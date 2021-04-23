@@ -2,7 +2,7 @@ Name:Tolaria
 ManaCost:no cost
 Types:Legendary Land
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
-A:AB$ Debuff | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | Keywords$ Banding & Bands with Other Creatures named Wolves of the Hunt & Bands with Other Legendary Creatures | ActivationPhases$ Upkeep | SpellDescription$ Target creature loses banding and all "bands with other" abilities until end of turn. Activate this ability only during any upkeep step. | StackDescription$ SpellDescription
+A:AB$ Debuff | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | Keywords$ Banding & Bands with Other Creatures named Wolves of the Hunt & Bands with Other Legendary Creatures | ActivationPhases$ Upkeep | SpellDescription$ Target creature loses banding and all "bands with other" abilities until end of turn. Activate only during any upkeep step. | StackDescription$ SpellDescription
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tolaria.jpg
-Oracle:{T}: Add {U}.\n{T}: Target creature loses banding and all "bands with other" abilities until end of turn. Activate this ability only during any upkeep step.
+Oracle:{T}: Add {U}.\n{T}: Target creature loses banding and all "bands with other" abilities until end of turn. Activate only during any upkeep step.

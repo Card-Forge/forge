@@ -4,6 +4,6 @@ Types:Sorcery
 A:SP$ Charm | Cost$ 4 U | Chooser$ Opponent | Choices$ DelTrigSlowDraw,Tutor
 SVar:DelTrigSlowDraw:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ DrawSlowThree | SpellDescription$ You draw three cards at the beginning of the next turn's upkeep.
 SVar:DrawSlowThree:DB$Draw | NumCards$ 3 | Defined$ You
-SVar:Tutor:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | SpellDescription$ You search your library for a card, put that card into your hand, then shuffle your library.
+SVar:Tutor:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | SpellDescription$ You search your library for a card, put that card into your hand, then shuffle.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/library_of_lat_nam.jpg
-Oracle:An opponent chooses one —\n• You draw three cards at the beginning of the next turn's upkeep.\n• You search your library for a card, put that card into your hand, then shuffle your library.
+Oracle:An opponent chooses one —\n• You draw three cards at the beginning of the next turn's upkeep.\n• You search your library for a card, put that card into your hand, then shuffle.

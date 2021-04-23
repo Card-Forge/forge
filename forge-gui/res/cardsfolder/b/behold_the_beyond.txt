@@ -1,8 +1,8 @@
 Name:Behold the Beyond
 ManaCost:5 B B
 Types:Sorcery
-A:SP$ Discard | Cost$ 5 B B | Mode$ Hand | SubAbility$ DBSearch | SpellDescription$ Discard your hand. Search your library for three cards and put those cards into your hand. Then shuffle your library.
+A:SP$ Discard | Cost$ 5 B B | Mode$ Hand | SubAbility$ DBSearch | SpellDescription$ Discard your hand. Search your library for three cards, put them into your hand, then shuffle.
 SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | Mandatory$ True | ChangeType$ Card | ChangeNum$ 3
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/behold_the_beyond.jpg
-Oracle:Discard your hand. Search your library for three cards and put those cards into your hand. Then shuffle your library.
+Oracle:Discard your hand. Search your library for three cards, put them into your hand, then shuffle.

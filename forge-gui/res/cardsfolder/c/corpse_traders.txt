@@ -2,7 +2,7 @@ Name:Corpse Traders
 ManaCost:3 B
 Types:Creature Human Rogue
 PT:3/3
-A:AB$ Discard | Cost$ 2 B Sac<1/Creature> | ValidTgts$ Player | Mode$ RevealYouChoose | NumCards$ 1 | SorcerySpeed$ True | SpellDescription$ Target player reveals their hand. You choose a card from it. That player discards that card. Activate this ability only any time you could cast a sorcery.
+A:AB$ Discard | Cost$ 2 B Sac<1/Creature> | ValidTgts$ Player | Mode$ RevealYouChoose | NumCards$ 1 | SorcerySpeed$ True | SpellDescription$ Target player reveals their hand. You choose a card from it. That player discards that card. Activate only any time you could cast a sorcery.
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/corpse_traders.jpg
-Oracle:{2}{B}, Sacrifice a creature: Target opponent reveals their hand. You choose a card from it. That player discards that card. Activate this ability only any time you could cast a sorcery.
+Oracle:{2}{B}, Sacrifice a creature: Target opponent reveals their hand. You choose a card from it. That player discards that card. Activate only as a sorcery.

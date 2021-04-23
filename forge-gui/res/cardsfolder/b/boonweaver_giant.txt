@@ -7,4 +7,4 @@ SVar:TrigSearch:DB$ ChangeZone | Hidden$ True | Origin$ Library | OriginChoice$ 
 AI:RemoveDeck:Random
 DeckNeeds:Type$Aura
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boonweaver_giant.jpg
-Oracle:When Boonweaver Giant enters the battlefield, you may search your graveyard, hand, and/or library for an Aura card and put it onto the battlefield attached to Boonweaver Giant. If you search your library this way, shuffle it.
+Oracle:When Boonweaver Giant enters the battlefield, you may search your graveyard, hand, and/or library for an Aura card and put it onto the battlefield attached to Boonweaver Giant. If you search your library this way, shuffle.

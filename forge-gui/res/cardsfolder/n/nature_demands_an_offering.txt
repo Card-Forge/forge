@@ -1,7 +1,7 @@
 Name:Nature Demands an Offering
 ManaCost:no cost
 Types:Scheme
-T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ ChooseCreature | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, target opponent chooses a creature you don't control and puts it on top of its owner's library, then repeats this process for an artifact, an enchantment, and a land. Then the owner of each permanent chosen this way shuffles their library.
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ ChooseCreature | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, target opponent chooses a creature you don't control and puts it on top of its owner's library, then repeats this process for an artifact, an enchantment, and a land. Then the owner of each permanent chosen this way shuffles.
 SVar:ChooseCreature:DB$ ChooseCard | ValidTgts$ Opponent | Choices$ Creature.YouDontCtrl | Mandatory$ True | SubAbility$ BounceCreature
 SVar:BounceCreature:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Battlefield | Destination$ Library | Imprint$ True | UnImprint$ True | LibraryPosition$ 0 | SubAbility$ DBRemember1
 SVar:DBRemember1:DB$ Pump | RememberObjects$ ImprintedOwner | SubAbility$ ChooseArtifact
@@ -17,4 +17,4 @@ SVar:DBRemember4:DB$ Pump | RememberObjects$ ImprintedOwner | SubAbility$ DBShuf
 SVar:DBShuffle:DB$ Shuffle | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:Picture:https://downloads.cardforge.org/images/cards/ARC/Nature Demands an Offering.full.jpg
-Oracle:When you set this scheme in motion, target opponent chooses a creature you don't control and puts it on top of its owner's library, then repeats this process for an artifact, an enchantment, and a land. Then the owner of each permanent chosen this way shuffles their library.
+Oracle:When you set this scheme in motion, target opponent chooses a creature you don't control and puts it on top of its owner's library, then repeats this process for an artifact, an enchantment, and a land. Then the owner of each permanent chosen this way shuffles.

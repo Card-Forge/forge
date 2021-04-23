@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Creature Bird Soldier
 PT:2/2
 K:Flying
-A:AB$ Untap | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsPresent$ Planeswalker.Gideon+YouCtrl | SpellDescription$ Untap target creature. Activate this ability only if you control a Gideon planeswalker.
+A:AB$ Untap | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsPresent$ Planeswalker.Gideon+YouCtrl | SpellDescription$ Untap target creature. Activate only if you control a Gideon planeswalker.
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/companion_of_the_trials.jpg
-Oracle:Flying\n{1}{W}: Untap target creature. Activate this ability only if you control a Gideon planeswalker.
+Oracle:Flying\n{1}{W}: Untap target creature. Activate only if you control a Gideon planeswalker.

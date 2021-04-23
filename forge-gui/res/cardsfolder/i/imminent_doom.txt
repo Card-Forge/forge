@@ -2,10 +2,10 @@ Name:Imminent Doom
 ManaCost:2 R
 Types:Enchantment
 K:etbCounter:DOOM:1
-T:Mode$ SpellCast | ValidCard$ Card.cmcEQX | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you cast a spell with converted mana cost equal to the number of doom counters on CARDNAME, CARDNAME deals that much damage to any target. Then put a doom counter on CARDNAME.
+T:Mode$ SpellCast | ValidCard$ Card.cmcEQX | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you cast a spell with mana value equal to the number of doom counters on CARDNAME, CARDNAME deals that much damage to any target. Then put a doom counter on CARDNAME.
 SVar:TrigDealDamage:DB$DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ Y | SubAbility$ DBPutCounter
-SVar:DBPutCounter:DB$PutCounter | Defined$ Self | CounterType$ DOOM | CounterNum$ 1 
+SVar:DBPutCounter:DB$PutCounter | Defined$ Self | CounterType$ DOOM | CounterNum$ 1
 SVar:X:Count$CardCounters.DOOM
-SVar:Y:TriggerCount$CastSACMC 
+SVar:Y:TriggerCount$CastSACMC
 SVar:Picture:http://www.wizards.com/global/images/magic/general/imminent_doom.jpg
-Oracle:Imminent Doom enters the battlefield with a doom counter on it.\nWhenever you cast a spell with converted mana cost equal to the number of doom counters on Imminent Doom, Imminent Doom deals that much damage to any target. Then put a doom counter on Imminent Doom.
+Oracle:Imminent Doom enters the battlefield with a doom counter on it.\nWhenever you cast a spell with mana value equal to the number of doom counters on Imminent Doom, Imminent Doom deals that much damage to any target. Then put a doom counter on Imminent Doom.

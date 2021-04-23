@@ -7,4 +7,4 @@ SVar:TrigSearch:DB$ ChangeZone | Hidden$ True | Origin$ Library | OriginChoice$ 
 AI:RemoveDeck:Random
 DeckNeeds:Type$Rune
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Equipped creature gets +1/+1.
-Oracle:When Runed Crown enters the battlefield, you may search your library, hand, and/or graveyard for a Rune card and put it onto the battlefield attached to Runed Crown. If you search your library this way, shuffle it.\nEquipped creature gets +1/+1.\nEquip {2}
+Oracle:When Runed Crown enters the battlefield, you may search your library, hand, and/or graveyard for a Rune card and put it onto the battlefield attached to Runed Crown. If you search your library this way, shuffle.\nEquipped creature gets +1/+1.\nEquip {2}

@@ -1,10 +1,10 @@
 Name:Distant Memories
 ManaCost:2 U U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 U U | Origin$ Library | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBReturn | SpellDescription$ Search your library for a card, exile it, then shuffle your library. Any opponent may have you put that card into your hand. If no player does, you draw three cards.
+A:SP$ ChangeZone | Cost$ 2 U U | Origin$ Library | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBReturn | SpellDescription$ Search your library for a card, exile it, then shuffle. Any opponent may have you put that card into your hand. If no player does, you draw three cards.
 SVar:DBReturn:DB$ChangeZone | Origin$ Exile | Destination$ Hand | ChangeType$ Card.IsRemembered | Hidden$ True | Chooser$ Opponent | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 3 | ConditionCheckSVar$ X | ConditionSVarCompare$ LE0
 SVar:X:Remembered$Amount
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/distant_memories.jpg
-Oracle:Search your library for a card, exile it, then shuffle your library. Any opponent may have you put that card into your hand. If no player does, you draw three cards.
+Oracle:Search your library for a card, exile it, then shuffle. Any opponent may have you put that card into your hand. If no player does, you draw three cards.

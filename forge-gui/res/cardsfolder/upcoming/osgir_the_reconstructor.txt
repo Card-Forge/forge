@@ -8,4 +8,4 @@ A:AB$ CopyPermanent | Cost$ X T ExileFromGrave<1/Artifact.cmcEQX/artifact card w
 SVar:X:Count$xPaid
 DeckHas:Ability$Token
 DeckHints:Type$Artifact
-Oracle:Vigilance\n{1}, Sacrifice an artifact: Target creature you control gets +2/+0 until end of turn.\n{x}, {t}, Exile an artifact card with mana value X from your graveyard: Create two tokens that are copies of the exiled card. Activate only as a sorcery.
+Oracle:Vigilance\n{1}, Sacrifice an artifact: Target creature you control gets +2/+0 until end of turn.\n{X}, {T}, Exile an artifact card with mana value X from your graveyard: Create two tokens that are copies of the exiled card. Activate only as a sorcery.

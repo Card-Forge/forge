@@ -2,6 +2,6 @@ Name:Zhalfirin Decoy
 ManaCost:1 W
 Types:Creature Human Soldier
 PT:1/3
-A:AB$ Tap | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | CheckSVar$ X | SpellDescription$ Tap target creature. Activate this ability only if you had a creature enter the battlefield under your control this turn.
+A:AB$ Tap | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | CheckSVar$ X | SpellDescription$ Tap target creature. Activate only if you had a creature enter the battlefield under your control this turn.
 SVar:X:Count$ThisTurnEntered_Battlefield_Creature.YouCtrl
-Oracle:{T}: Tap target creature. Activate this ability only if you had a creature enter the battlefield under your control this turn.
+Oracle:{T}: Tap target creature. Activate only if you had a creature enter the battlefield under your control this turn.

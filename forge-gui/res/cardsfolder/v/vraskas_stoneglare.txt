@@ -6,4 +6,4 @@ SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBClea
 SVar:DBSearch:DB$ ChangeZone | Origin$ Library | OriginChoice$ True | OriginAlternative$ Graveyard | AlternativeMessage$ Would you like to search your library with this ability? If you do, your library will be shuffled. | Destination$ Hand | ChangeType$ Card.namedVraska; Regal Gorgon | ChangeNum$ 1 | Optional$ True
 SVar:X:TargetedLKI$CardToughness
 DeckNeeds:Name$Vraska, Regal Gorgon
-Oracle:Destroy target creature. You gain life equal to its toughness. You may search your library and/or graveyard for a card named Vraska, Regal Gorgon, reveal it, and put it into your hand. If you search your library this way, shuffle it.
+Oracle:Destroy target creature. You gain life equal to its toughness. You may search your library and/or graveyard for a card named Vraska, Regal Gorgon, reveal it, and put it into your hand. If you search your library this way, shuffle.

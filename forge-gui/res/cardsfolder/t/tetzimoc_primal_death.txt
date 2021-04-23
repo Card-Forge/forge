@@ -3,8 +3,8 @@ ManaCost:4 B B
 Types:Legendary Creature Elder Dinosaur
 PT:6/6
 K:Deathtouch
-A:AB$ PutCounter | Cost$ B | ActivationZone$ Hand | CostDesc$ {B}, Reveal CARDNAME from your hand: | PlayerTurn$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ PREY | CounterNum$ 1 | IsCurse$ True | AILogic$ MarkOppCreature | SpellDescription$ Put a prey counter on target creature. Activate this ability only during your turn.
+A:AB$ PutCounter | Cost$ B | ActivationZone$ Hand | CostDesc$ {B}, Reveal CARDNAME from your hand: | PlayerTurn$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ PREY | CounterNum$ 1 | IsCurse$ True | AILogic$ MarkOppCreature | SpellDescription$ Put a prey counter on target creature. Activate only during your turn.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroyAll | TriggerDescription$ When CARDNAME enters the battlefield, destroy each creature your opponents control with a prey counter on it.
 SVar:TrigDestroyAll:DB$ DestroyAll | ValidCards$ Creature.OppCtrl+counters_GE1_PREY | AILogic$ Always
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tetzimoc_primal_death.jpg
-Oracle:Deathtouch\n{B}, Reveal Tetzimoc, Primal Death from your hand: Put a prey counter on target creature. Activate this ability only during your turn.\nWhen Tetzimoc enters the battlefield, destroy each creature your opponents control with a prey counter on it.
+Oracle:Deathtouch\n{B}, Reveal Tetzimoc, Primal Death from your hand: Put a prey counter on target creature. Activate only during your turn.\nWhen Tetzimoc enters the battlefield, destroy each creature your opponents control with a prey counter on it.

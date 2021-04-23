@@ -5,8 +5,8 @@ PT:6/7
 K:Indestructible
 S:Mode$ Continuous | Affected$ Card.Self | RemoveType$ Creature | CheckSVar$ X | SVarCompare$ LT7 | Description$ As long as your devotion to green and white is less than seven, CARDNAME isn't a creature.
 SVar:X:Count$DevotionDual.Green.White
-T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ TrigSearch | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you cast a creature spell, you may search your library for a Forest or Plains card, put it onto the battlefield tapped, then shuffle your library.
+T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ TrigSearch | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you cast a creature spell, you may search your library for a Forest or Plains card, put it onto the battlefield tapped, then shuffle.
 SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Forest,Plains | ChangeNum$ 1 | Tapped$ True | ShuffleNonMandatory$ True
 SVar:BuffedBy:Permanent.White,Permanent.Green
 SVar:Picture:http://www.wizards.com/global/images/magic/general/karametra_god_of_harvests.jpg
-Oracle:Indestructible\nAs long as your devotion to green and white is less than seven, Karametra isn't a creature.\nWhenever you cast a creature spell, you may search your library for a Forest or Plains card, put it onto the battlefield tapped, then shuffle your library.
+Oracle:Indestructible\nAs long as your devotion to green and white is less than seven, Karametra isn't a creature.\nWhenever you cast a creature spell, you may search your library for a Forest or Plains card, put it onto the battlefield tapped, then shuffle.

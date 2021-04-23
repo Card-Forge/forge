@@ -2,7 +2,7 @@ Name:Skirsdag High Priest
 ManaCost:1 B
 Types:Creature Human Cleric
 PT:1/2
-A:AB$ Token | Cost$ T tapXType<2/Creature> | CheckSVar$ Morbid | SVarCompare$ GE1 | LegacyImage$ b 5 5 demon flying isd | TokenAmount$ 1 | TokenScript$ b_5_5_demon_flying | TokenOwner$ You | CostDesc$ Morbid — {T}, Tap two untapped creatures you control: | SpellDescription$ Create a 5/5 black Demon creature token with flying. Activate this ability only if a creature died this turn.
+A:AB$ Token | Cost$ T tapXType<2/Creature> | CheckSVar$ Morbid | SVarCompare$ GE1 | LegacyImage$ b 5 5 demon flying isd | TokenAmount$ 1 | TokenScript$ b_5_5_demon_flying | TokenOwner$ You | CostDesc$ Morbid — {T}, Tap two untapped creatures you control: | SpellDescription$ Create a 5/5 black Demon creature token with flying. Activate only if a creature died this turn.
 SVar:Morbid:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skirsdag_high_priest.jpg
-Oracle:Morbid — {T}, Tap two untapped creatures you control: Create a 5/5 black Demon creature token with flying. Activate this ability only if a creature died this turn.
+Oracle:Morbid — {T}, Tap two untapped creatures you control: Create a 5/5 black Demon creature token with flying. Activate only if a creature died this turn.

@@ -3,10 +3,10 @@ ManaCost:2 W
 Types:Instant
 K:Kicker:R
 A:SP$ Destroy | Cost$ 2 W | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SubAbility$ DBDamage | SpellDescription$ Destroy target artifact or enchantment.
-SVar:DBDamage:DB$DealDamage | Condition$ Kicked | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | TargetMin$ Y | TargetMax$ Y | SpellDescription$ If CARDNAME was kicked, it deals damage equal to that permanent's converted mana cost to target creature.
+SVar:DBDamage:DB$DealDamage | Condition$ Kicked | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | TargetMin$ Y | TargetMax$ Y | SpellDescription$ If CARDNAME was kicked, it deals damage equal to that permanent's mana value to target creature.
 SVar:X:Targeted$CardManaCost
 SVar:Y:Count$Kicked.1.0
 DeckHints:Color$Red
 SVar:NeedsToPlay:Creature.OppCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orims_thunder.jpg
-Oracle:Kicker {R} (You may pay an additional {R} as you cast this spell.)\nDestroy target artifact or enchantment. If this spell was kicked, it deals damage equal to that permanent's converted mana cost to target creature.
+Oracle:Kicker {R} (You may pay an additional {R} as you cast this spell.)\nDestroy target artifact or enchantment. If this spell was kicked, it deals damage equal to that permanent's mana value to target creature.

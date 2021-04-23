@@ -1,8 +1,8 @@
 Name:Induce Despair
 ManaCost:2 B
 Types:Instant
-A:SP$ Pump | Cost$ 2 B Reveal<1/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ Target creature gets -X/-X until end of turn, where X is the revealed card's converted mana cost.
+A:SP$ Pump | Cost$ 2 B Reveal<1/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ Target creature gets -X/-X until end of turn, where X is the revealed card's mana value.
 SVar:X:Revealed$CardManaCost
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/induce_despair.jpg
-Oracle:As an additional cost to cast this spell, reveal a creature card from your hand.\nTarget creature gets -X/-X until end of turn, where X is the revealed card's converted mana cost.
+Oracle:As an additional cost to cast this spell, reveal a creature card from your hand.\nTarget creature gets -X/-X until end of turn, where X is the revealed card's mana value.

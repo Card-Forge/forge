@@ -2,8 +2,8 @@ Name:Ranging Raptors
 ManaCost:2 G
 Types:Creature Dinosaur
 PT:2/3
-T:Mode$ DamageDoneOnce | Execute$ TrigSearchLand | ValidTarget$ Card.Self | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Enrage — Whenever CARDNAME is dealt damage, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
+T:Mode$ DamageDoneOnce | Execute$ TrigSearchLand | ValidTarget$ Card.Self | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Enrage — Whenever CARDNAME is dealt damage, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
 SVar:TrigSearchLand:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 1 | Tapped$ True | ShuffleNonMandatory$ True
 SVar:HasCombatEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ranging_raptors.jpg
-Oracle:Enrage — Whenever Ranging Raptors is dealt damage, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
+Oracle:Enrage — Whenever Ranging Raptors is dealt damage, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle.

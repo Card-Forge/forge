@@ -5,4 +5,4 @@ PT:1/1
 T:Mode$ ChangesZoneAll | Destination$ Exile | TriggerZones$ Battlefield | Execute$ TrigPutcounter | PlayerTurn$ True | ActivationLimit$ 1 | TriggerDescription$ Whenever one or more cards are put into exile during your turn, put a +1/+1 counter on CARDNAME. This ability triggers only once each turn.
 SVar:TrigPutcounter:DB$ PutCounter | CounterType$ P1P1 | Defined$ Self | CounterNum$ 1
 DeckHas:Ability$Counter
-Oracle:Whenever one or more cards are put into exile during your turn, put a +1/+1 counter on CARDNAME. This ability triggers only once each turn.
+Oracle:Whenever one or more cards are put into exile during your turn, put a +1/+1 counter on Stonebinder's Familiar. This ability triggers only once each turn.

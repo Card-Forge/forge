@@ -3,8 +3,8 @@ ManaCost:1 W
 Types:Enchantment Aura
 K:Enchant nonland permanent
 A:SP$ Attach | Cost$ 1 W | ValidTgts$ Permanent.nonLand | AITgts$ Card.cmcGE2 | AILogic$ Curse
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ EnchantedController | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of the upkeep of enchanted permanent's controller, that player sacrifices it unless they pay {X}, where X is its converted mana cost.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ EnchantedController | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of the upkeep of enchanted permanent's controller, that player sacrifices it unless they pay {X}, where X is its mana value.
 SVar:TrigSac:DB$ SacrificeAll | Defined$ Enchanted | UnlessCost$ X | UnlessPayer$ EnchantedController
 SVar:X:Enchanted$CardManaCost
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_tithe.jpg
-Oracle:Enchant nonland permanent\nAt the beginning of the upkeep of enchanted permanent's controller, that player sacrifices it unless they pay {X}, where X is its converted mana cost.
+Oracle:Enchant nonland permanent\nAt the beginning of the upkeep of enchanted permanent's controller, that player sacrifices it unless they pay {X}, where X is its mana value.

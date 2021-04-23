@@ -7,4 +7,4 @@ K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ ReturnOneEach | TriggerDescription$ When CARDNAME enters the battlefield, for each opponent, return up to one target nonland permanent that player controls to its owner's hand.
 SVar:ReturnOneEach:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Permanent.nonLand+OppCtrl | TargetMin$ 0 | TargetMax$ OneEach | TargetsWithDifferentControllers$ True | TgtPrompt$ Select up to one target nonland permanent each opponent controls
 SVar:OneEach:PlayerCountOpponents$Amount
-Oracle:Prowl {3}{U} (You may cast this spell for its prowl cost if you dealt combat damage to a player this turn with a Sphinx or a Rogue.)\nFlying\nWhen Enigma Thief enters the battlefield, for each opponent, return up to one target nonland permanent that player controls to its owner's hand.
+Oracle:Prowl {3}{U} (You may cast this spell for its prowl cost if you dealt combat damage to a player this turn with a Sphinx or Rogue.)\nFlying\nWhen Enigma Thief enters the battlefield, for each opponent, return up to one target nonland permanent that player controls to its owner's hand.

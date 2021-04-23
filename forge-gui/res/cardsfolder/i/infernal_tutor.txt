@@ -1,11 +1,11 @@
 Name:Infernal Tutor
 ManaCost:1 B
 Types:Sorcery
-A:SP$ Reveal | Cost$ 1 B | RememberRevealed$ True | Defined$ You | SubAbility$ DBChangeZone | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SpellDescription$ Reveal a card from your hand. Search your library for a card with the same name as that card, reveal it, put it into your hand, then shuffle your library. Hellbent — If you have no cards in hand, instead search your library for a card, put it into your hand, then shuffle your library.
+A:SP$ Reveal | Cost$ 1 B | RememberRevealed$ True | Defined$ You | SubAbility$ DBChangeZone | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SpellDescription$ Reveal a card from your hand. Search your library for a card with the same name as that card, reveal it, put it into your hand, then shuffle. Hellbent — If you have no cards in hand, instead search your library for a card, put it into your hand, then shuffle.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Remembered.sameName | ChangeNum$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBChangeZone2
 SVar:DBChangeZone2:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$InYourHand
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infernal_tutor.jpg
-Oracle:Reveal a card from your hand. Search your library for a card with the same name as that card, reveal it, put it into your hand, then shuffle your library.\nHellbent — If you have no cards in hand, instead search your library for a card, put it into your hand, then shuffle your library.
+Oracle:Reveal a card from your hand. Search your library for a card with the same name as that card, reveal it, put it into your hand, then shuffle.\nHellbent — If you have no cards in hand, instead search your library for a card, put it into your hand, then shuffle.

@@ -4,6 +4,6 @@ Types:Creature Dragon
 PT:4/4
 K:Riot
 K:Flying
-A:AB$ DealDamage | Cost$ 3 R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target to distribute damage to | NumDmg$ 2 | TargetMin$ 1 | TargetMax$ 2 | DividedAsYouChoose$ 2 | IsPresent$ Card.Self+counters_GE1_P1P1 | SpellDescription$ CARDNAME deals 2 damage divided as you choose among one or two targets. Activate this ability only if CARDNAME has a +1/+1 counter on it.
+A:AB$ DealDamage | Cost$ 3 R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target to distribute damage to | NumDmg$ 2 | TargetMin$ 1 | TargetMax$ 2 | DividedAsYouChoose$ 2 | IsPresent$ Card.Self+counters_GE1_P1P1 | SpellDescription$ CARDNAME deals 2 damage divided as you choose among one or two targets. Activate only if CARDNAME has a +1/+1 counter on it.
 DeckHints:Ability$Counters
-Oracle:Riot (This creature enters the battlefield with your choice of a +1/+1 counter or haste.)\nFlying\n{3}{R}: Skarrgan Hellkite deals 2 damage divided as you choose among one or two targets. Activate this ability only if Skarrgan Hellkite has a +1/+1 counter on it.
+Oracle:Riot (This creature enters the battlefield with your choice of a +1/+1 counter or haste.)\nFlying\n{3}{R}: Skarrgan Hellkite deals 2 damage divided as you choose among one or two targets. Activate only if Skarrgan Hellkite has a +1/+1 counter on it.

@@ -5,4 +5,4 @@ A:SP$ Destroy | Cost$ 1 G | ValidTgts$ Enchantment | SubAbility$ DBClash | Spell
 SVar:DBClash:DB$Clash | WinSubAbility$ DBDestroyAll
 SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Enchantment.OppCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spring_cleaning.jpg
-Oracle:Destroy target enchantment. Clash with an opponent. If you win, destroy all enchantments your opponents control. (Each clashing player reveals the top card of their library, then puts that card on the top or bottom. A player wins if their card had a higher converted mana cost.)
+Oracle:Destroy target enchantment. Clash with an opponent. If you win, destroy all enchantments your opponents control. (Each clashing player reveals the top card of their library, then puts that card on the top or bottom. A player wins if their card had a higher mana value.)

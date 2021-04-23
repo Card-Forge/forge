@@ -6,4 +6,4 @@ S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddAbility$ WandDamage | Ad
 SVar:WandDamage:AB$ DealDamage | Cost$ T | ValidTgts$ Planeswalker,Player | TgtPrompt$ Select target Planeswalker or player | NumDmg$ 1 | SubAbility$ DBRoll | SpellDescription$ This creature deals 1 damage to target player or planeswalker. Roll a six-sided die. On a 5 or higher, untap it.
 SVar:DBRoll:DB$ RollDice | On5$ DBUntap | On6$ DBUntap
 SVar:DBUntap:DB$ Untap
-Oracle:Equipped creature has “{T}: This creature deals 1 damage to target player or planeswalker. Roll a six-sided die. On a 5 or higher, untap it.”\nEquip {2}
+Oracle:Equipped creature has "{T}: This creature deals 1 damage to target player or planeswalker. Roll a six-sided die. On a 5 or higher, untap it."\nEquip {2}

@@ -3,11 +3,11 @@ ManaCost:4 W
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigChange | TriggerDescription$ At the beginning of your upkeep, you may return target enchantment card from your graveyard to the battlefield.
 SVar:TrigChange:DB$ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeNum$ 1 | TgtPrompt$ Select target enchantment card in your graveyard | ValidTgts$ Enchantment.YouOwn
-S:Mode$ Continuous | CheckSVar$ X | SVarCompare$ GE5 | Affected$ Enchantment.YouCtrl+nonAura+Other | SetPower$ AffectedX | SetToughness$ AffectedX | AddType$ Creature | Description$ As long as you control five or more enchantments, each other non-Aura enchantment you control is a creature in addition to its other types and has base power and base toughness each equal to its converted mana cost.
-SVar:X:Count$Valid Enchantment.YouCtrl 
+S:Mode$ Continuous | CheckSVar$ X | SVarCompare$ GE5 | Affected$ Enchantment.YouCtrl+nonAura+Other | SetPower$ AffectedX | SetToughness$ AffectedX | AddType$ Creature | Description$ As long as you control five or more enchantments, each other non-Aura enchantment you control is a creature in addition to its other types and has base power and base toughness each equal to its mana value.
+SVar:X:Count$Valid Enchantment.YouCtrl
 SVar:AffectedX:Count$CardManaCost
 SVar:BuffedBy:Enchantment
 SVar:PlayMain1:ALWAYS
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/starfield_of_nyx.jpg
-Oracle:At the beginning of your upkeep, you may return target enchantment card from your graveyard to the battlefield.\nAs long as you control five or more enchantments, each other non-Aura enchantment you control is a creature in addition to its other types and has base power and base toughness each equal to its converted mana cost.
+Oracle:At the beginning of your upkeep, you may return target enchantment card from your graveyard to the battlefield.\nAs long as you control five or more enchantments, each other non-Aura enchantment you control is a creature in addition to its other types and has base power and base toughness each equal to its mana value.

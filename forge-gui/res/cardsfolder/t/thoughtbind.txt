@@ -1,6 +1,6 @@
 Name:Thoughtbind
 ManaCost:2 U
 Types:Instant
-A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target spell with CMC 4 or less | ValidTgts$ Card.cmcLE4 | SpellDescription$ Counter target spell with converted mana cost 4 or less.
+A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target spell with mana value 4 or less | ValidTgts$ Card.cmcLE4 | SpellDescription$ Counter target spell with mana value 4 or less.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thoughtbind.jpg
-Oracle:Counter target spell with converted mana cost 4 or less.
+Oracle:Counter target spell with mana value 4 or less.

@@ -5,9 +5,9 @@ K:Kicker:4
 K:Enchant creature
 A:SP$ Attach | Cost$ 3 G G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | SetPower$ 8 | SetToughness$ 8 | AddKeyword$ Trample | Description$ Enchanted creature has base power and toughness 8/8 and has trample.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | OptionalDecider$ You | Execute$ KickedGiant | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, you may search your library for a card named CARDNAME, put it onto the battlefield, then shuffle your library.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | OptionalDecider$ You | Execute$ KickedGiant | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, you may search your library for a card named CARDNAME, put it onto the battlefield, then shuffle.
 SVar:KickedGiant:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.namedGigantiform | ChangeNum$ 1 | ShuffleNonMandatory$ True
 SVar:NonStackingAttachEffect:True
 DeckHints:Name$Gigantiform
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gigantiform.jpg
-Oracle:Kicker {4}\nEnchant creature\nEnchanted creature has base power and toughness 8/8 and has trample.\nWhen Gigantiform enters the battlefield, if it was kicked, you may search your library for a card named Gigantiform, put it onto the battlefield, then shuffle your library.
+Oracle:Kicker {4}\nEnchant creature\nEnchanted creature has base power and toughness 8/8 and has trample.\nWhen Gigantiform enters the battlefield, if it was kicked, you may search your library for a card named Gigantiform, put it onto the battlefield, then shuffle.

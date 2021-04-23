@@ -3,11 +3,11 @@ ManaCost:6 U U U
 Types:Creature Leviathan
 PT:9/9
 K:Defender
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for any number of cards that have converted mana cost 9, reveal them, and put them into your hand. If you do, shuffle your library.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for any number of cards that have mana value 9, reveal them, put them into your hand, then shuffle.
 SVar:TrigChange:DB$ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.cmcEQ9 | ChangeNum$ X | ShuffleNonMandatory$ True
 A:AB$ Debuff | Cost$ 4 | Keywords$ Defender | Defined$ Self | SpellDescription$ CARDNAME loses defender until end of turn.
 K:Transmute:1 U U
 SVar:X:Count$InYourLibrary
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grozoth.jpg
-Oracle:Defender (This creature can't attack.)\nWhen Grozoth enters the battlefield, you may search your library for any number of cards that have converted mana cost 9, reveal them, and put them into your hand. If you do, shuffle your library.\n{4}: Grozoth loses defender until end of turn.\nTransmute {1}{U}{U} ({1}{U}{U}, Discard this card: Search your library for a card with the same converted mana cost as this card, reveal it, and put it into your hand. Then shuffle your library. Transmute only as a sorcery.)
+Oracle:Defender (This creature can't attack.)\nWhen Grozoth enters the battlefield, you may search your library for any number of cards that have mana value 9, reveal them, put them into your hand, then shuffle.\n{4}: Grozoth loses defender until end of turn.\nTransmute {1}{U}{U} ({1}{U}{U}, Discard this card: Search your library for a card with the same mana value as this card, reveal it, put it into your hand, then shuffle. Transmute only as a sorcery.)

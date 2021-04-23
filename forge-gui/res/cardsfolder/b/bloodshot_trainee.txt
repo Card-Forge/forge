@@ -2,7 +2,7 @@ Name:Bloodshot Trainee
 ManaCost:3 R
 Types:Creature Goblin Warrior
 PT:2/3
-A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsPresent$ Card.powerGE4+Self | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature. Activate this ability only if CARDNAME's power is 4 or greater.
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsPresent$ Card.powerGE4+Self | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature. Activate only if CARDNAME's power is 4 or greater.
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodshot_trainee.jpg
-Oracle:{T}: Bloodshot Trainee deals 4 damage to target creature. Activate this ability only if Bloodshot Trainee's power is 4 or greater.
+Oracle:{T}: Bloodshot Trainee deals 4 damage to target creature. Activate only if Bloodshot Trainee's power is 4 or greater.

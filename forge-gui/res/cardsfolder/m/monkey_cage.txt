@@ -1,9 +1,9 @@
 Name:Monkey Cage
 ManaCost:5
 Types:Artifact
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature |TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When a creature enters the battlefield, sacrifice CARDNAME and create X 2/2 green Monkey creature tokens, where X is that creature's converted mana cost.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature |TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When a creature enters the battlefield, sacrifice CARDNAME and create X 2/2 green Monkey creature tokens, where X is that creature's mana value.
 SVar:TrigSac:DB$Sacrifice | Defined$ Self | SubAbility$ DBToken | RememberSacrificed$ True
 SVar:DBToken:DB$Token | ConditionDefined$ Remembered | ConditionPresent$ Card.Self | TokenAmount$ X | TokenScript$ g_2_2_monkey | TokenOwner$ You | LegacyImage$ g 2 2 monkey mmq
 SVar:X:TriggeredCard$CardManaCost
 SVar:Picture:http://www.wizards.com/global/images/magic/general/monkey_cage.jpg
-Oracle:When a creature enters the battlefield, sacrifice Monkey Cage and create X 2/2 green Monkey creature tokens, where X is that creature's converted mana cost.
+Oracle:When a creature enters the battlefield, sacrifice Monkey Cage and create X 2/2 green Monkey creature tokens, where X is that creature's mana value.

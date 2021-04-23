@@ -4,8 +4,8 @@ Types:Legendary Creature Vampire Knight
 PT:4/4
 K:Vigilance
 K:Lifelink
-A:AB$ Destroy | Cost$ T PayLife<7> | PlayerTurn$ True | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | AILogic$ AtEOTIfNotAttacking | SpellDescription$ Destroy target nonland permanent. Activate this ability only during your turn.
+A:AB$ Destroy | Cost$ T PayLife<7> | PlayerTurn$ True | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | AILogic$ AtEOTIfNotAttacking | SpellDescription$ Destroy target nonland permanent. Activate only during your turn.
 DeckHas:Ability$LifeGain
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vona_butcher_of_magan.jpg
-Oracle:Vigilance, lifelink\n{T}, Pay 7 life: Destroy target nonland permanent. Activate this ability only during your turn.
+Oracle:Vigilance, lifelink\n{T}, Pay 7 life: Destroy target nonland permanent. Activate only during your turn.

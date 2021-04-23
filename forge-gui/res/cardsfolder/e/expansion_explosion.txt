@@ -2,8 +2,8 @@ Name:Expansion
 ManaCost:U/R U/R
 Types:Instant
 AlternateMode: Split
-A:SP$ CopySpellAbility | Cost$ U/R U/R | ValidTgts$ Card.Instant+cmcLE4,Card.Sorcery+cmcLE4 | TargetType$ Spell | MayChooseTarget$ True | SpellDescription$ Copy target instant or sorcery spell with converted mana cost 4 or less. You may choose new targets for the copy.
-Oracle:Copy target instant or sorcery spell with converted mana cost 4 or less. You may choose new targets for the copy.
+A:SP$ CopySpellAbility | Cost$ U/R U/R | ValidTgts$ Card.Instant+cmcLE4,Card.Sorcery+cmcLE4 | TargetType$ Spell | MayChooseTarget$ True | SpellDescription$ Copy target instant or sorcery spell with mana value 4 or less. You may choose new targets for the copy.
+Oracle:Copy target instant or sorcery spell with mana value 4 or less. You may choose new targets for the copy.
 
 ALTERNATE
 

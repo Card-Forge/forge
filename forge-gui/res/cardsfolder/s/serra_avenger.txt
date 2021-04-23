@@ -7,4 +7,4 @@ K:Vigilance
 S:Mode$ CantBeCast | ValidCard$ Card.Self | EffectZone$ All | CheckSVar$ X | SVarCompare$ LE3 | Description$ You can't play Serra Avenger during your first, second, or third turns of the game.
 SVar:X:Count$YourTurns
 SVar:Picture:http://resources.wizards.com/magic/cards/tsp/en-us/card113519.jpg
-Oracle:You can't cast this spell during your first, second, or third turns of the game.\nFlying\nVigilance (Attacking doesn't cause this creature to tap.)
+Oracle:You can't cast this spell during your first, second, or third turns of the game.\nFlying, vigilance

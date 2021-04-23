@@ -2,8 +2,8 @@ Name:Stain the Mind
 ManaCost:4 B
 Types:Sorcery
 K:Convoke
-A:SP$ NameCard | Cost$ 4 B | Defined$ You | ValidCards$ Card.nonLand | ValidDesc$ nonland | SubAbility$ ExileYard | SpellDescription$ Choose a nonland card name. Search target player's graveyard, hand, and library for any number of cards with that name and exile them. Then that player shuffles their library.
-SVar:ExileYard:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Card.NamedCard | Chooser$ You | ChangeNum$ NumInYard | Hidden$ True | SubAbility$ ExileHand | StackDescription$ Choose a nonland card name. Search target player's graveyard, hand, and library for any number of cards with that name and exile them. Then that player shuffles their library.
+A:SP$ NameCard | Cost$ 4 B | Defined$ You | ValidCards$ Card.nonLand | ValidDesc$ nonland | SubAbility$ ExileYard | SpellDescription$ Choose a nonland card name. Search target player's graveyard, hand, and library for any number of cards with that name and exile them. Then that player shuffles.
+SVar:ExileYard:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Card.NamedCard | Chooser$ You | ChangeNum$ NumInYard | Hidden$ True | SubAbility$ ExileHand | StackDescription$ Choose a nonland card name. Search target player's graveyard, hand, and library for any number of cards with that name and exile them. Then that player shuffles.
 SVar:ExileHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Targeted | ChangeType$ Card.NamedCard | ChangeNum$ NumInHand | Chooser$ You | SubAbility$ ExileLib | StackDescription$ None
 SVar:ExileLib:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPlayer$ Targeted | ChangeType$ Card.NamedCard | ChangeNum$ NumInLib | Chooser$ You | Shuffle$ True | StackDescription$ None
 SVar:NumInLib:TargetedPlayer$CardsInLibrary
@@ -12,4 +12,4 @@ SVar:NumInYard:TargetedPlayer$CardsInGraveyard
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stain_the_mind.jpg
-Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nChoose a nonland card name. Search target player's graveyard, hand, and library for any number of cards with that name and exile them. Then that player shuffles their library.
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nChoose a nonland card name. Search target player's graveyard, hand, and library for any number of cards with that name and exile them. Then that player shuffles.

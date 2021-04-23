@@ -1,6 +1,6 @@
 Name:Misty Rainforest
 ManaCost:no cost
 Types:Land
-A:AB$ ChangeZone | Cost$ T PayLife<1> Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | ChangeType$ Forest,Island | ChangeNum$ 1 | SpellDescription$ Search your library for a Forest or Island card, put it onto the battlefield, then shuffle your library.
+A:AB$ ChangeZone | Cost$ T PayLife<1> Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | ChangeType$ Forest,Island | ChangeNum$ 1 | SpellDescription$ Search your library for a Forest or Island card, put it onto the battlefield, then shuffle.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/misty_rainforest.jpg
-Oracle:{T}, Pay 1 life, Sacrifice Misty Rainforest: Search your library for a Forest or Island card, put it onto the battlefield, then shuffle your library.
+Oracle:{T}, Pay 1 life, Sacrifice Misty Rainforest: Search your library for a Forest or Island card, put it onto the battlefield, then shuffle.

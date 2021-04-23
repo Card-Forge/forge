@@ -5,4 +5,4 @@ PT:2/1
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, put up to one target instant or sorcery card from your graveyard on top of your library.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | TgtPrompt$ Select target instant or sorcery card from your graveyard | TargetMin$ 0 | TargetMax$ 1 | SpellDescription$ When CARDNAME enters the battlefield, put up to one target instant or sorcery card from your graveyard on top of your library.
-Oracle:When Biblioplex Assistant enters the battlefield, put up to one target instant or sorcery card from your graveyard on top of your library.
+Oracle:Flying\nWhen Biblioplex Assistant enters the battlefield, put up to one target instant or sorcery card from your graveyard on top of your library.

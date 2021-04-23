@@ -3,6 +3,6 @@ ManaCost:no cost
 Types:Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
-A:AB$ Token | Cost$ W W B T Sac<1/CARDNAME> Sac<1/Creature> | TokenAmount$ 1 | TokenScript$ w_4_4_angel_warrior_flying_vigilance | TokenOwner$ You | LegacyImage$ w 4 4 angel warrior flying vigilance khm | SorcerySpeed$ True | SpellDescription$ Create a 4/4 white Angel Warrior creature token with flying and vigilance. Activate this ability only any time you could cast a sorcery.
+A:AB$ Token | Cost$ W W B T Sac<1/CARDNAME> Sac<1/Creature> | TokenAmount$ 1 | TokenScript$ w_4_4_angel_warrior_flying_vigilance | TokenOwner$ You | LegacyImage$ w 4 4 angel warrior flying vigilance khm | SorcerySpeed$ True | SpellDescription$ Create a 4/4 white Angel Warrior creature token with flying and vigilance. Activate only as a sorcery.
 DeckHas:Ability$Token
-Oracle:Great Hall of Starnheim enters the battlefield tapped.\n{T}: Add {B}.\n{W}{W}{B}, {T}, Sacrifice Great Hall of Starnheim and a creature you control: Create a 4/4 white Angel Warrior creature token with flying and vigilance. Activate this ability only any time you could cast a sorcery.
+Oracle:Great Hall of Starnheim enters the battlefield tapped.\n{T}: Add {B}.\n{W}{W}{B}, {T}, Sacrifice Great Hall of Starnheim and a creature you control: Create a 4/4 white Angel Warrior creature token with flying and vigilance. Activate only as a sorcery.

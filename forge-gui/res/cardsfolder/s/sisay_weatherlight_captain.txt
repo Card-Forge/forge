@@ -4,7 +4,7 @@ Types:Legendary Creature Human Soldier
 PT:2/2
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each color among other legendary permanents you control.
 SVar:X:Count$ColorsCtrl Permanent.Other+Legendary
-A:AB$ ChangeZone | Cost$ W U B R G | Origin$ Library | Destination$ Battlefield | ChangeType$ Permanent.Legendary+cmcLTY | ChangeNum$ 1 |  SpellDescription$ Search your library for a legendary permanent card with converted mana cost less than NICKNAME's power, put that card onto the battlefield, then shuffle your library.
+A:AB$ ChangeZone | Cost$ W U B R G | Origin$ Library | Destination$ Battlefield | ChangeType$ Permanent.Legendary+cmcLTY | ChangeNum$ 1 |  SpellDescription$ Search your library for a legendary permanent card with mana value less than NICKNAME's power, put that card onto the battlefield, then shuffle.
 SVar:Y:Count$CardPower
 DeckHints:Type$Legendary
-Oracle:Sisay, Weatherlight Captain gets +1/+1 for each color among other legendary permanents you control.\n{W}{U}{B}{R}{G}: Search your library for a legendary permanent card with converted mana cost less than Sisay's power, put that card onto the battlefield, then shuffle your library.
+Oracle:Sisay, Weatherlight Captain gets +1/+1 for each color among other legendary permanents you control.\n{W}{U}{B}{R}{G}: Search your library for a legendary permanent card with mana value less than Sisay's power, put that card onto the battlefield, then shuffle.

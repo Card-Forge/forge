@@ -5,4 +5,4 @@ A:SP$ ChangeZone | Cost$ 4 B R | Origin$ Graveyard | Destination$ Battlefield | 
 SVar:DBPump:DB$ Animate | Keywords$ Haste | Defined$ Targeted | Permanent$ True
 K:TypeCycling:Basic:2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grave_upheaval.jpg
-Oracle:Put target creature card from a graveyard onto the battlefield under your control. It gains haste.\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.)
+Oracle:Put target creature card from a graveyard onto the battlefield under your control. It gains haste.\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)

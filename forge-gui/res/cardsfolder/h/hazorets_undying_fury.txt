@@ -1,7 +1,7 @@
 Name:Hazoret's Undying Fury
 ManaCost:4 R R
 Types:Sorcery
-A:SP$ Shuffle | Cost$ 4 R R | Defined$ You | SubAbility$ DBExile | SpellDescription$ Shuffle your library, then exile the top four cards. You may cast any number of spells with converted mana cost 5 or less from among them without paying their mana costs. Lands you control don't untap during your next untap step.
+A:SP$ Shuffle | Cost$ 4 R R | Defined$ You | SubAbility$ DBExile | SpellDescription$ Shuffle your library, then exile the top four cards. You may cast any number of spells with mana value 5 or less from among them without paying their mana costs. Lands you control don't untap during your next untap step.
 SVar:DBExile:DB$ Dig | Defined$ You | DigNum$ 4 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBPlay
 SVar:DBPlay:DB$ Play | Valid$ Card.nonLand+IsRemembered+YouOwn+cmcLE5 | ValidZone$ Exile | Controller$ You | WithoutManaCost$ True | Optional$ True | Amount$ All | SubAbility$ DBNoUntap
 SVar:DBNoUntap:DB$ Effect | StaticAbilities$ DontUntap | Triggers$ RemoveEffect | Duration$ Permanent | Name$ Hazoret's Undying Fury Effect | SubAbility$ DBCleanup | SpellDescription$ Lands you control don't untap during your next untap step.
@@ -9,4 +9,4 @@ SVar:DontUntap:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefiel
 SVar:RemoveEffect:Mode$ Phase | Phase$ Untap | ValidPlayer$ You | TriggerZones$ Command | Static$ True | Execute$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-Oracle:Shuffle your library, then exile the top four cards. You may cast any number of spells with converted mana cost 5 or less from among them without paying their mana costs. Lands you control don't untap during your next untap step.
+Oracle:Shuffle your library, then exile the top four cards. You may cast any number of spells with mana value 5 or less from among them without paying their mana costs. Lands you control don't untap during your next untap step.

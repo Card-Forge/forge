@@ -5,7 +5,7 @@ K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
 S:Mode$ Continuous | Affected$ Land.YouCtrl | AddAbility$ AnyMana | IsPresent$ Land.YouCtrl | PresentCompare$ GE6 | Description$ As long as you control six or more lands, lands you control have "{T}: Add one mana of any color."
 SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
-A:AB$ ChangeZone | Cost$ W W U U B B R R G G T Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | ChangeType$ God | ChangeNum$ XFetch | StackDescription$ SpellDescription | SpellDescription$ Search your library for any number of God cards, put them onto the battlefield, then shuffle your library.
+A:AB$ ChangeZone | Cost$ W W U U B B R R G G T Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | ChangeType$ God | ChangeNum$ XFetch | StackDescription$ SpellDescription | SpellDescription$ Search your library for any number of God cards, put them onto the battlefield, then shuffle.
 SVar:XFetch:Count$TypeInYourLibrary.God
 DeckHints:Type$God
-Oracle:The World Tree enters the battlefield tapped.\n{T}: Add {G}.\nAs long as you control six or more lands, lands you control have "{T}: Add one mana of any color."\n{W}{W}{U}{U}{B}{B}{R}{R}{G}{G}, {T}, Sacrifice The World Tree: Search your library for any number of God cards, put them onto the battlefield, then shuffle your library.
+Oracle:The World Tree enters the battlefield tapped.\n{T}: Add {G}.\nAs long as you control six or more lands, lands you control have "{T}: Add one mana of any color."\n{W}{W}{U}{U}{B}{B}{R}{R}{G}{G}, {T}, Sacrifice The World Tree: Search your library for any number of God cards, put them onto the battlefield, then shuffle.

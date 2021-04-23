@@ -5,4 +5,4 @@ A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ DealDamage | Cost$ 4 S T Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature.
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mouth_of_ronom.jpg
-Oracle:{T}: Add {C}.\n{4}{S}, {T}, Sacrifice Mouth of Ronom: It deals 4 damage to target creature. ({S} can be paid with one mana from a snow permanent.)
+Oracle:{T}: Add {C}.\n{4}{S}, {T}, Sacrifice Mouth of Ronom: It deals 4 damage to target creature. ({S} can be paid with one mana from a snow source.)

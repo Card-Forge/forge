@@ -2,6 +2,6 @@ Name:Hearth Kami
 ManaCost:1 R
 Types:Creature Spirit
 PT:2/1
-A:AB$ Destroy | Cost$ X Sac<1/CARDNAME> | ValidTgts$ Artifact.cmcEQX | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact with converted mana cost X.
+A:AB$ Destroy | Cost$ X Sac<1/CARDNAME> | ValidTgts$ Artifact.cmcEQX | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact with mana value X.
 SVar:X:Count$xPaid
-Oracle:{X}, Sacrifice Hearth Kami: Destroy target artifact with converted mana cost X.
+Oracle:{X}, Sacrifice Hearth Kami: Destroy target artifact with mana value X.

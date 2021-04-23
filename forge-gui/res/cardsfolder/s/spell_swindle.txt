@@ -1,10 +1,10 @@
 Name:Spell Swindle
 ManaCost:3 U U
 Types:Instant
-A:SP$ Counter | Cost$ 3 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | RememberCounteredCMC$ True | SubAbility$ DBTreasureTokens | SpellDescription$ Counter target spell. Create X Treasure tokens, where X is that spell's converted mana cost.
+A:SP$ Counter | Cost$ 3 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | RememberCounteredCMC$ True | SubAbility$ DBTreasureTokens | SpellDescription$ Counter target spell. Create X Treasure tokens, where X is that spell's mana value.
 SVar:DBTreasureTokens:DB$ Token | TokenAmount$ X | TokenScript$ c_a_treasure_sac | TokenOwner$ You | LegacyImage$ c a treasure sac xln | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedNumber
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spell_swindle.jpg
-Oracle:Counter target spell. Create X Treasure tokens, where X is that spell's converted mana cost. (They're artifacts with "{T}, Sacrifice this artifact: Add one mana of any color.")
+Oracle:Counter target spell. Create X Treasure tokens, where X is that spell's mana value. (They're artifacts with "{T}, Sacrifice this artifact: Add one mana of any color.")

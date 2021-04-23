@@ -2,8 +2,8 @@ Name:The Birth of Meletis
 ManaCost:1 W
 Types:Enchantment Saga
 K:Saga:3:TrigChange,TrigToken,TrigGainLife
-SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Plains+Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic Plains card, reveal it, put it into your hand, then shuffle your library.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Plains+Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic Plains card, reveal it, put it into your hand, then shuffle.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_0_4_a_wall_defender | TokenOwner$ You | LegacyImage$ c 0 4 wall defender thb | SpellDescription$ Create a 0/4 colorless Wall artifact creature token with defender.
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
 DeckHas:Ability$LifeGain & Ability$Token
-Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Search your library for a basic Plains card, reveal it, put it into your hand, then shuffle your library.\nII — Create a 0/4 colorless Wall artifact creature token with defender.\nIII — You gain 2 life.
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Search your library for a basic Plains card, reveal it, put it into your hand, then shuffle.\nII — Create a 0/4 colorless Wall artifact creature token with defender.\nIII — You gain 2 life.

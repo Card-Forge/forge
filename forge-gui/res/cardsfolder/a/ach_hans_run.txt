@@ -6,4 +6,4 @@ SVar:TrigAch:DB$ NameCard | Defined$ You | ValidCards$ Card.Creature | ValidDesc
 SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.NamedCard | RememberChanged$ True | SubAbility$ DBPump
 SVar:DBPump:DB$ Animate | Keywords$ Haste | Permanent$ True | AtEOT$ Exile | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-Oracle:At the beginning of your upkeep, you may say "Ach! Hans, run! It's the . . ." and the name of a creature card. If you do, search your library for a card with that name, put it onto the battlefield, then shuffle your library. That creature gains haste. Exile it at the beginning of the next end step.
+Oracle:At the beginning of your upkeep, you may say "Ach! Hans, run! It's the . . ." and the name of a creature card. If you do, search your library for a card with that name, put it onto the battlefield, then shuffle. That creature gains haste. Exile it at the beginning of the next end step.

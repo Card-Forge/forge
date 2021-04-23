@@ -3,10 +3,10 @@ ManaCost:2 W B
 Types:Legendary Creature Kor Cleric
 PT:3/3
 K:Lifelink
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ Whenever CARDNAME or another Cleric you control dies, return target Cleric with lesser converted mana cost from your graveyard to the battlefield.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Cleric.YouCtrl+Other | Execute$ TrigReturn | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME or another Cleric you control dies, return target Cleric card with lesser converted mana cost from your graveyard to the battlefield.
-SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Cleric.cmcLTX+YouOwn | TgtPrompt$ Choose target Cleric card with lesser converted mana cost | Origin$ Graveyard | Destination$ Battlefield
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ Whenever CARDNAME or another Cleric you control dies, return target Cleric with lesser mana value from your graveyard to the battlefield.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Cleric.YouCtrl+Other | Execute$ TrigReturn | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME or another Cleric you control dies, return target Cleric card with lesser mana value from your graveyard to the battlefield.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Cleric.cmcLTX+YouOwn | TgtPrompt$ Choose target Cleric card with lesser mana value | Origin$ Graveyard | Destination$ Battlefield
 SVar:X:TriggeredCard$CardManaCost
 DeckHas:Ability$Graveyard
 DeckHints:Type$Cleric
-Oracle:Lifelink\nWhenever Orah, Skyclave Hierophant or another Cleric you control dies, return target Cleric card with lesser converted mana cost from your graveyard to the battlefield.
+Oracle:Lifelink\nWhenever Orah, Skyclave Hierophant or another Cleric you control dies, return target Cleric card with lesser mana value from your graveyard to the battlefield.

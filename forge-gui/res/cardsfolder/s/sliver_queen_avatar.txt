@@ -2,11 +2,11 @@ Name:Sliver Queen Avatar
 ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:+0/+7
-T:Mode$ SpellCast | ValidCard$ Creature.nonSliver | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ TrigCopy | TriggerDescription$ Whenever you cast a non-Sliver creature spell, exile that spell. If you do, create a token that's a copy of a random non-Shapeshifter Sliver creature card with the same converted mana cost as that spell.
+T:Mode$ SpellCast | ValidCard$ Creature.nonSliver | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ TrigCopy | TriggerDescription$ Whenever you cast a non-Sliver creature spell, exile that spell. If you do, create a token that's a copy of a random non-Shapeshifter Sliver creature card with the same mana value as that spell.
 SVar:TrigCopy:DB$ ChangeZone | Defined$ TriggeredCardLKICopy | Origin$ Stack | Destination$ Exile | Fizzle$ True | RememberChanged$ True | SubAbility$ DBCopy
 SVar:DBCopy:DB$ CopyPermanent | NumCopies$ 1 | ValidSupportedCopy$ Creature.Sliver+nonShapeshifter+cmcEQX | RandomCopied$ True | RandomNum$ 1 | ConditionCheckSVar$ RememberedSize | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:TriggeredCard$CardManaCost
 SVar:RememberedSize:Remembered$Amount
 SVar:Picture:https://downloads.cardforge.org/images/cards/VAN/Sliver Queen Avatar.full.jpg
-Oracle:Hand +0, life +7\nWhenever you cast a non-Sliver creature spell, exile that spell. If you do, create a token that's a copy of a random non-Shapeshifter Sliver creature card with the same converted mana cost as that spell.
+Oracle:Hand +0, life +7\nWhenever you cast a non-Sliver creature spell, exile that spell. If you do, create a token that's a copy of a random non-Shapeshifter Sliver creature card with the same mana value as that spell.

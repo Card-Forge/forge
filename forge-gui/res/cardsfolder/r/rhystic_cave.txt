@@ -1,8 +1,8 @@
 Name:Rhystic Cave
 ManaCost:no cost
 Types:Land
-A:AB$ ChooseColor | Cost$ T | AILogic$ MostProminentInComputerDeck | SubAbility$ DBMana | InstantSpeed$ True | SpellDescription$ Choose a color. Add one mana of that color unless any player pays {1}. Activate this ability only any time you could cast an instant.
+A:AB$ ChooseColor | Cost$ T | AILogic$ MostProminentInComputerDeck | SubAbility$ DBMana | InstantSpeed$ True | SpellDescription$ Choose a color. Add one mana of that color unless any player pays {1}. Activate only as an instant.
 SVar:DBMana:DB$ Mana | Produced$ Chosen | UnlessCost$ 1 | UnlessPayer$ Player | SpellDescription$ Add one mana of the chosen color.
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rhystic_cave.jpg
-Oracle:{T}: Choose a color. Add one mana of that color unless any player pays {1}. Activate this ability only any time you could cast an instant.
+Oracle:{T}: Choose a color. Add one mana of that color unless any player pays {1}. Activate only as an instant.

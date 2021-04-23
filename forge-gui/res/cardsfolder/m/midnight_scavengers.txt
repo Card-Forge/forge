@@ -2,9 +2,9 @@ Name:Midnight Scavengers
 ManaCost:4 B
 Types:Creature Human Rogue
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target creature card with converted mana cost 3 or less from your graveyard to your hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target creature card with mana value 3 or less from your graveyard to your hand.
 SVar:TrigChangeZone:DB$ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouCtrl+cmcLE3
 DeckHints:Name$Graf Rats
 MeldPair:Graf Rats
 AlternateMode:Meld
-Oracle:When Midnight Scavengers enters the battlefield, you may return target creature card with converted mana cost 3 or less from your graveyard to your hand.\n(Melds with Graf Rats.)
+Oracle:When Midnight Scavengers enters the battlefield, you may return target creature card with mana value 3 or less from your graveyard to your hand.\n(Melds with Graf Rats.)

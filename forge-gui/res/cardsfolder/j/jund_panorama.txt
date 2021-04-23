@@ -2,6 +2,6 @@ Name:Jund Panorama
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ ChangeZone | Cost$ 1 T Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Swamp+Basic,Land.Mountain+Basic,Land.Forest+Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic Swamp, Mountain, or Forest card and put it onto the battlefield tapped. Then shuffle your library.
+A:AB$ ChangeZone | Cost$ 1 T Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Swamp+Basic,Land.Mountain+Basic,Land.Forest+Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jund_panorama.jpg
-Oracle:{T}: Add {C}.\n{1}, {T}, Sacrifice Jund Panorama: Search your library for a basic Swamp, Mountain, or Forest card and put it onto the battlefield tapped. Then shuffle your library.
+Oracle:{T}: Add {C}.\n{1}, {T}, Sacrifice Jund Panorama: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.

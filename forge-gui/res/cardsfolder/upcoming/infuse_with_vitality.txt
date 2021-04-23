@@ -7,4 +7,4 @@ SVar:SupernaturalStaminaChangeZone:Mode$ ChangesZone | Origin$ Battlefield | Des
 SVar:SupernaturalStaminaTrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | Defined$ TriggeredNewCardLKICopy | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
 DeckHas:Ability$LifeGain
-Oracle:Until end of turn, target creature gains deathtouch and “When this creature dies, return it to the battlefield tapped under its owner’s control.”\nYou gain 2 life.
+Oracle:Until end of turn, target creature gains deathtouch and "When this creature dies, return it to the battlefield tapped under its owner's control."\nYou gain 2 life.

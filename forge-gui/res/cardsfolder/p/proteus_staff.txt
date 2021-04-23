@@ -1,11 +1,11 @@
 Name:Proteus Staff
 ManaCost:3
 Types:Artifact
-A:AB$ ChangeZone | Cost$ 2 U T | SorcerySpeed$ True | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | ValidTgts$ Creature | AILogic$ Polymorph | RememberLKI$ True | TgtPrompt$ Select target creature | SubAbility$ DBDigUntil | SpellDescription$ Put target creature on the bottom of its owner's library. That creature's controller reveals cards from the top of their library until they reveal a creature card. The player puts that card onto the battlefield and the rest on the bottom of their library in any order. Activate this ability only any time you could cast a sorcery.
+A:AB$ ChangeZone | Cost$ 2 U T | SorcerySpeed$ True | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | ValidTgts$ Creature | AILogic$ Polymorph | RememberLKI$ True | TgtPrompt$ Select target creature | SubAbility$ DBDigUntil | SpellDescription$ Put target creature on the bottom of its owner's library. That creature's controller reveals cards from the top of their library until they reveal a creature card. The player puts that card onto the battlefield and the rest on the bottom of their library in any order. Activate only as a sorcery.
 SVar:DBDigUntil:DB$ DigUntil | Defined$ RememberedController | Valid$ Creature | ValidDescription$ creature | FoundDestination$ Battlefield | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 DeckNeeds:Color$Blue
 SVar:Picture:http://www.wizards.com/global/images/magic/general/proteus_staff.jpg
-Oracle:{2}{U}, {T}: Put target creature on the bottom of its owner's library. That creature's controller reveals cards from the top of their library until they reveal a creature card. The player puts that card onto the battlefield and the rest on the bottom of their library in any order. Activate this ability only any time you could cast a sorcery.
+Oracle:{2}{U}, {T}: Put target creature on the bottom of its owner's library. That creature's controller reveals cards from the top of their library until they reveal a creature card. The player puts that card onto the battlefield and the rest on the bottom of their library in any order. Activate only as a sorcery.

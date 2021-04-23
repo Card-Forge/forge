@@ -7,4 +7,4 @@ A:AB$ PumpAll | Cost$ 1 S | ValidCards$ Creature.Snow+YouCtrl | NumAtt$ +1 | Num
 # AI can now use snow mana to pay for activated abilities.
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diamond_faerie.jpg
-Oracle:Flying\n{1}{S}: Snow creatures you control get +1/+1 until end of turn. ({S} can be paid with one mana from a snow permanent.)
+Oracle:Flying\n{1}{S}: Snow creatures you control get +1/+1 until end of turn. ({S} can be paid with one mana from a snow source.)

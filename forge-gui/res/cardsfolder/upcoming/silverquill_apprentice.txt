@@ -2,7 +2,7 @@ Name:Silverquill Apprentice
 ManaCost:W B
 Types:Creature Human Warlock
 PT:2/2
-T:Mode$ SpellCastOrCopy | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Magecraft — Whenever you cast or copy an instant or sorcery spell, target creature gets +1/+0 until end of turn.
+T:Mode$ SpellCastOrCopy | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Magecraft — Whenever you cast or copy an instant or sorcery spell, target creature gets +1/+0 until end of turn..
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 1
 DeckNeeds:Type$Instant|Sorcery
-Oracle:Magecraft — Whenever you cast or copy an instant or sorcery spell, target creature gets +1/+0 until end of turn
+Oracle:Magecraft — Whenever you cast or copy an instant or sorcery spell, target creature gets +1/+0 until end of turn.

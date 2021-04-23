@@ -3,6 +3,6 @@ ManaCost:1 W
 Types:Creature Kithkin Rogue
 PT:1/1
 K:Lifelink
-K:Protection:Card.cmcGE3:Protection from converted mana cost 3 or greater
+K:Protection:Card.cmcGE3:Protection from mana value 3 or greater
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mistmeadow_skulk.jpg
-Oracle:Lifelink, protection from converted mana cost 3 or greater
+Oracle:Lifelink, protection from mana value 3 or greater

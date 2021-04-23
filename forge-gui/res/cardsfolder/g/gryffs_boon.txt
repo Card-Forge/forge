@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 0 | AddKeyword$ Flying | Description$ Enchanted creature gets +1/+0 and has flying.
-A:AB$ Pump | Cost$ 3 W | ActivationZone$ Graveyard | ValidTgts$ Creature | SorcerySpeed$ True | TgtPrompt$ Choose a creature | SubAbility$ DBChange | SpellDescription$ Return Gryff's Boon from your graveyard to the battlefield attached to target creature. Activate this ability only any time you could cast a sorcery. | StackDescription$ SpellDescription
+A:AB$ Pump | Cost$ 3 W | ActivationZone$ Graveyard | ValidTgts$ Creature | SorcerySpeed$ True | TgtPrompt$ Choose a creature | SubAbility$ DBChange | SpellDescription$ Return Gryff's Boon from your graveyard to the battlefield attached to target creature. Activate only any time you could cast a sorcery. | StackDescription$ SpellDescription
 SVar:DBChange:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield | AttachedTo$ ParentTarget | SpellDescription$ | StackDescription$ SpellDescription
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gryffs_boon.jpg
-Oracle:Enchant creature\nEnchanted creature gets +1/+0 and has flying.\n{3}{W}: Return Gryff's Boon from your graveyard to the battlefield attached to target creature. Activate this ability only any time you could cast a sorcery.
+Oracle:Enchant creature\nEnchanted creature gets +1/+0 and has flying.\n{3}{W}: Return Gryff's Boon from your graveyard to the battlefield attached to target creature. Activate only as a sorcery.

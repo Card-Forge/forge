@@ -4,8 +4,8 @@ Types:Artifact Creature Thopter
 PT:0/0
 K:Flying
 K:etbCounter:P1P1:3
-A:AB$ Token | Cost$ 1 SubCounter<1/P1P1> | TokenAmount$ 1 | TokenScript$ c_1_1_a_thopter_flying | TokenOwner$ You | LegacyImage$ c 1 1 a thopter flying exo | SorcerySpeed$ True | SpellDescription$ Create a 1/1 colorless Thopter artifact creature token with flying. Activate this ability only any time you could cast a sorcery.
-A:AB$ PutCounter | Cost$ 1 Sac<1/Thopter.Other/another Thopter> | CounterType$ P1P1 | CounterNum$ 1 | SorcerySpeed$ True | SpellDescription$ Put a +1/+1 counter on Thopter Squadron. Activate this ability only any time you could cast a sorcery.
+A:AB$ Token | Cost$ 1 SubCounter<1/P1P1> | TokenAmount$ 1 | TokenScript$ c_1_1_a_thopter_flying | TokenOwner$ You | LegacyImage$ c 1 1 a thopter flying exo | SorcerySpeed$ True | SpellDescription$ Create a 1/1 colorless Thopter artifact creature token with flying. Activate only as a sorcery.
+A:AB$ PutCounter | Cost$ 1 Sac<1/Thopter.Other/another Thopter> | CounterType$ P1P1 | CounterNum$ 1 | SorcerySpeed$ True | SpellDescription$ Put a +1/+1 counter on Thopter Squadron. Activate only any time you could cast a sorcery.
 DeckHas:Ability$Counters & Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thopter_squadron.jpg
-Oracle:Flying\nThopter Squadron enters the battlefield with three +1/+1 counters on it.\n{1}, Remove a +1/+1 counter from Thopter Squadron: Create a 1/1 colorless Thopter artifact creature token with flying. Activate this ability only any time you could cast a sorcery.\n{1}, Sacrifice another Thopter: Put a +1/+1 counter on Thopter Squadron. Activate this ability only any time you could cast a sorcery.
+Oracle:Flying\nThopter Squadron enters the battlefield with three +1/+1 counters on it.\n{1}, Remove a +1/+1 counter from Thopter Squadron: Create a 1/1 colorless Thopter artifact creature token with flying. Activate only as a sorcery.\n{1}, Sacrifice another Thopter: Put a +1/+1 counter on Thopter Squadron. Activate only as a sorcery.

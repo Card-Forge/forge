@@ -3,7 +3,7 @@ ManaCost:4 W W
 Types:Creature Angel Warrior
 PT:3/3
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return target permanent card with converted mana cost 2 or less from your graveyard to the battlefield.
-SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Permanent.YouOwn+cmcLE2 | TgtPrompt$ Select target permanent card with converted mana cost 2 or less in your graveyard
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return target permanent card with mana value 2 or less from your graveyard to the battlefield.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Permanent.YouOwn+cmcLE2 | TgtPrompt$ Select target permanent card with mana value 2 or less in your graveyard
 K:Foretell:3 W
-Oracle:Flying\nWhen Shepherd of the Cosmos enters the battlefield, return target permanent card with converted mana cost 2 or less from your graveyard to the battlefield.\nForetell {3}{W} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)
+Oracle:Flying\nWhen Shepherd of the Cosmos enters the battlefield, return target permanent card with mana value 2 or less from your graveyard to the battlefield.\nForetell {3}{W} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)

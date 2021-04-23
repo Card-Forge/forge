@@ -2,17 +2,17 @@ Name:Kianne, Dean of Substance
 ManaCost:2 G
 Types:Legendary Creature Elf Druid
 PT:2/2
-A:AB$ Dig | Cost$ T | DigNum$ 1 | ChangeNum$ All | ChangeValid$ Card | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBChangeZone | StackDescription$ SpellDescription | SpellDescription$ Exile the top card of your library. If it’s a land card, put it into your hand. Otherwise, put a study counter on it.
+A:AB$ Dig | Cost$ T | DigNum$ 1 | ChangeNum$ All | ChangeValid$ Card | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBChangeZone | StackDescription$ SpellDescription | SpellDescription$ Exile the top card of your library. If it's a land card, put it into your hand. Otherwise, put a study counter on it.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Exile | Destination$ Hand | Defined$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Land | ConditionCompare$ GE1 | StackDescription$ None | SubAbility$ DBCounter
 SVar:DBCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ STUDY | TgtZone$ Exile | ConditionDefined$ Remembered | ConditionPresent$ Land | ConditionCompare$ LT1 | StackDescription$ None | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
-A:AB$ Token | Cost$ 4 G | TokenScript$ gu_0_0_fractal | ImprintTokens$ True | SubAbility$ DBRemember | SpellDescription$ Create a 0/0 green and blue Fractal creaature token. Put a +1/+1 counter on it for each different mana value among nonland cards you own in exile with study counters on them.
+A:AB$ Token | Cost$ 4 G | TokenScript$ gu_0_0_fractal | ImprintTokens$ True | SubAbility$ DBRemember | SpellDescription$ Create a 0/0 green and blue Fractal creature token. Put a +1/+1 counter on it for each different mana value among nonland cards you own in exile with study counters on them.
 SVar:DBRemember:DB$ PumpAll | ValidCards$ Card.YouOwn+nonLand+counters_GE1_STUDY | PumpZone$ Exile | RememberAllPumped$ True | StackDescription$ None | SubAbility$ DBCounters
 SVar:DBCounters:DB$ PutCounter | Defined$ Imprinted | CounterType$ P1P1 | CounterNum$ X | StackDescription$ None | SubAbility$ DBCleanup
 SVar:X:Remembered$DifferentCMC
 DeckHas:Ability$Counters & Ability$Token
 AlternateMode:Modal
-Oracle:{T}: Exile the top card of your library. If it’s a land card, put it into your hand. Otherwise, put a study counter on it.\n{4}{G}: Create a 0/0 green and blue Fractal creaature token. Put a +1/+1 counter on it for each different mana value among nonland cards you own in exile with study counters on them.
+Oracle:{T}: Exile the top card of your library. If it's a land card, put it into your hand. Otherwise, put a study counter on it.\n{4}{G}: Create a 0/0 green and blue Fractal creature token. Put a +1/+1 counter on it for each different mana value among nonland cards you own in exile with study counters on them.
 
 ALTERNATE
 

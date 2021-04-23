@@ -1,7 +1,7 @@
 Name:Ice Cauldron
 ManaCost:4
 Types:Artifact
-A:AB$ PutCounter | Cost$ X T | RememberCostMana$ True | CounterType$ CHARGE | CounterNum$ 1 | CheckSVar$ Y | SVarCompare$ EQ0 | SubAbility$ DBExile | SpellDescription$ You may exile a nonland card from your hand. You may cast that card for as long as it remains exiled. Put a charge counter on CARDNAME and note the type and amount of mana spent to pay this activation cost. Activate this ability only if there are no charge counters on CARDNAME.
+A:AB$ PutCounter | Cost$ X T | RememberCostMana$ True | CounterType$ CHARGE | CounterNum$ 1 | CheckSVar$ Y | SVarCompare$ EQ0 | SubAbility$ DBExile | SpellDescription$ You may exile a nonland card from your hand. You may cast that card for as long as it remains exiled. Put a charge counter on CARDNAME and note the type and amount of mana spent to pay this activation cost. Activate only if there are no charge counters on CARDNAME.
 SVar:X:Count$xPaid
 SVar:Y:Count$CardCounters.CHARGE
 SVar:DBExile:DB$ ChangeZone | Optional$ True | RememberChanged$ True | Origin$ Hand | Destination$ Exile | ChangeType$ Card.nonLand | ChangeNum$ 1 | SubAbility$ DBEffect
@@ -13,4 +13,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | Va
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ Mana | Cost$ T SubCounter<1/CHARGE> | Produced$ Special LastNotedType | RestrictValid$ Card.IsRemembered | SpellDescription$ Add CARDNAME's last noted type and amount of mana. Spend this mana only to cast the last card exiled with CARDNAME.
 AI:RemoveDeck:All
-Oracle:{X}, {T}: You may exile a nonland card from your hand. You may cast that card for as long as it remains exiled. Put a charge counter on Ice Cauldron and note the type and amount of mana spent to pay this activation cost. Activate this ability only if there are no charge counters on Ice Cauldron.\n{T}, Remove a charge counter from Ice Cauldron: Add Ice Cauldron's last noted type and amount of mana. Spend this mana only to cast the last card exiled with Ice Cauldron.
+Oracle:{X}, {T}: You may exile a nonland card from your hand. You may cast that card for as long as it remains exiled. Put a charge counter on Ice Cauldron and note the type and amount of mana spent to pay this activation cost. Activate only if there are no charge counters on Ice Cauldron.\n{T}, Remove a charge counter from Ice Cauldron: Add Ice Cauldron's last noted type and amount of mana. Spend this mana only to cast the last card exiled with Ice Cauldron.

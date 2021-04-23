@@ -1,7 +1,7 @@
 Name:Spark of Creativity
 ManaCost:R
 Types:Sorcery
-A:SP$ Pump | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Damage | IsCurse$ True | SubAbility$ DBExile | StackDescription$ SpellDescription | SpellDescription$ Choose target creature. Exile the top card of your library. You may have CARDNAME deal damage to that creature equal to the exiled card's converted mana cost. If you don't, you may play that card until end of turn.
+A:SP$ Pump | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Damage | IsCurse$ True | SubAbility$ DBExile | StackDescription$ SpellDescription | SpellDescription$ Choose target creature. Exile the top card of your library. You may have CARDNAME deal damage to that creature equal to the exiled card's mana value. If you don't, you may play that card until end of turn.
 SVar:DBExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | Reveal$ True | SubAbility$ DBChoice
 SVar:DBChoice:DB$ GenericChoice | Defined$ You | Choices$ SparkDamage,SparkPlay | SubAbility$ DBCleanup | AILogic$ CreativitySpark
 SVar:SparkDamage:DB$ DealDamage | Defined$ ParentTarget | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target creature.
@@ -10,4 +10,4 @@ SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Car
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedCardManaCost
 AI:RemoveDeck:All
-Oracle:Choose target creature. Exile the top card of your library. You may have Spark of Creativity deal damage to that creature equal to the exiled card's converted mana cost. If you don't, you may play that card until end of turn.
+Oracle:Choose target creature. Exile the top card of your library. You may have Spark of Creativity deal damage to that creature equal to the exiled card's mana value. If you don't, you may play that card until end of turn.

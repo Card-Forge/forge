@@ -1,7 +1,7 @@
 Name:Illusionist's Gambit
 ManaCost:2 U U
 Types:Instant
-A:SP$ RemoveFromCombat | Cost$ 2 U U | Defined$ Valid Creature.attacking | ActivationPhases$ Declare Blockers | OpponentTurn$ True | RememberRemovedFromCombat$ True | SubAbility$ DBUntap | SpellDescription$ Cast CARDNAME only on the declare blockers step on an opponent's turn. Remove all attacking creatures from combat and untap them. After this phase, there is an additional combat phase. Each of those creatures attacks that combat if able. They can't attack you or a planeswalker you control that combat.
+A:SP$ RemoveFromCombat | Cost$ 2 U U | Defined$ Valid Creature.attacking | ActivationPhases$ Declare Blockers | OpponentTurn$ True | RememberRemovedFromCombat$ True | SubAbility$ DBUntap | SpellDescription$ Cast CARDNAME only on the declare blockers step on an opponent's turn. Remove all attacking creatures from combat and untap them. After this phase, there is an additional combat phase. Each of those creatures attacks that combat if able. They can't attack you or planeswalkers you control that combat.
 SVar:DBUntap:DB$ Untap | Defined$ Remembered | SubAbility$ DBAddPhase
 SVar:DBAddPhase:DB$ AddPhase | ExtraPhase$ Combat | AfterPhase$ EndCombat | SubAbility$ DBDelayedEffect
 SVar:DBDelayedEffect:DB$ DelayedTrigger | Mode$ Phase | Phase$ BeginCombat | Execute$ DBEffect | Static$ True
@@ -10,4 +10,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:STCantAttack:Mode$ CantAttack | EffectZone$ Command | ValidCard$ Creature.IsRemembered | Target$ You,Planeswalker.YouCtrl | Description$ Each of those creatures attacks that combat if able.
 SVar:STMustAttack:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.IsRemembered | AddHiddenKeyword$ CARDNAME attacks each combat if able.
 AI:RemoveDeck:All
-Oracle:Cast this spell only during the declare blockers step on an opponent's turn.\nRemove all attacking creatures from combat and untap them. After this phase, there is an additional combat phase. Each of those creatures attacks that combat if able. They can't attack you or a planeswalker you control that combat.
+Oracle:Cast this spell only during the declare blockers step on an opponent's turn.\nRemove all attacking creatures from combat and untap them. After this phase, there is an additional combat phase. Each of those creatures attacks that combat if able. They can't attack you or planeswalkers you control that combat.

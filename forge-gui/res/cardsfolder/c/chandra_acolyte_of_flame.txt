@@ -12,4 +12,4 @@ SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | ExileOnMoved$ Stack | Rep
 SVar:ReplaceGraveyard:Event$ Moved | ValidCard$ Card.IsRemembered | Origin$ Stack | Destination$ Graveyard | ReplaceWith$ MoveExile | Description$ If that card would be put into your graveyard this turn, exile it instead.
 SVar:MoveExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ Exile
 DeckHas:Ability$Token
-Oracle:[0]: Put a loyalty counter on each red planeswalker you control.\n[0]: Create two 1/1 red Elemental creature tokens. They gain haste. Sacrifice them at the beginning of the next end step.\n[−2]: You may cast target instant or sorcery card with converted mana cost 3 or less from your graveyard. If that spell would be put into your graveyard this turn, exile it instead.
+Oracle:[0]: Put a loyalty counter on each red planeswalker you control.\n[0]: Create two 1/1 red Elemental creature tokens. They gain haste. Sacrifice them at the beginning of the next end step.\n[−2]: You may cast target instant or sorcery card with mana value 3 or less from your graveyard. If that spell would be put into your graveyard this turn, exile it instead.

@@ -3,8 +3,8 @@ ManaCost:5
 Types:Artifact Creature Wall
 PT:0/1
 K:Defender
-A:AB$ PutCounter | Cost$ ExileFromGrave<1/Creature> | CounterType$ P0P1 | CounterNum$ X | AILogic$ ExiledCreatureFromGraveCMC | SpellDescription$ Put X +0/+1 counters on CARDNAME, where X is the exiled card's converted mana cost.
+A:AB$ PutCounter | Cost$ ExileFromGrave<1/Creature> | CounterType$ P0P1 | CounterNum$ X | AILogic$ ExiledCreatureFromGraveCMC | SpellDescription$ Put X +0/+1 counters on CARDNAME, where X is the exiled card's mana value.
 SVar:X:Exiled$CardManaCost
 SVar:AIPreference:ExileFromGraveCost$Creature.cmcGE1+inZoneGraveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/necropolis.jpg
-Oracle:Defender (This creature can't attack.)\nExile a creature card from your graveyard: Put X +0/+1 counters on Necropolis, where X is the exiled card's converted mana cost.
+Oracle:Defender (This creature can't attack.)\nExile a creature card from your graveyard: Put X +0/+1 counters on Necropolis, where X is the exiled card's mana value.

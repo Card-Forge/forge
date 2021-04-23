@@ -2,6 +2,6 @@ Name:Undercity Necrolisk
 ManaCost:3 B
 Types:Creature Zombie Lizard
 PT:3/3
-A:AB$ PutCounter | Cost$ 1 Sac<1/Creature.Other/another creature> | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SorcerySpeed$ True | SpellDescription$ Put a +1/+1 counter on CARDNAME. It gains menace until end of turn. Activate this ability only any time you could cast a sorcery.
+A:AB$ PutCounter | Cost$ 1 Sac<1/Creature.Other/another creature> | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SorcerySpeed$ True | SpellDescription$ Put a +1/+1 counter on CARDNAME. It gains menace until end of turn. Activate only any time you could cast a sorcery.
 SVar:DBPump:DB$ Pump | KW$ Menace | Defined$ Self
-Oracle:{1}, Sacrifice another creature: Put a +1/+1 counter on Undercity Necrolisk. It gains menace until end of turn. Activate this ability only any time you could cast a sorcery. (It can't be blocked except by two or more creatures.)
+Oracle:{1}, Sacrifice another creature: Put a +1/+1 counter on Undercity Necrolisk. It gains menace until end of turn. Activate only as a sorcery. (It can't be blocked except by two or more creatures.)

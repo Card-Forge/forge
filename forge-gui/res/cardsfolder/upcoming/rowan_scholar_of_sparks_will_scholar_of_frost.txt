@@ -11,7 +11,7 @@ SVar:TRCast:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer
 SVar:TrigCopy:AB$ CopySpellAbility | Cost$ 2 | Defined$ TriggeredSpellAbility | AILogic$ AlwaysIfViable | MayChooseTarget$ True
 AlternateMode:Modal
 DeckHints:Type$Instant|Sorcery
-Oracle:Instant and sorcery spells you cast cost {1} less to cast.\n[+1]: Rowan, Scholar of Sparks deals 1 damage to each opponent. If you've drawn three or more cards this turn, she deals 3 damage to each opponent instead.\n[-4]: You get an emblem with "Whenever you cast an instant or sorcery spell, you may pay {2}. If you do, copy that spell. You may choose new targets for the copy."
+Oracle:Instant and sorcery spells you cast cost {1} less to cast.\n[+1]: Rowan, Scholar of Sparks deals 1 damage to each opponent. If you've drawn three or more cards this turn, she deals 3 damage to each opponent instead.\n[−4]: You get an emblem with "Whenever you cast an instant or sorcery spell, you may pay {2}. If you do, copy that spell. You may choose new targets for the copy."
 
 ALTERNATE
 
@@ -27,4 +27,4 @@ SVar:DBRepeat:DB$ RepeatEach | DefinedCards$ DirectRemembered | UseImprinted$ Tr
 SVar:DBToken:DB$ Token | TokenScript$ ur_4_4_elemental | TokenOwner$ ImprintedController
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Tokens
-Oracle:Instant and sorcery spells you cast cost {1} less to cast.\n[+1]: Up to one target creature has base power and toughness 0/2 until your next turn.\n[−3]: Draw two cards.\n[−7]: Exile up to five target permanents. For each permanent exiled this way, its controller creates a 4/4 blue and red Elemental Creature token.
+Oracle:Instant and sorcery spells you cast cost {1} less to cast.\n[+1]: Up to one target creature has base power and toughness 0/2 until your next turn.\n[−3]: Draw two cards.\n[−7]: Exile up to five target permanents. For each permanent exiled this way, its controller creates a 4/4 blue and red Elemental creature token.

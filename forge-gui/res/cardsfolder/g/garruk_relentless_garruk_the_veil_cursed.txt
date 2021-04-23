@@ -20,10 +20,10 @@ Colors:green,black
 Types:Legendary Planeswalker Garruk
 Loyalty:3
 A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | TokenAmount$ 1 | TokenScript$ b_1_1_wolf_deathtouch | LegacyImage$ b 1 1 wolf deathtouch isd | TokenOwner$ You | Planeswalker$ True | SpellDescription$ Create a 1/1 black Wolf creature token with deathtouch.
-A:AB$ Sacrifice | Cost$ SubCounter<1/LOYALTY> | Defined$ You | SacValid$ Creature | SacMessage$ Creature | SubAbility$ DBSearch | Planeswalker$ True | RememberSacrificed$ True | SpellDescription$ Sacrifice a creature. If you do, search your library for a creature card, reveal it, put it into your hand, then shuffle your library.
+A:AB$ Sacrifice | Cost$ SubCounter<1/LOYALTY> | Defined$ You | SacValid$ Creature | SacMessage$ Creature | SubAbility$ DBSearch | Planeswalker$ True | RememberSacrificed$ True | SpellDescription$ Sacrifice a creature. If you do, search your library for a creature card, reveal it, put it into your hand, then shuffle.
 A:AB$ PumpAll | Cost$ SubCounter<3/LOYALTY> | ValidCards$ Creature.YouCtrl | KW$ Trample | NumAtt$ X | NumDef$ X | Planeswalker$ True | Ultimate$ True | SpellDescription$ Creatures you control gain trample and get +X/+X until end of turn, where X is the number of creature cards in your graveyard.
 SVar:X:Count$TypeInYourYard.Creature
 SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Creature | ChangeNum$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/garruk_the_veil_cursed.jpg
-Oracle:[+1]: Create a 1/1 black Wolf creature token with deathtouch.\n[−1]: Sacrifice a creature. If you do, search your library for a creature card, reveal it, put it into your hand, then shuffle your library.\n[−3]: Creatures you control gain trample and get +X/+X until end of turn, where X is the number of creature cards in your graveyard.
+Oracle:[+1]: Create a 1/1 black Wolf creature token with deathtouch.\n[−1]: Sacrifice a creature. If you do, search your library for a creature card, reveal it, put it into your hand, then shuffle.\n[−3]: Creatures you control gain trample and get +X/+X until end of turn, where X is the number of creature cards in your graveyard.

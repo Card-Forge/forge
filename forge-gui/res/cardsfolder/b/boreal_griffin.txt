@@ -7,4 +7,4 @@ A:AB$ Pump | Cost$ S | KW$ First Strike | Defined$ Self | SpellDescription$ CARD
 # AI can now use snow mana to pay for activated abilities.
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boreal_griffin.jpg
-Oracle:Flying\n{S}: Boreal Griffin gains first strike until end of turn. ({S} can be paid with one mana from a snow permanent.)
+Oracle:Flying\n{S}: Boreal Griffin gains first strike until end of turn. ({S} can be paid with one mana from a snow source.)

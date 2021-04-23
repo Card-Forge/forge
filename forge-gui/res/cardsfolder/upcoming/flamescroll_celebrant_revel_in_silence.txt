@@ -17,4 +17,4 @@ A:SP$ Effect | Cost$ W | Name$ Silence Effect | StaticAbilities$ STCantBeCast,ST
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | StackDescription$ None
 SVar:STCantBeCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card | Caster$ Opponent | Description$ Your opponents can't cast spells.
 SVar:STCantBeActivated:Mode$ CantBeActivated | Activator$ Opponent | EffectZone$ Command | ValidCard$ Planeswalker | Loyalty$ True | Description$ Your opponents can't activate planeswalkers' loyalty abilities.
-Oracle:You opponents can’t cast spells or activate planeswalkers’ loyalty abilities this turn.\nExile Revel in Silence.
+Oracle:Your opponents can't cast spells or activate planeswalkers' loyalty abilities this turn.\nExile Revel in Silence.

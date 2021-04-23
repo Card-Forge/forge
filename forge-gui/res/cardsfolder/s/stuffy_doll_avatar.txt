@@ -2,13 +2,13 @@ Name:Stuffy Doll Avatar
 ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:+0/-6
-A:AB$ ChooseSource | Cost$ 0 | ActivationZone$ Command | Choices$ Card,Emblem | AILogic$ NeedsPrevention | SubAbility$ DBEffect | ActivationLimit$ 1 | SpellDescription$ If damage would be dealt to you this turn by a source of your choice, prevent that damage. CARDNAME deals damage to you and target opponent or planeswalker equal to half the damage prevented this way, rounded up. Activate this ability only once each turn.
+A:AB$ ChooseSource | Cost$ 0 | ActivationZone$ Command | Choices$ Card,Emblem | AILogic$ NeedsPrevention | SubAbility$ DBEffect | ActivationLimit$ 1 | SpellDescription$ If damage would be dealt to you this turn by a source of your choice, prevent that damage. CARDNAME deals damage to you and target opponent or planeswalker equal to half the damage prevented this way, rounded up. Activate only once each turn.
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ SelflessDamage | RememberObjects$ Targeted | SubAbility$ DBCleanup | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ GE1 | ValidTgts$ Opponent,Planeswalker | TgtPrompt$ Select target opponent or planeswalker to give damage
-SVar:SelflessDamage:Event$ DamageDone | ValidTarget$ You | ValidSource$ Card.ChosenCard | PreventionEffect$ True | ReplaceWith$ DamageEffectYou | Description$ If damage would be dealt to you this turn by a source of your choice, prevent that damage. Stuffy Doll Avatar deals damage to you and target opponent or planeswalker equal to half the damage prevented this way, rounded up. Activate this ability only once each turn.
+SVar:SelflessDamage:Event$ DamageDone | ValidTarget$ You | ValidSource$ Card.ChosenCard | PreventionEffect$ True | ReplaceWith$ DamageEffectYou | Description$ If damage would be dealt to you this turn by a source of your choice, prevent that damage. Stuffy Doll Avatar deals damage to you and target opponent or planeswalker equal to half the damage prevented this way, rounded up. Activate only once each turn.
 SVar:DamageEffectYou:DB$ DealDamage | Defined$ You | DamageSource$ EffectSource | NumDmg$ X | SubAbility$ DamageEffectPlayer | DamageMap$ True
 SVar:DamageEffectPlayer:DB$ DealDamage | Defined$ Remembered | DamageSource$ EffectSource | NumDmg$ X | SubAbility$ DBDamageResolve
 SVar:DBDamageResolve:DB$ DamageResolve
 SVar:X:ReplaceCount$DamageAmount/HalfUp
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
 SVar:Picture:https://downloads.cardforge.org/images/cards/VAN/Stuffy Doll Avatar.full.jpg
-Oracle:Hand +0, life -6\n{0}: If damage would be dealt to you this turn by a source of your choice, prevent that damage. Stuffy Doll Avatar deals damage to you and target opponent or planeswalker equal to half the damage prevented this way, rounded up. Activate this ability only once each turn.
+Oracle:Hand +0, life -6\n{0}: If damage would be dealt to you this turn by a source of your choice, prevent that damage. Stuffy Doll Avatar deals damage to you and target opponent or planeswalker equal to half the damage prevented this way, rounded up. Activate only once each turn.

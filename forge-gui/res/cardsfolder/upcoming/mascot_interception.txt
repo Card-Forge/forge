@@ -6,4 +6,4 @@ A:SP$ GainControl | Cost$ 3 R | ValidTgts$ Creature | TgtPrompt$ Select target c
 SVar:DBPump:DB$ Pump | Defined$ Targeted | NumAtt$ +2 | KW$ Haste
 SVar:CostReduction:Count$Compare CheckTgt GE1.3.0
 SVar:CheckTgt:Targeted$Valid Creature.token
-Oracle:Gain control of target creature until end of turn. Untap that creature. It gets +2/+0 and gains haste until end of turn.
+Oracle:This spell costs {3} less to cast if it targets a creature token.\nGain control of target creature until end of turn. Untap that creature. It gets +2/+0 and gains haste until end of turn.

@@ -2,10 +2,10 @@ Name:Auratouched Mage
 ManaCost:5 W
 Types:Creature Human Wizard
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, search your library for an Aura card that could enchant it. If CARDNAME is still on the battlefield, put that Aura card onto the battlefield attached to it. Otherwise, reveal the Aura card and put it into your hand. Then shuffle your library.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, search your library for an Aura card that could enchant it. If CARDNAME is still on the battlefield, put that Aura card onto the battlefield attached to it. Otherwise, reveal the Aura card and put it into your hand. Then shuffle.
 SVar:TrigChangeZone:DB$ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Aura.CanEnchantSource | AttachedTo$ Self | ConditionPresent$ Card.Self | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Aura.CanEnchantSource | ConditionPresent$ Card.Self | ConditionCompare$ LE0
 AI:RemoveDeck:Random
 DeckNeeds:Type$Aura
 SVar:Picture:http://www.wizards.com/global/images/magic/general/auratouched_mage.jpg
-Oracle:When Auratouched Mage enters the battlefield, search your library for an Aura card that could enchant it. If Auratouched Mage is still on the battlefield, put that Aura card onto the battlefield attached to it. Otherwise, reveal the Aura card and put it into your hand. Then shuffle your library.
+Oracle:When Auratouched Mage enters the battlefield, search your library for an Aura card that could enchant it. If Auratouched Mage is still on the battlefield, put that Aura card onto the battlefield attached to it. Otherwise, reveal the Aura card and put it into your hand. Then shuffle.

@@ -4,6 +4,6 @@ Types:Sorcery
 A:SP$ Charm | Cost$ 4 G G | Choices$ DBPutCounter,DBChangeZone1,DBChangeZone2 | CharmNum$ 3 | CanRepeatModes$ True
 SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Put two +1/+1 counters on target creature.
 SVar:DBChangeZone1:DB$ ChangeZone | TgtPrompt$ Choose target permanent card in your graveyard | ValidTgts$ Permanent.YouOwn | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target permanent card from your graveyard to your hand.
-SVar:DBChangeZone2:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | Tapped$ True | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
+SVar:DBChangeZone2:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | Tapped$ True | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/verdant_confluence.jpg
-Oracle:Choose three. You may choose the same mode more than once.\n• Put two +1/+1 counters on target creature.\n• Return target permanent card from your graveyard to your hand.\n• Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
+Oracle:Choose three. You may choose the same mode more than once.\n• Put two +1/+1 counters on target creature.\n• Return target permanent card from your graveyard to your hand.\n• Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.

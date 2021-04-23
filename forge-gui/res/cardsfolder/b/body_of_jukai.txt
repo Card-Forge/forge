@@ -6,4 +6,4 @@ K:Trample
 K:Soulshift:8
 DeckHints:Type$Spirit
 SVar:Picture:http://www.wizards.com/global/images/magic/general/body_of_jukai.jpg
-Oracle:Trample\nSoulshift 8 (When this creature dies, you may return target Spirit card with converted mana cost 8 or less from your graveyard to your hand.)
+Oracle:Trample\nSoulshift 8 (When this creature dies, you may return target Spirit card with mana value 8 or less from your graveyard to your hand.)

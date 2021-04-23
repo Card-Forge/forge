@@ -2,7 +2,7 @@ Name:Rowan's Stalwarts
 ManaCost:4 R
 Types:Creature Human Knight
 PT:5/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library and/or graveyard for a card named Rowan, Fearless Sparkmage, reveal it, and put it into your hand. If you search your library this way, shuffle it.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library and/or graveyard for a card named Rowan, Fearless Sparkmage, reveal it, and put it into your hand. If you search your library this way, shuffle.
 SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | OriginChoice$ True | OriginAlternative$ Graveyard | AlternativeMessage$ Would you like to search your library with this ability? If you do, your library will be shuffled. | Destination$ Hand | ChangeType$ Card.namedRowan; Fearless Sparkmage | ChangeNum$ 1 | Optional$ True
 DeckHints:Name$Rowan, Fearless Sparkmage
-Oracle:When Rowan's Stalwarts enters the battlefield, you may search your library and/or graveyard for a card named Rowan, Fearless Sparkmage, reveal it, and put it into your hand. If you search your library this way, shuffle it.
+Oracle:When Rowan's Stalwarts enters the battlefield, you may search your library and/or graveyard for a card named Rowan, Fearless Sparkmage, reveal it, and put it into your hand. If you search your library this way, shuffle.

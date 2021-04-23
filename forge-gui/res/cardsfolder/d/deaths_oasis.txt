@@ -1,11 +1,11 @@
 Name:Death's Oasis
 ManaCost:W B G
 Types:Enchantment
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+nonToken | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever a nontoken creature you control dies, mill two cards. Then return a creature card with lesser converted mana cost than the creature that died from your graveyard to your hand.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+nonToken | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever a nontoken creature you control dies, mill two cards. Then return a creature card with lesser mana value than the creature that died from your graveyard to your hand.
 SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ You | SubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeType$ Creature.YouOwn+cmcLTY | Hidden$ True | ChangeNum$ 1
 SVar:Y:TriggeredCard$CardManaCost
-A:AB$ GainLife | Cost$ 1 Sac<1/CARDNAME> | LifeAmount$ X | SpellDescription$ You gain life equal to the highest converted mana cost among creatures you control.
+A:AB$ GainLife | Cost$ 1 Sac<1/CARDNAME> | LifeAmount$ X | SpellDescription$ You gain life equal to the highest mana value among creatures you control.
 SVar:X:Count$HighestCMC_Creature.YouCtrl+inZoneBattlefield
 DeckHas:Ability$LifeGain
-Oracle:Whenever a nontoken creature you control dies, mill two cards. Then return a creature card with lesser converted mana cost than the creature that died from your graveyard to your hand.\n{1}, Sacrifice Death's Oasis: You gain life equal to the highest converted mana cost among creatures you control.
+Oracle:Whenever a nontoken creature you control dies, mill two cards. Then return a creature card with lesser mana value than the creature that died from your graveyard to your hand.\n{1}, Sacrifice Death's Oasis: You gain life equal to the highest mana value among creatures you control.

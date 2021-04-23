@@ -2,14 +2,14 @@ Name:Orzhov Advokist
 ManaCost:2 W
 Types:Creature Human Advisor
 PT:1/4
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChoose | TriggerDescription$ At the beginning of your upkeep, each player may put two +1/+1 counters on a creature they control. If a player does, creatures that player controls can't attack you or a planeswalker you control until your next turn.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChoose | TriggerDescription$ At the beginning of your upkeep, each player may put two +1/+1 counters on a creature they control. If a player does, creatures that player controls can't attack you or planeswalkers you control until your next turn.
 SVar:TrigChoose:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChoice | SubAbility$ DBPutCounter
 SVar:DBChoice:DB$ ChooseCard | Defined$ Player.IsRemembered | Amount$ 1 | MinAmount$ 0 | Choices$ Creature.RememberedPlayerCtrl | RememberChosen$ True | AILogic$ OrzhovAdvokist
 SVar:DBPutCounter:DB$ PutCounterAll | ValidCards$ Creature.IsRemembered | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBClearChosen
 SVar:DBClearChosen:DB$ Cleanup | ClearChosenCard$ True | SubAbility$ DBRememberPlayer
 SVar:DBRememberPlayer:DB$ Pump | RememberObjects$ RememberedController | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ Player.IsRemembered | StaticAbilities$ STCantAttack | Duration$ UntilYourNextTurn | SubAbility$ DBCleanup
-SVar:STCantAttack:Mode$ CantAttack | EffectZone$ Command | ValidCard$ Creature.RememberedPlayerCtrl | Target$ You,Planeswalker.YouCtrl | Description$ Creatures that player controls can't attack you or a planeswalker you control until your next turn.
+SVar:STCantAttack:Mode$ CantAttack | EffectZone$ Command | ValidCard$ Creature.RememberedPlayerCtrl | Target$ You,Planeswalker.YouCtrl | Description$ Creatures that player controls can't attack you or planeswalkers you control until your next turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orzhov_advokist.jpg
-Oracle:At the beginning of your upkeep, each player may put two +1/+1 counters on a creature they control. If a player does, creatures that player controls can't attack you or a planeswalker you control until your next turn.
+Oracle:At the beginning of your upkeep, each player may put two +1/+1 counters on a creature they control. If a player does, creatures that player controls can't attack you or planeswalkers you control until your next turn.

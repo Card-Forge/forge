@@ -7,4 +7,4 @@ A:AB$ Untap | Cost$ T | ValidTgts$ Creature.attacking | TgtPrompt$ Select target
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Prevent all combat damage that would be dealt to and dealt by CARDNAME.
 K:Suspend:4:W U
 AI:RemoveDeck:All
-Oracle:Vigilance\n{T}: Untap target attacking creature. Prevent all combat damage that would be dealt to and dealt by that creature this turn.\nSuspend 4—{W}{U} (Rather than cast this card from your hand, you may pay {W}{U} and exile it with four time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost. It has haste.)
+Oracle:Vigilance\n{T}: Untap target attacking creature. Prevent all combat damage that would be dealt to and dealt by that creature this turn.\nSuspend 4—{W}{U}

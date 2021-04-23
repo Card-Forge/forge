@@ -1,7 +1,7 @@
 Name:Azor's Gateway
 ManaCost:2
 Types:Legendary Artifact
-A:AB$ Draw | Cost$ 1 T | NumCards$ 1 | SubAbility$ DBExile | SpellDescription$ Draw a card, then exile a card from your hand. If cards with five or more different converted mana costs are exiled with CARDNAME, you gain 5 life, untap CARDNAME, and transform it.
+A:AB$ Draw | Cost$ 1 T | NumCards$ 1 | SubAbility$ DBExile | SpellDescription$ Draw a card, then exile a card from your hand. If cards with five or more different mana values are exiled with CARDNAME, you gain 5 life, untap CARDNAME, and transform it.
 SVar:DBExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | RememberChanged$ True | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 5 | SubAbility$ DBUntap | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE5
 SVar:DBUntap:DB$ Untap | Defined$ Self | SubAbility$ DBTransform | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE5
@@ -13,7 +13,7 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Y:Remembered$DifferentCMC
 SVar:Picture:http://www.wizards.com/global/images/magic/general/azors_gateway.jpg
 AlternateMode:DoubleFaced
-Oracle:{1}, {T}: Draw a card, then exile a card from your hand. If cards with five or more different converted mana costs are exiled with Azor's Gateway, you gain 5 life, untap Azor's Gateway, and transform it.
+Oracle:{1}, {T}: Draw a card, then exile a card from your hand. If cards with five or more different mana values are exiled with Azor's Gateway, you gain 5 life, untap Azor's Gateway, and transform it.
 
 ALTERNATE
 

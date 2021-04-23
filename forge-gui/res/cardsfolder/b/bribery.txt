@@ -1,6 +1,6 @@
 Name:Bribery
 ManaCost:3 U U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 U U | Origin$ Library | Destination$ Battlefield | ValidTgts$ Opponent | ChangeType$ Creature | ChangeNum$ 1 | GainControl$ True | IsCurse$ True | StackDescription$ SpellDescription | SpellDescription$ Search target opponent's library for a creature card and put that card onto the battlefield under your control. Then that player shuffles their library.
+A:SP$ ChangeZone | Cost$ 3 U U | Origin$ Library | Destination$ Battlefield | ValidTgts$ Opponent | ChangeType$ Creature | ChangeNum$ 1 | GainControl$ True | IsCurse$ True | StackDescription$ SpellDescription | SpellDescription$ Search target opponent's library for a creature card and put that card onto the battlefield under your control. Then that player shuffles.
 SVar:Picture:http://resources.wizards.com/magic/cards/mm/en-us/card21300.jpg
-Oracle:Search target opponent's library for a creature card and put that card onto the battlefield under your control. Then that player shuffles their library.
+Oracle:Search target opponent's library for a creature card and put that card onto the battlefield under your control. Then that player shuffles.

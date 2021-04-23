@@ -3,9 +3,9 @@ ManaCost:8
 Types:Legendary Artifact Creature Golem
 PT:6/7
 K:Trample
-A:AB$ DealDamage | Cost$ 3 R Sac<1/Artifact> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the sacrificed artifact's converted mana cost to any target.
+A:AB$ DealDamage | Cost$ 3 R Sac<1/Artifact> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the sacrificed artifact's mana value to any target.
 SVar:X:Sacrificed$CardManaCost
 DeckNeeds:Color$Red
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bosh_iron_golem.jpg
-Oracle:Trample\n{3}{R}, Sacrifice an artifact: Bosh, Iron Golem deals damage equal to the sacrificed artifact's converted mana cost to any target.
+Oracle:Trample\n{3}{R}, Sacrifice an artifact: Bosh, Iron Golem deals damage equal to the sacrificed artifact's mana value to any target.

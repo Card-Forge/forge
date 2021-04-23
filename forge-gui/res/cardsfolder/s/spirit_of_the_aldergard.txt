@@ -2,10 +2,10 @@ Name:Spirit of the Aldergard
 ManaCost:3 G
 Types:Snow Creature Bear Spirit
 PT:0/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, search your library for a snow land card, reveal it, put it into your hand, then shuffle your library.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, search your library for a snow land card, reveal it, put it into your hand, then shuffle.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Snow | ChangeNum$ 1 | ShuffleNonMandatory$ True
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ CARDNAME gets +1/+0 for each other snow permanent you control.
 SVar:X:Count$Valid Permanent.Snow+Other+YouCtrl
 SVar:BuffedBy:Permanent.Snow
 DeckNeeds:Type$Snow
-Oracle:When Spirit of the Aldergard enters the battlefield, search your library for a snow land card, reveal it, put it into your hand, then shuffle your library.\nSpirit of the Aldergard gets +1/+0 for each other snow permanent you control.
+Oracle:When Spirit of the Aldergard enters the battlefield, search your library for a snow land card, reveal it, put it into your hand, then shuffle.\nSpirit of the Aldergard gets +1/+0 for each other snow permanent you control.

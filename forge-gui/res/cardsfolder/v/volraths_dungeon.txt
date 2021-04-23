@@ -2,7 +2,7 @@ Name:Volrath's Dungeon
 ManaCost:2 B B
 Types:Enchantment
 A:AB$ Destroy | Cost$ PayLife<5> | Defined$ Self | PlayerTurn$ True | Activator$ Player | SpellDescription$ Destroy CARDNAME. Any player may activate this ability but only during their turn.
-A:AB$ ChangeZone | Cost$ Discard<1/Card> | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Hand | Destination$ Library | ChangeType$ Card | ChangeNum$ 1 | Chooser$ Targeted | LibraryPosition$ 0 | SorcerySpeed$ True | SpellDescription$ Target player puts a card from their hand on top of their library. Activate this ability only any time you could cast a sorcery.
+A:AB$ ChangeZone | Cost$ Discard<1/Card> | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Hand | Destination$ Library | ChangeType$ Card | ChangeNum$ 1 | Chooser$ Targeted | LibraryPosition$ 0 | SorcerySpeed$ True | SpellDescription$ Target player puts a card from their hand on top of their library. Activate only as a sorcery.
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/volraths_dungeon.jpg
-Oracle:Pay 5 life: Destroy Volrath's Dungeon. Any player may activate this ability but only during their turn.\nDiscard a card: Target player puts a card from their hand on top of their library. Activate this ability only any time you could cast a sorcery.
+Oracle:Pay 5 life: Destroy Volrath's Dungeon. Any player may activate this ability but only during their turn.\nDiscard a card: Target player puts a card from their hand on top of their library. Activate only as a sorcery.

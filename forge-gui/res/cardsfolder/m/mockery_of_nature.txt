@@ -7,4 +7,4 @@ T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecide
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Choose target artifact or enchantment.
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mockery_of_nature.jpg
-Oracle:Emerge {7}{G} (You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's converted mana cost.)\nWhen you cast this spell, you may destroy target artifact or enchantment.
+Oracle:Emerge {7}{G} (You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's mana value.)\nWhen you cast this spell, you may destroy target artifact or enchantment.

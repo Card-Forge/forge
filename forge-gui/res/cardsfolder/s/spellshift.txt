@@ -1,11 +1,11 @@
 Name:Spellshift
 ManaCost:3 U
 Types:Instant
-A:SP$ Counter | Cost$ 3 U | TargetType$ Spell | ValidTgts$ Instant,Sorcery | TgtPrompt$ Select target Instant or Sorcery Spell | SubAbility$ DBDig | SpellDescription$ Counter target instant or sorcery spell. Its controller reveals cards from the top of their library until they reveal an instant or sorcery card. That player may cast that card without paying its mana cost. Then the player shuffles their library.
+A:SP$ Counter | Cost$ 3 U | TargetType$ Spell | ValidTgts$ Instant,Sorcery | TgtPrompt$ Select target Instant or Sorcery Spell | SubAbility$ DBDig | SpellDescription$ Counter target instant or sorcery spell. Its controller reveals cards from the top of their library until they reveal an instant or sorcery card. That player may cast that card without paying its mana cost. Then the player shuffles.
 SVar:DBDig:DB$ DigUntil | Defined$ TargetedController | Valid$ Instant,Sorcery | ValidDescription$ Sorcery or Instant | FoundDestination$ Library | RevealedDestination$ Library | RememberFound$ True | SubAbility$ DBPlay | Shuffle$ True
 SVar:DBPlay:DB$ Play | Defined$ Remembered | Controller$ TargetedController | WithoutManaCost$ True | Optional$ True | SubAbility$ DBShuffle
 SVar:DBShuffle:DB$ Shuffle | Defined$ TargetedController | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spellshift.jpg
-Oracle:Counter target instant or sorcery spell. Its controller reveals cards from the top of their library until they reveal an instant or sorcery card. That player may cast that card without paying its mana cost. Then the player shuffles their library.
+Oracle:Counter target instant or sorcery spell. Its controller reveals cards from the top of their library until they reveal an instant or sorcery card. That player may cast that card without paying its mana cost. Then the player shuffles.

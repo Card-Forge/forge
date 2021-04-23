@@ -2,6 +2,6 @@ Name:Swarmyard
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ Regenerate | ValidTgts$ Insect,Rat,Spider,Squirrel | TgtPrompt$ Select target Insect, Rat, Spider, or Squirrel | Cost$ T | SpellDescription$ Regenerate target Insect, Rat, Spider, or Squirrel.
+A:AB$ Regenerate | ValidTgts$ Insect,Rat,Spider,Squirrel | TgtPrompt$ Select target Insect, Rat, Spider, or Squirrel | Cost$ T | SpellDescription$ Regenerate target Insect, Rat, Spider, or Squirrel. (The next time it would be destroyed, instead tap it, remove it from combat, and heal all damage on it.)
 SVar:Picture:http://www.wizards.com/global/images/magic/general/swarmyard.jpg
-Oracle:{T}: Add {C}.\n{T}: Regenerate target Insect, Rat, Spider, or Squirrel.
+Oracle:{T}: Add {C}.\n{T}: Regenerate target Insect, Rat, Spider, or Squirrel. (The next time it would be destroyed, instead tap it, remove it from combat, and heal all damage on it.)

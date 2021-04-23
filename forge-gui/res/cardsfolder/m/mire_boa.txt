@@ -3,6 +3,6 @@ ManaCost:1 G
 Types:Creature Snake
 PT:2/1
 K:Swampwalk
-A:AB$ Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME.
+A:AB$ Regenerate | Cost$ G | SpellDescription$ Regenerate CARDNAME. (The next time this creature would be destroyed, instead tap it, remove it from combat, and heal all damage on it.)
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mire_boa.jpg
-Oracle:Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)\n{G}: Regenerate Mire Boa.
+Oracle:Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)\n{G}: Regenerate Mire Boa. (The next time this creature would be destroyed, instead tap it, remove it from combat, and heal all damage on it.)

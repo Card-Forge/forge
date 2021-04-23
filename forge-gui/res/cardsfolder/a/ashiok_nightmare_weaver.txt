@@ -3,7 +3,7 @@ ManaCost:1 U B
 Types:Legendary Planeswalker Ashiok
 Loyalty:3
 A:AB$ Dig | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Opponent | DigNum$ 3 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SpellDescription$ Exile the top three cards of target opponent's library.
-A:AB$ ChooseCard | Cost$ SubCounter<X/LOYALTY> | Choices$ Creature.cmcEQX+IsRemembered+ExiledWithSource | ChoiceZone$ Exile | Planeswalker$ True | SubAbility$ DBChangeZone | AILogic$ Ashiok | SpellDescription$ Put a creature card with converted mana cost X exiled with CARDNAME onto the battlefield under your control. That creature is a Nightmare in addition to its other types.
+A:AB$ ChooseCard | Cost$ SubCounter<X/LOYALTY> | Choices$ Creature.cmcEQX+IsRemembered+ExiledWithSource | ChoiceZone$ Exile | Planeswalker$ True | SubAbility$ DBChangeZone | AILogic$ Ashiok | SpellDescription$ Put a creature card with mana value X exiled with CARDNAME onto the battlefield under your control. That creature is a Nightmare in addition to its other types.
 SVar:DBChangeZone:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Exile | Destination$ Battlefield | ChangeType$ Creature.cmcEQX+IsRemembered+ExiledWithSource | ChangeNum$ 1 | GainControl$ True | SubAbility$ DBAnimate
 SVar:DBAnimate:DB$ Animate | Defined$ ChosenCard | Types$ Nightmare | Permanent$ True | SubAbility$ DBCleanMinus
 SVar:DBCleanMinus:DB$ Cleanup | ForgetDefined$ ChosenCard | ClearChosenCard$ True
@@ -13,4 +13,4 @@ T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCar
 SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-Oracle:[+2]: Exile the top three cards of target opponent's library.\n[−X]: Put a creature card with converted mana cost X exiled with Ashiok, Nightmare Weaver onto the battlefield under your control. That creature is a Nightmare in addition to its other types.\n[−10]: Exile all cards from all opponents' hands and graveyards.
+Oracle:[+2]: Exile the top three cards of target opponent's library.\n[−X]: Put a creature card with mana value X exiled with Ashiok, Nightmare Weaver onto the battlefield under your control. That creature is a Nightmare in addition to its other types.\n[−10]: Exile all cards from all opponents' hands and graveyards.

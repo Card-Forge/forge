@@ -1,8 +1,8 @@
 Name:Silkwrap
 ManaCost:1 W
 Types:Enchantment
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target creature with converted mana cost 3 or less an opponent controls until CARDNAME leaves the battlefield. (That creature returns under its owner's control.)
-SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.cmcLE3+OppCtrl | TgtPrompt$ Select target creature with converted mana cost 3 or less an opponent controls | UntilHostLeavesPlay$ True
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target creature with mana value 3 or less an opponent controls until CARDNAME leaves the battlefield. (That creature returns under its owner's control.)
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.cmcLE3+OppCtrl | TgtPrompt$ Select target creature with mana value 3 or less an opponent controls | UntilHostLeavesPlay$ True
 SVar:PlayMain1:TRUE
 SVar:NeedsToPlay:Creature.cmcLE3+OppCtrl
-Oracle:When Silkwrap enters the battlefield, exile target creature with converted mana cost 3 or less an opponent controls until Silkwrap leaves the battlefield. (That creature returns under its owner's control.)
+Oracle:When Silkwrap enters the battlefield, exile target creature with mana value 3 or less an opponent controls until Silkwrap leaves the battlefield. (That creature returns under its owner's control.)

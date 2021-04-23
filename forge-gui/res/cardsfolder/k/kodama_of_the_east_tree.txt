@@ -3,9 +3,9 @@ ManaCost:4 G G
 Types:Legendary Creature Spirit
 PT:6/6
 K:Reach
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Permanent.YouCtrl+Other | NotThisAbility$ True | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ Whenever another permanent enters the battlefield under your control, if it wasn't put onto the battlefield with this ability, you may put a permanent card with equal or lesser converted mana cost from your hand onto the battlefield.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Permanent.YouCtrl+Other | NotThisAbility$ True | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ Whenever another permanent enters the battlefield under your control, if it wasn't put onto the battlefield with this ability, you may put a permanent card with equal or lesser mana value from your hand onto the battlefield.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Permanent.YouCtrl+cmcLEX | ChangeNum$ 1
 SVar:X:TriggeredCard$CardManaCost
 K:Partner
-Oracle:Reach\nWhenever another permanent enters the battlefield under your control, if it wasn't put onto the battlefield with this ability, you may put a permanent card with equal or lesser converted mana cost from your hand onto the battlefield.\nPartner (You can have two commanders if both have partner.)
+Oracle:Reach\nWhenever another permanent enters the battlefield under your control, if it wasn't put onto the battlefield with this ability, you may put a permanent card with equal or lesser mana value from your hand onto the battlefield.\nPartner (You can have two commanders if both have partner.)
 

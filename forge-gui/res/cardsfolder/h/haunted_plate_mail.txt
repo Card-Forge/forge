@@ -3,6 +3,6 @@ ManaCost:4
 Types:Artifact Equipment
 K:Equip:4
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 4 | AddToughness$ 4 | Description$ Equipped creature gets +4/+4.
-A:AB$ Animate | Cost$ 0 | Defined$ Self | Power$ 4 | Toughness$ 4 | Types$ Creature,Artifact,Spirit | RemoveTypes$ Equipment | IsPresent$ Creature.YouCtrl | PresentCompare$ EQ0 | SpellDescription$ Until end of turn, CARDNAME becomes a 4/4 Spirit artifact creature that's no longer an Equipment. Activate this ability only if you control no creatures.
+A:AB$ Animate | Cost$ 0 | Defined$ Self | Power$ 4 | Toughness$ 4 | Types$ Creature,Artifact,Spirit | RemoveTypes$ Equipment | IsPresent$ Creature.YouCtrl | PresentCompare$ EQ0 | SpellDescription$ Until end of turn, CARDNAME becomes a 4/4 Spirit artifact creature that's no longer an Equipment. Activate only if you control no creatures.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/haunted_plate_mail.jpg
-Oracle:Equipped creature gets +4/+4.\n{0}: Until end of turn, Haunted Plate Mail becomes a 4/4 Spirit artifact creature that's no longer an Equipment. Activate this ability only if you control no creatures.\nEquip {4} ({4}: Attach to target creature you control. Equip only as a sorcery.)
+Oracle:Equipped creature gets +4/+4.\n{0}: Until end of turn, Haunted Plate Mail becomes a 4/4 Spirit artifact creature that's no longer an Equipment. Activate only if you control no creatures.\nEquip {4} ({4}: Attach to target creature you control. Equip only as a sorcery.)

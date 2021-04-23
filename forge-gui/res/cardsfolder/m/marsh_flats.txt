@@ -1,6 +1,6 @@
 Name:Marsh Flats
 ManaCost:no cost
 Types:Land
-A:AB$ ChangeZone | Cost$ T PayLife<1> Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | ChangeType$ Plains,Swamp | ChangeNum$ 1 | SpellDescription$ Search your library for a Plains or Swamp card, put it onto the battlefield, then shuffle your library.
+A:AB$ ChangeZone | Cost$ T PayLife<1> Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | ChangeType$ Plains,Swamp | ChangeNum$ 1 | SpellDescription$ Search your library for a Plains or Swamp card, put it onto the battlefield, then shuffle.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/marsh_flats.jpg
-Oracle:{T}, Pay 1 life, Sacrifice Marsh Flats: Search your library for a Plains or Swamp card, put it onto the battlefield, then shuffle your library.
+Oracle:{T}, Pay 1 life, Sacrifice Marsh Flats: Search your library for a Plains or Swamp card, put it onto the battlefield, then shuffle.

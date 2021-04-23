@@ -10,4 +10,4 @@ SVar:DBDamage:DB$ DealDamage | NumDmg$ 10 | Defined$ ChosenPlayer | ConditionPre
 DeckHas:Ability$Token
 SVar:BuffedBy:Instant,Sorcery
 DeckHints:Type$Instant|Sorcery
-Oracle:Magecraft — Whenever you cast or copy an instant or sorcery spell, scry 1. If that spell’s mana value is 5 or greater, create a 4/4 blue and red Elemental creature token. If that spell’s mana value is 10 ore greater, Zaffai, Thunder Conductor deals 10 damage to an opponent chosen at random.
+Oracle:Magecraft — Whenever you cast or copy an instant or sorcery spell, scry 1. If that spell's mana value is 5 or greater, create a 4/4 blue and red Elemental creature token. If that spell's mana value is 10 or greater, Zaffai, Thunder Conductor deals 10 damage to an opponent chosen at random.

@@ -2,7 +2,7 @@ Name:Rimewind Cryomancer
 ManaCost:3 U
 Types:Creature Human Wizard
 PT:2/3
-A:AB$ Counter | Cost$ 1 T | TgtPrompt$ Select target Activated Ability | ValidTgts$ Card | TargetType$ Activated | IsPresent$ Permanent.Snow+YouCtrl | PresentCompare$ GE4 | SpellDescription$ Counter target activated ability. Activate this ability only if you control four or more snow permanents.
+A:AB$ Counter | Cost$ 1 T | TgtPrompt$ Select target Activated Ability | ValidTgts$ Card | TargetType$ Activated | IsPresent$ Permanent.Snow+YouCtrl | PresentCompare$ GE4 | SpellDescription$ Counter target activated ability. Activate only if you control four or more snow permanents.
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rimewind_cryomancer.jpg
-Oracle:{1}, {T}: Counter target activated ability. Activate this ability only if you control four or more snow permanents. (Mana abilities can't be targeted.)
+Oracle:{1}, {T}: Counter target activated ability. Activate only if you control four or more snow permanents. (Mana abilities can't be targeted.)

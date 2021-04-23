@@ -8,4 +8,4 @@ SVar:ChangeControl:DB$GainControl | Defined$ Self | ValidTgts$ Opponent | TgtPro
 SVar:RemCombat:DB$ RemoveFromCombat | Defined$ Self
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/witch_engine.jpg
-Oracle:Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)\n{T}: Add {B}{B}{B}{B}. Target opponent gains control of Witch Engine. (Activate this ability only any time you could cast an instant.)
+Oracle:Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)\n{T}: Add {B}{B}{B}{B}. Target opponent gains control of Witch Engine. (Activate only as a instant.)

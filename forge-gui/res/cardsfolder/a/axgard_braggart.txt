@@ -5,4 +5,4 @@ PT:3/3
 A:AB$ Untap | Cost$ 1 W | Defined$ Self | SubAbility$ DBPutCounter | Boast$ True | SpellDescription$ Untap CARDNAME. Put a +1/+1 counter on it.
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 DeckHas:Ability$Counters
-Oracle:Boast — {1}{W}: Untap Axgard Braggart. Put a +1/+1 counter on it. (Activate this ability only if this creature attacked this turn and only once each turn.)
+Oracle:Boast — {1}{W}: Untap Axgard Braggart. Put a +1/+1 counter on it. (Activate only if this creature attacked this turn and only once each turn.)

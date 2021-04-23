@@ -3,9 +3,9 @@ ManaCost:2 G
 Types:Sorcery
 K:Entwine:2 G
 A:SP$ Charm | Cost$ 2 G | Choices$ DBChangeZone,DBEffect | CharmNum$ 1
-SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 2 | SpellDescription$ Search your library for up to two basic land cards, reveal them, put them into your hand, then shuffle your library.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 2 | SpellDescription$ Search your library for up to two basic land cards, reveal them, put them into your hand, then shuffle.
 SVar:DBEffect:DB$ Effect | Name$ Journey of Discovery Effect | StaticAbilities$ JourneyOfDis | AILogic$ Always | SpellDescription$ You may play up to two additional lands this turn.
 SVar:JourneyOfDis:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 2 | EffectZone$ Command | Description$ You may play two additional lands this turn.
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/journey_of_discovery.jpg
-Oracle:Choose one —\n• Search your library for up to two basic land cards, reveal them, put them into your hand, then shuffle your library.\n• You may play up to two additional lands this turn.\nEntwine {2}{G} (Choose both if you pay the entwine cost.)
+Oracle:Choose one —\n• Search your library for up to two basic land cards, reveal them, put them into your hand, then shuffle.\n• You may play up to two additional lands this turn.\nEntwine {2}{G} (Choose both if you pay the entwine cost.)

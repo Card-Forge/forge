@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Creature Imp
 PT:1/1
 K:Flying
-A:AB$ PumpAll | Cost$ T | ValidCards$ Creature.ActivePlayerCtrl+nonWall | KW$ HIDDEN CARDNAME attacks each combat if able. | RememberAllPumped$ True | ActivationPhases$ Upkeep->Main1 | OpponentTurn$ True | SubAbility$ DelTrig | StackDescription$ SpellDescription | SpellDescription$ Non-Wall creatures the active player controls attack this turn if able. At the beginning of the next end step, destroy each of those creatures that didn't attack this turn. Activate this ability only during an opponent's turn and only before combat.
+A:AB$ PumpAll | Cost$ T | ValidCards$ Creature.ActivePlayerCtrl+nonWall | KW$ HIDDEN CARDNAME attacks each combat if able. | RememberAllPumped$ True | ActivationPhases$ Upkeep->Main1 | OpponentTurn$ True | SubAbility$ DelTrig | StackDescription$ SpellDescription | SpellDescription$ Non-Wall creatures the active player controls attack this turn if able. At the beginning of the next end step, destroy each of those creatures that didn't attack this turn. Activate only during an opponent's turn and only before combat.
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigRem | RememberObjects$ Remembered | SubAbility$ DBCleanup | TriggerDescription$ At the beginning of the next end step, destroy each of those creatures that didn't attack this turn.
 SVar:TrigRem:DB$ Pump | RememberObjects$ DelayTriggerRemembered | SubAbility$ DBDestroy
 SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Creature.IsRemembered+notAttackedThisTurn | SubAbility$ DBCleanup
@@ -11,4 +11,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 SVar:NonCombatPriority:5
-Oracle:Flying\n{T}: Non-Wall creatures the active player controls attack this turn if able. At the beginning of the next end step, destroy each of those creatures that didn't attack this turn. Activate this ability only during an opponent's turn and only before combat.
+Oracle:Flying\n{T}: Non-Wall creatures the active player controls attack this turn if able. At the beginning of the next end step, destroy each of those creatures that didn't attack this turn. Activate only during an opponent's turn and only before combat.

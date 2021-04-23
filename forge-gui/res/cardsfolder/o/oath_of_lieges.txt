@@ -1,10 +1,10 @@
 Name:Oath of Lieges
 ManaCost:1 W
 Types:Enchantment
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ LiegesSearch | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, that player chooses target player who controls more lands than they do and is their opponent. The first player may search their library for a basic land card, put that card onto the battlefield, then shuffle their library.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ LiegesSearch | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, that player chooses target player who controls more lands than they do and is their opponent. The first player may search their library for a basic land card, put that card onto the battlefield, then shuffle.
 SVar:LiegesSearch:DB$ ChangeZone | TargetingPlayer$ TriggeredPlayer | ValidTgts$ Player.OpponentToActive+withMoreLandsThanActive | TgtPrompt$ Choose target opponent who controls more land than you | DefinedPlayer$ TriggeredPlayer | Chooser$ TriggeredPlayer | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 1 | Optional$ True | ShuffleNonMandatory$ True
 SVar:NeedsToPlayVar:Z GEY
 SVar:Z:Count$Valid Land.YouDontCtrl+inZoneBattlefield
 SVar:Y:Count$Valid Land.YouCtrl+inZoneBattlefield
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oath_of_lieges.jpg
-Oracle:At the beginning of each player's upkeep, that player chooses target player who controls more lands than they do and is their opponent. The first player may search their library for a basic land card, put that card onto the battlefield, then shuffle their library.
+Oracle:At the beginning of each player's upkeep, that player chooses target player who controls more lands than they do and is their opponent. The first player may search their library for a basic land card, put that card onto the battlefield, then shuffle.

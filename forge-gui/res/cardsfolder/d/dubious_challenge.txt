@@ -1,8 +1,8 @@
 Name:Dubious Challenge
 ManaCost:3 G
 Types:Sorcery
-A:SP$ Dig | Cost$ 3 G | DigNum$ 10 | ChangeNum$ 2 | Optional$ True | ChangeValid$ Creature | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ OpponentChooses | SpellDescription$ Look at the top ten cards of your library, exile up to two creature cards from among them, then shuffle your library. Target opponent may choose one of the exiled cards and put it onto the battlefield under their control. Put the rest onto the battlefield under your control. | StackDescription$ SpellDescription
+A:SP$ Dig | Cost$ 3 G | DigNum$ 10 | ChangeNum$ 2 | Optional$ True | ChangeValid$ Creature | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ OpponentChooses | SpellDescription$ Look at the top ten cards of your library, exile up to two creature cards from among them, then shuffle. Target opponent may choose one of the exiled cards and put it onto the battlefield under their control. Put the rest onto the battlefield under your control. | StackDescription$ SpellDescription
 SVar:OpponentChooses:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | GainControl$ True | DefinedPlayer$ You | Chooser$ Targeted | ValidTgts$ Opponent | ChangeType$ Card.IsRemembered | Hidden$ True | NewController$ Targeted | SubAbility$ YouGetTheRest
 SVar:YouGetTheRest:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Battlefield | ChangeType$ Card.IsRemembered
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dubious_challenge.jpg
-Oracle:Look at the top ten cards of your library, exile up to two creature cards from among them, then shuffle your library. Target opponent may choose one of the exiled cards and put it onto the battlefield under their control. Put the rest onto the battlefield under your control.
+Oracle:Look at the top ten cards of your library, exile up to two creature cards from among them, then shuffle. Target opponent may choose one of the exiled cards and put it onto the battlefield under their control. Put the rest onto the battlefield under your control.

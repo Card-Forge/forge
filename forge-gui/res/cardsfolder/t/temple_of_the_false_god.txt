@@ -1,7 +1,7 @@
 Name:Temple of the False God
 ManaCost:no cost
 Types:Land
-A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | IsPresent$ Land.YouCtrl | PresentCompare$ GE5 | SpellDescription$ Add {C}{C}. Activate this ability only if you control five or more lands.
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | IsPresent$ Land.YouCtrl | PresentCompare$ GE5 | SpellDescription$ Add {C}{C}. Activate only if you control five or more lands.
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temple_of_the_false_god.jpg
-Oracle:{T}: Add {C}{C}. Activate this ability only if you control five or more lands.
+Oracle:{T}: Add {C}{C}. Activate only if you control five or more lands.

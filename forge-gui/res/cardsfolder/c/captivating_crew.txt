@@ -2,6 +2,6 @@ Name:Captivating Crew
 ManaCost:3 R
 Types:Creature Human Pirate
 PT:4/3
-A:AB$ GainControl | Cost$ 3 R | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls. | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SorcerySpeed$ True | SpellDescription$ Gain control of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn. Activate this ability only any time you could cast a sorcery.
+A:AB$ GainControl | Cost$ 3 R | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls. | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SorcerySpeed$ True | SpellDescription$ Gain control of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn. Activate only as a sorcery.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/captivating_crew.jpg
-Oracle:{3}{R}: Gain control of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn. Activate this ability only any time you could cast a sorcery.
+Oracle:{3}{R}: Gain control of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn. Activate only as a sorcery.

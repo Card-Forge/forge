@@ -2,8 +2,8 @@ Name:Confront the Past
 ManaCost:X B
 Types:Sorcery Lesson
 A:SP$ Charm | Choices$ Return,Remove | CharmNum$ 1
-SVar:Return:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target planeswalker with mana value X | ValidTgts$ Planeswalker.YouOwn+cmcEQX | SpellDescription$ Return target planeswalker card with mana value X from your graveyard to the battlefield.
+SVar:Return:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target planeswalker with mana value X | ValidTgts$ Planeswalker.YouOwn+cmcEQX | SpellDescription$ Return target planeswalker card with mana value X or less from your graveyard to the battlefield.
 SVar:Remove:DB$ RemoveCounter | ValidTgts$ Planeswalker.OppCtrl | TgtPrompt$ Select target planeswalker an opponent controls | CounterType$ LOYALTY | CounterNum$ Y | SpellDescription$ Remove twice X loyalty counters from target planeswalker an opponent controls.
 SVar:X:Count$xPaid
 SVar:Y:SVar$X/Times.2
-Oracle:Choose one —\n• Return target planeswalker card with mana value X from your graveyard to the battlefield.\n• Remove twice X loyalty counters from target planeswalker an opponent controls.
+Oracle:Choose one —\n• Return target planeswalker card with mana value X or less from your graveyard to the battlefield.\n• Remove twice X loyalty counters from target planeswalker an opponent controls.

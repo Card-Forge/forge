@@ -1,8 +1,8 @@
 Name:Favor of the Mighty
 ManaCost:1 W
 Types:Tribal Enchantment Giant
-S:Mode$ Continuous | Affected$ Creature.greatestCMC_Creature | AddKeyword$ Protection from all colors | Description$ Each creature with the highest converted mana cost has protection from all colors.
+S:Mode$ Continuous | Affected$ Creature.greatestCMC_Creature | AddKeyword$ Protection from all colors | Description$ Each creature with the highest mana value has protection from all colors.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/favor_of_the_mighty.jpg
-Oracle:Each creature with the highest converted mana cost has protection from all colors.
+Oracle:Each creature with the highest mana value has protection from all colors.

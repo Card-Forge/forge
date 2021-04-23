@@ -1,9 +1,9 @@
 Name:Rocket Launcher
 ManaCost:4
 Types:Artifact
-A:AB$ DealDamage | Cost$ 2 | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SubAbility$ DBDelayTrig | IsPresent$ Card.Self+notFirstTurnControlled | SpellDescription$ CARDNAME deals 1 damage to any target. Destroy CARDNAME at the beginning of the next end step. Activate this ability only if you've controlled CARDNAME continuously since the beginning of your most recent turn.
+A:AB$ DealDamage | Cost$ 2 | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SubAbility$ DBDelayTrig | IsPresent$ Card.Self+notFirstTurnControlled | SpellDescription$ CARDNAME deals 1 damage to any target. Destroy CARDNAME at the beginning of the next end step. Activate only if you've controlled CARDNAME continuously since the beginning of your most recent turn.
 SVar:DBDelayTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ DestroySource | TriggerDescription$ Destroy CARDNAME at the beginning of the next end step.
 SVar:DestroySource:DB$ Destroy | Defined$ Self
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rocket_launcher.jpg
-Oracle:{2}: Rocket Launcher deals 1 damage to any target. Destroy Rocket Launcher at the beginning of the next end step. Activate this ability only if you've controlled Rocket Launcher continuously since the beginning of your most recent turn.
+Oracle:{2}: Rocket Launcher deals 1 damage to any target. Destroy Rocket Launcher at the beginning of the next end step. Activate only if you've controlled Rocket Launcher continuously since the beginning of your most recent turn.

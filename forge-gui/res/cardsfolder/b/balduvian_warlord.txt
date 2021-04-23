@@ -4,6 +4,6 @@ Types:Creature Human Barbarian
 PT:3/2
 A:AB$ RemoveFromCombat | Cost$ T | ActivationPhases$ Declare Blockers | ValidTgts$ Creature.blocking | Defined$ Targeted | UnblockCreaturesBlockedOnlyBy$ Targeted | SubAbility$ ChooseAttacker | SpellDescription$ Remove target blocking creature from combat. Creatures it was blocking that hadn't become blocked by another creature this combat become unblocked.
 SVar:ChooseAttacker:DB$ ChooseCard | Defined$ You | Choices$ Creature.attacking | ChoiceTitle$ Choose an attacker to block | RememberChosen$ True | Mandatory$ True | SubAbility$ Block | SpellDescriptions$ None | StackDescription$ None
-SVar:Block:DB$ Block | DefinedAttacker$ Remembered | DefinedBlocker$ ParentTarget | SpellDescription$ Then it blocks an attacking creature of your choice. Activate this ability only during the declare blockers step. | StackDescription$ SpellDescription | SubAbility$ DBCleanup
+SVar:Block:DB$ Block | DefinedAttacker$ Remembered | DefinedBlocker$ ParentTarget | SpellDescription$ Then it blocks an attacking creature of your choice. Activate only during the declare blockers step. | StackDescription$ SpellDescription | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-Oracle:{T}: Remove target blocking creature from combat. Creatures it was blocking that hadn't become blocked by another creature this combat become unblocked, then it blocks an attacking creature of your choice. Activate this ability only during the declare blockers step.
+Oracle:{T}: Remove target blocking creature from combat. Creatures it was blocking that hadn't become blocked by another creature this combat become unblocked, then it blocks an attacking creature of your choice. Activate only during the declare blockers step.

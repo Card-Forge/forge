@@ -3,5 +3,5 @@ ManaCost:4
 Types:Artifact Creature Wall
 PT:0/6
 K:Defender
-A:AB$ Pump | Cost$ 3 | Defined$ Self | NumAtt$ +3 | NumDef$ -1 | KW$ HIDDEN CARDNAME can attack as though it didn't have defender. | ActivationLimit$ 1 | SpellDescription$ CARDNAME get +3/-1 until end of turn and can attack this turn as though it didn't have defender. Activate this ability only once each turn.
-Oracle:Defender (This creature can't attack.)\n{3}: Mobile Fort gets +3/-1 until end of turn and can attack this turn as though it didn't have defender. Activate this ability only once each turn.
+A:AB$ Pump | Cost$ 3 | Defined$ Self | NumAtt$ +3 | NumDef$ -1 | KW$ HIDDEN CARDNAME can attack as though it didn't have defender. | ActivationLimit$ 1 | SpellDescription$ CARDNAME get +3/-1 until end of turn and can attack this turn as though it didn't have defender. Activate only once each turn.
+Oracle:Defender (This creature can't attack.)\n{3}: Mobile Fort gets +3/-1 until end of turn and can attack this turn as though it didn't have defender. Activate only once each turn.

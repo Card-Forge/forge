@@ -2,11 +2,11 @@ Name:Chalice of the Void
 ManaCost:X X
 Types:Artifact
 K:etbCounter:CHARGE:X
-T:Mode$ SpellCast | ValidCard$ Card.cmcEQY | ValidActivatingPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever a player casts a spell with converted mana cost equal to the number of charge counters on CARDNAME, counter that spell.
+T:Mode$ SpellCast | ValidCard$ Card.cmcEQY | ValidActivatingPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever a player casts a spell with mana value equal to the number of charge counters on CARDNAME, counter that spell.
 SVar:TrigCounter:DB$ Counter | Defined$ TriggeredSpellAbility
 SVar:X:Count$xPaid
 SVar:Y:Count$CardCounters.CHARGE
 SVar:AICurseEffect:ChaliceOfTheVoid
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chalice_of_the_void.jpg
-Oracle:Chalice of the Void enters the battlefield with X charge counters on it.\nWhenever a player casts a spell with converted mana cost equal to the number of charge counters on Chalice of the Void, counter that spell.
+Oracle:Chalice of the Void enters the battlefield with X charge counters on it.\nWhenever a player casts a spell with mana value equal to the number of charge counters on Chalice of the Void, counter that spell.

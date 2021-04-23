@@ -2,7 +2,7 @@ Name:Arcum Dagsson
 ManaCost:3 U
 Types:Legendary Creature Human Artificer
 PT:2/2
-A:AB$ Destroy | Cost$ T | ValidTgts$ Creature.Artifact | TgtPrompt$ Select target artifact creature | Sacrifice$ True | SubAbility$ DBChange | SpellDescription$ Target artifact creature's controller sacrifices it. That player may search their library for a noncreature artifact card, put it onto the battlefield, then shuffle their library.
+A:AB$ Destroy | Cost$ T | ValidTgts$ Creature.Artifact | TgtPrompt$ Select target artifact creature | Sacrifice$ True | SubAbility$ DBChange | SpellDescription$ Target artifact creature's controller sacrifices it. That player may search their library for a noncreature artifact card, put it onto the battlefield, then shuffle.
 SVar:DBChange:DB$ ChangeZone | Optional$ True | Origin$ Library | Destination$ Battlefield | ChangeType$ Artifact.nonCreature | DefinedPlayer$ TargetedController | ChangeNum$ 1 | ShuffleNonMandatory$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arcum_dagsson.jpg
-Oracle:{T}: Target artifact creature's controller sacrifices it. That player may search their library for a noncreature artifact card, put it onto the battlefield, then shuffle their library.
+Oracle:{T}: Target artifact creature's controller sacrifices it. That player may search their library for a noncreature artifact card, put it onto the battlefield, then shuffle.

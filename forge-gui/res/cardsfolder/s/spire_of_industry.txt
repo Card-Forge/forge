@@ -2,7 +2,7 @@ Name:Spire of Industry
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ Mana | Cost$ T PayLife<1> | Produced$ Any | Amount$ 1 | CheckSVar$ X | SpellDescription$ Add one mana of any color. Activate this ability only if you control an artifact.
+A:AB$ Mana | Cost$ T PayLife<1> | Produced$ Any | Amount$ 1 | CheckSVar$ X | SpellDescription$ Add one mana of any color. Activate only if you control an artifact.
 SVar:X:Count$Valid Artifact.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spire_of_industry.jpg
-Oracle:{T}: Add {C}.\n{T}, Pay 1 life: Add one mana of any color. Activate this ability only if you control an artifact.
+Oracle:{T}: Add {C}.\n{T}, Pay 1 life: Add one mana of any color. Activate only if you control an artifact.

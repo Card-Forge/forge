@@ -6,4 +6,4 @@ K:Reach
 K:TypeCycling:Forest:2
 K:TypeCycling:Plains:2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pale_recluse.jpg
-Oracle:Reach (This creature can block creatures with flying.)\nForestcycling {2}, plainscycling {2} ({2}, Discard this card: Search your library for a Forest or Plains card, reveal it, put it into your hand, then shuffle your library.)
+Oracle:Reach (This creature can block creatures with flying.)\nForestcycling {2}, plainscycling {2} ({2}, Discard this card: Search your library for a Forest or Plains card, reveal it, put it into your hand, then shuffle.)

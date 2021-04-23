@@ -2,6 +2,6 @@ Name:Sapseep Forest
 ManaCost:no cost
 Types:Land Forest
 K:CARDNAME enters the battlefield tapped.
-A:AB$ GainLife | Cost$ G T | LifeAmount$ 1 | IsPresent$ Permanent.Green+YouCtrl | PresentCompare$ GE2 | SpellDescription$ You gain 1 life. Activate this ability only if you control two or more green permanents.
+A:AB$ GainLife | Cost$ G T | LifeAmount$ 1 | IsPresent$ Permanent.Green+YouCtrl | PresentCompare$ GE2 | SpellDescription$ You gain 1 life. Activate only if you control two or more green permanents.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sapseep_forest.jpg
-Oracle:({T}: Add {G}.)\nSapseep Forest enters the battlefield tapped.\n{G}, {T}: You gain 1 life. Activate this ability only if you control two or more green permanents.
+Oracle:({T}: Add {G}.)\nSapseep Forest enters the battlefield tapped.\n{G}, {T}: You gain 1 life. Activate only if you control two or more green permanents.

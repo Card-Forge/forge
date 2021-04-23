@@ -2,9 +2,9 @@ Name:Thundering Sparkmage
 ManaCost:3 R
 Types:Creature Human Wizard
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals X damage to target creature or planeswalker, where X is the number of creatures in your party. (Your party consists of up to one of each of Cleric, Rogue, Warrior, and Wizard.)
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals X damage to target creature or planeswalker, where X is the number of creatures in your party. (Your party consists of up to one each of Cleric, Rogue, Warrior, and Wizard.)
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ X
 SVar:X:Count$Party
 DeckHas:Ability$Party
 DeckHints:Type$Cleric|Rogue|Warrior
-Oracle:When Thundering Sparkmage enters the battlefield, it deals X damage to target creature or planeswalker, where X is the number of creatures in your party. (Your party consists of up to one of each of Cleric, Rogue, Warrior, and Wizard.)
+Oracle:When Thundering Sparkmage enters the battlefield, it deals X damage to target creature or planeswalker, where X is the number of creatures in your party. (Your party consists of up to one each of Cleric, Rogue, Warrior, and Wizard.)

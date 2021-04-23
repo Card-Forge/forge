@@ -5,4 +5,4 @@ A:SP$ ChangeZone | Cost$ 1 B | ValidTgts$ Creature | Origin$ Graveyard | Destina
 SVar:DBClash:DB$Clash | WinSubAbility$ DBReturn
 SVar:DBReturn:DB$ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/revive_the_fallen.jpg
-Oracle:Return target creature card from a graveyard to its owner's hand. Clash with an opponent. If you win, return Revive the Fallen to its owner's hand. (Each clashing player reveals the top card of their library, then puts that card on the top or bottom. A player wins if their card had a higher converted mana cost.)
+Oracle:Return target creature card from a graveyard to its owner's hand. Clash with an opponent. If you win, return Revive the Fallen to its owner's hand. (Each clashing player reveals the top card of their library, then puts that card on the top or bottom. A player wins if their card had a higher mana value.)

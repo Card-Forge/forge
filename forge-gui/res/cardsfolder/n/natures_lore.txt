@@ -1,6 +1,6 @@
 Name:Nature's Lore
 ManaCost:1 G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 G | Origin$ Library | Destination$ Battlefield | ChangeType$ Forest | ChangeNum$ 1 | SpellDescription$ Search your library for a Forest card and put that card onto the battlefield. Then shuffle your library.
+A:SP$ ChangeZone | Cost$ 1 G | Origin$ Library | Destination$ Battlefield | ChangeType$ Forest | ChangeNum$ 1 | SpellDescription$ Search your library for a Forest card, put that card onto the battlefield, then shuffle.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/natures_lore.jpg
-Oracle:Search your library for a Forest card and put that card onto the battlefield. Then shuffle your library.
+Oracle:Search your library for a Forest card, put that card onto the battlefield, then shuffle.

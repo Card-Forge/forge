@@ -5,4 +5,4 @@ A:SP$ Clash | Cost$ 1 B | ValidTgts$ Player | TgtPrompt$ Select target player | 
 SVar:DBDiscardOne:DB$Discard | Defined$ Targeted | NumCards$ 1 | Mode$ TgtChoose
 SVar:DBDiscardTwo:DB$Discard | Defined$ Targeted | NumCards$ 2 | Mode$ TgtChoose
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pulling_teeth.jpg
-Oracle:Clash with an opponent. If you win, target player discards two cards. Otherwise, that player discards a card. (Each clashing player reveals the top card of their library, then puts that card on the top or bottom. A player wins if their card had a higher converted mana cost.)
+Oracle:Clash with an opponent. If you win, target player discards two cards. Otherwise, that player discards a card. (Each clashing player reveals the top card of their library, then puts that card on the top or bottom. A player wins if their card had a higher mana value.)

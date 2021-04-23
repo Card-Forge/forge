@@ -1,7 +1,7 @@
 Name:Ponder
 ManaCost:U
 Types:Sorcery
-A:SP$ RearrangeTopOfLibrary | Cost$ U | Defined$ You | NumCards$ 3 | MayShuffle$ True | SubAbility$ DBDraw | SpellDescription$ Look at the top three cards of your library, then put them back in any order. You may shuffle your library. Draw a card.
+A:SP$ RearrangeTopOfLibrary | Cost$ U | Defined$ You | NumCards$ 3 | MayShuffle$ True | SubAbility$ DBDraw | SpellDescription$ Look at the top three cards of your library, then put them back in any order. You may shuffle. Draw a card.
 SVar:DBDraw:DB$Draw | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ponder.jpg
-Oracle:Look at the top three cards of your library, then put them back in any order. You may shuffle your library.\nDraw a card.
+Oracle:Look at the top three cards of your library, then put them back in any order. You may shuffle.\nDraw a card.

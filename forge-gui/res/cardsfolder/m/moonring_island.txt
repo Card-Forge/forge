@@ -2,7 +2,7 @@ Name:Moonring Island
 ManaCost:no cost
 Types:Land Island
 K:CARDNAME enters the battlefield tapped.
-A:AB$ Dig | Cost$ U T | ValidTgts$ Player | TgtPrompt$ Select target player | DigNum$ 1 | DestinationZone$ Library | LibraryPosition$ 0 | IsPresent$ Permanent.Blue+YouCtrl | PresentCompare$ GE2 | SpellDescription$ Look at the top card of target player's library. Activate this ability only if you control two or more blue permanents.
+A:AB$ Dig | Cost$ U T | ValidTgts$ Player | TgtPrompt$ Select target player | DigNum$ 1 | DestinationZone$ Library | LibraryPosition$ 0 | IsPresent$ Permanent.Blue+YouCtrl | PresentCompare$ GE2 | SpellDescription$ Look at the top card of target player's library. Activate only if you control two or more blue permanents.
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moonring_island.jpg
-Oracle:({T}: Add {U}.)\nMoonring Island enters the battlefield tapped.\n{U}, {T}: Look at the top card of target player's library. Activate this ability only if you control two or more blue permanents.
+Oracle:({T}: Add {U}.)\nMoonring Island enters the battlefield tapped.\n{U}, {T}: Look at the top card of target player's library. Activate only if you control two or more blue permanents.

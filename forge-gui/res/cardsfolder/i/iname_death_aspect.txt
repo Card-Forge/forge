@@ -2,9 +2,9 @@ Name:Iname, Death Aspect
 ManaCost:4 B B
 Types:Legendary Creature Spirit
 PT:4/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for any number of Spirit cards and put them into your graveyard. If you do, shuffle your library.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for any number of Spirit cards, put them into your graveyard, then shuffle.
 SVar:TrigChangeZone:DB$ ChangeZone | ChangeType$ Spirit.YouCtrl | Origin$ Library | Destination$ Graveyard | ChangeNum$ X | Shuffle$ True | ShuffleNonMandatory$ True
 SVar:X:Count$TypeInYourLibrary.Spirit
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/iname_death_aspect.jpg
-Oracle:When Iname, Death Aspect enters the battlefield, you may search your library for any number of Spirit cards and put them into your graveyard. If you do, shuffle your library.
+Oracle:When Iname, Death Aspect enters the battlefield, you may search your library for any number of Spirit cards, put them into your graveyard, then shuffle.

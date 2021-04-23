@@ -7,4 +7,4 @@ A:AB$ Protection | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature.YouCtrl | TgtProm
 AI:RemoveDeck:Random
 DeckHints:Type$Spirit
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moonlit_strider.jpg
-Oracle:Sacrifice Moonlit Strider: Target creature you control gains protection from the color of your choice until end of turn.\nSoulshift 3 (When this creature dies, you may return target Spirit card with converted mana cost 3 or less from your graveyard to your hand.)
+Oracle:Sacrifice Moonlit Strider: Target creature you control gains protection from the color of your choice until end of turn.\nSoulshift 3 (When this creature dies, you may return target Spirit card with mana value 3 or less from your graveyard to your hand.)

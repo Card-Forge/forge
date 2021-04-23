@@ -4,7 +4,7 @@ Types:Creature Horse
 PT:4/4
 K:Trample
 K:CARDNAME doesn't untap during your untap step.
-A:AB$ Untap | Cost$ Sac<1/Creature> | ActivationPhases$ Upkeep | PlayerTurn$ True | SpellDescription$ Untap CARDNAME. Activate this ability only during your upkeep.
+A:AB$ Untap | Cost$ Sac<1/Creature> | ActivationPhases$ Upkeep | PlayerTurn$ True | SpellDescription$ Untap CARDNAME. Activate only during your upkeep.
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/black_carriage.jpg
-Oracle:Trample\nBlack Carriage doesn't untap during your untap step.\nSacrifice a creature: Untap Black Carriage. Activate this ability only during your upkeep.
+Oracle:Trample\nBlack Carriage doesn't untap during your untap step.\nSacrifice a creature: Untap Black Carriage. Activate only during your upkeep.

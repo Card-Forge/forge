@@ -1,7 +1,7 @@
 Name:Dovin's Dismissal
 ManaCost:2 W U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 2 W U | ValidTgts$ Creature.tapped | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target tapped creature | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SubAbility$ DBSearch | SpellDescription$ Put up to one target tapped creature on top of its owner's library. You may search your library and/or graveyard for a card named Dovin, Architect of Law, reveal it, and put it into your hand. If you search your library this way, shuffle it.
+A:SP$ ChangeZone | Cost$ 2 W U | ValidTgts$ Creature.tapped | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target tapped creature | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SubAbility$ DBSearch | SpellDescription$ Put up to one target tapped creature on top of its owner's library. You may search your library and/or graveyard for a card named Dovin, Architect of Law, reveal it, and put it into your hand. If you search your library this way, shuffle.
 SVar:DBSearch:DB$ ChangeZone | Origin$ Library | OriginChoice$ True | OriginAlternative$ Graveyard | AlternativeMessage$ Would you like to search your library with this ability? If you do, your library will be shuffled. | Destination$ Hand | ChangeType$ Card.namedDovin; Architect of Law | ChangeNum$ 1 | Optional$ True
 DeckNeeds:Name$Dovin, Architect of Law
-Oracle:Put up to one target tapped creature on top of its owner's library. You may search your library and/or graveyard for a card named Dovin, Architect of Law, reveal it, and put it into your hand. If you search your library this way, shuffle it.
+Oracle:Put up to one target tapped creature on top of its owner's library. You may search your library and/or graveyard for a card named Dovin, Architect of Law, reveal it, and put it into your hand. If you search your library this way, shuffle.

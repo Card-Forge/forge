@@ -2,8 +2,8 @@ Name:Hell's Caretaker
 ManaCost:3 B
 Types:Creature Horror
 PT:1/1
-A:AB$ ChangeZone | Cost$ T Sac<1/Creature> | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | Origin$ Graveyard | Destination$ Battlefield | PlayerTurn$ True | ActivationPhases$ Upkeep | SpellDescription$ Return target creature card from your graveyard to the battlefield. Activate this ability only during your upkeep.
+A:AB$ ChangeZone | Cost$ T Sac<1/Creature> | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | Origin$ Graveyard | Destination$ Battlefield | PlayerTurn$ True | ActivationPhases$ Upkeep | SpellDescription$ Return target creature card from your graveyard to the battlefield. Activate only during your upkeep.
 SVar:AIPreference:SacCost$Creature.cmcLE3
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hells_caretaker.jpg
-Oracle:{T}, Sacrifice a creature: Return target creature card from your graveyard to the battlefield. Activate this ability only during your upkeep.
+Oracle:{T}, Sacrifice a creature: Return target creature card from your graveyard to the battlefield. Activate only during your upkeep.

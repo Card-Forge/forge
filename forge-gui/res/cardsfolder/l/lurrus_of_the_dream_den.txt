@@ -2,7 +2,7 @@ Name:Lurrus of the Dream-Den
 ManaCost:1 W/B W/B
 Types:Legendary Creature Cat Nightmare
 PT:3/2
-K:Companion:Permanent.cmcLE2,Instant,Sorcery:Each permanent card in your starting deck has converted mana cost 2 or less.
+K:Companion:Permanent.cmcLE2,Instant,Sorcery:Each permanent card in your starting deck has mana value 2 or less.
 K:Lifelink
-S:Mode$ Continuous | EffectZone$ Battlefield | Condition$ PlayerTurn | MayPlay$ True | MayPlayLimit$ 1 | Affected$ Permanent.nonLand+YouOwn+cmcLE2 | AffectedZone$ Graveyard | Description$ During each of your turns, you may cast one permanent spell with converted mana cost 2 or less from your graveyard.
-Oracle:Companion — Each permanent card in your starting deck has converted mana cost 2 or less. (If this card is your chosen companion, you may put it into your hand from outside the game for {3} any time you could cast a sorcery.)\nLifelink\nDuring each of your turns, you may cast one permanent spell with converted mana cost 2 or less from your graveyard.
+S:Mode$ Continuous | EffectZone$ Battlefield | Condition$ PlayerTurn | MayPlay$ True | MayPlayLimit$ 1 | Affected$ Permanent.nonLand+YouOwn+cmcLE2 | AffectedZone$ Graveyard | Description$ During each of your turns, you may cast one permanent spell with mana value 2 or less from your graveyard.
+Oracle:Companion — Each permanent card in your starting deck has mana value 2 or less. (If this card is your chosen companion, you may put it into your hand from outside the game for {3} any time you could cast a sorcery.)\nLifelink\nDuring each of your turns, you may cast one permanent spell with mana value 2 or less from your graveyard.

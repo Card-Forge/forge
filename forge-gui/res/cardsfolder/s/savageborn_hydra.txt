@@ -4,7 +4,7 @@ Types:Creature Hydra
 PT:0/0
 K:Double Strike
 K:etbCounter:P1P1:X
-A:AB$ PutCounter | Cost$ 1 RG | SorcerySpeed$ True | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME. Activate this ability only any time you could cast a sorcery.
+A:AB$ PutCounter | Cost$ 1 RG | SorcerySpeed$ True | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME. Activate only as a sorcery.
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/savageborn_hydra.jpg
-Oracle:Double strike\nSavageborn Hydra enters the battlefield with X +1/+1 counters on it.\n{1}{R/G}: Put a +1/+1 counter on Savageborn Hydra. Activate this ability only any time you could cast a sorcery.
+Oracle:Double strike\nSavageborn Hydra enters the battlefield with X +1/+1 counters on it.\n{1}{R/G}: Put a +1/+1 counter on Savageborn Hydra. Activate only as a sorcery.

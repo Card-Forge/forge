@@ -2,8 +2,8 @@ Name:Seahunter
 ManaCost:2 U U
 Types:Creature Human Mercenary
 PT:2/2
-A:AB$ ChangeZone | Cost$ 3 T | Origin$ Library | Destination$ Battlefield | ChangeType$ Permanent.Merfolk | ChangeNum$ 1 | SpellDescription$ Search your library for a Merfolk permanent card and put it onto the battlefield. Then shuffle your library.
+A:AB$ ChangeZone | Cost$ 3 T | Origin$ Library | Destination$ Battlefield | ChangeType$ Permanent.Merfolk | ChangeNum$ 1 | SpellDescription$ Search your library for a Merfolk permanent card, put it onto the battlefield, then shuffle.
 AI:RemoveDeck:Random
 SVar:NonCombatPriority:3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seahunter.jpg
-Oracle:{3}, {T}: Search your library for a Merfolk permanent card and put it onto the battlefield. Then shuffle your library.
+Oracle:{3}, {T}: Search your library for a Merfolk permanent card, put it onto the battlefield, then shuffle.

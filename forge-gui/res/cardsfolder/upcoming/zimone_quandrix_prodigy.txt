@@ -6,4 +6,4 @@ A:AB$ ChangeZone | Cost$ 1 T | Origin$ Hand | Destination$ Battlefield | Tapped$
 A:AB$ Draw | Cost$ 4 T | NumCards$ X | SpellDescription$ Draw a card. If you control eight or more lands, draw two cards instead.
 SVar:X:Count$Compare CheckLands GE8.2.1
 SVar:CheckLands:Count$Valid Land.YouCtrl
-Oracle:{T}: You may put a land card from your hand onto the battlefield tapped.\n{4}, {T}: Draw a card. If you control eight or more lands, draw two cards instead.
+Oracle:{1}, {T}: You may put a land card from your hand onto the battlefield tapped.\n{4}, {T}: Draw a card. If you control eight or more lands, draw two cards instead.

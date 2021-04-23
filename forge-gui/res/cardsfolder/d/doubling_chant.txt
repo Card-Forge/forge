@@ -1,11 +1,11 @@
 Name:Doubling Chant
 ManaCost:5 G
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 5 G | RepeatSubAbility$ DBSearch | RepeatCards$ Creature.YouCtrl | SubAbility$ DBShuffle | StackDescription$ SpellDescription | SpellDescription$ For each creature you control, you may search your library for a creature card with the same name as that creature. Put those cards onto the battlefield, then shuffle your library.
+A:SP$ RepeatEach | Cost$ 5 G | RepeatSubAbility$ DBSearch | RepeatCards$ Creature.YouCtrl | SubAbility$ DBShuffle | StackDescription$ SpellDescription | SpellDescription$ For each creature you control, you may search your library for a creature card with the same name as that creature. Put those cards onto the battlefield, then shuffle.
 SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Remembered.Creature+sameName | ChangeNum$ 1 | NoShuffle$ True
 SVar:DBShuffle:DB$ Shuffle | Defined$ You | StackDescription$ None
 SVar:NeedsToPlayVar:Z GE2
 SVar:Z:Count$Valid Creature.YouCtrl+inZoneBattlefield
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/doubling_chant.jpg
-Oracle:For each creature you control, you may search your library for a creature card with the same name as that creature. Put those cards onto the battlefield, then shuffle your library.
+Oracle:For each creature you control, you may search your library for a creature card with the same name as that creature. Put those cards onto the battlefield, then shuffle.

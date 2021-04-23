@@ -2,8 +2,8 @@ Name:Coastal Wizard
 ManaCost:2 U U
 Types:Creature Human Wizard
 PT:1/1
-A:AB$ ChangeZone | Cost$ T | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBChangeZone | PlayerTurn$ True | ActivationPhases$ Upkeep->BeginCombat | SpellDescription$ Return CARDNAME and another target creature to their owners' hands. Activate this ability only during your turn, before attackers are declared.
+A:AB$ ChangeZone | Cost$ T | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBChangeZone | PlayerTurn$ True | ActivationPhases$ Upkeep->BeginCombat | SpellDescription$ Return CARDNAME and another target creature to their owners' hands. Activate only during your turn, before attackers are declared.
 SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coastal_wizard.jpg
-Oracle:{T}: Return Coastal Wizard and another target creature to their owners' hands. Activate this ability only during your turn, before attackers are declared.
+Oracle:{T}: Return Coastal Wizard and another target creature to their owners' hands. Activate only during your turn, before attackers are declared.

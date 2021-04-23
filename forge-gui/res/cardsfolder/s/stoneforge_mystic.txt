@@ -2,8 +2,8 @@ Name:Stoneforge Mystic
 ManaCost:1 W
 Types:Creature Kor Artificer
 PT:1/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for an Equipment card, reveal it, put it into your hand, then shuffle your library.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for an Equipment card, reveal it, put it into your hand, then shuffle.
 SVar:TrigChange:DB$ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.Equipment | ChangeNum$ 1 | ShuffleNonMandatory$ True
 A:AB$ChangeZone | Cost$ 1 W T | Origin$ Hand | Destination$ Battlefield | ChangeType$ Equipment | ChangeNum$ 1 | SpellDescription$ You may put an Equipment card from your hand onto the battlefield.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stoneforge_mystic.jpg
-Oracle:When Stoneforge Mystic enters the battlefield, you may search your library for an Equipment card, reveal it, put it into your hand, then shuffle your library.\n{1}{W}, {T}: You may put an Equipment card from your hand onto the battlefield.
+Oracle:When Stoneforge Mystic enters the battlefield, you may search your library for an Equipment card, reveal it, put it into your hand, then shuffle.\n{1}{W}, {T}: You may put an Equipment card from your hand onto the battlefield.

@@ -1,8 +1,8 @@
 Name:Culling Scales
 ManaCost:3
 Types:Artifact
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ At the beginning of your upkeep, destroy target nonland permanent with the lowest converted mana cost. (If two or more permanents are tied for lowest cost, target any one of them.)
-SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent.nonLand+lowestCMC | TgtPrompt$ Select target nonland permanent with the lowest converted mana cost.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ At the beginning of your upkeep, destroy target nonland permanent with the lowest mana value. (If two or more permanents are tied for lowest, target any one of them.)
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent.nonLand+lowestCMC | TgtPrompt$ Select target nonland permanent with the lowest mana value.
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/culling_scales.jpg
-Oracle:At the beginning of your upkeep, destroy target nonland permanent with the lowest converted mana cost. (If two or more permanents are tied for lowest cost, target any one of them.)
+Oracle:At the beginning of your upkeep, destroy target nonland permanent with the lowest mana value. (If two or more permanents are tied for lowest, target any one of them.)

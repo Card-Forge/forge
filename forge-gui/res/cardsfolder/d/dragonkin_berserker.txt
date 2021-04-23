@@ -5,5 +5,5 @@ PT:2/2
 K:First strike
 S:Mode$ ReduceCost | ValidCard$ Card | ValidSpell$ Activated.Boast | Activator$ You | Amount$ X | EffectZone$ Battlefield | Description$ Boast abilities you activiate cost {1} less to activate for each Dragon you control.
 SVar:X:Count$Valid Dragon.YouCtrl
-A:AB$ Token | Cost$ 4 R | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ r_5_5_dragon_flying | Boast$ True | SpellDescription$ Create a 5/5 red Dragon creature token with flying. (Activate this ability only if this creature attacked this turn and only once each turn.)
-Oracle:First strike\nBoast abilities you activate cost {1} less to activate for each Dragon you control.\nBoast — {4}{R}: Create a 5/5 red Dragon creature token with flying. (Activate this ability only if this creature attacked this turn and only once each turn.)
+A:AB$ Token | Cost$ 4 R | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ r_5_5_dragon_flying | Boast$ True | SpellDescription$ Create a 5/5 red Dragon creature token with flying. (Activate only if this creature attacked this turn and only once each turn.)
+Oracle:First strike\nBoast abilities you activate cost {1} less to activate for each Dragon you control.\nBoast — {4}{R}: Create a 5/5 red Dragon creature token with flying. (Activate only if this creature attacked this turn and only once each turn.)

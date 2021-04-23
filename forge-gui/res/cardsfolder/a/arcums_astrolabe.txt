@@ -5,4 +5,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 1
 A:AB$ Mana | Cost$ 1 T | Produced$ Any | SpellDescription$ Add one mana of any color.
 AI:RemoveDeck:All
-Oracle:({S} can be paid with one mana from a snow permanent.)\nWhen Arcum's Astrolabe enters the battlefield, draw a card.\n{1}, {T}: Add one mana of any color.
+Oracle:({S} can be paid with one mana from a snow source.)\nWhen Arcum's Astrolabe enters the battlefield, draw a card.\n{1}, {T}: Add one mana of any color.

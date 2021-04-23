@@ -8,4 +8,4 @@ K:TypeCycling:Basic:2
 SVar:AIPlayForSub:True
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/treacherous_terrain.jpg
-Oracle:Treacherous Terrain deals damage to each opponent equal to the number of lands that player controls.\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.)
+Oracle:Treacherous Terrain deals damage to each opponent equal to the number of lands that player controls.\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)

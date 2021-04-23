@@ -5,8 +5,8 @@ PT:3/4
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a Treasure token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
-S:Mode$ Continuous | Affected$ Artifact.YouCtrl | AddAbility$ AnyMana | Description$ Artifacts you control have "{T}: Add one mana of any color. Spend this mana only to cast instant or sorcery spells."
+S:Mode$ Continuous | Affected$ Artifact.YouCtrl | AddAbility$ AnyMana | Description$ Artifacts you control have "{T}: Add one mana of any color. Spend this mana only to cast an instant or sorcery spell."
 SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | RestrictValid$ Instant,Sorcery | SpellDescription$ Add one mana of any color. Spend this mana only to cast instant or sorcery spells.
 DeckHas:Ability$Token
 DeckNeeds:Type$Instant|Sorcery
-Oracle:Flying\nWhen Galazeth Prismari enters the battlefield, create a Treasure token.\nArtifacts you control have "{T}: Add one mana of any color. Spend this mana only to cast instant or sorcery spells."
+Oracle:Flying\nWhen Galazeth Prismari enters the battlefield, create a Treasure token.\nArtifacts you control have "{T}: Add one mana of any color. Spend this mana only to cast an instant or sorcery spell."

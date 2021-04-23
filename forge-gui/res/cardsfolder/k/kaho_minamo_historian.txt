@@ -2,9 +2,9 @@ Name:Kaho, Minamo Historian
 ManaCost:2 U U
 Types:Legendary Creature Human Wizard
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ Catalogue | TriggerDescription$ When CARDNAME enters the battlefield, search your library for up to three instant cards and exile them. Then shuffle your library.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ Catalogue | TriggerDescription$ When CARDNAME enters the battlefield, search your library for up to three instant cards, exile them, then shuffle.
 SVar:Catalogue:DB$ ChangeZone | Origin$ Library | Destination$ Exile | ChangeType$ Instant | ChangeNum$ 3 | RememberChanged$ True | ForgetOtherRemembered$ True
-A:AB$ Play | Cost$ X T | Valid$ Card.IsRemembered+ExiledWithSource | ValidSA$ Spell.cmcEQX | ValidZone$ Exile | WithoutManaCost$ True | Amount$ 1 | Controller$ You | Optional$ True | ForgetTargetRemembered$ True | SpellDescription$ You may cast a spell with converted mana cost X exiled with Kaho without paying its mana cost.
+A:AB$ Play | Cost$ X T | Valid$ Card.IsRemembered+ExiledWithSource | ValidSA$ Spell.cmcEQX | ValidZone$ Exile | WithoutManaCost$ True | Amount$ 1 | Controller$ You | Optional$ True | ForgetTargetRemembered$ True | SpellDescription$ You may cast a spell with mana value X exiled with Kaho without paying its mana cost.
 T:Mode$ ChangesZone | ValidCard$ Card.IsRemembered+ExiledWithSource | Origin$ Exile | Destination$ Any | Execute$ ForgetCard | Static$ True
 T:Mode$ SpellCast | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ ForgetCard | Static$ True
 SVar:ForgetCard:DB$ Cleanup | ForgetDefined$ TriggeredCard
@@ -13,4 +13,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kaho_minamo_historian.jpg
-Oracle:When Kaho, Minamo Historian enters the battlefield, search your library for up to three instant cards and exile them. Then shuffle your library.\n{X}, {T}: You may cast a spell with converted mana cost X from among cards exiled with Kaho without paying its mana cost.
+Oracle:When Kaho, Minamo Historian enters the battlefield, search your library for up to three instant cards, exile them, then shuffle.\n{X}, {T}: You may cast a spell with mana value X from among cards exiled with Kaho without paying its mana cost.

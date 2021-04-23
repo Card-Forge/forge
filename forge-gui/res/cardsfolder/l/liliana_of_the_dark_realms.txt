@@ -2,7 +2,7 @@ Name:Liliana of the Dark Realms
 ManaCost:2 B B
 Types:Legendary Planeswalker Liliana
 Loyalty:3
-A:AB$ ChangeZone | Cost$ AddCounter<1/LOYALTY> | Origin$ Library | Destination$ Hand | Planeswalker$ True | NumCards$ 1 | ChangeType$ Swamp | Mandatory$ True | SpellDescription$ Search your library for a swamp card, reveal it, put it into your hand, then shuffle your library.
+A:AB$ ChangeZone | Cost$ AddCounter<1/LOYALTY> | Origin$ Library | Destination$ Hand | Planeswalker$ True | NumCards$ 1 | ChangeType$ Swamp | Mandatory$ True | SpellDescription$ Search your library for a swamp card, reveal it, put it into your hand, then shuffle.
 A:AB$ Pump | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ ABChoice | SpellDescription$ Target creature gets +X/+X or -X/-X until end of turn, where X is the number of swamps you control. | StackDescription$ Target creature gets +X/+X or -X/-X until end of turn, where X is the number of swamps you control.
 A:AB$ Effect | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Liliana Of The Dark Realms | Image$ emblem_liliana_of_the_dark_realms | StaticAbilities$ SwampBoost | Stackable$ False | Duration$ Permanent | SpellDescription$ You get an emblem with "Swamps you control have '{T}: Add {B}{B}{B}{B}.'".
 SVar:X:Count$Valid Swamp.YouCtrl
@@ -12,4 +12,4 @@ SVar:ABPump2:DB$ Pump | Defined$ Targeted | NumAtt$ -X | NumDef$ -X | SpellDescr
 SVar:SwampBoost:Mode$ Continuous | EffectZone$ Command | Affected$ Swamp.YouCtrl | AffectedZone$ Battlefield | AddAbility$ BlackTap | Description$ Swamps you control have '{T}: Add {B}{B}{B}{B}.'
 SVar:BlackTap:AB$ Mana | Cost$ T | Produced$ B | Amount$ 4 | SpellDescription$ Add {B}{B}{B}{B}.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/liliana_of_the_dark_realms.jpg
-Oracle:[+1]: Search your library for a Swamp card, reveal it, and put it into your hand. Then shuffle your library.\n[−3]: Target creature gets +X/+X or -X/-X until end of turn, where X is the number of Swamps you control.\n[−6]: You get an emblem with "Swamps you control have '{T}: Add {B}{B}{B}{B}.'"
+Oracle:[+1]: Search your library for a Swamp card, reveal it, put it into your hand, then shuffle.\n[−3]: Target creature gets +X/+X or -X/-X until end of turn, where X is the number of Swamps you control.\n[−6]: You get an emblem with "Swamps you control have '{T}: Add {B}{B}{B}{B}.'"

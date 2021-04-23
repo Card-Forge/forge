@@ -2,7 +2,7 @@ Name:Pondering Mage
 ManaCost:3 U U
 Types:Creature Human Wizard
 PT:3/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRearrange | TriggerDescription$ When CARDNAME enters the battlefield, look at the top three cards of your library, then put them back in any order. You may shuffle your library. Draw a card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRearrange | TriggerDescription$ When CARDNAME enters the battlefield, look at the top three cards of your library, then put them back in any order. You may shuffle. Draw a card.
 SVar:TrigRearrange:DB$ RearrangeTopOfLibrary | Defined$ You | NumCards$ 3 | MayShuffle$ True | SubAbility$ DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 1
-Oracle:When Pondering Mage enters the battlefield, look at the top three cards of your library, then put them back in any order. You may shuffle your library. Draw a card.
+Oracle:When Pondering Mage enters the battlefield, look at the top three cards of your library, then put them back in any order. You may shuffle. Draw a card.

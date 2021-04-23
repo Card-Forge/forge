@@ -3,7 +3,7 @@ ManaCost:1 W
 Types:Tribal Enchantment Elemental
 T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever you draw a card, you may put a hoofprint counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ HOOFPRINT | CounterNum$ 1
-A:AB$ Token | Cost$ 2 W SubCounter<4/HOOFPRINT> | TokenAmount$ 1 | TokenScript$ w_4_4_elemental_flying | TokenOwner$ You | LegacyImage$ w 4 4 elemental flying lrw | PlayerTurn$ True | SpellDescription$ Create a 4/4 white Elemental creature token with flying. Activate this ability only during your turn.
+A:AB$ Token | Cost$ 2 W SubCounter<4/HOOFPRINT> | TokenAmount$ 1 | TokenScript$ w_4_4_elemental_flying | TokenOwner$ You | LegacyImage$ w 4 4 elemental flying lrw | PlayerTurn$ True | SpellDescription$ Create a 4/4 white Elemental creature token with flying. Activate only during your turn.
 DeckHas:Ability$Counters & Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hoofprints_of_the_stag.jpg
-Oracle:Whenever you draw a card, you may put a hoofprint counter on Hoofprints of the Stag.\n{2}{W}, Remove four hoofprint counters from Hoofprints of the Stag: Create a 4/4 white Elemental creature token with flying. Activate this ability only during your turn.
+Oracle:Whenever you draw a card, you may put a hoofprint counter on Hoofprints of the Stag.\n{2}{W}, Remove four hoofprint counters from Hoofprints of the Stag: Create a 4/4 white Elemental creature token with flying. Activate only during your turn.

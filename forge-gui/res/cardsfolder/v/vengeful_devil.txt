@@ -3,6 +3,6 @@ ManaCost:1 R
 Types:Creature Devil
 PT:1/1
 K:Haste
-A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player | TgtPrompt$ Select any target | NumDmg$ 1 | CheckSVar$ Morbid | SVarCompare$ GE1 | SpellDescription$ CARDNAME deals 1 damage to any target. Activate this ability only if a creature died this turn.
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player | TgtPrompt$ Select any target | NumDmg$ 1 | CheckSVar$ Morbid | SVarCompare$ GE1 | SpellDescription$ CARDNAME deals 1 damage to any target. Activate only if a creature died this turn.
 SVar:Morbid:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
-Oracle:Haste\nMorbid — {T}: Vengeful Devil deals 1 damage to any target. Activate this ability only if a creature died this turn.
+Oracle:Haste\nMorbid — {T}: Vengeful Devil deals 1 damage to any target. Activate only if a creature died this turn.

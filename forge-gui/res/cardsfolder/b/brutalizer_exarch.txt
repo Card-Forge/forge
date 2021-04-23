@@ -4,8 +4,8 @@ Types:Creature Cleric
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DBSearch,DBRemove
-SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Creature | ChangeNum$ 1 | SpellDescription$ Search your library for a creature card, reveal it, then shuffle your library and put that card on top of it.
+SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Creature | ChangeNum$ 1 | SpellDescription$ Search your library for a creature card, reveal it, then shuffle and put that card on top.
 SVar:DBRemove:DB$ ChangeZone | ValidTgts$ Permanent.nonCreature | IsCurse$ True | TgtPrompt$ Select target noncreature permanent | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put target noncreature permanent on the bottom of its owner's library.
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brutalizer_exarch.jpg
-Oracle:When Brutalizer Exarch enters the battlefield, choose one —\n• Search your library for a creature card, reveal it, then shuffle your library and put that card on top of it.\n• Put target noncreature permanent on the bottom of its owner's library.
+Oracle:When Brutalizer Exarch enters the battlefield, choose one —\n• Search your library for a creature card, reveal it, then shuffle and put that card on top.\n• Put target noncreature permanent on the bottom of its owner's library.

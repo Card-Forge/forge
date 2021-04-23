@@ -4,4 +4,4 @@ Types:Creature Zombie Crocodile
 PT:3/3
 K:Trample
 K:Lifelink
-Oracle:Trample,Lifelink
+Oracle:Trample, lifelink

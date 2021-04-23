@@ -3,11 +3,11 @@ ManaCost:3 U R
 Types:Creature Dragon
 PT:3/5
 K:Flying
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, draw a card, then discard a card. CARDNAME gets +X/+0 until end of turn, where X is the discarded card's converted mana cost.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, draw a card, then discard a card. CARDNAME gets +X/+0 until end of turn, where X is the discarded card's mana value.
 SVar:TrigDraw:DB$ Draw | NumCards$ 1 | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | NumCards$ 1 | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | NumAtt$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spellbound_dragon.jpg
-Oracle:Flying\nWhenever Spellbound Dragon attacks, draw a card, then discard a card. Spellbound Dragon gets +X/+0 until end of turn, where X is the discarded card's converted mana cost.
+Oracle:Flying\nWhenever Spellbound Dragon attacks, draw a card, then discard a card. Spellbound Dragon gets +X/+0 until end of turn, where X is the discarded card's mana value.

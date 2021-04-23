@@ -2,9 +2,9 @@ Name:Tornado
 ManaCost:4 G
 Types:Enchantment
 K:Cumulative upkeep:G
-A:AB$ Destroy | Cost$ 2 G PayLife<X> | CostDesc$ {2}{G}, Pay 3 life for each velocity counter on Tornado: | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SubAbility$ Velocity | ActivationLimit$ 1 | SpellDescription$ Destroy target permanent and put a velocity counter on CARDNAME. Activate this ability only once each turn.
+A:AB$ Destroy | Cost$ 2 G PayLife<X> | CostDesc$ {2}{G}, Pay 3 life for each velocity counter on Tornado: | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SubAbility$ Velocity | ActivationLimit$ 1 | SpellDescription$ Destroy target permanent and put a velocity counter on CARDNAME. Activate only once each turn.
 SVar:Velocity:DB$ PutCounter | Defined$ Self | CounterType$ VELOCITY | CounterNum$ 1
 SVar:X:Count$CardCounters.VELOCITY/Times.3
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tornado.jpg
-Oracle:Cumulative upkeep {G} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\n{2}{G}, Pay 3 life for each velocity counter on Tornado: Destroy target permanent and put a velocity counter on Tornado. Activate this ability only once each turn.
+Oracle:Cumulative upkeep {G} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\n{2}{G}, Pay 3 life for each velocity counter on Tornado: Destroy target permanent and put a velocity counter on Tornado. Activate only once each turn.

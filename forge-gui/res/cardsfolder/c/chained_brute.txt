@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Creature Devil
 PT:4/3
 K:CARDNAME doesn't untap during your untap step.
-A:AB$ Untap | Cost$ 1 Sac<1/Creature.Other/another creature> | PlayerTurn$ True | SpellDescription$ Untap CARDNAME. Activate this ability only during your turn.
+A:AB$ Untap | Cost$ 1 Sac<1/Creature.Other/another creature> | PlayerTurn$ True | SpellDescription$ Untap CARDNAME. Activate only during your turn.
 SVar:AIPreference:SacCost$Creature.token+powerLE2+toughnessLE2,Creature.cmcLE2+powerLE1+toughnessLE2+inZoneBattlefield
 DeckHas:Ability$Sacrifice
-Oracle:Chained Brute doesn't untap during your untap step.\n{1}, Sacrifice another creature: Untap Chained Brute. Activate this ability only during your turn.
+Oracle:Chained Brute doesn't untap during your untap step.\n{1}, Sacrifice another creature: Untap Chained Brute. Activate only during your turn.

@@ -1,9 +1,9 @@
 Name:Angrath's Fury
 ManaCost:3 B R
 Types:Sorcery
-A:SP$ Destroy | Cost$ 3 B R | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBDealDamage | SpellDescription$ Destroy target creature. CARDNAME deals 3 damage to target player or planeswalker. You may search your library and/or graveyard for a card named Angrath, Minotaur Pirate, reveal it, and put it into your hand. If you search your library this way, shuffle it.
+A:SP$ Destroy | Cost$ 3 B R | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBDealDamage | SpellDescription$ Destroy target creature. CARDNAME deals 3 damage to target player or planeswalker. You may search your library and/or graveyard for a card named Angrath, Minotaur Pirate, reveal it, and put it into your hand. If you search your library this way, shuffle.
 SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 3 | SubAbility$ DBSearch
 SVar:DBSearch:DB$ ChangeZone | Origin$ Library | OriginChoice$ True | OriginAlternative$ Graveyard | AlternativeMessage$ Would you like to search your library with this ability? If you do, your library will be shuffled. | Destination$ Hand | ChangeType$ Card.namedAngrath; Minotaur Pirate | ChangeNum$ 1 | Optional$ True
 DeckNeeds:Name$Angrath, Minotaur Pirate
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angraths_fury.jpg
-Oracle:Destroy target creature. Angrath's Fury deals 3 damage to target player or planeswalker. You may search your library and/or graveyard for a card named Angrath, Minotaur Pirate, reveal it, and put it into your hand. If you search your library this way, shuffle it.
+Oracle:Destroy target creature. Angrath's Fury deals 3 damage to target player or planeswalker. You may search your library and/or graveyard for a card named Angrath, Minotaur Pirate, reveal it, and put it into your hand. If you search your library this way, shuffle.

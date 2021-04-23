@@ -4,6 +4,6 @@ Types:Legendary Creature Demon
 PT:8/8
 K:Flying
 K:Trample
-A:AB$ ChangeZone | Cost$ PayLife<2> Sac<1/Creature.Other/another creature> | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | SpellDescription$ Search your library for a card and put that card into your hand. Then shuffle your library.
+A:AB$ ChangeZone | Cost$ PayLife<2> Sac<1/Creature.Other/another creature> | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | SpellDescription$ Search your library for a card, put that card into your hand, then shuffle.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/razaketh_the_foulblooded.jpg
-Oracle:Flying, trample\nPay 2 life, Sacrifice another creature: Search your library for a card and put that card into your hand. Then shuffle your library.
+Oracle:Flying, trample\nPay 2 life, Sacrifice another creature: Search your library for a card, put that card into your hand, then shuffle.

@@ -1,6 +1,6 @@
 Name:Amulet of Unmaking
 ManaCost:5
 Types:Artifact
-A:AB$ ChangeZone | Cost$ 5 T Exile<1/CARDNAME> | ValidTgts$ Artifact,Creature,Land | SorcerySpeed$ True | TgtPrompt$ Select target artifact, creature, or land | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target artifact, creature, or land. Activate this ability only any time you could cast a sorcery.
+A:AB$ ChangeZone | Cost$ 5 T Exile<1/CARDNAME> | ValidTgts$ Artifact,Creature,Land | SorcerySpeed$ True | TgtPrompt$ Select target artifact, creature, or land | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target artifact, creature, or land. Activate only as a sorcery.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/amulet_of_unmaking.jpg
-Oracle:{5}, {T}, Exile Amulet of Unmaking: Exile target artifact, creature, or land. Activate this ability only any time you could cast a sorcery.
+Oracle:{5}, {T}, Exile Amulet of Unmaking: Exile target artifact, creature, or land. Activate only as a sorcery.

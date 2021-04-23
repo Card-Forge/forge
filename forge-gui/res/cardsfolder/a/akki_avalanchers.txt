@@ -2,6 +2,6 @@ Name:Akki Avalanchers
 ManaCost:R
 Types:Creature Goblin Warrior
 PT:1/1
-A:AB$ Pump | Cost$ Sac<1/Land> | Defined$ Self | NumAtt$ 2 | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +2/+0 until end of turn. Activate this ability only once each turn.
+A:AB$ Pump | Cost$ Sac<1/Land> | Defined$ Self | NumAtt$ 2 | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +2/+0 until end of turn. Activate only once each turn.
 AI:RemoveDeck:All
-Oracle:Sacrifice a land: Akki Avalanchers gets +2/+0 until end of turn. Activate this ability only once each turn.
+Oracle:Sacrifice a land: Akki Avalanchers gets +2/+0 until end of turn. Activate only once each turn.

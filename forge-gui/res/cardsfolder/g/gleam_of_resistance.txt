@@ -5,4 +5,4 @@ A:SP$ PumpAll | Cost$ 4 W | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ 
 SVar:DBUntapAll:DB$ UntapAll | ValidCards$ Creature.YouCtrl
 K:TypeCycling:Basic:1 W
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gleam_of_resistance.jpg
-Oracle:Creatures you control get +1/+2 until end of turn. Untap those creatures.\nBasic landcycling {1}{W} ({1}{W}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.)
+Oracle:Creatures you control get +1/+2 until end of turn. Untap those creatures.\nBasic landcycling {1}{W} ({1}{W}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)

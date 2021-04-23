@@ -1,7 +1,7 @@
 Name:Buried Alive
 ManaCost:2 B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 B | Origin$ Library | Destination$ Graveyard | ChangeType$ Creature | ChangeNum$ 3 | SpellDescription$ Search your library for up to three creature cards, put them into your graveyard, then shuffle your library.
+A:SP$ ChangeZone | Cost$ 2 B | Origin$ Library | Destination$ Graveyard | ChangeType$ Creature | ChangeNum$ 3 | SpellDescription$ Search your library for up to three creature cards, put them into your graveyard, then shuffle.
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/buried_alive.jpg
-Oracle:Search your library for up to three creature cards, put them into your graveyard, then shuffle your library.
+Oracle:Search your library for up to three creature cards, put them into your graveyard, then shuffle.

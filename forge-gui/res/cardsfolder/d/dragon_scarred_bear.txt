@@ -2,7 +2,7 @@ Name:Dragon-Scarred Bear
 ManaCost:2 G
 Types:Creature Bear
 PT:3/2
-A:AB$ Regenerate | Cost$ 1 G | PrecostDesc$ Formidable — | CheckSVar$ FormidableTest | SVarCompare$ GE8 | SpellDescription$ Regenerate CARDNAME. Activate this ability only if creatures you control have total power 8 or greater.
+A:AB$ Regenerate | Cost$ 1 G | PrecostDesc$ Formidable — | CheckSVar$ FormidableTest | SVarCompare$ GE8 | SpellDescription$ Regenerate CARDNAME. Activate only if creatures you control have total power 8 or greater.
 SVar:FormidableTest:Count$SumPower_Creature.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragon_scarred_bear.jpg
-Oracle:Formidable — {1}{G}: Regenerate Dragon-Scarred Bear. Activate this ability only if creatures you control have total power 8 or greater.
+Oracle:Formidable — {1}{G}: Regenerate Dragon-Scarred Bear. Activate only if creatures you control have total power 8 or greater.

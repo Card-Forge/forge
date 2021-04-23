@@ -3,7 +3,7 @@ ManaCost:1 U U
 Types:Creature Shapeshifter
 PT:2/2
 K:Kicker:2 B Discard<1/Creature>
-R:Event$ Moved | ValidCard$ Card.Self+kicked | Destination$ Battlefield | ReplaceWith$ DBPump | Description$ If CARDNAME was kicked, it enters the battlefield with flying and with X +1/+1 counters on it, where X is the discarded card's converted mana cost.
+R:Event$ Moved | ValidCard$ Card.Self+kicked | Destination$ Battlefield | ReplaceWith$ DBPump | Description$ If CARDNAME was kicked, it enters the battlefield with flying and with X +1/+1 counters on it, where X is the discarded card's mana value.
 SVar:DBPump:DB$ Animate | Defined$ Self | Keywords$ Flying | Permanent$ True | SubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | ETB$ True | Defined$ Self | CounterType$ P1P1 | CounterNum$ KickedPet | SubAbility$ DBMoveToPlay
 SVar:DBMoveToPlay:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
@@ -12,4 +12,4 @@ AI:RemoveDeck:Random
 DeckHints:Color$Black
 DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dralnus_pet.jpg
-Oracle:Kicker—{2}{B}, Discard a creature card. (You may pay {2}{B} and discard a creature card in addition to any other costs as you cast this spell.)\nIf Dralnu's Pet was kicked, it enters the battlefield with flying and with X +1/+1 counters on it, where X is the discarded card's converted mana cost.
+Oracle:Kicker—{2}{B}, Discard a creature card. (You may pay {2}{B} and discard a creature card in addition to any other costs as you cast this spell.)\nIf Dralnu's Pet was kicked, it enters the battlefield with flying and with X +1/+1 counters on it, where X is the discarded card's mana value.

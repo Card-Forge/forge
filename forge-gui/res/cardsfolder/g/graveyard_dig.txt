@@ -3,4 +3,4 @@ ManaCost:1 BG
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ 1 BG | Origin$ Graveyard | Destination$ Hand | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl+Black,Creature.YouCtrl+Green | SpellDescription$ Return two target black or green creature cards from your graveyard to your hand.
 A:SP$ ChangeZone | Cost$ 2 BG BG | Origin$ Graveyard | Destination$ Hand | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return two target creature cards from your graveyard to your hand.
-Oracle:Return up to two target [black or green] creature cards from your graveyard to your hand.\nYou may cast this spell for {2}{B/G}{B/G}. If you do, ignore the bracketed text.
+Oracle:Return up to two target black or green creature cards from your graveyard to your hand.\nYou may cast this spell for {2}{B/G}{B/G}. If you do, ignore the bracketed text.

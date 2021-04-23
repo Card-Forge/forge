@@ -6,5 +6,5 @@ K:Flying
 T:Mode$ SpellCast | ValidActivatingPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell, put a +1/+1 counter on CARDNAME for each of that spell's colors.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X
 SVar:X:TriggeredCard$CardNumColors
-A:AB$ Mana | Cost$ SubCounter<5/P1P1> | Produced$ W W U U B B R R G G | ActivationLimit$ 1 | SpellDescription$ Add {W}{W}{U}{U}{B}{B}{R}{R}{G}{G}. Activate this ability only once each turn.
-Oracle:Flying\nWhenever you cast a spell, put a +1/+1 counter on Ramos, Dragon Engine for each of that spell's colors.\nRemove five +1/+1 counters from Ramos: Add {W}{W}{U}{U}{B}{B}{R}{R}{G}{G}. Activate this ability only once each turn.
+A:AB$ Mana | Cost$ SubCounter<5/P1P1> | Produced$ W W U U B B R R G G | ActivationLimit$ 1 | SpellDescription$ Add {W}{W}{U}{U}{B}{B}{R}{R}{G}{G}. Activate only once each turn.
+Oracle:Flying\nWhenever you cast a spell, put a +1/+1 counter on Ramos, Dragon Engine for each of that spell's colors.\nRemove five +1/+1 counters from Ramos: Add {W}{W}{U}{U}{B}{B}{R}{R}{G}{G}. Activate only once each turn.

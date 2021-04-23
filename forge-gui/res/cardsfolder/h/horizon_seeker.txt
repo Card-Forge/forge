@@ -2,5 +2,5 @@ Name:Horizon Seeker
 ManaCost:2 G
 Types:Creature Human Warrior
 PT:3/2
-A:AB$ ChangeZone | Cost$ 1 G | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1 |Boast$ True | SpellDescription$ Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library. 
-Oracle:Boast — {1}{G}: Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library. (Activate this ability only if this creature attacked this turn and only once each turn.)
+A:AB$ ChangeZone | Cost$ 1 G | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1 |Boast$ True | SpellDescription$ Search your library for a basic land card, reveal it, put it into your hand, then shuffle.
+Oracle:Boast — {1}{G}: Search your library for a basic land card, reveal it, put it into your hand, then shuffle. (Activate only if this creature attacked this turn and only once each turn.)

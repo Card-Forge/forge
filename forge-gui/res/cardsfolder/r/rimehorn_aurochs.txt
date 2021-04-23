@@ -11,4 +11,4 @@ SVar:DBMustBlock:DB$ MustBlock | DefinedAttacker$ ParentTarget | ValidTgts$ Crea
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rimehorn_aurochs.jpg
-Oracle:Trample\nWhenever Rimehorn Aurochs attacks, it gets +1/+0 until end of turn for each other attacking Aurochs.\n{2}{S}: Target creature blocks target creature this turn if able. ({S} can be paid with one mana from a snow permanent.)
+Oracle:Trample\nWhenever Rimehorn Aurochs attacks, it gets +1/+0 until end of turn for each other attacking Aurochs.\n{2}{S}: Target creature blocks target creature this turn if able. ({S} can be paid with one mana from a snow source.)

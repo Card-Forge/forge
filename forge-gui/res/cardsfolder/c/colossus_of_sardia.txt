@@ -4,6 +4,6 @@ Types:Artifact Creature Golem
 PT:9/9
 K:Trample
 K:CARDNAME doesn't untap during your untap step.
-A:AB$ Untap | Cost$ 9 | ActivationPhases$ Upkeep | PlayerTurn$ True | SpellDescription$ Untap CARDNAME. Activate this ability only during your upkeep.
+A:AB$ Untap | Cost$ 9 | ActivationPhases$ Upkeep | PlayerTurn$ True | SpellDescription$ Untap CARDNAME. Activate only during your upkeep.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/colossus_of_sardia.jpg
-Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)\nColossus of Sardia doesn't untap during your untap step.\n{9}: Untap Colossus of Sardia. Activate this ability only during your upkeep.
+Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)\nColossus of Sardia doesn't untap during your untap step.\n{9}: Untap Colossus of Sardia. Activate only during your upkeep.

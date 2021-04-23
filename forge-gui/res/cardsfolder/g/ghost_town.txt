@@ -2,6 +2,6 @@ Name:Ghost Town
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | OpponentTurn$ True | SpellDescription$ Return CARDNAME to its owner's hand. Activate this ability only if it's not your turn.
+A:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | OpponentTurn$ True | SpellDescription$ Return CARDNAME to its owner's hand. Activate only if it's not your turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghost_town.jpg
-Oracle:{T}: Add {C}.\n{0}: Return Ghost Town to its owner's hand. Activate this ability only if it's not your turn.
+Oracle:{T}: Add {C}.\n{0}: Return Ghost Town to its owner's hand. Activate only if it's not your turn.

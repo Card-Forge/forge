@@ -3,8 +3,8 @@ ManaCost:3 U
 Types:Creature Merfolk Wizard
 PT:2/3
 K:Islandwalk
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a Merfolk card, reveal it, then shuffle your library and put that card on top of it.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a Merfolk card, reveal it, then shuffle and put that card on top.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Card.Merfolk | ChangeNum$ 1 | ShuffleNonMandatory$ True
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merrow_harbinger.jpg
-Oracle:Islandwalk (This creature can't be blocked as long as defending player controls an Island.)\nWhen Merrow Harbinger enters the battlefield, you may search your library for a Merfolk card, reveal it, then shuffle your library and put that card on top of it.
+Oracle:Islandwalk (This creature can't be blocked as long as defending player controls an Island.)\nWhen Merrow Harbinger enters the battlefield, you may search your library for a Merfolk card, reveal it, then shuffle and put that card on top.

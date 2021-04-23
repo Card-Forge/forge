@@ -4,6 +4,6 @@ Types:Legendary Creature Human Wizard
 PT:1/4
 K:Partner:Pako, Arcane Retriever:Pako
 SVar:PlayMain1:TRUE
-S:Mode$ Continuous | Affected$ Card.nonCreature+ExiledByYou+counters_GE1_FETCH | AffectedZone$ Exile | MayPlay$ True | MayPlayIgnoreColor$ True | Description$ You may play noncreature cards from exile with fetch counters on them if you exiled them, and you may spend mana as though it were mana of any color to cast those spells.
+S:Mode$ Continuous | Affected$ Card.nonCreature+ExiledByYou+counters_GE1_FETCH | AffectedZone$ Exile | MayPlay$ True | MayPlayIgnoreColor$ True | Description$ You may play lands and cast noncreature spells from among cards you exiled that have fetch counters on them, and you may spend mana as though it were mana of any color to cast those spells.
 DeckNeeds:Name$Pako, Arcane Retriever
-Oracle:Partner with Pako, Arcane Retriever (When this creature enters the battlefield, target player may put Pako into their hand from their library, then shuffle.)\nYou may play noncreature cards from exile with fetch counters on them if you exiled them, and you may spend mana as though it were mana of any color to cast those spells.
+Oracle:Partner with Pako, Arcane Retriever (When this creature enters the battlefield, target player may put Pako into their hand from their library, then shuffle.)\nYou may play lands and cast noncreature spells from among cards you exiled that have fetch counters on them, and you may spend mana as though it were mana of any color to cast those spells.

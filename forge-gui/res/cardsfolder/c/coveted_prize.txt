@@ -3,8 +3,8 @@ ManaCost:4 B
 Types:Sorcery
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature in your party.
 SVar:X:Count$Party
-A:SP$ ChangeZone | Cost$ 4 B | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | SubAbility$ DBPlay | StackDescription$ SpellDescription | SpellDescription$ Search your library for a card, put it into your hand, then shuffle your library. If you have a full party, you may cast a spell with converted mana cost 4 or less from your hand without paying its mana cost.
+A:SP$ ChangeZone | Cost$ 4 B | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | SubAbility$ DBPlay | StackDescription$ SpellDescription | SpellDescription$ Search your library for a card, put it into your hand, then shuffle. If you have a full party, you may cast a spell with mana value 4 or less from your hand without paying its mana cost.
 SVar:DBPlay:DB$ Play | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ4 | Optional$ True | Valid$ Card.nonLand+YouOwn | ValidSA$ Spell.cmcLE4 | ValidZone$ Hand | WithoutManaCost$ True | Amount$ 1 | StackDescription$ None
 DeckHas:Ability$Party
 DeckHints:Type$Cleric|Rogue|Warrior|Wizard
-Oracle:This spell costs {1} less to cast for each creature in your party. (Your party consists of up to one each of Cleric, Rogue, Warrior, and Wizard.)\nSearch your library for a card, put it into your hand, then shuffle your library. If you have a full party, you may cast a spell with converted mana cost 4 or less from your hand without paying its mana cost.
+Oracle:This spell costs {1} less to cast for each creature in your party. (Your party consists of up to one each of Cleric, Rogue, Warrior, and Wizard.)\nSearch your library for a card, put it into your hand, then shuffle. If you have a full party, you may cast a spell with mana value 4 or less from your hand without paying its mana cost.

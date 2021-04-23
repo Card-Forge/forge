@@ -2,6 +2,6 @@ Name:Mask of the Mimic
 ManaCost:U
 Types:Instant
 A:SP$ Pump | Cost$ U Sac<1/Creature/creature> | ValidTgts$ Creature.nonToken | TgtPrompt$ Select target nontoken creature | StackDescription$ None | SubAbility$ DBChangeZone
-SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Targeted.sameName | ChangeNum$ 1 | Hidden$ True | StackDescription$ Search your library for a card with the same name as target nontoken creature and put that card onto the battlefield. | SpellDescription$ As an additional cost to cast this spell, sacrifice a creature. Search your library for a card with the same name as target nontoken creature and put that card onto the battlefield. Then shuffle your library.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Targeted.sameName | ChangeNum$ 1 | Hidden$ True | StackDescription$ Search your library for a card with the same name as target nontoken creature and put that card onto the battlefield. | SpellDescription$ As an additional cost to cast this spell, sacrifice a creature. Search your library for a card with the same name as target nontoken creature, put that card onto the battlefield, then shuffle.
 AI:RemoveDeck:All
-Oracle:As an additional cost to cast this spell, sacrifice a creature.\nSearch your library for a card with the same name as target nontoken creature and put that card onto the battlefield. Then shuffle your library.
+Oracle:As an additional cost to cast this spell, sacrifice a creature.\nSearch your library for a card with the same name as target nontoken creature, put that card onto the battlefield, then shuffle.

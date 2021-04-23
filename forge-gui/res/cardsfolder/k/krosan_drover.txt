@@ -2,6 +2,6 @@ Name:Krosan Drover
 ManaCost:3 G
 Types:Creature Elf
 PT:2/2
-S:Mode$ ReduceCost | ValidCard$ Creature.cmcGE6 | Type$ Spell | Activator$ You | Amount$ 2 | Description$ Creature spells you cast with converted mana cost 6 or greater cost {2} less to cast.
+S:Mode$ ReduceCost | ValidCard$ Creature.cmcGE6 | Type$ Spell | Activator$ You | Amount$ 2 | Description$ Creature spells you cast with mana value 6 or greater cost {2} less to cast.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krosan_drover.jpg
-Oracle:Creature spells you cast with converted mana cost 6 or greater cost {2} less to cast.
+Oracle:Creature spells you cast with mana value 6 or greater cost {2} less to cast.

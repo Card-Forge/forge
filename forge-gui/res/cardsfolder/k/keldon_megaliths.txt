@@ -3,6 +3,6 @@ ManaCost:no cost
 Types:Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
-A:AB$ DealDamage | Cost$ 1 R T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | Activation$ Hellbent | PrecostDesc$ Hellbent — | SpellDescription$ CARDNAME deals 1 damage to any target. Activate this ability only if you have no cards in hand.
+A:AB$ DealDamage | Cost$ 1 R T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | Activation$ Hellbent | PrecostDesc$ Hellbent — | SpellDescription$ CARDNAME deals 1 damage to any target. Activate only if you have no cards in hand.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/keldon_megaliths.jpg
-Oracle:Keldon Megaliths enters the battlefield tapped.\n{T}: Add {R}.\nHellbent — {1}{R}, {T}: Keldon Megaliths deals 1 damage to any target. Activate this ability only if you have no cards in hand.
+Oracle:Keldon Megaliths enters the battlefield tapped.\n{T}: Add {R}.\nHellbent — {1}{R}, {T}: Keldon Megaliths deals 1 damage to any target. Activate only if you have no cards in hand.

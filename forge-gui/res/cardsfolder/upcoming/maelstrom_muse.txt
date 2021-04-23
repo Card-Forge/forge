@@ -3,7 +3,7 @@ ManaCost:1 U U/R R
 Types:Creature Djinn Wizard
 PT:2/4
 K:Flying
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ CheckPower | TriggerDescription$ Whenever CARDNAME attacks, the next instant or sorcery spell you cast this turn costs {X} less to cast, where X is CARDNAME’s power as this ability resolves.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ CheckPower | TriggerDescription$ Whenever CARDNAME attacks, the next instant or sorcery spell you cast this turn costs {X} less to cast, where X is CARDNAME's power as this ability resolves.
 SVar:CheckPower:DB$ StoreSVar | SVar$ CurrPower | Type$ CountSVar | Expression$ X | SubAbility$ DBEffect | SpellDescription$ The next instant or sorcery spell you cast this turn costs {X} less to cast, where X is CARDNAME's power as this ability resolves.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ ReduceCost | Triggers$ TrigCastSpell
 SVar:ReduceCost:Mode$ ReduceCost | EffectZone$ Command | Type$ Spell | ValidCard$ Instant,Sorcery | Activator$ You | Amount$ CurrPower | Description$ The next instant or sorcery spell you cast this turn costs {X} less to cast, where X is CARDNAME's power at the time EFFECTSOURCE's ability resolved.
@@ -11,4 +11,4 @@ SVar:TrigCastSpell:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatin
 SVar:RemoveEffect:DB$ ChangeZone | Origin$ Command | Destination$ Exile
 SVar:CurrPower:Number$0
 SVar:X:TriggeredCard$CardPower
-Oracle:Flying\nWhenever Maelstrom Muse attacks, the next instant or sorcery spell you cast this turn costs {X} less to cast, where X is Maelstrom Muse’s power as this ability resolves.
+Oracle:Flying\nWhenever Maelstrom Muse attacks, the next instant or sorcery spell you cast this turn costs {X} less to cast, where X is Maelstrom Muse's power as this ability resolves.

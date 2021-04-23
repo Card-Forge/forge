@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
-A:AB$ PutCounter | Cost$ G W W T Sac<1/CARDNAME> | CounterNum$ 1 | CounterType$ P1P1 | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select up to two target creatures you control | SorcerySpeed$ True | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on each of up to two target creatures you control. They gain vigilance and lifelink until end of turn. Activate this ability only any time you could cast a sorcery.
+A:AB$ PutCounter | Cost$ G W W T Sac<1/CARDNAME> | CounterNum$ 1 | CounterType$ P1P1 | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select up to two target creatures you control | SorcerySpeed$ True | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on each of up to two target creatures you control. They gain vigilance and lifelink until end of turn. Activate only as a sorcery.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Vigilance & Lifelink | StackDescription$ {c:Targeted} gain vigilance and lifelink until end of turn.
 DeckHas:Ability$Sacrifice & Ability$Counters & Ability$LifeGain
-Oracle:Bretagard Stronghold enters the battlefield tapped.\n{T}: Add {G}.\n{G}{W}{W}, {T}, Sacrifice Bretagard Stronghold: Put a +1/+1 counter on each of up to two target creatures you control. They gain vigilance and lifelink until end of turn. Activate this ability only any time you could cast a sorcery.
+Oracle:Bretagard Stronghold enters the battlefield tapped.\n{T}: Add {G}.\n{G}{W}{W}, {T}, Sacrifice Bretagard Stronghold: Put a +1/+1 counter on each of up to two target creatures you control. They gain vigilance and lifelink until end of turn. Activate only as a sorcery.

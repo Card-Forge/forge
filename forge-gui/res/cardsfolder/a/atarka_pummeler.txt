@@ -2,7 +2,7 @@ Name:Atarka Pummeler
 ManaCost:4 R
 Types:Creature Ogre Warrior
 PT:4/5
-A:AB$ PumpAll | Cost$ 3 R R | ValidCards$ Creature.YouCtrl | KW$ Menace | CheckSVar$ FormidableTest | SVarCompare$ GE8 | PrecostDesc$ Formidable — | SpellDescription$ Creatures you control gain menace until end of turn. Activate this ability only if creatures you control have total power 8 or greater.
+A:AB$ PumpAll | Cost$ 3 R R | ValidCards$ Creature.YouCtrl | KW$ Menace | CheckSVar$ FormidableTest | SVarCompare$ GE8 | PrecostDesc$ Formidable — | SpellDescription$ Creatures you control gain menace until end of turn. Activate only if creatures you control have total power 8 or greater.
 SVar:FormidableTest:Count$SumPower_Creature.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/atarka_pummeler.jpg
-Oracle:Formidable — {3}{R}{R}: Creatures you control gain menace until end of turn. Activate this ability only if creatures you control have total power 8 or greater. (They can't be blocked except by two or more creatures.)
+Oracle:Formidable — {3}{R}{R}: Creatures you control gain menace until end of turn. Activate only if creatures you control have total power 8 or greater. (They can't be blocked except by two or more creatures.)

@@ -3,11 +3,11 @@ ManaCost:4 R R
 Types:Artifact Creature Construct
 PT:6/6
 K:First Strike
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBChoice | TriggerDescription$ When CARDNAME enters the battlefield, target opponent may have you draw three cards. If the player doesn't, you mill three cards, then CARDNAME deals damage to that player equal to the total converted mana cost of those cards.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBChoice | TriggerDescription$ When CARDNAME enters the battlefield, target opponent may have you draw three cards. If the player doesn't, you mill three cards, then CARDNAME deals damage to that player equal to the total mana value of those cards.
 SVar:DBChoice:DB$ GenericChoice | ValidTgts$ Opponent | Choices$ CombustDraw,CombustDamage | AILogic$ CombustibleGearhulk
 SVar:CombustDraw:DB$ Draw | Defined$ You | NumCards$ 3 | SpellDescription$ Controller draws three cards
-SVar:CombustDamage:DB$ Mill | Defined$ You | NumCards$ 3 | RememberMilled$ True | SubAbility$ DamageOpponent | SpellDescription$ Controller mills three cards, then CARDNAME deals damage to you equal to their total converted mana cost.
+SVar:CombustDamage:DB$ Mill | Defined$ You | NumCards$ 3 | RememberMilled$ True | SubAbility$ DamageOpponent | SpellDescription$ Controller mills three cards, then CARDNAME deals damage to you equal to their total mana value.
 SVar:DamageOpponent:DB$ DealDamage | Defined$ ParentTarget | NumDmg$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$SumCMC
-Oracle:First strike\nWhen Combustible Gearhulk enters the battlefield, target opponent may have you draw three cards. If the player doesn't, you mill three cards, then Combustible Gearhulk deals damage to that player equal to the total converted mana cost of those cards.
+Oracle:First strike\nWhen Combustible Gearhulk enters the battlefield, target opponent may have you draw three cards. If the player doesn't, you mill three cards, then Combustible Gearhulk deals damage to that player equal to the total mana value of those cards.

@@ -7,4 +7,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Creature.YouCtrl | ChangeNum$ 1 | AILogic$ NeverBounceItself
 SVar:NeedsToPlay:Creature.YouCtrl+token+powerLE1+toughnessLE3,Creature.YouCtrl+cmcLE2+powerLE1+toughnessLE3+inZoneBattlefield
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whitemane_lion.jpg
-Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen Whitemane Lion enters the battlefield, return a creature you control to its owner's hand.
+Oracle:Flash\nWhen Whitemane Lion enters the battlefield, return a creature you control to its owner's hand.

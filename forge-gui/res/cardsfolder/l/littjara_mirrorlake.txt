@@ -3,6 +3,6 @@ ManaCost:no cost
 Types:Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
-A:AB$ CopyPermanent | Cost$ 2 G G U T Sac<1/CARDNAME> | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | WithCounters$ P1P1_1 | SorcerySpeed$ True | SpellDescription$ Create a token that's a copy of target creature you control, except it enters the battlefield with an additional +1/+1 counter on it. Activate this ability only any time you could cast a sorcery.
+A:AB$ CopyPermanent | Cost$ 2 G G U T Sac<1/CARDNAME> | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | WithCounters$ P1P1_1 | SorcerySpeed$ True | SpellDescription$ Create a token that's a copy of target creature you control, except it enters the battlefield with an additional +1/+1 counter on it. Activate only as a sorcery.
 DeckHas:Ability$Sacrifice & Ability$Token & Ability$Counters
-Oracle:Littjara Mirrorlake enters the battlefield tapped.\n{T}: Add {U}.\n{2}{G}{G}{U}, {T}, Sacrifice Littjara Mirrorlake: Create a token that's a copy of target creature you control, except it enters the battlefield with an additional +1/+1 counter on it. Activate this ability only any time you could cast a sorcery.
+Oracle:Littjara Mirrorlake enters the battlefield tapped.\n{T}: Add {U}.\n{2}{G}{G}{U}, {T}, Sacrifice Littjara Mirrorlake: Create a token that's a copy of target creature you control, except it enters the battlefield with an additional +1/+1 counter on it. Activate only as a sorcery.

@@ -5,6 +5,6 @@ K:Enchant player
 A:SP$ Attach | Cost$ 2 B | ValidTgts$ Player | AILogic$ Curse
 T:Mode$ AttackersDeclared | ValidCard$ Creature | AttackedTarget$ Player.EnchantedBy | Execute$ TrigRepeat | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted player is attacked, create a 2/2 black Zombie creature token. Each opponent attacking that player does the same.
 SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ TriggeredAttackingPlayerAndYou | RepeatSubAbility$ TrigToken | ChangeZoneTable$ True
-SVar:TrigToken:DB$ Token | TokenOwner$ Player.IsRemembered | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | LegacyImage$ b 2 2 zombie c17 | SpellDescription$ Create a 2/2 black Zombie creature token. Activate this ability only any time you could cast a sorcery.
+SVar:TrigToken:DB$ Token | TokenOwner$ Player.IsRemembered | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | LegacyImage$ b 2 2 zombie c17 | SpellDescription$ Create a 2/2 black Zombie creature token. Activate only any time you could cast a sorcery.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_vitality.jpg
 Oracle:Enchant player\nWhenever enchanted player is attacked, create a 2/2 black Zombie creature token. Each opponent attacking that player does the same.

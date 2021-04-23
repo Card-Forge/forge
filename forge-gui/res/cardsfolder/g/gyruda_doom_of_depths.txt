@@ -2,10 +2,10 @@ Name:Gyruda, Doom of Depths
 ManaCost:4 U/B U/B
 Types:Legendary Creature Demon Kraken
 PT:6/6
-K:Companion:Card.cmcM20:Your starting deck contains only cards with even converted mana costs. (If this card is your chosen companion, you may cast it once from outside the game.)
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, each player mills four cards. Put a creature card with an even converted mana cost from those cards onto the battlefield under your control.
+K:Companion:Card.cmcM20:Your starting deck contains only cards with even mana value. (If this card is your chosen companion, you may cast it once from outside the game.)
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, each player mills four cards. Put a creature card with an even mana value from those cards onto the battlefield under your control.
 SVar:TrigMill:DB$ Mill | NumCards$ 4 | Defined$ Player | RememberMilled$ True | SubAbility$ DBChoose
-SVar:DBChoose:DB$ ChooseCard | Defined$ You | ChoiceTitle$ Choose a creature card with an even converted mana cost | DefinedCards$ ValidAll Card.Creature+IsRemembered+cmcM20 | AILogic$ BestCard | Mandatory$ True | SubAbility$ DBChangeZone
+SVar:DBChoose:DB$ ChooseCard | Defined$ You | ChoiceTitle$ Choose a creature card with an even mana value | DefinedCards$ ValidAll Card.Creature+IsRemembered+cmcM20 | AILogic$ BestCard | Mandatory$ True | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Hidden$ True | GainControl$ True | Defined$ ChosenCard | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-Oracle:Companion — Your starting deck contains only cards with even converted mana costs. (If this card is your chosen companion, you may put it into your hand from outside the game for {3} any time you could cast a sorcery.)\nWhen Gyruda enters the battlefield, each player mills four cards. Put a creature card with an even converted mana cost from among the milled cards onto the battlefield under your control.
+Oracle:Companion — Your starting deck contains only cards with even mana values. (If this card is your chosen companion, you may put it into your hand from outside the game for {3} any time you could cast a sorcery.)\nWhen Gyruda enters the battlefield, each player mills four cards. Put a creature card with an even mana value from among the milled cards onto the battlefield under your control.

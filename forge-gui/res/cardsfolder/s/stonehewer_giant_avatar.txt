@@ -2,7 +2,7 @@ Name:Stonehewer Giant Avatar
 ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:+1/-5
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Command | Execute$ TrigCopyEquip | TriggerDescription$ Whenever a creature enters the battlefield under your control, create a token that's a copy of a random Equipment card with converted mana cost less than that creature's converted mana cost. Attach that Equipment to that creature.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Command | Execute$ TrigCopyEquip | TriggerDescription$ Whenever a creature enters the battlefield under your control, create a token that's a copy of a random Equipment card with mana value less than that creature's mana value. Attach that Equipment to that creature.
 SVar:TrigCopyEquip:DB$ CopyPermanent | Defined$ TriggeredCard | NumCopies$ 1 | ValidSupportedCopy$ Equipment.cmcLTX | RandomCopied$ True | RandomNum$ 1 | AttachAfter$ True | AttachedTo$ TriggeredCard
 SVar:X:TriggeredCard$CardManaCost
-Oracle:Hand +1, life -5\nWhenever a creature enters the battlefield under your control, create a token that's a copy of a random Equipment card with converted mana cost less than that creature's converted mana cost. Attach that Equipment to that creature.
+Oracle:Hand +1, life -5\nWhenever a creature enters the battlefield under your control, create a token that's a copy of a random Equipment card with mana value less than that creature's mana value. Attach that Equipment to that creature.

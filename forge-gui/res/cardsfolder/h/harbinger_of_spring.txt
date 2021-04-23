@@ -6,4 +6,4 @@ K:Protection:Creature.nonSpirit:Protection from non-Spirit creatures
 K:Soulshift:4
 DeckHints:Type$Spirit
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harbinger_of_spring.jpg
-Oracle:Protection from non-Spirit creatures\nSoulshift 4 (When this creature dies, you may return target Spirit card with converted mana cost 4 or less from your graveyard to your hand.)
+Oracle:Protection from non-Spirit creatures\nSoulshift 4 (When this creature dies, you may return target Spirit card with mana value 4 or less from your graveyard to your hand.)

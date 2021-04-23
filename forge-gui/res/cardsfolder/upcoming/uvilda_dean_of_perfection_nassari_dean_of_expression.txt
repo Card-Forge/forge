@@ -2,7 +2,7 @@ Name:Uvilda, Dean of Perfection
 ManaCost:2 U
 Types:Legendary Creature Djinn Wizard
 PT:2/2
-A:AB$ ChangeZone | Cost$ T | RememberChanged$ True | Origin$ Hand | Destination$ Exile | ChangeType$ Instant,Sorcery | ChangeNum$ 1 | SubAbility$ DBPutCounter | StackDescription$ SpellDescription | SpellDescription$ You may exile an instant or sorcery card from your hand and put three hone counters on it. It gains "At the beginning of your upkeep, if this card is exiled, remove a hone counter from it" and "When the last hone counter is removed from this card, if it’s exiled, you may cast it. It costs {4} less to cast this way."
+A:AB$ ChangeZone | Cost$ T | RememberChanged$ True | Origin$ Hand | Destination$ Exile | ChangeType$ Instant,Sorcery | ChangeNum$ 1 | SubAbility$ DBPutCounter | StackDescription$ SpellDescription | SpellDescription$ You may exile an instant or sorcery card from your hand and put three hone counters on it. It gains "At the beginning of your upkeep, if this card is exiled, remove a hone counter from it" and "When the last hone counter is removed from this card, if it's exiled, you may cast it. It costs {4} less to cast this way."
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ HONE | CounterNum$ 3 | SubAbility$ DBAddTriggers | TgtZone$ Exile
 SVar:DBAddTriggers:DB$ Animate | Defined$ Remembered | Triggers$ TrigRemoveCounter,TrigCast | SubAbility$ DBCleanup | Permanent$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
@@ -13,7 +13,7 @@ SVar:DBCast:DB$ Play | Defined$ Self | PlayReduceCost$ 4
 AlternateMode:Modal
 SVar:BuffedBy:Instant,Sorcery
 DeckHints:Type$Instant|Sorcery
-Oracle:{T}: You may exile an instant or sorcery card from your hand and put three hone counters on it. It gains "At the beginning of your upkeep, if this card is exiled, remove a hone counter from it" and "When the last hone counter is removed from this card, if it’s exiled, you may cast it. It costs {4} less to cast this way."
+Oracle:{T}: You may exile an instant or sorcery card from your hand and put three hone counters on it. It gains "At the beginning of your upkeep, if this card is exiled, remove a hone counter from it" and "When the last hone counter is removed from this card, if it's exiled, you may cast it. It costs {4} less to cast this way."
 
 ALTERNATE
 
@@ -31,4 +31,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ SpellCast | ValidCard$ Card.wasCastFromExile | ValidActivatingPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell from exile, put a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 DeckHas:Ability$Counters
-Oracle:At the beginning of your upkeep, exile the top card of each opponent’s library. Until end of turn, you may cast spells from among those exiled cards, and you many spend mana as though it were mana of any color to cast those spells.\nWhenever you cast a spell from exile, put a +1/+1 counter on Nassari, Dean of Expression.
+Oracle:At the beginning of your upkeep, exile the top card of each opponent's library. Until end of turn, you may cast spells from among those exiled cards, and you may spend mana as though it were mana of any color to cast those spells.\nWhenever you cast a spell from exile, put a +1/+1 counter on Nassari, Dean of Expression.

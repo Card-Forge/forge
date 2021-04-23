@@ -3,7 +3,7 @@ ManaCost:2 U U U
 Types:Legendary Creature Human Wizard
 PT:3/4
 K:Flash
-S:Mode$ Continuous | Affected$ Creature.YouOwn+nonToken | AffectedZone$ Hand,Graveyard,Exile,Library,Command,Stack | AddKeyword$ Flash (You may cast this spell any time you could cast an instant.) | Description$ Creature cards you own that aren't on the battlefield have flash.
+S:Mode$ Continuous | Affected$ Creature.YouOwn+nonToken | AffectedZone$ Hand,Graveyard,Exile,Library,Command,Stack | AddKeyword$ Flash | Description$ Creature cards you own that aren't on the battlefield have flash.
 S:Mode$ CantBeCast | ValidCard$ Card | OnlySorcerySpeed$ True | Caster$ Opponent | Description$ Each opponent can cast spells only any time they could cast a sorcery.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/teferi_mage_of_zhalfir.jpg
-Oracle:Flash (You may cast this spell any time you could cast an instant.)\nCreature cards you own that aren't on the battlefield have flash.\nEach opponent can cast spells only any time they could cast a sorcery.
+Oracle:Flash\nCreature cards you own that aren't on the battlefield have flash.\nEach opponent can cast spells only any time they could cast a sorcery.

@@ -2,7 +2,7 @@ Name:Linessa, Zephyr Mage
 ManaCost:3 U
 Types:Legendary Creature Human Wizard
 PT:3/3
-A:AB$ ChangeZone | Cost$ X U U T | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature.cmcEQX | ChangeNum$ 1 | SpellDescription$ Return target creature with converted mana cost X to its owner's hand.
+A:AB$ ChangeZone | Cost$ X U U T | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature.cmcEQX | ChangeNum$ 1 | SpellDescription$ Return target creature with mana value X to its owner's hand.
 SVar:X:Count$xPaid
 A:AB$ ChangeZone | Cost$ Discard<1/Card.namedLinessa, Zephyr Mage> | CostDesc$ Grandeur — Discard another card named CARDNAME:| ValidTgts$ Player | TgtPrompt$ Select target player | RememberTargets$ True | ForgetOtherTargets$ True | Chooser$ Targeted | Mandatory$ True | Hidden$ True | Origin$ Battlefield | Destination$ Hand | ChangeType$ Creature.TargetedPlayerCtrl | SubAbility$ DBArtifact | SpellDescription$ Target player returns a creature they control to its owner's hand, then repeats this process for an artifact, an enchantment, and a land.
 SVar:DBArtifact:DB$ ChangeZone | DefinedPlayer$ Remembered | ChangeType$ Artifact | Origin$ Battlefield | Destination$ Hand | Chooser$ Remembered | Mandatory$ True | Hidden$ True | SubAbility$ DBEnchant
@@ -10,4 +10,4 @@ SVar:DBEnchant:DB$ ChangeZone | DefinedPlayer$ Remembered | ChangeType$ Enchantm
 SVar:DBLand:DB$ ChangeZone | DefinedPlayer$ Remembered | ChangeType$ Land | Origin$ Battlefield | Destination$ Hand | Chooser$ Remembered | Mandatory$ True | Hidden$ True
 DeckHints:Linessa, Zephyr Mage
 
-Oracle:{X}{U}{U}, {T}: Return target creature with converted mana cost X to its owner's hand.\nGrandeur — Discard another card named Linessa, Zephyr Mage: Target player returns a creature they control to its owner's hand, then repeats this process for an artifact, an enchantment, and a land.
+Oracle:{X}{U}{U}, {T}: Return target creature with mana value X to its owner's hand.\nGrandeur — Discard another card named Linessa, Zephyr Mage: Target player returns a creature they control to its owner's hand, then repeats this process for an artifact, an enchantment, and a land.

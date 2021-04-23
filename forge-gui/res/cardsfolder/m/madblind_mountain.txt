@@ -2,7 +2,7 @@ Name:Madblind Mountain
 ManaCost:no cost
 Types:Land Mountain
 K:CARDNAME enters the battlefield tapped.
-A:AB$ Shuffle | Cost$ R T | Defined$ You | IsPresent$ Permanent.Red+YouCtrl | PresentCompare$ GE2 | SpellDescription$ Shuffle your library. Activate this ability only if you control two or more red permanents.
+A:AB$ Shuffle | Cost$ R T | Defined$ You | IsPresent$ Permanent.Red+YouCtrl | PresentCompare$ GE2 | SpellDescription$ Shuffle your library. Activate only if you control two or more red permanents.
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/madblind_mountain.jpg
-Oracle:({T}: Add {R}.)\nMadblind Mountain enters the battlefield tapped.\n{R}, {T}: Shuffle your library. Activate this ability only if you control two or more red permanents.
+Oracle:({T}: Add {R}.)\nMadblind Mountain enters the battlefield tapped.\n{R}, {T}: Shuffle your library. Activate only if you control two or more red permanents.

@@ -2,11 +2,11 @@ Name:Lagonna-Band Storyteller
 ManaCost:3 W
 Types:Creature Centaur Advisor
 PT:3/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may put target enchantment card from your graveyard on top of your library. If you do, you gain life equal to its converted mana cost.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may put target enchantment card from your graveyard on top of your library. If you do, you gain life equal to its mana value.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | ValidTgts$ Enchantment.YouOwn | TgtPrompt$ Choose target enchantment from your graveyard | RememberChanged$ True | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 DeckNeeds:Type$Enchantment
 DeckHas:Ability$LifeGain
-Oracle:When Lagonna-Band Storyteller enters the battlefield, you may put target enchantment card from your graveyard on top of your library. If you do, you gain life equal to its converted mana cost.
+Oracle:When Lagonna-Band Storyteller enters the battlefield, you may put target enchantment card from your graveyard on top of your library. If you do, you gain life equal to its mana value.

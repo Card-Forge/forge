@@ -3,4 +3,4 @@ ManaCost:B
 Types:Creature Zombie
 PT:1/2
 A:AB$Discard | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Opponent | NumCards$ 1 | Mode$ TgtChoose | SorcerySpeed$ True | SpellDescription$
-Oracle:{T}, Sacrifice Liliana's Steward: Target opponent discards a card. Activate this ability only any time you could cast a sorcery.
+Oracle:{T}, Sacrifice Liliana's Steward: Target opponent discards a card. Activate only as a sorcery.

@@ -2,9 +2,9 @@ Name:Startled Awake
 ManaCost:2 U U
 Types:Sorcery
 A:SP$ Mill | Cost$ 2 U U | NumCards$ 13 | ValidTgts$ Opponent | TgtPrompt$ Choose an opponent | SpellDescription$ Target opponent mills thirteen cards.
-A:AB$ ChangeZone | Cost$ 3 U U | Origin$ Graveyard | Destination$ Battlefield | Transformed$ True | ActivationZone$ Graveyard | SorcerySpeed$ True | SpellDescription$ Return CARDNAME from your graveyard onto the battlefield transformed. Activate this ability only any time you could cast a sorcery.
+A:AB$ ChangeZone | Cost$ 3 U U | Origin$ Graveyard | Destination$ Battlefield | Transformed$ True | ActivationZone$ Graveyard | SorcerySpeed$ True | SpellDescription$ Return CARDNAME from your graveyard onto the battlefield transformed. Activate only any time you could cast a sorcery.
 AlternateMode:DoubleFaced
-Oracle:Target opponent mills thirteen cards.\n{3}{U}{U}: Put Startled Awake from your graveyard onto the battlefield transformed. Activate this ability only any time you could cast a sorcery.
+Oracle:Target opponent mills thirteen cards.\n{3}{U}{U}: Put Startled Awake from your graveyard onto the battlefield transformed. Activate only as a sorcery.
 
 ALTERNATE
 
@@ -15,5 +15,5 @@ Types:Creature Nightmare
 PT:1/1
 K:Skulk
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigBounce | TriggerDescription$ When CARDNAME deals combat damage to a player, return it to its owner's hand.
-SVar:TrigBounce:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand 
+SVar:TrigBounce:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand
 Oracle:Skulk (This creature can't be blocked by creatures with greater power.)\nWhen Persistent Nightmare deals combat damage to a player, return it to its owner's hand.

@@ -2,7 +2,7 @@ Name:Renegade Rallier
 ManaCost:1 G W
 Types:Creature Human Warrior
 PT:3/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | Revolt$ True | TriggerDescription$ Revolt — When CARDNAME enters the battlefield, if a permanent you controlled left the battlefield this turn, return target permanent card with converted mana cost 2 or less from your graveyard to the battlefield.
-SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Permanent.YouOwn+cmcLE2 | TgtPrompt$ Select target permanent card with converted mana cost 2 or less in your graveyard
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | Revolt$ True | TriggerDescription$ Revolt — When CARDNAME enters the battlefield, if a permanent you controlled left the battlefield this turn, return target permanent card with mana value 2 or less from your graveyard to the battlefield.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Permanent.YouOwn+cmcLE2 | TgtPrompt$ Select target permanent card with mana value 2 or less in your graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/renegade_rallier.jpg
-Oracle:Revolt — When Renegade Rallier enters the battlefield, if a permanent you controlled left the battlefield this turn, return target permanent card with converted mana cost 2 or less from your graveyard to the battlefield.
+Oracle:Revolt — When Renegade Rallier enters the battlefield, if a permanent you controlled left the battlefield this turn, return target permanent card with mana value 2 or less from your graveyard to the battlefield.

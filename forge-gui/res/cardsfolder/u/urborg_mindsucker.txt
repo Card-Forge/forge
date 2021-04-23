@@ -2,6 +2,6 @@ Name:Urborg Mindsucker
 ManaCost:2 B
 Types:Creature Horror
 PT:2/2
-A:AB$ Discard | Cost$ B Sac<1/CARDNAME> | ValidTgts$ Opponent | SorcerySpeed$ True | NumCards$ 1 | Mode$ Random | SpellDescription$ Target opponent discards a card at random. Activate this ability only any time you could cast a sorcery.
+A:AB$ Discard | Cost$ B Sac<1/CARDNAME> | ValidTgts$ Opponent | SorcerySpeed$ True | NumCards$ 1 | Mode$ Random | SpellDescription$ Target opponent discards a card at random. Activate only as a sorcery.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urborg_mindsucker.jpg
-Oracle:{B}, Sacrifice Urborg Mindsucker: Target opponent discards a card at random. Activate this ability only any time you could cast a sorcery.
+Oracle:{B}, Sacrifice Urborg Mindsucker: Target opponent discards a card at random. Activate only as a sorcery.

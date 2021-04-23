@@ -2,8 +2,8 @@ Name:Rimewind Taskmage
 ManaCost:1 U
 Types:Creature Human Wizard
 PT:1/2
-A:AB$ TapOrUntap | Cost$ 1 T | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | IsPresent$ Permanent.Snow+YouCtrl | PresentCompare$ GE4 | SpellDescription$ You may tap or untap target permanent. Activate this ability only if you control four or more snow permanents.
+A:AB$ TapOrUntap | Cost$ 1 T | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | IsPresent$ Permanent.Snow+YouCtrl | PresentCompare$ GE4 | SpellDescription$ You may tap or untap target permanent. Activate only if you control four or more snow permanents.
 AI:RemoveDeck:Random
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rimewind_taskmage.jpg
-Oracle:{1}, {T}: You may tap or untap target permanent. Activate this ability only if you control four or more snow permanents.
+Oracle:{1}, {T}: You may tap or untap target permanent. Activate only if you control four or more snow permanents.

@@ -2,11 +2,11 @@ Name:Refuse
 ManaCost:3 R
 AlternateMode: Split
 Types:Instant
-A:SP$ Pump | Cost$ 3 R | ValidTgts$ Card | TgtZone$ Stack | TgtPrompt$ Select target spell | PumpZone$ Stack | StackDescription$ None | SubAbility$ DBDmg | SpellDescription$ CARDNAME deals damage to target spell's controller equal to that spell's converted mana cost.
+A:SP$ Pump | Cost$ 3 R | ValidTgts$ Card | TgtZone$ Stack | TgtPrompt$ Select target spell | PumpZone$ Stack | StackDescription$ None | SubAbility$ DBDmg | SpellDescription$ CARDNAME deals damage to target spell's controller equal to that spell's mana value.
 SVar:DBDmg:DB$ DealDamage | Defined$ TargetedController | NumDmg$ X
 SVar:X:Targeted$CardManaCost
 AI:RemoveDeck:All
-Oracle:Refuse deals damage to target spell's controller equal to that spell's converted mana cost.
+Oracle:Refuse deals damage to target spell's controller equal to that spell's mana value.
 
 ALTERNATE
 

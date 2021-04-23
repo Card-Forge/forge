@@ -2,7 +2,7 @@ Name:Higure, the Still Wind Avatar
 ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:-1/+3
-T:Mode$ DamageDone | ValidSource$ Creature.nonToken+YouCtrl | ValidTarget$ Opponent | TriggerZones$ Command | CombatDamage$ True | Execute$ TrigChangeZone | TriggerDescription$ Whenever a nontoken creature you control deals combat damage to an opponent, choose a creature card at random from your library, reveal that card, and put it into your hand. Then shuffle your library.
+T:Mode$ DamageDone | ValidSource$ Creature.nonToken+YouCtrl | ValidTarget$ Opponent | TriggerZones$ Command | CombatDamage$ True | Execute$ TrigChangeZone | TriggerDescription$ Whenever a nontoken creature you control deals combat damage to an opponent, choose a creature card at random from your library, reveal that card, put it into your hand, then shuffle.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ True | ChangeType$ Card.Creature | ChangeNum$ 1
 SVar:Picture:https://downloads.cardforge.org/images/cards/VAN/Higure, the Still Wind Avatar.full.jpg
-Oracle:Hand -1, life +3\nWhenever a nontoken creature you control deals combat damage to an opponent, choose a creature card at random from your library, reveal that card, and put it into your hand. Then shuffle your library.
+Oracle:Hand -1, life +3\nWhenever a nontoken creature you control deals combat damage to an opponent, choose a creature card at random from your library, reveal that card, put it into your hand, then shuffle.

@@ -1,6 +1,6 @@
 Name:Vessel of Malignity
 ManaCost:1 B
 Types:Enchantment
-A:AB$ ChangeZone | Cost$ 1 B Sac<1/CARDNAME> | ValidTgts$ Opponent | SorcerySpeed$ True | TgtPrompt$ Select target opponent | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ 2 | Chooser$ Targeted | IsCurse$ True | Mandatory$ True | Hidden$ True | StackDescription$ SpellDescription | SpellDescription$ Target opponent exiles two cards from their hand. Activate this ability only any time you could cast a sorcery.
+A:AB$ ChangeZone | Cost$ 1 B Sac<1/CARDNAME> | ValidTgts$ Opponent | SorcerySpeed$ True | TgtPrompt$ Select target opponent | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ 2 | Chooser$ Targeted | IsCurse$ True | Mandatory$ True | Hidden$ True | StackDescription$ SpellDescription | SpellDescription$ Target opponent exiles two cards from their hand. Activate only as a sorcery.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vessel_of_malignity.jpg
-Oracle:{1}{B}, Sacrifice Vessel of Malignity: Target opponent exiles two cards from their hand. Activate this ability only any time you could cast a sorcery.
+Oracle:{1}{B}, Sacrifice Vessel of Malignity: Target opponent exiles two cards from their hand. Activate only as a sorcery.

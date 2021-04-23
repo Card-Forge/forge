@@ -3,5 +3,5 @@ ManaCost:2 B
 Types:Creature Human Wizard
 PT:2/2
 A:AB$ Pump | Cost$ W U B R G | Defined$ Self | NumAtt$ +2 | NumDef$ +2 | KW$ Fear | ActivationLimit$ 1 | SubAbility$ DBPump | SpellDescription$ CARDNAME gets +2/+2 and gains fear until end of turn.
-SVar:DBPump:DB$ Pump | NumAtt$ -2 | NumDef$ -2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | SpellDescription$ Target creature gets -2/-2 until end of turn. Activate this ability only once each turn.
-Oracle:{W}{U}{B}{R}{G}: Fleshformer gets +2/+2 and gains fear until end of turn. Target creature gets -2/-2 until end of turn. Activate this ability only during your turn. (A creature with fear can't be blocked except by artifact creatures and/or black creatures.)
+SVar:DBPump:DB$ Pump | NumAtt$ -2 | NumDef$ -2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | SpellDescription$ Target creature gets -2/-2 until end of turn. Activate only once each turn.
+Oracle:{W}{U}{B}{R}{G}: Fleshformer gets +2/+2 and gains fear until end of turn. Target creature gets -2/-2 until end of turn. Activate only during your turn. (A creature with fear can't be blocked except by artifact creatures and/or black creatures.)

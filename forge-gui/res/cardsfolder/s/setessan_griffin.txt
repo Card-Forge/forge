@@ -3,6 +3,6 @@ ManaCost:4 W
 Types:Creature Griffin
 PT:3/2
 K:Flying
-A:AB$ Pump | Cost$ 2 G G | NumAtt$ +2 | NumDef$ +2 | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +2/+2 until end of turn. Activate this ability only once each turn.
+A:AB$ Pump | Cost$ 2 G G | NumAtt$ +2 | NumDef$ +2 | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +2/+2 until end of turn. Activate only once each turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/setessan_griffin.jpg
-Oracle:Flying\n{2}{G}{G}: Setessan Griffin gets +2/+2 until end of turn. Activate this ability only once each turn.
+Oracle:Flying\n{2}{G}{G}: Setessan Griffin gets +2/+2 until end of turn. Activate only once each turn.

@@ -4,7 +4,7 @@ Types:Creature Human Warlock
 PT:5/1
 K:Haste
 K:CARDNAME attacks each combat if able.
-A:AB$ PutCounter | Cost$ 1 B ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ Indestructible | CounterNum$ 1 | SorcerySpeed$ True | SpellDescription$ Put an indestructible counter on target creature. Activate this ability only any time you could cast a sorcery.
+A:AB$ PutCounter | Cost$ 1 B ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ Indestructible | CounterNum$ 1 | SorcerySpeed$ True | SpellDescription$ Put an indestructible counter on target creature. Activate only as a sorcery.
 DeckHas:Ability$Counters & Ability$Graveyard
 SVar:AIPreference:ExileFromGraveCost$Card.Self
-Oracle:Haste\nDaring Fiendbonder attacks each combat if able.\n{1}{B}, Exile Daring Fiendbonder from your graveyard: Put an indestructible counter on target creature. Activate this ability only any time you could cast a sorcery.
+Oracle:Haste\nDaring Fiendbonder attacks each combat if able.\n{1}{B}, Exile Daring Fiendbonder from your graveyard: Put an indestructible counter on target creature. Activate only as a sorcery.

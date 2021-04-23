@@ -4,8 +4,8 @@ Types:Legendary Creature Human Cleric
 PT:2/2
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ PutCounterOneEach | TriggerDescription$ At the beginning of your end step, for each player, put a +1/+1 counter on up to one target creature that player controls.
 SVar:PutCounterOneEach:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature each player controls. | TargetMin$ 0 | TargetMax$ OneEach | TargetsWithDifferentControllers$ True
-S:Mode$ CantAttackUnless | ValidCard$ Creature.HasCounters | Target$ You,Planeswalker.YouCtrl | Cost$ X | RememberingAttacker$ True | Description$ Each creature with one or more counters on it can't attack you or a planeswalker you control unless its controller pays {X}, where X is the number of counters on that creature.
+S:Mode$ CantAttackUnless | ValidCard$ Creature.HasCounters | Target$ You,Planeswalker.YouCtrl | Cost$ X | RememberingAttacker$ True | Description$ Each creature with one or more counters on it can't attack you or planeswalkers you control unless its controller pays {X}, where X is the number of counters on that creature.
 SVar:OneEach:PlayerCountPlayers$Amount
 SVar:X:Remembered$CardCounters.ALL
 DeckHas:Ability$Counters
-Oracle:At the beginning of your end step, for each player, put a +1/+1 counter on up to one target creature that player controls.\nEach creature with one or more counters on it can’t attack you or planeswalkers you control unless its controller pays {X}, where X is the number of counters on that creature.
+Oracle:At the beginning of your end step, for each player, put a +1/+1 counter on up to one target creature that player controls.\nEach creature with one or more counters on it can't attack you or planeswalkers you control unless its controller pays {X}, where X is the number of counters on that creature.

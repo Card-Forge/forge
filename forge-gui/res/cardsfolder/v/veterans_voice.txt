@@ -3,8 +3,8 @@ ManaCost:R
 Types:Enchantment Aura
 K:Enchant creature you control
 A:SP$ Attach | Cost$ R | ValidTgts$ Creature.YouCtrl | AILogic$ Pump
-A:AB$ Pump | Cost$ tapXType<1/Creature.EnchantedBy/Enchanted Creature> | ValidTgts$ Creature.NotEnchantedBy | TgtPrompt$ Select target creature other than the creature tapped | NumAtt$ 2 | NumDef$ 1 | CostDesc$ Tap enchanted creature: | SpellDescription$ Target creature other than the creature tapped this way gets +2/+1 until end of turn. Activate this ability only if enchanted creature is untapped.
+A:AB$ Pump | Cost$ tapXType<1/Creature.EnchantedBy/Enchanted Creature> | ValidTgts$ Creature.NotEnchantedBy | TgtPrompt$ Select target creature other than the creature tapped | NumAtt$ 2 | NumDef$ 1 | CostDesc$ Tap enchanted creature: | SpellDescription$ Target creature other than the creature tapped this way gets +2/+1 until end of turn. Activate only if enchanted creature is untapped.
 AI:RemoveDeck:All
 SVar:NonStackingAttachEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veterans_voice.jpg
-Oracle:Enchant creature you control\nTap enchanted creature: Target creature other than the creature tapped this way gets +2/+1 until end of turn. Activate this ability only if enchanted creature is untapped.
+Oracle:Enchant creature you control\nTap enchanted creature: Target creature other than the creature tapped this way gets +2/+1 until end of turn. Activate only if enchanted creature is untapped.

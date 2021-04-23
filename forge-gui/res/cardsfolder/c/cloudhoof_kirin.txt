@@ -3,7 +3,7 @@ ManaCost:3 U U
 Types:Legendary Creature Kirin Spirit
 PT:4/4
 K:Flying
-T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigMill | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may have target player mill X cards, where X is that spell's converted mana cost.
+T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigMill | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may have target player mill X cards, where X is that spell's mana value.
 SVar:TrigMill:DB$ Mill | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ X
 SVar:X:TriggerCount$CastSACMC
-Oracle:Flying\nWhenever you cast a Spirit or Arcane spell, you may have target player mill X cards, where X is that spell's converted mana cost.
+Oracle:Flying\nWhenever you cast a Spirit or Arcane spell, you may have target player mill X cards, where X is that spell's mana value.

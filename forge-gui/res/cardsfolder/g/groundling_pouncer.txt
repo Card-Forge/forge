@@ -2,6 +2,6 @@ Name:Groundling Pouncer
 ManaCost:1 GU
 Types:Creature Faerie
 PT:2/1
-A:AB$ Pump | Cost$ GU | Defined$ Self | NumAtt$ 1 | NumDef$ 3 | KW$ Flying | ActivationLimit$ 1 | IsPresent$ Creature.withFlying+OppCtrl | SpellDescription$ CARDNAME gets +1/+3 and gains flying until end of turn. Activate this ability only once each turn and only if an opponent controls a creature with flying.
+A:AB$ Pump | Cost$ GU | Defined$ Self | NumAtt$ 1 | NumDef$ 3 | KW$ Flying | ActivationLimit$ 1 | IsPresent$ Creature.withFlying+OppCtrl | SpellDescription$ CARDNAME gets +1/+3 and gains flying until end of turn. Activate only once each turn and only if an opponent controls a creature with flying.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/groundling_pouncer.jpg
-Oracle:{G/U}: Groundling Pouncer gets +1/+3 and gains flying until end of turn. Activate this ability only once each turn and only if an opponent controls a creature with flying.
+Oracle:{G/U}: Groundling Pouncer gets +1/+3 and gains flying until end of turn. Activate only once each turn and only if an opponent controls a creature with flying.

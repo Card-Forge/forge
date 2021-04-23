@@ -1,9 +1,9 @@
 Name:Jeweled Amulet
 ManaCost:0
 Types:Artifact
-A:AB$ PutCounter | Cost$ 1 T | RememberCostMana$ True | CounterType$ CHARGE | CounterNum$ 1 | CheckSVar$ X | SVarCompare$ EQ0 | SpellDescription$ Put a charge counter on CARDNAME. Note the type of mana spent to pay this activation cost. Activate this ability only if there are no charge counters on CARDNAME.
+A:AB$ PutCounter | Cost$ 1 T | RememberCostMana$ True | CounterType$ CHARGE | CounterNum$ 1 | CheckSVar$ X | SVarCompare$ EQ0 | SpellDescription$ Put a charge counter on CARDNAME. Note the type of mana spent to pay this activation cost. Activate only if there are no charge counters on CARDNAME.
 SVar:X:Count$CardCounters.CHARGE
 A:AB$ Mana | Cost$ T SubCounter<1/CHARGE> | Produced$ Special LastNotedType | SpellDescription$ Add one mana of CARDNAME's last noted type.
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jeweled_amulet.jpg
-Oracle:{1}, {T}: Put a charge counter on Jeweled Amulet. Note the type of mana spent to pay this activation cost. Activate this ability only if there are no charge counters on Jeweled Amulet.\n{T}, Remove a charge counter from Jeweled Amulet: Add one mana of Jeweled Amulet's last noted type.
+Oracle:{1}, {T}: Put a charge counter on Jeweled Amulet. Note the type of mana spent to pay this activation cost. Activate only if there are no charge counters on Jeweled Amulet.\n{T}, Remove a charge counter from Jeweled Amulet: Add one mana of Jeweled Amulet's last noted type.

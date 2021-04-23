@@ -2,9 +2,9 @@ Name:Rionya, Fire Dancer
 ManaCost:3 R R
 Types:Legendary Creature Human Wizard
 PT:3/4
-T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, create X tokens that are copies of another target creature you control, where X is one plus the number of instant and sorcery spells you’ve cast this turn. They gain haste. Exile them at the beginning of the next end step.
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, create X tokens that are copies of another target creature you control, where X is one plus the number of instant and sorcery spells you've cast this turn. They gain haste. Exile them at the beginning of the next end step.
 SVar:TrigCopy:DB$ CopyPermanent | NumCopies$ X | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control | AddKeywords$ Haste | AtEOT$ Exile
 SVar:X:Count$ThisTurnCast_Instant.YouCtrl,Sorcery.YouCtrl/Plus.1
 DeckNeeds:Type$Instant|Sorcery
 DeckHas:Ability$Token
-Oracle:At the beginning of combat on your turn, create X tokens that are copies of another target creature you control, where X is one plus the number of instant and sorcery spells you’ve cast this turn. They gain haste. Exile them at the beginning of the next end step.
+Oracle:At the beginning of combat on your turn, create X tokens that are copies of another target creature you control, where X is one plus the number of instant and sorcery spells you've cast this turn. They gain haste. Exile them at the beginning of the next end step.

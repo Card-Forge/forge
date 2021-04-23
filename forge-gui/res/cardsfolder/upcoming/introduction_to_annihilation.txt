@@ -3,4 +3,4 @@ ManaCost:5
 Types:Sorcery Lesson
 A:SP$ ChangeZone | Cost$ 5 | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand | SubAbility$ DBDraw | SpellDescription$ Exile target nonland permanent. Its controller draws a card.
 SVar:DBDraw:DB$Draw | Defined$ TargetedController | NumCards$ 1
-Oracle:Exile target nonland permanent.\nIts controller draws a card.
+Oracle:Exile target nonland permanent. Its controller draws a card.

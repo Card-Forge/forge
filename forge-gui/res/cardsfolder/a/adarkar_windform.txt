@@ -6,4 +6,4 @@ K:Flying
 A:AB$ Debuff | Cost$ 1 S | ValidTgts$ Creature | TgtPrompt$ Select target creature | Keywords$ Flying | SpellDescription$ Target creature loses flying until end of turn.
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/adarkar_windform.jpg
-Oracle:Flying\n{1}{S}: Target creature loses flying until end of turn. ({S} can be paid with one mana from a snow permanent.)
+Oracle:Flying\n{1}{S}: Target creature loses flying until end of turn. ({S} can be paid with one mana from a snow source.)

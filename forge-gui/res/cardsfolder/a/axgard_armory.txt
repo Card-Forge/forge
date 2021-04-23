@@ -3,9 +3,9 @@ ManaCost:no cost
 Types:Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
-A:AB$ ChangeZone | Cost$ 1 R R W T Sac<1/CARDNAME> | Origin$ Library | Destination$ Hand | ChangeType$ Aura | ChangeNum$ 1 | SubAbility$ DBChange | StackDescription$ {p:You} searches their library for an Aura card and/or an Equipment card, reveals them, puts them into their hand, then shuffles their library. | SpellDescription$ Search your library for an Aura card and/or an Equipment card, reveal them, put them into your hand, then shuffle your library.
+A:AB$ ChangeZone | Cost$ 1 R R W T Sac<1/CARDNAME> | Origin$ Library | Destination$ Hand | ChangeType$ Aura | ChangeNum$ 1 | SubAbility$ DBChange | StackDescription$ {p:You} searches their library for an Aura card and/or an Equipment card, reveals them, puts them into their hand, then shuffles their library. | SpellDescription$ Search your library for an Aura card and/or an Equipment card, reveal them, put them into your hand, then shuffle.
 SVar:DBChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Equipment | ChangeNum$ 1 | Shuffle$ True | StackDescription$ None
 AI:RemoveDeck:Random
 DeckNeeds:Type$Aura|Equipment
 DeckHas:Ability$Sacrifice
-Oracle:Axgard Armory enters the battlefield tapped.\n{T}: Add {W}.\n{1}{R}{R}{W}, {T}, Sacrifice Axgard Armory: Search your library for an Aura card and/or an Equipment card, reveal them, put them into your hand, then shuffle your library.
+Oracle:Axgard Armory enters the battlefield tapped.\n{T}: Add {W}.\n{1}{R}{R}{W}, {T}, Sacrifice Axgard Armory: Search your library for an Aura card and/or an Equipment card, reveal them, put them into your hand, then shuffle.

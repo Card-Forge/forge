@@ -6,4 +6,4 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Shadow & Prevent all damage that would be dealt by CARDNAME. | Description$ Enchanted creature has shadow. Prevent all damage that would be dealt by enchanted creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/temporal_isolation.jpg
-Oracle:Flash (You may cast this spell any time you could cast an instant.)\nEnchant creature\nEnchanted creature has shadow. (It can block or be blocked by only creatures with shadow.)\nPrevent all damage that would be dealt by enchanted creature.
+Oracle:Flash\nEnchant creature\nEnchanted creature has shadow. (It can block or be blocked by only creatures with shadow.)\nPrevent all damage that would be dealt by enchanted creature.

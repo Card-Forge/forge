@@ -2,7 +2,7 @@ Name:Gemstone Caverns
 ManaCost:no cost
 Types:Legendary Land
 K:MayEffectFromOpeningHand:FromOpeningHand:!PlayFirst
-SVar:FromOpeningHand:DB$ ChangeZone | Defined$ Self | Origin$ Hand | Destination$ Battlefield | SubAbility$ LuckCounter | SpellDescription$ If CARDNAME is in your opening hand and you're not playing first, you may begin the game with CARDNAME on the battlefield with a luck counter on it. If you do, exile a card from your hand.
+SVar:FromOpeningHand:DB$ ChangeZone | Defined$ Self | Origin$ Hand | Destination$ Battlefield | SubAbility$ LuckCounter | SpellDescription$ If CARDNAME is in your opening hand and you're not the starting player, you may begin the game with CARDNAME on the battlefield with a luck counter on it. If you do, exile a card from your hand.
 SVar:LuckCounter:DB$ PutCounter | CounterType$ LUCK | CounterNum$ 1 | Defined$ Self | SubAbility$ ExileFromHand
 SVar:ExileFromHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | SpellDescription$ If you do, exile a card from your hand.
 A:AB$ Mana | Cost$ T | Produced$ C | ConditionCheckSVar$ CheckCounter | ConditionSVarCompare$ EQ0 | SubAbility$ DBMana | SpellDescription$ Add {C}. If CARDNAME has a luck counter on it, instead add one mana of any color.
@@ -11,4 +11,4 @@ SVar:CheckCounter:Count$CardCounters.LUCK
 #TODO: The AI is not yet fully aware that this card can generate any color of mana at any time if it has a luck counter on it.
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gemstone_caverns.jpg
-Oracle:If Gemstone Caverns is in your opening hand and you're not playing first, you may begin the game with Gemstone Caverns on the battlefield with a luck counter on it. If you do, exile a card from your hand.\n{T}: Add {C}. If Gemstone Caverns has a luck counter on it, instead add one mana of any color.
+Oracle:If Gemstone Caverns is in your opening hand and you're not the starting player, you may begin the game with Gemstone Caverns on the battlefield with a luck counter on it. If you do, exile a card from your hand.\n{T}: Add {C}. If Gemstone Caverns has a luck counter on it, instead add one mana of any color.

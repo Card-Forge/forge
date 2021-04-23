@@ -3,6 +3,6 @@ ManaCost:2 B
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 B | ValidTgts$ Creature | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Menace | Description$ Enchanted creature gets +2/+2, has menace, and can't attack you or a planeswalker you control. (It can't be blocked except by two or more creatures.)
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Menace | Description$ Enchanted creature gets +2/+2, has menace, and can't attack you or planeswalkers you control. (It can't be blocked except by two or more creatures.)
 S:Mode$ CantAttack | ValidCard$ Creature.EnchantedBy | Target$ You,Planeswalker.YouCtrl
-Oracle:Enchant creature\nEnchanted creature gets +2/+2, has menace, and can't attack you or a planeswalker you control. (It can't be blocked except by two or more creatures.)
+Oracle:Enchant creature\nEnchanted creature gets +2/+2, has menace, and can't attack you or planeswalkers you control. (It can't be blocked except by two or more creatures.)

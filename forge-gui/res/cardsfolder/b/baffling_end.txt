@@ -1,9 +1,9 @@
 Name:Baffling End
 ManaCost:1 W
 Types:Enchantment
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, exile target creature an opponent controls with converted mana cost 3 or less.
-SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Creature.OppCtrl+cmcLE3 | TgtPrompt$ Select target creature an opponent controls with converted mana cost 3 or less | Origin$ Battlefield | Destination$ Exile
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, exile target creature an opponent controls with mana value 3 or less.
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Creature.OppCtrl+cmcLE3 | TgtPrompt$ Select target creature an opponent controls with mana value 3 or less | Origin$ Battlefield | Destination$ Exile
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, target opponent creates a 3/3 green Dinosaur creature token with trample.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_3_3_dinosaur_trample | ValidTgts$ Opponent | TokenOwner$ Targeted | LegacyImage$ g 3 3 dinosaur trample rix
 SVar:Picture:http://www.wizards.com/global/images/magic/general/baffling_end.jpg
-Oracle:When Baffling End enters the battlefield, exile target creature an opponent controls with converted mana cost 3 or less.\nWhen Baffling End leaves the battlefield, target opponent creates a 3/3 green Dinosaur creature token with trample.
+Oracle:When Baffling End enters the battlefield, exile target creature an opponent controls with mana value 3 or less.\nWhen Baffling End leaves the battlefield, target opponent creates a 3/3 green Dinosaur creature token with trample.

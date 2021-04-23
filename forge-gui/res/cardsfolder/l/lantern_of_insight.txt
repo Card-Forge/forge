@@ -2,7 +2,7 @@ Name:Lantern of Insight
 ManaCost:1
 Types:Artifact
 S:Mode$ Continuous | Affected$ Card.TopLibrary | AffectedZone$ Library | MayLookAt$ Player | Description$ Players play with the top card of their libraries revealed.
-A:AB$ Shuffle | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ Target player shuffles their library.
+A:AB$ Shuffle | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ Target player shuffles.
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lantern_of_insight.jpg
-Oracle:Players play with the top card of their libraries revealed.\n{T}, Sacrifice Lantern of Insight: Target player shuffles their library.
+Oracle:Players play with the top card of their libraries revealed.\n{T}, Sacrifice Lantern of Insight: Target player shuffles.

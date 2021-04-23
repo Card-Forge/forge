@@ -7,4 +7,4 @@ SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | Condition
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:IsInstantOrSorcery:Remembered$Valid Instant,Sorcery
 DeckHas:Ability$Counters
-Oracle:{T}: Search your library for a card, put it into your graveyard, then shuffle. If it’s an instant or sorcery card, put a +1/+1 counter on Oriq Loremage.
+Oracle:{T}: Search your library for a card, put it into your graveyard, then shuffle. If it's an instant or sorcery card, put a +1/+1 counter on Oriq Loremage.

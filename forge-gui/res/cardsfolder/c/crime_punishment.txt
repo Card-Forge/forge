@@ -11,6 +11,6 @@ ALTERNATE
 Name:Punishment
 ManaCost:X B G
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ X B G | ValidCards$ Artifact.cmcEQX,Creature.cmcEQX,Enchantment.cmcEQX | SpellDescription$ Destroy each artifact, creature, and enchantment with converted mana cost X.
+A:SP$ DestroyAll | Cost$ X B G | ValidCards$ Artifact.cmcEQX,Creature.cmcEQX,Enchantment.cmcEQX | SpellDescription$ Destroy each artifact, creature, and enchantment with mana value X.
 SVar:X:Count$xPaid
-Oracle:Destroy each artifact, creature, and enchantment with converted mana cost X.
+Oracle:Destroy each artifact, creature, and enchantment with mana value X.

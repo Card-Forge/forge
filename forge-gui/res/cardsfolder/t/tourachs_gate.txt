@@ -11,4 +11,4 @@ A:AB$ PumpAll | Cost$ tapXType<1/Land.EnchantedBy/Enchanted Land> | ValidCards$ 
 AI:RemoveDeck:Random
 SVar:NonStackingAttachEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tourachs_gate.jpg
-Oracle:Enchant land you control\nSacrifice a Thrull: Put three time counters on Tourach's Gate.\nAt the beginning of your upkeep, remove a time counter from Tourach's Gate. If there are no time counters on Tourach's Gate, sacrifice it.\nTap enchanted land: Attacking creatures you control get +2/-1 until end of turn. Activate this ability only if enchanted land is untapped.
+Oracle:Enchant land you control\nSacrifice a Thrull: Put three time counters on Tourach's Gate.\nAt the beginning of your upkeep, remove a time counter from Tourach's Gate. If there are no time counters on Tourach's Gate, sacrifice it.\nTap enchanted land: Attacking creatures you control get +2/-1 until end of turn. Activate only if enchanted land is untapped.

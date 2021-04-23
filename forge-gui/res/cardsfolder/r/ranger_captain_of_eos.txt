@@ -2,8 +2,8 @@ Name:Ranger-Captain of Eos
 ManaCost:1 W W
 Types:Creature Human Soldier
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | OptionalDecider$ You | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a creature card with converted mana cost 1 or less, reveal that card, reveal it, put it into your hand, then shuffle your library.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | OptionalDecider$ You | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a creature card with mana value 1 or less, reveal that card, reveal it, put it into your hand, then shuffle.
 SVar:TrigChange:DB$ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Creature.cmcLE1 | ChangeNum$ 1 | ShuffleNonMandatory$ True
 A:AB$ Effect | Cost$ Sac<1/CARDNAME> | StaticAbilities$ STCantBeCast | SpellDescription$ Your opponents can't cast noncreature spells this turn.
 SVar:STCantBeCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card.nonCreature | Caster$ Opponent | Description$ Your opponents can't cast noncreature spells this turn.
-Oracle:When Ranger-Captain of Eos enters the battlefield, you may search your library for a creature card with converted mana cost 1 or less, reveal it, put it into your hand, then shuffle your library.\nSacrifice Ranger-Captain of Eos: Your opponents can't cast noncreature spells this turn.
+Oracle:When Ranger-Captain of Eos enters the battlefield, you may search your library for a creature card with mana value 1 or less, reveal it, put it into your hand, then shuffle.\nSacrifice Ranger-Captain of Eos: Your opponents can't cast noncreature spells this turn.

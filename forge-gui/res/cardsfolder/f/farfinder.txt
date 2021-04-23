@@ -3,6 +3,6 @@ ManaCost:3
 Types:Creature Fox
 PT:1/1
 K:Vigilance
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1 | ShuffleNonMandatory$ True
-Oracle:Vigilance\nWhen Farfinder enters the battlefield, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.
+Oracle:Vigilance\nWhen Farfinder enters the battlefield, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle.

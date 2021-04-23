@@ -1,6 +1,6 @@
 Name:Fragmentize
 ManaCost:W
 Types:Sorcery
-A:SP$ Destroy | Cost$ W | ValidTgts$ Artifact.cmcLE4,Enchantment.cmcLE4 | TgtPrompt$ Select target artifact or enchantment with converted mana cost 4 or less | SpellDescription$ Destroy target artifact or enchantment with converted mana cost 4 or less.
+A:SP$ Destroy | Cost$ W | ValidTgts$ Artifact.cmcLE4,Enchantment.cmcLE4 | TgtPrompt$ Select target artifact or enchantment with mana value 4 or less | SpellDescription$ Destroy target artifact or enchantment with mana value 4 or less.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fragmentize.jpg
-Oracle:Destroy target artifact or enchantment with converted mana cost 4 or less.
+Oracle:Destroy target artifact or enchantment with mana value 4 or less.

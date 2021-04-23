@@ -2,6 +2,6 @@ Name:Gaea's Touch
 ManaCost:G G
 Types:Enchantment
 A:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ G G | SpellDescription$ Add {G}{G}.
-A:AB$ ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Battlefield | ChangeType$ Forest.Basic+YouCtrl | ChangeNum$ 1 | SorcerySpeed$ True | ActivationLimit$ 1 | SpellDescription$ You may put a basic Forest card from your hand onto the battlefield. Activate this ability only any time you could cast a sorcery and only once each turn.
+A:AB$ ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Battlefield | ChangeType$ Forest.Basic+YouCtrl | ChangeNum$ 1 | SorcerySpeed$ True | ActivationLimit$ 1 | SpellDescription$ You may put a basic Forest card from your hand onto the battlefield. Activate only as a sorcery and only once each turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gaeas_touch.jpg
-Oracle:{0}: You may put a basic Forest card from your hand onto the battlefield. Activate this ability only any time you could cast a sorcery and only once each turn.\nSacrifice Gaea's Touch: Add {G}{G}.
+Oracle:{0}: You may put a basic Forest card from your hand onto the battlefield. Activate only as a sorcery and only once each turn.\nSacrifice Gaea's Touch: Add {G}{G}.

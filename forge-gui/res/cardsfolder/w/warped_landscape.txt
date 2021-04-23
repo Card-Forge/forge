@@ -2,6 +2,6 @@ Name:Warped Landscape
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ ChangeZone | Cost$ 2 T Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
+A:AB$ ChangeZone | Cost$ 2 T Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warped_landscape.jpg
-Oracle:{T}: Add {C}.\n{2}, {T}, Sacrifice Warped Landscape: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
+Oracle:{T}: Add {C}.\n{2}, {T}, Sacrifice Warped Landscape: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.

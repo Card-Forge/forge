@@ -1,6 +1,6 @@
 Name:Polluted Delta
 ManaCost:no cost
 Types:Land
-A:AB$ ChangeZone | Cost$ T PayLife<1> Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | ChangeType$ Island,Swamp | ChangeNum$ 1 | SpellDescription$ Search your library for a Island or Swamp card, put it onto the battlefield, then shuffle your library.
+A:AB$ ChangeZone | Cost$ T PayLife<1> Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | ChangeType$ Island,Swamp | ChangeNum$ 1 | SpellDescription$ Search your library for a Island or Swamp card, put it onto the battlefield, then shuffle.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/polluted_delta.jpg
-Oracle:{T}, Pay 1 life, Sacrifice Polluted Delta: Search your library for an Island or Swamp card, put it onto the battlefield, then shuffle your library.
+Oracle:{T}, Pay 1 life, Sacrifice Polluted Delta: Search your library for an Island or Swamp card, put it onto the battlefield, then shuffle.

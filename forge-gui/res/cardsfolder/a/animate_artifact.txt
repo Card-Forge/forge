@@ -3,8 +3,8 @@ ManaCost:3 U
 Types:Enchantment Aura
 K:Enchant artifact
 A:SP$ Attach | Cost$ 3 U | ValidTgts$ Artifact | AITgts$ Card.nonCreature | AILogic$ Animate
-S:Mode$ Continuous | Affected$ Card.AttachedBy+nonCreature | SetPower$ AffectedX | SetToughness$ AffectedX | AddType$ Creature | Description$ As long as enchanted artifact isn't a creature, it's an artifact creature with power and toughness each equal to its converted mana cost.
+S:Mode$ Continuous | Affected$ Card.AttachedBy+nonCreature | SetPower$ AffectedX | SetToughness$ AffectedX | AddType$ Creature | Description$ As long as enchanted artifact isn't a creature, it's an artifact creature with power and toughness each equal to its mana value.
 SVar:AffectedX:Count$CardManaCost
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/animate_artifact.jpg
-Oracle:Enchant artifact\nAs long as enchanted artifact isn't a creature, it's an artifact creature with power and toughness each equal to its converted mana cost.
+Oracle:Enchant artifact\nAs long as enchanted artifact isn't a creature, it's an artifact creature with power and toughness each equal to its mana value.

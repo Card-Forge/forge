@@ -1,7 +1,7 @@
 Name:Scourglass
 ManaCost:3 W W
 Types:Artifact
-A:AB$ DestroyAll | Cost$ T Sac<1/CARDNAME> | ValidCards$ Permanent.nonArtifact+nonLand | PlayerTurn$ True | ActivationPhases$ Upkeep | SpellDescription$ Destroy all permanents except for artifacts and lands. Activate this ability only during your upkeep.
+A:AB$ DestroyAll | Cost$ T Sac<1/CARDNAME> | ValidCards$ Permanent.nonArtifact+nonLand | PlayerTurn$ True | ActivationPhases$ Upkeep | SpellDescription$ Destroy all permanents except for artifacts and lands. Activate only during your upkeep.
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scourglass.jpg
-Oracle:{T}, Sacrifice Scourglass: Destroy all permanents except for artifacts and lands. Activate this ability only during your upkeep.
+Oracle:{T}, Sacrifice Scourglass: Destroy all permanents except for artifacts and lands. Activate only during your upkeep.

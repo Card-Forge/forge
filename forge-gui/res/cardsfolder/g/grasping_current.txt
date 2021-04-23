@@ -2,7 +2,7 @@ Name:Grasping Current
 ManaCost:4 U
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ 4 U | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select up to two target creatures | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBSearch | SpellDescription$ Return up to two target creatures to their owner's hand.
-SVar:DBSearch:DB$ ChangeZone | Origin$ Library | OriginChoice$ True | OriginAlternative$ Graveyard | AlternativeMessage$ Would you like to search your library with this ability? If you do, your library will be shuffled. | Destination$ Hand | ChangeType$ Card.namedJace; Ingenious Mind-Mage | ChangeNum$ 1 | SpellDescription$ Search your library and/or graveyard for a card named Jace, Ingenious Mind-Mage, reveal it, and put it into your hand. If you searched your library this way, shuffle it.
+SVar:DBSearch:DB$ ChangeZone | Origin$ Library | OriginChoice$ True | OriginAlternative$ Graveyard | AlternativeMessage$ Would you like to search your library with this ability? If you do, your library will be shuffled. | Destination$ Hand | ChangeType$ Card.namedJace; Ingenious Mind-Mage | ChangeNum$ 1 | SpellDescription$ Search your library and/or graveyard for a card named Jace, Ingenious Mind-Mage, reveal it, and put it into your hand. If you searched your library this way, shuffle.
 DeckHints:Name$Jace, Ingenious Mind-Mage
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grasping_current.jpg
-Oracle:Return up to two target creatures to their owner's hand.\nSearch your library and/or graveyard for a card named Jace, Ingenious Mind-Mage, reveal it, and put it into your hand. If you searched your library this way, shuffle it.
+Oracle:Return up to two target creatures to their owner's hand.\nSearch your library and/or graveyard for a card named Jace, Ingenious Mind-Mage, reveal it, and put it into your hand. If you searched your library this way, shuffle.

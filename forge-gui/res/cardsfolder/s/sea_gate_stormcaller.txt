@@ -3,10 +3,10 @@ ManaCost:1 U
 Types:Creature Human Wizard
 PT:2/1
 K:Kicker:4 U
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ When CARDNAME enters the battlefield, copy the next instant or sorcery spell with converted mana cost 2 or less you cast this turn when you cast it. You may choose new targets for the copy.
-SVar:TrigEffect:DB$ DelayedTrigger | AILogic$ SpellCopy | Mode$ SpellCast | ValidCard$ Instant.cmcLE2,Sorcery.cmcLE2 | ValidActivatingPlayer$ You | ThisTurn$ True | Execute$ TrigCopy | TriggerDescription$ Copy the next instant or sorcery spell with converted mana cost 2 or less you cast this turn when you cast it. You may choose new targets for the copy.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ When CARDNAME enters the battlefield, copy the next instant or sorcery spell with mana value 2 or less you cast this turn when you cast it. You may choose new targets for the copy.
+SVar:TrigEffect:DB$ DelayedTrigger | AILogic$ SpellCopy | Mode$ SpellCast | ValidCard$ Instant.cmcLE2,Sorcery.cmcLE2 | ValidActivatingPlayer$ You | ThisTurn$ True | Execute$ TrigCopy | TriggerDescription$ Copy the next instant or sorcery spell with mana value 2 or less you cast this turn when you cast it. You may choose new targets for the copy.
 SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | AILogic$ Always | Amount$ X | MayChooseTarget$ True
 SVar:X:Count$Kicked.2.1
 SVar:PlayMain1:TRUE
 DeckNeeds:Type$Instant|Sorcery
-Oracle:Kicker {4}{U}\nWhen Sea Gate Stormcaller enters the battlefield, copy the next instant or sorcery spell with converted mana cost 2 or less you cast this turn when you cast it. If Sea Gate Stormcaller was kicked, copy that spell twice instead. You may choose new targets for the copies.
+Oracle:Kicker {4}{U}\nWhen Sea Gate Stormcaller enters the battlefield, copy the next instant or sorcery spell with mana value 2 or less you cast this turn when you cast it. If Sea Gate Stormcaller was kicked, copy that spell twice instead. You may choose new targets for the copies.

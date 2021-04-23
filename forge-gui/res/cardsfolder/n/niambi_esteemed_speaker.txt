@@ -3,11 +3,11 @@ ManaCost:W U
 Types:Legendary Creature Human Cleric
 PT:2/1
 K:Flash
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return another target creature you control to its owner's hand. If you do, you gain life equal to that creature's converted mana cost.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return another target creature you control to its owner's hand. If you do, you gain life equal to that creature's mana value.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another creature you control | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Targeted$CardManaCost
 DeckHas:Ability$LifeGain
 A:AB$ Draw | Cost$ 1 W U T Discard<1/Card.Legendary/legendary> | NumCards$ 2 | SpellDescription$ Draw two cards.
 DeckHints:Type$Legendary
-Oracle:Flash\nWhen Niambi, Esteemed Speaker enters the battlefield, you may return another target creature you control to its owner's hand. If you do, you gain life equal to that creature's converted mana cost.\n{1}{W}{U}, {T}, Discard a legendary card: Draw two cards.
+Oracle:Flash\nWhen Niambi, Esteemed Speaker enters the battlefield, you may return another target creature you control to its owner's hand. If you do, you gain life equal to that creature's mana value.\n{1}{W}{U}, {T}, Discard a legendary card: Draw two cards.

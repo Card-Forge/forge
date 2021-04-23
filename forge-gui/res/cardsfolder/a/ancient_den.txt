@@ -3,4 +3,4 @@ ManaCost:no cost
 Types:Artifact Land
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ancient_den.jpg
-Oracle:(Ancient Den isn't a spell.)\n{T}: Add {W}.
+Oracle:{T}: Add {W}.

@@ -3,6 +3,6 @@ ManaCost:2 B R
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your upkeep, target player loses 1 life.
 SVar:TrigLoseLife:DB$LoseLife | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 1
-A:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SorcerySpeed$ True | SpellDescription$ CARDNAME deals 4 damage to target creature. Activate this ability only any time you could cast a sorcery.
+A:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SorcerySpeed$ True | SpellDescription$ CARDNAME deals 4 damage to target creature. Activate only any time you could cast a sorcery.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/smoldering_tar.jpg
-Oracle:At the beginning of your upkeep, target player loses 1 life.\nSacrifice Smoldering Tar: It deals 4 damage to target creature. Activate this ability only any time you could cast a sorcery.
+Oracle:At the beginning of your upkeep, target player loses 1 life.\nSacrifice Smoldering Tar: It deals 4 damage to target creature. Activate only as a sorcery.

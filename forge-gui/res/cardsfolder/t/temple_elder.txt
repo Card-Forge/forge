@@ -2,6 +2,6 @@ Name:Temple Elder
 ManaCost:2 W
 Types:Creature Human Cleric
 PT:1/2
-A:AB$ GainLife | Cost$ T | LifeAmount$ 1 | PlayerTurn$ True | ActivationPhases$ Upkeep,Draw,Main1,BeginCombat | SpellDescription$ You gain 1 life. Activate this ability only during your turn, before attackers are declared.
+A:AB$ GainLife | Cost$ T | LifeAmount$ 1 | PlayerTurn$ True | ActivationPhases$ Upkeep,Draw,Main1,BeginCombat | SpellDescription$ You gain 1 life. Activate only during your turn, before attackers are declared.
 SVar:Picture:http://serv4.tcgimages.eu/img/cards/Portal_Second_Age/temple_elder.jpg
-Oracle:{T}: You gain 1 life. Activate this ability only during your turn, before attackers are declared.
+Oracle:{T}: You gain 1 life. Activate only during your turn, before attackers are declared.

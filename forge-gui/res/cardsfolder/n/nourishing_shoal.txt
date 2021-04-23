@@ -1,10 +1,10 @@
 Name:Nourishing Shoal
 ManaCost:X G G
 Types:Instant Arcane
-SVar:AltCost:Cost$ ExileFromHand<1/Card.Green+Other/green card> | Description$ You may exile a green card with converted mana cost X from your hand rather than pay this spell's mana cost.
+SVar:AltCost:Cost$ ExileFromHand<1/Card.Green+Other/green card> | Description$ You may exile a green card with mana value X from your hand rather than pay this spell's mana cost.
 A:SP$ GainLife | Cost$ X G G | LifeAmount$ Z | SpellDescription$ You gain X life.
 SVar:X:Count$xPaid
 SVar:Y:Exiled$CardManaCost
 SVar:Z:SVar$Y/Plus.X
 AI:RemoveDeck:All
-Oracle:You may exile a green card with converted mana cost X from your hand rather than pay this spell's mana cost.\nYou gain X life.
+Oracle:You may exile a green card with mana value X from your hand rather than pay this spell's mana cost.\nYou gain X life.

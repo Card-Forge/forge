@@ -3,7 +3,7 @@ ManaCost:5
 Types:Artifact
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ Imprint — When CARDNAME enters the battlefield, you may have target player reveal their hand. If you do, choose a nonland card from it and exile that card.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ChangeType$ Card.nonLand | ChangeNum$ 1 | ValidTgts$ Player | TgtPrompt$ Select target player | Chooser$ You | Imprint$ True | Hidden$ True
-T:Mode$ SpellCast | ValidCard$ Card.SharesCMCWith Imprinted.ExiledWithSource,Card.SharesColorWith Imprinted.ExiledWithSource | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts a spell that shares a color or converted mana cost with the exiled card, CARDNAME deals 2 damage to that player.
+T:Mode$ SpellCast | ValidCard$ Card.SharesCMCWith Imprinted.ExiledWithSource,Card.SharesColorWith Imprinted.ExiledWithSource | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts a spell that shares a color or mana value with the exiled card, CARDNAME deals 2 damage to that player.
 SVar:TrigDamage:DB$ DealDamage | NumDmg$ 2 | Defined$ TriggeredActivator
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsImprinted+ExiledWithSource | Execute$ DBForget
 SVar:DBForget:DB$ Pump | ForgetImprinted$ TriggeredCard
@@ -12,4 +12,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thought_prison.jpg
-Oracle:Imprint — When Thought Prison enters the battlefield, you may have target player reveal their hand. If you do, choose a nonland card from it and exile that card.\nWhenever a player casts a spell that shares a color or converted mana cost with the exiled card, Thought Prison deals 2 damage to that player.
+Oracle:Imprint — When Thought Prison enters the battlefield, you may have target player reveal their hand. If you do, choose a nonland card from it and exile that card.\nWhenever a player casts a spell that shares a color or mana value with the exiled card, Thought Prison deals 2 damage to that player.

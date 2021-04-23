@@ -1,8 +1,8 @@
 Name:Tezzeret's Betrayal
 ManaCost:3 U B
 Types:Sorcery
-A:SP$ Destroy | Cost$ 3 U B | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBSearch | SpellDescription$ Destroy target creature. You may search your library and/or graveyard for a card named Tezzeret, Master of Metal, reveal it, and put it into your hand. If you search your library this way, shuffle it.
+A:SP$ Destroy | Cost$ 3 U B | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBSearch | SpellDescription$ Destroy target creature. You may search your library and/or graveyard for a card named Tezzeret, Master of Metal, reveal it, and put it into your hand. If you search your library this way, shuffle.
 SVar:DBSearch:DB$ ChangeZone | Origin$ Library | OriginChoice$ True | OriginAlternative$ Graveyard | AlternativeMessage$ Would you like to search your library with this ability? If you do, your library will be shuffled. | Destination$ Hand | ChangeType$ Card.namedTezzeret; Master of Metal | ChangeNum$ 1 | Optional$ True
 DeckHints:Name$Tezzeret, Master of Metal
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tezzerets_betrayal.jpg
-Oracle:Destroy target creature. You may search your library and/or graveyard for a card named Tezzeret, Master of Metal, reveal it, and put it into your hand. If you search your library this way, shuffle it.
+Oracle:Destroy target creature. You may search your library and/or graveyard for a card named Tezzeret, Master of Metal, reveal it, and put it into your hand. If you search your library this way, shuffle.

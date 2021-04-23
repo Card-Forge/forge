@@ -3,7 +3,7 @@ ManaCost:5 B B
 Types:Creature Demon
 PT:6/6
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a card, put it into your hand, then shuffle your library.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a card, put it into your hand, then shuffle.
 SVar:TrigChange:DB$ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | ShuffleNonMandatory$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rune_scarred_demon.jpg
-Oracle:Flying\nWhen Rune-Scarred Demon enters the battlefield, search your library for a card, put it into your hand, then shuffle your library.
+Oracle:Flying\nWhen Rune-Scarred Demon enters the battlefield, search your library for a card, put it into your hand, then shuffle.

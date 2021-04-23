@@ -4,11 +4,11 @@ Types:Legendary Planeswalker Angrath
 Loyalty:4
 A:AB$ Discard | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Defined$ Player.Opponent | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBLoseLife | SpellDescription$ Each opponent discards a card and loses 2 life.
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2 | Defined$ Player.Opponent
-A:AB$ GainControl | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SubAbility$ DelTrig | SpellDescription$ Gain control of target creature until end of turn. Untap it. It gains haste until end of turn. Sacrifice it at the beginning of the next end step if it has converted mana cost 3 or less.
-SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | Execute$ TrigSac | RememberObjects$ Targeted | TriggerDescription$ Sacrifice that creature at the beginning of the next end step if it has converted mana cost 3 or less.
+A:AB$ GainControl | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SubAbility$ DelTrig | SpellDescription$ Gain control of target creature until end of turn. Untap it. It gains haste until end of turn. Sacrifice it at the beginning of the next end step if it has mana value 3 or less.
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | Execute$ TrigSac | RememberObjects$ Targeted | TriggerDescription$ Sacrifice that creature at the beginning of the next end step if it has mana value 3 or less.
 SVar:TrigSac:DB$ SacrificeAll | Defined$ DelayTriggerRememberedLKI | Controller$ You | ConditionDefined$ DelayTriggerRememberedLKI | ConditionPresent$ Card.cmcLE3
 A:AB$ RepeatEach | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBLoseLife2 | SpellDescription$ Each opponent loses life equal to the number of cards in their graveyard.
 SVar:DBLoseLife2:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ X | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True 
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$ValidGraveyard Card.RememberedPlayerCtrl
-Oracle:[+1]: Each opponent discards a card and loses 2 life.\n[−3]: Gain control of target creature until end of turn. Untap it. It gains haste until end of turn. Sacrifice it at the beginning of the next end step if it has converted mana cost 3 or less.\n[−8]: Each opponent loses life equal to the number of cards in their graveyard.
+Oracle:[+1]: Each opponent discards a card and loses 2 life.\n[−3]: Gain control of target creature until end of turn. Untap it. It gains haste until end of turn. Sacrifice it at the beginning of the next end step if it has mana value 3 or less.\n[−8]: Each opponent loses life equal to the number of cards in their graveyard.

@@ -12,4 +12,4 @@ A:AB$ ChangeZone | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Origin$ Li
 SVar:DBPlay:DB$ Play | Defined$ Remembered | WithoutManaCost$ True | Optional$ True | SubAbility$ DBCleanup
 DeckHints:Type$Instant|Sorcery
 DeckHas:Ability$Token & Ability$Counters
-Oracle:Each other planeswalker you control has the loyalty abilities of Kasmina, Enigma Sage.\n[+2]: Scry 1.\n[-X]: Create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it.\n[-8]: Search your library for an instant or sorcery card that shares a color with this planeswalker, exile that card, then shuffle. You may cast that card without paying its mana cost.
+Oracle:Each other planeswalker you control has the loyalty abilities of Kasmina, Enigma Sage.\n[+2]: Scry 1.\n[−X]: Create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it.\n[−8]: Search your library for an instant or sorcery card that shares a color with this planeswalker, exile that card, then shuffle. You may cast that card without paying its mana cost.

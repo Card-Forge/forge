@@ -4,9 +4,9 @@ Types:Legendary Planeswalker Tezzeret
 A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ c_1_1_a_thopter_flying | LegacyImage$ c 1 1 a thopter flying m19 | SpellDescription$ Create a 1/1 colorless Thopter artifact creature token with flying.
 A:AB$ Draw | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | Defined$ You | NumCards$ X | SpellDescription$ Draw a card. If you control three or more artifacts, draw two cards instead.
 SVar:X:Count$Metalcraft.2.1
-A:AB$ Effect | Cost$ SubCounter<9/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Tezzeret, Artifice Master | Image$ emblem_tezzeret_artifice_master | Duration$ Permanent | Triggers$ EffT | SpellDescription$ You get an emblem with "At the beginning of your end step, search your library for a permanent card, put it onto the battlefield, then shuffle your library."
-SVar:EffT:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ EffTrigTutor | TriggerDescription$ At the beginning of your end step, search your library for a permanent card, put it onto the battlefield, then shuffle your library.
+A:AB$ Effect | Cost$ SubCounter<9/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Tezzeret, Artifice Master | Image$ emblem_tezzeret_artifice_master | Duration$ Permanent | Triggers$ EffT | SpellDescription$ You get an emblem with "At the beginning of your end step, search your library for a permanent card, put it onto the battlefield, then shuffle."
+SVar:EffT:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ EffTrigTutor | TriggerDescription$ At the beginning of your end step, search your library for a permanent card, put it onto the battlefield, then shuffle.
 SVar:EffTrigTutor:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.Permanent | ChangeNum$ 1
 DeckHas:Ability$Token
-Oracle:[+1]: Create a 1/1 colorless Thopter artifact creature token with flying.\n[0]: Draw a card. If you control three or more artifacts, draw two cards instead.\n[−9]: You get an emblem with "At the beginning of your end step, search your library for a permanent card, put it onto the battlefield, then shuffle your library."
+Oracle:[+1]: Create a 1/1 colorless Thopter artifact creature token with flying.\n[0]: Draw a card. If you control three or more artifacts, draw two cards instead.\n[−9]: You get an emblem with "At the beginning of your end step, search your library for a permanent card, put it onto the battlefield, then shuffle."
 Loyalty:5

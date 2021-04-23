@@ -1,11 +1,11 @@
 Name:Trail of Mystery
 ManaCost:1 G
 Types:Enchantment
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.faceDown+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ Whenever a face-down creature enters the battlefield under your control, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.faceDown+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ Whenever a face-down creature enters the battlefield under your control, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1 | ShuffleNonMandatory$ True
 T:Mode$ TurnFaceUp | ValidCard$ Permanent.Creature+YouCtrl | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever a permanent you control is turned face up, if it's a creature, it gets +2/+2 until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ TriggeredCard | NumAtt$ +2 | NumDef$ +2 | ConditionDefined$ TriggeredCard | ConditionPresent$ Creature | ConditionCompare$ GE1
 AI:RemoveDeck:Random
 DeckNeeds:Keyword$Morph
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trail_of_mystery.jpg
-Oracle:Whenever a face-down creature enters the battlefield under your control, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.\nWhenever a permanent you control is turned face up, if it's a creature, it gets +2/+2 until end of turn.
+Oracle:Whenever a face-down creature enters the battlefield under your control, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle.\nWhenever a permanent you control is turned face up, if it's a creature, it gets +2/+2 until end of turn.

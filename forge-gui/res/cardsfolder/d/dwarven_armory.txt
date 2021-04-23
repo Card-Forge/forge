@@ -1,8 +1,8 @@
 Name:Dwarven Armory
 ManaCost:2 R R
 Types:Enchantment
-A:AB$ PutCounter | Cost$ 2 Sac<1/Land> | CounterType$ P2P2 | CounterNum$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | PlayerTurn$ True | ActivationPhases$ Upkeep | SpellDescription$ Put a +2/+2 counter on target creature. Activate this ability only during any upkeep step.
+A:AB$ PutCounter | Cost$ 2 Sac<1/Land> | CounterType$ P2P2 | CounterNum$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | PlayerTurn$ True | ActivationPhases$ Upkeep | SpellDescription$ Put a +2/+2 counter on target creature. Activate only during any upkeep step.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dwarven_armory.jpg
-Oracle:{2}, Sacrifice a land: Put a +2/+2 counter on target creature. Activate this ability only during any upkeep step.
+Oracle:{2}, Sacrifice a land: Put a +2/+2 counter on target creature. Activate only during any upkeep step.

@@ -6,4 +6,4 @@ SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl
 S:Mode$ ReduceCost | ValidCard$ Card.Self | EffectZone$ All | Type$ Spell | Amount$ 2 | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME costs {2} less to cast if you've cast an instant or sorcery spell this turn.
 SVar:X:Count$ThisTurnCast_Instant.YouCtrl,Sorcery.YouCtrl
 DeckHints:Type$Instant|Sorcery
-Oracle:This spell costs {2} less to cast if you’ve cast another instant or sorcery spell this turn.\nTarget creature you control gets +1/+2 until end of turn. Then it fights target creature you don’t control. (Each deals damage equal to its power to the other.)
+Oracle:This spell costs {2} less to cast if you've cast another instant or sorcery spell this turn.\nTarget creature you control gets +1/+2 until end of turn. Then it fights target creature you don't control. (Each deals damage equal to its power to the other.)

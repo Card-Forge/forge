@@ -1,7 +1,7 @@
 Name:Panoptic Mirror
 ManaCost:5
 Types:Artifact
-A:AB$ ChangeZone | Cost$ X T | Imprint$ True | Origin$ Hand | Destination$ Exile | ChangeType$ Instant.cmcEQX,Sorcery.cmcEQX | ChangeNum$ 1 | PrecostDesc$ Imprint — | SpellDescription$ You may exile an instant or sorcery card with converted mana cost X from your hand.
+A:AB$ ChangeZone | Cost$ X T | Imprint$ True | Origin$ Hand | Destination$ Exile | ChangeType$ Instant.cmcEQX,Sorcery.cmcEQX | ChangeNum$ 1 | PrecostDesc$ Imprint — | SpellDescription$ You may exile an instant or sorcery card with mana value X from your hand.
 SVar:X:Count$xPaid
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ At the beginning of your upkeep, you may copy a card exiled with Panoptic Mirror. If you do, you may cast the copy without paying its mana cost.
 SVar:TrigCopy:DB$ Play | Valid$ Card.IsImprinted+ExiledWithSource | ValidZone$ Exile | WithoutManaCost$ True | Optional$ True | CopyCard$ True
@@ -11,4 +11,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self | Destination$ 
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/panoptic_mirror.jpg
-Oracle:Imprint — {X}, {T}: You may exile an instant or sorcery card with converted mana cost X from your hand.\nAt the beginning of your upkeep, you may copy a card exiled with Panoptic Mirror. If you do, you may cast the copy without paying its mana cost.
+Oracle:Imprint — {X}, {T}: You may exile an instant or sorcery card with mana value X from your hand.\nAt the beginning of your upkeep, you may copy a card exiled with Panoptic Mirror. If you do, you may cast the copy without paying its mana cost.

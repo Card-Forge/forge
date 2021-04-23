@@ -2,7 +2,7 @@ Name:Nantuko Monastery
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ Animate | Cost$ G W | Activation$ Threshold | Defined$ Self | Power$ 4 | Toughness$ 4 | Types$ Creature,Insect,Monk | Colors$ Green,White | Keywords$ First Strike | SpellDescription$ CARDNAME becomes a 4/4 green and white Insect Monk creature with first strike until end of turn. It's still a land. Activate this ability only if seven or more cards are in your graveyard. | PrecostDesc$ Threshold —
+A:AB$ Animate | Cost$ G W | Activation$ Threshold | Defined$ Self | Power$ 4 | Toughness$ 4 | Types$ Creature,Insect,Monk | Colors$ Green,White | Keywords$ First Strike | SpellDescription$ CARDNAME becomes a 4/4 green and white Insect Monk creature with first strike until end of turn. It's still a land. Activate only if seven or more cards are in your graveyard. | PrecostDesc$ Threshold —
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nantuko_monastery.jpg
-Oracle:{T}: Add {C}.\nThreshold — {G}{W}: Nantuko Monastery becomes a 4/4 green and white Insect Monk creature with first strike until end of turn. It's still a land. Activate this ability only if seven or more cards are in your graveyard.
+Oracle:{T}: Add {C}.\nThreshold — {G}{W}: Nantuko Monastery becomes a 4/4 green and white Insect Monk creature with first strike until end of turn. It's still a land. Activate only if seven or more cards are in your graveyard.

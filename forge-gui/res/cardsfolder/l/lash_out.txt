@@ -5,4 +5,4 @@ A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target cr
 SVar:DBClash:DB$ Clash | WinSubAbility$ DBDamageController
 SVar:DBDamageController:DB$ DealDamage | Defined$ TargetedController | NumDmg$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lash_out.jpg
-Oracle:Lash Out deals 3 damage to target creature. Clash with an opponent. If you win, Lash Out deals 3 damage to that creature's controller. (Each clashing player reveals the top card of their library, then puts that card on the top or bottom. A player wins if their card had a higher converted mana cost.)
+Oracle:Lash Out deals 3 damage to target creature. Clash with an opponent. If you win, Lash Out deals 3 damage to that creature's controller. (Each clashing player reveals the top card of their library, then puts that card on the top or bottom. A player wins if their card had a higher mana value.)

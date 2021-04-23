@@ -2,7 +2,7 @@ Name:Corrosion
 ManaCost:1 B R
 Types:Enchantment
 K:Cumulative upkeep:1
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCorrode | TriggerDescription$ At the beginning of your upkeep, put a rust counter on each artifact target opponent controls. Then destroy each artifact with converted mana cost less than or equal to the number of rust counters on it. Artifacts destroyed this way can't be regenerated.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCorrode | TriggerDescription$ At the beginning of your upkeep, put a rust counter on each artifact target opponent controls. Then destroy each artifact with mana value less than or equal to the number of rust counters on it. Artifacts destroyed this way can't be regenerated.
 SVar:TrigCorrode:DB$ PutCounterAll | ValidCards$ Artifact | CounterType$ RUST | CounterNum$ 1 | ValidTgts$ Opponent | SubAbility$ DBDestroyAllRusted
 SVar:DBDestroyAllRusted:DB$ RepeatEach | RepeatCards$ Artifact | RepeatSubAbility$ DBDestroyRusted
 SVar:DBDestroyRusted:DB$ Destroy | Defined$ Remembered | ConditionCheckSVar$ RememberedCMC | ConditionSVarCompare$ GEX | NoRegen$ True
@@ -12,4 +12,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.S
 SVar:TrigWipeCounters:DB$ RemoveCounterAll | Cost$ 3 B B | ValidCards$ Permanent | AllCounterTypes$ True
 SVar:NeedsToPlayVar:Y GE1
 SVar:Y:Count$Valid Artifact.OppCtrl
-Oracle:Cumulative upkeep {1} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nAt the beginning of your upkeep, put a rust counter on each artifact target opponent controls. Then destroy each artifact with converted mana cost less than or equal to the number of rust counters on it. Artifacts destroyed this way can't be regenerated.\nWhen Corrosion leaves the battlefield, remove all rust counters from all permanents.
+Oracle:Cumulative upkeep {1} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nAt the beginning of your upkeep, put a rust counter on each artifact target opponent controls. Then destroy each artifact with mana value less than or equal to the number of rust counters on it. Artifacts destroyed this way can't be regenerated.\nWhen Corrosion leaves the battlefield, remove all rust counters from all permanents.

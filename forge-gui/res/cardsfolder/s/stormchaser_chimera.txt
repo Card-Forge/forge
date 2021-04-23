@@ -3,9 +3,9 @@ ManaCost:2 U R
 Types:Creature Chimera
 PT:2/3
 K:Flying
-A:AB$ Scry | Cost$ 2 U R | ScryNum$ 1 | SubAbility$ DBReveal | SpellDescription$ Scry 1, then reveal the top card of your library. CARDNAME gets +X/+0 until end of turn, where X is that card's converted mana cost.
+A:AB$ Scry | Cost$ 2 U R | ScryNum$ 1 | SubAbility$ DBReveal | SpellDescription$ Scry 1, then reveal the top card of your library. CARDNAME gets +X/+0 until end of turn, where X is that card's mana value.
 SVar:DBReveal:DB$ Dig | DigNum$ 1 | Reveal$ True | NoMove$ True | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | NumAtt$ X
 SVar:X:Count$TopOfLibraryCMC
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stormchaser_chimera.jpg
-Oracle:Flying\n{2}{U}{R}: Scry 1, then reveal the top card of your library. Stormchaser Chimera gets +X/+0 until end of turn, where X is that card's converted mana cost. (To scry 1, look at the top card of your library, then you may put that card on the bottom of your library.)
+Oracle:Flying\n{2}{U}{R}: Scry 1, then reveal the top card of your library. Stormchaser Chimera gets +X/+0 until end of turn, where X is that card's mana value. (To scry 1, look at the top card of your library, then you may put that card on the bottom of your library.)
