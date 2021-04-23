@@ -34,6 +34,7 @@ import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.ExploreAi;
 import forge.ai.ability.LearnAi;
 import forge.ai.simulation.SpellAbilityPicker;
+import forge.card.CardStateName;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.deck.CardPool;
@@ -1453,6 +1454,12 @@ public class AiController {
                         || player.cantLoseForZeroOrLessLife() ) {
                     if (!game.getPhaseHandler().is(PhaseType.MAIN1) || !isSafeToHoldLandDropForMain2(land)) {
                         final List<SpellAbility> abilities = Lists.newArrayList();
+
+                        // TODO extend this logic to evaluate MDFC with both sides land
+                        // this can only happen if its a MDFC land
+                        if (!land.isLand()) {
+                            land.setState(CardStateName.Modal, false);
+                        }
 
                         LandAbility la = new LandAbility(land, player, null);
                         la.setCardState(land.getCurrentState());

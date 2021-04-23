@@ -4529,7 +4529,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final boolean isShrine()           { return getType().hasSubtype("Shrine"); }
 
     public final boolean isAttachment() { return isAura() || isEquipment() || isFortification(); }
-    public final boolean isHistoric()   {return getType().isLegendary() || isArtifact() || getType().hasSubtype("Saga");}
+    public final boolean isHistoric()   { return getType().isLegendary() || isArtifact() || getType().hasSubtype("Saga"); }
 
     public final boolean isScheme()     { return getType().isScheme(); }
     public final boolean isPhenomenon() { return getType().isPhenomenon(); }
