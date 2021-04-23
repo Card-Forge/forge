@@ -10,6 +10,7 @@ import forge.game.card.Card;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.TargetChoices;
 
 public class ChangeTargetsAi extends SpellAbilityAi {
 
@@ -40,18 +41,20 @@ public class ChangeTargetsAi extends SpellAbilityAi {
             // nothing on stack, so nothing to target
             return false;
         }
+        final TargetChoices topTargets = topSa.getTargets();
+        final Card topHost = topSa.getHostCard();
 
-        if (sa.getTargets().size() != 0) {
+        if (sa.getTargets().size() != 0 && sa.isTrigger()) {
             // something was already chosen before (e.g. in response to a trigger - Mizzium Meddler), so just proceed
             return true;
         }
 
-        if (!topSa.usesTargeting() || topSa.getTargets().getTargetCards().contains(sa.getHostCard())) {
+        if (!topSa.usesTargeting() || topTargets.getTargetCards().contains(sa.getHostCard())) {
             // if this does not target at all or already targets host, no need to redirect it again
             return false;
         }
 
-        for (Card tgt : topSa.getTargets().getTargetCards()) {
+        for (Card tgt : topTargets.getTargetCards()) {
             if (ComputerUtilAbility.getAbilitySourceName(sa).equals(tgt.getName()) && tgt.getController().equals(aiPlayer)) {
                 // We are already targeting at least one card with the same name (e.g. in presence of 2+ Spellskites),
                 // no need to retarget again to another one
@@ -59,7 +62,7 @@ public class ChangeTargetsAi extends SpellAbilityAi {
             }
         }
 
-        if (topSa.getHostCard() != null && !topSa.getHostCard().getController().isOpponentOf(aiPlayer)) {
+        if (topHost != null && !topHost.getController().isOpponentOf(aiPlayer)) {
             // make sure not to redirect our own abilities
             return false;
         }
@@ -71,7 +74,7 @@ public class ChangeTargetsAi extends SpellAbilityAi {
             // don't try retargeting a spell that the current card can't legally retarget (e.g. Muck Drubb + Lightning Bolt to the face)
             return false;
         }
-        
+
         if (sa.getPayCosts().getCostMana() != null && sa.getPayCosts().getCostMana().getMana().hasPhyrexian()) {
             ManaCost manaCost = sa.getPayCosts().getCostMana().getMana();
             int payDamage = manaCost.getPhyrexianCount() * 2;
@@ -80,10 +83,20 @@ public class ChangeTargetsAi extends SpellAbilityAi {
             ManaCost normalizedMana = manaCost.getNormalizedMana();
             boolean canPay = ComputerUtilMana.canPayManaCost(new ManaCostBeingPaid(normalizedMana), sa, aiPlayer);
             if (potentialDmg != -1 && potentialDmg <= payDamage && !canPay
-                    && topSa.getTargets().contains(aiPlayer)) {
+                    && topTargets.contains(aiPlayer)) {
                 // do not pay Phyrexian mana if the spell is a damaging one but it deals less damage or the same damage as we'll pay life
                 return false;
             }
+        }
+
+        Card firstCard = topTargets.getFirstTargetedCard();
+        // if we're not the target don't intervene unless we can steal a buff
+        if (firstCard != null && !aiPlayer.equals(firstCard.getController()) && !topHost.getController().equals(firstCard.getController()) && !topHost.getController().getAllies().contains(firstCard.getController())) {
+            return false;
+        }
+        Player firstPlayer = topTargets.getFirstTargetedPlayer();
+        if (firstPlayer != null && !aiPlayer.equals(firstPlayer)) {
+            return false;
         }
 
         sa.resetTargets();
