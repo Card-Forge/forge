@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
+import forge.gui.GuiBase;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.Application.ApplicationType;
@@ -148,8 +149,8 @@ public class AssetsDownloader {
                 return;
         }
 
-        //android 11 SAF causes some issues, so skip deleting the res folder. res folder should be original and custom cards shouldn't be loaded from res folder
-        boolean allowDeletion = Forge.androidVersion < 30;
+        //allow deletion on Android 10 or if using app-specific directory
+        boolean allowDeletion = Forge.androidVersion < 30 || GuiBase.isUsingAppDirectory();
         String assetURL = isSnapshots ? snapsURL + "assets.zip" : releaseURL + Forge.CURRENT_VERSION + "/" + "assets.zip";
         new GuiDownloadZipService("", "resource files", assetURL,
             ForgeConstants.ASSETS_DIR, ForgeConstants.RES_DIR, splashScreen.getProgressBar(), allowDeletion).downloadAndUnzip();

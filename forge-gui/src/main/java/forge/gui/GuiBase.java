@@ -12,12 +12,16 @@ public class GuiBase {
     private static String androidRelease = "";
     private static int androidAPI = 0;
     private static int deviceRAM = 0;
+    private static boolean usingAppDirectory = false;
 
     public static IGuiBase getInterface() { return guiInterface; }
     public static void setInterface(IGuiBase i0) { guiInterface = i0; }
 
     public static void setIsAndroid(boolean value) { isAndroidport = value; }
     public static boolean isAndroid() { return isAndroidport; }
+
+    public static void setUsingAppDirectory(boolean value) { usingAppDirectory = value; }
+    public static boolean isUsingAppDirectory() { return usingAppDirectory; }
 
     public static void setDeviceInfo(String DeviceName, String AndroidName, int AndroidAPI, int RAM) {
         deviceName = DeviceName;
