@@ -4,4 +4,4 @@ Types:Sorcery
 A:SP$ ChangeZone | Cost$ 1 W | ConditionPresent$ Land.YouCtrl | ConditionCompare$ LTX | Origin$ Library | Destination$ Hand | ChangeType$ Plains | ChangeNum$ 3 | SpellDescription$ If an opponent controls more lands than you, search your library for up to three Plains cards and put them into your hand.
 SVar:X:Count$Valid Land.OppCtrl
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84504.jpg
-Oracle:If an opponent controls more lands than you, search your library for up to three Plains cards, reveal them, and put them into your hand. Then shuffle your library.
+Oracle:If an opponent controls more lands than you, search your library for up to three Plains cards, reveal them, put them into your hand, then shuffle.

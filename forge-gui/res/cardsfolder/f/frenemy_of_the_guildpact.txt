@@ -3,4 +3,4 @@ ManaCost:1 G
 Types:Creature Spirit
 PT:3/2
 K:Protection:Card.Black+White,Card.Red+Blue,Card.Green+Black,Card.White+Red,Card.Blue+Green,Card.Red+White,Card.Green+Blue,Card.White+Black,Card.Blue+Red,Card.Black+Green:Protection from enemy-colored multicolored
-Oracle:Protection from enemy-colored multicolored (This creature can't be blocked, targeted, dealt damage, enchanted, or equipped by anything that's two enemy colors, such as blue and green.)
+Oracle:Protection from enemy-colored multicolored. (This creature can't be blocked, targeted, dealt damage, enchanted, or equipped by anything that's two enemy colors, such as blue and green.)

@@ -2,8 +2,8 @@ Name:Llanowar Sentinel
 ManaCost:2 G
 Types:Creature Elf
 PT:2/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, you may pay {1}{G}. If you do, search your library for a card named CARDNAME and put that card onto the battlefield. Then shuffle your library.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, you may pay {1}{G}. If you do, search your library for a card named CARDNAME, put that card onto the battlefield, then shuffle.
 SVar:TrigChange:AB$ChangeZone | Cost$ 1 G | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.namedLlanowar Sentinel | ChangeNum$ 1
 DeckHints:Name$Llanowar Sentinel
 SVar:Picture:http://www.wizards.com/global/images/magic/general/llanowar_sentinel.jpg
-Oracle:When Llanowar Sentinel enters the battlefield, you may pay {1}{G}. If you do, search your library for a card named Llanowar Sentinel and put that card onto the battlefield. Then shuffle your library.
+Oracle:When Llanowar Sentinel enters the battlefield, you may pay {1}{G}. If you do, search your library for a card named Llanowar Sentinel, put that card onto the battlefield, then shuffle.

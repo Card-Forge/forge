@@ -3,7 +3,7 @@ ManaCost:2
 Types:Artifact Creature Wall
 PT:0/4
 K:Defender
-A:AB$ DealDamage | Cost$ T | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1 | Activation$ Desert | SpellDescription$ CARDNAME deals 1 damage to target player or planeswalker. Activate this ability only if you control a Desert or there is a Desert card in your graveyard.
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1 | Activation$ Desert | SpellDescription$ CARDNAME deals 1 damage to target player or planeswalker. Activate only if you control a Desert or there is a Desert card in your graveyard.
 DeckHints:Type$Desert
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_forgotten_pharaohs.jpg
-Oracle:Defender\n{T}: Wall of Forgotten Pharaohs deals 1 damage to target player or planeswalker. Activate this ability only if you control a Desert or there is a Desert card in your graveyard.
+Oracle:Defender\n{T}: Wall of Forgotten Pharaohs deals 1 damage to target player or planeswalker. Activate only if you control a Desert or there is a Desert card in your graveyard.

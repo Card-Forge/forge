@@ -10,4 +10,4 @@ SVar:BuffedBy:Spirit
 SVar:NoZeroToughnessAI:True
 DeckHints:Type$Spirit
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kodama_of_the_center_tree.jpg
-Oracle:Kodama of the Center Tree's power and toughness are each equal to the number of Spirits you control.\nKodama of the Center Tree has soulshift X, where X is the number of Spirits you control. (When this creature dies, you may return target Spirit card with converted mana cost X or less from your graveyard to your hand.)
+Oracle:Kodama of the Center Tree's power and toughness are each equal to the number of Spirits you control.\nKodama of the Center Tree has soulshift X, where X is the number of Spirits you control. (When this creature dies, you may return target Spirit card with mana value X or less from your graveyard to your hand.)

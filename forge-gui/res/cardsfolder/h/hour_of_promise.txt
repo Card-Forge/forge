@@ -1,8 +1,8 @@
 Name:Hour of Promise
 ManaCost:4 G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 4 G | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land | ChangeNum$ 2 | SubAbility$ DBToken | SpellDescription$ Search your library for up to two land cards, put them onto the battlefield tapped, then shuffle your library. Then if you control three or more Deserts, create two 2/2 black Zombie creature tokens.
+A:SP$ ChangeZone | Cost$ 4 G | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land | ChangeNum$ 2 | SubAbility$ DBToken | SpellDescription$ Search your library for up to two land cards, put them onto the battlefield tapped, then shuffle. Then if you control three or more Deserts, create two 2/2 black Zombie creature tokens.
 SVar:DBToken:DB$ Token | ConditionPresent$ Desert.YouCtrl | ConditionCompare$ GE3 | TokenAmount$ 2 | TokenScript$ b_2_2_zombie | TokenOwner$ You | LegacyImage$ b 2 2 zombie hou
 DeckHints:Type$Desert
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hour_of_promise.jpg
-Oracle:Search your library for up to two land cards, put them onto the battlefield tapped, then shuffle your library. Then if you control three or more Deserts, create two 2/2 black Zombie creature tokens.
+Oracle:Search your library for up to two land cards, put them onto the battlefield tapped, then shuffle. Then if you control three or more Deserts, create two 2/2 black Zombie creature tokens.

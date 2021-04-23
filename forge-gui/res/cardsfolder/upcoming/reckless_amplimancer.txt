@@ -5,4 +5,4 @@ PT:2/2
 A:AB$ Pump | Cost$ 4 G | NumAtt$ +X | NumDef$ +Y | SpellDescription$ Double CARDNAME's power and toughness until end of turn.
 SVar:X:Count$CardPower
 SVar:Y:Count$CardToughness
-Oracle:{4}{G}: Double Reckless Amplimancer’s power and toughness until end of turn.
+Oracle:{4}{G}: Double Reckless Amplimancer's power and toughness until end of turn.

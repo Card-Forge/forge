@@ -2,6 +2,6 @@ Name:Voracious Null
 ManaCost:2 B
 Types:Creature Zombie
 PT:2/2
-A:AB$ PutCounter | Cost$ 1 B Sac<1/Creature.Other/another creature> | CounterType$ P1P1 | CounterNum$ 2 | SorcerySpeed$ True | SpellDescription$ Put two +1/+1 counters on CARDNAME. Activate this ability only any time you could cast a sorcery.
+A:AB$ PutCounter | Cost$ 1 B Sac<1/Creature.Other/another creature> | CounterType$ P1P1 | CounterNum$ 2 | SorcerySpeed$ True | SpellDescription$ Put two +1/+1 counters on CARDNAME. Activate only as a sorcery.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voracious_null.jpg
-Oracle:{1}{B}, Sacrifice another creature: Put two +1/+1 counters on Voracious Null. Activate this ability only any time you could cast a sorcery.
+Oracle:{1}{B}, Sacrifice another creature: Put two +1/+1 counters on Voracious Null. Activate only as a sorcery.

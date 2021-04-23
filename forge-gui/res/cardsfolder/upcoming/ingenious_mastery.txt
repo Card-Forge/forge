@@ -10,4 +10,4 @@ SVar:OppScry:DB$ Scry | ScryNum$ 2 | Defined$ ChosenPlayer
 SVar:DBDrawX:DB$ Draw | Defined$ You | NumCards$ X
 SVar:X:Count$xPaid
 SVar:AltCostPaid:Count$AltCost.1.0
-Oracle:You may pay {2}{U} rather than pay this spell’s mana cost.\nIf {2}{U} was paid, you draw three cards, then an opponent creates two Treasure tokens and they scry 2. If that cost wasn’t paid, you draw X cards.
+Oracle:You may pay {2}{U} rather than pay this spell's mana cost.\nIf the {2}{U} cost was paid, you draw three cards, then an opponent creates two Treasure tokens and they scry 2. If that cost wasn't paid, you draw X cards.

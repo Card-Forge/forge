@@ -2,10 +2,10 @@ Name:Blood Speaker
 ManaCost:3 B
 Types:Creature Ogre Shaman
 PT:3/2
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigSearch | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may sacrifice CARDNAME. If you do, search your library for a Demon card, reveal that card, put it into your hand, then shuffle your library.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigSearch | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may sacrifice CARDNAME. If you do, search your library for a Demon card, reveal that card, put it into your hand, then shuffle.
 SVar:TrigSearch:AB$ChangeZone | Cost$ Sac<1/CARDNAME> | Origin$ Library | Destination$ Hand | ChangeType$ Demon | ChangeNum$ 1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Demon.YouCtrl | TriggerZones$ Graveyard | OptionalDecider$ You | Execute$ TrigReturn | TriggerDescription$ Whenever a Demon enters the battlefield under your control, you may return CARDNAME from your graveyard to your hand.
 SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Hand
 DeckHints:Type$Demon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blood_speaker.jpg
-Oracle:At the beginning of your upkeep, you may sacrifice Blood Speaker. If you do, search your library for a Demon card, reveal that card, put it into your hand, then shuffle your library.\nWhenever a Demon enters the battlefield under your control, return Blood Speaker from your graveyard to your hand.
+Oracle:At the beginning of your upkeep, you may sacrifice Blood Speaker. If you do, search your library for a Demon card, reveal that card, put it into your hand, then shuffle.\nWhenever a Demon enters the battlefield under your control, return Blood Speaker from your graveyard to your hand.

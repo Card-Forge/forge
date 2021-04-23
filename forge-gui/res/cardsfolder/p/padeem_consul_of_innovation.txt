@@ -3,8 +3,8 @@ ManaCost:3 U
 Types:Legendary Creature Vedalken Artificer
 PT:1/4
 S:Mode$ Continuous | Affected$ Artifact.YouCtrl | AddKeyword$ Hexproof | Description$ Artifacts you control have hexproof.
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigDraw | TriggerDescription$ At the beginning of your upkeep, if you control the artifact with the highest converted mana cost or tied for the highest converted mana cost, draw a card.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigDraw | TriggerDescription$ At the beginning of your upkeep, if you control the artifact with the highest mana value or tied for the highest mana value, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:X:Count$Valid Artifact.greatestCMC_Artifact+YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/padeem_consul_of_innovation.jpg
-Oracle:Artifacts you control have hexproof.\nAt the beginning of your upkeep, if you control the artifact with the highest converted mana cost or tied for the highest converted mana cost, draw a card.
+Oracle:Artifacts you control have hexproof.\nAt the beginning of your upkeep, if you control the artifact with the highest mana value or tied for the highest mana value, draw a card.

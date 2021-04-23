@@ -3,7 +3,7 @@ ManaCost:6 G G
 Types:Legendary Creature Spirit
 PT:7/7
 K:Snake offering
-A:AB$ UntapAll | Cost$ T | ValidCards$ Forest,Creature.Green | ActivationLimit$ 1 | SpellDescription$ Untap all Forests and all green creatures. Activate this ability only once each turn.
+A:AB$ UntapAll | Cost$ T | ValidCards$ Forest,Creature.Green | ActivationLimit$ 1 | SpellDescription$ Untap all Forests and all green creatures. Activate only once each turn.
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/patron_of_the_orochi.jpg
-Oracle:Snake offering (You may cast this card any time you could cast an instant by sacrificing a Snake and paying the difference in mana costs between this and the sacrificed Snake. Mana cost includes color.)\n{T}: Untap all Forests and all green creatures. Activate this ability only once each turn.
+Oracle:Snake offering (You may cast this card any time you could cast an instant by sacrificing a Snake and paying the difference in mana costs between this and the sacrificed Snake. Mana cost includes color.)\n{T}: Untap all Forests and all green creatures. Activate only once each turn.

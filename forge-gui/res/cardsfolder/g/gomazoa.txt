@@ -4,11 +4,11 @@ Types:Creature Jellyfish
 PT:0/3
 K:Defender
 K:Flying
-A:AB$ ChangeZoneAll | Cost$ T | ChangeType$ Creature.blockedBySource | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ JellyBounceSelf | SpellDescription$ Put CARDNAME and each creature it's blocking on top of their owners' libraries, then those players shuffle their libraries.
+A:AB$ ChangeZoneAll | Cost$ T | ChangeType$ Creature.blockedBySource | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ JellyBounceSelf | SpellDescription$ Put CARDNAME and each creature it's blocking on top of their owners' libraries, then those players shuffle.
 SVar:JellyBounceSelf:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SubAbility$ WobbleOppJelly
 SVar:WobbleOppJelly:DB$ Shuffle | Defined$ RememberedOwner | SubAbility$ WobbleYourJelly | ConditionCheckSVar$ X
 SVar:WobbleYourJelly:DB$ Shuffle | Defined$ You | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gomazoa.jpg
-Oracle:Defender, flying\n{T}: Put Gomazoa and each creature it's blocking on top of their owners' libraries, then those players shuffle their libraries.
+Oracle:Defender, flying\n{T}: Put Gomazoa and each creature it's blocking on top of their owners' libraries, then those players shuffle.

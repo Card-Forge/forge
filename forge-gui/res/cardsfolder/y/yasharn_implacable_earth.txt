@@ -2,9 +2,9 @@ Name:Yasharn, Implacable Earth
 ManaCost:2 G W
 Types:Legendary Creature Elemental Boar
 PT:4/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigForest | TriggerDescription$ When CARDNAME enters the battlefield, search your library for a basic Forest card and a basic Plains card, reveal those cards, put them into your hand, then shuffle your library.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigForest | TriggerDescription$ When NICKNAME enters the battlefield, search your library for a basic Forest card and a basic Plains card, reveal those cards, put them into your hand, then shuffle.
 SVar:TrigForest:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Forest.Basic | ChangeNum$ 1 | SubAbility$ DBPlains
 SVar:DBPlains:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Plains.Basic | ChangeNum$ 1
 S:Mode$ Continuous | Affected$ Player | AddKeyword$ You can't pay life to cast spells or activate abilities. & You can't sacrifice nonland permanents to cast spells or activate abilities. | Description$ Players can't pay life or sacrifice nonland permanents to cast spells or activate abilities.
 AI:RemoveDeck:Random
-Oracle:When Yasharn, Implacable Earth enters the battlefield, search your library for a basic Forest card and a basic Plains card, reveal those cards, put them into your hand, then shuffle your library.\nPlayers can't pay life or sacrifice nonland permanents to cast spells or activate abilities.
+Oracle:When Yasharn enters the battlefield, search your library for a basic Forest card and a basic Plains card, reveal those cards, put them into your hand, then shuffle.\nPlayers can't pay life or sacrifice nonland permanents to cast spells or activate abilities.

@@ -8,4 +8,4 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness
 SVar:X:Count$CardCounters.AGE/Thrice
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glacial_plating.jpg
-Oracle:Enchant creature\nCumulative upkeep {S} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it. {S} can be paid with one mana from a snow permanent.)\nEnchanted creature gets +3/+3 for each age counter on Glacial Plating.
+Oracle:Enchant creature\nCumulative upkeep {S} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it. {S} can be paid with one mana from a snow source.)\nEnchanted creature gets +3/+3 for each age counter on Glacial Plating.

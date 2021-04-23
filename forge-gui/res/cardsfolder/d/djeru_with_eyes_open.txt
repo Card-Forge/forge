@@ -3,8 +3,8 @@ ManaCost:3 W W
 Types:Legendary Creature Human Warrior
 PT:4/3
 K:Vigilance
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a planeswalker card, reveal it, put it into your hand, then shuffle your library.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a planeswalker card, reveal it, put it into your hand, then shuffle.
 SVar:TrigChange:DB$ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Planeswalker | ChangeNum$ 1 | ShuffleNonMandatory$ True
 S:Mode$ PreventDamage | Target$ Planeswalker.YouCtrl | Amount$ 1 | Description$ If a source would deal damage to a planeswalker you control, prevent 1 of that damage.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/djeru_with_eyes_open.jpg
-Oracle:Vigilance\nWhen Djeru, With Eyes Open enters the battlefield, you may search your library for a planeswalker card, reveal it, put it into your hand, then shuffle your library.\nIf a source would deal damage to a planeswalker you control, prevent 1 of that damage.
+Oracle:Vigilance\nWhen Djeru, With Eyes Open enters the battlefield, you may search your library for a planeswalker card, reveal it, put it into your hand, then shuffle.\nIf a source would deal damage to a planeswalker you control, prevent 1 of that damage.

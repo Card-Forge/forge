@@ -7,4 +7,4 @@ SVar:DBEffect:DB$ Effect | RememberObjects$ ParentTarget | Triggers$ TrigDies
 SVar:TrigDies:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.IsRemembered | OneOff$ True | Execute$ TrigGainLife | TriggerDescription$ When that creature dies this turn, you gain 2 life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 2
 SVar:X:ParentTargeted$CardPower
-Oracle:Target creature you control deals damage equal to its power to target creature or planeswalker you don’t control. When the permanent you don’t control dies this turn, you gain 2 life.
+Oracle:Target creature you control deals damage equal to its power to target creature or planeswalker you don't control. When the permanent you don't control dies this turn, you gain 2 life.

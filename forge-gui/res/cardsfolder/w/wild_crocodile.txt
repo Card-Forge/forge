@@ -2,6 +2,6 @@ Name:Wild Crocodile
 ManaCost:1 G
 Types:Host Creature Crocodile
 PT:1/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | Host$ True | TriggerDescription$ When this creature enters the battlefield, search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | Host$ True | TriggerDescription$ When this creature enters the battlefield, search your library for a basic land card, reveal it, put it into your hand, then shuffle.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1
-Oracle:When this creature enters the battlefield, search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.
+Oracle:When this creature enters the battlefield, search your library for a basic land card, reveal it, put it into your hand, then shuffle.

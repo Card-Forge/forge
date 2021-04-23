@@ -4,8 +4,8 @@ Types:Creature Merfolk Rogue
 PT:2/1
 K:Kicker:XCantBe0 X
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, gain control of target artifact with converted mana cost X or less. If that artifact is an Equipment, attach it to CARDNAME.
-SVar:TrigKicker:DB$ GainControl | ValidTgts$ Artifact.cmcLEX | TgtPrompt$ Select target artifact with converted mana cost X or less | SubAbility$ DBAttach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, gain control of target artifact with mana value X or less. If that artifact is an Equipment, attach it to CARDNAME.
+SVar:TrigKicker:DB$ GainControl | ValidTgts$ Artifact.cmcLEX | TgtPrompt$ Select target artifact with mana value X or less | SubAbility$ DBAttach
 SVar:DBAttach:DB$ Attach | Object$ ParentTarget | Defined$ TriggeredCardLKICopy | ConditionDefined$ ParentTarget | ConditionPresent$ Card.Equipment | ConditionCompare$ GE1
 SVar:X:Count$xPaid
-Oracle:Kicker {X}. X can't be 0. (You may pay an additional {X} as you cast this spell.)\nFlying\nWhen Thieving Skydiver enters the battlefield, if it was kicked, gain control of target artifact with converted mana cost X or less. If that artifact is an Equipment, attach it to Thieving Skydiver.
+Oracle:Kicker {X}. X can't be 0. (You may pay an additional {X} as you cast this spell.)\nFlying\nWhen Thieving Skydiver enters the battlefield, if it was kicked, gain control of target artifact with mana value X or less. If that artifact is an Equipment, attach it to Thieving Skydiver.

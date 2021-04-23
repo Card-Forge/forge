@@ -2,7 +2,7 @@ Name:Fractured Powerstone
 ManaCost:2
 Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ RollPlanarDice | Cost$ T | SorcerySpeed$ True | SpellDescription$ Roll the planar die. Activate this ability only any time you could cast a sorcery.
+A:AB$ RollPlanarDice | Cost$ T | SorcerySpeed$ True | SpellDescription$ Roll the planar die. Activate only as a sorcery.
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fractured_powerstone.jpg
-Oracle:{T}: Add {C}.\n{T}: Roll the planar die. Activate this ability only any time you could cast a sorcery.
+Oracle:{T}: Add {C}.\n{T}: Roll the planar die. Activate only as a sorcery.

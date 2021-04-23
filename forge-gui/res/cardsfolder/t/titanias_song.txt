@@ -1,13 +1,13 @@
 Name:Titania's Song
 ManaCost:3 G
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Artifact.nonCreature | SetPower$ AffectedX | SetToughness$ AffectedX | AddType$ Artifact & Creature | RemoveCardTypes$ True | RemoveAllAbilities$ True | Description$ Each noncreature artifact loses all abilities and is an artifact creature with power and toughness each equal to its converted mana cost.
+S:Mode$ Continuous | Affected$ Artifact.nonCreature | SetPower$ AffectedX | SetToughness$ AffectedX | AddType$ Artifact & Creature | RemoveCardTypes$ True | RemoveAllAbilities$ True | Description$ Each noncreature artifact loses all abilities and is an artifact creature with power and toughness each equal to its mana value.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigEffect | Static$ True | TriggerDescription$ If CARDNAME leaves the battlefield, this effect continues until end of turn.
 SVar:TrigEffect:DB$ Effect | Name$ Titania's Song Effect | StaticAbilities$ KWAnimateAll
-SVar:KWAnimateAll:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Artifact.nonCreature | SetPower$ AffectedX | SetToughness$ AffectedX | AddType$ Creature | RemoveAllAbilities$ True | Description$ Each noncreature artifact loses all abilities and is an artifact creature with power and toughness each equal to its converted mana cost.
+SVar:KWAnimateAll:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Artifact.nonCreature | SetPower$ AffectedX | SetToughness$ AffectedX | AddType$ Creature | RemoveAllAbilities$ True | Description$ Each noncreature artifact loses all abilities and is an artifact creature with power and toughness each equal to its mana value.
 SVar:AffectedX:Count$CardManaCost
 SVar:NonStackingEffect:True
 SVar:PlayMain1:ALWAYS
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/titanias_song.jpg
-Oracle:Each noncreature artifact loses all abilities and becomes an artifact creature with power and toughness each equal to its converted mana cost. If Titania's Song leaves the battlefield, this effect continues until end of turn.
+Oracle:Each noncreature artifact loses all abilities and becomes an artifact creature with power and toughness each equal to its mana value. If Titania's Song leaves the battlefield, this effect continues until end of turn.

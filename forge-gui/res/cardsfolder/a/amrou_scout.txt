@@ -2,6 +2,6 @@ Name:Amrou Scout
 ManaCost:1 W
 Types:Creature Kithkin Rebel Scout
 PT:2/1
-A:AB$ ChangeZone | Cost$ 4 T | Origin$ Library | Destination$ Battlefield | ChangeType$ Permanent.Rebel+cmcLE3 | ChangeNum$ 1 | SpellDescription$ Search your library for a Rebel permanent card with converted mana cost 3 or less and put it onto the battlefield. Then shuffle your library.
+A:AB$ ChangeZone | Cost$ 4 T | Origin$ Library | Destination$ Battlefield | ChangeType$ Permanent.Rebel+cmcLE3 | ChangeNum$ 1 | SpellDescription$ Search your library for a Rebel permanent card with mana value 3 or less, put it onto the battlefield, then shuffle.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/amrou_scout.jpg
-Oracle:{4}, {T}: Search your library for a Rebel permanent card with converted mana cost 3 or less and put it onto the battlefield. Then shuffle your library.
+Oracle:{4}, {T}: Search your library for a Rebel permanent card with mana value 3 or less, put it onto the battlefield, then shuffle.

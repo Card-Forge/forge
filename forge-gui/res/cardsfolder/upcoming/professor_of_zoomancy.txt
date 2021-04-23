@@ -2,7 +2,7 @@ Name:Professor of Zoomancy
 ManaCost:3 G
 Types:Creature Bear Druid
 PT:4/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 black and green Pest creature token with "When this creature dies, you gain 1 life."
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 black and green Pest creature token with "When this creature dies, you gain 1 life.""
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ bg_1_1_pest_lifegain | TokenOwner$ You
 DeckHas:Ability$Token & Ability$LifeGain
-Oracle:When Professor of Zoomancy enters the battlefield, create a 1/1 black and green Pest creature token with "When this creature dies, you gain 1 life.
+Oracle:When Professor of Zoomancy enters the battlefield, create a 1/1 black and green Pest creature token with "When this creature dies, you gain 1 life."

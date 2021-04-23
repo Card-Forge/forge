@@ -1,10 +1,10 @@
 Name:Artifact Mutation
 ManaCost:R G
 Types:Instant
-A:SP$ Destroy | Cost$ R G | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | NoRegen$ True | SubAbility$ TrigToken | SpellDescription$ Destroy target artifact. It can't be regenerated. Create X 1/1 green Saproling creature tokens, where X is that artifact's converted mana cost.
+A:SP$ Destroy | Cost$ R G | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | NoRegen$ True | SubAbility$ TrigToken | SpellDescription$ Destroy target artifact. It can't be regenerated. Create X 1/1 green Saproling creature tokens, where X is that artifact's mana value.
 #X will be the Converted Mana Cost of the target of Mutation
 SVar:TrigToken:DB$Token | TokenAmount$ X | TokenScript$ g_1_1_saproling | TokenOwner$ You | LegacyImage$ g 1 1 saproling inv
 SVar:X:Targeted$CardManaCost
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/artifact_mutation.jpg
-Oracle:Destroy target artifact. It can't be regenerated. Create X 1/1 green Saproling creature tokens, where X is that artifact's converted mana cost.
+Oracle:Destroy target artifact. It can't be regenerated. Create X 1/1 green Saproling creature tokens, where X is that artifact's mana value.

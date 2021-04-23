@@ -2,7 +2,7 @@ Name:Leonin Squire
 ManaCost:1 W
 Types:Creature Cat Soldier
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target artifact card with converted mana cost 1 or less from your graveyard to your hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target artifact card with mana value 1 or less from your graveyard to your hand.
 SVar:TrigChangeZone:DB$ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Artifact.cmcLE1+YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leonin_squire.jpg
-Oracle:When Leonin Squire enters the battlefield, return target artifact card with converted mana cost 1 or less from your graveyard to your hand.
+Oracle:When Leonin Squire enters the battlefield, return target artifact card with mana value 1 or less from your graveyard to your hand.

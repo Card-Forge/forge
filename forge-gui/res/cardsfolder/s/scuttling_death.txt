@@ -7,4 +7,4 @@ K:Soulshift:4
 AI:RemoveDeck:All
 DeckHints:Type$Spirit
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scuttling_death.jpg
-Oracle:Sacrifice Scuttling Death: Target creature gets -1/-1 until end of turn.\nSoulshift 4 (When this creature dies, you may return target Spirit card with converted mana cost 4 or less from your graveyard to your hand.)
+Oracle:Sacrifice Scuttling Death: Target creature gets -1/-1 until end of turn.\nSoulshift 4 (When this creature dies, you may return target Spirit card with mana value 4 or less from your graveyard to your hand.)

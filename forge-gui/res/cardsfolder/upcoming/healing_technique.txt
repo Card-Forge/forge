@@ -7,4 +7,4 @@ SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBChan
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | StackDescription$ None
 SVar:X:Targeted$CardManaCost
 DeckHas:Ability$Graveyard & Ability$LifeGain
-Oracle:Demonstrate\nReturn target card from your graveyard to your hand. You gain life equal to that card's mana value. Exile Healing Technique.
+Oracle:Demonstrate (When you cast this spell, you may copy it. If you do, choose an opponent to also copy it. Players may choose new targets for their copies.)\nReturn target card from your graveyard to your hand. You gain life equal to that card's mana value. Exile Healing Technique.

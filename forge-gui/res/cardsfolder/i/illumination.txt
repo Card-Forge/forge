@@ -1,8 +1,8 @@
 Name:Illumination
 ManaCost:W W
 Types:Instant
-A:SP$ Counter | Cost$ W W | TargetType$ Spell | TgtPrompt$ Select target Artifact or Enchantment spell | ValidTgts$ Artifact,Enchantment | SubAbility$ DBGainLife | SpellDescription$ Counter target artifact or enchantment spell. Its controller gains life equal to its converted mana cost.
+A:SP$ Counter | Cost$ W W | TargetType$ Spell | TgtPrompt$ Select target Artifact or Enchantment spell | ValidTgts$ Artifact,Enchantment | SubAbility$ DBGainLife | SpellDescription$ Counter target artifact or enchantment spell. Its controller gains life equal to its mana value.
 SVar:DBGainLife:DB$ GainLife | Defined$ TargetedController | LifeAmount$ X
 SVar:X:Targeted$CardManaCost
 SVar:Picture:http://www.wizards.com/global/images/magic/general/illumination.jpg
-Oracle:Counter target artifact or enchantment spell. Its controller gains life equal to its converted mana cost.
+Oracle:Counter target artifact or enchantment spell. Its controller gains life equal to its mana value.

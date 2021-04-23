@@ -12,9 +12,9 @@ ALTERNATE
 Name:Dispersal
 ManaCost:3 U B
 Types:Instant
-A:SP$ RepeatEach | Cost$ 3 U B | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ TrigChooseReturn | SubAbility$ DBReturn | SpellDescription$ Each opponent returns a nonland permanent they control with the highest converted mana cost among permanents they control to its owner's hand, then discards a card.
-SVar:TrigChooseReturn:DB$ ChooseCard | Defined$ Remembered | Choices$ Permanent.greatestCMC_NonLandPermanentControlledByRemembered | ChoiceTitle$ Choose a nonland permanent with the highest converted mana cost | Mandatory$ True | RememberChosen$ True
+A:SP$ RepeatEach | Cost$ 3 U B | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ TrigChooseReturn | SubAbility$ DBReturn | SpellDescription$ Each opponent returns a nonland permanent they control with the highest mana value among permanents they control to its owner's hand, then discards a card.
+SVar:TrigChooseReturn:DB$ ChooseCard | Defined$ Remembered | Choices$ Permanent.greatestCMC_NonLandPermanentControlledByRemembered | ChoiceTitle$ Choose a nonland permanent with the highest mana value | Mandatory$ True | RememberChosen$ True
 SVar:DBReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ Remembered | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ Player.Opponent | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-Oracle:Each opponent returns a nonland permanent they control with the highest converted mana cost among permanents they control to its owner's hand, then discards a card.
+Oracle:Each opponent returns a nonland permanent they control with the highest mana value among permanents they control to its owner's hand, then discards a card.

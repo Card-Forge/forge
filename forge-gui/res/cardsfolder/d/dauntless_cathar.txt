@@ -2,7 +2,7 @@ Name:Dauntless Cathar
 ManaCost:2 W
 Types:Creature Human Soldier
 PT:3/2
-A:AB$ Token | Cost$ 1 W ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | SorcerySpeed$ True | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You | LegacyImage$ w 1 1 spirit flying soi | SpellDescription$ Create a 1/1 white Spirit creature token with flying. Activate this ability only any time you could cast a sorcery.
+A:AB$ Token | Cost$ 1 W ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | SorcerySpeed$ True | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You | LegacyImage$ w 1 1 spirit flying soi | SpellDescription$ Create a 1/1 white Spirit creature token with flying. Activate only as a sorcery.
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dauntless_cathar.jpg
-Oracle:{1}{W}, Exile Dauntless Cathar from your graveyard: Create a 1/1 white Spirit creature token with flying. Activate this ability only any time you could cast a sorcery.
+Oracle:{1}{W}, Exile Dauntless Cathar from your graveyard: Create a 1/1 white Spirit creature token with flying. Activate only as a sorcery.

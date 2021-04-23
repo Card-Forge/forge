@@ -1,8 +1,8 @@
 Name:Grinning Totem
 ManaCost:4
 Types:Artifact
-A:AB$ ChangeZone | Cost$ 2 T Sac<1/CARDNAME> | ValidTgts$ Player.Opponent | IsCurse$ True | Chooser$ You | Origin$ Library | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | IsCurse$ True | RememberChanged$ True | SubAbility$ TotemEffect | SpellDescription$ Search target opponent's library for a card and exile it. Then that player shuffles their library. Until the beginning of your next upkeep, you may play that card. At the beginning of your next upkeep, if you haven't played it, put it into its owner's graveyard. | StackDescription$ SpellDescription
-SVar:TotemEffect:DB$ Effect | StaticAbilities$ STGrinning | Duration$ Permanent | RememberObjects$ Remembered | Triggers$ TrigDuration,TrigReturn,TrigLandPlayed,TrigCast | SubAbility$ DBResetSVar 
+A:AB$ ChangeZone | Cost$ 2 T Sac<1/CARDNAME> | ValidTgts$ Player.Opponent | IsCurse$ True | Chooser$ You | Origin$ Library | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | IsCurse$ True | RememberChanged$ True | SubAbility$ TotemEffect | SpellDescription$ Search target opponent's library for a card and exile it. Then that player shuffles. Until the beginning of your next upkeep, you may play that card. At the beginning of your next upkeep, if you haven't played it, put it into its owner's graveyard. | StackDescription$ SpellDescription
+SVar:TotemEffect:DB$ Effect | StaticAbilities$ STGrinning | Duration$ Permanent | RememberObjects$ Remembered | Triggers$ TrigDuration,TrigReturn,TrigLandPlayed,TrigCast | SubAbility$ DBResetSVar
 # Even though the Effect is "Permanent", it's not really permanent
 SVar:DBResetSVar:DB$ StoreSVar | SVar$ ActiveTotem | Type$ Number | Expression$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
@@ -20,4 +20,4 @@ SVar:TrigLandPlayed:Mode$ LandPlayed | ValidCard$ Land.IsRemembered | Static$ Tr
 SVar:TrigCast:Mode$ SpellCast | ValidCard$ Card.IsRemembered | Static$ True | TriggerZones$ Command | Execute$ RemoveEffect
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grinning_totem.jpg
-Oracle:{2}, {T}, Sacrifice Grinning Totem: Search target opponent's library for a card and exile it. Then that player shuffles their library. Until the beginning of your next upkeep, you may play that card. At the beginning of your next upkeep, if you haven't played it, put it into its owner's graveyard.
+Oracle:{2}, {T}, Sacrifice Grinning Totem: Search target opponent's library for a card and exile it. Then that player shuffles. Until the beginning of your next upkeep, you may play that card. At the beginning of your next upkeep, if you haven't played it, put it into its owner's graveyard.

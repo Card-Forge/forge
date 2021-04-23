@@ -3,8 +3,8 @@ ManaCost:1 U
 Types:Creature Human Artificer
 PT:1/3
 A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | RestrictValid$ Card.Artifact,Activated.Artifact | SpellDescription$ Add {C}{C}. Spend this mana only to cast artifact spells or activate abilities of artifacts.
-A:AB$ ChangeZone | Cost$ U T | Origin$ Library | Destination$ Hand| ChangeType$ Card.namedHeart-Piercer Bow,Card.namedVial of Dragonfire | ChangeNum$ 1 | StackDescription$ SpellDescription | SpellDescription$ Search your library for a card named Heart-Piercer Bow or Vial of Dragonfire, put it into your hand, then shuffle your library.
+A:AB$ ChangeZone | Cost$ U T | Origin$ Library | Destination$ Hand| ChangeType$ Card.namedHeart-Piercer Bow,Card.namedVial of Dragonfire | ChangeNum$ 1 | StackDescription$ SpellDescription | SpellDescription$ Search your library for a card named Heart-Piercer Bow or Vial of Dragonfire, put it into your hand, then shuffle.
 DeckHints:Name$Heart-Piercer Bow|Vial of Dragonfire
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/renowned_weaponsmith.jpg
-Oracle:{T}: Add {C}{C}. Spend this mana only to cast artifact spells or activate abilities of artifacts.\n{U}, {T}: Search your library for a card named Heart-Piercer Bow or Vial of Dragonfire, reveal it, put it into your hand, then shuffle your library.
+Oracle:{T}: Add {C}{C}. Spend this mana only to cast artifact spells or activate abilities of artifacts.\n{U}, {T}: Search your library for a card named Heart-Piercer Bow or Vial of Dragonfire, reveal it, put it into your hand, then shuffle.

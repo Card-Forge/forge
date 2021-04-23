@@ -1,7 +1,7 @@
 Name:Oko's Hospitality
 ManaCost:3 G U
 Types:Instant
-A:SP$ AnimateAll | Cost$ 3 G U | ValidCards$ Creature.YouCtrl | Power$ 3 | Toughness$ 3 | SubAbility$ DBSearch | SpellDescription$ Creatures you control have base power and toughness 3/3 until end of turn. You may search your library and/or graveyard for a card named Oko, the Trickster, reveal it, and put it into your hand. If you search your library this way, shuffle it.
+A:SP$ AnimateAll | Cost$ 3 G U | ValidCards$ Creature.YouCtrl | Power$ 3 | Toughness$ 3 | SubAbility$ DBSearch | SpellDescription$ Creatures you control have base power and toughness 3/3 until end of turn. You may search your library and/or graveyard for a card named Oko, the Trickster, reveal it, and put it into your hand. If you search your library this way, shuffle.
 SVar:DBSearch:DB$ ChangeZone | Origin$ Library | OriginChoice$ True | OriginAlternative$ Graveyard | AlternativeMessage$ Would you like to search your library with this ability? If you do, your library will be shuffled. | Destination$ Hand | ChangeType$ Card.namedOko; the Trickster | ChangeNum$ 1 | Optional$ True
 DeckNeeds:Name$Oko, the Trickster
-Oracle:Creatures you control have base power and toughness 3/3 until end of turn. You may search your library and/or graveyard for a card named Oko, the Trickster, reveal it, and put it into your hand. If you search your library this way, shuffle it.
+Oracle:Creatures you control have base power and toughness 3/3 until end of turn. You may search your library and/or graveyard for a card named Oko, the Trickster, reveal it, and put it into your hand. If you search your library this way, shuffle.

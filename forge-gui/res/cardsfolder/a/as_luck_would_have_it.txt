@@ -6,4 +6,4 @@ T:Mode$ RolledDie | Execute$ TrigCounters | ValidPlayer$ You | TriggerZones$ Bat
 SVar:TrigCounters:DB$ PutCounter | Defined$ Self | CounterType$ LUCK | CounterNum$ X | SubAbility$ DBWin
 SVar:DBWin:DB$ WinsGame | Defined$ You | ConditionPresent$ Card.Self+counters_GE100_LUCK
 SVar:X:TriggerCount$Result
-Oracle:Whenever you roll a die, put a number of luck counters on As Luck Would Have It equal to the result. Then if there are 100 or more luck counters on As Luck Would Have It, you win the game. (Count both rolls if you reroll a die.)
+Oracle:Hexproof\nWhenever you roll a die, put a number of luck counters on As Luck Would Have It equal to the result. Then if there are 100 or more luck counters on As Luck Would Have It, you win the game. (Count both rolls if you reroll a die.)

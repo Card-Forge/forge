@@ -2,9 +2,9 @@ Name:Wave of Terror
 ManaCost:2 B
 Types:Enchantment
 K:Cumulative upkeep:1
-T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDestroyAll | TriggerDescription$ At the beginning of your draw step, destroy each creature with converted mana cost equal to the number of age counters on CARDNAME. They can't be regenerated.
+T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDestroyAll | TriggerDescription$ At the beginning of your draw step, destroy each creature with mana value equal to the number of age counters on CARDNAME. They can't be regenerated.
 SVar:TrigDestroyAll:DB$ DestroyAll | ValidCards$ Creature.cmcEQX | NoRegen$ True
 SVar:X:Count$CardCounters.AGE
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wave_of_terror.jpg
-Oracle:Cumulative upkeep {1} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nAt the beginning of your draw step, destroy each creature with converted mana cost equal to the number of age counters on Wave of Terror. They can't be regenerated.
+Oracle:Cumulative upkeep {1} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nAt the beginning of your draw step, destroy each creature with mana value equal to the number of age counters on Wave of Terror. They can't be regenerated.

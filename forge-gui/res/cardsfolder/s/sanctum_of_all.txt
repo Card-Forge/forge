@@ -1,8 +1,8 @@
 Name:Sanctum of All
 ManaCost:W U B R G
 Types:Legendary Enchantment Shrine
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigSearch | TriggerDescription$ At the beginning of your upkeep, you may search your library and/or graveyard for a Shrine card and put it onto the battlefield. If you search your library this way, shuffle it.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigSearch | TriggerDescription$ At the beginning of your upkeep, you may search your library and/or graveyard for a Shrine card and put it onto the battlefield. If you search your library this way, shuffle.
 SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | OriginChoice$ True | OriginAlternative$ Graveyard | AlternativeMessage$ Would you like to search your library with this ability? If you do, your library will be shuffled. | Destination$ Battlefield | ChangeType$ Card.Shrine
 S:Mode$ Panharmonicon | ValidCard$ Shrine.Other+YouCtrl | IsPresent$ Shrine.YouCtrl | PresentCompare$ GE6 | Description$If an ability of another Shrine you control triggers while you control six or more Shrines, that ability triggers an additional time.
 DeckHints:Type$Shrine
-Oracle:At the beginning of your upkeep, you may search your library and/or graveyard for a Shrine card and put it onto the battlefield. If you search your library this way, shuffle it.\nIf an ability of another Shrine you control triggers while you control six or more Shrines, that ability triggers an additional time.
+Oracle:At the beginning of your upkeep, you may search your library and/or graveyard for a Shrine card and put it onto the battlefield. If you search your library this way, shuffle.\nIf an ability of another Shrine you control triggers while you control six or more Shrines, that ability triggers an additional time.

@@ -5,4 +5,4 @@ A:SP$ Draw | Cost$ 1 U | Defined$ You | NumCards$ 1 | SubAbility$ DBClash | Spel
 SVar:DBClash:DB$Clash | WinSubAbility$ DBReturn
 SVar:DBReturn:DB$ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/research_the_deep.jpg
-Oracle:Draw a card. Clash with an opponent. If you win, return Research the Deep to its owner's hand. (Each clashing player reveals the top card of their library, then puts that card on the top or bottom. A player wins if their card had a higher converted mana cost.)
+Oracle:Draw a card. Clash with an opponent. If you win, return Research the Deep to its owner's hand. (Each clashing player reveals the top card of their library, then puts that card on the top or bottom. A player wins if their card had a higher mana value.)

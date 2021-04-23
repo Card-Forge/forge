@@ -3,6 +3,6 @@ ManaCost:2 B
 Types:Creature Rat
 PT:1/1
 A:AB$ DamageAll | Cost$ 2 B | ValidCards$ Creature | ValidPlayers$ Player | NumDmg$ 1 | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 1 damage to each creature and each player.
-A:AB$ DamageAll | Cost$ 3 B | ValidCards$ Creature | ValidPlayers$ Player | NumDmg$ 3 | ValidDescription$ each creature and each player. | Activation$ Threshold | PrecostDesc$ Threshold — | SpellDescription$ CARDNAME deals 3 damage to each creature and each player. Activate this ability only if seven or more cards are in your graveyard.
+A:AB$ DamageAll | Cost$ 3 B | ValidCards$ Creature | ValidPlayers$ Player | NumDmg$ 3 | ValidDescription$ each creature and each player. | Activation$ Threshold | PrecostDesc$ Threshold — | SpellDescription$ CARDNAME deals 3 damage to each creature and each player. Activate only if seven or more cards are in your graveyard.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infected_vermin.jpg
-Oracle:{2}{B}: Infected Vermin deals 1 damage to each creature and each player.\nThreshold — {3}{B}: Infected Vermin deals 3 damage to each creature and each player. Activate this ability only if seven or more cards are in your graveyard.
+Oracle:{2}{B}: Infected Vermin deals 1 damage to each creature and each player.\nThreshold — {3}{B}: Infected Vermin deals 3 damage to each creature and each player. Activate only if seven or more cards are in your graveyard.

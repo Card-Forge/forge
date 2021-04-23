@@ -1,10 +1,10 @@
 Name:Planeswalker's Scorn
 ManaCost:2 B
 Types:Enchantment
-A:AB$ Reveal | Cost$ 3 B | Random$ True | RememberRevealed$ True | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SorcerySpeed$ True | SubAbility$ DBPump | SpellDescription$ Target opponent reveals a card at random from their hand. Target creature gets -X/-X until end of turn, where X is the revealed card's converted mana cost. Activate this ability only any time you could cast a sorcery.
+A:AB$ Reveal | Cost$ 3 B | Random$ True | RememberRevealed$ True | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SorcerySpeed$ True | SubAbility$ DBPump | SpellDescription$ Target opponent reveals a card at random from their hand. Target creature gets -X/-X until end of turn, where X is the revealed card's mana value. Activate only as a sorcery.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/planeswalkers_scorn.jpg
-Oracle:{3}{B}: Target opponent reveals a card at random from their hand. Target creature gets -X/-X until end of turn, where X is the revealed card's converted mana cost. Activate this ability only any time you could cast a sorcery.
+Oracle:{3}{B}: Target opponent reveals a card at random from their hand. Target creature gets -X/-X until end of turn, where X is the revealed card's mana value. Activate only as a sorcery.

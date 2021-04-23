@@ -1,11 +1,11 @@
 Name:Enchanter's Bane
 ManaCost:1 R
 Types:Enchantment
-T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTarget | TriggerDescription$ At the beginning of your end step, target enchantment deals damage equal to its converted mana cost to its controller unless that player sacrifices it.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTarget | TriggerDescription$ At the beginning of your end step, target enchantment deals damage equal to its mana value to its controller unless that player sacrifices it.
 SVar:TrigTarget:DB$ Pump | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | IsCurse$ True | ImprintCards$ Targeted | SubAbility$ DBSac
 SVar:DBSac:DB$ Sacrifice | Defined$ TargetedController | SacValid$ TargetedCard.Self | Optional$ True | RememberSacrificed$ True | SubAbility$ TrigDamage
 SVar:TrigDamage:DB$ DealDamage | NumDmg$ X | Defined$ ImprintedController | DamageSource$ Imprinted | ConditionCheckSVar$ Y | ConditionSVarCompare$ EQ0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:Y:Remembered$Amount
 SVar:X:Imprinted$CardManaCost
-Oracle:At the beginning of your end step, target enchantment deals damage equal to its converted mana cost to its controller unless that player sacrifices it.
+Oracle:At the beginning of your end step, target enchantment deals damage equal to its mana value to its controller unless that player sacrifices it.

@@ -5,4 +5,4 @@ PT:2/1
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature gets -1/-0 until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | IsCurse$ True
-Oracle:When Burrog Befuddler enters the battlefield, target creature gets -1/-0 until end of turn.
+Oracle:Flash\nWhen Burrog Befuddler enters the battlefield, target creature an opponent controls gets -1/-0 until end of turn.

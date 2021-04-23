@@ -1,8 +1,8 @@
 Name:Veiled Sentry
 ManaCost:U
 Types:Enchantment
-T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | Execute$ TrigAnimate | TriggerZones$ Battlefield | IsPresent$ Card.Self+Enchantment | TriggerDescription$ When an opponent casts a spell, if CARDNAME is an enchantment, CARDNAME becomes an Illusion creature with power and toughness each equal to that spell's converted mana cost.
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | Execute$ TrigAnimate | TriggerZones$ Battlefield | IsPresent$ Card.Self+Enchantment | TriggerDescription$ When an opponent casts a spell, if CARDNAME is an enchantment, CARDNAME becomes an Illusion creature with power and toughness each equal to that spell's mana value.
 SVar:TrigAnimate:DB$ Animate | Defined$ Self | Power$ X | Toughness$ X | Types$ Creature,Illusion | RemoveCardTypes$ True | Permanent$ True
 SVar:X:TriggerCount$CastSACMC
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veiled_sentry.jpg
-Oracle:When an opponent casts a spell, if Veiled Sentry is an enchantment, Veiled Sentry becomes an Illusion creature with power and toughness each equal to that spell's converted mana cost.
+Oracle:When an opponent casts a spell, if Veiled Sentry is an enchantment, Veiled Sentry becomes an Illusion creature with power and toughness each equal to that spell's mana value.

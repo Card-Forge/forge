@@ -5,7 +5,7 @@ K:Enchant creature
 A:SP$ Attach | Cost$ U | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigPump | TriggerZones$ Battlefield | IsPresent$ Card.AttachedBy+powerLE2 | PresentCompare$ GE1 | TriggerDescription$ Whenever enchanted creature attacks, if its power is 2 or less, it can't be blocked this turn.
 SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttacker | KW$ HIDDEN Unblockable
-A:AB$ Pump | Cost$ 1 U Reveal<1/CARDNAME> | TgtPrompt$ Choose target creature with power 2 or less | ValidTgts$ Creature.powerLE2 | KW$ HIDDEN Unblockable | Forecast$ True | SpellDescription$ Target creature with power 2 or less can't be blocked this turn. (Activate this ability only during your upkeep and only once each turn.)
+A:AB$ Pump | Cost$ 1 U Reveal<1/CARDNAME> | TgtPrompt$ Choose target creature with power 2 or less | ValidTgts$ Creature.powerLE2 | KW$ HIDDEN Unblockable | Forecast$ True | SpellDescription$ Target creature with power 2 or less can't be blocked this turn. (Activate only during your upkeep and only once each turn.)
 SVar:NonStackingAttachEffect:True
 AI:RemoveDeck:All
-Oracle:Enchant creature\nWhenever enchanted creature attacks, if its power is 2 or less, it can't be blocked this turn.\nForecast — {1}{U}, Reveal Writ of Passage from your hand: Target creature with power 2 or less can't be blocked this turn. (Activate this ability only during your upkeep and only once each turn.)
+Oracle:Enchant creature\nWhenever enchanted creature attacks, if its power is 2 or less, it can't be blocked this turn.\nForecast — {1}{U}, Reveal Writ of Passage from your hand: Target creature with power 2 or less can't be blocked this turn. (Activate only during your upkeep and only once each turn.)

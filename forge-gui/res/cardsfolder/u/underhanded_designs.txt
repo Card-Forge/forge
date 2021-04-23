@@ -4,8 +4,8 @@ Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever an artifact enters the battlefield under your control, you may pay {1}. If you do, each opponent loses 1 life and you gain 1 life.
 SVar:TrigDrain:AB$ LoseLife | Cost$ 1 | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
-A:AB$ Destroy | Cost$ 1 B Sac<1/CARDNAME> | ValidTgts$ Creature | CheckSVar$ X | SVarCompare$ GE2 | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature. Activate this ability only if you control two or more artifacts.
+A:AB$ Destroy | Cost$ 1 B Sac<1/CARDNAME> | ValidTgts$ Creature | CheckSVar$ X | SVarCompare$ GE2 | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature. Activate only if you control two or more artifacts.
 SVar:X:Count$Valid Card.Artifact+YouCtrl
 DeckHas:Ability$LifeGain
 SVar:Picture:http://www.wizards.com/global/images/magic/general/underhanded_designs.jpg
-Oracle:Whenever an artifact enters the battlefield under your control, you may pay {1}. If you do, each opponent loses 1 life and you gain 1 life.\n{1}{B}, Sacrifice Underhanded Designs: Destroy target creature. Activate this ability only if you control two or more artifacts.
+Oracle:Whenever an artifact enters the battlefield under your control, you may pay {1}. If you do, each opponent loses 1 life and you gain 1 life.\n{1}{B}, Sacrifice Underhanded Designs: Destroy target creature. Activate only if you control two or more artifacts.

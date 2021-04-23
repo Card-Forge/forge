@@ -2,7 +2,7 @@ Name:Spinneret Sliver
 ManaCost:1 G
 Types:Creature Sliver
 PT:2/2
-S:Mode$ Continuous | Affected$ Creature.Sliver | AddKeyword$ Reach | Description$ All Sliver creatures have reach. (They can block creatures with flying.)
+S:Mode$ Continuous | Affected$ Creature.Sliver | AddKeyword$ Reach | Description$ All Sliver creatures have reach.
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spinneret_sliver.jpg
-Oracle:All Sliver creatures have reach. (They can block creatures with flying.)
+Oracle:All Sliver creatures have reach.

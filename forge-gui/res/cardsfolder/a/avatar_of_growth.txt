@@ -4,7 +4,7 @@ Types:Creature Elemental Avatar
 PT:4/4
 K:Trample
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ Trample
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | TriggerDescription$ When CARDNAME enters the battlefield, each player searches their library for up to two basic land cards, puts them onto the battlefield, then shuffles their library.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | TriggerDescription$ When CARDNAME enters the battlefield, each player searches their library for up to two basic land cards, puts them onto the battlefield, then shuffles.
 SVar:TrigSearch:DB$ ChangeZone | Optional$ True | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | DefinedPlayer$ Player | ChangeNum$ 2 | Shuffle$ True
 SVar:X:PlayerCountOpponents$Amount
-Oracle:This spell costs {1} less to cast for each opponent you have.\nTrample\nWhen Avatar of Growth enters the battlefield, each player searches their library for up to two basic land cards, puts them onto the battlefield, then shuffles their library.
+Oracle:This spell costs {1} less to cast for each opponent you have.\nTrample\nWhen Avatar of Growth enters the battlefield, each player searches their library for up to two basic land cards, puts them onto the battlefield, then shuffles.

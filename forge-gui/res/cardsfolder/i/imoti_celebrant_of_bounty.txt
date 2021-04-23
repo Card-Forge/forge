@@ -3,5 +3,5 @@ ManaCost:3 G U
 Types:Legendary Creature Naga Druid
 PT:3/1
 K:Cascade
-S:Mode$ Continuous | Affected$ Card.YouCtrl+cmcGE6 | AffectedZone$ Stack | AddKeyword$ Cascade | Description$ Spells you cast with converted mana cost 6 or greater have cascade.
-Oracle:Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)\nSpells you cast with converted mana cost 6 or greater have cascade.
+S:Mode$ Continuous | Affected$ Card.YouCtrl+cmcGE6 | AffectedZone$ Stack | AddKeyword$ Cascade | Description$ Spells you cast with mana value 6 or greater have cascade.
+Oracle:Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)\nSpells you cast with mana value 6 or greater have cascade.

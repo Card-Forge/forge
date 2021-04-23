@@ -4,4 +4,4 @@ Types:Creature Zombie
 PT:2/3
 A:AB$ LoseLife | Cost$ 1 B T | Defined$ Player.Opponent | CheckSVar$ X | SVarCompare$ GE1 | LifeAmount$ 2 | SpellDescription$ Each Opponent Loses 2 life.
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
-Oracle:{1}{B}, {T}: Each opponent loses 2 life. Activate this ability only if a creature died this turn.
+Oracle:{1}{B}, {T}: Each opponent loses 2 life. Activate only if a creature died this turn.

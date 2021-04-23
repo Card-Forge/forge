@@ -5,5 +5,5 @@ PT:4/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigUntapAll | TriggerDescription$ When CARDNAME enters the battlefield, untap all creatures you control.
 SVar:TrigUntapAll:DB$ UntapAll | ValidCards$ Creature.YouCtrl | SpellDescription$ untap all creatures you control.
-A:AB$ Draw | Cost$ tapXType<2/Creature.White;Creature.Blue/white and/or blue creatures> Reveal<1/CARDNAME> | NumCards$ 1 | Forecast$ True | SpellDescription$ Draw a card. (Activate this ability only during your upkeep and only once each turn.)
-Oracle:Flying\nWhen Sky Hussar enters the battlefield, untap all creatures you control.\nForecast — Tap two untapped white and/or blue creatures you control, Reveal Sky Hussar from your hand: Draw a card. (Activate this ability only during your upkeep and only once each turn.)
+A:AB$ Draw | Cost$ tapXType<2/Creature.White;Creature.Blue/white and/or blue creatures> Reveal<1/CARDNAME> | NumCards$ 1 | Forecast$ True | SpellDescription$ Draw a card. (Activate only during your upkeep and only once each turn.)
+Oracle:Flying\nWhen Sky Hussar enters the battlefield, untap all creatures you control.\nForecast — Tap two untapped white and/or blue creatures you control, Reveal Sky Hussar from your hand: Draw a card. (Activate only during your upkeep and only once each turn.)

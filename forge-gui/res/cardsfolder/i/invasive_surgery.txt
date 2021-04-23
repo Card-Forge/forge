@@ -11,4 +11,4 @@ SVar:NumInHand:TargetedController$CardsInHand
 SVar:NumInYard:TargetedController$CardsInGraveyard
 DeckHints:Ability$Graveyard & Ability$Discard
 DeckHas:Ability$Delirium
-Oracle:Counter target sorcery spell.\nDelirium — If there are four or more card types among cards in your graveyard, search the graveyard, hand, and library of that spell's controller for any number of cards with the same name as that spell, exile those cards, then that player shuffles their library.
+Oracle:Counter target sorcery spell.\nDelirium — If there are four or more card types among cards in your graveyard, search the graveyard, hand, and library of that spell's controller for any number of cards with the same name as that spell, exile those cards, then that player shuffles.

@@ -2,7 +2,7 @@ Name:Captain Sisay
 ManaCost:2 G W
 Types:Legendary Creature Human Soldier
 PT:2/2
-A:AB$ ChangeZone | Cost$ T | Origin$ Library | Destination$ Hand | ChangeType$ Legendary | ChangeNum$ 1 | SpellDescription$ Search your library for a legendary card, reveal that card, and put it into your hand. Then shuffle your library.
+A:AB$ ChangeZone | Cost$ T | Origin$ Library | Destination$ Hand | ChangeType$ Legendary | ChangeNum$ 1 | SpellDescription$ Search your library for a legendary card, reveal that card, put it into your hand, then shuffle.
 SVar:NonCombatPriority:3
 SVar:Picture:http://resources.wizards.com/magic/cards/in/en-us/card25976.jpg
-Oracle:{T}: Search your library for a legendary card, reveal that card, and put it into your hand. Then shuffle your library.
+Oracle:{T}: Search your library for a legendary card, reveal that card, put it into your hand, then shuffle.

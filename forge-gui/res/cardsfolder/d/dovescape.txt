@@ -1,10 +1,10 @@
 Name:Dovescape
 ManaCost:3 WU WU WU
 Types:Enchantment
-T:Mode$ SpellCast | ValidCard$ Card.nonCreature | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever a player casts a noncreature spell, counter that spell. That player creates X 1/1 white and blue Bird creature tokens with flying, where X is the spell's converted mana cost.
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever a player casts a noncreature spell, counter that spell. That player creates X 1/1 white and blue Bird creature tokens with flying, where X is the spell's mana value.
 SVar:TrigCounter:DB$ Counter | Defined$ TriggeredSpellAbility | RememberCounteredCMC$ True | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ wu_1_1_bird_flying | TokenOwner$ TriggeredActivator | LegacyImage$ wu 1 1 bird flying dis | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedNumber
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dovescape.jpg
-Oracle:({W/U} can be paid with either {W} or {U}.)\nWhenever a player casts a noncreature spell, counter that spell. That player creates X 1/1 white and blue Bird creature tokens with flying, where X is the spell's converted mana cost.
+Oracle:({W/U} can be paid with either {W} or {U}.)\nWhenever a player casts a noncreature spell, counter that spell. That player creates X 1/1 white and blue Bird creature tokens with flying, where X is the spell's mana value.

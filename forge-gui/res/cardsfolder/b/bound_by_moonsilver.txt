@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. & CARDNAME can't transform | Description$ Enchanted creature can't attack, block, or transform.
-A:AB$ Attach | Cost$ Sac<1/Permanent.Other/another permanent> | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Curse | SorcerySpeed$ True | ActivationLimit$ 1 | SpellDescription$ Attach CARDNAME to target creature. Activate this ability only any time you could cast a sorcery and only once each turn.
+A:AB$ Attach | Cost$ Sac<1/Permanent.Other/another permanent> | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Curse | SorcerySpeed$ True | ActivationLimit$ 1 | SpellDescription$ Attach CARDNAME to target creature. Activate only as a sorcery and only once each turn.
 SVar:AIPreference:SacCost$Card.token,Permanent.nonLand+cmcLE2,Land.Basic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bound_by_moonsilver.jpg
-Oracle:Enchant creature\nEnchanted creature can't attack, block, or transform.\nSacrifice another permanent: Attach Bound by Moonsilver to target creature. Activate this ability only any time you could cast a sorcery and only once each turn.
+Oracle:Enchant creature\nEnchanted creature can't attack, block, or transform.\nSacrifice another permanent: Attach Bound by Moonsilver to target creature. Activate only as a sorcery and only once each turn.

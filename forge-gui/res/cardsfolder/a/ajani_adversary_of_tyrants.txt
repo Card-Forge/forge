@@ -2,10 +2,10 @@ Name:Ajani, Adversary of Tyrants
 ManaCost:2 W W
 Types:Legendary Planeswalker Ajani
 A:AB$ PutCounter | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | CounterType$ P1P1 | CounterNum$ 1 | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Put a +1/+1 counter on each of up to two target creatures.
-A:AB$ ChangeZone | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Card.Creature+cmcLE2+YouCtrl | TgtPrompt$ Select target creature card with converted mana cost 2 or less | SpellDescription$ Return target creature card with converted mana cost 2 or less from your graveyard to the battlefield.
+A:AB$ ChangeZone | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Card.Creature+cmcLE2+YouCtrl | TgtPrompt$ Select target creature card with mana value 2 or less | SpellDescription$ Return target creature card with mana value 2 or less from your graveyard to the battlefield.
 A:AB$ Effect | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Ajani, Adversary of Tyrants | Image$ emblem_ajani_adversary_of_tyrants | Triggers$ EffPhase | Duration$ Permanent | SpellDescription$ You get an emblem with "At the beginning of your end step, create three 1/1 white Cat creature tokens with lifelink."
 SVar:EffPhase:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ EmblemTrigToken | TriggerDescription$ At the beginning of your end step, create three 1/1 white Cat creature tokens with lifelink.
 SVar:EmblemTrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ 3 | TokenScript$ w_1_1_cat_lifelink | LegacyImage$ w 1 1 cat lifelink m19
 DeckHas:Ability$Counters & Ability$Token
-Oracle:[+1]: Put a +1/+1 counter on each of up to two target creatures.\n[−2]: Return target creature card with converted mana cost 2 or less from your graveyard to the battlefield.\n[−7]: You get an emblem with "At the beginning of your end step, create three 1/1 white Cat creature tokens with lifelink."
+Oracle:[+1]: Put a +1/+1 counter on each of up to two target creatures.\n[−2]: Return target creature card with mana value 2 or less from your graveyard to the battlefield.\n[−7]: You get an emblem with "At the beginning of your end step, create three 1/1 white Cat creature tokens with lifelink."
 Loyalty:4

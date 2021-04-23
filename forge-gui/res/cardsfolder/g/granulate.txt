@@ -1,6 +1,6 @@
 Name:Granulate
 ManaCost:2 R R
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 2 R R | ValidCards$ Artifact.nonLand+cmcLE4 | SpellDescription$ Destroy each nonland artifact with converted mana cost 4 or less.
+A:SP$ DestroyAll | Cost$ 2 R R | ValidCards$ Artifact.nonLand+cmcLE4 | SpellDescription$ Destroy each nonland artifact with mana value 4 or less.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/granulate.jpg
-Oracle:Destroy each nonland artifact with converted mana cost 4 or less.
+Oracle:Destroy each nonland artifact with mana value 4 or less.

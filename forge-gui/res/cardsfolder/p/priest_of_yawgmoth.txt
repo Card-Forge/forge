@@ -2,8 +2,8 @@ Name:Priest of Yawgmoth
 ManaCost:1 B
 Types:Creature Human Cleric
 PT:1/2
-A:AB$ Mana | Cost$ T Sac<1/Artifact> | Produced$ B | Amount$ X | SpellDescription$ Add an amount of black mana equal to the sacrificed artifact's converted mana cost.
+A:AB$ Mana | Cost$ T Sac<1/Artifact> | Produced$ B | Amount$ X | SpellDescription$ Add an amount of black mana equal to the sacrificed artifact's mana value.
 SVar:X:Sacrificed$CardManaCost
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/priest_of_yawgmoth.jpg
-Oracle:{T}, Sacrifice an artifact: Add an amount of {B} equal to the sacrificed artifact's converted mana cost.
+Oracle:{T}, Sacrifice an artifact: Add an amount of {B} equal to the sacrificed artifact's mana value.

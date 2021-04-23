@@ -4,9 +4,9 @@ Types:Enchantment Saga
 K:Saga:3:DBDamageAll,DBScry,DBEffect
 SVar:DBDamageAll:DB$ DamageAll | NumDmg$ 4 | ValidCards$ Creature.nonGiant,Planeswalker | ValidDescription$ each non-Giant creature and each planeswalker. | SpellDescription$ CARDNAME deals 4 damage to each non-Giant creature and each planeswalker.
 SVar:DBScry:DB$ Scry | ScryNum$ 3 | SpellDescription$ Scry 3.
-SVar:DBEffect:DB$ Effect | Triggers$ CastSpell | SpellDescription$ Whenever you cast a spell with converted mana cost 5 or greater this turn, draw two cards, then discard a card.
-SVar:CastSpell:Mode$ SpellCast | ValidCard$ Card.cmcGE5 | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ DBDraw | TriggerDescription$ Whenever you cast a spell with converted mana cost 5 or greater this turn, draw two cards, then discard a card.
+SVar:DBEffect:DB$ Effect | Triggers$ CastSpell | SpellDescription$ Whenever you cast a spell with mana value 5 or greater this turn, draw two cards, then discard a card.
+SVar:CastSpell:Mode$ SpellCast | ValidCard$ Card.cmcGE5 | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ DBDraw | TriggerDescription$ Whenever you cast a spell with mana value 5 or greater this turn, draw two cards, then discard a card.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 2 | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 DeckHints:Type$Giant
-Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Battle of Frost and Fire deals 4 damage to each non-Giant creature and each planeswalker.\nII — Scry 3.\nIII — Whenever you cast a spell with converted mana cost 5 or greater this turn, draw two cards, then discard a card.
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Battle of Frost and Fire deals 4 damage to each non-Giant creature and each planeswalker.\nII — Scry 3.\nIII — Whenever you cast a spell with mana value 5 or greater this turn, draw two cards, then discard a card.

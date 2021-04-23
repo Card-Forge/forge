@@ -7,4 +7,4 @@ T:Mode$ SpellCastOrCopy | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ Yo
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 1
 SVar:BuffedBy:Instant,Sorcery
 DeckNeeds:Type$Instant|Sorcery
-Oracle:First Strike\nMagecraft — Whenever you cast or copy an instant or sorcery spell, Lorehold Pledgemage gets +1/+0 until end of turn.
+Oracle:First strike\nMagecraft — Whenever you cast or copy an instant or sorcery spell, Lorehold Pledgemage gets +1/+0 until end of turn.

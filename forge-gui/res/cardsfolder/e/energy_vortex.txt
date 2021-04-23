@@ -7,9 +7,9 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigRemove:DB$ RemoveCounter | CounterType$ VORTEX | CounterNum$ All
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.Chosen | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of the chosen player's upkeep, CARDNAME deals 3 damage to that player unless they pay {1} for each vortex counter on CARDNAME.
 SVar:TrigDamage:DB$ DealDamage | Defined$ ChosenPlayer | NumDmg$ 3 | UnlessCost$ Y | UnlessPayer$ ChosenPlayer
-A:AB$ PutCounter | Cost$ X | CounterType$ VORTEX | CounterNum$ X | PlayerTurn$ True | ActivationPhases$ Upkeep | SpellDescription$ Put X vortex counters on CARDNAME. Activate this ability only during your upkeep.
+A:AB$ PutCounter | Cost$ X | CounterType$ VORTEX | CounterNum$ X | PlayerTurn$ True | ActivationPhases$ Upkeep | SpellDescription$ Put X vortex counters on CARDNAME. Activate only during your upkeep.
 SVar:X:Count$xPaid
 SVar:Y:Count$CardCounters.VORTEX
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/energy_vortex.jpg
-Oracle:As Energy Vortex enters the battlefield, choose an opponent.\nAt the beginning of your upkeep, remove all vortex counters from Energy Vortex.\nAt the beginning of the chosen player's upkeep, Energy Vortex deals 3 damage to that player unless they pay {1} for each vortex counter on Energy Vortex.\n{X}: Put X vortex counters on Energy Vortex. Activate this ability only during your upkeep.
+Oracle:As Energy Vortex enters the battlefield, choose an opponent.\nAt the beginning of your upkeep, remove all vortex counters from Energy Vortex.\nAt the beginning of the chosen player's upkeep, Energy Vortex deals 3 damage to that player unless they pay {1} for each vortex counter on Energy Vortex.\n{X}: Put X vortex counters on Energy Vortex. Activate only during your upkeep.

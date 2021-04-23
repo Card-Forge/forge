@@ -3,4 +3,4 @@ ManaCost:4 R
 Types:Creature Troll Berserker
 PT:5/4
 A:AB$ DealDamage | Cost$ 1 R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | Boast$ True | SpellDescription$  CARDNAME deals 1 damage to any target.
-Oracle:Boast — {1}{R}: Hagi Mob deals 1 damage to any target. (Activate this ability only if this creature attacked this turn and only once each turn.)
+Oracle:Boast — {1}{R}: Hagi Mob deals 1 damage to any target. (Activate only if this creature attacked this turn and only once each turn.)

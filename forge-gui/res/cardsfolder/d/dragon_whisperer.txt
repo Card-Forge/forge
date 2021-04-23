@@ -4,8 +4,8 @@ Types:Creature Human Shaman
 PT:2/2
 A:AB$ Pump | Cost$ R | KW$ Flying | Defined$ Self | SpellDescription$ CARDNAME gains flying until end of turn.
 A:AB$ Pump | Cost$ 1 R | Defined$ Self | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
-A:AB$ Token | Cost$ 4 R R | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ r_4_4_dragon_flying | LegacyImage$ r 4 4 dragon flying dtk | CheckSVar$ FormidableTest | SVarCompare$ GE8 | PrecostDesc$ Formidable — | SpellDescription$ Create a 4/4 red Dragon creature token with flying. Activate this ability only if creatures you control have total power 8 or greater.
+A:AB$ Token | Cost$ 4 R R | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ r_4_4_dragon_flying | LegacyImage$ r 4 4 dragon flying dtk | CheckSVar$ FormidableTest | SVarCompare$ GE8 | PrecostDesc$ Formidable — | SpellDescription$ Create a 4/4 red Dragon creature token with flying. Activate only if creatures you control have total power 8 or greater.
 SVar:FormidableTest:Count$SumPower_Creature.YouCtrl
 DeckHas:Ability$Token
 DeckHints:Type$Dragon
-Oracle:{R}: Dragon Whisperer gains flying until end of turn.\n{1}{R}: Dragon Whisperer gets +1/+0 until end of turn.\nFormidable — {4}{R}{R}: Create a 4/4 red Dragon creature token with flying. Activate this ability only if creatures you control have total power 8 or greater.
+Oracle:{R}: Dragon Whisperer gains flying until end of turn.\n{1}{R}: Dragon Whisperer gets +1/+0 until end of turn.\nFormidable — {4}{R}{R}: Create a 4/4 red Dragon creature token with flying. Activate only if creatures you control have total power 8 or greater.

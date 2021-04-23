@@ -1,8 +1,8 @@
 Name:Liberating Combustion
 ManaCost:4 R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 4 R | ValidTgts$ Creature | NumDmg$ 6 | SubAbility$ DBSearch | SpellDescription$ CARDNAME deals 6 damage to target creature. You may search your library and/or graveyard for a card named Chandra, Pyrogenius, reveal it, and put it into your hand. If you search your library this way, shuffle it.
+A:SP$ DealDamage | Cost$ 4 R | ValidTgts$ Creature | NumDmg$ 6 | SubAbility$ DBSearch | SpellDescription$ CARDNAME deals 6 damage to target creature. You may search your library and/or graveyard for a card named Chandra, Pyrogenius, reveal it, and put it into your hand. If you search your library this way, shuffle.
 SVar:DBSearch:DB$ ChangeZone | Origin$ Library | OriginChoice$ True | OriginAlternative$ Graveyard | AlternativeMessage$ Would you like to search your library with this ability? If you do, your library will be shuffled. | Destination$ Hand | ChangeType$ Card.namedChandra; Pyrogenius | ChangeNum$ 1 | Optional$ True
 DeckHints:Name$Chandra, Pyrogenius
 SVar:Picture:http://www.wizards.com/global/images/magic/general/liberating_combustion.jpg
-Oracle:Liberating Combustion deals 6 damage to target creature. You may search your library and/or graveyard for a card named Chandra, Pyrogenius, reveal it, and put it into your hand. If you search your library this way, shuffle it.
+Oracle:Liberating Combustion deals 6 damage to target creature. You may search your library and/or graveyard for a card named Chandra, Pyrogenius, reveal it, and put it into your hand. If you search your library this way, shuffle.

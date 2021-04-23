@@ -2,6 +2,6 @@ Name:Leechridden Swamp
 ManaCost:no cost
 Types:Land Swamp
 K:CARDNAME enters the battlefield tapped.
-A:AB$ LoseLife | Cost$ B T | IsPresent$ Permanent.Black+YouCtrl | PresentCompare$ GE2 | Defined$ Player.Opponent | LifeAmount$ 1 | SpellDescription$ Each opponent loses 1 life. Activate this ability only if you control two or more black permanents.
+A:AB$ LoseLife | Cost$ B T | IsPresent$ Permanent.Black+YouCtrl | PresentCompare$ GE2 | Defined$ Player.Opponent | LifeAmount$ 1 | SpellDescription$ Each opponent loses 1 life. Activate only if you control two or more black permanents.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leechridden_swamp.jpg
-Oracle:({T}: Add {B}.)\nLeechridden Swamp enters the battlefield tapped.\n{B}, {T}: Each opponent loses 1 life. Activate this ability only if you control two or more black permanents.
+Oracle:({T}: Add {B}.)\nLeechridden Swamp enters the battlefield tapped.\n{B}, {T}: Each opponent loses 1 life. Activate only if you control two or more black permanents.

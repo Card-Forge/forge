@@ -1,7 +1,7 @@
 Name:Cateran Summons
 ManaCost:B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ B | Origin$ Library | Destination$ Hand | ChangeType$ Mercenary | ChangeNum$ 1 | SpellDescription$ Search your library for a Mercenary card, reveal that card, and put it into your hand. Then shuffle your library.
+A:SP$ ChangeZone | Cost$ B | Origin$ Library | Destination$ Hand | ChangeType$ Mercenary | ChangeNum$ 1 | SpellDescription$ Search your library for a Mercenary card, reveal that card, put it into your hand, then shuffle.
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cateran_summons.jpg
-Oracle:Search your library for a Mercenary card, reveal that card, and put it into your hand. Then shuffle your library.
+Oracle:Search your library for a Mercenary card, reveal that card, put it into your hand, then shuffle.

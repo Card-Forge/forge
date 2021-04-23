@@ -1,10 +1,10 @@
 Name:Vengeful Rebirth
 ManaCost:4 R G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 4 R G | ValidTgts$ Card.YouCtrl | TgtPrompt$ Select target card | Origin$ Graveyard | Destination$ Hand | SubAbility$ DBVengefulRebirthDamage | RememberTargets$ True | SpellDescription$ Return target card from your graveyard to your hand. If you return a nonland card to your hand this way, CARDNAME deals damage equal to that card's converted mana cost to any target. Exile CARDNAME.
+A:SP$ ChangeZone | Cost$ 4 R G | ValidTgts$ Card.YouCtrl | TgtPrompt$ Select target card | Origin$ Graveyard | Destination$ Hand | SubAbility$ DBVengefulRebirthDamage | RememberTargets$ True | SpellDescription$ Return target card from your graveyard to your hand. If you return a nonland card to your hand this way, CARDNAME deals damage equal to that card's mana value to any target. Exile CARDNAME.
 SVar:DBVengefulRebirthDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ VengefulRebirthX | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand | ConditionCompare$ GE1 | SubAbility$ DBVengefulRebirthExile
 SVar:DBVengefulRebirthExile:DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile | SubAbility$ DBVengefulRebirthCleanup
 SVar:DBVengefulRebirthCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:VengefulRebirthX:Remembered$CardManaCost
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vengeful_rebirth.jpg
-Oracle:Return target card from your graveyard to your hand. If you return a nonland card to your hand this way, Vengeful Rebirth deals damage equal to that card's converted mana cost to any target.\nExile Vengeful Rebirth.
+Oracle:Return target card from your graveyard to your hand. If you return a nonland card to your hand this way, Vengeful Rebirth deals damage equal to that card's mana value to any target.\nExile Vengeful Rebirth.

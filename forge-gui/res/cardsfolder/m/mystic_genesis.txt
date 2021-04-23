@@ -1,9 +1,9 @@
 Name:Mystic Genesis
 ManaCost:2 G U U
 Types:Instant
-A:SP$ Counter | Cost$ 2 G U U | TargetType$ Spell | RememberCounteredCMC$ True | ValidTgts$ Card | SubAbility$ DBToken | SpellDescription$ Counter target spell. Create an X/X green Ooze creature token, where X is that spell's converted mana cost.
+A:SP$ Counter | Cost$ 2 G U U | TargetType$ Spell | RememberCounteredCMC$ True | ValidTgts$ Card | SubAbility$ DBToken | SpellDescription$ Counter target spell. Create an X/X green Ooze creature token, where X is that spell's mana value.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_x_x_ooze | TokenOwner$ You | LegacyImage$ g x x ooze gtc | TokenPower$ X | TokenToughness$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedNumber
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_genesis.jpg
-Oracle:Counter target spell. Create an X/X green Ooze creature token, where X is that spell's converted mana cost.
+Oracle:Counter target spell. Create an X/X green Ooze creature token, where X is that spell's mana value.

@@ -6,4 +6,4 @@ SVar:DBClash:DB$ Clash | WinSubAbility$ DBGain
 SVar:DBGain:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:TargetedLKI$CardToughness
 SVar:Picture:http://www.wizards.com/global/images/magic/general/weed_strangle.jpg
-Oracle:Destroy target creature. Clash with an opponent. If you win, you gain life equal to that creature's toughness. (Each clashing player reveals the top card of their library, then puts that card on the top or bottom. A player wins if their card had a higher converted mana cost.)
+Oracle:Destroy target creature. Clash with an opponent. If you win, you gain life equal to that creature's toughness. (Each clashing player reveals the top card of their library, then puts that card on the top or bottom. A player wins if their card had a higher mana value.)

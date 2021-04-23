@@ -7,4 +7,4 @@ SVar:TrigDig:DB$Dig | DigNum$ 3 | Reveal$ True | ChangeNum$ All | ChangeValid$ L
 K:Soulshift:2
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elder_pine_of_jukai.jpg
-Oracle:Whenever you cast a Spirit or Arcane spell, reveal the top three cards of your library. Put all land cards revealed this way into your hand and the rest on the bottom of your library in any order.\nSoulshift 2 (When this creature dies, you may return target Spirit card with converted mana cost 2 or less from your graveyard to your hand.)
+Oracle:Whenever you cast a Spirit or Arcane spell, reveal the top three cards of your library. Put all land cards revealed this way into your hand and the rest on the bottom of your library in any order.\nSoulshift 2 (When this creature dies, you may return target Spirit card with mana value 2 or less from your graveyard to your hand.)

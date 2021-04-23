@@ -13,4 +13,4 @@ SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Valid Card.NamedCard/Times.3
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thought_hemorrhage.jpg
-Oracle:Choose a nonland card name. Target player reveals their hand. Thought Hemorrhage deals 3 damage to that player for each card with the chosen name revealed this way. Search that player's graveyard, hand, and library for all cards with that name and exile them. Then that player shuffles their library.
+Oracle:Choose a nonland card name. Target player reveals their hand. Thought Hemorrhage deals 3 damage to that player for each card with the chosen name revealed this way. Search that player's graveyard, hand, and library for all cards with that name and exile them. Then that player shuffles.

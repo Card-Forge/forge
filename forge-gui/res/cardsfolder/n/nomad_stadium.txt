@@ -2,8 +2,8 @@ Name:Nomad Stadium
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ W | SubAbility$ DBPain | SpellDescription$ Add {W}. CARDNAME deals 1 damage to you.
-A:AB$ GainLife | Cost$ W T Sac<1/CARDNAME> | LifeAmount$ 4 | Activation$ Threshold | PrecostDesc$ Threshold — | SpellDescription$ You gain 4 life. Activate this ability only if seven or more cards are in your graveyard.
+A:AB$ GainLife | Cost$ W T Sac<1/CARDNAME> | LifeAmount$ 4 | Activation$ Threshold | PrecostDesc$ Threshold — | SpellDescription$ You gain 4 life. Activate only if seven or more cards are in your graveyard.
 SVar:DBPain:DB$ DealDamage | NumDmg$ 1 | Defined$ You
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nomad_stadium.jpg
-Oracle:{T}: Add {W}. Nomad Stadium deals 1 damage to you.\nThreshold — {W}, {T}, Sacrifice Nomad Stadium: You gain 4 life. Activate this ability only if seven or more cards are in your graveyard.
+Oracle:{T}: Add {W}. Nomad Stadium deals 1 damage to you.\nThreshold — {W}, {T}, Sacrifice Nomad Stadium: You gain 4 life. Activate only if seven or more cards are in your graveyard.

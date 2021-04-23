@@ -8,4 +8,4 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME's power and toughness are switched
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crookclaw_transmuter.jpg
-Oracle:Flash (You may cast this spell any time you could cast an instant.)\nFlying\nWhen Crookclaw Transmuter enters the battlefield, switch target creature's power and toughness until end of turn.
+Oracle:Flash\nFlying\nWhen Crookclaw Transmuter enters the battlefield, switch target creature's power and toughness until end of turn.

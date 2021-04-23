@@ -1,7 +1,7 @@
 Name:Sprouting Vines
 ManaCost:2 G
 Types:Instant
-A:SP$ ChangeZone | Cost$ 2 G | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card, reveal that card, and put it into your hand. Then shuffle your library.
+A:SP$ ChangeZone | Cost$ 2 G | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card, reveal that card, put it into your hand, then shuffle.
 K:Storm
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sprouting_vines.jpg
-Oracle:Search your library for a basic land card, reveal that card, and put it into your hand. Then shuffle your library.\nStorm (When you cast this spell, copy it for each spell cast before it this turn.)
+Oracle:Search your library for a basic land card, reveal that card, put it into your hand, then shuffle.\nStorm (When you cast this spell, copy it for each spell cast before it this turn.)

@@ -4,4 +4,4 @@ Types:Sorcery
 A:SP$ Subgame | RememberPlayers$ Win | StartingLife$ 5 | SubAbility$ DBRepeatEachPlayer | SpellDescription$ Players play a Magic subgame, starting at 5 life and using their libraries as their decks. | StackDescription$ SpellDescription
 SVar:DBRepeatEachPlayer:DB$ RepeatEach | RepeatPlayers$ Remembered | ClearRememberedBeforeLoop$ True | RepeatSubAbility$ DBSearch | SpellDescription$ The winner searches their library for two cards, puts those cards into their hand, then shuffles their library. | StackDescription$ SpellDescription
 SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 2 | Mandatory$ True | DefinedPlayer$ Player.IsRemembered | SpellDescription$ None
-Oracle:Players play a Magic subgame under the table, starting at 5 life and using their libraries as their decks. The winner searches their library for two cards, puts those cards into their hand, then shuffles their library.
+Oracle:Players play a Magic subgame under the table, starting at 5 life and using their libraries as their decks. The winner searches their library for two cards, puts those cards into their hand, then shuffles.

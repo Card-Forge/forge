@@ -1,9 +1,9 @@
 Name:Growth Spasm
 ManaCost:2 G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 G | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 1 | Tapped$ True | SubAbility$ DBToken | SpellDescription$ Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
+A:SP$ ChangeZone | Cost$ 2 G | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 1 | Tapped$ True | SubAbility$ DBToken | SpellDescription$ Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_0_1_eldrazi_spawn_sac | TokenOwner$ You | LegacyImage$ c 0 1 eldrazi spawn sac roe | SpellDescription$ Create a 0/1 colorless Eldrazi Spawn creature token. It has "Sacrifice this creature: Add {C}."
 DeckHints:Type$Eldrazi
 DeckHas:Ability$Mana.Colorless & Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/growth_spasm.jpg
-Oracle:Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library. Create a 0/1 colorless Eldrazi Spawn creature token. It has "Sacrifice this creature: Add {C}."
+Oracle:Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. Create a 0/1 colorless Eldrazi Spawn creature token. It has "Sacrifice this creature: Add {C}."

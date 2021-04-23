@@ -1,7 +1,7 @@
 Name:Haunting Echoes
 ManaCost:3 B B
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 3 B B | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Card.nonBasic | RememberChanged$ True | SubAbility$ DBRepeat | SpellDescription$ Exile all cards from target player's graveyard other than basic land cards. For each card exiled this way, search that player's library for all cards with the same name as that card and exile them. Then that player shuffles their library.
+A:SP$ ChangeZoneAll | Cost$ 3 B B | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Card.nonBasic | RememberChanged$ True | SubAbility$ DBRepeat | SpellDescription$ Exile all cards from target player's graveyard other than basic land cards. For each card exiled this way, search that player's library for all cards with the same name as that card and exile them. Then that player shuffles.
 SVar:DBRepeat:DB$ ChangeZoneAll | Origin$ Library | Defined$ Targeted | Destination$ Exile | Mandatory$ True | ChangeType$ Card.sharesNameWith Remembered | Search$ True | Shuffle$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:NeedsToPlayVar:Z GE1
@@ -9,4 +9,4 @@ SVar:Z:SVar$Z1/Plus.Z2
 SVar:Z1:Count$ValidGraveyard Card.nonLand+OppOwn
 SVar:Z2:Count$ValidGraveyard Card.Land+nonBasic+OppOwn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/haunting_echoes.jpg
-Oracle:Exile all cards from target player's graveyard other than basic land cards. For each card exiled this way, search that player's library for all cards with the same name as that card and exile them. Then that player shuffles their library.
+Oracle:Exile all cards from target player's graveyard other than basic land cards. For each card exiled this way, search that player's library for all cards with the same name as that card and exile them. Then that player shuffles.

@@ -3,6 +3,6 @@ ManaCost:no cost
 Types:Land Desert
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Mana | Cost$ T PayLife<1> | Produced$ G | SpellDescription$ Add {G}.
-A:AB$ Pump | Cost$ 1 G G T Sac<1/Desert> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 3 | NumDef$ 3 | SorcerySpeed$ True | SpellDescription$ Target creature gets +3/+3 until end of turn. Activate this ability only any time you could cast a sorcery.
+A:AB$ Pump | Cost$ 1 G G T Sac<1/Desert> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 3 | NumDef$ 3 | SorcerySpeed$ True | SpellDescription$ Target creature gets +3/+3 until end of turn. Activate only as a sorcery.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hashep_oasis.jpg
-Oracle:{T}: Add {C}.\n{T}, Pay 1 life: Add {G}.\n{1}{G}{G}, {T}, Sacrifice a Desert: Target creature gets +3/+3 until end of turn. Activate this ability only any time you could cast a sorcery.
+Oracle:{T}: Add {C}.\n{T}, Pay 1 life: Add {G}.\n{1}{G}{G}, {T}, Sacrifice a Desert: Target creature gets +3/+3 until end of turn. Activate only as a sorcery.

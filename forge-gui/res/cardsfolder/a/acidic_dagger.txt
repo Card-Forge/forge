@@ -1,7 +1,7 @@
 Name:Acidic Dagger
 ManaCost:4
 Types:Artifact
-A:AB$ Effect | Cost$ 4 T | Name$ Acidic Dagger Effect | ValidTgts$ Creature | TgtPrompt$ Select target creature | Triggers$ TrigDam,TrigLeave | RememberObjects$ Targeted | ImprintCards$ Self | ActivationPhases$ Upkeep->Declare Attackers | SpellDescription$ Whenever target creature deals combat damage to a non-Wall creature this turn, destroy that non-Wall creature. When the targeted creature leaves the battlefield this turn, sacrifice CARDNAME. Activate this ability only before blockers are declared.
+A:AB$ Effect | Cost$ 4 T | Name$ Acidic Dagger Effect | ValidTgts$ Creature | TgtPrompt$ Select target creature | Triggers$ TrigDam,TrigLeave | RememberObjects$ Targeted | ImprintCards$ Self | ActivationPhases$ Upkeep->Declare Attackers | SpellDescription$ Whenever target creature deals combat damage to a non-Wall creature this turn, destroy that non-Wall creature. When the targeted creature leaves the battlefield this turn, sacrifice CARDNAME. Activate only before blockers are declared.
 SVar:TrigDam:Mode$ DamageDone | ValidSource$ Creature.IsRemembered | ValidTarget$ Creature.nonWall | CombatDamage$ True | TriggerZones$ Command | Execute$ TrigDestroy | TriggerDescription$ Whenever targeted creature deals combat damage to a non-Wall creature this turn, destroy that non-Wall creature.
 SVar:TrigLeave:Mode$ ChangesZone | ValidCard$ Creature.IsRemembered | Origin$ Battlefield | Destination$ Any | Execute$ TrigSac | TriggerZones$ Command | TriggerDescription$ When the targeted creature leaves the battlefield this turn, sacrifice Acidic Dagger.
 SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredTargetLKICopy
@@ -9,4 +9,4 @@ SVar:TrigSac:DB$ SacrificeAll | Defined$ Imprinted | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile | Static$ True
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/acidic_dagger.jpg
-Oracle:{4}, {T}: Whenever target creature deals combat damage to a non-Wall creature this turn, destroy that non-Wall creature. When the targeted creature leaves the battlefield this turn, sacrifice Acidic Dagger. Activate this ability only before blockers are declared.
+Oracle:{4}, {T}: Whenever target creature deals combat damage to a non-Wall creature this turn, destroy that non-Wall creature. When the targeted creature leaves the battlefield this turn, sacrifice Acidic Dagger. Activate only before blockers are declared.

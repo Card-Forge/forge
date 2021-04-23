@@ -2,6 +2,6 @@ Name:Rhythmic Water Vortex
 ManaCost:3 U U
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ 3 U U | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select up to two target creatures | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBSearch | SpellDescription$ Return up to two target creatures to their owner's hand.
-SVar:DBSearch:DB$ ChangeZone | Origin$ Library | OriginChoice$ True | OriginAlternative$ Graveyard | AlternativeMessage$ Would you like to search your library with this ability? If you do, your library will be shuffled. | Destination$ Hand | ChangeType$ Card.namedMu Yanling | ChangeNum$ 1 | SpellDescription$ Search your library and/or graveyard for a card named Mu Yanling, reveal it, and put it into your hand. If you searched your library this way, shuffle it.
+SVar:DBSearch:DB$ ChangeZone | Origin$ Library | OriginChoice$ True | OriginAlternative$ Graveyard | AlternativeMessage$ Would you like to search your library with this ability? If you do, your library will be shuffled. | Destination$ Hand | ChangeType$ Card.namedMu Yanling | ChangeNum$ 1 | SpellDescription$ Search your library and/or graveyard for a card named Mu Yanling, reveal it, and put it into your hand. If you searched your library this way, shuffle.
 DeckHints:Name$Mu Yanling
-Oracle:Return up to two target creatures to their owner's hand.\nSearch your library and/or graveyard for a card named Mu Yanling, reveal it, and put it into your hand. If you searched your library this way, shuffle it.
+Oracle:Return up to two target creatures to their owner's hand.\nSearch your library and/or graveyard for a card named Mu Yanling, reveal it, and put it into your hand. If you searched your library this way, shuffle.

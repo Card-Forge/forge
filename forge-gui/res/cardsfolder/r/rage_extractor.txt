@@ -1,10 +1,10 @@
 Name:Rage Extractor
 ManaCost:4 PR
 Types:Artifact
-T:Mode$ SpellCast | ValidCard$ Card.CostsPhyrexianMana | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you cast a spell with {P} in its mana cost, CARDNAME deals damage equal to that spell's converted mana cost to any target.
+T:Mode$ SpellCast | ValidCard$ Card.CostsPhyrexianMana | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you cast a spell with {P} in its mana cost, CARDNAME deals damage equal to that spell's mana value to any target.
 SVar:TrigDealDamage:DB$DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X
 SVar:X:TriggerCount$CastSACMC
 SVar:BuffedBy:Card.CostsPhyrexianMana
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rage_extractor.jpg
-Oracle:({R/P} can be paid with either {R} or 2 life.)\nWhenever you cast a spell with {P} in its mana cost, Rage Extractor deals damage equal to that spell's converted mana cost to any target.
+Oracle:({R/P} can be paid with either {R} or 2 life.)\nWhenever you cast a spell with {P} in its mana cost, Rage Extractor deals damage equal to that spell's mana value to any target.

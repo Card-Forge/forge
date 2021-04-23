@@ -6,4 +6,4 @@ K:Haste
 K:TypeCycling:Swamp:2
 K:TypeCycling:Mountain:2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/igneous_pouncer.jpg
-Oracle:Haste\nSwampcycling {2}, mountaincycling {2} ({2}, Discard this card: Search your library for a Swamp or Mountain card, reveal it, put it into your hand, then shuffle your library.)
+Oracle:Haste\nSwampcycling {2}, mountaincycling {2} ({2}, Discard this card: Search your library for a Swamp or Mountain card, reveal it, put it into your hand, then shuffle.)

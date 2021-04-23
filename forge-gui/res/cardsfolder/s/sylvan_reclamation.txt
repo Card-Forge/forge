@@ -4,4 +4,4 @@ Types:Instant
 A:SP$ ChangeZone | Cost$ 3 G W | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | TargetMin$ 0 | TargetMax$ 2 | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile up to two target artifacts and/or enchantments.
 K:TypeCycling:Basic:2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvan_reclamation.jpg
-Oracle:Exile up to two target artifacts and/or enchantments.\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.)
+Oracle:Exile up to two target artifacts and/or enchantments.\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)

@@ -6,4 +6,4 @@ A:AB$ Regenerate | Cost$ S | SpellDescription$ Regenerate CARDNAME.
 # AI can now use snow mana to pay for activated abilities.
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rimebound_dead.jpg
-Oracle:{S}: Regenerate Rimebound Dead. ({S} can be paid with one mana from a snow permanent.)
+Oracle:{S}: Regenerate Rimebound Dead. ({S} can be paid with one mana from a snow source.)

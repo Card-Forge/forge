@@ -8,4 +8,4 @@ SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent | TgtPrompt$ Select target p
 SVar:PlayMain1:TRUE
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reaper_king.jpg
-Oracle:({2/W} can be paid with any two mana or with {W}. This card's converted mana cost is 10.)\nOther Scarecrow creatures you control get +1/+1.\nWhenever another Scarecrow enters the battlefield under your control, destroy target permanent.
+Oracle:({2/W} can be paid with any two mana or with {W}. This card's mana value is 10.)\nOther Scarecrow creatures you control get +1/+1.\nWhenever another Scarecrow enters the battlefield under your control, destroy target permanent.

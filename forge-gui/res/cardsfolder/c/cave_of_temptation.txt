@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Mana | Cost$ 1 T | Produced$ Any | SpellDescription$ Add one mana of any color.
-A:AB$ PutCounter | Cost$ 4 T Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 2 | SorcerySpeed$ True | SpellDescription$ Put two +1/+1 counters on target creature. Activate this ability only any time you could cast a sorcery.
+A:AB$ PutCounter | Cost$ 4 T Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 2 | SorcerySpeed$ True | SpellDescription$ Put two +1/+1 counters on target creature. Activate only as a sorcery.
 DeckHas:Ability$Counters
 AI:RemoveDeck:All
-Oracle:{T}: Add {C}.\n{1}, {T}: Add one mana of any color.\n{4}, {T}, Sacrifice Cave of Temptation: Put two +1/+1 counters on target creature. Activate this ability only any time you could cast a sorcery.
+Oracle:{T}: Add {C}.\n{1}, {T}: Add one mana of any color.\n{4}, {T}, Sacrifice Cave of Temptation: Put two +1/+1 counters on target creature. Activate only as a sorcery.

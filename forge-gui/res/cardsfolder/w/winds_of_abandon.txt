@@ -1,10 +1,10 @@
 Name:Winds of Abandon
 ManaCost:1 W
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 W | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | SubAbility$ DBGetLandsAll | RememberLKI$ True | SpellDescription$ Exile target creature you don't control. For each creature exiled this way, its controller searches their library for a basic land card. Those players put those cards onto the battlefield tapped, then shuffle their libraries.
+A:SP$ ChangeZone | Cost$ 1 W | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | SubAbility$ DBGetLandsAll | RememberLKI$ True | SpellDescription$ Exile target creature you don't control. For each creature exiled this way, its controller searches their library for a basic land card. Those players put those cards onto the battlefield tapped, then shuffle.
 A:SP$ ChangeZoneAll | Cost$ 4 W W | ChangeType$ Creature.YouDontCtrl | Origin$ Battlefield | Destination$ Exile | RememberLKI$ True | SubAbility$ DBGetLandsAll | PrecostDesc$ Overload | CostDesc$ {4}{W}{W} | NonBasicSpell$ True | SpellDescription$ (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
 SVar:DBGetLandsAll:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBGetLandsOne | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:DBGetLandsOne:DB$ ChangeZone | Optional$ True | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ X | DefinedPlayer$ Player.IsRemembered | ShuffleNonMandatory$ False | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
 SVar:X:RememberedLKI$FilterControlledByRemembered_Number$1
-Oracle:Exile target creature you don't control. For each creature exiled this way, its controller searches their library for a basic land card. Those players put those cards onto the battlefield tapped, then shuffle their libraries.\nOverload {4}{W}{W} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
+Oracle:Exile target creature you don't control. For each creature exiled this way, its controller searches their library for a basic land card. Those players put those cards onto the battlefield tapped, then shuffle.\nOverload {4}{W}{W} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")

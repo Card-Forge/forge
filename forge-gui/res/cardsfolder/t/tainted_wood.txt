@@ -2,7 +2,7 @@ Name:Tainted Wood
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ Mana | Cost$ T | Produced$ B | IsPresent$ Swamp.YouCtrl | SpellDescription$ Add {B}. Activate this ability only if you control a Swamp.
-A:AB$ Mana | Cost$ T | Produced$ G | IsPresent$ Swamp.YouCtrl | SpellDescription$ Add {G}. Activate this ability only if you control a Swamp.
+A:AB$ Mana | Cost$ T | Produced$ B | IsPresent$ Swamp.YouCtrl | SpellDescription$ Add {B}. Activate only if you control a Swamp.
+A:AB$ Mana | Cost$ T | Produced$ G | IsPresent$ Swamp.YouCtrl | SpellDescription$ Add {G}. Activate only if you control a Swamp.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tainted_wood.jpg
-Oracle:{T}: Add {C}.\n{T}: Add {B} or {G}. Activate this ability only if you control a Swamp.
+Oracle:{T}: Add {C}.\n{T}: Add {B} or {G}. Activate only if you control a Swamp.

@@ -4,8 +4,8 @@ Types:Creature Human Cleric
 PT:2/2
 K:ETBReplacement:Other:ChooseNumber
 SVar:ChooseNumber:DB$ ChooseNumber | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a number.
-S:Mode$ CantBeCast | ValidCard$ Card.nonCreature+cmcEQX | Description$ Noncreature spells with converted mana cost equal to the chosen number can't be cast.
+S:Mode$ CantBeCast | ValidCard$ Card.nonCreature+cmcEQX | Description$ Noncreature spells with mana value equal to the chosen number can't be cast.
 SVar:X:Number$ChosenNumber
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sanctum_prelate.jpg
-Oracle:As Sanctum Prelate enters the battlefield, choose a number.\nNoncreature spells with converted mana cost equal to the chosen number can't be cast.
+Oracle:As Sanctum Prelate enters the battlefield, choose a number.\nNoncreature spells with mana value equal to the chosen number can't be cast.

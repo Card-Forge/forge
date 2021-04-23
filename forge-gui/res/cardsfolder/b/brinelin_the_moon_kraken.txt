@@ -3,7 +3,7 @@ ManaCost:6 U U
 Types:Legendary Creature Kraken
 PT:6/8
 K:Partner
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigReturn | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield or whenever you cast a spell with converted mana cost 6 or greater, you may return target nonland permanent to its owner's hand.
-T:Mode$ SpellCast | ValidCard$ Card.cmcGE6 | ValidActivatingPlayer$ You | Execute$ TrigReturn | TriggerZones$ Battlefield | OptionalDecider$ You | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or whenever you cast a spell with converted mana cost 6 or greater, you may return target nonland permanent to its owner's hand.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigReturn | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield or whenever you cast a spell with mana value 6 or greater, you may return target nonland permanent to its owner's hand.
+T:Mode$ SpellCast | ValidCard$ Card.cmcGE6 | ValidActivatingPlayer$ You | Execute$ TrigReturn | TriggerZones$ Battlefield | OptionalDecider$ You | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or whenever you cast a spell with mana value 6 or greater, you may return target nonland permanent to its owner's hand.
 SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand
-Oracle:When Brinelin, the Moon Kraken enters the battlefield or whenever you cast a spell with converted mana cost 6 or greater, you may return target nonland permanent to its owner's hand.\nPartner (You can have two commanders if both have partner.)
+Oracle:When Brinelin, the Moon Kraken enters the battlefield or whenever you cast a spell with mana value 6 or greater, you may return target nonland permanent to its owner's hand.\nPartner (You can have two commanders if both have partner.)

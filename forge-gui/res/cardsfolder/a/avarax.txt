@@ -4,7 +4,7 @@ Types:Creature Beast
 PT:3/3
 K:Haste
 A:AB$ Pump | Cost$ 1 R | Defined$ Self | NumAtt$ 1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a card named Avarax, reveal it, and put it into your hand. If you do, shuffle your library.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a card named Avarax, reveal it, put it into your hand, then shuffle.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.namedAvarax | ChangeNum$ 1 | ShuffleNonMandatory$ True
 DeckHints:Name$Avarax
-Oracle:Haste\nWhen Avarax enters the battlefield, you may search your library for a card named Avarax, reveal it, and put it into your hand. If you do, shuffle your library.\n{1}{R}: Avarax gets +1/+0 until end of turn.
+Oracle:Haste\nWhen Avarax enters the battlefield, you may search your library for a card named Avarax, reveal it, put it into your hand, then shuffle.\n{1}{R}: Avarax gets +1/+0 until end of turn.

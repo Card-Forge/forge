@@ -1,7 +1,7 @@
 Name:Shark Typhoon
 ManaCost:5 U
 Types:Enchantment
-T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, create an X/X blue Shark creature token with flying, where X is that spell's converted mana cost.
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, create an X/X blue Shark creature token with flying, where X is that spell's mana value.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_x_x_shark_flying | TokenOwner$ You | LegacyImage$ u x x shark flying iko | TokenPower$ Y | TokenToughness$ Y | TokenAmount$ 1
 SVar:Y:TriggeredCard$CardManaCost
 K:Cycling:X 1 U
@@ -9,4 +9,4 @@ T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigToken2 | TriggerDescription
 SVar:TrigToken2:DB$ Token | TokenAmount$ 1 | TokenScript$ u_x_x_shark_flying | TokenOwner$ You | LegacyImage$ u x x shark flying iko | TokenPower$ X | TokenToughness$ X | TokenAmount$ 1
 SVar:X:Count$xPaid
 DeckHas:Ability$Token
-Oracle:Whenever you cast a noncreature spell, create an X/X blue Shark creature token with flying, where X is that spell's converted mana cost.\nCycling {X}{1}{U} ({X}{1}{U}, Discard this card: Draw a card.)\nWhen you cycle Shark Typhoon, create an X/X blue Shark creature token with flying.
+Oracle:Whenever you cast a noncreature spell, create an X/X blue Shark creature token with flying, where X is that spell's mana value.\nCycling {X}{1}{U} ({X}{1}{U}, Discard this card: Draw a card.)\nWhen you cycle Shark Typhoon, create an X/X blue Shark creature token with flying.

@@ -3,4 +3,4 @@ ManaCost:2/R 2/R 2/R
 Types:Instant
 A:SP$ DealDamage | Cost$ 2/R 2/R 2/R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to any target.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flame_javelin.jpg
-Oracle:({2/R} can be paid with any two mana or with {R}. This card's converted mana cost is 6.)\nFlame Javelin deals 4 damage to any target.
+Oracle:({2/R} can be paid with any two mana or with {R}. This card's mana value is 6.)\nFlame Javelin deals 4 damage to any target.

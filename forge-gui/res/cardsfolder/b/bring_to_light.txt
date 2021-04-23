@@ -1,10 +1,10 @@
 Name:Bring to Light
 ManaCost:3 G U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 G U | Origin$ Library | Destination$ Exile | ChangeType$ Creature.cmcLEX,Instant.cmcLEX,Sorcery.cmcLEX | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ DBPlay | SpellDescription$ Converge — Search your library for a creature, instant, or sorcery card with converted mana cost less than or equal to the number of colors of mana spent to cast this spell, exile that card, then shuffle your library. You may cast that card without paying its mana cost.
+A:SP$ ChangeZone | Cost$ 3 G U | Origin$ Library | Destination$ Exile | ChangeType$ Creature.cmcLEX,Instant.cmcLEX,Sorcery.cmcLEX | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ DBPlay | SpellDescription$ Converge — Search your library for a creature, instant, or sorcery card with mana value less than or equal to the number of colors of mana spent to cast this spell, exile that card, then shuffle. You may cast that card without paying its mana cost.
 SVar:DBPlay:DB$ Play | Defined$ Remembered | WithoutManaCost$ True | Optional$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Converge
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bring_to_light.jpg
-Oracle:Converge — Search your library for a creature, instant, or sorcery card with converted mana cost less than or equal to the number of colors of mana spent to cast this spell, exile that card, then shuffle your library. You may cast that card without paying its mana cost.
+Oracle:Converge — Search your library for a creature, instant, or sorcery card with mana value less than or equal to the number of colors of mana spent to cast this spell, exile that card, then shuffle. You may cast that card without paying its mana cost.

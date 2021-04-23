@@ -2,5 +2,5 @@ Name:Battlefield Scrounger
 ManaCost:3 G G
 Types:Creature Centaur
 PT:3/3
-A:AB$ Pump | Cost$ PutCardToLibFromGrave<3/-1/Card> | Activation$ Threshold | ActivationLimit$ 1 | Defined$ Self | NumAtt$ +3 | NumDef$ +3 | PrecostDesc$ Threshold — | SpellDescription$ CARDNAME gets +3/+3 until end of turn. Activate this ability only once each turn and only if seven or more cards are in your graveyard.
-Oracle:Threshold — Put three cards from your graveyard on the bottom of your library: Battlefield Scrounger gets +3/+3 until end of turn. Activate this ability only once each turn and only if seven or more cards are in your graveyard.
+A:AB$ Pump | Cost$ PutCardToLibFromGrave<3/-1/Card> | Activation$ Threshold | ActivationLimit$ 1 | Defined$ Self | NumAtt$ +3 | NumDef$ +3 | PrecostDesc$ Threshold — | SpellDescription$ CARDNAME gets +3/+3 until end of turn. Activate only once each turn and only if seven or more cards are in your graveyard.
+Oracle:Threshold — Put three cards from your graveyard on the bottom of your library: Battlefield Scrounger gets +3/+3 until end of turn. Activate only once each turn and only if seven or more cards are in your graveyard.

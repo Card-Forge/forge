@@ -2,11 +2,11 @@ Name:Amulet of Quoz
 ManaCost:6
 Types:Artifact
 K:Remove CARDNAME from your deck before playing if you're not playing for ante.
-A:AB$ Dig | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Opponent | DestinationZone$ Ante | DigNum$ 1 | ChangeNum$ All | RememberChanged$ True | Optional$ True | SubAbility$ DBFlip | PlayerTurn$ True | ActivationPhases$ Upkeep | SpellDescription$ Target opponent may ante the top card of their library. If they don't, you flip a coin. If you win the flip, that player loses the game. If you lose the flip, you lose the game. Activate this ability only during your upkeep.
+A:AB$ Dig | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Opponent | DestinationZone$ Ante | DigNum$ 1 | ChangeNum$ All | RememberChanged$ True | Optional$ True | SubAbility$ DBFlip | PlayerTurn$ True | ActivationPhases$ Upkeep | SpellDescription$ Target opponent may ante the top card of their library. If they don't, you flip a coin. If you win the flip, that player loses the game. If you lose the flip, you lose the game. Activate only during your upkeep.
 SVar:DBFlip:DB$ FlipACoin | Caller$ You | WinSubAbility$ OppLoseGame | LoseSubAbility$ YouLoseGame | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
 SVar:OppLoseGame:DB$ LosesGame | Defined$ Targeted
 SVar:YouLoseGame:DB$ LosesGame | Defined$ You
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-Oracle:Remove Amulet of Quoz from your deck before playing if you're not playing for ante.\n{T}, Sacrifice Amulet of Quoz: Target opponent may ante the top card of their library. If they don't, you flip a coin. If you win the flip, that player loses the game. If you lose the flip, you lose the game. Activate this ability only during your upkeep.
+Oracle:Remove Amulet of Quoz from your deck before playing if you're not playing for ante.\n{T}, Sacrifice Amulet of Quoz: Target opponent may ante the top card of their library. If they don't, you flip a coin. If you win the flip, that player loses the game. If you lose the flip, you lose the game. Activate only during your upkeep.

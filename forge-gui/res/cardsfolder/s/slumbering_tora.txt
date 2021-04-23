@@ -1,10 +1,10 @@
 Name:Slumbering Tora
 ManaCost:3
 Types:Artifact
-A:AB$ Animate | Cost$ 2 Discard<1/Spirit;Arcane/spirit or arcane card> | CostDesc$ {2}, Discard a Spirit or Arcane card: | Defined$ Self | Power$ X | Toughness$ X | Types$ Creature,Artifact,Cat | SpellDescription$ CARDNAME becomes an X/X Cat artifact creature until end of turn, where X is the discarded card's converted mana cost.
+A:AB$ Animate | Cost$ 2 Discard<1/Spirit;Arcane/spirit or arcane card> | CostDesc$ {2}, Discard a Spirit or Arcane card: | Defined$ Self | Power$ X | Toughness$ X | Types$ Creature,Artifact,Cat | SpellDescription$ CARDNAME becomes an X/X Cat artifact creature until end of turn, where X is the discarded card's mana value.
 SVar:X:Discarded$CardManaCost
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 DeckHints:Type$Spirit|Arcane
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slumbering_tora.jpg
-Oracle:{2}, Discard a Spirit or Arcane card: Slumbering Tora becomes an X/X Cat artifact creature until end of turn, where X is the discarded card's converted mana cost.
+Oracle:{2}, Discard a Spirit or Arcane card: Slumbering Tora becomes an X/X Cat artifact creature until end of turn, where X is the discarded card's mana value.

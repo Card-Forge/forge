@@ -5,4 +5,4 @@ PT:5/3
 A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 K:TypeCycling:Swamp:2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/twisted_abomination.jpg
-Oracle:{B}: Regenerate Twisted Abomination.\nSwampcycling {2} ({2}, Discard this card: Search your library for a Swamp card, reveal it, put it into your hand, then shuffle your library.)
+Oracle:{B}: Regenerate Twisted Abomination.\nSwampcycling {2} ({2}, Discard this card: Search your library for a Swamp card, reveal it, put it into your hand, then shuffle.)

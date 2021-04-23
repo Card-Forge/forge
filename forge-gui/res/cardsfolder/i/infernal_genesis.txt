@@ -1,11 +1,11 @@
 Name:Infernal Genesis
 ManaCost:4 B B
 Types:Enchantment
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of each player's upkeep, that player mills a card. Then they create X 1/1 black Minion creature tokens, where X is the milled card's converted mana cost.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of each player's upkeep, that player mills a card. Then they create X 1/1 black Minion creature tokens, where X is the milled card's mana value.
 SVar:TrigMill:DB$ Mill | Defined$ TriggeredPlayer | NumCards$ 1 | RememberMilled$ True | SubAbility$ TrigToken
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ b_1_1_minion | TokenOwner$ TriggeredPlayer | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 DeckHas:Ability$Token
 AI:RemoveDeck:Random
-Oracle:At the beginning of each player's upkeep, that player mills a card. Then they create X 1/1 black Minion creature tokens, where X is the milled card's converted mana cost.
+Oracle:At the beginning of each player's upkeep, that player mills a card. Then they create X 1/1 black Minion creature tokens, where X is the milled card's mana value.

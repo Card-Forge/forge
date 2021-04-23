@@ -5,7 +5,7 @@ K:Flash
 K:Enchant creature or Vehicle
 A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature,Vehicle | AILogic$ Curse
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters the battlefield, you get {E}{E} (two energy counters).
-SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2 
-S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | AddPower$ -4 | Description$ Enchanted permanent gets -4/-0.
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2
+S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | AddPower$ -4 | Description$ Enchanted creature gets -4/-0.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_meltdown.jpg
-Oracle:Flash (You may cast this spell any time you could cast an instant.)\nEnchant creature or Vehicle\nWhen Aether Meltdown enters the battlefield, you get {E}{E} (two energy counters).\nEnchanted permanent gets -4/-0.
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nEnchant creature or Vehicle\nWhen Aether Meltdown enters the battlefield, you get {E}{E} (two energy counters).\nEnchanted creature gets -4/-0.

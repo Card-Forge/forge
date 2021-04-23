@@ -4,9 +4,9 @@ Types:Legendary Creature Nightmare Beast
 PT:3/3
 K:ETBReplacement:Other:AddExtraCounter:Mandatory:Battlefield:Creature.Other+YouCtrl
 SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ Vigilance | CounterNum$ 1 | SpellDescription$ Each other creature you control enters the battlefield with an additional vigilance counter on it.
-A:AB$ Mill | Cost$ 3 RemoveAnyCounter<3/Any/Creature.YouCtrl/among creatures you control> | NumCards$ 3 | Defined$ You | SubAbility$ DBChangeZone | StackDescription$ SpellDescription | SpellDescription$ Mill three cards, then return a permanent card with converted mana cost 3 or less from your graveyard to the battlefield.
+A:AB$ Mill | Cost$ 3 RemoveAnyCounter<3/Any/Creature.YouCtrl/among creatures you control> | NumCards$ 3 | Defined$ You | SubAbility$ DBChangeZone | StackDescription$ SpellDescription | SpellDescription$ Mill three cards, then return a permanent card with mana value 3 or less from your graveyard to the battlefield.
 SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Mandatory$ True | ChangeType$ Permanent.YouOwn+cmcLE3 | ChangeNum$ 1 | Origin$ Graveyard | Destination$ Battlefield
 DeckHas:Ability$Counters
 SVar:AIRemoveCounterCostPriority:Vigilance
-Oracle:Each other creature you control enters the battlefield with an additional vigilance counter on it.\n{3}, Remove three counters from among creatures you control: Mill three cards, then return a permanent card with converted mana cost 3 or less from your graveyard to the battlefield.
+Oracle:Each other creature you control enters the battlefield with an additional vigilance counter on it.\n{3}, Remove three counters from among creatures you control: Mill three cards, then return a permanent card with mana value 3 or less from your graveyard to the battlefield.
 

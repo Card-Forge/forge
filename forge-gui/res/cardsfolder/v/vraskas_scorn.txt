@@ -1,8 +1,8 @@
 Name:Vraska's Scorn
 ManaCost:2 B B
 Types:Sorcery
-A:SP$ LoseLife | Cost$ 2 B B | ValidTgts$ Opponent | LifeAmount$ 4 | SubAbility$ DBSearch | SpellDescription$ Target opponent loses 4 life. You may search your library and/or graveyard for a card named Vraska, Scheming Gorgon, reveal it, and put it into your hand. If you search your library this way, shuffle it.
+A:SP$ LoseLife | Cost$ 2 B B | ValidTgts$ Opponent | LifeAmount$ 4 | SubAbility$ DBSearch | SpellDescription$ Target opponent loses 4 life. You may search your library and/or graveyard for a card named Vraska, Scheming Gorgon, reveal it, and put it into your hand. If you search your library this way, shuffle.
 SVar:DBSearch:DB$ ChangeZone | Origin$ Library | OriginChoice$ True | OriginAlternative$ Graveyard | AlternativeMessage$ Would you like to search your library with this ability? If you do, your library will be shuffled. | Destination$ Hand | ChangeType$ Card.namedVraska; Scheming Gorgon | ChangeNum$ 1 | Optional$ True
 DeckNeeds:Name$Vraska, Scheming Gorgon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vraskas_scorn.jpg
-Oracle:Target opponent loses 4 life. You may search your library and/or graveyard for a card named Vraska, Scheming Gorgon, reveal it, and put it into your hand. If you search your library this way, shuffle it.
+Oracle:Target opponent loses 4 life. You may search your library and/or graveyard for a card named Vraska, Scheming Gorgon, reveal it, and put it into your hand. If you search your library this way, shuffle.

@@ -8,4 +8,4 @@ SVar:X:Count$InYourHand
 SVar:Y:Remembered$Amount
 K:TypeCycling:Basic:2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ancient_excavation.jpg
-Oracle:Draw cards equal to the number of cards in your hand, then discard a card for each card drawn this way.\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.)
+Oracle:Draw cards equal to the number of cards in your hand, then discard a card for each card drawn this way.\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)

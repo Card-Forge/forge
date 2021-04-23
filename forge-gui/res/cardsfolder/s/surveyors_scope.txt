@@ -1,9 +1,9 @@
 Name:Surveyor's Scope
 ManaCost:2
 Types:Artifact
-A:AB$ ChangeZone | Cost$ T Exile<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ X | SpellDescription$ Search your library for up to X basic land cards, where X is the number of players who control at least two more lands than you. Put those lands onto the battlefield, then shuffle your library.
+A:AB$ ChangeZone | Cost$ T Exile<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ X | SpellDescription$ Search your library for up to X basic land cards, where X is the number of players who control at least two more lands than you. Put those lands onto the battlefield, then shuffle.
 SVar:X:PlayerCountPropertywithAtLeast2MoreLandsThanYou$Amount
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/surveyors_scope.jpg
-Oracle:{T}, Exile Surveyor's Scope: Search your library for up to X basic land cards, where X is the number of players who control at least two more lands than you. Put those cards onto the battlefield, then shuffle your library.
+Oracle:{T}, Exile Surveyor's Scope: Search your library for up to X basic land cards, where X is the number of players who control at least two more lands than you. Put those cards onto the battlefield, then shuffle.

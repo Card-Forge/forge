@@ -6,9 +6,9 @@ K:Vigilance
 K:Trample
 T:Mode$ ChangesZone | ValidCard$ Card.wasCastFromHand+Self | Destination$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it from your hand, create three Food tokens.
 SVar:TrigToken:DB$ Token | TokenAmount$ 3 | TokenScript$ c_a_food_sac | TokenOwner$ You | LegacyImage$ c a food sac eld
-A:AB$ ChangeZone | Cost$ Sac<3/Food> | Origin$ Graveyard | Destination$ Battlefield | ActivationZone$ Graveyard | PlayerTurn$ True | SpellDescription$ Return CARDNAME from your graveyard to the battlefield. Activate this ability only during your turn.
+A:AB$ ChangeZone | Cost$ Sac<3/Food> | Origin$ Graveyard | Destination$ Battlefield | ActivationZone$ Graveyard | PlayerTurn$ True | SpellDescription$ Return CARDNAME from your graveyard to the battlefield. Activate only during your turn.
 SVar:DiscardMe:1
 SVar:AIPreference:SacCost$Card.Food
 DeckHas:Ability$Token & Ability$LifeGain & Ability$Food
 DeckHints:Ability$Food
-Oracle:Vigilance, trample\nWhen Feasting Troll King enters the battlefield, if you cast it from your hand, create three Food tokens. (They're artifacts with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")\nSacrifice three Foods: Return Feasting Troll King from your graveyard to the battlefield. Activate this ability only during your turn.
+Oracle:Vigilance, trample\nWhen Feasting Troll King enters the battlefield, if you cast it from your hand, create three Food tokens. (They're artifacts with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")\nSacrifice three Foods: Return Feasting Troll King from your graveyard to the battlefield. Activate only during your turn.

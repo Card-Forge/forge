@@ -5,6 +5,6 @@ PT:4/3
 K:Flying
 K:Lifelink
 K:Hexproof:Card.Planeswalker:planeswalkers
-A:AB$ Sacrifice | Cost$ 1 B Sac<1/Creature>| SacValid$ Creature,Planeswalker | SacMessage$ Creature or Planeswalker | Boast$ True | Defined$ Player.Opponent | SpellDescription$ Each opponent sacrifices a creature or planeswalker. (Activate this ability only if this creature attacked this turn and only once each turn.)
+A:AB$ Sacrifice | Cost$ 1 B Sac<1/Creature>| SacValid$ Creature,Planeswalker | SacMessage$ Creature or Planeswalker | Boast$ True | Defined$ Player.Opponent | SpellDescription$ Each opponent sacrifices a creature or planeswalker. (Activate only if this creature attacked this turn and only once each turn.)
 DeckHas:Ability$Sacrifice
-Oracle:Flying, lifelink, hexproof from planeswalkers\nBoast — {1}{B}, Sacrifice a creature: Each opponent sacrifices a creature or planeswalker. (Activate this ability only if this creature attacked this turn and only once each turn.)
+Oracle:Flying, lifelink, hexproof from planeswalkers\nBoast — {1}{B}, Sacrifice a creature: Each opponent sacrifices a creature or planeswalker. (Activate only if this creature attacked this turn and only once each turn.)

@@ -5,5 +5,5 @@ A:SP$ Charm | Cost$ 4 W W | MinCharmNum$ 1 | CharmNum$ 3 | Choices$ DBSmall,DBMe
 SVar:DBSmall:DB$ DestroyAll | ValidCards$ Creature.totalPT_LE4 | SpellDescription$ Destroy all small creatures.
 SVar:DBMedium:DB$ DestroyAll | ValidCards$ Creature.totalPT_GE5+totalPT_LE8 | SpellDescription$ Destroy all medium creatures.
 SVar:DBLarge:DB$ DestroyAll | ValidCards$ Creature.totalPT_GE9 | SpellDescription$ Destroy all large creatures.
-SVar:DBNoop:DB$ Pump | SpellDescription$ (A small creature has total power and toughness 4 or less, medium is 5-8, and large is 9 or more.)
-Oracle:Choose one or more—\n• Destroy all small creatures.\n• Destroy all medium creatures.\n• Destroy all large creatures.\n(A small creature has total power and toughness 4 or less, medium is 5-8, and large is 9 or more.)
+SVar:DBNoop:DB$ Pump | SpellDescription$ (A small creature has total power and toughness 4 or less, medium is 5—8, and large is 9 or more.)
+Oracle:Choose one or more —\n• Destroy all small creatures.\n• Destroy all medium creatures.\n• Destroy all large creatures.\n(A small creature has total power and toughness 4 or less, medium is 5—8, and large is 9 or more.)

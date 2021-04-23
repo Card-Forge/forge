@@ -2,7 +2,7 @@ Name:Rootweaver Druid
 ManaCost:2 G
 Types:Creature Elf Druid
 PT:2/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRepeat | TriggerDescription$ When CARDNAME enters the battlefield, each opponent may search their library for up to three basic land cards. They each put one of those cards onto the battlefield tapped under your control and the rest onto the battlefield tapped under their control. Then each player who searched their library this way shuffles it.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRepeat | TriggerDescription$ When CARDNAME enters the battlefield, each opponent may search their library for up to three basic land cards. They each put one of those cards onto the battlefield tapped under your control and the rest onto the battlefield tapped under their control. Then each player who searched their library this way shuffles.
 SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ DBSearch | ChangeZoneTable$ True | SubAbility$ DBCleanup
 SVar:DBSearch:DB$ ChangeZone | DefinedPlayer$ Player.IsRemembered | Optional$ True | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Land.Basic+RememberedPlayerCtrl | ChangeNum$ 3 | RememberChanged$ True | NoReveal$ True | ShuffleNonMandatory$ True | SubAbility$ DBChoose
 SVar:DBChoose:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Card.IsRemembered+RememberedPlayerCtrl | ChoiceZone$ Library | Amount$ 1 | Mandatory$ True | ChoiceTitle$ Choose a card to put on your opponent's battlefield | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBGive
@@ -10,4 +10,4 @@ SVar:DBGive:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | NoLook
 SVar:DBKeep:DB$ ChangeZoneAll | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.IsRemembered+RememberedPlayerCtrl | Tapped$ True | SubAbility$ DBClearChosen
 SVar:DBClearChosen:DB$ Cleanup | ClearChosenCard$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-Oracle:When Rootweaver Druid enters the battlefield, each opponent may search their library for up to three basic land cards. They each put one of those cards onto the battlefield tapped under your control and the rest onto the battlefield tapped under their control. Then each player who searched their library this way shuffles it.
+Oracle:When Rootweaver Druid enters the battlefield, each opponent may search their library for up to three basic land cards. They each put one of those cards onto the battlefield tapped under your control and the rest onto the battlefield tapped under their control. Then each player who searched their library this way shuffles.

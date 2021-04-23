@@ -1,8 +1,8 @@
 Name:Bloodsoaked Altar
 ManaCost:4 B B
 Types:Artifact
-A:AB$ Token | Cost$ T PayLife<2> Discard<1/Card> Sac<1/Creature> | LegacyImage$ b 5 5 demon flying m20 | TokenAmount$ 1 | TokenScript$ b_5_5_demon_flying | TokenOwner$ You | SorcerySpeed$ True | SpellDescription$ Create a 5/5 black Demon creature token with flying. Activate this ability only any time you could cast a sorcery.
+A:AB$ Token | Cost$ T PayLife<2> Discard<1/Card> Sac<1/Creature> | LegacyImage$ b 5 5 demon flying m20 | TokenAmount$ 1 | TokenScript$ b_5_5_demon_flying | TokenOwner$ You | SorcerySpeed$ True | SpellDescription$ Create a 5/5 black Demon creature token with flying. Activate only as a sorcery.
 SVar:AIPreference:DiscardCost$Card | SacCost$Creature.Token,Creature.cmcLE3
 DeckHas:Ability$Token
 AI:RemoveDeck:Random
-Oracle:{T}, Pay 2 life, Discard a card, Sacrifice a creature: Create a 5/5 black Demon creature token with flying. Activate this ability only any time you could cast a sorcery.
+Oracle:{T}, Pay 2 life, Discard a card, Sacrifice a creature: Create a 5/5 black Demon creature token with flying. Activate only as a sorcery.

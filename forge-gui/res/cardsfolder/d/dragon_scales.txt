@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 2 | AddKeyword$ Vigilance | Description$ Enchanted creature gets +1/+2 and has vigilance.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.cmcGE6 | Execute$ TrigReturn | TriggerZones$ Graveyard | OptionalDecider$ You | TriggerDescription$ When a creature with converted mana cost 6 or greater enters the battlefield, you may return CARDNAME from your graveyard to the battlefield attached to that creature.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.cmcGE6 | Execute$ TrigReturn | TriggerZones$ Graveyard | OptionalDecider$ You | TriggerDescription$ When a creature with mana value 6 or greater enters the battlefield, you may return CARDNAME from your graveyard to the battlefield attached to that creature.
 SVar:TrigReturn:DB$ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield | AttachedTo$ TriggeredCard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragon_scales.jpg
-Oracle:Enchant creature\nEnchanted creature gets +1/+2 and has vigilance.\nWhen a creature with converted mana cost 6 or greater enters the battlefield, you may return Dragon Scales from your graveyard to the battlefield attached to that creature.
+Oracle:Enchant creature\nEnchanted creature gets +1/+2 and has vigilance.\nWhen a creature with mana value 6 or greater enters the battlefield, you may return Dragon Scales from your graveyard to the battlefield attached to that creature.

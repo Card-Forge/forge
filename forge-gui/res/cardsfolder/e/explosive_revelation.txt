@@ -1,9 +1,9 @@
 Name:Explosive Revelation
 ManaCost:3 R R
 Types:Sorcery
-A:SP$ DigUntil | Cost$ 3 R R | Valid$ Card.nonLand | ValidDescription$ nonland | FoundDestination$ Hand | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RememberFound$ True | SubAbility$ Damage | SpellDescription$ Choose any target. Reveal cards from the top of your library until you reveal a nonland card. CARDNAME deals damage equal to that card's converted mana cost to that permanent or player. Put the nonland card into your hand and the rest on the bottom of your library in any order.
+A:SP$ DigUntil | Cost$ 3 R R | Valid$ Card.nonLand | ValidDescription$ nonland | FoundDestination$ Hand | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RememberFound$ True | SubAbility$ Damage | SpellDescription$ Choose any target. Reveal cards from the top of your library until you reveal a nonland card. CARDNAME deals damage equal to that card's mana value to that permanent or player. Put the nonland card into your hand and the rest on the bottom of your library in any order.
 SVar:Damage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 SVar:Picture:http://www.wizards.com/global/images/magic/general/explosive_revelation.jpg
-Oracle:Choose any target. Reveal cards from the top of your library until you reveal a nonland card. Explosive Revelation deals damage equal to that card's converted mana cost to that permanent or player. Put the nonland card into your hand and the rest on the bottom of your library in any order.
+Oracle:Choose any target. Reveal cards from the top of your library until you reveal a nonland card. Explosive Revelation deals damage equal to that card's mana value to that permanent or player. Put the nonland card into your hand and the rest on the bottom of your library in any order.

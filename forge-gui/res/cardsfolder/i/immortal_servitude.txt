@@ -1,7 +1,7 @@
 Name:Immortal Servitude
 ManaCost:X WB WB WB
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ X WB WB WB | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.YouOwn+cmcEQX | SpellDescription$ Return each creature with converted mana cost X from your graveyard to the battlefield.
+A:SP$ ChangeZoneAll | Cost$ X WB WB WB | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.YouOwn+cmcEQX | SpellDescription$ Return each creature with mana value X from your graveyard to the battlefield.
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/immortal_servitude.jpg
-Oracle:Return each creature card with converted mana cost X from your graveyard to the battlefield.
+Oracle:Return each creature card with mana value X from your graveyard to the battlefield.

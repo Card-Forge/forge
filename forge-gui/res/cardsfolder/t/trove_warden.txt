@@ -3,10 +3,10 @@ ManaCost:2 W W
 Types:Creature Cat Beast
 PT:3/4
 K:Vigilance
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, exile target permanent card with converted mana cost 3 or less from your graveyard.
-SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Permanent.YouOwn+cmcLE3 | TgtPrompt$ | Select target permanent card with converted mana cost 3 or less from your graveyard | Origin$ Graveyard | Destination$ Exile
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Landfall - Whenever a land enters the battlefield under your control, exile target permanent card with mana value 3 or less from your graveyard.
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Permanent.YouOwn+cmcLE3 | TgtPrompt$ | Select target permanent card with mana value 3 or less from your graveyard | Origin$ Graveyard | Destination$ Exile
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME dies, put each permanent card exiled with it onto the battlefield under the control of that card's owner.
 SVar:TrigReturn:DB$ ChangeZoneAll | ChangeType$ Permanent.ExiledWithSource | Origin$ Exile | Destination$ Battlefield
 DeckHas:Ability$Graveyard
 SVar:BuffedBy:Land
-Oracle:Vigilance\nLandfall — Whenever a land enters the battlefield under your control, exile target permanent card with converted mana cost 3 or less from your graveyard.\nWhen Trove Warden dies, put each permanent card exiled with it onto the battlefield under the control of that card's owner.
+Oracle:Vigilance\nLandfall — Whenever a land enters the battlefield under your control, exile target permanent card with mana value 3 or less from your graveyard.\nWhen Trove Warden dies, put each permanent card exiled with it onto the battlefield under the control of that card's owner.

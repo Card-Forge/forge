@@ -3,6 +3,6 @@ ManaCost:2 B G
 Types:Creature Plant Skeleton
 PT:4/1
 K:CARDNAME can't block.
-A:AB$ ChangeZone | Cost$ 2 B G Mill<4> | Origin$ Graveyard | Destination$ Battlefield | ActivationZone$ Graveyard | SorcerySpeed$ True | SpellDescription$ Return CARDNAME from your graveyard to the battlefield. Activate this ability only any time you could cast a sorcery.
+A:AB$ ChangeZone | Cost$ 2 B G Mill<4> | Origin$ Graveyard | Destination$ Battlefield | ActivationZone$ Graveyard | SorcerySpeed$ True | SpellDescription$ Return CARDNAME from your graveyard to the battlefield. Activate only as a sorcery.
 DeckHas:Ability$Graveyard
-Oracle:Rot Farm Skeleton can't block.\n{2}{B}{G}, Mill four cards: Return Rot Farm Skeleton from your graveyard to the battlefield. Activate this ability only any time you could cast a sorcery.
+Oracle:Rot Farm Skeleton can't block.\n{2}{B}{G}, Mill four cards: Return Rot Farm Skeleton from your graveyard to the battlefield. Activate only as a sorcery.

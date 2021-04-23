@@ -1,8 +1,8 @@
 Name:Liliana's Influence
 ManaCost:4 B B
 Types:Sorcery
-A:SP$ PutCounterAll | Cost$ 4 B B | ValidCards$ Creature.YouDontCtrl | CounterType$ M1M1 | CounterNum$ 1 | SubAbility$ DBShuffle | IsCurse$ True | SubAbility$ DBSearch | SpellDescription$ Put a -1/-1 counter on each creature you don't control. You may search your library and/or graveyard for a card named Liliana, Death Wielder, reveal it, and put it into your hand. If you search your library this way, shuffle it.
+A:SP$ PutCounterAll | Cost$ 4 B B | ValidCards$ Creature.YouDontCtrl | CounterType$ M1M1 | CounterNum$ 1 | SubAbility$ DBShuffle | IsCurse$ True | SubAbility$ DBSearch | SpellDescription$ Put a -1/-1 counter on each creature you don't control. You may search your library and/or graveyard for a card named Liliana, Death Wielder, reveal it, and put it into your hand. If you search your library this way, shuffle.
 SVar:DBSearch:DB$ ChangeZone | Origin$ Library | OriginChoice$ True | OriginAlternative$ Graveyard | AlternativeMessage$ Would you like to search your library with this ability? If you do, your library will be shuffled. | Destination$ Hand | ChangeType$ Card.namedLiliana; Death Wielder | ChangeNum$ 1 | Optional$ True
 DeckHints:Name$Liliana, Death Wielder
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lilianas_influence.jpg
-Oracle:Put a -1/-1 counter on each creature you don't control. You may search your library and/or graveyard for a card named Liliana, Death Wielder, reveal it, and put it into your hand. If you search your library this way, shuffle it.
+Oracle:Put a -1/-1 counter on each creature you don't control. You may search your library and/or graveyard for a card named Liliana, Death Wielder, reveal it, and put it into your hand. If you search your library this way, shuffle.

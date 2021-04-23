@@ -3,6 +3,6 @@ ManaCost:1 R W
 Types:Enchantment Saga
 K:Saga:3:DBToken,DBToken,DBChangeZone
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SpellDescription$ Create a Treasure token.
-SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.namedHalvar; God of Battle,Equipment | ChangeNum$ 1 | SpellDescription$ Search your library for a card named Halvar, God of Battle or an Equipment card, reveal it, put it into your hand, then shuffle your library.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.namedHalvar; God of Battle,Equipment | ChangeNum$ 1 | SpellDescription$ Search your library for a card named Halvar, God of Battle or an Equipment card, reveal it, put it into your hand, then shuffle.
 DeckHas:Ability$Token
-Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II — Create a Treasure token.\nIII — Search your library for a card named Halvar, God of Battle or an Equipment card, reveal it, put it into your hand, then shuffle your library.
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II — Create a Treasure token.\nIII — Search your library for a card named Halvar, God of Battle or an Equipment card, reveal it, put it into your hand, then shuffle.

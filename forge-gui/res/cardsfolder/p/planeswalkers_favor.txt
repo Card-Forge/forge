@@ -1,10 +1,10 @@
 Name:Planeswalker's Favor
 ManaCost:2 G
 Types:Enchantment
-A:AB$ Reveal | Cost$ 3 G | Random$ True | RememberRevealed$ True | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBPump | SpellDescription$ Target opponent reveals a card at random from their hand. Target creature gets +X/+X until end of turn, where X is the revealed card's converted mana cost.
+A:AB$ Reveal | Cost$ 3 G | Random$ True | RememberRevealed$ True | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBPump | SpellDescription$ Target opponent reveals a card at random from their hand. Target creature gets +X/+X until end of turn, where X is the revealed card's mana value.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/planeswalkers_favor.jpg
-Oracle:{3}{G}: Target opponent reveals a card at random from their hand. Target creature gets +X/+X until end of turn, where X is the revealed card's converted mana cost.
+Oracle:{3}{G}: Target opponent reveals a card at random from their hand. Target creature gets +X/+X until end of turn, where X is the revealed card's mana value.

@@ -6,4 +6,4 @@ A:AB$ Dig | Cost$ 1  | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | Def
 SVar:DBEffect:DB$ Effect | StaticAbilities$ EffSModeContinuous | ExileOnMoved$ Exile | RememberObjects$ Remembered | SubAbility$ DBCleanup
 SVar:EffSModeContinuous:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | MayPlay$ True | AffectedZone$ Exile | Description$ You may play that card this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-Oracle:Boast — {1}: Exile the top card of your library. You may play that card this turn. (Activate this ability only if this creature attacked this turn and only once each turn.)
+Oracle:Boast — {1}: Exile the top card of your library. You may play that card this turn. (Activate only if this creature attacked this turn and only once each turn.)

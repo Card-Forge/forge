@@ -1,6 +1,6 @@
 Name:Acquire
 ManaCost:3 U U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 U U | Origin$ Library | Destination$ Battlefield | ValidTgts$ Opponent | ChangeType$ Artifact | ChangeNum$ 1 | GainControl$ True | IsCurse$ True | StackDescription$ SpellDescription | SpellDescription$ Search target opponent's library for an artifact card and put that card onto the battlefield under your control. Then that player shuffles their library.
+A:SP$ ChangeZone | Cost$ 3 U U | Origin$ Library | Destination$ Battlefield | ValidTgts$ Opponent | ChangeType$ Artifact | ChangeNum$ 1 | GainControl$ True | IsCurse$ True | StackDescription$ SpellDescription | SpellDescription$ Search target opponent's library for an artifact card and put that card onto the battlefield under your control. Then that player shuffles.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/acquire.jpg
-Oracle:Search target opponent's library for an artifact card and put that card onto the battlefield under your control. Then that player shuffles their library.
+Oracle:Search target opponent's library for an artifact card and put that card onto the battlefield under your control. Then that player shuffles.

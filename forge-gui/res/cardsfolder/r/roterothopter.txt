@@ -3,6 +3,6 @@ ManaCost:1
 Types:Artifact Creature Thopter
 PT:0/2
 K:Flying
-A:AB$ Pump | Cost$ 2 | NumAtt$ +1 | ActivationLimit$ 2 | SpellDescription$ CARDNAME gets +1/+0 until end of turn. Activate this ability no more than twice each turn.
+A:AB$ Pump | Cost$ 2 | NumAtt$ +1 | ActivationLimit$ 2 | SpellDescription$ CARDNAME gets +1/+0 until end of turn. Activate no more than twice each turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/roterothopter.jpg
-Oracle:Flying\n{2}: Roterothopter gets +1/+0 until end of turn. Activate this ability no more than twice each turn.
+Oracle:Flying\n{2}: Roterothopter gets +1/+0 until end of turn. Activate no more than twice each turn.

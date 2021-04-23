@@ -7,4 +7,4 @@ SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
 SVar:PumpAll:DB$ PumpAll | ValidCards$ Creature.attacking+unblocked | NumAtt$ +1 | SpellDescription$ Unblocked attacking creatures get +1/+0 until end of turn.
 SVar:Token:DB$ Token | TokenScript$ c_1_1_spirit_lifelink_haste | SpellDescription$ Create a 1/1 colorless Spirit creature token with lifelink and haste.
 DeckHas:Ability$Token
-Oracle:Choose one—\n• Evil Boros Charm deals 2 damage to any target and you gain 2 life.\n• Unblocked attacking creatures get +1/+0 until end of turn.\n• Create a 1/1 colorless Spirit creature token with lifelink and haste.
+Oracle:Choose one —\n• Evil Boros Charm deals 2 damage to any target and you gain 2 life.\n• Unblocked attacking creatures get +1/+0 until end of turn.\n• Create a 1/1 colorless Spirit creature token with lifelink and haste.

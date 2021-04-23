@@ -10,4 +10,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:NumInLib:TargetedController$CardsInLibrary
 SVar:NumInHand:TargetedController$CardsInHand
 SVar:NumInYard:TargetedController$CardsInGraveyard
-Oracle:Devoid (This card has no color.)\nExile target nonbasic land. Search its controller's graveyard, hand, and library for any number of cards with the same name as that land and exile them. Then that player shuffles their library.
+Oracle:Devoid (This card has no color.)\nExile target nonbasic land. Search its controller's graveyard, hand, and library for any number of cards with the same name as that land and exile them. Then that player shuffles.

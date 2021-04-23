@@ -2,8 +2,8 @@ Name:Keruga, the Macrosage
 ManaCost:3 G/U G/U
 Types:Legendary Creature Dinosaur Hippo
 PT:5/4
-K:Companion:Card.cmcGE3,Land:Your starting deck contains only cards with converted mana cost 3 or greater and land cards.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card for each other permanent you control with converted mana cost 3 or greater.
+K:Companion:Card.cmcGE3,Land:Your starting deck contains only cards with mana value 3 or greater and land cards.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card for each other permanent you control with mana value 3 or greater.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X
 SVar:X:Count$Valid Permanent.Other+YouCtrl+cmcGE3
-Oracle:Companion — Your starting deck contains only cards with converted mana cost 3 or greater and land cards. (If this card is your chosen companion, you may put it into your hand from outside the game for {3} any time you could cast a sorcery.)\nWhen Keruga, the Macrosage enters the battlefield, draw a card for each other permanent you control with converted mana cost 3 or greater.
+Oracle:Companion — Your starting deck contains only cards with mana value 3 or greater and land cards. (If this card is your chosen companion, you may put it into your hand from outside the game for {3} any time you could cast a sorcery.)\nWhen Keruga, the Macrosage enters the battlefield, draw a card for each other permanent you control with mana value 3 or greater.

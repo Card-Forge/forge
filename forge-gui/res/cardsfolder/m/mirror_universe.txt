@@ -1,7 +1,7 @@
 Name:Mirror Universe
 ManaCost:6
 Types:Artifact
-A:AB$ ExchangeLife | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | ActivationPhases$ Upkeep | PlayerTurn$ True | SpellDescription$ Exchange life totals with target opponent. Activate this ability only during your upkeep.
+A:AB$ ExchangeLife | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | ActivationPhases$ Upkeep | PlayerTurn$ True | SpellDescription$ Exchange life totals with target opponent. Activate only during your upkeep.
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirror_universe.jpg
-Oracle:{T}, Sacrifice Mirror Universe: Exchange life totals with target opponent. Activate this ability only during your upkeep.
+Oracle:{T}, Sacrifice Mirror Universe: Exchange life totals with target opponent. Activate only during your upkeep.

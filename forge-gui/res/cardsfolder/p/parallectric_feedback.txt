@@ -1,9 +1,9 @@
 Name:Parallectric Feedback
 ManaCost:3 R
 Types:Instant
-A:SP$ Pump | Cost$ 3 R | ValidTgts$ Card | TgtZone$ Stack | TgtPrompt$ Select target spell | PumpZone$ Stack | StackDescription$ None | SubAbility$ DBDmg | SpellDescription$ CARDNAME deals damage to target spell's controller equal to that spell's converted mana cost.
+A:SP$ Pump | Cost$ 3 R | ValidTgts$ Card | TgtZone$ Stack | TgtPrompt$ Select target spell | PumpZone$ Stack | StackDescription$ None | SubAbility$ DBDmg | SpellDescription$ CARDNAME deals damage to target spell's controller equal to that spell's mana value.
 SVar:DBDmg:DB$ DealDamage | Defined$ TargetedController | NumDmg$ X
 SVar:X:Targeted$CardManaCost
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/parallectric_feedback.jpg
-Oracle:Parallectric Feedback deals damage to target spell's controller equal to that spell's converted mana cost.
+Oracle:Parallectric Feedback deals damage to target spell's controller equal to that spell's mana value.

@@ -3,5 +3,5 @@ ManaCost:B
 Types:Creature Imp
 PT:1/1
 K:Flying
-A:AB$ Discard | Cost$ 1 B T Sac<1/CARDNAME> | ValidTgts$ Player | Mode$ RevealYouChoose | DiscardValid$ Card.nonLand | NumCards$ 1 | SorcerySpeed$ True | SpellDescription$ Target player reveals their hand. You choose a nonland card from it. That player discards that card. Activate this ability only any time you could cast a sorcery.
-Oracle:Flying\n{1}{B}, {T}, Sacrifice Pilfering Imp: Target opponent reveals their hand. You choose a nonland card from it. That player discards that card. Activate this ability only any time you could cast a sorcery.
+A:AB$ Discard | Cost$ 1 B T Sac<1/CARDNAME> | ValidTgts$ Player | Mode$ RevealYouChoose | DiscardValid$ Card.nonLand | NumCards$ 1 | SorcerySpeed$ True | SpellDescription$ Target player reveals their hand. You choose a nonland card from it. That player discards that card. Activate only any time you could cast a sorcery.
+Oracle:Flying\n{1}{B}, {T}, Sacrifice Pilfering Imp: Target opponent reveals their hand. You choose a nonland card from it. That player discards that card. Activate only as a sorcery.

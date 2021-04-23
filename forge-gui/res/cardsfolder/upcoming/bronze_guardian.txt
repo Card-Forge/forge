@@ -7,5 +7,5 @@ K:Ward:2
 S:Mode$ Continuous | Affected$ Artifact.YouCtrl+Other | AddKeyword$ Ward:2 | Description$ Other artifacts you control have ward {2}.
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of artifacts you control.
 SVar:X:Count$Valid Artifact.YouCtrl
-DeckHints:Type$Artifact 
-Oracle:Double strike\nWard {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\nOther artifacts you control have ward {2}.\nBronze Guardian’s power is equal to the number of artifacts you control.
+DeckHints:Type$Artifact
+Oracle:Double strike\nWard {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\nOther artifacts you control have ward {2}.\nBronze Guardian's power is equal to the number of artifacts you control.

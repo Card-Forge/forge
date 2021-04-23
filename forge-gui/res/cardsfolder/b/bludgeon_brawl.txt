@@ -1,8 +1,8 @@
 Name:Bludgeon Brawl
 ManaCost:2 R
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Artifact.nonCreature+nonEquipment | AddKeyword$ Equip:ConvertedManaCost | AddType$ Equipment | RemoveArtifactTypes$ True | AddStaticAbility$ EquipPump | Description$ Each noncreature, non-Equipment artifact is an Equipment with equip X and "Equipped creature gets +X/+0," where X is that artifact's converted mana cost.
-SVar:EquipPump:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ ConvertedManaCost | Description$ Equipped creature gets +X/+0, where X is CARDNAME's converted mana cost.
+S:Mode$ Continuous | Affected$ Artifact.nonCreature+nonEquipment | AddKeyword$ Equip:ConvertedManaCost | AddType$ Equipment | RemoveArtifactTypes$ True | AddStaticAbility$ EquipPump | Description$ Each noncreature, non-Equipment artifact is an Equipment with equip X and "Equipped creature gets +X/+0," where X is that artifact's mana value.
+SVar:EquipPump:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ ConvertedManaCost | Description$ Equipped creature gets +X/+0, where X is CARDNAME's mana value.
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bludgeon_brawl.jpg
-Oracle:Each noncreature, non-Equipment artifact is an Equipment with equip {X} and "Equipped creature gets +X/+0," where X is that artifact's converted mana cost.
+Oracle:Each noncreature, non-Equipment artifact is an Equipment with equip {X} and "Equipped creature gets +X/+0," where X is that artifact's mana value.

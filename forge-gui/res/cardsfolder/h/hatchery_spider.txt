@@ -3,7 +3,7 @@ ManaCost:5 G G
 Types:Creature Spider
 PT:5/7
 K:Reach
-T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ Undergrowth - When you cast this spell, reveal the top X cards of your library, where X is the number of creature cards in your graveyard. You may put a green permanent card with converted mana cost X or less from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ Undergrowth - When you cast this spell, reveal the top X cards of your library, where X is the number of creature cards in your graveyard. You may put a green permanent card with mana value X or less from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
 SVar:TrigDig:DB$ Dig | DigNum$ X | Reveal$ True | ChangeNum$ 1 | ChangeValid$ Permanent.Green+cmcLEX | DestinationZone$ Battlefield | AILogic$ AtOppEndOfTurn | Optional$ True | RestRandomOrder$ True
 SVar:X:Count$TypeInYourYard.Creature
-Oracle:Reach\nUndergrowth — When you cast this spell, reveal the top X cards of your library, where X is the number of creature cards in your graveyard. You may put a green permanent card with converted mana cost X or less from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
+Oracle:Reach\nUndergrowth — When you cast this spell, reveal the top X cards of your library, where X is the number of creature cards in your graveyard. You may put a green permanent card with mana value X or less from among them onto the battlefield. Put the rest on the bottom of your library in a random order.

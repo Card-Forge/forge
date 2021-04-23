@@ -2,7 +2,7 @@ Name:Omen of the Hunt
 ManaCost:2 G
 Types:Enchantment
 K:Flash
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
 SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | Tapped$ True | ChangeNum$ 1 | ShuffleNonMandatory$ True
 A:AB$ Scry | Cost$ 2 G Sac<1/CARDNAME> | ScryNum$ 2 | AILogic$ BestOpportunity | SpellDescription$ Scry 2.
-Oracle:Flash\nWhen Omen of the Hunt enters the battlefield, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.\n{2}{G}, Sacrifice Omen of the Hunt: Scry 2.
+Oracle:Flash\nWhen Omen of the Hunt enters the battlefield, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle.\n{2}{G}, Sacrifice Omen of the Hunt: Scry 2.

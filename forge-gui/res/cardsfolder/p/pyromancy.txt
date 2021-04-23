@@ -1,9 +1,9 @@
 Name:Pyromancy
 ManaCost:2 R R
 Types:Enchantment
-A:AB$ DealDamage | Cost$ 3 Discard<1/Random> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | SpellDescription$ CARDNAME deals damage to any target equal to the converted mana cost of the discarded card.
+A:AB$ DealDamage | Cost$ 3 Discard<1/Random> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | SpellDescription$ CARDNAME deals damage to any target equal to the mana value of the discarded card.
 SVar:X:Discarded$CardManaCost
 AI:RemoveDeck:All
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyromancy.jpg
-Oracle:{3}, Discard a card at random: Pyromancy deals damage to any target equal to the converted mana cost of the discarded card.
+Oracle:{3}, Discard a card at random: Pyromancy deals damage to any target equal to the mana value of the discarded card.

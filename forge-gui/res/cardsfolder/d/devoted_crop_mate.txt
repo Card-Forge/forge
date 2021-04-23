@@ -3,6 +3,6 @@ ManaCost:2 W
 Types:Creature Human Warrior
 PT:3/2
 K:You may exert CARDNAME as it attacks.
-T:Mode$ Exerted | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When you exert CARDNAME, return target creature card with converted mana cost 2 or less from your graveyard to the battlefield.
-SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl+cmcLE2 | TgtPrompt$ Select target creature card with converted mana cost 2 or less in your graveyard
-Oracle:You may exert Devoted Crop-Mate as it attacks. When you do, return target creature card with converted mana cost 2 or less from your graveyard to the battlefield. (An exerted creature won't untap during your next untap step.)
+T:Mode$ Exerted | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When you exert CARDNAME, return target creature card with mana value 2 or less from your graveyard to the battlefield.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl+cmcLE2 | TgtPrompt$ Select target creature card with mana value 2 or less in your graveyard
+Oracle:You may exert Devoted Crop-Mate as it attacks. When you do, return target creature card with mana value 2 or less from your graveyard to the battlefield. (An exerted creature won't untap during your next untap step.)

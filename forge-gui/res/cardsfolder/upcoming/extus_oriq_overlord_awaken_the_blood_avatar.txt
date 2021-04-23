@@ -8,7 +8,7 @@ SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtProm
 DeckNeeds:Type$Instant|Sorcery
 DeckHas:Ability$Graveyard
 AlternateMode:Modal
-Oracle:Double strike\nMagecraft - Whenever you cast or copy an instant or sorcery spell, return target nonlegendary creature card from your graveyard to your hand.
+Oracle:Double strike\nMagecraft — Whenever you cast or copy an instant or sorcery spell, return target nonlegendary creature card from your graveyard to your hand.
 
 ALTERNATE
 

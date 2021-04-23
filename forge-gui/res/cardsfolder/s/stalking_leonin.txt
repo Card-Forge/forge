@@ -4,5 +4,5 @@ Types:Creature Cat Archer
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChooseOpp | TriggerDescription$ When CARDNAME enters the battlefield, secretly choose an opponent.
 SVar:TrigChooseOpp:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | Secretly$ True
-A:AB$ ChangeZone | Cost$ RevealChosenPlayer | ValidTgts$ Creature.attackingYou | TgtPrompt$ Select target creature that's attacking you. | Origin$ Battlefield | Destination$ Exile | ConditionDefined$ Targeted | ConditionPresent$ Card.ChosenCtrl | GameActivationLimit$ 1 | SpellDescription$ Exile target creature that's attacking you if it's controlled by the chosen player. Activate this ability only once.
-Oracle:When Stalking Leonin enters the battlefield, secretly choose an opponent.\nReveal the player you chose: Exile target creature that's attacking you if it's controlled by the chosen player. Activate this ability only once.
+A:AB$ ChangeZone | Cost$ RevealChosenPlayer | ValidTgts$ Creature.attackingYou | TgtPrompt$ Select target creature that's attacking you. | Origin$ Battlefield | Destination$ Exile | ConditionDefined$ Targeted | ConditionPresent$ Card.ChosenCtrl | GameActivationLimit$ 1 | SpellDescription$ Exile target creature that's attacking you if it's controlled by the chosen player. Activate only once.
+Oracle:When Stalking Leonin enters the battlefield, secretly choose an opponent.\nReveal the player you chose: Exile target creature that's attacking you if it's controlled by the chosen player. Activate only once.

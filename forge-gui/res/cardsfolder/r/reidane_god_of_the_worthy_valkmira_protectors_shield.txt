@@ -6,9 +6,9 @@ K:Flying
 K:Vigilance
 R:Event$ Moved | ValidCard$ Land.Snow+OppCtrl | Destination$ Battlefield | ReplaceWith$ ETBTapped | ActiveZones$ Battlefield | Description$ Snow lands your opponents control enter the battlefield tapped.
 SVar:ETBTapped:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Tapped$ True | Defined$ ReplacedCard
-S:Mode$ RaiseCost | ValidCard$ Card.nonCreature+cmcGE4 | Type$ Spell | Activator$ Opponent | Amount$ 2 | Description$ Noncreature spells your opponents cast with converted mana cost 4 or greater cost {2} more to cast.
+S:Mode$ RaiseCost | ValidCard$ Card.nonCreature+cmcGE4 | Type$ Spell | Activator$ Opponent | Amount$ 2 | Description$ Noncreature spells your opponents cast with mana value 4 or greater cost {2} more to cast.
 AlternateMode:Modal
-Oracle:Flying, vigilance\nSnow lands your opponents control enter the battlefield tapped.\nNoncreature spells your opponents cast with converted mana cost 4 or greater cost {2} more to cast.
+Oracle:Flying, vigilance\nSnow lands your opponents control enter the battlefield tapped.\nNoncreature spells your opponents cast with mana value 4 or greater cost {2} more to cast.
 
 ALTERNATE
 

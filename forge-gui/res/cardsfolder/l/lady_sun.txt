@@ -2,8 +2,8 @@ Name:Lady Sun
 ManaCost:1 U U
 Types:Legendary Creature Human Advisor
 PT:1/1
-A:AB$ ChangeZone | Cost$ T | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBChangeZone | PlayerTurn$ True | ActivationPhases$ Upkeep->BeginCombat | SpellDescription$ Return CARDNAME and another target creature to their owners' hands. Activate this ability only during your turn, before attackers are declared.
+A:AB$ ChangeZone | Cost$ T | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBChangeZone | PlayerTurn$ True | ActivationPhases$ Upkeep->BeginCombat | SpellDescription$ Return CARDNAME and another target creature to their owners' hands. Activate only during your turn, before attackers are declared.
 SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lady_sun.jpg
-Oracle:{T}: Return Lady Sun and another target creature to their owners' hands. Activate this ability only during your turn, before attackers are declared.
+Oracle:{T}: Return Lady Sun and another target creature to their owners' hands. Activate only during your turn, before attackers are declared.

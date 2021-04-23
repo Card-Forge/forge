@@ -2,7 +2,7 @@ Name:Nazahn, Revered Bladesmith
 ManaCost:4 G W
 Types:Legendary Creature Cat Artificer
 PT:5/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, search your library for an Equipment card and reveal it. If you reveal a card named Hammer of Nazahn this way, put it onto the battlefield. Otherwise, put that card into your hand. Then shuffle your library.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, search your library for an Equipment card and reveal it. If you reveal a card named Hammer of Nazahn this way, put it onto the battlefield. Otherwise, put that card into your hand. Then shuffle.
 SVar:TrigChange:DB$ChangeZone | Origin$ Library | Destination$ Library | ChangeType$ Equipment | ChangeNum$ 1 | Reveal$ True | Shuffle$ False | RememberChanged$ True | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Battlefield | ConditionDefined$ Remembered | ConditionPresent$ Card.namedHammer of Nazahn | ForgetChanged$ True | SubAbility$ DBChangeZone2
 SVar:DBChangeZone2:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand | SubAbility$ DBShuffle
@@ -12,4 +12,4 @@ T:Mode$ Attacks | ValidCard$ Creature.YouCtrl+equipped | Execute$ TrigTap | Trig
 SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.DefendingPlayerCtrl | TgtPrompt$ Select target creature defending player controls
 DeckHints:Name$Hammer of Nazahn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nazahn_revered_bladesmith.jpg
-Oracle:When Nazahn, Revered Bladesmith enters the battlefield, search your library for an Equipment card and reveal it. If you reveal a card named Hammer of Nazahn this way, put it onto the battlefield. Otherwise, put that card into your hand. Then shuffle your library.\nWhenever an equipped creature you control attacks, you may tap target creature defending player controls.
+Oracle:When Nazahn, Revered Bladesmith enters the battlefield, search your library for an Equipment card and reveal it. If you reveal a card named Hammer of Nazahn this way, put it onto the battlefield. Otherwise, put that card into your hand. Then shuffle.\nWhenever an equipped creature you control attacks, you may tap target creature defending player controls.

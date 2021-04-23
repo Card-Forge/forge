@@ -3,4 +3,4 @@ ManaCost:2 W W B
 Types:Sorcery
 A:SP$ DestroyAll | Cost$ 2 W W B | ValidCards$ Creature.cmcLE3 | SpellDescription$ Destroy each creature with converted manacost 3 or less.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/culling_sun.jpg
-Oracle:Destroy each creature with converted mana cost 3 or less.
+Oracle:Destroy each creature with mana value 3 or less.

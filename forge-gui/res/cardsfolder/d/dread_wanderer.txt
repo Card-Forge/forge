@@ -3,7 +3,7 @@ ManaCost:B
 Types:Creature Zombie Jackal
 PT:2/1
 K:CARDNAME enters the battlefield tapped.
-A:AB$ ChangeZone | Cost$ 2 B | Origin$ Graveyard | Destination$ Battlefield | ActivationZone$ Graveyard | SorcerySpeed$ True | CheckSVar$ X | SVarCompare$ LE1 | SpellDescription$ Return CARDNAME from your graveyard to the battlefield. Activate this ability only any time you could cast a sorcery and only if you have one or fewer cards in hand.
+A:AB$ ChangeZone | Cost$ 2 B | Origin$ Graveyard | Destination$ Battlefield | ActivationZone$ Graveyard | SorcerySpeed$ True | CheckSVar$ X | SVarCompare$ LE1 | SpellDescription$ Return CARDNAME from your graveyard to the battlefield. Activate only as a sorcery and only if you have one or fewer cards in hand.
 SVar:X:Count$InYourHand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dread_wanderer.jpg
-Oracle:Dread Wanderer enters the battlefield tapped.\n{2}{B}: Return Dread Wanderer from your graveyard to the battlefield. Activate this ability only any time you could cast a sorcery and only if you have one or fewer cards in hand.
+Oracle:Dread Wanderer enters the battlefield tapped.\n{2}{B}: Return Dread Wanderer from your graveyard to the battlefield. Activate only as a sorcery and only if you have one or fewer cards in hand.

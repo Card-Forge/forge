@@ -9,4 +9,4 @@ SVar:Vig:DB$ Pump | Defined$ Self | KW$ Vigilance
 SVar:FS:DB$ Pump | Defined$ Self | KW$ First Strike
 SVar:Fly:DB$ Pump | Defined$ Self | KW$ Flying
 SVar:P2:DB$ Pump | Defined$ Self | NumAtt$ 2 | NumDef$ 2
-Oracle:{2}: Roll a six-sided die. Urza’s Science Fair Project gets the indicated result.\n1 — It gets -2/-2 until end of turn.\n2 — Prevent all combat damage it would deal this turn.\n3 — It gains vigilance until end of turn.\n4 — It gains first strike until end of turn.\n5 — It gains flying until end of turn.\n6 — It gets +2/+2 until end of turn.
+Oracle:{2}: Roll a six-sided die. Urza's Science Fair Project gets the indicated result.\n1 — It gets -2/-2 until end of turn.\n2 — Prevent all combat damage it would deal this turn.\n3 — It gains vigilance until end of turn.\n4 — It gains first strike until end of turn.\n5 — It gains flying until end of turn.\n6 — It gets +2/+2 until end of turn.

@@ -2,7 +2,7 @@ Name:Barbarian Ring
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ R | SubAbility$ DBPain | SpellDescription$ Add {R}. CARDNAME deals 1 damage to you.
-A:AB$ DealDamage | Cost$ R T Sac<1/CARDNAME> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2 | Activation$ Threshold | PrecostDesc$ Threshold — | SpellDescription$ CARDNAME deals 2 damage to any target. Activate this ability only if seven or more cards are in your graveyard.
+A:AB$ DealDamage | Cost$ R T Sac<1/CARDNAME> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2 | Activation$ Threshold | PrecostDesc$ Threshold — | SpellDescription$ CARDNAME deals 2 damage to any target. Activate only if seven or more cards are in your graveyard.
 SVar:DBPain:DB$ DealDamage | NumDmg$ 1 | Defined$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barbarian_ring.jpg
-Oracle:{T}: Add {R}. Barbarian Ring deals 1 damage to you.\nThreshold — {R}, {T}, Sacrifice Barbarian Ring: It deals 2 damage to any target. Activate this ability only if seven or more cards are in your graveyard.
+Oracle:{T}: Add {R}. Barbarian Ring deals 1 damage to you.\nThreshold — {R}, {T}, Sacrifice Barbarian Ring: It deals 2 damage to any target. Activate only if seven or more cards are in your graveyard.

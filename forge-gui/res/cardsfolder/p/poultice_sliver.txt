@@ -2,8 +2,8 @@ Name:Poultice Sliver
 ManaCost:2 W
 Types:Creature Sliver
 PT:2/2
-S:Mode$ Continuous | Affected$ Sliver | AddAbility$ Regen | Description$ All Slivers have "{2}, {T}: Regenerate target Sliver."
+S:Mode$ Continuous | Affected$ Sliver | AddAbility$ Regen | Description$ All Slivers have "{2}, {T}: Regenerate target Sliver." (The next time that Sliver would be destroyed, instead tap it, remove it from combat, and heal all damage on it.)
 SVar:Regen:AB$Regenerate | Cost$ 2 T | ValidTgts$ Sliver | TgtPrompt$ Select target Sliver. | SpellDescription$ Regenerate a target Sliver.
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/poultice_sliver.jpg
-Oracle:All Slivers have "{2}, {T}: Regenerate target Sliver."
+Oracle:All Slivers have "{2}, {T}: Regenerate target Sliver." (The next time that Sliver would be destroyed, instead tap it, remove it from combat, and heal all damage on it.)

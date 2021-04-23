@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 R | ValidTgts$ Creature | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ First Strike | Description$ Enchanted creature gets +2/+2, has first strike, and can't attack you or a planeswalker you control.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ First Strike | Description$ Enchanted creature gets +2/+2, has first strike, and can't attack you or planeswalkers you control.
 S:Mode$ CantAttack | ValidCard$ Creature.EnchantedBy | Target$ You,Planeswalker.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vow_of_lightning.jpg
-Oracle:Enchant creature\nEnchanted creature gets +2/+2, has first strike, and can't attack you or a planeswalker you control.
+Oracle:Enchant creature\nEnchanted creature gets +2/+2, has first strike, and can't attack you or planeswalkers you control.

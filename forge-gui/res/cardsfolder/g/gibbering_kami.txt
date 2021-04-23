@@ -6,4 +6,4 @@ K:Flying
 K:Soulshift:3
 DeckHints:Type$Spirit
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gibbering_kami.jpg
-Oracle:Flying\nSoulshift 3 (When this creature dies, you may return target Spirit card with converted mana cost 3 or less from your graveyard to your hand.)
+Oracle:Flying\nSoulshift 3 (When this creature dies, you may return target Spirit card with mana value 3 or less from your graveyard to your hand.)

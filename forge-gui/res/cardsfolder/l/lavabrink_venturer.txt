@@ -4,5 +4,5 @@ Types:Creature Human Soldier
 PT:3/3
 K:ETBReplacement:Other:ChooseEvenOdd
 SVar:ChooseEvenOdd:DB$ ChooseEvenOdd | Defined$ You | AILogic$ CMCOppControlsByPower | SpellDescription$ As CARDNAME enters the battlefield, choose odd or even. (Zero is even.)
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection:Card.cmcChosenEvenOdd,Emblem.cmcChosenEvenOdd:Protection from each converted mana cost of chosenEvenOdd. | Description$ CARDNAME has protection from each converted mana cost of the chosen value.
-Oracle:As Lavabrink Venturer enters the battlefield, choose odd or even. (Zero is even.)\nLavabrink Venturer has protection from each converted mana cost of the chosen value.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection:Card.cmcChosenEvenOdd,Emblem.cmcChosenEvenOdd:Protection from each mana value of chosenEvenOdd. | Description$ CARDNAME has protection from each mana value of the chosen quality.
+Oracle:As Lavabrink Venturer enters the battlefield, choose odd or even. (Zero is even.)\nLavabrink Venturer has protection from each mana value of the chosen quality.

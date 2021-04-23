@@ -3,9 +3,9 @@ ManaCost:2 G
 Types:Creature Human Shaman
 PT:2/3
 A:AB$ Mana | Cost$ T | Produced$ Combo Any | Amount$ 2 | RestrictValid$ Card.Creature | SpellDescription$ Add two mana in any combination of colors. Spend this mana only to cast creature spells.
-A:AB$ RepeatEach | Cost$ 9 G G T | PrecostDesc$ Formidable — | CheckSVar$ FormidableTest | SVarCompare$ GE8 | RepeatPlayers$ Player | RepeatSubAbility$ DBSetLife | SpellDescription$ Each player's life total becomes the number of creatures they control. Activate this ability only if creatures you control have total power 8 or greater.
+A:AB$ RepeatEach | Cost$ 9 G G T | PrecostDesc$ Formidable — | CheckSVar$ FormidableTest | SVarCompare$ GE8 | RepeatPlayers$ Player | RepeatSubAbility$ DBSetLife | SpellDescription$ Each player's life total becomes the number of creatures they control. Activate only if creatures you control have total power 8 or greater.
 SVar:FormidableTest:Count$SumPower_Creature.YouCtrl
 SVar:DBSetLife:DB$ SetLife | Defined$ Player.IsRemembered | LifeAmount$ X
 SVar:X:Count$Valid Creature.RememberedPlayerCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shaman_of_forgotten_ways.jpg
-Oracle:{T}: Add two mana in any combination of colors. Spend this mana only to cast creature spells.\nFormidable — {9}{G}{G}, {T}: Each player's life total becomes the number of creatures they control. Activate this ability only if creatures you control have total power 8 or greater.
+Oracle:{T}: Add two mana in any combination of colors. Spend this mana only to cast creature spells.\nFormidable — {9}{G}{G}, {T}: Each player's life total becomes the number of creatures they control. Activate only if creatures you control have total power 8 or greater.

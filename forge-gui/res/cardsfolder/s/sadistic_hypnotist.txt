@@ -2,6 +2,6 @@ Name:Sadistic Hypnotist
 ManaCost:3 B B
 Types:Creature Human Minion
 PT:2/2
-A:AB$ Discard | Cost$ Sac<1/Creature> | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SorcerySpeed$ True | SpellDescription$ Target player discards two cards. Activate this ability only any time you could cast a sorcery.
+A:AB$ Discard | Cost$ Sac<1/Creature> | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SorcerySpeed$ True | SpellDescription$ Target player discards two cards. Activate only as a sorcery.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sadistic_hypnotist.jpg
-Oracle:Sacrifice a creature: Target player discards two cards. Activate this ability only any time you could cast a sorcery.
+Oracle:Sacrifice a creature: Target player discards two cards. Activate only as a sorcery.

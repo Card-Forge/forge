@@ -4,8 +4,8 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 1 | AddKeyword$ Haste | AddHiddenKeyword$ CARDNAME attacks each combat if able. | Description$ Enchanted creature gets +2/+1, has haste, and attacks each combat if able.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When enchanted creature dies, you may search your library for a card named Infectious Bloodlust, reveal it, put it into your hand, then shuffle your library.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When enchanted creature dies, you may search your library for a card named Infectious Bloodlust, reveal it, put it into your hand, then shuffle.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.namedInfectious Bloodlust | ChangeNum$ 1 | ShuffleNonMandatory$ True
 DeckHints:Name$Infectious Bloodlust
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infectious_bloodlust.jpg
-Oracle:Enchant creature\nEnchanted creature gets +2/+1, has haste, and attacks each combat if able.\nWhen enchanted creature dies, you may search your library for a card named Infectious Bloodlust, reveal it, put it into your hand, then shuffle your library.
+Oracle:Enchant creature\nEnchanted creature gets +2/+1, has haste, and attacks each combat if able.\nWhen enchanted creature dies, you may search your library for a card named Infectious Bloodlust, reveal it, put it into your hand, then shuffle.

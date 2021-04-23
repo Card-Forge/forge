@@ -2,7 +2,7 @@ Name:Veteran Explorer
 ManaCost:G
 Types:Creature Human Soldier Scout
 PT:1/1
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, each player may search their library for up to two basic land cards and put them onto the battlefield. Then each player who searched their library this way shuffles it.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, each player may search their library for up to two basic land cards, put them onto the battlefield, then shuffle.
 SVar:TrigChange:DB$ChangeZone | Optional$ True | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | DefinedPlayer$ Player | ChangeNum$ 2 | Shuffle$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veteran_explorer.jpg
-Oracle:When Veteran Explorer dies, each player may search their library for up to two basic land cards and put them onto the battlefield. Then each player who searched their library this way shuffles it.
+Oracle:When Veteran Explorer dies, each player may search their library for up to two basic land cards, put them onto the battlefield, then shuffle.

@@ -1,8 +1,8 @@
 Name:Horizon Spellbomb
 ManaCost:1
 Types:Artifact
-A:AB$ ChangeZone | Cost$ 2 T Sac<1/CARDNAME> | ChangeType$ Land.Basic | Origin$ Library | Destination$ Hand | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card, reveal it, and put it into your hand. Then shuffle your library.
+A:AB$ ChangeZone | Cost$ 2 T Sac<1/CARDNAME> | ChangeType$ Land.Basic | Origin$ Library | Destination$ Hand | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card, reveal it, put it into your hand, then shuffle.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | OptionalDecider$ TriggeredCardController | Execute$ TrigDraw | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, you may pay {G}. If you do, draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ G | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/horizon_spellbomb.jpg
-Oracle:{2}, {T}, Sacrifice Horizon Spellbomb: Search your library for a basic land card, reveal it, and put it into your hand. Then shuffle your library.\nWhen Horizon Spellbomb is put into a graveyard from the battlefield, you may pay {G}. If you do, draw a card.
+Oracle:{2}, {T}, Sacrifice Horizon Spellbomb: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.\nWhen Horizon Spellbomb is put into a graveyard from the battlefield, you may pay {G}. If you do, draw a card.

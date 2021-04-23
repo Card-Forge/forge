@@ -6,4 +6,4 @@ K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target Spirit, instant or sorcery card from your graveyard to your hand.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Instant.YouOwn,Sorcery.YouOwn,Spirit.YouOwn | TgtPrompt$ Select target Spirit, instant or sorcery card in your graveyard
 DeckHints:Type$Spirit
-Oracle:When Returned Pastcaller enters the battlefield, return target Spirit, instant or sorcery card from your graveyard to your hand.
+Oracle:Flying\nWhen Returned Pastcaller enters the battlefield, return target Spirit, instant, or sorcery card from your graveyard to your hand.

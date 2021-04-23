@@ -5,7 +5,7 @@ PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DBCounter,DBSearch
 SVar:DBCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
-SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Land.Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card, reveal it, then shuffle your library and put that card on top of it.
+SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Land.Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card, reveal it, then shuffle and put that card on top.
 DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ainok_guide.jpg
-Oracle:When Ainok Guide enters the battlefield, choose one —\n• Put a +1/+1 counter on Ainok Guide.\n• Search your library for a basic land card, reveal it, then shuffle your library and put that card on top of it.
+Oracle:When Ainok Guide enters the battlefield, choose one —\n• Put a +1/+1 counter on Ainok Guide.\n• Search your library for a basic land card, reveal it, then shuffle and put that card on top.

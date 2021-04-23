@@ -2,7 +2,7 @@ Name:Borderland Explorer
 ManaCost:1 G
 Types:Creature Elf Scout
 PT:3/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExploration | TriggerDescription$ When CARDNAME enters the battlefield, each player may discard a card. Each player who discarded a card this way may search their library for a basic land card, reveal it, put it into their hand, then shuffle their library.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExploration | TriggerDescription$ When CARDNAME enters the battlefield, each player may discard a card. Each player who discarded a card this way may search their library for a basic land card, reveal it, put it into their hand, then shuffle.
 SVar:TrigExploration:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBDiscardToFetch
 SVar:DBDiscardToFetch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | DefinedPlayer$ Player.IsRemembered | UnlessCost$ Discard<1/Card> | UnlessPayer$ Player.IsRemembered | UnlessSwitched$ True
-Oracle:When Borderland Explorer enters the battlefield, each player may discard a card. Each player who discarded a card this way may search their library for a basic land card, reveal it, put it into their hand, then shuffle their library.
+Oracle:When Borderland Explorer enters the battlefield, each player may discard a card. Each player who discarded a card this way may search their library for a basic land card, reveal it, put it into their hand, then shuffle.

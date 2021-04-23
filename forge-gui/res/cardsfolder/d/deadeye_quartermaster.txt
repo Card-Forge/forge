@@ -2,8 +2,8 @@ Name:Deadeye Quartermaster
 ManaCost:3 U
 Types:Creature Human Pirate
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for an Equipment or a Vehicle card, reveal it, put it into your hand, then shuffle your library.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for an Equipment or a Vehicle card, reveal it, put it into your hand, then shuffle.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.Equipment,Card.Vehicle | ChangeNum$ 1 | ShuffleNonMandatory$ True
 DeckHints:Type$Equipment|Vehicle
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deadeye_quartermaster.jpg
-Oracle:When Deadeye Quartermaster enters the battlefield, you may search your library for an Equipment or Vehicle card, reveal it, put it into your hand, then shuffle your library.
+Oracle:When Deadeye Quartermaster enters the battlefield, you may search your library for an Equipment or Vehicle card, reveal it, put it into your hand, then shuffle.

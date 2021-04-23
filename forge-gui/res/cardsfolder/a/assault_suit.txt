@@ -2,7 +2,7 @@ Name:Assault Suit
 ManaCost:4
 Types:Artifact Equipment
 K:Equip:3
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Haste | AddHiddenKeyword$ CARDNAME can't be sacrificed. | AddPower$ 2 | AddToughness$ 2 | Description$ Equipped creature gets +2/+2, has haste, can't attack you or a planeswalker you control, and can't be sacrificed.
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Haste | AddHiddenKeyword$ CARDNAME can't be sacrificed. | AddPower$ 2 | AddToughness$ 2 | Description$ Equipped creature gets +2/+2, has haste, can't attack you or planeswalkers you control, and can't be sacrificed.
 S:Mode$ CantAttack | ValidCard$ Creature.EquippedBy | Target$ You,Planeswalker.YouCtrl
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigGainControl | TriggerDescription$ At the beginning of each opponent's upkeep, you may have that player gain control of equipped creature until end of turn. If you do, untap it.
 SVar:TrigGainControl:DB$ GainControl | Defined$ Equipped | NewController$ TriggeredPlayer | LoseControl$ EOT | RememberControlled$ True | SubAbility$ DBUntap
@@ -10,4 +10,4 @@ SVar:DBUntap:DB$ Untap | Defined$ Equipped | ConditionDefined$ Remembered | Cond
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/assault_suit.jpg
-Oracle:Equipped creature gets +2/+2, has haste, can't attack you or a planeswalker you control, and can't be sacrificed.\nAt the beginning of each opponent's upkeep, you may have that player gain control of equipped creature until end of turn. If you do, untap it.\nEquip {3}
+Oracle:Equipped creature gets +2/+2, has haste, can't attack you or planeswalkers you control, and can't be sacrificed.\nAt the beginning of each opponent's upkeep, you may have that player gain control of equipped creature until end of turn. If you do, untap it.\nEquip {3}

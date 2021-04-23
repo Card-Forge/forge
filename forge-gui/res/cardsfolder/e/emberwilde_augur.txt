@@ -2,6 +2,6 @@ Name:Emberwilde Augur
 ManaCost:1 R
 Types:Creature Goblin Shaman
 PT:2/1
-A:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | NumDmg$ 3 | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | PlayerTurn$ True | ActivationPhases$ Upkeep | SpellDescription$ CARDNAME deals 3 damage to target player or planeswalker. Activate this ability only during your upkeep.
+A:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | NumDmg$ 3 | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | PlayerTurn$ True | ActivationPhases$ Upkeep | SpellDescription$ CARDNAME deals 3 damage to target player or planeswalker. Activate only during your upkeep.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emberwilde_augur.jpg
-Oracle:Sacrifice Emberwilde Augur: It deals 3 damage to target player or planeswalker. Activate this ability only during your upkeep.
+Oracle:Sacrifice Emberwilde Augur: It deals 3 damage to target player or planeswalker. Activate only during your upkeep.

@@ -1,9 +1,9 @@
 Name:Search for Glory
 ManaCost:2 W
 Types:Snow Sorcery
-A:SP$ ChangeZone | Cost$ 2 W | Origin$ Library | Destination$ Hand | ChangeType$ Permanent.Snow,Legendary,Saga | ChangeNum$ 1 | SubAbility$ DBGainLife | SpellDescription$ Search your library for a snow permanent card, a legendary card, or a Saga card, reveal it, put it into your hand, then shuffle your library. You gain 1 life for each {S} spent to cast this spell.
+A:SP$ ChangeZone | Cost$ 2 W | Origin$ Library | Destination$ Hand | ChangeType$ Permanent.Snow,Legendary,Saga | ChangeNum$ 1 | SubAbility$ DBGainLife | SpellDescription$ Search your library for a snow permanent card, a legendary card, or a Saga card, reveal it, put it into your hand, then shuffle. You gain 1 life for each {S} spent to cast this spell.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$CastTotalSnowManaSpent
 AI:RemoveDeck:Random
 DeckHints:Type$Legendary
-Oracle:Search your library for a snow permanent card, a legendary card, or a Saga card, reveal it, put it into your hand, then shuffle your library. You gain 1 life for each {S} spent to cast this spell. ({S} is mana from a snow source.)
+Oracle:Search your library for a snow permanent card, a legendary card, or a Saga card, reveal it, put it into your hand, then shuffle. You gain 1 life for each {S} spent to cast this spell. ({S} is mana from a snow source.)

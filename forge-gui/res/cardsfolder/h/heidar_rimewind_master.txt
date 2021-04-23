@@ -2,7 +2,7 @@ Name:Heidar, Rimewind Master
 ManaCost:4 U
 Types:Legendary Creature Human Wizard
 PT:3/3
-A:AB$ ChangeZone | Cost$ 2 T | ValidTgts$ Permanent | TgtPrompt$ Select target Permanent | Origin$ Battlefield | Destination$ Hand | IsPresent$ Permanent.Snow+YouCtrl | PresentCompare$ GE4 | SpellDescription$ Return target permanent to its owner's hand. Activate this ability only if you control four or more snow permanents.
+A:AB$ ChangeZone | Cost$ 2 T | ValidTgts$ Permanent | TgtPrompt$ Select target Permanent | Origin$ Battlefield | Destination$ Hand | IsPresent$ Permanent.Snow+YouCtrl | PresentCompare$ GE4 | SpellDescription$ Return target permanent to its owner's hand. Activate only if you control four or more snow permanents.
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heidar_rimewind_master.jpg
-Oracle:{2}, {T}: Return target permanent to its owner's hand. Activate this ability only if you control four or more snow permanents.
+Oracle:{2}, {T}: Return target permanent to its owner's hand. Activate only if you control four or more snow permanents.

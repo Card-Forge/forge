@@ -1,6 +1,6 @@
 Name:Disrupting Scepter
 ManaCost:3
 Types:Artifact
-A:AB$ Discard | Cost$ 3 T | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose | PlayerTurn$ True | SpellDescription$ Target player discards a card. Activate this ability only during your turn.
+A:AB$ Discard | Cost$ 3 T | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose | PlayerTurn$ True | SpellDescription$ Target player discards a card. Activate only during your turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disrupting_scepter.jpg
-Oracle:{3}, {T}: Target player discards a card. Activate this ability only during your turn.
+Oracle:{3}, {T}: Target player discards a card. Activate only during your turn.

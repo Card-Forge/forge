@@ -5,4 +5,4 @@ PT:3/6
 K:Vigilance
 K:TypeCycling:Plains:2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/noble_templar.jpg
-Oracle:Vigilance\nPlainscycling {2} ({2}, Discard this card: Search your library for a Plains card, reveal it, put it into your hand, then shuffle your library.)
+Oracle:Vigilance\nPlainscycling {2} ({2}, Discard this card: Search your library for a Plains card, reveal it, put it into your hand, then shuffle.)

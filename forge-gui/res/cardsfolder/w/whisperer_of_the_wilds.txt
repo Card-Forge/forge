@@ -3,6 +3,6 @@ ManaCost:1 G
 Types:Creature Human Shaman
 PT:0/2
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
-A:AB$ Mana | Cost$ T | Produced$ G | Amount$ 2 | IsPresent$ Creature.YouCtrl+powerGE4 | PrecostDesc$ Ferocious — | SpellDescription$ Add {G}{G}. Activate this ability only if you control a creature with power 4 or greater.
+A:AB$ Mana | Cost$ T | Produced$ G | Amount$ 2 | IsPresent$ Creature.YouCtrl+powerGE4 | PrecostDesc$ Ferocious — | SpellDescription$ Add {G}{G}. Activate only if you control a creature with power 4 or greater.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whisperer_of_the_wilds.jpg
-Oracle:{T}: Add {G}.\nFerocious — {T}: Add {G}{G}. Activate this ability only if you control a creature with power 4 or greater.
+Oracle:{T}: Add {G}.\nFerocious — {T}: Add {G}{G}. Activate only if you control a creature with power 4 or greater.

@@ -1,8 +1,8 @@
 Name:Arcum's Sleigh
 ManaCost:1
 Types:Artifact
-A:AB$ Pump | Cost$ 2 T | KW$ Vigilance | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsPresent$ Land.Snow+DefenderCtrl | ActivationPhases$ BeginCombat->EndCombat | SpellDescription$ Target creature gains vigilance until end of turn. Activate this ability only during combat and only if defending player controls a snow land.
+A:AB$ Pump | Cost$ 2 T | KW$ Vigilance | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsPresent$ Land.Snow+DefenderCtrl | ActivationPhases$ BeginCombat->EndCombat | SpellDescription$ Target creature gains vigilance until end of turn. Activate only during combat and only if defending player controls a snow land.
 AI:RemoveDeck:Random
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arcums_sleigh.jpg
-Oracle:{2}, {T}: Target creature gains vigilance until end of turn. Activate this ability only during combat and only if defending player controls a snow land.
+Oracle:{2}, {T}: Target creature gains vigilance until end of turn. Activate only during combat and only if defending player controls a snow land.

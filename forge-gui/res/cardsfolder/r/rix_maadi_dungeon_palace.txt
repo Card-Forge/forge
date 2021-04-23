@@ -2,6 +2,6 @@ Name:Rix Maadi, Dungeon Palace
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ Discard | Cost$ 1 B R T | NumCards$ 1 | Mode$ TgtChoose | Defined$ Player | SorcerySpeed$ True | SpellDescription$ Each player discards a card. Activate this ability only any time you could cast a sorcery.
+A:AB$ Discard | Cost$ 1 B R T | NumCards$ 1 | Mode$ TgtChoose | Defined$ Player | SorcerySpeed$ True | SpellDescription$ Each player discards a card. Activate only as a sorcery.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rix_maadi_dungeon_palace.jpg
-Oracle:{T}: Add {C}.\n{1}{B}{R}, {T}: Each player discards a card. Activate this ability only any time you could cast a sorcery.
+Oracle:{T}: Add {C}.\n{1}{B}{R}, {T}: Each player discards a card. Activate only as a sorcery.

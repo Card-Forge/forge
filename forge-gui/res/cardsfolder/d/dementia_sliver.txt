@@ -2,11 +2,11 @@ Name:Dementia Sliver
 ManaCost:3 U B
 Types:Creature Sliver
 PT:3/3
-S:Mode$ Continuous | Affected$ Sliver | AddAbility$ ABDementiaNameCard | AddSVar$ DBDementiaReveal & DBDementiaDiscard | Description$ All Slivers have "{T}: Choose a card name. Target opponent reveals a card at random from their hand. If that card has the chosen name, that player discards it. Activate this ability only during your turn."
-SVar:ABDementiaNameCard:AB$ NameCard | Cost$ T | Defined$ You | SubAbility$ DBDementiaReveal | SpellDescription$ Choose a card name. Target opponent reveals a card at random from their hand. If that card has the chosen name, that player discards it. Activate this ability only during your turn.
+S:Mode$ Continuous | Affected$ Sliver | AddAbility$ ABDementiaNameCard | AddSVar$ DBDementiaReveal & DBDementiaDiscard | Description$ All Slivers have "{T}: Choose a card name. Target opponent reveals a card at random from their hand. If that card has the chosen name, that player discards it. Activate only during your turn."
+SVar:ABDementiaNameCard:AB$ NameCard | Cost$ T | Defined$ You | SubAbility$ DBDementiaReveal | SpellDescription$ Choose a card name. Target opponent reveals a card at random from their hand. If that card has the chosen name, that player discards it. Activate only during your turn.
 SVar:DBDementiaReveal:DB$ Reveal | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Random$ True | PlayerTurn$ True | SubAbility$ DBDementiaDiscard
 SVar:DBDementiaDiscard:DB$ Discard | DiscardValid$ Card.NamedCard | Mode$ TgtChoose | Defined$ Targeted
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dementia_sliver.jpg
-Oracle:All Slivers have "{T}: Choose a card name. Target opponent reveals a card at random from their hand. If that card has the chosen name, that player discards it. Activate this ability only during your turn."
+Oracle:All Slivers have "{T}: Choose a card name. Target opponent reveals a card at random from their hand. If that card has the chosen name, that player discards it. Activate only during your turn."

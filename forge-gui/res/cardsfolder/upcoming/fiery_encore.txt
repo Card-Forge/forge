@@ -8,4 +8,4 @@ SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPromp
 SVar:X:Remembered$CardManaCost
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 K:Storm
-Oracle:Discard a card, then draw a card. When you discard a card this way, Fiery Encore deals damage equal to that card's mana value to target creature or planeswalker.\nStorm (When you cast this spell, copy it for each spell cast before it this turn.)
+Oracle:Discard a card, then draw a card. When you discard a nonland card this way, Fiery Encore deals damage equal to that card's mana value to target creature or planeswalker.\nStorm (When you cast this spell, copy it for each spell cast before it this turn.)

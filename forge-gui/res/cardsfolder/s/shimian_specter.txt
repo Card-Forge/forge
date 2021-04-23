@@ -3,7 +3,7 @@ ManaCost:2 B B
 Types:Creature Specter
 PT:2/2
 K:Flying
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigReveal | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player reveals their hand. You choose a nonland card from it. Search that player's graveyard, hand, and library for all cards with the same name as that card and exile them. Then that player shuffles their library.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigReveal | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player reveals their hand. You choose a nonland card from it. Search that player's graveyard, hand, and library for all cards with the same name as that card and exile them. Then that player shuffles.
 SVar:TrigReveal:DB$ RevealHand | Defined$ TriggeredTarget | RememberRevealedPlayer$ True | SubAbility$ ChooseCard
 SVar:ChooseCard:DB$ ChooseCard | Choices$ Card.nonLand+RememberedPlayerCtrl+inZoneHand | ChoiceZone$ Hand | SubAbility$ ExileYard | RememberChosen$ True | ForgetOtherTargets$ True
 SVar:ExileYard:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | Defined$ TriggeredTarget | ChangeType$ Remembered.sameName | SubAbility$ ExileHand | StackDescription$ None
@@ -13,4 +13,4 @@ SVar:NumInHand:TriggeredTarget$CardsInHand
 SVar:NumInLib:TriggeredTarget$CardsInLibrary
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shimian_specter.jpg
-Oracle:Flying\nWhenever Shimian Specter deals combat damage to a player, that player reveals their hand. You choose a nonland card from it. Search that player's graveyard, hand, and library for all cards with the same name as that card and exile them. Then that player shuffles their library.
+Oracle:Flying\nWhenever Shimian Specter deals combat damage to a player, that player reveals their hand. You choose a nonland card from it. Search that player's graveyard, hand, and library for all cards with the same name as that card and exile them. Then that player shuffles.

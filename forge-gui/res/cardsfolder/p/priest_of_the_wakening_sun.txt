@@ -2,9 +2,9 @@ Name:Priest of the Wakening Sun
 ManaCost:W
 Types:Creature Human Cleric
 PT:1/1
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ ABGainLife | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may reveal a Dinosaur card from your hand. If you do, you gain 2 life. 
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ ABGainLife | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may reveal a Dinosaur card from your hand. If you do, you gain 2 life.
 SVar:ABGainLife:DB$ GainLife | UnlessCost$ Reveal<1/Creature.Dinosaur> | UnlessPayer$ You | UnlessSwitched$ True | LifeAmount$ 2 | StackDescription$ you gain 2 life. | SpellDescription$ You gain 2 life.
-A:AB$ ChangeZone | Cost$ 3 W W Sac<1/CARDNAME> | Origin$ Library | Destination$ Hand | ChangeType$ Creature.Dinosaur | ChangeNum$ 1 | SpellDescription$ Search your library for a Dinosaur card, reveal it, put it into your hand, then shuffle your library.
+A:AB$ ChangeZone | Cost$ 3 W W Sac<1/CARDNAME> | Origin$ Library | Destination$ Hand | ChangeType$ Creature.Dinosaur | ChangeNum$ 1 | SpellDescription$ Search your library for a Dinosaur card, reveal it, put it into your hand, then shuffle.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/priest_of_the_wakening_sun.jpg
 DeckHints:Type$Dinosaur
-Oracle:At the beginning of your upkeep, you may reveal a Dinosaur card from your hand. If you do, you gain 2 life.\n{3}{W}{W}, Sacrifice Priest of the Wakening Sun: Search your library for a Dinosaur card, reveal it, put it into your hand, then shuffle your library.
+Oracle:At the beginning of your upkeep, you may reveal a Dinosaur card from your hand. If you do, you gain 2 life.\n{3}{W}{W}, Sacrifice Priest of the Wakening Sun: Search your library for a Dinosaur card, reveal it, put it into your hand, then shuffle.

@@ -3,11 +3,11 @@ ManaCost:3 B
 Types:Creature Zombie
 PT:2/2
 K:Double Strike
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, each player puts a creature card with converted mana cost 3 or less from their graveyard onto the battlefield.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, each player puts a creature card with mana value 3 or less from their graveyard onto the battlefield.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | ManaNotSpent$ R | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless {R} was spent to cast it.
 SVar:TrigChangeZone:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.RememberedPlayerCtrl+cmcLE3 | ChangeNum$ 1 | Hidden$ True | DefinedPlayer$ Player.IsRemembered | Chooser$ Player.IsRemembered
 SVar:TrigSac:DB$ Sacrifice | Defined$ Self
 SVar:ManaNeededToAvoidNegativeEffect:red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crypt_champion.jpg
-Oracle:Double strike\nWhen Crypt Champion enters the battlefield, each player puts a creature card with converted mana cost 3 or less from their graveyard onto the battlefield.\nWhen Crypt Champion enters the battlefield, sacrifice it unless {R} was spent to cast it.
+Oracle:Double strike\nWhen Crypt Champion enters the battlefield, each player puts a creature card with mana value 3 or less from their graveyard onto the battlefield.\nWhen Crypt Champion enters the battlefield, sacrifice it unless {R} was spent to cast it.

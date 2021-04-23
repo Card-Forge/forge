@@ -5,4 +5,4 @@ PT:0/4
 A:AB$ Pump | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SorcerySpeed$ True | SpellDescription$ Target creature gets -X/-X until end of turn, where X is the number of snow lands you control.
 SVar:X:Count$Valid Land.Snow+YouCtrl
 DeckHints:Type$Snow
-Oracle:{T}, Sacrifice Priest of the Haunted Edge: Target creature gets -X/-X until end of turn, where X is the number of snow lands you control. Activate this ability only any time you could cast a sorcery.
+Oracle:{T}, Sacrifice Priest of the Haunted Edge: Target creature gets -X/-X until end of turn, where X is the number of snow lands you control. Activate only as a sorcery.

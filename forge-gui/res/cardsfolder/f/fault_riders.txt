@@ -2,7 +2,7 @@ Name:Fault Riders
 ManaCost:2 R
 Types:Creature Human Soldier
 PT:2/2
-A:AB$ Pump | Cost$ Sac<1/Land> | Defined$ Self | NumAtt$ +2 | KW$ First Strike | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +2/+0 and gains first strike until end of turn. Activate this ability only once each turn.
+A:AB$ Pump | Cost$ Sac<1/Land> | Defined$ Self | NumAtt$ +2 | KW$ First Strike | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +2/+0 and gains first strike until end of turn. Activate only once each turn.
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fault_riders.jpg
-Oracle:Sacrifice a land: Fault Riders gets +2/+0 and gains first strike until end of turn. Activate this ability only once each turn.
+Oracle:Sacrifice a land: Fault Riders gets +2/+0 and gains first strike until end of turn. Activate only once each turn.

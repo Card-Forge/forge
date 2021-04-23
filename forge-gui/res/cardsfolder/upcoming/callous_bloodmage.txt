@@ -4,9 +4,9 @@ Types:Creature Vampire Warlock
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DBToken,DBDraw,DBExileYard
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ bg_1_1_pest_lifegain | TokenOwner$ You | SpellDescription$ Create a 1/1 black and green Pest creature token with “When this creature dies, you gain 1 life.”
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ bg_1_1_pest_lifegain | TokenOwner$ You | SpellDescription$ Create a 1/1 black and green Pest creature token with "When this creature dies, you gain 1 life."
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife | SpellDescription$ You draw a card and you lose 1 life.
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
 SVar:DBExileYard:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Card | SpellDescription$ Exile all cards from target player's graveyard.
 DeckHas:Ability$Token & Ability$LifeGain
-Oracle:When Callous Bloodmage enters the battlefield, choose one —\n• Create a 1/1 black and green Pest creature token with “When this creature dies, you gain 1 life.”\n• You draw a card and you lose 1 life.\n• Exile target player’s graveyard.
+Oracle:When Callous Bloodmage enters the battlefield, choose one —\n• Create a 1/1 black and green Pest creature token with "When this creature dies, you gain 1 life."\n• You draw a card and you lose 1 life.\n• Exile target player's graveyard.

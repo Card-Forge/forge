@@ -2,13 +2,13 @@ Name:Heir of Falkenrath
 ManaCost:1 B
 Types:Creature Vampire
 PT:2/1
-A:AB$SetState | Cost$ Discard<1/Card> | Defined$ Self | Mode$ Transform | ActivationLimit$ 1 | SpellDescription$ Transform CARDNAME. Activate this ability only once each turn.
+A:AB$SetState | Cost$ Discard<1/Card> | Defined$ Self | Mode$ Transform | ActivationLimit$ 1 | SpellDescription$ Transform CARDNAME. Activate only once each turn.
 DeckHas:Ability$Discard
 DeckHints:Keyword$Madness & Ability$Delirium
 SVar:AIPreference:DiscardCost$Card.cmcEQ1,Card.cmcEQ2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heir_of_falkenrath.jpg
 AlternateMode:DoubleFaced
-Oracle:Discard a card: Transform Heir of Falkenrath. Activate this ability only once each turn.
+Oracle:Discard a card: Transform Heir of Falkenrath. Activate only once each turn.
 
 ALTERNATE
 
@@ -19,5 +19,5 @@ Types:Creature Vampire Berserker
 PT:3/2
 K:Flying
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heir_to_the_night.jpg
-Oracle:Flying 
+Oracle:Flying
 

@@ -3,8 +3,8 @@ ManaCost:4 U
 Types:Creature Giant Wizard
 PT:2/5
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | IsPresent$ Giant.YouCtrl, Wizard.YouCtrl | Description$ This spell costs {1} less to cast if you control a Giant or a Wizard.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, search your library for an instant or sorcery card with the same name as a card in your graveyard, reveal it, put it into your hand, then shuffle your library.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, search your library for an instant or sorcery card with the same name as a card in your graveyard, reveal it, put it into your hand, then shuffle.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Instant.sharesNameWith YourGraveyard,Sorcery.sharesNameWith YourGraveyard | ChangeNum$ 1
 DeckHints:Type$Giant|Wizard
 DeckNeeds:Type$Instant|Sorcery
-Oracle:This spell costs {1} less to cast if you control a Giant or a Wizard.\nWhen Frostpyre Arcanist enters the battlefield, search your library for an instant or sorcery card with the same name as a card in your graveyard, reveal it, put it into your hand, then shuffle your library.
+Oracle:This spell costs {1} less to cast if you control a Giant or a Wizard.\nWhen Frostpyre Arcanist enters the battlefield, search your library for an instant or sorcery card with the same name as a card in your graveyard, reveal it, put it into your hand, then shuffle.

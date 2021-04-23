@@ -3,6 +3,6 @@ ManaCost:3
 Types:Artifact Creature Scarecrow
 PT:1/4
 K:Defender
-A:AB$ ChangeZone | Cost$ 2 Sac<1/CARDNAME> | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 2 | SpellDescription$ Search your library for up to two basic land cards, reveal them, and put them into your hand. Then shuffle your library.
+A:AB$ ChangeZone | Cost$ 2 Sac<1/CARDNAME> | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 2 | SpellDescription$ Search your library for up to two basic land cards, reveal them, put them into your hand, then shuffle.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wild_field_scarecrow.jpg
-Oracle:Defender\n{2}, Sacrifice Wild-Field Scarecrow: Search your library for up to two basic land cards, reveal them, and put them into your hand. Then shuffle your library.
+Oracle:Defender\n{2}, Sacrifice Wild-Field Scarecrow: Search your library for up to two basic land cards, reveal them, put them into your hand, then shuffle.

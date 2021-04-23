@@ -5,7 +5,7 @@ PT:4/4
 A:AB$SetState | Cost$ Sac<1/Human> | Defined$ Self | SorcerySpeed$ True | Mode$ Transform | SpellDescription$ Transform CARDNAME. Activate this only any time you could cast a sorcery.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ravenous_demon.jpg
 AlternateMode:DoubleFaced
-Oracle:Sacrifice a Human: Transform Ravenous Demon. Activate this ability only any time you could cast a sorcery.
+Oracle:Sacrifice a Human: Transform Ravenous Demon. Activate only as a sorcery.
 
 ALTERNATE
 

@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Scheme
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DBTutorCreature,DBPutCreature | CharmNum$ 1
-SVar:DBTutorCreature:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.Creature | ChangeNum$ 1 | SpellDescription$ Search your library for a creature card, reveal it, put it into your hand, then shuffle your library;
+SVar:DBTutorCreature:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.Creature | ChangeNum$ 1 | SpellDescription$ Search your library for a creature card, reveal it, put it into your hand, then shuffle;
 SVar:DBPutCreature:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Card.Creature | ChangeNum$ 1 | SpellDescription$ or you may put a creature card from your hand onto the battlefield.
 SVar:Picture:https://downloads.cardforge.org/images/cards/ARC/Introductions Are in Order.full.jpg
-Oracle:When you set this scheme in motion, choose one —\n• Search your library for a creature card, reveal it, put it into your hand, then shuffle your library.\n• You may put a creature card from your hand onto the battlefield.
+Oracle:When you set this scheme in motion, choose one —\n• Search your library for a creature card, reveal it, put it into your hand, then shuffle.\n• You may put a creature card from your hand onto the battlefield.

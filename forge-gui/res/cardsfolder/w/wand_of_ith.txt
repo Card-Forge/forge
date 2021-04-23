@@ -1,10 +1,10 @@
 Name:Wand of Ith
 ManaCost:4
 Types:Artifact
-A:AB$ Reveal | Cost$ 3 T | ValidTgts$ Player | TgtPrompt$ Select target player | Random$ True | IsCursed$ True | PlayerTurn$ True | RememberRevealed$ True | SubAbility$ DBDiscard1 | SpellDescription$ Target player reveals a card at random from their hand. If it's a land card, that player discards it unless they pay 1 life. If it isn't a land card, the player discards it unless they pay life equal to its converted mana cost. Activate this ability only during your turn.
+A:AB$ Reveal | Cost$ 3 T | ValidTgts$ Player | TgtPrompt$ Select target player | Random$ True | IsCursed$ True | PlayerTurn$ True | RememberRevealed$ True | SubAbility$ DBDiscard1 | SpellDescription$ Target player reveals a card at random from their hand. If it's a land card, that player discards it unless they pay 1 life. If it isn't a land card, the player discards it unless they pay life equal to its mana value. Activate only during your turn.
 SVar:DBDiscard1:DB$ Discard | ConditionDefined$ Remembered | ConditionPresent$ Card.Land | ConditionCompare$ EQ1 | Mode$ Defined | Defined$ ParentTarget | DefinedCards$ Remembered | UnlessCost$ PayLife<1> | UnlessPayer$ RememberedController | SubAbility$ DBDiscard2 | StackDescription$ None
 SVar:DBDiscard2:DB$ Discard | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand | ConditionCompare$ EQ1 | Mode$ Defined | Defined$ ParentTarget | DefinedCards$ Remembered | UnlessCost$ PayLife<X> | UnlessPayer$ RememberedController | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wand_of_ith.jpg
-Oracle:{3}, {T}: Target player reveals a card at random from their hand. If it's a land card, that player discards it unless they pay 1 life. If it isn't a land card, the player discards it unless they pay life equal to its converted mana cost. Activate this ability only during your turn.
+Oracle:{3}, {T}: Target player reveals a card at random from their hand. If it's a land card, that player discards it unless they pay 1 life. If it isn't a land card, the player discards it unless they pay life equal to its mana value. Activate only during your turn.

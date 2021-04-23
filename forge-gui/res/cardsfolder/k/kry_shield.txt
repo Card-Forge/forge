@@ -1,9 +1,9 @@
 Name:Kry Shield
 ManaCost:2
 Types:Artifact
-A:AB$ Pump | Cost$ 2 T | KW$ Prevent all damage that would be dealt by CARDNAME. | TgtPrompt$ Select target creature you control | ValidTgts$ Creature.YouCtrl | SubAbility$ DBPump | SpellDescription$ Prevent all damage that would be dealt this turn by target creature you control. That creature gets +0/+X until end of turn, where X is its converted mana cost.
+A:AB$ Pump | Cost$ 2 T | KW$ Prevent all damage that would be dealt by CARDNAME. | TgtPrompt$ Select target creature you control | ValidTgts$ Creature.YouCtrl | SubAbility$ DBPump | SpellDescription$ Prevent all damage that would be dealt this turn by target creature you control. That creature gets +0/+X until end of turn, where X is its mana value.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | NumDef$ X
 SVar:X:Targeted$CardManaCost
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kry_shield.jpg
-Oracle:{2}, {T}: Prevent all damage that would be dealt this turn by target creature you control. That creature gets +0/+X until end of turn, where X is its converted mana cost.
+Oracle:{2}, {T}: Prevent all damage that would be dealt this turn by target creature you control. That creature gets +0/+X until end of turn, where X is its mana value.

@@ -3,9 +3,9 @@ ManaCost:3 W W
 Types:Creature Angel
 PT:3/3
 K:Flying
-A:AB$ Pump | Cost$ Sac<1/Creature> | NumAtt$ +2 | NumDef$ +1 | AILogic$ Aristocrat | Activation$ Delirium | PrecostDesc$ Delirium — | SpellDescription$ CARDNAME gets +2/+1 until end of turn. Activate this ability only if there are four or more card types among cards in your graveyard.
+A:AB$ Pump | Cost$ Sac<1/Creature> | NumAtt$ +2 | NumDef$ +1 | AILogic$ Aristocrat | Activation$ Delirium | PrecostDesc$ Delirium — | SpellDescription$ CARDNAME gets +2/+1 until end of turn. Activate only if there are four or more card types among cards in your graveyard.
 SVar:AIPreference:SacCost$Creature.Other
 DeckHints:Ability$Graveyard & Ability$Discard
 DeckHas:Ability$Delirium
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reaper_of_flight_moonsilver.jpg
-Oracle:Flying\nDelirium — Sacrifice another creature: Reaper of Flight Moonsilver gets +2/+1 until end of turn. Activate this ability only if there are four or more card types among cards in your graveyard.
+Oracle:Flying\nDelirium — Sacrifice another creature: Reaper of Flight Moonsilver gets +2/+1 until end of turn. Activate only if there are four or more card types among cards in your graveyard.

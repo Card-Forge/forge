@@ -2,6 +2,6 @@ Name:Oashra Cultivator
 ManaCost:G
 Types:Creature Human Druid
 PT:0/3
-A:AB$ ChangeZone | Cost$ 2 G T Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
+A:AB$ ChangeZone | Cost$ 2 G T Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oashra_cultivator.jpg
-Oracle:{2}{G}, {T}, Sacrifice Oashra Cultivator: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
+Oracle:{2}{G}, {T}, Sacrifice Oashra Cultivator: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.

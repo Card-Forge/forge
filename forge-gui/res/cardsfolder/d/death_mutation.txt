@@ -1,10 +1,10 @@
 Name:Death Mutation
 ManaCost:6 B G
 Types:Sorcery
-A:SP$ Destroy | Cost$ 6 B G | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | NoRegen$ True | SubAbility$ TrigToken | SpellDescription$ Destroy target nonblack creature. It can't be regenerated. Create X 1/1 green Saproling creature tokens, where X is that creature's converted mana cost.
+A:SP$ Destroy | Cost$ 6 B G | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | NoRegen$ True | SubAbility$ TrigToken | SpellDescription$ Destroy target nonblack creature. It can't be regenerated. Create X 1/1 green Saproling creature tokens, where X is that creature's mana value.
 #X will be the Converted Mana Cost of the target of Mutation
 SVar:TrigToken:DB$Token | TokenAmount$ X | TokenScript$ g_1_1_saproling | TokenOwner$ You | LegacyImage$ g 1 1 saproling apc
 SVar:X:Targeted$CardManaCost
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_mutation.jpg
-Oracle:Destroy target nonblack creature. It can't be regenerated. Create X 1/1 green Saproling creature tokens, where X is that creature's converted mana cost.
+Oracle:Destroy target nonblack creature. It can't be regenerated. Create X 1/1 green Saproling creature tokens, where X is that creature's mana value.

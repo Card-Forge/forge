@@ -1,9 +1,9 @@
 Name:Puca's Mischief
 ManaCost:3 U
 Types:Enchantment
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigExchange | TriggerDescription$ At the beginning of your upkeep, you may exchange control of target nonland permanent you control and target nonland permanent an opponent controls with an equal or lesser converted mana cost.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigExchange | TriggerDescription$ At the beginning of your upkeep, you may exchange control of target nonland permanent you control and target nonland permanent an opponent controls with an equal or lesser mana value.
 SVar:TrigExchange:DB$ Pump | ValidTgts$ Permanent.YouCtrl+nonLand | TgtPrompt$ Select target nonland permanent you control | SubAbility$ DBExchange
-SVar:DBExchange:DB$ ExchangeControl | Defined$ ParentTarget | ValidTgts$ Permanent.OppCtrl+nonLand | TgtPrompt$ Select target nonland permanent an opponent controls with less or equal converted mana cost | TargetsWithRelatedProperty$ LECMC
+SVar:DBExchange:DB$ ExchangeControl | Defined$ ParentTarget | ValidTgts$ Permanent.OppCtrl+nonLand | TgtPrompt$ Select target nonland permanent an opponent controls with less or equal mana value | TargetsWithRelatedProperty$ LECMC
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pucas_mischief.jpg
-Oracle:At the beginning of your upkeep, you may exchange control of target nonland permanent you control and target nonland permanent an opponent controls with an equal or lesser converted mana cost.
+Oracle:At the beginning of your upkeep, you may exchange control of target nonland permanent you control and target nonland permanent an opponent controls with an equal or lesser mana value.

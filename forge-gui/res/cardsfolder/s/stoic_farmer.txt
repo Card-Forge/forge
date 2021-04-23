@@ -2,7 +2,7 @@ Name:Stoic Farmer
 ManaCost:3 W
 Types:Creature Dwarf Peasant
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigSearch | TriggerDescription$ When CARDNAME enters the battlefield, search your library for a basic Plains card and reveal it. If an opponent controls more lands than you, put it onto the battlefield tapped. Otherwise put it into your hand. Then shuffle your library.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigSearch | TriggerDescription$ When CARDNAME enters the battlefield, search your library for a basic Plains card and reveal it. If an opponent controls more lands than you, put it onto the battlefield tapped. Otherwise put it into your hand. Then shuffle.
 SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | Destination$ Library | ChangeType$ Land.Plains+Basic | ChangeNum$ 1 | RememberChanged$ True | Reveal$ True | Shuffle$ False | SubAbility$ DBBranch
 SVar:DBBranch:DB$ Branch | BranchConditionSVar$ X | TrueSubAbility$ ToBattlefieldTapped | FalseSubAbility$ ToHand | SubAbility$ DBCleanup
 SVar:X:PlayerCountOpponents$HasPropertywithMoreLandsThanYou
@@ -10,4 +10,4 @@ SVar:ToBattlefieldTapped:DB$ ChangeZone | Defined$ Remembered | Origin$ Library 
 SVar:ToHand:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand | Shuffle$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 K:Foretell:1 W
-Oracle:When Stoic Farmer enters the battlefield, search your library for a basic Plains card and reveal it. If an opponent controls more lands than you, put it onto the battlefield tapped. Otherwise put it into your hand. Then shuffle your library.\nForetell {1}{W} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)
+Oracle:When Stoic Farmer enters the battlefield, search your library for a basic Plains card and reveal it. If an opponent controls more lands than you, put it onto the battlefield tapped. Otherwise put it into your hand. Then shuffle.\nForetell {1}{W} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)

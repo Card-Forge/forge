@@ -1,10 +1,10 @@
 Name:Cerebral Eruption
 ManaCost:2 R R
 Types:Sorcery
-A:SP$ Dig | Cost$ 2 R R | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | DigNum$ 1 | Reveal$ True | NoMove$ True | RememberRevealed$ True | SubAbility$ DBDamage | SpellDescription$ Target opponent reveals the top card of their library. Cerebral Eruption deals damage equal to the revealed card's converted mana cost to that player and each creature they control. If a land card is revealed this way, return Cerebral Eruption to its owner's hand.
+A:SP$ Dig | Cost$ 2 R R | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | DigNum$ 1 | Reveal$ True | NoMove$ True | RememberRevealed$ True | SubAbility$ DBDamage | SpellDescription$ Target opponent reveals the top card of their library. Cerebral Eruption deals damage equal to the revealed card's mana value to that player and each creature they control. If a land card is revealed this way, return Cerebral Eruption to its owner's hand.
 SVar:DBDamage:DB$ DamageAll | ValidCards$ Creature.TargetedPlayerCtrl | ValidPlayers$ Targeted | ValidDescription$ that player and each creature they control. | NumDmg$ X | SubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Hand | ConditionDefined$ Remembered | ConditionPresent$ Land | ConditionCompare$ EQ1 | ConditionDescription$ If a land card is revealed this way, | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cerebral_eruption.jpg
-Oracle:Target opponent reveals the top card of their library. Cerebral Eruption deals damage equal to the revealed card's converted mana cost to that player and each creature that player controls. If a land card is revealed this way, return Cerebral Eruption to its owner's hand.
+Oracle:Target opponent reveals the top card of their library. Cerebral Eruption deals damage equal to the revealed card's mana value to that player and each creature that player controls. If a land card is revealed this way, return Cerebral Eruption to its owner's hand.

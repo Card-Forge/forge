@@ -10,4 +10,4 @@ DeckHas:Ability$Counters
 SVar:NeedsToPlayKickedVar:Z GE4
 SVar:Z:Count$Valid Land.YouCtrl+untapped
 SVar:Picture:http://www.wizards.com/global/images/magic/general/everflowing_chalice.jpg
-Oracle:Multikicker {2} (You may pay an additional {2} any number of times as you cast this spell.)\nEverflowing Chalice enters the battlefield with a charge counter on it for each time it was kicked.\n{T}: Add {C} for each charge counter on Everflowing Chalice.
+Oracle:Multikicker {2}\nEverflowing Chalice enters the battlefield with a charge counter on it for each time it was kicked.\n{T}: Add {C} for each charge counter on Everflowing Chalice.

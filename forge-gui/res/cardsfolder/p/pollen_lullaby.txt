@@ -6,4 +6,4 @@ SVar:DBClash:DB$Clash | WinSubAbility$ DBPumpAll | RememberClasher$ True | SubAb
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.RememberedPlayerCtrl | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pollen_lullaby.jpg
-Oracle:Prevent all combat damage that would be dealt this turn. Clash with an opponent. If you win, creatures that player controls don't untap during the player's next untap step. (Each clashing player reveals the top card of their library, then puts that card on the top or bottom. A player wins if their card had a higher converted mana cost.)
+Oracle:Prevent all combat damage that would be dealt this turn. Clash with an opponent. If you win, creatures that player controls don't untap during the player's next untap step. (Each clashing player reveals the top card of their library, then puts that card on the top or bottom. A player wins if their card had a higher mana value.)

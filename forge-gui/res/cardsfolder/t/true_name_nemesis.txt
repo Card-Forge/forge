@@ -6,4 +6,4 @@ K:ETBReplacement:Other:ChooseP
 SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player | AILogic$ Curse | SpellDescription$ As CARDNAME enters the battlefield, choose a player.
 S:Mode$ Continuous | AddKeyword$ Protection:Player.PlayerUID_ChosenPlayerUID:Protection from ChosenPlayerName | Affected$ Card.Self | Description$ CARDNAME has protection from that player. (This creature can't be blocked, targeted, dealt damage, or enchanted by anything controlled by that player.)
 SVar:Picture:http://www.wizards.com/global/images/magic/general/true_name_nemesis.jpg
-Oracle:As True-Name Nemesis enters the battlefield, choose a player.\nTrue-Name Nemesis has protection from the chosen player. (This creature can't be blocked, targeted, dealt damage, or enchanted by anything controlled by that player.)
+Oracle:As True-Name Nemesis enters the battlefield, choose a player.\nTrue-Name Nemesis has protection from the chosen player.

@@ -6,4 +6,4 @@ A:SP$ ChangeZone | Cost$ 7 U U U | Origin$ Library | Destination$ Battlefield | 
 #TODO: Tutoring in general can be improved to make this card work better for the AI. Currently the AI will grab the most expensive targets in the opponent's library (which is not necessarily a bad thing in itself, but not always optimal).
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eternal_dominion.jpg
-Oracle:Search target opponent's library for an artifact, creature, enchantment, or land card. Put that card onto the battlefield under your control. Then that player shuffles their library.\nEpic (For the rest of the game, you can't cast spells. At the beginning of each of your upkeeps, copy this spell except for its epic ability. You may choose a new target for the copy.)
+Oracle:Search target opponent's library for an artifact, creature, enchantment, or land card. Put that card onto the battlefield under your control. Then that player shuffles.\nEpic (For the rest of the game, you can't cast spells. At the beginning of each of your upkeeps, copy this spell except for its epic ability. You may choose a new target for the copy.)

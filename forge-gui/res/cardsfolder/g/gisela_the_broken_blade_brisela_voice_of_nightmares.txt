@@ -22,6 +22,6 @@ K:Flying
 K:First Strike
 K:Vigilance
 K:Lifelink
-S:Mode$ CantBeCast | ValidCard$ Card.cmcLE3 | Caster$ Opponent | Description$ Your opponents can't cast spells with converted mana cost 3 or less.
+S:Mode$ CantBeCast | ValidCard$ Card.cmcLE3 | Caster$ Opponent | Description$ Your opponents can't cast spells with mana value 3 or less.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brisela_voice_of_nightmares.jpg
-Oracle:Flying, first strike, vigilance, lifelink\nYour opponents can't cast spells with converted mana cost 3 or less.
+Oracle:Flying, first strike, vigilance, lifelink\nYour opponents can't cast spells with mana value 3 or less.

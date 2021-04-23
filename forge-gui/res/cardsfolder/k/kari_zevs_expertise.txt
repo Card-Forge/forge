@@ -1,7 +1,7 @@
 Name:Kari Zev's Expertise
 ManaCost:1 R R
 Types:Sorcery
-A:SP$ GainControl | Cost$ 1 R R | ValidTgts$ Creature,Vehicle | TgtPrompt$ Select target creature or vehicle | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SubAbility$ DBCast | SpellDescription$ Gain control of target creature or Vehicle until end of turn. Untap it. It gains haste until end of turn. You may cast a spell with converted mana cost 2 or less from your hand without paying its mana cost.
+A:SP$ GainControl | Cost$ 1 R R | ValidTgts$ Creature,Vehicle | TgtPrompt$ Select target creature or vehicle | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SubAbility$ DBCast | SpellDescription$ Gain control of target creature or Vehicle until end of turn. Untap it. It gains haste until end of turn. You may cast a spell with mana value 2 or less from your hand without paying its mana cost.
 SVar:DBCast:DB$ Play | ValidZone$ Hand | Valid$ Card.YouOwn+nonLand | ValidSA$ Spell.cmcLE2 | Controller$ You | WithoutManaCost$ True | Optional$ True | Amount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kari_zevs_expertise.jpg
-Oracle:Gain control of target creature or Vehicle until end of turn. Untap it. It gains haste until end of turn.\nYou may cast a spell with converted mana cost 2 or less from your hand without paying its mana cost.
+Oracle:Gain control of target creature or Vehicle until end of turn. Untap it. It gains haste until end of turn.\nYou may cast a spell with mana value 2 or less from your hand without paying its mana cost.

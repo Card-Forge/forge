@@ -1,8 +1,8 @@
 Name:Verdant Succession
 ManaCost:4 G
 Types:Enchantment
-T:Mode$ ChangesZone | ValidCard$ Creature.Green+nonToken | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigSearch | TriggerDescription$ Whenever a green nontoken creature dies, that creature's controller may search their library for a card with the same name as that creature and put it onto the battlefield. If that player does, they shuffle their library.
+T:Mode$ ChangesZone | ValidCard$ Creature.Green+nonToken | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigSearch | TriggerDescription$ Whenever a green nontoken creature dies, that creature's controller may search their library for a card with the same name as that creature, put it onto the battlefield, then shuffle.
 SVar:TrigSearch:DB$ ChangeZone | Optional$ True | DefinedPlayer$ TriggeredCardController | ChangeType$ Triggered.sameName | ChangeNum$ 1 | Origin$ Library | Destination$ Battlefield | Hidden$ True | Optional$ You | ShuffleNonMandatory$ True
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/verdant_succession.jpg
-Oracle:Whenever a green nontoken creature dies, that creature's controller may search their library for a card with the same name as that creature and put it onto the battlefield. If that player does, they shuffle their library.
+Oracle:Whenever a green nontoken creature dies, that creature's controller may search their library for a card with the same name as that creature, put it onto the battlefield, then shuffle.

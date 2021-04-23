@@ -3,7 +3,7 @@ ManaCost:4
 Types:Artifact
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | OptionalDecider$ You | Execute$ TrigExile | TriggerDescription$ Imprint — When CARDNAME enters the battlefield, you may exile a creature card from your hand.
 SVar:TrigExile:DB$ChangeZone | Imprint$ True | Origin$ Hand | Destination$ Exile | ChangeType$ Creature | ChangeNum$ 1
-A:AB$CopyPermanent | Cost$ X T | Defined$ Imprinted.ExiledWithSource | AILogic$ AtEOT | SpellDescription$ Create a token that's a copy of the exiled card. X is the converted mana cost of that card.
+A:AB$CopyPermanent | Cost$ X T | Defined$ Imprinted.ExiledWithSource | AILogic$ AtEOT | SpellDescription$ Create a token that's a copy of the exiled card. X is the mana value of that card.
 SVar:X:Imprinted$CardManaCost
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsImprinted+ExiledWithSource | Execute$ DBForget
 SVar:DBForget:DB$ Pump | ForgetImprinted$ TriggeredCard
@@ -12,4 +12,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 SVar:NeedsToPlayVar:Y GE1
 SVar:Y:Count$ValidHand Creature.YouOwn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_foundry.jpg
-Oracle:Imprint — When Soul Foundry enters the battlefield, you may exile a creature card from your hand.\n{X}, {T}: Create a token that's a copy of the exiled card. X is the converted mana cost of that card.
+Oracle:Imprint — When Soul Foundry enters the battlefield, you may exile a creature card from your hand.\n{X}, {T}: Create a token that's a copy of the exiled card. X is the mana value of that card.

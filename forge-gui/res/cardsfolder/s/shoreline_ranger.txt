@@ -5,4 +5,4 @@ PT:3/4
 K:Flying
 K:TypeCycling:Island:2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shoreline_ranger.jpg
-Oracle:Flying\nIslandcycling {2} ({2}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle your library.)
+Oracle:Flying\nIslandcycling {2} ({2}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)

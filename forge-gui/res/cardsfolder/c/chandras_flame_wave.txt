@@ -1,7 +1,7 @@
 Name:Chandra's Flame Wave
 ManaCost:3 R R
 Types:Sorcery
-A:SP$ DamageAll | Cost$ 3 R R | ValidTgts$ Player | NumDmg$ 2 | ValidPlayers$ Targeted | ValidCards$ Creature.TargetedPlayerCtrl | ValidDescription$ target player and each creature that player controls. | SubAbility$ DBSearch | SpellDescription$ CARDNAME deals 2 damage to target player and each creature that player controls. Search your library and/or graveyard for a card named Chandra, Flame's Fury, reveal it, and put it into your hand. If you search your library this way, shuffle it.
+A:SP$ DamageAll | Cost$ 3 R R | ValidTgts$ Player | NumDmg$ 2 | ValidPlayers$ Targeted | ValidCards$ Creature.TargetedPlayerCtrl | ValidDescription$ target player and each creature that player controls. | SubAbility$ DBSearch | SpellDescription$ CARDNAME deals 2 damage to target player and each creature that player controls. Search your library and/or graveyard for a card named Chandra, Flame's Fury, reveal it, and put it into your hand. If you search your library this way, shuffle.
 SVar:DBSearch:DB$ ChangeZone | Origin$ Library | OriginChoice$ True | OriginAlternative$ Graveyard | AlternativeMessage$ Would you like to search your library with this ability? If you do, your library will be shuffled. | Destination$ Hand | ChangeType$ Card.namedChandra; Flame's Fury | ChangeNum$ 1 | Optional$ True
 DeckHints:Name$Chandra, Flame's Fury
-Oracle:Chandra's Flame Wave deals 2 damage to target player and each creature that player controls. Search your library and/or graveyard for a card named Chandra, Flame's Fury, reveal it, and put it into your hand. If you search your library this way, shuffle it.
+Oracle:Chandra's Flame Wave deals 2 damage to target player and each creature that player controls. Search your library and/or graveyard for a card named Chandra, Flame's Fury, reveal it, and put it into your hand. If you search your library this way, shuffle.

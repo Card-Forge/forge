@@ -5,4 +5,4 @@ PT:3/3
 K:Vigilance
 K:Soulshift:4
 SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card87342.jpg
-Oracle:Vigilance (Attacking doesn't cause this creature to tap.)\nSoulshift 4 (When this creature dies, you may return target Spirit card with converted mana cost 4 or less from your graveyard to your hand.)
+Oracle:Vigilance (Attacking doesn't cause this creature to tap.)\nSoulshift 4 (When this creature dies, you may return target Spirit card with mana value 4 or less from your graveyard to your hand.)

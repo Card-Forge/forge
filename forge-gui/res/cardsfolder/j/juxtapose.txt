@@ -1,7 +1,7 @@
 Name:Juxtapose
 ManaCost:3 U
 Types:Sorcery
-A:SP$ ChooseCard | Cost$ 3 U | ValidTgts$ Player | Choices$ Creature.cmcEQY | TargetControls$ True | Mandatory$ True | AILogic$ WorstCard | RememberChosen$ True | SubAbility$ DBChooseCreatureYou | SpellDescription$ You and target player exchange control of the creature you each control with the highest converted mana cost. Then exchange control of artifacts the same way. If two or more permanents a player controls are tied for highest cost, their controller chooses one of them.
+A:SP$ ChooseCard | Cost$ 3 U | ValidTgts$ Player | Choices$ Creature.cmcEQY | TargetControls$ True | Mandatory$ True | AILogic$ WorstCard | RememberChosen$ True | SubAbility$ DBChooseCreatureYou | SpellDescription$ You and target player exchange control of the creature you each control with the highest mana value. Then exchange control of artifacts the same way. If two or more permanents a player controls are tied for highest, their controller chooses one of them.
 SVar:DBChooseCreatureYou:DB$ ChooseCard | Choices$ Creature.YouCtrl+cmcEQX | Mandatory$ True | RememberChosen$ True | SubAbility$ DBExchangeCreature
 SVar:DBExchangeCreature:DB$ ExchangeControl | Defined$ Remembered | SubAbility$ DBCleanCreature
 SVar:DBCleanCreature:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBChooseArtifactYou
@@ -14,4 +14,4 @@ SVar:Y:Count$HighestCMC_Creature.TargetedPlayerCtrl+inZoneBattlefield
 SVar:Z:Count$HighestCMC_Artifact.YouCtrl+inZoneBattlefield
 SVar:W:Count$HighestCMC_Artifact.TargetedPlayerCtrl+inZoneBattlefield
 AI:RemoveDeck:All
-Oracle:You and target player exchange control of the creature you each control with the highest converted mana cost. Then exchange control of artifacts the same way. If two or more permanents a player controls are tied for highest cost, their controller chooses one of them.
+Oracle:You and target player exchange control of the creature you each control with the highest mana value. Then exchange control of artifacts the same way. If two or more permanents a player controls are tied for highest, their controller chooses one of them.

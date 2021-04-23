@@ -3,7 +3,7 @@ ManaCost:4
 Types:Artifact
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | OptionalDecider$ You | Execute$ TrigExile | TriggerDescription$ Imprint — When CARDNAME enters the battlefield, you may exile an artifact card from your hand.
 SVar:TrigExile:DB$ ChangeZone | Imprint$ True | Origin$ Hand | Destination$ Exile | ChangeType$ Artifact | ChangeNum$ 1
-A:AB$ CopyPermanent | Cost$ X T | Defined$ Imprinted.ExiledWithSource | AILogic$ AtOppEOT | SpellDescription$ Create a token that's a copy of the exiled card. X is the converted mana cost of that card.
+A:AB$ CopyPermanent | Cost$ X T | Defined$ Imprinted.ExiledWithSource | AILogic$ AtOppEOT | SpellDescription$ Create a token that's a copy of the exiled card. X is the mana value of that card.
 SVar:X:Imprinted$CardManaCost
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsImprinted+ExiledWithSource | Execute$ DBForget
 SVar:DBForget:DB$ Pump | ForgetImprinted$ TriggeredCard
@@ -13,4 +13,4 @@ SVar:UntapMe:True
 SVar:NeedsToPlayVar:Z GE2
 SVar:Z:Count$ValidHand Artifact.YouCtrl
 AI:RemoveDeck:Random
-Oracle:Imprint — When Prototype Portal enters the battlefield, you may exile an artifact card from your hand.\n{X}, {T}: Create a token that's a copy of the exiled card. X is the converted mana cost of that card.
+Oracle:Imprint — When Prototype Portal enters the battlefield, you may exile an artifact card from your hand.\n{X}, {T}: Create a token that's a copy of the exiled card. X is the mana value of that card.

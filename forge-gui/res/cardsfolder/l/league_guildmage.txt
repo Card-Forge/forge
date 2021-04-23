@@ -3,7 +3,7 @@ ManaCost:U R
 Types:Creature Human Wizard
 PT:2/2
 A:AB$ Draw | Cost$ 3 U T | NumCards$ 1 | SpellDescription$ Draw a card.
-A:AB$ CopySpellAbility | Cost$ X R T | ValidTgts$ Instant.YouCtrl+cmcEQX,Sorcery.YouCtrl+cmcEQX | TargetType$ Spell | AILogic$ OnceIfViable | MayChooseTarget$ True | SpellDescription$ Copy target instant or sorcery spell you control with converted mana cost X. You may choose new targets for the copy.
+A:AB$ CopySpellAbility | Cost$ X R T | ValidTgts$ Instant.YouCtrl+cmcEQX,Sorcery.YouCtrl+cmcEQX | TargetType$ Spell | AILogic$ OnceIfViable | MayChooseTarget$ True | SpellDescription$ Copy target instant or sorcery spell you control with mana value X. You may choose new targets for the copy.
 SVar:X:Count$xPaid
 DeckHints:Type$Instant|Sorcery
-Oracle:{3}{U}, {T}: Draw a card.\n{X}{R}, {T}: Copy target instant or sorcery spell you control with converted mana cost X. You may choose new targets for the copy.
+Oracle:{3}{U}, {T}: Draw a card.\n{X}{R}, {T}: Copy target instant or sorcery spell you control with mana value X. You may choose new targets for the copy.

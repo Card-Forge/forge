@@ -3,6 +3,6 @@ ManaCost:2 G
 Types:Creature Human Druid
 PT:3/1
 K:Trample
-A:AB$ Regenerate | Cost$ 1 G | Activation$ Threshold | PrecostDesc$ Threshold — | SpellDescription$ Regenerate CARDNAME. Activate this ability only if seven or more cards are in your graveyard.
+A:AB$ Regenerate | Cost$ 1 G | Activation$ Threshold | PrecostDesc$ Threshold — | SpellDescription$ Regenerate CARDNAME. Activate only if seven or more cards are in your graveyard.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krosan_avenger.jpg
-Oracle:Trample\nThreshold — {1}{G}: Regenerate Krosan Avenger. Activate this ability only if seven or more cards are in your graveyard.
+Oracle:Trample\nThreshold — {1}{G}: Regenerate Krosan Avenger. Activate only if seven or more cards are in your graveyard.

@@ -42,6 +42,7 @@ def load_oracle_cards():
 
 def formalize_name(names):
     name = '_'.join(names)
+    name = unidecode.unidecode(name)
     name = name.lower()
     name = name.replace('& ', '')
     name = name.replace(' ', '_')
@@ -116,6 +117,8 @@ def update_oracle(name, lines, oracle_text, new_oracle, is_planeswalker):
         if org_line.find(':') != -1:
             if org_line.find('"') == -1 or org_line.find('"') > org_line.find(':'):
                 org_line = org_line[org_line.find(':') + 1:].lstrip()
+        if org_line.find('• ') != -1:
+            org_line = org_line[org_line.find('• ') + 2:].lstrip()
         if len(org_line) == 0:
             continue
         new_line = new_line.replace(name, 'CARDNAME')
@@ -123,6 +126,8 @@ def update_oracle(name, lines, oracle_text, new_oracle, is_planeswalker):
         if new_line.find(':') != -1:
             if new_line.find('"') == -1 or new_line.find('"') > new_line.find(':'):
                 new_line = new_line[new_line.find(':') + 1:].lstrip()
+        if new_line.find('• ') != -1:
+            new_line = new_line[new_line.find('• ') + 2:].lstrip()
         for i, line in enumerate(lines):
             if line.startswith('K:'):
                 continue

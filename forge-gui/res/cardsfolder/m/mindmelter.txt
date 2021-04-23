@@ -4,7 +4,7 @@ Types:Creature Eldrazi Drone
 PT:2/2
 K:Devoid
 K:Unblockable
-A:AB$ ChangeZone | Cost$ 3 C | ValidTgts$ Opponent | SorcerySpeed$ True | TgtPrompt$ Select target opponent | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | Chooser$ Targeted | IsCurse$ True | Mandatory$ True | Hidden$ True | StackDescription$ SpellDescription | SpellDescription$ Target opponent exiles a card from their hand. Activate this ability only any time you could cast a sorcery.
+A:AB$ ChangeZone | Cost$ 3 C | ValidTgts$ Opponent | SorcerySpeed$ True | TgtPrompt$ Select target opponent | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | Chooser$ Targeted | IsCurse$ True | Mandatory$ True | Hidden$ True | StackDescription$ SpellDescription | SpellDescription$ Target opponent exiles a card from their hand. Activate only any time you could cast a sorcery.
 DeckHints:Ability$Mana.Colorless
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mindmelter.jpg
-Oracle:Devoid (This card has no color.)\nMindmelter can't be blocked.\n{3}{C}: Target opponent exiles a card from their hand. Activate this ability only any time you could cast a sorcery. ({C} represents colorless mana.)
+Oracle:Devoid (This card has no color.)\nMindmelter can't be blocked.\n{3}{C}: Target opponent exiles a card from their hand. Activate only as a sorcery. ({C} represents colorless mana.)

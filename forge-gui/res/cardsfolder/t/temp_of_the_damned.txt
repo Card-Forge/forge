@@ -5,10 +5,10 @@ PT:3/3
 K:ETBReplacement:Other:RollCounters
 SVar:RollCounters:DB$ RollDice | ResultSVar$ Result | SubAbility$ DBCounters | SpellDescription$ As CARDNAME enters the battlefield, roll a six-sided die. CARDNAME enters the battlefield with a number of FUNK counters on it equal to the total of those results.
 SVar:DBCounters:DB$ PutCounter | Defined$ Self | CounterType$ FUNK | CounterNum$ Result | ETB$ True
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRemove | TriggerDescription$ At the beginning of your upkeep, remove a funk counter from CARDNAME. If you can’t, sacrifice it.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRemove | TriggerDescription$ At the beginning of your upkeep, remove a funk counter from CARDNAME. If you can't, sacrifice it.
 SVar:TrigRemove:DB$ RemoveCounter | Defined$ Self | CounterType$ FUNK | CounterNum$ 1 | RememberRemoved$ True | SubAbility$ DBSac
 SVar:DBSac:DB$ Sacrifice | SacValid$ Self | ConditionCheckSVar$ FadingCheckSVar | ConditionSVarCompare$ EQ0 | SubAbility$ DBCleanup
 SVar:FadingCheckSVar:Count$RememberedSize
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Counters
-Oracle:As Temp of the Damned enters the battlefield, roll a six-sided die. Temp of the Damned enters the battlefield with a number of funk counters on it equal to the result.\nAt the beginning of your upkeep, remove a funk counter from Temp of the Damned. If you can’t, sacrifice it.
+Oracle:As Temp of the Damned enters the battlefield, roll a six-sided die. Temp of the Damned enters the battlefield with a number of funk counters on it equal to the result.\nAt the beginning of your upkeep, remove a funk counter from Temp of the Damned. If you can't, sacrifice it.

@@ -2,7 +2,7 @@ Name:Ratchet Bomb
 ManaCost:2
 Types:Artifact
 A:AB$ PutCounter | Cost$ T | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on CARDNAME.
-A:AB$ DestroyAll | Cost$ T Sac<1/CARDNAME> | ValidCards$ Permanent.nonLand+cmcEQX | SpellDescription$ Destroy each nonland permanent with converted mana cost equal to the number of charge counters on CARDNAME.
+A:AB$ DestroyAll | Cost$ T Sac<1/CARDNAME> | ValidCards$ Permanent.nonLand+cmcEQX | SpellDescription$ Destroy each nonland permanent with mana value equal to the number of charge counters on CARDNAME.
 SVar:X:Count$CardCounters.CHARGE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ratchet_bomb.jpg
-Oracle:{T}: Put a charge counter on Ratchet Bomb.\n{T}, Sacrifice Ratchet Bomb: Destroy each nonland permanent with converted mana cost equal to the number of charge counters on Ratchet Bomb.
+Oracle:{T}: Put a charge counter on Ratchet Bomb.\n{T}, Sacrifice Ratchet Bomb: Destroy each nonland permanent with mana value equal to the number of charge counters on Ratchet Bomb.

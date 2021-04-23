@@ -10,4 +10,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChange2:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | TgtPrompt$ Select target card from any graveyard
 SVar:NeedsToPlay:Creature.YouCtrl+cmcLE3+inZoneBattlefield
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stonecloaker.jpg
-Oracle:Flash (You may cast this spell any time you could cast an instant.)\nFlying\nWhen Stonecloaker enters the battlefield, return a creature you control to its owner's hand.\nWhen Stonecloaker enters the battlefield, exile target card from a graveyard.
+Oracle:Flash\nFlying\nWhen Stonecloaker enters the battlefield, return a creature you control to its owner's hand.\nWhen Stonecloaker enters the battlefield, exile target card from a graveyard.

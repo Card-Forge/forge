@@ -3,8 +3,8 @@ ManaCost:3 R
 Types:Enchantment
 S:Mode$ CantBeCast | NonCasterTurn$ True | Caster$ You | Description$ You can cast spells only during your turn and you can cast no more than two spells each turn.
 S:Mode$ CantBeCast | NumLimitEachTurn$ 2 | Caster$ You | Secondary$ True | Description$ You can cast spells only during your turn and you can cast no more than two spells each turn.
-S:Mode$ Continuous | Affected$ Card.nonLand+YouOwn+cmcLEX | MayPlay$ True | MayPlayWithoutManaCost$ True | AffectedZone$ Hand,Graveyard,Exile,Command,Library | MayPlayDontGrantZonePermissions$ True | Description$ You may cast spells with converted mana cost less than or equal to the number of lands you control without paying their mana costs.
+S:Mode$ Continuous | Affected$ Card.nonLand+YouOwn+cmcLEX | MayPlay$ True | MayPlayWithoutManaCost$ True | AffectedZone$ Hand,Graveyard,Exile,Command,Library | MayPlayDontGrantZonePermissions$ True | Description$ You may cast spells with mana value less than or equal to the number of lands you control without paying their mana costs.
 SVar:X:Count$Valid Land.YouCtrl
 AI:RemoveDeck:Random
 SVar:NonStackingEffect:True
-Oracle:You can cast spells only during your turn and you can cast no more than two spells each turn.\nYou may cast spells with converted mana cost less than or equal to the number of lands you control without paying their mana costs.
+Oracle:You can cast spells only during your turn and you can cast no more than two spells each turn.\nYou may cast spells with mana value less than or equal to the number of lands you control without paying their mana costs.

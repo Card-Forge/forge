@@ -5,4 +5,4 @@ PT:2/1
 K:Deathtouch
 K:Reach
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thornweald_archer.jpg
-Oracle:Reach (This creature can block creatures with flying.)\nDeathtouch (Any amount of damage this deals to a creature is enough to destroy it.)
+Oracle:Reach, deathtouch

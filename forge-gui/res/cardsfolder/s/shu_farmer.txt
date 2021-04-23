@@ -2,6 +2,6 @@ Name:Shu Farmer
 ManaCost:1 W
 Types:Creature Human
 PT:1/1
-A:AB$ GainLife | Cost$ T | LifeAmount$ 1 | PlayerTurn$ True | ActivationPhases$ Upkeep,Draw,Main1,BeginCombat | SpellDescription$ You gain 1 life. Activate this ability only during your turn, before attackers are declared.
+A:AB$ GainLife | Cost$ T | LifeAmount$ 1 | PlayerTurn$ True | ActivationPhases$ Upkeep,Draw,Main1,BeginCombat | SpellDescription$ You gain 1 life. Activate only during your turn, before attackers are declared.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shu_farmer.jpg
-Oracle:{T}: You gain 1 life. Activate this ability only during your turn, before attackers are declared.
+Oracle:{T}: You gain 1 life. Activate only during your turn, before attackers are declared.

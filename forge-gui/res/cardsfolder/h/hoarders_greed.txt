@@ -9,4 +9,4 @@ SVar:DBStoreSVar:DB$ StoreSVar | SVar$ CheckRepeat | Type$ Number | Expression$ 
 SVar:DBReset:DB$ StoreSVar | SVar$ CheckRepeat | Type$ Number | Expression$ 0
 SVar:CheckRepeat:Number$0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hoarders_greed.jpg
-Oracle:You lose 2 life and draw two cards, then clash with an opponent. If you win, repeat this process. (Each clashing player reveals the top card of their library, then puts that card on the top or bottom. A player wins if their card had a higher converted mana cost.)
+Oracle:You lose 2 life and draw two cards, then clash with an opponent. If you win, repeat this process. (Each clashing player reveals the top card of their library, then puts that card on the top or bottom. A player wins if their card had a higher mana value.)

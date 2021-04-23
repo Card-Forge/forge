@@ -2,6 +2,6 @@ Name:Pang Tong, "Young Phoenix"
 ManaCost:1 W W
 Types:Legendary Creature Human Advisor
 PT:1/2
-A:AB$ Pump | Cost$ T | NumDef$ +2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | PlayerTurn$ True | ActivationPhases$ Upkeep,Draw,Main1,BeginCombat | SpellDescription$ Target creature gets +0/+2 until end of turn. Activate this ability only during your turn, before attackers are declared.
+A:AB$ Pump | Cost$ T | NumDef$ +2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | PlayerTurn$ True | ActivationPhases$ Upkeep,Draw,Main1,BeginCombat | SpellDescription$ Target creature gets +0/+2 until end of turn. Activate only during your turn, before attackers are declared.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pang_tong_young_phoenix.jpg
-Oracle:{T}: Target creature gets +0/+2 until end of turn. Activate this ability only during your turn, before attackers are declared.
+Oracle:{T}: Target creature gets +0/+2 until end of turn. Activate only during your turn, before attackers are declared.

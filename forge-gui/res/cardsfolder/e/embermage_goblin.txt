@@ -3,8 +3,8 @@ ManaCost:3 R
 Types:Creature Goblin Wizard
 PT:1/1
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a card named CARDNAME, reveal it, and put it into your hand. If you do, shuffle your library.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a card named CARDNAME, reveal it, put it into your hand, then shuffle.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.namedEmbermage Goblin | ChangeNum$ 1 | ShuffleNonMandatory$ True
 DeckHints:Name$Embermage Goblin
 SVar:Picture:http://www.wizards.com/global/images/magic/general/embermage_goblin.jpg
-Oracle:When Embermage Goblin enters the battlefield, you may search your library for a card named Embermage Goblin, reveal it, and put it into your hand. If you do, shuffle your library.\n{T}: Embermage Goblin deals 1 damage to any target.
+Oracle:When Embermage Goblin enters the battlefield, you may search your library for a card named Embermage Goblin, reveal it, put it into your hand, then shuffle.\n{T}: Embermage Goblin deals 1 damage to any target.

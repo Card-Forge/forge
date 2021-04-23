@@ -2,8 +2,8 @@ Name:Void Winnower
 ManaCost:9
 Types:Creature Eldrazi
 PT:11/9
-S:Mode$ CantBeCast | ValidCard$ Card.cmcEven | Caster$ Opponent | Description$ Your opponents can't cast spells with even converted mana costs. (Zero is even.)
-S:Mode$ Continuous | Affected$ Creature.OppCtrl+cmcEven | AddHiddenKeyword$ CARDNAME can't block. | Description$ Your opponents can't block with creatures with even converted mana costs.
+S:Mode$ CantBeCast | ValidCard$ Card.cmcEven | Caster$ Opponent | Description$ Your opponents can't cast spells with even mana values. (Zero is even.)
+S:Mode$ Continuous | Affected$ Creature.OppCtrl+cmcEven | AddHiddenKeyword$ CARDNAME can't block. | Description$ Your opponents can't block with creatures with even mana values.
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/void_winnower.jpg
-Oracle:Your opponents can't cast spells with even converted mana costs. (Zero is even.)\nYour opponents can't block with creatures with even converted mana costs.
+Oracle:Your opponents can't cast spells with even mana values. (Zero is even.)\nYour opponents can't block with creatures with even mana values.

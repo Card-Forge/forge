@@ -6,4 +6,4 @@ A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
 K:Transmute:1 U U
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tolaria_west.jpg
-Oracle:Tolaria West enters the battlefield tapped.\n{T}: Add {U}.\nTransmute {1}{U}{U} ({1}{U}{U}, Discard this card: Search your library for a card with converted mana cost 0, reveal it, and put it into your hand. Then shuffle your library. Transmute only as a sorcery.)
+Oracle:Tolaria West enters the battlefield tapped.\n{T}: Add {U}.\nTransmute {1}{U}{U} ({1}{U}{U}, Discard this card: Search your library for a card with mana value 0, reveal it, put it into your hand, then shuffle. Transmute only as a sorcery.)

@@ -2,7 +2,7 @@ Name:Weapon Rack
 ManaCost:4
 Types:Artifact
 K:etbCounter:P1P1:3
-A:AB$ MoveCounter | Cost$ T | Source$ Self | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SorcerySpeed$ True | SpellDescription$ Move a +1/+1 counter from CARDNAME onto target creature. Activate this ability only any time you could cast a sorcery.
+A:AB$ MoveCounter | Cost$ T | Source$ Self | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SorcerySpeed$ True | SpellDescription$ Move a +1/+1 counter from CARDNAME onto target creature. Activate only as a sorcery.
 DeckHas:Ability$Counters
 AI:RemoveDeck:All
-Oracle:Weapon Rack enters the battlefield with three +1/+1 counters on it.\n{T}: Move a +1/+1 counter from Weapon Rack onto target creature. Activate this ability only any time you could cast a sorcery.
+Oracle:Weapon Rack enters the battlefield with three +1/+1 counters on it.\n{T}: Move a +1/+1 counter from Weapon Rack onto target creature. Activate only as a sorcery.

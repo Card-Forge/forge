@@ -5,8 +5,8 @@ PT:4/4
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked, it gets -4/+4 until end of turn.
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPump | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked, it gets -4/+4 until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ -4 | NumDef$ 4
-A:AB$ Animate | Cost$ 1 | ValidTgts$ Artifact.nonCreature | TgtPrompt$ Select target noncreature artifact | Power$ X | Toughness$ X | Types$ Artifact,Creature | SpellDescription$ Target noncreature artifact becomes an artifact creature with power and toughness each equal to its converted mana cost until end of turn.
+A:AB$ Animate | Cost$ 1 | ValidTgts$ Artifact.nonCreature | TgtPrompt$ Select target noncreature artifact | Power$ X | Toughness$ X | Types$ Artifact,Creature | SpellDescription$ Target noncreature artifact becomes an artifact creature with power and toughness each equal to its mana value until end of turn.
 SVar:X:Targeted$CardManaCost
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/karn_silver_golem.jpg
-Oracle:Whenever Karn, Silver Golem blocks or becomes blocked, it gets -4/+4 until end of turn.\n{1}: Target noncreature artifact becomes an artifact creature with power and toughness each equal to its converted mana cost until end of turn.
+Oracle:Whenever Karn, Silver Golem blocks or becomes blocked, it gets -4/+4 until end of turn.\n{1}: Target noncreature artifact becomes an artifact creature with power and toughness each equal to its mana value until end of turn.

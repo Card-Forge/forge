@@ -4,9 +4,9 @@ Types:Sorcery
 K:Kicker:2 B B
 A:SP$ Charm | Cost$ 2 B | MinCharmNum$ X | CharmNum$ Y | Choices$ DBDiscard,DBReturn,DBDestroy | AdditionalDescription$ . If this spell was kicked, choose any number instead.
 SVar:DBDiscard:DB$ Discard | ValidTgts$ Opponent | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target opponent discards two cards.
-SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Card.Creature+cmcLE2+YouOwn | TgtPrompt$ Select target creature card with converted mana cost 2 or less | SpellDescription$ Return target creature card with converted mana cost 2 or less from your graveyard to the battlefield.
-SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.cmcLE3 | TgtPrompt$ Select target creature with converted mana cost 3 or less | SpellDescription$ Destroy target creature with converted mana cost 3 or less.
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Card.Creature+cmcLE2+YouOwn | TgtPrompt$ Select target creature card with mana value 2 or less | SpellDescription$ Return target creature card with mana value 2 or less from your graveyard to the battlefield.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.cmcLE3 | TgtPrompt$ Select target creature with mana value 3 or less | SpellDescription$ Destroy target creature with mana value 3 or less.
 SVar:X:Count$Kicked.0.1
 SVar:Y:Count$Kicked.3.1
-Oracle:Kicker {2}{B}{B}\nChoose one. If this spell was kicked, choose any number instead.\n• Target opponent discards two cards.\n• Return target creature card with converted mana cost 2 or less from your graveyard to the battlefield.\n• Destroy target creature with converted mana cost 3 or less.
+Oracle:Kicker {2}{B}{B}\nChoose one. If this spell was kicked, choose any number instead.\n• Target opponent discards two cards.\n• Return target creature card with mana value 2 or less from your graveyard to the battlefield.\n• Destroy target creature with mana value 3 or less.
 

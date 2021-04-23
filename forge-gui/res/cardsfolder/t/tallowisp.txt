@@ -2,8 +2,8 @@ Name:Tallowisp
 ManaCost:1 W
 Types:Creature Spirit
 PT:1/3
-T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigSearch | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may search your library for an Aura card with enchant creature, reveal it, and put it into your hand. If you do, shuffle your library.
+T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigSearch | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may search your library for an Aura card with enchant creature, reveal it, put it into your hand, then shuffle.
 SVar:TrigSearch:DB$ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Aura.withEnchant creature | ChangeNum$ 1 | Shuffle$ True | ShuffleNonMandatory$ True
 SVar:BuffedBy:Arcane,Spirit
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tallowisp.jpg
-Oracle:Whenever you cast a Spirit or Arcane spell, you may search your library for an Aura card with enchant creature, reveal it, and put it into your hand. If you do, shuffle your library.
+Oracle:Whenever you cast a Spirit or Arcane spell, you may search your library for an Aura card with enchant creature, reveal it, put it into your hand, then shuffle.

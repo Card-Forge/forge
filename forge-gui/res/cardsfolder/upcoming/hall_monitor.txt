@@ -4,4 +4,4 @@ Types:Creature Lizard Shaman
 PT:1/1
 K:Haste
 A:AB$ Pump | Cost$ 1 R T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | SpellDescription$ Target creature can't block this turn.
-Oracle:Haste\n{1}{R}, {T}: Target creature can’t block this turn.
+Oracle:Haste\n{1}{R}, {T}: Target creature can't block this turn.

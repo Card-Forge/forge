@@ -1,7 +1,7 @@
 Name:Back from the Brink
 ManaCost:4 U U
 Types:Enchantment
-A:AB$ CopyPermanent | Cost$ ExileFromGrave<1/Creature> Mana<20\Exiled> | CostDesc$ Exile a creature card from your graveyard and pay its mana cost: | Defined$ Exiled | SorcerySpeed$ True | SpellDescription$ Create a token that's a copy of that card. Activate this ability only any time you could cast a sorcery.
+A:AB$ CopyPermanent | Cost$ ExileFromGrave<1/Creature> Mana<20\Exiled> | CostDesc$ Exile a creature card from your graveyard and pay its mana cost: | Defined$ Exiled | SorcerySpeed$ True | SpellDescription$ Create a token that's a copy of that card. Activate only as a sorcery.
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/back_from_the_brink.jpg
-Oracle:Exile a creature card from your graveyard and pay its mana cost: Create a token that's a copy of that card. Activate this ability only any time you could cast a sorcery.
+Oracle:Exile a creature card from your graveyard and pay its mana cost: Create a token that's a copy of that card. Activate only as a sorcery.

@@ -2,6 +2,6 @@ Name:Magus of the Mirror
 ManaCost:4 B B
 Types:Creature Human Wizard
 PT:4/2
-A:AB$ ExchangeLife | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | ActivationPhases$ Upkeep | PlayerTurn$ True | SpellDescription$ Exchange life totals with target opponent. Activate this ability only during your upkeep.
+A:AB$ ExchangeLife | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | ActivationPhases$ Upkeep | PlayerTurn$ True | SpellDescription$ Exchange life totals with target opponent. Activate only during your upkeep.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magus_of_the_mirror.jpg
-Oracle:{T}, Sacrifice Magus of the Mirror: Exchange life totals with target opponent. Activate this ability only during your upkeep.
+Oracle:{T}, Sacrifice Magus of the Mirror: Exchange life totals with target opponent. Activate only during your upkeep.

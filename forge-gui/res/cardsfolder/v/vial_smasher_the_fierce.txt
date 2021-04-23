@@ -2,11 +2,11 @@ Name:Vial Smasher the Fierce
 ManaCost:1 B R
 Types:Legendary Creature Goblin Berserker
 PT:2/3
-T:Mode$ SpellCast | ValidActivatingPlayer$ You | ActivatorThisTurnCast$ EQ1 | NoResolvingCheck$ True | ValidCard$ Card | Execute$ TrigChoose | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast your first spell each turn, choose an opponent at random. CARDNAME deals damage equal to that spell's converted mana cost to that player or a planeswalker that player controls.
+T:Mode$ SpellCast | ValidActivatingPlayer$ You | ActivatorThisTurnCast$ EQ1 | NoResolvingCheck$ True | ValidCard$ Card | Execute$ TrigChoose | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast your first spell each turn, choose an opponent at random. CARDNAME deals damage equal to that spell's mana value to that player or a planeswalker that player controls.
 SVar:TrigChoose:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | Random$ True | SubAbility$ DBDealDamage
 SVar:DBDealDamage:DB$ DealDamage | Defined$ ChosenPlayer | NumDmg$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenPlayer$ True
 SVar:X:TriggerCount$CastSACMC
 K:Partner
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vial_smasher_the_fierce.jpg
-Oracle:Whenever you cast your first spell each turn, choose an opponent at random. Vial Smasher the Fierce deals damage equal to that spell's converted mana cost to that player or a planeswalker that player controls.\nPartner (You can have two commanders if both have partner.)
+Oracle:Whenever you cast your first spell each turn, choose an opponent at random. Vial Smasher the Fierce deals damage equal to that spell's mana value to that player or a planeswalker that player controls.\nPartner (You can have two commanders if both have partner.)

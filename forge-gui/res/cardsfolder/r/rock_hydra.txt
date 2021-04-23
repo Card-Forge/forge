@@ -4,7 +4,7 @@ Types:Creature Hydra
 PT:0/0
 K:etbCounter:P1P1:X
 A:AB$ PreventDamage | Cost$ R | Defined$ Self | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to CARDNAME this turn.
-A:AB$ PutCounter | Cost$ R R R | ActivationPhases$ Upkeep | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME. Activate this ability only during your upkeep.
+A:AB$ PutCounter | Cost$ R R R | ActivationPhases$ Upkeep | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME. Activate only during your upkeep.
 T:Mode$ DamageDone | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ RemoveCtrsTrig | Static$ True
 SVar:RemoveCtrsTrig:DB$ RemoveCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ NumDmgTrig
 R:Event$ DamageDone | ValidTarget$ Card.Self | ActiveZones$ Battlefield | ReplaceWith$ ReplaceDamage | PreventionEffect$ True | Description$ For each 1 damage that would be dealt to CARDNAME, if it has a +1/+1 counter on it, remove a +1/+1 counter from it and prevent that 1 damage.
@@ -17,4 +17,4 @@ SVar:Y:Count$CardCounters.P1P1
 SVar:Z:SVar$NumDmg/Minus.Y
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rock_hydra.jpg
-Oracle:Rock Hydra enters the battlefield with X +1/+1 counters on it.\nFor each 1 damage that would be dealt to Rock Hydra, if it has a +1/+1 counter on it, remove a +1/+1 counter from it and prevent that 1 damage.\n{R}: Prevent the next 1 damage that would be dealt to Rock Hydra this turn.\n{R}{R}{R}: Put a +1/+1 counter on Rock Hydra. Activate this ability only during your upkeep.
+Oracle:Rock Hydra enters the battlefield with X +1/+1 counters on it.\nFor each 1 damage that would be dealt to Rock Hydra, if it has a +1/+1 counter on it, remove a +1/+1 counter from it and prevent that 1 damage.\n{R}: Prevent the next 1 damage that would be dealt to Rock Hydra this turn.\n{R}{R}{R}: Put a +1/+1 counter on Rock Hydra. Activate only during your upkeep.

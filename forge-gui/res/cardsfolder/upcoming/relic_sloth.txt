@@ -4,4 +4,4 @@ Types:Creature Beast
 PT:4/4
 K:Vigilance
 K:Menace
-Oracle:Vigilance\nMenace(This creature can't be blocked except by two or more creatures.)
+Oracle:Vigilance\nMenace (This creature can't be blocked except by two or more creatures.)

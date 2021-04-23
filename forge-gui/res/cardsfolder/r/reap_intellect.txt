@@ -11,4 +11,4 @@ SVar:NumInHand:TargetedPlayer$CardsInHand
 SVar:NumInLib:TargetedPlayer$CardsInLibrary
 SVar:NumInYard:TargetedPlayer$CardsInGraveyard
 SVar:X:Count$xPaid
-Oracle:Target opponent reveals their hand. You choose up to X nonland cards from it and exile them. For each card exiled this way, search that player's graveyard, hand, and library for any number of cards with the same name as that card and exile them. Then that player shuffles their library.
+Oracle:Target opponent reveals their hand. You choose up to X nonland cards from it and exile them. For each card exiled this way, search that player's graveyard, hand, and library for any number of cards with the same name as that card and exile them. Then that player shuffles.

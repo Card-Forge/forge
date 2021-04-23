@@ -3,8 +3,8 @@ ManaCost:3 W U
 Types:Legendary Creature Human Soldier
 PT:4/4
 K:Protection from red
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ Detain | TriggerDescription$ When CARDNAME enters the battlefield, detain each nonland permanent your opponents control with converted mana cost 4 or less.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ Detain | TriggerDescription$ When CARDNAME enters the battlefield, detain each nonland permanent your opponents control with mana value 4 or less.
 SVar:Detain:DB$ PumpAll | KW$ HIDDEN CARDNAME can't attack or block. & HIDDEN CARDNAME's activated abilities can't be activated. | IsCurse$ True | UntilYourNextTurn$ True | ValidCards$ Permanent.OppCtrl+nonLand+cmcLE4
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lavinia_of_the_tenth.jpg
-Oracle:Protection from red\nWhen Lavinia of the Tenth enters the battlefield, detain each nonland permanent your opponents control with converted mana cost 4 or less. (Until your next turn, those permanents can't attack or block and their activated abilities can't be activated.)
+Oracle:Protection from red\nWhen Lavinia of the Tenth enters the battlefield, detain each nonland permanent your opponents control with mana value 4 or less. (Until your next turn, those permanents can't attack or block and their activated abilities can't be activated.)

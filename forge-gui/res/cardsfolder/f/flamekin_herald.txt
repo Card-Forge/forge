@@ -2,7 +2,7 @@ Name:Flamekin Herald
 ManaCost:2 R
 Types:Creature Elemental Wizard
 PT:3/2
-S:Mode$ Continuous | Affected$ Card.IsCommander+YouCtrl | AffectedZone$ Stack | AddKeyword$ Cascade | Description$ Commander spells you cast have cascade. (Whenever you cast a commander, exile cards from the top of your library until you exile a nonland card with lesser converted mana cost. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)
+S:Mode$ Continuous | Affected$ Card.IsCommander+YouCtrl | AffectedZone$ Stack | AddKeyword$ Cascade | Description$ Commander spells you cast have cascade. (Whenever you cast a commander, exile cards from the top of your library until you exile a nonland card with lesser mana value. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)
 SVar:PlayMain1:TRUE
 AI:RemoveDeck:NonCommander
-Oracle:Commander spells you cast have cascade. (Whenever you cast a commander, exile cards from the top of your library until you exile a nonland card with lesser converted mana cost. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)
+Oracle:Commander spells you cast have cascade. (Whenever you cast a commander, exile cards from the top of your library until you exile a nonland card with lesser mana value. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)

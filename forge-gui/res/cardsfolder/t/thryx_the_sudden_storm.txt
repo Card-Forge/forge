@@ -4,6 +4,6 @@ Types:Legendary Creature Elemental Giant
 PT:4/5
 K:Flash
 K:Flying
-S:Mode$ ReduceCost | ValidCard$ Card.cmcGE5 | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Spells you cast with converted mana cost 5 or greater cost {1} less to cast and can't be countered.
-S:Mode$ Continuous | Affected$ Card.cmcGE5+YouCtrl | AffectedZone$ Stack | AddHiddenKeyword$ CARDNAME can't be countered. | Secondary$ True | Description$ Spells you cast with converted mana cost 5 or greater cost {1} less to cast and can't be countered.
-Oracle:Flash\nFlying\nSpells you cast with converted mana cost 5 or greater cost {1} less to cast and can't be countered.
+S:Mode$ ReduceCost | ValidCard$ Card.cmcGE5 | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Spells you cast with mana value 5 or greater cost {1} less to cast and can't be countered.
+S:Mode$ Continuous | Affected$ Card.cmcGE5+YouCtrl | AffectedZone$ Stack | AddHiddenKeyword$ CARDNAME can't be countered. | Secondary$ True | Description$ Spells you cast with mana value 5 or greater cost {1} less to cast and can't be countered.
+Oracle:Flash\nFlying\nSpells you cast with mana value 5 or greater cost {1} less to cast and can't be countered.

@@ -3,8 +3,8 @@ ManaCost:2 R
 Types:Enchantment
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Creature | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When there are no creatures on the battlefield, sacrifice CARDNAME.
 SVar:TrigSac:DB$Sacrifice | Defined$ Self
-A:AB$ DealDamage | Cost$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | Activator$ Player | SorcerySpeed$ True | SpellDescription$ CARDNAME deals 1 damage to target creature. Any player may activate this ability but only any time they could cast a sorcery.
+A:AB$ DealDamage | Cost$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | Activator$ Player | SorcerySpeed$ True | SpellDescription$ CARDNAME deals 1 damage to target creature. Any player may activate this ability but only as a sorcery.
 SVar:NeedsToPlay:Creature.YouCtrl
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/task_mage_assembly.jpg
-Oracle:When there are no creatures on the battlefield, sacrifice Task Mage Assembly.\n{2}: Task Mage Assembly deals 1 damage to target creature. Any player may activate this ability but only any time they could cast a sorcery.
+Oracle:When there are no creatures on the battlefield, sacrifice Task Mage Assembly.\n{2}: Task Mage Assembly deals 1 damage to target creature. Any player may activate this ability but only as a sorcery.

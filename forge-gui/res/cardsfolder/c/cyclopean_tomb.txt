@@ -1,7 +1,7 @@
 Name:Cyclopean Tomb
 ManaCost:4
 Types:Artifact
-A:AB$ PutCounter | Cost$ 2 T | ValidTgts$ Land.nonSwamp | TgtPrompt$ Select target non-Swamp land | RememberCards$ True | CounterType$ MIRE | CounterNum$ 1 | ActivationPhases$ Upkeep | SubAbility$ DBEffect | SpellDescription$ Put a mire counter on target non-Swamp land. That land is a Swamp for as long as it has a mire counter on it. Activate this ability only during your upkeep.
+A:AB$ PutCounter | Cost$ 2 T | ValidTgts$ Land.nonSwamp | TgtPrompt$ Select target non-Swamp land | RememberCards$ True | CounterType$ MIRE | CounterNum$ 1 | ActivationPhases$ Upkeep | SubAbility$ DBEffect | SpellDescription$ Put a mire counter on target non-Swamp land. That land is a Swamp for as long as it has a mire counter on it. Activate only during your upkeep.
 SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | StaticAbilities$ TombStatic | ForgetOnMoved$ Battlefield | ForgetCounter$ MIRE | Duration$ Permanent
 SVar:TombStatic:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | AddType$ Swamp | RemoveLandTypes$ True | Description$ That land is a Swamp for as long as it has a mire counter on it
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, at the beginning of each of your upkeeps for the rest of the game, remove all mire counters from a land that a mire counter was put onto with CARDNAME but that a mire counter has not been removed from with CARDNAME.
@@ -16,4 +16,4 @@ SVar:DBClearRemembered:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cyclopean_tomb.jpg
-Oracle:{2}, {T}: Put a mire counter on target non-Swamp land. That land is a Swamp for as long as it has a mire counter on it. Activate this ability only during your upkeep.\nWhen Cyclopean Tomb is put into a graveyard from the battlefield, at the beginning of each of your upkeeps for the rest of the game, remove all mire counters from a land that a mire counter was put onto with Cyclopean Tomb but that a mire counter has not been removed from with Cyclopean Tomb.
+Oracle:{2}, {T}: Put a mire counter on target non-Swamp land. That land is a Swamp for as long as it has a mire counter on it. Activate only during your upkeep.\nWhen Cyclopean Tomb is put into a graveyard from the battlefield, at the beginning of each of your upkeeps for the rest of the game, remove all mire counters from a land that a mire counter was put onto with Cyclopean Tomb but that a mire counter has not been removed from with Cyclopean Tomb.

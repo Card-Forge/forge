@@ -2,6 +2,6 @@ Name:Trap Runner
 ManaCost:2 W W
 Types:Creature Human Soldier
 PT:2/3
-A:AB$ BecomesBlocked | Cost$ T | ValidTgts$ Creature.attacking+unblocked | TgtPrompt$ Select target unblocked attacking creature | ActivationPhases$ Declare Blockers->EndCombat | SpellDescription$ Target unblocked attacking creature becomes blocked. Activate this ability only during combat after blockers are declared. (This ability works on creatures that can't be blocked.)
+A:AB$ BecomesBlocked | Cost$ T | ValidTgts$ Creature.attacking+unblocked | TgtPrompt$ Select target unblocked attacking creature | ActivationPhases$ Declare Blockers->EndCombat | SpellDescription$ Target unblocked attacking creature becomes blocked. Activate only during combat after blockers are declared. (This ability works on creatures that can't be blocked.)
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trap_runner.jpg
-Oracle:{T}: Target unblocked attacking creature becomes blocked. Activate this ability only during combat after blockers are declared. (This ability works on creatures that can't be blocked.)
+Oracle:{T}: Target unblocked attacking creature becomes blocked. Activate only during combat after blockers are declared. (This ability works on creatures that can't be blocked.)

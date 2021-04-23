@@ -2,7 +2,7 @@ Name:Wild Wanderer
 ManaCost:3 G
 Types:Creature Elf Druid
 PT:3/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | OptionalDecider$ You | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | OptionalDecider$ You | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
 SVar:TrigChange:DB$ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wild_wanderer.jpg
-Oracle:When Wild Wanderer enters the battlefield, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
+Oracle:When Wild Wanderer enters the battlefield, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle.

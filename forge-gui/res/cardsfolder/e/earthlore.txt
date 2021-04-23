@@ -6,4 +6,4 @@ A:SP$ Attach | Cost$ G | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land
 A:AB$ Pump | Cost$ tapXType<1/Land.EnchantedBy/Enchanted Land> | ValidTgts$ Creature.blocking | NumAtt$ 1 | NumDef$ 2 | CostDesc$ Tap enchanted land: | SpellDescription$ Target blocking creature gets +1/+2 until end of turn.
 SVar:NonStackingAttachEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/earthlore.jpg
-Oracle:Enchant land you control\nTap enchanted land: Target blocking creature gets +1/+2 until end of turn. Activate this ability only if enchanted land is untapped.
+Oracle:Enchant land you control\nTap enchanted land: Target blocking creature gets +1/+2 until end of turn. Activate only if enchanted land is untapped.

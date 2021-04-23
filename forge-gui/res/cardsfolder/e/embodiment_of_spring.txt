@@ -2,8 +2,8 @@ Name:Embodiment of Spring
 ManaCost:U
 Types:Creature Elemental
 PT:0/3
-A:AB$ ChangeZone | Cost$ 1 G T Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card and put it onto the battlefield tapped, then shuffle your library.
+A:AB$ ChangeZone | Cost$ 1 G T Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card and put it onto the battlefield tapped, then shuffle.
 DeckHints:Color$Green
 #TODO: Just like with Sakura-Tribe Elder, the AI will sac it at its earliest convenience to search for a land. Might improve conditions for when the AI might not want to do that.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/embodiment_of_spring.jpg
-Oracle:{1}{G}, {T}, Sacrifice Embodiment of Spring: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle your library.
+Oracle:{1}{G}, {T}, Sacrifice Embodiment of Spring: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.

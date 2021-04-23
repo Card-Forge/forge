@@ -5,6 +5,6 @@ PT:6/6
 K:Flying
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigEnergy | TriggerDescription$ At the beginning of your upkeep, you get {E}{E}{E} (three energy counters).
 SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 3
-A:AB$ ChangeZoneAll | Cost$ PayEnergy<8> | ChangeType$ Creature.Other | SorcerySpeed$ True | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all other creatures to their owners' hands. Activate this ability only any time you could cast a sorcery.
+A:AB$ ChangeZoneAll | Cost$ PayEnergy<8> | ChangeType$ Creature.Other | SorcerySpeed$ True | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all other creatures to their owners' hands. Activate only as a sorcery.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aethersquall_ancient.jpg
-Oracle:Flying\nAt the beginning of your upkeep, you get {E}{E}{E} (three energy counters).\nPay {E}{E}{E}{E}{E}{E}{E}{E}: Return all other creatures to their owners' hands. Activate this ability only any time you could cast a sorcery.
+Oracle:Flying\nAt the beginning of your upkeep, you get {E}{E}{E} (three energy counters).\nPay {E}{E}{E}{E}{E}{E}{E}{E}: Return all other creatures to their owners' hands. Activate only as a sorcery.

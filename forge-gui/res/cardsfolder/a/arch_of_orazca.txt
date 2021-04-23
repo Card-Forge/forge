@@ -3,6 +3,6 @@ ManaCost:no cost
 Types:Land
 K:Ascend
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ Draw | Cost$ 5 T | NumCards$ 1 | Activation$ Blessing | AILogic$ AlwaysAtOppEOT | SpellDescription$ Draw a card. Activate this ability only if you have the city's blessing.
+A:AB$ Draw | Cost$ 5 T | NumCards$ 1 | Activation$ Blessing | AILogic$ AlwaysAtOppEOT | SpellDescription$ Draw a card. Activate only if you have the city's blessing.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arch_of_orazca.jpg
-Oracle:Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\n{T}: Add {C}.\n{5}, {T}: Draw a card. Activate this ability only if you have the city's blessing.
+Oracle:Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\n{T}: Add {C}.\n{5}, {T}: Draw a card. Activate only if you have the city's blessing.

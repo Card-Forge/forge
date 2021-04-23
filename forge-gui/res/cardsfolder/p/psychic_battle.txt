@@ -1,7 +1,7 @@
 Name:Psychic Battle
 ManaCost:3 U U
 Types:Enchantment
-T:Mode$ BecomesTargetOnce | ValidCause$ Card.notnamedPsychic Battle | TriggerZones$ Battlefield | Execute$ TrigReveal | TriggerDescription$ Whenever a player chooses one or more targets, each player reveals the top card of their library. The player who reveals the card with the highest converted mana cost may change the target or targets. If two or more cards are tied for highest cost, the target or targets remain unchanged. Changing targets this way doesn't trigger abilities of permanents named Psychic Battle.
+T:Mode$ BecomesTargetOnce | ValidCause$ Card.notnamedPsychic Battle | TriggerZones$ Battlefield | Execute$ TrigReveal | TriggerDescription$ Whenever a player chooses one or more targets, each player reveals the top card of their library. The player who reveals the card with the highest mana value may change the target or targets. If two or more cards are tied for highest cost, the target or targets remain unchanged. Changing targets this way doesn't trigger abilities of permanents named Psychic Battle.
 SVar:TrigReveal:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBDig | SubAbility$ DBChangeTargets
 SVar:DBDig:DB$ Dig | Defined$ Remembered | DigNum$ 1 | Reveal$ True | NoMove$ True | RememberRevealed$ True | SubAbility$ DBCheckLibrary
 SVar:DBCheckLibrary:DB$ Branch | BranchConditionSVar$ NumRememberedCard | TrueSubAbility$ DBCheckImprinted
@@ -19,4 +19,4 @@ SVar:CMCRememberedCard:Remembered$CardManaCost
 SVar:CMCImprintedCard:Count$ImprintedCardManaCost
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
-Oracle:Whenever a player chooses one or more targets, each player reveals the top card of their library. The player who reveals the card with the highest converted mana cost may change the target or targets. If two or more cards are tied for highest cost, the target or targets remain unchanged. Changing targets this way doesn't trigger abilities of permanents named Psychic Battle.
+Oracle:Whenever a player chooses one or more targets, each player reveals the top card of their library. The player who reveals the card with the highest mana value may change the target or targets. If two or more cards are tied for highest, the target or targets remain unchanged. Changing targets this way doesn't trigger abilities of permanents named Psychic Battle.

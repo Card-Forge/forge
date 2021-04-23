@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
-A:AB$ Pump | Cost$ 2 B B G T Sac<1/CARDNAME> | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select up to one target creature you don't control | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SorcerySpeed$ True | SubAbility$ DBToken | StackDescription$ {c:Targeted} gets -2/-2 until end of turn. | SpellDescription$ Up to one target creature you don't control gets -2/-2 until end of turn. Create two 1/1 green Elf Warrior creature tokens. Activate this ability only any time you could cast a sorcery.
+A:AB$ Pump | Cost$ 2 B B G T Sac<1/CARDNAME> | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select up to one target creature you don't control | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SorcerySpeed$ True | SubAbility$ DBToken | StackDescription$ {c:Targeted} gets -2/-2 until end of turn. | SpellDescription$ Up to one target creature you don't control gets -2/-2 until end of turn. Create two 1/1 green Elf Warrior creature tokens. Activate only as a sorcery.
 SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ g_1_1_elf_warrior | TokenOwner$ You | StackDescription$ {p:You} creates two 1/1 green Elf Warrior creature tokens.
 DeckHas:Ability$Token & Ability$Sacrifice
-Oracle:Skemfar Elderhall enters the battlefield tapped.\n{T}: Add {G}.\n{2}{B}{B}{G}, {T}, Sacrifice Skemfar Elderhall: Up to one target creature you don't control gets -2/-2 until end of turn. Create two 1/1 green Elf Warrior creature tokens. Activate this ability only any time you could cast a sorcery.
+Oracle:Skemfar Elderhall enters the battlefield tapped.\n{T}: Add {G}.\n{2}{B}{B}{G}, {T}, Sacrifice Skemfar Elderhall: Up to one target creature you don't control gets -2/-2 until end of turn. Create two 1/1 green Elf Warrior creature tokens. Activate only as a sorcery.
