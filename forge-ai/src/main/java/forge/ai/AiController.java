@@ -1463,7 +1463,8 @@ public class AiController {
                         // TODO extend this logic to evaluate MDFC with both sides land
                         // this can only happen if its a MDFC land
                         if (!land.isLand()) {
-                            land.setState(CardStateName.Modal, false);
+                            land.setState(CardStateName.Modal, true);
+                            land.setBackSide(true);
                         }
 
                         LandAbility la = new LandAbility(land, player, null);
