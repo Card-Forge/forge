@@ -194,7 +194,7 @@ public class ConquestPlane {
         for (String setCode : setCodes) {
             CardEdition edition = FModel.getMagicDb().getEditions().get(setCode);
             if (edition != null) {
-                for (CardInSet card : edition.getCards()) {
+                for (CardInSet card : edition.getAllCardsInSet()) {
                     if (bannedCardSet == null || !bannedCardSet.contains(card.name)) {
                         addCard(commonCards.getCard(card.name, setCode));
                     }
