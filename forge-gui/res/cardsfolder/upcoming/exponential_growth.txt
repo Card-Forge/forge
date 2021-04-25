@@ -5,4 +5,5 @@ A:SP$ Repeat | Cost$ X X G G | ValidTgts$ Creature | TgtPrompt$ Select target cr
 SVar:DBPump:DB$ Pump | Defined$ Targeted | NumAtt$ +Y | SpellDescription$ Double the power of target creature X times until end of turn.
 SVar:X:Count$xPaid
 SVar:Y:Targeted$CardPower
+AI:RemoveDeck:All
 Oracle:Until end of turn, double target creature's power X times.

@@ -18,7 +18,7 @@ public class RepeatAi extends SpellAbilityAi {
         final Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
 
         if (sa.usesTargeting()) {
-            if (!opp.canBeTargetedBy(sa)) {
+            if (!sa.canTarget(opp)) {
                 return false;
             }
             sa.resetTargets();
