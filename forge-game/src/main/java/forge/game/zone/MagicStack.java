@@ -718,6 +718,18 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 remove(si);
             }
         }
+        for (SpellAbility sa : Lists.newArrayList(simultaneousStackEntryList)) {
+            Player activator = sa.getActivatingPlayer();
+            if (activator == null) {
+                if (sa.getHostCard().getController().equals(p)) {
+                    simultaneousStackEntryList.remove(sa);
+                }
+            } else {
+                if (activator.equals(p)) {
+                    simultaneousStackEntryList.remove(sa);
+                }
+            }
+        }
     }
 
     public void fizzleTriggersOnStackTargeting(Card c, TriggerType t) {
