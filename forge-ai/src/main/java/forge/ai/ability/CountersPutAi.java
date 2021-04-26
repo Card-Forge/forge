@@ -866,17 +866,16 @@ public class CountersPutAi extends SpellAbilityAi {
                             choice = Aggregates.random(list);
                         }
                     }
-                    if (choice != null && divided) {
-                        int alloc = Math.max(amount / totalTargets, 1);
-                        if (sa.getTargets().size() == Math.min(totalTargets, sa.getMaxTargets()) - 1) {
-                            sa.addDividedAllocation(choice, left);
-                        } else {
-                            sa.addDividedAllocation(choice, alloc);
-                            left -= alloc;
-                        }
+                }
+                if (choice != null && divided) {
+                    int alloc = Math.max(amount / totalTargets, 1);
+                    if (sa.getTargets().size() == Math.min(totalTargets, sa.getMaxTargets()) - 1) {
+                        sa.addDividedAllocation(choice, left);
+                    } else {
+                        sa.addDividedAllocation(choice, alloc);
+                        left -= alloc;
                     }
                 }
-
                 if (choice != null) {
                     sa.getTargets().add(choice);
                     list.remove(choice);
