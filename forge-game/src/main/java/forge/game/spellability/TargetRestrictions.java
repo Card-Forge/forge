@@ -302,7 +302,7 @@ public class TargetRestrictions {
      */
     public final boolean isMinTargetsChosen(final Card c, final SpellAbility sa) {
         int min = getMinTargets(c, sa);
-        if (min == 0 || sa.getDividedValue() == 0) {
+        if (min == 0 || (sa.isDividedAsYouChoose() && sa.getDividedValue() == 0)) {
             return true;
         }
         return min <= sa.getTargets().size();
