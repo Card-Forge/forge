@@ -101,8 +101,10 @@ public class Main {
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
         config.setResizable(false);
         config.setWindowedMode(desktopMode ? desktopScreenWidth : screenWidth,  desktopMode ? desktopScreenHeight : screenHeight);
-        if (desktopMode && fullscreenFlag)
+        if (desktopMode && fullscreenFlag) {
             config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
+            config.setAutoIconify(true); //fix alt-tab when running fullscreen
+        }
         config.setTitle("Forge");
         if (desktopMode)
             config.setHdpiMode(HdpiMode.Logical);
