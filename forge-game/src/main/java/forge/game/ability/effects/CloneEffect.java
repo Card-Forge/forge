@@ -143,6 +143,12 @@ public class CloneEffect extends SpellAbilityEffect {
 
         tgtCard.updateStateForView();
 
+        // when clone is itself, cleanup from old abilities
+        if (host.equals(tgtCard)) {
+            tgtCard.clearImprintedCards();
+            tgtCard.clearRemembered();
+        }
+
         // check if clone is now an Aura that needs to be attached
         if (tgtCard.isAura() && !tgtCard.isInZone(ZoneType.Battlefield)) {
             AttachEffect.attachAuraOnIndirectEnterBattlefield(tgtCard);
@@ -150,7 +156,7 @@ public class CloneEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("Duration")) {
             final Card cloneCard = tgtCard;
-            // if clone is temporary, target needs old values back after
+            // if clone is temporary, target needs old values back after (keep Death-Mask Duplicant working)
             final Iterable<Card> clonedImprinted = new CardCollection(tgtCard.getImprintedCards());
             final Iterable<Object> clonedRemembered = new FCollection<>(tgtCard.getRemembered());
 
@@ -188,7 +194,7 @@ public class CloneEffect extends SpellAbilityEffect {
             }
         }
 
-        //Clear Remembered and Imprint lists
+        // now we can also cleanup in case target was another card
         tgtCard.clearRemembered();
         tgtCard.clearImprintedCards();
 
