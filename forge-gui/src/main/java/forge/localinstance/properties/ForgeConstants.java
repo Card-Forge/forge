@@ -212,7 +212,7 @@ public final class ForgeConstants {
     public static final String DECK_BASE_DIR;
     public static final String DECK_CONSTRUCTED_DIR;
     static {
-        ForgeProfileProperties.load();
+        ForgeProfileProperties.load(GuiBase.isUsingAppDirectory());
         USER_DIR               = ForgeProfileProperties.getUserDir();
         CACHE_DIR              = ForgeProfileProperties.getCacheDir();
         CACHE_CARD_PICS_DIR    = ForgeProfileProperties.getCardPicsDir();

@@ -57,11 +57,11 @@ public class ForgeProfileProperties {
         //prevent initializing static class
     }
 
-    public static void load() {
+    public static void load(boolean isUsingAppDirectory) {
         final Properties props = new Properties();
         final File propFile = new File(ForgeConstants.PROFILE_FILE);
         try {
-            if (propFile.canRead()) {
+            if (propFile.canRead() && !isUsingAppDirectory) {
                 props.load(new FileInputStream(propFile));
             }
         } catch (final IOException e) {

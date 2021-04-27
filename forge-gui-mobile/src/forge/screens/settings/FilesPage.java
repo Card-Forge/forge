@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import forge.gui.GuiBase;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.utils.Align;
@@ -133,26 +134,28 @@ public class FilesPage extends TabPage<SettingsScreen> {
                 ForgeProfileProperties.setDecksDir(newDir);
             }
         };
-        lstItems.addItem(new StorageOption(localizer.getMessage("lblDataLocation"), ForgeProfileProperties.getUserDir()) {
-            @Override
-            protected void onDirectoryChanged(String newDir) {
-                ForgeProfileProperties.setUserDir(newDir);
+        if (!GuiBase.isUsingAppDirectory()) {
+            lstItems.addItem(new StorageOption(localizer.getMessage("lblDataLocation"), ForgeProfileProperties.getUserDir()) {
+                @Override
+                protected void onDirectoryChanged(String newDir) {
+                    ForgeProfileProperties.setUserDir(newDir);
 
-                //ensure decks option is updated if needed
-                decksOption.updateDir(ForgeProfileProperties.getDecksDir());
-            }
-        }, 1);
-        lstItems.addItem(new StorageOption(localizer.getMessage("lblImageCacheLocation"), ForgeProfileProperties.getCacheDir()) {
-            @Override
-            protected void onDirectoryChanged(String newDir) {
-                ForgeProfileProperties.setCacheDir(newDir);
+                    //ensure decks option is updated if needed
+                    decksOption.updateDir(ForgeProfileProperties.getDecksDir());
+                }
+            }, 1);
+            lstItems.addItem(new StorageOption(localizer.getMessage("lblImageCacheLocation"), ForgeProfileProperties.getCacheDir()) {
+                @Override
+                protected void onDirectoryChanged(String newDir) {
+                    ForgeProfileProperties.setCacheDir(newDir);
 
-                //ensure card pics option is updated if needed
-                cardPicsOption.updateDir(ForgeProfileProperties.getCardPicsDir());
-            }
-        }, 1);
-        lstItems.addItem(cardPicsOption, 1);
-        lstItems.addItem(decksOption, 1);
+                    //ensure card pics option is updated if needed
+                    cardPicsOption.updateDir(ForgeProfileProperties.getCardPicsDir());
+                }
+            }, 1);
+            lstItems.addItem(cardPicsOption, 1);
+            lstItems.addItem(decksOption, 1);
+        }
     }
 
     @Override
