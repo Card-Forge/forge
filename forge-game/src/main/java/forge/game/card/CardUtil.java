@@ -322,15 +322,16 @@ public final class CardUtil {
     }
 
     public static CardCollection getRadiance(final SpellAbility sa) {
-        if (!sa.usesTargeting() || !sa.hasParam("Radiance")) {
+        SpellAbility targetSA = sa.getSATargetingCard();
+        if (targetSA == null || !targetSA.usesTargeting() || !targetSA.hasParam("Radiance")) {
             return new CardCollection();
         }
 
-        final Card source = sa.getHostCard();
+        final Card source = targetSA.getHostCard();
         final Game game = source.getGame();
         final CardCollection res = new CardCollection();
-        final String[] valid = sa.getParam("ValidTgts").split(",");
-        final CardCollectionView tgts = sa.getTargets().getTargetCards();
+        final String[] valid = targetSA.getParam("ValidTgts").split(",");
+        final CardCollectionView tgts = targetSA.getTargets().getTargetCards();
 
         byte combinedColor = 0;
         for (Card tgt : tgts) {
@@ -346,7 +347,7 @@ public final class CardUtil {
                 continue;
             }
             for(final Card c : game.getColoredCardsInPlay(MagicColor.toLongString(color))) {
-                if (!res.contains(c) && !tgts.contains(c) && c.isValid(valid, source.getController(), source, sa)) {
+                if (!res.contains(c) && !tgts.contains(c) && c.isValid(valid, source.getController(), source, targetSA)) {
                     res.add(c);
                 }
             }

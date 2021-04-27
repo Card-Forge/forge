@@ -1,9 +1,7 @@
 Name:Rally the Righteous
 ManaCost:1 R W
 Types:Instant
-A:SP$ Pump | Cost$ 1 R W | ValidTgts$ Creature | Radiance$ True | RememberTargets$ True | NumAtt$ 2 | SubAbility$ DBUntap | SpellDescription$ Radiance — Untap target creature and each other creature that shares a color with it. Those creatures get +2/+0 until end of turn.
-SVar:DBUntap:DB$ UntapAll | ValidCards$ Creature.SharesColorWith Remembered | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:SP$ Untap | Cost$ 1 R W | ValidTgts$ Creature | Radiance$ True | SubAbility$ DBPump | SpellDescription$ Radiance — Untap target creature and each other creature that shares a color with it. Those creatures get +2/+0 until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ ParentTarget | Radiance$ True | NumAtt$ 2
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/rally_the_righteous.jpg
 Oracle:Radiance — Untap target creature and each other creature that shares a color with it. Those creatures get +2/+0 until end of turn.

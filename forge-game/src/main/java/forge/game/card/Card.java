@@ -4886,6 +4886,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final boolean sharesColorWith(final Card c1) {
+        if (isColorless() || c1.isColorless()) {
+            return false;
+        }
         boolean shares;
         shares = (isBlack() && c1.isBlack());
         shares |= (isBlue() && c1.isBlue());

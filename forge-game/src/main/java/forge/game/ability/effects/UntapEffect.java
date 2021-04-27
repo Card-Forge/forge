@@ -3,8 +3,10 @@ package forge.game.ability.effects;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.card.CardUtil;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -41,10 +43,20 @@ public class UntapEffect extends SpellAbilityEffect {
         } else if (sa.hasParam("UntapExactly")) {
             untapChoose(sa, true);
         } else {
+            final CardCollection untargetedCards = CardUtil.getRadiance(sa);
             for (final Card tgtC : getTargetCards(sa)) {
                 if (sa.usesTargeting() && !tgtC.canBeTargetedBy(sa)) {
                     continue;
                 }
+                if (tgtC.isInPlay()) {
+                    tgtC.untap();
+                }
+                if (sa.hasParam("ETB")) {
+                    // do not fire triggers
+                    tgtC.setTapped(false);
+                }
+            }
+            for (final Card tgtC : untargetedCards) {
                 if (tgtC.isInPlay()) {
                     tgtC.untap();
                 }

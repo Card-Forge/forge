@@ -720,15 +720,27 @@ public class CardProperty {
                 return !CardLists.filter(list, CardPredicates.sharesCMCWith(card)).isEmpty();
             }
         } else if (property.startsWith("SharesColorWith")) {
+            // if card is colorless, it can't share colors
+            if (card.isColorless()) {
+                return false;
+            }
             if (property.equals("SharesColorWith")) {
                 if (!card.sharesColorWith(source)) {
                     return false;
                 }
             } else {
+                // Special case to prevent list from comparing with itself
+                if (property.startsWith("SharesColorWithOther")) {
+                    final String restriction = property.split("SharesColorWithOther ")[1];
+                    CardCollection list = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
+                    list.remove(card);
+                    return Iterables.any(list, CardPredicates.sharesColorWith(card));
+                }
+
                 final String restriction = property.split("SharesColorWith ")[1];
                 if (restriction.startsWith("Remembered") || restriction.startsWith("Imprinted")) {
                     CardCollection list = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
-                    return !CardLists.filter(list, CardPredicates.sharesColorWith(card)).isEmpty();
+                    return Iterables.any(list, CardPredicates.sharesColorWith(card));
                 }
 
                 switch (restriction) {
