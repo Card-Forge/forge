@@ -5,14 +5,13 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ColorConvertOp;
 import java.awt.image.Raster;
 import java.io.File;
-import java.util.Iterator;
 
 import javax.imageio.ImageIO;
-import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
 
 import com.google.common.cache.CacheLoader;
 
+import com.twelvemonkeys.imageio.ImageReaderBase;
 import forge.gui.error.BugReporter;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
@@ -35,17 +34,9 @@ final class ImageLoader extends CacheLoader<String, BufferedImage> {
             try {
                 return ImageIO.read(file);
             } catch (Exception e) {
+                //Use TwelveMonkeys to support JPEG "flavors"
+                ImageReaderBase reader = null;
                 try {
-                    //Find a suitable ImageReader
-                    Iterator readers = ImageIO.getImageReadersByFormatName("JPEG");
-                    ImageReader reader = null;
-                    while (readers.hasNext()) {
-                        reader = (ImageReader) readers.next();
-                        if (reader.canReadRaster()) {
-                            break;
-                        }
-                    }
-                    //Stream the image file (the original CMYK image)
                     ImageInputStream input;
                     input = ImageIO.createImageInputStream(file);
                     if (input == null) {
@@ -59,10 +50,12 @@ final class ImageLoader extends CacheLoader<String, BufferedImage> {
                     BufferedImage bi = new BufferedImage(raster.getWidth(), raster.getHeight(), BufferedImage.TYPE_4BYTE_ABGR);
                     //Fill the new image with the old raster
                     bi.getRaster().setRect(raster);
-                    BufferedImage colorConverted = colorConvert(bi);
-                    return colorConverted;
+                    return colorConvert(bi);
                 } catch (Exception ex) {
                     BugReporter.reportException(ex, "Could not read image file " + file.getAbsolutePath() + " ");
+                } finally {
+                    if (reader != null)
+                        reader.dispose();
                 }
             }
         }
