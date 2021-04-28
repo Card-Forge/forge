@@ -237,6 +237,7 @@ public class TriggerHandler {
             if (
                     TriggerType.Exploited.equals(t.getMode()) ||
                     TriggerType.Sacrificed.equals(t.getMode()) ||
+                    TriggerType.Destroyed.equals(t.getMode()) ||
                     (TriggerType.ChangesZone.equals(t.getMode()) && "Battlefield".equals(t.getParam("Origin")))) {
                 registerOneTrigger(t);
             }
