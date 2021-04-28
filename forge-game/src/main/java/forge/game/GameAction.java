@@ -1680,7 +1680,9 @@ public class GameAction {
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
         runParams.put(AbilityKey.Causer, activator);
         game.getTriggerHandler().runTrigger(TriggerType.Destroyed, runParams, false);
-
+        // in case the destroyed card has such a trigger
+        game.getTriggerHandler().registerActiveLTBTrigger(c);
+        
         final Card sacrificed = sacrificeDestroy(c, sa, table);
         return sacrificed != null;
     }
