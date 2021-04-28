@@ -232,8 +232,8 @@ public class CardLists {
 
     public static CardCollection getTargetableCards(Iterable<Card> cardList, SpellAbility source) {
         CardCollection result = CardLists.filter(cardList, CardPredicates.isTargetableBy(source));
-        // Filter more cards that can only be detected along with other candiates
-        if (source.getTargets().isEmpty() && source.getMinTargets() >= 2) {
+        // Filter more cards that can only be detected along with other candidates
+        if (source.getTargets().isEmpty() && source.usesTargeting() && source.getMinTargets() >= 2) {
             CardCollection removeList = new CardCollection();
             TargetRestrictions tr = source.getTargetRestrictions();
             for (final Card card : cardList) {
