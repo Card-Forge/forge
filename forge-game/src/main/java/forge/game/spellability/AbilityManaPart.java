@@ -500,6 +500,8 @@ public class AbilityManaPart implements java.io.Serializable {
      * @return a boolean.
      */
     public final boolean canProduce(final String s, final SpellAbility sa) {
+        // TODO: need to handle replacement effects like 106.7
+        
         // Any mana never means Colorless?
         if (isAnyMana() && !s.equals("C")) {
             return true;

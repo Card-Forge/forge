@@ -23,6 +23,8 @@ import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Localizer;
+import io.sentry.Sentry;
+import io.sentry.event.BreadcrumbBuilder;
 
 public class ManaEffect extends SpellAbilityEffect {
 
@@ -199,13 +201,21 @@ public class ManaEffect extends SpellAbilityEffect {
                     }
                     abMana.setExpressChoice(sb.toString().trim());
                 }
+            }
 
-                if (abMana.getExpressChoice().isEmpty()) {
-                    System.out.println("AbilityFactoryMana::manaResolve() - special mana effect is empty for " + sa.getHostCard().getName());
-                }
-            }    
+            String mana = GameActionUtil.generatedMana(sa);
 
-            abMana.produceMana(GameActionUtil.generatedMana(sa), p, sa);
+            // this can happen when mana is based on criteria that didn't match
+            if (mana.isEmpty()) {
+                String msg = "AbilityFactoryMana::manaResolve() - special mana effect is empty for";
+                Sentry.getContext().recordBreadcrumb(
+                        new BreadcrumbBuilder().setMessage(msg)
+                        .withData("Card", card.getName()).withData("SA", sa.toString()).build()
+                );
+                continue;
+            }
+
+            abMana.produceMana(mana, p, sa);
         }
 
         // Only clear express choice after mana has been produced
