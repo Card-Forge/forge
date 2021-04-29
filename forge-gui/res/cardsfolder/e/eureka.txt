@@ -1,21 +1,19 @@
 Name:Eureka
 ManaCost:2 G G
 Types:Sorcery
-A:SP$ Repeat | Cost$ 2 G G | RepeatSubAbility$ ResetCheck | RepeatCheckSVar$ NumPlayerGiveup | RepeatSVarCompare$ LTTotalPlayer | SubAbility$ DBChangeZoneAll | StackDescription$ SpellDescription | SpellDescription$ Starting with you, each player may put a permanent card from their hand onto the battlefield. Repeat this process until no one puts a card onto the battlefield.
+A:SP$ Repeat | Cost$ 2 G G | RepeatSubAbility$ ResetCheck | RepeatCheckSVar$ NumPlayerGiveup | RepeatSVarCompare$ LTTotalPlayer | SubAbility$ FinalReset | StackDescription$ SpellDescription | SpellDescription$ Starting with you, each player may put a permanent card from their hand onto the battlefield. Repeat this process until no one puts a card onto the battlefield.
 SVar:ResetCheck:DB$ StoreSVar | SVar$ NumPlayerGiveup | Type$ Number | Expression$ 0 | SubAbility$ DBRepeatChoice
 SVar:DBRepeatChoice:DB$ RepeatEach | StartingWithActivator$ True | RepeatSubAbility$ DBChoice | RepeatPlayers$ Player
 SVar:DBChoice:DB$ GenericChoice | Choices$ DBCheckHand,DBNoChange | Defined$ Player.IsRemembered
 SVar:DBCheckHand:DB$ StoreSVar | SVar$ NumPlayerGiveup | Type$ CountSVar | Expression$ NumPlayerGiveup/Plus.1 | ConditionCheckSVar$ CheckHand | ConditionSVarCompare$ EQ0 | SubAbility$ DBChoose | SpellDescription$ Choose a permanent to put onto the battlefield
-SVar:DBChoose:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Permanent.IsNotRemembered+RememberedPlayerCtrl | ChoiceZone$ Hand | Amount$ 1 | RememberChosen$ True | Mandatory$ True | ConditionCheckSVar$ CheckHand | ConditionSVarCompare$ GE1
+SVar:DBChoose:DB$ ChangeZone | DefinedPlayer$ Player.IsRemembered | Origin$ Hand | Destination$ Battlefield | ChangeType$ Permanent | ChangeNum$ 1 | ConditionCheckSVar$ CheckHand | ConditionSVarCompare$ GE1
 SVar:DBNoChange:DB$ StoreSVar | SVar$ NumPlayerGiveup | Type$ CountSVar | Expression$ NumPlayerGiveup/Plus.1 | SpellDescription$ Do not put a permanent onto the battlefield
-SVar:DBChangeZoneAll:DB$ ChangeZoneAll | Origin$ Hand | Destination$ Battlefield | ChangeType$ Card.IsRemembered | SubAbility$ FinalReset
 SVar:FinalReset:DB$ StoreSVar | SVar$ NumPlayerGiveup | Type$ Number | Expression$ 0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:NumPlayerGiveup:Number$0
 SVar:TotalPlayer:PlayerCountPlayers$Amount
-SVar:CheckHand:Count$ValidHand Permanent.IsNotRemembered+RememberedPlayerCtrl
+SVar:CheckHand:Count$ValidHand Permanent.RememberedPlayerCtrl
 AI:RemoveDeck:Random
 SVar:NeedsToPlayVar:Y GE1
 SVar:Y:Count$ValidHand Permanent.YouCtrl+cmcGE5
-SVar:Picture:http://www.wizards.com/global/images/magic/general/eureka.jpg
 Oracle:Starting with you, each player may put a permanent card from their hand onto the battlefield. Repeat this process until no one puts a card onto the battlefield.
