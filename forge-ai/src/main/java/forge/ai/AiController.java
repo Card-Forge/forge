@@ -1884,6 +1884,8 @@ public class AiController {
             return MyRandom.getRandom().nextInt(3);
         } else if (source.hasSVar("EnergyToPay")) {
             return AbilityUtils.calculateAmount(source, source.getSVar("EnergyToPay"), sa);
+        } else if ("Vermin".equals(logic)) {
+            return MyRandom.getRandom().nextInt(Math.max(player.getLife() - 5, 0));
         }
         return max;
     }

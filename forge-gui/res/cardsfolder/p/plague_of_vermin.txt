@@ -1,0 +1,24 @@
+Name:Plague of Vermin
+ManaCost:6 B
+Types:Sorcery
+A:SP$ Effect | Cost$ 6 B | Name$ Plague of Vermin Life Paid | EffectOwner$ Player | ImprintOnHost$ True | Mutable$ True | Duration$ Permanent | SubAbility$ DBRepeat | StackDescription$ SpellDescription | SpellDescription$ Starting with you, each player may pay any amount of life. Repeat this process until no one pays life. Each player creates a 1/1 black Rat creature token for each 1 life they paid this way.
+SVar:DBRepeat:DB$ Repeat | RepeatSubAbility$ DBResetCheck | RepeatCheckSVar$ NumPlayerGiveup | RepeatSVarCompare$ LTTotalPlayer | SubAbility$ DBRepeatToken
+SVar:DBResetCheck:DB$ StoreSVar | SVar$ NumPlayerGiveup | Type$ Number | Expression$ 0 | SubAbility$ DBRepeatChoice
+SVar:DBRepeatChoice:DB$ RepeatEach | StartingWithActivator$ True | RepeatSubAbility$ DBChoice | RepeatPlayers$ Player
+SVar:DBChoice:DB$ ChooseNumber | Defined$ Player.IsRemembered | Max$ LifeTotal | AILogic$ Vermin | ListTitle$ Pay Any Amount of Life | SubAbility$ DBCheckPaid
+SVar:DBCheckPaid:DB$ StoreSVar | SVar$ NumPlayerGiveup | Type$ CountSVar | Expression$ NumPlayerGiveup/Plus.1 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBStore
+SVar:DBStore:DB$ PutCounter | Defined$ Imprinted.namedPlague of Vermin Life Paid+OwnedBy Player.IsRemembered | CounterNum$ X | Placer$ Player.IsRemembered | CounterType$ PLAGUE | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | UnlessCost$ PayLife<X> | UnlessPayer$ Player.IsRemembered | UnlessSwitched$ True | UnlessResolveSubs$ WhenNotPaid | SubAbility$ DBGiveUp | SpellDescription$ You may pay any amount of life.
+SVar:DBGiveUp:DB$ StoreSVar | SVar$ NumPlayerGiveup | Type$ CountSVar | Expression$ NumPlayerGiveup/Plus.1 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
+SVar:DBRepeatToken:DB$ RepeatEach | StartingWithActivator$ True | RepeatSubAbility$ DBToken | RepeatPlayers$ Player | SubAbility$ DBFinalReset
+SVar:DBToken:DB$ Token | TokenAmount$ LifePaidAmount | TokenScript$ b_1_1_rat | TokenOwner$ Player.IsRemembered | StackDescription$ None | SubAbility$ DBRestoreImmutable
+SVar:DBRestoreImmutable:DB$ Animate | Defined$ Imprinted.namedPlague of Vermin Life Paid+OwnedBy Player.IsRemembered | Permanent$ True | Immutable$ True
+SVar:DBFinalReset:DB$ StoreSVar | SVar$ NumPlayerGiveup | Type$ Number | Expression$ 0 | SubAbility$ DBExileEffect
+SVar:DBExileEffect:DB$ ChangeZone | Defined$ Imprinted | Origin$ Command | Destination$ Exile | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+SVar:NumPlayerGiveup:Number$0
+SVar:TotalPlayer:PlayerCountPlayers$Amount
+SVar:LifeTotal:PlayerCountRemembered$LifeTotal
+SVar:LifePaidAmount:ImprintedLKI$FilterControlledByRemembered_CardCounters.PLAGUE
+SVar:X:Count$ChosenNumber
+AI:RemoveDeck:Random
+Oracle:Starting with you, each player may pay any amount of life. Repeat this process until no one pays life. Each player creates a 1/1 black Rat creature token for each 1 life they paid this way.
