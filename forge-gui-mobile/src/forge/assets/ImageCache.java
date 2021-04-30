@@ -70,21 +70,25 @@ public class ImageCache {
     // short prefixes to save memory
 
     private static final Set<String> missingIconKeys = new HashSet<>();
-    private static final LoadingCache<String, Texture> cache = CacheBuilder.newBuilder()
-            .maximumSize(Forge.cacheSize)
-            .expireAfterAccess(15, TimeUnit.MINUTES)
-            .removalListener(new RemovalListener<String, Texture>() {
-                @Override
-                public void onRemoval(RemovalNotification<String, Texture> removalNotification) {
-                    if (removalNotification.wasEvicted()) {
-                        if (removalNotification.getValue() != ImageCache.defaultImage)
-                            removalNotification.getValue().dispose();
+    private static LoadingCache<String, Texture> cache;
+    public static void initCache(int capacity) {
+        cache = CacheBuilder.newBuilder()
+                .maximumSize(capacity)
+                .expireAfterAccess(15, TimeUnit.MINUTES)
+                .removalListener(new RemovalListener<String, Texture>() {
+                    @Override
+                    public void onRemoval(RemovalNotification<String, Texture> removalNotification) {
+                        if (removalNotification.wasEvicted()) {
+                            if (removalNotification.getValue() != ImageCache.defaultImage)
+                                removalNotification.getValue().dispose();
 
-                        CardRenderer.clearcardArtCache();
+                            CardRenderer.clearcardArtCache();
+                        }
                     }
-                }
-            })
-            .build(new ImageLoader());
+                })
+                .build(new ImageLoader());
+        System.out.println("Card Texture Cache Size: "+capacity);
+    }
     private static final LoadingCache<String, Texture> otherCache = CacheBuilder.newBuilder().build(new OtherImageLoader());
     public static final Texture defaultImage;
     public static FImage BlackBorder = FSkinImage.IMG_BORDER_BLACK;
