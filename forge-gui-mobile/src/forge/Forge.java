@@ -149,10 +149,11 @@ public class Forge implements ApplicationListener {
 
         if (autoCache) {
             //increase cacheSize for devices with RAM more than 5GB, default is 400. Some phones have more than 10GB RAM (Mi 10, OnePlus 8, S20, etc..)
-            if (totalDeviceRAM>5000) //devices with more than 10GB RAM will have 1000 Cache size, 700 Cache size for morethan 5GB RAM
-                cacheSize = totalDeviceRAM>10000 ? 1000: 700;
+            if (totalDeviceRAM>5000) //devices with more than 10GB RAM will have 800 Cache size, 600 Cache size for morethan 5GB RAM
+                cacheSize = totalDeviceRAM>10000 ? 800: 600;
         }
-
+        //init cache
+        ImageCache.initCache(cacheSize);
         final Localizer localizer = Localizer.getInstance();
 
         //load model on background thread (using progress bar to report progress)
