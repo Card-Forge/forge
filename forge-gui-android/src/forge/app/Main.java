@@ -53,6 +53,8 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.util.FileUtil;
 import forge.util.ThreadUtil;
+import io.sentry.Sentry;
+import io.sentry.android.AndroidSentryClientFactory;
 
 public class Main extends AndroidApplication {
     AndroidAdapter Gadapter;
@@ -60,6 +62,10 @@ public class Main extends AndroidApplication {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Context ctx = this.getApplicationContext();
+        String sentryDsn = "https://a0b8dbad9b8a49cfa51bf65d462e8dae:b3f27d7461224cb8836eb5c6050c666c@sentry.cardforge.org/2?buffer.enabled=false";
+        //init Sentry
+        Sentry.init(sentryDsn, new AndroidSentryClientFactory(ctx));
         //get total device RAM in mb
         ActivityManager actManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
         ActivityManager.MemoryInfo memInfo = new ActivityManager.MemoryInfo();

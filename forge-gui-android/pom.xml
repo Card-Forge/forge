@@ -89,6 +89,11 @@
             <artifactId>gdx-backend-android</artifactId>
             <version>1.10.0</version>
         </dependency>
+        <dependency>
+            <groupId>io.sentry</groupId>
+            <artifactId>sentry-android</artifactId>
+            <version>1.7.30</version>
+        </dependency>
     </dependencies>
 
     <profiles>
