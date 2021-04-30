@@ -189,6 +189,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
     private static DeckEditorPage[] getPages(EditorType editorType) {
         final Localizer localizer = Localizer.getInstance();
+        boolean isLandscape = Forge.isLandscapeMode();
         switch (editorType) {
         default:
         case Constructed:
@@ -212,17 +213,27 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         case Commander:
         case TinyLeaders:
         case Brawl:
-            return new DeckEditorPage[] {
+            return isLandscape ? new DeckEditorPage[] {
                     new CatalogPage(ItemManagerConfig.CARD_CATALOG),
                     new DeckSectionPage(DeckSection.Commander, ItemManagerConfig.COMMANDER_SECTION),
                     new DeckSectionPage(DeckSection.Main),
                     new DeckSectionPage(DeckSection.Sideboard)
+            } : new DeckEditorPage[] {
+                    new CatalogPage(ItemManagerConfig.CARD_CATALOG),
+                    new DeckSectionPage(DeckSection.Main),
+                    new DeckSectionPage(DeckSection.Commander, ItemManagerConfig.COMMANDER_SECTION),
+                    new DeckSectionPage(DeckSection.Sideboard)
             };
         case Oathbreaker:
-            return new DeckEditorPage[] {
+            return isLandscape ? new DeckEditorPage[] {
                     new CatalogPage(ItemManagerConfig.CARD_CATALOG),
                     new DeckSectionPage(DeckSection.Commander, ItemManagerConfig.OATHBREAKER_SECTION, localizer.getMessage("lblOathbreaker"), FSkinImage.COMMANDER),
                     new DeckSectionPage(DeckSection.Main),
+                    new DeckSectionPage(DeckSection.Sideboard)
+            } : new DeckEditorPage[] {
+                    new CatalogPage(ItemManagerConfig.CARD_CATALOG),
+                    new DeckSectionPage(DeckSection.Main),
+                    new DeckSectionPage(DeckSection.Commander, ItemManagerConfig.OATHBREAKER_SECTION, localizer.getMessage("lblOathbreaker"), FSkinImage.COMMANDER),
                     new DeckSectionPage(DeckSection.Sideboard)
             };
         case Archenemy:
@@ -242,16 +253,24 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.QUEST_DECK_EDITOR)
             };
         case QuestCommander:
-            return new DeckEditorPage[] {
+            return isLandscape ? new DeckEditorPage[] {
                     new CatalogPage(ItemManagerConfig.QUEST_EDITOR_POOL, localizer.getMessage("lblInventory"), FSkinImage.QUEST_BOX),
                     new DeckSectionPage(DeckSection.Commander, ItemManagerConfig.COMMANDER_SECTION),
                     new DeckSectionPage(DeckSection.Main, ItemManagerConfig.QUEST_DECK_EDITOR)
+            } : new DeckEditorPage[] {
+                    new CatalogPage(ItemManagerConfig.QUEST_EDITOR_POOL, localizer.getMessage("lblInventory"), FSkinImage.QUEST_BOX),
+                    new DeckSectionPage(DeckSection.Main, ItemManagerConfig.QUEST_DECK_EDITOR),
+                    new DeckSectionPage(DeckSection.Commander, ItemManagerConfig.COMMANDER_SECTION)
             };
         case PlanarConquest:
-            return new DeckEditorPage[] {
+            return isLandscape ? new DeckEditorPage[] {
                     new CatalogPage(ItemManagerConfig.CONQUEST_COLLECTION, localizer.getMessage("lblCollection"), FSkinImage.SPELLBOOK),
                     new DeckSectionPage(DeckSection.Commander, ItemManagerConfig.COMMANDER_SECTION),
                     new DeckSectionPage(DeckSection.Main, ItemManagerConfig.CONQUEST_DECK_EDITOR, localizer.getMessage("lblDeck"), Forge.hdbuttons ? FSkinImage.HDLIBRARY : FSkinImage.DECKLIST)
+            } : new DeckEditorPage[] {
+                    new CatalogPage(ItemManagerConfig.CONQUEST_COLLECTION, localizer.getMessage("lblCollection"), FSkinImage.SPELLBOOK),
+                    new DeckSectionPage(DeckSection.Main, ItemManagerConfig.CONQUEST_DECK_EDITOR, localizer.getMessage("lblDeck"), Forge.hdbuttons ? FSkinImage.HDLIBRARY : FSkinImage.DECKLIST),
+                    new DeckSectionPage(DeckSection.Commander, ItemManagerConfig.COMMANDER_SECTION)
             };
         }
     }
