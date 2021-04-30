@@ -19,7 +19,6 @@ package forge.card;
 
 import java.io.File;
 import java.io.FilenameFilter;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
