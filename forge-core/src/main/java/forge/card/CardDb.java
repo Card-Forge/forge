@@ -533,6 +533,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     @Override
     public int getPrintCount(String cardName, String edition) {
         int cnt = 0;
+        if (edition == null || cardName == null)
+            return cnt;
         for (PaperCard pc : getAllCards(cardName)) {
             if (pc.getEdition().equals(edition)) {
                 cnt++;
@@ -544,6 +546,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     @Override
     public int getMaxPrintCount(String cardName) {
         int max = -1;
+        if (cardName == null)
+            return max;
         for (PaperCard pc : getAllCards(cardName)) {
             if (max < pc.getArtIndex()) {
                 max = pc.getArtIndex();
@@ -555,6 +559,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     @Override
     public int getArtCount(String cardName, String setName) {
         int cnt = 0;
+        if (cardName == null || setName == null)
+            return cnt;
 
         Collection<PaperCard> cards = getAllCards(cardName);
         if (null == cards) {

@@ -256,7 +256,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             date = date + "-01";
         try {
             return formatter.parse(date);
-        } catch (ParseException e) {
+        } catch (Exception e) {
             return new Date();
         }
     }
