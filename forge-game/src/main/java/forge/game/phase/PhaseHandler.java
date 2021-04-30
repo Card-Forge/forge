@@ -162,6 +162,8 @@ public class PhaseHandler implements java.io.Serializable {
         boolean isTopsy = playerTurn.getAmountOfKeyword("The phases of your turn are reversed.") % 2 == 1;
         boolean turnEnded = false;
 
+        game.getStack().clearUndoStack(); //can't undo action from previous phase
+
         if (bRepeatCleanup) { // for when Cleanup needs to repeat itself
             bRepeatCleanup = false;
         }
@@ -183,6 +185,28 @@ public class PhaseHandler implements java.io.Serializable {
                 turnEnded = PhaseType.isLast(phase, isTopsy);
                 setPhase(PhaseType.getNext(phase, isTopsy));
             }
+
+            if (turnEnded) {
+                turn++;
+                extraPhases.clear();
+                game.updateTurnForView();
+                game.fireEvent(new GameEventTurnBegan(playerTurn, turn));
+
+                // Tokens starting game in play should suffer from Sum. Sickness
+                for (final Card c : playerTurn.getCardsIncludePhasingIn(ZoneType.Battlefield)) {
+                    if (playerTurn.getTurn() > 0 || !c.isStartsGameInPlay()) {
+                        c.setSickness(false);
+                    }
+                }
+                playerTurn.incrementTurn();
+
+                game.getAction().resetActivationsPerTurn();
+
+                final List<Card> lands = CardLists.filter(playerTurn.getLandsInPlay(), Presets.UNTAPPED);
+                playerTurn.setNumPowerSurgeLands(lands.size());
+            }
+            //update tokens
+            game.fireEvent(new GameEventTokenStateUpdate(playerTurn.getTokensInPlay()));
 
             // Replacement effects
             final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromAffected(playerTurn);
@@ -206,32 +230,7 @@ public class PhaseHandler implements java.io.Serializable {
             }
         }
 
-        game.getStack().clearUndoStack(); //can't undo action from previous phase
-
         String phaseType = oldPhase == phase ? "Repeat" : phase == PhaseType.getNext(oldPhase, isTopsy) ? "" : "Additional";
-
-        if (turnEnded) {
-            turn++;
-            extraPhases.clear();
-            game.updateTurnForView();
-            game.fireEvent(new GameEventTurnBegan(playerTurn, turn));
-
-            // Tokens starting game in play should suffer from Sum. Sickness
-            for (final Card c : playerTurn.getCardsIncludePhasingIn(ZoneType.Battlefield)) {
-                if (playerTurn.getTurn() > 0 || !c.isStartsGameInPlay()) {
-                    c.setSickness(false);
-                }
-            }
-            playerTurn.incrementTurn();
-
-            game.getAction().resetActivationsPerTurn();
-
-            final List<Card> lands = CardLists.filter(playerTurn.getLandsInPlay(), Presets.UNTAPPED);
-            playerTurn.setNumPowerSurgeLands(lands.size());
-        }
-        //update tokens
-        game.fireEvent(new GameEventTokenStateUpdate(playerTurn.getTokensInPlay()));
-
         game.fireEvent(new GameEventTurnPhase(playerTurn, phase, phaseType));
     }
 
