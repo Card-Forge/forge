@@ -472,7 +472,9 @@ public class Forge implements ApplicationListener {
         }
         catch (Exception ex) {
             graphics.end();
-            BugReporter.reportException(ex);
+            //check if sentry is enabled, if not it will call the gui interface but here we end the graphics so we only send it via sentry..
+            if (BugReporter.isSentryEnabled())
+                BugReporter.reportException(ex);
         } finally {
             if(dispose)
                 ImageCache.disposeTexture();
@@ -524,7 +526,9 @@ public class Forge implements ApplicationListener {
         }
         catch (Exception ex) {
             graphics.end();
-            BugReporter.reportException(ex);
+            //check if sentry is enabled, if not it will call the gui interface but here we end the graphics so we only send it via sentry..
+            if (BugReporter.isSentryEnabled())
+                BugReporter.reportException(ex);
         }
         if (showFPS)
             frameRate.render();
@@ -544,7 +548,9 @@ public class Forge implements ApplicationListener {
         }
         catch (Exception ex) {
             graphics.end();
-            BugReporter.reportException(ex);
+            //check if sentry is enabled, if not it will call the gui interface but here we end the graphics so we only send it via sentry..
+            if (BugReporter.isSentryEnabled())
+                BugReporter.reportException(ex);
         }
     }
 
