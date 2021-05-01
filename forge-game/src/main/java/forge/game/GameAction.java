@@ -934,6 +934,10 @@ public class GameAction {
             if (lki == null) {
                 lki = CardUtil.getLKICopy(c);
             }
+            // again, make sure no triggers run from cards leaving controlled by loser
+            if (lki.getController().equals(lki.getOwner())) {
+                lki.getCurrentState().clearTriggers();
+            }
             if (game.getCombat() != null) {
                 game.getCombat().removeFromCombat(c);
                 game.getCombat().saveLKI(lki);

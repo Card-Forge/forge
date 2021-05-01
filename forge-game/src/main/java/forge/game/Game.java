@@ -773,6 +773,7 @@ public class Game {
             // CR 800.4d if card is controlled by opponent, LTB should trigger
             if (c.getOwner().equals(p) && c.getController().equals(p)) {
                 c.getCurrentState().clearTriggers();
+                c.getGame().getTriggerHandler().clearActiveTriggers(c, null);
             }
         }
 
