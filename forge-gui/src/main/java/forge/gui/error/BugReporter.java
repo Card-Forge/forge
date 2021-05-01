@@ -98,7 +98,7 @@ public class BugReporter {
         }
     }
 
-    private static boolean isSentryEnabled() {
+    public static boolean isSentryEnabled() {
         return FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.USE_SENTRY);
     }
     /**
