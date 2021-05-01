@@ -813,6 +813,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                     activePlayerSAs.add(sa);
                 }
             } else {
+                if (activator.hasLost()) { // if there is some LTB trigger leftover, it needs to run NOW
+                    activator = activePlayer;
+                }
                 if (activator.equals(activePlayer)) {
                     activePlayerSAs.add(sa);
                 }
