@@ -172,7 +172,13 @@ public class GuiDownloadZipService extends GuiDownloadService {
                 }
             }
 
-            final ZipFile zipFile = new ZipFile(zipFilename, Charset.forName("IBM437"));
+            final Charset charset = Charset.forName("IBM437");
+            ZipFile zipFile;
+            try {
+                zipFile = new ZipFile(zipFilename, charset);
+            } catch (Throwable e) { //some older Android versions need the old method
+                zipFile = new ZipFile(zipFilename);
+            }
             final Enumeration<? extends ZipEntry> entries = zipFile.entries();
 
             progressBar.reset();
