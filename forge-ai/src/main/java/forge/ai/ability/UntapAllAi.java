@@ -8,6 +8,7 @@ import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -29,6 +30,10 @@ public class UntapAllAi extends SpellAbilityAi {
                 valid = sa.getParam("ValidCards");
             }
             list = CardLists.getValidCards(list, valid.split(","), source.getController(), source, sa);
+            // don't untap if only opponent benefits
+            PlayerCollection goodControllers = aiPlayer.getAllies();
+            goodControllers.add(aiPlayer);
+            list = CardLists.filter(list, CardPredicates.isControlledByAnyOf(goodControllers));
             return !list.isEmpty();
         }
         return false;
