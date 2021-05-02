@@ -270,7 +270,7 @@ public final class CMatchUI
      * View deck list.
      */
     public void viewDeckList() {
-        if (!isInGame()) {
+        if (!isInGame() || getCurrentPlayer() == null) {
             return;
         }
         final Deck deck = getGameView().getDeck(getCurrentPlayer());
