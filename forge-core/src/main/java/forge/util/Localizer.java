@@ -58,6 +58,14 @@ public class Localizer {
 		return StandardCharsets.UTF_8.name();
 	}
 
+	public String getMessage(final String key, String defaultValue, final Object... messageArguments) {
+		try {
+			return getMessage(key, messageArguments);
+		} catch (Exception e) {
+			return defaultValue;
+		}
+	}
+	//FIXME: localizer should return default value from english locale or it will crash some GUI element like the NewGameMenu->NewGameScreen Popup when returned null...
 	public String getMessage(final String key, final Object... messageArguments) {
 		MessageFormat formatter = null;
 
