@@ -938,7 +938,10 @@ public class GameAction {
                 game.getCombat().removeFromCombat(c);
                 game.getCombat().saveLKI(lki);
             }
-            game.getTriggerHandler().registerActiveLTBTrigger(lki);
+            // again, make sure no triggers run from cards leaving controlled by loser
+            if (!lki.getController().equals(lki.getOwner())) {
+                game.getTriggerHandler().registerActiveLTBTrigger(lki);
+            }
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
             runParams.put(AbilityKey.CardLKI, lki);
             runParams.put(AbilityKey.Origin, c.getZone().getZoneType().name());

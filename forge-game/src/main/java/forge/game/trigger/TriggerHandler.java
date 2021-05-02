@@ -59,9 +59,6 @@ public class TriggerHandler {
         game = gameState;
     }
 
-    public final void cleanUpTemporaryTriggers() {
-    }
-
     public final boolean hasDelayedTriggers() {
         return !delayedTriggers.isEmpty();
     }
