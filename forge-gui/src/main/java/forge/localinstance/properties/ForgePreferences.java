@@ -157,6 +157,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_DEFAULT_FONT_SIZE("12"),
     	UI_SELECT_FROM_CARD_DISPLAYS("true"),
         UI_FOR_TOUCHSCREN("false"),
+        UI_SWITCH_STATES_DECKVIEW("Always"),
 
         UI_VIBRATE_ON_LIFE_LOSS("true"),
         UI_VIBRATE_ON_LONG_PRESS("true"),

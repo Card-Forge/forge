@@ -143,6 +143,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final FComboBoxPanel<String> cbpGraveyardOrdering = new FComboBoxPanel<>(localizer.getMessage("cbpGraveyardOrdering")+":");
     private final FComboBoxPanel<String> cbpDefaultLanguage = new FComboBoxPanel<>(localizer.getMessage("cbpSelectLanguage")+":");
     private final FComboBoxPanel<String> cbpAutoUpdater = new FComboBoxPanel<>(localizer.getMessage("cbpAutoUpdater")+":");
+    private final FComboBoxPanel<String> cbpSwitchStates = new FComboBoxPanel<>(localizer.getMessage("cbpSwitchStates")+":");
 
     /**
      * Constructor.
@@ -383,6 +384,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbpDisplayCurrentCardColors, comboBoxConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlDisplayCurrentCardColors")), descriptionConstraints);
+
+        pnlPrefs.add(cbpSwitchStates, comboBoxConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlSwitchStates")), descriptionConstraints);
 
         // Sound options
         pnlPrefs.add(new SectionLabel(localizer.getMessage("SoundOptions")), sectionConstraints + ", gaptop 2%");
@@ -730,6 +734,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     public FComboBoxPanel<String> getDisplayColorIdentity() {
         return cbpDisplayCurrentCardColors;
+    }
+
+    public FComboBoxPanel<String> getSwitchStates() {
+        return cbpSwitchStates;
     }
 
     public FComboBoxPanel<CloseAction> getCloseActionComboBoxPanel() {

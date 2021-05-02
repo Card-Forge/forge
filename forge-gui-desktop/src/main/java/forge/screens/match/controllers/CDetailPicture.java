@@ -39,11 +39,15 @@ public class CDetailPicture {
         return cPicture;
     }
 
+    public void displayAlt(final boolean showAlt) {
+        isDisplayAlt = showAlt;
+    }
+
     public void showCard(final CardView c, final boolean showAlt) {
         currentView = c;
-        final boolean mayView = mayView(), mayFlip = mayView && mayFlip();
+        final boolean mayFlip = mayView() && mayFlip();
         isDisplayAlt = mayFlip && showAlt;
-        alwaysDisplayAlt = mayView && mayFlip && c.isFaceDown();
+        alwaysDisplayAlt = mayFlip && c.isFaceDown();
 
         update();
     }
@@ -65,7 +69,7 @@ public class CDetailPicture {
                     c.getCurrentState().setFoilIndexOverride(1);
                 }
             }
-            showCard(c, false);
+            showCard(c, isDisplayAlt);
         } else {
             currentView = null;
             isDisplayAlt = false;
