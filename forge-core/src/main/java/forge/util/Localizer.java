@@ -58,7 +58,7 @@ public class Localizer {
         return StandardCharsets.UTF_8.name();
     }
 
-    public String getMessage(final String key, String defaultValue, final Object... messageArguments) {
+    public String getMessageorUseDefault(final String key, final String defaultValue, final Object... messageArguments) {
         try {
             return getMessage(key, messageArguments);
         } catch (Exception e) {
