@@ -6476,6 +6476,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
         final Collection<SpellAbility> toRemove = Lists.newArrayListWithCapacity(abilities.size());
         for (final SpellAbility sa : abilities) {
+            Player oldController = sa.getActivatingPlayer();
             sa.setActivatingPlayer(player);
             // fix things like retrace
             // check only if SA can't be cast normally
@@ -6483,6 +6484,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 continue;
             }
             if ((removeUnplayable && !sa.canPlay()) || !sa.isPossible()) {
+                if (oldController != null) {
+                    // in case the ability is on the stack this should not change
+                    sa.setActivatingPlayer(oldController);
+                }
                 toRemove.add(sa);
             }
         }
