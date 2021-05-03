@@ -431,7 +431,7 @@ public class ReplacementHandler {
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(player);
         repParams.put(AbilityKey.Phase, phase);
         List<ReplacementEffect> list = getReplacementList(ReplacementType.BeginPhase, repParams, ReplacementLayer.Control);
-        if (!list.isEmpty()) {
+        if (list.isEmpty()) {
             return false;
         }
         return true;
