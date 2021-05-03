@@ -216,10 +216,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         if ("Always".equals(sa.getParam("AILogic"))) {
-            if (sa.getTrigger().getParam("TriggerDescription") != null && sa.getTrigger().getParam("TriggerDescription").contains("Partner with")) {
-                sa.resetTargets();
-                sa.getTargets().add(aiPlayer);
-            }
             return true;
         } else if ("IfNotBuffed".equals(sa.getParam("AILogic"))) {
             if (ComputerUtilCard.isUselessCreature(aiPlayer, sa.getHostCard())) {
