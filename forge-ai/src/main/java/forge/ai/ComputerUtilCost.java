@@ -3,6 +3,7 @@ package forge.ai;
 import java.util.List;
 import java.util.Set;
 
+import forge.game.ability.ApiType;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -557,7 +558,6 @@ public class ComputerUtilCost {
         boolean payForOwnOnly = "OnlyOwn".equals(aiLogic);
         boolean payOwner = sa.hasParam("UnlessAI") && aiLogic.startsWith("Defined");
         boolean payNever = "Never".equals(aiLogic);
-        boolean shockland = "Shockland".equals(aiLogic);
         boolean isMine = sa.getActivatingPlayer().equals(payer);
 
         if (payNever) { return false; }
@@ -572,26 +572,6 @@ public class ComputerUtilCost {
             if (sa.getHostCard() == null || payer.equals(sa.getHostCard().getController())) {
                 return false;
             }
-        } else if (shockland) {
-            if (payer.getLife() > 3 && payer.canPayLife(2)) {
-                final int landsize = payer.getLandsInPlay().size() + 1;
-                for (Card c : payer.getCardsIn(ZoneType.Hand)) {
-                    // if the new land size would equal the CMC of a card in AIs hand, consider playing it untapped,
-                    // otherwise don't bother running other checks
-                    if (landsize != c.getCMC()) {
-                        continue;
-                    }
-                    // try to determine in the AI is actually planning to play a spell ability from the card
-                    boolean willPlay = ComputerUtil.hasReasonToPlayCardThisTurn(payer, c);
-                    // try to determine if the mana shards provided by the lands would be applicable to pay the mana cost
-                    boolean canPay = c.getManaCost().canBePaidWithAvaliable(ColorSet.fromNames(getAvailableManaColors(payer, source)).getColor());
-
-                    if (canPay && willPlay) {
-                        return true;
-                    }
-                }
-            }
-            return false;
         } else if ("Paralyze".equals(aiLogic)) {
             final Card c = source.getEnchantingCard();
             if (c == null || c.isUntapped()) {
@@ -627,6 +607,29 @@ public class ComputerUtilCost {
             return false;
         } else if ("LowPriority".equals(aiLogic) && MyRandom.getRandom().nextInt(100) < 67) {
             return false;
+        }
+
+        // Check for shocklands and similar ETB replacement effects
+        if (sa.hasParam("ETB") && sa.getApi().equals(ApiType.Tap)) {
+            for (final CostPart part : cost.getCostParts()) {
+                if (part instanceof CostPayLife) {
+                    final CostPayLife lifeCost = (CostPayLife) part;
+                    Integer amount = lifeCost.convertAmount();
+                    if (payer.getLife() > (amount + 1) && payer.canPayLife(amount)) {
+                        final int landsize = payer.getLandsInPlay().size() + 1;
+                        for (Card c : payer.getCardsIn(ZoneType.Hand)) {
+                            // Check if the AI has enough lands to play the card
+                            if (landsize != c.getCMC()) {
+                                continue;
+                            }
+                            // Check if the AI intends to play the card and if it can pay for it with the mana it has
+                            boolean willPlay = ComputerUtil.hasReasonToPlayCardThisTurn(payer, c);
+                            boolean canPay = c.getManaCost().canBePaidWithAvaliable(ColorSet.fromNames(getAvailableManaColors(payer, source)).getColor());
+                            return canPay && willPlay;
+                        }
+                    }
+                }
+            }
         }
 
         // AI will only pay when it's not already payed and only opponents abilities
