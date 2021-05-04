@@ -2,6 +2,5 @@ Name:Watery Grave
 ManaCost:no cost
 Types:Land Island Swamp
 K:ETBReplacement:Other:DBTap
-SVar:DBTap:DB$ Tap | ETB$ True | Defined$ Self | UnlessCost$ PayLife<2> | UnlessPayer$ You | UnlessAI$ Shockland | StackDescription$ enters the battlefield tapped. | SpellDescription$ As CARDNAME enters the battlefield, you may pay 2 life. If you don't, it enters the battlefield tapped.
-SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card83731.jpg
+SVar:DBTap:DB$ Tap | ETB$ True | Defined$ Self | UnlessCost$ PayLife<2> | UnlessPayer$ You | UnlessAI$ UntapFor2 | StackDescription$ enters the battlefield tapped. | SpellDescription$ As CARDNAME enters the battlefield, you may pay 2 life. If you don't, it enters the battlefield tapped.
 Oracle:({T}: Add {U} or {B}.)\nAs Watery Grave enters the battlefield, you may pay 2 life. If you don't, it enters the battlefield tapped.

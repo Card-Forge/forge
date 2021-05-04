@@ -557,7 +557,7 @@ public class ComputerUtilCost {
         boolean payForOwnOnly = "OnlyOwn".equals(aiLogic);
         boolean payOwner = sa.hasParam("UnlessAI") && aiLogic.startsWith("Defined");
         boolean payNever = "Never".equals(aiLogic);
-        boolean shockland = "Shockland".equals(aiLogic);
+        boolean lifeUntap = aiLogic.startsWith("UntapFor");
         boolean isMine = sa.getActivatingPlayer().equals(payer);
 
         if (payNever) { return false; }
@@ -572,8 +572,10 @@ public class ComputerUtilCost {
             if (sa.getHostCard() == null || payer.equals(sa.getHostCard().getController())) {
                 return false;
             }
-        } else if (shockland) {
-            if (payer.getLife() > 3 && payer.canPayLife(2)) {
+        } else if (lifeUntap) {
+            final int needLife = Integer.parseInt(aiLogic.split("UntapFor")[1]);
+            System.out.println(needLife);
+            if (payer.getLife() > needLife && payer.canPayLife(needLife - 1)) {
                 final int landsize = payer.getLandsInPlay().size() + 1;
                 for (Card c : payer.getCardsIn(ZoneType.Hand)) {
                     // if the new land size would equal the CMC of a card in AIs hand, consider playing it untapped,
