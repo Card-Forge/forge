@@ -574,7 +574,6 @@ public class ComputerUtilCost {
             }
         } else if (lifeUntap) {
             final int needLife = Integer.parseInt(aiLogic.split("UntapFor")[1]);
-            System.out.println(needLife);
             if (payer.getLife() > needLife && payer.canPayLife(needLife - 1)) {
                 final int landsize = payer.getLandsInPlay().size() + 1;
                 for (Card c : payer.getCardsIn(ZoneType.Hand)) {
