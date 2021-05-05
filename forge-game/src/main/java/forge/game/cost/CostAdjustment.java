@@ -123,7 +123,7 @@ public class CostAdjustment {
             if ("Escalate".equals(amount)) {
                 SpellAbility sub = sa;
                 while(sub != null) {
-                    if (!sub.getSVar("CharmOrder").equals("")) {
+                    if (sub.getDirectSVars().containsKey("CharmOrder")) {
                         count++;
                     }
                     sub = sub.getSubAbility();
