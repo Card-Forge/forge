@@ -27,6 +27,7 @@ import forge.screens.FScreen;
 import forge.screens.TabPageScreen;
 import forge.screens.TabPageScreen.TabPage;
 import forge.screens.home.HomeScreen;
+import forge.screens.match.MatchController;
 import forge.sound.SoundSystem;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FGroupList;
@@ -248,8 +249,22 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     super.select();
                     //update
                     Forge.altPlayerLayout = FModel.getPreferences().getPrefBoolean(FPref.UI_ALT_PLAYERINFOLAYOUT);
+                    if (MatchController.instance != null)
+                        MatchController.instance.resetPlayerPanels();
                 }
             },1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_ALT_PLAYERZONETABS,
+                localizer.getMessage("lblAltZoneTabs"),
+                localizer.getMessage("nlAltZoneTabs")){
+            @Override
+            public void select() {
+                super.select();
+                //update
+                Forge.altZoneTabs = FModel.getPreferences().getPrefBoolean(FPref.UI_ALT_PLAYERZONETABS);
+                if (MatchController.instance != null)
+                    MatchController.instance.resetPlayerPanels();
+            }
+        },1);
 
         //Random Deck Generation
         lstSettings.addItem(new BooleanSetting(FPref.DECKGEN_NOSMALL,

@@ -68,6 +68,7 @@ public class Forge implements ApplicationListener {
     private static boolean isloadingaMatch = false;
     public static boolean showFPS = false;
     public static boolean altPlayerLayout = false;
+    public static boolean altZoneTabs = false;
     public static String enableUIMask = "Crop";
     public static boolean enablePreloadExtendedArt = false;
     public static boolean isTabletDevice = false;
@@ -136,6 +137,7 @@ public class Forge implements ApplicationListener {
         textureFiltering = prefs.getPrefBoolean(FPref.UI_LIBGDX_TEXTURE_FILTERING);
         showFPS = prefs.getPrefBoolean(FPref.UI_SHOW_FPS);
         altPlayerLayout = prefs.getPrefBoolean(FPref.UI_ALT_PLAYERINFOLAYOUT);
+        altZoneTabs = prefs.getPrefBoolean(FPref.UI_ALT_PLAYERZONETABS);
         enableUIMask = prefs.getPref(FPref.UI_ENABLE_BORDER_MASKING);
         if (prefs.getPref(FPref.UI_ENABLE_BORDER_MASKING).equals("true")) //override old settings if not updated
             enableUIMask = "Full";

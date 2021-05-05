@@ -535,6 +535,13 @@ public class MatchScreen extends FScreen {
         }
     }
 
+    public void forceRevalidate() {
+        for (VPlayerPanel playerPanel : getPlayerPanels().values()) {
+            playerPanel.revalidate(true);
+
+        }
+    }
+
     public void updateZones(final Iterable<PlayerZoneUpdate> zonesToUpdate) {
         for (final PlayerZoneUpdate update : zonesToUpdate) {
             final PlayerView owner = update.getPlayer();

@@ -30,6 +30,7 @@ import forge.util.Utils;
 
 public class VPlayerPanel extends FContainer {
     private static final FSkinFont LIFE_FONT = FSkinFont.get(18);
+    private static final FSkinFont LIFE_FONT_ALT = FSkinFont.get(22);
     private static final FSkinFont INFO_FONT = FSkinFont.get(12);
     private static final FSkinFont INFO2_FONT = FSkinFont.get(14);
     private static final FSkinColor INFO_FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
@@ -114,6 +115,18 @@ public class VPlayerPanel extends FContainer {
         }
 
         return null;
+    }
+
+    private boolean isAltZoneDisplay(InfoTab tab) {
+        if (tab.getIcon() == FSkinImage.HDHAND || tab.getIcon() == FSkinImage.HAND)
+            return true;
+        if (tab.getIcon() == FSkinImage.HDGRAVEYARD || tab.getIcon() == FSkinImage.GRAVEYARD)
+            return true;
+        if (tab.getIcon() == FSkinImage.HDLIBRARY || tab.getIcon() == FSkinImage.LIBRARY)
+            return true;
+        if (tab.getIcon() == FSkinImage.HDEXILE || tab.getIcon() == FSkinImage.EXILE)
+            return true;
+        return false;
     }
 
     public void setSelectedZone(ZoneType zoneType) {
@@ -281,33 +294,51 @@ public class VPlayerPanel extends FContainer {
                 child.setTop(height - child.getBottom());
             }
         }
+
+        //this is used for landscape so set this to 0
+        field.setFieldModifier(0);
     }
 
     private void doLandscapeLayout(float width, float height) {
         float x = 0;
         float y = 0;
+        float yAlt = 0;
+        float avatarWidth = Forge.altZoneTabs ? avatar.getWidth() : 0;
         avatar.setPosition(x, y);
         y += avatar.getHeight();
 
-        lblLife.setBounds(x, Forge.altPlayerLayout ? 0 : y, avatar.getWidth(), Forge.altPlayerLayout ? INFO_FONT.getLineHeight() : LIFE_FONT.getLineHeight());
-        if (Forge.altPlayerLayout) {
+        lblLife.setBounds(x, (Forge.altPlayerLayout && !Forge.altZoneTabs) ? 0 : y, avatar.getWidth(), (Forge.altPlayerLayout && !Forge.altZoneTabs) ? INFO_FONT.getLineHeight() : Forge.altZoneTabs ? LIFE_FONT_ALT.getLineHeight() : LIFE_FONT.getLineHeight());
+        if (Forge.altPlayerLayout && !Forge.altZoneTabs) {
             if (adjustHeight > 2)
                 y += INFO_FONT.getLineHeight()/2;
         } else
             y += lblLife.getHeight();
 
         float infoTabWidth = avatar.getWidth();
-        float infoTabHeight = (height - y) / tabs.size();
+        int tabSize = !Forge.altZoneTabs ? tabs.size() : tabs.size() - 4;
+        float infoTabHeight = (height - y) / tabSize;
+        float infoTabHeightAlt = (height - yAlt) / 4;
+
         for (InfoTab tab : tabs) {
-            tab.setBounds(x, y, infoTabWidth, infoTabHeight);
-            y += infoTabHeight;
+            if (!Forge.altZoneTabs) {
+                tab.setBounds(x, y, infoTabWidth, infoTabHeight);
+                y += infoTabHeight;
+            } else {
+                if (!isAltZoneDisplay(tab)) {
+                    tab.setBounds(x, y, infoTabWidth, infoTabHeight);
+                    y += infoTabHeight;
+                } else {
+                    tab.setBounds(x+width-avatarWidth, yAlt, avatarWidth, infoTabHeightAlt);
+                    yAlt += infoTabHeightAlt;
+                }
+            }
         }
         x = avatar.getRight();
         phaseIndicator.resetFont();
         phaseIndicator.setBounds(x, 0, avatar.getWidth() * 0.6f, height);
         x += phaseIndicator.getWidth();
 
-        float fieldWidth = width - x;
+        float fieldWidth = width - x - avatarWidth;
         float displayAreaWidth = height / FCardPanel.ASPECT_RATIO;
         if (selectedTab != null) {
             fieldWidth -= displayAreaWidth;
@@ -331,10 +362,15 @@ public class VPlayerPanel extends FContainer {
 
         field.setBounds(x, 0, fieldWidth, height);
 
-        x = width - displayAreaWidth;
+        x = width - displayAreaWidth-avatarWidth;
         for (InfoTab tab : tabs) {
             tab.displayArea.setBounds(x, 0, displayAreaWidth, height);
         }
+
+        if (!Forge.altZoneTabs)
+            field.setFieldModifier(0);
+        else
+            field.setFieldModifier(avatarWidth);
     }
 
     @Override
@@ -419,7 +455,7 @@ public class VPlayerPanel extends FContainer {
         public void draw(Graphics g) {
             adjustHeight = 1;
             float divider = Gdx.app.getGraphics().getHeight() > 900 ? 1.2f : 2f;
-            if(Forge.altPlayerLayout && Forge.isLandscapeMode()) {
+            if(Forge.altPlayerLayout && !Forge.altZoneTabs && Forge.isLandscapeMode()) {
                 if (poisonCounters == 0 && energyCounters == 0 && experienceCounters == 0) {
                     g.fillRect(Color.DARK_GRAY, 0, 0, INFO2_FONT.getBounds(lifeStr).width+1, INFO2_FONT.getBounds(lifeStr).height+1);
                     g.drawText(lifeStr, INFO2_FONT, INFO_FORE_COLOR.getColor(), 0, 0, getWidth(), getHeight(), false, Align.left, false);
@@ -453,7 +489,7 @@ public class VPlayerPanel extends FContainer {
                 }
             } else {
                 if (poisonCounters == 0 && energyCounters == 0) {
-                    g.drawText(lifeStr, LIFE_FONT, INFO_FORE_COLOR, 0, 0, getWidth(), getHeight(), false, Align.center, true);
+                    g.drawText(lifeStr, Forge.altZoneTabs ? LIFE_FONT_ALT : LIFE_FONT, INFO_FORE_COLOR, 0, 0, getWidth(), getHeight(), false, Align.center, true);
                 } else {
                     float halfHeight = getHeight() / 2;
                     float textStart = halfHeight + Utils.scale(1);

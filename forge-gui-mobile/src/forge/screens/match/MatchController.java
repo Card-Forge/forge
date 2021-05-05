@@ -474,6 +474,11 @@ public class MatchController extends AbstractGuiGame {
         //view = null;
     }
 
+    public void resetPlayerPanels() {
+        if (view != null)
+            view.forceRevalidate();
+    }
+
     private static void actuateMatchPreferences() {
         final ForgePreferences prefs = FModel.getPreferences();
 
