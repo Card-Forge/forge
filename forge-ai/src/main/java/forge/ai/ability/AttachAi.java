@@ -740,10 +740,9 @@ public class AttachAi extends SpellAbilityAi {
 
         if ("Guilty Conscience".equals(sourceName)) {
             chosen = SpecialCardAi.GuiltyConscience.getBestAttachTarget(ai, sa, list);
-        } else {
+        } else if (sa.hasParam("AIValid")) {
             // TODO: Make the AI recognize which cards to pump based on the card's abilities alone
-            final String quality = sa.getParam("AILogic").split("_")[1];
-            chosen = doPumpOrCurseAILogic(ai, sa, list, quality);
+            chosen = doPumpOrCurseAILogic(ai, sa, list, sa.getParam("AIValid"));
         }
 
         // If Mandatory (brought directly into play without casting) gotta
@@ -1459,7 +1458,7 @@ public class AttachAi extends SpellAbilityAi {
         // changed to represent that
         final List<Card> prefList;
 
-        if ("Reanimate".equals(logic) || logic.startsWith("SpecificCard")) {
+        if ("Reanimate".equals(logic) || "SpecificCard".equals(logic)) {
             // Reanimate or SpecificCard aren't so restrictive
             prefList = list;
         } else {
@@ -1496,7 +1495,7 @@ public class AttachAi extends SpellAbilityAi {
             c = attachAIAnimatePreference(sa, prefList, mandatory, attachSource);
         } else if ("Reanimate".equals(logic)) {
             c = attachAIReanimatePreference(sa, prefList, mandatory, attachSource);
-        } else if (logic.startsWith("SpecificCard")) {
+        } else if ("SpecificCard".equals(logic)) {
             c = attachAISpecificCardPreference(sa, prefList, mandatory, attachSource);
         } else if ("HighestEvaluation".equals(logic)) {
             c = attachAIHighestEvaluationPreference(prefList);
