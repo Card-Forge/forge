@@ -55,7 +55,7 @@ public abstract class SpellAbilityEffect {
     public abstract void resolve(SpellAbility sa);
 
     protected String getStackDescription(final SpellAbility sa) {
-        // Unless overriden, let the spell description also be the stack description
+        // Unless overridden, let the spell description also be the stack description
         return sa.getDescription();
     }
 
@@ -217,7 +217,6 @@ public abstract class SpellAbilityEffect {
         return useTargets ? Lists.newArrayList(sa.getTargets().getTargetSpells())
                 : AbilityUtils.getDefinedSpellAbilities(sa.getHostCard(), sa.getParam(definedParam), sa);
     }
-
 
     // Targets of card or player type
     protected final static List<GameEntity> getTargetEntities(final SpellAbility sa) {                                return getEntities(false, "Defined",    sa); }

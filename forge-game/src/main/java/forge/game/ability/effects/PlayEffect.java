@@ -40,6 +40,10 @@ import forge.util.Lang;
 import forge.util.Localizer;
 
 public class PlayEffect extends SpellAbilityEffect {
+    private Card tgtCard;
+
+    public Card getTgtCard() { return tgtCard; }
+
     @Override
     protected String getStackDescription(final SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
@@ -181,7 +185,7 @@ public class PlayEffect extends SpellAbilityEffect {
         final CardCollection saidNoTo = new CardCollection();
         while (tgtCards.size() > saidNoTo.size() && saidNoTo.size() < amount && amount > 0) {
             activator.getController().tempShowCards(showCards);
-            Card tgtCard = controller.getController().chooseSingleEntityForEffect(tgtCards, sa, Localizer.getInstance().getMessage("lblSelectCardToPlay"), null);
+            tgtCard = controller.getController().chooseSingleEntityForEffect(tgtCards, sa, Localizer.getInstance().getMessage("lblSelectCardToPlay"), null);
             activator.getController().endTempShowCards();
             if (tgtCard == null) {
                 break;
