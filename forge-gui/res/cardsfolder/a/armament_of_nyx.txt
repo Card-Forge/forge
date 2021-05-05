@@ -2,8 +2,7 @@ Name:Armament of Nyx
 ManaCost:2 W
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ Curse | AITgts$ Creature.nonEnchantment+OppCtrl
+A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ SpecificCard | AIValid$ Enchantment
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+Enchantment | AddKeyword$ Double Strike | Description$ Enchanted creature has double strike as long as it's an enchantment. Otherwise, prevent all damage that would be dealt by enchanted creature.
 R:Event$ DamageDone | Prevent$ True | ValidSource$ Creature.EnchantedBy+nonEnchantment | Secondary$ True | Description$ Otherwise, prevent all damage that would be dealt by enchanted creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/armament_of_nyx.jpg
 Oracle:Enchant creature\nEnchanted creature has double strike as long as it's an enchantment. Otherwise, prevent all damage that would be dealt by enchanted creature. (A creature with double strike deals both first-strike and regular combat damage.)

@@ -2,9 +2,7 @@ Name:Serra's Boon
 ManaCost:2 W
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ SpecificCard | AIValid$ Card.White
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+White | AddPower$ 1 | AddToughness$ 2 | Description$ Enchanted creature gets +1/+2 as long as it's white.
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+nonWhite | AddPower$ -2 | AddToughness$ -1 | Description$ Otherwise, it gets -2/-1.
-AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/serras_boon.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+2 as long as it's white. Otherwise, it gets -2/-1.
