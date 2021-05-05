@@ -734,17 +734,16 @@ public class AttachAi extends SpellAbilityAi {
      */
     private static Card attachAISpecificCardPreference(final SpellAbility sa, final List<Card> list, final boolean mandatory,
             final Card attachSource) {
-        // I know this isn't much better than Hardcoding, but some cards need it for now
         final Player ai = sa.getActivatingPlayer();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         Card chosen = null;
 
         if ("Guilty Conscience".equals(sourceName)) {
             chosen = SpecialCardAi.GuiltyConscience.getBestAttachTarget(ai, sa, list);
-        } else if ("Bonds of Faith".equals(sourceName)) {
-            chosen = doPumpOrCurseAILogic(ai, sa, list, "Human");
-        } else if ("Clutch of Undeath".equals(sourceName)) {
-            chosen = doPumpOrCurseAILogic(ai, sa, list, "Zombie");
+        } else {
+            // TODO: Make the AI recognize which cards to pump based on the card's abilities alone
+            final String quality = sa.getParam("AILogic").split("_")[1];
+            chosen = doPumpOrCurseAILogic(ai, sa, list, quality);
         }
 
         // If Mandatory (brought directly into play without casting) gotta
@@ -1460,7 +1459,7 @@ public class AttachAi extends SpellAbilityAi {
         // changed to represent that
         final List<Card> prefList;
 
-        if ("Reanimate".equals(logic) || "SpecificCard".equals(logic)) {
+        if ("Reanimate".equals(logic) || logic.startsWith("SpecificCard")) {
             // Reanimate or SpecificCard aren't so restrictive
             prefList = list;
         } else {
@@ -1497,7 +1496,7 @@ public class AttachAi extends SpellAbilityAi {
             c = attachAIAnimatePreference(sa, prefList, mandatory, attachSource);
         } else if ("Reanimate".equals(logic)) {
             c = attachAIReanimatePreference(sa, prefList, mandatory, attachSource);
-        } else if ("SpecificCard".equals(logic)) {
+        } else if (logic.startsWith("SpecificCard")) {
             c = attachAISpecificCardPreference(sa, prefList, mandatory, attachSource);
         } else if ("HighestEvaluation".equals(logic)) {
             c = attachAIHighestEvaluationPreference(prefList);
@@ -1699,7 +1698,7 @@ public class AttachAi extends SpellAbilityAi {
                 if (!c.getController().equals(ai)) {
                     return false;
                 }
-                return c.getType().hasCreatureType(type);
+                return c.isValid(type, ai, sa.getHostCard(), sa);
             }
         });
         List<Card> oppNonType = CardLists.filter(list, new Predicate<Card>() {
@@ -1709,7 +1708,7 @@ public class AttachAi extends SpellAbilityAi {
                 if (c.getController().equals(ai)) {
                     return false;
                 }
-                return !c.getType().hasCreatureType(type) && !ComputerUtilCard.isUselessCreature(ai, c);
+                return !c.isValid(type, ai, sa.getHostCard(), sa) && !ComputerUtilCard.isUselessCreature(ai, c);
             }
         });
 
