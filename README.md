@@ -2,7 +2,7 @@
 
 [Official GitLab repo](https://git.cardforge.org/core-developers/forge).
 
-Dev instructions here: [Getting Started](https://www.slightlymagic.net/wiki/Forge:How_to_Get_Started_Developing_Forge) (Somewhat outdated)
+Dev instructions here: [Getting Started](https://git.cardforge.org/core-developers/forge/-/wikis/(SM-autoconverted)-how-to-get-started-developing-forge) (Somewhat outdated)
 
 Discord channel [here](https://discordapp.com/channels/267367946135928833/267742313390931968)
 
@@ -168,11 +168,11 @@ The resulting snapshot will be found at: forge-gui-desktop/target/forge-gui-desk
 
 ## IntelliJ
 
-Quick start guide for [setting up the Forge project within IntelliJ](https://git.cardforge.org/core-developers/forge/wikis/intellij-setup).
+Quick start guide for [setting up the Forge project within IntelliJ](https://git.cardforge.org/core-developers/forge/-/wikis/Development/intellij-setup).
 
 ## Card Scripting
 
-Visit [this page](https://www.slightlymagic.net/wiki/Forge_API) for information on scripting.
+Visit [this page](https://git.cardforge.org/core-developers/forge/-/wikis/Card-scripting-API/Card-scripting-API) for information on scripting.
 
 Card scripting resources are found in the forge-gui/res/ path.
 
