@@ -280,7 +280,7 @@ public class ComputerUtil {
         SpellAbility newSA = sa.copyWithNoManaCost();
         newSA.setActivatingPlayer(ai);
 
-        if (!CostPayment.canPayAdditionalCosts(newSA.getPayCosts(), newSA)) {
+        if (!CostPayment.canPayAdditionalCosts(newSA.getPayCosts(), newSA) || !ComputerUtilMana.payManaCost(ai, newSA)) {
             return false;
         }
 
