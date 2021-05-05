@@ -240,7 +240,7 @@ public class StaticEffect {
             // remove keywords
             // (Although nothing uses it at this time)
             if (hasParam("AddKeyword") || hasParam("RemoveKeyword")
-                    || hasParam("RemoveAllAbilities")) {
+                    || hasParam("RemoveAllAbilities") || hasParam("RemoveLandTypes")) {
                 affectedCard.removeChangedCardKeywords(getTimestamp());
             }
 
