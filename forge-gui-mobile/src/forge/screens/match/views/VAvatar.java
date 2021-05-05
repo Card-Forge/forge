@@ -70,7 +70,7 @@ public class VAvatar extends FDisplayObject {
         float h = getHeight();
         g.drawImage(image, 0, 0, w, h);
 
-        if (Forge.altPlayerLayout && Forge.isLandscapeMode())
+        if (Forge.altPlayerLayout && !Forge.altZoneTabs && Forge.isLandscapeMode())
             return;
 
         //display XP in lower right corner of avatar
