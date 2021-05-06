@@ -52,9 +52,10 @@ public class ClashEffect extends SpellAbilityEffect {
         runParams.put(AbilityKey.Player, player);
         runParams.put(AbilityKey.Won, player.equals(winner) ? "True" : "False");
         sa.getHostCard().getGame().getTriggerHandler().runTrigger(TriggerType.Clashed, runParams, false);
-        runParams.put(AbilityKey.Player, opponent);
-        runParams.put(AbilityKey.Won, opponent.equals(winner) ? "True" : "False");
-        sa.getHostCard().getGame().getTriggerHandler().runTrigger(TriggerType.Clashed, runParams, false);
+        final Map<AbilityKey, Object> runParams2 = AbilityKey.newMap();
+        runParams2.put(AbilityKey.Player, opponent);
+        runParams2.put(AbilityKey.Won, opponent.equals(winner) ? "True" : "False");
+        sa.getHostCard().getGame().getTriggerHandler().runTrigger(TriggerType.Clashed, runParams2, false);
     }
 
     /**
