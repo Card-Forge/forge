@@ -7,11 +7,11 @@ MciCode=afr
 Type=Expansion
 
 [cards]
-33 C Portable Hole
+33 U Portable Hole
 114 U Power Word Kill
 124 R Vorpal Sword
 200 U Prosperous Innkeeper
-236 M Tiamat
+235 M Tiamat
 265 L Plains
 269 L Island
 273 L Swamp
