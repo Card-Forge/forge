@@ -388,6 +388,8 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
     }
     //simple check for cardview needed on some special renderer for cards
     private boolean showAlternate(CardView cardView, String value){
+        if(cardView == null)
+            return false;
         boolean showAlt = false;
         if(cardView.hasAlternateState()){
             if(cardView.hasBackSide())
