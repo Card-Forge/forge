@@ -597,4 +597,12 @@
 2021-04-22 Pioneer Preliminary (9 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2021-04-22-pioneer-preliminary.zip
 2021-04-23 Pioneer Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2021-04-23-pioneer-preliminary.zip
 2021-04-24 Pioneer Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2021-04-24-pioneer-preliminary.zip
-2021-04-25 Pioneer Challenge (0 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2021-04-25-pioneer-challenge.zip
+2021-04-29 Pioneer League (21 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2021-04-29-pioneer-league.zip
+2021-04-29 Pioneer Preliminary (9 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2021-04-29-pioneer-preliminary.zip
+2021-04-30 Pioneer Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2021-04-30-pioneer-preliminary.zip
+2021-05-01 Pioneer Preliminary (6 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2021-05-01-pioneer-preliminary.zip
+2021-05-02 Pioneer Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2021-05-02-pioneer-challenge.zip
+2021-05-02 Pioneer Champ Qual (32 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2021-05-02-pioneer-champ-qual.zip
+2021-05-03 Pioneer Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2021-05-03-pioneer-challenge.zip
+2021-05-03 Pioneer League (27 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2021-05-03-pioneer-league.zip
+2021-05-05 Pioneer Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/pioneer/2021-05-05-pioneer-preliminary.zip
