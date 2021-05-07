@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 import java.util.List;
+import java.util.Map;
 
 import forge.ai.AiAttackController;
 import forge.ai.ComputerUtilCost;
@@ -123,7 +124,7 @@ public class DigUntilAi extends SpellAbilityAi {
      * @see forge.card.ability.SpellAbilityAi#confirmAction(forge.card.spellability.SpellAbility, forge.game.player.PlayerActionConfirmMode, java.lang.String)
      */
     @Override
-    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
         if (sa.hasParam("AILogic")) {
             final String logic = sa.getParam("AILogic");
             if ("OathOfDruids".equals(logic)) {

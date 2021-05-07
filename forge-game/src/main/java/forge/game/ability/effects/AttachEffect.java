@@ -90,7 +90,7 @@ public class AttachEffect extends SpellAbilityEffect {
         // If Cast Targets will be checked on the Stack
         for (final Card attachment : attachments) {
             String message = Localizer.getInstance().getMessage("lblDoYouWantAttachSourceToTarget", CardTranslation.getTranslatedName(attachment.getName()), attachToName);
-            if ( sa.hasParam("Optional") && !p.getController().confirmAction(sa, null, message) )
+            if ( sa.hasParam("Optional") && !p.getController().confirmAction(sa, null, message, null) )
                 continue;
             handleAttachment(attachment, attachTo, sa);
         }

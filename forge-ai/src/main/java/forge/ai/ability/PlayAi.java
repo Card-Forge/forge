@@ -29,7 +29,6 @@ import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
-import forge.game.ability.effects.PlayEffect;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityPredicates;
@@ -164,9 +163,9 @@ public class PlayAi extends SpellAbilityAi {
      * @see forge.card.ability.SpellAbilityAi#confirmAction(forge.game.player.Player, forge.card.spellability.SpellAbility, forge.game.player.PlayerActionConfirmMode, java.lang.String)
      */
     @Override
-    public boolean confirmAction(Player ai, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
+    public boolean confirmAction(Player ai, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
         // as called from PlayEffect
-        return chooseSingleCard(ai, sa, new CardCollection(((PlayEffect)(sa.getApi().getSpellEffect())).getTgtCard()), true, ai, null) != null;
+        return chooseSingleCard(ai, sa, new CardCollection((Card) params.get("Card")), true, ai, null) != null;
     }
     
     /* (non-Javadoc)

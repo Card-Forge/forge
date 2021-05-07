@@ -61,7 +61,7 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
             }
             
             if( doReveal && sa.hasParam("RevealOptional") )
-                doReveal = peekingPlayer.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblRevealCardToOtherPlayers"));
+                doReveal = peekingPlayer.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblRevealCardToOtherPlayers"), null);
             
             if (doReveal) {
                 peekingPlayer.getGame().getAction().reveal(revealableCards, peekingPlayer);

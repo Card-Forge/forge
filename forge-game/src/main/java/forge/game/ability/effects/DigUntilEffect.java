@@ -119,7 +119,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
                 continue;
             }
             if (!sa.usesTargeting() || p.canBeTargetedBy(sa)) {
-                if (optional && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantDigYourLibrary"))) {
+                if (optional && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantDigYourLibrary"), null)) {
                     continue;
                 }
                 CardCollection found = new CardCollection();
@@ -171,7 +171,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
                         final Card c = itr.next();
                         final ZoneType origin = c.getZone().getZoneType();
                         if (optionalFound && !p.getController().confirmAction(sa, null,
-                                Localizer.getInstance().getMessage("lblDoYouWantPutCardToZone", foundDest.getTranslatedName()))) {
+                                Localizer.getInstance().getMessage("lblDoYouWantPutCardToZone", foundDest.getTranslatedName()), null)) {
                             continue;
                         } else {
                             Card m = null;

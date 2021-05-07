@@ -137,7 +137,7 @@ public class CopySpellAbilityAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
         // Chain of Acid requires special attention here since otherwise the AI will confirm the copy and then
         // run into the necessity of confirming a mandatory Destroy, thus destroying all of its own permanents.
         if ("ChainOfAcid".equals(sa.getParam("AILogic"))) {

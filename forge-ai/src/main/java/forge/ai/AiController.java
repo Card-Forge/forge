@@ -1281,7 +1281,7 @@ public class AiController {
         return discardList;
     }
 
-    public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message) {
+    public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
         ApiType api = sa.getApi();
 
         // Abilities without api may also use this routine, However they should provide a unique mode value ?? How could this work?
@@ -1290,7 +1290,7 @@ public class AiController {
                     mode);
             throw new IllegalArgumentException(exMsg);
         }
-        return SpellApiToAi.Converter.get(api).confirmAction(player, sa, mode, message);
+        return SpellApiToAi.Converter.get(api).confirmAction(player, sa, mode, message, params);
     }
 
     public boolean confirmBidAction(SpellAbility sa, PlayerActionConfirmMode mode, String message, int bid, Player winner) {

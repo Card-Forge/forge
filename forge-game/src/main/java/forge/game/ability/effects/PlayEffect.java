@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -10,6 +11,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import forge.GameCommand;
 import forge.StaticData;
@@ -40,10 +42,6 @@ import forge.util.Lang;
 import forge.util.Localizer;
 
 public class PlayEffect extends SpellAbilityEffect {
-    private Card tgtCard;
-
-    public Card getTgtCard() { return tgtCard; }
-
     @Override
     protected String getStackDescription(final SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
@@ -185,7 +183,7 @@ public class PlayEffect extends SpellAbilityEffect {
         final CardCollection saidNoTo = new CardCollection();
         while (tgtCards.size() > saidNoTo.size() && saidNoTo.size() < amount && amount > 0) {
             activator.getController().tempShowCards(showCards);
-            tgtCard = controller.getController().chooseSingleEntityForEffect(tgtCards, sa, Localizer.getInstance().getMessage("lblSelectCardToPlay"), null);
+            Card tgtCard = controller.getController().chooseSingleEntityForEffect(tgtCards, sa, Localizer.getInstance().getMessage("lblSelectCardToPlay"), null);
             activator.getController().endTempShowCards();
             if (tgtCard == null) {
                 break;
@@ -203,7 +201,9 @@ public class PlayEffect extends SpellAbilityEffect {
                 game.getAction().revealTo(tgtCard, activator);
             }
 
-            if (optional && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantPlayCard", CardTranslation.getTranslatedName(tgtCard.getName())))) {
+            Map<String, Object> params = Maps.newHashMap();
+            params.put("Card", tgtCard);
+            if (optional && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantPlayCard", CardTranslation.getTranslatedName(tgtCard.getName())), params)) {
                 if (wasFaceDown) {
                     tgtCard.turnFaceDownNoUpdate();
                 }

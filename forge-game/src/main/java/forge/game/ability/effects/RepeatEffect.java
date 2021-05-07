@@ -121,7 +121,7 @@ public class RepeatEffect extends SpellAbilityEffect {
             Player decider = sa.hasParam("RepeatOptionalDecider")
                     ? AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("RepeatOptionalDecider"), sa).get(0)
                     : sa.getActivatingPlayer();
-            return decider.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantRepeatProcessAgain"));
+            return decider.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantRepeatProcessAgain"), null);
         }
 
         return true;

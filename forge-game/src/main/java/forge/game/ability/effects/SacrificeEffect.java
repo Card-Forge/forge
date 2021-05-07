@@ -41,7 +41,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
         if (sa.hasParam("Echo")) {
             boolean isPaid;
             if (activator.hasKeyword("You may pay 0 rather than pay the echo cost for permanents you control.")
-                    && activator.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantPayEcho") + " {0}?")) {
+                    && activator.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantPayEcho") + " {0}?", null)) {
                 isPaid = true;
             } else {
                 isPaid = activator.getController().payManaOptional(card, new Cost(sa.getParam("Echo"), true),
@@ -128,7 +128,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
 
                 if (sa.hasParam("Random")) {
                     choosenToSacrifice = Aggregates.random(validTargets, Math.min(amount, validTargets.size()), new CardCollection());
-                } else if (sa.hasParam("OptionalSacrifice") && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantSacrifice"))) {
+                } else if (sa.hasParam("OptionalSacrifice") && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantSacrifice"), null)) {
                     choosenToSacrifice = CardCollection.EMPTY;
                 } else {
                     boolean isOptional = sa.hasParam("Optional");

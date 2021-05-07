@@ -1,6 +1,8 @@
 package forge.ai.ability;
 
 
+import java.util.Map;
+
 import forge.ai.AiAttackController;
 import forge.ai.AiController;
 import forge.ai.ComputerUtilCost;
@@ -38,7 +40,7 @@ public class RepeatAi extends SpellAbilityAi {
     }
     
     @Override
-    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
       //TODO add logic to have computer make better choice (ArsenalNut)
         return false;
     }
