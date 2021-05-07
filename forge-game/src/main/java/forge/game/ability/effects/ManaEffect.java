@@ -166,7 +166,8 @@ public class ManaEffect extends SpellAbilityEffect {
                     abMana.setExpressChoice(sb.toString());
                 } else if (type.startsWith("EachColorAmong")) {
                     final String res = type.split("_")[1];
-                    final CardCollection list = CardLists.getValidCards(card.getGame().getCardsIn(ZoneType.Battlefield),
+                    final ZoneType zone = type.startsWith("EachColorAmong_") ? ZoneType.Battlefield : ZoneType.smartValueOf(type.split("_")[0].substring(14));
+                    final CardCollection list = CardLists.getValidCards(card.getGame().getCardsIn(zone),
                             res, sa.getActivatingPlayer(), card, sa);
                     byte colors = 0;
                     for (Card c : list) {

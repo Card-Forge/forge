@@ -1,0 +1,7 @@
+Name:Portable Hole
+ManaCost:W
+Types:Artifact
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target nonland permanent an opponent controls with mana value 2 or less until CARDNAME leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Permanent.nonLand+OppCtrl+cmcLE2 | TgtPrompt$ Select target nonland permanent an opponent controls with mana value 2 or less | Origin$ Battlefield | Destination$ Exile | UntilHostLeavesPlay$ True
+SVar:PlayMain1:TRUE
+Oracle:When Portable Hole enters the battlefield, exile target nonland permanent an opponent controls with mana value 2 or less until Portable Hole leaves the battlefield.

@@ -111,6 +111,7 @@ Graveborn:Graveborn
 Gremlin:Gremlins
 Griffin:Griffins
 Hag:Hags
+Halfling:Halflings
 Harpy:Harpies
 Hellion:Hellions
 Hippo:Hippos
