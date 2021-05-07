@@ -6,7 +6,6 @@ Code2=AFR
 MciCode=afr
 Type=Expansion
 
-
 [cards]
 33 C Portable Hole
 114 U Power Word Kill
