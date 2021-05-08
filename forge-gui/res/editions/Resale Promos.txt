@@ -23,6 +23,7 @@ Type=Promos
 49 R Curator of Mysteries
 100 R Etali, Primal Storm
 123 R Beast Whisperer
+140 R Neheb, Dreadhorde Champion
 141 R Goblin Chieftain
 147 R Bristling Hydra
 149 R Atarka, World Render
