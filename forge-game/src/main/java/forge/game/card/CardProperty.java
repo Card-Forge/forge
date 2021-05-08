@@ -3,6 +3,7 @@ package forge.game.card;
 import java.util.Collections;
 import java.util.List;
 
+import forge.card.mana.ManaCostParser;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Iterables;
@@ -1465,6 +1466,12 @@ public class CardProperty {
             x = AbilityUtils.calculateAmount(source, rhs, spellAbility);
 
             if (!Expressions.compare(y, property, x)) {
+                return false;
+            }
+        }
+
+        else if (property.startsWith("ManaCost")) {
+            if (!card.getManaCost().getShortString().equals(property.substring(8))) {
                 return false;
             }
         }

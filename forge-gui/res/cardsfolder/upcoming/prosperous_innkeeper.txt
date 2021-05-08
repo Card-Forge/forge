@@ -1,0 +1,10 @@
+Name:Prosperous Innkeeper
+ManaCost:1 G
+Types:Creature Halfling Citizen
+PT:1/1
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac
+T:Mode$ ChangesZone | ValidCard$ Creature.Other+YouCtrl | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever another creature enters the battlefield under your control, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1
+DeckHas:Ability$Token & Ability$LifeGain
+Oracle:When Prosperous Innkeeper enters the battlefield, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")\nWhenever another creature enters the battlefield under your control, you gain 1 life.

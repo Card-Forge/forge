@@ -1,0 +1,9 @@
+Name:Tiamat
+ManaCost:2 W U B R G
+Types:Legendary Creature Dragon God
+PT:7/7
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self+wasCast | Destination$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it, search your library for up to five Dragon cards not named Tiamat that each have different names, reveal them, put them into your hand, then shuffle.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.notnamedTiamat | ChangeNum$ 5 | DifferentNames$ True
+DeckNeeds:Type$Dragon
+Oracle:Flying\nWhen Tiamat enters the battlefield, if you cast it, search your library for up to five Dragon cards not named Tiamat that each have different names, reveal them, put them into your hand, then shuffle.
