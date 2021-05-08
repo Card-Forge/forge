@@ -342,7 +342,8 @@ public class ReplacementHandler {
             final String question = replacementEffect instanceof ReplaceDiscard
                 ? Localizer.getInstance().getMessage("lblApplyCardReplacementEffectToCardConfirm", CardTranslation.getTranslatedName(cardForUi.getName()), runParams.get(AbilityKey.Card).toString(), effectDesc)
                 : Localizer.getInstance().getMessage("lblApplyReplacementEffectOfCardConfirm", CardTranslation.getTranslatedName(cardForUi.getName()), effectDesc);
-            boolean confirmed = optDecider.getController().confirmReplacementEffect(replacementEffect, effectSA, question);
+            GameEntity affected = (GameEntity) runParams.get(AbilityKey.Affected);
+            boolean confirmed = optDecider.getController().confirmReplacementEffect(replacementEffect, effectSA, affected, question);
             if (!confirmed) {
                 return ReplacementResult.NotReplaced;
             }

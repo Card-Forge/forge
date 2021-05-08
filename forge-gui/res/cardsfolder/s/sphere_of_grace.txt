@@ -1,7 +1,7 @@
 Name:Sphere of Grace
 ManaCost:3 W
 Types:Enchantment
-S:Mode$ PreventDamage | Target$ You | Source$ Card.BlackSource | Amount$ 2 | Description$ If a black source would deal damage to you, prevent 2 of that damage.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.BlackSource | ValidTarget$ You | ReplaceWith$ DBReplace | PreventionEffect$ True | Description$ If a black source would deal damage to you, prevent 2 of that damage.
+SVar:DBReplace:DB$ ReplaceDamage | Amount$ 2
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sphere_of_grace.jpg
 Oracle:If a black source would deal damage to you, prevent 2 of that damage.

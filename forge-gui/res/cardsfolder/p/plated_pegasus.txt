@@ -4,6 +4,6 @@ Types:Creature Pegasus
 PT:1/2
 K:Flash
 K:Flying
-S:Mode$ PreventDamage | Target$ Permanent,Player | Source$ Spell | Amount$ 1 | Description$ If a spell would deal damage to a permanent or player, prevent 1 damage that spell would deal to that permanent or player.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/plated_pegasus.jpg
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Spell | ValidTarget$ Permanent,Player | ReplaceWith$ DBReplace | PreventionEffect$ True | Description$ If a spell would deal damage to a permanent or player, prevent 1 damage that spell would deal to that permanent or player.
+SVar:DBReplace:DB$ ReplaceDamage | Amount$ 1
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nFlying\nIf a spell would deal damage to a permanent or player, prevent 1 damage that spell would deal to that permanent or player.

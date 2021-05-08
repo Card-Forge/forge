@@ -729,13 +729,6 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         int restDamage = damage;
 
-        // Prevent Damage static abilities
-        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
-            for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                restDamage = stAb.applyAbility("PreventDamage", source, this, restDamage, isCombat, isTest);
-            }
-        }
-
         if (restDamage > 0) {
             return restDamage;
         }

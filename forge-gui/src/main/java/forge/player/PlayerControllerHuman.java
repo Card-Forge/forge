@@ -1345,7 +1345,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
      */
     @Override
     public boolean confirmReplacementEffect(final ReplacementEffect replacementEffect, final SpellAbility effectSA,
-            final String question) {
+        GameEntity affected, final String question) {
         final InputConfirm inp = new InputConfirm(this, question, effectSA);
         inp.showAndWait();
         return inp.getResult();

@@ -1307,15 +1307,6 @@ public class AiController {
     }
 
     public boolean confirmStaticApplication(Card hostCard, GameEntity affected, String logic, String message) {
-        if (logic.equalsIgnoreCase("ProtectFriendly")) {
-            final Player controller = hostCard.getController();
-            if (affected instanceof Player) {
-                return !((Player) affected).isOpponentOf(controller);
-            }
-            if (affected instanceof Card) {
-                return !((Card) affected).getController().isOpponentOf(controller);
-            }
-        }
         return true;
     }
 
@@ -1759,12 +1750,21 @@ public class AiController {
      * @param sa the sa
      * @return true, if successful
      */
-    public final boolean aiShouldRun(final ReplacementEffect effect, final SpellAbility sa) {
+    public final boolean aiShouldRun(final ReplacementEffect effect, final SpellAbility sa, GameEntity affected) {
         Card hostCard = effect.getHostCard();
         if (hostCard.hasAlternateState()) {
             hostCard = game.getCardState(hostCard);
         }
 
+        if (effect.hasParam("AILogic") && effect.getParam("AILogic").equalsIgnoreCase("ProtectFriendly")) {
+            final Player controller = hostCard.getController();
+            if (affected instanceof Player) {
+                return !((Player) affected).isOpponentOf(controller);
+            }
+            if (affected instanceof Card) {
+                return !((Card) affected).getController().isOpponentOf(controller);
+            }
+        }
         if (effect.hasParam("AICheckSVar")) {
             System.out.println("aiShouldRun?" + sa);
             final String svarToCheck = effect.getParam("AICheckSVar");
