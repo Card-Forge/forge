@@ -568,8 +568,8 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public boolean confirmReplacementEffect(ReplacementEffect replacementEffect, SpellAbility effectSA, String question) {
-        return brains.aiShouldRun(replacementEffect, effectSA);
+    public boolean confirmReplacementEffect(ReplacementEffect replacementEffect, SpellAbility effectSA, GameEntity affected, String question) {
+        return brains.aiShouldRun(replacementEffect, effectSA, affected);
     }
 
     @Override

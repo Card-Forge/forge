@@ -287,41 +287,6 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         return getParam("Mode").equals("Continuous") && layers.contains(layer) && !isSuppressed() && checkConditions() && (previousRun || getHostCard().getStaticAbilities().contains(this));
     }
 
-    // apply the ability if it has the right mode
-    /**
-     * Apply ability.
-     *
-     * @param mode
-     *            the mode
-     * @param source
-     *            the source
-     * @param target
-     *            the target
-     * @param in
-     *            the in
-     * @param isCombat
-     *            the b
-     * @return the int
-     */
-    public final int applyAbility(final String mode, final Card source, final GameEntity target, final int in,
-            final boolean isCombat, final boolean isTest) {
-
-        // don't apply the ability if it hasn't got the right mode
-        if (!getParam("Mode").equals(mode)) {
-            return in;
-        }
-
-        if (this.isSuppressed() || !this.checkConditions()) {
-            return in;
-        }
-
-        if (mode.equals("PreventDamage")) {
-            return StaticAbilityPreventDamage.applyPreventDamageAbility(this, source, target, in, isCombat, isTest);
-        }
-
-        return in;
-    }
-
     /**
      * Apply ability.
      *

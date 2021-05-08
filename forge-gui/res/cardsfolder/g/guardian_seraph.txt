@@ -3,6 +3,6 @@ ManaCost:2 W W
 Types:Creature Angel
 PT:3/4
 K:Flying
-S:Mode$ PreventDamage | Target$ You | Source$ Card.OppCtrl | Amount$ 1 | Description$ If a source an opponent controls would deal damage to you, prevent 1 of that damage.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/guardian_seraph.jpg
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.OppCtrl,Emblem.OppCtrl | ValidTarget$ You | ReplaceWith$ DBReplace | PreventionEffect$ True | Description$ If a source an opponent controls would deal damage to you, prevent 1 of that damage.
+SVar:DBReplace:DB$ ReplaceDamage | Amount$ 1
 Oracle:Flying\nIf a source an opponent controls would deal damage to you, prevent 1 of that damage.

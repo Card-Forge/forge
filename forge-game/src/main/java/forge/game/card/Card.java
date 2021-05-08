@@ -5222,12 +5222,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return 0;
         }
 
-        // Prevent Damage static abilities
-        for (final Card ca : getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
-            for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                restDamage = stAb.applyAbility("PreventDamage", source, this, restDamage, isCombat, isTest);
-            }
-        }
         return restDamage > 0 ? restDamage : 0;
     }
 

@@ -2,9 +2,8 @@ Name:Dark Sphere
 ManaCost:0
 Types:Artifact
 A:AB$ ChooseSource | Cost$ T Sac<1/CARDNAME> | Choices$ Card | RememberChosen$ True | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ The next time a source of your choice would deal damage to you this turn, prevent half that damage, rounded down.
-SVar:DBEffect:DB$ Effect | Triggers$ DamageDealt | StaticAbilities$ StaticPrevent | RememberObjects$ Remembered
-SVar:StaticPrevent:Mode$ PreventDamage | Source$ Card.IsRemembered | Target$ You | Amount$ HalfDown | EffectZone$ Command | Description$ The next time a source of your choice would deal damage to you this turn, prevent half that damage, rounded down.
-SVar:DamageDealt:Mode$ DamageDone | ValidSource$ Card.IsRemembered | ValidTarget$ You | Execute$ ExileEffect | Static$ True
-SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dark_sphere.jpg
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | ReplacementEffects$ DBPrevent | ForgetOnMoved$ Battlefield
+SVar:DBPrevent:Event$ DamageDone | ActiveZones$ Command | ValidSource$ Card.IsRemembered | ValidTarget$ You | ReplaceWith$ DBReplace | PreventionEffect$ True | Description$ The next time a source of your choice would deal damage to you this turn, prevent half that damage, rounded down.
+SVar:DBReplace:DB$ ReplaceDamage | Amount$ ShieldAmount
+SVar:ShieldAmount:ReplaceCount$DamageAmount/HalfDown
 Oracle:{T}, Sacrifice Dark Sphere: The next time a source of your choice would deal damage to you this turn, prevent half that damage, rounded down.
