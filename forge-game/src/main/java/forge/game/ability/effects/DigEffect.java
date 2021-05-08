@@ -124,8 +124,8 @@ public class DigEffect extends SpellAbilityEffect {
             if (!top.isEmpty()) {
                 DelayedReveal delayedReveal = null;
                 boolean hasRevealed = true;
-                if (sa.hasParam("Reveal")) {
-                    game.getAction().reveal(top, p, false);
+                if (sa.hasParam("Reveal") && "True".equalsIgnoreCase(sa.getParam("Reveal"))) {
+                        game.getAction().reveal(top, p, false);
                 }
                 else if (sa.hasParam("RevealOptional")) {
                     String question = TextUtil.concatWithSpace(Localizer.getInstance().getMessage("lblReveal") + ":", TextUtil.addSuffix(Lang.joinHomogenous(top),"?"));
