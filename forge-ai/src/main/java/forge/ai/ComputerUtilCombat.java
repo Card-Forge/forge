@@ -2256,11 +2256,12 @@ public class ComputerUtilCombat {
      * @return a int.
      */
     public final static int getDamageToKill(final Card c) {
-        int killDamage = c.getLethalDamage() + c.getPreventNextDamageTotalShields();
+        int damageShield = c.getPreventNextDamageTotalShields();
+        int killDamage = c.getLethalDamage() + damageShield;
 
-        if ((killDamage > c.getPreventNextDamageTotalShields())
+        if ((killDamage > damageShield)
                 && c.hasSVar("DestroyWhenDamaged")) {
-            killDamage = 1 + c.getPreventNextDamageTotalShields();
+            killDamage = 1 + damageShield;
         }
 
         return killDamage;

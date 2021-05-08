@@ -1,20 +1,16 @@
 package forge.game.ability.effects;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
-import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardUtil;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
-public class DamagePreventEffect extends SpellAbilityEffect {
+public class DamagePreventEffect extends DamagePreventEffectBase {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
@@ -73,69 +69,25 @@ public class DamagePreventEffect extends SpellAbilityEffect {
         final CardCollection untargetedCards = CardUtil.getRadiance(sa);
 
         final boolean targeted = (sa.usesTargeting());
-        final boolean preventionWithEffect = sa.hasParam("PreventionSubAbility");
 
         for (final GameObject o : tgts) {
             numDam = (sa.usesTargeting() && sa.isDividedAsYouChoose()) ? sa.getDividedValue(o) : numDam;
             if (o instanceof Card) {
                 final Card c = (Card) o;
                 if (c.isInPlay() && (!targeted || c.canBeTargetedBy(sa))) {
-                    if (preventionWithEffect) {
-                        Map<String, String> effectMap = new TreeMap<>();
-                        effectMap.put("EffectString", sa.getSVar(sa.getParam("PreventionSubAbility")));
-                        effectMap.put("ShieldAmount", String.valueOf(numDam));
-                        if (sa.hasParam("ShieldEffectTarget")) {
-                            String effTgtString = "";
-                            List<GameObject> effTgts = new ArrayList<>();
-                            effTgts = AbilityUtils.getDefinedObjects(host, sa.getParam("ShieldEffectTarget"), sa);
-                            for (final Object effTgt : effTgts) {
-                                if (effTgt instanceof Card) {
-                                    effTgtString = String.valueOf(((Card) effTgt).getId());
-                                    effectMap.put("ShieldEffectTarget", "CardUID_" + effTgtString);
-                                } else if (effTgt instanceof Player) {
-                                    effTgtString = ((Player) effTgt).getName();
-                                    effectMap.put("ShieldEffectTarget", "PlayerNamed_" + effTgtString);
-                                }
-                            }
-                        }
-                        c.addPreventNextDamageWithEffect(host, effectMap);
-                    } else {
-                        c.addPreventNextDamage(numDam);
-                    }
+                    addPreventNextDamage(sa, o, numDam);
                 }
-
             } else if (o instanceof Player) {
                 final Player p = (Player) o;
                 if (!targeted || p.canBeTargetedBy(sa)) {
-                    if (preventionWithEffect) {
-                        Map<String, String> effectMap = new TreeMap<>();
-                        effectMap.put("EffectString", sa.getSVar(sa.getParam("PreventionSubAbility")));
-                        effectMap.put("ShieldAmount", String.valueOf(numDam));
-                        if (sa.hasParam("ShieldEffectTarget")) {
-                            String effTgtString = "";
-                            List<GameObject> effTgts = new ArrayList<>();
-                            effTgts = AbilityUtils.getDefinedObjects(host, sa.getParam("ShieldEffectTarget"), sa);
-                            for (final Object effTgt : effTgts) {
-                                if (effTgt instanceof Card) {
-                                    effTgtString = String.valueOf(((Card) effTgt).getId());
-                                    effectMap.put("ShieldEffectTarget", "CardUID_" + effTgtString);
-                                } else if (effTgt instanceof Player) {
-                                    effTgtString = ((Player) effTgt).getName();
-                                    effectMap.put("ShieldEffectTarget", "PlayerNamed_" + effTgtString);
-                                }
-                            }
-                        }
-                        p.addPreventNextDamageWithEffect(host, effectMap);
-                    } else {
-                        p.addPreventNextDamage(numDam);
-                    }
+                    addPreventNextDamage(sa, o, numDam);
                 }
             }
         }
 
         for (final Card c : untargetedCards) {
             if (c.isInPlay()) {
-                c.addPreventNextDamage(numDam);
+                addPreventNextDamage(sa, c, numDam);
             }
         }
     } // preventDamageResolve

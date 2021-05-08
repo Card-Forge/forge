@@ -31,7 +31,6 @@ import java.util.Map.Entry;
 import java.util.NavigableMap;
 import java.util.Set;
 import java.util.SortedSet;
-import java.util.TreeMap;
 import java.util.concurrent.ConcurrentSkipListMap;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -837,83 +836,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         }
 
-        return restDamage;
-    }
-
-    protected int preventShieldEffect(final int damage) {
-        if (damage <= 0) {
-            return 0;
-        }
-
-        int restDamage = damage;
-
-        boolean DEBUGShieldsWithEffects = false;
-        while (!getPreventNextDamageWithEffect().isEmpty() && restDamage != 0) {
-            Map<Card, Map<String, String>> shieldMap = getPreventNextDamageWithEffect();
-            CardCollection preventionEffectSources = new CardCollection(shieldMap.keySet());
-            Card shieldSource = preventionEffectSources.get(0);
-            if (preventionEffectSources.size() > 1) {
-                Map<String, Card> choiceMap = new TreeMap<>();
-                List<String> choices = new ArrayList<>();
-                for (final Card key : preventionEffectSources) {
-                    String effDesc = shieldMap.get(key).get("EffectString");
-                    int descIndex = effDesc.indexOf("SpellDescription");
-                    effDesc = effDesc.substring(descIndex + 18);
-                    String shieldDescription = key.toString() + " - " + shieldMap.get(shieldSource).get("ShieldAmount")
-                            + " shields - " + effDesc;
-                    choices.add(shieldDescription);
-                    choiceMap.put(shieldDescription, key);
-                }
-                shieldSource = getController().chooseProtectionShield(this, choices, choiceMap);
-            }
-            if (DEBUGShieldsWithEffects) {
-                System.out.println("Prevention shield source: " + shieldSource);
-            }
-
-            int shieldAmount = Integer.valueOf(shieldMap.get(shieldSource).get("ShieldAmount"));
-            int dmgToBePrevented = Math.min(restDamage, shieldAmount);
-            if (DEBUGShieldsWithEffects) {
-                System.out.println("Selected source initial shield amount: " + shieldAmount);
-                System.out.println("Incoming damage: " + restDamage);
-                System.out.println("Damage to be prevented: " + dmgToBePrevented);
-            }
-
-            //Set up ability
-            SpellAbility shieldSA = null;
-            String effectAbString = shieldMap.get(shieldSource).get("EffectString");
-            effectAbString = TextUtil.fastReplace(effectAbString, "PreventedDamage", Integer.toString(dmgToBePrevented));
-            effectAbString = TextUtil.fastReplace(effectAbString, "ShieldEffectTarget", shieldMap.get(shieldSource).get("ShieldEffectTarget"));
-            if (DEBUGShieldsWithEffects) {
-                System.out.println("Final shield ability string: " + effectAbString);
-            }
-            shieldSA = AbilityFactory.getAbility(effectAbString, shieldSource);
-            if (shieldSA.usesTargeting()) {
-                System.err.println(shieldSource + " - Targeting for prevention shield's effect should be done with initial spell");
-            }
-
-            boolean apiIsEffect = (shieldSA.getApi() == ApiType.Effect);
-            CardCollectionView cardsInCommand = null;
-            if (apiIsEffect) {
-                cardsInCommand = getGame().getCardsIn(ZoneType.Command);
-            }
-
-            getController().playSpellAbilityNoStack(shieldSA, true);
-            if (apiIsEffect) {
-                CardCollection newCardsInCommand = new CardCollection(getGame().getCardsIn(ZoneType.Command));
-                newCardsInCommand.removeAll(cardsInCommand);
-                if (!newCardsInCommand.isEmpty()) {
-                    newCardsInCommand.get(0).setSVar("PreventedDamage", "Number$" + dmgToBePrevented);
-                }
-            }
-            subtractPreventNextDamageWithEffect(shieldSource, restDamage);
-            restDamage = restDamage - dmgToBePrevented;
-
-            if (DEBUGShieldsWithEffects) {
-                System.out.println("Remaining shields: "
-                        + (shieldMap.containsKey(shieldSource) ? shieldMap.get(shieldSource).get("ShieldAmount") : "all shields used"));
-                System.out.println("Remaining damage: " + restDamage);
-            }
-        }
         return restDamage;
     }
 
@@ -2597,8 +2519,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         for (final PlayerZone pz : zones.values()) {
             pz.resetCardsAddedThisTurn();
         }
-        resetPreventNextDamage();
-        resetPreventNextDamageWithEffect();
         resetNumDrawnThisTurn();
         resetNumDiscardedThisTurn();
         resetNumForetoldThisTurn();

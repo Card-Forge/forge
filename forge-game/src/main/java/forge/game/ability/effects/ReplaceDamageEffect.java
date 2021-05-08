@@ -29,7 +29,7 @@ public class ReplaceDamageEffect extends SpellAbilityEffect {
 
         final ReplacementType event = sa.getReplacementEffect().getMode();
         
-        String varValue = sa.getParamOrDefault("VarName", "1");
+        String varValue = sa.getParamOrDefault("Amount", "1");
 
         @SuppressWarnings("unchecked")
         Map<AbilityKey, Object> originalParams = (Map<AbilityKey, Object>) sa.getReplacingObject(AbilityKey.OriginalParams);
@@ -51,6 +51,8 @@ public class ReplaceDamageEffect extends SpellAbilityEffect {
             } else if (!StringUtils.isNumeric(varValue)) {
                 card.setSVar(varValue, "Number$" + prevent);
             }
+            // Set PreventedDamage SVar for PreventionSubAbility
+            card.setSVar("PreventedDamage", "Number$" + n);
         }
 
         // no damage for original target anymore
