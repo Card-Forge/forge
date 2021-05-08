@@ -29,11 +29,13 @@ import com.google.common.collect.Sets;
 
 import forge.game.CardTraitBase;
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.GameLogEntryType;
 import forge.game.IHasSVars;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardState;
@@ -435,5 +437,40 @@ public class ReplacementHandler {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Helper function to get total prevention shield amount (limited to "prevent next N damage effects")
+     * @param o Affected game entity object
+     * @return total shield amount
+     */
+    public int getTotalPreventionShieldAmount(GameEntity o) {
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(o);
+        repParams.put(AbilityKey.Prevention, true);
+        repParams.put(AbilityKey.DamageAmount, 1);
+        List<ReplacementEffect> list = getReplacementList(ReplacementType.DamageDone, repParams, ReplacementLayer.Other);
+        if (list.isEmpty()) {
+            return 0;
+        }
+        int totalAmount = 0;
+        for (ReplacementEffect re : list) {
+            if (re.getOverridingAbility() != null) {
+                SpellAbility sa = re.getOverridingAbility();
+                if (ApiType.ReplaceDamage == sa.getApi() && sa.hasParam("Amount")) {
+                    String varValue = sa.getParam("Amount");
+                    if (StringUtils.isNumeric(varValue)) {
+                        totalAmount += Integer.parseInt(varValue);
+                    } else {
+                        varValue = sa.getSVar(varValue);
+                        if (StringUtils.isNumeric(varValue)) {
+                            totalAmount += Integer.parseInt(varValue);
+                        } else if (varValue.startsWith("Number$")) {
+                            totalAmount += Integer.parseInt(varValue.substring(7));
+                        }
+                    }
+                }
+            }
+        }
+        return totalAmount;
     }
 }

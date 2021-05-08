@@ -5231,83 +5231,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return restDamage > 0 ? restDamage : 0;
     }
 
-    protected int preventShieldEffect(final int damage) {
-        if (damage <= 0) {
-            return 0;
-        }
-
-        int restDamage = damage;
-
-        boolean DEBUGShieldsWithEffects = false;
-        while (!getPreventNextDamageWithEffect().isEmpty() && restDamage != 0) {
-            Map<Card, Map<String, String>> shieldMap = getPreventNextDamageWithEffect();
-            CardCollectionView preventionEffectSources = new CardCollection(shieldMap.keySet());
-            Card shieldSource = preventionEffectSources.get(0);
-            if (preventionEffectSources.size() > 1) {
-                Map<String, Card> choiceMap = Maps.newTreeMap();
-                List<String> choices = Lists.newArrayList();
-                for (final Card key : preventionEffectSources) {
-                    String effDesc = shieldMap.get(key).get("EffectString");
-                    int descIndex = effDesc.indexOf("SpellDescription");
-                    effDesc = effDesc.substring(descIndex + 18);
-                    String shieldDescription = key.toString() + " - " + shieldMap.get(key).get("ShieldAmount")
-                            + " shields - " + effDesc;
-                    choices.add(shieldDescription);
-                    choiceMap.put(shieldDescription, key);
-                }
-                shieldSource = getController().getController().chooseProtectionShield(this, choices, choiceMap);
-            }
-            if (DEBUGShieldsWithEffects) {
-                System.out.println("Prevention shield source: " + shieldSource);
-            }
-
-            int shieldAmount = Integer.valueOf(shieldMap.get(shieldSource).get("ShieldAmount"));
-            int dmgToBePrevented = Math.min(restDamage, shieldAmount);
-            if (DEBUGShieldsWithEffects) {
-                System.out.println("Selected source initial shield amount: " + shieldAmount);
-                System.out.println("Incoming damage: " + restDamage);
-                System.out.println("Damage to be prevented: " + dmgToBePrevented);
-            }
-
-            //Set up ability
-            SpellAbility shieldSA;
-            String effectAbString = shieldMap.get(shieldSource).get("EffectString");
-            effectAbString = TextUtil.fastReplace(effectAbString, "PreventedDamage", Integer.toString(dmgToBePrevented));
-            effectAbString = TextUtil.fastReplace(effectAbString, "ShieldEffectTarget", shieldMap.get(shieldSource).get("ShieldEffectTarget"));
-            if (DEBUGShieldsWithEffects) {
-                System.out.println("Final shield ability string: " + effectAbString);
-            }
-            shieldSA = AbilityFactory.getAbility(effectAbString, shieldSource);
-            if (shieldSA.usesTargeting()) {
-                System.err.println(shieldSource + " - Targeting for prevention shield's effect should be done with initial spell");
-            }
-
-            boolean apiIsEffect = (shieldSA.getApi() == ApiType.Effect);
-            CardCollectionView cardsInCommand = null;
-            if (apiIsEffect) {
-                cardsInCommand = getGame().getCardsIn(ZoneType.Command);
-            }
-
-            getController().getController().playSpellAbilityNoStack(shieldSA, true);
-            if (apiIsEffect) {
-                CardCollection newCardsInCommand = (CardCollection)getGame().getCardsIn(ZoneType.Command);
-                newCardsInCommand.removeAll(cardsInCommand);
-                if (!newCardsInCommand.isEmpty()) {
-                    newCardsInCommand.get(0).setSVar("PreventedDamage", "Number$" + dmgToBePrevented);
-                }
-            }
-            subtractPreventNextDamageWithEffect(shieldSource, restDamage);
-            restDamage = restDamage - dmgToBePrevented;
-
-            if (DEBUGShieldsWithEffects) {
-                System.out.println("Remaining shields: "
-                    + (shieldMap.containsKey(shieldSource) ? shieldMap.get(shieldSource).get("ShieldAmount") : "all shields used"));
-                System.out.println("Remaining damage: " + restDamage);
-            }
-        }
-        return restDamage;
-    }
-
     // This is used by the AI to forecast an effect (so it must not change the game state)
     @Override
     public final int staticReplaceDamage(final int damage, final Card source, final boolean isCombat) {
@@ -6205,8 +6128,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public void onCleanupPhase(final Player turn) {
         setDamage(0);
         setHasBeenDealtDeathtouchDamage(false);
-        resetPreventNextDamage();
-        resetPreventNextDamageWithEffect();
         resetReceivedDamageFromThisTurn();
         resetDealtDamageToThisTurn();
         resetDealtDamageToPlayerThisTurn();

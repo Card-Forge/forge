@@ -45,9 +45,7 @@ import forge.game.zone.ZoneType;
 public abstract class GameEntity extends GameObject implements IIdentifiable {
     protected final int id;
     private String name = "";
-    private int preventNextDamage = 0;
     protected CardCollection attachedCards = new CardCollection();
-    private Map<Card, Map<String, String>> preventionShieldsWithEffects = Maps.newTreeMap();
     protected Map<CounterType, Integer> counters = Maps.newHashMap();
 
     protected GameEntity(int id0) {
@@ -192,20 +190,6 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         // then apply static Damage Prevention effects
         restDamage = staticDamagePrevention(restDamage, source, isCombat, false);
 
-        // then apply ShieldEffects with Special Effect
-        restDamage = preventShieldEffect(restDamage);
-
-        // then do Shield with only number
-        if (restDamage <= 0) {
-            restDamage = 0;
-        } else if (restDamage >= getPreventNextDamage()) {
-            restDamage = restDamage - getPreventNextDamage();
-            setPreventNextDamage(0);
-        } else {
-            setPreventNextDamage(getPreventNextDamage() - restDamage);
-            restDamage = 0;
-        }
-
         // if damage is greater than restDamage, damage was prevented
         if (damage > restDamage) {
             int prevent = damage - restDamage;
@@ -223,60 +207,8 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         return restDamage;
     }
 
-    protected abstract int preventShieldEffect(final int damage);
-
-    public int getPreventNextDamage() {
-        return preventNextDamage;
-    }
-    public void setPreventNextDamage(final int n) {
-        preventNextDamage = n;
-    }
-    public void addPreventNextDamage(final int n) {
-        preventNextDamage += n;
-    }
-    public void subtractPreventNextDamage(final int n) {
-        preventNextDamage -= n;
-    }
-    public void resetPreventNextDamage() {
-        preventNextDamage = 0;
-    }
-
-    // PreventNextDamageWithEffect
-    public Map<Card, Map<String, String>> getPreventNextDamageWithEffect() {
-        return preventionShieldsWithEffects;
-    }
     public int getPreventNextDamageTotalShields() {
-        int shields = preventNextDamage;
-        for (final Map<String, String> value : preventionShieldsWithEffects.values()) {
-            shields += Integer.valueOf(value.get("ShieldAmount"));
-        }
-        return shields;
-    }
-    /**
-     * Adds a damage prevention shield with an effect that happens at time of prevention.
-     * @param shieldSource - The source card which generated the shield
-     * @param effectMap - A map of the effect occurring with the damage prevention
-     */
-    public void addPreventNextDamageWithEffect(final Card shieldSource, Map<String, String> effectMap) {
-        if (preventionShieldsWithEffects.containsKey(shieldSource)) {
-            int currentShields = Integer.valueOf(preventionShieldsWithEffects.get(shieldSource).get("ShieldAmount"));
-            currentShields += Integer.valueOf(effectMap.get("ShieldAmount"));
-            effectMap.put("ShieldAmount", Integer.toString(currentShields));
-            preventionShieldsWithEffects.put(shieldSource, effectMap);
-        } else {
-            preventionShieldsWithEffects.put(shieldSource, effectMap);
-        }
-    }
-    public void subtractPreventNextDamageWithEffect(final Card shieldSource, final int n) {
-        int currentShields = Integer.valueOf(preventionShieldsWithEffects.get(shieldSource).get("ShieldAmount"));
-        if (currentShields > n) {
-            preventionShieldsWithEffects.get(shieldSource).put("ShieldAmount", String.valueOf(currentShields - n));
-        } else {
-            preventionShieldsWithEffects.remove(shieldSource);
-        }
-    }
-    public void resetPreventNextDamageWithEffect() {
-        preventionShieldsWithEffects.clear();
+        return getGame().getReplacementHandler().getTotalPreventionShieldAmount(this);
     }
 
     public abstract boolean hasKeyword(final String keyword);
