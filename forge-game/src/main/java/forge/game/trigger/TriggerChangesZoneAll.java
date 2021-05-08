@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Map;
 
 import forge.game.ability.AbilityKey;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardZoneTable;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.Expressions;
 import forge.util.Localizer;
 
 public class TriggerChangesZoneAll extends Trigger {
@@ -23,6 +25,9 @@ public class TriggerChangesZoneAll extends Trigger {
 
         if (!matchesValidParam("ValidCause", runParams.get(AbilityKey.Cause))) {
             return false;
+        } else if (hasParam("ValidAmount")) {
+            int right = AbilityUtils.calculateAmount(hostCard, getParam("ValidAmount").substring(2), this);
+            if (!Expressions.compare(this.filterCards(table).size(), getParam("ValidAmount").substring(0, 2), right)) { return false; }
         }
 
         return !filterCards(table).isEmpty();
