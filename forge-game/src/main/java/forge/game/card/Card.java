@@ -5170,10 +5170,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return damage;
         }
 
-        for (final Card ca : getGame().getCardsIn(ZoneType.Battlefield)) {
+        for (final Card ca : getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final ReplacementEffect re : ca.getReplacementEffects()) {
                 Map<String, String> params = re.getMapParams();
-                if (!re.getMode().equals(ReplacementType.DamageDone) || !params.containsKey("PreventionEffect")) {
+                if (!re.getMode().equals(ReplacementType.DamageDone) ||
+                        (!params.containsKey("PreventionEffect") && !params.containsKey("Prevent"))) {
                     continue;
                 }
                 if (params.containsKey("ValidSource")
@@ -5193,6 +5194,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         if (isCombat) {
                             continue;
                         }
+                    }
+                }
+                if (params.containsKey("Prevent")) {
+                    return 0;
+                } else if (re.getOverridingAbility() != null) {
+                    SpellAbility repSA = re.getOverridingAbility();
+                    if (repSA.getApi() == ApiType.ReplaceDamage) {
+                        return Math.max(0, damage - AbilityUtils.calculateAmount(ca, repSA.getParam("Amount"), repSA));
                     }
                 }
                 return 0;
