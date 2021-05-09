@@ -29,7 +29,7 @@ public class FogAi extends SpellAbilityAi {
         final Card hostCard = sa.getHostCard();
 
         // Don't cast it, if the effect is already in place
-        if (game.getPhaseHandler().isPreventCombatDamageThisTurn()) {
+        if (game.getReplacementHandler().isPreventCombatDamageThisTurn()) {
             return false;
         }
 

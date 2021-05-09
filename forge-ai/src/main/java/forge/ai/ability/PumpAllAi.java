@@ -113,7 +113,7 @@ public class PumpAllAi extends PumpAiBase {
                 if (phase.isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)
                         || phase.isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
                         || game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())
-                        || game.getPhaseHandler().isPreventCombatDamageThisTurn()) {
+                        || game.getReplacementHandler().isPreventCombatDamageThisTurn()) {
                     return false;
                 }
                 int totalPower = 0;

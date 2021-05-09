@@ -5212,7 +5212,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return damageIn;
         }
 
-        if (isCombat && getGame().getPhaseHandler().isPreventCombatDamageThisTurn()) {
+        if (isCombat && getGame().getReplacementHandler().isPreventCombatDamageThisTurn()) {
             return 0;
         }
 
