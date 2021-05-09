@@ -92,7 +92,6 @@ public class PhaseHandler implements java.io.Serializable {
     private int nUpkeepsThisGame = 0;
     private int nCombatsThisTurn = 0;
     private int nMain2sThisTurn = 0;
-    private boolean bPreventCombatDamageThisTurn  = false;
     private int planarDiceRolledthisTurn = 0;
 
     private transient Player playerTurn = null;
@@ -520,7 +519,6 @@ public class PhaseHandler implements java.io.Serializable {
                 break;
 
             case CLEANUP:
-                bPreventCombatDamageThisTurn = false;
                 if (!bRepeatCleanup) {
                     // only call onCleanupPhase when Cleanup is not repeated
                     game.onCleanupPhase();
@@ -832,10 +830,6 @@ public class PhaseHandler implements java.io.Serializable {
         }
         SpellAbility fakeSA = new SpellAbility.EmptySa(blocker, blocker.getController());
         return noCost || blocker.getController().getController().payManaOptional(blocker, blockCost, fakeSA, "Pay cost to declare " + blocker + " a blocker. ", ManaPaymentPurpose.DeclareBlocker);
-    }
-
-    public final boolean isPreventCombatDamageThisTurn() {
-        return bPreventCombatDamageThisTurn;
     }
 
     private Player handleNextTurn() {
@@ -1220,10 +1214,6 @@ public class PhaseHandler implements java.io.Serializable {
         extraPhases.clear();
         setPhase(PhaseType.CLEANUP);
         onPhaseBegin();
-    }
-
-    public final void setPreventCombatDamageThisTurn() {
-        bPreventCombatDamageThisTurn = true;
     }
 
     public int getPlanarDiceRolledthisTurn() {

@@ -719,7 +719,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             return damage;
         }
 
-        if (isCombat && game.getPhaseHandler().isPreventCombatDamageThisTurn()) {
+        if (isCombat && game.getReplacementHandler().isPreventCombatDamageThisTurn()) {
             return 0;
         }
 
@@ -1195,7 +1195,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
 
     public boolean hasProtectionFromDamage(final Card source) {
-        return hasProtectionFrom(source, false, false);
+        return hasProtectionFrom(source, false, true);
     }
 
     @Override

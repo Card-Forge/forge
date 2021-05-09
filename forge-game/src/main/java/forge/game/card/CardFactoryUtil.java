@@ -2228,6 +2228,59 @@ public class CardFactoryUtil {
         return re;
     }
 
+    // Create damage prevention replacement effect for protection keyword
+    private static ReplacementEffect createProtectionReplacement(final CardState card, final String kw, final boolean intrinsic) {
+        Card host = card.getCard();
+        String validSource = "Card.";
+
+        if (kw.startsWith("Protection:")) {
+            final String[] kws = kw.split(":");
+            String characteristic = kws[1];
+            if (characteristic.startsWith("Player")) {
+                validSource += "ControlledBy " + characteristic;
+            } else {
+                if (characteristic.endsWith("White") || characteristic.endsWith("Blue")
+                    || characteristic.endsWith("Black") || characteristic.endsWith("Red")
+                    || characteristic.endsWith("Green") || characteristic.endsWith("Colorless")
+                    || characteristic.endsWith("MonoColor") || characteristic.endsWith("MultiColor")) {
+                    characteristic += "Source";
+                }
+                validSource = characteristic;
+            }
+        } else if (kw.startsWith("Protection from ")) {
+            String protectType = kw.substring("Protection from ".length());
+            if (protectType.equals("white")) {
+                validSource += "WhiteSource";
+            } else if (protectType.equals("blue")) {
+                validSource += "BlueSource";
+            } else if (protectType.equals("black")) {
+                validSource += "BlackSource";
+            } else if (protectType.equals("red")) {
+                validSource += "RedSource";
+            } else if (protectType.equals("green")) {
+                validSource += "GreenSource";
+            } else if (protectType.equals("all colors")) {
+                validSource += "nonColorless";
+            } else if (protectType.equals("everything")) {
+                validSource = "";
+            } else if (protectType.startsWith("opponent of ")) {
+                final String playerName = protectType.substring("opponent of ".length());
+                validSource += "ControlledBy Player.OpponentOf PlayerNamed_" + playerName;
+            } else {
+                validSource = CardType.getSingularType(protectType);
+            }
+        }
+
+        String rep = "Event$ DamageDone | Prevent$ True | ActiveZones$ Battlefield | ValidTarget$ Card.Self";
+        if (!validSource.isEmpty()) {
+            rep += " | ValidSource$ " + validSource;
+        }
+        rep += " | Secondary$ True | TiedToKeyword$ " + kw + " | Description$ " + kw;
+
+        ReplacementEffect re = ReplacementHandler.parseReplacement(rep, host, intrinsic, card);
+        return re;
+    }
+
     public static ReplacementEffect makeEtbCounter(final String kw, final CardState card, final boolean intrinsic)
     {
         String parse = kw;
@@ -3914,6 +3967,10 @@ public class CardFactoryUtil {
 
                 inst.addReplacement(re);
             }
+        }
+        else if (keyword.startsWith("Protection")) {
+            ReplacementEffect re = createProtectionReplacement(card, keyword, intrinsic);
+            inst.addReplacement(re);
         }
 
         else if (keyword.startsWith("If CARDNAME would be put into a graveyard "

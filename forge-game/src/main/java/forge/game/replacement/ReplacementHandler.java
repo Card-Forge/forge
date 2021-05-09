@@ -482,4 +482,28 @@ public class ReplacementHandler {
         }
         return totalAmount;
     }
+
+    /**
+     * Helper function to check if combat damage is prevented this turn (fog effect)
+     * @return true if there is some resolved fog effect
+     */
+    public final boolean isPreventCombatDamageThisTurn() {
+        final List<ReplacementEffect> list = Lists.newArrayList();
+        game.forEachCardInGame(new Visitor<Card>() {
+            @Override
+            public boolean visit(Card c) {
+                for (final ReplacementEffect re : c.getReplacementEffects()) {
+                    if (re.getMode() == ReplacementType.DamageDone
+                            && re.getLayer() == ReplacementLayer.Other
+                            && re.hasParam("Prevent") && re.getParam("Prevent").equals("True")
+                            && re.hasParam("IsCombat") && re.getParam("IsCombat").equals("True")
+                            && re.zonesCheck(game.getZoneOf(c))) {
+                        list.add(re);
+                    }
+                }
+                return true;
+            }
+        });
+        return !list.isEmpty();
+    }
 }

@@ -187,9 +187,6 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
             restDamage = 0;
         }
 
-        // then apply static Damage Prevention effects
-        restDamage = staticDamagePrevention(restDamage, source, isCombat, false);
-
         // if damage is greater than restDamage, damage was prevented
         if (damage > restDamage) {
             int prevent = damage - restDamage;
