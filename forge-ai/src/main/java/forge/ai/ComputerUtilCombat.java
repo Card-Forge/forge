@@ -412,7 +412,6 @@ public class ComputerUtilCombat {
             return false;
         }
 
-
         // check for creatures that must be blocked
         final List<Card> attackers = combat.getAttackersOf(ai);
 

@@ -368,7 +368,7 @@ public class AiBlockController {
                         // if the total damage of the blockgang was not enough
                         // without but is enough with this blocker finish the blockgang
                         if (ComputerUtilCombat.totalFirstStrikeDamageOfBlockers(attacker, blockGang) < damageNeeded
-                                || CombatUtil.needsBlockers(attacker) > blockGang.size()) {
+                                || CombatUtil.getMinNumBlockersForAttacker(attacker, ai) > blockGang.size()) {
                             blockGang.add(blocker);
                             if (ComputerUtilCombat.totalFirstStrikeDamageOfBlockers(attacker, blockGang) >= damageNeeded) {
                                 currentAttackers.remove(attacker);
@@ -406,7 +406,7 @@ public class AiBlockController {
             boolean foundDoubleBlock = false; // if true, a good double block is found
 
             // AI can't handle good blocks with more than three creatures yet
-            if (CombatUtil.needsBlockers(attacker) > (considerTripleBlock ? 3 : 2)) {
+            if (CombatUtil.getMinNumBlockersForAttacker(attacker, ai) > (considerTripleBlock ? 3 : 2)) {
                 continue;
             }
 
@@ -443,7 +443,7 @@ public class AiBlockController {
                 final int addedValue = ComputerUtilCard.evaluateCreature(blocker);
                 final int damageNeeded = ComputerUtilCombat.getDamageToKill(attacker)
                         + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, blocker, combat, false);
-                if ((damageNeeded > currentDamage || CombatUtil.needsBlockers(attacker) > blockGang.size())
+                if ((damageNeeded > currentDamage || CombatUtil.getMinNumBlockersForAttacker(attacker, ai) > blockGang.size())
                         && !(damageNeeded > currentDamage + additionalDamage)
                         // The attacker will be killed
                         && (absorbedDamage2 + absorbedDamage > attacker.getNetCombatDamage()
@@ -494,7 +494,7 @@ public class AiBlockController {
                     final int addedValue3 = ComputerUtilCard.evaluateCreature(secondBlocker);
                     final int netCombatDamage = attacker.getNetCombatDamage();
 
-                    if ((damageNeeded > currentDamage || CombatUtil.needsBlockers(attacker) > blockGang.size())
+                    if ((damageNeeded > currentDamage || CombatUtil.getMinNumBlockersForAttacker(attacker, ai) > blockGang.size())
                             && !(damageNeeded > currentDamage + additionalDamage2 + additionalDamage3)
                             // The attacker will be killed
                             && ((absorbedDamage2 + absorbedDamage > netCombatDamage && absorbedDamage3 + absorbedDamage > netCombatDamage
@@ -1093,7 +1093,7 @@ public class AiBlockController {
         chumpBlockers.addAll(CardLists.getKeyword(blockersLeft, "CARDNAME blocks each combat if able."));
         // if an attacker with lure attacks - all that can block
         for (final Card blocker : blockersLeft) {
-            if (CombatUtil.mustBlockAnAttacker(blocker, combat)) {
+            if (CombatUtil.mustBlockAnAttacker(blocker, combat, null)) {
                 chumpBlockers.add(blocker);
             }
         }
@@ -1103,7 +1103,7 @@ public class AiBlockController {
                 blockers = getPossibleBlockers(combat, attacker, chumpBlockers, false);
                 for (final Card blocker : blockers) {
                     if (CombatUtil.canBlock(attacker, blocker, combat) && blockersLeft.contains(blocker)
-                            && (CombatUtil.mustBlockAnAttacker(blocker, combat)
+                            && (CombatUtil.mustBlockAnAttacker(blocker, combat, null)
                                     || blocker.hasKeyword("CARDNAME blocks each turn if able.")
                                     || blocker.hasKeyword("CARDNAME blocks each combat if able."))) {
                         combat.addBlocker(attacker, blocker);
@@ -1121,7 +1121,6 @@ public class AiBlockController {
                 }
             }
         }
-
 
         // check to see if it's possible to defend a Planeswalker under attack with a chump block,
         // unless life is low enough to be more worried about saving preserving the life total
