@@ -1,0 +1,33 @@
+[metadata]
+Code=MH2
+Date=2021-06-18
+Name=Modern Horizons 2
+Code2=MH2
+MciCode=mh2
+Type=Other
+
+[cards]
+223 U Brainstone
+225 R Diamond Lion
+244 R Arid Mesa
+248 R Marsh Flats
+250 R Misty Rainforest
+254 R Scalding Tarn
+259 R Urza's Saga
+260 R Verdant Catacombs
+267 U Counterspell
+308 R Counterspell
+380 R Urza's Saga
+426 U Brainstone
+427 R Diamond Lion
+436 R Arid Mesa
+437 R Marsh Flats
+438 R Misty Rainforest
+439 R Scalding Tarn
+440 R Verdant Catacombs
+475 R Arid Mesa
+476 R Marsh Flats
+477 R Misty Rainforest
+478 R Scalding Tarn
+479 R Verdant Catacombs
+491 M Sanctum Prelate

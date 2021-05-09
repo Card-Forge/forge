@@ -1,0 +1,22 @@
+[metadata]
+Code=AFR
+Date=2021-07-23
+Name=Dungeons & Dragons: Adventures in the Forgotten Realms
+Code2=AFR
+MciCode=afr
+Type=Expansion
+
+[cards]
+33 U Portable Hole
+114 U Power Word Kill
+124 R Vorpal Sword
+200 U Prosperous Innkeeper
+235 M Tiamat
+265 L Plains
+269 L Island
+273 L Swamp
+277 L Mountain
+281 L Forest
+298 M Tiamat
+377 R Vorpal Sword
+396 R Vorpal Sword
