@@ -1644,11 +1644,12 @@ public class ComputerUtilCard {
         copiedKeywords.insertAll(pumped.getKeywords());
         List<KeywordInterface> toCopy = Lists.newArrayList();
         for (KeywordInterface k : c.getKeywords()) {
-            if (!copiedKeywords.contains(k.getOriginal())) {
-                if (k.getHidden()) {
-                    pumped.addHiddenExtrinsicKeyword(k);
+            KeywordInterface copiedKI = k.copy(c, true);
+            if (!copiedKeywords.contains(copiedKI.getOriginal())) {
+                if (copiedKI.getHidden()) {
+                    pumped.addHiddenExtrinsicKeyword(copiedKI);
                 } else {
-                    toCopy.add(k);
+                    toCopy.add(copiedKI);
                 }
             }
         }
