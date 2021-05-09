@@ -163,9 +163,9 @@ public class PlayAi extends SpellAbilityAi {
      * @see forge.card.ability.SpellAbilityAi#confirmAction(forge.game.player.Player, forge.card.spellability.SpellAbility, forge.game.player.PlayerActionConfirmMode, java.lang.String)
      */
     @Override
-    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
-        // as called from PlayEffect:173
-        return true;
+    public boolean confirmAction(Player ai, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
+        // as called from PlayEffect
+        return chooseSingleCard(ai, sa, new CardCollection((Card) params.get("Card")), true, ai, null) != null;
     }
     
     /* (non-Javadoc)

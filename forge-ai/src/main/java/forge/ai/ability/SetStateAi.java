@@ -1,5 +1,7 @@
 package forge.ai.ability;
 
+import java.util.Map;
+
 import com.google.common.base.Predicate;
 
 import forge.ai.ComputerUtilCard;
@@ -264,7 +266,7 @@ public class SetStateAi extends SpellAbilityAi {
         return true;
     }
 
-    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
         // TODO: improve the AI for when it may want to transform something that's optional to transform
         return isSafeToTransformIntoLegendary(player, sa.getHostCard());
     }

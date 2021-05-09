@@ -26,7 +26,7 @@ public class EndTurnEffect extends SpellAbilityEffect {
         final List<Player> enders = getDefinedPlayersOrTargeted(sa, "Defined");
         final Player ender = enders.isEmpty() ? sa.getActivatingPlayer() : enders.get(0);
         if (sa.hasParam("Optional")) {
-            if (!ender.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantEndTurn"))) {
+            if (!ender.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantEndTurn"), null)) {
                 return;
             }
         }

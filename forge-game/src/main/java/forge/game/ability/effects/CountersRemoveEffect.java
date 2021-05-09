@@ -87,7 +87,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("Optional")) {
             String ctrs = cntToRemove > 1 ? Localizer.getInstance().getMessage("lblCounters") : num.equals("All") ? Localizer.getInstance().getMessage("lblAllCounters") : Localizer.getInstance().getMessage("lblACounters");
-            if (!sa.getActivatingPlayer().getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblRemove") + " " + ctrs + "?")) {
+            if (!sa.getActivatingPlayer().getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblRemove") + " " + ctrs + "?", null)) {
                 return;
             }
         }
