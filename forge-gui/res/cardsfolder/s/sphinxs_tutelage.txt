@@ -6,7 +6,7 @@ SVar:TrigMill:DB$ Repeat | ValidTgts$ Opponent | IsCurse$ True | RepeatSubAbilit
 SVar:DBCleanAndGrind:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBGrind
 SVar:DBGrind:DB$ Mill | NumCards$ 2 | Defined$ Targeted | NoReveal$ True | RememberMilled$ True
 SVar:MaxRepeats:TargetedPlayer$CardsInLibrary
-SVar:MilledSharesColor:RememberedLKI$Valid Card.nonLand+SharesColorWithOther Remembered
+SVar:MilledSharesColor:Remembered$Valid Card.nonLand+SharesColorWithOther Remembered
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ Draw | Cost$ 5 U | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
