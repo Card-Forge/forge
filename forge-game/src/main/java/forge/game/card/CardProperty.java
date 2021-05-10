@@ -3,7 +3,6 @@ package forge.game.card;
 import java.util.Collections;
 import java.util.List;
 
-import forge.card.mana.ManaCostParser;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Iterables;
