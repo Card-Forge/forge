@@ -497,6 +497,7 @@ public class ReplacementHandler {
                             && re.getLayer() == ReplacementLayer.Other
                             && re.hasParam("Prevent") && re.getParam("Prevent").equals("True")
                             && re.hasParam("IsCombat") && re.getParam("IsCombat").equals("True")
+                            && !re.hasParam("ValidSource") && !re.hasParam("ValidTarget")
                             && re.zonesCheck(game.getZoneOf(c))) {
                         list.add(re);
                     }

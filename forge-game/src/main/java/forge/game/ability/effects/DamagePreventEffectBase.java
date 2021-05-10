@@ -28,7 +28,6 @@ public abstract class DamagePreventEffectBase extends SpellAbilityEffect {
         StringBuilder sb = new StringBuilder("Event$ DamageDone | ActiveZones$ Command | ValidTarget$ ");
         sb.append((o instanceof Card ? "Card.IsRemembered" : "Player.IsRemembered"));
         sb.append(" | PreventionEffect$ True | Description$ Prevent the next ").append(numDam).append(" damage.");
-        String repeffstr = sb.toString();
         String effect = "DB$ ReplaceDamage | Amount$ ShieldAmount";
 
         final Card eff = createEffect(sa, player, name, image);
@@ -51,9 +50,13 @@ public abstract class DamagePreventEffectBase extends SpellAbilityEffect {
                 }
                 subAbString = TextUtil.fastReplace(subAbString, "ShieldEffectTarget", effTgtString);
             }
-            replaceDamage.setSubAbility((AbilitySub) AbilityFactory.getAbility(subAbString, eff));
+            AbilitySub subSA = (AbilitySub) AbilityFactory.getAbility(subAbString, eff);
+            replaceDamage.setSubAbility(subSA);
+            // Add SpellDescription of PreventionSubAbility to effect description
+            sb.append(" ").append(subSA.getParam("SpellDescription"));
         }
 
+        String repeffstr = sb.toString();
         ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, eff, true);
         re.setOverridingAbility(replaceDamage);
         eff.addReplacementEffect(re);
