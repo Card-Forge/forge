@@ -1870,23 +1870,25 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }));
         }
 
-        // JAVA 1.8 use Map.Entry.comparingByValue() somehow
-        Map.Entry<Player, Map.Entry<String, Integer>> max = Collections.max(data.entrySet(), new Comparator<Map.Entry<Player, Map.Entry<String, Integer>>>() {
-            @Override
-            public int compare(Map.Entry<Player, Map.Entry<String, Integer>> o1, Map.Entry<Player, Map.Entry<String, Integer>> o2) {
-                return o1.getValue().getValue() - o2.getValue().getValue();
+        if (!data.isEmpty()) {
+            // JAVA 1.8 use Map.Entry.comparingByValue() somehow
+            Map.Entry<Player, Map.Entry<String, Integer>> max = Collections.max(data.entrySet(), new Comparator<Map.Entry<Player, Map.Entry<String, Integer>>>() {
+                @Override
+                public int compare(Map.Entry<Player, Map.Entry<String, Integer>> o1, Map.Entry<Player, Map.Entry<String, Integer>> o2) {
+                    return o1.getValue().getValue() - o2.getValue().getValue();
+                }
+            });
+
+            // filter list again by the opponent and a creature of the wanted name that can be targeted
+            list = CardLists.filter(CardLists.filterControlledBy(list, max.getKey()),
+                    CardPredicates.nameEquals(max.getValue().getKey()), CardPredicates.isTargetableBy(sa));
+
+            // list should contain only one element or zero
+            sa.resetTargets();
+            for (Card c : list) {
+                sa.getTargets().add(c);
+                return true;
             }
-        });
-
-        // filter list again by the opponent and a creature of the wanted name that can be targeted
-        list = CardLists.filter(CardLists.filterControlledBy(list, max.getKey()),
-                CardPredicates.nameEquals(max.getValue().getKey()), CardPredicates.isTargetableBy(sa));
-
-        // list should contain only one element or zero
-        sa.resetTargets();
-        for (Card c : list) {
-            sa.getTargets().add(c);
-            return true;
         }
 
         return false;
