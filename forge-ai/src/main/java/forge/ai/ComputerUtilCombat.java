@@ -2293,7 +2293,8 @@ public class ComputerUtilCombat {
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final ReplacementEffect re : ca.getReplacementEffects()) {
                 Map<String, String> params = re.getMapParams();
-                if (!re.getMode().equals(ReplacementType.DamageDone) || !params.containsKey("PreventionEffect")) {
+                if (!re.getMode().equals(ReplacementType.DamageDone) ||
+                        (!params.containsKey("PreventionEffect") && !params.containsKey("Prevent"))) {
                     continue;
                 }
                 // Immortal Coil prevents the damage but has a similar negative effect
@@ -2319,6 +2320,14 @@ public class ComputerUtilCombat {
                         }
                     }
 
+                }
+                if (params.containsKey("Prevent")) {
+                    return 0;
+                } else if (re.getOverridingAbility() != null) {
+                    SpellAbility repSA = re.getOverridingAbility();
+                    if (repSA.getApi() == ApiType.ReplaceDamage) {
+                        return Math.max(0, restDamage - AbilityUtils.calculateAmount(ca, repSA.getParam("Amount"), repSA));
+                    }
                 }
                 return 0;
             }
@@ -2491,7 +2500,14 @@ public class ComputerUtilCombat {
         List<ReplacementEffect> list = game.getReplacementHandler().getReplacementList(
                 ReplacementType.DamageDone, repParams, ReplacementLayer.Other);
 
-        return !list.isEmpty();
+        for (final ReplacementEffect re : list) {
+            Map<String, String> params = re.getMapParams();
+            if (params.containsKey("Prevent") ||
+                    (re.getOverridingAbility() != null && re.getOverridingAbility().getApi() != ApiType.ReplaceDamage)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static boolean attackerHasThreateningAfflict(Card attacker, Player aiDefender) {
