@@ -5,6 +5,6 @@ A:SP$ Mill | Cost$ X B B | NumCards$ X | Defined$ Player | RememberMilled$ True 
 SVar:DBToken:DB$ Token | TokenAmount$ Y | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenTapped$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid
-SVar:Y:Count$ValidGraveyard Creature.IsRemembered
+SVar:Y:Remembered$Valid Creature.inZoneGraveyard
 DeckHas:Ability$Token
 Oracle:Each player mills X cards. For each creature card put into a graveyard this way, you create a tapped 2/2 black Zombie creature token.
