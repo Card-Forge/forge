@@ -222,6 +222,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private boolean tapped = false;
     private boolean sickness = true; // summoning sickness
     private boolean token = false;
+    private boolean tokenCard = false;
     private Card copiedPermanent = null;
     private boolean copiedSpell = false;
 
@@ -2919,6 +2920,18 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public final void updateTokenView() {
         view.updateToken(this);
+    }
+
+    public final boolean isTokenCard() {
+        if (isInZone(ZoneType.Battlefield) && hasMergedCard()) {
+            return getTopMergedCard().tokenCard;
+        }
+        return tokenCard;
+    }
+    public final void setTokenCard(boolean tokenC) {
+        if (tokenCard = tokenC) { return; }
+        tokenCard = tokenC;
+        view.updateTokenCard(this);
     }
 
     public final Card getCopiedPermanent() {

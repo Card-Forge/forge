@@ -47,6 +47,7 @@ public enum TrackableProperty {
     Sickness(TrackableTypes.BooleanType),
     Tapped(TrackableTypes.BooleanType),
     Token(TrackableTypes.BooleanType),
+    TokenCard(TrackableTypes.BooleanType),
     IsCommander(TrackableTypes.BooleanType),
     CommanderAltType(TrackableTypes.StringType),
     Damage(TrackableTypes.IntegerType),
