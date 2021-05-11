@@ -2228,9 +2228,7 @@ public class CardFactoryUtil {
         return re;
     }
 
-    // Create damage prevention replacement effect for protection keyword
-    private static ReplacementEffect createProtectionReplacement(final CardState card, final String kw, final boolean intrinsic) {
-        Card host = card.getCard();
+    public static String getProtectionReplacementValidSource(final String kw) {
         String validSource = "Card.";
 
         if (kw.startsWith("Protection:")) {
@@ -2259,8 +2257,10 @@ public class CardFactoryUtil {
                 validSource += "RedSource";
             } else if (protectType.equals("green")) {
                 validSource += "GreenSource";
+            } else if (protectType.equals("colorless")) {
+                validSource += "ColorlessSource";
             } else if (protectType.equals("all colors")) {
-                validSource += "nonColorless";
+                validSource += "nonColorlessSource";
             } else if (protectType.equals("everything")) {
                 validSource = "";
             } else if (protectType.startsWith("opponent of ")) {
@@ -2271,14 +2271,7 @@ public class CardFactoryUtil {
             }
         }
 
-        String rep = "Event$ DamageDone | Prevent$ True | ActiveZones$ Battlefield | ValidTarget$ Card.Self";
-        if (!validSource.isEmpty()) {
-            rep += " | ValidSource$ " + validSource;
-        }
-        rep += " | Secondary$ True | TiedToKeyword$ " + kw + " | Description$ " + kw;
-
-        ReplacementEffect re = ReplacementHandler.parseReplacement(rep, host, intrinsic, card);
-        return re;
+        return validSource;
     }
 
     public static ReplacementEffect makeEtbCounter(final String kw, final CardState card, final boolean intrinsic)
@@ -3969,7 +3962,15 @@ public class CardFactoryUtil {
             }
         }
         else if (keyword.startsWith("Protection")) {
-            ReplacementEffect re = createProtectionReplacement(card, keyword, intrinsic);
+            String validSource = getProtectionReplacementValidSource(keyword);
+
+            String rep = "Event$ DamageDone | Prevent$ True | ActiveZones$ Battlefield | ValidTarget$ Card.Self";
+            if (!validSource.isEmpty()) {
+                rep += " | ValidSource$ " + validSource;
+            }
+            rep += " | Secondary$ True | TiedToKeyword$ " + keyword + " | Description$ " + keyword;
+
+            ReplacementEffect re = ReplacementHandler.parseReplacement(rep, host, intrinsic, card);
             inst.addReplacement(re);
         }
 

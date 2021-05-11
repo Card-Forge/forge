@@ -5,7 +5,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | OriginChoice$ True | OriginAlternative$ Graveyard | AlternativeMessage$ Would you like to search your library with this ability? If you do, your library will be shuffled. | Destination$ Hand | ChangeType$ Card.namedAjani; Valiant Protector | ChangeNum$ 1 | Optional$ True
 A:AB$ ChooseCard | Cost$ Sac<1/CARDNAME> | Choices$ Creature | AILogic$ NeedsPrevention | SubAbility$ DBEffect | RememberChosen$ True | SpellDescription$ Prevent all combat damage a creature of your choice would deal this turn.
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromSource | RememberObjects$ Remembered | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
-SVar:RPreventNextFromSource:Event$ DamageDone | IsCombat$ True | ValidSource$ Card.IsRemembered | Prevent$ True | PreventionEffect$ True | Description$ Prevent all combat damage a creature of your choice would deal this turn.
+SVar:RPreventNextFromSource:Event$ DamageDone | IsCombat$ True | ValidSource$ Card.IsRemembered | Prevent$ True | Description$ Prevent all combat damage a creature of your choice would deal this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHints:Name$Ajani, Valiant Protector
 Oracle:When Ajani's Aid enters the battlefield, you may search your library and/or graveyard for a card named Ajani, Valiant Protector, reveal it, and put it into your hand. If you search your library this way, shuffle.\nSacrifice Ajani's Aid: Prevent all combat damage a creature of your choice would deal this turn.

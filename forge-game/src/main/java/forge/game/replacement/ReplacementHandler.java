@@ -38,6 +38,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardDamageMap;
 import forge.game.card.CardState;
 import forge.game.card.CardTraitChanges;
 import forge.game.card.CardUtil;
@@ -280,6 +281,23 @@ public class ReplacementHandler {
         return res;
     }
 
+    private void putPreventMapEntry(final Map<AbilityKey, Object> runParams) {
+        // Set prevent map entry
+        CardDamageMap preventMap = (CardDamageMap) runParams.get(AbilityKey.PreventMap);
+        Card source = (Card) runParams.get(AbilityKey.DamageSource);
+        GameEntity target = (GameEntity) runParams.get(AbilityKey.Affected);
+        Integer damage = (Integer) runParams.get(AbilityKey.DamageAmount);
+        preventMap.put(source, target, damage);
+
+        // Following codes are commented out since DamagePrevented trigger is currently not used by any Card.
+        // final Map<AbilityKey, Object> trigParams = AbilityKey.newMap();
+        // trigParams.put(AbilityKey.DamageTarget, target);
+        // trigParams.put(AbilityKey.DamageAmount, damage);
+        // trigParams.put(AbilityKey.DamageSource, source);
+        // trigParams.put(AbilityKey.IsCombatDamage, runParams.get(AbilityKey.IsCombat));
+        // game.getTriggerHandler().runTrigger(TriggerType.DamagePrevented, trigParams, false);
+    }
+
     /**
      *
      * Runs a single replacement effect.
@@ -349,10 +367,14 @@ public class ReplacementHandler {
             }
         }
 
-        if (mapParams.containsKey("Prevent")) {
-            if (mapParams.get("Prevent").equals("True")) {
-                return ReplacementResult.Prevented; // Nothing should replace the event.
+        if (mapParams.containsKey("Prevent") && mapParams.get("Prevent").equals("True")) {
+            if (replacementEffect.getMode() == ReplacementType.DamageDone) {
+                if (Boolean.TRUE.equals(runParams.get(AbilityKey.NoPreventDamage))) {
+                    return ReplacementResult.NotReplaced;
+                }
+                putPreventMapEntry(runParams);
             }
+            return ReplacementResult.Prevented; // Nothing should replace the event.
         }
 
         if (mapParams.containsKey("Skip")) {
@@ -361,9 +383,25 @@ public class ReplacementHandler {
             }
         }
 
+        boolean cantPreventDamage = (replacementEffect.getMode() == ReplacementType.DamageDone
+            && mapParams.containsKey("PreventionEffect")
+            && Boolean.TRUE.equals(runParams.get(AbilityKey.NoPreventDamage)));
+
         Player player = host.getController();
 
-        player.getController().playSpellAbilityNoStack(effectSA, true);
+        if (!cantPreventDamage || mapParams.containsKey("AlwaysReplace")) {
+            player.getController().playSpellAbilityNoStack(effectSA, true);
+            if (replacementEffect.getMode() == ReplacementType.DamageDone
+                    && effectSA.getApi() != ApiType.ReplaceDamage && !cantPreventDamage) {
+                putPreventMapEntry(runParams);
+            }
+        }
+
+        // If can't prevent damage, result is not replaced
+        if (cantPreventDamage) {
+            return ReplacementResult.NotReplaced;
+        }
+
         // if the spellability is a replace effect then its some new logic
         // if ReplacementResult is set in run params use that instead
         if (runParams.containsKey(AbilityKey.ReplacementResult)) {

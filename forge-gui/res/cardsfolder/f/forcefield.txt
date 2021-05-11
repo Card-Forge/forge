@@ -4,9 +4,9 @@ Types:Artifact
 A:AB$ ChooseCard | Cost$ 1 | Choices$ Creature.unblocked | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ The next time an unblocked creature of your choice would deal combat damage to you this turn, prevent all but 1 of that damage.
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventDamage | SubAbility$ DBCleanup | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ GE1
 SVar:RPreventDamage:Event$ DamageDone | ValidSource$ Card.ChosenCard | ValidTarget$ You | ReplaceWith$ PreventDmg | PreventionEffect$ True | IsCombat$ True | Description$ The next time an unblocked creature of your choice would deal combat damage to you this turn, prevent all but 1 of that damage.
-SVar:PreventDmg:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ 1 | SubAbility$ ExileEffect
+SVar:PreventDmg:DB$ ReplaceDamage | Amount$ ShieldAmount | SubAbility$ ExileEffect
+SVar:ShieldAmount:ReplaceCount$DamageAmount/Minus.1
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 SVar:NonStackingEffect:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/forcefield.jpg
 Oracle:{1}: The next time an unblocked creature of your choice would deal combat damage to you this turn, prevent all but 1 of that damage.

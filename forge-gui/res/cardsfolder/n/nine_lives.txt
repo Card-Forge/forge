@@ -2,7 +2,7 @@ Name:Nine Lives
 ManaCost:1 W W
 Types:Enchantment
 K:Hexproof
-R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card,Emblem | ValidTarget$ You | PreventionEffect$ True | ReplaceWith$ AddCounters | Description$ If a source would deal damage to you, prevent that damage and put an incarnation counter on CARDNAME.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card,Emblem | ValidTarget$ You | PreventionEffect$ True | ReplaceWith$ AddCounters | AlwaysReplace$ True | Description$ If a source would deal damage to you, prevent that damage and put an incarnation counter on CARDNAME.
 SVar:AddCounters:DB$ PutCounter | Defined$ Self | CounterType$ INCARNATION | CounterNum$ 1
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE9_INCARNATION | Execute$ TrigExile | TriggerDescription$ When there are nine or more incarnation counters on CARDNAME, exile it.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ Self

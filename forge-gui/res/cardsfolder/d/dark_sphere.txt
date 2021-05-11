@@ -4,6 +4,7 @@ Types:Artifact
 A:AB$ ChooseSource | Cost$ T Sac<1/CARDNAME> | Choices$ Card | RememberChosen$ True | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ The next time a source of your choice would deal damage to you this turn, prevent half that damage, rounded down.
 SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | ReplacementEffects$ DBPrevent | ForgetOnMoved$ Battlefield
 SVar:DBPrevent:Event$ DamageDone | ActiveZones$ Command | ValidSource$ Card.IsRemembered | ValidTarget$ You | ReplaceWith$ DBReplace | PreventionEffect$ True | Description$ The next time a source of your choice would deal damage to you this turn, prevent half that damage, rounded down.
-SVar:DBReplace:DB$ ReplaceDamage | Amount$ ShieldAmount
+SVar:DBReplace:DB$ ReplaceDamage | Amount$ ShieldAmount | SubAbility$ ExileEffect
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:ShieldAmount:ReplaceCount$DamageAmount/HalfDown
 Oracle:{T}, Sacrifice Dark Sphere: The next time a source of your choice would deal damage to you this turn, prevent half that damage, rounded down.
