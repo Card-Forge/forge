@@ -608,7 +608,7 @@ public final class CardPredicates {
         public static final Predicate<Card> NON_TOKEN = new Predicate<Card>() {
             @Override
             public boolean apply(Card c) {
-                return !c.isToken();
+                return !(c.isToken() || c.isTokenCard());
             }
         };
         /**
@@ -617,7 +617,7 @@ public final class CardPredicates {
         public static final Predicate<Card> TOKEN = new Predicate<Card>() {
             @Override
             public boolean apply(Card c) {
-                return c.isToken();
+                return c.isToken() || c.isTokenCard();
             }
         };
         /**
