@@ -7,6 +7,6 @@ A:AB$ PutCounterAll | Cost$ SubCounter<2/LOYALTY> | ValidCards$ Creature.YouCtrl
 SVar:DBPutCounterAll:DB$ PutCounterAll | ValidCards$ Planeswalker.YouCtrl+Other | CounterType$ LOYALTY | CounterNum$ 1
 A:AB$ Effect | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Ajani Steadfast | Image$ emblem_ajani_steadfast | ReplacementEffects$ RPreventDamage | Stackable$ False | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "If a source would deal damage to you or a planeswalker you control, prevent all but 1 of that damage."
 SVar:RPreventDamage:Event$ DamageDone | ValidTarget$ You,Planeswalker.YouCtrl | ReplaceWith$ PreventDmg | PreventionEffect$ True | Description$ If a source would deal damage to you or a planeswalker you control, prevent all but 1 of that damage.
-SVar:PreventDmg:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ajani_steadfast.jpg
+SVar:PreventDmg:DB$ ReplaceDamage | Amount$ ShieldAmount
+SVar:ShieldAmount:ReplaceCount$DamageAmount/Minus.1
 Oracle:[+1]: Until end of turn, up to one target creature gets +1/+1 and gains first strike, vigilance, and lifelink.\n[−2]: Put a +1/+1 counter on each creature you control and a loyalty counter on each other planeswalker you control.\n[−7]: You get an emblem with "If a source would deal damage to you or a planeswalker you control, prevent all but 1 of that damage."

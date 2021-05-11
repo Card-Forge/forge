@@ -1,7 +1,7 @@
 package forge.game.player;
 
-import forge.card.CardType;
 import forge.game.card.Card;
+import forge.game.card.CardFactoryUtil;
 import forge.game.keyword.KeywordInterface;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
@@ -46,41 +46,7 @@ public class PlayerFactoryUtil {
         String effect = null;
 
         if (keyword.startsWith("Protection")) {
-            String validSource = "Card.";
-            if (keyword.startsWith("Protection:")) {
-                final String[] kws = keyword.split(":");
-                String characteristic = kws[1];
-                if (characteristic.startsWith("Player")) {
-                    validSource += "ControlledBy " + characteristic;
-                } else {
-                    if (characteristic.endsWith("White") || characteristic.endsWith("Blue")
-                        || characteristic.endsWith("Black") || characteristic.endsWith("Red")
-                        || characteristic.endsWith("Green") || characteristic.endsWith("Colorless")
-                        || characteristic.endsWith("MonoColor") || characteristic.endsWith("MultiColor")) {
-                        characteristic += "Source";
-                    }
-                    validSource = characteristic;
-                }
-            } else if (keyword.startsWith("Protection from ")) {
-                String protectType = keyword.substring("Protection from ".length());
-                if (protectType.equals("white")) {
-                    validSource += "WhiteSource";
-                } else if (protectType.equals("blue")) {
-                    validSource += "BlueSource";
-                } else if (protectType.equals("black")) {
-                    validSource += "BlackSource";
-                } else if (protectType.equals("red")) {
-                    validSource += "RedSource";
-                } else if (protectType.equals("green")) {
-                    validSource += "GreenSource";
-                } else if (protectType.equals("all colors")) {
-                    validSource += "nonColorless";
-                } else if (protectType.equals("everything")) {
-                    validSource = "";
-                } else {
-                    validSource = CardType.getSingularType(protectType);
-                }
-            }
+            String validSource = CardFactoryUtil.getProtectionReplacementValidSource(keyword);
 
             effect = "Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ You";
             if (!validSource.isEmpty()) {

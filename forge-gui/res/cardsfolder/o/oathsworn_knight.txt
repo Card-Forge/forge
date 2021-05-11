@@ -4,7 +4,7 @@ Types:Creature Human Knight
 PT:0/0
 K:etbCounter:P1P1:4
 K:CARDNAME attacks each combat if able.
-R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self+counters_GE1_P1P1 | ReplaceWith$ DBRemoveCounters | PreventionEffect$ True | Description$ If damage would be dealt to CARDNAME while it has a +1/+1 counter on it, prevent that damage and remove a +1/+1 counter from it.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self+counters_GE1_P1P1 | ReplaceWith$ DBRemoveCounters | PreventionEffect$ True | AlwaysReplace$ True | Description$ If damage would be dealt to CARDNAME while it has a +1/+1 counter on it, prevent that damage and remove a +1/+1 counter from it.
 SVar:DBRemoveCounters:DB$ RemoveCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 DeckHas:Ability$Counters
 Oracle:Oathsworn Knight enters the battlefield with four +1/+1 counters on it.\nOathsworn Knight attacks each combat if able.\nIf damage would be dealt to Oathsworn Knight while it has a +1/+1 counter on it, prevent that damage and remove a +1/+1 counter from it.

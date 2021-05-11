@@ -6,8 +6,7 @@ SVar:Bash:DB$ Destroy | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonb
 SVar:Token:DB$ Token | TokenAmount$ 3 | TokenScript$ g_1_1_saproling | TokenOwner$ You | LegacyImage$ g 1 1 saproling pls | SpellDescription$ Create three 1/1 green Saproling creature tokens.
 SVar:Prevent:DB$ ChooseSource | Choices$ Card | RememberChosen$ True | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ Prevent all damage a source of your choice would deal this turn.
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromSource | RememberObjects$ Remembered | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
-SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.IsRemembered | Prevent$ True | PreventionEffect$ True | Description$ Prevent all damage the source would deal this turn.
+SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.IsRemembered | Prevent$ True | Description$ Prevent all damage the source would deal this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/riths_charm.jpg
 Oracle:Choose one —\n• Destroy target nonbasic land.\n• Create three 1/1 green Saproling creature tokens.\n• Prevent all damage a source of your choice would deal this turn.

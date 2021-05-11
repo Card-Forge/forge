@@ -5,8 +5,8 @@ PT:0/0
 K:etbCounter:P1P1:2
 T:Mode$ Phase | Static$ True | Phase$ First Strike Damage | Execute$ DBCleanup
 T:Mode$ Phase | Static$ True | Phase$ EndCombat | Execute$ DBCleanup
-R:Event$ DamageDone | IsCombat$ True | ActiveZones$ Battlefield | ValidTarget$ Card.Self | ReplaceWith$ DBRemoveCountersInCombat | PreventionEffect$ True | Description$ If damage would be dealt to CARDNAME, prevent that damage. Remove a +1/+1 counter from CARDNAME.
-R:Event$ DamageDone | IsCombat$ False | ActiveZones$ Battlefield | ValidTarget$ Card.Self | ReplaceWith$ DBRemoveCounters | PreventionEffect$ True | Secondary$ True | Description$ If damage would be dealt to CARDNAME, prevent that damage. Remove a +1/+1 counter from CARDNAME.
+R:Event$ DamageDone | IsCombat$ True | ActiveZones$ Battlefield | ValidTarget$ Card.Self | ReplaceWith$ DBRemoveCountersInCombat | PreventionEffect$ True | AlwaysReplace$ True | Description$ If damage would be dealt to CARDNAME, prevent that damage. Remove a +1/+1 counter from CARDNAME.
+R:Event$ DamageDone | IsCombat$ False | ActiveZones$ Battlefield | ValidTarget$ Card.Self | ReplaceWith$ DBRemoveCounters | PreventionEffect$ True | AlwaysReplace$ True | Secondary$ True | Description$ If damage would be dealt to CARDNAME, prevent that damage. Remove a +1/+1 counter from CARDNAME.
 SVar:DBRemoveCountersInCombat:DB$ RemoveCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | ConditionCheckSVar$ TimesFlagged | ConditionSVarCompare$ EQ0 | SubAbility$ DBFlagRemoveCounters
 SVar:DBFlagRemoveCounters:DB$ StoreSVar | SVar$ TimesFlagged | Type$ CountSVar | Expression$ TimesFlagged/Plus.1
 SVar:DBRemoveCounters:DB$ RemoveCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1

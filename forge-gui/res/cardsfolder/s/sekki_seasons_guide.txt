@@ -3,10 +3,9 @@ ManaCost:5 G G G
 Types:Legendary Creature Spirit
 PT:0/0
 K:etbCounter:P1P1:8
-R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self | ReplaceWith$ SekkiCounters | PreventionEffect$ True | Description$ If damage would be dealt to Sekki, prevent that damage, remove that many +1/+1 counters from Sekki, and create that many 1/1 colorless Spirit creature tokens.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self | ReplaceWith$ SekkiCounters | PreventionEffect$ True | AlwaysReplace$ True | Description$ If damage would be dealt to Sekki, prevent that damage, remove that many +1/+1 counters from Sekki, and create that many 1/1 colorless Spirit creature tokens.
 SVar:SekkiCounters:DB$ RemoveCounter | CounterType$ P1P1 | CounterNum$ SekkiX | SubAbility$ DBSekkiToken
 SVar:DBSekkiToken:DB$ Token | TokenAmount$ SekkiX | TokenScript$ c_1_1_spirit | LegacyImage$ c 1 1 spirit sok
 A:AB$ ChangeZone | Cost$ Sac<8/Spirit> | Defined$ Self | ActivationZone$ Graveyard | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return Sekki from your graveyard to the battlefield.
 SVar:SekkiX:ReplaceCount$DamageAmount
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sekki_seasons_guide.jpg
 Oracle:Sekki, Seasons' Guide enters the battlefield with eight +1/+1 counters on it.\nIf damage would be dealt to Sekki, prevent that damage, remove that many +1/+1 counters from Sekki, and create that many 1/1 colorless Spirit creature tokens.\nSacrifice eight Spirits: Return Sekki from your graveyard to the battlefield.

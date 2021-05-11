@@ -4,7 +4,7 @@ Types:Creature Spirit Monk
 PT:0/0
 K:etbCounter:P1P1:X
 SVar:X:Count$xPaid
-R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self+counters_GE1_P1P1 | ReplaceWith$ Counters | PreventionEffect$ True | Description$ If damage would be dealt to CARDNAME while it has a +1/+1 counter on it, prevent that damage and remove that many +1/+1 counters from CARDNAME.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self+counters_GE1_P1P1 | ReplaceWith$ Counters | PreventionEffect$ True | AlwaysReplace$ True | Description$ If damage would be dealt to CARDNAME while it has a +1/+1 counter on it, prevent that damage and remove that many +1/+1 counters from CARDNAME.
 SVar:Counters:DB$ RemoveCounter | Defined$ ReplacedTarget | CounterType$ P1P1 | CounterNum$ Y
 SVar:Y:ReplaceCount$DamageAmount
 DeckHas:Ability$Counters

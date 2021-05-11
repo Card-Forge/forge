@@ -5,7 +5,7 @@ PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters the battlefield, target opponent becomes the monarch. You can't become the monarch this turn.
 SVar:TrigMonarch:DB$ BecomeMonarch | ValidTgts$ Opponent | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ You | KW$ You can’t become the monarch this turn.
-R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self | CheckDefinedPlayer$ You.isMonarch | ReplaceWith$ Counters | PreventionEffect$ True | Description$ If damage would be dealt to NICKNAME while you're the monarch, prevent that damage and put that many +1/+1 counters on it.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self | CheckDefinedPlayer$ You.isMonarch | ReplaceWith$ Counters | PreventionEffect$ True | AlwaysReplace$ True | Description$ If damage would be dealt to NICKNAME while you're the monarch, prevent that damage and put that many +1/+1 counters on it.
 SVar:Counters:DB$ PutCounter | Defined$ ReplacedTarget | CounterType$ P1P1 | CounterNum$ Y
 SVar:Y:ReplaceCount$DamageAmount
 DeckHas:Ability$Counters

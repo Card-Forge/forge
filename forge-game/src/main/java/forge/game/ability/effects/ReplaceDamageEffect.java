@@ -5,16 +5,24 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardDamageMap;
 import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.util.TextUtil;
 
+/**
+ * This class handles two kinds of prevention effect:
+ * - Prevent next X damages. Those will use `Amount$ <SVar>`, and the `<SVar>` will have form `Number$ X`.
+ *   That SVar will be updated after each prevention "shield" used up.
+ * - Prevent X damages. Those will use `Amount$ N` or `Amount$ <SVar>`, where the `<SVar>` will have form other than
+ *   `Number$ X`. These "shields" are not used up so won't be updated. */
 public class ReplaceDamageEffect extends SpellAbilityEffect {
 
     @Override
@@ -27,33 +35,44 @@ public class ReplaceDamageEffect extends SpellAbilityEffect {
             return;
         }
 
-        final ReplacementType event = sa.getReplacementEffect().getMode();
-        
-        String varValue = sa.getParamOrDefault("Amount", "1");
-
         @SuppressWarnings("unchecked")
         Map<AbilityKey, Object> originalParams = (Map<AbilityKey, Object>) sa.getReplacingObject(AbilityKey.OriginalParams);
         Map<AbilityKey, Object> params = AbilityKey.newMap(originalParams);
-        
+
         Integer dmg = (Integer) sa.getReplacingObject(AbilityKey.DamageAmount);
                 
+        String varValue = sa.getParamOrDefault("Amount", "1");
         int prevent = AbilityUtils.calculateAmount(card, varValue, sa);
-        
-        // Currently it does reduce damage by amount, need second mode for Setting Damage
         
         if (prevent > 0) {
             int n = Math.min(dmg, prevent);
             dmg -= n;
             prevent -= n;
 
-            if (card.getType().hasStringType("Effect") && prevent <= 0) {
-                game.getAction().exile(card, null);
-            } else if (!StringUtils.isNumeric(varValue) && card.getSVar(varValue).startsWith("Number$")) {
-                card.setSVar(varValue, "Number$" + prevent);
-                card.updateAbilityTextForView();
+            if (!StringUtils.isNumeric(varValue) && card.getSVar(varValue).startsWith("Number$")) {
+                if (card.getType().hasStringType("Effect") && prevent <= 0) {
+                    game.getAction().exile(card, null);
+                } else {
+                    card.setSVar(varValue, "Number$" + prevent);
+                    card.updateAbilityTextForView();
+                }
             }
-            // Set PreventedDamage SVar for PreventionSubAbility
+            // Set PreventedDamage SVar
             card.setSVar("PreventedDamage", "Number$" + n);
+
+            // Set prevent map entry
+            CardDamageMap preventMap = (CardDamageMap) originalParams.get(AbilityKey.PreventMap);
+            Card source = (Card) sa.getReplacingObject(AbilityKey.Source);
+            GameEntity target = (GameEntity) sa.getReplacingObject(AbilityKey.Target);
+            preventMap.put(source, target, n);
+
+            // Following codes are commented out since DamagePrevented trigger is currently not used by any Card.
+            // final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            // runParams.put(AbilityKey.DamageTarget, target);
+            // runParams.put(AbilityKey.DamageAmount, dmg);
+            // runParams.put(AbilityKey.DamageSource, source);
+            // runParams.put(AbilityKey.IsCombatDamage, originalParams.get(AbilityKey.IsCombat));
+            // game.getTriggerHandler().runTrigger(TriggerType.DamagePrevented, runParams, false);
         }
 
         // no damage for original target anymore
@@ -71,6 +90,7 @@ public class ReplaceDamageEffect extends SpellAbilityEffect {
         }
 
         //try to call replacementHandler with new Params
+        final ReplacementType event = sa.getReplacementEffect().getMode();
         ReplacementResult result = game.getReplacementHandler().run(event, params);
         switch (result) {
         case NotReplaced:
