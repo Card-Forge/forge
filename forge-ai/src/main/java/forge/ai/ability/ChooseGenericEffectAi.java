@@ -52,8 +52,6 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
             }
         } else if ("GideonBlackblade".equals(aiLogic)) {
             return SpecialCardAi.GideonBlackblade.consider(ai, sa);
-        } else if ("SoulEcho".equals(aiLogic)) {
-            return doTriggerAINoCost(ai, sa, true);
         } else if ("Always".equals(aiLogic)) {
             return true;
         }
@@ -70,7 +68,7 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
      */
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
-        return checkApiLogic(aiPlayer, sa);
+        return sa.isTrigger() ? doTriggerAINoCost(aiPlayer, sa, sa.isMandatory()) : checkApiLogic(aiPlayer, sa);
     }
 
     @Override
