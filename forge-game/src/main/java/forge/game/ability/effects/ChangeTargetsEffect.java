@@ -78,20 +78,16 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                 TargetChoices newTargetBlock = oldTargetBlock.clone();
                 // gets the divied value from old target
                 Integer div = oldTargetBlock.getDividedValue(oldTarget);
-                newTargetBlock.remove(oldTarget);
-                replaceIn.updateTarget(newTargetBlock, sa.getHostCard());
                 // 3. test if updated choices would be correct.
                 GameObject newTarget = Iterables.getFirst(getDefinedCardsOrTargeted(sa, "DefinedMagnet"), null);
 
                 if (replaceIn.getSpellAbility(true).canTarget(newTarget)) {
+                    newTargetBlock.remove(oldTarget);
                     newTargetBlock.add(newTarget);
                     if (div != null) {
                         newTargetBlock.addDividedAllocation(newTarget, div);
                     }
                     replaceIn.updateTarget(newTargetBlock, sa.getHostCard());
-                }
-                else {
-                    replaceIn.updateTarget(oldTargetBlock, sa.getHostCard());
                 }
             }
             else {
