@@ -3,9 +3,8 @@ ManaCost:4 B B
 Types:Creature Human Berserker
 PT:5/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice a creature.
-SVar:TrigSac:DB$Sacrifice | Defined$ You | SacValid$ Creature
-K:CantBeBlockedBy Saproling
+SVar:TrigSac:DB$ Sacrifice | Defined$ You | SacValid$ Creature
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.Saproling | Description$ CARDNAME can't be blocked by Saprolings.
 AI:RemoveDeck:Random
 SVar:NeedsToPlay:Creature.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vindictive_mob.jpg
 Oracle:When Vindictive Mob enters the battlefield, sacrifice a creature.\nVindictive Mob can't be blocked by Saprolings.

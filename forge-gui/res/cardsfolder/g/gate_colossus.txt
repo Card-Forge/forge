@@ -5,7 +5,7 @@ PT:8/8
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ CARDNAME costs {1} less to cast for each Gate you control.
 SVar:X:Count$Valid Gate.YouCtrl
 DeckNeeds:Type$Gate
-K:CantBeBlockedBy Creature.powerLE2
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLE2 | Description$ CARDNAME can't be blocked by creatures with power 2 or less.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Gate.YouCtrl | OptionalDecider$ You | TriggerZones$ Graveyard | Execute$ TrigChange | TriggerDescription$ Whenever a Gate enters the battlefield under your control, you may put CARDNAME from your graveyard on top of your library.
 SVar:TrigChange:DB$ChangeZone | Origin$ Graveyard | Destination$ Library | Defined$ Self
 DeckHints:Type$Gate

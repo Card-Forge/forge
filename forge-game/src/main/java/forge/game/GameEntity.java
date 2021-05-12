@@ -24,6 +24,8 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import forge.game.ability.AbilityKey;
+import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
@@ -35,6 +37,7 @@ import forge.game.card.CounterType;
 import forge.game.event.GameEventCardAttachment;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
+import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
@@ -148,7 +151,49 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
 
     // This should be also usable by the AI to forecast an effect (so it must
     // not change the game state)
-    public abstract int staticDamagePrevention(final int damage, final Card source, final boolean isCombat, final boolean isTest);
+    public int staticDamagePrevention(final int damage, final int possiblePrevention, final Card source, final boolean isCombat) {
+        if (damage <= 0) {
+            return 0;
+        }
+        if (!source.canDamagePrevented(isCombat)) {
+            return damage;
+        }
+
+        if (isCombat && getGame().getReplacementHandler().isPreventCombatDamageThisTurn()) {
+            return 0;
+        }
+
+        for (final Card ca : getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final ReplacementEffect re : ca.getReplacementEffects()) {
+                if (!re.getMode().equals(ReplacementType.DamageDone) ||
+                        (!re.hasParam("PreventionEffect") && !re.hasParam("Prevent"))) {
+                    continue;
+                }
+                if (!re.matchesValidParam("ValidSource", source)) {
+                    continue;
+                }
+                if (!re.matchesValidParam("ValidTarget", this)) {
+                    continue;
+                }
+                if (re.hasParam("IsCombat")) {
+                    if (re.getParam("IsCombat").equals("True") != isCombat) {
+                        continue;
+                    }
+                }
+                if (re.hasParam("Prevent")) {
+                    return 0;
+                } else if (re.getOverridingAbility() != null) {
+                    SpellAbility repSA = re.getOverridingAbility();
+                    if (repSA.getApi() == ApiType.ReplaceDamage) {
+                        return Math.max(0, damage - AbilityUtils.calculateAmount(ca, repSA.getParam("Amount"), repSA));
+                    }
+                }
+                return 0;
+            }
+        }
+
+        return Math.max(0, damage - possiblePrevention);
+    }
 
     // This should be also usable by the AI to forecast an effect (so it must
     // not change the game state)

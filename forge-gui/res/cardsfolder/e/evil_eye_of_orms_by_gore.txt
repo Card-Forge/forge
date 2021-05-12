@@ -2,7 +2,6 @@ Name:Evil Eye of Orms-by-Gore
 ManaCost:4 B
 Types:Creature Eye
 PT:3/6
-K:CantBeBlockedBy Creature.nonWall
-S:Mode$ Continuous | Affected$ Creature.nonEye+YouCtrl | AddHiddenKeyword$ CARDNAME can't attack. | Description$ Non-Eye creatures you control can't attack.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/evil_eye_of_orms_by_gore.jpg
+S:Mode$ CantAttack | ValidCard$ Creature.nonEye+YouCtrl | Description$ Non-Eye creatures you control can't attack.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.nonWall | Description$ CARDNAME can't be blocked except by Walls.
 Oracle:Non-Eye creatures you control can't attack.\nEvil Eye of Orms-by-Gore can't be blocked except by Walls.

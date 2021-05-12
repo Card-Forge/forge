@@ -46,7 +46,7 @@ public class PlayerFactoryUtil {
         String effect = null;
 
         if (keyword.startsWith("Protection")) {
-            String validSource = CardFactoryUtil.getProtectionReplacementValidSource(keyword);
+            String validSource = CardFactoryUtil.getProtectionValid(keyword, true);
 
             effect = "Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ You";
             if (!validSource.isEmpty()) {

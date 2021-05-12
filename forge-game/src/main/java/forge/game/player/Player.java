@@ -709,32 +709,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         return amount;
     }
 
-    // This should be also usable by the AI to forecast an effect (so it must not change the game state)
-    @Override
-    public final int staticDamagePrevention(final int damage, final Card source, final boolean isCombat, final boolean isTest) {
-        if (damage <= 0) {
-            return 0;
-        }
-        if (!source.canDamagePrevented(isCombat)) {
-            return damage;
-        }
-
-        if (isCombat && game.getReplacementHandler().isPreventCombatDamageThisTurn()) {
-            return 0;
-        }
-
-        if (hasProtectionFromDamage(source)) {
-            return 0;
-        }
-
-        int restDamage = damage;
-
-        if (restDamage > 0) {
-            return restDamage;
-        }
-        return 0;
-    }
-
     // This is usable by the AI to forecast an effect (so it must
     // not change the game state)
     // 2012/01/02: No longer used in calculating the finalized damage, but

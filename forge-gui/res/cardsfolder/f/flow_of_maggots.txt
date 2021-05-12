@@ -3,6 +3,5 @@ ManaCost:2 B
 Types:Creature Insect
 PT:2/2
 K:Cumulative upkeep:1
-K:CantBeBlockedBy Creature.nonWall
-SVar:Picture:http://www.wizards.com/global/images/magic/general/flow_of_maggots.jpg
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.nonWall | Description$ CARDNAME can't be blocked by non-Wall creatures.
 Oracle:Cumulative upkeep {1} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nFlow of Maggots can't be blocked by non-Wall creatures.

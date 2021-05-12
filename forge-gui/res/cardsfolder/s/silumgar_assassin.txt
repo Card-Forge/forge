@@ -3,7 +3,8 @@ ManaCost:1 B
 Types:Creature Human Assassin
 PT:2/1
 K:Megamorph:2 B
-K:Creatures with power greater than CARDNAME's power can't block it.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerGTX | Description$ Creatures with power greater than CARDNAME's power can't block it.
+SVar:X:Count$CardPower
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, destroy target creature with power 3 or less an opponent controls.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.powerLE3+OppCtrl | TgtPrompt$ Select target creature with power 3 or less an opponent controls.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silumgar_assassin.jpg

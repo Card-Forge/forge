@@ -3,8 +3,7 @@ ManaCost:4 U
 Types:Creature Djinn
 PT:3/3
 K:Flying
-K:CARDNAME can block only creatures with flying.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.withoutFlying | ValidBlocker$ Creature.Self | Description$ CARDNAME can block only creatures with flying.
 A:AB$ Pump | Cost$ R R | NumAtt$ +2 | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME gets +2/+0 until end of turn and deals 1 damage to you.
 SVar:DBDealDamage:DB$DealDamage | Defined$ You | NumDmg$ 1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stormcloud_djinn.jpg
 Oracle:Flying\nStormcloud Djinn can block only creatures with flying.\n{R}{R}: Stormcloud Djinn gets +2/+0 until end of turn and deals 1 damage to you.

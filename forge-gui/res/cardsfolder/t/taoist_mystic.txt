@@ -1,7 +1,6 @@
 Name:Taoist Mystic
 ManaCost:2 G
 Types:Creature Human Mystic
-K:CantBeBlockedBy Creature.withHorsemanship
 PT:2/2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/taoist_mystic.jpg
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.withHorsemanship | Description$ CARDNAME can't be blocked by creatures with horsemanship.
 Oracle:Taoist Mystic can't be blocked by creatures with horsemanship.

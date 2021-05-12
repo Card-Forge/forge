@@ -3,7 +3,7 @@ ManaCost:R G
 Types:Creature Elemental
 PT:1/1
 K:Haste
-K:CantBeBlockedBy Creature.powerLE2
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLE2 | Description$ CARDNAME can't be blocked by creatures with power 2 or less.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, Brushfire Elemental gets +2/+2 until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 2 | NumDef$ 2
 SVar:BuffedBy:Land

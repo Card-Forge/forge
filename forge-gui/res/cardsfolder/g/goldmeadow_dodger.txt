@@ -2,6 +2,5 @@ Name:Goldmeadow Dodger
 ManaCost:W
 Types:Creature Kithkin Rogue
 PT:1/1
-K:CantBeBlockedBy Creature.powerGE4
-SVar:Picture:http://www.wizards.com/global/images/magic/general/goldmeadow_dodger.jpg
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerGE4 | Description$ CARDNAME can't be blocked by creatures with power 4 or greater.
 Oracle:Goldmeadow Dodger can't be blocked by creatures with power 4 or greater.

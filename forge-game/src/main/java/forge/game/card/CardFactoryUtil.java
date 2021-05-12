@@ -27,9 +27,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
@@ -77,7 +75,6 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
-import forge.util.Expressions;
 import forge.util.Lang;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
@@ -245,26 +242,6 @@ public class CardFactoryUtil {
                 + " | HiddenAgenda$ True"
                 + " | Mode$ TurnFace | SpellDescription$ Reveal this Hidden Agenda at any time.";
         return AbilityFactory.getAbility(ab, sourceCard);
-    }
-
-    // does "target" have protection from "card"?
-    /**
-     * <p>
-     * hasProtectionFrom.
-     * </p>
-     *
-     * @param card
-     *            a {@link forge.game.card.Card} object.
-     * @param target
-     *            a {@link forge.game.card.Card} object.
-     * @return a boolean.
-     */
-    public static boolean hasProtectionFrom(final Card card, final Card target) {
-        if (target == null) {
-            return false;
-        }
-
-        return target.hasProtectionFrom(card);
     }
 
     /**
@@ -2228,8 +2205,8 @@ public class CardFactoryUtil {
         return re;
     }
 
-    public static String getProtectionReplacementValidSource(final String kw) {
-        String validSource = "Card.";
+    public static String getProtectionValid(final String kw, final boolean damage) {
+        String validSource = "Card."; // TODO extend for Emblem too
 
         if (kw.startsWith("Protection:")) {
             final String[] kws = kw.split(":");
@@ -2237,10 +2214,10 @@ public class CardFactoryUtil {
             if (characteristic.startsWith("Player")) {
                 validSource += "ControlledBy " + characteristic;
             } else {
-                if (characteristic.endsWith("White") || characteristic.endsWith("Blue")
+                if (damage && (characteristic.endsWith("White") || characteristic.endsWith("Blue")
                     || characteristic.endsWith("Black") || characteristic.endsWith("Red")
                     || characteristic.endsWith("Green") || characteristic.endsWith("Colorless")
-                    || characteristic.endsWith("MonoColor") || characteristic.endsWith("MultiColor")) {
+                    || characteristic.endsWith("MonoColor") || characteristic.endsWith("MultiColor"))) {
                     characteristic += "Source";
                 }
                 validSource = characteristic;
@@ -2248,19 +2225,19 @@ public class CardFactoryUtil {
         } else if (kw.startsWith("Protection from ")) {
             String protectType = kw.substring("Protection from ".length());
             if (protectType.equals("white")) {
-                validSource += "WhiteSource";
+                validSource += "White" + (damage ? "Source" : "");
             } else if (protectType.equals("blue")) {
-                validSource += "BlueSource";
+                validSource += "Blue" + (damage ? "Source" : "");
             } else if (protectType.equals("black")) {
-                validSource += "BlackSource";
+                validSource += "Black" + (damage ? "Source" : "");
             } else if (protectType.equals("red")) {
-                validSource += "RedSource";
+                validSource += "Red" + (damage ? "Source" : "");
             } else if (protectType.equals("green")) {
-                validSource += "GreenSource";
+                validSource += "Green" + (damage ? "Source" : "");
             } else if (protectType.equals("colorless")) {
-                validSource += "ColorlessSource";
+                validSource += "Colorless" + (damage ? "Source" : "");
             } else if (protectType.equals("all colors")) {
-                validSource += "nonColorlessSource";
+                validSource += "nonColorless" + (damage ? "Source" : "");
             } else if (protectType.equals("everything")) {
                 validSource = "";
             } else if (protectType.startsWith("opponent of ")) {
@@ -2270,7 +2247,6 @@ public class CardFactoryUtil {
                 validSource = CardType.getSingularType(protectType);
             }
         }
-
         return validSource;
     }
 
@@ -3962,7 +3938,7 @@ public class CardFactoryUtil {
             }
         }
         else if (keyword.startsWith("Protection")) {
-            String validSource = getProtectionReplacementValidSource(keyword);
+            String validSource = getProtectionValid(keyword, true);
 
             String rep = "Event$ DamageDone | Prevent$ True | ActiveZones$ Battlefield | ValidTarget$ Card.Self";
             if (!validSource.isEmpty()) {
@@ -4862,6 +4838,8 @@ public class CardFactoryUtil {
             svars.put("PlayEncoded", ab);
         } else if (keyword.startsWith("Dash")) {
             effect = "Mode$ Continuous | Affected$ Card.Self+dashed | AddKeyword$ Haste";
+        } else if (keyword.equals("Defender")) {
+            effect = "Mode$ CantAttack | ValidCard$ Card.Self | DefenderKeyword$ True | Secondary$ True";
         } else if (keyword.equals("Devoid")) {
             effect = "Mode$ Continuous | EffectZone$ All | Affected$ Card.Self" +
                     " | CharacteristicDefining$ True | SetColor$ Colorless | Secondary$ True" +
@@ -4882,6 +4860,12 @@ public class CardFactoryUtil {
             effect = "Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Secondary$ True"
                     + " | Amount$ Escalate | Cost$ "+ manacost +" | EffectZone$ All"
                     + " | Description$ " + sb.toString() + " (" + inst.getReminderText() + ")";
+        } else if (keyword.equals("Fear")) {
+            effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.nonArtifact+nonBlack | Secondary$ True " +
+                    " | Description$ Fear ( " + inst.getReminderText() + ")";
+        } else if (keyword.equals("Flying")) {
+            effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.withoutFlying+withoutReach | Secondary$ True " +
+                    " | Description$ Flying ( " + inst.getReminderText() + ")";
         } else if (keyword.startsWith("Hexproof")) {
             final StringBuilder sbDesc = new StringBuilder("Hexproof");
             final StringBuilder sbValid = new StringBuilder();
@@ -4896,9 +4880,26 @@ public class CardFactoryUtil {
             effect = "Mode$ CantTarget | Hexproof$ True | ValidCard$ Card.Self | Secondary$ True"
                     + sbValid.toString() + " | Activator$ Opponent | Description$ "
                     + sbDesc.toString() + " (" + inst.getReminderText() + ")";
+        } else if (keyword.equals("Horsemanship")) {
+            effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.withoutHorsemanship | Secondary$ True " +
+                    " | Description$ Horsemanship ( " + inst.getReminderText() + ")";
+        } else if (keyword.equals("Intimidate")) {
+            effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.nonArtifact+notSharesColorWith | Secondary$ True " +
+                    " | Description$ Intimidate ( " + inst.getReminderText() + ")";
+        } else if (keyword.startsWith("Protection")) {
+            String valid = getProtectionValid(keyword, false);
+            effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self ";
+            if (!valid.isEmpty()) {
+                effect += "| ValidBlocker$ " + valid;
+            }
+            effect += " | Secondary$ True | Description$ Protection ( " + inst.getReminderText() + ")";
         } else if (keyword.equals("Shroud")) {
             effect = "Mode$ CantTarget | Shroud$ True | ValidCard$ Card.Self | Secondary$ True"
                     + " | Description$ Shroud (" + inst.getReminderText() + ")";
+        } else if (keyword.equals("Skulk")) {
+            effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerGTX | Secondary$ True " +
+                    " | Description$ Skulk ( " + inst.getReminderText() + ")";
+            svars.put("X", "Count$CardPower");
         } else if (keyword.startsWith("Strive")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
@@ -4910,11 +4911,6 @@ public class CardFactoryUtil {
         } else if (keyword.equals("Undaunted")) {
             effect = "Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Secondary$ True"
                     + "| Amount$ Undaunted | EffectZone$ All | Description$ Undaunted (" + inst.getReminderText() + ")";
-        } else if (keyword.startsWith("CantBeBlockedBy ")) {
-            final String[] k = keyword.split(" ", 2);
-
-            effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ " + k[1]
-                    + " | Description$ CARDNAME can't be blocked " + getTextForKwCantBeBlockedByType(keyword);
         } else if (keyword.equals("MayFlashSac")) {
             effect = "Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | Secondary$ True | MayPlay$ True"
                 + " | MayPlayNotSorcerySpeed$ True | MayPlayWithFlash$ True | MayPlayText$ Sacrifice at the next cleanup step"
@@ -4974,122 +4970,6 @@ public class CardFactoryUtil {
         sa.appendSubAbility(as);
         return as;
         // ETBReplacementMove(sa.getHostCard(), null));
-    }
-
-    private static String getTextForKwCantBeBlockedByType(final String keyword) {
-        boolean negative = true;
-        final List<String> subs = Lists.newArrayList(TextUtil.split(keyword.split(" ", 2)[1], ','));
-        final List<List<String>> subsAnd = Lists.newArrayList();
-        final List<String> orClauses = Lists.newArrayList();
-        for (final String expession : subs) {
-            final List<String> parts = Lists.newArrayList(expession.split("[.+]"));
-            for (int p = 0; p < parts.size(); p++) {
-                final String part = parts.get(p);
-                if (part.equalsIgnoreCase("creature")) {
-                    parts.remove(p--);
-                    continue;
-                }
-                // based on suppossition that each expression has at least 1 predicate except 'creature'
-                negative &= part.contains("non") || part.contains("without");
-            }
-            subsAnd.add(parts);
-        }
-
-        final boolean allNegative = negative;
-        final String byClause = allNegative ? "except by " : "by ";
-
-        final Function<Pair<Boolean, String>, String> withToString = new Function<Pair<Boolean, String>, String>() {
-            @Override
-            public String apply(Pair<Boolean, String> inp) {
-                boolean useNon = inp.getKey() == allNegative;
-                return (useNon ? "*NO* " : "") + inp.getRight();
-            }
-        };
-
-        for (final List<String> andOperands : subsAnd) {
-            final List<Pair<Boolean, String>> prependedAdjectives = Lists.newArrayList();
-            final List<Pair<Boolean, String>> postponedAdjectives = Lists.newArrayList();
-            String creatures = null;
-
-            for (String part : andOperands) {
-                boolean positive = true;
-                if (part.startsWith("non")) {
-                    part = part.substring(3);
-                    positive = false;
-                }
-                if (part.startsWith("with")) {
-                    positive = !part.startsWith("without");
-                    postponedAdjectives.add(Pair.of(positive, part.substring(positive ? 4 : 7)));
-                } else if (part.startsWith("powerLEX")) {// Kraken of the Straits
-                    postponedAdjectives.add(Pair.of(true, "power less than the number of islands you control"));
-                } else if (part.startsWith("power")) {
-                    int kwLength = 5;
-                    String opName = Expressions.operatorName(part.substring(kwLength, kwLength + 2));
-                    String operand = part.substring(kwLength + 2);
-                    postponedAdjectives.add(Pair.of(true, "power" + opName + operand));
-                } else if (part.startsWith("toughness")) {
-                    int kwLength = 9;
-                    String operand = part.substring(kwLength + 2);
-                    String opName = "";
-                    if (part.startsWith("toughnessGE")) {
-                        opName = " or greater";
-                    } else {
-                        opName = "update CardFactoryUtil line 4773";
-                    }
-                    postponedAdjectives.add(Pair.of(true, "toughness " + operand + opName));
-                } else if (CardType.isACreatureType(part)) {
-                    if (creatures != null && CardType.isACreatureType(creatures)) { // e.g. Kor Castigator
-                        creatures = StringUtils.capitalize(Lang.getPlural(part)) + creatures;
-                    } else {
-                        creatures = StringUtils.capitalize(Lang.getPlural(part)) + (creatures == null ? "" : " or " + creatures);
-                    }
-                    // Kor Castigator and other similar creatures with composite subtype Eldrazi Scion in their text
-                    creatures = TextUtil.fastReplace(creatures, "Scions or Eldrazis", "Eldrazi Scions");
-                } else {
-                    prependedAdjectives.add(Pair.of(positive, part.toLowerCase()));
-                }
-            }
-
-            StringBuilder sbShort = new StringBuilder();
-            if (allNegative) {
-                boolean isFirst = true;
-                for (Pair<Boolean, String> pre : prependedAdjectives) {
-                    if (isFirst) isFirst = false;
-                    else sbShort.append(" and/or ");
-
-                    boolean useNon = pre.getKey() == allNegative;
-                    if (useNon) sbShort.append("non-");
-                    sbShort.append(pre.getValue()).append(" ").append(creatures == null ? "creatures" : creatures);
-                }
-                if (prependedAdjectives.isEmpty())
-                    sbShort.append(creatures == null ? "creatures" : creatures);
-
-                if (!postponedAdjectives.isEmpty()) {
-                    if (!prependedAdjectives.isEmpty()) {
-                        sbShort.append(" and/or creatures");
-                    }
-
-                    sbShort.append(" with ");
-                    sbShort.append(Lang.joinHomogenous(postponedAdjectives, withToString, allNegative ? "or" : "and"));
-                }
-
-            } else {
-                for (Pair<Boolean, String> pre : prependedAdjectives) {
-                    boolean useNon = pre.getKey() == allNegative;
-                    if (useNon) sbShort.append("non-");
-                    sbShort.append(pre.getValue()).append(" ");
-                }
-                sbShort.append(creatures == null ? "creatures" : creatures);
-
-                if (!postponedAdjectives.isEmpty()) {
-                    sbShort.append(" with ");
-                    sbShort.append(Lang.joinHomogenous(postponedAdjectives, withToString, allNegative ? "or" : "and"));
-                }
-
-            }
-            orClauses.add(sbShort.toString());
-        }
-        return byClause + StringUtils.join(orClauses, " or ") + ".";
     }
 
     public static void setupAdventureAbility(Card card) {

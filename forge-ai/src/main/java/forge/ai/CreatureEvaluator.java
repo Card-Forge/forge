@@ -162,9 +162,9 @@ public class CreatureEvaluator implements Function<Card, Integer> {
             value -= subValue(10, "must-attack");
         } else if (c.hasStartOfKeyword("CARDNAME attacks specific player each combat if able")) {
             value -= subValue(10, "must-attack-player");
-        } else if (c.hasKeyword("CARDNAME can block only creatures with flying.")) {
+        }/* else if (c.hasKeyword("CARDNAME can block only creatures with flying.")) {
             value -= subValue(toughness * 5, "reverse-reach");
-        }
+        }//*/
     
         if (c.hasSVar("DestroyWhenDamaged")) {
             value -= subValue((toughness - 1) * 9, "dies-to-dmg");

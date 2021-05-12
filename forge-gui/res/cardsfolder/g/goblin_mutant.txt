@@ -4,6 +4,5 @@ Types:Creature Goblin Mutant
 PT:5/3
 K:Trample
 S:Mode$ CantAttack | ValidCard$ Card.Self | IfDefenderControls$ Creature.untapped+powerGE3 | Description$ CARDNAME can't attack if defending player controls an untapped creature with power 3 or greater.
-K:CantBlock Creature.powerGE3:creatures with power 3 or greater
-SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_mutant.jpg
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.powerGE3 | ValidBlocker$ Creature.Self | Description$ CARDNAME can't block creatures with power 3 or greater.
 Oracle:Trample\nGoblin Mutant can't attack if defending player controls an untapped creature with power 3 or greater.\nGoblin Mutant can't block creatures with power 3 or greater.

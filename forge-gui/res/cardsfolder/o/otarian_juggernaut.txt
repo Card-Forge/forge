@@ -2,7 +2,7 @@ Name:Otarian Juggernaut
 ManaCost:4
 Types:Artifact Creature Juggernaut
 PT:2/3
-K:CantBeBlockedBy Creature.Wall
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.Wall | Description$ CARDNAME can't be blocked by Walls.
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | AddKeyword$ CARDNAME attacks each combat if able. | Condition$ Threshold | Description$ Threshold — As long as seven or more cards are in your graveyard, CARDNAME gets +3/+0 and attacks each combat if able.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/otarian_juggernaut.jpg
 Oracle:Otarian Juggernaut can't be blocked by Walls.\nThreshold — As long as seven or more cards are in your graveyard, Otarian Juggernaut gets +3/+0 and attacks each combat if able.

@@ -4,6 +4,5 @@ Types:Creature Wall
 PT:5/6
 K:Flying
 K:Defender
-K:CantBlock Creature.powerLE2:creatures with power 2 or less
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sunweb.jpg
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.powerLE2 | ValidBlocker$ Creature.Self | Description$ CARDNAME can't block creatures with power 2 or less.
 Oracle:Defender (This creature can't attack.)\nFlying\nSunweb can't block creatures with power 2 or less.
