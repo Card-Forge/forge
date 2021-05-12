@@ -4,6 +4,6 @@ Types:Creature Zombie
 PT:5/5
 K:Menace
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME enters the battlefield, return up to X target Zombie cards from your graveyard to the battlefield, where X is the number of opponents you have.
-SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Card.Zombie | TargetMin$ 0 | TargetMax$ X | TgtPrompt$ Select target Zombie card | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return up to X target Zombie cards from your graveyard to the battlefield, where X is the number of opponents you have.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Card.Zombie+YouCtrl | TargetMin$ 0 | TargetMax$ X | TgtPrompt$ Select target Zombie card | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return up to X target Zombie cards from your graveyard to the battlefield, where X is the number of opponents you have.
 SVar:X:PlayerCountOpponents$Amount
 Oracle:Menace\nWhen Rot Hulk enters the battlefield, return up to X target Zombie cards from your graveyard to the battlefield, where X is the number of opponents you have.
