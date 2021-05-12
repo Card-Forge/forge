@@ -1355,8 +1355,7 @@ public class GameAction {
         if (c.getCounters(CounterEnumType.LORE) < c.getFinalChapterNr()) {
             return false;
         }
-        if (!game.getStack().hasSimultaneousStackEntries() &&
-                !game.getStack().hasSourceOnStack(c, SpellAbilityPredicates.isChapter())) {
+        if (!game.getStack().hasSourceOnStack(c, SpellAbilityPredicates.isChapter())) {
             sacrifice(c, null, table);
             checkAgain = true;
         }
