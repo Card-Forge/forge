@@ -172,8 +172,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     }
 
     public final void clearFrozen() {
-        // TODO: frozen triggered abilities and undoable costs have nasty
-        // consequences
+        // TODO: frozen triggered abilities and undoable costs have nasty consequences
         frozen = false;
         frozenStack.clear();
     }
@@ -905,11 +904,14 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
         for (SpellAbilityStackInstance si : stack) {
             if (si.isTrigger() && si.getSourceCard().equals(source)) {
-                if (pred == null) {
+                if (pred == null || pred.apply(si.getSpellAbility(false))) {
                     return true;
                 }
-                SpellAbility sa = si.getSpellAbility(false);
-                if (pred.apply(sa)) {
+            }
+        }
+        for (SpellAbility sa : simultaneousStackEntryList) {
+            if (sa.isTrigger() && sa.getHostCard().equals(source)) {
+                if (pred == null || pred.apply(sa)) {
                     return true;
                 }
             }
