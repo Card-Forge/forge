@@ -2,6 +2,5 @@ Name:Gnat Alley Creeper
 ManaCost:2 R
 Types:Creature Human Rogue
 PT:3/1
-K:CantBeBlockedBy Creature.withFlying
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gnat_alley_creeper.jpg
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.withFlying | Description$ CARDNAME can't be blocked by creatures with flying.
 Oracle:Gnat Alley Creeper can't be blocked by creatures with flying.

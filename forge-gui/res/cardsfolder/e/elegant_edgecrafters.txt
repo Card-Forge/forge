@@ -2,8 +2,7 @@ Name:Elegant Edgecrafters
 ManaCost:4 G G
 Types:Creature Elf Artificer
 PT:3/4
-K:CantBeBlockedBy Creature.powerLE2
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLE2 | Description$ CARDNAME can't be blocked by creatures with power 2 or less.
 K:Fabricate:2
 DeckHas:Ability$Counters & Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/elegant_edgecrafters.jpg
 Oracle:Elegant Edgecrafters can't be blocked by creatures with power 2 or less.\nFabricate 2 (When this creature enters the battlefield, put two +1/+1 counters on it or create two 1/1 colorless Servo artifact creature tokens.)

@@ -2018,7 +2018,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     sbLong.append(keyword).append("\r\n");
                 } else if (keyword.startsWith("Strive") || keyword.startsWith("Escalate")
                         || keyword.startsWith("ETBReplacement")
-                        || keyword.startsWith("CantBeBlockedBy ")
                         || keyword.startsWith("Affinity")
                         || keyword.equals("CARDNAME enters the battlefield tapped.")
                         || keyword.startsWith("UpkeepCost")) {
@@ -2105,14 +2104,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 } else if (keyword.startsWith("CantBeBlockedByAmount")) {
                     sbLong.append(getName()).append(" can't be blocked ");
                     sbLong.append(getTextForKwCantBeBlockedByAmount(keyword));
-                } else if (keyword.startsWith("CantBlock")) {
-                    sbLong.append(getName()).append(" can't block ");
-                    if (keyword.contains("CardUID")) {
-                        sbLong.append("CardID (").append(Integer.valueOf(keyword.split("CantBlockCardUID_")[1])).append(")");
-                    } else {
-                        final String[] k = keyword.split(":");
-                        sbLong.append(k.length > 1 ? k[1] + ".\r\n" : "");
-                    }
                 } else if (keyword.equals("Unblockable")) {
                     sbLong.append(getName()).append(" can't be blocked.\r\n");
                 } else if (keyword.equals("AllNonLegendaryCreatureNames")) {
@@ -5178,76 +5169,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     // This is used by the AI to forecast an effect (so it must not change the game state)
-    public final int staticDamagePrevention(final int damage, final int possiblePrevention, final Card source, final boolean isCombat) {
-        if (!source.canDamagePrevented(isCombat)) {
-            return damage;
-        }
-
-        for (final Card ca : getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
-            for (final ReplacementEffect re : ca.getReplacementEffects()) {
-                Map<String, String> params = re.getMapParams();
-                if (!re.getMode().equals(ReplacementType.DamageDone) ||
-                        (!params.containsKey("PreventionEffect") && !params.containsKey("Prevent"))) {
-                    continue;
-                }
-                if (params.containsKey("ValidSource")
-                        && !source.isValid(params.get("ValidSource"), ca.getController(), ca, null)) {
-                    continue;
-                }
-                if (params.containsKey("ValidTarget")
-                        && !isValid(params.get("ValidTarget"), ca.getController(), ca, null)) {
-                    continue;
-                }
-                if (params.containsKey("IsCombat")) {
-                    if (params.get("IsCombat").equals("True")) {
-                        if (!isCombat) {
-                            continue;
-                        }
-                    } else {
-                        if (isCombat) {
-                            continue;
-                        }
-                    }
-                }
-                if (params.containsKey("Prevent")) {
-                    return 0;
-                } else if (re.getOverridingAbility() != null) {
-                    SpellAbility repSA = re.getOverridingAbility();
-                    if (repSA.getApi() == ApiType.ReplaceDamage) {
-                        return Math.max(0, damage - AbilityUtils.calculateAmount(ca, repSA.getParam("Amount"), repSA));
-                    }
-                }
-                return 0;
-            }
-        }
-        return staticDamagePrevention(damage - possiblePrevention, source, isCombat, true);
-    }
-
-    // This should be also usable by the AI to forecast an effect (so it must not change the game state)
-    @Override
-    public final int staticDamagePrevention(final int damageIn, final Card source, final boolean isCombat, final boolean isTest) {
-        if (damageIn <= 0) {
-            return 0;
-        }
-
-        if (!source.canDamagePrevented(isCombat)) {
-            return damageIn;
-        }
-
-        if (isCombat && getGame().getReplacementHandler().isPreventCombatDamageThisTurn()) {
-            return 0;
-        }
-
-        int restDamage = damageIn;
-
-        if (hasProtectionFromDamage(source)) {
-            return 0;
-        }
-
-        return restDamage > 0 ? restDamage : 0;
-    }
-
-    // This is used by the AI to forecast an effect (so it must not change the game state)
     @Override
     public final int staticReplaceDamage(final int damage, final Card source, final boolean isCombat) {
 
@@ -5716,10 +5637,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public boolean hasProtectionFrom(final Card source) {
         return hasProtectionFrom(source, false, false);
-    }
-
-    public boolean hasProtectionFromDamage(final Card source) {
-        return hasProtectionFrom(source, false, true);
     }
 
     @Override

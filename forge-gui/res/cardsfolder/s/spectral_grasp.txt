@@ -4,6 +4,6 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ CantAttack | ValidCard$ Creature.EnchantedBy | Target$ You,Planeswalker.YouCtrl | Description$ Enchanted creature can't attack you or planeswalkers you control.
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CantBlock Creature.YouCtrl | Description$ Enchanted creature can't block creatures you control.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.YouCtrl | ValidBlocker$ Creature.EnchantedBy | Description$ Enchanted creature can't block creatures you control.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spectral_grasp.jpg
 Oracle:Enchant creature\nEnchanted creature can't attack you or planeswalkers you control.\nEnchanted creature can't block creatures you control.

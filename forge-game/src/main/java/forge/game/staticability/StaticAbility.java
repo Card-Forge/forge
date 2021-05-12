@@ -450,11 +450,6 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             return false;
         }
 
-        if (hasParam("PlayerAttackedWithCreatureThisTurn")
-                && player.getCreaturesAttackedThisTurn().isEmpty()) {
-            return false;
-        }
-
         return true;
     }
 

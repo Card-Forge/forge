@@ -4,7 +4,7 @@ Types:Creature Faerie Rogue
 PT:3/1
 K:Flash
 K:Flying
-K:CARDNAME can block only creatures with flying.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.withoutFlying | ValidBlocker$ Creature.Self | Description$ CARDNAME can block only creatures with flying.
 Oracle:Flash\nFlying\nBrazen Borrower can block only creatures with flying.
 AlternateMode:Adventure
 

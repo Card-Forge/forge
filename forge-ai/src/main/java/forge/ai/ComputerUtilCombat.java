@@ -777,7 +777,6 @@ public class ComputerUtilCombat {
     public static boolean combatTriggerWillTrigger(final Card attacker, final Card defender, final Trigger trigger,
             Combat combat, final List<Card> plannedAttackers) {
         final Game game = attacker.getGame();
-        final Map<String, String> trigParams = trigger.getMapParams();
         boolean willTrigger = false;
         final Card source = trigger.getHostCard();
         if (combat == null) {
@@ -800,29 +799,27 @@ public class ComputerUtilCombat {
             if (combat.isAttacking(attacker)) {
                 return false; // The trigger should have triggered already
             }
-            if (trigParams.containsKey("ValidCard")) {
-                if (!trigger.matchesValid(attacker, trigParams.get("ValidCard").split(","))
-                        && !(combat.isAttacking(source) && trigger.matchesValid(source,
-                        trigParams.get("ValidCard").split(","))
-                            && !trigParams.containsKey("Alone"))) {
+            if (trigger.hasParam("ValidCard")) {
+                if (!trigger.matchesValidParam("ValidCard", attacker)
+                        && !(combat.isAttacking(source) && trigger.matchesValidParam("ValidCard", source)
+                            && !trigger.hasParam("Alone"))) {
                     return false;
                 }
             }
-            if (trigParams.containsKey("Attacked")) {
-            	if (combat.isAttacking(attacker)) {
-	            	GameEntity attacked = combat.getDefenderByAttacker(attacker);
-	                if (!trigger.matchesValid(attacked, trigParams.get("Attacked").split(","))) {
-	                    return false;
-	                }
-            	} else {
-            		if ("You,Planeswalker.YouCtrl".equals(trigParams.get("Attacked"))) {
-            			if (source.getController() == attacker.getController()) {
-            				return false;
-            			}
-            		}
-            	}
+            if (trigger.hasParam("Attacked")) {
+                if (combat.isAttacking(attacker)) {
+                    if (!trigger.matchesValidParam("Attacked", combat.getDefenderByAttacker(attacker))) {
+                        return false;
+                    }
+                } else {
+                    if ("You,Planeswalker.YouCtrl".equals(trigger.getParam("Attacked"))) {
+                        if (source.getController() == attacker.getController()) {
+                            return false;
+                        }
+                    }
+                }
             }
-            if (trigParams.containsKey("Alone") && plannedAttackers != null && plannedAttackers.size() != 1) {
+            if (trigger.hasParam("Alone") && plannedAttackers != null && plannedAttackers.size() != 1) {
                 return false; // won't trigger since the AI is planning to attack with more than one creature
             }
         }
@@ -830,10 +827,8 @@ public class ComputerUtilCombat {
         // defender == null means unblocked
         if ((defender == null) && mode == TriggerType.AttackerUnblocked) {
             willTrigger = true;
-            if (trigParams.containsKey("ValidCard")) {
-                if (!trigger.matchesValid(attacker, trigParams.get("ValidCard").split(","))) {
-                    return false;
-                }
+            if (!trigger.matchesValidParam("ValidCard", attacker)) {
+                return false;
             }
         }
 
@@ -843,8 +838,8 @@ public class ComputerUtilCombat {
 
         if (mode == TriggerType.Blocks) {
             willTrigger = true;
-            if (trigParams.containsKey("ValidBlocked")) {
-                String validBlocked = trigParams.get("ValidBlocked");
+            if (trigger.hasParam("ValidBlocked")) {
+                String validBlocked = trigger.getParam("ValidBlocked");
                 if (validBlocked.contains(".withLesserPower")) {
                     // Have to check this restriction here as triggering objects aren't set yet, so
                     // ValidBlocked$Creature.powerLTX where X:TriggeredBlocker$CardPower crashes with NPE
@@ -857,8 +852,8 @@ public class ComputerUtilCombat {
                     return false;
                 }
             }
-            if (trigParams.containsKey("ValidCard")) {
-                String validBlocker = trigParams.get("ValidCard");
+            if (trigger.hasParam("ValidCard")) {
+                String validBlocker = trigger.getParam("ValidCard");
                 if (validBlocker.contains(".withLesserPower")) {
                     // Have to check this restriction here as triggering objects aren't set yet, so
                     // ValidCard$Creature.powerLTX where X:TriggeredAttacker$CardPower crashes with NPE
@@ -873,29 +868,23 @@ public class ComputerUtilCombat {
             }
         } else if (mode == TriggerType.AttackerBlocked || mode == TriggerType.AttackerBlockedByCreature) {
             willTrigger = true;
-            if (trigParams.containsKey("ValidBlocker")) {
-                if (!trigger.matchesValid(defender, trigParams.get("ValidBlocker").split(","))) {
-                    return false;
-                }
+            if (!trigger.matchesValidParam("ValidBlocker", defender)) {
+                return false;
             }
-            if (trigParams.containsKey("ValidCard")) {
-                if (!trigger.matchesValid(attacker, trigParams.get("ValidCard").split(","))) {
-                    return false;
-                }
+            if (!trigger.matchesValidParam("ValidCard", attacker)) {
+                return false;
             }
         } else if (mode == TriggerType.DamageDone) {
             willTrigger = true;
-            if (trigParams.containsKey("ValidSource")) {
-                if (!(trigger.matchesValid(defender, trigParams.get("ValidSource").split(","))
+            if (trigger.hasParam("ValidSource")) {
+                if (!(trigger.matchesValidParam("ValidSource", defender)
                         && defender.getNetCombatDamage() > 0
-                        && (!trigParams.containsKey("ValidTarget")
-                                || trigger.matchesValid(attacker, trigParams.get("ValidTarget").split(","))))) {
+                        && trigger.matchesValidParam("ValidTarget", attacker))) {
                     return false;
                 }
-                if (!(trigger.matchesValid(attacker, trigParams.get("ValidSource").split(","))
+                if (!(trigger.matchesValidParam("ValidSource", attacker)
                         && attacker.getNetCombatDamage() > 0
-                        && (!trigParams.containsKey("ValidTarget")
-                        || trigger.matchesValid(defender, trigParams.get("ValidTarget").split(","))))) {
+                        && trigger.matchesValidParam("ValidTarget", defender))) {
                     return false;
                 }
             }
@@ -1638,8 +1627,8 @@ public class ComputerUtilCombat {
 
         //Check triggers that deal damage or shrink the attacker
         if (ComputerUtilCombat.getDamageToKill(attacker)
-        		+ ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, blocker, combat, withoutAbilities) <= 0) {
-        	return true;
+                + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, blocker, combat, withoutAbilities) <= 0) {
+            return true;
         }
 
         // check Destroy triggers (Cockatrice and friends)
@@ -2292,36 +2281,26 @@ public class ComputerUtilCombat {
         // Predict replacement effects
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final ReplacementEffect re : ca.getReplacementEffects()) {
-                Map<String, String> params = re.getMapParams();
                 if (!re.getMode().equals(ReplacementType.DamageDone) ||
-                        (!params.containsKey("PreventionEffect") && !params.containsKey("Prevent"))) {
+                        (!re.hasParam("PreventionEffect") && !re.hasParam("Prevent"))) {
                     continue;
                 }
                 // Immortal Coil prevents the damage but has a similar negative effect
                 if ("Immortal Coil".equals(ca.getName())) {
                     continue;
                 }
-                if (params.containsKey("ValidSource")
-                        && !source.isValid(params.get("ValidSource"), ca.getController(), ca, null)) {
+                if (!re.matchesValidParam("ValidSource", source)) {
                     continue;
                 }
-                if (params.containsKey("ValidTarget")
-                        && !target.isValid(params.get("ValidTarget"), ca.getController(), ca, null)) {
+                if (!re.matchesValidParam("ValidTarget", source)) {
                     continue;
                 }
-                if (params.containsKey("IsCombat")) {
-                    if (params.get("IsCombat").equals("True")) {
-                        if (!isCombat) {
-                            continue;
-                        }
-                    } else {
-                        if (isCombat) {
-                            continue;
-                        }
+                if (re.hasParam("IsCombat")) {
+                    if (re.getParam("IsCombat").equals("True") != isCombat) {
+                        continue;
                     }
-
                 }
-                if (params.containsKey("Prevent")) {
+                if (re.hasParam("Prevent")) {
                     return 0;
                 } else if (re.getOverridingAbility() != null) {
                     SpellAbility repSA = re.getOverridingAbility();
@@ -2333,7 +2312,7 @@ public class ComputerUtilCombat {
             }
         }
 
-        restDamage = target.staticDamagePrevention(restDamage, source, isCombat, true);
+        restDamage = target.staticDamagePrevention(restDamage, 0, source, isCombat);
 
         return restDamage;
     }
@@ -2358,7 +2337,7 @@ public class ComputerUtilCombat {
         int restDamage = damage;
 
         restDamage = target.staticReplaceDamage(restDamage, source, isCombat);
-        restDamage = target.staticDamagePrevention(restDamage, source, isCombat, true);
+        restDamage = target.staticDamagePrevention(restDamage, 0, source, isCombat);
 
         return restDamage;
     }

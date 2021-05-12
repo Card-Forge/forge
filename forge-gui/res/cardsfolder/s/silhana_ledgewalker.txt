@@ -2,7 +2,6 @@ Name:Silhana Ledgewalker
 ManaCost:1 G
 Types:Creature Elf Rogue
 PT:1/1
-K:CantBeBlockedBy Creature.withoutFlying
 K:Hexproof
-SVar:Picture:http://www.wizards.com/global/images/magic/general/silhana_ledgewalker.jpg
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.withoutFlying | Description$ CARDNAME can't be blocked except by creatures with flying.
 Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)\nSilhana Ledgewalker can't be blocked except by creatures with flying.

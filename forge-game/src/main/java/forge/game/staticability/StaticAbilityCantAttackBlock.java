@@ -55,6 +55,12 @@ public class StaticAbilityCantAttackBlock {
             return false;
         }
 
+        if (stAb.hasParam("DefenderKeyword")) {
+            if (card.hasKeyword("CARDNAME can attack as though it didn't have defender.")) {
+                return false;
+            }
+        }
+
         final Player defender = target instanceof Card ? ((Card) target).getController() : (Player) target;
 
         if (stAb.hasParam("UnlessDefenderControls")) {
@@ -115,13 +121,27 @@ public class StaticAbilityCantAttackBlock {
                             }
                         }
                     }
-                    if (!stillblock) {
-                        return true;
+                    if (stillblock) {
+                        return false;
                     }
+                } else {
+                    return false;
                 }
             }
         }
-        return false;
+        // relative valid relative to each other
+        if (!stAb.matchesValidParam("ValidAttackerRelative", attacker, blocker)) {
+            return false;
+        }
+        if (!stAb.matchesValidParam("ValidBlockerRelative", blocker, attacker)) {
+            return false;
+        }
+        if (blocker != null) {
+            if (!stAb.matchesValidParam("ValidDefender", blocker.getController())) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**

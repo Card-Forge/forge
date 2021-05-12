@@ -3,6 +3,5 @@ ManaCost:2 U
 Types:Creature Zombie Drake
 PT:2/3
 K:Flying
-K:CARDNAME can block only creatures with flying.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/scrapskin_drake.jpg
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.withoutFlying | ValidBlocker$ Creature.Self | Description$ CARDNAME can block only creatures with flying.
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nScrapskin Drake can block only creatures with flying.

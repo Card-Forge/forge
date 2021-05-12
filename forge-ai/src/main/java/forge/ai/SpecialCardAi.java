@@ -379,7 +379,7 @@ public class SpecialCardAi {
             }
 
             // Do not activate if damage will be prevented
-            if (source.staticDamagePrevention(predictedPT.getLeft(), source, true, true) == 0) {
+            if (source.staticDamagePrevention(predictedPT.getLeft(), 0, source, true) == 0) {
                 return false;
             }
 

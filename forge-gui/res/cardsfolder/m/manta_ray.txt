@@ -3,9 +3,8 @@ ManaCost:1 U U
 Types:Creature Fish
 PT:3/3
 S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefenderControls$ Island | Description$ CARDNAME can't attack unless defending player controls an Island.
-K:CantBeBlockedBy Creature.nonBlue
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.nonBlue | Description$ CARDNAME can't be blocked except by blue creatures.
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Island.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When you control no Islands, sacrifice CARDNAME.
 SVar:TrigSac:DB$Sacrifice | Defined$ Self
 SVar:NeedsToPlay:Island.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/manta_ray.jpg
 Oracle:Manta Ray can't attack unless defending player controls an Island.\nManta Ray can't be blocked except by blue creatures.\nWhen you control no Islands, sacrifice Manta Ray.

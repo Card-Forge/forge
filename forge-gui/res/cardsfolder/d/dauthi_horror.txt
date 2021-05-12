@@ -3,6 +3,5 @@ ManaCost:1 B
 Types:Creature Dauthi Horror
 PT:2/1
 K:Shadow
-K:CantBeBlockedBy Creature.White
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dauthi_horror.jpg
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.White | Description$ CARDNAME can't be blocked by white creatures.
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\nDauthi Horror can't be blocked by white creatures.

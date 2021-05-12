@@ -3,6 +3,6 @@ ManaCost:2 B
 Types:Creature Bird
 PT:2/2
 K:Flying
-K:CARDNAME can block only creatures with flying.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.withoutFlying | ValidBlocker$ Creature.Self | Description$ CARDNAME can block only creatures with flying.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/belbes_percher.jpg
 Oracle:Flying\nBelbe's Percher can block only creatures with flying.

@@ -3,6 +3,5 @@ ManaCost:2 U
 Types:Creature Drake
 PT:2/3
 K:Flying
-K:CantBlock Artifact.Creature:artifact creatures
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hinterland_drake.jpg
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Artifact | ValidBlocker$ Creature.Self | Description$ CARDNAME can't block artifact creatures.
 Oracle:Flying\nHinterland Drake can't block artifact creatures.

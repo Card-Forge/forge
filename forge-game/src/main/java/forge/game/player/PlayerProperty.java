@@ -240,7 +240,7 @@ public class PlayerProperty {
             final String[] type = property.substring(8).split("_");
             final CardCollectionView list = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type[0], sourceController, source, spellAbility);
             String comparator = type[1];
-            int y = AbilityUtils.calculateAmount(source, comparator.substring(2), null);
+            int y = AbilityUtils.calculateAmount(source, comparator.substring(2), spellAbility);
             if (!Expressions.compare(list.size(), comparator, y)) {
                 return false;
             }
@@ -248,7 +248,7 @@ public class PlayerProperty {
             final String[] type = property.substring(10).split("_");
             final CardCollectionView list = CardLists.getValidCards(player.getCardsIn(ZoneType.smartValueOf(type[0])), type[1], sourceController, source, spellAbility);
             String comparator = type[2];
-            int y = AbilityUtils.calculateAmount(source, comparator.substring(2), null);
+            int y = AbilityUtils.calculateAmount(source, comparator.substring(2), spellAbility);
             if (!Expressions.compare(list.size(), comparator, y)) {
                 return false;
             }
@@ -380,6 +380,14 @@ public class PlayerProperty {
             }
         } else if (property.startsWith("Triggered")) {
             if (!AbilityUtils.getDefinedPlayers(source, property, spellAbility).contains(player)) {
+                return false;
+            }
+        } else if (property.equals("castSpellThisTurn")) {
+            if (player.getSpellsCastThisTurn() > 0) {
+                return false;
+            }
+        } else if (property.equals("attackedWithCreaturesThisTurn")) {
+            if (player.getCreaturesAttackedThisTurn().isEmpty()) {
                 return false;
             }
         }

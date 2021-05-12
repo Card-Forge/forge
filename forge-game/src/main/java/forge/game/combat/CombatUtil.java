@@ -37,7 +37,6 @@ import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.cost.Cost;
@@ -252,22 +251,11 @@ public class CombatUtil {
         }
 
         // Keywords
-        final boolean canAttackWithDefender = attacker.hasKeyword("CARDNAME can attack as though it didn't have defender.");
         for (final KeywordInterface keyword : attacker.getKeywords()) {
             switch (keyword.getOriginal()) {
             case "CARDNAME can't attack.":
             case "CARDNAME can't attack or block.":
                 return false;
-            case "CARDNAME can't attack if you cast a spell this turn.":
-                if (attacker.getController().getSpellsCastThisTurn() > 0) {
-                    return false;
-                }
-                break;
-            case "Defender":
-                if (!canAttackWithDefender) {
-                    return false;
-                }
-                break;
             }
         }
 
@@ -1043,10 +1031,6 @@ public class CombatUtil {
         if (!CombatUtil.canBeBlocked(attacker, blocker.getController())) {
             return false;
         }
-
-        if (CardFactoryUtil.hasProtectionFrom(blocker, attacker)) {
-            return false;
-        }
         
         if (isUnblockableFromLandwalk(attacker, blocker.getController())
         		&& !blocker.hasKeyword("CARDNAME can block creatures with landwalk abilities as though they didn't have those abilities.")) {
@@ -1068,15 +1052,6 @@ public class CombatUtil {
             return false;
         }
 
-        if (attacker.hasKeyword("Creatures with power less than CARDNAME's power can't block it.") && attacker.getNetPower() > blocker.getNetPower()) {
-            return false;
-        }
-
-        if ((attacker.hasKeyword("Creatures with power greater than CARDNAME's power can't block it.") || attacker.hasKeyword(Keyword.SKULK))
-            && attacker.getNetPower() < blocker.getNetPower()) {
-            return false;
-        }
-
         // CantBlockBy static abilities
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
@@ -1084,57 +1059,6 @@ public class CombatUtil {
                     return false;
                 }
             }
-        }
-
-        for (KeywordInterface inst : blocker.getKeywords()) {
-            String keyword = inst.getOriginal();
-            if (keyword.startsWith("CantBlockCardUID")) {
-                final String[] k = keyword.split("_", 2);
-                if (attacker.getId() == Integer.parseInt(k[1])) {
-                    return false;
-                }
-            } else if (keyword.startsWith("CantBlock")) {
-                final String[] parse0 = keyword.split(":");
-                final String[] k = parse0[0].split(" ", 2);
-                final String[] restrictions = k[1].split(",");
-                if (attacker.isValid(restrictions, blocker.getController(), blocker, null)) {
-                    return false;
-                }
-            }
-        }
-
-        if (blocker.hasKeyword("CARDNAME can block only creatures with flying.") && !attacker.hasKeyword(Keyword.FLYING)) {
-            return false;
-        }
-
-        if (attacker.hasKeyword(Keyword.FLYING) && !blocker.hasKeyword(Keyword.FLYING) && !blocker.hasKeyword(Keyword.REACH)) {
-            boolean stillblock = false;
-            for (KeywordInterface inst : blocker.getKeywords()) {
-                String k = inst.getOriginal();
-                if (k.startsWith("IfReach")) {
-                    String[] n = k.split(":");
-                    if (attacker.getType().hasCreatureType(n[1])) {
-                        stillblock = true;
-                        break;  
-                    }
-                }
-            }
-            if (!stillblock) {
-                return false;
-            }
-        }
-
-        if (attacker.hasKeyword(Keyword.HORSEMANSHIP) && !blocker.hasKeyword(Keyword.HORSEMANSHIP)) {
-            return false;
-        }
-
-        // color is hardcoded there
-        if (attacker.hasKeyword(Keyword.FEAR) && !blocker.isArtifact() && !blocker.isBlack()) {
-            return false;
-        }
-
-        if (attacker.hasKeyword(Keyword.INTIMIDATE) && !blocker.isArtifact() && !blocker.sharesColorWith(attacker)) {
-            return false;
         }
 
         return true;

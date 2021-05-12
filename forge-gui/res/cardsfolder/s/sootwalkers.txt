@@ -2,6 +2,5 @@ Name:Sootwalkers
 ManaCost:2 BR BR
 Types:Creature Elemental Rogue
 PT:3/3
-K:CantBeBlockedBy Creature.White
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sootwalkers.jpg
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.White | Description$ CARDNAME can't be blocked by white creatures.
 Oracle:Sootwalkers can't be blocked by white creatures.

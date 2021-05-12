@@ -2,9 +2,9 @@ Name:Shrill Howler
 ManaCost:2 G
 Types:Creature Werewolf Horror
 PT:3/1
-K:Creatures with power less than CARDNAME's power can't block it. 
-A:AB$SetState | Cost$ 5 G | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/shrill_howler.jpg
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLTX | Description$ Creatures with power less than CARDNAME's power can't block it.
+SVar:X:Count$CardPower
+A:AB$ SetState | Cost$ 5 G | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
 AlternateMode:DoubleFaced
 DeckHints:Type$Eldrazi|Horror
 DeckHas:Ability$Token
@@ -16,9 +16,8 @@ Name:Howling Chorus
 ManaCost:no cost
 Types:Creature Eldrazi Werewolf
 PT:3/5
-K:Creatures with power less than CARDNAME's power can't block it. 
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLTX | Description$ Creatures with power less than CARDNAME's power can't block it.
+SVar:X:Count$CardPower 
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, create a 3/2 colorless Eldrazi Horror creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_3_2_eldrazi_horror | TokenOwner$ You | LegacyImage$ c 3 2 eldrazi horror emn
-SVar:Picture:http://www.wizards.com/global/images/magic/general/howling_chorus.jpg
 Oracle:Creatures with power less than Howling Chorus's power can't block it.\nWhenever Howling Chorus deals combat damage to a player, create a 3/2 colorless Eldrazi Horror creature token.
-
