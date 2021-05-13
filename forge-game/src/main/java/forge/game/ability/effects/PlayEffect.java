@@ -180,8 +180,7 @@ public class PlayEffect extends SpellAbilityEffect {
             activator.addController(controlledByTimeStamp, controlledByPlayer);
         }
 
-        final CardCollection saidNoTo = new CardCollection();
-        while (tgtCards.size() > saidNoTo.size() && saidNoTo.size() < amount && amount > 0) {
+        while (!tgtCards.isEmpty() && amount > 0) {
             activator.getController().tempShowCards(showCards);
             Card tgtCard = controller.getController().chooseSingleEntityForEffect(tgtCards, sa, Localizer.getInstance().getMessage("lblSelectCardToPlay"), null);
             activator.getController().endTempShowCards();
@@ -207,7 +206,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 if (wasFaceDown) {
                     tgtCard.turnFaceDownNoUpdate();
                 }
-                saidNoTo.add(tgtCard);
+                tgtCards.remove(tgtCard);
                 continue;
             }
 
@@ -241,7 +240,7 @@ public class PlayEffect extends SpellAbilityEffect {
                         source.addRemembered(tgtCard);
                     }
                 } else {
-                    saidNoTo.add(tgtCard);
+                    tgtCards.remove(tgtCard);
                 }
                 continue;
             }
