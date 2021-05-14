@@ -96,7 +96,7 @@ public class CardFactoryUtil {
         String abString  = "AB$ Mana | Cost$ T | Produced$ " + strcolor +
                 " | Secondary$ True | SpellDescription$ Add {" + strcolor + "}.";
         SpellAbility sa = AbilityFactory.getAbility(abString, state);
-        sa.setIntrinsic(true); // always intristic
+        sa.setIntrinsic(true); // always intrisic
         return sa;
     }
 

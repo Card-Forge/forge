@@ -3,7 +3,6 @@ package forge.game.ability.effects;
 import java.util.Arrays;
 import java.util.List;
 
-import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -170,9 +169,9 @@ public class CloneEffect extends SpellAbilityEffect {
                         cloneCard.clearImprintedCards();
                         cloneCard.clearRemembered();
                         // restore original Remembered and Imprinted, ignore cards from players who lost
-                        cloneCard.addImprintedCards(Iterables.filter(clonedImprinted, Predicates.not(CardPredicates.inZone(ZoneType.None))));
+                        cloneCard.addImprintedCards(Iterables.filter(clonedImprinted, CardPredicates.ownerLives()));
                         cloneCard.addRemembered(Iterables.filter(clonedRemembered, Player.class));
-                        cloneCard.addRemembered(Iterables.filter(Iterables.filter(clonedRemembered, Card.class),  CardPredicates.ownerLives()));
+                        cloneCard.addRemembered(Iterables.filter(Iterables.filter(clonedRemembered, Card.class), CardPredicates.ownerLives()));
                         cloneCard.updateStateForView();
                         game.fireEvent(new GameEventCardStatsChanged(cloneCard));
                     }

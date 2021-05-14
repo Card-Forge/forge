@@ -91,9 +91,8 @@ public class PumpEffect extends SpellAbilityEffect {
                 @Override
                 public void run() {
                     gameCard.removePTBoost(timestamp, 0);
-                    boolean updateText = false;
-                    updateText = gameCard.removeCanBlockAny(timestamp) || updateText;
-                    updateText = gameCard.removeCanBlockAdditional(timestamp) || updateText;
+                    boolean updateText = gameCard.removeCanBlockAny(timestamp);
+                    updateText |= gameCard.removeCanBlockAdditional(timestamp);
 
                     if (keywords.size() > 0) {
 
@@ -146,8 +145,12 @@ public class PumpEffect extends SpellAbilityEffect {
     }
 
     private static void addUntilCommand(final SpellAbility sa, GameCommand untilEOT) {
-        final Card host = sa.getHostCard();
+        Card host = sa.getHostCard();
         final Game game = host.getGame();
+        // in case host was LKI
+        if (host.isLKI()) {
+            host = game.getCardState(host);
+        }
 
         if (sa.hasParam("UntilEndOfCombat")) {
             game.getEndOfCombat().addUntil(untilEOT);
