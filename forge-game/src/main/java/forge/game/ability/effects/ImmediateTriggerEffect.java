@@ -9,6 +9,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
@@ -57,7 +58,9 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
         Card lki = CardUtil.getLKICopy(gameCard);
         lki.clearControllers();
         lki.setOwner(sa.getActivatingPlayer());
-        final Trigger immediateTrig = TriggerHandler.parseTrigger(mapParams, lki, sa.isIntrinsic(), null);
+        // if this trigger is part of ETBReplacement it shouldn't run with LKI from incomplete zone change (Wall of Stolen Identity)
+        final Card trigHost = sa.getRootAbility().getReplacementEffect() != null && sa.getRootAbility().getReplacementEffect().getMode().equals(ReplacementType.Moved) ? gameCard : lki;
+        final Trigger immediateTrig = TriggerHandler.parseTrigger(mapParams, trigHost, sa.isIntrinsic(), null);
         immediateTrig.setSpawningAbility(sa.copy(lki, sa.getActivatingPlayer(), true));
 
         // Need to copy paid costs
