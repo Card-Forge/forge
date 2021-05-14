@@ -575,6 +575,8 @@ public abstract class SpellAbilityEffect {
 
             GameEntity defender = null;
             FCollection<GameEntity> defs = null;
+            // important to update defenders here, maybe some PW got removed
+            combat.initConstraints();
             if ("True".equalsIgnoreCase(attacking)) {
                 defs = (FCollection<GameEntity>) combat.getDefenders();
             } else if (sa.hasParam("ChoosePlayerOrPlaneswalker")) {
