@@ -5,6 +5,6 @@ PT:2/2
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigTap | TriggerDescription$ Whenever CARDNAME deals damage to a player, tap target creature that player controls. That creature doesn't untap during its controller's untap step for as long as CARDNAME remains on the battlefield.
 SVar:TrigTap:DB$ Tap | ValidTgts$ Creature | TargetsWithDefinedController$ TriggeredTarget | SubAbility$ DBSomnophoreAnimate
-SVar:DBSomnophoreAnimate:DB$ Pump | Defined$ Targeted | KW$ HIDDEN CARDNAME doesn't untap during your untap step. | UntilHostLeavesPlay$ True
+SVar:DBSomnophoreAnimate:DB$ Pump | Defined$ Targeted | KW$ HIDDEN CARDNAME doesn't untap during your untap step. | Duration$ UntilHostLeavesPlay
 SVar:Picture:http://www.wizards.com/global/images/magic/general/somnophore.jpg
 Oracle:Flying\nWhenever Somnophore deals damage to a player, tap target creature that player controls. That creature doesn't untap during its controller's untap step for as long as Somnophore remains on the battlefield.

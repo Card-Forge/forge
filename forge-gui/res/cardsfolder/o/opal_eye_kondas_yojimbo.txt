@@ -5,7 +5,7 @@ PT:1/4
 K:Defender
 K:Bushido:1
 A:AB$ ChooseSource | Cost$ T | Choices$ Card,Emblem | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ The next time a source of your choice would deal damage this turn, that damage is dealt to CARDNAME instead.
-SVar:DBEffect:DB$ Effect | ReplacementEffects$ SelflessDamage | Triggers$ OutOfSight | Duration$ HostLeavesOrEOT | SubAbility$ DBCleanup | ConditionDefined$ ChosenCard | ConditionPresent$ Card,Emblem | ConditionCompare$ GE1
+SVar:DBEffect:DB$ Effect | ReplacementEffects$ SelflessDamage | Triggers$ OutOfSight | Duration$ UntilHostLeavesPlayOrEOT | SubAbility$ DBCleanup | ConditionDefined$ ChosenCard | ConditionPresent$ Card,Emblem | ConditionCompare$ GE1
 SVar:SelflessDamage:Event$ DamageDone | ValidTarget$ You | ValidSource$ Card.ChosenCard,Emblem.ChosenCard | ReplaceWith$ SelflessDmg | DamageTarget$ EffectSource | Description$ The next time a source of your choice would deal damage to you this turn, that damage is dealt to EFFECTSOURCE instead.
 SVar:SelflessDmg:DB$ ReplaceEffect | VarName$ Affected | VarValue$ EffectSource | VarType$ Card | SubAbility$ ExileEffect
 SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Defined$ ChosenCard | Execute$ ExileEffect | Static$ True

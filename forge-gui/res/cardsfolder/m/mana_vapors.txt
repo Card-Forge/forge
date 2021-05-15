@@ -1,7 +1,7 @@
 Name:Mana Vapors
 ManaCost:1 U
 Types:Sorcery
-A:SP$ PumpAll | Cost$ 1 U | ValidTgts$ Player | IsCurse$ True | ValidCards$ Land.TargetedPlayerCtrl | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True | SpellDescription$ Lands target player controls don't untap during their next untap step.
+A:SP$ PumpAll | Cost$ 1 U | ValidTgts$ Player | IsCurse$ True | ValidCards$ Land.TargetedPlayerCtrl | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent | SpellDescription$ Lands target player controls don't untap during their next untap step.
 #TODO: the AI doesn't really target the opponent with the tapped lands in a multiplayer game (not necessarily, anyway). Could use improvement before this card is marked AI playable.
 SVar:NeedsToPlay:Land.OppCtrl+tapped
 AI:RemoveDeck:All

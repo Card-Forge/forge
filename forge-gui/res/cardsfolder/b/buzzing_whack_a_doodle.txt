@@ -9,9 +9,9 @@ SVar:YouDoodle:DB$ StoreSVar | SVar$ Doodles | Type$ Number | Expression$ 1 | Sp
 SVar:StoreYou:DB$ StoreSVar | SVar$ YouChose | Type$ CountSVar | Expression$ Doodles | SubAbility$ OppChoice
 SVar:OppChoice:DB$ GenericChoice | Choices$ AniWhack,OppDoodle | Defined$ Player.Chosen | AILogic$ Random | ShowChoice$ ExceptSelf
 SVar:OppDoodle:DB$ StoreSVar | SVar$ Doodles | Type$ CountSVar | Expression$ Doodles/Plus.1 | SubAbility$ AniBuzz | SpellDescription$ Doodle
-SVar:AniWhack:DB$ Animate | Defined$ Self | Abilities$ ABWhack | Permanent$ True | SpellDescription$ Whack | ConditionCheckSVar$ Doodles | ConditionSVarCompare$ EQ0 | SubAbility$ AniBuzz
-SVar:AniBuzz:DB$ Animate | Defined$ Self | Abilities$ ABBuzz | Permanent$ True | ConditionCheckSVar$ Doodles | ConditionSVarCompare$ EQ1 | SubAbility$ AniDoodle
-SVar:AniDoodle:DB$ Animate | Defined$ Self | Abilities$ ABDoodle | Permanent$ True | ConditionCheckSVar$ Doodles | ConditionSVarCompare$ EQ2 | SubAbility$ NotifyWhack
+SVar:AniWhack:DB$ Animate | Defined$ Self | Abilities$ ABWhack | Duration$ Permanent | SpellDescription$ Whack | ConditionCheckSVar$ Doodles | ConditionSVarCompare$ EQ0 | SubAbility$ AniBuzz
+SVar:AniBuzz:DB$ Animate | Defined$ Self | Abilities$ ABBuzz | Duration$ Permanent | ConditionCheckSVar$ Doodles | ConditionSVarCompare$ EQ1 | SubAbility$ AniDoodle
+SVar:AniDoodle:DB$ Animate | Defined$ Self | Abilities$ ABDoodle | Duration$ Permanent | ConditionCheckSVar$ Doodles | ConditionSVarCompare$ EQ2 | SubAbility$ NotifyWhack
 SVar:NotifyWhack:DB$ GenericChoice | Choices$ YouWhack | AtRandom$ True | Defined$ You | ShowChoice$ ExceptSelf | ConditionCheckSVar$ YouChose | ConditionSVarCompare$ EQ0 | SubAbility$ NotifyDoodle
 SVar:NotifyDoodle:DB$ GenericChoice | Choices$ YouDoodle | AtRandom$ True | Defined$ You | ShowChoice$ ExceptSelf | ConditionCheckSVar$ YouChose | ConditionSVarCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenPlayer$ True

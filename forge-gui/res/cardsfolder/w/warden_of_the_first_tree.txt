@@ -2,8 +2,8 @@ Name:Warden of the First Tree
 ManaCost:G
 Types:Creature Human
 PT:1/1
-A:AB$ Animate | Cost$ 1 WB | Types$ Human,Warrior | Permanent$ True | Power$ 3 | Toughness$ 3 | SpellDescription$ CARDNAME becomes a Human Warrior with base power and toughness 3/3.
-A:AB$ Animate | Cost$ 2 WB WB | Defined$ Self | ConditionPresent$ Card.Self+Warrior | Types$ Human,Warrior,Spirit | Permanent$ True | Keywords$ Trample & Lifelink | SpellDescription$ If CARDNAME is a Warrior, it becomes a Human Spirit Warrior with trample and lifelink.
+A:AB$ Animate | Cost$ 1 WB | Types$ Human,Warrior | Duration$ Permanent | Power$ 3 | Toughness$ 3 | SpellDescription$ CARDNAME becomes a Human Warrior with base power and toughness 3/3.
+A:AB$ Animate | Cost$ 2 WB WB | Defined$ Self | ConditionPresent$ Card.Self+Warrior | Types$ Human,Warrior,Spirit | Duration$ Permanent | Keywords$ Trample & Lifelink | SpellDescription$ If CARDNAME is a Warrior, it becomes a Human Spirit Warrior with trample and lifelink.
 A:AB$ PutCounter | Cost$ 3 WB WB WB | ConditionPresent$ Card.Self+Spirit | CounterType$ P1P1 | CounterNum$ 5 | SpellDescription$ If CARDNAME is a Spirit, put five +1/+1 counters on it.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warden_of_the_first_tree.jpg
 Oracle:{1}{W/B}: Warden of the First Tree becomes a Human Warrior with base power and toughness 3/3.\n{2}{W/B}{W/B}: If Warden of the First Tree is a Warrior, it becomes a Human Spirit Warrior with trample and lifelink.\n{3}{W/B}{W/B}{W/B}: If Warden of the First Tree is a Spirit, put five +1/+1 counters on it.

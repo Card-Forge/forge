@@ -289,7 +289,6 @@ public class Combat {
     public final Player getDefenderPlayerByAttacker(final Card c) {
         GameEntity defender = getDefenderByAttacker(c);
 
-        // System.out.println(c.toString() + " attacks " + defender.toString());
         if (defender instanceof Player) {
             return (Player) defender;
         }

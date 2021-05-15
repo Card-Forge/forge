@@ -108,8 +108,8 @@ public class ControlGainEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            if (!tgtC.equals(sa.getHostCard()) && !sa.getHostCard().getGainControlTargets().contains(tgtC)) {
-                sa.getHostCard().addGainControlTarget(tgtC);
+            if (!tgtC.equals(source) && !source.getGainControlTargets().contains(tgtC)) {
+                source.addGainControlTarget(tgtC);
             }
 
             long tStamp = game.getNextTimestamp();
@@ -139,24 +139,24 @@ public class ControlGainEffect extends SpellAbilityEffect {
                 game.fireEvent(new GameEventCardStatsChanged(tgtC));
             }
 
-            if (remember && !sa.getHostCard().isRemembered(tgtC)) {
-                sa.getHostCard().addRemembered(tgtC);
+            if (remember && !source.isRemembered(tgtC)) {
+                source.addRemembered(tgtC);
             }
 
-            if (forget && sa.getHostCard().isRemembered(tgtC)) {
-                sa.getHostCard().removeRemembered(tgtC);
+            if (forget && source.isRemembered(tgtC)) {
+                source.removeRemembered(tgtC);
             }
 
             if (lose != null) {
                 final GameCommand loseControl = getLoseControlCommand(tgtC, tStamp, bTapOnLose, source);
-                if (lose.contains("LeavesPlay") && sa.getHostCard() != tgtC) { // Only return control if host and target are different cards
-                    sa.getHostCard().addLeavesPlayCommand(loseControl);
+                if (lose.contains("LeavesPlay") && source != tgtC) { // Only return control if host and target are different cards
+                    source.addLeavesPlayCommand(loseControl);
                 }
                 if (lose.contains("Untap")) {
-                    sa.getHostCard().addUntapCommand(loseControl);
+                    source.addUntapCommand(loseControl);
                 }
                 if (lose.contains("LoseControl")) {
-                    sa.getHostCard().addChangeControllerCommand(loseControl);
+                    source.addChangeControllerCommand(loseControl);
                 }
                 if (lose.contains("EOT")) {
                     game.getEndOfTurn().addUntil(loseControl);
@@ -169,7 +169,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
                 if (lose.contains("StaticCommandCheck")) {
                     String leftVar = sa.getSVar(sa.getParam("StaticCommandCheckSVar"));
                     String rightVar = sa.getParam("StaticCommandSVarCompare");
-                    sa.getHostCard().addStaticCommandList(new Object[]{leftVar, rightVar, tgtC, loseControl});
+                    source.addStaticCommandList(new Object[]{leftVar, rightVar, tgtC, loseControl});
                 }
                 if (lose.contains("UntilTheEndOfYourNextTurn")) {
                     if (game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) {

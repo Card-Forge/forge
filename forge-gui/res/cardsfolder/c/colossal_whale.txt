@@ -4,6 +4,6 @@ Types:Creature Whale
 PT:5/5
 K:Islandwalk
 T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, you may exile target creature defending player controls until CARDNAME leaves the battlefield.
-SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select target creature defending player control | UntilHostLeavesPlay$ True
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select target creature defending player control | Duration$ UntilHostLeavesPlay
 SVar:PlayMain1:TRUE
 Oracle:Islandwalk (This creature can't be blocked as long as defending player controls an Island.)\nWhenever Colossal Whale attacks, you may exile target creature defending player controls until Colossal Whale leaves the battlefield. (That creature returns under its owner's control.)

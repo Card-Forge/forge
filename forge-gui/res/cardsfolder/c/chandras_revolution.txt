@@ -3,7 +3,7 @@ ManaCost:3 R
 Types:Sorcery
 A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SubAbility$ DBTapLand | SpellDescription$ CARDNAME deals 4 damage to target creature. Tap target land. That land doesn't untap during its controller's next untap step.
 SVar:DBTapLand:DB$ Tap | ValidTgts$ Land | TgtPrompt$ Choose target land | RememberTapped$ True | AlwaysRemember$ True | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True | SubAbility$ DBCleanup
+SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chandras_revolution.jpg
 Oracle:Chandra's Revolution deals 4 damage to target creature. Tap target land. That land doesn't untap during its controller's next untap step.

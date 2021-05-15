@@ -2,7 +2,7 @@ Name:Aligned Hedron Network
 ManaCost:4
 Types:Artifact
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile all creatures with power 5 or greater until CARDNAME leaves the battlefield. (Those creatures return under their owners' control.)
-SVar:TrigExile:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | ChangeType$ Creature.powerGE5 | UntilHostLeavesPlay$ True
+SVar:TrigExile:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | ChangeType$ Creature.powerGE5 | Duration$ UntilHostLeavesPlay
 SVar:PlayMain1:TRUE
 SVar:NeedsToPlayVar:Z GE1
 SVar:Z:SVar$Z1/Minus.Z2

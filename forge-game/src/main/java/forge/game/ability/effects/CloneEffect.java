@@ -178,19 +178,7 @@ public class CloneEffect extends SpellAbilityEffect {
                 }
             };
 
-            final String duration = sa.getParam("Duration");
-            if (duration.equals("UntilEndOfTurn")) {
-                game.getEndOfTurn().addUntil(unclone);
-            }
-            else if (duration.equals("UntilYourNextTurn")) {
-                game.getCleanup().addUntil(host.getController(), unclone);
-            }
-            else if (duration.equals("UntilUnattached")) {
-                sa.getHostCard().addUnattachCommand(unclone);
-            }
-            else if (duration.equals("UntilFacedown")) {
-                sa.getHostCard().addFacedownCommand(unclone);
-            }
+            addUntilCommand(sa, unclone);
         }
 
         // now we can also cleanup in case target was another card

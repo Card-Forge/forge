@@ -3,10 +3,10 @@ ManaCost:3 B B
 Types:Enchantment
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ SiegeChoice | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose Khans or Dragons. Khans — At the beginning of your upkeep, return target creature card from your graveyard to your hand. Dragons — At the beginning of your upkeep, each opponent loses 2 life and you gain 2 life.
 SVar:SiegeChoice:DB$ GenericChoice | Choices$ Khans,Dragons | Defined$ You | SetChosenMode$ True | AILogic$ Dragons | ShowChoice$ ExceptSelf
-SVar:Khans:DB$ Animate | Defined$ Self | Triggers$ KhansTrigger | Permanent$ True | SpellDescription$ Khans
+SVar:Khans:DB$ Animate | Defined$ Self | Triggers$ KhansTrigger | Duration$ Permanent | SpellDescription$ Khans
 SVar:KhansTrigger:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ RaiseDead | TriggerDescription$ At the beginning of your upkeep, return target creature card from your graveyard to your hand.
 SVar:RaiseDead:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl
-SVar:Dragons:DB$ Animate | Defined$ Self | Triggers$ DragonsTrigger | Permanent$ True | SpellDescription$ Dragons
+SVar:Dragons:DB$ Animate | Defined$ Self | Triggers$ DragonsTrigger | Duration$ Permanent | SpellDescription$ Dragons
 SVar:DragonsTrigger:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ SyphonLife | TriggerDescription$ At the beginning of your upkeep, each opponent loses 2 life and you gain 2 life.
 SVar:SyphonLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2

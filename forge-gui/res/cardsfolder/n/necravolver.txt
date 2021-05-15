@@ -6,9 +6,9 @@ K:Kicker:1 G:W
 K:ETBReplacement:Other:VolverStrength:Mandatory::Card.Self+kicked 1
 K:ETBReplacement:Other:VolverPumped:Mandatory::Card.Self+kicked 2
 SVar:VolverStrength:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | ETB$ True | SubAbility$ VolverStomp | SpellDescription$ If CARDNAME was kicked with its {1}{G} kicker, it enters the battlefield with two +1/+1 counters on it and with trample.
-SVar:VolverStomp:DB$ Animate | Defined$ Self | Keywords$ Trample | Permanent$ True
+SVar:VolverStomp:DB$ Animate | Defined$ Self | Keywords$ Trample | Duration$ Permanent
 SVar:VolverPumped:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | ETB$ True | SubAbility$ VolverLife | SpellDescription$ If CARDNAME was kicked with its {W} kicker, it enters the battlefield with a +1/+1 counter on it and with "Whenever CARDNAME deals damage, you gain that much life."
-SVar:VolverLife:DB$ Animate | Defined$ Self | Triggers$ PseudoLifelink | sVars$ VolverTrigGain,VolverX | Permanent$ True
+SVar:VolverLife:DB$ Animate | Defined$ Self | Triggers$ PseudoLifelink | sVars$ VolverTrigGain,VolverX | Duration$ Permanent
 SVar:PseudoLifelink:Mode$ DamageDealtOnce | ValidSource$ Card.Self | Execute$ VolverTrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage, you gain that much life.
 SVar:VolverTrigGain:DB$ GainLife | Defined$ You | LifeAmount$ VolverX
 SVar:VolverX:TriggerCount$DamageAmount

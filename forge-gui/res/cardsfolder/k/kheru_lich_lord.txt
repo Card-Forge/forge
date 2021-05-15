@@ -4,7 +4,7 @@ Types:Creature Zombie Wizard
 PT:4/4
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigChangZone | TriggerDescription$ At the beginning of your upkeep, you may pay {2}{B}. If you do, return a creature card at random from your graveyard to the battlefield. It gains flying, trample, and haste. Exile that card at the beginning of your next end step. If it would leave the battlefield, exile it instead of putting it anywhere else.
 SVar:TrigChangZone:AB$ ChangeZone | Cost$ 2 B | ChangeType$ Creature.YouCtrl | Origin$ Graveyard | Destination$ Battlefield | Hidden$ True | Mandatory$ True | AtRandom$ True | RememberChanged$ True | SubAbility$ DBUnearthed
-SVar:DBUnearthed:DB$ Animate | Defined$ Remembered | Keywords$ Flying & Trample & Haste | LeaveBattlefield$ Exile | sVars$ KheruMustAttack | Permanent$ True | SubAbility$ DBCleanup | AtEOT$ Exile | StackDescription$ It gains flying, trample, and haste. Exile that card at the beginning of your next end step. If it would leave the battlefield, exile it instead of putting it anywhere else.
+SVar:DBUnearthed:DB$ Animate | Defined$ Remembered | Keywords$ Flying & Trample & Haste | LeaveBattlefield$ Exile | sVars$ KheruMustAttack | Duration$ Permanent | SubAbility$ DBCleanup | AtEOT$ Exile | StackDescription$ It gains flying, trample, and haste. Exile that card at the beginning of your next end step. If it would leave the battlefield, exile it instead of putting it anywhere else.
 SVar:KheruMustAttack:SVar:MustAttack:True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:Random

@@ -2,9 +2,9 @@ Name:Urza's Saga
 ManaCost:no cost
 Types:Enchantment Land Urza's Saga
 K:Saga:3:Animate1,Animate2,Tutor
-SVar:Animate1:DB$ Animate | Defined$ Self | Abilities$ ABMana | Permanent$ True | SpellDescription$ CARDNAME gains "{T}: Add {C}."
+SVar:Animate1:DB$ Animate | Defined$ Self | Abilities$ ABMana | Duration$ Permanent | SpellDescription$ CARDNAME gains "{T}: Add {C}."
 SVar:ABMana:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-SVar:Animate2:DB$ Animate | Defined$ Self | Abilities$ ABToken | Permanent$ True | SpellDescription$ CARDNAME gains "{2}, {T}: Create a 0/0 colorless Construct artifact creature token with 'This creature gets +1/+1 for each artifact you control.'"
+SVar:Animate2:DB$ Animate | Defined$ Self | Abilities$ ABToken | Duration$ Permanent | SpellDescription$ CARDNAME gains "{2}, {T}: Create a 0/0 colorless Construct artifact creature token with 'This creature gets +1/+1 for each artifact you control.'"
 SVar:ABToken:AB$ Token | Cost$ 2 T | TokenScript$ c_0_0_a_construct_total_artifacts | SpellDescription$ Create a 0/0 colorless Construct artifact creature token with "This creature gets +1/+1 for each artifact you control."
 SVar:Tutor:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Artifact.ManaCost0,Artifact.ManaCost1 | ChangeNum$ 1 | SpellDescription$ Search your library for an artifact card with mana cost {0} or {1}, put it onto the battlefield, then shuffle.
 DeckHas:Ability$Token

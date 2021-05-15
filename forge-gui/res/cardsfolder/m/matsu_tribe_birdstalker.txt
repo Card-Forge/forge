@@ -4,7 +4,7 @@ Types:Creature Snake Warrior Archer
 PT:2/2
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ Whenever CARDNAME deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.
 SVar:TrigTap:DB$ Tap | Defined$ TriggeredTarget | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | Defined$ TriggeredTarget | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True | IsCurse$ True
+SVar:DBPump:DB$ Pump | Defined$ TriggeredTarget | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent | IsCurse$ True
 A:AB$ Pump | Cost$ G | KW$ Reach | Defined$ Self | SpellDescription$ CARDNAME gains reach until end of turn. (It can block creatures with flying.)
 SVar:HasCombatEffect:TRUE
 Oracle:Whenever Matsu-Tribe Birdstalker deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.\n{G}: Matsu-Tribe Birdstalker gains reach until end of turn. (It can block creatures with flying.)

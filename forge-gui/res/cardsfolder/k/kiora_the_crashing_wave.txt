@@ -2,7 +2,7 @@ Name:Kiora, the Crashing Wave
 ManaCost:2 G U
 Types:Legendary Planeswalker Kiora
 Loyalty:2
-A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Permanent.OppCtrl | TgtPrompt$ Select target permanent an opponent controls | Planeswalker$ True | KW$ Prevent all damage that would be dealt to and dealt by CARDNAME. | IsCurse$ True | UntilYourNextTurn$ True | SpellDescription$ Until your next turn, prevent all damage that would be dealt to and dealt by target permanent an opponent controls.
+A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Permanent.OppCtrl | TgtPrompt$ Select target permanent an opponent controls | Planeswalker$ True | KW$ Prevent all damage that would be dealt to and dealt by CARDNAME. | IsCurse$ True | Duration$ UntilYourNextTurn | SpellDescription$ Until your next turn, prevent all damage that would be dealt to and dealt by target permanent an opponent controls.
 A:AB$ Draw | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | SubAbility$ DBEffect | SpellDescription$ Draw a card. You may play an additional land this turn.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ Exploration
 SVar:Exploration:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | EffectZone$ Command | Description$ You may play an additional land this turn.

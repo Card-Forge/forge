@@ -29,7 +29,7 @@ public class AnimateEffect extends AnimateEffectBase {
         String animateImprinted = null;
 
         //if host is not on the battlefield don't apply
-        if ((sa.hasParam("UntilHostLeavesPlay") || sa.hasParam("UntilLoseControlOfHost"))
+        if (("UntilHostLeavesPlay".equals(sa.getParam("Duration")) || "UntilLoseControlOfHost".equals(sa.getParam("Duration")))
                 && !sa.getHostCard().isInPlay()) {
             return;
         }
@@ -216,7 +216,7 @@ public class AnimateEffect extends AnimateEffectBase {
             toughness = AbilityUtils.calculateAmount(host, sa.getParam("Toughness"), sa);
         }
 
-        final boolean permanent = sa.hasParam("Permanent");
+        final boolean permanent = "Permanent".equals(sa.getParam("Duration"));
         final List<String> types = Lists.newArrayList();
         if (sa.hasParam("Types")) {
             types.addAll(Arrays.asList(sa.getParam("Types").split(",")));
@@ -296,15 +296,16 @@ public class AnimateEffect extends AnimateEffectBase {
         // sb.append(abilities)
         // sb.append(triggers)
         if (!permanent) {
-            if (sa.hasParam("UntilEndOfCombat")) {
+            final String duration = sa.getParam("Duration");
+            if ("UntilEndOfCombat".equals(duration)) {
                 sb.append(" until end of combat.");
-            } else if (sa.hasParam("UntilHostLeavesPlay")) {
+            } else if ("UntilHostLeavesPlay".equals(duration)) {
                 sb.append(" until ").append(host).append(" leaves the battlefield.");
-            } else if (sa.hasParam("UntilYourNextUpkeep")) {
+            } else if ("UntilYourNextUpkeep".equals(duration)) {
                 sb.append(" until your next upkeep.");
-            } else if (sa.hasParam("UntilYourNextTurn")) {
+            } else if ("UntilYourNextTurn".equals(duration)) {
                 sb.append(" until your next turn.");
-            } else if (sa.hasParam("UntilControllerNextUntap")) {
+            } else if ("UntilControllerNextUntap".equals(duration)) {
                 sb.append(" until its controller's next untap step.");
             } else {
                 sb.append(" until end of turn.");

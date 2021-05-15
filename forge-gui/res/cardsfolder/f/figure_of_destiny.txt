@@ -2,8 +2,8 @@ Name:Figure of Destiny
 ManaCost:RW
 Types:Creature Kithkin
 PT:1/1
-A:AB$ Animate | Cost$ RW | Types$ Kithkin,Spirit | Permanent$ True | Power$ 2 | Toughness$ 2 | SpellDescription$ CARDNAME becomes a Kithkin Spirit with base power and toughness 2/2.
-A:AB$ Animate | Cost$ RW RW RW | ConditionPresent$ Card.Self+Spirit | Types$ Kithkin,Spirit,Warrior | Permanent$ True | Power$ 4 | Toughness$ 4 | SpellDescription$ If CARDNAME is a Spirit, it becomes a Kithkin Spirit Warrior with base power and toughness 4/4.
-A:AB$ Animate | Cost$ RW RW RW RW RW RW| ConditionPresent$ Card.Self+Warrior | Types$ Kithkin,Spirit,Warrior,Avatar | Permanent$ True | Power$ 8 | Toughness$ 8 | Keywords$ Flying & First Strike | SpellDescription$ If CARDNAME is a Warrior, it becomes a Kithkin Spirit Warrior Avatar with base power and toughness 8/8, flying, and first strike.
+A:AB$ Animate | Cost$ RW | Types$ Kithkin,Spirit | Duration$ Permanent | Power$ 2 | Toughness$ 2 | SpellDescription$ CARDNAME becomes a Kithkin Spirit with base power and toughness 2/2.
+A:AB$ Animate | Cost$ RW RW RW | ConditionPresent$ Card.Self+Spirit | Types$ Kithkin,Spirit,Warrior | Duration$ Permanent | Power$ 4 | Toughness$ 4 | SpellDescription$ If CARDNAME is a Spirit, it becomes a Kithkin Spirit Warrior with base power and toughness 4/4.
+A:AB$ Animate | Cost$ RW RW RW RW RW RW| ConditionPresent$ Card.Self+Warrior | Types$ Kithkin,Spirit,Warrior,Avatar | Duration$ Permanent | Power$ 8 | Toughness$ 8 | Keywords$ Flying & First Strike | SpellDescription$ If CARDNAME is a Warrior, it becomes a Kithkin Spirit Warrior Avatar with base power and toughness 8/8, flying, and first strike.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/figure_of_destiny.jpg
 Oracle:{R/W}: Figure of Destiny becomes a Kithkin Spirit with base power and toughness 2/2.\n{R/W}{R/W}{R/W}: If Figure of Destiny is a Spirit, it becomes a Kithkin Spirit Warrior with base power and toughness 4/4.\n{R/W}{R/W}{R/W}{R/W}{R/W}{R/W}: If Figure of Destiny is a Warrior, it becomes a Kithkin Spirit Warrior Avatar with base power and toughness 8/8, flying, and first strike.

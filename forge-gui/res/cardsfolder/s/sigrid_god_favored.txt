@@ -6,6 +6,6 @@ K:Flash
 K:First Strike
 K:Protection:Creature.God:Protection from God creatures
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, exile up to one target attacking or blocking creature until NICKNAME leaves the battlefield.
-SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.attacking,Creature.blocking | AITgts$ Creature.OppCtrl+attacking,Creature.OppCtrl+blocking | TgtPrompt$ Select target attacking or blocking creature | TargetMin$ 0 | TargetMax$ 1 | UntilHostLeavesPlay$ True | AILogic$ ExileCombatThreat
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.attacking,Creature.blocking | AITgts$ Creature.OppCtrl+attacking,Creature.OppCtrl+blocking | TgtPrompt$ Select target attacking or blocking creature | TargetMin$ 0 | TargetMax$ 1 | Duration$ UntilHostLeavesPlay | AILogic$ ExileCombatThreat
 SVar:AmbushAI:True
 Oracle:Flash\nFirst strike, protection from God creatures\nWhen Sigrid, God-Favored enters the battlefield, exile up to one target attacking or blocking creature until Sigrid leaves the battlefield.

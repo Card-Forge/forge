@@ -4,7 +4,7 @@ Types:Legendary Creature Djinn Wizard
 PT:2/2
 A:AB$ ChangeZone | Cost$ T | RememberChanged$ True | Origin$ Hand | Destination$ Exile | ChangeType$ Instant,Sorcery | ChangeNum$ 1 | SubAbility$ DBPutCounter | StackDescription$ SpellDescription | SpellDescription$ You may exile an instant or sorcery card from your hand and put three hone counters on it. It gains "At the beginning of your upkeep, if this card is exiled, remove a hone counter from it" and "When the last hone counter is removed from this card, if it's exiled, you may cast it. It costs {4} less to cast this way."
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ HONE | CounterNum$ 3 | SubAbility$ DBAddTriggers | TgtZone$ Exile
-SVar:DBAddTriggers:DB$ Animate | Defined$ Remembered | Triggers$ TrigRemoveCounter,TrigCast | SubAbility$ DBCleanup | Permanent$ True
+SVar:DBAddTriggers:DB$ Animate | Defined$ Remembered | Triggers$ TrigRemoveCounter,TrigCast | SubAbility$ DBCleanup | Duration$ Permanent
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:TrigRemoveCounter:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Exile | Execute$ DBRemoveCounter | TriggerDescription$ At the beginning of your upkeep, if this card is exiled, remove a hone counter from it.
 SVar:DBRemoveCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ HONE | CounterNum$ 1

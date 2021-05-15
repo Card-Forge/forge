@@ -2,7 +2,7 @@ Name:Dovin Baan
 ManaCost:2 W U
 Types:Legendary Planeswalker Dovin
 Loyalty:3
-A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumAtt$ -3 | IsCurse$ True | UntilYourNextTurn$ True | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME's activated abilities can't be activated. | SpellDescription$ Until your next turn, up to one target creature gets -3/-0 and its activated abilities can't be activated.
+A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumAtt$ -3 | IsCurse$ True | Duration$ UntilYourNextTurn | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME's activated abilities can't be activated. | SpellDescription$ Until your next turn, up to one target creature gets -3/-0 and its activated abilities can't be activated.
 A:AB$ GainLife | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | Defined$ You | LifeAmount$ 2 | SubAbility$ DBDraw | SpellDescription$ You gain 2 life and draw a card.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
 A:AB$ Effect | Cost$ SubCounter<7/LOYALTY> | Name$ Emblem - Dovin Baan | Image$ Emblem_dovin_baan | StaticAbilities$ STDovin | Planeswalker$ True | Ultimate$ True | Stackable$ False | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Your opponents can't untap more than two permanents during their untap steps."

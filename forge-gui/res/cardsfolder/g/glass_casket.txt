@@ -2,7 +2,7 @@ Name:Glass Casket
 ManaCost:1 W
 Types:Artifact
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target creature an opponent controls with mana value 3 or less until CARDNAME leaves the battlefield.
-SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl+cmcLE3 | TgtPrompt$ Select target creature an opponent controls with mana value 3 or less | UntilHostLeavesPlay$ True
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl+cmcLE3 | TgtPrompt$ Select target creature an opponent controls with mana value 3 or less | Duration$ UntilHostLeavesPlay
 SVar:PlayMain1:TRUE
 SVar:NeedsToPlay:Creature.OppCtrl+cmcLE3
 Oracle:When Glass Casket enters the battlefield, exile target creature an opponent controls with mana value 3 or less until Glass Casket leaves the battlefield.

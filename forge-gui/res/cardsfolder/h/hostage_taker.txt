@@ -3,7 +3,7 @@ ManaCost:2 U B
 Types:Creature Human Pirate
 PT:2/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile another target creature or artifact until CARDNAME leaves the battlefield. You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any type to cast that spell.
-SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.Other,Artifact.Other | TgtPrompt$ Select another target creature or artifact | UntilHostLeavesPlay$ True | RememberChanged$ True | SubAbility$ DBEffect
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.Other,Artifact.Other | TgtPrompt$ Select another target creature or artifact | Duration$ UntilHostLeavesPlay | RememberChanged$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Remembered | Duration$ Permanent | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
 SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreType$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may cast that card and you may spend mana as though it were mana of any type to cast it.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

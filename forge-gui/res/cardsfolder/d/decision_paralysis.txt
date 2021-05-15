@@ -2,6 +2,6 @@ Name:Decision Paralysis
 ManaCost:3 U
 Types:Instant
 A:SP$ Tap | Cost$ 3 U | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target creature | ValidTgts$ Creature | SubAbility$ TrigPump | SpellDescription$ Tap up to two target creatures. Those creatures don't untap during their controller's next untap step.
-SVar:TrigPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True
+SVar:TrigPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent
 SVar:Picture:http://www.wizards.com/global/images/magic/general/decision_paralysis.jpg
 Oracle:Tap up to two target creatures. Those creatures don't untap during their controller's next untap step.

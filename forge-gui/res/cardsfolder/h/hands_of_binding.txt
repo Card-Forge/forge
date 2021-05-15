@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Sorcery
 K:Cipher
 A:SP$ Tap | Cost$ 1 U | ValidTgts$ Creature.OppCtrl | SubAbility$ DBPump | SpellDescription$ Tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.
-SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True | SubAbility$ Cipher
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent | SubAbility$ Cipher
 SVar:Cipher:DB$ Encode | Defined$ Self
 DeckNeeds:Type$Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hands_of_binding.jpg

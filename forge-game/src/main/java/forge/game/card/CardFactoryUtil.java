@@ -1750,7 +1750,7 @@ public class CardFactoryUtil {
 
             if (card.isPermanent()) {
                 final String abPump = "DB$ Pump | Defined$ Remembered | KW$ Haste | PumpZone$ Stack "
-                        + "| ConditionDefined$ Remembered | ConditionPresent$ Creature | UntilLoseControlOfHost$ True";
+                        + "| ConditionDefined$ Remembered | ConditionPresent$ Creature | Duration$ UntilLoseControlOfHost";
                 final AbilitySub saPump = (AbilitySub)AbilityFactory.getAbility(abPump, card);
 
                 String dbClean = "DB$ Cleanup | ClearRemembered$ True";
@@ -2230,7 +2230,7 @@ public class CardFactoryUtil {
 
             final String counter = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | ETB$ True | CounterNum$ 1" +
                                 " | SpellDescription$ Put a +1/+1 counter on it.";
-            final String haste = "DB$ Animate | Defined$ Self | Keywords$ Haste | Permanent$ True | SpellDescription$ Haste";
+            final String haste = "DB$ Animate | Defined$ Self | Keywords$ Haste | Duration$ Permanent | SpellDescription$ Haste";
 
             SpellAbility saChoose = AbilityFactory.getAbility(choose, card);
 
@@ -2506,7 +2506,7 @@ public class CardFactoryUtil {
             final String awaken = "DB$ PutCounter | CounterType$ P1P1 | CounterNum$ "+ counters + " | "
                     + "ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | Awaken$ True";
             final String animate = "DB$ Animate | Defined$ Targeted | Power$ 0 | Toughness$ 0 | Types$"
-                    + " Creature,Elemental | Permanent$ True | Keywords$ Haste";
+                    + " Creature,Elemental | Duration$ Permanent | Keywords$ Haste";
 
             final AbilitySub awakenSub = (AbilitySub) AbilityFactory.getAbility(awaken, card);
             final AbilitySub animateSub = (AbilitySub) AbilityFactory.getAbility(animate, card);

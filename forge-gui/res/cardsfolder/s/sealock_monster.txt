@@ -5,7 +5,7 @@ PT:5/5
 S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefenderControls$ Island | Description$ CARDNAME can't attack unless defending player controls an Island.
 K:Monstrosity:3:5 U U
 T:Mode$ BecomeMonstrous | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ When CARDNAME becomes monstrous, target land becomes an Island in addition to its other types.
-SVar:TrigAnimate:DB$ Animate | ValidTgts$ Land | AITgts$ Land.OppCtrl | Types$ Island | Permanent$ True | IsCurse$ True
+SVar:TrigAnimate:DB$ Animate | ValidTgts$ Land | AITgts$ Land.OppCtrl | Types$ Island | Duration$ Permanent | IsCurse$ True
 DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sealock_monster.jpg
 Oracle:Sealock Monster can't attack unless defending player controls an Island.\n{5}{U}{U}: Monstrosity 3. (If this creature isn't monstrous, put three +1/+1 counters on it and it becomes monstrous.)\nWhen Sealock Monster becomes monstrous, target land becomes an Island in addition to its other types.

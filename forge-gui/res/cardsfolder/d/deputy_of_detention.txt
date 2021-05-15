@@ -3,6 +3,6 @@ ManaCost:1 W U
 Types:Creature Vedalken Wizard
 PT:1/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target nonland permanent an opponent controls and all other nonland permanents that player controls with the same name as that permanent until CARDNAME leaves the battlefield.
-SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand+OppCtrl | TgtPrompt$ Select target nonland permanent an opponent controls | SubAbility$ DBChangeZoneAll | UntilHostLeavesPlay$ True
-SVar:DBChangeZoneAll:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | ChangeType$ Permanent.nonLand+NotDefinedTargeted+sharesNameWith Targeted+ControlledBy TargetedOrController | UntilHostLeavesPlay$ True
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand+OppCtrl | TgtPrompt$ Select target nonland permanent an opponent controls | SubAbility$ DBChangeZoneAll | Duration$ UntilHostLeavesPlay
+SVar:DBChangeZoneAll:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | ChangeType$ Permanent.nonLand+NotDefinedTargeted+sharesNameWith Targeted+ControlledBy TargetedOrController | Duration$ UntilHostLeavesPlay
 Oracle:When Deputy of Detention enters the battlefield, exile target nonland permanent an opponent controls and all other nonland permanents that player controls with the same name as that permanent until Deputy of Detention leaves the battlefield.

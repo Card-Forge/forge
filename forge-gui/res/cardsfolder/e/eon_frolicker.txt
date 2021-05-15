@@ -5,6 +5,6 @@ PT:5/5
 K:Flying
 T:Mode$ ChangesZone | ValidCard$ Card.wasCast+Self | Destination$ Battlefield | Execute$ DBAddTurn | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it, target opponent takes an extra turn after this one. Until your next turn, you and planeswalkers you control gain protection from that player. (You and planeswalkers you control can't be targeted, dealt damage, or enchanted by anything controlled by that player.)
 SVar:DBAddTurn:DB$ AddTurn | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumTurns$ 1 | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | Defined$ You | KW$ Protection:Player.TargetedPlayer:Protection from the target opponent | DefinedKW$ TargetedPlayer | UntilYourNextTurn$ True | SubAbility$ DBPumpWalkers
-SVar:DBPumpWalkers:DB$ Pump | Defined$ Valid Planeswalker.YouCtrl | KW$ Protection:Player.TargetedPlayer:Protection from the target opponent | DefinedKW$ TargetedPlayer | UntilYourNextTurn$ True
+SVar:DBPump:DB$ Pump | Defined$ You | KW$ Protection:Player.TargetedPlayer:Protection from the target opponent | DefinedKW$ TargetedPlayer | Duration$ UntilYourNextTurn | SubAbility$ DBPumpWalkers
+SVar:DBPumpWalkers:DB$ Pump | Defined$ Valid Planeswalker.YouCtrl | KW$ Protection:Player.TargetedPlayer:Protection from the target opponent | DefinedKW$ TargetedPlayer | Duration$ UntilYourNextTurn
 Oracle:Flying\nWhen Eon Frolicker enters the battlefield, if you cast it, target opponent takes an extra turn after this one. Until your next turn, you and planeswalkers you control gain protection from that player. (You and planeswalkers you control can't be targeted, dealt damage, or enchanted by anything controlled by that player.)

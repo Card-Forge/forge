@@ -3,5 +3,5 @@ ManaCost:3 R
 Types:Creature Human Soldier
 PT:2/2
 T:Mode$ Attacks | ValidCard$ Card.Self | Alone$ True | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks alone, CARDNAME can't be blocked this combat.
-SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ HIDDEN Unblockable | UntilEndOfCombat$ True
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ HIDDEN Unblockable | Duration$ UntilEndOfCombat
 Oracle:Whenever Yuan Shao's Infantry attacks alone, Yuan Shao's Infantry can't be blocked this combat.

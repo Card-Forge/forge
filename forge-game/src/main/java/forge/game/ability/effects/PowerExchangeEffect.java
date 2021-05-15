@@ -63,7 +63,7 @@ public class PowerExchangeEffect extends SpellAbilityEffect {
         game.fireEvent(new GameEventCardStatsChanged(c1));
         game.fireEvent(new GameEventCardStatsChanged(c2));
 
-        if (!sa.hasParam("Permanent")) {
+        if (!"Permanent".equals(sa.getParam("Duration"))) {
             // If not Permanent, remove Pumped at EOT
             final GameCommand untilEOT = new GameCommand() {
 
@@ -77,14 +77,8 @@ public class PowerExchangeEffect extends SpellAbilityEffect {
                     game.fireEvent(new GameEventCardStatsChanged(c2));
                 }
             };
-            
-            if (sa.hasParam("UntilEndOfCombat")) {
-                game.getEndOfCombat().addUntil(untilEOT);
-            } else if (sa.hasParam("UntilHostLeavesPlay")) {
-                sa.getHostCard().addLeavesPlayCommand(untilEOT);
-            } else {
-                game.getEndOfTurn().addUntil(untilEOT);
-            }
+
+            addUntilCommand(sa, untilEOT);
         }
     }
 

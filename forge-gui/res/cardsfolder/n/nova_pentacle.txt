@@ -2,7 +2,7 @@ Name:Nova Pentacle
 ManaCost: 4
 Types:Artifact
 A:AB$ ChooseSource | Cost$ 3 T | Choices$ Card,Emblem | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ The next time a source of your choice would deal damage to you this turn, that damage is dealt to target creature of an opponent's choice instead.
-SVar:DBEffect:DB$ Effect | TargetingPlayer$ Player.Opponent | ValidTgts$ Creature | TgtPrompt$ Select target creature to redirect the damage to | ReplacementEffects$ SelflessDamage | Triggers$ OutOfSight | Duration$ HostLeavesOrEOT | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SubAbility$ DBCleanup | ConditionDefined$ ChosenCard | ConditionPresent$ Card,Emblem | ConditionCompare$ GE1 | AILogic$ RedirectFromOppToCreature
+SVar:DBEffect:DB$ Effect | TargetingPlayer$ Player.Opponent | ValidTgts$ Creature | TgtPrompt$ Select target creature to redirect the damage to | ReplacementEffects$ SelflessDamage | Triggers$ OutOfSight | Duration$ UntilHostLeavesPlayOrEOT | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SubAbility$ DBCleanup | ConditionDefined$ ChosenCard | ConditionPresent$ Card,Emblem | ConditionCompare$ GE1 | AILogic$ RedirectFromOppToCreature
 SVar:SelflessDamage:Event$ DamageDone | ValidTarget$ You | ValidSource$ Card.ChosenCard,Emblem.ChosenCard | ReplaceWith$ SelflessDmg | DamageTarget$ Remembered | Description$ The next time a source of your choice would deal damage to you this turn, that damage is dealt to target creature of an opponent's choice instead.
 SVar:SelflessDmg:DB$ ReplaceEffect | VarName$ Affected | VarValue$ Remembered | VarType$ Card | SubAbility$ ExileEffect
 #Zone Change for the source of your choice

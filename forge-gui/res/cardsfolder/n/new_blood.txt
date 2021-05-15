@@ -2,7 +2,7 @@ Name:New Blood
 ManaCost:2 B B
 Types:Sorcery
 A:SP$ GainControl | Cost$ 2 B B tapXType<1/Vampire> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBChangeText | SpellDescription$ Gain control of target creature. Change the text of that creature by replacing all instances of one creature type with Vampire.
-SVar:DBChangeText:DB$ ChangeText | Defined$ ParentTarget | ChangeTypeWord$ ChooseCreatureType Vampire | Permanent$ True
+SVar:DBChangeText:DB$ ChangeText | Defined$ ParentTarget | ChangeTypeWord$ ChooseCreatureType Vampire | Duration$ Permanent
 DeckHints:Type$Vampire
 SVar:Picture:http://www.wizards.com/global/images/magic/general/new_blood.jpg
 Oracle:As an additional cost to cast this spell, tap an untapped Vampire you control.\nGain control of target creature. Change the text of that creature by replacing all instances of one creature type with Vampire.

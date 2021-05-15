@@ -4,7 +4,7 @@ Types:Plane Zendikar
 T:Mode$ ChangesZone | ValidCard$ Creature.nonToken | Origin$ Any | Destination$ Battlefield | TriggerZones$ Command | Execute$ TrigRamp | OptionalDecider$ TriggeredCardController | TriggerDescription$ Whenever a nontoken creature enters the battlefield, its controller may search their library for a basic land card, put it onto the battlefield tapped, then shuffle.
 SVar:TrigRamp:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1 | DefinedPlayer$ TriggeredCardController | ShuffleNonMandatory$ True
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, target land becomes a 4/4 creature that's still a land.
-SVar:RolledChaos:DB$ Animate | ValidTgts$ Land | Power$ 4 | Toughness$ 4 | Types$ Creature | Permanent$ True
+SVar:RolledChaos:DB$ Animate | ValidTgts$ Land | Power$ 4 | Toughness$ 4 | Types$ Creature | Duration$ Permanent
 SVar:Picture:http://www.wizards.com/global/images/magic/general/murasa.jpg
 SVar:AIRollPlanarDieParams:Mode$ Always
 Oracle:Whenever a nontoken creature enters the battlefield, its controller may search their library for a basic land card, put it onto the battlefield tapped, then shuffle.\nWhenever you roll {CHAOS}, target land becomes a 4/4 creature that's still a land.

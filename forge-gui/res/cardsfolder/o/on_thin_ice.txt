@@ -4,7 +4,7 @@ Types:Snow Enchantment Aura
 K:Enchant snow land you control
 A:SP$ Attach | Cost$ W | ValidTgts$ Land.Snow+YouCtrl | TgtPrompt$ Select target snow land you control | AILogic$ Pump
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target creature an opponent controls until CARDNAME leaves the battlefield.
-SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | UntilHostLeavesPlay$ True
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Duration$ UntilHostLeavesPlay
 SVar:PlayMain1:TRUE
 SVar:NeedsToPlay:Creature.OppCtrl
 DeckHints:Type$Snow

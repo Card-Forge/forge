@@ -2,7 +2,7 @@ Name:Mu Yanling, Celestial Wind
 ManaCost:4 U U
 Types:Legendary Planeswalker Yanling
 Loyalty:5
-A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumAtt$ -5 | IsCurse$ True | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | UntilYourNextTurn$ True | SpellDescription$ Until your next turn, up to one target creature gets -5/-0.
+A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumAtt$ -5 | IsCurse$ True | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | Duration$ UntilYourNextTurn | SpellDescription$ Until your next turn, up to one target creature gets -5/-0.
 A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ 0 | TargetMax$ 2 | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return up to two target creatures to their owners' hands.
 A:AB$ PumpAll | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidCards$ Creature.withFlying+YouCtrl | NumAtt$ +5 | NumDef$ +5 | SpellDescription$ Creatures you control with flying get +5/+5 until end of turn.
 Oracle:[+1]: Until your next turn, up to one target creature gets -5/-0.\n[−3]: Return up to two target creatures to their owners' hands.\n[−7]: Creatures you control with flying get +5/+5 until end of turn.

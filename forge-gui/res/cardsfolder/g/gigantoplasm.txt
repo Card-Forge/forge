@@ -4,7 +4,7 @@ Types:Creature Shapeshifter
 PT:0/0
 K:ETBReplacement:Copy:DBCopy:Optional
 SVar:DBCopy:DB$ Clone | Choices$ Creature.Other | AddAbilities$ Gigantoplasm | AddSVars$ X | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any creature on the battlefield, except it has "{X}: This creature has base power and toughness of X/X."
-SVar:Gigantoplasm:AB$ Animate | Cost$ X | Power$ X | Toughness$ X | ValidCards$ Self | Permanent$ True | SpellDescription$ CARDNAME has base power and toughness of X/X.
+SVar:Gigantoplasm:AB$ Animate | Cost$ X | Power$ X | Toughness$ X | ValidCards$ Self | Duration$ Permanent | SpellDescription$ CARDNAME has base power and toughness of X/X.
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gigantoplasm.jpg
 Oracle:You may have Gigantoplasm enter the battlefield as a copy of any creature on the battlefield, except it has "{X}: This creature has base power and toughness X/X."

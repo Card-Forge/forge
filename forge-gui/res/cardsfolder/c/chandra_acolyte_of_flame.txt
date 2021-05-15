@@ -4,7 +4,7 @@ ManaCost:1 R R
 Loyalty:4
 A:AB$ PutCounterAll | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | ValidCards$ Planeswalker.YouCtrl+Red | CounterType$ LOYALTY | CounterNum$ 1 | SpellDescription$ Put a loyalty counter on each red planeswalker you control.
 A:AB$ Token | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | TokenAmount$ 2 | TokenScript$ r_1_1_elemental | TokenOwner$ You | LegacyImage$ r 1 1 elemental m20 | AtEOT$ Sacrifice | RememberTokens$ True | SubAbility$ DBPump | SpellDescription$ Create two 1/1 red Elemental creature tokens. They gain haste. Sacrifice them at the beginning of the next end step.
-SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ Haste | Permanent$ True | SubAbility$ DBCleanup
+SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ Haste | Duration$ Permanent | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ Effect | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | AILogic$ CastFromGraveThisTurn | ValidTgts$ Instant.YouCtrl+cmcLE3,Sorcery.YouCtrl+cmcLE3 | TgtZone$ Graveyard | TgtPrompt$ Select target instant or sorcery card with mana cost 3 or less | RememberObjects$ Targeted | StaticAbilities$ Play | ExileOnMoved$ Graveyard | SubAbility$ DBEffect | SpellDescription$ You may cast target instant or sorcery card with mana cost 3 or less from your graveyard this turn. If that card would be put into your graveyard this turn, exile it instead.
 SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Graveyard | Description$ You may play remembered card.

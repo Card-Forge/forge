@@ -3,8 +3,7 @@ ManaCost:no cost
 Types:Scheme
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ TrigControl | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, for each opponent, put up to one target creature card from that player's graveyard onto the battlefield under your control. Each of those creatures attacks its owner each combat if able.
 SVar:TrigControl:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | ValidTgts$ Creature.OppCtrl | TgtZone$ Graveyard | TgtPrompt$ Choose target creature card in each opponent's graveyard | TargetMin$ 0 | TargetMax$ OneEach | TargetsWithDifferentControllers$ True | RememberChanged$ True | SubAbility$ DBPump
-SVar:DBPump:DB$ PumpAll | ValidCards$ Card.IsRemembered | KW$ HIDDEN CARDNAME attacks specific player each combat if able:CardOwner | UntilLoseControl$ True | SubAbility$ DBCleanup
+SVar:DBPump:DB$ PumpAll | ValidCards$ Card.IsRemembered | KW$ HIDDEN CARDNAME attacks specific player each combat if able:CardOwner | Duration$ UntilLoseControlOfHost | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:OneEach:PlayerCountOpponents$Amount
-SVar:Picture:https://downloads.cardforge.org/images/cards/ARC/The Dead Shall Serve.full.jpg
 Oracle:When you set this scheme in motion, for each opponent, put up to one target creature card from that player's graveyard onto the battlefield under your control. Each of those creatures attacks its owner each combat if able.

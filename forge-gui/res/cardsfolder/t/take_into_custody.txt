@@ -2,6 +2,6 @@ Name:Take into Custody
 ManaCost:U
 Types:Instant
 A:SP$ Tap | Cost$ U | TgtPrompt$ Choose target creature | ValidTgts$ Creature | SubAbility$ DBPump | SpellDescription$ Tap target creature. It doesn't untap during its controller's next untap step.
-SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent
 SVar:Picture:http://www.wizards.com/global/images/magic/general/take_into_custody.jpg
 Oracle:Tap target creature. It doesn't untap during its controller's next untap step.

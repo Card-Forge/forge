@@ -5,7 +5,7 @@ A:SP$ DestroyAll | Cost$ 4 B B B | ValidCards$ Creature | RememberDestroyed$ Tru
 SVar:TrigImprint:DB$ Pump | ImprintCards$ Remembered | SubAbility$ DBClearRemember | StackDescription$ None
 SVar:DBClearRemember:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | ChangeType$ Creature.nonToken+IsImprinted | ChangeNum$ 1 | Hidden$ True | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | AnimateSubAbility$ DBZombify | SubAbility$ DBCleanup
-SVar:DBZombify:DB$ Animate | Defined$ Remembered | Types$ Zombie | Colors$ Black | Permanent$ True
+SVar:DBZombify:DB$ Animate | Defined$ Remembered | Types$ Zombie | Colors$ Black | Duration$ Permanent
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True | SubAbility$ DBChange
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | StackDescription$ None
 Oracle:Destroy all creatures, then return a creature card put into a graveyard this way to the battlefield under your control. It's a black Zombie in addition to its other colors and types. Exile Necromantic Selection.

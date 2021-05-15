@@ -4,7 +4,7 @@ Types:Enchantment
 K:etbCounter:ISOLATION:X
 SVar:X:Count$xPaid
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, for each isolation counter on it, exile up to one target nonland permanent an opponent controls until CARDNAME leaves the battlefield.
-SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand+OppCtrl | TargetMin$ 0 | TargetMax$ Y | TgtPrompt$ Select target nonland permanent an opponent controls | UntilHostLeavesPlay$ True
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand+OppCtrl | TargetMin$ 0 | TargetMax$ Y | TgtPrompt$ Select target nonland permanent an opponent controls | Duration$ UntilHostLeavesPlay
 SVar:Y:Count$CardCounters.ISOLATION
 SVar:PlayMain1:TRUE
 SVar:OblivionRing:TRUE

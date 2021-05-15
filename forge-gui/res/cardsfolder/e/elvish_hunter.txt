@@ -2,6 +2,6 @@ Name:Elvish Hunter
 ManaCost:1 G
 Types:Creature Elf Archer
 PT:1/1
-A:AB$ Pump | Cost$ 1 G T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True | IsCurse$ True | SpellDescription$ Target creature doesn't untap during its controller's next untap step.
+A:AB$ Pump | Cost$ 1 G T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent | IsCurse$ True | SpellDescription$ Target creature doesn't untap during its controller's next untap step.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_hunter.jpg
 Oracle:{1}{G}, {T}: Target creature doesn't untap during its controller's next untap step.

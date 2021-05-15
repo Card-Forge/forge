@@ -6,6 +6,6 @@ S:Mode$ Continuous | Affected$ Creature.YouCtrl,Planeswalker.YouCtrl | AddKeywor
 SVar:NonStackingEffect:True
 A:AB$ DealDamage | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target player or planeswalker.
 A:AB$ ChangeZone | Cost$ SubCounter<X/LOYALTY> | Planeswalker$ True | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn+cmcEQX | AILogic$ SorinVengefulBloodlord | TgtPrompt$ Select target creature with mana value X from your graveyard | AnimateSubAbility$ Animate | SpellDescription$ Return target creature card with mana value X from your graveyard to the battlefield. That creature is a Vampire in addition to its other types.
-SVar:Animate:DB$ Animate | Defined$ Remembered | Types$ Vampire | Permanent$ True
+SVar:Animate:DB$ Animate | Defined$ Remembered | Types$ Vampire | Duration$ Permanent
 SVar:X:Count$xPaid
 Oracle:As long as it's your turn, creatures and planeswalkers you control have lifelink.\n[+2]: Sorin, Vengeful Bloodlord deals 1 damage to target player or planeswalker.\n[−X]: Return target creature card with mana value X from your graveyard to the battlefield. That creature is a Vampire in addition to its other types.

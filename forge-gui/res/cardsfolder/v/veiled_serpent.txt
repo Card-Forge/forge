@@ -2,7 +2,7 @@ Name:Veiled Serpent
 ManaCost:2 U
 Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | IsPresent$ Card.Self+Enchantment | Execute$ TrigAnimate | TriggerDescription$ When an opponent casts a spell, if CARDNAME is an enchantment, CARDNAME becomes a 4/4 Serpent creature with "This creature can't attack unless defending player controls an Island."
-SVar:TrigAnimate:DB$ Animate | Defined$ Self | Power$ 4 | Toughness$ 4 | staticAbilities$ VeiledSerpentST | Types$ Creature,Serpent | RemoveCardTypes$ True | Permanent$ True
+SVar:TrigAnimate:DB$ Animate | Defined$ Self | Power$ 4 | Toughness$ 4 | staticAbilities$ VeiledSerpentST | Types$ Creature,Serpent | RemoveCardTypes$ True | Duration$ Permanent
 K:Cycling:2
 SVar:VeiledSerpentST:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefenderControls$ Island | Description$ CARDNAME can't attack unless defending player controls an Island.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veiled_serpent.jpg

@@ -283,7 +283,7 @@ public class EffectEffect extends SpellAbilityEffect {
                 else if (duration.equals("UntilHostLeavesPlay")) {
                     hostCard.addLeavesPlayCommand(endEffect);
                 }
-                else if (duration.equals("HostLeavesOrEOT")) {
+                else if (duration.equals("UntilHostLeavesPlayOrEOT")) {
                     game.getEndOfTurn().addUntil(endEffect);
                     hostCard.addLeavesPlayCommand(endEffect);
                 }

@@ -3,9 +3,9 @@ ManaCost:2 G W
 Types:Enchantment
 A:AB$ GenericChoice | Cost$ G W Discard<1/Card> | ValidTgts$ Creature | Defined$ You | Choices$ DBPutCounter,DBBanding,DBFirstStrike,DBTrample | SpellDescription$ Put a +1/+1 counter on target creature or that creature gains banding, first strike, or trample.
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
-SVar:DBBanding:DB$ Pump | Defined$ Targeted | KW$ Banding | Permanent$ True | SpellDescription$ Target creature gains Banding
-SVar:DBFirstStrike:DB$ Pump | Defined$ Targeted | KW$ First Strike | Permanent$ True | SpellDescription$ Target creature gains First Strike
-SVar:DBTrample:DB$ Pump | Defined$ Targeted | KW$ Trample | Permanent$ True | SpellDescription$ Target creature gains Trample
+SVar:DBBanding:DB$ Pump | Defined$ Targeted | KW$ Banding | Duration$ Permanent | SpellDescription$ Target creature gains Banding
+SVar:DBFirstStrike:DB$ Pump | Defined$ Targeted | KW$ First Strike | Duration$ Permanent | SpellDescription$ Target creature gains First Strike
+SVar:DBTrample:DB$ Pump | Defined$ Targeted | KW$ Trample | Duration$ Permanent | SpellDescription$ Target creature gains Trample
 AI:RemoveDeck:All
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/natures_blessing.jpg

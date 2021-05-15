@@ -5,7 +5,7 @@ PT:0/0
 K:Flying
 K:ETBReplacement:Other:TrigSac
 SVar:TrigSac:DB$ Sacrifice | Amount$ SacX | SacValid$ Creature | Defined$ You | RememberSacrificed$ True | Optional$ True | SubAbility$ DBAnimate | SpellDescription$ As CARDNAME enters the battlefield, sacrifice any number of creatures. CARDNAME's power becomes the total power of those creatures and its toughness becomes their total toughness.
-SVar:DBAnimate:DB$ Animate | Defined$ Self | Power$ DracoPwr | Toughness$ DracoTgn | Permanent$ True | SubAbility$ DBCleanup
+SVar:DBAnimate:DB$ Animate | Defined$ Self | Power$ DracoPwr | Toughness$ DracoTgn | Duration$ Permanent | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:SacX:Count$Valid Creature.YouCtrl
 SVar:DracoPwr:RememberedLKI$CardPower

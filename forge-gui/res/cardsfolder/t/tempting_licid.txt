@@ -2,7 +2,7 @@ Name:Tempting Licid
 ManaCost:2 G
 Types:Creature Licid
 PT:2/2
-A:AB$ Animate | Cost$ G T | Defined$ Self | RemoveThisAbility$ True | Permanent$ True | RevertCost$ G | Keywords$ Enchant creature | Abilities$ SPAttach | Types$ Enchantment,Aura | RemoveCardTypes$ True | RemoveEnchantmentTypes$ True | SubAbility$ DBAttach | SpellDescription$ CARDNAME loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {G} to end this effect.
+A:AB$ Animate | Cost$ G T | Defined$ Self | RemoveThisAbility$ True | Duration$ Permanent | RevertCost$ G | Keywords$ Enchant creature | Abilities$ SPAttach | Types$ Enchantment,Aura | RemoveCardTypes$ True | RemoveEnchantmentTypes$ True | SubAbility$ DBAttach | SpellDescription$ CARDNAME loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {G} to end this effect.
 SVar:DBAttach:DB$ Attach | ValidTgts$ Creature | AILogic$ Pump
 SVar:SPAttach:SP$ Attach | Cost$ 0 | ValidTgts$ Creature
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ All creatures able to block CARDNAME do so. | Description$ All creatures able to block enchanted creature do so.

@@ -5,5 +5,5 @@ PT:3/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters the battlefield, you become the monarch.
 SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | AttackDifferentPlayers$ True | TriggerDescription$ Whenever CARDNAME and another creature attack different players, CARDNAME can't be blocked this combat.
-SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ HIDDEN Unblockable | UntilEndOfCombat$ True
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ HIDDEN Unblockable | Duration$ UntilEndOfCombat
 Oracle:When Canal Courier enters the battlefield, you become the monarch.\nWhenever Canal Courier and another creature attack different players, Canal Courier can't be blocked this combat.

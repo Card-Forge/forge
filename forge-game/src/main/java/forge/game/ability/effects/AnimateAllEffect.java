@@ -43,7 +43,7 @@ public class AnimateAllEffect extends AnimateEffectBase {
         // Every Animate event needs a unique time stamp
         final long timestamp = game.getNextTimestamp();
 
-        final boolean permanent = sa.hasParam("Permanent");
+        final boolean permanent = "Permanent".equals(sa.getParam("Duration"));
 
         final CardType types = new CardType(true);
         if (sa.hasParam("Types")) {
@@ -158,13 +158,7 @@ public class AnimateAllEffect extends AnimateEffectBase {
             };
 
             if (!permanent) {
-                if (sa.hasParam("UntilEndOfCombat")) {
-                    game.getEndOfCombat().addUntil(unanimate);
-                } else if (sa.hasParam("UntilYourNextTurn")) {
-                    game.getCleanup().addUntil(host.getController(), unanimate);
-                } else {
-                    game.getEndOfTurn().addUntil(unanimate);
-                }
+                addUntilCommand(sa, unanimate);
             }
         }
     } // animateAllResolve

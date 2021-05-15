@@ -100,30 +100,30 @@ public class AnimateAi extends SpellAbilityAi {
         }
         // Don't use instant speed animate abilities before AI's COMBAT_BEGIN
         if (!ph.is(PhaseType.COMBAT_BEGIN) && ph.isPlayerTurn(ai) && !SpellAbilityAi.isSorcerySpeed(sa)
-                && !sa.hasParam("ActivationPhases") && !sa.hasParam("Permanent")) {
+                && !sa.hasParam("ActivationPhases") && !"Permanent".equals(sa.getParam("Duration"))) {
             return false;
         }
         // Don't use instant speed animate abilities outside human's
         // COMBAT_DECLARE_ATTACKERS or if no attackers
-        if (ph.getPlayerTurn().isOpponentOf(ai) && !sa.hasParam("Permanent")
+        if (ph.getPlayerTurn().isOpponentOf(ai) && !"Permanent".equals(sa.getParam("Duration"))
                 && (!ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS)
                         || game.getCombat() != null && game.getCombat().getAttackersOf(ai).isEmpty())) {
             return false;
         }
         // Don't activate during MAIN2 unless this effect is permanent
-        if (ph.is(PhaseType.MAIN2) && !sa.hasParam("Permanent") && !sa.hasParam("UntilYourNextTurn")) {
+        if (ph.is(PhaseType.MAIN2) && !"Permanent".equals(sa.getParam("Duration")) && !"UntilYourNextTurn".equals(sa.getParam("Duration"))) {
             return false;
         }
         // Don't animate if the AI won't attack anyway or use as a potential blocker
         Player opponent = ai.getWeakestOpponent();
         // Activating as a potential blocker is only viable if it's an ability activated from a permanent, otherwise
         // the AI will waste resources
-        boolean activateAsPotentialBlocker = sa.hasParam("UntilYourNextTurn")
+        boolean activateAsPotentialBlocker = "UntilYourNextTurn".equals(sa.getParam("Duration"))
                 && ai.getGame().getPhaseHandler().getNextTurn() != ai
                 && source.isPermanent();
         if (ph.isPlayerTurn(ai) && ai.getLife() < 6 && opponent.getLife() > 6
                 && Iterables.any(opponent.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES)
-                && !sa.hasParam("AILogic") && !sa.hasParam("Permanent") && !activateAsPotentialBlocker) {
+                && !sa.hasParam("AILogic") && !"Permanent".equals(sa.getParam("Duration")) && !activateAsPotentialBlocker) {
             return false;
         }
         return true;
@@ -156,7 +156,7 @@ public class AnimateAi extends SpellAbilityAi {
                         && !c.isEquipping();
                 
                 // for creatures that could be improved (like Figure of Destiny)
-                if (!bFlag && c.isCreature() && (sa.hasParam("Permanent") || (!c.isTapped() && !c.isSick()))) {
+                if (!bFlag && c.isCreature() && ("Permanent".equals(sa.getParam("Duration")) || (!c.isTapped() && !c.isSick()))) {
                     int power = -5;
                     if (sa.hasParam("Power")) {
                         power = AbilityUtils.calculateAmount(c, sa.getParam("Power"), sa);
@@ -179,7 +179,7 @@ public class AnimateAi extends SpellAbilityAi {
                     }
                 }
 
-                if (!SpellAbilityAi.isSorcerySpeed(sa) && !sa.hasParam("Permanent")) {
+                if (!SpellAbilityAi.isSorcerySpeed(sa) && !"Permanent".equals(sa.getParam("Duration"))) {
                     if (sa.hasParam("Crew") && c.isCreature()) {
                         // Do not try to crew a vehicle which is already a creature
                         return false;
@@ -278,7 +278,7 @@ public class AnimateAi extends SpellAbilityAi {
             Map<Card, Integer> data = Maps.newHashMap();
             for (final Card c : list) {
                 // don't use Permanent animate on something that would leave the field
-                if (c.hasSVar("EndOfTurnLeavePlay") && sa.hasParam("Permanent")) {
+                if (c.hasSVar("EndOfTurnLeavePlay") && "Permanent".equals(sa.getParam("Duration"))) {
                     continue;
                 }
 
@@ -312,9 +312,9 @@ public class AnimateAi extends SpellAbilityAi {
                 // if its player turn,
                 // check if its Permanent or that creature would attack
                 if (ph.isPlayerTurn(ai)) {
-                    if (!sa.hasParam("Permanent")
+                    if (!"Permanent".equals(sa.getParam("Duration"))
                             && !ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, animatedCopy)
-                            && !sa.hasParam("UntilHostLeavesPlay")) {
+                            && !"UntilHostLeavesPlay".equals(sa.getParam("Duration"))) {
                         continue;
                     }
                 }

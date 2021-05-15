@@ -4,7 +4,7 @@ Types:Enchantment Saga
 K:Saga:3:TrigToken,TrigTap,TrigGainControl
 SVar:TrigToken:DB$ Token | TokenScript$ u_8_8_kraken_hexproof | SpellDescription$ Create an 8/8 blue Kraken creature token with hexproof.
 SVar:TrigTap:DB$ TapAll | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | ValidCards$ Permanent.nonLand | SubAbility$ DBPumpAll | SpellDescription$ Tap all nonland permanents target opponent controls. They don't untap during their controllers' next untap step.
-SVar:DBPumpAll:DB$ PumpAll | Defined$ Targeted | ValidCards$ Creature | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True
+SVar:DBPumpAll:DB$ PumpAll | Defined$ Targeted | ValidCards$ Creature | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent
 SVar:TrigGainControl:DB$ GainControl | TgtPrompt$ Choose target creature | ValidTgts$ Permanent.OppCtrl | TgtPrompt$ Select target permanent an opponent controls | SubAbility$ DBUntap | SpellDescription$ Gain control of target permanent an opponent controls. Untap it.
 SVar:DBUntap:DB$ Untap | Defined$ Targeted
 DeckHas:Ability$Token

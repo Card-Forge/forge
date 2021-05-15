@@ -3,8 +3,8 @@ ManaCost:5 R W
 Types:Creature Minotaur Soldier
 PT:5/5
 T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | Execute$ TrigMustAttackBlock | TriggerDescription$ At the beginning of each combat, up to one target creature attacks or blocks this combat if able and up to one target creature can't attack or block this combat.
-SVar:TrigMustAttackBlock:DB$ Pump | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose target creature to attack or block if able | KW$ HIDDEN CARDNAME attacks each combat if able. & HIDDEN CARDNAME blocks each combat if able. | IsCurse$ True | UntilEndOfCombat$ True | SubAbility$ DBCantAttackBlock
-SVar:DBCantAttackBlock:DB$ Pump | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose target creature that cannot attack or block this combat | KW$ HIDDEN CARDNAME can't attack or block. | IsCurse$ True | UntilEndOfCombat$ True
+SVar:TrigMustAttackBlock:DB$ Pump | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose target creature to attack or block if able | KW$ HIDDEN CARDNAME attacks each combat if able. & HIDDEN CARDNAME blocks each combat if able. | IsCurse$ True | Duration$ UntilEndOfCombat | SubAbility$ DBCantAttackBlock
+SVar:DBCantAttackBlock:DB$ Pump | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose target creature that cannot attack or block this combat | KW$ HIDDEN CARDNAME can't attack or block. | IsCurse$ True | Duration$ UntilEndOfCombat
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boros_battleshaper.jpg
 Oracle:At the beginning of each combat, up to one target creature attacks or blocks this combat if able and up to one target creature can't attack or block this combat.

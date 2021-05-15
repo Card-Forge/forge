@@ -5,6 +5,6 @@ PT:4/4
 K:Flying
 K:Defender
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ Animate | TriggerDescription$ When CARDNAME blocks, it becomes a Bird Giant, and it loses defender.
-SVar:Animate:DB$ Animate | Defined$ TriggeredBlocker | Types$ Bird,Giant | RemoveCreatureTypes$ True | RemoveKeywords$ Defender | Permanent$ True
+SVar:Animate:DB$ Animate | Defined$ TriggeredBlocker | Types$ Bird,Giant | RemoveCreatureTypes$ True | RemoveKeywords$ Defender | Duration$ Permanent
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ageless_sentinels.jpg
 Oracle:Defender (This creature can't attack.)\nFlying\nWhen Ageless Sentinels blocks, it becomes a Bird Giant, and it loses defender. (It's no longer a Wall. This effect lasts indefinitely.)

@@ -2,6 +2,6 @@ Name:Veiled Apparition
 ManaCost:1 U
 Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | IsPresent$ Card.Self+Enchantment | Execute$ TrigAnimate | TriggerDescription$ When an opponent casts a spell, if CARDNAME is an enchantment, CARDNAME becomes a 3/3 Illusion creature with flying and "At the beginning of your upkeep, sacrifice CARDNAME unless you pay {1}{U}."
-SVar:TrigAnimate:DB$Animate | Defined$ Self | Power$ 3 | Toughness$ 3 | Keywords$ Flying & UpkeepCost:1 U | Types$ Creature,Illusion | RemoveCardTypes$ True | Permanent$ True
+SVar:TrigAnimate:DB$Animate | Defined$ Self | Power$ 3 | Toughness$ 3 | Keywords$ Flying & UpkeepCost:1 U | Types$ Creature,Illusion | RemoveCardTypes$ True | Duration$ Permanent
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veiled_apparition.jpg
 Oracle:When an opponent casts a spell, if Veiled Apparition is an enchantment, Veiled Apparition becomes a 3/3 Illusion creature with flying and "At the beginning of your upkeep, sacrifice Veiled Apparition unless you pay {1}{U}."
