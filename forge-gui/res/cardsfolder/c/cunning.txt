@@ -5,8 +5,7 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 3 | Description$ Enchanted creature gets +3/+3.
 T:Mode$ Attacks | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ DelayedTrig | TriggerDescription$ When enchanted creature attacks or blocks, sacrifice CARDNAME at the beginning of the next cleanup step.
-T:Mode$ Blocks | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield| Execute$ DelayedTrig | Secondary$ True | TriggerDescription$ When enchanted creature attacks or blocks, sacrifice CARDNAME at the beginning of the next cleanup step.
-SVar:DelayedTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Cleanup | ValidPlayer$ Player | Execute$ TrigSac | TriggerDescription$ Sacrifice CARDNAME.
-SVar:TrigSac:DB$Sacrifice | Defined$ Self
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cunning.jpg
+T:Mode$ Blocks | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ DelayedTrig | Secondary$ True | TriggerDescription$ When enchanted creature attacks or blocks, sacrifice CARDNAME at the beginning of the next cleanup step.
+SVar:DelayedTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Cleanup | ValidPlayer$ Player | Execute$ TrigSacrifice | TriggerDescription$ Sacrifice CARDNAME.
+SVar:TrigSacrifice:DB$ SacrificeAll | Defined$ DelayTriggerRememberedLKI
 Oracle:Enchant creature\nEnchanted creature gets +3/+3.\nWhen enchanted creature attacks or blocks, sacrifice Cunning at the beginning of the next cleanup step.

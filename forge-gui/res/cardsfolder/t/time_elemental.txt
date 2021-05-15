@@ -5,9 +5,8 @@ PT:0/2
 A:AB$ ChangeZone | Cost$ 2 U U T | ValidTgts$ Permanent.unenchanted | TgtPrompt$ Select target unenchanted permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target permanent that isn't enchanted to its owner's hand.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DelayedTrig | TriggerDescription$ When CARDNAME attacks or blocks, at end of combat, sacrifice it and it deals 5 damage to you.
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ DelayedTrig | Secondary$ True | TriggerDescription$ When CARDNAME attacks or blocks, at end of combat, sacrifice it and it deals 5 damage to you.
-SVar:DelayedTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigSac | TriggerDescription$ At end of combat, sacrifice CARDNAME and CARDNAME deals 5 damage to you.
-SVar:TrigSac:DB$Sacrifice | Defined$ Self | SubAbility$ DBDamage
+SVar:DelayedTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigSacrifice | TriggerDescription$ At end of combat, sacrifice CARDNAME and CARDNAME deals 5 damage to you.
+SVar:TrigSacrifice:DB$ SacrificeAll | Defined$ DelayTriggerRememberedLKI | SubAbility$ DBDamage
 SVar:DBDamage:DB$DealDamage | NumDmg$ 5 | Defined$ You
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/time_elemental.jpg
 Oracle:When Time Elemental attacks or blocks, at end of combat, sacrifice it and it deals 5 damage to you.\n{2}{U}{U}, {T}: Return target permanent that isn't enchanted to its owner's hand.
