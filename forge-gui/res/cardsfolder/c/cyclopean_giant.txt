@@ -3,6 +3,6 @@ ManaCost:2 B B
 Types:Creature Zombie Giant
 PT:4/2
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigAnimate | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, target land becomes a Swamp. Exile CARDNAME.
-SVar:TrigAnimate:DB$ Animate | ValidTgts$ Land | TgtPrompt$ Select target land | Types$ Swamp | RemoveLandTypes$ True | Permanent$ True | SubAbility$ DBExile | SpellDescription$ Target land becomes a Swamp.
+SVar:TrigAnimate:DB$ Animate | ValidTgts$ Land | TgtPrompt$ Select target land | Types$ Swamp | RemoveLandTypes$ True | Duration$ Permanent | SubAbility$ DBExile | SpellDescription$ Target land becomes a Swamp.
 SVar:DBExile:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Exile
 Oracle:When Cyclopean Giant dies, target land becomes a Swamp. Exile Cyclopean Giant.

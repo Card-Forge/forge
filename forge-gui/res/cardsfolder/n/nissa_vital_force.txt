@@ -3,7 +3,7 @@ ManaCost:3 G G
 Types:Legendary Planeswalker Nissa
 Loyalty:5
 A:AB$ Untap | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | SubAbility$ DBAnimate | SpellDescription$ Untap target land you control. Until your next turn, it becomes a 5/5 Elemental creature with haste. It's still a land.
-SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Power$ 5 | Toughness$ 5 | Types$ Creature,Elemental | UntilYourNextTurn$ True | Keywords$ Haste
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Power$ 5 | Toughness$ 5 | Types$ Creature,Elemental | Duration$ UntilYourNextTurn | Keywords$ Haste
 A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target permanent card in your graveyard | ValidTgts$ Permanent.YouCtrl | SpellDescription$ Return target permanent card from your graveyard to your hand.
 A:AB$ Effect | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Nissa, Vital Force | Image$ emblem_nissa_vital_force | Triggers$ TrigDraw | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Whenever a land enters the battlefield under your control, you may draw a card."
 SVar:TrigDraw:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ DBDraw | OptionalDecider$ You | TriggerZones$ Command | TriggerDescription$ Whenever a land enters the battlefield under your control, you may draw a card.

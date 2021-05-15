@@ -6,7 +6,7 @@ K:Flying
 K:Persist
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, put target creature card from an opponent's graveyard onto the battlefield under your control. It gains haste. At the beginning of your next end step, exile it.
 SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Creature.OppOwn | TgtPrompt$ Select target creature from an opponent's graveyard | RememberChanged$ True | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | SubAbility$ DBPump
-SVar:DBPump:DB$ Animate | Keywords$ Haste | Defined$ Remembered | Permanent$ True | AtEOT$ Exile | SubAbility$ DBCleanup
+SVar:DBPump:DB$ Animate | Keywords$ Haste | Defined$ Remembered | Duration$ Permanent | AtEOT$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:PlayMain1:ALWAYS
 SVar:Picture:http://www.wizards.com/global/images/magic/general/puppeteer_clique.jpg

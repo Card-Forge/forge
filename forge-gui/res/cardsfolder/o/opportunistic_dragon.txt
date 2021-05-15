@@ -5,5 +5,5 @@ PT:4/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainControl | TriggerDescription$ When CARDNAME enters the battlefield, choose target Human or artifact an opponent controls. For as long as CARDNAME remains on the battlefield, gain control of that permanent, it loses all abilities, and it can't attack or block.
 SVar:TrigGainControl:DB$ GainControl | ValidTgts$ Human.OppCtrl,Artifact.OppCtrl | TgtPrompt$ Select target Human or artifact an opponent controls | LoseControl$ LeavesPlay | SubAbility$ DBPump
-SVar:DBPump:DB$ Animate | Defined$ Targeted | HiddenKeywords$ CARDNAME can't attack or block. | RemoveAllAbilities$ True | UntilHostLeavesPlay$ True
+SVar:DBPump:DB$ Animate | Defined$ Targeted | HiddenKeywords$ CARDNAME can't attack or block. | RemoveAllAbilities$ True | Duration$ UntilHostLeavesPlay
 Oracle:Flying\nWhen Opportunistic Dragon enters the battlefield, choose target Human or artifact an opponent controls. For as long as Opportunistic Dragon remains on the battlefield, gain control of that permanent, it loses all abilities, and it can't attack or block.

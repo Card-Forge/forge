@@ -6,7 +6,7 @@ K:Morph:2 U
 R:Event$ TurnFaceUp | ValidCard$ Card.Self | ReplaceWith$ MorphChoice | ActiveZones$ Battlefield
 K:ETBReplacement:Other:MorphChoice
 SVar:MorphChoice:DB$ GenericChoice | Defined$ You | Choices$ BigTough,BigPower | SpellDescription$ As CARDNAME enters the battlefield or is turned face up, it becomes your choice of 5/1 or 1/5.
-SVar:BigPower:DB$ Animate | Defined$ Self | Permanent$ True | Power$ 5 | Toughness$ 1 | SpellDescription$ CARDNAME is 5/1
-SVar:BigTough:DB$ Animate | Defined$ Self | Permanent$ True | Power$ 1 | Toughness$ 5 | SpellDescription$ CARDNAME is 1/5
+SVar:BigPower:DB$ Animate | Defined$ Self | Duration$ Permanent | Power$ 5 | Toughness$ 1 | SpellDescription$ CARDNAME is 5/1
+SVar:BigTough:DB$ Animate | Defined$ Self | Duration$ Permanent | Power$ 1 | Toughness$ 5 | SpellDescription$ CARDNAME is 1/5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aquamorph_entity.jpg
 Oracle:As Aquamorph Entity enters the battlefield or is turned face up, it becomes your choice of 5/1 or 1/5.\nMorph {2}{U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)

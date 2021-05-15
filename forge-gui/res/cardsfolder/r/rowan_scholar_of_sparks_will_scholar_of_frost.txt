@@ -20,7 +20,7 @@ ManaCost:4 U
 Types:Legendary Planeswalker Will
 Loyalty:4
 S:Mode$ ReduceCost | ValidCard$ Instant,Sorcery | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Instant and sorcery spells you cast cost {1} less to cast.
-A:AB$ Animate | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | TargetMin$ 0 | TargetMax$ 1 | Power$ 0 | Toughness$ 2 | UntilYourNextTurn$ True | SpellDescription$ Up to one target creature has base power and toughness 0/2 until your next turn.
+A:AB$ Animate | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | TargetMin$ 0 | TargetMax$ 1 | Power$ 0 | Toughness$ 2 | Duration$ UntilYourNextTurn | SpellDescription$ Up to one target creature has base power and toughness 0/2 until your next turn.
 A:AB$ Draw | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | NumCards$ 3 | SpellDescription$ Draw three cards.
 A:AB$ ChangeZone | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | ValidTgts$ Permanent | TgtPrompt$ Select up to five target permanents | TargetMin$ 0 | TargetMax$ 5 | Origin$ Battlefield | Destination$ Exile | RememberLKI$ True | SubAbility$ DBRepeat | SpellDescription$ Exile up to five target permanents. For each permanent exiled this way, its controller creates a 4/4 blue and red Elemental creature token.
 SVar:DBRepeat:DB$ RepeatEach | DefinedCards$ DirectRemembered | UseImprinted$ True | RepeatSubAbility$ DBToken | SubAbility$ DBCleanup | ChangeZoneTables$ True

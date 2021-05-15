@@ -7,7 +7,7 @@ SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Hexproof
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ Whenever a land enters the battlefield under your control, target creature an opponent controls attacks during its controller's next combat phase if able.
 SVar:TrigEffect:DB$ Effect | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | IsCurse$ True | RememberObjects$ Targeted | Triggers$ MustAttackTrig | Duration$ Permanent | ForgetOnMoved$ Battlefield
 SVar:MustAttackTrig:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ Player.controlsCreature.IsRemembered_GE1 | Execute$ TrigPump | TriggerDescription$ Target creature an opponent controls attacks during its controller's next combat phase if able.
-SVar:TrigPump:DB$ Animate | Defined$ Remembered | HiddenKeywords$ CARDNAME attacks each combat if able. | UntilEndOfCombat$ True | SubAbility$ ExileSelf
+SVar:TrigPump:DB$ Animate | Defined$ Remembered | HiddenKeywords$ CARDNAME attacks each combat if able. | Duration$ UntilEndOfCombat | SubAbility$ ExileSelf
 SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
 SVar:BuffedBy:Land
 Oracle:Return a land you control to its owner's hand: Untap Trench Behemoth. It gains hexproof until end of turn.\nWhenever a land enters the battlefield under your control, target creature an opponent controls attacks during its controller's next combat phase if able.

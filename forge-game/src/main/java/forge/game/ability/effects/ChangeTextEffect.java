@@ -26,7 +26,7 @@ public class ChangeTextEffect extends SpellAbilityEffect {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
         final Long timestamp = Long.valueOf(game.getNextTimestamp());
-        final boolean permanent = sa.hasParam("Permanent");
+        final boolean permanent = "Permanent".equals(sa.getParam("Duration"));
 
         final String changedColorWordOriginal, changedColorWordNew;
         if (sa.hasParam("ChangeColorWord")) {
@@ -151,7 +151,7 @@ public class ChangeTextEffect extends SpellAbilityEffect {
             changedTypeWordNew = null;
         }
 
-        final boolean permanent = sa.hasParam("Permanent");
+        final boolean permanent = "Permanent".equals(sa.getParam("Duration"));
 
         final StringBuilder sb = new StringBuilder();
         sb.append("Change the text of ");

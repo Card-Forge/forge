@@ -1,6 +1,6 @@
 Name:Jade Statue
 ManaCost:4
 Types:Artifact
-A:AB$ Animate | Cost$ 2 | Defined$ Self | Power$ 3 | Toughness$ 6 | Types$ Creature,Artifact,Golem | UntilEndOfCombat$ True | ActivationPhases$ BeginCombat->EndCombat | SpellDescription$ CARDNAME becomes a 3/6 Golem artifact creature until end of combat. Activate only during combat.
+A:AB$ Animate | Cost$ 2 | Defined$ Self | Power$ 3 | Toughness$ 6 | Types$ Creature,Artifact,Golem | Duration$ UntilEndOfCombat | ActivationPhases$ BeginCombat->EndCombat | SpellDescription$ CARDNAME becomes a 3/6 Golem artifact creature until end of combat. Activate only during combat.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jade_statue.jpg
 Oracle:{2}: Jade Statue becomes a 3/6 Golem artifact creature until end of combat. Activate only during combat.

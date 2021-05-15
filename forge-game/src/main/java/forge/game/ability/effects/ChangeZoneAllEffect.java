@@ -43,7 +43,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         //if host is not on the battlefield don't apply
-        if (sa.hasParam("UntilHostLeavesPlay") && !sa.getHostCard().isInPlay()) {
+        if ("UntilHostLeavesPlay".equals(sa.getParam("Duration")) && !sa.getHostCard().isInPlay()) {
             return;
         }
 
@@ -270,8 +270,8 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
 
         triggerList.triggerChangesZoneAll(game, sa);
 
-        if (sa.hasParam("UntilHostLeavesPlay")) {
-            source.addLeavesPlayCommand(untilHostLeavesPlayCommand(triggerList, source));
+        if (sa.hasParam("Duration")) {
+            addUntilCommand(sa, untilHostLeavesPlayCommand(triggerList, source));
         }
 
         // if Shuffle parameter exists, and any amount of cards were owned by

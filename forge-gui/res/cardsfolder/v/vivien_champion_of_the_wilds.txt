@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Legendary Planeswalker Vivien
 Loyalty:4
 S:Mode$ CastWithFlash | ValidCard$ Creature | ValidSA$ Spell | Caster$ You | Description$ You may cast creature spells as though they had flash.
-A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target creature | KW$ Vigilance & Reach | UntilYourNextTurn$ True | SpellDescription$ Until your next turn, up to one target creature gains vigilance and reach.
+A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target creature | KW$ Vigilance & Reach | Duration$ UntilYourNextTurn | SpellDescription$ Until your next turn, up to one target creature gains vigilance and reach.
 A:AB$ Dig | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | Defined$ You | DigNum$ 3 | DestinationZone$ Exile | ExileFaceDown$ True | RememberChanged$ True | SubAbility$ DBEffect | AILogic$ DigForCreature | SpellDescription$ Look at the top three cards of your library. Exile one face down and put the rest on the bottom of your library in any order. For as long as it remains exiled, you may look at that card and you may cast it if it's a creature spell.
 SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ STPlay1,STPlay2 | Duration$ Permanent | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
 SVar:STPlay1:Mode$ Continuous | MayLookAt$ You | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may look at the card and you may cast it if it's a creature.

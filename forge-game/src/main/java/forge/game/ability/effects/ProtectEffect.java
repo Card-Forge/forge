@@ -85,7 +85,7 @@ public class ProtectEffect extends SpellAbilityEffect {
                 sb.append(gains.get(i));
             }
 
-            if (!sa.hasParam("Permanent")) {
+            if (!"Permanent".equals(sa.getParam("Duration"))) {
                 sb.append(" until end of turn");
             }
 
@@ -147,7 +147,7 @@ public class ProtectEffect extends SpellAbilityEffect {
 
             tgtC.addChangedCardKeywords(gainsKWList, null, false, false, timestamp, true);
 
-            if (!sa.hasParam("Permanent")) {
+            if (!"Permanent".equals(sa.getParam("Duration"))) {
                 // If not Permanent, remove protection at EOT
                 final GameCommand untilEOT = new GameCommand() {
                     private static final long serialVersionUID = 7682700789217703789L;
@@ -159,11 +159,7 @@ public class ProtectEffect extends SpellAbilityEffect {
                         }
                     }
                 };
-                if (sa.hasParam("UntilEndOfCombat")) {
-                    game.getEndOfCombat().addUntil(untilEOT);
-                } else {
-                    game.getEndOfTurn().addUntil(untilEOT);
-                }
+                addUntilCommand(sa, untilEOT);
             }
         }
 
@@ -175,7 +171,7 @@ public class ProtectEffect extends SpellAbilityEffect {
 
             unTgtC.addChangedCardKeywords(gainsKWList, null, false, false, timestamp, true);
 
-            if (!sa.hasParam("Permanent")) {
+            if (!"Permanent".equals(sa.getParam("Duration"))) {
                 // If not Permanent, remove protection at EOT
                 final GameCommand untilEOT = new GameCommand() {
                     private static final long serialVersionUID = 7682700789217703789L;
@@ -187,11 +183,7 @@ public class ProtectEffect extends SpellAbilityEffect {
                         }
                     }
                 };
-                if (sa.hasParam("UntilEndOfCombat")) {
-                    game.getEndOfCombat().addUntil(untilEOT);
-                } else {
-                    game.getEndOfTurn().addUntil(untilEOT);
-                }
+                addUntilCommand(sa, untilEOT);
             }
         }
     } // protectResolve()

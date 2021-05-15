@@ -3,6 +3,6 @@ ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:+1/+7
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Command | ValidCard$ Creature.YouCtrl | Execute$ PumpRandom | TriggerDescription$ Whenever a creature enters the battlefield under your control, it gains two abilities chosen at random from flying, first strike, trample, haste, protection from black, protection from red, and vigilance.
-SVar:PumpRandom:DB$ Pump | Defined$ TriggeredCard | Permanent$ True | KW$ Flying & First Strike & Trample & Haste & Protection from black & Protection from red & Vigilance | RandomKeyword$ True | RandomKWNum$ 2
+SVar:PumpRandom:DB$ Pump | Defined$ TriggeredCard | Duration$ Permanent | KW$ Flying & First Strike & Trample & Haste & Protection from black & Protection from red & Vigilance | RandomKeyword$ True | RandomKWNum$ 2
 SVar:Picture:https://downloads.cardforge.org/images/cards/VAN/Akroma, Angel of Wrath Avatar.full.jpg
 Oracle:Hand +1, life +7\nWhenever a creature enters the battlefield under your control, it gains two abilities chosen at random from flying, first strike, trample, haste, protection from black, protection from red, and vigilance.

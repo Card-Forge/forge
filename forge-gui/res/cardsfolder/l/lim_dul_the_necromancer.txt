@@ -4,6 +4,6 @@ Types:Legendary Creature Human Wizard
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigReturn | OptionalDecider$ You | TriggerDescription$ Whenever a creature an opponent controls dies, you may pay {1}{B}. If you do, return that card to the battlefield under your control. If it's a creature, it's a Zombie in addition to its other creature types.
 SVar:TrigReturn:AB$ ChangeZone | Cost$ 1 B | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | Defined$ TriggeredNewCardLKICopy | AnimateSubAbility$ Animate
-SVar:Animate:DB$ Animate | Defined$ Remembered | Types$ Zombie | Permanent$ True | ConditionDefined$ Remembered | ConditionPresent$ Creature
+SVar:Animate:DB$ Animate | Defined$ Remembered | Types$ Zombie | Duration$ Permanent | ConditionDefined$ Remembered | ConditionPresent$ Creature
 A:AB$ Regenerate | ValidTgts$ Zombie | TgtPrompt$ Select target Zombie | Cost$ 1 B | SpellDescription$ Regenerate target Zombie.
 Oracle:Whenever a creature an opponent controls dies, you may pay {1}{B}. If you do, return that card to the battlefield under your control. If it's a creature, it's a Zombie in addition to its other creature types.\n{1}{B}: Regenerate target Zombie.

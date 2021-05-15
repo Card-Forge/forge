@@ -2,7 +2,7 @@ Name:Jund
 ManaCost:no cost
 Types:Plane Alara
 T:Mode$ SpellCast | ValidCard$ Creature.Black,Creature.Red,Creature.Green | ValidActivatingPlayer$ Player | TriggerZones$ Command | Execute$ DevourPump | TriggerDescription$ Whenever a player casts a black, red, or green creature spell, it gains devour 5. (As the creature enters the battlefield, its controller may sacrifice any number of creatures. The creature enters the battlefield with five times that many +1/+1 counters on it.)
-SVar:DevourPump:DB$ Animate | Defined$ TriggeredCard | Keywords$ Devour:5 | Permanent$ True
+SVar:DevourPump:DB$ Animate | Defined$ TriggeredCard | Keywords$ Devour:5 | Duration$ Permanent
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, create two 1/1 red Goblin creature tokens.
 SVar:RolledChaos:DB$ Token | TokenAmount$ 2 | TokenScript$ r_1_1_goblin | LegacyImage$ r 1 1 goblin pc2 | TokenOwner$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jund.jpg

@@ -33,7 +33,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
 
         if (tgtCards.size() > 0) {
             sb.append("Valid card gain protection");
-            if (!sa.hasParam("Permanent")) {
+            if (!"Permanent".equals(sa.getParam("Duration"))) {
                 sb.append(" until end of turn");
             }
             sb.append(".");
@@ -94,7 +94,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
                 if (tgtC.isInPlay()) {
                     tgtC.addChangedCardKeywords(gainsKWList, null, false, false, timestamp, true);
 
-                    if (!sa.hasParam("Permanent")) {
+                    if (!"Permanent".equals(sa.getParam("Duration"))) {
                         // If not Permanent, remove protection at EOT
                         final GameCommand untilEOT = new GameCommand() {
                             private static final long serialVersionUID = -6573962672873853565L;
@@ -106,11 +106,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
                                 }
                             }
                         };
-                        if (sa.hasParam("UntilEndOfCombat")) {
-                            game.getEndOfCombat().addUntil(untilEOT);
-                        } else {
-                            game.getEndOfTurn().addUntil(untilEOT);
-                        }
+                        addUntilCommand(sa, untilEOT);
                     }
                 }
             }
@@ -128,7 +124,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
                     player.addChangedKeywords(ImmutableList.of("Protection from " + gain), ImmutableList.of(), timestamp);
                 }
 
-                if (!sa.hasParam("Permanent")) {
+                if (!"Permanent".equals(sa.getParam("Duration"))) {
                     // If not Permanent, remove protection at EOT
                     final GameCommand revokeCommand = new GameCommand() {
                         private static final long serialVersionUID = -6573962672873853565L;
@@ -138,11 +134,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
                             player.removeChangedKeywords(timestamp);
                         }
                     };
-                    if (sa.hasParam("UntilEndOfCombat")) {
-                        game.getEndOfCombat().addUntil(revokeCommand);
-                    } else {
-                        game.getEndOfTurn().addUntil(revokeCommand);
-                    }
+                    addUntilCommand(sa, revokeCommand);
                 }
             }
         }

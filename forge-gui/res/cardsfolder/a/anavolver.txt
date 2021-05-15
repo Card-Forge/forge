@@ -6,9 +6,9 @@ K:Kicker:1 U:B
 K:ETBReplacement:Other:VolverStrength:Mandatory::Card.Self+kicked 1
 K:ETBReplacement:Other:VolverPumped:Mandatory::Card.Self+kicked 2
 SVar:VolverStrength:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | ETB$ True | SubAbility$ VolverLaunch | SpellDescription$ If CARDNAME was kicked with its {1}{U} kicker, it enters the battlefield with two +1/+1 counters on it and with flying.
-SVar:VolverLaunch:DB$ Animate | Defined$ Self | Keywords$ Flying | Permanent$ True
+SVar:VolverLaunch:DB$ Animate | Defined$ Self | Keywords$ Flying | Duration$ Permanent
 SVar:VolverPumped:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | ETB$ True | SubAbility$ VolverResilience | SpellDescription$ If CARDNAME was kicked with its {B} kicker, it enters the battlefield with a +1/+1 counter on it and with "Pay 3 life: Regenerate CARDNAME."
-SVar:VolverResilience:DB$ Animate | Defined$ Self | Abilities$ ABRegen | Permanent$ True
+SVar:VolverResilience:DB$ Animate | Defined$ Self | Abilities$ ABRegen | Duration$ Permanent
 SVar:ABRegen:AB$Regenerate | Cost$ PayLife<3> | SpellDescription$ Regenerate CARDNAME.
 AI:RemoveDeck:Random
 DeckNeeds:Color$Blue|Black

@@ -2,8 +2,8 @@ Name:Opal Acrolith
 ManaCost:2 W
 Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | IsPresent$ Card.Self+Enchantment | Execute$ TrigAnimate | TriggerDescription$ When an opponent casts a creature spell, if CARDNAME is an enchantment, CARDNAME becomes a 2/4 Soldier creature.
-A:AB$ Animate | Cost$ 0 | Defined$ Self | Types$ Enchantment | RemoveCardTypes$ True | Permanent$ True | SpellDescription$ CARDNAME becomes an enchantment.
-SVar:TrigAnimate:DB$Animate | Defined$ Self | Power$ 2 | Toughness$ 4 | Types$ Creature,Soldier | RemoveCardTypes$ True | Permanent$ True
+A:AB$ Animate | Cost$ 0 | Defined$ Self | Types$ Enchantment | RemoveCardTypes$ True | Duration$ Permanent | SpellDescription$ CARDNAME becomes an enchantment.
+SVar:TrigAnimate:DB$Animate | Defined$ Self | Power$ 2 | Toughness$ 4 | Types$ Creature,Soldier | RemoveCardTypes$ True | Duration$ Permanent
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/opal_acrolith.jpg
 Oracle:Whenever an opponent casts a creature spell, if Opal Acrolith is an enchantment, Opal Acrolith becomes a 2/4 Soldier creature.\n{0}: Opal Acrolith becomes an enchantment.

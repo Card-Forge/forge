@@ -2,7 +2,7 @@ Name:Nurturing Licid
 ManaCost:1 G
 Types:Creature Licid
 PT:1/1
-A:AB$ Animate | Cost$ G T | Defined$ Self | RemoveThisAbility$ True | Permanent$ True | RevertCost$ G | Keywords$ Enchant creature | Abilities$ SPAttach | Types$ Enchantment,Aura | RemoveCardTypes$ True | RemoveEnchantmentTypes$ True | SubAbility$ DBAttach | SpellDescription$ CARDNAME loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {G} to end this effect.
+A:AB$ Animate | Cost$ G T | Defined$ Self | RemoveThisAbility$ True | Duration$ Permanent | RevertCost$ G | Keywords$ Enchant creature | Abilities$ SPAttach | Types$ Enchantment,Aura | RemoveCardTypes$ True | RemoveEnchantmentTypes$ True | SubAbility$ DBAttach | SpellDescription$ CARDNAME loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {G} to end this effect.
 SVar:DBAttach:DB$ Attach | ValidTgts$ Creature | AILogic$ Pump
 SVar:SPAttach:SP$ Attach | Cost$ 0 | ValidTgts$ Creature
 A:AB$ Regenerate | Cost$ G | Defined$ Enchanted | SpellDescription$ Regenerate enchanted creature.

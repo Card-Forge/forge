@@ -8,7 +8,7 @@ SVar:TrigDrawCard:DB$ Draw | NumCards$ 1 | Defined$ You
 SVar:TrigChange:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ TrigForget
 SVar:TrigForget:DB$ Pump | ForgetObjects$ TriggeredCard
 A:AB$ Tap | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Permanent.nonLand | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select target nonland permanent | SubAbility$ DBPump | SpellDescription$ Tap up to two target nonland permanents. They don't untap during their controller's next untap step.
-SVar:DBPump:DB$ Pump | Defined$ Targeted | Permanent$ True | KW$ HIDDEN This card doesn't untap during your next untap step.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | Duration$ Permanent | KW$ HIDDEN This card doesn't untap during your next untap step.
 A:AB$ Effect | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Tamiyo, Field Researcher | Image$ emblem_tamiyo_field_researcher | StaticAbilities$ Omniscience | Stackable$ False | Duration$ Permanent | AILogic$ Always | SubAbility$ DBDraw | SpellDescription$ Draw three cards. You get an emblem with "You may cast spells from your hand without paying their mana costs."
 SVar:Omniscience:Mode$ Continuous | EffectZone$ Command | Affected$ Card.nonLand+YouOwn | MayPlay$ True | MayPlayWithoutManaCost$ True | AffectedZone$ Hand | Description$ You may cast spells from your hand without paying their mana costs.
 SVar:DBDraw:DB$Draw | NumCards$ 3

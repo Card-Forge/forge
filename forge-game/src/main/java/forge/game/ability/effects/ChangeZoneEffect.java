@@ -420,7 +420,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         //if host is not on the battlefield don't apply
-        if (sa.hasParam("UntilHostLeavesPlay") && !sa.getHostCard().isInPlay()) {
+        if ("UntilHostLeavesPlay".equals(sa.getParam("Duration")) && !sa.getHostCard().isInPlay()) {
             return;
         }
 
@@ -816,8 +816,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         if (sa.hasParam("AtEOT") && !triggerList.isEmpty()) {
             registerDelayedTrigger(sa, sa.getParam("AtEOT"), triggerList.allCards());
         }
-        if (sa.hasParam("UntilHostLeavesPlay")) {
-            hostCard.addLeavesPlayCommand(untilHostLeavesPlayCommand(triggerList, hostCard));
+        if ("UntilHostLeavesPlay".equals(sa.getParam("Duration"))) {
+            addUntilCommand(sa, untilHostLeavesPlayCommand(triggerList, hostCard));
         }
 
         // for things like Gaea's Blessing
@@ -1402,8 +1402,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         }
         triggerList.triggerChangesZoneAll(game, sa);
 
-        if (sa.hasParam("UntilHostLeavesPlay")) {
-            source.addLeavesPlayCommand(untilHostLeavesPlayCommand(triggerList, source));
+        if ("UntilHostLeavesPlay".equals(sa.getParam("Duration"))) {
+            addUntilCommand(sa, untilHostLeavesPlayCommand(triggerList, source));
         }
     }
 

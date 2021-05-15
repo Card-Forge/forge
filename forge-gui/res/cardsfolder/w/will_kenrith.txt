@@ -4,7 +4,7 @@ Types:Legendary Planeswalker Will
 Loyalty:4
 Text:CARDNAME can be your commander.
 K:Partner:Rowan Kenrith:Rowan
-A:AB$ Animate | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | UntilYourNextTurn$ True | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 2 | Power$ 0 | Toughness$ 3 | IsCurse$ True | RemoveAllAbilities$ True | SpellDescription$ Until your next turn, up to two target creatures each have base power and toughness 0/3 and lose all abilities.
+A:AB$ Animate | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | Duration$ UntilYourNextTurn | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 2 | Power$ 0 | Toughness$ 3 | IsCurse$ True | RemoveAllAbilities$ True | SpellDescription$ Until your next turn, up to two target creatures each have base power and toughness 0/3 and lose all abilities.
 A:AB$ Draw | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Player | NumCards$ 2 | SubAbility$ DBEffect | SpellDescription$ Target player draws two cards. Until your next turn, instant, sorcery, and planeswalker spells that player casts cost {2} less to cast.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ WillReduceCost | RememberObjects$ Targeted | Duration$ UntilYourNextTurn
 SVar:WillReduceCost:Mode$ ReduceCost | EffectZone$ Command | ValidCard$ Instant,Sorcery,Planeswalker | Type$ Spell | Activator$ Player.IsRemembered | Amount$ 2 | Description$ Until your next turn, instant, sorcery, and planeswalker spells that player casts cost {2} less to cast.

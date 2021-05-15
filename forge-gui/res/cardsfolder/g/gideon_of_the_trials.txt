@@ -2,7 +2,7 @@ Name:Gideon of the Trials
 ManaCost:1 W W
 Types:Legendary Planeswalker Gideon
 Loyalty:3
-A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Planeswalker$ True | KW$ Prevent all damage that would be dealt by CARDNAME. | IsCurse$ True | UntilYourNextTurn$ True | SpellDescription$ Until your next turn, prevent all damage target permanent would deal.
+A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Planeswalker$ True | KW$ Prevent all damage that would be dealt by CARDNAME. | IsCurse$ True | Duration$ UntilYourNextTurn | SpellDescription$ Until your next turn, prevent all damage target permanent would deal.
 A:AB$ Animate | Cost$ AddCounter<0/LOYALTY> | Defined$ Self | Power$ 4 | Toughness$ 4 | Keywords$ Indestructible | Types$ Creature,Human,Soldier | SubAbility$ GideonPrevent | Planeswalker$ True | SpellDescription$ Until end of turn, CARDNAME becomes a 4/4 Human Soldier creature with indestructible that's still a planeswalker. Prevent all damage that would be dealt to him this turn.
 SVar:GideonPrevent:DB$ Pump | Defined$ Self | KW$ Prevent all damage that would be dealt to CARDNAME.
 A:AB$ Effect | Cost$ AddCounter<0/LOYALTY> | Name$ Emblem - Gideon of the Trials | StaticAbilities$ STPump1,STPump2 | Planeswalker$ True | Ultimate$ True | Duration$ Permanent | AILogic$ Always | Stackable$ False | SpellDescription$ You get an emblem with "As long as you control a Gideon planeswalker, you can't lose the game and your opponents can't win the game."

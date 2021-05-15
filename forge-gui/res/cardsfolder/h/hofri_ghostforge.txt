@@ -6,7 +6,7 @@ S:Mode$ Continuous | Affected$ Spirit.YouCtrl | AddPower$ 1 | AddToughness$ 1 | 
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+nonToken+YouCtrl | Execute$ TrigChange | TriggerDescription$ Whenever another nontoken creature you control dies, exile it. If you do, create a token that's a copy of that creature, except it's a Spirit in addition to its other types and it has "When this creature leaves the battlefield, return the exiled card to its owner's graveyard."
 SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Defined$ TriggeredNewCardLKICopy | RememberChanged$ True | SubAbility$ DBCopy
 SVar:DBCopy:DB$ CopyPermanent | Defined$ TriggeredCardLKICopy | AddTypes$ Spirit | ConditionDefined$ TriggeredNewCardLKICopy | ConditionPresent$ Card | ConditionCompare$ EQExiledCount | ImprintTokens$ True | TokenRemembered$ Remembered | SubAbility$ DBAnimate
-SVar:DBAnimate:DB$ Animate | Defined$ Imprinted | Permanent$ True | Triggers$ TrigLeavesBattlefield | sVars$ TrigReturn | SubAbility$ DBCleanup
+SVar:DBAnimate:DB$ Animate | Defined$ Imprinted | Duration$ Permanent | Triggers$ TrigLeavesBattlefield | sVars$ TrigReturn | SubAbility$ DBCleanup
 SVar:TrigLeavesBattlefield:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When this creature leaves the battlefield, return the exiled card to your graveyard.
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Graveyard | Defined$ Remembered
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True

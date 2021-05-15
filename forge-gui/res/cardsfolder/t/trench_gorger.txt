@@ -5,7 +5,7 @@ PT:6/6
 K:Trample
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | OptionalDecider$ You | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for any number of land cards, exile them, then shuffle. If you do, CARDNAME has base power and base toughness each equal to the number of cards exiled this way.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Exile | ChangeType$ Land | ChangeNum$ X | RememberChanged$ True | SubAbility$ TrenchAnimate | ShuffleNonMandatory$ True
-SVar:TrenchAnimate:DB$Animate | Power$ Y | Toughness$ Y | Permanent$ True | SubAbility$ DBCleanUp
+SVar:TrenchAnimate:DB$Animate | Power$ Y | Toughness$ Y | Duration$ Permanent | SubAbility$ DBCleanUp
 SVar:DBCleanUp:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$TypeInYourLibrary.Land
 SVar:Y:Remembered$Amount

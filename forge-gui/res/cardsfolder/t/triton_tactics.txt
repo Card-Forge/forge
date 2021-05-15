@@ -6,7 +6,7 @@ SVar:DBUntap:DB$ Untap | Defined$ ParentTarget | SubAbility$ DBDelTrig
 SVar:DBDelTrig:DB$ DelayedTrigger | ThisTurn$ True | Mode$ Phase | Phase$ EndCombat | Execute$ TrigRemember | TriggerDescription$ At this turn's next end of combat, tap each creature that was blocked by one of those creatures this turn and it doesn't untap during its controller's next untap step. | RememberObjects$ ParentTarget
 SVar:TrigRemember:DB$ Pump | RememberObjects$ DelayTriggerRemembered | SubAbility$ TrigTap
 SVar:TrigTap:DB$ TapAll | ValidCards$ Creature.blockedByRemembered | SubAbility$ DBPump
-SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.blockedByRemembered | Permanent$ True | KW$ HIDDEN This card doesn't untap during your next untap step. | SubAbility$ DBCleanup
+SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.blockedByRemembered | Duration$ Permanent | KW$ HIDDEN This card doesn't untap during your next untap step. | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/triton_tactics.jpg

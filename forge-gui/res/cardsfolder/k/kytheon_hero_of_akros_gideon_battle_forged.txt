@@ -21,7 +21,7 @@ Colors:white
 Types:Legendary Planeswalker Gideon
 Loyalty:3
 A:AB$ MustAttack | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature.OppCtrl | Defender$ Self | TgtPrompt$ Select target creature an opponent controls | SpellDescription$ Up to one target creature an opponent controls attacks CARDNAME during its controller's next turn if able.
-A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Indestructible | UntilYourNextTurn$ True | SubAbility$ DBUntap | SpellDescription$ Until your next turn, target creature gains indestructible. Untap that creature.
+A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Indestructible | Duration$ UntilYourNextTurn | SubAbility$ DBUntap | SpellDescription$ Until your next turn, target creature gains indestructible. Untap that creature.
 SVar:DBUntap:DB$ Untap | Defined$ Targeted
 A:AB$ Animate | Cost$ AddCounter<0/LOYALTY> | Defined$ Self | Power$ 4 | Toughness$ 4 | Types$ Creature,Human,Soldier | Keywords$ Indestructible | SubAbility$ DBPrevent | Planeswalker$ True | Ultimate$ True | SpellDescription$ Until end of turn, CARDNAME becomes a 4/4 Human Soldier creature with indestructible that's still a planeswalker. Prevent all damage that would be dealt to him this turn.
 SVar:DBPrevent:DB$ Pump | Defined$ Self | KW$ Prevent all damage that would be dealt to CARDNAME.

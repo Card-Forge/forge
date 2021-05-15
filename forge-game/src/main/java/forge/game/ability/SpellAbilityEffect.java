@@ -24,6 +24,7 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardZoneTable;
 import forge.game.combat.Combat;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplacementEffect;
@@ -696,6 +697,54 @@ public abstract class SpellAbilityEffect {
                     sa.getHostCard().addRemembered(p);
                 }
             }
+        }
+    }
+
+    protected static void addUntilCommand(final SpellAbility sa, GameCommand until) {
+        Card host = sa.getHostCard();
+        final Game game = host.getGame();
+        final String duration = sa.getParam("Duration");
+        // in case host was LKI
+        if (host.isLKI()) {
+            host = game.getCardState(host);
+        }
+
+        if ("UntilEndOfCombat".equals(duration)) {
+            game.getEndOfCombat().addUntil(until);
+        } else if ("UntilYourNextUpkeep".equals(duration)) {
+            game.getUpkeep().addUntil(sa.getActivatingPlayer(), until);
+        } else if ("UntilTheEndOfYourNextUpkeep".equals(duration)) {
+            if (game.getPhaseHandler().is(PhaseType.UPKEEP)) {
+                game.getUpkeep().registerUntilEnd(host.getController(), until);
+            } else {
+                game.getUpkeep().addUntilEnd(host.getController(), until);
+            }
+        }  else if ("UntilTheEndOfYourNextTurn".equals(duration)) {
+            if (game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) {
+                game.getEndOfTurn().registerUntilEnd(sa.getActivatingPlayer(), until);
+            } else {
+                game.getEndOfTurn().addUntilEnd(sa.getActivatingPlayer(), until);
+            }
+        } else if (duration != null && duration.startsWith("UntilAPlayerCastSpell")) {
+            game.getStack().addCastCommand(duration.split(" ")[1], until);
+        } else if ("UntilHostLeavesPlay".equals(duration)) {
+            host.addLeavesPlayCommand(until);
+        } else if ("UntilHostLeavesPlayOrEOT".equals(duration)) {
+            host.addLeavesPlayCommand(until);
+            game.getEndOfTurn().addUntil(until);
+        } else if ("UntilLoseControlOfHost".equals(duration)) {
+            host.addLeavesPlayCommand(until);
+            host.addChangeControllerCommand(until);
+        } else if ("UntilYourNextTurn".equals(duration)) {
+            game.getCleanup().addUntil(sa.getActivatingPlayer(), until);
+        } else if ("UntilUntaps".equals(duration)) {
+            host.addUntapCommand(until);
+        } else if ("UntilUnattached".equals(duration)) {
+            sa.getHostCard().addUnattachCommand(until);
+        } else if ("UntilFacedown".equals(duration)) {
+            sa.getHostCard().addFacedownCommand(until);
+        }else {
+            game.getEndOfTurn().addUntil(until);
         }
     }
 }

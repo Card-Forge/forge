@@ -2,8 +2,8 @@ Name:Mu Yanling, Sky Dancer
 ManaCost:1 U U
 Types:Legendary Planeswalker Yanling
 Loyalty:2
-A:AB$ Pump | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | NumAtt$ -2 | IsCurse$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ 0 | TargetMax$ 1 | UntilYourNextTurn$ True | SubAbility$ DBDebuff | SpellDescription$ Until your next turn, up to one target creature gets -2/-0 and loses flying.
-SVar:DBDebuff:DB$ Debuff | Defined$ Targeted | Keywords$ Flying | UntilYourNextTurn$ True
+A:AB$ Pump | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | NumAtt$ -2 | IsCurse$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ 0 | TargetMax$ 1 | Duration$ UntilYourNextTurn | SubAbility$ DBDebuff | SpellDescription$ Until your next turn, up to one target creature gets -2/-0 and loses flying.
+SVar:DBDebuff:DB$ Debuff | Defined$ Targeted | Keywords$ Flying | Duration$ UntilYourNextTurn
 A:AB$ Token | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ u_4_4_elemental_bird_flying | TokenOwner$ You | LegacyImage$ u 4 4 elemental bird flying m20 | SpellDescription$ Create a 4/4 blue Elemental Bird creature token with flying.
 A:AB$ Effect | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | AIlogic$ Always | Stackable$ False | Name$ Emblem - Mu Yanling, Sky Dancer | Image$ emblem_mu_yanling_sky_dancer | Duration$ Permanent | StaticAbilities$ STDraw | SpellDescription$ You get an emblem with "Islands you control have '{T}: Draw a card.'"
 SVar:STDraw:Mode$ Continuous | EffectZone$ Command | Affected$ Island.YouCtrl | AddAbility$ AnimateIsland | Description$ Islands you control have "{T}: Draw a card".

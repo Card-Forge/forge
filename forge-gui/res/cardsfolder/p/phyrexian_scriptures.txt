@@ -3,7 +3,7 @@ ManaCost:2 B B
 Types:Enchantment Saga
 K:Saga:3:DBPutCounter,DBDestroyAll,DBChangeZoneAll
 SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | CounterType$ P1P1 | CounterNum$ 1 | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBAnimate | SpellDescription$ Put a +1/+1 counter on up to one target creature. That creature becomes an artifact in addition to its other types.
-SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Types$ Artifact | Permanent$ True
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Types$ Artifact | Duration$ Permanent
 SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature.nonArtifact | SpellDescription$ Destroy all nonartifact creatures.
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Card.OppCtrl | Origin$ Graveyard | Destination$ Exile | SpellDescription$ Exile all cards from all opponents' graveyards.
 SVar:NeedsToPlay:Creature.YouCtrl

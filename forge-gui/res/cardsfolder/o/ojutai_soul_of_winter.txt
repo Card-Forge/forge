@@ -6,7 +6,7 @@ K:Flying
 K:Vigilance
 T:Mode$ Attacks | ValidCard$ Dragon.YouCtrl | Execute$ TrigTap | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Dragon you control attacks, tap target nonland permanent an opponent controls. It doesn't untap during its controller's next untap step.
 SVar:TrigTap:DB$ Tap | ValidTgts$ Permanent.nonLand+OppCtrl | TgtPrompt$ Choose target permanent. | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | Defined$ Targeted | Permanent$ True | KW$ HIDDEN This card doesn't untap during your next untap step.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | Duration$ Permanent | KW$ HIDDEN This card doesn't untap during your next untap step.
 SVar:HasAttackEffect:TRUE
 DeckHints:Type$Dragon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ojutai_soul_of_winter.jpg

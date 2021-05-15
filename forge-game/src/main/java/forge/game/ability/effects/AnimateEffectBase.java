@@ -32,7 +32,6 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.keyword.Keyword;
-import forge.game.phase.PhaseType;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.spellability.AbilityStatic;
@@ -214,30 +213,11 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
                     addedStaticAbilities, removeAll, false, removeLandTypes, timestamp);
         }
 
-        if (!sa.hasParam("Permanent")) {
-            if (sa.hasParam("UntilEndOfCombat")) {
-                game.getEndOfCombat().addUntil(unanimate);
-            } else if (sa.hasParam("UntilHostLeavesPlay")) {
-                source.addLeavesPlayCommand(unanimate);
-            } else if (sa.hasParam("UntilLoseControlOfHost")) {
-                sa.getHostCard().addLeavesPlayCommand(unanimate);
-                sa.getHostCard().addChangeControllerCommand(unanimate);
-            } else if (sa.hasParam("UntilYourNextUpkeep")) {
-                game.getUpkeep().addUntil(source.getController(), unanimate);
-            } else if (sa.hasParam("UntilTheEndOfYourNextUpkeep")) {
-                if (game.getPhaseHandler().is(PhaseType.UPKEEP)) {
-                    game.getUpkeep().registerUntilEnd(source.getController(), unanimate);
-                } else {
-                    game.getUpkeep().addUntilEnd(source.getController(), unanimate);
-                }
-            } else if (sa.hasParam("UntilControllerNextUntap")) {
+        if (!"Permanent".equals(sa.getParam("Duration"))) {
+            if ("UntilControllerNextUntap".equals(sa.getParam("Duration"))) {
                 game.getUntap().addUntil(c.getController(), unanimate);
-            } else if (sa.hasParam("UntilAPlayerCastSpell")) {
-                game.getStack().addCastCommand(sa.getParam("UntilAPlayerCastSpell"), unanimate);
-            } else if (sa.hasParam("UntilYourNextTurn")) {
-                game.getCleanup().addUntil(source.getController(), unanimate);
             } else {
-                game.getEndOfTurn().addUntil(unanimate);
+                addUntilCommand(sa, unanimate);
             }
         }
     }

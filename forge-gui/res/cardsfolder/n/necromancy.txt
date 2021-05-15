@@ -4,7 +4,7 @@ Types:Enchantment
 K:MayFlashSac
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ RaiseDead | TriggerDescription$ When CARDNAME enters the battlefield, if it's on the battlefield, it becomes an Aura with "enchant creature put onto the battlefield with CARDNAME." Put target creature card from a graveyard onto the battlefield under your control and attach CARDNAME to it
 SVar:RaiseDead:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | RememberChanged$ True | TgtPrompt$ Select target creature card in a graveyard | ValidTgts$ Creature | ChangeNum$ 1 | SubAbility$ Aurify
-SVar:Aurify:DB$ Animate | IsPresent$ Card.Self | Types$ Aura | OverwriteSpells$ True | Abilities$ NewAttach | Keywords$ Enchant creature put onto the battlefield with CARDNAME | Permanent$ True | SubAbility$ NecromAttach
+SVar:Aurify:DB$ Animate | IsPresent$ Card.Self | Types$ Aura | OverwriteSpells$ True | Abilities$ NewAttach | Keywords$ Enchant creature put onto the battlefield with CARDNAME | Duration$ Permanent | SubAbility$ NecromAttach
 SVar:NewAttach:SP$ Attach | Cost$ 2 B | ValidTgts$ Creature.IsRemembered | AILogic$ Pump
 SVar:NecromAttach:DB$ Attach | Defined$ Remembered
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigSac | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, enchanted permanent's controller sacrifices it.

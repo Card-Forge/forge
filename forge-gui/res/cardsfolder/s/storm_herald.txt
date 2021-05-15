@@ -5,7 +5,7 @@ PT:3/2
 K:Haste
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ GraveAuras | TriggerDescription$ When CARDNAME enters the battlefield, return any number of Aura cards from your graveyard to the battlefield attached to creatures you control. Exile those Auras at the beginning of your next end step. If those Auras would leave the battlefield, exile them instead of putting them anywhere else.
 SVar:GraveAuras:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Aura.YouOwn | RememberChanged$ True | AttachedTo$ Creature.YouCtrl | ChangeNum$ GraveX | Optional$ True | Hidden$ True | SubAbility$ DBUnearthed
-SVar:DBUnearthed:DB$ Animate | Defined$ Remembered | LeaveBattlefield$ Exile | Permanent$ True | SubAbility$ DelayedExile | StackDescription$ If those Auras would leave the battlefield, exile them instead of putting them anywhere else.
+SVar:DBUnearthed:DB$ Animate | Defined$ Remembered | LeaveBattlefield$ Exile | Duration$ Permanent | SubAbility$ DelayedExile | StackDescription$ If those Auras would leave the battlefield, exile them instead of putting them anywhere else.
 SVar:DelayedExile:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigReturn | RememberObjects$ RememberedLKI | TriggerDescription$ Exile those Auras at the beginning of your next end step.  | SubAbility$ DBCleanup
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ DelayTriggerRememberedLKI
 SVar:GraveX:Count$ValidGraveyard Aura.YouOwn

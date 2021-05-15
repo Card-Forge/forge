@@ -2,6 +2,6 @@ Name:Woodwraith Corrupter
 ManaCost:3 B B G
 Types:Creature Elemental Horror
 PT:3/6
-A:AB$ Animate | Cost$ 1 B G T | ValidTgts$ Forest | TgtPrompt$ Select target Forest | Power$ 4 | Toughness$ 4 | Types$ Creature,Elemental,Horror | Colors$ Black,Green | Permanent$ True | AILogic$ EOT | SpellDescription$ Target Forest becomes a 4/4 black and green Elemental Horror creature. It's still a land.
+A:AB$ Animate | Cost$ 1 B G T | ValidTgts$ Forest | TgtPrompt$ Select target Forest | Power$ 4 | Toughness$ 4 | Types$ Creature,Elemental,Horror | Colors$ Black,Green | Duration$ Permanent | AILogic$ EOT | SpellDescription$ Target Forest becomes a 4/4 black and green Elemental Horror creature. It's still a land.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/woodwraith_corrupter.jpg
 Oracle:{1}{B}{G}, {T}: Target Forest becomes a 4/4 black and green Elemental Horror creature. It's still a land.

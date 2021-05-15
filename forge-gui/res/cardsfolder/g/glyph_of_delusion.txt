@@ -4,7 +4,7 @@ Types:Instant
 A:SP$ Pump | Cost$ U | ValidTgts$ Wall.blockedThisTurn | TgtPrompt$ Select target Wall that blocked this turn | SubAbility$ DBPutCounter | StackDescription$ SpellDescription | SpellDescription$ Put X glyph counters on target creature that target Wall blocked this turn, where X is the power of that blocked creature. The creature gains "This creature doesn't untap during your untap step if it has a glyph counter on it" and "At the beginning of your upkeep, remove a glyph counter from this creature."
 SVar:DBPutCounter:DB$ PutCounter | CounterType$ GLYPH | CounterNum$ X | ValidTgts$ Creature.blockedByValidThisTurn ParentTarget | TgtPrompt$ Select target creature blocked by target Wall this turn to put counters on | SubAbility$ Delude | IsCurse$ True
 SVar:X:Targeted$CardPower
-SVar:Delude:DB$ Animate | Defined$ ParentTarget | staticAbilities$ Delusional | Triggers$ TrigGlyphUpkeep | sVars$ LoseGlyph | Permanent$ True | StackDescription$ None
+SVar:Delude:DB$ Animate | Defined$ ParentTarget | staticAbilities$ Delusional | Triggers$ TrigGlyphUpkeep | sVars$ LoseGlyph | Duration$ Permanent | StackDescription$ None
 SVar:Delusional:Mode$ Continuous | Affected$ Card.Self+counters_GE1_GLYPH | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ CARDNAME doesn't untap during your untap step if it has a glyph counter on it.
 SVar:TrigGlyphUpkeep:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ LoseGlyph | TriggerDescription$ At the beginning of your upkeep, remove a glyph counter from CARDNAME.
 SVar:LoseGlyph:DB$ RemoveCounter | CounterType$ GLYPH | CounterNum$ 1

@@ -6,5 +6,5 @@ A:AB$ Effect | Cost$ Discard<1/Card> | StaticAbilities$ STYardCast | ActivationL
 SVar:STYardCast:Mode$ Continuous | Affected$ Creature.nonLand+YouCtrl | MayPlay$ True | MayPlayLimit$ 1 | EffectZone$ Command | AffectedZone$ Graveyard
 AI:RemoveDeck:All
 T:Mode$ ChangesZone | ValidCard$ Creature.nonToken+YouCtrl+wasNotCastFromHand | Origin$ Any | Destination$ Battlefield | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever a nontoken creature enters the battlefield under your control, if you didn't cast it from your hand, it gains haste until your next turn.
-SVar:TrigPump:DB$ Pump | Defined$ TriggeredCard | KW$ Haste | UntilYourNextTurn$ True
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredCard | KW$ Haste | Duration$ UntilYourNextTurn
 Oracle:Discard a card: You may cast a creature spell from your graveyard this turn. Activate only once each turn.\nWhenever a nontoken creature enters the battlefield under your control, if you didn't cast it from your hand, it gains haste until your next turn.

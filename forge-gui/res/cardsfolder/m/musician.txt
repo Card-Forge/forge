@@ -4,7 +4,7 @@ Types:Creature Human Wizard
 PT:1/3
 K:Cumulative upkeep:1
 A:AB$ PutCounter | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | CounterType$ MUSIC | CounterNum$ 1 | SubAbility$ PayThePiper | SpellDescription$ Put a music counter on target creature. If it doesn't have "At the beginning of your upkeep, destroy this creature unless you pay {1} for each music counter on it," it gains that ability.
-SVar:PayThePiper:DB$ Animate | Defined$ Targeted | Permanent$ True | Keywords$ At the beginning of your upkeep, destroy this creature unless you pay {1} for each music counter on it | Triggers$ TrigMusicianPay | sVars$ MusiciansSpite,MusicX | ConditionDefined$ Targeted | ConditionPresent$ Card.withoutAt the beginning of your upkeep, destroy this creature unless you pay {1} for each music counter on it | ConditionCompare$ GE1
+SVar:PayThePiper:DB$ Animate | Defined$ Targeted | Duration$ Permanent | Keywords$ At the beginning of your upkeep, destroy this creature unless you pay {1} for each music counter on it | Triggers$ TrigMusicianPay | sVars$ MusiciansSpite,MusicX | ConditionDefined$ Targeted | ConditionPresent$ Card.withoutAt the beginning of your upkeep, destroy this creature unless you pay {1} for each music counter on it | ConditionCompare$ GE1
 #The keyword added does nothing itself other than create a keyword string to check against in the conditional
 SVar:TrigMusicianPay:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ MusiciansSpite | Secondary$ True | TriggerDescription$ At the beginning of your upkeep, destroy this creature unless you pay 1 for each music counter on it.
 SVar:MusiciansSpite:DB$ Destroy | Defined$ Self | UnlessCost$ MusicX | UnlessPayer$ You

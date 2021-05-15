@@ -5,7 +5,7 @@ PT:1/1
 K:Kicker:3 B
 R:Event$ Moved | ValidCard$ Card.Self+kicked | Destination$ Battlefield | ReplaceWith$ GatherDust | Description$ If CARDNAME was kicked, it enters the battlefield with two +1/+1 counters on it and with fear. (It can't be blocked except by artifact creatures and/or black creatures.)
 SVar:GatherDust:DB$ PutCounter | Defined$ Self | ETB$ True | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ Dustwalk
-SVar:Dustwalk:DB$ Animate | Defined$ Self | Keywords$ Fear | Permanent$ True | SubAbility$ DBMoveToPlay
+SVar:Dustwalk:DB$ Animate | Defined$ Self | Keywords$ Fear | Duration$ Permanent | SubAbility$ DBMoveToPlay
 SVar:DBMoveToPlay:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/duskwalker.jpg
 Oracle:Kicker {3}{B} (You may pay an additional {3}{B} as you cast this spell.)\nIf Duskwalker was kicked, it enters the battlefield with two +1/+1 counters on it and with fear. (It can't be blocked except by artifact creatures and/or black creatures.)

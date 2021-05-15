@@ -4,6 +4,6 @@ Types:Legendary Creature Human Soldier
 PT:4/4
 K:Flash
 T:Mode$ DamageDone | ValidSource$ Creature | ValidTarget$ You | CombatDamage$ True | IsPresent$ Card.Self+ThisTurnEntered | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature deals combat damage to you, if CARDNAME entered the battlefield this turn, exile that creature until CARDNAME leaves the battlefield.
-SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ TriggeredSourceLKICopy | UntilHostLeavesPlay$ True
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ TriggeredSourceLKICopy | Duration$ UntilHostLeavesPlay
 SVar:AmbushAI:BlockOnly
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhenever a creature deals combat damage to you, if Hixus, Prison Warden entered the battlefield this turn, exile that creature until Hixus leaves the battlefield. (That creature returns under its owner's control.)

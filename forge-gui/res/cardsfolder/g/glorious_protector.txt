@@ -5,7 +5,7 @@ PT:3/4
 K:Flash
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, you may exile any number of other non-Angel creatures you control until CARDNAME leaves the battlefield.
-SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Hidden$ True | ChangeType$ Creature.nonAngel+YouCtrl | ChangeNum$ MaxTgts | SelectPrompt$ Choose any number of non-Angel creatures you control | UntilHostLeavesPlay$ True
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Hidden$ True | ChangeType$ Creature.nonAngel+YouCtrl | ChangeNum$ MaxTgts | SelectPrompt$ Choose any number of non-Angel creatures you control | Duration$ UntilHostLeavesPlay
 SVar:MaxTgts:Count$Valid Creature.nonAngel+YouCtrl
 AI:RemoveDeck:Random
 K:Foretell:2 W

@@ -110,7 +110,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                     && (card.getNetCombatDamage() > 0)
                     && !ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS);
         } else if (keyword.endsWith("CARDNAME can't attack or block.")) {
-            if (sa.hasParam("UntilYourNextTurn")) {
+            if ("UntilYourNextTurn".equals(sa.getParam("Duration"))) {
                 return CombatUtil.canAttack(card, ai) || CombatUtil.canBlock(card, true);
             }
             if (!ph.isPlayerTurn(ai)) {

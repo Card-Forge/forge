@@ -3,7 +3,7 @@ ManaCost:2
 Types:Artifact Creature Construct
 PT:1/1
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigBanding | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, CARDNAME gains banding until end of combat.
-SVar:TrigBanding:DB$ Pump | Defined$ Self | KW$ Banding | UntilEndOfCombat$ True
+SVar:TrigBanding:DB$ Pump | Defined$ Self | KW$ Banding | Duration$ UntilEndOfCombat
 T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature.Wall | Execute$ DelayAttackTrig | TriggerDescription$ Whenever CARDNAME becomes blocked by a Wall, destroy that Wall at end of combat.
 SVar:DelayAttackTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroyBlocker | RememberObjects$ TriggeredBlocker | TriggerDescription$ Destroy blocked creature at end of combat.
 SVar:TrigDestroyBlocker:DB$ Destroy | Defined$ DelayTriggerRemembered

@@ -7,7 +7,7 @@ A:AB$ Pump | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Creat
 SVar:X:Count$Valid Artifact.YouCtrl
 A:AB$ Effect | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Tezzeret the Schemer | Triggers$ CombatTrig | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "At the beginning of combat on your turn, target artifact you control becomes an artifact creature with base power and toughness 5/5."
 SVar:CombatTrig:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Command | Execute$ TezzeretAnimate | TriggerDescription$ At the beginning of combat on your turn, target artifact you control becomes an artifact creature with base power and toughness 5/5.
-SVar:TezzeretAnimate:DB$ Animate | ValidTgts$ Artifact.YouCtrl | TgtPrompt$ Select target artifact you control | Power$ 5 | Toughness$ 5 | Types$ Artifact,Creature | Permanent$ True
+SVar:TezzeretAnimate:DB$ Animate | ValidTgts$ Artifact.YouCtrl | TgtPrompt$ Select target artifact you control | Power$ 5 | Toughness$ 5 | Types$ Artifact,Creature | Duration$ Permanent
 DeckNeeds:Type$Artifact
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tezzeret_the_schemer.jpg
 Oracle:[+1]: Create a colorless artifact token named Etherium Cell with "{T}, Sacrifice this artifact: Add one mana of any color."\n[−2]: Target creature gets +X/-X until end of turn, where X is the number of artifacts you control.\n[−7]: You get an emblem with "At the beginning of combat on your turn, target artifact you control becomes an artifact creature with base power and toughness 5/5."

@@ -5,7 +5,7 @@ Loyalty:3
 A:AB$ Dig | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Opponent | DigNum$ 3 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SpellDescription$ Exile the top three cards of target opponent's library.
 A:AB$ ChooseCard | Cost$ SubCounter<X/LOYALTY> | Choices$ Creature.cmcEQX+IsRemembered+ExiledWithSource | ChoiceZone$ Exile | Planeswalker$ True | SubAbility$ DBChangeZone | AILogic$ Ashiok | SpellDescription$ Put a creature card with mana value X exiled with CARDNAME onto the battlefield under your control. That creature is a Nightmare in addition to its other types.
 SVar:DBChangeZone:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Exile | Destination$ Battlefield | ChangeType$ Creature.cmcEQX+IsRemembered+ExiledWithSource | ChangeNum$ 1 | GainControl$ True | SubAbility$ DBAnimate
-SVar:DBAnimate:DB$ Animate | Defined$ ChosenCard | Types$ Nightmare | Permanent$ True | SubAbility$ DBCleanMinus
+SVar:DBAnimate:DB$ Animate | Defined$ ChosenCard | Types$ Nightmare | Duration$ Permanent | SubAbility$ DBCleanMinus
 SVar:DBCleanMinus:DB$ Cleanup | ForgetDefined$ ChosenCard | ClearChosenCard$ True
 SVar:X:Count$xPaid
 A:AB$ ChangeZoneAll | Cost$ SubCounter<10/LOYALTY> | ChangeType$ Card.OppCtrl | Origin$ Graveyard,Hand | Destination$ Exile | RememberChanged$ True | Planeswalker$ True | Ultimate$ True | SpellDescription$ Exile all cards from all opponents' hands and graveyards.

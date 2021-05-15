@@ -3,7 +3,7 @@ ManaCost:3 W B
 Types:Legendary Planeswalker Kaya
 Loyalty:5
 A:AB$ PutCounter | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature.nonToken | AITgts$ Creature.nonToken+YouCtrl | TgtPrompt$ Select target nontoken creature | TargetMin$ 0 | TargetMax$ 1 | CounterType$ GHOSTFORM | CounterNum$ 1 | SubAbility$ DBAnimate | SpellDescription$ Put a ghostform counter on up to one target nontoken creature. It gains "When this creature dies or is put into exile, return it to its owner's hand and create a 1/1 white Spirit creature token with flying."
-SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Permanent$ True | Triggers$ TrigDieExile | StackDescription$ {c:Targeted} gains "When this creature dies or is put into exile, return it to its owner's hand and create a 1/1 white Spirit creature token with flying."
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Duration$ Permanent | Triggers$ TrigDieExile | StackDescription$ {c:Targeted} gains "When this creature dies or is put into exile, return it to its owner's hand and create a 1/1 white Spirit creature token with flying."
 SVar:TrigDieExile:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard,Exile | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When this creature dies or is put into exile, return it to its owner's hand and create a 1/1 white Spirit creature token with flying.
 SVar:TrigReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ All | Destination$ Hand | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ TriggeredCardController

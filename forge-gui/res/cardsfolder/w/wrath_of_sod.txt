@@ -2,6 +2,6 @@ Name:Wrath of Sod
 ManaCost:2 W G
 Types:Sorcery
 A:SP$ PutCounterAll | Cost$ 2 W G | ValidCards$ Creature | CounterType$ MANABOND | CounterNum$ 1 | SubAbility$ DBAnimateAll | SpellDescription$ Put a manabond counter on all creatures. (They lose all other abilities and become lands with "{T}: Add one mana of this card's color.")
-SVar:DBAnimateAll:DB$ AnimateAll | ValidCards$ Creature | Permanent$ True | OverwriteTypes$ True | Types$ Land | Abilities$ ABMana
+SVar:DBAnimateAll:DB$ AnimateAll | ValidCards$ Creature | Duration$ Permanent | OverwriteTypes$ True | Types$ Land | Abilities$ ABMana
 SVar:ABMana:AB$ ManaReflected | Cost$ T | Valid$ Defined.Self | ColorOrType$ Color | ReflectProperty$ Is | SpellDescription$ Add one mana of any of this card's colors.
 Oracle:Put a manabond counter on all creatures. (They lose all other abilities and become lands with "{T}: Add one mana of this card's color.")

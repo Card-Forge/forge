@@ -5,7 +5,7 @@ PT:2/2
 K:Kicker:2 W
 K:ETBReplacement:Other:DBPutCounter:Mandatory::Card.Self+kicked
 SVar:DBPutCounter:DB$ PutCounter | ETB$ True | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBPump | SpellDescription$ If CARDNAME was kicked, it enters the battlefield with two +1/+1 counters on it and with first strike.
-SVar:DBPump:DB$ Animate | Defined$ Self | Keywords$ First Strike | Permanent$ True
+SVar:DBPump:DB$ Animate | Defined$ Self | Keywords$ First Strike | Duration$ Permanent
 DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/benalish_lancer.jpg
 Oracle:Kicker {2}{W} (You may pay an additional {2}{W} as you cast this spell.)\nIf Benalish Lancer was kicked, it enters the battlefield with two +1/+1 counters on it and with first strike.

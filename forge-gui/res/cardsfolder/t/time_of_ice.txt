@@ -3,7 +3,7 @@ ManaCost:3 U
 Types:Enchantment Saga
 K:Saga:3:DBTap,DBTap,DBChangeZoneAll
 SVar:DBTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | SubAbility$ DBPump | SpellDescription$ Tap target creature an opponent controls. It doesn't untap during its controller's untap step for as long as you control CARDNAME.
-SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN CARDNAME doesn't untap during your untap step. | UntilLoseControlOfHost$ True
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN CARDNAME doesn't untap during your untap step. | Duration$ UntilLoseControlOfHost
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Creature.tapped | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all tapped creatures to their owners' hands.
 SVar:PlayMain1:TRUE
 SVar:NeedsToPlay:Creature.OppCtrl

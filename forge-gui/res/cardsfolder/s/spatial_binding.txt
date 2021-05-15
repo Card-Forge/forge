@@ -1,7 +1,7 @@
 Name:Spatial Binding
 ManaCost:U B
 Types:Enchantment
-A:AB$ Pump | Cost$ PayLife<1> | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | KW$ HIDDEN CARDNAME can't phase out. | AITgts$ Permanent.withPhasing+YouCtrl | UntilYourNextUpkeep$ True | SpellDescription$ Until your next upkeep, target permanent can't phase out.
+A:AB$ Pump | Cost$ PayLife<1> | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | KW$ HIDDEN CARDNAME can't phase out. | AITgts$ Permanent.withPhasing+YouCtrl | Duration$ UntilYourNextUpkeep | SpellDescription$ Until your next upkeep, target permanent can't phase out.
 AI:RemoveDeck:Random
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spatial_binding.jpg
