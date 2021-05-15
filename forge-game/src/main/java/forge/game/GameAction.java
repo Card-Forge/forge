@@ -1699,7 +1699,7 @@ public class GameAction {
         }
 
         final Card newCard = moveToGraveyard(c, cause, null);
-        if (table != null) {
+        if (table != null && newCard != null && newCard.getZone() != null) {
             table.put(ZoneType.Battlefield, newCard.getZone().getZoneType(), newCard);
         }
 

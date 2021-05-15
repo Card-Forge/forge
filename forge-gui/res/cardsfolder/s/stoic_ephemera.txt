@@ -6,7 +6,6 @@ K:Defender
 K:Flying
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ DelTrig | TriggerDescription$ When CARDNAME blocks, sacrifice it at end of combat.
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Opponent | Execute$ TrigSacrifice | TriggerDescription$ Sacrifice CARDNAME at end of combat.
-SVar:TrigSacrifice:DB$Sacrifice | Defined$ Self
+SVar:TrigSacrifice:DB$ SacrificeAll | Defined$ DelayTriggerRememberedLKI
 SVar:SacrificeEndCombat:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stoic_ephemera.jpg
 Oracle:Defender (This creature can't attack.)\nFlying\nWhen Stoic Ephemera blocks, sacrifice it at end of combat.
