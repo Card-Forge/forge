@@ -5,5 +5,4 @@ A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Player | TgtPrompt$ Select target play
 SVar:X:TargetedPlayer$LifeTotal
 SVar:Y:Count$OppsAtLifeTotal.10
 SVar:NeedsToPlayVar:Y GE1
-SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card88818.jpg
 Oracle:If target player has exactly 10 life, Hidetsugu's Second Rite deals 10 damage to that player.

@@ -30,7 +30,6 @@ import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
-import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPlayOption;
 import forge.game.card.CardUtil;
@@ -455,13 +454,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                 life = activator.getOpponentsSmallestLifeTotal();
             }
 
-            int right = 1;
-            final String rightString = this.getLifeAmount().substring(2);
-            if (rightString.equals("X")) {
-                right = CardFactoryUtil.xCount(sa.getHostCard(), sa.getHostCard().getSVar("X"));
-            } else {
-                right = Integer.parseInt(this.getLifeAmount().substring(2));
-            }
+            int right =AbilityUtils.calculateAmount(sa.getHostCard(), this.getLifeAmount().substring(2), sa);
 
             if (!Expressions.compare(life, this.getLifeAmount(), right)) {
                 return false;

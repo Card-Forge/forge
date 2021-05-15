@@ -982,7 +982,7 @@ public class ComputerUtilCard {
                 for(byte c : MagicColor.WUBRG) {
                     String devotionCode = "Count$Devotion." + MagicColor.toLongString(c);
 
-                    int devotion = CardFactoryUtil.xCount(sa.getHostCard(), devotionCode);
+                    int devotion = AbilityUtils.calculateAmount(sa.getHostCard(), devotionCode, sa);
                     if (devotion > curDevotion && !CardLists.filter(hand, CardPredicates.isColor(c)).isEmpty()) {
                         curDevotion = devotion;
                         chosenColor = MagicColor.toLongString(c);
@@ -1679,37 +1679,27 @@ public class ComputerUtilCard {
             // remove old boost that might be copied
             for (final StaticAbility stAb : c.getStaticAbilities()) {
                 vCard.removePTBoost(c.getTimestamp(), stAb.getId());
-                final Map<String, String> params = stAb.getMapParams();
-                if (!params.get("Mode").equals("Continuous")) {
+                if (!stAb.getParam("Mode").equals("Continuous")) {
                     continue;
                 }
-                if (!params.containsKey("Affected")) {
+                if (!stAb.hasParam("Affected")) {
                     continue;
                 }
-                if (!params.containsKey("AddPower") && !params.containsKey("AddToughness")) {
+                if (!stAb.hasParam("AddPower") && !stAb.hasParam("AddToughness")) {
                     continue;
                 }
-                final String valid = params.get("Affected");
-                if (!vCard.isValid(valid, c.getController(), c, null)) {
+                if (!vCard.isValid(stAb.getParam("Affected").split(","), c.getController(), c, stAb)) {
                     continue;
                 }
                 int att = 0;
-                if (params.containsKey("AddPower")) {
-                    String addP = params.get("AddPower");
-                    if (addP.equals("AffectedX")) {
-                        att = CardFactoryUtil.xCount(vCard, AbilityUtils.getSVar(stAb, addP));
-                    } else {
-                        att = AbilityUtils.calculateAmount(c, addP, stAb);
-                    }
+                if (stAb.hasParam("AddPower")) {
+                    String addP = stAb.getParam("AddPower");
+                    att = AbilityUtils.calculateAmount(addP.startsWith("Affected") ? vCard : c, addP, stAb, true);
                 }
                 int def = 0;
-                if (params.containsKey("AddToughness")) {
-                    String addT = params.get("AddToughness");
-                    if (addT.equals("AffectedY")) {
-                        def = CardFactoryUtil.xCount(vCard, AbilityUtils.getSVar(stAb, addT));
-                    } else {
-                        def = AbilityUtils.calculateAmount(c, addT, stAb);
-                    }
+                if (stAb.hasParam("AddToughness")) {
+                    String addT = stAb.getParam("AddToughness");
+                    def = AbilityUtils.calculateAmount(addT.startsWith("Affected") ? vCard : c, addT, stAb, true);
                 }
                 vCard.addPTBoost(att, def, c.getTimestamp(), stAb.getId());
             }

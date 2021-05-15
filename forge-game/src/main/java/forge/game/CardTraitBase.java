@@ -441,7 +441,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         }
 
         if (params.containsKey("WerewolfTransformCondition")) {
-            if (!CardUtil.getLastTurnCast("Card", this.getHostCard()).isEmpty()) {
+            if (!CardUtil.getLastTurnCast("Card", this.getHostCard(), this).isEmpty()) {
                 return false;
             }
         }

@@ -638,11 +638,11 @@ public final class StaticAbilityContinuous {
             if (layer == StaticAbilityLayer.SETPT) {
                 if ((setPower != Integer.MAX_VALUE) || (setToughness != Integer.MAX_VALUE)) {
                     // non CharacteristicDefining
-                    if (setP.startsWith("AffectedX")) {
-                        setPower = CardFactoryUtil.xCount(affectedCard, AbilityUtils.getSVar(stAb, setP));
+                    if (setP.startsWith("Affected")) {
+                        setPower = AbilityUtils.calculateAmount(affectedCard, setP, stAb, true);
                     }
-                    if (setT.startsWith("AffectedX")) {
-                        setToughness = CardFactoryUtil.xCount(affectedCard, AbilityUtils.getSVar(stAb, setT));
+                    if (setT.startsWith("Affected")) {
+                        setToughness = AbilityUtils.calculateAmount(affectedCard, setT, stAb, true);
                     }
                     affectedCard.addNewPT(setPower, setToughness,
                         hostCard.getTimestamp(), stAb.hasParam("CharacteristicDefining"));
@@ -651,11 +651,11 @@ public final class StaticAbilityContinuous {
 
             // add P/T bonus
             if (layer == StaticAbilityLayer.MODIFYPT) {
-                if (addP.startsWith("AffectedX")) {
-                    powerBonus = CardFactoryUtil.xCount(affectedCard, AbilityUtils.getSVar(stAb, addP));
+                if (addP.startsWith("Affected")) {
+                    powerBonus = AbilityUtils.calculateAmount(affectedCard, addP, stAb, true);
                 }
-                if (addT.startsWith("AffectedX")) {
-                    toughnessBonus = CardFactoryUtil.xCount(affectedCard, AbilityUtils.getSVar(stAb, addT));
+                if (addT.startsWith("Affected")) {
+                    toughnessBonus = AbilityUtils.calculateAmount(affectedCard, addT, stAb, true);
                 }
                 affectedCard.addPTBoost(powerBonus, toughnessBonus, se.getTimestamp(), stAb.getId());
             }

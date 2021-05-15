@@ -23,7 +23,6 @@ import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardPredicates;
 import forge.game.cost.Cost;
 import forge.game.keyword.KeywordInterface;
@@ -199,7 +198,7 @@ public class StaticAbilityCantAttackBlock {
         }
         String costString = stAb.getParam("Cost");
         if (stAb.hasSVar(costString)) {
-            costString = Integer.toString(CardFactoryUtil.xCount(hostCard, stAb.getSVar(costString)));
+            costString = Integer.toString(AbilityUtils.calculateAmount(hostCard, costString, stAb));
         }
 
         return new Cost(costString, true);

@@ -11,5 +11,5 @@ SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreColor$ True | Effect
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$ValidHand Card.DefenderCtrl
 SVar:Y:Count$InYourHand
-SVar:Z:Count$CreaturesAttackedThisTurn_Rogue
+SVar:Z:Count$CreaturesAttackedThisTurn Creature.Rogue
 Oracle:Reach, haste\nWhenever Robber of the Rich attacks, if defending player has more cards in hand than you, exile the top card of their library. During any turn you attacked with a Rogue, you may cast that card and you may spend mana as though it were mana of any color to cast that spell.

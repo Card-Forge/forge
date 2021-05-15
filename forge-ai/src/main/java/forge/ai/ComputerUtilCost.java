@@ -157,7 +157,7 @@ public class ComputerUtilCost {
                 if (typeList.size() > ai.getMaxHandSize()) {
                     continue;
                 }
-                int num = AbilityUtils.calculateAmount(source, disc.getAmount(), null);
+                int num = AbilityUtils.calculateAmount(source, disc.getAmount(), sa);
 
                 for (int i = 0; i < num; i++) {
                     Card pref = ComputerUtil.getCardPreference(ai, source, "DiscardCost", typeList);

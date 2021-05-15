@@ -32,6 +32,7 @@ import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
+import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
@@ -115,7 +116,7 @@ public final class CardUtil {
      * @param src   a Card object
      * @return a CardCollection that matches the given criteria
      */
-    public static List<Card> getThisTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src) {
+    public static List<Card> getThisTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src, final CardTraitBase ctb) {
         List<Card> res = Lists.newArrayList();
         final Game game = src.getGame();
         if (to != ZoneType.Stack) {
@@ -126,8 +127,7 @@ public final class CardUtil {
         else {
             res.addAll(game.getStackZone().getCardsAddedThisTurn(from));
         }
-        res = CardLists.getValidCardsAsList(res, valid, src.getController(), src, null);
-        return res;
+        return CardLists.getValidCardsAsList(res, valid, src.getController(), src, ctb);
     }
 
     /**
@@ -139,7 +139,7 @@ public final class CardUtil {
      * @param src   a Card object
      * @return a CardCollection that matches the given criteria
      */
-    public static List<Card> getLastTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src) {
+    public static List<Card> getLastTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src, final CardTraitBase ctb) {
         List<Card> res = Lists.newArrayList();
         final Game game = src.getGame();
         if (to != ZoneType.Stack) {
@@ -150,16 +150,15 @@ public final class CardUtil {
         else {
             res.addAll(game.getStackZone().getCardsAddedLastTurn(from));
         }
-        res = CardLists.getValidCardsAsList(res, valid, src.getController(), src, null);
-        return res;
+        return CardLists.getValidCardsAsList(res, valid, src.getController(), src, ctb);
     }
 
-    public static List<Card> getThisTurnCast(final String valid, final Card src) {
-        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastThisTurn(), valid, src.getController(), src, null);
+    public static List<Card> getThisTurnCast(final String valid, final Card src, final CardTraitBase ctb) {
+        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastThisTurn(), valid, src.getController(), src, ctb);
     }
 
-    public static List<Card> getLastTurnCast(final String valid, final Card src) {
-        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastLastTurn(), valid, src.getController(), src, null);
+    public static List<Card> getLastTurnCast(final String valid, final Card src, final CardTraitBase ctb) {
+        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastLastTurn(), valid, src.getController(), src, ctb);
 
     }
 
