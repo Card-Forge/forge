@@ -4,7 +4,6 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.card.CardFactoryUtil;
 import forge.game.spellability.SpellAbility;
 import forge.util.TextUtil;
 
@@ -50,12 +49,12 @@ public class StoreSVarEffect extends SpellAbilityEffect {
                 int exprMath = AbilityUtils.calculateAmount(source, exprMathVar, sa);
                 expr = TextUtil.fastReplace(expr, exprMathVar, Integer.toString(exprMath));
             }
-            value = CardFactoryUtil.xCount(source, "SVar$" + expr);
+            value = AbilityUtils.xCount(source, "SVar$" + expr, sa);
         } else if (type.equals("Targeted")) {
-            value = CardFactoryUtil.handlePaid(sa.findTargetedCards(), expr, source);
+            value = AbilityUtils.handlePaid(sa.findTargetedCards(), expr, source, sa);
         } else if (type.equals("Triggered")) {
             Card trigCard = (Card)sa.getTriggeringObject(AbilityKey.Card);
-            value = CardFactoryUtil.xCount(trigCard, expr);
+            value = AbilityUtils.xCount(trigCard, expr, sa);
         } else if (type.equals("Calculate")) {
             value = AbilityUtils.calculateAmount(source, expr, sa);
         }

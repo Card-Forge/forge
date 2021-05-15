@@ -21,7 +21,6 @@ import forge.game.GameObject;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardZoneTable;
 import forge.game.combat.Combat;
 import forge.game.player.Player;
@@ -123,7 +122,7 @@ public abstract class SpellAbilityEffect {
 
         if (sa.hasParam("Announce")) {
             String svar = sa.getParam("Announce");
-            int amount = CardFactoryUtil.xCount(sa.getHostCard(), sa.getSVar(svar));
+            int amount = AbilityUtils.calculateAmount(sa.getHostCard(), svar, sa);
             sb.append(" ");
             sb.append(TextUtil.enclosedParen(TextUtil.concatNoSpace(svar,"=",String.valueOf(amount))));
         } else{

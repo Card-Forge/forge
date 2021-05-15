@@ -766,7 +766,7 @@ public class AttachAi extends SpellAbilityAi {
         int powerBuff = 0;
         for (StaticAbility stAb : sa.getHostCard().getStaticAbilities()) {
             if ("Card.EquippedBy".equals(stAb.getParam("Affected")) && stAb.hasParam("AddPower")) {
-                powerBuff = AbilityUtils.calculateAmount(sa.getHostCard(), stAb.getParam("AddPower"), null);
+                powerBuff = AbilityUtils.calculateAmount(sa.getHostCard(), stAb.getParam("AddPower"), stAb);
             }
         }
         if (combat != null && combat.isAttacking(equipped) && ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS, sa.getActivatingPlayer())) {

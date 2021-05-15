@@ -8,7 +8,6 @@ import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardDamageMap;
-import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -90,7 +89,7 @@ public class DamageEachEffect extends DamageBaseEffect {
                 final Card sourceLKI = game.getChangeZoneLKIInfo(source);
 
                 // TODO shouldn't that be using Num or something first?
-                final int dmg = CardFactoryUtil.xCount(source, sa.getSVar("X"));
+                final int dmg = AbilityUtils.calculateAmount(source, "X", sa);
                 
                 // System.out.println(source+" deals "+dmg+" damage to "+o.toString());
                 if (o instanceof Card) {
@@ -113,14 +112,14 @@ public class DamageEachEffect extends DamageBaseEffect {
                 for (final Card source : sources) {
                     final Card sourceLKI = game.getChangeZoneLKIInfo(source);
 
-                    final int dmg = CardFactoryUtil.xCount(source, card.getSVar("X"));
+                    final int dmg = AbilityUtils.calculateAmount(source, "X", sa);
                     // System.out.println(source+" deals "+dmg+" damage to "+source);
                     source.addDamage(dmg, sourceLKI, damageMap, preventMap, counterTable, sa);
                 }
             }
             if (sa.getParam("DefinedCards").equals("Remembered")) {
                 for (final Card source : sources) {
-                    final int dmg = CardFactoryUtil.xCount(source, card.getSVar("X"));
+                    final int dmg = AbilityUtils.calculateAmount(source, "X", sa);
                     final Card sourceLKI = source.getGame().getChangeZoneLKIInfo(source);
 
                     for (final Object o : sa.getHostCard().getRemembered()) {

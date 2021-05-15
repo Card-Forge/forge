@@ -33,7 +33,6 @@ import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardUtil;
@@ -938,25 +937,18 @@ public class ComputerUtilCombat {
         final CardCollectionView cardList = CardCollection.combine(game.getCardsIn(ZoneType.Battlefield), game.getCardsIn(ZoneType.Command));
         for (final Card card : cardList) {
             for (final StaticAbility stAb : card.getStaticAbilities()) {
-                final Map<String, String> params = stAb.getMapParams();
-                if (!params.get("Mode").equals("Continuous")) {
+                if (!stAb.getParam("Mode").equals("Continuous")) {
                     continue;
                 }
-                if (!params.containsKey("Affected") || !params.get("Affected").contains("blocking")) {
+                if (!stAb.hasParam("Affected") || !stAb.getParam("Affected").contains("blocking")) {
                     continue;
                 }
-                final String valid = TextUtil.fastReplace(params.get("Affected"), "blocking", "Creature");
-                if (!blocker.isValid(valid, card.getController(), card, null)) {
+                final String valid = TextUtil.fastReplace(stAb.getParam("Affected"), "blocking", "Creature");
+                if (!blocker.isValid(valid, card.getController(), card, stAb)) {
                     continue;
                 }
-                if (params.containsKey("AddPower")) {
-                    if (params.get("AddPower").equals("X")) {
-                        power += CardFactoryUtil.xCount(card, card.getSVar("X"));
-                    } else if (params.get("AddPower").equals("Y")) {
-                        power += CardFactoryUtil.xCount(card, card.getSVar("Y"));
-                    } else {
-                        power += Integer.valueOf(params.get("AddPower"));
-                    }
+                if (stAb.hasParam("AddPower")) {
+                    power += AbilityUtils.calculateAmount(card, stAb.getParam("AddPower"), stAb);
                 }
             }
         }
@@ -1247,25 +1239,18 @@ public class ComputerUtilCombat {
             final CardCollectionView cardList = CardCollection.combine(game.getCardsIn(ZoneType.Battlefield), game.getCardsIn(ZoneType.Command));
             for (final Card card : cardList) {
                 for (final StaticAbility stAb : card.getStaticAbilities()) {
-                    final Map<String, String> params = stAb.getMapParams();
-                    if (!params.get("Mode").equals("Continuous")) {
+                    if (!stAb.getParam("Mode").equals("Continuous")) {
                         continue;
                     }
-                    if (!params.containsKey("Affected") || !params.get("Affected").contains("attacking")) {
+                    if (!stAb.hasParam("Affected") || !stAb.getParam("Affected").contains("attacking")) {
                         continue;
                     }
-                    final String valid = TextUtil.fastReplace(params.get("Affected"), "attacking", "Creature");
-                    if (!attacker.isValid(valid, card.getController(), card, null)) {
+                    final String valid = TextUtil.fastReplace(stAb.getParam("Affected"), "attacking", "Creature");
+                    if (!attacker.isValid(valid, card.getController(), card, stAb)) {
                         continue;
                     }
-                    if (params.containsKey("AddPower")) {
-                        if (params.get("AddPower").equals("X")) {
-                            power += CardFactoryUtil.xCount(card, card.getSVar("X"));
-                        } else if (params.get("AddPower").equals("Y")) {
-                            power += CardFactoryUtil.xCount(card, card.getSVar("Y"));
-                        } else {
-                            power += Integer.valueOf(params.get("AddPower"));
-                        }
+                    if (stAb.hasParam("AddPower")) {
+                        power += AbilityUtils.calculateAmount(card, stAb.getParam("AddPower"), stAb);
                     }
                 }
             }
@@ -1339,7 +1324,7 @@ public class ComputerUtilCombat {
                 } else if (bonus.contains("TriggeredAttacker$CardToughness")) {
                     bonus = TextUtil.fastReplace(bonus, "TriggeredAttacker$CardToughness", TextUtil.concatNoSpace("Number$", String.valueOf(attacker.getNetToughness())));
                 }
-                power += CardFactoryUtil.xCount(source, bonus);
+                power += AbilityUtils.calculateAmount(source, bonus, sa);
 
             }
         }
@@ -1529,7 +1514,7 @@ public class ComputerUtilCombat {
                     } else if (bonus.contains("TriggeredPlayersDefenders$Amount")) { // for Melee
                         bonus = TextUtil.fastReplace(bonus, "TriggeredPlayersDefenders$Amount", "Number$1");
                     }
-                    toughness += CardFactoryUtil.xCount(source, bonus);
+                    toughness += AbilityUtils.calculateAmount(source, bonus, sa);
                 }
             } else if (ApiType.PumpAll.equals(sa.getApi())) {
 
@@ -1562,7 +1547,7 @@ public class ComputerUtilCombat {
                     } else if (bonus.contains("TriggeredPlayersDefenders$Amount")) { // for Melee
                         bonus = TextUtil.fastReplace(bonus, "TriggeredPlayersDefenders$Amount", "Number$1");
                     }
-                    toughness += CardFactoryUtil.xCount(source, bonus);
+                    toughness += AbilityUtils.calculateAmount(source, bonus, sa);
                 }
             }
         }

@@ -18,7 +18,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardUtil;
@@ -139,9 +138,9 @@ public class CostAdjustment {
                     count = Integer.parseInt(amount);
                 } else {
                     if (st.hasParam("AffectedAmount")) {
-                        count = CardFactoryUtil.xCount(card, hostCard.getSVar(amount));
+                        count = AbilityUtils.calculateAmount(card, amount, st);
                     } else {
-                        count = AbilityUtils.calculateAmount(hostCard, amount, sa);
+                        count = AbilityUtils.calculateAmount(hostCard, amount, st);
                     }
                 }
             }
@@ -380,7 +379,7 @@ public class CostAdjustment {
 
         int value;
         if ("AffectedX".equals(amount)) {
-            value = CardFactoryUtil.xCount(card, hostCard.getSVar(amount));
+            value = AbilityUtils.calculateAmount(card, amount, staticAbility);
         } else if ("Undaunted".equals(amount)) {
             value = card.getController().getOpponents().size();
         } else if (staticAbility.hasParam("Relative")) {
@@ -429,13 +428,13 @@ public class CostAdjustment {
         final Card card = sa.getHostCard();
         final Game game = hostCard.getGame();
 
-        if (st.hasParam("ValidCard") && !st.matchesValid(card, st.getParam("ValidCard").split(","))) {
+        if (!st.matchesValidParam("ValidCard", card)) {
             return false;
         }
-        if (st.hasParam("ValidSpell") && !st.matchesValid(sa, st.getParam("ValidSpell").split(","))) {
+        if (!st.matchesValidParam("ValidSpell", sa)) {
             return false;
         }
-        if (st.hasParam("Activator") && !st.matchesValid(activator, st.getParam("Activator").split(","))) {
+        if (!st.matchesValidParam("Activator", activator)) {
             return false;
         }
         if (st.hasParam("NonActivatorTurn") && ((activator == null)
@@ -455,7 +454,7 @@ public class CostAdjustment {
                     }
                     List<Card> list;
                     if (st.hasParam("ValidCard")) {
-                        list = CardUtil.getThisTurnCast(st.getParam("ValidCard"), hostCard);
+                        list = CardUtil.getThisTurnCast(st.getParam("ValidCard"), hostCard, st);
                     } else {
                         list = game.getStack().getSpellsCastThisTurn();
                     }

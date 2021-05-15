@@ -47,6 +47,7 @@ import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.GameEntity;
 import forge.game.GlobalRuleChange;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellApiBased;
@@ -79,6 +80,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.replacement.ReplaceMoved;
 import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementLayer;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.LandAbility;
@@ -509,20 +511,35 @@ public class AiController {
 
         //try to skip lands that enter the battlefield tapped
         if (!nonLandsInHand.isEmpty()) {
-            CardCollection nonTappeddLands = new CardCollection();
+            CardCollection nonTappedLands = new CardCollection();
             for (Card land : landList) {
-                // Is this the best way to check if a land ETB Tapped?
-                if (land.hasSVar("ETBTappedSVar")) {
+                // check replacement effects if land would enter tapped or not
+                final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(land);
+                repParams.put(AbilityKey.Origin, land.getZone().getZoneType());
+                repParams.put(AbilityKey.Destination, ZoneType.Battlefield);
+                repParams.put(AbilityKey.Source, land);
+
+                boolean foundTapped = false;
+                for (ReplacementEffect re : player.getGame().getReplacementHandler().getReplacementList(ReplacementType.Moved, repParams, ReplacementLayer.Other)) {
+                    SpellAbility reSA = re.ensureAbility();
+                    if (reSA == null || !ApiType.Tap.equals(reSA.getApi())) {
+                        continue;
+                    }
+                    reSA.setActivatingPlayer(reSA.getHostCard().getController());
+                    if (reSA.metConditions()) {
+                        foundTapped = true;
+                        break;
+                    }
+                }
+
+                if (foundTapped) {
                     continue;
                 }
-                // Glacial Fortress and friends
-                if (land.hasSVar("ETBCheckSVar") && CardFactoryUtil.xCount(land, land.getSVar("ETBCheckSVar")) == 0) {
-                    continue;
-                }
-                nonTappeddLands.add(land);
+
+                nonTappedLands.add(land);
             }
-            if (!nonTappeddLands.isEmpty()) {
-                landList = nonTappeddLands;
+            if (!nonTappedLands.isEmpty()) {
+                landList = nonTappedLands;
             }
         }
 
@@ -1779,7 +1796,7 @@ public class AiController {
                     compareTo = Integer.parseInt(strCmpTo);
                 } catch (final Exception ignored) {
                     if (sa == null) {
-                        compareTo = CardFactoryUtil.xCount(hostCard, hostCard.getSVar(strCmpTo));
+                        compareTo = AbilityUtils.calculateAmount(hostCard, hostCard.getSVar(strCmpTo), effect);
                     } else {
                         compareTo = AbilityUtils.calculateAmount(hostCard, hostCard.getSVar(strCmpTo), sa);
                     }
@@ -1789,7 +1806,7 @@ public class AiController {
             int left = 0;
 
             if (sa == null) {
-                left = CardFactoryUtil.xCount(hostCard, hostCard.getSVar(svarToCheck));
+                left = AbilityUtils.calculateAmount(hostCard, svarToCheck, effect);
             } else {
                 left = AbilityUtils.calculateAmount(hostCard, svarToCheck, sa);
             }
