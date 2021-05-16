@@ -19,8 +19,7 @@ public class TapOrUntapAi extends TapAiBase {
 
         if (!sa.usesTargeting()) {
             // assume we are looking to tap human's stuff
-            // TODO - check for things with untap abilities, and don't tap
-            // those.
+            // TODO - check for things with untap abilities, and don't tap those.
 
             boolean bFlag = false;
             for (final Card c : AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa)) {

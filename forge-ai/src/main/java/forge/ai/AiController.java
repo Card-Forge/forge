@@ -1422,8 +1422,6 @@ public class AiController {
     private List<SpellAbility> singleSpellAbilityList(SpellAbility sa) {
         if (sa == null) { return null; }
 
-        // System.out.println("Chosen to play: " + sa);
-
         final List<SpellAbility> abilities = Lists.newArrayList();
         abilities.add(sa);
         return abilities;

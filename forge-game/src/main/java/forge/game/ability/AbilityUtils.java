@@ -1233,7 +1233,6 @@ public class AbilityUtils {
         }
         else if (defined.startsWith("PlayerNamed_")) {
             for (Player p : game.getPlayersInTurnOrder()) {
-                //System.out.println("Named player " + defined.substring(12));
                 if (p.getName().equals(defined.substring(12))) {
                     players.add(p);
                 }

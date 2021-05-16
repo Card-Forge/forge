@@ -19,8 +19,7 @@ public class ShuffleAi extends SpellAbilityAi {
             return aiPlayer.getGame().getPhaseHandler().is(PhaseType.MAIN2, aiPlayer);
         }
 
-        // not really sure when the compy would use this; maybe only after a
-        // human
+        // not really sure when the compy would use this; maybe only after a human
         // deliberately put a card on top of their library
         return false;
         /*

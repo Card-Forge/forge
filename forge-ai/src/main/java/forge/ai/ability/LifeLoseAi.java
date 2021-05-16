@@ -60,7 +60,6 @@ public class LifeLoseAi extends SpellAbilityAi {
         return true;
     }
 
-
     /*
      * (non-Javadoc)
      * 
@@ -123,12 +122,11 @@ public class LifeLoseAi extends SpellAbilityAi {
             return false;
         }
 
-        final PlayerCollection tgtPlayers = getPlayers(ai, sa);
-
         if (ComputerUtil.playImmediately(ai, sa)) {
             return true;
         }
 
+        final PlayerCollection tgtPlayers = getPlayers(ai, sa);
         PlayerCollection filteredPlayer = tgtPlayers
                 .filter(Predicates.and(PlayerPredicates.isOpponentOf(ai), PlayerPredicates.lifeLessOrEqualTo(amount)));
         // killing opponents asap

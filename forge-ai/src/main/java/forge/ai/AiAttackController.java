@@ -427,8 +427,7 @@ public class AiAttackController {
                 // total attack = biggest creature + exalted, *2 if Rafiq is in play
                 int humanBasePower = getAttack(this.oppList.get(0)) + humanExaltedBonus;
                 if (finestHour) {
-                    // For Finest Hour, one creature could attack and get the
-                    // bonus TWICE
+                    // For Finest Hour, one creature could attack and get the bonus TWICE
                     humanBasePower = humanBasePower + humanExaltedBonus;
                 }
                 final int totalExaltedAttack = opp.isCardInPlay("Rafiq of the Many") ? 2 * humanBasePower
@@ -935,12 +934,9 @@ public class AiAttackController {
 
         // *********************
         // if outnumber and superior ratio work out whether attritional all out
-        // attacking will work
-        // attritional attack will expect some creatures to die but to achieve
-        // victory by sheer weight
-        // of numbers attacking turn after turn. It's not calculate very
-        // carefully, the accuracy
-        // can probably be improved
+        // attacking will work  attritional attack will expect some creatures to die but to achieve
+        // victory by sheer weight of numbers attacking turn after turn. It's not calculate very
+        // carefully, the accuracy can probably be improved
         // *********************
         boolean doAttritionalAttack = false;
         // get list of attackers ordered from low power to high
@@ -974,7 +970,6 @@ public class AiAttackController {
                 doAttritionalAttack = true;
             }
         }
-        // System.out.println(doAttritionalAttack + " = do attritional attack");
         // *********************
         // end attritional attack calculation
         // *********************
@@ -1024,11 +1019,9 @@ public class AiAttackController {
         // end see how long until unblockable attackers will be fatal
         // *****************
 
-
         // decide on attack aggression based on a comparison of forces, life
-        // totals and other considerations
-        // some bad "magic numbers" here, TODO replace with nice descriptive
-        // variable names
+        // totals and other considerations some bad "magic numbers" here
+        // TODO replace with nice descriptive variable names
         if (ratioDiff > 0 && doAttritionalAttack) {
             this.aiAggression = 5; // attack at all costs
         } else if ((ratioDiff >= 1 && this.attackers.size() > 1 && (humanLifeToDamageRatio < 2 || outNumber > 0))
@@ -1223,9 +1216,8 @@ public class AiAttackController {
         }
 
         // look at the attacker in relation to the blockers to establish a
-        // number of factors about the attacking
-        // context that will be relevant to the attackers decision according to
-        // the selected strategy
+        // number of factors about the attacking  context that will be relevant
+        // to the attackers decision according to the selected strategy
         for (final Card defender : validBlockers) {
             // if both isWorthLessThanAllKillers and canKillAllDangerous are false there's nothing more to check
             if (isWorthLessThanAllKillers || canKillAllDangerous || numberOfPossibleBlockers < 2) {
@@ -1303,10 +1295,7 @@ public class AiAttackController {
                 || (numberOfPossibleBlockers == 2 && CombatUtil.canAttackerBeBlockedWithAmount(attacker, 2, combat))) {
             canBeBlocked = true;
         }
-        /*System.out.println(attacker + " canBeKilledByOne: " + canBeKilledByOne + " canKillAll: "
-                + canKillAll + " isWorthLessThanAllKillers: " + isWorthLessThanAllKillers + " canBeBlocked: " + canBeBlocked);*/
-        // decide if the creature should attack based on the prevailing strategy
-        // choice in aiAggression
+        // decide if the creature should attack based on the prevailing strategy choice in aiAggression
         switch (this.aiAggression) {
         case 6: // Exalted: expecting to at least kill a creature of equal value or not be blocked
             if ((canKillAll && isWorthLessThanAllKillers) || !canBeBlocked) {
@@ -1441,7 +1430,7 @@ public class AiAttackController {
     public String toProtectAttacker(SpellAbility sa) {
         //AiAttackController is created with the selected attacker as the only entry in "attackers"
         if (sa.getApi() != ApiType.Protection || oppList.isEmpty() || getPossibleBlockers(oppList, attackers).isEmpty()) {
-            return null;    //not protection sa or attacker is already unblockable
+            return null; //not protection sa or attacker is already unblockable
         }
         final List<String> choices = ProtectEffect.getProtectionList(sa);
         String color = ComputerUtilCard.getMostProminentColor(getPossibleBlockers(oppList, attackers)), artifact = null;
@@ -1451,7 +1440,7 @@ public class AiAttackController {
         if (!choices.contains(color)) {
             color = null;
         }
-        for (Card c : oppList) {   //find a blocker that ignores the currently selected protection
+        for (Card c : oppList) { //find a blocker that ignores the currently selected protection
             if (artifact != null && !c.isArtifact()) {
                 artifact = null;
             }
@@ -1484,7 +1473,7 @@ public class AiAttackController {
                     break;
                 }
             }
-            if (color == null && artifact == null) {  //nothing can make the attacker unblockable
+            if (color == null && artifact == null) { //nothing can make the attacker unblockable
                 return null;
             }
         }
@@ -1562,4 +1551,4 @@ public class AiAttackController {
         return true;
     }
 
-} // end class ComputerUtil_Attack2
+}

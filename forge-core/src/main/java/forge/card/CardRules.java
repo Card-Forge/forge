@@ -544,7 +544,6 @@ public final class CardRules implements ICardCharacteristics {
             @Override
             public final ManaCostShard next() {
                 final String unparsed = st.nextToken();
-                // System.out.println(unparsed);
                 if (StringUtils.isNumeric(unparsed)) {
                     this.genericCost += Integer.parseInt(unparsed);
                     return null;
@@ -560,7 +559,7 @@ public final class CardRules implements ICardCharacteristics {
              */
             @Override
             public void remove() {
-            } // unsuported
+            } // unsupported
         }
     }
 

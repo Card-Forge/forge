@@ -154,7 +154,6 @@ public class QuestBazaarManager {
         for (int iSlot = 0; iSlot < QuestController.MAX_PET_SLOTS; iSlot++) {
 
             for (final QuestPetController pet : qCtrl.getPetsStorage().getAllPets(iSlot)) {
-                //System.out.println("Pet: " + pet.getName());
                 itemSet.put(pet.getName(), pet);
             }
         }
@@ -168,7 +167,6 @@ public class QuestBazaarManager {
 
             for (final String itemName : thisStall.getItems()) {
                 final IQuestBazaarItem item = itemSet.get(itemName);
-                //System.out.println(itemName);
                 set.add(item);
             }
             itemsOnStalls.put(thisStall.getName(), set);

@@ -265,16 +265,14 @@ public class ComputerUtilCard {
      * @return a {@link forge.game.card.Card} object.
      */
     public static Card getBestAI(final Iterable<Card> list) {
-        // Get Best will filter by appropriate getBest list if ALL of the list
-        // is of that type
+        // Get Best will filter by appropriate getBest list if ALL of the list is of that type
         if (Iterables.all(list, CardPredicates.Presets.CREATURES)) {
             return ComputerUtilCard.getBestCreatureAI(list);
         }
         if (Iterables.all(list, CardPredicates.Presets.LANDS)) {
             return getBestLandAI(list);
         }
-        // TODO - Once we get an EvaluatePermanent this should call
-        // getBestPermanent()
+        // TODO - Once we get an EvaluatePermanent this should call getBestPermanent()
         return ComputerUtilCard.getMostExpensivePermanentAI(list);
     }
 
@@ -410,8 +408,7 @@ public class ComputerUtilCard {
             return getWorstCreatureAI(CardLists.filter(list, CardPredicates.Presets.CREATURES));
         }
     
-        // Planeswalkers fall through to here, lands will fall through if there
-        // aren't very many
+        // Planeswalkers fall through to here, lands will fall through if there aren't very many
         return getCheapestPermanentAI(list, null, false);
     }
 
@@ -1198,7 +1195,7 @@ public class ComputerUtilCard {
                     }
                     String kws = params.get("AddKeyword");
                     if (kws != null) {
-                        bonusPT += 4 * (1 + StringUtils.countMatches(kws, "&"));    //treat each added keyword as a +2/+2 for now
+                        bonusPT += 4 * (1 + StringUtils.countMatches(kws, "&")); //treat each added keyword as a +2/+2 for now
                     }
                     if (bonusPT > 0) {
                         threat = bonusPT * (1 + opp.getCreaturesInPlay().size()) / 10.0f;
@@ -1212,7 +1209,7 @@ public class ComputerUtilCard {
         }
         
         final float valueNow = Math.max(valueTempo, threat);
-        if (valueNow < 0.2) {   //hard floor to reduce ridiculous odds for instants over time
+        if (valueNow < 0.2) { //hard floor to reduce ridiculous odds for instants over time
             return false;
         }
         final float chance = MyRandom.getRandom().nextFloat();
@@ -1310,7 +1307,7 @@ public class ComputerUtilCard {
                     threat *= 2;
                 }
                 if (c.getNetPower() == 0 && c == sa.getHostCard() && power > 0 ) {
-                    threat *= 4;    //over-value self +attack for 0 power creatures which may be pumped further after attacking 
+                    threat *= 4; //over-value self +attack for 0 power creatures which may be pumped further after attacking 
                 }
                 chance += threat;
 

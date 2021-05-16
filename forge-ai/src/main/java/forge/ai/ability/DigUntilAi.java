@@ -61,9 +61,8 @@ public class DigUntilAi extends SpellAbilityAi {
             sa.resetTargets();
             if (!sa.canTarget(opp)) {
                 return false;
-            } else {
-                sa.getTargets().add(opp);
             }
+            sa.getTargets().add(opp);
             libraryOwner = opp;
         } else {
             if (sa.hasParam("Valid")) {

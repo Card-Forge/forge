@@ -2253,10 +2253,8 @@ public class ComputerUtil {
         String chosen = "";
         if (kindOfType.equals("Card")) {
             // TODO
-            // computer will need to choose a type
-            // based on whether it needs a creature or land,
-            // otherwise, lib search for most common type left
-            // then, reveal chosenType to Human
+            // computer will need to choose a type based on whether it needs a creature or land,
+            // otherwise, lib search for most common type left then, reveal chosenType to Human
             if (game.getPhaseHandler().is(PhaseType.UNTAP) && logic == null) { // Storage Matrix
                 double amount = 0;
                 for (String type : CardType.getAllCardTypes()) {
@@ -2477,8 +2475,7 @@ public class ComputerUtil {
                 return opponent ? "Numbers" : "Strength";
             }
 
-            // TODO check for ETB to +1/+1 counters
-            // or over another trigger like lifegain
+            // TODO check for ETB to +1/+1 counters or over another trigger like lifegain
 
             int tokenScore = ComputerUtilCard.evaluateCreature(token);
 
@@ -2556,8 +2553,7 @@ public class ComputerUtil {
                 return "Taxes";
             } else {
                 // ai is first voter or ally of controller
-                // both are not affected, but if opponents controll creatures,
-                // sacrifice is worse
+                // both are not affected, but if opponents control creatures, sacrifice is worse
                 return controller.getOpponents().getCreaturesInPlay().isEmpty() ? "Taxes" : "Death";
             }
         default:

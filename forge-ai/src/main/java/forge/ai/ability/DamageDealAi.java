@@ -795,8 +795,7 @@ public class DamageDealAi extends DamageAiBase {
                     }
                 }
             }
-            // TODO: Improve Damage, we shouldn't just target the player just
-            // because we can
+            // TODO: Improve Damage, we shouldn't just target the player just because we can
             if (sa.canTarget(enemy) && tcs.size() < tgt.getMaxTargets(source, sa)) {
                 if (((phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai))
                         || (SpellAbilityAi.isSorcerySpeed(sa) && phase.is(PhaseType.MAIN2))
@@ -1041,7 +1040,7 @@ public class DamageDealAi extends DamageAiBase {
             saTgt = saTgt.getParent();
         }
 
-        Player opponent = ai.getOpponents().min(PlayerPredicates.compareByLife());
+        Player opponent = ai.getWeakestOpponent();
 
         // TODO: somehow account for the possible cost reduction?
         int dmg = ComputerUtilMana.determineLeftoverMana(sa, ai, saTgt.getParam("XColor"));
