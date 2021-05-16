@@ -443,7 +443,7 @@ public class DrawAi extends SpellAbilityAi {
                     continue;
                 }
 
-                // use xPaid abilties only for itself
+                // use xPaid abilities only for itself
                 if (xPaid) {
                     continue;
                 }

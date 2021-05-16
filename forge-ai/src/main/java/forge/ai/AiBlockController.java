@@ -366,8 +366,7 @@ public class AiBlockController {
                         final int damageNeeded = ComputerUtilCombat.getDamageToKill(attacker)
                                 + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, blocker, combat, false);
                         // if the total damage of the blockgang was not enough
-                        // without but is enough with this blocker finish the
-                        // blockgang
+                        // without but is enough with this blocker finish the blockgang
                         if (ComputerUtilCombat.totalFirstStrikeDamageOfBlockers(attacker, blockGang) < damageNeeded
                                 || CombatUtil.needsBlockers(attacker) > blockGang.size()) {
                             blockGang.add(blocker);
@@ -454,8 +453,7 @@ public class AiBlockController {
                         || (lifeInDanger && ComputerUtilCombat.lifeInDanger(ai, combat)))
                         // or life is in danger
                         && CombatUtil.canBlock(attacker, blocker, combat)) {
-                    // this is needed for attackers that can't be blocked by
-                    // more than 1
+                    // this is needed for attackers that can't be blocked by more than 1
                     currentAttackers.remove(attacker);
                     combat.addBlocker(attacker, blocker);
                     if (CombatUtil.canBlock(attacker, leader, combat)) {
@@ -510,8 +508,7 @@ public class AiBlockController {
                             // or life is in danger
                             && CombatUtil.canBlock(attacker, secondBlocker, combat)
                             && CombatUtil.canBlock(attacker, thirdBlocker, combat)) {
-                        // this is needed for attackers that can't be blocked by
-                        // more than 1
+                        // this is needed for attackers that can't be blocked by more than 1
                         currentAttackers.remove(attacker);
                         combat.addBlocker(attacker, thirdBlocker);
                         if (CombatUtil.canBlock(attacker, secondBlocker, combat)) {
@@ -736,8 +733,7 @@ public class AiBlockController {
         List<Card> tramplingAttackers = CardLists.getKeyword(attackers, Keyword.TRAMPLE);
         tramplingAttackers = CardLists.filter(tramplingAttackers, Predicates.not(rampagesOrNeedsManyToBlock));
 
-        // TODO - should check here for a "rampage-like" trigger that replaced
-        // the keyword:
+        // TODO - should check here for a "rampage-like" trigger that replaced the keyword:
         // "Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it."
 
         for (final Card attacker : tramplingAttackers) {
@@ -1036,27 +1032,21 @@ public class AiBlockController {
             } else {
                 lifeInDanger = false;
             }
-            // if life is still in danger
-            // Reinforce blockers blocking attackers with trample if life is
-            // still
-            // in danger
+            // Reinforce blockers blocking attackers with trample if life is still in danger
             if (lifeInDanger && ComputerUtilCombat.lifeInDanger(ai, combat)) {
                 reinforceBlockersAgainstTrample(combat);
             } else {
                 lifeInDanger = false;
             }
             // Support blockers not destroying the attacker with more blockers
-            // to
-            // try to kill the attacker
+            // to try to kill the attacker
             if (!lifeInDanger) {
                 reinforceBlockersToKill(combat);
             }
 
-            // == 2. If the AI life would still be in danger make a safer
-            // approach ==
+            // == 2. If the AI life would still be in danger make a safer approach ==
             if (lifeInDanger && ComputerUtilCombat.lifeInDanger(ai, combat)) {
-                clearBlockers(combat, possibleBlockers); // reset every block
-                                                         // assignment
+                clearBlockers(combat, possibleBlockers); // reset every block assignment
                 makeTradeBlocks(combat); // choose necessary trade blocks
                 // if life is in danger
                 makeGoodBlocks(combat);
@@ -1066,8 +1056,7 @@ public class AiBlockController {
                 } else {
                     lifeInDanger = false;
                 }
-                // Reinforce blockers blocking attackers with trample if life is
-                // still in danger
+                // Reinforce blockers blocking attackers with trample if life is still in danger
                 if (lifeInDanger && ComputerUtilCombat.lifeInDanger(ai, combat)) {
                     reinforceBlockersAgainstTrample(combat);
                 } else {
@@ -1077,11 +1066,9 @@ public class AiBlockController {
                 reinforceBlockersToKill(combat);
             }
 
-            // == 3. If the AI life would be in serious danger make an even
-            // safer approach ==
+            // == 3. If the AI life would be in serious danger make an even safer approach ==
             if (lifeInDanger && ComputerUtilCombat.lifeInSeriousDanger(ai, combat)) {
-                clearBlockers(combat, possibleBlockers); // reset every block
-                                                         // assignment
+                clearBlockers(combat, possibleBlockers); // reset every block assignment
                 makeChumpBlocks(combat); // choose chump blocks
                 if (ComputerUtilCombat.lifeInDanger(ai, combat)) {
                     makeTradeBlocks(combat); // choose necessary trade
@@ -1090,15 +1077,13 @@ public class AiBlockController {
                 if (!ComputerUtilCombat.lifeInDanger(ai, combat)) {
                     makeGoodBlocks(combat);
                 }
-                // Reinforce blockers blocking attackers with trample if life is
-                // still in danger
+                // Reinforce blockers blocking attackers with trample if life is still in danger
                 else {
                     reinforceBlockersAgainstTrample(combat);
                 }
                 makeGangBlocks(combat);
                 // Support blockers not destroying the attacker with more
-                // blockers
-                // to try to kill the attacker
+                // blockers to try to kill the attacker
                 reinforceBlockersToKill(combat);
             }
         }

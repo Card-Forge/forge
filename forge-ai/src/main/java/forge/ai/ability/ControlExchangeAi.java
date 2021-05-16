@@ -31,8 +31,7 @@ public class ControlExchangeAi extends SpellAbilityAi {
 
         CardCollection list =
                 CardLists.getValidCards(AiAttackController.choosePreferredDefenderPlayer(ai).getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, sa.getHostCard(), sa);
-        // AI won't try to grab cards that are filtered out of AI decks on
-        // purpose
+        // AI won't try to grab cards that are filtered out of AI decks on purpose
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {                

@@ -120,8 +120,7 @@ public class CountersMultiplyAi extends SpellAbilityAi {
 
         CardCollection list = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
 
-        // pre filter targetable cards with counters and can receive one of
-        // them
+        // pre filter targetable cards with counters and can receive one of them
         list = CardLists.filter(list, new Predicate<Card>() {
 
             @Override

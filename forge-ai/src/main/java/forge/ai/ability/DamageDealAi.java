@@ -40,7 +40,6 @@ import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
-import forge.game.player.PlayerPredicates;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetChoices;
@@ -795,8 +794,7 @@ public class DamageDealAi extends DamageAiBase {
                     }
                 }
             }
-            // TODO: Improve Damage, we shouldn't just target the player just
-            // because we can
+            // TODO: Improve Damage, we shouldn't just target the player just because we can
             if (sa.canTarget(enemy) && tcs.size() < tgt.getMaxTargets(source, sa)) {
                 if (((phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai))
                         || (SpellAbilityAi.isSorcerySpeed(sa) && phase.is(PhaseType.MAIN2))
@@ -1041,7 +1039,7 @@ public class DamageDealAi extends DamageAiBase {
             saTgt = saTgt.getParent();
         }
 
-        Player opponent = ai.getOpponents().min(PlayerPredicates.compareByLife());
+        Player opponent = ai.getWeakestOpponent();
 
         // TODO: somehow account for the possible cost reduction?
         int dmg = ComputerUtilMana.determineLeftoverMana(sa, ai, saTgt.getParam("XColor"));

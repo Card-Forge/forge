@@ -266,8 +266,7 @@ public class LifeGainAi extends SpellAbilityAi {
             }
             if (!hasTgt && mandatory) {
                 // need to target something but its neither negative against
-                // opponents,
-                // nor posive against allies
+                // opponents, nor positive against allies
 
                 // hurting ally is probably better than healing opponent
                 // look for Lifegain not Negative (case of lifegain negated)
@@ -295,8 +294,7 @@ public class LifeGainAi extends SpellAbilityAi {
                     sa.getTargets().add(ally);
                     hasTgt = true;
                 }
-                // better heal opponent which most life then the one with the
-                // lowest
+                // better heal opponent which most life then the one with the lowest
                 if (!hasTgt) {
                     Player opp = opps.max(PlayerPredicates.compareByLife());
                     sa.getTargets().add(opp);

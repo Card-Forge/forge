@@ -2681,11 +2681,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             //getZone(ZoneType.Command).add(c);
         }
 
-        //DBG
-        //System.out.println("CurrentPlanes: " + currentPlanes);
-        //System.out.println("ActivePlanes: " + game.getActivePlanes());
-        //System.out.println("CommandPlanes: " + getZone(ZoneType.Command).getCards());
-
         game.setActivePlanes(currentPlanes);
         //Run PlaneswalkedTo triggers here.
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
@@ -2710,11 +2705,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             game.getAction().moveTo(ZoneType.PlanarDeck, plane,-1, null);
         }
         currentPlanes.clear();
-
-        //DBG
-        //System.out.println("CurrentPlanes: " + currentPlanes);
-        //System.out.println("ActivePlanes: " + game.getActivePlanes());
-        //System.out.println("CommandPlanes: " + getZone(ZoneType.Command).getCards());
     }
 
     /**

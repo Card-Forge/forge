@@ -54,8 +54,7 @@ public class SetStateAi extends SpellAbilityAi {
 
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
-        // Gross generalization, but this always considers alternate
-        // states more powerful
+        // Gross generalization, but this always considers alternate states more powerful
         return !sa.getHostCard().isInAlternateState();
     }
 

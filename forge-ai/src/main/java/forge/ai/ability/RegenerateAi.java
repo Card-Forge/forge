@@ -49,14 +49,6 @@ import forge.game.zone.ZoneType;
  */
 public class RegenerateAi extends SpellAbilityAi {
 
-    // Ex: A:SP$Regenerate | Cost$W | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$Regenerate
-    // target creature.
-    // http://www.slightlymagic.net/wiki/Forge_AbilityFactory#Regenerate
-
-    // **************************************************************
-    // ********************* Regenerate ****************************
-    // **************************************************************
-
     @Override
     protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
         final Game game = ai.getGame();
@@ -65,8 +57,7 @@ public class RegenerateAi extends SpellAbilityAi {
         boolean chance = false;
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt == null) {
-            // As far as I can tell these Defined Cards will only have one of
-            // them
+            // As far as I can tell these Defined Cards will only have one of them
             final List<Card> list = AbilityUtils.getDefinedCards(hostCard, sa.getParam("Defined"), sa);
 
             if (!game.getStack().isEmpty()) {
@@ -105,8 +96,7 @@ public class RegenerateAi extends SpellAbilityAi {
             }
 
             if (!game.getStack().isEmpty()) {
-                // check stack for something on the stack will kill anything i
-                // control
+                // check stack for something on the stack will kill anything i control
                 final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa, true);
 
                 final List<Card> threatenedTargets = new ArrayList<>();
@@ -191,8 +181,7 @@ public class RegenerateAi extends SpellAbilityAi {
                 }
             }
 
-            // TODO see if something on the stack is about to kill something i
-            // can target
+            // TODO see if something on the stack is about to kill something i can target
 
             // choose my best X without regen
             if (CardLists.getNotType(compTargetables, "Creature").isEmpty()) {

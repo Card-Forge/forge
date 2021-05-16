@@ -609,7 +609,6 @@ public class ComputerUtilMana {
 
             String manaProduced = predictManafromSpellAbility(saPayment, ai, toPay);
 
-            //System.out.println(manaProduced);
             payMultipleMana(cost, manaProduced, ai);
 
             // remove from available lists
