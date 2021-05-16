@@ -145,7 +145,6 @@ public class DamageDealEffect extends DamageBaseEffect {
         final String damage = sa.getParam("NumDmg");
         int dmg = AbilityUtils.calculateAmount(hostCard, damage, sa);
 
-        final boolean noPrevention = sa.hasParam("NoPrevention");
         final boolean removeDamage = sa.hasParam("Remove");
         final boolean divideOnResolution = sa.hasParam("DividerOnResolution");
 
@@ -172,17 +171,19 @@ public class DamageDealEffect extends DamageBaseEffect {
         boolean usedDamageMap = true;
         CardDamageMap damageMap = sa.getDamageMap();
         CardDamageMap preventMap = sa.getPreventMap();
-        GameEntityCounterTable counterTable = new GameEntityCounterTable();
+        GameEntityCounterTable counterTable = sa.getCounterTable();
 
         if (damageMap == null) {
             // make a new damage map
             damageMap = new CardDamageMap();
             preventMap = new CardDamageMap();
+            counterTable = new GameEntityCounterTable();
             usedDamageMap = false;
         }
         if (sa.hasParam("DamageMap")) {
             sa.setDamageMap(damageMap);
             sa.setPreventMap(preventMap);
+            sa.setCounterTable(counterTable);
             usedDamageMap = true;
         }
 
@@ -208,19 +209,12 @@ public class DamageDealEffect extends DamageBaseEffect {
                 Player assigningPlayer = players.get(0);
                 Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(sourceLKI, assigneeCards, dmg, null, true);
                 for (Entry<Card, Integer> dt : map.entrySet()) {
-                    dt.getKey().addDamage(dt.getValue(), sourceLKI, damageMap, preventMap, counterTable, sa);
+                    damageMap.put(sourceLKI, dt.getKey(), dt.getValue());
                 }
 
                 if (!usedDamageMap) {
-                    preventMap.triggerPreventDamage(false);
-                    // non combat damage cause lifegain there
-                    damageMap.triggerDamageDoneOnce(false, game, sa);
-
-                    preventMap.clear();
-                    damageMap.clear();
+                    game.getAction().dealDamage(false, damageMap, preventMap, counterTable, sa);
                 }
-
-                counterTable.triggerCountersPutAll(game);
                 replaceDying(sa);
                 return;
             }
@@ -244,18 +238,18 @@ public class DamageDealEffect extends DamageBaseEffect {
                         continue;
                     }
                     if (!sa.usesTargeting() || gc.canBeTargetedBy(sa)) {
-                        internalDamageDeal(sa, sourceLKI, gc, dmg, damageMap, preventMap, counterTable);
+                        internalDamageDeal(sa, sourceLKI, gc, dmg, damageMap);
                     }
                 } else if (o instanceof Player) {
                     final Player p = (Player) o;
                     if (!sa.usesTargeting() || p.canBeTargetedBy(sa)) {
-                        p.addDamage(dmg, sourceLKI, false, noPrevention, damageMap, preventMap, counterTable, sa);
+                        damageMap.put(sourceLKI, p, dmg);
                     }
                 }
             }
             for (final Card unTgtC : untargetedCards) {
                 if (unTgtC.isInPlay()) {
-                    internalDamageDeal(sa, sourceLKI, unTgtC, dmg, damageMap, preventMap, counterTable);
+                    internalDamageDeal(sa, sourceLKI, unTgtC, dmg, damageMap);
                 }
             }
 
@@ -264,21 +258,14 @@ public class DamageDealEffect extends DamageBaseEffect {
             }
         }
         if (!usedDamageMap) {
-            preventMap.triggerPreventDamage(false);
-            // non combat damage cause lifegain there
-            damageMap.triggerDamageDoneOnce(false, game, sa);
-
-            preventMap.clear();
-            damageMap.clear();
+            game.getAction().dealDamage(false, damageMap, preventMap, counterTable, sa);
         }
-        counterTable.triggerCountersPutAll(game);
         replaceDying(sa);
     }
 
-    protected void internalDamageDeal(SpellAbility sa, Card sourceLKI, Card c, int dmg, CardDamageMap damageMap, CardDamageMap preventMap, GameEntityCounterTable counterTable) {
+    protected void internalDamageDeal(SpellAbility sa, Card sourceLKI, Card c, int dmg, CardDamageMap damageMap) {
         final Card hostCard = sa.getHostCard();
         final Player activationPlayer = sa.getActivatingPlayer();
-        final boolean noPrevention = sa.hasParam("NoPrevention");
 
         if (sa.hasParam("Remove")) {
             c.setDamage(0);
@@ -293,17 +280,17 @@ public class DamageDealEffect extends DamageBaseEffect {
                 }
                 int dmgToTarget = Math.min(lethal, dmg);
 
-                c.addDamage(dmgToTarget, sourceLKI, false, noPrevention, damageMap, preventMap, counterTable, sa);
+                damageMap.put(sourceLKI, c, dmgToTarget);
 
                 List<GameEntity> list = Lists.newArrayList();
                 list.addAll(AbilityUtils.getDefinedCards(hostCard, sa.getParam("ExcessDamage"), sa));
                 list.addAll(AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("ExcessDamage"), sa));
 
                 if (!list.isEmpty()) {
-                    list.get(0).addDamage(dmg - dmgToTarget, sourceLKI, false, noPrevention, damageMap, preventMap, counterTable, sa);
+                    damageMap.put(sourceLKI, list.get(0), dmg - dmgToTarget);
                 }
             } else {
-                c.addDamage(dmg, sourceLKI, false, noPrevention, damageMap, preventMap, counterTable, sa);
+                damageMap.put(sourceLKI, c, dmg);
             }
         }
     }

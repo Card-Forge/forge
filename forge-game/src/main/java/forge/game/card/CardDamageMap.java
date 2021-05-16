@@ -18,8 +18,6 @@ import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObjectPredicates;
 import forge.game.ability.AbilityKey;
-import forge.game.keyword.Keyword;
-import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 
 public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
@@ -50,7 +48,7 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
         }
     }
 
-    public void triggerDamageDoneOnce(boolean isCombat, final Game game, final SpellAbility sa) {
+    public void triggerDamageDoneOnce(boolean isCombat, final Game game) {
         // Source -> Targets
         for (Map.Entry<Card, Map<GameEntity, Integer>> e : rowMap().entrySet()) {
             final Card sourceLKI = e.getKey();
@@ -65,10 +63,6 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
                 runParams.put(AbilityKey.IsCombatDamage, isCombat);
 
                 game.getTriggerHandler().runTrigger(TriggerType.DamageDealtOnce, runParams, false);
-
-                if (sourceLKI.hasKeyword(Keyword.LIFELINK)) {
-                    sourceLKI.getController().gainLife(sum, sourceLKI, sa);
-                }
             }
         }
         // Targets -> Source

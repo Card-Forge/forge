@@ -71,15 +71,9 @@ public class CostDamage extends CostPart {
         CardDamageMap preventMap = new CardDamageMap();
         GameEntityCounterTable table = new GameEntityCounterTable();
 
-        payer.addDamage(decision.c, source, damageMap, preventMap, table, sa);
+        damageMap.put(source, payer, decision.c);
+        source.getGame().getAction().dealDamage(false, damageMap, preventMap, table, sa);
 
-        preventMap.triggerPreventDamage(false);
-        damageMap.triggerDamageDoneOnce(false, source.getGame(), sa);
-        table.triggerCountersPutAll(payer.getGame());
-
-        preventMap.clear();
-        damageMap.clear();
-        table.clear();
         return decision.c > 0;
     }
 

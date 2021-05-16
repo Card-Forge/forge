@@ -60,17 +60,18 @@ public class ReplaceDamageEffect extends SpellAbilityEffect {
             // Set PreventedDamage SVar
             card.setSVar("PreventedDamage", "Number$" + n);
 
+            Card sourceLKI = (Card) sa.getReplacingObject(AbilityKey.Source);
+            GameEntity target = (GameEntity) sa.getReplacingObject(AbilityKey.Target);
+
             // Set prevent map entry
             CardDamageMap preventMap = (CardDamageMap) originalParams.get(AbilityKey.PreventMap);
-            Card source = (Card) sa.getReplacingObject(AbilityKey.Source);
-            GameEntity target = (GameEntity) sa.getReplacingObject(AbilityKey.Target);
-            preventMap.put(source, target, n);
+            preventMap.put(sourceLKI, target, n);
 
             // Following codes are commented out since DamagePrevented trigger is currently not used by any Card.
             // final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             // runParams.put(AbilityKey.DamageTarget, target);
             // runParams.put(AbilityKey.DamageAmount, dmg);
-            // runParams.put(AbilityKey.DamageSource, source);
+            // runParams.put(AbilityKey.DamageSource, sourceLKI);
             // runParams.put(AbilityKey.IsCombatDamage, originalParams.get(AbilityKey.IsCombat));
             // game.getTriggerHandler().runTrigger(TriggerType.DamagePrevented, runParams, false);
         }

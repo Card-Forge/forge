@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import forge.game.GameEntityCounterTable;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.CardDamageMap;
 import forge.game.spellability.SpellAbility;
@@ -18,16 +19,9 @@ public class DamageResolveEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         CardDamageMap damageMap = sa.getDamageMap();
         CardDamageMap preventMap = sa.getPreventMap();
-        
-        if (preventMap != null) {
-            preventMap.triggerPreventDamage(false);
-            preventMap.clear();
-        }
-        // non combat damage cause lifegain there
-        if (damageMap != null) {
-            damageMap.triggerDamageDoneOnce(false, sa.getHostCard().getGame(), sa);
-            damageMap.clear();
-        }
+        GameEntityCounterTable counterTable = sa.getCounterTable();
+
+        sa.getHostCard().getGame().getAction().dealDamage(false, damageMap, preventMap, counterTable, sa);
     }
 
     /* (non-Javadoc)
