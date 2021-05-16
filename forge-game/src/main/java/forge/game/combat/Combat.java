@@ -73,13 +73,10 @@ public class Combat {
     private final Multimap<GameEntity, AttackingBand> attackedByBands = Multimaps.synchronizedMultimap(ArrayListMultimap.create());
     private final Multimap<AttackingBand, Card> blockedBands = Multimaps.synchronizedMultimap(ArrayListMultimap.create());
 
-    private final Map<Card, Integer> defendingDamageMap = Maps.newHashMap();
-
     private Map<Card, CardCollection> attackersOrderedForDamageAssignment = Maps.newHashMap();
     private Map<Card, CardCollection> blockersOrderedForDamageAssignment = Maps.newHashMap();
     private Map<GameEntity, CombatLki> lkiCache = Maps.newHashMap();
-    private CardDamageMap dealtDamageTo = new CardDamageMap();
-    private boolean dividedToPlayer = false;
+    private CardDamageMap damageMap = new CardDamageMap();
 
     // List holds creatures who have dealt 1st strike damage to disallow them deal damage on regular basis (unless they have double-strike KW) 
     private CardCollection combatantsThatDealtFirstStrikeDamage = new CardCollection();
@@ -113,9 +110,6 @@ public class Combat {
         for (Entry<AttackingBand, Card> entry : combat.blockedBands.entries()) {
             blockedBands.put(bandsMap.get(entry.getKey()), map.map(entry.getValue()));
         }
-        for (Entry<Card, Integer> entry : combat.defendingDamageMap.entrySet()) {
-            defendingDamageMap.put(map.map(entry.getKey()), entry.getValue());
-        }
         
         for (Entry<Card, CardCollection> entry : combat.attackersOrderedForDamageAssignment.entrySet()) {
             attackersOrderedForDamageAssignment.put(map.map(entry.getKey()), map.mapCollection(entry.getValue()));
@@ -124,8 +118,8 @@ public class Combat {
             blockersOrderedForDamageAssignment.put(map.map(entry.getKey()), map.mapCollection(entry.getValue()));
         }
         // Note: Doesn't currently set up lkiCache, since it's just a cache and not strictly needed...
-        for (Table.Cell<Card, GameEntity, Integer> entry : combat.dealtDamageTo.cellSet()) {
-            dealtDamageTo.put(map.map(entry.getRowKey()), map.map(entry.getColumnKey()), entry.getValue());
+        for (Table.Cell<Card, GameEntity, Integer> entry : combat.damageMap.cellSet()) {
+            damageMap.put(map.map(entry.getRowKey()), map.map(entry.getColumnKey()), entry.getValue());
         }
 
         attackConstraints = new AttackConstraints(this);
@@ -170,7 +164,6 @@ public class Combat {
         attackableEntries.clear();
         attackedByBands.clear();
         blockedBands.clear();
-        defendingDamageMap.clear();
         attackersOrderedForDamageAssignment.clear();
         blockersOrderedForDamageAssignment.clear();
         lkiCache.clear();
@@ -728,6 +721,7 @@ public class Combat {
                 Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(blocker, attackers, damage, null, assigningPlayer != blocker.getController());
                 for (Entry<Card, Integer> dt : map.entrySet()) {
                     dt.getKey().addAssignedDamage(dt.getValue(), blocker);
+                    damageMap.put(blocker, dt.getKey(), dt.getValue());
                 }
             }
         }
@@ -736,7 +730,6 @@ public class Combat {
 
     private final boolean assignAttackersDamage(boolean firstStrikeDamage) {
         // Assign damage by Attackers
-        defendingDamageMap.clear(); // this should really happen in deal damage
         CardCollection orderedBlockers = null;
         final CardCollection attackers = getAttackers();
         boolean assignedDamage = false;
@@ -784,20 +777,19 @@ public class Combat {
                 }
             }
             assignedDamage = true;
+            GameEntity defender = getDefenderByAttacker(band);
             // If the Attacker is unblocked, or it's a trampler and has 0 blockers, deal damage to defender
             if (orderedBlockers == null || orderedBlockers.isEmpty()) {
                 if (trampler || !band.isBlocked()) { // this is called after declare blockers, no worries 'bout nulls in isBlocked
-                    addDefendingDamage(damageDealt, attacker);
+                    damageMap.put(attacker, defender, damageDealt);
                 } // No damage happens if blocked but no blockers left
             }
             else {
-                GameEntity defender = getDefenderByAttacker(band);
                 Player assigningPlayer = getAttackingPlayer();
                 // Defensive Formation is very similar to Banding with Blockers
                 // It allows the defending player to assign damage instead of the attacking player
                 if (defender instanceof Card && divideCombatDamageAsChoose) {
                     defender = getDefenderPlayerByAttacker(attacker);
-                    dividedToPlayer = true;
                 }
                 if (defender instanceof Player && defender.hasKeyword("You assign combat damage of each creature attacking you.")) {
                     assigningPlayer = (Player)defender;
@@ -810,10 +802,15 @@ public class Combat {
                         damageDealt, defender, divideCombatDamageAsChoose || getAttackingPlayer() != assigningPlayer);
                 for (Entry<Card, Integer> dt : map.entrySet()) {
                     if (dt.getKey() == null) {
-                        if (dt.getValue() > 0) 
-                            addDefendingDamage(dt.getValue(), attacker);
+                        if (dt.getValue() > 0) {
+                            if (defender instanceof Card) {
+                                ((Card) defender).addAssignedDamage(dt.getValue(), attacker);
+                            }
+                            damageMap.put(attacker, defender, dt.getValue());
+                        }
                     } else {
                         dt.getKey().addAssignedDamage(dt.getValue(), attacker);
+                        damageMap.put(attacker, dt.getKey(), dt.getValue());
                     }
                 }
             } // if !hasFirstStrike ...
@@ -833,24 +830,6 @@ public class Combat {
         return !firstStrikeDamage && !combatantsThatDealtFirstStrikeDamage.contains(combatant);
     }
 
-    // Damage to whatever was protected there. 
-    private final void addDefendingDamage(final int n, final Card source) {
-        final GameEntity ge = getDefenderByAttacker(source);
-
-        if (ge instanceof Card && !dividedToPlayer) {
-            final Card planeswalker = (Card) ge;
-            planeswalker.addAssignedDamage(n, source);
-            return;
-        }
-
-        if (!defendingDamageMap.containsKey(source)) {
-            defendingDamageMap.put(source, n);
-        }
-        else {
-            defendingDamageMap.put(source, defendingDamageMap.get(source) + n);
-        }
-    }
-
     public final boolean assignCombatDamage(boolean firstStrikeDamage) {
         boolean assignedDamage = assignAttackersDamage(firstStrikeDamage);
         assignedDamage |= assignBlockersDamage(firstStrikeDamage);
@@ -862,7 +841,7 @@ public class Combat {
     }
 
     public final CardDamageMap getDamageMap() {
-        return dealtDamageTo;
+        return damageMap;
     }
 
     public void dealAssignedDamage() {
@@ -872,49 +851,7 @@ public class Combat {
         CardDamageMap preventMap = new CardDamageMap();
         GameEntityCounterTable counterTable = new GameEntityCounterTable();
 
-        // This function handles both Regular and First Strike combat assignment
-        for (final Entry<Card, Integer> entry : defendingDamageMap.entrySet()) {
-            GameEntity defender = getDefenderByAttacker(entry.getKey());
-            if (dividedToPlayer) {
-                defender = getDefenderPlayerByAttacker(entry.getKey());
-            }
-            if (defender instanceof Player) { // player
-                defender.addCombatDamage(entry.getValue(), entry.getKey(), dealtDamageTo, preventMap, counterTable);
-            }
-            else if (defender instanceof Card) { // planeswalker
-                ((Card) defender).getController().addCombatDamage(entry.getValue(), entry.getKey(), dealtDamageTo, preventMap, counterTable);
-            }
-        }
-
-        // this can be much better below here...
-
-        final CardCollection combatants = new CardCollection();
-        combatants.addAll(getAttackers());
-        combatants.addAll(getAllBlockers());
-        combatants.addAll(getDefendingPlaneswalkers());
-        combatants.addAll(getDefendersCreatures());
-
-        for (final Card c : combatants) {
-            // if no assigned damage to resolve, move to next
-            if (c.getTotalAssignedDamage() == 0) {
-                continue;
-            }
-
-            c.addCombatDamage(c.getAssignedDamageMap(), dealtDamageTo, preventMap, counterTable);
-            c.clearAssignedDamage();
-        }
-
-        preventMap.triggerPreventDamage(true);
-        preventMap.clear();
-        // This was deeper before, but that resulted in the stack entry acting like before.
-
-        // Run the trigger to deal combat damage once
-        // LifeLink for Combat Damage at this place
-        dealtDamageTo.triggerDamageDoneOnce(true, game, null);
-        dealtDamageTo.clear();
-
-        counterTable.triggerCountersPutAll(game);
-        counterTable.clear();
+        game.getAction().dealDamage(true, damageMap, preventMap, counterTable, null);
 
         // copy last state again for dying replacement effects
         game.copyLastState();

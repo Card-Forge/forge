@@ -7,6 +7,7 @@ import com.google.common.collect.Lists;
 
 import forge.GameCommand;
 import forge.game.Game;
+import forge.game.GameEntityCounterTable;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -86,6 +87,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
         if (sa.hasParam("DamageMap")) {
             sa.setDamageMap(new CardDamageMap());
             sa.setPreventMap(new CardDamageMap());
+            sa.setCounterTable(new GameEntityCounterTable());
         }
         if (sa.hasParam("ChangeZoneTable")) {
             sa.setChangeZoneTable(new CardZoneTable());
@@ -166,11 +168,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
         }
         
         if(sa.hasParam("DamageMap")) {
-            sa.getPreventMap().triggerPreventDamage(false);
-            sa.setPreventMap(null);
-            // non combat damage cause lifegain there
-            sa.getDamageMap().triggerDamageDoneOnce(false, game, sa);
-            sa.setDamageMap(null);
+            game.getAction().dealDamage(false, sa.getDamageMap(), sa.getPreventMap(), sa.getCounterTable(), sa);
         }
         if (sa.hasParam("ChangeZoneTable")) {
             sa.getChangeZoneTable().triggerChangesZoneAll(game, sa);

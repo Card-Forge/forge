@@ -146,12 +146,13 @@ public class FightEffect extends DamageBaseEffect {
         boolean usedDamageMap = true;
         CardDamageMap damageMap = sa.getDamageMap();
         CardDamageMap preventMap = sa.getPreventMap();
-        GameEntityCounterTable counterTable = new GameEntityCounterTable();
+        GameEntityCounterTable counterTable = sa.getCounterTable();
 
         if (damageMap == null) {
             // make a new damage map
             damageMap = new CardDamageMap();
             preventMap = new CardDamageMap();
+            counterTable = new GameEntityCounterTable();
             usedDamageMap = false;
         }
 
@@ -163,22 +164,17 @@ public class FightEffect extends DamageBaseEffect {
 
         final int dmg1 = fightToughness ? fighterA.getNetToughness() : fighterA.getNetPower();
         if (fighterA.equals(fighterB)) {
-            fighterA.addDamage(dmg1 * 2, fighterA, damageMap, preventMap, counterTable, sa);
+            damageMap.put(fighterA, fighterA, dmg1 * 2);
         } else {
             final int dmg2 = fightToughness ? fighterB.getNetToughness() : fighterB.getNetPower();
 
-            fighterB.addDamage(dmg1, fighterA, damageMap, preventMap, counterTable, sa);
-            fighterA.addDamage(dmg2, fighterB, damageMap, preventMap, counterTable, sa);
+            damageMap.put(fighterA, fighterB, dmg1);
+            damageMap.put(fighterB, fighterA, dmg2);
         }
 
         if (!usedDamageMap) {
-            preventMap.triggerPreventDamage(false);
-            damageMap.triggerDamageDoneOnce(false, fighterA.getGame(), sa);
-
-            preventMap.clear();
-            damageMap.clear();
+            sa.getHostCard().getGame().getAction().dealDamage(false, damageMap, preventMap, counterTable, sa);
         }
-        counterTable.triggerCountersPutAll(sa.getHostCard().getGame());
 
         replaceDying(sa);
     }

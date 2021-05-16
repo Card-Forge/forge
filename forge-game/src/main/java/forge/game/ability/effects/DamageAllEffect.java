@@ -89,24 +89,29 @@ public class DamageAllEffect extends DamageBaseEffect {
         boolean usedDamageMap = true;
         CardDamageMap damageMap = sa.getDamageMap();
         CardDamageMap preventMap = sa.getPreventMap();
-        GameEntityCounterTable counterTable = new GameEntityCounterTable();
+        GameEntityCounterTable counterTable = sa.getCounterTable();
 
         if (damageMap == null) {
             // make a new damage map
             damageMap = new CardDamageMap();
             preventMap = new CardDamageMap();
+            counterTable = new GameEntityCounterTable();
             usedDamageMap = false;
         }
 
         for (final Card c : list) {
-            c.addDamage(dmg, sourceLKI, damageMap, preventMap, counterTable, sa);
+            damageMap.put(sourceLKI, c, dmg);
         }
 
         if (!players.equals("")) {
             final List<Player> playerList = AbilityUtils.getDefinedPlayers(card, players, sa);
             for (final Player p : playerList) {
-                p.addDamage(dmg, sourceLKI, damageMap, preventMap, counterTable, sa);
+                damageMap.put(sourceLKI, p, dmg);
             }
+        }
+
+        if (!usedDamageMap) {
+            game.getAction().dealDamage(false, damageMap, preventMap, counterTable, sa);
         }
 
         // do Remember there
@@ -119,16 +124,6 @@ public class DamageAllEffect extends DamageBaseEffect {
                 }
             }
         }
-
-        if (!usedDamageMap) {
-            preventMap.triggerPreventDamage(false);
-            damageMap.triggerDamageDoneOnce(false, game, sa);
-
-            preventMap.clear();
-            damageMap.clear();
-        }
-
-        counterTable.triggerCountersPutAll(game);
 
         replaceDying(sa);
     }

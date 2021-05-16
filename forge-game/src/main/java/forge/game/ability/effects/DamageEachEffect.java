@@ -75,12 +75,13 @@ public class DamageEachEffect extends DamageBaseEffect {
         boolean usedDamageMap = true;
         CardDamageMap damageMap = sa.getDamageMap();
         CardDamageMap preventMap = sa.getPreventMap();
-        GameEntityCounterTable counterTable = new GameEntityCounterTable();
+        GameEntityCounterTable counterTable = sa.getCounterTable();
 
         if (damageMap == null) {
             // make a new damage map
             damageMap = new CardDamageMap();
             preventMap = new CardDamageMap();
+            counterTable = new GameEntityCounterTable();
             usedDamageMap = false;
         }
 
@@ -95,13 +96,13 @@ public class DamageEachEffect extends DamageBaseEffect {
                 if (o instanceof Card) {
                     final Card c = (Card) o;
                     if (c.isInPlay() && (!targeted || c.canBeTargetedBy(sa))) {
-                        c.addDamage(dmg, sourceLKI, damageMap, preventMap, counterTable, sa);
+                        damageMap.put(sourceLKI, c, dmg);
                     }
 
                 } else if (o instanceof Player) {
                     final Player p = (Player) o;
                     if (!targeted || p.canBeTargetedBy(sa)) {
-                        p.addDamage(dmg, sourceLKI, damageMap, preventMap, counterTable, sa);
+                        damageMap.put(sourceLKI, p, dmg);
                     }
                 }
             }
@@ -113,8 +114,7 @@ public class DamageEachEffect extends DamageBaseEffect {
                     final Card sourceLKI = game.getChangeZoneLKIInfo(source);
 
                     final int dmg = AbilityUtils.calculateAmount(source, "X", sa);
-                    // System.out.println(source+" deals "+dmg+" damage to "+source);
-                    source.addDamage(dmg, sourceLKI, damageMap, preventMap, counterTable, sa);
+                    damageMap.put(sourceLKI, source, dmg);
                 }
             }
             if (sa.getParam("DefinedCards").equals("Remembered")) {
@@ -125,8 +125,7 @@ public class DamageEachEffect extends DamageBaseEffect {
                     for (final Object o : sa.getHostCard().getRemembered()) {
                         if (o instanceof Card) {
                             Card rememberedcard = (Card) o;
-                            // System.out.println(source + " deals " + dmg + " damage to " + rememberedcard);
-                            rememberedcard.addDamage(dmg, sourceLKI, damageMap, preventMap, counterTable, sa);
+                            damageMap.put(sourceLKI, rememberedcard, dmg);
                         }
                     }
                 }
@@ -134,14 +133,8 @@ public class DamageEachEffect extends DamageBaseEffect {
         }
 
         if (!usedDamageMap) {
-            preventMap.triggerPreventDamage(false);
-            damageMap.triggerDamageDoneOnce(false, game, sa);
-
-            preventMap.clear();
-            damageMap.clear();
+            game.getAction().dealDamage(false, damageMap, preventMap, counterTable, sa);
         }
-
-        counterTable.triggerCountersPutAll(game);
 
         replaceDying(sa);
     }

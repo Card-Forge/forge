@@ -58,18 +58,16 @@ public class ReplaceSplitDamageEffect extends SpellAbilityEffect {
             }
             
             Card sourceLKI = (Card) sa.getReplacingObject(AbilityKey.Source);
+            GameEntity target = (GameEntity) sa.getReplacingObject(AbilityKey.Target);
 
+            GameEntity obj = (GameEntity) list.get(0);
+            boolean isCombat = (Boolean) originalParams.get(AbilityKey.IsCombat);
             CardDamageMap damageMap = (CardDamageMap) originalParams.get(AbilityKey.DamageMap);
             CardDamageMap preventMap = (CardDamageMap) originalParams.get(AbilityKey.PreventMap);
             GameEntityCounterTable counterTable = (GameEntityCounterTable) originalParams.get(AbilityKey.CounterTable);
             SpellAbility cause = (SpellAbility) originalParams.get(AbilityKey.Cause);
-            
-            boolean isCombat = (Boolean) originalParams.get(AbilityKey.IsCombat);
-            boolean noPrevention = (Boolean) originalParams.get(AbilityKey.NoPreventDamage);
-            
-            GameEntity obj = (GameEntity) list.get(0);
-
-            obj.addDamage(n, sourceLKI, isCombat, noPrevention, damageMap, preventMap, counterTable, cause);
+            damageMap.put(sourceLKI, obj, n);
+            obj.replaceDamage(n, sourceLKI, isCombat, damageMap, preventMap, counterTable, cause);
         }
 
         // no damage for original target anymore

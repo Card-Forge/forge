@@ -68,7 +68,6 @@ import forge.game.ability.effects.DetachedCardEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardDamageMap;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
@@ -636,7 +635,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     // This function handles damage after replacement and prevention effects are applied
     @Override
-    public final int addDamageAfterPrevention(final int amount, final Card source, final boolean isCombat, CardDamageMap damageMap, GameEntityCounterTable counterTable) {
+    public final int addDamageAfterPrevention(final int amount, final Card source, final boolean isCombat, GameEntityCounterTable counterTable) {
         if (amount <= 0) {
             return 0;
         }
@@ -703,9 +702,6 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         game.fireEvent(new GameEventPlayerDamaged(this, source, amount, isCombat, infect));
 
-        if (amount > 0) {
-            damageMap.put(source, this, amount);
-        }
         return amount;
     }
 

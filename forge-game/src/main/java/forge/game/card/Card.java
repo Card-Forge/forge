@@ -5136,24 +5136,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return total;
     }
 
-    public final void addCombatDamage(final Map<Card, Integer> map, final CardDamageMap damageMap, final CardDamageMap preventMap, GameEntityCounterTable counterTable) {
-        for (final Entry<Card, Integer> entry : map.entrySet()) {
-            addCombatDamage(entry.getValue(), entry.getKey(), damageMap, preventMap, counterTable);
-        }
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see forge.game.GameEntity#addCombatDamageBase(int, forge.game.card.Card, forge.game.card.CardDamageMap, forge.game.GameEntityCounterTable)
-     */
-    @Override
-    protected int addCombatDamageBase(final int damage, final Card source, CardDamageMap damageMap, GameEntityCounterTable counterTable) {
-        if (isInPlay()) {
-            return super.addCombatDamageBase(damage, source, damageMap, counterTable);
-        }
-        return 0;
-    }
-
     public final boolean canDamagePrevented(final boolean isCombat) {
         CardCollection list = new CardCollection(getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES));
         list.add(this);
@@ -5246,19 +5228,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return restDamage;
     }
 
-    public final void addDamage(final Map<Card, Integer> sourcesMap, CardDamageMap damageMap, GameEntityCounterTable counterTable) {
-        for (final Entry<Card, Integer> entry : sourcesMap.entrySet()) {
-            // damage prevention is already checked!
-            addDamageAfterPrevention(entry.getValue(), entry.getKey(), true, damageMap, counterTable);
-        }
-    }
-
     /**
      * This function handles damage after replacement and prevention effects are
      * applied.
      */
     @Override
-    public final int addDamageAfterPrevention(final int damageIn, final Card source, final boolean isCombat, CardDamageMap damageMap, GameEntityCounterTable counterTable) {
+    public final int addDamageAfterPrevention(final int damageIn, final Card source, final boolean isCombat, GameEntityCounterTable counterTable) {
 
         if (damageIn <= 0) {
             return 0; // Rule 119.8
@@ -5329,8 +5304,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             // Play the Damage sound
             game.fireEvent(new GameEventCardDamaged(this, source, damageIn, damageType));
         }
-
-        damageMap.put(source, this, damageIn);
 
         if (excess > 0) {
             // Run triggers
