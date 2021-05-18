@@ -1054,7 +1054,8 @@ public class Game {
 
     public void onCleanupPhase() {
         clearCounterAddedThisTurn();
-        for (Player player : getPlayers()) {
+        // some cards need this info updated even after a player lost, so don't skip them
+        for (Player player : getRegisteredPlayers()) {
             player.onCleanupPhase();
         }
     }
