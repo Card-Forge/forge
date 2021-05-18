@@ -25,6 +25,7 @@ import forge.game.card.CardZoneTable;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Localizer;
+import forge.util.TextUtil;
 
 import java.util.*;
 
@@ -123,7 +124,7 @@ public class TriggerAbilityTriggered extends Trigger {
                     destinations.add(dest.toString());
                 }
             }
-            newRunParams.put(AbilityKey.Destination, String.join(",", destinations));
+            newRunParams.put(AbilityKey.Destination, TextUtil.join(destinations, ","));
             newRunParams.put(AbilityKey.Cause, table.allCards());
         }
         sa.setTriggeringObject(AbilityKey.TriggeredParams, newRunParams);
