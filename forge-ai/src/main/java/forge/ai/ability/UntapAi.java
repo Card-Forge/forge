@@ -66,7 +66,7 @@ public class UntapAi extends SpellAbilityAi {
 
         if (!sa.usesTargeting()) {
             final List<Card> pDefined = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
-            return pDefined == null || !pDefined.get(0).isUntapped() || pDefined.get(0).getController() != ai;
+            return pDefined.isEmpty() || (pDefined.get(0).isTapped() && pDefined.get(0).getController() == ai);
         } else {
             return untapPrefTargeting(ai, sa, false);
         }
@@ -82,9 +82,8 @@ public class UntapAi extends SpellAbilityAi {
                 return false;
             }
 
-            // TODO: use Defined to determine, if this is an unfavorable result
             final List<Card> pDefined = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
-            return pDefined == null || !pDefined.get(0).isUntapped() || pDefined.get(0).getController() != ai;
+            return pDefined.isEmpty() || (pDefined.get(0).isTapped() && pDefined.get(0).getController() == ai);
         } else {
             if (untapPrefTargeting(ai, sa, mandatory)) {
                 return true;
