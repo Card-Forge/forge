@@ -99,8 +99,8 @@ public class ControlExchangeEffect extends SpellAbilityEffect {
         object2.setController(player1, tStamp);
         object1.setController(player2, tStamp);
         if (sa.hasParam("RememberExchanged")) {
-            sa.getHostCard().addRemembered(object1);
-            sa.getHostCard().addRemembered(object2);
+            host.addRemembered(object1);
+            host.addRemembered(object2);
         }
     }
 

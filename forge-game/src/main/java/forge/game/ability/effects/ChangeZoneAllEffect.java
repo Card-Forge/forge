@@ -42,8 +42,10 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
+        final Card source = sa.getHostCard();
+
         //if host is not on the battlefield don't apply
-        if ("UntilHostLeavesPlay".equals(sa.getParam("Duration")) && !sa.getHostCard().isInPlay()) {
+        if ("UntilHostLeavesPlay".equals(sa.getParam("Duration")) && !source.isInPlay()) {
             return;
         }
 
@@ -53,7 +55,6 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
         CardCollection cards;
         List<Player> tgtPlayers = getTargetPlayers(sa);
         final Game game = sa.getActivatingPlayer().getGame();
-        final Card source = sa.getHostCard();
 
         if ((!sa.usesTargeting() && !sa.hasParam("Defined")) || sa.hasParam("UseAllOriginZones")) {
             cards = new CardCollection(game.getCardsIn(origin));
@@ -122,7 +123,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasParam("ForgetOtherRemembered")) {
-            sa.getHostCard().clearRemembered();
+            source.clearRemembered();
         }
 
         final String remember = sa.getParam("RememberChanged");
@@ -202,9 +203,6 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 }
                 if (sa.hasParam("ExileFaceDown")) {
                     movedCard.turnFaceDown(true);
-                }
-                if (sa.hasParam("Tapped")) {
-                    movedCard.setTapped(true);
                 }
             }
 

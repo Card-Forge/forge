@@ -30,7 +30,7 @@ public class AnimateEffect extends AnimateEffectBase {
 
         //if host is not on the battlefield don't apply
         if (("UntilHostLeavesPlay".equals(sa.getParam("Duration")) || "UntilLoseControlOfHost".equals(sa.getParam("Duration")))
-                && !sa.getHostCard().isInPlay()) {
+                && !source.isInPlay()) {
             return;
         }
 

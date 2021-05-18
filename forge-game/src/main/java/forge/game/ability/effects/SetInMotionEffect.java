@@ -27,7 +27,7 @@ public class SetInMotionEffect extends SpellAbilityEffect {
         int repeats = 1;
 
         if (sa.hasParam("RepeatNum")) {
-            repeats = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("RepeatNum"), sa);
+            repeats = AbilityUtils.calculateAmount(source, sa.getParam("RepeatNum"), sa);
         }
 
         for (int i = 0; i < repeats; i++) {

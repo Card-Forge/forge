@@ -41,7 +41,7 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
         final Card host = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
         final String type = sa.getParam("CounterType");
-        final int counterAmount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("CounterNum"), sa);
+        final int counterAmount = AbilityUtils.calculateAmount(host, sa.getParam("CounterNum"), sa);
         final String valid = sa.getParam("ValidCards");
         final ZoneType zone = sa.hasParam("ValidZone") ? ZoneType.smartValueOf(sa.getParam("ValidZone")) : ZoneType.Battlefield;
         final boolean etbcounter = sa.hasParam("ETB");
@@ -52,7 +52,7 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
         }
         
         CardCollectionView cards = game.getCardsIn(zone);
-        cards = CardLists.getValidCards(cards, valid, host.getController(), sa.getHostCard(), sa);
+        cards = CardLists.getValidCards(cards, valid, host.getController(), host, sa);
 
         if (sa.usesTargeting()) {
             final Player pl = sa.getTargets().getFirstTargetedPlayer();
