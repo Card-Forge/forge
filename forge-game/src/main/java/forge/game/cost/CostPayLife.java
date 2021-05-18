@@ -76,9 +76,13 @@ public class CostPayLife extends CostPart {
         Integer amount = this.convertAmount();
         if (amount == null) { // try to calculate when it's defined.
             amount = AbilityUtils.calculateAmount(ability.getHostCard(), getAmount(), ability);
+            // CR 107.1b
+            if (getAmount().contains("/Half")) {
+                amount = Math.max(amount, 0);
+            }
         }
 
-        if ((amount != null) && !payer.canPayLife(amount)) {
+        if (amount != null && !payer.canPayLife(amount)) {
             return false;
         }
 

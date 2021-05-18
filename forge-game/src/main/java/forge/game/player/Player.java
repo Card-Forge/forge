@@ -589,7 +589,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean canPayLife(final int lifePayment) {
-        if (life < lifePayment) {
+        if (lifePayment > 0 && life < lifePayment) {
             return false;
         }
         return (lifePayment <= 0) || !hasKeyword("Your life total can't change.");
