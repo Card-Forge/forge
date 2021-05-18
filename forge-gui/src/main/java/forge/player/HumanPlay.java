@@ -198,8 +198,6 @@ public class HumanPlay {
         req.playAbility(!useOldTargets, false, true);
     }
 
-    // ------------------------------------------------------------------------
-
     private static int getAmountFromPart(CostPart part, Card source, SpellAbility sourceAbility) {
         String amountString = part.getAmount();
         return StringUtils.isNumeric(amountString) ? Integer.parseInt(amountString) : AbilityUtils.calculateAmount(source, amountString, sourceAbility);
@@ -267,9 +265,13 @@ public class HumanPlay {
             boolean mayRemovePart = true;
 
             if (part instanceof CostPayLife) {
-                final int amount = getAmountFromPart(part, source, sourceAbility);
-                if (!p.canPayLife(amount)) {
+                if (!part.canPay(sourceAbility, p)) {
                     return false;
+                }
+
+                int amount = getAmountFromPart(part, source, sourceAbility);
+                if (part.getAmount().contains("/Half")) {
+                    amount = Math.max(amount, 0);
                 }
 
                 if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantPayNLife", String.valueOf(amount)) + orString, sourceAbility)) {
