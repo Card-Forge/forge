@@ -344,6 +344,7 @@ public class GameAction {
                         c.updateStateForView();
                     }
                 }
+
                 return c;
             }
         }
@@ -373,7 +374,7 @@ public class GameAction {
                 if (saTargeting != null) {
                     saTargeting.getTargets().replaceTargetCard(c, cards);
                 }
-                // Replace host rememberd cards
+                // Replace host remembered cards
                 // But not replace RememberLKI, since it wants to refer to the last known info.
                 Card hostCard = cause.getHostCard();
                 if (!cause.hasParam("RememberLKI") && hostCard.isRemembered(c)) {

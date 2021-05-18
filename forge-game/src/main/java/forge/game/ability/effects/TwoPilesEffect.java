@@ -68,19 +68,19 @@ public class TwoPilesEffect extends SpellAbilityEffect {
 
         Player separator = card.getController();
         if (sa.hasParam("Separator")) {
-            separator = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Separator"), sa).get(0);
+            separator = AbilityUtils.getDefinedPlayers(card, sa.getParam("Separator"), sa).get(0);
         }
 
         Player chooser = tgtPlayers.get(0);
         if (sa.hasParam("Chooser")) {
-            chooser = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Chooser"), sa).get(0);
+            chooser = AbilityUtils.getDefinedPlayers(card, sa.getParam("Chooser"), sa).get(0);
         }
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 CardCollectionView pool0;
                 if (sa.hasParam("DefinedCards")) {
-                    pool0 = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DefinedCards"), sa);
+                    pool0 = AbilityUtils.getDefinedCards(card, sa.getParam("DefinedCards"), sa);
                 } else {
                     pool0 = p.getCardsIn(zone);
                 }

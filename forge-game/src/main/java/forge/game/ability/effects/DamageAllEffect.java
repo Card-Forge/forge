@@ -52,14 +52,14 @@ public class DamageAllEffect extends DamageBaseEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        final List<Card> definedSources = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DamageSource"), sa);
+        final Card source = sa.getHostCard();
+        final List<Card> definedSources = AbilityUtils.getDefinedCards(source, sa.getParam("DamageSource"), sa);
         final Card card = definedSources.get(0);
         final Card sourceLKI = card.getGame().getChangeZoneLKIInfo(card);
-        final Card source = sa.getHostCard();
         final Game game = sa.getActivatingPlayer().getGame();
 
         final String damage = sa.getParam("NumDmg");
-        final int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
+        final int dmg = AbilityUtils.calculateAmount(source, damage, sa);
 
         final boolean rememberCard = sa.hasParam("RememberDamaged") || sa.hasParam("RememberDamagedCreature");
         final boolean rememberPlayer = sa.hasParam("RememberDamaged") || sa.hasParam("RememberDamagedPlayer");

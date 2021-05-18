@@ -39,7 +39,7 @@ public class SkipTurnEffect extends SpellAbilityEffect {
         final Game game = hostCard.getGame();
         final String name = hostCard.getName() + "'s Effect";
         final String image = hostCard.getImageKey();
-        final int numTurns = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumTurns"), sa);
+        final int numTurns = AbilityUtils.calculateAmount(hostCard, sa.getParam("NumTurns"), sa);
         String repeffstr = "Event$ BeginTurn | ActiveZones$ Command | ValidPlayer$ You " +
         "| Description$ Skip your next " + (numTurns > 1 ? Lang.getNumeral(numTurns) + " turns." : "turn.");
         String effect = "DB$ StoreSVar | SVar$ NumTurns | Type$ CountSVar | Expression$ NumTurns/Minus.1";
