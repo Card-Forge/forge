@@ -265,13 +265,9 @@ public class HumanPlay {
             boolean mayRemovePart = true;
 
             if (part instanceof CostPayLife) {
-                if (!part.canPay(sourceAbility, p)) {
+                final int amount = getAmountFromPart(part, source, sourceAbility);
+                if (!p.canPayLife(amount)) {
                     return false;
-                }
-
-                int amount = getAmountFromPart(part, source, sourceAbility);
-                if (part.getAmount().contains("/Half")) {
-                    amount = Math.max(amount, 0);
                 }
 
                 if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantPayNLife", String.valueOf(amount)) + orString, sourceAbility)) {

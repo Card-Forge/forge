@@ -1551,7 +1551,8 @@ public class AbilityUtils {
         boolean alreadyPaid = false;
         for (Player payer : allPayers) {
             if (unlessCost.equals("LifeTotalHalfUp")) {
-                cost = new Cost("PayLife<Count$YourLifeTotal/HalfUp>", true);
+                String halfup = Integer.toString(Math.max(0,(int) Math.ceil(payer.getLife() / 2.0)));
+                cost = new Cost("PayLife<" + halfup + ">", true);
             }
             alreadyPaid |= payer.getController().payCostToPreventEffect(cost, sa, alreadyPaid, allPayers);
         }
