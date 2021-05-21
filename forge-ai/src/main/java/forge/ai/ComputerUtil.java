@@ -2432,8 +2432,7 @@ public class ComputerUtil {
             if (!source.canReceiveCounters(p1p1Type)) {
                 return opponent ? "Feather" : "Quill";
             }
-            // if source is not on the battlefield anymore, choose +1/+1
-            // ones
+            // if source is not on the battlefield anymore, choose +1/+1 ones
             if (!game.getCardState(source).isInZone(ZoneType.Battlefield)) {
                 return opponent ? "Feather" : "Quill";
             }
@@ -2850,7 +2849,6 @@ public class ComputerUtil {
     }
 
     public static boolean lifegainNegative(final Player player, final Card source, final int n) {
-
         if (!player.canGainLife()) {
             return false;
         }

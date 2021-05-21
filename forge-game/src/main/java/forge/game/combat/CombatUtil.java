@@ -1079,7 +1079,10 @@ public class CombatUtil {
     } // canBlock()
 
     public static boolean canAttackerBeBlockedWithAmount(Card attacker, int amount, Combat combat) {
-        if( amount == 0 )
+        return canAttackerBeBlockedWithAmount(attacker, amount, combat != null ? combat.getDefenderPlayerByAttacker(attacker) : null);
+    }
+    public static boolean canAttackerBeBlockedWithAmount(Card attacker, int amount, Player defender) {
+        if(amount == 0 )
             return false; // no block
 
         List<String> restrictions = Lists.newArrayList();
@@ -1098,18 +1101,7 @@ public class CombatUtil {
             if (Expressions.compare(amount, operator, operand) )
                 return false;
         }
-        if (combat != null && attacker.hasKeyword("CARDNAME can't be blocked " +
-                "unless all creatures defending player controls block it.")) {
-            Player defender = combat.getDefenderPlayerByAttacker(attacker);
-            if (defender == null) {
-                // TODO: a better fix is needed here (to prevent a hard NPE, e.g. when the AI attacks with Tromokratis).
-                System.out.println("Warning: defender was 'null' in CombatUtil::canAttackerBeBlockedWithAmount for the card " + attacker + ", attempting to deduce defender.");
-                defender = combat.getDefendingPlayers().getFirst();
-                if (defender == null) {
-                    System.out.println("Warning: it was impossible to deduce the defending player in CombatUtil#canAttackerBeBlockedWithAmount, returning 'true' (safest default).");
-                    return true;
-                }
-            }
+        if (defender != null && attacker.hasKeyword("CARDNAME can't be blocked unless all creatures defending player controls block it.")) {
             return amount >= defender.getCreaturesInPlay().size();
         }
 

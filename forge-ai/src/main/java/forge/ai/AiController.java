@@ -613,8 +613,7 @@ public class AiController {
             SpellAbility currentSA = sa;
             sa.setActivatingPlayer(player);
             // check everything necessary
-            
-            
+
             AiPlayDecision opinion = canPlayAndPayFor(currentSA);
             //PhaseHandler ph = game.getPhaseHandler();
             // System.out.printf("Ai thinks '%s' of %s @ %s %s >>> \n", opinion, sa, Lang.getPossesive(ph.getPlayerTurn().getName()), ph.getPhase());
@@ -1726,10 +1725,8 @@ public class AiController {
         for (int i = 0; i < numToExile; i++) {
             Card chosen = null;
             for (final Card c : grave) { // Exile noncreatures first in
-                // case we can revive. Might
-                // wanna do some additional
-                // checking here for Flashback
-                // and the like.
+                // case we can revive. Might wanna do some additional
+                // checking here for Flashback and the like.
                 if (!c.isCreature()) {
                     chosen = c;
                     break;
@@ -1997,7 +1994,6 @@ public class AiController {
         }
         return result;
     }
-
 
     // this is where the computer cheats
     // changes AllZone.getComputerPlayer().getZone(Zone.Library)
@@ -2278,8 +2274,7 @@ public class AiController {
             }
         }
 
-        // AI logic for choosing which replacement effect to apply
-        // happens here.
+        // AI logic for choosing which replacement effect to apply happens here.
         return Iterables.getFirst(list, null);
     }
     

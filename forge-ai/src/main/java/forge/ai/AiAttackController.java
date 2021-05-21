@@ -54,7 +54,6 @@ import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 
 
-//doesHumanAttackAndWin() uses the global variable AllZone.getComputerPlayer()
 /**
  * <p>
  * ComputerUtil_Attack2 class.
@@ -412,12 +411,10 @@ public class AiAttackController {
 
         final Player opp = this.defendingOpponent;
 
-        // Increase the total number of blockers needed by 1 if Finest Hour in
-        // play
+        // Increase the total number of blockers needed by 1 if Finest Hour in play
         // (human will get an extra first attack with a creature that untaps)
         // In addition, if the computer guesses it needs no blockers, make sure
-        // that
-        // it won't be surprised by Exalted
+        // that it won't be surprised by Exalted
         final int humanExaltedBonus = opp.countExaltedBonus();
 
         if (humanExaltedBonus > 0) {
@@ -448,7 +445,6 @@ public class AiAttackController {
         return notNeededAsBlockers;
     }
 
-    // this uses a global variable, which isn't perfect
     public final boolean doesHumanAttackAndWin(final Player ai, final int nBlockingCreatures) {
         int totalAttack = 0;
         int totalPoison = 0;
@@ -715,7 +711,7 @@ public class AiAttackController {
         int attackMax = restrict.getMax();
         if (attackMax == -1) {
             // check with the local limitations vs. the chosen defender
-            attackMax = ComputerUtilCombat.getMaxAttackersFor(defender);
+            attackMax = restrict.getDefenderMax().get(defender) == null ? -1 : restrict.getDefenderMax().get(defender);
         }
 
         if (attackMax == 0) {
@@ -774,7 +770,6 @@ public class AiAttackController {
         if (!doRevengeOfRavensAttackLogic(ai, defender, attackersLeft, numForcedAttackers, attackMax)) {
             return;
         }
-
 
         if (bAssault) {
             if (LOG_AI_ATTACKS)
@@ -849,7 +844,6 @@ public class AiAttackController {
             // no more creatures to attack
             return;
         }
-        
 
         // *******************
         // Evaluate the creature forces
@@ -1291,8 +1285,8 @@ public class AiAttackController {
         }
 
         if (numberOfPossibleBlockers > 2 
-                || (numberOfPossibleBlockers >= 1 && CombatUtil.canAttackerBeBlockedWithAmount(attacker, 1, combat))
-                || (numberOfPossibleBlockers == 2 && CombatUtil.canAttackerBeBlockedWithAmount(attacker, 2, combat))) {
+                || (numberOfPossibleBlockers >= 1 && CombatUtil.canAttackerBeBlockedWithAmount(attacker, 1, this.defendingOpponent))
+                || (numberOfPossibleBlockers == 2 && CombatUtil.canAttackerBeBlockedWithAmount(attacker, 2, this.defendingOpponent))) {
             canBeBlocked = true;
         }
         // decide if the creature should attack based on the prevailing strategy choice in aiAggression
