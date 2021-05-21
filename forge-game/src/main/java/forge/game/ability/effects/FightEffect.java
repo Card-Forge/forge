@@ -63,7 +63,7 @@ public class FightEffect extends DamageBaseEffect {
         Player controller = host.getController();
         boolean isOptional = sa.hasParam("Optional");
 
-        if (isOptional && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblWouldYouLikeFight", CardTranslation.getTranslatedName(fighters.get(0).getName()), CardTranslation.getTranslatedName(fighters.get(1).getName())), null)) {
+        if (isOptional && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblWouldYouLikeFight", CardTranslation.getTranslatedName(fighters.get(0).getName()), CardTranslation.getTranslatedName(fighters.get(1).getName())))) {
             return;
         } else {
             dealDamage(sa, fighters.get(0), fighters.get(1));

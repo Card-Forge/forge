@@ -761,7 +761,7 @@ public class Combat {
                             "defending player and/or any number of creatures they control.")
                     && attacker.getController().getController().confirmAction(null, null,
                     Localizer.getInstance().getMessage("lblAssignCombatDamageAsChoose",
-                            CardTranslation.getTranslatedName(attacker.getName())), null));
+                            CardTranslation.getTranslatedName(attacker.getName()))));
             boolean trampler = attacker.hasKeyword(Keyword.TRAMPLE);
             orderedBlockers = blockersOrderedForDamageAssignment.get(attacker);
             if (divideCombatDamageAsChoose) {

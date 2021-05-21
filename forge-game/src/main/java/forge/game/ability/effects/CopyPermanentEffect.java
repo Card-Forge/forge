@@ -60,7 +60,7 @@ public class CopyPermanentEffect extends TokenEffectBase {
         final Game game = host.getGame();
 
         if (sa.hasParam("Optional")) {
-            if (!activator.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblCopyPermanentConfirm"), null)) {
+            if (!activator.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblCopyPermanentConfirm"))) {
                 return;
             }
         }
@@ -150,7 +150,7 @@ public class CopyPermanentEffect extends TokenEffectBase {
                         if (choosen != null) {
                             tgtCards.add(choosen);
                             choices = CardLists.filter(choices, Predicates.not(CardPredicates.sharesNameWith(choosen)));
-                        } else if (chooser.getController().confirmAction(sa, PlayerActionConfirmMode.OptionalChoose, Localizer.getInstance().getMessage("lblCancelChooseConfirm"), null)) {
+                        } else if (chooser.getController().confirmAction(sa, PlayerActionConfirmMode.OptionalChoose, Localizer.getInstance().getMessage("lblCancelChooseConfirm"))) {
                             break;
                         }
                     }

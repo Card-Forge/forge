@@ -182,32 +182,20 @@ public class PlayEffect extends SpellAbilityEffect {
 
         while (!tgtCards.isEmpty() && amount > 0) {
             activator.getController().tempShowCards(showCards);
-            Card tgtCard = controller.getController().chooseSingleEntityForEffect(tgtCards, sa, Localizer.getInstance().getMessage("lblSelectCardToPlay"), null);
+            Card tgtCard = controller.getController().chooseSingleEntityForEffect(tgtCards, sa, Localizer.getInstance().getMessage("lblSelectCardToPlay"), optional, null);
             activator.getController().endTempShowCards();
             if (tgtCard == null) {
                 break;
             }
 
-            final boolean wasFaceDown;
+            boolean wasFaceDown = false;
             if (tgtCard.isFaceDown()) {
                 tgtCard.forceTurnFaceUp();
                 wasFaceDown = true;
-            } else {
-                wasFaceDown = false;
             }
 
             if (sa.hasParam("ShowCardToActivator")) {
                 game.getAction().revealTo(tgtCard, activator);
-            }
-
-            Map<String, Object> params = Maps.newHashMap();
-            params.put("Card", tgtCard);
-            if (optional && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantPlayCard", CardTranslation.getTranslatedName(tgtCard.getName())), params)) {
-                if (wasFaceDown) {
-                    tgtCard.turnFaceDownNoUpdate();
-                }
-                tgtCards.remove(tgtCard);
-                continue;
             }
 
             if (!sa.hasParam("AllowRepeats")) {

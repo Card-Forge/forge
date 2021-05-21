@@ -151,7 +151,7 @@ public class DamageDealEffect extends DamageBaseEffect {
         List<GameObject> tgts = getTargets(sa);
         if (sa.hasParam("OptionalDecider")) {
             Player decider = Iterables.getFirst(AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("OptionalDecider"), sa), null);
-            if (decider != null && !decider.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoyouWantDealTargetDamageToTarget", String.valueOf(dmg), tgts.toString()), null)) {
+            if (decider != null && !decider.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoyouWantDealTargetDamageToTarget", String.valueOf(dmg), tgts.toString()))) {
                 return;
             }
         }

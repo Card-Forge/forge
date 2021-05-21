@@ -147,7 +147,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                 }
             }
             for (final Player p : repeatPlayers) {
-                if (optional && !p.getController().confirmAction(repeat, null, sa.getParam("RepeatOptionalMessage"), null)) {
+                if (optional && !p.getController().confirmAction(repeat, null, sa.getParam("RepeatOptionalMessage"))) {
                     continue;
                 }
                 if (nextTurn) {

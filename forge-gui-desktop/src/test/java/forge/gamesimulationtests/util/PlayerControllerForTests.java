@@ -197,7 +197,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
+    public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         return true;
     }
 
