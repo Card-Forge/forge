@@ -672,9 +672,12 @@ public class Graphics {
         batch.draw(image, adjustX(x), adjustY(y, h), w, h);
     }
     public void drawImage(TextureRegion image, float x, float y, float w, float h) {
-        batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+        if (image != null)
+            batch.draw(image, adjustX(x), adjustY(y, h), w, h);
     }
     public void drawImage(TextureRegion image, TextureRegion glowImageReference, float x, float y, float w, float h, Color glowColor, boolean selected) {
+        if (image == null || glowImageReference == null)
+            return;
          //1st image is the image on top of the shader, 2nd image is for the outline reference for the shader glow...
         // if the 1st image don't have transparency in the middle (only on the sides, top and bottom, use the 1st image as outline reference...
         if (!selected) {
@@ -698,6 +701,8 @@ public class Graphics {
         }
     }
     public void drawDeckBox(FImage cardArt, float scale, TextureRegion image, TextureRegion glowImageReference, float x, float y, float w, float h, Color glowColor, boolean selected) {
+        if (image == null || glowImageReference == null)
+            return;
         float yBox = y-(h*0.25f);
         if (!selected) {
             cardArt.draw(this,x+((w-w*scale)/2), y+((h-h*scale)/3f), w*scale, h*scale/1.85f);
@@ -788,6 +793,8 @@ public class Graphics {
         drawText(text, font, skinColor.getColor(), x, y, w, h, wrap, horzAlignment, centerVertically);
     }
     public void drawText(String text, FSkinFont font, Color color, float x, float y, float w, float h, boolean wrap, int horzAlignment, boolean centerVertically) {
+        if (text == null)
+            return;
         if (alphaComposite < 1) {
             color = FSkinColor.alphaColor(color, color.a * alphaComposite);
         }
