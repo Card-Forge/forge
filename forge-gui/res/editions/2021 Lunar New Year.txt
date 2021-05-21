@@ -6,6 +6,8 @@ Type=Reprint
 
 [cards]
 1 R Sethron, Hurloon General
+2 M Moraug, Fury of Akoum
+3 M Ox of Agonas
 
 [tokens]
 r_2_3_minotaur
