@@ -180,11 +180,9 @@ public class AiBlockController {
 
     // Good Blocks means a good trade or no trade
     private void makeGoodBlocks(final Combat combat) {
-
         List<Card> currentAttackers = new ArrayList<>(attackersLeft);
 
         for (final Card attacker : attackersLeft) {
-
             if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT")
                     || attacker.hasKeyword("CARDNAME can't be blocked unless all creatures defending player controls block it.")
                     || attacker.hasKeyword(Keyword.MENACE)) {
@@ -192,7 +190,6 @@ public class AiBlockController {
             }
 
             Card blocker = null;
-
             final List<Card> blockers = getPossibleBlockers(combat, attacker, blockersLeft, true);
 
             final List<Card> safeBlockers = getSafeBlockers(combat, attacker, blockers);
@@ -305,7 +302,6 @@ public class AiBlockController {
             }
 
             Card blocker = null;
-
             final List<Card> blockers = getPossibleBlockers(combat, attacker, blockersLeft, true);
 
             for (Card b : blockers) {
@@ -584,12 +580,10 @@ public class AiBlockController {
      * @param combat a {@link forge.game.combat.Combat} object.
      */
     private void makeTradeBlocks(final Combat combat) {
-
         List<Card> currentAttackers = new ArrayList<>(attackersLeft);
         List<Card> killingBlockers;
 
         for (final Card attacker : attackersLeft) {
-
             if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT")
                     || attacker.hasKeyword(Keyword.MENACE)
                     || attacker.hasKeyword("CARDNAME can't be blocked unless all creatures defending player controls block it.")) {
@@ -625,7 +619,6 @@ public class AiBlockController {
 
     // Chump Blocks (should only be made if life is in danger)
     private void makeChumpBlocks(final Combat combat) {
-
         List<Card> currentAttackers = new ArrayList<>(attackersLeft);
 
         makeChumpBlocks(combat, currentAttackers);
@@ -636,7 +629,6 @@ public class AiBlockController {
     }
 
     private void makeChumpBlocks(final Combat combat, List<Card> attackers) {
-
         if (attackers.isEmpty() || !ComputerUtilCombat.lifeInDanger(ai, combat)) {
             return;
         }
@@ -691,11 +683,9 @@ public class AiBlockController {
 
     // Block creatures with "can't be blocked except by two or more creatures"
     private void makeMultiChumpBlocks(final Combat combat) {
-
         List<Card> currentAttackers = new ArrayList<>(attackersLeft);
 
         for (final Card attacker : currentAttackers) {
-
             if (!attacker.hasStartOfKeyword("CantBeBlockedByAmount LT")
                     && !attacker.hasKeyword(Keyword.MENACE)
                     && !attacker.hasKeyword("CARDNAME can't be blocked unless all creatures defending player controls block it.")) {
@@ -727,7 +717,6 @@ public class AiBlockController {
 
     /** Reinforce blockers blocking attackers with trample (should only be made if life is in danger) */
     private void reinforceBlockersAgainstTrample(final Combat combat) {
-
         List<Card> chumpBlockers;
 
         List<Card> tramplingAttackers = CardLists.getKeyword(attackers, Keyword.TRAMPLE);
@@ -760,7 +749,6 @@ public class AiBlockController {
 
     /** Support blockers not destroying the attacker with more blockers to try to kill the attacker */
     private void reinforceBlockersToKill(final Combat combat) {
-
         List<Card> safeBlockers;
         List<Card> blockers;
         List<Card> targetAttackers = CardLists.filter(blockedButUnkilled, Predicates.not(rampagesOrNeedsManyToBlock));
