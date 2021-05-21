@@ -2,7 +2,6 @@ package forge.game.ability.effects;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -11,7 +10,6 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 import forge.GameCommand;
 import forge.StaticData;
@@ -37,7 +35,6 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
-import forge.util.CardTranslation;
 import forge.util.Lang;
 import forge.util.Localizer;
 
