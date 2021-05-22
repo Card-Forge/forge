@@ -113,8 +113,7 @@ public class CounterAi extends SpellAbilityAi {
             boolean setPayX = false;
             if (unlessCost.equals("X") && sa.getSVar(unlessCost).equals("Count$xPaid")) {
                 setPayX = true;
-                // TODO use ComputerUtilCost.getMaxXValue
-                toPay = Math.min(ComputerUtilMana.determineLeftoverMana(sa, ai), usableManaSources + 1);
+                toPay = Math.min(ComputerUtilCost.getMaxXValue(sa, ai), usableManaSources + 1);
             } else {
                 toPay = AbilityUtils.calculateAmount(source, unlessCost, sa);
             }
@@ -124,8 +123,7 @@ public class CounterAi extends SpellAbilityAi {
             }
 
             if (toPay <= usableManaSources) {
-                // If this is a reusable Resource, feel free to play it most of
-                // the time
+                // If this is a reusable Resource, feel free to play it most of the time
                 if (!SpellAbilityAi.playReusable(ai,sa)) {
                     return false;
                 }
