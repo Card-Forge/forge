@@ -237,8 +237,8 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
-        return getAi().confirmAction(sa, mode, message, params);
+    public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message) {
+        return getAi().confirmAction(sa, mode, message);
     }
     
     @Override

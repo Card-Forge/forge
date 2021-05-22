@@ -72,7 +72,7 @@ public final class EncodeAi extends SpellAbilityAi {
      * forge.game.player.PlayerActionConfirmMode, java.lang.String)
      */
     @Override
-    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         // only try to encode if there is a creature it can be used on
         return chooseCard(player, player.getCreaturesInPlay(), true) != null;
     }

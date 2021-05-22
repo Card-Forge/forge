@@ -41,7 +41,7 @@ public class ManaEffect extends SpellAbilityEffect {
         final boolean optional = sa.hasParam("Optional");
         final Game game = sa.getActivatingPlayer().getGame();
 
-        if (optional && !sa.getActivatingPlayer().getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantAddMana"), null)) {
+        if (optional && !sa.getActivatingPlayer().getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantAddMana"))) {
             return;
         }
 

@@ -147,7 +147,7 @@ public class AnimateEffect extends AnimateEffectBase {
                     ? TextUtil.fastReplace(sa.getParam("OptionQuestion"), "TARGETS", targets)
                     : getStackDescription(sa);
 
-            if (!sa.getActivatingPlayer().getController().confirmAction(sa, null, message, null)) {
+            if (!sa.getActivatingPlayer().getController().confirmAction(sa, null, message)) {
                 return;
             }
         }

@@ -890,7 +890,7 @@ public class CountersPutAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         final Card source = sa.getHostCard();
         if (mode == PlayerActionConfirmMode.Tribute) {
             // add counter if that opponent has a giant creature

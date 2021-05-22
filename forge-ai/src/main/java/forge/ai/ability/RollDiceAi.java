@@ -1,8 +1,6 @@
 package forge.ai.ability;
 
 
-import java.util.Map;
-
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.card.Card;
@@ -45,7 +43,7 @@ public class RollDiceAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         return true;
     }
 }

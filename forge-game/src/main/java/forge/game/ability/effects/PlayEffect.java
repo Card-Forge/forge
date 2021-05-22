@@ -2,7 +2,6 @@ package forge.game.ability.effects;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -11,7 +10,6 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 import forge.GameCommand;
 import forge.StaticData;
@@ -37,7 +35,6 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
-import forge.util.CardTranslation;
 import forge.util.Lang;
 import forge.util.Localizer;
 
@@ -182,32 +179,20 @@ public class PlayEffect extends SpellAbilityEffect {
 
         while (!tgtCards.isEmpty() && amount > 0) {
             activator.getController().tempShowCards(showCards);
-            Card tgtCard = controller.getController().chooseSingleEntityForEffect(tgtCards, sa, Localizer.getInstance().getMessage("lblSelectCardToPlay"), null);
+            Card tgtCard = controller.getController().chooseSingleEntityForEffect(tgtCards, sa, Localizer.getInstance().getMessage("lblSelectCardToPlay"), optional, null);
             activator.getController().endTempShowCards();
             if (tgtCard == null) {
                 break;
             }
 
-            final boolean wasFaceDown;
+            boolean wasFaceDown = false;
             if (tgtCard.isFaceDown()) {
                 tgtCard.forceTurnFaceUp();
                 wasFaceDown = true;
-            } else {
-                wasFaceDown = false;
             }
 
             if (sa.hasParam("ShowCardToActivator")) {
                 game.getAction().revealTo(tgtCard, activator);
-            }
-
-            Map<String, Object> params = Maps.newHashMap();
-            params.put("Card", tgtCard);
-            if (optional && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantPlayCard", CardTranslation.getTranslatedName(tgtCard.getName())), params)) {
-                if (wasFaceDown) {
-                    tgtCard.turnFaceDownNoUpdate();
-                }
-                tgtCards.remove(tgtCard);
-                continue;
             }
 
             if (!sa.hasParam("AllowRepeats")) {
