@@ -1857,6 +1857,10 @@ public class AbilityUtils {
                     list = CardLists.getValidCards(list, k[1].split(","), player, c, ctb);
                     return doXMath(list.size(), expr, c, ctb);
                 }
+
+                if (sq[0].startsWith("xPaid")) {
+                    return doXMath(c.getXManaCostPaid(), expr, c, ctb);
+                }
             } // end SpellAbility
 
             // Count$TargetedLifeTotal (targeted player's life total)
