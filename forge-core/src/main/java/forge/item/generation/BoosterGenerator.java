@@ -70,12 +70,14 @@ public class BoosterGenerator {
     }
 
     private static PaperCard generateFoilCard(PrintSheet sheet) {
-        return StaticData.instance().getCommonCards().getFoiled(sheet.random(1, true).get(0));
+        PaperCard randomCard = sheet.random(1, true).get(0);
+        return randomCard.getFoiled();
     }
 
     private static PaperCard generateFoilCard(List<PaperCard> cardList) {
         Collections.shuffle(cardList, MyRandom.getRandom());
-        return StaticData.instance().getCommonCards().getFoiled(cardList.get(0));
+        PaperCard randomCard = cardList.get(0);
+        return randomCard.getFoiled();
     }
 
     public static List<PaperCard> getBoosterPack(SealedProduct.Template template) {
@@ -461,7 +463,7 @@ public class BoosterGenerator {
         if (toReplace != null) {
             // Keep the foil state
             if (toReplace.isFoil()) {
-                toAdd = StaticData.instance().getCommonCards().getFoiled(toAdd);
+                toAdd = toAdd.getFoiled();
             }
             booster.remove(toReplace);
             booster.add(toAdd);
