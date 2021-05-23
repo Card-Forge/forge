@@ -94,7 +94,9 @@ public enum ColumnDef {
             new Function<Entry<? extends InventoryItem, Integer>, Object>() {
                 @Override
                 public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return "";
+                    InventoryItem item = from.getKey();
+                    return item instanceof PaperCard ?
+                            String.format("%03d", ((PaperCard) item).getCollectorNumber()) : "";
                 }
             }),
     /**The type column.*/
@@ -579,7 +581,7 @@ public enum ColumnDef {
         @return A sortable numeric string based on the item's attributes.*/
     private static String toCollectorPrefix(final InventoryItem i) {
       //make sure it's a card. if not, pointless to proceed.
-      return (i instanceof PaperCard ? toBasicLandsLast(i) + " " : "") + toSortableName(i.getName());
+      return (i instanceof PaperCard ? String.format("%03d", ((PaperCard) i).getCollectorNumber()) : "") + toSortableName(i.getName());
     }
     
     /**Returns 1 for land, otherwise 0 and continues sorting.
