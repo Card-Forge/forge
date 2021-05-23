@@ -3,7 +3,7 @@ ManaCost:2 W W
 Types:Enchantment
 K:ETBReplacement:Other:ChooseColor
 SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentInHumanDeck | SpellDescription$ As CARDNAME enters the battlefield, choose a color.
-R:Event$ DamageDone | ValidTarget$ You | ActiveZones$ Battlefield | ValidSource$ Instant.ChosenColor,Sorcery.ChosenColor | ReplaceWith$ HarshDmg | Description$ If an instant or sorcery spell of the chosen color would deal damage to you, it deals that damage to its controller instead.
+R:Event$ DamageDone | ValidTarget$ You | ActiveZones$ Battlefield | ValidSource$ Instant.ChosenColor,Sorcery.ChosenColor | DamageTarget$ ReplacedSourceController | ReplaceWith$ HarshDmg | Description$ If an instant or sorcery spell of the chosen color would deal damage to you, it deals that damage to its controller instead.
 SVar:HarshDmg:DB$ ReplaceEffect | VarName$ Affected | VarValue$ ReplacedSourceController | VarType$ Player
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harsh_judgment.jpg

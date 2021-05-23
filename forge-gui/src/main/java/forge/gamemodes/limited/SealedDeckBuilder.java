@@ -40,7 +40,6 @@ public class SealedDeckBuilder extends LimitedDeckBuilder {
         for (int i = 0; i < limit; i++) {
             PaperCard cp = initialRanked.get(i);
             colorChooserList.add(cp);
-            //System.out.println(cp.getName() + " " + cp.getRules().getManaCost().toString());
         }
 
         Iterable<CardRules> rules = Iterables.transform(colorChooserList, PaperCard.FN_GET_RULES);

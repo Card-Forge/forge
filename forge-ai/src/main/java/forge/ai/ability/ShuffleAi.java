@@ -1,7 +1,5 @@
 package forge.ai.ability;
 
-import java.util.Map;
-
 import forge.ai.SpellAbilityAi;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -19,8 +17,7 @@ public class ShuffleAi extends SpellAbilityAi {
             return aiPlayer.getGame().getPhaseHandler().is(PhaseType.MAIN2, aiPlayer);
         }
 
-        // not really sure when the compy would use this; maybe only after a
-        // human
+        // not really sure when the compy would use this; maybe only after a human
         // deliberately put a card on top of their library
         return false;
         /*
@@ -57,7 +54,7 @@ public class ShuffleAi extends SpellAbilityAi {
     }  
 
     @Override
-    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         // ai could analyze parameter denoting the player to shuffle
         return true;
     }

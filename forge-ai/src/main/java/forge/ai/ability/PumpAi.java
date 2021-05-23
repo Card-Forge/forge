@@ -2,7 +2,6 @@ package forge.ai.ability;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -807,7 +806,7 @@ public class PumpAi extends PumpAiBase {
     } // pumpDrawbackAI()
 
     @Override
-    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         //TODO Add logic here if necessary but I think the AI won't cast
         //the spell in the first place if it would curse its own creature
         //and the pump isn't mandatory

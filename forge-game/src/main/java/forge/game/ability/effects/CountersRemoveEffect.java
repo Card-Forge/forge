@@ -82,12 +82,12 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
 
         int cntToRemove = 0;
         if (!num.equals("All") && !num.equals("Any")) {
-            cntToRemove = AbilityUtils.calculateAmount(sa.getHostCard(), num, sa);
+            cntToRemove = AbilityUtils.calculateAmount(card, num, sa);
         }
 
         if (sa.hasParam("Optional")) {
             String ctrs = cntToRemove > 1 ? Localizer.getInstance().getMessage("lblCounters") : num.equals("All") ? Localizer.getInstance().getMessage("lblAllCounters") : Localizer.getInstance().getMessage("lblACounters");
-            if (!sa.getActivatingPlayer().getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblRemove") + " " + ctrs + "?", null)) {
+            if (!sa.getActivatingPlayer().getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblRemove") + " " + ctrs + "?")) {
                 return;
             }
         }

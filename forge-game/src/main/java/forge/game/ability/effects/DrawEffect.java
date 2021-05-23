@@ -50,7 +50,7 @@ public class DrawEffect extends SpellAbilityEffect {
 
         for (final Player p : getDefinedPlayersOrTargeted(sa)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) 
-                if (optional && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantDrawCards", Lang.nounWithAmount(numCards, " card")), null))
+                if (optional && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantDrawCards", Lang.nounWithAmount(numCards, " card"))))
                     continue;
 
                 int actualNum = numCards; 

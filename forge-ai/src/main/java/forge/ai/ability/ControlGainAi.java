@@ -110,8 +110,7 @@ public class ControlGainAi extends SpellAbilityAi {
             }
         }
 
-        // Don't steal something if I can't Attack without, or prevent it from
-        // blocking at least
+        // Don't steal something if I can't Attack without, or prevent it from blocking at least
         if (lose.contains("EOT")
                 && ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                 && !sa.isTrigger()) {
@@ -211,6 +210,7 @@ public class ControlGainAi extends SpellAbilityAi {
                 }
             }
 
+            // TODO check life of controller and consider stealing from another opponent so the risk of your army disappearing is spread out
             while (t == null) {
                 // filter by MustTarget requirement
                 CardCollection originalList = new CardCollection(list);
@@ -264,7 +264,6 @@ public class ControlGainAi extends SpellAbilityAi {
         }
 
         return true;
-
     }
 
     @Override

@@ -15,6 +15,7 @@ import forge.Forge;
 import forge.assets.FSkinImage.SourceFile;
 import forge.card.CardFaceSymbols;
 import forge.gui.FThreads;
+import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -240,16 +241,24 @@ public class FSkin {
 
             //hdbuttons
             if (f11.exists()) {
-                Texture t = new Texture(f11, true);
-                t.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
-                textures.put(f11.path(), t);
-                Forge.hdbuttons = true;
+                if (GuiBase.isAndroid() && Forge.totalDeviceRAM <5000) {
+                    Forge.hdbuttons = false;
+                } else {
+                    Texture t = new Texture(f11, true);
+                    t.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
+                    textures.put(f11.path(), t);
+                    Forge.hdbuttons = true;
+                }
             } else { Forge.hdbuttons = false; } //how to refresh buttons when a theme don't have hd buttons?
             if (f12.exists()) {
-                Texture t = new Texture(f12, true);
-                t.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
-                textures.put(f12.path(), t);
-                Forge.hdstart = true;
+                if (GuiBase.isAndroid() && Forge.totalDeviceRAM <5000) {
+                    Forge.hdstart = false;
+                } else {
+                    Texture t = new Texture(f12, true);
+                    t.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
+                    textures.put(f12.path(), t);
+                    Forge.hdstart = true;
+                }
             } else { Forge.hdstart = false; }
             //update colors
             for (final FSkinColor.Colors c : FSkinColor.Colors.values()) {
@@ -258,7 +267,16 @@ public class FSkin {
 
             //load images
             for (FSkinImage image : FSkinImage.values()) {
-                image.load(textures, preferredIcons);
+                if (GuiBase.isAndroid()) {
+                    if (Forge.totalDeviceRAM>5000)
+                        image.load(textures, preferredIcons);
+                    else if (image.toString().equals("HDMULTI"))
+                        image.load(textures, preferredIcons);
+                    else if (!image.toString().startsWith("HD"))
+                        image.load(textures, preferredIcons);
+                } else {
+                    image.load(textures, preferredIcons);
+                }
             }
             for (FSkinTexture texture : FSkinTexture.values()) {
                 if (texture != FSkinTexture.BG_TEXTURE) {

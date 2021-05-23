@@ -310,6 +310,9 @@ public class AiController {
             }
 
             exSA.setTrigger(tr);
+            // need to set TriggeredObject
+            exSA.setTriggeringObject(AbilityKey.Card, card);
+
 
             // for trigger test, need to ignore the conditions
             SpellAbilityCondition cons = exSA.getConditions();
@@ -610,8 +613,7 @@ public class AiController {
             SpellAbility currentSA = sa;
             sa.setActivatingPlayer(player);
             // check everything necessary
-            
-            
+
             AiPlayDecision opinion = canPlayAndPayFor(currentSA);
             //PhaseHandler ph = game.getPhaseHandler();
             // System.out.printf("Ai thinks '%s' of %s @ %s %s >>> \n", opinion, sa, Lang.getPossesive(ph.getPlayerTurn().getName()), ph.getPhase());
@@ -1298,7 +1300,7 @@ public class AiController {
         return discardList;
     }
 
-    public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
+    public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         ApiType api = sa.getApi();
 
         // Abilities without api may also use this routine, However they should provide a unique mode value ?? How could this work?
@@ -1307,7 +1309,7 @@ public class AiController {
                     mode);
             throw new IllegalArgumentException(exMsg);
         }
-        return SpellApiToAi.Converter.get(api).confirmAction(player, sa, mode, message, params);
+        return SpellApiToAi.Converter.get(api).confirmAction(player, sa, mode, message);
     }
 
     public boolean confirmBidAction(SpellAbility sa, PlayerActionConfirmMode mode, String message, int bid, Player winner) {
@@ -1421,8 +1423,6 @@ public class AiController {
 
     private List<SpellAbility> singleSpellAbilityList(SpellAbility sa) {
         if (sa == null) { return null; }
-
-        // System.out.println("Chosen to play: " + sa);
 
         final List<SpellAbility> abilities = Lists.newArrayList();
         abilities.add(sa);
@@ -1725,10 +1725,8 @@ public class AiController {
         for (int i = 0; i < numToExile; i++) {
             Card chosen = null;
             for (final Card c : grave) { // Exile noncreatures first in
-                // case we can revive. Might
-                // wanna do some additional
-                // checking here for Flashback
-                // and the like.
+                // case we can revive. Might wanna do some additional
+                // checking here for Flashback and the like.
                 if (!c.isCreature()) {
                     chosen = c;
                     break;
@@ -1996,7 +1994,6 @@ public class AiController {
         }
         return result;
     }
-
 
     // this is where the computer cheats
     // changes AllZone.getComputerPlayer().getZone(Zone.Library)
@@ -2277,8 +2274,7 @@ public class AiController {
             }
         }
 
-        // AI logic for choosing which replacement effect to apply
-        // happens here.
+        // AI logic for choosing which replacement effect to apply happens here.
         return Iterables.getFirst(list, null);
     }
     

@@ -88,7 +88,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
             SpellAbility chosenSA = controller.getController().chooseSingleSpellForEffect(tgtSpells, sa,
                     Localizer.getInstance().getMessage("lblSelectASpellCopy"), ImmutableMap.of());
 
-            if (isOptional && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoyouWantCopyTheSpell", CardTranslation.getTranslatedName(chosenSA.getHostCard().getName())), null)) {
+            if (isOptional && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoyouWantCopyTheSpell", CardTranslation.getTranslatedName(chosenSA.getHostCard().getName())))) {
                 continue;
             }
 

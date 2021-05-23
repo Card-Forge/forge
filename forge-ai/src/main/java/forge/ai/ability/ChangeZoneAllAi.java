@@ -1,7 +1,6 @@
 package forge.ai.ability;
 
 import java.util.Collections;
-import java.util.Map;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -331,7 +330,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
      * @see forge.card.ability.SpellAbilityAi#confirmAction(forge.game.player.Player, forge.card.spellability.SpellAbility, forge.game.player.PlayerActionConfirmMode, java.lang.String)
      */
     @Override
-    public boolean confirmAction(Player ai, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
+    public boolean confirmAction(Player ai, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         final Card source = sa.getHostCard();
         final String hostName = source.getName();
         final ZoneType origin = ZoneType.listValueOf(sa.getParam("Origin")).get(0);

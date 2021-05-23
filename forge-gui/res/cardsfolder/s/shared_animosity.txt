@@ -2,9 +2,7 @@ Name:Shared Animosity
 ManaCost:2 R
 Types:Enchantment
 T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ AnimosityPump | TriggerDescription$ Whenever a creature you control attacks, it gets +1/+0 until end of turn for each other attacking creature that shares a creature type with it.
-SVar:AnimosityPump:DB$ Pump | RememberObjects$ TriggeredAttacker | SubAbility$ AnimosityPump2
-SVar:AnimosityPump2:DB$ Pump | Defined$ Remembered | NumAtt$ X | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Count$Valid Creature.attacking+IsNotRemembered+sharesCreatureTypeWith Remembered
+SVar:AnimosityPump:DB$ Pump | Defined$ TriggeredAttacker | NumAtt$ X
+SVar:X:Count$Valid Creature.attacking+NotTriggeredAttacker+sharesCreatureTypeWith TriggeredAttacker
 AI:RemoveDeck:Random
 Oracle:Whenever a creature you control attacks, it gets +1/+0 until end of turn for each other attacking creature that shares a creature type with it.

@@ -44,7 +44,7 @@ public class AssignGroupEffect extends SpellAbilityEffect {
         Player chooser = sa.getActivatingPlayer();
         if (sa.hasParam("Chooser")) {
             final String choose = sa.getParam("Chooser");
-            chooser = AbilityUtils.getDefinedPlayers(sa.getHostCard(), choose, sa).get(0);
+            chooser = AbilityUtils.getDefinedPlayers(host, choose, sa).get(0);
         }
 
         Multimap<SpellAbility, GameObject> result = ArrayListMultimap.create();

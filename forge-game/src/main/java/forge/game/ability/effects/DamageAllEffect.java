@@ -52,14 +52,14 @@ public class DamageAllEffect extends DamageBaseEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        final List<Card> definedSources = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DamageSource"), sa);
+        final Card source = sa.getHostCard();
+        final List<Card> definedSources = AbilityUtils.getDefinedCards(source, sa.getParam("DamageSource"), sa);
         final Card card = definedSources.get(0);
         final Card sourceLKI = card.getGame().getChangeZoneLKIInfo(card);
-        final Card source = sa.getHostCard();
         final Game game = sa.getActivatingPlayer().getGame();
 
         final String damage = sa.getParam("NumDmg");
-        final int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
+        final int dmg = AbilityUtils.calculateAmount(source, damage, sa);
 
         final boolean rememberCard = sa.hasParam("RememberDamaged") || sa.hasParam("RememberDamagedCreature");
         final boolean rememberPlayer = sa.hasParam("RememberDamaged") || sa.hasParam("RememberDamagedPlayer");
@@ -89,24 +89,29 @@ public class DamageAllEffect extends DamageBaseEffect {
         boolean usedDamageMap = true;
         CardDamageMap damageMap = sa.getDamageMap();
         CardDamageMap preventMap = sa.getPreventMap();
-        GameEntityCounterTable counterTable = new GameEntityCounterTable();
+        GameEntityCounterTable counterTable = sa.getCounterTable();
 
         if (damageMap == null) {
             // make a new damage map
             damageMap = new CardDamageMap();
             preventMap = new CardDamageMap();
+            counterTable = new GameEntityCounterTable();
             usedDamageMap = false;
         }
 
         for (final Card c : list) {
-            c.addDamage(dmg, sourceLKI, damageMap, preventMap, counterTable, sa);
+            damageMap.put(sourceLKI, c, dmg);
         }
 
         if (!players.equals("")) {
             final List<Player> playerList = AbilityUtils.getDefinedPlayers(card, players, sa);
             for (final Player p : playerList) {
-                p.addDamage(dmg, sourceLKI, damageMap, preventMap, counterTable, sa);
+                damageMap.put(sourceLKI, p, dmg);
             }
+        }
+
+        if (!usedDamageMap) {
+            game.getAction().dealDamage(false, damageMap, preventMap, counterTable, sa);
         }
 
         // do Remember there
@@ -119,16 +124,6 @@ public class DamageAllEffect extends DamageBaseEffect {
                 }
             }
         }
-
-        if (!usedDamageMap) {
-            preventMap.triggerPreventDamage(false);
-            damageMap.triggerDamageDoneOnce(false, game, sa);
-
-            preventMap.clear();
-            damageMap.clear();
-        }
-
-        counterTable.triggerCountersPutAll(game);
 
         replaceDying(sa);
     }

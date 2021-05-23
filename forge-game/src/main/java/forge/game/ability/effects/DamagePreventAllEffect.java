@@ -13,7 +13,7 @@ public class DamagePreventAllEffect extends DamagePreventEffectBase {
     public void resolve(SpellAbility sa) {
         final Card source = sa.getHostCard();
         final Game game = sa.getActivatingPlayer().getGame();
-        final int numDam = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa);
+        final int numDam = AbilityUtils.calculateAmount(source, sa.getParam("Amount"), sa);
 
         String players = "";
 

@@ -1,7 +1,6 @@
 package forge.ai.ability;
 
 import java.util.List;
-import java.util.Map;
 
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
@@ -171,7 +170,7 @@ public class SacrificeAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         return true;
     }
 

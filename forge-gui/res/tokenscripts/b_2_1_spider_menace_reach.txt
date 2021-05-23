@@ -1,0 +1,7 @@
+Name:Spider
+ManaCost:no cost
+Colors:black
+PT:2/1
+K:Menace
+K:Reach
+Oracle:Menace, reach

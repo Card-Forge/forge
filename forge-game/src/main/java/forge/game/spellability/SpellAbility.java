@@ -45,6 +45,7 @@ import forge.game.ForgeScript;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.GameEntity;
+import forge.game.GameEntityCounterTable;
 import forge.game.GameObject;
 import forge.game.IHasSVars;
 import forge.game.IIdentifiable;
@@ -186,6 +187,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private CardDamageMap damageMap = null;
     private CardDamageMap preventMap = null;
+    private GameEntityCounterTable counterTable = null;
     private CardZoneTable changeZoneTable = null;
 
     public CardCollection getLastStateBattlefield() {
@@ -1046,6 +1048,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
             if (preventMap != null) {
                 clone.preventMap = new CardDamageMap(preventMap);
+            }
+            if (counterTable != null) {
+                clone.counterTable = new GameEntityCounterTable(counterTable);
             }
             if (changeZoneTable != null) {
                 clone.changeZoneTable = new CardZoneTable();
@@ -2231,6 +2236,15 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return null;
     }
 
+    public GameEntityCounterTable getCounterTable() {
+        if (counterTable != null) {
+            return counterTable;
+        } else if (getParent() != null) {
+            return getParent().getCounterTable();
+        }
+        return null;
+    }
+
     public CardZoneTable getChangeZoneTable() {
         if (changeZoneTable != null) {
             return changeZoneTable;
@@ -2245,6 +2259,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
     public void setPreventMap(final CardDamageMap map) {
         preventMap = map;
+    }
+    public void setCounterTable(final GameEntityCounterTable table) {
+        counterTable = table;
     }
     public void setChangeZoneTable(final CardZoneTable table) {
         changeZoneTable = table;

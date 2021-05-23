@@ -11,6 +11,7 @@ import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -309,9 +310,8 @@ public abstract class TapAiBase extends SpellAbilityAi {
                 return true;
             }
 
-            // TODO: use Defined to determine, if this is an unfavorable result
-
-            return true;
+            final List<Card> pDefined = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
+            return pDefined.isEmpty() || (pDefined.get(0).isUntapped() && pDefined.get(0).getController() != ai);
         } else {
             sa.resetTargets();
             if (tapPrefTargeting(ai, source, sa, mandatory)) {

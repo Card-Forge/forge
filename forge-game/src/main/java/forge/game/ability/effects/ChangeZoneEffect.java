@@ -97,13 +97,13 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         // Player whose cards will change zones
         List<Player> fetchers = null;
         if (sa.hasParam("DefinedPlayer")) {
-            fetchers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("DefinedPlayer"), sa);
+            fetchers = AbilityUtils.getDefinedPlayers(host, sa.getParam("DefinedPlayer"), sa);
         }
         if (fetchers == null && sa.hasParam("ValidTgts") && sa.usesTargeting()) {
             fetchers = Lists.newArrayList(sa.getTargets().getTargetPlayers());
         }
         if (fetchers == null) {
-            fetchers = Lists.newArrayList(sa.getHostCard().getController());
+            fetchers = Lists.newArrayList(host.getController());
         }
 
         final String fetcherNames = Lang.joinHomogenous(fetchers, Player.Accessors.FN_GET_NAME);
@@ -111,7 +111,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         // Player who chooses the cards to move
         List<Player> choosers = Lists.newArrayList();
         if (sa.hasParam("Chooser")) {
-            choosers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Chooser"), sa);
+            choosers = AbilityUtils.getDefinedPlayers(host, sa.getParam("Chooser"), sa);
         }
         if (choosers.isEmpty()) {
             choosers.add(sa.getActivatingPlayer());
@@ -462,7 +462,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             if (sa.hasParam("AlternativeDecider")) {
                 alterDecider = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("AlternativeDecider"), sa).get(0);
             }
-            if (!alterDecider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneToAltDestination, sb.toString(), null)) {
+            if (!alterDecider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneToAltDestination, sb.toString())) {
                 destination = ZoneType.smartValueOf(sa.getParam("DestinationAlternative"));
                 altDest = true;
             }
@@ -502,7 +502,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         Player chooser = player;
         if (sa.hasParam("Chooser")) {
-            chooser = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Chooser"), sa).get(0);
+            chooser = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("Chooser"), sa).get(0);
         }
 
         for (final Card tgtC : tgtCards) {
@@ -521,7 +521,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
 
             final String prompt = TextUtil.concatWithSpace(Localizer.getInstance().getMessage("lblDoYouWantMoveTargetFromOriToDest", CardTranslation.getTranslatedName(gameCard.getName()), Lang.joinHomogenous(origin, ZoneType.Accessors.GET_TRANSLATED_NAME), destination.getTranslatedName()));
-            if (optional && !chooser.getController().confirmAction(sa, null, prompt, null) )
+            if (optional && !chooser.getController().confirmAction(sa, null, prompt) )
                 continue;
 
             final Zone originZone = game.getZoneOf(gameCard);
@@ -636,8 +636,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         hostCard.removeRemembered(gameCard);
                     }
 
-                    // Auras without Candidates stay in their current
-                    // location
+                    // Auras without Candidates stay in their current location
                     if (gameCard.isAura()) {
                         final SpellAbility saAura = gameCard.getFirstAttachSpell();
                         if (saAura != null) {
@@ -678,12 +677,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         game.getCombat().addAttacker(movedCard, defender);
                         game.getCombat().getBandOfAttacker(movedCard).setBlocked(false);
                         combatChanged = true;
-                    }
-                    if (sa.hasParam("Tapped") || sa.hasParam("Ninjutsu")) {
-                        movedCard.setTapped(true);
-                    }
-                    if (sa.hasParam("Untapped")) {
-                        movedCard.setTapped(false);
                     }
                     movedCard.setTimestamp(ts);
                 } else {
@@ -812,7 +805,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         triggerList.triggerChangesZoneAll(game, sa);
         counterTable.triggerCountersPutAll(game);
 
-
         if (sa.hasParam("AtEOT") && !triggerList.isEmpty()) {
             registerDelayedTrigger(sa, sa.getParam("AtEOT"), triggerList.allCards());
         }
@@ -911,7 +903,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 sb.append(sa.getParam("AlternativeMessage")).append(" ");
                 sb.append(altFetchList.size()).append(" " + Localizer.getInstance().getMessage("lblCardMatchSearchingTypeInAlternateZones"));
 
-                if (!decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneFromAltSource, sb.toString(), null)) {
+                if (!decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneFromAltSource, sb.toString())) {
                     origin = alt;
                 }
             }
@@ -923,7 +915,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 final StringBuilder sb = new StringBuilder();
                 sb.append(sa.getParam("AlternativeDestinationMessage"));
 
-                if (!decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneToAltDestination, sb.toString(), null)) {
+                if (!decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneToAltDestination, sb.toString())) {
                     destination = ZoneType.smartValueOf(sa.getParam("DestinationAlternative"));
                     libraryPos = sa.hasParam("LibraryPositionAlternative") ? Integer.parseInt(sa.getParam("LibraryPositionAlternative")) : 0;
                 }
@@ -941,7 +933,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     prompt = Localizer.getInstance().getMessage("lblSearchPlayerZoneConfirm", "{player's}", Lang.joinHomogenous(origin, ZoneType.Accessors.GET_TRANSLATED_NAME).toLowerCase());
                 }
                 String message = MessageUtil.formatMessage(prompt , decider, player);
-                if (!decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneGeneral, message, null)) {
+                if (!decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneGeneral, message)) {
                     return;
                 }
             }
@@ -1024,7 +1016,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             continue;
                         }
                         SpellAbility tgtSA = decider.getController().getAbilityToPlay(tgtCard, sas);
-                        if (!decider.getController().confirmAction(tgtSA, null, Localizer.getInstance().getMessage("lblDoYouWantPlayCard", CardTranslation.getTranslatedName(tgtCard.getName())), null)) {
+                        if (!decider.getController().confirmAction(tgtSA, null, Localizer.getInstance().getMessage("lblDoYouWantPlayCard", CardTranslation.getTranslatedName(tgtCard.getName())))) {
                             continue;
                         }
                         tgtSA.setSVar("IsCastFromPlayEffect", "True");
@@ -1133,7 +1125,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         final int num = Math.min(fetchList.size(), changeNum - i);
                         String message = Localizer.getInstance().getMessage("lblCancelSearchUpToSelectNumCards", String.valueOf(num));
 
-                        if (fetchList.isEmpty() || decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneGeneral, message, null)) {
+                        if (fetchList.isEmpty() || decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneGeneral, message)) {
                             break;
                         }
                         i--;
@@ -1292,11 +1284,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         setFaceDownState(c, sa);
                     }
                     movedCard = game.getAction().moveToPlay(c, c.getController(), sa, moveParams);
-                    if (sa.hasParam("Tapped")) {
-                        movedCard.setTapped(true);
-                    } else if (sa.hasParam("Untapped")) {
-                        c.setTapped(false);
-                    }
 
                     movedCard.setTimestamp(ts);
                 }

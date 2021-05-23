@@ -13,8 +13,7 @@ public class GameLossAi extends SpellAbilityAi {
             return false;
         }
 
-        // Only one SA Lose the Game card right now, which is Door to
-        // Nothingness
+        // Only one SA Lose the Game card right now, which is Door to Nothingness
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {

@@ -1,7 +1,5 @@
 package forge.ai.ability;
 
-import java.util.Map;
-
 import com.google.common.base.Predicates;
 
 import forge.ai.ComputerUtilMana;
@@ -121,11 +119,9 @@ public class ScryAi extends SpellAbilityAi {
             return false;
         }
 
-        double chance = .4; // 40 percent chance of milling with instant speed
-                            // stuff
+        double chance = .4; // 40 percent chance of milling with instant speed stuff
         if (SpellAbilityAi.isSorcerySpeed(sa)) {
-            chance = .667; // 66.7% chance for sorcery speed (since it will
-                           // never activate EOT)
+            chance = .667; // 66.7% chance for sorcery speed (since it will never activate EOT)
         }
         boolean randomReturn = MyRandom.getRandom().nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
 
@@ -137,7 +133,7 @@ public class ScryAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         return true;
     }
 }

@@ -303,8 +303,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         final int deckMinSize = Math.min(mainSize, gameType.getDeckFormat().getMainRange().getMinimum());
         final Range<Integer> sbRange = gameType.getDeckFormat().getSideRange();
-        // Limited doesn't have a sideboard max, so let the Main min take care
-        // of things.
+        // Limited doesn't have a sideboard max, so let the Main min take care of things.
         final int sbMax = sbRange == null ? combinedDeckSize : sbRange.getMaximum();
 
         List<PaperCard> newMain = null;
@@ -493,8 +492,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public CardCollectionView chooseCardsForEffect(final CardCollectionView sourceList, final SpellAbility sa,
             final String title, final int min, final int max, final boolean isOptional, Map<String, Object> params) {
         // If only one card to choose, use a dialog box.
-        // Otherwise, use the order dialog to be able to grab multiple cards in
-        // one shot
+        // Otherwise, use the order dialog to be able to grab multiple cards in one shot
 
         if (min == 1 && max == 1) {
             final Card singleChosen = chooseSingleEntityForEffect(sourceList, sa, title, isOptional, params);
@@ -527,8 +525,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public <T extends GameEntity> T chooseSingleEntityForEffect(final FCollectionView<T> optionList,
             final DelayedReveal delayedReveal, final SpellAbility sa, final String title, final boolean isOptional,
             final Player targetedPlayer, Map<String, Object> params) {
-        // Human is supposed to read the message and understand from it what to
-        // choose
+        // Human is supposed to read the message and understand from it what to choose
         if (optionList.isEmpty()) {
             if (delayedReveal != null) {
                 reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(),
@@ -580,8 +577,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         Sentry.getContext().addExtra("Card", sa.getCardView().toString());
         Sentry.getContext().addExtra("SpellAbility", sa.toString());
 
-        // Human is supposed to read the message and understand from it what to //
-        // choose
+        // Human is supposed to read the message and understand from it what to choose
         if (optionList.isEmpty()) {
             if (delayedReveal != null) {
                 reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(),
@@ -679,7 +675,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
      * SpellAbility, java.lang.String, java.lang.String)
      */
     @Override
-    public boolean confirmAction(final SpellAbility sa, final PlayerActionConfirmMode mode, final String message, Map<String, Object> params) {
+    public boolean confirmAction(final SpellAbility sa, final PlayerActionConfirmMode mode, final String message) {
         if (sa != null && sa.getHostCard() != null && sa.hasParam("ShowCardInPrompt")) {
             // The card wants another thing displayed in the prompt on mouse over rather than itself
             Card show = null;
@@ -1275,6 +1271,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     continue;
                 }
                 if (sa.hasParam("TokenScript")) {
+                    sa.setActivatingPlayer(player);
                     Card protoType = TokenInfo.getProtoType(sa.getParam("TokenScript"), sa);
                     for (String type : protoType.getType().getCreatureTypes()) {
                         Integer count = typesInDeck.get(type);
@@ -1290,6 +1287,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 SpellAbility sa = t.ensureAbility();
                 if (sa != null) {
                     if (sa.hasParam("TokenScript")) {
+                        sa.setActivatingPlayer(player);
                         Card protoType = TokenInfo.getProtoType(sa.getParam("TokenScript"), sa);
                         for (String type : protoType.getType().getCreatureTypes()) {
                             Integer count = typesInDeck.get(type);
@@ -1368,8 +1366,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public CardCollectionView getCardsToMulligan(final Player firstPlayer) {
-        // Partial Paris is gone, so it being commander doesn't really matter
-        // anymore...
+        // Partial Paris is gone, so it being commander doesn't really matter anymore...
         final InputConfirmMulligan inp = new InputConfirmMulligan(this, player, firstPlayer);
         inp.showAndWait();
         return inp.isKeepHand() ? null : player.getCardsIn(ZoneType.Hand);
@@ -1408,20 +1405,17 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         if (mayAutoPass()) {
             // avoid prompting for input if current phase is set to be
-            // auto-passed
-            // instead posing a short delay if needed to prevent the game
-            // jumping ahead too quick
+            // auto-passed instead posing a short delay if needed to
+            // prevent the game jumping ahead too quick
             int delay = 0;
             if (stack.isEmpty()) {
-                // make sure to briefly pause at phases you're not set up to
-                // skip
+                // make sure to briefly pause at phases you're not set up to skip
                 if (!getGui().isUiSetToSkipPhase(getGame().getPhaseHandler().getPlayerTurn().getView(),
                         getGame().getPhaseHandler().getPhase())) {
                     delay = FControlGamePlayback.phasesDelay;
                 }
             } else {
-                // pause slightly longer for spells and abilities on the stack
-                // resolving
+                // pause slightly longer for spells and abilities on the stack resolving
                 delay = FControlGamePlayback.resolveDelay;
             }
             if (delay > 0) {
@@ -1443,8 +1437,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         } else {
             final SpellAbility ability = stack.peekAbility();
             if (ability != null && ability.isAbility() && getGui().shouldAutoYield(ability.yieldKey())) {
-                // avoid prompt for input if top ability of stack is set to
-                // auto-yield
+                // avoid prompt for input if top ability of stack is set to auto-yield
                 try {
                     Thread.sleep(FControlGamePlayback.resolveDelay);
                 } catch (final InterruptedException e) {
@@ -2939,8 +2932,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         // Position in the macro "sequence".
         private int sequenceIndex = 0;
         // "Actions" are stored as a pair of the "action" recipient (the entity
-        // to "click") and a boolean representing whether the entity is a
-        // player.
+        // to "click") and a boolean representing whether the entity is a player.
         private final List<Pair<GameEntityView, Boolean>> rememberedActions = Lists.newArrayList();
         private String rememberedSequenceText = "";
 
@@ -2961,10 +2953,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             final List<Pair<Integer, Boolean>> entityInfo = Lists.newArrayList();
             final int playerID = getPlayer().getId();
             // Only support 1 opponent for now. There are some ideas about
-            // supporting
-            // multiplayer games in the future, but for now it would complicate
-            // the parsing
-            // process, and this implementation is still a "proof of concept".
+            // supporting multiplayer games in the future, but for now it would complicate
+            // the parsing process, and this implementation is still a "proof of concept".
             int opponentID = 0;
             for (final Player player : getGame().getPlayers()) {
                 if (player.getId() != playerID) {
@@ -2974,8 +2964,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
 
             // A more informative prompt would be useful, but the dialog seems
-            // to
-            // like to clip text in long messages...
+            // to like to clip text in long messages...
             final String prompt = localizer.getMessage("lblEnterASequence");
             String textSequence = getGui().showInputDialog(prompt, dialogTitle, FSkinProp.ICO_QUEST_NOTES,
                     rememberedSequenceText);
@@ -2988,8 +2977,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 return;
             }
             // If they haven't changed the sequence, inform them the index is
-            // reset
-            // but don't change rememberedActions.
+            // reset but don't change rememberedActions.
             if (textSequence.equals(rememberedSequenceText)) {
                 if (currentIndex > 0 && currentIndex < rememberedActions.size()) {
                     getGui().message(localizer.getMessage("lblRestartingActionSequence"), dialogTitle);
@@ -3001,8 +2989,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
             // Clean up input
             textSequence = textSequence.trim().toLowerCase().replaceAll("[@%]", "");
-            // Replace "opponent" and "me" with symbols to ease following
-            // replacements
+            // Replace "opponent" and "me" with symbols to ease following replacements
             textSequence = textSequence.replaceAll("\\bopponent\\b", "%").replaceAll("\\bme\\b", "@");
             // Strip user input of anything that's not a
             // digit/comma/whitespace/special symbol
@@ -3226,4 +3213,3 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
 }
-

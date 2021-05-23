@@ -21,6 +21,7 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
+import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
@@ -193,7 +194,7 @@ public class MillAi extends SpellAbilityAi {
      * @see forge.card.ability.SpellAbilityAi#confirmAction(forge.game.player.Player, forge.card.spellability.SpellAbility, forge.game.player.PlayerActionConfirmMode, java.lang.String)
      */
     @Override
-    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         if ("TimmerianFiends".equals(sa.getParam("AILogic"))) {
             return SpecialCardAi.TimmerianFiends.consider(player, sa);
         }
@@ -214,13 +215,7 @@ public class MillAi extends SpellAbilityAi {
         }
 
         // get targeted or defined Player with largest library 
-        // TODO in Java 8 find better way
-        final Player m = Collections.max(list, new Comparator<Player>() {
-            @Override
-            public int compare(Player arg0, Player arg1) {
-                return arg0.getCardsIn(ZoneType.Library).size() - arg1.getCardsIn(ZoneType.Library).size();
-            }
-        });
+        final Player m = Collections.max(list, PlayerPredicates.compareByZoneSize(ZoneType.Library));
 
         int cardsToDiscard =  m.getCardsIn(ZoneType.Library).size();
 

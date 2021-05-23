@@ -198,8 +198,6 @@ public class HumanPlay {
         req.playAbility(!useOldTargets, false, true);
     }
 
-    // ------------------------------------------------------------------------
-
     private static int getAmountFromPart(CostPart part, Card source, SpellAbility sourceAbility) {
         String amountString = part.getAmount();
         return StringUtils.isNumeric(amountString) ? Integer.parseInt(amountString) : AbilityUtils.calculateAmount(source, amountString, sourceAbility);

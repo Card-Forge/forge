@@ -220,7 +220,6 @@ public class CardFactory {
         return getCard(cp, owner, owner == null ? -1 : owner.getGame().nextCardId(), game);
     }
     public final static Card getCard(final IPaperCard cp, final Player owner, final int cardId, final Game game) {
-        //System.out.println(cardName);
         CardRules cardRules = cp.getRules();
         final Card c = readCard(cardRules, cp, cardId, game);
         c.setRules(cardRules);

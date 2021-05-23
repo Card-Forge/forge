@@ -334,7 +334,7 @@ public class ComputerUtilCombat {
      */
     public static int resultingPoison(final Player ai, final Combat combat) {
 
-        // ai can't get poision counters, so the value can't change
+        // ai can't get poison counters, so the value can't change
         if (!ai.canReceiveCounters(CounterEnumType.POISON)) {
             return ai.getPoisonCounters();
         }
@@ -411,7 +411,6 @@ public class ComputerUtilCombat {
         if (!CardLists.filter(otb, CardPredicates.nameEquals("Elderscale Wurm")).isEmpty() && ai.getLife() >= 7) {
             return false;
         }
-
 
         // check for creatures that must be blocked
         final List<Card> attackers = combat.getAttackersOf(ai);
@@ -492,8 +491,7 @@ public class ComputerUtilCombat {
     }
 
     public static boolean lifeInSeriousDanger(final Player ai, final Combat combat, final int payment) {
-        // life in danger only cares about the player's life. Not about a
-        // Planeswalkers life
+        // life in danger only cares about the player's life. Not about a Planeswalkers life
         if (ai.cantLose() || combat == null) {
             return false;
         }
@@ -568,8 +566,7 @@ public class ComputerUtilCombat {
         return damage;
     }
 
-    // This calculates the amount of damage a blocker in a blockgang can deal to
-    // the attacker
+    // This calculates the amount of damage a blocker in a blockgang can deal to the attacker
     /**
      * <p>
      * dealsDamageAsBlocker.
@@ -582,7 +579,6 @@ public class ComputerUtilCombat {
      * @return a int.
      */
     public static int dealsDamageAsBlocker(final Card attacker, final Card defender) {
-
         int defenderDamage = predictDamageByBlockerWithoutDoubleStrike(attacker, defender);
 
         if (defender.hasKeyword(Keyword.DOUBLE_STRIKE)) {
@@ -647,7 +643,6 @@ public class ComputerUtilCombat {
      * @return a int.
      */
     public static int totalShieldDamage(final Card attacker, final List<Card> defenders) {
-
         int defenderDefense = 0;
 
         for (final Card defender : defenders) {
@@ -671,7 +666,6 @@ public class ComputerUtilCombat {
      * @return a int.
      */
     public static int shieldDamage(final Card attacker, final Card blocker) {
-
         if (ComputerUtilCombat.canDestroyBlockerBeforeFirstStrike(blocker, attacker, false)) {
         	return 0;
         }
@@ -932,8 +926,7 @@ public class ComputerUtilCombat {
         }
 
         final Game game = attacker.getGame();
-        // look out for continuous static abilities that only care for blocking
-        // creatures
+        // look out for continuous static abilities that only care for blocking creatures
         final CardCollectionView cardList = CardCollection.combine(game.getCardsIn(ZoneType.Battlefield), game.getCardsIn(ZoneType.Command));
         for (final Card card : cardList) {
             for (final StaticAbility stAb : card.getStaticAbilities()) {
@@ -1233,8 +1226,7 @@ public class ComputerUtilCombat {
             theTriggers.addAll(blocker.getTriggers());
         }
 
-        // look out for continuous static abilities that only care for attacking
-        // creatures
+        // look out for continuous static abilities that only care for attacking creatures
         if (!withoutCombatStaticAbilities) {
             final CardCollectionView cardList = CardCollection.combine(game.getCardsIn(ZoneType.Battlefield), game.getCardsIn(ZoneType.Command));
             for (final Card card : cardList) {
@@ -1421,8 +1413,7 @@ public class ComputerUtilCombat {
             theTriggers.addAll(blocker.getTriggers());
         }
 
-        // look out for continuous static abilities that only care for attacking
-        // creatures
+        // look out for continuous static abilities that only care for attacking creatures
         if (!withoutCombatStaticAbilities) {
             final CardCollectionView cardList = game.getCardsIn(ZoneType.Battlefield);
             for (final Card card : cardList) {
@@ -2257,7 +2248,6 @@ public class ComputerUtilCombat {
      */
 
     public final static int predictDamageTo(final Player target, final int damage, final Card source, final boolean isCombat) {
-
         final Game game = target.getGame();
         int restDamage = damage;
 
@@ -2318,13 +2308,7 @@ public class ComputerUtilCombat {
     // This function helps the AI calculate the actual amount of damage an
     // effect would deal
     public final static int predictDamageTo(final Card target, final int damage, final Card source, final boolean isCombat) {
-
-        int restDamage = damage;
-
-        restDamage = target.staticReplaceDamage(restDamage, source, isCombat);
-        restDamage = target.staticDamagePrevention(restDamage, 0, source, isCombat);
-
-        return restDamage;
+        return predictDamageTo(target, damage, 0, source, isCombat);
     }
 
 
@@ -2346,7 +2330,6 @@ public class ComputerUtilCombat {
      * @return a int.
      */
     public final static int predictDamageTo(final Card target, final int damage, final int possiblePrevention, final Card source, final boolean isCombat) {
-
         int restDamage = damage;
 
         restDamage = target.staticReplaceDamage(restDamage, source, isCombat);
@@ -2356,7 +2339,6 @@ public class ComputerUtilCombat {
     }
 
     public final static boolean dealsFirstStrikeDamage(final Card combatant, final boolean withoutAbilities, final Combat combat) {
-
         if (combatant.hasKeyword(Keyword.DOUBLE_STRIKE) || combatant.hasKeyword(Keyword.FIRST_STRIKE)) {
             return true;
         }
@@ -2480,20 +2462,6 @@ public class ComputerUtilCombat {
         return afflictDmg > attacker.getNetPower() || afflictDmg >= aiDefender.getLife();
     }
 
-    public static int getMaxAttackersFor(final GameEntity defender) {
-        if (defender instanceof Player) {
-            for (final Card card : ((Player) defender).getCardsIn(ZoneType.Battlefield)) {
-                if (card.hasKeyword("No more than one creature can attack you each combat.")) {
-                    return 1;
-                } else if (card.hasKeyword("No more than two creatures can attack you each combat.")) {
-                    return 2;
-                }
-            }
-        }
-
-        return -1;
-    }
-
     public static List<Card> categorizeAttackersByEvasion(List<Card> attackers) {
         List<Card> categorizedAttackers = Lists.newArrayList();
 
@@ -2583,5 +2551,3 @@ public class ComputerUtilCombat {
         return false;
     }
 }
-
-

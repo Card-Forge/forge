@@ -282,18 +282,19 @@ public class ReplacementHandler {
     }
 
     private void putPreventMapEntry(final Map<AbilityKey, Object> runParams) {
-        // Set prevent map entry
-        CardDamageMap preventMap = (CardDamageMap) runParams.get(AbilityKey.PreventMap);
-        Card source = (Card) runParams.get(AbilityKey.DamageSource);
+        Card sourceLKI = (Card) runParams.get(AbilityKey.DamageSource);
         GameEntity target = (GameEntity) runParams.get(AbilityKey.Affected);
         Integer damage = (Integer) runParams.get(AbilityKey.DamageAmount);
-        preventMap.put(source, target, damage);
+
+        // Set prevent map entry
+        CardDamageMap preventMap = (CardDamageMap) runParams.get(AbilityKey.PreventMap);
+        preventMap.put(sourceLKI, target, damage);
 
         // Following codes are commented out since DamagePrevented trigger is currently not used by any Card.
         // final Map<AbilityKey, Object> trigParams = AbilityKey.newMap();
         // trigParams.put(AbilityKey.DamageTarget, target);
         // trigParams.put(AbilityKey.DamageAmount, damage);
-        // trigParams.put(AbilityKey.DamageSource, source);
+        // trigParams.put(AbilityKey.DamageSource, sourceLKI);
         // trigParams.put(AbilityKey.IsCombatDamage, runParams.get(AbilityKey.IsCombat));
         // game.getTriggerHandler().runTrigger(TriggerType.DamagePrevented, trigParams, false);
     }
