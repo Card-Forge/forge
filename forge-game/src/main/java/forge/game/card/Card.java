@@ -5521,7 +5521,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void setRandomFoil() {
         setFoil(CardEdition.getRandomFoil(getSetCode()));
     }
-
     public final void setFoil(final int f) {
         currentState.setSVar("Foil", Integer.toString(f));
     }
@@ -5565,9 +5564,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return pairedWith != null;
     }
 
-    public Card getMeldedWith() {   return meldedWith;  }
-
-    public void setMeldedWith(Card meldedWith) {    this.meldedWith = meldedWith;   }
+    public Card getMeldedWith() { return meldedWith; }
+    public void setMeldedWith(Card meldedWith) { this.meldedWith = meldedWith; }
 
     public final int getDamageDoneThisTurn() {
         int sum = 0;
