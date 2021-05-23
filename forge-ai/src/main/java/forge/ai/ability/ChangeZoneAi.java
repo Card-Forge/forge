@@ -1989,8 +1989,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 boolean setPayX = false;
                 if (unlessCost.equals("X") && sa.getSVar(unlessCost).equals("Count$xPaid")) {
                     setPayX = true;
-                    // TODO use ComputerUtilCost.getMaxXValue if able
-                    toPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
+                    toPay = ComputerUtilCost.getMaxXValue(sa, ai);
                 } else {
                     toPay = AbilityUtils.calculateAmount(source, unlessCost, sa);
                 }
