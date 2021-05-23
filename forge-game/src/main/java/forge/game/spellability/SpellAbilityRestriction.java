@@ -265,13 +265,13 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                     }
 
                     if (params.containsKey("Affected")) {
-                        if (!cp.isValid(params.get("Affected").split(","), activator, o.getHost(), null)) {
+                        if (!cp.isValid(params.get("Affected").split(","), activator, o.getHost(), sa)) {
                             return false;
                         }
                     }
 
                     if (params.containsKey("ValidSA")) {
-                        if (!sa.isValid(params.get("ValidSA").split(","), activator, o.getHost(), null)) {
+                        if (!sa.isValid(params.get("ValidSA").split(","), activator, o.getHost(), sa)) {
                             return false;
                         }
                     }
