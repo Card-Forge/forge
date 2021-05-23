@@ -2378,4 +2378,12 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         }
         rollbackEffects.clear();
     }
+
+    public boolean isHidden() {
+        boolean hidden = hasParam("Hidden");
+        if (!hidden && hasParam("Origin")) {
+            hidden = ZoneType.isHidden(getParam("Origin"));
+        }
+        return hidden;
+    }
 }
