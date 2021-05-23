@@ -19,7 +19,7 @@ import forge.util.PredicateString;
 
 public interface IPaperCard extends InventoryItem, Serializable {
 
-    int NO_COLLECTOR_NUMBER = 0;
+    String NO_COLLECTOR_NUMBER = "N.A.";  // Placeholder for No-Collection number available
     int DEFAULT_ART_INDEX = 1;
 
     /**
@@ -229,7 +229,7 @@ public interface IPaperCard extends InventoryItem, Serializable {
 
     String getName();
     String getEdition();
-    int getCollectorNumber();
+    String getCollectorNumber();
     int getArtIndex();
     boolean isFoil();
     boolean isToken();

@@ -134,7 +134,7 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
     @Override public String getEdition() { return edition != null ? edition.getCode() : "???"; }
 
     @Override
-    public int getCollectorNumber() {
+    public String getCollectorNumber() {
         return IPaperCard.NO_COLLECTOR_NUMBER;
     }
 
