@@ -10,225 +10,219 @@ Booster=11 Common, 3 Uncommon, 1 Rare
 Foil=NotSupported
 
 [cards]
-R Alabaster Dragon
-R Alluring Scent
-U Anaconda
-U Anaconda
-R Ancestral Memories
-C Angelic Blessing
-R Archangel
-U Ardent Militia
-R Armageddon
-C Armored Pegasus
-U Arrogant Vampire
-U Assassin's Blade
-R Balance of Power
-U Baleful Stare
-U Bee Sting
-U Blaze
-U Blaze
-R Blessed Reversal
-R Blinding Light
-C Bog Imp
-C Bog Raiders
-U Bog Wraith
-U Boiling Seas
-C Border Guard
-C Breath of Life
-U Bull Hippo
-C Burning Cloak
-R Capricious Sorcerer
-U Charging Bandits
-U Charging Paladin
-R Charging Rhino
-C Cloak of Feathers
-R Cloud Dragon
-C Cloud Pirates
-U Cloud Spirit
-U Command of Unsummoning
-C Coral Eel
-C Craven Giant
-C Craven Knight
-R Cruel Bargain
-R Cruel Fate
-R Cruel Tutor
-U Deep Wood
-U Deep-Sea Serpent
-U Defiant Stand
-C Deja Vu
-U Desert Drake
-R Devastation
-C Devoted Hero
-R Djinn of the Lamp
-R Dread Charge
-R Dread Reaper
-U Dry Spell
-R Earthquake
-R Ebon Dragon
-C Elite Cat Warrior
-C Elite Cat Warrior
-C Elven Cache
-C Elvish Ranger
-R Endless Cockroaches
-R Exhaustion
-C False Peace
-C Feral Shadow
-R Final Strike
-R Fire Dragon
-U Fire Imp
-C Fire Snake
-R Fire Tempest
-U Flashfires
-C Fleet-Footed Monk
-U Flux
-C Foot Soldiers
-L Forest
-L Forest
-L Forest
-L Forest
-R Forked Lightning
-C Fruition
-C Giant Octopus
-C Giant Spider
-R Gift of Estates
-C Goblin Bully
-C Gorilla Warrior
-U Gravedigger
-C Grizzly Bears
-C Hand of Death
-C Hand of Death
-R Harsh Justice
-C Highland Giant
-C Hill Giant
-C Horned Turtle
-C Howling Fury
-U Hulking Cyclops
-C Hulking Goblin
-R Hurricane
-U Ingenious Thief
-L Island
-L Island
-L Island
-L Island
-C Jungle Lion
-C Keen-Eyed Archers
-R King's Assassin
-C Knight Errant
-R Last Chance
-C Lava Axe
-U Lava Flow
-C Lizard Warrior
-U Man-o'-War
-R Mercenary Knight
-C Merfolk of the Pearl Trident
-C Mind Knives
-C Mind Rot
-C Minotaur Warrior
-C Mobilize
-C Monstrous Growth
-C Monstrous Growth
-U Moon Sprite
-L Mountain
-L Mountain
-L Mountain
-L Mountain
-U Mountain Goat
-C Muck Rats
-U Mystic Denial
-R Natural Order
-U Natural Spring
-R Nature's Cloak
-C Nature's Lore
-U Nature's Ruin
-U Needle Storm
-U Noxious Toad
-C Omen
-C Owl Familiar
-C Panther Warriors
-C Path of Peace
-U Personal Tutor
-R Phantom Warrior
-R Pillaging Horde
-L Plains
-L Plains
-L Plains
-L Plains
-U Plant Elemental
-R Primeval Force
-R Prosperity
-R Pyroclasm
-C Python
-C Raging Cougar
-C Raging Goblin
-C Raging Goblin
-C Raging Minotaur
-U Rain of Salt
-U Rain of Tears
-C Raise Dead
-C Redwood Treefolk
-C Regal Unicorn
-U Renewing Dawn
-C Rowan Treefolk
-C Sacred Knight
-C Sacred Nectar
-C Scorching Spear
-U Scorching Winds
-U Seasoned Marshal
-R Serpent Assassin
-C Serpent Warrior
-C Skeletal Crocodile
-C Skeletal Snake
-C Snapping Drake
-C Sorcerous Sight
-C Soul Shred
-C Spined Wurm
-R Spiritual Guardian
-C Spitting Earth
-C Spotted Griffin
-C Stalking Tiger
-U Starlight
-U Starlit Angel
-C Steadfastness
-R Stern Marshal
-C Stone Rain
-C Storm Crow
-R Summer Bloom
-L Swamp
-L Swamp
-L Swamp
-L Swamp
-R Sylvan Tutor
-C Symbol of Unsummoning
-R Taunt
-R Temporary Truce
-U Theft of Dreams
-R Thing from the Deep
-R Thundering Wurm
-R Thundermare
-C Tidal Surge
-C Time Ebb
-C Touch of Brilliance
-R Treetop Defense
-C Undying Beast
-U Untamed Wilds
-U Valorous Charge
-U Vampiric Feast
-C Vampiric Touch
-U Venerable Monk
-U Vengeance
-U Virtue's Ruin
-R Volcanic Dragon
-C Volcanic Hammer
-U Wall of Granite
-U Wall of Swords
-C Warrior's Charge
-C Warrior's Charge
-U Whiptail Wurm
-R Wicked Pact
-C Willow Dryad
-C Wind Drake
-R Winds of Change
-U Winter's Grasp
-U Withering Gaze
-R Wood Elves
-R Wrath of God
+1 R Alabaster Dragon
+157 R Alluring Scent
+158 U Anaconda
+40 R Ancestral Memories
+2 C Angelic Blessing
+3 R Archangel
+4 U Ardent Militia
+5 R Armageddon
+6 C Armored Pegasus
+79 U Arrogant Vampire
+80 U Assassin's Blade
+41 R Balance of Power
+42 U Baleful Stare
+159 U Bee Sting
+118 U Blaze
+118s U Blaze
+7 R Blessed Reversal
+8 R Blinding Light
+81 C Bog Imp
+82 C Bog Raiders
+83 U Bog Wraith
+119 U Boiling Seas
+9 C Border Guard
+10 C Breath of Life
+160 U Bull Hippo
+120 C Burning Cloak
+43 R Capricious Sorcerer
+84 U Charging Bandits
+11 U Charging Paladin
+161 R Charging Rhino
+44 C Cloak of Feathers
+45 R Cloud Dragon
+46 C Cloud Pirates
+47 U Cloud Spirit
+48 U Command of Unsummoning
+49 C Coral Eel
+121 C Craven Giant
+85 C Craven Knight
+86 R Cruel Bargain
+50 R Cruel Fate
+87 R Cruel Tutor
+51 U Deep-Sea Serpent
+162 U Deep Wood
+12 U Defiant Stand
+53 C Deja Vu
+122 U Desert Drake
+123 R Devastation
+13 C Devoted Hero
+52 R Djinn of the Lamp
+88 R Dread Charge
+89 R Dread Reaper
+90 U Dry Spell
+124 R Earthquake
+91 R Ebon Dragon
+163 C Elite Cat Warrior
+164 C Elven Cache
+165 C Elvish Ranger
+92 R Endless Cockroaches
+54 R Exhaustion
+14 C False Peace
+93 C Feral Shadow
+94 R Final Strike
+125 R Fire Dragon
+126 U Fire Imp
+127 C Fire Snake
+128 R Fire Tempest
+129 U Flashfires
+15 C Fleet-Footed Monk
+55 U Flux
+16 C Foot Soldiers
+212 L Forest
+213 L Forest
+214 L Forest
+215 L Forest
+130 R Forked Lightning
+166 C Fruition
+56 C Giant Octopus
+167 C Giant Spider
+17 R Gift of Estates
+131 C Goblin Bully
+168 C Gorilla Warrior
+95 U Gravedigger
+169 C Grizzly Bears
+96 C Hand of Death
+18 R Harsh Justice
+132 C Highland Giant
+133 C Hill Giant
+57 C Horned Turtle
+97 C Howling Fury
+134 U Hulking Cyclops
+135 C Hulking Goblin
+170 R Hurricane
+58 U Ingenious Thief
+200 L Island
+201 L Island
+202 L Island
+203 L Island
+171 C Jungle Lion
+19 C Keen-Eyed Archers
+98 R King's Assassin
+20 C Knight Errant
+136 R Last Chance
+137 C Lava Axe
+138 U Lava Flow
+139 C Lizard Warrior
+59 U Man-o'-War
+99 R Mercenary Knight
+60 C Merfolk of the Pearl Trident
+100 C Mind Knives
+101 C Mind Rot
+140 C Minotaur Warrior
+172 C Mobilize
+173 C Monstrous Growth
+174 U Moon Sprite
+208 L Mountain
+209 L Mountain
+210 L Mountain
+211 L Mountain
+141 U Mountain Goat
+102 C Muck Rats
+61 U Mystic Denial
+175 R Natural Order
+176 U Natural Spring
+177 R Nature's Cloak
+178 C Nature's Lore
+103 U Nature's Ruin
+179 U Needle Storm
+104 U Noxious Toad
+62 C Omen
+63 C Owl Familiar
+180 C Panther Warriors
+21 C Path of Peace
+64 U Personal Tutor
+65 R Phantom Warrior
+142 R Pillaging Horde
+196 L Plains
+197 L Plains
+198 L Plains
+199 L Plains
+181 U Plant Elemental
+182 R Primeval Force
+66 R Prosperity
+143 R Pyroclasm
+105 C Python
+144 C Raging Cougar
+145 C Raging Goblin
+146 C Raging Minotaur
+147 U Rain of Salt
+106 U Rain of Tears
+107 C Raise Dead
+183 C Redwood Treefolk
+22 C Regal Unicorn
+23 U Renewing Dawn
+184 C Rowan Treefolk
+24 C Sacred Knight
+25 C Sacred Nectar
+148 C Scorching Spear
+149 U Scorching Winds
+26 U Seasoned Marshal
+108 R Serpent Assassin
+109 C Serpent Warrior
+110 C Skeletal Crocodile
+111 C Skeletal Snake
+67 C Snapping Drake
+68 C Sorcerous Sight
+112 C Soul Shred
+185 C Spined Wurm
+27 R Spiritual Guardian
+150 C Spitting Earth
+28 C Spotted Griffin
+186 C Stalking Tiger
+29 U Starlight
+30 U Starlit Angel
+31 C Steadfastness
+32 R Stern Marshal
+151 C Stone Rain
+69 C Storm Crow
+187 R Summer Bloom
+204 L Swamp
+205 L Swamp
+206 L Swamp
+207 L Swamp
+188 R Sylvan Tutor
+70 C Symbol of Unsummoning
+71 R Taunt
+33 R Temporary Truce
+72 U Theft of Dreams
+73 R Thing from the Deep
+189 R Thundering Wurm
+152 R Thundermare
+74 C Tidal Surge
+75 C Time Ebb
+76 C Touch of Brilliance
+190 R Treetop Defense
+113 C Undying Beast
+191 U Untamed Wilds
+34 U Valorous Charge
+114 U Vampiric Feast
+115 C Vampiric Touch
+35 U Venerable Monk
+36 U Vengeance
+116 U Virtue's Ruin
+153 R Volcanic Dragon
+154 C Volcanic Hammer
+155 U Wall of Granite
+37 U Wall of Swords
+38 C Warrior's Charge
+192 U Whiptail Wurm
+117 R Wicked Pact
+193 C Willow Dryad
+77 C Wind Drake
+156 R Winds of Change
+194 U Winter's Grasp
+78 U Withering Gaze
+195 R Wood Elves
+39 R Wrath of God

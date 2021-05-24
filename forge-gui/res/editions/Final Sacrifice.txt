@@ -5,4 +5,4 @@ Name=Final Sacrifice
 Type=Other
 
 [cards]
-C Mana Crypt
+5 C Mana Crypt

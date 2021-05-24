@@ -1,7 +1,7 @@
 [metadata]
 Code=PBNG
 Date=2014-02-01
-Name=Born of the Gods Promos 
+Name=Born of the Gods Promos
 Type=Promos
 
 [cards]

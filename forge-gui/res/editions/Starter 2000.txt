@@ -10,60 +10,22 @@ Foil=OldStyle
 FoilAlwaysInCommonSlot=False
 
 [cards]
-C Angelic Blessing
-C Armored Pegasus
-C Bog Imp
-U Breath of Life
-C Coercion
-C Counterspell
-C Disenchant
-C Drudge Skeletons
-C Durkwood Boars
-C Eager Cadet
-C Flame Spirit
-C Flight
-L Forest
-L Forest
-C Giant Growth
-C Giant Octopus
-C Goblin Hero
-C Hand of Death
-C Hero's Resolve
-C Inspiration
-L Island
-L Island
-C Knight Errant
-C Lava Axe
-C Llanowar Elves
-C Merfolk of the Pearl Trident
-C Mons's Goblin Raiders
-C Monstrous Growth
-U Moon Sprite
-L Mountain
-L Mountain
-U Obsianus Golem
-C Ogre Warrior
-U Orcish Oriflamme
-L Plains
-L Plains
-C Prodigal Sorcerer
-C Python
-U Rod of Ruin
-C Royal Falcon
-C Samite Healer
-C Scathe Zombies
-C Sea Eagle
-C Shock
-U Soul Net
-C Spined Wurm
-C Stone Rain
-L Swamp
-L Swamp
-C Terror
-C Time Ebb
-R Trained Orgg
-C Venerable Monk
-R Vizzerdrix
-C Wild Griffin
-C Willow Elf
-C Wind Drake
+1 C Angelic Blessing
+3 U Breath of Life
+38 C Durkwood Boars
+5 C Eager Cadet
+14 C Giant Octopus
+25 C Hand of Death
+7 C Knight Errant
+31 C Lava Axe
+32 C Mons's Goblin Raiders
+41 C Monstrous Growth
+42 U Moon Sprite
+33 C Ogre Warrior
+8 C Royal Falcon
+18 C Sea Eagle
+19 C Time Ebb
+37 R Trained Orgg
+20 R Vizzerdrix
+11 C Wild Griffin
+45 C Willow Elf

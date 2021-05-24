@@ -8,30 +8,30 @@ MciCode=mbp
 Type=Other
 
 [cards]
-1 S Arena
-R Avatar of Hope
-R Beast of Burden
-R Dirtcowl Wurm
-R False Prophet
-R Feral Throwback
-R Fungal Shambler
-8 S Giant Badger
-R Glory
-R Helm of Kaldra
-R Laquatus's Champion
-R Lightning Dragon
-6 S Mana Crypt
-R Monstrous Hound
-3 S Nalathni Dragon
-R Overtaker
-R Questing Phelddagrif
-R Raging Kavu
-R Rathi Assassin
-R Revenant
-R Ryusei, the Falling Star
-2 S Sewers of Estark
-R Shield of Kaldra
-R Silent Specter
-R Soul Collector
-R Sword of Kaldra
-7 S Windseeker Centaur
+35958 S Arena
+32206 R Avatar of Hope
+32198 R Beast of Burden
+32190 R Dirtcowl Wurm
+32200 R False Prophet
+36256 R Feral Throwback
+36236 R Fungal Shambler
+35960 S Giant Badger
+36248 R Glory
+31989 R Helm of Kaldra
+37875 R Laquatus's Champion
+32196 R Lightning Dragon
+35962 S Mana Crypt
+32194 R Monstrous Hound
+35956 S Nalathni Dragon
+32202 R Overtaker
+36234 R Questing Phelddagrif
+36206 R Raging Kavu
+32204 R Rathi Assassin
+32192 R Revenant
+32001 R Ryusei, the Falling Star
+35964 R Sewers of Estark
+31985 R Shield of Kaldra
+36252 R Silent Specter
+36268 R Soul Collector
+31987 R Sword of Kaldra
+35966 S Windseeker Centaur

@@ -11,193 +11,193 @@ BoosterBox=60
 Foil=NotSupported
 
 [cards]
-R Aeolipile
-C Armor Thrull
-C Armor Thrull
-C Armor Thrull
-C Armor Thrull
-R Balm of Restoration
-C Basal Thrull
-C Basal Thrull
-C Basal Thrull
-C Basal Thrull
-R Bottomless Vault
-C Brassclaw Orcs
-C Brassclaw Orcs
-C Brassclaw Orcs
-C Brassclaw Orcs
-U Breeding Pit
-C Combat Medic
-C Combat Medic
-C Combat Medic
-C Combat Medic
-R Conch Horn
-U Deep Spawn
-C Delif's Cone
-R Delif's Cube
-R Derelor
-R Draconian Cylix
-R Dwarven Armorer
-U Dwarven Catapult
-R Dwarven Hold
-U Dwarven Lieutenant
-U Dwarven Ruins
-C Dwarven Soldier
-C Dwarven Soldier
-C Dwarven Soldier
-R Ebon Praetor
-U Ebon Stronghold
-C Elven Fortress
-C Elven Fortress
-C Elven Fortress
-C Elven Fortress
-R Elven Lyre
-R Elvish Farmer
-C Elvish Hunter
-C Elvish Hunter
-C Elvish Hunter
-C Elvish Scout
-C Elvish Scout
-C Elvish Scout
-U Farrel's Mantle
-C Farrel's Zealot
-C Farrel's Zealot
-C Farrel's Zealot
-U Farrelite Priest
-U Feral Thallid
-R Fungal Bloom
-C Goblin Chirurgeon
-C Goblin Chirurgeon
-C Goblin Chirurgeon
-R Goblin Flotilla
-C Goblin Grenade
-C Goblin Grenade
-C Goblin Grenade
-U Goblin Kites
-C Goblin War Drums
-C Goblin War Drums
-C Goblin War Drums
-C Goblin War Drums
-R Goblin Warrens
-R Hand of Justice
-U Havenwood Battleground
-U Heroism
-C High Tide
-C High Tide
-C High Tide
-R Hollow Trees
-C Homarid
-C Homarid
-C Homarid
-C Homarid
-R Homarid Shaman
-U Homarid Spawning Bed
-C Homarid Warrior
-C Homarid Warrior
-C Homarid Warrior
-C Hymn to Tourach
-C Hymn to Tourach
-C Hymn to Tourach
-C Hymn to Tourach
-C Icatian Infantry
-C Icatian Infantry
-C Icatian Infantry
-C Icatian Infantry
-C Icatian Javelineers
-C Icatian Javelineers
-C Icatian Javelineers
-R Icatian Lieutenant
-C Icatian Moneychanger
-C Icatian Moneychanger
-C Icatian Moneychanger
-U Icatian Phalanx
-U Icatian Priest
-C Icatian Scout
-C Icatian Scout
-C Icatian Scout
-C Icatian Scout
-R Icatian Skirmishers
-R Icatian Store
-R Icatian Town
-R Implements of Sacrifice
-C Initiates of the Ebon Hand
-C Initiates of the Ebon Hand
-C Initiates of the Ebon Hand
-C Merseine
-C Merseine
-C Merseine
-C Merseine
-C Mindstab Thrull
-C Mindstab Thrull
-C Mindstab Thrull
-C Necrite
-C Necrite
-C Necrite
-C Night Soil
-C Night Soil
-C Night Soil
-U Orcish Captain
-C Orcish Spy
-C Orcish Spy
-C Orcish Spy
-C Orcish Veteran
-C Orcish Veteran
-C Orcish Veteran
-C Orcish Veteran
-C Order of Leitbur
-C Order of Leitbur
-C Order of Leitbur
-C Order of the Ebon Hand
-C Order of the Ebon Hand
-C Order of the Ebon Hand
-R Orgg
-U Raiding Party
-R Rainbow Vale
-R Ring of Renewal
-R River Merfolk
-U Ruins of Trokair
-R Sand Silos
-U Seasinger
-U Soul Exchange
-R Spirit Shield
-C Spore Cloud
-C Spore Cloud
-C Spore Cloud
-U Spore Flower
-U Svyelunite Priest
-U Svyelunite Temple
-C Thallid
-C Thallid
-C Thallid
-C Thallid
-U Thallid Devourer
-U Thelon's Chant
-R Thelon's Curse
-U Thelonite Druid
-R Thelonite Monk
-C Thorn Thallid
-C Thorn Thallid
-C Thorn Thallid
-C Thorn Thallid
-R Thrull Champion
-U Thrull Retainer
-U Thrull Wizard
-C Tidal Flats
-C Tidal Flats
-C Tidal Flats
-U Tidal Influence
-U Tourach's Chant
-R Tourach's Gate
-R Vodalian Knights
-C Vodalian Mage
-C Vodalian Mage
-C Vodalian Mage
-C Vodalian Soldiers
-C Vodalian Soldiers
-C Vodalian Soldiers
-C Vodalian Soldiers
-R Vodalian War Machine
-R Zelyon Sword
+81 R Aeolipile
+33a C Armor Thrull
+33b C Armor Thrull
+33c C Armor Thrull
+33d C Armor Thrull
+82 R Balm of Restoration
+34a C Basal Thrull
+34b C Basal Thrull
+34c C Basal Thrull
+34d C Basal Thrull
+92 R Bottomless Vault
+49a C Brassclaw Orcs
+49b C Brassclaw Orcs
+49c C Brassclaw Orcs
+49d C Brassclaw Orcs
+35 U Breeding Pit
+1a C Combat Medic
+1b C Combat Medic
+1c C Combat Medic
+1d C Combat Medic
+83 R Conch Horn
+17 U Deep Spawn
+84 C Delif's Cone
+85 R Delif's Cube
+36 R Derelor
+86 R Draconian Cylix
+50 R Dwarven Armorer
+51 U Dwarven Catapult
+93 R Dwarven Hold
+52 U Dwarven Lieutenant
+94 U Dwarven Ruins
+53a C Dwarven Soldier
+53b C Dwarven Soldier
+53c C Dwarven Soldier
+37 R Ebon Praetor
+95 U Ebon Stronghold
+65a C Elven Fortress
+65b C Elven Fortress
+65c C Elven Fortress
+65d C Elven Fortress
+87 R Elven Lyre
+66 R Elvish Farmer
+67a C Elvish Hunter
+67b C Elvish Hunter
+67c C Elvish Hunter
+68a C Elvish Scout
+68b C Elvish Scout
+68c C Elvish Scout
+2 U Farrel's Mantle
+3a C Farrel's Zealot
+3b C Farrel's Zealot
+3c C Farrel's Zealot
+4 U Farrelite Priest
+69 U Feral Thallid
+70 R Fungal Bloom
+54a C Goblin Chirurgeon
+54b C Goblin Chirurgeon
+54c C Goblin Chirurgeon
+55 R Goblin Flotilla
+56a C Goblin Grenade
+56b C Goblin Grenade
+56c C Goblin Grenade
+57 U Goblin Kites
+58a C Goblin War Drums
+58b C Goblin War Drums
+58c C Goblin War Drums
+58d C Goblin War Drums
+59 R Goblin Warrens
+5 R Hand of Justice
+96 U Havenwood Battleground
+6 U Heroism
+18a C High Tide
+18b C High Tide
+18c C High Tide
+97 R Hollow Trees
+19a C Homarid
+19b C Homarid
+19c C Homarid
+19d C Homarid
+20 R Homarid Shaman
+21 U Homarid Spawning Bed
+22a C Homarid Warrior
+22b C Homarid Warrior
+22c C Homarid Warrior
+38a C Hymn to Tourach
+38b C Hymn to Tourach
+38c C Hymn to Tourach
+38d C Hymn to Tourach
+7a C Icatian Infantry
+7b C Icatian Infantry
+7c C Icatian Infantry
+7d C Icatian Infantry
+8a C Icatian Javelineers
+8b C Icatian Javelineers
+8c C Icatian Javelineers
+9 R Icatian Lieutenant
+10a C Icatian Moneychanger
+10b C Icatian Moneychanger
+10c C Icatian Moneychanger
+11 U Icatian Phalanx
+12 U Icatian Priest
+13a C Icatian Scout
+13b C Icatian Scout
+13c C Icatian Scout
+13d C Icatian Scout
+14 R Icatian Skirmishers
+98 R Icatian Store
+15 R Icatian Town
+88 R Implements of Sacrifice
+39a C Initiates of the Ebon Hand
+39b C Initiates of the Ebon Hand
+39c C Initiates of the Ebon Hand
+23a C Merseine
+23b C Merseine
+23c C Merseine
+23d C Merseine
+40a C Mindstab Thrull
+40b C Mindstab Thrull
+40c C Mindstab Thrull
+41a C Necrite
+41b C Necrite
+41c C Necrite
+71a C Night Soil
+71b C Night Soil
+71c C Night Soil
+60 U Orcish Captain
+61a C Orcish Spy
+61b C Orcish Spy
+61c C Orcish Spy
+62a C Orcish Veteran
+62b C Orcish Veteran
+62c C Orcish Veteran
+62d C Orcish Veteran
+16a C Order of Leitbur
+16b C Order of Leitbur
+16c C Order of Leitbur
+42a C Order of the Ebon Hand
+42b C Order of the Ebon Hand
+42c C Order of the Ebon Hand
+63 R Orgg
+64 U Raiding Party
+99 R Rainbow Vale
+89 R Ring of Renewal
+24 R River Merfolk
+100 U Ruins of Trokair
+101 R Sand Silos
+25 U Seasinger
+43 U Soul Exchange
+90 R Spirit Shield
+72a C Spore Cloud
+72b C Spore Cloud
+72c C Spore Cloud
+73 U Spore Flower
+26 U Svyelunite Priest
+102 U Svyelunite Temple
+74a C Thallid
+74b C Thallid
+74c C Thallid
+74d C Thallid
+75 U Thallid Devourer
+76 U Thelon's Chant
+77 R Thelon's Curse
+78 U Thelonite Druid
+79 R Thelonite Monk
+80a C Thorn Thallid
+80b C Thorn Thallid
+80c C Thorn Thallid
+80d C Thorn Thallid
+44 R Thrull Champion
+45 U Thrull Retainer
+46 U Thrull Wizard
+27a C Tidal Flats
+27b C Tidal Flats
+27c C Tidal Flats
+28 U Tidal Influence
+47 U Tourach's Chant
+48 R Tourach's Gate
+29 R Vodalian Knights
+30a C Vodalian Mage
+30b C Vodalian Mage
+30c C Vodalian Mage
+31a C Vodalian Soldiers
+31b C Vodalian Soldiers
+31c C Vodalian Soldiers
+31d C Vodalian Soldiers
+32 R Vodalian War Machine
+91 R Zelyon Sword
 
 [tokens]
 w_1_1_citizen

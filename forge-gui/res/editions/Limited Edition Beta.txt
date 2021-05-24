@@ -11,308 +11,308 @@ Foil=NotSupported
 ChaosDraftThemes=CORE_SET
 
 [cards]
-U Air Elemental
-R Ancestral Recall
-U Animate Artifact
-U Animate Dead
-R Animate Wall
-R Ankh of Mishra
-R Armageddon
-R Aspect of Wolf
-R Bad Moon
-R Badlands
-R Balance
-U Basalt Monolith
-R Bayou
-C Benalish Hero
-U Berserk
-R Birds of Paradise
-U Black Knight
-R Black Lotus
-U Black Vise
-U Black Ward
-R Blaze of Glory
-R Blessing
-C Blue Elemental Blast
-U Blue Ward
-U Bog Wraith
-R Braingeyser
-U Burrowing
-U Camouflage
-U Castle
-U Celestial Prism
-U Channel
-R Chaos Orb
-R Chaoslace
-C Circle of Protection: Black
-C Circle of Protection: Blue
-C Circle of Protection: Green
-C Circle of Protection: Red
-C Circle of Protection: White
-R Clockwork Beast
-U Clone
-R Cockatrice
-U Consecrate Land
-U Conservator
-R Contract from Below
-U Control Magic
-U Conversion
-U Copper Tablet
-R Copy Artifact
-U Counterspell
-C Craw Wurm
-C Creature Bond
-R Crusade
-U Crystal Rod
-U Cursed Land
-R Cyclopean Tomb
-C Dark Ritual
-R Darkpact
-C Death Ward
-U Deathgrip
-R Deathlace
-R Demonic Attorney
-R Demonic Hordes
-U Demonic Tutor
-R Dingus Egg
-C Disenchant
-C Disintegrate
-R Disrupting Scepter
-U Dragon Whelp
-C Drain Life
-R Drain Power
-C Drudge Skeletons
-U Dwarven Demolition Team
-C Dwarven Warriors
-U Earth Elemental
-C Earthbind
-R Earthquake
-R Elvish Archers
-U Evil Presence
-C False Orders
-R Farmstead
-R Fastbond
-C Fear
-U Feedback
-U Fire Elemental
-C Fireball
-C Firebreathing
-U Flashfires
-C Flight
-C Fog
-R Force of Nature
-R Forcefield
-L Forest
-L Forest
-L Forest
-R Fork
-C Frozen Shade
-R Fungusaur
-R Gaea's Liege
-R Gauntlet of Might
-C Giant Growth
-C Giant Spider
-U Glasses of Urza
-U Gloom
-U Goblin Balloon Brigade
-R Goblin King
-R Granite Gargoyle
-C Gray Ogre
-U Green Ward
-C Grizzly Bears
-C Guardian Angel
-C Healing Salve
-R Helm of Chatzuk
-C Hill Giant
-C Holy Armor
-C Holy Strength
-C Howl from Beyond
-R Howling Mine
-C Hurloon Minotaur
-U Hurricane
-U Hypnotic Specter
-U Ice Storm
-U Icy Manipulator
-R Illusionary Mask
-U Instill Energy
-C Invisibility
-U Iron Star
-C Ironclaw Orcs
-C Ironroot Treefolk
-L Island
-L Island
-L Island
-R Island Sanctuary
-U Ivory Cup
-R Jade Monolith
-U Jade Statue
-R Jayemdae Tome
-U Juggernaut
-C Jump
-U Karma
-U Keldon Warlord
-R Kormus Bell
-R Kudzu
-U Lance
-U Ley Druid
-U Library of Leng
-R Lich
-U Lifeforce
-R Lifelace
-U Lifetap
-C Lightning Bolt
-R Living Artifact
-R Living Lands
-U Living Wall
-C Llanowar Elves
-R Lord of Atlantis
-R Lord of the Pit
-U Lure
-R Magical Hack
-R Mahamoti Djinn
-R Mana Flare
-R Mana Short
-R Mana Vault
-R Manabarbs
-R Meekstone
-C Merfolk of the Pearl Trident
-C Mesa Pegasus
-R Mind Twist
-C Mons's Goblin Raiders
-L Mountain
-L Mountain
-L Mountain
-R Mox Emerald
-R Mox Jet
-R Mox Pearl
-R Mox Ruby
-R Mox Sapphire
-R Natural Selection
-R Nether Shadow
-U Nettling Imp
-R Nevinyrral's Disk
-R Nightmare
-R Northern Paladin
-U Obsianus Golem
-U Orcish Artillery
-U Orcish Oriflamme
-C Paralyze
-C Pearled Unicorn
-R Personal Incarnation
-C Pestilence
-U Phantasmal Forces
-C Phantasmal Terrain
-U Phantom Monster
-R Pirate Ship
-C Plague Rats
-L Plains
-L Plains
-L Plains
-R Plateau
-C Power Leak
-C Power Sink
-R Power Surge
-C Prodigal Sorcerer
-U Psionic Blast
-C Psychic Venom
-R Purelace
-R Raging River
-C Raise Dead
-C Red Elemental Blast
-U Red Ward
-C Regeneration
-U Regrowth
-U Resurrection
-R Reverse Damage
-R Righteousness
-R Roc of Kher Ridges
-R Rock Hydra
-U Rod of Ruin
-R Royal Assassin
-U Sacrifice
-C Samite Healer
-R Savannah
-R Savannah Lions
-C Scathe Zombies
-U Scavenging Ghoul
-R Scrubland
-C Scryb Sprites
-C Sea Serpent
-R Sedge Troll
-U Sengir Vampire
-U Serra Angel
-C Shanodin Dryads
-C Shatter
-R Shivan Dragon
-U Simulacrum
-C Sinkhole
-U Siren's Call
-R Sleight of Mind
-R Smoke
-U Sol Ring
-U Soul Net
-C Spell Blast
-R Stasis
-U Steal Artifact
-U Stone Giant
-C Stone Rain
-C Stream of Life
-R Sunglasses of Urza
-L Swamp
-L Swamp
-L Swamp
-U Swords to Plowshares
-R Taiga
-C Terror
-R The Hive
-U Thicket Basilisk
-R Thoughtlace
-U Throne of Bone
-R Timber Wolves
-R Time Vault
-R Time Walk
-R Timetwister
-C Tranquility
-R Tropical Island
-U Tsunami
-R Tundra
-U Tunnel
-C Twiddle
-R Two-Headed Giant of Foriys
-R Underground Sea
-C Unholy Strength
-C Unsummon
-U Uthden Troll
-R Verduran Enchantress
-R Vesuvan Doppelganger
-R Veteran Bodyguard
-R Volcanic Eruption
-R Volcanic Island
-U Wall of Air
-U Wall of Bone
-U Wall of Brambles
-U Wall of Fire
-U Wall of Ice
-U Wall of Stone
-U Wall of Swords
-U Wall of Water
-C Wall of Wood
-U Wanderlust
-C War Mammoth
-R Warp Artifact
-U Water Elemental
-C Weakness
-R Web
-R Wheel of Fortune
-U White Knight
-U White Ward
-C Wild Growth
-R Will-o'-the-Wisp
-R Winter Orb
-U Wooden Sphere
-R Word of Command
-R Wrath of God
-R Zombie Master
+47 U Air Elemental
+48 R Ancestral Recall
+49 U Animate Artifact
+93 U Animate Dead
+1 R Animate Wall
+231 R Ankh of Mishra
+2 R Armageddon
+185 R Aspect of Wolf
+94 R Bad Moon
+278 R Badlands
+3 R Balance
+232 U Basalt Monolith
+279 R Bayou
+4 C Benalish Hero
+186 U Berserk
+187 R Birds of Paradise
+95 U Black Knight
+233 R Black Lotus
+234 U Black Vise
+5 U Black Ward
+6 R Blaze of Glory
+7 R Blessing
+50 C Blue Elemental Blast
+8 U Blue Ward
+96 U Bog Wraith
+51 R Braingeyser
+139 U Burrowing
+188 U Camouflage
+9 U Castle
+235 U Celestial Prism
+189 U Channel
+236 R Chaos Orb
+140 R Chaoslace
+10 C Circle of Protection: Black
+11 C Circle of Protection: Blue
+12 C Circle of Protection: Green
+13 C Circle of Protection: Red
+14 C Circle of Protection: White
+237 R Clockwork Beast
+52 U Clone
+190 R Cockatrice
+15 U Consecrate Land
+238 U Conservator
+97 R Contract from Below
+53 U Control Magic
+16 U Conversion
+239 U Copper Tablet
+54 R Copy Artifact
+55 U Counterspell
+191 C Craw Wurm
+56 C Creature Bond
+17 R Crusade
+240 U Crystal Rod
+98 U Cursed Land
+241 R Cyclopean Tomb
+99 C Dark Ritual
+100 R Darkpact
+18 C Death Ward
+101 U Deathgrip
+102 R Deathlace
+103 R Demonic Attorney
+104 R Demonic Hordes
+105 U Demonic Tutor
+242 R Dingus Egg
+19 C Disenchant
+141 C Disintegrate
+243 R Disrupting Scepter
+142 U Dragon Whelp
+106 C Drain Life
+57 R Drain Power
+107 C Drudge Skeletons
+143 U Dwarven Demolition Team
+144 C Dwarven Warriors
+145 U Earth Elemental
+146 C Earthbind
+147 R Earthquake
+192 R Elvish Archers
+108 U Evil Presence
+148 C False Orders
+20 R Farmstead
+193 R Fastbond
+109 C Fear
+58 U Feedback
+149 U Fire Elemental
+150 C Fireball
+151 C Firebreathing
+152 U Flashfires
+59 C Flight
+194 C Fog
+195 R Force of Nature
+244 R Forcefield
+300 L Forest
+301 L Forest
+302 L Forest
+153 R Fork
+110 C Frozen Shade
+196 R Fungusaur
+197 R Gaea's Liege
+245 R Gauntlet of Might
+198 C Giant Growth
+199 C Giant Spider
+246 U Glasses of Urza
+111 U Gloom
+154 U Goblin Balloon Brigade
+155 R Goblin King
+156 R Granite Gargoyle
+157 C Gray Ogre
+21 U Green Ward
+200 C Grizzly Bears
+22 C Guardian Angel
+23 C Healing Salve
+247 R Helm of Chatzuk
+158 C Hill Giant
+24 C Holy Armor
+25 C Holy Strength
+112 C Howl from Beyond
+248 R Howling Mine
+159 C Hurloon Minotaur
+201 U Hurricane
+113 U Hypnotic Specter
+202 U Ice Storm
+249 U Icy Manipulator
+250 R Illusionary Mask
+203 U Instill Energy
+60 C Invisibility
+251 U Iron Star
+160 C Ironclaw Orcs
+204 C Ironroot Treefolk
+291 L Island
+292 L Island
+293 L Island
+26 R Island Sanctuary
+252 U Ivory Cup
+253 R Jade Monolith
+254 U Jade Statue
+255 R Jayemdae Tome
+256 U Juggernaut
+61 C Jump
+27 U Karma
+161 U Keldon Warlord
+257 R Kormus Bell
+205 R Kudzu
+28 U Lance
+206 U Ley Druid
+258 U Library of Leng
+114 R Lich
+207 U Lifeforce
+208 R Lifelace
+62 U Lifetap
+162 C Lightning Bolt
+209 R Living Artifact
+210 R Living Lands
+259 U Living Wall
+211 C Llanowar Elves
+63 R Lord of Atlantis
+115 R Lord of the Pit
+212 U Lure
+64 R Magical Hack
+65 R Mahamoti Djinn
+163 R Mana Flare
+66 R Mana Short
+260 R Mana Vault
+164 R Manabarbs
+261 R Meekstone
+67 C Merfolk of the Pearl Trident
+29 C Mesa Pegasus
+116 R Mind Twist
+165 C Mons's Goblin Raiders
+297 L Mountain
+298 L Mountain
+299 L Mountain
+262 R Mox Emerald
+263 R Mox Jet
+264 R Mox Pearl
+265 R Mox Ruby
+266 R Mox Sapphire
+213 R Natural Selection
+117 R Nether Shadow
+118 U Nettling Imp
+267 R Nevinyrral's Disk
+119 R Nightmare
+30 R Northern Paladin
+268 U Obsianus Golem
+166 U Orcish Artillery
+167 U Orcish Oriflamme
+120 C Paralyze
+31 C Pearled Unicorn
+32 R Personal Incarnation
+121 C Pestilence
+68 U Phantasmal Forces
+69 C Phantasmal Terrain
+70 U Phantom Monster
+71 R Pirate Ship
+122 C Plague Rats
+288 L Plains
+289 L Plains
+290 L Plains
+280 R Plateau
+72 C Power Leak
+73 C Power Sink
+168 R Power Surge
+74 C Prodigal Sorcerer
+75 U Psionic Blast
+76 C Psychic Venom
+33 R Purelace
+169 R Raging River
+123 C Raise Dead
+170 C Red Elemental Blast
+34 U Red Ward
+214 C Regeneration
+215 U Regrowth
+35 U Resurrection
+36 R Reverse Damage
+37 R Righteousness
+171 R Roc of Kher Ridges
+172 R Rock Hydra
+269 U Rod of Ruin
+124 R Royal Assassin
+125 U Sacrifice
+38 C Samite Healer
+281 R Savannah
+39 R Savannah Lions
+126 C Scathe Zombies
+127 U Scavenging Ghoul
+282 R Scrubland
+216 C Scryb Sprites
+77 C Sea Serpent
+173 R Sedge Troll
+128 U Sengir Vampire
+40 U Serra Angel
+217 C Shanodin Dryads
+174 C Shatter
+175 R Shivan Dragon
+129 U Simulacrum
+130 C Sinkhole
+78 U Siren's Call
+79 R Sleight of Mind
+176 R Smoke
+270 U Sol Ring
+271 U Soul Net
+80 C Spell Blast
+81 R Stasis
+82 U Steal Artifact
+177 U Stone Giant
+178 C Stone Rain
+218 C Stream of Life
+272 R Sunglasses of Urza
+294 L Swamp
+295 L Swamp
+296 L Swamp
+41 U Swords to Plowshares
+283 R Taiga
+131 C Terror
+273 R The Hive
+219 U Thicket Basilisk
+83 R Thoughtlace
+274 U Throne of Bone
+220 R Timber Wolves
+275 R Time Vault
+84 R Time Walk
+85 R Timetwister
+221 C Tranquility
+284 R Tropical Island
+222 U Tsunami
+285 R Tundra
+179 U Tunnel
+86 C Twiddle
+180 R Two-Headed Giant of Foriys
+286 R Underground Sea
+132 C Unholy Strength
+87 C Unsummon
+181 U Uthden Troll
+223 R Verduran Enchantress
+88 R Vesuvan Doppelganger
+42 R Veteran Bodyguard
+89 R Volcanic Eruption
+287 R Volcanic Island
+90 U Wall of Air
+133 U Wall of Bone
+224 U Wall of Brambles
+182 U Wall of Fire
+225 U Wall of Ice
+183 U Wall of Stone
+43 U Wall of Swords
+91 U Wall of Water
+226 C Wall of Wood
+227 U Wanderlust
+228 C War Mammoth
+134 R Warp Artifact
+92 U Water Elemental
+135 C Weakness
+229 R Web
+184 R Wheel of Fortune
+44 U White Knight
+45 U White Ward
+230 C Wild Growth
+136 R Will-o'-the-Wisp
+276 R Winter Orb
+277 U Wooden Sphere
+137 R Word of Command
+46 R Wrath of God
+138 R Zombie Master
 
 [tokens]
 wasp

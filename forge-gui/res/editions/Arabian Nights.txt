@@ -11,98 +11,84 @@ BoosterBox=60
 Foil=NotSupported
 
 [cards]
-U Abu Ja'far
-R Aladdin
-R Aladdin's Lamp
-R Aladdin's Ring
-U Ali Baba
-R Ali from Cairo
-C Army of Allah
-C Army of Allah
-U Bazaar of Baghdad
-C Bird Maiden
-C Bird Maiden
-R Bottle of Suleiman
-U Brass Man
-C Camel
-R City in a Bottle
-U City of Brass
-C Cuombajj Witches
-U Cyclone
-R Dancing Scimitar
-C Dandan
-C Desert
-C Desert Nomads
-U Desert Twister
-U Diamond Valley
-R Drop of Honey
-R Ebony Horse
-R El-Hajjaj
-R Elephant Graveyard
-C Erg Raiders
-C Erg Raiders
-R Erhnam Djinn
-U Eye for an Eye
-C Fishliver Oil
-C Fishliver Oil
-U Flying Carpet
-C Flying Men
-C Ghazban Ogre
-C Giant Tortoise
-C Giant Tortoise
-R Guardian Beast
-C Hasran Ogress
-C Hasran Ogress
-C Hurr Jackal
-R Ifh-Biff Efreet
-R Island Fish Jasconius
-R Island of Wak-Wak
-R Jandor's Ring
-R Jandor's Saddlebags
-U Jeweled Bird
-R Jihad
-R Junun Efreet
-R Juzam Djinn
-U Khabal Ghoul
-R King Suleiman
-C Kird Ape
-U Library of Alexandria
-U Magnetic Mountain
-U Merchant Ship
-C Metamorphosis
-R Mijae Djinn
-C Moorish Cavalry
-C Moorish Cavalry
-C Mountain
-C Nafs Asp
-C Nafs Asp
-U Oasis
-R Old Man of the Sea
-C Oubliette
-C Oubliette
-C Piety
-C Piety
-R Pyramids
-R Repentant Blacksmith
-R Ring of Ma'ruf
-C Rukh Egg
-C Rukh Egg
-U Sandals of Abdallah
-C Sandstorm
-R Serendib Djinn
-R Serendib Efreet
-R Shahrazad
-U Sindbad
-R Singing Tree
-U Sorceress Queen
-C Stone-Throwing Devils
-C Stone-Throwing Devils
-C Unstable Mutation
-C War Elephant
-C War Elephant
-C Wyluli Wolf
-C Wyluli Wolf
-R Ydwen Efreet
+1 U Abu Ja'far
+34 R Aladdin
+56 R Aladdin's Lamp
+57 R Aladdin's Ring
+35 U Ali Baba
+36 R Ali from Cairo
+2 C Army of Allah
+70 U Bazaar of Baghdad
+37 C Bird Maiden
+58 R Bottle of Suleiman
+59 U Brass Man
+3 C Camel
+60 R City in a Bottle
+71 U City of Brass
+23 C Cuombajj Witches
+45 U Cyclone
+61 R Dancing Scimitar
+12 C Dandan
+72 C Desert
+38 C Desert Nomads
+46 U Desert Twister
+73 U Diamond Valley
+47 R Drop of Honey
+62 R Ebony Horse
+24 R El-Hajjaj
+74 R Elephant Graveyard
+25 C Erg Raiders
+48 R Erhnam Djinn
+4 U Eye for an Eye
+13 C Fishliver Oil
+63 U Flying Carpet
+14 C Flying Men
+49 C Ghazban Ogre
+15 C Giant Tortoise
+26 R Guardian Beast
+27 C Hasran Ogress
+39 C Hurr Jackal
+50 R Ifh-Biff Efreet
+16 R Island Fish Jasconius
+75 R Island of Wak-Wak
+64 R Jandor's Ring
+65 R Jandor's Saddlebags
+66 U Jeweled Bird
+5 R Jihad
+28 R Junun Efreet
+29 R Juzam Djinn
+30 U Khabal Ghoul
+6 R King Suleiman
+40 C Kird Ape
+76 U Library of Alexandria
+41 U Magnetic Mountain
+17 U Merchant Ship
+51 C Metamorphosis
+42 R Mijae Djinn
+7 C Moorish Cavalry
+77 C Mountain
+52 C Nafs Asp
+78 U Oasis
+18 R Old Man of the Sea
+31 C Oubliette
+8 C Piety
+67 R Pyramids
+9 R Repentant Blacksmith
+68 R Ring of Ma'ruf
+43 C Rukh Egg
+69 U Sandals of Abdallah
+53 C Sandstorm
+19 R Serendib Djinn
+20 R Serendib Efreet
+10 R Shahrazad
+21 U Sindbad
+54 R Singing Tree
+32 U Sorceress Queen
+33 C Stone-Throwing Devils
+22 C Unstable Mutation
+11 C War Elephant
+55 C Wyluli Wolf
+44 R Ydwen Efreet
 
 [tokens]
 r_4_4_bird_flying

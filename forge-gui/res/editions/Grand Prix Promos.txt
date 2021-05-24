@@ -7,23 +7,23 @@ MciCode=pgpx
 Type=Other
 
 [cards]
-R Spiritmonger
-R Call of the Herd
-R Chrome Mox
-R Umezawa's Jitte
-R Maelstrom Pulse
-R Goblin Guide
-R Lotus Cobra
-M Primeval Titan
-R All Is Dust
-M Batterskull
-M Griselbrand
-R Stoneforge Mystic
-R Sword of Feast and Famine
-M Progenitus
-R Mutavault
-L Plains
-L Island
-L Swamp
-L Mountain
-L Forest
+2007 R Spiritmonger
+2008 R Call of the Herd
+2009 R Chrome Mox
+2010 R Umezawa's Jitte
+2011 R Maelstrom Pulse
+2012a R Goblin Guide
+2012b R Lotus Cobra
+2013a M Primeval Titan
+2013b R All Is Dust
+2014 M Batterskull
+2015 M Griselbrand
+2016 R Stoneforge Mystic
+2016b R Sword of Feast and Famine
+2017 M Progenitus
+2018 R Mutavault
+2018a L Plains
+2018b L Island
+2018c L Swamp
+2018d L Mountain
+2018f L Forest

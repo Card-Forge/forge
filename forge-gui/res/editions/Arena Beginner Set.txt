@@ -5,119 +5,119 @@ Name=Arena Beginner Set
 Type=Online
 
 [cards]
-U Affectionate Indrik
-U Air Elemental
-R Angelic Guardian
-U Angelic Reward
-U Angel of Vitality
-C Armored Whirl Turtle
-U Bad Deal
-C Baloth Packhunter
-C Bombard
-U Bond of Discipline
-C Burn Bright
-C Charging Badger
-C Charmed Stray
-C Cloudkin Seer
-U Colossal Majesty
-C Compound Fracture
-U Confront the Assault
-C Coral Merfolk
-C Cruel Cut
-R Demon of Loathing
-R Epic Proportions
-U Eternal Thirst
-C Evolving Wilds
-C Fearless Halberdier
-C Fencing Ace
-C Feral Roar
-C Forest
-C Frilled Sea Serpent
-C Generous Stray
-R Gigantosaurus
-C Glint
-U Goblin Gang Leader
-C Goblin Gathering
-R Goblin Trashmaster
-C Goblin Tunneler
-R Goring Ceratops
-C Greenwood Sentinel
-U Hallowed Priest
-C Hurloon Minotaur
-C Ilysian Caryatid
-R Immortal Phoenix
-C Impassioned Orator
-U Inescapable Blaze
-R Inspiring Commander
-C Island
-C Jungle Delver
-C Knight's Pledge
-C Krovikan Scoundrel
-R Leonin Warleader
-C Loxodon Line Breaker
-U Malakir Cullblade
-C Maniacal Rage
-R Mardu Outrider
-C Molten Ravager
-C Moorland Inquisitor
-C Mountain
-U Murder
-C Nest Robber
-R Nightmare
-C Nimble Pilferer
-C Octoprophet
-R Ogre Battledriver
-R Overflowing Insight
-C Pacifism
-C Plains
-U Prized Unicorn
-C Rabid Bite
-C Raging Goblin
-U Raid Bombardment
-C Raise Dead
-R Rampaging Brontodon
-C Reduce to Ashes
-R Riddlemaster Sphinx
-C River's Favor
-C Rumbling Baloth
-C Sanctuary Cat
-C Sanitarium Skeleton
-C Savage Gorger
-C Scathe Zombies
-U Sengir Vampire
-U Sentinel Spider
-U Serra Angel
-C Shock
-C Shrine Keeper
-R Siege Dragon
-C Skeleton Archer
-U Sleep
-R Soulblade Djinn
-R Soulhunter Rakshasa
-C Soulmender
-C Spiritual Guardian
-C Stony Strength
-C Storm Strike
-C Swamp
-C Sworn Guardian
-C Tactical Advantage
-C Tin Street Cadet
-C Titanic Growth
-C Treetop Warden
-C Typhoid Rats
-C Unlikely Aid
-C Unsummon
-C Vampire Opportunist
-U Volcanic Dragon
-C Wall of Runes
-U Warden of Evos Isle
-C Waterkin Shaman
-C Waterknot
-C Wildwood Patrol
-R Windreader Sphinx
-U Windstorm Drake
-C Winged Words
-C Witch's Familiar
-C Woodland Mystic
-R World Shaper
-C Zephyr Gull
+89 U Affectionate Indrik
+23 U Air Elemental
+1 U Angel of Vitality
+2 R Angelic Guardian
+3 U Angelic Reward
+24 C Armored Whirl Turtle
+45 U Bad Deal
+90 C Baloth Packhunter
+67 C Bombard
+4 U Bond of Discipline
+68 C Burn Bright
+91 C Charging Badger
+5 C Charmed Stray
+25 C Cloudkin Seer
+92 U Colossal Majesty
+46 C Compound Fracture
+6 U Confront the Assault
+26 C Coral Merfolk
+47 C Cruel Cut
+48 R Demon of Loathing
+93 R Epic Proportions
+49 U Eternal Thirst
+111 C Evolving Wilds
+69 C Fearless Halberdier
+7 C Fencing Ace
+94 C Feral Roar
+112 C Forest
+27 C Frilled Sea Serpent
+95 C Generous Stray
+96 R Gigantosaurus
+28 C Glint
+70 U Goblin Gang Leader
+71 C Goblin Gathering
+72 R Goblin Trashmaster
+73 C Goblin Tunneler
+8 R Goring Ceratops
+97 C Greenwood Sentinel
+9 U Hallowed Priest
+74 C Hurloon Minotaur
+98 C Ilysian Caryatid
+75 R Immortal Phoenix
+10 C Impassioned Orator
+76 U Inescapable Blaze
+11 R Inspiring Commander
+113 C Island
+99 C Jungle Delver
+12 C Knight's Pledge
+50 C Krovikan Scoundrel
+13 R Leonin Warleader
+14 C Loxodon Line Breaker
+51 U Malakir Cullblade
+77 C Maniacal Rage
+52 R Mardu Outrider
+78 C Molten Ravager
+15 C Moorland Inquisitor
+114 C Mountain
+53 U Murder
+79 C Nest Robber
+54 R Nightmare
+55 C Nimble Pilferer
+29 C Octoprophet
+80 R Ogre Battledriver
+30 R Overflowing Insight
+16 C Pacifism
+115 C Plains
+100 U Prized Unicorn
+101 C Rabid Bite
+81 C Raging Goblin
+82 U Raid Bombardment
+56 C Raise Dead
+102 R Rampaging Brontodon
+83 C Reduce to Ashes
+31 R Riddlemaster Sphinx
+32 C River's Favor
+103 C Rumbling Baloth
+17 C Sanctuary Cat
+57 C Sanitarium Skeleton
+58 C Savage Gorger
+59 C Scathe Zombies
+60 U Sengir Vampire
+104 U Sentinel Spider
+18 U Serra Angel
+84 C Shock
+19 C Shrine Keeper
+85 R Siege Dragon
+61 C Skeleton Archer
+33 U Sleep
+34 R Soulblade Djinn
+62 R Soulhunter Rakshasa
+20 C Soulmender
+21 C Spiritual Guardian
+105 C Stony Strength
+86 C Storm Strike
+116 C Swamp
+35 C Sworn Guardian
+22 C Tactical Advantage
+87 C Tin Street Cadet
+106 C Titanic Growth
+107 C Treetop Warden
+63 C Typhoid Rats
+64 C Unlikely Aid
+36 C Unsummon
+65 C Vampire Opportunist
+88 U Volcanic Dragon
+37 C Wall of Runes
+38 U Warden of Evos Isle
+39 C Waterkin Shaman
+40 C Waterknot
+108 C Wildwood Patrol
+41 R Windreader Sphinx
+42 U Windstorm Drake
+43 C Winged Words
+66 C Witch's Familiar
+109 C Woodland Mystic
+110 R World Shaper
+44 C Zephyr Gull
