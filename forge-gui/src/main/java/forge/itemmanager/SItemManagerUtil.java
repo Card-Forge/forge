@@ -164,10 +164,16 @@ public final class SItemManagerUtil {
         return builder.toString();
     }
 
-    private static final GroupDef[] CARD_GROUPBY_OPTIONS = { GroupDef.DEFAULT, GroupDef.CARD_TYPE, GroupDef.COLOR, GroupDef.COLOR_IDENTITY, GroupDef.SET, GroupDef.CARD_RARITY, GroupDef.PW_DECK_SORT };
-    private static final GroupDef[] DECK_GROUPBY_OPTIONS = { GroupDef.COLOR, GroupDef.COLOR_IDENTITY, GroupDef.SET };
-    private static final ColumnDef[] CARD_PILEBY_OPTIONS = { ColumnDef.CMC, ColumnDef.COLOR, ColumnDef.NAME, ColumnDef.COST, ColumnDef.TYPE, ColumnDef.RARITY, ColumnDef.SET };
-    private static final ColumnDef[] DECK_PILEBY_OPTIONS = { ColumnDef.DECK_COLOR, ColumnDef.DECK_FOLDER, ColumnDef.NAME, ColumnDef.DECK_FORMAT, ColumnDef.DECK_EDITION };
+    private static final GroupDef[] CARD_GROUPBY_OPTIONS = {GroupDef.DEFAULT, GroupDef.CARD_TYPE, GroupDef.COLOR,
+                                                            GroupDef.COLOR_IDENTITY, GroupDef.SET, GroupDef.CARD_RARITY,
+                                                            GroupDef.PW_DECK_SORT};
+    private static final GroupDef[] DECK_GROUPBY_OPTIONS = {GroupDef.COLOR, GroupDef.COLOR_IDENTITY, GroupDef.SET};
+    private static final ColumnDef[] CARD_PILEBY_OPTIONS = {ColumnDef.CMC, ColumnDef.COLOR, ColumnDef.NAME,
+                                                            ColumnDef.COST, ColumnDef.TYPE, ColumnDef.RARITY,
+                                                            ColumnDef.SET, ColumnDef.COLLECTOR_ORDER};
+    private static final ColumnDef[] DECK_PILEBY_OPTIONS = {ColumnDef.DECK_COLOR, ColumnDef.DECK_FOLDER,
+                                                            ColumnDef.NAME, ColumnDef.DECK_FORMAT,
+                                                            ColumnDef.DECK_EDITION};
 
     public static void populateImageViewOptions(final IItemManager<?> itemManager, final IComboBox<Object> cbGroupByOptions, final IComboBox<Object> cbPileByOptions) {
         final boolean isDeckManager = itemManager.getGenericType().equals(DeckProxy.class);
