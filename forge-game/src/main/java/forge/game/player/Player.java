@@ -640,7 +640,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             return 0;
         }
         //String additionalLog = "";
-        source.addDealtDamageToPlayerThisTurn(getName(), amount);
 
         boolean infect = source.hasKeyword(Keyword.INFECT)
                 || hasKeyword("All damage is dealt to you as though its source had infect.");
@@ -680,7 +679,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         int old = assignedDamage.containsKey(source) ? assignedDamage.get(source) : 0;
         assignedDamage.put(source, old + amount);
-        source.getDamageHistory().registerDamage(this);
+        source.getDamageHistory().registerDamage(this, amount);
 
         if (isCombat) {
             old = assignedCombatDamage.containsKey(source) ? assignedCombatDamage.get(source) : 0;
@@ -688,6 +687,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             for (final String type : source.getType().getCreatureTypes()) {
                 source.getController().addProwlType(type);
             }
+            source.getDamageHistory().registerCombatDamage(this, amount);
         }
 
         // Run triggers

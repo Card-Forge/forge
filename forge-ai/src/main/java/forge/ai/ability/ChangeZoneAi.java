@@ -165,7 +165,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 return sa.isTargetNumberValid(); // Pre-targeted in checkAiLogic
             }
         }
-        if (isHidden(sa)) {
+        if (sa.isHidden()) {
             return hiddenOriginCanPlayAI(aiPlayer, sa);
         }
         return knownOriginCanPlayAI(aiPlayer, sa);
@@ -182,19 +182,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
      */
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
-        if (isHidden(sa)) {
+        if (sa.isHidden()) {
             return hiddenOriginPlayDrawbackAI(aiPlayer, sa);
         }
         return knownOriginPlayDrawbackAI(aiPlayer, sa);
-    }
-
-
-    private static boolean isHidden(SpellAbility sa) {
-        boolean hidden = sa.hasParam("Hidden");
-        if (!hidden && sa.hasParam("Origin")) {
-            hidden = ZoneType.isHidden(sa.getParam("Origin"));
-        }
-        return hidden;
     }
 
     /**
@@ -232,7 +223,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             return delta <= 0;
         }
 
-        if (isHidden(sa)) {
+        if (sa.isHidden()) {
             return hiddenTriggerAI(aiPlayer, sa, mandatory);
         }
         return knownOriginTriggerAI(aiPlayer, sa, mandatory);
@@ -788,7 +779,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             return ph.getNextTurn().equals(ai) && ph.is(PhaseType.END_OF_TURN);
         }
 
-        if (isHidden(sa)) {
+        if (sa.isHidden()) {
             return true;
         }
 
@@ -1316,8 +1307,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
     private static Card canBouncePermanent(final Player ai, SpellAbility sa, CardCollectionView list) {
         Game game = ai.getGame();
         // filter out untargetables
-        CardCollectionView aiPermanents = CardLists
-                .filterControlledBy(list, ai);
+        CardCollectionView aiPermanents = CardLists.filterControlledBy(list, ai);
         CardCollection aiPlaneswalkers = CardLists.filter(aiPermanents, Presets.PLANESWALKERS);
 
         // Felidar Guardian + Saheeli Rai combo support
@@ -1989,8 +1979,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 boolean setPayX = false;
                 if (unlessCost.equals("X") && sa.getSVar(unlessCost).equals("Count$xPaid")) {
                     setPayX = true;
-                    // TODO use ComputerUtilCost.getMaxXValue if able
-                    toPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
+                    toPay = ComputerUtilCost.getMaxXValue(sa, ai);
                 } else {
                     toPay = AbilityUtils.calculateAmount(source, unlessCost, sa);
                 }

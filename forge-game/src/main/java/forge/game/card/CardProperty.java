@@ -591,14 +591,8 @@ public class CardProperty {
                 }
             } else {
                 String prop = property.substring("DamagedBy".length());
-
-                boolean found = false;
-                for (Card d : card.getReceivedDamageFromThisTurn().keySet()) {
-                    if (d.isValid(prop, sourceController, source, spellAbility)) {
-                        found = true;
-                        break;
-                    }
-                }
+                final Iterable<Card> list = Iterables.filter(card.getReceivedDamageFromThisTurn().keySet(), Card.class);
+                boolean found = Iterables.any(list, CardPredicates.restriction(prop, sourceController, source, spellAbility));
 
                 if (!found) {
                     for (Card d : AbilityUtils.getDefinedCards(source, prop, spellAbility)) {
@@ -613,7 +607,7 @@ public class CardProperty {
                 }
             }
         } else if (property.startsWith("Damaged")) {
-            if (!card.getDealtDamageToThisTurn().containsKey(source)) {
+            if (!card.getDamageHistory().getThisTurnDamaged().containsKey(source)) {
                 return false;
             }
         } else if (property.startsWith("SharesCMCWith")) {
@@ -1077,7 +1071,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("dealtDamageToYouThisTurn")) {
-            if (!card.getDamageHistory().getThisTurnDamaged().contains(sourceController)) {
+            if (!card.getDamageHistory().getThisTurnDamaged().containsKey(sourceController)) {
                 return false;
             }
         } else if (property.startsWith("dealtDamageToOppThisTurn")) {
@@ -1086,36 +1080,24 @@ public class CardProperty {
             }
         } else if (property.startsWith("dealtCombatDamageThisTurn ") || property.startsWith("notDealtCombatDamageThisTurn ")) {
             final String v = property.split(" ")[1];
-            final List<GameEntity> list = card.getDamageHistory().getThisTurnCombatDamaged();
-            boolean found = false;
-            for (final GameEntity e : list) {
-                if (e.isValid(v, sourceController, source, spellAbility)) {
-                    found = true;
-                    break;
-                }
-            }
+            final Iterable<Card> list = Iterables.filter(card.getDamageHistory().getThisTurnCombatDamaged().keySet(), Card.class);
+            boolean found = Iterables.any(list, CardPredicates.restriction(v, sourceController, source, spellAbility));
             if (found == property.startsWith("not")) {
                 return false;
             }
         } else if (property.startsWith("dealtCombatDamageThisCombat ") || property.startsWith("notDealtCombatDamageThisCombat ")) {
             final String v = property.split(" ")[1];
-            final List<GameEntity> list = card.getDamageHistory().getThisCombatDamaged();
-            boolean found = false;
-            for (final GameEntity e : list) {
-                if (e.isValid(v, sourceController, source, spellAbility)) {
-                    found = true;
-                    break;
-                }
-            }
+            final Iterable<Card> list = Iterables.filter(card.getDamageHistory().getThisCombatDamaged().keySet(), Card.class);
+            boolean found = Iterables.any(list, CardPredicates.restriction(v, sourceController, source, spellAbility));
             if (found == property.startsWith("not")) {
                 return false;
             }
         } else if (property.startsWith("controllerWasDealtCombatDamageByThisTurn")) {
-            if (!source.getDamageHistory().getThisTurnCombatDamaged().contains(controller)) {
+            if (!source.getDamageHistory().getThisTurnCombatDamaged().containsKey(controller)) {
                 return false;
             }
         } else if (property.startsWith("controllerWasDealtDamageByThisTurn")) {
-            if (!source.getDamageHistory().getThisTurnDamaged().contains(controller)) {
+            if (!source.getDamageHistory().getThisTurnDamaged().containsKey(controller)) {
                 return false;
             }
         } else if (property.startsWith("wasDealtDamageThisTurn")) {
@@ -1127,7 +1109,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("dealtDamagetoAny")) {
-            return card.getHasdealtDamagetoAny();
+            return card.getDamageHistory().getHasdealtDamagetoAny();
         } else if (property.startsWith("attackedThisTurn")) {
             if (!card.getDamageHistory().getCreatureAttackedThisTurn()) {
                 return false;
@@ -1135,7 +1117,11 @@ public class CardProperty {
         } else if (property.startsWith("attackedLastTurn")) {
             return card.getDamageHistory().getCreatureAttackedLastTurnOf(controller);
         } else if (property.startsWith("blockedThisTurn")) {
-            if (!card.getDamageHistory().getCreatureBlockedThisTurn()) {
+            if (card.getBlockedThisTurn().isEmpty()) {
+                return false;
+            }
+        } else if (property.startsWith("notBlockedThisTurn")) {
+            if (!card.getBlockedThisTurn().isEmpty()) {
                 return false;
             }
         } else if (property.startsWith("notExertedThisTurn")) {
@@ -1143,7 +1129,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("gotBlockedThisTurn")) {
-            if (!card.getDamageHistory().getCreatureGotBlockedThisTurn()) {
+            if (card.getBlockedByThisTurn().isEmpty()) {
                 return false;
             }
         } else if (property.startsWith("notAttackedThisTurn")) {
@@ -1152,10 +1138,7 @@ public class CardProperty {
             }
         } else if (property.startsWith("notAttackedLastTurn")) {
             return !card.getDamageHistory().getCreatureAttackedLastTurnOf(controller);
-        } else if (property.startsWith("notBlockedThisTurn")) {
-            if (card.getDamageHistory().getCreatureBlockedThisTurn()) {
-                return false;
-            }
+
         } else if (property.startsWith("greatestPower")) {
             CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
             if (property.contains("ControlledBy")) {

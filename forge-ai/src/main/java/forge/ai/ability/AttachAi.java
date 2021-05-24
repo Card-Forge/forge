@@ -555,12 +555,7 @@ public class AttachAi extends SpellAbilityAi {
         	if (!evenBetterList.isEmpty()) {
         		betterList = evenBetterList;
         	}
-        	evenBetterList = CardLists.filter(betterList, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return c.isUntapped();
-                }
-            });
+        	evenBetterList = CardLists.filter(betterList, CardPredicates.Presets.UNTAPPED);
         	if (!evenBetterList.isEmpty()) {
         		betterList = evenBetterList;
         	}

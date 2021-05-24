@@ -76,7 +76,7 @@ public class ComputerUtilCard {
                 }
             });
         }
-        return ComputerUtilCard.getMostExpensivePermanentAI(all);
+        return getMostExpensivePermanentAI(all);
     }
 
     /**
@@ -381,7 +381,7 @@ public class ComputerUtilCard {
         }
 
         if (biasLand && Iterables.any(list, CardPredicates.Presets.LANDS)) {
-            return ComputerUtilCard.getWorstLand(CardLists.filter(list, CardPredicates.Presets.LANDS));
+            return getWorstLand(CardLists.filter(list, CardPredicates.Presets.LANDS));
         }
     
         final boolean hasCreatures = Iterables.any(list, CardPredicates.Presets.CREATURES);
@@ -391,7 +391,7 @@ public class ComputerUtilCard {
     
         List<Card> lands = CardLists.filter(list, CardPredicates.Presets.LANDS);
         if (lands.size() > 6) {
-            return ComputerUtilCard.getWorstLand(lands);
+            return getWorstLand(lands);
         }
     
         if (hasEnchantmants || hasArtifacts) {
@@ -441,7 +441,7 @@ public class ComputerUtilCard {
     public static final Comparator<Card> EvaluateCreatureComparator = new Comparator<Card>() {
         @Override
         public int compare(final Card a, final Card b) {
-            return ComputerUtilCard.evaluateCreature(b) - ComputerUtilCard.evaluateCreature(a);
+            return evaluateCreature(b) - evaluateCreature(a);
         }
     };
 
@@ -879,8 +879,8 @@ public class ComputerUtilCard {
     public static final Predicate<Deck> AI_KNOWS_HOW_TO_PLAY_ALL_CARDS = new Predicate<Deck>() {
         @Override
         public boolean apply(Deck d) {
-            for(Entry<DeckSection, CardPool> cp: d) {
-                for(Entry<PaperCard, Integer> e : cp.getValue()) {
+            for (Entry<DeckSection, CardPool> cp: d) {
+                for (Entry<PaperCard, Integer> e : cp.getValue()) {
                     if ( e.getKey().getRules().getAiHints().getRemAIDecks() )
                         return false;
                 }
