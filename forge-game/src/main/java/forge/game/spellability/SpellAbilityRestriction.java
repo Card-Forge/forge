@@ -244,7 +244,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                     // NOTE: this assumes that it's always possible to cast cards from hand and you don't
                     // need special permissions for that. If WotC ever prints a card that forbids casting
                     // cards from hand, this may become relevant.
-                    if (!o.grantsZonePermissions() && cardZone != null && !cardZone.is(ZoneType.Hand)) {
+                    if (!o.grantsZonePermissions() && cardZone != null && (!cardZone.is(ZoneType.Hand) || activator != c.getOwner())) {
                         final List<CardPlayOption> opts = c.mayPlay(activator);
                         boolean hasOtherGrantor = false;
                         for (CardPlayOption opt : opts) {
