@@ -451,7 +451,7 @@ public enum ColumnDef {
     /**
      * The deck edition column, a mystery to us all.
      */
-    DECK_EDITION("lblSet", "lblSetEdition", 38, true, SortState.DESC,
+    DECK_EDITION("lblSet", "lblSet", 38, true, SortState.DESC,
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
