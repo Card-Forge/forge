@@ -10,22 +10,22 @@ Booster=11 Common, 3 Uncommon, 1 Rare
 FoilAlwaysInCommonSlot=False
 
 [cards]
-3 C Amateur Auteur
-3 C Amateur Auteur
-3 C Amateur Auteur
-3 C Amateur Auteur
+3a C Amateur Auteur
+3b C Amateur Auteur
+3c C Amateur Auteur
+3d C Amateur Auteur
 6 M Do-It-Yourself Seraph
 7 U Gimme Five
 8 C GO TO JAIL
 9 U Half-Kitten, Half-
 10 C Humming-
 11 R Jackknight
-U Knight of the Kitchen Sink A
-U Knight of the Kitchen Sink B
-U Knight of the Kitchen Sink C
-U Knight of the Kitchen Sink D
-U Knight of the Kitchen Sink E
-U Knight of the Kitchen Sink F
+12a U Knight of the Kitchen Sink A
+12b U Knight of the Kitchen Sink B
+12c U Knight of the Kitchen Sink C
+12d U Knight of the Kitchen Sink D
+12e U Knight of the Kitchen Sink E
+12f U Knight of the Kitchen Sink F
 13 U Knight of the Widget
 14 U Midlife Upgrade
 15 R Oddly Uneven
@@ -54,10 +54,10 @@ U Knight of the Kitchen Sink F
 38 C Magic Word
 39 C Mer Man
 40 U More or Less
-C Novellamental
-C Novellamental
-C Novellamental
-C Novellamental
+41a C Novellamental
+41b C Novellamental
+41c C Novellamental
+41d C Novellamental
 42 C Numbing Jellyfish
 43 U S.N.E.A.K. Dispatcher
 44 U Socketed Sprocketer
@@ -65,20 +65,20 @@ C Novellamental
 46 U Spy Eye
 47 U Suspicious Nanny
 48 C Time Out
-R Very Cryptic Command A
-R Very Cryptic Command B
-R Very Cryptic Command C
-R Very Cryptic Command D
-R Very Cryptic Command E
-R Very Cryptic Command F
+49a R Very Cryptic Command A
+49b R Very Cryptic Command B
+49c R Very Cryptic Command C
+49d R Very Cryptic Command D
+49e R Very Cryptic Command E
+49f R Very Cryptic Command F
 50 C Wall of Fortune
 51 C Big Boa Constrictor
 52 C capital offense
 53 C Dirty Rat
-C Extremely Slow Zombie
-C Extremely Slow Zombie
-C Extremely Slow Zombie
-C Extremely Slow Zombie
+54a C Extremely Slow Zombie
+54b C Extremely Slow Zombie
+54c C Extremely Slow Zombie
+54d C Extremely Slow Zombie
 55 C Finders, Keepers
 56 R Hangman
 57 C Hazmat Suit (Used)
@@ -91,12 +91,12 @@ C Extremely Slow Zombie
 64 U Overt Operative
 65 U "Rumors of My Death..."
 66 U Skull Saucer
-U Sly Spy A
-U Sly Spy B
-U Sly Spy C
-U Sly Spy D
-U Sly Spy E
-U Sly Spy F
+67a U Sly Spy A
+67b U Sly Spy B
+67c U Sly Spy C
+67d U Sly Spy D
+67e U Sly Spy E
+67f U Sly Spy F
 68 C Snickering Squirrel
 69 R Spike, Tournament Grinder
 70 U Squirrel-Powered Scheme
@@ -111,12 +111,12 @@ U Sly Spy F
 79 C Common Iguana
 80 R The Countdown Is at One
 81 C Feisty Stegosaurus
-U Garbage Elemental A
-U Garbage Elemental B
-U Garbage Elemental C
-U Garbage Elemental D
-U Garbage Elemental E
-U Garbage Elemental F
+82a U Garbage Elemental A
+82b U Garbage Elemental B
+82c U Garbage Elemental C
+82d U Garbage Elemental D
+82e U Garbage Elemental E
+82f U Garbage Elemental F
 83 U Goblin Haberdasher
 84 U Half-Orc, Half-
 85 C Hammer Helper
@@ -132,18 +132,18 @@ U Garbage Elemental F
 95 U Steamflogger Temp
 96 U Steamfloggery
 97 U Super-Duper Death Ray
-C Target Minotaur
-C Target Minotaur
-C Target Minotaur
-C Target Minotaur
+98a C Target Minotaur
+98b C Target Minotaur
+98c C Target Minotaur
+98d C Target Minotaur
 99 R Three-Headed Goblin
 100 C Work a Double
 101 C Wrench-Rigger
 102 R As Luck Would Have It
-C Beast in Show
-C Beast in Show
-C Beast in Show
-C Beast in Show
+103a C Beast in Show
+103b C Beast in Show
+103c C Beast in Show
+103d C Beast in Show
 104 U Chittering Doom
 105 U Clever Combo
 106 U Druid of the Sacred Beaker
@@ -153,12 +153,12 @@ C Beast in Show
 110 U Ground Pounder
 111 U Half-Squirrel, Half-
 112 R Hydradoodle
-R Ineffable Blessing A
-R Ineffable Blessing B
-R Ineffable Blessing C
-R Ineffable Blessing D
-R Ineffable Blessing E
-R Ineffable Blessing F
+113a R Ineffable Blessing A
+113b R Ineffable Blessing B
+113c R Ineffable Blessing C
+113d R Ineffable Blessing D
+113e R Ineffable Blessing E
+113f R Ineffable Blessing F
 114 C Joyride Rigger
 115 U Monkey-
 116 C Mother Kangaroo
@@ -190,17 +190,17 @@ R Ineffable Blessing F
 142 U Clock of DOOOOOOOOOOOOM!
 143 U Cogmentor
 144 U Contraption Cannon
-C Curious Killbot
-C Delighted Killbot
-C Despondent Killbot
-C Enraged Killbot
+145a C Curious Killbot
+145b C Delighted Killbot
+145c C Despondent Killbot
+145d C Enraged Killbot
 146 U Entirely Normal Armchair
-R Everythingamajig A
-R Everythingamajig B
-R Everythingamajig C
-R Everythingamajig D
-R Everythingamajig E
-R Everythingamajig F
+147a R Everythingamajig A
+147b R Everythingamajig B
+147c R Everythingamajig C
+147d R Everythingamajig D
+147e R Everythingamajig E
+147f R Everythingamajig F
 148 C Gnome-Made Engine
 149 R Handy Dandy Clone Machine
 150 R Kindslaver
@@ -218,11 +218,11 @@ R Everythingamajig F
 162 U Steel Squirrel
 163 M Sword of Dungeons & Dragons
 164 C Voracious Vacuum
-C Secret Base
-C Secret Base
-C Secret Base
-C Secret Base
-C Secret Base
+165a C Secret Base
+165b C Secret Base
+165c C Secret Base
+165d C Secret Base
+165e C Secret Base
 166 R Watermarket
 167 U Accessories to Murder
 168 C Applied Aeronautics
