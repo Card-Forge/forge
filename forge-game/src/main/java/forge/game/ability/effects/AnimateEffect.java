@@ -314,7 +314,6 @@ public class AnimateEffect extends AnimateEffectBase {
             sb.append(".");
         }
 
-
         return sb.toString();
     }
 

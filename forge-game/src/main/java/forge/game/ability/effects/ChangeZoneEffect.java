@@ -57,17 +57,9 @@ import forge.util.collect.FCollectionView;
 
 public class ChangeZoneEffect extends SpellAbilityEffect {
 
-    private boolean isHidden(SpellAbility sa) {
-        boolean hidden = sa.hasParam("Hidden");
-        if (!hidden && sa.hasParam("Origin")) {
-            hidden = ZoneType.isHidden(sa.getParam("Origin"));
-        }
-        return hidden;
-    }
-
     @Override
     protected String getStackDescription(SpellAbility sa) {
-        if (isHidden(sa)) {
+        if (sa.isHidden()) {
             return changeHiddenOriginStackDescription(sa);
         }
         return changeKnownOriginStackDescription(sa);
@@ -424,7 +416,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             return;
         }
 
-        if (isHidden(sa) && !sa.hasParam("Ninjutsu")) {
+        if (sa.isHidden() && !sa.hasParam("Ninjutsu")) {
             changeHiddenOriginResolve(sa);
         } else {
             //else if (isKnown(origin) || sa.containsKey("Ninjutsu")) {
