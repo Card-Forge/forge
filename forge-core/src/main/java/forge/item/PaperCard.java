@@ -86,8 +86,8 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         if (collectorNumber == null){
             collectorNumber = this.retrieveCollectorNumber();
         }
-        return collectorNumber;
 
+        return collectorNumber;
     }
 
     @Override
