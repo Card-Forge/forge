@@ -83,7 +83,7 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         If "unset", the corresponding collectorNumber will be retrieved
         from the corresponding CardEdition (see retrieveCollectorNumber)
         * */
-        if (collectorNumber == null){
+        if (collectorNumber == null) {
             collectorNumber = this.retrieveCollectorNumber();
         }
 
@@ -122,7 +122,7 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         if (this.foil)
             return this;
 
-        if (this.foiledVersion == null){
+        if (this.foiledVersion == null) {
             this.foiledVersion = new PaperCard(this.rules, this.edition, this.rarity,
                     this.artIndex, true, String.valueOf(collectorNumber));
         }
@@ -163,7 +163,7 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         }
     };
 
-    public PaperCard(final CardRules rules0, final String edition0, final CardRarity rarity0){
+    public PaperCard(final CardRules rules0, final String edition0, final CardRarity rarity0) {
         this(rules0, edition0, rarity0, IPaperCard.DEFAULT_ART_INDEX, false);
     }
 
@@ -172,7 +172,7 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
     }
 
     public PaperCard(final CardRules rules0, final String edition0, final CardRarity rarity0, final int artIndex0,
-                     final boolean foil0){
+                     final boolean foil0) {
         if (rules0 == null || edition0 == null || rarity0 == null) {
             throw new IllegalArgumentException("Cannot create card without rules, edition or rarity");
         }
@@ -185,12 +185,12 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
     }
 
     public PaperCard(final CardRules rules0, final String edition0, final CardRarity rarity0, final int artIndex0,
-                     final String collectorNumber0){
+                     final String collectorNumber0) {
         this(rules0, edition0, rarity0, artIndex0, false, collectorNumber0);
     }
 
     public PaperCard(final CardRules rules0, final String edition0, final CardRarity rarity0,
-                     final int artIndex0, final boolean foil0, final String collectorNumber0){
+                     final int artIndex0, final boolean foil0, final String collectorNumber0) {
         this(rules0, edition0, rarity0, artIndex0, foil0);
         collectorNumber = collectorNumber0;
     }
@@ -251,7 +251,7 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         }
         //FIXME: compare sets properly
         int setDiff = edition.compareTo(o.getEdition());
-        if ( 0 != setDiff )
+        if (0 != setDiff)
             return setDiff;
         final int collNrCmp = getCollectorNumber().compareTo(o.getCollectorNumber());
         if (0 != collNrCmp) {
