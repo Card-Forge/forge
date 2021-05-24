@@ -252,10 +252,13 @@ public final class CardUtil {
 
         newCopy.setColor(in.determineColor().getColor());
         newCopy.setReceivedDamageFromThisTurn(in.getReceivedDamageFromThisTurn());
-        newCopy.setReceivedDamageFromPlayerThisTurn(in.getReceivedDamageFromPlayerThisTurn());
-        newCopy.setDealtDamageToThisTurn(in.getDealtDamageToThisTurn());
-        newCopy.setDealtDamageToPlayerThisTurn(in.getDealtDamageToPlayerThisTurn());
-        newCopy.getDamageHistory().setCreatureGotBlockedThisTurn(in.getDamageHistory().getCreatureGotBlockedThisTurn());
+        newCopy.setDamageHistory(in.getDamageHistory());
+        for (Card c : in.getBlockedThisTurn()) {
+            newCopy.addBlockedThisTurn(c);
+        }
+        for (Card c : in.getBlockedByThisTurn()) {
+            newCopy.addBlockedByThisTurn(c);
+        }
 
         newCopy.setAttachedCards(getLKICopyList(in.getAttachedCards(), cachedMap));
         newCopy.setEntityAttachedTo(getLKICopy(in.getEntityAttachedTo(), cachedMap));
@@ -265,12 +268,8 @@ public final class CardUtil {
         for (final Card haunter : in.getHauntedBy()) {
             newCopy.addHauntedBy(haunter, false);
         }
-        for (final Object o : in.getRemembered()) {
-            newCopy.addRemembered(o);
-        }
-        for (final Card o : in.getImprintedCards()) {
-            newCopy.addImprintedCard(o);
-        }
+        newCopy.addRemembered(in.getRemembered());
+        newCopy.addImprintedCards(in.getImprintedCards());
 
         for(Table.Cell<Player, CounterType, Integer> cl : in.getEtbCounters()) {
             newCopy.addEtbCounter(cl.getColumnKey(), cl.getValue(), cl.getRowKey());

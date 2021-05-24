@@ -1868,7 +1868,6 @@ public class AbilityUtils {
                 }
             }
 
-
             // Count$DevotionDual.<color name>.<color name>
             // Count$Devotion.<color name>
             if (sq[0].contains("Devotion")) {
@@ -1892,15 +1891,6 @@ public class AbilityUtils {
                 return doXMath(colorOcurrencices, expr, c, ctb);
             }
 
-
-
-            if (sq[0].startsWith("DamageDoneByPlayerThisTurn")) {
-                int sum = 0;
-                for (Player p : AbilityUtils.getDefinedPlayers(c, sq[1], ctb)) {
-                    sum += c.getReceivedDamageByPlayerThisTurn(p);
-                }
-                return doXMath(sum, expr, c, ctb);
-            }
         } // end ctb != null
 
         if (sq[0].contains("OppsAtLifeTotal")) {
@@ -1922,9 +1912,6 @@ public class AbilityUtils {
             }
             return doXMath(sum, expr, c, ctb);
         }
-
-
-        //return CardFactoryUtil.xCount(c, s2);
 
         ////////////////////
         // card info
@@ -1961,7 +1948,7 @@ public class AbilityUtils {
             return doXMath(c.getTotalDamageDoneBy(), expr, c, ctb);
         }
         if (sq[0].equals("TotalDamageReceivedThisTurn")) {
-            return doXMath(c.getTotalDamageRecievedThisTurn(), expr, c, ctb);
+            return doXMath(c.getTotalDamageReceivedThisTurn(), expr, c, ctb);
         }
 
         if (sq[0].contains("CardPower")) {
@@ -2017,9 +2004,6 @@ public class AbilityUtils {
             }
             return doXMath(sum, expr, c, ctb);
         }
-        if (sq[0].equals("DamageDoneThisTurn")) {
-            return doXMath(c.getDamageDoneThisTurn(), expr, c, ctb);
-        }
         if (sq[0].equals("RegeneratedThisTurn")) {
             return doXMath(c.getRegeneratedThisTurn(), expr, c, ctb);
         }
@@ -2067,7 +2051,6 @@ public class AbilityUtils {
             final boolean isMyMain = cPhase.getPhase().isMain() && cPhase.isPlayerTurn(player) && c.getCastFrom() != null;
             return doXMath(Integer.parseInt(sq[isMyMain ? 1 : 2]), expr, c, ctb);
         }
-
 
         // Count$AttachedTo <DefinedCards related to spellability> <restriction>
         if (sq[0].startsWith("AttachedTo")) {
@@ -2133,7 +2116,6 @@ public class AbilityUtils {
             }
             return doXMath(maxNum, expr, c, ctb);
         }
-
 
         // Count$EnchantedControllerCreatures
         if (sq[0].equals("EnchantedControllerCreatures")) { // maybe refactor into a Valid with ControlledBy
@@ -2428,7 +2410,6 @@ public class AbilityUtils {
             return doXMath(uniqueColors, expr, c, ctb);
         }
 
-
         // TODO change into checking SpellAbility
         if (sq[0].contains("xColorPaid")) {
             String[] attrs = sq[0].split(" ");
@@ -2531,7 +2512,6 @@ public class AbilityUtils {
             return doXMath(game.getStack().getMaxDistinctSources(), expr, c, ctb);
         }
 
-
         //Count$Random.<Min>.<Max>
         if (sq[0].equals("Random")) {
             int min = AbilityUtils.calculateAmount(c, sq[1], ctb);
@@ -2539,7 +2519,6 @@ public class AbilityUtils {
 
             return MyRandom.getRandom().nextInt(1+max-min) + min;
         }
-
 
         // Count$SumPower_valid
         if (sq[0].startsWith("SumPower")) {
@@ -2561,9 +2540,6 @@ public class AbilityUtils {
             CardCollection filteredCards = CardLists.getValidCards(cardsonbattlefield, rest, player, c, ctb);
             return Aggregates.sum(filteredCards, CardPredicates.Accessors.fnGetCmc);
         }
-
-
-
 
         // Count$TotalCounters.<counterType>_<valid>
         if (sq[0].startsWith("TotalCounters")) {
@@ -3354,10 +3330,6 @@ public class AbilityUtils {
 
         if (value.contains("AttackersDeclared")) {
             return doXMath(player.getAttackersDeclaredThisTurn(), m, source, ctb);
-        }
-
-        if (value.equals("DamageDoneToPlayerBy")) {
-            return doXMath(source.getDamageDoneToPlayerBy(player.getName()), m, source, ctb);
         }
 
         if (value.contains("DamageToOppsThisTurn")) {

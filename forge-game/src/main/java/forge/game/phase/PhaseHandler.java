@@ -665,8 +665,7 @@ public class PhaseHandler implements java.io.Serializable {
                 return;
             }
 
-            // Handles removing cards like Mogg Flunkies from combat if group block
-            // didn't occur
+            // Handles removing cards like Mogg Flunkies from combat if group block didn't occur
             for (Card blocker : CardLists.filterControlledBy(combat.getAllBlockers(), p)) {
                 final List<Card> attackers = Lists.newArrayList(combat.getAttackersBlockedBy(blocker));
                 for (Card attacker : attackers) {

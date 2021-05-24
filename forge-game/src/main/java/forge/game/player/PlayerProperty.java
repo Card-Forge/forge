@@ -96,7 +96,7 @@ public class PlayerProperty {
             final List<Card> cards = AbilityUtils.getDefinedCards(source, v, spellAbility);
             int found = 0;
             for (final Card card : cards) {
-                if (card.getDamageHistory().getThisCombatDamaged().contains(player)) {
+                if (card.getDamageHistory().getThisCombatDamaged().containsKey(player)) {
                     found++;
                 }
             }
@@ -115,7 +115,7 @@ public class PlayerProperty {
             final List<Card> cards = AbilityUtils.getDefinedCards(source, v, spellAbility);
             int found = 0;
             for (final Card card : cards) {
-                if (card.getDamageHistory().getThisGameDamaged().contains(player)) {
+                if (card.getDamageHistory().getThisGameDamaged().containsKey(player)) {
                     found++;
                 }
             }
@@ -134,7 +134,7 @@ public class PlayerProperty {
             final List<Card> cards = AbilityUtils.getDefinedCards(source, v, spellAbility);
             int found = 0;
             for (final Card card : cards) {
-                if (card.getDamageHistory().getThisTurnDamaged().contains(player)) {
+                if (card.getDamageHistory().getThisTurnDamaged().containsKey(player)) {
                     found++;
                 }
             }
@@ -154,7 +154,7 @@ public class PlayerProperty {
 
             int found = 0;
             for (final Card card : cards) {
-                if (card.getDamageHistory().getThisTurnCombatDamaged().contains(player)) {
+                if (card.getDamageHistory().getThisTurnCombatDamaged().containsKey(player)) {
                     found++;
                 }
             }
