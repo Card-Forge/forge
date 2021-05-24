@@ -93,7 +93,7 @@ public abstract class ImageFetcher {
                 }
                 // see https://scryfall.com/blog 2020/8/6, and
                 // https://scryfall.com/docs/api/cards/collector
-                downloadUrls.add(String.format("https://api.scryfall.com/cards/%s/%d/%s?format=image&version=normal%s",
+                downloadUrls.add(String.format("https://api.scryfall.com/cards/%s/%s/%s?format=image&version=normal%s",
                         editionMciCode, cardCollectorNumber, langCode, faceParam));
             }
 
