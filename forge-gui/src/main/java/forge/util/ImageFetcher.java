@@ -79,8 +79,8 @@ public abstract class ImageFetcher {
                 artIndex = Integer.parseInt(matcher.group(2));
             }
             final StaticData data = StaticData.instance();
-            final int cardCollectorNumber = paperCard.getCollectorNumber();
-            if (cardCollectorNumber != IPaperCard.NO_COLLECTOR_NUMBER) {
+            final String cardCollectorNumber = paperCard.getCollectorNumber();
+            if (!cardCollectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER)){
                 String faceParam = "";
                 if (paperCard.getRules().getOtherPart() != null) {
                     faceParam = (backFace ? "&face=back" : "&face=front");
@@ -93,7 +93,7 @@ public abstract class ImageFetcher {
                 }
                 // see https://scryfall.com/blog 2020/8/6, and
                 // https://scryfall.com/docs/api/cards/collector
-                downloadUrls.add(String.format("https://api.scryfall.com/cards/%s/%d/%s?format=image&version=normal%s",
+                downloadUrls.add(String.format("https://api.scryfall.com/cards/%s/%s/%s?format=image&version=normal%s",
                         editionMciCode, cardCollectorNumber, langCode, faceParam));
             }
 
