@@ -277,8 +277,8 @@ public final class FModel {
             }
         }
 
-        /*if (GuiBase.getInterface().isLibgdxPort() && GuiBase.getDeviceRAM() < 5000)
-            return; // don't preload ItemPool on mobile port with less than 5GB RAM*/
+        if (GuiBase.getInterface().isLibgdxPort() && GuiBase.getDeviceRAM() < 5000)
+            return; // don't preload ItemPool on mobile port with less than 5GB RAM
 
         //common ItemPool to preload
         allCardsNoAlt = getAllCardsNoAlt();
