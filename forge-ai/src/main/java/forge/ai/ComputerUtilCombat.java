@@ -2449,7 +2449,7 @@ public class ComputerUtilCombat {
         for (final ReplacementEffect re : list) {
             Map<String, String> params = re.getMapParams();
             if (params.containsKey("Prevent") ||
-                    (re.getOverridingAbility() != null && re.getOverridingAbility().getApi() != ApiType.ReplaceDamage)) {
+                    (re.getOverridingAbility() != null && re.getOverridingAbility().getApi() != ApiType.ReplaceDamage && re.getOverridingAbility().getApi() != ApiType.ReplaceEffect)) {
                 return true;
             }
         }
