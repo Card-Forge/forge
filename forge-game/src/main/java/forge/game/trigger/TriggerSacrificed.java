@@ -80,11 +80,15 @@ public class TriggerSacrificed extends Trigger {
 
             // When cast with Emerge, the cost instance is there
             IndividualCostPaymentInstance currentPayment = (IndividualCostPaymentInstance) runParams.get(AbilityKey.IndividualCostPaymentInstance);
-            SpellAbility sa = currentPayment.getPayment().getAbility();
 
-            if (sa != null && sa.getHostCard() != null) {
-                if (sa.isSpell() && sa.getHostCard().hasStartOfUnHiddenKeyword(keyword)) {
-                    withKeyword = true;
+            SpellAbility sa;
+            if (currentPayment != null) {
+                sa = currentPayment.getPayment().getAbility();
+
+                if (sa != null && sa.getHostCard() != null) {
+                    if (sa.isSpell() && sa.getHostCard().hasStartOfUnHiddenKeyword(keyword)) {
+                        withKeyword = true;
+                    }
                 }
             }
 
