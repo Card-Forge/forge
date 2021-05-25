@@ -732,12 +732,10 @@ public class DamageDealAi extends DamageAiBase {
                 }
 
                 // When giving priority to targeting Creatures for mandatory
-                // triggers
-                // feel free to add the Human after we run out of good targets
+                // triggers feel free to add the Human after we run out of good targets
 
                 // TODO: add check here if card is about to die from something
-                // on the stack
-                // or from taking combat damage
+                // on the stack or from taking combat damage
 
                 final Cost abCost = sa.getPayCosts();
                 boolean freePing = immediately || abCost == null
@@ -982,7 +980,6 @@ public class DamageDealAi extends DamageAiBase {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-
         final Card source = sa.getHostCard();
         final String damage = sa.getParam("NumDmg");
         int dmg = AbilityUtils.calculateAmount(source, damage, sa);
