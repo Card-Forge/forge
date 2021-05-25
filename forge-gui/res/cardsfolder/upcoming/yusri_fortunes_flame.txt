@@ -1,0 +1,17 @@
+Name:Yusri, Fortune's Flame
+ManaCost:1 U R
+Types:Legendary Creature Efreet
+PT:2/3
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChooseNumber | TriggerDescription$ Whenever CARDNAME attacks, choose a number between 1 and 5. Flip that many coins. For each flip you win, draw a card. For each flip you lose, NICKNAME deals 2 damage to you. If you won five flips this way, you may cast spells from your hand this turn without paying their mana costs.
+SVar:TrigChooseNumber:DB$ ChooseNumber | Defined$ You | Min$ 1 | Max$ 5 | AILogic$ Max | SubAbility$ FlipCoin
+SVar:FlipCoin:DB$ FlipACoin | Amount$ X | WinSubAbility$ DBDraw | LoseSubAbility$ DBDamage | RememberNumber$ Wins | SubAbility$ DBEffect
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ Wins
+SVar:DBDamage:DB$ DealDamage | NumDmg$ Damage | Defined$ You
+SVar:DBEffect:DB$ Effect | StaticAbilities$ MayPlay | Stackable$ False | ConditionCheckSVar$ Y | ConditionSVarCompare$ EQ5 | SubAbility$ DBCleanup
+SVar:MayPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.nonLand+YouOwn | MayPlay$ True | MayPlayWithoutManaCost$ True | AffectedZone$ Hand | Description$ You may cast spells from your hand this turn without paying their mana costs.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Number$ChosenNumber
+SVar:Y:Count$RememberedNumber
+SVar:Damage:SVar$Losses/Times.2
+Oracle:Flying\nWhenever Yusri, Fortune's Flame attacks, choose a number between 1 and 5. Flip that many coins. For each flip you win, draw a card. For each flip you lose, Yusri deals 2 damage to you. If you won five flips this way, you may cast spells from your hand this turn without paying their mana costs.
