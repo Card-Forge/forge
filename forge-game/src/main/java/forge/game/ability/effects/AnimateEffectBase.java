@@ -110,6 +110,10 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             removeEnchantmentTypes = true;
         }
 
+        if (sa.hasParam("RememberAnimated")) {
+            source.addRemembered(c);
+        }
+
         if ((power != null) || (toughness != null)) {
             c.addNewPT(power, toughness, timestamp);
         }
