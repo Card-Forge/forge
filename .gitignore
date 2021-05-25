@@ -32,6 +32,8 @@ bin
 gen
 *.log
 
+# Ignore macOS Spotlight rubbish
+.DS_Store
 
 # TODO: specify what these ignores are for (releasing?)
 

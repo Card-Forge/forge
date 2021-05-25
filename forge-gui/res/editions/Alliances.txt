@@ -11,205 +11,205 @@ BoosterBox=45
 Foil=NotSupported
 
 [cards]
-C Aesthir Glider
-C Aesthir Glider
-C Agent of Stromgald
-C Agent of Stromgald
-C Arcane Denial
-C Arcane Denial
-R Ashnod's Cylix
-C Astrolabe
-C Astrolabe
-C Awesome Presence
-C Awesome Presence
-U Balduvian Dead
-R Balduvian Horde
-R Balduvian Trading Post
-C Balduvian War-Makers
-C Balduvian War-Makers
-C Benthic Explorers
-C Benthic Explorers
-C Bestial Fury
-C Bestial Fury
-U Bounty of the Hunt
-U Browse
-U Burnout
-C Carrier Pigeons
-C Carrier Pigeons
-C Casting of Bones
-C Casting of Bones
-R Chaos Harlequin
-U Contagion
-C Deadly Insect
-C Deadly Insect
-U Death Spark
-R Diminishing Returns
-U Diseased Vermin
-R Dystopia
-U Elvish Bard
-C Elvish Ranger
-C Elvish Ranger
-U Elvish Spirit Guide
-U Energy Arc
-C Enslaved Scout
-C Enslaved Scout
-C Errand of Duty
-C Errand of Duty
-R Exile
-C False Demise
-C False Demise
-R Fatal Lore
-C Feast or Famine
-C Feast or Famine
-C Fevered Strength
-C Fevered Strength
-R Floodwater Dam
-U Force of Will
-C Foresight
-C Foresight
-C Fyndhorn Druid
-C Fyndhorn Druid
-R Gargantuan Gorilla
-C Gift of the Woods
-C Gift of the Woods
-C Gorilla Berserkers
-C Gorilla Berserkers
-C Gorilla Chieftain
-C Gorilla Chieftain
-C Gorilla Shaman
-C Gorilla Shaman
-C Gorilla War Cry
-C Gorilla War Cry
-C Guerrilla Tactics
-C Guerrilla Tactics
-R Gustha's Scepter
-U Hail Storm
-R Heart of Yavimaya
-R Helm of Obedience
-U Inheritance
-C Insidious Bookworms
-C Insidious Bookworms
-R Ivory Gargoyle
-U Juniper Order Advocate
-R Kaysa
-R Keeper of Tresserhorn
-C Kjeldoran Escort
-C Kjeldoran Escort
-U Kjeldoran Home Guard
-R Kjeldoran Outpost
-C Kjeldoran Pride
-C Kjeldoran Pride
-R Krovikan Horror
-U Krovikan Plague
-R Lake of the Dead
-C Lat-Nam's Legacy
-C Lat-Nam's Legacy
-R Library of Lat-Nam
-C Lim-Dul's High Guard
-C Lim-Dul's High Guard
-U Lim-Dul's Paladin
-U Lim-Dul's Vault
-R Lodestone Bauble
-R Lord of Tresserhorn
-C Martyrdom
-C Martyrdom
-R Misfortune
-U Mishra's Groundbreaker
-U Misinformation
-U Mystic Compass
-U Nature's Blessing
-U Nature's Chosen
-R Nature's Wrath
-C Noble Steeds
-C Noble Steeds
-R Omen of Fire
-C Phantasmal Fiend
-C Phantasmal Fiend
-R Phantasmal Sphere
-R Phelddagrif
-C Phyrexian Boon
-C Phyrexian Boon
-R Phyrexian Devourer
-R Phyrexian Portal
-C Phyrexian War Beast
-C Phyrexian War Beast
-U Pillage
-U Primitive Justice
-U Pyrokinesis
-C Reinforcements
-C Reinforcements
-C Reprisal
-C Reprisal
-R Ritual of the Machine
-R Rogue Skycaptain
-R Royal Decree
-C Royal Herbalist
-C Royal Herbalist
-U Scarab of the Unseen
-U Scars of the Veteran
-U School of the Unseen
-U Seasoned Tactician
-R Sheltered Valley
-U Shield Sphere
-U Sol Grail
-C Soldevi Adnate
-C Soldevi Adnate
-R Soldevi Digger
-R Soldevi Excavations
-C Soldevi Heretic
-C Soldevi Heretic
-C Soldevi Sage
-C Soldevi Sage
-C Soldevi Sentry
-C Soldevi Sentry
-C Soldevi Steam Beast
-C Soldevi Steam Beast
-U Soldier of Fortune
-U Spiny Starfish
-R Splintering Wind
-C Stench of Decay
-C Stench of Decay
-R Storm Cauldron
-C Storm Crow
-C Storm Crow
-U Storm Elemental
-C Storm Shaman
-C Storm Shaman
-U Stromgald Spy
-U Suffocation
-U Surge of Strength
-R Sustaining Spirit
-C Swamp Mosquito
-C Swamp Mosquito
-R Sworn Defender
-C Taste of Paradise
-C Taste of Paradise
-R Thawing Glaciers
-R Thought Lash
-R Tidal Control
-R Tornado
-C Undergrowth
-C Undergrowth
-U Unlikely Alliance
-U Urza's Engine
-C Varchild's Crusader
-C Varchild's Crusader
-R Varchild's War-Riders
-C Veteran's Voice
-C Veteran's Voice
-C Viscerid Armor
-C Viscerid Armor
-U Viscerid Drone
-R Wandering Mage
-C Whip Vine
-C Whip Vine
-U Whirling Catapult
-C Wild Aesthir
-C Wild Aesthir
-R Winter's Night
-C Yavimaya Ancients
-C Yavimaya Ancients
-U Yavimaya Ants
+116a C Aesthir Glider
+116b C Aesthir Glider
+64a C Agent of Stromgald
+64b C Agent of Stromgald
+22a C Arcane Denial
+22b C Arcane Denial
+117 R Ashnod's Cylix
+118a C Astrolabe
+118b C Astrolabe
+23a C Awesome Presence
+23b C Awesome Presence
+43 U Balduvian Dead
+65 R Balduvian Horde
+137 R Balduvian Trading Post
+66a C Balduvian War-Makers
+66b C Balduvian War-Makers
+24a C Benthic Explorers
+24b C Benthic Explorers
+67a C Bestial Fury
+67b C Bestial Fury
+85 U Bounty of the Hunt
+25 U Browse
+68 U Burnout
+1a C Carrier Pigeons
+1b C Carrier Pigeons
+44a C Casting of Bones
+44b C Casting of Bones
+69 R Chaos Harlequin
+45 U Contagion
+86a C Deadly Insect
+86b C Deadly Insect
+70 U Death Spark
+26 R Diminishing Returns
+46 U Diseased Vermin
+47 R Dystopia
+87 U Elvish Bard
+88a C Elvish Ranger
+88b C Elvish Ranger
+89 U Elvish Spirit Guide
+106 U Energy Arc
+71a C Enslaved Scout
+71b C Enslaved Scout
+2a C Errand of Duty
+2b C Errand of Duty
+3 R Exile
+27a C False Demise
+27b C False Demise
+48 R Fatal Lore
+49a C Feast or Famine
+49b C Feast or Famine
+50a C Fevered Strength
+50b C Fevered Strength
+119 R Floodwater Dam
+28 U Force of Will
+29a C Foresight
+29b C Foresight
+90a C Fyndhorn Druid
+90b C Fyndhorn Druid
+91 R Gargantuan Gorilla
+92a C Gift of the Woods
+92b C Gift of the Woods
+93a C Gorilla Berserkers
+93b C Gorilla Berserkers
+94a C Gorilla Chieftain
+94b C Gorilla Chieftain
+72a C Gorilla Shaman
+72b C Gorilla Shaman
+73a C Gorilla War Cry
+73b C Gorilla War Cry
+74a C Guerrilla Tactics
+74b C Guerrilla Tactics
+120 R Gustha's Scepter
+95 U Hail Storm
+138 R Heart of Yavimaya
+121 R Helm of Obedience
+4 U Inheritance
+51a C Insidious Bookworms
+51b C Insidious Bookworms
+5 R Ivory Gargoyle
+6 U Juniper Order Advocate
+96 R Kaysa
+52 R Keeper of Tresserhorn
+7a C Kjeldoran Escort
+7b C Kjeldoran Escort
+8 U Kjeldoran Home Guard
+139 R Kjeldoran Outpost
+9a C Kjeldoran Pride
+9b C Kjeldoran Pride
+53 R Krovikan Horror
+54 U Krovikan Plague
+140 R Lake of the Dead
+30a C Lat-Nam's Legacy
+30b C Lat-Nam's Legacy
+31 R Library of Lat-Nam
+55a C Lim-Dûl's High Guard
+55b C Lim-Dûl's High Guard
+108 U Lim-Dûl's Paladin
+107 U Lim-Dûl's Vault
+122 R Lodestone Bauble
+112 R Lord of Tresserhorn
+10a C Martyrdom
+10b C Martyrdom
+113 R Misfortune
+123 U Mishra's Groundbreaker
+56 U Misinformation
+124 U Mystic Compass
+110 U Nature's Blessing
+97 U Nature's Chosen
+98 R Nature's Wrath
+11a C Noble Steeds
+11b C Noble Steeds
+75 R Omen of Fire
+57a C Phantasmal Fiend
+57b C Phantasmal Fiend
+32 R Phantasmal Sphere
+115 R Phelddagrif
+58a C Phyrexian Boon
+58b C Phyrexian Boon
+125 R Phyrexian Devourer
+126 R Phyrexian Portal
+127a C Phyrexian War Beast
+127b C Phyrexian War Beast
+76 U Pillage
+77 U Primitive Justice
+78 U Pyrokinesis
+12a C Reinforcements
+12b C Reinforcements
+13a C Reprisal
+13b C Reprisal
+59 R Ritual of the Machine
+79 R Rogue Skycaptain
+14 R Royal Decree
+15a C Royal Herbalist
+15b C Royal Herbalist
+128 U Scarab of the Unseen
+16 U Scars of the Veteran
+141 U School of the Unseen
+17 U Seasoned Tactician
+142 R Sheltered Valley
+129 U Shield Sphere
+130 U Sol Grail
+60a C Soldevi Adnate
+60b C Soldevi Adnate
+131 R Soldevi Digger
+143 R Soldevi Excavations
+33a C Soldevi Heretic
+33b C Soldevi Heretic
+34a C Soldevi Sage
+34b C Soldevi Sage
+132a C Soldevi Sentry
+132b C Soldevi Sentry
+133a C Soldevi Steam Beast
+133b C Soldevi Steam Beast
+80 U Soldier of Fortune
+35 U Spiny Starfish
+99 R Splintering Wind
+61a C Stench of Decay
+61b C Stench of Decay
+134 R Storm Cauldron
+36a C Storm Crow
+36b C Storm Crow
+37 U Storm Elemental
+81a C Storm Shaman
+81b C Storm Shaman
+62 U Stromgald Spy
+38 U Suffocation
+109 U Surge of Strength
+18 R Sustaining Spirit
+63a C Swamp Mosquito
+63b C Swamp Mosquito
+19 R Sworn Defender
+100a C Taste of Paradise
+100b C Taste of Paradise
+144 R Thawing Glaciers
+39 R Thought Lash
+40 R Tidal Control
+101 R Tornado
+102a C Undergrowth
+102b C Undergrowth
+20 U Unlikely Alliance
+135 U Urza's Engine
+82a C Varchild's Crusader
+82b C Varchild's Crusader
+83 R Varchild's War-Riders
+84a C Veteran's Voice
+84b C Veteran's Voice
+41a C Viscerid Armor
+41b C Viscerid Armor
+42 U Viscerid Drone
+111 R Wandering Mage
+103a C Whip Vine
+103b C Whip Vine
+136 U Whirling Catapult
+21a C Wild Aesthir
+21b C Wild Aesthir
+114 R Winter's Night
+104a C Yavimaya Ancients
+104b C Yavimaya Ancients
+105 U Yavimaya Ants
 
 [tokens]
 w_0_1_deserter

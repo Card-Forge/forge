@@ -5,4 +5,4 @@ Name=Shattered Chains
 Type=Other
 
 [cards]
-C Giant Badger
+4 C Giant Badger

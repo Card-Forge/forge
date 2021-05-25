@@ -132,6 +132,12 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
 
     @Override public String toString() { return name; }
     @Override public String getEdition() { return edition != null ? edition.getCode() : "???"; }
+
+    @Override
+    public String getCollectorNumber() {
+        return IPaperCard.NO_COLLECTOR_NUMBER;
+    }
+
     @Override public int getArtIndex() { return artIndex; }
     @Override public boolean isFoil() { return false; }
     @Override public CardRules getRules() { return card; }

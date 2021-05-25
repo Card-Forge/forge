@@ -9,6 +9,7 @@ import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import forge.item.IPaperCard;
 import org.apache.commons.lang3.tuple.Pair;
 
 import forge.ImageKeys;
@@ -78,12 +79,11 @@ public abstract class ImageFetcher {
                 artIndex = Integer.parseInt(matcher.group(2));
             }
             final StaticData data = StaticData.instance();
-            final String cardNum = data.getCommonCards().getCardCollectorNumber(paperCard.getName(),
-                    paperCard.getEdition(), artIndex);
-            if (cardNum != null) {
-                String suffix = "";
+            final String cardCollectorNumber = paperCard.getCollectorNumber();
+            if (!cardCollectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER)){
+                String faceParam = "";
                 if (paperCard.getRules().getOtherPart() != null) {
-                    suffix = (backFace ? "b" : "a");
+                    faceParam = (backFace ? "&face=back" : "&face=front");
                 }
                 final String editionMciCode = data.getEditions().getMciCodeByCode(paperCard.getEdition());
                 String langCode = "en";
@@ -93,8 +93,8 @@ public abstract class ImageFetcher {
                 }
                 // see https://scryfall.com/blog 2020/8/6, and
                 // https://scryfall.com/docs/api/cards/collector
-                downloadUrls.add(String.format("https://api.scryfall.com/cards/%s/%s%s/%s?format=image&version=normal",
-                        editionMciCode, cardNum, suffix, langCode));
+                downloadUrls.add(String.format("https://api.scryfall.com/cards/%s/%s/%s?format=image&version=normal%s",
+                        editionMciCode, cardCollectorNumber, langCode, faceParam));
             }
 
         } else if (prefix.equals(ImageKeys.TOKEN_PREFIX)) {

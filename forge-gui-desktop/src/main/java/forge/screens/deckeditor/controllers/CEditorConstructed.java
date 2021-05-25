@@ -314,18 +314,18 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
             if (gameType == GameType.Oathbreaker) {
                 PaperCard pc = cmb.getItemManager().getSelectedItem();
                 if (pc != null && pc.getRules().canBeSignatureSpell()) {
-                    cmb.addMoveItems(localizer.getMessage("lblSet2"), localizer.getMessage("lblassignaturespell"));
+                    cmb.addMoveItems(localizer.getMessage("lblSetEdition"), localizer.getMessage("lblassignaturespell"));
                 }
                 else {
-                    cmb.addMoveItems(localizer.getMessage("lblSet2"), localizer.getMessage("lblasoathbreaker"));
+                    cmb.addMoveItems(localizer.getMessage("lblSetEdition"), localizer.getMessage("lblasoathbreaker"));
                 }
             }
             else {
-                cmb.addMoveItems(localizer.getMessage("lblSet2"), localizer.getMessage("lblascommander"));
+                cmb.addMoveItems(localizer.getMessage("lblSetEdition"), localizer.getMessage("lblascommander"));
             }
             break;
         case Avatar:
-            cmb.addMoveItems(localizer.getMessage("lblSet2"), localizer.getMessage("lblasavatar"));
+            cmb.addMoveItems(localizer.getMessage("lblSetEdition"), localizer.getMessage("lblasavatar"));
             break;
         case Schemes:
             cmb.addMoveItems(localizer.getMessage("lblAdd"), localizer.getMessage("lbltoschemedeck"));

@@ -5,42 +5,42 @@ Name=Arena New Player Experience
 Type=Online
 
 [cards]
-C Altar's Reap
-U Ambition's Cost
-U Angelic Reward
-U Blinding Radiance
-R Chaos Maw
-U Confront the Assault
-C Cruel Cut
-C Divination
-U Doublecast
-C Feral Roar
-U Goblin Bruiser
-U Goblin Gang Leader
-U Goblin Grenade
-R Inspiring Commander
-C Knight's Pledge
-C Loxodon Line Breaker
-C Miasmic Mummy
-C Nimble Pilferer
-R Ogre Painbringer
-M Overflowing Insight
-C Raging Goblin
-C Renegade Demon
-U Rise from the Grave
-C River's Favor
-C Rumbling Baloth
-C Sanctuary Cat
-U Seismic Rupture
-U Serra Angel
-C Shorecomber Crab
-C Shrine Keeper
-R Soulhunter Rakshasa
-C Spiritual Guardian
-C Tactical Advantage
-C Take Vengeance
-U Titanic Pelagosaur
-C Treetop Warden
-U Volcanic Dragon
-C Waterknot
-C Zephyr Gull
+24 C Altar's Reap
+25 U Ambition's Cost
+1 U Angelic Reward
+2 U Blinding Radiance
+36 R Chaos Maw
+3 U Confront the Assault
+26 C Cruel Cut
+14 C Divination
+37 U Doublecast
+46 C Feral Roar
+39 U Goblin Bruiser
+40 U Goblin Gang Leader
+41 U Goblin Grenade
+4 R Inspiring Commander
+5 C Knight's Pledge
+7 C Loxodon Line Breaker
+29 C Miasmic Mummy
+31 C Nimble Pilferer
+42 R Ogre Painbringer
+16 M Overflowing Insight
+43 C Raging Goblin
+33 C Renegade Demon
+34 U Rise from the Grave
+19 C River's Favor
+47 C Rumbling Baloth
+8 C Sanctuary Cat
+44 U Seismic Rupture
+9 U Serra Angel
+18 C Shorecomber Crab
+10 C Shrine Keeper
+35 R Soulhunter Rakshasa
+11 C Spiritual Guardian
+12 C Tactical Advantage
+13 C Take Vengeance
+19 U Titanic Pelagosaur
+48 C Treetop Warden
+45 U Volcanic Dragon
+22 C Waterknot
+23 C Zephyr Gull

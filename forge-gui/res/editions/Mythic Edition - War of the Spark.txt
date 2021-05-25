@@ -6,14 +6,14 @@ MciCode=med
 Type=Other
 
 [cards]
-M Ugin, the Spirit Dragon
-M Gideon Blackblade
-M Jace, the Mind Sculptor
-M Tezzeret the Seeker
-M Garruk, Apex Predator
-M Nicol Bolas, Dragon-God
-M Nahiri, the Harbinger
-M Sarkhan Unbroken
+WS1 M Ugin, the Spirit Dragon
+WS2 M Gideon Blackblade
+WS3 M Jace, the Mind Sculptor
+WS4 M Tezzeret the Seeker
+WS5 M Garruk, Apex Predator
+WS6 M Nicol Bolas, Dragon-God
+WS7 M Nahiri, the Harbinger
+WS8 M Sarkhan Unbroken
 
 [tokens]
 b_3_3_beast_deathtouch

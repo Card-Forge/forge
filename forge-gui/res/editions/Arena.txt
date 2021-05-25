@@ -5,5 +5,5 @@ Name=Arena
 Type=Other
 
 [cards]
-C Arena
-C Sewers of Estark
+1 C Arena
+2 C Sewers of Estark

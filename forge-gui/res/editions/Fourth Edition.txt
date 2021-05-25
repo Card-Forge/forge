@@ -12,384 +12,384 @@ Foil=NotSupported
 ChaosDraftThemes=CORE_SET
 
 [cards]
-U Abomination
-U Air Elemental
-C Alabaster Potion
-R Aladdin's Lamp
-R Aladdin's Ring
-U Ali Baba
-C Amrou Kithkin
-C Amulet of Kroog
-U Angry Mob
-U Animate Artifact
-U Animate Dead
-R Animate Wall
-R Ankh of Mishra
-C Apprentice Wizard
-R Armageddon
-R Armageddon Clock
-U Ashes to Ashes
-U Ashnod's Battle Gear
-R Aspect of Wolf
-U Backfire
-R Bad Moon
-R Balance
-R Ball Lightning
-C Battering Ram
-C Benalish Hero
-C Bird Maiden
-R Birds of Paradise
-U Black Knight
-R Black Mana Battery
-U Black Vise
-U Black Ward
-R Blessing
-U Blight
-C Blood Lust
-C Blue Elemental Blast
-R Blue Mana Battery
-U Blue Ward
-C Bog Imp
-U Bog Wraith
-R Bottle of Suleiman
-C Brainwash
-U Brass Man
-R Bronze Tablet
-C Brothers of Fire
-U Burrowing
-C Carnivorous Plant
-U Carrion Ants
-U Castle
-U Cave People
-U Celestial Prism
-U Channel
-R Chaoslace
-U Circle of Protection: Artifacts
-C Circle of Protection: Black
-C Circle of Protection: Blue
-C Circle of Protection: Green
-C Circle of Protection: Red
-C Circle of Protection: White
-C Clay Statue
-R Clockwork Avian
-R Clockwork Beast
-R Cockatrice
-R Colossus of Sardia
-U Conservator
-U Control Magic
-U Conversion
-R Coral Helm
-R Cosmic Horror
-U Counterspell
-C Craw Wurm
-C Creature Bond
-R Crimson Manticore
-U Crumble
-R Crusade
-U Crystal Rod
-U Cursed Land
-U Cursed Rack
-C Cyclopean Mummy
-R Dancing Scimitar
-C Dark Ritual
-C Death Ward
-U Deathgrip
-R Deathlace
-U Desert Twister
-U Detonate
-U Diabolic Machine
-R Dingus Egg
-C Disenchant
-C Disintegrate
-R Disrupting Scepter
-U Divine Transformation
-R Dragon Engine
-U Dragon Whelp
-C Drain Life
-R Drain Power
-C Drudge Skeletons
-C Durkwood Boars
-C Dwarven Warriors
-U Earth Elemental
-R Earthquake
-R Ebony Horse
-R El-Hajjaj
-R Elder Land Wurm
-U Elven Riders
-R Elvish Archers
-U Energy Flux
-C Energy Tap
-C Erg Raiders
-C Erosion
-C Eternal Warrior
-U Evil Presence
-R Eye for an Eye
-C Fear
-U Feedback
-U Fellwar Stone
-U Fire Elemental
-C Fireball
-C Firebreathing
-C Fissure
-U Flashfires
-C Flight
-C Flood
-R Flying Carpet
-C Fog
-R Force of Nature
-L Forest
-L Forest
-L Forest
-C Fortified Area
-C Frozen Shade
-R Fungusaur
-R Gaea's Liege
-C Gaseous Form
-U Ghost Ship
-C Giant Growth
-C Giant Spider
-C Giant Strength
-C Giant Tortoise
-U Glasses of Urza
-U Gloom
-U Goblin Balloon Brigade
-R Goblin King
-C Goblin Rock Sled
-C Grapeshot Catapult
-C Gray Ogre
-R Greed
-R Green Mana Battery
-U Green Ward
-C Grizzly Bears
-C Healing Salve
-R Helm of Chatzuk
-C Hill Giant
-C Holy Armor
-C Holy Strength
-C Howl from Beyond
-R Howling Mine
-R Hurkyl's Recall
-C Hurloon Minotaur
-R Hurr Jackal
-U Hurricane
-U Hypnotic Specter
-C Immolation
-R Inferno
-U Instill Energy
-U Iron Star
-C Ironclaw Orcs
-C Ironroot Treefolk
-L Island
-L Island
-L Island
-R Island Fish Jasconius
-R Island Sanctuary
-U Ivory Cup
-R Ivory Tower
-R Jade Monolith
-R Jandor's Saddlebags
-R Jayemdae Tome
-C Jump
-U Junun Efreet
-U Karma
-U Keldon Warlord
-U Killer Bees
-U Kismet
-R Kormus Bell
-C Land Leeches
-R Land Tax
-R Leviathan
-U Ley Druid
-U Library of Leng
-U Lifeforce
-R Lifelace
-U Lifetap
-C Lightning Bolt
-R Living Artifact
-R Living Lands
-C Llanowar Elves
-R Lord of Atlantis
-R Lord of the Pit
-C Lost Soul
-U Lure
-R Magical Hack
-R Magnetic Mountain
-R Mahamoti Djinn
-R Mana Clash
-R Mana Flare
-R Mana Short
-R Mana Vault
-R Manabarbs
-C Marsh Gas
-C Marsh Viper
-R Meekstone
-C Merfolk of the Pearl Trident
-C Mesa Pegasus
-R Millstone
-U Mind Bomb
-R Mind Twist
-U Mishra's Factory
-R Mishra's War Machine
-C Mons's Goblin Raiders
-C Morale
-L Mountain
-L Mountain
-L Mountain
-C Murk Dwellers
-C Nafs Asp
-R Nether Shadow
-R Nevinyrral's Disk
-R Nightmare
-R Northern Paladin
-U Oasis
-U Obsianus Golem
-R Onulet
-U Orcish Artillery
-U Orcish Oriflamme
-U Ornithopter
-U Osai Vultures
-C Paralyze
-C Pearled Unicorn
-R Personal Incarnation
-C Pestilence
-U Phantasmal Forces
-C Phantasmal Terrain
-U Phantom Monster
-C Piety
-C Pikemen
-R Pirate Ship
-C Pit Scorpion
-C Plague Rats
-L Plains
-L Plains
-L Plains
-C Power Leak
-C Power Sink
-R Power Surge
-C Pradesh Gypsies
-R Primal Clay
-C Prodigal Sorcerer
-R Psionic Entity
-C Psychic Venom
-R Purelace
-U Pyrotechnics
-U Radjan Spirit
-R Rag Man
-C Raise Dead
-R Rebirth
-C Red Elemental Blast
-R Red Mana Battery
-U Red Ward
-C Regeneration
-R Relic Bind
-R Reverse Damage
-R Righteousness
-U Rod of Ruin
-R Royal Assassin
-C Samite Healer
-C Sandstorm
-R Savannah Lions
-C Scathe Zombies
-U Scavenging Ghoul
-C Scryb Sprites
-C Sea Serpent
-C Seeker
-U Segovian Leviathan
-U Sengir Vampire
-U Serra Angel
-C Shanodin Dryads
-U Shapeshifter
-C Shatter
-R Shivan Dragon
-U Simulacrum
-U Sindbad
-U Siren's Call
-C Sisters of the Flame
-R Sleight of Mind
-R Smoke
-R Sorceress Queen
-U Soul Net
-C Spell Blast
-U Spirit Link
-U Spirit Shackle
-R Stasis
-U Steal Artifact
-U Stone Giant
-C Stone Rain
-C Stream of Life
-U Strip Mine
-R Sunglasses of Urza
-C Sunken City
-L Swamp
-L Swamp
-L Swamp
-U Swords to Plowshares
-R Sylvan Library
-U Tawnos's Wand
-U Tawnos's Weaponry
-R Tempest Efreet
-C Terror
-R Tetravus
-C The Brute
-R The Hive
-U The Rack
-U Thicket Basilisk
-R Thoughtlace
-U Throne of Bone
-R Timber Wolves
-R Time Elemental
-R Titania's Song
-C Tranquility
-R Triskelion
-U Tsunami
-C Tundra Wolves
-U Tunnel
-C Twiddle
-U Uncle Istvan
-C Unholy Strength
-C Unstable Mutation
-C Unsummon
-U Untamed Wilds
-R Urza's Avenger
-U Uthden Troll
-C Vampire Bats
-C Venom
-R Verduran Enchantress
-U Visions
-R Volcanic Eruption
-U Wall of Air
-U Wall of Bone
-U Wall of Brambles
-U Wall of Dust
-U Wall of Fire
-U Wall of Ice
-C Wall of Spears
-U Wall of Stone
-U Wall of Swords
-U Wall of Water
-C Wall of Wood
-U Wanderlust
-C War Mammoth
-R Warp Artifact
-U Water Elemental
-C Weakness
-R Web
-U Whirling Dervish
-U White Knight
-R White Mana Battery
-U White Ward
-C Wild Growth
-R Will-o'-the-Wisp
-R Winds of Change
-U Winter Blast
-R Winter Orb
-U Wooden Sphere
-C Word of Binding
-R Wrath of God
-R Xenic Poltergeist
-C Yotian Soldier
-C Zephyr Falcon
-R Zombie Master
+117 U Abomination
+59 U Air Elemental
+1 C Alabaster Potion
+291 R Aladdin's Lamp
+292 R Aladdin's Ring
+175 U Ali Baba
+2 C Amrou Kithkin
+293 C Amulet of Kroog
+3 U Angry Mob
+60 U Animate Artifact
+118 U Animate Dead
+4 R Animate Wall
+294 R Ankh of Mishra
+61 C Apprentice Wizard
+5 R Armageddon
+295 R Armageddon Clock
+119 U Ashes to Ashes
+296 U Ashnod's Battle Gear
+233 R Aspect of Wolf
+62 U Backfire
+120 R Bad Moon
+6 R Balance
+176 R Ball Lightning
+297 C Battering Ram
+7 C Benalish Hero
+177 C Bird Maiden
+234 R Birds of Paradise
+121 U Black Knight
+298 R Black Mana Battery
+299 U Black Vise
+8 U Black Ward
+9 R Blessing
+122 U Blight
+178 C Blood Lust
+63 C Blue Elemental Blast
+300 R Blue Mana Battery
+10 U Blue Ward
+123 C Bog Imp
+124 U Bog Wraith
+301 R Bottle of Suleiman
+11 C Brainwash
+302 U Brass Man
+303 R Bronze Tablet
+179 C Brothers of Fire
+180 U Burrowing
+235 C Carnivorous Plant
+125 U Carrion Ants
+12 U Castle
+181 U Cave People
+304 U Celestial Prism
+236 U Channel
+182 R Chaoslace
+13 U Circle of Protection: Artifacts
+14 C Circle of Protection: Black
+15 C Circle of Protection: Blue
+16 C Circle of Protection: Green
+17 C Circle of Protection: Red
+18 C Circle of Protection: White
+305 C Clay Statue
+306 R Clockwork Avian
+307 R Clockwork Beast
+237 R Cockatrice
+308 R Colossus of Sardia
+309 U Conservator
+64 U Control Magic
+19 U Conversion
+310 R Coral Helm
+126 R Cosmic Horror
+65 U Counterspell
+238 C Craw Wurm
+66 C Creature Bond
+183 R Crimson Manticore
+239 U Crumble
+20 R Crusade
+311 U Crystal Rod
+127 U Cursed Land
+312 U Cursed Rack
+128 C Cyclopean Mummy
+313 R Dancing Scimitar
+129 C Dark Ritual
+21 C Death Ward
+130 U Deathgrip
+131 R Deathlace
+240 U Desert Twister
+184 U Detonate
+314 U Diabolic Machine
+315 R Dingus Egg
+22 C Disenchant
+185 C Disintegrate
+316 R Disrupting Scepter
+23 U Divine Transformation
+317 R Dragon Engine
+186 U Dragon Whelp
+132 C Drain Life
+67 R Drain Power
+133 C Drudge Skeletons
+241 C Durkwood Boars
+187 C Dwarven Warriors
+188 U Earth Elemental
+189 R Earthquake
+318 R Ebony Horse
+134 R El-Hajjaj
+24 R Elder Land Wurm
+242 U Elven Riders
+243 R Elvish Archers
+68 U Energy Flux
+69 C Energy Tap
+135 C Erg Raiders
+70 C Erosion
+190 C Eternal Warrior
+136 U Evil Presence
+25 R Eye for an Eye
+137 C Fear
+71 U Feedback
+319 U Fellwar Stone
+191 U Fire Elemental
+192 C Fireball
+193 C Firebreathing
+194 C Fissure
+195 U Flashfires
+72 C Flight
+73 C Flood
+320 R Flying Carpet
+244 C Fog
+245 R Force of Nature
+376 L Forest
+377 L Forest
+378 L Forest
+26 C Fortified Area
+138 C Frozen Shade
+246 R Fungusaur
+247 R Gaea's Liege
+74 C Gaseous Form
+75 U Ghost Ship
+248 C Giant Growth
+249 C Giant Spider
+196 C Giant Strength
+76 C Giant Tortoise
+321 U Glasses of Urza
+139 U Gloom
+197 U Goblin Balloon Brigade
+198 R Goblin King
+199 C Goblin Rock Sled
+322 C Grapeshot Catapult
+200 C Gray Ogre
+140 R Greed
+323 R Green Mana Battery
+27 U Green Ward
+250 C Grizzly Bears
+28 C Healing Salve
+324 R Helm of Chatzuk
+201 C Hill Giant
+29 C Holy Armor
+30 C Holy Strength
+141 C Howl from Beyond
+325 R Howling Mine
+77 R Hurkyl's Recall
+202 C Hurloon Minotaur
+203 R Hurr Jackal
+251 U Hurricane
+142 U Hypnotic Specter
+204 C Immolation
+205 R Inferno
+252 U Instill Energy
+326 U Iron Star
+206 C Ironclaw Orcs
+253 C Ironroot Treefolk
+367 L Island
+368 L Island
+369 L Island
+78 R Island Fish Jasconius
+31 R Island Sanctuary
+327 U Ivory Cup
+328 R Ivory Tower
+329 R Jade Monolith
+330 R Jandor's Saddlebags
+331 R Jayemdae Tome
+79 C Jump
+143 U Junun Efreet
+32 U Karma
+207 U Keldon Warlord
+254 U Killer Bees
+33 U Kismet
+332 R Kormus Bell
+255 C Land Leeches
+34 R Land Tax
+80 R Leviathan
+256 U Ley Druid
+333 U Library of Leng
+257 U Lifeforce
+258 R Lifelace
+81 U Lifetap
+208 C Lightning Bolt
+259 R Living Artifact
+260 R Living Lands
+261 C Llanowar Elves
+82 R Lord of Atlantis
+144 R Lord of the Pit
+145 C Lost Soul
+262 U Lure
+83 R Magical Hack
+209 R Magnetic Mountain
+84 R Mahamoti Djinn
+210 R Mana Clash
+211 R Mana Flare
+85 R Mana Short
+334 R Mana Vault
+212 R Manabarbs
+146 C Marsh Gas
+263 C Marsh Viper
+335 R Meekstone
+86 C Merfolk of the Pearl Trident
+35 C Mesa Pegasus
+336 R Millstone
+87 U Mind Bomb
+147 R Mind Twist
+361 U Mishra's Factory
+337 R Mishra's War Machine
+213 C Mons's Goblin Raiders
+36 C Morale
+373 L Mountain
+374 L Mountain
+375 L Mountain
+148 C Murk Dwellers
+264 C Nafs Asp
+149 R Nether Shadow
+338 R Nevinyrral's Disk
+150 R Nightmare
+37 R Northern Paladin
+362 U Oasis
+339 U Obsianus Golem
+340 R Onulet
+214 U Orcish Artillery
+215 U Orcish Oriflamme
+341 U Ornithopter
+38 U Osai Vultures
+151 C Paralyze
+39 C Pearled Unicorn
+40 R Personal Incarnation
+152 C Pestilence
+88 U Phantasmal Forces
+89 C Phantasmal Terrain
+90 U Phantom Monster
+41 C Piety
+42 C Pikemen
+91 R Pirate Ship
+153 C Pit Scorpion
+154 C Plague Rats
+364 L Plains
+365 L Plains
+366 L Plains
+92 C Power Leak
+93 C Power Sink
+216 R Power Surge
+265 C Pradesh Gypsies
+342 R Primal Clay
+94 C Prodigal Sorcerer
+95 R Psionic Entity
+96 C Psychic Venom
+43 R Purelace
+217 U Pyrotechnics
+266 U Radjan Spirit
+155 R Rag Man
+156 C Raise Dead
+267 R Rebirth
+218 C Red Elemental Blast
+343 R Red Mana Battery
+44 U Red Ward
+268 C Regeneration
+97 R Relic Bind
+45 R Reverse Damage
+46 R Righteousness
+344 U Rod of Ruin
+157 R Royal Assassin
+47 C Samite Healer
+269 C Sandstorm
+48 R Savannah Lions
+158 C Scathe Zombies
+159 U Scavenging Ghoul
+270 C Scryb Sprites
+98 C Sea Serpent
+49 C Seeker
+99 U Segovian Leviathan
+160 U Sengir Vampire
+50 U Serra Angel
+271 C Shanodin Dryads
+345 U Shapeshifter
+219 C Shatter
+220 R Shivan Dragon
+161 U Simulacrum
+100 U Sindbad
+101 U Siren's Call
+221 C Sisters of the Flame
+102 R Sleight of Mind
+222 R Smoke
+162 R Sorceress Queen
+346 U Soul Net
+103 C Spell Blast
+51 U Spirit Link
+163 U Spirit Shackle
+104 R Stasis
+105 U Steal Artifact
+223 U Stone Giant
+224 C Stone Rain
+272 C Stream of Life
+363 U Strip Mine
+347 R Sunglasses of Urza
+106 C Sunken City
+370 L Swamp
+371 L Swamp
+372 L Swamp
+52 U Swords to Plowshares
+273 R Sylvan Library
+348 U Tawnos's Wand
+349 U Tawnos's Weaponry
+225 R Tempest Efreet
+164 C Terror
+350 R Tetravus
+226 C The Brute
+351 R The Hive
+352 U The Rack
+274 U Thicket Basilisk
+107 R Thoughtlace
+353 U Throne of Bone
+275 R Timber Wolves
+108 R Time Elemental
+276 R Titania's Song
+277 C Tranquility
+354 R Triskelion
+278 U Tsunami
+53 C Tundra Wolves
+227 U Tunnel
+109 C Twiddle
+165 U Uncle Istvan
+166 C Unholy Strength
+110 C Unstable Mutation
+111 C Unsummon
+279 U Untamed Wilds
+355 R Urza's Avenger
+228 U Uthden Troll
+167 C Vampire Bats
+280 C Venom
+281 R Verduran Enchantress
+54 U Visions
+112 R Volcanic Eruption
+113 U Wall of Air
+168 U Wall of Bone
+282 U Wall of Brambles
+229 U Wall of Dust
+230 U Wall of Fire
+283 U Wall of Ice
+356 C Wall of Spears
+231 U Wall of Stone
+55 U Wall of Swords
+114 U Wall of Water
+284 C Wall of Wood
+285 U Wanderlust
+286 C War Mammoth
+169 R Warp Artifact
+115 U Water Elemental
+170 C Weakness
+287 R Web
+288 U Whirling Dervish
+56 U White Knight
+357 R White Mana Battery
+57 U White Ward
+289 C Wild Growth
+171 R Will-o'-the-Wisp
+232 R Winds of Change
+290 U Winter Blast
+358 R Winter Orb
+359 U Wooden Sphere
+172 C Word of Binding
+58 R Wrath of God
+173 R Xenic Poltergeist
+360 C Yotian Soldier
+116 C Zephyr Falcon
+174 R Zombie Master
 
 [tokens]
 wasp
