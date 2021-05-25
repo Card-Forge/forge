@@ -254,6 +254,14 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
             }
         }
 
+        if (hasParam("NoColoredMana")) {
+            for (Mana m : spellAbility.getPayingMana()) {
+                if (!m.isColorless()) {
+                    return false;
+                }
+            }
+        }
+
         if (hasParam("SnowSpentForCardsColor")) {
             boolean found = false;
             for (Mana m : spellAbility.getPayingMana()) {
