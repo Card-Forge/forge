@@ -1,0 +1,6 @@
+Name:Void Mirror
+ManaCost:2
+Types:Artifact
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigCounter | NoColoredMana$ True | TriggerDescription$ Whenever a player casts a spell, if no colored mana was spent to cast it, counter that spell.
+SVar:TrigCounter:DB$ Counter | Defined$ TriggeredSpellAbility
+Oracle:Whenever a player casts a spell, if no colored mana was spent to cast it, counter that spell.
