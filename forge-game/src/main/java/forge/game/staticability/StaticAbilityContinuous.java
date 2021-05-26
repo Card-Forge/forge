@@ -732,7 +732,6 @@ public final class StaticAbilityContinuous {
             }
 
             if (layer == StaticAbilityLayer.ABILITIES) {
-
                 List<SpellAbility> addedAbilities = Lists.newArrayList();
                 List<ReplacementEffect> addedReplacementEffects = Lists.newArrayList();
                 List<Trigger> addedTrigger = Lists.newArrayList();
