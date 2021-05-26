@@ -348,7 +348,6 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
             }
             list = CardLists.getValidCards(list, sIsPresent.split(","), this.getHostCard().getController(), this.getHostCard(), this);
 
-
             final String rightString = presentCompare.substring(2);
             int right = AbilityUtils.calculateAmount(getHostCard(), rightString, this);
             final int left = list.size();
