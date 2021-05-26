@@ -147,7 +147,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         }
     }
 
-    public static class CardInSet {
+    public static class CardInSet implements Comparable<CardInSet> {
         public final CardRarity rarity;
         public final String collectorNumber;
         public final String name;
@@ -170,6 +170,51 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             }
             sb.append(name);
             return sb.toString();
+        }
+
+        /**
+         * This method implements the main strategy to allow for natural ordering of collectorNumber
+         * (i.e. "1" < "10"), overloading the default lexicographic order (i.e. "10" < "1").
+         * Any non-numerical parts in the input collectorNumber will be also accounted for, and attached to the
+         * resulting sorting key, accordingly.
+         *
+         * @param collectorNumber: Input collectorNumber tro transform in a Sorting Key
+         * @return A 5-digits zero-padded collector number + any non-numerical parts attached.
+         */
+        public static String getSortableCollectorNumber(final String collectorNumber){
+            String sortableCollNr = collectorNumber;
+            if (sortableCollNr == null || sortableCollNr.length() == 0)
+                sortableCollNr = "50000";  // very big number of 5 digits to have them in last positions
+
+            // Now, for proper sorting, let's zero-pad the collector number (if integer)
+            int collNr;
+            try {
+                collNr = Integer.parseInt(sortableCollNr);
+                sortableCollNr = String.format("%05d", collNr);
+            } catch (NumberFormatException ex) {
+                String nonNumeric = sortableCollNr.replaceAll("[0-9]", "");
+                String onlyNumeric = sortableCollNr.replaceAll("[^0-9]", "");
+                if (sortableCollNr.startsWith(onlyNumeric)) // e.g. 12a, 37+, 2018f,
+                    sortableCollNr = String.format("%05d", Integer.parseInt(onlyNumeric)) + nonNumeric;
+                else  // e.g. WS6, S1
+                    sortableCollNr = nonNumeric + String.format("%05d", Integer.parseInt(onlyNumeric));
+            }
+            return sortableCollNr;
+        }
+
+        @Override
+        public int compareTo(CardInSet o) {
+            final int nameCmp = name.compareToIgnoreCase(o.name);
+            if (0 != nameCmp) {
+                return nameCmp;
+            }
+            String thisCollNr = getSortableCollectorNumber(collectorNumber);
+            String othrCollNr = getSortableCollectorNumber(o.collectorNumber);
+            final int collNrCmp = thisCollNr.compareTo(othrCollNr);
+            if (0 != collNrCmp) {
+                return collNrCmp;
+            }
+            return rarity.compareTo(o.rarity);
         }
     }
 
@@ -286,7 +331,9 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
 
     public List<CardInSet> getCards() { return cardMap.get("cards"); }
     public List<CardInSet> getAllCardsInSet() {
-        return Lists.newArrayList(cardMap.values());
+        ArrayList<CardInSet> cardsInSet = Lists.newArrayList(cardMap.values());
+        Collections.sort(cardsInSet);
+        return cardsInSet;
     }
 
     public boolean isModern() { return getDate().after(parseDate("2003-07-27")); } //8ED and above are modern except some promo cards and others
