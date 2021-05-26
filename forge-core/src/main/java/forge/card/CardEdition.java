@@ -305,7 +305,10 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         if (o == null) {
             return 1;
         }
-        return date.compareTo(o.date);
+        int dateComp = date.compareTo(o.date);
+        if (0 != dateComp)
+            return dateComp;
+        return name.compareTo(o.name);
     }
 
     @Override
@@ -413,7 +416,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
                     * rarity - grouping #4
                     * name - grouping #5
              */
-                "(^([0-9]+.?) )?(([SCURML]) )?(.*)$"
+                "(^([0-9A-Z]+.?) )?(([SCURML]) )?(.*)$"
             );
 
             ListMultimap<String, CardInSet> cardMap = ArrayListMultimap.create();
