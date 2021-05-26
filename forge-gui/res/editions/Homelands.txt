@@ -11,7 +11,7 @@ BoosterBox=60
 Foil=NotSupported
 
 [cards]
-21 U AEther Storm
+21 U Aether Storm
 1 U Abbey Gargoyles
 2a C Abbey Matron
 2b C Abbey Matron
