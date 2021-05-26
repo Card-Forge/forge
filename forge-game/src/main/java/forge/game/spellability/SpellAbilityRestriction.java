@@ -51,12 +51,10 @@ import forge.util.collect.FCollection;
  * @version $Id$
  */
 public class SpellAbilityRestriction extends SpellAbilityVariables {
-    // A class for handling SpellAbility Restrictions. These restrictions
-    // include:
+    // A class for handling SpellAbility Restrictions. These restrictions include:
     // Zone, Phase, OwnTurn, Speed (instant/sorcery), Amount per Turn, Player,
     // Threshold, Metalcraft, LevelRange, etc
-    // Each value will have a default, that can be overridden (mostly by
-    // AbilityFactory)
+    // Each value will have a default, that can be overridden (mostly by AbilityFactory)
     // The canPlay function will use these values to determine if the current
     // game state is ok with these restrictions
 
@@ -246,7 +244,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                     // NOTE: this assumes that it's always possible to cast cards from hand and you don't
                     // need special permissions for that. If WotC ever prints a card that forbids casting
                     // cards from hand, this may become relevant.
-                    if (!o.grantsZonePermissions() && cardZone != null && !cardZone.is(ZoneType.Hand)) {
+                    if (!o.grantsZonePermissions() && cardZone != null && (!cardZone.is(ZoneType.Hand) || activator != c.getOwner())) {
                         final List<CardPlayOption> opts = c.mayPlay(activator);
                         boolean hasOtherGrantor = false;
                         for (CardPlayOption opt : opts) {
@@ -265,13 +263,13 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                     }
 
                     if (params.containsKey("Affected")) {
-                        if (!cp.isValid(params.get("Affected").split(","), activator, o.getHost(), null)) {
+                        if (!cp.isValid(params.get("Affected").split(","), activator, o.getHost(), o.getAbility())) {
                             return false;
                         }
                     }
 
                     if (params.containsKey("ValidSA")) {
-                        if (!sa.isValid(params.get("ValidSA").split(","), activator, o.getHost(), null)) {
+                        if (!sa.isValid(params.get("ValidSA").split(","), activator, o.getHost(), o.getAbility())) {
                             return false;
                         }
                     }

@@ -1,0 +1,13 @@
+Name:Flametongue Yearling
+ManaCost:R R
+Types:Creature Kavu
+PT:2/1
+K:Multikicker:2
+K:etbCounter:P1P1:XKicked:no condition:CARDNAME enters the battlefield with a +1/+1 counter on it for each time it was kicked.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals damage equal to its power to target creature.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ Y
+SVar:X:Count$CardCounters.P1P1
+SVar:XKicked:Count$TimesKicked
+SVar:Y:Count$CardPower
+DeckHas:Ability$Counters
+Oracle:Multikicker {2} (You may pay an additional {2} any number of times as you cast this spell.)\nFlametongue Yearling enters the battlefield with a +1/+1 counter on it for each time it was kicked.\nWhen Flametongue Yearling enters the battlefield, it deals damage equal to its power to target creature.

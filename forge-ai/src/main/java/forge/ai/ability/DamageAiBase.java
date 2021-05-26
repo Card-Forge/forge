@@ -111,8 +111,7 @@ public abstract class DamageAiBase extends SpellAbilityAi {
         final CardCollectionView hand = comp.getCardsIn(ZoneType.Hand);
 
         if ((enemy.getLife() - restDamage) < 5) {
-            // drop the human to less than 5
-            // life
+            // drop the human to less than 5 life
             return true;
         }
 
@@ -147,12 +146,12 @@ public abstract class DamageAiBase extends SpellAbilityAi {
                         }
                     }
                 }
-                if (value > 0) {    //more likely to burn with larger hand
+                if (value > 0) { //more likely to burn with larger hand
                     for (int i = 3; i < hand.size(); i++) {
                         value *= 1.1f;
                     }
                 }
-                if (value < 0.2f) {   //hard floor to reduce ridiculous odds for instants over time
+                if (value < 0.2f) { //hard floor to reduce ridiculous odds for instants over time
                     return false;
                 } else {
                     final float chance = MyRandom.getRandom().nextFloat();

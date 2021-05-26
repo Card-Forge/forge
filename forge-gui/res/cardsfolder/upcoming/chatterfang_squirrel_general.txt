@@ -1,0 +1,14 @@
+Name:Chatterfang, Squirrel General
+ManaCost:2 G
+Types:Legendary Creature Squirrel Warrior
+PT:3/3
+K:Forestwalk
+R:Event$ CreateToken | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ DBReplace | Description$ If one or more tokens would be created under your control, those tokens plus that many 1/1 green Squirrel creature tokens are created instead.
+SVar:DBReplace:DB$ ReplaceEffect | VarName$ TokenNum | VarValue$ Y | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ Y | TokenScript$ g_1_1_squirrel
+A:AB$ Pump | Cost$ B Sac<X/Squirrel> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ -X | SpellDescription$ Target creature gets +X/-X until end of turn.
+SVar:X:Count$xPaid
+SVar:Y:ReplaceCount$TokenNum
+DeckHas:Ability$Token
+DeckHints:Type$Squirrel
+Oracle:Forestwalk (This creature can't be blocked as long as defending player controls a Forest.)\nIf one or more tokens would be created under your control, those tokens plus that many 1/1 green Squirrel creature tokens are created instead.\n{B}, Sacrifice X Squirrels: Target creature gets +X/-X until end of turn.

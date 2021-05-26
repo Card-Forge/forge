@@ -340,7 +340,7 @@ public abstract class Trigger extends TriggerReplacementBase {
             }
         }
 
-        if ( !meetsCommonRequirements(this.mapParams))
+        if (!meetsCommonRequirements(this.mapParams))
             return false;
 
         return true;

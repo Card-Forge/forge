@@ -62,6 +62,7 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardFaceView;
 import forge.game.card.CardLists;
+import forge.game.card.CardPlayOption;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardUtil;
 import forge.game.card.CardView;
@@ -266,10 +267,19 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             final ITriggerEvent triggerEvent) {
         // make sure another human player can't choose opponents cards just because he might see them
         if (triggerEvent != null && !hostCard.isInZone(ZoneType.Battlefield) && !hostCard.getOwner().equals(player) &&
-                !hostCard.getController().equals(player) && hostCard.mayPlay(player).size() == 0 &&
+                !hostCard.getController().equals(player) &&
                 // If player cast Shaman's Trance, they can play spells from any Graveyard (if other effects allow it to be cast)
                 (!player.hasKeyword("Shaman's Trance") || !hostCard.isInZone(ZoneType.Graveyard))) {
-            return null;
+            boolean noPermission = true;
+            for (CardPlayOption o : hostCard.mayPlay(player)) {
+                if (o.grantsZonePermissions()) {
+                    noPermission = false;
+                    break;
+                }
+            }
+            if (noPermission) {
+                return null;
+            }
         }
         spellViewCache = SpellAbilityView.getMap(abilities);
         final SpellAbilityView resultView = getGui().getAbilityToPlay(CardView.get(hostCard),
