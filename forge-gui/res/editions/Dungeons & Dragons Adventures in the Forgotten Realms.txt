@@ -8,15 +8,21 @@ Type=Expansion
 
 [cards]
 33 U Portable Hole
+112 M Lolth, Spider Queen
 114 U Power Word Kill
 124 R Vorpal Sword
 200 U Prosperous Innkeeper
+219 U Bruenor Battlehammer
+220 R Drizzt Do'Urden
 235 M Tiamat
 265 L Plains
 269 L Island
 273 L Swamp
 277 L Mountain
 281 L Forest
+284 M Lolth, Spider Queen
 298 M Tiamat
+337 U Bruenor Battlehammer
+338 R Drizzt Do'Urden
 377 R Vorpal Sword
 396 R Vorpal Sword

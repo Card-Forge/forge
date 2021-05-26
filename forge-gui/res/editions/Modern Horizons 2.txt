@@ -7,8 +7,60 @@ MciCode=mh2
 Type=Other
 
 [cards]
+8 C Break Ties
+19 C Late to Dinner
+25 U Prismatic Ending
+30 M Serra's Emissary
+35 R Timeless Dragon
+44 R Fractured Sanity
+50 U Lucid Dreams
+58 R Rise and Shine
+59 R Rishadan Dockhand
+63 C So Shiny
+67 M Subtlety
+87 M Grief
+89 C Kitchen Imp
+94 U Necromancer's Familiar
+97 R Profane Tutor
+102 M Tourach, Dread Chanter
+103 C Tourach's Canticle
+105 U Underworld Hermit
+106 R Unmarked Grave
+110 U Young Necromancer
+120 R Chef's Kiss
+125 U Flametongue Yearling
+142 U Spreading Insurrection
+147 C Abundant Harvest
+148 R Aeve, Progenitor Ooze
+151 M Chatterfang, Squirrel General
+152 C Chatterstorm
+167 C "Bushitoad"
+172 U Scurry Oak
+174 U Squirrel Sanctuary
+175 U Squirrel Sovereign
+176 R Sylvan Anthem
+177 U Terrain Shift
+178 M Thrasta, Tempest's Roar
+182 R Verdant Command
+184 U Arcbound Shikari
+189 R Carth the Lion
+192 M Dakkon, Shadow Slayer
+194 C Drey Keeper
+197 M Garth One-Eye
+202 M Grist, the Hunger Tide
+208 R Priest of Fell Rites
+211 U Ravenous Squirrel
+218 R Yusri, Fortune's Flame
+222 C Bottle Golems
 223 U Brainstone
 225 R Diamond Lion
+228 U Liquimetal Torque
+229 U Monoskelion
+234 M Scion of Draco
+237 U Steel Camel
+238 M Sword of Hearth and Home
+242 R Void Mirror
+243 R Zabaz, the Glimmerwasp
 244 R Arid Mesa
 248 R Marsh Flats
 250 R Misty Rainforest
@@ -16,18 +68,85 @@ Type=Other
 259 R Urza's Saga
 260 R Verdant Catacombs
 267 U Counterspell
-308 R Counterspell
+269 U Seal of Removal
+271 R Wonder
+275 R Patriarch's Bidding
+276 U Skirge Familiar
+277 R Chance Encounter
+279 R Goblin Bombardment
+282 U Mogg Salvage
+286 R Squirrel Mob
+296 U Extruder
+300 U Zuran Orb
+301 M Cabal Coffers
+304 M Dakkon, Shadow Slayer
+308 U Counterspell
+309 M Subtlety
+311 M Grief
+312 M Tourach, Dread Chanter
+316 M Chatterfang, Squirrel General
+318 M Thrasta, Tempest's Roar
+323 M Scion of Draco
+324 M Sword of Hearth and Home
+325 M Cabal Coffers
+329 C Late to Dinner
+333 M Serra's Emissary
+336 R Fractured Sanity
+340 R Rise and Shine
+347 U Underworld Hermit
+350 U Flametongue Yearling
+354 C Abundant Harvest
+357 R Sylvan Anthem
+359 R Verdant Command
+360 U Arcbound Shikari
+363 M Dakkon, Shadow Slayer
+364 U Prismatic Ending
+365 M Garth One-Eye
+372 R Priest of Fell Rites
+375 U Ravenous Squirrel
 380 R Urza's Saga
+385 R Timeless Dragon
+391 R Rishadan Dockhand
+401 R Profane Tutor
+409 R Aeve, Progenitor Ooze
+410 M Chatterfang, Squirrel General
+411 C Chatterstorm
+415 U Squirrel Sovereign
+418 R Carth the Lion
+420 M Garth One-Eye
 426 U Brainstone
 427 R Diamond Lion
+433 M Sword of Hearth and Home
+435 R Void Mirror
 436 R Arid Mesa
 437 R Marsh Flats
 438 R Misty Rainforest
 439 R Scalding Tarn
 440 R Verdant Catacombs
+443 R Timeless Dragon
+447 R Rishadan Dockhand
+452 R Profane Tutor
+453 R Unmarked Grave
+457 R Chef's Kiss
+459 R Aeve, Progenitor Ooze
+464 R Carth the Lion
+468 R Yusri, Fortune's Flame
+470 R Diamond Lion
+473 R Void Mirror
 475 R Arid Mesa
 476 R Marsh Flats
 477 R Misty Rainforest
 478 R Scalding Tarn
 479 R Verdant Catacombs
+481 L Plains
+482 L Plains
+483 L Island
+484 L Island
+485 L Swamp
+486 L Swamp
+487 L Mountain
+488 L Mountain
+489 L Forest
+490 L Forest
 491 M Sanctum Prelate
+492 R Yusri, Fortune's Flame
