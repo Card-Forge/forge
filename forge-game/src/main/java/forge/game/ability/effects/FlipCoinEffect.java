@@ -62,8 +62,12 @@ public class FlipCoinEffect extends SpellAbilityEffect {
         final boolean noCall = sa.hasParam("NoCall");
         String varName = sa.hasParam("SaveNumFlipsToSVar") ? sa.getParam("SaveNumFlipsToSVar") : "X";
         boolean victory = false;
+        int amount = 1;
+        if (sa.hasParam("Amount")) {
+            amount = AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa);
+        }
 
-        if (!noCall) {
+        if ((!noCall) && (amount == 1)) {
             flipMultiplier = getFilpMultiplier(caller.get(0));
             victory = flipCoinCall(caller.get(0), sa, flipMultiplier, varName);
         }
@@ -76,11 +80,6 @@ public class FlipCoinEffect extends SpellAbilityEffect {
 
                 int countHeads = 0;
                 int countTails = 0;
-
-                int amount = 1;
-                if (sa.hasParam("Amount")) {
-                    amount = AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa);
-                }
 
                 for(int i = 0; i < amount; ++i) {
                     final boolean resultIsHeads = flipCoinNoCall(sa, flipper, flipMultiplier, varName);
@@ -111,6 +110,43 @@ public class FlipCoinEffect extends SpellAbilityEffect {
                             sub.setSVar(varName, "Number$" + countTails);
                         }
                         AbilityUtils.resolve(sub);
+                    }
+                }
+            } else if (amount > 1){
+                flipMultiplier = getFilpMultiplier(flipper);
+
+                int countWins = 0;
+                int countLosses = 0;
+
+                for(int i = 0; i < amount; ++i) {
+                    final boolean win = flipCoinCall(caller.get(0), sa, flipMultiplier, varName);
+
+                    if (win) {
+                        countWins++;
+                    } else {
+                        countLosses++;
+                    }
+                }
+                if (countWins > 0) {
+                    SpellAbility sub = sa.getAdditionalAbility("WinSubAbility");
+                    if (sub != null) {
+                        sub.setSVar("Wins", "Number$" + countWins);
+                        AbilityUtils.resolve(sub);
+                    }
+                }
+                if (countLosses > 0) {
+                    SpellAbility sub = sa.getAdditionalAbility("LoseSubAbility");
+                    if (sub != null) {
+                        sub.setSVar("Losses", "Number$" + countLosses);
+                        AbilityUtils.resolve(sub);
+                    }
+                }
+                if (sa.hasParam("RememberNumber")) {
+                    String toRemember = sa.getParam("RememberNumber");
+                    if (toRemember.startsWith("Win")) {
+                        host.addRemembered(countWins);
+                    } else if (toRemember.startsWith("Loss")) {
+                        host.addRemembered(countLosses);
                     }
                 }
             } else {
