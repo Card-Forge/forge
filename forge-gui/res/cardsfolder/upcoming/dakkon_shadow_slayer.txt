@@ -1,0 +1,11 @@
+Name:Dakkon, Shadow Slayer
+ManaCost:W U B
+Types:Legendary Planeswalker Dakkon
+Loyalty:0
+K:etbCounter:LOYALTY:X:no Condition:CARDNAME enters the battlefield with a number of loyalty counters on him equal to the number of lands you control.
+SVar:X:Count$Valid Land.YouCtrl
+A:AB$ Surveil | Cost$ AddCounter<1/LOYALTY> | Amount$ 2 | Planeswalker$ True | SpellDescription$ Surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature.
+A:AB$ ChangeZone | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | ChangeType$ Artifact.YouOwn | ChangeNum$ 1 | Origin$ Hand,Graveyard | Destination$ Battlefield | StackDescription$ SpellDescription | SpellDescription$ You may put an artifact card from your hand or graveyard onto the battlefield.
+DeckHints:Type$Artifact
+Oracle:Dakkon, Shadow Slayer enters the battlefield with a number of loyalty counters on him equal to the number of lands you control.\n[+1]: Surveil 2.\n[−3]: Exile target creature.\n[-6]: You may put an artifact card from your hand or graveyard onto the battlefield.
