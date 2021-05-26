@@ -1,0 +1,20 @@
+[metadata]
+Code=RMH1
+Date=2021-06-18
+Name=Modern Horizons 1 Timeshifts
+Type=Other
+
+[cards]
+1 U Ephemerate
+3 R Giver of Runes
+8 U Faerie Seer
+9 R Force of Negation
+10 U Tribute Mage
+18 U Shenanigans
+19 R Ayula, Queen Among Bears
+20 R Deep Forest Hermit
+28 U Ingenious Infiltrator
+30 U Soulherder
+32 M Sword of Truth and Justice
+38 U Universal Automaton
+39 R Hall of Heliod's Generosity
