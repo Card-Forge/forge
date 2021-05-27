@@ -21,6 +21,7 @@ import forge.game.player.Player;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
+import forge.util.Aggregates;
 import forge.util.CardTranslation;
 import forge.util.Localizer;
 
@@ -161,6 +162,14 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                     SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
                     if (sa.hasParam("MayChooseTarget")) {
                         copy.setMayChooseNewTargets(true);
+                    }
+                    if (sa.hasParam("RandomTarget")){
+                        List<GameEntity> candidates = copy.getTargetRestrictions().getAllCandidates(chosenSA, true);
+                        if (sa.hasParam("RandomTargetRestriction")) {
+                            candidates.removeIf(c -> !c.isValid(sa.getParam("RandomTargetRestriction").split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa));
+                        }
+                        GameEntity choice = Aggregates.random(candidates);
+                        resetFirstTargetOnCopy(copy, choice, chosenSA);
                     }
 
                     // extra case for Epic to remove the keyword and the last part of the SpellAbility
