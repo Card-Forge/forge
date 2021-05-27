@@ -1,0 +1,10 @@
+Name:Subtlety
+ManaCost:2 U U
+Types:Creature Elemental Incarnation
+PT:3/3
+K:Flash
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTuck | TriggerDescription$ When CARDNAME enters the battlefield, choose up to one target creature spell or planeswalker spell. Its owner puts it on the top or bottom of their library.
+SVar:TrigTuck:DB$ ChangeZone | ValidTgts$ Card.inZoneStack+Creature,Card.inZoneStack+Planeswalker | TgtZone$ Stack | TgtPrompt$ Select up to one target creature spell or planeswalker spell | AlternativeDecider$ TargetedController | Origin$ Stack | Fizzle$ True | Destination$ Library | LibraryPosition$ 0 | DestinationAlternative$ Library | LibraryPositionAlternative$ -1 | AlternativeDestinationMessage$ Would you like to put the card on the top of your library (and not on the bottom)? | SpellDescription$ Choose up to one target creature spell or planeswalker spell. Its owner puts it on the top or bottom of their library.
+K:Evoke:ExileFromHand<1/Card.Blue+Other>
+Oracle:Flash\nFlying\nWhen Subtlety enters the battlefield, choose up to one target creature spell or planeswalker spell. Its owner puts it on the top or bottom of their library.\nEvoke — Exile a blue card from your hand.
