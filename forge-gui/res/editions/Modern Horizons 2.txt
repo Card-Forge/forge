@@ -16,9 +16,7 @@ Type=Other
 30 M Serra's Emissary
 35 R Timeless Dragon
 39 R Disapprove
-41 U "MacGuffin Collector"
 44 R Fractured Sanity
-45 U "Escaped Dorm Sheets"
 48 U Junk Winder
 50 U Lucid Dreams
 51 C Mental Journey
@@ -30,7 +28,6 @@ Type=Other
 66 C Step Through
 67 M Subtlety
 68 C Suspend
-69 M "Merfolk Siren"
 70 U Sweep the Skies
 73 U Vedalken Rogue
 76 C Bone Shards
@@ -66,7 +63,6 @@ Type=Other
 158 U Gifts of the Fae
 162 R Gaea's Will
 166 R Ignoble Hierarch
-167 C "Bushitoad"
 169 C Orchard Strider
 170 C Rift Sower
 172 U Scurry Oak
@@ -143,7 +139,6 @@ Type=Other
 306 M Grist, the Hunger Tide
 308 R Counterspell
 309 M Subtlety
-310 M "Merfolk Siren"
 311 M Grief
 312 M Tourach, Dread Chanter
 314 M Imperial Recruiter
@@ -180,7 +175,6 @@ Type=Other
 388 R Timeless Dragon
 391 R Rishadan Dockhand
 392 C Step Through
-393 M "Merfolk Siren"
 395 C Bone Shards
 400 R Persist
 401 R Profane Tutor
