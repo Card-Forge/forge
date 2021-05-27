@@ -661,24 +661,11 @@ public enum ColumnDef {
         //make sure it's a card. if not, pointless to proceed.
         String collectorNumber;
         if (i instanceof PaperCard) {
-            collectorNumber = ((PaperCard) i).getCollectorNumber();
-            // First off, make all NO_COLLECTOR_NUMBER the last in sortings
-            if (collectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER))
-                collectorNumber = "50000";  // very big number of 5 digits to have them in last positions
-
-            // Now, for proper sorting, let's zero-pad the collector number (if integer)
-            try {
-                int collNr = Integer.parseInt(collectorNumber);
-                collectorNumber = String.format("%05d", collNr);
-            } catch (NumberFormatException ex) {
-                String nonNumeric = collectorNumber.replaceAll("[0-9]", "");
-                String onlyNumeric = collectorNumber.replaceAll("[^0-9]", "");
-                collectorNumber = String.format("%05d", Integer.parseInt(onlyNumeric)) + nonNumeric;
-            }
+            collectorNumber = ((PaperCard) i).getCollectorNumberSortingKey();
         } else {
             collectorNumber = IPaperCard.NO_COLLECTOR_NUMBER;
         }
-        return collectorNumber + toSortableName(i.getName());
+        return collectorNumber;
     }
 
     /**
