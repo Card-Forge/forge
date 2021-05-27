@@ -105,10 +105,10 @@ Foil=NotSupported
 30a C Lat-Nam's Legacy
 30b C Lat-Nam's Legacy
 31 R Library of Lat-Nam
-55a C Lim-Dûl's High Guard
-55b C Lim-Dûl's High Guard
-108 U Lim-Dûl's Paladin
-107 U Lim-Dûl's Vault
+55a C Lim-Dul's High Guard
+55b C Lim-Dul's High Guard
+108 U Lim-Dul's Paladin
+107 U Lim-Dul's Vault
 122 R Lodestone Bauble
 112 R Lord of Tresserhorn
 10a C Martyrdom

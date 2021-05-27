@@ -243,6 +243,34 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         // return String.format("%s|%s", name, cardSet);
     }
 
+    /*
+     * This (utility) method transform a collectorNumber String into a key string for sorting.
+     * This method proxies the same strategy implemented in CardEdition.CardInSet class from which the
+     * collectorNumber of PaperCard instances are originally retrieved.
+     * This is also to centralise the criterion, whilst avoiding code duplication.
+     *
+     * Note: The method has been made private as this is for internal API use **only**, to allow
+     * for generalised comparison with IPaperCard instances (see compareTo)
+     *
+     * The public API of PaperCard includes a method (i.e. getCollectorNumberSortingKey) which applies
+     * this method on instance's own collector number.
+     *
+     * @return a zero-padded 5-digits String + any non-numerical content in the input String, properly attached.
+     */
+    private static String makeCollectorNumberSortingKey(final String collectorNumber0){
+        String collectorNumber = collectorNumber0;
+        if (collectorNumber.equals(NO_COLLECTOR_NUMBER))
+            collectorNumber = null;
+        return CardEdition.CardInSet.getSortableCollectorNumber(collectorNumber);
+    }
+
+    public String getCollectorNumberSortingKey(){
+        // Hardly the case, but just invoke getter rather than direct
+        // attribute to be sure that collectorNumber has been retrieved already!
+        return makeCollectorNumberSortingKey(getCollectorNumber());
+    }
+
+
     @Override
     public int compareTo(final IPaperCard o) {
         final int nameCmp = name.compareToIgnoreCase(o.getName());
@@ -253,7 +281,9 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         int setDiff = edition.compareTo(o.getEdition());
         if (0 != setDiff)
             return setDiff;
-        final int collNrCmp = getCollectorNumber().compareTo(o.getCollectorNumber());
+        String thisCollNrKey = getCollectorNumberSortingKey();
+        String othrCollNrKey = makeCollectorNumberSortingKey(o.getCollectorNumber());
+        final int collNrCmp = thisCollNrKey.compareTo(othrCollNrKey);
         if (0 != collNrCmp) {
             return collNrCmp;
         }
