@@ -257,7 +257,7 @@ public class DrawAi extends SpellAbilityAi {
                 } else {
                     numCards = ComputerUtilCost.getMaxXValue(sa, ai);
                     // try not to overdraw
-                    int safeDraw = Math.min(computerMaxHandSize - computerHandSize, computerLibrarySize - 3);
+                    int safeDraw = Math.abs(Math.min(computerMaxHandSize - computerHandSize, computerLibrarySize - 3));
                     if (sa.getHostCard().isInstant() || sa.getHostCard().isSorcery()) { safeDraw++; } // card will be spent
                     numCards = Math.min(numCards, safeDraw);
 
@@ -377,7 +377,7 @@ public class DrawAi extends SpellAbilityAi {
             // checks what the ai prevent from casting it on itself
             // if spell is not mandatory
             if (aiTarget && !ai.cantLose()) {
-                if (numCards >= computerLibrarySize) {
+                if (numCards >= computerLibrarySize - 3) {
                     if (xPaid) {
                         numCards = computerLibrarySize - 1;
                         if (numCards <= 0 && !mandatory) {
@@ -422,8 +422,7 @@ public class DrawAi extends SpellAbilityAi {
                         }
                         root.setXManaCostPaid(numCards);
                     } else {
-                        // Don't draw too many cards and then risk discarding
-                        // cards at EOT
+                        // Don't draw too many cards and then risk discarding cards at EOT
                         if (!drawback && !mandatory) {
                             return false;
                         }
@@ -493,7 +492,7 @@ public class DrawAi extends SpellAbilityAi {
             // TODO: consider if human is the defined player
 
             // ability is not targeted
-            if (numCards >= computerLibrarySize) {
+            if (numCards >= computerLibrarySize - 3) {
                 if (ai.isCardInPlay("Laboratory Maniac")) {
                     return true;
                 }
@@ -509,8 +508,7 @@ public class DrawAi extends SpellAbilityAi {
                     && game.getPhaseHandler().isPlayerTurn(ai)
                     && !sa.isTrigger()
                     && !assumeSafeX) {
-                // Don't draw too many cards and then risk discarding cards at
-                // EOT
+                // Don't draw too many cards and then risk discarding cards at EOT
                 if (!drawback) {
                     return false;
                 }

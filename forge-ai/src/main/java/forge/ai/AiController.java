@@ -1894,7 +1894,7 @@ public class AiController {
         } else if ("LowestLoseLife".equals(logic)) {
             return MyRandom.getRandom().nextInt(Math.min(player.getLife() / 3, player.getWeakestOpponent().getLife())) + 1;
         } else if ("HighestLoseLife".equals(logic)) {
-            return MyRandom.getRandom().nextInt(Math.max(player.getLife() / 3, player.getWeakestOpponent().getLife())) + 1;
+            return Math.min(player.getLife() -1,MyRandom.getRandom().nextInt(Math.max(player.getLife() / 3, player.getWeakestOpponent().getLife())) + 1);
         } else if ("HighestGetCounter".equals(logic)) {
             return MyRandom.getRandom().nextInt(3);
         } else if (source.hasSVar("EnergyToPay")) {
@@ -2279,4 +2279,3 @@ public class AiController {
     }
     
 }
-

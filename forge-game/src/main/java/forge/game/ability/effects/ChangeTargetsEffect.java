@@ -99,6 +99,9 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                             int div = changingTgtSA.getTotalDividedValue();
                             changingTgtSA.resetTargets();
                             List<GameEntity> candidates = changingTgtSA.getTargetRestrictions().getAllCandidates(changingTgtSA, true);
+                            if (sa.hasParam("RandomTargetRestriction")) {
+                                candidates.removeIf(c -> !c.isValid(sa.getParam("RandomTargetRestriction").split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa));
+                            }
                             GameEntity choice = Aggregates.random(candidates);
                             changingTgtSA.getTargets().add(choice);
                             if (changingTgtSA.isDividedAsYouChoose()) {
