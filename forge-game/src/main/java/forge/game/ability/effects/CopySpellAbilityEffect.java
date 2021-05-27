@@ -3,6 +3,7 @@ package forge.game.ability.effects;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
@@ -166,7 +167,12 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                     if (sa.hasParam("RandomTarget")){
                         List<GameEntity> candidates = copy.getTargetRestrictions().getAllCandidates(chosenSA, true);
                         if (sa.hasParam("RandomTargetRestriction")) {
-                            candidates.removeIf(c -> !c.isValid(sa.getParam("RandomTargetRestriction").split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa));
+                            candidates.removeIf(new Predicate<GameEntity>() {
+                                @Override
+                                public boolean test(GameEntity c) {
+                                    return !c.isValid(sa.getParam("RandomTargetRestriction").split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa);
+                                }
+                            });
                         }
                         GameEntity choice = Aggregates.random(candidates);
                         resetFirstTargetOnCopy(copy, choice, chosenSA);
