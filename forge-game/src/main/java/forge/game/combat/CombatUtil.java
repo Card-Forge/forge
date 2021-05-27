@@ -595,6 +595,8 @@ public class CombatUtil {
                 walkTypes.add("Land.Legendary");
             } else if (keyword.equals("Nonbasic landwalk")) {
                 walkTypes.add("Land.nonBasic");
+            } else if (keyword.equals("Artifact landwalk")) {
+                walkTypes.add("Land.Artifact");
             } else if (keyword.equals("Snow landwalk")) {
                 walkTypes.add("Land.Snow");
             } else if (keyword.endsWith("walk")) {
