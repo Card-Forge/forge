@@ -1,0 +1,5 @@
+Name:Persist
+ManaCost:1 B
+Types:Sorcery
+A:SP$ ChangeZone | Cost$ 1 B | ValidTgts$ Creature.nonLegendary+YouCtrl | TgtPrompt$ Select target creature from your graveyard | Origin$ Graveyard | Destination$ Battlefield | WithCounters$ M1M1_1 | SpellDescription$ Choose target non-legendary creature card in your graveyard. Return it to the battlefield with a -1/-1 counter on it.
+Oracle:Choose target non-legendary creature card in your graveyard. Return it to the battlefield with a -1/-1 counter on it.
