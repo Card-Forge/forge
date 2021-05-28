@@ -39,6 +39,7 @@ Type=Other
 73 U Vedalken Infiltrator
 74 U Archfiend of Sorrows
 76 C Bone Shards
+79 U Clattering Augur
 82 C Discerning Taste
 85 U Flay Essence
 87 M Grief
@@ -111,6 +112,7 @@ Type=Other
 223 U Brainstone
 224 R Dermotaxi
 225 R Diamond Lion
+227 M Kaldra Compleat
 228 U Liquimetal Torque
 229 U Monoskelion
 233 U Sanctuary Raptor
