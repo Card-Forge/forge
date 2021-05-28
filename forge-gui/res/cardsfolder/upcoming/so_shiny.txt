@@ -1,0 +1,13 @@
+Name:So Shiny
+ManaCost:2 U
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature | AILogic$ KeepTapped
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | IsPresent$ Card.YouCtrl+token | PresentCompare$ GE1 | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, if you control a token, tap enchanted creature, then scry 2.
+SVar:TrigTap:DB$ Tap | Defined$ Enchanted | SubAbility$ DBScry
+SVar:DBScry:DB$ Scry | ScryNum$ 2
+S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Enchanted creature doesn't untap during its controller's untap step.
+DeckNeeds:Ability$Token
+SVar:NeedsToPlayVar:Y GE1
+SVar:Y:Count$Valid Permanent.token+YouCtrl
+Oracle:Enchant creature\nWhen So Shiny enters the battlefield, if you control a token, tap enchanted creature, then scry 2.\nEnchanted creature doesn't untap during its controller's untap step.

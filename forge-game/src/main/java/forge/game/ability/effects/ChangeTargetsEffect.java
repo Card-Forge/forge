@@ -100,7 +100,12 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                             changingTgtSA.resetTargets();
                             List<GameEntity> candidates = changingTgtSA.getTargetRestrictions().getAllCandidates(changingTgtSA, true);
                             if (sa.hasParam("RandomTargetRestriction")) {
-                                candidates.removeIf(c -> !c.isValid(sa.getParam("RandomTargetRestriction").split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa));
+                                candidates.removeIf(new java.util.function.Predicate<GameEntity>() {
+                                    @Override
+                                    public boolean test(GameEntity c) {
+                                        return !c.isValid(sa.getParam("RandomTargetRestriction").split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa);
+                                    }
+                                });
                             }
                             GameEntity choice = Aggregates.random(candidates);
                             changingTgtSA.getTargets().add(choice);

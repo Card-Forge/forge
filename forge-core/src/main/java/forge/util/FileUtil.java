@@ -29,6 +29,7 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.Reader;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -208,7 +209,8 @@ public final class FileUtil {
             if ((file == null) || !file.exists()) {
                 return new ArrayList<>();
             }
-            return FileUtil.readAllLines(new FileReader(file), false);
+            Charset charset = Charset.forName("UTF-8");
+            return FileUtil.readAllLines(new FileReader(file, charset), false);
         } catch (final Exception ex) {
             throw new RuntimeException("FileUtil : readFile() error, " + ex);
         }

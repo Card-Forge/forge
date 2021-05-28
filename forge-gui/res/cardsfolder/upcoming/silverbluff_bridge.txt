@@ -1,0 +1,8 @@
+Name:Silverbluff Bridge
+ManaCost:no cost
+Types:Artifact Land
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+K:CARDNAME enters the battlefield tapped.
+K:Indestructible
+Oracle:Silverbluff Bridge enters the battlefield tapped.\nIndestructible\n{T}: Add {U} or {R}.

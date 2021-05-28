@@ -1079,7 +1079,7 @@ public class DamageDealAi extends DamageAiBase {
         saTgt.resetTargets();
         saTgt.getTargets().add(tgtCreature != null && dmg < opponent.getLife() ? tgtCreature : opponent);
 
-        sa.setXManaCostPaid(dmg);
+        saTgt.setXManaCostPaid(dmg);
         return true;
     }
 

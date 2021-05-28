@@ -8,7 +8,7 @@ A:AB$ Token | Cost$ SubCounter<X/LOYALTY> | Planeswalker$ True | TokenScript$ gu
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid
-A:AB$ ChangeZone | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Origin$ Library | Destination$ Exile | ChangeType$ Instant.SharesColorWith Card.Self,Sorcery.SharesColorWith Card.Self | ChangeNum$ 1 | SubAbility$ DBPlay | RememberChanged$ True | SpellDescription$ Search your library for an instant or sorcery card that shares a color with this planeswalker, exile that card, then shuffle. You may cast that card without paying its mana cost.
+A:AB$ ChangeZone | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | Origin$ Library | Destination$ Exile | ChangeType$ Instant.SharesColorWith Card.Self,Sorcery.SharesColorWith Card.Self | ChangeNum$ 1 | SubAbility$ DBPlay | RememberChanged$ True | SpellDescription$ Search your library for an instant or sorcery card that shares a color with this planeswalker, exile that card, then shuffle. You may cast that card without paying its mana cost.
 SVar:DBPlay:DB$ Play | Defined$ Remembered | WithoutManaCost$ True | Optional$ True | SubAbility$ DBCleanup
 DeckHints:Type$Instant|Sorcery
 DeckHas:Ability$Token & Ability$Counters
