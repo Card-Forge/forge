@@ -99,7 +99,7 @@ public class ImageUtil {
                     final CardDb db =  StaticData.instance().getCommonCards();
                     return db.getRules(card.getMeldWith()).getOtherPart().getName();
                 } else {
-            	    return null;
+                    return null;
                 }
             else
                 return null;
@@ -116,6 +116,27 @@ public class ImageUtil {
 
     public static String getDownloadUrl(PaperCard cp, boolean backFace) {
         return getImageRelativePath(cp, backFace, true, true);
+    }
+
+    public static String getScryfallDownloadUrl(PaperCard cp, boolean backFace, String setCode){
+        return getScryfallDownloadUrl(cp, backFace, setCode, "en");
+    }
+
+    public static String getScryfallDownloadUrl(PaperCard cp, boolean backFace, String setCode, String langCode){
+        String editionCode;
+        if ((setCode != null) && (setCode.length() > 0))
+            editionCode = setCode;
+        else
+            editionCode = cp.getEdition().toLowerCase();
+        String cardCollectorNumber = cp.getCollectorNumber();
+        // Hack to account for variations in Arabian Nights
+        cardCollectorNumber = cardCollectorNumber.replace("+", "†");
+        String faceParam = "";
+        if (cp.getRules().getOtherPart() != null) {
+            faceParam = (backFace ? "&face=back" : "&face=front");
+        }
+        return String.format("%s/%s/%s?format=image&version=normal%s", editionCode, cardCollectorNumber,
+                langCode, faceParam);
     }
 
     public static String toMWSFilename(String in) {
