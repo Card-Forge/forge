@@ -1,0 +1,11 @@
+Name:Glorious Enforcer
+ManaCost:5 W W
+Types:Creature Angel
+PT:5/5
+K:Flying
+K:Lifelink
+T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | Execute$ TrigPump | CheckSVar$ Y | SVarCompare$ GTX | TriggerDescription$ At the beginning of each combat, if you have more life than an opponent, CARDNAME gains double strike until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Double Strike
+SVar:X:PlayerCountOpponents$LowestLifeTotal
+SVar:Y:Count$YourLifeTotal
+Oracle:Flying, lifelink\nAt the beginning of each combat, if you have more life than an opponent, Glorious Enforcer gains double strike until end of turn.
