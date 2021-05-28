@@ -7,16 +7,25 @@ MciCode=mh2
 Type=Other
 
 [cards]
+1 U Abiding Grace
 3 C Arcbound Mouser
 8 C Break Ties
 10 U Constable of the Realm
+12 R Esper Sentinel
+14 U Glorious Enforcer
 18 C Landscaper Colos
 19 C Late to Dinner
+23 R Out of Time
 25 U Prismatic Ending
+27 R Sanctifier en-Vec
 30 M Serra's Emissary
+32 M Solitude
 35 R Timeless Dragon
-39 R Disapprove
+37 C Aeromoeba
+39 R Dress Down
+41 U Filigree Attendant
 44 R Fractured Sanity
+45 U Ghost-Lit Drifter
 48 U Junk Winder
 50 U Lucid Dreams
 51 C Mental Journey
@@ -24,21 +33,29 @@ Type=Other
 55 C Phantasmal Dreadmaw
 58 R Rise and Shine
 59 R Rishadan Dockhand
+60 U Said // Done
+61 U Scuttletide
 63 C So Shiny
 66 C Step Through
 67 M Subtlety
 68 C Suspend
+69 M Svyelun of Sea and Sky
 70 U Sweep the Skies
-73 U Vedalken Rogue
+73 U Vedalken Infiltrator
+74 U Archfiend of Sorrows
 76 C Bone Shards
+79 U Clattering Augur
+80 R Damn
 82 C Discerning Taste
+84 U Feast of Sanity
 85 U Flay Essence
 87 M Grief
 89 C Kitchen Imp
+90 U Legion Vanguard
 94 U Necromancer's Familiar
 96 R Persist
 97 R Profane Tutor
-102 M Tourach, Dread Chanter
+102 M Tourach, Dread Cantor
 103 C Tourach's Canticle
 105 U Underworld Hermit
 106 R Unmarked Grave
@@ -46,31 +63,40 @@ Type=Other
 110 U Young Necromancer
 113 U Arcbound Whelp
 114 C Battle Plan
+117 R Breya's Apprentice
 118 R Calibrated Blast
 120 R Chef's Kiss
 121 U Dragon's Rage Channeler
+124 U Flame Blitz
 125 U Flametongue Yearling
-127 C Glavanic Relay
+127 C Galvanic Relay
 129 R Glimpse of Tomorrow
 132 R Harmonic Prodigy
 137 R Obsidian Charmaw
+138 M Ragavan, Nimble Pilferer
 140 C Skophos Reaver
 142 U Spreading Insurrection
 147 C Abundant Harvest
 148 R Aeve, Progenitor Ooze
 151 M Chatterfang, Squirrel General
 152 C Chatterstorm
-158 U Gifts of the Fae
+157 M Endurance
+158 U Fae Offering
 162 R Gaea's Will
+165 U Herd Baloth
 166 R Ignoble Hierarch
+167 C Jade Avenger
 169 C Orchard Strider
 170 C Rift Sower
+171 R Sanctum Weaver
 172 U Scurry Oak
 174 U Squirrel Sanctuary
 175 U Squirrel Sovereign
 176 R Sylvan Anthem
-177 U Terrain Shift
+177 U Terramorph
 178 M Thrasta, Tempest's Roar
+179 U Timeless Witness
+181 C Urban Daggertooth
 182 R Verdant Command
 184 U Arcbound Shikari
 186 R Asmoranomardicadaistinaculdacar
@@ -79,19 +105,28 @@ Type=Other
 194 C Drey Keeper
 197 M Garth One-Eye
 198 R General Ferrous Rokiric
+199 M Geyadrone Dihada
 202 M Grist, the Hunger Tide
 201 U Graceful Restoration
 204 R Lonis, Cryptozoologist
+205 R Master of Death
+207 R Piru, the Volatile
 208 R Priest of Fell Rites
+209 U Prophetic Titan
 211 U Ravenous Squirrel
 212 U Road // Ruin
+216 R Territorial Kavu
 218 R Yusri, Fortune's Flame
-219 R Academy Manufacturer
+219 R Academy Manufactor
+220 U Altar of the Goyf
 222 C Bottle Golems
 223 U Brainstone
+224 R Dermotaxi
 225 R Diamond Lion
+227 M Kaldra Compleat
 228 U Liquimetal Torque
 229 U Monoskelion
+233 U Sanctuary Raptor
 234 M Scion of Draco
 237 U Steel Dromedary
 238 M Sword of Hearth and Home
@@ -116,77 +151,119 @@ Type=Other
 258 C Thornglint Bridge
 259 R Urza's Saga
 260 R Verdant Catacombs
+261 R Yavimaya, Cradle of Growth
+263 R Karmic Guide
 264 U Seal of Cleansing
+265 R Solitary Confinement
 266 U Soul Snare
 267 U Counterspell
 269 U Seal of Removal
+270 R Upheaval
 271 R Wonder
+272 U Bone Shredder
+273 R Braids, Cabal Minion
 274 U Greed
 275 R Patriarch's Bidding
 276 U Skirge Familiar
 277 R Chance Encounter
 278 U Flame Rift
 279 R Goblin Bombardment
+280 U Gorilla Shaman
 281 M Imperial Recruiter
 282 U Mogg Salvage
+283 R Enchantress's Presence
 285 U Quirion Ranger
 286 R Squirrel Mob
+290 R Fire // Ice
+291 M Mirari's Wake
+293 R Sterling Grove
+294 R Vindicate
 296 U Extruder
+297 U Millikin
+298 R Nevinyrral's Disk
 300 U Zuran Orb
 301 M Cabal Coffers
 302 U Mishra's Factory
 304 M Dakkon, Shadow Slayer
+305 M Geyadrone Dihada
 306 M Grist, the Hunger Tide
+307 M Solitude
 308 R Counterspell
 309 M Subtlety
+310 M Svyelun of Sea and Sky
 311 M Grief
-312 M Tourach, Dread Chanter
+312 M Tourach, Dread Cantor
 314 M Imperial Recruiter
+315 M Ragavan, Nimble Pilferer
 316 M Chatterfang, Squirrel General
 318 M Thrasta, Tempest's Roar
+320 M Mirari's Wake
+322 R Vindicate
 323 M Scion of Draco
 324 M Sword of Hearth and Home
 325 M Cabal Coffers
 326 R Mishra's Factory
+328 R Esper Sentinel
 329 C Late to Dinner
 333 M Serra's Emissary
-334 R Disapprove
+334 R Dress Down
 336 R Fractured Sanity
 338 U Mystic Redaction
+339 C Phantasmal Dreadmaw
 340 R Rise and Shine
 343 C Kitchen Imp
 345 R Persist
 347 U Underworld Hermit
+348 C World-Weary
 350 U Flametongue Yearling
 352 R Harmonic Prodigy
+353 R Obsidian Charmaw
 354 C Abundant Harvest
+355 R Ignoble Hierarch
+356 C Jade Avenger
 357 R Sylvan Anthem
+358 U Timeless Witness
 359 R Verdant Command
 360 U Arcbound Shikari
 363 M Dakkon, Shadow Slayer
 365 M Garth One-Eye
 366 R General Ferrous Rokiric
+367 M Geyadrone Dihada
 368 M Grist, the Hunger Tide
+370 R Lonis, Cryptozoologist
 372 R Priest of Fell Rites
+373 U Prophetic Titan
 375 U Ravenous Squirrel
 376 U Road // Ruin
+378 R Dermotaxi
 380 R Urza's Saga
+383 R Out of Time
 384 U Prismatic Ending
+387 U Soul Snare
 388 R Timeless Dragon
+389 C Aeromoeba
 391 R Rishadan Dockhand
 392 C Step Through
+393 M Svyelun of Sea and Sky
 395 C Bone Shards
+396 R Damn
 400 R Persist
 401 R Profane Tutor
-402 M Tourach, Dread Chanter
+402 M Tourach, Dread Cantor
+405 R Calibrated Blast
+406 C Galvanic Relay
 407 R Glimpse of Tomorrow
 409 R Aeve, Progenitor Ooze
 410 M Chatterfang, Squirrel General
 411 C Chatterstorm
+412 R Gaea's Will
+414 R Ignoble Hierarch
 415 U Squirrel Sovereign
 417 R Asmoranomardicadaistinaculdacar
 418 R Carth the Lion
 420 M Garth One-Eye
+422 R Piru, the Volatile
+425 R Territorial Kavu
 426 U Brainstone
 427 R Diamond Lion
 428 U Liquimetal Torque
@@ -200,18 +277,28 @@ Type=Other
 438 R Misty Rainforest
 439 R Scalding Tarn
 440 R Verdant Catacombs
+441 R Yavimaya, Cradle of Growth
 442 R Out of Time
 445 R Timeless Dragon
 447 R Rishadan Dockhand
 448 R Suspend
+449 R Damn
 452 R Profane Tutor
 453 R Unmarked Grave
+455 R Breya's Apprentice
+456 R Calibrated Blast
 457 R Chef's Kiss
 458 R Glimpse of Tomorrow
 459 R Aeve, Progenitor Ooze
+461 R Gaea's Will
+462 R Sanctum Weaver
 463 R Asmoranomardicadaistinaculdacar
 464 R Carth the Lion
+465 R Master of Death
+466 R Piru, the Volatile
+467 R Territorial Kavu
 468 R Yusri, Fortune's Flame
+469 R Academy Manufactor
 470 R Diamond Lion
 473 R Void Mirror
 474 R Zabaz, the Glimmerwasp
@@ -220,6 +307,7 @@ Type=Other
 477 R Misty Rainforest
 478 R Scalding Tarn
 479 R Verdant Catacombs
+480 R Yavimaya, Cradle of Growth
 481 L Plains
 482 L Plains
 483 L Island

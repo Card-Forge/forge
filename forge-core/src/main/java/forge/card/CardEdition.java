@@ -250,6 +250,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     private String[] chaosDraftThemes = new String[0];
 
     private final ListMultimap<String, CardInSet> cardMap;
+    private final List<CardInSet> cardsInSet;
     private final Map<String, Integer> tokenNormalized;
     // custom print sheets that will be loaded lazily
     private final Map<String, List<String>> customPrintSheetsToParse;
@@ -259,13 +260,18 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
 
     private CardEdition(ListMultimap<String, CardInSet> cardMap, Map<String, Integer> tokens, Map<String, List<String>> customPrintSheetsToParse) {
         this.cardMap = cardMap;
+        this.cardsInSet = new ArrayList<>(cardMap.values());
+        Collections.sort(cardsInSet);
         this.tokenNormalized = tokens;
         this.customPrintSheetsToParse = customPrintSheetsToParse;
     }
 
     private CardEdition(CardInSet[] cards, Map<String, Integer> tokens) {
+        List<CardInSet> cardsList = Arrays.asList(cards);
         this.cardMap = ArrayListMultimap.create();
-        this.cardMap.replaceValues("cards", Arrays.asList(cards));
+        this.cardMap.replaceValues("cards", cardsList);
+        this.cardsInSet = new ArrayList<>(cardsList);
+        Collections.sort(cardsInSet);
         this.tokenNormalized = tokens;
         this.customPrintSheetsToParse = new HashMap<>();
     }
@@ -331,8 +337,6 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
 
     public List<CardInSet> getCards() { return cardMap.get("cards"); }
     public List<CardInSet> getAllCardsInSet() {
-        ArrayList<CardInSet> cardsInSet = Lists.newArrayList(cardMap.values());
-        Collections.sort(cardsInSet);
         return cardsInSet;
     }
 
@@ -389,7 +393,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     }
 
     public boolean isLargeSet() {
-        return getAllCardsInSet().size() > 200 && !smallSetOverride;
+        return this.cardsInSet.size() > 200 && !smallSetOverride;
     }
 
     public int getCntBoosterPictures() {

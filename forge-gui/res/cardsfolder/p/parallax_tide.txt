@@ -2,11 +2,10 @@ Name:Parallax Tide
 ManaCost:2 U U
 Types:Enchantment
 K:Fading:5
-A:AB$ ChangeZone | Cost$ SubCounter<1/FADE> | ValidTgts$ Land | TgtPrompt$ Select target land | Imprint$ True | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target land.
+A:AB$ ChangeZone | Cost$ SubCounter<1/FADE> | ValidTgts$ Land | TgtPrompt$ Select target land | ImprintTargets$ True | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target land.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, each player returns to the battlefield all cards they own exiled with CARDNAME.
-SVar:TrigReturn:DB$ChangeZone | Defined$ Imprinted | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
+SVar:TrigReturn:DB$ ChangeZone | Defined$ Imprinted | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 SVar:PlayMain1:TRUE
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/parallax_tide.jpg
 Oracle:Fading 5 (This enchantment enters the battlefield with five fade counters on it. At the beginning of your upkeep, remove a fade counter from it. If you can't, sacrifice it.)\nRemove a fade counter from Parallax Tide: Exile target land.\nWhen Parallax Tide leaves the battlefield, each player returns to the battlefield all cards they own exiled with Parallax Tide.
