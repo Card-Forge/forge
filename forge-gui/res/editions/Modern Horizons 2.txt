@@ -109,6 +109,7 @@ Type=Other
 216 R Territorial Kavu
 218 R Yusri, Fortune's Flame
 219 R Academy Manufacturer
+220 U Altar of the Goyf
 222 C Bottle Golems
 223 U Brainstone
 224 R Dermotaxi
@@ -170,6 +171,7 @@ Type=Other
 301 M Cabal Coffers
 302 U Mishra's Factory
 304 M Dakkon, Shadow Slayer
+305 M Geyadrone Dihada
 306 M Grist, the Hunger Tide
 307 M Solitude
 308 R Counterspell
@@ -208,6 +210,7 @@ Type=Other
 363 M Dakkon, Shadow Slayer
 365 M Garth One-Eye
 366 R General Ferrous Rokiric
+367 M Geyadrone Dihada
 368 M Grist, the Hunger Tide
 370 R Lonis, Cryptozoologist
 372 R Priest of Fell Rites
