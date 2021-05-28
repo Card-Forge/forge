@@ -1,0 +1,8 @@
+Name:Thornglint Bridge
+ManaCost:no cost
+Types:Artifact Land
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
+K:CARDNAME enters the battlefield tapped.
+K:Indestructible
+Oracle:Thornglint Bridge enters the battlefield tapped.\nIndestructible\n{T}: Add {G} or {W}.
