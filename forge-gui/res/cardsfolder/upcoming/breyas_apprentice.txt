@@ -10,4 +10,5 @@ SVar:DBEffect:DB$ Effect | StaticAbilities$ StaticMayPlay | Duration$ UntilTheEn
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:StaticMayPlay:Mode$ Continuous | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Exile | MayPlay$ True | Description$ Until the end of your next turn, you may play that card.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | NumAtt$ +2 | TgtPrompt$ Select target creature. | SpellDescription$ Target creature gets +2/+0 until end of turn.
+DeckHas:Ability$Token
 Oracle:When Breya's Apprentice enters the battlefield, create a 1/1 colorless Thopter artifact creature token with flying.\n{T}, Sacrifice an artifact: Choose one —\n• Exile the top card of your library. Until the end of your next turn, you may play that card.\n• Target creature gets +2/+0 until end of turn.
