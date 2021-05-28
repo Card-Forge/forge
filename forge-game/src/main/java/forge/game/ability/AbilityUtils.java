@@ -1629,6 +1629,8 @@ public class AbilityUtils {
                 }
             }
         }
+        // make sure that when this is from a trigger LKI is updated
+        host.getGame().updateLastStateForCard(host);
     }
 
     /**
