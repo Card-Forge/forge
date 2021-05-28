@@ -40,6 +40,7 @@ Type=Other
 74 U Archfiend of Sorrows
 76 C Bone Shards
 79 U Clattering Augur
+80 R Damn
 82 C Discerning Taste
 85 U Flay Essence
 87 M Grief
@@ -61,6 +62,7 @@ Type=Other
 118 R Calibrated Blast
 120 R Chef's Kiss
 121 U Dragon's Rage Channeler
+124 U Flame Blitz
 125 U Flametongue Yearling
 127 C Galvanic Relay
 129 R Glimpse of Tomorrow
@@ -158,6 +160,7 @@ Type=Other
 277 R Chance Encounter
 278 U Flame Rift
 279 R Goblin Bombardment
+280 U Gorilla Shaman
 281 M Imperial Recruiter
 282 U Mogg Salvage
 283 R Enchantress's Presence
@@ -226,6 +229,7 @@ Type=Other
 391 R Rishadan Dockhand
 392 C Step Through
 395 C Bone Shards
+396 R Damn
 400 R Persist
 401 R Profane Tutor
 402 M Tourach, Dread Cantor
@@ -258,6 +262,7 @@ Type=Other
 445 R Timeless Dragon
 447 R Rishadan Dockhand
 448 R Suspend
+449 R Damn
 452 R Profane Tutor
 453 R Unmarked Grave
 457 R Chef's Kiss
