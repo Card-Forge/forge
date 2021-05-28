@@ -73,6 +73,7 @@ Type=Other
 148 R Aeve, Progenitor Ooze
 151 M Chatterfang, Squirrel General
 152 C Chatterstorm
+157 M Endurance
 158 U Gifts of the Fae
 162 R Gaea's Will
 165 U Herd Baloth
