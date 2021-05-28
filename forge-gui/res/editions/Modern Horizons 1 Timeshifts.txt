@@ -21,6 +21,7 @@ Type=Other
 22 U Llanowar Tribe
 23 U Scale Up
 26 M The First Sliver
+27 R Ice-Fang Coatl
 28 U Ingenious Infiltrator
 30 U Soulherder
 32 M Sword of Truth and Justice
