@@ -148,6 +148,7 @@ Type=Other
 269 U Seal of Removal
 270 R Upheaval
 271 R Wonder
+273 R Braids, Cabal Minion
 274 U Greed
 275 R Patriarch's Bidding
 276 U Skirge Familiar
