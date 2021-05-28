@@ -87,6 +87,20 @@ public class DigEffect extends SpellAbilityEffect {
         final boolean mayBeSkipped = sa.hasParam("PromptToSkipOptionalAbility");
         final String optionalAbilityPrompt = sa.hasParam("OptionalAbilityPrompt") ? sa.getParam("OptionalAbilityPrompt") : "";
 
+        boolean remZone1 = false;
+        boolean remZone2 = false;
+        if (sa.hasParam("RememberChanged")) {
+            remZone1 = true;
+        }
+        if (sa.hasParam("RememberMovedToZone")) {
+            if (sa.getParam("RememberMovedToZone").contains("1")) {
+                remZone1 = true;
+            }
+            if (sa.getParam("RememberMovedToZone").contains("2")) {
+                remZone2 = true;
+            }
+        }
+
         boolean changeAll = false;
         boolean allButOne = false;
 
@@ -341,7 +355,7 @@ public class DigEffect extends SpellAbilityEffect {
                         if (sa.hasParam("ForgetOtherRemembered")) {
                             host.clearRemembered();
                         }
-                        if (sa.hasParam("RememberChanged")) {
+                        if (remZone1) {
                             host.addRemembered(c);
                         }
                         rest.remove(c);
@@ -376,6 +390,9 @@ public class DigEffect extends SpellAbilityEffect {
                             if (m != null && !origin.equals(m.getZone().getZoneType())) {
                                 table.put(origin, m.getZone().getZoneType(), m);
                             }
+                            if (remZone2) {
+                                host.addRemembered(m);
+                            }
                         }
                     }
                     else {
@@ -395,6 +412,9 @@ public class DigEffect extends SpellAbilityEffect {
                                 }
                                 c.setExiledWith(effectHost);
                                 c.setExiledBy(effectHost.getController());
+                                if (remZone2) {
+                                    host.addRemembered(c);
+                                }
                             }
                         }
                     }
