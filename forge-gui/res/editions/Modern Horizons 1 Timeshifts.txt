@@ -7,15 +7,21 @@ Type=Other
 [cards]
 1 U Ephemerate
 3 R Giver of Runes
+4 U King of the Pride
+5 M Ranger-Captain of Eos
+7 R Archmage's Charm
 8 U Faerie Seer
 9 R Force of Negation
 10 U Tribute Mage
+11 M Urza, Lord High Artificer
+15 U Undead Augur
 18 U Shenanigans
 19 R Ayula, Queen Among Bears
 20 R Deep Forest Hermit
 22 U Llanowar Tribe
 23 U Scale Up
 26 M The First Sliver
+27 R Ice-Fang Coatl
 28 U Ingenious Infiltrator
 30 U Soulherder
 32 M Sword of Truth and Justice
