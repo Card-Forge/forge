@@ -35,7 +35,10 @@ public class ReplaceProduceMana extends ReplacementEffect {
         if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Affected))) {
             return false;
         }
-        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Activator))) {
+        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {
+            return false;
+        }
+        if (!matchesValidParam("ValidActivator", runParams.get(AbilityKey.Activator))) {
             return false;
         }
         if (!matchesValidParam("ValidAbility", runParams.get(AbilityKey.AbilityMana))) {
