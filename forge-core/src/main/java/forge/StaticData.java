@@ -151,6 +151,11 @@ public class StaticData {
         return this.editions;
     }
 
+    public final CardEdition.Collection getCustomEditions(){
+        return this.customEditions;
+    }
+
+
     private List<CardEdition> sortedEditions;
     public final List<CardEdition> getSortedEditions() {
         if (sortedEditions == null) {
