@@ -72,6 +72,7 @@ Type=Other
 118 R Calibrated Blast
 120 R Chef's Kiss
 121 U Dragon's Rage Channeler
+123 U Fast // Furious
 124 U Flame Blitz
 125 U Flametongue Yearling
 127 C Galvanic Relay
@@ -81,6 +82,7 @@ Type=Other
 138 M Ragavan, Nimble Pilferer
 140 C Skophos Reaver
 142 U Spreading Insurrection
+143 Strike It Rich
 147 C Abundant Harvest
 148 R Aeve, Progenitor Ooze
 151 M Chatterfang, Squirrel General
@@ -115,6 +117,7 @@ Type=Other
 201 U Graceful Restoration
 204 R Lonis, Cryptozoologist
 205 R Master of Death
+206 R Moderation
 207 R Piru, the Volatile
 208 R Priest of Fell Rites
 209 U Prophetic Titan
@@ -124,6 +127,7 @@ Type=Other
 218 R Yusri, Fortune's Flame
 219 R Academy Manufactor
 220 U Altar of the Goyf
+221 U Batterbone
 222 C Bottle Golems
 223 U Brainstone
 224 R Dermotaxi
