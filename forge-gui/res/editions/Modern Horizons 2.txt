@@ -20,6 +20,7 @@ Type=Other
 27 R Sanctifier en-Vec
 30 M Serra's Emissary
 32 M Solitude
+34 U Thraben Watcher
 35 R Timeless Dragon
 37 C Aeromoeba
 39 R Dress Down
@@ -27,6 +28,7 @@ Type=Other
 44 R Fractured Sanity
 45 U Ghost-Lit Drifter
 48 U Junk Winder
+49 C Lose Focus
 50 U Lucid Dreams
 51 C Mental Journey
 53 U Mystic Redaction
@@ -35,6 +37,7 @@ Type=Other
 59 R Rishadan Dockhand
 60 U Said // Done
 61 U Scuttletide
+62 C Shattered Ego
 63 C So Shiny
 66 C Step Through
 67 M Subtlety
@@ -55,6 +58,7 @@ Type=Other
 94 U Necromancer's Familiar
 96 R Persist
 97 R Profane Tutor
+100 U Sudden Edict
 102 M Tourach, Dread Cantor
 103 C Tourach's Canticle
 105 U Underworld Hermit
@@ -63,6 +67,7 @@ Type=Other
 110 U Young Necromancer
 113 U Arcbound Whelp
 114 C Battle Plan
+115 U Burning Rootwalla
 117 R Breya's Apprentice
 118 R Calibrated Blast
 120 R Chef's Kiss
@@ -174,6 +179,7 @@ Type=Other
 283 R Enchantress's Presence
 285 U Quirion Ranger
 286 R Squirrel Mob
+287 M Titania, Protector of Argoth
 290 R Fire // Ice
 291 M Mirari's Wake
 293 R Sterling Grove
@@ -236,6 +242,7 @@ Type=Other
 375 U Ravenous Squirrel
 376 U Road // Ruin
 378 R Dermotaxi
+379 M Kaldra Compleat
 380 R Urza's Saga
 383 R Out of Time
 384 U Prismatic Ending
@@ -250,6 +257,7 @@ Type=Other
 400 R Persist
 401 R Profane Tutor
 402 M Tourach, Dread Cantor
+404 U Burning Rootwalla
 405 R Calibrated Blast
 406 C Galvanic Relay
 407 R Glimpse of Tomorrow
