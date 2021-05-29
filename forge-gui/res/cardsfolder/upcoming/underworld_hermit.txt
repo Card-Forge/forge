@@ -1,0 +1,9 @@
+Name:Underworld Hermit
+ManaCost:4 B B
+Types:Creature Human Peasant
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a number of 1/1 green Squirrel creature tokens equal to your devotion to black.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ g_1_1_squirrel | TokenOwner$ You
+SVar:X:Count$Devotion.Black
+DeckHas:Ability$Token
+Oracle:When Underworld Hermit enters the battlefield, create a number of 1/1 green Squirrel creature tokens equal to your devotion to black.
