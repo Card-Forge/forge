@@ -1,0 +1,10 @@
+Name:Verdant Command
+ManaCost:1 G
+Types:Instant
+A:SP$ Charm | Cost$ 1 G | Choices$ DBToken,DBCounter,DBExile,DBGainLife | CharmNum$ 2
+SVar:DBToken:DB$ Token | ValidTgts$ Player | TgtPrompt$ Select target player | TokenAmount$ 2 | TokenScript$ g_1_1_squirrel | TokenTapped$ True | TokenOwner$ TargetedPlayer | SpellDescription$ • Target player creates two tapped 1/1 green Squirrel creature tokens.
+SVar:DBCounter:DB$ Counter | TargetType$ Activated | TgtPrompt$ Select target loyalty ability of a planeswalker | ValidTgts$ Planeswalker | SpellDescription$ • Counter target loyalty ability of a planeswalker.
+SVar:DBExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | TgtPrompt$ Select target card from a graveyard | SpellDescription$ • Exile target card from a graveyard.
+SVar:DBGainLife:DB$ GainLife | ValidTgts$ Player | TgtPrompt$ Select target player to gain life | LifeAmount$ 3 | SpellDescription$ • Target player gains 3 life.
+DeckHas:Ability$Token & Ability$LifeGain
+Oracle:Choose two —\n• Target player creates two tapped 1/1 green Squirrel creature tokens.\n• Counter target loyalty ability of a planeswalker.\n• Exile target card from a graveyard.\n• Target player gains 3 life.

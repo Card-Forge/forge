@@ -1,0 +1,7 @@
+Name:Flame Blitz
+ManaCost:R
+Types:Enchantment
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ At the beginning of your end step, CARDNAME deals 5 damage to each planeswalker.
+SVar:TrigDealDamage:DB$ DamageAll | ValidCards$ Planeswalker | NumDmg$ 5
+K:Cycling:2
+Oracle:At the beginning of your end step, Flame Blitz deals 5 damage to each planeswalker.\nCycling {2} ({2}, Discard this card: Draw a card.)

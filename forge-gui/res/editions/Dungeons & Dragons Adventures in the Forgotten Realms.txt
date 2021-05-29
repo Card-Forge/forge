@@ -22,6 +22,7 @@ Type=Expansion
 281 L Forest
 284 M Lolth, Spider Queen
 298 M Tiamat
+302 U Cloister Gargoyle
 337 U Bruenor Battlehammer
 338 R Drizzt Do'Urden
 377 R Vorpal Sword

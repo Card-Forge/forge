@@ -329,6 +329,7 @@ Estrid
 Freyalise
 Garruk
 Gideon
+Grist
 Huatli
 Inzerva
 Jace
