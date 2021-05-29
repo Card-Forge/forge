@@ -31,13 +31,12 @@ public class ManaEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card card = sa.getHostCard();
-
         AbilityManaPart abMana = sa.getManaPart();
+        final List<Player> tgtPlayers = getTargetPlayers(sa);
 
         // Spells are not undoable
-        sa.setUndoable(sa.isAbility() && sa.isUndoable());
+        sa.setUndoable(sa.isAbility() && sa.isUndoable() && tgtPlayers.size() < 2);
 
-        final List<Player> tgtPlayers = getTargetPlayers(sa);
         final boolean optional = sa.hasParam("Optional");
         final Game game = sa.getActivatingPlayer().getGame();
 

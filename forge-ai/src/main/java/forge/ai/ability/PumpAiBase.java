@@ -532,8 +532,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
 
     protected boolean containsNonCombatKeyword(final List<String> keywords) {
         for (final String keyword : keywords) {
-            // since most keywords are combat relevant check for those that are
-            // not
+            // since most keywords are combat relevant check for those that are not
             if (keyword.endsWith("This card doesn't untap during your next untap step.")
                     || keyword.endsWith("Shroud") || keyword.endsWith("Hexproof")) {
                 return true;

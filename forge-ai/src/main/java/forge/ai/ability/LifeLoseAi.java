@@ -28,7 +28,6 @@ public class LifeLoseAi extends SpellAbilityAi {
      */
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
-
         final PlayerCollection tgtPlayers = getPlayers(ai, sa);
 
         final Card source = sa.getHostCard();
@@ -127,6 +126,7 @@ public class LifeLoseAi extends SpellAbilityAi {
         }
 
         final PlayerCollection tgtPlayers = getPlayers(ai, sa);
+         // TODO: check against the amount we could obtain when multiple activations are possible
         PlayerCollection filteredPlayer = tgtPlayers
                 .filter(Predicates.and(PlayerPredicates.isOpponentOf(ai), PlayerPredicates.lifeLessOrEqualTo(amount)));
         // killing opponents asap

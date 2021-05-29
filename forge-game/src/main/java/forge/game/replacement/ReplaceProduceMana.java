@@ -35,7 +35,7 @@ public class ReplaceProduceMana extends ReplacementEffect {
         if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Affected))) {
             return false;
         }
-        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {
+        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Activator))) {
             return false;
         }
         if (!matchesValidParam("ValidAbility", runParams.get(AbilityKey.AbilityMana))) {
@@ -57,7 +57,6 @@ public class ReplaceProduceMana extends ReplacementEffect {
 
         return true;
     }
-
 
     public void setReplacingObjects(Map<AbilityKey, Object> runParams, SpellAbility sa) {
         sa.setReplacingObject(AbilityKey.Mana, runParams.get(AbilityKey.Mana));
