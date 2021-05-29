@@ -787,7 +787,8 @@ public class PlayerControllerAi extends PlayerController {
                         case "BetterTgtThanRemembered":
                             if (source.getRememberedCount() > 0) {
                                 Card rem = (Card) source.getFirstRemembered();
-                                if (!rem.isInZone(ZoneType.Battlefield)) {
+                                //  avoid pumping opponent creature
+                                if (!rem.isInZone(ZoneType.Battlefield) || rem.getController().isOpponentOf(source.getController())) {
                                     return true;
                                 }
                                 for (Card c : source.getController().getCreaturesInPlay()) {
