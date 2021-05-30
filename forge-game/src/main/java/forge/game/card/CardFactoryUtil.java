@@ -3232,8 +3232,17 @@ public class CardFactoryUtil {
         if (keyword.startsWith("Affinity")) {
             final String[] k = keyword.split(":");
             final String t = k[1];
+            String d = "";
+            if (k.length > 2) {
+                final StringBuilder s = new StringBuilder();
+                s.append(k[2]).append("s");
+                d = s.toString();
+            }
 
             String desc = "Artifact".equals(t) ? "artifacts" : CardType.getPluralType(t);
+            if (!d.isEmpty()) {
+                desc = d;
+            }
             StringBuilder sb = new StringBuilder();
             sb.append("Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ AffinityX | EffectZone$ All");
             sb.append("| Description$ Affinity for ").append(desc);
