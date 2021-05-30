@@ -227,7 +227,7 @@ public class CharmAi extends SpellAbilityAi {
                 if (AiPlayDecision.WillPlay == aic.canPlaySa(sub)) {
                     chosenList.add(sub);
                     if (chosenList.size() == min) {
-                        break;  // enough choices
+                        break; // enough choices
                     }
                 }
             }
