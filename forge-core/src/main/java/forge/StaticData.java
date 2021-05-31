@@ -163,6 +163,11 @@ public class StaticData {
             for (CardEdition set : editions) {
                 sortedEditions.add(set);
             }
+            if (customEditions.size() > 0){
+                for (CardEdition set : customEditions) {
+                    sortedEditions.add(set);
+                }
+            }
             Collections.sort(sortedEditions);
             Collections.reverse(sortedEditions); //put newer sets at the top
         }
