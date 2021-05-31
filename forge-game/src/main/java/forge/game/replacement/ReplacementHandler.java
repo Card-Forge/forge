@@ -17,7 +17,10 @@
  */
 package forge.game.replacement;
 
+import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -30,6 +33,7 @@ import com.google.common.collect.Sets;
 import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.GameEntityCounterTable;
 import forge.game.GameLogEntryType;
 import forge.game.IHasSVars;
 import forge.game.ability.AbilityFactory;
@@ -45,6 +49,8 @@ import forge.game.card.CardUtil;
 import forge.game.keyword.KeywordInterface;
 import forge.game.keyword.KeywordsChange;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
+import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -58,6 +64,10 @@ public class ReplacementHandler {
     private final Game game;
 
     private Set<ReplacementEffect> hasRun = Sets.newHashSet();
+
+    // List of all replacement effect candidates for DamageDone event, in APNAP order
+    private final List<Map<ReplacementEffect, List<Map<AbilityKey, Object>>>> replaceDamageList = new ArrayList<>();
+
     /**
      * ReplacementHandler.
      * @param gameState
@@ -281,24 +291,6 @@ public class ReplacementHandler {
         return res;
     }
 
-    private void putPreventMapEntry(final Map<AbilityKey, Object> runParams) {
-        Card sourceLKI = (Card) runParams.get(AbilityKey.DamageSource);
-        GameEntity target = (GameEntity) runParams.get(AbilityKey.Affected);
-        Integer damage = (Integer) runParams.get(AbilityKey.DamageAmount);
-
-        // Set prevent map entry
-        CardDamageMap preventMap = (CardDamageMap) runParams.get(AbilityKey.PreventMap);
-        preventMap.put(sourceLKI, target, damage);
-
-        // Following codes are commented out since DamagePrevented trigger is currently not used by any Card.
-        // final Map<AbilityKey, Object> trigParams = AbilityKey.newMap();
-        // trigParams.put(AbilityKey.DamageTarget, target);
-        // trigParams.put(AbilityKey.DamageAmount, damage);
-        // trigParams.put(AbilityKey.DamageSource, sourceLKI);
-        // trigParams.put(AbilityKey.IsCombatDamage, runParams.get(AbilityKey.IsCombat));
-        // game.getTriggerHandler().runTrigger(TriggerType.DamagePrevented, trigParams, false);
-    }
-
     /**
      *
      * Runs a single replacement effect.
@@ -368,14 +360,21 @@ public class ReplacementHandler {
             }
         }
 
-        if (mapParams.containsKey("Prevent") && mapParams.get("Prevent").equals("True")) {
-            if (replacementEffect.getMode() == ReplacementType.DamageDone) {
-                if (Boolean.TRUE.equals(runParams.get(AbilityKey.NoPreventDamage))) {
-                    return ReplacementResult.NotReplaced;
+        boolean isPrevent = mapParams.containsKey("Prevent") && mapParams.get("Prevent").equals("True");
+        if (isPrevent || mapParams.containsKey("PreventionEffect")) {
+            if (Boolean.TRUE.equals(runParams.get(AbilityKey.NoPreventDamage))) {
+                // If can't prevent damage, result is not replaced
+                // But still put "prevented" amount for buffered SA
+                if (mapParams.containsKey("AlwaysReplace")) {
+                    runParams.put(AbilityKey.PreventedAmount, runParams.get(AbilityKey.DamageAmount));
+                } else {
+                    runParams.put(AbilityKey.PreventedAmount, 0);
                 }
-                putPreventMapEntry(runParams);
+                return ReplacementResult.NotReplaced;
             }
-            return ReplacementResult.Prevented; // Nothing should replace the event.
+            if (isPrevent) {
+                return ReplacementResult.Prevented; // Nothing should replace the event.
+            }
         }
 
         if (mapParams.containsKey("Skip")) {
@@ -384,23 +383,17 @@ public class ReplacementHandler {
             }
         }
 
-        boolean cantPreventDamage = (replacementEffect.getMode() == ReplacementType.DamageDone
-            && mapParams.containsKey("PreventionEffect")
-            && Boolean.TRUE.equals(runParams.get(AbilityKey.NoPreventDamage)));
-
         Player player = host.getController();
 
-        if (!cantPreventDamage || mapParams.containsKey("AlwaysReplace")) {
-            player.getController().playSpellAbilityNoStack(effectSA, true);
-            if (replacementEffect.getMode() == ReplacementType.DamageDone
-                    && effectSA.getApi() != ApiType.ReplaceDamage && !cantPreventDamage) {
-                putPreventMapEntry(runParams);
+        if (effectSA != null) {
+            ApiType apiType = effectSA.getApi();
+            if (replacementEffect.getMode() != ReplacementType.DamageDone ||
+                (apiType == ApiType.ReplaceDamage || apiType == ApiType.ReplaceSplitDamage || apiType == ApiType.ReplaceEffect)) {
+                player.getController().playSpellAbilityNoStack(effectSA, true);
+            } else {
+                // The SA if buffered, but replacement result should be set to Replaced
+                runParams.put(AbilityKey.ReplacementResult, ReplacementResult.Replaced);
             }
-        }
-
-        // If can't prevent damage, result is not replaced
-        if (cantPreventDamage) {
-            return ReplacementResult.NotReplaced;
         }
 
         // if the spellability is a replace effect then its some new logic
@@ -410,6 +403,322 @@ public class ReplacementHandler {
         }
 
         return ReplacementResult.Replaced;
+    }
+
+    private void getPossibleReplaceDamageList(PlayerCollection players, final boolean isCombat, final CardDamageMap damageMap, final SpellAbility cause) {
+        for (Map.Entry<GameEntity, Map<Card, Integer>> et : damageMap.columnMap().entrySet()) {
+            final GameEntity target = et.getKey();
+            int playerIndex = (target instanceof Player ? players.indexOf(((Player) target)) :
+                                players.indexOf(((Card) target).getController()));
+            Map<ReplacementEffect, List<Map<AbilityKey, Object>>> replaceCandidateMap = replaceDamageList.get(playerIndex);
+            for (Map.Entry<Card, Integer> e : et.getValue().entrySet()) {
+                Card source = e.getKey();
+                Integer damage = e.getValue();
+                if (damage > 0) {
+                    boolean prevention = source.canDamagePrevented(isCombat) &&
+                                            (cause == null || !cause.hasParam("NoPrevention"));
+                    final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(target);
+                    repParams.put(AbilityKey.DamageSource, source);
+                    repParams.put(AbilityKey.DamageAmount, damage);
+                    repParams.put(AbilityKey.IsCombat, isCombat);
+                    repParams.put(AbilityKey.NoPreventDamage, !prevention);
+                    if (cause != null) {
+                        repParams.put(AbilityKey.Cause, cause);
+                    }
+
+                    List<ReplacementEffect> reList = getReplacementList(ReplacementType.DamageDone, repParams, ReplacementLayer.Other);
+                    for (ReplacementEffect re : reList) {
+                        if (!replaceCandidateMap.containsKey(re)) {
+                            replaceCandidateMap.put(re, new ArrayList<>());
+                        }
+                        List<Map<AbilityKey, Object>> runParamList = replaceCandidateMap.get(re);
+                        runParamList.add(repParams);
+                    }
+                }
+            }
+        }
+    }
+
+    private void runSingleReplaceDamageEffect(ReplacementEffect re, Map<AbilityKey, Object> runParams, Map<ReplacementEffect, List<Map<AbilityKey, Object>>> replaceCandidateMap,
+            Map<ReplacementEffect, List<Map<AbilityKey, Object>>> executedDamageMap, Player decider, final CardDamageMap damageMap, final CardDamageMap preventMap) {
+        List<Map<AbilityKey, Object>> executedParamList = executedDamageMap.get(re);
+        ApiType apiType = re.getOverridingAbility() != null ? re.getOverridingAbility().getApi() : null;
+        Card source = (Card) runParams.get(AbilityKey.DamageSource);
+        GameEntity target = (GameEntity) runParams.get(AbilityKey.Affected);
+        int damage = (int) runParams.get(AbilityKey.DamageAmount);
+        Map<String, String> mapParams = re.getMapParams();
+
+        ReplacementResult res = executeReplacement(runParams, re, decider, game);
+        GameEntity newTarget = (GameEntity) runParams.get(AbilityKey.Affected);
+        int newDamage = (int) runParams.get(AbilityKey.DamageAmount);
+
+        // ReplaceSplitDamage will split the damage event into two event, so need to create run params for old event
+        // (original run params is changed for new event)
+        Map<AbilityKey, Object> oldParams = null;
+
+        if (res != ReplacementResult.NotReplaced) {
+            // Remove this event from other possible replacers
+            Iterator<Map.Entry<ReplacementEffect, List<Map<AbilityKey, Object>>>> itr = replaceCandidateMap.entrySet().iterator();
+            while (itr.hasNext()) {
+                Map.Entry<ReplacementEffect, List<Map<AbilityKey, Object>>> entry = itr.next();
+                if (entry.getKey() == re) continue;
+                if (entry.getValue().contains(runParams)) {
+                    entry.getValue().remove(runParams);
+                    if (entry.getValue().isEmpty()) {
+                        itr.remove();
+                    }
+                }
+            }
+            // Add updated event to possible replacers
+            if (res == ReplacementResult.Updated || apiType == ApiType.ReplaceSplitDamage) {
+                Map<ReplacementEffect, List<Map<AbilityKey, Object>>> newReplaceCandidateMap = replaceCandidateMap;
+                if (!target.equals(newTarget)) {
+                    PlayerCollection players = game.getPlayersInTurnOrder();
+                    int playerIndex = (newTarget instanceof Player ? players.indexOf(((Player) newTarget)) :
+                                       players.indexOf(((Card) newTarget).getController()));
+                    newReplaceCandidateMap = replaceDamageList.get(playerIndex);
+                }
+
+                List<ReplacementEffect> reList = getReplacementList(ReplacementType.DamageDone, runParams, ReplacementLayer.Other);
+                for (ReplacementEffect newRE : reList) {
+                    // Skip if this has already been executed by given replacement effect
+                    if (executedDamageMap.containsKey(newRE) && executedDamageMap.get(newRE).contains(runParams)) {
+                        continue;
+                    }
+                    if (!newReplaceCandidateMap.containsKey(newRE)) {
+                        newReplaceCandidateMap.put(newRE, new ArrayList<>());
+                    }
+                    List<Map<AbilityKey, Object>> runParamList = newReplaceCandidateMap.get(newRE);
+                    runParamList.add(runParams);
+                }
+            }
+            // Add old updated event too for ReplaceSplitDamage
+            if (apiType == ApiType.ReplaceSplitDamage && res == ReplacementResult.Updated) {
+                oldParams = AbilityKey.newMap(runParams);
+                oldParams.put(AbilityKey.Affected, target);
+                oldParams.put(AbilityKey.DamageAmount, damage - newDamage);
+                List<ReplacementEffect> reList = getReplacementList(ReplacementType.DamageDone, oldParams, ReplacementLayer.Other);
+                for (ReplacementEffect newRE : reList) {
+                    if (!replaceCandidateMap.containsKey(newRE)) {
+                        replaceCandidateMap.put(newRE, new ArrayList<>());
+                    }
+                    List<Map<AbilityKey, Object>> runParamList = replaceCandidateMap.get(newRE);
+                    runParamList.add(oldParams);
+                }
+            }
+        }
+
+        @SuppressWarnings("unchecked")
+        Map<ReplacementEffect, ReplacementResult> resultMap = (Map<ReplacementEffect, ReplacementResult>) runParams.get(AbilityKey.ReplacementResultMap);
+        resultMap.put(re, res);
+
+        // Update damage map and prevent map
+        switch (res) {
+        case NotReplaced:
+            break;
+        case Updated:
+            // check if this is still the affected card or player
+            if (target.equals(newTarget)) {
+                damageMap.put(source, target, newDamage - damage);
+            } else if (apiType == ApiType.ReplaceSplitDamage) {
+                damageMap.put(source, target, -newDamage);
+            }
+            if (!target.equals(newTarget)) {
+                if (apiType != ApiType.ReplaceSplitDamage) {
+                    damageMap.remove(source, target);
+                }
+                damageMap.put(source, newTarget, newDamage);
+            }
+            if (apiType == ApiType.ReplaceDamage) {
+                preventMap.put(source, target, damage - newDamage);
+                // Record prevented amount
+                runParams.put(AbilityKey.PreventedAmount, damage - newDamage);
+            }
+            break;
+        default:
+            damageMap.remove(source, target);
+            if (apiType == ApiType.ReplaceDamage ||
+                    (mapParams.containsKey("Prevent") && mapParams.get("Prevent").equals("True")) ||
+                    mapParams.containsKey("PreventionEffect")) {
+                preventMap.put(source, target, damage);
+                // Record prevented amount
+                runParams.put(AbilityKey.PreventedAmount, damage);
+            }
+            if (apiType == ApiType.ReplaceSplitDamage) {
+                damageMap.put(source, newTarget, newDamage);
+            }
+        }
+
+        // Put run params into executed param list so this replacement effect won't handle them again
+        // (For example, if the damage is redirected back)
+        executedParamList.add(runParams);
+        if (apiType == ApiType.ReplaceSplitDamage) {
+            executedParamList.add(oldParams);
+        }
+
+        // Log the replacement effect
+        if (res != ReplacementResult.NotReplaced) {
+            String message = re.getDescription();
+            if ( !StringUtils.isEmpty(message)) {
+                if (re.getHostCard() != null) {
+                    message = TextUtil.fastReplace(message, "CARDNAME", re.getHostCard().getName());
+                }
+                game.getGameLog().add(GameLogEntryType.EFFECT_REPLACED, message);
+            }
+        }
+    }
+
+    private void executeReplaceDamageBufferedSA(Map<ReplacementEffect, List<Map<AbilityKey, Object>>> executedDamageMap) {
+        for (Map.Entry<ReplacementEffect, List<Map<AbilityKey, Object>>> entry : executedDamageMap.entrySet()) {
+            ReplacementEffect re = entry.getKey();
+            if (re.getOverridingAbility() == null) {
+                continue;
+            }
+            SpellAbility bufferedSA = re.getOverridingAbility();
+            ApiType apiType = bufferedSA.getApi();
+            if (apiType == ApiType.ReplaceDamage || apiType == ApiType.ReplaceSplitDamage || apiType == ApiType.ReplaceEffect) {
+                bufferedSA = bufferedSA.getSubAbility();
+                if (bufferedSA == null) {
+                    continue;
+                }
+            }
+
+            List<Map<AbilityKey, Object>> executedParamList = entry.getValue();
+            if (executedParamList.isEmpty()) {
+                continue;
+            }
+
+            Map<String, String> mapParams = re.getMapParams();
+            boolean isPrevention = (mapParams.containsKey("Prevent") && mapParams.get("Prevent").equals("True")) || mapParams.containsKey("PreventionEffect");
+            boolean executePerSource = (mapParams.containsKey("ExecuteMode") && mapParams.get("ExecuteMode").equals("PerSource"));
+            boolean executePerTarget = (mapParams.containsKey("ExecuteMode") && mapParams.get("ExecuteMode").equals("PerTarget"));
+
+            while (!executedParamList.isEmpty()) {
+                Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+                List<Card> damageSourceList = new ArrayList<>();
+                List<GameEntity> affectedList = new ArrayList<>();
+                int damageSum = 0;
+
+                Iterator<Map<AbilityKey, Object>> itr = executedParamList.iterator();
+                while (itr.hasNext()) {
+                    Map<AbilityKey, Object> executedParams = itr.next();
+
+                    @SuppressWarnings("unchecked")
+                    Map<ReplacementEffect, ReplacementResult> resultMap = (Map<ReplacementEffect, ReplacementResult>) executedParams.get(AbilityKey.ReplacementResultMap);
+                    ReplacementResult res = resultMap.get(re);
+                    if (res == ReplacementResult.NotReplaced && (!isPrevention || Boolean.FALSE.equals(executedParams.get(AbilityKey.NoPreventDamage)))) {
+                        itr.remove();
+                        continue;
+                    }
+
+                    Card source = (Card) executedParams.get(AbilityKey.DamageSource);
+                    if (executePerSource && !damageSourceList.isEmpty() && !damageSourceList.contains(source)) {
+                        continue;
+                    }
+
+                    GameEntity target = (GameEntity) executedParams.get(AbilityKey.Affected);
+                    if (executePerTarget && !affectedList.isEmpty() && !affectedList.contains(target)) {
+                        continue;
+                    }
+
+                    itr.remove();
+                    int damage = (int) executedParams.get(isPrevention ? AbilityKey.PreventedAmount : AbilityKey.DamageAmount);
+                    if (!damageSourceList.contains(source)) {
+                        damageSourceList.add(source);
+                    }
+                    if (!affectedList.contains(target)) {
+                        affectedList.add(target);
+                    }
+                    damageSum += damage;
+                }
+
+                if (damageSum > 0) {
+                    runParams.put(AbilityKey.DamageSource, (damageSourceList.size() > 1 ? damageSourceList : damageSourceList.get(0)));
+                    runParams.put(AbilityKey.Affected, (affectedList.size() > 1 ? affectedList : affectedList.get(0)));
+                    runParams.put(AbilityKey.DamageAmount, damageSum);
+
+                    re.setReplacingObjects(runParams, re.getOverridingAbility());
+                    bufferedSA.setActivatingPlayer(re.getHostCard().getController());
+                    AbilityUtils.resolve(bufferedSA);
+                }
+            }
+        }
+    }
+
+    public void runReplaceDamage(final boolean isCombat, final CardDamageMap damageMap, final CardDamageMap preventMap,
+            final GameEntityCounterTable counterTable, final SpellAbility cause) {
+        PlayerCollection players = game.getPlayersInTurnOrder();
+        for (int i = 0; i < players.size(); i++) {
+            replaceDamageList.add(new HashMap<>());
+        }
+
+        // Map of all executed replacement effect for DamageDone event, including run params
+        Map<ReplacementEffect, List<Map<AbilityKey, Object>>> executedDamageMap = new HashMap<>();
+
+        // First, gather all possible replacement effects
+        getPossibleReplaceDamageList(players, isCombat, damageMap, cause);
+
+        // Next, handle replacement effects in APNAP order
+        // Handle "Prevented this way" and abilities like "Phantom Nomad", by buffer the replaced SA
+        // and only run them after all prevention and redirection effects are processed.
+        while (true) {
+            Player decider = null;
+            Map<ReplacementEffect, List<Map<AbilityKey, Object>>> replaceCandidateMap = null;
+            for (int i = 0; i < players.size(); i++) {
+                if (replaceDamageList.get(i).isEmpty()) continue;
+                decider = players.get(i);
+                replaceCandidateMap = replaceDamageList.get(i);
+                break;
+            }
+            if (replaceCandidateMap == null) {
+                break;
+            }
+
+            List<ReplacementEffect> possibleReplacers = new ArrayList<>(replaceCandidateMap.keySet());
+            ReplacementEffect chosenRE = decider.getController().chooseSingleReplacementEffect(Localizer.getInstance().getMessage("lblChooseFirstApplyReplacementEffect"), possibleReplacers);
+            List<Map<AbilityKey, Object>> runParamList = replaceCandidateMap.get(chosenRE);
+
+            if (!executedDamageMap.containsKey(chosenRE)) {
+                executedDamageMap.put(chosenRE, new ArrayList<>());
+            }
+
+            // Run all possible events for chosen replacement effect
+            chosenRE.setHasRun(true);
+            SpellAbility effectSA = chosenRE.getOverridingAbility();
+            SpellAbility bufferedSA = effectSA;
+            boolean needRestoreSubSA = false;
+            if (effectSA != null) {
+                ApiType apiType = effectSA.getApi();
+                // Temporary remove sub ability from ReplaceDamage, ReplaceSplitDamage and ReplaceEffect API so they could be run later
+                if (apiType == ApiType.ReplaceDamage || apiType == ApiType.ReplaceSplitDamage || apiType == ApiType.ReplaceEffect) {
+                    bufferedSA = effectSA.getSubAbility();
+                    if (bufferedSA != null) {
+                        needRestoreSubSA = true;
+                        effectSA.setSubAbility(null);
+                    }
+                }
+            }
+
+            for (Map<AbilityKey, Object> runParams : runParamList) {
+                if (!runParams.containsKey(AbilityKey.ReplacementResultMap)) {
+                    Map<ReplacementEffect, ReplacementResult> resultMap = new HashMap<>();
+                    runParams.put(AbilityKey.ReplacementResultMap, resultMap);
+                }
+                runSingleReplaceDamageEffect(chosenRE, runParams, replaceCandidateMap, executedDamageMap, decider, damageMap, preventMap);
+            }
+
+            // Restore temporary removed SA
+            if (needRestoreSubSA) {
+                effectSA.setSubAbility((AbilitySub)bufferedSA);
+            }
+            chosenRE.setHasRun(false);
+            replaceCandidateMap.remove(chosenRE);
+        }
+
+        replaceDamageList.clear();
+
+        // Finally, run all buffered SA to finish the replacement processing
+        executeReplaceDamageBufferedSA(executedDamageMap);
     }
 
     /**

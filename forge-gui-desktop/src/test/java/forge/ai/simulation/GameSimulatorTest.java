@@ -2166,4 +2166,149 @@ public class GameSimulatorTest extends SimulationTestCase {
         assertEquals(true, simGoblin.isRed() && simGoblin.isBlack());
         assertEquals(true, simGoblin.getType().hasSubtype("Zombie"));
     }
+
+    public void testCantBePrevented() {
+        String polukranosCardName = "Polukranos, Unchained";
+        String hydraCardName = "Phyrexian Hydra";
+        String leylineCardName = "Leyline of Punishment";
+
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+
+        Card polukranos = addCard(polukranosCardName, p);
+        polukranos.addCounter(CounterEnumType.P1P1, 6, p, false, null);
+        addCard(hydraCardName, p);
+        addCard(leylineCardName, p);
+        for (int i = 0; i < 2; ++i) {
+            addCard("Mountain", p);
+        }
+        Card pyroCard = addCardToZone("Pyroclasm", p, ZoneType.Hand);
+        SpellAbility pyroSA = pyroCard.getFirstSpellAbility();
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        GameSimulator sim = createSimulator(game, p);
+        sim.simulateSpellAbility(pyroSA);
+        Game simGame = sim.getSimulatedGameState();
+        Card simPolukranos = findCardWithName(simGame, polukranosCardName);
+        Card simHydra = findCardWithName(simGame, hydraCardName);
+
+        assertTrue(simPolukranos.hasCounters());
+        assertEquals(4, simPolukranos.getCounters(CounterEnumType.P1P1));
+        assertEquals(2, simPolukranos.getDamage());
+
+        assertFalse(simHydra.hasCounters());
+        assertEquals(2, simHydra.getDamage());
+    }
+
+    public void testAlphaBrawl() {
+        Game game = initAndCreateGame();
+        Player p1 = game.getPlayers().get(0);
+        Player p2 = game.getPlayers().get(1);
+
+        String nishobaName = "Phantom Nishoba";
+        String capridorName = "Stormwild Capridor";
+        String pridemateName = "Ajani's Pridemate";
+        String indestructibilityName = "Indestructibility";
+        String bearName = "Runeclaw Bear";
+        String alphaBrawlName = "Alpha Brawl";
+
+        // enough to cast Alpha Brawl
+        for (int i = 0; i < 8; ++i) {
+            addCard("Mountain", p2);
+        }
+
+        Card nishoba = addCard(nishobaName, p1);
+        nishoba.addCounter(CounterEnumType.P1P1, 7, p1, false, null);
+        addCard(capridorName, p1);
+        Card pridemate = addCard(pridemateName, p1);
+        Card indestructibility = addCard(indestructibilityName, p1);
+        indestructibility.attachToEntity(pridemate);
+        addCard(bearName, p1);
+
+        Card alphaBrawl = addCardToZone(alphaBrawlName, p2, ZoneType.Hand);
+        SpellAbility alphaBrawlSA = alphaBrawl.getFirstSpellAbility();
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p2);
+        game.getAction().checkStateEffects(true);
+
+        GameSimulator sim = createSimulator(game, p2);
+        alphaBrawlSA.setTargetCard(nishoba);
+        sim.simulateSpellAbility(alphaBrawlSA);
+        Game simGame = sim.getSimulatedGameState();
+        Card simNishoba = findCardWithName(simGame, nishobaName);
+        Card simCapridor = findCardWithName(simGame, capridorName);
+        Card simPridemate = findCardWithName(simGame, pridemateName);
+        Card simBear = findCardWithName(simGame, bearName);
+
+        // bear is destroyed
+        assertNull(simBear);
+
+        assertNotNull(simNishoba);
+        assertTrue(simNishoba.hasCounters());
+        // Damage prevented and only 1 +1/+1 counter is removed
+        assertEquals(0, simNishoba.getDamage());
+        assertTrue(simNishoba.hasCounters());
+        assertEquals(6, simNishoba.getCounters(CounterEnumType.P1P1));
+        assertEquals(6, simNishoba.getToughnessBonusFromCounters());
+        assertEquals(6, simNishoba.getPowerBonusFromCounters());
+
+        assertNotNull(simCapridor);
+        // Damage prevented and that many +1/+1 counters are put
+        assertEquals(0, simCapridor.getDamage());
+        assertTrue(simCapridor.hasCounters());
+        assertEquals(7, simCapridor.getCounters(CounterEnumType.P1P1));
+        assertEquals(7, simCapridor.getToughnessBonusFromCounters());
+        assertEquals(7, simCapridor.getPowerBonusFromCounters());
+
+        assertNotNull(simPridemate);
+        assertEquals(7, simPridemate.getDamage());
+        // Life gain only triggered once
+        assertTrue(simPridemate.hasCounters());
+        assertEquals(1, simPridemate.getCounters(CounterEnumType.P1P1));
+        assertEquals(1, simPridemate.getToughnessBonusFromCounters());
+        assertEquals(1, simPridemate.getPowerBonusFromCounters());
+
+        // 2 times 7 damage with life gain = 14 + 20 = 34 (damage to Stormwild Capridor is prevented)
+        assertEquals(34, simGame.getPlayers().get(0).getLife());
+    }
+
+    public void testGlarecaster() {
+        String glarecasterName = "Glarecaster";
+
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        Player p2 = game.getPlayers().get(1);
+
+        Card glarecaster = addCard(glarecasterName, p);
+        // enough to activate Glarecaster and cast Inferno
+        for (int i = 0; i < 7; ++i) {
+            addCard("Plains", p);
+            addCard("Mountain", p);
+        }
+        Card infernoCard = addCardToZone("Inferno", p, ZoneType.Hand);
+        SpellAbility infernoSA = infernoCard.getFirstSpellAbility();
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility saGlarecaster = findSAWithPrefix(glarecaster, "{5}{W}");
+        assertNotNull(saGlarecaster);
+        saGlarecaster.getTargets().add(p2);
+
+        GameSimulator sim = createSimulator(game, p);
+        int score = sim.simulateSpellAbility(saGlarecaster).value;
+        assertTrue(score > 0);
+        sim.simulateSpellAbility(infernoSA);
+        Game simGame = sim.getSimulatedGameState();
+        Card simGlarecaster = findCardWithName(simGame, glarecasterName);
+
+        assertNotNull(simGlarecaster);
+        assertEquals(0, simGlarecaster.getDamage());
+
+        // 6 * 3 = 18 damage are all dealt to p2
+        assertEquals(20, simGame.getPlayers().get(0).getLife());
+        assertEquals(2, simGame.getPlayers().get(1).getLife());
+    }
 }
