@@ -1,0 +1,11 @@
+Name:General Ferrous Rokiric
+ManaCost:1 R W
+Types:Legendary Creature Human Soldier
+PT:3/1
+K:Hexproof:Card.MonoColor:monocolored
+T:Mode$ SpellCast | ValidCard$ Card.MultiColor | ValidActivatingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a multicolored spell, create a 4/4 red and white Golem creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ rw_4_4_golem
+AI:RemoveDeck:Random
+SVar:BuffedBy:Card.MultiColor
+DeckHas:Ability$Token
+Oracle:Hexproof from monocolored (This creature can't be the target of monocolored spells or abilities your opponents control.)\nWhenever you cast a multicolored spell, create a 4/4 red and white Golem creature token.
