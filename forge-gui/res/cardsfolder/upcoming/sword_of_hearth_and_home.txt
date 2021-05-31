@@ -1,0 +1,12 @@
+Name:Sword of Hearth and Home
+ManaCost:3
+Types:Artifact Equipment
+K:Equip:2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | AddSVar$ SwordOfHearthAndHomeCE | AddKeyword$ Protection from green & Protection from white | Description$ Equipped creature gets +2/+2 and has protection from green and from white.
+T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigBlink | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, exile up to one target creature you own, then search your library for a basic land card. Put both cards onto the battlefield under your control, then shuffle.
+SVar:TrigBlink:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | ValidTgts$ Creature.YouOwn | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target creature you own | SubAbility$ DBLand
+SVar:DBLand:DB$ ChangeZone | Origin$ Library | Destination$ Library | ChangeType$ Land.Basic | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ All | Destination$ Battlefield | GainControl$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:SwordOfHearthAndHomeCE:SVar:MustBeBlocked:AttackingPlayerConservative
+Oracle:Equipped creature gets +2/+2 and has protection from green and from white.\nWhenever equipped creature deals combat damage to a player, exile up to one target creature you own, then search your library for a basic land card. Put both cards onto the battlefield under your control, then shuffle.\nEquip {2}

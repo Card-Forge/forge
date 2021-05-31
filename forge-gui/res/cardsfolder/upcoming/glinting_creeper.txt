@@ -1,0 +1,10 @@
+Name:Glinting Creeper
+ManaCost:4 G
+Types:Creature Plant
+PT:0/0
+K:etbCounter:P1P1:Y:no Condition:Converge — CARDNAME enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.
+K:CantBeBlockedBy Creature.powerLE2
+SVar:X:Count$Converge
+SVar:Y:SVar$X/Twice
+DeckHints:Ability$Counters
+Oracle:Converge — Glinting Creeper enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.\nGlinting Creeper can't be blocked by creautures with power 2 or less.

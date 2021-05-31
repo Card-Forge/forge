@@ -1,0 +1,9 @@
+Name:Thraben Watcher
+ManaCost:2 W W
+Types:Creature Angel
+PT:2/2
+K:Flying
+K:Vigilance
+S:Mode$ Continuous | Affected$ Creature.nonToken+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Vigilance | Description$ Other nontoken creatures you control get +1/+1 and have vigilance.
+SVar:PlayMain1:TRUE
+Oracle:Flying, vigilance\nOther nontoken creatures you control get +1/+1 and have vigilance.
