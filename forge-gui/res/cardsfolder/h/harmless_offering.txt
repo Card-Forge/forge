@@ -1,10 +1,7 @@
 Name:Harmless Offering
 ManaCost:2 R
 Types:Sorcery
-A:SP$ Pump | Cost$ 2 R | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ D1 | SpellDescription$ Target opponent gains control of target permanent you control. | StackDescription$ None
-SVar:D1:DB$ Pump | Static$ True | SubAbility$ D2 | StackDescription$ None
-SVar:D2:DB$ Pump | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent you control | SubAbility$ D3 | StackDescription$ None
-SVar:D3:DB$ GainControl | Defined$ Targeted | NewController$ TargetedPlayer
+A:SP$ Pump | Cost$ 2 R | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBGainControl | SpellDescription$ Target opponent gains control of target permanent you control. | StackDescription$ None
+SVar:DBGainControl:DB$ GainControl | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent you control | NewController$ ParentTarget
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/harmless_offering.jpg
 Oracle:Target opponent gains control of target permanent you control.

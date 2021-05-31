@@ -1,0 +1,10 @@
+Name:Tireless Provisioner
+ManaCost:2 G
+Types:Creature Elf Scout
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigTokenChoice | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, create a Food token or a Treasure token. (Food is an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life." Treasure is an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+SVar:TrigTokenChoice:DB$ GenericChoice | Defined$ You | Choices$ Food,Treasure | SpellDescription$ Whenever a land enters the battlefield under your control, create a Food token or a Treasure token.
+SVar:Food:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You | SpellDescription$ Food
+SVar:Treasure:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SpellDescription$ Treasure
+DeckHas:Ability$Token & Ability$LifeGain
+Oracle:Landfall — Whenever a land enters the battlefield under your control, create a Food token or a Treasure token. (Food is an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life." Treasure is an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

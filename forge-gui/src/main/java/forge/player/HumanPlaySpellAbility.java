@@ -143,8 +143,9 @@ public class HumanPlaySpellAbility {
 
         // This line makes use of short-circuit evaluation of boolean values, that is each subsequent argument
         // is only executed or evaluated if the first argument does not suffice to determine the value of the expression
-        final boolean prerequisitesMet = announceValuesLikeX()
-                && announceType()
+        // because of Selective Snare do announceType first
+        final boolean prerequisitesMet = announceType()
+                && announceValuesLikeX()
                 && (!mayChooseTargets || ability.setupTargets()) // if you can choose targets, then do choose them.
                 && ability.canCastTiming(human)
                 && ability.checkRestrictions(human)

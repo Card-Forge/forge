@@ -1,0 +1,8 @@
+Name:Combine Chrysalis
+ManaCost:G U
+Types:Artifact
+S:Mode$ Continuous | Affected$ Creature.token | AddKeyword$ Flying | Description$ Creature tokens you control have flying.
+A:AB$ Token | Cost$ 2 G U T Sac<1/Permanent.token/token> | SorcerySpeed$ True | TokenScript$ g_4_4_beast | SpellDescription$ Create a 4/4 green Beast creature token. Activate only as a sorcery.
+DeckNeeds:Ability$Token
+DeckHas:Ability$Token
+Oracle:Creature tokens you control have flying.\n{2}{G}{U}, {T}, Sacrifice a token: Create a 4/4 green Beast creature token. Activate only as a sorcery.
