@@ -1,0 +1,9 @@
+Name:Ignoble Hierarch
+ManaCost:G
+Types:Creature Goblin Shaman
+PT:0/1
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+K:Exalted
+Oracle:Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)\n{T}: Add {B}, {R}, or {G}.

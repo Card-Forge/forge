@@ -1,0 +1,7 @@
+Name:Sylvan Anthem
+ManaCost:G G
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.Green+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Green creatures you control get +1/+1.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Green+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigScry | TriggerDescription$ Whenever a green creature enters the battlefield under your control, scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)
+SVar:TrigScry:DB$ Scry | ScryNum$ 1
+Oracle:Green creatures you control get +1/+1.\nWhenever a green creature enters the battlefield under your control, scry 1.

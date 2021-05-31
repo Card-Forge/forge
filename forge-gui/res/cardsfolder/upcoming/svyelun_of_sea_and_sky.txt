@@ -1,4 +1,4 @@
-Name:Svyelun, of Sea and Sky
+Name:Svyelun of Sea and Sky
 ManaCost:1 U U
 Types:Legendary Creature Merfolk God
 PT:3/4
@@ -7,4 +7,4 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 S:Mode$ Continuous | Affected$ Merfolk.Other+YouCtrl | AddKeyword$ Ward:1 | Description$ Other Merfolk you control have ward {1}.
 DeckNeeds:Type$Merfolk
-Oracle:Description$ As long as you control two other Merfolk, Svyelun has indestructible. (Damage and effects that say "destroy" don't destroy it.)\nWhenever Svyelun attacks, draw a card.\nOther Merfolk you control have ward {1}.
+Oracle:Svyelun of Sea and Sky has indestructible as long as you control at least two other Merfolk.\nWhenever Svyelun attacks, draw a card.\nOther Merfolk you control have ward {1}.

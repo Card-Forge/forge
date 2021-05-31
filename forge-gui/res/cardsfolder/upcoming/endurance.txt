@@ -1,0 +1,10 @@
+Name:Endurance
+ManaCost:1 G G
+Types:Creature Elemental Incarnation
+PT:3/4
+K:Flash
+K:Reach
+K:Evoke:ExileFromHand<1/Card.Green+Other>
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigBottom | TriggerDescription$ When CARDNAME enters the battlefield, up to one target player puts all the cards from their graveyard on the bottom of their library in a random order.
+SVar:TrigBottom:DB$ ChangeZoneAll | ValidTgts$ Player | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target player | ChangeType$ Card | Origin$ Graveyard | Destination$ Library | Reveal$ False | RandomOrder$ True
+Oracle:Flash\nReach\nWhen Endurance enters the battlefield, up to one target player puts all the cards from their graveyard on the bottom of their library in a random order.\nEvoke — Exile a green card from your hand.

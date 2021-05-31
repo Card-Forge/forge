@@ -1,0 +1,14 @@
+Name:Archon of Cruelty
+ManaCost:6 B B
+Types:Creature Archon
+PT:6/6
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigSac | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, target opponent sacrifices a creature or planeswalker, discards a card, and loses 3 life. You draw a card and gain 3 life.
+T:Mode$ Attacks | ValidCard$ Card.Self | Secondary$ True | Execute$ TrigSac | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, target opponent sacrifices a creature or planeswalker, discards a card, and loses 3 life. You draw a card and gain 3 life.
+SVar:TrigSac:DB$ Sacrifice | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SacValid$ Creature,Planeswalker | SacMessage$ creature or planeswalker | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ Targeted | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Targeted | LifeAmount$ 3 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3
+DeckHas:Ability$LifeGain
+Oracle:Flying\nWhenever Archon of Cruelty enters the battlefield or attacks, target opponent sacrifices a creature or planeswalker, discards a card, and loses 3 life. You draw a card and gain 3 life.

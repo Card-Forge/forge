@@ -1,0 +1,9 @@
+Name:Abiding Grace
+ManaCost:2 W
+Types:Enchantment
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCharm | TriggerDescription$ At the beginning of your end step, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBGainLife,DBChangeZone | CharmNum$ 1
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card with mana value 1 in your graveyard | ValidTgts$ Creature.cmcEQ1+YouCtrl | SpellDescription$ Return target creature card with mana value 1 from your graveyard to the battlefield.
+DeckHas:Ability$LifeGain
+Oracle:At the beginning of your end step, choose one —\n• You gain 1 life.\n• Return target creature card with mana value 1 from your graveyard to the battlefield.

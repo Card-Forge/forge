@@ -24,7 +24,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        final List<Player> newController = getTargetPlayers(sa, "NewController");
+        final List<Player> newController = getDefinedPlayersOrTargeted(sa, "NewController");
         if (newController.isEmpty()) {
             newController.add(sa.getActivatingPlayer());
         }

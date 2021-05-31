@@ -1,7 +1,7 @@
 Name:Aluren
 ManaCost:2 G G
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Creature.cmcLE3+nonToken | MayPlay$ True | MayPlayCardOwner$ True | MayPlayWithoutManaCost$ True | MayPlayWithFlash$ True | MayPlayDontGrantZonePermissions$ True | AffectedZone$ Hand,Graveyard,Library,Exile | Description$ Any player may cast creature spells with mana value 3 or less without paying their mana costs and as though they had flash.
+S:Mode$ Continuous | Affected$ Creature.cmcLE3+nonToken | MayPlay$ True | MayPlayCardOwner$ True | MayPlayWithoutManaCost$ True | MayPlayWithFlash$ True | MayPlayDontGrantZonePermissions$ True | AffectedZone$ Hand,Graveyard,Library,Exile,Command | Description$ Any player may cast creature spells with mana value 3 or less without paying their mana costs and as though they had flash.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aluren.jpg

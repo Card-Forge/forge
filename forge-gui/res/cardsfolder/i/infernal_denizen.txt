@@ -6,7 +6,7 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigSacrificeSwamp |
 SVar:TrigSacrificeSwamp:DB$ Sacrifice | Defined$ You | Amount$ 2 | SacValid$ Swamp | RememberSacrificed$ True | SubAbility$ DBTap
 SVar:DBTap:DB$ Tap | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Swamp | ConditionCompare$ LE1 | SubAbility$ DBChooseOpponent
 SVar:DBChooseOpponent:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent: | AILogic$ Random | ConditionDefined$ Remembered | ConditionPresent$ Swamp | ConditionCompare$ LE1 | SubAbility$ DBChooseCreature
-SVar:DBChooseCreature:DB$ ChooseCard | Optional$ Yes | Defined$ Player.Chosen | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose a creature you want to control: | AILogic$ BestCard | ConditionDefined$ Remembered | ConditionPresent$ Swamp | ConditionCompare$ LE1 | SubAbility$ DBOpponentGainControl
+SVar:DBChooseCreature:DB$ ChooseCard | Defined$ Player.Chosen | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose a creature you want to control: | AILogic$ BestCard | ConditionDefined$ Remembered | ConditionPresent$ Swamp | ConditionCompare$ LE1 | SubAbility$ DBOpponentGainControl
 SVar:DBOpponentGainControl:DB$ GainControl | Defined$ ChosenCard | NewController$ Player.Chosen | LoseControl$ LeavesPlay | ConditionDefined$ Remembered | ConditionPresent$ Swamp | ConditionCompare$ LE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenPlayer$ True | ClearChosenCard$ True
 A:AB$ GainControl | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature. | LoseControl$ LeavesPlay | SpellDescription$ Gain control of target creature for as long as CARDNAME remains on the battlefield.
