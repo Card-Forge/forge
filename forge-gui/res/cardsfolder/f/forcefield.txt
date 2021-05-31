@@ -1,7 +1,7 @@
 Name:Forcefield
 ManaCost:3
 Types:Artifact
-A:AB$ ChooseCard | Cost$ 1 | Choices$ Creature.unblocked | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ The next time an unblocked creature of your choice would deal combat damage to you this turn, prevent all but 1 of that damage.
+A:AB$ ChooseCard | Cost$ 1 | Choices$ Creature.unblocked | AILogic$ NeedsPrevention | Mandatory$ True | SubAbility$ DBEffect | SpellDescription$ The next time an unblocked creature of your choice would deal combat damage to you this turn, prevent all but 1 of that damage.
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventDamage | SubAbility$ DBCleanup | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ GE1
 SVar:RPreventDamage:Event$ DamageDone | ValidSource$ Card.ChosenCard | ValidTarget$ You | ReplaceWith$ PreventDmg | PreventionEffect$ True | IsCombat$ True | Description$ The next time an unblocked creature of your choice would deal combat damage to you this turn, prevent all but 1 of that damage.
 SVar:PreventDmg:DB$ ReplaceDamage | Amount$ ShieldAmount | SubAbility$ ExileEffect

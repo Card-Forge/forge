@@ -6,8 +6,7 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 A:AB$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land. | Cost$ T | SpellDescription$ Destroy target land.
 SVar:DBTap:DB$ Tap | Defined$ Self | UnlessCost$ B B B | UnlessPayer$ You | UnlessResolveSubs$ WhenNotPaid | SubAbility$ DBChooseOpponent
 SVar:DBChooseOpponent:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent | SubAbility$ DBChooseLand
-SVar:DBChooseLand:DB$ ChooseCard | Defined$ ChosenPlayer | Choices$ Land.YouCtrl | ChoiceTitle$ Select a land for opponent to sacrifice | SubAbility$ DBSacLand
+SVar:DBChooseLand:DB$ ChooseCard | Defined$ ChosenPlayer | Choices$ Land.YouCtrl | Mandatory$ True | ChoiceTitle$ Select a land for opponent to sacrifice | SubAbility$ DBSacLand
 SVar:DBSacLand:DB$ Destroy | Sacrifice$ True | Defined$ ChosenCard
 SVar:PlayMain1:FALSE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/demonic_hordes.jpg
 Oracle:{T}: Destroy target land.\nAt the beginning of your upkeep, unless you pay {B}{B}{B}, tap Demonic Hordes and sacrifice a land of an opponent's choice.
