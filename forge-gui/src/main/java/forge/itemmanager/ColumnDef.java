@@ -225,8 +225,13 @@ public enum ColumnDef {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
                     InventoryItem i = from.getKey();
-                    return i instanceof InventoryItemFromSet ? FModel.getMagicDb().getEditions()
-                            .get(((InventoryItemFromSet) i).getEdition()) : CardEdition.UNKNOWN;
+                    if (!(i instanceof InventoryItemFromSet))
+                            return CardEdition.UNKNOWN;
+                    String editionCode = ((InventoryItemFromSet) i).getEdition();
+                    CardEdition edition = FModel.getMagicDb().getEditions().get(editionCode);
+                    if (edition == null)  // Try Custom Editions
+                        edition = FModel.getMagicDb().getCustomEditions().get(editionCode);
+                    return edition;
                 }
             },
             new Function<Entry<? extends InventoryItem, Integer>, Object>() {
