@@ -11,7 +11,7 @@ SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Pl
 SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play remembered card.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ Dig | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | Defined$ You | DigNum$ 10 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBChoose | SpellDescription$ Exile the top ten cards of your library. Choose an instant or sorcery card exiled this way and copy it three times. You may cast the copies without paying their mana costs.
-SVar:DBChoose:DB$ ChooseCard | Choices$ Instant.IsRemembered,Sorcery.IsRemembered | ChoiceZone$ Exile | Defined$ You | SubAbility$ DBPlay
+SVar:DBChoose:DB$ ChooseCard | Choices$ Instant.IsRemembered,Sorcery.IsRemembered | Mandatory$ True | ChoiceZone$ Exile | Defined$ You | SubAbility$ DBPlay
 SVar:DBPlay:DB$ Play | Defined$ ChosenCard | WithoutManaCost$ True | CopyCard$ True | Amount$ 3 | AllowRepeats$ True | Controller$ You | Optional$ True | SubAbility$ DBCleanup
 AI:RemoveDeck:All
 Oracle:[+1]: Chandra, Pyromaster deals 1 damage to target player or planeswalker and 1 damage to up to one target creature that player or that planeswalker's controller controls. That creature can't block this turn.\n[0]: Exile the top card of your library. You may play it this turn.\n[−7]: Exile the top ten cards of your library. Choose an instant or sorcery card exiled this way and copy it three times. You may cast the copies without paying their mana costs.

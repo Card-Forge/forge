@@ -84,7 +84,6 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("Choices")) {
             permanentSources = CardLists.getValidCards(permanentSources, sa.getParam("Choices"), host.getController(), host, sa);
-
             stackSources = CardLists.getValidCards(stackSources, sa.getParam("Choices"), host.getController(), host, sa);
             referencedSources = CardLists.getValidCards(referencedSources, sa.getParam("Choices"), host.getController(), host, sa);
             commandZoneSources = CardLists.getValidCards(commandZoneSources, sa.getParam("Choices"), host.getController(), host, sa);
@@ -137,7 +136,7 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
                     Card o = null;
                     do {
                         o = p.getController().chooseSingleEntityForEffect(sourcesToChooseFrom, sa, choiceTitle, null);
-                    } while (o == null);
+                    } while (o == null || o.getName().startsWith("--"));
                     chosen.add(o);
                     sourcesToChooseFrom.remove(o);
                 }

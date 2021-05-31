@@ -7,7 +7,7 @@ K:Indestructible
 S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't attack or block. | CheckSVar$ X | SVarCompare$ LE6 | Description$ CARDNAME can't attack or block unless you have seven or more cards in hand.
 SVar:X:Count$InYourHand
 A:AB$ Draw | Cost$ 3 U | NumCards$ 1 | Defined$ You | SubAbility$ DBChooseCard | SpellDescription$ Draw a card, then you may return a land you control to its owner's hand.
-SVar:DBChooseCard:DB$ ChooseCard | Choices$ Land.YouCtrl | Optional$ Yes | ChoiceZone$ Battlefield | Amount$ 1 | SubAbility$ DBChangeZone
+SVar:DBChooseCard:DB$ ChooseCard | Choices$ Land.YouCtrl | ChoiceZone$ Battlefield | Amount$ 1 | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ ChosenCard | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kefnet_the_mindful.jpg

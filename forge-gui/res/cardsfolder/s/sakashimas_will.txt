@@ -2,10 +2,10 @@ Name:Sakashima's Will
 ManaCost:3 U
 Types:Sorcery
 A:SP$ Charm | Cost$ 3 U | MinCharmNum$ 1 | CharmNum$ X | Choices$ DBControl,DBImprint | AdditionalDescription$ If you control a commander as you cast this spell, you may choose both.
-SVar:DBControl:DB$ ChooseCard | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Amount$ 1 | Choices$ Creature.TargetedPlayerCtrl | ChoiceTitle$ Choose a creature you control | SubAbility$ DBGainControl | AILogic$ WorstCard | SpellDescription$ Target opponent chooses a creature they control. You gain control of it.
+SVar:DBControl:DB$ ChooseCard | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Mandatory$ True | Choices$ Creature.TargetedPlayerCtrl | ChoiceTitle$ Choose a creature you control | SubAbility$ DBGainControl | AILogic$ WorstCard | SpellDescription$ Target opponent chooses a creature they control. You gain control of it.
 SVar:DBGainControl:DB$ GainControl | Defined$ ChosenCard | NewController$ You | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | ClearRemembered$ True
-SVar:DBImprint:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose a creature you control | RememberChosen$ True | SubAbility$ MassClone | AILogic$ BestCard | SpellDescription$ Choose a creature you control. Each other creature you control becomes a copy of that creature until end of turn.
+SVar:DBImprint:DB$ ChooseCard | Defined$ You | Mandatory$ True | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose a creature you control | RememberChosen$ True | SubAbility$ MassClone | AILogic$ BestCard | SpellDescription$ Choose a creature you control. Each other creature you control becomes a copy of that creature until end of turn.
 SVar:MassClone:DB$ RepeatEach | UseImprinted$ True | RepeatCards$ Card.Creature+IsNotRemembered+YouCtrl | RepeatSubAbility$ DBCopy | SubAbility$ DBCleanup
 SVar:DBCopy:DB$ Clone | Defined$ Remembered | CloneTarget$ Imprinted | Duration$ UntilEndOfTurn
 SVar:X:Count$Compare Y GE1.2.1
