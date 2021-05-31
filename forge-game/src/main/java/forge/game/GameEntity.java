@@ -23,13 +23,11 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardDamageMap;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CounterEnumType;
@@ -65,43 +63,6 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     public void setName(final String s) {
         name = s;
         getView().updateName(this);
-    }
-
-    //                                          final Iterable<Card> source
-    public void replaceDamage(final int damage, final Card source, final boolean isCombat,
-            final CardDamageMap damageMap, final CardDamageMap preventMap, GameEntityCounterTable counterTable, final SpellAbility cause) {
-        boolean prevention = source.canDamagePrevented(isCombat) && (cause == null || !cause.hasParam("NoPrevention"));
-
-        // Replacement effects
-        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
-        repParams.put(AbilityKey.DamageSource, source);
-        repParams.put(AbilityKey.DamageAmount, damage);
-        repParams.put(AbilityKey.IsCombat, isCombat);
-        repParams.put(AbilityKey.NoPreventDamage, !prevention);
-        repParams.put(AbilityKey.DamageMap, damageMap);
-        repParams.put(AbilityKey.PreventMap, preventMap);
-        repParams.put(AbilityKey.CounterTable, counterTable);
-        if (cause != null) {
-            repParams.put(AbilityKey.Cause, cause);
-        }
-
-        switch (getGame().getReplacementHandler().run(ReplacementType.DamageDone, repParams)) {
-        case NotReplaced:
-            break;
-        case Updated:
-            int newDamage = (int) repParams.get(AbilityKey.DamageAmount);
-            GameEntity newTarget = (GameEntity) repParams.get(AbilityKey.Affected);
-            // check if this is still the affected card or player
-            if (this.equals(newTarget)) {
-                damageMap.put(source, this, newDamage - damage);
-            } else {
-                damageMap.remove(source, this);
-                damageMap.put(source, newTarget, newDamage);
-            }
-            break;
-        default:
-            damageMap.remove(source, this);
-        }
     }
 
     // This function handles damage after replacement and prevention effects are applied

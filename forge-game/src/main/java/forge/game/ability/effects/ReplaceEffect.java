@@ -65,6 +65,14 @@ public class ReplaceEffect extends SpellAbilityEffect {
             params.put(AbilityKey.EffectOnly, true);
         }
 
+        if (retype == ReplacementType.DamageDone) {
+            for (Map.Entry<AbilityKey, Object> e : params.entrySet()) {
+                originalParams.put(e.getKey(), e.getValue());
+            }
+            originalParams.put(AbilityKey.ReplacementResult, ReplacementResult.Updated);
+            return;
+        }
+
         // need to log Updated events there, or the log is wrong order
         String message = sa.getReplacementEffect().toString();
         if ( !StringUtils.isEmpty(message)) {
