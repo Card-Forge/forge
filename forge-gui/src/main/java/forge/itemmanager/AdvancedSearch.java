@@ -116,10 +116,7 @@ public class AdvancedSearch {
         CARD_SET("lblSet", PaperCard.class, FilterOperator.SINGLE_LIST_OPS, new CustomListEvaluator<PaperCard, CardEdition>(FModel.getMagicDb().getSortedEditions(), CardEdition.FN_GET_CODE) {
             @Override
             protected CardEdition getItemValue(PaperCard input) {
-                CardEdition edition = FModel.getMagicDb().getEditions().get(input.getEdition());
-                if (edition == null)  // try custom editions
-                    edition = FModel.getMagicDb().getCustomEditions().get(input.getEdition());
-                return edition;
+                return FModel.getMagicDb().getCardEdition(input.getEdition());
             }
         }),
         CARD_FORMAT("lblFormat", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<PaperCard, GameFormat>((List<GameFormat>)FModel.getFormats().getFilterList()) {

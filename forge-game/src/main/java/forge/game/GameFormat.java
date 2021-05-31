@@ -104,7 +104,7 @@ public class GameFormat implements Comparable<GameFormat> {
             StaticData data = StaticData.instance();
             Set<String> parsedSets = new HashSet<>();
             for (String set : sets) {
-                if ((data.getEditions().get(set) == null) && (data.getCustomEditions().get(set) == null)) {
+                if (data.getCardEdition(set) == null) {
                     System.out.println("Set " + set + " in format " + fName + " does not match any valid editions!");
                     continue;
                 }

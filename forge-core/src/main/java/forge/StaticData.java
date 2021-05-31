@@ -174,6 +174,13 @@ public class StaticData {
         return sortedEditions;
     }
 
+    public CardEdition getCardEdition(String setCode){
+        CardEdition edition = this.editions.get(setCode);
+        if (edition == null)  // try custom editions
+            edition = this.customEditions.get(setCode);
+        return edition;
+    }
+
     public PaperCard getOrLoadCommonCard(String cardName, String setCode, int artIndex, boolean foil) {
         PaperCard card = commonCards.getCard(cardName, setCode, artIndex);
         boolean isCustom = false;

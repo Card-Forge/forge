@@ -228,10 +228,7 @@ public enum ColumnDef {
                     if (!(i instanceof InventoryItemFromSet))
                             return CardEdition.UNKNOWN;
                     String editionCode = ((InventoryItemFromSet) i).getEdition();
-                    CardEdition edition = FModel.getMagicDb().getEditions().get(editionCode);
-                    if (edition == null)  // Try Custom Editions
-                        edition = FModel.getMagicDb().getCustomEditions().get(editionCode);
-                    return edition;
+                    return FModel.getMagicDb().getCardEdition(editionCode);
                 }
             },
             new Function<Entry<? extends InventoryItem, Integer>, Object>() {
