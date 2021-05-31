@@ -192,7 +192,10 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
     public PaperCard(final CardRules rules0, final String edition0, final CardRarity rarity0,
                      final int artIndex0, final boolean foil0, final String collectorNumber0) {
         this(rules0, edition0, rarity0, artIndex0, foil0);
-        collectorNumber = collectorNumber0;
+        if ((collectorNumber0 == null) || (collectorNumber0.length() == 0))
+            collectorNumber = IPaperCard.NO_COLLECTOR_NUMBER;
+        else
+            collectorNumber = collectorNumber0;
     }
 
     // Want this class to be a key for HashTable
