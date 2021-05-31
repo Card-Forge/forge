@@ -50,8 +50,15 @@ public class DialogChooseSets {
 
 		// create a local copy of the editions list so we can sort it
 		List<CardEdition> editions = Lists.newArrayList(FModel.getMagicDb().getEditions());
+		Collections.sort(editions);
+		Collections.reverse(editions);
+
 		List<CardEdition> customEditions = Lists.newArrayList(FModel.getMagicDb().getCustomEditions());
 		boolean customSetsExist = (customEditions.size() > 0);
+		if (customSetsExist){
+			Collections.sort(customEditions);
+			Collections.reverse(customEditions);
+		}
 		List<FCheckBox> coreSets = new ArrayList<>();
 		List<FCheckBox> expansionSets = new ArrayList<>();
 		List<FCheckBox> otherSets = new ArrayList<>();
