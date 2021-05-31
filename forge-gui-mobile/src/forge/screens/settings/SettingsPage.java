@@ -411,7 +411,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 localizer.getMessage("cbImageFetcher"),
                 localizer.getMessage("nlImageFetcher")),
                 4);
-        lstSettings.addItem(new CustomSelectSetting(FPref.UI_PREFERRED_ART,
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_PREFERRED_CARD_FRAME,
                 localizer.getMessage("lblPreferredArt"),
                 localizer.getMessage("nlPreferredArt"),
                 new String[]{"Latest", "Earliest", "Default"}) {
