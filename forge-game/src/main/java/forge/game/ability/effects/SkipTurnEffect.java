@@ -67,4 +67,3 @@ public class SkipTurnEffect extends SpellAbilityEffect {
         }
     }
 }
-

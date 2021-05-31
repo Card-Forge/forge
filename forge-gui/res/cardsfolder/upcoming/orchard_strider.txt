@@ -1,0 +1,9 @@
+Name:Orchard Strider
+ManaCost:4 G G
+Types:Creature Treefolk
+PT:6/4
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two Food tokens. (They're artifacts with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_food_sac | TokenAmount$ 2
+K:TypeCycling:Basic:1 G
+DeckHas:Ability$Token & Ability$LifeGain
+Oracle:When Orchard Strider enters the battlefield, create two Food tokens. (They're artifacts with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")\nBasic landcycling {1}{G} ({1}{G}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)

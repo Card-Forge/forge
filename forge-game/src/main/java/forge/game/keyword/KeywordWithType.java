@@ -11,6 +11,9 @@ public class KeywordWithType extends KeywordInstance<KeywordWithType> {
             type = details.toLowerCase();
         } else if (details.contains(":")) {
             type = details.split(":")[0];
+            if (this.toString().startsWith("Affinity")) {
+                type = details.split(":")[1];
+            }
         } else {
             type = details;
         }

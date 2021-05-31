@@ -194,10 +194,15 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             } catch (NumberFormatException ex) {
                 String nonNumeric = sortableCollNr.replaceAll("[0-9]", "");
                 String onlyNumeric = sortableCollNr.replaceAll("[^0-9]", "");
-                if (sortableCollNr.startsWith(onlyNumeric)) // e.g. 12a, 37+, 2018f,
-                    sortableCollNr = String.format("%05d", Integer.parseInt(onlyNumeric)) + nonNumeric;
+                try {
+                    collNr = Integer.parseInt(onlyNumeric);
+                } catch (NumberFormatException exon) {
+                    collNr = 0;  // this is the case of ONLY-letters collector numbers
+                }
+                if ((collNr > 0) && (sortableCollNr.startsWith(onlyNumeric))) // e.g. 12a, 37+, 2018f,
+                    sortableCollNr = String.format("%05d", collNr) + nonNumeric;
                 else  // e.g. WS6, S1
-                    sortableCollNr = nonNumeric + String.format("%05d", Integer.parseInt(onlyNumeric));
+                    sortableCollNr = nonNumeric + String.format("%05d", collNr);
             }
             return sortableCollNr;
         }

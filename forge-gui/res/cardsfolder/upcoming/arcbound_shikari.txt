@@ -1,0 +1,11 @@
+Name:Arcbound Shikari
+ManaCost:1 R W
+Types:Artifact Creature Cat Soldier
+PT:0/0
+K:First Strike
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on each other artifact creature you control.
+SVar:TrigPutCounter:DB$ PutCounterAll | ValidCards$ Creature.Artifact+Other+YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+K:Modular:2
+DeckHas:Ability$Counters
+SVar:PlayMain1:TRUE
+Oracle:First strike\nWhen Arcbound Shikari enters the battlefield, put a +1/+1 counter on each other artifact creature you control.\nModular 2 (This creature enters the battlefield with two +1/+1 counters on it. When it does, you may put its counters on target artifact creature.)

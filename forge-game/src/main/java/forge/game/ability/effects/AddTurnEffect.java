@@ -16,12 +16,10 @@ public class AddTurnEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
-
         final StringBuilder sb = new StringBuilder();
         final int numTurns = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumTurns"), sa);
 
         List<Player> tgtPlayers = getTargetPlayers(sa);
-
 
         for (final Player player : tgtPlayers) {
             sb.append(player).append(" ");
