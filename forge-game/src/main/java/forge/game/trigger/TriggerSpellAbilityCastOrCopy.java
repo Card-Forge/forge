@@ -87,7 +87,6 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
             }
         }
 
-
         if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {
             return false;
         }
