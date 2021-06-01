@@ -8,4 +8,5 @@ SVar:DBToken2:DB$ Token | TokenScript$ c_a_food_sac | TokenAmount$ X | SubAbilit
 SVar:DBToken3:DB$ Token | TokenScript$ c_a_treasure_sac | TokenAmount$ X
 SVar:X:ReplaceCount$TokenNum
 DeckHas:Ability$Sacrifice & Ability$Token & Ability$LifeGain
+DeckHints:Ability$Investigate
 Oracle:If you would create a Clue, Food, or Treasure token, instead create one of each.
