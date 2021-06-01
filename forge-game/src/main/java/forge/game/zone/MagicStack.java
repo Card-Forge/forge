@@ -299,6 +299,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         runParams.put(AbilityKey.CastSACMC, si.getSpellAbility(true).getHostCard().getCMC());
         runParams.put(AbilityKey.CurrentStormCount, thisTurnCast.size());
         runParams.put(AbilityKey.CurrentCastSpells, Lists.newArrayList(thisTurnCast));
+
         if (!sp.isCopied()) {
             // Run SpellAbilityCast triggers
             game.getTriggerHandler().runTrigger(TriggerType.SpellAbilityCast, runParams, true);
