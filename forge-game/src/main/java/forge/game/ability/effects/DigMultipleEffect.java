@@ -26,7 +26,6 @@ public class DigMultipleEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         final Player player = sa.getActivatingPlayer();
         final Game game = player.getGame();
-        Player chooser = player;
         int numToDig = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);
 
         final ZoneType srcZone = sa.hasParam("SourceZone") ? ZoneType.smartValueOf(sa.getParam("SourceZone")) : ZoneType.Library;
@@ -40,13 +39,13 @@ public class DigMultipleEffect extends SpellAbilityEffect {
         boolean chooseOptional = sa.hasParam("Optional");
 
         CardZoneTable table = new CardZoneTable();
-        for (final Player p : getTargetPlayers(sa)) {
-            if (sa.usesTargeting() && !p.canBeTargetedBy(sa)) {
+        for (final Player chooser : getDefinedPlayersOrTargeted(sa)) {
+            if (sa.usesTargeting() && !chooser.canBeTargetedBy(sa)) {
                 continue;
             }
             final CardCollection top = new CardCollection();
             final CardCollection rest = new CardCollection();
-            final PlayerZone sourceZone = p.getZone(srcZone);
+            final PlayerZone sourceZone = chooser.getZone(srcZone);
 
             numToDig = Math.min(numToDig, sourceZone.size());
             for (int i = 0; i < numToDig; i++) {
@@ -60,10 +59,10 @@ public class DigMultipleEffect extends SpellAbilityEffect {
             rest.addAll(top);
 
             if (sa.hasParam("Reveal")) {
-                game.getAction().reveal(top, p, false);
+                game.getAction().reveal(top, chooser, false);
             } else {
                 // reveal cards first
-                game.getAction().revealTo(top, player);
+                game.getAction().revealTo(top, chooser);
             }
 
             Map<String, CardCollection> validMap = Maps.newHashMap();
