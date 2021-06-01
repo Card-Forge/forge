@@ -221,6 +221,8 @@ public final class CardUtil {
 
         newCopy.getCurrentState().copyFrom(in.getState(in.getFaceupCardStateName()), true);
         if (in.isFaceDown()) {
+            // prevent StackDescription from revealing face
+            newCopy.setName(in.toString());
             newCopy.turnFaceDownNoUpdate();
         }
 
