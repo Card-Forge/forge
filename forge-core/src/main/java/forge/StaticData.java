@@ -151,6 +151,11 @@ public class StaticData {
         return this.editions;
     }
 
+    public final CardEdition.Collection getCustomEditions(){
+        return this.customEditions;
+    }
+
+
     private List<CardEdition> sortedEditions;
     public final List<CardEdition> getSortedEditions() {
         if (sortedEditions == null) {
@@ -158,10 +163,22 @@ public class StaticData {
             for (CardEdition set : editions) {
                 sortedEditions.add(set);
             }
+            if (customEditions.size() > 0){
+                for (CardEdition set : customEditions) {
+                    sortedEditions.add(set);
+                }
+            }
             Collections.sort(sortedEditions);
             Collections.reverse(sortedEditions); //put newer sets at the top
         }
         return sortedEditions;
+    }
+
+    public CardEdition getCardEdition(String setCode){
+        CardEdition edition = this.editions.get(setCode);
+        if (edition == null)  // try custom editions
+            edition = this.customEditions.get(setCode);
+        return edition;
     }
 
     public PaperCard getOrLoadCommonCard(String cardName, String setCode, int artIndex, boolean foil) {

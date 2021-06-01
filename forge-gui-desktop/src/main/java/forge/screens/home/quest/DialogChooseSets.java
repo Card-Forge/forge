@@ -16,6 +16,7 @@ import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
+import com.google.common.collect.Lists;
 import forge.card.CardEdition;
 import forge.game.GameFormat;
 import forge.gui.SOverlayUtils;
@@ -42,32 +43,32 @@ public class DialogChooseSets {
 	private Runnable okCallback;
 
 	private final List<FCheckBox> choices = new ArrayList<>();
-	private final FCheckBox cbWantReprints = new FCheckBox(Localizer.getInstance().getMessage("lblDisplayRecentSetRepints"));
+	private final FCheckBox cbWantReprints = new FCheckBox(Localizer.getInstance().getMessage("lblDisplayRecentSetReprints"));
 
 	// lists are of set codes (e.g. "2ED")
 	public DialogChooseSets(Collection<String> preselectedSets, Collection<String> unselectableSets, boolean showWantReprintsCheckbox) {
 
 		// create a local copy of the editions list so we can sort it
-		List<CardEdition> editions = new ArrayList<>();
-		for (CardEdition ce : FModel.getMagicDb().getEditions()) {
-			editions.add(ce);
-		}
+		List<CardEdition> editions = Lists.newArrayList(FModel.getMagicDb().getEditions());
 		Collections.sort(editions);
 		Collections.reverse(editions);
 
+		List<CardEdition> customEditions = Lists.newArrayList(FModel.getMagicDb().getCustomEditions());
+		boolean customSetsExist = (customEditions.size() > 0);
+		if (customSetsExist){
+			Collections.sort(customEditions);
+			Collections.reverse(customEditions);
+		}
 		List<FCheckBox> coreSets = new ArrayList<>();
 		List<FCheckBox> expansionSets = new ArrayList<>();
 		List<FCheckBox> otherSets = new ArrayList<>();
 
 		for (CardEdition ce : editions) {
-
 			String code = ce.getCode();
 			FCheckBox box = new FCheckBox(TextUtil.concatWithSpace(ce.getName(), TextUtil.enclosedParen(code)));
-
 			box.setName(code);
 			box.setSelected(null != preselectedSets && preselectedSets.contains(code));
 			box.setEnabled(null == unselectableSets || !unselectableSets.contains(code));
-
 			switch (ce.getType()) {
 				case CORE:
 					coreSets.add(box);
@@ -79,16 +80,29 @@ public class DialogChooseSets {
 					otherSets.add(box);
 					break;
 			}
+		}
+		// CustomSet
+		List<FCheckBox> customSets = new ArrayList<>();
+		if (customSetsExist) {
+			for (CardEdition ce : customEditions){
+				String code = ce.getCode();
+				FCheckBox box = new FCheckBox(TextUtil.concatWithSpace(ce.getName(), TextUtil.enclosedParen(code)));
+				box.setName(code);
+				box.setSelected(null != preselectedSets && preselectedSets.contains(code));
+				box.setEnabled(null == unselectableSets || !unselectableSets.contains(code));
+				customSets.add(box);
+			}
 
 		}
-
-		FPanel panel = new FPanel(new MigLayout("insets 10, gap 5, center, wrap 3"));
+		int wrapCol = !customSetsExist ? 3 : 4;
+		FPanel panel = new FPanel(new MigLayout(String.format("insets 10, gap 5, center, wrap %d", wrapCol)));
 		panel.setOpaque(false);
 		panel.setBackgroundTexture(FSkin.getIcon(FSkinProp.BG_TEXTURE));
 
 		FTextField coreField = new FTextField.Builder().text("0").maxLength(3).build();
 		FTextField expansionField = new FTextField.Builder().text("0").maxLength(3).build();
 		FTextField otherField = new FTextField.Builder().text("0").maxLength(3).build();
+		FTextField customField = new FTextField.Builder().text("0").maxLength(3).build();
 
 		JPanel optionsPanel = new JPanel(new MigLayout("insets 10, gap 5, center, wrap 2"));
 		optionsPanel.setVisible(false);
@@ -99,12 +113,20 @@ public class DialogChooseSets {
 		JPanel leftOptionsPanel = new JPanel(new MigLayout("insets 10, gap 5, center, wrap 2"));
 		leftOptionsPanel.setOpaque(false);
 		leftOptionsPanel.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblSelectNumber") + ":").fontSize(14).fontStyle(Font.BOLD).build(), " span 2");
+
 		leftOptionsPanel.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblCore") + ":").build());
 		leftOptionsPanel.add(coreField, "w 40!");
+
 		leftOptionsPanel.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblExpansion") + ":").build());
 		leftOptionsPanel.add(expansionField, "w 40!");
+
 		leftOptionsPanel.add(new FLabel.Builder().text("Other:").build());
 		leftOptionsPanel.add(otherField, "w 40!");
+
+		if (customSetsExist){
+			leftOptionsPanel.add(new FLabel.Builder().text("Custom Editions:").build());
+			leftOptionsPanel.add(customField, "w 40!");
+		}
 
 		JPanel rightOptionsPanel = new JPanel(new MigLayout("insets 10, gap 25 5, center, wrap 2"));
 		rightOptionsPanel.setOpaque(false);
@@ -148,6 +170,9 @@ public class DialogChooseSets {
 			int numberOfCoreSets = Integer.parseInt(coreField.getText());
 			int numberOfExpansionSets = Integer.parseInt(expansionField.getText());
 			int numberOfOtherSets = Integer.parseInt(otherField.getText());
+			int numberOfCustomeSets = 0;
+			if (customSetsExist)
+			 	numberOfCustomeSets = Integer.parseInt(customField.getText());
 
 			for (FCheckBox coreSet : coreSets) {
 				coreSet.setSelected(false);
@@ -157,6 +182,11 @@ public class DialogChooseSets {
 			}
 			for (FCheckBox otherSet : otherSets) {
 				otherSet.setSelected(false);
+			}
+			if (customSetsExist){
+				for (FCheckBox customSet : customSets) {
+					customSet.setSelected(false);
+				}
 			}
 
 			Predicate<CardEdition> formatPredicate = null;
@@ -201,6 +231,16 @@ public class DialogChooseSets {
 			Collections.shuffle(filteredExpansionSets);
 			Collections.shuffle(filteredOtherSets);
 
+			List<CardEdition> filteredCustomSets = new ArrayList<>();
+			if (customSetsExist){
+				for (CardEdition edition : customEditions) {
+					if (formatPredicate != null && formatPredicate.test(edition)) {
+						filteredCustomSets.add(edition);
+					}
+				}
+				Collections.shuffle(filteredCustomSets);
+			}
+
 			for (int i = 0; i < numberOfCoreSets && i < filteredCoreSets.size(); i++) {
 				String name = TextUtil.concatWithSpace(filteredCoreSets.get(i).getName(), TextUtil.enclosedParen(filteredCoreSets.get(i).getCode()));
 				for (FCheckBox set : coreSets) {
@@ -228,6 +268,18 @@ public class DialogChooseSets {
 				}
 			}
 
+			if (customSetsExist){
+				for (int i = 0; i < numberOfCustomeSets && i < filteredCustomSets.size(); i++) {
+					String name = TextUtil.concatWithSpace(filteredCustomSets.get(i).getName(),
+							                               TextUtil.enclosedParen(filteredCustomSets.get(i).getCode()));
+					for (FCheckBox set : customSets) {
+						if (set.getText().equals(name)) {
+							set.setSelected(true);
+						}
+					}
+				}
+			}
+
 			panel.repaintSelf();
 
 		});
@@ -242,6 +294,11 @@ public class DialogChooseSets {
 			}
 			for (FCheckBox otherSet : otherSets) {
 				otherSet.setSelected(false);
+			}
+			if (customSetsExist){
+				for (FCheckBox cmSet : customSets) {
+					cmSet.setSelected(false);
+				}
 			}
 			panel.repaintSelf();
 		});
@@ -275,9 +332,20 @@ public class DialogChooseSets {
 		panel.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblChooseSets")).fontSize(20).build(), "center, span, wrap, gaptop 10");
 
 		String constraints = "aligny top";
-		panel.add(makeCheckBoxList(coreSets, Localizer.getInstance().getMessage("lblCoreSets"), true), constraints);
-		panel.add(makeCheckBoxList(expansionSets, Localizer.getInstance().getMessage("lblExpansions"), false), constraints);
-		panel.add(makeCheckBoxList(otherSets, Localizer.getInstance().getMessage("lblOtherSets"), false), constraints);
+		panel.add(makeCheckBoxList(coreSets,
+									Localizer.getInstance().getMessage("lblCoreSets"), true),
+									constraints);
+		panel.add(makeCheckBoxList(expansionSets,
+									Localizer.getInstance().getMessage("lblExpansions"), false),
+									constraints);
+		panel.add(makeCheckBoxList(otherSets,
+									Localizer.getInstance().getMessage("lblOtherSets"), false),
+									constraints);
+		if (customSetsExist){
+			panel.add(makeCheckBoxList(customSets,
+										Localizer.getInstance().getMessage("lblCustomSets"), false),
+										constraints);
+		}
 		panel.add(showOptionsButton, "center, w 230!, h 30!, gap 10 0 20 0, span 3, hidemode 3");
 		panel.add(optionsPanel, "center, w 100, span 3, growx, hidemode 3");
 
@@ -338,11 +406,10 @@ public class DialogChooseSets {
 	}
 
 	private JPanel makeCheckBoxList(List<FCheckBox> sets, String title, boolean focused) {
-
 		choices.addAll(sets);
 		final FCheckBoxList<FCheckBox> cbl = new FCheckBoxList<>(false);
 		cbl.setListData(sets.toArray(new FCheckBox[sets.size()]));
-		cbl.setVisibleRowCount(Math.min(20, sets.size()));
+		cbl.setVisibleRowCount(20);
 
 		if (focused) {
 			SwingUtilities.invokeLater(new Runnable() {

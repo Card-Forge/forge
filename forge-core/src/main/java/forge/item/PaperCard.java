@@ -306,10 +306,13 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
     }
 
     private String retrieveCollectorNumber() {
-        CardEdition.Collection editions = StaticData.instance().getEditions();
-        CardEdition edition = editions.get(this.edition);
-        if (edition == null)  // don't bother continuing - non-existing card!
-            return NO_COLLECTOR_NUMBER;
+        StaticData data = StaticData.instance();
+        CardEdition edition = data.getEditions().get(this.edition);
+        if (edition == null) {
+            edition = data.getCustomEditions().get(this.edition);
+            if (edition == null)  // don't bother continuing - non-existing card!
+                return NO_COLLECTOR_NUMBER;
+        }
         int artIndexCount = 0;
         String collectorNumberInEdition = "";
         for (CardEdition.CardInSet card : edition.getAllCardsInSet()) {
