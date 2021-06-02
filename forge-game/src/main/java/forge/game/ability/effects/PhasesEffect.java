@@ -72,7 +72,7 @@ public class PhasesEffect extends SpellAbilityEffect {
             for (final Card tgtC : tgtCards) {
                 if (!tgtC.isPhasedOut()) {
                     tgtC.phase(false);
-                    if ( tgtC.isPhasedOut()) {
+                    if (tgtC.isPhasedOut()) {
                         tgtC.setWontPhaseInNormal(wontPhaseInNormal);
                     }
                 }

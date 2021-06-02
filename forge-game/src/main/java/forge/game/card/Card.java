@@ -4608,8 +4608,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             setDirectlyPhasedOut(direct);
         }
 
-        if (hasCardAttachments()) {
-            for (final Card eq : getAttachedCards()) {
+        // CR 702.25g
+        if (!getAllAttachedCards().isEmpty()) {
+            for (final Card eq : getAllAttachedCards()) {
                 if (eq.isPhasedOut() == phasingIn) {
                     eq.phase(fromUntapStep, false);
                 }
