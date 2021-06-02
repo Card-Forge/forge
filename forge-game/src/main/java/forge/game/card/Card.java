@@ -4645,8 +4645,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             // If this is currently PhasedIn, it's about to phase out.
             // Run trigger before it does because triggers don't work with phased out objects
             getGame().getTriggerHandler().runTrigger(TriggerType.PhaseOut, runParams, false);
-            runLeavesPlayCommands();
+            // when it doesn't exist the game will no longer see it as tapped
             runUntapCommands();
+            // TODO need to run UntilHostLeavesPlay commands but only when worded "for as long as"
         }
 
         setPhasedOut(!phasedOut);
@@ -5770,11 +5771,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final boolean canBeDestroyed() {
-        return isInPlay() && (!hasKeyword(Keyword.INDESTRUCTIBLE) || (isCreature() && getNetToughness() <= 0));
+        return isInPlay() && !isPhasedOut() && (!hasKeyword(Keyword.INDESTRUCTIBLE) || (isCreature() && getNetToughness() <= 0));
     }
 
     public final boolean canBeSacrificed() {
-        return isInPlay() && !this.isPhasedOut() && !hasKeyword("CARDNAME can't be sacrificed.");
+        return isInPlay() && !isPhasedOut() && !hasKeyword("CARDNAME can't be sacrificed.");
     }
 
     @Override
