@@ -1704,7 +1704,7 @@ public class CardProperty {
         } else if (property.startsWith("set")) {
             final String setCode = property.substring(3, 6);
             final PaperCard setCard = StaticData.instance().getCommonCards().getCardFromEdition(card.getName(), CardDb.SetPreference.Earliest);
-            if (!setCard.getEdition().equals(setCode)) {
+            if (setCard != null && !setCard.getEdition().equals(setCode)) {
                 return false;
             }
         } else if (property.startsWith("inZone")) {

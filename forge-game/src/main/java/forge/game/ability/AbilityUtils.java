@@ -3351,7 +3351,8 @@ public class AbilityUtils {
         }
 
         if (value.equals("OpponentsAttackedThisTurn")) {
-            return doXMath(player.getAttackedOpponentsThisTurn().size(), m, source, ctb);
+            final PlayerCollection opps = game.getPlayersAttackedThisTurn().get(player);
+            return doXMath(opps == null ? 0 : opps.size(), m, source, ctb);
         }
 
         return doXMath(0, m, source, ctb);
