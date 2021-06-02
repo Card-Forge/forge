@@ -1966,6 +1966,15 @@ public class AbilityUtils {
         if (sq[0].contains("CardSumPT")) {
             return doXMath((c.getNetPower() + c.getNetToughness()), expr, c, ctb);
         }
+        if (sq[0].contains("CardNumTypes")) {
+            Card ce;
+            if (sq[0].contains("Remembered")) {
+                ce = (Card) c.getFirstRemembered();
+            } else {
+                ce = c;
+            }
+            return doXMath(getNumberOfTypes(ce), expr, c, ctb);
+        }
 
         if (sq[0].contains("CardNumColors")) {
             return doXMath(CardUtil.getColors(c).countColors(), expr, c, ctb);
@@ -3645,6 +3654,12 @@ public class AbilityUtils {
             });
         }
         return someCards;
+    }
+
+    public static int getNumberOfTypes(final Card card) {
+        EnumSet<CardType.CoreType> types = EnumSet.noneOf(CardType.CoreType.class);
+        Iterables.addAll(types, card.getType().getCoreTypes());
+        return types.size();
     }
 
     public static int getCardTypesFromList(final CardCollectionView list) {
