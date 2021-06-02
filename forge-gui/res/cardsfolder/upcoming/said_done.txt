@@ -1,0 +1,15 @@
+Name:Said
+ManaCost:2 U
+AlternateMode: Split
+Types:Sorcery
+A:SP$ ChangeZone | Cost$ 2 U | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | SpellDescription$ Return target instant or sorcery card from your graveyard to your hand.
+Oracle:Return target instant or sorcery card from your graveyard to your hand.
+
+ALTERNATE
+
+Name:Done
+ManaCost:3 U
+Types:Instant
+A:SP$ Tap | Cost$ 3 U | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose up to two target creatures | ValidTgts$ Creature | SubAbility$ TrigPump | StackDescription$ SpellDescription | SpellDescription$ Tap up to two target creatures. Those creatures don't untap during their controller's next untap step.
+SVar:TrigPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True | StackDescription$ None
+Oracle:Tap up to two target creatures. Those creatures don't untap during their controller's next untap step.
