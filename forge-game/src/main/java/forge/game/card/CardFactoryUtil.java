@@ -3208,6 +3208,8 @@ public class CardFactoryUtil {
             String desc = type;
             if (type.equals("Basic")) {
                 desc = "Basic land";
+            } else if (type.equals("Land.Artifact")) {
+                desc = "Artifact land";
             }
 
             sb.append(" Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$ ").append(desc).append("cycling ");
