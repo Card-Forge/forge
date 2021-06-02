@@ -4627,7 +4627,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     private boolean switchPhaseState(final boolean fromUntapStep) {
-
         if (phasedOut && hasKeyword("CARDNAME can't phase in.")) {
             return false;
         }
@@ -4646,6 +4645,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             // If this is currently PhasedIn, it's about to phase out.
             // Run trigger before it does because triggers don't work with phased out objects
             getGame().getTriggerHandler().runTrigger(TriggerType.PhaseOut, runParams, false);
+            runLeavesPlayCommands();
+            runUntapCommands();
         }
 
         setPhasedOut(!phasedOut);
