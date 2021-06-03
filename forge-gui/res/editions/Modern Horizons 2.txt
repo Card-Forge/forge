@@ -7,7 +7,7 @@ MciCode=mh2
 Type=Other
 Booster=10 Common:!fromSheet("MH2 Secret Cards"):fromSheet("MH2 cards"), 3 Uncommon:!fromSheet("MH2 Secret Cards"):fromSheet("MH2 cards"), 1 RareMythic:!fromSheet("MH2 Secret Cards"):fromSheet("MH2 cards"), 1 fromSheet("MH2 Lands")
 BoosterReplaceSlotFromPrintSheet=MH2 NewToModern
-BoosterBox=24
+BoosterBox=36
 ChaosDraftThemes=MASTERS_SET
 
 [cards]
