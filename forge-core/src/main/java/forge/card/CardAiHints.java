@@ -6,7 +6,6 @@ package forge.card;
  */
 public class CardAiHints {
 
-    
     private final boolean isRemovedFromAIDecks;
     private final boolean isRemovedFromRandomDecks;
     private final boolean isRemovedFromNonCommanderDecks;
@@ -14,7 +13,6 @@ public class CardAiHints {
     private final DeckHints deckHints;
     private final DeckHints deckNeeds;
     private final DeckHints deckHas;
-
 
     public CardAiHints(boolean remAi, boolean remRandom, boolean remUnlessCommander, DeckHints dh, DeckHints dn, DeckHints has) {
         isRemovedFromAIDecks = remAi;
@@ -89,6 +87,5 @@ public class CardAiHints {
             return Integer.valueOf(1);
         }
     }
-
 
 }
