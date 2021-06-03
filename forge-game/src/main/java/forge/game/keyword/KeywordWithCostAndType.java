@@ -24,6 +24,8 @@ public class KeywordWithCostAndType extends KeywordInstance<KeywordWithCostAndTy
                     n[i] = n[i].toLowerCase();
                 } else if (n[i].equals("Basic")) {
                     n[i] = "basic land";
+                } else if (n[i].equals("Land.Artifact")) {
+                    n[i] = "artifact land";
                 }
             }
 
