@@ -6,4 +6,5 @@ T:Mode$ SpellCast | ValidCard$ Enchantment | ValidActivatingPlayer$ You | Trigge
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1 | SubAbility$ TrigDraw
 SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 1
 DeckHints:Type$Enchantment
+DeckHas:Ability$LifeGain
 Oracle:Whenever you cast an enchantment spell, you gain 1 life and draw a card.
