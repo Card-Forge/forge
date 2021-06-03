@@ -4661,6 +4661,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             getGame().getTriggerHandler().registerActiveTrigger(this, false);
             getGame().getTriggerHandler().runTrigger(TriggerType.PhaseIn, runParams, false);
         }
+ 
+        game.updateLastStateForCard(this);
 
         return true;
     }
