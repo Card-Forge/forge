@@ -6,25 +6,36 @@ Type=Other
 
 [cards]
 1 U Ephemerate
+2 U Generous Gift
 3 R Giver of Runes
 4 U King of the Pride
 5 M Ranger-Captain of Eos
+6 R Sisay, Weatherlight Captain
 7 R Archmage's Charm
 8 U Faerie Seer
 9 R Force of Negation
 10 U Tribute Mage
 11 M Urza, Lord High Artificer
+12 U Changeling Outcast
 13 U Defile
+14 R Plague Engineer
 15 U Undead Augur
+16 R Goblin Engineer
+17 U Magmatic Sinkhole
 18 U Shenanigans
 19 R Ayula, Queen Among Bears
 20 R Deep Forest Hermit
+21 R Force of Vigor
 22 U Llanowar Tribe
 23 U Scale Up
+24 U Weather the Storm
+25 U Etchings of the Chosen
 26 M The First Sliver
 27 R Ice-Fang Coatl
 28 U Ingenious Infiltrator
+29 U Lavabelly Sliver
 30 U Soulherder
+31 M Sword of Sinew and Steel
 32 M Sword of Truth and Justice
 33 U Talisman of Conviction
 34 U Talisman of Creativity
@@ -33,3 +44,4 @@ Type=Other
 37 U Talisman of Resilience
 38 U Universal Automaton
 39 R Hall of Heliod's Generosity
+40 R Prismatic Vista
