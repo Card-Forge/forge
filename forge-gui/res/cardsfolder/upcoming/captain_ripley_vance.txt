@@ -7,4 +7,5 @@ SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | Counter
 SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X
 SVar:X:Count$CardPower
 SVar:YouCastThisTurn:Count$ThisTurnCast_Card.YouCtrl
+DeckHas:Ability$Counters
 Oracle:Whenever you cast your third spell each turn, put a +1/+1 counter on Captain Ripley Vance, then it deals damage equal to its power to any target.
