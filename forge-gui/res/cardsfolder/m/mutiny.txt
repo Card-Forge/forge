@@ -5,5 +5,5 @@ A:SP$ Pump | Cost$ R | ValidTgts$ Creature.OppCtrl | AILogic$ PowerDmg | TgtProm
 SVar:MutinyDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | TargetUnique$ True | AILogic$ PowerDmg | NumDmg$ X | DamageSource$ ParentTarget
 SVar:X:ParentTargeted$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mutiny.jpg
-//Not perfect yet, there seems to be no check whether the creature's controller is the same?
+//TODO Not perfect yet, there seems to be no check whether the creature's controller is the same?
 Oracle:Target creature an opponent controls deals damage equal to its power to another target creature that player controls.

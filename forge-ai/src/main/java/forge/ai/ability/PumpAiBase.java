@@ -44,7 +44,6 @@ public abstract class PumpAiBase extends SpellAbilityAi {
         return false;
     }
 
-
     public boolean grantsUsefulExtraBlockOpts(final Player ai, final SpellAbility sa, final Card card, List<String> keywords) {
         PhaseHandler ph = ai.getGame().getPhaseHandler();
         Card pumped = ComputerUtilCard.getPumpedCreature(ai, sa, card, 0, 0, keywords);
@@ -506,7 +505,6 @@ public abstract class PumpAiBase extends SpellAbilityAi {
         else {
             final boolean addsKeywords = !keywords.isEmpty();
             if (addsKeywords) {
-
                 // If the keyword can prevent a creature from attacking, see if there's some kind of viable prioritization
                 if (keywords.contains("CARDNAME can't attack.") || keywords.contains("CARDNAME can't attack or block.")
                         || keywords.contains("HIDDEN CARDNAME can't attack.") || keywords.contains("HIDDEN CARDNAME can't attack or block.")) {

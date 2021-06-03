@@ -39,6 +39,4 @@ public class TapOrUntapAi extends TapAiBase {
         return randomReturn;
     }
 
-
-
 }

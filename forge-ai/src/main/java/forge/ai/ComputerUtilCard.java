@@ -881,7 +881,7 @@ public class ComputerUtilCard {
         public boolean apply(Deck d) {
             for (Entry<DeckSection, CardPool> cp: d) {
                 for (Entry<PaperCard, Integer> e : cp.getValue()) {
-                    if ( e.getKey().getRules().getAiHints().getRemAIDecks() )
+                    if (e.getKey().getRules().getAiHints().getRemAIDecks())
                         return false;
                 }
             }
