@@ -1163,7 +1163,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         return !hasProtectionFrom(sa.getHostCard());
     }
 
-
     public boolean hasProtectionFromDamage(final Card source) {
         return hasProtectionFrom(source, false, true);
     }
@@ -1243,7 +1242,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public void surveil(int num, SpellAbility cause) {
-
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
         repParams.put(AbilityKey.Source, cause);
         repParams.put(AbilityKey.SurveilNum, num);
