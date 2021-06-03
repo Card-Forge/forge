@@ -772,7 +772,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     public PaperCard createUnsupportedCard(String cardName) {
-
         CardRequest request = CardRequest.fromString(cardName);
         CardEdition cardEdition = CardEdition.UNKNOWN;
         CardRarity cardRarity = CardRarity.Unknown;
@@ -813,7 +812,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
 
         return new PaperCard(CardRules.getUnsupportedCardNamed(request.cardName), cardEdition.getCode(), cardRarity, 1);
-
     }
 
     private final Editor editor = new Editor();
