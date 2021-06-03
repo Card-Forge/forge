@@ -8,122 +8,222 @@ Type=Other
 
 [cards]
 1 U Abiding Grace
+2 U Arcbound Javelineer
 3 C Arcbound Mouser
+4 C Arcbound Prototype
+5 U Barbed Spike
+6 C Blacksmith's Skill
+7 U Blossoming Calm
 8 C Break Ties
+9 U Caprichrome
 10 U Constable of the Realm
+11 C Disciple of the Sun
 12 R Esper Sentinel
+13 C Fairgrounds Patrol
 14 U Glorious Enforcer
+15 C Guardian Kirin
+16 U Healer's Flock
+17 C Knighted Myr
 18 C Landscaper Colos
 19 C Late to Dinner
+20 C Lens Flare
+21 C Marble Gargoyle
+22 R Nykthos Paragon
 23 R Out of Time
+24 C Piercing Rays
 25 U Prismatic Ending
+26 R Resurgent Belief
 27 R Sanctifier en-Vec
+28 U Scour the Desert
+29 R Search the Premises
 30 M Serra's Emissary
+31 U Skyblade's Boon
 32 M Solitude
+33 C Soul of Migration
 34 U Thraben Watcher
 35 R Timeless Dragon
+36 C Unbounded Potential
 37 C Aeromoeba
+38 C Burdened Aerialist
 39 R Dress Down
+40 C Etherium Spinner
 41 U Filigree Attendant
+42 C Floodhound
+43 C Foul Watcher
 44 R Fractured Sanity
 45 U Ghost-Lit Drifter
+46 C Hard Evidence
+47 R Inevitable Betrayal
 48 U Junk Winder
 49 C Lose Focus
 50 U Lucid Dreams
 51 C Mental Journey
+52 M Murktide Regent
 53 U Mystic Redaction
+54 C Parcel Myr
 55 C Phantasmal Dreadmaw
+56 U Raving Visionary
+57 C Recalibrate
 58 R Rise and Shine
 59 R Rishadan Dockhand
 60 U Said // Done
 61 U Scuttletide
 62 C Shattered Ego
 63 C So Shiny
+64 U Specimen Collector
+65 C Steelfin Whale
 66 C Step Through
 67 M Subtlety
-68 C Suspend
+68 R Suspend
 69 M Svyelun of Sea and Sky
 70 U Sweep the Skies
+71 R Thought Monitor
+72 U Tide Shaper
 73 U Vedalken Infiltrator
 74 U Archfiend of Sorrows
+75 M Archon of Cruelty
 76 C Bone Shards
+77 U Break the Ice
+78 C Cabal Initiate
 79 U Clattering Augur
 80 R Damn
+81 R Dauthi Voidwalker
 82 C Discerning Taste
+83 C Echoing Return
 84 U Feast of Sanity
 85 U Flay Essence
+86 C Gilt-Blade Prowler
 87 M Grief
+88 C Hell Mongrel
 89 C Kitchen Imp
 90 U Legion Vanguard
+91 C Loathsome Curator
+92 R Magus of the Bridge
+93 R Necrogoyf
 94 U Necromancer's Familiar
+95 C Nested Shambler
 96 R Persist
 97 R Profane Tutor
+98 U Radiant Epicure
+99 C Sinister Starfish
 100 U Sudden Edict
+101 C Tizerus Charger
 102 M Tourach, Dread Cantor
 103 C Tourach's Canticle
+104 C Tragic Fall
 105 U Underworld Hermit
 106 R Unmarked Grave
+107 C Vermin Gorger
+108 U Vile Entomber
 109 C World-Weary
 110 U Young Necromancer
+111 C Arcbound Slasher
+112 C Arcbound Tracker
 113 U Arcbound Whelp
 114 C Battle Plan
-115 U Burning Rootwalla
+115 U Blazing Rootwalla
+116 R Bloodbraid Marauder
 117 R Breya's Apprentice
 118 R Calibrated Blast
+119 U Captain Ripley Vance
 120 R Chef's Kiss
 121 U Dragon's Rage Channeler
+122 C Faithless Salvaging
 123 U Fast // Furious
 124 U Flame Blitz
 125 U Flametongue Yearling
+126 M Fury
 127 C Galvanic Relay
+128 C Gargadon
 129 R Glimpse of Tomorrow
+130 U Goblin Traprunner
+131 C Gouged Zealot
 132 R Harmonic Prodigy
+133 U Kaleidoscorch
+134 C Lightning Spear
+135 C Mine Collapse
+136 C Mount Velus Manticore
 137 R Obsidian Charmaw
 138 M Ragavan, Nimble Pilferer
+139 C Revolutionist
 140 C Skophos Reaver
+141 U Slag Strider
 142 U Spreading Insurrection
-143 Strike It Rich
+143 U Strike It Rich
+144 C Tavern Scoundrel
+145 C Unholy Heat
+146 C Viashino Lashclaw
 147 C Abundant Harvest
 148 R Aeve, Progenitor Ooze
+149 C Bannerhide Krushok
+150 U Blessed Respite
 151 M Chatterfang, Squirrel General
 152 C Chatterstorm
+153 R Chitterspitter
+154 C Crack Open
+155 C Deepwood Denizen
+156 C Duskshell Crawler
 157 M Endurance
 158 U Fae Offering
+159 C Flourishing Strike
+160 U Foundation Breaker
+161 C Funnel-Web Recluse
 162 R Gaea's Will
+163 C Glimmer Bairn
+164 U Glinting Creeper
 165 U Herd Baloth
 166 R Ignoble Hierarch
 167 C Jade Avenger
+168 C Jewel-Eyed Cobra
 169 C Orchard Strider
 170 C Rift Sower
 171 R Sanctum Weaver
 172 U Scurry Oak
+173 C Smell Fear
 174 U Squirrel Sanctuary
 175 U Squirrel Sovereign
 176 R Sylvan Anthem
 177 U Terramorph
 178 M Thrasta, Tempest's Roar
 179 U Timeless Witness
+180 U Tireless Provisioner
 181 C Urban Daggertooth
 182 R Verdant Command
+183 U Wren's Run Hydra
 184 U Arcbound Shikari
+185 U Arcus Acolyte
 186 R Asmoranomardicadaistinaculdacar
+187 C Breathless Knight
+188 C Captured by Lagacs
 189 R Carth the Lion
+190 C Chrome Courier
+191 U Combine Chrysalis
 192 M Dakkon, Shadow Slayer
+193 C Dihada's Ploy
 194 C Drey Keeper
+195 U Ethersworn Sphinx
+196 C Foundry Helix
 197 M Garth One-Eye
 198 R General Ferrous Rokiric
 199 M Geyadrone Dihada
-202 M Grist, the Hunger Tide
+200 C Goblin Anarchomancer
 201 U Graceful Restoration
+202 M Grist, the Hunger Tide
+203 U Lazotep Chancellor
 204 R Lonis, Cryptozoologist
 205 R Master of Death
 206 R Moderation
 207 R Piru, the Volatile
 208 R Priest of Fell Rites
 209 U Prophetic Titan
+210 U Rakdos Headliner
 211 U Ravenous Squirrel
 212 U Road // Ruin
+213 C Storm God's Oracle
+214 R Sythis, Harvest's Hand
+215 C Terminal Agony
 216 R Territorial Kavu
+217 C Wavesifter
 218 R Yusri, Fortune's Flame
 219 R Academy Manufactor
 220 U Altar of the Goyf
@@ -132,11 +232,17 @@ Type=Other
 223 U Brainstone
 224 R Dermotaxi
 225 R Diamond Lion
+226 C Fodder Tosser
 227 M Kaldra Compleat
 228 U Liquimetal Torque
 229 U Monoskelion
+230 C Myr Scrapling
+231 R Nettlecyst
+232 C Ornithopter of Paradise
 233 U Sanctuary Raptor
 234 M Scion of Draco
+235 C Sojourner's Companion
+236 R Sol Talisman
 237 U Steel Dromedary
 238 M Sword of Hearth and Home
 239 C Tormod's Cryptkeeper
@@ -151,6 +257,7 @@ Type=Other
 248 R Marsh Flats
 249 C Mistvault Bridge
 250 R Misty Rainforest
+251 U Power Depot
 252 C Razortide Bridge
 253 C Rustvale Bridge
 254 R Scalding Tarn
@@ -161,11 +268,13 @@ Type=Other
 259 R Urza's Saga
 260 R Verdant Catacombs
 261 R Yavimaya, Cradle of Growth
+262 U Angelic Curator
 263 R Karmic Guide
 264 U Seal of Cleansing
 265 R Solitary Confinement
 266 U Soul Snare
 267 U Counterspell
+268 U Sea Drake
 269 U Seal of Removal
 270 R Upheaval
 271 R Wonder
@@ -181,19 +290,26 @@ Type=Other
 281 M Imperial Recruiter
 282 U Mogg Salvage
 283 R Enchantress's Presence
+284 U Hunting Pack
 285 U Quirion Ranger
 286 R Squirrel Mob
 287 M Titania, Protector of Argoth
+288 U Yavimaya Elder
+289 R Chainer, Nightmare Adept
 290 R Fire // Ice
 291 M Mirari's Wake
+292 R Shardless Agent
 293 R Sterling Grove
 294 R Vindicate
+295 R Cursed Totem
 296 U Extruder
 297 U Millikin
 298 R Nevinyrral's Disk
+299 U Patchwork Gnomes
 300 U Zuran Orb
 301 M Cabal Coffers
 302 U Mishra's Factory
+303 R Riptide Laboratory
 304 M Dakkon, Shadow Slayer
 305 M Geyadrone Dihada
 306 M Grist, the Hunger Tide
@@ -203,29 +319,45 @@ Type=Other
 310 M Svyelun of Sea and Sky
 311 M Grief
 312 M Tourach, Dread Cantor
+313 M Fury
 314 M Imperial Recruiter
 315 M Ragavan, Nimble Pilferer
 316 M Chatterfang, Squirrel General
+317 M Endurance
 318 M Thrasta, Tempest's Roar
+319 M Titania, Protector of Argoth
 320 M Mirari's Wake
+321 R Shardless Agent
 322 R Vindicate
 323 M Scion of Draco
 324 M Sword of Hearth and Home
 325 M Cabal Coffers
 326 R Mishra's Factory
+327 U Blossoming Calm
 328 R Esper Sentinel
 329 C Late to Dinner
+330 C Lens Flare
+331 R Nykthos Paragon
+332 R Search the Premises
 333 M Serra's Emissary
 334 R Dress Down
+335 C Floodhound
 336 R Fractured Sanity
+337 M Murktide Regent
 338 U Mystic Redaction
 339 C Phantasmal Dreadmaw
 340 R Rise and Shine
+341 R Thought Monitor
+342 M Archon of Cruelty
 343 C Kitchen Imp
+344 R Magus of the Bridge
 345 R Persist
+346 U Sudden Edict
 347 U Underworld Hermit
 348 C World-Weary
+349 C Faithless Salvaging
 350 U Flametongue Yearling
+351 C Gargadon
 352 R Harmonic Prodigy
 353 R Obsidian Charmaw
 354 C Abundant Harvest
@@ -235,52 +367,78 @@ Type=Other
 358 U Timeless Witness
 359 R Verdant Command
 360 U Arcbound Shikari
+361 U Arcus Acolyte
+362 U Combine Chrysalis
 363 M Dakkon, Shadow Slayer
+364 U Ethersworn Sphinx
 365 M Garth One-Eye
 366 R General Ferrous Rokiric
 367 M Geyadrone Dihada
 368 M Grist, the Hunger Tide
+369 U Lazotep Chancellor
 370 R Lonis, Cryptozoologist
+371 R Moderation
 372 R Priest of Fell Rites
 373 U Prophetic Titan
+374 U Rakdos Headliner
 375 U Ravenous Squirrel
 376 U Road // Ruin
+377 R Sythis, Harvest's Hand
 378 R Dermotaxi
 379 M Kaldra Compleat
 380 R Urza's Saga
+381 C Blacksmith's Skill
+382 C Marble Gargoyle
 383 R Out of Time
 384 U Prismatic Ending
+385 R Resurgent Belief
+386 R Sanctifier en-Vec
 387 U Soul Snare
 388 R Timeless Dragon
 389 C Aeromoeba
+390 R Inevitable Betrayal
 391 R Rishadan Dockhand
 392 C Step Through
 393 M Svyelun of Sea and Sky
+394 U Tide Shaper
 395 C Bone Shards
 396 R Damn
+397 R Dauthi Voidwalker
+398 R Necrogoyf
+399 C Nested Shambler
 400 R Persist
 401 R Profane Tutor
 402 M Tourach, Dread Cantor
-404 U Burning Rootwalla
+403 U Vile Entomber
+404 U Blazing Rootwalla
 405 R Calibrated Blast
 406 C Galvanic Relay
 407 R Glimpse of Tomorrow
+408 C Mine Collapse
 409 R Aeve, Progenitor Ooze
 410 M Chatterfang, Squirrel General
 411 C Chatterstorm
 412 R Gaea's Will
+413 C Glimmer Bairn
 414 R Ignoble Hierarch
 415 U Squirrel Sovereign
+416 M Titania, Protector of Argoth
 417 R Asmoranomardicadaistinaculdacar
 418 R Carth the Lion
+419 R Chainer, Nightmare Adept
 420 M Garth One-Eye
+421 C Goblin Anarchomancer
 422 R Piru, the Volatile
+423 R Shardless Agent
+424 C Terminal Agony
 425 R Territorial Kavu
 426 U Brainstone
 427 R Diamond Lion
 428 U Liquimetal Torque
 429 U Monoskelion
+430 C Ornithopter of Paradise
 431 M Scion of Draco
+432 R Sol Talisman
 433 M Sword of Hearth and Home
 434 U The Underworld Cookbook
 435 R Void Mirror
@@ -291,17 +449,24 @@ Type=Other
 440 R Verdant Catacombs
 441 R Yavimaya, Cradle of Growth
 442 R Out of Time
+443 R Resurgent Belief
+444 R Sanctifier en-Vec
 445 R Timeless Dragon
+446 R Inevitable Betrayal
 447 R Rishadan Dockhand
 448 R Suspend
 449 R Damn
+450 R Dauthi Voidwalker
+451 R Necrogoyf
 452 R Profane Tutor
 453 R Unmarked Grave
+454 R Bloodbraid Marauder
 455 R Breya's Apprentice
 456 R Calibrated Blast
 457 R Chef's Kiss
 458 R Glimpse of Tomorrow
 459 R Aeve, Progenitor Ooze
+460 R Chitterspitter
 461 R Gaea's Will
 462 R Sanctum Weaver
 463 R Asmoranomardicadaistinaculdacar
@@ -312,6 +477,8 @@ Type=Other
 468 R Yusri, Fortune's Flame
 469 R Academy Manufactor
 470 R Diamond Lion
+471 R Nettlecyst
+472 R Sol Talisman
 473 R Void Mirror
 474 R Zabaz, the Glimmerwasp
 475 R Arid Mesa
