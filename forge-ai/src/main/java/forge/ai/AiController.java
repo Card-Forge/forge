@@ -313,7 +313,6 @@ public class AiController {
             // need to set TriggeredObject
             exSA.setTriggeringObject(AbilityKey.Card, card);
 
-
             // for trigger test, need to ignore the conditions
             SpellAbilityCondition cons = exSA.getConditions();
             if (cons != null) {
