@@ -43,6 +43,8 @@ public class RestartGameEffect extends SpellAbilityEffect {
         // Avoid Psychic Surgery trigger in new game
         trigHandler.suppressMode(TriggerType.Shuffled);
 
+        game.getPhaseHandler().resetExtra();
+
         game.getStack().reset();
         game.clearCounterAddedThisTurn();
         game.resetPlayersAttackedOnNextTurn();

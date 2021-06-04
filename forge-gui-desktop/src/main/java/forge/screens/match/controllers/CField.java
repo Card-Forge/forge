@@ -70,7 +70,7 @@ public class CField implements ICDoc {
 
         final Function<Byte, Boolean> manaAction = new Function<Byte, Boolean>() {
             @Override public final Boolean apply(final Byte colorCode) {
-                if (CField.this.player.isLobbyPlayer(Singletons.getControl().getGuiPlayer())) {
+                if (player.getHasPriority()) {
                     final int oldMana = player.getMana(colorCode);
                     matchUI.getGameController().useMana(colorCode.byteValue());
                     return Boolean.valueOf(oldMana != player.getMana(colorCode));

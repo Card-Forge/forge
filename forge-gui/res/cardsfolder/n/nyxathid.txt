@@ -6,7 +6,6 @@ K:ETBReplacement:Other:ChooseP
 SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | AILogic$ Curse | SpellDescription$ As CARDNAME enters the battlefield, choose an opponent.
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ -X | AddToughness$ -X | Description$ CARDNAME gets -1/-1 for each card in the chosen player's hand.
 SVar:X:Count$InChosenHand
-SVar:NeedsToPlayVar:Z LE5
-SVar:Z:Count$InOppHand
-SVar:Picture:http://www.wizards.com/global/images/magic/general/nyxathid.jpg
+SVar:NeedsToPlayVar:Z GE1
+SVar:Z:PlayerCountPropertyOpponent$HasPropertyHasCardsInHand_Card_LE5
 Oracle:As Nyxathid enters the battlefield, choose an opponent.\nNyxathid gets -1/-1 for each card in the chosen player's hand.

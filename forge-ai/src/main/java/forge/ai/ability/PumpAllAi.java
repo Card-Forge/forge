@@ -151,6 +151,12 @@ public class PumpAllAi extends PumpAiBase {
         return true;
     }
 
+    @Override
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        // important to call canPlay first so targets are added if needed
+        return canPlayAI(ai, sa) || mandatory;
+    }
+
     boolean pumpAgainstRemoval(Player ai, SpellAbility sa, List<Card> comp) {
         final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa, true);
         for (final Card c : comp) {

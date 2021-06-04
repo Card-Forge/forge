@@ -1,0 +1,8 @@
+Name:Etherium Spinner
+ManaCost:2 U
+Types:Artifact Creature Human Wizard
+PT:2/1
+T:Mode$ SpellCast | ValidCard$ Card.cmcGE4 | ValidActivatingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell with mana value 4 or greater, create a 1/1 colorless Thopter artifact creature token with flying.
+DeckHas:Ability$Token
+SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenScript$ c_1_1_a_thopter_flying | TokenAmount$ 1
+Oracle:Whenever you cast a spell with mana value 4 or greater, create a 1/1 colorless Thopter artifact creature token with flying.

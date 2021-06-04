@@ -2,7 +2,8 @@ Name:Goblin Artisans
 ManaCost:R
 Types:Creature Goblin Artificer
 PT:1/1
-T:Mode$ ChangesZone | Static$ True | ValidCard$ Artifact.YouCtrl | Origin$ Any | Destination$ Stack | RememberTriggeringCard
+T:Mode$ ChangesZone | Static$ True | ValidCard$ Artifact.YouCtrl | Origin$ Any | Destination$ Stack | Execute$ DBRemember
+SVar:DBRemember:DB$ Pump | RememberObjects$ TriggeredCard
 T:Mode$ BecomesTarget | Static$ True | ValidSource$ Card.Other+namedGoblin Artisans | ValidTarget$ Spell | Execute$ DBForget
 SVar:DBForget:DB$ Cleanup | ForgetDefined$ TriggeredTargetHostCard
 T:Mode$ ChangesZone | Static$ True | ValidCard$ Artifact.YouCtrl+IsRemembered | Origin$ Stack | Destination$ Any | Execute$ DBCleanup

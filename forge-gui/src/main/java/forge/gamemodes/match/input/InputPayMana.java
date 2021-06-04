@@ -66,12 +66,14 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
     @Override
     protected void onStop() {
-        // Clear current Mana cost being paid for SA
-        saPaidFor.setManaCostBeingPaid(null);
-        player.popPaidForSA();
+        if (!isFinished()) {
+            // Clear current Mana cost being paid for SA
+            saPaidFor.setManaCostBeingPaid(null);
+            player.popPaidForSA();
 
-        if (wasFloatingMana) { //hide mana pool if it was shown due to floating mana
-            getController().getGui().hideManaPool(PlayerView.get(player));
+            if (wasFloatingMana) { //hide mana pool if it was shown due to floating mana
+                getController().getGui().hideManaPool(PlayerView.get(player));
+            }
         }
     }
 
