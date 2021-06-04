@@ -59,7 +59,7 @@ public enum Keyword {
     EMERGE("Emerge", KeywordWithCost.class, false, "You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's mana value."),
     ENCHANT("Enchant", KeywordWithType.class, false, "Target a %s as you cast this. This card enters the battlefield attached to that %s."),
     ENCORE("Encore", KeywordWithCost.class, false, "%s, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery."),
-    ENTWINE("Entwine", KeywordWithCost.class, true, "You may choose all modes of this spell instead of just one. If you do, you pay an additional %s."),
+    ENTWINE("Entwine", KeywordWithCost.class, true, "Choose both if you pay the entwine cost."),
     EPIC("Epic", SimpleKeyword.class, true, "For the rest of the game, you can't cast spells. At the beginning of each of your upkeeps for the rest of the game, copy this spell except for its epic ability. If the spell has any targets, you may choose new targets for the copy."),
     EQUIP("Equip", Equip.class, false, "%s: Attach to target %s you control. Equip only as a sorcery."),
     ESCAPE("Escape", KeywordWithCost.class, false, "You may cast this card from your graveyard for its escape cost."),
