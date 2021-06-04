@@ -3,6 +3,7 @@ Code=PSUS
 Date=1999-12-01
 Name=Junior Super Series
 Type=Promos
+ScryfallCode=PSUS
 
 [cards]
 1 R Thran Quarry

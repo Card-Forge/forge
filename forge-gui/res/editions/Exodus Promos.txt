@@ -3,6 +3,7 @@ Code=PEXO
 Date=1998-06-15
 Name=Exodus Promos
 Type=Promos
+ScryfallCode=PEXO
 
 [cards]
 89 R Monstrous Hound

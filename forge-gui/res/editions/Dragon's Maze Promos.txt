@@ -3,6 +3,7 @@ Code=PDGM
 Date=2013-04-27
 Name=Dragon's Maze Promos
 Type=Promos
+ScryfallCode=PDGM
 
 [cards]
 84 R Melek, Izzet Paragon

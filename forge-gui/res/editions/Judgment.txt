@@ -10,6 +10,7 @@ Booster=11 Common, 3 Uncommon, 1 Rare
 Foil=OldStyle
 FoilAlwaysInCommonSlot=False
 ChaosDraftThemes=GRAVEYARD_MATTERS
+ScryfallCode=JUD
 
 [cards]
 1 U Ancestor's Chosen

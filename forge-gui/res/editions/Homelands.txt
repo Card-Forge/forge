@@ -9,6 +9,7 @@ BoosterCovers=1
 Booster=6 Common, 2 UncommonRare
 BoosterBox=60
 Foil=NotSupported
+ScryfallCode=HML
 
 [cards]
 21 U Aether Storm

@@ -3,6 +3,7 @@ Code=PAL04
 Date=2004-01-01
 Name=Arena League 2004
 Type=Promos
+ScryfallCode=PAL04
 
 [cards]
 1 R Plains

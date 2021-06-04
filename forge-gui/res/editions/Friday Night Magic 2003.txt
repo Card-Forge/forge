@@ -3,6 +3,7 @@ Code=F03
 Date=2003-01-01
 Name=Friday Night Magic 2003
 Type=Promos
+ScryfallCode=F03
 
 [cards]
 1 R Bottle Gnomes

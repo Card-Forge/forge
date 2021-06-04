@@ -3,6 +3,7 @@ Code=J16
 Date=2016-01-01
 Name=Judge Gift Cards 2016
 Type=Promos
+ScryfallCode=J16
 
 [cards]
 1 R Stoneforge Mystic

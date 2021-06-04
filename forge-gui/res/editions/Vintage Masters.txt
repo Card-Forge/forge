@@ -8,6 +8,7 @@ BoosterCovers=1
 Booster=11 Common, 3 Uncommon, 1 RareMythic, 0 Special
 # 0 Special is needed here so the Foil card includes the Specials
 FoilChanceInBooster=100
+ScryfallCode=VMA
 
 [cards]
 1 S Ancestral Recall

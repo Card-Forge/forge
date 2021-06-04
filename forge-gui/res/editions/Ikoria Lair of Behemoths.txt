@@ -8,6 +8,7 @@ Type=Expansion
 BoosterCovers=3
 Booster=10 Common:fromSheet("IKO cards"):!fromSheet("IKO Lands"), 3 Uncommon:fromSheet("IKO cards"), 1 RareMythic:fromSheet("IKO cards"), 1 fromSheet("IKO Lands")
 Prerelease=6 Boosters, 1 RareMythic+
+ScryfallCode=IKO
 
 [cards]
 1 C Adaptive Shimmerer

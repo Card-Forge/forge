@@ -4,6 +4,7 @@ Date=2007-11-16
 Name=Duel Decks: Elves vs. Goblins
 MciCode=dd1
 Type=Duel_Decks
+ScryfallCode=DD1
 
 [cards]
 1 R Ambush Commander

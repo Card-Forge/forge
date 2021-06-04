@@ -5,6 +5,7 @@ Name=Duel Decks: Divine vs. Demonic
 Code2=DDC
 MciCode=dvd
 Type=Duel_Decks
+ScryfallCode=DDC
 
 [cards]
 1 M Akroma, Angel of Wrath

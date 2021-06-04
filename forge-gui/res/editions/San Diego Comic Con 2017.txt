@@ -3,6 +3,7 @@ Code=PS17
 Date=2017-07-20
 Name=San Diego Comic-Con 2017
 Type=Promos
+ScryfallCode=PS17
 
 [cards]
 14 M Gideon of the Trials

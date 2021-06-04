@@ -7,6 +7,7 @@ Type=Expansion
 MciCode=xln
 BoosterCovers=5
 Booster=10 Common:fromSheet("XLN cards"), 3 Uncommon:fromSheet("XLN cards"), 1 RareMythic:fromSheet("XLN cards"), 1 BasicLand
+ScryfallCode=XLN
 
 [cards]
 1 U Adanto Vanguard
@@ -296,7 +297,7 @@ Booster=10 Common:fromSheet("XLN cards"), 3 Uncommon:fromSheet("XLN cards"), 1 R
 283 U Jace's Sentinel
 284 C Woodland Stream
 285 M Huatli, Dinosaur Knight
-286 C Huatli's Snubhorn 
+286 C Huatli's Snubhorn
 287 U Huatli's Spurring
 288 R Sun-Blessed Mount
 289 C Stone Quarry

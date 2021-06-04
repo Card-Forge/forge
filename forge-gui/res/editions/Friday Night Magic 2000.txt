@@ -1,8 +1,9 @@
 [metadata]
 Code=FNM
 Date=2000-01-01
-Name=Friday Night Magic 2000 
+Name=Friday Night Magic 2000
 Type=Promos
+ScryfallCode=FNM
 
 [cards]
 1 R River Boa

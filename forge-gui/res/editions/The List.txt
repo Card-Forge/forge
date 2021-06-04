@@ -3,6 +3,7 @@ Code=PLIST
 Date=2020-09-26
 Name=The List
 Type=Reprint
+ScryfallCode=PLIST
 
 [cards]
 1 U Iterative Analysis

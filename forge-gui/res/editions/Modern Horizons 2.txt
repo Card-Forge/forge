@@ -5,6 +5,7 @@ Name=Modern Horizons 2
 Code2=MH2
 MciCode=mh2
 Type=Other
+ScryfallCode=MH2
 
 [cards]
 1 U Abiding Grace

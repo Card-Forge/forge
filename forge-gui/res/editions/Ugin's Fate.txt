@@ -4,6 +4,7 @@ Date=2015-01-23
 Name=Ugin's Fate
 MciCode=ugin
 Type=Other
+ScryfallCode=ugin
 
 [cards]
 1 M Ugin, the Spirit Dragon

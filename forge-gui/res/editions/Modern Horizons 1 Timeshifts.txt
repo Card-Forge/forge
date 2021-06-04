@@ -3,6 +3,7 @@ Code=RMH1
 Date=2021-06-18
 Name=Modern Horizons 1 Timeshifts
 Type=Other
+ScryfallCode=RMH1
 
 [cards]
 1 U Ephemerate

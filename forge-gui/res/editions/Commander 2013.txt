@@ -5,6 +5,7 @@ Name=Commander 2013
 Code2=C13
 MciCode=c13
 Type=Other
+ScryfallCode=C13
 
 [cards]
 1 R Act of Authority

@@ -3,6 +3,7 @@ Code=PTMP
 Date=1997-10-14
 Name=Tempest Promos
 Type=Promos
+ScryfallCode=PTMP
 
 [cards]
 221 R Dirtcowl Wurm

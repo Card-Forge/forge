@@ -5,6 +5,7 @@ Name=From the Vault: Legends
 MciCode=fvl
 Type=From_the_Vault
 Alias=V11
+ScryfallCode=V11
 
 [cards]
 1 M Cao Cao, Lord of Wei

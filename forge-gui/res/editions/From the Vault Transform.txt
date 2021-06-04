@@ -4,6 +4,7 @@ Date=2017-11-24
 Name=From the Vault: Transform
 MciCode=v17
 Type=From_the_Vault
+ScryfallCode=V17
 
 [cards]
 1 M Archangel Avacyn

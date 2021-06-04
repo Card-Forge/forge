@@ -9,7 +9,7 @@ BoosterCovers=5
 Booster=9 Common:!dfc, 3 Uncommon:!dfc, 1 RareMythic:!dfc, 1 dfc:!Rare:!Mythic, 1 BasicLand
 ChanceReplaceCommonWith=.125F dfc:RareMythic
 ChaosDraftThemes=GRAVEYARD_MATTERS
-
+ScryfallCode=SOI
 
 [cards]
 1 R Always Watching

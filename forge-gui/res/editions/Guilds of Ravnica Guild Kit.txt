@@ -5,135 +5,136 @@ Name=Guilds of Ravnica Guild Kit
 Code2=GK1
 MciCode=gk1
 Type=Other
+ScryfallCode=GK1
 
 [cards]
-1 R Etrata, the Silencer 
-2 R Stolen Identity 
-3 U Syncopate 
-4 U Telling Time 
-5 C Last Gasp 
-6 U Netherborn Phalanx 
-7 U Ribbons of Night 
-8 U Call of the Nightwing 
-9 R Circu, Dimir Lobotomist 
-10 R Consuming Aberration 
-11 U Dimir Charm 
-12 R Dimir Doppelganger 
-13 U Dimir Guildmage 
-14 U Dinrova Horror 
-15 R Glimpse the Unthinkable 
-16 M Lazav, Dimir Mastermind 
-17 R Mirko Vosk, Mind Drinker 
-18 U Moroii 
-19 R Nightveil Specter 
-20 R Szadek, Lord of Secrets 
-21 U Warped Physique 
-22 C Dimir Signet 
-23 C Dimir Aqueduct 
-24 L Island 
-25 L Swamp 
-26 R Niv-Mizzet, the Firemind 
-27 U Thunderheads 
-28 R Char 
-29 C Electrickery 
-30 U Goblin Rally 
-31 U Guttersnipe 
-32 R Mizzium Mortars 
-33 C Pyromatics 
-34 U Shattering Spree 
-35 R Cerebral Vortex 
-36 R Djinn Illuminatus 
-37 U Electrolyze 
-38 U Gelectrode 
-39 R Hypersonic Dragon 
-40 R Invoke the Firemind 
-41 U Izzet Charm 
-42 U Nivix Guildmage 
-43 R Stitch in Time 
-44 R Tibor and Lumia 
+1 R Etrata, the Silencer
+2 R Stolen Identity
+3 U Syncopate
+4 U Telling Time
+5 C Last Gasp
+6 U Netherborn Phalanx
+7 U Ribbons of Night
+8 U Call of the Nightwing
+9 R Circu, Dimir Lobotomist
+10 R Consuming Aberration
+11 U Dimir Charm
+12 R Dimir Doppelganger
+13 U Dimir Guildmage
+14 U Dinrova Horror
+15 R Glimpse the Unthinkable
+16 M Lazav, Dimir Mastermind
+17 R Mirko Vosk, Mind Drinker
+18 U Moroii
+19 R Nightveil Specter
+20 R Szadek, Lord of Secrets
+21 U Warped Physique
+22 C Dimir Signet
+23 C Dimir Aqueduct
+24 L Island
+25 L Swamp
+26 R Niv-Mizzet, the Firemind
+27 U Thunderheads
+28 R Char
+29 C Electrickery
+30 U Goblin Rally
+31 U Guttersnipe
+32 R Mizzium Mortars
+33 C Pyromatics
+34 U Shattering Spree
+35 R Cerebral Vortex
+36 R Djinn Illuminatus
+37 U Electrolyze
+38 U Gelectrode
+39 R Hypersonic Dragon
+40 R Invoke the Firemind
+41 U Izzet Charm
+42 U Nivix Guildmage
+43 R Stitch in Time
+44 R Tibor and Lumia
 45 U Turn // Burn
-46 C Izzet Signet 
-47 C Izzet Boilerworks 
-48 L Island 
-49 L Mountain 
-50 R Izoni, Thousand-Eyed 
-51 U Darkblast 
-52 U Slum Reaper 
-53 C Stinkweed Imp 
-54 U Vigor Mortis 
-55 R Deadbridge Goliath 
-56 C Elves of Deep Shadow 
-57 R Abrupt Decay 
-58 M Deadbridge Chant 
-59 R Deathrite Shaman 
-60 C Drown in Filth 
-61 R Gaze of Granite 
-62 U Golgari Charm 
-63 R Grave-Shell Scarab 
-64 C Grisly Salvage 
-65 M Jarad, Golgari Lich Lord 
-66 U Korozda Guildmage 
-67 R Lotleth Troll 
-68 U Putrefy 
-69 R Savra, Queen of the Golgari 
-70 C Shambling Shell 
-71 R Sisters of Stone Death 
-72 U Treasured Find 
-73 C Golgari Signet 
-74 C Golgari Rot Farm 
-75 L Swamp 
-76 L Forest 
-77 M Aurelia, the Warleader 
-78 U Boros Elite 
-79 C Daring Skyjek 
-80 C Bomber Corps 
-81 U Frenzied Goblin 
-82 R Legion Loyalist 
-83 R Agrus Kos, Wojek Veteran 
-84 U Boros Charm 
-85 R Boros Reckoner 
-86 U Boros Swiftblade 
-87 R Brightflame 
-88 R Firemane Angel 
-89 R Firemane Avenger 
-90 U Lightning Helix 
-91 C Martial Glory 
-92 R Master Warcraft 
-93 R Razia, Boros Archangel 
-94 R Spark Trooper 
-95 U Sunhome Guildmage 
-96 U Boros Keyrune 
-97 C Boros Signet 
-98 C Boros Garrison 
-99 U Sunhome, Fortress of the Legion 
-100 L Plains 
-101 L Mountain 
-102 M Trostani, Selesnya's Voice 
-103 U Devouring Light 
-104 R Hour of Reckoning 
-105 C Gather Courage 
-106 C Scatter the Seeds 
-107 R Advent of the Wurm 
-108 M Armada Wurm 
-109 U Call of the Conclave 
-110 C Centaur Healer 
-111 U Dryad Militant 
-112 R Glare of Subdual 
-113 R Growing Ranks 
-114 R Loxodon Hierarch 
-115 U Pollenbright Wings 
-116 R Privileged Position 
-117 U Selesnya Charm 
-118 C Selesnya Evangel 
-119 U Selesnya Guildmage 
-120 C Sundering Growth 
-121 R Tolsimir Wolfblood 
-122 U Watchwolf 
-123 C Selesnya Signet 
-124 R Grove of the Guardian 
-125 C Selesnya Sanctuary 
-126 L Plains 
-127 L Forest 
+46 C Izzet Signet
+47 C Izzet Boilerworks
+48 L Island
+49 L Mountain
+50 R Izoni, Thousand-Eyed
+51 U Darkblast
+52 U Slum Reaper
+53 C Stinkweed Imp
+54 U Vigor Mortis
+55 R Deadbridge Goliath
+56 C Elves of Deep Shadow
+57 R Abrupt Decay
+58 M Deadbridge Chant
+59 R Deathrite Shaman
+60 C Drown in Filth
+61 R Gaze of Granite
+62 U Golgari Charm
+63 R Grave-Shell Scarab
+64 C Grisly Salvage
+65 M Jarad, Golgari Lich Lord
+66 U Korozda Guildmage
+67 R Lotleth Troll
+68 U Putrefy
+69 R Savra, Queen of the Golgari
+70 C Shambling Shell
+71 R Sisters of Stone Death
+72 U Treasured Find
+73 C Golgari Signet
+74 C Golgari Rot Farm
+75 L Swamp
+76 L Forest
+77 M Aurelia, the Warleader
+78 U Boros Elite
+79 C Daring Skyjek
+80 C Bomber Corps
+81 U Frenzied Goblin
+82 R Legion Loyalist
+83 R Agrus Kos, Wojek Veteran
+84 U Boros Charm
+85 R Boros Reckoner
+86 U Boros Swiftblade
+87 R Brightflame
+88 R Firemane Angel
+89 R Firemane Avenger
+90 U Lightning Helix
+91 C Martial Glory
+92 R Master Warcraft
+93 R Razia, Boros Archangel
+94 R Spark Trooper
+95 U Sunhome Guildmage
+96 U Boros Keyrune
+97 C Boros Signet
+98 C Boros Garrison
+99 U Sunhome, Fortress of the Legion
+100 L Plains
+101 L Mountain
+102 M Trostani, Selesnya's Voice
+103 U Devouring Light
+104 R Hour of Reckoning
+105 C Gather Courage
+106 C Scatter the Seeds
+107 R Advent of the Wurm
+108 M Armada Wurm
+109 U Call of the Conclave
+110 C Centaur Healer
+111 U Dryad Militant
+112 R Glare of Subdual
+113 R Growing Ranks
+114 R Loxodon Hierarch
+115 U Pollenbright Wings
+116 R Privileged Position
+117 U Selesnya Charm
+118 C Selesnya Evangel
+119 U Selesnya Guildmage
+120 C Sundering Growth
+121 R Tolsimir Wolfblood
+122 U Watchwolf
+123 C Selesnya Signet
+124 R Grove of the Guardian
+125 C Selesnya Sanctuary
+126 L Plains
+127 L Forest
 
 [tokens]
 voja

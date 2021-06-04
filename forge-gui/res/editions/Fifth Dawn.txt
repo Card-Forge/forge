@@ -9,6 +9,7 @@ BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 Rare
 FoilAlwaysInCommonSlot=False
 ChaosDraftThemes=MIRRODIN
+ScryfallCode=5DN
 
 [cards]
 1 C Abuna's Chant

@@ -4,6 +4,7 @@ Date=2017-11-13
 Name=Unstable Promos
 Type=Funny
 Border=Silver
+ScryfallCode=PUST
 
 [cards]
 108 R Earl of Squirrel

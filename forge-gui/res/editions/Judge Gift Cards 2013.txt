@@ -3,6 +3,7 @@ Code=J13
 Date=2013-01-01
 Name=Judge Gift Cards 2013
 Type=Promos
+ScryfallCode=J13
 
 [cards]
 1 R Swords to Plowshares

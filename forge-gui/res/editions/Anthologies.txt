@@ -6,6 +6,7 @@ Name=Anthologies
 Type=Other
 Border=White
 Foil=NotSupported
+ScryfallCode=ATH
 
 [cards]
 1 R Nevinyrral's Disk

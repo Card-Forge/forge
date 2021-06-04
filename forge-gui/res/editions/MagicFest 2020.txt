@@ -3,6 +3,7 @@ Code=PF20
 Date=2020-01-01
 Name=MagicFest 2020
 Type=Promos
+ScryfallCode=PF20
 
 [cards]
 1 R Path to Exile

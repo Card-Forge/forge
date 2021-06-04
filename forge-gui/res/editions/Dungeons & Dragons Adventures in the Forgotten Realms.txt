@@ -5,6 +5,7 @@ Name=Dungeons & Dragons: Adventures in the Forgotten Realms
 Code2=AFR
 MciCode=afr
 Type=Expansion
+ScryfallCode=AFR
 
 [cards]
 33 U Portable Hole

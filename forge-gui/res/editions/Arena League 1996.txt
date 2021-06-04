@@ -3,6 +3,7 @@ Code=PARL
 Date=1996-08-02
 Name=Arena League 1996
 Type=Promos
+ScryfallCode=PARL
 
 [cards]
 1 R Plains

@@ -3,6 +3,7 @@ Code=PSS1
 Date=2015-10-02
 Name=BFZ Standard Series
 Type=Reprint
+ScryfallCode=PSS1
 
 [cards]
 234 R Canopy Vista

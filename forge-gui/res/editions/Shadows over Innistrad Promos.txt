@@ -3,6 +3,7 @@ Code=PSOI
 Date=2016-04-09
 Name=Shadows over Innistrad Promos
 Type=Promos
+ScryfallCode=PSOI
 
 [cards]
 2 R Angel of Deliverance

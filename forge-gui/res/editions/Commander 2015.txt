@@ -5,6 +5,7 @@ Name=Commander 2015
 Code2=C15
 MciCode=c15
 Type=Other
+ScryfallCode=C15
 
 [cards]
 1 R Bastion Protector

@@ -9,6 +9,7 @@ BoosterCovers=1
 Booster=11 Common, 3 Uncommon, 1 Rare, 0 Special
 Foil=OldStyle
 FoilAlwaysInCommonSlot=False
+ScryfallCode=PLS
 
 [cards]
 20 U Allied Strategies

@@ -3,6 +3,7 @@ Code=F01
 Date=2001-01-01
 Name=Friday Night Magic 2001
 Type=Promos
+ScryfallCode=F01
 
 [cards]
 6 R Swords to Plowshares

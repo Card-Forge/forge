@@ -3,6 +3,7 @@ Code=CP2
 Date=2015-01-23
 Name=Fate Reforged Clash Pack
 Type=Promos
+ScryfallCode=CP2
 
 [cards]
 1 R Necropolis Fiend

@@ -8,6 +8,7 @@ Type=Core
 BoosterCovers=1
 Booster=11 Common, 3 Uncommon, 1 Rare
 Foil=NotSupported
+ScryfallCode=LEA
 
 [cards]
 46 U Air Elemental

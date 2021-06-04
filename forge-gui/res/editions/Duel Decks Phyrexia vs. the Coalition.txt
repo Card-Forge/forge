@@ -4,6 +4,7 @@ Date=2010-03-19
 Name=Duel Decks: Phyrexia vs. the Coalition
 MciCode=pvc
 Type=Duel_Decks
+ScryfallCode=DDE
 
 [cards]
 1 M Phyrexian Negator

@@ -3,6 +3,7 @@ Code=C20
 Date=2020-04-17
 Name=Commander 2020
 Type=Other
+ScryfallCode=C20
 
 [cards]
 1 M Trynn, Champion of Freedom

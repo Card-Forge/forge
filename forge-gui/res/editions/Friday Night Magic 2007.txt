@@ -3,6 +3,7 @@ Code=F07
 Date=2007-01-01
 Name=Friday Night Magic 2007
 Type=Promos
+ScryfallCode=F07
 
 [cards]
 1 R Firebolt

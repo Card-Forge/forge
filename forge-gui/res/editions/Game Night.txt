@@ -5,76 +5,77 @@ Name=Game Night
 Code2=GNT
 MciCode=gnt
 Type=Other
+ScryfallCode=GNT
 
 [cards]
-1 M Militant Angel 
-2 M Inspired Sphinx 
-3 M Rot Hulk 
-4 M Goblin Goliath 
-5 M Avatar of Growth 
-6 U Aerial Responder 
-7 R Always Watching 
-8 R Benalish Marshal 
-9 U Bright Reprisal 
-10 C Call the Cavalry 
-11 U Everdawn Champion 
-12 C Fan Bearer 
-13 C Inspired Charge 
-14 C Inspiring Captain 
-15 C Mesa Unicorn 
-16 U Serra Angel 
-17 U Subjugator Angel 
-18 U Advanced Stitchwing 
-19 U Air Elemental 
-20 C Claustrophobia 
-21 U Favorable Winds 
-22 U Hydrolash 
-23 U Reckless Scholar 
-24 R Soulblade Djinn 
-25 U Whirler Rogue 
-26 R Zahid, Djinn of the Lamp 
-27 C Bone Splinters 
-28 U Cruel Revival 
-29 U Fleshbag Marauder 
-30 C Gruesome Fate 
-31 R Languish 
-32 R Liliana's Mastery 
-33 U Lord of the Accursed 
-34 C Tattered Mummy 
-35 U Thallid Soothsayer 
-36 U Zulaport Cutthroat 
-37 C Bombard 
-38 R Captivating Crew 
-39 C Dragon Fodder 
-40 U Rolling Thunder 
-41 U Seismic Elemental 
-42 R Siege-Gang Commander 
-43 C Tormenting Voice 
-44 R Ghalta, Primal Hunger 
-45 C Jungle Delver 
-46 C Llanowar Elves 
-47 R Nissa's Revelation 
-48 U Overcome 
-49 C Seek the Wilds 
-50 U Thrashing Brontodon 
-51 C Eager Construct 
-52 U Filigree Familiar 
-53 U Howling Golem 
-54 C Manalith 
-55 U Pilgrim's Eye 
-56 U Rhonas's Monument 
-57 U Snare Thopter 
-58 C Welder Automaton 
-59 L Plains 
-60 L Plains 
-61 L Island 
-62 L Island 
-63 L Swamp 
-64 L Swamp 
-65 L Mountain 
-66 L Mountain 
-67 L Forest 
-68 L Forest 
+1 M Militant Angel
+2 M Inspired Sphinx
+3 M Rot Hulk
+4 M Goblin Goliath
+5 M Avatar of Growth
+6 U Aerial Responder
+7 R Always Watching
+8 R Benalish Marshal
+9 U Bright Reprisal
+10 C Call the Cavalry
+11 U Everdawn Champion
+12 C Fan Bearer
+13 C Inspired Charge
+14 C Inspiring Captain
+15 C Mesa Unicorn
+16 U Serra Angel
+17 U Subjugator Angel
+18 U Advanced Stitchwing
+19 U Air Elemental
+20 C Claustrophobia
+21 U Favorable Winds
+22 U Hydrolash
+23 U Reckless Scholar
+24 R Soulblade Djinn
+25 U Whirler Rogue
+26 R Zahid, Djinn of the Lamp
+27 C Bone Splinters
+28 U Cruel Revival
+29 U Fleshbag Marauder
+30 C Gruesome Fate
+31 R Languish
+32 R Liliana's Mastery
+33 U Lord of the Accursed
+34 C Tattered Mummy
+35 U Thallid Soothsayer
+36 U Zulaport Cutthroat
+37 C Bombard
+38 R Captivating Crew
+39 C Dragon Fodder
+40 U Rolling Thunder
+41 U Seismic Elemental
+42 R Siege-Gang Commander
+43 C Tormenting Voice
+44 R Ghalta, Primal Hunger
+45 C Jungle Delver
+46 C Llanowar Elves
+47 R Nissa's Revelation
+48 U Overcome
+49 C Seek the Wilds
+50 U Thrashing Brontodon
+51 C Eager Construct
+52 U Filigree Familiar
+53 U Howling Golem
+54 C Manalith
+55 U Pilgrim's Eye
+56 U Rhonas's Monument
+57 U Snare Thopter
+58 C Welder Automaton
+59 L Plains
+60 L Plains
+61 L Island
+62 L Island
+63 L Swamp
+64 L Swamp
+65 L Mountain
+66 L Mountain
+67 L Forest
+68 L Forest
 
 [tokens]
 w_2_2_knight_vigilance

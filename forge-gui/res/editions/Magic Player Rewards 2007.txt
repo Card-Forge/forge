@@ -3,6 +3,7 @@ Code=P07
 Date=2007-01-01
 Name=Magic Player Rewards 2007
 Type=Promos
+ScryfallCode=P07
 
 [cards]
 1 R Wrath of God

@@ -5,6 +5,7 @@ Name=Deckmasters: Garfield vs. Finkel
 MciCode=dm
 Type=Other
 Border=White
+ScryfallCode=DKM
 
 [cards]
 1 U Abyssal Specter

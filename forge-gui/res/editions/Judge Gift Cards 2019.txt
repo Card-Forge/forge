@@ -3,6 +3,7 @@ Code=J19
 Date=2019-04-10
 Name=Judge Gift Cards 2019
 Type=Promos
+ScryfallCode=J19
 
 [cards]
 1 M Mirri's Guile

@@ -8,6 +8,7 @@ Type=Core
 BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 ChaosDraftThemes=CORE_SET
+ScryfallCode=M13
 
 [cards]
 159 U Acidic Slime

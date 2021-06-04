@@ -5,6 +5,7 @@ Name=Time Spiral "Timeshifted"
 Code2=TSB
 MciCode=tsts
 Type=Other
+ScryfallCode=TSB
 
 [cards]
 1 S Akroma, Angel of Wrath

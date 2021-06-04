@@ -3,6 +3,7 @@ Code=P06
 Date=2006-01-01
 Name=Magic Player Rewards 2006
 Type=Promos
+ScryfallCode=P06
 
 [cards]
 1 R Hypnotic Specter

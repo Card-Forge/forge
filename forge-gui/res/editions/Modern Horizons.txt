@@ -9,7 +9,7 @@ BoosterCovers=5
 Booster=10 Common:!fromSheet("MH1 Secret Cards"), 3 Uncommon:!fromSheet("MH1 Secret Cards"), 1 RareMythic:!fromSheet("MH1 Secret Cards"), 1 fromSheet("MH1 Lands")
 BoosterBox=24
 ChaosDraftThemes=MASTERS_SET;GRAVEYARD_MATTERS
-
+ScryfallCode=MH1
 
 [cards]
 1 M Morophon, the Boundless
@@ -267,7 +267,6 @@ ChaosDraftThemes=MASTERS_SET;GRAVEYARD_MATTERS
 253 L Snow-Covered Mountain
 254 L Snow-Covered Forest
 255 R Flusterstorm
-
 
 [tokens]
 b_2_2_zombie

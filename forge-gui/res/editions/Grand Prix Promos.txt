@@ -5,6 +5,7 @@ Date=2007-02-24
 Name=Grand Prix Promos
 MciCode=pgpx
 Type=Other
+ScryfallCode=PGPX
 
 [cards]
 2007 R Spiritmonger

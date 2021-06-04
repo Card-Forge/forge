@@ -3,6 +3,7 @@ Code=F09
 Date=2009-01-01
 Name=Friday Night Magic 2009
 Type=Promos
+ScryfallCode=F09
 
 [cards]
 1 R Magma Jet

@@ -3,6 +3,7 @@ Code=PWAR
 Date=2019-05-04
 Name=War of the Spark Promos
 Type=Promos
+ScryfallCode=PWAR
 
 [cards]
 41 U Augur of Bolas

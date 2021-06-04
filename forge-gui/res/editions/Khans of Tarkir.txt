@@ -8,6 +8,7 @@ Type=Expansion
 BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand KTK
 ChaosDraftThemes=GRAVEYARD_MATTERS
+ScryfallCode=KTK
 
 [cards]
 1 U Abzan Battle Priest

@@ -8,6 +8,7 @@ Booster=8 Common, 3 Uncommon, 2 RareMythic, 2 fromSheet("2XM Foils")
 Foil=NotSupported
 DoublePick=FirstPick
 ChaosDraftThemes=MASTERS_SET
+ScryfallCode=2XM
 
 [cards]
 1 M Karn Liberated

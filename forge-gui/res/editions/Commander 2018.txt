@@ -5,6 +5,7 @@ Name=Commander 2018
 Code2=C18
 MciCode=c18
 Type=Other
+ScryfallCode=C18
 
 [cards]
 1 R Boreas Charger

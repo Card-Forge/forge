@@ -3,6 +3,7 @@ Code=J20
 Date=2020-01-01
 Name=Judge Gift Cards 2020
 Type=Promos
+ScryfallCode=J20
 
 [cards]
 1 R Arena Rector

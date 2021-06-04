@@ -4,6 +4,7 @@ Date=2015-08-21
 Name=From the Vault: Angels
 MciCode=v15
 Type=From_the_Vault
+ScryfallCode=V15
 
 [cards]
 1 M Akroma, Angel of Fury

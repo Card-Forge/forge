@@ -5,6 +5,7 @@ Name=From the Vault: Relics
 MciCode=fvr
 Type=From_the_Vault
 Alias=V10
+ScryfallCode=V10
 
 [cards]
 1 M AEther Vial

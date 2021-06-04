@@ -10,6 +10,7 @@ Booster=10 Common:!dfc:fromSheet("ZNR cards"), 3 Uncommon:!dfc:fromSheet("ZNR ca
 BoosterReplaceSlotFromPrintSheet=ZNR ModalDoubleFaceCards
 Prerelease=6 Boosters, 1 RareMythic+
 #BoosterBox=36 Boosters, 1 fromSheet('ZNR buy a box')+
+ScryfallCode=ZNR
 
 [cards]
 1 U Allied Assault

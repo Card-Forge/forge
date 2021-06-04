@@ -4,6 +4,8 @@ Date=2018-06-08
 Name=Commander Anthology Vol. II
 MciCode=CM2
 Type=Other
+ScryfallCode=CM2
+
 [cards]
 1 M The Mimeoplasm
 2 M Damia, Sage of Stone
