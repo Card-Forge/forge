@@ -125,8 +125,10 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
         SHOWCASE("showcase"),
         EXTENDED_ART("extended art"),
         ALTERNATE_ART("alternate art"),
+        ALTERNATE_FRAME("alternate frame"),
         BUY_A_BOX("buy a box"),
         PROMO("promo"),
+        BUNDLE("bundle"),
         BOX_TOPPER("box topper");
 
         private final String name;
