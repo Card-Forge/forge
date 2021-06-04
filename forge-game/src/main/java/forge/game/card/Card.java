@@ -2037,6 +2037,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 } else if (keyword.startsWith("Partner:")) {
                     final String[] k = keyword.split(":");
                     sbLong.append("Partner with ").append(k[1]).append(" (").append(inst.getReminderText()).append(")");
+                } else if (keyword.startsWith("Devour ")) {
+                    final String[] k = keyword.split(":");
+                    final String[] s = (k[0]).split(" ");
+                    final String t = s[1];
+                    sbLong.append(k[0]).append(" ").append(k[1]).append(" (As this enters the battlefield, you may ");
+                    sbLong.append("sacrifice any number of ").append(t).append("s. This creature enters the ");
+                    sbLong.append("battlefield with that many +1/+1 counters on it.)");
                 } else if (keyword.startsWith("Modular") || keyword.startsWith("Bloodthirst") || keyword.startsWith("Dredge")
                         || keyword.startsWith("Fabricate") || keyword.startsWith("Soulshift") || keyword.startsWith("Bushido")
                         || keyword.startsWith("Crew") || keyword.startsWith("Tribute") || keyword.startsWith("Absorb")

@@ -1,0 +1,10 @@
+Name:Caprichrome
+ManaCost:3 W
+Types:Artifact Creature Goat
+PT:2/2
+K:Flash
+K:Vigilance
+K:Devour artifact:1
+DeckHas:Ability$Counters
+DeckNeeds:Type$Artifact
+Oracle:Flash\nVigilance\nDevour artifact 1 (As this enters the battlefield, you may sacrifice any number of artifacts. This creature enters the battlefield with that many +1/+1 counters on it.)
