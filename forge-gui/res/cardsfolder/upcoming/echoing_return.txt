@@ -1,0 +1,7 @@
+Name:Echoing Return
+ManaCost:B
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | AILogic$ SameName | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select target creature | SubAbility$ DBReturn | SpellDescription$ Return target creature card and all other cards with the same name as that card from your graveyard to your hand. | StackDescription$ Return {c:Targeted} and all other cards with the same name as that card from your graveyard to your hand.
+SVar:DBReturn:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Hand | Defined$ You | ChangeType$ TargetedCard.sameName
+DeckHas:Ability$Graveyard
+Oracle:Return target creature card and all other cards with the same name as that card from your graveyard to your hand.
