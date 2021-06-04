@@ -266,7 +266,6 @@ public class PlayerProperty {
             final Player controller = "Active".equals(property.split("sThan")[1]) ? game.getPhaseHandler().getPlayerTurn() : sourceController;
             final CardCollectionView oppList = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(cardType));
             final CardCollectionView yourList = CardLists.filter(controller.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(cardType));
-            System.out.println(yourList.size());
             if (oppList.size() < yourList.size() + amount) {
                 return false;
             }
