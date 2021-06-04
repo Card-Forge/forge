@@ -23,7 +23,6 @@ import java.awt.event.MouseListener;
 
 import com.google.common.base.Function;
 
-import forge.Singletons;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.ICDoc;
