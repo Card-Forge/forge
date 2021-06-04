@@ -475,7 +475,7 @@ public final class CardEdition implements Comparable<CardEdition> {
                     * rarity - grouping #4
                     * name - grouping #5
              */
-                "(^([0-9A-Z]+.?) )?(([SCURML]) )?(.*)$"
+                "(^(.?[0-9A-Z]+.?) )?(([SCURML]) )?(.*)$"
             );
 
             ListMultimap<String, CardInSet> cardMap = ArrayListMultimap.create();
