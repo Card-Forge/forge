@@ -831,6 +831,11 @@ public class PhaseHandler implements java.io.Serializable {
         return noCost || blocker.getController().getController().payManaOptional(blocker, blockCost, fakeSA, "Pay cost to declare " + blocker + " a blocker. ", ManaPaymentPurpose.DeclareBlocker);
     }
 
+    public void resetExtra() {
+        extraPhases.clear();
+        extraTurns.clear();
+    }
+
     private Player handleNextTurn() {
         game.getStack().onNextTurn();
         // reset mustAttackEntity
