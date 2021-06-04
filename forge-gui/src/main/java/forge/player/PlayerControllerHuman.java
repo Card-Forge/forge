@@ -2170,8 +2170,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public IDevModeCheats cheat() {
         if (cheats == null) {
             cheats = new DevModeCheats();
-            // TODO: In Network game, inform other players that this player is
-            // cheating
+            // TODO: In Network game, inform other players that this player is cheating
         }
         return cheats;
     }
