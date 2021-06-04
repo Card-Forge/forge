@@ -1,0 +1,6 @@
+Name:Sol Talisman
+ManaCost:no cost
+Types:Artifact
+K:Suspend:3:1
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | SpellDescription$ Add {C}{C}.
+Oracle:Suspend 3—{1} (Rather than cast this card from your hand, pay 0 and exile it with three time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)\n{T}: Add {C}{C}.

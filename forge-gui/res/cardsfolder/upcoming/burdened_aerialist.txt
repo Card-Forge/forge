@@ -1,0 +1,10 @@
+Name:Burdened Aerialist
+ManaCost:2 U
+Types:Creature Human Pirate
+PT:3/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTreasure | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME enters the battlefield, create a Treasure token.
+SVar:TrigTreasure:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Permanent.token+YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice a token, CARDNAME gains flying until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Flying
+DeckHas:Ability$Token
+Oracle:When Burdened Aerialist enters the battlefield, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")\nWhenever you sacrifice a token, Burdened Aerialist gains flying until end of turn.
