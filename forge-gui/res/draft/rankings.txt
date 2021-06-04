@@ -227,7 +227,7 @@
 #226|Arcbound Javelineer|U|MH2
 #227|Unbounded Potential|C|MH2
 #228|Sudden Edict|U|MH2
-#229|Strike it Rich|U|MH2
+#229|Strike It Rich|U|MH2
 #230|Disciple of the Sun|C|MH2
 #231|Burdened Aerialist|C|MH2
 #232|Cabal Initiate|C|MH2

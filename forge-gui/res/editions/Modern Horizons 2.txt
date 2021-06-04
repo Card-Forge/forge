@@ -5,7 +5,7 @@ Name=Modern Horizons 2
 Code2=MH2
 MciCode=mh2
 Type=Other
-Booster=10 Common:!fromSheet("MH2 Secret Cards"):fromSheet("MH2 cards"), 3 Uncommon:!fromSheet("MH2 Secret Cards"):fromSheet("MH2 cards"), 1 RareMythic:!fromSheet("MH2 Secret Cards"):fromSheet("MH2 cards"), 1 fromSheet("MH2 Lands")
+Booster=10 Common:fromSheet("MH2 cards"), 3 Uncommon:fromSheet("MH2 cards"), 1 RareMythic:fromSheet("MH2 cards"), 1 fromSheet("MH2 Lands")
 BoosterReplaceSlotFromPrintSheet=MH2 NewToModern
 BoosterBox=36
 ChaosDraftThemes=MASTERS_SET
@@ -254,6 +254,8 @@ ChaosDraftThemes=MASTERS_SET
 241 U Vectis Gloves
 242 R Void Mirror
 243 R Zabaz, the Glimmerwasp
+
+[special slot]
 244 R Arid Mesa
 245 C Darkmoss Bridge
 246 C Drossforge Bridge
