@@ -1,0 +1,7 @@
+Name:Smell Fear
+ManaCost:1 G
+Types:Sorcery
+A:SP$ Proliferate | Cost$ 1 G | SubAbility$ DBPump | SpellDescription$ Proliferate (Choose any number of permanents and/or players, then give each another counter of each kind already there.) Target creature you control fights target creature you don't control. (Each deals damage equal to its power to the other.)
+SVar:DBPump:DB$ Pump | AILogic$ Fight | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | SubAbility$ DBFight | StackDescription$ None | SpellDescription$ Target creature you control fights target creature you don't control.
+SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control
+Oracle:Proliferate (Choose any number of permanents and/or players, then give each another counter of each kind already there.)\nTarget creature you control fights target creature you don't control. (Each deals damage equal to its power to the other.)
