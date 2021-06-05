@@ -1,0 +1,22 @@
+[metadata]
+Code=OLGC
+Date=2011-01-01
+Name=Legacy Championship
+Type=Promos
+
+[cards]
+2011 R Force of Will
+2012 R Brainstorm
+2013 U Wasteland
+2014 M Gaea's Cradle
+2015 M Tundra
+2016 M Underground Sea
+2017 M Badlands
+2018 M Taiga
+2019 M Savannah
+2020 M Scrubland
+2021 M Plateau
+2022 M Volcanic Island
+2023 M Tropical Island
+2024 M Bayou
+2025 M City of Traitors

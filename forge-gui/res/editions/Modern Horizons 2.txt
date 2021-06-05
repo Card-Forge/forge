@@ -652,3 +652,26 @@ Mishra's Factory
 Riptide Laboratory
 
 [tokens]
+b_0_0_germ
+b_0_0_zombie_army
+b_2_2_zombie
+bg_1_1_insect
+c_0_0_a_construct_total_artifacts
+c_1_1_a_thopter_flying
+c_a_clue_draw
+c_a_clue_draw
+c_a_food_sac
+c_a_food_sac
+c_a_treasure_sac
+c_a_treasure_sac
+g_1_1_squirrel
+g_4_4_beast
+g_5_3_elemental
+r_1_1_goblin
+rw_4_4_a_golem
+u_0_3_crab
+u_1_1_bird_flying
+
+[other]
+eternalize_timeless_dragon
+eternalize_timeless_witness
