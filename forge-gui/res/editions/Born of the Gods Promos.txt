@@ -5,12 +5,12 @@ Name=Born of the Gods Promos
 Type=Promos
 
 [cards]
-26 R Silent Sentinel
-31 R Arbiter of the Ideal
-55 R Tromokratis
-66 R Eater of Hope
+26★ R Silent Sentinel
+31★ R Arbiter of the Ideal
+55★ R Tromokratis
+66★ R Eater of Hope
 80 R Pain Seer
-94 R Fated Conflagration
-98 R Forgestoker Dragon
-129 R Nessian Wilds Ravager
+*94 R Fated Conflagration
+98★ R Forgestoker Dragon
+129★ R Nessian Wilds Ravager
 150 U Kiora's Follower

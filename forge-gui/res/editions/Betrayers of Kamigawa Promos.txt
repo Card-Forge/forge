@@ -5,5 +5,5 @@ Name=Betrayers of Kamigawa Promos
 Type=Promos
 
 [cards]
-71 R Ink-Eyes, Servant of Oni
-122 U Budoka Pupil
+71★ R Ink-Eyes, Servant of Oni
+122★ U Budoka Pupil
