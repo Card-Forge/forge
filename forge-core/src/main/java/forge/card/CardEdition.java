@@ -120,13 +120,16 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     // commonly used printsheets with collector number
     public enum EditionSectionWithCollectorNumbers {
         CARDS("cards"),
+        SPECIAL_SLOT("special slot"), //to help with convoluted boosters
         PRECON_PRODUCT("precon product"),
         BORDERLESS("borderless"),
         SHOWCASE("showcase"),
         EXTENDED_ART("extended art"),
         ALTERNATE_ART("alternate art"),
+        ALTERNATE_FRAME("alternate frame"),
         BUY_A_BOX("buy a box"),
         PROMO("promo"),
+        BUNDLE("bundle"),
         BOX_TOPPER("box topper");
 
         private final String name;
