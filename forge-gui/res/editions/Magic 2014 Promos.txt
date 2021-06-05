@@ -5,8 +5,8 @@ Name=Magic 2014 Promos
 Type=Promos
 
 [cards]
-21 C Hive Stirrings
-48 R Colossal Whale
-141 R Goblin Diplomats
-185 R Megantic Sliver
-215 R Ratchet Bomb
+21★ C Hive Stirrings
+48★ R Colossal Whale
+141★ R Goblin Diplomats
+185★ R Megantic Sliver
+215★ R Ratchet Bomb

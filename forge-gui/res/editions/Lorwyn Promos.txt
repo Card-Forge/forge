@@ -5,5 +5,5 @@ Name=Lorwyn Promos
 Type=Promos
 
 [cards]
-139 R Shriekmaw
-244 R Wren's Run Packmaster
+139★ R Shriekmaw
+244★ R Wren's Run Packmaster

@@ -5,8 +5,8 @@ Name=Magic 2012 Promos
 Type=Promos
 
 [cards]
-82 M Bloodlord of Vaasgoth
-126 R Chandra's Phoenix
+82★ M Bloodlord of Vaasgoth
+126★ R Chandra's Phoenix
 156 U Stormblood Berserker
 171 R Dungrove Elder
-176 R Garruk's Horde
+176★ R Garruk's Horde
