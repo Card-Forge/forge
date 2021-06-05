@@ -3,6 +3,7 @@ Code=ARENA
 Date=1994-09-26
 Name=Arena
 Type=Other
+ScryfallCode=PHPR
 
 [cards]
 1 C Arena
