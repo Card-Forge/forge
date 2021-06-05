@@ -39,13 +39,14 @@ public abstract class ImageFetcher {
     private HashMap<String, HashSet<Callback>> currentFetches = new HashMap<>();
     private HashMap<String, String> tokenImages;
 
-    private String getScryfallDownloadURL(PaperCard c, boolean backFace, String langCode){
+    private String getScryfallDownloadURL(PaperCard c, boolean backFace){
         StaticData data = StaticData.instance();
         CardEdition edition = data.getEditions().get(c.getEdition());
         if (edition == null) // edition does not exist - some error occurred with card data
             return null;
         // 1. Try MCI code first, as it original.
         String setCode = edition.getScryfallCode();
+        String langCode = edition.getCardsLangCode();
         return ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD +
                 ImageUtil.getScryfallDownloadUrl(c, backFace, setCode, langCode);
     }
@@ -82,11 +83,7 @@ public abstract class ImageFetcher {
             downloadUrls.add(setDownload.toString());
             final String cardCollectorNumber = paperCard.getCollectorNumber();
             if (!cardCollectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER)){
-                String langCode = "en";
-                String UILang = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_LANGUAGE);
-                if (langCodeMap.containsKey(UILang))
-                    langCode = langCodeMap.get(UILang);
-                final String scryfallURL = this.getScryfallDownloadURL(paperCard, backFace, langCode);
+                final String scryfallURL = this.getScryfallDownloadURL(paperCard, backFace);
                 if (scryfallURL != null)
                     downloadUrls.add(scryfallURL);
             }
