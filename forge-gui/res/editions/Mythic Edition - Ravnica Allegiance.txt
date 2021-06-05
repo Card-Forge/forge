@@ -4,6 +4,7 @@ Date=2019-01-24
 Name=Mythic Edition - Ravnica Allegiance
 MciCode=med
 Type=Other
+ScryfallCode=med
 
 [cards]
 RA1 M Karn, Scion of Urza
