@@ -5,5 +5,5 @@ Name=Alara Reborn Promos
 Type=Promos
 
 [cards]
-53 M Dragon Broodmother
-70 R Knight of New Alara
+53★ M Dragon Broodmother
+70★ R Knight of New Alara
