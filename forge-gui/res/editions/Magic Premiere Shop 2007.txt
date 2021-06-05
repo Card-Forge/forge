@@ -3,6 +3,7 @@ Code=PMPS07
 Date=2007-01-01
 Name=Magic Premiere Shop 2007
 Type=Promos
+CardLang=ja
 
 [cards]
 1 R Plains
