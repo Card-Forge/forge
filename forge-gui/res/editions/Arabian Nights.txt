@@ -50,7 +50,7 @@ ScryfallCode=ARN
 14 C Flying Men
 49 C Ghazban Ogre
 15 C Giant Tortoise
-15+ C Giant Tortoise
+15† C Giant Tortoise
 26 R Guardian Beast
 27 C Hasran Ogress
 27† C Hasran Ogress
@@ -100,7 +100,7 @@ ScryfallCode=ARN
 33† C Stone-Throwing Devils
 22 C Unstable Mutation
 11 C War Elephant
-11+ C War Elephant
+11† C War Elephant
 55 C Wyluli Wolf
 55† C Wyluli Wolf
 44 R Ydwen Efreet
