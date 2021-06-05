@@ -1,0 +1,6 @@
+Name:Mine Collapse
+ManaCost:3 R
+Types:Instant
+SVar:AltCost:Cost$ Sac<1/Mountain> | PlayerTurn$ True | Description$ If it's your turn, you may sacrifice a Mountain rather than pay this spell's mana cost.
+A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target creature or planeswalker.
+Oracle:If it's your turn, you may sacrifice a Mountain rather than pay this spell's mana cost.\nMine Collapse deals 5 damage to target creature or planeswalker.
