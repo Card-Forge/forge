@@ -1,0 +1,8 @@
+Name:Gilt-Blade Prowler
+ManaCost:2 B
+Types:Creature Human Rogue
+PT:2/3
+A:AB$ Draw | Cost$ 1 T PayLife<1> | CheckSVar$ X | SpellDescription$ Draw a card. Activate only if you've discarded a card this turn.
+SVar:X:PlayerCountPropertyYou$CardsDiscardedThisTurn
+DeckHints:Ability$Discard
+Oracle:{1}, {T}, Pay 1 life: Draw a card. Activate only if you've discarded a card this turn.
