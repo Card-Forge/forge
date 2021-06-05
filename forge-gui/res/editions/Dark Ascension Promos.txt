@@ -5,8 +5,8 @@ Name=Dark Ascension Promos
 Type=Promos
 
 [cards]
-64 R Gravecrawler
-71 R Ravenous Demon
+*64 R Gravecrawler
+71★ R Ravenous Demon
 80 R Zombie Apocalypse
-98 R Mondronen Shaman
+98★ R Mondronen Shaman
 127 U Strangleroot Geist

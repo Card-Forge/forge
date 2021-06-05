@@ -5,5 +5,5 @@ Name=Conflux Promos
 Type=Promos
 
 [cards]
-117 R Malfegor
-140 R Obelisk of Alara
+117★ R Malfegor
+140★ R Obelisk of Alara

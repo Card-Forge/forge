@@ -5,5 +5,5 @@ Name=Dissension Promos
 Type=Promos
 
 [cards]
-140 R Avatar of Discord
-141 R Azorius Guildmage
+140★ R Avatar of Discord
+141★ R Azorius Guildmage

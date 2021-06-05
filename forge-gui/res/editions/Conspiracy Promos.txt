@@ -5,4 +5,4 @@ Name=Conspiracy Promos
 Type=Promos
 
 [cards]
-48 R Magister of Worth
+48★ R Magister of Worth
