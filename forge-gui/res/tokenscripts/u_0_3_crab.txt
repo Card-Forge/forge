@@ -1,0 +1,6 @@
+Name:Crab
+ManaCost:no cost
+Types:Creature Crab
+Colors:blue
+PT:0/1
+Oracle:
