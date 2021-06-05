@@ -5,9 +5,9 @@ Name=New Phyrexia Promos
 Type=Promos
 
 [cards]
-42 R Phyrexian Metamorph
-73 M Sheoldred, Whispering One
-74 R Surgical Extraction
+42★ R Phyrexian Metamorph
+73★ M Sheoldred, Whispering One
+*74 R Surgical Extraction
 90 U Priest of Urabrask
 145 R Myr Superion
 151 C Pristine Talisman

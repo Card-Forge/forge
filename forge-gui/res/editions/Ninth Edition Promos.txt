@@ -5,5 +5,5 @@ Name=Ninth Edition Promos
 Type=Promos
 
 [cards]
+242★ R Force of Nature
 219 R Shivan Dragon
-242 R Force of Nature
