@@ -5,5 +5,5 @@ Name=Morningtide Promos
 Type=Promos
 
 [cards]
-60 R Earwig Squad
-143 R Door of Destinies
+60★ R Earwig Squad
+143★ R Door of Destinies

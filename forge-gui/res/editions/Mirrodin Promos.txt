@@ -5,4 +5,4 @@ Name=Mirrodin Promos
 Type=Promos
 
 [cards]
-251 R Sword of Kaldra
+251★ R Sword of Kaldra

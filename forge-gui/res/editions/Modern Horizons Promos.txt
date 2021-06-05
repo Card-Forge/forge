@@ -5,4 +5,4 @@ Name=Modern Horizons Promos
 Type=Promos
 
 [cards]
-1 R Astral Drift
+3 R Astral Drift

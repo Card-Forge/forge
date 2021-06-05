@@ -5,9 +5,9 @@ Name=Mirrodin Besieged Promos
 Type=Promos
 
 [cards]
-8 M Hero of Bladehold
-14 R Mirran Crusader
+8★ M Hero of Bladehold
+*14 R Mirran Crusader
 34 U Treasure Mage
 39 R Black Sun's Zenith
-96 M Glissa, the Traitor
-140 R Thopter Assembly
+96★ M Glissa, the Traitor
+140★ R Thopter Assembly
