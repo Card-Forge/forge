@@ -11,6 +11,7 @@ AdditionalSheetForFoils=fromSheet("MPS Hour of Devastation Invocations")
 AdditionalSetUnlockedInQuest=MPS_AKH
 TreatAsSmallSet=true
 ChaosDraftThemes=GRAVEYARD_MATTERS
+ScryfallCode=HOU
 
 [cards]
 1 C Act of Heroism

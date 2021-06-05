@@ -8,6 +8,7 @@ Type=Core
 BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 Rare, 1 BasicLand
 ChaosDraftThemes=CORE_SET
+ScryfallCode=10E
 
 [cards]
 249 R Abundance

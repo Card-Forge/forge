@@ -9,6 +9,7 @@ BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 Rare
 Foil=OldStyle
 FoilAlwaysInCommonSlot=False
+ScryfallCode=MMQ
 
 [cards]
 58 R Aerial Caravan

@@ -10,6 +10,7 @@ Booster=10 Common:!fromSheet("AKH Planeswalker Decks and Toolkit"), 3 Uncommon:!
 AdditionalSheetForFoils=fromSheet("MPS Amonkhet Invocations")
 AdditionalSetUnlockedInQuest=MPS_AKH
 ChaosDraftThemes=GRAVEYARD_MATTERS
+ScryfallCode=AKH
 
 [cards]
 1 M Angel of Sanctions

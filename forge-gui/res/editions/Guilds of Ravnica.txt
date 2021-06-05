@@ -9,6 +9,7 @@ BoosterCovers=5
 Booster=10 Common:!fromSheet("GRN Secret Cards"), 3 Uncommon:!fromSheet("GRN Secret Cards"), 1 RareMythic:!fromSheet("GRN Secret Cards"), 1 fromSheet("GRN Lands")
 AdditionalSetUnlockedInQuest=GK1
 ChaosDraftThemes=RAVNICA;GRAVEYARD_MATTERS
+ScryfallCode=GRN
 
 [cards]
 1 C Blade Instructor

@@ -4,6 +4,7 @@ Date=2008-11-07
 Name=Duel Decks: Jace vs. Chandra
 MciCode=jvc
 Type=Duel_Decks
+ScryfallCode=DD2
 
 [cards]
 1 M Jace Beleren

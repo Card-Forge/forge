@@ -3,6 +3,8 @@ Code=PMPS08
 Date=2008-01-01
 Name=Magic Premiere Shop 2008
 Type=Promos
+CardLang=ja
+ScryfallCode=PMPS08
 
 [cards]
 1 R Plains

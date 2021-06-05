@@ -4,6 +4,7 @@ Date=2016-06-16
 Name=Welcome Deck 2016
 MciCode=w16
 Type=Other
+ScryfallCode=W16
 
 [cards]
 1 R Aegis Angel

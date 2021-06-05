@@ -6,6 +6,7 @@ MciCode=bd
 Type=Other
 Border=White
 Foil=NotSupported
+ScryfallCode=BTD
 
 [cards]
 1 U Air Elemental

@@ -7,6 +7,7 @@ Alias=CMD
 MciCode=cmd
 Type=Other
 BoosterBox=0
+ScryfallCode=cmd
 
 [cards]
 39 C AEthersnipe

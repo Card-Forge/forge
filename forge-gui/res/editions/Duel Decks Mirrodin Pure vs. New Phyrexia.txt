@@ -5,6 +5,7 @@ Name=Duel Decks: Mirrodin Pure vs. New Phyrexia
 MciCode=td2
 Type=Online
 Type=Duel_Decks
+ScryfallCode=TD2
 
 [cards]
 1 M Platinum Angel

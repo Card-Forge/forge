@@ -9,6 +9,7 @@ BoosterCovers=1
 Booster=5 Common, 2 Uncommon, 1 Rare
 BoosterBox=60
 Foil=NotSupported
+ScryfallCode=FEM
 
 [cards]
 81 R Aeolipile

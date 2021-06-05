@@ -3,6 +3,7 @@ Code=PCEL
 Date=1996-08-14
 Name=Celebration Cards
 Type=Funny
+ScryfallCode=PCEL
 
 [cards]
 1 M 1996 World Champion

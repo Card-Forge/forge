@@ -3,6 +3,7 @@ Code=SS3
 Date=2020-06-26
 Name=Signature Spellbook: Chandra
 Type=Reprint
+ScryfallCode=SS3
 
 [cards]
 1 M Chandra, Torch of Defiance

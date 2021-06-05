@@ -8,6 +8,7 @@ Border=Silver
 BoosterCovers=3
 Booster=10 Common, 3 Uncommon, 1 BasicLand, 1 Rare
 FoilAlwaysInCommonSlot=False
+ScryfallCode=UNH
 
 [cards]
 1 U Atinlay Igpay

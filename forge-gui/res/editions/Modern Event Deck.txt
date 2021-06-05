@@ -5,6 +5,7 @@ Name=Modern Event Deck
 Code2=MD1
 MciCode=md1
 Type=other
+ScryfallCode=MD1
 
 [cards]
 1 C Soul Warden

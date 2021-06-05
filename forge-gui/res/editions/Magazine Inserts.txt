@@ -3,45 +3,45 @@ Code=PMEI
 Date=1995-01-01
 Name=Magazine Inserts
 Type=Reprint
+ScryfallCode=PMEI
 
 [cards]
 4 C Fireball
 5 C Blue Elemental Blast
-8 C Jamuraan Lion 
-9 C Scent of Cinder 
+8 C Jamuraan Lion
+9 C Scent of Cinder
 10 C Lightning Hounds
 11 C Spined Wurm
-12 U Warmonger 
+12 U Warmonger
 13 C Silver Drake
-14 C Phyrexian Rager 
+14 C Phyrexian Rager
 15 R Shivan Dragon
 16 R Darksteel Juggernaut
 17 U Cunning Sparkmage
 18 C Chandra's Outrage
 19 U Chandra's Spitfire
 20 R Kuldotha Phoenix
-21 U Phantasmal Dragon 
+21 U Phantasmal Dragon
 22 C Sandbar Crocodile
 23 C Zhalfirin Knight
 24 C Shrieking Drake
 25 C Stream of Life
 26 R Thorn Elemental
 27 C Parallax Dementia
-28 R Ascendant Evincar 
-29 R Archangel 
+28 R Ascendant Evincar
+29 R Archangel
 30 U Cast Down
 31 R Diabolic Edict
 32 R Shock
 33 U Lava Coil
-34 R Duress 
+34 R Duress
 35 R Voltaic Key
 36 U Daxos, Blessed by the Sun
 37 R Staggering Insight
-38 C Dark Ritual 
+38 C Dark Ritual
 39 R Sprite Dragon
 40 R Hypnotic Sprite
 41 R Heliod's Pilgrim
 42 R Crop Rotation
 43 R Tangled Florahedron
 44 R Counterspell
-

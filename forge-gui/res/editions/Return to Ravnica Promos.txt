@@ -3,15 +3,16 @@ Code=PRTR
 Date=2012-10-05
 Name=Return to Ravnica Promos
 Type=Promos
+ScryfallCode=PRTR
 
 [cards]
-120 R Deadbridge Goliath
-142 R Archon of the Triumvirate
-147 R Carnival Hellsteed
-152 R Corpsejack Menace
+120★ R Deadbridge Goliath
+142★ R Archon of the Triumvirate
+147★ R Carnival Hellsteed
+152★ R Corpsejack Menace
 158 U Dreg Mangler
-170 R Hypersonic Dragon
-201 R Supreme Verdict
+170★ R Hypersonic Dragon
+*201 R Supreme Verdict
 212 R Cryptborn Horror
 214 U Dryad Militant
-240 R Grove of the Guardian
+240★ R Grove of the Guardian

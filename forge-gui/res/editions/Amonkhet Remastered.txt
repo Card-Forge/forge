@@ -5,6 +5,7 @@ Name=Amonkhet Remastered
 BoosterCovers=1
 Booster=10 Common, 3 Uncommon, 1 RareMythic:!fromSheet("AKR buy a box")
 Type=Online
+ScryfallCode=AKR
 
 [cards]
 1 M Angel of Sanctions

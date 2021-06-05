@@ -3,10 +3,11 @@ Code=PM10
 Date=2009-07-16
 Name=Magic 2010 Promos
 Type=Promos
+ScryfallCode=PM10
 
 [cards]
-16 R Honor of the Pure
+16★ R Honor of the Pure
 28 R Mycoid Shepherd
 29 R Naya Sojourners
-118 M Vampire Nocturnus
-166 R Ant Queen
+118★ M Vampire Nocturnus
+166★ R Ant Queen

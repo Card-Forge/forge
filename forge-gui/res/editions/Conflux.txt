@@ -8,6 +8,7 @@ MciCode=cfx
 Type=Expansion
 BoosterCovers=3
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand ALA
+ScryfallCode=CON
 
 [cards]
 40 C Absorb Vis

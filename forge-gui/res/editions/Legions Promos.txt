@@ -3,6 +3,7 @@ Code=PLGN
 Date=2003-02-03
 Name=Legions Promos
 Type=Promos
+ScryfallCode=PLGN
 
 [cards]
 126 R Feral Throwback

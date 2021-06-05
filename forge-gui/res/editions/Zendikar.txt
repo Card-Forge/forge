@@ -7,6 +7,7 @@ MciCode=zen
 Type=Expansion
 BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
+ScryfallCode=ZEN
 
 [cards]
 40 U AEther Figment

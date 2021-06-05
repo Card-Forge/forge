@@ -3,6 +3,7 @@ Code=PDP12
 Date=2011-01-01
 Name=Duels of the Planeswalkers 2012 Promos
 Type=Promos
+ScryfallCode=PDP12
 
 [cards]
 1 M Frost Titan

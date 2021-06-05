@@ -5,6 +5,7 @@ Name=Kaladesh Remastered
 BoosterCovers=1
 Booster=10 Common, 3 Uncommon, 1 RareMythic:fromSheet("KLR cards")
 Type=Online
+ScryfallCode=KLR
 
 [cards]
 1 U Aerial Responder

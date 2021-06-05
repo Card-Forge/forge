@@ -5,6 +5,7 @@ Name=Game Night 2019
 Code2=GN2
 MciCode=gn2
 Type=Other
+ScryfallCode=GN2
 
 [cards]
 1 M Highcliff Felidar

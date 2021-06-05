@@ -3,6 +3,7 @@ Code=PWCQ
 Date=2013-04-06
 Name=World Magic Cup Qualifiers
 Type=Promos
+ScryfallCode=PWCQ
 
 [cards]
 2013 M Vengevine

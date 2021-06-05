@@ -3,6 +3,7 @@ Code=AJMP
 Date=2020-07-17
 Name=Jumpstart Arena Exclusives
 Type=Online
+ScryfallCode=AJMP
 
 [cards]
 3 R Archon of Sun's Grace

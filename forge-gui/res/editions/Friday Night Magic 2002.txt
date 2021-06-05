@@ -3,6 +3,7 @@ Code=F02
 Date=2002-01-01
 Name=Friday Night Magic 2002
 Type=Promos
+ScryfallCode=F02
 
 [cards]
 1 R Soltari Priest

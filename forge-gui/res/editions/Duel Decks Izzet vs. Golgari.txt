@@ -4,6 +4,7 @@ Date=2012-09-07
 Name=Duel Decks: Izzet vs. Golgari
 MciCode=ddj
 Type=Duel_Decks
+ScryfallCode=DDJ
 
 [cards]
 1 M Niv-Mizzet, the Firemind

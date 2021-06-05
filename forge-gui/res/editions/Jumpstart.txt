@@ -3,6 +3,7 @@ Code=JMP
 Date=2020-07-17
 Name=Jumpstart
 Type=Other
+ScryfallCode=JMP
 
 [cards]
 1 R Blessed Sanctuary

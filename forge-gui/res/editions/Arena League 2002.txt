@@ -3,6 +3,7 @@ Code=PAL02
 Date=2002-01-01
 Name=Arena League 2002
 Type=Promos
+ScryfallCode=PAL02
 
 [cards]
 1 R Island

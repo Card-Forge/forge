@@ -4,6 +4,7 @@ Date=2018-06-22
 Name=Global Series Jiang Yanggu & Mu Yanling
 MciCode=gs1
 Type=Other
+ScryfallCode=GS1
 
 [cards]
 1 M Mu Yanling

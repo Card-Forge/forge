@@ -3,6 +3,7 @@ Code=G04
 Date=2004-01-01
 Name=Judge Gift Cards 2004
 Type=Promos
+ScryfallCode=G04
 
 [cards]
 1 R Armageddon

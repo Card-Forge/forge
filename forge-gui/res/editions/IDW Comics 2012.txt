@@ -3,6 +3,7 @@ Code=PIDW
 Date=2012-01-01
 Name=IDW Comics 2012
 Type=Promos
+ScryfallCode=PIDW
 
 [cards]
 1 R Treasure Hunt

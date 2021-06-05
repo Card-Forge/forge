@@ -4,6 +4,7 @@ Date=2011-04-01
 Name=Duel Decks: Knights vs. Dragons
 MciCode=ddg
 Type=Duel_Decks
+ScryfallCode=DDG
 
 [cards]
 1 M Knight of the Reliquary

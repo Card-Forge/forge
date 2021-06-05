@@ -5,6 +5,7 @@ Name=Planechase 2012
 Code2=PC2
 MciCode=pc2
 Type=Other
+ScryfallCode=PC2
 
 [cards]
 9 C Akoum

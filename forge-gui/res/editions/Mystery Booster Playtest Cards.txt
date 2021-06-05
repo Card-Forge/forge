@@ -5,6 +5,7 @@ Name=Mystery Booster Playtest Cards
 Code2=CMB1
 MciCode=cmb1
 Type=Funny
+ScryfallCode=CMB1
 
 [cards]
 1 R Ral's Vanguard

@@ -9,6 +9,7 @@ BoosterCovers=1
 Booster=11 Common, 3 Uncommon, 1 Rare
 Foil=NotSupported
 ChaosDraftThemes=GRAVEYARD_MATTERS
+ScryfallCode=WTH
 
 [cards]
 30 U Abduction

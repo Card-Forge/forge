@@ -3,6 +3,7 @@ Code=PGRU
 Date=1999-07-12
 Name=Guru
 Type=Promos
+ScryfallCode=PGRU
 
 [cards]
 1 R Plains

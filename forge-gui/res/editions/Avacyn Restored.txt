@@ -8,6 +8,7 @@ Type=Expansion
 BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 ChaosDraftThemes=GRAVEYARD_MATTERS
+ScryfallCode=AVR
 
 [cards]
 167 C Abundant Growth

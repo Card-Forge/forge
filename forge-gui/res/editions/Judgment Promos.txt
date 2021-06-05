@@ -3,6 +3,8 @@ Code=PJUD
 Date=2002-05-27
 Name=Judgment Promos
 Type=Promos
+CardLang=he
+ScryfallCode=PJUD
 
 [cards]
 11 R Glory

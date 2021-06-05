@@ -4,6 +4,7 @@ Date=2015-10-02
 Name=Zendikar Expeditions
 MciCode=exp
 Type=Other
+ScryfallCode=EXP
 
 [cards]
 1 M Prairie Stream

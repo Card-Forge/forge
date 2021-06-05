@@ -3,6 +3,7 @@ Code=PBFZ
 Date=2015-10-03
 Name=Battle for Zendikar Promos
 Type=Promos
+ScryfallCode=PBFZ
 
 [cards]
 2 R Blight Herder

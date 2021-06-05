@@ -5,6 +5,7 @@ Name=Archenemy
 Code2=ARC
 MciCode=arc
 Type=Other
+ScryfallCode=ARC
 
 [cards]
 8 C A Display of My Dark Power

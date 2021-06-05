@@ -3,6 +3,8 @@ Code=PMPS
 Date=2005-01-01
 Name=Magic Premiere Shop 2005
 Type=Promos
+CardLang=ja
+ScryfallCode=PMPS
 
 [cards]
 287 C Plains

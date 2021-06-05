@@ -9,6 +9,7 @@ Type=Starter
 BoosterCovers=1
 Booster=11 Common, 3 Uncommon, 1 Rare
 Foil=NotSupported
+ScryfallCode=P02
 
 [cards]
 61 U Abyssal Nightstalker

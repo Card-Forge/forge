@@ -3,6 +3,7 @@ Code=PAER
 Date=2017-01-21
 Name=Aether Revolt Promos
 Type=Promos
+ScryfallCode=PAER
 
 [cards]
 48 U Trophy Mage

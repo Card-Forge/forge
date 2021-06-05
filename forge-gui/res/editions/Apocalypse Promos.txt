@@ -3,6 +3,8 @@ Code=PAPC
 Date=2001-06-04
 Name=Apocalypse Promos
 Type=Promos
+CardLang=sa
+ScryfallCode=PAPC
 
 [cards]
 100 R Fungal Shambler

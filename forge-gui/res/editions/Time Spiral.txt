@@ -8,6 +8,7 @@ Type=Expansion
 BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 Rare, 1 TimeShifted TSB
 AdditionalSetUnlockedInQuest=TSB
+ScryfallCode=TSP
 
 [cards]
 189 C AEther Web

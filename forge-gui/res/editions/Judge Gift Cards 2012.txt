@@ -3,6 +3,7 @@ Code=J12
 Date=2012-01-01
 Name=Judge Gift Cards 2012
 Type=Promos
+ScryfallCode=J12
 
 [cards]
 1 R Xiahou Dun, the One-Eyed

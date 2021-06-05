@@ -8,6 +8,7 @@ Type=Other
 BoosterCovers=3
 Booster=10 Common:!fromSheet("CN2 Not In Normal Slots"), 3 Uncommon:!fromSheet("CN2 Not In Normal Slots"), 1 RareMythic:!fromSheet("CN2 Not In Normal Slots"), 1 fromSheet("CN2 Draft Matters")
 AdditionalSheetForFoils=fromSheet("CN2 Foil Kaya")
+ScryfallCode=CN2
 
 [cards]
 1 C Adriana's Valor

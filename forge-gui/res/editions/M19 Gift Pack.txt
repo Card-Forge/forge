@@ -5,10 +5,11 @@ Name=M19 Gift Pack
 Code2=G18
 MciCode=g18
 Type=Other
+ScryfallCode=g18
 
 [cards]
-1 S Angelic Guardian
-2 S Angler Turtle
-3 S Vengeant Vampire
-4 S Immortal Phoenix
-5 S Rampaging Brontodon
+GP1 S Angelic Guardian
+GP2 S Angler Turtle
+GP3 S Vengeant Vampire
+GP4 S Immortal Phoenix
+GP5 S Rampaging Brontodon

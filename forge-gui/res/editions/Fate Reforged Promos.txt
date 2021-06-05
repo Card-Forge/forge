@@ -3,6 +3,7 @@ Code=PFRF
 Date=2015-01-24
 Name=Fate Reforged Promos
 Type=Promos
+ScryfallCode=PFRF
 
 [cards]
 11 R Dragonscale General

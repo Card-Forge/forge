@@ -3,14 +3,15 @@ Code=PGTC
 Date=2013-01-26
 Name=Gatecrash Promos
 Type=Promos
+ScryfallCode=PGTC
 
 [cards]
-133 R Skarrg Goliath
-152 R Consuming Aberration
-162 R Fathom Mage
+133★ R Skarrg Goliath
+152★ R Consuming Aberration
+162★ R Fathom Mage
 163 R Firemane Avenger
-165 R Foundry Champion
-191 R Rubblehulk
-201 R Treasury Thrull
+165★ R Foundry Champion
+191★ R Rubblehulk
+201★ R Treasury Thrull
 209 U Zameck Guildmage
-222 R Nightveil Specter
+*222 R Nightveil Specter

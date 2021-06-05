@@ -3,6 +3,7 @@ Code=JGP
 Date=1998-01-01
 Name=Judge Gift Cards 1998
 Type=Promos
+ScryfallCode=JGP
 
 [cards]
 1 R Lightning Bolt

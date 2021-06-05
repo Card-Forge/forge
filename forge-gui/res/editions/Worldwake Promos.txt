@@ -3,11 +3,12 @@ Code=PWWK
 Date=2010-04-05
 Name=Worldwake Promos
 Type=Promos
+ScryfallCode=PWWK
 
 [cards]
-28 R Hada Freeblade
+38 R Hada Freeblade
 39 R Kalastria Highborn
-65 C Ruthless Cullblade
-76 M Comet Storm
-106 R Joraga Warcaller
+65★ C Ruthless Cullblade
+76★ M Comet Storm
+106★ R Joraga Warcaller
 133 R Celestial Colonnade

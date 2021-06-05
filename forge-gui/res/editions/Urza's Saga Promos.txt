@@ -3,6 +3,7 @@ Code=PUSG
 Date=1998-10-13
 Name=Urza's Saga Promos
 Type=Promos
+ScryfallCode=PUSG
 
 [cards]
 202 R Lightning Dragon

@@ -8,6 +8,7 @@ Type=Expansion
 BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand RTR
 ChaosDraftThemes=RAVNICA
+ScryfallCode=GTC
 
 [cards]
 29 U AEtherize

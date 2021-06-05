@@ -3,6 +3,7 @@ Code=ZNC
 Date=2020-09-25
 Name=Zendikar Rising Commander
 Type=Other
+ScryfallCode=ZNC
 
 [cards]
 1 M Anowon, the Ruin Thief
@@ -17,114 +18,114 @@ Type=Other
 10 M Admonition Angel
 11 U Banishing Light
 12 U Condemn
-13 U Crush Contraband 
+13 U Crush Contraband
 14 U Elite Scaleguard
-15 R Emeria Angel 
+15 R Emeria Angel
 16 R Emeria Shepherd
-17 R Hour of Revelation 
-18 C Kor Cartographer 
-19 R Planar Outburst 
+17 R Hour of Revelation
+18 C Kor Cartographer
+19 R Planar Outburst
 20 U Retreat to Emeria
 21 M Sun Titan
 22 R Together Forever
 23 U Aetherize
-24 C Distant Melody 
-25 U Fact or Fiction 
-26 U Faerie Vandal 
+24 C Distant Melody
+25 U Fact or Fiction
+26 U Faerie Vandal
 27 U Invisible Stalker
 28 C Latchkey Faerie
-29 U Marang River Prowler 
-30 U Master Thief 
-31 U Military Intelligence 
-32 U Nightveil Sprite 
+29 U Marang River Prowler
+30 U Master Thief
+31 U Military Intelligence
+32 U Nightveil Sprite
 33 R Notorious Throng
-34 U Open into Wonder 
-35 R Scourge of Fleets 
+34 U Open into Wonder
+35 R Scourge of Fleets
 36 C Slither Blade
 37 R Stolen Identity
 38 C Triton Shorestalker
-39 U Whirler Rogue 
+39 U Whirler Rogue
 40 C Changeling Outcast
-41 U Endless Obedience 
-42 R Fated Return 
+41 U Endless Obedience
+42 R Fated Return
 43 C Frogtosser Banneret
-44 R Gonti, Lord of Luxury 
+44 R Gonti, Lord of Luxury
 45 R In Garruk's Wake
 46 U Marsh Flitter
 47 C Murder
 48 R Necromantic Selection
 49 R Nighthowler
 50 R Ogre Slumlord
-51 U Oona's Blackguard 
+51 U Oona's Blackguard
 52 U Price of Fame
 53 U Rise from the Grave
 54 R Sepulchral Primordial
 55 U Stinkdrinker Bandit
 56 U Syr Konrad, the Grim
-57 U Zulaport Cutthroat 
+57 U Zulaport Cutthroat
 58 R Abundance
-59 U Acidic Slime 
-60 U Armorcraft Judge 
+59 U Acidic Slime
+60 U Armorcraft Judge
 61 U Beanstalk Giant
-62 U Circuitous Route 
+62 U Circuitous Route
 63 C Elvish Rejuvenator
 64 U Embodiment of Insight
 65 U Evolution Sage
 66 C Far Wanderings
-67 C Fertilid 
-68 U Harmonize 
+67 C Fertilid
+68 U Harmonize
 69 C Harrow
-70 U Inspiring Call 
-71 U Keeper of Fables 
-72 C Khalni Heart Expedition 
-73 C Kodama's Reach 
+70 U Inspiring Call
+71 U Keeper of Fables
+72 C Khalni Heart Expedition
+73 C Kodama's Reach
 74 R The Mending of Dominaria
 75 M Multani, Yavimaya's Avatar
-76 R Nissa's Renewal 
+76 R Nissa's Renewal
 77 R Rampaging Baloths
 78 U Retreat to Kazandu
-79 R Return of the Wildspeaker 
-80 R Rites of Flourishing 
+79 R Return of the Wildspeaker
+80 R Rites of Flourishing
 81 C Satyr Wayfinder
-82 C Sporemound 
-83 C Springbloom Druid 
+82 C Sporemound
+83 C Springbloom Druid
 84 R Sylvan Advocate
-85 U Tuskguard Captain 
+85 U Tuskguard Captain
 86 R Waker of the Wilds
-87 C Yavimaya Elder 
-88 U Zendikar's Roil 
+87 C Yavimaya Elder
+88 U Zendikar's Roil
 89 R Consuming Aberration
-90 U Extract from Darkness 
-91 U Ground Assault 
+90 U Extract from Darkness
+91 U Ground Assault
 92 M Lazav, Dimir Mastermind
 93 R Living Twister
 94 R Mina and Denn, Wildborn
-95 U Naya Charm 
+95 U Naya Charm
 96 R Notion Thief
-97 M Omnath, Locus of Rage 
+97 M Omnath, Locus of Rage
 98 R Oona, Queen of the Fae
-99 R Silumgar's Command 
+99 R Silumgar's Command
 100 U Soul Manipulation
 101 R Spinal Embrace
 102 U Struggle // Survive
 103 R Sygg, River Cutthroat
-104 U Sylvan Reclamation 
-105 U Treacherous Terrain 
-106 C Arcane Signet 
+104 U Sylvan Reclamation
+105 U Treacherous Terrain
+106 C Arcane Signet
 107 R Blackblade Reforged
 108 R Bonehoard
 109 C Commander's Sphere
 110 U Dimir Keyrune
 111 C Dimir Locket
-112 U Dimir Signet 
-113 U Heirloom Blade 
+112 U Dimir Signet
+113 U Heirloom Blade
 114 C Mind Stone
 115 R Obelisk of Urd
-116 U Sandstone Oracle 
+116 U Sandstone Oracle
 117 C Scaretiller
 118 R Scytheclaw
 119 R Seer's Sundial
-120 U Sol Ring 
+120 U Sol Ring
 121 U Blighted Woodland
 122 C Boros Garrison
 123 C Boros Guildgate

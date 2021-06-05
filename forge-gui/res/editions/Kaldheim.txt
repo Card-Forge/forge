@@ -9,6 +9,7 @@ BoosterCovers=3
 Booster=10 Common:!fromSheet("KHM Snow Lands"):fromsheet("KHM cards"), 3 Uncommon:fromSheet("KHM cards"), 1 RareMythic:fromSheet("KHM cards"), 1 fromSheet("KHM Snow Lands")
 Prerelease=6 Boosters, 1 RareMythic+
 #BoosterBox=36 Boosters, 1 fromSheet('KHM buy a box')+
+ScryfallCode=KHM
 
 [cards]
 1 C Axgard Braggart

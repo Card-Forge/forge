@@ -3,6 +3,7 @@ Code=P10E
 Date=2007-07-13
 Name=Tenth Edition Promos
 Type=Promos
+ScryfallCode=P10E
 
 [cards]
 35 R Reya Dawnbringer

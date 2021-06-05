@@ -6,6 +6,7 @@ Type=Other
 Booster=13 Common:fromSheet("CMR cards"), 3 fromSheet("CMR Non-Legendary Uncommons"), 1 fromSheet("CMR Non-Legendary RareMythics"), 1 fromSheet("CMR Foils"), 2 fromSheet("CMR Legendaries")
 Foil=NotSupported
 DoublePick=Always
+ScryfallCode=CMR
 
 [cards]
 1 C The Prismatic Piper

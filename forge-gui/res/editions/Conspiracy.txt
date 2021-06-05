@@ -7,6 +7,7 @@ MciCode=cns
 Type=Other
 BoosterCovers=3
 Booster=10 Common:!fromSheet("CNS Draft Matters"), 3 Uncommon:!fromSheet("CNS Draft Matters"), 1 RareMythic:!fromSheet("CNS Draft Matters"), 1 fromSheet("CNS Draft Matters")
+ScryfallCode=CNS
 
 [cards]
 1 U Advantageous Proclamation

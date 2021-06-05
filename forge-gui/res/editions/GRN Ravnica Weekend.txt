@@ -3,15 +3,16 @@ Code=PRWK
 Date=2018-11-09
 Name=GRN Ravnica Weekend
 Type=Promos
+ScryfallCode=PRWK
 
 [cards]
-1 C Island
-2 C Swamp
-3 C Island
-4 C Mountain
-5 C Swamp
-6 C Forest
-7 C Mountain
-8 C Plains
-9 C Forest
-10 C Plains
+A01 C Island
+A02 C Swamp
+A03 C Island
+A04 C Mountain
+A05 C Swamp
+A06 C Forest
+A07 C Mountain
+A08 C Plains
+A09 C Forest
+A10 C Plains

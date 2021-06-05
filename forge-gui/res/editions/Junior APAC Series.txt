@@ -3,11 +3,12 @@ Code=PJAS
 Date=2006-01-01
 Name=Junior APAC Series
 Type=Promos
+ScryfallCode=PJAS
 
 [cards]
-6 R Sakura-Tribe Elder
-7 R Soltari Priest
-8 R Glorious Anthem
-9 R Shard Phoenix
-10 R Whirling Dervish
-11 R Elvish Champion
+1U06 R Sakura-Tribe Elder
+1U07 R Soltari Priest
+1U08 R Glorious Anthem
+2U06 R Shard Phoenix
+2U07 R Whirling Dervish
+2U08 R Elvish Champion

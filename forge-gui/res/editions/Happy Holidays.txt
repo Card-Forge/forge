@@ -4,6 +4,7 @@ Date=2006-12-31
 Name=Happy Holidays
 Type=Funny
 Border=Silver
+ScryfallCode=HHO
 
 [cards]
 6 R Fruitcake Elemental

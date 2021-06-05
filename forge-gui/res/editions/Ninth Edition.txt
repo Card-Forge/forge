@@ -10,6 +10,7 @@ BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 Rare, 1 BasicLand
 FoilAlwaysInCommonSlot=False
 ChaosDraftThemes=CORE_SET
+ScryfallCode=9ED
 
 [cards]
 317 R Adarkar Wastes

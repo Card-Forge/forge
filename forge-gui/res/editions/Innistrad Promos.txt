@@ -3,6 +3,7 @@ Code=PISD
 Date=2011-01-01
 Name=Innistrad Promos
 Type=Promos
+ScryfallCode=PISD
 
 [cards]
 13 R Elite Inquisitor

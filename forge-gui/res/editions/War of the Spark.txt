@@ -9,6 +9,7 @@ BoosterCovers=3
 Booster=10 Common:!fromSheet("WAR Secret Cards"), 3 Uncommon:!fromSheet("WAR Secret Cards"), 1 RareMythic:!fromSheet("WAR Secret Cards"), 1 BasicLand
 BoosterMustContain=Planeswalker
 ChaosDraftThemes=RAVNICA
+ScryfallCode=WAR
 
 [cards]
 1 R Karn, the Great Creator
@@ -342,4 +343,3 @@ voja_friend_to_elves
 w_0_3_wall_defender
 w_2_2_soldier_vigilance
 w_4_4_angel_flying_vigilance
-

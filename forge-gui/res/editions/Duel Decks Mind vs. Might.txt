@@ -5,6 +5,7 @@ Name=Duel Decks: Mind vs. Might
 Code2=DDS
 MciCode=dds
 Type=Duel_Decks
+ScryfallCode=DDS
 
 [cards]
 1 M Jhoira of the Ghitu

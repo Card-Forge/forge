@@ -4,6 +4,7 @@ Date=2018-04-06
 Name=Duel Decks: Elves vs. Inventors
 MciCode=ddu
 Type=Duel_Decks
+ScryfallCode=DDU
 
 [cards]
 1 M Ezuri, Renegade Leader

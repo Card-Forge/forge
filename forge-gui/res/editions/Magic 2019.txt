@@ -8,6 +8,7 @@ Type=Core
 BoosterCovers=5
 Booster=10 Common:!fromSheet("M19 Secret Cards"), 3 Uncommon:!fromSheet("M19 Secret Cards"), 1 RareMythic:!fromSheet("M19 Secret Cards"), 1 fromSheet("M19 Lands")
 ChaosDraftThemes=CORE_SET
+ScryfallCode=M19
 
 [cards]
 1 U Aegis of the Heavens

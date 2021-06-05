@@ -3,6 +3,7 @@ Code=J17
 Date=2017-01-01
 Name=Judge Gift Cards 2017
 Type=Promos
+ScryfallCode=J17
 
 [cards]
 1 M Avacyn, Angel of Hope

@@ -3,6 +3,7 @@ Code=PWPN
 Date=2008-10-01
 Name=Wizards Play Network 2008
 Type=Promos
+ScryfallCode=PWPN
 
 [cards]
 21 R Sprouting Thrinax

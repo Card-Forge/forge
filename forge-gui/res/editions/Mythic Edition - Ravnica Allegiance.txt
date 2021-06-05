@@ -4,16 +4,17 @@ Date=2019-01-24
 Name=Mythic Edition - Ravnica Allegiance
 MciCode=med
 Type=Other
+ScryfallCode=med
 
 [cards]
-9 M Karn, Scion of Urza
-10 M Tamiyo, the Moon Sage
-11 M Sorin Markov
-12 M Jaya Ballard
-13 M Ajani, Mentor of Heroes
-14 M Dack Fayden
-15 M Domri, Chaos Bringer
-16 M Kaya, Orzhov Usurper
+RA1 M Karn, Scion of Urza
+RA2 M Tamiyo, the Moon Sage
+RA3 M Sorin Markov
+RA4 M Jaya Ballard
+RA5 M Ajani, Mentor of Heroes
+RA6 M Dack Fayden
+RA7 M Domri, Chaos Bringer
+RA8 M Kaya, Orzhov Usurper
 
 [tokens]
 c_0_0_a_construct_total_artifacts

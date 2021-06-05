@@ -3,6 +3,7 @@ Code=ANB
 Date=2020-08-13
 Name=Arena Beginner Set
 Type=Online
+ScryfallCode=ANB
 
 [cards]
 89 U Affectionate Indrik

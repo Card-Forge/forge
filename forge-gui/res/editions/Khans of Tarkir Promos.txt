@@ -3,6 +3,7 @@ Code=PKTK
 Date=2014-09-27
 Name=Khans of Tarkir Promos
 Type=Promos
+ScryfallCode=PKTK
 
 [cards]
 134 U Heir of the Wilds

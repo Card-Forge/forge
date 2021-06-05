@@ -3,7 +3,8 @@ Code=PPLC
 Date=2007-02-02
 Name=Planar Chaos Promos
 Type=Promos
+ScryfallCode=PPLC
 
 [cards]
-151 R Hedge Troll
-161 R Oros, the Avenger
+151★ R Hedge Troll
+161★ R Oros, the Avenger

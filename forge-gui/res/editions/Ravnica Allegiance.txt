@@ -8,6 +8,7 @@ Type=Expansion
 BoosterCovers=5
 Booster=10 Common:!fromSheet("RNA Secret Cards"), 3 Uncommon:!fromSheet("RNA Secret Cards"), 1 RareMythic:!fromSheet("RNA Secret Cards"), 1 fromSheet("RNA Lands")
 ChaosDraftThemes=RAVNICA
+ScryfallCode=RNA
 
 [cards]
 1 M Angel of Grace

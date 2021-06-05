@@ -3,6 +3,7 @@ Code=F15
 Date=2015-01-01
 Name=Friday Night Magic 2015
 Type=Promos
+ScryfallCode=F15
 
 [cards]
 1 R Frenzied Goblin
