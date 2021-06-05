@@ -71,6 +71,8 @@ public class Untap extends Phase {
 
         final Player turn = game.getPhaseHandler().getPlayerTurn();
         Untap.doPhasing(turn);
+ 
+        game.getAction().checkStaticAbilities();
 
         doUntap();
     }

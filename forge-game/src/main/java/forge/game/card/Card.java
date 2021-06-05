@@ -4609,8 +4609,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             setDirectlyPhasedOut(direct);
         }
 
-        if (hasCardAttachments()) {
-            for (final Card eq : getAttachedCards()) {
+        // CR 702.25g
+        if (!getAllAttachedCards().isEmpty()) {
+            for (final Card eq : getAllAttachedCards()) {
                 if (eq.isPhasedOut() == phasingIn) {
                     eq.phase(fromUntapStep, false);
                 }
@@ -4627,7 +4628,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     private boolean switchPhaseState(final boolean fromUntapStep) {
-
         if (phasedOut && hasKeyword("CARDNAME can't phase in.")) {
             return false;
         }
@@ -4646,6 +4646,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             // If this is currently PhasedIn, it's about to phase out.
             // Run trigger before it does because triggers don't work with phased out objects
             getGame().getTriggerHandler().runTrigger(TriggerType.PhaseOut, runParams, false);
+            // when it doesn't exist the game will no longer see it as tapped
+            runUntapCommands();
+            // TODO need to run UntilHostLeavesPlay commands but only when worded "for as long as"
         }
 
         setPhasedOut(!phasedOut);
@@ -4659,6 +4662,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             getGame().getTriggerHandler().registerActiveTrigger(this, false);
             getGame().getTriggerHandler().runTrigger(TriggerType.PhaseIn, runParams, false);
         }
+ 
+        game.updateLastStateForCard(this);
 
         return true;
     }
@@ -5769,11 +5774,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final boolean canBeDestroyed() {
-        return isInPlay() && (!hasKeyword(Keyword.INDESTRUCTIBLE) || (isCreature() && getNetToughness() <= 0));
+        return isInPlay() && !isPhasedOut() && (!hasKeyword(Keyword.INDESTRUCTIBLE) || (isCreature() && getNetToughness() <= 0));
     }
 
     public final boolean canBeSacrificed() {
-        return isInPlay() && !this.isPhasedOut() && !hasKeyword("CARDNAME can't be sacrificed.");
+        return isInPlay() && !isPhasedOut() && !hasKeyword("CARDNAME can't be sacrificed.");
     }
 
     @Override

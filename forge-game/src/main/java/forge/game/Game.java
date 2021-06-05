@@ -756,7 +756,7 @@ public class Game {
         // Rule 800.4 Losing a Multiplayer game
         CardCollectionView cards = this.getCardsInGame();
         boolean planarControllerLost = false;
-        boolean isMultiplayer = this.getPlayers().size() > 2;
+        boolean isMultiplayer = getPlayers().size() > 2;
 
         // 702.142f & 707.9
         // If a player leaves the game, all face-down cards that player owns must be revealed to all players.
@@ -793,16 +793,16 @@ public class Game {
                     }
                     getAction().ceaseToExist(c, false);
                     // CR 603.2f owner of trigger source lost game
-                    triggerHandler.clearDelayedTrigger(c);
+                    getTriggerHandler().clearDelayedTrigger(c);
                 } else {
                     // return stolen permanents
-                    if (c.getController().equals(p) && c.isInZone(ZoneType.Battlefield)) {
+                    if ((c.getController().equals(p) || c.getZone().getPlayer().equals(p)) && c.isInZone(ZoneType.Battlefield)) {
                         c.removeTempController(p);
                         getAction().controllerChangeZoneCorrection(c);
                     }
                     c.removeTempController(p);
                     if (c.getController().equals(p)) {
-                        this.getAction().exile(c, null);
+                        getAction().exile(c, null);
                     }
                 }
             } else {
@@ -830,7 +830,7 @@ public class Game {
         }
 
         // Remove leftover items from
-        this.getStack().removeInstancesControlledBy(p);
+        getStack().removeInstancesControlledBy(p);
 
         getTriggerHandler().onPlayerLost(p);
 
