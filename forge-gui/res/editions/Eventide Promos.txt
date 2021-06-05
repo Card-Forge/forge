@@ -5,5 +5,5 @@ Name=Eventide Promos
 Type=Promos
 
 [cards]
-139 R Figure of Destiny
-157 R Overbeing of Myth
+139★ R Figure of Destiny
+157★ R Overbeing of Myth

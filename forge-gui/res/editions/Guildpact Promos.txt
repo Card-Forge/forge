@@ -5,5 +5,5 @@ Name=Guildpact Promos
 Type=Promos
 
 [cards]
-142 R Djinn Illuminatus
-144 R Gruul Guildmage
+142★ R Djinn Illuminatus
+144★ R Gruul Guildmage

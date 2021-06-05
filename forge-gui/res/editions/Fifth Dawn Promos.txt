@@ -5,4 +5,4 @@ Name=Fifth Dawn Promos
 Type=Promos
 
 [cards]
-131 R Helm of Kaldra
+131★ R Helm of Kaldra

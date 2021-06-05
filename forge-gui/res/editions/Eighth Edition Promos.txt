@@ -5,4 +5,4 @@ Name=Eighth Edition Promos
 Type=Promos
 
 [cards]
-216 R Rukh Egg
+216★ R Rukh Egg
