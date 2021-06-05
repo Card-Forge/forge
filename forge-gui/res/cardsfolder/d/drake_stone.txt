@@ -1,5 +1,5 @@
 Name:Drake Stone
-ManaCost:U
+ManaCost:3 U B
 Types:Planeswalker Stone
 Loyalty:4
 A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumCards$ 1 | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then each player discards a card.
