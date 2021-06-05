@@ -3,6 +3,7 @@ Code=PRW2
 Date=2019-02-16
 Name=RNA Ravnica Weekend
 Type=Promos
+ScryfallCode=PRW2
 
 [cards]
 B01 C Plains

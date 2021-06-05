@@ -3,6 +3,7 @@ Code=PM14
 Date=2013-07-18
 Name=Magic 2014 Promos
 Type=Promos
+ScryfallCode=PM14
 
 [cards]
 21★ C Hive Stirrings

@@ -3,6 +3,7 @@ Code=PDIS
 Date=2006-05-05
 Name=Dissension Promos
 Type=Promos
+ScryfallCode=PDIS
 
 [cards]
 140★ R Avatar of Discord

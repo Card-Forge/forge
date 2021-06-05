@@ -3,6 +3,7 @@ Code=PAVR
 Date=2012-04-28
 Name=Avacyn Restored Promos
 Type=Promos
+ScryfallCode=PAVR
 
 [cards]
 32★ R Restoration Angel

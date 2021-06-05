@@ -3,6 +3,7 @@ Code=PM13
 Date=2012-07-12
 Name=Magic 2013 Promos
 Type=Promos
+ScryfallCode=PM13
 
 [cards]
 118★ R Xathrid Gorgon

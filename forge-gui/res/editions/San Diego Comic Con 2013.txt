@@ -3,6 +3,7 @@ Code=PSDC
 Date=2013-07-18
 Name=San Diego Comic-Con 2013
 Type=Promos
+ScryfallCode=PSDC
 
 [cards]
 1★ M Ajani, Caller of the Pride

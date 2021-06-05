@@ -3,6 +3,7 @@ Code=PSHM
 Date=2008-05-02
 Name=Shadowmoor Promos
 Type=Promos
+ScryfallCode=PSHM
 
 [cards]
 183★ R Demigod of Revenge

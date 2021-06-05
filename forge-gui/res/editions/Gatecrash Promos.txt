@@ -3,6 +3,7 @@ Code=PGTC
 Date=2013-01-26
 Name=Gatecrash Promos
 Type=Promos
+ScryfallCode=PGTC
 
 [cards]
 133★ R Skarrg Goliath

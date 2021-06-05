@@ -3,6 +3,7 @@ Code=PWWK
 Date=2010-04-05
 Name=Worldwake Promos
 Type=Promos
+ScryfallCode=PWWK
 
 [cards]
 38 R Hada Freeblade

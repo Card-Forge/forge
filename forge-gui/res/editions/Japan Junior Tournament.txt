@@ -4,6 +4,7 @@ Date=2003-01-01
 Name=Japan Junior Tournament
 Type=Promos
 CardLang=ja
+ScryfallCode=PJJT
 
 [cards]
 1N03 R Volcanic Hammer

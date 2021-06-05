@@ -3,6 +3,7 @@ Code=PRTR
 Date=2012-10-05
 Name=Return to Ravnica Promos
 Type=Promos
+ScryfallCode=PRTR
 
 [cards]
 120★ R Deadbridge Goliath

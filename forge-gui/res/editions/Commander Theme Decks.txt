@@ -4,6 +4,7 @@ Date=2009-08-25
 Name=Commander Theme Decks
 MciCode=td0
 Type=Online
+ScryfallCode=TD0
 
 [cards]
 A1 C Auramancer

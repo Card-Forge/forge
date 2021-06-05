@@ -3,6 +3,7 @@ Code=HA5
 Date=2021-05-27
 Name=Historic Anthology 5
 Type=Online
+ScryfallCode=HA5
 
 [cards]
 999-CH C Court Homunculus

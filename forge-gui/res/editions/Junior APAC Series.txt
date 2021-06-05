@@ -3,6 +3,7 @@ Code=PJAS
 Date=2006-01-01
 Name=Junior APAC Series
 Type=Promos
+ScryfallCode=PJAS
 
 [cards]
 1U06 R Sakura-Tribe Elder

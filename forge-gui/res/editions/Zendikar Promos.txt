@@ -3,6 +3,7 @@ Code=PZEN
 Date=2009-10-02
 Name=Zendikar Promos
 Type=Promos
+ScryfallCode=PZEN
 
 [cards]
 *9 R Day of Judgment

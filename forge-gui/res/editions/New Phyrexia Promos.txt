@@ -3,6 +3,7 @@ Code=PNPH
 Date=2011-05-12
 Name=New Phyrexia Promos
 Type=Promos
+ScryfallCode=PNPH
 
 [cards]
 42★ R Phyrexian Metamorph

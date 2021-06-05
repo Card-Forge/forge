@@ -3,6 +3,7 @@ Code=PDOM
 Date=2018-04-27
 Name=Dominaria Promos
 Type=Promos
+ScryfallCode=PDOM
 
 [cards]
 60 C Opt

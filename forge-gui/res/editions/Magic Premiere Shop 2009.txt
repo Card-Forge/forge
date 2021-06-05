@@ -4,7 +4,7 @@ Date=2009-01-01
 Name=Magic Premiere Shop 2009
 Type=Promos
 CardLang=ja
-
+ScryfallCode=PMPS09
 
 [cards]
 1 R Plains

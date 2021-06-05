@@ -3,6 +3,7 @@ Code=PM12
 Date=2012-01-01
 Name=Magic 2012 Promos
 Type=Promos
+ScryfallCode=PM12
 
 [cards]
 82★ M Bloodlord of Vaasgoth
