@@ -3,6 +3,7 @@ Code=OVNT
 Date=2003-01-01
 Name=Vintage Championship
 Type=Promos
+ScryfallCode=OVNT
 
 [cards]
 2003 R Black Lotus
@@ -18,13 +19,13 @@ Type=Promos
 2013 R Ancestral Recall
 2014 M Mox Pearl
 2015 M Mox Emerald
-2016 M Mox Jet
-2017 M Mox Sapphire
-2018 M Mox Ruby
-2019 M Black Lotus
-2020 M Ancestral Recall
-2021 M Timetwister
-2022 M Time Walk
-2023 M Mox Pearl
-2024 M Mox Sapphire
-2025 M Mox Jet
+2016EU M Mox Jet
+2016NA M Mox Sapphire
+2017EU M Mox Ruby
+2017NA M Black Lotus
+2018 M Ancestral Recall
+2018A M Timetwister
+2018NA M Time Walk
+2019 M Mox Pearl
+2019A M Mox Sapphire
+2019NA M Mox Jet
