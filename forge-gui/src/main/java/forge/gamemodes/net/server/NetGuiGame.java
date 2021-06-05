@@ -74,7 +74,7 @@ public class NetGuiGame extends AbstractGuiGame {
         updateGameView();
         send(ProtocolMethod.showPromptMessage, playerView, message);
     }
-    
+
     @Override
     public void showPromptMessage(final PlayerView playerView, final String message, final CardView card) {
         updateGameView();
@@ -204,6 +204,11 @@ public class NetGuiGame extends AbstractGuiGame {
     @Override
     public Map<CardView, Integer> assignCombatDamage(final CardView attacker, final List<CardView> blockers, final int damage, final GameEntityView defender, final boolean overrideOrder) {
         return sendAndWait(ProtocolMethod.assignCombatDamage, attacker, blockers, damage, defender, overrideOrder);
+    }
+
+    @Override
+    public Map<GameEntityView, Integer> assignGenericAmount(final CardView effectSource, final Map<GameEntityView, Integer> targets, final int amount, final boolean atLeastOne, final String amountLabel) {
+        return sendAndWait(ProtocolMethod.divideShield, effectSource, targets, amount, atLeastOne, amountLabel);
     }
 
     @Override

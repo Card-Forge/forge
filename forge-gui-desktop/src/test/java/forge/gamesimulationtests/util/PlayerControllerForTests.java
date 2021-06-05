@@ -147,6 +147,12 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
+    public Map<GameEntity, Integer> divideShield(Card effectSource, Map<GameEntity, Integer> affected, int shieldAmount) {
+        throw new IllegalStateException("Erring on the side of caution here...");
+    }
+
+
+    @Override
     public Integer announceRequirements(SpellAbility ability, String announce) {
         throw new IllegalStateException("Erring on the side of caution here...");
     }

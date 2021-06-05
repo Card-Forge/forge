@@ -27,7 +27,7 @@ public abstract class DamagePreventEffectBase extends SpellAbilityEffect {
         final String image = hostCard.getImageKey();
         StringBuilder sb = new StringBuilder("Event$ DamageDone | ActiveZones$ Command | ValidTarget$ ");
         sb.append((o instanceof Card ? "Card.IsRemembered" : "Player.IsRemembered"));
-        sb.append(" | PreventionEffect$ True | Description$ Prevent the next ").append(numDam).append(" damage.");
+        sb.append(" | PreventionEffect$ NextN | Description$ Prevent the next ").append(numDam).append(" damage.");
         String effect = "DB$ ReplaceDamage | Amount$ ShieldAmount";
 
         final Card eff = createEffect(sa, player, name, image);

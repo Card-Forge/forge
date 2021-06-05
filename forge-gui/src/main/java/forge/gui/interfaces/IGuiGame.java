@@ -69,6 +69,7 @@ public interface IGuiGame {
     void setPanelSelection(CardView hostCard);
     SpellAbilityView getAbilityToPlay(CardView hostCard, List<SpellAbilityView> abilities, ITriggerEvent triggerEvent);
     Map<CardView, Integer> assignCombatDamage(CardView attacker, List<CardView> blockers, int damage, GameEntityView defender, boolean overrideOrder);
+    Map<GameEntityView, Integer> assignGenericAmount(CardView effectSource, Map<GameEntityView, Integer> target, int amount, final boolean atLeastOne, final String amountLabel);
 
     void message(String message);
     void message(String message, String title);
