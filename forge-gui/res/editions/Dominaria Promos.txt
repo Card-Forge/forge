@@ -5,7 +5,6 @@ Name=Dominaria Promos
 Type=Promos
 
 [cards]
-33 U Serra Angel
 60 C Opt
 76 R Zahid, Djinn of the Lamp
 81 U Cast Down
@@ -13,3 +12,4 @@ Type=Promos
 182 R Steel Leaf Champion
 204 U Shanna, Sisay's Legacy
 249 U Zhalfirin Void
+33c U Serra Angel
