@@ -6,6 +6,7 @@ Alias=PRO
 Code2=MBP
 MciCode=mbp
 Type=Other
+ScryfallCode=PRM
 
 [cards]
 35958 S Arena

@@ -3,6 +3,7 @@ Code=SHC
 Date=1995-01-27
 Name=Shattered Chains
 Type=Other
+ScryfallCode=PHPR
 
 [cards]
 4 C Giant Badger

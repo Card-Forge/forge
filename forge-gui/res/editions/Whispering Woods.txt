@@ -3,6 +3,7 @@ Code=WW
 Date=1994-11-23
 Name=Whispering Woods
 Type=Other
+ScryfallCode=PHPR
 
 [cards]
 3 C Windseeker Centaur
