@@ -1708,6 +1708,9 @@ public class CardProperty {
             }
         } else if (property.startsWith("set")) {
             final String setCode = property.substring(3, 6);
+            if (card.getName().isEmpty()) {
+                return false;
+            }
             final PaperCard setCard = StaticData.instance().getCommonCards().getCardFromEdition(card.getName(), CardDb.SetPreference.Earliest);
             if (setCard != null && !setCard.getEdition().equals(setCode)) {
                 return false;
