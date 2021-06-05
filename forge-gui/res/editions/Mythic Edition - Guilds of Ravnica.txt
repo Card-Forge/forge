@@ -4,16 +4,17 @@ Date=2018-10-03
 Name=Mythic Edition - Guilds of Ravnica
 MciCode=med
 Type=Other
+ScryfallCode=med
 
 [cards]
-1 M Elspeth, Knight-Errant
-2 M Liliana, the Last Hope
-3 M Daretti, Ingenious Iconoclast
-4 M Nicol Bolas, Planeswalker
-5 M Ral, Izzet Viceroy
-6 M Teferi, Hero of Dominaria
-7 M Tezzeret, Agent of Bolas
-8 M Vraska, Golgari Queen
+GR1 M Elspeth, Knight-Errant
+GR2 M Liliana, the Last Hope
+GR3 M Daretti, Ingenious Iconoclast
+GR4 M Nicol Bolas, Planeswalker
+GR5 M Ral, Izzet Viceroy
+GR6 M Teferi, Hero of Dominaria
+GR7 M Tezzeret, Agent of Bolas
+GR8 M Vraska, Golgari Queen
 
 [tokens]
 w_1_1_soldier
