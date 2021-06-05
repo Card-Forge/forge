@@ -33,6 +33,8 @@ public enum CounterEnumType {
 
     LOYALTY("LOYAL", 198, 198, 198),
 
+    ACORN("ACORN", 139,69,19),
+
     AEGIS("AEGIS", 207, 207, 207),
 
     AGE("AGE", 255, 137, 57),
