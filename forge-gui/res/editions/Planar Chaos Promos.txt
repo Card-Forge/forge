@@ -5,5 +5,5 @@ Name=Planar Chaos Promos
 Type=Promos
 
 [cards]
-151 R Hedge Troll
-161 R Oros, the Avenger
+151★ R Hedge Troll
+161★ R Oros, the Avenger
