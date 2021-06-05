@@ -4,6 +4,7 @@ Date=1994-07-15
 Name=DragonCon 1994
 Border=Black
 Type=Other
+ScryfallCode=PDRC
 
 [cards]
 1 S Nalathni Dragon
