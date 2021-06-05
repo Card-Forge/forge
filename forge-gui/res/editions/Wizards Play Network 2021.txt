@@ -1,0 +1,8 @@
+[metadata]
+Code=PWP21
+Date=2021-06-18
+Name=Wizards Play Network 2021
+Type=Promos
+
+[cards]
+1 R Fabled Passage

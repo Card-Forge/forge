@@ -1,0 +1,10 @@
+Name:Serra's Emissary
+ManaCost:4 W W W
+Types:Creature Angel
+PT:7/7
+K:Flying
+K:ETBReplacement:Other:ChooseCT
+SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Card | AILogic$ MostProminentOppControls | SpellDescription$ As CARDNAME enters the battlefield, choose a card type.
+S:Mode$ Continuous | Affected$ You,Creature.YouCtrl | AddKeyword$ Protection from ChosenType | Description$ You and creatures you control have protection from the chosen type.
+SVar:PlayMain1:TRUE
+Oracle:As Serra's Emissary enters the battlefield, choose a card type. \nYou and creatures you control have protection from the chosen type.

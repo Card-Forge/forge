@@ -2,7 +2,7 @@ Name:Skilled Animator
 ManaCost:2 U
 Types:Creature Human Artificer
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ When CARDNAME enters the battlefield, target artifact you control becomes an artifact creature with base power and toughness 5/5 for as long as CARDNAME remains on the battlefield.
-SVar:TrigAnimate:DB$ Animate | ValidTgts$ Artifact.YouCtrl | TgtPrompt$ Select target artifact you control | Power$ 5 | Toughness$ 5 | Types$ Artifact,Creature | UntilHostLeavesPlay$ True
+SVar:TrigAnimate:DB$ Animate | ValidTgts$ Artifact.YouCtrl | TgtPrompt$ Select target artifact you control | Power$ 5 | Toughness$ 5 | Types$ Artifact,Creature | Duration$ UntilHostLeavesPlay
 SVar:PlayMain1:TRUE
 Oracle:When Skilled Animator enters the battlefield, target artifact you control becomes an artifact creature with base power and toughness 5/5 for as long as Skilled Animator remains on the battlefield.
 PT:1/3

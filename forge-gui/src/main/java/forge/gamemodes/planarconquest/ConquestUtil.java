@@ -12,7 +12,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
-import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.CardType;
@@ -187,13 +186,9 @@ public class ConquestUtil {
     public static Iterable<PaperCard> getStartingPlaneswalkerOptions(final PaperCard startingCommander) {
         final byte colorIdentity = startingCommander.getRules().getColorIdentity().getColor();
         final List<String> selected = Lists.newArrayList();
-        return Iterables.filter(FModel.getMagicDb().getCommonCards().getUniqueCards(), new Predicate<PaperCard>() {
+        return Iterables.filter(FModel.getMagicDb().getCommonCards().getAllNonPromosNonReprintsNoAlt(), new Predicate<PaperCard>() {
             @Override
             public boolean apply(PaperCard card) {
-                if (FModel.getMagicDb().getEditions().get(card.getEdition()).getType() == CardEdition.Type.PROMOS
-                    || FModel.getMagicDb().getEditions().get(card.getEdition()).getType() == CardEdition.Type.REPRINT) {
-                    return false; // exclude promos from the starting planeswalker set
-                }
                 if (selected.contains(card.getName())) {
                     return false;
                 }

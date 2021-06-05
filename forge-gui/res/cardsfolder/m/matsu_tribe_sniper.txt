@@ -5,6 +5,6 @@ PT:1/1
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature with flying.
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ Whenever CARDNAME deals damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.
 SVar:TrigTap:DB$ Tap | Defined$ TriggeredTarget | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | Defined$ TriggeredTarget | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True | IsCurse$ True
+SVar:DBPump:DB$ Pump | Defined$ TriggeredTarget | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent | IsCurse$ True
 SVar:HasCombatEffect:TRUE
 Oracle:{T}: Matsu-Tribe Sniper deals 1 damage to target creature with flying.\nWhenever Matsu-Tribe Sniper deals damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.

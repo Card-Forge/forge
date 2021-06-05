@@ -1,7 +1,10 @@
 package forge.game.player;
 
 import forge.game.card.Card;
+import forge.game.card.CardFactoryUtil;
 import forge.game.keyword.KeywordInterface;
+import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementHandler;
 import forge.game.staticability.StaticAbility;
 
 public class PlayerFactoryUtil {
@@ -39,6 +42,24 @@ public class PlayerFactoryUtil {
     }
 
     public static void addReplacementEffect(final KeywordInterface inst, Player player) {
+        String keyword = inst.getOriginal();
+        String effect = null;
+
+        if (keyword.startsWith("Protection")) {
+            String validSource = CardFactoryUtil.getProtectionValid(keyword, true);
+
+            effect = "Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ You";
+            if (!validSource.isEmpty()) {
+                effect += " | ValidSource$ " + validSource;
+            }
+            effect += " | Secondary$ True | Description$ " + keyword;
+        }
+
+        if (effect != null) {
+            final Card card = player.getKeywordCard();
+            ReplacementEffect re = ReplacementHandler.parseReplacement(effect, card, false, card.getCurrentState());
+            inst.addReplacement(re);
+        }
     }
 
     public static void addSpellAbility(final KeywordInterface inst, Player player) {

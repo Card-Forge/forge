@@ -3,6 +3,6 @@ ManaCost:RG RG
 Types:Creature Goblin Shaman
 PT:2/2
 K:CARDNAME can't be countered.
-A:AB$ Pump | Cost$ RG | ValidTgts$ Card.inZoneStack | TgtZone$ Stack | PumpZone$ Stack | KW$ HIDDEN This spell can't be countered. | SpellDescription$ Target spell can't be countered.
+A:AB$ Pump | Cost$ RG | ValidTgts$ Card.inZoneStack | TgtZone$ Stack | PumpZone$ Stack | KW$ HIDDEN CARDNAME can't be countered. | SpellDescription$ Target spell can't be countered.
 AI:RemoveDeck:All
 Oracle:This spell can't be countered.\n{R/G}: Target spell can't be countered.

@@ -23,19 +23,20 @@ import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Localizer;
+import io.sentry.Sentry;
+import io.sentry.event.BreadcrumbBuilder;
 
 public class ManaEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
         final Card card = sa.getHostCard();
-
         AbilityManaPart abMana = sa.getManaPart();
+        final List<Player> tgtPlayers = getTargetPlayers(sa);
 
         // Spells are not undoable
-        sa.setUndoable(sa.isAbility() && sa.isUndoable());
+        sa.setUndoable(sa.isAbility() && sa.isUndoable() && tgtPlayers.size() < 2);
 
-        final List<Player> tgtPlayers = getTargetPlayers(sa);
         final boolean optional = sa.hasParam("Optional");
         final Game game = sa.getActivatingPlayer().getGame();
 
@@ -166,7 +167,8 @@ public class ManaEffect extends SpellAbilityEffect {
                     abMana.setExpressChoice(sb.toString());
                 } else if (type.startsWith("EachColorAmong")) {
                     final String res = type.split("_")[1];
-                    final CardCollection list = CardLists.getValidCards(card.getGame().getCardsIn(ZoneType.Battlefield),
+                    final ZoneType zone = type.startsWith("EachColorAmong_") ? ZoneType.Battlefield : ZoneType.smartValueOf(type.split("_")[0].substring(14));
+                    final CardCollection list = CardLists.getValidCards(card.getGame().getCardsIn(zone),
                             res, sa.getActivatingPlayer(), card, sa);
                     byte colors = 0;
                     for (Card c : list) {
@@ -199,13 +201,21 @@ public class ManaEffect extends SpellAbilityEffect {
                     }
                     abMana.setExpressChoice(sb.toString().trim());
                 }
+            }
 
-                if (abMana.getExpressChoice().isEmpty()) {
-                    System.out.println("AbilityFactoryMana::manaResolve() - special mana effect is empty for " + sa.getHostCard().getName());
-                }
-            }    
+            String mana = GameActionUtil.generatedMana(sa);
 
-            abMana.produceMana(GameActionUtil.generatedMana(sa), p, sa);
+            // this can happen when mana is based on criteria that didn't match
+            if (mana.isEmpty()) {
+                String msg = "AbilityFactoryMana::manaResolve() - special mana effect is empty for";
+                Sentry.getContext().recordBreadcrumb(
+                        new BreadcrumbBuilder().setMessage(msg)
+                        .withData("Card", card.getName()).withData("SA", sa.toString()).build()
+                );
+                continue;
+            }
+
+            abMana.produceMana(mana, p, sa);
         }
 
         // Only clear express choice after mana has been produced

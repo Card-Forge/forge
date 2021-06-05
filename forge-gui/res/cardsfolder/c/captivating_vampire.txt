@@ -4,7 +4,7 @@ Types:Creature Vampire
 PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Vampire+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Vampire creatures you control get +1/+1.
 A:AB$ GainControl | Cost$ tapXType<5/Vampire> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ Animate | SpellDescription$ Gain control of target creature. It becomes a Vampire in addition to its other types.
-SVar:Animate:DB$Animate | Defined$ Targeted | Types$ Vampire | Permanent$ True
+SVar:Animate:DB$Animate | Defined$ Targeted | Types$ Vampire | Duration$ Permanent
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/captivating_vampire.jpg
 Oracle:Other Vampire creatures you control get +1/+1.\nTap five untapped Vampires you control: Gain control of target creature. It becomes a Vampire in addition to its other types.

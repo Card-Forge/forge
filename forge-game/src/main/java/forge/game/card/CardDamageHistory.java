@@ -2,8 +2,10 @@ package forge.game.card;
 
 
 import java.util.List;
+import java.util.Map;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import forge.game.GameEntity;
 import forge.game.player.Player;
@@ -17,9 +19,7 @@ public class CardDamageHistory {
     private boolean creatureAttackedThisTurn = false;
     private boolean creatureAttackedThisCombat = false;
     private boolean creatureBlockedThisCombat = false;
-    private boolean creatureBlockedThisTurn = false;
     private boolean creatureGotBlockedThisCombat = false;
-    private boolean creatureGotBlockedThisTurn = false;
     private int attacksThisTurn = 0;
 
     private final List<Player> creatureAttackedLastTurnOf = Lists.newArrayList();
@@ -27,10 +27,15 @@ public class CardDamageHistory {
     private final List<Player> NotBlockedSinceLastUpkeepOf = Lists.newArrayList();
     private final List<Player> NotBeenBlockedSinceLastUpkeepOf = Lists.newArrayList();
 
-    private final List<GameEntity> damagedThisCombat = Lists.newArrayList();
-    private final List<GameEntity> damagedThisTurn = Lists.newArrayList();
-    private final List<GameEntity> damagedThisTurnInCombat = Lists.newArrayList();
-    private final List<GameEntity> damagedThisGame = Lists.newArrayList();
+    private final Map<GameEntity, Integer> damagedThisCombat = Maps.newHashMap();
+    private final Map<GameEntity, Integer> damagedThisTurn = Maps.newHashMap();
+    private final Map<GameEntity, Integer> damagedThisTurnInCombat = Maps.newHashMap();
+    private final Map<GameEntity, Integer> damagedThisGame = Maps.newHashMap();
+    
+    public final boolean getHasdealtDamagetoAny() {
+        return !damagedThisGame.isEmpty();
+    }
+
     // used to see if an attacking creature with a triggering attack ability
     // triggered this phase:
     /**
@@ -210,9 +215,6 @@ public class CardDamageHistory {
      */
     public final void setCreatureBlockedThisCombat(final boolean b) {
         this.creatureBlockedThisCombat = b;
-        if (b) {
-            this.setCreatureBlockedThisTurn(true);
-        }
     }
     /**
      * <p>
@@ -226,27 +228,6 @@ public class CardDamageHistory {
     }
     /**
      * <p>
-     * Setter for the field <code>creatureBlockedThisTurn</code>.
-     * </p>
-     * 
-     * @param b
-     *            a boolean.
-     */
-    public final void setCreatureBlockedThisTurn(final boolean b) {
-        this.creatureBlockedThisTurn = b;
-    }
-    /**
-     * <p>
-     * Getter for the field <code>creatureBlockedThisTurn</code>.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean getCreatureBlockedThisTurn() {
-        return this.creatureBlockedThisTurn;
-    }
-    /**
-     * <p>
      * Setter for the field <code>creatureGotBlockedThisCombat</code>.
      * </p>
      * 
@@ -255,9 +236,6 @@ public class CardDamageHistory {
      */
     public final void setCreatureGotBlockedThisCombat(final boolean b) {
         this.creatureGotBlockedThisCombat = b;
-        if (b) {
-            this.setCreatureGotBlockedThisTurn(true);
-        }
     }
     /**
      * <p>
@@ -269,50 +247,33 @@ public class CardDamageHistory {
     public final boolean getCreatureGotBlockedThisCombat() {
         return this.creatureGotBlockedThisCombat;
     }
-    /**
-     * <p>
-     * Setter for the field <code>creatureGotBlockedThisTurn</code>.
-     * </p>
-     * 
-     * @param b
-     *            a boolean.
-     */
-    public final void setCreatureGotBlockedThisTurn(final boolean b) {
-        this.creatureGotBlockedThisTurn = b;
-    }
-    /**
-     * <p>
-     * Getter for the field <code>creatureGotBlockedThisTurn</code>.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean getCreatureGotBlockedThisTurn() {
-        return this.creatureGotBlockedThisTurn;
-    }
-    public final List<GameEntity> getThisCombatDamaged() {
+    public final Map<GameEntity, Integer> getThisCombatDamaged() {
         return damagedThisCombat;
     }
-    public final List<GameEntity> getThisTurnDamaged() {
+    public final Map<GameEntity, Integer> getThisTurnDamaged() {
         return damagedThisTurn;
     }
-    public final List<GameEntity> getThisTurnCombatDamaged() {
+    public final Map<GameEntity, Integer> getThisTurnCombatDamaged() {
         return damagedThisTurnInCombat;
     }
-    public final List<GameEntity> getThisGameDamaged() {
+    public final Map<GameEntity, Integer> getThisGameDamaged() {
         return damagedThisGame;
     }
     /**
      * TODO: Write javadoc for this method.
      * @param player
      */
-    public void registerCombatDamage(GameEntity entity) {
-        if (!damagedThisCombat.contains(entity)) {
-            damagedThisCombat.add(entity);
+    public void registerCombatDamage(GameEntity entity, int amount) {
+        int old = 0;
+        if (damagedThisCombat.containsKey(entity)) {
+            old = damagedThisCombat.get(entity);
         }
-        if (!damagedThisTurnInCombat.contains(entity)) {
-            damagedThisTurnInCombat.add(entity);
+        damagedThisCombat.put(entity, old + amount);
+        old = 0;
+        if (damagedThisTurnInCombat.containsKey(entity)) {
+            old = damagedThisTurnInCombat.get(entity);
         }
+        damagedThisTurnInCombat.put(entity, old + amount);
     }
     /**
      * TODO: Write javadoc for this method.
@@ -331,13 +292,17 @@ public class CardDamageHistory {
      * TODO: Write javadoc for this method.
      * @param player
      */
-    public void registerDamage(GameEntity entity) {
-        if (!damagedThisTurn.contains(entity)) {
-            damagedThisTurn.add(entity);
+    public void registerDamage(GameEntity entity, int amount) {
+        int old = 0;
+        if (damagedThisTurn.containsKey(entity)) {
+            old = damagedThisTurn.get(entity);
         }
-        if (!damagedThisGame.contains(entity)) {
-            damagedThisGame.add(entity);
+        damagedThisTurn.put(entity, old + amount);
+        old = 0;
+        if (damagedThisGame.containsKey(entity)) {
+            old = damagedThisGame.get(entity);
         }
+        damagedThisGame.put(entity, old + amount);
     }
 
 }

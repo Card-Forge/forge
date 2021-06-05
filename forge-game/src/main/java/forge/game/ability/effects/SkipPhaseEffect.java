@@ -110,11 +110,7 @@ public class SkipPhaseEffect extends SpellAbilityEffect {
                 }
             };
 
-            if (duration.equals("EndOfTurn") || isNextThisTurn) {
-                game.getEndOfTurn().addUntil(endEffect);
-            } else if (duration.equals("UntilTheEndOfYourNextTurn")) {
-                game.getEndOfTurn().addUntilEnd(player, endEffect);
-            }
+            addUntilCommand(sa, endEffect);
         }
         eff.addReplacementEffect(re);
         eff.updateStateForView();

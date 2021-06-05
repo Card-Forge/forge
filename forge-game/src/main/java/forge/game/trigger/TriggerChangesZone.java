@@ -30,7 +30,6 @@ import com.google.common.collect.Sets;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
-import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardUtil;
@@ -139,7 +138,7 @@ public class TriggerChangesZone extends Trigger {
             final String comparator = condition.length < 2 ? "GE1" : condition[1];
             final int referenceValue = AbilityUtils.calculateAmount(host, comparator.substring(2), this);
             final Card triggered = (Card) runParams.get(AbilityKey.Card);
-            final int actualValue = CardFactoryUtil.xCount(triggered, host.getSVar(condition[0]));
+            final int actualValue = AbilityUtils.calculateAmount(triggered, condition[0], this);
             if (!Expressions.compare(actualValue, comparator.substring(0, 2), referenceValue)) {
                 return false;
             }
@@ -161,7 +160,7 @@ public class TriggerChangesZone extends Trigger {
             // need to check the ChangeZone LKI copy for damage, otherwise it'll return 0 for a new object in the new zone
             Card lkiCard = card.getGame().getChangeZoneLKIInfo(card);
 
-            final boolean expr = Expressions.compare(lkiCard.getTotalDamageRecievedThisTurn(), cond, rightSide);
+            final boolean expr = Expressions.compare(lkiCard.getTotalDamageReceivedThisTurn(), cond, rightSide);
             if (!expr) {
                 return false;
             }
@@ -179,7 +178,7 @@ public class TriggerChangesZone extends Trigger {
         /* this trigger only activates for the nth spell you cast this turn */
         if (hasParam("ConditionYouCastThisTurn")) {
             final String compare = getParam("ConditionYouCastThisTurn");
-            List<Card> thisTurnCast = CardUtil.getThisTurnCast("Card", getHostCard());
+            List<Card> thisTurnCast = CardUtil.getThisTurnCast("Card", getHostCard(), this);
             thisTurnCast = CardLists.filterControlledByAsList(thisTurnCast, getHostCard().getController());
 
             // checks which card this spell was the castSA

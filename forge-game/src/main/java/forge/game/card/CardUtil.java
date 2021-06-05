@@ -32,6 +32,7 @@ import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
+import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
@@ -115,7 +116,7 @@ public final class CardUtil {
      * @param src   a Card object
      * @return a CardCollection that matches the given criteria
      */
-    public static List<Card> getThisTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src) {
+    public static List<Card> getThisTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src, final CardTraitBase ctb) {
         List<Card> res = Lists.newArrayList();
         final Game game = src.getGame();
         if (to != ZoneType.Stack) {
@@ -126,8 +127,7 @@ public final class CardUtil {
         else {
             res.addAll(game.getStackZone().getCardsAddedThisTurn(from));
         }
-        res = CardLists.getValidCardsAsList(res, valid, src.getController(), src, null);
-        return res;
+        return CardLists.getValidCardsAsList(res, valid, src.getController(), src, ctb);
     }
 
     /**
@@ -139,7 +139,7 @@ public final class CardUtil {
      * @param src   a Card object
      * @return a CardCollection that matches the given criteria
      */
-    public static List<Card> getLastTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src) {
+    public static List<Card> getLastTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src, final CardTraitBase ctb) {
         List<Card> res = Lists.newArrayList();
         final Game game = src.getGame();
         if (to != ZoneType.Stack) {
@@ -150,16 +150,15 @@ public final class CardUtil {
         else {
             res.addAll(game.getStackZone().getCardsAddedLastTurn(from));
         }
-        res = CardLists.getValidCardsAsList(res, valid, src.getController(), src, null);
-        return res;
+        return CardLists.getValidCardsAsList(res, valid, src.getController(), src, ctb);
     }
 
-    public static List<Card> getThisTurnCast(final String valid, final Card src) {
-        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastThisTurn(), valid, src.getController(), src, null);
+    public static List<Card> getThisTurnCast(final String valid, final Card src, final CardTraitBase ctb) {
+        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastThisTurn(), valid, src.getController(), src, ctb);
     }
 
-    public static List<Card> getLastTurnCast(final String valid, final Card src) {
-        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastLastTurn(), valid, src.getController(), src, null);
+    public static List<Card> getLastTurnCast(final String valid, final Card src, final CardTraitBase ctb) {
+        return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastLastTurn(), valid, src.getController(), src, ctb);
 
     }
 
@@ -222,6 +221,8 @@ public final class CardUtil {
 
         newCopy.getCurrentState().copyFrom(in.getState(in.getFaceupCardStateName()), true);
         if (in.isFaceDown()) {
+            // prevent StackDescription from revealing face
+            newCopy.setName(in.toString());
             newCopy.turnFaceDownNoUpdate();
         }
 
@@ -252,11 +253,16 @@ public final class CardUtil {
         newCopy.setCounters(Maps.newHashMap(in.getCounters()));
 
         newCopy.setColor(in.determineColor().getColor());
+        newCopy.setPhasedOut(in.isPhasedOut());
+
         newCopy.setReceivedDamageFromThisTurn(in.getReceivedDamageFromThisTurn());
-        newCopy.setReceivedDamageFromPlayerThisTurn(in.getReceivedDamageFromPlayerThisTurn());
-        newCopy.setDealtDamageToThisTurn(in.getDealtDamageToThisTurn());
-        newCopy.setDealtDamageToPlayerThisTurn(in.getDealtDamageToPlayerThisTurn());
-        newCopy.getDamageHistory().setCreatureGotBlockedThisTurn(in.getDamageHistory().getCreatureGotBlockedThisTurn());
+        newCopy.setDamageHistory(in.getDamageHistory());
+        for (Card c : in.getBlockedThisTurn()) {
+            newCopy.addBlockedThisTurn(c);
+        }
+        for (Card c : in.getBlockedByThisTurn()) {
+            newCopy.addBlockedByThisTurn(c);
+        }
 
         newCopy.setAttachedCards(getLKICopyList(in.getAttachedCards(), cachedMap));
         newCopy.setEntityAttachedTo(getLKICopy(in.getEntityAttachedTo(), cachedMap));
@@ -266,12 +272,8 @@ public final class CardUtil {
         for (final Card haunter : in.getHauntedBy()) {
             newCopy.addHauntedBy(haunter, false);
         }
-        for (final Object o : in.getRemembered()) {
-            newCopy.addRemembered(o);
-        }
-        for (final Card o : in.getImprintedCards()) {
-            newCopy.addImprintedCard(o);
-        }
+        newCopy.addRemembered(in.getRemembered());
+        newCopy.addImprintedCards(in.getImprintedCards());
 
         for(Table.Cell<Player, CounterType, Integer> cl : in.getEtbCounters()) {
             newCopy.addEtbCounter(cl.getColumnKey(), cl.getValue(), cl.getRowKey());
@@ -322,15 +324,16 @@ public final class CardUtil {
     }
 
     public static CardCollection getRadiance(final SpellAbility sa) {
-        if (!sa.usesTargeting() || !sa.hasParam("Radiance")) {
+        SpellAbility targetSA = sa.getSATargetingCard();
+        if (targetSA == null || !targetSA.usesTargeting() || !targetSA.hasParam("Radiance")) {
             return new CardCollection();
         }
 
-        final Card source = sa.getHostCard();
+        final Card source = targetSA.getHostCard();
         final Game game = source.getGame();
         final CardCollection res = new CardCollection();
-        final String[] valid = sa.getParam("ValidTgts").split(",");
-        final CardCollectionView tgts = sa.getTargets().getTargetCards();
+        final String[] valid = targetSA.getParam("ValidTgts").split(",");
+        final CardCollectionView tgts = targetSA.getTargets().getTargetCards();
 
         byte combinedColor = 0;
         for (Card tgt : tgts) {
@@ -346,7 +349,7 @@ public final class CardUtil {
                 continue;
             }
             for(final Card c : game.getColoredCardsInPlay(MagicColor.toLongString(color))) {
-                if (!res.contains(c) && !tgts.contains(c) && c.isValid(valid, source.getController(), source, sa)) {
+                if (!res.contains(c) && !tgts.contains(c) && c.isValid(valid, source.getController(), source, targetSA)) {
                     res.add(c);
                 }
             }

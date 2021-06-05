@@ -33,6 +33,8 @@ public enum CounterEnumType {
 
     LOYALTY("LOYAL", 198, 198, 198),
 
+    ACORN("ACORN", 139,69,19),
+
     AEGIS("AEGIS", 207, 207, 207),
 
     AGE("AGE", 255, 137, 57),
@@ -64,6 +66,8 @@ public enum CounterEnumType {
     COIN("COIN",255,215,0),
 
     CORPSE("CRPSE", 230, 186, 209),
+
+    CORRUPTION("CRPTN", 210, 121, 210),
 
     CREDIT("CRDIT", 188, 197, 234),
 

@@ -1,7 +1,7 @@
 Name:Barl's Cage
 ManaCost:4
 Types:Artifact
-A:AB$ Pump | Cost$ 3 | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True | IsCurse$ True | SpellDescription$ Target creature doesn't untap during its controller's next untap step.
+A:AB$ Pump | Cost$ 3 | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent | IsCurse$ True | SpellDescription$ Target creature doesn't untap during its controller's next untap step.
 SVar:NonStackingEffect:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barls_cage.jpg
 Oracle:{3}: Target creature doesn't untap during its controller's next untap step.

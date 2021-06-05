@@ -1,0 +1,10 @@
+Name:Rise and Shine
+ManaCost:1 U
+Types:Sorcery
+A:SP$ Animate | ValidTgts$ Artifact.nonCreature+YouCtrl | TgtPrompt$ Select target noncreature artifact you control | Types$ Artifact,Creature | Duration$ Permanent | Power$ 0 | Toughness$ 0 | RememberAnimated$ True | SubAbility$ DBPutCounter | StackDescription$ {c:Targeted} becomes a 0/0 artifact creature. | SpellDescription$ Target noncreature artifact you control becomes a 0/0 artifact creature. Put four +1/+1 counters on each artifact that became a creature this way.
+A:SP$ AnimateAll | Cost$ 4 U U | ValidCards$ Artifact.nonCreature+YouCtrl | Types$ Artifact,Creature | Duration$ Permanent | Power$ 0 | Toughness$ 0 | PrecostDesc$ Overload | CostDesc$ {4}{U}{U} | NonBasicSpell$ True | RememberAnimated$ True | SubAbility$ DBPutCounter | StackDescription$ Each noncreature artifact {p:You} controls becomes a 0/0 artifact creature. | SpellDescription$ (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ 4 | SubAbility$ DBCleanup | StackDescription$ {p:You} puts four +1/+1 counters on each artifact that became a creature this way. | SpellDescription$ Put four +1/+1 counters on each artifact that became a creature this way.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Counters
+DeckNeeds:Type$Artifact
+Oracle:Target noncreature artifact you control becomes a 0/0 artifact creature. Put four +1/+1 counters on each artifact that became a creature this way.\nOverload {4}{U}{U} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")

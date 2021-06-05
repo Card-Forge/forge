@@ -79,7 +79,7 @@ public class EffectAi extends SpellAbilityAi {
                 if (!game.getStack().isEmpty()) {
                     return false;
                 }
-                if (game.getPhaseHandler().isPreventCombatDamageThisTurn()) {
+                if (game.getReplacementHandler().isPreventCombatDamageThisTurn()) {
                     return false;
                 }
                 if (!ComputerUtilCombat.lifeInDanger(ai, game.getCombat())) {

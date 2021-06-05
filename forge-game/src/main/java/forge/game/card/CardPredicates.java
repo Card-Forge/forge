@@ -22,6 +22,7 @@ import java.util.Comparator;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
+import forge.card.CardStateName;
 import forge.game.CardTraitBase;
 import forge.game.combat.CombatUtil;
 import forge.game.keyword.Keyword;
@@ -218,6 +219,15 @@ public final class CardPredicates {
     }
 
     public static final Predicate<Card> restriction(final String[] restrictions, final Player sourceController, final Card source, final CardTraitBase spellAbility) {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return (c != null) && c.isValid(restrictions, sourceController, source, spellAbility);
+            }
+        };
+    }
+
+    public static final Predicate<Card> restriction(final String restrictions, final Player sourceController, final Card source, final CardTraitBase spellAbility) {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -607,7 +617,7 @@ public final class CardPredicates {
         public static final Predicate<Card> NON_TOKEN = new Predicate<Card>() {
             @Override
             public boolean apply(Card c) {
-                return !c.isToken();
+                return !(c.isToken() || c.isTokenCard());
             }
         };
         /**
@@ -616,7 +626,7 @@ public final class CardPredicates {
         public static final Predicate<Card> TOKEN = new Predicate<Card>() {
             @Override
             public boolean apply(Card c) {
-                return c.isToken();
+                return c.isToken() || c.isTokenCard();
             }
         };
         /**
@@ -653,7 +663,7 @@ public final class CardPredicates {
         public static final Predicate<Card> LANDS = new Predicate<Card>() {
             @Override
             public boolean apply(Card c) {
-                return c.isLand();
+                return c.isLand() || (!c.isInZone(ZoneType.Battlefield) && c.isModal() && c.getState(CardStateName.Modal).getType().isLand());
             }
         };
         /**

@@ -2,7 +2,7 @@ Name:Consulate Crackdown
 ManaCost:3 W W
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile all artifacts your opponents control until CARDNAME leaves the battlefield.
-SVar:TrigExile:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | ChangeType$ Artifact.OppCtrl | UntilHostLeavesPlay$ True
+SVar:TrigExile:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | ChangeType$ Artifact.OppCtrl | Duration$ UntilHostLeavesPlay
 SVar:PlayMain1:TRUE
 SVar:NeedsToPlayVar:Z GE2
 SVar:Z:Count$Valid Artifact.OppCtrl

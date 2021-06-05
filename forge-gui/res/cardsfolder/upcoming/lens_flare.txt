@@ -1,0 +1,6 @@
+Name:Lens Flare
+ManaCost:4 W
+Types:Instant
+K:Affinity:Artifact
+A:SP$ DealDamage | Cost$ 4 W | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target attacking or blocking creature.
+Oracle:Lens Flare deals 5 damage to target attacking or blocking creature.

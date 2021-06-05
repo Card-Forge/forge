@@ -21,11 +21,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import org.apache.commons.lang3.StringUtils;
+
 import forge.game.Game;
 import forge.game.TriggerReplacementBase;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.phase.PhaseType;
 import forge.game.spellability.SpellAbility;
@@ -228,6 +231,30 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
             desc = TextUtil.fastReplace(desc, "NICKNAME", Lang.getInstance().getNickName(CardTranslation.getTranslatedName(currentName)));
             if (desc.contains("EFFECTSOURCE")) {
                 desc = TextUtil.fastReplace(desc, "EFFECTSOURCE", getHostCard().getEffectSource().toString());
+            }
+            // Add remaining shield amount
+            if (mode == ReplacementType.DamageDone) {
+                SpellAbility repSA = getOverridingAbility();
+                if (repSA != null && repSA.getApi() == ApiType.ReplaceDamage && repSA.hasParam("Amount")) {
+                    String varValue = repSA.getParam("Amount");
+                    if (!StringUtils.isNumeric(varValue)) {
+                        varValue = repSA.getSVar(varValue);
+                        if (varValue.startsWith("Number$")) {
+                            desc += " \nShields remain: " + varValue.substring(7);
+                        }
+                    }
+                }
+                if (repSA != null && repSA.getApi() == ApiType.ReplaceSplitDamage) {
+                    String varValue = repSA.getParamOrDefault("VarName", "1");
+                    if (varValue.equals("1")) {
+                        desc += " \nShields remain: 1";
+                    } else if (!StringUtils.isNumeric(varValue)) {
+                        varValue = repSA.getSVar(varValue);
+                        if (varValue.startsWith("Number$")) {
+                            desc += " \nShields remain: " + varValue.substring(7);
+                        }
+                    }
+                }
             }
             return desc;
         } else {

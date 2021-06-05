@@ -5,7 +5,7 @@ Loyalty:5
 A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You | Planeswalker$ True | SubAbility$ DBMill | SpellDescription$ Create a 2/2 black Zombie creature token. Mill two cards.
 SVar:DBMill:DB$ Mill | Defined$ You | NumCards$ 2
 A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl | AnimateSubAbility$ Animate | TgtPrompt$ Select target creature card from your graveyard | Planeswalker$ True | SpellDescription$ Return target creature card from your graveyard to the battlefield. That creature is a black Zombie in addition to its other colors and types.
-SVar:Animate:DB$ Animate | Defined$ Remembered | Types$ Zombie | Colors$ Black | Permanent$ True
+SVar:Animate:DB$ Animate | Defined$ Remembered | Types$ Zombie | Colors$ Black | Duration$ Permanent
 A:AB$ DestroyAll | Cost$ SubCounter<7/LOYALTY> | Ultimate$ True | ValidCards$ Creature.nonZombie | Planeswalker$ True | SpellDescription$ Destroy all non-Zombie creatures.
 DeckHas:Ability$Token & Ability$Graveyard
 DeckHints:Type$Zombie

@@ -1,0 +1,13 @@
+Name:Dress Down
+ManaCost:1 U
+Types:Enchantment
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
+SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 1
+S:Mode$ Continuous | Affected$ Creature | RemoveAllAbilities$ True | Description$ All creatures lose all abilities.
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of the end step, sacrifice CARDNAME.
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Self
+SVar:EndOfTurnLeavePlay:True
+AI:RemoveDeck:Random
+DeckHas:Ability$Sacrifice
+Oracle:Flash\nWhen Dress Down enters the battlefield, draw a card.\nAll creatures lose all abilities.\nAt the beginning of the end step, sacrifice Dress Down.

@@ -7,14 +7,14 @@ SVar:DBDefLeftEffect:DB$ Effect | EffectOwner$ Remembered | Name$ Raging River L
 SVar:DBDefRightEffect:DB$ Effect | EffectOwner$ Remembered | Name$ Raging River Right | StaticAbilities$ DBCantBlock | ImprintOnHost$ True | Mutable$ True | Duration$ UntilEndOfCombat | SubAbility$ DBDefLeftRight
 SVar:DBCantBlock:Mode$ CantBlockBy | ValidAttacker$ Creature.IsRemembered | ValidBlocker$ Creature.withoutFlying+IsNotImprinted+YouCtrl | EffectZone$ Command
 SVar:DBDefLeftRight:DB$ TwoPiles | Defined$ Remembered | Separator$ Remembered | ValidCards$ Creature.withoutFlying+RememberedPlayerCtrl | Zone$ Battlefield | LeftRightPile$ True | ChosenPile$ DBDefLeftPile | UnchosenPile$ DBDefRightPile | AILogic$ Random | SubAbility$ DBClearImprinted
-SVar:DBDefLeftPile:DB$ Animate | Defined$ Imprinted.namedRaging River Left | ImprintCards$ Remembered | Permanent$ True | SubAbility$ DBLeftPump
-SVar:DBDefRightPile:DB$ Animate | Defined$ Imprinted.namedRaging River Right | ImprintCards$ Remembered | Permanent$ True | SubAbility$ DBRightPump
+SVar:DBDefLeftPile:DB$ Animate | Defined$ Imprinted.namedRaging River Left | ImprintCards$ Remembered | Duration$ Permanent | SubAbility$ DBLeftPump
+SVar:DBDefRightPile:DB$ Animate | Defined$ Imprinted.namedRaging River Right | ImprintCards$ Remembered | Duration$ Permanent | SubAbility$ DBRightPump
 SVar:DBClearImprinted:DB$ Cleanup | ClearImprinted$ True
 SVar:DBAtkLeftRight:DB$ TwoPiles | Defined$ You | Separator$ You | ValidCards$ Creature.attacking+YouCtrl | Zone$ Battlefield | LeftRightPile$ True | ChosenPile$ DBAtkLeftPile | UnchosenPile$ DBAtkRightPile | AILogic$ Random | SubAbility$ DBCleanup
-SVar:DBAtkLeftPile:DB$ Animate | Defined$ ValidCommand Effect.namedRaging River Left | RememberObjects$ RememberedCard | Permanent$ True | Immutable$ True | SubAbility$ DBLeftPump
-SVar:DBAtkRightPile:DB$ Animate | Defined$ ValidCommand Effect.namedRaging River Right | RememberObjects$ RememberedCard | Permanent$ True | Immutable$ True | SubAbility$ DBRightPump
-SVar:DBLeftPump:DB$ Pump | Defined$ Remembered | KW$ "Left" pile | UntilEndOfCombat$ True
-SVar:DBRightPump:DB$ Pump | Defined$ Remembered | KW$ "Right" pile | UntilEndOfCombat$ True
+SVar:DBAtkLeftPile:DB$ Animate | Defined$ ValidCommand Effect.namedRaging River Left | RememberObjects$ RememberedCard | Duration$ Permanent | Immutable$ True | SubAbility$ DBLeftPump
+SVar:DBAtkRightPile:DB$ Animate | Defined$ ValidCommand Effect.namedRaging River Right | RememberObjects$ RememberedCard | Duration$ Permanent | Immutable$ True | SubAbility$ DBRightPump
+SVar:DBLeftPump:DB$ Pump | Defined$ Remembered | KW$ "Left" pile | Duration$ UntilEndOfCombat
+SVar:DBRightPump:DB$ Pump | Defined$ Remembered | KW$ "Right" pile | Duration$ UntilEndOfCombat
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:PlayMain1:TRUE
 Oracle:Whenever one or more creatures you control attack, each defending player divides all creatures without flying they control into a "left" pile and a "right" pile. Then, for each attacking creature you control, choose "left" or "right." That creature can't be blocked this combat except by creatures with flying and creatures in a pile with the chosen label.

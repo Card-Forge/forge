@@ -44,7 +44,6 @@ public abstract class PumpAiBase extends SpellAbilityAi {
         return false;
     }
 
-
     public boolean grantsUsefulExtraBlockOpts(final Player ai, final SpellAbility sa, final Card card, List<String> keywords) {
         PhaseHandler ph = ai.getGame().getPhaseHandler();
         Card pumped = ComputerUtilCard.getPumpedCreature(ai, sa, card, 0, 0, keywords);
@@ -110,7 +109,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                     && (card.getNetCombatDamage() > 0)
                     && !ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS);
         } else if (keyword.endsWith("CARDNAME can't attack or block.")) {
-            if (sa.hasParam("UntilYourNextTurn")) {
+            if ("UntilYourNextTurn".equals(sa.getParam("Duration"))) {
                 return CombatUtil.canAttack(card, ai) || CombatUtil.canBlock(card, true);
             }
             if (!ph.isPlayerTurn(ai)) {
@@ -154,14 +153,6 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 }
             });
             return CombatUtil.canBlockAtLeastOne(card, attackers);
-        } else if (keyword.endsWith("CantBlockCardUIDSource")) {    // can't block CARDNAME this turn
-            if (!ph.isPlayerTurn(ai) || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)
-                    || ph.getPhase().isBefore(PhaseType.MAIN1) || !CombatUtil.canBlock(sa.getHostCard(), card)) {
-                return false;
-            }
-            // target needs to be a creature, controlled by the player which is attacked
-            return !sa.getHostCard().isTapped() || (combat != null && combat.isAttacking(sa.getHostCard())
-                    && card.getController().equals(combat.getDefenderPlayerByAttacker(sa.getHostCard())));
         } else if (keyword.endsWith("This card doesn't untap during your next untap step.")) {
             return !ph.getPhase().isBefore(PhaseType.MAIN2) && !card.isUntapped() && ph.isPlayerTurn(ai)
                     && Untap.canUntap(card);
@@ -480,7 +471,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 }
             }); // leaves all creatures that will be destroyed
         } // -X/-X end
-        else if (attack < 0 && !game.getPhaseHandler().isPreventCombatDamageThisTurn()) {
+        else if (attack < 0 && !game.getReplacementHandler().isPreventCombatDamageThisTurn()) {
             // spells that give -X/0
             boolean isMyTurn = game.getPhaseHandler().isPlayerTurn(ai);
             if (isMyTurn) {
@@ -514,7 +505,6 @@ public abstract class PumpAiBase extends SpellAbilityAi {
         else {
             final boolean addsKeywords = !keywords.isEmpty();
             if (addsKeywords) {
-
                 // If the keyword can prevent a creature from attacking, see if there's some kind of viable prioritization
                 if (keywords.contains("CARDNAME can't attack.") || keywords.contains("CARDNAME can't attack or block.")
                         || keywords.contains("HIDDEN CARDNAME can't attack.") || keywords.contains("HIDDEN CARDNAME can't attack or block.")) {
@@ -540,8 +530,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
 
     protected boolean containsNonCombatKeyword(final List<String> keywords) {
         for (final String keyword : keywords) {
-            // since most keywords are combat relevant check for those that are
-            // not
+            // since most keywords are combat relevant check for those that are not
             if (keyword.endsWith("This card doesn't untap during your next untap step.")
                     || keyword.endsWith("Shroud") || keyword.endsWith("Hexproof")) {
                 return true;

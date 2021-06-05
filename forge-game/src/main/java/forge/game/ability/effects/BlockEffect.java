@@ -29,7 +29,7 @@ public class BlockEffect extends SpellAbilityEffect {
 
         List<Card> attackers = new ArrayList<>();
         if (sa.hasParam("DefinedAttacker")) {
-            for (final Card attacker : AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DefinedAttacker"), sa)) {
+            for (final Card attacker : AbilityUtils.getDefinedCards(host, sa.getParam("DefinedAttacker"), sa)) {
                 if (combat.isAttacking(attacker))
                     attackers.add(attacker);
             }
@@ -37,7 +37,7 @@ public class BlockEffect extends SpellAbilityEffect {
 
         List<Card> blockers = new ArrayList<>();
         if (sa.hasParam("DefinedBlocker")) {
-            for (final Card blocker : AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DefinedBlocker"), sa)) {
+            for (final Card blocker : AbilityUtils.getDefinedCards(host, sa.getParam("DefinedBlocker"), sa)) {
                 if (blocker.isCreature() && blocker.isInZone(ZoneType.Battlefield))
                     blockers.add(blocker);
             }

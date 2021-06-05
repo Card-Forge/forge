@@ -2,7 +2,7 @@ Name:House Guildmage
 ManaCost:U B
 Types:Creature Human Wizard
 PT:2/2
-A:AB$ Pump | Cost$ 1 U T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True | IsCurse$ True | SpellDescription$ Target creature doesn't untap during its controller's next untap step.
+A:AB$ Pump | Cost$ 1 U T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent | IsCurse$ True | SpellDescription$ Target creature doesn't untap during its controller's next untap step.
 A:AB$ Surveil | Cost$ 2 B T | Amount$ 2 | SpellDescription$ Surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
 DeckHas:Ability$Surveil & Ability$Graveyard
 Oracle:{1}{U}, {T}: Target creature doesn't untap during its controller's next untap step.\n{2}{B}, {T}: Surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)

@@ -17,9 +17,10 @@ import forge.card.MagicColor;
 import forge.util.PredicateCard;
 import forge.util.PredicateString;
 
-//import forge.Card;
-
 public interface IPaperCard extends InventoryItem, Serializable {
+
+    String NO_COLLECTOR_NUMBER = "N.A.";  // Placeholder for No-Collection number available
+    int DEFAULT_ART_INDEX = 1;
 
     /**
      * Number of filters based on CardPrinted values.
@@ -228,6 +229,7 @@ public interface IPaperCard extends InventoryItem, Serializable {
 
     String getName();
     String getEdition();
+    String getCollectorNumber();
     int getArtIndex();
     boolean isFoil();
     boolean isToken();

@@ -280,7 +280,7 @@ public class ComputerUtil {
         SpellAbility newSA = sa.copyWithNoManaCost();
         newSA.setActivatingPlayer(ai);
 
-        if (!CostPayment.canPayAdditionalCosts(newSA.getPayCosts(), newSA)) {
+        if (!CostPayment.canPayAdditionalCosts(newSA.getPayCosts(), newSA) || !ComputerUtilMana.canPayManaCost(newSA, ai, 0)) {
             return false;
         }
 
@@ -1125,7 +1125,7 @@ public class ComputerUtil {
                     creatures2.add(creatures.get(i));
                 }
             }
-            if (((creatures2.size() + CardUtil.getThisTurnCast("Creature.YouCtrl", vengevines.get(0)).size()) > 1)
+            if (((creatures2.size() + CardUtil.getThisTurnCast("Creature.YouCtrl", vengevines.get(0), null).size()) > 1)
                     && card.isCreature() && card.getManaCost().getCMC() <= 3) {
                 return true;
             }
@@ -2253,10 +2253,8 @@ public class ComputerUtil {
         String chosen = "";
         if (kindOfType.equals("Card")) {
             // TODO
-            // computer will need to choose a type
-            // based on whether it needs a creature or land,
-            // otherwise, lib search for most common type left
-            // then, reveal chosenType to Human
+            // computer will need to choose a type based on whether it needs a creature or land,
+            // otherwise, lib search for most common type left then, reveal chosenType to Human
             if (game.getPhaseHandler().is(PhaseType.UNTAP) && logic == null) { // Storage Matrix
                 double amount = 0;
                 for (String type : CardType.getAllCardTypes()) {
@@ -2434,8 +2432,7 @@ public class ComputerUtil {
             if (!source.canReceiveCounters(p1p1Type)) {
                 return opponent ? "Feather" : "Quill";
             }
-            // if source is not on the battlefield anymore, choose +1/+1
-            // ones
+            // if source is not on the battlefield anymore, choose +1/+1 ones
             if (!game.getCardState(source).isInZone(ZoneType.Battlefield)) {
                 return opponent ? "Feather" : "Quill";
             }
@@ -2477,8 +2474,7 @@ public class ComputerUtil {
                 return opponent ? "Numbers" : "Strength";
             }
 
-            // TODO check for ETB to +1/+1 counters
-            // or over another trigger like lifegain
+            // TODO check for ETB to +1/+1 counters or over another trigger like lifegain
 
             int tokenScore = ComputerUtilCard.evaluateCreature(token);
 
@@ -2556,8 +2552,7 @@ public class ComputerUtil {
                 return "Taxes";
             } else {
                 // ai is first voter or ally of controller
-                // both are not affected, but if opponents controll creatures,
-                // sacrifice is worse
+                // both are not affected, but if opponents control creatures, sacrifice is worse
                 return controller.getOpponents().getCreaturesInPlay().isEmpty() ? "Taxes" : "Death";
             }
         default:
@@ -2854,7 +2849,6 @@ public class ComputerUtil {
     }
 
     public static boolean lifegainNegative(final Player player, final Card source, final int n) {
-
         if (!player.canGainLife()) {
             return false;
         }

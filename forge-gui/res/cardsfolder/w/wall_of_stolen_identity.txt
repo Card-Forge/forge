@@ -6,6 +6,6 @@ K:ETBReplacement:Copy:DBCopy:Optional
 SVar:DBCopy:DB$ Clone | Choices$ Creature.Other | AddTypes$ Wall | AddKeywords$ Defender | AiChoiceLogic$ BestOppCtrl | SubAbility$ DBTrigger | RememberCloneOrigin$ True | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any creature on the battlefield, except it's a Wall in addition to its other types and has defender. When you do, tap the copied creature and it doesn't untap during its controller's untap step for as long as you control CARDNAME.
 SVar:DBTrigger:DB$ ImmediateTrigger | Execute$ DBTap | RememberObjects$ RememberedCard | SubAbility$ DBCleanup | TriggerDescription$ When you do, tap the copied creature and it doesn't untap during its controller's untap step for as long as you control CARDNAME.
 SVar:DBTap:DB$ Tap | Defined$ DelayTriggerRemembered | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | Defined$ DelayTriggerRemembered | KW$ HIDDEN CARDNAME doesn't untap during your untap step. | UntilHostLeavesPlay$ True
+SVar:DBPump:DB$ Pump | Defined$ DelayTriggerRemembered | KW$ HIDDEN CARDNAME doesn't untap during your untap step. | Duration$ UntilLoseControlOfHost
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:You may have Wall of Stolen Identity enter the battlefield as a copy of any creature on the battlefield, except it's a Wall in addition to its other types and has defender. When you do, tap the copied creature and it doesn't untap during its controller's untap step for as long as you control Wall of Stolen Identity.

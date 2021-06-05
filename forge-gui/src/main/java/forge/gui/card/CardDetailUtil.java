@@ -280,6 +280,8 @@ public class CardDetailUtil {
                 area.append("Emblem");
             else
                 area.append("Token");
+        } else if (card.isTokenCard()) {
+            area.append("Token card");
         }
 
         // card text

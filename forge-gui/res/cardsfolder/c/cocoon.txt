@@ -11,7 +11,7 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigRemoveCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ PUPA | CounterNum$ 1 | RememberRemoved$ True | SubAbility$ TrigPutCounter
 # TODO need EnchantedLKI because it isn't enchanted anymore if this is sacrificed
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Enchanted | CounterType$ P1P1 | CounterNum$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ LE0 | SubAbility$ TrigPump
-SVar:TrigPump:DB$ Pump | Defined$ Enchanted | KW$ Flying | Permanent$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ LE0 | SubAbility$ TrigSac
+SVar:TrigPump:DB$ Pump | Defined$ Enchanted | KW$ Flying | Duration$ Permanent | ConditionCheckSVar$ X | ConditionSVarCompare$ LE0 | SubAbility$ TrigSac
 SVar:TrigSac:DB$ Sacrifice | Defined$ Self | ConditionCheckSVar$ X | ConditionSVarCompare$ LE0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedSize

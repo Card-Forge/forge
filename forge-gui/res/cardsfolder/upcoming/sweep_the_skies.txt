@@ -1,0 +1,8 @@
+Name:Sweep the Skies
+ManaCost:X U U
+Types:Sorcery
+A:SP$ Token | Cost$ X U U | TokenAmount$ Y | TokenScript$ c_1_1_a_thopter_flying | TokenOwner$ You | SpellDescription$ Create a 1/1 colorless Thopter artifact creature token with flying for each color of mana spent to cast this spell.
+SVar:X:Count$xPaid
+SVar:Y:Count$Converge
+DeckHas:Ability$Token
+Oracle:Converge — Create a 1/1 colorless Thopter artifact creature token with flying for each color of mana spent to cast this spell.

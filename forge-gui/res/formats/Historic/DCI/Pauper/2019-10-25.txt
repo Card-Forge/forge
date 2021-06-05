@@ -1,0 +1,7 @@
+[format]
+Name:Pauper, 10/25/19
+Type:Historic
+Subtype:Custom
+Effective:2019-10-25
+Rarities:L, C
+Banned:Arcum's Astrolabe; Gush; Gitaxian Probe; Daze

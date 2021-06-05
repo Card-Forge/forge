@@ -31,9 +31,7 @@ public class CamouflageEffect extends SpellAbilityEffect {
                 }
             }
 
-            if (attacker.hasKeyword("CARDNAME can't be blocked unless all creatures defending player controls block it.") &&
-                    blockers.size() < defender.getCreaturesInPlay().size() ||
-                    blockers.size() < CombatUtil.needsBlockers(attacker)) {
+            if (blockers.size() < CombatUtil.getMinNumBlockersForAttacker(attacker, defender)) {
                 // If not enough remaining creatures to block, don't add them as blocker
                 continue;
             }

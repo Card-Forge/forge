@@ -97,6 +97,7 @@ public enum ApiType {
     LookAt (LookAtEffect.class),
     LoseLife (LifeLoseEffect.class),
     LosesGame (GameLossEffect.class),
+    MakeCard (MakeCardEffect.class),
     Mana (ManaEffect.class),
     ManaReflected (ManaReflectedEffect.class),
     Manifest (ManifestEffect.class),

@@ -32,7 +32,6 @@ public class PlayerStatistics {
 
     private int turnsPlayed = 0;
 
-
     private PlayerOutcome outcome;
 
     /**

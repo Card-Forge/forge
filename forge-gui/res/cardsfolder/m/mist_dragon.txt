@@ -2,8 +2,8 @@ Name:Mist Dragon
 ManaCost:4 U U
 Types:Creature Dragon
 PT:4/4
-A:AB$ Pump | Cost$ 0 | Defined$ Self | KW$ Flying | Permanent$ True | SpellDescription$ CARDNAME gains flying. (This effect lasts indefinitely.)
-A:AB$ Debuff | Cost$ 0 | Defined$ Self | Keywords$ Flying | Permanent$ True | SpellDescription$ CARDNAME loses flying. (This effect lasts indefinitely.)
+A:AB$ Pump | Cost$ 0 | Defined$ Self | KW$ Flying | Duration$ Permanent | SpellDescription$ CARDNAME gains flying. (This effect lasts indefinitely.)
+A:AB$ Debuff | Cost$ 0 | Defined$ Self | Keywords$ Flying | Duration$ Permanent | SpellDescription$ CARDNAME loses flying. (This effect lasts indefinitely.)
 A:AB$ Phases | Cost$ 3 U U | Defined$ Self | SpellDescription$ CARDNAME phases out.
 #TODO: the AI will currently not make Mist Dragon lose flying if it's threatened by something that targets a flying creature, might be improved. Otherwise the AI uses this card in full.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mist_dragon.jpg

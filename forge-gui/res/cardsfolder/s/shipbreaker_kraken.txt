@@ -5,7 +5,7 @@ PT:6/6
 K:Monstrosity:4:6 U U
 T:Mode$ BecomeMonstrous | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ When CARDNAME becomes monstrous, tap up to four target creatures. Those creatures don't untap during their controllers' untap steps for as long as you control CARDNAME.
 SVar:TrigTap:DB$ Tap | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 4 | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN CARDNAME doesn't untap during your untap step. | UntilLoseControlOfHost$ True
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN CARDNAME doesn't untap during your untap step. | Duration$ UntilLoseControlOfHost
 DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shipbreaker_kraken.jpg
 Oracle:{6}{U}{U}: Monstrosity 4. (If this creature isn't monstrous, put four +1/+1 counters on it and it becomes monstrous.)\nWhen Shipbreaker Kraken becomes monstrous, tap up to four target creatures. Those creatures don't untap during their controllers' untap steps for as long as you control Shipbreaker Kraken.

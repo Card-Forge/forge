@@ -2,6 +2,5 @@ Name:Raven's Run Dragoon
 ManaCost:2 GW GW
 Types:Creature Elf Knight
 PT:3/3
-K:CantBeBlockedBy Creature.Black
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ravens_run_dragoon.jpg
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.Black | Description$ CARDNAME can't be blocked by black creatures.
 Oracle:Raven's Run Dragoon can't be blocked by black creatures.

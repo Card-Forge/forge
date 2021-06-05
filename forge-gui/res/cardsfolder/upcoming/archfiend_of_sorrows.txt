@@ -1,0 +1,10 @@
+Name:Archfiend of Sorrows
+ManaCost:5 B B
+Types:Creature Demon
+PT:4/5
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMassacre | TriggerDescription$ When CARDNAME enters the battlefield, creatures your opponents control get -2/-2 until end of turn.
+SVar:TrigMassacre:DB$ PumpAll | NumAtt$ -2 | NumDef$ -2 | ValidCards$ Creature.OppCtrl | IsCurse$ True
+K:Unearth:3 B B
+SVar:PlayMain1:TRUE
+Oracle:When Archfiend of Sorrows enters the battlefield, creatures your opponents control get -2/-2 until end of turn.\nUnearth {3}{B}{B} ({3}{B}{B}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)

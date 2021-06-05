@@ -3,6 +3,6 @@ ManaCost:4 U
 Types:Creature Homarid Warrior
 PT:3/3
 A:AB$ Pump | Cost$ U | Defined$ Self | KW$ Shroud | SubAbility$ DBPumpNoUntap | SpellDescription$ CARDNAME gains shroud until end of turn and doesn't untap during your next untap step. Tap CARDNAME. (A permanent with shroud can't be the target of spells or abilities.)
-SVar:DBPumpNoUntap:DB$ Pump | Defined$ Self | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True | SubAbility$ DBTap
+SVar:DBPumpNoUntap:DB$ Pump | Defined$ Self | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent | SubAbility$ DBTap
 SVar:DBTap:DB$ Tap | Defined$ Self
 Oracle:{U}: Homarid Warrior gains shroud until end of turn and doesn't untap during your next untap step. Tap Homarid Warrior. (A creature with shroud can't be the target of spells or abilities.)

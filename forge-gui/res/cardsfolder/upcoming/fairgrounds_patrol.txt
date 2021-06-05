@@ -1,0 +1,7 @@
+Name:Fairgrounds Patrol
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:2/1
+A:AB$ Token | Cost$ 1 W ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | SorcerySpeed$ True | TokenScript$ c_1_1_a_thopter_flying | SpellDescription$ Create a 1/1 colorless Thopter artifact creature token with flying. Activate only as a sorcery.
+DeckHas:Ability$Token & Type$Artifact
+Oracle:{1}{W}, Exile Fairgrounds Patrol from your graveyard: Create a 1/1 colorless Thopter artifact creature token with flying. Activate only as a sorcery.

@@ -30,7 +30,6 @@ public class ManaCostParser implements IParserManaCost {
      */
     public ManaCostParser(final String cost) {
         this.cost = cost.split(" ");
-        // System.out.println(cost);
         this.nextToken = 0;
         this.genericCost = 0;
     }
@@ -66,7 +65,6 @@ public class ManaCostParser implements IParserManaCost {
     @Override
     public final ManaCostShard next() {
         final String unparsed = this.cost[this.nextToken++];
-        // System.out.println(unparsed);
         if (StringUtils.isNumeric(unparsed)) {
             this.genericCost += Integer.parseInt(unparsed);
             return null;

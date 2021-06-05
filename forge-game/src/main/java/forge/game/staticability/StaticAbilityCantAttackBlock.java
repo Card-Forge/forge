@@ -23,7 +23,6 @@ import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardPredicates;
 import forge.game.cost.Cost;
 import forge.game.keyword.KeywordInterface;
@@ -53,6 +52,12 @@ public class StaticAbilityCantAttackBlock {
 
         if (!stAb.matchesValidParam("Target", target)) {
             return false;
+        }
+
+        if (stAb.hasParam("DefenderKeyword")) {
+            if (card.hasKeyword("CARDNAME can attack as though it didn't have defender.")) {
+                return false;
+            }
         }
 
         final Player defender = target instanceof Card ? ((Card) target).getController() : (Player) target;
@@ -115,13 +120,27 @@ public class StaticAbilityCantAttackBlock {
                             }
                         }
                     }
-                    if (!stillblock) {
-                        return true;
+                    if (stillblock) {
+                        return false;
                     }
+                } else {
+                    return false;
                 }
             }
         }
-        return false;
+        // relative valid relative to each other
+        if (!stAb.matchesValidParam("ValidAttackerRelative", attacker, blocker)) {
+            return false;
+        }
+        if (!stAb.matchesValidParam("ValidBlockerRelative", blocker, attacker)) {
+            return false;
+        }
+        if (blocker != null) {
+            if (!stAb.matchesValidParam("ValidDefender", blocker.getController())) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -179,7 +198,7 @@ public class StaticAbilityCantAttackBlock {
         }
         String costString = stAb.getParam("Cost");
         if (stAb.hasSVar(costString)) {
-            costString = Integer.toString(CardFactoryUtil.xCount(hostCard, stAb.getSVar(costString)));
+            costString = Integer.toString(AbilityUtils.calculateAmount(hostCard, costString, stAb));
         }
 
         return new Cost(costString, true);

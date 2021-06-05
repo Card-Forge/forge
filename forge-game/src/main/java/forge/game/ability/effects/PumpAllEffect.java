@@ -70,7 +70,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
                 sa.getHostCard().addRemembered(tgtC);
             }
         
-            if (!sa.hasParam("Permanent")) {
+            if (!"Permanent".equals(sa.getParam("Duration"))) {
                 // If not Permanent, remove Pumped at EOT
                 final GameCommand untilEOT = new GameCommand() {
                     private static final long serialVersionUID = 5415795460189457660L;
@@ -88,23 +88,11 @@ public class PumpAllEffect extends SpellAbilityEffect {
                         game.fireEvent(new GameEventCardStatsChanged(tgtC));
                     }
                 };
-                if (sa.hasParam("UntilUntaps")) {
-                    sa.getHostCard().addUntapCommand(untilEOT);
-                } else if (sa.hasParam("UntilEndOfCombat")) {
-                    game.getEndOfCombat().addUntil(untilEOT);
-                } else if (sa.hasParam("UntilYourNextTurn")) {
-                    game.getCleanup().addUntil(sa.getActivatingPlayer(), untilEOT);
-                } else if (sa.hasParam("UntilLoseControl")) {
+                if ("UntilLoseControlOfHost".equals(sa.getParam("Duration"))) {
                     tgtC.addLeavesPlayCommand(untilEOT);
                     tgtC.addChangeControllerCommand(untilEOT);
-                } else if (sa.hasParam("UntilTheEndOfYourNextTurn")) {
-                    if (game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) {
-                        game.getEndOfTurn().registerUntilEnd(sa.getActivatingPlayer(), untilEOT);
-                    } else {
-                        game.getEndOfTurn().addUntilEnd(sa.getActivatingPlayer(), untilEOT);
-                    }
                 } else {
-                    game.getEndOfTurn().addUntil(untilEOT);
+                    addUntilCommand(sa, untilEOT);
                 }
             }
 

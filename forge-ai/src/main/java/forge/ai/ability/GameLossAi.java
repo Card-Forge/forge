@@ -13,8 +13,7 @@ public class GameLossAi extends SpellAbilityAi {
             return false;
         }
 
-        // Only one SA Lose the Game card right now, which is Door to
-        // Nothingness
+        // Only one SA Lose the Game card right now, which is Door to Nothingness
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
@@ -29,19 +28,23 @@ public class GameLossAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        Player loser = ai;
+        
         // Phage the Untouchable
         // (Final Fortune would need to attach it's delayed trigger to a
         // specific turn, which can't be done yet)
-        Player opp = ai.getGame().getCombat().getDefenderPlayerByAttacker(sa.getHostCard());
+        if (ai.getGame().getCombat() != null) {
+            loser = ai.getGame().getCombat().getDefenderPlayerByAttacker(sa.getHostCard());
+        }
 
-        if (!mandatory && opp.cantLose()) {
+        if (!mandatory && loser.cantLose()) {
             return false;
         }
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
             sa.resetTargets();
-            sa.getTargets().add(opp);
+            sa.getTargets().add(loser);
         }
 
         return true;

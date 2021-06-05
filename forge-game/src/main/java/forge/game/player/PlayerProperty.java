@@ -96,7 +96,7 @@ public class PlayerProperty {
             final List<Card> cards = AbilityUtils.getDefinedCards(source, v, spellAbility);
             int found = 0;
             for (final Card card : cards) {
-                if (card.getDamageHistory().getThisCombatDamaged().contains(player)) {
+                if (card.getDamageHistory().getThisCombatDamaged().containsKey(player)) {
                     found++;
                 }
             }
@@ -115,7 +115,7 @@ public class PlayerProperty {
             final List<Card> cards = AbilityUtils.getDefinedCards(source, v, spellAbility);
             int found = 0;
             for (final Card card : cards) {
-                if (card.getDamageHistory().getThisGameDamaged().contains(player)) {
+                if (card.getDamageHistory().getThisGameDamaged().containsKey(player)) {
                     found++;
                 }
             }
@@ -134,7 +134,7 @@ public class PlayerProperty {
             final List<Card> cards = AbilityUtils.getDefinedCards(source, v, spellAbility);
             int found = 0;
             for (final Card card : cards) {
-                if (card.getDamageHistory().getThisTurnDamaged().contains(player)) {
+                if (card.getDamageHistory().getThisTurnDamaged().containsKey(player)) {
                     found++;
                 }
             }
@@ -154,7 +154,7 @@ public class PlayerProperty {
 
             int found = 0;
             for (final Card card : cards) {
-                if (card.getDamageHistory().getThisTurnCombatDamaged().contains(player)) {
+                if (card.getDamageHistory().getThisTurnCombatDamaged().containsKey(player)) {
                     found++;
                 }
             }
@@ -240,7 +240,7 @@ public class PlayerProperty {
             final String[] type = property.substring(8).split("_");
             final CardCollectionView list = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type[0], sourceController, source, spellAbility);
             String comparator = type[1];
-            int y = AbilityUtils.calculateAmount(source, comparator.substring(2), null);
+            int y = AbilityUtils.calculateAmount(source, comparator.substring(2), spellAbility);
             if (!Expressions.compare(list.size(), comparator, y)) {
                 return false;
             }
@@ -248,7 +248,7 @@ public class PlayerProperty {
             final String[] type = property.substring(10).split("_");
             final CardCollectionView list = CardLists.getValidCards(player.getCardsIn(ZoneType.smartValueOf(type[0])), type[1], sourceController, source, spellAbility);
             String comparator = type[2];
-            int y = AbilityUtils.calculateAmount(source, comparator.substring(2), null);
+            int y = AbilityUtils.calculateAmount(source, comparator.substring(2), spellAbility);
             if (!Expressions.compare(list.size(), comparator, y)) {
                 return false;
             }
@@ -266,7 +266,6 @@ public class PlayerProperty {
             final Player controller = "Active".equals(property.split("sThan")[1]) ? game.getPhaseHandler().getPlayerTurn() : sourceController;
             final CardCollectionView oppList = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(cardType));
             final CardCollectionView yourList = CardLists.filter(controller.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(cardType));
-            System.out.println(yourList.size());
             if (oppList.size() < yourList.size() + amount) {
                 return false;
             }
@@ -380,6 +379,14 @@ public class PlayerProperty {
             }
         } else if (property.startsWith("Triggered")) {
             if (!AbilityUtils.getDefinedPlayers(source, property, spellAbility).contains(player)) {
+                return false;
+            }
+        } else if (property.equals("castSpellThisTurn")) {
+            if (player.getSpellsCastThisTurn() > 0) {
+                return false;
+            }
+        } else if (property.equals("attackedWithCreaturesThisTurn")) {
+            if (player.getCreaturesAttackedThisTurn().isEmpty()) {
                 return false;
             }
         }

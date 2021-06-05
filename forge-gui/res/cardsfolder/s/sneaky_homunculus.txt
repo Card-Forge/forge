@@ -2,7 +2,6 @@ Name:Sneaky Homunculus
 ManaCost:1 U
 Types:Creature Homunculus Illusion
 PT:1/1
-K:CantBeBlockedBy Creature.powerGE2
-K:CantBlock Creature.powerGE2:creatures with power 2 or greater
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sneaky_homunculus.jpg
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.powerGE2 | ValidBlocker$ Creature.Self | Description$ CARDNAME can't block or be blocked by creatures with power 2 or greater.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerGE2 | Secondary$ True | Description$ CARDNAME can't block or be blocked by creatures with power 2 or greater.
 Oracle:Sneaky Homunculus can't block or be blocked by creatures with power 2 or greater.

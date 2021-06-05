@@ -5,4 +5,4 @@ Name=Whispering Woods
 Type=Other
 
 [cards]
-C Windseeker Centaur
+3 C Windseeker Centaur

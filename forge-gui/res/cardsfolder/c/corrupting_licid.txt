@@ -2,7 +2,7 @@ Name:Corrupting Licid
 ManaCost:2 B
 Types:Creature Licid
 PT:2/2
-A:AB$ Animate | Cost$ B T | Defined$ Self | RemoveThisAbility$ True | Permanent$ True | RevertCost$ B | Keywords$ Enchant creature | Abilities$ SPAttach | Types$ Enchantment,Aura | RemoveCardTypes$ True | RemoveEnchantmentTypes$ True | SubAbility$ DBAttach | SpellDescription$ CARDNAME loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {B} to end this effect.
+A:AB$ Animate | Cost$ B T | Defined$ Self | RemoveThisAbility$ True | Duration$ Permanent | RevertCost$ B | Keywords$ Enchant creature | Abilities$ SPAttach | Types$ Enchantment,Aura | RemoveCardTypes$ True | RemoveEnchantmentTypes$ True | SubAbility$ DBAttach | SpellDescription$ CARDNAME loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {B} to end this effect.
 SVar:DBAttach:DB$ Attach | ValidTgts$ Creature | AILogic$ Pump
 SVar:SPAttach:SP$ Attach | Cost$ 0 | ValidTgts$ Creature
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Fear | Description$ Enchanted creature has fear. (It can't be blocked except by artifact creatures and/or black creatures.)

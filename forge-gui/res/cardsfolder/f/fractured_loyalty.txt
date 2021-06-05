@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ BecomesTarget | ValidTarget$ Card.EnchantedBy | TriggerZones$ Battlefield | Execute$ TrigGainControl | TriggerDescription$ Whenever enchanted creature becomes the target of a spell or ability, that spell or ability's controller gains control of that creature. (This effect lasts indefinitely.)
-SVar:TrigGainControl:DB$ GainControl | Defined$ Enchanted | NewController$ TriggeredSourceController | Permanent$ True
+SVar:TrigGainControl:DB$ GainControl | Defined$ Enchanted | NewController$ TriggeredSourceController | Duration$ Permanent
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fractured_loyalty.jpg
 Oracle:Enchant creature\nWhenever enchanted creature becomes the target of a spell or ability, that spell or ability's controller gains control of that creature. (This effect lasts indefinitely.)

@@ -4,6 +4,7 @@ import static forge.card.CardRenderer.MANA_SYMBOL_SIZE;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
 
 import com.badlogic.gdx.utils.Align;
@@ -24,6 +25,7 @@ import forge.card.mana.ManaCostParser;
 import forge.game.card.CardView;
 import forge.game.card.IHasCardView;
 import forge.game.player.PlayerView;
+import forge.game.zone.ZoneType;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.itemmanager.AdvancedSearch.FilterOperator;
@@ -386,6 +388,8 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
     }
     //simple check for cardview needed on some special renderer for cards
     private boolean showAlternate(CardView cardView, String value){
+        if(cardView == null)
+            return false;
         boolean showAlt = false;
         if(cardView.hasAlternateState()){
             if(cardView.hasBackSide())
@@ -515,7 +519,8 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
 
         @Override
         public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
-            CardView cv = ((IHasCardView)value).getCardView();
+            //should fix NPE ie Thief of Sanity, Gonti... etc
+            CardView cv = ((IHasCardView)value).getCardView().isFaceDown() && ((IHasCardView)value).getCardView().isInZone(EnumSet.of(ZoneType.Exile)) ? ((IHasCardView)value).getCardView().getBackup() : ((IHasCardView)value).getCardView();
             boolean showAlternate = showAlternate(cv, value.toString());
             CardRenderer.drawCardWithOverlays(g, cv, x, y, VStack.CARD_WIDTH, VStack.CARD_HEIGHT, CardStackPosition.Top, false, showAlternate, true);
 

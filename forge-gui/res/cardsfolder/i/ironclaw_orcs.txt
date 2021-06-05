@@ -2,6 +2,5 @@ Name:Ironclaw Orcs
 ManaCost:1 R
 Types:Creature Orc
 PT:2/2
-K:CantBlock Creature.powerGE2:creatures with power 2 or greater
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ironclaw_orcs.jpg
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.powerGE2 | ValidBlocker$ Creature.Self | Description$ CARDNAME can't block creatures with power 2 or greater.
 Oracle:Ironclaw Orcs can't block creatures with power 2 or greater.

@@ -1,0 +1,7 @@
+Name:Chef's Kiss
+ManaCost:1 R R
+Types:Instant
+A:SP$ ControlSpell | ValidTgts$ Card | TgtPrompt$ Select target spell that targets only a single permanent or player | TargetType$ Spell | Mode$ Gain | TargetsSingleTarget$ True | TargetValidTargeting$ Permanent,Player | SubAbility$ DBCopy | StackDescription$ SpellDescription | SpellDescription$ Gain control of target spell that targets only a single permanent or player. Copy it, then reselect the targets at random for the spell and the copy. The new targets can't be you or a permanent you control.
+SVar:DBCopy:DB$ CopySpellAbility | Defined$ Targeted | RandomTarget$ True | RandomTargetRestriction$ Player.Other,Permanent.YouDontCtrl | SubAbility$ DBChangeTargets | StackDescription$ None
+SVar:DBChangeTargets:DB$ ChangeTargets | Defined$ Targeted | RandomTarget$ True | RandomTargetRestriction$ Player.Other,Permanent.YouDontCtrl
+Oracle:Gain control of target spell that targets only a single permanent or player. Copy it, then reselect the targets at random for the spell and the copy. The new targets can't be you or a permanent you control.

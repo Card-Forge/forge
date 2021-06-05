@@ -2,8 +2,7 @@ Name:Scuttling Doom Engine
 ManaCost:6
 Types:Artifact Creature Construct
 PT:6/6
-K:CantBeBlockedBy Creature.powerLE2
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLE2 | Description$ CARDNAME can't be blocked by creatures with power 2 or less.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, it deals 6 damage to target opponent or planeswalker.
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Opponent,Planeswalker | NumDmg$ 6
-SVar:Picture:http://www.wizards.com/global/images/magic/general/scuttling_doom_engine.jpg
 Oracle:Scuttling Doom Engine can't be blocked by creatures with power 2 or less.\nWhen Scuttling Doom Engine dies, it deals 6 damage to target opponent or planeswalker.

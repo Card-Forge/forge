@@ -42,8 +42,10 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
+        final Card source = sa.getHostCard();
+
         //if host is not on the battlefield don't apply
-        if (sa.hasParam("UntilHostLeavesPlay") && !sa.getHostCard().isInPlay()) {
+        if ("UntilHostLeavesPlay".equals(sa.getParam("Duration")) && !source.isInPlay()) {
             return;
         }
 
@@ -53,7 +55,6 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
         CardCollection cards;
         List<Player> tgtPlayers = getTargetPlayers(sa);
         final Game game = sa.getActivatingPlayer().getGame();
-        final Card source = sa.getHostCard();
 
         if ((!sa.usesTargeting() && !sa.hasParam("Defined")) || sa.hasParam("UseAllOriginZones")) {
             cards = new CardCollection(game.getCardsIn(origin));
@@ -122,7 +123,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasParam("ForgetOtherRemembered")) {
-            sa.getHostCard().clearRemembered();
+            source.clearRemembered();
         }
 
         final String remember = sa.getParam("RememberChanged");
@@ -203,9 +204,6 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 if (sa.hasParam("ExileFaceDown")) {
                     movedCard.turnFaceDown(true);
                 }
-                if (sa.hasParam("Tapped")) {
-                    movedCard.setTapped(true);
-                }
             }
 
             if (remember != null) {
@@ -270,8 +268,8 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
 
         triggerList.triggerChangesZoneAll(game, sa);
 
-        if (sa.hasParam("UntilHostLeavesPlay")) {
-            source.addLeavesPlayCommand(untilHostLeavesPlayCommand(triggerList, source));
+        if (sa.hasParam("Duration")) {
+            addUntilCommand(sa, untilHostLeavesPlayCommand(triggerList, source));
         }
 
         // if Shuffle parameter exists, and any amount of cards were owned by

@@ -1,0 +1,6 @@
+[format]
+Name:Standard, Throne of Eldraine
+Type:Historic
+Subtype:Standard
+Effective:2019-10-04
+Sets:GRN, RNA, WAR, M20, ELD

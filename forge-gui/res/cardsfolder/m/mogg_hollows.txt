@@ -4,6 +4,6 @@ Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}. CARDNAME doesn't untap during your next untap step. | SubAbility$ DBPump
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}. CARDNAME doesn't untap during your next untap step. | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | KW$ HIDDEN This card doesn't untap during your next untap step. | Defined$ Self | Permanent$ True
+SVar:DBPump:DB$ Pump | KW$ HIDDEN This card doesn't untap during your next untap step. | Defined$ Self | Duration$ Permanent
 SVar:Picture:http://magiccards.info/scans/en/br/45.jpg
 Oracle:{T}: Add {C}.\n{T}: Add {R} or {G}. Mogg Hollows doesn't untap during your next untap step.

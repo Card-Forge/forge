@@ -1,9 +1,9 @@
 Name:Shield Mare
 ManaCost:1 W W
 Types:Creature Horse
-K:CantBeBlockedBy Creature.Red
+PT:2/3
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.Red | Description$ CARDNAME can't be blocked by red creatures.
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ DBGainLife | TriggerDescription$ When CARDNAME enters the battlefield or becomes the target of a spell or ability an opponent controls, you gain 3 life.
 T:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ Card.OppCtrl | TriggerZones$ Battlefield | Execute$ DBGainLife | TriggerDescription$ When CARDNAME enters the battlefield or becomes the target of a spell or ability an opponent controls, you gain 3 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
 Oracle:Shield Mare can't be blocked by red creatures.\nWhen Shield Mare enters the battlefield or becomes the target of a spell or ability an opponent controls, you gain 3 life.
-PT:2/3

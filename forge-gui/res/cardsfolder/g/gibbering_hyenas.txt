@@ -2,6 +2,5 @@ Name:Gibbering Hyenas
 ManaCost:2 G
 Types:Creature Hyena
 PT:3/2
-K:CantBlock Creature.Black:black creatures
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gibbering_hyenas.jpg
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Black | ValidBlocker$ Creature.Self | Description$ CARDNAME can't block black creatures.
 Oracle:Gibbering Hyenas can't block black creatures.

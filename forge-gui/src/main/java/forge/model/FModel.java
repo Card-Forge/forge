@@ -277,28 +277,23 @@ public final class FModel {
             }
         }
 
-        allCardsNoAlt = ItemPool.createFrom(Iterables.concat(getMagicDb().getCommonCards().getAllCardsNoAlt(), getMagicDb().getCustomCards().getAllCardsNoAlt()), PaperCard.class);
-        archenemyCards = ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_SCHEME, PaperCard.FN_GET_RULES)), PaperCard.class);
-        planechaseCards = ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_PLANE_OR_PHENOMENON, PaperCard.FN_GET_RULES)), PaperCard.class);
+        if (GuiBase.getInterface().isLibgdxPort() && GuiBase.getDeviceRAM() < 5000)
+            return; // don't preload ItemPool on mobile port with less than 5GB RAM
+
+        //common ItemPool to preload
+        allCardsNoAlt = getAllCardsNoAlt();
+        archenemyCards = getArchenemyCards();
+        planechaseCards = getPlanechaseCards();
         if (GuiBase.getInterface().isLibgdxPort()) {
             //preload mobile Itempool
-            uniqueCardsNoAlt = ItemPool.createFrom(Iterables.concat(getMagicDb().getCommonCards().getUniqueCardsNoAlt(), getMagicDb().getCustomCards().getUniqueCardsNoAlt()), PaperCard.class);
+            uniqueCardsNoAlt = getUniqueCardsNoAlt();
         } else {
             //preload Desktop Itempool
-            commanderPool = ItemPool.createFrom(Iterables.concat(
-                    getMagicDb().getCommonCards().getAllCardsNoAlt(Predicates.compose(CardRulesPredicates.Presets.CAN_BE_COMMANDER, PaperCard.FN_GET_RULES)),
-                    getMagicDb().getCustomCards().getAllCardsNoAlt(Predicates.compose(CardRulesPredicates.Presets.CAN_BE_COMMANDER, PaperCard.FN_GET_RULES))), PaperCard.class);
-            brawlCommander = ItemPool.createFrom(Iterables.concat(getMagicDb().getCommonCards().getAllCardsNoAlt(Predicates.and(
-                    FModel.getFormats().get("Brawl").getFilterPrinted(), Predicates.compose(CardRulesPredicates.Presets.CAN_BE_BRAWL_COMMANDER, PaperCard.FN_GET_RULES))), getMagicDb().getCustomCards().getAllCardsNoAlt(Predicates.and(
-                    FModel.getFormats().get("Brawl").getFilterPrinted(), Predicates.compose(CardRulesPredicates.Presets.CAN_BE_BRAWL_COMMANDER, PaperCard.FN_GET_RULES)))), PaperCard.class);
-            oathbreakerCommander = ItemPool.createFrom(Iterables.concat(
-                    getMagicDb().getCommonCards().getAllCardsNoAlt(Predicates.compose(Predicates.or(CardRulesPredicates.Presets.CAN_BE_OATHBREAKER, CardRulesPredicates.Presets.CAN_BE_SIGNATURE_SPELL), PaperCard.FN_GET_RULES)),
-                    getMagicDb().getCustomCards().getAllCardsNoAlt(Predicates.compose(Predicates.or(CardRulesPredicates.Presets.CAN_BE_OATHBREAKER, CardRulesPredicates.Presets.CAN_BE_SIGNATURE_SPELL), PaperCard.FN_GET_RULES))), PaperCard.class);
-            tinyLeadersCommander = ItemPool.createFrom(Iterables.concat(
-                    getMagicDb().getCommonCards().getAllCardsNoAlt(Predicates.compose(CardRulesPredicates.Presets.CAN_BE_TINY_LEADERS_COMMANDER, PaperCard.FN_GET_RULES)),
-                    getMagicDb().getCustomCards().getAllCardsNoAlt(Predicates.compose(CardRulesPredicates.Presets.CAN_BE_TINY_LEADERS_COMMANDER, PaperCard.FN_GET_RULES))), PaperCard.class);
-            avatarPool = ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_VANGUARD, PaperCard.FN_GET_RULES)), PaperCard.class);
-            conspiracyPool = ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_CONSPIRACY, PaperCard.FN_GET_RULES)), PaperCard.class);
+            commanderPool = getCommanderPool();
+            brawlCommander = getBrawlCommander();
+            tinyLeadersCommander = getTinyLeadersCommander();
+            avatarPool = getAvatarPool();
+            conspiracyPool = getConspiracyPool();
         }
     }
 
@@ -317,42 +312,70 @@ public final class FModel {
     }
 
     public static ItemPool<PaperCard> getUniqueCardsNoAlt() {
+        if (uniqueCardsNoAlt == null)
+            return ItemPool.createFrom(Iterables.concat(getMagicDb().getCommonCards().getUniqueCardsNoAlt(), getMagicDb().getCustomCards().getUniqueCardsNoAlt()), PaperCard.class);
         return uniqueCardsNoAlt;
     }
 
     public static ItemPool<PaperCard> getAllCardsNoAlt() {
+        if (allCardsNoAlt == null)
+            return ItemPool.createFrom(Iterables.concat(getMagicDb().getCommonCards().getAllCardsNoAlt(), getMagicDb().getCustomCards().getAllCardsNoAlt()), PaperCard.class);
         return allCardsNoAlt;
     }
 
     public static ItemPool<PaperCard> getArchenemyCards() {
+        if (archenemyCards == null)
+            return ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_SCHEME, PaperCard.FN_GET_RULES)), PaperCard.class);
         return archenemyCards;
     }
 
     public static ItemPool<PaperCard> getPlanechaseCards() {
+        if (planechaseCards == null)
+            return ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_PLANE_OR_PHENOMENON, PaperCard.FN_GET_RULES)), PaperCard.class);
         return planechaseCards;
     }
 
     public static ItemPool<PaperCard> getBrawlCommander() {
+        if (brawlCommander == null)
+            return ItemPool.createFrom(Iterables.concat(getMagicDb().getCommonCards().getAllCardsNoAlt(Predicates.and(
+                    FModel.getFormats().get("Brawl").getFilterPrinted(), Predicates.compose(CardRulesPredicates.Presets.CAN_BE_BRAWL_COMMANDER, PaperCard.FN_GET_RULES))), getMagicDb().getCustomCards().getAllCardsNoAlt(Predicates.and(
+                    FModel.getFormats().get("Brawl").getFilterPrinted(), Predicates.compose(CardRulesPredicates.Presets.CAN_BE_BRAWL_COMMANDER, PaperCard.FN_GET_RULES)))), PaperCard.class);
         return brawlCommander;
     }
 
     public static ItemPool<PaperCard> getOathbreakerCommander() {
+        if (oathbreakerCommander == null)
+            return ItemPool.createFrom(Iterables.concat(
+                    getMagicDb().getCommonCards().getAllCardsNoAlt(Predicates.compose(Predicates.or(CardRulesPredicates.Presets.CAN_BE_OATHBREAKER, CardRulesPredicates.Presets.CAN_BE_SIGNATURE_SPELL), PaperCard.FN_GET_RULES)),
+                    getMagicDb().getCustomCards().getAllCardsNoAlt(Predicates.compose(Predicates.or(CardRulesPredicates.Presets.CAN_BE_OATHBREAKER, CardRulesPredicates.Presets.CAN_BE_SIGNATURE_SPELL), PaperCard.FN_GET_RULES))), PaperCard.class);
         return oathbreakerCommander;
     }
 
     public static ItemPool<PaperCard> getTinyLeadersCommander() {
+        if (tinyLeadersCommander == null)
+            return ItemPool.createFrom(Iterables.concat(
+                    getMagicDb().getCommonCards().getAllCardsNoAlt(Predicates.compose(CardRulesPredicates.Presets.CAN_BE_TINY_LEADERS_COMMANDER, PaperCard.FN_GET_RULES)),
+                    getMagicDb().getCustomCards().getAllCardsNoAlt(Predicates.compose(CardRulesPredicates.Presets.CAN_BE_TINY_LEADERS_COMMANDER, PaperCard.FN_GET_RULES))), PaperCard.class);
         return tinyLeadersCommander;
     }
 
     public static ItemPool<PaperCard> getCommanderPool() {
+        if (commanderPool == null)
+            return ItemPool.createFrom(Iterables.concat(
+                    getMagicDb().getCommonCards().getAllCardsNoAlt(Predicates.compose(CardRulesPredicates.Presets.CAN_BE_COMMANDER, PaperCard.FN_GET_RULES)),
+                    getMagicDb().getCustomCards().getAllCardsNoAlt(Predicates.compose(CardRulesPredicates.Presets.CAN_BE_COMMANDER, PaperCard.FN_GET_RULES))), PaperCard.class);
         return commanderPool;
     }
 
     public static ItemPool<PaperCard> getAvatarPool() {
+        if (avatarPool == null)
+            return ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_VANGUARD, PaperCard.FN_GET_RULES)), PaperCard.class);
         return avatarPool;
     }
 
     public static ItemPool<PaperCard> getConspiracyPool() {
+        if (conspiracyPool == null)
+            return ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_CONSPIRACY, PaperCard.FN_GET_RULES)), PaperCard.class);
         return conspiracyPool;
     }
 

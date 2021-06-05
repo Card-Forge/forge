@@ -4,7 +4,7 @@ Types:Creature Antelope
 PT:1/4
 K:Plainswalk
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigAnimate | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may have target land become a Plains until CARDNAME leaves the battlefield.
-SVar:TrigAnimate:DB$ Animate | ValidTgts$ Land | TgtPrompt$ Select target land | UntilHostLeavesPlay$ True | Types$ Plains | RemoveLandTypes$ True | RemoveIntrinsicAbilities$ True
+SVar:TrigAnimate:DB$ Animate | ValidTgts$ Land | TgtPrompt$ Select target land | Duration$ UntilHostLeavesPlay | Types$ Plains | RemoveLandTypes$ True | RemoveIntrinsicAbilities$ True
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/graceful_antelope.jpg
 Oracle:Plainswalk (This creature can't be blocked as long as defending player controls a Plains.)\nWhenever Graceful Antelope deals combat damage to a player, you may have target land become a Plains until Graceful Antelope leaves the battlefield.

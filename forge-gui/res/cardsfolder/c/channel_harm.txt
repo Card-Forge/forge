@@ -3,7 +3,6 @@ ManaCost:5 W
 Types:Instant
 A:SP$ Effect | Cost$ 5 W | ValidTgts$ Creature | ReplacementEffects$ ChannelHarmRep | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | AILogic$ Fog | SpellDescription$ Prevent all damage that would be dealt to you and permanents you control this turn by sources you don't control. If damage is prevented this way, you may have CARDNAME deal that much damage to target creature.
 SVar:ChannelHarmRep:Event$ DamageDone | ActiveZones$ Command | ValidTarget$ You,Permanent.YouCtrl | ValidSource$ Card.YouDontCtrl,Emblem.YouDontCtrl | ReplaceWith$ DamageSourceInstead | PreventionEffect$ True | Description$ Prevent all damage that would be dealt to you and permanents you control this turn by sources you don't control. If damage is prevented this way, you may have EFFECTHOST deal that much damage to target creature.
-SVar:DamageSourceInstead:DB$ DealDamage | NumDmg$ X | Defined$ Remembered | DamageSouce$ EffectSource | OptionalDecider$ You
+SVar:DamageSourceInstead:DB$ DealDamage | NumDmg$ X | Defined$ Remembered | DamageSource$ EffectSource | OptionalDecider$ You
 SVar:X:ReplaceCount$DamageAmount
-SVar:Picture:http://www.wizards.com/global/images/magic/general/channel_harm.jpg
 Oracle:Prevent all damage that would be dealt to you and permanents you control this turn by sources you don't control. If damage is prevented this way, you may have Channel Harm deal that much damage to target creature.

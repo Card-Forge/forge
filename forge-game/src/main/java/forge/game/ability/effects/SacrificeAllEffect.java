@@ -47,7 +47,7 @@ public class SacrificeAllEffect extends SpellAbilityEffect {
 
         CardCollectionView list;
         if (sa.hasParam("Defined")) {
-            list = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
+            list = AbilityUtils.getDefinedCards(card, sa.getParam("Defined"), sa);
         } else {
             list = game.getCardsIn(ZoneType.Battlefield);
             if (sa.hasParam("ValidCards")) {

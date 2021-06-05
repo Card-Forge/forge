@@ -4,7 +4,7 @@ Types:Creature Faerie
 PT:1/1
 T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ TrigAnimateAttacker | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, that creature becomes green. (This effect lasts indefinitely.)
 T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | Execute$ TrigAnimateBlocker | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, that creature becomes green. (This effect lasts indefinitely.)
-SVar:TrigAnimateAttacker:DB$Animate | Defined$ TriggeredAttacker | Colors$ Green | OverwriteColors$ True | Permanent$ True
-SVar:TrigAnimateBlocker:DB$Animate | Defined$ TriggeredBlocker | Colors$ Green | OverwriteColors$ True | Permanent$ True
+SVar:TrigAnimateAttacker:DB$Animate | Defined$ TriggeredAttacker | Colors$ Green | OverwriteColors$ True | Duration$ Permanent
+SVar:TrigAnimateBlocker:DB$Animate | Defined$ TriggeredBlocker | Colors$ Green | OverwriteColors$ True | Duration$ Permanent
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aisling_leprechaun.jpg
 Oracle:Whenever Aisling Leprechaun blocks or becomes blocked by a creature, that creature becomes green. (This effect lasts indefinitely.)

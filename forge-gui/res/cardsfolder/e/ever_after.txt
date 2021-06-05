@@ -2,7 +2,7 @@ Name:Ever After
 ManaCost:4 B B
 Types:Sorcery
 A:SP$ ChangeZone | Cost$ 4 B B | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | TargetMin$ 0 | TargetMax$ 2 | AnimateSubAbility$ Animate | SubAbility$ DBPut | SpellDescription$ Return up to two target creature cards from your graveyard onto the battlefield.
-SVar:Animate:DB$Animate | Defined$ Remembered | Types$ Zombie | Colors$ Black | Permanent$ True | SpellDescription$ Each of those creatures is a black Zombie in addition to its other colors and types.
+SVar:Animate:DB$Animate | Defined$ Remembered | Types$ Zombie | Colors$ Black | Duration$ Permanent | SpellDescription$ Each of those creatures is a black Zombie in addition to its other colors and types.
 SVar:DBPut:DB$ChangeZone | Origin$ Stack | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put Ever After on the bottom of its owner's library.
 DeckHints:Ability$Graveyard & Ability$Discard & Type$Zombie
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ever_after.jpg

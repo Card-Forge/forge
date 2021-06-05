@@ -3,8 +3,8 @@ ManaCost:2 R G
 Types:Creature Viashino Berserker
 PT:2/2
 K:Bloodthirst:1
-A:AB$ Pump | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature that can't block this creature this turn | IsCurse$ True | KW$ HIDDEN CantBlockCardUIDSource | DefinedKW$ CardUIDSource | UntilHostLeavesPlayOrEOT$ True | StackDescription$ {c:Targeted} can't block CARDNAME this turn. | SpellDescription$ Target creature can't block CARDNAME this turn.
+A:AB$ Effect | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature that can't block this creature this turn | IsCurse$ True | RememberObjects$ TargetedCard | ForgetOnMoved$ Battlefield | StaticAbilities$ KWPump | Duration$ UntilHostLeavesPlayOrEOT | StackDescription$ {c:Targeted} can't block CARDNAME this turn. | SpellDescription$ Target creature can't block CARDNAME this turn.
+SVar:KWPump:Mode$ CantBlockBy | ValidAttacker$ Creature.EffectSource | ValidBlocker$ Creature.IsRemembered | Description$ {c:Remembered} can't block EFFECTSOURCE this turn.
 A:AB$ MustBlock | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature that must block this creature this turn | SpellDescription$ Target creature blocks CARDNAME this turn if able.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/burning_tree_bloodscale.jpg
 Oracle:Bloodthirst 1 (If an opponent was dealt damage this turn, this creature enters the battlefield with a +1/+1 counter on it.)\n{2}{R}: Target creature can't block Burning-Tree Bloodscale this turn.\n{2}{G}: Target creature blocks Burning-Tree Bloodscale this turn if able.

@@ -89,7 +89,7 @@ ChaosDraftThemes=CORE_SET
 129 C Drudge Skeletons
 130 C Dusk Imp
 184 U Dwarven Demolition Team
-C Eager Cadet
+S1 C Eager Cadet
 131 R Eastern Paladin
 324 U Elfhame Palace
 18 R Elite Archers
@@ -100,7 +100,7 @@ C Eager Cadet
 244 R Elvish Piper
 245 U Elvish Scrapper
 246 R Emperor Crocodile
-U Enormous Baloth
+S6 U Enormous Baloth
 185 U Enrage
 300 R Ensnaring Bridge
 76 R Evacuation
@@ -129,7 +129,7 @@ U Enormous Baloth
 253 C Giant Badger
 135 C Giant Cockroach
 254 C Giant Growth
-C Giant Octopus
+S3 C Giant Octopus
 255 C Giant Spider
 20 R Glorious Anthem
 21 C Glory Seeker
@@ -273,7 +273,7 @@ C Giant Octopus
 42 U Sanctimony
 43 R Savannah Lions
 160 C Scathe Zombies
-C Sea Eagle
+S4 C Sea Eagle
 99 C Sea Monster
 218 R Searing Wind
 44 U Seasoned Marshal
@@ -288,7 +288,7 @@ C Sea Eagle
 326 U Shivan Oasis
 222 C Shock
 223 C Shock Troops
-U Silverback Ape
+S7 U Silverback Ape
 224 C Sizzle
 313 R Skull of Orm
 164 U Slay
@@ -344,14 +344,14 @@ U Silverback Ape
 330 U Urza's Tower
 170 R Vampiric Spirit
 55 C Venerable Monk
-U Vengeance
+S2 U Vengeance
 285 R Verduran Enchantress
 286 R Vernal Bloom
 319 R Vexing Arcanix
 230 U Viashino Sandstalker
 171 C Vicious Hunger
 287 C Vine Trellis
-R Vizzerdrix
+S5 R Vizzerdrix
 231 C Volcanic Hammer
 113 U Wall of Air
 320 U Wall of Spears

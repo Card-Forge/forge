@@ -49,6 +49,7 @@ import forge.model.FModel;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
 import forge.screens.match.views.VAssignCombatDamage;
+import forge.screens.match.views.VAssignGenericAmount;
 import forge.screens.match.views.VPhaseIndicator;
 import forge.screens.match.views.VPhaseIndicator.PhaseLabel;
 import forge.screens.match.views.VPlayerPanel;
@@ -396,6 +397,18 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
+    public Map<GameEntityView, Integer> assignGenericAmount(final CardView effectSource, final Map<GameEntityView, Integer> targets,
+            final int amount, final boolean atLeastOne, final String amountLabel) {
+        return new WaitCallback<Map<GameEntityView, Integer>>() {
+            @Override
+            public void run() {
+                final VAssignGenericAmount v = new VAssignGenericAmount(effectSource, targets, amount, atLeastOne, amountLabel, this);
+                v.show();
+            }
+        }.invokeAndWait();
+    }
+
+    @Override
     public void updateManaPool(final Iterable<PlayerView> manaPoolUpdate) {
         for (final PlayerView p : manaPoolUpdate) {
             view.getPlayerPanel(p).updateManaPool();
@@ -472,6 +485,11 @@ public class MatchController extends AbstractGuiGame {
         super.afterGameEnd();
         Forge.back();
         //view = null;
+    }
+
+    public void resetPlayerPanels() {
+        if (view != null)
+            view.forceRevalidate();
     }
 
     private static void actuateMatchPreferences() {

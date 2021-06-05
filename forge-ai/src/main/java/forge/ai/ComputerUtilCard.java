@@ -76,7 +76,7 @@ public class ComputerUtilCard {
                 }
             });
         }
-        return ComputerUtilCard.getMostExpensivePermanentAI(all);
+        return getMostExpensivePermanentAI(all);
     }
 
     /**
@@ -265,16 +265,14 @@ public class ComputerUtilCard {
      * @return a {@link forge.game.card.Card} object.
      */
     public static Card getBestAI(final Iterable<Card> list) {
-        // Get Best will filter by appropriate getBest list if ALL of the list
-        // is of that type
+        // Get Best will filter by appropriate getBest list if ALL of the list is of that type
         if (Iterables.all(list, CardPredicates.Presets.CREATURES)) {
             return ComputerUtilCard.getBestCreatureAI(list);
         }
         if (Iterables.all(list, CardPredicates.Presets.LANDS)) {
             return getBestLandAI(list);
         }
-        // TODO - Once we get an EvaluatePermanent this should call
-        // getBestPermanent()
+        // TODO - Once we get an EvaluatePermanent this should call getBestPermanent()
         return ComputerUtilCard.getMostExpensivePermanentAI(list);
     }
 
@@ -383,7 +381,7 @@ public class ComputerUtilCard {
         }
 
         if (biasLand && Iterables.any(list, CardPredicates.Presets.LANDS)) {
-            return ComputerUtilCard.getWorstLand(CardLists.filter(list, CardPredicates.Presets.LANDS));
+            return getWorstLand(CardLists.filter(list, CardPredicates.Presets.LANDS));
         }
     
         final boolean hasCreatures = Iterables.any(list, CardPredicates.Presets.CREATURES);
@@ -393,7 +391,7 @@ public class ComputerUtilCard {
     
         List<Card> lands = CardLists.filter(list, CardPredicates.Presets.LANDS);
         if (lands.size() > 6) {
-            return ComputerUtilCard.getWorstLand(lands);
+            return getWorstLand(lands);
         }
     
         if (hasEnchantmants || hasArtifacts) {
@@ -410,8 +408,7 @@ public class ComputerUtilCard {
             return getWorstCreatureAI(CardLists.filter(list, CardPredicates.Presets.CREATURES));
         }
     
-        // Planeswalkers fall through to here, lands will fall through if there
-        // aren't very many
+        // Planeswalkers fall through to here, lands will fall through if there aren't very many
         return getCheapestPermanentAI(list, null, false);
     }
 
@@ -444,7 +441,7 @@ public class ComputerUtilCard {
     public static final Comparator<Card> EvaluateCreatureComparator = new Comparator<Card>() {
         @Override
         public int compare(final Card a, final Card b) {
-            return ComputerUtilCard.evaluateCreature(b) - ComputerUtilCard.evaluateCreature(a);
+            return evaluateCreature(b) - evaluateCreature(a);
         }
     };
 
@@ -882,9 +879,9 @@ public class ComputerUtilCard {
     public static final Predicate<Deck> AI_KNOWS_HOW_TO_PLAY_ALL_CARDS = new Predicate<Deck>() {
         @Override
         public boolean apply(Deck d) {
-            for(Entry<DeckSection, CardPool> cp: d) {
-                for(Entry<PaperCard, Integer> e : cp.getValue()) {
-                    if ( e.getKey().getRules().getAiHints().getRemAIDecks() )
+            for (Entry<DeckSection, CardPool> cp: d) {
+                for (Entry<PaperCard, Integer> e : cp.getValue()) {
+                    if (e.getKey().getRules().getAiHints().getRemAIDecks())
                         return false;
                 }
             }
@@ -982,7 +979,7 @@ public class ComputerUtilCard {
                 for(byte c : MagicColor.WUBRG) {
                     String devotionCode = "Count$Devotion." + MagicColor.toLongString(c);
 
-                    int devotion = CardFactoryUtil.xCount(sa.getHostCard(), devotionCode);
+                    int devotion = AbilityUtils.calculateAmount(sa.getHostCard(), devotionCode, sa);
                     if (devotion > curDevotion && !CardLists.filter(hand, CardPredicates.isColor(c)).isEmpty()) {
                         curDevotion = devotion;
                         chosenColor = MagicColor.toLongString(c);
@@ -1198,7 +1195,7 @@ public class ComputerUtilCard {
                     }
                     String kws = params.get("AddKeyword");
                     if (kws != null) {
-                        bonusPT += 4 * (1 + StringUtils.countMatches(kws, "&"));    //treat each added keyword as a +2/+2 for now
+                        bonusPT += 4 * (1 + StringUtils.countMatches(kws, "&")); //treat each added keyword as a +2/+2 for now
                     }
                     if (bonusPT > 0) {
                         threat = bonusPT * (1 + opp.getCreaturesInPlay().size()) / 10.0f;
@@ -1212,7 +1209,7 @@ public class ComputerUtilCard {
         }
         
         final float valueNow = Math.max(valueTempo, threat);
-        if (valueNow < 0.2) {   //hard floor to reduce ridiculous odds for instants over time
+        if (valueNow < 0.2) { //hard floor to reduce ridiculous odds for instants over time
             return false;
         }
         final float chance = MyRandom.getRandom().nextFloat();
@@ -1310,7 +1307,7 @@ public class ComputerUtilCard {
                     threat *= 2;
                 }
                 if (c.getNetPower() == 0 && c == sa.getHostCard() && power > 0 ) {
-                    threat *= 4;    //over-value self +attack for 0 power creatures which may be pumped further after attacking 
+                    threat *= 4; //over-value self +attack for 0 power creatures which may be pumped further after attacking 
                 }
                 chance += threat;
 
@@ -1644,11 +1641,12 @@ public class ComputerUtilCard {
         copiedKeywords.insertAll(pumped.getKeywords());
         List<KeywordInterface> toCopy = Lists.newArrayList();
         for (KeywordInterface k : c.getKeywords()) {
-            if (!copiedKeywords.contains(k.getOriginal())) {
-                if (k.getHidden()) {
-                    pumped.addHiddenExtrinsicKeyword(k);
+            KeywordInterface copiedKI = k.copy(c, true);
+            if (!copiedKeywords.contains(copiedKI.getOriginal())) {
+                if (copiedKI.getHidden()) {
+                    pumped.addHiddenExtrinsicKeyword(copiedKI);
                 } else {
-                    toCopy.add(k);
+                    toCopy.add(copiedKI);
                 }
             }
         }
@@ -1678,37 +1676,27 @@ public class ComputerUtilCard {
             // remove old boost that might be copied
             for (final StaticAbility stAb : c.getStaticAbilities()) {
                 vCard.removePTBoost(c.getTimestamp(), stAb.getId());
-                final Map<String, String> params = stAb.getMapParams();
-                if (!params.get("Mode").equals("Continuous")) {
+                if (!stAb.getParam("Mode").equals("Continuous")) {
                     continue;
                 }
-                if (!params.containsKey("Affected")) {
+                if (!stAb.hasParam("Affected")) {
                     continue;
                 }
-                if (!params.containsKey("AddPower") && !params.containsKey("AddToughness")) {
+                if (!stAb.hasParam("AddPower") && !stAb.hasParam("AddToughness")) {
                     continue;
                 }
-                final String valid = params.get("Affected");
-                if (!vCard.isValid(valid, c.getController(), c, null)) {
+                if (!vCard.isValid(stAb.getParam("Affected").split(","), c.getController(), c, stAb)) {
                     continue;
                 }
                 int att = 0;
-                if (params.containsKey("AddPower")) {
-                    String addP = params.get("AddPower");
-                    if (addP.equals("AffectedX")) {
-                        att = CardFactoryUtil.xCount(vCard, AbilityUtils.getSVar(stAb, addP));
-                    } else {
-                        att = AbilityUtils.calculateAmount(c, addP, stAb);
-                    }
+                if (stAb.hasParam("AddPower")) {
+                    String addP = stAb.getParam("AddPower");
+                    att = AbilityUtils.calculateAmount(addP.startsWith("Affected") ? vCard : c, addP, stAb, true);
                 }
                 int def = 0;
-                if (params.containsKey("AddToughness")) {
-                    String addT = params.get("AddToughness");
-                    if (addT.equals("AffectedY")) {
-                        def = CardFactoryUtil.xCount(vCard, AbilityUtils.getSVar(stAb, addT));
-                    } else {
-                        def = AbilityUtils.calculateAmount(c, addT, stAb);
-                    }
+                if (stAb.hasParam("AddToughness")) {
+                    String addT = stAb.getParam("AddToughness");
+                    def = AbilityUtils.calculateAmount(addT.startsWith("Affected") ? vCard : c, addT, stAb, true);
                 }
                 vCard.addPTBoost(att, def, c.getTimestamp(), stAb.getId());
             }

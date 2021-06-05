@@ -3,7 +3,7 @@ ManaCost:1 W
 Types:Enchantment
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target tapped creature an opponent controls until CARDNAME leaves the battlefield.
-SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.tapped+OppCtrl | TgtPrompt$ Select target tapped creature an opponent controls | UntilHostLeavesPlay$ True
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.tapped+OppCtrl | TgtPrompt$ Select target tapped creature an opponent controls | Duration$ UntilHostLeavesPlay
 SVar:PlayMain1:TRUE
 SVar:OblivionRing:TRUE
 Oracle:Flash\nWhen Seal Away enters the battlefield, exile target tapped creature an opponent controls until Seal Away leaves the battlefield.

@@ -4,6 +4,6 @@ Types:Creature Leviathan
 PT:9/9
 T:Mode$ ChangesZone | ValidCard$ Card.wasCastFromHand+Self | Destination$ Battlefield | Execute$ TrigTapAll | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it from your hand, tap all nonblue creatures. Those creatures don't untap during their controllers' next untap steps.
 SVar:TrigTapAll:DB$ TapAll | ValidCards$ Creature.nonBlue | SubAbility$ TrigPump2
-SVar:TrigPump2:DB$ PumpAll | ValidCards$ Creature.nonBlue | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True
+SVar:TrigPump2:DB$ PumpAll | ValidCards$ Creature.nonBlue | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent
 SVar:Picture:http://www.wizards.com/global/images/magic/general/breaching_leviathan.jpg
 Oracle:When Breaching Leviathan enters the battlefield, if you cast it from your hand, tap all nonblue creatures. Those creatures don't untap during their controllers' next untap steps.

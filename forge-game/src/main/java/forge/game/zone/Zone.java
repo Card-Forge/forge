@@ -121,9 +121,9 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
             c.setTapped(false);
         }
 
-        // Do not add Tokens to other zones than the battlefield.
+        // Do not add Tokens to other zones than the battlefield. (unless it's a copy of a card 706.12)
         // But Effects/Emblems count as Tokens too, so allow Command too.
-        if (zoneType == ZoneType.Battlefield || !c.isToken()) {
+        if ((zoneType == ZoneType.Battlefield || !c.isToken()) || (zoneType == ZoneType.Stack && c.getCopiedPermanent() != null)) {
             c.setZone(this);
 
             if (index == null) {
@@ -167,10 +167,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
             cardList.clear();
         } else {
             for (Card c : cardList) {
-                if (cardList.remove(c)) {
-                    onChanged();
-                    game.fireEvent(new GameEventZone(zoneType, getPlayer(), EventValueChangeType.Removed, c));
-                }
+                remove(c);
             }
         }
     }
@@ -208,12 +205,10 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
     }
 
     public final List<Card> getCardsAddedThisTurn(final ZoneType origin) {
-        //System.out.print("Request cards put into " + getZoneType() + " from " + origin + ".Amount: ");
         return getCardsAdded(cardsAddedThisTurn, origin);
     }
 
     public final List<Card> getCardsAddedLastTurn(final ZoneType origin) {
-        //System.out.print("Last turn - Request cards put into " + getZoneType() + " from " + origin + ".Amount: ");
         return getCardsAdded(cardsAddedLastTurn, origin);
     }
 

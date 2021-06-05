@@ -4,7 +4,7 @@ Types:Creature Human Noble Wizard
 PT:2/3
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ Whenever CARDNAME deals combat damage to a creature, tap that creature. It doesn't untap during its controller's next untap step.
 SVar:TrigTap:DB$ Tap | Defined$ TriggeredTarget | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | Defined$ TriggeredTarget | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True | IsCurse$ True
+SVar:DBPump:DB$ Pump | Defined$ TriggeredTarget | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent | IsCurse$ True
 SVar:HasCombatEffect:TRUE
 Oracle:Whenever Queen of Ice deals combat damage to a creature, tap that creature. It doesn't untap during its controller's next untap step.
 AlternateMode:Adventure
@@ -15,5 +15,5 @@ Name:Rage of Winter
 ManaCost:1 U
 Types:Sorcery Adventure
 A:SP$ Tap | Cost$ 1 U | ValidTgts$ Creature | SubAbility$ DBPump | SpellDescription$ Tap target creature. It doesn't untap during its controller's next untap step. (Then exile this card. You may cast the creature later from exile.)
-SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True | IsCurse$ True
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent | IsCurse$ True
 Oracle:Tap target creature. It doesn't untap during its controller's next untap step. (Then exile this card. You may cast the creature later from exile.)

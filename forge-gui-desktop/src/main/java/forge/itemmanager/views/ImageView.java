@@ -46,7 +46,9 @@ import forge.itemmanager.ItemManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.ItemManagerModel;
 import forge.itemmanager.SItemManagerUtil;
+import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.screens.deckeditor.CDeckEditorUI;
@@ -796,6 +798,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         if (hoveredItem == item) { return false; }
         hoveredItem = item;
         if (item != null) {
+            final CDetailPicture cDetailPicture = itemManager.getCDetailPicture();
+            if (cDetailPicture != null) {
+                cDetailPicture.displayAlt(item.alt);
+            }
             showHoveredItem(item.item);
         }
         return true;
@@ -999,6 +1005,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         private final T item;
         private int index;
         private boolean selected;
+        private boolean alt;
 
         private ItemInfo(T item0) {
             item = item0;
@@ -1115,6 +1122,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     if (pile.getTop() >= visibleBottom) {
                         break;
                     }
+
                     for (ItemInfo itemInfo : pile.items) {
                         if (itemInfo.getBottom() < visibleTop) {
                             continue;
@@ -1122,6 +1130,28 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         if (itemInfo.getTop() >= visibleBottom) {
                             break;
                         }
+
+                        InventoryItem item = itemInfo.item;
+                        itemInfo.alt = false;
+                        if (!FModel.getPreferences().getPref(FPref.UI_SWITCH_STATES_DECKVIEW).equals(ForgeConstants.SWITCH_CARDSTATES_DECK_NEVER)) {
+                            if ((hoveredItem == null || !hoveredItem.item.equals(item)) || (FModel.getPreferences().getPref(FPref.UI_SWITCH_STATES_DECKVIEW).equals(ForgeConstants.SWITCH_CARDSTATES_DECK_ALWAYS))) {
+                                if (item instanceof PaperCard) {
+                                    if (ImageUtil.hasBackFacePicture(((PaperCard)item))) {
+                                        if (item.equals(lastAltCard)) {
+                                            itemInfo.alt = true;
+                                            lastAltCard = null;
+                                        }
+                                        else {
+                                            lastAltCard = item;
+                                        }
+                                    }
+                                    else {
+                                        lastAltCard = null;
+                                    }
+                                }
+                            }
+                        }
+
                         if (itemInfo != hoveredItem) { //save hovered item for last
                             drawItemImage(g2d, itemInfo);
                         }
@@ -1149,12 +1179,13 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             Rectangle bounds = itemInfo.getBounds();
             final int itemWidth = bounds.width;
             final int selBorderSize = 1;
-            boolean deckSelectMode = itemInfo.item instanceof DeckProxy;
+            InventoryItem item = itemInfo.item;
+            boolean deckSelectMode = item instanceof DeckProxy;
 
             // Determine whether to render border from properties
             boolean noBorder = !isPreferenceEnabled(ForgePreferences.FPref.UI_RENDER_BLACK_BORDERS);
-            if (itemInfo.item instanceof IPaperCard) {
-                CardView cv = CardView.getCardForUi((IPaperCard) itemInfo.item);
+            if (item instanceof IPaperCard) {
+                CardView cv = CardView.getCardForUi((IPaperCard) item);
                 // Amonkhet Invocations
                 noBorder |= cv.getCurrentState().getSetCode().equalsIgnoreCase("MPS_AKH");
                 // Unstable basic lands
@@ -1174,27 +1205,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             g.setColor(Color.black);
             g.fillRoundRect(bounds.x, bounds.y, bounds.width, bounds.height, cornerSize, cornerSize);
 
-            InventoryItem item = itemInfo.item;
-
-            boolean tryAltState = false;
-            if (hoveredItem == null || hoveredItem.item != item) {
-                if (item instanceof PaperCard) {
-                    if (ImageUtil.hasBackFacePicture(((PaperCard)item))) {
-                        if (item.equals(lastAltCard)) {
-                            tryAltState = true;
-                            lastAltCard = null;
-                        }
-                        else {
-                            lastAltCard = item;
-                        }
-                    }
-                    else {
-                        lastAltCard = null;
-                    }
-                }
-            }
-
-            BufferedImage img = ImageCache.getImage(item, bounds.width - 2 * borderSize, bounds.height - 2 * borderSize, tryAltState);
+            BufferedImage img = ImageCache.getImage(item, bounds.width - 2 * borderSize, bounds.height - 2 * borderSize, itemInfo.alt);
 
             if (img != null) {
                 g.drawImage(img, null, bounds.x + borderSize, bounds.y + borderSize);

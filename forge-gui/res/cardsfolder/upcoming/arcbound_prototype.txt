@@ -1,0 +1,7 @@
+Name:Arcbound Prototype
+ManaCost:1 W
+Types:Artifact Creature Assembly-Worker
+PT:0/0
+K:Modular:2
+DeckHas:Ability$Counters
+Oracle:Modular 2 (This creature enters the battlefield with two +1/+1 counters on it. When it dies, you may put its +1/+1 counters on target artifact creature.)

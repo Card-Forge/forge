@@ -6,7 +6,7 @@ K:Partner:Nikara, Lair Scavenger:Nikara
 K:Vigilance
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters the battlefield, exile another creature you control until CARDNAME leaves the battlefield. When you do, distribute +1/+1 counters among any number of target creatures, where X is the exiled creature's power.
 SVar:TrigChoose:DB$ ChooseCard | Choices$ Creature.YouCtrl+Other | ChoiceZone$ Battlefield | ChoiceTitle$ Select another creature you control | Mandatory$ True | SubAbility$ DBExile
-SVar:DBExile:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Battlefield | Destination$ Exile | RememberLKI$ True | UntilHostLeavesPlay$ True | SubAbility$ DBImmediateTrigger
+SVar:DBExile:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Battlefield | Destination$ Exile | RememberLKI$ True | Duration$ UntilHostLeavesPlay | SubAbility$ DBImmediateTrigger
 SVar:DBImmediateTrigger:DB$ ImmediateTrigger | Execute$ TrigPutCounters | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | TriggerDescription$ When you do, distribute X +1/+1 counters among any number of target creatures, where X is the exiled creature's power.
 SVar:TrigPutCounters:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute counters to | CounterType$ P1P1 | CounterNum$ X | TargetMin$ 1 | TargetMax$ X | DividedAsYouChoose$ X | SubAbility$ DBCleanup | SpellDescription$ Distribute X +1/+1 counters among any number of target creatures.
 SVar:X:RememberedLKI$CardPower

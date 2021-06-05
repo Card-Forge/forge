@@ -5,7 +5,7 @@ Loyalty:5
 A:AB$ GainLife | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Defined$ You | LifeAmount$ 2 | SubAbility$ DBDraw | SpellDescription$ You gain 2 life and draw a card.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
 A:AB$ Tap | Cost$ SubCounter<1/LOYALTY> | ValidTgts$ Creature | TgtPrompt$ Choose target creature to tap. | Planeswalker$ True | SubAbility$ DovinPump | SpellDescription$ Tap target creature. It doesn't untap during its controller's next untap step.
-SVar:DovinPump:DB$ Pump | Defined$ Targeted | Permanent$ True | KW$ HIDDEN This card doesn't untap during your next untap step.
+SVar:DovinPump:DB$ Pump | Defined$ Targeted | Duration$ Permanent | KW$ HIDDEN This card doesn't untap during your next untap step.
 A:AB$ TapAll | Cost$ SubCounter<9/LOYALTY> | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | ValidCards$ Permanent | Planeswalker$ True | Ultimate$ True | SubAbility$ NoUntap | SpellDescription$ Tap all permanents target opponent controls. That player skips their next untap step.
 SVar:NoUntap:DB$ SkipPhase | Defined$ TargetedPlayer | Step$ Untap | IsCurse$ True
 Oracle:[+1]: You gain 2 life and draw a card.\n[−1]: Tap target creature. It doesn't untap during its controller's next untap step.\n[−9]: Tap all permanents target opponent controls. That player skips their next untap step.

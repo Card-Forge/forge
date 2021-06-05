@@ -7,7 +7,7 @@ SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ Difference
 SVar:Y:Count$InYourHand
 SVar:Difference:Number$7/Minus.Y
 K:Menace
-A:AB$ Counter | Cost$ Discard<1/Card.cmcEQX/card with mana value X> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card.cmcEQX | AILogic$ Never | SpellDescription$ Counter target spell with mana value X.
-SVar:X:Count$xPaid
+A:AB$ Counter | Cost$ Discard<1/Card.cmcEQX/card with mana value X> | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | AILogic$ Never | SpellDescription$ Counter target spell with mana value X.
+SVar:X:Targeted$CardManaCost
 DeckNeeds:Ability$Mana.Colorless
 Oracle:When you cast this spell, if you have fewer than seven cards in hand, draw cards equal to the difference.\nMenace\nDiscard a card with mana value X: Counter target spell with mana value X.

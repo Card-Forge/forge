@@ -6,6 +6,6 @@ K:Flying
 K:Morph:2 U
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigDjinnVanishing | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, put two time counters on it and it gains vanishing.
 SVar:TrigDjinnVanishing:DB$ PutCounter | CounterType$ TIME | CounterNum$ 2 | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Vanishing:2 | Permanent$ True
+SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Vanishing:2 | Duration$ Permanent
 SVar:Picture:http://www.wizards.com/global/images/magic/general/maelstrom_djinn.jpg
 Oracle:Flying\nMorph {2}{U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Maelstrom Djinn is turned face up, put two time counters on it and it gains vanishing. (At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)

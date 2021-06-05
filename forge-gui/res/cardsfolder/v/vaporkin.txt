@@ -3,6 +3,5 @@ ManaCost:1 U
 Types:Creature Elemental
 PT:2/1
 K:Flying
-K:CARDNAME can block only creatures with flying.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vaporkin.jpg
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.withoutFlying | ValidBlocker$ Creature.Self | Description$ CARDNAME can block only creatures with flying.
 Oracle:Flying\nVaporkin can block only creatures with flying.

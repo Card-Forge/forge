@@ -297,7 +297,7 @@ public class PermanentAi extends SpellAbilityAi {
         if (!checkPhaseRestrictions(ai, sa, ai.getGame().getPhaseHandler())) {
             return false;
         }
-        return checkApiLogic(ai, sa);
+        return mandatory || checkApiLogic(ai, sa);
     }
 
 }

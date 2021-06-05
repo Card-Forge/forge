@@ -1,0 +1,11 @@
+Name:Foul Watcher
+ManaCost:1 U
+Types:Creature Nightmare Bird
+PT:1/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSurveil | TriggerDescription$ When CARDNAME enters the battlefield, surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)
+SVar:TrigSurveil:DB$ Surveil | Defined$ You | Amount$ 1
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | Condition$ Delirium | Description$ Delirium — CARDNAME gets +1/+0 as long as there are four or more card types among cards in your graveyard.
+DeckHints:Ability$Graveyard & Ability$Discard
+DeckHas:Ability$Delirium
+Oracle:Flying\nWhen Foul Watcher enters the battlefield, surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)\nDelirium — Foul Watcher gets +1/+0 as long as there are four or more card types among cards in your graveyard.

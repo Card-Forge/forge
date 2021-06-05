@@ -1,0 +1,15 @@
+Name:Out of Time
+ManaCost:1 W W
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters the battlefield, untap all creatures, then phase them out until CARDNAME leaves the battlefield. Put a time counter on CARDNAME for each creature phased out this way.
+SVar:TrigUntap:DB$ UntapAll | ValidCards$ Creature | RememberUntapped$ True | SubAbility$ DBPhase
+SVar:DBPhase:DB$ Phases | Defined$ Remembered | WontPhaseInNormal$ True | ConditionPresent$ Card.Self | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | Triggers$ TrigComeBack | RememberObjects$ Remembered | ImprintCards$ Self | ConditionPresent$ Card.Self | Duration$ Permanent | ForgetOnPhasedIn$ True | SubAbility$ DBPutCounter
+SVar:TrigComeBack:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsImprinted | Execute$ DBPhaseIn | TriggerZones$ Command | TriggerController$ TriggeredCardController | Static$ True | TriggerDescription$ These creatures phase out until CARDNAME leaves the battlefield.
+SVar:DBPhaseIn:DB$ Phases | Defined$ Remembered | PhaseInOrOut$ True | SubAbility$ DBExileSelf
+SVar:DBExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ TIME | CounterNum$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$RememberedSize
+K:Vanishing:0
+Oracle:When Out of Time enters the battlefield, untap all creatures, then phase them out until Out of Time leaves the battlefield. Put a time counter on Out of Time for each creature phased out this way.\nVanishing (At the beginning of your upkeep, remove a time counter from this enchantment. When the last is removed, sacrifice it.)

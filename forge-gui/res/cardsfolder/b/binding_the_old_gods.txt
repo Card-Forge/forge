@@ -1,8 +1,8 @@
 Name:Binding the Old Gods
 ManaCost:2 B G
 Types:Enchantment Saga
-K:Saga:3:DBDestroy,DBFetch,DBEffect
-SVar:DBDestroy:DB$ ChangeZone | Origin$ Battlefield | Destination$ Graveyard | ValidTgts$ Permanent.OppCtrl+nonland | TgtPrompt$ Select target nonland permanent an opponent controls | SpellDescription$ Destroy target nonland permanent an opponent controls.
-SVar:DBFetch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Forest | Tapped$ True | ChangeNum$ 1 | SpellDescription$ Search your library for a Forest card, put it onto the battlefield tapped, then shuffle.
-SVar:DBEffect:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Deathtouch | SpellDescription$ Creatures you control gain deathtouch until end of turn.
+K:Saga:3:DBDestroy,DBFetch,DBPump
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Permanent.OppCtrl+nonland | TgtPrompt$ Select target nonland permanent an opponent controls | SpellDescription$ Destroy target nonland permanent an opponent controls.
+SVar:DBFetch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Forest | Tapped$ True | ChangeNum$ 1 | Mandatory$ True | SpellDescription$ Search your library for a Forest card, put it onto the battlefield tapped, then shuffle.
+SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Deathtouch | SpellDescription$ Creatures you control gain deathtouch until end of turn.
 Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Destroy target nonland permanent an opponent controls.\nII — Search your library for a Forest card, put it onto the battlefield tapped, then shuffle.\nIII — Creatures you control gain deathtouch until end of turn.

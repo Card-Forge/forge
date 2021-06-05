@@ -2,7 +2,7 @@ Name:Thelonite Monk
 ManaCost:2 G G
 Types:Creature Insect Monk Cleric
 PT:1/2
-A:AB$ Animate | Cost$ T Sac<1/Creature.Green/green creature> | ValidTgts$ Land | TgtPrompt$ Select target land | Types$ Forest | RemoveLandTypes$ True | Permanent$ True | SpellDescription$ Target land becomes a Forest. (This effect lasts indefinitely.)
+A:AB$ Animate | Cost$ T Sac<1/Creature.Green/green creature> | ValidTgts$ Land | TgtPrompt$ Select target land | Types$ Forest | RemoveLandTypes$ True | Duration$ Permanent | SpellDescription$ Target land becomes a Forest. (This effect lasts indefinitely.)
 SVar:AIPreference:SacCost$Creature.Green+token
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thelonite_monk.jpg

@@ -4,7 +4,7 @@ Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ PsychicSlap | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals X damage to target opponent, where X is the number of cards in your hand minus the number of cards in that player's hand.
 SVar:PsychicSlap:DB$ DealDamage | ValidTgts$ Opponent | NumDmg$ X
 SVar:A:Count$InYourHand
-SVar:B:Count$InOppHand
+SVar:B:Count$InTargetedHand
 SVar:X:SVar$A/Minus.B
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bulwark.jpg

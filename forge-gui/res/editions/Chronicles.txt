@@ -12,131 +12,131 @@ BoosterBox=45
 Foil=NotSupported
 
 [cards]
-U Abu Ja'far
-C Active Volcano
-R Akron Legionnaire
-U Aladdin
-R Angelic Voices
-R Arcades Sabboth
-R Arena of the Ancients
-C Argothian Pixies
-C Ashnod's Altar
-C Ashnod's Transmogrant
-R Axelrod Gunnarson
-R Ayesha Tanaka
-U Azure Drake
-U Banshee
-R Barl's Cage
-U Beasts of Bogardan
-R Blood Moon
-U Blood of the Martyr
-C Bog Rats
-R Book of Rass
-C Boomerang
-R Bronze Horse
-C Cat Warriors
-R Chromium
-R City of Brass
-U Cocoon
-R Concordant Crossroads
-U Craw Giant
-C Cuombajj Witches
-R Cyclone
-C D'Avenant Archer
-R Dakkon Blackblade
-R Dance of Many
-C Dandan
-C Divine Offering
-C Emerald Dragonfly
-U Enchantment Alteration
-U Erhnam Djinn
-U Fallen Angel
-C Feldon's Cane
-U Fire Drake
-C Fishliver Oil
-C Flash Flood
-C Fountain of Youth
-R Gabriel Angelfire
-R Gauntlets of Chaos
-C Ghazban Ogre
-C Giant Slug
-U Goblin Artisans
-C Goblin Digging Team
-C Goblin Shrine
-C Goblins of the Flarg
-C Hasran Ogress
-R Hell's Caretaker
-R Horn of Deafening
-C Indestructible Aura
-U Ivory Guardians
-R Jalum Tome
-R Jeweled Bird
-R Johan
-R Juxtapose
-C Keepers of the Faith
-U Kei Takahashi
-R Land's Edge
-C Living Armor
-U Marhault Elsdragon
-C Metamorphosis
-C Mountain Yeti
-R Nebuchadnezzar
-R Nicol Bolas
-R Obelisk of Undoing
-R Palladia-Mors
-R Petra Sphinx
-U Primordial Ooze
-U Puppet Master
-U Rabid Wombat
-R Rakalite
-U Recall
-C Remove Soul
-C Repentant Blacksmith
-R Revelation
-R Rubinia Soulsinger
-C Runesword
-R Safe Haven
-C Scavenger Folk
-R Sentinel
-R Serpent Generator
-U Shield Wall
-U Shimian Night Stalker
-U Sivitri Scarzam
-R Sol'kanar the Swamp King
-R Stangg
-U Storm Seeker
-U Takklemaggot
-R Teleport
-U The Fallen
-R The Wretched
-U Tobias Andrion
-U Tor Wauki
-C Tormod's Crypt
-C Transmutation
-R Triassic Egg
-U Urza's Mine
-U Urza's Mine
-U Urza's Mine
-U Urza's Mine
-U Urza's Power Plant
-U Urza's Power Plant
-U Urza's Power Plant
-U Urza's Power Plant
-U Urza's Tower
-U Urza's Tower
-U Urza's Tower
-U Urza's Tower
-R Vaevictis Asmadi
-R Voodoo Doll
-C Wall of Heat
-U Wall of Opposition
-C Wall of Shadows
-C Wall of Vapor
-U Wall of Wonder
-C War Elephant
-U Witch Hunter
-R Xira Arien
-R Yawgmoth Demon
+1 U Abu Ja'far
+43 C Active Volcano
+2 R Akron Legionnaire
+44 U Aladdin
+3 R Angelic Voices
+71 R Arcades Sabboth
+91 R Arena of the Ancients
+57 C Argothian Pixies
+92 C Ashnod's Altar
+93 C Ashnod's Transmogrant
+72 R Axelrod Gunnarson
+73 R Ayesha Tanaka
+15 U Azure Drake
+29 U Banshee
+94 R Barl's Cage
+45 U Beasts of Bogardan
+46 R Blood Moon
+4 U Blood of the Martyr
+30 C Bog Rats
+95 R Book of Rass
+16 C Boomerang
+96 R Bronze Horse
+58 C Cat Warriors
+74 R Chromium
+112 R City of Brass
+59 U Cocoon
+60 R Concordant Crossroads
+61 U Craw Giant
+31 C Cuombajj Witches
+62 R Cyclone
+5 C D'Avenant Archer
+75 R Dakkon Blackblade
+17 R Dance of Many
+18 C Dandan
+6 C Divine Offering
+63 C Emerald Dragonfly
+19 U Enchantment Alteration
+64 U Erhnam Djinn
+32 U Fallen Angel
+97 C Feldon's Cane
+47 U Fire Drake
+20 C Fishliver Oil
+21 C Flash Flood
+98 C Fountain of Youth
+76 R Gabriel Angelfire
+99 R Gauntlets of Chaos
+65 C Ghazban Ogre
+33 C Giant Slug
+48 U Goblin Artisans
+49 C Goblin Digging Team
+50 C Goblin Shrine
+51 C Goblins of the Flarg
+34 C Hasran Ogress
+35 R Hell's Caretaker
+100 R Horn of Deafening
+7 C Indestructible Aura
+8 U Ivory Guardians
+101 R Jalum Tome
+102 R Jeweled Bird
+77 R Johan
+22 R Juxtapose
+9 C Keepers of the Faith
+78 U Kei Takahashi
+52 R Land's Edge
+103 C Living Armor
+79 U Marhault Elsdragon
+66 C Metamorphosis
+53 C Mountain Yeti
+80 R Nebuchadnezzar
+81 R Nicol Bolas
+104 R Obelisk of Undoing
+82 R Palladia-Mors
+10 R Petra Sphinx
+54 U Primordial Ooze
+23 U Puppet Master
+67 U Rabid Wombat
+105 R Rakalite
+24 U Recall
+25 C Remove Soul
+11 C Repentant Blacksmith
+68 R Revelation
+83 R Rubinia Soulsinger
+106 C Runesword
+113 R Safe Haven
+69 C Scavenger Folk
+107 R Sentinel
+108 R Serpent Generator
+12 U Shield Wall
+36 U Shimian Night Stalker
+84 U Sivitri Scarzam
+85 R Sol'kanar the Swamp King
+86 R Stangg
+70 U Storm Seeker
+37 U Takklemaggot
+26 R Teleport
+38 U The Fallen
+39 R The Wretched
+87 U Tobias Andrion
+88 U Tor Wauki
+109 C Tormod's Crypt
+40 C Transmutation
+110 R Triassic Egg
+114a U Urza's Mine
+114b U Urza's Mine
+114c U Urza's Mine
+114d U Urza's Mine
+115a U Urza's Power Plant
+115b U Urza's Power Plant
+115c U Urza's Power Plant
+115d U Urza's Power Plant
+116a U Urza's Tower
+116b U Urza's Tower
+116c U Urza's Tower
+116d U Urza's Tower
+89 R Vaevictis Asmadi
+111 R Voodoo Doll
+55 C Wall of Heat
+56 U Wall of Opposition
+41 C Wall of Shadows
+27 C Wall of Vapor
+28 U Wall of Wonder
+13 C War Elephant
+14 U Witch Hunter
+90 R Xira Arien
+42 R Yawgmoth Demon
 
 [tokens]
 stangg_twin

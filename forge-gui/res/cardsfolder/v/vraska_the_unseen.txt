@@ -2,7 +2,7 @@ Name:Vraska the Unseen
 ManaCost:3 B G
 Types:Legendary Planeswalker Vraska
 Loyalty:5
-A:AB$ Animate | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Defined$ Self | Triggers$ TrigVraska | sVars$ VraskaGaze | UntilYourNextTurn$ True | AILogic$ EOT | SpellDescription$ Until your next turn, whenever a creature deals combat damage to CARDNAME, destroy that creature. | StackDescription$ Until your next turn, whenever a creature deals combat damage to CARDNAME, destroy that creature.
+A:AB$ Animate | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Defined$ Self | Triggers$ TrigVraska | sVars$ VraskaGaze | Duration$ UntilYourNextTurn | AILogic$ EOT | SpellDescription$ Until your next turn, whenever a creature deals combat damage to CARDNAME, destroy that creature. | StackDescription$ Until your next turn, whenever a creature deals combat damage to CARDNAME, destroy that creature.
 SVar:TrigVraska:Mode$ DamageDone | ValidSource$ Creature | ValidTarget$ Card.Self | TriggerZones$ Battlefield | CombatDamage$ True | Execute$ VraskaGaze | TriggerDescription$ Until your next turn, whenever a creature deals combat damage to CARDNAME, destroy that creature.
 SVar:VraskaGaze:DB$ Destroy | Defined$ TriggeredSourceLKICopy
 A:AB$ Destroy | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | SpellDescription$ Destroy target nonland permanent.

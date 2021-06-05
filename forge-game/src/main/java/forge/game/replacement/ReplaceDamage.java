@@ -51,9 +51,6 @@ public class ReplaceDamage extends ReplacementEffect {
     public boolean canReplace(Map<AbilityKey, Object> runParams) {
         final Game game = getHostCard().getGame();
 
-        if (!(runParams.containsKey(AbilityKey.Prevention) == (hasParam("PreventionEffect") || hasParam("Prevent")))) {
-            return false;
-        }
         if (((Integer) runParams.get(AbilityKey.DamageAmount)) == 0) {
             // If no actual damage is dealt, there is nothing to replace
             return false;

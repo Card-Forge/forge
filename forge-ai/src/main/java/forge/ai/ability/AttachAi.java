@@ -555,12 +555,7 @@ public class AttachAi extends SpellAbilityAi {
         	if (!evenBetterList.isEmpty()) {
         		betterList = evenBetterList;
         	}
-        	evenBetterList = CardLists.filter(betterList, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return c.isUntapped();
-                }
-            });
+        	evenBetterList = CardLists.filter(betterList, CardPredicates.Presets.UNTAPPED);
         	if (!evenBetterList.isEmpty()) {
         		betterList = evenBetterList;
         	}
@@ -734,17 +729,15 @@ public class AttachAi extends SpellAbilityAi {
      */
     private static Card attachAISpecificCardPreference(final SpellAbility sa, final List<Card> list, final boolean mandatory,
             final Card attachSource) {
-        // I know this isn't much better than Hardcoding, but some cards need it for now
         final Player ai = sa.getActivatingPlayer();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         Card chosen = null;
 
         if ("Guilty Conscience".equals(sourceName)) {
             chosen = SpecialCardAi.GuiltyConscience.getBestAttachTarget(ai, sa, list);
-        } else if ("Bonds of Faith".equals(sourceName)) {
-            chosen = doPumpOrCurseAILogic(ai, sa, list, "Human");
-        } else if ("Clutch of Undeath".equals(sourceName)) {
-            chosen = doPumpOrCurseAILogic(ai, sa, list, "Zombie");
+        } else if (sa.hasParam("AIValid")) {
+            // TODO: Make the AI recognize which cards to pump based on the card's abilities alone
+            chosen = doPumpOrCurseAILogic(ai, sa, list, sa.getParam("AIValid"));
         }
 
         // If Mandatory (brought directly into play without casting) gotta
@@ -768,7 +761,7 @@ public class AttachAi extends SpellAbilityAi {
         int powerBuff = 0;
         for (StaticAbility stAb : sa.getHostCard().getStaticAbilities()) {
             if ("Card.EquippedBy".equals(stAb.getParam("Affected")) && stAb.hasParam("AddPower")) {
-                powerBuff = AbilityUtils.calculateAmount(sa.getHostCard(), stAb.getParam("AddPower"), null);
+                powerBuff = AbilityUtils.calculateAmount(sa.getHostCard(), stAb.getParam("AddPower"), stAb);
             }
         }
         if (combat != null && combat.isAttacking(equipped) && ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS, sa.getActivatingPlayer())) {
@@ -1646,7 +1639,7 @@ public class AttachAi extends SpellAbilityAi {
             return ComputerUtilCombat.canAttackNextTurn(card) && card.getNetCombatDamage() >= 1;
         } else if (keyword.endsWith("CARDNAME attacks each turn if able.") || keyword.endsWith("CARDNAME attacks each combat if able.")) {
             return ComputerUtilCombat.canAttackNextTurn(card) && CombatUtil.canBlock(card, true) && !ai.getCreaturesInPlay().isEmpty();
-        } else if (keyword.endsWith("CARDNAME can't block.") || keyword.contains("CantBlock")) {
+        } else if (keyword.endsWith("CARDNAME can't block.")) {
             return CombatUtil.canBlock(card, true);
         } else if (keyword.endsWith("CARDNAME's activated abilities can't be activated.")) {
             for (SpellAbility ability : card.getSpellAbilities()) {
@@ -1699,7 +1692,7 @@ public class AttachAi extends SpellAbilityAi {
                 if (!c.getController().equals(ai)) {
                     return false;
                 }
-                return c.getType().hasCreatureType(type);
+                return c.isValid(type, ai, sa.getHostCard(), sa);
             }
         });
         List<Card> oppNonType = CardLists.filter(list, new Predicate<Card>() {
@@ -1709,7 +1702,7 @@ public class AttachAi extends SpellAbilityAi {
                 if (c.getController().equals(ai)) {
                     return false;
                 }
-                return !c.getType().hasCreatureType(type) && !ComputerUtilCard.isUselessCreature(ai, c);
+                return !c.isValid(type, ai, sa.getHostCard(), sa) && !ComputerUtilCard.isUselessCreature(ai, c);
             }
         });
 

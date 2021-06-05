@@ -20,6 +20,8 @@ package forge.game.spellability;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.lang3.ObjectUtils;
+
 import com.google.common.collect.Lists;
 
 import forge.card.CardType;
@@ -302,7 +304,7 @@ public class TargetRestrictions {
      */
     public final boolean isMinTargetsChosen(final Card c, final SpellAbility sa) {
         int min = getMinTargets(c, sa);
-        if (min == 0) {
+        if (min == 0 || (sa.isDividedAsYouChoose() && ObjectUtils.defaultIfNull(sa.getDividedValue(), 0) == 0)) {
             return true;
         }
         return min <= sa.getTargets().size();

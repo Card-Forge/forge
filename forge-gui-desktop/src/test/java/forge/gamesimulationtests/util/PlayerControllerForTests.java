@@ -147,6 +147,12 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
+    public Map<GameEntity, Integer> divideShield(Card effectSource, Map<GameEntity, Integer> affected, int shieldAmount) {
+        throw new IllegalStateException("Erring on the side of caution here...");
+    }
+
+
+    @Override
     public Integer announceRequirements(SpellAbility ability, String announce) {
         throw new IllegalStateException("Erring on the side of caution here...");
     }
@@ -310,7 +316,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public boolean confirmReplacementEffect(ReplacementEffect replacementEffect, SpellAbility effectSA, String question) {
+    public boolean confirmReplacementEffect(ReplacementEffect replacementEffect, SpellAbility effectSA, GameEntity affected, String question) {
         return true;
     }
 

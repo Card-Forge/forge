@@ -2,6 +2,8 @@ package forge.util;
 
 import forge.gui.FThreads;
 
+import java.awt.event.KeyEvent;
+
 public class OperatingSystem {
     private static String os = System.getProperty("os.name").toLowerCase();
 
@@ -47,7 +49,10 @@ public class OperatingSystem {
             try {
                 //use robot to simulate user action so system standby timer resets
                 java.awt.Robot robot = new java.awt.Robot();
-                robot.keyPress(0xF002); //simulate F15 key press since that won't do anything noticable
+                if (isMac())
+                    robot.keyPress(KeyEvent.VK_F1); // F15 increases Display Brightness by default. Switch to F1
+                else
+                    robot.keyPress(KeyEvent.VK_F15); //simulate F15 key press since that won't do anything noticeable
 
                 delayedKeepAwakeTask = ThreadUtil.delay(30000, keepSystemAwake); //repeat every 30 seconds until flag cleared
             }

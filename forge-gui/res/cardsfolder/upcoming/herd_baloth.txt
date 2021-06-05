@@ -1,0 +1,9 @@
+Name:Herd Baloth
+ManaCost:3 G G
+Types:Creature Beast
+PT:4/4
+T:Mode$ CounterAddedOnce | ValidCard$ Card.Self | TriggerZones$ Battlefield | CounterType$ P1P1 | Execute$ TrigToken | OptionalDecider$ You | TriggerDescription$ Whenever one or more +1/+1 counters are put on CARDNAME, you may create a 4/4 green Beast creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_4_4_beast | TokenOwner$ You
+DeckHints:Ability$Counters
+DeckHas:Ability$Token
+Oracle:Whenever one or more +1/+1 counters are put on Herd Baloth, you may create a 4/4 green Beast creature token.

@@ -2,7 +2,7 @@ Name:Grasp of Fate
 ManaCost:1 W W
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, for each opponent, exile up to one target nonland permanent that player controls until CARDNAME leaves the battlefield. (Those permanents return under their owners' control.)
-SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand+OppCtrl | TargetMin$ 0 | TargetMax$ OneEach | TargetsWithDifferentControllers$ True | TgtPrompt$ Select up to one target nonland permanent each opponent controls | UntilHostLeavesPlay$ True
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand+OppCtrl | TargetMin$ 0 | TargetMax$ OneEach | TargetsWithDifferentControllers$ True | TgtPrompt$ Select up to one target nonland permanent each opponent controls | Duration$ UntilHostLeavesPlay
 SVar:OneEach:PlayerCountOpponents$Amount
 SVar:PlayMain1:TRUE
 SVar:OblivionRing:TRUE

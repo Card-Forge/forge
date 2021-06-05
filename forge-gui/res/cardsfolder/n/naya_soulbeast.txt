@@ -2,15 +2,14 @@ Name:Naya Soulbeast
 ManaCost:6 G G
 Types:Creature Beast
 PT:0/0
-K:Trample
-T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigRepeat | TriggerDescription$ Trample
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigRepeat | TriggerDescription$ When you cast this spell, each player reveals the top card of their library.
 SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBReveal
 SVar:DBReveal:DB$ Dig | Defined$ Player.IsRemembered | DigNum$ 1 | Reveal$ True | NoMove$ True | RememberRevealed$ True
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ SoulbestETB | Secondary$ True | Description$ CARDNAME enters the battlefield with X +1/+1 counters on it, where X is the total mana value of all cards revealed this way.
-SVar:SoulbestETB:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard | SubAbility$ SoulbestCounters
-SVar:SoulbestCounters:DB$ PutCounter | ETB$ True | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCleanup
+K:etbCounter:P1P1:X:no Condition:CARDNAME enters the battlefield with X +1/+1 counters on it, where X is the total mana value of all cards revealed this way.
+SVar:X:Remembered$SumCMC
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBCleanup | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Remembered$CardManaCost
+K:Trample
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/naya_soulbeast.jpg
+DeckHas:Ability$Counters
 Oracle:When you cast this spell, each player reveals the top card of their library. Naya Soulbeast enters the battlefield with X +1/+1 counters on it, where X is the total mana value of all cards revealed this way.\nTrample

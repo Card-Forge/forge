@@ -12,455 +12,455 @@ Foil=NotSupported
 ChaosDraftThemes=CORE_SET
 
 [cards]
-U AEther Storm
-U Abbey Gargoyles
-U Abyssal Specter
-R Adarkar Wastes
-U Air Elemental
-R Akron Legionnaire
-C Alabaster Potion
-R Aladdin's Ring
-C Ambush Party
-C Amulet of Kroog
-R An-Havva Constable
-U Angry Mob
-U Animate Dead
-R Animate Wall
-R Ankh of Mishra
-U Anti-Magic Aura
-U Arenson's Aura
-R Armageddon
-C Armor of Faith
-U Ashes to Ashes
-U Ashnod's Altar
-C Ashnod's Transmogrant
-R Aspect of Wolf
-U Atog
-C Aurochs
-C Aysen Bureaucrats
-U Azure Drake
-R Bad Moon
-R Ball Lightning
-C Barbed Sextant
-R Barl's Cage
-C Battering Ram
-C Benalish Hero
-U Binding Grasp
-C Bird Maiden
-R Birds of Paradise
-U Black Knight
-C Blessed Wine
-U Blight
-R Blinking Spirit
-C Blood Lust
-C Bog Imp
-C Bog Rats
-U Bog Wraith
-C Boomerang
-R Bottle of Suleiman
-R Bottomless Vault
-C Brainstorm
-C Brainwash
-C Brassclaw Orcs
-U Breeding Pit
-R Broken Visage
-C Brothers of Fire
-R Brushland
-C Carapace
-R Caribou Range
-U Carrion Ants
-U Castle
-C Cat Warriors
-U Cave People
-C Chub Toad
-U Circle of Protection: Artifacts
-C Circle of Protection: Black
-C Circle of Protection: Blue
-C Circle of Protection: Green
-C Circle of Protection: Red
-C Circle of Protection: White
-R City of Brass
-C Clay Statue
-C Cloak of Confusion
-R Clockwork Beast
-U Clockwork Steed
-R Cockatrice
-R Colossus of Sardia
-U Conquer
-R Coral Helm
-C Counterspell
-U Craw Giant
-C Craw Wurm
-R Crimson Manticore
-R Crown of the Ages
-U Crumble
-R Crusade
-U Crystal Rod
-U Cursed Land
-C D'Avenant Archer
-R Dance of Many
-R Dancing Scimitar
-C Dandan
-C Dark Maze
-C Dark Ritual
-C Death Speakers
-C Death Ward
-U Deathgrip
-R Deflection
-R Derelor
-U Desert Twister
-U Detonate
-U Diabolic Machine
-R Dingus Egg
-C Disenchant
-C Disintegrate
-R Disrupting Scepter
-C Divine Offering
-U Divine Transformation
-R Dragon Engine
-C Drain Life
-R Drain Power
-C Drudge Skeletons
-C Durkwood Boars
-U Dust to Dust
-U Dwarven Catapult
-R Dwarven Hold
-U Dwarven Ruins
-C Dwarven Soldier
-C Dwarven Warriors
-R Earthquake
-U Ebon Stronghold
-R Elder Druid
-R Elkin Bottle
-U Elven Riders
-R Elvish Archers
-U Energy Flux
-C Enervate
-C Erg Raiders
-C Errantry
-C Eternal Warrior
-U Evil Eye of Orms-by-Gore
-U Evil Presence
-R Eye for an Eye
-U Fallen Angel
-C Fear
-U Feedback
-U Feldon's Cane
-U Fellwar Stone
-R Feroz's Ban
-U Fire Drake
-C Fireball
-C Firebreathing
-U Flame Spirit
-C Flare
-U Flashfires
-C Flight
-C Flood
-R Flying Carpet
-C Fog
-C Force Spike
-R Force of Nature
-L Forest
-L Forest
-L Forest
-L Forest
-R Forget
-U Fountain of Youth
-C Foxfire
-C Frozen Shade
-C Funeral March
-R Fungusaur
-U Fyndhorn Elder
-R Game of Chaos
-C Gaseous Form
-R Gauntlets of Chaos
-C Ghazban Ogre
-C Giant Growth
-C Giant Spider
-C Giant Strength
-U Glacial Wall
-U Glasses of Urza
-U Gloom
-C Goblin Digging Team
-C Goblin Hero
-R Goblin King
-C Goblin War Drums
-R Goblin Warrens
-C Grapeshot Catapult
-U Greater Realm of Preservation
-U Greater Werewolf
-C Grizzly Bears
-U Havenwood Battleground
-C Heal
-C Healing Salve
-R Hecatomb
-R Helm of Chatzuk
-C Hill Giant
-C Hipparion
-R Hollow Trees
-C Holy Strength
-C Homarid Warrior
-C Howl from Beyond
-R Howling Mine
-C Hungry Mist
-R Hurkyl's Recall
-C Hurloon Minotaur
-U Hurricane
-U Hydroblast
-U Icatian Phalanx
-C Icatian Scout
-R Icatian Store
-R Icatian Town
-U Ice Floe
-C Imposing Visage
-C Incinerate
-R Inferno
-R Infinite Hourglass
-C Initiates of the Ebon Hand
-U Instill Energy
-U Iron Star
-R Ironclaw Curse
-C Ironclaw Orcs
-C Ironroot Treefolk
-L Island
-L Island
-L Island
-L Island
-R Island Sanctuary
-U Ivory Cup
-U Ivory Guardians
-R Jade Monolith
-R Jalum Tome
-R Jandor's Saddlebags
-R Jayemdae Tome
-R Jester's Cap
-U Johtull Wurm
-R Jokulhaups
-U Joven's Tools
-U Justice
-R Juxtapose
-U Karma
-R Karplusan Forest
-U Keldon Warlord
-U Killer Bees
-U Kismet
-C Kjeldoran Dead
-R Kjeldoran Royal Guard
-U Kjeldoran Skycaptain
-U Knight of Stromgald
-C Krovikan Fetish
-C Krovikan Sorcerer
-C Labyrinth Minotaur
-U Leshrac's Rite
-R Leviathan
-C Ley Druid
-R Lhurgoyf
-U Library of Leng
-U Lifeforce
-U Lifetap
-R Living Artifact
-R Living Lands
-C Llanowar Elves
-R Lord of Atlantis
-R Lord of the Pit
-C Lost Soul
-U Lure
-R Magical Hack
-R Magus of the Unseen
-R Mana Clash
-R Mana Flare
-R Mana Vault
-R Manabarbs
-C Marsh Viper
-R Meekstone
-C Memory Lapse
-C Merfolk of the Pearl Trident
-C Mesa Falcon
-C Mesa Pegasus
-R Millstone
-U Mind Bomb
-C Mind Ravel
-U Mind Warp
-C Mindstab Thrull
-U Mole Worms
-C Mons's Goblin Raiders
-L Mountain
-L Mountain
-L Mountain
-L Mountain
-C Mountain Goat
-C Murk Dwellers
-C Nature's Lore
-C Necrite
-R Necropotence
-R Nether Shadow
-R Nevinyrral's Disk
-R Nightmare
-R Obelisk of Undoing
-U Orcish Artillery
-U Orcish Captain
-C Orcish Conscripts
-C Orcish Farmer
-U Orcish Oriflamme
-R Orcish Squatters
-R Order of the Sacred Torch
-U Order of the White Shield
-R Orgg
-U Ornithopter
-C Panic
-C Paralyze
-C Pearled Unicorn
-R Pentagram of the Ages
-R Personal Incarnation
-C Pestilence
-U Phantasmal Forces
-C Phantasmal Terrain
-U Phantom Monster
-C Pikemen
-R Pirate Ship
-C Pit Scorpion
-C Plague Rats
-L Plains
-L Plains
-L Plains
-L Plains
-C Portent
-U Power Sink
-R Pox
-C Pradesh Gypsies
-R Primal Clay
-R Primal Order
-U Primordial Ooze
-C Prismatic Ward
-C Prodigal Sorcerer
-C Psychic Venom
-U Pyroblast
-U Pyrotechnics
-U Rabid Wombat
-U Radjan Spirit
-R Rag Man
-C Raise Dead
-C Ray of Command
-R Recall
-C Reef Pirates
-C Regeneration
-C Remove Soul
-C Repentant Blacksmith
-R Reverse Damage
-R Righteousness
-U Rod of Ruin
-U Ruins of Trokair
-C Sabretooth Tiger
-U Sacred Boon
-C Samite Healer
-R Sand Silos
-C Scaled Wurm
-C Scathe Zombies
-C Scavenger Folk
-C Scryb Sprites
-C Sea Serpent
-U Sea Spirit
-U Sea Sprite
-U Seasinger
-U Segovian Leviathan
-R Sengir Autocrat
-R Seraph
-R Serpent Generator
-U Serra Bestiary
-U Serra Paladin
-C Shanodin Dryads
-U Shapeshifter
-C Shatter
-U Shatterstorm
-C Shield Bearer
-C Shield Wall
-R Shivan Dragon
-C Shrink
-R Sibilant Spirit
-U Skull Catapult
-R Sleight of Mind
-R Smoke
-R Sorceress Queen
-C Soul Barrier
-U Soul Net
-C Spell Blast
-U Spirit Link
-R Stampede
-R Stasis
-U Steal Artifact
-U Stone Giant
-C Stone Rain
-U Stone Spirit
-C Stream of Life
-R Stromgald Cabal
-R Sulfurous Springs
-U Svyelunite Temple
-L Swamp
-L Swamp
-L Swamp
-L Swamp
-R Sylvan Library
-C Tarpan
-U Tawnos's Weaponry
-C Terror
-C The Brute
-R The Hive
-R The Wretched
-U Thicket Basilisk
-U Throne of Bone
-U Thrull Retainer
-R Time Bomb
-R Time Elemental
-R Titania's Song
-C Torture
-C Touch of Death
-C Tranquility
-R Truce
-U Tsunami
-C Tundra Wolves
-C Twiddle
-R Underground River
-C Unholy Strength
-C Unstable Mutation
-C Unsummon
-U Untamed Wilds
-C Updraft
-R Urza's Avenger
-U Urza's Bauble
-C Urza's Mine
-C Urza's Power Plant
-C Urza's Tower
-C Vampire Bats
-C Venom
-R Verduran Enchantress
-C Vodalian Soldiers
-U Wall of Air
-U Wall of Bone
-U Wall of Brambles
-U Wall of Fire
-C Wall of Spears
-U Wall of Stone
-U Wall of Swords
-U Wanderlust
-C War Mammoth
-R Warp Artifact
-C Weakness
-U Whirling Dervish
-U White Knight
-C Wild Growth
-U Wind Spirit
-R Winds of Change
-U Winter Blast
-R Winter Orb
-U Wolverine Pack
-U Wooden Sphere
-U Word of Blasting
-R Wrath of God
-R Wyluli Wolf
-R Xenic Poltergeist
-C Zephyr Falcon
-R Zombie Master
-R Zur's Weirding
+1 U Abbey Gargoyles
+139 U Abyssal Specter
+410 R Adarkar Wastes
+70 U Aether Storm
+71 U Air Elemental
+2 R Akron Legionnaire
+3 C Alabaster Potion
+346 R Aladdin's Ring
+208 C Ambush Party
+347 C Amulet of Kroog
+4 U Angry Mob
+277 R An-Havva Constable
+140 U Animate Dead
+5 R Animate Wall
+348 R Ankh of Mishra
+72 U Anti-Magic Aura
+6 U Arenson's Aura
+7 R Armageddon
+8 C Armor of Faith
+141 U Ashes to Ashes
+349 U Ashnod's Altar
+350 C Ashnod's Transmogrant
+278 R Aspect of Wolf
+209 U Atog
+279 C Aurochs
+9 C Aysen Bureaucrats
+73 U Azure Drake
+142 R Bad Moon
+210 R Ball Lightning
+351 C Barbed Sextant
+352 R Barl's Cage
+353 C Battering Ram
+10 C Benalish Hero
+74 U Binding Grasp
+211 C Bird Maiden
+280 R Birds of Paradise
+143 U Black Knight
+11 C Blessed Wine
+144 U Blight
+12 R Blinking Spirit
+212 C Blood Lust
+145 C Bog Imp
+146 C Bog Rats
+147 U Bog Wraith
+75 C Boomerang
+354 R Bottle of Suleiman
+411 R Bottomless Vault
+76 C Brainstorm
+13 C Brainwash
+213 C Brassclaw Orcs
+148 U Breeding Pit
+149 R Broken Visage
+214 C Brothers of Fire
+412 R Brushland
+281 C Carapace
+14 R Caribou Range
+150 U Carrion Ants
+15 U Castle
+282 C Cat Warriors
+215 U Cave People
+283 C Chub Toad
+16 U Circle of Protection: Artifacts
+17 C Circle of Protection: Black
+18 C Circle of Protection: Blue
+19 C Circle of Protection: Green
+20 C Circle of Protection: Red
+21 C Circle of Protection: White
+413 R City of Brass
+355 C Clay Statue
+151 C Cloak of Confusion
+356 R Clockwork Beast
+357 U Clockwork Steed
+284 R Cockatrice
+358 R Colossus of Sardia
+216 U Conquer
+359 R Coral Helm
+77 C Counterspell
+285 U Craw Giant
+286 C Craw Wurm
+217 R Crimson Manticore
+360 R Crown of the Ages
+287 U Crumble
+22 R Crusade
+361 U Crystal Rod
+152 U Cursed Land
+78 R Dance of Many
+362 R Dancing Scimitar
+79 C Dandan
+80 C Dark Maze
+153 C Dark Ritual
+23 C D'Avenant Archer
+154 U Deathgrip
+24 C Death Speakers
+25 C Death Ward
+81 R Deflection
+155 R Derelor
+288 U Desert Twister
+218 U Detonate
+363 U Diabolic Machine
+364 R Dingus Egg
+26 C Disenchant
+219 C Disintegrate
+365 R Disrupting Scepter
+27 C Divine Offering
+28 U Divine Transformation
+366 R Dragon Engine
+156 C Drain Life
+82 R Drain Power
+157 C Drudge Skeletons
+289 C Durkwood Boars
+29 U Dust to Dust
+220 U Dwarven Catapult
+414 R Dwarven Hold
+415 U Dwarven Ruins
+221 C Dwarven Soldier
+222 C Dwarven Warriors
+223 R Earthquake
+416 U Ebon Stronghold
+290 R Elder Druid
+367 R Elkin Bottle
+291 U Elven Riders
+292 R Elvish Archers
+83 U Energy Flux
+84 C Enervate
+158 C Erg Raiders
+224 C Errantry
+225 C Eternal Warrior
+159 U Evil Eye of Orms-by-Gore
+160 U Evil Presence
+30 R Eye for an Eye
+161 U Fallen Angel
+162 C Fear
+85 U Feedback
+368 U Feldon's Cane
+369 U Fellwar Stone
+370 R Feroz's Ban
+227 C Fireball
+228 C Firebreathing
+226 U Fire Drake
+229 U Flame Spirit
+230 C Flare
+231 U Flashfires
+86 C Flight
+87 C Flood
+371 R Flying Carpet
+293 C Fog
+294 R Force of Nature
+88 C Force Spike
+446 L Forest
+447 L Forest
+448 L Forest
+449 L Forest
+89 R Forget
+372 U Fountain of Youth
+295 C Foxfire
+163 C Frozen Shade
+164 C Funeral March
+296 R Fungusaur
+297 U Fyndhorn Elder
+232 R Game of Chaos
+90 C Gaseous Form
+373 R Gauntlets of Chaos
+298 C Ghazban Ogre
+299 C Giant Growth
+300 C Giant Spider
+233 C Giant Strength
+91 U Glacial Wall
+374 U Glasses of Urza
+165 U Gloom
+234 C Goblin Digging Team
+235 C Goblin Hero
+236 R Goblin King
+237 C Goblin War Drums
+238 R Goblin Warrens
+375 C Grapeshot Catapult
+31 U Greater Realm of Preservation
+166 U Greater Werewolf
+301 C Grizzly Bears
+417 U Havenwood Battleground
+32 C Heal
+33 C Healing Salve
+167 R Hecatomb
+376 R Helm of Chatzuk
+239 C Hill Giant
+34 C Hipparion
+418 R Hollow Trees
+35 C Holy Strength
+92 C Homarid Warrior
+168 C Howl from Beyond
+377 R Howling Mine
+302 C Hungry Mist
+93 R Hurkyl's Recall
+240 C Hurloon Minotaur
+303 U Hurricane
+94 U Hydroblast
+36 U Icatian Phalanx
+37 C Icatian Scout
+419 R Icatian Store
+38 R Icatian Town
+420 U Ice Floe
+241 C Imposing Visage
+242 C Incinerate
+243 R Inferno
+378 R Infinite Hourglass
+169 C Initiates of the Ebon Hand
+304 U Instill Energy
+244 R Ironclaw Curse
+245 C Ironclaw Orcs
+305 C Ironroot Treefolk
+379 U Iron Star
+434 L Island
+435 L Island
+436 L Island
+437 L Island
+39 R Island Sanctuary
+380 U Ivory Cup
+40 U Ivory Guardians
+381 R Jade Monolith
+382 R Jalum Tome
+383 R Jandor's Saddlebags
+384 R Jayemdae Tome
+385 R Jester's Cap
+306 U Johtull Wurm
+246 R Jokulhaups
+386 U Joven's Tools
+41 U Justice
+95 R Juxtapose
+42 U Karma
+421 R Karplusan Forest
+247 U Keldon Warlord
+307 U Killer Bees
+43 U Kismet
+170 C Kjeldoran Dead
+44 R Kjeldoran Royal Guard
+45 U Kjeldoran Skycaptain
+171 U Knight of Stromgald
+172 C Krovikan Fetish
+96 C Krovikan Sorcerer
+97 C Labyrinth Minotaur
+173 U Leshrac's Rite
+98 R Leviathan
+308 C Ley Druid
+309 R Lhurgoyf
+387 U Library of Leng
+310 U Lifeforce
+99 U Lifetap
+311 R Living Artifact
+312 R Living Lands
+313 C Llanowar Elves
+100 R Lord of Atlantis
+174 R Lord of the Pit
+175 C Lost Soul
+314 U Lure
+101 R Magical Hack
+102 R Magus of the Unseen
+250 R Manabarbs
+248 R Mana Clash
+249 R Mana Flare
+388 R Mana Vault
+315 C Marsh Viper
+389 R Meekstone
+103 C Memory Lapse
+104 C Merfolk of the Pearl Trident
+46 C Mesa Falcon
+47 C Mesa Pegasus
+390 R Millstone
+105 U Mind Bomb
+176 C Mind Ravel
+178 C Mindstab Thrull
+177 U Mind Warp
+179 U Mole Worms
+251 C Mons's Goblin Raiders
+442 L Mountain
+443 L Mountain
+444 L Mountain
+445 L Mountain
+252 C Mountain Goat
+180 C Murk Dwellers
+316 C Nature's Lore
+181 C Necrite
+182 R Necropotence
+183 R Nether Shadow
+391 R Nevinyrral's Disk
+184 R Nightmare
+392 R Obelisk of Undoing
+253 U Orcish Artillery
+254 U Orcish Captain
+255 C Orcish Conscripts
+256 C Orcish Farmer
+257 U Orcish Oriflamme
+258 R Orcish Squatters
+48 R Order of the Sacred Torch
+49 U Order of the White Shield
+259 R Orgg
+393 U Ornithopter
+260 C Panic
+185 C Paralyze
+50 C Pearled Unicorn
+394 R Pentagram of the Ages
+51 R Personal Incarnation
+186 C Pestilence
+106 U Phantasmal Forces
+107 C Phantasmal Terrain
+108 U Phantom Monster
+52 C Pikemen
+109 R Pirate Ship
+187 C Pit Scorpion
+188 C Plague Rats
+430 L Plains
+431 L Plains
+432 L Plains
+433 L Plains
+110 C Portent
+111 U Power Sink
+189 R Pox
+317 C Pradesh Gypsies
+395 R Primal Clay
+318 R Primal Order
+261 U Primordial Ooze
+53 C Prismatic Ward
+112 C Prodigal Sorcerer
+113 C Psychic Venom
+262 U Pyroblast
+263 U Pyrotechnics
+319 U Rabid Wombat
+320 U Radjan Spirit
+190 R Rag Man
+191 C Raise Dead
+114 C Ray of Command
+115 R Recall
+116 C Reef Pirates
+321 C Regeneration
+117 C Remove Soul
+54 C Repentant Blacksmith
+55 R Reverse Damage
+56 R Righteousness
+396 U Rod of Ruin
+422 U Ruins of Trokair
+264 C Sabretooth Tiger
+57 U Sacred Boon
+58 C Samite Healer
+423 R Sand Silos
+322 C Scaled Wurm
+192 C Scathe Zombies
+323 C Scavenger Folk
+324 C Scryb Sprites
+118 C Sea Serpent
+121 U Seasinger
+119 U Sea Spirit
+120 U Sea Sprite
+122 U Segovian Leviathan
+193 R Sengir Autocrat
+59 R Seraph
+397 R Serpent Generator
+60 U Serra Bestiary
+61 U Serra Paladin
+325 C Shanodin Dryads
+398 U Shapeshifter
+265 C Shatter
+266 U Shatterstorm
+62 C Shield Bearer
+63 C Shield Wall
+267 R Shivan Dragon
+326 C Shrink
+123 R Sibilant Spirit
+399 U Skull Catapult
+124 R Sleight of Mind
+268 R Smoke
+194 R Sorceress Queen
+125 C Soul Barrier
+400 U Soul Net
+126 C Spell Blast
+64 U Spirit Link
+327 R Stampede
+127 R Stasis
+128 U Steal Artifact
+269 U Stone Giant
+270 C Stone Rain
+271 U Stone Spirit
+328 C Stream of Life
+195 R Stromgald Cabal
+424 R Sulfurous Springs
+425 U Svyelunite Temple
+438 L Swamp
+439 L Swamp
+440 L Swamp
+441 L Swamp
+329 R Sylvan Library
+330 C Tarpan
+401 U Tawnos's Weaponry
+196 C Terror
+272 C The Brute
+402 R The Hive
+197 R The Wretched
+331 U Thicket Basilisk
+403 U Throne of Bone
+198 U Thrull Retainer
+404 R Time Bomb
+129 R Time Elemental
+332 R Titania's Song
+199 C Torture
+200 C Touch of Death
+333 C Tranquility
+65 R Truce
+334 U Tsunami
+66 C Tundra Wolves
+130 C Twiddle
+426 R Underground River
+201 C Unholy Strength
+131 C Unstable Mutation
+132 C Unsummon
+335 U Untamed Wilds
+133 C Updraft
+405 R Urza's Avenger
+406 U Urza's Bauble
+427 C Urza's Mine
+428 C Urza's Power Plant
+429 C Urza's Tower
+202 C Vampire Bats
+336 C Venom
+337 R Verduran Enchantress
+134 C Vodalian Soldiers
+135 U Wall of Air
+203 U Wall of Bone
+338 U Wall of Brambles
+273 U Wall of Fire
+407 C Wall of Spears
+274 U Wall of Stone
+67 U Wall of Swords
+339 U Wanderlust
+340 C War Mammoth
+204 R Warp Artifact
+205 C Weakness
+341 U Whirling Dervish
+68 U White Knight
+342 C Wild Growth
+275 R Winds of Change
+136 U Wind Spirit
+343 U Winter Blast
+408 R Winter Orb
+344 U Wolverine Pack
+409 U Wooden Sphere
+276 U Word of Blasting
+69 R Wrath of God
+345 R Wyluli Wolf
+206 R Xenic Poltergeist
+137 C Zephyr Falcon
+207 R Zombie Master
+138 R Zur's Weirding
 
 [tokens]
 wasp

@@ -5,7 +5,6 @@ PT:1/1
 K:Protection from red
 A:AB$ ChooseSource | Cost$ Sac<1/CARDNAME> | Choices$ Card.RedSource | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ Prevent all damage a red source of your choice would deal this turn.
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromSource | SubAbility$ DBCleanup | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ GE1
-SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.ChosenCard+RedSource | Prevent$ True | PreventionEffect$ True | Description$ Prevent all damage the chosen source would deal this turn.
+SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.ChosenCard+RedSource | Prevent$ True | Description$ Prevent all damage the chosen source would deal this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/burrenton_forge_tender.jpg
 Oracle:Protection from red\nSacrifice Burrenton Forge-Tender: Prevent all damage a red source of your choice would deal this turn.

@@ -5,7 +5,7 @@ HandLifeModifier:+0/-3
 A:AB$ Effect | ActivationZone$ Command | Cost$ PayLife<1> | TgtZone$ Graveyard | ValidTgts$ Creature.YouOwn | PumpZone$ Graveyard | TgtPrompt$ Select target creature in your graveyard, you may play it this turn | RememberObjects$ Targeted | StaticAbilities$ Play | ExileOnMoved$ Graveyard | SpellDescription$ You may cast target creature card in your graveyard this turn.
 SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Graveyard | Description$ You may play remembered card.
 T:Mode$ SpellCast | ValidCard$ Card.wasCastFromGraveyard | ValidControllingPlayer$ You | TriggerZones$ Command | Execute$ TrigAnimate | TriggerDescription$ Whenever you cast a creature spell from your graveyard, it becomes a black Zombie Knight.
-SVar:TrigAnimate:DB$ Animate | Defined$ TriggeredCard | Types$ Zombie,Knight | Colors$ Black | OverwriteColors$ True | Permanent$ True | RemoveCreatureTypes$ True
+SVar:TrigAnimate:DB$ Animate | Defined$ TriggeredCard | Types$ Zombie,Knight | Colors$ Black | OverwriteColors$ True | Duration$ Permanent | RemoveCreatureTypes$ True
 R:Event$ Moved | ValidCard$ Card.Zombie+Knight | Destination$ Graveyard | ReplaceWith$ DBExile | Description$ If a Zombie Knight would be put into your graveyard from the battlefield, exile it instead.
 SVar:DBExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Battlefield | Destination$ Exile
 SVar:Picture:https://downloads.cardforge.org/images/cards/VAN/Haakon, Stromgald Scourge Avatar.full.jpg

@@ -57,17 +57,9 @@ import forge.util.collect.FCollectionView;
 
 public class ChangeZoneEffect extends SpellAbilityEffect {
 
-    private boolean isHidden(SpellAbility sa) {
-        boolean hidden = sa.hasParam("Hidden");
-        if (!hidden && sa.hasParam("Origin")) {
-            hidden = ZoneType.isHidden(sa.getParam("Origin"));
-        }
-        return hidden;
-    }
-
     @Override
     protected String getStackDescription(SpellAbility sa) {
-        if (isHidden(sa)) {
+        if (sa.isHidden()) {
             return changeHiddenOriginStackDescription(sa);
         }
         return changeKnownOriginStackDescription(sa);
@@ -97,13 +89,13 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         // Player whose cards will change zones
         List<Player> fetchers = null;
         if (sa.hasParam("DefinedPlayer")) {
-            fetchers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("DefinedPlayer"), sa);
+            fetchers = AbilityUtils.getDefinedPlayers(host, sa.getParam("DefinedPlayer"), sa);
         }
         if (fetchers == null && sa.hasParam("ValidTgts") && sa.usesTargeting()) {
             fetchers = Lists.newArrayList(sa.getTargets().getTargetPlayers());
         }
         if (fetchers == null) {
-            fetchers = Lists.newArrayList(sa.getHostCard().getController());
+            fetchers = Lists.newArrayList(host.getController());
         }
 
         final String fetcherNames = Lang.joinHomogenous(fetchers, Player.Accessors.FN_GET_NAME);
@@ -111,7 +103,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         // Player who chooses the cards to move
         List<Player> choosers = Lists.newArrayList();
         if (sa.hasParam("Chooser")) {
-            choosers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Chooser"), sa);
+            choosers = AbilityUtils.getDefinedPlayers(host, sa.getParam("Chooser"), sa);
         }
         if (choosers.isEmpty()) {
             choosers.add(sa.getActivatingPlayer());
@@ -420,11 +412,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         //if host is not on the battlefield don't apply
-        if (sa.hasParam("UntilHostLeavesPlay") && !sa.getHostCard().isInPlay()) {
+        if ("UntilHostLeavesPlay".equals(sa.getParam("Duration")) && !sa.getHostCard().isInPlay()) {
             return;
         }
 
-        if (isHidden(sa) && !sa.hasParam("Ninjutsu")) {
+        if (sa.isHidden() && !sa.hasParam("Ninjutsu")) {
             changeHiddenOriginResolve(sa);
         } else {
             //else if (isKnown(origin) || sa.containsKey("Ninjutsu")) {
@@ -502,7 +494,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         Player chooser = player;
         if (sa.hasParam("Chooser")) {
-            chooser = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Chooser"), sa).get(0);
+            chooser = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("Chooser"), sa).get(0);
         }
 
         for (final Card tgtC : tgtCards) {
@@ -510,7 +502,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             // gameCard is LKI in that case, the card is not in game anymore
             // or the timestamp did change
             // this should check Self too
-            if (gameCard == null || !tgtC.equalsWithTimestamp(gameCard)) {
+            if (gameCard == null || !tgtC.equalsWithTimestamp(gameCard) || gameCard.isPhasedOut()) {
                 continue;
             }
             if (sa.usesTargeting() && !gameCard.canBeTargetedBy(sa)) {
@@ -636,8 +628,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         hostCard.removeRemembered(gameCard);
                     }
 
-                    // Auras without Candidates stay in their current
-                    // location
+                    // Auras without Candidates stay in their current location
                     if (gameCard.isAura()) {
                         final SpellAbility saAura = gameCard.getFirstAttachSpell();
                         if (saAura != null) {
@@ -678,12 +669,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         game.getCombat().addAttacker(movedCard, defender);
                         game.getCombat().getBandOfAttacker(movedCard).setBlocked(false);
                         combatChanged = true;
-                    }
-                    if (sa.hasParam("Tapped") || sa.hasParam("Ninjutsu")) {
-                        movedCard.setTapped(true);
-                    }
-                    if (sa.hasParam("Untapped")) {
-                        movedCard.setTapped(false);
                     }
                     movedCard.setTimestamp(ts);
                 } else {
@@ -812,12 +797,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         triggerList.triggerChangesZoneAll(game, sa);
         counterTable.triggerCountersPutAll(game);
 
-
         if (sa.hasParam("AtEOT") && !triggerList.isEmpty()) {
             registerDelayedTrigger(sa, sa.getParam("AtEOT"), triggerList.allCards());
         }
-        if (sa.hasParam("UntilHostLeavesPlay")) {
-            hostCard.addLeavesPlayCommand(untilHostLeavesPlayCommand(triggerList, hostCard));
+        if ("UntilHostLeavesPlay".equals(sa.getParam("Duration"))) {
+            addUntilCommand(sa, untilHostLeavesPlayCommand(triggerList, hostCard));
         }
 
         // for things like Gaea's Blessing
@@ -1292,11 +1276,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         setFaceDownState(c, sa);
                     }
                     movedCard = game.getAction().moveToPlay(c, c.getController(), sa, moveParams);
-                    if (sa.hasParam("Tapped")) {
-                        movedCard.setTapped(true);
-                    } else if (sa.hasParam("Untapped")) {
-                        c.setTapped(false);
-                    }
 
                     movedCard.setTimestamp(ts);
                 }
@@ -1402,8 +1381,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         }
         triggerList.triggerChangesZoneAll(game, sa);
 
-        if (sa.hasParam("UntilHostLeavesPlay")) {
-            source.addLeavesPlayCommand(untilHostLeavesPlayCommand(triggerList, source));
+        if ("UntilHostLeavesPlay".equals(sa.getParam("Duration"))) {
+            addUntilCommand(sa, untilHostLeavesPlayCommand(triggerList, source));
         }
     }
 

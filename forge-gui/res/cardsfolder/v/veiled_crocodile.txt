@@ -2,7 +2,7 @@ Name:Veiled Crocodile
 ManaCost:2 U
 Types:Enchantment
 T:Mode$ Always | CheckSVar$ X | SVarCompare$ EQ0 | TriggerZones$ Battlefield | Execute$ TrigVCAnimate | IsPresent$ Card.Self+Enchantment | ResolvingCheck$ IsPresent | TriggerDescription$ When a player has no cards in hand, if CARDNAME is an enchantment, CARDNAME becomes a 4/4 Crocodile creature.
-SVar:TrigVCAnimate:DB$ Animate | Types$ Creature,Crocodile | Power$ 4 | Toughness$ 4 | RemoveCardTypes$ True | Permanent$ True
+SVar:TrigVCAnimate:DB$ Animate | Types$ Creature,Crocodile | Power$ 4 | Toughness$ 4 | RemoveCardTypes$ True | Duration$ Permanent
 SVar:X:PlayerCountPlayers$LowestValidHand Card.YouOwn
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veiled_crocodile.jpg

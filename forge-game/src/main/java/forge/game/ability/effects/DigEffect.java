@@ -87,6 +87,20 @@ public class DigEffect extends SpellAbilityEffect {
         final boolean mayBeSkipped = sa.hasParam("PromptToSkipOptionalAbility");
         final String optionalAbilityPrompt = sa.hasParam("OptionalAbilityPrompt") ? sa.getParam("OptionalAbilityPrompt") : "";
 
+        boolean remZone1 = false;
+        boolean remZone2 = false;
+        if (sa.hasParam("RememberChanged")) {
+            remZone1 = true;
+        }
+        if (sa.hasParam("RememberMovedToZone")) {
+            if (sa.getParam("RememberMovedToZone").contains("1")) {
+                remZone1 = true;
+            }
+            if (sa.getParam("RememberMovedToZone").contains("2")) {
+                remZone2 = true;
+            }
+        }
+
         boolean changeAll = false;
         boolean allButOne = false;
 
@@ -124,8 +138,8 @@ public class DigEffect extends SpellAbilityEffect {
             if (!top.isEmpty()) {
                 DelayedReveal delayedReveal = null;
                 boolean hasRevealed = true;
-                if (sa.hasParam("Reveal")) {
-                    game.getAction().reveal(top, p, false);
+                if (sa.hasParam("Reveal") && "True".equalsIgnoreCase(sa.getParam("Reveal"))) {
+                        game.getAction().reveal(top, p, false);
                 }
                 else if (sa.hasParam("RevealOptional")) {
                     String question = TextUtil.concatWithSpace(Localizer.getInstance().getMessage("lblReveal") + ":", TextUtil.addSuffix(Lang.joinHomogenous(top),"?"));
@@ -170,7 +184,7 @@ public class DigEffect extends SpellAbilityEffect {
                     }
                 }
                 if (sa.hasParam("Choser")) {
-                    final FCollectionView<Player> choosers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Choser"), sa);
+                    final FCollectionView<Player> choosers = AbilityUtils.getDefinedPlayers(host, sa.getParam("Choser"), sa);
                     if (!choosers.isEmpty()) {
                         chooser = player.getController().chooseSingleEntityForEffect(choosers, null, sa, Localizer.getInstance().getMessage("lblChooser") + ":", false, p, null);
                     }
@@ -207,8 +221,8 @@ public class DigEffect extends SpellAbilityEffect {
 
                     // Optional abilities that use a dialog box to prompt the user to skip the ability (e.g. Explorer's Scope, Quest for Ula's Temple)
                     if (optional && mayBeSkipped && !valid.isEmpty()) {
-                        String prompt = !optionalAbilityPrompt.isEmpty() ? optionalAbilityPrompt : Localizer.getInstance().getMessage("lblWouldYouLikeProceedWithOptionalAbility") + " " + sa.getHostCard() + "?\n\n(" + sa.getDescription() + ")";
-                        if (!p.getController().confirmAction(sa, null, TextUtil.fastReplace(prompt, "CARDNAME", CardTranslation.getTranslatedName(sa.getHostCard().getName())))) {
+                        String prompt = !optionalAbilityPrompt.isEmpty() ? optionalAbilityPrompt : Localizer.getInstance().getMessage("lblWouldYouLikeProceedWithOptionalAbility") + " " + host + "?\n\n(" + sa.getDescription() + ")";
+                        if (!p.getController().confirmAction(sa, null, TextUtil.fastReplace(prompt, "CARDNAME", CardTranslation.getTranslatedName(host.getName())))) {
                             return;
                         }
                     }
@@ -341,7 +355,7 @@ public class DigEffect extends SpellAbilityEffect {
                         if (sa.hasParam("ForgetOtherRemembered")) {
                             host.clearRemembered();
                         }
-                        if (sa.hasParam("RememberChanged")) {
+                        if (remZone1) {
                             host.addRemembered(c);
                         }
                         rest.remove(c);
@@ -376,6 +390,9 @@ public class DigEffect extends SpellAbilityEffect {
                             if (m != null && !origin.equals(m.getZone().getZoneType())) {
                                 table.put(origin, m.getZone().getZoneType(), m);
                             }
+                            if (remZone2) {
+                                host.addRemembered(m);
+                            }
                         }
                     }
                     else {
@@ -395,6 +412,9 @@ public class DigEffect extends SpellAbilityEffect {
                                 }
                                 c.setExiledWith(effectHost);
                                 c.setExiledBy(effectHost.getController());
+                                if (remZone2) {
+                                    host.addRemembered(c);
+                                }
                             }
                         }
                     }

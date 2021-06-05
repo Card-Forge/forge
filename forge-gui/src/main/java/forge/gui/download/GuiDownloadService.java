@@ -413,7 +413,6 @@ public abstract class GuiDownloadService implements Runnable {
     protected static void addMissingItems(Map<String, String> list, String nameUrlFile, String dir, boolean includeParent) {
         for (Pair<String, String> nameUrlPair : FileUtil.readNameUrlFile(nameUrlFile)) {
             File f = new File(includeParent? dir+FileUtil.getParent(nameUrlPair.getRight()) : dir , decodeURL(nameUrlPair.getLeft()));
-            //System.out.println(f.getAbsolutePath());
             if (!f.exists()) {
                 list.put(f.getAbsolutePath(), nameUrlPair.getRight());
             }

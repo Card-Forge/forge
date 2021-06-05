@@ -101,6 +101,13 @@ public abstract class FContainer extends FDisplayObject {
     }
 
     public void revalidate() {
+        revalidate(false);
+    }
+    public void revalidate(boolean forced) {
+        if (forced) {
+            doLayout(getWidth(), getHeight());
+            return;
+        }
         float w = getWidth();
         float h = getHeight();
         if (w == 0 || h == 0) { return; } //don't revalidate if size not set yet

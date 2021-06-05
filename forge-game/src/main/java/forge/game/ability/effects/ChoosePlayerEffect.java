@@ -35,7 +35,7 @@ public class ChoosePlayerEffect extends SpellAbilityEffect {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         final FCollectionView<Player> choices = sa.hasParam("Choices") ? AbilityUtils.getDefinedPlayers(
-                sa.getHostCard(), sa.getParam("Choices"), sa) : sa.getActivatingPlayer().getGame().getPlayersInTurnOrder();
+                card, sa.getParam("Choices"), sa) : sa.getActivatingPlayer().getGame().getPlayersInTurnOrder();
 
         final String choiceDesc = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChoosePlayer");
         final boolean random = sa.hasParam("Random");

@@ -53,6 +53,9 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.util.FileUtil;
 import forge.util.ThreadUtil;
+import io.sentry.Sentry;
+import io.sentry.android.AndroidSentryClientFactory;
+import io.sentry.event.BreadcrumbBuilder;
 
 public class Main extends AndroidApplication {
     AndroidAdapter Gadapter;
@@ -60,6 +63,10 @@ public class Main extends AndroidApplication {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Context ctx = this.getApplicationContext();
+        String sentryDsn = "https://a0b8dbad9b8a49cfa51bf65d462e8dae:b3f27d7461224cb8836eb5c6050c666c@sentry.cardforge.org/2?buffer.enabled=false";
+        //init Sentry
+        Sentry.init(sentryDsn, new AndroidSentryClientFactory(ctx));
         //get total device RAM in mb
         ActivityManager actManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
         ActivityManager.MemoryInfo memInfo = new ActivityManager.MemoryInfo();
@@ -209,21 +216,28 @@ public class Main extends AndroidApplication {
         if (!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
             //fake init for error message
             //set current orientation
+            String message = getDeviceName()+"\n"+"Android "+AndroidRelease+"\n"+"RAM "+ totalRAM+"MB" +"\n"+"LibGDX "+ Version.VERSION+"\n"+"Can't access external storage";
+            Sentry.getContext().recordBreadcrumb(
+                    new BreadcrumbBuilder().setMessage(message).build()
+            );
             Main.this.setRequestedOrientation(Main.this.getResources().getConfiguration().orientation);
             initialize(Forge.getApp(new AndroidClipboard(), adapter, "", false, true, totalRAM, isTabletDevice, AndroidAPI, AndroidRelease, getDeviceName()));
-            displayMessage(adapter, true, getDeviceName()+"\n"+"Android "+AndroidRelease+"\n"+"RAM "+ totalRAM+"MB" +"\n"
-                    +"LibGDX "+ Version.VERSION+"\n"+"Can't access external storage");
+            displayMessage(adapter, true, message);
             return;
         }
-        String obbforge = Environment.getExternalStorageDirectory() + "/obbforge"; //if obbforge file exists in Phone Storage, use app-specific Obb directory as path
-        String assetsDir = FileUtil.doesFileExist(obbforge) ? getContext().getObbDir()+"/Forge/" : Environment.getExternalStorageDirectory()+"/Forge/";
+        String obbforge = Environment.getExternalStorageDirectory() + "/obbforge";
+        //if obbforge file exists in Phone Storage, Forge uses app-specific Obb directory as path, Android 11+ is mandatory even without obbforge
+        String assetsDir = (FileUtil.doesFileExist(obbforge) || Build.VERSION.SDK_INT > 29) ? getContext().getObbDir()+"/Forge/" : Environment.getExternalStorageDirectory()+"/Forge/";
         if (!FileUtil.ensureDirectoryExists(assetsDir)) {
             //fake init for error message
             //set current orientation
+            String message = getDeviceName()+"\n"+"Android "+AndroidRelease+"\n"+"RAM "+ totalRAM+"MB" +"\n"+"LibGDX "+ Version.VERSION+"\n"+"Can't access external storage\nPath: " + assetsDir;
+            Sentry.getContext().recordBreadcrumb(
+                    new BreadcrumbBuilder().setMessage(message).build()
+            );
             Main.this.setRequestedOrientation(Main.this.getResources().getConfiguration().orientation);
             initialize(Forge.getApp(new AndroidClipboard(), adapter, "", false, true, totalRAM, isTabletDevice, AndroidAPI, AndroidRelease, getDeviceName()));
-            displayMessage(adapter, true, getDeviceName()+"\n"+"Android "+AndroidRelease+"\n"+"RAM "+ totalRAM+"MB" +"\n"
-                    +"LibGDX "+ Version.VERSION+"\n"+"Can't access external storage\nPath: " + assetsDir);
+            displayMessage(adapter, true, message);
             return;
         }
         boolean isPortrait;

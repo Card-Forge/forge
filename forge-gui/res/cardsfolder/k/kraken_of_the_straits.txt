@@ -2,8 +2,7 @@ Name:Kraken of the Straits
 ManaCost:5 U U
 Types:Creature Kraken
 PT:6/6
-K:CantBeBlockedBy Creature.powerLEX
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLEX | Description$ Creatures with power less than the number of Islands you control can't block CARDNAME.
 SVar:X:Count$TypeYouCtrl.Island
 SVar:BuffedBy:Island
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kraken_of_the_straits.jpg
 Oracle:Creatures with power less than the number of Islands you control can't block Kraken of the Straits.

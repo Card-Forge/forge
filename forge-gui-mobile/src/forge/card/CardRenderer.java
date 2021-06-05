@@ -481,10 +481,8 @@ public class CardRenderer {
                 drawFoilEffect(g, card, x, y, w, h, false);
             }
         } else {
-            if (!Forge.enableUIMask.equals("Off")) //render this if mask is still loading
-                CardImageRenderer.drawCardImage(g, CardView.getCardForUi(pc), false, x, y, w, h, pos);
-            else //draw cards without textures as just a black rectangle
-                g.fillRect(Color.BLACK, x, y, w, h);
+            //if card has invalid or no texture due to sudden changes in ImageCache, draw CardImageRenderer instead and wait for it to refresh automatically
+            CardImageRenderer.drawCardImage(g, CardView.getCardForUi(pc), false, x, y, w, h, pos);
         }
     }
     public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean rotate) {
@@ -545,10 +543,8 @@ public class CardRenderer {
             }
             drawFoilEffect(g, card, x, y, w, h, false);
         } else {
-            if (!Forge.enableUIMask.equals("Off")) //render this if mask is still loading
-                CardImageRenderer.drawCardImage(g, card, false, x, y, w, h, pos);
-            else //draw cards without textures as just a black rectangle
-                g.fillRect(Color.BLACK, x, y, w, h);
+            //if card has invalid or no texture due to sudden changes in ImageCache, draw CardImageRenderer instead and wait for it to refresh automatically
+            CardImageRenderer.drawCardImage(g, card, false, x, y, w, h, pos);
         }
     }
 

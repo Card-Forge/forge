@@ -3,6 +3,6 @@ ManaCost:2 U U
 Types:Instant Trap
 SVar:AltCost:Cost$ U | CheckSVar$ GreenCreats | Description$ If an opponent had a green creature enter the battlefield under their control this turn, you may pay {U} rather than pay this spell's mana cost.
 A:SP$ Tap | Cost$ 2 U U | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBPump | SpellDescription$ Tap up to two target creatures. Those creatures don't untap during their controller's next untap step.
-SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True | StackDescription$ {c:Targeted} don't untap during {p:TargetedController}'s next untap step.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent | StackDescription$ {c:Targeted} don't untap during {p:TargetedController}'s next untap step.
 SVar:GreenCreats:Count$ThisTurnEntered_Battlefield_Creature.Green+OppCtrl
 Oracle:If an opponent had a green creature enter the battlefield under their control this turn, you may pay {U} rather than pay this spell's mana cost.\nTap up to two target creatures. Those creatures don't untap during their controller's next untap step.

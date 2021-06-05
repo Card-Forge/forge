@@ -27,7 +27,7 @@ public class MustBlockEffect extends SpellAbilityEffect {
 
         List<Card> cards;
         if (sa.hasParam("DefinedAttacker")) {
-            cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DefinedAttacker"), sa);
+            cards = AbilityUtils.getDefinedCards(host, sa.getParam("DefinedAttacker"), sa);
         } else {
             cards = Lists.newArrayList(host);
         }
@@ -37,7 +37,7 @@ public class MustBlockEffect extends SpellAbilityEffect {
             Player chooser = activator;
             if (sa.hasParam("Chooser")) {
                 final String choose = sa.getParam("Chooser");
-                chooser = AbilityUtils.getDefinedPlayers(sa.getHostCard(), choose, sa).get(0);
+                chooser = AbilityUtils.getDefinedPlayers(host, choose, sa).get(0);
             }
 
             CardCollectionView choices = game.getCardsIn(ZoneType.Battlefield);
@@ -81,7 +81,7 @@ public class MustBlockEffect extends SpellAbilityEffect {
 
         String attacker = null;
         if (sa.hasParam("DefinedAttacker")) {
-            final List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DefinedAttacker"), sa);
+            final List<Card> cards = AbilityUtils.getDefinedCards(host, sa.getParam("DefinedAttacker"), sa);
             attacker = cards.get(0).toString();
         } else {
             attacker = host.toString();

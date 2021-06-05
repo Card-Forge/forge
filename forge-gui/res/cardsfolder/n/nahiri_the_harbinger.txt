@@ -7,7 +7,7 @@ SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | ConditionDefined$ Remembered
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ ChangeZone | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Enchantment,Artifact.tapped,Creature.tapped | TgtPrompt$ Select target enchantment, tapped artifact, or tapped creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target enchantment, tapped artifact, or tapped creature.
 A:AB$ ChangeZone | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | Origin$ Library | Destination$ Battlefield | ChangeType$ Artifact,Creature | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ DBPump | SpellDescription$ Search your library for an artifact or creature card, put it onto the battlefield, then shuffle. It gains haste. Return it to your hand at the beginning of the next end step.
-SVar:DBPump:DB$ Animate | Keywords$ Haste | Permanent$ True | AtEOT$ Hand | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBPump:DB$ Animate | Keywords$ Haste | Duration$ Permanent | AtEOT$ Hand | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Discard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nahiri_the_harbinger.jpg

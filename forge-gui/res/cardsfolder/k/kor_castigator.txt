@@ -2,6 +2,5 @@ Name:Kor Castigator
 ManaCost:1 W
 Types:Creature Kor Wizard Ally
 PT:3/1
-K:CantBeBlockedBy Creature.Eldrazi+Scion
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kor_castigator.jpg
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.Eldrazi+Scion | Description$ CARDNAME can't be blocked by Eldrazi Scions.
 Oracle:Kor Castigator can't be blocked by Eldrazi Scions.

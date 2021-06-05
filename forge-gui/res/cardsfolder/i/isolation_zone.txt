@@ -2,7 +2,7 @@ Name:Isolation Zone
 ManaCost:2 W W
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target creature or enchantment an opponent controls until CARDNAME leaves the battlefield. (That permanent returns under its owner's control.)
-SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl,Enchantment.OppCtrl | TgtPrompt$ Select target creature or enchantment an opponent controls | UntilHostLeavesPlay$ True
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl,Enchantment.OppCtrl | TgtPrompt$ Select target creature or enchantment an opponent controls | Duration$ UntilHostLeavesPlay
 SVar:PlayMain1:TRUE
 SVar:OblivionRing:TRUE
 Oracle:When Isolation Zone enters the battlefield, exile target creature or enchantment an opponent controls until Isolation Zone leaves the battlefield. (That permanent returns under its owner's control.)

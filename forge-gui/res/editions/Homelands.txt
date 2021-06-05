@@ -11,146 +11,146 @@ BoosterBox=60
 Foil=NotSupported
 
 [cards]
-U AEther Storm
-U Abbey Gargoyles
-C Abbey Matron
-C Abbey Matron
-C Aliban's Tower
-C Aliban's Tower
-C Ambush
-C Ambush Party
-C Ambush Party
-R An-Havva Constable
-U An-Havva Inn
-U An-Havva Township
-R An-Zerrin Ruins
-R Anaba Ancestor
-C Anaba Bodyguard
-C Anaba Bodyguard
-C Anaba Shaman
-C Anaba Shaman
-R Anaba Spirit Crafter
-R Apocalypse Chime
-R Autumn Willow
-U Aysen Abbey
-C Aysen Bureaucrats
-C Aysen Bureaucrats
-R Aysen Crusader
-R Aysen Highway
-R Baki's Curse
-R Baron Sengir
-R Beast Walkers
-R Black Carriage
-R Broken Visage
-C Carapace
-C Carapace
-U Castle Sengir
-C Cemetery Gate
-C Cemetery Gate
-R Chain Stasis
-C Chandler
-C Clockwork Gnomes
-C Clockwork Steed
-C Clockwork Swarm
-C Coral Reef
-C Dark Maze
-C Dark Maze
-R Daughter of Autumn
-U Death Speakers
-R Didgeridoo
-U Drudge Spell
-C Dry Spell
-C Dry Spell
-R Dwarven Pony
-R Dwarven Sea Clan
-C Dwarven Trader
-C Dwarven Trader
-C Ebony Rhino
-U Eron the Relentless
-U Evaporate
-R Faerie Noble
-C Feast of the Unicorn
-C Feast of the Unicorn
-R Feroz's Ban
-C Folk of An-Havva
-C Folk of An-Havva
-R Forget
-C Funeral March
-U Ghost Hounds
-C Giant Albatross
-C Giant Albatross
-U Giant Oyster
-R Grandmother Sengir
-C Greater Werewolf
-R Hazduhr the Abbot
-C Headstone
-R Heart Wolf
-C Hungry Mist
-C Hungry Mist
-U Ihsan's Shade
-U Irini Sengir
-R Ironclaw Curse
-C Jinx
-C Joven
-C Joven's Ferrets
-U Joven's Tools
-R Koskun Falls
-U Koskun Keep
-C Labyrinth Minotaur
-C Labyrinth Minotaur
-C Leaping Lizard
-R Leeches
-R Mammoth Harness
-R Marjhan
-C Memory Lapse
-C Memory Lapse
-C Merchant Scroll
-C Mesa Falcon
-C Mesa Falcon
-R Mystic Decree
-R Narwhal
-U Orcish Mine
-R Primal Order
-C Prophecy
-U Rashka the Slayer
-C Reef Pirates
-C Reef Pirates
-C Renewal
-U Retribution
-R Reveka, Wizard Savant
-U Root Spider
-U Roots
-C Roterothopter
-R Rysorian Badger
-C Samite Alchemist
-C Samite Alchemist
-U Sea Sprite
-U Sea Troll
-U Sengir Autocrat
-C Sengir Bats
-C Sengir Bats
-R Serra Aviary
-C Serra Bestiary
-U Serra Inquisitors
-C Serra Paladin
-C Serrated Arrows
-C Shrink
-C Shrink
-R Soraya the Falconer
-U Spectral Bears
-R Timmerian Fiends
-C Torture
-C Torture
-C Trade Caravan
-C Trade Caravan
-R Truce
-R Veldrane of Sengir
-R Wall of Kelp
-C Willow Faerie
-C Willow Faerie
-R Willow Priestess
-R Winter Sky
-U Wizards' School
+21 U Aether Storm
+1 U Abbey Gargoyles
+2a C Abbey Matron
+2b C Abbey Matron
+61a C Aliban's Tower
+61b C Aliban's Tower
+62 C Ambush
+63a C Ambush Party
+63b C Ambush Party
+81 R An-Havva Constable
+82 U An-Havva Inn
+111 U An-Havva Township
+64 R An-Zerrin Ruins
+65 R Anaba Ancestor
+66a C Anaba Bodyguard
+66b C Anaba Bodyguard
+67a C Anaba Shaman
+67b C Anaba Shaman
+68 R Anaba Spirit Crafter
+101 R Apocalypse Chime
+83 R Autumn Willow
+112 U Aysen Abbey
+3a C Aysen Bureaucrats
+3b C Aysen Bureaucrats
+4 R Aysen Crusader
+5 R Aysen Highway
+22 R Baki's Curse
+41 R Baron Sengir
+6 R Beast Walkers
+42 R Black Carriage
+43 R Broken Visage
+84a C Carapace
+84b C Carapace
+113 U Castle Sengir
+44a C Cemetery Gate
+44b C Cemetery Gate
+23 R Chain Stasis
+69 C Chandler
+102 C Clockwork Gnomes
+103 C Clockwork Steed
+104 C Clockwork Swarm
+24 C Coral Reef
+25a C Dark Maze
+25b C Dark Maze
+85 R Daughter of Autumn
+7 U Death Speakers
+105 R Didgeridoo
+45 U Drudge Spell
+46a C Dry Spell
+46b C Dry Spell
+70 R Dwarven Pony
+71 R Dwarven Sea Clan
+72a C Dwarven Trader
+72b C Dwarven Trader
+106 C Ebony Rhino
+73 U Eron the Relentless
+74 U Evaporate
+86 R Faerie Noble
+47a C Feast of the Unicorn
+47b C Feast of the Unicorn
+107 R Feroz's Ban
+87a C Folk of An-Havva
+87b C Folk of An-Havva
+26 R Forget
+48 C Funeral March
+49 U Ghost Hounds
+27a C Giant Albatross
+27b C Giant Albatross
+28 U Giant Oyster
+50 R Grandmother Sengir
+51 C Greater Werewolf
+8 R Hazduhr the Abbot
+52 C Headstone
+75 R Heart Wolf
+88a C Hungry Mist
+88b C Hungry Mist
+53 U Ihsan's Shade
+54 U Irini Sengir
+76 R Ironclaw Curse
+29 C Jinx
+77 C Joven
+89 C Joven's Ferrets
+108 U Joven's Tools
+55 R Koskun Falls
+114 U Koskun Keep
+30a C Labyrinth Minotaur
+30b C Labyrinth Minotaur
+90 C Leaping Lizard
+9 R Leeches
+91 R Mammoth Harness
+31 R Marjhan
+32a C Memory Lapse
+32b C Memory Lapse
+33 C Merchant Scroll
+10a C Mesa Falcon
+10b C Mesa Falcon
+34 R Mystic Decree
+35 R Narwhal
+78 U Orcish Mine
+92 R Primal Order
+11 C Prophecy
+12 U Rashka the Slayer
+36a C Reef Pirates
+36b C Reef Pirates
+93 C Renewal
+79 U Retribution
+37 R Reveka, Wizard Savant
+94 U Root Spider
+95 U Roots
+109 C Roterothopter
+96 R Rysorian Badger
+13a C Samite Alchemist
+13b C Samite Alchemist
+38 U Sea Sprite
+39 U Sea Troll
+56 U Sengir Autocrat
+57a C Sengir Bats
+57b C Sengir Bats
+14 R Serra Aviary
+15 C Serra Bestiary
+16 U Serra Inquisitors
+17 C Serra Paladin
+110 C Serrated Arrows
+97a C Shrink
+97b C Shrink
+18 R Soraya the Falconer
+98 U Spectral Bears
+58 R Timmerian Fiends
+59a C Torture
+59b C Torture
+19a C Trade Caravan
+19b C Trade Caravan
+20 R Truce
+60 R Veldrane of Sengir
+40 R Wall of Kelp
+99a C Willow Faerie
+99b C Willow Faerie
+100 R Willow Priestess
+80 R Winter Sky
+115 U Wizards' School
 
 [tokens]
 kelp

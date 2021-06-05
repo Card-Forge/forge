@@ -92,7 +92,6 @@ public class PhaseHandler implements java.io.Serializable {
     private int nUpkeepsThisGame = 0;
     private int nCombatsThisTurn = 0;
     private int nMain2sThisTurn = 0;
-    private boolean bPreventCombatDamageThisTurn  = false;
     private int planarDiceRolledthisTurn = 0;
 
     private transient Player playerTurn = null;
@@ -162,6 +161,8 @@ public class PhaseHandler implements java.io.Serializable {
         boolean isTopsy = playerTurn.getAmountOfKeyword("The phases of your turn are reversed.") % 2 == 1;
         boolean turnEnded = false;
 
+        game.getStack().clearUndoStack(); //can't undo action from previous phase
+
         if (bRepeatCleanup) { // for when Cleanup needs to repeat itself
             bRepeatCleanup = false;
         }
@@ -183,6 +184,28 @@ public class PhaseHandler implements java.io.Serializable {
                 turnEnded = PhaseType.isLast(phase, isTopsy);
                 setPhase(PhaseType.getNext(phase, isTopsy));
             }
+
+            if (turnEnded) {
+                turn++;
+                extraPhases.clear();
+                game.updateTurnForView();
+                game.fireEvent(new GameEventTurnBegan(playerTurn, turn));
+
+                // Tokens starting game in play should suffer from Sum. Sickness
+                for (final Card c : playerTurn.getCardsIncludePhasingIn(ZoneType.Battlefield)) {
+                    if (playerTurn.getTurn() > 0 || !c.isStartsGameInPlay()) {
+                        c.setSickness(false);
+                    }
+                }
+                playerTurn.incrementTurn();
+
+                game.getAction().resetActivationsPerTurn();
+
+                final List<Card> lands = CardLists.filter(playerTurn.getLandsInPlay(), Presets.UNTAPPED);
+                playerTurn.setNumPowerSurgeLands(lands.size());
+            }
+            //update tokens
+            game.fireEvent(new GameEventTokenStateUpdate(playerTurn.getTokensInPlay()));
 
             // Replacement effects
             final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromAffected(playerTurn);
@@ -206,32 +229,7 @@ public class PhaseHandler implements java.io.Serializable {
             }
         }
 
-        game.getStack().clearUndoStack(); //can't undo action from previous phase
-
         String phaseType = oldPhase == phase ? "Repeat" : phase == PhaseType.getNext(oldPhase, isTopsy) ? "" : "Additional";
-
-        if (turnEnded) {
-            turn++;
-            extraPhases.clear();
-            game.updateTurnForView();
-            game.fireEvent(new GameEventTurnBegan(playerTurn, turn));
-
-            // Tokens starting game in play should suffer from Sum. Sickness
-            for (final Card c : playerTurn.getCardsIncludePhasingIn(ZoneType.Battlefield)) {
-                if (playerTurn.getTurn() > 0 || !c.isStartsGameInPlay()) {
-                    c.setSickness(false);
-                }
-            }
-            playerTurn.incrementTurn();
-
-            game.getAction().resetActivationsPerTurn();
-
-            final List<Card> lands = CardLists.filter(playerTurn.getLandsInPlay(), Presets.UNTAPPED);
-            playerTurn.setNumPowerSurgeLands(lands.size());
-        }
-        //update tokens
-        game.fireEvent(new GameEventTokenStateUpdate(playerTurn.getTokensInPlay()));
-
         game.fireEvent(new GameEventTurnPhase(playerTurn, phase, phaseType));
     }
 
@@ -477,7 +475,7 @@ public class PhaseHandler implements java.io.Serializable {
             boolean manaBurns = game.getRules().hasManaBurn() ||
                     (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.manaBurn));
             if (manaBurns) {
-                p.loseLife(burn,true);
+                p.loseLife(burn, true);
             }
         }
 
@@ -487,7 +485,7 @@ public class PhaseHandler implements java.io.Serializable {
                 break;
 
             case UPKEEP:
-                for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
+                for (Card c : game.getCardsIncludePhasingIn(ZoneType.Battlefield)) {
                     c.getDamageHistory().setNotAttackedSinceLastUpkeepOf(playerTurn);
                     c.getDamageHistory().setNotBlockedSinceLastUpkeepOf(playerTurn);
                     c.getDamageHistory().setNotBeenBlockedSinceLastUpkeepOf(playerTurn);
@@ -521,7 +519,6 @@ public class PhaseHandler implements java.io.Serializable {
                 break;
 
             case CLEANUP:
-                bPreventCombatDamageThisTurn = false;
                 if (!bRepeatCleanup) {
                     // only call onCleanupPhase when Cleanup is not repeated
                     game.onCleanupPhase();
@@ -668,8 +665,7 @@ public class PhaseHandler implements java.io.Serializable {
                 return;
             }
 
-            // Handles removing cards like Mogg Flunkies from combat if group block
-            // didn't occur
+            // Handles removing cards like Mogg Flunkies from combat if group block didn't occur
             for (Card blocker : CardLists.filterControlledBy(combat.getAllBlockers(), p)) {
                 final List<Card> attackers = Lists.newArrayList(combat.getAttackersBlockedBy(blocker));
                 for (Card attacker : attackers) {
@@ -835,8 +831,9 @@ public class PhaseHandler implements java.io.Serializable {
         return noCost || blocker.getController().getController().payManaOptional(blocker, blockCost, fakeSA, "Pay cost to declare " + blocker + " a blocker. ", ManaPaymentPurpose.DeclareBlocker);
     }
 
-    public final boolean isPreventCombatDamageThisTurn() {
-        return bPreventCombatDamageThisTurn;
+    public void resetExtra() {
+        extraPhases.clear();
+        extraTurns.clear();
     }
 
     private Player handleNextTurn() {
@@ -848,6 +845,9 @@ public class PhaseHandler implements java.io.Serializable {
         game.getTriggerHandler().resetTurnTriggerState();
 
         Player next = getNextActivePlayer();
+        while (next.hasLost()) {
+            next = getNextActivePlayer();
+        }
 
         game.getTriggerHandler().handlePlayerDefinedDelTriggers(next);
 
@@ -1218,10 +1218,6 @@ public class PhaseHandler implements java.io.Serializable {
         extraPhases.clear();
         setPhase(PhaseType.CLEANUP);
         onPhaseBegin();
-    }
-
-    public final void setPreventCombatDamageThisTurn() {
-        bPreventCombatDamageThisTurn = true;
     }
 
     public int getPlanarDiceRolledthisTurn() {

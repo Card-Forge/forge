@@ -3,7 +3,7 @@ ManaCost:3 R
 Types:Enchantment Saga
 K:Saga:3:DBGainControl,DBAllAttack,DBDamageTapped
 SVar:DBGainControl:DB$ GainControl | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ LeavesPlay | SpellDescription$ Gain control of target creature for as long as CARDNAME remains on the battlefield.
-SVar:DBAllAttack:DB$ PumpAll | ValidCards$ Creature.OppCtrl | UntilYourNextTurn$ True | KW$ HIDDEN CARDNAME attacks each combat if able. | SpellDescription$ Until your next turn, creatures your opponents control attack each turn if able.
+SVar:DBAllAttack:DB$ PumpAll | ValidCards$ Creature.OppCtrl | Duration$ UntilYourNextTurn | KW$ HIDDEN CARDNAME attacks each combat if able. | SpellDescription$ Until your next turn, creatures your opponents control attack each turn if able.
 SVar:DBDamageTapped:DB$ EachDamage | ValidCards$ Creature.tapped | NumDmg$ X | DamageDesc$ damage equal to its power | DefinedCards$ Self | SpellDescription$ Each tapped creature deals damage to itself equal to its power.
 SVar:X:Count$CardPower
 Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Gain control of target creature for as long as The Akroan War remains on the battlefield.\nII — Until your next turn, creatures your opponents control attack each combat if able.\nIII — Each tapped creature deals damage to itself equal to its power.

@@ -3,6 +3,5 @@ ManaCost:2 U U
 Types:Creature Whale
 PT:4/3
 K:Flying
-K:CARDNAME can block only creatures with flying.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/long_finned_skywhale.jpg
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.withoutFlying | ValidBlocker$ Creature.Self | Description$ CARDNAME can block only creatures with flying.
 Oracle:Flying\nLong-Finned Skywhale can block only creatures with flying.

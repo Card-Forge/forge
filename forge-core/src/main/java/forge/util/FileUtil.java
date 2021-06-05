@@ -21,7 +21,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -208,7 +207,7 @@ public final class FileUtil {
             if ((file == null) || !file.exists()) {
                 return new ArrayList<>();
             }
-            return FileUtil.readAllLines(new FileReader(file), false);
+            return FileUtil.readAllLines(file, false);
         } catch (final Exception ex) {
             throw new RuntimeException("FileUtil : readFile() error, " + ex);
         }
@@ -235,6 +234,31 @@ public final class FileUtil {
         final List<String> list = new ArrayList<>();
         try {
             final BufferedReader in = new BufferedReader(reader);
+            String line;
+            while ((line = in.readLine()) != null) {
+                if (mayTrim) {
+                    line = line.trim();
+                }
+                list.add(line);
+            }
+            in.close();
+        } catch (final IOException ex) {
+            throw new RuntimeException("FileUtil : readAllLines() error, " + ex);
+        }
+        return list;
+    }
+    /**
+     * Reads all lines from given file to a list of strings.
+     *
+     * @param file is the File to read.
+     * @param mayTrim defines whether to trim lines.
+     * @return list of strings
+     */
+    public static List<String> readAllLines(final File file, final boolean mayTrim) {
+        final List<String> list = new ArrayList<>();
+        try {
+            final BufferedReader in = new BufferedReader(
+                    new InputStreamReader(new FileInputStream(file), "UTF-8"));
             String line;
             while ((line = in.readLine()) != null) {
                 if (mayTrim) {

@@ -6,5 +6,5 @@ K:Phasing
 T:Mode$ PhaseOut | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME phases out or leaves the battlefield, mill three cards.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | TriggerZones$ Battlefield | Secondary$ True | Execute$ TrigMill | TriggerDescription$ When CARDNAME phases out or leaves the battlefield, mill three cards.
 SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ You
-A:AB$ Pump | Cost$ U | Defined$ Self | KW$ HIDDEN CARDNAME can't phase out. | UntilYourNextUpkeep$ True | SpellDescription$ Until your next upkeep, CARDNAME can't phase out.
+A:AB$ Pump | Cost$ U | Defined$ Self | KW$ HIDDEN CARDNAME can't phase out. | Duration$ UntilYourNextUpkeep | SpellDescription$ Until your next upkeep, CARDNAME can't phase out.
 Oracle:Phasing (This phases in or out before you untap during each of your untap steps. While it's phased out, it's treated as though it doesn't exist.)\nWhen Ertai's Familiar phases out or leaves the battlefield, mill three cards.\n{U}: Until your next upkeep, Ertai's Familiar can't phase out.

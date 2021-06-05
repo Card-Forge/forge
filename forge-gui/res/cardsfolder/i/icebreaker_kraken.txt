@@ -5,7 +5,7 @@ PT:8/8
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ CARDNAME costs {1} less to cast for each snow land you control.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | ValidCards$ Artifact,Creature | Execute$ TrigTapDown | TriggerDescription$ When CARDNAME enters the battlefield, artifacts and creatures target opponent controls don't untap during that player's next untap step.
 A:AB$ ChangeZone | Cost$ Return<3/Land.Snow> | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
-SVar:TrigTapDown:DB$ PumpAll | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | ValidCards$ Artifact,Creature | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True
+SVar:TrigTapDown:DB$ PumpAll | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | ValidCards$ Artifact,Creature | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent
 SVar:X:Count$Valid Land.Snow+YouCtrl
 DeckHints:Type$Snow
 Oracle:This spell costs {1} less to cast for each snow land you control.\nWhen Icebreaker Kraken enters the battlefield, artifacts and creatures target opponent controls don't untap during that player's next untap step.\nReturn three snow lands you control to their owner's hand: Return Icebreaker Kraken to its owner's hand.

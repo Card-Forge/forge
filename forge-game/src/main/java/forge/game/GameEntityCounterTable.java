@@ -20,6 +20,13 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
 
     private Table<Optional<Player>, GameEntity, Map<CounterType, Integer>> dataMap = HashBasedTable.create();
 
+    public GameEntityCounterTable() {
+    }
+
+    public GameEntityCounterTable(Table<Optional<Player>, GameEntity, Map<CounterType, Integer>> counterTable) {
+        putAll(counterTable);
+    }
+
     /*
      * (non-Javadoc)
      * @see com.google.common.collect.ForwardingTable#delegate()

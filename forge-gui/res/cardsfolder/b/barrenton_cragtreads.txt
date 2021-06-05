@@ -2,6 +2,5 @@ Name:Barrenton Cragtreads
 ManaCost:2 WU WU
 Types:Creature Kithkin Scout
 PT:3/3
-K:CantBeBlockedBy Creature.Red
-SVar:Picture:http://www.wizards.com/global/images/magic/general/barrenton_cragtreads.jpg
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.Red | Description$ CARDNAME can't be blocked by red creatures.
 Oracle:Barrenton Cragtreads can't be blocked by red creatures.

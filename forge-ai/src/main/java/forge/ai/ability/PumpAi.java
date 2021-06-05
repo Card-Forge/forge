@@ -400,7 +400,6 @@ public class PumpAi extends PumpAiBase {
                     if (ComputerUtilCard.shouldPumpCard(ai, sa, card, defense, attack, keywords, false)) {
                         return true;
                     } else if (containsUsefulKeyword(ai, keywords, card, sa, attack)) {
-
                         Card pumped = ComputerUtilCard.getPumpedCreature(ai, sa, card, 0, 0, keywords);
                         if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS, ai)
                                 || game.getPhaseHandler().is(PhaseType.COMBAT_BEGIN, ai)) {
@@ -438,7 +437,7 @@ public class PumpAi extends PumpAiBase {
                 && game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)
                 && !(sa.isCurse() && defense < 0)
                 && !containsNonCombatKeyword(keywords)
-                && !sa.hasParam("UntilYourNextTurn")
+                && !"UntilYourNextTurn".equals(sa.getParam("Duration"))
                 && !"Snapcaster".equals(sa.getParam("AILogic"))
                 && !isFight) {
             return false;

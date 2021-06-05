@@ -5,21 +5,21 @@ Name=Jumpstart Arena Exclusives
 Type=Online
 
 [cards]
-R Archon of Sun's Grace
-C Audacious Thief
-U Banishing Light
-U Bond of Revival
-R Carnifex Demon
-R Doomed Necromancer
-U Dryad Greenseeker
-U Fanatic of Mogis
-R Gadwick, the Wizened
-U Goblin Oriflamme
-R Lightning Serpent
-U Lightning Strike
-C Pollenbright Druid
-C Prey Upon
-C Scorching Dragonfire
-R Serra's Guardian
-U Weight of Memory
-R Woe Strider
+3 R Archon of Sun's Grace
+84 C Audacious Thief
+4 U Banishing Light
+80 U Bond of Revival
+57 R Carnifex Demon
+137 R Doomed Necromancer
+178 U Dryad Greenseeker
+121 U Fanatic of Mogis
+48 R Gadwick, the Wizened
+130 U Goblin Oriflamme
+88 R Lightning Serpent
+152 U Lightning Strike
+173 C Pollenbright Druid
+143 C Prey Upon
+139 C Scorching Dragonfire
+310 R Serra's Guardian
+74 U Weight of Memory
+123 R Woe Strider

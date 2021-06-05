@@ -3,7 +3,7 @@ ManaCost:2 B B
 Types:Creature Zombie Dragon
 PT:4/3
 K:Flying
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Dragon.YouCtrl | IsPresent$ Card.StrictlySelf | PresentZone$ Graveyard | TriggerZones$ Graveyard | Execute$ TrigReturn | TriggerDescription$ Whenever a Dragon you control dies while Boneyard Scourge is in your graveyard, you may pay {1}{B}. If you do, return Boneyard Scourge from your graveyard to the battlefield.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Dragon.YouCtrl | IsPresent$ Card.StrictlySelf+inZoneGraveyard | PresentZone$ Graveyard | TriggerZones$ Graveyard | Execute$ TrigReturn | TriggerDescription$ Whenever a Dragon you control dies while Boneyard Scourge is in your graveyard, you may pay {1}{B}. If you do, return Boneyard Scourge from your graveyard to the battlefield.
 SVar:TrigReturn:AB$ ChangeZone | Cost$ 1 B | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield
 SVar:SacMe:1
 SVar:DiscardMe:1

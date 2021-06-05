@@ -5,9 +5,9 @@ Loyalty:3
 A:AB$ PutCounter | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on up to one target creature. It gains indestructible until end of turn.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Indestructible
 A:AB$ Effect | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | Triggers$ TrigAttack | SpellDescription$ Whenever one or more nontoken creatures attack this turn, create that many 1/1 white Soldier creature tokens that are tapped and attacking.
-SVar:TrigAttack:Mode$ AttackersDeclared | ValidAttackers$ Creature.nonToken+YouCtrl | TriggerZones$ Command | Execute$ TrigToken | TriggerDescription$ Whenever one or more nontoken creatures attack this turn, create that many 1/1 white Soldier creature tokens that are tapped and attacking.
+SVar:TrigAttack:Mode$ AttackersDeclared | ValidAttackers$ Creature.nonToken | TriggerZones$ Command | Execute$ TrigToken | TriggerDescription$ Whenever one or more nontoken creatures attack this turn, create that many 1/1 white Soldier creature tokens that are tapped and attacking.
 SVar:TrigToken:DB$ Token | TokenAmount$ BasriX | TokenScript$ w_1_1_soldier | TokenOwner$ You | TokenTapped$ True | TokenAttacking$ True
-SVar:BasriX:TriggerObjectsAttackers$Valid Creature.nonToken+YouCtrl
+SVar:BasriX:TriggerObjectsAttackers$Valid Creature.nonToken
 A:AB$ Effect | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Basri Ket | Image$ emblem_basri_ket | Triggers$ EffPhase | Duration$ Permanent | SpellDescription$ You get an emblem with "At the beginning of combat on your turn, create a 1/1 white Soldier creature token, then put a +1/+1 counter on each creature you control."
 SVar:EffPhase:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ EmblemTrigToken | TriggerDescription$ At the beginning of combat on your turn, create a 1/1 white Soldier creature token, then put a +1/+1 counter on each creature you control.
 SVar:EmblemTrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ w_1_1_soldier | SubAbility$ DBPutCounterAll

@@ -2,8 +2,8 @@ Name:Mimic Vat
 ManaCost:3
 Types:Artifact
 T:Mode$ ChangesZone | ValidCard$ Creature.nonToken | Origin$ Battlefield | Destination$ Graveyard | OptionalDecider$ You | Execute$ TrigReturn | TriggerZones$ Battlefield | TriggerDescription$ Imprint — Whenever a nontoken creature dies, you may exile that card. If you do, return each other card exiled with CARDNAME to its owner's graveyard.
-SVar:TrigReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Graveyard | Defined$ Imprinted | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True | SubAbility$ DBExile
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Graveyard | Defined$ Imprinted | SubAbility$ DBCleanup | ConditionPresent$ Card.inRealZone Graveyard | ConditionDefined$ TriggeredNewCardLKICopy | ConditionCompare$ EQ1
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True | SubAbility$ DBExile | ConditionPresent$ Card.inRealZone Graveyard | ConditionDefined$ TriggeredNewCardLKICopy | ConditionCompare$ EQ1
 SVar:DBExile:DB$ ChangeZone | Imprint$ True | Origin$ Graveyard | Destination$ Exile | Defined$ TriggeredNewCardLKICopy | AILogic$ MimicVat
 A:AB$ CopyPermanent | Cost$ 3 T | Defined$ Imprinted.ExiledWithSource | Choices$ Card | PumpKeywords$ Haste | AtEOT$ Exile | AILogic$ MimicVat | SpellDescription$ Create a token that's a copy of a card exiled with CARDNAME. It gains haste. Exile it at the beginning of the next end step.
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsImprinted+ExiledWithSource | Execute$ DBForget

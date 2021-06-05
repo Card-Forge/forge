@@ -24,13 +24,13 @@ public class NewGameMenu extends FPopupMenu {
     final static Localizer localizer = Localizer.getInstance();
 
     public enum NewGameScreen {
-        Constructed(localizer.getMessage("lblConstructed"), FSkinImage.MENU_CONSTRUCTED, ConstructedScreen.class),
-        BoosterDraft(localizer.getMessage("lblBoosterDraft"), FSkinImage.MENU_DRAFT, NewDraftScreen.class),
-        SealedDeck(localizer.getMessage("lblSealedDeck"), FSkinImage.MENU_SEALED, NewSealedScreen.class),
-        QuestMode(localizer.getMessage("lblQuestMode"), FSkinImage.QUEST_ZEP, NewQuestScreen.class),
-        PuzzleMode(localizer.getMessage("lblPuzzleMode"), FSkinImage.MENU_PUZZLE, PuzzleScreen.class),
-        PlanarConquest(localizer.getMessage("lblPlanarConquest"), FSkinImage.MENU_GALAXY, NewConquestScreen.class),
-        Gauntlet(localizer.getMessage("lblGauntlet"), FSkinImage.MENU_GAUNTLET, NewGauntletScreen.class);
+        Constructed(localizer.getMessageorUseDefault("lblConstructed", "Constructed"), FSkinImage.MENU_CONSTRUCTED, ConstructedScreen.class),
+        BoosterDraft(localizer.getMessageorUseDefault("lblBoosterDraft", "Booster Draft"), FSkinImage.MENU_DRAFT, NewDraftScreen.class),
+        SealedDeck(localizer.getMessageorUseDefault("lblSealedDeck", "Sealed Deck"), FSkinImage.MENU_SEALED, NewSealedScreen.class),
+        QuestMode(localizer.getMessageorUseDefault("lblQuestMode", "Quest Mode"), FSkinImage.QUEST_ZEP, NewQuestScreen.class),
+        PuzzleMode(localizer.getMessageorUseDefault("lblPuzzleMode", "Puzzle Mode"), FSkinImage.MENU_PUZZLE, PuzzleScreen.class),
+        PlanarConquest(localizer.getMessageorUseDefault("lblPlanarConquest", "Planar Conquest"), FSkinImage.MENU_GALAXY, NewConquestScreen.class),
+        Gauntlet(localizer.getMessageorUseDefault("lblGauntlet", "Gauntlet"), FSkinImage.MENU_GAUNTLET, NewGauntletScreen.class);
 
         private final FMenuItem item;
         private final Class<? extends FScreen> screenClass;
@@ -51,7 +51,7 @@ public class NewGameMenu extends FPopupMenu {
             if (screen == null) { //don't initialize screen until it's opened the first time
                 try {
                     screen = screenClass.newInstance();
-                    screen.setHeaderCaption(localizer.getMessage("lblNewGame") + " - " + item.getText());
+                    screen.setHeaderCaption(localizer.getMessageorUseDefault("lblNewGame", "New Game") + " - " + item.getText());
                 }
                 catch (Exception e) {
                     e.printStackTrace();

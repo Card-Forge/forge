@@ -5,7 +5,7 @@ PT:2/2
 K:Kicker:2 G
 K:ETBReplacement:Other:DBPutCounter:Mandatory::Card.Self+kicked
 SVar:DBPutCounter:DB$ PutCounter | ETB$ True | Defined$ Self | CounterType$ P1P1 | CounterNum$ 3 | SubAbility$ Dustwalk | SpellDescription$ If CARDNAME was kicked, it enters the battlefield with three +1/+1 counters on it and with trample.
-SVar:Dustwalk:DB$ Animate | Defined$ Self | Keywords$ Trample | Permanent$ True
+SVar:Dustwalk:DB$ Animate | Defined$ Self | Keywords$ Trample | Duration$ Permanent
 DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kavu_titan.jpg
 Oracle:Kicker {2}{G} (You may pay an additional {2}{G} as you cast this spell.)\nIf Kavu Titan was kicked, it enters the battlefield with three +1/+1 counters on it and with trample.

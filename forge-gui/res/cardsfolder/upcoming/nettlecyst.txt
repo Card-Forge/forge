@@ -1,0 +1,12 @@
+Name:Nettlecyst
+ManaCost:3
+Types:Artifact Equipment
+K:Living Weapon
+K:Equip:2
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ X | Description$ Equipped creature gets +1/+1 for each artifact and/or enchantment you control.
+SVar:X:Count$Valid Artifact.YouCtrl,Enchantment.YouCtrl
+SVar:NeedsToPlayVar:X GE1
+SVar:BuffedBy:Artifact,Enchantment
+DeckHas:Ability$Token
+DeckHints:Type$Artifact|Enchantment
+Oracle:Living weapon (When this Equipment enters the battlefield, create a 0/0 black Germ creature token, then attach this to it.)\nEquipped creature gets +1/+1 for each artifact and/or enchantment you control.\nEquip {2}

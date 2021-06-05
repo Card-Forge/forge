@@ -3,7 +3,7 @@ ManaCost:3 R
 Types:Creature Human Artificer
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAnimate | TriggerDescription$ When CARDNAME enters the battlefield, target artifact you control gains "{T}: This artifact deals 2 damage to any target" for as long as you control CARDNAME.
-SVar:TrigAnimate:DB$ Animate | ValidTgts$ Artifact.YouCtrl | TgtPrompt$ Select target artifact you control | Abilities$ ABDealDamage | UntilLoseControlOfHost$ True
+SVar:TrigAnimate:DB$ Animate | ValidTgts$ Artifact.YouCtrl | TgtPrompt$ Select target artifact you control | Abilities$ ABDealDamage | Duration$ UntilLoseControlOfHost
 SVar:ABDealDamage:AB$DealDamage | Cost$ T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quicksmith_rebel.jpg

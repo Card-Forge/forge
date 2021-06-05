@@ -5,16 +5,19 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.game.Game;
-import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.replacement.ReplacementResult;
-import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
-import forge.util.TextUtil;
 
+/**
+ * This class handles two kinds of prevention effect:
+ * - Prevent next X damages. Those will use `Amount$ <SVar>`, and the `<SVar>` will have form `Number$ X`.
+ *   That SVar will be updated after each prevention "shield" used up.
+ * - Prevent X damages. Those will use `Amount$ N` or `Amount$ <SVar>`, where the `<SVar>` will have form other than
+ *   `Number$ X`. These "shields" are not used up so won't be updated. */
 public class ReplaceDamageEffect extends SpellAbilityEffect {
 
     @Override
@@ -27,30 +30,32 @@ public class ReplaceDamageEffect extends SpellAbilityEffect {
             return;
         }
 
-        final ReplacementType event = sa.getReplacementEffect().getMode();
-        
-        String varValue = sa.getParamOrDefault("VarName", "1");
-
         @SuppressWarnings("unchecked")
         Map<AbilityKey, Object> originalParams = (Map<AbilityKey, Object>) sa.getReplacingObject(AbilityKey.OriginalParams);
-        Map<AbilityKey, Object> params = AbilityKey.newMap(originalParams);
-        
         Integer dmg = (Integer) sa.getReplacingObject(AbilityKey.DamageAmount);
                 
+        String varValue = sa.getParamOrDefault("Amount", "1");
         int prevent = AbilityUtils.calculateAmount(card, varValue, sa);
-        
-        // Currently it does reduce damage by amount, need second mode for Setting Damage
         
         if (prevent > 0) {
             int n = Math.min(dmg, prevent);
+            // if the effect has divided shield, use that
+            if (originalParams.get(AbilityKey.DividedShieldAmount) != null) {
+                n = Math.min(n, (Integer)originalParams.get(AbilityKey.DividedShieldAmount));
+            }
             dmg -= n;
             prevent -= n;
 
-            if (card.getType().hasStringType("Effect") && prevent <= 0) {
-                game.getAction().exile(card, null);
-            } else if (!StringUtils.isNumeric(varValue)) {
-                card.setSVar(varValue, "Number$" + prevent);
+            if (!StringUtils.isNumeric(varValue) && card.getSVar(varValue).startsWith("Number$")) {
+                if (card.getType().hasStringType("Effect") && prevent <= 0) {
+                    game.getAction().exile(card, null);
+                } else {
+                    card.setSVar(varValue, "Number$" + prevent);
+                    card.updateAbilityTextForView();
+                }
             }
+            // Set PreventedDamage SVar
+            card.setSVar("PreventedDamage", "Number$" + n);
         }
 
         // no damage for original target anymore
@@ -58,32 +63,8 @@ public class ReplaceDamageEffect extends SpellAbilityEffect {
             originalParams.put(AbilityKey.ReplacementResult, ReplacementResult.Replaced);
             return;
         }
-        params.put(AbilityKey.DamageAmount, dmg);
-
-        // need to log Updated events there, or the log is wrong order
-        String message = sa.getReplacementEffect().toString();
-        if ( !StringUtils.isEmpty(message)) {
-            message = TextUtil.fastReplace(message, "CARDNAME", card.getName());
-            game.getGameLog().add(GameLogEntryType.EFFECT_REPLACED, message);
-        }
-
-        //try to call replacementHandler with new Params
-        ReplacementResult result = game.getReplacementHandler().run(event, params);
-        switch (result) {
-        case NotReplaced:
-        case Updated: {
-            for (Map.Entry<AbilityKey, Object> e : params.entrySet()) {
-                originalParams.put(e.getKey(), e.getValue());
-            }
-            // effect was updated
-            originalParams.put(AbilityKey.ReplacementResult, ReplacementResult.Updated);
-            break;
-        }
-        default:
-            // effect was replaced with something else
-            originalParams.put(AbilityKey.ReplacementResult, result);
-            break;
-        }
+        originalParams.put(AbilityKey.DamageAmount, dmg);
+        originalParams.put(AbilityKey.ReplacementResult, ReplacementResult.Updated);
     }
 
 }

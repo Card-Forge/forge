@@ -533,6 +533,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     @Override
     public int getPrintCount(String cardName, String edition) {
         int cnt = 0;
+        if (edition == null || cardName == null)
+            return cnt;
         for (PaperCard pc : getAllCards(cardName)) {
             if (pc.getEdition().equals(edition)) {
                 cnt++;
@@ -544,6 +546,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     @Override
     public int getMaxPrintCount(String cardName) {
         int max = -1;
+        if (cardName == null)
+            return max;
         for (PaperCard pc : getAllCards(cardName)) {
             if (max < pc.getArtIndex()) {
                 max = pc.getArtIndex();
@@ -555,6 +559,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     @Override
     public int getArtCount(String cardName, String setName) {
         int cnt = 0;
+        if (cardName == null || setName == null)
+            return cnt;
 
         Collection<PaperCard> cards = getAllCards(cardName);
         if (null == cards) {
@@ -624,6 +630,23 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                     return false;
                 }
                 return edition != null && edition.getType() != Type.PROMOS;
+            }
+        }));
+    }
+
+    public Collection<PaperCard> getAllNonPromosNonReprintsNoAlt() {
+        return Lists.newArrayList(Iterables.filter(getAllCardsNoAlt(), new Predicate<PaperCard>() {
+            @Override
+            public boolean apply(final PaperCard paperCard) {
+                CardEdition edition = null;
+                try {
+                    edition = editions.getEditionByCodeOrThrow(paperCard.getEdition());
+                    if (edition.getType() == Type.PROMOS||edition.getType() == Type.REPRINT)
+                        return false;
+                } catch (Exception ex) {
+                    return false;
+                }
+                return true;
             }
         }));
     }
@@ -749,7 +772,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     public PaperCard createUnsupportedCard(String cardName) {
-
         CardRequest request = CardRequest.fromString(cardName);
         CardEdition cardEdition = CardEdition.UNKNOWN;
         CardRarity cardRarity = CardRarity.Unknown;
@@ -790,7 +812,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
 
         return new PaperCard(CardRules.getUnsupportedCardNamed(request.cardName), cardEdition.getCode(), cardRarity, 1);
-
     }
 
     private final Editor editor = new Editor();

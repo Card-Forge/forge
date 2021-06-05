@@ -6,5 +6,4 @@ SVar:DBReveal:DB$ Reveal | Random$ True | RememberRevealed$ True | Defined$ You 
 SVar:DBDamage:DB$ DealDamage | NumDmg$ 2 | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | ConditionDefined$ Remembered | ConditionPresent$ Card.NamedCard | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:PreferredHandSize:1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cursed_scroll.jpg
 Oracle:{3}, {T}: Choose a card name, then reveal a card at random from your hand. If that card has the chosen name, Cursed Scroll deals 2 damage to any target.

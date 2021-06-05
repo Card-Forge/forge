@@ -172,8 +172,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     }
 
     public final void clearFrozen() {
-        // TODO: frozen triggered abilities and undoable costs have nasty
-        // consequences
+        // TODO: frozen triggered abilities and undoable costs have nasty consequences
         frozen = false;
         frozenStack.clear();
     }
@@ -300,6 +299,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         runParams.put(AbilityKey.CastSACMC, si.getSpellAbility(true).getHostCard().getCMC());
         runParams.put(AbilityKey.CurrentStormCount, thisTurnCast.size());
         runParams.put(AbilityKey.CurrentCastSpells, Lists.newArrayList(thisTurnCast));
+
         if (!sp.isCopied()) {
             // Run SpellAbilityCast triggers
             game.getTriggerHandler().runTrigger(TriggerType.SpellAbilityCast, runParams, true);
@@ -646,9 +646,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                     } else {
                         if (o instanceof SpellAbility) {
                             SpellAbilityStackInstance si = getInstanceFromSpellAbility((SpellAbility)o);
-                            invalidTarget = si == null ? true : !si.getSpellAbility(true).canBeTargetedBy(sa);
+                            invalidTarget = si == null ? true : !sa.canTarget(si.getSpellAbility(true));
                         } else {
-                            invalidTarget = !o.canBeTargetedBy(sa);
+                            invalidTarget = !sa.canTarget(o);
                         }
                     }
                     // Remove targets
@@ -716,6 +716,18 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         for (SpellAbilityStackInstance si : stack) {
             if (si.getActivatingPlayer().equals(p)) {
                 remove(si);
+            }
+        }
+        for (SpellAbility sa : Lists.newArrayList(simultaneousStackEntryList)) {
+            Player activator = sa.getActivatingPlayer();
+            if (activator == null) {
+                if (sa.getHostCard().getController().equals(p)) {
+                    simultaneousStackEntryList.remove(sa);
+                }
+            } else {
+                if (activator.equals(p)) {
+                    simultaneousStackEntryList.remove(sa);
+                }
             }
         }
     }
@@ -893,11 +905,14 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
         for (SpellAbilityStackInstance si : stack) {
             if (si.isTrigger() && si.getSourceCard().equals(source)) {
-                if (pred == null) {
+                if (pred == null || pred.apply(si.getSpellAbility(false))) {
                     return true;
                 }
-                SpellAbility sa = si.getSpellAbility(false);
-                if (pred.apply(sa)) {
+            }
+        }
+        for (SpellAbility sa : simultaneousStackEntryList) {
+            if (sa.isTrigger() && sa.getHostCard().equals(source)) {
+                if (pred == null || pred.apply(sa)) {
                     return true;
                 }
             }

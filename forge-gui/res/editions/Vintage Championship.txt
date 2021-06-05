@@ -1,0 +1,30 @@
+[metadata]
+Code=OVNT
+Date=2003-01-01
+Name=Vintage Championship
+Type=Promos
+
+[cards]
+2003 R Black Lotus
+2004 R Timetwister
+2005 R Ancestral Recall
+2006 R Mox Pearl
+2007 R Mox Jet
+2008 R Mox Ruby
+2009 R Mox Emerald
+2010 R Mox Sapphire
+2011 R Time Walk
+2012 R Timetwister
+2013 R Ancestral Recall
+2014 M Mox Pearl
+2015 M Mox Emerald
+2016 M Mox Jet
+2017 M Mox Sapphire
+2018 M Mox Ruby
+2019 M Black Lotus
+2020 M Ancestral Recall
+2021 M Timetwister
+2022 M Time Walk
+2023 M Mox Pearl
+2024 M Mox Sapphire
+2025 M Mox Jet

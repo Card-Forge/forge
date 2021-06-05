@@ -56,6 +56,7 @@ public enum ProtocolMethod {
     setPanelSelection   (Mode.SERVER, Void.TYPE, CardView.class),
     getAbilityToPlay    (Mode.SERVER, SpellAbilityView.class, CardView.class, List/*SpellAbilityView*/.class, ITriggerEvent.class),
     assignCombatDamage  (Mode.SERVER, Map.class, CardView.class, List/*CardView*/.class, Integer.TYPE, GameEntityView.class, Boolean.TYPE),
+    divideShield        (Mode.SERVER, Map.class, CardView.class, Map.class, Integer.TYPE, Boolean.TYPE, String.class),
     message             (Mode.SERVER, Void.TYPE, String.class, String.class),
     showErrorDialog     (Mode.SERVER, Void.TYPE, String.class, String.class),
     showConfirmDialog   (Mode.SERVER, Boolean.TYPE, String.class, String.class, String.class, String.class, Boolean.TYPE),

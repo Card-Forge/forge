@@ -2,7 +2,7 @@ Name:Orcish Farmer
 ManaCost:1 R R
 Types:Creature Orc
 PT:2/2
-A:AB$ Animate | Cost$ T | ValidTgts$ Land | TgtPrompt$ Select target land | Types$ Swamp | RemoveLandTypes$ True | UntilControllerNextUntap$ True | SpellDescription$ Target land becomes a Swamp until its controller's next untap step.
+A:AB$ Animate | Cost$ T | ValidTgts$ Land | TgtPrompt$ Select target land | Types$ Swamp | RemoveLandTypes$ True | Duration$ UntilControllerNextUntap | SpellDescription$ Target land becomes a Swamp until its controller's next untap step.
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_farmer.jpg
 Oracle:{T}: Target land becomes a Swamp until its controller's next untap step.

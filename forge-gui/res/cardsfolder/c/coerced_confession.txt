@@ -4,5 +4,5 @@ Types:Sorcery
 A:SP$ Mill | Cost$ 4 UB | NumCards$ 4 | ValidTgts$ Player | TgtPrompt$ Choose a player | RememberMilled$ True | SubAbility$ DBDraw | SpellDescription$ Target player mills four cards. You draw a card for each creature card put into a graveyard this way.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Remembered$Valid Creature
+SVar:X:Remembered$Valid Creature.inZoneGraveyard
 Oracle:Target player mills four cards. You draw a card for each creature card put into their graveyard this way.

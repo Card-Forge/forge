@@ -4,7 +4,7 @@ Types:Creature Elemental
 PT:1/1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ At the beginning of your upkeep, reveal cards from the top of your library until you reveal a creature card. Until your next turn, CARDNAME's base power becomes twice that card's power and its toughness. Put the revealed cards on the bottom of your library in a random order.
 SVar:TrigDig:DB$ DigUntil | Reveal$ True | Valid$ Creature | ValidDescription$ creature card | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | ImprintRevealed$ True | SubAbility$ DBAnimate
-SVar:DBAnimate:DB$ Animate | Power$ X | Toughness$ Y | UntilYourNextTurn$ True | SubAbility$ DBMovetoLib
+SVar:DBAnimate:DB$ Animate | Power$ X | Toughness$ Y | Duration$ UntilYourNextTurn | SubAbility$ DBMovetoLib
 SVar:DBMovetoLib:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered,Card.IsImprinted | Origin$ Exile | Destination$ Library | RandomOrder$ True | LibraryPosition$ -1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:X:Remembered$CardPower/Times.2

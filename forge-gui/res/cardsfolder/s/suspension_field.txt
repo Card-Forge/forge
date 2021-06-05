@@ -2,7 +2,7 @@ Name:Suspension Field
 ManaCost:1 W
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may exile target creature with toughness 3 or greater until CARDNAME leaves the battlefield.
-SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.toughnessGE3 | TgtPrompt$ Select target creature with toughness 3 or greater | UntilHostLeavesPlay$ True
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.toughnessGE3 | TgtPrompt$ Select target creature with toughness 3 or greater | Duration$ UntilHostLeavesPlay
 SVar:PlayMain1:TRUE
 SVar:OblivionRing:TRUE
 Oracle:When Suspension Field enters the battlefield, you may exile target creature with toughness 3 or greater until Suspension Field leaves the battlefield. (That creature returns under its owner's control.)

@@ -4,6 +4,6 @@ Types:Legendary Creature Giant Warrior
 PT:7/7
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigChoose | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, choose an opponent at random. CARDNAME attacks that player this combat if able.
 SVar:TrigChoose:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | Random$ True | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME attacks specific player each combat if able:ChosenPlayer | UntilEndOfCombat$ True
+SVar:DBPump:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME attacks specific player each combat if able:ChosenPlayer | Duration$ UntilEndOfCombat
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ruhan_of_the_fomori.jpg
 Oracle:At the beginning of combat on your turn, choose an opponent at random. Ruhan of the Fomori attacks that player this combat if able.

@@ -1,10 +1,7 @@
 Name:Psychic Miasma
 ManaCost:1 B
 Types:Sorcery
-#You can not clear a remembered object from a card on the stack, so this card is cleaned beforehand.
-A:SP$ Pump | Cost$ 1 B | SubAbility$ DBCleanup | Static$ True
-SVar:DBDiscard:DB$ Discard | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBChangeZone | SpellDescription$ Target player discards a card. If a land card is discarded this way, return CARDNAME to its owner's hand.
-SVar:DBChangeZone:DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Hand | Hidden$ True | ConditionDefined$ Remembered | ConditionPresent$ Land | ConditionCompare$ EQ1
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBDiscard
-SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_miasma.jpg
+A:SP$ Discard | Cost$ 1 B | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBChangeZone | SpellDescription$ Target player discards a card. If a land card is discarded this way, return CARDNAME to its owner's hand.
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Hand | Hidden$ True | ConditionDefined$ Remembered | ConditionPresent$ Land | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Target player discards a card. If a land card is discarded this way, return Psychic Miasma to its owner's hand.

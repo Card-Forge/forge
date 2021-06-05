@@ -14,6 +14,7 @@ import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
 import forge.screens.workshop.controllers.CCardScript;
+import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextPane;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
@@ -32,6 +33,7 @@ public enum VCardScript implements IVDoc<CCardScript> {
     private final DragTab tab = new DragTab(Localizer.getInstance().getMessage("lblCardScript"));
 
     private final FTextPane txtScript = new FTextPane();
+    private final FScrollPane scrollScript;
     private final StyledDocument doc;
     private final Style error;
 
@@ -41,6 +43,7 @@ public enum VCardScript implements IVDoc<CCardScript> {
         txtScript.setFocusable(true);
         doc = new DefaultStyledDocument();
         txtScript.setDocument(doc);
+        scrollScript = new FScrollPane(txtScript, true);
         error = doc.addStyle("error", null);
         error.addAttribute(StyleConstants.Background, Color.red);
         error.addAttribute(StyleConstants.Bold, Boolean.valueOf(true));
@@ -107,6 +110,6 @@ public enum VCardScript implements IVDoc<CCardScript> {
     public void populate() {
     	JPanel body = parentCell.getBody();
     	body.setLayout(new MigLayout("insets 1, gap 0, wrap"));
-    	body.add(txtScript, "w 100%, h 100%");
+    	body.add(scrollScript, "w 100%, h 100%");
     }
 }

@@ -82,7 +82,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
 
         int cntToRemove = 0;
         if (!num.equals("All") && !num.equals("Any")) {
-            cntToRemove = AbilityUtils.calculateAmount(sa.getHostCard(), num, sa);
+            cntToRemove = AbilityUtils.calculateAmount(card, num, sa);
         }
 
         if (sa.hasParam("Optional")) {

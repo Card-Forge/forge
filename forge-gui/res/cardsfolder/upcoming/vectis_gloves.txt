@@ -1,0 +1,6 @@
+Name:Vectis Gloves
+ManaCost:2
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddKeyword$ Artifact landwalk | Description$ Equipped creature gets +2/+0 and has artifact landwalk. (It can’t be blocked as long as defending player controls an artifact land.)
+K:Equip:2
+Oracle:Equipped creature gets +2/+0 and has artifact landwalk. (It can’t be blocked as long as defending player controls an artifact land.)\nEquip {2}

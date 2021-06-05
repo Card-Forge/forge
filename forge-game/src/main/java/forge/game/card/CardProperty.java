@@ -47,6 +47,11 @@ public class CardProperty {
         final Card lki = game.getChangeZoneLKIInfo(card);
         final Player controller = lki.getController();
 
+        // CR 702.25b if card is phased out it will not count unless specifically asked for
+        if (card.isPhasedOut() && !property.contains("phasedOut")) {
+            return false;
+        }
+
         // by name can also have color names, so needs to happen before colors.
         if (property.startsWith("named")) {
             String name = TextUtil.fastReplace(property.substring(5), ";", ","); // for some legendary cards
@@ -219,55 +224,22 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("TargetedPlayerCtrl")) {
-            boolean foundTargetingSA = false;
-            for (final SpellAbility sa : source.getCurrentState().getNonManaAbilities()) {
-                final SpellAbility saTargeting = sa.getSATargetingPlayer();
-                if (saTargeting != null) {
-                    foundTargetingSA = true;
-                    for (final Player p : saTargeting.getTargets().getTargetPlayers()) {
-                        if (!controller.equals(p)) {
-                            return false;
-                        }
-                    }
-                }
-            }
-            if (!foundTargetingSA) {
-                // FIXME: Something went wrong with detecting the SA that has a target, this can happen
-                // e.g. when activating a SA on a card from another player's hand (e.g. opponent's Chandra's Fury
-                // activated via Sen Triplets). Needs further investigation as to why this is happening, it might
-                // cause issues elsewhere too.
-                System.err.println("Warning: could not deduce a player target for TargetedPlayerCtrl for " + source + ", trying to locate it via CastSA...");
-                SpellAbility castSA = source.getCastSA();
-                while (castSA != null) {
-                    if (!Iterables.isEmpty(castSA.getTargets().getTargetPlayers())) {
-                        foundTargetingSA = true;
-                        for (final Player p : castSA.getTargets().getTargetPlayers()) {
-                            if (!controller.equals(p)) {
-                                return false;
-                            }
-                        }
-                    }
-                    castSA = castSA.getSubAbility();
-                }
-                if (!foundTargetingSA) {
-                    System.err.println("Warning: checking targets in CastSA did not yield any results as well, TargetedPlayerCtrl check failed.");
-                }
+            if (!AbilityUtils.getDefinedPlayers(source, "TargetedPlayer", spellAbility).contains(controller)) {
+                return false;
             }
         } else if (property.equals("TargetedControllerCtrl")) {
-            for (final SpellAbility sa : source.getCurrentState().getNonManaAbilities()) {
-                final CardCollectionView cards = AbilityUtils.getDefinedCards(source, "Targeted", sa);
-                final List<SpellAbility> sas = AbilityUtils.getDefinedSpellAbilities(source, "Targeted", sa);
-                for (final Card c : cards) {
-                    final Player p = c.getController();
-                    if (!controller.equals(p)) {
-                        return false;
-                    }
+            final CardCollectionView cards = AbilityUtils.getDefinedCards(source, "Targeted", spellAbility);
+            final List<SpellAbility> sas = AbilityUtils.getDefinedSpellAbilities(source, "Targeted", spellAbility);
+            for (final Card c : cards) {
+                final Player p = c.getController();
+                if (!controller.equals(p)) {
+                    return false;
                 }
-                for (final SpellAbility s : sas) {
-                    final Player p = s.getHostCard().getController();
-                    if (!controller.equals(p)) {
-                        return false;
-                    }
+            }
+            for (final SpellAbility s : sas) {
+                final Player p = s.getHostCard().getController();
+                if (!controller.equals(p)) {
+                    return false;
                 }
             }
         } else if (property.startsWith("ActivePlayerCtrl")) {
@@ -291,36 +263,8 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("TargetedPlayerOwn")) {
-            boolean foundTargetingSA = false;
-            for (final SpellAbility sa : source.getCurrentState().getNonManaAbilities()) {
-                final SpellAbility saTargeting = sa.getSATargetingPlayer();
-                if (saTargeting != null) {
-                    foundTargetingSA = true;
-                    for (final Player p : saTargeting.getTargets().getTargetPlayers()) {
-                        if (!card.getOwner().equals(p)) {
-                            return false;
-                        }
-                    }
-                }
-            }
-            if (!foundTargetingSA) {
-                // FIXME: Something went wrong with detecting the SA that has a target, needs investigation
-                System.err.println("Warning: could not deduce a player target for TargetedPlayerOwn for " + source + ", trying to locate it via CastSA...");
-                SpellAbility castSA = source.getCastSA();
-                while (castSA != null) {
-                    if (!Iterables.isEmpty(castSA.getTargets().getTargetPlayers())) {
-                        foundTargetingSA = true;
-                        for (final Player p : castSA.getTargets().getTargetPlayers()) {
-                            if (!card.getOwner().equals(p)) {
-                                return false;
-                            }
-                        }
-                    }
-                    castSA = castSA.getSubAbility();
-                }
-                if (!foundTargetingSA) {
-                    System.err.println("Warning: checking targets in CastSA did not yield any results as well, TargetedPlayerOwn check failed.");
-                }
+            if (!AbilityUtils.getDefinedPlayers(source, "TargetedPlayer", spellAbility).contains(card.getOwner())) {
+                return false;
             }
         } else if (property.startsWith("OwnedBy")) {
             final String valid = property.substring(8);
@@ -475,14 +419,9 @@ public class CardProperty {
                         }
                         break;
                     case "Targeted":
-                        for (final SpellAbility sa : source.getCurrentState().getNonManaAbilities()) {
-                            final SpellAbility saTargeting = sa.getSATargetingCard();
-                            if (saTargeting != null) {
-                                for (final Card c : saTargeting.getTargets().getTargetCards()) {
-                                    if (!card.isEnchantedBy(c) && !card.equals(c.getEntityAttachedTo())) {
-                                        return false;
-                                    }
-                                }
+                        for (final Card c : AbilityUtils.getDefinedCards(source, "Targeted", spellAbility)) {
+                            if (!card.isEnchantedBy(c) && !card.equals(c.getEntityAttachedTo())) {
+                                return false;
                             }
                         }
                         break;
@@ -497,14 +436,9 @@ public class CardProperty {
             }
         } else if (property.startsWith("NotEnchantedBy")) {
             if (property.substring(14).equals("Targeted")) {
-                for (final SpellAbility sa : source.getCurrentState().getNonManaAbilities()) {
-                    final SpellAbility saTargeting = sa.getSATargetingCard();
-                    if (saTargeting != null) {
-                        for (final Card c : saTargeting.getTargets().getTargetCards()) {
-                            if (card.isEnchantedBy(c)) {
-                                return false;
-                            }
-                        }
+                for (final Card c : AbilityUtils.getDefinedCards(source, "Targeted", spellAbility)) {
+                    if (card.isEnchantedBy(c)) {
+                        return false;
                     }
                 }
             } else {
@@ -528,14 +462,9 @@ public class CardProperty {
             }
         } else if (property.startsWith("CanBeEnchantedBy")) {
             if (property.substring(16).equals("Targeted")) {
-                for (final SpellAbility sa : source.getCurrentState().getNonManaAbilities()) {
-                    final SpellAbility saTargeting = sa.getSATargetingCard();
-                    if (saTargeting != null) {
-                        for (final Card c : saTargeting.getTargets().getTargetCards()) {
-                            if (!card.canBeAttached(c)) {
-                                return false;
-                            }
-                        }
+                for (final Card c : AbilityUtils.getDefinedCards(source, "Targeted", spellAbility)) {
+                    if (!card.canBeAttached(c)) {
+                        return false;
                     }
                 }
             } else if (property.substring(16).equals("AllRemembered")) {
@@ -554,14 +483,9 @@ public class CardProperty {
             }
         } else if (property.startsWith("EquippedBy")) {
             if (property.substring(10).equals("Targeted")) {
-                for (final SpellAbility sa : source.getCurrentState().getNonManaAbilities()) {
-                    final SpellAbility saTargeting = sa.getSATargetingCard();
-                    if (saTargeting != null) {
-                        for (final Card c : saTargeting.getTargets().getTargetCards()) {
-                            if (!card.hasCardAttachment(c)) {
-                                return false;
-                            }
-                        }
+                for (final Card c : AbilityUtils.getDefinedCards(source, "Targeted", spellAbility)) {
+                    if (!card.hasCardAttachment(c)) {
+                        return false;
                     }
                 }
             } else if (property.substring(10).equals("Enchanted")) {
@@ -672,14 +596,8 @@ public class CardProperty {
                 }
             } else {
                 String prop = property.substring("DamagedBy".length());
-
-                boolean found = false;
-                for (Card d : card.getReceivedDamageFromThisTurn().keySet()) {
-                    if (d.isValid(prop, sourceController, source, spellAbility)) {
-                        found = true;
-                        break;
-                    }
-                }
+                final Iterable<Card> list = Iterables.filter(card.getReceivedDamageFromThisTurn().keySet(), Card.class);
+                boolean found = Iterables.any(list, CardPredicates.restriction(prop, sourceController, source, spellAbility));
 
                 if (!found) {
                     for (Card d : AbilityUtils.getDefinedCards(source, prop, spellAbility)) {
@@ -694,21 +612,9 @@ public class CardProperty {
                 }
             }
         } else if (property.startsWith("Damaged")) {
-            if (!card.getDealtDamageToThisTurn().containsKey(source)) {
+            if (!card.getDamageHistory().getThisTurnDamaged().containsKey(source)) {
                 return false;
             }
-        } else if (property.startsWith("IsTargetingSource")) {
-            for (final SpellAbility sa : card.getCurrentState().getNonManaAbilities()) {
-                final SpellAbility saTargeting = sa.getSATargetingCard();
-                if (saTargeting != null) {
-                    for (final Card c : saTargeting.getTargets().getTargetCards()) {
-                        if (c.equals(source)) {
-                            return true;
-                        }
-                    }
-                }
-            }
-            return false;
         } else if (property.startsWith("SharesCMCWith")) {
             if (property.equals("SharesCMCWith")) {
                 if (!card.sharesCMCWith(source)) {
@@ -720,15 +626,27 @@ public class CardProperty {
                 return !CardLists.filter(list, CardPredicates.sharesCMCWith(card)).isEmpty();
             }
         } else if (property.startsWith("SharesColorWith")) {
+            // if card is colorless, it can't share colors
+            if (card.isColorless()) {
+                return false;
+            }
             if (property.equals("SharesColorWith")) {
                 if (!card.sharesColorWith(source)) {
                     return false;
                 }
             } else {
+                // Special case to prevent list from comparing with itself
+                if (property.startsWith("SharesColorWithOther")) {
+                    final String restriction = property.split("SharesColorWithOther ")[1];
+                    CardCollection list = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
+                    list.remove(card);
+                    return Iterables.any(list, CardPredicates.sharesColorWith(card));
+                }
+
                 final String restriction = property.split("SharesColorWith ")[1];
                 if (restriction.startsWith("Remembered") || restriction.startsWith("Imprinted")) {
                     CardCollection list = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
-                    return !CardLists.filter(list, CardPredicates.sharesColorWith(card)).isEmpty();
+                    return Iterables.any(list, CardPredicates.sharesColorWith(card));
                 }
 
                 switch (restriction) {
@@ -904,10 +822,10 @@ public class CardProperty {
                 } else if (restriction.equals(ZoneType.Battlefield.toString())) {
                     return Iterables.any(game.getCardsIn(ZoneType.Battlefield), CardPredicates.sharesNameWith(card));
                 } else if (restriction.equals("ThisTurnCast")) {
-                    return Iterables.any(CardUtil.getThisTurnCast("Card", source), CardPredicates.sharesNameWith(card));
+                    return Iterables.any(CardUtil.getThisTurnCast("Card", source, spellAbility), CardPredicates.sharesNameWith(card));
                 } else if (restriction.equals("MovedToGrave")) {
-                    for (final SpellAbility sa : source.getCurrentState().getNonManaAbilities()) {
-                        final SpellAbility root = sa.getRootAbility();
+                    if (!(spellAbility instanceof SpellAbility)) {
+                        final SpellAbility root = ((SpellAbility)spellAbility).getRootAbility();
                         if (root != null && (root.getPaidList("MovedToGrave") != null)
                                 && !root.getPaidList("MovedToGrave").isEmpty()) {
                             final CardCollectionView cards = root.getPaidList("MovedToGrave");
@@ -998,7 +916,7 @@ public class CardProperty {
                 }
             }
         } else if (property.startsWith("SecondSpellCastThisTurn")) {
-            final List<Card> cards = CardUtil.getThisTurnCast("Card", source);
+            final List<Card> cards = CardUtil.getThisTurnCast("Card", source, spellAbility);
             if (cards.size() < 2)  {
                 return false;
             }
@@ -1006,7 +924,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("ThisTurnCast")) {
-            for (final Card c : CardUtil.getThisTurnCast("Card", source)) {
+            for (final Card c : CardUtil.getThisTurnCast("Card", source, spellAbility)) {
                 if (card.equals(c)) {
                     return true;
                 }
@@ -1055,7 +973,7 @@ public class CardProperty {
                 return false;
             }
 
-            List<Card> cards = CardUtil.getThisTurnEntered(ZoneType.Graveyard, ZoneType.Hand, "Card", source);
+            List<Card> cards = CardUtil.getThisTurnEntered(ZoneType.Graveyard, ZoneType.Hand, "Card", source, spellAbility);
             if (!cards.contains(card) && !card.getMadnessWithoutCast()) {
                 return false;
             }
@@ -1158,7 +1076,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("dealtDamageToYouThisTurn")) {
-            if (!card.getDamageHistory().getThisTurnDamaged().contains(sourceController)) {
+            if (!card.getDamageHistory().getThisTurnDamaged().containsKey(sourceController)) {
                 return false;
             }
         } else if (property.startsWith("dealtDamageToOppThisTurn")) {
@@ -1167,36 +1085,24 @@ public class CardProperty {
             }
         } else if (property.startsWith("dealtCombatDamageThisTurn ") || property.startsWith("notDealtCombatDamageThisTurn ")) {
             final String v = property.split(" ")[1];
-            final List<GameEntity> list = card.getDamageHistory().getThisTurnCombatDamaged();
-            boolean found = false;
-            for (final GameEntity e : list) {
-                if (e.isValid(v, sourceController, source, spellAbility)) {
-                    found = true;
-                    break;
-                }
-            }
+            final Iterable<Card> list = Iterables.filter(card.getDamageHistory().getThisTurnCombatDamaged().keySet(), Card.class);
+            boolean found = Iterables.any(list, CardPredicates.restriction(v, sourceController, source, spellAbility));
             if (found == property.startsWith("not")) {
                 return false;
             }
         } else if (property.startsWith("dealtCombatDamageThisCombat ") || property.startsWith("notDealtCombatDamageThisCombat ")) {
             final String v = property.split(" ")[1];
-            final List<GameEntity> list = card.getDamageHistory().getThisCombatDamaged();
-            boolean found = false;
-            for (final GameEntity e : list) {
-                if (e.isValid(v, sourceController, source, spellAbility)) {
-                    found = true;
-                    break;
-                }
-            }
+            final Iterable<Card> list = Iterables.filter(card.getDamageHistory().getThisCombatDamaged().keySet(), Card.class);
+            boolean found = Iterables.any(list, CardPredicates.restriction(v, sourceController, source, spellAbility));
             if (found == property.startsWith("not")) {
                 return false;
             }
         } else if (property.startsWith("controllerWasDealtCombatDamageByThisTurn")) {
-            if (!source.getDamageHistory().getThisTurnCombatDamaged().contains(controller)) {
+            if (!source.getDamageHistory().getThisTurnCombatDamaged().containsKey(controller)) {
                 return false;
             }
         } else if (property.startsWith("controllerWasDealtDamageByThisTurn")) {
-            if (!source.getDamageHistory().getThisTurnDamaged().contains(controller)) {
+            if (!source.getDamageHistory().getThisTurnDamaged().containsKey(controller)) {
                 return false;
             }
         } else if (property.startsWith("wasDealtDamageThisTurn")) {
@@ -1208,7 +1114,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("dealtDamagetoAny")) {
-            return card.getHasdealtDamagetoAny();
+            return card.getDamageHistory().getHasdealtDamagetoAny();
         } else if (property.startsWith("attackedThisTurn")) {
             if (!card.getDamageHistory().getCreatureAttackedThisTurn()) {
                 return false;
@@ -1216,7 +1122,11 @@ public class CardProperty {
         } else if (property.startsWith("attackedLastTurn")) {
             return card.getDamageHistory().getCreatureAttackedLastTurnOf(controller);
         } else if (property.startsWith("blockedThisTurn")) {
-            if (!card.getDamageHistory().getCreatureBlockedThisTurn()) {
+            if (card.getBlockedThisTurn().isEmpty()) {
+                return false;
+            }
+        } else if (property.startsWith("notBlockedThisTurn")) {
+            if (!card.getBlockedThisTurn().isEmpty()) {
                 return false;
             }
         } else if (property.startsWith("notExertedThisTurn")) {
@@ -1224,7 +1134,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("gotBlockedThisTurn")) {
-            if (!card.getDamageHistory().getCreatureGotBlockedThisTurn()) {
+            if (card.getBlockedByThisTurn().isEmpty()) {
                 return false;
             }
         } else if (property.startsWith("notAttackedThisTurn")) {
@@ -1233,10 +1143,7 @@ public class CardProperty {
             }
         } else if (property.startsWith("notAttackedLastTurn")) {
             return !card.getDamageHistory().getCreatureAttackedLastTurnOf(controller);
-        } else if (property.startsWith("notBlockedThisTurn")) {
-            if (card.getDamageHistory().getCreatureBlockedThisTurn()) {
-                return false;
-            }
+
         } else if (property.startsWith("greatestPower")) {
             CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
             if (property.contains("ControlledBy")) {
@@ -1358,11 +1265,11 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("token")) {
-            if (!card.isToken()) {
+            if (!card.isToken() && !card.isTokenCard()) {
                 return false;
             }
         } else if (property.startsWith("nonToken")) {
-            if (card.isToken()) {
+            if (card.isToken() || card.isTokenCard()) {
                 return false;
             }
         } else if (property.startsWith("copiedSpell")) {
@@ -1453,6 +1360,12 @@ public class CardProperty {
             x = AbilityUtils.calculateAmount(source, rhs, spellAbility);
 
             if (!Expressions.compare(y, property, x)) {
+                return false;
+            }
+        }
+
+        else if (property.startsWith("ManaCost")) {
+            if (!card.getManaCost().getShortString().equals(property.substring(8))) {
                 return false;
             }
         }
@@ -1796,7 +1709,7 @@ public class CardProperty {
         } else if (property.startsWith("set")) {
             final String setCode = property.substring(3, 6);
             final PaperCard setCard = StaticData.instance().getCommonCards().getCardFromEdition(card.getName(), CardDb.SetPreference.Earliest);
-            if (!setCard.getEdition().equals(setCode)) {
+            if (setCard != null && !setCard.getEdition().equals(setCode)) {
                 return false;
             }
         } else if (property.startsWith("inZone")) {

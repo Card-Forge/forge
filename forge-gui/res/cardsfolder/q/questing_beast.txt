@@ -5,7 +5,7 @@ PT:4/4
 K:Vigilance
 K:Deathtouch
 K:Haste
-K:CantBeBlockedBy Creature.powerLE2
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLE2 | Description$ CARDNAME can't be blocked by creatures with power 2 or less.
 S:Mode$ CantPreventDamage | IsCombat$ True | ValidSource$ Creature.YouCtrl | Description$ Combat damage that would be dealt by creatures you control can't be prevented.
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ MoreDamage | TriggerDescription$ Whenever CARDNAME deals combat damage to an opponent, it deals that much damage to target planeswalker that player controls.
 SVar:MoreDamage:DB$ DealDamage | ValidTgts$ Planeswalker.ControlledBy TriggeredTarget | TgtPrompt$ Select target planeswalker that player controls | NumDmg$ X

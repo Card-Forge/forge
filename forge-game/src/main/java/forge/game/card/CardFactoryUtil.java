@@ -19,17 +19,13 @@ package forge.game.card;
 
 import java.util.Arrays;
 import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
@@ -43,24 +39,18 @@ import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.ICardFace;
 import forge.card.MagicColor;
-import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
-import forge.card.mana.ManaCostShard;
 import forge.game.Game;
-import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
 import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
-import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
-import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementLayer;
@@ -76,11 +66,8 @@ import forge.game.staticability.StaticAbilityCantBeCast;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
-import forge.util.Aggregates;
-import forge.util.Expressions;
 import forge.util.Lang;
 import forge.util.TextUtil;
-import forge.util.collect.FCollectionView;
 import io.sentry.Sentry;
 import io.sentry.event.BreadcrumbBuilder;
 
@@ -99,7 +86,7 @@ public class CardFactoryUtil {
         String abString  = "AB$ Mana | Cost$ T | Produced$ " + strcolor +
                 " | Secondary$ True | SpellDescription$ Add {" + strcolor + "}.";
         SpellAbility sa = AbilityFactory.getAbility(abString, state);
-        sa.setIntrinsic(true); // always intristic
+        sa.setIntrinsic(true); // always intrisic
         return sa;
     }
 
@@ -247,26 +234,6 @@ public class CardFactoryUtil {
         return AbilityFactory.getAbility(ab, sourceCard);
     }
 
-    // does "target" have protection from "card"?
-    /**
-     * <p>
-     * hasProtectionFrom.
-     * </p>
-     *
-     * @param card
-     *            a {@link forge.game.card.Card} object.
-     * @param target
-     *            a {@link forge.game.card.Card} object.
-     * @return a boolean.
-     */
-    public static boolean hasProtectionFrom(final Card card, final Card target) {
-        if (target == null) {
-            return false;
-        }
-
-        return target.hasProtectionFrom(card);
-    }
-
     /**
      * <p>
      * isCounterable.
@@ -341,1566 +308,6 @@ public class CardFactoryUtil {
     public static String extractOperators(final String expression) {
         String[] l = expression.split("/");
         return l.length > 1 ? l[1] : null;
-    }
-
-    /**
-     * <p>
-     * Parse player targeted X variables.
-     * </p>
-     *
-     * @param objects
-     *            a {@link java.util.ArrayList} object.
-     * @param s
-     *            a {@link java.lang.String} object.
-     * @param source
-     *            a {@link forge.game.card.Card} object.
-     * @return a int.
-     */
-    public static int objectXCount(final List<?> objects, final String s, final Card source) {
-        if (objects.isEmpty()) {
-            return 0;
-        }
-
-        if (s.startsWith("Valid")) {
-            return CardFactoryUtil.handlePaid(Iterables.filter(objects, Card.class), s, source);
-        }
-
-        int n = s.startsWith("Amount") ? objects.size() : 0;
-        return doXMath(n, extractOperators(s), source);
-    }
-
-    /**
-     * <p>
-     * Parse player targeted X variables.
-     * </p>
-     *
-     * @param players
-     *            a {@link java.util.ArrayList} object.
-     * @param s
-     *            a {@link java.lang.String} object.
-     * @param source
-     *            a {@link forge.game.card.Card} object.
-     * @return a int.
-     */
-    public static int playerXCount(final List<Player> players, final String s, final Card source) {
-        if (players.size() == 0) {
-            return 0;
-        }
-
-        final String[] l = s.split("/");
-        final String m = extractOperators(s);
-
-        int n = 0;
-
-        if (l[0].startsWith("TotalCommanderCastFromCommandZone")) {
-            int totCast = 0;
-            for (Player p : players) {
-                totCast += p.getTotalCommanderCast();
-            }
-            return doXMath(totCast, m, source);
-        }
-
-        // methods for getting the highest/lowest playerXCount from a range of players
-        if (l[0].startsWith("Highest")) {
-            for (final Player player : players) {
-                final int current = playerXProperty(player, TextUtil.fastReplace(s, "Highest", ""), source);
-                if (current > n) {
-                    n = current;
-                }
-            }
-
-            return doXMath(n, m, source);
-        }
-
-        if (l[0].startsWith("Lowest")) {
-            n = 99999; // if no players have fewer than 99999 valids, the game is frozen anyway
-            for (final Player player : players) {
-                final int current = playerXProperty(player, TextUtil.fastReplace(s, "Lowest", ""), source);
-                if (current < n) {
-                    n = current;
-                }
-            }
-            return doXMath(n, m, source);
-        }
-
-        if (l[0].startsWith("TiedForHighestLife")) {
-            int maxLife = Integer.MIN_VALUE;
-            for (final Player player : players) {
-                int highestTotal = playerXProperty(player, "LifeTotal", source);
-                if (highestTotal > maxLife) {
-                    maxLife = highestTotal;
-                }
-            }
-            int numTied = 0;
-            for (final Player player : players) {
-                if (player.getLife() == maxLife) {
-                    numTied++;
-                }
-            }
-            return doXMath(numTied, m, source);
-        }
-
-        if (l[0].startsWith("TiedForLowestLife")) {
-            int minLife = Integer.MAX_VALUE;
-            for (final Player player : players) {
-                int lowestTotal = playerXProperty(player, "LifeTotal", source);
-                if (lowestTotal < minLife) {
-                    minLife = lowestTotal;
-                }
-            }
-            int numTied = 0;
-            for (final Player player : players) {
-                if (player.getLife() == minLife) {
-                    numTied++;
-                }
-            }
-            return doXMath(numTied, m, source);
-        }
-
-        final String[] sq;
-        sq = l[0].split("\\.");
-
-        // the number of players passed in
-        if (sq[0].equals("Amount")) {
-            return doXMath(players.size(), m, source);
-        }
-
-        if (sq[0].startsWith("HasProperty")) {
-            int totPlayer = 0;
-            String property = sq[0].substring(11);
-            for (Player p : players) {
-                if (p.hasProperty(property, source.getController(), source, null)) {
-                    totPlayer++;
-                }
-            }
-            return doXMath(totPlayer, m, source);
-        }
-
-        if (sq[0].contains("DamageThisTurn")) {
-            int totDmg = 0;
-            for (Player p : players) {
-                totDmg += p.getAssignedDamage();
-            }
-            return doXMath(totDmg, m, source);
-        } else if (sq[0].contains("LifeLostThisTurn")) {
-            int totDmg = 0;
-            for (Player p : players) {
-                totDmg += p.getLifeLostThisTurn();
-            }
-            return doXMath(totDmg, m, source);
-        }
-
-        if (players.size() > 0) {
-            int totCount = 0;
-            for (Player p : players) {
-                totCount += playerXProperty(p, s, source);
-            }
-            return totCount;
-        }
-
-        return doXMath(n, m, source);
-    }
-
-    public static int playerXProperty(final Player player, final String s, final Card source) {
-        final String[] l = s.split("/");
-        final String m = extractOperators(s);
-
-        final Game game = player.getGame();
-
-        // count valid cards in any specified zone/s
-        if (l[0].startsWith("Valid") && !l[0].contains("Valid ")) {
-            String[] lparts = l[0].split(" ", 2);
-            final List<ZoneType> vZone = ZoneType.listValueOf(lparts[0].split("Valid")[1]);
-            String restrictions = TextUtil.fastReplace(l[0], TextUtil.addSuffix(lparts[0]," "), "");
-            final String[] rest = restrictions.split(",");
-            CardCollection cards = CardLists.getValidCards(game.getCardsIn(vZone), rest, player, source, null);
-            return doXMath(cards.size(), m, source);
-        }
-
-        // count valid cards on the battlefield
-        if (l[0].startsWith("Valid ")) {
-            final String restrictions = l[0].substring(6);
-            final String[] rest = restrictions.split(",");
-            CardCollection cardsonbattlefield = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), rest, player, source, null);
-            return doXMath(cardsonbattlefield.size(), m, source);
-        }
-
-        final String[] sq = l[0].split("\\.");
-        final String value = sq[0];
-
-        if (value.contains("CardsInHand")) {
-            return doXMath(player.getCardsIn(ZoneType.Hand).size(), m, source);
-        }
-
-        if (value.contains("NumPowerSurgeLands")) {
-            return doXMath(player.getNumPowerSurgeLands(), m, source);
-        }
-
-        if (value.contains("DomainPlayer")) {
-            int n = 0;
-            final CardCollectionView someCards = player.getCardsIn(ZoneType.Battlefield);
-            final List<String> basic = MagicColor.Constant.BASIC_LANDS;
-
-            for (int i = 0; i < basic.size(); i++) {
-                if (!CardLists.getType(someCards, basic.get(i)).isEmpty()) {
-                    n++;
-                }
-            }
-            return doXMath(n, m, source);
-        }
-
-        if (value.contains("CardsInLibrary")) {
-            return doXMath(player.getCardsIn(ZoneType.Library).size(), m, source);
-        }
-
-        if (value.contains("CardsInGraveyard")) {
-            return doXMath(player.getCardsIn(ZoneType.Graveyard).size(), m, source);
-        }
-        if (value.contains("LandsInGraveyard")) {
-            return doXMath(CardLists.getType(player.getCardsIn(ZoneType.Graveyard), "Land").size(), m, source);
-        }
-
-        if (value.contains("CreaturesInPlay")) {
-            return doXMath(player.getCreaturesInPlay().size(), m, source);
-        }
-
-        if (value.contains("CardsInPlay")) {
-            return doXMath(player.getCardsIn(ZoneType.Battlefield).size(), m, source);
-        }
-
-        if (value.contains("StartingLife")) {
-            return doXMath(player.getStartingLife(), m, source);
-        }
-
-        if (value.contains("LifeTotal")) {
-            return doXMath(player.getLife(), m, source);
-        }
-
-        if (value.contains("LifeLostThisTurn")) {
-            return doXMath(player.getLifeLostThisTurn(), m, source);
-        }
-
-        if (value.contains("LifeLostLastTurn")) {
-            return doXMath(player.getLifeLostLastTurn(), m, source);
-        }
-
-        if (value.contains("LifeGainedThisTurn")) {
-            return doXMath(player.getLifeGainedThisTurn(), m, source);
-        }
-
-        if (value.contains("LifeGainedByTeamThisTurn")) {
-            return doXMath(player.getLifeGainedByTeamThisTurn(), m, source);
-        }
-
-        if (value.contains("LifeStartedThisTurnWith")) {
-            return doXMath(player.getLifeStartedThisTurnWith(), m, source);
-        }
-
-        if (value.contains("PoisonCounters")) {
-            return doXMath(player.getPoisonCounters(), m, source);
-        }
-
-        if (value.contains("TopOfLibraryCMC")) {
-            return doXMath(Aggregates.sum(player.getCardsIn(ZoneType.Library, 1), CardPredicates.Accessors.fnGetCmc), m, source);
-        }
-
-        if (value.contains("LandsPlayed")) {
-            return doXMath(player.getLandsPlayedThisTurn(), m, source);
-        }
-
-        if (value.contains("CardsDrawn")) {
-            return doXMath(player.getNumDrawnThisTurn(), m, source);
-        }
-
-        if (value.contains("CardsDiscardedThisTurn")) {
-            return doXMath(player.getNumDiscardedThisTurn(), m, source);
-        }
-
-        if (value.contains("TokensCreatedThisTurn")) {
-            return doXMath(player.getNumTokensCreatedThisTurn(), m, source);
-        }
-
-        if (value.contains("AttackersDeclared")) {
-            return doXMath(player.getAttackersDeclaredThisTurn(), m, source);
-        }
-
-        if (value.equals("DamageDoneToPlayerBy")) {
-            return doXMath(source.getDamageDoneToPlayerBy(player.getName()), m, source);
-        }
-
-        if (value.contains("DamageToOppsThisTurn")) {
-            int oppDmg = 0;
-            for (Player opp : player.getOpponents()) {
-                oppDmg += opp.getAssignedDamage();
-            }
-            return doXMath(oppDmg, m, source);
-        }
-
-        if (value.contains("NonCombatDamageDealtThisTurn")) {
-            return doXMath(player.getAssignedDamage() - player.getAssignedCombatDamage(), m, source);
-        }
-
-        if (value.equals("OpponentsAttackedThisTurn")) {
-            return doXMath(player.getAttackedOpponentsThisTurn().size(), m, source);
-        }
-
-        return doXMath(0, m, source);
-    }
-
-    /**
-     * <p>
-     * Parse non-mana X variables.
-     * </p>
-     *
-     * @param c
-     *            a {@link forge.game.card.Card} object.
-     * @param expression
-     *            a {@link java.lang.String} object.
-     * @return a int.
-     */
-    public static int xCount(final Card c, final String expression) {
-        if (StringUtils.isBlank(expression) || c == null) {
-            return 0;
-        }
-        if (StringUtils.isNumeric(expression)) {
-            return Integer.parseInt(expression);
-        }
-
-        final Player cc = c.getController();
-        final Game game = c.getGame();
-        final Player activePlayer = game.getPhaseHandler().getPlayerTurn();
-
-        final String[] l = expression.split("/");
-        final String m = extractOperators(expression);
-
-        // accept straight numbers
-        if (l[0].startsWith("Number$")) {
-            final String number = l[0].substring(7);
-            if (number.equals("ChosenNumber")) {
-                int x = c.getChosenNumber() == null ? 0 : c.getChosenNumber();
-                return doXMath(x, m, c);
-            }
-            return doXMath(Integer.parseInt(number), m, c);
-        }
-
-        if (l[0].startsWith("Count$")) {
-            l[0] = l[0].substring(6);
-        }
-
-        if (l[0].startsWith("SVar$")) {
-            return doXMath(xCount(c, c.getSVar(l[0].substring(5))), m, c);
-        }
-
-        if (l[0].startsWith("Controller$")) {
-            return playerXProperty(cc, l[0].substring(11), c);
-        }
-
-        // Manapool
-        if (l[0].startsWith("ManaPool")) {
-            final String color = l[0].split(":")[1];
-            if (color.equals("All")) {
-                return cc.getManaPool().totalMana();
-            }
-            return cc.getManaPool().getAmountOfColor(ManaAtom.fromName(color));
-        }
-
-        // count valid cards in any specified zone/s
-        if (l[0].startsWith("Valid")) {
-            String[] lparts = l[0].split(" ", 2);
-            final String[] rest = lparts[1].split(",");
-
-            final CardCollectionView cardsInZones = lparts[0].length() > 5
-                ? game.getCardsIn(ZoneType.listValueOf(lparts[0].substring(5)))
-                : game.getCardsIn(ZoneType.Battlefield);
-
-            CardCollection cards = CardLists.getValidCards(cardsInZones, rest, cc, c, null);
-            return doXMath(cards.size(), m, c);
-        }
-
-        if (l[0].startsWith("ImprintedCardManaCost") && !c.getImprintedCards().isEmpty()) {
-            return c.getImprintedCards().get(0).getCMC();
-        }
-
-        if (l[0].startsWith("GreatestPower")) {
-            final String[] lparts = l[0].split("_", 2);
-            final String[] rest = lparts[1].split(",");
-            final CardCollectionView cardsInZones = lparts[0].length() > 13
-                    ? game.getCardsIn(ZoneType.listValueOf(lparts[0].substring(13)))
-                    : game.getCardsIn(ZoneType.Battlefield);
-            CardCollection list = CardLists.getValidCards(cardsInZones, rest, cc, c, null);
-            int highest = 0;
-            for (final Card crd : list) {
-                if (crd.getNetPower() > highest) {
-                    highest = crd.getNetPower();
-                }
-            }
-            return highest;
-        }
-
-        if (l[0].startsWith("GreatestToughness_")) {
-            final String restriction = l[0].substring(18);
-            final String[] rest = restriction.split(",");
-            CardCollection list = CardLists.getValidCards(cc.getGame().getCardsIn(ZoneType.Battlefield), rest, cc, c, null);
-            int highest = 0;
-            for (final Card crd : list) {
-                if (crd.getNetToughness() > highest) {
-                    highest = crd.getNetToughness();
-                }
-            }
-            return highest;
-        }
-
-        if (l[0].startsWith("HighestCMC_")) {
-            final String restriction = l[0].substring(11);
-            final String[] rest = restriction.split(",");
-            CardCollection list = CardLists.getValidCards(cc.getGame().getCardsInGame(), rest, cc, c, null);
-            int highest = 0;
-            for (final Card crd : list) {
-                // dont check for Split card anymore
-                if (crd.getCMC() > highest) {
-                    highest = crd.getCMC();
-                }
-            }
-            return highest;
-        }
-
-        if (l[0].startsWith("MostCardName")) {
-        	String[] lparts = l[0].split(" ", 2);
-            final String[] rest = lparts[1].split(",");
-
-            final CardCollectionView cardsInZones = lparts[0].length() > 12
-                ? game.getCardsIn(ZoneType.listValueOf(lparts[0].substring(12)))
-                : game.getCardsIn(ZoneType.Battlefield);
-
-            CardCollection cards = CardLists.getValidCards(cardsInZones, rest, cc, c, null);
-            final Map<String, Integer> map = Maps.newHashMap();
-            for (final Card card : cards) {
-                // Remove Duplicated types
-                final String name = card.getName();
-                Integer count = map.get(name);
-                map.put(name, count == null ? 1 : count + 1);
-            }
-            int max = 0;
-            for (final Entry<String, Integer> entry : map.entrySet()) {
-                if (max < entry.getValue()) {
-                    max = entry.getValue();
-                }
-            }
-            return max;
-        }
-
-        if (l[0].startsWith("DifferentCardNames_")) {
-            final List<String> crdname = Lists.newArrayList();
-            final String restriction = l[0].substring(19);
-            final String[] rest = restriction.split(",");
-            CardCollection list = CardLists.getValidCards(cc.getGame().getCardsInGame(), rest, cc, c, null);
-            for (final Card card : list) {
-                String name = card.getName();
-                // CR 201.2b Those objects have different names only if each of them has at least one name and no two objects in that group have a name in common
-                if (!crdname.contains(name) && !name.isEmpty()) {
-                    crdname.add(name);
-                }
-            }
-            return doXMath(crdname.size(), m, c);
-        }
-
-        if (l[0].startsWith("DifferentPower_")) {
-            final List<Integer> powers = Lists.newArrayList();
-            final String restriction = l[0].substring(15);
-            final String[] rest = restriction.split(",");
-            CardCollection list = CardLists.getValidCards(cc.getGame().getCardsIn(ZoneType.Battlefield), rest, cc, c, null);
-            for (final Card card : list) {
-                Integer pow = card.getNetPower();
-                if (!powers.contains(pow)) {
-                    powers.add(pow);
-                }
-            }
-            return doXMath(powers.size(), m, c);
-        }
-
-        if (l[0].startsWith("RememberedSize")) {
-            return doXMath(c.getRememberedCount(), m, c);
-        }
-
-        if (l[0].startsWith("RememberedNumber")) {
-            int num = 0;
-            for (final Object o : c.getRemembered()) {
-                if (o instanceof Integer) {
-                    num += (Integer) o;
-                }
-            }
-            return doXMath(num, m, c);
-        }
-
-        if (l[0].startsWith("RememberedWithSharedCardType")) {
-            int maxNum = 1;
-            for (final Object o : c.getRemembered()) {
-                if (o instanceof Card) {
-                    int num = 1;
-                    Card firstCard = (Card) o;
-                    for (final Object p : c.getRemembered()) {
-                        if (p instanceof Card) {
-                            Card secondCard = (Card) p;
-                            if (!firstCard.equals(secondCard) && firstCard.sharesCardTypeWith(secondCard)) {
-                                num++;
-                            }
-                        }
-                    }
-                    if (num > maxNum) {
-                        maxNum = num;
-                    }
-                }
-            }
-            return doXMath(maxNum, m, c);
-        }
-
-        if (l[0].startsWith("CommanderCastFromCommandZone")) {
-            // only used by Opal Palace, and it does add the trigger to the card
-            return doXMath(cc.getCommanderCast(c), m, c);
-        }
-
-        if (l[0].startsWith("TotalCommanderCastFromCommandZone")) {
-            return doXMath(cc.getTotalCommanderCast(), m, c);
-        }
-
-        if (l[0].startsWith("MostProminentCreatureType")) {
-            String restriction = l[0].split(" ")[1];
-            CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restriction, cc, c, null);
-            return doXMath(getMostProminentCreatureTypeSize(list), m, c);
-        }
-
-        if (l[0].startsWith("SecondMostProminentColor")) {
-            String restriction = l[0].split(" ")[1];
-            CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restriction, cc, c, null);
-            int[] colorSize = SortColorsFromList(list);
-            return doXMath(colorSize[colorSize.length - 2], m, c);
-        }
-
-        if (l[0].startsWith("RolledThisTurn")) {
-            return game.getPhaseHandler().getPlanarDiceRolledthisTurn();
-        }
-
-        //SacrificedThisTurn <type>
-        if (l[0].startsWith("SacrificedThisTurn")) {
-            CardCollectionView list = cc.getSacrificedThisTurn();
-            if (l[0].contains(" ")) {
-                String[] lparts = l[0].split(" ", 2);
-                String restrictions = TextUtil.fastReplace(l[0], TextUtil.addSuffix(lparts[0]," "), "");
-                final String[] rest = restrictions.split(",");
-                list = CardLists.getValidCards(list, rest, cc, c, null);
-            }
-            return doXMath(list.size(), m, c);
-        }
-
-        final String[] sq;
-        sq = l[0].split("\\.");
-
-        if (sq[0].contains("xPaid")) {
-            return doXMath(c.getXManaCostPaid(), m, c);
-        }
-
-        if (sq[0].contains("xColorPaid")) {
-            String[] attrs = sq[0].split(" ");
-            StringBuilder colors = new StringBuilder();
-            for (int i = 1; i < attrs.length; i++) {
-                colors.append(attrs[i]);
-            }
-            return doXMath(c.getXManaCostPaidCount(colors.toString()), m, c);
-        }
-
-        if (sq[0].equals("YouCycledThisTurn")) {
-            return doXMath(cc.getCycledThisTurn(), m, c);
-        }
-
-        if (sq[0].equals("YouDrewThisTurn")) {
-            return doXMath(cc.getNumDrawnThisTurn(), m, c);
-        }
-
-        if (sq[0].equals("YouSurveilThisTurn")) {
-            return doXMath(cc.getSurveilThisTurn(), m, c);
-        }
-
-        if (sq[0].equals("YouCastThisGame")) {
-            return doXMath(cc.getSpellsCastThisGame(), m, c);
-        }
-
-        if (sq[0].equals("StormCount")) {
-            return doXMath(game.getStack().getSpellsCastThisTurn().size() - 1, m, c);
-        }
-        if (sq[0].startsWith("DamageDoneByPlayerThisTurn")) {
-            int sum = 0;
-            for (Player p : AbilityUtils.getDefinedPlayers(c, sq[1], null)) {
-                sum += c.getReceivedDamageByPlayerThisTurn(p);
-            }
-            return doXMath(sum, m, c);
-        }
-        if (sq[0].equals("DamageDoneThisTurn")) {
-            return doXMath(c.getDamageDoneThisTurn(), m, c);
-        }
-        if (sq[0].equals("BloodthirstAmount")) {
-            return doXMath(cc.getBloodthirstAmount(), m, c);
-        }
-        if (sq[0].equals("RegeneratedThisTurn")) {
-            return doXMath(c.getRegeneratedThisTurn(), m, c);
-        }
-
-        if (sq[0].contains("YourStartingLife")) {
-            return doXMath(cc.getStartingLife(), m, c);
-        }
-
-        if (sq[0].contains("YourLifeTotal")) {
-            return doXMath(cc.getLife(), m, c);
-        }
-        if (sq[0].contains("OppGreatestLifeTotal")) {
-            return doXMath(cc.getOpponentsGreatestLifeTotal(), m, c);
-        }
-        if (sq[0].contains("OppsAtLifeTotal")) {
-                final int lifeTotal = xCount(c, sq[1]);
-                int number = 0;
-                for (final Player opp : cc.getOpponents()) {
-                        if (opp.getLife() == lifeTotal) {
-                                number++;
-                        }
-                }
-                return doXMath(number, m, c);
-        }
-
-        //  Count$TargetedLifeTotal (targeted player's life total)
-        if (sq[0].contains("TargetedLifeTotal")) {
-            // This doesn't work in some circumstances, since the active SA isn't passed through
-            for (final SpellAbility sa : c.getCurrentState().getNonManaAbilities()) {
-                final SpellAbility saTargeting = sa.getSATargetingPlayer();
-                if (saTargeting != null) {
-                    for (final Player tgtP : saTargeting.getTargets().getTargetPlayers()) {
-                        return doXMath(tgtP.getLife(), m, c);
-                    }
-                }
-            }
-        }
-
-        if (sq[0].contains("LifeYouLostThisTurn")) {
-            return doXMath(cc.getLifeLostThisTurn(), m, c);
-        }
-        if (sq[0].contains("LifeYouGainedThisTurn")) {
-            return doXMath(cc.getLifeGainedThisTurn(), m, c);
-        }
-        if (sq[0].contains("LifeYourTeamGainedThisTurn")) {
-            return doXMath(cc.getLifeGainedByTeamThisTurn(), m, c);
-        }
-        if (sq[0].contains("LifeYouGainedTimesThisTurn")) {
-            return doXMath(cc.getLifeGainedTimesThisTurn(), m, c);
-        }
-        if (sq[0].contains("LifeOppsLostThisTurn")) {
-            return doXMath(cc.getOpponentLostLifeThisTurn(), m, c);
-        }
-        if (sq[0].equals("TotalDamageDoneByThisTurn")) {
-            return doXMath(c.getTotalDamageDoneBy(), m, c);
-        }
-        if (sq[0].equals("TotalDamageReceivedThisTurn")) {
-            return doXMath(c.getTotalDamageRecievedThisTurn(), m, c);
-        }
-
-        if (sq[0].startsWith("YourCounters")) {
-            // "YourCountersExperience" or "YourCountersPoison"
-            String counterType = sq[0].substring(12);
-            return doXMath(cc.getCounters(CounterType.getType(counterType)), m, c);
-        }
-
-        if (sq[0].contains("YourPoisonCounters")) {
-            return doXMath(cc.getPoisonCounters(), m, c);
-        }
-        if (sq[0].contains("TotalOppPoisonCounters")) {
-            return doXMath(cc.getOpponentsTotalPoisonCounters(), m, c);
-        }
-
-        if (sq[0].contains("YourDamageThisTurn")) {
-            return doXMath(cc.getAssignedDamage(), m, c);
-        }
-        if (sq[0].contains("TotalOppDamageThisTurn")) {
-            return doXMath(cc.getOpponentsAssignedDamage(), m, c);
-        }
-        if (sq[0].contains("MaxOppDamageThisTurn")) {
-            return doXMath(cc.getMaxOpponentAssignedDamage(), m, c);
-        }
-
-        // Count$YourTypeDamageThisTurn Type
-        if (sq[0].contains("YourTypeDamageThisTurn")) {
-            return doXMath(cc.getAssignedDamage(sq[0].split(" ")[1]), m, c);
-        }
-        if (sq[0].contains("YourDamageSourcesThisTurn")) {
-            Iterable<Card> allSrc = cc.getAssignedDamageSources();
-            String restriction = sq[0].split(" ")[1];
-            CardCollection filtered = CardLists.getValidCards(allSrc, restriction, cc, c, null);
-            return doXMath(filtered.size(), m, c);
-        }
-
-        if (sq[0].contains("YourLandsPlayed")) {
-            return doXMath(cc.getLandsPlayedThisTurn(), m, c);
-        }
-
-        // Count$TopOfLibraryCMC
-        if (sq[0].contains("TopOfLibraryCMC")) {
-            int cmc = cc.getCardsIn(ZoneType.Library).isEmpty() ? 0 :
-                cc.getCardsIn(ZoneType.Library).getFirst().getCMC();
-            return doXMath(cmc, m, c);
-        }
-
-        // Count$EnchantedControllerCreatures
-        if (sq[0].contains("EnchantedControllerCreatures")) {
-            if (c.getEnchantingCard() != null) {
-                return CardLists.count(c.getEnchantingCard().getController().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
-            }
-            return 0;
-        }
-
-        // Count$Chroma.<color name>
-        if (sq[0].contains("Chroma")) {
-            ZoneType sourceZone = sq[0].contains("ChromaInGrave") ?  ZoneType.Graveyard : ZoneType.Battlefield;
-            final CardCollectionView cards;
-            if (sq[0].contains("ChromaSource")) { // Runs Chroma for passed in Source card
-                cards = new CardCollection(c);
-            }
-            else {
-                cards = cc.getCardsIn(sourceZone);
-            }
-
-            int colorOcurrencices = 0;
-            byte colorCode = ManaAtom.fromName(sq[1]);
-            for (Card c0 : cards) {
-                for (ManaCostShard sh : c0.getManaCost()){
-                    if ((sh.getColorMask() & colorCode) != 0)
-                        colorOcurrencices++;
-                }
-            }
-            return doXMath(colorOcurrencices, m, c);
-        }
-        // Count$DevotionDual.<color name>.<color name>
-        // Count$Devotion.<color name>
-        if (sq[0].contains("Devotion")) {
-            int colorOcurrencices = 0;
-            String colorName = sq[1];
-            if (colorName.contains("Chosen")) {
-                colorName = MagicColor.toShortString(c.getChosenColor());
-            }
-            byte colorCode = ManaAtom.fromName(colorName);
-            if (sq[0].equals("DevotionDual")) {
-                colorCode |= ManaAtom.fromName(sq[2]);
-            }
-            for (Card c0 : cc.getCardsIn(ZoneType.Battlefield)) {
-                for (ManaCostShard sh : c0.getManaCost()) {
-                    if ((sh.getColorMask() & colorCode) != 0) {
-                        colorOcurrencices++;
-                    }
-                }
-                colorOcurrencices += c0.getAmountOfKeyword("Your devotion to each color and each combination of colors is increased by one.");
-            }
-            return doXMath(colorOcurrencices, m, c);
-        }
-
-        if (sq[0].contains("ColorsCtrl")) {
-            final String restriction = l[0].substring(11);
-            final String[] rest = restriction.split(",");
-            final CardCollection list = CardLists.getValidCards(cc.getCardsIn(ZoneType.Battlefield), rest, cc, c, null);
-            byte n = 0;
-            for (final Card card : list) {
-                n |= card.determineColor().getColor();
-            }
-            return doXMath(ColorSet.fromMask(n).countColors(), m, c);
-        }
-
-        if (sq[0].equals("ColorsColorIdentity")) {
-            return doXMath(c.getController().getCommanderColorID().countColors(), m, c);
-        }
-
-        if (sq[0].contains("CreatureType")) {
-            String[] sqparts = l[0].split(" ", 2);
-            final String[] rest = sqparts[1].split(",");
-
-            final CardCollectionView cardsInZones = sqparts[0].length() > 12
-                ? game.getCardsIn(ZoneType.listValueOf(sqparts[0].substring(12)))
-                : game.getCardsIn(ZoneType.Battlefield);
-
-            CardCollection cards = CardLists.getValidCards(cardsInZones, rest, cc, c, null);
-            final Set<String> creatTypes = Sets.newHashSet();
-
-            for (Card card : cards) {
-                Iterables.addAll(creatTypes, card.getType().getCreatureTypes());
-            }
-            int n = creatTypes.contains(CardType.AllCreatureTypes) ? CardType.getAllCreatureTypes().size() : creatTypes.size();
-            return doXMath(n, m, c);
-        }
-
-        if (sq[0].contains("ExactManaCost")) {
-            String[] sqparts = l[0].split(" ", 2);
-            final String[] rest = sqparts[1].split(",");
-
-            final CardCollectionView cardsInZones = sqparts[0].length() > 13
-                ? game.getCardsIn(ZoneType.listValueOf(sqparts[0].substring(13)))
-                : game.getCardsIn(ZoneType.Battlefield);
-
-            CardCollection cards = CardLists.getValidCards(cardsInZones, rest, cc, c, null);
-            final Set<String> manaCost = Sets.newHashSet();
-
-            for (Card card : cards) {
-                manaCost.add(card.getManaCost().getShortString());
-            }
-
-            return doXMath(manaCost.size(), m, c);
-        }
-
-        if (sq[0].contains("Hellbent")) {
-            return doXMath(Integer.parseInt(sq[cc.hasHellbent() ? 1 : 2]), m, c);
-        }
-        if (sq[0].contains("Metalcraft")) {
-            return doXMath(Integer.parseInt(sq[cc.hasMetalcraft() ? 1 : 2]), m, c);
-        }
-        if (sq[0].contains("Delirium")) {
-            return doXMath(Integer.parseInt(sq[cc.hasDelirium() ? 1 : 2]), m, c);
-        }
-        if (sq[0].contains("FatefulHour")) {
-            return doXMath(Integer.parseInt(sq[cc.getLife() <= 5 ? 1 : 2]), m, c);
-        }
-        if (sq[0].contains("Revolt")) {
-            return doXMath(Integer.parseInt(sq[cc.hasRevolt() ? 1 : 2]), m, c);
-        }
-        if (sq[0].contains("Landfall")) {
-            return doXMath(Integer.parseInt(sq[cc.hasLandfall() ? 1 : 2]), m, c);
-        }
-        if (sq[0].contains("Monarch")) {
-            return doXMath(Integer.parseInt(sq[cc.isMonarch() ? 1 : 2]), m, c);
-        }
-        if (sq[0].contains("Blessing")) {
-            return doXMath(Integer.parseInt(sq[cc.hasBlessing() ? 1 : 2]), m, c);
-        }
-        if (sq[0].contains("Threshold")) {
-            return doXMath(Integer.parseInt(sq[cc.hasThreshold() ? 1 : 2]), m, c);
-        }
-        if (sq[0].contains("Averna")) {
-            String str = "As you cascade, you may put a land card from among the exiled cards onto the " +
-                    "battlefield tapped.";
-            return cc.getKeywords().getAmount(str);
-        }
-        if (sq[0].startsWith("Kicked")) {
-            return doXMath(Integer.parseInt(sq[c.getKickerMagnitude() > 0 ? 1 : 2]), m, c);
-        }
-        if (sq[0].startsWith("Escaped")) {
-            return doXMath(Integer.parseInt(sq[c.getCastSA() != null && c.getCastSA().isEscape() ? 1 : 2]), m, c);
-        }
-        if (sq[0].startsWith("AltCost")) {
-            return doXMath(Integer.parseInt(sq[c.isOptionalCostPaid(OptionalCost.AltCost) ? 1 : 2]), m, c);
-        }
-
-        // Count$wasCastFrom<Zone>.<true>.<false>
-        if (sq[0].startsWith("wasCastFrom")) {
-            boolean zonesMatch = c.getCastFrom() == ZoneType.smartValueOf(sq[0].substring(11));
-            return doXMath(Integer.parseInt(sq[zonesMatch ? 1 : 2]), m, c);
-        }
-
-        if (sq[0].startsWith("Devoured")) {
-            final String validDevoured = l[0].split(" ")[1];
-            CardCollection cl = CardLists.getValidCards(c.getDevouredCards(), validDevoured.split(","), cc, c, null);
-            return doXMath(cl.size(), m, c);
-        }
-
-        if (sq[0].contains("Party")) {
-            CardCollection adventurers = CardLists.getValidCards(cc.getCardsIn(ZoneType.Battlefield),
-                    "Creature.Cleric,Creature.Rogue,Creature.Warrior,Creature.Wizard", cc, c, null);
-
-            Set<String> partyTypes = new HashSet<>(Arrays.asList(new String[]{"Cleric", "Rogue", "Warrior", "Wizard"}));
-            int partySize = 0;
-
-            HashMap<String, Card> chosenParty = new HashMap<>();
-            List<Card> wildcard = Lists.newArrayList();
-            HashMap<Card, Set<String>> multityped = new HashMap<>();
-
-            // Figure out how to count each class separately.
-            for (Card card : adventurers) {
-                Set<String> creatureTypes = card.getType().getCreatureTypes();
-                boolean anyType = creatureTypes.contains(CardType.AllCreatureTypes);
-                creatureTypes.retainAll(partyTypes);
-
-                if (anyType || creatureTypes.size() == 4) {
-                    wildcard.add(card);
-
-                    if (wildcard.size() >= 4) {
-                        break;
-                    }
-                    continue;
-                } else if (creatureTypes.size() == 1) {
-                    String type = (String)(creatureTypes.toArray()[0]);
-
-                    if (!chosenParty.containsKey(type)) {
-                        chosenParty.put(type, card);
-                    }
-                } else {
-                    multityped.put(card, creatureTypes);
-                }
-            }
-
-            partySize = Math.min(chosenParty.size() + wildcard.size(), 4);
-
-            if (partySize < 4) {
-                partyTypes.removeAll(chosenParty.keySet());
-
-                // Here I'm left with just the party types that I haven't selected.
-                for(Card multi : multityped.keySet()) {
-                    Set<String> types = multityped.get(multi);
-                    types.retainAll(partyTypes);
-
-                    for(String type : types) {
-                        chosenParty.put(type, multi);
-                        partyTypes.remove(type);
-                        break;
-                    }
-                }
-            }
-
-            partySize = Math.min(chosenParty.size() + wildcard.size(), 4);
-
-            return doXMath(partySize, m, c);
-        }
-
-        if (sq[0].contains("CardPower")) {
-            return doXMath(c.getNetPower(), m, c);
-        }
-        if (sq[0].contains("CardToughness")) {
-            return doXMath(c.getNetToughness(), m, c);
-        }
-        if (sq[0].contains("CardSumPT")) {
-            return doXMath((c.getNetPower() + c.getNetToughness()), m, c);
-        }
-
-        // Count$SumPower_valid
-        if (sq[0].contains("SumPower")) {
-            final String[] restrictions = l[0].split("_");
-            final String[] rest = restrictions[1].split(",");
-            CardCollection filteredCards = CardLists.getValidCards(cc.getGame().getCardsIn(ZoneType.Battlefield), rest, cc, c, null);
-            return doXMath(Aggregates.sum(filteredCards, CardPredicates.Accessors.fnGetNetPower), m, c);
-        }
-        // Count$CardManaCost
-        if (sq[0].contains("CardManaCost")) {
-            Card ce;
-            if (sq[0].contains("Equipped") && c.isEquipping()) {
-                ce = c.getEquipping();
-            }
-            else if (sq[0].contains("Remembered")) {
-                ce = (Card) c.getFirstRemembered();
-            }
-            else {
-                ce = c;
-            }
-
-            return doXMath(ce == null ? 0 : ce.getCMC(), m, c);
-        }
-        // Count$SumCMC_valid
-        if (sq[0].contains("SumCMC")) {
-            ZoneType zone = ZoneType.Battlefield;
-            //graveyard support for Inferno Project (may need other zones or multi-zone in future)
-            if (sq[0].contains("Graveyard"))
-                zone = ZoneType.Graveyard;
-            final String[] restrictions = l[0].split("_");
-            final String[] rest = restrictions[1].split(",");
-            CardCollectionView cardsonbattlefield = game.getCardsIn(zone);
-            CardCollection filteredCards = CardLists.getValidCards(cardsonbattlefield, rest, cc, c, null);
-            return Aggregates.sum(filteredCards, CardPredicates.Accessors.fnGetCmc);
-        }
-
-        if (sq[0].contains("CardNumColors")) {
-            return doXMath(CardUtil.getColors(c).countColors(), m, c);
-        }
-        if (sq[0].contains("CardNumAttacksThisTurn")) {
-            return doXMath(c.getDamageHistory().getCreatureAttacksThisTurn(), m, c);
-        }
-        if (sq[0].contains("ChosenNumber")) {
-            Integer i = c.getChosenNumber();
-            return doXMath(i == null ? 0 : i, m, c);
-        }
-        if (sq[0].contains("CardCounters")) {
-            // CardCounters.ALL to be used for Kinsbaile Borderguard and anything that cares about all counters
-            int count = 0;
-            if (sq[1].equals("ALL")) {
-                for (Integer i : c.getCounters().values()) {
-                    if (i != null && i > 0) {
-                        count += i;
-                    }
-                }
-            }
-            else {
-                count = c.getCounters(CounterType.getType(sq[1]));
-            }
-            return doXMath(count, m, c);
-        }
-
-        // Count$TotalCounters.<counterType>_<valid>
-        if (sq[0].contains("TotalCounters")) {
-            final String[] restrictions = l[0].split("_");
-            final CounterType cType = CounterType.getType(restrictions[1]);
-            final String[] validFilter = restrictions[2].split(",");
-            CardCollectionView validCards = game.getCardsIn(ZoneType.Battlefield);
-            validCards = CardLists.getValidCards(validCards, validFilter, cc, c, null);
-            int cCount = 0;
-            for (final Card card : validCards) {
-                cCount += card.getCounters(cType);
-            }
-            return doXMath(cCount, m, c);
-        }
-
-        if (sq[0].contains("CardControllerTypes")) {
-            return doXMath(getCardTypesFromList(cc.getCardsIn(ZoneType.listValueOf(sq[1]))), m, c);
-        }
-
-        if (sq[0].contains("CardTypes")) {
-            return doXMath(getCardTypesFromList(game.getCardsIn(ZoneType.smartValueOf(sq[1]))), m, c);
-        }
-
-        if (sq[0].contains("OppTypesInGrave")) {
-            final PlayerCollection opponents = cc.getOpponents();
-            CardCollection oppCards = new CardCollection();
-            oppCards.addAll(opponents.getCardsIn(ZoneType.Graveyard));
-            return doXMath(getCardTypesFromList(oppCards), m, c);
-        }
-
-        if (sq[0].contains("BushidoPoint")) {
-            return doXMath(c.getKeywordMagnitude(Keyword.BUSHIDO), m, c);
-        }
-        if (sq[0].contains("TimesKicked")) {
-            return doXMath(c.getKickerMagnitude(), m, c);
-        }
-        if (sq[0].contains("TimesPseudokicked")) {
-            return doXMath(c.getPseudoKickerMagnitude(), m, c);
-        }
-        if (sq[0].contains("TimesMutated")) {
-            return doXMath(c.getTimesMutated(), m, c);
-        }
-
-        // Count$IfCastInOwnMainPhase.<numMain>.<numNotMain> // 7/10
-        if (sq[0].contains("IfCastInOwnMainPhase")) {
-            final PhaseHandler cPhase = cc.getGame().getPhaseHandler();
-            final boolean isMyMain = cPhase.getPhase().isMain() && cPhase.getPlayerTurn().equals(cc) && c.getCastFrom() != null;
-            return doXMath(Integer.parseInt(sq[isMyMain ? 1 : 2]), m, c);
-        }
-
-        // Count$ThisTurnEntered <ZoneDestination> [from <ZoneOrigin>] <Valid>
-        if (sq[0].contains("ThisTurnEntered")) {
-            final String[] workingCopy = l[0].split("_");
-
-            ZoneType destination = ZoneType.smartValueOf(workingCopy[1]);
-            final boolean hasFrom = workingCopy[2].equals("from");
-            ZoneType origin = hasFrom ? ZoneType.smartValueOf(workingCopy[3]) : null;
-            String validFilter = workingCopy[hasFrom ? 4 : 2] ;
-
-            final List<Card> res = CardUtil.getThisTurnEntered(destination, origin, validFilter, c);
-            if (origin == null) { // Remove cards on the battlefield that changed controller
-                res.removeAll(CardUtil.getThisTurnEntered(destination, destination, validFilter, c));
-            }
-            return doXMath(res.size(), m, c);
-        }
-
-        // Count$LastTurnEntered <ZoneDestination> [from <ZoneOrigin>] <Valid>
-        if (sq[0].contains("LastTurnEntered")) {
-            final String[] workingCopy = l[0].split("_");
-
-            ZoneType destination = ZoneType.smartValueOf(workingCopy[1]);
-            final boolean hasFrom = workingCopy[2].equals("from");
-            ZoneType origin = hasFrom ? ZoneType.smartValueOf(workingCopy[3]) : null;
-            String validFilter = workingCopy[hasFrom ? 4 : 2] ;
-
-            final List<Card> res = CardUtil.getLastTurnEntered(destination, origin, validFilter, c);
-            if (origin == null) { // Remove cards on the battlefield that changed controller
-                res.removeAll(CardUtil.getLastTurnEntered(destination, destination, validFilter, c));
-            }
-            return doXMath(res.size(), m, c);
-        }
-
-        // Count$AttackersDeclared
-        if (sq[0].contains("AttackersDeclared")) {
-            return doXMath(cc.getAttackersDeclaredThisTurn(), m, c);
-        }
-
-        // Count$CardAttackedThisTurn_<Valid>
-        if (sq[0].contains("CreaturesAttackedThisTurn")) {
-            final String[] workingCopy = l[0].split("_");
-            final String validFilter = workingCopy[1];
-            return doXMath(CardLists.getType(cc.getCreaturesAttackedThisTurn(), validFilter).size(), m, c);
-        }
-
-        // Count$ThisTurnCast <Valid>
-        // Count$LastTurnCast <Valid>
-        if (sq[0].contains("ThisTurnCast") || sq[0].contains("LastTurnCast")) {
-
-            final String[] workingCopy = l[0].split("_");
-            final String validFilter = workingCopy[1];
-
-            List<Card> res = Lists.newArrayList();
-            if (workingCopy[0].contains("This")) {
-                res = CardUtil.getThisTurnCast(validFilter, c);
-            }
-            else {
-                res = CardUtil.getLastTurnCast(validFilter, c);
-            }
-
-            final int ret = doXMath(res.size(), m, c);
-            return ret;
-        }
-
-        // Count$Morbid.<True>.<False>
-        if (sq[0].startsWith("Morbid")) {
-            final List<Card> res = CardUtil.getThisTurnEntered(ZoneType.Graveyard, ZoneType.Battlefield, "Creature", c);
-            return doXMath(Integer.parseInt(sq[res.size() > 0 ? 1 : 2]), m, c);
-        }
-
-        // Count$Madness.<True>.<False>
-        if (sq[0].startsWith("Madness")) {
-            String v = c.isMadness() ? sq[1] : sq[2];
-            // TODO move this to AbilityUtils
-            return doXMath(StringUtils.isNumeric(v) ? Integer.parseInt(v) : xCount(c, c.getSVar(v)), m, c);
-        }
-
-        // Count$Foretold.<True>.<False>
-        if (sq[0].startsWith("Foretold")) {
-            String v = c.isForetold() ? sq[1] : sq[2];
-            // TODO move this to AbilityUtils
-            return doXMath(StringUtils.isNumeric(v) ? Integer.parseInt(v) : xCount(c, c.getSVar(v)), m, c);
-        }
-
-        // Count$Presence_<Type>.<True>.<False>
-        if (sq[0].startsWith("Presence")) {
-            final String type = sq[0].split("_")[1];
-
-            if (c.getCastFrom() != null && c.getCastSA() != null) {
-                int revealed = AbilityUtils.calculateAmount(c, "Revealed$Valid " + type, c.getCastSA());
-                int ctrl = AbilityUtils.calculateAmount(c, "Count$Valid " + type + ".inZoneBattlefield+YouCtrl", c.getCastSA());
-                if (revealed + ctrl >= 1) {
-                    return doXMath(StringUtils.isNumeric(sq[1]) ? Integer.parseInt(sq[1]) : xCount(c, c.getSVar(sq[1])), m, c);
-                }
-            }
-            return doXMath(StringUtils.isNumeric(sq[2]) ? Integer.parseInt(sq[2]) : xCount(c, c.getSVar(sq[2])), m, c);
-        }
-
-        if (sq[0].startsWith("LastStateBattlefield")) {
-            final String[] k = l[0].split(" ");
-            CardCollection list = new CardCollection(game.getLastStateBattlefield());
-            list = CardLists.getValidCards(list, k[1].split(","), cc, c, null);
-            return CardFactoryUtil.doXMath(list.size(), m, c);
-        }
-
-        if (sq[0].startsWith("LastStateGraveyard")) {
-            final String[] k = l[0].split(" ");
-            CardCollection list = new CardCollection(game.getLastStateGraveyard());
-            list = CardLists.getValidCards(list, k[1].split(","), cc, c, null);
-            return CardFactoryUtil.doXMath(list.size(), m, c);
-        }
-
-        if (sq[0].equals("YourTurns")) {
-            return doXMath(cc.getTurn(), m, c);
-        }
-
-        if (sq[0].equals("TotalTurns")) {
-            // Sorry for the Singleton use, replace this once this function has game passed into it
-            return doXMath(game.getPhaseHandler().getTurn(), m, c);
-        }
-
-        if (sq[0].equals("MaxDistinctOnStack")) {
-            return game.getStack().getMaxDistinctSources();
-        }
-
-        //Count$Random.<Min>.<Max>
-        if (sq[0].equals("Random")) {
-            int min = StringUtils.isNumeric(sq[1]) ? Integer.parseInt(sq[1]) : xCount(c, c.getSVar(sq[1]));
-            int max = StringUtils.isNumeric(sq[2]) ? Integer.parseInt(sq[2]) : xCount(c, c.getSVar(sq[2]));
-
-            return forge.util.MyRandom.getRandom().nextInt(1+max-min) + min;
-        }
-
-        // Count$Domain
-        if (sq[0].startsWith("Domain")) {
-            int n = 0;
-            Player neededPlayer = sq[0].equals("DomainActivePlayer") ? activePlayer : cc;
-            CardCollection someCards = CardLists.filter(neededPlayer.getCardsIn(ZoneType.Battlefield), Presets.LANDS);
-            for (String basic : MagicColor.Constant.BASIC_LANDS) {
-                if (!CardLists.getType(someCards, basic).isEmpty()) {
-                    n++;
-                }
-            }
-            return doXMath(n, m, c);
-        }
-        if (sq[0].startsWith("UniqueManaColorsProduced")) {
-            boolean untappedOnly = sq[1].contains("ByUntappedSources");
-            int uniqueColors = 0;
-            CardCollectionView otb = cc.getCardsIn(ZoneType.Battlefield);
-            outer: for (byte color : MagicColor.WUBRG) {
-                for (Card card : otb) {
-                    if (!card.isTapped() || !untappedOnly) {
-                        for (SpellAbility ma : card.getManaAbilities()) {
-                            if (ma.canProduce(MagicColor.toShortString(color))) {
-                                uniqueColors++;
-                                continue outer;
-                            }
-                        }
-                    }
-                }
-            }
-            return doXMath(uniqueColors, m, c);
-        }
-        // Count$Converge
-        if (sq[0].contains("Converge")) {
-            SpellAbility castSA = c.getCastSA();
-            return doXMath(castSA == null ? 0 : castSA.getPayingColors().countColors(), m, c);
-        }
-
-        // Count$CardMulticolor.<numMC>.<numNotMC>
-        if (sq[0].contains("CardMulticolor")) {
-            final boolean isMulti = CardUtil.getColors(c).isMulticolor();
-            return doXMath(Integer.parseInt(sq[isMulti ? 1 : 2]), m, c);
-        }
-
-        // Complex counting methods
-        CardCollectionView someCards = getCardListForXCount(c, cc, sq);
-
-        // 1/10 - Count$MaxCMCYouCtrl
-        if (sq[0].contains("MaxCMC")) {
-            int mmc = Aggregates.max(someCards, CardPredicates.Accessors.fnGetCmc);
-            return doXMath(mmc, m, c);
-        }
-
-        return doXMath(someCards.size(), m, c);
-    }
-
-    private static CardCollectionView getCardListForXCount(final Card c, final Player cc, final String[] sq) {
-        final List<Player> opps = cc.getOpponents();
-        CardCollection someCards = new CardCollection();
-        final Game game = c.getGame();
-
-        // Generic Zone-based counting
-        // Count$QualityAndZones.Subquality
-
-        // build a list of cards in each possible specified zone
-
-        if (sq[0].contains("YouCtrl")) {
-            someCards.addAll(cc.getCardsIn(ZoneType.Battlefield));
-        }
-
-        if (sq[0].contains("InYourYard")) {
-            someCards.addAll(cc.getCardsIn(ZoneType.Graveyard));
-        }
-
-        if (sq[0].contains("InYourLibrary")) {
-            someCards.addAll(cc.getCardsIn(ZoneType.Library));
-        }
-
-        if (sq[0].contains("InYourHand")) {
-            someCards.addAll(cc.getCardsIn(ZoneType.Hand));
-        }
-
-        if (sq[0].contains("InYourSideboard")) {
-            someCards.addAll(cc.getCardsIn(ZoneType.Sideboard));
-        }
-
-        if (sq[0].contains("OppCtrl")) {
-            for (final Player p : opps) {
-                someCards.addAll(p.getZone(ZoneType.Battlefield).getCards());
-            }
-        }
-
-        if (sq[0].contains("InOppYard")) {
-            for (final Player p : opps) {
-                someCards.addAll(p.getCardsIn(ZoneType.Graveyard));
-            }
-        }
-
-        if (sq[0].contains("InOppHand")) {
-            for (final Player p : opps) {
-                someCards.addAll(p.getCardsIn(ZoneType.Hand));
-            }
-        }
-
-        if (sq[0].contains("InChosenHand")) {
-            if (c.getChosenPlayer() != null) {
-                someCards.addAll(c.getChosenPlayer().getCardsIn(ZoneType.Hand));
-            }
-        }
-
-        if (sq[0].contains("InRememberedHand")) {
-            if (c.getRemembered() != null) {
-                for (final Object o : c.getRemembered()) {
-                    if (o instanceof Player) {
-                        Player remPlayer = (Player) o;
-                        someCards.addAll(remPlayer.getCardsIn(ZoneType.Hand));
-                    }
-                }
-            }
-        }
-
-        if (sq[0].contains("InChosenYard")) {
-            if (c.getChosenPlayer() != null) {
-                someCards.addAll(c.getChosenPlayer().getCardsIn(ZoneType.Graveyard));
-            }
-        }
-
-        if (sq[0].contains("OnBattlefield")) {
-            someCards.addAll(game.getCardsIn(ZoneType.Battlefield));
-        }
-
-        if (sq[0].contains("InAllYards")) {
-            someCards.addAll(game.getCardsIn(ZoneType.Graveyard));
-        }
-
-        if (sq[0].contains("SpellsOnStack")) {
-            someCards.addAll(game.getCardsIn(ZoneType.Stack));
-        }
-
-        if (sq[0].contains("InAllHands")) {
-            someCards.addAll(game.getCardsIn(ZoneType.Hand));
-        }
-
-        //  Count$InTargetedHand (targeted player's cards in hand)
-        if (sq[0].contains("InTargetedHand")) {
-            for (final SpellAbility sa : c.getCurrentState().getNonManaAbilities()) {
-                final SpellAbility saTargeting = sa.getSATargetingPlayer();
-                if (saTargeting != null) {
-                    for (final Player tgtP : saTargeting.getTargets().getTargetPlayers()) {
-                        someCards.addAll(tgtP.getCardsIn(ZoneType.Hand));
-                    }
-                }
-            }
-        }
-
-        //  Count$InTargetedHand (targeted player's cards in hand)
-        if (sq[0].contains("InTargetedLibrary")) {
-            for (final SpellAbility sa : c.getCurrentState().getNonManaAbilities()) {
-                final SpellAbility saTargeting = sa.getSATargetingPlayer();
-                if (saTargeting != null) {
-                    for (final Player tgtP : saTargeting.getTargets().getTargetPlayers()) {
-                        someCards.addAll(tgtP.getCardsIn(ZoneType.Library));
-                    }
-                }
-            }
-        }
-
-        //  Count$InTargetedHand (targeted player's cards in hand)
-        if (sq[0].contains("InEnchantedHand")) {
-            GameEntity o = c.getEntityAttachedTo();
-            Player controller = null;
-            if (o instanceof Card) {
-                controller = ((Card) o).getController();
-            }
-            else {
-                controller = (Player) o;
-            }
-            if (controller != null) {
-                someCards.addAll(controller.getCardsIn(ZoneType.Hand));
-            }
-        }
-        if (sq[0].contains("InEnchantedYard")) {
-            GameEntity o = c.getEntityAttachedTo();
-            Player controller = null;
-            if (o instanceof Card) {
-                controller = ((Card) o).getController();
-            }
-            else {
-                controller = (Player) o;
-            }
-            if (controller != null) {
-                someCards.addAll(controller.getCardsIn(ZoneType.Graveyard));
-            }
-        }
-
-        // filter lists based on the specified quality
-
-        // "Clerics you control" - Count$TypeYouCtrl.Cleric
-        if (sq[0].contains("Type")) {
-            someCards = CardLists.filter(someCards, CardPredicates.isType(sq[1]));
-        }
-
-        // "Named <CARDNAME> in all graveyards" - Count$NamedAllYards.<CARDNAME>
-
-        if (sq[0].contains("Named")) {
-            if (sq[1].equals("CARDNAME")) {
-                sq[1] = c.getName();
-            }
-            someCards = CardLists.filter(someCards, CardPredicates.nameEquals(sq[1]));
-        }
-
-        // Refined qualities
-
-        // "Untapped Lands" - Count$UntappedTypeYouCtrl.Land
-        // if (sq[0].contains("Untapped")) { someCards = CardLists.filter(someCards, Presets.UNTAPPED); }
-
-        // if (sq[0].contains("Tapped")) { someCards = CardLists.filter(someCards, Presets.TAPPED); }
-
-//        String sq0 = sq[0].toLowerCase();
-//        for (String color : MagicColor.Constant.ONLY_COLORS) {
-//            if (sq0.contains(color))
-//                someCards = someCards.filter(CardListFilter.WHITE);
-//        }
-        // "White Creatures" - Count$WhiteTypeYouCtrl.Creature
-        // if (sq[0].contains("White")) someCards = CardLists.filter(someCards, CardPredicates.isColor(MagicColor.WHITE));
-        // if (sq[0].contains("Blue"))  someCards = CardLists.filter(someCards, CardPredicates.isColor(MagicColor.BLUE));
-        // if (sq[0].contains("Black")) someCards = CardLists.filter(someCards, CardPredicates.isColor(MagicColor.BLACK));
-        // if (sq[0].contains("Red"))   someCards = CardLists.filter(someCards, CardPredicates.isColor(MagicColor.RED));
-        // if (sq[0].contains("Green")) someCards = CardLists.filter(someCards, CardPredicates.isColor(MagicColor.GREEN));
-
-        if (sq[0].contains("Multicolor")) {
-            someCards = CardLists.filter(someCards, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return CardUtil.getColors(c).isMulticolor();
-                }
-            });
-        }
-
-        if (sq[0].contains("Monocolor")) {
-            someCards = CardLists.filter(someCards, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return CardUtil.getColors(c).isMonoColor();
-                }
-            });
-        }
-        return someCards;
-    }
-
-    public static int doXMath(final int num, final String operators, final Card c) {
-        if (operators == null || operators.equals("none")) {
-            return num;
-        }
-
-        final String[] s = operators.split("\\.");
-        int secondaryNum = 0;
-
-        try {
-            if (s.length == 2) {
-                secondaryNum = Integer.parseInt(s[1]);
-            }
-        } catch (final Exception e) {
-            secondaryNum = xCount(c, c.getSVar(s[1]));
-        }
-
-        if (s[0].contains("Plus")) {
-            return num + secondaryNum;
-        } else if (s[0].contains("NMinus")) {
-            return secondaryNum - num;
-        } else if (s[0].contains("Minus")) {
-            return num - secondaryNum;
-        } else if (s[0].contains("Twice")) {
-            return num * 2;
-        } else if (s[0].contains("Thrice")) {
-            return num * 3;
-        } else if (s[0].contains("HalfUp")) {
-            return (int) (Math.ceil(num / 2.0));
-        } else if (s[0].contains("HalfDown")) {
-            return (int) (Math.floor(num / 2.0));
-        } else if (s[0].contains("ThirdUp")) {
-            return (int) (Math.ceil(num / 3.0));
-        } else if (s[0].contains("ThirdDown")) {
-            return (int) (Math.floor(num / 3.0));
-        } else if (s[0].contains("Negative")) {
-            return num * -1;
-        } else if (s[0].contains("Times")) {
-            return num * secondaryNum;
-        } else if (s[0].contains("DivideEvenlyDown")) {
-            if (secondaryNum == 0) {
-                return 0;
-            } else {
-                return num / secondaryNum;
-            }
-        } else if (s[0].contains("Mod")) {
-            return num % secondaryNum;
-        } else if (s[0].contains("Abs")) {
-            return Math.abs(num);
-        } else if (s[0].contains("LimitMax")) {
-            if (num < secondaryNum) {
-                return num;
-            } else {
-                return secondaryNum;
-            }
-        } else if (s[0].contains("LimitMin")) {
-            if (num > secondaryNum) {
-                return num;
-            } else {
-                return secondaryNum;
-            }
-
-        } else {
-            return num;
-        }
-    }
-
-    /**
-     * <p>
-     * handlePaid.
-     * </p>
-     *
-     * @param paidList
-     *            a {@link forge.game.card.CardCollectionView} object.
-     * @param string
-     *            a {@link java.lang.String} object.
-     * @param source
-     *            a {@link forge.game.card.Card} object.
-     * @return a int.
-     */
-    public static int handlePaid(final Iterable<Card> paidList, final String string, final Card source) {
-        if (paidList == null) {
-            if (string.contains(".")) {
-                final String[] splitString = string.split("\\.", 2);
-                return doXMath(0, splitString[1], source);
-            } else {
-                return 0;
-            }
-        }
-        if (string.startsWith("Amount")) {
-            int size = Iterables.size(paidList);
-            if (string.contains(".")) {
-                final String[] splitString = string.split("\\.", 2);
-                return doXMath(size, splitString[1], source);
-            } else {
-                return size;
-            }
-
-        }
-
-        if (string.startsWith("DifferentCMC")) {
-            final Set<Integer> diffCMC = new HashSet<>();
-            for (final Card card : paidList) {
-                diffCMC.add(card.getCMC());
-            }
-            return diffCMC.size();
-        }
-
-        if (string.startsWith("SumCMC")) {
-            int sumCMC = 0;
-            for(Card c : paidList) {
-                sumCMC += c.getCMC();
-            }
-            return sumCMC;
-        }
-
-        if (string.startsWith("Valid")) {
-
-            final String[] splitString = string.split("/", 2);
-            String valid = splitString[0].substring(6);
-            final List<Card> list = CardLists.getValidCardsAsList(paidList, valid, source.getController(), source, null);
-            return doXMath(list.size(), splitString.length > 1 ? splitString[1] : null, source);
-        }
-
-        String filteredString = string;
-        Iterable<Card> filteredList = paidList;
-        final String[] filter = filteredString.split("_");
-
-        if (string.startsWith("FilterControlledBy")) {
-            final String pString = filter[0].substring(18);
-            FCollectionView<Player> controllers = AbilityUtils.getDefinedPlayers(source, pString, null);
-            filteredList = CardLists.filterControlledByAsList(filteredList, controllers);
-            filteredString = TextUtil.fastReplace(filteredString, pString, "");
-            filteredString = TextUtil.fastReplace(filteredString, "FilterControlledBy_", "");
-        }
-
-        int tot = 0;
-        for (final Card c : filteredList) {
-            tot += xCount(c, filteredString);
-        }
-
-        return tot;
     }
 
     /**
@@ -2226,6 +633,51 @@ public class CardFactoryUtil {
         re.setOverridingAbility(repAb);
 
         return re;
+    }
+
+    public static String getProtectionValid(final String kw, final boolean damage) {
+        String validSource = "Card."; // TODO extend for Emblem too
+
+        if (kw.startsWith("Protection:")) {
+            final String[] kws = kw.split(":");
+            String characteristic = kws[1];
+            if (characteristic.startsWith("Player")) {
+                validSource += "ControlledBy " + characteristic;
+            } else {
+                if (damage && (characteristic.endsWith("White") || characteristic.endsWith("Blue")
+                    || characteristic.endsWith("Black") || characteristic.endsWith("Red")
+                    || characteristic.endsWith("Green") || characteristic.endsWith("Colorless")
+                    || characteristic.endsWith("MonoColor") || characteristic.endsWith("MultiColor"))) {
+                    characteristic += "Source";
+                }
+                validSource = characteristic;
+            }
+        } else if (kw.startsWith("Protection from ")) {
+            String protectType = kw.substring("Protection from ".length());
+            if (protectType.equals("white")) {
+                validSource += "White" + (damage ? "Source" : "");
+            } else if (protectType.equals("blue")) {
+                validSource += "Blue" + (damage ? "Source" : "");
+            } else if (protectType.equals("black")) {
+                validSource += "Black" + (damage ? "Source" : "");
+            } else if (protectType.equals("red")) {
+                validSource += "Red" + (damage ? "Source" : "");
+            } else if (protectType.equals("green")) {
+                validSource += "Green" + (damage ? "Source" : "");
+            } else if (protectType.equals("colorless")) {
+                validSource += "Colorless" + (damage ? "Source" : "");
+            } else if (protectType.equals("all colors")) {
+                validSource += "nonColorless" + (damage ? "Source" : "");
+            } else if (protectType.equals("everything")) {
+                validSource = "";
+            } else if (protectType.startsWith("opponent of ")) {
+                final String playerName = protectType.substring("opponent of ".length());
+                validSource += "ControlledBy Player.OpponentOf PlayerNamed_" + playerName;
+            } else {
+                validSource = CardType.getSingularType(protectType);
+            }
+        }
+        return validSource;
     }
 
     public static ReplacementEffect makeEtbCounter(final String kw, final CardState card, final boolean intrinsic)
@@ -3010,7 +1462,7 @@ public class CardFactoryUtil {
 
             final String effect = "DB$ ChangeZone | ValidTgts$ Player | TgtPrompt$ Select target player" +
                     " | Origin$ Library | Destination$ Hand | ChangeType$ Card.named" + k[1] +
-                    " | ChangeNum$ 1 | Hidden$ True | Chooser$ Targeted | Optional$ Targeted | AILogic$ Always";
+                    " | ChangeNum$ 1 | Hidden$ True | Chooser$ Targeted | Optional$ Targeted";
 
             final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
             trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
@@ -3298,7 +1750,7 @@ public class CardFactoryUtil {
 
             if (card.isPermanent()) {
                 final String abPump = "DB$ Pump | Defined$ Remembered | KW$ Haste | PumpZone$ Stack "
-                        + "| ConditionDefined$ Remembered | ConditionPresent$ Creature | UntilLoseControlOfHost$ True";
+                        + "| ConditionDefined$ Remembered | ConditionPresent$ Creature | Duration$ UntilLoseControlOfHost";
                 final AbilitySub saPump = (AbilitySub)AbilityFactory.getAbility(abPump, card);
 
                 String dbClean = "DB$ Cleanup | ClearRemembered$ True";
@@ -3422,7 +1874,24 @@ public class CardFactoryUtil {
         Card host = card.getCard();
 
         String keyword = inst.getOriginal();
-        if (keyword.equals("Aftermath") && card.getStateName().equals(CardStateName.RightSplit)) {
+        if (keyword.startsWith("Absorb")) {
+            final String[] k = keyword.split(":");
+            final String n = k[1];
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self");
+            sb.append(" | PreventionEffect$ True | Secondary$ True | Description$ Absorb ").append(n);
+            sb.append(" (").append(inst.getReminderText()).append(")");
+            String repeffstr = sb.toString();
+
+            String abString = "DB$ ReplaceDamage | Amount$ " + n;
+            SpellAbility replaceDamage = AbilityFactory.getAbility(abString, card);
+            replaceDamage.setIntrinsic(intrinsic);
+
+            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, host, intrinsic, card);
+            re.setOverridingAbility(replaceDamage);
+            inst.addReplacement(re);
+        } else if (keyword.equals("Aftermath") && card.getStateName().equals(CardStateName.RightSplit)) {
             StringBuilder sb = new StringBuilder();
             sb.append("Event$ Moved | ValidCard$ Card.Self | Origin$ Stack | ExcludeDestination$ Exile ");
             sb.append("| ValidStackSa$ Spell.Aftermath | Description$ Aftermath");
@@ -3569,16 +2038,23 @@ public class CardFactoryUtil {
         } else if (keyword.startsWith("Devour")) {
             final String[] k = keyword.split(":");
             final String magnitude = k[1];
+            String valid = "Creature";
+            final String[] s = k[0].split(" ");
+            if (s.length > 1) {
+                valid = s[1].substring(0, 1).toUpperCase() + s[1].substring(1);
+                final StringBuilder d = new StringBuilder();
+            }
 
-            String sacrificeStr = "DB$ Sacrifice | Defined$ You | Amount$ DevourSacX | "
-                    + "SacValid$ Creature.Other | SacMessage$ another creature (Devour "+ magnitude + ") | "
-                    + "RememberSacrificed$ True | Optional$ True | Devour$ True";
+            String sacrificeStr = "DB$ Sacrifice | Defined$ You | Amount$ DevourSacX | SacValid$ " + valid +
+                    ".Other | SacMessage$ another " + valid.toLowerCase() + " (Devour " + magnitude +
+                    ") | RememberSacrificed$ True | Optional$ True | Devour$ True";
 
             String counterStr = "DB$ PutCounter | ETB$ True | Defined$ Self | CounterType$ P1P1 | CounterNum$ DevourX";
             String cleanupStr = "DB$ Cleanup | ClearRemembered$ True";
 
             AbilitySub sacrificeSA = (AbilitySub) AbilityFactory.getAbility(sacrificeStr, card);
-            sacrificeSA.setSVar("DevourSacX", "Count$Valid Creature.YouCtrl+Other");
+            String value = "Count$Valid " + valid + ".YouCtrl+Other";
+            sacrificeSA.setSVar("DevourSacX", value);
 
             AbilitySub counterSA = (AbilitySub) AbilityFactory.getAbility(counterStr, card);
             counterSA.setSVar("DevourX", "SVar$DevourSize/Times." + magnitude);
@@ -3761,7 +2237,7 @@ public class CardFactoryUtil {
 
             final String counter = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | ETB$ True | CounterNum$ 1" +
                                 " | SpellDescription$ Put a +1/+1 counter on it.";
-            final String haste = "DB$ Animate | Defined$ Self | Keywords$ Haste | Permanent$ True | SpellDescription$ Haste";
+            final String haste = "DB$ Animate | Defined$ Self | Keywords$ Haste | Duration$ Permanent | SpellDescription$ Haste";
 
             SpellAbility saChoose = AbilityFactory.getAbility(choose, card);
 
@@ -3898,6 +2374,18 @@ public class CardFactoryUtil {
                 inst.addReplacement(re);
             }
         }
+        else if (keyword.startsWith("Protection")) {
+            String validSource = getProtectionValid(keyword, true);
+
+            String rep = "Event$ DamageDone | Prevent$ True | ActiveZones$ Battlefield | ValidTarget$ Card.Self";
+            if (!validSource.isEmpty()) {
+                rep += " | ValidSource$ " + validSource;
+            }
+            rep += " | Secondary$ True | TiedToKeyword$ " + keyword + " | Description$ " + keyword;
+
+            ReplacementEffect re = ReplacementHandler.parseReplacement(rep, host, intrinsic, card);
+            inst.addReplacement(re);
+        }
 
         else if (keyword.startsWith("If CARDNAME would be put into a graveyard "
                 + "from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.")) {
@@ -4025,7 +2513,7 @@ public class CardFactoryUtil {
             final String awaken = "DB$ PutCounter | CounterType$ P1P1 | CounterNum$ "+ counters + " | "
                     + "ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | Awaken$ True";
             final String animate = "DB$ Animate | Defined$ Targeted | Power$ 0 | Toughness$ 0 | Types$"
-                    + " Creature,Elemental | Permanent$ True | Keywords$ Haste";
+                    + " Creature,Elemental | Duration$ Permanent | Keywords$ Haste";
 
             final AbilitySub awakenSub = (AbilitySub) AbilityFactory.getAbility(awaken, card);
             final AbilitySub animateSub = (AbilitySub) AbilityFactory.getAbility(animate, card);
@@ -4727,6 +3215,8 @@ public class CardFactoryUtil {
             String desc = type;
             if (type.equals("Basic")) {
                 desc = "Basic land";
+            } else if (type.equals("Land.Artifact")) {
+                desc = "Artifact land";
             }
 
             sb.append(" Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$ ").append(desc).append("cycling ");
@@ -4748,20 +3238,20 @@ public class CardFactoryUtil {
         String effect = null;
         Map<String, String> svars = Maps.newHashMap();
 
-        if (keyword.startsWith("Absorb")) {
-            final String[] k = keyword.split(":");
-            final String n = k[1];
-
-            StringBuilder sb = new StringBuilder();
-            sb.append("Mode$ PreventDamage | Target$ Card.Self | Amount$ ");
-            sb.append(n).append("| Secondary$ True | Description$ Absorb ").append(n);
-            sb.append(" (").append(inst.getReminderText()).append(")");
-            effect = sb.toString();
-        } else if (keyword.startsWith("Affinity")) {
+        if (keyword.startsWith("Affinity")) {
             final String[] k = keyword.split(":");
             final String t = k[1];
+            String d = "";
+            if (k.length > 2) {
+                final StringBuilder s = new StringBuilder();
+                s.append(k[2]).append("s");
+                d = s.toString();
+            }
 
             String desc = "Artifact".equals(t) ? "artifacts" : CardType.getPluralType(t);
+            if (!d.isEmpty()) {
+                desc = d;
+            }
             StringBuilder sb = new StringBuilder();
             sb.append("Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ AffinityX | EffectZone$ All");
             sb.append("| Description$ Affinity for ").append(desc);
@@ -4796,6 +3286,8 @@ public class CardFactoryUtil {
             svars.put("PlayEncoded", ab);
         } else if (keyword.startsWith("Dash")) {
             effect = "Mode$ Continuous | Affected$ Card.Self+dashed | AddKeyword$ Haste";
+        } else if (keyword.equals("Defender")) {
+            effect = "Mode$ CantAttack | ValidCard$ Card.Self | DefenderKeyword$ True | Secondary$ True";
         } else if (keyword.equals("Devoid")) {
             effect = "Mode$ Continuous | EffectZone$ All | Affected$ Card.Self" +
                     " | CharacteristicDefining$ True | SetColor$ Colorless | Secondary$ True" +
@@ -4816,6 +3308,12 @@ public class CardFactoryUtil {
             effect = "Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Secondary$ True"
                     + " | Amount$ Escalate | Cost$ "+ manacost +" | EffectZone$ All"
                     + " | Description$ " + sb.toString() + " (" + inst.getReminderText() + ")";
+        } else if (keyword.equals("Fear")) {
+            effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.nonArtifact+nonBlack | Secondary$ True " +
+                    " | Description$ Fear ( " + inst.getReminderText() + ")";
+        } else if (keyword.equals("Flying")) {
+            effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.withoutFlying+withoutReach | Secondary$ True " +
+                    " | Description$ Flying ( " + inst.getReminderText() + ")";
         } else if (keyword.startsWith("Hexproof")) {
             final StringBuilder sbDesc = new StringBuilder("Hexproof");
             final StringBuilder sbValid = new StringBuilder();
@@ -4830,9 +3328,26 @@ public class CardFactoryUtil {
             effect = "Mode$ CantTarget | Hexproof$ True | ValidCard$ Card.Self | Secondary$ True"
                     + sbValid.toString() + " | Activator$ Opponent | Description$ "
                     + sbDesc.toString() + " (" + inst.getReminderText() + ")";
+        } else if (keyword.equals("Horsemanship")) {
+            effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.withoutHorsemanship | Secondary$ True " +
+                    " | Description$ Horsemanship ( " + inst.getReminderText() + ")";
+        } else if (keyword.equals("Intimidate")) {
+            effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.nonArtifact+notSharesColorWith | Secondary$ True " +
+                    " | Description$ Intimidate ( " + inst.getReminderText() + ")";
+        } else if (keyword.startsWith("Protection")) {
+            String valid = getProtectionValid(keyword, false);
+            effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self ";
+            if (!valid.isEmpty()) {
+                effect += "| ValidBlocker$ " + valid;
+            }
+            effect += " | Secondary$ True | Description$ Protection ( " + inst.getReminderText() + ")";
         } else if (keyword.equals("Shroud")) {
             effect = "Mode$ CantTarget | Shroud$ True | ValidCard$ Card.Self | Secondary$ True"
                     + " | Description$ Shroud (" + inst.getReminderText() + ")";
+        } else if (keyword.equals("Skulk")) {
+            effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerGTX | Secondary$ True " +
+                    " | Description$ Skulk ( " + inst.getReminderText() + ")";
+            svars.put("X", "Count$CardPower");
         } else if (keyword.startsWith("Strive")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
@@ -4844,11 +3359,6 @@ public class CardFactoryUtil {
         } else if (keyword.equals("Undaunted")) {
             effect = "Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Secondary$ True"
                     + "| Amount$ Undaunted | EffectZone$ All | Description$ Undaunted (" + inst.getReminderText() + ")";
-        } else if (keyword.startsWith("CantBeBlockedBy ")) {
-            final String[] k = keyword.split(" ", 2);
-
-            effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ " + k[1]
-                    + " | Description$ CARDNAME can't be blocked " + getTextForKwCantBeBlockedByType(keyword);
         } else if (keyword.equals("MayFlashSac")) {
             effect = "Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | Secondary$ True | MayPlay$ True"
                 + " | MayPlayNotSorcerySpeed$ True | MayPlayWithFlash$ True | MayPlayText$ Sacrifice at the next cleanup step"
@@ -4908,122 +3418,6 @@ public class CardFactoryUtil {
         sa.appendSubAbility(as);
         return as;
         // ETBReplacementMove(sa.getHostCard(), null));
-    }
-
-    private static String getTextForKwCantBeBlockedByType(final String keyword) {
-        boolean negative = true;
-        final List<String> subs = Lists.newArrayList(TextUtil.split(keyword.split(" ", 2)[1], ','));
-        final List<List<String>> subsAnd = Lists.newArrayList();
-        final List<String> orClauses = Lists.newArrayList();
-        for (final String expession : subs) {
-            final List<String> parts = Lists.newArrayList(expession.split("[.+]"));
-            for (int p = 0; p < parts.size(); p++) {
-                final String part = parts.get(p);
-                if (part.equalsIgnoreCase("creature")) {
-                    parts.remove(p--);
-                    continue;
-                }
-                // based on suppossition that each expression has at least 1 predicate except 'creature'
-                negative &= part.contains("non") || part.contains("without");
-            }
-            subsAnd.add(parts);
-        }
-
-        final boolean allNegative = negative;
-        final String byClause = allNegative ? "except by " : "by ";
-
-        final Function<Pair<Boolean, String>, String> withToString = new Function<Pair<Boolean, String>, String>() {
-            @Override
-            public String apply(Pair<Boolean, String> inp) {
-                boolean useNon = inp.getKey() == allNegative;
-                return (useNon ? "*NO* " : "") + inp.getRight();
-            }
-        };
-
-        for (final List<String> andOperands : subsAnd) {
-            final List<Pair<Boolean, String>> prependedAdjectives = Lists.newArrayList();
-            final List<Pair<Boolean, String>> postponedAdjectives = Lists.newArrayList();
-            String creatures = null;
-
-            for (String part : andOperands) {
-                boolean positive = true;
-                if (part.startsWith("non")) {
-                    part = part.substring(3);
-                    positive = false;
-                }
-                if (part.startsWith("with")) {
-                    positive = !part.startsWith("without");
-                    postponedAdjectives.add(Pair.of(positive, part.substring(positive ? 4 : 7)));
-                } else if (part.startsWith("powerLEX")) {// Kraken of the Straits
-                    postponedAdjectives.add(Pair.of(true, "power less than the number of islands you control"));
-                } else if (part.startsWith("power")) {
-                    int kwLength = 5;
-                    String opName = Expressions.operatorName(part.substring(kwLength, kwLength + 2));
-                    String operand = part.substring(kwLength + 2);
-                    postponedAdjectives.add(Pair.of(true, "power" + opName + operand));
-                } else if (part.startsWith("toughness")) {
-                    int kwLength = 9;
-                    String operand = part.substring(kwLength + 2);
-                    String opName = "";
-                    if (part.startsWith("toughnessGE")) {
-                        opName = " or greater";
-                    } else {
-                        opName = "update CardFactoryUtil line 4773";
-                    }
-                    postponedAdjectives.add(Pair.of(true, "toughness " + operand + opName));
-                } else if (CardType.isACreatureType(part)) {
-                    if (creatures != null && CardType.isACreatureType(creatures)) { // e.g. Kor Castigator
-                        creatures = StringUtils.capitalize(Lang.getPlural(part)) + creatures;
-                    } else {
-                        creatures = StringUtils.capitalize(Lang.getPlural(part)) + (creatures == null ? "" : " or " + creatures);
-                    }
-                    // Kor Castigator and other similar creatures with composite subtype Eldrazi Scion in their text
-                    creatures = TextUtil.fastReplace(creatures, "Scions or Eldrazis", "Eldrazi Scions");
-                } else {
-                    prependedAdjectives.add(Pair.of(positive, part.toLowerCase()));
-                }
-            }
-
-            StringBuilder sbShort = new StringBuilder();
-            if (allNegative) {
-                boolean isFirst = true;
-                for (Pair<Boolean, String> pre : prependedAdjectives) {
-                    if (isFirst) isFirst = false;
-                    else sbShort.append(" and/or ");
-
-                    boolean useNon = pre.getKey() == allNegative;
-                    if (useNon) sbShort.append("non-");
-                    sbShort.append(pre.getValue()).append(" ").append(creatures == null ? "creatures" : creatures);
-                }
-                if (prependedAdjectives.isEmpty())
-                    sbShort.append(creatures == null ? "creatures" : creatures);
-
-                if (!postponedAdjectives.isEmpty()) {
-                    if (!prependedAdjectives.isEmpty()) {
-                        sbShort.append(" and/or creatures");
-                    }
-
-                    sbShort.append(" with ");
-                    sbShort.append(Lang.joinHomogenous(postponedAdjectives, withToString, allNegative ? "or" : "and"));
-                }
-
-            } else {
-                for (Pair<Boolean, String> pre : prependedAdjectives) {
-                    boolean useNon = pre.getKey() == allNegative;
-                    if (useNon) sbShort.append("non-");
-                    sbShort.append(pre.getValue()).append(" ");
-                }
-                sbShort.append(creatures == null ? "creatures" : creatures);
-
-                if (!postponedAdjectives.isEmpty()) {
-                    sbShort.append(" with ");
-                    sbShort.append(Lang.joinHomogenous(postponedAdjectives, withToString, allNegative ? "or" : "and"));
-                }
-
-            }
-            orClauses.add(sbShort.toString());
-        }
-        return byClause + StringUtils.join(orClauses, " or ") + ".";
     }
 
     public static void setupAdventureAbility(Card card) {

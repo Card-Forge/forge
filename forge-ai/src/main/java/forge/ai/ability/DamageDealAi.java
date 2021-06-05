@@ -30,7 +30,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
-import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CounterEnumType;
@@ -41,7 +40,6 @@ import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
-import forge.game.player.PlayerPredicates;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetChoices;
@@ -132,7 +130,7 @@ public class DamageDealAi extends DamageAiBase {
                 // Set PayX here to maximum value. It will be adjusted later depending on the target.
                 sa.setXManaCostPaid(dmg);
             } else if (sa.getSVar(damage).contains("InYourHand") && source.isInZone(ZoneType.Hand)) {
-                dmg = CardFactoryUtil.xCount(source, sa.getSVar(damage)) - 1; // the card will be spent casting the spell, so actual damage is 1 less
+                dmg = AbilityUtils.calculateAmount(source, damage, sa) - 1; // the card will be spent casting the spell, so actual damage is 1 less
             } else if (sa.getSVar(damage).equals("TargetedPlayer$CardsInHand")) {
                 // cards that deal damage by the number of cards in target player's hand, e.g. Sudden Impact
                 if (sa.getTargetRestrictions().canTgtPlayer()) {
@@ -734,12 +732,10 @@ public class DamageDealAi extends DamageAiBase {
                 }
 
                 // When giving priority to targeting Creatures for mandatory
-                // triggers
-                // feel free to add the Human after we run out of good targets
+                // triggers feel free to add the Human after we run out of good targets
 
                 // TODO: add check here if card is about to die from something
-                // on the stack
-                // or from taking combat damage
+                // on the stack or from taking combat damage
 
                 final Cost abCost = sa.getPayCosts();
                 boolean freePing = immediately || abCost == null
@@ -796,8 +792,7 @@ public class DamageDealAi extends DamageAiBase {
                     }
                 }
             }
-            // TODO: Improve Damage, we shouldn't just target the player just
-            // because we can
+            // TODO: Improve Damage, we shouldn't just target the player just because we can
             if (sa.canTarget(enemy) && tcs.size() < tgt.getMaxTargets(source, sa)) {
                 if (((phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai))
                         || (SpellAbilityAi.isSorcerySpeed(sa) && phase.is(PhaseType.MAIN2))
@@ -985,7 +980,6 @@ public class DamageDealAi extends DamageAiBase {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-
         final Card source = sa.getHostCard();
         final String damage = sa.getParam("NumDmg");
         int dmg = AbilityUtils.calculateAmount(source, damage, sa);
@@ -1042,7 +1036,7 @@ public class DamageDealAi extends DamageAiBase {
             saTgt = saTgt.getParent();
         }
 
-        Player opponent = ai.getOpponents().min(PlayerPredicates.compareByLife());
+        Player opponent = ai.getWeakestOpponent();
 
         // TODO: somehow account for the possible cost reduction?
         int dmg = ComputerUtilMana.determineLeftoverMana(sa, ai, saTgt.getParam("XColor"));
@@ -1085,7 +1079,7 @@ public class DamageDealAi extends DamageAiBase {
         saTgt.resetTargets();
         saTgt.getTargets().add(tgtCreature != null && dmg < opponent.getLife() ? tgtCreature : opponent);
 
-        sa.setXManaCostPaid(dmg);
+        saTgt.setXManaCostPaid(dmg);
         return true;
     }
 

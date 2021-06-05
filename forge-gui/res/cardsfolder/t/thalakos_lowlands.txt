@@ -4,5 +4,5 @@ Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Mana | Cost$ T | Produced$ W | SubAbility$ DBStayTapped | SpellDescription$ Add {W}. CARDNAME doesn't untap during your next untap step.
 A:AB$ Mana | Cost$ T | Produced$ U | SubAbility$ DBStayTapped | SpellDescription$ Add {U}. CARDNAME doesn't untap during your next untap step.
-SVar:DBStayTapped:DB$ Pump | KW$ HIDDEN This card doesn't untap during your next untap step. | Defined$ Self | Permanent$ True
+SVar:DBStayTapped:DB$ Pump | KW$ HIDDEN This card doesn't untap during your next untap step. | Defined$ Self | Duration$ Permanent
 Oracle:{T}: Add {C}.\n{T}: Add {W} or {U}. Thalakos Lowlands doesn't untap during your next untap step.

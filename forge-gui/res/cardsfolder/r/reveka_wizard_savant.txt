@@ -3,5 +3,5 @@ ManaCost:2 U U
 Types:Legendary Creature Dwarf Wizard
 PT:0/1
 A:AB$ DealDamage | Cost$ T | NumDmg$ 2 | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select target creature or player | SubAbility$ DBPump | SpellDescription$ CARDNAME deals 2 damage to any target and doesn't untap during your next untap step.
-SVar:DBPump:DB$ Pump | KW$ HIDDEN This card doesn't untap during your next untap step. | Defined$ Self | Permanent$ True
+SVar:DBPump:DB$ Pump | KW$ HIDDEN This card doesn't untap during your next untap step. | Defined$ Self | Duration$ Permanent
 Oracle:{T}: Reveka, Wizard Savant deals 2 damage to any target and doesn't untap during your next untap step.

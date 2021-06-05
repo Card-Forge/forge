@@ -257,6 +257,7 @@ public enum CSubmenuPreferences implements ICDoc {
         initializeStackAdditionsComboBox();
         initializeLandPlayedComboBox();
         initializeColorIdentityCombobox();
+        initializeSwitchStatesCombobox();
         initializeAutoYieldModeComboBox();
         initializeCounterDisplayTypeComboBox();
         initializeCounterDisplayLocationComboBox();
@@ -475,6 +476,15 @@ public enum CSubmenuPreferences implements ICDoc {
             ForgeConstants.DISP_CURRENT_COLORS_ALWAYS};
         final FPref userSetting = FPref.UI_DISPLAY_CURRENT_COLORS;
         final FComboBoxPanel<String> panel = this.view.getDisplayColorIdentity();
+        final FComboBox<String> comboBox = createComboBox(elems, userSetting);
+        final String selectedItem = this.prefs.getPref(userSetting);
+        panel.setComboBox(comboBox, selectedItem);
+    }
+
+    private void initializeSwitchStatesCombobox() {
+        final String[] elems = {ForgeConstants.SWITCH_CARDSTATES_DECK_NEVER, ForgeConstants.SWITCH_CARDSTATES_DECK_HOVER, ForgeConstants.SWITCH_CARDSTATES_DECK_ALWAYS};
+        final FPref userSetting = FPref.UI_SWITCH_STATES_DECKVIEW;
+        final FComboBoxPanel<String> panel = this.view.getSwitchStates();
         final FComboBox<String> comboBox = createComboBox(elems, userSetting);
         final String selectedItem = this.prefs.getPref(userSetting);
         panel.setComboBox(comboBox, selectedItem);

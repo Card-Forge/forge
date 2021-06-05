@@ -59,9 +59,6 @@ public class TriggerHandler {
         game = gameState;
     }
 
-    public final void cleanUpTemporaryTriggers() {
-    }
-
     public final boolean hasDelayedTriggers() {
         return !delayedTriggers.isEmpty();
     }
@@ -237,6 +234,7 @@ public class TriggerHandler {
             if (
                     TriggerType.Exploited.equals(t.getMode()) ||
                     TriggerType.Sacrificed.equals(t.getMode()) ||
+                    TriggerType.Destroyed.equals(t.getMode()) ||
                     (TriggerType.ChangesZone.equals(t.getMode()) && "Battlefield".equals(t.getParam("Origin")))) {
                 registerOneTrigger(t);
             }

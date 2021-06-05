@@ -7,6 +7,6 @@ K:Deathtouch
 K:CARDNAME can only attack alone.
 T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | ValidDefender$ Player | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME attacks a player and isn't blocked, that player's life total becomes 1. CARDNAME assigns no combat damage this combat.
 SVar:TrigDamage:DB$ SetLife | Defined$ TriggeredDefender | LifeAmount$ 1 | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME assigns no combat damage | UntilEndOfCombat$ True
+SVar:DBPump:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME assigns no combat damage | Duration$ UntilEndOfCombat
 SVar:MustBeBlocked:True
 Oracle:First strike, deathtouch\nMaster of Cruelties can only attack alone.\nWhenever Master of Cruelties attacks a player and isn't blocked, that player's life total becomes 1. Master of Cruelties assigns no combat damage this combat.

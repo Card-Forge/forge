@@ -3,6 +3,6 @@ ManaCost:G
 Types:Creature Human Warrior
 PT:1/1
 K:Bloodthirst:1
-K:Creatures with power less than CARDNAME's power can't block it.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/skarrgan_pit_skulk.jpg
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLTX | Description$ Creatures with power less than CARDNAME's power can't block it.
+SVar:X:Count$CardPower
 Oracle:Bloodthirst 1 (If an opponent was dealt damage this turn, this creature enters the battlefield with a +1/+1 counter on it.)\nCreatures with power less than Skarrgan Pit-Skulk's power can't block it.

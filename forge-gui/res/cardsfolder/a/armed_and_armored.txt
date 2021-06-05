@@ -2,7 +2,7 @@ Name:Armed and Armored
 ManaCost:1 W
 Types:Instant
 A:SP$ AnimateAll | Cost$ 1 W | Types$ Creature,Artifact | ValidCards$ Vehicle.YouCtrl | SubAbility$ ChooseDwarf | StackDescription$ Vehicles {p:You} controls become artifact creatures until end of turn. | SpellDescription$ Vehicles you control become artifact creatures until end of turn. Choose a Dwarf you control. Attach any number of Equipment you control to it.
-SVar:ChooseDwarf:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Dwarf.YouCtrl | ChoiceTitle$ Choose a Dwarf you control | StackDescription$ {p:You} chooses a Dwarf they control and attaches any number of Equipment they control to it. | ImprintChosen$ True | SubAbility$ ChooseEquipment
+SVar:ChooseDwarf:DB$ ChooseCard | Defined$ You | Mandatory$ True | Choices$ Dwarf.YouCtrl | ChoiceTitle$ Choose a Dwarf you control | StackDescription$ {p:You} chooses a Dwarf they control and attaches any number of Equipment they control to it. | ImprintChosen$ True | SubAbility$ ChooseEquipment
 SVar:ChooseEquipment:DB$ ChooseCard | Defined$ You | MinAmount$ 0 | Amount$ X | Choices$ Equipment.YouCtrl | StackDescription$ None | ChoiceTitle$ Choose any number of Equipment you control | ForgetChosen$ True | SubAbility$ DeployDwarf
 SVar:DeployDwarf:DB$ RepeatEach | RepeatSubAbility$ ArmDwarf | RepeatCards$ Card.ChosenCard | SubAbility$ DBCleanup
 SVar:ArmDwarf:DB$ Attach | Object$ Remembered | Defined$ Imprinted | StackDescription$ None

@@ -3,7 +3,7 @@ ManaCost:3 W
 Types:Creature Vampire Cleric
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target creature an opponent controls until CARDNAME leaves the battlefield.
-SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | ConditionPresent$ Card.Self | UntilHostLeavesPlay$ True | RememberChanged$ True
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | ConditionPresent$ Card.Self | Duration$ UntilHostLeavesPlay | RememberChanged$ True
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, target Vampire gets +X/+X until end of turn, where X is the power of the exiled card.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Permanent.Vampire | TgtPrompt$ Select target Vampire | NumAtt$ X | NumDef$ X
 SVar:X:Remembered$CardPower

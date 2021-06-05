@@ -162,6 +162,9 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
      * @return a boolean.
      */
     public boolean matchesValid(final Object o, final String[] valids, final Card srcCard) {
+        if (srcCard == null) {
+            return false;
+        }
         return matchesValid(o, valids, srcCard, srcCard.getController());
     }
 
@@ -188,11 +191,15 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         return matchesValid(o, valids, getHostCard());
     }
 
-    public boolean matchesValidParam(String param, final Object o) {
-        if (hasParam(param) && !matchesValid(o, getParam(param).split(","))) {
+    public boolean matchesValidParam(String param, final Object o, final Card srcCard) {
+        if (hasParam(param) && !matchesValid(o, getParam(param).split(","), srcCard)) {
             return false;
         }
         return true;
+    }
+
+    public boolean matchesValidParam(String param, final Object o) {
+        return matchesValidParam(param, o, getHostCard());
     }
 
     /**
@@ -341,7 +348,6 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
             }
             list = CardLists.getValidCards(list, sIsPresent.split(","), this.getHostCard().getController(), this.getHostCard(), this);
 
-
             final String rightString = presentCompare.substring(2);
             int right = AbilityUtils.calculateAmount(getHostCard(), rightString, this);
             final int left = list.size();
@@ -434,7 +440,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         }
 
         if (params.containsKey("WerewolfTransformCondition")) {
-            if (!CardUtil.getLastTurnCast("Card", this.getHostCard()).isEmpty()) {
+            if (!CardUtil.getLastTurnCast("Card", this.getHostCard(), this).isEmpty()) {
                 return false;
             }
         }

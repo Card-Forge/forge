@@ -155,16 +155,16 @@ public class CountersPutEffect extends SpellAbilityEffect {
             }
             Player chooser = activator;
             if (sa.hasParam("Chooser")) {
-                List<Player> choosers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Chooser"), sa);
+                List<Player> choosers = AbilityUtils.getDefinedPlayers(card, sa.getParam("Chooser"), sa);
                 if (choosers.isEmpty()) {
                     return;
                 }
                 chooser = choosers.get(0);
             }
 
-            int n = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParamOrDefault("ChoiceAmount",
+            int n = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("ChoiceAmount",
                     "1"), sa);
-            int m = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParamOrDefault("MinChoiceAmount",
+            int m = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("MinChoiceAmount",
                     sa.getParamOrDefault("ChoiceAmount", "1")), sa);
 
             // no choices allowed
@@ -405,10 +405,10 @@ public class CountersPutEffect extends SpellAbilityEffect {
         Player placer = activator;
         if (sa.hasParam("Placer")) {
             final String pstr = sa.getParam("Placer");
-            placer = AbilityUtils.getDefinedPlayers(sa.getHostCard(), pstr, sa).get(0);
+            placer = AbilityUtils.getDefinedPlayers(card, pstr, sa).get(0);
         }
 
-        int counterAmount = AbilityUtils.calculateAmount(sa.getHostCard(), amount, sa);
+        int counterAmount = AbilityUtils.calculateAmount(card, amount, sa);
 
         GameEntityCounterTable table = new GameEntityCounterTable();
 
@@ -422,7 +422,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
             List<String> keywords = Arrays.asList(sa.getParam("SharedKeywords").split(" & "));
             List<ZoneType> zones =  ZoneType.listValueOf(sa.getParam("SharedKeywordsZone"));
             String[] restrictions = sa.hasParam("SharedRestrictions") ? sa.getParam("SharedRestrictions").split(",") : new String[]{"Card"};
-            keywords = CardFactoryUtil.sharedKeywords(keywords, restrictions, zones, sa.getHostCard());
+            keywords = CardFactoryUtil.sharedKeywords(keywords, restrictions, zones, card);
             for (String k : keywords) {
                 resolvePerType(sa, placer, CounterType.getType(k), counterAmount, table);
             }

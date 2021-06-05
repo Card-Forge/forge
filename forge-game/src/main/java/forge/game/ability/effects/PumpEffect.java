@@ -39,7 +39,7 @@ public class PumpEffect extends SpellAbilityEffect {
         final Game game = host.getGame();
         //if host is not on the battlefield don't apply
         // Suspend should does Affect the Stack
-        if ((sa.hasParam("UntilLoseControlOfHost") || sa.hasParam("UntilHostLeavesPlay"))
+        if (("UntilHostLeavesPlay".equals(sa.getParam("Duration")) || "UntilLoseControlOfHost".equals(sa.getParam("Duration")))
                 && !(host.isInPlay() || host.isInZone(ZoneType.Stack))) {
             return;
         }
@@ -83,7 +83,7 @@ public class PumpEffect extends SpellAbilityEffect {
             addLeaveBattlefieldReplacement(gameCard, sa, sa.getParam("LeaveBattlefield"));
         }
 
-        if (!sa.hasParam("Permanent")) {
+        if (!"Permanent".equals(sa.getParam("Duration"))) {
             // If not Permanent, remove Pumped at EOT
             final GameCommand untilEOT = new GameCommand() {
                 private static final long serialVersionUID = -42244224L;
@@ -91,9 +91,8 @@ public class PumpEffect extends SpellAbilityEffect {
                 @Override
                 public void run() {
                     gameCard.removePTBoost(timestamp, 0);
-                    boolean updateText = false;
-                    updateText = gameCard.removeCanBlockAny(timestamp) || updateText;
-                    updateText = gameCard.removeCanBlockAdditional(timestamp) || updateText;
+                    boolean updateText = gameCard.removeCanBlockAny(timestamp);
+                    updateText |= gameCard.removeCanBlockAdditional(timestamp);
 
                     if (keywords.size() > 0) {
 
@@ -131,7 +130,7 @@ public class PumpEffect extends SpellAbilityEffect {
             p.addChangedKeywords(keywords, ImmutableList.of(), timestamp);
         }
 
-        if (!sa.hasParam("Permanent")) {
+        if (!"Permanent".equals(sa.getParam("Duration"))) {
             // If not Permanent, remove Pumped at EOT
             final GameCommand untilEOT = new GameCommand() {
                 private static final long serialVersionUID = -32453460L;
@@ -142,31 +141,6 @@ public class PumpEffect extends SpellAbilityEffect {
                 }
             };
             addUntilCommand(sa, untilEOT);
-        }
-    }
-
-    private static void addUntilCommand(final SpellAbility sa, GameCommand untilEOT) {
-        final Card host = sa.getHostCard();
-        final Game game = host.getGame();
-
-        if (sa.hasParam("UntilEndOfCombat")) {
-            game.getEndOfCombat().addUntil(untilEOT);
-        } else if (sa.hasParam("UntilYourNextUpkeep")) {
-            game.getUpkeep().addUntil(sa.getActivatingPlayer(), untilEOT);
-        } else if (sa.hasParam("UntilHostLeavesPlay")) {
-            host.addLeavesPlayCommand(untilEOT);
-        } else if (sa.hasParam("UntilHostLeavesPlayOrEOT")) {
-            host.addLeavesPlayCommand(untilEOT);
-            game.getEndOfTurn().addUntil(untilEOT);
-        } else if (sa.hasParam("UntilLoseControlOfHost")) {
-            host.addLeavesPlayCommand(untilEOT);
-            host.addChangeControllerCommand(untilEOT);
-        } else if (sa.hasParam("UntilYourNextTurn")) {
-            game.getCleanup().addUntil(sa.getActivatingPlayer(), untilEOT);
-        } else if (sa.hasParam("UntilUntaps")) {
-            host.addUntapCommand(untilEOT);
-        } else {
-            game.getEndOfTurn().addUntil(untilEOT);
         }
     }
 
@@ -245,7 +219,7 @@ public class PumpEffect extends SpellAbilityEffect {
                 sb.append(" each combat ");
             }
 
-            if (!sa.hasParam("Permanent")) {
+            if (!"Permanent".equals(sa.getParam("Duration"))) {
                 sb.append("until end of turn.");
             } else {
                 sb.append(".");

@@ -1,0 +1,15 @@
+Name:Drizzt Do'Urden
+Nickname:Drizzt
+ManaCost:3 G W
+Types:Legendary Creature Elf Ranger
+PT:3/3
+K:Double Strike
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create Guenhwyvar, a legendary 4/1 green Cat creature token with trample.
+SVar:TrigToken:DB$ Token | TokenScript$ guenhwyvar
+T:Mode$ ChangesZone | ValidCard$ Creature.powerGTX | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature dies, if it had power greater than NICKNAME's power, put a number of +1/+1 counters on NICKNAME equal to the difference.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ Z
+SVar:X:Count$CardPower
+SVar:Y:TriggeredCard$CardPower
+SVar:Z:SVar$Y/Minus.X
+DeckHas:Ability$Token & Ability$Counters
+Oracle:Double strike\nWhen Drizzt Do'Urden enters the battlefield, create Guenhwyvar, a legendary 4/1 green Cat creature token with trample.\nWhenever a creature dies, if it had power greater than Drizzt's power, put a number of +1/+1 counters on Drizzt equal to the difference.

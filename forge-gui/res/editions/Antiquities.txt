@@ -11,106 +11,106 @@ BoosterBox=60
 Foil=NotSupported
 
 [cards]
-C Amulet of Kroog
-R Argivian Archaeologist
-C Argivian Blacksmith
-C Argothian Pixies
-C Argothian Treefolk
-U Armageddon Clock
-C Artifact Blast
-C Artifact Possession
-C Artifact Ward
-U Ashnod's Altar
-U Ashnod's Battle Gear
-U Ashnod's Transmogrant
-C Atog
-C Battering Ram
-R Bronze Tablet
-R Candelabra of Tawnos
-U Circle of Protection: Artifacts
-U Citanul Druid
-C Clay Statue
-R Clockwork Avian
-R Colossus of Sardia
-R Coral Helm
-C Crumble
-U Cursed Rack
-U Damping Field
-U Detonate
-C Drafna's Restoration
-C Dragon Engine
-U Dwarven Weaponsmith
-U Energy Flux
-U Feldon's Cane
-R Gaea's Avenger
-U Gate to Phyrexia
-U Goblin Artisans
-R Golgothian Sylex
-C Grapeshot Catapult
-U Haunting Wind
-R Hurkyl's Recall
-U Ivory Tower
-U Jalum Tome
-U Martyrs of Korlis
-U Mightstone
-U Millstone
-R Mishra's Factory
-R Mishra's Factory
-U Mishra's Factory
-R Mishra's Factory
-R Mishra's War Machine
-R Mishra's Workshop
-R Obelisk of Undoing
-U Onulet
-C Orcish Mechanics
-C Ornithopter
-C Phyrexian Gremlins
-U Power Artifact
-U Powerleech
-C Priest of Yawgmoth
-U Primal Clay
-U Rakalite
-C Reconstruction
-C Reverse Polarity
-U Rocket Launcher
-C Sage of Lat-Nam
-R Shapeshifter
-R Shatterstorm
-C Staff of Zegon
-R Strip Mine
-R Strip Mine
-R Strip Mine
-U Strip Mine
-U Su-Chi
-C Tablet of Epityr
-R Tawnos's Coffin
-U Tawnos's Wand
-U Tawnos's Weaponry
-R Tetravus
-U The Rack
-U Titania's Song
-U Transmute Artifact
-R Triskelion
-R Urza's Avenger
-C Urza's Chalice
-C Urza's Mine
-U Urza's Mine
-C Urza's Mine
-U Urza's Mine
-R Urza's Miter
-U Urza's Power Plant
-C Urza's Power Plant
-C Urza's Power Plant
-U Urza's Power Plant
-U Urza's Tower
-U Urza's Tower
-C Urza's Tower
-U Urza's Tower
-U Wall of Spears
-U Weakstone
-U Xenic Poltergeist
-R Yawgmoth Demon
-C Yotian Soldier
+36 C Amulet of Kroog
+1 R Argivian Archaeologist
+2 C Argivian Blacksmith
+29 C Argothian Pixies
+30 C Argothian Treefolk
+37 U Armageddon Clock
+22 C Artifact Blast
+15 C Artifact Possession
+3 C Artifact Ward
+38 U Ashnod's Altar
+39 U Ashnod's Battle Gear
+40 U Ashnod's Transmogrant
+23 C Atog
+41 C Battering Ram
+42 R Bronze Tablet
+43 R Candelabra of Tawnos
+4 U Circle of Protection: Artifacts
+31 U Citanul Druid
+44 C Clay Statue
+45 R Clockwork Avian
+46 R Colossus of Sardia
+47 R Coral Helm
+32 C Crumble
+48 U Cursed Rack
+5 U Damping Field
+24 U Detonate
+8 C Drafna's Restoration
+49 C Dragon Engine
+25 U Dwarven Weaponsmith
+9 U Energy Flux
+50 U Feldon's Cane
+33 R Gaea's Avenger
+16 U Gate to Phyrexia
+26 U Goblin Artisans
+51 R Golgothian Sylex
+52 C Grapeshot Catapult
+17 U Haunting Wind
+10 R Hurkyl's Recall
+53 U Ivory Tower
+54 U Jalum Tome
+6 U Martyrs of Korlis
+55 U Mightstone
+56 U Millstone
+80c R Mishra's Factory
+80b R Mishra's Factory
+80a U Mishra's Factory
+80d R Mishra's Factory
+57 R Mishra's War Machine
+81 R Mishra's Workshop
+58 R Obelisk of Undoing
+59 U Onulet
+27 C Orcish Mechanics
+60 C Ornithopter
+18 C Phyrexian Gremlins
+11 U Power Artifact
+34 U Powerleech
+19 C Priest of Yawgmoth
+61 U Primal Clay
+62 U Rakalite
+12 C Reconstruction
+7 C Reverse Polarity
+63 U Rocket Launcher
+13 C Sage of Lat-Nam
+64 R Shapeshifter
+28 R Shatterstorm
+65 C Staff of Zegon
+82d R Strip Mine
+82b R Strip Mine
+82c R Strip Mine
+82a U Strip Mine
+66 U Su-Chi
+67 C Tablet of Epityr
+68 R Tawnos's Coffin
+69 U Tawnos's Wand
+70 U Tawnos's Weaponry
+71 R Tetravus
+72 U The Rack
+35 U Titania's Song
+14 U Transmute Artifact
+73 R Triskelion
+74 R Urza's Avenger
+75 C Urza's Chalice
+83c C Urza's Mine
+83b U Urza's Mine
+83a C Urza's Mine
+83d U Urza's Mine
+76 R Urza's Miter
+84b U Urza's Power Plant
+84a C Urza's Power Plant
+84c C Urza's Power Plant
+84d U Urza's Power Plant
+85c U Urza's Tower
+85b U Urza's Tower
+85a C Urza's Tower
+85d U Urza's Tower
+77 U Wall of Spears
+78 U Weakstone
+20 U Xenic Poltergeist
+21 R Yawgmoth Demon
+79 C Yotian Soldier
 
 [tokens]
 c_1_1_a_tetravite_flying_noenchant

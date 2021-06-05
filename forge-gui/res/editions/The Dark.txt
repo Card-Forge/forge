@@ -11,122 +11,122 @@ BoosterBox=60
 Foil=NotSupported
 
 [cards]
-U Amnesia
-U Angry Mob
-R Apprentice Wizard
-C Ashes to Ashes
-R Ball Lightning
-U Banshee
-R Barl's Cage
-R Blood Moon
-U Blood of the Martyr
-C Bog Imp
-C Bog Rats
-U Bone Flute
-U Book of Rass
-C Brainwash
-U Brothers of Fire
-C Carnivorous Plant
-U Cave People
-R City of Shadows
-R Cleansing
-U Coal Golem
-U Curse Artifact
-R Dance of Many
-C Dark Heart of the Wood
-U Dark Sphere
-C Deep Water
-U Diabolic Machine
-C Drowned
-C Dust to Dust
-U Eater of the Dead
-U Electric Eel
-U Elves of Deep Shadow
-C Erosion
-R Eternal Flame
-R Exorcist
-U Fasting
-U Fellwar Stone
-C Festival
-U Fire Drake
-U Fire and Brimstone
-C Fissure
-U Flood
-U Fountain of Youth
-R Frankenstein's Monster
-C Gaea's Touch
-C Ghost Ship
-C Giant Shark
-C Goblin Caves
-C Goblin Digging Team
-C Goblin Hero
-C Goblin Rock Sled
-C Goblin Shrine
-R Goblin Wizard
-C Goblins of the Flarg
-R Grave Robbers
-R Hidden Path
-C Holy Light
-R Inferno
-C Inquisition
-R Knights of Thorn
-C Land Leeches
-R Leviathan
-U Living Armor
-R Lurker
-R Mana Clash
-R Mana Vortex
-C Marsh Gas
-C Marsh Goblins
-C Marsh Viper
-R Martyr's Cry
-U Maze of Ith
-U Merfolk Assassin
-R Mind Bomb
-C Miracle Worker
-C Morale
-C Murk Dwellers
-R Nameless Race
-U Necropolis
-R Niall Silvain
-U Orc General
-U People of the Woods
-C Pikemen
-R Preacher
-R Psychic Allergy
-R Rag Man
-U Reflecting Mirror
-C Riptide
-U Runesword
-R Safe Haven
-C Savaen Elves
-U Scarecrow
-R Scarwood Bandits
-C Scarwood Goblins
-U Scarwood Hag
-C Scavenger Folk
-R Season of the Witch
-U Sisters of the Flame
-U Skull of Orm
-R Sorrow's Path
-U Spitting Slug
-C Squire
-U Standing Stones
-R Stone Calendar
-C Sunken City
-U Tangle Kelp
-U The Fallen
-U Tivadar's Crusade
-U Tormod's Crypt
-U Tower of Coireall
-R Tracker
-U Uncle Istvan
-C Venom
-U Wand of Ith
-U War Barge
-C Water Wurm
-U Whippoorwill
-R Witch Hunter
-C Word of Binding
-R Worms of the Earth
-R Wormwood Treefolk
+20 U Amnesia
+1 U Angry Mob
+21 R Apprentice Wizard
+39 C Ashes to Ashes
+57 R Ball Lightning
+40 U Banshee
+96 R Barl's Cage
+58 R Blood Moon
+2 U Blood of the Martyr
+41 C Bog Imp
+42 C Bog Rats
+97 U Bone Flute
+98 U Book of Rass
+3 C Brainwash
+59 U Brothers of Fire
+75 C Carnivorous Plant
+60 U Cave People
+116 R City of Shadows
+4 R Cleansing
+99 U Coal Golem
+43 U Curse Artifact
+22 R Dance of Many
+95 C Dark Heart of the Wood
+100 U Dark Sphere
+23 C Deep Water
+101 U Diabolic Machine
+24 C Drowned
+5 C Dust to Dust
+44 U Eater of the Dead
+25 U Electric Eel
+76 U Elves of Deep Shadow
+26 C Erosion
+61 R Eternal Flame
+6 R Exorcist
+7 U Fasting
+102 U Fellwar Stone
+8 C Festival
+9 U Fire and Brimstone
+62 U Fire Drake
+63 C Fissure
+27 U Flood
+103 U Fountain of Youth
+45 R Frankenstein's Monster
+77 C Gaea's Touch
+28 C Ghost Ship
+29 C Giant Shark
+64 C Goblin Caves
+65 C Goblin Digging Team
+66 C Goblin Hero
+67 C Goblin Rock Sled
+68 C Goblin Shrine
+70 C Goblins of the Flarg
+69 R Goblin Wizard
+46 R Grave Robbers
+78 R Hidden Path
+10 C Holy Light
+71 R Inferno
+47 C Inquisition
+11 R Knights of Thorn
+79 C Land Leeches
+30 R Leviathan
+104 U Living Armor
+80 R Lurker
+72 R Mana Clash
+31 R Mana Vortex
+48 C Marsh Gas
+93 C Marsh Goblins
+81 C Marsh Viper
+12 R Martyr's Cry
+117 U Maze of Ith
+32 U Merfolk Assassin
+33 R Mind Bomb
+13 C Miracle Worker
+14 C Morale
+49 C Murk Dwellers
+50 R Nameless Race
+105 U Necropolis
+82 R Niall Silvain
+73 U Orc General
+83 U People of the Woods
+15 C Pikemen
+16 R Preacher
+34 R Psychic Allergy
+51 R Rag Man
+106 U Reflecting Mirror
+35 C Riptide
+107 U Runesword
+118 R Safe Haven
+84 C Savaen Elves
+108 U Scarecrow
+85 R Scarwood Bandits
+94 C Scarwood Goblins
+86 U Scarwood Hag
+87 C Scavenger Folk
+52 R Season of the Witch
+74 U Sisters of the Flame
+109 U Skull of Orm
+119 R Sorrow's Path
+88 U Spitting Slug
+17 C Squire
+110 U Standing Stones
+111 R Stone Calendar
+36 C Sunken City
+37 U Tangle Kelp
+53 U The Fallen
+18 U Tivadar's Crusade
+112 U Tormod's Crypt
+113 U Tower of Coireall
+89 R Tracker
+54 U Uncle Istvan
+90 C Venom
+114 U Wand of Ith
+115 U War Barge
+38 C Water Wurm
+91 U Whippoorwill
+19 R Witch Hunter
+55 C Word of Binding
+56 R Worms of the Earth
+92 R Wormwood Treefolk

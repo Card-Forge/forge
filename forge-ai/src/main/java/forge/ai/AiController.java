@@ -34,6 +34,7 @@ import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.ExploreAi;
 import forge.ai.ability.LearnAi;
 import forge.ai.simulation.SpellAbilityPicker;
+import forge.card.CardStateName;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.deck.CardPool;
@@ -46,6 +47,7 @@ import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.GameEntity;
 import forge.game.GlobalRuleChange;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellApiBased;
@@ -78,6 +80,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.replacement.ReplaceMoved;
 import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementLayer;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.LandAbility;
@@ -307,6 +310,8 @@ public class AiController {
             }
 
             exSA.setTrigger(tr);
+            // need to set TriggeredObject
+            exSA.setTriggeringObject(AbilityKey.Card, card);
 
             // for trigger test, need to ignore the conditions
             SpellAbilityCondition cons = exSA.getConditions();
@@ -432,17 +437,22 @@ public class AiController {
                     }
                 }
 
-                // don't play the land if it has cycling and enough lands are available
-                final FCollectionView<SpellAbility> spellAbilities = c.getSpellAbilities();
-
                 final CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
                 CardCollection lands = new CardCollection(battlefield);
                 lands.addAll(hand);
                 lands = CardLists.filter(lands, CardPredicates.Presets.LANDS);
                 int maxCmcInHand = Aggregates.max(hand, CardPredicates.Accessors.fnGetCmc);
-                for (final SpellAbility sa : spellAbilities) {
-                    if (sa.isCycling()) {
-                        if (lands.size() >= Math.max(maxCmcInHand, 6)) {
+
+                if (lands.size() >= Math.max(maxCmcInHand, 6)) {
+                    // don't play MDFC land if other side is spell and enough lands are available
+                    if (!c.isLand() || (c.isModal() && !c.getState(CardStateName.Modal).getType().isLand())) {
+                        return false;
+                    }
+
+                    // don't play the land if it has cycling and enough lands are available
+                    final FCollectionView<SpellAbility> spellAbilities = c.getSpellAbilities();
+                    for (final SpellAbility sa : spellAbilities) {
+                        if (sa.isCycling()) {
                             return false;
                         }
                     }
@@ -503,20 +513,35 @@ public class AiController {
 
         //try to skip lands that enter the battlefield tapped
         if (!nonLandsInHand.isEmpty()) {
-            CardCollection nonTappeddLands = new CardCollection();
+            CardCollection nonTappedLands = new CardCollection();
             for (Card land : landList) {
-                // Is this the best way to check if a land ETB Tapped?
-                if (land.hasSVar("ETBTappedSVar")) {
+                // check replacement effects if land would enter tapped or not
+                final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(land);
+                repParams.put(AbilityKey.Origin, land.getZone().getZoneType());
+                repParams.put(AbilityKey.Destination, ZoneType.Battlefield);
+                repParams.put(AbilityKey.Source, land);
+
+                boolean foundTapped = false;
+                for (ReplacementEffect re : player.getGame().getReplacementHandler().getReplacementList(ReplacementType.Moved, repParams, ReplacementLayer.Other)) {
+                    SpellAbility reSA = re.ensureAbility();
+                    if (reSA == null || !ApiType.Tap.equals(reSA.getApi())) {
+                        continue;
+                    }
+                    reSA.setActivatingPlayer(reSA.getHostCard().getController());
+                    if (reSA.metConditions()) {
+                        foundTapped = true;
+                        break;
+                    }
+                }
+
+                if (foundTapped) {
                     continue;
                 }
-                // Glacial Fortress and friends
-                if (land.hasSVar("ETBCheckSVar") && CardFactoryUtil.xCount(land, land.getSVar("ETBCheckSVar")) == 0) {
-                    continue;
-                }
-                nonTappeddLands.add(land);
+
+                nonTappedLands.add(land);
             }
-            if (!nonTappeddLands.isEmpty()) {
-                landList = nonTappeddLands;
+            if (!nonTappedLands.isEmpty()) {
+                landList = nonTappedLands;
             }
         }
 
@@ -587,8 +612,7 @@ public class AiController {
             SpellAbility currentSA = sa;
             sa.setActivatingPlayer(player);
             // check everything necessary
-            
-            
+
             AiPlayDecision opinion = canPlayAndPayFor(currentSA);
             //PhaseHandler ph = game.getPhaseHandler();
             // System.out.printf("Ai thinks '%s' of %s @ %s %s >>> \n", opinion, sa, Lang.getPossesive(ph.getPlayerTurn().getName()), ph.getPhase());
@@ -1301,15 +1325,6 @@ public class AiController {
     }
 
     public boolean confirmStaticApplication(Card hostCard, GameEntity affected, String logic, String message) {
-        if (logic.equalsIgnoreCase("ProtectFriendly")) {
-            final Player controller = hostCard.getController();
-            if (affected instanceof Player) {
-                return !((Player) affected).isOpponentOf(controller);
-            }
-            if (affected instanceof Card) {
-                return !((Card) affected).getController().isOpponentOf(controller);
-            }
-        }
         return true;
     }
 
@@ -1408,8 +1423,6 @@ public class AiController {
     private List<SpellAbility> singleSpellAbilityList(SpellAbility sa) {
         if (sa == null) { return null; }
 
-        // System.out.println("Chosen to play: " + sa);
-
         final List<SpellAbility> abilities = Lists.newArrayList();
         abilities.add(sa);
         return abilities;
@@ -1453,6 +1466,13 @@ public class AiController {
                         || player.cantLoseForZeroOrLessLife() ) {
                     if (!game.getPhaseHandler().is(PhaseType.MAIN1) || !isSafeToHoldLandDropForMain2(land)) {
                         final List<SpellAbility> abilities = Lists.newArrayList();
+
+                        // TODO extend this logic to evaluate MDFC with both sides land
+                        // this can only happen if its a MDFC land
+                        if (!land.isLand()) {
+                            land.setState(CardStateName.Modal, true);
+                            land.setBackSide(true);
+                        }
 
                         LandAbility la = new LandAbility(land, player, null);
                         la.setCardState(land.getCurrentState());
@@ -1704,10 +1724,8 @@ public class AiController {
         for (int i = 0; i < numToExile; i++) {
             Card chosen = null;
             for (final Card c : grave) { // Exile noncreatures first in
-                // case we can revive. Might
-                // wanna do some additional
-                // checking here for Flashback
-                // and the like.
+                // case we can revive. Might wanna do some additional
+                // checking here for Flashback and the like.
                 if (!c.isCreature()) {
                     chosen = c;
                     break;
@@ -1746,12 +1764,21 @@ public class AiController {
      * @param sa the sa
      * @return true, if successful
      */
-    public final boolean aiShouldRun(final ReplacementEffect effect, final SpellAbility sa) {
+    public final boolean aiShouldRun(final ReplacementEffect effect, final SpellAbility sa, GameEntity affected) {
         Card hostCard = effect.getHostCard();
         if (hostCard.hasAlternateState()) {
             hostCard = game.getCardState(hostCard);
         }
 
+        if (effect.hasParam("AILogic") && effect.getParam("AILogic").equalsIgnoreCase("ProtectFriendly")) {
+            final Player controller = hostCard.getController();
+            if (affected instanceof Player) {
+                return !((Player) affected).isOpponentOf(controller);
+            }
+            if (affected instanceof Card) {
+                return !((Card) affected).getController().isOpponentOf(controller);
+            }
+        }
         if (effect.hasParam("AICheckSVar")) {
             System.out.println("aiShouldRun?" + sa);
             final String svarToCheck = effect.getParam("AICheckSVar");
@@ -1766,7 +1793,7 @@ public class AiController {
                     compareTo = Integer.parseInt(strCmpTo);
                 } catch (final Exception ignored) {
                     if (sa == null) {
-                        compareTo = CardFactoryUtil.xCount(hostCard, hostCard.getSVar(strCmpTo));
+                        compareTo = AbilityUtils.calculateAmount(hostCard, hostCard.getSVar(strCmpTo), effect);
                     } else {
                         compareTo = AbilityUtils.calculateAmount(hostCard, hostCard.getSVar(strCmpTo), sa);
                     }
@@ -1776,7 +1803,7 @@ public class AiController {
             int left = 0;
 
             if (sa == null) {
-                left = CardFactoryUtil.xCount(hostCard, hostCard.getSVar(svarToCheck));
+                left = AbilityUtils.calculateAmount(hostCard, svarToCheck, effect);
             } else {
                 left = AbilityUtils.calculateAmount(hostCard, svarToCheck, sa);
             }
@@ -1866,11 +1893,13 @@ public class AiController {
         } else if ("LowestLoseLife".equals(logic)) {
             return MyRandom.getRandom().nextInt(Math.min(player.getLife() / 3, player.getWeakestOpponent().getLife())) + 1;
         } else if ("HighestLoseLife".equals(logic)) {
-            return MyRandom.getRandom().nextInt(Math.max(player.getLife() / 3, player.getWeakestOpponent().getLife())) + 1;
+            return Math.min(player.getLife() -1,MyRandom.getRandom().nextInt(Math.max(player.getLife() / 3, player.getWeakestOpponent().getLife())) + 1);
         } else if ("HighestGetCounter".equals(logic)) {
             return MyRandom.getRandom().nextInt(3);
         } else if (source.hasSVar("EnergyToPay")) {
             return AbilityUtils.calculateAmount(source, source.getSVar("EnergyToPay"), sa);
+        } else if ("Vermin".equals(logic)) {
+            return MyRandom.getRandom().nextInt(Math.max(player.getLife() - 5, 0));
         }
         return max;
     }
@@ -1964,7 +1993,6 @@ public class AiController {
         }
         return result;
     }
-
 
     // this is where the computer cheats
     // changes AllZone.getComputerPlayer().getZone(Zone.Library)
@@ -2245,10 +2273,8 @@ public class AiController {
             }
         }
 
-        // AI logic for choosing which replacement effect to apply
-        // happens here.
+        // AI logic for choosing which replacement effect to apply happens here.
         return Iterables.getFirst(list, null);
     }
     
 }
-

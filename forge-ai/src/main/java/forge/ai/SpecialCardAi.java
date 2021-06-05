@@ -39,7 +39,6 @@ import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardUtil;
@@ -379,7 +378,7 @@ public class SpecialCardAi {
             }
 
             // Do not activate if damage will be prevented
-            if (source.staticDamagePrevention(predictedPT.getLeft(), source, true, true) == 0) {
+            if (source.staticDamagePrevention(predictedPT.getLeft(), 0, source, true) == 0) {
                 return false;
             }
 
@@ -1085,7 +1084,7 @@ public class SpecialCardAi {
                 return false;
             }
             String prominentColor = ComputerUtilCard.getMostProminentColor(ai.getCardsIn(ZoneType.Battlefield));
-            int devotion = CardFactoryUtil.xCount(sa.getHostCard(), "Count$Devotion." + prominentColor);
+            int devotion = AbilityUtils.calculateAmount(sa.getHostCard(), "Count$Devotion." + prominentColor, sa);
             int activationCost = sa.getPayCosts().getTotalMana().getCMC() + (sa.getPayCosts().hasTapCost() ? 1 : 0);
 
             // do not use this SA if devotion to most prominent color is less than its own activation cost + 1 (to actually get advantage)

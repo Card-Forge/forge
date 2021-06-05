@@ -3,7 +3,6 @@ package forge.game.ability.effects;
 import java.util.Arrays;
 import java.util.List;
 
-import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -143,6 +142,12 @@ public class CloneEffect extends SpellAbilityEffect {
 
         tgtCard.updateStateForView();
 
+        // when clone is itself, cleanup from old abilities
+        if (host.equals(tgtCard)) {
+            tgtCard.clearImprintedCards();
+            tgtCard.clearRemembered();
+        }
+
         // check if clone is now an Aura that needs to be attached
         if (tgtCard.isAura() && !tgtCard.isInZone(ZoneType.Battlefield)) {
             AttachEffect.attachAuraOnIndirectEnterBattlefield(tgtCard);
@@ -150,7 +155,7 @@ public class CloneEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("Duration")) {
             final Card cloneCard = tgtCard;
-            // if clone is temporary, target needs old values back after
+            // if clone is temporary, target needs old values back after (keep Death-Mask Duplicant working)
             final Iterable<Card> clonedImprinted = new CardCollection(tgtCard.getImprintedCards());
             final Iterable<Object> clonedRemembered = new FCollection<>(tgtCard.getRemembered());
 
@@ -164,31 +169,19 @@ public class CloneEffect extends SpellAbilityEffect {
                         cloneCard.clearImprintedCards();
                         cloneCard.clearRemembered();
                         // restore original Remembered and Imprinted, ignore cards from players who lost
-                        cloneCard.addImprintedCards(Iterables.filter(clonedImprinted, Predicates.not(CardPredicates.inZone(ZoneType.None))));
+                        cloneCard.addImprintedCards(Iterables.filter(clonedImprinted, CardPredicates.ownerLives()));
                         cloneCard.addRemembered(Iterables.filter(clonedRemembered, Player.class));
-                        cloneCard.addRemembered(Iterables.filter(Iterables.filter(clonedRemembered, Card.class),  CardPredicates.ownerLives()));
+                        cloneCard.addRemembered(Iterables.filter(Iterables.filter(clonedRemembered, Card.class), CardPredicates.ownerLives()));
                         cloneCard.updateStateForView();
                         game.fireEvent(new GameEventCardStatsChanged(cloneCard));
                     }
                 }
             };
 
-            final String duration = sa.getParam("Duration");
-            if (duration.equals("UntilEndOfTurn")) {
-                game.getEndOfTurn().addUntil(unclone);
-            }
-            else if (duration.equals("UntilYourNextTurn")) {
-                game.getCleanup().addUntil(host.getController(), unclone);
-            }
-            else if (duration.equals("UntilUnattached")) {
-                sa.getHostCard().addUnattachCommand(unclone);
-            }
-            else if (duration.equals("UntilFacedown")) {
-                sa.getHostCard().addFacedownCommand(unclone);
-            }
+            addUntilCommand(sa, unclone);
         }
 
-        //Clear Remembered and Imprint lists
+        // now we can also cleanup in case target was another card
         tgtCard.clearRemembered();
         tgtCard.clearImprintedCards();
 

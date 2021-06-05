@@ -2,8 +2,7 @@ Name:Bonds of Faith
 ManaCost:1 W
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ SpecificCard
+A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ SpecificCard | AIValid$ Human
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+Human | AddPower$ 2 | AddToughness$ 2 | Description$ Enchanted creature gets +2/+2 as long as it's a Human.
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+nonHuman | AddHiddenKeyword$ CARDNAME can't attack or block. | Description$ Otherwise, it can't attack or block.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/bonds_of_faith.jpg
 Oracle:Enchant creature\nEnchanted creature gets +2/+2 as long as it's a Human. Otherwise, it can't attack or block.

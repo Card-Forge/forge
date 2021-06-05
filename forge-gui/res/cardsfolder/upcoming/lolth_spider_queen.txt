@@ -1,0 +1,16 @@
+Name:Lolth, Spider Queen
+ManaCost:3 B B
+Types:Legendary Planeswalker Lolth
+Loyalty:4
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature you control dies, put a loyalty counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ LOYALTY | CounterNum$ 1
+A:AB$ Draw | Cost$ AddCounter<0/LOYALTY> | NumCards$ 1 | SubAbility$ DBLoseLife1 | Planeswalker$ True | SpellDescription$ You draw a card and you lose 1 life.
+SVar:DBLoseLife1:DB$ LoseLife | LifeAmount$ 1
+A:AB$ Token | Cost$ SubCounter<3/LOYALTY> | TokenAmount$ 2 | TokenScript$ b_2_1_spider_menace_reach | TokenOwner$ You | Planeswalker$ True | SpellDescription$ Create two 2/1 black Spider creature tokens with menace and reach.
+A:AB$ Effect | Cost$ SubCounter<8/LOYALTY> | Name$ Emblem - Lolth, Spider Queen | Triggers$ TrigLoseLife | Planeswalker$ True | Ultimate$ True | Duration$ Permanent | AILogic$ Main1 | SpellDescription$ You get an emblem with "Whenever an opponent is dealt combat damage by one or more creatures you control, if that player lost less than 8 life this turn, they lose life equal to the difference."
+SVar:TrigLoseLife:Mode$ DamageDoneOnce | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | CombatDamage$ True | CheckSVar$ X | SVarCompare$ LT8 | Execute$ LoseLife | TriggerZones$ Command | TriggerDescription$ Whenever an opponent is dealt combat damage by one or more creatures you control, if that player lost less than 8 life this turn, they lose life equal to the difference.
+SVar:LoseLife:DB$ LoseLife | Defined$ TriggeredTarget | LifeAmount$ Y | SubAbility$ Cleanup
+SVar:Cleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:TriggeredTarget$LifeLostThisTurn
+SVar:Y:SVar$X/NMinus.8
+Oracle:Whenever a creature you control dies, put a loyalty counter on Lolth, Spider Queen.\n[0]: You draw a card and you lose 1 life.\n[−3]: Create two 2/1 black Spider creature tokens with menace and reach.\n[−8]: You get an emblem with "Whenever an opponent is dealt combat damage by one or more creatures you control, if that player lost less than 8 life this turn, they lose life equal to the difference."

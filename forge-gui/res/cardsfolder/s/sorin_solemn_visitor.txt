@@ -2,7 +2,7 @@ Name:Sorin, Solemn Visitor
 ManaCost:2 W B
 Types:Legendary Planeswalker Sorin
 Loyalty:4
-A:AB$ PumpAll | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | KW$ Lifelink | UntilYourNextTurn$ True | SpellDescription$ Until your next turn, creatures you control get +1/+0 and gain lifelink.
+A:AB$ PumpAll | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | KW$ Lifelink | Duration$ UntilYourNextTurn | SpellDescription$ Until your next turn, creatures you control get +1/+0 and gain lifelink.
 A:AB$ Token | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | LegacyImage$ b 2 2 vampire flying ktk | TokenOwner$ You | TokenScript$ b_2_2_vampire_flying | SpellDescription$ Create a 2/2 black Vampire creature token with flying.
 A:AB$ Effect | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Sorin, Solemn Visitor | Triggers$ BOTTrig | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "At the beginning of each opponent's upkeep, that player sacrifices a creature."
 SVar:BOTTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.Opponent | TriggerZones$ Command | Execute$ SorinSac | TriggerDescription$ At the beginning of each opponent's upkeep, that player sacrifices a creature.

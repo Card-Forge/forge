@@ -84,6 +84,12 @@ public final class CardRules implements ICardCharacteristics {
         boolean isReminder = false;
         boolean isSymbol = false;
         String oracleText = face.getOracleText();
+        // CR 903.4 colors defined by its characteristic-defining abilities
+        for (String staticAbility : face.getStaticAbilities()) {
+            if (staticAbility.contains("CharacteristicDefining$ True") && staticAbility.contains("SetColor$ All")) {
+                res |= MagicColor.ALL_COLORS;
+            }
+        }
         int len = oracleText.length();
         for(int i = 0; i < len; i++) {
             char c = oracleText.charAt(i); // This is to avoid needless allocations performed by toCharArray()
@@ -388,7 +394,6 @@ public final class CardRules implements ICardCharacteristics {
                             this.removedFromNonCommanderDecks = "NonCommander".equalsIgnoreCase(value);
                         }
                     } else if ("AlternateMode".equals(key)) {
-                        //System.out.println(faces[curFace].getName());
                         this.altMode = CardSplitType.smartValueOf(value);
                     } else if ("ALTERNATE".equals(key)) {
                         this.curFace = 1;
@@ -539,7 +544,6 @@ public final class CardRules implements ICardCharacteristics {
             @Override
             public final ManaCostShard next() {
                 final String unparsed = st.nextToken();
-                // System.out.println(unparsed);
                 if (StringUtils.isNumeric(unparsed)) {
                     this.genericCost += Integer.parseInt(unparsed);
                     return null;
@@ -555,7 +559,7 @@ public final class CardRules implements ICardCharacteristics {
              */
             @Override
             public void remove() {
-            } // unsuported
+            } // unsupported
         }
     }
 

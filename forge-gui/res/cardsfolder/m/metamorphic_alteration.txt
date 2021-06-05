@@ -4,8 +4,7 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature
 K:ETBReplacement:Other:ChooseCreature
-SVar:ChooseCreature:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Creature.Other | SpellDescription$ As CARDNAME enters the battlefield, choose a creature.
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Static$ True | Origin$ Any | Destination$ Battlefield | Execute$ DBClone | TriggerDescription$ Enchanted creature is a copy of the chosen creature.
-SVar:DBClone:DB$ Clone | Defined$ ChosenCard | CloneTarget$ Enchanted | Duration$ UntilUnattached | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+SVar:ChooseCreature:DB$ ChooseCard | Defined$ You | Mandatory$ True | Choices$ Creature.Other | SpellDescription$ As CARDNAME enters the battlefield, choose a creature.
+T:Mode$ Attached | ValidSource$ Card.Self | Static$ True | Execute$ DBClone | TriggerDescription$ Enchanted creature is a copy of the chosen creature.
+SVar:DBClone:DB$ Clone | Defined$ ChosenCard | CloneTarget$ Enchanted | Duration$ UntilUnattached
 Oracle:Enchant creature\nAs Metamorphic Alteration enters the battlefield, choose a creature.\nEnchanted creature is a copy of the chosen creature.

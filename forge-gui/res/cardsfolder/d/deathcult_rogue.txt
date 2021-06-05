@@ -2,6 +2,5 @@ Name:Deathcult Rogue
 ManaCost:1 UB UB
 Types:Creature Human Rogue
 PT:2/2
-K:CantBeBlockedBy Creature.nonRogue
-SVar:Picture:http://www.wizards.com/global/images/magic/general/deathcult_rogue.jpg
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.nonRogue | Description$ CARDNAME can't be blocked except by Rogues.
 Oracle:Deathcult Rogue can't be blocked except by Rogues.

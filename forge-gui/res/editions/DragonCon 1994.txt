@@ -6,4 +6,4 @@ Border=Black
 Type=Other
 
 [cards]
-S Nalathni Dragon
+1 S Nalathni Dragon

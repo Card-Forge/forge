@@ -5,6 +5,6 @@ PT:5/5
 K:Defender
 K:Trample
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigDebuff | TriggerDescription$ When CARDNAME blocks, it loses defender.
-SVar:TrigDebuff:DB$Debuff | Keywords$ Defender | Defined$ TriggeredBlocker | Permanent$ True
+SVar:TrigDebuff:DB$Debuff | Keywords$ Defender | Defined$ TriggeredBlocker | Duration$ Permanent
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elder_land_wurm.jpg
 Oracle:Defender, trample\nWhen Elder Land Wurm blocks, it loses defender.

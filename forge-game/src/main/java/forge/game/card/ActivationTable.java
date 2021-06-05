@@ -26,7 +26,7 @@ public class ActivationTable extends ForwardingTable<SpellAbility, Optional<Stat
         if (root.isTrigger()) {
             original = root.getTrigger().getOverridingAbility();
         } else {
-            original = ObjectUtils.defaultIfNull(root.getOriginalAbility(), sa);
+            original = ObjectUtils.defaultIfNull(root.getOriginalAbility(), root);
         }
         return original;
     }
@@ -34,9 +34,12 @@ public class ActivationTable extends ForwardingTable<SpellAbility, Optional<Stat
     public void add(SpellAbility sa) {
         SpellAbility root = sa.getRootAbility();
         SpellAbility original = getOriginal(sa);
-        Optional<StaticAbility> st = Optional.fromNullable(root.getGrantorStatic());
 
-        delegate().put(original, st, ObjectUtils.defaultIfNull(get(original, st), 0) + 1);
+        if (original != null) {
+            Optional<StaticAbility> st = Optional.fromNullable(root.getGrantorStatic());
+
+            delegate().put(original, st, ObjectUtils.defaultIfNull(get(original, st), 0) + 1);
+        }
     }
 
     public Integer get(SpellAbility sa) {

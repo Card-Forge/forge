@@ -1,0 +1,14 @@
+Name:Asmoranomardicadaistinaculdacar
+ManaCost:no cost
+Types:Legendary Creature Human Wizard
+Colors:black,red
+PT:3/3
+SVar:AltCost:Cost$ BR | CheckSVar$ X | Description$ As long as you've discarded a card this turn, you may pay {B/R} to cast this spell.
+SVar:X:PlayerCountPropertyYou$CardsDiscardedThisTurn
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a card named The Underworld Cookbook, reveal it, put it into your hand, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.namedThe Underworld Cookbook | ChangeNum$ 1 | ShuffleNonMandatory$ True
+A:AB$ DealDamage | Cost$ Sac<2/Food> | ValidTgts$ Creature | TgtPrompt$ Select target creature | DamageSource$ Targeted | NumDmg$ 6 | SpellDescription$ Target creature deals 6 damage to itself.
+DeckHints:Type$Discard
+DeckHas:Ability$Sacrifice
+DeckNeeds:Name$The Underworld Cookbook
+Oracle:As long as you've discarded a card this turn, you may pay {B/R} to cast this spell.\nWhen Asmoranomardicadaistinaculdacar enters the battlefield, you may search your library for a card named The Underworld Cookbook, reveal it, put it into your hand, then shuffle.\nSacrifice two Foods: Target creature deals 6 damage to itself.

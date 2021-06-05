@@ -11,173 +11,173 @@ Foil=NotSupported
 ChaosDraftThemes=GRAVEYARD_MATTERS
 
 [cards]
-U AEther Flash
-U Abduction
-R Abeyance
-C Abjure
-R Aboroth
-C Abyssal Gatekeeper
-U Agonizing Memories
-R Alabaster Dragon
-C Alms
-R Ancestral Knowledge
-C Angelic Renewal
-C Apathy
-U Arctic Wolves
-C Ardent Militia
-U Argivian Find
-U Argivian Restoration
-U Aura of Silence
-R Avizoa
-U Barishi
-C Barrow Ghoul
-C Benalish Infantry
-C Benalish Knight
-C Benalish Missionary
-C Betrothed of Fire
-C Bloodrock Cyclops
-C Blossoming Wreath
-C Bogardan Firefiend
-C Boiling Blood
-R Bone Dancer
-R Bosium Strip
-C Briar Shield
-R Bubble Matrix
-U Buried Alive
-R Call of the Wild
-U Chimeric Sphere
-C Choking Vines
-U Cinder Giant
-C Cinder Wall
-U Circling Vultures
-U Cloud Djinn
-C Coils of the Medusa
-U Cone of Flame
-R Debt of Loyalty
-R Dense Foliage
-U Desperate Gambit
-U Dingus Staff
-C Disrupt
-R Doomsday
-U Downdraft
-C Duskrider Falcon
-C Dwarven Berserker
-R Dwarven Thaumaturgist
-C Empyrial Armor
-R Ertai's Familiar
-U Fallow Wurm
-U Familiar Ground
-C Fatal Blow
-R Fervor
-U Festering Evil
-C Fire Whip
-R Firestorm
-C Fit of Rage
-C Fledgling Djinn
-C Flux
-C Fog Elemental
-U Foriysian Brigade
-R Fungus Elemental
-U Gaea's Blessing
-R Gallowbraid
-U Gemstone Mine
-U Gerrard's Wisdom
-R Goblin Bomb
-U Goblin Grenadiers
-C Goblin Vandal
-C Guided Strike
-C Harvest Wurm
-C Haunting Misery
-R Heart of Bogardan
-R Heat Stroke
-C Heavy Ballista
-U Hidden Horror
-U Hurloon Shaman
-R Infernal Tribute
-R Inner Sanctum
-U Jabari's Banner
-C Jangling Automaton
-C Kithkin Armor
-U Lava Hounds
-C Lava Storm
-R Liege of the Hollows
-U Llanowar Behemoth
-C Llanowar Druid
-C Llanowar Sentinel
-R Lotus Vale
-C Mana Chains
-R Mana Web
-C Manta Ray
-R Maraxus of Keld
-U Master of Arms
-C Merfolk Traders
-C Mind Stone
-U Mischievous Poltergeist
-U Mistmoon Griffin
-R Morinfen
-R Mwonvuli Ooze
-C Nature's Kiss
-R Nature's Resurgence
-U Necratog
-U Noble Benefactor
-R Null Rod
-U Odylic Wraith
-C Ophidian
-U Orcish Settlers
-R Paradigm Shift
-R Peacekeeper
-R Pendrell Mists
-U Phantom Warrior
-C Phantom Wings
-U Phyrexian Furnace
-R Psychic Vortex
-C Razortooth Rats
-C Redwood Treefolk
-U Relearn
-U Revered Unicorn
-U Roc Hatchling
-C Rogue Elephant
-C Sage Owl
-C Sawtooth Ogre
-R Scorched Ruins
-R Serenity
-U Serra's Blessing
-U Serrated Biskelion
-C Shadow Rider
-C Shattered Crypt
-C Soul Shepherd
-R Southern Paladin
-C Spinning Darkness
-U Steel Golem
-U Strands of Night
-U Straw Golem
-C Striped Bears
-U Sylvan Hierophant
-R Tariff
-U Teferi's Veil
-C Tendrils of Despair
-U Thran Forge
-R Thran Tome
-C Thunderbolt
-R Thundermare
-U Timid Drake
-C Tolarian Drake
-R Tolarian Entrancer
-R Tolarian Serpent
-U Touchstone
-R Tranquil Grove
-C Uktabi Efreet
-R Urborg Justice
-R Urborg Stalker
-U Veteran Explorer
-C Vitalize
-U Vodalian Illusionist
-U Volunteer Reserves
-R Wave of Terror
-R Well of Knowledge
-R Winding Canyons
-R Xanthic Statue
-C Zombie Scavengers
+30 U Abduction
+1 R Abeyance
+31 C Abjure
+117 R Aboroth
+59 C Abyssal Gatekeeper
+88 U Aether Flash
+60 U Agonizing Memories
+2 R Alabaster Dragon
+3 C Alms
+32 R Ancestral Knowledge
+4 C Angelic Renewal
+33 C Apathy
+118 U Arctic Wolves
+5 C Ardent Militia
+6 U Argivian Find
+34 U Argivian Restoration
+7 U Aura of Silence
+35 R Avizoa
+119 U Barishi
+61 C Barrow Ghoul
+8 C Benalish Infantry
+9 C Benalish Knight
+10 C Benalish Missionary
+89 C Betrothed of Fire
+90 C Bloodrock Cyclops
+120 C Blossoming Wreath
+91 C Bogardan Firefiend
+92 C Boiling Blood
+62 R Bone Dancer
+147 R Bosium Strip
+121 C Briar Shield
+146 R Bubble Matrix
+63 U Buried Alive
+122 R Call of the Wild
+148 U Chimeric Sphere
+123 C Choking Vines
+93 U Cinder Giant
+94 C Cinder Wall
+64 U Circling Vultures
+36 U Cloud Djinn
+65 C Coils of the Medusa
+95 U Cone of Flame
+11 R Debt of Loyalty
+124 R Dense Foliage
+96 U Desperate Gambit
+149 U Dingus Staff
+37 C Disrupt
+66 R Doomsday
+125 U Downdraft
+12 C Duskrider Falcon
+97 C Dwarven Berserker
+98 R Dwarven Thaumaturgist
+13 C Empyrial Armor
+38 R Ertai's Familiar
+126 U Fallow Wurm
+127 U Familiar Ground
+67 C Fatal Blow
+99 R Fervor
+68 U Festering Evil
+101 R Firestorm
+100 C Fire Whip
+102 C Fit of Rage
+69 C Fledgling Djinn
+39 C Flux
+40 C Fog Elemental
+14 U Foriysian Brigade
+128 R Fungus Elemental
+129 U Gaea's Blessing
+70 R Gallowbraid
+164 U Gemstone Mine
+15 U Gerrard's Wisdom
+103 R Goblin Bomb
+104 U Goblin Grenadiers
+105 C Goblin Vandal
+16 C Guided Strike
+130 C Harvest Wurm
+71 C Haunting Misery
+106 R Heart of Bogardan
+107 R Heat Stroke
+17 C Heavy Ballista
+72 U Hidden Horror
+108 U Hurloon Shaman
+73 R Infernal Tribute
+18 R Inner Sanctum
+150 U Jabari's Banner
+151 C Jangling Automaton
+19 C Kithkin Armor
+109 U Lava Hounds
+110 C Lava Storm
+131 R Liege of the Hollows
+132 U Llanowar Behemoth
+133 C Llanowar Druid
+134 C Llanowar Sentinel
+165 R Lotus Vale
+41 C Mana Chains
+152 R Mana Web
+42 C Manta Ray
+111 R Maraxus of Keld
+20 U Master of Arms
+43 C Merfolk Traders
+153 C Mind Stone
+74 U Mischievous Poltergeist
+21 U Mistmoon Griffin
+75 R Morinfen
+135 R Mwonvuli Ooze
+136 C Nature's Kiss
+137 R Nature's Resurgence
+76 U Necratog
+44 U Noble Benefactor
+154 R Null Rod
+77 U Odylic Wraith
+45 C Ophidian
+112 U Orcish Settlers
+46 R Paradigm Shift
+22 R Peacekeeper
+47 R Pendrell Mists
+48 U Phantom Warrior
+49 C Phantom Wings
+155 U Phyrexian Furnace
+50 R Psychic Vortex
+78 C Razortooth Rats
+138 C Redwood Treefolk
+51 U Relearn
+23 U Revered Unicorn
+113 U Roc Hatchling
+139 C Rogue Elephant
+52 C Sage Owl
+114 C Sawtooth Ogre
+166 R Scorched Ruins
+24 R Serenity
+25 U Serra's Blessing
+156 U Serrated Biskelion
+79 C Shadow Rider
+80 C Shattered Crypt
+26 C Soul Shepherd
+27 R Southern Paladin
+81 C Spinning Darkness
+157 U Steel Golem
+82 U Strands of Night
+158 U Straw Golem
+140 C Striped Bears
+141 U Sylvan Hierophant
+28 R Tariff
+53 U Teferi's Veil
+83 C Tendrils of Despair
+159 U Thran Forge
+160 R Thran Tome
+115 C Thunderbolt
+116 R Thundermare
+54 U Timid Drake
+55 C Tolarian Drake
+56 R Tolarian Entrancer
+57 R Tolarian Serpent
+161 U Touchstone
+142 R Tranquil Grove
+143 C Uktabi Efreet
+84 R Urborg Justice
+85 R Urborg Stalker
+144 U Veteran Explorer
+145 C Vitalize
+58 U Vodalian Illusionist
+29 U Volunteer Reserves
+86 R Wave of Terror
+162 R Well of Knowledge
+167 R Winding Canyons
+163 R Xanthic Statue
+87 C Zombie Scavengers
 
 [tokens]
 g_1_1_squirrel

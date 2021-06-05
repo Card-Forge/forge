@@ -133,6 +133,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_FILTER_LANDS_BY_COLOR_IDENTITY("true"),
         UI_ALLOW_ESC_TO_END_TURN ("false"),
         UI_ALT_PLAYERINFOLAYOUT ("false"),
+        UI_ALT_PLAYERZONETABS ("false"),
         UI_PRESELECT_PREVIOUS_ABILITY_ORDER ("false"),
         UI_AUTO_YIELD_MODE (ForgeConstants.AUTO_YIELD_PER_ABILITY),
         UI_SHOW_STORM_COUNT_IN_PROMPT ("false"),
@@ -157,6 +158,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_DEFAULT_FONT_SIZE("12"),
     	UI_SELECT_FROM_CARD_DISPLAYS("true"),
         UI_FOR_TOUCHSCREN("false"),
+        UI_SWITCH_STATES_DECKVIEW("Always"),
 
         UI_VIBRATE_ON_LIFE_LOSS("true"),
         UI_VIBRATE_ON_LONG_PRESS("true"),

@@ -30,12 +30,13 @@ import forge.util.Localizer;
 import forge.util.WaitCallback;
 
 public class AutoUpdater {
-    private final String SNAPSHOT_VERSION_INDEX = "https://snapshots.cardforge.org/";
-    private final String SNAPSHOT_VERSION_URL = "https://snapshots.cardforge.org/version.txt";
-    private final String SNAPSHOT_PACKAGE = "https://snapshots.cardforge.org/latest/";
-    private final String RELEASE_VERSION_URL = "https://releases.cardforge.org/forge/forge-gui-desktop/version.txt";
-    private final String RELEASE_PACKAGE = "https://releases.cardforge.org/latest/";
-    private final String RELEASE_MAVEN_METADATA = "https://releases.cardforge.org/forge/forge-gui-desktop/maven-metadata.xml";
+    private final String SNAPSHOT_VERSION_INDEX = "https://downloads.cardforge.org/dailysnapshots/";
+    private final String SNAPSHOT_VERSION_URL = SNAPSHOT_VERSION_INDEX + "version.txt";
+    private final String SNAPSHOT_PACKAGE = SNAPSHOT_VERSION_INDEX + "latest/";
+    private final String RELEASE_VERSION_INDEX = "https://releases.cardforge.org/";
+    private final String RELEASE_VERSION_URL = RELEASE_VERSION_INDEX + "forge/forge-gui-desktop/version.txt";
+    private final String RELEASE_PACKAGE = RELEASE_VERSION_INDEX + "latest/";
+    private final String RELEASE_MAVEN_METADATA = RELEASE_VERSION_INDEX + "forge/forge-gui-desktop/maven-metadata.xml";
     private static final boolean VERSION_FROM_METADATA = true;
     private static final String TMP_DIR = "tmp/";
     private static final Localizer localizer = Localizer.getInstance();

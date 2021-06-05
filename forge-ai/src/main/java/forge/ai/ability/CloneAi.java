@@ -56,7 +56,7 @@ public class CloneAi extends SpellAbilityAi {
                 bFlag |= (!c.isCreature() && !c.isTapped() && !(c.getTurnInZone() == phase.getTurn()));
 
                 // for creatures that could be improved (like Figure of Destiny)
-                if (c.isCreature() && (sa.hasParam("Permanent") || (!c.isTapped() && !c.isSick()))) {
+                if (c.isCreature() && (!sa.hasParam("Duration") || (!c.isTapped() && !c.isSick()))) {
                     int power = -5;
                     if (sa.hasParam("Power")) {
                         power = AbilityUtils.calculateAmount(source, sa.getParam("Power"), sa);
@@ -72,8 +72,7 @@ public class CloneAi extends SpellAbilityAi {
 
             }
 
-            if (!bFlag) { // All of the defined stuff is cloned, not very
-                          // useful
+            if (!bFlag) { // All of the defined stuff is cloned, not very useful
                 return false;
             }
         } else {
@@ -246,7 +245,7 @@ public class CloneAi extends SpellAbilityAi {
         // Combat_Begin step
         if (!ph.is(PhaseType.COMBAT_BEGIN)
                 && ph.isPlayerTurn(ai) && !SpellAbilityAi.isSorcerySpeed(sa)
-                && !sa.hasParam("ActivationPhases") && !sa.hasParam("Permanent")) {
+                && !sa.hasParam("ActivationPhases") && sa.hasParam("Duration")) {
             return false;
         }
 
@@ -257,6 +256,6 @@ public class CloneAi extends SpellAbilityAi {
         }
 
         // don't activate during main2 unless this effect is permanent
-        return !ph.is(PhaseType.MAIN2) || sa.hasParam("Permanent");
+        return !ph.is(PhaseType.MAIN2) || !sa.hasParam("Duration");
     }
 }
