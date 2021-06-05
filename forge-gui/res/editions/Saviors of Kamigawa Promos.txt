@@ -5,5 +5,5 @@ Name=Saviors of Kamigawa Promos
 Type=Promos
 
 [cards]
-18 R Kiyomaro, First to Stand
-99 R Ghost-Lit Raider
+18★ R Kiyomaro, First to Stand
+99★ R Ghost-Lit Raider

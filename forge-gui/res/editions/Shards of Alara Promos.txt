@@ -5,4 +5,4 @@ Name=Shards of Alara Promos
 Type=Promos
 
 [cards]
-154 M Ajani Vengeant
+154★ M Ajani Vengeant

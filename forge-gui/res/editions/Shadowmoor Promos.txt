@@ -5,5 +5,5 @@ Name=Shadowmoor Promos
 Type=Promos
 
 [cards]
-183 R Demigod of Revenge
-222 R Vexing Shusher
+183★ R Demigod of Revenge
+222★ R Vexing Shusher
