@@ -5,7 +5,7 @@ Name=Coldsnap Promos
 Type=Promos
 
 [cards]
-101 R Allosaurus Rider
+101★ R Allosaurus Rider
 
 [tokens]
 marit_lage
