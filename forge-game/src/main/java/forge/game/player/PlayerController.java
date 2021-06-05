@@ -108,6 +108,7 @@ public abstract class PlayerController {
     public abstract List<PaperCard> chooseCardsYouWonToAddToDeck(List<PaperCard> losses);
 
     public abstract Map<Card, Integer> assignCombatDamage(Card attacker, CardCollectionView blockers, int damageDealt, GameEntity defender, boolean overrideOrder);
+    public abstract Map<GameEntity, Integer> divideShield(Card effectSource, Map<GameEntity, Integer> affected, int shieldAmount);
 
     public abstract Integer announceRequirements(SpellAbility ability, String announce);
     public abstract CardCollectionView choosePermanentsToSacrifice(SpellAbility sa, int min, int max, CardCollectionView validTargets, String message);

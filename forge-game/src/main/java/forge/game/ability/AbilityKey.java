@@ -57,6 +57,7 @@ public enum AbilityKey {
     DefendingPlayer("DefendingPlayer"),
     Destination("Destination"),
     Devoured("Devoured"),
+    DividedShieldAmount("DividedShieldAmount"),
     EchoPaid("EchoPaid"),
     EffectOnly("EffectOnly"),
     Exploited("Exploited"),

@@ -1,0 +1,11 @@
+Name:Harm's Way
+ManaCost:W
+Types:Instant
+A:SP$ ChooseSource | Cost$ W | Choices$ Card,Emblem | AILogic$ NeedsPrevention | SubAbility$ DBEffect | StackDescription$ SpellDescription | SpellDescription$ The next 2 damage that a source of your choice would deal to you and/or permanents you control this turn is dealt to any target instead.
+SVar:DBEffect:DB$ Effect | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target to redirect damage to | ReplacementEffects$ ReDamage | RememberObjects$ Targeted | SubAbility$ DBCleanup
+SVar:ReDamage:Event$ DamageDone | ActiveZones$ Command | ValidTarget$ You,Permanent.YouCtrl | ValidSource$ Card.ChosenCard,Emblem.ChosenCard | ReplaceWith$ SplitDamage | DamageTarget$ Remembered | Description$ The next 2 damage that a source of your choice would deal to you and/or permanents you control this turn is dealt to any target instead.
+SVar:SplitDamage:DB$ ReplaceSplitDamage | DamageTarget$ Remembered | VarName$ ShieldAmount | DivideShield$ True
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+SVar:ShieldAmount:Number$2
+AI:RemoveDeck:All
+Oracle:The next 2 damage that a source of your choice would deal to you and/or permanents you control this turn is dealt to any target instead.

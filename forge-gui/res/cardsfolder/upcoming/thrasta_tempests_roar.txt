@@ -1,0 +1,11 @@
+Name:Thrasta, Tempest's Roar
+ManaCost:10 G G
+Types:Legendary Creature Dinosaur
+PT:7/7
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {3} less to cast for each other spell cast this turn.
+SVar:X:Count$ThisTurnCast_Card.Other/Times.3
+K:Trample
+K:Haste
+K:Trample over planeswalkers
+S:Mode$ Continuous | Affected$ Card.Self+ThisTurnEntered | AddKeyword$ Hexproof | Description$ CARDNAME has hexproof as long as it entered the battlefield this turn.
+Oracle:This spell costs {3} less to cast for each other spell cast this turn.\nTrample, haste\nTrample over planeswalkers (This creature can deal excess combat damage to the controller of the planeswalker it’s attacking.)\nThrasta, Tempest’s Roar has hexproof as long as it entered the battlefield this turn.

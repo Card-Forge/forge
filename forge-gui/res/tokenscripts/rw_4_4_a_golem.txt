@@ -1,5 +1,5 @@
 Name:Golem
-Types:Creature Golem
+Types:Artifact Creature Golem
 Colors:red,white
 ManaCost:no cost
 PT:4/4

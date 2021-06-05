@@ -676,7 +676,6 @@ public class AiAttackController {
      * @return a {@link forge.game.combat.Combat} object.
      */
     public final void declareAttackers(final Combat combat) {
-
         if (this.attackers.isEmpty()) {
             return;
         }

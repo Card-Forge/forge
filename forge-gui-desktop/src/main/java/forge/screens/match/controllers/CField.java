@@ -23,10 +23,12 @@ import java.awt.event.MouseListener;
 
 import com.google.common.base.Function;
 
-import forge.Singletons;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
+import forge.gamemodes.match.input.Input;
+import forge.gamemodes.match.input.InputPayMana;
 import forge.gui.framework.ICDoc;
+import forge.player.PlayerControllerHuman;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.ZoneAction;
 import forge.screens.match.views.VField;
@@ -70,10 +72,14 @@ public class CField implements ICDoc {
 
         final Function<Byte, Boolean> manaAction = new Function<Byte, Boolean>() {
             @Override public final Boolean apply(final Byte colorCode) {
-                if (player.getHasPriority()) {
-                    final int oldMana = player.getMana(colorCode);
-                    matchUI.getGameController().useMana(colorCode.byteValue());
-                    return Boolean.valueOf(oldMana != player.getMana(colorCode));
+                if (matchUI.getGameController() instanceof PlayerControllerHuman) {
+                    final PlayerControllerHuman controller = (PlayerControllerHuman) matchUI.getGameController();
+                    final Input ipm = controller.getInputQueue().getInput();
+                    if (ipm instanceof InputPayMana && ipm.getOwner().equals(player)) {
+                        final int oldMana = player.getMana(colorCode);
+                        controller.useMana(colorCode.byteValue());
+                        return Boolean.valueOf(oldMana != player.getMana(colorCode));
+                    }
                 }
                 return Boolean.FALSE;
             }

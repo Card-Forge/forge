@@ -448,7 +448,9 @@ public class VAssignCombatDamage {
         }
         else {
             lethalDamage = Math.max(0, card.getLethalDamage());
-            if (attackerHasDeathtouch) {
+            if (card.getCurrentState().getType().isPlaneswalker()) {
+                lethalDamage = Integer.valueOf(card.getCurrentState().getLoyalty());
+            } else if (attackerHasDeathtouch) {
                 lethalDamage = Math.min(lethalDamage, 1);
             }
         }

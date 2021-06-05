@@ -81,9 +81,9 @@ import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 
 
-/** 
+/**
  * A prototype for player controller class
- * 
+ *
  * Handles phase skips for now.
  */
 public class PlayerControllerAi extends PlayerController {
@@ -94,11 +94,11 @@ public class PlayerControllerAi extends PlayerController {
 
         brains = new AiController(p, game);
     }
-    
+
     public void allowCheatShuffle(boolean value){
         brains.allowCheatShuffle(value);
     }
-    
+
     public void setUseSimulation(boolean value) {
         brains.setUseSimulation(value);
     }
@@ -132,6 +132,12 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
+    public Map<GameEntity, Integer> divideShield(Card effectSource, Map<GameEntity, Integer> affected, int shieldAmount) {
+        // TODO: AI current can't use this so this is not implemented.
+        return new HashMap<>();
+    }
+
+    @Override
     public Integer announceRequirements(SpellAbility ability, String announce) {
         // For now, these "announcements" are made within the AI classes of the appropriate SA effects
         if (ability.getApi() != null) {
@@ -157,7 +163,7 @@ public class PlayerControllerAi extends PlayerController {
                 case BidLife:
                     return 0;
                 default:
-                    return null;   
+                    return null;
             }
         }
         return null; // return incorrect value to indicate that
@@ -240,7 +246,7 @@ public class PlayerControllerAi extends PlayerController {
     public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message) {
         return getAi().confirmAction(sa, mode, message);
     }
-    
+
     @Override
     public boolean confirmBidAction(SpellAbility sa, PlayerActionConfirmMode mode, String string,
             int bid, Player winner) {
@@ -646,7 +652,7 @@ public class PlayerControllerAi extends PlayerController {
     public List<SpellAbility> chooseSpellAbilityToPlay() {
         return brains.chooseSpellAbilityToPlay();
     }
-    
+
     @Override
     public boolean playChosenSpellAbility(SpellAbility sa) {
         if (sa instanceof LandAbility) {
@@ -658,7 +664,7 @@ public class PlayerControllerAi extends PlayerController {
             ComputerUtil.handlePlayingSpellAbility(player, sa, getGame());
         }
         return true;
-    }    
+    }
 
     @Override
     public CardCollection chooseCardsToDiscardToMaximumHandSize(int numDiscard) {
@@ -711,7 +717,7 @@ public class PlayerControllerAi extends PlayerController {
     public int chooseNumber(SpellAbility sa, String title, int min, int max) {
         return brains.chooseNumber(sa, title, min, max);
     }
-    
+
     @Override
     public int chooseNumber(SpellAbility sa, String string, int min, int max, Map<String, Object> params) {
         ApiType api = sa.getApi();
@@ -814,7 +820,7 @@ public class PlayerControllerAi extends PlayerController {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see
      * forge.game.player.PlayerController#chooseBinary(forge.game.spellability.
      * SpellAbility, java.lang.String,
@@ -855,7 +861,7 @@ public class PlayerControllerAi extends PlayerController {
         }
         return sa.getChosenList();
     }
-    
+
     @Override
     public byte chooseColorAllowColorless(String message, Card card, ColorSet colors) {
         final String c = ComputerUtilCard.getMostProminentColor(player.getCardsIn(ZoneType.Hand));
@@ -901,7 +907,7 @@ public class PlayerControllerAi extends PlayerController {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see forge.game.player.PlayerController#chooseCounterType(java.util.List,
      * forge.game.spellability.SpellAbility, java.lang.String, java.util.Map)
      */
@@ -917,7 +923,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public boolean confirmPayment(CostPart costPart, String prompt, SpellAbility sa) {
-        return brains.confirmPayment(costPart); // AI is expected to know what it is paying for at the moment (otherwise add another parameter to this method) 
+        return brains.confirmPayment(costPart); // AI is expected to know what it is paying for at the moment (otherwise add another parameter to this method)
     }
 
     @Override
@@ -1105,7 +1111,7 @@ public class PlayerControllerAi extends PlayerController {
     public void revealAnte(String message, Multimap<Player, PaperCard> removedAnteCards) {
         // Ai won't understand that anyway
     }
-    
+
     @Override
     public Collection<? extends PaperCard> complainCardsCantPlayWell(Deck myDeck) {
         return brains.complainCardsCantPlayWell(myDeck);
@@ -1153,7 +1159,7 @@ public class PlayerControllerAi extends PlayerController {
                 return new HashMap<>();
             }
         }
-        
+
         //Do not convoke potential blockers until after opponent's attack
         final CardCollectionView blockers = ComputerUtilCard.getLikelyBlockers(ai, null);
         if ((ph.isPlayerTurn(ai) && ph.getPhase().isAfter(PhaseType.COMBAT_BEGIN)) ||

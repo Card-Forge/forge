@@ -253,6 +253,8 @@ public final class CardUtil {
         newCopy.setCounters(Maps.newHashMap(in.getCounters()));
 
         newCopy.setColor(in.determineColor().getColor());
+        newCopy.setPhasedOut(in.isPhasedOut());
+
         newCopy.setReceivedDamageFromThisTurn(in.getReceivedDamageFromThisTurn());
         newCopy.setDamageHistory(in.getDamageHistory());
         for (Card c : in.getBlockedThisTurn()) {

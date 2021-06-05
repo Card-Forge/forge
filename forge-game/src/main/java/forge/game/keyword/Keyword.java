@@ -153,6 +153,7 @@ public enum Keyword {
     SUSPEND("Suspend", Suspend.class, false, "Rather than cast this card from your hand, you may pay %s and exile it with {%d:time counter} on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost."),
     TOTEM_ARMOR("Totem armor", SimpleKeyword.class, true, "If enchanted permanent would be destroyed, instead remove all damage marked on it and destroy this Aura."),
     TRAMPLE("Trample", SimpleKeyword.class, true, "This creature can deal excess combat damage to the player or planeswalker it's attacking."),
+    TRAMPLE_OVER_PLANESWALKERS("Trample over planeswalkers", SimpleKeyword.class, true, "This creature can deal excess combat damage to the controller of the planeswalker it’s attacking."),
     TRANSFIGURE("Transfigure", KeywordWithCost.class, false, "%s, Sacrifice this creature: Search your library for a creature card with the same mana value as this creature and put that card onto the battlefield, then shuffle. Transfigure only as a sorcery."),
     TRANSMUTE("Transmute", KeywordWithCost.class, false, "%s, Discard this card: Search your library for a card with the same mana value as this card, reveal it, and put it into your hand, then shuffle. Transmute only as a sorcery."),
     TRIBUTE("Tribute", KeywordWithAmount.class, false, "As this creature enters the battlefield, an opponent of your choice may put {%d:+1/+1 counter} on it."),

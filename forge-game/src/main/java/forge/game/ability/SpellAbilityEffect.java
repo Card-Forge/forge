@@ -21,6 +21,7 @@ import forge.game.GameObject;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardUtil;
 import forge.game.card.CardZoneTable;
 import forge.game.combat.Combat;
 import forge.game.phase.PhaseType;
@@ -296,7 +297,7 @@ public abstract class SpellAbilityEffect {
         }
         delTrig.append("| TriggerDescription$ ").append(desc);
 
-        final Trigger trig = TriggerHandler.parseTrigger(delTrig.toString(), sa.getHostCard(), intrinsic);
+        final Trigger trig = TriggerHandler.parseTrigger(delTrig.toString(), CardUtil.getLKICopy(sa.getHostCard()), intrinsic);
         for (final Card c : crds) {
             trig.addRemembered(c);
 
