@@ -1,0 +1,15 @@
+Name:Refraction Trap
+ManaCost:3 W
+Types:Instant Trap
+SVar:AltCost:Cost$ W | CheckSVar$ X | SVarCompare$ GE1 | Description$ If an opponent cast a red instant or sorcery spell this turn, you may pay {W} rather than pay this spell's mana cost.
+A:SP$ ChooseSource | Cost$ 3 W | Choices$ Card,Emblem | AILogic$ NeedsPrevention | SubAbility$ DBEffect | StackDescription$ SpellDescription | SpellDescription$ Prevent the next 3 damage that a source of your choice would deal to you and/or permanents you control this turn. If damage is prevented this way, CARDNAME deals that much damage to any target.
+SVar:DBEffect:DB$ Effect | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target to deal prevented damage to | ReplacementEffects$ ReDamage | RememberObjects$ Targeted | SubAbility$ DBCleanup
+SVar:ReDamage:Event$ DamageDone | ActiveZones$ Command | ValidTarget$ You,Permanent.YouCtrl | ValidSource$ Card.ChosenCard,Emblem.ChosenCard | ReplaceWith$ PreventDamage | PreventionEffect$ NextN | Description$ Prevent the next 3 damage that a source of your choice would deal to you and/or permanents you control this turn. If damage is prevented this way, EFFECTSOURCE deals that much damage to any target.
+SVar:PreventDamage:DB$ ReplaceDamage | Amount$ ShieldAmount | DivideShield$ True | SubAbility$ DBDealDamage
+SVar:DBDealDamage:DB$ DealDamage | NumDmg$ Y | Defined$ Remembered | DamageSource$ EffectSource
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+SVar:X:Count$ThisTurnCast_Instant.Red+OppCtrl,Sorcery.Red+OppCtrl
+SVar:ShieldAmount:Number$3
+SVar:Y:ReplaceCount$DamageAmount
+AI:RemoveDeck:All
+Oracle:If an opponent cast a red instant or sorcery spell this turn, you may pay {W} rather than pay this spell's mana cost.\nPrevent the next 3 damage that a source of your choice would deal to you and/or permanents you control this turn. If damage is prevented this way, Refraction Trap deals that much damage to any target.

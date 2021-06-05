@@ -688,6 +688,7 @@ public class ReplacementHandler {
             ApiType apiType = null;
             SpellAbility bufferedSA = effectSA;
             boolean needRestoreSubSA = false;
+            boolean needDivideShield = false;
             boolean needChooseSource = false;
             int shieldAmount = 0;
             if (effectSA != null) {
@@ -701,7 +702,8 @@ public class ReplacementHandler {
                     }
                 }
 
-                // Determine if the prevent next N damage shield is large enough to replace all damage
+                // Determine if need to divide shield among affected entity and
+                // determine if the prevent next N damage shield is large enough to replace all damage
                 Map<String, String> mapParams = chosenRE.getMapParams();
                 if ((mapParams.containsKey("PreventionEffect") && mapParams.get("PreventionEffect").equals("NextN"))
                         || apiType == ApiType.ReplaceSplitDamage) {
@@ -711,15 +713,48 @@ public class ReplacementHandler {
                         shieldAmount = AbilityUtils.calculateAmount(effectSA.getHostCard(), effectSA.getParamOrDefault("VarName", "1"), effectSA);
                     }
                     int damageAmount = 0;
+                    boolean hasMultipleSource = false;
+                    boolean hasMultipleTarget = false;
+                    Card firstSource = null;
+                    GameEntity firstTarget = null;
                     for (Map<AbilityKey, Object> runParams : runParamList) {
                         // Only count damage that can be prevented
                         if (apiType == ApiType.ReplaceDamage && Boolean.TRUE.equals(runParams.get(AbilityKey.NoPreventDamage))) continue;
                         damageAmount += (int) runParams.get(AbilityKey.DamageAmount);
+                        if (firstSource == null) {
+                            firstSource = (Card) runParams.get(AbilityKey.DamageSource);
+                        } else if (!firstSource.equals(runParams.get(AbilityKey.DamageSource))) {
+                            hasMultipleSource = true;
+                        }
+                        if (firstTarget == null) {
+                            firstTarget = (GameEntity) runParams.get(AbilityKey.Affected);
+                        } else if (!firstTarget.equals(runParams.get(AbilityKey.Affected))) {
+                            hasMultipleTarget = true;
+                        }
                     }
-                    if (damageAmount > shieldAmount) {
-                        needChooseSource = true;
+                    if (damageAmount > shieldAmount && runParamList.size() > 1) {
+                        if (hasMultipleSource)
+                            needChooseSource = true;
+                        if (effectSA.hasParam("DivideShield") && hasMultipleTarget)
+                            needDivideShield = true;
                     }
                 }
+            }
+
+            // Ask the decider to divide shield among affected damage target
+            Map<GameEntity, Integer> shieldMap = null;
+            if (needDivideShield) {
+                Map<GameEntity, Integer> affected = new HashMap<>();
+                for (Map<AbilityKey, Object> runParams : runParamList) {
+                    GameEntity target = (GameEntity) runParams.get(AbilityKey.Affected);
+                    Integer damage = (Integer) runParams.get(AbilityKey.DamageAmount);
+                    if (!affected.containsKey(target)) {
+                        affected.put(target, damage);
+                    } else {
+                        affected.put(target, damage + affected.get(target));
+                    }
+                }
+                shieldMap = decider.getController().divideShield(chosenRE.getHostCard(), affected, shieldAmount);
             }
 
             // CR 615.7
@@ -735,23 +770,42 @@ public class ReplacementHandler {
                 while (shieldAmount > 0 && !sourcesToChooseFrom.isEmpty()) {
                     Card source = decider.getController().chooseSingleEntityForEffect(sourcesToChooseFrom, effectSA, choiceTitle, null);
                     sourcesToChooseFrom.remove(source);
-                    Map<AbilityKey, Object> runParams = null;
-                    for (Map<AbilityKey, Object> rp : runParamList) {
-                        if (source.equals(rp.get(AbilityKey.DamageSource))) {
-                            runParams = rp;
-                            break;
+                    Iterator<Map<AbilityKey, Object>> itr = runParamList.iterator();
+                    while (itr.hasNext()) {
+                        Map<AbilityKey, Object> runParams = itr.next();
+                        if (source.equals(runParams.get(AbilityKey.DamageSource))) {
+                            itr.remove();
+                            if (shieldMap != null) {
+                                GameEntity target = (GameEntity) runParams.get(AbilityKey.Affected);
+                                if (shieldMap.containsKey(target) && shieldMap.get(target) > 0) {
+                                    Integer dividedShieldAmount = shieldMap.get(target);
+                                    runParams.put(AbilityKey.DividedShieldAmount, dividedShieldAmount);
+                                    shieldAmount -= (int) dividedShieldAmount;
+                                } else {
+                                    continue;
+                                }
+                            } else {
+                                shieldAmount -= (int) runParams.get(AbilityKey.DamageAmount);
+                            }
+                            if (!runParams.containsKey(AbilityKey.ReplacementResultMap)) {
+                                Map<ReplacementEffect, ReplacementResult> resultMap = new HashMap<>();
+                                runParams.put(AbilityKey.ReplacementResultMap, resultMap);
+                            }
+                            runSingleReplaceDamageEffect(chosenRE, runParams, replaceCandidateMap, executedDamageMap, decider, damageMap, preventMap);
                         }
                     }
-                    runParamList.remove(runParams);
-                    shieldAmount -= (int) runParams.get(AbilityKey.DamageAmount);
-                    if (!runParams.containsKey(AbilityKey.ReplacementResultMap)) {
-                        Map<ReplacementEffect, ReplacementResult> resultMap = new HashMap<>();
-                        runParams.put(AbilityKey.ReplacementResultMap, resultMap);
-                    }
-                    runSingleReplaceDamageEffect(chosenRE, runParams, replaceCandidateMap, executedDamageMap, decider, damageMap, preventMap);
                 }
             } else {
                 for (Map<AbilityKey, Object> runParams : runParamList) {
+                    if (shieldMap != null) {
+                        GameEntity target = (GameEntity) runParams.get(AbilityKey.Affected);
+                        if (shieldMap.containsKey(target) && shieldMap.get(target) > 0) {
+                            Integer dividedShieldAmount = shieldMap.get(target);
+                            runParams.put(AbilityKey.DividedShieldAmount, dividedShieldAmount);
+                        } else {
+                            continue;
+                        }
+                    }
                     if (!runParams.containsKey(AbilityKey.ReplacementResultMap)) {
                         Map<ReplacementEffect, ReplacementResult> resultMap = new HashMap<>();
                         runParams.put(AbilityKey.ReplacementResultMap, resultMap);
