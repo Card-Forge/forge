@@ -192,7 +192,7 @@ public class PlayAi extends SpellAbilityAi {
 
                         spell = (Spell) spell.copyWithDefinedCost(abCost);
                     }
-                    if( AiPlayDecision.WillPlay == ((PlayerControllerAi)ai.getController()).getAi().canPlayFromEffectAI(spell, !isOptional, true)) {
+                    if (AiPlayDecision.WillPlay == ((PlayerControllerAi)ai.getController()).getAi().canPlayFromEffectAI(spell, !isOptional, true)) {
                         // Before accepting, see if the spell has a valid number of targets (it should at this point).
                         // Proceeding past this point if the spell is not correctly targeted will result
                         // in "Failed to add to stack" error and the card disappearing from the game completely.
