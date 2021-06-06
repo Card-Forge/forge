@@ -17,24 +17,23 @@
  */
 package forge.deck;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Lists;
+import forge.StaticData;
+import forge.card.CardDb;
+import forge.item.IPaperCard;
+import forge.item.PaperCard;
+import forge.util.ItemPool;
+import forge.util.ItemPoolSorter;
+import forge.util.MyRandom;
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.base.Predicate;
-import com.google.common.collect.Lists;
-
-import forge.StaticData;
-import forge.card.CardDb;
-import forge.item.PaperCard;
-import forge.util.ItemPool;
-import forge.util.ItemPoolSorter;
-import forge.util.MyRandom;
 
 
 public class CardPool extends ItemPool<PaperCard> {
@@ -61,16 +60,16 @@ public class CardPool extends ItemPool<PaperCard> {
                 this.add(splitCardName[0], splitCardName[1], Integer.parseInt(splitCardName[2]), amount);
             }
         } else {
-            this.add(cardName, null, -1, amount);
+            this.add(cardName, null, IPaperCard.DEFAULT_ART_INDEX, amount);
         }
     }
 
     public void add(final String cardName, final String setCode) {
-        this.add(cardName, setCode, -1, 1);
+        this.add(cardName, setCode, IPaperCard.DEFAULT_ART_INDEX, 1);
     }
 
     public void add(final String cardName, final String setCode, final int amount) {
-        this.add(cardName, setCode, -1, amount);
+        this.add(cardName, setCode, IPaperCard.DEFAULT_ART_INDEX, amount);
     }
 
     // NOTE: ART indices are "1" -based
