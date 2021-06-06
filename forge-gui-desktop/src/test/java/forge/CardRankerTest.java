@@ -1,13 +1,5 @@
 package forge;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.junit.Assert;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
-
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.gamemodes.limited.CardRanker;
@@ -15,6 +7,14 @@ import forge.gui.GuiBase;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.testng.AssertJUnit.assertEquals;
 
 @Test(timeOut = 1000, enabled = true)
 public class CardRankerTest {
@@ -37,10 +37,10 @@ public class CardRankerTest {
         list.add(c3);
 
         List<PaperCard> ranked = CardRanker.rankCardsInDeck(list);
-        Assert.assertEquals("Hero of Goma Fada", ranked.get(0).getName());
-        Assert.assertEquals("Makindi Patrol", ranked.get(1).getName());
-        Assert.assertEquals("Altar's Reap", ranked.get(2).getName());
-        Assert.assertEquals("Plains", ranked.get(3).getName());
+        assertEquals("Hero of Goma Fada", ranked.get(0).getName());
+        assertEquals("Makindi Patrol", ranked.get(1).getName());
+        assertEquals("Altar's Reap", ranked.get(2).getName());
+        assertEquals("Plains", ranked.get(3).getName());
     }
 
     /**
@@ -60,6 +60,6 @@ public class CardRankerTest {
             crr.parseLine(line);
         }
         // Don't care what the actual rarity is here.
-        return new PaperCard(crr.getCard(), "BFZ", CardRarity.Common, 0);
+        return new PaperCard(crr.getCard(), "BFZ", CardRarity.Common);
     }
 }
