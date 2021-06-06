@@ -2636,7 +2636,7 @@ public class ComputerUtil {
                 continue;
             }
             if (trigger.hasParam("ValidCard")) {
-                if (!card.isValid(trigger.getParam("ValidCard"), source.getController(), source, sa)) {
+                if (!card.isValid(trigger.getParam("ValidCard").split(","), source.getController(), source, sa)) {
                     continue;
                 }
             }
