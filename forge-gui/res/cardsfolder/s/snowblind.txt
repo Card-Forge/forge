@@ -3,15 +3,15 @@ ManaCost:3 G
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 3 G | ValidTgts$ Creature | AILogic$ Curse
-S:Mode$ Continuous | Affected$ Card.AttachedBy | CheckSVar$ CheckAttacking | AddPower$ AttackingX | AddToughness$ AttackingY | Description$ Enchanted creature gets -X/-Y. If that creature is attacking, X is the number of snow lands defending player controls. Otherwise, X is the number of snow lands its controller controls. Y is equal to X or to enchanted creature's toughness minus 1, whichever is smaller.
-S:Mode$ Continuous | Affected$ Card.AttachedBy | CheckSVar$ CheckAttacking | SVarCompare$ EQ0 | AddPower$ NotAttackingX | AddToughness$ NotAttackingY
+S:Mode$ Continuous | Affected$ Card.AttachedBy | CheckSVar$ CheckAttacking | AddPower$ -AttackingX | AddToughness$ -AttackingY | Description$ Enchanted creature gets -X/-Y. If that creature is attacking, X is the number of snow lands defending player controls. Otherwise, X is the number of snow lands its controller controls. Y is equal to X or to enchanted creature's toughness minus 1, whichever is smaller.
+S:Mode$ Continuous | Affected$ Card.AttachedBy | CheckSVar$ CheckAttacking | SVarCompare$ EQ0 | AddPower$ -NotAttackingX | AddToughness$ -NotAttackingY
 SVar:CheckAttacking:Count$Valid Card.AttachedBy+attacking
-SVar:AttackingX:Count$Valid Land.DefenderCtrl+Snow/Negative
-SVar:NotAttackingX:Count$Valid Land.Snow+EnchantedControllerCtrl/Negative
+SVar:AttackingX:Count$Valid Land.DefenderCtrl+Snow
+SVar:NotAttackingX:Count$Valid Land.Snow+EnchantedControllerCtrl
 SVar:EnchantedY:Enchanted$CardToughness/Minus.1
-SVar:EnchantedDef:SVar$EnchantedY/Negative
-SVar:AttackingY:SVar$EnchantedDef/LimitMin.AttackingX
-SVar:NotAttackingY:SVar$EnchantedDef/LimitMin.NotAttackingX
+SVar:EnchantedDef:SVar$EnchantedY
+SVar:AttackingY:SVar$EnchantedDef/LimitMax.AttackingX
+SVar:NotAttackingY:SVar$EnchantedDef/LimitMax.NotAttackingX
 AI:RemoveDeck:Random
 DeckNeeds:Type$Snow
 SVar:Picture:http://www.wizards.com/global/images/magic/general/snowblind.jpg

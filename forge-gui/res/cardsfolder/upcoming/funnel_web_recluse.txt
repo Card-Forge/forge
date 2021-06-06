@@ -1,5 +1,6 @@
 Name:Funnel-Web Recluse
 ManaCost:4 G
+PT:3/5
 Types:Creature Spider
 K:Reach
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ Morbid | SVarCompare$ GE1 | Execute$ TrigInvestigate | TriggerDescription$ Morbid — When CARDNAME enters the battlefield, if a creature died this turn, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
