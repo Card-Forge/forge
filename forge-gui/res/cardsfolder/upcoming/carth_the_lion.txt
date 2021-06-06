@@ -1,5 +1,5 @@
 Name:Carth the Lion
-ManaCost:3 B G
+ManaCost:2 B G
 Types:Legendary Creature Human Warrior
 PT:3/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ Whenever CARDNAME enters the battlefield or a planeswalker you control dies, look at the top seven cards of your library. You may reveal a planeswalker card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
