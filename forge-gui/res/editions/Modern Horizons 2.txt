@@ -255,6 +255,8 @@ ScryfallCode=MH2
 241 U Vectis Gloves
 242 R Void Mirror
 243 R Zabaz, the Glimmerwasp
+
+[special slot]
 244 R Arid Mesa
 245 C Darkmoss Bridge
 246 C Drossforge Bridge
@@ -315,6 +317,8 @@ ScryfallCode=MH2
 301 M Cabal Coffers
 302 U Mishra's Factory
 303 R Riptide Laboratory
+
+[alternate art]
 304 M Dakkon, Shadow Slayer
 305 M Geyadrone Dihada
 306 M Grist, the Hunger Tide
@@ -338,6 +342,8 @@ ScryfallCode=MH2
 324 M Sword of Hearth and Home
 325 M Cabal Coffers
 326 R Mishra's Factory
+
+[showcase]
 327 U Blossoming Calm
 328 R Esper Sentinel
 329 C Late to Dinner
@@ -392,6 +398,8 @@ ScryfallCode=MH2
 378 R Dermotaxi
 379 M Kaldra Compleat
 380 R Urza's Saga
+
+[alternate frame]
 381 C Blacksmith's Skill
 382 C Marble Gargoyle
 383 R Out of Time
@@ -453,6 +461,8 @@ ScryfallCode=MH2
 439 R Scalding Tarn
 440 R Verdant Catacombs
 441 R Yavimaya, Cradle of Growth
+
+[extended art]
 442 R Out of Time
 443 R Resurgent Belief
 444 R Sanctifier en-Vec
@@ -492,6 +502,8 @@ ScryfallCode=MH2
 478 R Scalding Tarn
 479 R Verdant Catacombs
 480 R Yavimaya, Cradle of Growth
+
+[promo]
 481 L Plains
 482 L Plains
 483 L Island
@@ -502,5 +514,103 @@ ScryfallCode=MH2
 488 L Mountain
 489 L Forest
 490 L Forest
+
+[buy a box]
 491 M Sanctum Prelate
+
+[bundle]
 492 R Yusri, Fortune's Flame
+
+[Lands]
+19 Arid Mesa|MH2|1
+1 Arid Mesa|MH2|2
+100 Darkmoss Bridge|MH2|1
+100 Drossforge Bridge|MH2|1
+100 Goldmire Bridge|MH2|1
+19 Marsh Flats|MH2|1
+1 Marsh Flats|MH2|2
+100 Mistvault Bridge|MH2|1
+19 Misty Rainforest|MH2|1
+1 Misty Rainforest|MH2|2
+60 Power Depot|MH2|1
+100 Razortide Bridge|MH2|1
+100 Rustvale Bridge|MH2|1
+19 Scalding Tarn|MH2|1
+1 Scalding Tarn|MH2|2
+100 Silverbluff Bridge|MH2|1
+100 Slagwoods Bridge|MH2|1
+100 Tanglepool Bridge|MH2|1
+100 Thornglint Bridge|MH2|1
+20 Urza's Saga|MH2|1
+19 Verdant Catacombs|MH2|1
+1 Verdant Catacombs|MH2|2
+20 Yavimaya, Cradle of Growth|MH2|1
+10 Cabal Coffers|MH2|1
+60 Mishra's Factory|MH2|1
+20 Riptide Laboratory|MH2|1
+
+[NewToModern]
+6 Angelic Curator|MH2|1
+2 Karmic Guide|MH2|1
+6 Seal of Cleansing|MH2|1
+2 Solitary Confinement|MH2|1
+6 Soul Snare|MH2|1
+6 Counterspell|MH2|1
+6 Sea Drake|MH2|1
+6 Seal of Removal|MH2|1
+2 Upheaval|MH2|1
+2 Wonder|MH2|1
+6 Bone Shredder|MH2|1
+2 Braids, Cabal Minion|MH2|1
+6 Greed|MH2|1
+2 Patriarch's Bidding|MH2|1
+6 Skirge Familiar|MH2|1
+2 Chance Encounter|MH2|1
+6 Flame Rift|MH2|1
+2 Goblin Bombardment|MH2|1
+6 Gorilla Shaman|MH2|1
+1 Imperial Recruiter|MH2|1
+6 Mogg Salvage|MH2|1
+2 Enchantress's Presence|MH2|1
+6 Hunting Pack|MH2|1
+6 Quirion Ranger|MH2|1
+2 Squirrel Mob|MH2|1
+1 Titania, Protector of Argoth|MH2|1
+6 Yavimaya Elder|MH2|1
+2 Chainer, Nightmare Adept|MH2|1
+2 Fire // Ice|MH2|1
+1 Mirari's Wake|MH2|1
+2 Shardless Agent|MH2|1
+2 Sterling Grove|MH2|1
+2 Vindicate|MH2|1
+2 Cursed Totem|MH2|1
+6 Extruder|MH2|1
+6 Millikin|MH2|1
+2 Nevinyrral's Disk|MH2|1
+6 Patchwork Gnomes|MH2|1
+6 Zuran Orb|MH2|1
+
+[tokens]
+b_0_0_germ
+b_0_0_zombie_army
+b_2_2_zombie
+bg_1_1_insect
+c_0_0_a_construct_total_artifacts
+c_1_1_a_thopter_flying
+c_a_clue_draw
+c_a_clue_draw
+c_a_food_sac
+c_a_food_sac
+c_a_treasure_sac
+c_a_treasure_sac
+g_1_1_squirrel
+g_4_4_beast
+g_5_3_elemental
+r_1_1_goblin
+rw_4_4_a_golem
+u_0_3_crab
+u_1_1_bird_flying
+
+[other]
+eternalize_timeless_dragon
+eternalize_timeless_witness
