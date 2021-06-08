@@ -1086,7 +1086,7 @@ public class CardView extends GameEntityView {
         }
 
         public CardTypeView getType() {
-            if (isFaceDown() && !isInZone(EnumSet.of(ZoneType.Battlefield, ZoneType.Stack))) {
+            if (getState() != CardStateName.Original && isFaceDown() && !isInZone(EnumSet.of(ZoneType.Battlefield, ZoneType.Stack))) {
                 return CardType.EMPTY;
             }
             return get(TrackableProperty.Type);

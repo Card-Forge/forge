@@ -366,7 +366,6 @@ public class TargetRestrictions {
         return this.saValidTargeting;
     }
 
-
     /**
      * <p>
      * canOnlyTgtOpponent.

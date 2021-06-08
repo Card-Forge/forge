@@ -31,7 +31,6 @@ public class ReplaceProduceMana extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<AbilityKey, Object> runParams) {
-
         if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Affected))) {
             return false;
         }

@@ -184,11 +184,11 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         if (!hasLocalPlayers()) {
             return true; //if not in game, card can be shown
         }
-        if(GuiBase.getInterface().isLibgdxPort()){
-            if(gameView != null && gameView.isGameOver()) {
+        if (GuiBase.getInterface().isLibgdxPort()){
+            if (gameView != null && gameView.isGameOver()) {
                 return true;
             }
-            if(spectator!=null) { //workaround fix!! this is needed on above code or it will
+            if (spectator!=null) { //workaround fix!! this is needed on above code or it will
                 for (Map.Entry<PlayerView, IGameController> e : gameControllers.entrySet()) {
                     if (e.getValue().equals(spectator)) {
                         gameControllers.remove(e.getKey());
@@ -197,7 +197,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                 }
                 return true;
             }
-            try{
+            try {
                 if (getGameController().mayLookAtAllCards()) { // when it bugged here, the game thinks the spectator (null)
                     return true;                               // is the humancontroller here (maybe because there is an existing game thread???)
                 }

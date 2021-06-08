@@ -11,7 +11,7 @@ SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ bg_1_1_insect | TokenOwne
 SVar:DBMill:DB$ Mill | Defined$ You | NumCards$ 1 | RememberMilled$ True | SubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$PutCounter | Defined$ Self | CounterType$ LOYALTY | CounterNum$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card.Insect | ConditionCompare$ EQ1
 SVar:MaxRepeats:Count$InYourLibrary
-SVar:MilledInsect:RememberedLKI$Valid Card.Insect
+SVar:MilledInsect:Remembered$Valid Card.Insect
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ ImmediateTrigger | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | Execute$ TrigDestroy | UnlessCost$ Sac<1/Creature> | UnlessPayer$ You | UnlessSwitched$ True | SpellDescription$ You may sacrifice a creature. When you do, destroy target creature or planeswalker.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker
