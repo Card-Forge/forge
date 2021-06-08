@@ -807,6 +807,8 @@ public class AbilityUtils {
                     final SpellAbility root = sa.getRootAbility();
                     list = new CardCollection((Card) root.getReplacingObject(AbilityKey.fromString(calcX[0].substring(8))));
                 }
+                // there could be null inside!
+                list = Iterables.filter(list, Card.class);
                 if (list != null) {
                     val = handlePaid(list, calcX[1], card, ability);
                 }
@@ -3424,7 +3426,6 @@ public class AbilityUtils {
             } else {
                 return size;
             }
-
         }
 
         if (string.startsWith("DifferentCMC")) {
@@ -3437,14 +3438,13 @@ public class AbilityUtils {
 
         if (string.startsWith("SumCMC")) {
             int sumCMC = 0;
-            for(Card c : paidList) {
+            for (Card c : paidList) {
                 sumCMC += c.getCMC();
             }
             return sumCMC;
         }
 
         if (string.startsWith("Valid")) {
-
             final String[] splitString = string.split("/", 2);
             String valid = splitString[0].substring(6);
             final List<Card> list = CardLists.getValidCardsAsList(paidList, valid, source.getController(), source, ctb);
@@ -3464,6 +3464,7 @@ public class AbilityUtils {
         }
 
         int tot = 0;
+
         for (final Card c : filteredList) {
             tot += xCount(c, filteredString, ctb);
         }
