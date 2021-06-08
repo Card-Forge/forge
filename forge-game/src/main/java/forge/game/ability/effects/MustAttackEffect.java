@@ -22,7 +22,6 @@ public class MustAttackEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         final StringBuilder sb = new StringBuilder();
 
-
         // end standard pre-
 
         final List<Player> tgtPlayers = getTargetPlayers(sa);
@@ -67,7 +66,6 @@ public class MustAttackEffect extends SpellAbilityEffect {
                 entity = defPWs.getFirst();
             }
         }
-        //System.out.println("Setting mustAttackEntity to: "+entity);
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
