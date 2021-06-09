@@ -12,9 +12,9 @@ public interface ITokenDatabase extends Iterable<PaperToken> {
     PaperToken getToken(String tokenName);
     PaperToken getToken(String tokenName, String edition);
     PaperToken getToken(String tokenName, String edition, int artIndex);
-    PaperToken getTokenFromEdition(String tokenName, CardDb.CardArtPreference fromSet);
-    PaperToken getTokenFromEdition(String tokenName, Date printedBefore, CardDb.CardArtPreference fromSet);
-    PaperToken getTokenFromEdition(String tokenName, Date printedBefore, CardDb.CardArtPreference fromSet, int artIndex);
+    PaperToken getTokenFromEditions(String tokenName, CardDb.CardArtPreference fromSet);
+    PaperToken getTokenFromEditions(String tokenName, Date printedBefore, CardDb.CardArtPreference fromSet);
+    PaperToken getTokenFromEditions(String tokenName, Date printedBefore, CardDb.CardArtPreference fromSet, int artIndex);
 
     PaperToken getFoiled(PaperToken cpi);
 
