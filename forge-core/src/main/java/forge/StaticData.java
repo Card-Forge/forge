@@ -1,15 +1,6 @@
 package forge;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-
 import com.google.common.base.Predicate;
-
 import forge.card.CardDb;
 import forge.card.CardDb.CardRequest;
 import forge.card.CardEdition;
@@ -22,6 +13,9 @@ import forge.item.SealedProduct;
 import forge.token.TokenDb;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
+
+import java.io.File;
+import java.util.*;
 
 
 /**
@@ -53,8 +47,6 @@ public class StaticData {
 
     private MulliganDefs.MulliganRule mulliganRule = MulliganDefs.getDefaultRule();
 
-    private String prefferedArt;
-
     // Loaded lazily:
     private IStorage<SealedProduct.Template> boosters;
     private IStorage<SealedProduct.Template> specialBoosters;
@@ -65,18 +57,17 @@ public class StaticData {
 
     private static StaticData lastInstance = null;
 
-    public StaticData(CardStorageReader cardReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String prefferedArt, boolean enableUnknownCards, boolean loadNonLegalCards) {
-        this(cardReader, null, customCardReader, editionFolder, customEditionsFolder, blockDataFolder, prefferedArt, enableUnknownCards, loadNonLegalCards);
+    public StaticData(CardStorageReader cardReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String preferredCardArt, boolean enableUnknownCards, boolean loadNonLegalCards) {
+        this(cardReader, null, customCardReader, editionFolder, customEditionsFolder, blockDataFolder, preferredCardArt, enableUnknownCards, loadNonLegalCards);
     }
 
-    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String prefferedArt, boolean enableUnknownCards, boolean loadNonLegalCards) {
+    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String preferredCardArt, boolean enableUnknownCards, boolean loadNonLegalCards) {
         this.cardReader = cardReader;
         this.tokenReader = tokenReader;
         this.editions = new CardEdition.Collection(new CardEdition.Reader(new File(editionFolder)));
         this.blockDataFolder = blockDataFolder;
         this.customCardReader = customCardReader;
         this.customEditions = new CardEdition.Collection(new CardEdition.Reader(new File(customEditionsFolder)));
-        this.prefferedArt = prefferedArt;
         lastInstance = this;
         List<String> funnyCards = new ArrayList<>();
         List<String> filtered = new ArrayList<>();
@@ -121,9 +112,9 @@ public class StaticData {
                 Collections.sort(filtered);
             }
 
-            commonCards = new CardDb(regularCards, editions, filtered);
-            variantCards = new CardDb(variantsCards, editions, filtered);
-            customCards = new CardDb(customizedCards, customEditions, filtered);
+            commonCards = new CardDb(regularCards, editions, filtered, preferredCardArt);
+            variantCards = new CardDb(variantsCards, editions, filtered, preferredCardArt);
+            customCards = new CardDb(customizedCards, customEditions, filtered, preferredCardArt);
 
             //must initialize after establish field values for the sake of card image logic
             commonCards.initialize(false, false, enableUnknownCards);
@@ -131,15 +122,17 @@ public class StaticData {
             customCards.initialize(false, false, enableUnknownCards);
         }
 
-        {
+        if (this.tokenReader != null){
             final Map<String, CardRules> tokens = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
-            for (CardRules card : tokenReader.loadCards()) {
+            for (CardRules card : this.tokenReader.loadCards()) {
                 if (null == card) continue;
 
                 tokens.put(card.getNormalizedName(), card);
             }
             allTokens = new TokenDb(tokens, editions);
+        } else {
+            allTokens = null;
         }
     }
 
@@ -172,7 +165,7 @@ public class StaticData {
             card = commonCards.getCard(cardName, setCode, artIndex);
         }
         if (card == null) {
-            card = commonCards.getCard(cardName, setCode, -1);
+            card = commonCards.getCard(cardName, setCode);
         }
         if (card == null) {
             card = customCards.getCard(cardName, setCode, artIndex);
@@ -180,7 +173,7 @@ public class StaticData {
                 isCustom = true;
         }
         if (card == null) {
-            card = customCards.getCard(cardName, setCode, -1);
+            card = customCards.getCard(cardName, setCode);
             if (card != null)
                 isCustom = true;
         }
@@ -188,8 +181,8 @@ public class StaticData {
             return null;
         }
         if (isCustom)
-            return foil ? customCards.getFoiled(card) : card;
-        return foil ? commonCards.getFoiled(card) : card;
+            return foil ? card.getFoiled() : card;
+        return foil ? card.getFoiled() : card;
     }
 
     public void attemptToLoadCard(String encodedCardName, String setCode) {
@@ -286,27 +279,29 @@ public class StaticData {
 
     public Predicate<PaperCard> getBrawlPredicate() { return brawlPredicate; }
 
-    public String getPrefferedArtOption() { return prefferedArt; }
+    public String getPreferredCardArt() { return this.commonCards.getCardArtPreference().toString(); }
 
     public void setFilteredHandsEnabled(boolean filteredHandsEnabled){
         this.filteredHandsEnabled = filteredHandsEnabled;
     }
 
+    // TODO: @leriomaggio
+    // Once the new DB API will be merged, This method will received important refactoring!
     public PaperCard getCardByEditionDate(PaperCard card, Date editionDate) {
 
-        PaperCard c = this.getCommonCards().getCardFromEdition(card.getName(), editionDate, CardDb.SetPreference.LatestCoreExp, card.getArtIndex());
+        PaperCard c = this.getCommonCards().getCardFromEditions(card.getName(), CardDb.CardArtPreference.LatestPrintNoPromoNoOnline, card.getArtIndex(), editionDate);
 
         if (null != c) {
             return c;
         }
 
-        c = this.getCommonCards().getCardFromEdition(card.getName(), editionDate, CardDb.SetPreference.LatestCoreExp, -1);
+        c = this.getCommonCards().getCardFromEditions(card.getName(), CardDb.CardArtPreference.LatestPrintNoPromoNoOnline, editionDate);
 
         if (null != c) {
             return c;
         }
 
-        c = this.getCommonCards().getCardFromEdition(card.getName(), editionDate, CardDb.SetPreference.Latest, -1);
+        c = this.getCommonCards().getCardFromEditions(card.getName(), CardDb.CardArtPreference.LatestPrint, editionDate);
 
         if (null != c) {
             return c;
@@ -316,27 +311,29 @@ public class StaticData {
         return card;
     }
 
+    // TODO: @leriomaggio
+    // Once the new DB API will be merged, these methods are the first to go!
     public PaperCard getCardFromLatestorEarliest(PaperCard card) {
 
-        PaperCard c = this.getCommonCards().getCardFromEdition(card.getName(), null, CardDb.SetPreference.Latest, card.getArtIndex());
+        PaperCard c = this.getCommonCards().getCardFromEditions(card.getName(), CardDb.CardArtPreference.LatestPrint, card.getArtIndex());
 
         if (null != c && c.hasImage()) {
             return c;
         }
 
-        c = this.getCommonCards().getCardFromEdition(card.getName(), null, CardDb.SetPreference.Latest, -1);
+        c = this.getCommonCards().getCardFromEditions(card.getName(), CardDb.CardArtPreference.LatestPrint);
 
         if (null != c && c.hasImage()) {
             return c;
         }
 
-        c = this.getCommonCards().getCardFromEdition(card.getName(), null, CardDb.SetPreference.LatestCoreExp, -1);
+        c = this.getCommonCards().getCardFromEditions(card.getName(), CardDb.CardArtPreference.LatestPrintNoPromoNoOnline);
 
         if (null != c) {
             return c;
         }
 
-        c = this.getCommonCards().getCardFromEdition(card.getName(), null, CardDb.SetPreference.EarliestCoreExp, -1);
+        c = this.getCommonCards().getCardFromEditions(card.getName(), CardDb.CardArtPreference.OldPrintNoPromoNoOnline);
 
         if (null != c) {
             return c;
@@ -346,21 +343,23 @@ public class StaticData {
         return card;
     }
 
+    // TODO: @leriomaggio
+    // Once the new DB API will be merged, these methods are the first to go!
     public PaperCard getCardFromEarliestCoreExp(PaperCard card) {
 
-        PaperCard c = this.getCommonCards().getCardFromEdition(card.getName(), null, CardDb.SetPreference.EarliestCoreExp, card.getArtIndex());
+        PaperCard c = this.getCommonCards().getCardFromEditions(card.getName(), CardDb.CardArtPreference.OldPrintNoPromoNoOnline, card.getArtIndex());
 
         if (null != c && c.hasImage()) {
             return c;
         }
 
-        c = this.getCommonCards().getCardFromEdition(card.getName(), null, CardDb.SetPreference.EarliestCoreExp, -1);
+        c = this.getCommonCards().getCardFromEditions(card.getName(), CardDb.CardArtPreference.OldPrintNoPromoNoOnline);
 
         if (null != c && c.hasImage()) {
             return c;
         }
 
-        c = this.getCommonCards().getCardFromEdition(card.getName(), null, CardDb.SetPreference.Earliest, -1);
+        c = this.getCommonCards().getCardFromEditions(card.getName(), CardDb.CardArtPreference.OldPrint);
 
         if (null != c) {
             return c;
