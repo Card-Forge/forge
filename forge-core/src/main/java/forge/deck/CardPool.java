@@ -86,17 +86,17 @@ public class CardPool extends ItemPool<PaperCard> {
             }
         }
 
-        int artCount = 1;
+        int artCount = IPaperCard.DEFAULT_ART_INDEX;
         if (paperCard != null) {
             setCode = paperCard.getEdition();
             cardName = paperCard.getName();
-            artCount = isCommonCard ? StaticData.instance().getCommonCards().getArtCount(cardName, setCode) : 1;
+            artCount = isCommonCard ? StaticData.instance().getCommonCards().getArtCount(cardName, setCode) : IPaperCard.DEFAULT_ART_INDEX;
         } else {
             System.err.print("An unsupported card was requested: \"" + cardName + "\" from \"" + setCode + "\". ");
             paperCard = StaticData.instance().getCommonCards().createUnsupportedCard(cardName);
         }
 
-        boolean artIndexExplicitlySet = artIndex > 0 || Character.isDigit(cardName.charAt(cardName.length() - 1)) && cardName.charAt(cardName.length() - 2) == CardDb.NameSetSeparator;
+        boolean artIndexExplicitlySet = artIndex > IPaperCard.NO_ART_INDEX || Character.isDigit(cardName.charAt(cardName.length() - 1)) && cardName.charAt(cardName.length() - 2) == CardDb.NameSetSeparator;
 
         if (artIndexExplicitlySet || artCount <= 1) {
             // either a specific art index is specified, or there is only one art, so just add the card
