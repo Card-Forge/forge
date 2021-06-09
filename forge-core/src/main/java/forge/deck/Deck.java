@@ -263,7 +263,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
                 int count = cp.getValue();
 
                 PaperCard replacementCard;
-                replacementCard = StaticData.instance().getReplacementCard(card, dateWithAllCards);
+                replacementCard = StaticData.instance().getAlternativeCardPrint(card, dateWithAllCards);
 
                 // Note @leriomaggio: The following logic is very obscure to me
                 // Why looking for a replacement Card and then not using adding it to the pool?

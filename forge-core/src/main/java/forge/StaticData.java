@@ -283,7 +283,7 @@ public class StaticData {
         this.filteredHandsEnabled = filteredHandsEnabled;
     }
 
-    public PaperCard getReplacementCard(PaperCard card, final Date setReleasedBefore) {
+    public PaperCard getAlternativeCardPrint(PaperCard card, final Date setReleasedBefore) {
         PaperCard c = this.getCommonCards().getCardFromEditions(card.getName(), card.getArtIndex(), setReleasedBefore);
         // NOTE: if c is null, is necessarily due to the artIndex, so remove it!
         return c != null ? c : this.getCommonCards().getCardFromEditions(card.getName(), setReleasedBefore);

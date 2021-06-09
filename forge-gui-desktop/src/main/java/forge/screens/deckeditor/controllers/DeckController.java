@@ -17,21 +17,9 @@
  */
 package forge.screens.deckeditor.controllers;
 
-import java.util.Date;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Supplier;
-
 import forge.StaticData;
-import forge.deck.CardPool;
-import forge.deck.Deck;
-import forge.deck.DeckBase;
-import forge.deck.DeckProxy;
-import forge.deck.DeckSection;
+import forge.deck.*;
 import forge.item.PaperCard;
 import forge.screens.deckeditor.menus.DeckFileMenu;
 import forge.screens.deckeditor.views.VCurrentDeck;
@@ -42,6 +30,12 @@ import forge.screens.home.sanctioned.VSubmenuConstructed;
 import forge.util.ItemPool;
 import forge.util.Localizer;
 import forge.util.storage.IStorage;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Date;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DeckController<T extends DeckBase> {
     private T model;
@@ -188,7 +182,7 @@ public class DeckController<T extends DeckBase> {
 
             int countToAdd = countByName.get(cardName);
 
-            card = StaticData.instance().getCardByEditionDate(card, dateWithAllCards);
+            card = StaticData.instance().getAlternativeCardPrint(card, dateWithAllCards);
             targetSection.add(card.getName(), card.getEdition(), countToAdd);
         }
     }
