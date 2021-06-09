@@ -82,7 +82,7 @@ public class ReplaceManaEffect extends SpellAbilityEffect {
 
         // need to log Updated events there, or the log is wrong order
         String message = sa.getReplacementEffect().toString();
-        if ( !StringUtils.isEmpty(message)) {
+        if (!StringUtils.isEmpty(message)) {
             message = TextUtil.fastReplace(message, "CARDNAME", card.getName());
             game.getGameLog().add(GameLogEntryType.EFFECT_REPLACED, message);
         }
