@@ -966,7 +966,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
 
         // Passing null preference
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LatestPrint);
-        PaperCard httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, null);
+        PaperCard httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, null, null);
         assertNotNull(httCard);
         assertEquals(httCard.getName(), cardNameHymnToTourach);
         assertEquals(httCard.getEdition(), newFrameHymnToTourachEdition);
@@ -974,7 +974,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         // Changing default value for default card art preference
         this.cardDb.setCardArtPreference("OldPrint");
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.OldPrint);
-        httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, null);
+        httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, null, null);
         assertNotNull(httCard);
         assertEquals(httCard.getName(), cardNameHymnToTourach);
         assertEquals(httCard.getEdition(), oldFrameHymnToTourachEdition);
