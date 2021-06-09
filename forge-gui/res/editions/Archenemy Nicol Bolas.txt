@@ -5,6 +5,7 @@ Name=Archenemy: Nicol Bolas
 Code2=E01
 MciCode=E01
 Type=Other
+ScryfallCode=E01
 
 [cards]
 1 R Aegis Angel

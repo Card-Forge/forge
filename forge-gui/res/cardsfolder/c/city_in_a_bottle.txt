@@ -1,7 +1,7 @@
 Name:City in a Bottle
 ManaCost:2
 Types:Artifact
-T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Permanent.nontoken+setARN+Other | Execute$ TrigSac | TriggerDescription$ Whenever one or more other nontoken permanents with a name originally printed in the Arabian Nights expansion are on the battlefield, their controllers sacrifice them.
+T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Permanent.nonToken+setARN+Other | Execute$ TrigSac | TriggerDescription$ Whenever one or more other nontoken permanents with a name originally printed in the Arabian Nights expansion are on the battlefield, their controllers sacrifice them.
 SVar:TrigSac:DB$ SacrificeAll | ValidCards$ Permanent.nontoken+setARN+Other
 S:Mode$ CantPlayLand | ValidCard$ Card.setARN | Description$ Players can't cast spells or play lands with a name originally printed in the Arabian Nights expansion.
 S:Mode$ CantBeCast | ValidCard$ Card.setARN

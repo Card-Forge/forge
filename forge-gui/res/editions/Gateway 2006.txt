@@ -3,6 +3,7 @@ Code=PGTW
 Date=2006-01-01
 Name=Gateway 2006
 Type=Reprint
+ScryfallCode=PGTW
 
 [cards]
 1 R Wood Elves

@@ -3,6 +3,7 @@ Code=PG07
 Date=2007-01-01
 Name=Gateway 2007
 Type=Reprint
+ScryfallCode=PG07
 
 [cards]
 4 R Boomerang

@@ -3,6 +3,7 @@ Code=PS14
 Date=2014-07-08
 Name=San Diego Comic-Con 2014
 Type=Promos
+ScryfallCode=PS14
 
 [cards]
 1 M Ajani Steadfast

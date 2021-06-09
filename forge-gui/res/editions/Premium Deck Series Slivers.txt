@@ -5,6 +5,7 @@ Name=Premium Deck Series: Slivers
 MciCode=pds
 Type=Premium_Deck_Series
 Alias=H09
+ScryfallCode=H09
 
 [cards]
 13 U Acidic Sliver

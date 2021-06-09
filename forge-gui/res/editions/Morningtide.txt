@@ -7,6 +7,7 @@ MciCode=mt
 Type=Expansion
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 Rare
+ScryfallCode=MOR
 
 [cards]
 113 C Ambassador Oak

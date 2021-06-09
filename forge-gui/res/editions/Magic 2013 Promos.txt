@@ -3,10 +3,11 @@ Code=PM13
 Date=2012-07-12
 Name=Magic 2013 Promos
 Type=Promos
+ScryfallCode=PM13
 
 [cards]
-118 R Xathrid Gorgon
-140 R Magmaquake
-177 U Mwonvuli Beast Tracker
-217 R Staff of Nin
-221 R Cathedral of War
+118★ R Xathrid Gorgon
+140★ R Magmaquake
+177★ U Mwonvuli Beast Tracker
+217★ R Staff of Nin
+221★ R Cathedral of War

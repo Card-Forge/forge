@@ -3,6 +3,8 @@ Code=PTOR
 Date=2002-02-04
 Name=Torment Promos
 Type=Promos
+CardLang=ru
+ScryfallCode=PTOR
 
 [cards]
-1 R Laquatus's Champion
+67 R Laquatus's Champion

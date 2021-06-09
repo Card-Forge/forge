@@ -3,6 +3,7 @@ Code=J15
 Date=2015-01-01
 Name=Judge Gift Cards 2015
 Type=Promos
+ScryfallCode=J15
 
 [cards]
 1 R Temporal Manipulation

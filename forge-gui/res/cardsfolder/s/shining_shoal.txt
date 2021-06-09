@@ -1,0 +1,16 @@
+Name:Shining Shoal
+ManaCost:X W W
+Types:Instant Arcane
+SVar:AltCost:Cost$ ExileFromHand<1/Card.White+Other/white card> | Description$ You may exile a white card with mana value X from your hand rather than pay this spell's mana cost.
+A:SP$ ChooseSource | Cost$ X W W | Choices$ Card,Emblem | AILogic$ NeedsPrevention | SubAbility$ DBStoreSVar | StackDescription$ SpellDescription | SpellDescription$ The next X damage that a source of your choice would deal to you and/or creatures you control this turn is dealt to any target instead.
+SVar:DBStoreSVar:DB$ StoreSVar | SVar$ ShieldAmount | Type$ Calculate | Expression$ Z | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target to redirect damage to | ReplacementEffects$ ReDamage | RememberObjects$ Targeted | SubAbility$ DBCleanup
+SVar:ReDamage:Event$ DamageDone | ActiveZones$ Command | ValidTarget$ You,Creature.YouCtrl | ValidSource$ Card.ChosenCard,Emblem.ChosenCard | ReplaceWith$ SplitDamage | DamageTarget$ Remembered | Description$ The next X damage that a source of your choice would deal to you and/or creatures you control this turn is dealt to any target instead.
+SVar:SplitDamage:DB$ ReplaceSplitDamage | DamageTarget$ Remembered | VarName$ ShieldAmount | DivideShield$ True
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+SVar:X:Count$xPaid
+SVar:Y:Exiled$CardManaCost
+SVar:Z:SVar$Y/Plus.X
+SVar:ShieldAmount:Number$0
+AI:RemoveDeck:All
+Oracle:You may exile a white card with mana value X from your hand rather than pay this spell's mana cost.\nThe next X damage that a source of your choice would deal to you and/or creatures you control this turn is dealt to any target instead.

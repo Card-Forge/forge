@@ -461,8 +461,10 @@ public class VAssignCombatDamage extends FDialog {
         }
         else {
             lethalDamage = Math.max(0, source.getLethalDamage());
-            if (attackerHasDeathtouch) {
-                    lethalDamage = Math.min(lethalDamage, 1);
+            if (source.getCurrentState().getType().isPlaneswalker()) {
+                lethalDamage = Integer.valueOf(source.getCurrentState().getLoyalty());
+            } else if (attackerHasDeathtouch) {
+                lethalDamage = Math.min(lethalDamage, 1);
             }
         }
         return lethalDamage;

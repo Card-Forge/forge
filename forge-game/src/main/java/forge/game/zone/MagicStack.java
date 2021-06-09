@@ -299,6 +299,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         runParams.put(AbilityKey.CastSACMC, si.getSpellAbility(true).getHostCard().getCMC());
         runParams.put(AbilityKey.CurrentStormCount, thisTurnCast.size());
         runParams.put(AbilityKey.CurrentCastSpells, Lists.newArrayList(thisTurnCast));
+
         if (!sp.isCopied()) {
             // Run SpellAbilityCast triggers
             game.getTriggerHandler().runTrigger(TriggerType.SpellAbilityCast, runParams, true);
@@ -645,9 +646,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                     } else {
                         if (o instanceof SpellAbility) {
                             SpellAbilityStackInstance si = getInstanceFromSpellAbility((SpellAbility)o);
-                            invalidTarget = si == null ? true : !si.getSpellAbility(true).canBeTargetedBy(sa);
+                            invalidTarget = si == null ? true : !sa.canTarget(si.getSpellAbility(true));
                         } else {
-                            invalidTarget = !o.canBeTargetedBy(sa);
+                            invalidTarget = !sa.canTarget(o);
                         }
                     }
                     // Remove targets

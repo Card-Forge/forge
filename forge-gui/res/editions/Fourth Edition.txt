@@ -10,6 +10,7 @@ BoosterCovers=5
 Booster=11 Common, 3 Uncommon, 1 Rare
 Foil=NotSupported
 ChaosDraftThemes=CORE_SET
+ScryfallCode=4ED
 
 [cards]
 117 U Abomination

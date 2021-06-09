@@ -4,6 +4,7 @@ Date=2017-04-28
 Name=Masterpiece Series - Amonkhet
 MciCode=mp2
 Type=Other
+ScryfallCode=mp2
 
 [cards]
 1 M Austere Command

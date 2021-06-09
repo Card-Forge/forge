@@ -3,10 +3,11 @@ Code=PSDC
 Date=2013-07-18
 Name=San Diego Comic-Con 2013
 Type=Promos
+ScryfallCode=PSDC
 
 [cards]
-1 M Ajani, Caller of the Pride
-60 M Jace, Memory Adept
-102 M Liliana of the Dark Realms
-132 M Chandra, Pyromaster
-172 M Garruk, Caller of Beasts
+1★ M Ajani, Caller of the Pride
+60★ M Jace, Memory Adept
+102★ M Liliana of the Dark Realms
+132★ M Chandra, Pyromaster
+172★ M Garruk, Caller of Beasts

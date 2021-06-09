@@ -1,0 +1,8 @@
+Name:Arcbound Slasher
+ManaCost:4 R
+Types:Artifact Creature Cat
+PT:0/0
+K:Modular:4
+K:Riot
+DeckHas:Ability$Counters
+Oracle:Modular 4 (This creature enters the battlefield with four +1/+1 counters on it. When it dies, you may put its +1/+1 counters on target artifact creature.)\nRiot (This creature enters the battlefield with your choice of an additional +1/+1 counter or haste.)

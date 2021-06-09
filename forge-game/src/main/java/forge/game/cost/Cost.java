@@ -31,6 +31,7 @@ import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.CardTraitBase;
 import forge.game.card.Card;
+import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
@@ -876,15 +877,30 @@ public class Cost implements Serializable {
                     costParts.add(0, new CostPartMana(oldManaCost.toManaCost(), r));
                 }
             } else if (part instanceof CostDiscard || part instanceof CostTapType ||
-                    part instanceof CostAddMana || part instanceof CostPayLife) {
+                    part instanceof CostAddMana || part instanceof CostPayLife
+                    || part instanceof CostPutCounter) {
                 boolean alreadyAdded = false;
                 for (final CostPart other : costParts) {
-                    if (other.getClass().equals(part.getClass()) &&
+                    if ((other.getClass().equals(part.getClass()) || (part instanceof CostPutCounter && ((CostPutCounter)part).getCounter().is(CounterEnumType.LOYALTY))) &&
                             part.getType().equals(other.getType()) &&
                             StringUtils.isNumeric(part.getAmount()) &&
                             StringUtils.isNumeric(other.getAmount())) {
-                        final String amount = String.valueOf(Integer.parseInt(part.getAmount()) + Integer.parseInt(other.getAmount()));
-                        if (part instanceof CostDiscard) {
+                        String amount = String.valueOf(Integer.parseInt(part.getAmount()) + Integer.parseInt(other.getAmount()));
+                        if (part instanceof CostPutCounter) { // path for Carth
+                            if (other instanceof CostPutCounter && ((CostPutCounter)other).getCounter().is(CounterEnumType.LOYALTY)) {
+                                costParts.add(new CostPutCounter(amount, CounterType.get(CounterEnumType.LOYALTY), part.getType(), part.getTypeDescription()));
+                            } else if (other instanceof CostRemoveCounter && ((CostRemoveCounter)other).counter.is(CounterEnumType.LOYALTY)) {
+                                Integer counters = Integer.parseInt(other.getAmount()) - Integer.parseInt(part.getAmount());
+                                // the cost can turn positive if multiple Carth raise it
+                                if (counters < 0) {
+                                    costParts.add(new CostPutCounter(String.valueOf(counters *-1), CounterType.get(CounterEnumType.LOYALTY), part.getType(), part.getTypeDescription()));
+                                } else {
+                                    costParts.add(new CostRemoveCounter(String.valueOf(counters), CounterType.get(CounterEnumType.LOYALTY), part.getType(), part.getTypeDescription(), ZoneType.Battlefield));
+                                }
+                            } else {
+                                continue;
+                            }
+                        } else if (part instanceof CostDiscard) {
                             costParts.add(new CostDiscard(amount, part.getType(), part.getTypeDescription()));
                         } else if (part instanceof CostTapType) {
                             CostTapType tappart = (CostTapType)part;

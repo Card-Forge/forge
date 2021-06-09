@@ -3,6 +3,7 @@ Code=HA2
 Date=2020-03-12
 Name=Historic Anthology 2
 Type=Online
+ScryfallCode=HA2
 
 [cards]
 1 U Nyx-Fleece Ram

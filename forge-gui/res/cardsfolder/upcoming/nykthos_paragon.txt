@@ -1,0 +1,10 @@
+Name:Nykthos Paragon
+ManaCost:4 W W
+Types:Enchantment Creature Human Soldier
+PT:4/6
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounterAll | ActivationLimit$ 1 | OptionalDecider$ You | TriggerDescription$ Whenever you gain life, you may put that many +1/+1 counters on each creature you control. This ability triggers only once each turn.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ X
+SVar:X:TriggerCount$LifeAmount
+DeckNeeds:Ability$LifeGain
+DeckHas:Ability$Counters
+Oracle:Whenever you gain life, you may put that many +1/+1 counters on each creature you control. This ability triggers only once each turn.

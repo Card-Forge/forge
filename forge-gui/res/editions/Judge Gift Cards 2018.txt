@@ -3,6 +3,7 @@ Code=J18
 Date=2018-01-01
 Name=Judge Gift Cards 2018
 Type=Promos
+ScryfallCode=J18
 
 [cards]
 1 R Merchant Scroll

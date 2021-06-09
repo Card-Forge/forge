@@ -1,0 +1,7 @@
+Name:Glimmer Bairn
+ManaCost:G
+Types:Creature Ouphe
+PT:1/2
+A:AB$ Pump | Cost$ Sac<1/Permanent.token/token> | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ CARDNAME gets +2/+2 until end of turn.
+DeckNeeds:Ability$Token
+Oracle:Sacrifice a token: Glimmer Bairn gets +2/+2 until end of turn.

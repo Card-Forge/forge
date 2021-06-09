@@ -3,13 +3,14 @@ Code=PJSE
 Date=2005-01-01
 Name=Junior Series Europe
 Type=Promos
+ScryfallCode=PJSE
 
 [cards]
-5 R Slith Firewalker
-6 R Sakura-Tribe Elder
-7 R Soltari Priest
-8 R Glorious Anthem
-9 R Royal Assassin
-10 R Shard Phoenix
-11 R Whirling Dervish
-12 R Elvish Champion
+1E05 R Slith Firewalker
+1E06 R Sakura-Tribe Elder
+1E07 R Soltari Priest
+1E08 R Glorious Anthem
+2E05 R Royal Assassin
+2E06 R Shard Phoenix
+2E07 R Whirling Dervish
+2E08 R Elvish Champion

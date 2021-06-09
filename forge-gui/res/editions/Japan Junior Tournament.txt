@@ -3,17 +3,19 @@ Code=PJJT
 Date=2003-01-01
 Name=Japan Junior Tournament
 Type=Promos
+CardLang=ja
+ScryfallCode=PJJT
 
 [cards]
-3 R Volcanic Hammer
-4 R Giant Growth
-5 R Slith Firewalker
-6 R Sakura-Tribe Elder
-7 R Soltari Priest
-8 R Glorious Anthem
-9 R Two-Headed Dragon
-10 R Royal Assassin
-11 R Shard Phoenix
-12 R Whirling Dervish
-13 R Elvish Champion
-14 R Mad Auntie
+1N03 R Volcanic Hammer
+1N04 R Giant Growth
+1N05 R Slith Firewalker
+1N06 R Sakura-Tribe Elder
+1N07 R Soltari Priest
+1N08 R Glorious Anthem
+2N04 R Two-Headed Dragon
+2N05 R Royal Assassin
+2N06 R Shard Phoenix
+2N07 R Whirling Dervish
+2N08 R Elvish Champion
+3N08 R Mad Auntie

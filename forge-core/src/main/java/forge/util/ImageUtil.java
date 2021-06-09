@@ -118,10 +118,6 @@ public class ImageUtil {
         return getImageRelativePath(cp, backFace, true, true);
     }
 
-    public static String getScryfallDownloadUrl(PaperCard cp, boolean backFace, String setCode){
-        return getScryfallDownloadUrl(cp, backFace, setCode, "en");
-    }
-
     public static String getScryfallDownloadUrl(PaperCard cp, boolean backFace, String setCode, String langCode){
         String editionCode;
         if ((setCode != null) && (setCode.length() > 0))

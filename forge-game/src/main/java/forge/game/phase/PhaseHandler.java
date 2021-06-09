@@ -475,7 +475,7 @@ public class PhaseHandler implements java.io.Serializable {
             boolean manaBurns = game.getRules().hasManaBurn() ||
                     (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.manaBurn));
             if (manaBurns) {
-                p.loseLife(burn,true);
+                p.loseLife(burn, true);
             }
         }
 
@@ -485,7 +485,7 @@ public class PhaseHandler implements java.io.Serializable {
                 break;
 
             case UPKEEP:
-                for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
+                for (Card c : game.getCardsIncludePhasingIn(ZoneType.Battlefield)) {
                     c.getDamageHistory().setNotAttackedSinceLastUpkeepOf(playerTurn);
                     c.getDamageHistory().setNotBlockedSinceLastUpkeepOf(playerTurn);
                     c.getDamageHistory().setNotBeenBlockedSinceLastUpkeepOf(playerTurn);
@@ -829,6 +829,11 @@ public class PhaseHandler implements java.io.Serializable {
         }
         SpellAbility fakeSA = new SpellAbility.EmptySa(blocker, blocker.getController());
         return noCost || blocker.getController().getController().payManaOptional(blocker, blockCost, fakeSA, "Pay cost to declare " + blocker + " a blocker. ", ManaPaymentPurpose.DeclareBlocker);
+    }
+
+    public void resetExtra() {
+        extraPhases.clear();
+        extraTurns.clear();
     }
 
     private Player handleNextTurn() {

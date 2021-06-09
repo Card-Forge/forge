@@ -162,7 +162,7 @@ public abstract class SpellAbilityAi {
         if (ComputerUtil.preventRunAwayActivations(sa)) {
             return false;   // prevent infinite loop
         }
-        return MyRandom.getRandom().nextFloat() < .8f;   // random success
+        return MyRandom.getRandom().nextFloat() < .8f; // random success
     }
     
     public final boolean doTriggerAI(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
@@ -193,7 +193,7 @@ public abstract class SpellAbilityAi {
      * Handles the AI decision to play a triggered SpellAbility
      */
     protected boolean doTriggerAINoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
-        if (canPlayWithoutRestrict(aiPlayer, sa)) {
+        if (canPlayWithoutRestrict(aiPlayer, sa) && (!mandatory || sa.isTargetNumberValid())) {
             return true;
         }
 

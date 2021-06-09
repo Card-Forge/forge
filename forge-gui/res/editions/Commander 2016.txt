@@ -5,6 +5,7 @@ Name=Commander 2016
 Code2=C16
 MciCode=c16
 Type=Other
+ScryfallCode=C16
 
 [cards]
 1 R Duelist's Heritage

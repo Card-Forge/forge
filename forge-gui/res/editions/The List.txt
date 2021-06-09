@@ -3,6 +3,7 @@ Code=PLIST
 Date=2020-09-26
 Name=The List
 Type=Reprint
+ScryfallCode=PLIST
 
 [cards]
 1 U Iterative Analysis
@@ -353,3 +354,108 @@ Type=Reprint
 346 R Cavern of Souls
 347 R Dark Depths
 348 R Scrying Sheets
+349 M Kozilek, Butcher of Truth
+350 U Great Teacher's Decree
+351 U Jubilant Mascot
+352 R Pursuit of Knowledge
+353 C Stonybrook Schoolmaster
+354 R Academy Elite
+355 R Archive Trap
+356 U Kasmina, Enigmatic Mentor
+357 R Ormos, Archive Keeper
+358 R Pedantic Learning
+359 U Relearn
+360 C Venerated Teacher
+361 M Will Kenrith
+362 M Liliana, the Last Hope
+363 C Painful Lesson
+364 C Arcane Teachings
+365 R Dual Casting
+366 C Ghitu Chronicler
+367 U Guttersnipe
+368 M Lukka, Coppercoat Outcast
+369 R Mages' Contest
+370 M Rowan Kenrith
+371 U Young Pyromancer
+372 R Deeproot Champion
+373 R Heartwood Storyteller
+374 M Primeval Bounty
+375 U Renata, Called to the Hunt
+376 M Unbound Flourishing
+377 U Warriors' Lesson
+378 M Elenda, the Dusk Rose
+379 R Firemane Angel
+380 M Gisela, Blade of Goldnight
+381 R Mercurial Chemister
+382 M Mizzix of the Izmagnus
+383 U Moldervine Reclamation
+384 M Niv-Mizzet Reborn
+385 R Skullbriar, the Walking Grave
+386 R Spellbound Dragon
+387 R Unexpected Results
+388 M Uro, Titan of Nature's Wrath
+389 R Balefire Liege
+390 R Biomass Mutation
+391 U Bloodied Ghost
+392 U Deathless Knight
+393 R Grind // Dust
+394 R Fool's Tome
+395 M Grimoire of the Dead
+396 R Knowledge Pool
+397 U Nuisance Engine
+398 R Scroll of the Masters
+399 U Spellbook
+400 R Walking Archive
+401 M Mirrorpool
+402 U Nephalia Academy
+403 L Island
+404 R Always Watching
+405 M Angel of Serenity
+406 U Canyon Jerboa
+407 R Celestial Ancient
+408 U Reduce to Memory
+409 U Soulcatchers' Aerie
+410 U Stasis Snare
+411 R Stonehewer Giant
+412 M Sun Titan
+413 M Bruvac the Grandiloquent
+414 U Callaphe, Beloved of the Sea
+415 U Fact or Fiction
+416 M Orvar, the All-Form
+417 R Riptide Director
+418 R Spell Swindle
+419 U Time of Ice
+420 U Animate Dead
+421 R Bone Miser
+422 R Bridge from Below
+423 R Entreat the Dead
+424 R Mindslicer
+425 U Goblin Assassin
+426 R Kari Zev, Skyship Raider
+427 U Lesser Gargadon
+428 C Lightning Axe
+429 U Lightning Bolt
+430 R Splinter Twin
+431 U Storm Entity
+432 C Chatter of the Squirrel
+433 R Nut Collector
+434 R Tarmogoyf
+435 R Tireless Tracker
+436 U Veil of Summer
+437 U Aura Shards
+438 M Dragonlord Atarka
+439 R Filigree Angel
+440 R Grand Arbiter Augustin IV
+441 U Juniper Order Ranger
+442 M Master of Cruelties
+443 U Obsessive Stitcher
+444 M Olivia, Mobilized for War
+445 M Phenax, God of Deception
+446 U Guttural Response
+447 U Aether Vial
+448 R Arcbound Overseer
+449 R Blackblade Reforged
+450 C Ancient Den
+451 R Petrified Field
+452 R Urborg, Tomb of Yawgmoth
+453 L Mountain

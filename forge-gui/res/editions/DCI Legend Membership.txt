@@ -3,6 +3,7 @@ Code=PLGM
 Date=1995-01-01
 Name=DCI Legend Membership
 Type=Promos
+ScryfallCode=PLGM
 
 [cards]
 1 R Counterspell

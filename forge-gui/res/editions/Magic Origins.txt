@@ -8,6 +8,7 @@ Type=Core
 BoosterCovers=5
 Booster=10 Common:!fromSheet("ORI Sample Cards"), 3 Uncommon:!fromSheet("ORI Sample Cards"), 1 RareMythic:!fromSheet("ORI Sample Cards"), 1 BasicLand
 ChaosDraftThemes=CORE_SET
+ScryfallCode=ORI
 
 [cards]
 1 C Akroan Jailer

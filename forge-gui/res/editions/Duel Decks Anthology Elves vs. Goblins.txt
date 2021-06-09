@@ -4,6 +4,7 @@ Date=2014-12-05
 Name=Duel Decks Anthology: Elves vs. Goblins
 MciCode=evg
 Type=Duel_Decks
+ScryfallCode=EVG
 
 [cards]
 1 R Ambush Commander

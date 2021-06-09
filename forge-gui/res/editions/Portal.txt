@@ -8,12 +8,13 @@ Type=Starter
 BoosterCovers=5
 Booster=11 Common, 3 Uncommon, 1 Rare
 Foil=NotSupported
+ScryfallCode=POR
 
 [cards]
 1 R Alabaster Dragon
 157 R Alluring Scent
 158 U Anaconda
-158+ U Anaconda
+158† U Anaconda
 40 R Ancestral Memories
 2 C Angelic Blessing
 3 R Archangel
@@ -66,7 +67,7 @@ Foil=NotSupported
 124 R Earthquake
 91 R Ebon Dragon
 163 C Elite Cat Warrior
-163+ C Elite Cat Warrior
+163† C Elite Cat Warrior
 164 C Elven Cache
 165 C Elvish Ranger
 92 R Endless Cockroaches
@@ -96,7 +97,7 @@ Foil=NotSupported
 95 U Gravedigger
 169 C Grizzly Bears
 96 C Hand of Death
-96+ C Hand of Death
+96† C Hand of Death
 18 R Harsh Justice
 132 C Highland Giant
 133 C Hill Giant
@@ -126,7 +127,7 @@ Foil=NotSupported
 140 C Minotaur Warrior
 172 C Mobilize
 173 C Monstrous Growth
-173+ C Monstrous Growth
+173† C Monstrous Growth
 174 U Moon Sprite
 208 L Mountain
 209 L Mountain
@@ -160,7 +161,7 @@ Foil=NotSupported
 105 C Python
 144 C Raging Cougar
 145 C Raging Goblin
-145+ C Raging Goblin
+145† C Raging Goblin
 146 C Raging Minotaur
 147 U Rain of Salt
 106 U Rain of Tears
@@ -222,7 +223,7 @@ Foil=NotSupported
 155 U Wall of Granite
 37 U Wall of Swords
 38 C Warrior's Charge
-38+ C Warrior's Charge
+38† C Warrior's Charge
 192 U Whiptail Wurm
 117 R Wicked Pact
 193 C Willow Dryad

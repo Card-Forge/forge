@@ -3,6 +3,7 @@ Code=PPRO
 Date=2007-02-09
 Name=Pro Tour Promos
 Type=Promos
+ScryfallCode=PPRO
 
 [cards]
 2007 R Eternal Dragon

@@ -3,6 +3,7 @@ Code=PPCY
 Date=2000-06-05
 Name=Prophecy Promos
 Type=Promos
+ScryfallCode=PPCY
 
 [cards]
 3 R Avatar of Hope

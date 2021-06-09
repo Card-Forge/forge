@@ -3,6 +3,7 @@ Code=PL21
 Date=2021-01-25
 Name=2021 Lunar New Year
 Type=Reprint
+ScryfallCode=PL21
 
 [cards]
 1 R Sethron, Hurloon General

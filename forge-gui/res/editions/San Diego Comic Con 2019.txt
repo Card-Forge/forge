@@ -3,6 +3,7 @@ Code=PS19
 Date=2019-07-18
 Name=San Diego Comic-Con 2019
 Type=Promos
+ScryfallCode=PS19
 
 [cards]
 16 M God-Eternal Oketra

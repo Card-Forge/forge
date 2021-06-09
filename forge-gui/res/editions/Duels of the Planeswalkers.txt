@@ -4,6 +4,7 @@ Date=2010-06-04
 Name=Duels of the Planeswalkers
 MciCode=dpa
 Type=Other
+ScryfallCode=DPA
 
 [cards]
 1 U Air Elemental

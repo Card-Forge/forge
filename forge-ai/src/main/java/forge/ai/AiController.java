@@ -313,7 +313,6 @@ public class AiController {
             // need to set TriggeredObject
             exSA.setTriggeringObject(AbilityKey.Card, card);
 
-
             // for trigger test, need to ignore the conditions
             SpellAbilityCondition cons = exSA.getConditions();
             if (cons != null) {
@@ -1355,7 +1354,7 @@ public class AiController {
 
     public AiPlayDecision canPlayFromEffectAI(Spell spell, boolean mandatory, boolean withoutPayingManaCost) {
         int damage = ComputerUtil.getDamageForPlaying(player, spell);
-        if (damage >= player.getLife() && !player.cantLoseForZeroOrLessLife() && player.canLoseLife()) {
+        if (!mandatory && damage >= player.getLife() && !player.cantLoseForZeroOrLessLife() && player.canLoseLife()) {
             return AiPlayDecision.CurseEffects;
         }
 

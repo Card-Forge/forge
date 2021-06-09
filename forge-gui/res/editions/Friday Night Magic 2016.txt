@@ -3,6 +3,7 @@ Code=F16
 Date=2016-01-01
 Name=Friday Night Magic 2016
 Type=Promos
+ScryfallCode=F16
 
 [cards]
 1 R Nissa's Pilgrimage

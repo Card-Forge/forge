@@ -1,0 +1,7 @@
+[format]
+Name:Pioneer, Strixhaven School of Mages
+Type:Historic
+Subtype:Pioneer
+Effective:2021-04-23
+Sets:RTR, GTC, DGM, M14, THS, BNG, JOU, M15, KTK, FRF, DTK, ORI, BFZ, OGW, W16, SOI, EMN, KLD, AER, W17, AKH, HOU, XLN, RIX, DOM, GS1, M19, GRN, G18, RNA, WAR, M20, ELD, THB, IKO, M21, ZNR, KHM, STX
+Banned:Balustrade Spy; Bloodstained Mire; Felidar Guardian; Flooded Strand; Inverter of Truth; Kethis, the Hidden Hand; Leyline of Abundance; Polluted Delta; Teferi, Time Raveler; Undercity Informer; Underworld Breach; Uro, Titan of Nature's Wrath; Walking Ballista; Wilderness Reclamation; Windswept Heath; Wooded Foothills

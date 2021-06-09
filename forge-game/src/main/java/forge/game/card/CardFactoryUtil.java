@@ -2038,16 +2038,23 @@ public class CardFactoryUtil {
         } else if (keyword.startsWith("Devour")) {
             final String[] k = keyword.split(":");
             final String magnitude = k[1];
+            String valid = "Creature";
+            final String[] s = k[0].split(" ");
+            if (s.length > 1) {
+                valid = s[1].substring(0, 1).toUpperCase() + s[1].substring(1);
+                final StringBuilder d = new StringBuilder();
+            }
 
-            String sacrificeStr = "DB$ Sacrifice | Defined$ You | Amount$ DevourSacX | "
-                    + "SacValid$ Creature.Other | SacMessage$ another creature (Devour "+ magnitude + ") | "
-                    + "RememberSacrificed$ True | Optional$ True | Devour$ True";
+            String sacrificeStr = "DB$ Sacrifice | Defined$ You | Amount$ DevourSacX | SacValid$ " + valid +
+                    ".Other | SacMessage$ another " + valid.toLowerCase() + " (Devour " + magnitude +
+                    ") | RememberSacrificed$ True | Optional$ True | Devour$ True";
 
             String counterStr = "DB$ PutCounter | ETB$ True | Defined$ Self | CounterType$ P1P1 | CounterNum$ DevourX";
             String cleanupStr = "DB$ Cleanup | ClearRemembered$ True";
 
             AbilitySub sacrificeSA = (AbilitySub) AbilityFactory.getAbility(sacrificeStr, card);
-            sacrificeSA.setSVar("DevourSacX", "Count$Valid Creature.YouCtrl+Other");
+            String value = "Count$Valid " + valid + ".YouCtrl+Other";
+            sacrificeSA.setSVar("DevourSacX", value);
 
             AbilitySub counterSA = (AbilitySub) AbilityFactory.getAbility(counterStr, card);
             counterSA.setSVar("DevourX", "SVar$DevourSize/Times." + magnitude);
@@ -3208,6 +3215,8 @@ public class CardFactoryUtil {
             String desc = type;
             if (type.equals("Basic")) {
                 desc = "Basic land";
+            } else if (type.equals("Land.Artifact")) {
+                desc = "Artifact land";
             }
 
             sb.append(" Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$ ").append(desc).append("cycling ");

@@ -4,6 +4,7 @@ Date=2014-12-05
 Name=Duel Decks Anthology: Jace vs. Chandra
 MciCode=jvc
 Type=Duel_Decks
+ScryfallCode=JVC
 
 [cards]
 1 M Jace Beleren

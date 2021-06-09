@@ -9,6 +9,7 @@ BoosterCovers=5
 Booster=11 Common, 3 Uncommon, 1 Rare
 FoilAlwaysInCommonSlot=False
 ChaosDraftThemes=MIRRODIN
+ScryfallCode=MRD
 
 [cards]
 141 C AEther Spellbomb

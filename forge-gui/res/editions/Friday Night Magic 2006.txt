@@ -3,6 +3,7 @@ Code=F06
 Date=2006-01-01
 Name=Friday Night Magic 2006
 Type=Promos
+ScryfallCode=F06
 
 [cards]
 1 R Elves of Deep Shadow

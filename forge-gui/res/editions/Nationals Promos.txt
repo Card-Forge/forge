@@ -3,6 +3,7 @@ Code=PNAT
 Date=2018-01-25
 Name=Nationals Promos
 Type=Promos
+ScryfallCode=PNAT
 
 [cards]
 2018 R Flooded Strand

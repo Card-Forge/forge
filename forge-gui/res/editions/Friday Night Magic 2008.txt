@@ -1,8 +1,9 @@
 [metadata]
 Code=F08
 Date=2008-01-01
-Name=Friday Night Magic 2008 
+Name=Friday Night Magic 2008
 Type=Promos
+ScryfallCode=F08
 
 [cards]
 1 R Remand

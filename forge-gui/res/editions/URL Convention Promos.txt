@@ -3,6 +3,7 @@ Code=PURL
 Date=2009-02-08
 Name=URL Convention Promos
 Type=Promos
+ScryfallCode=PURL
 
 [cards]
 1 R Steward of Valeron

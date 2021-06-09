@@ -3,6 +3,7 @@ Code=P04
 Date=2004-01-01
 Name=Magic Player Rewards 2004
 Type=Promos
+ScryfallCode=P04
 
 [cards]
 1 R Powder Keg

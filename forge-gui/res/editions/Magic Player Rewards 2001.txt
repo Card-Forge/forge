@@ -3,6 +3,7 @@ Code=MPR
 Date=2001-01-01
 Name=Magic Player Rewards 2001
 Type=Promos
+ScryfallCode=MPR
 
 [cards]
 1 R Wasteland

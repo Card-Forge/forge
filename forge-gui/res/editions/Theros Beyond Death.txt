@@ -8,6 +8,7 @@ BoosterCovers=3
 Booster=10 Common:fromSheet("THB Commons"), 3 Uncommon:fromSheet("THB Uncommons"), 1 RareMythic:fromSheet("THB RareMythics"), 1 BasicLand
 Prerelease=6 Boosters, 1 RareMythic+
 ChaosDraftThemes=GRAVEYARD_MATTERS
+ScryfallCode=THB
 
 [cards]
 1 U Alseid of Life's Bounty

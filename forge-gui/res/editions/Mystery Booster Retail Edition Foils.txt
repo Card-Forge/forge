@@ -3,6 +3,7 @@ Code=FMB1
 Date=2020-03-08
 Name=Mystery Booster Retail Edition Foils
 Type=Other
+ScryfallCode=FMB1
 
 [cards]
 1 U Not of This World

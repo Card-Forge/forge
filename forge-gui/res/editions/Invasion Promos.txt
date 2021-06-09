@@ -3,6 +3,8 @@ Code=PINV
 Date=2000-10-02
 Name=Invasion Promos
 Type=Promos
+CardLang=la
+ScryfallCode=PINV
 
 [cards]
 262 R Raging Kavu

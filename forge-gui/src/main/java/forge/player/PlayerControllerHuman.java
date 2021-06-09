@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -356,8 +357,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             map.put(null, damageDealt);
         } else {
             if ((attacker.hasKeyword(Keyword.TRAMPLE) && defender != null) || (blockers.size() > 1)
-                    || (attacker.hasKeyword("You may assign CARDNAME's combat damage divided as you choose among defending" +
-                    " player and/or any number of creatures they control.")) && overrideOrder && blockers.size() >0) {
+                    || ((attacker.hasKeyword("You may assign CARDNAME's combat damage divided as you choose among " +
+                    "defending player and/or any number of creatures they control.")) && overrideOrder &&
+                    blockers.size() >0) || (attacker.hasKeyword("Trample over planeswalkers") && defender instanceof Card)) {
                 GameEntityViewMap<Card, CardView> gameCacheBlockers = GameEntityView.getMap(blockers);
                 final CardView vAttacker = CardView.get(attacker);
                 final GameEntityView vDefender = GameEntityView.get(defender);
@@ -386,6 +388,24 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         } else {
             return false;
         }
+    }
+
+    @Override
+    public Map<GameEntity, Integer> divideShield(Card effectSource, Map<GameEntity, Integer> affected, int shieldAmount) {
+        final CardView vSource = CardView.get(effectSource);
+        final Map<GameEntityView, Integer> vAffected = new HashMap<>(affected.size());
+        for (Map.Entry<GameEntity, Integer> e : affected.entrySet()) {
+            vAffected.put(GameEntityView.get(e.getKey()), e.getValue());
+        }
+        final Map<GameEntityView, Integer> vResult = getGui().assignGenericAmount(vSource, vAffected, shieldAmount, false,
+            localizer.getMessage("lblShield"));
+        Map<GameEntity, Integer> result = new HashMap<>(vResult.size());
+        for (Map.Entry<GameEntity, Integer> e : affected.entrySet()) {
+            if (vResult.containsKey(GameEntityView.get(e.getKey()))) {
+                result.put(e.getKey(), vResult.get(GameEntityView.get(e.getKey())));
+            }
+        }
+        return result;
     }
 
     @Override
@@ -2170,8 +2190,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public IDevModeCheats cheat() {
         if (cheats == null) {
             cheats = new DevModeCheats();
-            // TODO: In Network game, inform other players that this player is
-            // cheating
+            // TODO: In Network game, inform other players that this player is cheating
         }
         return cheats;
     }

@@ -3,6 +3,7 @@ Code=KHC
 Date=2021-02-05
 Name=Kaldheim Commander
 Type=Other
+ScryfallCode=KHC
 
 [cards]
 1 M Lathril, Blade of the Elves

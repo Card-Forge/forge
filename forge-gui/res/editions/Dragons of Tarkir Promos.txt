@@ -3,6 +3,7 @@ Code=PDTK
 Date=2015-03-08
 Name=Dragons of Tarkir Promos
 Type=Promos
+ScryfallCode=PDTK
 
 [cards]
 96 R Deathbringer Regent

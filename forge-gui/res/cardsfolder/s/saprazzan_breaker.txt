@@ -2,7 +2,7 @@ Name:Saprazzan Breaker
 ManaCost:4 U
 Types:Creature Beast
 PT:3/3
-A:AB$ Dig | Cost$ U | DigNum$ 1 | Reveal$ True | ChangeNum$ All | RememberRevealed$ True | DestinationZone$ Graveyard | SubAbility$ DBPump | SpellDescription$ Mill a card. If a land card was milled this way, CARDNAME can't be blocked this turn.
+A:AB$ Mill | Cost$ U | Defined$ You | NumCards$ 1 | RememberMilled$ True | SubAbility$ DBPump | SpellDescription$ Mill a card. If a land card was milled this way, CARDNAME can't be blocked this turn.
 SVar:DBPump:DB$ Pump | Defined$ Self | KW$ HIDDEN Unblockable | ConditionDefined$ Remembered | ConditionPresent$ Card.Land | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All

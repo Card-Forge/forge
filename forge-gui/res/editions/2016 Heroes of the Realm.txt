@@ -5,6 +5,7 @@ Name=2016 Heroes of the Realm
 Code2=HTR
 MciCode=htr
 Type=Funny
+ScryfallCode=htr16
 
 [cards]
 1 M Chandra, Gremlin Wrangler

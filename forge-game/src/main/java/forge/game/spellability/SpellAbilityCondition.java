@@ -244,7 +244,6 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
      * @return a boolean.
      */
     public final boolean areMet(final SpellAbility sa) {
-
         Player activator = sa.getActivatingPlayer();
         if (activator == null) {
             activator = sa.getHostCard().getController();

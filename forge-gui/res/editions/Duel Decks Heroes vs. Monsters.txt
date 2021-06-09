@@ -5,6 +5,7 @@ Date=2013-09-06
 Name=Duel Decks: Heroes vs. Monsters
 MciCode=ddl
 Type=Duel_Decks
+ScryfallCode=DDL
 
 [cards]
 1 M Sun Titan

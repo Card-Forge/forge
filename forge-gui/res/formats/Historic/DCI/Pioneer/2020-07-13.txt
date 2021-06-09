@@ -1,0 +1,7 @@
+[format]
+Name:Pioneer, 7/13/20
+Type:Historic
+Subtype:Pioneer
+Effective:2020-07-13
+Sets:RTR, GTC, DGM, M14, THS, BNG, JOU, M15, KTK, FRF, DTK, ORI, BFZ, OGW, W16, SOI, EMN, KLD, AER, W17, AKH, HOU, XLN, RIX, DOM, GS1, M19, GRN, G18, RNA, WAR, M20, ELD, THB, IKO, M21
+Banned:Bloodstained Mire; Felidar Guardian; Flooded Strand; Leyline of Abundance; Polluted Delta; Windswept Heath; Wooded Foothills

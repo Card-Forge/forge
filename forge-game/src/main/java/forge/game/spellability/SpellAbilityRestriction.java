@@ -195,7 +195,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
      * @return a boolean.
      */
     public final boolean checkZoneRestrictions(final Card c, final SpellAbility sa) {
-
         final Player activator = sa.getActivatingPlayer();
         final Zone cardZone = c.getLastKnownZone();
         Card cp = c;

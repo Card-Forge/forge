@@ -8,6 +8,7 @@ Border=Silver
 BoosterCovers=1
 Booster=11 Common, 3 Uncommon, 1 Rare
 FoilAlwaysInCommonSlot=False
+ScryfallCode=UST
 
 [cards]
 3a C Amateur Auteur
@@ -278,6 +279,7 @@ FoilAlwaysInCommonSlot=False
 [tokens]
 storm_crow
 c_2_2_homunculus
+c_4_4_dragon_flying
 w_2_2_cat
 w_0_1_goat
 w_1_1_spirit_flying
@@ -309,7 +311,6 @@ g_1_1_squirrel
 g_6_6_wurm
 gw_x_x_elemental_total_creatures
 gw_x_x_elemental_total_creatures
-wubrg_4_4_dragon
 c_a_clue_draw
 c_a_clue_draw
 c_x_x_a_construct

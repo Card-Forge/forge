@@ -3,6 +3,7 @@ Code=STA
 Date=2021-04-23
 Name=Strixhaven Mystical Archive
 Type=Other
+ScryfallCode=STA
 
 [cards]
 1 M Approach of the Second Sun
@@ -131,4 +132,3 @@ Type=Other
 124 R Growth Spiral
 125 R Lightning Helix
 126 R Putrefy
-

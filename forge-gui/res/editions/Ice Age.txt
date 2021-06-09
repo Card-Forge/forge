@@ -8,6 +8,7 @@ Type=Expansion
 BoosterCovers=5
 Booster=11 Common, 3 Uncommon, 1 Rare
 Foil=NotSupported
+ScryfallCode=ICE
 
 [cards]
 113 U Abyssal Specter

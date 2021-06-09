@@ -3,7 +3,8 @@ Code=PSOK
 Date=2005-06-03
 Name=Saviors of Kamigawa Promos
 Type=Promos
+ScryfallCode=PSOK
 
 [cards]
-18 R Kiyomaro, First to Stand
-99 R Ghost-Lit Raider
+18★ R Kiyomaro, First to Stand
+99★ R Ghost-Lit Raider

@@ -48,7 +48,9 @@ import java.util.regex.Pattern;
  * @author Forge
  * @version $Id: CardSet.java 9708 2011-08-09 19:34:12Z jendave $
  */
-public final class CardEdition implements Comparable<CardEdition> { // immutable
+public final class CardEdition implements Comparable<CardEdition> {
+
+    // immutable
     public enum Type {
         UNKNOWN,
 
@@ -98,13 +100,16 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     // commonly used printsheets with collector number
     public enum EditionSectionWithCollectorNumbers {
         CARDS("cards"),
+        SPECIAL_SLOT("special slot"), //to help with convoluted boosters
         PRECON_PRODUCT("precon product"),
         BORDERLESS("borderless"),
         SHOWCASE("showcase"),
         EXTENDED_ART("extended art"),
         ALTERNATE_ART("alternate art"),
+        ALTERNATE_FRAME("alternate frame"),
         BUY_A_BOX("buy a box"),
         PROMO("promo"),
+        BUNDLE("bundle"),
         BOX_TOPPER("box topper");
 
         private final String name;
@@ -209,6 +214,8 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     private String code;
     private String code2;
     private String mciCode;
+    private String scryfallCode;
+    private String cardsLanguage;
     private Type   type;
     private String name;
     private String alias = null;
@@ -298,6 +305,8 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
     public String getCode()  { return code;  }
     public String getCode2() { return code2; }
     public String getMciCode() { return mciCode; }
+    public String getScryfallCode() { return scryfallCode.toLowerCase(); }
+    public String getCardsLangCode() { return cardsLanguage.toLowerCase(); }
     public Type   getType()  { return type;  }
     public String getName()  { return name;  }
     public String getAlias() { return alias; }
@@ -450,7 +459,8 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
                     * rarity - grouping #4
                     * name - grouping #5
              */
-                "(^([0-9A-Z]+.?) )?(([SCURML]) )?(.*)$"
+//                "(^(.?[0-9A-Z]+.?))?(([SCURML]) )?(.*)$"
+                "(^(.?[0-9A-Z]+\\S?[A-Z]*)\\s)?(([SCURML])\\s)?(.*)$"
             );
 
             ListMultimap<String, CardInSet> cardMap = ArrayListMultimap.create();
@@ -515,6 +525,14 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             res.mciCode = section.get("MciCode");
             if (res.mciCode == null) {
                 res.mciCode = res.code2.toLowerCase();
+            }
+            res.scryfallCode = section.get("ScryfallCode");
+            if (res.scryfallCode == null){
+                res.scryfallCode = res.code;
+            }
+            res.cardsLanguage = section.get("CardLang");
+            if (res.cardsLanguage == null){
+                res.cardsLanguage = "en";
             }
 
             res.boosterArts = section.getInt("BoosterCovers", 1);

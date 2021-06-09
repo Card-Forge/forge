@@ -3,15 +3,16 @@ Code=PTHS
 Date=2013-09-21
 Name=Theros Promos
 Type=Promos
+ScryfallCode=PTHS
 
 [cards]
-3 R Celestial Archon
+3★ R Celestial Archon
 26 U Phalanx Leader
-42 R Bident of Thassa
-63 R Shipbreaker Kraken
-75 R Abhorrent Overlord
+42★ R Bident of Thassa
+63★ R Shipbreaker Kraken
+75★ R Abhorrent Overlord
 98 R Nighthowler
-120 R Ember Swallower
-149 R Anthousa, Setessan Hero
+120★ R Ember Swallower
+149★ R Anthousa, Setessan Hero
 160 U Karametra's Acolyte
-180 R Sylvan Caryatid
+*180 R Sylvan Caryatid

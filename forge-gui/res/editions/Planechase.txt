@@ -6,6 +6,7 @@ Alias=PCH
 Code2=HOP
 MciCode=pch
 Type=Other
+ScryfallCode=HOP
 
 [cards]
 1 C Academy at Tolaria West

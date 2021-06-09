@@ -3,6 +3,7 @@ package forge.game.ability.effects;
 import java.util.Collections;
 import java.util.List;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.GameCommand;
@@ -154,20 +155,27 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                     game.getUntap().addUntil(p, new GameCommand() {
                         @Override
                         public void run() {
+                            List<Object> tempRemembered = Lists.newArrayList(Iterables.filter(source.getRemembered(), Player.class));
+                            source.removeRemembered(tempRemembered);
                             source.addRemembered(p);
                             AbilityUtils.resolve(repeat);
                             source.removeRemembered(p);
+                            source.addRemembered(tempRemembered);
                         }
                     });
                 } else {
+                    // to avoid risk of collision with other abilities swap out other Remembered Player while resolving
+                    List<Object> tempRemembered = Lists.newArrayList(Iterables.filter(source.getRemembered(), Player.class));
+                    source.removeRemembered(tempRemembered);
                     source.addRemembered(p);
                     AbilityUtils.resolve(repeat);
                     source.removeRemembered(p);
+                    source.addRemembered(tempRemembered);
                 }
             }
         }
         
-        if(sa.hasParam("DamageMap")) {
+        if (sa.hasParam("DamageMap")) {
             game.getAction().dealDamage(false, sa.getDamageMap(), sa.getPreventMap(), sa.getCounterTable(), sa);
         }
         if (sa.hasParam("ChangeZoneTable")) {

@@ -4,6 +4,7 @@ Date=2015-02-27
 Name=Duel Decks: Elspeth vs. Kiora
 MciCode=ddo
 Type=Duel_Decks
+ScryfallCode=DDO
 
 [cards]
 1 M Elspeth, Sun's Champion

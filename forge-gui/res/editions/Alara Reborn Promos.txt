@@ -3,7 +3,8 @@ Code=PARB
 Date=2009-04-30
 Name=Alara Reborn Promos
 Type=Promos
+ScryfallCode=PARB
 
 [cards]
-53 M Dragon Broodmother
-70 R Knight of New Alara
+53★ M Dragon Broodmother
+70★ R Knight of New Alara

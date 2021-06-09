@@ -33,5 +33,5 @@ Test of Endurance|The Test|So... did I pass?
 Thassa's Oracle|The Prophecy of Victory|I see... nothing. We must've won.
 The Cheese Stands Alone|The Cheese|It's cheesy, but hey, it works!
 Triskaidekaphobia|The Fear of 13|It's just a silly ancient superstition... right?
-Vorpal Blade|Snicker-Snack!|"And hast thou slain the Jabberwock? Come to my arms, my beamish boy!"
+Vorpal Sword|Snicker-Snack!|"And hast thou slain the Jabberwock? Come to my arms, my beamish boy!"
 Emblem - Vraska, Golgari Queen|The Flurry of Assassins|How good is your dodging?

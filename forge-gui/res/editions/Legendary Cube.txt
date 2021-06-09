@@ -5,6 +5,7 @@ Name=Legendary Cube
 Code2=PZ1
 MciCode=pz1
 Type=Online
+ScryfallCode=PZ1
 
 [cards]
 1 R Bastion Protector

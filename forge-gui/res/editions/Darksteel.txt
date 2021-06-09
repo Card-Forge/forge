@@ -9,6 +9,7 @@ BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 Rare
 FoilAlwaysInCommonSlot=False
 ChaosDraftThemes=MIRRODIN
+ScryfallCode=DST
 
 [cards]
 37 R AEther Snap

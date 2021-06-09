@@ -8,6 +8,7 @@ BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 RareMythic
 FoilChanceInBooster=100
 ChaosDraftThemes=MASTERS_SET
+ScryfallCode=IMA
 
 [cards]
 1 C Scion of Ugin
@@ -195,7 +196,7 @@ ChaosDraftThemes=MASTERS_SET
 183 M Primeval Titan
 184 R Rampaging Baloths
 185 C Search for Tomorrow
-186 U Sultai Flayer 
+186 U Sultai Flayer
 187 C Timberland Guide
 188 U Undercity Troll
 189 M Vorinclex, Voice of Hunger
@@ -224,7 +225,7 @@ ChaosDraftThemes=MASTERS_SET
 212 R Aether Vial
 213 U Bubbling Cauldron
 214 C Darksteel Axe
-215 U Dragonloft Idol 
+215 U Dragonloft Idol
 216 C Guardian Idol
 217 U Kolaghan Monument
 218 C Manakin

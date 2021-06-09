@@ -146,8 +146,8 @@ public class GameAction {
         boolean fromBattlefield = zoneFrom != null && zoneFrom.is(ZoneType.Battlefield);
         boolean wasFacedown = c.isFaceDown();
 
-        //Rule 110.5g: A token that has left the battlefield can't move to another zone
-        if (c.isToken() && zoneFrom != null && !fromBattlefield && !zoneFrom.is(ZoneType.Stack)) {
+        // Rule 111.8: A token that has left the battlefield can't move to another zone
+        if (!c.isSpell() && c.isToken() && zoneFrom != null && !fromBattlefield && !zoneFrom.is(ZoneType.Stack)) {
             return c;
         }
 
@@ -243,7 +243,7 @@ public class GameAction {
                 copied = CardFactory.copyCard(c, false);
 
                 if (zoneTo.is(ZoneType.Stack)) {
-                    // when moving to stack, copy changed card infomation
+                    // when moving to stack, copy changed card information
                     copied.setChangedCardColors(c.getChangedCardColors());
                     copied.setChangedCardKeywords(c.getChangedCardKeywords());
                     copied.setChangedCardTypes(c.getChangedCardTypesMap());
@@ -441,7 +441,7 @@ public class GameAction {
         }
 
         if (mergedCards != null) {
-            // Move components of merged permanet here
+            // Move components of merged permanent here
             // Also handle 721.3e and 903.9a
             boolean wasToken = c.isToken();
             if (commanderEffect != null) {

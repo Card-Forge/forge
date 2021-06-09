@@ -3,6 +3,7 @@ Code=PSCG
 Date=2003-05-26
 Name=Scourge Promos
 Type=Promos
+ScryfallCode=PSCG
 
 [cards]
 74 R Soul Collector

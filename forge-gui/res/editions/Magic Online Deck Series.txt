@@ -4,46 +4,47 @@ Date=2010-11-08
 Name=Magic Online Deck Series
 MciCode=td1
 Type=Online
+ScryfallCode=td0
 
 [cards]
-1 U Aura of Silence
-2 C Benevolent Bodyguard
-3 R Ethersworn Canonist
-4 U Flickerwisp
-5 U Jotun Grunt
-6 U Kor Firewalker
-7 R Mangara of Corondor
-8 C Oblivion Ring
-9 R Serra Avenger
-10 R Silence
-11 R Stoneforge Mystic
-12 U Swords to Plowshares
-13 R Weathered Wayfarer
-14 C Chain Lightning
-15 C Fireblast
-16 U Flames of the Blood Hand
-17 R Goblin Guide
-18 U Hellspark Elemental
-19 C Keldon Marauders
-20 C Lava Spike
-21 C Lightning Bolt
-22 U Magma Jet
-23 U Price of Progress
-24 C Pyroblast
-25 C Pyrostatic Pillar
-26 C Rift Bolt
-27 U Aether Vial
-28 C Bonesplitter
-29 U Relic of Progenitus
-30 R Umezawa's Jitte
-31 R Flagstones of Trokair
-32 R Karakas
-33 U Mishra's Factory
-34 L Plains
-35 L Plains
-36 L Plains
-37 L Plains
-38 L Mountain
-39 L Mountain
-40 L Mountain
-41 L Mountain
+B1 U Aura of Silence
+B2 C Benevolent Bodyguard
+B3 R Ethersworn Canonist
+B4 U Flickerwisp
+B5 U Jotun Grunt
+B6 U Kor Firewalker
+B7 R Mangara of Corondor
+B8 C Oblivion Ring
+B9 R Serra Avenger
+B10 R Silence
+B11 R Stoneforge Mystic
+B12 U Swords to Plowshares
+B13 R Weathered Wayfarer
+B14 C Chain Lightning
+B15 C Fireblast
+B16 U Flames of the Blood Hand
+B17 R Goblin Guide
+B18 U Hellspark Elemental
+B19 C Keldon Marauders
+B20 C Lava Spike
+B21 C Lightning Bolt
+B22 U Magma Jet
+B23 U Price of Progress
+B24 C Pyroblast
+B25 C Pyrostatic Pillar
+B26 C Rift Bolt
+B27 U Aether Vial
+B28 C Bonesplitter
+B29 U Relic of Progenitus
+B30 R Umezawa's Jitte
+B31 R Flagstones of Trokair
+B32 R Karakas
+B33 U Mishra's Factory
+B34 L Plains
+B35 L Plains
+B36 L Plains
+B37 L Plains
+B38 L Mountain
+B39 L Mountain
+B40 L Mountain
+B41 L Mountain

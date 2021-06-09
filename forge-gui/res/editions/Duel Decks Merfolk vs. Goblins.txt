@@ -5,35 +5,36 @@ Name=Duel Decks: Merfolk vs. Goblins
 Code2=DDT
 MciCode=ddt
 Type=Duel_Decks
+ScryfallCode=DDT
 
 [cards]
 1 M Master of Waves
-2 C Aquitect's Will 
-3 C Claustrophobia 
-4 U Concentrate 
+2 C Aquitect's Will
+3 C Claustrophobia
+4 U Concentrate
 5 R Engulf the Shore
 6 C Essence Scatter
 7 R Harbinger of the Tides
-8 C Inkfathom Divers 
+8 C Inkfathom Divers
 9 R Master of the Pearl Trident
-10 U Merfolk Looter 
+10 U Merfolk Looter
 11 R Merfolk Sovereign
 12 U Merfolk Wayfinder
-13 U Merrow Reejerey 
-14 R Mind Spring 
-15 R Misdirection 
-16 U Rootwater Hunter 
-17 C Scroll Thief 
-18 C Streambed Aquitects 
-19 U Tidal Courier 
-20 C Tidal Warrior 
-21 C Tidal Wave 
-22 R Tidebinder Mage 
-23 U Triton Tactics 
-24 R Wake Thrasher 
-25 R Cold-Eyed Selkie 
-26 U Blighted Cataract 
-27 C Lonely Sandbar 
+13 U Merrow Reejerey
+14 R Mind Spring
+15 R Misdirection
+16 U Rootwater Hunter
+17 C Scroll Thief
+18 C Streambed Aquitects
+19 U Tidal Courier
+20 C Tidal Warrior
+21 C Tidal Wave
+22 R Tidebinder Mage
+23 U Triton Tactics
+24 R Wake Thrasher
+25 R Cold-Eyed Selkie
+26 U Blighted Cataract
+27 C Lonely Sandbar
 28 L Island
 29 L Island
 30 L Island

@@ -1215,8 +1215,7 @@ public abstract class GameState {
                     boolean tapped = c.isTapped();
                     boolean sickness = c.hasSickness();
                     Map<CounterType, Integer> counters = c.getCounters();
-                    // Note: Not clearCounters() since we want to keep the counters
-                    // var as-is.
+                    // Note: Not clearCounters() since we want to keep the counters var as-is.
                     c.setCounters(Maps.newHashMap());
                     if (c.isAura()) {
                         // dummy "enchanting" to indicate that the card will be force-attached elsewhere

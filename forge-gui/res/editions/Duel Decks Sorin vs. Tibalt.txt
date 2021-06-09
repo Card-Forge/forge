@@ -4,6 +4,7 @@ Date=2013-03-15
 Name=Duel Decks: Sorin vs. Tibalt
 MciCode=ddk
 Type=Duel_Decks
+ScryfallCode=DDK
 
 [cards]
 1 M Sorin, Lord of Innistrad

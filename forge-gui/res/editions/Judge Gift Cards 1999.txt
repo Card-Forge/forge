@@ -3,6 +3,7 @@ Code=G99
 Date=1999-01-01
 Name=Judge Gift Cards 1999
 Type=Promos
+ScryfallCode=G99
 
 [cards]
 1 R Memory Lapse

@@ -4,164 +4,165 @@ Date=2009-08-25
 Name=Commander Theme Decks
 MciCode=td0
 Type=Online
+ScryfallCode=TD0
 
 [cards]
-1 C Auramancer
-2 U Condemn
-3 R Decree of Justice
-4 C Dismantling Blow
-5 U Empyrial Armor
-6 R Enlightened Tutor
-7 U Faith's Fetters
-8 U Ghostly Prison
-9 C Kami of Ancient Law
-10 C Momentary Blink
-11 C Noble Templar
-12 C Oblivion Ring
-13 U Prison Term
-14 U Resurrection
-15 C Seal of Cleansing
-16 U Stonecloaker
-17 U Swords to Plowshares
-18 C Capsize
-19 C Compulsive Research
-20 U Confiscate
-21 R Copy Enchantment
-22 U Court Hussar
-23 U Fact or Fiction
-24 U Hinder
-25 C Looter il-Kor
-26 C Man-o'-War
-27 C Merfolk Looter
-28 C Mulldrifter
-29 U Overwhelming Intellect
-30 U Raven Familiar
-31 C Rhystic Study
-32 C Shoreline Ranger
-33 U Willbender
-34 C Abyssal Gatekeeper
-35 R All Hallow's Eve
-36 U Animate Dead
-37 U Ashes to Ashes
-38 R Avatar of Woe
-39 U Buried Alive
-40 C Carrion Feeder
-41 U Dread Return
-42 U Golgari Thug
-43 C Grim Harvest
-44 U Massacre
-45 U Nezumi Graverobber
-46 R Phyrexian Arena
-47 C Reaping the Graves
-48 U Shriekmaw
-49 U Stinkweed Imp
-50 C Terror
-51 C Twisted Abomination
-52 C Anarchist
-53 C Ancient Grudge
-54 U Anger
-55 C Chain Lightning
-56 C Chartooth Cougar
-57 U Flametongue Kavu
-58 C Hissing Iguanar
-59 C Keldon Vandals
-60 C Lightning Bolt
-61 C Resounding Thunder
-62 C Borderland Ranger
-63 U Brawn
-64 C Civic Wayfinder
-65 U Concordant Crossroads
-66 U Constant Mists
-67 C Edge of Autumn
-68 C Elven Cache
-69 C Elvish Visionary
-70 U Eternal Witness
-71 U Explosive Vegetation
-72 C Fertile Ground
-73 R Genesis
-74 R Golgari Grave-Troll
-75 U Harmonize
-76 C Jungle Lion
-77 C Kodama's Reach
-78 C Krosan Tusker
-79 R Life from the Loam
-80 C Moment's Peace
-81 C Penumbra Bobcat
-82 U Phantom Centaur
-83 C Rampant Growth
-84 U Recollect
-85 C Rootbreaker Wurm
-86 C Sakura-Tribe Elder
-87 C Werebear
-88 C Wickerbough Elder
-89 C Wild Mongrel
-90 C Wirewood Guardian
-91 U Wood Elves
-92 C Yavimaya Elder
-93 U Yavimaya Enchantress
-94 U Armadillo Cloak
-95 U Azorius Guildmage
-96 U Cauldron Dance
-97 U Coiling Oracle
-98 U Fires of Yavimaya
-99 U Jungle Barrier
-100 R Mirari's Wake
-101 U Mistmeadow Witch
-102 U Putrefy
-103 R Questing Phelddagrif
-104 R Rubinia Soulsinger
-105 C Shambling Shell
-106 U Sterling Grove
-107 C Temporal Spring
-108 C Terminate
-109 R Vampiric Dragon
-110 R Xira Arien
-111 C Azorius Signet
-112 C Golgari Signet
-113 C Gruul Signet
-114 R Illusionary Mask
-115 U Lightning Greaves
-116 C Rakdos Signet
-117 U Relic of Progenitus
-118 C Selesnya Signet
-119 C Simic Signet
-120 U Skullclamp
-121 U Azorius Chancery
-122 C Bant Panorama
-123 C Barren Moor
-124 U Coastal Tower
-125 U Darigaaz's Caldera
-126 U Elfhame Palace
-127 C Forgotten Cave
-128 U Ghost Quarter
-129 C Golgari Rot Farm
-130 C Gruul Turf
-131 C Jund Panorama
-132 R Miren, the Moaning Well
-133 C Rakdos Carnarium
-134 C Rupture Spire
-135 U Savage Lands
-136 U Seaside Citadel
-137 U Selesnya Sanctuary
-138 U Simic Growth Chamber
-139 C Terramorphic Expanse
-140 C Tranquil Thicket
-141 U Treva's Ruins
-142 L Plains
-143 L Plains
-144 L Plains
-145 L Island
-146 L Island
-147 L Island
-148 L Swamp
-149 L Swamp
-150 L Swamp
-151 L Mountain
-152 L Mountain
-153 L Mountain
-154 L Forest
-155 L Forest
-156 L Forest
+A1 C Auramancer
+A2 U Condemn
+A3 R Decree of Justice
+A4 C Dismantling Blow
+A5 U Empyrial Armor
+A6 R Enlightened Tutor
+A7 U Faith's Fetters
+A8 U Ghostly Prison
+A9 C Kami of Ancient Law
+A10 C Momentary Blink
+A11 C Noble Templar
+A12 C Oblivion Ring
+A13 U Prison Term
+A14 U Resurrection
+A15 C Seal of Cleansing
+A16 U Stonecloaker
+A17 U Swords to Plowshares
+A18 C Capsize
+A19 C Compulsive Research
+A20 U Confiscate
+A21 R Copy Enchantment
+A22 U Court Hussar
+A23 U Fact or Fiction
+A24 U Hinder
+A25 C Looter il-Kor
+A26 C Man-o'-War
+A27 C Merfolk Looter
+A28 C Mulldrifter
+A29 U Overwhelming Intellect
+A30 U Raven Familiar
+A31 C Rhystic Study
+A32 C Shoreline Ranger
+A33 U Willbender
+A34 C Abyssal Gatekeeper
+A35 R All Hallow's Eve
+A36 U Animate Dead
+A37 U Ashes to Ashes
+A38 R Avatar of Woe
+A39 U Buried Alive
+A40 C Carrion Feeder
+A41 U Dread Return
+A42 U Golgari Thug
+A43 C Grim Harvest
+A44 U Massacre
+A45 U Nezumi Graverobber
+A46 R Phyrexian Arena
+A47 C Reaping the Graves
+A48 U Shriekmaw
+A49 U Stinkweed Imp
+A50 C Terror
+A51 C Twisted Abomination
+A52 C Anarchist
+A53 C Ancient Grudge
+A54 U Anger
+A55 C Chain Lightning
+A56 C Chartooth Cougar
+A57 U Flametongue Kavu
+A58 C Hissing Iguanar
+A59 C Keldon Vandals
+A60 C Lightning Bolt
+A61 C Resounding Thunder
+A62 C Borderland Ranger
+A63 U Brawn
+A64 C Civic Wayfinder
+A65 U Concordant Crossroads
+A66 U Constant Mists
+A67 C Edge of Autumn
+A68 C Elven Cache
+A69 C Elvish Visionary
+A70 U Eternal Witness
+A71 U Explosive Vegetation
+A72 C Fertile Ground
+A73 R Genesis
+A74 R Golgari Grave-Troll
+A75 U Harmonize
+A76 C Jungle Lion
+A77 C Kodama's Reach
+A78 C Krosan Tusker
+A79 R Life from the Loam
+A80 C Moment's Peace
+A81 C Penumbra Bobcat
+A82 U Phantom Centaur
+A83 C Rampant Growth
+A84 U Recollect
+A85 C Rootbreaker Wurm
+A86 C Sakura-Tribe Elder
+A87 C Werebear
+A88 C Wickerbough Elder
+A89 C Wild Mongrel
+A90 C Wirewood Guardian
+A91 U Wood Elves
+A92 C Yavimaya Elder
+A93 U Yavimaya Enchantress
+A94 U Armadillo Cloak
+A95 U Azorius Guildmage
+A96 U Cauldron Dance
+A97 U Coiling Oracle
+A98 U Fires of Yavimaya
+A99 U Jungle Barrier
+A100 R Mirari's Wake
+A101 U Mistmeadow Witch
+A102 U Putrefy
+A103 R Questing Phelddagrif
+A104 R Rubinia Soulsinger
+A105 C Shambling Shell
+A106 U Sterling Grove
+A107 C Temporal Spring
+A108 C Terminate
+A109 R Vampiric Dragon
+A110 R Xira Arien
+A111 C Azorius Signet
+A112 C Golgari Signet
+A113 C Gruul Signet
+A114 R Illusionary Mask
+A115 U Lightning Greaves
+A116 C Rakdos Signet
+A117 U Relic of Progenitus
+A118 C Selesnya Signet
+A119 C Simic Signet
+A120 U Skullclamp
+A121 U Azorius Chancery
+A122 C Bant Panorama
+A123 C Barren Moor
+A124 U Coastal Tower
+A125 U Darigaaz's Caldera
+A126 U Elfhame Palace
+A127 C Forgotten Cave
+A128 U Ghost Quarter
+A129 C Golgari Rot Farm
+A130 C Gruul Turf
+A131 C Jund Panorama
+A132 R Miren, the Moaning Well
+A133 C Rakdos Carnarium
+A134 C Rupture Spire
+A135 U Savage Lands
+A136 U Seaside Citadel
+A137 U Selesnya Sanctuary
+A138 U Simic Growth Chamber
+A139 C Terramorphic Expanse
+A140 C Tranquil Thicket
+A141 U Treva's Ruins
+A142 L Plains
+A143 L Plains
+A144 L Plains
+A145 L Island
+A146 L Island
+A147 L Island
+A148 L Swamp
+A149 L Swamp
+A150 L Swamp
+A151 L Mountain
+A152 L Mountain
+A153 L Mountain
+A154 L Forest
+A155 L Forest
+A156 L Forest
 
 [tokens]
 w_4_4_angel_flying

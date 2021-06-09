@@ -21,6 +21,7 @@ import forge.game.GameObject;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardUtil;
 import forge.game.card.CardZoneTable;
 import forge.game.combat.Combat;
 import forge.game.phase.PhaseType;
@@ -198,7 +199,7 @@ public abstract class SpellAbilityEffect {
     // Players
     protected final static PlayerCollection getTargetPlayers(final SpellAbility sa) {                                       return getPlayers(false, "Defined",    sa); }
     protected final static PlayerCollection getTargetPlayers(final SpellAbility sa, final String definedParam) {            return getPlayers(false, definedParam, sa); }
-    protected final static PlayerCollection getDefinedPlayersOrTargeted(final SpellAbility sa ) {                           return getPlayers(true,  "Defined",    sa); }
+    protected final static PlayerCollection getDefinedPlayersOrTargeted(final SpellAbility sa) {                           return getPlayers(true,  "Defined",    sa); }
     protected final static PlayerCollection getDefinedPlayersOrTargeted(final SpellAbility sa, final String definedParam) { return getPlayers(true,  definedParam, sa); }
 
     private static PlayerCollection getPlayers(final boolean definedFirst, final String definedParam, final SpellAbility sa) {
@@ -296,7 +297,7 @@ public abstract class SpellAbilityEffect {
         }
         delTrig.append("| TriggerDescription$ ").append(desc);
 
-        final Trigger trig = TriggerHandler.parseTrigger(delTrig.toString(), sa.getHostCard(), intrinsic);
+        final Trigger trig = TriggerHandler.parseTrigger(delTrig.toString(), CardUtil.getLKICopy(sa.getHostCard()), intrinsic);
         for (final Card c : crds) {
             trig.addRemembered(c);
 
@@ -703,8 +704,8 @@ public abstract class SpellAbilityEffect {
         Card host = sa.getHostCard();
         final Game game = host.getGame();
         final String duration = sa.getParam("Duration");
-        // in case host was LKI
-        if (host.isLKI()) {
+        // in case host was LKI or still resolving
+        if (host.isLKI() || host.getZone().is(ZoneType.Stack)) {
             host = game.getCardState(host);
         }
 

@@ -116,7 +116,7 @@ public class AdvancedSearch {
         CARD_SET("lblSet", PaperCard.class, FilterOperator.SINGLE_LIST_OPS, new CustomListEvaluator<PaperCard, CardEdition>(FModel.getMagicDb().getSortedEditions(), CardEdition.FN_GET_CODE) {
             @Override
             protected CardEdition getItemValue(PaperCard input) {
-                return FModel.getMagicDb().getEditions().get(input.getEdition());
+                return FModel.getMagicDb().getCardEdition(input.getEdition());
             }
         }),
         CARD_FORMAT("lblFormat", PaperCard.class, FilterOperator.MULTI_LIST_OPS, new CustomListEvaluator<PaperCard, GameFormat>((List<GameFormat>)FModel.getFormats().getFilterList()) {
@@ -330,7 +330,10 @@ public class AdvancedSearch {
             @Override
             protected CardEdition getItemValue(InventoryItem input) {
                 if (input instanceof PaperCard) {
-                    return FModel.getMagicDb().getEditions().get(((PaperCard)input).getEdition());
+                    CardEdition set = FModel.getMagicDb().getEditions().get(((PaperCard)input).getEdition());
+                    if (set == null)  // try custom set
+                        set = FModel.getMagicDb().getCustomEditions().get(((PaperCard)input).getEdition());
+                    return set;
                 } else if (input instanceof SealedProduct) {
                     return FModel.getMagicDb().getEditions().get(((SealedProduct)input).getEdition());
                 } else {

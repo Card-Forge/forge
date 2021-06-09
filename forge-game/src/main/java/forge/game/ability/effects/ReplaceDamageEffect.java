@@ -39,6 +39,10 @@ public class ReplaceDamageEffect extends SpellAbilityEffect {
         
         if (prevent > 0) {
             int n = Math.min(dmg, prevent);
+            // if the effect has divided shield, use that
+            if (originalParams.get(AbilityKey.DividedShieldAmount) != null) {
+                n = Math.min(n, (Integer)originalParams.get(AbilityKey.DividedShieldAmount));
+            }
             dmg -= n;
             prevent -= n;
 

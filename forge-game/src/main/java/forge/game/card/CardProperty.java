@@ -40,6 +40,11 @@ public class CardProperty {
         final Card lki = game.getChangeZoneLKIInfo(card);
         final Player controller = lki.getController();
 
+        // CR 702.25b if card is phased out it will not count unless specifically asked for
+        if (card.isPhasedOut() && !property.contains("phasedOut")) {
+            return false;
+        }
+
         // by name can also have color names, so needs to happen before colors.
         if (property.startsWith("named")) {
             String name = TextUtil.fastReplace(property.substring(5), ";", ","); // for some legendary cards

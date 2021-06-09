@@ -6,6 +6,7 @@ MciCode=br
 Type=Other
 Border=White
 Foil=NotSupported
+ScryfallCode=BRB
 
 [cards]
 1 U Abyssal Specter

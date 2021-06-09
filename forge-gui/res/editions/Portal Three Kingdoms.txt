@@ -9,6 +9,7 @@ Border=White
 BoosterCovers=1
 Booster=5 Common, 2 Uncommon, 1 Rare, 2 BasicLand
 Foil=NotSupported
+ScryfallCode=PTK
 
 [cards]
 1 U Alert Shu Infantry

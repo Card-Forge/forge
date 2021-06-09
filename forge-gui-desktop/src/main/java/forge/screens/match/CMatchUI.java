@@ -760,7 +760,7 @@ public final class CMatchUI
                 }
             }
             };
-            
+
         if (FThreads.isGuiThread()) { // run this now whether in EDT or not so that it doesn't clobber later stuff
             FThreads.invokeInEdtNowOrLater(focusRoutine);
         } else {
@@ -1029,6 +1029,24 @@ public final class CMatchUI
     }
 
     @Override
+    public Map<GameEntityView, Integer> assignGenericAmount(final CardView effectSource, final Map<GameEntityView, Integer> target,
+            final int amount, final boolean atLeastOne, final String amountLabel) {
+        if (amount <= 0) {
+            return Collections.emptyMap();
+        }
+
+        final AtomicReference<Map<GameEntityView, Integer>> result = new AtomicReference<>();
+        FThreads.invokeInEdtAndWait(new Runnable() {
+            @Override
+            public void run() {
+                final VAssignGenericAmount v = new VAssignGenericAmount(CMatchUI.this, effectSource, target, amount, atLeastOne, amountLabel);
+                result.set(v.getAssignedMap());
+            }});
+        return result.get();
+    }
+
+
+    @Override
     public void openView(final TrackableCollection<PlayerView> myPlayers) {
         final GameView gameView = getGameView();
         gameView.getGameLog().addObserver(cLog);
@@ -1273,28 +1291,28 @@ public final class CMatchUI
         String stackNotificationPolicy = FModel.getPreferences().getPref(FPref.UI_STACK_EFFECT_NOTIFICATION_POLICY);
         boolean isAi = sa.getActivatingPlayer().isAI();
         boolean isTrigger = sa.isTrigger();
-        int stackIndex = event.stackIndex;        
-        if(stackIndex == nextNotifiableStackIndex) {            
+        int stackIndex = event.stackIndex;
+        if(stackIndex == nextNotifiableStackIndex) {
             if(ForgeConstants.STACK_EFFECT_NOTIFICATION_ALWAYS.equals(stackNotificationPolicy) || (ForgeConstants.STACK_EFFECT_NOTIFICATION_AI_AND_TRIGGERED.equals(stackNotificationPolicy) && (isAi || isTrigger))) {
             // We can go and show the modal
             SpellAbilityStackInstance si = event.si;
-            
+
             MigLayout migLayout = new MigLayout("insets 15, left, gap 30, fill");
             JPanel mainPanel = new JPanel(migLayout);
             final Dimension parentSize = JOptionPane.getRootFrame().getSize();
             Dimension maxSize = new Dimension(1400, parentSize.height - 100);
             mainPanel.setMaximumSize(maxSize);
-            mainPanel.setOpaque(false);              
+            mainPanel.setOpaque(false);
 
             // Big Image
             addBigImageToStackModalPanel(mainPanel, si);
-            
+
             // Text
             addTextToStackModalPanel(mainPanel,sa,si);
-            
+
             // Small images
             int numSmallImages = 0;
-            
+
             // If current effect is a triggered/activated ability of an enchantment card, I want to show the enchanted card
             GameEntityView enchantedEntityView = null;
             Card hostCard = sa.getHostCard();
@@ -1308,45 +1326,45 @@ public final class CMatchUI
                         && !sa.getRootAbility().getPaidList("Sacrificed").isEmpty()) {
                     // If the player activated its ability by sacrificing the enchantment, the enchantment has not anything attached anymore and the ex-enchanted card has to be searched in other ways.. for example, the green enchantment "Carapace"
                     enchantedEntity = sa.getRootAbility().getPaidList("Sacrificed").get(0).getEnchantingCard();
-                    if(enchantedEntity != null) {            
-                        enchantedEntityView = enchantedEntity.getView();                            
+                    if(enchantedEntity != null) {
+                        enchantedEntityView = enchantedEntity.getView();
                         numSmallImages++;
                     }
                 }
             }
-                
+
             // If current effect is a triggered ability, I want to show the triggering card if present
             SpellAbility sourceSA = (SpellAbility) si.getTriggeringObject(AbilityKey.SourceSA);
             CardView sourceCardView = null;
             if(sourceSA != null) {
                 sourceCardView = sourceSA.getHostCard().getView();
                 numSmallImages++;
-            } 
+            }
 
             // I also want to show each type of targets (both cards and players)
             List<GameEntityView> targets = getTargets(si,new ArrayList<GameEntityView>());
             numSmallImages = numSmallImages + targets.size();
-            
+
             // Now I know how many small images - on to render them
             if(enchantedEntityView != null) {
-                addSmallImageToStackModalPanel(enchantedEntityView,mainPanel,numSmallImages);                                                                                 
+                addSmallImageToStackModalPanel(enchantedEntityView,mainPanel,numSmallImages);
             }
             if(sourceCardView != null) {
-                addSmallImageToStackModalPanel(sourceCardView,mainPanel,numSmallImages);                                                             
+                addSmallImageToStackModalPanel(sourceCardView,mainPanel,numSmallImages);
             }
             for(GameEntityView gev : targets) {
                 addSmallImageToStackModalPanel(gev, mainPanel, numSmallImages);
-            }                                                                       
-            
-            FOptionPane.showOptionDialog(null, "Forge", null, mainPanel, ImmutableList.of(Localizer.getInstance().getMessage("lblOK")));                               
+            }
+
+            FOptionPane.showOptionDialog(null, "Forge", null, mainPanel, ImmutableList.of(Localizer.getInstance().getMessage("lblOK")));
             // here the user closed the modal - time to update the next notifiable stack index
-            
+
             }
             // In any case, I have to increase the counter
             nextNotifiableStackIndex++;
-            
+
         } else {
-            
+
             // Not yet time to show the modal - schedule the method again, and try again later
             Runnable tryAgainThread = new Runnable() {
                 @Override
@@ -1355,8 +1373,8 @@ public final class CMatchUI
                 }
             };
             GuiBase.getInterface().invokeInEdtLater(tryAgainThread);
-            
-        }            
+
+        }
     }
 
     private List<GameEntityView> getTargets(SpellAbilityStackInstance si, List<GameEntityView> result){
@@ -1380,22 +1398,22 @@ public final class CMatchUI
 
         return getTargets(si.getSubInstance(),result);
     }
-    
+
     private void addBigImageToStackModalPanel(JPanel mainPanel, SpellAbilityStackInstance si) {
         StackItemView siv = si.getView();
         int rotation = getRotation(si.getCardView());
 
-        FImagePanel imagePanel = new FImagePanel();               
-        BufferedImage bufferedImage = FImageUtil.getImage(siv.getSourceCard().getCurrentState()); 
+        FImagePanel imagePanel = new FImagePanel();
+        BufferedImage bufferedImage = FImageUtil.getImage(siv.getSourceCard().getCurrentState());
         imagePanel.setImage(bufferedImage, rotation, AutoSizeImageMode.SOURCE);
         int imageWidth = 433;
         int imageHeight = 600;
         Dimension imagePanelDimension = new Dimension(imageWidth,imageHeight);
         imagePanel.setMinimumSize(imagePanelDimension);
-                
-        mainPanel.add(imagePanel, "cell 0 0, spany 3");         
+
+        mainPanel.add(imagePanel, "cell 0 0, spany 3");
     }
-    
+
     private void addTextToStackModalPanel(JPanel mainPanel, SpellAbility sa, SpellAbilityStackInstance si) {
         String who = sa.getActivatingPlayer().getName();
         String action = sa.isSpell() ? " cast " : sa.isTrigger() ? " triggered " : " activated ";
@@ -1409,45 +1427,45 @@ public final class CMatchUI
             TargetChoices targets = si.getTargetChoices();
             sb.append(targets);
         }
-        sb.append(".");        
+        sb.append(".");
         String message1 = sb.toString();
-        String message2 = si.getStackDescription();       
+        String message2 = si.getStackDescription();
         String messageTotal = message1 + "\n\n" + message2;
-        
+
         final FTextArea prompt1 = new FTextArea(messageTotal);
         prompt1.setFont(FSkin.getFont(21));
         prompt1.setAutoSize(true);
         prompt1.setMinimumSize(new Dimension(475,200));
-        mainPanel.add(prompt1, "cell 1 0, aligny top");    
+        mainPanel.add(prompt1, "cell 1 0, aligny top");
     }
-    
+
     private void addSmallImageToStackModalPanel(GameEntityView gameEntityView, JPanel mainPanel, int numTarget) {
         if(gameEntityView instanceof CardView) {
             CardView cardView = (CardView) gameEntityView;
-            int currRotation = getRotation(cardView);                        
+            int currRotation = getRotation(cardView);
             FImagePanel targetPanel = new FImagePanel();
-            BufferedImage bufferedImage = FImageUtil.getImage(cardView.getCurrentState()); 
+            BufferedImage bufferedImage = FImageUtil.getImage(cardView.getCurrentState());
             targetPanel.setImage(bufferedImage, currRotation, AutoSizeImageMode.SOURCE);
             int imageWidth = 217;
             int imageHeight = 300;
             Dimension targetPanelDimension = new Dimension(imageWidth,imageHeight);
             targetPanel.setMinimumSize(targetPanelDimension);
-            mainPanel.add(targetPanel, "cell 1 1, split " + numTarget+ ",  aligny bottom");                                     
+            mainPanel.add(targetPanel, "cell 1 1, split " + numTarget+ ",  aligny bottom");
         } else if(gameEntityView instanceof PlayerView) {
             PlayerView playerView = (PlayerView) gameEntityView;
             SkinImage playerAvatar = getPlayerAvatar(playerView, 0);
             final FLabel lblIcon = new FLabel.Builder().icon(playerAvatar).build();
             Dimension dimension = playerAvatar.getSizeForPaint(JOptionPane.getRootFrame().getGraphics());
-            mainPanel.add(lblIcon, "cell 1 1, split " + numTarget+ ", w " + dimension.getWidth() + ", h " + dimension.getHeight() + ", aligny bottom");      
+            mainPanel.add(lblIcon, "cell 1 1, split " + numTarget+ ", w " + dimension.getWidth() + ", h " + dimension.getHeight() + ", aligny bottom");
         }
-    }  
-    
+    }
+
     private int getRotation(CardView cardView) {
         final int rotation;
         if (cardView.isSplitCard()) {
             String cardName = cardView.getName();
             if (cardName.isEmpty()) { cardName = cardView.getAlternateState().getName(); }
-            
+
             PaperCard pc = StaticData.instance().getCommonCards().getCard(cardName);
             boolean hasKeywordAftermath = pc != null && Card.getCardForUi(pc).hasKeyword(Keyword.AFTERMATH);
 
@@ -1459,7 +1477,7 @@ public final class CMatchUI
 
         return rotation;
     }
-    
+
     @Override
     public void notifyStackRemoval(GameEventSpellRemovedFromStack event) {
         // I always decrease the counter
@@ -1474,49 +1492,49 @@ public final class CMatchUI
                 createLandPopupPanel(land);
             }
         };
-        GuiBase.getInterface().invokeInEdtAndWait(createPopupThread);        
+        GuiBase.getInterface().invokeInEdtAndWait(createPopupThread);
     }
 
     private void createLandPopupPanel(Card land) {
-        
+
         String landPlayedNotificationPolicy = FModel.getPreferences().getPref(FPref.UI_LAND_PLAYED_NOTIFICATION_POLICY);
-        Player cardController = land.getController();       
-        boolean isAi = cardController.isAI();         
-        if(ForgeConstants.LAND_PLAYED_NOTIFICATION_ALWAYS.equals(landPlayedNotificationPolicy) 
+        Player cardController = land.getController();
+        boolean isAi = cardController.isAI();
+        if(ForgeConstants.LAND_PLAYED_NOTIFICATION_ALWAYS.equals(landPlayedNotificationPolicy)
                 || (ForgeConstants.LAND_PLAYED_NOTIFICATION_AI.equals(landPlayedNotificationPolicy) && (isAi))
                 || (ForgeConstants.LAND_PLAYED_NOTIFICATION_ALWAYS_FOR_NONBASIC_LANDS.equals(landPlayedNotificationPolicy) && !land.isBasicLand())
                 || (ForgeConstants.LAND_PLAYED_NOTIFICATION_AI_FOR_NONBASIC_LANDS.equals(landPlayedNotificationPolicy) && !land.isBasicLand()) && (isAi)) {
-            String title = "Forge";            
+            String title = "Forge";
             List<String> options = ImmutableList.of(Localizer.getInstance().getMessage("lblOK"));
-            
+
             MigLayout migLayout = new MigLayout("insets 15, left, gap 30, fill");
             JPanel mainPanel = new JPanel(migLayout);
             final Dimension parentSize = JOptionPane.getRootFrame().getSize();
             Dimension maxSize = new Dimension(1400, parentSize.height - 100);
             mainPanel.setMaximumSize(maxSize);
-            mainPanel.setOpaque(false);   
-            
+            mainPanel.setOpaque(false);
+
             int rotation = getRotation(land.getView());
 
-            FImagePanel imagePanel = new FImagePanel();               
-            BufferedImage bufferedImage = FImageUtil.getImage(land.getCurrentState().getView()); 
+            FImagePanel imagePanel = new FImagePanel();
+            BufferedImage bufferedImage = FImageUtil.getImage(land.getCurrentState().getView());
             imagePanel.setImage(bufferedImage, rotation, AutoSizeImageMode.SOURCE);
             int imageWidth = 433;
             int imageHeight = 600;
             Dimension imagePanelDimension = new Dimension(imageWidth,imageHeight);
             imagePanel.setMinimumSize(imagePanelDimension);
-                    
+
             mainPanel.add(imagePanel, "cell 0 0, spany 3");
-            
-            String msg = cardController.toString() + " puts " + land.toString() + " into play into " + ZoneType.Battlefield.toString() + "."; 
-            
+
+            String msg = cardController.toString() + " puts " + land.toString() + " into play into " + ZoneType.Battlefield.toString() + ".";
+
             final FTextArea prompt1 = new FTextArea(msg);
             prompt1.setFont(FSkin.getFont(21));
             prompt1.setAutoSize(true);
             prompt1.setMinimumSize(new Dimension(475,200));
-            mainPanel.add(prompt1, "cell 1 0, aligny top");    
-            
-            FOptionPane.showOptionDialog(null, title, null, mainPanel, options);                      
-        }      
+            mainPanel.add(prompt1, "cell 1 0, aligny top");
+
+            FOptionPane.showOptionDialog(null, title, null, mainPanel, options);
+        }
     }
 }

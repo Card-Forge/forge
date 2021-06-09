@@ -5,6 +5,7 @@ Name=2018 Heroes of the Realm
 Code2=HTR18
 MciCode=htr18
 Type=Funny
+ScryfallCode=HTR18
 
 [cards]
 1 M Kharis & The Beholder

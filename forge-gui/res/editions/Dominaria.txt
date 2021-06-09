@@ -7,7 +7,7 @@ MciCode=dom
 BoosterCovers=5
 Booster=10 Common:!fromSheet("DOM Planeswalker Decks and Additional Promo"), 3 Uncommon:!fromSheet("DOM Planeswalker Decks and Additional Promo"), 1 RareMythic:!fromSheet("DOM Planeswalker Decks and Additional Promo"), 1 BasicLand DOM
 BoosterMustContain=Legendary Creature
-
+ScryfallCode=DOM
 
 [cards]
 1 M Karn, Scion of Urza

@@ -8,6 +8,7 @@ MciCode=st2k
 Type=Starter
 Foil=OldStyle
 FoilAlwaysInCommonSlot=False
+ScryfallCode=S00
 
 [cards]
 1 C Angelic Blessing

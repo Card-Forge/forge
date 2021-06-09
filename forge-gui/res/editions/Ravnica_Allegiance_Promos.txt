@@ -3,6 +3,7 @@ Code=PRNA
 Date=2019-01-25
 Name=Ravnica Allegiance Promos
 Type=Promos
+ScryfallCode=PRNA
 
 [cards]
 107 U Light Up the Stage

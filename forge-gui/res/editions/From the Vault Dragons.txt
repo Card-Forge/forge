@@ -4,6 +4,7 @@ Date=2008-08-29
 Name=From the Vault: Dragons
 MciCode=fvd
 Type=From_the_Vault
+ScryfallCode=DRB
 
 [cards]
 1 R Bladewing the Risen

@@ -8,6 +8,7 @@ Type=Expansion
 BoosterCovers=5
 Booster=9 Common:!dfc, 3 Uncommon:!dfc, 1 RareMythic:!dfc, 1 dfc, 1 BasicLand
 ChaosDraftThemes=GRAVEYARD_MATTERS
+ScryfallCode=ISD
 
 [cards]
 85 U Abattoir Ghoul
