@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -62,6 +63,7 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
 
         boolean randomChoice = sa.hasParam("AtRandom");
         boolean chooseFromDefined = sa.hasParam("ChooseFromDefinedCards");
+        boolean chooseFromOneTimeList = sa.hasParam("ChooseFromOneTimeList");
 
         if (!randomChoice) {
             if (sa.hasParam("SelectPrompt")) {
@@ -100,7 +102,7 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                 } else if (chooseFromDefined) {
                     CardCollection choices = AbilityUtils.getDefinedCards(host, sa.getParam("ChooseFromDefinedCards"), sa);
                     choices = CardLists.getValidCards(choices, valid, host.getController(), host, sa);
-                    List<ICardFace> faces = Lists.newArrayList();
+                    List<ICardFace> faces = new ArrayList<>();
                     // get Card
                     for (final Card c : choices) {
                         final CardRules rules = c.getRules();
@@ -114,6 +116,22 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                     }
                     Collections.sort(faces);
                     chosen = p.getController().chooseCardName(sa, faces, message);
+                } else if (chooseFromOneTimeList) {
+                    String [] names = sa.getParam("ChooseFromOneTimeList").split(",");
+                    List<ICardFace> faces = new ArrayList<>();
+                    for (String name : names) {
+                        faces.add(StaticData.instance().getCommonCards().getFaceByName(name));
+                    }
+                    chosen = p.getController().chooseCardName(sa, faces, message);
+
+                    // Remove chosen Name from List
+                    StringBuilder sb = new StringBuilder();
+                    for (String name : names) {
+                        if (chosen.equals(name)) continue;
+                        if (sb.length() > 0) sb.append(',');
+                        sb.append(name);
+                    }
+                    sa.putParam("ChooseFromOneTimeList", sb.toString());
                 } else {
                     // use CardFace because you might name a alternate names
                     Predicate<ICardFace> cpp = Predicates.alwaysTrue();
