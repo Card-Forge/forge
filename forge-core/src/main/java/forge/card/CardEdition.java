@@ -17,49 +17,27 @@
  */
 package forge.card;
 
-import java.io.File;
-import java.io.FilenameFilter;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.ListMultimap;
-import com.google.common.collect.Lists;
-
+import com.google.common.collect.*;
 import forge.StaticData;
-import forge.card.CardDb.SetPreference;
+import forge.card.CardDb.CardArtPreference;
 import forge.deck.CardPool;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
-import forge.util.Aggregates;
-import forge.util.FileSection;
-import forge.util.FileUtil;
-import forge.util.IItemReader;
-import forge.util.MyRandom;
+import forge.util.*;
 import forge.util.storage.StorageBase;
 import forge.util.storage.StorageReaderBase;
 import forge.util.storage.StorageReaderFolder;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.File;
+import java.io.FilenameFilter;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 /**
@@ -460,7 +438,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             /*
             The following pattern will match the WAR Japanese art entries,
             it should also match the Un-set and older alternate art cards
-            like Merseine from FEM (should the editions files ever be updated)
+            like Merseine from FEM.
              */
             //"(^(?<cnum>[0-9]+.?) )?((?<rarity>[SCURML]) )?(?<name>.*)$"
             /*  Ideally we'd use the named group above, but Android 6 and
@@ -713,16 +691,36 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             };
         }
 
+        /* @leriomaggio [Note to self]
+         I am sure this method does not work the way it is expected - do some tests
+         The name is also misleading!
+
+         What the method **really** does is to return the **latest** (as in the most recent)
+         Card Edition among the different (see Set<String>) sets found
+         that includes cards in the pool, picked by an "Old Art First" policy.
+         There is definitely no-guarantee that **all** cards in the pool will be
+         included in the set returned!
+
+         CounterExample: All cards from LEA, one card from USG.
+         USG will be returned!
+         See CardEditionCollectionTestCase.getEarliestEditionWithAllCardsNotWorkingAsExpected
+         test case that tackles exactly this example!
+
+         What I would do instead is to return the set containing the majority of the cards in
+         the pool (still picked with the same "Old Art First" policy!
+
+         A good renaming would be "getEarlierEditionWithMostOfTheCards"
+         */
         public CardEdition getEarliestEditionWithAllCards(CardPool cards) {
             Set<String> minEditions = new HashSet<>();
 
-            SetPreference strictness = SetPreference.EarliestCoreExp;
+            CardArtPreference strictness = CardArtPreference.OldPrintNoPromoNoOnline;
 
             for (Entry<PaperCard, Integer> k : cards) {
-                PaperCard cp = StaticData.instance().getCommonCards().getCardFromEdition(k.getKey().getName(), strictness);
-                if( cp == null && strictness == SetPreference.EarliestCoreExp) {
-                    strictness = SetPreference.Earliest; // card is not found in core and expansions only (probably something CMD or C13)
-                    cp = StaticData.instance().getCommonCards().getCardFromEdition(k.getKey().getName(), strictness);
+                PaperCard cp = StaticData.instance().getCommonCards().getCardFromEditions(k.getKey().getName(), strictness);
+                if( cp == null && strictness == CardArtPreference.OldPrintNoPromoNoOnline) {
+                    strictness = CardArtPreference.OldPrint; // card is not found in core and expansions only (probably something CMD or C13)
+                    cp = StaticData.instance().getCommonCards().getCardFromEditions(k.getKey().getName(), strictness);
                 }
                 if ( cp == null )
                     cp = k.getKey(); // it's unlikely, this code will ever run
