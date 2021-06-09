@@ -17,24 +17,15 @@
  */
 package forge.deck;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.EnumMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeSet;
-
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
-
 import forge.StaticData;
 import forge.card.CardDb;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * <p>
@@ -261,7 +252,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
 
     private void convertByXitaxMethod() {
         Date dateWithAllCards = StaticData.instance().getEditions().getEarliestDateWithAllCards(getAllCardsInASinglePool());
-        String artOption = StaticData.instance().getPrefferedArtOption();
+        String artOption = StaticData.instance().getPreferredCardArt();
 
         for(Entry<DeckSection, CardPool> p : parts.entrySet()) {
             if( p.getKey() == DeckSection.Planes || p.getKey() == DeckSection.Schemes || p.getKey() == DeckSection.Avatar)
@@ -285,6 +276,9 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
                         replacementCard = StaticData.instance().getCardByEditionDate(card, dateWithAllCards);
                 }
 
+                // Note @leriomaggio: The following logic is very obscure to me
+                // Why looking for a replacement Card and then not using adding it to the pool?
+                // Also, what does "having the same art index" say about the two cards?
                 if (replacementCard.getArtIndex() == card.getArtIndex()) {
                     if (card.hasImage())
                         newPool.add(card, count);
