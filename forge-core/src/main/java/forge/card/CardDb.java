@@ -17,41 +17,21 @@
  */
 package forge.card;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeMap;
-
-import forge.StaticData;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.ListMultimap;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Multimaps;
-
+import com.google.common.collect.*;
 import forge.card.CardEdition.CardInSet;
 import forge.card.CardEdition.Type;
 import forge.deck.generation.IDeckGenPool;
+import forge.item.IPaperCard;
 import forge.item.PaperCard;
-import forge.util.Aggregates;
 import forge.util.CollectionSuppliers;
 import forge.util.Lang;
-import forge.util.MyRandom;
 import forge.util.TextUtil;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 public final class CardDb implements ICardDatabase, IDeckGenPool {
     public final static String foilSuffix = "+";
@@ -60,7 +40,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     private final String exlcudedCardSet = "DS0";
 
     // need this to obtain cardReference by name+set+artindex
-    private final ListMultimap<String, PaperCard> allCardsByName = Multimaps.newListMultimap(new TreeMap<>(String.CASE_INSENSITIVE_ORDER),  CollectionSuppliers.arrayLists());
+    private final ListMultimap<String, PaperCard> allCardsByName = Multimaps.newListMultimap(new TreeMap<>(String.CASE_INSENSITIVE_ORDER), CollectionSuppliers.arrayLists());
     private final Map<String, PaperCard> uniqueCardsByName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
     private final Map<String, CardRules> rulesByName;
     private final Map<String, ICardFace> facesByName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
@@ -72,78 +52,152 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     private final CardEdition.Collection editions;
     private List<String> filtered;
 
-    public enum SetPreference {
-        Latest(false),
-        LatestCoreExp(true),
-        Earliest(false),
-        EarliestCoreExp(true),
-        Random(false);
+    public enum CardArtPreference {
+        LatestPrint(false, true),
+        LatestPrintNoPromoNoOnline(true, true),
+        OldPrint(false, false),
+        OldPrintNoPromoNoOnline(true, false);
 
         final boolean filterSets;
-        SetPreference(boolean filterIrregularSets) {
+        final boolean latestFirst;
+
+        CardArtPreference(boolean filterIrregularSets, boolean latestSetFirst) {
             filterSets = filterIrregularSets;
+            latestFirst = latestSetFirst;
         }
 
         public boolean accept(CardEdition ed) {
-            if (ed == null)  return false;
+            if (ed == null) return false;
             return !filterSets || ed.getType() == Type.CORE || ed.getType() == Type.EXPANSION || ed.getType() == Type.REPRINT;
         }
     }
 
-    // NO GETTERS/SETTERS HERE!
+    // Placeholder to setup default art Preference - to be moved from Static Data!
+    private CardArtPreference defaultCardArtPreference;
+
     public static class CardRequest {
-        // TODO Move Request to its own class
         public String cardName;
         public String edition;
         public int artIndex;
         public boolean isFoil;
+        public String collectorNumber;
 
-        private CardRequest(String name, String edition, int artIndex, boolean isFoil) {
+        private CardRequest(String name, String edition, int artIndex, boolean isFoil, String collectorNumber) {
             cardName = name;
             this.edition = edition;
             this.artIndex = artIndex;
             this.isFoil = isFoil;
+            this.collectorNumber = collectorNumber;
         }
 
-        public static CardRequest fromString(String name) {
-            boolean isFoil = name.endsWith(foilSuffix);
-            if (isFoil) {
-                name = name.substring(0, name.length() - foilSuffix.length());
+        public static String compose(String cardName, String setCode) {
+            setCode = setCode != null ? setCode : "";
+            cardName = cardName != null ? cardName : "";
+            return cardName + NameSetSeparator + setCode;
+        }
+
+        public static String compose(String cardName, String setCode, int artIndex) {
+            String requestInfo = compose(cardName, setCode);
+            artIndex = Math.max(artIndex, IPaperCard.DEFAULT_ART_INDEX);
+            return requestInfo + NameSetSeparator + artIndex;
+        }
+
+        public static String compose(String cardName, String setCode, String collectorNumber) {
+            String requestInfo = compose(cardName, setCode);
+            // CollectorNumber will be wrapped in square brackets
+            collectorNumber = preprocessCollectorNumber(collectorNumber);
+            return requestInfo + NameSetSeparator + collectorNumber;
+        }
+
+        private static String preprocessCollectorNumber(String collectorNumber) {
+            if (collectorNumber == null)
+                return "";
+            collectorNumber = collectorNumber.trim();
+            if (!collectorNumber.startsWith("["))
+                collectorNumber = "[" + collectorNumber;
+            if (!collectorNumber.endsWith("]"))
+                collectorNumber += "]";
+            return collectorNumber;
+        }
+
+        public static String compose(String cardName, String setCode, int artIndex, String collectorNumber) {
+            String requestInfo = compose(cardName, setCode, artIndex);
+            // CollectorNumber will be wrapped in square brackets
+            collectorNumber = preprocessCollectorNumber(collectorNumber);
+            return requestInfo + NameSetSeparator + collectorNumber;
+        }
+
+        private static boolean isCollectorNumber(String s) {
+            return s.startsWith("[") && s.endsWith("]");
+        }
+
+        private static boolean isArtIndex(String s) {
+            return StringUtils.isNumeric(s) && s.length() == 1;
+        }
+
+        private static boolean isSetCode(String s) {
+            return !StringUtils.isNumeric(s);
+        }
+
+        public static CardRequest fromString(String reqInfo) {
+            if (reqInfo == null)
+                return null;
+
+            String[] info = TextUtil.split(reqInfo, NameSetSeparator);
+            int setPos;
+            int artPos;
+            int cNrPos;
+            if (info.length >= 4) { // name|set|artIndex|[collNr]
+                setPos = isSetCode(info[1]) ? 1 : -1;
+                artPos = isArtIndex(info[2]) ? 2 : -1;
+                cNrPos = isCollectorNumber(info[3]) ? 3 : -1;
+            } else if (info.length == 3) { // name|set|artIndex (or CollNr)
+                setPos = isSetCode(info[1]) ? 1 : -1;
+                artPos = isArtIndex(info[2]) ? 2 : -1;
+                cNrPos = isCollectorNumber(info[2]) ? 2 : -1;
+            } else if (info.length == 2) { // name|set (or artIndex, even if not possible via compose)
+                setPos = isSetCode(info[1]) ? 1 : -1;
+                artPos = isArtIndex(info[1]) ? 1 : -1;
+                cNrPos = -1;
+            } else {
+                setPos = -1;
+                artPos = -1;
+                cNrPos = -1;
             }
-
-            String preferredArt = artPrefs.get(name);
-            if (preferredArt != null) { //account for preferred art if needed
-                name += NameSetSeparator + preferredArt;
-            }
-
-            String[] nameParts = TextUtil.split(name, NameSetSeparator);
-
-            int setPos = nameParts.length >= 2 && !StringUtils.isNumeric(nameParts[1]) ? 1 : -1;
-            int artPos = nameParts.length >= 2 && StringUtils.isNumeric(nameParts[1]) ? 1 : nameParts.length >= 3 && StringUtils.isNumeric(nameParts[2]) ? 2 : -1;
-
-            String cardName = nameParts[0];
+            String cardName = info[0];
+            boolean isFoil = false;
             if (cardName.endsWith(foilSuffix)) {
                 cardName = cardName.substring(0, cardName.length() - foilSuffix.length());
                 isFoil = true;
             }
 
-            int artIndex = artPos > 0 ? Integer.parseInt(nameParts[artPos]) : 0;
-            String setName = setPos > 0 ? nameParts[setPos] : null;
+            String preferredArt = artPrefs.get(cardName);
+            int artIndex = artPos > 0 ? Integer.parseInt(info[artPos]) : IPaperCard.NO_ART_INDEX;  // default: no art index
+            if (preferredArt != null) { //account for preferred art if needed
+                System.err.println("I AM HERE - DECIDE WHAT TO DO");
+            }
+            String collectorNumber = cNrPos > 0 ? info[cNrPos].substring(1, info[cNrPos].length() - 1) : IPaperCard.NO_COLLECTOR_NUMBER;
+            String setName = setPos > 0 ? info[setPos] : null;
             if ("???".equals(setName)) {
                 setName = null;
             }
-
-            return new CardRequest(cardName, setName, artIndex, isFoil);
+            // finally, check whether any between artIndex and CollectorNumber has been set
+            if (collectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER) && artIndex == IPaperCard.NO_ART_INDEX)
+                artIndex = IPaperCard.DEFAULT_ART_INDEX;
+            return new CardRequest(cardName, setName, artIndex, isFoil, collectorNumber);
         }
     }
 
-    public CardDb(Map<String, CardRules> rules, CardEdition.Collection editions0, List<String> filteredCards) {
+    public CardDb(Map<String, CardRules> rules, CardEdition.Collection editions0, List<String> filteredCards){
+        this(rules, editions0, filteredCards, "LatestPrint");
+    }
+    public CardDb(Map<String, CardRules> rules, CardEdition.Collection editions0, List<String> filteredCards, String preferredCardArt) {
         this.filtered = filteredCards;
         this.rulesByName = rules;
         this.editions = editions0;
 
         // create faces list from rules
-        for (final CardRules rule : rules.values() ) {
+        for (final CardRules rule : rules.values()) {
             if (filteredCards.contains(rule.getName()) && !exlcudedCardName.equalsIgnoreCase(rule.getName()))
                 continue;
             final ICardFace main = rule.getMainPart();
@@ -159,21 +213,22 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 }
             }
         }
-    }
-
-    private ListMultimap<String, PaperCard> getAllCardsByName() {
-        return allCardsByName;
+        try{
+            this.defaultCardArtPreference = CardArtPreference.valueOf(preferredCardArt);
+        } catch (IllegalArgumentException ex){
+            this.defaultCardArtPreference = CardArtPreference.LatestPrint;
+        }
     }
 
     private void addSetCard(CardEdition e, CardInSet cis, CardRules cr) {
-        int artIdx = 1;
+        int artIdx = IPaperCard.DEFAULT_ART_INDEX;
         String key = e.getCode() + "/" + cis.name;
         if (artIds.containsKey(key)) {
             artIdx = artIds.get(key) + 1;
         }
 
         artIds.put(key, artIdx);
-        addCard(new PaperCard(cr, e.getCode(), cis.rarity, artIdx));
+        addCard(new PaperCard(cr, e.getCode(), cis.rarity, artIdx, cis.collectorNumber));
     }
 
     public void loadCard(String cardName, CardRules cr) {
@@ -212,16 +267,14 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 CardRules cr = rulesByName.get(cis.name);
                 if (cr != null) {
                     addSetCard(e, cis, cr);
-                }
-                else {
+                } else {
                     missingCards.add(cis.name);
                 }
             }
             if (isCoreExpSet && logMissingPerEdition) {
                 if (missingCards.isEmpty()) {
                     System.out.println(" ... 100% ");
-                }
-                else {
+                } else {
                     int missing = (e.getAllCardsInSet().size() - missingCards.size()) * 10000 / e.getAllCardsInSet().size();
                     System.out.printf(" ... %.2f%% (%s missing: %s)%n", missing * 0.01f, Lang.nounWithAmount(missingCards.size(), "card"), StringUtils.join(missingCards, " | "));
                 }
@@ -244,10 +297,10 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         for (CardRules cr : rulesByName.values()) {
             if (!contains(cr.getName())) {
                 if (upcomingSet != null) {
-                    addCard(new PaperCard(cr, upcomingSet.getCode(), CardRarity.Unknown, 1));
-                } else if(enableUnknownCards) {
+                    addCard(new PaperCard(cr, upcomingSet.getCode(), CardRarity.Unknown));
+                } else if (enableUnknownCards) {
                     System.err.println("The card " + cr.getName() + " was not assigned to any set. Adding it to UNKNOWN set... to fix see res/editions/ folder. ");
-                    addCard(new PaperCard(cr, CardEdition.UNKNOWN.getCode(), CardRarity.Special, 1));
+                    addCard(new PaperCard(cr, CardEdition.UNKNOWN.getCode(), CardRarity.Special));
                 }
             }
         }
@@ -261,7 +314,9 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
         allCardsByName.put(paperCard.getName(), paperCard);
 
-        if (paperCard.getRules().getSplitType() == CardSplitType.None) { return; }
+        if (paperCard.getRules().getSplitType() == CardSplitType.None) {
+            return;
+        }
 
         if (paperCard.getRules().getOtherPart() != null) {
             //allow looking up card by the name of other faces
@@ -272,20 +327,21 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             allCardsByName.put(paperCard.getRules().getMainPart().getName(), paperCard);
         }
     }
+
     private boolean excludeCard(String cardName, String cardEdition) {
         if (filtered.isEmpty())
             return false;
         if (filtered.contains(cardName)) {
             if (exlcudedCardSet.equalsIgnoreCase(cardEdition) && exlcudedCardName.equalsIgnoreCase(cardName))
                 return true;
-            else if (!exlcudedCardName.equalsIgnoreCase(cardName))
-                return true;
+            else return !exlcudedCardName.equalsIgnoreCase(cardName);
         }
         return false;
     }
+
     private void reIndex() {
         uniqueCardsByName.clear();
-        for (Entry<String, Collection<PaperCard>> kv : getAllCardsByName().asMap().entrySet()) {
+        for (Entry<String, Collection<PaperCard>> kv : allCardsByName.asMap().entrySet()) {
             PaperCard pc = getFirstWithImage(kv.getValue());
             uniqueCardsByName.put(kv.getKey(), pc);
         }
@@ -315,15 +371,32 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return false;
     }
 
-    public CardRules getRules(String cardname) {
-        CardRules result = rulesByName.get(cardname);
+    public CardRules getRules(String cardName) {
+        CardRules result = rulesByName.get(cardName);
         if (result != null) {
             return result;
         } else {
-            return CardRules.getUnsupportedCardNamed(cardname);
+            return CardRules.getUnsupportedCardNamed(cardName);
         }
     }
 
+    public CardArtPreference getCardArtPreference(){ return this.defaultCardArtPreference; }
+    public void setCardArtPreference(String artPreference){
+        CardArtPreference cardArtPreference = null;
+        try{
+            cardArtPreference = CardArtPreference.valueOf(artPreference);
+        } catch (IllegalArgumentException ex){}
+        finally {
+            if (cardArtPreference != null)
+                this.defaultCardArtPreference = cardArtPreference;
+        }
+    }
+
+    /*
+     * ======================
+     * 1. CARD LOOKUP METHODS
+     * ======================
+     */
     @Override
     public PaperCard getCard(String cardName) {
         CardRequest request = CardRequest.fromString(cardName);
@@ -332,222 +405,221 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     @Override
     public PaperCard getCard(final String cardName, String setCode) {
-        CardRequest request = CardRequest.fromString(cardName);
-        if (setCode != null) {
-            request.edition = setCode;
-        }
+        CardRequest request = CardRequest.fromString(CardRequest.compose(cardName, setCode));
         return tryGetCard(request);
     }
 
     @Override
     public PaperCard getCard(final String cardName, String setCode, int artIndex) {
-        CardRequest request = CardRequest.fromString(cardName);
-        if (setCode != null) {
-            request.edition = setCode;
-        }
-        if (artIndex > 0) {
-            request.artIndex = artIndex;
-        }
+        String reqInfo = CardRequest.compose(cardName, setCode, artIndex);
+        CardRequest request = CardRequest.fromString(reqInfo);
         return tryGetCard(request);
     }
 
-    public String getCardCollectorNumber(String cardName, String reqEdition, int artIndex) {
-        cardName = getName(cardName);
-        CardEdition edition = editions.get(reqEdition);
-        if (edition == null)
-            return null;
-        int numMatches = 0;
-        for (CardInSet card : edition.getAllCardsInSet()) {
-            if (card.name.equalsIgnoreCase(cardName)) {
-                numMatches += 1;
-                if (numMatches == artIndex) {
-                    return card.collectorNumber;
-                }
-            }
-        }
-        return null;
+    @Override
+    public PaperCard getCard(final String cardName, String setCode, String collectorNumber) {
+        String reqInfo = CardRequest.compose(cardName, setCode, collectorNumber);
+        CardRequest request = CardRequest.fromString(reqInfo);
+        return tryGetCard(request);
+    }
+
+    @Override
+    public PaperCard getCard(final String cardName, String setCode, int artIndex, String collectorNumber) {
+        String reqInfo = CardRequest.compose(cardName, setCode, artIndex, collectorNumber);
+        CardRequest request = CardRequest.fromString(reqInfo);
+        return tryGetCard(request);
     }
 
     private PaperCard tryGetCard(CardRequest request) {
-        Collection<PaperCard> cards = getAllCards(request.cardName);
-        if (cards == null) { return null; }
-
-        PaperCard result = null;
-
-        String reqEdition = request.edition;
-        if (reqEdition != null && !editions.contains(reqEdition)) {
-            CardEdition edition = editions.get(reqEdition);
-            if (edition != null) {
-                reqEdition = edition.getCode();
-            }
-        }
-
-        if (request.artIndex <= 0) { // this stands for 'random art'
-            Collection<PaperCard> candidates;
-            if (reqEdition == null) {
-                candidates = new ArrayList<>(cards);
-            }
-            else {
-                candidates = new ArrayList<>();
-                for (PaperCard pc : cards) {
-                    if (pc.getEdition().equalsIgnoreCase(reqEdition)) {
-                        candidates.add(pc);
-                    }
-                }
-            }
-            if (candidates.isEmpty()) {
-                return null;
-            }
-            result = Aggregates.random(candidates);
-
-            //if card image doesn't exist for chosen candidate, try another one if possible
-            while (candidates.size() > 1 && !result.hasImage()) {
-                candidates.remove(result);
-                result = Aggregates.random(candidates);
-            }
-        }
-        else {
-            for (PaperCard pc : cards) {
-                if (pc.getEdition().equalsIgnoreCase(reqEdition) && request.artIndex == pc.getArtIndex()) {
-                    result = pc;
-                    break;
-                }
-            }
-        }
-        if (result == null) { return null; }
-
-        return request.isFoil ? getFoiled(result) : result;
-    }
-
-    @Override
-    public PaperCard getCardFromEdition(final String cardName, SetPreference fromSet) {
-        return getCardFromEdition(cardName, null, fromSet);
-    }
-
-    @Override
-    public PaperCard getCardFromEdition(final String cardName, final Date printedBefore, final SetPreference fromSet) {
-        return getCardFromEdition(cardName, printedBefore, fromSet, -1);
-    }
-
-    @Override
-    public PaperCard getCardFromEdition(final String cardName, final Date printedBefore, final SetPreference fromSets, int artIndex) {
-        final CardRequest cr = CardRequest.fromString(cardName);
-        SetPreference fromSet = fromSets;
-        List<PaperCard> cards = getAllCards(cr.cardName);
-        if (printedBefore != null){
-            cards = Lists.newArrayList(Iterables.filter(cards, new Predicate<PaperCard>() {
-                @Override public boolean apply(PaperCard c) {
-                    CardEdition ed = editions.get(c.getEdition());
-                    return ed.getDate().before(printedBefore); }
-            }));
-        }
-
-        if (cards.size() == 0)  // Don't bother continuing! No cards has been found!
+        // Before doing anything, check that a non-null request has been provided
+        if (request == null)
             return null;
-        boolean cardsListReadOnly = true;
+        // 1. First off, try using all possible search parameters, to narrow down the actual cards looked for.
+        String reqEditionCode = request.edition;
+        PaperCard result = null;
+        if ((reqEditionCode != null) && (reqEditionCode.length() > 0)) {
+            // This get is robust even against expansion aliases (e.g. TE and TMP both valid for Tempest) -
+            // MOST of the extensions have two short codes, 141 out of 221 (so far)
+            CardEdition edition = editions.get(reqEditionCode);
+            return this.getCardFromSet(request.cardName, edition, request.artIndex,
+                    request.collectorNumber, request.isFoil);
+        }
 
-        //overrides
-        if (StaticData.instance().getPrefferedArtOption().equals("Earliest"))
-            fromSet = SetPreference.EarliestCoreExp;
+        // 2. Card lookup in edition with specified filter didn't work.
+        // So now check whether the cards exists in the DB first,
+        // and select pick the card based on current SetPreference policy as a fallback
+        Collection<PaperCard> cards = getAllCards(request.cardName);
+        if (cards == null)
+            return null;
+        // Either No Edition has been specified OR as a fallback in case of any error!
+        // get card using the default policy strategy (Latest, Earliest, or Random)
+        // Note: Request is transformed back into the unique line,
+        // embedding all the information; Parameter Name is counter intuitive though.
+        result = getCardFromEditions(request.cardName);
+        return result != null && request.isFoil ? result.getFoiled() : result;
+    }
 
-        if (StringUtils.isNotBlank(cr.edition)) {
+    /*
+     * ==========================================
+     * 2. CARD LOOKUP FROM A SINGLE EXPANSION SET
+     * ==========================================
+     */
+    @Override
+    public PaperCard getCardFromSet(String cardName, CardEdition edition, boolean isFoil) {
+        return getCardFromSet(cardName, edition, IPaperCard.NO_ART_INDEX,
+                IPaperCard.NO_COLLECTOR_NUMBER, isFoil);
+    }
+
+    @Override
+    public PaperCard getCardFromSet(String cardName, CardEdition edition, int artIndex, boolean isFoil) {
+        return getCardFromSet(cardName, edition, artIndex, IPaperCard.NO_COLLECTOR_NUMBER, isFoil);
+    }
+
+    @Override
+    public PaperCard getCardFromSet(String cardName, CardEdition edition, String collectorNumber, boolean isFoil) {
+        return getCardFromSet(cardName, edition, IPaperCard.NO_ART_INDEX, collectorNumber, isFoil);
+    }
+
+    @Override
+    public PaperCard getCardFromSet(String cardName, CardEdition edition, int artIndex,
+                                    String collectorNumber, boolean isFoil) {
+        if (edition == null || cardName == null)  // preview cards
+            return null;  // No cards will be returned
+
+        // Allow to pass in cardNames with foil markers, and adapt accordingly
+        CardRequest cardNameRequest = CardRequest.fromString(cardName);
+        cardName = cardNameRequest.cardName;
+        isFoil = isFoil || cardNameRequest.isFoil;
+
+        List<PaperCard> cards = getAllCards(cardName);
+        // Look for Code or Code2 to make the retrieval more robust
+        List<PaperCard> candidates = Lists.newArrayList(Iterables.filter(cards, new Predicate<PaperCard>() {
+            @Override
+            public boolean apply(PaperCard c) {
+                boolean artIndexFilter = true;
+                boolean collectorNumberFilter = true;
+                boolean setFilter = ((c.getEdition().equalsIgnoreCase(edition.getCode())) ||
+                        (c.getEdition().equalsIgnoreCase(edition.getCode2())));
+                if (artIndex > 0)
+                    artIndexFilter = (c.getArtIndex() == artIndex);
+                if ((collectorNumber != null) && (collectorNumber.length() > 0)
+                        && !(collectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER)))
+                    collectorNumberFilter = (c.getCollectorNumber().equals(collectorNumber));
+                return setFilter && artIndexFilter && collectorNumberFilter;
+            }
+        }));
+        if (candidates.isEmpty()) {
+            return null;
+        }
+        PaperCard candidate = candidates.get(0);
+        // Before returning make sure that actual candidate has Image.
+        // If not, try to replace current candidate with one having image, so to align this implementation with old one.
+        if (!candidate.hasImage()) {
+            for (PaperCard card : candidates) {
+                if (card.hasImage()) {
+                    candidate = card;
+                    break; // found, ready to go
+                }
+            }
+        }
+        return isFoil ? candidate.getFoiled() : candidate;
+    }
+
+    /*
+     * ====================================================
+     * 3. CARD LOOKUP BASED ON PREFERRED PRINT (FRAME) OPTION
+     * ====================================================
+     */
+
+    /* Get Card from Edition using the default `CardArtPreference`
+    NOTE: this method has NOT been included in the Interface API refactoring as it
+    relies on a specific (new) attribute included in the `CardDB` that sets the
+    default `ArtPreference`. The method is public, though, for future use.
+     */
+    public PaperCard getCardFromEditions(final String cardName) {
+        return this.getCardFromEditions(cardName, this.defaultCardArtPreference);
+    }
+
+    @Override
+    public PaperCard getCardFromEditions(final String cardName, CardArtPreference artPreference) {
+        return getCardFromEditions(cardName, artPreference, IPaperCard.NO_ART_INDEX, null);
+    }
+
+    @Override
+    public PaperCard getCardFromEditions(final String cardName, CardArtPreference artPreference, int artIndex) {
+        return getCardFromEditions(cardName, artPreference, artIndex, null);
+    }
+
+    @Override
+    public PaperCard getCardFromEditions(final String cardName, final CardArtPreference artPreference, final Date printedBefore) {
+        return getCardFromEditions(cardName, artPreference, IPaperCard.NO_ART_INDEX, printedBefore);
+    }
+
+    @Override
+    public PaperCard getCardFromEditions(final String cardName, final CardArtPreference artPreference, int artIndex,
+                                         final Date printedBefore) {
+        if (cardName == null)
+            return null;
+        final CardRequest cr = CardRequest.fromString(cardName);
+        // Check whether input `frame` is null. In that case, fallback to default SetPreference !-)
+        final CardArtPreference artPref = artPreference != null ? artPreference : this.defaultCardArtPreference;
+        if (artIndex >= IPaperCard.DEFAULT_ART_INDEX && cr.artIndex < IPaperCard.DEFAULT_ART_INDEX) {
+            cr.artIndex = artIndex;
+        }
+        List<PaperCard> cards = getAllCards(cr.cardName);
+        if (printedBefore != null) {
             cards = Lists.newArrayList(Iterables.filter(cards, new Predicate<PaperCard>() {
-                @Override public boolean apply(PaperCard input) { return input.getEdition().equalsIgnoreCase(cr.edition); }
+                @Override
+                public boolean apply(PaperCard c) {
+                    CardEdition ed = editions.get(c.getEdition());
+                    return ed.getDate().before(printedBefore);
+                }
             }));
         }
-        if (artIndex == -1 && cr.artIndex > 0) {
-            artIndex = cr.artIndex;
+
+        if (cards.size() == 0)  // Don't bother continuing! No card has been found!
+            return null;
+
+        /* 2. Retrieve cards based of [Frame]Set Preference
+           ================================================ */
+
+        // Collect the list of all editions found for target card
+        LinkedHashSet<CardEdition> cardEditions = new LinkedHashSet<>();
+        for (PaperCard card : cards) {
+            CardEdition ed = editions.get(card.getEdition());
+            cardEditions.add(ed);
         }
-
-        int sz = cards.size();
-        if (fromSet == SetPreference.Earliest || fromSet == SetPreference.EarliestCoreExp) {
-            PaperCard firstWithoutImage = null;
-            for (int i = sz - 1 ; i >= 0 ; i--) {
-                PaperCard pc = cards.get(i);
-                CardEdition ed = editions.get(pc.getEdition());
-                if (!fromSet.accept(ed)) {
-                    continue;
-                }
-
-                if ((artIndex <= 0 || pc.getArtIndex() == artIndex) && (printedBefore == null || ed.getDate().before(printedBefore))) {
-                    if (pc.hasImage()) {
-                        return pc;
-                    }
-                    else if (firstWithoutImage == null) {
-                        firstWithoutImage = pc; //ensure first without image returns if none have image
-                    }
-                }
+        // Filter Cards Editions based on set preferences
+        List<CardEdition> acceptedEditions = Lists.newArrayList(Iterables.filter(cardEditions, new Predicate<CardEdition>() {
+            @Override
+            public boolean apply(CardEdition ed) {
+                return artPref.accept(ed);
             }
-            return firstWithoutImage;
-        }
-        else if (fromSet == SetPreference.LatestCoreExp || fromSet == SetPreference.Latest || fromSet == null || fromSet == SetPreference.Random) {
-            PaperCard firstWithoutImage = null;
-            for (int i = 0; i < sz; i++) {
-                PaperCard pc = cards.get(i);
-                CardEdition ed = editions.get(pc.getEdition());
-                if (fromSet != null && !fromSet.accept(ed)) {
-                    continue;
-                }
+        }));
+        Collections.sort(acceptedEditions);  // CardEdition correctly sort by (release) date
+        if (artPref.latestFirst)
+            Collections.reverse(acceptedEditions);  // newest editions first
 
-                if ((artIndex < 0 || pc.getArtIndex() == artIndex) && (printedBefore == null || ed.getDate().before(printedBefore))) {
-                    if (fromSet == SetPreference.LatestCoreExp || fromSet == SetPreference.Latest) {
-                        if (pc.hasImage()) {
-                            return pc;
-                        }
-                        else if (firstWithoutImage == null) {
-                            firstWithoutImage = pc; //ensure first without image returns if none have image
-                        }
-                    }
-                    else {
-                        while (sz > i) {
-                            int randomIndex = i + MyRandom.getRandom().nextInt(sz - i);
-                            pc = cards.get(randomIndex);
-                            if (pc.hasImage()) {
-                                return pc;
-                            }
-                            else {
-                                if (firstWithoutImage == null) {
-                                    firstWithoutImage = pc; //ensure first without image returns if none have image
-                                }
-                                if (cardsListReadOnly) { //ensure we don't modify a cached collection
-                                    cards = new ArrayList<>(cards);
-                                    cardsListReadOnly = false;
-                                }
-                                cards.remove(randomIndex); //remove card from collection and try another random card
-                                sz--;
-                            }
-                        }
-                    }
-                }
+        PaperCard candidate = null;
+        for (CardEdition ed : acceptedEditions) {
+            PaperCard cardFromSet = getCardFromSet(cr.cardName, ed, artIndex, cr.isFoil);
+            if (candidate == null && cardFromSet != null)
+                // save the first card found, as the last backup in case no other candidate *with image* will be found
+                candidate = cardFromSet;
+
+            if (cardFromSet != null && cardFromSet.hasImage()) {
+                candidate = cardFromSet;
+                break;  // we're done here: found card **with Image**
             }
-            return firstWithoutImage;
         }
-        return null;
-    }
-
-    public PaperCard getFoiled(PaperCard card0) {
-        // Here - I am still unsure if there should be a cache Card->Card from unfoiled to foiled, to avoid creation of N instances of single plains
-        return new PaperCard(card0.getRules(), card0.getEdition(), card0.getRarity(), card0.getArtIndex(), true);
+        return candidate;  // any foil request already handled in getCardFromSet
     }
 
     @Override
-    public int getPrintCount(String cardName, String edition) {
-        int cnt = 0;
-        if (edition == null || cardName == null)
-            return cnt;
-        for (PaperCard pc : getAllCards(cardName)) {
-            if (pc.getEdition().equals(edition)) {
-                cnt++;
-            }
-        }
-        return cnt;
-    }
-
-    @Override
-    public int getMaxPrintCount(String cardName) {
-        int max = -1;
+    public int getMaxArtIndex(String cardName) {
         if (cardName == null)
-            return max;
+            return IPaperCard.NO_ART_INDEX;
+        int max = IPaperCard.NO_ART_INDEX;
         for (PaperCard pc : getAllCards(cardName)) {
             if (max < pc.getArtIndex()) {
                 max = pc.getArtIndex();
@@ -607,11 +679,11 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     @Override
     public Collection<PaperCard> getAllCards() {
-        return Collections.unmodifiableCollection(getAllCardsByName().values());
+        return Collections.unmodifiableCollection(allCardsByName.values());
     }
 
     public Collection<PaperCard> getAllCardsNoAlt() {
-        return Multimaps.filterEntries(getAllCardsByName(), new Predicate<Entry<String, PaperCard>>() {
+        return Multimaps.filterEntries(allCardsByName, new Predicate<Entry<String, PaperCard>>() {
             @Override
             public boolean apply(Entry<String, PaperCard> entry) {
                 return entry.getKey().equals(entry.getValue().getName());
@@ -641,7 +713,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 CardEdition edition = null;
                 try {
                     edition = editions.getEditionByCodeOrThrow(paperCard.getEdition());
-                    if (edition.getType() == Type.PROMOS||edition.getType() == Type.REPRINT)
+                    if (edition.getType() == Type.PROMOS || edition.getType() == Type.REPRINT)
                         return false;
                 } catch (Exception ex) {
                     return false;
@@ -660,11 +732,11 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     @Override
     public List<PaperCard> getAllCards(String cardName) {
-        return getAllCardsByName().get(getName(cardName));
+        return allCardsByName.get(getName(cardName));
     }
 
     public List<PaperCard> getAllCardsNoAlt(String cardName) {
-        return Lists.newArrayList(Multimaps.filterEntries(getAllCardsByName(), new Predicate<Entry<String, PaperCard>>() {
+        return Lists.newArrayList(Multimaps.filterEntries(allCardsByName, new Predicate<Entry<String, PaperCard>>() {
             @Override
             public boolean apply(Entry<String, PaperCard> entry) {
                 return entry.getKey().equals(entry.getValue().getName());
@@ -672,23 +744,27 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }).get(getName(cardName)));
     }
 
-    /**  Returns a modifiable list of cards matching the given predicate */
+    /**
+     * Returns a modifiable list of cards matching the given predicate
+     */
     @Override
     public List<PaperCard> getAllCards(Predicate<PaperCard> predicate) {
         return Lists.newArrayList(Iterables.filter(getAllCards(), predicate));
     }
 
-    /**  Returns a modifiable list of cards matching the given predicate */
+    /**
+     * Returns a modifiable list of cards matching the given predicate
+     */
     public List<PaperCard> getAllCardsNoAlt(Predicate<PaperCard> predicate) {
         return Lists.newArrayList(Iterables.filter(getAllCardsNoAlt(), predicate));
     }
 
     // Do I want a foiled version of these cards?
     @Override
-    public List<PaperCard> getAllCardsFromEdition(CardEdition edition) {
+    public Collection<PaperCard> getAllCards(CardEdition edition) {
         List<PaperCard> cards = Lists.newArrayList();
 
-        for(CardInSet cis : edition.getAllCardsInSet()) {
+        for (CardInSet cis : edition.getAllCardsInSet()) {
             PaperCard card = this.getCard(cis.name, edition.getCode());
             if (card == null) {
                 // Just in case the card is listed in the edition file but Forge doesn't support it
@@ -702,7 +778,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     @Override
     public boolean contains(String name) {
-        return getAllCardsByName().containsKey(getName(name));
+        return allCardsByName.containsKey(getName(name));
     }
 
     @Override
@@ -710,6 +786,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return getAllCards().iterator();
     }
 
+    @Override
     public Predicate<? super PaperCard> wasPrintedInSets(List<String> setCodes) {
         return new PredicateExistsInSets(setCodes);
     }
@@ -731,7 +808,9 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             return false;
         }
     }
+
     // This Predicate validates if a card was printed at [rarity], on any of its printings
+    @Override
     public Predicate<? super PaperCard> wasPrintedAtRarity(CardRarity rarity) {
         return new PredicatePrintedAtRarity(rarity);
     }
@@ -747,6 +826,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 }
             }
         }
+
         @Override
         public boolean apply(final PaperCard subject) {
             return matchingCards.contains(subject.getName());
@@ -763,7 +843,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         if (!hasBadSetInfo) {
             int artCount = getArtCount(card.getName(), card.getEdition());
             sb.append(CardDb.NameSetSeparator).append(card.getEdition());
-            if (artCount > 1) {
+            if (artCount >= IPaperCard.DEFAULT_ART_INDEX) {
                 sb.append(CardDb.NameSetSeparator).append(card.getArtIndex()); // indexes start at 1 to match image file name conventions
             }
         }
@@ -800,8 +880,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                         break;
                     }
                 }
-            }
-            else {
+            } else {
                 cardEdition = CardEdition.UNKNOWN;
             }
         }
@@ -812,20 +891,29 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             System.err.println("We're sorry, but you cannot use this card yet.");
         }
 
-        return new PaperCard(CardRules.getUnsupportedCardNamed(request.cardName), cardEdition.getCode(), cardRarity, 1);
+        return new PaperCard(CardRules.getUnsupportedCardNamed(request.cardName), cardEdition.getCode(), cardRarity);
 
     }
 
     private final Editor editor = new Editor();
-    public Editor getEditor() { return editor; }
+
+    public Editor getEditor() {
+        return editor;
+    }
+
     public class Editor {
         private boolean immediateReindex = true;
-        public CardRules putCard(CardRules rules) { return putCard(rules, null); /* will use data from editions folder */ }
-        public CardRules putCard(CardRules rules, List<Pair<String, CardRarity>> whenItWasPrinted){ // works similarly to Map<K,V>, returning prev. value
+
+        public CardRules putCard(CardRules rules) {
+            return putCard(rules, null); /* will use data from editions folder */
+        }
+
+        public CardRules putCard(CardRules rules, List<Pair<String, CardRarity>> whenItWasPrinted) {
+            // works similarly to Map<K,V>, returning prev. value
             String cardName = rules.getName();
 
             CardRules result = rulesByName.get(cardName);
-            if (result != null && result.getName().equals(cardName)){ // change properties only
+            if (result != null && result.getName().equals(cardName)) { // change properties only
                 result.reinitializeFromRules(rules);
                 return result;
             }
@@ -837,7 +925,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             if (null == whenItWasPrinted || whenItWasPrinted.isEmpty()) {
                 // TODO Not performant Each time we "putCard" we loop through ALL CARDS IN ALL editions
                 for (CardEdition e : editions.getOrderedEditions()) {
-                    int artIdx = 1;
+                    int artIdx = IPaperCard.DEFAULT_ART_INDEX;
                     for (CardInSet cis : e.getAllCardsInSet()) {
                         if (!cis.name.equals(cardName)) {
                             continue;
@@ -845,13 +933,12 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                         paperCards.add(new PaperCard(rules, e.getCode(), cis.rarity, artIdx++));
                     }
                 }
-            }
-            else {
+            } else {
                 String lastEdition = null;
                 int artIdx = 0;
-                for (Pair<String, CardRarity> tuple : whenItWasPrinted){
+                for (Pair<String, CardRarity> tuple : whenItWasPrinted) {
                     if (!tuple.getKey().equals(lastEdition)) {
-                        artIdx = 1;
+                        artIdx = IPaperCard.DEFAULT_ART_INDEX;
                         lastEdition = tuple.getKey();
                     }
                     CardEdition ed = editions.get(lastEdition);
@@ -862,7 +949,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 }
             }
             if (paperCards.isEmpty()) {
-                paperCards.add(new PaperCard(rules, CardEdition.UNKNOWN.getCode(), CardRarity.Special, 1));
+                paperCards.add(new PaperCard(rules, CardEdition.UNKNOWN.getCode(), CardRarity.Special));
             }
             // 2. add them to db
             for (PaperCard paperCard : paperCards) {
@@ -878,6 +965,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         public boolean isImmediateReindex() {
             return immediateReindex;
         }
+
         public void setImmediateReindex(boolean immediateReindex) {
             this.immediateReindex = immediateReindex;
         }

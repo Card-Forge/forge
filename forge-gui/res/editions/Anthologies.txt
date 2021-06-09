@@ -3,7 +3,7 @@ Code=ATH
 MciCode=at
 Date=1998-11
 Name=Anthologies
-Type=Other
+Type=Reprint
 Border=White
 Foil=NotSupported
 
