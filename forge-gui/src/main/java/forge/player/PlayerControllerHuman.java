@@ -487,7 +487,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     private boolean useSelectCardsInput(final FCollectionView<? extends GameEntity> sourceList) {
         // can't use InputSelect from GUI thread (e.g., DevMode Tutor)
-        if ( FThreads.isGuiThread() ) { return false; }
+        if (FThreads.isGuiThread()) { return false; }
 
         // if UI_SELECT_FROM_CARD_DISPLAYS not set use InputSelect only for battlefield and player hand
         // if UI_SELECT_FROM_CARD_DISPLAYS set and using desktop GUI use InputSelect for any zone that can be shown
