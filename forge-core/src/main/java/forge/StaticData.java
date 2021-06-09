@@ -279,94 +279,14 @@ public class StaticData {
 
     public Predicate<PaperCard> getBrawlPredicate() { return brawlPredicate; }
 
-    public String getPreferredCardArt() { return this.commonCards.getCardArtPreference().toString(); }
-
     public void setFilteredHandsEnabled(boolean filteredHandsEnabled){
         this.filteredHandsEnabled = filteredHandsEnabled;
     }
 
-    // TODO: @leriomaggio
-    // Once the new DB API will be merged, This method will received important refactoring!
-    public PaperCard getCardByEditionDate(PaperCard card, Date editionDate) {
-
-        PaperCard c = this.getCommonCards().getCardFromEditions(card.getName(), CardDb.CardArtPreference.LatestPrintNoPromoNoOnline, card.getArtIndex(), editionDate);
-
-        if (null != c) {
-            return c;
-        }
-
-        c = this.getCommonCards().getCardFromEditions(card.getName(), CardDb.CardArtPreference.LatestPrintNoPromoNoOnline, editionDate);
-
-        if (null != c) {
-            return c;
-        }
-
-        c = this.getCommonCards().getCardFromEditions(card.getName(), CardDb.CardArtPreference.LatestPrint, editionDate);
-
-        if (null != c) {
-            return c;
-        }
-
-        // I give up!
-        return card;
-    }
-
-    // TODO: @leriomaggio
-    // Once the new DB API will be merged, these methods are the first to go!
-    public PaperCard getCardFromLatestorEarliest(PaperCard card) {
-
-        PaperCard c = this.getCommonCards().getCardFromEditions(card.getName(), CardDb.CardArtPreference.LatestPrint, card.getArtIndex());
-
-        if (null != c && c.hasImage()) {
-            return c;
-        }
-
-        c = this.getCommonCards().getCardFromEditions(card.getName(), CardDb.CardArtPreference.LatestPrint);
-
-        if (null != c && c.hasImage()) {
-            return c;
-        }
-
-        c = this.getCommonCards().getCardFromEditions(card.getName(), CardDb.CardArtPreference.LatestPrintNoPromoNoOnline);
-
-        if (null != c) {
-            return c;
-        }
-
-        c = this.getCommonCards().getCardFromEditions(card.getName(), CardDb.CardArtPreference.OldPrintNoPromoNoOnline);
-
-        if (null != c) {
-            return c;
-        }
-
-        // I give up!
-        return card;
-    }
-
-    // TODO: @leriomaggio
-    // Once the new DB API will be merged, these methods are the first to go!
-    public PaperCard getCardFromEarliestCoreExp(PaperCard card) {
-
-        PaperCard c = this.getCommonCards().getCardFromEditions(card.getName(), CardDb.CardArtPreference.OldPrintNoPromoNoOnline, card.getArtIndex());
-
-        if (null != c && c.hasImage()) {
-            return c;
-        }
-
-        c = this.getCommonCards().getCardFromEditions(card.getName(), CardDb.CardArtPreference.OldPrintNoPromoNoOnline);
-
-        if (null != c && c.hasImage()) {
-            return c;
-        }
-
-        c = this.getCommonCards().getCardFromEditions(card.getName(), CardDb.CardArtPreference.OldPrint);
-
-        if (null != c) {
-            return c;
-        }
-
-        // I give up!
-        return card;
+    public PaperCard getReplacementCard(PaperCard card, final Date setReleasedBefore) {
+        PaperCard c = this.getCommonCards().getCardFromEditions(card.getName(), card.getArtIndex(), setReleasedBefore);
+        // NOTE: if c is null, is necessarily due to the artIndex, so remove it!
+        return c != null ? c : this.getCommonCards().getCardFromEditions(card.getName(), setReleasedBefore);
     }
 
     public boolean getFilteredHandsEnabled(){

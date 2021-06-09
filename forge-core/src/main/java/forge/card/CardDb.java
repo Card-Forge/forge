@@ -534,10 +534,19 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     /* Get Card from Edition using the default `CardArtPreference`
     NOTE: this method has NOT been included in the Interface API refactoring as it
     relies on a specific (new) attribute included in the `CardDB` that sets the
-    default `ArtPreference`. The method is public, though, for future use.
+    default `ArtPreference`. This attribute does not necessarily belongs to any
+    class implementing ICardInterface, and so the not inclusion in the API
      */
     public PaperCard getCardFromEditions(final String cardName) {
         return this.getCardFromEditions(cardName, this.defaultCardArtPreference);
+    }
+
+    public PaperCard getCardFromEditions(final String cardName, final Date printedBefore) {
+        return this.getCardFromEditions(cardName, this.defaultCardArtPreference, IPaperCard.NO_ART_INDEX, printedBefore);
+    }
+
+    public PaperCard getCardFromEditions(final String cardName, final int artIndex, final Date printedBefore) {
+        return this.getCardFromEditions(cardName, this.defaultCardArtPreference, artIndex, printedBefore);
     }
 
     @Override

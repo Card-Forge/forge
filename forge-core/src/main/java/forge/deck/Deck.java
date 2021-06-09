@@ -252,8 +252,6 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
 
     private void convertByXitaxMethod() {
         Date dateWithAllCards = StaticData.instance().getEditions().getEarliestDateWithAllCards(getAllCardsInASinglePool());
-        String artOption = StaticData.instance().getPreferredCardArt();
-
         for(Entry<DeckSection, CardPool> p : parts.entrySet()) {
             if( p.getKey() == DeckSection.Planes || p.getKey() == DeckSection.Schemes || p.getKey() == DeckSection.Avatar)
                 continue;
@@ -265,16 +263,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
                 int count = cp.getValue();
 
                 PaperCard replacementCard;
-                switch (artOption) {
-                    case "Latest":
-                        replacementCard = StaticData.instance().getCardFromLatestorEarliest(card);
-                        break;
-                    case "Earliest":
-                        replacementCard = StaticData.instance().getCardFromEarliestCoreExp(card);
-                        break;
-                    default:
-                        replacementCard = StaticData.instance().getCardByEditionDate(card, dateWithAllCards);
-                }
+                replacementCard = StaticData.instance().getReplacementCard(card, dateWithAllCards);
 
                 // Note @leriomaggio: The following logic is very obscure to me
                 // Why looking for a replacement Card and then not using adding it to the pool?
