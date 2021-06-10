@@ -1096,6 +1096,10 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             c = AbilityUtils.calculateAmount(source, amount, ability);
         }
 
+        if (c == 0) {
+            return PaymentDecision.number(0);
+        }
+
         if (sameType) {
             final CardCollection list2 = typeList;
             typeList = CardLists.filter(typeList, new Predicate<Card>() {
@@ -1109,9 +1113,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                     return false;
                 }
             });
-            if (c == 0) {
-                return PaymentDecision.number(0);
-            }
+
             final CardCollection tapped = new CardCollection();
             while (c > 0) {
                 final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, 1, 1, typeList, ability);

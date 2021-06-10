@@ -243,5 +243,4 @@ public class CharmEffect extends SpellAbilityEffect {
 
     }
 
-
 }

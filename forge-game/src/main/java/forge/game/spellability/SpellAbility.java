@@ -765,6 +765,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         resetTriggeringObjects();
         resetTriggerRemembered();
 
+        if (isActivatedAbility()) {
+            setXManaCostPaid(null);
+        }
+
         // reset last state when finished resolving
         setLastStateBattlefield(CardCollection.EMPTY);
         setLastStateGraveyard(CardCollection.EMPTY);
