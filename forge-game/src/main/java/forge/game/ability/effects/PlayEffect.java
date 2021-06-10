@@ -141,7 +141,7 @@ public class PlayEffect extends SpellAbilityEffect {
             }
         } else if (sa.hasParam("CopyFromChosenName")) {
             String name = source.getChosenName();
-            if (name.isBlank()) return;
+            if (name.trim().isEmpty()) return;
             Card card = Card.fromPaperCard(StaticData.instance().getCommonCards().getUniqueByName(name), controller);
             card.setToken(true);
             tgtCards = new CardCollection();
