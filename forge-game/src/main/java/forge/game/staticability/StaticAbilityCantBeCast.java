@@ -57,16 +57,17 @@ public class StaticAbilityCantBeCast {
     }
 
     public static boolean cantBeActivatedAbility(final SpellAbility spell, final Card card, final Player activator) {
-        if (!spell.isTrigger()) {
-            final Game game = activator.getGame();
-            for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
-                for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                    if (!stAb.getParam("Mode").equals(CantBeActivated) || stAb.isSuppressed() || !stAb.checkConditions()) {
-                        continue;
-                    }
-                    if (applyCantBeActivatedAbility(stAb, spell, card, activator)) {
-                        return true;
-                    }
+        if (spell.isTrigger()) {
+            return false;
+        }
+        final Game game = activator.getGame();
+        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (!stAb.getParam("Mode").equals(CantBeActivated) || stAb.isSuppressed() || !stAb.checkConditions()) {
+                    continue;
+                }
+                if (applyCantBeActivatedAbility(stAb, spell, card, activator)) {
+                    return true;
                 }
             }
         }
@@ -100,7 +101,6 @@ public class StaticAbilityCantBeCast {
      * @return true, if successful
      */
     public static boolean applyCantBeCastAbility(final StaticAbility stAb, final SpellAbility spell, final Card card, final Player activator) {
-
         if (!stAb.matchesValidParam("ValidCard", card)) {
             return false;
         }
