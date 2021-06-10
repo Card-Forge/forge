@@ -1,9 +1,0 @@
-Name:Squirrel Mob
-ManaCost:1 G G
-Types:Creature Squirrel
-PT:2/2
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each other Squirrel on the battlefield.
-SVar:X:Count$Valid Squirrel.Other
-SVar:BuffedBy:Squirrel
-DeckHints:Type$Squirrel
-Oracle:Squirrel Mob gets +1/+1 for each other Squirrel on the battlefield.

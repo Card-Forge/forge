@@ -35,6 +35,7 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
+import forge.util.CardTranslation;
 import forge.util.Lang;
 import forge.util.Localizer;
 
@@ -93,8 +94,7 @@ public class PlayEffect extends SpellAbilityEffect {
             if (sa.hasParam("ShowCards")) {
                 showCards = new CardCollection(AbilityUtils.filterListByType(game.getCardsIn(zones), sa.getParam("ShowCards"), sa));
             }
-        }
-        else if (sa.hasParam("AnySupportedCard")) {
+        } else if (sa.hasParam("AnySupportedCard")) {
             final String valid = sa.getParam("AnySupportedCard");
             List<PaperCard> cards = null;
             if (valid.startsWith("Names:")){
@@ -139,8 +139,14 @@ public class PlayEffect extends SpellAbilityEffect {
             else {
                 return;
             }
-        }
-        else {
+        } else if (sa.hasParam("CopyFromChosenName")) {
+            String name = source.getChosenName();
+            if (name.trim().isEmpty()) return;
+            Card card = Card.fromPaperCard(StaticData.instance().getCommonCards().getUniqueByName(name), controller);
+            card.setToken(true);
+            tgtCards = new CardCollection();
+            tgtCards.add(card);
+        } else {
             tgtCards = new CardCollection();
             // filter only cards that didn't changed zones
             for (Card c : getTargetCards(sa)) {
@@ -179,7 +185,16 @@ public class PlayEffect extends SpellAbilityEffect {
 
         while (!tgtCards.isEmpty() && amount > 0) {
             activator.getController().tempShowCards(showCards);
-            Card tgtCard = controller.getController().chooseSingleEntityForEffect(tgtCards, sa, Localizer.getInstance().getMessage("lblSelectCardToPlay"), optional, null);
+            Card tgtCard = null;
+            if (tgtCards.size() == 1 && amount == 1 && optional) {
+                tgtCard = tgtCards.get(0);
+                if (!controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantPlayCard", CardTranslation.getTranslatedName(tgtCard.getName())))) {
+                    break;
+                }
+            } else {
+                tgtCard = controller.getController().chooseSingleEntityForEffect(tgtCards, sa, Localizer.getInstance().getMessage("lblSelectCardToPlay"), optional, null);
+            }
+
             activator.getController().endTempShowCards();
             if (tgtCard == null) {
                 break;
