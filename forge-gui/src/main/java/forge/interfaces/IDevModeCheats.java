@@ -59,6 +59,8 @@ public interface IDevModeCheats {
 
     void planeswalkTo();
 
+    void askAI();
+
     /**
      * Implementation of {@link IDevModeCheats} that disallows cheating by
      * performing no action whatsoever when any of its methods is called.
@@ -140,6 +142,9 @@ public interface IDevModeCheats {
         }
         @Override
         public void removeCardsFromGame() {
+        }
+        @Override
+        public void askAI() {
         }
     };
 
