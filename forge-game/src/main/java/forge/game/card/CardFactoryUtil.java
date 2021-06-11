@@ -1398,7 +1398,7 @@ public class CardFactoryUtil {
             inst.addTrigger(triggerDrawn);
         } else if (keyword.startsWith("Modular")) {
             final String abStr = "DB$ PutCounter | ValidTgts$ Artifact.Creature | " +
-                    "TgtPrompt$ Select target artifact creature | CounterType$ P1P1 | CounterNum$ ModularX";
+                    "TgtPrompt$ Select target artifact creature | CounterType$ P1P1 | CounterNum$ ModularX | Modular$ True";
 
             String trigStr = "Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard" +
                     " | OptionalDecider$ TriggeredCardController | TriggerController$ TriggeredCardController" +
@@ -3087,7 +3087,7 @@ public class CardFactoryUtil {
 
                     int counters = AbilityUtils.calculateAmount(c, k[1], this);
                     GameEntityCounterTable table = new GameEntityCounterTable();
-                    c.addCounter(CounterEnumType.TIME, counters, getActivatingPlayer(), true, table);
+                    c.addCounter(CounterEnumType.TIME, counters, getActivatingPlayer(), this, true, table);
                     table.triggerCountersPutAll(game);
 
                     String sb = TextUtil.concatWithSpace(getActivatingPlayer().toString(),"has suspended", c.getName(), "with", String.valueOf(counters),"time counters on it.");

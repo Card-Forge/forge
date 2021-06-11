@@ -1382,21 +1382,21 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return true;
     }
 
-    public final int addCounter(final CounterType counterType, final int n, final Player source, final boolean applyMultiplier, GameEntityCounterTable table) {
-        return addCounter(counterType, n, source, applyMultiplier, true, table);
+    public final int addCounter(final CounterType counterType, final int n, final Player source, final SpellAbility cause, final boolean applyMultiplier, GameEntityCounterTable table) {
+        return addCounter(counterType, n, source, cause, applyMultiplier, true, table);
     }
-    public final int addCounterFireNoEvents(final CounterType counterType, final int n, final Player source, final boolean applyMultiplier, GameEntityCounterTable table) {
-        return addCounter(counterType, n, source, applyMultiplier, false, table);
+    public final int addCounterFireNoEvents(final CounterType counterType, final int n, final Player source, final SpellAbility cause, final boolean applyMultiplier, GameEntityCounterTable table) {
+        return addCounter(counterType, n, source, cause, applyMultiplier, false, table);
     }
-    public final int addCounter(final CounterEnumType counterType, final int n, final Player source, final boolean applyMultiplier, GameEntityCounterTable table) {
-        return addCounter(counterType, n, source, applyMultiplier, true, table);
+    public final int addCounter(final CounterEnumType counterType, final int n, final Player source, final SpellAbility cause, final boolean applyMultiplier, GameEntityCounterTable table) {
+        return addCounter(counterType, n, source, cause, applyMultiplier, true, table);
     }
-    public final int addCounterFireNoEvents(final CounterEnumType counterType, final int n, final Player source, final boolean applyMultiplier, GameEntityCounterTable table) {
-        return addCounter(counterType, n, source, applyMultiplier, false, table);
+    public final int addCounterFireNoEvents(final CounterEnumType counterType, final int n, final Player source, final SpellAbility cause, final boolean applyMultiplier, GameEntityCounterTable table) {
+        return addCounter(counterType, n, source, cause, applyMultiplier, false, table);
     }
 
     @Override
-    public int addCounter(final CounterType counterType, final int n, final Player source, final boolean applyMultiplier, final boolean fireEvents, GameEntityCounterTable table) {
+    public int addCounter(final CounterType counterType, final int n, final Player source, final SpellAbility cause, final boolean applyMultiplier, final boolean fireEvents, GameEntityCounterTable table) {
         int addAmount = n;
         if(addAmount <= 0 || !canReceiveCounters(counterType)) {
             // As per rule 107.1b
@@ -1404,6 +1404,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
         repParams.put(AbilityKey.Source, source);
+        repParams.put(AbilityKey.Cause, cause);
         repParams.put(AbilityKey.CounterType, counterType);
         repParams.put(AbilityKey.CounterNum, addAmount);
         repParams.put(AbilityKey.EffectOnly, applyMultiplier);
@@ -5273,7 +5274,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     || source.hasKeyword(Keyword.WITHER) || source.hasKeyword(Keyword.INFECT));
 
             if (wither) { // 120.3d
-                addCounter(CounterType.get(CounterEnumType.M1M1), damageIn, source.getController(), true, counterTable);
+                addCounter(CounterType.get(CounterEnumType.M1M1), damageIn, source.getController(), null, true, counterTable);
                 damageType = DamageType.M1M1Counters;
             }
             else { // 120.3e
@@ -6611,7 +6612,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     changed = true;
                 }
             } else {
-                changed |= addCounter(ct, e.getValue(), e.getRowKey(), true, table) > 0;
+                changed |= addCounter(ct, e.getValue(), e.getRowKey(), null, true, table) > 0;
             }
         }
         return changed;

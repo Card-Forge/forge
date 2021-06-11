@@ -30,7 +30,7 @@ public class CountersNoteEffect extends SpellAbilityEffect {
             if (mode.equals(MODE_STORE)) {
                 noteCounters(c, source);
             } else if (mode.equals(MODE_LOAD)) {
-                loadCounters(c, source, p, table);
+                loadCounters(c, source, p, sa, table);
             }
         }
         table.triggerCountersPutAll(game);
@@ -44,13 +44,13 @@ public class CountersNoteEffect extends SpellAbilityEffect {
         }
     }
 
-    private void loadCounters(Card notee, Card source, final Player p, GameEntityCounterTable table) {
+    private void loadCounters(Card notee, Card source, final Player p, final SpellAbility sa, GameEntityCounterTable table) {
         for(Entry<String, String> svar : source.getSVars().entrySet()) {
             String key = svar.getKey();
             if (key.startsWith(NOTE_COUNTERS)) {
                 notee.addCounter(
                         CounterType.getType(key.substring(NOTE_COUNTERS.length())),
-                        Integer.parseInt(svar.getValue()), p, false, table);
+                        Integer.parseInt(svar.getValue()), p, sa, false, table);
             }
             // TODO Probably should "remove" the svars that were temporarily used
         }

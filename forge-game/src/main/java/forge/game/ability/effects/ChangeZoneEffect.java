@@ -709,7 +709,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (sa.hasParam("WithCountersType")) {
                         CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
                         int cAmount = AbilityUtils.calculateAmount(hostCard, sa.getParamOrDefault("WithCountersAmount", "1"), sa);
-                        movedCard.addCounter(cType, cAmount, player, true, counterTable);
+                        movedCard.addCounter(cType, cAmount, player, sa, true, counterTable);
                     }
 
                     if (sa.hasParam("ExileFaceDown") || sa.hasParam("FaceDown")) {
