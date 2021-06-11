@@ -177,7 +177,7 @@ public class CostPutCounter extends CostPartWithList {
     @Override
     protected Card doPayment(SpellAbility ability, Card targetCard){
         final Integer i = this.convertAmount();
-        targetCard.addCounter(this.getCounter(), i, ability.getActivatingPlayer(), ability.getRootAbility().isTrigger(), counterTable);
+        targetCard.addCounter(this.getCounter(), i, ability.getActivatingPlayer(), null, ability.getRootAbility().isTrigger(), counterTable);
         return targetCard;
     }
 

@@ -336,7 +336,7 @@ public class DigEffect extends SpellAbilityEffect {
                             } else if (destZone1.equals(ZoneType.Exile)) {
                                 if (sa.hasParam("ExileWithCounter")) {
                                     c.addCounter(CounterType.getType(sa.getParam("ExileWithCounter")),
-                                            1, player, true, counterTable);
+                                            1, player, sa, true, counterTable);
                                 }
                                 c.setExiledWith(effectHost);
                                 c.setExiledBy(effectHost.getController());
@@ -408,7 +408,7 @@ public class DigEffect extends SpellAbilityEffect {
                             if (destZone2 == ZoneType.Exile) {
                                 if (sa.hasParam("ExileWithCounter")) {
                                     c.addCounter(CounterType.getType(sa.getParam("ExileWithCounter")),
-                                            1, player, true, counterTable);
+                                            1, player, sa, true, counterTable);
                                 }
                                 c.setExiledWith(effectHost);
                                 c.setExiledBy(effectHost.getController());
