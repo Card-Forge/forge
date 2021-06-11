@@ -3,6 +3,7 @@ Code=PPP1
 Date=2019-07-12
 Name=M20 Promo Packs
 Type=Promos
+ScryfallCode=PPP1
 
 [cards]
 1 R Plains

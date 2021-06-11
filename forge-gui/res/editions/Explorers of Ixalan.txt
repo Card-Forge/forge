@@ -5,6 +5,7 @@ Name=Explorers of Ixalan
 Code2=E02
 MciCode=E02
 Type=Other
+ScryfallCode=E02
 
 [cards]
 1 R Beacon of Immortality

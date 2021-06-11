@@ -3,6 +3,7 @@ Code=PM19
 Date=2018-07-13
 Name=Core Set 2019 Promos
 Type=Promos
+ScryfallCode=PM19
 
 [cards]
 29 U Militia Bugler

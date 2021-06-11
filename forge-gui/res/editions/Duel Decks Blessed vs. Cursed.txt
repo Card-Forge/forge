@@ -5,6 +5,7 @@ Name=Duel Decks: Blessed vs. Cursed
 Code2=DDQ
 MciCode=ddq
 Type=Duel_Decks
+ScryfallCode=DDQ
 
 [cards]
 1 M Geist of Saint Traft

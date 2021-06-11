@@ -4,6 +4,7 @@ Date=2016-11-16
 Name=Treasure Chests
 MciCode=pz2
 Type=Online
+ScryfallCode=PZ2
 
 [cards]
 1 C Throne Warden

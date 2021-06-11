@@ -1,5 +1,5 @@
 Name:Search the Premises
-ManaCost:2 W
+ManaCost:3 W
 Types:Enchantment
 T:Mode$ Attacks | ValidCard$ Creature | Attacked$ You,Planeswalker.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigInvestigate | TriggerDescription$ Whenever a creature attacks you or a planeswalker you control, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.)
 SVar:TrigInvestigate:DB$ Investigate

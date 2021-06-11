@@ -3,6 +3,7 @@ Code=PAL05
 Date=2005-01-01
 Name=Arena League 2005
 Type=Promos
+ScryfallCode=PAL05
 
 [cards]
 1 R Plains

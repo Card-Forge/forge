@@ -3,7 +3,8 @@ Code=PTSP
 Date=2006-10-06
 Name=Time Spiral Promos
 Type=Promos
+ScryfallCode=PTSP
 
 [cards]
-178 R Sudden Shock
-259 R Lotus Bloom
+179★ R Sudden Shock
+259★ R Lotus Bloom

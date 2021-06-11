@@ -4,7 +4,7 @@ Types:Legendary Planeswalker Basri
 Loyalty:4
 A:AB$ PutCounter | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | CounterNum$ 1 | CounterType$ P1P1 | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose target creature | ValidTgts$ Creature | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on up to one target creature. It gains vigilance until end of turn.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Vigilance
-A:AB$ Effect | Cost$ SubCounter<1/LOYALTY> | Triggers$ TrigAttack | SpellDescription$ Whenever a creature attacks this turn, put a +1/+1 counter on it.
+A:AB$ Effect | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | Triggers$ TrigAttack | SpellDescription$ Whenever a creature attacks this turn, put a +1/+1 counter on it.
 SVar:TrigAttack:Mode$ Attacks | ValidCard$ Creature | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature attacks this turn, put a +1/+1 counter on it.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredAttackerLKICopy | CounterType$ P1P1 | CounterNum$ 1
 A:AB$ PumpAll | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +2 | KW$ Flying | SpellDescription$ Creatures you control get +2/+2 and gain flying until end of turn.

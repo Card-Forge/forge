@@ -4,6 +4,7 @@ Date=2012-08-31
 Name=From the Vault: Realms
 MciCode=v12
 Type=From_the_Vault
+ScryfallCode=V12
 
 [cards]
 1 M Ancient Tomb

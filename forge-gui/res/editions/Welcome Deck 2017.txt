@@ -4,6 +4,7 @@ Date=2017-04-15
 Name=Welcome Deck 2017
 MciCode=w17
 Type=Other
+ScryfallCode=W17
 
 [cards]
 1 C Divine Verdict

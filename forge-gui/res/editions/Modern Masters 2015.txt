@@ -9,6 +9,7 @@ Booster=11 Common, 3 Uncommon, 1 RareMythic
 BoosterBox=24
 FoilChanceInBooster=100
 ChaosDraftThemes=MASTERS_SET
+ScryfallCode=MM2
 
 [cards]
 1 R All Is Dust

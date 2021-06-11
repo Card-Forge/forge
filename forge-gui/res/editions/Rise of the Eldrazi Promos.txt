@@ -3,11 +3,12 @@ Code=PROE
 Date=2010-04-23
 Name=Rise of the Eldrazi Promos
 Type=Promos
+ScryfallCode=PROE
 
 [cards]
-4 M Emrakul, the Aeons Torn
+4★ M Emrakul, the Aeons Torn
 48 R Staggershock
 49 R Deathless Angel
-112 R Guul Draz Assassin
-124 R Pestilence Demon
-156 R Lord of Shatterskull Pass
+*112 R Guul Draz Assassin
+*124 R Pestilence Demon
+156★ R Lord of Shatterskull Pass

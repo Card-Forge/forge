@@ -3,6 +3,7 @@ Code=PAL06
 Date=2006-01-01
 Name=Arena League 2006
 Type=Promos
+ScryfallCode=PAL06
 
 [cards]
 1 R Plains

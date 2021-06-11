@@ -5,16 +5,17 @@ Name=Planechase Anthology
 Code2=PCA
 MciCode=pca
 Type=Other
+ScryfallCode=PCA
 
 [cards]
-1 C Chaotic AEther 
-2 C Interplanar Tunnel 
-3 C Morphic Tide 
-4 C Mutual Epiphany 
-5 C Planewide Disaster 
-6 C Reality Shaping 
-7 C Spatial Merging 
-8 C Time Distortion 
+1 C Chaotic AEther
+2 C Interplanar Tunnel
+3 C Morphic Tide
+4 C Mutual Epiphany
+5 C Planewide Disaster
+6 C Reality Shaping
+7 C Spatial Merging
+8 C Time Distortion
 9 C Academy at Tolaria West
 10 C The AEther Flues
 11 C Agyrem

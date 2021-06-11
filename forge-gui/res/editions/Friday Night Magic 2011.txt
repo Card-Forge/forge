@@ -3,6 +3,7 @@ Code=F11
 Date=2011-01-01
 Name=Friday Night Magic 2011
 Type=Promos
+ScryfallCode=F11
 
 [cards]
 1 R Everflowing Chalice

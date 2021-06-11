@@ -3,21 +3,22 @@ Code=PRES
 Date=2007-01-01
 Name=Resale Promos
 Type=Promos
+ScryfallCode=PRES
 
 [cards]
-1 R Jaya Ballard, Task Mage
-2 R Brion Stoutarm
-3 R Broodmate Dragon
-4 R Retaliator Griffin
-5 R Terra Stomper
-6 R Terastodon
-7 R Knight Exemplar
-8 R Sunblast Angel
-9 R Angel of Glory's Rise
-10 R Hamletback Goliath
-11 R Angelic Skirmisher
-12 R Xathrid Necromancer
-13 U Loam Lion
+A1 R Jaya Ballard, Task Mage
+A2 R Brion Stoutarm
+A3 R Broodmate Dragon
+A4 R Retaliator Griffin
+A5 R Terra Stomper
+A6 R Terastodon
+A7 R Knight Exemplar
+A8 R Sunblast Angel
+A9 R Angel of Glory's Rise
+A10 R Hamletback Goliath
+A11 R Angelic Skirmisher
+A12 R Xathrid Necromancer
+13★ U Loam Lion
 26 R Felidar Sovereign
 47 R Thalia's Lancers
 49 R Curator of Mysteries
@@ -25,12 +26,12 @@ Type=Promos
 123 R Beast Whisperer
 133 R Opportunistic Dragon
 140 R Neheb, Dreadhorde Champion
-141 R Goblin Chieftain
+141★ R Goblin Chieftain
 147 R Bristling Hydra
 149 R Atarka, World Render
-149 R Lathliss, Dragon Queen
+149* R Lathliss, Dragon Queen
 172 R Gargos, Vicious Watcher
 174 R Genesis Hydra
 193 R Outland Colossus
-221 R Oran-Rief, the Vastwood
+221★ R Oran-Rief, the Vastwood
 235 R Stonecoil Serpent

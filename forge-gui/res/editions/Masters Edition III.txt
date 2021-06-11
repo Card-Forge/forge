@@ -6,6 +6,7 @@ Code2=ME3
 Type=Online
 BoosterCovers=1
 Booster=10 Common, 3 Uncommon, 1 Rare, 1 BasicLand
+ScryfallCode=ME3
 
 [cards]
 85 U Active Volcano

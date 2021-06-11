@@ -3,10 +3,11 @@ Code=PM11
 Date=2010-07-15
 Name=Magic 2011 Promos
 Type=Promos
+ScryfallCode=PM11
 
 [cards]
-35 M Sun Titan
+35★ M Sun Titan
 53 R Mitotic Slime
 104 C Liliana's Specter
-122 R Ancient Hellkite
-165 R Birds of Paradise
+122★ R Ancient Hellkite
+165★ R Birds of Paradise

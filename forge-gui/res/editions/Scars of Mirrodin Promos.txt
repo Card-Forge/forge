@@ -3,6 +3,7 @@ Code=PSOM
 Date=2010-09-30
 Name=Scars of Mirrodin Promos
 Type=Promos
+ScryfallCode=PSOM
 
 [cards]
 24 R Tempered Steel

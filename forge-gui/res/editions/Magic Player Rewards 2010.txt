@@ -3,6 +3,7 @@ Code=P10
 Date=2010-01-01
 Name=Magic Player Rewards 2010
 Type=Promos
+ScryfallCode=P10
 
 [cards]
 1 R Lightning Bolt

@@ -9,6 +9,7 @@ BoosterCovers=1
 Booster=8 Common, 3 Uncommon, 1 Rare
 BoosterBox=45
 Foil=NotSupported
+ScryfallCode=ALL
 
 [cards]
 116a C Aesthir Glider

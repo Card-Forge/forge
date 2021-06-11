@@ -9,6 +9,7 @@ BoosterCovers=1
 Booster=11 Common, 3 Uncommon, 1 Rare
 Foil=OldStyle
 FoilAlwaysInCommonSlot=False
+ScryfallCode=APC
 
 [cards]
 91 U AEther Mutation

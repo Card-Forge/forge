@@ -5,6 +5,7 @@ Date=2013-08-23
 Name=From the Vault: Twenty
 MciCode=v13
 Type=From_the_Vault
+ScryfallCode=V13
 
 [cards]
 1 M Dark Ritual

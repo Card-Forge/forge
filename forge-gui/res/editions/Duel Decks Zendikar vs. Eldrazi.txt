@@ -5,6 +5,7 @@ Name=Duel Decks: Zendikar vs. Eldrazi
 Code2=DDP
 MciCode=ddp
 Type=Duel_Decks
+ScryfallCode=DDP
 
 [cards]
 1 M Avenger of Zendikar

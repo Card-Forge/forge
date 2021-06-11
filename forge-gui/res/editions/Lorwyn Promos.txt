@@ -3,7 +3,8 @@ Code=PLRW
 Date=2008-01-01
 Name=Lorwyn Promos
 Type=Promos
+ScryfallCode=PLRW
 
 [cards]
-139 R Shriekmaw
-244 R Wren's Run Packmaster
+139★ R Shriekmaw
+244★ R Wren's Run Packmaster

@@ -3,6 +3,7 @@ Code=F13
 Date=2013-01-01
 Name=Friday Night Magic 2013
 Type=Promos
+ScryfallCode=F13
 
 [cards]
 1 R Searing Spear

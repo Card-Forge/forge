@@ -5,6 +5,7 @@ Name=M15 Prerelease Challenge
 Code2= PPC1
 MciCode=ppc1
 Type=Promos
+ScryfallCode=PPC1
 
 [cards]
 1 C Garruk the Slayer

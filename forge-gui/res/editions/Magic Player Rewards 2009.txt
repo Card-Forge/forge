@@ -3,6 +3,7 @@ Code=P09
 Date=2009-01-01
 Name=Magic Player Rewards 2009
 Type=Promos
+ScryfallCode=P09
 
 [cards]
 1 R Cryptic Command

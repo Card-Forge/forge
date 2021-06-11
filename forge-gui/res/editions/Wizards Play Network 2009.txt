@@ -3,6 +3,7 @@ Code=PWP09
 Date=2009-01-01
 Name=Wizards Play Network 2009
 Type=Promos
+ScryfallCode=PWP09
 
 [cards]
 24 R Path to Exile

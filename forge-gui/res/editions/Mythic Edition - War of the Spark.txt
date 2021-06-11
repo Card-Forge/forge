@@ -4,6 +4,7 @@ Date=2019-05-03
 Name=Mythic Edition - War of the Spark
 MciCode=med
 Type=Other
+ScryfallCode=med
 
 [cards]
 WS1 M Ugin, the Spirit Dragon

@@ -5,6 +5,7 @@ Name=From the Vault: Exiled
 MciCode=fve
 Type=From_the_Vault
 Alias=V09
+ScryfallCode=V09
 
 [cards]
 1 M Balance

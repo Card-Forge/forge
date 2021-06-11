@@ -9,6 +9,7 @@ BoosterCovers=1
 Booster=6 Common, 2 UncommonRare
 BoosterBox=60
 Foil=NotSupported
+ScryfallCode=ARN
 
 [cards]
 1 U Abu Ja'far
@@ -21,7 +22,7 @@ Foil=NotSupported
 2+ C Army of Allah
 70 U Bazaar of Baghdad
 37 C Bird Maiden
-37+ C Bird Maiden
+37† C Bird Maiden
 58 R Bottle of Suleiman
 59 U Brass Man
 3 C Camel
@@ -40,19 +41,19 @@ Foil=NotSupported
 24 R El-Hajjaj
 74 R Elephant Graveyard
 25 C Erg Raiders
-25+ C Erg Raiders
+25† C Erg Raiders
 48 R Erhnam Djinn
 4 U Eye for an Eye
 13 C Fishliver Oil
-13+ C Fishliver Oil
+13† C Fishliver Oil
 63 U Flying Carpet
 14 C Flying Men
 49 C Ghazban Ogre
 15 C Giant Tortoise
-15+ C Giant Tortoise
+15† C Giant Tortoise
 26 R Guardian Beast
 27 C Hasran Ogress
-27+ C Hasran Ogress
+27† C Hasran Ogress
 39 C Hurr Jackal
 50 R Ifh-Biff Efreet
 16 R Island Fish Jasconius
@@ -72,21 +73,21 @@ Foil=NotSupported
 51 C Metamorphosis
 42 R Mijae Djinn
 7 C Moorish Cavalry
-7+ C Moorish Cavalry
+7† C Moorish Cavalry
 77 C Mountain
 52 C Nafs Asp
-52+ C Nafs Asp
+52† C Nafs Asp
 78 U Oasis
 18 R Old Man of the Sea
 31 C Oubliette
-31+ C Oubliette
+31† C Oubliette
 8 C Piety
-8+ C Piety
+8† C Piety
 67 R Pyramids
 9 R Repentant Blacksmith
 68 R Ring of Ma'ruf
 43 C Rukh Egg
-43+ C Rukh Egg
+43† C Rukh Egg
 69 U Sandals of Abdallah
 53 C Sandstorm
 19 R Serendib Djinn
@@ -96,12 +97,12 @@ Foil=NotSupported
 54 R Singing Tree
 32 U Sorceress Queen
 33 C Stone-Throwing Devils
-33+ C Stone-Throwing Devils
+33† C Stone-Throwing Devils
 22 C Unstable Mutation
 11 C War Elephant
-11+ C War Elephant
+11† C War Elephant
 55 C Wyluli Wolf
-55+ C Wyluli Wolf
+55† C Wyluli Wolf
 44 R Ydwen Efreet
 
 [tokens]

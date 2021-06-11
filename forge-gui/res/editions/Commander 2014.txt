@@ -5,6 +5,7 @@ Name=Commander 2014
 Code2=C14
 MciCode=c14
 Type=Other
+ScryfallCode=C14
 
 [cards]
 1 R Angel of the Dire Hour

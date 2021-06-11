@@ -5,6 +5,8 @@ Name=Commander Anthology
 Code2=CMA
 MciCode=CMA
 Type=Other
+ScryfallCode=CMA
+
 [cards]
 1 U Aerie Mystics
 2 R Akroma's Vengeance

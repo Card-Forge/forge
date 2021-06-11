@@ -3,6 +3,7 @@ Code=HA4
 Date=2021-03-11
 Name=Historic Anthology 4
 Type=Online
+ScryfallCode=HA4
 
 [cards]
 1 R Adorned Pouncer
@@ -29,4 +30,4 @@ Type=Online
 22 U Coldsteel Heart
 23 R Inspiring Statuary
 24 M Sword of Body and Mind
-25 R Blinkmoth Nexus 
+25 R Blinkmoth Nexus

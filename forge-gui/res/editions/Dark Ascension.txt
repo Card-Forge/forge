@@ -8,6 +8,7 @@ Type=Expansion
 BoosterCovers=3
 Booster=9 Common:!dfc, 3 Uncommon:!dfc, 1 RareMythic:!dfc, 1 dfc, 1 BasicLand ISD
 ChaosDraftThemes=GRAVEYARD_MATTERS
+ScryfallCode=DKA
 
 [cards]
 81 U Afflicted Deserter

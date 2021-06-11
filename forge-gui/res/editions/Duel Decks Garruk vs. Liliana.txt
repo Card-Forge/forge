@@ -4,6 +4,7 @@ Date=2009-10-30
 Name=Duel Decks: Garruk vs. Liliana
 MciCode=gvl
 Type=Duel_Decks
+ScryfallCode=DDD
 
 [cards]
 1 M Garruk Wildspeaker

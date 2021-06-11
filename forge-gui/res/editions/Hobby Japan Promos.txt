@@ -3,6 +3,8 @@ Code=PHJ
 Date=2002-07-21
 Name=Hobby Japan Promos
 Type=Promos
+CardLang=ja
+ScryfallCode=PHJ
 
 [cards]
 1 R Goblin Mutant

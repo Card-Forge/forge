@@ -1,8 +1,11 @@
 [metadata]
-Code=RMH1
+Code=H1R
 Date=2021-06-18
 Name=Modern Horizons 1 Timeshifts
+Code2=RMH1
+Alias=RMH1
 Type=Other
+ScryfallCode=H1R
 
 [cards]
 1 U Ephemerate

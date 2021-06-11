@@ -5,6 +5,7 @@ Name=Commander 2017
 Code2=C17
 MciCode=c17
 Type=Other
+ScryfallCode=C17
 
 [cards]
 1 R Alms Collector

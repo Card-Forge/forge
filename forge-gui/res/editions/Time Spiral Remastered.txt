@@ -5,6 +5,7 @@ Date=2021-03-19
 Type=Reprint
 BoosterCovers=3
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 Special
+ScryfallCode=TSR
 
 [cards]
 1 C Amrou Scout
@@ -439,4 +440,3 @@ llanowar_elves
 g_1_1_saproling
 c_2_2_a_assembly_worker
 metallic_sliver
-

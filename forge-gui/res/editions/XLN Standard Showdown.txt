@@ -3,6 +3,7 @@ Code=PSS2
 Date=2017-09-29
 Name=XLN Standard Showdown
 Type=Promos
+ScryfallCode=PSS2
 
 [cards]
 1 R Plains

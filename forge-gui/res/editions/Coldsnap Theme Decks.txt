@@ -4,6 +4,7 @@ Date=2006-07-21
 Name=Coldsnap Theme Decks
 MciCode=cst
 Type=Other
+ScryfallCode=CST
 
 [cards]
 8 U Kjeldoran Home Guard

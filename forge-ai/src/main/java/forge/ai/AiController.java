@@ -1354,7 +1354,7 @@ public class AiController {
 
     public AiPlayDecision canPlayFromEffectAI(Spell spell, boolean mandatory, boolean withoutPayingManaCost) {
         int damage = ComputerUtil.getDamageForPlaying(player, spell);
-        if (damage >= player.getLife() && !player.cantLoseForZeroOrLessLife() && player.canLoseLife()) {
+        if (!mandatory && damage >= player.getLife() && !player.cantLoseForZeroOrLessLife() && player.canLoseLife()) {
             return AiPlayDecision.CurseEffects;
         }
 

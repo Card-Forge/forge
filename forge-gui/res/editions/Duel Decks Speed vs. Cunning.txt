@@ -4,6 +4,7 @@ Date=2014-09-05
 Name=Duel Decks: Speed vs. Cunning
 MciCode=ddn
 Type=Duel_Decks
+ScryfallCode=DDN
 
 [cards]
 1 M Zurgo Helmsmasher

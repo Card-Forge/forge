@@ -3,10 +3,11 @@ Code=PAVR
 Date=2012-04-28
 Name=Avacyn Restored Promos
 Type=Promos
+ScryfallCode=PAVR
 
 [cards]
-32 R Restoration Angel
-36 R Silverblade Paladin
+32★ R Restoration Angel
+*36 R Silverblade Paladin
 63 U Latch Seeker
 111 R Killing Wave
-217 R Moonsilver Spear
+217★ R Moonsilver Spear

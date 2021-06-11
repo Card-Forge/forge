@@ -3,9 +3,10 @@ Code=PCSP
 Date=2006-07-21
 Name=Coldsnap Promos
 Type=Promos
+ScryfallCode=PCSP
 
 [cards]
-101 R Allosaurus Rider
+101★ R Allosaurus Rider
 
 [tokens]
 marit_lage

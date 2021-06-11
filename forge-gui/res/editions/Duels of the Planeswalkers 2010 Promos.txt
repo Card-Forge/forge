@@ -3,6 +3,7 @@ Code=PDP10
 Date=2010-01-01
 Name=Duels of the Planeswalkers 2010 Promos
 Type=Promos
+ScryfallCode=PDP10
 
 [cards]
 1 M Liliana Vess

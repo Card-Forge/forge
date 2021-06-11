@@ -7,6 +7,7 @@ Type=Core
 BoosterCovers=3
 Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Secret Cards"), 1 RareMythic:!fromSheet("M20 Secret Cards"), 1 fromSheet("M20 Lands")
 ChaosDraftThemes=CORE_SET
+ScryfallCode=M20
 
 [cards]
 1 C Aerial Assault
@@ -353,6 +354,7 @@ ChaosDraftThemes=CORE_SET
 342 C Prized Unicorn
 343 C Titanic Growth
 344 C Woodland Mystic
+
 [tokens]
 ajanis_pridemate
 b_5_5_demon_flying

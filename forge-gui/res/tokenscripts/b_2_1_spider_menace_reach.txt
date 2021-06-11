@@ -1,5 +1,6 @@
 Name:Spider
 ManaCost:no cost
+Types:Creature Spider
 Colors:black
 PT:2/1
 K:Menace

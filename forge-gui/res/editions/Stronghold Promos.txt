@@ -3,6 +3,7 @@ Code=PSTH
 Date=1998-03-02
 Name=Stronghold Promos
 Type=Promos
+ScryfallCode=PSTH
 
 [cards]
 68 R Revenant

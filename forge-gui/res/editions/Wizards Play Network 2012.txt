@@ -3,6 +3,7 @@ Code=PWP12
 Date=2012-01-01
 Name=Wizards Play Network 2012
 Type=Promos
+ScryfallCode=PWP12
 
 [cards]
 79 R Gather the Townsfolk

@@ -3,7 +3,8 @@ Code=PCON
 Date=2009-02-06
 Name=Conflux Promos
 Type=Promos
+ScryfallCode=PCON
 
 [cards]
-117 R Malfegor
-140 R Obelisk of Alara
+117★ R Malfegor
+140★ R Obelisk of Alara

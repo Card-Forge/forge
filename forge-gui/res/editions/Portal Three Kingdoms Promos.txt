@@ -3,7 +3,8 @@ Code=PPTK
 Date=1999-07-01
 Name=Portal: Three Kingdoms Promos
 Type=Promos
+ScryfallCode=PPTK
 
 [cards]
-115 R Lu Bu, Master-at-Arms
+115b R Lu Bu, Master-at-Arms
 116 R Lu Bu, Master-at-Arms

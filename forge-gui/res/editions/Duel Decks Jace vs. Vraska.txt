@@ -4,6 +4,7 @@ Date=2014-03-14
 Name=Duel Decks: Jace vs. Vraska
 MciCode=ddm
 Type=Duel_Decks
+ScryfallCode=DDM
 
 [cards]
 1 M Jace, Architect of Thought

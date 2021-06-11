@@ -3,6 +3,7 @@ Code=PS16
 Date=2016-01-01
 Name=San Diego Comic-Con 2016
 Type=Promos
+ScryfallCode=PS16
 
 [cards]
 29 M Gideon, Ally of Zendikar

@@ -3,7 +3,8 @@ Code=P9ED
 Date=2005-07-29
 Name=Ninth Edition Promos
 Type=Promos
+ScryfallCode=P9ED
 
 [cards]
+242★ R Force of Nature
 219 R Shivan Dragon
-242 R Force of Nature

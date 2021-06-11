@@ -9,6 +9,7 @@ Booster=10 Common:fromSheet("MH2 cards"), 3 Uncommon:fromSheet("MH2 cards"), 1 R
 BoosterReplaceSlotFromPrintSheet=MH2 NewToModern
 BoosterBox=36
 ChaosDraftThemes=MASTERS_SET
+ScryfallCode=MH2
 
 [cards]
 1 U Abiding Grace
@@ -588,68 +589,6 @@ ChaosDraftThemes=MASTERS_SET
 2 Nevinyrral's Disk|MH2|1
 6 Patchwork Gnomes|MH2|1
 6 Zuran Orb|MH2|1
-
-[Secret Cards]
-Arid Mesa
-Darkmoss Bridge
-Drossforge Bridge
-Goldmire Bridge
-Marsh Flats
-Mistvault Bridge
-Misty Rainforest
-Power Depot
-Razortide Bridge
-Rustvale Bridge
-Scalding Tarn
-Silverbluff Bridge
-Slagwoods Bridge
-Tanglepool Bridge
-Thornglint Bridge
-Urza's Saga
-Verdant Catacombs
-Yavimaya, Cradle of Growth
-Angelic Curator
-Karmic Guide
-Seal of Cleansing
-Solitary Confinement
-Soul Snare
-Counterspell
-Sea Drake
-Seal of Removal
-Upheaval
-Wonder
-Bone Shredder
-Braids, Cabal Minion
-Greed
-Patriarch's Bidding
-Skirge Familiar
-Chance Encounter
-Flame Rift
-Goblin Bombardment
-Gorilla Shaman
-Imperial Recruiter
-Mogg Salvage
-Enchantress's Presence
-Hunting Pack
-Quirion Ranger
-Squirrel Mob
-Titania, Protector of Argoth
-Yavimaya Elder
-Chainer, Nightmare Adept
-Fire // Ice
-Mirari's Wake
-Shardless Agent
-Sterling Grove
-Vindicate
-Cursed Totem
-Extruder
-Millikin
-Nevinyrral's Disk
-Patchwork Gnomes
-Zuran Orb
-Cabal Coffers
-Mishra's Factory
-Riptide Laboratory
 
 [tokens]
 b_0_0_germ

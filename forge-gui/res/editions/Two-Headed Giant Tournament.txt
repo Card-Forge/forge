@@ -3,6 +3,7 @@ Code=P2HG
 Date=2005-12-09
 Name=Two-Headed Giant Tournament
 Type=Promos
+ScryfallCode=P2HG
 
 [cards]
 1 R Underworld Dreams

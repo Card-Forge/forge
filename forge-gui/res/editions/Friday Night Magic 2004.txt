@@ -3,6 +3,7 @@ Code=F04
 Date=2004-01-01
 Name=Friday Night Magic 2004
 Type=Promos
+ScryfallCode=F04
 
 [cards]
 1 R Willbender

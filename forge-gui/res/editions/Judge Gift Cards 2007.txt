@@ -3,6 +3,7 @@ Code=G07
 Date=2007-01-01
 Name=Judge Gift Cards 2007
 Type=Promos
+ScryfallCode=G07
 
 [cards]
 1 R Ravenous Baloth

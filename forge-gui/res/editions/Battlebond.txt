@@ -6,6 +6,7 @@ MciCode=bbd
 Type=Other
 BoosterCovers=3
 Booster=10 Common, 3 Uncommon, 1 fromSheet("BBD RareMythic"), 1 BasicLand
+ScryfallCode=BBD
 
 [cards]
 1 M Will Kenrith

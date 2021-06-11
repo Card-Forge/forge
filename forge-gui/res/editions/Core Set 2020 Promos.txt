@@ -3,6 +3,7 @@ Code=PM20
 Date=2019-07-02
 Name=Core Set 2020 Promos
 Type=Promos
+ScryfallCode=PM20
 
 [cards]
 69 C Negate

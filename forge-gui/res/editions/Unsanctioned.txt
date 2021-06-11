@@ -6,6 +6,7 @@ Name=Unsanctioned
 MciCode=und
 Type=Funny
 Border=Silver
+ScryfallCode=UND
 
 [cards]
 1 C Adorable Kitten

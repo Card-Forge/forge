@@ -8,6 +8,7 @@ Type=Expansion
 BoosterCovers=3
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 ChaosDraftThemes=MIRRODIN
+ScryfallCode=NPH
 
 [cards]
 78 U Act of Aggression

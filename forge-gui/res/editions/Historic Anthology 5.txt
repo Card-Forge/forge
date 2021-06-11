@@ -3,30 +3,31 @@ Code=HA5
 Date=2021-05-27
 Name=Historic Anthology 5
 Type=Online
+ScryfallCode=HA5
 
 [cards]
-1 C Court Homunculus
-2 M Elesh Norn, Grand Cenobite
-3 U Intangible Virtue
-4 C Ray of Revelation
-5 M Jin-Gitaxias, Core Augur
-6 C Merfolk Looter
-7 U Reverse Engineer
-8 R Stifle
-9 U Whirler Rogue
-10 M Sheoldred, Whispering One
-11 C Vault Skirge
-12 U Ancient Grudge
-13 R Dragonstorm
-14 U Trash for Treasure
-15 M Urabrask the Hidden
-16 C Into the North
-17 M Vorinclex, Voice of Hunger
-18 R Ojutai's Command
-19 R Silumgar's Command
-20 R Kolaghan's Command
-21 R Atarka's Command
-22 R Dromoka's Command
-23 C Grisly Salvage
-24 C Ichor Wellspring
-25 C Relic of Progenitus
+999-CH C Court Homunculus
+999-ENGC M Elesh Norn, Grand Cenobite
+999-IV U Intangible Virtue
+999-ROR C Ray of Revelation
+999-JGCA M Jin-Gitaxias, Core Augur
+999-ML C Merfolk Looter
+999-RE U Reverse Engineer
+999-S R Stifle
+999-WN U Whirler Rogue
+999-SWO M Sheoldred, Whispering One
+999-VS C Vault Skirge
+999-AG U Ancient Grudge
+999-DS R Dragonstorm
+999-TFT U Trash for Treasure
+999-UTH M Urabrask the Hidden
+999-ITN C Into the North
+999-VVOH M Vorinclex, Voice of Hunger
+999-OC R Ojutai's Command
+999-SC R Silumgar's Command
+999-KC R Kolaghan's Command
+999-AC R Atarka's Command
+999-DC R Dromoka's Command
+999-GS C Grisly Salvage
+999-IW C Ichor Wellspring
+999-ROP C Relic of Progenitus

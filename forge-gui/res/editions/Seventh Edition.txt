@@ -11,6 +11,7 @@ Booster=10 Common, 3 Uncommon, 1 Rare, 1 BasicLand
 Foil=OldStyle
 FoilAlwaysInCommonSlot=False
 ChaosDraftThemes=CORE_SET
+ScryfallCode=7ED
 
 [cards]
 172 U AEther Flash

@@ -3,6 +3,7 @@ Code=FS
 Date=1995-03-23
 Name=Final Sacrifice
 Type=Other
+ScryfallCode=PHPR
 
 [cards]
 5 C Mana Crypt

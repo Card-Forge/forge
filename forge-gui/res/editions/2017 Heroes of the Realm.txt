@@ -5,6 +5,7 @@ Name=2017 Heroes of the Realm
 Code2=HTR17
 MciCode=htr17
 Type=Funny
+ScryfallCode=HTR17
 
 [cards]
 1 M Diabolical Salvation

@@ -3,6 +3,7 @@ Code=PKLD
 Date=2016-01-01
 Name=Kaladesh Promos
 Type=Promos
+ScryfallCode=PKLD
 
 [cards]
 62 R Saheeli's Artistry

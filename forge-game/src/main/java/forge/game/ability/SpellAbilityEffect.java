@@ -704,8 +704,8 @@ public abstract class SpellAbilityEffect {
         Card host = sa.getHostCard();
         final Game game = host.getGame();
         final String duration = sa.getParam("Duration");
-        // in case host was LKI
-        if (host.isLKI()) {
+        // in case host was LKI or still resolving
+        if (host.isLKI() || host.getZone().is(ZoneType.Stack)) {
             host = game.getCardState(host);
         }
 

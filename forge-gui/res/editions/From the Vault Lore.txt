@@ -4,6 +4,7 @@ Date=2016-08-19
 Name=From the Vault: Lore
 MciCode=v16
 Type=From_the_Vault
+ScryfallCode=V16
 
 [cards]
 1 M Beseech the Queen

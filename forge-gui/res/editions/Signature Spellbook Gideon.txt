@@ -4,13 +4,14 @@ Date=2019-06-28
 Name=Signature Spellbook: Gideon
 MciCode=ss2
 Type=Reprint
+ScryfallCode=SS2
 
 [cards]
-1 M Gideon Jura 
-2 R Martyr's Bond 
-3 R Path to Exile 
-4 R Rest in Peace 
-5 R Shielded by Faith 
-6 R True Conviction 
-7 R Worship 
-8 R Blackblade Reforged 
+1 M Gideon Jura
+2 R Martyr's Bond
+3 R Path to Exile
+4 R Rest in Peace
+5 R Shielded by Faith
+6 R True Conviction
+7 R Worship
+8 R Blackblade Reforged

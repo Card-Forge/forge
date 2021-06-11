@@ -8,6 +8,7 @@ Type=Expansion
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 Rare
 Foil=NotSupported
+ScryfallCode=USG
 
 [cards]
 1 U Absolute Grace

@@ -4,6 +4,7 @@ Date=2019-02-15
 Name=Ravnica Allegiance Guild Kit
 MciCode=gk2
 Type=Other
+ScryfallCode=GK2
 
 [cards]
 1 M Isperia, Supreme Judge
