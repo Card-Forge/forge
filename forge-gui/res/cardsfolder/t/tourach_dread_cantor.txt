@@ -1,0 +1,12 @@
+Name:Tourach, Dread Cantor
+ManaCost:1 B
+Types:Legendary Creature Human Cleric
+PT:2/1
+K:Kicker:B B
+K:Protection from white
+T:Mode$ Discarded | ValidCard$ Card.OppOwn | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever an opponent discards a card, put a +1/+1 counter on CARDNAME.
+SVar:TrigCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, target opponent discards two cards at random.
+SVar:TrigDiscard:DB$ Discard | ValidTgts$ Opponent | NumCards$ 2 | Mode$ Random
+DeckHas:Ability$Counters
+Oracle:Kicker {B}{B}\nProtection from white\nWhenever an opponent discards a card, put a +1/+1 counter on Tourach, Dread Cantor.\nWhen Tourach enters the battlefield, if it was kicked, target opponent discards two cards at random.

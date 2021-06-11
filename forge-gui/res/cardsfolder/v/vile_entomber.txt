@@ -1,0 +1,9 @@
+Name:Vile Entomber
+ManaCost:2 B B
+Types:Creature Zombie Warlock
+PT:2/2
+K:Deathtouch
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, search your library for a card, put that card into your graveyard, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Graveyard | ChangeNum$ 1 | Mandatory$ True | ChangeType$ Card
+DeckHas:Ability$Graveyard
+Oracle:Deathtouch\nWhen Vile Entomber enters the battlefield, search your library for a card, put that card into your graveyard, then shuffle.

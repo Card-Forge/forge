@@ -1,0 +1,7 @@
+Name:Scuttletide
+ManaCost:1 U
+Types:Enchantment
+A:AB$ Token | Cost$ 1 Discard<1/Card> | TokenAmount$ 1 | TokenScript$ u_0_3_crab | TokenOwner$ You | SpellDescription$ Create a 0/3 blue Crab creature token.
+S:Mode$ Continuous | Affected$ Crab.YouCtrl | AddPower$ 1 | AddToughness$ 1 | Condition$ Delirium | Description$ Delirium — Crabs you control get +1/+1 as long as there are four or more card types among cards in your graveyard.
+DeckHas:Ability$Token
+Oracle:{1}, Discard a card: Create a 0/3 blue Crab creature token.\nDelirium — Crabs you control get +1/+1 as long as there are four or more card types among cards in your graveyard.

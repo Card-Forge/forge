@@ -1,0 +1,11 @@
+Name:Drey Keeper
+ManaCost:3 B G
+Types:Creature Elf Druid
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 1/1 green Squirrel creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ g_1_1_squirrel | TokenOwner$ You
+A:AB$ PumpAll | Cost$ 3 B | ValidCards$ Squirrel.YouCtrl | NumAtt$ +1 | KW$ Menace | SpellDescription$ Squirrels you control get +1/+0 and gain menace until end of turn.
+SVar:PlayMain1:TRUE
+DeckNeeds:Type$Squirrel
+DeckHas:Ability$Token
+Oracle:When Drey Keeper enters the battlefield, create two 1/1 green Squirrel creature tokens.\n{3}{B}: Squirrels you control get +1/+0 and gain menace until end of turn.

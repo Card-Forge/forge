@@ -1,0 +1,12 @@
+Name:Sanctifier en-Vec
+ManaCost:W W
+Types:Creature Human Cleric
+PT:2/2
+K:Protection from black
+K:Protection from red
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZoneAll | TriggerDescription$ When CARDNAME enters the battlefield, exile all cards that are black or red from all graveyards.
+SVar:TrigChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Card.Black,Card.Red | Origin$ Graveyard | Destination$ Exile
+R:Event$ Moved | ActiveZones$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Black,Card.Red | ReplaceWith$ Exile | Description$ If a black or red permanent, spell, or card not on the battlefield would be put into a graveyard, exile it instead.
+SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
+SVar:NonStackingEffect:True
+Oracle:Protection from black and from red\nWhen Sanctifier en-Vec enters the battlefield, exile all cards that are black or red from all graveyards.\nIf a black or red permanent, spell, or card not on the battlefield would be put into a graveyard, exile it instead.

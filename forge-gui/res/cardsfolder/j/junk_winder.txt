@@ -1,0 +1,10 @@
+Name:Junk Winder
+ManaCost:5 U U
+Types:Creature Serpent
+PT:5/6
+K:Affinity:Permanent.token:token
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Permanent.token+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ Whenever a token enters the battlefield under your control, tap target nonland permanent an opponent controls. It doesn't untap during its controller's next untap step.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Permanent.nonLand+OppCtrl | TgtPrompt$ Choose target nonland permanent an opponent controls | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent
+DeckNeeds:Ability$Token
+Oracle:Affinity for tokens (This spell costs {1} less to cast for each token you control.)\nWhenever a token enters the battlefield under your control, tap target nonland permanent an opponent controls. It doesn't untap during its controller's next untap step.

@@ -867,12 +867,12 @@ public class Player extends GameEntity implements Comparable<Player> {
         return true;
     }
 
-    public final int addCounter(final CounterType counterType, final int n, final Player source, final boolean applyMultiplier, GameEntityCounterTable table) {
-        return addCounter(counterType, n, source, applyMultiplier, true, table);
+    public final int addCounter(final CounterType counterType, final int n, final Player source, final SpellAbility cause, final boolean applyMultiplier, GameEntityCounterTable table) {
+        return addCounter(counterType, n, source, cause, applyMultiplier, true, table);
     }
 
     @Override
-    public int addCounter(CounterType counterType, int n, final Player source, boolean applyMultiplier, boolean fireEvents, GameEntityCounterTable table) {
+    public int addCounter(CounterType counterType, int n, final Player source, final SpellAbility cause, boolean applyMultiplier, boolean fireEvents, GameEntityCounterTable table) {
         int addAmount = n;
         if (addAmount <= 0 || !canReceiveCounters(counterType)) {
             // Can't add negative or 0 counters, bail out now
@@ -881,6 +881,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
         repParams.put(AbilityKey.Source, source);
+        repParams.put(AbilityKey.Cause, cause);
         repParams.put(AbilityKey.CounterType, counterType);
         repParams.put(AbilityKey.CounterNum, addAmount);
         repParams.put(AbilityKey.EffectOnly, applyMultiplier);
@@ -980,7 +981,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public final void addPoisonCounters(final int num, final Card source, GameEntityCounterTable table) {
         int oldPoison = getCounters(CounterEnumType.POISON);
-        addCounter(CounterEnumType.POISON, num, source.getController(), false, true, table);
+        addCounter(CounterEnumType.POISON, num, source.getController(), null, false, true, table);
 
         if (oldPoison != getCounters(CounterEnumType.POISON)) {
             game.fireEvent(new GameEventPlayerPoisoned(this, source, oldPoison, num));
@@ -1762,7 +1763,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final boolean playLand(final Card land, final boolean ignoreZoneAndTiming) {
         // Dakkon Blackblade Avatar will use a similar effect
         if (canPlayLand(land, ignoreZoneAndTiming)) {
-            this.playLandNoCheck(land);
+            playLandNoCheck(land);
             return true;
         }
 
@@ -1775,8 +1776,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (land.isFaceDown()) {
             land.turnFaceUp(null);
         }
-        final Card c = game.getAction().moveTo(getZone(ZoneType.Battlefield), land, null);
         game.copyLastState();
+        final Card c = game.getAction().moveTo(getZone(ZoneType.Battlefield), land, null);
         game.updateLastStateForCard(c);
 
         // play a sound

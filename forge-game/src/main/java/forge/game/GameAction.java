@@ -1235,7 +1235,7 @@ public class GameAction {
                     int loyal = c.getCounters(CounterEnumType.LOYALTY);
                     if (loyal < beeble) {
                         GameEntityCounterTable counterTable = new GameEntityCounterTable();
-                        c.addCounter(CounterEnumType.LOYALTY, beeble - loyal, c.getController(), false, counterTable);
+                        c.addCounter(CounterEnumType.LOYALTY, beeble - loyal, c.getController(), null, false, counterTable);
                         counterTable.triggerCountersPutAll(game);
                     } else if (loyal > beeble) {
                         c.subtractCounter(CounterEnumType.LOYALTY, loyal - beeble);

@@ -1,0 +1,8 @@
+Name:Razortide Bridge
+ManaCost:no cost
+Types:Artifact Land
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+K:CARDNAME enters the battlefield tapped.
+K:Indestructible
+Oracle:Razortide Bridge enters the battlefield tapped.\nIndestructible\n{T}: Add {W} or {U}.

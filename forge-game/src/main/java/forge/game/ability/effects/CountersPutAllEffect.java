@@ -71,7 +71,7 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
             if (etbcounter) {
                 tgtCard.addEtbCounter(CounterType.getType(type), counterAmount, placer);
             } else {
-                tgtCard.addCounter(CounterType.getType(type), counterAmount, placer, inBattlefield, table);
+                tgtCard.addCounter(CounterType.getType(type), counterAmount, placer, sa, inBattlefield, table);
             }
             game.updateLastStateForCard(tgtCard);
         }

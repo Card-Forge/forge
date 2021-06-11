@@ -1,0 +1,8 @@
+Name:Flourishing Strike
+ManaCost:1 G
+Types:Instant
+K:Entwine:2 G
+A:SP$ Charm | Choices$ DBDealDamage,DBPump
+SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target creature with flying.
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | AILogic$ Pump | SpellDescription$ Target creature gets +3/+3 until end of turn.
+Oracle:Choose one — \n• Flourishing Strike deals 5 damage to target creature with flying.\n• Target creature gets +3/+3 until end of turn.\nEntwine {2}{G} (Choose both if you pay the entwine cost.)

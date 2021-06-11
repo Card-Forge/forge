@@ -32,7 +32,7 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
     public InputSelectEntitiesFromList(final PlayerControllerHuman controller, final int min, final int max, final FCollectionView<T> validChoices0, final SpellAbility sa0) {
         super(controller, Math.min(min, validChoices0.size()), Math.min(max, validChoices0.size()), sa0);
         validChoices = validChoices0;
-        if (min > validChoices.size()) {  // pfps does this really do anything useful??
+        if (min > validChoices.size()) { // pfps does this really do anything useful??
             System.out.println(String.format("Trying to choose at least %d things from a list with only %d things!", min, validChoices.size()));
         }
         ArrayList<CardView> vCards = new ArrayList<>();

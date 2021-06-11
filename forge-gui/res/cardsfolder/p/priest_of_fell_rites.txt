@@ -1,0 +1,7 @@
+Name:Priest of Fell Rites
+ManaCost:W B
+Types:Creature Human Warlock
+PT:2/2
+A:AB$ ChangeZone | Cost$ T PayLife<3> Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SorcerySpeed$ True | SpellDescription$ Return target creature card from your graveyard to the battlefield.
+K:Unearth:3 W B
+Oracle:{T}, Pay 3 life, Sacrifice Priest of Fell Rites: Return target creature card from your graveyard to the battlefield. Activate only as a sorcery.\nUnearth {3}{W}{B} ({3}{W}{B}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)

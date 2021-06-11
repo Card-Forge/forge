@@ -1,6 +1,5 @@
 Name:Emergent Growth
 ManaCost:3 G
 Types:Sorcery
-A:SP$ Pump | Cost$ 3 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +5 | NumDef$ +5 | KW$ HIDDEN CARDNAME must be blocked if able. | AILogic$ Pump | SpellDescription$ Target creature gets +5/+5 until end of turn and must be blocked this turn if able.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/emergent_growth.jpg
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +5 | NumDef$ +5 | KW$ HIDDEN CARDNAME must be blocked if able. | AILogic$ Pump | StackDescription$ {c:Targeted} gets +5/+5 until end of turn and must be blocked this turn if able. | SpellDescription$ Target creature gets +5/+5 until end of turn and must be blocked this turn if able.
 Oracle:Target creature gets +5/+5 until end of turn and must be blocked this turn if able.

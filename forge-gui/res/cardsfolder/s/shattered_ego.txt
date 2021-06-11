@@ -1,0 +1,8 @@
+Name:Shattered Ego
+ManaCost:U
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ U | ValidTgts$ Creature | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -3 | Description$ Enchanted creature gets -3/-0.
+A:AB$ ChangeZone | Cost$ 3 U U | Defined$ Enchanted | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 2 | SpellDescription$ Put enchanted creature into its owner's library third from the top.
+Oracle:Enchant creature\nEnchanted creature gets -3/-0.\n{3}{U}{U}: Put enchanted creature into its owner's library third from the top.

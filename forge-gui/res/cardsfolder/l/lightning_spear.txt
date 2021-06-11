@@ -1,0 +1,7 @@
+Name:Lightning Spear
+ManaCost:1 R
+Types:Artifact Equipment
+K:Equip:1
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddKeyword$ Trample | Description$ Equipped creature gets +1/+0 and has trample.
+A:AB$ DealDamage | Cost$ 2 R Sac<1/CARDNAME> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target.
+Oracle:Equipped creature gets +1/+0 and has trample.\n{2}{R}, Sacrifice Lightning Spear: It deals 3 damage to any target.\nEquip {1}

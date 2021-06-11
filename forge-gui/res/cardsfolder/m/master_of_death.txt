@@ -1,0 +1,11 @@
+Name:Master of Death
+ManaCost:1 U B
+Types:Creature Zombie Wizard
+PT:3/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSurveil | TriggerDescription$ When CARDNAME enters the battlefield, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+SVar:TrigSurveil:DB$ Surveil | Defined$ You | Amount$ 2
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.StrictlySelf | PresentZone$ Graveyard | PresentPlayer$ You | TriggerZones$ Graveyard | OptionalDecider$ You | Execute$ TrigReturn | TriggerDescription$ At the beginning of your upkeep, if CARDNAME is in your graveyard, you may pay 1 life. If you do, return CARDNAME to your hand.
+SVar:TrigReturn:AB$ChangeZone | Cost$ PayLife<1> | Defined$ Self | Origin$ Graveyard | Destination$ Hand
+SVar:SacMe:2
+SVar:DiscardMe:1
+Oracle:When Master of Death enters the battlefield, surveil 2.\nAt the beginning of your upkeep, if Master of Death is in your graveyard, you may pay 1 life. If you do, return Master of Death to your hand.

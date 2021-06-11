@@ -1630,7 +1630,7 @@ public class ComputerUtilCard {
         pumped.addChangedCardKeywords(kws, null, false, false, timestamp);
         Set<CounterType> types = c.getCounters().keySet();
         for(CounterType ct : types) {
-            pumped.addCounterFireNoEvents(ct, c.getCounters(ct), ai, true, null);
+            pumped.addCounterFireNoEvents(ct, c.getCounters(ct), ai, sa, true, null);
         }
         //Copies tap-state and extra keywords (auras, equipment, etc.) 
         if (c.isTapped()) {

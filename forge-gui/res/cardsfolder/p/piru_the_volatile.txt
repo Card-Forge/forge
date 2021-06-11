@@ -1,0 +1,10 @@
+Name:Piru, the Volatile
+ManaCost:2 R R W W B B
+Types:Legendary Creature Elder Dragon
+PT:7/7
+K:Flying
+K:Lifelink
+K:UpkeepCost:R W B
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, it deals 7 damage to each nonlegendary creature.
+SVar:TrigDamage:DB$ DamageAll | ValidCards$ Creature.nonLegendary | NumDmg$ 7 | ValidDescription$ each nonlegendary creature.
+Oracle:Flying, lifelink\nAt the beginning of your upkeep, sacrifice Piru, the Volatile unless you pay {R}{W}{B}.\nWhen Piru dies, it deals 7 damage to each nonlegendary creature.

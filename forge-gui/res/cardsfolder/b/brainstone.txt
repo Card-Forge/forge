@@ -1,0 +1,6 @@
+Name:Brainstone
+ManaCost:1
+Types:Artifact
+A:AB$ Draw | Cost$ 2 T Sac<1/CARDNAME> | NumCards$ 3 | SubAbility$ DBChangeZone | StackDescription$ {p:You} draws three cards, | SpellDescription$ Draw three cards, then put two cards from your hand on top of your library in any order.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Library | ChangeNum$ 2 | Mandatory$ True | StackDescription$ then puts two cards from their hand on top of their library in any order.
+Oracle:{2}, {T}, Sacrifice Brainstone: Draw three cards, then put two cards from your hand on top of your library in any order.

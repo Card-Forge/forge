@@ -163,7 +163,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                 }
             }
             for (Map.Entry<CounterType, Integer> e : countersToAdd.entrySet()) {
-                dest.addCounter(e.getKey(), e.getValue(), player, true, table);
+                dest.addCounter(e.getKey(), e.getValue(), player, sa, true, table);
             }
 
             game.updateLastStateForCard(dest);
@@ -225,7 +225,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
 
                 if (cnum > 0) {
                     source.subtractCounter(cType, cnum);
-                    cur.addCounter(cType, cnum, player, true, table);
+                    cur.addCounter(cType, cnum, player, sa, true, table);
                     game.updateLastStateForCard(cur);
                     updateSource = true;
                 }
@@ -311,7 +311,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                     }
 
                     for (Map.Entry<CounterType, Integer> e : countersToAdd.entrySet()) {
-                        cur.addCounter(e.getKey(), e.getValue(), player, true, table);
+                        cur.addCounter(e.getKey(), e.getValue(), player, sa, true, table);
                     }
                     game.updateLastStateForCard(cur);
                 }

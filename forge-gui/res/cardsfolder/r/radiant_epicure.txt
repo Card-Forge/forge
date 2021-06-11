@@ -1,0 +1,10 @@
+Name:Radiant Epicure
+ManaCost:4 B
+Types:Creature Vampire Wizard
+PT:5/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDrain | SpellDescription$ Converge — When CARDNAME enters the battlefield, each opponent loses X life and you gain X life, where X is the number of colors of mana spent to cast this spell.
+SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ X | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
+SVar:X:Count$Converge
+DeckHas:Ability$LifeGain
+Oracle:Converge — When Radiant Epicure enters the battlefield, each opponent loses X life and you gain X life, where X is the number of colors of mana spent to cast this spell.

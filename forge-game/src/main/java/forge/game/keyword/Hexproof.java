@@ -32,6 +32,5 @@ public class Hexproof extends KeywordInstance<Hexproof> {
         }
         return false;
     }
-    
-    
+
 }

@@ -1,0 +1,6 @@
+Name:Yavimaya, Cradle of Growth
+ManaCost:no cost
+Types:Legendary Land
+S:Mode$ Continuous | Affected$ Land | AddType$ Forest | Description$ Each land is a Forest in addition to its other land types.
+AI:RemoveDeck:Random
+Oracle:Each land is a Forest in addition to its other land types.

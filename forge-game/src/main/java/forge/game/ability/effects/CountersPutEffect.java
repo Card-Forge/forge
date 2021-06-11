@@ -226,10 +226,10 @@ public class CountersPutEffect extends SpellAbilityEffect {
                 if (eachExistingCounter) {
                     for (CounterType ct : choices) {
                         if (obj instanceof Player) {
-                            ((Player) obj).addCounter(ct, counterAmount, placer, true, table);
+                            ((Player) obj).addCounter(ct, counterAmount, placer, sa, true, table);
                         }
                         if (obj instanceof Card) {
-                            gameCard.addCounter(ct, counterAmount, placer, true, table);
+                            gameCard.addCounter(ct, counterAmount, placer, sa, true, table);
                         }
                     }
                     continue;
@@ -253,7 +253,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                 for (Card c : AbilityUtils.getDefinedCards(card, sa.getParam("EachFromSource"), sa)) {
                     for (Entry<CounterType, Integer> cti : c.getCounters().entrySet()) {
                         if (gameCard != null && gameCard.canReceiveCounters(cti.getKey())) {
-                            gameCard.addCounter(cti.getKey(), cti.getValue(), placer, true, table);
+                            gameCard.addCounter(cti.getKey(), cti.getValue(), placer, sa, true, table);
                         }
                     }
                 }
@@ -338,7 +338,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         if (etbcounter) {
                             gameCard.addEtbCounter(counterType, counterAmount, placer);
                         } else {
-                            int addedAmount = gameCard.addCounter(counterType, counterAmount, placer, true, table);
+                            int addedAmount = gameCard.addCounter(counterType, counterAmount, placer, sa, true, table);
                             if (addedAmount > 0) {
                                 counterAdded = true;
                             }
@@ -372,7 +372,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         if (etbcounter) {
                             gameCard.addEtbCounter(counterType, counterAmount, placer);
                         } else {
-                            if (gameCard.addCounter(counterType, counterAmount, placer, false, table) > 0) {
+                            if (gameCard.addCounter(counterType, counterAmount, placer, sa, false, table) > 0) {
                                 counterAdded = true;
                             }
                         }
@@ -388,7 +388,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
             } else if (obj instanceof Player) {
                 // Add Counters to players!
                 Player pl = (Player) obj;
-                pl.addCounter(counterType, counterAmount, placer, true, table);
+                pl.addCounter(counterType, counterAmount, placer, sa, true, table);
             }
         }
     }

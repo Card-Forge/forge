@@ -1,0 +1,12 @@
+Name:Fae Offering
+ManaCost:2 G
+Types:Enchantment
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ Z | SVarCompare$ GE2 | Execute$ TrigTokenClue | TriggerDescription$ At the beginning of each end step, if you cast a creature and non-creature spell this turn, create a Clue token, a Food token, and a Treasure token.
+SVar:TrigTokenClue:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_clue_draw | TokenOwner$ You | SubAbility$ TrigTokenFood
+SVar:TrigTokenFood:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You | SubAbility$ TrigTokenTreasure
+SVar:TrigTokenTreasure:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+SVar:X:Count$ThisTurnCast_Creature.YouCtrl/LimitMax.1
+SVar:Y:Count$ThisTurnCast_Card.nonCreature+YouCtrl/LimitMax.1
+SVar:Z:SVar$X/Plus.Y
+DeckHas:Ability$Token
+Oracle:At the beginning of each end step, if you cast a creature and non-creature spell this turn, create a Clue token, a Food token, and a Treasure token.

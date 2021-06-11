@@ -1,0 +1,8 @@
+Name:Slagwoods Bridge
+ManaCost:no cost
+Types:Artifact Land
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+K:CARDNAME enters the battlefield tapped.
+K:Indestructible
+Oracle:Slagwoods Bridge enters the battlefield tapped.\nIndestructible\n{T}: Add {R} or {G}.

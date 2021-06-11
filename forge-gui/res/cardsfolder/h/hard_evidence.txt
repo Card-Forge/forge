@@ -1,0 +1,7 @@
+Name:Hard Evidence
+ManaCost:U
+Types:Sorcery
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ u_0_3_crab | TokenOwner$ You | SubAbility$ DBInvestigate | SpellDescription$ Create a 0/3 blue Crab creature token. Investigate.
+SVar:DBInvestigate:DB$ Investigate
+DeckHas:Ability$Investigate & Ability$Token
+Oracle:Create a 0/3 blue Crab creature token. Investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")

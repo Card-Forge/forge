@@ -1,0 +1,10 @@
+Name:Soul of Migration
+ManaCost:5 W W
+Types:Creature Elemental
+PT:2/4
+K:Flying
+K:Evoke:3 W
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 1/1 white Bird creature tokens with flying.
+SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ 2 | TokenScript$ w_1_1_bird_flying
+DeckHas:Ability$Token
+Oracle:Flying\nWhen Soul of Migration enters the battlefield, create two 1/1 white Bird creature tokens with flying.\nEvoke {3}{W} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield.)
