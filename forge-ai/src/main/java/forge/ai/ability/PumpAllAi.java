@@ -61,13 +61,13 @@ public class PumpAllAi extends PumpAiBase {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Player opp = ai.getStrongestOpponent();
 
-        if (tgt != null && sa.canTarget(opp) && sa.hasParam("IsCurse")) {
+        if (tgt != null && sa.canTarget(opp) && sa.isCurse()) {
             sa.resetTargets();
             sa.getTargets().add(opp);
             return true;
         }
         
-        if (tgt != null && sa.canTarget(ai) && !sa.hasParam("IsCurse")) {
+        if (tgt != null && sa.canTarget(ai) && !sa.isCurse()) {
             sa.resetTargets();
             sa.getTargets().add(ai);
             return true;
@@ -88,7 +88,7 @@ public class PumpAllAi extends PumpAiBase {
         if (!game.getStack().isEmpty() && !sa.isCurse()) {
             return pumpAgainstRemoval(ai, sa, comp);
         }
-        if (sa.hasParam("IsCurse")) {
+        if (sa.isCurse()) {
             if (defense < 0) { // try to destroy creatures
                 comp = CardLists.filter(comp, new Predicate<Card>() {
                     @Override
