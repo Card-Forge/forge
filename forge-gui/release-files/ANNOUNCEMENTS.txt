@@ -1,6 +1,10 @@
 #Add one announcement per line
 Get in the discord if you aren't yet.
-Modern Horizons 2 cards are fully implemented.
-All cards legal in Modern format are added.
+Card support has been extended up to "Modern Horizon 2" (including the new "Time Spiral Remastered", and "StrixHeaven: School of Mages"), including the available previews from the upcoming "Dungeons and Dragons: Adventures in the Forgotten Realms".
+Collector Number has been added to all cards in the Catalog.
+[Desktop] Card Catalog now adds the Cards' Collector Number as a sortable column.
+[Desktop] Improved support for Custom Editions: now custom editions appear with their own names within other official editions, and can be selected in Set filters.
 Net decks have been expanded and there are now tons of new decks in constructed, commander, brawl, oathbreaker and tiny leaders.
-Various other game mechanics and AI improvements have been made, please check the Git log for details if interested.
+Complete support to game mechanics for all cards in Modern format.
+Various other improvements to game mechanics and AI: please check the Git log for details if interested.
+Improvements to Italian translation.
