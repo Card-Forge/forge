@@ -21,7 +21,7 @@ import forge.util.storage.StorageBase;
 
 public class NetDeckCategory extends StorageBase<Deck> {
     public static final String PREFIX = "NET_DECK_";
-    private static Map<String, NetDeckCategory> constructed, commander, brawl;
+    private static Map<String, NetDeckCategory> constructed, commander, brawl, oathbreaker, tinyleaders;
 
     private static Map<String, NetDeckCategory> loadCategories(String filename) {
         Map<String, NetDeckCategory> categories = new TreeMap<>();
@@ -63,6 +63,18 @@ public class NetDeckCategory extends StorageBase<Deck> {
                     brawl = loadCategories(ForgeConstants.NET_DECKS_BRAWL_LIST_FILE);
                 }
                 categories = brawl;
+                break;
+            case Oathbreaker:
+                if (oathbreaker == null) {
+                    oathbreaker = loadCategories(ForgeConstants.NET_DECKS_OATHBREAKER_LIST_FILE);
+                }
+                categories = oathbreaker;
+                break;
+            case TinyLeaders:
+                if (tinyleaders == null) {
+                    tinyleaders = loadCategories(ForgeConstants.NET_DECKS_TINYLEADERS_LIST_FILE);
+                }
+                categories = tinyleaders;
                 break;
         default:
             return null;

@@ -1,15 +1,32 @@
-Commander Clash | https://downloads.cardforge.org/decks/commanderclash.zip
-Much Abrew About Nothing | https://downloads.cardforge.org/decks/muchabrewaboutnothing-commander.zip
-The Week That Was | https://downloads.cardforge.org/decks/theweekthatwas-commander.zip
-WotC Preconstructed | https://downloads.cardforge.org/decks/precon-commander.zip
-Serious Fun | https://downloads.cardforge.org/decks/seriousfun-commander.zip
-ReConstructed | https://downloads.cardforge.org/decks/recon-commander.zip
-Latest Developments | https://downloads.cardforge.org/decks/latestdevelopments-commander.zip
-From the Lab | https://downloads.cardforge.org/decks/fromthelab-commander.zip
-Feature Article | https://downloads.cardforge.org/decks/feature-commander.zip
-Daily Deck List | https://downloads.cardforge.org/decks/dailydecks-commander.zip
+99 Problems | https://downloads.cardforge.org/decks/99problems.zip
+Budget Commander | https://downloads.cardforge.org/decks/budgetcommander.zip
+Card Preview | https://downloads.cardforge.org/decks/cardpreview-commander.zip
 Command Tower | https://downloads.cardforge.org/decks/commandtower.zip
-Going Rogue | https://downloads.cardforge.org/decks/goingrogue-commander.zip
-Current Commander Metagame | https://downloads.cardforge.org/decks/currentcommandermetagame.zip
-Current Commander 1v1 Metagame | https://downloads.cardforge.org/decks/currentcommander1v1metagame.zip
+Commander Clash | https://downloads.cardforge.org/decks/commanderclash.zip
 Commander On a Budget | https://downloads.cardforge.org/decks/commanderonabudget.zip
+Commander VS | https://downloads.cardforge.org/decks/commandervs.zip
+Current Commander 1v1 Metagame | https://downloads.cardforge.org/decks/currentcommander1v1metagame.zip
+Current Commander Metagame | https://downloads.cardforge.org/decks/currentcommandermetagame.zip
+Daily Deck List | https://downloads.cardforge.org/decks/dailydecks-commander.zip
+Daily Magic Update | https://downloads.cardforge.org/decks/dailymagicupdate-commander.zip
+Dear Azami | https://downloads.cardforge.org/decks/dearazami.zip
+EDHREC Columms | https://downloads.cardforge.org/decks/edhrec.zip
+Fat Stacks | https://downloads.cardforge.org/decks/fatstacks.zip
+Feature Article | https://downloads.cardforge.org/decks/feature-commander.zip
+From the Lab | https://downloads.cardforge.org/decks/fromthelab-commander.zip
+Going Rogue | https://downloads.cardforge.org/decks/goingrogue-commander.zip
+House of Cards | https://downloads.cardforge.org/decks/houseofcards-commander.zip
+How to Build | https://downloads.cardforge.org/decks/howtobuild-commander.zip
+Instant Deck Tech | https://downloads.cardforge.org/decks/instantdecktech-commander.zip
+Latest Developments | https://downloads.cardforge.org/decks/latestdevelopments-commander.zip
+Much Abrew About Nothing | https://downloads.cardforge.org/decks/muchabrewaboutnothing-commander.zip
+Perilous Research | https://downloads.cardforge.org/decks/perilousresearch-commander.zip
+ReConstructed | https://downloads.cardforge.org/decks/recon-commander.zip
+Rhystic Study | https://downloads.cardforge.org/decks/rhysticstudy.zip
+Serious Fun | https://downloads.cardforge.org/decks/seriousfun-commander.zip
+The Command Center | https://downloads.cardforge.org/decks/commandcenter.zip
+The Fish Tank | https://downloads.cardforge.org/decks/fishtank-commander.zip
+The Week That Was | https://downloads.cardforge.org/decks/theweekthatwas-commander.zip
+Top Decks | https://downloads.cardforge.org/decks/topdecks-commander.zip
+Ways to Play | https://downloads.cardforge.org/decks/waystoplay-commander.zip
+WotC Preconstructed | https://downloads.cardforge.org/decks/precon-commander.zip
