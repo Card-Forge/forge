@@ -1,6 +1,6 @@
 #Add one announcement per line
 Get in the discord if you aren't yet.
-Card support has been extended up to "Modern Horizon 2", including the available previews from the upcoming "Dungeons and Dragons: Adventures in the Forgotten Realms".
+Card support has been extended up to "Modern Horizons 2", including the available previews from the upcoming "Dungeons and Dragons: Adventures in the Forgotten Realms".
 Collector Number has been added to all cards in the Catalog.
 [Desktop] Card Catalog now adds the Cards' Collector Number as a sortable column.
 [Desktop] Improved support for Custom Editions: now custom editions appear with their own names within other official editions, and can be selected in Set filters.
