@@ -35,7 +35,6 @@ import forge.game.card.CardPredicates;
 import forge.game.card.CounterEnumType;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPartMana;
-import forge.game.cost.CostRemoveCounter;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -439,62 +438,11 @@ public class DamageDealAi extends DamageAiBase {
 
         // We can hurt a planeswalker, so rank the one which is the best target
         if (!hPlay.isEmpty() && pl.isOpponentOf(ai) && activator.equals(ai)) {
-            return getBestPlaneswalkerToDamage(hPlay);
+            return ComputerUtilCard.getBestPlaneswalkerToDamage(hPlay);
         }
 
         return null;
     }
-
-    private Card getBestPlaneswalkerToDamage(final List<Card> pws) {
-        Card bestTgt = null;
-
-        // As of right now, ranks planeswalkers by their Current Loyalty * 10 + Big buff if close to "Ultimate"
-        int bestScore = 0;
-        for (Card pw : pws) {
-            int curLoyalty = pw.getCounters(CounterEnumType.LOYALTY);
-            int pwScore = curLoyalty * 10;
-
-            for (SpellAbility sa : pw.getSpellAbilities()) {
-                if (sa.hasParam("Ultimate")) {
-                    Integer loyaltyCost = 0;
-                    CostRemoveCounter remLoyalty = sa.getPayCosts().getCostPartByType(CostRemoveCounter.class);
-                    if (remLoyalty != null) {
-                        // if remLoyalty is null, generally there's an AddCounter<0/LOYALTY> cost, like for Gideon Jura.
-                        loyaltyCost = remLoyalty.convertAmount();
-                    }
-
-                    if (loyaltyCost != null && loyaltyCost != 0 && loyaltyCost - curLoyalty <= 1) {
-                        // Will ultimate soon
-                        pwScore += 10000;
-                    }
-
-                    if (pwScore > bestScore) {
-                        bestScore = pwScore;
-                        bestTgt = pw;
-                    }
-                }
-            }
-        }
-
-        return bestTgt;
-    }
-
-    private Card getWorstPlaneswalkerToDamage(final List<Card> pws) {
-        Card bestTgt = null;
-
-        int bestScore = Integer.MAX_VALUE;
-        for (Card pw : pws) {
-            int curLoyalty = pw.getCounters(CounterEnumType.LOYALTY);
-
-            if (curLoyalty < bestScore) {
-                bestScore = curLoyalty;
-                bestTgt = pw;
-            }
-        }
-
-        return bestTgt;
-    }
-
 
     private List<Card> getTargetableCards(Player ai, SpellAbility sa, Player pl, TargetRestrictions tgt, Player activator, Card source, Game game) {
         List<Card> hPlay = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), activator, source, sa);
@@ -950,7 +898,7 @@ public class DamageDealAi extends DamageAiBase {
             }
             else if (tgt.canTgtPlaneswalker()) {
                 // Second pass for planeswalkers: choose AI's worst planeswalker
-                final Card c = getWorstPlaneswalkerToDamage(CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Predicates.and(CardPredicates.Presets.PLANESWALKERS), CardPredicates.isTargetableBy(sa)));
+                final Card c = ComputerUtilCard.getWorstPlaneswalkerToDamage(CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Predicates.and(CardPredicates.Presets.PLANESWALKERS), CardPredicates.isTargetableBy(sa)));
                 if (c != null) {
                     sa.getTargets().add(c);
                     if (divided) {

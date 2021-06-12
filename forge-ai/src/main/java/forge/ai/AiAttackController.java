@@ -18,6 +18,7 @@
 package forge.ai;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.google.common.base.Predicate;
@@ -43,6 +44,7 @@ import forge.game.combat.GlobalAttackRestrictions;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
+import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
@@ -391,7 +393,7 @@ public class AiAttackController {
 
         //Calculate the amount of creatures necessary
         for (int i = 0; i < list.size(); i++) {
-            if (!this.doesHumanAttackAndWin(ai, i)) {
+            if (!doesHumanAttackAndWin(ai, i)) {
                 blockersNeeded = i;
                 break;
             }
@@ -635,7 +637,7 @@ public class AiAttackController {
         if (defs.size() == 1) {
             return defs.getFirst();
         }
-        Player prefDefender = (Player) (defs.contains(this.defendingOpponent) ? this.defendingOpponent : defs.get(0));
+        GameEntity prefDefender = defs.contains(this.defendingOpponent) ? this.defendingOpponent : defs.get(0);
 
         // Attempt to see if there's a defined entity that must be attacked strictly this turn...
         GameEntity entity = ai.getMustAttackEntityThisTurn();
@@ -659,7 +661,7 @@ public class AiAttackController {
             // 2. attack planeswalkers
             List<Card> pwDefending = c.getDefendingPlaneswalkers();
             if (!pwDefending.isEmpty()) {
-                return pwDefending.get(0);
+                return ComputerUtilCard.getBestPlaneswalkerToDamage(pwDefending);
             } else {
                 return prefDefender;
             }
@@ -695,14 +697,14 @@ public class AiAttackController {
             tradeIfLowerLifePressure = aic.getBooleanProperty(AiProps.RANDOMLY_ATKTRADE_ONLY_ON_LOWER_LIFE_PRESSURE);
         }
 
-        final boolean bAssault = this.doAssault(ai);
+        final boolean bAssault = doAssault(ai);
         // TODO: detect Lightmine Field by presence of a card with a specific trigger
         final boolean lightmineField = ComputerUtilCard.isPresentOnBattlefield(ai.getGame(), "Lightmine Field");
         // TODO: detect Season of the Witch by presence of a card with a specific trigger
         final boolean seasonOfTheWitch = ComputerUtilCard.isPresentOnBattlefield(ai.getGame(), "Season of the Witch");
 
         // Determine who will be attacked
-        GameEntity defender = this.chooseDefender(combat, bAssault);
+        GameEntity defender = chooseDefender(combat, bAssault);
         List<Card> attackersLeft = new ArrayList<>(this.attackers);
 
         // TODO probably use AttackConstraints instead of only GlobalAttackRestrictions?
@@ -1090,17 +1092,17 @@ public class AiAttackController {
                     // if enough damage: switch to next planeswalker or player
                     if (damage >= pw.getCounters(CounterEnumType.LOYALTY)) {
                         List<Card> pwDefending = combat.getDefendingPlaneswalkers();
-                        boolean found = false;
                         // look for next planeswalker
-                        for (Card walker : pwDefending) {
-                            if (combat.getAttackersOf(walker).isEmpty()) {
-                                defender = walker;
-                                found = true;
-                                break;
+                        for (Card walker : Lists.newArrayList(pwDefending)) {
+                            if (!combat.getAttackersOf(walker).isEmpty()) {
+                                pwDefending.remove(walker);
                             }
                         }
-                        if (!found) {
-                            defender = combat.getDefendingPlayers().get(0);
+                        if (pwDefending.isEmpty()) {
+                            defender = Collections.min(Lists.newArrayList(combat.getDefendingPlayers()), PlayerPredicates.compareByLife());
+                        }
+                        else {
+                            defender = ComputerUtilCard.getBestPlaneswalkerToDamage(pwDefending);
                         }
                     }
                 }
@@ -1354,8 +1356,7 @@ public class AiAttackController {
             }
 
             // if card has a Exert Trigger which would target,
-            // but there are no creatures it can target, no need to exert with
-            // it
+            // but there are no creatures it can target, no need to exert with it
             boolean missTarget = false;
             for (Trigger t : c.getTriggers()) {
                 if (!TriggerType.Exerted.equals(t.getMode())) {
