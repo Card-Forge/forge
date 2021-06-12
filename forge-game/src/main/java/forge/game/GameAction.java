@@ -672,6 +672,23 @@ public class GameAction {
 
         c = changeZone(zoneFrom, zoneTo, c, position, cause, params);
 
+        // need to refresh ability text for affected cards
+        for (final StaticAbility stAb : c.getStaticAbilities()) {
+            if (stAb.isSecondary() ||
+                    !stAb.getParam("Mode").equals("CantBlockBy") ||
+                    stAb.isSuppressed() || !stAb.checkConditions() ||
+                    !stAb.hasParam("ValidAttacker") ||
+                    (stAb.hasParam("ValidBlocker") && stAb.getParam("ValidBlocker").equals("Creature.Self"))) {
+                continue;
+            }
+            final Card host = stAb.getHostCard();
+            for (Card creature : Iterables.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES)) {
+                if (creature.isValid(stAb.getParam("ValidAttacker").split(","), host.getController(), host, stAb)) {
+                    creature.updateAbilityTextForView();
+                }
+            }
+        }
+
         // Move card in maingame if take card from subgame
         // 720.4a
         if (zoneFrom != null && zoneFrom.is(ZoneType.Sideboard) && game.getMaingame() != null) {

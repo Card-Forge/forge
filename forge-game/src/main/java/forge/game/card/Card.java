@@ -2342,12 +2342,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     if (stAb.isSecondary() ||
                             !stAb.getParam("Mode").equals("CantBlockBy") ||
                             stAb.isSuppressed() || !stAb.checkConditions() ||
-                            !stAb.hasParam("ValidAttacker")) {
+                            !stAb.hasParam("ValidAttacker") ||
+                    (stAb.hasParam("ValidBlocker") && stAb.getParam("ValidBlocker").equals("Creature.Self"))) {
                         continue;
                     }
                     final Card host = stAb.getHostCard();
                     if (isValid(stAb.getParam("ValidAttacker").split(","), host.getController(), host, stAb)) {
-                        String currentName = (host.getName());
+                        String currentName = host.getName();
                         String desc1 = TextUtil.fastReplace(stAb.toString(), "CARDNAME", currentName);
                         String desc = TextUtil.fastReplace(desc1,"NICKNAME", currentName.split(",")[0]);
                         if (host.getEffectSource() != null) {
