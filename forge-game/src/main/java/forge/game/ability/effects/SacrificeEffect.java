@@ -106,10 +106,12 @@ public class SacrificeEffect extends SpellAbilityEffect {
         final String remSVar = sa.getParam("RememberSacrificedSVar");
         int countSacrificed = 0;
         CardZoneTable table = new CardZoneTable();
+        Map<AbilityKey, Object> params = AbilityKey.newMap();
+        params.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
 
         if (valid.equals("Self") && game.getZoneOf(card) != null) {
             if (game.getZoneOf(card).is(ZoneType.Battlefield)) {
-                if (game.getAction().sacrifice(card, sa, table) != null) {
+                if (game.getAction().sacrifice(card, sa, table, params) != null) {
                     countSacrificed++;
                     if (remSacrificed) {
                         card.addRemembered(card);
@@ -152,8 +154,8 @@ public class SacrificeEffect extends SpellAbilityEffect {
                 Map<Integer, Card> cachedMap = Maps.newHashMap();
                 for (Card sac : choosenToSacrifice) {
                     final Card lKICopy = CardUtil.getLKICopy(sac, cachedMap);
-                    boolean wasSacrificed = !destroy && game.getAction().sacrifice(sac, sa, table) != null;
-                    boolean wasDestroyed = destroy && game.getAction().destroy(sac, sa, true, table);
+                    boolean wasSacrificed = !destroy && game.getAction().sacrifice(sac, sa, table, params) != null;
+                    boolean wasDestroyed = destroy && game.getAction().destroy(sac, sa, true, table, params);
                     // Run Devour Trigger
                     if (devour) {
                         card.addDevoured(lKICopy);

@@ -6,6 +6,7 @@ import com.google.common.collect.Maps;
 
 import forge.game.Game;
 import forge.game.GameActionUtil;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -90,10 +91,12 @@ public class DestroyAllEffect extends SpellAbilityEffect {
         }
 
         CardZoneTable table = new CardZoneTable();
+        Map<AbilityKey, Object> params = AbilityKey.newMap();
+        params.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
 
         Map<Integer, Card> cachedMap = Maps.newHashMap();
         for (Card c : list) {
-            if (game.getAction().destroy(c, sa, !noRegen, table) && remDestroyed) {
+            if (game.getAction().destroy(c, sa, !noRegen, table, params) && remDestroyed) {
                 card.addRemembered(CardUtil.getLKICopy(c, cachedMap));
             }
         }
