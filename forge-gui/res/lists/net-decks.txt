@@ -1,41 +1,67 @@
 Against the Odds | https://downloads.cardforge.org/decks/againsttheodds.zip
-Much Abrew About Nothing | https://downloads.cardforge.org/decks/muchabrewaboutnothing.zip
-MTG Deck Clusters | https://downloads.cardforge.org/decks/mtgdeckclusters.zip
-Top Decks | https://downloads.cardforge.org/decks/topdecks.zip
-World Championship | https://downloads.cardforge.org/decks/worldchampion.zip
-The Week That Was | https://downloads.cardforge.org/decks/theweekthatwas.zip
-Single Card Strategy | https://downloads.cardforge.org/decks/singlecardstrategy.zip
-WotC Preconstructed | https://downloads.cardforge.org/decks/precon.zip
-Serious Fun | https://downloads.cardforge.org/decks/seriousfun.zip
-ReConstructed | https://downloads.cardforge.org/decks/recon.zip
-Pro Tour | https://downloads.cardforge.org/decks/protour.zip
-Perilous Research | https://downloads.cardforge.org/decks/perilousresearch.zip
-Into the AEther | https://downloads.cardforge.org/decks/intotheaether.zip
-Level One | https://downloads.cardforge.org/decks/levelone.zip
-Latest Developments | https://downloads.cardforge.org/decks/latestdevelopments.zip
-From the Lab | https://downloads.cardforge.org/decks/fromthelab.zip
-Feature Article | https://downloads.cardforge.org/decks/feature.zip
-Daily Deck List | https://downloads.cardforge.org/decks/dailydecks.zip
-Building on a Budget | https://downloads.cardforge.org/decks/buildingonabudget.zip
 Breaking Through | https://downloads.cardforge.org/decks/breakingthrough.zip
-Woo Brews | https://downloads.cardforge.org/decks/woobrews.zip
-Swimming with Sharks | https://downloads.cardforge.org/decks/swimmingwithsharks.zip
-Learning Curve | https://downloads.cardforge.org/decks/learningcurve.zip
-Squandered Resources | https://downloads.cardforge.org/decks/squanderedresources.zip
-Deconstructing Famous | https://downloads.cardforge.org/decks/dfd.zip
-Going Rogue | https://downloads.cardforge.org/decks/goingrogue.zip
-Uncommon Knowledge | https://downloads.cardforge.org/decks/uncommonknowledge.zip
-MagicTheGathering.Combos | https://downloads.cardforge.org/decks/combos.zip
-Players Championship 2012 | https://downloads.cardforge.org/decks/magicplayerschampionship.zip
 Brewing on a Budget | https://downloads.cardforge.org/decks/brewingonabudget.zip
-Grand Prix Lincoln 2012 | https://downloads.cardforge.org/decks/gplincoln2012.zip
-Genetic Algorithm AI Decks | https://downloads.cardforge.org/decks/geneticalgorithmdecks.zip
-Current Standard Metagame | https://downloads.cardforge.org/decks/currentstandardmetagame.zip
-Current Modern Metagame | https://downloads.cardforge.org/decks/currentmodernmetagame.zip
-Current Legacy Metagame | https://downloads.cardforge.org/decks/currentlegacymetagame.zip
-Current Pauper Metagame | https://downloads.cardforge.org/decks/currentpaupermetagame.zip
-Current Pioneer Metagame | https://downloads.cardforge.org/decks/currentpioneermetagame.zip
+Budget Magic | https://downloads.cardforge.org/decks/budgetmagic.zip
+Budget Modern Metagame | https://downloads.cardforge.org/decks/budgetmodernmetagame.zip
+Building on a Budget | https://downloads.cardforge.org/decks/buildingonabudget.zip
+Card Preview | https://downloads.cardforge.org/decks/cardpreview.zip
 Current Historic Metagame | https://downloads.cardforge.org/decks/currenthistoricmetagame.zip
+Current Legacy Metagame | https://downloads.cardforge.org/decks/currentlegacymetagame.zip
+Current Modern Metagame | https://downloads.cardforge.org/decks/currentmodernmetagame.zip
+Current Pauper Metagame | https://downloads.cardforge.org/decks/currentpaupermetagame.zip
 Current Penny Dreadful Metagame | https://downloads.cardforge.org/decks/currentpennydreadfulmetagame.zip
+Current Pioneer Metagame | https://downloads.cardforge.org/decks/currentpioneermetagame.zip
+Current Standard Metagame | https://downloads.cardforge.org/decks/currentstandardmetagame.zip
 Current Vintage Metagame | https://downloads.cardforge.org/decks/currentvintagemetagame.zip
+Daily Deck List | https://downloads.cardforge.org/decks/dailydecks.zip
+Daily Magic Update | https://downloads.cardforge.org/decks/dailymagicupdate.zip
+Dear Azami | https://downloads.cardforge.org/decks/dearazami-standard.zip
+Deconstructing Famous | https://downloads.cardforge.org/decks/dfd.zip
+EDHREC Columms | https://downloads.cardforge.org/decks/edhrec-constructed.zip
+Feature Article | https://downloads.cardforge.org/decks/feature.zip
+Fish 5-0 | https://downloads.cardforge.org/decks/fish50.zip
+From the Lab | https://downloads.cardforge.org/decks/fromthelab.zip
+Genetic Algorithm AI Decks | https://downloads.cardforge.org/decks/geneticalgorithmdecks.zip
+Going Rogue | https://downloads.cardforge.org/decks/goingrogue.zip
+Grand Prix Lincoln 2012 | https://downloads.cardforge.org/decks/gplincoln2012.zip
+Historic 101 | https://downloads.cardforge.org/decks/historic101.zip
+House of Cards | https://downloads.cardforge.org/decks/houseofcards.zip
+How to Build | https://downloads.cardforge.org/decks/howtobuild.zip
+Instant Deck Tech | https://downloads.cardforge.org/decks/instantdecktech.zip
+Into the AEther | https://downloads.cardforge.org/decks/intotheaether.zip
+Latest Developments | https://downloads.cardforge.org/decks/latestdevelopments.zip
+Learning Curve | https://downloads.cardforge.org/decks/learningcurve.zip
+Level One | https://downloads.cardforge.org/decks/levelone.zip
+MTG Deck Clusters | https://downloads.cardforge.org/decks/mtgdeckclusters.zip
+Magic Invitational | https://downloads.cardforge.org/decks/invitational.zip
+MagicTheGathering.Combos | https://downloads.cardforge.org/decks/combos.zip
+Meme or Dream? | https://downloads.cardforge.org/decks/memeordream.zip
+Modern Mayhem | https://downloads.cardforge.org/decks/modernmayhem.zip
 Modern on a Budget | https://downloads.cardforge.org/decks/modernonabudget.zip
+Much Abrew About Nothing | https://downloads.cardforge.org/decks/muchabrewaboutnothing.zip
+Mythic Championship | https://downloads.cardforge.org/decks/mythicchampionship.zip
+Mythic Invitational| https://downloads.cardforge.org/decks/mythicinvitational.zip
+Online Tech | https://downloads.cardforge.org/decks/onlinetech.zip
+Online and Enjoying It | https://downloads.cardforge.org/decks/onlineandenjoyingit.zip
+Perilous Research | https://downloads.cardforge.org/decks/perilousresearch.zip
+Pioneer Peak | https://downloads.cardforge.org/decks/pioneerpeak.zip
+Play Design | https://downloads.cardforge.org/decks/playdesign.zip
+Players Championship 2012 | https://downloads.cardforge.org/decks/magicplayerschampionship.zip
+Playing Pauper | https://downloads.cardforge.org/decks/playingpauper.zip
+Pro Tour | https://downloads.cardforge.org/decks/protour.zip
+ReConstructed | https://downloads.cardforge.org/decks/recon.zip
+Serious Fun | https://downloads.cardforge.org/decks/seriousfun.zip
+Single Card Strategy | https://downloads.cardforge.org/decks/singlecardstrategy.zip
+Single Scoop | https://downloads.cardforge.org/decks/singlescoop.zip
+Squandered Resources | https://downloads.cardforge.org/decks/squanderedresources.zip
+Swimming with Sharks | https://downloads.cardforge.org/decks/swimmingwithsharks.zip
+The Fish Tank | https://downloads.cardforge.org/decks/fishtank.zip
+The Week That Was | https://downloads.cardforge.org/decks/theweekthatwas.zip
+Thirty Casual Decks under $20 | https://downloads.cardforge.org/decks/30casual20.zip
+Top Decks | https://downloads.cardforge.org/decks/topdecks.zip
+Uncommon Knowledge | https://downloads.cardforge.org/decks/uncommonknowledge.zip
+Ways to Play | https://downloads.cardforge.org/decks/waystoplay.zip
+Week in Review | https://downloads.cardforge.org/decks/weekinreview.zip
+Woo Brews | https://downloads.cardforge.org/decks/woobrews.zip
+World Championship | https://downloads.cardforge.org/decks/worldchampion.zip
+WotC Preconstructed | https://downloads.cardforge.org/decks/precon.zip

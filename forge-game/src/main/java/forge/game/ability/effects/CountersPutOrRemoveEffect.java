@@ -111,7 +111,7 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
             
             boolean apply = zone == null || zone.is(ZoneType.Battlefield) || zone.is(ZoneType.Stack);
 
-            tgtCard.addCounter(chosenType, counterAmount, pl, apply, table);
+            tgtCard.addCounter(chosenType, counterAmount, pl, sa, apply, table);
         } else {
             tgtCard.subtractCounter(chosenType, counterAmount);
         }

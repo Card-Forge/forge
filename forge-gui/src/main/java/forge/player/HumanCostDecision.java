@@ -1096,7 +1096,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             c = AbilityUtils.calculateAmount(source, amount, ability);
         }
 
-        if (c == 0) {
+        if (c != null && c == 0) {
             return PaymentDecision.number(0);
         }
 

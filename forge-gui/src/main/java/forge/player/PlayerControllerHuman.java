@@ -36,6 +36,7 @@ import com.google.common.collect.Multimap;
 import forge.LobbyPlayer;
 import forge.StaticData;
 import forge.ai.GameState;
+import forge.ai.PlayerControllerAi;
 import forge.card.CardDb;
 import forge.card.CardStateName;
 import forge.card.CardType;
@@ -2431,7 +2432,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             if (subtract) {
                 card.subtractCounter(counter, count);
             } else {
-                card.addCounter(counter, count, card.getController(), false, null);
+                card.addCounter(counter, count, card.getController(), null, false, null);
             }
 
         }
@@ -2941,6 +2942,18 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     PlanarDice.roll(p, PlanarDice.Planeswalk);
                 }
             });
+        }
+
+        public void askAI() {
+            PlayerControllerAi ai = new PlayerControllerAi(player.getGame(), player, player.getOriginalLobbyPlayer());
+            player.runWithController(new Runnable() {
+                @Override
+                public void run() {
+                    List<SpellAbility> sas = ai.chooseSpellAbilityToPlay();
+                    SpellAbility chosen = sas == null ? null : sas.get(0);
+                    getGui().message(chosen == null ? "AI doesn't want to play anything right now" : chosen.getHostCard().toString(), "AI Play Suggestion");
+                }
+            }, ai);
         }
     }
 

@@ -155,6 +155,8 @@ public class ForgeScript {
             return sa.isAftermath();
         } else if (property.equals("MorphUp")) {
             return sa.isMorphUp();
+        } else if (property.equals("Modular")) {
+            return sa.hasParam("Modular");
         } else if (property.equals("Equip")) {
             return sa.hasParam("Equip");
         } else if (property.equals("Boast")) {

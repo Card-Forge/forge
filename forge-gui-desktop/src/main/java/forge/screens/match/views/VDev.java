@@ -81,6 +81,9 @@ public class VDev implements IVDoc<CDev>, IDevListener {
     private final DevLabel lblRiggedRoll = new DevLabel(Localizer.getInstance().getMessage("lblRiggedRoll"));
     private final DevLabel lblWalkTo = new DevLabel(Localizer.getInstance().getMessage("lblWalkTo"));
 
+    private final DevLabel lblAskAI = new DevLabel(Localizer.getInstance().getMessage("lblAskAI"));
+
+
     private final CDev controller;
 
     //========= Constructor
@@ -116,6 +119,7 @@ public class VDev implements IVDoc<CDev>, IDevListener {
         viewport.add(this.lblUntapPermanent, halfConstraints);
         viewport.add(this.lblRiggedRoll, halfConstraintsLeft);
         viewport.add(this.lblWalkTo, halfConstraints);
+        viewport.add(this.lblAskAI, halfConstraintsLeft);
     }
 
     //========= Overridden methods
@@ -292,6 +296,10 @@ public class VDev implements IVDoc<CDev>, IDevListener {
 
     public DevLabel getLblWalkTo() {
         return this.lblWalkTo;
+    }
+
+    public DevLabel getLblAskAI() {
+        return this.lblAskAI;
     }
 
     /**

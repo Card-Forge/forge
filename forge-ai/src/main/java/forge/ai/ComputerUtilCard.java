@@ -47,6 +47,7 @@ import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayEnergy;
+import forge.game.cost.CostRemoveCounter;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordCollection;
 import forge.game.keyword.KeywordInterface;
@@ -135,6 +136,56 @@ public class ComputerUtilCard {
         }
         // no AI logic, just return least expensive
         return Aggregates.itemWithMin(all, CardPredicates.Accessors.fnGetCmc);
+    }
+
+    public static Card getBestPlaneswalkerToDamage(final List<Card> pws) {
+        Card bestTgt = null;
+
+        // As of right now, ranks planeswalkers by their Current Loyalty * 10 + Big buff if close to "Ultimate"
+        int bestScore = 0;
+        for (Card pw : pws) {
+            int curLoyalty = pw.getCounters(CounterEnumType.LOYALTY);
+            int pwScore = curLoyalty * 10;
+
+            for (SpellAbility sa : pw.getSpellAbilities()) {
+                if (sa.hasParam("Ultimate")) {
+                    Integer loyaltyCost = 0;
+                    CostRemoveCounter remLoyalty = sa.getPayCosts().getCostPartByType(CostRemoveCounter.class);
+                    if (remLoyalty != null) {
+                        // if remLoyalty is null, generally there's an AddCounter<0/LOYALTY> cost, like for Gideon Jura.
+                        loyaltyCost = remLoyalty.convertAmount();
+                    }
+
+                    if (loyaltyCost != null && loyaltyCost != 0 && loyaltyCost - curLoyalty <= 1) {
+                        // Will ultimate soon
+                        pwScore += 10000;
+                    }
+
+                    if (pwScore > bestScore) {
+                        bestScore = pwScore;
+                        bestTgt = pw;
+                    }
+                }
+            }
+        }
+
+        return bestTgt;
+    }
+
+    public static Card getWorstPlaneswalkerToDamage(final List<Card> pws) {
+        Card bestTgt = null;
+
+        int bestScore = Integer.MAX_VALUE;
+        for (Card pw : pws) {
+            int curLoyalty = pw.getCounters(CounterEnumType.LOYALTY);
+
+            if (curLoyalty < bestScore) {
+                bestScore = curLoyalty;
+                bestTgt = pw;
+            }
+        }
+
+        return bestTgt;
     }
 
     // The AI doesn't really pick the best enchantment, just the most expensive.
@@ -1630,7 +1681,7 @@ public class ComputerUtilCard {
         pumped.addChangedCardKeywords(kws, null, false, false, timestamp);
         Set<CounterType> types = c.getCounters().keySet();
         for(CounterType ct : types) {
-            pumped.addCounterFireNoEvents(ct, c.getCounters(ct), ai, true, null);
+            pumped.addCounterFireNoEvents(ct, c.getCounters(ct), ai, sa, true, null);
         }
         //Copies tap-state and extra keywords (auras, equipment, etc.) 
         if (c.isTapped()) {
