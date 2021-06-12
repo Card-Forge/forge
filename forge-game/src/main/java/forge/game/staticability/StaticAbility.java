@@ -299,7 +299,6 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
      * @return true, if successful
      */
     public final boolean applyAbility(final String mode, final Card card, final SpellAbility spellAbility) {
-
         // don't apply the ability if it hasn't got the right mode
         if (!getParam("Mode").equals(mode)) {
             return false;
@@ -334,7 +333,6 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
     }
 
     public final boolean applyAbility(String mode, Card card, CounterType type) {
-
         // don't apply the ability if it hasn't got the right mode
         if (!getParam("Mode").equals(mode)) {
             return false;
@@ -353,7 +351,6 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
     }
 
     public final boolean applyAbility(String mode, Player player, CounterType type) {
-
         // don't apply the ability if it hasn't got the right mode
         if (!getParam("Mode").equals(mode)) {
             return false;
@@ -400,7 +397,6 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
      * @return true, if successful
      */
     public final boolean applyAbility(final String mode, final Card card, final GameEntity target) {
-
         // don't apply the ability if it hasn't got the right mode
         if (!getParam("Mode").equals(mode)) {
             return false;

@@ -520,28 +520,6 @@ public class CardFactoryUtil {
     }
 
     /**
-     * <p>
-     * getNeededXDamage.
-     * </p>
-     *
-     * @param ability
-     *            a {@link forge.game.spellability.SpellAbility} object.
-     * @return a int.
-     */
-    public static int getNeededXDamage(final SpellAbility ability) {
-        // when targeting a creature, make sure the AI won't overkill on X
-        // damage
-        final Card target = ability.getTargetCard();
-        int neededDamage = -1;
-
-        if ((target != null)) {
-            neededDamage = target.getNetToughness() - target.getDamage();
-        }
-
-        return neededDamage;
-    }
-
-    /**
      * Adds the ability factory abilities.
      *
      * @param card

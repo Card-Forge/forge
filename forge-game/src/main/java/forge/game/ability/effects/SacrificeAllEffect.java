@@ -6,6 +6,7 @@ import com.google.common.collect.Maps;
 
 import forge.game.Game;
 import forge.game.GameActionUtil;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -86,9 +87,12 @@ public class SacrificeAllEffect extends SpellAbilityEffect {
 
         CardZoneTable table = new CardZoneTable();
         Map<Integer, Card> cachedMap = Maps.newHashMap();
+        Map<AbilityKey, Object> params = AbilityKey.newMap();
+        params.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
+
         for (Card sac : list) {
             final Card lKICopy = CardUtil.getLKICopy(sac, cachedMap);
-            if (game.getAction().sacrifice(sac, sa, table) != null) {
+            if (game.getAction().sacrifice(sac, sa, table, params) != null) {
                 if (remSacrificed) {
                     card.addRemembered(lKICopy);
                 }

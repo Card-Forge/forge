@@ -5,6 +5,7 @@ import com.google.common.collect.ImmutableList;
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardZoneTable;
 
 import forge.game.spellability.SpellAbility;
@@ -22,8 +23,17 @@ public class StaticAbilityPanharmonicon {
     public static int handlePanharmonicon(final Game game, final Trigger t, final Map<AbilityKey, Object> runParams) {
         int n = 0;
 
+        CardCollectionView cardList = null;
+        // currently only used for leave the battlefield trigger
+        if (runParams.containsKey(AbilityKey.LastStateBattlefield)) {
+            cardList = (CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield);
+        }
+        if (cardList == null) {
+            cardList = t.getMode() == TriggerType.ChangesZone && "Battlefield".equals(t.getParam("Origin")) ? game.getLastStateBattlefield() : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
+        }
+
         // Checks only the battlefield, as those effects only work from there
-        for (final Card ca : t.getMode() == TriggerType.ChangesZone ? game.getLastStateBattlefield() : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+        for (final Card ca : cardList) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.getParam("Mode").equals(MODE) || stAb.isSuppressed() || !stAb.checkConditions()) {
                     continue;
