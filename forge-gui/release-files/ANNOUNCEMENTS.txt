@@ -1,7 +1,6 @@
 #Add one announcement per line
 Get in the discord if you aren't yet.
-Planar Conquest now has a new plane accessible - Ikoria.
-In Planar Conquest, it's now possible to collect C19 cards on Eldraine and ZNE/ZNC cards on Zendikar.
-In Planar Conquest, the Eldraine plane now holds a little secret that's rather unhinged. It may be difficult to find though.
-Quest Mode now has a preference option to enable or disable promos in random reward pool.
+Modern Horizons 2 cards are fully implemented.
+All cards legal in Modern format are added.
 Net decks have been expanded and there are now tons of new decks in constructed, commander, brawl, oathbreaker and tiny leaders.
+Various other game mechanics and AI improvements have been made, please check the Git log for details if interested.
