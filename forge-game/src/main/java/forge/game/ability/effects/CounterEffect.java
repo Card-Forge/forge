@@ -12,6 +12,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardFactoryUtil;
+import forge.game.card.CardZoneTable;
 import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
@@ -113,6 +114,8 @@ public class CounterEffect extends SpellAbilityEffect {
             }
         }
 
+        Map<AbilityKey, Object> params = AbilityKey.newMap();
+        CardZoneTable table = new CardZoneTable();
         for (final SpellAbility tgtSA : sas) {
             final Card tgtSACard = tgtSA.getHostCard();
             // should remember even that spell cannot be countered, e.g. Dovescape
@@ -137,7 +140,7 @@ public class CounterEffect extends SpellAbilityEffect {
 
             // Destroy Permanent may be able to be turned into a SubAbility
             if (tgtSA.isAbility() && sa.hasParam("DestroyPermanent")) {
-                game.getAction().destroy(tgtSACard, sa, true, null);
+                game.getAction().destroy(tgtSACard, sa, true, table, params);
             }
 
             if (sa.hasParam("RememberCountered")) {
@@ -152,6 +155,7 @@ public class CounterEffect extends SpellAbilityEffect {
                 }
             }
         }
+        table.triggerChangesZoneAll(game, sa);
     } // end counterResolve
 
     /**

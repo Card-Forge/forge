@@ -1880,7 +1880,7 @@ public class ComputerUtilMana {
             final Card offering = sa.getSacrificedAsOffering();
             offering.setUsedToPay(false);
             if (costIsPaid && !test) {
-                sa.getHostCard().getGame().getAction().sacrifice(offering, sa, null);
+                sa.getHostCard().getGame().getAction().sacrifice(offering, sa, null, null);
             }
             sa.resetSacrificedAsOffering();
         }
@@ -1888,7 +1888,7 @@ public class ComputerUtilMana {
             final Card emerge = sa.getSacrificedAsEmerge();
             emerge.setUsedToPay(false);
             if (costIsPaid && !test) {
-                sa.getHostCard().getGame().getAction().sacrifice(emerge, sa, null);
+                sa.getHostCard().getGame().getAction().sacrifice(emerge, sa, null, null);
             }
             sa.resetSacrificedAsEmerge();
         }

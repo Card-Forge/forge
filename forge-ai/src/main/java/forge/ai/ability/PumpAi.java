@@ -488,7 +488,32 @@ public class PumpAi extends PumpAiBase {
                 // each player sacrifices one permanent, e.g. Vaevictis, Asmadi the Dire - grab the worst for allied and
                 // the best for opponents
                 return SacrificeAi.doSacOneEachLogic(ai, sa);
+            } else if (sa.getParam("AILogic").equals("Destroy")) {
+                List<Card> tgts = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
+                if (tgts.isEmpty()) {
+                    return false;
+                }
+
+                List<Card> alliedTgts = CardLists.filter(tgts, Predicates.or(CardPredicates.isControlledByAnyOf(ai.getAllies()), CardPredicates.isController(ai)));
+                List<Card> oppTgts = CardLists.filter(tgts, CardPredicates.isControlledByAnyOf(ai.getRegisteredOpponents()));
+
+                Card destroyTgt = null;
+                if (!oppTgts.isEmpty()) {
+                    destroyTgt = ComputerUtilCard.getBestAI(oppTgts);
+                } else {
+                    // TODO: somehow limit this so that the AI doesn't always destroy own stuff when able?
+                    destroyTgt = ComputerUtilCard.getWorstAI(alliedTgts);
+                }
+
+                if (destroyTgt != null) {
+                    sa.resetTargets();
+                    sa.getTargets().add(destroyTgt);
+                    return true;
+                }
+
+                return false;
             }
+
             if (isFight) {
                 return FightAi.canFightAi(ai, sa, attack, defense);
             }

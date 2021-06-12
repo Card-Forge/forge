@@ -197,6 +197,15 @@ public class Game {
         }
     }
 
+    public CardCollectionView copyLastStateBattlefield() {
+        CardCollection result = new CardCollection();
+        Map<Integer, Card> cachedMap = Maps.newHashMap();
+        for (final Player p : getPlayers()) {
+            result.addAll(p.getZone(ZoneType.Battlefield).getLKICopy(cachedMap));
+        }
+        return result;
+    }
+
     public void updateLastStateForCard(Card c) {
         if (c == null || c.getZone() == null) {
             return;

@@ -173,15 +173,13 @@ public class AbilityUtils {
             }
         }
         else if (defined.equals("Targeted") && sa instanceof SpellAbility) {
-            final SpellAbility saTargeting = ((SpellAbility)sa).getSATargetingCard();
-            if (saTargeting != null) {
-                Iterables.addAll(cards, saTargeting.getTargets().getTargetCards());
+            for (TargetChoices tc : ((SpellAbility)sa).getAllTargetChoices()) {
+                Iterables.addAll(cards, tc.getTargetCards());
             }
         }
         else if (defined.equals("TargetedSource") && sa instanceof SpellAbility) {
-            final SpellAbility saTargeting = ((SpellAbility)sa).getSATargetingSA();
-            if (saTargeting != null) {
-                for (SpellAbility s : saTargeting.getTargets().getTargetSpells()) {
+            for (TargetChoices tc : ((SpellAbility)sa).getAllTargetChoices()) {
+                for (SpellAbility s : tc.getTargetSpells()) {
                     cards.add(s.getHostCard());
                 }
             }
@@ -1008,9 +1006,8 @@ public class AbilityUtils {
             players.addAll(getDefinedPlayers(card, "TargetedController", sa));
         }
         else if ((defined.equals("Targeted") || defined.equals("TargetedPlayer")) && sa instanceof SpellAbility) {
-            final SpellAbility saTargeting = ((SpellAbility)sa).getSATargetingPlayer();
-            if (saTargeting != null) {
-                players.addAll(saTargeting.getTargets().getTargetPlayers());
+            for (TargetChoices tc : ((SpellAbility)sa).getAllTargetChoices()) {
+                players.addAll(tc.getTargetPlayers());
             }
         }
         else if (defined.equals("ParentTarget") && sa instanceof SpellAbility) {
@@ -1298,9 +1295,8 @@ public class AbilityUtils {
             s = ((SpellAbility)sa).getRootAbility();
         }
         else if (defined.equals("Targeted") && sa instanceof SpellAbility) {
-            final SpellAbility saTargeting = ((SpellAbility)sa).getSATargetingSA();
-            if (saTargeting != null) {
-                for (SpellAbility targetSpell : saTargeting.getTargets().getTargetSpells()) {
+            for (TargetChoices tc : ((SpellAbility)sa).getAllTargetChoices()) {
+                for (SpellAbility targetSpell : tc.getTargetSpells()) {
                     SpellAbilityStackInstance stackInstance = game.getStack().getInstanceFromSpellAbility(targetSpell);
                     if (stackInstance != null) {
                         SpellAbility instanceSA = stackInstance.getSpellAbility(true);
@@ -1412,7 +1408,6 @@ public class AbilityUtils {
             }
             return;
         }
-
         AbilityUtils.resolveApiAbility(sa, game);
     }
 
