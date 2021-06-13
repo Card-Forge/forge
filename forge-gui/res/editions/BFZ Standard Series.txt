@@ -2,7 +2,7 @@
 Code=PSS1
 Date=2015-10-02
 Name=BFZ Standard Series
-Type=Reprint
+Type=Promo
 ScryfallCode=PSS1
 
 [cards]

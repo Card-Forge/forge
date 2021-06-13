@@ -2,7 +2,7 @@
 Code=PLGN
 Date=2003-02-03
 Name=Legions Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PLGN
 
 [cards]

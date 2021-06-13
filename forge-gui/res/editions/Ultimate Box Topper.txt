@@ -3,7 +3,7 @@ Code=PUMA
 Date=2018-12-07
 Name=Ultimate Box Topper - Ultimate Masters
 MciCode=uma
-Type=Other
+Type=Reprint
 ScryfallCode=uma
 
 [cards]

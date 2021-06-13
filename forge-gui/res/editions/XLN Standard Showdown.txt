@@ -2,7 +2,7 @@
 Code=PSS2
 Date=2017-09-29
 Name=XLN Standard Showdown
-Type=Promos
+Type=Promo
 ScryfallCode=PSS2
 
 [cards]

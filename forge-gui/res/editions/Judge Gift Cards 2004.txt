@@ -2,7 +2,7 @@
 Code=G04
 Date=2004-01-01
 Name=Judge Gift Cards 2004
-Type=Promos
+Type=Promo
 ScryfallCode=G04
 
 [cards]

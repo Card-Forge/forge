@@ -1,8 +1,8 @@
 [metadata]
 Code=POGW
-Date=2016-01-23
+Date=2016-01-22
 Name=Oath of the Gatewatch Promos
-Type=Promos
+Type=Promo
 ScryfallCode=POGW
 
 [cards]

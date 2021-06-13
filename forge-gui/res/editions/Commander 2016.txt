@@ -4,7 +4,7 @@ Date=2016-11-11
 Name=Commander 2016
 Code2=C16
 MciCode=c16
-Type=Other
+Type=Commander
 ScryfallCode=C16
 
 [cards]

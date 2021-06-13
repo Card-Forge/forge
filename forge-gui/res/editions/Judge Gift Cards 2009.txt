@@ -2,7 +2,7 @@
 Code=G09
 Date=2009-01-01
 Name=Judge Gift Cards 2009
-Type=Promos
+Type=Promo
 ScryfallCode=G09
 
 [cards]

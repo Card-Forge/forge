@@ -1,8 +1,8 @@
 [metadata]
 Code=PWAR
-Date=2019-05-04
+Date=2019-05-03
 Name=War of the Spark Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PWAR
 
 [cards]

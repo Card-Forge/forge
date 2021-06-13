@@ -2,7 +2,7 @@
 Code=F05
 Date=2005-01-01
 Name=Friday Night Magic 2005
-Type=Promos
+Type=Promo
 ScryfallCode=F05
 
 [cards]

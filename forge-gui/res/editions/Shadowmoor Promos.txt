@@ -2,7 +2,7 @@
 Code=PSHM
 Date=2008-05-02
 Name=Shadowmoor Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PSHM
 
 [cards]

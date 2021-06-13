@@ -3,7 +3,7 @@ Code=DRB
 Date=2008-08-29
 Name=From the Vault: Dragons
 MciCode=fvd
-Type=From_the_Vault
+Type=Collector_Edition
 ScryfallCode=DRB
 
 [cards]

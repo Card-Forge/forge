@@ -2,7 +2,7 @@
 Code=PSS3
 Date=2018-07-13
 Name=M19 Standard Showdown
-Type=Promos
+Type=Promo
 ScryfallCode=PSS3
 
 [cards]

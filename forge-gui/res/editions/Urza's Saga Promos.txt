@@ -1,8 +1,8 @@
 [metadata]
 Code=PUSG
-Date=1998-10-13
+Date=1998-10-12
 Name=Urza's Saga Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PUSG
 
 [cards]

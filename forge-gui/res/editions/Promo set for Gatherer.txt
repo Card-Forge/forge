@@ -1,11 +1,11 @@
 [metadata]
 Code=MBP
-Date=1996-02
+Date=2002-06-24
 Name=Promo set for Gatherer
 Alias=PRO
 Code2=MBP
 MciCode=mbp
-Type=Other
+Type=Online
 ScryfallCode=PRM
 
 [cards]

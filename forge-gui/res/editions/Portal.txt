@@ -1,6 +1,6 @@
 [metadata]
 Code=POR
-Date=1997-06
+Date=1997-05-01
 Name=Portal
 Code2=PT
 MciCode=po

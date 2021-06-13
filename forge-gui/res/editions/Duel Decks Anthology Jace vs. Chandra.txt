@@ -3,7 +3,7 @@ Code=JVC
 Date=2014-12-05
 Name=Duel Decks Anthology: Jace vs. Chandra
 MciCode=jvc
-Type=Duel_Decks
+Type=Duel_Deck
 ScryfallCode=JVC
 
 [cards]

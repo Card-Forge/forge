@@ -3,7 +3,7 @@ Code=V17
 Date=2017-11-24
 Name=From the Vault: Transform
 MciCode=v17
-Type=From_the_Vault
+Type=Collector_Edition
 ScryfallCode=V17
 
 [cards]

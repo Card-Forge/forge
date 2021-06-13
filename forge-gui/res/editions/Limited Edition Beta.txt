@@ -1,6 +1,6 @@
 [metadata]
 Code=LEB
-Date=1993-10-01
+Date=1993-10-04
 Name=Limited Edition Beta
 Code2=B
 MciCode=be

@@ -2,7 +2,7 @@
 Code=PDP13
 Date=2012-01-01
 Name=Duels of the Planeswalkers 2013 Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PDP13
 
 [cards]

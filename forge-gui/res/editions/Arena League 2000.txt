@@ -2,7 +2,7 @@
 Code=PAL00
 Date=2000-01-01
 Name=Arena League 2000
-Type=Promos
+Type=Promo
 ScryfallCode=PAL00
 
 [cards]

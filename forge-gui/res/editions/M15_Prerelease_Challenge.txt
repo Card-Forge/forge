@@ -4,7 +4,7 @@ Date=2014-07-12
 Name=M15 Prerelease Challenge
 Code2= PPC1
 MciCode=ppc1
-Type=Promos
+Type=Promo
 ScryfallCode=PPC1
 
 [cards]

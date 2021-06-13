@@ -2,7 +2,7 @@
 Code=PJSE
 Date=2005-01-01
 Name=Junior Series Europe
-Type=Promos
+Type=Promo
 ScryfallCode=PJSE
 
 [cards]

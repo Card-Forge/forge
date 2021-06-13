@@ -2,7 +2,7 @@
 Code=PPTK
 Date=1999-07-01
 Name=Portal: Three Kingdoms Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PPTK
 
 [cards]

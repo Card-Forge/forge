@@ -2,7 +2,7 @@
 Code=PTHS
 Date=2013-09-21
 Name=Theros Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PTHS
 
 [cards]

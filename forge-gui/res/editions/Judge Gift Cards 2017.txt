@@ -2,7 +2,7 @@
 Code=J17
 Date=2017-01-01
 Name=Judge Gift Cards 2017
-Type=Promos
+Type=Promo
 ScryfallCode=J17
 
 [cards]

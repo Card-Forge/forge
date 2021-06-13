@@ -1,8 +1,8 @@
 [metadata]
 Code=PKTK
-Date=2014-09-27
+Date=2014-09-26
 Name=Khans of Tarkir Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PKTK
 
 [cards]

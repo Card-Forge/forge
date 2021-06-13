@@ -2,7 +2,7 @@
 Code=PM15
 Date=2014-07-17
 Name=Magic 2015 Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PM15
 
 [cards]

@@ -4,7 +4,7 @@ Date=2014-11-07
 Name=Commander 2014
 Code2=C14
 MciCode=c14
-Type=Other
+Type=Commander
 ScryfallCode=C14
 
 [cards]

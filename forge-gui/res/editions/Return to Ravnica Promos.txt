@@ -2,7 +2,7 @@
 Code=PRTR
 Date=2012-10-05
 Name=Return to Ravnica Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PRTR
 
 [cards]

@@ -4,7 +4,7 @@ Code2=PGPX
 Date=2007-02-24
 Name=Grand Prix Promos
 MciCode=pgpx
-Type=Other
+Type=Promo
 ScryfallCode=PGPX
 
 [cards]

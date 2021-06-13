@@ -2,7 +2,7 @@
 Code=PDP12
 Date=2011-01-01
 Name=Duels of the Planeswalkers 2012 Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PDP12
 
 [cards]

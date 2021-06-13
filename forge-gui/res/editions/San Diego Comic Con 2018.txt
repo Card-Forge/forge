@@ -2,7 +2,7 @@
 Code=PS18
 Date=2018-07-19
 Name=San Diego Comic-Con 2018
-Type=Promos
+Type=Promo
 ScryfallCode=PS18
 
 [cards]

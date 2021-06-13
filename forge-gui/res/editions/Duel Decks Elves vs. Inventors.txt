@@ -3,7 +3,7 @@ Code=DDU
 Date=2018-04-06
 Name=Duel Decks: Elves vs. Inventors
 MciCode=ddu
-Type=Duel_Decks
+Type=Duel_Deck
 ScryfallCode=DDU
 
 [cards]

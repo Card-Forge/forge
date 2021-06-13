@@ -1,8 +1,8 @@
 [metadata]
 Code=PAER
-Date=2017-01-21
+Date=2017-01-20
 Name=Aether Revolt Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PAER
 
 [cards]

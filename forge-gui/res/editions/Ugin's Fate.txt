@@ -1,9 +1,9 @@
 [metadata]
 Code=UGF
-Date=2015-01-23
+Date=2015-01-17
 Name=Ugin's Fate
 MciCode=ugin
-Type=Other
+Type=Promo
 ScryfallCode=ugin
 
 [cards]

@@ -2,7 +2,7 @@
 Code=PRED
 Date=1996-10-01
 Name=Redemption Program
-Type=Promos
+Type=Promo
 CardLang=ja
 ScryfallCode=PRED
 

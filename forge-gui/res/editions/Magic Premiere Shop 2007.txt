@@ -2,7 +2,7 @@
 Code=PMPS07
 Date=2007-01-01
 Name=Magic Premiere Shop 2007
-Type=Promos
+Type=Promo
 CardLang=ja
 ScryfallCode=PMPS07
 

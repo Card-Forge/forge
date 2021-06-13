@@ -5,7 +5,7 @@ Name=Commander
 Code2=COM
 Alias=CMD
 MciCode=cmd
-Type=Other
+Type=Commander
 BoosterBox=0
 ScryfallCode=cmd
 

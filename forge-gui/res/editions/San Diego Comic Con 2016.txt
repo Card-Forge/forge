@@ -1,8 +1,8 @@
 [metadata]
 Code=PS16
-Date=2016-01-01
+Date=2016-10-01
 Name=San Diego Comic-Con 2016
-Type=Promos
+Type=Promo
 ScryfallCode=PS16
 
 [cards]

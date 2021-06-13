@@ -3,7 +3,7 @@ Code=CM2
 Date=2018-06-08
 Name=Commander Anthology Vol. II
 MciCode=CM2
-Type=Other
+Type=Commander
 ScryfallCode=CM2
 
 [cards]
