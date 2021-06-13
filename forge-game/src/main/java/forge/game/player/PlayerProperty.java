@@ -17,7 +17,6 @@ import forge.util.TextUtil;
 public class PlayerProperty {
 
     public static boolean playerHasProperty(Player player, String property, Player sourceController, Card source, CardTraitBase spellAbility) {
-
         Game game = player.getGame();
         if (property.equals("You")) {
             if (!player.equals(sourceController)) {
@@ -382,7 +381,7 @@ public class PlayerProperty {
                 return false;
             }
         } else if (property.equals("castSpellThisTurn")) {
-            if (player.getSpellsCastThisTurn() > 0) {
+            if (player.getSpellsCastThisTurn() == 0) {
                 return false;
             }
         } else if (property.equals("attackedWithCreaturesThisTurn")) {
