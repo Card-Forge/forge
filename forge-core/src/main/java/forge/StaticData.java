@@ -75,7 +75,7 @@ public class StaticData {
         this.editions = new CardEdition.Collection(new CardEdition.Reader(new File(editionFolder)));
         this.blockDataFolder = blockDataFolder;
         this.customCardReader = customCardReader;
-        this.customEditions = new CardEdition.Collection(new CardEdition.Reader(new File(customEditionsFolder)));
+        this.customEditions = new CardEdition.Collection(new CardEdition.Reader(new File(customEditionsFolder), true));
         this.prefferedArt = prefferedArt;
         lastInstance = this;
         List<String> funnyCards = new ArrayList<>();

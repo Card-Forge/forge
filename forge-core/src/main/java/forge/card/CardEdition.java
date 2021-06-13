@@ -80,16 +80,19 @@ public final class CardEdition implements Comparable<CardEdition> {
         EXPANSION,
 
         REPRINT,
-        ONLINE,
         STARTER,
 
-        DUEL_DECKS,
-        PREMIUM_DECK_SERIES,
-        FROM_THE_VAULT,
+        COMMANDER,
+        COLLECTOR_EDITION,
+        DUEL_DECK,
 
-        OTHER,
-        PROMOS,
+        DRAFT_INNOVATION,
+        PROMO,
+
+        ONLINE,
         FUNNY,
+
+        OTHER,  // FALLBACK CATEGORY
         THIRDPARTY; // custom sets
 
         public String getBoosterBoxDefault() {
@@ -457,8 +460,16 @@ public final class CardEdition implements Comparable<CardEdition> {
     }
 
     public static class Reader extends StorageReaderFolder<CardEdition> {
+        private boolean isCustomEditions;
+
         public Reader(File path) {
             super(path, CardEdition.FN_GET_CODE);
+            this.isCustomEditions = false;
+        }
+
+        public Reader(File path, boolean isCustomEditions) {
+            super(path, CardEdition.FN_GET_CODE);
+            this.isCustomEditions = isCustomEditions;
         }
 
         @Override
@@ -563,15 +574,20 @@ public final class CardEdition implements Comparable<CardEdition> {
 
             res.alias = section.get("alias");
             res.borderColor = BorderColor.valueOf(section.get("border", "Black").toUpperCase(Locale.ENGLISH));
-            String type  = section.get("type");
             Type enumType = Type.UNKNOWN;
-            if (null != type && !type.isEmpty()) {
-                try {
-                    enumType = Type.valueOf(type.toUpperCase(Locale.ENGLISH));
-                } catch (IllegalArgumentException ignored) {
-                    // ignore; type will get UNKNOWN
-                    System.err.println("Ignoring unknown type in set definitions: name: " + res.name + "; type: " + type);
+            if (this.isCustomEditions){
+                enumType = Type.THIRDPARTY;  // Forcing ThirdParty Edition Type to avoid inconsistencies
+            } else {
+                String type  = section.get("type");
+                if (null != type && !type.isEmpty()) {
+                    try {
+                        enumType = Type.valueOf(type.toUpperCase(Locale.ENGLISH));
+                    } catch (IllegalArgumentException ignored) {
+                        // ignore; type will get UNKNOWN
+                        System.err.println("Ignoring unknown type in set definitions: name: " + res.name + "; type: " + type);
+                    }
                 }
+
             }
             res.type = enumType;
             res.prerelease = section.get("Prerelease", null);
