@@ -382,8 +382,7 @@ public class PumpAi extends PumpAiBase {
                 return false;
             }
 
-            // when this happens we need to expand AI to consider if its ok for
-            // everything?
+            // when this happens we need to expand AI to consider if its ok for everything?
             for (final Card card : cards) {
                 if (sa.isCurse()) {
                     if (!card.getController().isOpponentOf(ai)) {
@@ -506,7 +505,6 @@ public class PumpAi extends PumpAiBase {
                 }
 
                 if (destroyTgt != null) {
-                    sa.resetTargets();
                     sa.getTargets().add(destroyTgt);
                     return true;
                 }
