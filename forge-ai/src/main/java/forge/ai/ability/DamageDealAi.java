@@ -100,7 +100,6 @@ public class DamageDealAi extends DamageAiBase {
 
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);

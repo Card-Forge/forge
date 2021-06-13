@@ -805,9 +805,9 @@ public class AbilityUtils {
                     final SpellAbility root = sa.getRootAbility();
                     list = new CardCollection((Card) root.getReplacingObject(AbilityKey.fromString(calcX[0].substring(8))));
                 }
-                // there could be null inside!
-                list = Iterables.filter(list, Card.class);
                 if (list != null) {
+                    // there could be null inside!
+                    list = Iterables.filter(list, Card.class);
                     val = handlePaid(list, calcX[1], card, ability);
                 }
             }
@@ -3389,7 +3389,6 @@ public class AbilityUtils {
         int n = s.startsWith("Amount") ? objects.size() : 0;
         return doXMath(n, CardFactoryUtil.extractOperators(s), source, ctb);
     }
-
 
     /**
      * <p>
