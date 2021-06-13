@@ -1643,7 +1643,7 @@ public class ComputerUtilCard {
      */
     public static Card getPumpedCreature(final Player ai, final SpellAbility sa,
             final Card c, int toughness, int power, final List<String> keywords) {
-        Card pumped = CardFactory.copyCard(c, true);
+        Card pumped = CardFactory.copyCard(c, false);
         pumped.setSickness(c.hasSickness());
         final long timestamp = c.getGame().getNextTimestamp();
         final List<String> kws = new ArrayList<>();
