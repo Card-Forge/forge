@@ -629,7 +629,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 } catch (Exception ex) {
                     return false;
                 }
-                return edition != null && edition.getType() != Type.PROMOS;
+                return edition != null && edition.getType() != Type.PROMO;
             }
         }));
     }
@@ -641,7 +641,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 CardEdition edition = null;
                 try {
                     edition = editions.getEditionByCodeOrThrow(paperCard.getEdition());
-                    if (edition.getType() == Type.PROMOS||edition.getType() == Type.REPRINT)
+                    if (edition.getType() == Type.PROMO||edition.getType() == Type.REPRINT)
                         return false;
                 } catch (Exception ex) {
                     return false;
