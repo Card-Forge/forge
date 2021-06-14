@@ -354,7 +354,6 @@ public class AiCostDecision extends CostDecisionMakerBase {
         return PaymentDecision.number(c);
     }
 
-
     @Override
     public PaymentDecision visit(CostPutCardToLib cost) {
         if (cost.payCostFromSource()) {

@@ -8,6 +8,8 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -20,6 +22,7 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CardUtil;
 import forge.game.card.CounterEnumType;
@@ -270,7 +273,10 @@ public class ComputerUtilCost {
                 }
 
                 final CardCollection sacList = new CardCollection();
-                final CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, sourceAbility);
+                CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, sourceAbility);
+
+                // don't sacrifice the card we're pumping
+                typeList = paymentChoicesWithoutTargets(typeList, sourceAbility, ai);
 
                 int count = 0;
                 while (count < amount) {
@@ -320,11 +326,14 @@ public class ComputerUtilCost {
                 }
 
                 final CardCollection sacList = new CardCollection();
-                final CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, sourceAbility);
+                CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, sourceAbility);
+
+                // don't sacrifice the card we're pumping
+                typeList = paymentChoicesWithoutTargets(typeList, sourceAbility, ai);
 
                 int count = 0;
                 while (count < amount) {
-                    Card prefCard = ComputerUtil.getCardPreference(ai, source, "SacCost", typeList);
+                    Card prefCard = ComputerUtil.getCardPreference(ai, source, "SacCost", typeList, sourceAbility);
                     if (prefCard == null) {
                         return false;
                     }
@@ -407,7 +416,7 @@ public class ComputerUtilCost {
      * @return true, if successful
      */
     public static boolean checkSacrificeCost(final Player ai, final Cost cost, final Card source, final SpellAbility sourceAbility) {
-        return checkSacrificeCost(ai, cost, source, sourceAbility,true);
+        return checkSacrificeCost(ai, cost, source, sourceAbility, true);
     }
 
     /**
@@ -420,8 +429,8 @@ public class ComputerUtilCost {
      * @param cost
      * @return a boolean.
      */
+    @Deprecated
     public static boolean shouldPayCost(final Player ai, final Card hostCard, final Cost cost) {
-
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostPayLife) {
                 if (!ai.cantLoseForZeroOrLessLife()) {
@@ -740,5 +749,13 @@ public class ComputerUtilCost {
             }
         }
         return ObjectUtils.defaultIfNull(val, 0);
+    }
+
+    public static CardCollection paymentChoicesWithoutTargets(Iterable<Card> choices, SpellAbility source, Player ai) {
+        if (source.usesTargeting()) {
+            final CardCollection targets = new CardCollection(source.getTargets().getTargetCards());
+            choices = Iterables.filter(choices, Predicates.not(Predicates.and(CardPredicates.isController(ai), Predicates.in(targets))));
+        }
+        return new CardCollection(choices);
     }
 }

@@ -7,5 +7,6 @@ S:Mode$ Continuous | Affected$ Creature.ChosenType+YouCtrl | AddPower$ 1 | AddTo
 AI:RemoveDeck:Random
 SVar:PlayMain1:TRUE
 SVar:AIPreference:SacCost$Creature.ChosenType+Other
+SVar:AIPreferenceParams:CreatureEvalThreshold$ Targeted/Plus.10
 A:AB$ Pump | Cost$ 1 Sac<1/Creature.ChosenType/creature of the chosen type> | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Indestructible | SpellDescription$ Target creature you control gains indestructible until end of turn.
 Oracle:As Etchings of the Chosen enters the battlefield, choose a creature type.\nCreatures you control of the chosen type get +1/+1.\n{1}, Sacrifice a creature of the chosen type: Target creature you control gains indestructible until end of turn.
