@@ -661,7 +661,8 @@ public class AiAttackController {
             // 2. attack planeswalkers
             List<Card> pwDefending = c.getDefendingPlaneswalkers();
             if (!pwDefending.isEmpty()) {
-                return ComputerUtilCard.getBestPlaneswalkerToDamage(pwDefending);
+                final Card pwNearUlti = ComputerUtilCard.getBestPlaneswalkerToDamage(pwDefending);
+                return pwNearUlti != null ? pwNearUlti : ComputerUtilCard.getBestPlaneswalkerAI(pwDefending);
             } else {
                 return prefDefender;
             }
@@ -1102,7 +1103,8 @@ public class AiAttackController {
                             defender = Collections.min(Lists.newArrayList(combat.getDefendingPlayers()), PlayerPredicates.compareByLife());
                         }
                         else {
-                            defender = ComputerUtilCard.getBestPlaneswalkerToDamage(pwDefending);
+                            final Card pwNearUlti = ComputerUtilCard.getBestPlaneswalkerToDamage(pwDefending);
+                            defender = pwNearUlti != null ? pwNearUlti : ComputerUtilCard.getBestPlaneswalkerAI(pwDefending);
                         }
                     }
                 }
