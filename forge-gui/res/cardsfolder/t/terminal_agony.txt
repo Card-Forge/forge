@@ -1,7 +1,7 @@
 Name:Terminal Agony
-ManaCost:3 B R
+ManaCost:2 B R
 Types:Sorcery
 K:Madness:B R
-A:SP$ Destroy | Cost$ 3 B R | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
+A:SP$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
 DeckHints:Ability$Discard
 Oracle:Destroy target creature.\nMadness {B}{R} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)
