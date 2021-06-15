@@ -281,7 +281,7 @@ public class ReplacementHandler {
         // Updated Replacements need to be logged elsewhere because its otherwise in the wrong order
         if (res != ReplacementResult.Updated) {
             String message = chosenRE.getDescription();
-            if ( !StringUtils.isEmpty(message))
+            if (!StringUtils.isEmpty(message))
                 if (chosenRE.getHostCard() != null) {
                     message = TextUtil.fastReplace(message, "CARDNAME", chosenRE.getHostCard().getName());
                 }
