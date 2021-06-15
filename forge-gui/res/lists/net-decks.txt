@@ -5,6 +5,7 @@ Budget Magic | https://downloads.cardforge.org/decks/budgetmagic.zip
 Budget Modern Metagame | https://downloads.cardforge.org/decks/budgetmodernmetagame.zip
 Building on a Budget | https://downloads.cardforge.org/decks/buildingonabudget.zip
 Card Preview | https://downloads.cardforge.org/decks/cardpreview.zip
+Community Cup | https://downloads.cardforge.org/decks/communitycup.zip
 Current Historic Metagame | https://downloads.cardforge.org/decks/currenthistoricmetagame.zip
 Current Legacy Metagame | https://downloads.cardforge.org/decks/currentlegacymetagame.zip
 Current Modern Metagame | https://downloads.cardforge.org/decks/currentmodernmetagame.zip
