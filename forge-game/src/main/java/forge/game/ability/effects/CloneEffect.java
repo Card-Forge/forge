@@ -143,7 +143,7 @@ public class CloneEffect extends SpellAbilityEffect {
         tgtCard.updateStateForView();
 
         // when clone is itself, cleanup from old abilities
-        if (host.equals(tgtCard)) {
+        if (host.equals(tgtCard) && !sa.hasParam("ImprintRememberedNoCleanup")) {
             tgtCard.clearImprintedCards();
             tgtCard.clearRemembered();
         }
