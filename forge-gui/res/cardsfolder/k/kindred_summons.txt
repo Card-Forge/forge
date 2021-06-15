@@ -6,7 +6,6 @@ SVar:DBDigUntil:DB$ DigUntil | Amount$ X | ConditionCheckSVar$ X | ConditionSVar
 SVar:DBShuffle:DB$ Shuffle | Defined$ You
 SVar:X:Count$Valid Creature.ChosenType+YouCtrl
 AI:RemoveDeck:Random
-#TODO: This could benefit from something like "Creature.YouCtrl+sharesCreatureTypeWithAnotherCreature" (doesn't exist in code yet)
-SVar:NeedsToPlay:Creature.YouCtrl+inZoneBattlefield
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kindred_summons.jpg
+SVar:NeedsToPlayVar:MaxTypes GE2
+SVar:MaxTypes:Count$MostProminentCreatureType Creature.YouCtrl
 Oracle:Choose a creature type. Reveal cards from the top of your library until you reveal X creature cards of the chosen type, where X is the number of creatures you control of that type. Put those cards onto the battlefield, then shuffle the rest of the revealed cards into your library.

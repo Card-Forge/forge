@@ -112,12 +112,10 @@ public class CostPartMana extends CostPart {
     @Override
     public boolean isUndoable() { return true; }
 
-
     @Override
     public final String toString() {
         return cost.toString();
     }
-
 
     @Override
     public final boolean canPay(final SpellAbility ability, final Player payer) {

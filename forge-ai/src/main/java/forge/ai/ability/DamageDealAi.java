@@ -39,6 +39,7 @@ import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetChoices;
@@ -844,7 +845,7 @@ public class DamageDealAi extends DamageAiBase {
         // this is for Triggered targets that are mandatory
         final boolean noPrevention = sa.hasParam("NoPrevention");
         final boolean divided = sa.isDividedAsYouChoose();
-        final Player opp = ai.getWeakestOpponent();
+        PlayerCollection opps = ai.getOpponents();
 
         while (sa.canAddMoreTarget()) {
             if (tgt.canTgtPlaneswalker()) {
@@ -872,13 +873,17 @@ public class DamageDealAi extends DamageAiBase {
                 }
             }
 
-            if (sa.canTarget(opp)) {
-                if (sa.getTargets().add(opp)) {
-                    if (divided) {
-                        sa.addDividedAllocation(opp, dmg);
-                        break;
+            if (!opps.isEmpty()) {
+                Player opp = opps.getFirst();
+                opps.remove(opp);
+                if (sa.canTarget(opp)) {
+                    if (sa.getTargets().add(opp)) {
+                        if (divided) {
+                            sa.addDividedAllocation(opp, dmg);
+                            break;
+                        }
+                        continue;
                     }
-                    continue;
                 }
             }
 

@@ -291,7 +291,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
      * @return a {@link java.lang.String} object.
      */
     private static String changeKnownOriginStackDescription(final SpellAbility sa) {
-
         final StringBuilder sb = new StringBuilder();
         final Card host = sa.getHostCard();
 
@@ -1047,7 +1046,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             // only multi-select if player can select more than one
             if (changeNum > 1 && allowMultiSelect(decider, sa)) {
                 List<Card> selectedCards;
-                if (! sa.hasParam("SelectPrompt")) {
+                if (!sa.hasParam("SelectPrompt")) {
                     // new default messaging for multi select
                     if (fetchList.size() > changeNum) {
                         //Select up to %changeNum cards from %players %origin

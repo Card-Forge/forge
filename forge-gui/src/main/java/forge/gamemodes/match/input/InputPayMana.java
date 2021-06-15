@@ -271,7 +271,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             }
 
             // Store some information about color costs to help with any mana choices
-            if (colorNeeded == 0) {  // only colorless left
+            if (colorNeeded == 0) { // only colorless left
                 if (saPaidFor.getHostCard() != null && saPaidFor.getHostCard().hasSVar("ManaNeededToAvoidNegativeEffect")) {
                     String[] negEffects = saPaidFor.getHostCard().getSVar("ManaNeededToAvoidNegativeEffect").split(",");
                     for (String negColor : negEffects) {

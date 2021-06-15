@@ -2731,7 +2731,6 @@ public class AbilityUtils {
             return doXMath(powers.size(), expr, c, ctb);
         }
 
-
         if (sq[0].startsWith("MostProminentCreatureType")) {
             String restriction = l[0].split(" ")[1];
             CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restriction, player, c, ctb);
