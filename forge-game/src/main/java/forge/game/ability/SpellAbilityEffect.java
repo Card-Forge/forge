@@ -617,8 +617,29 @@ public abstract class SpellAbilityEffect {
                 combat.addBlocker(attacker, c);
                 combat.orderAttackersForDamageAssignment(c);
 
+                {
+                    final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+                    runParams.put(AbilityKey.Attacker, attacker);
+                    runParams.put(AbilityKey.Blocker, c);
+                    game.getTriggerHandler().runTrigger(TriggerType.AttackerBlockedByCreature, runParams, false);
+                }
+                {
+                    final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+                    runParams.put(AbilityKey.Attackers, attacker);
+                    game.getTriggerHandler().runTrigger(TriggerType.AttackerBlockedOnce, runParams, false);
+                }
+
                 // Run triggers for new blocker and add it to damage assignment order
                 if (!wasBlocked) {
+                    final CardCollection blockers = combat.getBlockers(attacker);
+                    final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+                    runParams.put(AbilityKey.Attacker, attacker);
+                    runParams.put(AbilityKey.Blockers, blockers);
+                    runParams.put(AbilityKey.NumBlockers, blockers.size());
+                    runParams.put(AbilityKey.Defender, combat.getDefenderByAttacker(attacker));
+                    runParams.put(AbilityKey.DefendingPlayer, combat.getDefenderPlayerByAttacker(attacker));
+                    game.getTriggerHandler().runTrigger(TriggerType.AttackerBlocked, runParams, false);
+
                     combat.setBlocked(attacker, true);
                     combat.addBlockerToDamageAssignmentOrder(attacker, c);
                 }
