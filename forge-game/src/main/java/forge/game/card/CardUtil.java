@@ -275,7 +275,7 @@ public final class CardUtil {
         newCopy.addRemembered(in.getRemembered());
         newCopy.addImprintedCards(in.getImprintedCards());
 
-        for(Table.Cell<Player, CounterType, Integer> cl : in.getEtbCounters()) {
+        for (Table.Cell<Player, CounterType, Integer> cl : in.getEtbCounters()) {
             newCopy.addEtbCounter(cl.getColumnKey(), cl.getValue(), cl.getRowKey());
         }
 
