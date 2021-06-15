@@ -3,7 +3,7 @@ Code=DKM
 Date=2001-12-01
 Name=Deckmasters: Garfield vs. Finkel
 MciCode=dm
-Type=Reprint
+Type=Boxed_Set
 Border=White
 ScryfallCode=DKM
 
