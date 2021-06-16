@@ -2227,11 +2227,11 @@ public class AiController {
     
     private boolean checkAiSpecificRestrictions(final SpellAbility sa) {
         // AI-specific restrictions specified as activation parameters in spell abilities
-        
+
         if (sa.hasParam("AILifeThreshold")) {
             return player.getLife() > Integer.parseInt(sa.getParam("AILifeThreshold"));
         }
-        
+
         return true;
     }
 

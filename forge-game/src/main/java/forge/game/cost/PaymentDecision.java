@@ -58,7 +58,6 @@ public class PaymentDecision {
         return res;
     }
 
-
     public static PaymentDecision number(int c) {
         return new PaymentDecision(c);
     }
@@ -76,7 +75,6 @@ public class PaymentDecision {
     public static PaymentDecision mana(List<Mana> manas) {
         return new PaymentDecision(null, manas, null, null, null);
     }
-
 
     /* (non-Javadoc)
      * @see java.lang.Object#toString()

@@ -331,11 +331,14 @@ public class ComputerUtil {
     }
 
     public static Card getCardPreference(final Player ai, final Card activate, final String pref, final CardCollection typeList) {
+        return getCardPreference(ai, activate, pref, typeList, null);
+    }
+    public static Card getCardPreference(final Player ai, final Card activate, final String pref, final CardCollection typeList, SpellAbility sa) {
         final Game game = ai.getGame();
         String prefDef = "";
         if (activate != null) {
             prefDef = activate.getSVar("AIPreference");
-            final String[] prefGroups = activate.getSVar("AIPreference").split("\\|");
+            final String[] prefGroups = prefDef.split("\\|");
             for (String prefGroup : prefGroups) {
                 final String[] prefValid = prefGroup.trim().split("\\$");
                 if (prefValid[0].equals(pref) && !prefValid[1].startsWith("Special:")) {
@@ -346,8 +349,8 @@ public class ComputerUtil {
 
                     for (String validItem : prefValid[1].split(",")) {
                         final CardCollection prefList = CardLists.getValidCards(typeList, validItem, activate.getController(), activate, null);
-                        int threshold = getAIPreferenceParameter(activate, "CreatureEvalThreshold");
-                        int minNeeded = getAIPreferenceParameter(activate, "MinCreaturesBelowThreshold");
+                        int threshold = getAIPreferenceParameter(activate, "CreatureEvalThreshold", sa);
+                        int minNeeded = getAIPreferenceParameter(activate, "MinCreaturesBelowThreshold", sa);
 
                         if (threshold != -1) {
                             List<Card> toRemove = Lists.newArrayList();
@@ -390,7 +393,7 @@ public class ComputerUtil {
                 final CardCollection sacMeList = CardLists.filter(typeList, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
-                        return (c.hasSVar("SacMe") && (Integer.parseInt(c.getSVar("SacMe")) == priority));
+                        return c.hasSVar("SacMe") && (Integer.parseInt(c.getSVar("SacMe")) == priority);
                     }
                 });
                 if (!sacMeList.isEmpty()) {
@@ -419,6 +422,7 @@ public class ComputerUtil {
                 if (!nonCreatures.isEmpty()) {
                     return ComputerUtilCard.getWorstAI(nonCreatures);
                 } else if (!typeList.isEmpty()) {
+                    // TODO make sure survival is possible in case the creature blocks a trampler
                     return ComputerUtilCard.getWorstAI(typeList);
                 }
             }
@@ -505,7 +509,7 @@ public class ComputerUtil {
         return null;
     }
 
-    public static int getAIPreferenceParameter(final Card c, final String paramName) {
+    public static int getAIPreferenceParameter(final Card c, final String paramName, SpellAbility sa) {
         if (!c.hasSVar("AIPreferenceParams")) {
             return -1;
         }
@@ -520,7 +524,21 @@ public class ComputerUtil {
                 case "CreatureEvalThreshold":
                     // Threshold of 150 is just below the level of a 1/1 mana dork or a 2/2 baseline creature with no keywords
                     if (paramName.equals(parName)) {
-                        return Integer.parseInt(parValue);
+                        int num = 0;
+                        try {
+                            num = Integer.parseInt(parValue);
+                        } catch (NumberFormatException nfe) {
+                            String[] valParts = StringUtils.split(parValue, "/");
+                            CardCollection foundCards  = AbilityUtils.getDefinedCards(c, valParts[0], sa);
+                            if (!foundCards.isEmpty()) {
+                                num = ComputerUtilCard.evaluateCreature(foundCards.get(0));
+                            }
+                            valParts[0] = Integer.toString(num);
+                            if (valParts.length > 1) {
+                                num = AbilityUtils.doXMath(num, valParts[1], c, sa);
+                            }
+                        }
+                        return num;
                     }
                     break;
                 case "MinCreaturesBelowThreshold":
@@ -543,9 +561,8 @@ public class ComputerUtil {
 
         typeList = CardLists.filter(typeList, CardPredicates.canBeSacrificedBy(ability));
 
-        if ((target != null) && target.getController() == ai) {
-            typeList.remove(target); // don't sacrifice the card we're pumping
-        }
+        // don't sacrifice the card we're pumping
+        typeList = ComputerUtilCost.paymentChoicesWithoutTargets(typeList, ability, ai);
 
         if (typeList.size() < amount) {
             return null;
@@ -573,9 +590,8 @@ public class ComputerUtil {
             final Card target, final int amount, SpellAbility sa) {
         CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(zone), type.split(";"), activate.getController(), activate, sa);
 
-        if ((target != null) && target.getController() == ai) {
-            typeList.remove(target); // don't exile the card we're pumping
-        }
+        // don't exile the card we're pumping
+        typeList = ComputerUtilCost.paymentChoicesWithoutTargets(typeList, sa, ai);
 
         if (typeList.size() < amount) {
             return null;
@@ -594,9 +610,8 @@ public class ComputerUtil {
             final Card target, final int amount, SpellAbility sa) {
         CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(zone), type.split(";"), activate.getController(), activate, sa);
 
-        if ((target != null) && target.getController() == ai) {
-            typeList.remove(target); // don't move the card we're pumping
-        }
+        // don't move the card we're pumping
+        typeList = ComputerUtilCost.paymentChoicesWithoutTargets(typeList, sa, ai);
 
         if (typeList.size() < amount) {
             return null;
@@ -718,12 +733,10 @@ public class ComputerUtil {
     }
 
     public static CardCollection chooseReturnType(final Player ai, final String type, final Card activate, final Card target, final int amount, SpellAbility sa) {
-        final CardCollection typeList =
-                CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), activate.getController(), activate, sa);
-        if ((target != null) && target.getController() == ai) {
-            // don't bounce the card we're pumping
-            typeList.remove(target);
-        }
+        CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), activate.getController(), activate, sa);
+
+        // don't bounce the card we're pumping
+        typeList = ComputerUtilCost.paymentChoicesWithoutTargets(typeList, sa, ai);
 
         if (typeList.size() < amount) {
             return new CardCollection();
@@ -743,7 +756,7 @@ public class ComputerUtil {
         CardCollection remaining = new CardCollection(cardlist);
         final CardCollection sacrificed = new CardCollection();
         final Card host = source.getHostCard();
-        final int considerSacThreshold = getAIPreferenceParameter(host, "CreatureEvalThreshold");
+        final int considerSacThreshold = getAIPreferenceParameter(host, "CreatureEvalThreshold", source);
 
         if ("OpponentOnly".equals(source.getParam("AILogic"))) {
             if(!source.getActivatingPlayer().isOpponentOf(ai)) {
@@ -3026,6 +3039,6 @@ public class ComputerUtil {
             }
         }
         return false;
-
     }
+
 }

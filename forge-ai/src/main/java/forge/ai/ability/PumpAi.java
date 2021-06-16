@@ -540,8 +540,7 @@ public class PumpAi extends PumpAiBase {
 
         list = CardLists.getValidCards(list, tgt.getValidTgts(), ai, source, sa);
         if (game.getStack().isEmpty()) {
-            // If the cost is tapping, don't activate before declare
-            // attack/block
+            // If the cost is tapping, don't activate before declare attack/block
             if (sa.getPayCosts().hasTapCost()) {
                 if (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
                         && game.getPhaseHandler().isPlayerTurn(ai)) {
