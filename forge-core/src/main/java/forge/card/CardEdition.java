@@ -78,18 +78,19 @@ public final class CardEdition implements Comparable<CardEdition> {
 
         CORE,
         EXPANSION,
-
-        REPRINT,
         STARTER,
+        REPRINT,
+        BOXED_SET,
 
-        COMMANDER,
         COLLECTOR_EDITION,
         DUEL_DECK,
+        PROMO,
+        ONLINE,
 
         DRAFT_INNOVATION,
-        PROMO,
 
-        ONLINE,
+        COMMANDER,
+        MULTIPLAYER,
         FUNNY,
 
         OTHER,  // FALLBACK CATEGORY
