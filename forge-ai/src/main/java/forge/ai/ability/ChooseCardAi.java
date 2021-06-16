@@ -246,7 +246,6 @@ public class ChooseCardAi extends SpellAbilityAi {
                     return true;
                 }
             });
-            System.out.println("Tangle Wire" + options + " - " + betterList);
             if (!betterList.isEmpty()) {
                 choice = betterList.get(0);
             } else {
