@@ -279,7 +279,7 @@ public final class CMatchUI
         }
     }
 
-    private SkinImage getPlayerAvatar(final PlayerView p, final int defaultIndex) {
+    public SkinImage getPlayerAvatar(final PlayerView p, final int defaultIndex) {
         if (avatarImages.containsKey(p.getLobbyPlayerName())) {
             return ImageCache.getIcon(avatarImages.get(p.getLobbyPlayerName()));
         }
