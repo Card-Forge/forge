@@ -42,11 +42,13 @@ import forge.toolbox.FButton;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
+import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.view.FDialog;
 import forge.view.arcane.CardPanel;
+import forge.view.arcane.MiscCardPanel;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -91,30 +93,31 @@ public class VAssignGenericAmount {
     }
 
     private final List<AssignTarget> targetsList = new ArrayList<>();
-    private final Map<GameEntityView, AssignTarget> targetsMap = new HashMap<>();
+    private final Map<SkinnedPanel, AssignTarget> targetsMap = new HashMap<>();
 
     // Mouse actions
     private final MouseAdapter mad = new MouseAdapter() {
         @Override
         public void mouseEntered(final MouseEvent evt) {
-            ((CardPanel) evt.getSource()).setBorder(new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_ACTIVE), 2));
+            ((SkinnedPanel) evt.getSource()).setBorder(new FSkin.LineSkinBorder(FSkin.getColor(FSkin.Colors.CLR_ACTIVE), 2));
         }
 
         @Override
         public void mouseExited(final MouseEvent evt) {
-            ((CardPanel) evt.getSource()).setBorder((Border)null);
+            ((SkinnedPanel) evt.getSource()).setBorder((Border)null);
         }
 
         @Override
         public void mousePressed(final MouseEvent evt) {
-            CardView source = ((CardPanel) evt.getSource()).getCard(); // will be NULL for player
+            SkinnedPanel panel = (SkinnedPanel)evt.getSource();
+            AssignTarget at = targetsMap.get(panel);
 
             boolean meta = evt.isControlDown();
             boolean isLMB = SwingUtilities.isLeftMouseButton(evt);
             boolean isRMB = SwingUtilities.isRightMouseButton(evt);
 
             if ( isLMB || isRMB)
-                assignAmountTo(source, meta, isLMB);
+                assignAmountTo(at, meta, isLMB);
         }
     };
 
@@ -197,26 +200,26 @@ public class VAssignGenericAmount {
     }
 
     private void addPanelForTarget(final JPanel pnlTargets, final AssignTarget at) {
-        CardView cv = null;
         if (at.entity instanceof CardView) {
-            cv = (CardView)at.entity;
+            final CardPanel cp = new CardPanel(matchUI, (CardView)at.entity);
+            cp.setCardBounds(0, 0, 105, 150);
+            cp.setOpaque(true);
+            pnlTargets.add(cp, "w 145px!, h 170px!, gap 5px 5px 3px 3px, ax center");
+            cp.addMouseListener(mad);
+            targetsMap.put(cp, at);
         } else if (at.entity instanceof PlayerView) {
             final PlayerView p = (PlayerView)at.entity;
-            cv = new CardView(-1, null, at.entity.toString(), p, matchUI.getAvatarImage(p.getLobbyPlayerName()));
-        } else {
-            return;
+            SkinImage playerAvatar = matchUI.getPlayerAvatar(p, 0);
+            final MiscCardPanel mp = new MiscCardPanel(matchUI, p.getName(), playerAvatar);
+            mp.setCardBounds(0, 0, 105, 150);
+            pnlTargets.add(mp, "w 145px!, h 170px!, gap 5px 5px 3px 3px, ax center");
+            mp.addMouseListener(mad);
+            targetsMap.put(mp, at);
         }
-        final CardPanel cp = new CardPanel(matchUI, cv);
-        cp.setCardBounds(0, 0, 105, 150);
-        cp.setOpaque(true);
-        pnlTargets.add(cp, "w 145px!, h 170px!, gap 5px 5px 3px 3px, ax center");
-        cp.addMouseListener(mad);
-        targetsMap.put(cv, at);
         targetsList.add(at);
     }
 
-    private void assignAmountTo(CardView source, final boolean meta, final boolean isAdding) {
-        AssignTarget at = targetsMap.get(source);
+    private void assignAmountTo(AssignTarget at, final boolean meta, final boolean isAdding) {
         int assigned = at.amount;
         int leftToAssign = Math.max(0, at.max - assigned);
         int amountToAdd = isAdding ? 1 : -1;
