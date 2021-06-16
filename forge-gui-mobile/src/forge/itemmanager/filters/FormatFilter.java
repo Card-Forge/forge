@@ -136,17 +136,25 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
 
             lstSets.addGroup("Core Sets");
             lstSets.addGroup("Expansions");
-            lstSets.addGroup("Reprint Sets");
             lstSets.addGroup("Starter Sets");
-            lstSets.addGroup("Commander");
+            lstSets.addGroup("Reprint Sets");
+            lstSets.addGroup("Boxed Sets");
+
             lstSets.addGroup("Collector's Edition");
             lstSets.addGroup("Duel Decks");
-            lstSets.addGroup("Draft Innovation Sets");
             lstSets.addGroup("Promo Sets");
             lstSets.addGroup("Digital Sets");
+
+            lstSets.addGroup("Draft Innovation Sets");
+
+
+
+            lstSets.addGroup("Commander Sets");
+            lstSets.addGroup("Multiplayer Sets");
+            lstSets.addGroup("Other Supplemental Sets");
             lstSets.addGroup("Funny Sets");
+
             lstSets.addGroup("Custom Sets");
-            lstSets.addGroup("Other Sets");
 
             List<CardEdition> sets = FModel.getMagicDb().getSortedEditions();
             for (CardEdition set : sets) {
@@ -157,14 +165,14 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
                     case EXPANSION:
                         lstSets.addItem(set, 1);
                         break;
-                    case REPRINT:
+                    case STARTER:
                         lstSets.addItem(set, 2);
                         break;
-                    case STARTER:
+                    case REPRINT:
                         lstSets.addItem(set, 3);
                         break;
-                    case COMMANDER:
-                        lstSets.addItem(set, 4);
+                    case BOXED_SET:
+                        lstSets.addItem(set,4);
                         break;
                     case COLLECTOR_EDITION:
                         lstSets.addItem(set, 5);
@@ -172,23 +180,29 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
                     case DUEL_DECK:
                         lstSets.addItem(set, 6);
                         break;
-                    case DRAFT_INNOVATION:
+                    case PROMO:
                         lstSets.addItem(set, 7);
                         break;
-                    case PROMO:
+                    case ONLINE:
                         lstSets.addItem(set, 8);
                         break;
-                    case ONLINE:
+                    case DRAFT_INNOVATION:
                         lstSets.addItem(set, 9);
                         break;
-                    case FUNNY:
+                    case COMMANDER:
                         lstSets.addItem(set, 10);
                         break;
-                    case THIRDPARTY:
+                    case MULTIPLAYER:
                         lstSets.addItem(set, 11);
                         break;
-                    default:
+                    case OTHER:
                         lstSets.addItem(set, 12);
+                        break;
+                    case FUNNY:
+                        lstSets.addItem(set, 13);
+                        break;
+                    default:  // THIRDPARTY - Custom Sets
+                        lstSets.addItem(set, 14);
                         break;
                 }
             }
