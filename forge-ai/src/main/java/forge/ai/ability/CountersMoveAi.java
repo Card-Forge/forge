@@ -29,7 +29,6 @@ import forge.util.collect.FCollection;
 public class CountersMoveAi extends SpellAbilityAi {
     @Override
     protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
-
         if (sa.usesTargeting()) {
             sa.resetTargets();
             if (!moveTgtAI(ai, sa)) {
@@ -83,8 +82,7 @@ public class CountersMoveAi extends SpellAbilityAi {
                                 return true;
                             }
 
-                            // something you can't block, try to reduce its
-                            // attack
+                            // something you can't block, try to reduce its attack
                             if (!ComputerUtilCard.canBeBlockedProfitably(ai, cpy)) {
                                 return true;
                             }
@@ -119,7 +117,6 @@ public class CountersMoveAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(final Player ai, SpellAbility sa, boolean mandatory) {
-
         if (sa.usesTargeting()) {
             sa.resetTargets();
 
@@ -237,7 +234,6 @@ public class CountersMoveAi extends SpellAbilityAi {
     }
 
     private boolean moveTgtAI(final Player ai, final SpellAbility sa) {
-
         final Card host = sa.getHostCard();
         final Game game = ai.getGame();
         final String type = sa.getParam("CounterType");
