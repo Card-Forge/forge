@@ -173,26 +173,25 @@ public class DigUntilEffect extends SpellAbilityEffect {
                         if (optionalFound && !p.getController().confirmAction(sa, null,
                                 Localizer.getInstance().getMessage("lblDoYouWantPutCardToZone", foundDest.getTranslatedName()))) {
                             continue;
+                        }
+                        Card m = null;
+                        if (sa.hasParam("GainControl") && foundDest.equals(ZoneType.Battlefield)) {
+                            c.setController(sa.getActivatingPlayer(), game.getNextTimestamp());
+                            m = game.getAction().moveTo(c.getController().getZone(foundDest), c, sa);
+                            if (sa.hasParam("Tapped")) {
+                                c.setTapped(true);
+                            }
+                            if (addToCombat(c, c.getController(), sa, "Attacking", "Blocking")) {
+                                combatChanged = true;
+                            }
+                        } else if (sa.hasParam("NoMoveFound") && foundDest.equals(ZoneType.Library)) {
+                            //Don't do anything
                         } else {
-                            Card m = null;
-                            if (sa.hasParam("GainControl") && foundDest.equals(ZoneType.Battlefield)) {
-                                c.setController(sa.getActivatingPlayer(), game.getNextTimestamp());
-                                m = game.getAction().moveTo(c.getController().getZone(foundDest), c, sa);
-                                if (sa.hasParam("Tapped")) {
-                                    c.setTapped(true);
-                                }
-                                if (addToCombat(c, c.getController(), sa, "Attacking", "Blocking")) {
-                                    combatChanged = true;
-                                }
-                            } else if (sa.hasParam("NoMoveFound") && foundDest.equals(ZoneType.Library)) {
-                                //Don't do anything
-                            } else {
-                                m = game.getAction().moveTo(foundDest, c, foundLibPos, sa);
-                            }
-                            revealed.remove(c);
-                            if (m != null && !origin.equals(m.getZone().getZoneType())) {
-                                table.put(origin, m.getZone().getZoneType(), m);
-                            }
+                            m = game.getAction().moveTo(foundDest, c, foundLibPos, sa);
+                        }
+                        revealed.remove(c);
+                        if (m != null && !origin.equals(m.getZone().getZoneType())) {
+                            table.put(origin, m.getZone().getZoneType(), m);
                         }
                     }
                 }

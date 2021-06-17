@@ -3,7 +3,7 @@ ManaCost:4 W W
 Types:Creature Spirit
 PT:5/5
 K:Flying
-K:ETBReplacement:Other:AddExtraCounter:Mandatory:Battlefield:Creature.Human+YouCtrl
+K:ETBReplacement:Other:AddExtraCounter:Mandatory:Graveyard:Creature.Human+YouCtrl
 SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ As long as CARDNAME is in your graveyard, each Human creature you control enters the battlefield with an additional +1/+1 counter on it.
 DeckNeeds:Type$Human
 DeckHas:Ability$Counters
