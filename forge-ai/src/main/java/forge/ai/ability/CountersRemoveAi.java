@@ -81,7 +81,6 @@ public class CountersRemoveAi extends SpellAbilityAi {
      */
     @Override
     protected boolean checkApiLogic(Player ai, SpellAbility sa) {
-
         final String type = sa.getParam("CounterType");
 
         if (sa.usesTargeting()) {

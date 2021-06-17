@@ -505,7 +505,7 @@ public class PhaseHandler implements java.io.Serializable {
                     eventEndCombat = new GameEventCombatEnded(attackers, blockers);
                 }
                 endCombat();
-                for(Player player : game.getPlayers()) {
+                for (Player player : game.getPlayers()) {
                     player.resetCombatantsThisCombat();
                 }
 
