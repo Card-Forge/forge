@@ -3,7 +3,7 @@ ManaCost:2 G G
 Types:Creature Spirit
 PT:3/4
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ RepeatPayment | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, each player may pay any amount of mana. Then each player creates a number of 1/1 green Squirrel creature tokens equal to the amount of mana they paid this way.
-SVar:RepeatPayment:DB$ RepeatEach | RepeatPlayers$ Player | StartingWithActivator$ True | RepeatSubAbility$ DBPay | StackDescription$ When CARDNAME dies, each player may pay any amount of mana. Then each player creates a number of 1/1 green Squirrel creature tokens equal to the amount of mana they paid this way.
+SVar:RepeatPayment:DB$ RepeatEach | RepeatPlayers$ Player | StartingWithActivator$ True | ChangeZoneTable$ True | RepeatSubAbility$ DBPay | StackDescription$ When CARDNAME dies, each player may pay any amount of mana. Then each player creates a number of 1/1 green Squirrel creature tokens equal to the amount of mana they paid this way.
 SVar:DBPay:DB$ ChooseNumber | Defined$ Player.IsRemembered | ChooseAnyNumber$ True | ListTitle$ Pay Any Mana | AILogic$ MaxForAnyController | SubAbility$ DBToken
 # TODO: ideally the tokens should be created simultaneously after all the players have finished paying mana, but that's difficult to implement.
 SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ g_1_1_squirrel | TokenOwner$ Player.IsRemembered | LegacyImage$ g 1 1 squirrel wth | UnlessCost$ X | UnlessPayer$ Player.IsRemembered | UnlessSwitched$ True

@@ -788,7 +788,6 @@ public class ComputerUtilMana {
                 String manaProduced = ignoreColor || ignoreType ? MagicColor.toShortString(toPay.getColorMask())
                         : predictManafromSpellAbility(saPayment, ai, toPay);
 
-                // System.out.println(manaProduced);
                 payMultipleMana(cost, manaProduced, ai);
 
                 // remove from available lists

@@ -67,8 +67,7 @@ public class FightAi extends SpellAbilityAi {
             for (Card humanCreature : humCreatures) {
                 if (ComputerUtilCombat.getDamageToKill(humanCreature) <= fighter1.getNetPower()
                         && humanCreature.getNetPower() < ComputerUtilCombat.getDamageToKill(fighter1)) {
-                    // todo: check min/max targets; see if we picked the best
-                    // matchup
+                    // todo: check min/max targets; see if we picked the best matchup
                     sa.getTargets().add(humanCreature);
                     return true;
                 } else if (humanCreature.getSVar("Targeting").equals("Dies")) {
@@ -85,8 +84,7 @@ public class FightAi extends SpellAbilityAi {
                     for (Card aiCreature : aiCreatures) {
                         if (ComputerUtilCombat.getDamageToKill(humanCreature) <= aiCreature.getNetPower()
                                 && humanCreature.getNetPower() < ComputerUtilCombat.getDamageToKill(aiCreature)) {
-                            // todo: check min/max targets; see if we picked the
-                            // best matchup
+                            // todo: check min/max targets; see if we picked the best matchup
                             sa.getTargets().add(humanCreature);
                             sa.getTargets().add(aiCreature);
                             return true;
