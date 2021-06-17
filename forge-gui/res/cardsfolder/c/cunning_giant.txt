@@ -2,10 +2,6 @@ Name:Cunning Giant
 ManaCost:5 R
 Types:Creature Giant
 PT:4/4
-R:Event$ DamageDone | ValidTarget$ Player.attackedBySourceThisCombat | ValidSource$ Card.Self+unblocked | IsCombat$ True | ReplaceWith$ ChooseVictim | Optional$ True | OptionalDecider$ You | Description$ If CARDNAME is unblocked, you may have it assign its combat damage to a creature defending player controls.
-R:Event$ DamageDone | ValidTarget$ Planeswalker.attackedBySourceThisCombat | ValidSource$ Card.Self+unblocked | IsCombat$ True | ReplaceWith$ ChooseVictim | Optional$ True | OptionalDecider$ You | Secondary$ True | Description$ If CARDNAME is unblocked, you may have it assign its combat damage to a creature defending player controls.
-SVar:ChooseVictim:DB$ ChooseCard | ChoiceZone$ Battlefield | Choices$ Creature.DefenderCtrl | Amount$ 1 | ChoiceTitle$ Choose a card to deal the damage to | SubAbility$ CunningDmg
-SVar:CunningDmg:DB$ ReplaceEffect | VarName$ Affected | VarValue$ ChosenCard | VarType$ Card
+K:If CARDNAME is unblocked, you may have it assign its combat damage to a creature defending player controls.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/cunning_giant.jpg
 Oracle:If Cunning Giant is unblocked, you may have it assign its combat damage to a creature defending player controls.
