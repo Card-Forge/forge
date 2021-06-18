@@ -34,10 +34,11 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 
-import forge.game.GameEntityView;
+import forge.card.MagicColor;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.gui.SOverlayUtils;
+import forge.localinstance.skin.FSkinProp;
 import forge.toolbox.FButton;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
@@ -52,11 +53,7 @@ import forge.view.arcane.MiscCardPanel;
 import net.miginfocom.swing.MigLayout;
 
 /**
- * Assembles Swing components of assign damage dialog.
- *
- * This needs a JDialog to maintain a modal state.
- * Without the modal state, the PhaseHandler automatically
- * moves forward to phase Main2 without assigning damage.
+ * Assembles Swing components of assign generic amount dialog.
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
@@ -80,12 +77,12 @@ public class VAssignGenericAmount {
     private final FButton btnReset = new FButton(localizer.getMessage("lblReset"));
 
     private static class AssignTarget {
-        public final GameEntityView entity;
+        public final Object entity;
         public final JLabel label;
         public final int max;
         public int amount;
 
-        public AssignTarget(final GameEntityView e, final JLabel lbl, int max0) {
+        public AssignTarget(final Object e, final JLabel lbl, int max0) {
             entity = e;
             label = lbl;
             max = max0;
@@ -122,7 +119,7 @@ public class VAssignGenericAmount {
         }
     };
 
-    public VAssignGenericAmount(final CMatchUI matchUI, final CardView effectSource, final Map<GameEntityView, Integer> targets, final int amount, final boolean atLeastOne, final String amountLabel) {
+    public VAssignGenericAmount(final CMatchUI matchUI, final CardView effectSource, final Map<Object, Integer> targets, final int amount, final boolean atLeastOne, final String amountLabel) {
         this.matchUI = matchUI;
         dlg.setTitle(localizer.getMessage("lbLAssignAmountForEffect", amountLabel, effectSource.toString()));
 
@@ -158,7 +155,7 @@ public class VAssignGenericAmount {
         final FScrollPane scrTargets = new FScrollPane(pnlTargets, false);
 
         // Top row of cards...
-        for (final Map.Entry<GameEntityView, Integer> e : targets.entrySet()) {
+        for (final Map.Entry<Object, Integer> e : targets.entrySet()) {
             int maxAmount = e.getValue() != null ? e.getValue() : amount;
             final AssignTarget at = new AssignTarget(e.getKey(), new FLabel.Builder().text("0").fontSize(18).fontAlign(SwingConstants.CENTER).build(), maxAmount);
             addPanelForTarget(pnlTargets, at);
@@ -166,7 +163,11 @@ public class VAssignGenericAmount {
 
         // ... bottom row of labels.
         for (final AssignTarget l : targetsList) {
-            pnlTargets.add(l.label, "w 145px!, h 30px!, gap 5px 5px 0 5px");
+            if (l.entity instanceof Byte) {
+                pnlTargets.add(l.label, "w 100px!, h 30px!, gap 5px 5px 0 5px");
+            } else {
+                pnlTargets.add(l.label, "w 145px!, h 30px!, gap 5px 5px 0 5px");
+            }
         }
 
         btnOK.addActionListener(new ActionListener() {
@@ -215,6 +216,27 @@ public class VAssignGenericAmount {
             final MiscCardPanel mp = new MiscCardPanel(matchUI, p.getName(), playerAvatar);
             mp.setCardBounds(0, 0, 105, 150);
             pnlTargets.add(mp, "w 145px!, h 170px!, gap 5px 5px 3px 3px, ax center");
+            mp.addMouseListener(mad);
+            targetsMap.put(mp, at);
+        } else if (at.entity instanceof Byte) {
+            SkinImage manaSymbol;
+            Byte color = (Byte) at.entity;
+            if (color == MagicColor.WHITE) {
+                manaSymbol = FSkin.getImage(FSkinProp.IMG_MANA_W);
+            } else if (color == MagicColor.BLUE) {
+                manaSymbol = FSkin.getImage(FSkinProp.IMG_MANA_U);
+            } else if (color == MagicColor.BLACK) {
+                manaSymbol = FSkin.getImage(FSkinProp.IMG_MANA_B);
+            } else if (color == MagicColor.RED) {
+                manaSymbol = FSkin.getImage(FSkinProp.IMG_MANA_R);
+            } else if (color == MagicColor.GREEN) {
+                manaSymbol = FSkin.getImage(FSkinProp.IMG_MANA_G);
+            } else { // Should never come here, but add this to avoid compile error
+                manaSymbol = FSkin.getImage(FSkinProp.IMG_MANA_COLORLESS);
+            }
+            final MiscCardPanel mp = new MiscCardPanel(matchUI, "", manaSymbol);
+            mp.setCardBounds(0, 0, 70, 70);
+            pnlTargets.add(mp, "w 100px!, h 150px!, gap 5px 5px 3px 3px, ax center");
             mp.addMouseListener(mad);
             targetsMap.put(mp, at);
         }
@@ -313,8 +335,8 @@ public class VAssignGenericAmount {
         SOverlayUtils.hideOverlay();
     }
 
-    public Map<GameEntityView, Integer> getAssignedMap() {
-        Map<GameEntityView, Integer> result = new HashMap<>(targetsList.size());
+    public Map<Object, Integer> getAssignedMap() {
+        Map<Object, Integer> result = new HashMap<>(targetsList.size());
         for (AssignTarget at : targetsList)
             result.put(at.entity, at.amount);
         return result;

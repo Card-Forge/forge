@@ -138,6 +138,23 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
+    public Map<Byte, Integer> specifyManaCombo(SpellAbility sa, ColorSet colorSet, int manaAmount, boolean different) {
+        Map<Byte, Integer> result = new HashMap<>();
+        for (int i = 0; i < manaAmount; ++i) {
+            Byte chosen = chooseColor("", sa, colorSet);
+            if (result.containsKey(chosen)) {
+                result.put(chosen, result.get(chosen) + 1);
+            } else {
+                result.put(chosen, 1);
+            }
+            if (different) {
+                colorSet = ColorSet.fromMask(colorSet.getColor() - chosen);
+            }
+        }
+        return result;
+    }
+
+    @Override
     public Integer announceRequirements(SpellAbility ability, String announce) {
         // For now, these "announcements" are made within the AI classes of the appropriate SA effects
         if (ability.getApi() != null) {

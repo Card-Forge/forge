@@ -397,9 +397,9 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
-    public Map<GameEntityView, Integer> assignGenericAmount(final CardView effectSource, final Map<GameEntityView, Integer> targets,
+    public Map<Object, Integer> assignGenericAmount(final CardView effectSource, final Map<Object, Integer> targets,
             final int amount, final boolean atLeastOne, final String amountLabel) {
-        return new WaitCallback<Map<GameEntityView, Integer>>() {
+        return new WaitCallback<Map<Object, Integer>>() {
             @Override
             public void run() {
                 final VAssignGenericAmount v = new VAssignGenericAmount(effectSource, targets, amount, atLeastOne, amountLabel, this);
