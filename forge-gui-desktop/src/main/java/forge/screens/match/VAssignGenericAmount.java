@@ -74,6 +74,7 @@ public class VAssignGenericAmount {
 
     private final String lblAmount;
     private final JLabel lblTotalAmount;
+    private final boolean atLeastOne;
     //  Label Buttons
     private final FButton btnOK    = new FButton(localizer.getMessage("lblOk"));
     private final FButton btnReset = new FButton(localizer.getMessage("lblReset"));
@@ -126,6 +127,7 @@ public class VAssignGenericAmount {
         dlg.setTitle(localizer.getMessage("lbLAssignAmountForEffect", amountLabel, effectSource.toString()));
 
         totalAmountToAssign = amount;
+        this.atLeastOne = atLeastOne;
 
         lblAmount = amountLabel;
         lblTotalAmount = new FLabel.Builder().text(localizer.getMessage("lblTotalAmountText", lblAmount)).build();
@@ -170,7 +172,7 @@ public class VAssignGenericAmount {
         btnOK.addActionListener(new ActionListener() {
             @Override public void actionPerformed(ActionEvent arg0) { finish(); } });
         btnReset.addActionListener(new ActionListener() {
-            @Override public void actionPerformed(ActionEvent arg0) { resetAssignedAmount(); initialAssignAmount(atLeastOne); } });
+            @Override public void actionPerformed(ActionEvent arg0) { resetAssignedAmount(); initialAssignAmount(); } });
 
             // Final UI layout
         pnlMain.setLayout(new MigLayout("insets 0, gap 0, wrap 2, ax center"));
@@ -188,7 +190,7 @@ public class VAssignGenericAmount {
 
         pnlMain.getRootPane().setDefaultButton(btnOK);
 
-        initialAssignAmount(atLeastOne);
+        initialAssignAmount();
         SOverlayUtils.showOverlay();
 
         dlg.setUndecorated(true);
@@ -237,6 +239,9 @@ public class VAssignGenericAmount {
         if (amountToAdd > remainingAmount) {
             amountToAdd = remainingAmount;
         }
+        if (atLeastOne && assigned + amountToAdd < 1) {
+            amountToAdd = 1 - assigned;
+        }
 
         if (0 == amountToAdd || amountToAdd + assigned < 0) {
             return;
@@ -246,7 +251,7 @@ public class VAssignGenericAmount {
         updateLabels();
     }
 
-    private void initialAssignAmount(boolean atLeastOne) {
+    private void initialAssignAmount() {
         if (!atLeastOne) {
             updateLabels();
             return;

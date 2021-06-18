@@ -61,6 +61,7 @@ public class VAssignGenericAmount extends FDialog {
 
     private final String lblAmount;
     private final FLabel lblTotalAmount;
+    private final boolean atLeastOne;
 
     private final EffectSourcePanel pnlSource;
     private final TargetsPanel pnlTargets;
@@ -80,6 +81,7 @@ public class VAssignGenericAmount extends FDialog {
 
         callback = waitCallback;
         totalAmountToAssign = amount;
+        this.atLeastOne = atLeastOne;
 
         lblAmount = amountLabel;
         lblTotalAmount = add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblTotalAmountText", lblAmount)).align(Align.center).build());
@@ -97,11 +99,11 @@ public class VAssignGenericAmount extends FDialog {
             @Override
             public void handleEvent(FEvent e) {
                 resetAssignedDamage();
-                initialAssignAmount(atLeastOne);
+                initialAssignAmount();
             }
         });
 
-        initialAssignAmount(atLeastOne);
+        initialAssignAmount();
     }
 
     @Override
@@ -264,6 +266,9 @@ public class VAssignGenericAmount extends FDialog {
         if (amountToAdd > remainingAmount) {
             amountToAdd = remainingAmount;
         }
+        if (atLeastOne && assigned + amountToAdd < 1) {
+            amountToAdd = 1 - assigned;
+        }
 
         if (0 == amountToAdd || amountToAdd + assigned < 0) {
             return;
@@ -273,7 +278,7 @@ public class VAssignGenericAmount extends FDialog {
         updateLabels();
     }
 
-    private void initialAssignAmount(boolean atLeastOne) {
+    private void initialAssignAmount() {
         if (!atLeastOne) {
             updateLabels();
             return;
