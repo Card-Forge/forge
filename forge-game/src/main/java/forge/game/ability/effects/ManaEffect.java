@@ -63,7 +63,7 @@ public class ManaEffect extends SpellAbilityEffect {
                 boolean differentChoice = abMana.getOrigProduced().contains("Different");
                 ColorSet fullOptions = colorOptions;
                 // Use specifyManaCombo if possible
-                if (colorsNeeded == null && amount > 1) {
+                if (colorsNeeded == null && amount > 1 && !sa.hasParam("TwoEach")) {
                     Map<Byte, Integer> choices = p.getController().specifyManaCombo(sa, colorOptions, amount, differentChoice);
                     for (Map.Entry<Byte, Integer> e : choices.entrySet()) {
                         Byte chosenColor = e.getKey();
@@ -74,9 +74,6 @@ public class ManaEffect extends SpellAbilityEffect {
                                 choiceString.append(" ");
                             }
                             choiceString.append(choice);
-                            if (sa.hasParam("TwoEach")) {
-                                choiceString.append(" ").append(choice);
-                            }
                             --count;
                         }
                     }
