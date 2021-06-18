@@ -1951,7 +1951,44 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             checkSA = checkSA.getSubAbility();
         }
 
-        return select.chooseTargets(null, null, null, false, canFilterMustTarget);
+        boolean result = select.chooseTargets(null, null, null, false, canFilterMustTarget);
+
+        // assign divided as you choose values
+        if (result && currentAbility.isDividedAsYouChoose() && currentAbility.getStillToDivide() > 0) {
+            int amount = currentAbility.getStillToDivide();
+            final List<GameEntity> targets = currentAbility.getTargets().getTargetEntities();
+            if (targets.size() == 1) {
+                currentAbility.addDividedAllocation(targets.get(0), amount);
+            } else if (targets.size() == amount) {
+                for (GameEntity e : targets) {
+                    currentAbility.addDividedAllocation(e, 1);
+                }
+            } else if (targets.size() > amount) {
+                return false;
+            } else {
+                String label = "lblDamage";
+                if (currentAbility.getApi() == ApiType.PreventDamage) {
+                    label = "lblShield";
+                } else if (currentAbility.getApi() == ApiType.PutCounter) {
+                    label = "lblCounters";
+                }
+                label = localizer.getMessage(label).toLowerCase();
+                final CardView vSource = CardView.get(currentAbility.getHostCard());
+                final Map<GameEntityView, Integer> vTargets = new HashMap<>(targets.size());
+                for (GameEntity e : targets) {
+                    vTargets.put(GameEntityView.get(e), amount);
+                }
+                final Map<GameEntityView, Integer> vResult = getGui().assignGenericAmount(vSource, vTargets, amount, true, label);
+                for (GameEntity e : targets) {
+                    currentAbility.addDividedAllocation(e, vResult.get(GameEntityView.get(e)));
+                }
+                if (currentAbility.getStillToDivide() > 0) {
+                    return false;
+                }
+            }
+        }
+
+        return result;
     }
 
     @Override
