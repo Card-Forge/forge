@@ -1,6 +1,6 @@
 /*
  * Forge: Play Magic: the Gathering.
- * Copyright (C) 2011  Forge Team
+ * Copyright (C) 2021  Forge Team
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.card.CardZoom;
-import forge.game.GameEntityView;
+import forge.card.MagicColor;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.screens.match.MatchController;
@@ -56,7 +56,7 @@ public class VAssignGenericAmount extends FDialog {
     private static final float CARD_GAP_X = Utils.scale(10);
     private static final float ADD_BTN_HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.75f;
 
-    private final Callback<Map<GameEntityView, Integer>> callback;
+    private final Callback<Map<Object, Integer>> callback;
     private final int totalAmountToAssign;
 
     private final String lblAmount;
@@ -67,7 +67,7 @@ public class VAssignGenericAmount extends FDialog {
     private final TargetsPanel pnlTargets;
 
     private final List<AssignTarget> targetsList = new ArrayList<>();
-    private final Map<GameEntityView, AssignTarget> targetsMap = new HashMap<>();
+    private final Map<Object, AssignTarget> targetsMap = new HashMap<>();
 
     /** Constructor.
      *
@@ -76,7 +76,7 @@ public class VAssignGenericAmount extends FDialog {
      * @param amount Total amount to be assigned
      * @param atLeastOne Must assign at least one amount to each target
      */
-    public VAssignGenericAmount(final CardView effectSource, final Map<GameEntityView, Integer> targets, final int amount, final boolean atLeastOne, final String amountLabel, final WaitCallback<Map<GameEntityView, Integer>> waitCallback) {
+    public VAssignGenericAmount(final CardView effectSource, final Map<Object, Integer> targets, final int amount, final boolean atLeastOne, final String amountLabel, final WaitCallback<Map<Object, Integer>> waitCallback) {
         super(Localizer.getInstance().getMessage("lbLAssignAmountForEffect", amountLabel, CardTranslation.getTranslatedName(effectSource.getName())) , 2);
 
         callback = waitCallback;
@@ -132,13 +132,13 @@ public class VAssignGenericAmount extends FDialog {
     }
 
     private class TargetsPanel extends FScrollPane {
-        private TargetsPanel(final Map<GameEntityView, Integer> targets) {
-            for (final Map.Entry<GameEntityView, Integer> e : targets.entrySet()) {
+        private TargetsPanel(final Map<Object, Integer> targets) {
+            for (final Map.Entry<Object, Integer> e : targets.entrySet()) {
                 addDamageTarget(e.getKey(), e.getValue());
             }
         }
 
-        private void addDamageTarget(GameEntityView entity, int max) {
+        private void addDamageTarget(Object entity, int max) {
             AssignTarget at = add(new AssignTarget(entity, max));
             targetsMap.put(entity, at);
             targetsList.add(at);
@@ -164,23 +164,38 @@ public class VAssignGenericAmount extends FDialog {
     }
 
     private class AssignTarget extends FContainer {
-        private final GameEntityView entity;
+        private final Object entity;
         private final FDisplayObject obj;
         private final FLabel label, btnSubtract, btnAdd;
         private final int max;
         private int amount;
 
-        public AssignTarget(GameEntityView entity0, int max0) {
+        public AssignTarget(Object entity0, int max0) {
             entity = entity0;
             max = max0;
             if (entity instanceof CardView) {
                 obj = add(new EffectSourcePanel((CardView)entity));
-            }
-            else if (entity instanceof PlayerView) {
+            } else if (entity instanceof PlayerView) {
                 PlayerView player = (PlayerView)entity;
                 obj = add(new MiscTargetPanel(player.getName(), MatchController.getPlayerAvatar(player)));
-            }
-            else {
+            } else if (entity instanceof Byte) {
+                FSkinImage manaSymbol;
+                Byte color = (Byte) entity;
+                if (color == MagicColor.WHITE) {
+                    manaSymbol = FSkinImage.MANA_W;
+                } else if (color == MagicColor.BLUE) {
+                    manaSymbol = FSkinImage.MANA_U;
+                } else if (color == MagicColor.BLACK) {
+                    manaSymbol = FSkinImage.MANA_B;
+                } else if (color == MagicColor.RED) {
+                    manaSymbol = FSkinImage.MANA_R;
+                } else if (color == MagicColor.GREEN) {
+                    manaSymbol = FSkinImage.MANA_G;
+                } else { // Should never come here, but add this to avoid compile error
+                    manaSymbol = FSkinImage.MANA_COLORLESS;
+                }
+                obj = add(new MiscTargetPanel("", manaSymbol));
+            } else {
                 obj = add(new MiscTargetPanel(entity.toString(), FSkinImage.UNKNOWN));
             }
             label = add(new FLabel.Builder().text("0").font(FSkinFont.get(18)).align(Align.center).build());
@@ -256,7 +271,7 @@ public class VAssignGenericAmount extends FDialog {
         }
     }
 
-    private void assignAmountTo(GameEntityView source, boolean isAdding) {
+    private void assignAmountTo(Object source, boolean isAdding) {
         AssignTarget at = targetsMap.get(source);
         int assigned = at.amount;
         int leftToAssign = Math.max(0, at.max - assigned);
@@ -344,8 +359,8 @@ public class VAssignGenericAmount extends FDialog {
         callback.run(getAssignedMap());
     }
 
-    public Map<GameEntityView, Integer> getAssignedMap() {
-        Map<GameEntityView, Integer> result = new HashMap<>(targetsList.size());
+    public Map<Object, Integer> getAssignedMap() {
+        Map<Object, Integer> result = new HashMap<>(targetsList.size());
         for (AssignTarget at : targetsList)
             result.put(at.entity, at.amount);
         return result;

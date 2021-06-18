@@ -80,7 +80,7 @@ import forge.util.collect.FCollectionView;
 /**
  * Default harmless implementation for tests.
  * Test-specific behaviour can easily be added by mocking (parts of) this class.
- * 
+ *
  * Note that the current PlayerController implementations seem to be responsible for handling some game logic,
  * and even aside from that, they are theoretically capable of making illegal choices (which are then not blocked by the real game logic).
  * Test cases that need to override the default behaviour of this class should make sure to do so in a way that does not invalidate their correctness.
@@ -151,6 +151,10 @@ public class PlayerControllerForTests extends PlayerController {
         throw new IllegalStateException("Erring on the side of caution here...");
     }
 
+    @Override
+    public Map<Byte, Integer> specifyManaCombo(SpellAbility sa, ColorSet colorSet, int manaAmount, boolean different) {
+        throw new IllegalStateException("Erring on the side of caution here...");
+    }
 
     @Override
     public Integer announceRequirements(SpellAbility ability, String announce) {
@@ -422,7 +426,7 @@ public class PlayerControllerForTests extends PlayerController {
     @Override
     public List<SpellAbility> chooseSpellAbilityToPlay() {
         //TODO: This method has to return the spellability chosen by player
-        // It should not play the sa right from here. The code has been left as it is to quickly adapt to changed playercontroller interface 
+        // It should not play the sa right from here. The code has been left as it is to quickly adapt to changed playercontroller interface
         if (playerActions != null) {
             CastSpellFromHandAction castSpellFromHand = playerActions.getNextActionIfApplicable(player, getGame(), CastSpellFromHandAction.class);
             if (castSpellFromHand != null) {
@@ -476,7 +480,7 @@ public class PlayerControllerForTests extends PlayerController {
     public byte chooseColor(String message, SpellAbility sa, ColorSet colors) {
         return Iterables.getFirst(colors, MagicColor.WHITE);
     }
-    
+
     @Override
     public byte chooseColorAllowColorless(String message, Card card, ColorSet colors) {
         return Iterables.getFirst(colors, (byte)0);
@@ -551,7 +555,7 @@ public class PlayerControllerForTests extends PlayerController {
             ComputerUtil.playStack(sa, player, getGame());
         }
     }
-    
+
     private void prepareSingleSa(final Card host, final SpellAbility sa, boolean isMandatory){
         if (sa.hasParam("TargetingPlayer")) {
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(host, sa.getParam("TargetingPlayer"), sa).get(0);
@@ -583,7 +587,7 @@ public class PlayerControllerForTests extends PlayerController {
                 } else {
                     ComputerUtil.playStack(tgtSA, player, getGame());
                 }
-            } else 
+            } else
                 return false; // didn't play spell
         }
         return true;
