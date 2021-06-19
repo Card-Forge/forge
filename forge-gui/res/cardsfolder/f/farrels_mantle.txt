@@ -5,7 +5,6 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Pump
 T:Mode$ AttackerUnblocked | ValidCard$ Creature.EnchantedBy | Execute$ FarrelDmg | TriggerController$ EnchantedController | OptionalDecider$ EnchantedController | TriggerDescription$ Whenever enchanted creature attacks and isn't blocked, its controller may have it deal damage equal to its power plus 2 to another target creature. If that player does, the attacking creature assigns no combat damage this turn.
 SVar:FarrelDmg:DB$ DealDamage | ValidTgts$ Creature.NotEnchantedBy | TgtPrompt$ Select another target creature | NumDmg$ FarrelX | DamageSource$ Enchanted | SubAbility$ FarrelPump
-SVar:FarrelPump:DB$ Pump | Defined$ Enchanted | KW$ Prevent all combat damage that would be dealt by CARDNAME.
+SVar:FarrelPump:DB$ Pump | Defined$ Enchanted | KW$ HIDDEN CARDNAME assigns no combat damage
 SVar:FarrelX:TriggeredAttacker$CardPower/Plus.2
-SVar:Picture:http://www.wizards.com/global/images/magic/general/farrels_mantle.jpg
 Oracle:Enchant creature\nWhenever enchanted creature attacks and isn't blocked, its controller may have it deal damage equal to its power plus 2 to another target creature. If that player does, the attacking creature assigns no combat damage this turn.

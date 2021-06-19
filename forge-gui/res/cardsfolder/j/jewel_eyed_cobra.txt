@@ -1,6 +1,6 @@
 Name:Jewel-Eyed Cobra
 ManaCost:2 G
-Types:Creature Smake
+Types:Creature Snake
 PT:3/1
 K:Deathtouch
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a Treasure token.

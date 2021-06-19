@@ -71,6 +71,9 @@ public class AnimateEffect extends AnimateEffectBase {
         if (types.hasSubtype("ChosenType")) {
             types.clear();
             types.add(source.getChosenType());
+        } else if (types.hasSubtype("ChosenType2")) {
+            types.clear();
+            types.add(source.getChosenType2());
         }
 
         final List<String> keywords = Lists.newArrayList();
@@ -227,7 +230,7 @@ public class AnimateEffect extends AnimateEffectBase {
         }
         // allow SVar substitution for keywords
         for (int i = 0; i < keywords.size(); i++) {
-            final String k = keywords.get(i);   
+            final String k = keywords.get(i);
             if (sa.hasSVar(k)) {
                 keywords.add("\"" + k + "\"");
                 keywords.remove(k);

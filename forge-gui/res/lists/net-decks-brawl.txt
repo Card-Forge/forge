@@ -1,1 +1,11 @@
+Card Preview | https://downloads.cardforge.org/decks/cardpreview-brawl.zip
+Commander Clash | https://downloads.cardforge.org/decks/commanderclash-brawl.zip
+Commander VS | https://downloads.cardforge.org/decks/commandervs-brawl.zip
 Current Brawl Metagame | https://downloads.cardforge.org/decks/currentbrawlmetagame.zip
+Dear Azami | https://downloads.cardforge.org/decks/dearazami-brawl.zip
+EDHREC Columms | https://downloads.cardforge.org/decks/edhrec-brawl.zip
+Feature Article | https://downloads.cardforge.org/decks/feature-brawl.zip
+How to Build | https://downloads.cardforge.org/decks/howtobuild-brawl.zip
+Much Abrew About Nothing | https://downloads.cardforge.org/decks/muchabrewaboutnothing-brawl.zip
+Ready to Brawl? | https://downloads.cardforge.org/decks/readytobrawl.zip
+Ways to Play | https://downloads.cardforge.org/decks/waystoplay-brawl.zip

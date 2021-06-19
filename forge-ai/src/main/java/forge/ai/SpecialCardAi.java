@@ -217,7 +217,7 @@ public class SpecialCardAi {
 
             Card animated = AnimateAi.becomeAnimated(sa.getHostCard(), sa.getSubAbility());
             if (sa.getHostCard().canReceiveCounters(CounterEnumType.P1P1)) {
-                animated.addCounter(CounterEnumType.P1P1, 2, ai, false, null);
+                animated.addCounter(CounterEnumType.P1P1, 2, ai, sa.getSubAbility(), false, null);
             }
             boolean isOppEOT = ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == ai;
             boolean isValuableAttacker = ph.is(PhaseType.MAIN1, ai) && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, animated);

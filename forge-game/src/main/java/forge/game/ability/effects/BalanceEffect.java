@@ -7,6 +7,7 @@ import java.util.Map;
 import com.google.common.collect.Maps;
 
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -46,7 +47,8 @@ public class BalanceEffect extends SpellAbilityEffect {
             validCards.add(CardLists.getValidCards(players.get(i).getCardsIn(zone), valid, activator, source, sa));
             min = Math.min(min, validCards.get(i).size());
         }
-        
+
+        Map<AbilityKey, Object> params = AbilityKey.newMap();
         CardZoneTable table = new CardZoneTable();
         for (int i = 0; i < players.size(); i++) {
             Player p = players.get(i);
@@ -59,7 +61,7 @@ public class BalanceEffect extends SpellAbilityEffect {
             } else { // Battlefield
                 for (Card card : p.getController().choosePermanentsToSacrifice(sa, numToBalance, numToBalance,  validCards.get(i), valid)) {
                     if ( null == card ) continue; 
-                    game.getAction().sacrifice(card, sa, table);
+                    game.getAction().sacrifice(card, sa, table, params);
                 }
             }
         }

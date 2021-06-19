@@ -279,7 +279,7 @@ public final class CMatchUI
         }
     }
 
-    private SkinImage getPlayerAvatar(final PlayerView p, final int defaultIndex) {
+    public SkinImage getPlayerAvatar(final PlayerView p, final int defaultIndex) {
         if (avatarImages.containsKey(p.getLobbyPlayerName())) {
             return ImageCache.getIcon(avatarImages.get(p.getLobbyPlayerName()));
         }
@@ -1029,13 +1029,13 @@ public final class CMatchUI
     }
 
     @Override
-    public Map<GameEntityView, Integer> assignGenericAmount(final CardView effectSource, final Map<GameEntityView, Integer> target,
+    public Map<Object, Integer> assignGenericAmount(final CardView effectSource, final Map<Object, Integer> target,
             final int amount, final boolean atLeastOne, final String amountLabel) {
         if (amount <= 0) {
             return Collections.emptyMap();
         }
 
-        final AtomicReference<Map<GameEntityView, Integer>> result = new AtomicReference<>();
+        final AtomicReference<Map<Object, Integer>> result = new AtomicReference<>();
         FThreads.invokeInEdtAndWait(new Runnable() {
             @Override
             public void run() {

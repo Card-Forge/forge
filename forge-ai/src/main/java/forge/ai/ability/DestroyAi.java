@@ -24,7 +24,7 @@ import forge.game.zone.ZoneType;
 public class DestroyAi extends SpellAbilityAi {
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
-        return canPlayAI(ai, sa);
+        return checkApiLogic(ai, sa);
     }
 
     @Override

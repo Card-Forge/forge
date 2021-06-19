@@ -1,9 +1,9 @@
 Name:Decimate
 ManaCost:2 R G
 Types:Sorcery
-A:SP$ Destroy | Cost$ 2 R G | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SubAbility$ DestroyCreature | SpellDescription$ Destroy target artifact, target creature, target enchantment, and target land.
-SVar:DestroyCreature:DB$ Destroy | ValidTgts$ Creature | SubAbility$ DestroyEnch | TgtPrompt$ Select target creature
-SVar:DestroyEnch:DB$ Destroy | ValidTgts$ Enchantment | SubAbility$ DestroyLand | TgtPrompt$ Select target enchantment
-SVar:DestroyLand:DB$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land
-SVar:Picture:http://www.wizards.com/global/images/magic/general/decimate.jpg
+A:SP$ Pump | Cost$ 2 R G | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SubAbility$ DestroyCreature | AILogic$ Destroy | IsCurse$ True | SpellDescription$ Destroy target artifact, target creature, target enchantment, and target land. | StackDescription$ None
+SVar:DestroyCreature:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Destroy | IsCurse$ True | SubAbility$ DestroyEnch | StackDescription$ None
+SVar:DestroyEnch:DB$ Pump | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | AILogic$ Destroy | IsCurse$ True | SubAbility$ DestroyLand | StackDescription$ None
+SVar:DestroyLand:DB$ Pump | ValidTgts$ Land | TgtPrompt$ Select target land | AILogic$ Destroy | IsCurse$ True | SubAbility$ DBDestroy | StackDescription$ None
+SVar:DBDestroy:DB$ Destroy | Defined$ Targeted
 Oracle:Destroy target artifact, target creature, target enchantment, and target land.

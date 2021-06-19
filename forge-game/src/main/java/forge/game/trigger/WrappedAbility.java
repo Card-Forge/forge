@@ -10,11 +10,14 @@ import com.google.common.collect.Maps;
 
 import forge.card.mana.ManaCost;
 import forge.game.Game;
+import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardDamageMap;
 import forge.game.card.CardState;
+import forge.game.card.CardZoneTable;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.spellability.Ability;
@@ -503,6 +506,39 @@ public class WrappedAbility extends Ability {
             }
         }
         // TODO: CardCollection
+    }
+
+    @Override
+    public CardDamageMap getDamageMap() {
+        return sa.getDamageMap();
+    }
+    @Override
+    public CardDamageMap getPreventMap() {
+        return sa.getPreventMap();
+    }
+    @Override
+    public GameEntityCounterTable getCounterTable() {
+        return sa.getCounterTable();
+    }
+    @Override
+    public CardZoneTable getChangeZoneTable() {
+        return sa.getChangeZoneTable();
+    }
+    @Override
+    public void setDamageMap(final CardDamageMap map) {
+        sa.setDamageMap(map);
+    }
+    @Override
+    public void setPreventMap(final CardDamageMap map) {
+        sa.setPreventMap(map);
+    }
+    @Override
+    public void setCounterTable(final GameEntityCounterTable table) {
+        sa.setCounterTable(table);
+    }
+    @Override
+    public void setChangeZoneTable(final CardZoneTable table) {
+        sa.setChangeZoneTable(table);
     }
 
     public boolean isAlternativeCost(AlternativeCost ac) {

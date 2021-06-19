@@ -16,7 +16,7 @@ sets = [
     'OGW', 'SOI', 'EMN', 'CN2', 'KLD', 'C16', 'AER', 'AKH', 'ANN', 'HOU',
     'C17', 'XLN', 'RIX', 'DOM', 'BBD', 'M19', 'C18', 'GRN', 'RNA', 'WAR',
     'MH1', 'M20', 'C19', 'ELD', 'THB', 'IKO', 'C20', 'M21', 'JMP', 'ZNR',
-    'ZNC', 'CMR', 'KHM', 'KHC', 'STX', 'C21',
+    'ZNC', 'CMR', 'KHM', 'KHC', 'STX', 'C21', 'MH2',
 ]
 
 costmap = [

@@ -638,6 +638,9 @@ public final class GameActionUtil {
     }
 
     public static CardCollectionView orderCardsByTheirOwners(Game game, CardCollectionView list, ZoneType dest, SpellAbility sa) {
+        if (list.size() <= 1) {
+            return list;
+        }
         CardCollection completeList = new CardCollection();
         for (Player p : game.getPlayers()) {
             CardCollection subList = new CardCollection();

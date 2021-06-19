@@ -7,8 +7,8 @@ SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ ChosenAndYou | RepeatSubAbility$ D
 SVar:DBDraw:DB$ Draw | Defined$ Player.IsRemembered | NumCards$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
 SVar:X:RememberedLKI$Valid Creature.RememberedPlayerCtrl
 SVar:DBChoose:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | SubAbility$ DBReturnYou
-SVar:DBReturnYou:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.YouCtrl | ChangeNum$ 1 | Hidden$ True | SubAbility$ DBReturnOpp
-SVar:DBReturnOpp:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.ChosenCtrl | DefinedPlayer$ ChosenPlayer | Chooser$ ChosenPlayer | ChangeNum$ 1 | Hidden$ True | SubAbility$ DBCleanup
+SVar:DBReturnYou:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.YouCtrl | ChangeNum$ 1 | Hidden$ True | Mandatory$ True | SubAbility$ DBReturnOpp
+SVar:DBReturnOpp:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.ChosenCtrl | DefinedPlayer$ ChosenPlayer | Chooser$ ChosenPlayer | ChangeNum$ 1 | Hidden$ True | Mandatory$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 AI:RemoveDeck:Random

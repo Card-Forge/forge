@@ -231,7 +231,6 @@ public class CardFactory {
 
         // Would like to move this away from in-game entities
         String originalPicture = cp.getImageKey(false);
-        //System.out.println(c.getName() + " -> " + originalPicture);
         c.setImageKey(originalPicture);
         c.setToken(cp.isToken());
 

@@ -173,15 +173,13 @@ public class AbilityUtils {
             }
         }
         else if (defined.equals("Targeted") && sa instanceof SpellAbility) {
-            final SpellAbility saTargeting = ((SpellAbility)sa).getSATargetingCard();
-            if (saTargeting != null) {
-                Iterables.addAll(cards, saTargeting.getTargets().getTargetCards());
+            for (TargetChoices tc : ((SpellAbility)sa).getAllTargetChoices()) {
+                Iterables.addAll(cards, tc.getTargetCards());
             }
         }
         else if (defined.equals("TargetedSource") && sa instanceof SpellAbility) {
-            final SpellAbility saTargeting = ((SpellAbility)sa).getSATargetingSA();
-            if (saTargeting != null) {
-                for (SpellAbility s : saTargeting.getTargets().getTargetSpells()) {
+            for (TargetChoices tc : ((SpellAbility)sa).getAllTargetChoices()) {
+                for (SpellAbility s : tc.getTargetSpells()) {
                     cards.add(s.getHostCard());
                 }
             }
@@ -807,9 +805,9 @@ public class AbilityUtils {
                     final SpellAbility root = sa.getRootAbility();
                     list = new CardCollection((Card) root.getReplacingObject(AbilityKey.fromString(calcX[0].substring(8))));
                 }
-                // there could be null inside!
-                list = Iterables.filter(list, Card.class);
                 if (list != null) {
+                    // there could be null inside!
+                    list = Iterables.filter(list, Card.class);
                     val = handlePaid(list, calcX[1], card, ability);
                 }
             }
@@ -1008,9 +1006,8 @@ public class AbilityUtils {
             players.addAll(getDefinedPlayers(card, "TargetedController", sa));
         }
         else if ((defined.equals("Targeted") || defined.equals("TargetedPlayer")) && sa instanceof SpellAbility) {
-            final SpellAbility saTargeting = ((SpellAbility)sa).getSATargetingPlayer();
-            if (saTargeting != null) {
-                players.addAll(saTargeting.getTargets().getTargetPlayers());
+            for (TargetChoices tc : ((SpellAbility)sa).getAllTargetChoices()) {
+                players.addAll(tc.getTargetPlayers());
             }
         }
         else if (defined.equals("ParentTarget") && sa instanceof SpellAbility) {
@@ -1298,9 +1295,8 @@ public class AbilityUtils {
             s = ((SpellAbility)sa).getRootAbility();
         }
         else if (defined.equals("Targeted") && sa instanceof SpellAbility) {
-            final SpellAbility saTargeting = ((SpellAbility)sa).getSATargetingSA();
-            if (saTargeting != null) {
-                for (SpellAbility targetSpell : saTargeting.getTargets().getTargetSpells()) {
+            for (TargetChoices tc : ((SpellAbility)sa).getAllTargetChoices()) {
+                for (SpellAbility targetSpell : tc.getTargetSpells()) {
                     SpellAbilityStackInstance stackInstance = game.getStack().getInstanceFromSpellAbility(targetSpell);
                     if (stackInstance != null) {
                         SpellAbility instanceSA = stackInstance.getSpellAbility(true);
@@ -1412,7 +1408,6 @@ public class AbilityUtils {
             }
             return;
         }
-
         AbilityUtils.resolveApiAbility(sa, game);
     }
 
@@ -2736,7 +2731,6 @@ public class AbilityUtils {
             return doXMath(powers.size(), expr, c, ctb);
         }
 
-
         if (sq[0].startsWith("MostProminentCreatureType")) {
             String restriction = l[0].split(" ")[1];
             CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restriction, player, c, ctb);
@@ -3394,7 +3388,6 @@ public class AbilityUtils {
         int n = s.startsWith("Amount") ? objects.size() : 0;
         return doXMath(n, CardFactoryUtil.extractOperators(s), source, ctb);
     }
-
 
     /**
      * <p>

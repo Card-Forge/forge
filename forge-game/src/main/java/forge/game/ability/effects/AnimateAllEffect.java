@@ -59,6 +59,9 @@ public class AnimateAllEffect extends AnimateEffectBase {
         if (types.hasSubtype("ChosenType")) {
             types.clear();
             types.add(host.getChosenType());
+        } else if (types.hasSubtype("ChosenType2")) {
+            types.clear();
+            types.add(host.getChosenType2());
         }
 
         final List<String> keywords = new ArrayList<>();
@@ -125,7 +128,7 @@ public class AnimateAllEffect extends AnimateEffectBase {
         }
 
         CardCollectionView list;
-        
+
         if (!sa.usesTargeting() && !sa.hasParam("Defined")) {
             list = game.getCardsIn(ZoneType.Battlefield);
         } else {

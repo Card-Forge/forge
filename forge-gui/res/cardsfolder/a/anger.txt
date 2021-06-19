@@ -3,8 +3,7 @@ ManaCost:3 R
 Types:Creature Incarnation
 PT:2/2
 K:Haste
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | EffectZone$ Graveyard | AddKeyword$ Haste | CheckSVar$ X | SVarCompare$ GE1 | Description$ As long as CARDNAME is in your graveyard and you control a Mountain, creatures you control have haste.
-SVar:X:Count$Valid Mountain.YouCtrl
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | EffectZone$ Graveyard | AddKeyword$ Haste | IsPresent$ Mountain.YouCtrl | Description$ As long as CARDNAME is in your graveyard and you control a Mountain, creatures you control have haste.
 SVar:DiscardMe:2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/anger.jpg
 Oracle:Haste\nAs long as Anger is in your graveyard and you control a Mountain, creatures you control have haste.

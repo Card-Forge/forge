@@ -12,6 +12,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -36,6 +38,7 @@ import com.google.common.collect.Multimap;
 import forge.LobbyPlayer;
 import forge.StaticData;
 import forge.ai.GameState;
+import forge.ai.PlayerControllerAi;
 import forge.card.CardDb;
 import forge.card.CardStateName;
 import forge.card.CardType;
@@ -393,16 +396,38 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public Map<GameEntity, Integer> divideShield(Card effectSource, Map<GameEntity, Integer> affected, int shieldAmount) {
         final CardView vSource = CardView.get(effectSource);
-        final Map<GameEntityView, Integer> vAffected = new HashMap<>(affected.size());
+        final Map<Object, Integer> vAffected = new HashMap<>(affected.size());
         for (Map.Entry<GameEntity, Integer> e : affected.entrySet()) {
             vAffected.put(GameEntityView.get(e.getKey()), e.getValue());
         }
-        final Map<GameEntityView, Integer> vResult = getGui().assignGenericAmount(vSource, vAffected, shieldAmount, false,
+        final Map<Object, Integer> vResult = getGui().assignGenericAmount(vSource, vAffected, shieldAmount, false,
             localizer.getMessage("lblShield"));
         Map<GameEntity, Integer> result = new HashMap<>(vResult.size());
         for (Map.Entry<GameEntity, Integer> e : affected.entrySet()) {
             if (vResult.containsKey(GameEntityView.get(e.getKey()))) {
                 result.put(e.getKey(), vResult.get(GameEntityView.get(e.getKey())));
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public Map<Byte, Integer> specifyManaCombo(SpellAbility sa, ColorSet colorSet, int manaAmount, boolean different) {
+        final CardView vSource = CardView.get(sa.getHostCard());
+        final Map<Object, Integer> vAffected = new LinkedHashMap<>(manaAmount);
+        Integer maxAmount = different ? 1 : manaAmount;
+        Iterator<Byte> it = colorSet.iterator();
+        while (it.hasNext()) {
+            vAffected.put(it.next(), maxAmount);
+        }
+        final Map<Object, Integer> vResult = getGui().assignGenericAmount(vSource, vAffected, manaAmount, false,
+            localizer.getMessage("lblMana").toLowerCase());
+        Map<Byte, Integer> result = new HashMap<>(vResult.size());
+        it = colorSet.iterator();
+        while (it.hasNext()) {
+            Byte color = it.next();
+            if (vResult.containsKey(color)) {
+                result.put(color, vResult.get(color));
             }
         }
         return result;
@@ -1950,7 +1975,44 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             checkSA = checkSA.getSubAbility();
         }
 
-        return select.chooseTargets(null, null, null, false, canFilterMustTarget);
+        boolean result = select.chooseTargets(null, null, null, false, canFilterMustTarget);
+
+        // assign divided as you choose values
+        if (result && currentAbility.isDividedAsYouChoose() && currentAbility.getStillToDivide() > 0) {
+            int amount = currentAbility.getStillToDivide();
+            final List<GameEntity> targets = currentAbility.getTargets().getTargetEntities();
+            if (targets.size() == 1) {
+                currentAbility.addDividedAllocation(targets.get(0), amount);
+            } else if (targets.size() == amount) {
+                for (GameEntity e : targets) {
+                    currentAbility.addDividedAllocation(e, 1);
+                }
+            } else if (targets.size() > amount) {
+                return false;
+            } else {
+                String label = "lblDamage";
+                if (currentAbility.getApi() == ApiType.PreventDamage) {
+                    label = "lblShield";
+                } else if (currentAbility.getApi() == ApiType.PutCounter) {
+                    label = "lblCounters";
+                }
+                label = localizer.getMessage(label).toLowerCase();
+                final CardView vSource = CardView.get(currentAbility.getHostCard());
+                final Map<Object, Integer> vTargets = new HashMap<>(targets.size());
+                for (GameEntity e : targets) {
+                    vTargets.put(GameEntityView.get(e), amount);
+                }
+                final Map<Object, Integer> vResult = getGui().assignGenericAmount(vSource, vTargets, amount, true, label);
+                for (GameEntity e : targets) {
+                    currentAbility.addDividedAllocation(e, vResult.get(GameEntityView.get(e)));
+                }
+                if (currentAbility.getStillToDivide() > 0) {
+                    return false;
+                }
+            }
+        }
+
+        return result;
     }
 
     @Override
@@ -2431,7 +2493,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             if (subtract) {
                 card.subtractCounter(counter, count);
             } else {
-                card.addCounter(counter, count, card.getController(), false, null);
+                card.addCounter(counter, count, card.getController(), null, false, null);
             }
 
         }
@@ -2941,6 +3003,18 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     PlanarDice.roll(p, PlanarDice.Planeswalk);
                 }
             });
+        }
+
+        public void askAI() {
+            PlayerControllerAi ai = new PlayerControllerAi(player.getGame(), player, player.getOriginalLobbyPlayer());
+            player.runWithController(new Runnable() {
+                @Override
+                public void run() {
+                    List<SpellAbility> sas = ai.chooseSpellAbilityToPlay();
+                    SpellAbility chosen = sas == null ? null : sas.get(0);
+                    getGui().message(chosen == null ? "AI doesn't want to play anything right now" : chosen.getHostCard().toString(), "AI Play Suggestion");
+                }
+            }, ai);
         }
     }
 

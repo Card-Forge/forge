@@ -65,19 +65,18 @@ public class FightEffect extends DamageBaseEffect {
 
         if (isOptional && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblWouldYouLikeFight", CardTranslation.getTranslatedName(fighters.get(0).getName()), CardTranslation.getTranslatedName(fighters.get(1).getName())))) {
             return;
-        } else {
-            dealDamage(sa, fighters.get(0), fighters.get(1));
-
-            for (Card c : fighters) {
-                final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-                runParams.put(AbilityKey.Fighter, c);
-                game.getTriggerHandler().runTrigger(TriggerType.Fight, runParams, false);
-            }
-
-            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-            runParams.put(AbilityKey.Fighters, fighters);
-            game.getTriggerHandler().runTrigger(TriggerType.FightOnce, runParams, false);
         }
+
+        dealDamage(sa, fighters.get(0), fighters.get(1));
+
+        for (Card c : fighters) {
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.Fighter, c);
+            game.getTriggerHandler().runTrigger(TriggerType.Fight, runParams, false);
+        }
+
+        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        runParams.put(AbilityKey.Fighters, fighters);
     }
 
     private static List<Card> getFighters(SpellAbility sa) {
