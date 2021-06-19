@@ -1,6 +1,6 @@
 Name:Spire Monitor
 ManaCost:4 U
-Types:Creature Drake
+Types:Creature Phyrexian Drake
 PT:3/3
 K:Flash
 K:Flying

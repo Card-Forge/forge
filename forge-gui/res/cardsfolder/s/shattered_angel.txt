@@ -1,6 +1,6 @@
 Name:Shattered Angel
 ManaCost:3 W W
-Types:Creature Angel
+Types:Creature Phyrexian Angel
 PT:3/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigGain | OptionalDecider$ You | TriggerDescription$ Whenever a land enters the battlefield under an opponent's control, you may gain 3 life.

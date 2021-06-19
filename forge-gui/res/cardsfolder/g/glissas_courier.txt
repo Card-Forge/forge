@@ -1,6 +1,6 @@
 Name:Glissa's Courier
 ManaCost:1 G G
-Types:Creature Horror
+Types:Creature Phyrexian Horror
 PT:2/3
 K:Mountainwalk
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glissas_courier.jpg

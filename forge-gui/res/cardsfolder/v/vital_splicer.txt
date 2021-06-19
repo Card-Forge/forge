@@ -1,9 +1,8 @@
 Name:Vital Splicer
 ManaCost:3 G
-Types:Creature Human Artificer
+Types:Creature Phyrexian Human Artificer
 PT:1/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 3/3 colorless Golem artifact creature token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_3_3_a_golem | TokenOwner$ You | LegacyImage$ c 3 3 a golem nph
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 3/3 colorless Phyrexian Golem artifact creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_3_3_a_phyrexian_golem | TokenOwner$ You
 A:AB$ Regenerate | Cost$ 1 | ValidTgts$ Golem.YouCtrl | TgtPrompt$ Select target Golem you control. | SpellDescription$ Regenerate target Golem you control.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vital_splicer.jpg
-Oracle:When Vital Splicer enters the battlefield, create a 3/3 colorless Golem artifact creature token.\n{1}: Regenerate target Golem you control.
+Oracle:When Vital Splicer enters the battlefield, create a 3/3 colorless Phyrexian Golem artifact creature token.\n{1}: Regenerate target Golem you control.

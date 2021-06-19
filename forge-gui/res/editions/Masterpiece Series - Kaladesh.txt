@@ -66,5 +66,5 @@ ScryfallCode=mps
 [tokens]
 g_2_2_wolf
 c_1_1_a_thopter_flying
-c_3_3_a_wurm_deathtouch
-c_3_3_a_wurm_lifelink
+c_3_3_a_phyrexian_wurm_deathtouch
+c_3_3_a_phyrexian_wurm_lifelink

@@ -1,6 +1,6 @@
 Name:Shriek Raptor
 ManaCost:3 W W
-Types:Creature Bird
+Types:Creature Phyrexian Bird
 PT:2/3
 K:Flying
 K:Infect

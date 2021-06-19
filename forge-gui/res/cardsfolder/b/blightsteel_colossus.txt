@@ -1,6 +1,6 @@
 Name:Blightsteel Colossus
 ManaCost:12
-Types:Artifact Creature Golem
+Types:Artifact Creature Phyrexian Golem
 PT:11/11
 K:Trample
 K:Infect

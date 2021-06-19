@@ -1,6 +1,6 @@
 Name:Tine Shrike
 ManaCost:3 W
-Types:Creature Bird
+Types:Creature Phyrexian Bird
 PT:2/1
 K:Flying
 K:Infect

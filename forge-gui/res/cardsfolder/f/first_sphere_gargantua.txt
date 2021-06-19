@@ -1,6 +1,6 @@
 Name:First-Sphere Gargantua
 ManaCost:4 B B
-Types:Creature Horror
+Types:Creature Phyrexian Horror
 PT:5/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, you draw a card and you lose 1 life.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife

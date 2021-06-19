@@ -1,6 +1,6 @@
 Name:Phyrexian Juggernaut
 ManaCost:6
-Types:Artifact Creature Juggernaut
+Types:Artifact Creature Phyrexian Juggernaut
 PT:5/5
 K:Infect
 K:CARDNAME attacks each combat if able.

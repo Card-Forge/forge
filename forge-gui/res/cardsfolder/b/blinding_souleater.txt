@@ -1,6 +1,6 @@
 Name:Blinding Souleater
 ManaCost:3
-Types:Artifact Creature Cleric
+Types:Artifact Creature Phyrexian Cleric
 PT:1/3
 A:AB$ Tap | Cost$ PW T | ValidTgts$ Creature | TgtPrompt$ Select target creature | AIPhyrexianPayment$ Never | SpellDescription$ Tap target creature.
 AI:RemoveDeck:Random

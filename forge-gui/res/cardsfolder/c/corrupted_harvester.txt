@@ -1,6 +1,6 @@
 Name:Corrupted Harvester
 ManaCost:4 B B
-Types:Creature Horror
+Types:Creature Phyrexian Horror
 PT:6/3
 A:AB$ Regenerate | Cost$ B Sac<1/Creature> | SpellDescription$ Regenerate CARDNAME.
 SVar:AIPreferences:SacCost$Creature.token,Creature.cmcLE5+powerLE3+toughnessLE4

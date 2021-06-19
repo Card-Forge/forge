@@ -1,6 +1,6 @@
 Name:Skittering Skirge
 ManaCost:B B
-Types:Creature Imp
+Types:Creature Phyrexian Imp
 PT:3/2
 K:Flying
 T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSacrifice | TriggerDescription$ When you cast a creature spell, sacrifice CARDNAME.

@@ -10,4 +10,4 @@ AI:RemoveDeck:Random
 DeckNeeds:Color$Black & Type$Swamp
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lashwrithe.jpg
-Oracle:Living weapon (When this Equipment enters the battlefield, create a 0/0 black Germ creature token, then attach this to it.)\nEquipped creature gets +1/+1 for each Swamp you control.\nEquip {B/P}{B/P} ({B/P} can be paid with either {B} or 2 life.)
+Oracle:Living weapon (When this Equipment enters the battlefield, create a 0/0 black Phyrexian Germ creature token, then attach this to it.)\nEquipped creature gets +1/+1 for each Swamp you control.\nEquip {B/P}{B/P} ({B/P} can be paid with either {B} or 2 life.)

@@ -4,4 +4,4 @@ Types:Creature Merfolk
 PT:1/2
 K:Islandwalk
 A:AB$ Tap | Cost$ 1 T | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Tap target land.
-Oracle:Islandwalk\n{1}, {T}: Tap target land.
+Oracle:Islandwalk (This creature can't be blocked as long as defending player controls an Island.)\n{1}, {T}: Tap target land.

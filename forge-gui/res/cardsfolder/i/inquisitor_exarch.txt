@@ -1,6 +1,6 @@
 Name:Inquisitor Exarch
 ManaCost:W W
-Types:Creature Cleric
+Types:Creature Phyrexian Cleric
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DBGain,DBLose

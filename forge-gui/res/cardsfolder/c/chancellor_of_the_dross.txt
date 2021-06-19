@@ -1,6 +1,6 @@
 Name:Chancellor of the Dross
 ManaCost:4 B B B
-Types:Creature Vampire
+Types:Creature Phyrexian Vampire
 PT:6/6
 K:MayEffectFromOpeningHand:RevealCard
 K:Flying

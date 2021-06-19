@@ -1,6 +1,6 @@
 Name:Glistener Elf
 ManaCost:G
-Types:Creature Elf Warrior
+Types:Creature Phyrexian Elf Warrior
 PT:1/1
 K:Infect
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glistener_elf.jpg

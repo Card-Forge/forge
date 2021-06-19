@@ -1,6 +1,6 @@
 Name:Jin-Gitaxias, Core Augur
 ManaCost:8 U U
-Types:Legendary Creature Praetor
+Types:Legendary Creature Phyrexian Praetor
 PT:5/4
 K:Flash
 S:Mode$ Continuous | Affected$ Opponent | RaiseMaxHandSize$ -7 | Description$ Each opponent's maximum hand size is reduced by seven.

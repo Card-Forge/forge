@@ -4,8 +4,8 @@ Types:Artifact
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ PayLife | Description$ As CARDNAME enters the battlefield, pay any amount of life.
 SVar:PayLife:AB$ StoreSVar | Cost$ Mandatory PayLife<X> | SVar$ LifePaidOnETB | Type$ Calculate | Expression$ X | SubAbility$ MoveToPlay
 SVar:MoveToPlay:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ All | Destination$ Battlefield
-A:AB$ Token | Cost$ 4 T | TokenAmount$ 1 | TokenScript$ b_x_x_minion | TokenOwner$ You | TokenPower$ LifePaidOnETB | TokenToughness$ LifePaidOnETB | LegacyImage$ b x x minion usg | SpellDescription$ Create an X/X black Minion creature token, where X is the life paid as CARDNAME entered the battlefield.
+A:AB$ Token | Cost$ 4 T | TokenAmount$ 1 | TokenScript$ b_x_x_phyrexian_minion | TokenOwner$ You | TokenPower$ LifePaidOnETB | TokenToughness$ LifePaidOnETB | SpellDescription$ Create an X/X black Phyrexian Minion creature token, where X is the life paid as CARDNAME entered the battlefield.
 SVar:X:Count$xPaid
 SVar:LifePaidOnETB:Number$0
 AI:RemoveDeck:All
-Oracle:As Phyrexian Processor enters the battlefield, pay any amount of life.\n{4}, {T}: Create an X/X black Minion creature token, where X is the life paid as Phyrexian Processor entered the battlefield.
+Oracle:As Phyrexian Processor enters the battlefield, pay any amount of life.\n{4}, {T}: Create an X/X black Phyrexian Minion creature token, where X is the life paid as Phyrexian Processor entered the battlefield.

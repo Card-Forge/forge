@@ -1,6 +1,6 @@
 Name:Tsabo Tavoc
 ManaCost:5 B R
-Types:Legendary Creature Horror
+Types:Legendary Creature Phyrexian Horror
 PT:7/4
 K:First Strike
 K:Protection:Creature.Legendary:Protection from legendary creatures

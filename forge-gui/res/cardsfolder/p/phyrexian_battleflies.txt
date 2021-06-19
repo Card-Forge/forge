@@ -1,6 +1,6 @@
 Name:Phyrexian Battleflies
 ManaCost:B
-Types:Creature Insect
+Types:Creature Phyrexian Insect
 PT:0/1
 K:Flying
 A:AB$ Pump | Cost$ B | Defined$ Self | NumAtt$ +1 | ActivationLimit$ 2 | SpellDescription$ CARDNAME gets +1/+0 until end of turn. Activate no more than twice each turn.

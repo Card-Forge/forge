@@ -1,9 +1,8 @@
 Name:Wing Splicer
 ManaCost:3 U
-Types:Creature Human Artificer
+Types:Creature Phyrexian Human Artificer
 PT:1/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 3/3 colorless Golem artifact creature token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_3_3_a_golem | TokenOwner$ You | LegacyImage$ c 3 3 a golem nph
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 3/3 colorless Phyrexian Golem artifact creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_3_3_a_phyrexian_golem | TokenOwner$ You
 S:Mode$ Continuous | Affected$ Creature.Golem+YouCtrl | AddKeyword$ Flying | Description$ Golem creatures you control have flying.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/wing_splicer.jpg
-Oracle:When Wing Splicer enters the battlefield, create a 3/3 colorless Golem artifact creature token.\nGolem creatures you control have flying.
+Oracle:When Wing Splicer enters the battlefield, create a 3/3 colorless Phyrexian Golem artifact creature token.\nGolem creatures you control have flying.

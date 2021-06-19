@@ -1,0 +1,6 @@
+Name:Phyrexian Minion
+ManaCost:no cost
+Types:Creature Phyrexian Minion
+PT:*/*
+Colors:black
+Oracle:

@@ -265,9 +265,9 @@ ScryfallCode=SOM
 w_2_2_cat
 w_1_1_soldier
 r_1_1_goblin
-g_1_1_insect_infect
+g_1_1_phyrexian_insect_infect
 g_2_2_wolf
 c_3_3_a_golem
 c_1_1_a_myr
-c_3_3_a_wurm_deathtouch
-c_3_3_a_wurm_lifelink
+c_3_3_a_phyrexian_wurm_deathtouch
+c_3_3_a_phyrexian_wurm_lifelink

@@ -1,6 +1,6 @@
 Name:Razor Swine
 ManaCost:2 R
-Types:Creature Boar
+Types:Creature Phyrexian Boar
 PT:2/1
 K:First Strike
 K:Infect

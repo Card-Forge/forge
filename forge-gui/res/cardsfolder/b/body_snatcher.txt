@@ -1,6 +1,6 @@
 Name:Body Snatcher
 ManaCost:2 B B
-Types:Creature Minion
+Types:Creature Phyrexian Minion
 PT:2/2
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ DBExileMe | TriggerDescription$ When CARDNAME enters the battlefield, exile it unless you discard a creature card.
 SVar:DBExileMe:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile | UnlessCost$ Discard<1/Creature> | UnlessPayer$ You

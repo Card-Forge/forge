@@ -1,0 +1,5 @@
+Name:Phyrexian Myr
+ManaCost:no cost
+PT:1/1
+Types:Artifact Creature Phyrexian Myr
+Oracle:
