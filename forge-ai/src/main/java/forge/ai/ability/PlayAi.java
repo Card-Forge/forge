@@ -63,7 +63,7 @@ public class PlayAi extends SpellAbilityAi {
                 return false;
             }
         } else if (!sa.hasParam("Valid")) {
-            cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
+            cards = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
             if (cards.isEmpty()) {
                 return false;
             }

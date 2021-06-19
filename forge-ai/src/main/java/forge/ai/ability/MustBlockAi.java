@@ -78,7 +78,7 @@ public class MustBlockAi extends SpellAbilityAi {
 
         Card attacker = null;
         if (sa.hasParam("DefinedAttacker")) {
-            final List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DefinedAttacker"), sa);
+            final List<Card> cards = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedAttacker"), sa);
             if (cards.isEmpty()) {
                 return false;
             }

@@ -202,11 +202,10 @@ public class ProtectAi extends SpellAbilityAi {
         sa.resetTargets();
         CardCollection list = getProtectCreatures(ai, sa);
 
-        list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard(), sa);
+        list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), source, sa);
 
         if (game.getStack().isEmpty()) {
-            // If the cost is tapping, don't activate before declare
-            // attack/block
+            // If the cost is tapping, don't activate before declare attack/block
             if (sa.getPayCosts().hasTapCost()) {
                 if (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
                         && game.getPhaseHandler().isPlayerTurn(ai)) {
@@ -341,7 +340,7 @@ public class ProtectAi extends SpellAbilityAi {
             sa.getTargets().add(c);
         }
 
-        if (sa.getTargets().size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
+        if (sa.getTargets().size() < tgt.getMinTargets(source, sa)) {
             sa.resetTargets();
             return false;
         }

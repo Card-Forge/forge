@@ -289,7 +289,6 @@ public abstract class SpellAbilityAi {
         if (sa.isSpell() && !sa.isBuyBackAbility()) {
             return false;
         }
-        
 
         return phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai);
     }
