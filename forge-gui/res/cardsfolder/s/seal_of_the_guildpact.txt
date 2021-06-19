@@ -4,7 +4,7 @@ Types:Artifact
 K:ETBReplacement:Other:ChooseColors
 SVar:ChooseColors:DB$ ChooseColor | Defined$ You | TwoColors$ True | AILogic$ MostProminentDualInComputerDeck | SpellDescription$ As CARDNAME enters the battlefield, choose two colors.
 S:Mode$ ReduceCost | ValidCard$ Card | Type$ Spell | Activator$ You | Amount$ Col | Relative$ True | Description$ Each spell you cast costs {1} less to cast for each of the chosen colors it is.
-SVar:Col:Count$HasNumChosenColors.Self
+SVar:Col:Count$HasNumChosenColors.OriginalHost
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seal_of_the_guildpact.jpg
 Oracle:As Seal of the Guildpact enters the battlefield, choose two colors.\nEach spell you cast costs {1} less to cast for each of the chosen colors it is.
