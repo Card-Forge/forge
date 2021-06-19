@@ -53,10 +53,9 @@ public class DamageDealAi extends DamageAiBase {
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         final String damage = sa.getParam("NumDmg");
-        int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
-        final String logic = sa.getParam("AILogic");
-
         Card source = sa.getHostCard();
+        int dmg = AbilityUtils.calculateAmount(source, damage, sa);
+        final String logic = sa.getParam("AILogic");
 
         if ("MadSarkhanDigDmg".equals(logic)) {
             return SpecialCardAi.SarkhanTheMad.considerDig(ai, sa);
@@ -106,7 +105,7 @@ public class DamageDealAi extends DamageAiBase {
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
 
         final String damage = sa.getParam("NumDmg");
-        int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
+        int dmg = AbilityUtils.calculateAmount(source, damage, sa);
 
         if (damage.equals("X")) {
             if (sa.getSVar(damage).equals("Count$xPaid") || sourceName.equals("Crater's Claws")) {
@@ -532,7 +531,7 @@ public class DamageDealAi extends DamageAiBase {
                 && "P1P1".equals(sa.getParent().getParam("CounterType"))) {
             // assuming the SA parent is of PutCounter type. Perhaps it's possible to predict counter multipliers here somehow?
             final String amountStr = sa.getParent().getParamOrDefault("CounterNum", "1");
-            final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
+            final int amount = AbilityUtils.calculateAmount(source, amountStr, sa);
             dmg += amount;
         }
 

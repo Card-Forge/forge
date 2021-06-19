@@ -27,7 +27,6 @@ public class PermanentNoncreatureAi extends PermanentAi {
      */
     @Override
     protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
-
         if (!super.checkApiLogic(ai, sa))
             return false;
 

@@ -147,8 +147,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
             Map<CounterType, Integer> countersToAdd = Maps.newHashMap();
 
             for (Card src : srcCards) {
-                // rule 121.5: If the first and second objects are the same object, nothing
-                // happens
+                // rule 121.5: If the first and second objects are the same object, nothing happens
                 if (src.equals(dest)) {
                     continue;
                 }
@@ -199,8 +198,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
             boolean updateSource = false;
 
             for (final Card dest : tgtCards) {
-                // rule 121.5: If the first and second objects are the same object, nothing
-                // happens
+                // rule 121.5: If the first and second objects are the same object, nothing happens
                 if (source.equals(dest)) {
                     continue;
                 }
@@ -262,8 +260,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
 
             for (final Card dest : tgtCards) {
                 if (null != dest) {
-                    // rule 121.5: If the first and second objects are the same object, nothing
-                    // happens
+                    // rule 121.5: If the first and second objects are the same object, nothing happens
                     if (source.equals(dest)) {
                         continue;
                     }
@@ -329,8 +326,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
         final PlayerController pc = player.getController();
         final Game game = host.getGame();
 
-        // rule 121.5: If the first and second objects are the same object, nothing
-        // happens
+        // rule 121.5: If the first and second objects are the same object, nothing happens
         if (src.equals(dest)) {
             return;
         }
