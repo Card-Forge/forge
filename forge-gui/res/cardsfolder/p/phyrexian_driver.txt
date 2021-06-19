@@ -1,6 +1,6 @@
 Name:Phyrexian Driver
 ManaCost:2 B
-Types:Creature Zombie Mercenary
+Types:Creature Phyrexian Zombie Mercenary
 PT:1/1
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, other Mercenary creatures get +1/+1 until end of turn.
 SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.Mercenary+Other | NumAtt$ +1 | NumDef$ +1

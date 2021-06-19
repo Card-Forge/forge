@@ -1,6 +1,6 @@
 Name:Tangle Hulk
 ManaCost:5
-Types:Artifact Creature Beast
+Types:Artifact Creature Phyrexian Beast
 PT:5/3
 A:AB$ Regenerate | Cost$ 2 G | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tangle_hulk.jpg

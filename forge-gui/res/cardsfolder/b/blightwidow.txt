@@ -1,6 +1,6 @@
 Name:Blightwidow
 ManaCost:3 G
-Types:Creature Spider
+Types:Creature Phyrexian Spider
 PT:2/4
 K:Reach
 K:Infect

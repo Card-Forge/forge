@@ -1,6 +1,6 @@
 Name:Plague Spitter
 ManaCost:2 B
-Types:Creature Horror
+Types:Creature Phyrexian Horror
 PT:2/2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamageAll | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 1 damage to each creature and each player.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDamageAll | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, CARDNAME deals 1 damage to each creature and each player.

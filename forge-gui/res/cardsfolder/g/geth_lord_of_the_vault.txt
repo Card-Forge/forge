@@ -1,6 +1,6 @@
 Name:Geth, Lord of the Vault
 ManaCost:4 B B
-Types:Legendary Creature Zombie
+Types:Legendary Creature Phyrexian Zombie
 PT:5/5
 K:Intimidate
 A:AB$ ChangeZone | Cost$ X B | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | TgtPrompt$ Choose target artifact or creature card in an opponent's graveyard | ValidTgts$ Creature.OppOwn+cmcEQX,Artifact.OppOwn+cmcEQX | Tapped$ True | SubAbility$ DBMill | SpellDescription$ Put target artifact or creature card with mana value X from an opponent's graveyard onto the battlefield under your control tapped. Then that player mills X cards.

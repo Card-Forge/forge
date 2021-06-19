@@ -1,6 +1,6 @@
 Name:Order of Yawgmoth
 ManaCost:2 B B
-Types:Creature Zombie Knight
+Types:Creature Phyrexian Zombie Knight
 PT:2/2
 K:Fear
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage to a player, that player discards a card.

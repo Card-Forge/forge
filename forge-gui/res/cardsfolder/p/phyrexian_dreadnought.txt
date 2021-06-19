@@ -1,6 +1,6 @@
 Name:Phyrexian Dreadnought
 ManaCost:1
-Types:Artifact Creature Dreadnought
+Types:Artifact Creature Phyrexian Dreadnought
 PT:12/12
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ ChooseCreatures | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you sacrifice any number of creatures with total power 12 or greater.

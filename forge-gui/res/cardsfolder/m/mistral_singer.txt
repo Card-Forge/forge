@@ -1,6 +1,6 @@
 Name:Mistral Singer
 ManaCost:2 U
-Types:Creature Human Soldier
+Types:Creature Siren
 PT:2/2
 K:Flying
 K:Prowess

@@ -1,6 +1,6 @@
 Name:Phyrexian Metamorph
 ManaCost:3 PU
-Types:Artifact Creature Shapeshifter
+Types:Artifact Creature Phyrexian Shapeshifter
 PT:0/0
 K:ETBReplacement:Copy:DBCopy:Optional
 SVar:DBCopy:DB$ Clone | Choices$ Creature.Other,Artifact.Other | AddTypes$ Artifact | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any artifact or creature on the battlefield, except it's an artifact in addition to its other types.

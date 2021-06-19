@@ -17,6 +17,7 @@
 
 .vscode/settings.json
 .vscode/launch.json
+.factorypath
 
 
 # Ignore NetBeans config files

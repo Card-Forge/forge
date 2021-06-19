@@ -1,6 +1,6 @@
 Name:Soul of New Phyrexia
 ManaCost:6
-Types:Artifact Creature Avatar
+Types:Artifact Creature Phyrexian Avatar
 PT:6/6
 K:Trample
 A:AB$ PumpAll | Cost$ 5 | ValidCards$ Permanent.YouCtrl | KW$ Indestructible | SpellDescription$ Permanents you control gain indestructible until end of turn.

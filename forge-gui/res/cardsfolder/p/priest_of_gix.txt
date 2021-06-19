@@ -1,6 +1,6 @@
 Name:Priest of Gix
 ManaCost:2 B
-Types:Creature Human Cleric Minion
+Types:Creature Phyrexian Human Cleric Minion
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMana | TriggerDescription$ When CARDNAME enters the battlefield, add {B}{B}{B}.
 SVar:TrigMana:DB$Mana | Produced$ B | Amount$ 3

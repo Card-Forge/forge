@@ -1,6 +1,6 @@
 Name:Tethered Skirge
 ManaCost:2 B
-Types:Creature Imp
+Types:Creature Phyrexian Imp
 PT:2/2
 K:Flying
 T:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever CARDNAME becomes the target of a spell or ability, you lose 1 life.

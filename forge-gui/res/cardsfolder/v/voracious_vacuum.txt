@@ -1,6 +1,6 @@
 Name:Voracious Vacuum
 ManaCost:3
-Types:Artifact Host Creature Construct
+Types:Host Artifact Creature Construct
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPut | Host$ True | TriggerDescription$ When this creature enters the battlefield, put a +1/+1 counter on target creature.
 SVar:TrigPut:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1

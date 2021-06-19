@@ -1,6 +1,6 @@
 Name:Deathmist Raptor
 ManaCost:1 G G
-Types:Creature Dinosaur
+Types:Creature Dinosaur Beast
 PT:3/3
 K:Deathtouch
 K:Megamorph:4 G

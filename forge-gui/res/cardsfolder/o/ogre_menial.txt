@@ -1,6 +1,6 @@
 Name:Ogre Menial
 ManaCost:3 R
-Types:Creature Ogre
+Types:Creature Phyrexian Ogre
 PT:0/4
 K:Infect
 A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.

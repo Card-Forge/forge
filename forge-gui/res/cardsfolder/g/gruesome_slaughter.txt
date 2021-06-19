@@ -1,6 +1,6 @@
 Name:Gruesome Slaughter
 ManaCost:6
-Types:Instant
+Types:Sorcery
 A:SP$ AnimateAll | Cost$ 6 | ValidCards$ Creature.Colorless+YouCtrl | Abilities$ ThrowPunch | sVars$ GruesomeX | SpellDescription$ Until end of turn, colorless creatures you control gain "{T}: This creature deals damage equal to its power to target creature."
 SVar:ThrowPunch:AB$ DealDamage | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ GruesomeX | SpellDescription$ This creature deals damage equal to its power to target creature.
 SVar:GruesomeX:Count$CardPower

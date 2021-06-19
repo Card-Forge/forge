@@ -1,6 +1,6 @@
 Name:Labro Bot
 ManaCost:5
-Types:Artifact Host Creature Dog
+Types:Host Artifact Creature Dog
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | Host$ True | TriggerDescription$ When this creature enters the battlefield, return target host card or card with augment from your graveyard to your hand.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Host.YouOwn,Card.YouOwn+withAugment

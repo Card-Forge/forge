@@ -1,6 +1,6 @@
 Name:Spined Thopter
 ManaCost:2 PU
-Types:Artifact Creature Thopter
+Types:Artifact Creature Phyrexian Thopter
 PT:2/1
 K:Flying
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spined_thopter.jpg

@@ -1,6 +1,6 @@
 Name:Xantcha, Sleeper Agent
 ManaCost:1 B R
-Types:Legendary Creature Minion
+Types:Legendary Creature Phyrexian Minion
 PT:5/5
 K:CARDNAME attacks each combat if able.
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ DBChooseOpp | Layer$ Control | Description$ CARDNAME enters the battlefield under the control of an opponent of your choice.

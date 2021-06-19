@@ -1,6 +1,6 @@
 Name:Dungeon Master
 ManaCost:2 W U
-Types:Legendary Planeswalker Dungeon-Master
+Types:Legendary Planeswalker Dungeon Master
 Loyalty:1
 K:ETBReplacement:Other:RollLoyal
 SVar:RollLoyal:DB$ RollDice | Sides$ 4 | ResultSVar$ Result | SubAbility$ DBLoyalty | SpellDescription$ Add 1d4 loyalty counters to CARDNAME

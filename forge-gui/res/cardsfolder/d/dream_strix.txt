@@ -1,6 +1,6 @@
 Name:Dream Strix
 ManaCost:2 U
-Types:Creature Bird Ilusion
+Types:Creature Bird Illusion
 PT:3/2
 K:Flying
 T:Mode$ BecomesTarget | ValidTarget$ Card.Self | SourceType$ Spell | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When CARDNAME becomes the target of a spell, sacrifice it.

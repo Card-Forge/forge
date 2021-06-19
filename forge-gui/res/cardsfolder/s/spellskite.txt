@@ -1,6 +1,6 @@
 Name:Spellskite
 ManaCost:2
-Types:Artifact Creature Horror
+Types:Artifact Creature Phyrexian Horror
 PT:0/4
 A:AB$ ChangeTargets | Cost$ PU | TargetType$ Spell,Activated,Triggered | ValidTgts$ Card | DefinedMagnet$ Self | ChangeSingleTarget$ True | SpellDescription$ Change a target of target spell or ability to CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spellskite.jpg

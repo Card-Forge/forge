@@ -1,6 +1,6 @@
 Name:Demonlord Belzenlok
 ManaCost:4 B B
-Types:Legendary Creature Demon
+Types:Legendary Creature Elder Demon
 PT:6/6
 K:Flying
 K:Trample

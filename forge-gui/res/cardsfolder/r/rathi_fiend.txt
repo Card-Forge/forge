@@ -1,6 +1,6 @@
 Name:Rathi Fiend
 ManaCost:3 B
-Types:Creature Horror Mercenary
+Types:Creature Phyrexian Horror Mercenary
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, each player loses 3 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player | LifeAmount$ 3

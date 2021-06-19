@@ -1,6 +1,6 @@
 Name:Commander Greven il-Vec
 ManaCost:3 B B B
-Types:Legendary Creature Human Warrior
+Types:Legendary Creature Phyrexian Human Warrior
 PT:7/5
 K:Fear
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice a creature.

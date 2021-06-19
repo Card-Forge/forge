@@ -1,6 +1,6 @@
 Name:The Legend of Arena
 ManaCost:1 U R W
-Types:Enchantment Saga
+Types:Legendary Enchantment Saga
 Text:CARDNAME can be your commander.
 K:Saga:3:DBToken,DBToken,DBSearch
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_2_1_human_wizard | TokenOwner$ You | SubAbility$ DBDiscount | SpellDescription$ Create a 2/1 red Human Wizard creature token.

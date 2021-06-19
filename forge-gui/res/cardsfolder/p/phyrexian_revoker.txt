@@ -1,6 +1,6 @@
 Name:Phyrexian Revoker
 ManaCost:2
-Types:Artifact Creature Horror
+Types:Artifact Creature Phyrexian Horror
 PT:2/1
 K:ETBReplacement:Other:DBNameCard
 SVar:DBNameCard:DB$ NameCard | Defined$ You | ValidCards$ Card.nonLand | ValidDesc$ nonland | SpellDescription$ As CARDNAME enters the battlefield, choose a nonland card name.

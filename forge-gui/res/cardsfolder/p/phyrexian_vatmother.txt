@@ -1,6 +1,6 @@
 Name:Phyrexian Vatmother
 ManaCost:2 B B
-Types:Creature Horror
+Types:Creature Phyrexian Horror
 PT:4/5
 K:Infect
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPoison | TriggerDescription$ At the beginning of your upkeep, you get a poison counter.

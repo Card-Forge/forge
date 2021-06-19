@@ -1,6 +1,6 @@
 Name:Ascendant Evincar
 ManaCost:4 B B
-Types:Legendary Creature Vampire Noble
+Types:Legendary Creature Phyrexian Vampire Noble
 PT:3/3
 K:Flying
 S:Mode$ Continuous | Affected$ Creature.Black+Other | AddPower$ 1 | AddToughness$ 1 | Description$ Other black creatures get +1/+1.
