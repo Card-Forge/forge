@@ -361,6 +361,7 @@ b_5_5_demon_flying
 r_1_1_elemental
 u_4_4_elemental_bird_flying
 c_3_3_a_golem
+c_3_3_a_phyrexian_golem
 w_1_1_soldier
 w_1_1_spirit_flying
 c_a_treasure_sac

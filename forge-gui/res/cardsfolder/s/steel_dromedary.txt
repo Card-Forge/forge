@@ -5,8 +5,8 @@ PT:2/2
 K:ETBReplacement:Other:CamelTapped
 SVar:CamelTapped:DB$ Tap | Defined$ Self | ETB$ True | SubAbility$ DBAddCounter | SpellDescription$ CARDNAME enters the battlefield tapped with two +1/+1 counters on it.
 SVar:DBAddCounter:DB$ PutCounter | ETB$ True | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2
-S:Mode$ Continuous | Affected$ Card.Self+counters_GE1_P1P1 | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ As long as there are +1/+1 counters on CARDNAME, it doesn't untap during your untap step.
-T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigMoveCounter | TriggerDescription$ At the beginning of combat on your turn, you may move a +1/+1 counter from CARDNAME onto another target creature.
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE1_P1P1 | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ CARDNAME doesn't untap during your untap step if it has a +1/+1 counter on it.
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigMoveCounter | TriggerDescription$ At the beginning of combat on your turn, you may move a +1/+1 counter from CARDNAME onto target creature.
 SVar:TrigMoveCounter:DB$ MoveCounter | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | Source$ Self | CounterType$ P1P1 | CounterNum$ 1
 DeckHas:Ability$Counters
-Oracle:Steel Dromedary enters the battlefield tapped with two +1/+1 counters on it.\nAs long as there are +1/+1 counters on Steel Dromedary, it doesn't untap during your untap step.\nAt the beginning of combat on your turn, you may move a +1/+1 counter from Steel Dromedary onto another target creature.
+Oracle:Steel Dromedary enters the battlefield tapped with two +1/+1 counters on it.\nSteel Dromedary doesn't untap during your untap step if it has a +1/+1 counter on it.\nAt the beginning of combat on your turn, you may move a +1/+1 counter from Steel Dromedary onto target creature.

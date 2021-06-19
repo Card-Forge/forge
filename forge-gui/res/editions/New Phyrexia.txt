@@ -188,9 +188,9 @@ ScryfallCode=NPH
 51 R Xenograft
 
 [tokens]
-b_0_0_germ
-r_1_1_goblin_haste
+b_0_0_phyrexian_germ
+r_1_1_phyrexian_goblin_haste
 g_3_3_beast
-g_1_1_insect_infect
-c_3_3_a_golem
-c_1_1_a_myr
+g_1_1_phyrexian_insect_infect
+c_3_3_a_phyrexian_golem
+c_1_1_a_phyrexian_myr

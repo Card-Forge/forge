@@ -3,7 +3,7 @@ ManaCost:1 U R
 Types:Legendary Creature Efreet
 PT:2/3
 K:Flying
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChooseNumber | TriggerDescription$ Whenever CARDNAME attacks, choose a number between 1 and 5. Flip that many coins. For each flip you win, draw a card. For each flip you lose, NICKNAME deals 2 damage to you. If you won five flips this way, you may cast spells from your hand this turn without paying their mana costs.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChooseNumber | TriggerDescription$ Whenever CARDNAME attacks, choose a number between 1 and 5. Flip that many coins. For each flip you win, draw a card. For each flip you lose, Yursi deals 2 damage to you. If you won five flips this way, you may cast spells from your hand this turn without paying their mana costs.
 SVar:TrigChooseNumber:DB$ ChooseNumber | Defined$ You | Min$ 1 | Max$ 5 | AILogic$ Max | SubAbility$ FlipCoin
 SVar:FlipCoin:DB$ FlipACoin | Amount$ X | WinSubAbility$ DBDraw | LoseSubAbility$ DBDamage | RememberNumber$ Wins | SubAbility$ DBEffect
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ Wins

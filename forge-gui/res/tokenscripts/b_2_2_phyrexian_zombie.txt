@@ -1,0 +1,6 @@
+Name:Phyrexian Zombie
+ManaCost:no cost
+Types:Creature Phyrexian Zombie
+Colors:black
+PT:2/2
+Oracle:

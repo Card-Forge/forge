@@ -1,8 +1,7 @@
 Name:Lurking Evil
 ManaCost:B B B
 Types:Enchantment
-A:AB$ Animate | Cost$ PayLife<X> | Types$ Creature,Horror | Power$ 4 | Toughness$ 4 | Keywords$ Flying | RemoveCardTypes$ True | Duration$ Permanent | CostDesc$ Pay half your life, rounded up: | SpellDescription$ CARDNAME becomes a 4/4 Horror creature with flying.
+A:AB$ Animate | Cost$ PayLife<X> | Types$ Creature,Phyrexian,Horror | Power$ 4 | Toughness$ 4 | Keywords$ Flying | RemoveCardTypes$ True | Duration$ Permanent | CostDesc$ Pay half your life, rounded up: | SpellDescription$ CARDNAME becomes a 4/4 Phyrexian Horror creature with flying.
 SVar:X:Count$YourLifeTotal/HalfUp
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/lurking_evil.jpg
-Oracle:Pay half your life, rounded up: Lurking Evil becomes a 4/4 Horror creature with flying.
+Oracle:Pay half your life, rounded up: Lurking Evil becomes a 4/4 Phyrexian Horror creature with flying.

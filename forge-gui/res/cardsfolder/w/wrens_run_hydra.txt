@@ -7,4 +7,4 @@ K:Reinforce:X:X G G
 K:etbCounter:P1P1:X
 SVar:X:Count$xPaid
 DeckHas:Ability$Counters
-Oracle:Reach\nWren's Run Hydra enters the battlefield with X +1/+1 counters on it.\nReinforce X — {X}{G}{G} ({X}{G}{G}, Discard this card: Put X +1/+1 counters on target creature.)
+Oracle:Reach\nWren's Run Hydra enters the battlefield with X +1/+1 counters on it.\nReinforce X—{X}{G}{G} ({X}{G}{G}, Discard this card: Put X +1/+1 counters on target creature.)

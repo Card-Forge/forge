@@ -1,9 +1,8 @@
 Name:Maul Splicer
 ManaCost:6 G
-Types:Creature Human Artificer
+Types:Creature Phyrexian Human Artificer
 PT:1/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, enters the battlefield, create two 3/3 colorless Golem artifact creature tokens.
-SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_3_3_a_golem | TokenOwner$ You | LegacyImage$ c 3 3 a golem nph
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 3/3 colorless Phyrexian Golem artifact creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_3_3_a_phyrexian_golem | TokenOwner$ You
 S:Mode$ Continuous | Affected$ Creature.Golem+YouCtrl | AddKeyword$ Trample | Description$ Golem creatures you control have trample.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/maul_splicer.jpg
-Oracle:When Maul Splicer enters the battlefield, create two 3/3 colorless Golem artifact creature tokens.\nGolem creatures you control have trample.
+Oracle:When Maul Splicer enters the battlefield, create two 3/3 colorless Phyrexian Golem artifact creature tokens.\nGolem creatures you control have trample.

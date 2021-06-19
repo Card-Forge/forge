@@ -5,9 +5,9 @@ PT:3/2
 K:Flash
 K:Lifelink
 K:Evoke:ExileFromHand<1/Card.White+Other>
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile up to one target creature. That creature's controller gains life equal to its power.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile up to one other target creature. That creature's controller gains life equal to its power.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.Other | RememberLKI$ True | TgtPrompt$ Select up to one other target creature | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ RememberedController | LifeAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:RememberedLKI$CardPower
-Oracle:Flash\nLifelink\nWhen Solitude enters the battlefield, exile up to one target creature. That creature's controller gains life equal to its power.\nEvoke — Exile a white card from your hand.
+Oracle:Flash\nLifelink\nWhen Solitude enters the battlefield, exile up to one other target creature. That creature's controller gains life equal to its power.\nEvoke—Exile a white card from your hand.

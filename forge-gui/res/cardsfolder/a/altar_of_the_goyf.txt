@@ -1,9 +1,9 @@
 Name:Altar of the Goyf
 ManaCost:5
 Types:Tribal Artifact Lhurgoyf
-T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | Alone$ True | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature you control attacks alone, it gets +X/+X until end of turn, where X is the number of card types among cards in all graveyards.
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | Alone$ True | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature you control attacks alone, it gets +X/+X until end of turn, where X is the number of card types among cards in all graveyard.
 SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttacker | NumAtt$ +X | NumDef$ +X
 S:Mode$ Continuous | Affected$ Creature.Lhurgoyf+YouCtrl | AddKeyword$ Trample | Description$ Lhurgoyf creatures you control have trample.
 SVar:X:Count$CardTypes.Graveyard
 SVar:PlayMain1:TRUE
-Oracle:Whenever a creature you control attacks alone, it gets +X/+X until end of turn, where X is the number of card types among cards in all graveyards.\nLhurgoyf creatures you control have trample.
+Oracle:Whenever a creature you control attacks alone, it gets +X/+X until end of turn, where X is the number of card types among cards in all graveyard.\nLhurgoyf creatures you control have trample.
