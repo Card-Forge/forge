@@ -1,0 +1,13 @@
+Name:Impact Resonance
+ManaCost:1 R
+Types:Instant
+T:Mode$ TurnBegin | Execute$ ResetDamage | Static$ True
+SVar:ResetDamage:DB$ StoreSVar | SVar$ X | Type$ Number | Expression$ 0
+T:Mode$ DamageDone | ValidTarget$ Player,Permanent | Execute$ StoreDamage | Static$ True
+SVar:StoreDamage:DB$ StoreSVar | SVar$ X | Type$ Calculate | Expression$ Y | ConditionCheckSVar$ Y | ConditionSVarCompare$ GTX
+A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature | TargetMin$ MinTgts | TargetMax$ MaxTgts | NumDmg$ X | DividedAsYouChoose$ X | SpellDescription$ CARDNAME deals X damage divided as you choose among any number of target creatures, where X is the greatest amount of damage dealt by a source to a permanent or player this turn.
+SVar:X:Number$0
+SVar:Y:TriggerCount$DamageAmount
+SVar:MinTgts:SVar$X/LimitMax.1
+SVar:MaxTgts:Count$Valid Creature
+Oracle:Impact Resonance deals X damage divided as you choose among any number of target creatures, where X is the greatest amount of damage dealt by a source to a permanent or player this turn.
