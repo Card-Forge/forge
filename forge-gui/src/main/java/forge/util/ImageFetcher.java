@@ -73,7 +73,7 @@ public abstract class ImageFetcher {
                 System.err.println("Paper card not found for: " + imageKey);
                 return;
             }
-            final boolean backFace = ImageUtil.hasBackFacePicture(paperCard);
+            final boolean backFace = imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX);
             final String filename = ImageUtil.getImageKey(paperCard, backFace, true);
             destFile = new File(ForgeConstants.CACHE_CARD_PICS_DIR, filename + ".jpg");
 
