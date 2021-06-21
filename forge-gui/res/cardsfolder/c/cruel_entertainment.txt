@@ -1,0 +1,9 @@
+Name:Cruel Entertainment
+ManaCost:6 B
+Types:Sorcery
+# Turn targeted player into chosen
+A:SP$ ChoosePlayer | ValidTgts$ Player | TargetUnique$ True | Choices$ ThisTargetedPlayer | Defined$ You | SubAbility$ DBControlPlayer1 | StackDescription$ SpellDescription | SpellDescription$ Choose target player and another target player. The first player controls the second player during the second player's next turn, and the second player controls the first player during the first player's next turn.
+SVar:DBControlPlayer1:DB$ ControlPlayer | ValidTgts$ Player | TargetUnique$ True | TgtPrompt$ Choose another target player | Controller$ Player.Chosen | SubAbility$ DBControlPlayer2 | StackDescription$ None
+SVar:DBControlPlayer2:DB$ ControlPlayer | Defined$ Player.Chosen | Controller$ ParentTarget | StackDescription$ None
+AI:RemoveDeck:All
+Oracle:Choose target player and another target player. The first player controls the second player during the second player's next turn, and the second player controls the first player during the first player's next turn.

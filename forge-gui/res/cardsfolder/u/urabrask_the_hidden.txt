@@ -1,6 +1,6 @@
 Name:Urabrask the Hidden
 ManaCost:3 R R
-Types:Legendary Creature Praetor
+Types:Legendary Creature Phyrexian Praetor
 PT:4/4
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Haste | Description$ Creatures you control have haste.
 R:Event$ Moved | ValidCard$ Creature.OppCtrl | Destination$ Battlefield | ReplaceWith$ ETBTapped | ActiveZones$ Battlefield | Description$ Creatures your opponents control enter the battlefield tapped.

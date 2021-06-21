@@ -50,7 +50,6 @@ public class TokenAi extends SpellAbilityAi {
 
     @Override
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
-
         final Card source = sa.getHostCard();
         // Planeswalker-related flags
         boolean pwMinus = false;

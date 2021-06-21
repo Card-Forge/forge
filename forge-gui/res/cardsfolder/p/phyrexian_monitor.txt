@@ -1,6 +1,6 @@
 Name:Phyrexian Monitor
 ManaCost:3 B
-Types:Creature Skeleton
+Types:Creature Phyrexian Skeleton
 PT:2/2
 A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_monitor.jpg

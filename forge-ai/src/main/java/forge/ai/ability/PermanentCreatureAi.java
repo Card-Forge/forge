@@ -58,7 +58,6 @@ public class PermanentCreatureAi extends PermanentAi {
      */
     @Override
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
-
         final Card card = sa.getHostCard();
         final Game game = ai.getGame();
 

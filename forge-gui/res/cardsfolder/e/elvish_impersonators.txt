@@ -1,6 +1,6 @@
 Name:Elvish Impersonators
 ManaCost:3 G
-Types:Creature Elf
+Types:Creature Elves
 PT:*/*
 K:Flying
 K:ETBReplacement:Other:TrigRoll

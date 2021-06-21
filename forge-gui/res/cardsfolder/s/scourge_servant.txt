@@ -1,6 +1,6 @@
 Name:Scourge Servant
 ManaCost:4 B
-Types:Creature Zombie
+Types:Creature Phyrexian Zombie
 PT:3/3
 K:Infect
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scourge_servant.jpg

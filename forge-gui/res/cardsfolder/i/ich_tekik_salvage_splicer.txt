@@ -1,13 +1,13 @@
 Name:Ich-Tekik, Salvage Splicer
 ManaCost:4 G
-Types:Legendary Creature Human Artificer
+Types:Legendary Creature Phyrexian Human Artificer
 PT:1/1
 K:Partner
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 3/3 colorless Golem artifact creature token.
-SVar:TrigToken:DB$ Token | TokenScript$ c_3_3_a_golem | TokenAmount$ 1
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 3/3 colorless Phyrexian Golem artifact creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ c_3_3_a_phyrexian_golem | TokenAmount$ 1
 T:Mode$ ChangesZone | ValidCard$ Artifact | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever an artifact is put into a graveyard from the battlefield, put a +1/+1 counter on NICKNAME and a +1/+1 counter on each Golem you control.
 SVar:TrigCounter:DB$ PutCounterAll | ValidCards$ Card.Self,Golem.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
 DeckHas:Ability$Token & Ability$Counters
 DeckHints:Type$Golem
 DeckNeeds:Type$Artifact
-Oracle:When Ich-Tekik, Salvage Splicer enters the battlefield, create a 3/3 colorless Golem artifact creature token.\nWhenever an artifact is put into a graveyard from the battlefield, put a +1/+1 counter on Ich-Tekik and a +1/+1 counter on each Golem you control.\nPartner (You can have two commanders if both have partner.)
+Oracle:When Ich-Tekik, Salvage Splicer enters the battlefield, create a 3/3 colorless Phyrexian Golem artifact creature token.\nWhenever an artifact is put into a graveyard from the battlefield, put a +1/+1 counter on Ich-Tekik and a +1/+1 counter on each Golem you control.\nPartner (You can have two commanders if both have partner.)

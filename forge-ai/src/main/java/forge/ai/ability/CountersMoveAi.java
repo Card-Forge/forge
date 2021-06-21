@@ -29,7 +29,6 @@ import forge.util.collect.FCollection;
 public class CountersMoveAi extends SpellAbilityAi {
     @Override
     protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
-
         if (sa.usesTargeting()) {
             sa.resetTargets();
             if (!moveTgtAI(ai, sa)) {
@@ -83,8 +82,7 @@ public class CountersMoveAi extends SpellAbilityAi {
                                 return true;
                             }
 
-                            // something you can't block, try to reduce its
-                            // attack
+                            // something you can't block, try to reduce its attack
                             if (!ComputerUtilCard.canBeBlockedProfitably(ai, cpy)) {
                                 return true;
                             }
@@ -119,7 +117,6 @@ public class CountersMoveAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(final Player ai, SpellAbility sa, boolean mandatory) {
-
         if (sa.usesTargeting()) {
             sa.resetTargets();
 
@@ -237,7 +234,6 @@ public class CountersMoveAi extends SpellAbilityAi {
     }
 
     private boolean moveTgtAI(final Player ai, final SpellAbility sa) {
-
         final Card host = sa.getHostCard();
         final Game game = ai.getGame();
         final String type = sa.getParam("CounterType");
@@ -283,8 +279,7 @@ public class CountersMoveAi extends SpellAbilityAi {
                         // cant use substract on Copy
                         srcCardCpy.setCounters(cType, srcCardCpy.getCounters(cType) - amount);
 
-                        // do not steal a P1P1 from Undying if it would die
-                        // this way
+                        // do not steal a P1P1 from Undying if it would die this way
                         if (cType != null && cType.is(CounterEnumType.P1P1) && srcCardCpy.getNetToughness() <= 0) {
                             return srcCardCpy.getCounters(cType) > 0 || !card.hasKeyword(Keyword.UNDYING) || card.isToken();
                         }
@@ -373,8 +368,13 @@ public class CountersMoveAi extends SpellAbilityAi {
             }
 
             Card lki = CardUtil.getLKICopy(src);
-            lki.clearCounters();
-            // go for opponent when value implies debuff
+            if (cType == null) {
+                lki.clearCounters();
+            }
+            else {
+                lki.setCounters(cType, 0);
+            }
+            // go for opponent when higher value implies debuff
             if (ComputerUtilCard.evaluateCreature(src) > ComputerUtilCard.evaluateCreature(lki)) {
                 List<Card> aiList = CardLists.filterControlledBy(tgtCards, ai);
                 if (!aiList.isEmpty()) {
@@ -418,6 +418,12 @@ public class CountersMoveAi extends SpellAbilityAi {
                         sa.getTargets().add(card);
                         return true;
                     }
+                }
+                final boolean isMandatoryTrigger = (sa.isTrigger() && !sa.isOptionalTrigger())
+                        || (sa.getRootAbility().isTrigger() && !sa.getRootAbility().isOptionalTrigger());
+                if (!isMandatoryTrigger) {
+                    // no good target
+                    return false;
                 }
             }
 

@@ -1,6 +1,6 @@
 Name:Caustic Hound
 ManaCost:5 B
-Types:Creature Dog
+Types:Creature Phyrexian Dog
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, each player loses 4 life.
 SVar:TrigLoseLife:DB$LoseLife | LifeAmount$ 4 | Defined$ Player

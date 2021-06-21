@@ -1,6 +1,6 @@
 Name:Tel-Jilad Fallen
 ManaCost:2 G G
-Types:Creature Elf Warrior
+Types:Creature Phyrexian Elf Warrior
 PT:3/1
 K:Protection from artifacts
 K:Infect

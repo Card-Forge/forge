@@ -1,6 +1,6 @@
 Name:Putrefax
 ManaCost:3 G G
-Types:Creature Horror
+Types:Creature Phyrexian Horror
 PT:5/3
 K:Trample
 K:Haste

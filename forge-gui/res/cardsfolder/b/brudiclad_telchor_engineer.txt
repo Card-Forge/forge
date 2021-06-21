@@ -1,15 +1,15 @@
 Name:Brudiclad, Telchor Engineer
 ManaCost:4 U R
-Types:Legendary Artifact Creature Artificer
+Types:Legendary Artifact Creature Phyrexian Artificer
 PT:4/4
 S:Mode$ Continuous | Affected$ Creature.token+YouCtrl | AddKeyword$ Haste | Description$ Creature tokens you control have haste.
 SVar:PlayMain1:TRUE
-T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of combat on your turn, create a 2/1 blue Myr artifact creature token. Then you may choose a token you control. If you do, each other token you control becomes a copy of that token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_2_1_a_myr | TokenOwner$ You | SubAbility$ DBImprint
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of combat on your turn, create a 2/1 blue Phyrexian Myr artifact creature token. Then you may choose a token you control. If you do, each other token you control becomes a copy of that token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_2_1_a_phyrexian_myr | TokenOwner$ You | SubAbility$ DBImprint
 SVar:DBImprint:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Card.token+YouCtrl | ChoiceTitle$ Choose token you control | RememberChosen$ True | SubAbility$ MassClone | StackDescription$ None | SpellDescription$ Each other token becomes a copy of target token.
 SVar:MassClone:DB$ RepeatEach | UseImprinted$ True | RepeatCards$ Card.token+IsNotRemembered+YouCtrl | RepeatSubAbility$ DBCopy | SubAbility$ DBCleanup
 SVar:DBCopy:DB$ Clone | Defined$ Remembered | CloneTarget$ Imprinted
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHints:Type$Token
 DeckHas:Type$Token
-Oracle:Creature tokens you control have haste.\nAt the beginning of combat on your turn, create a 2/1 blue Myr artifact creature token. Then you may choose a token you control. If you do, each other token you control becomes a copy of that token.
+Oracle:Creature tokens you control have haste.\nAt the beginning of combat on your turn, create a 2/1 blue Phyrexian Myr artifact creature token. Then you may choose a token you control. If you do, each other token you control becomes a copy of that token.

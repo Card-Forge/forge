@@ -1,6 +1,6 @@
 Name:Slag Fiend
 ManaCost:R
-Types:Creature Construct
+Types:Creature Phyrexian Construct
 PT:*/*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of artifact cards in all graveyards.
 SVar:X:Count$TypeInAllYards.Artifact

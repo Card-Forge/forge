@@ -735,16 +735,16 @@ ScryfallCode=2XM
 1 Dark Depths+|2XM
 
 [tokens]
-b_0_0_germ
+b_0_0_phyrexian_germ
 b_5_5_demon_flying
 c_0_1_eldrazi_spawn_sac
 c_1_1_a_myr
 c_1_1_a_servo
 c_1_1_a_thopter_flying
 c_1_1_shapeshifter_changeling
-c_3_3_a_golem
-c_3_3_a_wurm_deathtouch
-c_3_3_a_wurm_lifelink
+c_3_3_a_phyrexian_golem
+c_3_3_a_phyrexian_wurm_deathtouch
+c_3_3_a_phyrexian_wurm_lifelink
 c_a_clue_draw
 c_a_treasure_sac
 g_0_1_plant
@@ -760,7 +760,7 @@ gw_x_x_elemental_total_creatures
 marit_lage
 tuktuk_the_returned
 u_1_1_a_thopter_flying
-u_2_1_a_myr
+u_2_1_a_phyrexian_myr
 w_1_1_human_soldier
 w_1_1_soldier
 w_2_2_cat

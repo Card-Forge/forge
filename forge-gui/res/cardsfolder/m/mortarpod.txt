@@ -8,4 +8,4 @@ SVar:Damage:AB$DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature,Player,P
 DeckHas:Ability$Token
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mortarpod.jpg
-Oracle:Living weapon (When this Equipment enters the battlefield, create a 0/0 black Germ creature token, then attach this to it.)\nEquipped creature gets +0/+1 and has "Sacrifice this creature: This creature deals 1 damage to any target."\nEquip {2}
+Oracle:Living weapon (When this Equipment enters the battlefield, create a 0/0 black Phyrexian Germ creature token, then attach this to it.)\nEquipped creature gets +0/+1 and has "Sacrifice this creature: This creature deals 1 damage to any target."\nEquip {2}

@@ -370,7 +370,7 @@ w_1_1_spirit_flying
 u_2_2_bird_flying
 u_1_1_squid_islandwalk
 u_1_1_a_thopter_flying
-b_0_0_germ
+b_0_0_phyrexian_germ
 b_2_2_zombie
 r_1_1_goblin_all_attack
 r_3_3_ogre
@@ -379,5 +379,5 @@ g_1_1_elf_warrior
 g_1_1_saproling
 g_1_1_saproling
 bg_1_1_worm
-c_x_x_a_horror
+c_x_x_a_phyrexian_horror
 c_1_1_a_myr

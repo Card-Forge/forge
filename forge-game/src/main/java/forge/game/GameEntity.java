@@ -205,7 +205,6 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     public boolean canBeAttached(final Card attach) {
         return canBeAttached(attach, false);
     }
-
     public boolean canBeAttached(final Card attach, boolean checkSBA) {
         // master mode
         if (!attach.isAttachment() || attach.isCreature() || equals(attach)) {
@@ -250,7 +249,6 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     }
 
     protected boolean canBeEnchantedBy(final Card aura) {
-
         SpellAbility sa = aura.getFirstAttachSpell();
         TargetRestrictions tgt = null;
         if (sa != null) {
@@ -263,7 +261,6 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     public boolean hasProtectionFrom(final Card source) {
         return hasProtectionFrom(source, false);
     }
-
     public abstract boolean hasProtectionFrom(final Card source, final boolean checkSBA);
 
     // Counters!
@@ -280,7 +277,6 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         Integer value = counters.get(counterName);
         return value == null ? 0 : value;
     }
-
     public final int getCounters(final CounterEnumType counterType) {
         return getCounters(CounterType.get(counterType));
     }
@@ -292,7 +288,6 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
             counters.put(counterType, num);
         }
     }
-
     public void setCounters(final CounterEnumType counterType, final Integer num) {
         setCounters(CounterType.get(counterType), num);
     }

@@ -360,12 +360,12 @@ w_2_2_cat
 w_2_2_knight_first_strike
 w_2_2_knight_vigilance
 u_2_2_drake_flying
-b_0_0_germ
+b_0_0_phyrexian_germ
 b_2_2_zombie
 r_5_5_dragon_flying
 r_3_1_elemental_shaman_haste
 g_2_2_bear
-g_4_4_beast
+g_4_4_phyrexian_beast
 g_3_3_elephant
 g_3_3_frog_lizard
 g_1_1_saproling

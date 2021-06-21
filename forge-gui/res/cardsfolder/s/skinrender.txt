@@ -1,6 +1,6 @@
 Name:Skinrender
 ManaCost:2 B B
-Types:Creature Zombie
+Types:Creature Phyrexian Zombie
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, put three -1/-1 counters on target creature.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ M1M1 | IsCurse$ True | CounterNum$ 3

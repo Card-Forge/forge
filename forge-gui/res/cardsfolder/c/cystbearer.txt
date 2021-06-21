@@ -1,6 +1,6 @@
 Name:Cystbearer
 ManaCost:2 G
-Types:Creature Beast
+Types:Creature Phyrexian Beast
 PT:2/3
 K:Infect
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cystbearer.jpg

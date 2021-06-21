@@ -6,4 +6,4 @@ K:Vigilance
 T:Mode$ DamageDoneOnce | Execute$ TrigProliferate | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Enrage — Whenever CARDNAME is dealt damage, proliferate.
 SVar:TrigProliferate:DB$Proliferate
 SVar:HasCombatEffect:TRUE
-Oracle:Enrage — Whenever Urban Daggertooth is dealt damage, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
+Oracle:Vigilance\nEnrage — Whenever Urban Daggertooth is dealt damage, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)

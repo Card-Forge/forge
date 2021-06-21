@@ -13,4 +13,4 @@ Types:Sorcery
 K:Aftermath
 A:SP$ DealDamage | Cost$ 1 R R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target creature equal to the number of lands you control.
 SVar:X:Count$TypeYouCtrl.Land
-Oracle:Ruin deals damage to target creature equal to the number of lands you control.
+Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nRuin deals damage to target creature equal to the number of lands you control.

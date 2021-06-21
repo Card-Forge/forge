@@ -1,6 +1,6 @@
 Name:Phyrexian Negator
 ManaCost:2 B
-Types:Creature Horror
+Types:Creature Phyrexian Horror
 PT:5/5
 K:Trample
 T:Mode$ DamageDoneOnce | ValidTarget$ Card.Self | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, sacrifice that many permanents.

@@ -1286,8 +1286,7 @@ public class AbilityUtils {
 
         SpellAbility s = null;
 
-        // TODO - this probably needs to be fleshed out a bit, but the basics
-        // work
+        // TODO - this probably needs to be fleshed out a bit, but the basics work
         if (defined.equals("Self") && sa instanceof SpellAbility) {
             s = (SpellAbility)sa;
         }
@@ -2730,7 +2729,6 @@ public class AbilityUtils {
             }
             return doXMath(powers.size(), expr, c, ctb);
         }
-
 
         if (sq[0].startsWith("MostProminentCreatureType")) {
             String restriction = l[0].split(" ")[1];

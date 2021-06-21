@@ -984,7 +984,7 @@ public class AttachAi extends SpellAbilityAi {
         List<GameObject> targets = new ArrayList<>();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt == null) {
-            targets = AbilityUtils.getDefinedObjects(sa.getHostCard(), sa.getParam("Defined"), sa);
+            targets = AbilityUtils.getDefinedObjects(card, sa.getParam("Defined"), sa);
         } else {
             AttachAi.attachPreference(sa, tgt, mandatory);
             targets = sa.getTargets();
@@ -1344,7 +1344,7 @@ public class AttachAi extends SpellAbilityAi {
 
         CardCollection list = null;
         if (tgt == null) {
-            list = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
+            list = AbilityUtils.getDefinedCards(attachSource, sa.getParam("Defined"), sa);
         } else {
             list = CardLists.getValidCards(aiPlayer.getGame().getCardsIn(tgt.getZone()), tgt.getValidTgts(), sa.getActivatingPlayer(), attachSource, sa);
 

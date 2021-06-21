@@ -1,6 +1,6 @@
 Name:Phyrexian Crusader
 ManaCost:1 B B
-Types:Creature Zombie Knight
+Types:Creature Phyrexian Zombie Knight
 PT:2/2
 K:First Strike
 K:Protection from red

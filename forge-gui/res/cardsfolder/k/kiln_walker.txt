@@ -1,6 +1,6 @@
 Name:Kiln Walker
 ManaCost:3
-Types:Artifact Creature Construct
+Types:Artifact Creature Phyrexian Construct
 PT:0/3
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +3/+0 until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 3

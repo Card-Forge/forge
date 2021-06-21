@@ -68,7 +68,6 @@ import forge.util.Aggregates;
 public class ControlGainAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(final Player ai, final SpellAbility sa) {
-
         final List<String> lose = Lists.newArrayList();
 
         if (sa.hasParam("LoseControl")) {

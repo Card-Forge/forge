@@ -3,6 +3,7 @@ package forge.game.ability.effects;
 import static forge.util.TextUtil.toManaString;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -61,34 +62,51 @@ public class ManaEffect extends SpellAbilityEffect {
                 String[] colorsNeeded = express.isEmpty() ? null : express.split(" ");
                 boolean differentChoice = abMana.getOrigProduced().contains("Different");
                 ColorSet fullOptions = colorOptions;
-                for (int nMana = 0; nMana < amount; nMana++) {
-                    String choice = "";
-                    if (colorsNeeded != null && colorsNeeded.length > nMana) { // select from express choices if possible
-                        colorOptions = ColorSet
-                                .fromMask(fullOptions.getColor() & ManaAtom.fromName(colorsNeeded[nMana]));
-                    }
-                    if (colorOptions.isColorless() && colorsProduced.length > 0) {
-                        // If we just need generic mana, no reason to ask the controller for a choice,
-                        // just use the first possible color.
-                        choice = colorsProduced[differentChoice ? nMana : 0];
-                    } else {
-                        byte chosenColor = p.getController().chooseColor(Localizer.getInstance().getMessage("lblSelectManaProduce"), sa,
-                                differentChoice && (colorsNeeded == null || colorsNeeded.length <= nMana) ? fullOptions : colorOptions);
-                        if (chosenColor == 0)
-                            throw new RuntimeException("ManaEffect::resolve() /*combo mana*/ - " + p + " color mana choice is empty for " + card.getName());
-
-                        if (differentChoice) {
-                            fullOptions = ColorSet.fromMask(fullOptions.getColor() - chosenColor);
+                // Use specifyManaCombo if possible
+                if (colorsNeeded == null && amount > 1 && !sa.hasParam("TwoEach")) {
+                    Map<Byte, Integer> choices = p.getController().specifyManaCombo(sa, colorOptions, amount, differentChoice);
+                    for (Map.Entry<Byte, Integer> e : choices.entrySet()) {
+                        Byte chosenColor = e.getKey();
+                        String choice = MagicColor.toShortString(chosenColor);
+                        Integer count = e.getValue();
+                        while (count > 0) {
+                            if (choiceString.length() > 0) {
+                                choiceString.append(" ");
+                            }
+                            choiceString.append(choice);
+                            --count;
                         }
-                        choice = MagicColor.toShortString(chosenColor);
                     }
+                } else {
+                    for (int nMana = 0; nMana < amount; nMana++) {
+                        String choice = "";
+                        if (colorsNeeded != null && colorsNeeded.length > nMana) { // select from express choices if possible
+                            colorOptions = ColorSet
+                                    .fromMask(fullOptions.getColor() & ManaAtom.fromName(colorsNeeded[nMana]));
+                        }
+                        if (colorOptions.isColorless() && colorsProduced.length > 0) {
+                            // If we just need generic mana, no reason to ask the controller for a choice,
+                            // just use the first possible color.
+                            choice = colorsProduced[differentChoice ? nMana : 0];
+                        } else {
+                            byte chosenColor = p.getController().chooseColor(Localizer.getInstance().getMessage("lblSelectManaProduce"), sa,
+                                    differentChoice && (colorsNeeded == null || colorsNeeded.length <= nMana) ? fullOptions : colorOptions);
+                            if (chosenColor == 0)
+                                throw new RuntimeException("ManaEffect::resolve() /*combo mana*/ - " + p + " color mana choice is empty for " + card.getName());
 
-                    if (nMana > 0) {
-                        choiceString.append(" ");
-                    }
-                    choiceString.append(choice);
-                    if (sa.hasParam("TwoEach")) {
-                        choiceString.append(" ").append(choice);
+                            if (differentChoice) {
+                                fullOptions = ColorSet.fromMask(fullOptions.getColor() - chosenColor);
+                            }
+                            choice = MagicColor.toShortString(chosenColor);
+                        }
+
+                        if (nMana > 0) {
+                            choiceString.append(" ");
+                        }
+                        choiceString.append(choice);
+                        if (sa.hasParam("TwoEach")) {
+                            choiceString.append(" ").append(choice);
+                        }
                     }
                 }
 
@@ -128,7 +146,7 @@ public class ManaEffect extends SpellAbilityEffect {
 
                 if (type.equals("EnchantedManaCost")) {
                     Card enchanted = card.getEnchantingCard();
-                    if (enchanted == null ) 
+                    if (enchanted == null )
                         continue;
 
                     StringBuilder sb = new StringBuilder();
@@ -234,7 +252,7 @@ public class ManaEffect extends SpellAbilityEffect {
      *            a {@link forge.card.spellability.AbilityMana} object.
      * @param af
      *            a {@link forge.game.ability.AbilityFactory} object.
-     * 
+     *
      * @return a {@link java.lang.String} object.
      */
 

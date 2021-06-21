@@ -23,7 +23,6 @@ public class SacrificeAi extends SpellAbilityAi {
 
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-
         return sacrificeTgtAI(ai, sa);
     }
 

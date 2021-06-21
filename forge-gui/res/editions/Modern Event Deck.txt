@@ -38,4 +38,4 @@ ScryfallCode=MD1
 [tokens]
 w_1_1_soldier
 w_1_1_spirit_flying
-c_1_1_a_myr
+c_1_1_a_phyrexian_myr

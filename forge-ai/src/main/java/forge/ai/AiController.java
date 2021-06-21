@@ -1819,7 +1819,7 @@ public class AiController {
         // AI would play everything. But limits to one copy of (Leyline of Singularity) and (Gemstone Caverns)
         
         List<SpellAbility> result = Lists.newArrayList();
-        for(SpellAbility sa : usableFromOpeningHand) {
+        for (SpellAbility sa : usableFromOpeningHand) {
             // Is there a better way for the AI to decide this?
             if (doTrigger(sa, false)) {
                 result.add(sa);
@@ -1830,7 +1830,7 @@ public class AiController {
         SpellAbility saGemstones = null;
 
         List<SpellAbility> toRemove = Lists.newArrayList();
-        for(SpellAbility sa : result) {
+        for (SpellAbility sa : result) {
             String srcName = sa.getHostCard().getName();
             if ("Gemstone Caverns".equals(srcName)) {
                 if (saGemstones == null)
@@ -2227,11 +2227,11 @@ public class AiController {
     
     private boolean checkAiSpecificRestrictions(final SpellAbility sa) {
         // AI-specific restrictions specified as activation parameters in spell abilities
-        
+
         if (sa.hasParam("AILifeThreshold")) {
             return player.getLife() > Integer.parseInt(sa.getParam("AILifeThreshold"));
         }
-        
+
         return true;
     }
 

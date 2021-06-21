@@ -5,6 +5,7 @@ Command Tower | https://downloads.cardforge.org/decks/commandtower.zip
 Commander Clash | https://downloads.cardforge.org/decks/commanderclash.zip
 Commander On a Budget | https://downloads.cardforge.org/decks/commanderonabudget.zip
 Commander VS | https://downloads.cardforge.org/decks/commandervs.zip
+Community Cup | https://downloads.cardforge.org/decks/communitycup-commander.zip
 Current Commander 1v1 Metagame | https://downloads.cardforge.org/decks/currentcommander1v1metagame.zip
 Current Commander Metagame | https://downloads.cardforge.org/decks/currentcommandermetagame.zip
 Daily Deck List | https://downloads.cardforge.org/decks/dailydecks-commander.zip

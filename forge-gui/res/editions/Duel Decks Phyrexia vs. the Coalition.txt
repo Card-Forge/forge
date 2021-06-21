@@ -81,5 +81,5 @@ ScryfallCode=DDE
 
 [tokens]
 hornet
-b_x_x_minion
+b_x_x_phyrexian_minion
 g_1_1_saproling

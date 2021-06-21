@@ -322,7 +322,7 @@ c_1_1_shapeshifter_changeling
 w_4_4_angel_flying
 w_2_2_cat
 w_1_1_soldier
-u_2_1_a_myr
+u_2_1_a_phyrexian_myr
 u_1_1_a_thopter_flying
 b_2_2_zombie
 r_0_2_dragon_egg_defender_hatches_dragon
@@ -337,7 +337,7 @@ bg_1_1_worm
 c_a_clue_draw
 c_4_4_a_construct
 c_6_12_a_construct_trample
-c_x_x_a_horror
+c_x_x_a_phyrexian_horror
 c_1_1_a_myr
 c_1_1_a_servo
 c_1_1_a_thopter_flying

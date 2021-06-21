@@ -14,7 +14,8 @@ import unidecode
 
 NAME_STR = 'Name:'
 ORACLE_STR = 'Oracle:'
-ALTERATE_STR = 'AlternateMode:'
+ALTERNATE_STR = 'AlternateMode:'
+ALTERNATE_MARK = 'ALTERNATE'
 ALTERNATE_SEPARATER = ' // '
 tools_folder = os.path.dirname(os.path.realpath(__file__))
 
@@ -64,13 +65,16 @@ def read_card_script(cardfile):
     oracle_texts = []
     lines = []
     line_num = 0
+    alternate_line = 0
     alternate_mode = ''
     for line in cardfile.readlines():
         line = line.strip()
         if line.startswith(NAME_STR):
             names.append(line[len(NAME_STR):])
-        elif line.startswith(ALTERATE_STR):
-            alternate_mode = line[len(ALTERATE_STR):]
+        elif line.startswith(ALTERNATE_STR):
+            alternate_mode = line[len(ALTERNATE_STR):]
+        elif line.startswith(ALTERNATE_MARK):
+            alternate_line = line_num
         elif line.startswith(ORACLE_STR):
             oracle_texts.append([line_num, line[len(ORACLE_STR):]])
             lines.append('')
@@ -79,7 +83,7 @@ def read_card_script(cardfile):
         lines.append(line + '\n')
         line_num += 1
     cardfile.close()
-    return names, lines, oracle_texts, alternate_mode
+    return names, lines, oracle_texts, alternate_mode, alternate_line
 
 
 def write_card_script(cardfile, lines, oracle_texts):
@@ -95,20 +99,33 @@ def write_card_script(cardfile, lines, oracle_texts):
     cardfile.close()
 
 
-def update_oracle(name, lines, oracle_text, new_oracle, is_planeswalker):
+def update_oracle(name, lines, oracle_text, new_oracle, type_line, alternate_line):
+    updated = False
+    # Update type line first
+    for i, line in enumerate(lines):
+        if i <= alternate_line:
+            continue
+        if line.startswith('Types:'):
+            if line[6:].rstrip() != type_line:
+                lines[i] = 'Types:' + type_line + '\n'
+                updated = True
+            break
+
+    is_planeswalker = type_line.find('Planeswalker') != -1
     if is_planeswalker:
         new_oracle = re.sub(r'([\+−]?[0-9X]+):', r'[\1]:', new_oracle)
     new_oracle = new_oracle.replace('\n', '\\n')
     if oracle_text[1] == new_oracle:
-        return False
+        return updated
 
     oracle_lines = oracle_text[1].split('\\n')
     new_lines = new_oracle.split('\\n')
     nickname = name.split(', ')[0]
     oracle_text[1] = new_oracle
+    updated = True
 
     if len(oracle_lines) != len(new_lines):
-        return True
+        return updated
 
     # Also replace descriptions
     for org_line, new_line in zip(oracle_lines, new_lines):
@@ -134,13 +151,13 @@ def update_oracle(name, lines, oracle_text, new_oracle, is_planeswalker):
             if line.find(org_line) != -1:
                 lines[i] = line.replace(org_line, new_line)
 
-    return True
+    return updated
 
 def update_card_script(dirname, filename, oracle_cards, logfile):
     file = open(os.path.join(dirname, filename), 'r', encoding='utf8')
     clean_name = filename.replace('.txt', '')
 
-    names, lines, oracle_texts, alternate_mode = read_card_script(file)
+    names, lines, oracle_texts, alternate_mode, alternate_line = read_card_script(file)
     formal_name = formalize_name(names)
     if clean_name != formal_name:
         logfile.write(f'Rename "{clean_name}" => "{formal_name}"\n')
@@ -162,24 +179,29 @@ def update_card_script(dirname, filename, oracle_cards, logfile):
 
     card = oracle_cards[cardname]
     if len(names) == 1:
-        is_planeswalker = card['type_line'].find('Planeswalker') != -1
+        type_line = card['type_line'].replace(' — ', ' ')
         is_vanguard = card['type_line'].find('Vanguard') != -1
         new_oracle = card['oracle_text']
         if is_vanguard:
             new_oracle = 'Hand {0}, life {1}\n'.format(card['hand_modifier'], card['life_modifier']) + new_oracle
-        oracle_updated = update_oracle(names[0], lines, oracle_texts[0], new_oracle, is_planeswalker)
+        oracle_updated = update_oracle(names[0], lines, oracle_texts[0], new_oracle, type_line, 0)
     elif len(names) == 2:
         if alternate_mode == 'Meld':
+            type_line = card['type_line'].replace(' — ', ' ')
             new_oracle = card['oracle_text']
-            oracle_updated = update_oracle(names[0], lines, oracle_texts[0], new_oracle, False)
+            oracle_updated = update_oracle(names[0], lines, oracle_texts[0], new_oracle, type_line, 0)
             card = oracle_cards[names[1]]
+            type_line = card['type_line'].replace(' — ', ' ')
             new_oracle = card['oracle_text']
-            oracle_updated = oracle_updated | update_oracle(names[1], lines, oracle_texts[1], new_oracle, False)
+            oracle_updated = oracle_updated | update_oracle(names[1], lines, oracle_texts[1], new_oracle, type_line, alternate_line)
         else:
             for i, face in enumerate(card['card_faces']):
-                is_planeswalker = face['type_line'].find('Planeswalker') != -1
+                type_line = face['type_line'].replace(' — ', ' ')
                 new_oracle = face['oracle_text']
-                oracle_updated = oracle_updated | update_oracle(names[i], lines, oracle_texts[i], new_oracle, is_planeswalker)
+                if i == 0:
+                    oracle_updated = oracle_updated | update_oracle(names[i], lines, oracle_texts[i], new_oracle, type_line, 0)
+                else:
+                    oracle_updated = oracle_updated | update_oracle(names[i], lines, oracle_texts[i], new_oracle, type_line, alternate_line)
 
 
     if not oracle_updated:

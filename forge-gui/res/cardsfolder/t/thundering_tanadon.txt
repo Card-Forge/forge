@@ -1,6 +1,6 @@
 Name:Thundering Tanadon
 ManaCost:4 PG PG
-Types:Artifact Creature Beast
+Types:Artifact Creature Phyrexian Beast
 PT:5/4
 K:Trample
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thundering_tanadon.jpg

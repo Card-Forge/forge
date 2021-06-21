@@ -1,6 +1,6 @@
 Name:Flamescroll Celebrant
 ManaCost:1 R
-Types:Creature Human Cleric
+Types:Creature Human Shaman
 PT:2/1
 T:Mode$ AbilityCast | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ Whenever an opponent activates an ability that isn't a mana ability, CARDNAME deals 1 damage to that player.
 SVar:TrigDmg:DB$ DealDamage | NumDmg$ 1 | Defined$ TriggeredActivator

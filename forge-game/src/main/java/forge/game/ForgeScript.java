@@ -125,7 +125,6 @@ public class ForgeScript {
 
     }
 
-
     public static boolean spellAbilityHasProperty(SpellAbility sa, String property, Player sourceController,
             Card source, CardTraitBase spellAbility) {
         if (property.equals("ManaAbility")) {

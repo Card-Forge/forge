@@ -788,7 +788,6 @@ public class ComputerUtilMana {
                 String manaProduced = ignoreColor || ignoreType ? MagicColor.toShortString(toPay.getColorMask())
                         : predictManafromSpellAbility(saPayment, ai, toPay);
 
-                // System.out.println(manaProduced);
                 payMultipleMana(cost, manaProduced, ai);
 
                 // remove from available lists
@@ -1072,7 +1071,6 @@ public class ComputerUtilMana {
             getComboManaChoice(ai, saPayment, sa, cost);
         }
         else if (saPayment.getApi() == ApiType.ManaReflected) {
-            //System.out.println("Evaluate reflected mana of: " + saPayment.getHostCard());
             Set<String> reflected = CardUtil.getReflectableManaColors(saPayment);
 
             for (byte c : MagicColor.WUBRG) {
@@ -1281,7 +1279,7 @@ public class ComputerUtilMana {
         final AbilityManaPart abMana = manaAb.getManaPart();
 
         if (abMana.isComboMana()) {
-            int amount = manaAb.hasParam("Amount") ? AbilityUtils.calculateAmount(source, manaAb.getParam("Amount"), saRoot) : 1;
+            int amount = manaAb.hasParam("Amount") ? AbilityUtils.calculateAmount(source, manaAb.getParam("Amount"), manaAb) : 1;
             final ManaCostBeingPaid testCost = new ManaCostBeingPaid(cost);
             final String[] comboColors = abMana.getComboColors().split(" ");
             for (int nMana = 1; nMana <= amount; nMana++) {
@@ -1301,7 +1299,7 @@ public class ComputerUtilMana {
                 if (!testCost.isPaid()) {
                     // Loop over combo colors
                     for (String color : comboColors) {
-                        if (satisfiesColorChoice(abMana, choiceString, choice) && testCost.isAnyPartPayableWith(ManaAtom.fromName(color), ai.getManaPool())) {
+                        if (satisfiesColorChoice(abMana, choiceString, choice) && testCost.needsColor(ManaAtom.fromName(color), ai.getManaPool())) {
                             payMultipleMana(testCost, color, ai);
                             if (nMana != 1) {
                                 choiceString.append(" ");

@@ -64,11 +64,9 @@ public class CountersPutAi extends SpellAbilityAi {
      */
     @Override
     protected boolean willPayCosts(Player ai, SpellAbility sa, Cost cost, Card source) {
-
         final String type = sa.getParam("CounterType");
         final String aiLogic = sa.getParamOrDefault("AILogic", "");
 
-        // TODO Auto-generated method stub
         if (!super.willPayCosts(ai, sa, cost, source)) {
             return false;
         }
@@ -225,8 +223,7 @@ public class CountersPutAi extends SpellAbilityAi {
                 }
 
                 if (sa.canTarget(ai)) {
-                    // don't target itself when its forced to add poison
-                    // counters too
+                    // don't target itself when its forced to add poison counters too
                     if (!ai.getCounters().isEmpty()) {
                         if (!eachExisting || ai.getPoisonCounters() < 5) {
                             sa.getTargets().add(ai);
@@ -480,7 +477,6 @@ public class CountersPutAi extends SpellAbilityAi {
             list = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-
                     // don't put the counter on the dead creature
                     if (sacSelf && c.equals(source)) {
                         return false;
@@ -493,6 +489,8 @@ public class CountersPutAi extends SpellAbilityAi {
                 Card sacTarget = ComputerUtil.getCardPreference(ai, source, "SacCost", list);
                 // this card is planned to be sacrificed during cost payment, so don't target it
                 // (otherwise the AI can cheat by activating this SA and not paying the sac cost, e.g. Extruder)
+                // TODO needs update if amount > 1 gets printed, 
+                // maybe also check putting the counter on that exact creature is more important than sacrificing it (though unlikely?)
                 list.remove(sacTarget);
             }
 
@@ -617,7 +615,7 @@ public class CountersPutAi extends SpellAbilityAi {
             // Instant +1/+1
             if (type.equals("P1P1") && !SpellAbilityAi.isSorcerySpeed(sa)) {
                 if (!(ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN) && abCost.isReusuableResource())) {
-                    return false;   // only if next turn and cost is reusable
+                    return false; // only if next turn and cost is reusable
                 }
             }
         }

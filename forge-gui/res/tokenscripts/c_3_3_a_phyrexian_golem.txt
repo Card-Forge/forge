@@ -1,0 +1,5 @@
+Name:Phyrexian Golem
+ManaCost:no cost
+PT:3/3
+Types:Artifact Creature Phyrexian Golem
+Oracle:

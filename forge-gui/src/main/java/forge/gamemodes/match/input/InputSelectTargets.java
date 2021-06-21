@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
 import forge.game.GameEntity;
@@ -129,10 +128,10 @@ public final class InputSelectTargets extends InputSyncronizedBase {
                 "(Targeting ERROR)", "");
         showMessage(message, sa.getView());
 
-        if (sa.isDividedAsYouChoose() && sa.getMinTargets() == 0 && sa.getTargets().size() == 0) {
+        if ((divisionValues != null && !divisionValues.isEmpty()) && sa.getMinTargets() == 0 && sa.getTargets().size() == 0) {
             // extra logic for Divided with min targets = 0, should only work if num targets are 0 too
             getController().getGui().updateButtons(getOwner(), true, true, false);
-        } else if (!sa.isMinTargetChosen() || sa.isDividedAsYouChoose()) {
+        } else if (!sa.isMinTargetChosen() || (divisionValues != null && !divisionValues.isEmpty())){
             // If reached Minimum targets, enable OK button
             if (mandatory && tgt.hasCandidates(sa, true)) {
                 // Player has to click on a target
@@ -280,7 +279,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             return false;
         }
 
-        if (sa.isDividedAsYouChoose()) {
+        if ((divisionValues != null && !divisionValues.isEmpty())) {
             Boolean val = onDividedAsYouChoose(card);
             if (val != null) {
                 return val;
@@ -322,7 +321,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             return;
         }
 
-        if (sa.isDividedAsYouChoose()) {
+        if ((divisionValues != null && !divisionValues.isEmpty())) {
             Boolean val = onDividedAsYouChoose(player);
             if (val != null) {
                 return;
@@ -332,57 +331,25 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     }
 
     protected Boolean onDividedAsYouChoose(GameObject go) {
-        if (divisionValues != null) {
-            if (divisionValues.isEmpty()) {
-                return false;
-            }
-            String apiBasedMessage = "Distribute how much to ";
-            if (sa.getApi() == ApiType.DealDamage) {
-                apiBasedMessage = "Select how much damage to deal to ";
-            }
-            else if (sa.getApi() == ApiType.PreventDamage) {
-                apiBasedMessage = "Select how much damage to prevent to ";
-            }
-            else if (sa.getApi() == ApiType.PutCounter) {
-                apiBasedMessage = "Select how many counters to distribute to ";
-            }
-            final StringBuilder sb = new StringBuilder();
-            sb.append(apiBasedMessage);
-            sb.append(go.toString());
-            final Integer chosen = getController().getGui().oneOrNone(sb.toString(), Lists.newArrayList(divisionValues));
-            if (chosen == null) {
-                return true; //still return true since there was a valid choice
-            }
-            divisionValues.remove(chosen);
-            sa.addDividedAllocation(go, chosen);
-        } else {
-            final int stillToDivide = sa.getStillToDivide();
-            int allocatedPortion = 0;
-            // allow allocation only if the max targets isn't reached and there are more candidates
-            if ((sa.getTargets().size() + 1 < sa.getMaxTargets()) && (tgt.getNumCandidates(sa, true) - 1 > 0) && stillToDivide > 1) {
-                final ImmutableList.Builder<Integer> choices = ImmutableList.builder();
-                for (int i = 1; i <= stillToDivide; i++) {
-                    choices.add(Integer.valueOf(i));
-                }
-                String apiBasedMessage = "Distribute how much to ";
-                if (sa.getApi() == ApiType.DealDamage) {
-                    apiBasedMessage = "Select how much damage to deal to ";
-                } else if (sa.getApi() == ApiType.PreventDamage) {
-                    apiBasedMessage = "Select how much damage to prevent to ";
-                }
-                final StringBuilder sb = new StringBuilder();
-                sb.append(apiBasedMessage);
-                sb.append(go.toString());
-                final Integer chosen = getController().getGui().oneOrNone(sb.toString(), choices.build());
-                if (null == chosen) {
-                    return true;
-                }
-                allocatedPortion = chosen;
-            } else { // otherwise assign the rest of the damage/protection
-                allocatedPortion = stillToDivide;
-            }
-            sa.addDividedAllocation(go, allocatedPortion);
+        String apiBasedMessage = "Distribute how much to ";
+        if (sa.getApi() == ApiType.DealDamage) {
+            apiBasedMessage = "Select how much damage to deal to ";
         }
+        else if (sa.getApi() == ApiType.PreventDamage) {
+            apiBasedMessage = "Select how much damage to prevent to ";
+        }
+        else if (sa.getApi() == ApiType.PutCounter) {
+            apiBasedMessage = "Select how many counters to distribute to ";
+        }
+        final StringBuilder sb = new StringBuilder();
+        sb.append(apiBasedMessage);
+        sb.append(go.toString());
+        final Integer chosen = getController().getGui().oneOrNone(sb.toString(), Lists.newArrayList(divisionValues));
+        if (chosen == null) {
+            return true; //still return true since there was a valid choice
+        }
+        divisionValues.remove(chosen);
+        sa.addDividedAllocation(go, chosen);
         return null;
     }
 
@@ -419,7 +386,8 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     }
 
     private boolean hasAllTargets() {
-        return sa.isMaxTargetChosen() || (sa.isDividedAsYouChoose() && sa.getStillToDivide() == 0);
+        return sa.isMaxTargetChosen() || (divisionValues != null && sa.getStillToDivide() == 0)
+            || (sa.isDividedAsYouChoose() && sa.getTargets().size() == sa.getStillToDivide());
     }
 
     @Override

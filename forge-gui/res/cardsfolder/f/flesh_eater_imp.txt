@@ -1,6 +1,6 @@
 Name:Flesh-Eater Imp
 ManaCost:3 B
-Types:Creature Imp
+Types:Creature Phyrexian Imp
 PT:2/2
 K:Flying
 K:Infect

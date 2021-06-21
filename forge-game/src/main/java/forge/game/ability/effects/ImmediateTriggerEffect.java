@@ -58,8 +58,8 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
         Card lki = CardUtil.getLKICopy(gameCard);
         lki.clearControllers();
         lki.setOwner(sa.getActivatingPlayer());
-        // if this trigger is part of ETBReplacement it shouldn't run with LKI from incomplete zone change (Wall of Stolen Identity)
-        final Card trigHost = sa.getRootAbility().getReplacementEffect() != null && sa.getRootAbility().getReplacementEffect().getMode().equals(ReplacementType.Moved) ? gameCard : lki;
+        // if this trigger is part of ETBReplacement it shouldn't run with LKI from incomplete zone change (Mimic Vat + Wall of Stolen Identity)
+        final Card trigHost = sa.getRootAbility().getReplacementEffect() != null && sa.getRootAbility().getReplacementEffect().getMode().equals(ReplacementType.Moved) && gameCard.getZone() == null ? gameCard : lki;
         final Trigger immediateTrig = TriggerHandler.parseTrigger(mapParams, trigHost, sa.isIntrinsic(), null);
         immediateTrig.setSpawningAbility(sa.copy(lki, sa.getActivatingPlayer(), true));
 

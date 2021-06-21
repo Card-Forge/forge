@@ -1,6 +1,6 @@
 Name:Ichor Rats
 ManaCost:1 B B
-Types:Creature Rat
+Types:Creature Phyrexian Rat
 PT:2/1
 K:Infect
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPoison | TriggerDescription$ When CARDNAME enters the battlefield, each player gets a poison counter.

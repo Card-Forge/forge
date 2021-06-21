@@ -4,7 +4,7 @@ Types:Artifact Land
 K:CARDNAME enters the battlefield tapped.
 K:Modular:1
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ Mana | Cost$ T | Produced$ Any | RestrictValid$ Spell.Artifact,Activated.Artifact | SpellDescription$ Add {C}. Spend this mana only to cast artifact spells or activate abilities of artifacts.
+A:AB$ Mana | Cost$ T | Produced$ Any | RestrictValid$ Spell.Artifact,Activated.Artifact | SpellDescription$ Add one mana of any color. Spend this mana only to cast artifact spells or activate abilities of artifacts.
 DeckHints:Type$Artifact
 DeckHas:Ability$Counters
-Oracle:Power Depot enters the battlefield tapped.\n{T}: Add {C}.\n{T}: Add {C}. Spend this mana only to cast artifact spells or activate abilities of artifacts.\nModular 1 (This land enters the battlefield with a +1/+1 counter on it. When it is put into a graveyard from the battlefield, you may put its +1/+1 counters on target artifact creature.)
+Oracle:Power Depot enters the battlefield tapped.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast artifact spells or activate abilities of artifacts.\nModular 1

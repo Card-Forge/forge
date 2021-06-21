@@ -155,7 +155,7 @@ w_1_1_kor_ally
 g_1_1_saproling
 g_2_2_elemental
 g_4_4_beast
-b_0_0_germ
+b_0_0_phyrexian_germ
 b_1_1_faerie_rogue_flying
 b_1_1_goblin_rogue
 b_1_1_rat

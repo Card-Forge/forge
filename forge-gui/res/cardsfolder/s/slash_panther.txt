@@ -1,6 +1,6 @@
 Name:Slash Panther
 ManaCost:4 PR
-Types:Artifact Creature Cat
+Types:Artifact Creature Phyrexian Cat
 PT:4/2
 K:Haste
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slash_panther.jpg

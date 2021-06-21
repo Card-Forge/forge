@@ -1,6 +1,6 @@
 Name:Chancellor of the Annex
 ManaCost:4 W W W
-Types:Creature Angel
+Types:Creature Phyrexian Angel
 PT:5/6
 K:Flying
 K:MayEffectFromOpeningHand:RevealCard

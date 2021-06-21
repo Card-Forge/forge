@@ -1,6 +1,6 @@
 Name:Invader Parasite
 ManaCost:3 R R
-Types:Creature Insect
+Types:Creature Phyrexian Insect
 PT:3/2
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ Imprint — When CARDNAME enters the battlefield, exile target land.
 SVar:TrigExile:DB$ChangeZone | Imprint$ True | ValidTgts$ Land | TgtPrompt$ Select target land | Origin$ Battlefield | Destination$ Exile

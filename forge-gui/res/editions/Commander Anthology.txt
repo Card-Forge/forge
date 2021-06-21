@@ -333,7 +333,7 @@ ScryfallCode=CMA
 w_1_1_kithkin_soldier
 w_2_2_knight_vigilance
 w_1_1_spirit_flying
-b_0_0_germ
+b_0_0_phyrexian_germ
 b_2_2_zombie
 r_5_5_dragon_flying
 g_3_3_beast

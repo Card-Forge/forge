@@ -39,6 +39,7 @@ import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetChoices;
@@ -52,10 +53,9 @@ public class DamageDealAi extends DamageAiBase {
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         final String damage = sa.getParam("NumDmg");
-        int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
-        final String logic = sa.getParam("AILogic");
-
         Card source = sa.getHostCard();
+        int dmg = AbilityUtils.calculateAmount(source, damage, sa);
+        final String logic = sa.getParam("AILogic");
 
         if ("MadSarkhanDigDmg".equals(logic)) {
             return SpecialCardAi.SarkhanTheMad.considerDig(ai, sa);
@@ -105,7 +105,7 @@ public class DamageDealAi extends DamageAiBase {
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
 
         final String damage = sa.getParam("NumDmg");
-        int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
+        int dmg = AbilityUtils.calculateAmount(source, damage, sa);
 
         if (damage.equals("X")) {
             if (sa.getSVar(damage).equals("Count$xPaid") || sourceName.equals("Crater's Claws")) {
@@ -531,7 +531,7 @@ public class DamageDealAi extends DamageAiBase {
                 && "P1P1".equals(sa.getParent().getParam("CounterType"))) {
             // assuming the SA parent is of PutCounter type. Perhaps it's possible to predict counter multipliers here somehow?
             final String amountStr = sa.getParent().getParamOrDefault("CounterNum", "1");
-            final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
+            final int amount = AbilityUtils.calculateAmount(source, amountStr, sa);
             dmg += amount;
         }
 
@@ -844,7 +844,7 @@ public class DamageDealAi extends DamageAiBase {
         // this is for Triggered targets that are mandatory
         final boolean noPrevention = sa.hasParam("NoPrevention");
         final boolean divided = sa.isDividedAsYouChoose();
-        final Player opp = ai.getWeakestOpponent();
+        PlayerCollection opps = ai.getOpponents();
 
         while (sa.canAddMoreTarget()) {
             if (tgt.canTgtPlaneswalker()) {
@@ -872,13 +872,17 @@ public class DamageDealAi extends DamageAiBase {
                 }
             }
 
-            if (sa.canTarget(opp)) {
-                if (sa.getTargets().add(opp)) {
-                    if (divided) {
-                        sa.addDividedAllocation(opp, dmg);
-                        break;
+            if (!opps.isEmpty()) {
+                Player opp = opps.getFirst();
+                opps.remove(opp);
+                if (sa.canTarget(opp)) {
+                    if (sa.getTargets().add(opp)) {
+                        if (divided) {
+                            sa.addDividedAllocation(opp, dmg);
+                            break;
+                        }
+                        continue;
                     }
-                    continue;
                 }
             }
 

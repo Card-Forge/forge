@@ -163,7 +163,7 @@ c_0_1_eldrazi_spawn_sac
 w_2_2_knight_vigilance
 w_1_1_kor_soldier
 b_5_5_demon_flying
-b_0_0_germ
+b_0_0_phyrexian_germ
 b_2_2_zombie
 r_5_5_dragon_flying
 g_4_4_beast

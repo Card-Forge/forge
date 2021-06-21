@@ -1,6 +1,6 @@
 Name:Psychosis Crawler
 ManaCost:5
-Types:Artifact Creature Horror
+Types:Artifact Creature Phyrexian Horror
 PT:*/*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of cards in your hand.
 SVar:X:Count$InYourHand

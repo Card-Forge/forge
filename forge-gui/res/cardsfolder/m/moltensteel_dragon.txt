@@ -1,6 +1,6 @@
 Name:Moltensteel Dragon
 ManaCost:4 PR PR
-Types:Artifact Creature Dragon
+Types:Artifact Creature Phyrexian Dragon
 PT:4/4
 K:Flying
 A:AB$ Pump | Cost$ PR | Defined$ Self | NumAtt$ 1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.

@@ -1,6 +1,6 @@
 Name:Tormentor Exarch
 ManaCost:3 R
-Types:Creature Cleric
+Types:Creature Phyrexian Cleric
 PT:2/2
 T:Mode$ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
 SVar:TrigChoose:DB$ Charm | Choices$ DBPump,DBCurse

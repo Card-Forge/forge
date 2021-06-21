@@ -24,7 +24,7 @@ public class TokenDb implements ITokenDatabase {
 
     // colors_power_toughness_cardtypes_sub_types_keywords
     // Some examples:
-    // c_3_3_a_wurm_lifelink
+    // c_3_3_a_phyrexian_wurm_lifelink
     // w_2_2_knight_first_strike
 
     // The image names should be the same as the script name + _set

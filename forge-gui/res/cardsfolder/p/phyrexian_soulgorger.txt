@@ -1,6 +1,6 @@
 Name:Phyrexian Soulgorger
 ManaCost:3
-Types:Snow Artifact Creature Construct
+Types:Snow Artifact Creature Phyrexian Construct
 PT:8/8
 K:Cumulative upkeep:Sac<1/Creature>:Sacrifice a creature.
 AI:RemoveDeck:All

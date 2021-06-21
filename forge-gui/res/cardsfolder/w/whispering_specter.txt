@@ -1,6 +1,6 @@
 Name:Whispering Specter
 ManaCost:1 B B
-Types:Creature Specter
+Types:Creature Phyrexian Specter
 PT:1/1
 K:Flying
 K:Infect

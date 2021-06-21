@@ -1,6 +1,6 @@
 Name:Vebulid
 ManaCost:B
-Types:Creature Horror
+Types:Creature Phyrexian Horror
 PT:0/0
 K:etbCounter:P1P1:1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may put a +1/+1 counter on CARDNAME.

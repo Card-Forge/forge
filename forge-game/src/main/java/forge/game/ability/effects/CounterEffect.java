@@ -193,7 +193,7 @@ public class CounterEffect extends SpellAbilityEffect {
         params.put(AbilityKey.StackSi, si);
 
         String destination =  srcSA.hasParam("Destination") ? srcSA.getParam("Destination") : tgtSA.isAftermath() ? "Exile" : "Graveyard";
-        if (srcSA.hasParam("DestinationChoice")) {//Hinder
+        if (srcSA.hasParam("DestinationChoice")) { //Hinder
             List<String> pos = Arrays.asList(srcSA.getParam("DestinationChoice").split(","));
             destination = srcSA.getActivatingPlayer().getController().chooseSomeType(Localizer.getInstance().getMessage("lblRemoveDestination"), tgtSA, pos, null);
         }
@@ -211,7 +211,6 @@ public class CounterEffect extends SpellAbilityEffect {
         } else if (destination.equals("Battlefield")) {
             if (tgtSA instanceof SpellPermanent) {
                 Card c = tgtSA.getHostCard();
-                System.out.println(c + " is SpellPermanent");
                 c.setController(srcSA.getActivatingPlayer(), 0);
                 game.getAction().moveToPlay(c, srcSA.getActivatingPlayer(), srcSA, params);
             } else {

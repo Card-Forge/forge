@@ -1,6 +1,6 @@
 Name:Morinfen
 ManaCost:3 B B
-Types:Legendary Creature Horror
+Types:Legendary Creature Phyrexian Horror
 PT:5/4
 K:Flying
 K:Cumulative upkeep:PayLife<1>:Pay 1 life.

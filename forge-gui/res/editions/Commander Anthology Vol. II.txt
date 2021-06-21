@@ -327,13 +327,14 @@ w_1_1_bird_flying
 w_0_1_goat
 w_2_2_knight_first_strike
 w_1_1_spirit_flying
-b_0_0_germ
+b_0_0_phyrexian_germ
 b_2_2_zombie
 r_3_1_elemental_shaman_haste
 r_1_1_goblin
 g_1_1_saproling
 c_1_1_a_myr
+c_1_1_a_phyrexian_myr
 c_1_1_a_pentavite_flying
 c_1_1_a_triskelavite_flying_ammo
-c_3_3_a_wurm_deathtouch
-c_3_3_a_wurm_lifelink
+c_3_3_a_phyrexian_wurm_deathtouch
+c_3_3_a_phyrexian_wurm_lifelink

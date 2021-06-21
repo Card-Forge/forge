@@ -1,0 +1,6 @@
+Name:Phyrexian Myr
+ManaCost:no cost
+Types:Artifact Creature Phyrexian Myr
+Colors:blue
+PT:2/1
+Oracle:

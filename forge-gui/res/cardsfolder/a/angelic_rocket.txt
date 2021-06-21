@@ -1,6 +1,6 @@
 Name:Angelic Rocket
 ManaCost:8
-Types:Artifact Creature Angel
+Types:Host Artifact Creature Angel
 PT:4/4
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | Host$ True | TriggerDescription$ When this creature enters the battlefield, you may destroy target nonland permanent.

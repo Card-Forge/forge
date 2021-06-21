@@ -6,4 +6,4 @@ A:SP$ Mill | Defined$ Opponent | NumCards$ 14 | SpellDescription$ Each opponent 
 T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When you cycle CARDNAME, each opponent mills four cards.
 SVar:TrigMill:DB$ Mill | Defined$ Opponent | NumCards$ 4
 DeckHas:Ability$Mill
-Oracle:Each opponent mills fourteen cards.\nCycling {1}{U}\nWhen you cycle Fractured Sanity, each opponent mills four cards.
+Oracle:Each opponent mills fourteen cards.\nCycling {1}{U} ({1}{U}, Discard this card: Draw a card.)\nWhen you cycle Fractured Sanity, each opponent mills four cards.
