@@ -37,6 +37,7 @@ import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
@@ -52,11 +53,6 @@ import forge.card.CardDb.SetPreference;
 import forge.deck.CardPool;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
-import forge.util.Aggregates;
-import forge.util.FileSection;
-import forge.util.FileUtil;
-import forge.util.IItemReader;
-import forge.util.MyRandom;
 import forge.util.storage.StorageBase;
 import forge.util.storage.StorageReaderBase;
 import forge.util.storage.StorageReaderFolder;
@@ -104,6 +100,19 @@ public final class CardEdition implements Comparable<CardEdition> {
                 default:
                     return "0";
             }
+        }
+
+        public String toString(){
+            String[] names = TextUtil.splitWithParenthesis(this.name().toLowerCase(), '_');
+            for (int i = 0; i < names.length; i++)
+                names[i] = TextUtil.capitalize(names[i]);
+            return TextUtil.join(Arrays.asList(names), " ");
+        }
+
+        public static Type fromString(String label){
+            List<String> names = Arrays.asList(TextUtil.splitWithParenthesis(label.toUpperCase(), ' '));
+            String value = TextUtil.join(names, "_");
+            return Type.valueOf(value);
         }
     }
 
