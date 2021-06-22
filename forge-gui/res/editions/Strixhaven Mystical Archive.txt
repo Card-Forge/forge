@@ -5,7 +5,7 @@ Name=Strixhaven Mystical Archive
 Type=Other
 ScryfallCode=STA
 
-[cards]
+[borderless]
 1 M Approach of the Second Sun
 2 M Day of Judgment
 3 U Defiant Strike
@@ -132,3 +132,132 @@ ScryfallCode=STA
 124 R Growth Spiral
 125 R Lightning Helix
 126 R Putrefy
+
+
+[etched]
+1e M Approach of the Second Sun
+2e M Day of Judgment
+3e U Defiant Strike
+4e U Divine Gambit
+5e R Ephemerate
+6e R Gift of Estates
+7e R Gods Willing
+8e R Mana Tithe
+9e U Revitalize
+10e R Swords to Plowshares
+11e M Teferi's Protection
+12e M Blue Sun's Zenith
+13e R Brainstorm
+14e R Compulsive Research
+15e R Counterspell
+16e R Memory Lapse
+17e M Mind's Desire
+18e U Negate
+19e U Opt
+20e U Strategic Planning
+21e R Tezzeret's Gambit
+22e M Time Warp
+23e U Whirlwind Denial
+24e U Agonizing Remorse
+25e M Crux of Fate
+26e R Dark Ritual
+27e M Demonic Tutor
+28e R Doom Blade
+29e U Duress
+30e U Eliminate
+31e R Inquisition of Kozilek
+32e R Sign in Blood
+33e M Tainted Pact
+34e R Tendrils of Agony
+35e U Village Rites
+36e M Chaos Warp
+37e U Claim the Firstborn
+38e R Faithless Looting
+39e R Grapeshot
+40e M Increasing Vengeance
+41e U Infuriate
+42e C Lightning Bolt
+43e M Mizzix's Mastery
+44e U Shock
+45e R Stone Rain
+46e U Thrill of Possibility
+47e R Urza's Rage
+48e R Abundant Harvest
+49e U Adventurous Impulse
+50e M Channel
+51e U Cultivate
+52e R Harmonize
+53e R Krosan Grip
+54e M Natural Order
+55e M Primal Command
+56e R Regrowth
+57e U Snakeskin Veil
+58e R Weather the Storm
+59e R Despark
+60e R Electrolyze
+61e R Growth Spiral
+62e R Lightning Helix
+63e R Putrefy
+64e M Approach of the Second Sun
+65e M Day of Judgment
+66e U Defiant Strike
+67e U Divine Gambit
+68e R Ephemerate
+69e R Gift of Estates
+70e R Gods Willing
+71e R Mana Tithe
+72e U Revitalize
+73e R Swords to Plowshares
+74e M Teferi's Protection
+75e M Blue Sun's Zenith
+76e R Brainstorm
+77e R Compulsive Research
+78e R Counterspell
+79e R Memory Lapse
+80e M Mind's Desire
+81e U Negate
+82e U Opt
+83e U Strategic Planning
+84e R Tezzeret's Gambit
+85e M Time Warp
+86e U Whirlwind Denial
+87e U Agonizing Remorse
+88e M Crux of Fate
+89e R Dark Ritual
+90e M Demonic Tutor
+91e R Doom Blade
+92e U Duress
+93e U Eliminate
+94e R Inquisition of Kozilek
+95e R Sign in Blood
+96e M Tainted Pact
+97e R Tendrils of Agony
+98e U Village Rites
+99e M Chaos Warp
+100e U Claim the Firstborn
+101e R Faithless Looting
+102e R Grapeshot
+103e M Increasing Vengeance
+104e U Infuriate
+105e C Lightning Bolt
+106e M Mizzix's Mastery
+107e U Shock
+108e R Stone Rain
+109e U Thrill of Possibility
+110e R Urza's Rage
+111e R Abundant Harvest
+112e U Adventurous Impulse
+113e M Channel
+114e U Cultivate
+115e R Harmonize
+116e R Krosan Grip
+117e M Natural Order
+118e M Primal Command
+119e R Regrowth
+120e U Snakeskin Veil
+121e R Weather the Storm
+122e R Despark
+123e R Electrolyze
+124e R Growth Spiral
+125e R Lightning Helix
+126e R Putrefy

@@ -87,7 +87,7 @@ public class BoosterDraft implements IBoosterDraft {
     protected boolean generateProduct() {
         switch (this.draftFormat) {
             case Full: // Draft from all cards in Forge
-                final Supplier<List<PaperCard>> s = new UnOpenedProduct(SealedProduct.Template.genericBooster);
+                final Supplier<List<PaperCard>> s = new UnOpenedProduct(SealedProduct.Template.genericDraftBooster);
 
                 for (int i = 0; i < 3; i++) {
                     this.product.add(s);
