@@ -150,7 +150,6 @@ public class PumpEffect extends SpellAbilityEffect {
      */
     @Override
     protected String getStackDescription(final SpellAbility sa) {
-
         final StringBuilder sb = new StringBuilder();
         List<GameEntity> tgts = Lists.newArrayList();
         tgts.addAll(getCardsfromTargets(sa));

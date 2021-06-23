@@ -2,11 +2,11 @@ Name:Zaffai, Thunder Conductor
 ManaCost:2 U R
 Types:Legendary Creature Human Shaman
 PT:1/4
-T:Mode$ SpellCastOrCopy | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ DBScry | TriggerDescription$ Magecraft — Whenever you cast or copy an instant or sorcery spell, scry 1. If that spell's mana value is 5 or greater, create a 4/4 blue and red Elemental creature token. If that spell's mana value is 10 ore greater, CARDNAME deals 10 damage to an opponent chosen at random.
+T:Mode$ SpellCastOrCopy | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ DBScry | TriggerDescription$ Magecraft — Whenever you cast or copy an instant or sorcery spell, scry 1. If that spell's mana value is 5 or greater, create a 4/4 blue and red Elemental creature token. If that spell's mana value is 10 or greater, CARDNAME deals 10 damage to an opponent chosen at random.
 SVar:DBScry:DB$ Scry | ScryNum$ 1 | SubAbility$ DBToken
-SVar:DBToken:DB$ Token | TokenScript$ ur_4_4_elemental | TokenOwner$ You | ConditionPresent$ Card.cmcGE5 | ConditionDefined$ TriggeredCard | ConditionCompare$ GE1 | SubAbility$ DBChoose
+SVar:DBToken:DB$ Token | TokenScript$ ur_4_4_elemental | TokenOwner$ You | ConditionCheckSVar$ TriggerCount$CastSACMC | ConditionSVarCompare$ GE5 | SubAbility$ DBChoose
 SVar:DBChoose:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | Random$ True | SubAbility$ DBDamage
-SVar:DBDamage:DB$ DealDamage | NumDmg$ 10 | Defined$ ChosenPlayer | ConditionPresent$ Card.cmcGE10 | ConditionDefined$ TriggeredCard | ConditionCompare$ GE1
+SVar:DBDamage:DB$ DealDamage | NumDmg$ 10 | Defined$ ChosenPlayer | ConditionCheckSVar$ TriggerCount$CastSACMC | ConditionSVarCompare$ GE10
 DeckHas:Ability$Token
 SVar:BuffedBy:Instant,Sorcery
 DeckHints:Type$Instant|Sorcery
