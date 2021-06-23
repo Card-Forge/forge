@@ -142,7 +142,7 @@
 2015-03-09 Vintage Daily (9 decks) | https://downloads.cardforge.org/decks/archive/vintage/2015-03-09-vintage-daily.zip
 2015-03-12 Vintage Daily (7 decks) | https://downloads.cardforge.org/decks/archive/vintage/2015-03-12-vintage-daily.zip
 2015-03-13 Vintage Daily (6 decks) | https://downloads.cardforge.org/decks/archive/vintage/2015-03-13-vintage-daily.zip
-2015-03-14 Vintage Daily (1 decks) | https://downloads.cardforge.org/decks/archive/vintage/2015-03-14-vintage-daily.zip
+2015-03-14 Vintage Daily (5 decks) | https://downloads.cardforge.org/decks/archive/vintage/2015-03-14-vintage-daily.zip
 2015-03-15 Vintage Daily (8 decks) | https://downloads.cardforge.org/decks/archive/vintage/2015-03-15-vintage-daily.zip
 2015-03-16 Vintage Daily (10 decks) | https://downloads.cardforge.org/decks/archive/vintage/2015-03-16-vintage-daily.zip
 2015-03-19 Vintage Daily (7 decks) | https://downloads.cardforge.org/decks/archive/vintage/2015-03-19-vintage-daily.zip
@@ -263,6 +263,8 @@
 2015-10-05 Vintage Daily (1 decks) | https://downloads.cardforge.org/decks/archive/vintage/2015-10-05-vintage-daily.zip
 2015-10-14 0 Vintage Daily (5 decks) | https://downloads.cardforge.org/decks/archive/vintage/2015-10-14-0-vintage-daily.zip
 2015-10-14 1 Vintage Daily (5 decks) | https://downloads.cardforge.org/decks/archive/vintage/2015-10-14-1-vintage-daily.zip
+2015-10-14 2 Vintage Daily (4 decks) | https://downloads.cardforge.org/decks/archive/vintage/2015-10-14-2-vintage-daily.zip
+2015-10-14 Vintage Daily (5 decks) | https://downloads.cardforge.org/decks/archive/vintage/2015-10-14-vintage-daily.zip
 2015-10-19 0 Vintage Daily (4 decks) | https://downloads.cardforge.org/decks/archive/vintage/2015-10-19-0-vintage-daily.zip
 2015-10-19 1 Vintage Daily (5 decks) | https://downloads.cardforge.org/decks/archive/vintage/2015-10-19-1-vintage-daily.zip
 2015-10-19 Vintage Daily (4 decks) | https://downloads.cardforge.org/decks/archive/vintage/2015-10-19-vintage-daily.zip
@@ -1136,7 +1138,7 @@
 2020-03-01 Vintage League (14 decks) | https://downloads.cardforge.org/decks/archive/vintage/2020-03-01-vintage-league.zip
 2020-03-02 Vintage Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/vintage/2020-03-02-vintage-preliminary.zip
 2020-03-07 Vintage Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/vintage/2020-03-07-vintage-preliminary.zip
-2020-03-08 Vintage Challenge (19 decks) | https://downloads.cardforge.org/decks/archive/vintage/2020-03-08-vintage-challenge.zip
+2020-03-08 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2020-03-08-vintage-challenge.zip
 2020-03-08 Vintage League (13 decks) | https://downloads.cardforge.org/decks/archive/vintage/2020-03-08-vintage-league.zip
 2020-03-14 Vintage Preliminary (21 decks) | https://downloads.cardforge.org/decks/archive/vintage/2020-03-14-vintage-preliminary.zip
 2020-03-15 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2020-03-15-vintage-challenge.zip
@@ -1335,80 +1337,6 @@
 2020-12-28 Vintage Preliminary (6 decks) | https://downloads.cardforge.org/decks/archive/vintage/2020-12-28-vintage-preliminary.zip
 2020-12-29 Vintage Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/vintage/2020-12-29-vintage-preliminary.zip
 2020-12-31 Vintage Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/vintage/2020-12-31-vintage-preliminary.zip
-2021-01-02 Vintage Preliminary (6 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-01-02-vintage-preliminary.zip
-2021-01-03 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-01-03-vintage-challenge.zip
-2021-01-03 Vintage League (14 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-01-03-vintage-league.zip
-2021-01-04 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-01-04-vintage-challenge.zip
-2021-01-04 Vintage Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-01-04-vintage-preliminary.zip
-2021-01-07 Vintage Preliminary (6 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-01-07-vintage-preliminary.zip
-2021-01-09 Vintage Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-01-09-vintage-preliminary.zip
-2021-01-10 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-01-10-vintage-challenge.zip
-2021-01-10 Vintage League (16 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-01-10-vintage-league.zip
-2021-01-13 Vintage Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-01-13-vintage-preliminary.zip
-2021-01-14 Vintage Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-01-14-vintage-preliminary.zip
-2021-01-16 Vintage Preliminary (13 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-01-16-vintage-preliminary.zip
-2021-01-17 Vintage League (17 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-01-17-vintage-league.zip
-2021-01-17 Vintage Showcase Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-01-17-vintage-showcase-challenge.zip
-2021-01-18 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-01-18-vintage-challenge.zip
-2021-01-18 Vintage Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-01-18-vintage-preliminary.zip
-2021-01-19 Vintage Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-01-19-vintage-preliminary.zip
-2021-01-21 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-01-21-vintage-challenge.zip
-2021-01-21 Vintage Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-01-21-vintage-preliminary.zip
-2021-01-23 Vintage Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-01-23-vintage-preliminary.zip
-2021-01-24 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-01-24-vintage-challenge.zip
-2021-01-24 Vintage League (25 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-01-24-vintage-league.zip
-2021-01-25 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-01-25-vintage-challenge.zip
-2021-01-25 Vintage Super Qualifier (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-01-25-vintage-super-qualifier.zip
-2021-01-26 Vintage Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-01-26-vintage-preliminary.zip
-2021-01-28 Vintage Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-01-28-vintage-preliminary.zip
-2021-01-30 Vintage Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-01-30-vintage-preliminary.zip
-2021-01-31 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-01-31-vintage-challenge.zip
-2021-01-31 Vintage League (11 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-01-31-vintage-league.zip
-2021-02-01 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-02-01-vintage-challenge.zip
-2021-02-02 Vintage Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-02-02-vintage-preliminary.zip
-2021-02-04 Vintage Preliminary (3 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-02-04-vintage-preliminary.zip
-2021-02-06 Vintage Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-02-06-vintage-preliminary.zip
-2021-02-07 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-02-07-vintage-challenge.zip
-2021-02-07 Vintage League (21 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-02-07-vintage-league.zip
-2021-02-08 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-02-08-vintage-challenge.zip
-2021-02-13 Vintage Preliminary (6 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-02-13-vintage-preliminary.zip
-2021-02-14 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-02-14-vintage-challenge.zip
-2021-02-14 Vintage League (14 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-02-14-vintage-league.zip
-2021-02-15 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-02-15-vintage-challenge.zip
-2021-02-18 Vintage Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-02-18-vintage-preliminary.zip
-2021-02-21 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-02-21-vintage-challenge.zip
-2021-02-21 Vintage League (15 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-02-21-vintage-league.zip
-2021-02-22 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-02-22-vintage-challenge.zip
-2021-02-27 Vintage Preliminary (3 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-02-27-vintage-preliminary.zip
-2021-02-28 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-02-28-vintage-challenge.zip
-2021-02-28 Vintage League (16 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-02-28-vintage-league.zip
-2021-03-01 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-03-01-vintage-challenge.zip
-2021-03-04 Vintage Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-03-04-vintage-preliminary.zip
-2021-03-06 Vintage Preliminary (7 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-03-06-vintage-preliminary.zip
-2021-03-07 Vintage League (18 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-03-07-vintage-league.zip
-2021-03-07 Vintage Showcase Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-03-07-vintage-showcase-challenge.zip
-2021-03-08 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-03-08-vintage-challenge.zip
-2021-03-23 Vintage Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-03-23-vintage-preliminary.zip
-2021-03-25 Vintage Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-03-25-vintage-preliminary.zip
-2021-03-27 Vintage Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-03-27-vintage-preliminary.zip
-2021-03-28 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-03-28-vintage-challenge.zip
-2021-03-28 Vintage League (19 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-03-28-vintage-league.zip
-2021-03-29 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-03-29-vintage-challenge.zip
-2021-03-29 Vintage Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-03-29-vintage-preliminary.zip
-2021-04-01 Vintage Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-04-01-vintage-preliminary.zip
-2021-04-03 Vintage Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-04-03-vintage-preliminary.zip
-2021-04-04 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-04-04-vintage-challenge.zip
-2021-04-04 Vintage League (13 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-04-04-vintage-league.zip
-2021-04-05 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-04-05-vintage-challenge.zip
-2021-04-05 Vintage Super Qualifier (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-04-05-vintage-super-qualifier.zip
-2021-04-08 Vintage Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-04-08-vintage-preliminary.zip
-2021-04-10 Vintage Preliminary (6 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-04-10-vintage-preliminary.zip
-2021-04-11 Vintage League (16 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-04-11-vintage-league.zip
-2021-04-11 Vintage Showcase Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-04-11-vintage-showcase-challenge.zip
-2021-04-12 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-04-12-vintage-challenge.zip
-2021-04-12 Vintage Preliminary (8 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-04-12-vintage-preliminary.zip
-2021-04-15 Vintage Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-04-15-vintage-preliminary.zip
-2021-04-17 Vintage Preliminary (4 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-04-17-vintage-preliminary.zip
 2021-04-18 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-04-18-vintage-challenge.zip
 2021-04-18 Vintage League (7 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-04-18-vintage-league.zip
 2021-04-19 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-04-19-vintage-challenge.zip
@@ -1435,3 +1363,11 @@
 2021-05-30 Vintage League (16 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-05-30-vintage-league.zip
 2021-05-30 Vintage Showcase Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-05-30-vintage-showcase-challenge.zip
 2021-06-03 Vintage Preliminary (3 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-06-03-vintage-preliminary.zip
+2021-06-13 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-06-13-vintage-challenge.zip
+2021-06-13 Vintage League (15 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-06-13-vintage-league.zip
+2021-06-14 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-06-14-vintage-challenge.zip
+2021-06-15 Vintage Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-06-15-vintage-preliminary.zip
+2021-06-17 Vintage Preliminary (5 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-06-17-vintage-preliminary.zip
+2021-06-20 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-06-20-vintage-challenge.zip
+2021-06-20 Vintage League (15 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-06-20-vintage-league.zip
+2021-06-21 Vintage Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/vintage/2021-06-21-vintage-challenge.zip
