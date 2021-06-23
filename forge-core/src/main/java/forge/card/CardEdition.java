@@ -422,8 +422,18 @@ public final class CardEdition implements Comparable<CardEdition> {
     public SealedProduct.Template getBoosterTemplate(String boosterType) {
         return boosterTemplates.get(boosterType);
     }
+    public String getRandomBoosterKind() {
+        List<String> boosterTypes = Lists.newArrayList(boosterTemplates.keySet());
 
-    public Set<String> getAvailableBoosertTypes() {
+        if (boosterTypes.isEmpty()) {
+            return null;
+        }
+
+        Collections.shuffle(boosterTypes);
+        return boosterTypes.get(0);
+    }
+
+    public Set<String> getAvailableBoosterTypes() {
         return boosterTemplates.keySet();
     }
 
@@ -734,7 +744,7 @@ public final class CardEdition implements Comparable<CardEdition> {
                 public Map<String, SealedProduct.Template> readAll() {
                     Map<String, SealedProduct.Template> map = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
                     for(CardEdition ce : Collection.this) {
-                        List<String> boosterTypes = Lists.newArrayList(ce.getAvailableBoosertTypes());
+                        List<String> boosterTypes = Lists.newArrayList(ce.getAvailableBoosterTypes());
                         for (String type : boosterTypes) {
                             String setAffix = type.equals("Draft") ? "" : type;
 
