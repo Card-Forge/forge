@@ -22,10 +22,9 @@ import io.sentry.event.BreadcrumbBuilder;
 public abstract class KeywordInstance<T extends KeywordInstance<?>> implements KeywordInterface {
     private Keyword keyword;
     private String original;
-    
-    
+
     private boolean hidden;
-    
+
     private List<Trigger> triggers = Lists.newArrayList();
     private List<ReplacementEffect> replacements = Lists.newArrayList();
     private List<SpellAbility> abilities = Lists.newArrayList();
@@ -53,7 +52,7 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
     public String getReminderText() {
         String result = formatReminderText(keyword.reminderText);
         Matcher m = Pattern.compile("\\{(\\w):(.+?)\\}").matcher(result);
-        
+
         StringBuffer sb = new StringBuffer();
         while (m.find()) {
             m.appendReplacement(sb, Lang.nounWithNumeral(m.group(1), m.group(2)));
@@ -75,7 +74,7 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
     }
     protected abstract void parse(String details);
     protected abstract String formatReminderText(String reminderText);
-    
+
 
     /*
      * (non-Javadoc)
@@ -181,7 +180,7 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
     public final void addTrigger(final Trigger trg) {
         triggers.add(trg);
     }
-    
+
     /*
      * (non-Javadoc)
      * @see forge.game.keyword.KeywordInterface#addReplacement(forge.game.replacement.ReplacementEffect)
@@ -197,7 +196,7 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
     public final void addSpellAbility(final SpellAbility s) {
         abilities.add(s);
     }
-    
+
     /*
      * (non-Javadoc)
      * @see forge.game.keyword.KeywordInterface#addStaticAbility(forge.game.staticability.StaticAbility)
@@ -205,9 +204,7 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
     public final void addStaticAbility(final StaticAbility st) {
         staticAbilities.add(st);
     }
-    
-    
-    
+
     /* (non-Javadoc)
      * @see forge.game.keyword.KeywordInterface#getHidden()
      */
@@ -222,7 +219,7 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
     public void setHidden(boolean val) {
         hidden = val;        
     }
-    
+
     /*
      * (non-Javadoc)
      * @see forge.game.keyword.KeywordInterface#getTriggers()

@@ -534,7 +534,6 @@ public class CardFactory {
     }
 
     public static void copySpellAbility(SpellAbility from, SpellAbility to, final Card host, final Player p, final boolean lki) {
-
         if (from.getTargetRestrictions() != null) {
             to.setTargetRestrictions(from.getTargetRestrictions());
         }
@@ -562,7 +561,7 @@ public class CardFactory {
             to.setConditions((SpellAbilityCondition) from.getConditions().copy());
         }
 
-        // do this after other abilties are copied
+        // do this after other abilities are copied
         if (p != null) {
             to.setActivatingPlayer(p, lki);
         }
