@@ -166,7 +166,7 @@ public class MetaSet {
 
         switch(type) {
             case Full:
-                return new UnOpenedProduct(SealedProduct.Template.genericBooster);
+                return new UnOpenedProduct(SealedProduct.Template.genericDraftBooster);
 
             case Booster:
                 return new UnOpenedProduct(FModel.getMagicDb().getBoosters().get(data));
@@ -179,7 +179,7 @@ public class MetaSet {
 
             case JoinedSet:
                 Predicate<PaperCard> predicate = IPaperCard.Predicates.printedInSets(data.split(" "));
-                return new UnOpenedProduct(SealedProduct.Template.genericBooster, predicate);
+                return new UnOpenedProduct(SealedProduct.Template.genericDraftBooster, predicate);
 
             case Choose: return UnOpenedMeta.choose(data);
             case Random: return UnOpenedMeta.random(data);
