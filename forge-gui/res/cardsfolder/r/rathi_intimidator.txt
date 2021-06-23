@@ -1,6 +1,6 @@
 Name:Rathi Intimidator
 ManaCost:1 B B
-Types:Creature Horror Mercenary
+Types:Creature Phyrexian Horror Mercenary
 PT:2/1
 K:Fear
 A:AB$ ChangeZone | Cost$ 2 T | Origin$ Library | Destination$ Battlefield | ChangeType$ Permanent.Mercenary+cmcLE2 | ChangeNum$ 1 | SpellDescription$ Search your library for a Mercenary permanent card with mana value 2 or less, put it onto the battlefield, then shuffle.

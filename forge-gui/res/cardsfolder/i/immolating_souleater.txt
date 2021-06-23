@@ -1,6 +1,6 @@
 Name:Immolating Souleater
 ManaCost:2
-Types:Artifact Creature Dog
+Types:Artifact Creature Phyrexian Dog
 PT:1/1
 A:AB$ Pump | Cost$ PR | Defined$ Self | NumAtt$ 1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 DeckNeeds:Color$Red

@@ -8,4 +8,4 @@ SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ rw_4_
 AI:RemoveDeck:Random
 SVar:BuffedBy:Card.MultiColor
 DeckHas:Ability$Token
-Oracle:Hexproof from monocolored (This creature can't be the target of monocolored spells or abilities your opponents control.)\nWhenever you cast a multicolored spell, create a 4/4 red and white Golem artifact creature token.
+Oracle:Hexproof from monocolored\nWhenever you cast a multicolored spell, create a 4/4 red and white Golem artifact creature token.

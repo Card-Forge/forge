@@ -1,11 +1,10 @@
 Name:Ezuri's Predation
 ManaCost:5 G G G
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 5 G G G | RepeatCards$ Creature.OppCtrl | UseImprinted$ True | RepeatSubAbility$ DBToken | ChangeZoneTable$ True | SubAbility$ DBCleanup2 | SpellDescription$ For each creature your opponents control, create a 4/4 green Beast creature token. Each of those Beasts fights a different one of those creatures.
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_4_4_beast | TokenOwner$ You | LegacyImage$ g 4 4 beast c15 | RememberTokens$ True | SubAbility$ DBFight
+A:SP$ RepeatEach | Cost$ 5 G G G | RepeatCards$ Creature.OppCtrl | UseImprinted$ True | RepeatSubAbility$ DBToken | ChangeZoneTable$ True | SubAbility$ DBCleanup2 | SpellDescription$ For each creature your opponents control, create a 4/4 green Phyrexian Beast creature token. Each of those Beasts fights a different one of those creatures.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_4_4_phyrexian_beast | TokenOwner$ You | RememberTokens$ True | SubAbility$ DBFight
 SVar:DBFight:DB$ Fight | Defined$ Imprinted | ExtraDefined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:DBCleanup2:DB$ Cleanup | ClearImprinted$ True
 SVar:NeedsToPlay:Creature.OppCtrl+inZoneBattlefield+powerLE3
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ezuris_predation.jpg
-Oracle:For each creature your opponents control, create a 4/4 green Beast creature token. Each of those Beasts fights a different one of those creatures.
+Oracle:For each creature your opponents control, create a 4/4 green Phyrexian Beast creature token. Each of those Beasts fights a different one of those creatures.

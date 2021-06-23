@@ -1,9 +1,11 @@
 [metadata]
-Code=PLGS
+Code=PLG20
 Date=2020-05-18
-Name=Love Your LGS
+Name=Love Your LGS 2020
+Code2=PLGS
+Alias=PLGS
 Type=Promos
-ScryfallCode=PLGS
+ScryfallCode=PLG20
 
 [cards]
 1 R Reliquary Tower

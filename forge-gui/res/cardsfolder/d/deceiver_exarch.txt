@@ -1,6 +1,6 @@
 Name:Deceiver Exarch
 ManaCost:2 U
-Types:Creature Cleric
+Types:Creature Phyrexian Cleric
 PT:1/4
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY

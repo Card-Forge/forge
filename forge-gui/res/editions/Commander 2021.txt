@@ -439,6 +439,7 @@ g_6_6_wurm
 u_9_9_kraken
 g_1_1_insect_flying_deathtouch
 g_4_4_beast
+g_4_4_phyrexian_beast
 g_x_x_hydra
 g_2_2_boar
 g_3_3_frog_lizard

@@ -269,7 +269,7 @@ c_0_1_eldrazi_spawn_sac
 w_1_1_soldier
 w_1_1_spirit_flying
 b_1_1_faerie_rogue_flying
-b_0_0_germ
+b_0_0_phyrexian_germ
 b_1_1_thrull
 g_3_3_elephant
 g_1_1_insect

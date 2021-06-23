@@ -1,6 +1,6 @@
 Name:Greven, Predator Captain
 ManaCost:3 B R
-Types:Legendary Creature Human Warrior
+Types:Legendary Creature Phyrexian Human Warrior
 PT:5/5
 K:Menace
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ CARDNAME gets +X/+0, where X is the amount of life you've lost this turn.

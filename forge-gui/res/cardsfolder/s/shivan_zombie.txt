@@ -1,6 +1,6 @@
 Name:Shivan Zombie
 ManaCost:B R
-Types:Creature Barbarian Zombie
+Types:Creature Phyrexian Barbarian Zombie
 PT:2/2
 K:Protection from white
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shivan_zombie.jpg

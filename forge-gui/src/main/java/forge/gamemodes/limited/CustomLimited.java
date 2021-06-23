@@ -107,7 +107,7 @@ public class CustomLimited extends DeckBase {
                 slots.add(ImmutablePair.of(kv[1], Integer.parseInt(kv[0])));
             }
         } else
-            slots = SealedProduct.Template.genericBooster.getSlots();
+            slots = SealedProduct.Template.genericDraftBooster.getSlots();
 
         final CustomLimited cd = new CustomLimited(data.get("Name"), slots);
         cd.landSetCode = data.get("LandSetCode");

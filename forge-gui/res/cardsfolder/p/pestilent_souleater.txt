@@ -1,6 +1,6 @@
 Name:Pestilent Souleater
 ManaCost:5
-Types:Artifact Creature Insect
+Types:Artifact Creature Phyrexian Insect
 PT:3/3
 A:AB$ Pump | Cost$ PB | Defined$ Self | KW$ Infect | SpellDescription$ CARDNAME gains infect until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pestilent_souleater.jpg

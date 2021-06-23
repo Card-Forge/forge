@@ -1,6 +1,6 @@
 Name:Corpse Cur
 ManaCost:4
-Types:Artifact Creature Dog
+Types:Artifact Creature Phyrexian Dog
 PT:2/2
 K:Infect
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target creature card with infect from your graveyard to your hand.

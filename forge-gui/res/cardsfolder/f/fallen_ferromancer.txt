@@ -1,6 +1,6 @@
 Name:Fallen Ferromancer
 ManaCost:3 R
-Types:Creature Human Shaman
+Types:Creature Phyrexian Human Shaman
 PT:1/1
 K:Infect
 A:AB$ DealDamage | Cost$ 1 R T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.

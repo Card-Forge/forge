@@ -1,6 +1,6 @@
 Name:Dementia Bat
 ManaCost:4 B
-Types:Creature Bat
+Types:Creature Phyrexian Bat
 PT:2/2
 K:Flying
 A:AB$ Discard | Cost$ Sac<1/CARDNAME> 4 B | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target player discards two cards.

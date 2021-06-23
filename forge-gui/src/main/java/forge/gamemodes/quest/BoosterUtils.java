@@ -69,20 +69,23 @@ public final class BoosterUtils {
     };
 
     private static final GameFormat.Collection  formats   = FModel.getFormats();
-    private static final Predicate<CardEdition> filterExt = formats.getExtended().editionLegalPredicate;
+    private static final Predicate<CardEdition> filterPioneer = formats.getPioneer().editionLegalPredicate;
+    private static final Predicate<CardEdition> filterModern= formats.getModern().editionLegalPredicate;
 
-    /** The filter t2booster. */
-    private static final Predicate<CardEdition> filterT2booster = Predicates.and(CardEdition.Predicates.CAN_MAKE_BOOSTER,
+    private static final Predicate<CardEdition> filterStandard = Predicates.and(CardEdition.Predicates.CAN_MAKE_BOOSTER,
             formats.getStandard().editionLegalPredicate);
 
-    /** The filter ext but t2. */
-    private static final Predicate<CardEdition> filterExtButT2 = Predicates.and(
+    private static final Predicate<CardEdition> filterPioneerNotStandard = Predicates.and(
             CardEdition.Predicates.CAN_MAKE_BOOSTER,
-            Predicates.and(filterExt, formats.getStandard().editionLegalPredicate));
+            Predicates.and(filterPioneer, Predicates.not(formats.getStandard().editionLegalPredicate)));
+
+    private static final Predicate<CardEdition> filterModernNotPioneer = Predicates.and(
+            CardEdition.Predicates.CAN_MAKE_BOOSTER,
+            Predicates.and(filterModern, Predicates.not(filterPioneer)));
 
     /** The filter not ext. */
-    private static final Predicate<CardEdition> filterNotExt = Predicates.and(CardEdition.Predicates.CAN_MAKE_BOOSTER,
-            Predicates.not(filterExt));
+    private static final Predicate<CardEdition> filterNotModern = Predicates.and(CardEdition.Predicates.CAN_MAKE_BOOSTER,
+            Predicates.not(filterModern));
 
     /**
      * Gets the quest starter deck.
@@ -169,7 +172,19 @@ public final class BoosterUtils {
             return generateRandomBoosterPacks(quantity, isLegalInQuestFormat(questController.getFormat()));
         } else {
             final int rollD100 = MyRandom.getRandom().nextInt(100);
-            return generateRandomBoosterPacks(quantity, rollD100 < 40 ? filterT2booster : (rollD100 < 75 ? filterExtButT2 : filterNotExt));
+            // 30% Standard, 20% Pioneer, pre-standard -> 20% Modern, pre-pioneer -> 30% Pre-modern
+            Predicate<CardEdition> rolledFilter;
+            if (rollD100 < 30) {
+                rolledFilter = filterStandard;
+            } else if (rollD100 < 50) {
+                rolledFilter = filterPioneerNotStandard;
+            } else if (rollD100 < 70) {
+                rolledFilter = filterModernNotPioneer;
+            } else {
+                rolledFilter = filterNotModern;
+            }
+
+            return generateRandomBoosterPacks(quantity, rolledFilter);
         }
     }
 

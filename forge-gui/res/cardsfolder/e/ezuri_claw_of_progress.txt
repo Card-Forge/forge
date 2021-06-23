@@ -1,6 +1,6 @@
 Name:Ezuri, Claw of Progress
 ManaCost:2 G U
-Types:Legendary Creature Elf Warrior
+Types:Legendary Creature Phyrexian Elf Warrior
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.powerLE2+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature with power 2 or less enters the battlefield under your control, you get an experience counter.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ You | CounterType$ Experience | CounterNum$ 1

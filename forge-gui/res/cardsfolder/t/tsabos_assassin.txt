@@ -1,6 +1,6 @@
 Name:Tsabo's Assassin
 ManaCost:2 B B
-Types:Creature Zombie Assassin
+Types:Creature Phyrexian Zombie Assassin
 PT:1/1
 A:AB$ Destroy | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NoRegen$ True | AITgts$ Creature.SharesColorWith MostProminentColor | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SpellDescription$ Destroy target creature if it shares a color with the most common color among all permanents or a color tied for most common. A creature destroyed this way can't be regenerated.
 SVar:X:Targeted$Valid Creature.SharesColorWith MostProminentColor

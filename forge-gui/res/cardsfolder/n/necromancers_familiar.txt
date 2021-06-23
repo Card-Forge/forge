@@ -7,4 +7,4 @@ S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Lifelink | Condition$ Hel
 A:AB$ Pump | Cost$ B Discard<1/Card> | Defined$ Self | KW$ Indestructible | SubAbility$ DBTap | SpellDescription$ CARDNAME gains indestructible until end of turn. Tap it.
 SVar:DBTap:DB$ Tap | Defined$ Self
 DeckHas:Ability$LifeGain
-Oracle:Flying\nNecromancer's Familiar has lifelink as long as you have no cards in hand.\n{B}, Discard a card: CARDNAME gains indestructible until end of turn. Tap it. (Damage and effects that say "destroy" don't destroy it.)
+Oracle:Flying\nHellbent — Necromancer's Familiar has lifelink as long as you have no cards in hand.\n{B}, Discard a card: Necromancer's Familiar gains indestructible until end of turn. Tap it.

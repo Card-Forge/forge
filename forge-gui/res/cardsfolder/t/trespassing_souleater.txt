@@ -1,6 +1,6 @@
 Name:Trespassing Souleater
 ManaCost:3
-Types:Artifact Creature Construct
+Types:Artifact Creature Phyrexian Construct
 PT:2/2
 A:AB$ Pump | Cost$ PU | Defined$ Self | KW$ HIDDEN Unblockable | SpellDescription$ CARDNAME can't be blocked this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trespassing_souleater.jpg

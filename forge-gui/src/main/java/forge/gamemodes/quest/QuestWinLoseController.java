@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map.Entry;
 
+import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -589,7 +590,15 @@ public class QuestWinLoseController {
                 final IUnOpenedProduct product = new UnOpenedProduct(getBoosterTemplate(), cards);
                 cardsWon = product.get();
             } else {
-                final IUnOpenedProduct product = new UnOpenedProduct(FModel.getMagicDb().getBoosters().get(chooseEd.getCode()));
+                final IUnOpenedProduct product;
+                List<String> boosterTypes = Lists.newArrayList(chooseEd.getAvailableBoosterTypes());
+                String setAffix = "";
+                String type = SGuiChoose.one("Which booster type do you choose?", boosterTypes);
+                if (!type.equals("Draft")) {
+                    setAffix = type;
+                }
+                product = new UnOpenedProduct(FModel.getMagicDb().getBoosters().get(chooseEd.getCode() + setAffix));
+
                 cardsWon = product.get();
             }
 

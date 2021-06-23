@@ -125,6 +125,7 @@ public final class CardEdition implements Comparable<CardEdition> {
         SPECIAL_SLOT("special slot"), //to help with convoluted boosters
         PRECON_PRODUCT("precon product"),
         BORDERLESS("borderless"),
+        ETCHED("etched"),
         SHOWCASE("showcase"),
         EXTENDED_ART("extended art"),
         ALTERNATE_ART("alternate art"),
@@ -269,6 +270,7 @@ public final class CardEdition implements Comparable<CardEdition> {
 
     private int boosterArts = 1;
     private SealedProduct.Template boosterTpl = null;
+    private final Map<String, SealedProduct.Template> boosterTemplates = new HashMap<>();
 
     private CardEdition(ListMultimap<String, CardInSet> cardMap, Map<String, Integer> tokens, Map<String, List<String>> customPrintSheetsToParse) {
         this.cardMap = cardMap;
@@ -415,11 +417,28 @@ public final class CardEdition implements Comparable<CardEdition> {
     }
 
     public SealedProduct.Template getBoosterTemplate() {
-        return boosterTpl;
+        return getBoosterTemplate("Draft");
+    }
+    public SealedProduct.Template getBoosterTemplate(String boosterType) {
+        return boosterTemplates.get(boosterType);
+    }
+    public String getRandomBoosterKind() {
+        List<String> boosterTypes = Lists.newArrayList(boosterTemplates.keySet());
+
+        if (boosterTypes.isEmpty()) {
+            return null;
+        }
+
+        Collections.shuffle(boosterTypes);
+        return boosterTypes.get(0);
+    }
+
+    public Set<String> getAvailableBoosterTypes() {
+        return boosterTemplates.keySet();
     }
 
     public boolean hasBoosterTemplate() {
-        return boosterTpl != null;
+        return boosterTemplates.containsKey("Draft");
     }
 
     public List<PrintSheet> getPrintSheetsBySection() {
@@ -559,7 +578,21 @@ public final class CardEdition implements Comparable<CardEdition> {
 
             res.boosterArts = section.getInt("BoosterCovers", 1);
             String boosterDesc = section.get("Booster");
-            res.boosterTpl = boosterDesc == null ? null : new SealedProduct.Template(res.code, SealedProduct.Template.Reader.parseSlots(boosterDesc));
+
+            if (section.contains("Booster")) {
+                // Historical naming convention in Forge for "DraftBooster"
+                res.boosterTpl = new SealedProduct.Template(res.code, SealedProduct.Template.Reader.parseSlots(boosterDesc));
+                res.boosterTemplates.put("Draft", res.boosterTpl);
+            }
+
+            String[] boostertype = { "Draft", "Collector", "Set" };
+            // Theme boosters aren't here because they are closer to preconstructed decks, and should be treated as such
+            for (String type : boostertype) {
+                String name = type + "Booster";
+                if (section.contains(name)) {
+                    res.boosterTemplates.put(type, new SealedProduct.Template(res.code, SealedProduct.Template.Reader.parseSlots(section.get(name))));
+                }
+            }
 
             res.alias = section.get("alias");
             res.borderColor = BorderColor.valueOf(section.get("border", "Black").toUpperCase(Locale.ENGLISH));
@@ -706,14 +739,16 @@ public final class CardEdition implements Comparable<CardEdition> {
         };
 
         public IItemReader<SealedProduct.Template> getBoosterGenerator() {
-            // TODO Auto-generated method stub
             return new StorageReaderBase<SealedProduct.Template>(null) {
                 @Override
                 public Map<String, SealedProduct.Template> readAll() {
                     Map<String, SealedProduct.Template> map = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
                     for(CardEdition ce : Collection.this) {
-                        if (ce.hasBoosterTemplate()) {
-                            map.put(ce.getCode(), ce.getBoosterTemplate());
+                        List<String> boosterTypes = Lists.newArrayList(ce.getAvailableBoosterTypes());
+                        for (String type : boosterTypes) {
+                            String setAffix = type.equals("Draft") ? "" : type;
+
+                            map.put(ce.getCode() + setAffix, ce.getBoosterTemplate(type));
                         }
                     }
                     return map;

@@ -1,6 +1,6 @@
 Name:Toxic Nim
 ManaCost:4 B B
-Types:Creature Zombie
+Types:Creature Phyrexian Zombie
 PT:4/1
 K:Infect
 A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.

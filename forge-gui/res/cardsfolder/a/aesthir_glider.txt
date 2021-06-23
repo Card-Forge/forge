@@ -1,6 +1,6 @@
 Name:Aesthir Glider
 ManaCost:3
-Types:Artifact Creature Bird
+Types:Artifact Creature Bird Construct
 PT:2/1
 K:CARDNAME can't block.
 K:Flying

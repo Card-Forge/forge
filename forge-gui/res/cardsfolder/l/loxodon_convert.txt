@@ -1,6 +1,6 @@
 Name:Loxodon Convert
 ManaCost:3 W
-Types:Creature Elephant Soldier
+Types:Creature Phyrexian Elephant Soldier
 PT:4/2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/loxodon_convert.jpg
 Oracle:

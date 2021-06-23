@@ -195,7 +195,6 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
      */
     @Override
     public CounterType chooseCounterType(List<CounterType> options, SpellAbility sa, Map<String, Object> params) {
-
         if (options.size() > 1) {
             final Player ai = sa.getActivatingPlayer();
             final Game game = ai.getGame();

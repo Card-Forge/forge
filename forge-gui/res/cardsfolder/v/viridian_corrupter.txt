@@ -1,6 +1,6 @@
 Name:Viridian Corrupter
 ManaCost:1 G G
-Types:Creature Elf Shaman
+Types:Creature Phyrexian Elf Shaman
 PT:2/2
 K:Infect
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target artifact.

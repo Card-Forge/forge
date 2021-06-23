@@ -283,4 +283,4 @@ gw_x_x_elemental_total_creatures
 rg_4_4_giant_warrior_haste
 rg_1_1_goblin_warrior
 rw_1_1_soldier_haste
-c_3_3_a_golem
+c_3_3_a_phyrexian_golem

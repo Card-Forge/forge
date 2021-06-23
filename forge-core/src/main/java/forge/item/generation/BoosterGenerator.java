@@ -236,6 +236,11 @@ public class BoosterGenerator {
             String slotType = slot.getLeft(); // add expansion symbol here?
             int numCards = slot.getRight();
 
+            boolean convertCardFoil = slotType.endsWith("+");
+            if (convertCardFoil) {
+                slotType = slotType.substring(0, slotType.length() - 1);
+            }
+
             String[] sType = TextUtil.splitWithParenthesis(slotType, ' ');
             String setCode = sType.length == 1 && template.getEdition() != null ? template.getEdition() : null;
             String sheetKey = StaticData.instance().getEditions().contains(setCode) ? slotType.trim() + " " + setCode
@@ -280,7 +285,19 @@ public class BoosterGenerator {
             }
 
             PrintSheet ps = getPrintSheet(sheetKey);
-            result.addAll(ps.random(numCards, true));
+            List<PaperCard> paperCards;
+
+            // For cards that end in '+', attempt to convert this card to foil.
+            if (convertCardFoil) {
+                paperCards = Lists.newArrayList();
+                for(PaperCard pc : ps.random(numCards, true)) {
+                    paperCards.add(pc.getFoiled());
+                }
+            } else {
+                paperCards = ps.random(numCards, true);
+            }
+
+            result.addAll(paperCards);
             sheetsUsed.add(ps);
 
             if (foilInThisSlot) {
@@ -508,6 +525,7 @@ public class BoosterGenerator {
                     mainCode.regionMatches(true, 0, "wholeSheet", 0, 10)
             ) { // custom print sheet
                 String sheetName = StringUtils.strip(mainCode.substring(10), "()\" ");
+                System.out.println("Attempting to lookup :" + sheetName);
                 src = StaticData.instance().getPrintSheets().get(sheetName).toFlatList();
                 setPred = Predicates.alwaysTrue();
 

@@ -1,6 +1,6 @@
 Name:Phyrexian Snowcrusher
 ManaCost:6
-Types:Snow Artifact Creature Juggernaut
+Types:Snow Artifact Creature Phyrexian Juggernaut
 PT:6/5
 K:CARDNAME attacks each combat if able.
 A:AB$ Pump | Cost$ 1 S | Defined$ Self | NumAtt$ +1 | SpellDescription$ Phyrexian Snowcrusher gets +1/+0 until end of turn.

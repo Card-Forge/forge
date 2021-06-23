@@ -1240,7 +1240,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final boolean hasTrigger(final Trigger t) {
        return currentState.hasTrigger(t);
     }
-
     public final boolean hasTrigger(final int id) {
         return currentState.hasTrigger(id);
     }
@@ -1495,7 +1494,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public boolean removeCounterTimestamp(CounterType counterType) {
         return removeCounterTimestamp(counterType, true);
     }
-
     public boolean removeCounterTimestamp(CounterType counterType, boolean updateView) {
         Long old = counterTypeTimestamps.remove(counterType);
         if (old != null) {
@@ -1581,6 +1579,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
     }
 
+    public final int sumAllCounters() {
+        int count = 0;
+        for (final Integer value2 : counters.values()) {
+            count += value2;
+        }
+        return count;
+    }
+
     public final String getSVar(final String var) {
         return currentState.getSVar(var);
     }
@@ -1611,18 +1617,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         currentState.removeSVar(var);
     }
 
-    public final int sumAllCounters() {
-        int count = 0;
-        for (final Integer value2 : counters.values()) {
-            count += value2;
-        }
-        return count;
-    }
-
     public final int getTurnInZone() {
         return turnInZone;
     }
-
     public final void setTurnInZone(final int turn) {
         turnInZone = turn;
     }
@@ -1630,7 +1627,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final Player getTurnInController() {
         return turnInController;
     }
-
     public final void setTurnInController(final Player p) {
         turnInController = p;
     }
@@ -1638,7 +1634,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void setManaCost(final ManaCost s) {
         currentState.setManaCost(s);
     }
-
     public final ManaCost getManaCost() {
         return currentState.getManaCost();
     }

@@ -1,6 +1,6 @@
 Name:Porcelain Legionnaire
 ManaCost:2 PW
-Types:Artifact Creature Soldier
+Types:Artifact Creature Phyrexian Soldier
 PT:3/1
 K:First Strike
 SVar:Picture:http://www.wizards.com/global/images/magic/general/porcelain_legionnaire.jpg

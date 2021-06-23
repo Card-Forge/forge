@@ -1,6 +1,6 @@
 Name:Phyrexian Colossus
 ManaCost:7
-Types:Artifact Creature Golem
+Types:Artifact Creature Phyrexian Golem
 PT:8/8
 K:CARDNAME doesn't untap during your untap step.
 A:AB$ Untap | Cost$ PayLife<8> | SpellDescription$ Untap CARDNAME.

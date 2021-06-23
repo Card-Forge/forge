@@ -1,6 +1,6 @@
 Name:Phyrexian Hydra
 ManaCost:3 G G
-Types:Creature Hydra
+Types:Creature Phyrexian Hydra
 PT:7/7
 K:Infect
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self | ReplaceWith$ Counters | PreventionEffect$ True | Description$ If damage would be dealt to CARDNAME, prevent that damage. Put a -1/-1 counter on CARDNAME for each 1 damage prevented this way.

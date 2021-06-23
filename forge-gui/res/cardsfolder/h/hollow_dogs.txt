@@ -1,6 +1,6 @@
 Name:Hollow Dogs
 ManaCost:4 B
-Types:Creature Zombie Dog
+Types:Creature Phyrexian Zombie Dog
 PT:3/3
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +2/+0 until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 2

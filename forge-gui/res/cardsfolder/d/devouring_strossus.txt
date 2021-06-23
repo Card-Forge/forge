@@ -1,6 +1,6 @@
 Name:Devouring Strossus
 ManaCost:5 B B B
-Types:Creature Horror
+Types:Creature Phyrexian Horror
 PT:9/9
 K:Flying
 K:Trample

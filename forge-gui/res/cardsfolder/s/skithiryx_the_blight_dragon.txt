@@ -1,6 +1,6 @@
 Name:Skithiryx, the Blight Dragon
 ManaCost:3 B B
-Types:Legendary Creature Dragon Skeleton
+Types:Legendary Creature Phyrexian Dragon Skeleton
 PT:4/4
 K:Flying
 K:Infect

@@ -1,6 +1,6 @@
 Name:Chancellor of the Spires
 ManaCost:4 U U U
-Types:Creature Sphinx
+Types:Creature Phyrexian Sphinx
 PT:5/7
 K:MayEffectFromOpeningHand:RevealCard
 K:Flying

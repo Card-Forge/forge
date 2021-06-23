@@ -1,6 +1,6 @@
 Name:Carnifex Demon
 ManaCost:4 B B
-Types:Creature Demon
+Types:Creature Phyrexian Demon
 PT:6/6
 K:Flying
 K:etbCounter:M1M1:2

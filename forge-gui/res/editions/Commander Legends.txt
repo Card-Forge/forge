@@ -1337,8 +1337,8 @@ b_0_1_thrull
 b_2_2_zombie
 r_2_2_dragon_flying_firebreathing
 g_1_1_elf_warrior
-c_3_3_a_golem
-b_x_x_horror
+c_3_3_a_phyrexian_golem
+c_x_x_a_horror
 rock
 c_a_treasure_sac
 w_2_2_cat

@@ -128,10 +128,10 @@ public final class InputSelectTargets extends InputSyncronizedBase {
                 "(Targeting ERROR)", "");
         showMessage(message, sa.getView());
 
-        if (divisionValues != null && sa.getMinTargets() == 0 && sa.getTargets().size() == 0) {
+        if ((divisionValues != null && !divisionValues.isEmpty()) && sa.getMinTargets() == 0 && sa.getTargets().size() == 0) {
             // extra logic for Divided with min targets = 0, should only work if num targets are 0 too
             getController().getGui().updateButtons(getOwner(), true, true, false);
-        } else if (!sa.isMinTargetChosen() || divisionValues != null) {
+        } else if (!sa.isMinTargetChosen() || (divisionValues != null && !divisionValues.isEmpty())){
             // If reached Minimum targets, enable OK button
             if (mandatory && tgt.hasCandidates(sa, true)) {
                 // Player has to click on a target
@@ -279,7 +279,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             return false;
         }
 
-        if (divisionValues != null) {
+        if ((divisionValues != null && !divisionValues.isEmpty())) {
             Boolean val = onDividedAsYouChoose(card);
             if (val != null) {
                 return val;
@@ -321,7 +321,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             return;
         }
 
-        if (divisionValues != null) {
+        if ((divisionValues != null && !divisionValues.isEmpty())) {
             Boolean val = onDividedAsYouChoose(player);
             if (val != null) {
                 return;
@@ -331,9 +331,6 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     }
 
     protected Boolean onDividedAsYouChoose(GameObject go) {
-        if (divisionValues.isEmpty()) {
-            return false;
-        }
         String apiBasedMessage = "Distribute how much to ";
         if (sa.getApi() == ApiType.DealDamage) {
             apiBasedMessage = "Select how much damage to deal to ";

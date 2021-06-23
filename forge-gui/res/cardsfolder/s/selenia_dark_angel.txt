@@ -1,6 +1,6 @@
 Name:Selenia, Dark Angel
 ManaCost:3 W B
-Types:Legendary Creature Angel
+Types:Legendary Creature Phyrexian Angel
 PT:3/3
 K:Flying
 A:AB$ ChangeZone | Cost$ PayLife<2> | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.

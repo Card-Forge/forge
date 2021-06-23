@@ -1,6 +1,0 @@
-Name:Wurm
-ManaCost:no cost
-Types:Artifact Creature Wurm
-PT:3/3
-K:Deathtouch
-Oracle:Deathtouch

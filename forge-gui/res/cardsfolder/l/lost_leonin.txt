@@ -1,6 +1,6 @@
 Name:Lost Leonin
 ManaCost:1 W
-Types:Creature Cat Soldier
+Types:Creature Phyrexian Cat Soldier
 PT:2/1
 K:Infect
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lost_leonin.jpg

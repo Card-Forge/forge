@@ -25,4 +25,4 @@ ScryfallCode=V16
 
 [tokens]
 marit_lage
-b_x_x_minion
+b_x_x_phyrexian_minion

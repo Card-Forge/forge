@@ -1,6 +1,6 @@
 Name:Captain Lannery Storm
 ManaCost:2 R
-Types:Creature Legendary Human Pirate
+Types:Legendary Creature Human Pirate
 PT:2/2
 K:Haste
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, create a Treasure token.

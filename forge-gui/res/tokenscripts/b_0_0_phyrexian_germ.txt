@@ -1,0 +1,6 @@
+Name:Phyrexian Germ
+ManaCost:no cost
+Types:Creature Phyrexian Germ
+Colors:black
+PT:0/0
+Oracle:
