@@ -62,7 +62,7 @@ ScryfallCode=AFR
 400 U Power Word Kill
 402 U Prosperous Innkeeper
 
-[tokens]
+[dungeons]
 dungeon_of_the_mad_mage
 lost_mine_of_phandelver
 tomb_of_annihilation
