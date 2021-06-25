@@ -35,9 +35,12 @@ public class BoosterPack extends SealedProduct {
 
     public static final Function<CardEdition, BoosterPack> FN_FROM_SET = new Function<CardEdition, BoosterPack>() {
         @Override
-        public BoosterPack apply(final CardEdition arg1) {
-            Template d = StaticData.instance().getBoosters().get(arg1.getCode());
-            return new BoosterPack(arg1.getName(), d);
+        public BoosterPack apply(final CardEdition edition) {
+            String boosterKind = edition.getRandomBoosterKind();
+            Template d = edition.getBoosterTemplate(boosterKind);
+            StringBuilder sb = new StringBuilder(edition.getName());
+            sb.append(" ").append(boosterKind);
+            return new BoosterPack(sb.toString(), d);
         }
     };
 

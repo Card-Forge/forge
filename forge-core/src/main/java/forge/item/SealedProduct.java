@@ -132,7 +132,7 @@ public abstract class SealedProduct implements InventoryItemFromSet {
     public static class Template {
 
         @SuppressWarnings("unchecked")
-        public final static Template genericBooster = new Template(null, Lists.newArrayList(
+        public final static Template genericDraftBooster = new Template(null, Lists.newArrayList(
             Pair.of(BoosterSlots.COMMON, 10), Pair.of(BoosterSlots.UNCOMMON, 3),
             Pair.of(BoosterSlots.RARE_MYTHIC, 1), Pair.of(BoosterSlots.BASIC_LAND, 1)
         ));
