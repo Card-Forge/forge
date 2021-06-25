@@ -63,6 +63,6 @@ ScryfallCode=AFR
 402 U Prosperous Innkeeper
 
 [dungeons]
-dungeon_of_the_mad_mage
-lost_mine_of_phandelver
-tomb_of_annihilation
+S Dungeon of the Mad Mage
+S Lost Mine of Phandelver
+S Tomb of Annihilation
