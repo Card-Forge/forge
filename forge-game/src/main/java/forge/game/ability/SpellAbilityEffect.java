@@ -329,7 +329,6 @@ public abstract class SpellAbilityEffect {
     }
 
     protected static void addSelfTrigger(final SpellAbility sa, String location, final Card card) {
-    	
     	String trigStr = "Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield " +
     	     "| TriggerDescription$ At the beginning of the end step, " + location.toLowerCase()  + " CARDNAME.";
     	

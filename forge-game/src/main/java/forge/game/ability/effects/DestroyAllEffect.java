@@ -45,7 +45,6 @@ public class DestroyAllEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-
         final boolean noRegen = sa.hasParam("NoRegen");
         final Card card = sa.getHostCard();
         final Game game = sa.getActivatingPlayer().getGame();

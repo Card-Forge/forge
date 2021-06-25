@@ -111,7 +111,6 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
         ability.resetPaidHash();
         splicedCards = sa.getSplicedCards();
 
-        // TODO getXManaCostPaid should be on the SA, not the Card
         xManaPaid = sa.getXManaCostPaid();
 
         // Triggering info
