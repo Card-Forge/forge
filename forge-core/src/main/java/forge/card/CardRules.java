@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -34,7 +34,7 @@ import static org.apache.commons.lang3.StringUtils.containsIgnoreCase;
 /**
  * A collection of methods containing full
  * meta and gameplay properties of a card.
- * 
+ *
  * @author Forge
  * @version $Id: CardRules.java 9708 2011-08-09 19:34:12Z jendave $
  */
@@ -116,7 +116,7 @@ public final class CardRules implements ICardCharacteristics {
 
     public boolean isVariant() {
         CardType t = getType();
-        return t.isVanguard() || t.isScheme() || t.isPlane() || t.isPhenomenon() || t.isConspiracy();
+        return t.isVanguard() || t.isScheme() || t.isPlane() || t.isPhenomenon() || t.isConspiracy() || t.isDungeon();
     }
 
     public CardSplitType getSplitType() {
@@ -334,7 +334,7 @@ public final class CardRules implements ICardCharacteristics {
 
         /**
          * Gets the card.
-         * 
+         *
          * @return the card
          */
         public final CardRules getCard() {
@@ -370,7 +370,7 @@ public final class CardRules implements ICardCharacteristics {
 
         /**
          * Parses the line.
-         * 
+         *
          * @param line
          *            the line
          */
@@ -528,7 +528,7 @@ public final class CardRules implements ICardCharacteristics {
 
             /*
              * (non-Javadoc)
-             * 
+             *
              * @see java.util.Iterator#hasNext()
              */
             @Override
@@ -538,7 +538,7 @@ public final class CardRules implements ICardCharacteristics {
 
             /*
              * (non-Javadoc)
-             * 
+             *
              * @see java.util.Iterator#next()
              */
             @Override
@@ -554,7 +554,7 @@ public final class CardRules implements ICardCharacteristics {
 
             /*
              * (non-Javadoc)
-             * 
+             *
              * @see java.util.Iterator#remove()
              */
             @Override

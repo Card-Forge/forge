@@ -3359,6 +3359,29 @@ public class AbilityUtils {
             return doXMath(opps == null ? 0 : opps.size(), m, source, ctb);
         }
 
+        if (value.equals("DungeonsCompleted")) {
+            return doXMath(player.getCompletedDungeons().size(), m, source, ctb);
+        }
+        if (value.equals("DifferentlyNamedDungeonsCompleted")) {
+            int amount = 0;
+            List<Card> dungeons = player.getCompletedDungeons();
+            for (int i = 0; i < dungeons.size(); ++i) {
+                Card d1 = dungeons.get(i);
+                boolean hasSameName = false;
+                for (int j = i - 1; j >= 0; --j) {
+                    Card d2 = dungeons.get(j);
+                    if (d1.getName().equals(d2.getName())) {
+                        hasSameName = true;
+                        break;
+                    }
+                }
+                if (!hasSameName) {
+                    ++amount;
+                }
+            }
+            return doXMath(amount, m, source, ctb);
+        }
+
         return doXMath(0, m, source, ctb);
     }
 

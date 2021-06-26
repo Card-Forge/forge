@@ -194,6 +194,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private boolean tappedLandForManaThisTurn = false;
     private int attackersDeclaredThisTurn = 0;
     private PlayerCollection attackedOpponentsThisTurn = new PlayerCollection();
+    private List<Card> completedDungeons = new ArrayList<>();
 
     private final Map<ZoneType, PlayerZone> zones = Maps.newEnumMap(ZoneType.class);
     private final Map<Long, Integer> adjustLandPlays = Maps.newHashMap();
@@ -1945,6 +1946,13 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public final void resetAttackersDeclaredThisTurn() {
         attackersDeclaredThisTurn = 0;
+    }
+
+    public final List<Card> getCompletedDungeons() {
+        return completedDungeons;
+    }
+    public void addCompletedDungeon(Card dungeon) {
+        completedDungeons.add(dungeon);
     }
 
     public final void altWinBySpellEffect(final String sourceName) {

@@ -1,0 +1,6 @@
+Name:Skeleton
+ManaCost:no cost
+Types:Creature Skeleton
+Colors:black
+PT:1/1
+Oracle:
