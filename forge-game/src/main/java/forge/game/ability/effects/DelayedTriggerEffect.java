@@ -31,7 +31,6 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
         }
 
         return "";
-
     }
 
     @Override

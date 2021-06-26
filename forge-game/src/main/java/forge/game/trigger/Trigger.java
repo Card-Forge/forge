@@ -340,6 +340,12 @@ public abstract class Trigger extends TriggerReplacementBase {
             }
         }
 
+        if (hasParam("ResolvedLimit")) {
+            if (this.getOverridingAbility().getResolvedThisTurn() >= Integer.parseInt(getParam("ResolvedLimit"))) {
+                return false;
+            }
+        }
+
         if (!meetsCommonRequirements(this.mapParams))
             return false;
 
