@@ -193,7 +193,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     private boolean activateLoyaltyAbilityThisTurn = false;
     private boolean tappedLandForManaThisTurn = false;
     private int attackersDeclaredThisTurn = 0;
-    private PlayerCollection attackedOpponentsThisTurn = new PlayerCollection();
 
     private final Map<ZoneType, PlayerZone> zones = Maps.newEnumMap(ZoneType.class);
     private final Map<Long, Integer> adjustLandPlays = Maps.newHashMap();
