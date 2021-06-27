@@ -8,23 +8,61 @@ Type=Expansion
 ScryfallCode=AFR
 
 [cards]
+7 U Cloister Gargoyle
+15 R Flumph
+16 C Gloom Stalker
+27 R Nadaar, Selfless Paladin
 33 U Portable Hole
+73 C Shortcut Seeker
+78 R Tasha's Hideous Laughter
+99 U Dungeon Crawler
 112 M Lolth, Spider Queen
 114 U Power Word Kill
 124 R Vorpal Sword
+181 M Ellywick Tumblestrum
 200 U Prosperous Innkeeper
 219 U Bruenor Battlehammer
 220 R Drizzt Do'Urden
 235 M Tiamat
+256 C Evolving Wilds
+262 L Plains
+263 L Plains
+264 L Plains
 265 L Plains
+266 L Island
+267 L Island
+268 L Island
 269 L Island
+270 L Swamp
+271 L Swamp
+272 L Swamp
 273 L Swamp
+274 L Mountain
+275 L Mountain
+276 L Mountain
 277 L Mountain
+278 L Forest
+279 L Forest
+280 L Forest
 281 L Forest
 284 M Lolth, Spider Queen
+286 M Ellywick Tumblestrum
 298 M Tiamat
 302 U Cloister Gargoyle
+303 R Nadaar, Selfless Paladin
 337 U Bruenor Battlehammer
 338 R Drizzt Do'Urden
+351 R Den of the Bugbear
+353 C Evolving Wilds
+361 R Flumph
+368 R Tasha's Hideous Laughter
 377 R Vorpal Sword
 396 R Vorpal Sword
+398 U Portable Hole
+400 U Power Word Kill
+402 U Prosperous Innkeeper
+
+[dungeons]
+S Dungeon of the Mad Mage
+S Lost Mine of Phandelver
+S Tomb of Annihilation
