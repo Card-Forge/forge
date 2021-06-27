@@ -1,8 +1,10 @@
 package forge.game.ability.effects;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -138,14 +140,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
                         CardCollection validTargets = validTargetsList.get(i);
                         if (validTargets.isEmpty()) continue;
                         if (validTargets.size() > 1 && i < validArray.length - 1) {
-                            // remove candidates that must be chosen for later types
-                            CardCollection union = new CardCollection();
-                            for (int j = i + 1; j < validArray.length; ++j) {
-                                union.addAll(validTargetsList.get(j));
-                                if (union.size() == (j - i) * amount) {
-                                    validTargets.removeAll(union);
-                                }
-                            }
+                            removeCandidates(validTargets, validTargetsList, new HashSet<>(), i + 1, 0, amount);
                         }
                         choosenToSacrifice = p.getController().choosePermanentsToSacrifice(sa, amount, amount, validTargets, msgArray[i]);
                         for (int j = i + 1; j < validArray.length; ++j) {
@@ -263,5 +258,34 @@ public class SacrificeEffect extends SpellAbilityEffect {
         }
 
         return sb.toString();
+    }
+
+    private void removeCandidates(CardCollection validTargets, List<CardCollection> validTargetsList, Set<Card> union, int index, int included, int amount) {
+        if (index >= validTargetsList.size()) {
+            if (union.size() == included * amount) {
+                validTargets.removeAll(union);
+            }
+            return;
+        }
+
+        removeCandidates(validTargets, validTargetsList, union, index + 1, included, amount);
+
+
+        CardCollection candidate = validTargetsList.get(index);
+        if (candidate.isEmpty()) {
+            return;
+        }
+
+        if (union.isEmpty()) {
+            removeCandidates(validTargets, validTargetsList, candidate.asSet(), index + 1, included + 1, amount);
+        } else {
+            Set<Card> intersection = new HashSet<>(union);
+            intersection.retainAll(candidate.asSet());
+            if (!intersection.isEmpty()) {
+                Set<Card> unionClone = new HashSet<>(union);
+                unionClone.addAll(candidate.asSet());
+                removeCandidates(validTargets, validTargetsList, unionClone, index + 1, included + 1, amount);
+            }
+        }
     }
 }
