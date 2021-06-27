@@ -1192,6 +1192,8 @@ public class GameAction {
                     for (final Card c : cards) {
                         // If a token is in a zone other than the battlefield, it ceases to exist.
                         checkAgain |= stateBasedAction704_5d(c);
+                         // Dungeon Card won't affect other cards, so don't need to set checkAgain
+                        stateBasedAction_Dungeon(c);
                     }
                 }
             }
@@ -1380,6 +1382,15 @@ public class GameAction {
             checkAgain = true;
         }
         return checkAgain;
+    }
+
+    private void stateBasedAction_Dungeon(Card c) {
+        if (!c.getType().isDungeon() || !c.isInLastRoom()) {
+            return;
+        }
+        if (!game.getStack().hasSourceOnStack(c, null)) {
+            completeDungeon(c.getController(), c);
+        }
     }
 
     private boolean stateBasedAction704_attach(Card c, CardZoneTable table) {
@@ -1706,7 +1717,7 @@ public class GameAction {
         game.getTriggerHandler().runTrigger(TriggerType.Destroyed, runParams, false);
         // in case the destroyed card has such a trigger
         game.getTriggerHandler().registerActiveLTBTrigger(c);
-        
+
         final Card sacrificed = sacrificeDestroy(c, sa, table, params);
         return sacrificed != null;
     }
@@ -2186,5 +2197,15 @@ public class GameAction {
 
         counterTable.triggerCountersPutAll(game);
         counterTable.clear();
+    }
+
+    public void completeDungeon(Player player, Card dungeon) {
+        player.addCompletedDungeon(dungeon);
+        ceaseToExist(dungeon, true);
+
+        // Run RoomEntered trigger
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(dungeon);
+        runParams.put(AbilityKey.Player, player);
+        game.getTriggerHandler().runTrigger(TriggerType.DungeonCompleted, runParams, false);
     }
 }
