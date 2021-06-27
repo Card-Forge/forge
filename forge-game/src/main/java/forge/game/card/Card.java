@@ -4095,7 +4095,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final boolean hasKeyword(Keyword keyword) {
         return hasKeyword(keyword, currentState);
     }
-
     public final boolean hasKeyword(Keyword key, CardState state) {
         return state.hasKeyword(key);
     }
@@ -4104,7 +4103,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final boolean hasKeyword(String keyword) {
         return hasKeyword(keyword, currentState);
     }
-
     public final boolean hasKeyword(String keyword, CardState state) {
         if (keyword.startsWith("HIDDEN")) {
             keyword = keyword.substring(7);
@@ -4129,8 +4127,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             final boolean removeAllKeywords, final boolean removeIntrinsicKeywords, final long timestamp) {
         addChangedCardKeywords(keywords, removeKeywords, removeAllKeywords, removeIntrinsicKeywords, timestamp, true);
     }
-
-
     public final void addChangedCardKeywords(final List<String> keywords, final List<String> removeKeywords,
             final boolean removeAllKeywords, final boolean removeIntrinsicKeywords, final long timestamp, final boolean updateView) {
         // if the key already exists - merge entries
@@ -4184,7 +4180,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final KeywordsChange removeChangedCardKeywords(final long timestamp) {
         return removeChangedCardKeywords(timestamp, true);
     }
-
     public final KeywordsChange removeChangedCardKeywords(final long timestamp, final boolean updateView) {
         KeywordsChange change = changedCardKeywords.remove(timestamp);
         if (change != null && updateView) {
