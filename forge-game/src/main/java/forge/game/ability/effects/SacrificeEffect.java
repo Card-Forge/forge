@@ -262,7 +262,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
 
     private void removeCandidates(CardCollection validTargets, List<CardCollection> validTargetsList, Set<Card> union, int index, int included, int amount) {
         if (index >= validTargetsList.size()) {
-            if (union.size() == included * amount) {
+            if (union.size() <= included * amount) {
                 validTargets.removeAll(union);
             }
             return;
@@ -277,15 +277,15 @@ public class SacrificeEffect extends SpellAbilityEffect {
         }
 
         if (union.isEmpty()) {
-            removeCandidates(validTargets, validTargetsList, candidate.asSet(), index + 1, included + 1, amount);
-        } else {
-            Set<Card> intersection = new HashSet<>(union);
-            intersection.retainAll(candidate.asSet());
-            if (!intersection.isEmpty()) {
-                Set<Card> unionClone = new HashSet<>(union);
-                unionClone.addAll(candidate.asSet());
-                removeCandidates(validTargets, validTargetsList, unionClone, index + 1, included + 1, amount);
+            if (candidate.size() <= amount) {
+                validTargets.removeAll(candidate.asSet());
+            } else {
+                removeCandidates(validTargets, validTargetsList, candidate.asSet(), index + 1, included + 1, amount);
             }
+        } else {
+            Set<Card> unionClone = new HashSet<>(union);
+            unionClone.addAll(candidate.asSet());
+            removeCandidates(validTargets, validTargetsList, unionClone, index + 1, included + 1, amount);
         }
     }
 }
