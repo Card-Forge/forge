@@ -50,7 +50,7 @@ public class RestartGameEffect extends SpellAbilityEffect {
         game.resetPlayersAttackedOnNextTurn();
         game.resetPlayersAttackedOnNextTurn();
         GameAction action = game.getAction();
-        
+
         for (Player p: players) {
             p.setStartingLife(p.getStartingLife());
             p.clearCounters();
@@ -58,6 +58,7 @@ public class RestartGameEffect extends SpellAbilityEffect {
             p.onCleanupPhase();
             p.setLandsPlayedLastTurn(0);
             p.resetCommanderStats();
+            p.resetCompletedDungeons();
 
             CardCollection newLibrary = new CardCollection(p.getCardsIn(restartZones, false));
             List<Card> filteredCards = null;
@@ -74,7 +75,7 @@ public class RestartGameEffect extends SpellAbilityEffect {
                 }
             }
             p.getZone(ZoneType.Command).removeAllCards(true);
-            
+
             for (Card c : newLibrary) {
                 action.moveToLibrary(c, 0, sa);
             }
@@ -85,15 +86,15 @@ public class RestartGameEffect extends SpellAbilityEffect {
 
         trigHandler.clearSuppression(TriggerType.Shuffled);
         trigHandler.clearSuppression(TriggerType.ChangesZone);
-    
+
         game.resetTurnOrder();
         game.setAge(GameStage.RestartedByKarn);
         // Do not need this because ability will resolve only during that player's turn
         //game.getPhaseHandler().setPlayerTurn(sa.getActivatingPlayer());
-        
+
         // Set turn number?
-        
-        // The rest is handled by phaseHandler 
+
+        // The rest is handled by phaseHandler
     }
 
     /* (non-Javadoc)

@@ -510,6 +510,13 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
         }
 
+        if (card.getCurrentRoom() != null && !card.getCurrentRoom().isEmpty()) {
+            List<String> markers = new ArrayList<>();
+            markers.add("In Room:");
+            markers.add(card.getCurrentRoom());
+            drawMarkersTabs(g, markers);
+        }
+
         final int combatXSymbols = (cardXOffset + (cardWidth / 4)) - 16;
         final int stateXSymbols = (cardXOffset + (cardWidth / 2)) - 16;
         final int ySymbols = (cardYOffset + cardHeight) - (cardHeight / 8) - 16;
@@ -836,6 +843,57 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             CardFaceSymbols.drawSymbol("counters3", g, cardXOffset - 15, yCounters);
         } else if (counters > 3) {
             CardFaceSymbols.drawSymbol("countersMulti", g, cardXOffset - 15, yCounters);
+        }
+
+    }
+
+    private void drawMarkersTabs(final Graphics g, List<String> markers) {
+
+        final Dimension imgSize = calculateImageSize();
+        final int titleY = Math.round(imgSize.height * (54f / 640)) - 15;
+
+        final int spaceFromTopOfCard = titleY + 60;
+        final int markerBoxHeight = 24;
+        final int markerBoxBaseWidth = 14;
+        final int markerBoxSpacing = 2;
+
+        int currentMarker = 0;
+
+        FontMetrics smallFontMetrics = g.getFontMetrics(smallCounterFont);
+
+        for (String marker : markers) {
+
+            final int markerBoxRealWidth = markerBoxBaseWidth + smallFontMetrics.stringWidth(marker);
+            final int markerYOffset;
+
+            if (ForgeConstants.CounterDisplayLocation.from(FModel.getPreferences().getPref(FPref.UI_CARD_COUNTER_DISPLAY_LOCATION)) == ForgeConstants.CounterDisplayLocation.TOP) {
+                markerYOffset = cardYOffset + spaceFromTopOfCard - markerBoxHeight + currentMarker++ * (markerBoxHeight + markerBoxSpacing);
+            } else {
+                markerYOffset = cardYOffset + cardHeight - spaceFromTopOfCard / 2 - markerBoxHeight + currentMarker++ * (markerBoxHeight + markerBoxSpacing);
+            }
+
+            if (isSelected) {
+                g.setColor(new Color(0, 0, 0, 255));
+            } else {
+                g.setColor(new Color(0, 0, 0, 200));
+            }
+
+            RoundRectangle2D markerArea = new RoundRectangle2D.Float(cardXOffset, markerYOffset, markerBoxRealWidth, markerBoxHeight, 9, 9);
+            ((Graphics2D) g).fill(markerArea);
+
+            g.fillRect(cardXOffset, markerYOffset, 9, markerBoxHeight);
+
+            if (isSelected) {
+                g.setColor(new Color(200, 200, 200));
+            } else {
+                g.setColor(new Color(200, 200, 200, 180));
+            }
+
+            Rectangle nameBounds = markerArea.getBounds();
+            nameBounds.x += 8;
+            nameBounds.y -= 1;
+            nameBounds.width = 43;
+            drawVerticallyCenteredString(g, marker, nameBounds, smallCounterFont, smallFontMetrics);
         }
 
     }

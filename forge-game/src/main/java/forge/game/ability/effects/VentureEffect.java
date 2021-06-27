@@ -49,7 +49,7 @@ public class VentureEffect  extends SpellAbilityEffect {
         for (PaperCard pc : dungeonCards) {
             faces.add(pc.getRules().getMainPart());
         }
-        String message = Localizer.getInstance().getMessage("lblChooseACardName");
+        String message = Localizer.getInstance().getMessage("lblChooseDungeon");
         String chosen = player.getController().chooseCardName(sa, faces, message);
         Card dungeon = Card.fromPaperCard(StaticData.instance().getVariantCards().getUniqueByName(chosen), player);
 
@@ -81,7 +81,7 @@ public class VentureEffect  extends SpellAbilityEffect {
                     }
                 }
             }
-            final String title = Localizer.getInstance().getMessage("lblChooseAbilityForObject", dungeon.toString());
+            final String title = Localizer.getInstance().getMessage("lblChooseRoom");
             SpellAbility chosen = player.getController().chooseSingleSpellForEffect(candidates, sa, title, null);
             return chosen.getParam("RoomName");
         } else {

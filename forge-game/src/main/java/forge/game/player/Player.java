@@ -1954,6 +1954,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     public void addCompletedDungeon(Card dungeon) {
         completedDungeons.add(dungeon);
     }
+    public void resetCompletedDungeons() {
+        completedDungeons.clear();
+    }
 
     public final void altWinBySpellEffect(final String sourceName) {
         if (cantWin()) {
