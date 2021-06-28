@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Strixhaven: School of Mages #03
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2021/05/174.-STX3-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. You have five Lessons in your sideboard: Expanded Anatomy, Environmental Sciences, Necrotic Fumes, Containment Breach, Pest Summoning
+[state]
+humanlife=20
+ailife=9
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Witherbloom Command;Valentin, Dean of the Vein;Cram Session;Bake into a Pie
+humanbattlefield=Eyetwitch;Accomplished Alchemist;Bushmeat Poacher;Swamp;Swamp;Swamp;Swamp;Forest;Forest;Forest
+humansideboard=Expanded Anatomy;Environmental Sciences;Necrotic Fumes;Containment Breach;Pest Summoning
+aibattlefield=t:Giant Wizard,P:4,T:4,Cost:no cost,Color:U,Types:Creature-Giant-Wizard,Keywords:,Image:u_4_4_giant_wizard_khm|Id:1;Giant's Amulet|AttachedTo:1
