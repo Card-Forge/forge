@@ -1,0 +1,23 @@
+[metadata]
+Name:Possibility Storm - Strixhaven: School of Mages #02
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2021/05/173.-STX2-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. You have 36 cards remaining in your library. Your opponent has 40. Assume that any that are drawn are not relevant to the puzzle. Mystic Reflection is Foretold in exile and you have three Lessons in your sideboard: Expanded Anatomy, Environmental Sciences, Confront the Past
+[state]
+humanlife=20
+ailife=19
+turn=2
+activeplayer=human
+activephase=MAIN1
+humanhand=Plumb the Forbidden;Peer into the Abyss;Quandrix Command;Poison the Cup
+humanlibrary=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+humanbattlefield=Kasmina, Enigma Sage|Counters:LOYALTY=4;Garruk, Cursed Huntsman|Counters:LOYALTY=5;Gingerbrute|Counters:P1P1=6;Lorescale Coatl|Counters:P1P1=2;Eyetwitch;Necroblossom Snarl;Necroblossom Snarl;Necroblossom Snarl;Necroblossom Snarl;Vineglimmer Snarl;Vineglimmer Snarl;Vineglimmer Snarl
+humanexile=Mystic Reflection|Foretold
+humansideboard=Expanded Anatomy;Environmental Sciences;Confront the Past
+humanprecast=Garruk, Cursed Huntsman:1
+ailibrary=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+aibattlefield=Cubwarden;Eradicator Valkyrie;Chrome Replicator;Glorious Anthem
+removesummoningsickness=true
+aiprecast=Cubwarden:CustomScript:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_cat_lifelink | TokenOwner$ You;Chrome Replicator:CustomScript:DB$ Token | TokenAmount$ 1 | TokenScript$ c_4_4_a_construct | TokenOwner$ You
