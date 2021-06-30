@@ -270,6 +270,63 @@ public class ComputerUtilCard {
 
     /**
      * <p>
+     * getWorstLand.
+     * </p>
+     * 
+     * @param lands
+     * @return a {@link forge.game.card.Card} object.
+     */
+    public static Card getWorstLand(final List<Card> lands) {
+        Card worstLand = null;
+        int maxScore = Integer.MIN_VALUE;
+        // first, check for tapped, basic lands
+        for (Card tmp : lands) {
+            int score = tmp.isTapped() ? 2 : 0;
+            score += tmp.isBasicLand() ? 1 : 0;
+            score -= tmp.isCreature() ? 4 : 0;
+            for (Card aura : tmp.getEnchantedBy()) {
+                if (aura.getController().isOpponentOf(tmp.getController())) {
+                    score += 5;
+                } else {
+                    score -= 5;
+                }
+            }
+            if (score == maxScore &&
+                    CardLists.count(lands, CardPredicates.sharesNameWith(tmp)) > CardLists.count(lands, CardPredicates.sharesNameWith(worstLand))) {
+                worstLand = tmp;
+            }
+            if (score > maxScore) {
+                worstLand = tmp;
+                maxScore = score;
+            }
+        }
+        return worstLand;
+    }
+
+    public static Card getBestLandToAnimate(final Iterable<Card> lands) {
+        Card land = null;
+        int maxScore = Integer.MIN_VALUE;
+        // first, check for tapped, basic lands
+        for (Card tmp : lands) {
+            int score = tmp.isTapped() ? 0 : 2;
+            score += tmp.isBasicLand() ? 2 : 0;
+            score -= tmp.isCreature() ? 4 : 0;
+            score -= 5 * tmp.getEnchantedBy().size();
+
+            if (score == maxScore &&
+                    CardLists.count(lands, CardPredicates.sharesNameWith(tmp)) > CardLists.count(lands, CardPredicates.sharesNameWith(land))) {
+                land = tmp;
+            }
+            if (score > maxScore) {
+                land = tmp;
+                maxScore = score;
+            }
+        }
+        return land;
+    }
+
+    /**
+     * <p>
      * getCheapestPermanentAI.
      * </p>
      * 
@@ -876,57 +933,6 @@ public class ComputerUtilCard {
         return result;
     }
 
-
-    /**
-     * <p>
-     * getWorstLand.
-     * </p>
-     * 
-     * @param lands
-     * @return a {@link forge.game.card.Card} object.
-     */
-    public static Card getWorstLand(final List<Card> lands) {
-        Card worstLand = null;
-        int maxScore = Integer.MIN_VALUE;
-        // first, check for tapped, basic lands
-        for (Card tmp : lands) {
-            int score = tmp.isTapped() ? 2 : 0;
-            score += tmp.isBasicLand() ? 1 : 0;
-            score -= tmp.isCreature() ? 4 : 0;
-            for (Card aura : tmp.getEnchantedBy()) {
-            	if (aura.getController().isOpponentOf(tmp.getController())) {
-            		score += 5;
-            	} else {
-            		score -= 5;
-            	}
-            }
-            if (score >= maxScore) {
-                worstLand = tmp;
-                maxScore = score;
-            }
-        }
-        return worstLand;
-    } // end getWorstLand
-
-    public static Card getBestLandToAnimate(final Iterable<Card> lands) {
-        Card land = null;
-        int maxScore = Integer.MIN_VALUE;
-        // first, check for tapped, basic lands
-        for (Card tmp : lands) {
-            // TODO Improve this by choosing basic lands that I have plenty of mana in
-            int score = tmp.isTapped() ? 0 : 2;
-            score += tmp.isBasicLand() ? 2 : 0;
-            score -= tmp.isCreature() ? 4 : 0;
-            score -= 5 * tmp.getEnchantedBy().size();
-
-            if (score >= maxScore) {
-                land = tmp;
-                maxScore = score;
-            }
-        }
-        return land;
-    } // end getBestLandToAnimate
-
     public static final Predicate<Deck> AI_KNOWS_HOW_TO_PLAY_ALL_CARDS = new Predicate<Deck>() {
         @Override
         public boolean apply(Deck d) {
@@ -939,6 +945,7 @@ public class ComputerUtilCard {
             return true;
         }
     };
+
     public static List<String> chooseColor(SpellAbility sa, int min, int max, List<String> colorChoices) {
         List<String> chosen = new ArrayList<>();
         Player ai = sa.getActivatingPlayer();

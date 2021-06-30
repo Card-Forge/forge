@@ -397,7 +397,6 @@ public class PlayEffect extends SpellAbilityEffect {
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
     }
 
-
     protected void addIllusionaryMaskReplace(Card c, SpellAbility sa) {
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();

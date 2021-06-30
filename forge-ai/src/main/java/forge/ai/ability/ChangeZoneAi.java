@@ -1709,7 +1709,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
         return true;
     }
 
-
     @Override
     public Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         // Called when looking for creature to attach aura or equipment
