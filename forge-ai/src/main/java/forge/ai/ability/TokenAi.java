@@ -142,7 +142,7 @@ public class TokenAi extends SpellAbilityAi {
         final Player opp = ai.getWeakestOpponent();
 
         if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return false;   // prevent infinite tokens?
+            return false; // prevent infinite tokens?
         }
         Card actualToken = spawnToken(ai, sa);
 

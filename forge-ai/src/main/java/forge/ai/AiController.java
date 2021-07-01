@@ -816,7 +816,7 @@ public class AiController {
             if(payCosts != null) {
                 ManaCost mana = payCosts.getTotalMana();
                 if (mana != null) {
-                    if(mana.countX() > 0) {
+                    if (mana.countX() > 0) {
                         // Set PayX here to maximum value.
                         final int xPay = ComputerUtilCost.getMaxXValue(sa, player);
                         if (xPay <= 0) {
