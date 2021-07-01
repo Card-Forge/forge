@@ -8,23 +8,90 @@ Type=Expansion
 ScryfallCode=AFR
 
 [cards]
+5 C Celestial Unicorn
 7 U Cloister Gargoyle
+9 C Dawnbringer Cleric
+11 C Devoted Paladin
 15 R Flumph
 16 C Gloom Stalker
+19 C Half-Elf Monk
+20 M Icingdeath, Frost Tyrant
+26 U Moon-Blessed Cleric
 27 R Nadaar, Selfless Paladin
+28 R Oswald Fiddlebender
 33 U Portable Hole
+42 C You Hear Something on Watch
+43 C You're Ambushed on the Road
+45 C Air-Cult Elemental
+48 R The Blackstaff of Waterdeep
+50 C Charmed Sleep
+51 C Clever Conjurer
+56 R Dragon Turtle
+60 R Grazilaxx, Illithid Scholar
+61 U Guild Thief
 73 C Shortcut Seeker
 78 R Tasha's Hideous Laughter
+83 C You Come to a River
+84 C You Find the Villains' Lair
+85 C You See a Guard Approach
+89 C Baleful Beholder
+90 U Black Dragon
+91 M The Book of Vile Darkness
+97 C Devour Intellect
 99 U Dungeon Crawler
+100 M Ebondeath, Dracolich
+105 R Gelatinous Cube
+107 U Grim Wanderer
 112 M Lolth, Spider Queen
+113 C Manticore
 114 U Power Word Kill
+119 C Shambling Ghast
+121 R Sphere of Annihilation
 124 R Vorpal Sword
+127 R Wight
+132 U Battle Cry Goblin
+140 C Dueling Rapier
+143 M Flameskull
+148 C Hobgoblin Captain
+155 R Meteor Swarm
+156 R Minion of the Mighty
+157 R Orb of Dragonkind
+158 C Plundering Barbarian
+163 U Tiger-Tribe Hunter
+165 C Valor Singer
+166 R Wish
+168 C You Come to the Gnoll Camp
+169 U You Find Some Prisoners
+170 U You See a Pair of Goblins
+174 C Bull's Strength
+175 U Choose Your Weapon
+176 R Circle of Dreams Druid
 181 M Ellywick Tumblestrum
+185 C Gnoll Hunter
+186 U Green Dragon
+189 C Inspiring Bard
+196 R Ochre Jelly
+198 C Owlbear
 200 U Prosperous Innkeeper
+201 U Purple Worm
+207 M The Tarrasque
+211 R Werewolf Pack Leader
+214 U You Happen On a Glade
+216 R Adult Gold Dragon
 219 U Bruenor Battlehammer
 220 R Drizzt Do'Urden
+231 U Shessra, Death's Whisper
+234 U Targ Nar, Demon-Fang Gnoll
 235 M Tiamat
+236 U Trelasarra, Moon Dancer
+239 M Xanathar, Guild Kingpin
+244 U Fifty Feet of Rope
+249 C Mimic
+253 R Cave of the Frost Dragon
+254 R Den of the Bugbear
 256 C Evolving Wilds
+257 R Hall of Storm Giants
+258 R Hive of the Eye Tyrant
 262 L Plains
 263 L Plains
 264 L Plains
@@ -47,18 +114,54 @@ ScryfallCode=AFR
 281 L Forest
 284 M Lolth, Spider Queen
 286 M Ellywick Tumblestrum
+287 M Icingdeath, Frost Tyrant
+291 U Black Dragon
+292 M Ebondeath, Dracolich
+295 U Green Dragon
+297 R Adult Gold Dragon
 298 M Tiamat
+301 C Celestial Unicorn
 302 U Cloister Gargoyle
 303 R Nadaar, Selfless Paladin
+304 R Oswald Fiddlebender
+307 R Dragon Turtle
+311 C Baleful Beholder
+313 R Gelatinous Cube
+314 C Manticore
+316 R Wight
+320 R Minion of the Mighty
+326 C Gnoll Hunter
+330 R Ochre Jelly
+331 C Owlbear
+332 U Purple Worm
+333 M The Tarrasque
 337 U Bruenor Battlehammer
 338 R Drizzt Do'Urden
+345 U Shessra, Death's Whisper
+346 U Trelasarra, Moon Dancer
+349 C Mimic
+350 R Cave of the Frost Dragon
 351 R Den of the Bugbear
 353 C Evolving Wilds
+354 R Hall of Storm Giants
+355 R Hive of the Eye Tyrant
 361 R Flumph
+365 R The Blackstaff of Waterdeep
+367 R Grazilaxx, Illithid Scholar
 368 R Tasha's Hideous Laughter
+374 M The Book of Vile Darkness
+376 R Sphere of Annihilation
 377 R Vorpal Sword
+378 M Flameskull
+380 R Meteor Swarm
+381 R Orb of Dragonkind
+382 R Wish
+383 R Circle of Dreams Druid
+387 R Werewolf Pack Leader
+391 M Xanathar, Guild Kingpin
 396 R Vorpal Sword
 398 U Portable Hole
+399 C You Find the Villains' Lair
 400 U Power Word Kill
 402 U Prosperous Innkeeper
 
