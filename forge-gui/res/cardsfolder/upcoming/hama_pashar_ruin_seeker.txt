@@ -1,0 +1,6 @@
+Name:Hama Pashar, Ruin Seeker
+ManaCost:1 W U
+Types:Legendary Creature Human Wizard
+PT:2/3
+S:Mode$ Panharmonicon | ValidMode$ RoomEntered | ValidCard$ Dungeon.YouCtrl | Description$ Room abilities of dungeons you own trigger an additional time.
+Oracle:Room abilities of dungeons you own trigger an additional time.

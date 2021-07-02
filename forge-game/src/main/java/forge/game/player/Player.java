@@ -193,6 +193,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private boolean activateLoyaltyAbilityThisTurn = false;
     private boolean tappedLandForManaThisTurn = false;
     private int attackersDeclaredThisTurn = 0;
+    private int venturedThisTurn = 0;
     private List<Card> completedDungeons = new ArrayList<>();
 
     private final Map<ZoneType, PlayerZone> zones = Maps.newEnumMap(ZoneType.class);
@@ -1947,6 +1948,16 @@ public class Player extends GameEntity implements Comparable<Player> {
         attackersDeclaredThisTurn = 0;
     }
 
+    public final int getVenturedThisTurn() {
+        return venturedThisTurn;
+    }
+    public final void incrementVenturedThisTurn() {
+        venturedThisTurn++;
+    }
+    public final void resetVenturedThisTurn() {
+        venturedThisTurn = 0;
+    }
+
     public final List<Card> getCompletedDungeons() {
         return completedDungeons;
     }
@@ -2490,6 +2501,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         resetSacrificedThisTurn();
         clearAssignedDamage();
         resetAttackersDeclaredThisTurn();
+        resetVenturedThisTurn();
         setRevolt(false);
         resetProwl();
         setSpellsCastLastTurn(getSpellsCastThisTurn());
