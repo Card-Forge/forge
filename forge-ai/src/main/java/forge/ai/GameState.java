@@ -1411,6 +1411,8 @@ public abstract class GameState {
                     c.addMayLookTemp(c.getOwner());
                 } else if (info.equals("ForetoldThisTurn")) {
                     c.setForetoldThisTurn(true);
+                } else if (info.equals("IsToken")) {
+                    c.setToken(true);
                 }
             }
 
