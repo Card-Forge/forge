@@ -90,6 +90,10 @@ public class VentureEffect  extends SpellAbilityEffect {
     }
 
     private void ventureIntoDungeon(SpellAbility sa, Player player) {
+        if (player.getVenturedThisTurn() >= 1 && player.hasKeyword("You can't venture into the dungeon more than once each turn.")) {
+            return;
+        }
+
         final Game game = player.getGame();
         Card dungeon = getDungeonCard(sa, player);
         String room = dungeon.getCurrentRoom();
@@ -111,6 +115,8 @@ public class VentureEffect  extends SpellAbilityEffect {
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(dungeon);
         runParams.put(AbilityKey.RoomName, nextRoom);
         game.getTriggerHandler().runTrigger(TriggerType.RoomEntered, runParams, false);
+
+        player.incrementVenturedThisTurn();
     }
 
     @Override
