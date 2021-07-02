@@ -1,0 +1,7 @@
+Name:Clattering Skeletons
+ManaCost:3 B
+Types:Creature Skeleton
+PT:4/3
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigVenture | TriggerDescription$ When CARDNAME dies, venture into the dungeon. (Enter the first room or advance to the next room.)
+SVar:TrigVenture:DB$ Venture
+Oracle:When Clattering Skeletons dies, venture into the dungeon. (Enter the first room or advance to the next room.)
