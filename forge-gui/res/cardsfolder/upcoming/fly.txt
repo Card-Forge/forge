@@ -1,0 +1,9 @@
+Name:Fly
+ManaCost:U
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ U | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying | AddTrigger$ TrigDamageDone | Description$ Enchanted creature has flying and "Whenever this creature deals combat damage to a player, venture into the dungeon." (Enter the first room or advance to the next room.)
+SVar:TrigDamageDone:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigVenture | TriggerDescription$ Whenever this creature deals combat damage to a player, venture into the dungeon.
+SVar:TrigVenture:DB$ Venture
+Oracle:Enchant creature\nEnchanted creature has flying and "Whenever this creature deals combat damage to a player, venture into the dungeon." (Enter the first room or advance to the next room.)

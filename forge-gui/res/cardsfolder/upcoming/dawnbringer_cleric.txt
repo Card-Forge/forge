@@ -1,0 +1,11 @@
+Name:Dawnbringer Cleric
+ManaCost:1 W
+Types:Creature Human Cleric
+PT:1/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBGainLife,DBDestroy,DBExileCard
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2 | SpellDescription$ Cure Wounds — You gain 2 life.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Dispel Magic — Destroy target enchantment.
+SVar:DBExileCard:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Gentle Repose — Exile target card from a graveyard.
+DeckHas:Ability$LifeGain
+Oracle:When Dawnbringer Cleric enters the battlefield, choose one — \n• Cure Wounds — You gain 2 life.\n• Dispel Magic — Destroy target enchantment.\n• Gentle Repose — Exile target card from a graveyard.
