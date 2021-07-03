@@ -121,7 +121,7 @@ public class CostAdjustment {
             String amount = st.getParam("Amount");
             if ("Escalate".equals(amount)) {
                 SpellAbility sub = sa;
-                while(sub != null) {
+                while (sub != null) {
                     if (sub.getDirectSVars().containsKey("CharmOrder")) {
                         count++;
                     }
@@ -148,7 +148,7 @@ public class CostAdjustment {
             // Amount 1 as default
             count = 1;
         }
-        for(int i = 0; i < count; ++i) {
+        for (int i = 0; i < count; ++i) {
             cost.add(part);
         }
     }
