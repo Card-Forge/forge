@@ -28,6 +28,7 @@ import forge.game.card.CardPredicates;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
+import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityPredicates;
@@ -158,6 +159,11 @@ public class PlayAi extends SpellAbilityAi {
         return true;
     }
 
+    @Override
+    public boolean confirmAction(Player ai, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
+        return true;
+    }
+
     /* (non-Javadoc)
      * @see forge.card.ability.SpellAbilityAi#chooseSingleCard(forge.game.player.Player, forge.card.spellability.SpellAbility, java.util.List, boolean)
      */
@@ -192,7 +198,7 @@ public class PlayAi extends SpellAbilityAi {
 
                         spell = (Spell) spell.copyWithDefinedCost(abCost);
                     }
-                    if (AiPlayDecision.WillPlay == ((PlayerControllerAi)ai.getController()).getAi().canPlayFromEffectAI(spell, !isOptional, true)) {
+                    if (AiPlayDecision.WillPlay == ((PlayerControllerAi)ai.getController()).getAi().canPlayFromEffectAI(spell, !(isOptional || sa.hasParam("Optional")), true)) {
                         // Before accepting, see if the spell has a valid number of targets (it should at this point).
                         // Proceeding past this point if the spell is not correctly targeted will result
                         // in "Failed to add to stack" error and the card disappearing from the game completely.
