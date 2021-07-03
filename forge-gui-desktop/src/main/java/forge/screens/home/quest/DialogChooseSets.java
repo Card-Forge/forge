@@ -6,27 +6,20 @@ import java.util.*;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
+import forge.toolbox.*;
 import forge.card.CardEdition;
 import forge.game.GameFormat;
 import forge.gui.SOverlayUtils;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
-import forge.toolbox.FButton;
-import forge.toolbox.FCheckBox;
-import forge.toolbox.FCheckBoxList;
-import forge.toolbox.FLabel;
-import forge.toolbox.FOverlay;
-import forge.toolbox.FPanel;
-import forge.toolbox.FRadioButton;
-import forge.toolbox.FScrollPane;
-import forge.toolbox.FSkin;
-import forge.toolbox.FTextField;
 import forge.util.Localizer;
 import forge.util.TextUtil;
 import net.miginfocom.swing.MigLayout;
+import forge.toolbox.FCheckBoxTree.FTreeNode;
+import forge.toolbox.FCheckBoxTree.FTreeNodeData;
 
 public class DialogChooseSets {
 
@@ -34,8 +27,8 @@ public class DialogChooseSets {
 	private boolean wantReprints = true;
 	private Runnable okCallback;
 
-	private final Map<CardEdition.Type, List<FCheckBox>> selectedCheckBoxes = new TreeMap<>();
 	private final FCheckBox cbWantReprints = new FCheckBox(Localizer.getInstance().getMessage("lblDisplayRecentSetReprints"));
+	private final FCheckBoxTree checkBoxTree = new FCheckBoxTree();
 
 	public DialogChooseSets(Collection<String> preselectedSets, Collection<String> unselectableSets, boolean showWantReprintsCheckbox) {
 
@@ -56,311 +49,389 @@ public class DialogChooseSets {
 				preselectedTypes.add(edition.getType());
 			}
 		}
-		Set<CardEdition.Type> unSelectableTypes = null;
-		if (unselectableSets != null){
-			unSelectableTypes = new HashSet<>();
-			for (String code: unselectableSets){
-				CardEdition edition = FModel.getMagicDb().getCardEdition(code);
-				unSelectableTypes.add(edition.getType());
-			}
-		}
 
-		// Create the map of Edition Checkboxes, organised per type (label) for immediate access.
-		/* NOTE: Here the (String) label representation of CardEdition.Type will be used as keys
-				 (i.e. Title case and no underscore) instead of the actual enum instance.
-				 This is to simplify the retrieval of checkboxes for each edition type, since the very same labels will
-				 be also used in the UI for selection (see the `editionTypes` ArrayList definition below).*/
-		Map<String, List<FCheckBox>> editionsCheckBoxes = new HashMap<>();
-		// Store the list of all Edition Types available to be added in the UI panel
-		List<String> editionTypes = new ArrayList<>();  // List of all EditionTypes
-
+		TreeMap<FTreeNodeData, List<FTreeNodeData>> editionTypeTreeData = new TreeMap<>();
+		TreeMap<CardEdition.Type, Integer> allEditionTypes = new TreeMap<>();
+		List<CardEdition> allCardEditions = new ArrayList<>();
 		for (CardEdition.Type editionType : editionsTypeMap.keySet()) {
-			if (null != unSelectableTypes && unSelectableTypes.contains(editionType))  // skip unselectable types
-				continue;
 			List<CardEdition> editionsOfType = editionsTypeMap.get(editionType);
 			if (editionsOfType.size() == 0)  // skip empty set types
 				continue;
-			String editionTypeLabel = editionType.toString();
-			editionTypes.add(editionTypeLabel);
-
-			// initialise map of selected checkboxes
-			selectedCheckBoxes.put(editionType, new ArrayList<>());
-			List<FCheckBox> edTypeCheckBoxes = new ArrayList<>();
+			List<FTreeNodeData> editionPerTypeNodes = new ArrayList<>();
+			allCardEditions.addAll(editionsOfType);
+			int enabledEditionsOfTypeCounter = 0;
 			for (CardEdition ce: editionsOfType){
 				String code = ce.getCode();
-				FCheckBox edBox = new FCheckBox(TextUtil.concatWithSpace(ce.getName(), TextUtil.enclosedParen(code)));
-				edBox.setName(code);
-				// set the status of UI components
 				boolean isSelected = null != preselectedSets && preselectedSets.contains(code);
-				edBox.setSelected(isSelected);
-				edBox.setEnabled(null == unselectableSets || !unselectableSets.contains(code));
-				edTypeCheckBoxes.add(edBox);
-				if (isSelected)  // also add to the list of selected boxes
-					selectedCheckBoxes.get(editionType).add(edBox);
+				boolean isEnabled = null == unselectableSets || !unselectableSets.contains(code);
+				FTreeNodeData editionNode = new FTreeNodeData(ce, ce.getName(), ce.getCode());
+				editionNode.isEnabled = isEnabled;
+				editionNode.isSelected = isSelected;
+				if (isEnabled)
+					enabledEditionsOfTypeCounter += 1;
+				editionPerTypeNodes.add(editionNode);
 			}
-			editionsCheckBoxes.put(editionTypeLabel, edTypeCheckBoxes);
+			editionTypeTreeData.put(new FTreeNodeData(editionType), editionPerTypeNodes);
+			allEditionTypes.put(editionType, enabledEditionsOfTypeCounter);
 		}
-		// Initialise UI - MAIN PANEL WINDOW
-		FPanel panel = new FPanel(new MigLayout("insets 10, gap 5, center, wrap 3"));
-		panel.setOpaque(false);
-		panel.setBackgroundTexture(FSkin.getIcon(FSkinProp.BG_TEXTURE));
+		this.checkBoxTree.setTreeData(editionTypeTreeData);
 
-		// === BOTTOM OPTIONS PANEL ===
-		JPanel optionsPanel = new JPanel(new MigLayout("insets 10, gap 5, center, wrap 3"));
-		optionsPanel.setVisible(false);
+		// === 0. MAIN PANEL WINDOW ===
+		// ===================================================================
+		// Initialise UI
+		FPanel mainDialogPanel = new FPanel(new MigLayout("insets 10, gap 5, center, wrap 2, w 800:1024:2048"));
+		mainDialogPanel.setOpaque(false);
+		mainDialogPanel.setBackgroundTexture(FSkin.getIcon(FSkinProp.BG_TEXTURE));
+
+		// === 1. RANDOM SELECTION PANEL ===
+		// ===================================================================
+		JPanel randomSelectionPanel = new JPanel(new MigLayout("insets 10, gap 5, right, wrap 2"));
+		randomSelectionPanel.setOpaque(false);
+
+		// === 2. RANDOM OPTIONS PANEL ===
+		// Setup components for the random selection panel.
+		// NOTES: These components need to be defined first, as they will also be controlled by
+		// format selection buttons (enabled/disabled accordingly).
+		randomSelectionPanel.add(new FLabel.Builder().text(
+				Localizer.getInstance().getMessage("lblSelectRandomSets")).fontSize(14)
+				.fontStyle(Font.BOLD).build(), "h 40!, w 100%, center, span 2");
+		FButton randomSelectionButton = new FButton(Localizer.getInstance().getMessage("lblRandomizeSets"));
+		randomSelectionButton.setFont(FSkin.getBoldFont(13));
+		randomSelectionButton.setEnabled(false);  // by default is not enabled
+
+		// === SPINNER AND LABELS ===
+		TreeMap<CardEdition.Type, FSpinner> spinnersEditionTypeMap = new TreeMap<>();
+		TreeMap<CardEdition.Type, FLabel> labelsEditionTypeMap = new TreeMap<>();
+		List<FSpinner> editionTypeSpinners = new ArrayList<>();
+		for (CardEdition.Type editionType: allEditionTypes.keySet()) {
+			int enabledEditionCount = allEditionTypes.get(editionType);
+
+			FSpinner spinner = new FSpinner.Builder().initialValue(0).minValue(0).maxValue(enabledEditionCount).build();
+			String labTxt = "<html>" + editionType.toString().replaceAll(" ", "<br>") + ": </html>";
+			FLabel label = new FLabel.Builder().text(labTxt).fontSize(13).build();
+
+			// Determine status of component
+			if (enabledEditionCount == 0) {
+				// No editions enabled meaning:
+				// the edition type HAS extensions but none of them is enabled!
+				spinner.setEnabled(false);
+				label.setEnabled(false);
+			}
+			editionTypeSpinners.add(spinner);
+			labelsEditionTypeMap.put(editionType, label);
+			spinnersEditionTypeMap.put(editionType, spinner);
+		}
+		// == SPINNERS ACTION PERFORMED ==
+		editionTypeSpinners.forEach(spinner -> {
+			spinner.addChangeListener(new ChangeListener() {
+				@Override
+				public void stateChanged(ChangeEvent e) {
+					// As soon as the value of a spinner becomes different from zero,
+					// enabled the random selection button.
+					int spinValue = (int) spinner.getValue();
+					if (spinValue > 0) {
+						if (!randomSelectionButton.isEnabled())
+							randomSelectionButton.setEnabled(true);
+					} else {
+						// Similarly, when all spinners are set to zero,
+						// disable the random selection button
+						boolean allZeros = true;
+						for (FSpinner spin : editionTypeSpinners) {
+							int value = (int) spin.getValue();
+							if (value != 0) {
+								allZeros = false;
+								break;
+							}
+						}
+						if (allZeros)
+							randomSelectionButton.setEnabled(false);
+					}
+				}
+			});
+		});
+
+		// == ADD SPINNERS AND LABELS TO THE PANEL ==
+		JPanel typeFieldsPanel = null;
+		randomSelectionPanel.add(new JSeparator(SwingConstants.HORIZONTAL), "w 100%, span 2, center");
+		randomSelectionPanel.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("nlSelectRandomSets"))
+				.fontSize(12).fontStyle(Font.ITALIC).build(), "w 80%!, h 22px!, gap 10 0 0 0, span 2, center");
+		String pairPanelLayout = "wrap 2, w 30%";
+		int componentIndex = 0;
+		int pairPerPanel = 3;
+		int panelCompsCount = 0;
+		for (CardEdition.Type editionType : allEditionTypes.keySet()) {
+			if (panelCompsCount == 0)
+				typeFieldsPanel = new JPanel(new MigLayout("insets 10, gap 25 5, wrap 3"));
+			typeFieldsPanel.setOpaque(false);
+			JPanel pairPanel = new JPanel(new MigLayout(pairPanelLayout));
+			pairPanel.setOpaque(false);
+			pairPanel.add(labelsEditionTypeMap.get(editionType), "w 100!, align left, span 1");
+			pairPanel.add(spinnersEditionTypeMap.get(editionType), "w 45!, align right, span 1");
+			typeFieldsPanel.add(pairPanel, "span 1, left");
+			panelCompsCount += 1;
+			componentIndex += 1;
+			if ((panelCompsCount == pairPerPanel) || (componentIndex == editionTypeSpinners.size())) {
+				// add panel to outer container if we ran out of space, or we are processing the last item
+				randomSelectionPanel.add(typeFieldsPanel, "w 100%, span 2");
+				panelCompsCount = 0; // reset counter for the new panel, in case
+			}
+		}
+		randomSelectionPanel.add(new JSeparator(SwingConstants.HORIZONTAL), "w 100%, span 2, gap 0");
+		FButton clearSelectionButton = new FButton(Localizer.getInstance().getMessage("lblClearSelection"));
+		clearSelectionButton.setFont(FSkin.getBoldFont(13));
+
+		// == UPDATE RANDOM PANEL LAYOUT ==
+		randomSelectionPanel.add(clearSelectionButton, "gaptop 15, w 40%, h 26!, center");
+		randomSelectionPanel.add(randomSelectionButton, "gaptop 15, w 40%, h 26!, center");
+		if (showWantReprintsCheckbox) {
+			randomSelectionPanel.add(cbWantReprints, "gaptop 10, left, span, wrap");
+		}
+
+		// === 2. OPTIONS PANEL ===
+		// ===================================================================
+		JPanel optionsPanel = new JPanel(new MigLayout("insets 10, gap 5, center, wrap 2"));
 		optionsPanel.setOpaque(false);
-		optionsPanel.add(new JSeparator(SwingConstants.HORIZONTAL), "w 100%, span 2, growx");
-		optionsPanel.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblSelectRandomSets"))
-				.fontSize(17).fontStyle(Font.BOLD).build(), "h 40!, span 2");
 
-		// a. Left Options
-		// TO BE DECIDED on these three
-		FTextField coreField = new FTextField.Builder().text("0").maxLength(3).build();
-		FTextField expansionField = new FTextField.Builder().text("0").maxLength(3).build();
-		FTextField otherField = new FTextField.Builder().text("0").maxLength(3).build();
+		// === 2. FORMAT OPTIONS PANEL ===
+		// This will include a button for each format and a NO-Format Radio Button (default)
+		JPanel formatOptionsPanel = new JPanel(new MigLayout("insets 10, gap 25 5, center"));
+		formatOptionsPanel.setOpaque(false);
+		formatOptionsPanel.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblFormatRestrictions") + ":")
+				.fontSize(14).fontStyle(Font.BOLD).build(), "span 1");
 
-		JPanel leftOptionsPanel = new JPanel(new MigLayout("insets 10, gap 5, center, wrap 3"));
-		leftOptionsPanel.setOpaque(false);
-		leftOptionsPanel.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblSelectNumber") + ":")
-				.fontSize(14).fontStyle(Font.BOLD).build(), " span 2");
-
-		leftOptionsPanel.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblCore") + ":").build());
-		leftOptionsPanel.add(coreField, "w 40!");
-
-		leftOptionsPanel.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblExpansion") + ":").build());
-		leftOptionsPanel.add(expansionField, "w 40!");
-
-		leftOptionsPanel.add(new FLabel.Builder().text("Other:").build());
-		leftOptionsPanel.add(otherField, "w 40!");
-
-		// b. Right Options
-		JPanel rightOptionsPanel = new JPanel(new MigLayout("insets 10, gap 25 5, center, wrap 3"));
-		rightOptionsPanel.setOpaque(false);
-		rightOptionsPanel.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblFormatRestrictions") +":")
-				.fontSize(14).fontStyle(Font.BOLD).build(), "span 2");
-
-		// Format Options
 		ButtonGroup formatButtonGroup = new ButtonGroup();
 		List<GameFormat> gameFormats = new ArrayList<>();
 		FModel.getFormats().getSanctionedList().forEach(gameFormats::add);
-
-		// TODO: Automate game formats using appropriate Enum?
+		Map<String, FRadioButton> formatButtonGroupMap = new HashMap<>();
 		gameFormats.forEach(item -> {
-			if (item.getName().equals("Legacy")) {
-				FRadioButton button = new FRadioButton(Localizer.getInstance().getMessage("lblLegacyOrVintage"));
-				button.setActionCommand(item.getName());
-				formatButtonGroup.add(button);
-				rightOptionsPanel.add(button);
-			} else if (!item.getName().equals("Vintage")) {
-				FRadioButton button = new FRadioButton(item.getName());
-				button.setActionCommand(item.getName());
-				formatButtonGroup.add(button);
-				rightOptionsPanel.add(button);
-			}
+			FRadioButton button = new FRadioButton(item.getName());
+			button.setActionCommand(item.getName());
+			button.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					/* Whenever a Format button will be pressed, the status of the UI will be
+					   updated accordingly.
+					   In particular, for each format, the number of allowed editions will be retrieved.
+					   (EMPTY LIST in case of NO RESTRICTIONS).
+					*/
+					List<String> allowedSetCodes = item.getAllowedSetCodes();
+					/* A. NO RESTRICTIONS:
+					   -------------------
+					   All the components will be enabled, namely:
+					   - all nodes in the checkbox tree;
+					   - all spinners are enabled and their maximum value updated accordingly from the Tree status
+					*/
+					if (allowedSetCodes.size() == 0) {
+						for (CardEdition ce : allCardEditions) {
+							String code = ce.getCode();
+							FTreeNode node = checkBoxTree.getNodeByKey(code);
+							if (node != null)
+								checkBoxTree.setNodeEnabledStatus(node, true);
+						}
+						for (CardEdition.Type editionType : allEditionTypes.keySet()) {
+							int numberOfEnabledEditions = allEditionTypes.get(editionType);
+							if (numberOfEnabledEditions == 0)
+								// This component will remain disabled, no matter the format selected
+								continue;
+							FSpinner spinner = spinnersEditionTypeMap.get(editionType);
+							FLabel label = labelsEditionTypeMap.get(editionType);
+							spinner.setEnabled(true);
+							label.setEnabled(true);
+							FTreeNode node = checkBoxTree.getNodeByKey(editionType);
+							if (node != null){
+								int maxValue = checkBoxTree.getNumberOfActiveChildNodes(node);
+								int currentValue = (int) spinner.getValue();
+								spinner.setValue(Math.min(currentValue, maxValue));
+								SpinnerNumberModel m = (SpinnerNumberModel) spinner.getModel();
+								m.setMaximum(maxValue);
+							} else {
+								spinner.setValue(0);
+							}
+						}
+						return;
+					}
+					/* B. FORMAT RESTRICTIONS:
+					   -----------------------
+					   All components matching with **allowed** editions will be ENABLED.
+					   This includes:
+					   - nodes in the checkbox tree;
+					   - spinners (along with their corresponding MAX values as returned from Tree status).
+					   All components matching with the **BLACK LIST** of editions will be DISABLED
+					   (Same as in the previous case).
+					*/
+					List<String> codesToDisable = new ArrayList<>();
+					Set<CardEdition.Type> typesToDisable = new HashSet<>();
+					Set<CardEdition.Type> allowedTypes = new HashSet<>();
+					for (CardEdition ce : allCardEditions) {
+						String code = ce.getCode();
+						if (unselectableSets != null && unselectableSets.contains(code))
+							continue;
+						if (!allowedSetCodes.contains(code)) {
+							codesToDisable.add(code);
+							typesToDisable.add(ce.getType());
+						} else {
+							allowedTypes.add(ce.getType());
+						}
+					}
+					// NOTE: We need to distinguish CardEdition.Type not having any actual CardEdition
+					// in the allowed sets (i.e. to be completely disabled) from those still
+					// having partial sets to be allowed.
+					// The latter will result in adjusted maxValues of the corresponding spinner,
+					// as well as their current value, when necessary.
+					typesToDisable.removeAll(allowedTypes);
+
+					// == Update Checkbox Tree ==
+					for (String code : codesToDisable) {
+						FTreeNode node = checkBoxTree.getNodeByKey(code);
+						if (node != null)
+							checkBoxTree.setNodeEnabledStatus(node, false);
+					}
+					for (String code : allowedSetCodes) {
+						FTreeNode node = checkBoxTree.getNodeByKey(code);
+						if (node != null)
+							checkBoxTree.setNodeEnabledStatus(node, true);
+					}
+					// == update spinners ==
+					for (CardEdition.Type editionType : typesToDisable) {
+						FSpinner spinner = spinnersEditionTypeMap.get(editionType);
+						FLabel label = labelsEditionTypeMap.get(editionType);
+						spinner.setEnabled(false);
+						spinner.setValue(0);
+						label.setEnabled(false);
+					}
+					for (CardEdition.Type editionType : allowedTypes) {
+						if (allEditionTypes.get(editionType) == 0)
+							continue;
+						FLabel label = labelsEditionTypeMap.get(editionType);
+						label.setEnabled(true);
+						FSpinner spinner = spinnersEditionTypeMap.get(editionType);
+						spinner.setEnabled(true);
+						FTreeNode node = checkBoxTree.getNodeByKey(editionType);
+						if (node != null){
+							int maxValue = checkBoxTree.getNumberOfActiveChildNodes(node);
+							int currentValue = (int) spinner.getValue();
+							spinner.setValue(Math.min(currentValue, maxValue));
+							SpinnerNumberModel m = (SpinnerNumberModel) spinner.getModel();
+							m.setMaximum(maxValue);
+						} else {
+							spinner.setValue(0);
+						}
+					}
+				}
+			});
+			formatButtonGroup.add(button);
+			formatOptionsPanel.add(button);
+			formatButtonGroupMap.put(item.getName(), button);
 		});
 
-		// TODO: Remember to cross check what's the effect of this button
-		FRadioButton button = new FRadioButton(Localizer.getInstance().getMessage("lblModernCardFrame"));
-		button.setActionCommand("Modern Card Frame");
-		formatButtonGroup.add(button);
-		rightOptionsPanel.add(button);
-
+		// NO FORMAT Button
 		FRadioButton noFormatSelectionButton = new FRadioButton(Localizer.getInstance().getMessage("lblNoFormatRestriction"));
-		noFormatSelectionButton.setActionCommand("No Format Restriction");
+		noFormatSelectionButton.setActionCommand("No Format");
+		noFormatSelectionButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				for (CardEdition ce: allCardEditions){
+					String code = ce.getCode();
+					FTreeNode node = checkBoxTree.getNodeByKey(code);
+					if (node != null)
+						checkBoxTree.setNodeEnabledStatus(node, true);
+				}
+				for (CardEdition.Type editionType : allEditionTypes.keySet()) {
+					if (allEditionTypes.get(editionType) == 0)
+						// This component will remain disabled, no matter the format selected
+						continue;
+					FSpinner spinner = spinnersEditionTypeMap.get(editionType);
+					FLabel label = labelsEditionTypeMap.get(editionType);
+					spinner.setEnabled(true);
+					label.setEnabled(true);
+					FTreeNode node = checkBoxTree.getNodeByKey(editionType);
+					if (node != null){
+						int maxValue = checkBoxTree.getNumberOfActiveChildNodes(node);
+						int currentValue = (int) spinner.getValue();
+						spinner.setValue(Math.min(currentValue, maxValue));
+						SpinnerNumberModel m = (SpinnerNumberModel) spinner.getModel();
+						m.setMaximum(maxValue);
+					} else {
+						spinner.setValue(0);
+					}
+				}
+			}
+		});
 		formatButtonGroup.add(noFormatSelectionButton);
-		rightOptionsPanel.add(noFormatSelectionButton);
+		formatOptionsPanel.add(noFormatSelectionButton);
+		formatButtonGroupMap.put("No Format", noFormatSelectionButton);
 		noFormatSelectionButton.setSelected(true);
 
-		optionsPanel.add(leftOptionsPanel, "w 33%:40%:78%");
-		optionsPanel.add(rightOptionsPanel, "w 33%:60%:78%");
+		// === Update Option Panel ===
+		optionsPanel.add(formatOptionsPanel, "span 2, w 100%");
+		optionsPanel.add(new JSeparator(SwingConstants.HORIZONTAL), "w 100%, span 2");
 
-		// FIXME: this button is so far ineffective
-		FButton randomSelectionButton = new FButton(Localizer.getInstance().getMessage("lblRandomizeSets"));
-//		randomSelectionButton.addActionListener(actionEvent -> {
-//
-//			int numberOfCoreSets = Integer.parseInt(coreField.getText());
-//			int numberOfExpansionSets = Integer.parseInt(expansionField.getText());
-//			int numberOfOtherSets = Integer.parseInt(otherField.getText());
-//			int numberOfCustomeSets = 0;
-//
-//			for (FCheckBox coreSet : coreSets) {
-//				coreSet.setSelected(false);
-//			}
-//			for (FCheckBox expansionSet : expansionSets) {
-//				expansionSet.setSelected(false);
-//			}
-//			for (FCheckBox otherSet : otherSets) {
-//				otherSet.setSelected(false);
-//			}
-//
-//
-//			Predicate<CardEdition> formatPredicate = null;
-//			for (GameFormat gameFormat : gameFormats) {
-//				if (gameFormat.getName().equals(formatButtonGroup.getSelection().getActionCommand())) {
-//					formatPredicate = edition -> gameFormat.editionLegalPredicate.apply(edition) && (unselectableSets == null || !unselectableSets.contains(edition.getCode()));
-//				} else if (formatButtonGroup.getSelection().getActionCommand().equals("Modern Card Frame")) {
-//					formatPredicate = edition -> edition.getDate().after(new Date(1059350399L * 1000L)) && (unselectableSets == null || !unselectableSets.contains(edition.getCode()));
-//				} else if (formatButtonGroup.getSelection().getActionCommand().equals("No Format Restriction")) {
-//					formatPredicate = edition -> unselectableSets == null || !unselectableSets.contains(edition.getCode());
-//				}
-//			}
-//
-//			List<CardEdition> filteredCoreSets = new ArrayList<>();
-//			for (CardEdition edition : editions) {
-//				if (edition.getType() == CardEdition.Type.CORE) {
-//					if (formatPredicate != null && formatPredicate.test(edition)) {
-//						filteredCoreSets.add(edition);
-//					}
-//				}
-//			}
-//
-//			List<CardEdition> filteredExpansionSets = new ArrayList<>();
-//			for (CardEdition edition : editions) {
-//				if (edition.getType() == CardEdition.Type.EXPANSION) {
-//					if (formatPredicate != null && formatPredicate.test(edition)) {
-//						filteredExpansionSets.add(edition);
-//					}
-//				}
-//			}
-//
-//			List<CardEdition> filteredOtherSets = new ArrayList<>();
-//			for (CardEdition edition : editions) {
-//				if (edition.getType() != CardEdition.Type.CORE && edition.getType() != CardEdition.Type.EXPANSION) {
-//					if (formatPredicate != null && formatPredicate.test(edition)) {
-//						filteredOtherSets.add(edition);
-//					}
-//				}
-//			}
-//
-//			Collections.shuffle(filteredCoreSets);
-//			Collections.shuffle(filteredExpansionSets);
-//			Collections.shuffle(filteredOtherSets);
-//
-//			List<CardEdition> filteredCustomSets = new ArrayList<>();
-//			if (customSetsExist){
-//				for (CardEdition edition : customEditions) {
-//					if (formatPredicate != null && formatPredicate.test(edition)) {
-//						filteredCustomSets.add(edition);
-//					}
-//				}
-//				Collections.shuffle(filteredCustomSets);
-//			}
-//
-//			for (int i = 0; i < numberOfCoreSets && i < filteredCoreSets.size(); i++) {
-//				String name = TextUtil.concatWithSpace(filteredCoreSets.get(i).getName(), TextUtil.enclosedParen(filteredCoreSets.get(i).getCode()));
-//				for (FCheckBox set : coreSets) {
-//					if (set.getText().equals(name)) {
-//						set.setSelected(true);
-//					}
-//				}
-//			}
-//
-//			for (int i = 0; i < numberOfExpansionSets && i < filteredExpansionSets.size(); i++) {
-//				String name = TextUtil.concatWithSpace(filteredExpansionSets.get(i).getName(), TextUtil.enclosedParen(filteredExpansionSets.get(i).getCode()));
-//				for (FCheckBox set : expansionSets) {
-//					if (set.getText().equals(name)) {
-//						set.setSelected(true);
-//					}
-//				}
-//			}
-//
-//			for (int i = 0; i < numberOfOtherSets && i < filteredOtherSets.size(); i++) {
-//				String name = TextUtil.concatWithSpace(filteredOtherSets.get(i).getName(), TextUtil.enclosedParen(filteredOtherSets.get(i).getCode()));
-//				for (FCheckBox set : otherSets) {
-//					if (set.getText().equals(name)) {
-//						set.setSelected(true);
-//					}
-//				}
-//			}
-//
-//			if (customSetsExist){
-//				for (int i = 0; i < numberOfCustomeSets && i < filteredCustomSets.size(); i++) {
-//					String name = TextUtil.concatWithSpace(filteredCustomSets.get(i).getName(),
-//							                               TextUtil.enclosedParen(filteredCustomSets.get(i).getCode()));
-//					for (FCheckBox set : customSets) {
-//						if (set.getText().equals(name)) {
-//							set.setSelected(true);
-//						}
-//					}
-//				}
-//			}
-//
-//			panel.repaintSelf();
-//
-//		});
-
-		// Clear Selection Button
-		// CLEAR Selection button
-		FButton clearSelectionButton = new FButton(Localizer.getInstance().getMessage("lblClearSelection"));
-		clearSelectionButton.addActionListener(actionEvent -> {
-			for (List<FCheckBox> checkBoxes : editionsCheckBoxes.values()){
-				for (FCheckBox cBox : checkBoxes)
-					cBox.setSelected(false);
-			}
-			// Remove all the checkboxes from the selected sets
-			selectedCheckBoxes.replaceAll((t, v) -> new ArrayList<>());
-			panel.repaintSelf();
-		});
-
-		// === MIDDLE: SHOW OPTIONS BUTTON ===
-		FButton showOptionsButton = new FButton(Localizer.getInstance().getMessage("lblShowOptions"));
-		showOptionsButton.addActionListener(actionEvent -> {
-			optionsPanel.setVisible(true);
-			showOptionsButton.setVisible(false);
-		});
-
-		// Hide Option Button
-		FButton hideOptionsButton = new FButton(Localizer.getInstance().getMessage("lblHideOptions"));
-		hideOptionsButton.addActionListener(actionEvent -> {
-			optionsPanel.setVisible(false);
-			showOptionsButton.setVisible(true);
-		});
-
-		// Button Panel to enable the three button sets: "random selection; clear selection, hide options"
-		JPanel buttonPanel = new JPanel(new MigLayout("h 50!, center, gap 10, insets 0, ay center"));
-		buttonPanel.setOpaque(false);
-		buttonPanel.add(randomSelectionButton, "w 175!, h 28!");
-		buttonPanel.add(clearSelectionButton, "w 175!, h 28!");
-		buttonPanel.add(hideOptionsButton, " w 175!, h 28!");
-		optionsPanel.add(buttonPanel, "span 2, growx");
-		if (showWantReprintsCheckbox) {
-			optionsPanel.add(cbWantReprints, "center, span, wrap");
-		}
-
-		// === SEPARATOR ===
-		optionsPanel.add(new JSeparator(SwingConstants.HORIZONTAL), "w 100%, span 2, growx");
-
-		// === TOP PANEL ===
-
-		panel.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblChooseSets"))
-				.fontSize(20).build(), "center, span, wrap, gaptop 10");
-
+		// === EDITION (PER TYPE) SELECTION PANEL ===
 		// Selected Editions Panel
-		JPanel selectedEditionsPnl = new JPanel(new MigLayout("center, wrap"));
-		selectedEditionsPnl.setOpaque(false);
-		selectedEditionsPnl.add(new FLabel.Builder().text("Selected Editions").build());
-		setupSelectedSetsList(selectedCheckBoxes, editionsCheckBoxes, selectedEditionsPnl);
+		JPanel editionSelectionPanel = new JPanel(new MigLayout("insets 10, gap 25 5, wrap 1, align left"));
+		editionSelectionPanel.setOpaque(false);
+		editionSelectionPanel.add(new FLabel.Builder().text(
+				Localizer.getInstance().getMessage("lblCardEditionTypeList")).fontSize(14)
+				.fontStyle(Font.BOLD).build(), "h 40!, w 100%, center, span 1");
+		this.checkBoxTree.setOpaque(false);
+		this.checkBoxTree.setVisibleRowCount(21);
+		FScrollPane selectionScroller = new FScrollPane(checkBoxTree, true);
+		editionSelectionPanel.add(selectionScroller, "span 1, w 100%");
 
-		// Checkboxes Panel
-		JPanel setsCheckBoxesPanel = new JPanel(new MigLayout("center, wrap"));
-		setsCheckBoxesPanel.setOpaque(false);
-		setsCheckBoxesPanel.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblSetEdition")).build());
-		FCheckBoxList<FCheckBox> setsCheckboxesList = setupEditionCheckBoxList(selectedCheckBoxes, setsCheckBoxesPanel);
+		// ======== ADD ACTION LISTENERS TO CLEAR AND RANDOM SELECT BUTTONS
+		clearSelectionButton.addActionListener(actionEvent -> {
+			this.checkBoxTree.resetCheckingState();
+			allEditionTypes.forEach((editionType, count) -> {
+				if (count == 0)
+					return;
+				FSpinner spinner = spinnersEditionTypeMap.get(editionType);
+				FLabel label = labelsEditionTypeMap.get(editionType);
+				spinner.setValue(0);
+				spinner.setEnabled(true);
+				label.setEnabled(true);
+			});
+			noFormatSelectionButton.setSelected(true);
+			cbWantReprints.setSelected(false);
+			mainDialogPanel.repaintSelf();
+		});
+		randomSelectionButton.addActionListener(actionEvent -> {
+			Map<CardEdition.Type, Integer> countPerEditionType = new HashMap<>();
+			for (CardEdition.Type editionType: allEditionTypes.keySet()){
+				if (allEditionTypes.get(editionType) == 0)
+					continue;
+				FSpinner spinner = spinnersEditionTypeMap.get(editionType);
+				if (!spinner.isEnabled())
+					continue;
+				int value = (int) spinner.getValue();
+				if (value > 0)
+					countPerEditionType.put(editionType, value);
+			}
+			// We can safely reset selections as this button would not be enabled at all
+			// if at least one spinner has been modified, and so countPerEdition updated.
+			checkBoxTree.resetCheckingState();
+			String selectedFormat = formatButtonGroup.getSelection().getActionCommand();
+			FRadioButton formatButton = formatButtonGroupMap.get(selectedFormat);
+			formatButton.doClick();
+			for (CardEdition.Type editionType : countPerEditionType.keySet()){
+				int totalToSelect = countPerEditionType.get(editionType);
+				FTreeNode setTypeNode = checkBoxTree.getNodeByKey(editionType);
+				if (setTypeNode != null){
+					List<FTreeNode> activeChildNodes = checkBoxTree.getActiveChildNodes(setTypeNode);
+					Collections.shuffle(activeChildNodes);
+					for (int i = 0; i < totalToSelect; i++)
+						checkBoxTree.setNodeCheckStatus(activeChildNodes.get(i), true);
+				}
+			}
+			mainDialogPanel.repaintSelf();
+		});
 
+		// ===================================================================
 
-		// Edition Type Panel
-		JPanel editionTypesPanel = new JPanel(new MigLayout("center, wrap"));
-		editionTypesPanel.setOpaque(false);
-		editionTypesPanel.add(new FLabel.Builder().text("Edition Types").build());
-		setupEditionTypesPanel(editionTypes, editionsCheckBoxes, setsCheckboxesList, editionTypesPanel);
-
-		// ADD all panels to the main UI Panel
-		panel.add(editionTypesPanel, "aligny top");
-		panel.add(setsCheckBoxesPanel, "aligny top");
-		panel.add(selectedEditionsPnl, "aligny top");
-
-//		panel.add(showOptionsButton, "center, w 260!, h 30!, gap 10 0 20 0, span 3, hidemode 3");
-//		panel.add(optionsPanel, "center, w 100, span 3, growx, hidemode 3");
+		mainDialogPanel.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblChooseSets"))
+				.fontSize(20).build(), "center, span, wrap, gaptop 10");
+		mainDialogPanel.add(editionSelectionPanel, "aligny top, w 70%, growx, span 1");
+		mainDialogPanel.add(randomSelectionPanel, "aligny top, w 30%, span 1");
+		mainDialogPanel.add(optionsPanel, "center, w 100, span 2");
 
 		final JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
 		overlay.setLayout(new MigLayout("insets 0, gap 0, wrap, ax center, ay center"));
@@ -394,12 +465,11 @@ public class DialogChooseSets {
 		southPanel.add(btnOk, "center, w 250!, h 30!");
 		southPanel.add(btnCancel, "center, w 250!, h 30!");
 
-		panel.add(southPanel, "dock south, gapBottom 10");
+		mainDialogPanel.add(southPanel, "dock south, gapBottom 10");
 
-		overlay.add(panel);
-		panel.getRootPane().setDefaultButton(btnOk);
+		overlay.add(mainDialogPanel);
+		mainDialogPanel.getRootPane().setDefaultButton(btnOk);
 		SOverlayUtils.showOverlay();
-
 	}
 
 	public void setOkCallback(Runnable onOk) {
@@ -434,95 +504,12 @@ public class DialogChooseSets {
 		textArea.setText(selectedEditionsLines);
 	}
 
-	private void setupSelectedSetsList(Map<CardEdition.Type, List<FCheckBox>> selectedEditions,
-									   Map<String, List<FCheckBox>> editionsCheckBoxes, JPanel txtAreaPanel){
-
-		JTextArea selectedEditionsTxtArea = new JTextArea(26, 33);
-		selectedEditionsTxtArea.setEditable(false);
-		txtAreaPanel.add(new FScrollPane(selectedEditionsTxtArea, true,
-				ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS));
-		refreshSelectedEditions(selectedEditions, selectedEditionsTxtArea);
-		// Program the event for checkboxes
-		for (String editionTypeLabel : editionsCheckBoxes.keySet()) {
-			List<FCheckBox> checkBoxes = editionsCheckBoxes.get(editionTypeLabel);
-			for (FCheckBox checkBox: checkBoxes){
-				checkBox.addItemListener(new ItemListener() {
-					@Override
-					public void itemStateChanged(ItemEvent e) {
-						CardEdition.Type edType = CardEdition.Type.fromString(editionTypeLabel);
-						if (checkBox.isSelected()){
-							selectedEditions.get(edType).add(checkBox);
-						} else {
-							selectedEditions.get(edType).remove(checkBox);
-						}
-						refreshSelectedEditions(selectedEditions, selectedEditionsTxtArea);
-					}});
-			}
-		}
-	}
-
-	private FCheckBoxList<FCheckBox> setupEditionCheckBoxList(Map<CardEdition.Type, List<FCheckBox>> selectedEditions,
-															  JPanel checkBoxesPnl) {
-		// Setup Sets Checkboxes
-		List<FCheckBox> checkBoxesToAddToScrollPane = new ArrayList<>();
-		for (CardEdition.Type editionType : selectedEditions.keySet()) {
-			List<FCheckBox> checkBoxes = selectedEditions.get(editionType);
-			checkBoxesToAddToScrollPane.addAll(checkBoxes);
-		}
-		FCheckBoxList<FCheckBox> setsCbl = new FCheckBoxList<>(false);
-		setsCbl.setListData(checkBoxesToAddToScrollPane.toArray(new FCheckBox[checkBoxesToAddToScrollPane.size()]));
-		setsCbl.setVisibleRowCount(25);
-		checkBoxesPnl.add(new FScrollPane(setsCbl, true,
-				ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS));                                                                                                                                                                                                                                                       ;
-		return setsCbl;
-	}
-
-	private void setupEditionTypesPanel(List<String> editionTypes, Map<String, List<FCheckBox>> editionsCheckBoxes,
-										FCheckBoxList<FCheckBox> checkBoxList, JPanel editionTypesPanel) {
-
-		JList editionTypesList = new JList(editionTypes.toArray());
-		editionTypesList.setFixedCellHeight(20);
-		editionTypesList.setFixedCellWidth(120);
-		editionTypesList.setVisibleRowCount(20);
-		ListSelectionModel listSelectionModel = editionTypesList.getSelectionModel();
-		listSelectionModel.addListSelectionListener(new ListSelectionListener() {
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				ListSelectionModel lsm = (ListSelectionModel) e.getSource();
-				boolean isAdjusting = lsm.getValueIsAdjusting();
-				if (!lsm.isSelectionEmpty() && !isAdjusting) {
-					// Find out which indexes are selected.
-					int minIndex = lsm.getMinSelectionIndex();
-					int maxIndex = lsm.getMaxSelectionIndex();
-					for (int i = minIndex; i <= maxIndex; i++) {
-						if (lsm.isSelectedIndex(i)) {
-							String editionTypeLabel = editionTypes.get(i);
-							List<FCheckBox> editionCheckBoxes = editionsCheckBoxes.get(editionTypeLabel);
-							checkBoxList.setListData(editionCheckBoxes.toArray(new FCheckBox[editionCheckBoxes.size()]));
-						}
-					}
-				}
-			}});
-		editionTypesPanel.add(new FScrollPane(editionTypesList, true,
-				ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER));
-
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				editionTypesList.requestFocusInWindow();
-			}
-		});
-	}
-
 	private void handleOk() {
 
-		for (CardEdition.Type editionType : selectedCheckBoxes.keySet()){
-			List<FCheckBox> choices = selectedCheckBoxes.get(editionType);
-			for (FCheckBox box : choices) {
-				if (box.isSelected()) {
-					selectedSets.add(box.getName());
-				}
-			}
+		Object[] checkedValues = this.checkBoxTree.getCheckedValues(true);
+		for (Object data: checkedValues){
+			CardEdition edition = (CardEdition) data;
+			selectedSets.add(edition.getCode());
 		}
 		wantReprints = cbWantReprints.isSelected();
 
@@ -530,5 +517,4 @@ public class DialogChooseSets {
 			okCallback.run();
 		}
 	}
-
 }
