@@ -175,7 +175,6 @@ public class PermanentCreatureAi extends PermanentAi {
             }
         }
 
-
         if (hasFloatMana || willDiscardNow || willDieNow) {
             // Will lose mana in pool or about to discard a card in cleanup or about to die in combat, so use this opportunity
             return true;
@@ -206,7 +205,6 @@ public class PermanentCreatureAi extends PermanentAi {
 
     @Override
     protected boolean checkApiLogic(Player ai, SpellAbility sa) {
-
         if (!super.checkApiLogic(ai, sa)) {
             return false;
         }
