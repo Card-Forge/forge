@@ -107,6 +107,7 @@ public enum AbilityKey {
     ReplacementResult("ReplacementResult"),
     ReplacementResultMap("ReplacementResultMap"),
     Result("Result"),
+    RoomName("RoomName"),
     Scheme("Scheme"),
     Source("Source"),
     Sources("Sources"),

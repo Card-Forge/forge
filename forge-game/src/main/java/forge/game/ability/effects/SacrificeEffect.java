@@ -1,7 +1,10 @@
 package forge.game.ability.effects;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -62,18 +65,18 @@ public class SacrificeEffect extends SpellAbilityEffect {
             Cost cumCost = new Cost(sa.getParam("CumulativeUpkeep"), true);
             Cost payCost = new Cost(ManaCost.ZERO, true);
             int n = card.getCounters(CounterEnumType.AGE);
-            
+
             // multiply cost
             for (int i = 0; i < n; ++i) {
                 payCost.add(cumCost);
             }
-            
+
             sa.setCumulativeupkeep(true);
             game.updateLastStateForCard(card);
-            
+
             StringBuilder sb = new StringBuilder();
             sb.append("Cumulative upkeep for ").append(card);
-            
+
             boolean isPaid = activator.getController().payManaOptional(card, payCost, sa, sb.toString(), ManaPaymentPurpose.CumulativeUpkeep);
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(card);
             runParams.put(AbilityKey.CumulativeUpkeepPaid, isPaid);
@@ -90,6 +93,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
         final List<Player> tgts = getTargetPlayers(sa);
         final boolean devour = sa.hasParam("Devour");
         final boolean exploit = sa.hasParam("Exploit");
+        final boolean sacEachValid = sa.hasParam("SacEachValid");
 
         String valid = sa.getParam("SacValid");
         if (valid == null) {
@@ -118,32 +122,56 @@ public class SacrificeEffect extends SpellAbilityEffect {
                     }
                 }
             }
-        }
-        else {
+        } else {
             CardCollectionView choosenToSacrifice = null;
             for (final Player p : tgts) {
                 CardCollectionView battlefield = p.getCardsIn(ZoneType.Battlefield);
-                CardCollectionView validTargets = AbilityUtils.filterListByType(battlefield, valid, sa);
-                if (!destroy) {
-                    validTargets = CardLists.filter(validTargets, CardPredicates.canBeSacrificedBy(sa));
-                }
-
-                if (sa.hasParam("Random")) {
-                    choosenToSacrifice = Aggregates.random(validTargets, Math.min(amount, validTargets.size()), new CardCollection());
-                } else if (sa.hasParam("OptionalSacrifice") && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantSacrifice"))) {
-                    choosenToSacrifice = CardCollection.EMPTY;
+                if (sacEachValid) {  // Sacrifice maximum permanents in any combination of types specified by SacValid
+                    String [] validArray = valid.split(" & ");
+                    String [] msgArray = msg.split(" & ");
+                    List<CardCollection> validTargetsList = new ArrayList<>(validArray.length);
+                    for (String subValid : validArray) {
+                        CardCollectionView validTargets = AbilityUtils.filterListByType(battlefield, subValid, sa);
+                        validTargets = CardLists.filter(validTargets, CardPredicates.canBeSacrificedBy(sa));
+                        validTargetsList.add(new CardCollection(validTargets));
+                    }
+                    CardCollection chosenCards = new CardCollection();
+                    for (int i = 0; i < validArray.length; ++i) {
+                        CardCollection validTargets = validTargetsList.get(i);
+                        if (validTargets.isEmpty()) continue;
+                        if (validTargets.size() > 1 && i < validArray.length - 1) {
+                            removeCandidates(validTargets, validTargetsList, new HashSet<>(), i + 1, 0, amount);
+                        }
+                        choosenToSacrifice = p.getController().choosePermanentsToSacrifice(sa, amount, amount, validTargets, msgArray[i]);
+                        for (int j = i + 1; j < validArray.length; ++j) {
+                            validTargetsList.get(j).removeAll(choosenToSacrifice);
+                        }
+                        chosenCards.addAll(choosenToSacrifice);
+                    }
+                    choosenToSacrifice = chosenCards;
                 } else {
-                    boolean isOptional = sa.hasParam("Optional");
-                    boolean isStrict = sa.hasParam("StrictAmount");
-                    int minTargets = isOptional ? 0 : amount;
-                    boolean notEnoughTargets = isStrict && validTargets.size() < minTargets;
-                    
-                    if (!notEnoughTargets) {
-                        choosenToSacrifice = destroy ? 
-                            p.getController().choosePermanentsToDestroy(sa, minTargets, amount, validTargets, msg) :
-                            p.getController().choosePermanentsToSacrifice(sa, minTargets, amount, validTargets, msg);
-                    } else {
+                    CardCollectionView validTargets = AbilityUtils.filterListByType(battlefield, valid, sa);
+                    if (!destroy) {
+                        validTargets = CardLists.filter(validTargets, CardPredicates.canBeSacrificedBy(sa));
+                    }
+
+                    if (sa.hasParam("Random")) {
+                        choosenToSacrifice = Aggregates.random(validTargets, Math.min(amount, validTargets.size()), new CardCollection());
+                    } else if (sa.hasParam("OptionalSacrifice") && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantSacrifice"))) {
                         choosenToSacrifice = CardCollection.EMPTY;
+                    } else {
+                        boolean isOptional = sa.hasParam("Optional");
+                        boolean isStrict = sa.hasParam("StrictAmount");
+                        int minTargets = isOptional ? 0 : amount;
+                        boolean notEnoughTargets = isStrict && validTargets.size() < minTargets;
+
+                        if (!notEnoughTargets) {
+                            choosenToSacrifice = destroy ?
+                                p.getController().choosePermanentsToDestroy(sa, minTargets, amount, validTargets, msg) :
+                                p.getController().choosePermanentsToSacrifice(sa, minTargets, amount, validTargets, msg);
+                        } else {
+                            choosenToSacrifice = CardCollection.EMPTY;
+                        }
                     }
                 }
 
@@ -230,5 +258,34 @@ public class SacrificeEffect extends SpellAbilityEffect {
         }
 
         return sb.toString();
+    }
+
+    private void removeCandidates(CardCollection validTargets, List<CardCollection> validTargetsList, Set<Card> union, int index, int included, int amount) {
+        if (index >= validTargetsList.size()) {
+            if (union.size() <= included * amount) {
+                validTargets.removeAll(union);
+            }
+            return;
+        }
+
+        removeCandidates(validTargets, validTargetsList, union, index + 1, included, amount);
+
+
+        CardCollection candidate = validTargetsList.get(index);
+        if (candidate.isEmpty()) {
+            return;
+        }
+
+        if (union.isEmpty()) {
+            if (candidate.size() <= amount) {
+                validTargets.removeAll(candidate.asSet());
+            } else {
+                removeCandidates(validTargets, validTargetsList, candidate.asSet(), index + 1, included + 1, amount);
+            }
+        } else {
+            Set<Card> unionClone = new HashSet<>(union);
+            unionClone.addAll(candidate.asSet());
+            removeCandidates(validTargets, validTargetsList, unionClone, index + 1, included + 1, amount);
+        }
     }
 }

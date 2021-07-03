@@ -1,0 +1,13 @@
+Name:Den of the Bugbear
+ManaCost:no cost
+Types:Land
+K:ETBReplacement:Other:LandTapped
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionCheckSVar$ ETBCheckSVar2 | ConditionSVarCompare$ GT1 | SpellDescription$ If you control two or more other lands, CARDNAME enters the battlefield tapped.
+SVar:ETBCheckSVar2:Count$LastStateBattlefield Land.YouCtrl
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+A:AB$ Animate | Cost$ 3 R | Defined$ Self | Power$ 3 | Toughness$ 2 | Types$ Creature,Goblin | Colors$ Red | Triggers$ TrigAttack | SpellDescription$ Until end of turn, CARDNAME becomes a 3/2 red Goblin creature with "Whenever this creature attacks, create a 1/1 red Goblin creature token that's tapped and attacking." It's still a land.
+SVar:TrigAttack:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, create a 1/1 red Goblin creature token that's tapped and attacking.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_goblin | TokenOwner$ You | TokenTapped$ True | TokenAttacking$ True
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token
+Oracle:If you control two or more other lands, Den of the Bugbear enters the battlefield tapped.\n{T}: Add {R}.\n{3}{R}: Until end of turn, Den of the Bugbear becomes a 3/2 red Goblin creature with "Whenever this creature attacks, create a 1/1 red Goblin creature token that's tapped and attacking." It's still a land.

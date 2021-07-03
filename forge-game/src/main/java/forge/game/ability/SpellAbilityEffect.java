@@ -510,7 +510,7 @@ public abstract class SpellAbilityEffect {
                 }
             }
 
-            // build an Effect with that infomation
+            // build an Effect with that information
             String name = host.getName() + "'s Effect";
 
             final Card eff = createEffect(sa, controller, name, host.getImageKey());

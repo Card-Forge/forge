@@ -302,6 +302,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private EvenOdd chosenEvenOdd = null;
     private Direction chosenDirection = null;
     private String chosenMode = "";
+    private String currentRoom = null;
 
     private Card exiledWith = null;
     private Player exiledBy = null;
@@ -1782,6 +1783,23 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         view.updateChosenMode(this);
     }
 
+    public String getCurrentRoom() {
+        return currentRoom;
+    }
+    public void setCurrentRoom(String room) {
+        currentRoom = room;
+        view.updateCurrentRoom(this);
+    }
+    public boolean isInLastRoom() {
+        for (final Trigger t : getTriggers()) {
+            SpellAbility sa = t.getOverridingAbility();
+            if (sa.getParam("RoomName").equals(currentRoom) && !sa.hasParam("NextRoom")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean hasChosenName() {
         return chosenName != null;
     }
@@ -2112,7 +2130,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.startsWith("Amplify") || keyword.startsWith("Ninjutsu") || keyword.startsWith("Adapt")
                         || keyword.startsWith("Transfigure") || keyword.startsWith("Aura swap")
                         || keyword.startsWith("Cycling") || keyword.startsWith("TypeCycling")
-                        || keyword.startsWith("Encore") || keyword.startsWith("Mutate")) {
+                        || keyword.startsWith("Encore") || keyword.startsWith("Mutate") || keyword.startsWith("Dungeon")) {
                     // keyword parsing takes care of adding a proper description
                 } else if (keyword.startsWith("CantBeBlockedByAmount")) {
                     sbLong.append(getName()).append(" can't be blocked ");
@@ -4077,7 +4095,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final boolean hasKeyword(Keyword keyword) {
         return hasKeyword(keyword, currentState);
     }
-
     public final boolean hasKeyword(Keyword key, CardState state) {
         return state.hasKeyword(key);
     }
@@ -4086,7 +4103,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final boolean hasKeyword(String keyword) {
         return hasKeyword(keyword, currentState);
     }
-
     public final boolean hasKeyword(String keyword, CardState state) {
         if (keyword.startsWith("HIDDEN")) {
             keyword = keyword.substring(7);
@@ -4111,8 +4127,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             final boolean removeAllKeywords, final boolean removeIntrinsicKeywords, final long timestamp) {
         addChangedCardKeywords(keywords, removeKeywords, removeAllKeywords, removeIntrinsicKeywords, timestamp, true);
     }
-
-
     public final void addChangedCardKeywords(final List<String> keywords, final List<String> removeKeywords,
             final boolean removeAllKeywords, final boolean removeIntrinsicKeywords, final long timestamp, final boolean updateView) {
         // if the key already exists - merge entries
@@ -4166,7 +4180,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final KeywordsChange removeChangedCardKeywords(final long timestamp) {
         return removeChangedCardKeywords(timestamp, true);
     }
-
     public final KeywordsChange removeChangedCardKeywords(final long timestamp, final boolean updateView) {
         KeywordsChange change = changedCardKeywords.remove(timestamp);
         if (change != null && updateView) {
@@ -4666,7 +4679,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             getGame().getTriggerHandler().registerActiveTrigger(this, false);
             getGame().getTriggerHandler().runTrigger(TriggerType.PhaseIn, runParams, false);
         }
- 
+
         game.updateLastStateForCard(this);
 
         return true;

@@ -410,6 +410,7 @@ public class ReplacementHandler {
             final GameEntity target = et.getKey();
             int playerIndex = (target instanceof Player ? players.indexOf(((Player) target)) :
                                 players.indexOf(((Card) target).getController()));
+            if (playerIndex == -1) continue;
             Map<ReplacementEffect, List<Map<AbilityKey, Object>>> replaceCandidateMap = replaceDamageList.get(playerIndex);
             for (Map.Entry<Card, Integer> e : et.getValue().entrySet()) {
                 Card source = e.getKey();

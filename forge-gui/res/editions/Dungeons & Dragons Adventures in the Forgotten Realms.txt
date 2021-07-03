@@ -8,23 +8,289 @@ Type=Expansion
 ScryfallCode=AFR
 
 [cards]
+1 C +2 Mace
+5 C Celestial Unicorn
+6 U Cleric Class
+7 U Cloister Gargoyle
+9 C Dawnbringer Cleric
+10 C Delver's Torch
+11 C Devoted Paladin
+13 U Dragon's Disciple
+14 C Dwarfhold Champion
+15 R Flumph
+16 C Gloom Stalker
+18 R Guardian of Faith
+19 C Half-Elf Monk
+20 M Icingdeath, Frost Tyrant
+22 U Keen-Eared Sentry
+24 C Minimus Containment
+26 U Moon-Blessed Cleric
+27 R Nadaar, Selfless Paladin
+28 R Oswald Fiddlebender
+31 C Planar Ally
 33 U Portable Hole
+37 C Ranger's Hawk
+40 C Veteran Dungeoneer
+42 C You Hear Something on Watch
+43 C You're Ambushed on the Road
+45 C Air-Cult Elemental
+46 C Arcane Investigator
+47 C Bar the Gate
+48 R The Blackstaff of Waterdeep
+50 C Charmed Sleep
+51 C Clever Conjurer
+52 C Contact Other Plane
+53 M Demilich
+54 U Displacer Beast
+55 C Djinni Windseer
+56 R Dragon Turtle
+57 U Eccentric Apprentice
+58 U Feywild Trickster
+59 U Fly
+60 R Grazilaxx, Illithid Scholar
+61 U Guild Thief
+65 C Mordenkainen's Polymorph
+66 C Pixie Guide
+67 U Power of Persuasion
+68 U Ray of Frost
+69 C Rimeshield Frost Giant
+70 C Scion of Stygia
+71 C Secret Door
+72 C Shocking Grasp
+73 C Shortcut Seeker
+78 R Tasha's Hideous Laughter
+82 R Wizard's Spellbook
+83 C You Come to a River
+84 C You Find the Villains' Lair
+85 C You See a Guard Approach
+86 R Yuan-Ti Malison
+89 C Baleful Beholder
+90 U Black Dragon
+91 M The Book of Vile Darkness
+93 C Clattering Skeletons
+95 U Death-Priest of Myrkul
+97 C Devour Intellect
+98 U Drider
+99 U Dungeon Crawler
+100 M Ebondeath, Dracolich
+102 C Fates' Reversal
+103 C Feign Death
+105 R Gelatinous Cube
+107 U Grim Wanderer
+108 C Herald of Hadar
+109 C Hired Hexblade
+111 U Lightfoot Rogue
 112 M Lolth, Spider Queen
+113 C Manticore
 114 U Power Word Kill
+115 C Precipitous Drop
+119 C Shambling Ghast
+120 U Skullport Merchant
+121 R Sphere of Annihilation
 124 R Vorpal Sword
+125 U Warlock Class
+127 R Wight
+128 C Yuan-Ti Fang-Blade
+129 C Zombie Ogre
+132 U Battle Cry Goblin
+134 C Brazen Dwarf
+136 U Chaos Channeler
+137 U Critical Hit
+138 R Delina, Wild Mage
+140 C Dueling Rapier
+141 C Earth-Cult Elemental
+142 C Farideh's Fireball
+143 M Flameskull
+144 C Goblin Javelineer
+145 U Goblin Morningstar
+146 C Hoarding Ogre
+148 C Hobgoblin Captain
+149 U Hulking Bugbear
+150 C Improvised Weaponry
+152 C Jaded Sell-Sword
+153 C Kick in the Door
+155 R Meteor Swarm
+156 R Minion of the Mighty
+157 R Orb of Dragonkind
+158 C Plundering Barbarian
+160 U Red Dragon
+162 C Swarming Goblins
+163 U Tiger-Tribe Hunter
+165 C Valor Singer
+166 R Wish
+168 C You Come to the Gnoll Camp
+169 U You Find Some Prisoners
+170 U You See a Pair of Goblins
+171 R Zalto, Fire Giant Duke
+172 M Zariel, Archduke of Avernus
+173 C Bulette
+174 C Bull's Strength
+175 U Choose Your Weapon
+176 R Circle of Dreams Druid
+181 M Ellywick Tumblestrum
+182 C Elturgard Ranger
+183 C Find the Path
+184 R Froghemoth
+185 C Gnoll Hunter
+186 U Green Dragon
+186 U Hunter's Mark
+187 C Hill Giant Herdgorger
+189 C Inspiring Bard
+190 R Instrument of the Bards
+191 U Intrepid Outlander
+192 U Loathsome Troll
+194 U Lurking Roper
+196 R Ochre Jelly
+198 C Owlbear
 200 U Prosperous Innkeeper
+201 U Purple Worm
+206 C Sylvan Shepherd
+207 M The Tarrasque
+209 R Varis, Silverymoon Ranger
+210 U Wandering Troubadour
+211 R Werewolf Pack Leader
+213 C You Find a Cursed Idol
+214 U You Happen On a Glade
+215 U You Meet in a Tavern
+216 R Adult Gold Dragon
+217 R Bard Class
+218 U Barrowin of Clan Undurr
 219 U Bruenor Battlehammer
 220 R Drizzt Do'Urden
+221 U Farideh, Devil's Chosen
+223 U Gretchen Titchwillow
+224 U Hama Pashar, Ruin Seeker
+225 U Kalain, Reclusive Painter
+226 U Krydle of Baldur's Gate
+229 R Orcus, Prince of Undeath
+231 U Shessra, Death's Whisper
+234 U Targ Nar, Demon-Fang Gnoll
 235 M Tiamat
+236 U Trelasarra, Moon Dancer
+237 R Triumphant Adventurer
+238 R Volo, Guide to Monsters
+239 M Xanathar, Guild Kingpin
+240 U Bag of Holding
+241 M The Deck of Many Things
+242 U Dungeon Map
+244 U Fifty Feet of Rope
+249 C Mimic
+251 C Spiked Pit Trap
+252 R Treasure Chest
+253 R Cave of the Frost Dragon
+254 R Den of the Bugbear
+255 R Dungeon Descent
+256 C Evolving Wilds
+257 R Hall of Storm Giants
+258 R Hive of the Eye Tyrant
+262 L Plains
+263 L Plains
+264 L Plains
 265 L Plains
+266 L Island
+267 L Island
+268 L Island
 269 L Island
+270 L Swamp
+271 L Swamp
+272 L Swamp
 273 L Swamp
+274 L Mountain
+275 L Mountain
+276 L Mountain
 277 L Mountain
+278 L Forest
+279 L Forest
+280 L Forest
 281 L Forest
 284 M Lolth, Spider Queen
+285 M Zariel, Archduke of Avernus
+286 M Ellywick Tumblestrum
+287 M Icingdeath, Frost Tyrant
+291 U Black Dragon
+292 M Ebondeath, Dracolich
+294 U Red Dragon
+295 U Green Dragon
+297 R Adult Gold Dragon
 298 M Tiamat
+301 C Celestial Unicorn
 302 U Cloister Gargoyle
+303 R Nadaar, Selfless Paladin
+304 R Oswald Fiddlebender
+305 U Displacer Beast
+306 C Djinni Windseer
+307 R Dragon Turtle
+309 C Pixie Guide
+310 C Rimeshield Frost Giant
+311 C Baleful Beholder
+312 C Clattering Skeletons
+313 R Gelatinous Cube
+314 C Manticore
+316 R Wight
+317 R Delina, Wild Mage
+318 C Goblin Javelineer
+319 U Hulking Bugbear
+320 R Minion of the Mighty
+323 R Zalto, Fire Giant Duke
+324 C Bulette
+326 C Gnoll Hunter
+327 U Loathsome Troll
+328 U Lurking Roper
+330 R Ochre Jelly
+331 C Owlbear
+332 U Purple Worm
+333 M The Tarrasque
+335 R Varis, Silverymoon Ranger
+336 U Barrowin of Clan Undurr
 337 U Bruenor Battlehammer
 338 R Drizzt Do'Urden
+339 U Farideh, Devil's Chosen
+340 U Gretchen Titchwillow
+341 U Hama Pashar, Ruin Seeker
+342 U Kalain, Reclusive Painter
+343 U Krydle of Baldur's Gate
+345 U Shessra, Death's Whisper
+346 U Trelasarra, Moon Dancer
+347 R Volo, Guide to Monsters
+349 C Mimic
+350 R Cave of the Frost Dragon
+351 R Den of the Bugbear
+352 R Dungeon Descent
+353 C Evolving Wilds
+354 R Hall of Storm Giants
+355 R Hive of the Eye Tyrant
+361 R Flumph
+362 R Guardian of Faith
+365 R The Blackstaff of Waterdeep
+366 M Demilich
+367 R Grazilaxx, Illithid Scholar
+368 R Tasha's Hideous Laughter
+370 R Wizard's Spellbook
+371 R Yuan-Ti Malison
+374 M The Book of Vile Darkness
+376 R Sphere of Annihilation
 377 R Vorpal Sword
+378 M Flameskull
+380 R Meteor Swarm
+381 R Orb of Dragonkind
+382 R Wish
+383 R Circle of Dreams Druid
+384 R Froghemoth
+385 R Instrument of the Bards
+387 R Werewolf Pack Leader
+388 R Orcus, Prince of Undeath
+390 R Triumphant Adventurer
+391 M Xanathar, Guild Kingpin
+392 M The Deck of Many Things
+395 R Treasure Chest
 396 R Vorpal Sword
+397 R Treasure Chest
+398 U Portable Hole
+399 C You Find the Villains' Lair
+400 U Power Word Kill
+402 U Prosperous Innkeeper
+
+[dungeons]
+S Dungeon of the Mad Mage
+S Lost Mine of Phandelver
+S Tomb of Annihilation

@@ -19,6 +19,7 @@ package forge.game.card;
 
 import java.util.Arrays;
 import java.util.EnumSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -1817,6 +1818,41 @@ public class CardFactoryUtil {
 
             inst.addTrigger(parsedUpkeepTrig);
             inst.addTrigger(parsedSacTrigger);
+        } else if (keyword.startsWith("Dungeon")) {
+            final List<String> abs = Arrays.asList(keyword.substring("Dungeon:".length()).split(","));
+            final Map<String, SpellAbility> saMap = new LinkedHashMap<>();
+
+            for(String ab : abs) {
+                saMap.put(ab, AbilityFactory.getAbility(card, ab));
+            }
+            for (SpellAbility sa : saMap.values()) {
+                String roomName = sa.getParam("RoomName");
+                StringBuilder trigStr = new StringBuilder("Mode$ RoomEntered | TriggerZones$ Command");
+                trigStr.append(" | ValidCard$ Card.Self | ValidRoom$ ").append(roomName);
+                trigStr.append(" | TriggerDescription$ ").append(roomName).append(" — ").append(sa.getDescription());
+                if (sa.hasParam("NextRoom")) {
+                    boolean first = true;
+                    StringBuilder nextRoomParam = new StringBuilder();
+                    trigStr.append("  (→ ");
+                    for (String nextRoomSVar : sa.getParam("NextRoom").split(",")) {
+                        if (!first) {
+                            trigStr.append(" or ");
+                            nextRoomParam.append(",");
+                        }
+                        String nextRoomName = saMap.get(nextRoomSVar).getParam("RoomName");
+                        trigStr.append(nextRoomName);
+                        nextRoomParam.append(nextRoomName);
+                        first = false;
+                    }
+                    trigStr.append(")");
+                    sa.putParam("NextRoomName", nextRoomParam.toString());
+                }
+
+                // Need to set intrinsic to false here, else the first room won't get triggered
+                final Trigger t = TriggerHandler.parseTrigger(trigStr.toString(), card, false);
+                t.setOverridingAbility(sa);
+                inst.addTrigger(t);
+            }
         } else if (keyword.startsWith("Ward")) {
             final String[] k = keyword.split(":");
             final Cost cost = new Cost(k[1], false);

@@ -126,7 +126,7 @@ public class CardDetailUtil {
 
     public static String getCurrentColors(final CardStateView c) {
         ColorSet curColors = c.getColors();
-        String strCurColors = ""; 
+        String strCurColors = "";
 
         if (curColors.hasWhite()) { strCurColors += "{W}"; }
         if (curColors.hasBlue())  { strCurColors += "{U}"; }
@@ -140,7 +140,7 @@ public class CardDetailUtil {
 
         return strCurColors;
     }
-    
+
     public static DetailColors getRarityColor(final CardRarity rarity) {
         switch (rarity) {
             case Uncommon:
@@ -251,7 +251,7 @@ public class CardDetailUtil {
                     origIdent = origCard != null ? getCurrentColors(origCard.isFaceDown() ? CardView.get(origCard).getState(false) : CardView.get(origCard).getCurrentState()) : "";
                 } catch(Exception ex) {
                     System.err.println("Unexpected behavior: card " + card.getName() + "[" + card.getId() + "] tripped an exception when trying to process current card colors.");
-                } 
+                }
                 isChanged = !curColors.equals(origIdent);
             }
 
@@ -475,6 +475,15 @@ public class CardDetailUtil {
                 }
             }
             area.append(")");
+        }
+
+        // dungeon room
+        if (card.getCurrentRoom() != null && !card.getCurrentRoom().isEmpty()) {
+            if (area.length() != 0) {
+                area.append("\n");
+            }
+            area.append("(In room: ");
+            area.append(card.getCurrentRoom()).append(")");
         }
 
         // a card has something attached to it

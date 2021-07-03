@@ -7,7 +7,7 @@ import java.util.Map;
 import forge.game.card.Card;
 
 
-/** 
+/**
  * TODO: Write javadoc for this type.
  *
  */
@@ -58,6 +58,7 @@ public enum TriggerType {
     Discarded(TriggerDiscarded.class),
     DiscardedAll(TriggerDiscardedAll.class),
     Drawn(TriggerDrawn.class),
+    DungeonCompleted(TriggerCompletedDungeon.class),
     Evolved(TriggerEvolved.class),
     ExcessDamage(TriggerExcessDamage.class),
     Exerted(TriggerExerted.class),
@@ -88,6 +89,7 @@ public enum TriggerType {
     Regenerated(TriggerRegenerated.class),
     Revealed(TriggerRevealed.class),
     RolledDie(TriggerRolledDie.class),
+    RoomEntered(TriggerEnteredRoom.class),
     Sacrificed(TriggerSacrificed.class),
     Scry(TriggerScry.class),
     SearchedLibrary(TriggerSearchedLibrary.class),

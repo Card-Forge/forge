@@ -1,0 +1,9 @@
+Name:Hall of Storm Giants
+ManaCost:no cost
+Types:Land
+K:ETBReplacement:Other:LandTapped
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionCheckSVar$ ETBCheckSVar2 | ConditionSVarCompare$ GE2 | SpellDescription$ If you control two or more other lands, CARDNAME enters the battlefield tapped.
+SVar:ETBCheckSVar2:Count$LastStateBattlefield Land.YouCtrl
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+A:AB$ Animate | Cost$ 5 U | Defined$ Self | Power$ 7 | Toughness$ 7 | Types$ Creature,Giant | Colors$ Blue | Keywords$ Ward:3 | SpellDescription$ Until end of turn, CARDNAME becomes a 7/7 blue Giant creature with ward {3}. It's still a land. (Whenever it becomes the target of a spell or ability an opponent controls, counter it unless that player pays {3}.)
+Oracle:If you control two or more other lands, Hall of Storm Giants enters the battlefield tapped.\n{T}: Add {U}.\n{5}{U}: Until end of turn, Hall of Storm Giants becomes a 7/7 blue Giant creature with ward {3}. It's still a land. (Whenever it becomes the target of a spell or ability an opponent controls, counter it unless that player pays {3}.)

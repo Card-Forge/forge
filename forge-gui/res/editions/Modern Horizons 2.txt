@@ -8,6 +8,7 @@ Type=Draft_Innovation
 Booster=10 Common:fromSheet("MH2 cards"), 3 Uncommon:fromSheet("MH2 cards"), 1 RareMythic:fromSheet("MH2 cards"), 1 fromSheet("MH2 Lands")
 BoosterReplaceSlotFromPrintSheet=MH2 NewToModern
 BoosterBox=36
+BoosterCovers=3
 ChaosDraftThemes=MASTERS_SET
 ScryfallCode=MH2
 

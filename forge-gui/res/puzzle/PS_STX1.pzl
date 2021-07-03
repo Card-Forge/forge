@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Strixhaven: School of Mages #01
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2021/04/172.-STX1-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Assume your opponent has no mana available and no cards in hand.
+[state]
+humanlife=20
+ailife=10
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Hall Monitor;Lorehold Command;Sentinel's Eyes;Venerable Knight
+humanbattlefield=Hofri Ghostforge;Fuming Effigy;Plargg, Dean of Chaos|Modal;Plains;Plains;Plains;Mountain;Mountain;Mountain
+aibattlefield=Colossal Dreadmaw;Joraga Visionary;Spined Karok

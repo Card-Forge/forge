@@ -183,18 +183,11 @@ public class PlayEffect extends SpellAbilityEffect {
             activator.addController(controlledByTimeStamp, controlledByPlayer);
         }
 
+        boolean singleOption = tgtCards.size() == 1 && amount == 1 && optional;
+
         while (!tgtCards.isEmpty() && amount > 0) {
             activator.getController().tempShowCards(showCards);
-            Card tgtCard = null;
-            if (tgtCards.size() == 1 && amount == 1 && optional) {
-                tgtCard = tgtCards.get(0);
-                if (!controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantPlayCard", CardTranslation.getTranslatedName(tgtCard.getName())))) {
-                    break;
-                }
-            } else {
-                tgtCard = controller.getController().chooseSingleEntityForEffect(tgtCards, sa, Localizer.getInstance().getMessage("lblSelectCardToPlay"), optional, null);
-            }
-
+            Card tgtCard = controller.getController().chooseSingleEntityForEffect(tgtCards, sa, Localizer.getInstance().getMessage("lblSelectCardToPlay"), !singleOption, null);
             activator.getController().endTempShowCards();
             if (tgtCard == null) {
                 break;
@@ -210,12 +203,16 @@ public class PlayEffect extends SpellAbilityEffect {
                 game.getAction().revealTo(tgtCard, activator);
             }
 
-            if (!sa.hasParam("AllowRepeats")) {
-                tgtCards.remove(tgtCard);
+            if (singleOption && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantPlayCard", CardTranslation.getTranslatedName(tgtCard.getName())))) {
+                if (wasFaceDown) {
+                    tgtCard.turnFaceDownNoUpdate();
+                    tgtCard.updateStateForView();
+                }
+                break;
             }
 
-            if (wasFaceDown) {
-                tgtCard.updateStateForView();
+            if (!sa.hasParam("AllowRepeats")) {
+                tgtCards.remove(tgtCard);
             }
 
             final Card original = tgtCard;
@@ -272,6 +269,10 @@ public class PlayEffect extends SpellAbilityEffect {
             }
             // in case player canceled from choice dialog
             if (tgtSA == null) {
+                if (wasFaceDown) {
+                    tgtCard.turnFaceDownNoUpdate();
+                    tgtCard.updateStateForView();
+                }
                 continue;
             }
 
@@ -329,7 +330,7 @@ public class PlayEffect extends SpellAbilityEffect {
                     source.addRemembered(tgtSA.getHostCard());
                 }
 
-                //Forgot only of playing was successful
+                //Forgot only if playing was successful
                 if (sa.hasParam("ForgetRemembered")) {
                     source.clearRemembered();
                 }
@@ -396,7 +397,6 @@ public class PlayEffect extends SpellAbilityEffect {
         game.getAction().moveTo(ZoneType.Command, eff, sa);
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
     }
-
 
     protected void addIllusionaryMaskReplace(Card c, SpellAbility sa) {
         final Card hostCard = sa.getHostCard();

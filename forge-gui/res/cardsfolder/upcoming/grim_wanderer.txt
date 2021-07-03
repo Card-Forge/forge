@@ -1,0 +1,8 @@
+Name:Grim Wanderer
+ManaCost:1 B
+Types:Creature Goblin Warlock
+PT:5/3
+K:Flash
+S:Mode$ CantBeCast | ValidCard$ Card.Self | EffectZone$ All | CheckSVar$ X | Description$ Tragic Backstory — Cast this spell only if a creature died this turn.
+SVar:X:Count$Morbid.0.1
+Oracle:Flash\nTragic Backstory — Cast this spell only if a creature died this turn.
