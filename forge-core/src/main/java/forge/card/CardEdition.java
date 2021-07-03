@@ -90,7 +90,7 @@ public final class CardEdition implements Comparable<CardEdition> {
         FUNNY,
 
         OTHER,  // FALLBACK CATEGORY
-        THIRDPARTY; // custom sets
+        CUSTOM_SET; // custom sets
 
         public String getBoosterBoxDefault() {
             switch (this) {
@@ -619,7 +619,7 @@ public final class CardEdition implements Comparable<CardEdition> {
             res.borderColor = BorderColor.valueOf(section.get("border", "Black").toUpperCase(Locale.ENGLISH));
             Type enumType = Type.UNKNOWN;
             if (this.isCustomEditions){
-                enumType = Type.THIRDPARTY;  // Forcing ThirdParty Edition Type to avoid inconsistencies
+                enumType = Type.CUSTOM_SET;  // Forcing ThirdParty Edition Type to avoid inconsistencies
             } else {
                 String type  = section.get("type");
                 if (null != type && !type.isEmpty()) {
