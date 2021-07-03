@@ -6,4 +6,5 @@ SVar:SmashIt:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifa
 SVar:LiftTheCurse:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Lift the Curse — Destroy target enchantment.
 SVar:StealItsEyes:DB$ Token | TokenScript$ c_a_treasure_sac | SubAbility$ DBVenture | SpellDescription$ Steal Its Eyes — Create a Treasure token and venture into the dungeon. (Enter the first room or advance to the next room.)
 SVar:DBVenture:DB$ Venture
-Oracle:Choose one —\n• Smash It — Destroy target artifact.\n• Lift the Curse — Destroy target enchantment.\n• Steal Its Eyes — Create an Treasure token and venture into the dungeon. (Enter the first room or advance to the next room.)
+DeckHas:Ability$Token
+Oracle:Choose one —\n• Smash It — Destroy target artifact.\n• Lift the Curse — Destroy target enchantment.\n• Steal Its Eyes — Create a Treasure token and venture into the dungeon. (Enter the first room or advance to the next room.)
