@@ -27,9 +27,9 @@ public class HistoricFormatSelect extends FScreen {
 
     private GameFormat selectedFormat;
     private final FGroupList<GameFormat> lstFormats = add(new FGroupList<>());
-    private final Set<GameFormat.FormatSubType> historicSubTypes = new HashSet<>(Arrays.asList(GameFormat.FormatSubType.Block,
-            GameFormat.FormatSubType.Standard,GameFormat.FormatSubType.Extended,GameFormat.FormatSubType.Modern,
-            GameFormat.FormatSubType.Legacy, GameFormat.FormatSubType.Vintage));
+    private final Set<GameFormat.FormatSubType> historicSubTypes = new HashSet<>(Arrays.asList(GameFormat.FormatSubType.BLOCK,
+            GameFormat.FormatSubType.STANDARD,GameFormat.FormatSubType.EXTENDED,GameFormat.FormatSubType.MODERN,
+            GameFormat.FormatSubType.LEGACY, GameFormat.FormatSubType.VINTAGE));
 
     private Runnable onCloseCallBack;
 
@@ -56,22 +56,22 @@ public class HistoricFormatSelect extends FScreen {
                     break;
                 case HISTORIC:
                     switch (format.getFormatSubType()){
-                        case Block:
+                        case BLOCK:
                             lstFormats.addItem(format, 2);
                             break;
-                        case Standard:
+                        case STANDARD:
                             lstFormats.addItem(format, 3);
                             break;
-                        case Extended:
+                        case EXTENDED:
                             lstFormats.addItem(format, 4);
                             break;
-                        case Modern:
+                        case MODERN:
                             lstFormats.addItem(format, 5);
                             break;
-                        case Legacy:
+                        case LEGACY:
                             lstFormats.addItem(format, 6);
                             break;
-                        case Vintage:
+                        case VINTAGE:
                             lstFormats.addItem(format, 7);
                             break;
 

@@ -65,19 +65,19 @@ public class GameFormat implements Comparable<GameFormat> {
         CUSTOM
     }
     public enum FormatSubType {
-        Block,
-        Standard,
-        Extended,
-        Pioneer,
-        Modern,
-        Legacy,
-        Vintage,
-        Commander,
-        Planechase,
-        Videogame,
+        BLOCK,
+        STANDARD,
+        EXTENDED,
+        PIONEER,
+        MODERN,
+        LEGACY,
+        VINTAGE,
+        COMMANDER,
+        PLANECHASE,
+        VIDEOGAME,
         MTGO,
-        Arena,
-        Custom
+        ARENA,
+        CUSTOM
     }
 
     // contains allowed sets, when empty allows all sets
@@ -105,11 +105,11 @@ public class GameFormat implements Comparable<GameFormat> {
     private final int index;
 
     public GameFormat(final String fName, final Iterable<String> sets, final List<String> bannedCards) {
-        this(fName, parseDate(DEFAULTDATE), sets, bannedCards, null, false, null, null, 0, FormatType.CUSTOM, FormatSubType.Custom);
+        this(fName, parseDate(DEFAULTDATE), sets, bannedCards, null, false, null, null, 0, FormatType.CUSTOM, FormatSubType.CUSTOM);
     }
     
     public static final GameFormat NoFormat = new GameFormat("(none)", parseDate(DEFAULTDATE) , null, null, null, false
-            , null, null, Integer.MAX_VALUE, FormatType.CUSTOM, FormatSubType.Custom);
+            , null, null, Integer.MAX_VALUE, FormatType.CUSTOM, FormatSubType.CUSTOM);
     
     public GameFormat(final String fName, final Date effectiveDate, final Iterable<String> sets, final List<String> bannedCards,
                       final List<String> restrictedCards, Boolean restrictedLegendary, final List<String> additionalCards,
@@ -366,7 +366,7 @@ public class GameFormat implements Comparable<GameFormat> {
             try {
                 formatsubType = FormatSubType.valueOf(section.get("subtype"));
             } catch (Exception e) {
-                formatsubType = FormatSubType.Custom;
+                formatsubType = FormatSubType.CUSTOM;
             }
             Integer idx = section.getInt("order");
             String dateStr = section.get("effective");
@@ -552,7 +552,7 @@ public class GameFormat implements Comparable<GameFormat> {
                     //exclude Digital formats from lists for now
                     continue;
                 }
-                if (gf.getFormatSubType().equals(FormatSubType.Commander)){
+                if (gf.getFormatSubType().equals(FormatSubType.COMMANDER)){
                     //exclude Commander format as other deck checks are not performed here
                     continue;
                 }
