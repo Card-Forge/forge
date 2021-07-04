@@ -50,9 +50,9 @@ public class CardSetFilter extends CardFormatFilter {
     }
 
     public void edit(final ItemManager<? super PaperCard> itemManager) {
-        final DialogChooseSets dialog = new DialogChooseSets(this.sets, null, true);
+        final DialogChooseSets dialog = new DialogChooseSets(this.sets, null, true,
+                                                             this.allowReprints);
         final CardSetFilter itemFilter = this;
-        dialog.setWantReprintsCB(allowReprints);
         
         dialog.setOkCallback(new Runnable() {
             @Override

@@ -47,7 +47,8 @@ public class DeckSetFilter extends DeckFormatFilter {
     }
 
     public void edit() {
-        final DialogChooseSets dialog = new DialogChooseSets(this.sets, null, true);
+        final DialogChooseSets dialog = new DialogChooseSets(this.sets, null, true,
+                                                             this.allowReprints);
         dialog.setOkCallback(new Runnable() {
             @Override
             public void run() {
