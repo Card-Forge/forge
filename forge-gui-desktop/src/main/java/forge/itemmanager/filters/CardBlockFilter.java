@@ -11,11 +11,12 @@ import java.util.*;
 public class CardBlockFilter extends CardSetFilter {
 
     private final Set<GameFormat> selectedBlocks = new HashSet<>();
-    private GameFormat cardBlock = null;
+    private GameFormat cardBlock;
 
     public CardBlockFilter(final ItemManager<? super PaperCard> itemManager0, final GameFormat cardBlock) {
         super(itemManager0, cardBlock.getAllowedSetCodes(), false);
         this.formats.add(cardBlock);
+        this.cardBlock = cardBlock;
         this.selectedBlocks.add(cardBlock);
     }
 
