@@ -1,0 +1,13 @@
+Name:Zariel, Archduke of Avernus
+ManaCost:2 R R
+Types:Legendary Planeswalker Zariel
+Loyalty:4
+A:AB$ PumpAll | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +0 | KW$ Haste | SpellDescription$ Creatures you control get +1/+0 and gain haste until end of turn.
+A:AB$ Token | Cost$ AddCounter<0/LOYALTY> | TokenAmount$ 1 | TokenScript$ r_1_1_devil_burn | TokenOwner$ You | Planeswalker$ True | SpellDescription$ Create a 1/1 red Devil creature token with "When this creature dies, it deals 1 damage to any target."
+A:AB$ Effect | Cost$ SubCounter<6/LOYALTY> | Name$ Emblem - Zariel, Archduke of Avernus | Image$ emblem_zariel_archduke_of_avernus | Triggers$ STZariel | Planeswalker$ True | Ultimate$ True | Duration$ Permanent | SpellDescription$ You get an emblem with “At the end of the first combat phase on your turn, untap target creature you control. After this phase, there is an additional combat phase.”
+SVar:STZariel:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ You | FirstCombat$ True | Execute$ TrigZarielCombat | TriggerDescription$ At the end of the first combat phase on your turn, untap target creature you control. After this phase, there is an additional combat phase.
+SVar:TrigZarielCombat:DB$ Untap | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control. | SubAbility$ DBAddCombat
+SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ Combat | AfterPhase$ EndCombat
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Token
+Oracle:[+1]: Creatures you control get +1/+0 and gain haste until end of turn.\n[0]: Create a 1/1 red Devil creature token with "When this creature dies, it deals 1 damage to any target."\n[−6]: You get an emblem with "At the end of the first combat phase on your turn, untap target creature you control. After this phase, there is an additional combat phase."

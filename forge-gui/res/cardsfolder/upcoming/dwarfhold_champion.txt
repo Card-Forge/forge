@@ -1,0 +1,7 @@
+Name:Dwarfhold Champion
+ManaCost:1 W
+Types:Creature Dwarf Warrior
+PT:3/1
+S:Mode$ Continuous | Affected$ Card.Self+equipped | AddPower$ 0 | AddToughness$ 2 | Description$ As long as CARDNAME is equipped, it gets +0/+2.
+SVar:EquipMe:Once
+Oracle:As long as Dwarfhold Champion is equipped, it gets +0/+2.
