@@ -305,9 +305,10 @@ public class GameFormat implements Comparable<GameFormat> {
             }
         }
         if (formatType.equals(FormatType.HISTORIC)){
-            if(effectiveDate!=other.effectiveDate) {//for matching dates or default dates default to name sorting
-                return other.effectiveDate.compareTo(effectiveDate);
-            }
+            int compareDates = this.effectiveDate.compareTo(other.effectiveDate);
+            if (compareDates != 0)
+                return compareDates;
+            return (this.index - other.index);
         }
         return name.compareTo(other.name);
         //return index - other.index;
