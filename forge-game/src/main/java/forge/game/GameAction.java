@@ -251,6 +251,7 @@ public class GameAction {
                     copied.setChangedCardTraits(c.getChangedCardTraits());
 
                     copied.copyChangedTextFrom(c);
+                    copied.setTimestamp(c.getTimestamp());
 
                     // copy exiled properties when adding to stack
                     // will be cleanup later in MagicStack
