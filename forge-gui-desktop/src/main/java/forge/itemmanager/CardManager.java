@@ -156,7 +156,7 @@ public class CardManager extends ItemManager<PaperCard> {
             GuiUtils.addMenuItem(world, w.getName(), null, new Runnable() {
                 @Override
                 public void run() {
-                    itemManager.addFilter(new CardQuestWorldFilter(itemManager, w));
+                    itemManager.addFilter(new CardQuestWorldFilter(itemManager, w, false));
                 }
             }, CardQuestWorldFilter.canAddQuestWorld(w, itemManager.getFilter(CardQuestWorldFilter.class)));
         }
