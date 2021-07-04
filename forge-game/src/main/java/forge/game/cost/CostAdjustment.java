@@ -138,7 +138,7 @@ public class CostAdjustment {
                     count = Integer.parseInt(amount);
                 } else {
                     if (st.hasParam("AffectedAmount")) {
-                        count = AbilityUtils.calculateAmount(hostCard, amount, sa);
+                        count = AbilityUtils.calculateAmount(card, st.hasSVar(amount) ? st.getSVar(amount) : amount, sa);
                     } else {
                         count = AbilityUtils.calculateAmount(hostCard, amount, st);
                     }
@@ -310,7 +310,6 @@ public class CostAdjustment {
     }
 
     private static void adjustCostByEmerge(final ManaCostBeingPaid cost, final SpellAbility sa) {
-    
         Card toSac = null;
         CardCollectionView canEmerge = CardLists.filter(sa.getActivatingPlayer().getCreaturesInPlay(), CardPredicates.canBeSacrificedBy(sa));
 
