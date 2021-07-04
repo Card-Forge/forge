@@ -151,7 +151,7 @@ public class FCheckBoxTree extends JTree {
     // == CONSTRUCTOR METHOD ==
     // ========================
 
-    public FCheckBoxTree() {
+    public FCheckBoxTree(){
         super(new FTreeNode(new FTreeNodeData(ROOTNODE_LABEL)));
         // Disabling toggling by double-click
         this.setToggleClickCount(0);
@@ -323,7 +323,7 @@ public class FCheckBoxTree extends JTree {
         checkedPaths = new HashSet<>();
         nodesSet = new HashMap<>();
         FTreeNode node = (FTreeNode) getModel().getRoot();
-        if (node == null)
+        if (node == null || node.getChildCount() == 0)
             return;
         addSubtreeToCheckingStateTracking(node, false);
     }
@@ -469,7 +469,7 @@ public class FCheckBoxTree extends JTree {
             this.setOpaque(false);
             this.checkBox = new FCheckBox();
             this.displayNodesCount = displayNodesCount;
-            add(this.checkBox, "left, gap 0, w 250::450");
+            add(this.checkBox, "left, gaptop 2, w 250::450, h 20!");
 
         }
 
@@ -589,14 +589,20 @@ public class FCheckBoxTree extends JTree {
     }
 
     public void addCheckChangeEventListener(CheckChangeEventListener listener) {
+        if (listenerList == null)
+            return;
         listenerList.add(CheckChangeEventListener.class, listener);
     }
 
     public void removeCheckChangeEventListener(CheckChangeEventListener listener) {
+        if (listenerList == null)
+            return;
         listenerList.remove(CheckChangeEventListener.class, listener);
     }
 
     void fireCheckChangeEvent(TreeCheckChangeEvent evt) {
+        if (listenerList == null)
+            return;
         Object[] listeners = listenerList.getListenerList();
         for (int i = 0; i < listeners.length; i++) {
             if (listeners[i] == CheckChangeEventListener.class) {
@@ -616,14 +622,20 @@ public class FCheckBoxTree extends JTree {
     }
 
     public void addEnableChangeEventListener(EnableChangeEventListener listener) {
+        if (listenerList == null)
+            return;
         listenerList.add(EnableChangeEventListener.class, listener);
     }
 
     public void removeEnableChangeEventListener(EnableChangeEventListener listener) {
+        if (listenerList == null)
+            return;
         listenerList.remove(EnableChangeEventListener.class, listener);
     }
 
     void fireEnabledChangeEvent(TreeEnabledChangeEvent evt) {
+        if (listenerList == null)
+            return;
         Object[] listeners = listenerList.getListenerList();
         for (int i = 0; i < listeners.length; i++) {
             if (listeners[i] == CheckChangeEventListener.class) {
