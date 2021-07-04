@@ -138,7 +138,7 @@ public class CostAdjustment {
                     count = Integer.parseInt(amount);
                 } else {
                     if (st.hasParam("AffectedAmount")) {
-                        count = AbilityUtils.calculateAmount(card, amount, st);
+                        count = AbilityUtils.calculateAmount(hostCard, amount, sa);
                     } else {
                         count = AbilityUtils.calculateAmount(hostCard, amount, st);
                     }
