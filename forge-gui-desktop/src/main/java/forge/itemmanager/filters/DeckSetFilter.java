@@ -11,7 +11,7 @@ import forge.screens.home.quest.DialogChooseSets;
 
 
 public class DeckSetFilter extends DeckFormatFilter {
-    private final Set<String> sets = new HashSet<>();
+    protected final Set<String> sets = new HashSet<>();
 
     public DeckSetFilter(ItemManager<? super DeckProxy> itemManager0, Collection<String> sets0, boolean allowReprints0) {
         super(itemManager0);
