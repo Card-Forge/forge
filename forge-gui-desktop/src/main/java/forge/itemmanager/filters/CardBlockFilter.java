@@ -66,7 +66,10 @@ public class CardBlockFilter extends CardSetFilter {
 
     @Override
     protected int getCount() {
-        return this.selectedBlocks.size();
+        int setCount = 0;
+        for (GameFormat block : this.selectedBlocks)
+            setCount += block.getAllowedSetCodes().size();
+        return setCount;
     }
 
     @Override
