@@ -2569,7 +2569,6 @@ public class AbilityUtils {
         // Count$ThisTurnCast <Valid>
         // Count$LastTurnCast <Valid>
         if (sq[0].startsWith("ThisTurnCast") || sq[0].startsWith("LastTurnCast")) {
-
             final String[] workingCopy = l[0].split("_");
             final String validFilter = workingCopy[1];
 
