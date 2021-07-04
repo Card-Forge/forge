@@ -296,6 +296,7 @@ public class GameFormat implements Comparable<GameFormat> {
         if (null == other) {
             return 1;
         }
+
         if (other.formatType != formatType){
             return formatType.compareTo(other.formatType);
         }else{
@@ -358,13 +359,13 @@ public class GameFormat implements Comparable<GameFormat> {
             String title = section.get("name");
             FormatType formatType;
             try {
-                formatType = FormatType.valueOf(section.get("type"));
+                formatType = FormatType.valueOf(section.get("type").toUpperCase());
             } catch (Exception e) {
                 formatType = FormatType.CUSTOM;
             }
             FormatSubType formatsubType;
             try {
-                formatsubType = FormatSubType.valueOf(section.get("subtype"));
+                formatsubType = FormatSubType.valueOf(section.get("subtype").toUpperCase());
             } catch (Exception e) {
                 formatsubType = FormatSubType.CUSTOM;
             }
