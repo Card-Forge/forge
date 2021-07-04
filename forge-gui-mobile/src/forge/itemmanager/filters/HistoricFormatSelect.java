@@ -36,7 +36,7 @@ public class HistoricFormatSelect extends FScreen {
     public HistoricFormatSelect() {
         super(Localizer.getInstance().getMessage("lblChooseFormat"));
         for (GameFormat.FormatType group:GameFormat.FormatType.values()){
-            if (group == GameFormat.FormatType.Historic){
+            if (group == GameFormat.FormatType.HISTORIC){
                 for (GameFormat.FormatSubType subgroup:GameFormat.FormatSubType.values()){
                     if (historicSubTypes.contains(subgroup)){
                         lstFormats.addGroup(group.name() + "-" + subgroup.name());
@@ -48,13 +48,13 @@ public class HistoricFormatSelect extends FScreen {
         }
         for (GameFormat format: FModel.getFormats().getOrderedList()){
             switch(format.getFormatType()){
-                case Sanctioned:
+                case SANCTIONED:
                     lstFormats.addItem(format, 0);
                     break;
-                case Casual:
+                case CASUAL:
                     lstFormats.addItem(format, 1);
                     break;
-                case Historic:
+                case HISTORIC:
                     switch (format.getFormatSubType()){
                         case Block:
                             lstFormats.addItem(format, 2);
@@ -77,10 +77,10 @@ public class HistoricFormatSelect extends FScreen {
 
                     }
                     break;
-                case Digital:
+                case DIGITAL:
                     lstFormats.addItem(format, 8);
                     break;
-                case Custom:
+                case CUSTOM:
                     lstFormats.addItem(format, 9);
             }
         }

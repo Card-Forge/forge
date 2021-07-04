@@ -57,8 +57,28 @@ import forge.util.storage.StorageReaderRecursiveFolderWithUserFolder;
 
 public class GameFormat implements Comparable<GameFormat> {
     private final String name;
-    public enum FormatType {Sanctioned, Casual, Historic, Digital, Custom}
-    public enum FormatSubType {Block, Standard, Extended, Pioneer, Modern, Legacy, Vintage, Commander, Planechase, Videogame, MTGO, Arena, Custom}
+    public enum FormatType {
+        SANCTIONED,
+        CASUAL,
+        HISTORIC,
+        DIGITAL,
+        CUSTOM
+    }
+    public enum FormatSubType {
+        Block,
+        Standard,
+        Extended,
+        Pioneer,
+        Modern,
+        Legacy,
+        Vintage,
+        Commander,
+        Planechase,
+        Videogame,
+        MTGO,
+        Arena,
+        Custom
+    }
 
     // contains allowed sets, when empty allows all sets
     private FormatType formatType;
@@ -85,11 +105,11 @@ public class GameFormat implements Comparable<GameFormat> {
     private final int index;
 
     public GameFormat(final String fName, final Iterable<String> sets, final List<String> bannedCards) {
-        this(fName, parseDate(DEFAULTDATE), sets, bannedCards, null, false, null, null, 0, FormatType.Custom, FormatSubType.Custom);
+        this(fName, parseDate(DEFAULTDATE), sets, bannedCards, null, false, null, null, 0, FormatType.CUSTOM, FormatSubType.Custom);
     }
     
     public static final GameFormat NoFormat = new GameFormat("(none)", parseDate(DEFAULTDATE) , null, null, null, false
-            , null, null, Integer.MAX_VALUE, FormatType.Custom, FormatSubType.Custom);
+            , null, null, Integer.MAX_VALUE, FormatType.CUSTOM, FormatSubType.Custom);
     
     public GameFormat(final String fName, final Date effectiveDate, final Iterable<String> sets, final List<String> bannedCards,
                       final List<String> restrictedCards, Boolean restrictedLegendary, final List<String> additionalCards,
@@ -283,7 +303,7 @@ public class GameFormat implements Comparable<GameFormat> {
                 return formatSubType.compareTo(other.formatSubType);
             }
         }
-        if (formatType.equals(FormatType.Historic)){
+        if (formatType.equals(FormatType.HISTORIC)){
             if(effectiveDate!=other.effectiveDate) {//for matching dates or default dates default to name sorting
                 return other.effectiveDate.compareTo(effectiveDate);
             }
@@ -340,7 +360,7 @@ public class GameFormat implements Comparable<GameFormat> {
             try {
                 formatType = FormatType.valueOf(section.get("type"));
             } catch (Exception e) {
-                formatType = FormatType.Custom;
+                formatType = FormatType.CUSTOM;
             }
             FormatSubType formatsubType;
             try {
@@ -432,7 +452,7 @@ public class GameFormat implements Comparable<GameFormat> {
         public Iterable<GameFormat> getSanctionedList() {
             List<GameFormat> coreList = new ArrayList<>();
             for(GameFormat format: naturallyOrdered){
-                if(format.getFormatType().equals(FormatType.Sanctioned)){
+                if(format.getFormatType().equals(FormatType.SANCTIONED)){
                     coreList.add(format);
                 }
             }
@@ -442,8 +462,8 @@ public class GameFormat implements Comparable<GameFormat> {
         public Iterable<GameFormat> getFilterList() {
             List<GameFormat> coreList = new ArrayList<>();
             for(GameFormat format: naturallyOrdered){
-                if(!format.getFormatType().equals(FormatType.Historic)
-                        &&!format.getFormatType().equals(FormatType.Digital)){
+                if(!format.getFormatType().equals(FormatType.HISTORIC)
+                        &&!format.getFormatType().equals(FormatType.DIGITAL)){
                     coreList.add(format);
                 }
             }
@@ -453,7 +473,7 @@ public class GameFormat implements Comparable<GameFormat> {
         public Iterable<GameFormat> getHistoricList() {
             List<GameFormat> coreList = new ArrayList<>();
             for(GameFormat format: naturallyOrdered){
-                if(format.getFormatType().equals(FormatType.Historic)){
+                if(format.getFormatType().equals(FormatType.HISTORIC)){
                     coreList.add(format);
                 }
             }
@@ -463,7 +483,7 @@ public class GameFormat implements Comparable<GameFormat> {
         public Map<String, List<GameFormat>> getHistoricMap() {
             Map<String, List<GameFormat>> coreList = new HashMap<>();
             for(GameFormat format: naturallyOrdered){
-                if(format.getFormatType().equals(FormatType.Historic)){
+                if(format.getFormatType().equals(FormatType.HISTORIC)){
                     String alpha = format.getName().substring(0,1);
                     if(!coreList.containsKey(alpha)){
                         coreList.put(alpha,new ArrayList<>());
@@ -528,7 +548,7 @@ public class GameFormat implements Comparable<GameFormat> {
             Set<FormatSubType> coveredTypes = new HashSet<>();
             CardPool allCards = deck.getAllCardsInASinglePool();
             for(GameFormat gf : reverseDateOrdered) {
-                if (gf.getFormatType().equals(FormatType.Digital) && !exhaustive){
+                if (gf.getFormatType().equals(FormatType.DIGITAL) && !exhaustive){
                     //exclude Digital formats from lists for now
                     continue;
                 }
@@ -536,7 +556,7 @@ public class GameFormat implements Comparable<GameFormat> {
                     //exclude Commander format as other deck checks are not performed here
                     continue;
                 }
-                if (gf.getFormatType().equals(FormatType.Historic) && coveredTypes.contains(gf.getFormatSubType())
+                if (gf.getFormatType().equals(FormatType.HISTORIC) && coveredTypes.contains(gf.getFormatSubType())
                         && !exhaustive){
                     //exclude duplicate formats - only keep first of e.g. Standard historical
                     continue;
@@ -570,7 +590,7 @@ public class GameFormat implements Comparable<GameFormat> {
                     return gf1.formatSubType.compareTo(gf2.formatSubType);
                 }
             }
-            if (gf1.formatType.equals(FormatType.Historic)){
+            if (gf1.formatType.equals(FormatType.HISTORIC)){
                 if(gf1.effectiveDate!=gf2.effectiveDate) {//for matching dates or default dates default to name sorting
                     return gf1.effectiveDate.compareTo(gf2.effectiveDate);
                 }
