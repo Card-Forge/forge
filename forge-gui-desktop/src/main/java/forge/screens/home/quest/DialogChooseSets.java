@@ -9,6 +9,7 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import forge.Singletons;
 import forge.toolbox.*;
 import forge.card.CardEdition;
 import forge.game.GameFormat;
@@ -16,7 +17,6 @@ import forge.gui.SOverlayUtils;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.util.Localizer;
-import forge.util.TextUtil;
 import net.miginfocom.swing.MigLayout;
 import forge.toolbox.FCheckBoxTree.FTreeNode;
 import forge.toolbox.FCheckBoxTree.FTreeNodeData;
@@ -30,7 +30,13 @@ public class DialogChooseSets {
 	private final FCheckBox cbWantReprints = new FCheckBox(Localizer.getInstance().getMessage("lblDisplayRecentSetReprints"));
 	private final FCheckBoxTree checkBoxTree = new FCheckBoxTree();
 
-	public DialogChooseSets(Collection<String> preselectedSets, Collection<String> unselectableSets, boolean showWantReprintsCheckbox) {
+	public DialogChooseSets(Collection<String> preselectedSets, Collection<String> unselectableSets,
+							boolean showWantReprintsCheckbox) {
+		this(preselectedSets, unselectableSets, showWantReprintsCheckbox, false);
+	}
+
+	public DialogChooseSets(Collection<String> preselectedSets, Collection<String> unselectableSets,
+							boolean showWantReprintsCheckbox, boolean allowReprints) {
 
 		// get the map of each editions per type
 		Map<CardEdition.Type, List<CardEdition>> editionsTypeMap = FModel.getMagicDb().getEditionsTypeMap();
@@ -79,7 +85,8 @@ public class DialogChooseSets {
 		// === 0. MAIN PANEL WINDOW ===
 		// ===================================================================
 		// Initialise UI
-		FPanel mainDialogPanel = new FPanel(new MigLayout("insets 10, gap 5, center, wrap 2, w 800:1024:2048"));
+		FPanel mainDialogPanel = new FPanel(new MigLayout(
+				String.format("insets 10, gap 5, center, wrap 2, w %d!", getMainDialogWidth())));
 		mainDialogPanel.setOpaque(false);
 		mainDialogPanel.setBackgroundTexture(FSkin.getIcon(FSkinProp.BG_TEXTURE));
 
@@ -154,20 +161,20 @@ public class DialogChooseSets {
 		JPanel typeFieldsPanel = null;
 		randomSelectionPanel.add(new JSeparator(SwingConstants.HORIZONTAL), "w 100%, span 2, center");
 		randomSelectionPanel.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("nlSelectRandomSets"))
-				.fontSize(12).fontStyle(Font.ITALIC).build(), "w 80%!, h 22px!, gap 10 0 0 0, span 2, center");
+				.fontSize(12).fontStyle(Font.ITALIC).build(), "w 80%!, h 22px!, gap 5 0 0 0, span 2, center");
 		String pairPanelLayout = "wrap 2, w 30%";
 		int componentIndex = 0;
 		int pairPerPanel = 3;
 		int panelCompsCount = 0;
 		for (CardEdition.Type editionType : allEditionTypes.keySet()) {
 			if (panelCompsCount == 0)
-				typeFieldsPanel = new JPanel(new MigLayout("insets 10, gap 25 5, wrap 3"));
+				typeFieldsPanel = new JPanel(new MigLayout("insets 5, wrap 3"));
 			typeFieldsPanel.setOpaque(false);
 			JPanel pairPanel = new JPanel(new MigLayout(pairPanelLayout));
 			pairPanel.setOpaque(false);
 			pairPanel.add(labelsEditionTypeMap.get(editionType), "w 100!, align left, span 1");
 			pairPanel.add(spinnersEditionTypeMap.get(editionType), "w 45!, align right, span 1");
-			typeFieldsPanel.add(pairPanel, "span 1, left");
+			typeFieldsPanel.add(pairPanel, "span 1, center, growx, h 50!");
 			panelCompsCount += 1;
 			componentIndex += 1;
 			if ((panelCompsCount == pairPerPanel) || (componentIndex == editionTypeSpinners.size())) {
@@ -184,6 +191,7 @@ public class DialogChooseSets {
 		randomSelectionPanel.add(clearSelectionButton, "gaptop 15, w 40%, h 26!, center");
 		randomSelectionPanel.add(randomSelectionButton, "gaptop 15, w 40%, h 26!, center");
 		if (showWantReprintsCheckbox) {
+			cbWantReprints.setSelected(allowReprints);
 			randomSelectionPanel.add(cbWantReprints, "gaptop 10, left, span, wrap");
 		}
 
@@ -374,7 +382,6 @@ public class DialogChooseSets {
 				Localizer.getInstance().getMessage("lblCardEditionTypeList")).fontSize(14)
 				.fontStyle(Font.BOLD).build(), "h 40!, w 100%, center, span 1");
 		this.checkBoxTree.setOpaque(false);
-		this.checkBoxTree.setVisibleRowCount(21);
 		FScrollPane selectionScroller = new FScrollPane(checkBoxTree, true);
 		editionSelectionPanel.add(selectionScroller, "span 1, w 100%");
 
@@ -429,8 +436,8 @@ public class DialogChooseSets {
 
 		mainDialogPanel.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblChooseSets"))
 				.fontSize(20).build(), "center, span, wrap, gaptop 10");
-		mainDialogPanel.add(editionSelectionPanel, "aligny top, w 70%, growx, span 1");
-		mainDialogPanel.add(randomSelectionPanel, "aligny top, w 30%, span 1");
+		mainDialogPanel.add(editionSelectionPanel, "aligny top, w 50%, span 1");
+		mainDialogPanel.add(randomSelectionPanel, "aligny top, w 50%, span 1");
 		mainDialogPanel.add(optionsPanel, "center, w 100, span 2");
 
 		final JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
@@ -472,6 +479,36 @@ public class DialogChooseSets {
 		SOverlayUtils.showOverlay();
 	}
 
+	private int getMainDialogWidth() {
+		int winWidth = Singletons.getView().getFrame().getSize().width;
+		System.out.println("Win Width " + winWidth);
+		int[] sizeBoundaries = new int[] {800, 1024, 1280, 2048};
+		return calculateRelativePanelDimension(winWidth, 90, sizeBoundaries);
+	}
+
+	// So far, not yet used, but left here just in case
+	private int getMainDialogHeight() {
+		int winHeight = Singletons.getView().getFrame().getSize().height;
+		System.out.println("Win Height " + winHeight);
+		int[] sizeBoundaries = new int[] {600, 720, 780, 1024};
+		return calculateRelativePanelDimension(winHeight, 40, sizeBoundaries);
+	}
+
+	private int calculateRelativePanelDimension(int winDim, int ratio, int[] sizeBoundaries){
+		int relativeWinDimension = winDim * ratio / 100;
+		if (winDim < sizeBoundaries[0])
+			return relativeWinDimension;
+		for (int i = 1; i < sizeBoundaries.length; i++){
+			int left = sizeBoundaries[i-1];
+			int right = sizeBoundaries[i];
+			if (winDim <= left || winDim > right)
+				continue;
+			return Math.min(right*90/100, relativeWinDimension);
+		}
+		return sizeBoundaries[sizeBoundaries.length - 1] * 90 / 100;  // Max Size fixed
+	}
+
+
 	public void setOkCallback(Runnable onOk) {
 		okCallback = onOk;
 	}
@@ -483,29 +520,8 @@ public class DialogChooseSets {
 	public boolean getWantReprints() {
 		return wantReprints;
 	}
-	
-	public void setWantReprintsCB(boolean isSet) {
-	    cbWantReprints.setSelected(isSet);
-	}
-
-	private String getSelectedSetLabel(String editionTypeLabel, String editionLabel){
-		editionTypeLabel = TextUtil.enclosedParen(editionTypeLabel);
-		return editionTypeLabel + " " + editionLabel + "\n";
-	}
-
-	private void refreshSelectedEditions(Map<CardEdition.Type, List<FCheckBox>> selectedEditions, JTextArea textArea){
-		textArea.setText("");
-		String selectedEditionsLines = "";
-		for (CardEdition.Type editionType : selectedEditions.keySet()){
-			List<FCheckBox> selectedCheckBoxes = selectedEditions.get(editionType);
-			for (FCheckBox cbox : selectedCheckBoxes)
-				selectedEditionsLines += getSelectedSetLabel(editionType.toString(), cbox.getText());
-		}
-		textArea.setText(selectedEditionsLines);
-	}
 
 	private void handleOk() {
-
 		Object[] checkedValues = this.checkBoxTree.getCheckedValues(true);
 		for (Object data: checkedValues){
 			CardEdition edition = (CardEdition) data;
