@@ -2,7 +2,7 @@ Name:The Blackstaff of Waterdeep
 ManaCost:U
 Types:Legendary Artifact
 K:You may choose not to untap CARDNAME during your untap step.
-A:AB$ Pump | Cost$ 1 U T | ValidTgts$ Artifact.Other+nonToken+YouCtrl | TgtPrompt$ Select another target nontoken artifact you control | RememberTargets$ True | AILogic$ ContinuousBonus | SpellDescription$ Another target nontoken artifact you control becomes a 4/4 artifact creature for as long as CARDNAME remains tapped. Activate only as a sorcery. | SorcerySpeed$ True | StackDescription$ SpellDescription
+A:AB$ Pump | Cost$ 1 U T | ValidTgts$ Artifact.Other+nonToken+YouCtrl | TgtPrompt$ Select another target nontoken artifact you control | RememberTargets$ True | AILogic$ ContinuousBonus | PrecostDesc$ Animate Walking Statue — | SpellDescription$ Another target nontoken artifact you control becomes a 4/4 artifact creature for as long as CARDNAME remains tapped. Activate only as a sorcery. | SorcerySpeed$ True | StackDescription$ SpellDescription
 S:Mode$ Continuous | Affected$ Artifact.IsRemembered | SetPower$ 4 | SetToughness$ 4 | AddType$ Creature
 T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ ClearRemembered | Static$ True
 SVar:ClearRemembered:DB$ Cleanup | ClearRemembered$ True
