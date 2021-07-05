@@ -4827,8 +4827,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             final String excR = incR[1];
             final String[] exRs = excR.split("\\+"); // Exclusive Restrictions are ...
             for (String exR : exRs) {
-                if (!hasProperty(exR, sourceController, source, spellAbility)) {
-                    return testFailed;
+                if (exR.startsWith("!")) {
+                    exR = exR.substring(1);
+                    if (hasProperty(exR, sourceController, source, spellAbility)) {
+                        return testFailed;
+                    }
+                } else {
+                    if (!hasProperty(exR, sourceController, source, spellAbility)) {
+                        return testFailed;
+                    }
                 }
             }
         }
