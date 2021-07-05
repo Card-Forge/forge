@@ -807,7 +807,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return description;
     }
     public void setDescription(final String s) {
-        originalDescription = s;
+        originalDescription = TextUtil.fastReplace(s, "VERT", "|");
         description = originalDescription;
     }
 
