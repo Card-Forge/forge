@@ -1,0 +1,16 @@
+Name:The Deck of Many Things
+ManaCost:5
+Types:Legendary Artifact
+A:AB$ RollDice | Cost$ 2 T | Sides$ 20 | Modifier$ CardsInHand | ResultSubAbilities$ Else:DBDiscard,1-9:DBReturn,10-19:DBDrawTwo,20:DBReanimate | SpellDescription$ Roll a d20 and subtract the number of cards in your hand. If the result is 0 or less, discard your hand.
+SVar:CardsInHand:Count$InYourHand/Negative
+SVar:DBDiscard:DB$ Discard | Mode$ Hand
+SVar:DBReturn:DB$ ChangeZone | ChangeType$ Card.YouCtrl | ChangeNum$ 1 | Hidden$ True | Origin$ Graveyard | AtRandom$ True | Destination$ Hand | SpellDescription$ 1-9 VERT Return a card at random from your graveyard to your hand.
+SVar:DBDrawTwo:DB$ Draw | NumCards$ 2 | SpellDescription$ 10-19 VERT Draw two cards.
+SVar:DBReanimate:DB$ ChooseCard | Choices$ Creature | ChoiceZone$ Graveyard | Amount$ 1 | SubAbility$ DBChangeZone | SpellDescription$ 20 VERT Put a creature card from any graveyard onto the battlefield under your control. When that creature dies, its owner loses the game.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ ChosenCard | GainControl$ True | RememberChanged$ True | SubAbility$ DBLoseEffect
+SVar:DBLoseEffect:DB$ Effect | Triggers$ TrigDie | RememberObjects$ ChosenCard | Duration$ Permanent | ExileOnMoved$ Battlefield | SubAbility$ DBCleanup
+SVar:TrigDie:Mode$ ChangesZone | ValidCard$ Creature.IsRemembered | Origin$ Battlefield | Destination$ Graveyard | Execute$ DBLose | TriggerDescription$ When that creature dies, its owner loses the game.
+SVar:DBLose:DB$ LosesGame | Defined$ RememberedOwner
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+DeckHas:Ability$Discard & Ability$Graveyard
+Oracle:{2}, {T}: Roll a d20 and subtract the number of cards in your hand. If the result is 0 or less, discard your hand.\n1-9 | Return a card at random from your graveyard to your hand.\n10-19 | Draw two cards.\n20 | Put a creature card from any graveyard onto the battlefield under your control. When that creature dies, its owner loses the game.

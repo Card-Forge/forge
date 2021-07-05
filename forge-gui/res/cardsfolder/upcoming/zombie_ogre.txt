@@ -1,0 +1,8 @@
+Name:Zombie Ogre
+ManaCost:3 B B
+Types:Creature Zombie Ogre
+PT:3/5
+T:Mode$ Phase | Phase$ End of Turn | CheckSVar$ Morbid | SVarCompare$ GE1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigVenture | TriggerDescription$ At the beginning of your end step, if a creature died this turn, venture into the dungeon. (Enter the first room or advance to the next room.)
+SVar:TrigVenture:DB$ Venture
+SVar:Morbid:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+Oracle:At the beginning of your end step, if a creature died this turn, venture into the dungeon. (Enter the first room or advance to the next room.)

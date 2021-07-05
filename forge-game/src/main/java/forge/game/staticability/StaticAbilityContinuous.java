@@ -966,6 +966,13 @@ public final class StaticAbilityContinuous {
         final Player controller = hostCard.getController();
 
         if (stAb.hasParam("CharacteristicDefining")) {
+            if (stAb.hasParam("ExcludeZone")) {
+                for (ZoneType zt : ZoneType.listValueOf(stAb.getParam("ExcludeZone"))) {
+                    if (hostCard.isInZone(zt)) {
+                        return CardCollection.EMPTY;
+                    }
+                }
+            }
             return new CardCollection(hostCard); // will always be the card itself
         }
 

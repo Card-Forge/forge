@@ -3,13 +3,13 @@ ManaCost:4 R
 Types:Creature Beast
 PT:5/6
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRollETB | TriggerDescription$ When Spark Fiend enters the battlefield, roll two six-sided dice. If you rolled 2, 3, or 12, sacrifice Spark Fiend. If you rolled 7 or 11, don’t roll dice for Spark Fiend during any of your following upkeeps. If you rolled any other total, note that total.
-SVar:TrigRollETB:DB$ RollDice | Amt$ 2 | On2$ DBSac | On3$ DBSac | On12$ DBSac | On7$ DBSafe | Else$ DBNote | ResultSVar$ Result
+SVar:TrigRollETB:DB$ RollDice | Amount$ 2 | ResultSubAbilities$ 2-3:DBSac,12:DBSac,7:DBSafe,Else:DBNote | ResultSVar$ Result
 SVar:DBSac:DB$ Sacrifice | Defined$ Self
 SVar:Safe:Number$1
 SVar:Noted:Number$0
 SVar:DBSafe:DB$ StoreSVar | SVar$ Safe | Type$ Number | Expression$ 0
 SVar:DBNote:DB$ StoreSVar | SVar$ Noted | Type$ CountSVar | Expression$ Result
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | CheckSVar$ Safe | SVarCompare$ NE0 | TriggerZones$ Battlefield | Execute$ TrigRoll | TriggerDescription$ At the beginning of your upkeep, roll two six-sided dice. If you rolled 7, sacrifice Spark Fiend. If you roll the noted total, don’t roll dice for Spark Fiend during any of your following upkeeps. Otherwise, do nothing.
-SVar:TrigRoll:DB$ RollDice | Amt$ 2 | On7$ DBSac | ResultSVar$ Result | SubAbility$ DBCheck
+SVar:TrigRoll:DB$ RollDice | Amount$ 2 | ResultSubAbilities$ 7:DBSac | ResultSVar$ Result | SubAbility$ DBCheck
 SVar:DBCheck:DB$ StoreSVar | SVar$ Safe | Type$ CountSVar | Expression$ Result/Minus.Noted
 Oracle:When Spark Fiend enters the battlefield, roll two six-sided dice. If you rolled 2, 3, or 12, sacrifice Spark Fiend. If you rolled 7 or 11, don't roll dice for Spark Fiend during any of your following upkeeps. If you rolled any other total, note that total.\nAt the beginning of your upkeep, roll two six-sided dice. If you rolled 7, sacrifice Spark Fiend. If you roll the noted total, don't roll dice for Spark Fiend during any of your following upkeeps. Otherwise, do nothing.
