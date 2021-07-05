@@ -4,7 +4,7 @@ Types:Creature Hydra Dog
 PT:0/0
 K:ETBReplacement:Other:RollCounters
 SVar:X:Count$xPaid
-SVar:RollCounters:DB$ RollDice | Amt$ X | ETB$ True | ResultSVar$ Result | SubAbility$ DBCounters | SpellDescription$ As CARDNAME enters the battlefield, roll X six-sided dice. CARDNAME enters the battlefield with a number of +1/+1 counters on it equal to the total of those results.
+SVar:RollCounters:DB$ RollDice | Amount$ X | ETB$ True | ResultSVar$ Result | SubAbility$ DBCounters | SpellDescription$ As CARDNAME enters the battlefield, roll X six-sided dice. CARDNAME enters the battlefield with a number of +1/+1 counters on it equal to the total of those results.
 SVar:DBCounters:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ Result | ETB$ True
 K:Reach
 K:Trample

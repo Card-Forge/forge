@@ -1,0 +1,7 @@
+Name:Critical Hit
+ManaCost:1 R
+Types:Instant
+A:SP$ Pump | KW$ Double Strike | ValidTgts$ Creature
+T:Mode$ RolledDie | TriggerZones$ Graveyard | ValidResult$ 20 | ValidPlayer$ You | Execute$ TrigReturn | TriggerDescription$ When you roll a natural 20, return CARDNAME from your graveyard to your hand. (A natural 20 is a roll that displays 20 on the die.)
+SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Hand
+Oracle:Target creature gains double strike until end of turn.\nWhen you roll a natural 20, return Critical Hit from your graveyard to your hand. (A natural 20 is a roll that displays 20 on the die.)

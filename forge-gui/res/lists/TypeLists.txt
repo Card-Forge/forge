@@ -257,6 +257,7 @@ Tetravite:Tetravites
 Thalakos:Thalakoses
 Thopter:Thopters
 Thrull:Thrulls
+Tiefling:Tieflings
 Treefolk:Treefolks
 Trilobite:Trilobites
 Triskelavite:Triskelavites

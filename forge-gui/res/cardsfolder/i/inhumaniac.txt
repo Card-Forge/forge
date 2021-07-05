@@ -3,7 +3,7 @@ ManaCost:1 B
 Types:Creature Brainiac
 PT:1/1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRoll | TriggerDescription$ At the beginning of your upkeep, roll a six-sided die. On a 3 or 4, put a +1/+1 counter on Inhumaniac. On a 5 or higher, put two +1/+1 counters on it. On a 1, remove all +1/+1 counters from Inhumaniac.
-SVar:TrigRoll:DB$ RollDice | On3$ DBOne | On4$ DBOne | On5$ DBTwo | On6$ DBTwo | On1$ DBRemove
+SVar:TrigRoll:DB$ RollDice | ResultSubAbilities$ 3-4:DBOne,5-6:DBTwo,1:DBRemove
 SVar:DBOne:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:DBTwo:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2
 SVar:DBRemove:DB$ RemoveCounterAll | ValidCards$ Card.Self | CounterType$ P1P1 | AllCounters$ True
