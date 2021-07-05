@@ -148,6 +148,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int investigatedThisTurn = 0;
     private int surveilThisTurn = 0;
     private int cycledThisTurn = 0;
+    private int equippedThisTurn = 0;
     private int lifeLostThisTurn = 0;
     private int lifeLostLastTurn = 0;
     private int lifeGainedThisTurn = 0;
@@ -2498,6 +2499,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         resetInvestigatedThisTurn();
         resetSurveilThisTurn();
         resetCycledThisTurn();
+        resetEquippedThisTurn();
         resetSacrificedThisTurn();
         clearAssignedDamage();
         resetAttackersDeclaredThisTurn();
@@ -3454,6 +3456,25 @@ public class Player extends GameEntity implements Comparable<Player> {
     public void resetCycledThisTurn() {
         cycledThisTurn = 0;
     }
+
+    public void addEquipped(SpellAbility sp) {
+        equippedThisTurn++;
+
+        Map<AbilityKey, Object> equipParams = AbilityKey.mapFromCard(CardUtil.getLKICopy(game.getCardState(sp.getHostCard())));
+        equipParams.put(AbilityKey.Cause, sp);
+        equipParams.put(AbilityKey.Player, this);
+        equipParams.put(AbilityKey.NumThisTurn, equippedThisTurn);
+        game.getTriggerHandler().runTrigger(TriggerType.Equipped, equipParams, false);
+    }
+
+    public int getEquippedThisTurn() {
+        return equippedThisTurn;
+    }
+
+    public void resetEquippedThisTurn() {
+        equippedThisTurn = 0;
+    }
+
 
     public boolean hasUrzaLands() {
         final CardCollectionView landsControlled = getCardsIn(ZoneType.Battlefield);
