@@ -1,0 +1,9 @@
+Name:Icingdeath, Frost Tongue
+ManaCost:no cost
+Types:Legendary Artifact Equipment
+Colors:white
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 0 | Description$ Equipped creature gets +2/+0.
+T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigTap | TriggerDescription$ Whenever equipped creature attacks, tap target creature defending player controls.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select target creature defending player controls
+K:Equip:2
+Oracle:Equipped creature gets +2/+0.\nWhenever equipped creature attacks, tap target creature defending player controls.\nEquip {2}

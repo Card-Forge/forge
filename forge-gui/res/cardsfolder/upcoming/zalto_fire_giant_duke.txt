@@ -1,0 +1,9 @@
+Name:Zalto, Fire Giant Duke
+ManaCost:3 R R
+Types:Legendary Creature Giant Barbarian
+PT:7/3
+K:Trample
+T:Mode$ DamageDoneOnce | ValidTarget$ Card.Self | Execute$ TrigVenture | TriggerDescription$ Whenever CARDNAME is dealt damage, venture into the dungeon. (Enter the first room or advance to the next room.)
+SVar:TrigVenture:DB$ Venture
+SVar:HasCombatEffect:TRUE
+Oracle:Trample\nWhenever Zalto, Fire Giant Duke is dealt damage, venture into the dungeon. (Enter the first room or advance to the next room.)

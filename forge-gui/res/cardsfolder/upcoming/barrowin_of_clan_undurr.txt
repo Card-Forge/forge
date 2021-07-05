@@ -1,0 +1,11 @@
+Name:Barrowin of Clan Undurr
+ManaCost:2 W B
+Types:Legendary Creature Dwarf Cleric
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBVenture | TriggerDescription$ When CARDNAME enters the battlefield, venture into the dungeon. (Enter the first room or advance to the next room.)
+T:Mode$ Attacks | ValidCard$ Card.Self | CheckSVar$ X | SVarCompare$ GE1 | Execute$ DBChangeZone | TriggerDescription$ Whenever CARDNAME attacks, return up to one creature card with mana value 3 or less from your graveyard to the battlefield if you've completed a dungeon.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature in your graveyard | ValidTgts$ Creature.YouOwn+cmcLE3
+SVar:DBVenture:DB$ Venture | Defined$ You
+SVar:X:PlayerCountPropertyYou$DungeonsCompleted
+DeckHints:Ability$Graveyard
+Oracle:When Barrowin of Clan Undurr enters the battlefield, venture into the dungeon. (Enter the first room or advance to the next room.)\nWhenever Barrowin of Clan Undurr attacks, return up to one creature card with mana value 3 or less from your graveyard to the battlefield if you've completed a dungeon.

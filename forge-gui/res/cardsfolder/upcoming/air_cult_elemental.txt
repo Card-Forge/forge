@@ -3,6 +3,6 @@ ManaCost:4 U U
 Types:Creature Elemental
 PT:2/5
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME enters the battlefield, return up to one other target creature to its owner's hand.
-SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Creature.Other | TargetMin$ 0 | TargetMax$ 1 | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Select up to one other target creature | SpellDescription$ Return up to one other target creature to its owner's hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ Whirlwind — When CARDNAME enters the battlefield, return up to one other target creature to its owner's hand.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Creature.Other | TargetMin$ 0 | TargetMax$ 1 | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Select up to one other target creature
 Oracle:Flying\nWhirlwind — When Air-Cult Elemental enters the battlefield, return up to one other target creature to its owner's hand.

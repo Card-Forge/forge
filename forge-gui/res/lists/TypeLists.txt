@@ -32,6 +32,7 @@ Avatar:Avatars
 Azra:Azra
 Badger:Badgers
 Barbarian:Barbarians
+Bard:Bards
 Basilisk:Basilisks
 Bat:Bats
 Bear:Bears

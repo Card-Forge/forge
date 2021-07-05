@@ -1,0 +1,8 @@
+Name:Yuan-Ti Fang-Blade
+ManaCost:2 B
+Types:Creature Snake Rogue
+PT:2/2
+K:Deathtouch
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigVenture | TriggerZones$ Battlefield | TriggerController$ TriggeredSourceController | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, venture into the dungeon. (Enter the first room or advance to the next room.)
+SVar:TrigVenture:DB$ Venture
+Oracle:Deathtouch\nWhenever Yuan-Ti Fang-Blade deals combat damage to a player, venture into the dungeon. (Enter the first room or advance to the next room.)
