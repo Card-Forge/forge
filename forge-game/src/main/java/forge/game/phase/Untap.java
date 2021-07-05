@@ -87,7 +87,6 @@ public class Untap extends Phase {
      * @return a boolean.
      */
     public static boolean canUntap(final Card c) {
-
         if (c.hasKeyword("CARDNAME doesn't untap during your untap step.")
                 || c.hasKeyword("This card doesn't untap during your next untap step.")
                 || c.hasKeyword("This card doesn't untap during your next two untap steps.")
