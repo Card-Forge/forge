@@ -491,7 +491,7 @@ public class FCheckBoxTree extends JTree {
             String chkBoxTxt = nodeInfo.label;
             int disabledNodes = cn.numberOfChildren - cn.enabledChildrenCount;
             int totalActiveNodes = cn.numberOfChildren - disabledNodes;
-            if (this.displayNodesCount && !node.isLeaf() && cn.numberOfChildren > 0) {
+            if (this.displayNodesCount && !node.isLeaf() && cn.numberOfChildren > 0 && totalActiveNodes > 0) {
                 chkBoxTxt += String.format(" (%d/%d)", cn.selectedChildrenCount, totalActiveNodes);;
             }
             this.checkBox.setText(chkBoxTxt);
