@@ -472,7 +472,6 @@ public class ComputerUtilCombat {
      * @return a boolean.
      */
     public static boolean wouldLoseLife(final Player ai, final Combat combat) {
-
         return (ComputerUtilCombat.lifeThatWouldRemain(ai, combat) < ai.getLife());
     }
 

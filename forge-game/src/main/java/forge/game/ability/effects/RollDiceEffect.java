@@ -143,7 +143,7 @@ public class RollDiceEffect extends SpellAbilityEffect {
 
         final PlayerCollection playersToRoll = getTargetPlayers(sa);
 
-        for(Player player : playersToRoll) {
+        for (Player player : playersToRoll) {
             rollDice(sa, player, amount, sides);
         }
     }
