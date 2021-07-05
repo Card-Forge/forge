@@ -83,7 +83,7 @@ public final class CardEdition implements Comparable<CardEdition> {
         PROMO,
         ONLINE,
 
-        DRAFT_INNOVATION,
+        DRAFT,
 
         COMMANDER,
         MULTIPLAYER,

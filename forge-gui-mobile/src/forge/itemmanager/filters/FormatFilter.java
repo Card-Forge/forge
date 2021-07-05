@@ -186,7 +186,7 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
                     case ONLINE:
                         lstSets.addItem(set, 8);
                         break;
-                    case DRAFT_INNOVATION:
+                    case DRAFT:
                         lstSets.addItem(set, 9);
                         break;
                     case COMMANDER:
