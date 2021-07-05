@@ -1,0 +1,12 @@
+Name:Iymrith, Desert Doom
+ManaCost:3 U U
+Types:Legendary Creature Dragon
+PT:5/5
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Self+untapped | AddKeyword$ Ward:4 | Description$ CARDNAME has ward {4} as long as it's untapped.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, draw a card. Then if you have fewer than three cards in hand, draw cards equal to the difference.
+SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBDrawMore
+SVar:DBDrawMore:DB$ Draw | Defined$ You | CheckSVar$ X | SVarCompare$ LT3 | NumCards$ Difference
+SVar:X:Count$InYourHand
+SVar:Difference:Number$3/Minus.X
+Oracle:Iymrith, Desert Doom has ward {4} as long as it's untapped.\nWhenever Iymrith, Desert Doom deals combat damage to a player, draw a card. Then if you have fewer than three cards in hand, draw cards equal to the difference.
