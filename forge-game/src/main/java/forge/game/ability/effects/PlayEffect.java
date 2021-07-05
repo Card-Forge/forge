@@ -187,7 +187,7 @@ public class PlayEffect extends SpellAbilityEffect {
 
         while (!tgtCards.isEmpty() && amount > 0) {
             activator.getController().tempShowCards(showCards);
-            Card tgtCard = controller.getController().chooseSingleEntityForEffect(tgtCards, sa, Localizer.getInstance().getMessage("lblSelectCardToPlay"), !singleOption, null);
+            Card tgtCard = controller.getController().chooseSingleEntityForEffect(tgtCards, sa, Localizer.getInstance().getMessage("lblSelectCardToPlay"), !singleOption && optional, null);
             activator.getController().endTempShowCards();
             if (tgtCard == null) {
                 break;
