@@ -211,11 +211,20 @@ public final class CardRules implements ICardCharacteristics {
     }
 
     public boolean canBeCommander() {
-        CardType type = mainPart.getType();
-        if (type.isLegendary() && type.isCreature()) {
+        if (mainPart.getOracleText().contains("can be your commander")) {
             return true;
         }
-        return mainPart.getOracleText().contains("can be your commander");
+        CardType type = mainPart.getType();
+        boolean creature = type.isCreature();
+        for (String staticAbility : mainPart.getStaticAbilities()) { // Check for Grist
+            if (staticAbility.contains("CharacteristicDefining$ True") && staticAbility.contains("AddType$ Creature")) {
+                creature = true;
+            }
+        }
+        if (type.isLegendary() && creature) {
+            return true;
+        }
+        return false;
     }
 
     public boolean canBePartnerCommander() {
@@ -234,12 +243,38 @@ public final class CardRules implements ICardCharacteristics {
 
     public boolean canBeBrawlCommander() {
         CardType type = mainPart.getType();
-        return type.isLegendary() && (type.isCreature() || type.isPlaneswalker());
+        if (!type.isLegendary()) {
+            return false;
+        }
+        if (type.isCreature() || type.isPlaneswalker()) {
+            return true;
+        }
+
+        // Grist is checked above, but new cards might work this way
+        for (String staticAbility : mainPart.getStaticAbilities()) {
+            if (staticAbility.contains("CharacteristicDefining$ True") && staticAbility.contains("AddType$ Creature")) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean canBeTinyLeadersCommander() {
         CardType type = mainPart.getType();
-        return type.isLegendary() && (type.isCreature() || type.isPlaneswalker());
+        if (!type.isLegendary()) {
+            return false;
+        }
+        if (type.isCreature() || type.isPlaneswalker()) {
+            return true;
+        }
+
+        // Grist is checked above, but new cards might work this way
+        for (String staticAbility : mainPart.getStaticAbilities()) {
+            if (staticAbility.contains("CharacteristicDefining$ True") && staticAbility.contains("AddType$ Creature")) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public String getMeldWith() {

@@ -2,8 +2,7 @@ Name:Grist, the Hunger Tide
 ManaCost:1 B G
 Types:Legendary Planeswalker Grist
 Loyalty:3
-S:Mode$ Continuous | Affected$ Card.Self | AffectedZone$ Command,Exile,Graveyard,Hand,Library,Stack | SetPower$ 1 | SetToughness$ 1 | AddType$ Creature & Insect | CharacteristicDefining$ True | Description$ As long as CARDNAME isn't on the battlefield, it's a 1/1 Insect creature in addition to its other types.
-S:Mode$ Continuous | Affected$ Card.Self | AffectedZone$ Battlefield | RemoveType$ Creature | RemoveCreatureTypes$ True
+S:Mode$ Continuous | Affected$ Card.Self | ExcludeZone$ Battlefield | SetPower$ 1 | SetToughness$ 1 | AddType$ Creature & Insect | CharacteristicDefining$ True | Description$ As long as CARDNAME isn't on the battlefield, it's a 1/1 Insect creature in addition to its other types.
 A:AB$ Effect | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | SubAbility$ DBRepeat | SpellDescription$ Create a 1/1 black and green Insect creature token, then mill a card. If an Insect card was milled this way, put a loyalty counter on Grist and repeat this process.
 SVar:DBRepeat:DB$ Repeat | RepeatSubAbility$ CleanupBegin | MaxRepeat$ MaxRepeats | RepeatCheckSVar$ MilledInsect | RepeatSVarCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:CleanupBegin:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBToken
