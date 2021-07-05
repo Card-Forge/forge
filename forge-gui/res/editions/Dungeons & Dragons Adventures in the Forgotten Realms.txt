@@ -147,7 +147,6 @@ ScryfallCode=AFR
 161 U Rust Monster
 162 C Swarming Goblins
 163 U Tiger-Tribe Hunter
-163 U Tiger-Tribe Hunter
 164 C Unexpected Windfall
 165 C Valor Singer
 166 R Wish
