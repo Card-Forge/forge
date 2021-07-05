@@ -1,0 +1,10 @@
+Name:Monk of the Open Hand
+ManaCost:W
+Types:Creature Elf Monk
+PT:1/1
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | CheckSVar$ YouCastThisTurn | SVarCompare$ EQ2 | NoResolvingCheck$ True | TriggerDescription$ Whenever you cast your second spell each turn, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:YouCastThisTurn:Count$ThisTurnCast_Card.YouCtrl
+SVar:BuffedBy:Card
+DeckHas:Ability$Counters
+Oracle:Whenever you cast your second spell each turn, put a +1/+1 counter on Monk of the Open Hand.

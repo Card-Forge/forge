@@ -36,6 +36,7 @@ ScryfallCode=AFR
 29 R Paladin Class
 30 C Paladin's Shield
 31 C Planar Ally
+32 U Plate Armor
 33 U Portable Hole
 34 C Potion of Healing
 36 U Rally Maneuver
@@ -64,6 +65,7 @@ ScryfallCode=AFR
 61 U Guild Thief
 62 M Iymrith, Desert Doom
 63 R Mind Flayer
+64 M Mordenkainen
 65 C Mordenkainen's Polymorph
 66 C Pixie Guide
 67 U Power of Persuasion
@@ -88,6 +90,7 @@ ScryfallCode=AFR
 89 C Baleful Beholder
 90 U Black Dragon
 91 M The Book of Vile Darkness
+92 U Check for Traps
 93 C Clattering Skeletons
 95 U Death-Priest of Myrkul
 96 U Demogorgon's Clutches
@@ -189,6 +192,7 @@ ScryfallCode=AFR
 209 R Varis, Silverymoon Ranger
 210 U Wandering Troubadour
 211 R Werewolf Pack Leader
+212 U Wild Shape
 213 C You Find a Cursed Idol
 214 U You Happen On a Glade
 215 U You Meet in a Tavern
@@ -219,6 +223,7 @@ ScryfallCode=AFR
 240 U Bag of Holding
 241 M The Deck of Many Things
 242 U Dungeon Map
+243 R Eye of Vecna
 244 U Fifty Feet of Rope
 249 C Mimic
 251 C Spiked Pit Trap
@@ -250,10 +255,13 @@ ScryfallCode=AFR
 280 L Forest
 281 L Forest
 261 R Treasure Vault
+282 M Grand Master of Flowers
+283 M Mordenkainen
 284 M Lolth, Spider Queen
 285 M Zariel, Archduke of Avernus
 286 M Ellywick Tumblestrum
 287 M Icingdeath, Frost Tyrant
+288 U White Dragon
 289 U Blue Dragon
 290 M Iymrith, Desert Doom
 291 U Black Dragon
@@ -339,6 +347,7 @@ ScryfallCode=AFR
 390 R Triumphant Adventurer
 391 M Xanathar, Guild Kingpin
 392 M The Deck of Many Things
+394 R Hand of Vecna
 395 R Treasure Chest
 396 R Vorpal Sword
 397 R Treasure Chest
