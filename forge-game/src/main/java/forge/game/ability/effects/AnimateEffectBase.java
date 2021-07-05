@@ -120,7 +120,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
 
         if (!addType.isEmpty() || !removeType.isEmpty() || removeCreatureTypes) {
             c.addChangedCardTypes(addType, removeType, removeSuperTypes, removeCardTypes, removeSubTypes,
-                    removeLandTypes, removeCreatureTypes, removeArtifactTypes, removeEnchantmentTypes, timestamp);
+                    removeLandTypes, removeCreatureTypes, removeArtifactTypes, removeEnchantmentTypes, timestamp, true, false);
         }
 
         c.addChangedCardKeywords(keywords, removeKeywords, removeAll, removeLandTypes, timestamp);
@@ -133,7 +133,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             c.addHiddenExtrinsicKeyword(k);
         }
 
-        c.addColor(colors, !sa.hasParam("OverwriteColors"), timestamp);
+        c.addColor(colors, !sa.hasParam("OverwriteColors"), timestamp, false);
 
         if (sa.hasParam("LeaveBattlefield")) {
             addLeaveBattlefieldReplacement(c, sa, sa.getParam("LeaveBattlefield"));
