@@ -4,10 +4,12 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.google.common.base.Predicate;
 import forge.deck.DeckProxy;
 import forge.game.GameFormat;
 import forge.itemmanager.ItemManager;
 import forge.screens.home.quest.DialogChooseSets;
+import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 
 
 public class DeckSetFilter extends DeckFormatFilter {
@@ -74,5 +76,15 @@ public class DeckSetFilter extends DeckFormatFilter {
     @Override
     protected Iterable<String> getList() {
         return this.sets;
+    }
+
+    @Override
+    protected Predicate<DeckProxy> buildPredicate() {
+        return new Predicate<DeckProxy>() {
+            @Override
+            public boolean apply(@NullableDecl DeckProxy input) {
+                return input != null && sets.contains(input.getEdition().getCode());
+            }
+        };
     }
 }
