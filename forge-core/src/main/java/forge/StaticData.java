@@ -202,9 +202,19 @@ public class StaticData {
         return foil ? card.getFoiled() : card;
     }
 
+    public void attemptToLoadCard(String cardName){
+        tryToLoadCard(cardName);
+    }
+
     public void attemptToLoadCard(String encodedCardName, String setCode) {
-        CardDb.CardRequest r = CardRequest.fromString(encodedCardName);
+        String requestInfo = CardRequest.compose(encodedCardName, setCode);
+        tryToLoadCard(requestInfo);
+    }
+
+    private void tryToLoadCard(String requestInfo){
+        CardDb.CardRequest r = CardRequest.fromString(requestInfo);
         String cardName = r.cardName;
+        String setCode = r.edition;
         CardRules rules = cardReader.attemptToLoadCard(cardName, setCode);
         CardRules customRules = null;
         if (customCardReader != null) {
@@ -269,6 +279,10 @@ public class StaticData {
     }
 
     public TokenDb getAllTokens() { return allTokens; }
+
+    public String[] getCardArtAvailablePreferences() {
+        return CardDb.CardArtPreference.getPreferences();
+    }
 
     
 
