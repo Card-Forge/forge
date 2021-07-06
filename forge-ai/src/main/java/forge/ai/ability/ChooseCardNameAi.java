@@ -63,7 +63,6 @@ public class ChooseCardNameAi extends SpellAbilityAi {
      */
     @Override
     public Card chooseSingleCard(final Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
-
         return ComputerUtilCard.getBestAI(options);
     }
 
