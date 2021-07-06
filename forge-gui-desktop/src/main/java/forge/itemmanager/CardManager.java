@@ -1,5 +1,7 @@
 package forge.itemmanager;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
@@ -11,21 +13,8 @@ import forge.gamemodes.quest.QuestWorld;
 import forge.gamemodes.quest.data.QuestPreferences;
 import forge.gui.GuiUtils;
 import forge.item.PaperCard;
-import forge.itemmanager.filters.AdvancedSearchFilter;
-import forge.itemmanager.filters.CardCMCFilter;
-import forge.itemmanager.filters.CardCMCRangeFilter;
-import forge.itemmanager.filters.CardColorFilter;
-import forge.itemmanager.filters.CardFoilFilter;
-import forge.itemmanager.filters.CardFormatFilter;
-import forge.itemmanager.filters.CardPowerFilter;
-import forge.itemmanager.filters.CardQuestWorldFilter;
-import forge.itemmanager.filters.CardRatingFilter;
-import forge.itemmanager.filters.CardSearchFilter;
-import forge.itemmanager.filters.CardSetFilter;
-import forge.itemmanager.filters.CardToughnessFilter;
-import forge.itemmanager.filters.CardTypeFilter;
-import forge.itemmanager.filters.FormatFilter;
-import forge.itemmanager.filters.ItemFilter;
+import forge.itemmanager.filters.*;
+import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.screens.home.quest.DialogChooseFormats;
 import forge.screens.home.quest.DialogChooseSets;
@@ -161,6 +150,28 @@ public class CardManager extends ItemManager<PaperCard> {
             }, CardQuestWorldFilter.canAddQuestWorld(w, itemManager.getFilter(CardQuestWorldFilter.class)));
         }
         menu.add(world);
+
+        if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.LOAD_HISTORIC_FORMATS)) {
+            JMenu blocks = GuiUtils.createMenu(localizer.getMessage("lblBlock"));
+            List<GameFormat> blockFormats = new ArrayList<>();
+            for (GameFormat format : FModel.getFormats().getHistoricList()){
+                if (format.getFormatSubType() != GameFormat.FormatSubType.BLOCK)
+                    continue;
+                if (!format.getName().endsWith("Block"))
+                    continue;
+                blockFormats.add(format);
+            }
+            Collections.sort(blockFormats);  // GameFormat will be sorted by Index!
+            for (final GameFormat f : blockFormats) {
+                GuiUtils.addMenuItem(blocks, f.getName(), null, new Runnable() {
+                    @Override
+                    public void run() {
+                        itemManager.addFilter(new CardBlockFilter(itemManager, f));
+                    }
+                }, CardBlockFilter.canAddCardBlockWorld(f, itemManager.getFilter(CardBlockFilter.class)));
+            }
+            menu.add(blocks);
+        }
 
         GuiUtils.addSeparator(menu);
 

@@ -3,7 +3,7 @@ Code=W17
 Date=2017-04-15
 Name=Welcome Deck 2017
 MciCode=w17
-Type=Other
+Type=Starter
 ScryfallCode=W17
 
 [cards]

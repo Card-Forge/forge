@@ -2,7 +2,7 @@
 Code=PF19
 Date=2019-01-01
 Name=MagicFest 2019
-Type=Promos
+Type=Promo
 ScryfallCode=PF19
 
 [cards]

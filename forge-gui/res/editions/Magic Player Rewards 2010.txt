@@ -2,7 +2,7 @@
 Code=P10
 Date=2010-01-01
 Name=Magic Player Rewards 2010
-Type=Promos
+Type=Promo
 ScryfallCode=P10
 
 [cards]

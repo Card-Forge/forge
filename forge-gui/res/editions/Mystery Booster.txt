@@ -2,7 +2,7 @@
 Code=MB1
 Date=2019-11-07
 Name=Mystery Booster
-Type=Reprint
+Type=Draft
 BoosterCovers=1
 Booster=2 fromSheet("MB1 White CommonUncommon"), 2 fromSheet("MB1 Blue CommonUncommon"), 2 fromSheet("MB1 Black CommonUncommon"), 2 fromSheet("MB1 Green CommonUncommon"), 2 fromSheet("MB1 Red CommonUncommon"), 1 fromSheet("MB1 Multi CommonUncommon"), 1 fromSheet("MB1 Artifact Land CommonUncommon"), 1 fromSheet("MB1 Pre M15"), 1 fromSheet("MB1 Post M15 RareMythic"), 1 fromSheet("MB1 Foils")
 Foil=NotSupported

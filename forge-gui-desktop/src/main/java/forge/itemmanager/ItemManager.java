@@ -138,11 +138,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     protected boolean lockFiltering;
 
     /**
-     * ItemManager Constructor.
-     *
-     * @param genericType0 the class of item that this table will contain
-     * @param statLabels0 stat labels for this item manager
-     * @param wantUnique0 whether this table should display only one item with the same name
+     * ItemManager Constructor
      */
     protected ItemManager(final Class<T> genericType0, final CDetailPicture cDetailPicture, final boolean wantUnique0) {
         this.cDetailPicture = cDetailPicture;
@@ -1043,9 +1039,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
 
     /**
      *
-     * updateView.
-     *
-     * @param bForceFilter
+     * updateView
      */
     public void updateView(final boolean forceFilter, final Iterable<T> itemsToSelect) {
         final boolean useFilter = (forceFilter && (this.filterPredicate != null)) || !isUnfiltered();

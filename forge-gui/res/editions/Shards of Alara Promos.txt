@@ -1,8 +1,8 @@
 [metadata]
 Code=PALA
-Date=2008-01-01
+Date=2008-10-03
 Name=Shards of Alara Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PALA
 
 [cards]

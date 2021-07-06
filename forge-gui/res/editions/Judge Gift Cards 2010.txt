@@ -2,7 +2,7 @@
 Code=G10
 Date=2010-01-01
 Name=Judge Gift Cards 2010
-Type=Promos
+Type=Promo
 ScryfallCode=G10
 
 [cards]

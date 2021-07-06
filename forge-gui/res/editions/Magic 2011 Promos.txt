@@ -2,7 +2,7 @@
 Code=PM11
 Date=2010-07-15
 Name=Magic 2011 Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PM11
 
 [cards]

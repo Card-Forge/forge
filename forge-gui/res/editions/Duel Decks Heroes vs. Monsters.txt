@@ -4,7 +4,7 @@ Alias=HVM
 Date=2013-09-06
 Name=Duel Decks: Heroes vs. Monsters
 MciCode=ddl
-Type=Duel_Decks
+Type=Duel_Deck
 ScryfallCode=DDL
 
 [cards]

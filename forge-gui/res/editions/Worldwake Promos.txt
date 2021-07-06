@@ -1,8 +1,8 @@
 [metadata]
 Code=PWWK
-Date=2010-04-05
+Date=2010-02-05
 Name=Worldwake Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PWWK
 
 [cards]

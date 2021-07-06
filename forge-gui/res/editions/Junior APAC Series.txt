@@ -2,7 +2,7 @@
 Code=PJAS
 Date=2006-01-01
 Name=Junior APAC Series
-Type=Promos
+Type=Promo
 ScryfallCode=PJAS
 
 [cards]

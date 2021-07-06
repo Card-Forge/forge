@@ -4,7 +4,7 @@ Date=2017-06-09
 Name=Commander Anthology
 Code2=CMA
 MciCode=CMA
-Type=Other
+Type=Commander
 ScryfallCode=CMA
 
 [cards]

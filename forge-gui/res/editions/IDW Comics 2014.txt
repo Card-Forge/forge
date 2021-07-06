@@ -2,7 +2,7 @@
 Code=PI14
 Date=2014-01-01
 Name=IDW Comics 2014
-Type=Promos
+Type=Promo
 ScryfallCode=PI14
 
 [cards]

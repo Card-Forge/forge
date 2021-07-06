@@ -2,7 +2,7 @@
 Code=PM19
 Date=2018-07-13
 Name=Core Set 2019 Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PM19
 
 [cards]

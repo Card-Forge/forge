@@ -2,7 +2,7 @@
 Code=STA
 Date=2021-04-23
 Name=Strixhaven Mystical Archive
-Type=Other
+Type=Collector_Edition
 ScryfallCode=STA
 
 [borderless]

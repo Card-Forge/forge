@@ -3,7 +3,7 @@ Code=MPS_AKH
 Date=2017-04-28
 Name=Masterpiece Series - Amonkhet
 MciCode=mp2
-Type=Other
+Type=Collector_Edition
 ScryfallCode=mp2
 
 [cards]

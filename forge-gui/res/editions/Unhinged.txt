@@ -1,6 +1,6 @@
 [metadata]
 Code=UNH
-Date=2004-11-20
+Date=2004-11-19
 Name=Unhinged
 MciCode=uh
 Type=Funny

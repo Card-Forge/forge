@@ -2,7 +2,7 @@
 Code=P11
 Date=2011-01-01
 Name=Magic Player Rewards 2011
-Type=Promos
+Type=Promo
 ScryfallCode=P11
 
 [cards]

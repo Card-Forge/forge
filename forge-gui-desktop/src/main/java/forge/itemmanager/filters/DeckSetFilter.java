@@ -4,14 +4,16 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.google.common.base.Predicate;
 import forge.deck.DeckProxy;
 import forge.game.GameFormat;
 import forge.itemmanager.ItemManager;
 import forge.screens.home.quest.DialogChooseSets;
+import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 
 
 public class DeckSetFilter extends DeckFormatFilter {
-    private final Set<String> sets = new HashSet<>();
+    protected final Set<String> sets = new HashSet<>();
 
     public DeckSetFilter(ItemManager<? super DeckProxy> itemManager0, Collection<String> sets0, boolean allowReprints0) {
         super(itemManager0);
@@ -47,7 +49,8 @@ public class DeckSetFilter extends DeckFormatFilter {
     }
 
     public void edit() {
-        final DialogChooseSets dialog = new DialogChooseSets(this.sets, null, true);
+        final DialogChooseSets dialog = new DialogChooseSets(this.sets, null, true,
+                                                             this.allowReprints);
         dialog.setOkCallback(new Runnable() {
             @Override
             public void run() {
@@ -73,5 +76,15 @@ public class DeckSetFilter extends DeckFormatFilter {
     @Override
     protected Iterable<String> getList() {
         return this.sets;
+    }
+
+    @Override
+    protected Predicate<DeckProxy> buildPredicate() {
+        return new Predicate<DeckProxy>() {
+            @Override
+            public boolean apply(@NullableDecl DeckProxy input) {
+                return input != null && sets.contains(input.getEdition().getCode());
+            }
+        };
     }
 }

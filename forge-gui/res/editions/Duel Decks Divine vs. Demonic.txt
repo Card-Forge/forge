@@ -4,7 +4,7 @@ Date=2009-04-10
 Name=Duel Decks: Divine vs. Demonic
 Code2=DDC
 MciCode=dvd
-Type=Duel_Decks
+Type=Duel_Deck
 ScryfallCode=DDC
 
 [cards]

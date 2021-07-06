@@ -2,7 +2,7 @@
 Code=PDIS
 Date=2006-05-05
 Name=Dissension Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PDIS
 
 [cards]

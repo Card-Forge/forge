@@ -1,8 +1,8 @@
 [metadata]
 Code=PLRW
-Date=2008-01-01
+Date=2007-10-12
 Name=Lorwyn Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PLRW
 
 [cards]

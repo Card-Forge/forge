@@ -2,7 +2,7 @@
 Code=P10E
 Date=2007-07-13
 Name=Tenth Edition Promos
-Type=Promos
+Type=Promo
 ScryfallCode=P10E
 
 [cards]

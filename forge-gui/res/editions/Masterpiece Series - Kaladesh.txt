@@ -4,7 +4,7 @@ Alias=MPS
 Date=2016-09-30
 Name=Masterpiece Series - Kaladesh
 MciCode=mps
-Type=Other
+Type=Collector_Edition
 ScryfallCode=mps
 
 [cards]

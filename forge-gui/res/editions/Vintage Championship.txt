@@ -2,7 +2,7 @@
 Code=OVNT
 Date=2003-01-01
 Name=Vintage Championship
-Type=Promos
+Type=Promo
 ScryfallCode=OVNT
 
 [cards]

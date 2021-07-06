@@ -2,7 +2,7 @@
 Code=CC1
 Date=2020-12-04
 Name=Commander Collection Green
-Type=Reprint
+Type=Collector_Edition
 ScryfallCode=CC1
 
 [cards]

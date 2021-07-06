@@ -2,7 +2,7 @@
 Code=ZNE
 Date=2020-09-25
 Name=Zendikar Rising Expeditions
-Type=Reprint
+Type=Collector_Edition
 ScryfallCode=ZNE
 
 [cards]

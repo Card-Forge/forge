@@ -2,7 +2,7 @@
 Code=PMMQ
 Date=1999-10-04
 Name=Mercadian Masques Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PMMQ
 
 [cards]

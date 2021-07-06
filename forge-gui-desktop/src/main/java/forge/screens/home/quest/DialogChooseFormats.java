@@ -48,15 +48,15 @@ public class DialogChooseFormats {
 			FCheckBox box = new FCheckBox(format.getName());
 			box.setName(format.getName());
 			switch (format.getFormatType()){
-				case Sanctioned:
+				case SANCTIONED:
 					sanctioned.add(box);
 					break;
-				case Historic:
+				case HISTORIC:
 					historic.add(box);
 					break;
-				case Custom:
-				case Casual:
-				case Digital:
+				case CUSTOM:
+				case CASUAL:
+				case DIGITAL:
 				default:
 					casual.add(box);
 					break;

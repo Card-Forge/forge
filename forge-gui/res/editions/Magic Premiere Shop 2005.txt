@@ -2,7 +2,7 @@
 Code=PMPS
 Date=2005-01-01
 Name=Magic Premiere Shop 2005
-Type=Promos
+Type=Promo
 CardLang=ja
 ScryfallCode=PMPS
 

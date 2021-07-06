@@ -2,7 +2,7 @@
 Code=PTOR
 Date=2002-02-04
 Name=Torment Promos
-Type=Promos
+Type=Promo
 CardLang=ru
 ScryfallCode=PTOR
 

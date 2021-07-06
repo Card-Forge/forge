@@ -1,8 +1,8 @@
 [metadata]
 Code=PFRF
-Date=2015-01-24
+Date=2015-01-23
 Name=Fate Reforged Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PFRF
 
 [cards]

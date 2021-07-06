@@ -2,7 +2,7 @@
 Code=PELP
 Date=2000-02-05
 Name=European Land Program
-Type=Promos
+Type=Promo
 ScryfallCode=PELP
 
 [cards]

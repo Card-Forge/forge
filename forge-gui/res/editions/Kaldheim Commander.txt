@@ -2,7 +2,7 @@
 Code=KHC
 Date=2021-02-05
 Name=Kaldheim Commander
-Type=Other
+Type=Commander
 ScryfallCode=KHC
 
 [cards]

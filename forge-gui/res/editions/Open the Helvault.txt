@@ -2,7 +2,7 @@
 Code=PHEL
 Date=2012-04-28
 Name=Open the Helvault
-Type=Promos
+Type=Promo
 ScryfallCode=PHEL
 
 [cards]

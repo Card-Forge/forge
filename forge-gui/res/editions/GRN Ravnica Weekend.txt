@@ -2,7 +2,7 @@
 Code=PRWK
 Date=2018-11-09
 Name=GRN Ravnica Weekend
-Type=Promos
+Type=Promo
 ScryfallCode=PRWK
 
 [cards]

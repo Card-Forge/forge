@@ -2,7 +2,7 @@
 Code=F13
 Date=2013-01-01
 Name=Friday Night Magic 2013
-Type=Promos
+Type=Promo
 ScryfallCode=F13
 
 [cards]

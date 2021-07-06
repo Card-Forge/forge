@@ -1,9 +1,9 @@
 [metadata]
 Code=MPS_GRN
-Date=2018-10-03
+Date=2018-10-05
 Name=Mythic Edition - Guilds of Ravnica
 MciCode=med
-Type=Other
+Type=Collector_Edition
 ScryfallCode=med
 
 [cards]

@@ -2,7 +2,7 @@
 Code=PI13
 Date=2013-01-01
 Name=IDW Comics 2013
-Type=Promos
+Type=Promo
 ScryfallCode=PI13
 
 [cards]

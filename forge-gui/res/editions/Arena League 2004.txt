@@ -2,7 +2,7 @@
 Code=PAL04
 Date=2004-01-01
 Name=Arena League 2004
-Type=Promos
+Type=Promo
 ScryfallCode=PAL04
 
 [cards]

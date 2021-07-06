@@ -2,7 +2,7 @@
 Code=PFUT
 Date=2007-05-04
 Name=Future Sight Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PFUT
 
 [cards]

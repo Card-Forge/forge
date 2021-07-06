@@ -14,7 +14,7 @@ import forge.screens.home.quest.DialogChooseSets;
  *
  */
 public class CardSetFilter extends CardFormatFilter {
-    private final Set<String> sets = new HashSet<>();
+    protected final Set<String> sets = new HashSet<>();
 
     public CardSetFilter(ItemManager<? super PaperCard> itemManager0, Collection<String> sets0, boolean allowReprints0) {
         super(itemManager0);
@@ -50,9 +50,9 @@ public class CardSetFilter extends CardFormatFilter {
     }
 
     public void edit(final ItemManager<? super PaperCard> itemManager) {
-        final DialogChooseSets dialog = new DialogChooseSets(this.sets, null, true);
+        final DialogChooseSets dialog = new DialogChooseSets(this.sets, null, true,
+                                                             this.allowReprints);
         final CardSetFilter itemFilter = this;
-        dialog.setWantReprintsCB(allowReprints);
         
         dialog.setOkCallback(new Runnable() {
             @Override

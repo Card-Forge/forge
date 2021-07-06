@@ -2,7 +2,7 @@
 Code=PS19
 Date=2019-07-18
 Name=San Diego Comic-Con 2019
-Type=Promos
+Type=Promo
 ScryfallCode=PS19
 
 [cards]

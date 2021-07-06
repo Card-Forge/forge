@@ -2,7 +2,7 @@
 Code=PALP
 Date=1998-09-01
 Name=Asia Pacific Land Program
-Type=Promos
+Type=Promo
 ScryfallCode=PALP
 
 [cards]

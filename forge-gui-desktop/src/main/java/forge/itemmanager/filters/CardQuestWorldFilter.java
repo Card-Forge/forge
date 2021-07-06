@@ -14,12 +14,21 @@ public class CardQuestWorldFilter extends CardFormatFilter {
     private final Set<QuestWorld> questWorlds = new HashSet<>();
 
     public CardQuestWorldFilter(final ItemManager<? super PaperCard> itemManager0) {
+        this(itemManager0, true);
+    }
+    public CardQuestWorldFilter(final ItemManager<? super PaperCard> itemManager0, boolean allowReprints) {
         super(itemManager0);
+        this.allowReprints = allowReprints;
     }
     public CardQuestWorldFilter(final ItemManager<? super PaperCard> itemManager0, final QuestWorld questWorld0) {
+        this(itemManager0, questWorld0, true);
+    }
+
+    public CardQuestWorldFilter(final ItemManager<? super PaperCard> itemManager0, final QuestWorld questWorld0, boolean allowReprints){
         super(itemManager0);
         this.questWorlds.add(questWorld0);
         this.formats.add(getQuestWorldFormat(questWorld0));
+        this.allowReprints = allowReprints;
     }
 
     @Override

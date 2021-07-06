@@ -2,7 +2,7 @@
 Code=PM14
 Date=2013-07-18
 Name=Magic 2014 Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PM14
 
 [cards]

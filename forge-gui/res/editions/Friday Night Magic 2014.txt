@@ -2,7 +2,7 @@
 Code=F14
 Date=2014-01-01
 Name=Friday Night Magic 2014
-Type=Promos
+Type=Promo
 ScryfallCode=F14
 
 [cards]

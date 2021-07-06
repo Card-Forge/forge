@@ -4,7 +4,7 @@ Date=2012-06-01
 Name=Planechase 2012
 Code2=PC2
 MciCode=pc2
-Type=Other
+Type=Multiplayer
 ScryfallCode=PC2
 
 [cards]

@@ -2,7 +2,7 @@
 Code=PCEL
 Date=1996-08-14
 Name=Celebration Cards
-Type=Funny
+Type=Promo
 ScryfallCode=PCEL
 
 [cards]
