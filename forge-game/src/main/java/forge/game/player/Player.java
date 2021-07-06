@@ -3457,15 +3457,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         cycledThisTurn = 0;
     }
 
-    public void addEquipped(SpellAbility sp) {
-        equippedThisTurn++;
-
-        Map<AbilityKey, Object> equipParams = AbilityKey.mapFromCard(CardUtil.getLKICopy(game.getCardState(sp.getHostCard())));
-        equipParams.put(AbilityKey.Cause, sp);
-        equipParams.put(AbilityKey.Player, this);
-        equipParams.put(AbilityKey.NumThisTurn, equippedThisTurn);
-        game.getTriggerHandler().runTrigger(TriggerType.Equipped, equipParams, false);
-    }
+    public void addEquipped() { equippedThisTurn++; }
 
     public int getEquippedThisTurn() {
         return equippedThisTurn;
