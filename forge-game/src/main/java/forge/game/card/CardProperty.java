@@ -1702,7 +1702,7 @@ public class CardProperty {
         } else if (property.startsWith("set")) {
             final String setCode = property.substring(3, 6);
             final PaperCard setCard = StaticData.instance().getCommonCards().getCardFromEditions(card.getName(),
-                                                                                     CardDb.CardArtPreference.OldPrint);
+                                                                                     CardDb.CardArtPreference.OldArtAllEditions);
             if (!setCard.getEdition().equals(setCode)) {
                 return false;
             }
