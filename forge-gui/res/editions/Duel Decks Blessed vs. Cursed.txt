@@ -4,7 +4,7 @@ Date=2016-02-26
 Name=Duel Decks: Blessed vs. Cursed
 Code2=DDQ
 MciCode=ddq
-Type=Duel_Decks
+Type=Duel_Deck
 ScryfallCode=DDQ
 
 [cards]

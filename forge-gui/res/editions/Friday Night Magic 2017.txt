@@ -2,7 +2,7 @@
 Code=F17
 Date=2017-01-01
 Name=Friday Night Magic 2017
-Type=Promos
+Type=Promo
 ScryfallCode=F17
 
 [cards]

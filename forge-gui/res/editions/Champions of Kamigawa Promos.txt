@@ -2,7 +2,7 @@
 Code=PCHK
 Date=2004-10-01
 Name=Champions of Kamigawa Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PCHK
 
 [cards]

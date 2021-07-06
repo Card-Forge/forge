@@ -2,7 +2,7 @@
 Code=PG08
 Date=2008-01-01
 Name=Gateway 2008
-Type=Reprint
+Type=Promo
 ScryfallCode=PG08
 
 [cards]

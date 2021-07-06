@@ -1,8 +1,8 @@
 [metadata]
 Code=ARENA
-Date=1994-09-26
+Date=1994-09-01
 Name=Arena
-Type=Other
+Type=Promo
 ScryfallCode=PHPR
 
 [cards]

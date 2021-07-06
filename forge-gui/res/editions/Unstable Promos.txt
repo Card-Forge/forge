@@ -1,8 +1,8 @@
 [metadata]
 Code=PUST
-Date=2017-11-13
+Date=2017-12-08
 Name=Unstable Promos
-Type=Funny
+Type=Promo
 Border=Silver
 ScryfallCode=PUST
 

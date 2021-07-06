@@ -2,7 +2,7 @@
 Code=F08
 Date=2008-01-01
 Name=Friday Night Magic 2008
-Type=Promos
+Type=Promo
 ScryfallCode=F08
 
 [cards]

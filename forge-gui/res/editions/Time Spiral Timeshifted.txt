@@ -4,7 +4,7 @@ Date=2006-10-06
 Name=Time Spiral "Timeshifted"
 Code2=TSB
 MciCode=tsts
-Type=Other
+Type=Expansion
 ScryfallCode=TSB
 
 [cards]

@@ -2,7 +2,7 @@
 Code=PSOM
 Date=2010-09-30
 Name=Scars of Mirrodin Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PSOM
 
 [cards]

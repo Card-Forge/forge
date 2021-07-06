@@ -1,8 +1,8 @@
 [metadata]
 Code=SHC
-Date=1995-01-27
+Date=1994-09-01
 Name=Shattered Chains
-Type=Other
+Type=Promo
 ScryfallCode=PHPR
 
 [cards]

@@ -2,7 +2,7 @@
 Code=PGTC
 Date=2013-01-26
 Name=Gatecrash Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PGTC
 
 [cards]

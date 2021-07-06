@@ -3,7 +3,7 @@ Code=SS2
 Date=2019-06-28
 Name=Signature Spellbook: Gideon
 MciCode=ss2
-Type=Reprint
+Type=Collector_Edition
 ScryfallCode=SS2
 
 [cards]

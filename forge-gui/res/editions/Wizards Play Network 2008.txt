@@ -2,7 +2,7 @@
 Code=PWPN
 Date=2008-10-01
 Name=Wizards Play Network 2008
-Type=Promos
+Type=Promo
 ScryfallCode=PWPN
 
 [cards]

@@ -2,7 +2,7 @@
 Code=PARB
 Date=2009-04-30
 Name=Alara Reborn Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PARB
 
 [cards]

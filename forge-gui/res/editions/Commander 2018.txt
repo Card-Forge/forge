@@ -4,7 +4,7 @@ Date=2018-08-09
 Name=Commander 2018
 Code2=C18
 MciCode=c18
-Type=Other
+Type=Commander
 ScryfallCode=C18
 
 [cards]

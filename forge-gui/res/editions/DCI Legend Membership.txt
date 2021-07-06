@@ -2,7 +2,7 @@
 Code=PLGM
 Date=1995-01-01
 Name=DCI Legend Membership
-Type=Promos
+Type=Promo
 ScryfallCode=PLGM
 
 [cards]

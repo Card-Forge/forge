@@ -3,7 +3,7 @@ Code=DDI
 Date=2012-03-30
 Name=Duel Decks: Venser vs. Koth
 MciCode=ddi
-Type=Duel_Decks
+Type=Duel_Deck
 ScryfallCode=DDI
 
 [cards]

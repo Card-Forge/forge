@@ -25,7 +25,7 @@ public class DeckFormatFilter extends FormatFilter<DeckProxy> {
     }
 
     @Override
-    protected final Predicate<DeckProxy> buildPredicate() {
+    protected Predicate<DeckProxy> buildPredicate() {
         return DeckProxy.createPredicate(SFilterUtil.buildFormatFilter(this.formats, this.allowReprints));
     }
 

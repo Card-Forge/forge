@@ -1,8 +1,8 @@
 [metadata]
 Code=PISD
-Date=2011-01-01
+Date=2011-09-24
 Name=Innistrad Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PISD
 
 [cards]

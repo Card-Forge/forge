@@ -2,7 +2,7 @@
 Code=G06
 Date=2006-01-01
 Name=Judge Gift Cards 2006
-Type=Promos
+Type=Promo
 ScryfallCode=G06
 
 [cards]

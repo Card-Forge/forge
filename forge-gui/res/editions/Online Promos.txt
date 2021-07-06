@@ -2,7 +2,7 @@
 Name=Online Promos
 Code=PRM
 Date=2002-06-24
-Type=Promos
+Type=Online
 ScryfallCode=PRM
 
 [cards]

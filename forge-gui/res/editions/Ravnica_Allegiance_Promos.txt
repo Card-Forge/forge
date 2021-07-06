@@ -2,7 +2,7 @@
 Code=PRNA
 Date=2019-01-25
 Name=Ravnica Allegiance Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PRNA
 
 [cards]

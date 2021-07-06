@@ -2,7 +2,7 @@
 Code=PXTC
 Date=2017-11-24
 Name=XLN Treasure Chest
-Type=Promos
+Type=Promo
 ScryfallCode=PXTC
 
 [cards]

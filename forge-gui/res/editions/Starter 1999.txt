@@ -1,6 +1,6 @@
 [metadata]
 Code=S99
-Date=1999-07
+Date=1999-07-01
 Name=Starter 1999
 Border=White
 Code2=ST

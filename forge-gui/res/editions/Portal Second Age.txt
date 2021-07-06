@@ -1,6 +1,6 @@
 [metadata]
 Code=PO2
-Date=1998-06
+Date=1998-06-24
 Name=Portal: Second Age
 Code2=P2
 Alias=P02

@@ -2,7 +2,7 @@
 Code=P5DN
 Date=2004-06-04
 Name=Fifth Dawn Promos
-Type=Promos
+Type=Promo
 ScryfallCode=P5DN
 
 [cards]

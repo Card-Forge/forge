@@ -2,7 +2,7 @@
 Code=JMP
 Date=2020-07-17
 Name=Jumpstart
-Type=Other
+Type=Draft
 ScryfallCode=JMP
 
 [cards]

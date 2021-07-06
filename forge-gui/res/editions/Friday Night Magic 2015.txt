@@ -2,7 +2,7 @@
 Code=F15
 Date=2015-01-01
 Name=Friday Night Magic 2015
-Type=Promos
+Type=Promo
 ScryfallCode=F15
 
 [cards]

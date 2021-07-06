@@ -4,7 +4,7 @@ Date=2015-11-13
 Name=Commander 2015
 Code2=C15
 MciCode=c15
-Type=Other
+Type=Commander
 ScryfallCode=C15
 
 [cards]

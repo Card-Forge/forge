@@ -3,7 +3,7 @@ Code=PD3
 Date=2011-11-18
 Name=Premium Deck Series: Graveborn
 MciCode=pd3
-Type=Premium_Deck_Series
+Type=Collector_Edition
 ScryfallCode=PD3
 
 [cards]

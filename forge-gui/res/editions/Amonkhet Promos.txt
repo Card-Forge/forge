@@ -2,7 +2,7 @@
 Code=PAKH
 Date=2017-04-28
 Name=Amonkhet Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PAKH
 
 [cards]

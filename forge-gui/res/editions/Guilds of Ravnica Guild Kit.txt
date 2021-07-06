@@ -4,7 +4,7 @@ Date=2018-11-02
 Name=Guilds of Ravnica Guild Kit
 Code2=GK1
 MciCode=gk1
-Type=Other
+Type=Boxed_Set
 ScryfallCode=GK1
 
 [cards]

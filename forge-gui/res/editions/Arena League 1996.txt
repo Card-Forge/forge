@@ -2,7 +2,7 @@
 Code=PARL
 Date=1996-08-02
 Name=Arena League 1996
-Type=Promos
+Type=Promo
 ScryfallCode=PARL
 
 [cards]

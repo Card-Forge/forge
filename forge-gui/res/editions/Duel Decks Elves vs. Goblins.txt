@@ -3,7 +3,7 @@ Code=DD1
 Date=2007-11-16
 Name=Duel Decks: Elves vs. Goblins
 MciCode=dd1
-Type=Duel_Decks
+Type=Duel_Deck
 ScryfallCode=DD1
 
 [cards]

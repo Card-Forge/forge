@@ -3,7 +3,7 @@ Code=DVD
 Date=2014-12-05
 Name=Duel Decks Anthology: Divine vs. Demonic
 MciCode=dvd
-Type=Duel_Decks
+Type=Duel_Deck
 ScryfallCode=DVD
 
 [cards]

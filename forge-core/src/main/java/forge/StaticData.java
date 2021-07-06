@@ -1,20 +1,12 @@
 package forge;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 import com.google.common.base.Predicate;
 
-import forge.card.CardDb;
+import forge.card.*;
 import forge.card.CardDb.CardRequest;
-import forge.card.CardEdition;
-import forge.card.CardRules;
-import forge.card.PrintSheet;
 import forge.item.BoosterBox;
 import forge.item.FatPack;
 import forge.item.PaperCard;
@@ -75,7 +67,7 @@ public class StaticData {
         this.editions = new CardEdition.Collection(new CardEdition.Reader(new File(editionFolder)));
         this.blockDataFolder = blockDataFolder;
         this.customCardReader = customCardReader;
-        this.customEditions = new CardEdition.Collection(new CardEdition.Reader(new File(customEditionsFolder)));
+        this.customEditions = new CardEdition.Collection(new CardEdition.Reader(new File(customEditionsFolder), true));
         this.prefferedArt = prefferedArt;
         lastInstance = this;
         List<String> funnyCards = new ArrayList<>();
@@ -172,6 +164,22 @@ public class StaticData {
             Collections.reverse(sortedEditions); //put newer sets at the top
         }
         return sortedEditions;
+    }
+
+    private TreeMap<CardEdition.Type, List<CardEdition>> editionsTypeMap;
+    public final Map<CardEdition.Type, List<CardEdition>> getEditionsTypeMap(){
+        if (editionsTypeMap == null){
+            editionsTypeMap = new TreeMap<>();
+            for (CardEdition.Type editionType : CardEdition.Type.values()){
+                editionsTypeMap.put(editionType, new ArrayList<>());
+            }
+            for (CardEdition edition : this.getSortedEditions()){
+                CardEdition.Type key = edition.getType();
+                List<CardEdition> editionsOfType = editionsTypeMap.get(key);
+                editionsOfType.add(edition);
+            }
+        }
+        return editionsTypeMap;
     }
 
     public CardEdition getCardEdition(String setCode){

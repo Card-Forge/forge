@@ -1,8 +1,8 @@
 [metadata]
 Code=PM20
-Date=2019-07-02
+Date=2019-07-12
 Name=Core Set 2020 Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PM20
 
 [cards]

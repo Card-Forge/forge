@@ -27,16 +27,16 @@ public class HistoricFormatSelect extends FScreen {
 
     private GameFormat selectedFormat;
     private final FGroupList<GameFormat> lstFormats = add(new FGroupList<>());
-    private final Set<GameFormat.FormatSubType> historicSubTypes = new HashSet<>(Arrays.asList(GameFormat.FormatSubType.Block,
-            GameFormat.FormatSubType.Standard,GameFormat.FormatSubType.Extended,GameFormat.FormatSubType.Modern,
-            GameFormat.FormatSubType.Legacy, GameFormat.FormatSubType.Vintage));
+    private final Set<GameFormat.FormatSubType> historicSubTypes = new HashSet<>(Arrays.asList(GameFormat.FormatSubType.BLOCK,
+            GameFormat.FormatSubType.STANDARD,GameFormat.FormatSubType.EXTENDED,GameFormat.FormatSubType.MODERN,
+            GameFormat.FormatSubType.LEGACY, GameFormat.FormatSubType.VINTAGE));
 
     private Runnable onCloseCallBack;
 
     public HistoricFormatSelect() {
         super(Localizer.getInstance().getMessage("lblChooseFormat"));
         for (GameFormat.FormatType group:GameFormat.FormatType.values()){
-            if (group == GameFormat.FormatType.Historic){
+            if (group == GameFormat.FormatType.HISTORIC){
                 for (GameFormat.FormatSubType subgroup:GameFormat.FormatSubType.values()){
                     if (historicSubTypes.contains(subgroup)){
                         lstFormats.addGroup(group.name() + "-" + subgroup.name());
@@ -48,39 +48,39 @@ public class HistoricFormatSelect extends FScreen {
         }
         for (GameFormat format: FModel.getFormats().getOrderedList()){
             switch(format.getFormatType()){
-                case Sanctioned:
+                case SANCTIONED:
                     lstFormats.addItem(format, 0);
                     break;
-                case Casual:
+                case CASUAL:
                     lstFormats.addItem(format, 1);
                     break;
-                case Historic:
+                case HISTORIC:
                     switch (format.getFormatSubType()){
-                        case Block:
+                        case BLOCK:
                             lstFormats.addItem(format, 2);
                             break;
-                        case Standard:
+                        case STANDARD:
                             lstFormats.addItem(format, 3);
                             break;
-                        case Extended:
+                        case EXTENDED:
                             lstFormats.addItem(format, 4);
                             break;
-                        case Modern:
+                        case MODERN:
                             lstFormats.addItem(format, 5);
                             break;
-                        case Legacy:
+                        case LEGACY:
                             lstFormats.addItem(format, 6);
                             break;
-                        case Vintage:
+                        case VINTAGE:
                             lstFormats.addItem(format, 7);
                             break;
 
                     }
                     break;
-                case Digital:
+                case DIGITAL:
                     lstFormats.addItem(format, 8);
                     break;
-                case Custom:
+                case CUSTOM:
                     lstFormats.addItem(format, 9);
             }
         }

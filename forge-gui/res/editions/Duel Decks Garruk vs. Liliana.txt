@@ -3,7 +3,7 @@ Code=DDD
 Date=2009-10-30
 Name=Duel Decks: Garruk vs. Liliana
 MciCode=gvl
-Type=Duel_Decks
+Type=Duel_Deck
 ScryfallCode=DDD
 
 [cards]
