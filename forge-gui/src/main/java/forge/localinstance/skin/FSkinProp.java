@@ -20,7 +20,7 @@ package forge.localinstance.skin;
 /**
  * Assembles settings from selected or default theme as appropriate. Saves in a
  * hashtable, access using .get(settingName) method.
- * 
+ *
  */
 public enum FSkinProp {
     //backgrounds
@@ -61,6 +61,11 @@ public enum FSkinProp {
 
     IMG_ZONE_GRAVEYARD   (new int[] {320, 0, 40, 40}, PropType.IMAGE),
     IMG_HDZONE_GRAVEYARD (new int[] {132, 6, 128, 128}, PropType.BUTTONS),
+
+    IMG_ZONE_ANTE        (new int[] {360, 0, 40, 40}, PropType.IMAGE),
+
+    IMG_ZONE_SIDEBOARD   (new int[] {360, 40, 40, 40}, PropType.IMAGE),
+    IMG_HDZONE_SIDEBOARD (new int[] {132, 1792, 128, 128}, PropType.BUTTONS),
 
     IMG_HDZONE_MANAPOOL  (new int[] {2, 6, 128, 128}, PropType.BUTTONS),
 
@@ -143,7 +148,7 @@ public enum FSkinProp {
     IMG_COUNTERS_MULTI  (new int[] {80, 400, 80, 80}, PropType.IMAGE),
     IMG_ENERGY          (new int[] {320, 120, 40, 40}, PropType.IMAGE),
     IMG_EXPERIENCE      (new int[] {280, 120, 40, 30}, PropType.IMAGE),
-    
+
     //foils
     FOIL_01     (new int[] {0, 0, 400, 570}, PropType.FOIL),
     FOIL_02     (new int[] {400, 0, 400, 570}, PropType.FOIL),
@@ -395,7 +400,7 @@ public enum FSkinProp {
     IMG_FAV4    (new int[] {300, 0, 100, 100}, PropType.FAVICON),
     IMG_FAV5    (new int[] {400, 0, 100, 100}, PropType.FAVICON),
     IMG_FAVNONE (new int[] {500, 0, 100, 100}, PropType.FAVICON),
- 
+
     IMG_QUEST_DRAFT_DECK (new int[] {0, 0, 680, 475}, PropType.IMAGE),
     //COMMANDER
     IMG_ABILITY_COMMANDER      (new int[] {330, 576, 80, 80}, PropType.ABILITY),
@@ -452,7 +457,7 @@ public enum FSkinProp {
     IMG_ABILITY_PROTECT_U             (new int[] {2, 330, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_PROTECT_UW            (new int[] {84, 330, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_PROTECT_W             (new int[] {166, 330, 80, 80}, PropType.ABILITY);
-    
+
     private int[] coords;
     private PropType type;
 

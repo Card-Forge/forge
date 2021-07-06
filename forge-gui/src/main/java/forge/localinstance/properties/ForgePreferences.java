@@ -86,7 +86,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_IMAGE_CACHE_MAXIMUM("400"),
         UI_OVERLAY_FOIL_EFFECT ("true"),
         UI_HIDE_REMINDER_TEXT ("false"),
-        UI_SR_OPTIMIZE ("false"), 
+        UI_SR_OPTIMIZE ("false"),
         UI_OPEN_PACKS_INDIV ("false"),
         UI_STACK_CREATURES ("false"),
         UI_UPLOAD_DRAFT ("false"),
@@ -238,12 +238,18 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         ZONE_LOC_HUMAN_GRAVEYARD(""),
         ZONE_LOC_HUMAN_EXILE(""),
         ZONE_LOC_HUMAN_FLASHBACK(""),
+        ZONE_LOC_HUMAN_COMMAND(""),
+        ZONE_LOC_HUMAN_ANTE(""),
+        ZONE_LOC_HUMAN_SIDEBOARD(""),
 
         ZONE_LOC_AI_HAND(""),
         ZONE_LOC_AI_LIBRARY(""),
         ZONE_LOC_AI_GRAVEYARD(""),
         ZONE_LOC_AI_EXILE(""),
         ZONE_LOC_AI_FLASHBACK(""),
+        ZONE_LOC_AI_COMMAND(""),
+        ZONE_LOC_AI_ANTE(""),
+        ZONE_LOC_AI_SIDEBOARD(""),
 
         CHAT_WINDOW_LOC(""),
 
