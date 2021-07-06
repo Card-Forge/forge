@@ -39,6 +39,8 @@ public class PlayerDetailsPanel extends JPanel {
     private final DetailLabel lblExile = new DetailLabel(FSkinProp.IMG_ZONE_EXILE, Localizer.getInstance().getMessage("lblExileNCards", "%s"));
     private final DetailLabel lblFlashback = new DetailLabel(FSkinProp.IMG_ZONE_FLASHBACK, Localizer.getInstance().getMessage("lblFlashbackNCards", "%s"));
     private final DetailLabel lblCommand = new DetailLabel(FSkinProp.IMG_PLANESWALKER, Localizer.getInstance().getMessage("lblCommandZoneNCards", "%s"));
+    private final DetailLabel lblAnte = new DetailLabel(FSkinProp.IMG_ZONE_ANTE, Localizer.getInstance().getMessage("lblAnteZoneNCards", "%s"));
+    private final DetailLabel lblSideboard = new DetailLabel(FSkinProp.IMG_ZONE_SIDEBOARD, Localizer.getInstance().getMessage("lblSideboardNCards", "%s"));
     private final List<Pair<DetailLabel, Byte>> manaLabels = new ArrayList<>();
 
     public PlayerDetailsPanel(final PlayerView player0) {
@@ -67,6 +69,7 @@ public class PlayerDetailsPanel extends JPanel {
         final SkinnedPanel row4 = new SkinnedPanel(new MigLayout("insets 0, gap 0"));
         final SkinnedPanel row5 = new SkinnedPanel(new MigLayout("insets 0, gap 0"));
         final SkinnedPanel row6 = new SkinnedPanel(new MigLayout("insets 0, gap 0"));
+        final SkinnedPanel row7 = new SkinnedPanel(new MigLayout("insets 0, gap 0"));
 
         row1.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
         row2.setOpaque(false);
@@ -74,6 +77,7 @@ public class PlayerDetailsPanel extends JPanel {
         row4.setOpaque(false);
         row5.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
         row6.setOpaque(false);
+        row7.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
 
         // Hand, library, graveyard, exile, flashback, command
         final String constraintsCell = "w 50%-4px!, h 100%!, gapleft 2px, gapright 2px";
@@ -87,22 +91,26 @@ public class PlayerDetailsPanel extends JPanel {
         row3.add(lblFlashback, constraintsCell);
         row3.add(lblCommand, constraintsCell);
 
-        row4.add(manaLabels.get(0).getLeft(), constraintsCell);
-        row4.add(manaLabels.get(1).getLeft(), constraintsCell);
+        row4.add(lblAnte, constraintsCell);
+        row4.add(lblSideboard, constraintsCell);
 
-        row5.add(manaLabels.get(2).getLeft(), constraintsCell);
-        row5.add(manaLabels.get(3).getLeft(), constraintsCell);
+        row5.add(manaLabels.get(0).getLeft(), constraintsCell);
+        row5.add(manaLabels.get(1).getLeft(), constraintsCell);
 
-        row6.add(manaLabels.get(4).getLeft(), constraintsCell);
-        row6.add(manaLabels.get(5).getLeft(), constraintsCell);
+        row6.add(manaLabels.get(2).getLeft(), constraintsCell);
+        row6.add(manaLabels.get(3).getLeft(), constraintsCell);
 
-        final String constraintsRow = "w 100%!, h 16%!";
+        row7.add(manaLabels.get(4).getLeft(), constraintsCell);
+        row7.add(manaLabels.get(5).getLeft(), constraintsCell);
+
+        final String constraintsRow = "w 100%!, h 14%!";
         add(row1, constraintsRow + ", gap 0 0 2% 0");
         add(row2, constraintsRow);
         add(row3, constraintsRow);
         add(row4, constraintsRow);
         add(row5, constraintsRow);
         add(row6, constraintsRow);
+        add(row7, constraintsRow);
     }
 
     public Component getLblLibrary() {
@@ -119,7 +127,9 @@ public class PlayerDetailsPanel extends JPanel {
                 librarySize   = String.valueOf(player.getLibrarySize()),
                 flashbackSize = String.valueOf(player.getFlashbackSize()),
                 exileSize     = String.valueOf(player.getExileSize()),
-                commandSize   = String.valueOf(player.getCommandSize());
+                commandSize   = String.valueOf(player.getCommandSize()),
+                anteSize      = String.valueOf(player.getAnteSize()),
+                sideboardSize = String.valueOf(player.getSideboardSize());
 
         lblHand.setText(handSize);
         lblHand.setToolTip(handSize, player.getMaxHandString());
@@ -133,6 +143,10 @@ public class PlayerDetailsPanel extends JPanel {
         lblExile.setToolTip(exileSize);
         lblCommand.setText(commandSize);
         lblCommand.setToolTip(commandSize);
+        lblAnte.setText(anteSize);
+        lblAnte.setToolTip(anteSize);
+        lblSideboard.setText(sideboardSize);
+        lblSideboard.setToolTip(sideboardSize);
     }
 
     /**
@@ -147,7 +161,7 @@ public class PlayerDetailsPanel extends JPanel {
     }
 
     public void setupMouseActions(final Runnable handAction, final Runnable libraryAction, final Runnable exileAction,
-                                  final Runnable graveAction, final Runnable flashBackAction, final Runnable commandAction,
+                                  final Runnable graveAction, final Runnable flashBackAction, final Runnable commandAction, final Runnable anteAction, final Runnable sideboardAction,
                                   final Function<Byte, Boolean> manaAction) {
         // Detail label listeners
         lblGraveyard.addMouseListener(new FMouseAdapter() {
@@ -178,6 +192,16 @@ public class PlayerDetailsPanel extends JPanel {
         lblCommand.addMouseListener(new FMouseAdapter() {
             @Override public void onLeftClick(final MouseEvent e) {
                 commandAction.run();
+            }
+        });
+        lblAnte.addMouseListener(new FMouseAdapter() {
+            @Override public void onLeftClick(final MouseEvent e) {
+                anteAction.run();
+            }
+        });
+        lblSideboard.addMouseListener(new FMouseAdapter() {
+            @Override public void onLeftClick(final MouseEvent e) {
+                sideboardAction.run();
             }
         });
 
