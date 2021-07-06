@@ -1,0 +1,8 @@
+Name:Mind Flayer
+ManaCost:3 U U
+Types:Creature Horror
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ Dominate Monster – When CARDNAME enters the battlefield, gain control of target creature for as long as you control CARDNAME.
+SVar:TrigChange:DB$ GainControl | TgtPrompt$ Choose target creature | ValidTgts$ Creature | LoseControl$ LeavesPlay,LoseControl
+SVar:PlayMain1:TRUE
+Oracle:Dominate Monster — When Mind Flayer enters the battlefield, gain control of target creature for as long as you control Mind Flayer.
