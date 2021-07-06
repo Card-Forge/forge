@@ -120,7 +120,7 @@ public class GameFormat implements Comparable<GameFormat> {
         this.name = fName;
         this.effectiveDate = effectiveDate;
 
-        if(sets != null) {
+        if (sets != null) {
             StaticData data = StaticData.instance();
             Set<String> parsedSets = new HashSet<>();
             for (String set : sets) {
@@ -129,10 +129,9 @@ public class GameFormat implements Comparable<GameFormat> {
                     continue;
                 }
                 parsedSets.add(set);
-
             }
             allowedSetCodes = Lists.newArrayList(parsedSets);
-        }else{
+        } else {
             allowedSetCodes = new ArrayList<>();
         }
 
@@ -183,7 +182,7 @@ public class GameFormat implements Comparable<GameFormat> {
     }
 
     private static Date parseDate(String date) {
-        if( date.length() <= 7 )
+        if (date.length() <= 7)
             date = date + "-01";
         try {
             return formatter.parse(date);
@@ -192,7 +191,7 @@ public class GameFormat implements Comparable<GameFormat> {
         }
     }
 
-    public Date getEffectiveDate()  { return effectiveDate;  }
+    public Date getEffectiveDate() { return effectiveDate;  }
 
     public FormatType getFormatType() {
         return this.formatType;
@@ -299,10 +298,9 @@ public class GameFormat implements Comparable<GameFormat> {
 
         if (other.formatType != formatType){
             return formatType.compareTo(other.formatType);
-        }else{
-            if (other.formatSubType != formatSubType){
-                return formatSubType.compareTo(other.formatSubType);
-            }
+        }
+        if (other.formatSubType != formatSubType){
+            return formatSubType.compareTo(other.formatSubType);
         }
         if (formatType.equals(FormatType.HISTORIC)){
             int compareDates = this.effectiveDate.compareTo(other.effectiveDate);
@@ -342,7 +340,7 @@ public class GameFormat implements Comparable<GameFormat> {
 
         @Override
         protected GameFormat read(File file) {
-            if(!includeHistoric && !coreFormats.contains(file.getName())){
+            if (!includeHistoric && !coreFormats.contains(file.getName())) {
                 return null;
             }
             final Map<String, List<String>> contents = FileSection.parseSections(FileUtil.readFile(file));
@@ -391,17 +389,17 @@ public class GameFormat implements Comparable<GameFormat> {
             }
 
             Boolean strRestrictedLegendary = section.getBoolean("restrictedlegendary");
-            if ( strRestrictedLegendary != null ) {
+            if (strRestrictedLegendary != null) {
                 restrictedLegendary = strRestrictedLegendary;
             }
 
             strCars = section.get("additional");
-            if ( strCars != null ) {
+            if (strCars != null) {
                 additionalCards = Arrays.asList(strCars.split("; "));
             }
 
             strCars = section.get("rarities");
-            if ( strCars != null ) {
+            if (strCars != null) {
                 CardRarity cr;
                 rarities = Lists.newArrayList();
                 for (String s: strCars.split(", ")) {
@@ -453,8 +451,8 @@ public class GameFormat implements Comparable<GameFormat> {
 
         public Iterable<GameFormat> getSanctionedList() {
             List<GameFormat> coreList = new ArrayList<>();
-            for(GameFormat format: naturallyOrdered){
-                if(format.getFormatType().equals(FormatType.SANCTIONED)){
+            for (GameFormat format: naturallyOrdered) {
+                if (format.getFormatType().equals(FormatType.SANCTIONED)){
                     coreList.add(format);
                 }
             }
@@ -463,8 +461,8 @@ public class GameFormat implements Comparable<GameFormat> {
 
         public Iterable<GameFormat> getFilterList() {
             List<GameFormat> coreList = new ArrayList<>();
-            for(GameFormat format: naturallyOrdered){
-                if(!format.getFormatType().equals(FormatType.HISTORIC)
+            for (GameFormat format: naturallyOrdered) {
+                if (!format.getFormatType().equals(FormatType.HISTORIC)
                         &&!format.getFormatType().equals(FormatType.DIGITAL)){
                     coreList.add(format);
                 }
@@ -474,8 +472,8 @@ public class GameFormat implements Comparable<GameFormat> {
 
         public Iterable<GameFormat> getHistoricList() {
             List<GameFormat> coreList = new ArrayList<>();
-            for(GameFormat format: naturallyOrdered){
-                if(format.getFormatType().equals(FormatType.HISTORIC)){
+            for (GameFormat format: naturallyOrdered) {
+                if (format.getFormatType().equals(FormatType.HISTORIC)){
                     coreList.add(format);
                 }
             }
@@ -484,10 +482,10 @@ public class GameFormat implements Comparable<GameFormat> {
 
         public Map<String, List<GameFormat>> getHistoricMap() {
             Map<String, List<GameFormat>> coreList = new HashMap<>();
-            for(GameFormat format: naturallyOrdered){
-                if(format.getFormatType().equals(FormatType.HISTORIC)){
+            for (GameFormat format: naturallyOrdered){
+                if (format.getFormatType().equals(FormatType.HISTORIC)){
                     String alpha = format.getName().substring(0,1);
-                    if(!coreList.containsKey(alpha)){
+                    if (!coreList.containsKey(alpha)) {
                         coreList.put(alpha,new ArrayList<>());
                     }
                     coreList.get(alpha).add(format);
@@ -549,7 +547,7 @@ public class GameFormat implements Comparable<GameFormat> {
             SortedSet<GameFormat> result = new TreeSet<>();
             Set<FormatSubType> coveredTypes = new HashSet<>();
             CardPool allCards = deck.getAllCardsInASinglePool();
-            for(GameFormat gf : reverseDateOrdered) {
+            for (GameFormat gf : reverseDateOrdered) {
                 if (gf.getFormatType().equals(FormatType.DIGITAL) && !exhaustive){
                     //exclude Digital formats from lists for now
                     continue;
@@ -587,13 +585,12 @@ public class GameFormat implements Comparable<GameFormat> {
             }
             if (gf2.formatType != gf1.formatType){
                 return gf1.formatType.compareTo(gf2.formatType);
-            }else{
-                if (gf2.formatSubType != gf1.formatSubType){
-                    return gf1.formatSubType.compareTo(gf2.formatSubType);
-                }
+            }
+            if (gf2.formatSubType != gf1.formatSubType){
+                return gf1.formatSubType.compareTo(gf2.formatSubType);
             }
             if (gf1.formatType.equals(FormatType.HISTORIC)){
-                if(gf1.effectiveDate!=gf2.effectiveDate) {//for matching dates or default dates default to name sorting
+                if (gf1.effectiveDate!=gf2.effectiveDate) {//for matching dates or default dates default to name sorting
                     return gf1.effectiveDate.compareTo(gf2.effectiveDate);
                 }
             }
