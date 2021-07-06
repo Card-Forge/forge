@@ -1,6 +1,6 @@
 Name:Tangle Angler
 ManaCost:3 G
-Types:Creature Horror
+Types:Creature Phyrexian Horror
 PT:1/5
 K:Infect
 A:AB$ MustBlock | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ AllowNonLethal | SpellDescription$ Target creature blocks CARDNAME this turn if able.

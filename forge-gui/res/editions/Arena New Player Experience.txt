@@ -1,6 +1,6 @@
 [metadata]
 Code=ANA
-Date=2018-07-12
+Date=2018-07-14
 Name=Arena New Player Experience
 Type=Online
 ScryfallCode=ANA

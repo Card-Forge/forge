@@ -4,7 +4,7 @@ Date=2018-11-16
 Name=Game Night
 Code2=GNT
 MciCode=gnt
-Type=Other
+Type=Multiplayer
 ScryfallCode=GNT
 
 [cards]

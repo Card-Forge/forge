@@ -1,10 +1,10 @@
 [metadata]
 Code=TD2
-Date=2013-01-11
+Date=2011-05-14
 Name=Duel Decks: Mirrodin Pure vs. New Phyrexia
 MciCode=td2
 Type=Online
-Type=Duel_Decks
+Type=Online
 ScryfallCode=TD2
 
 [cards]
@@ -99,10 +99,10 @@ ScryfallCode=TD2
 
 [tokens]
 w_2_2_cat
-b_0_0_germ
+b_0_0_phyrexian_germ
 g_5_5_beast
 g_1_1_insect
 g_1_1_ooze
 g_2_2_ooze_mitotic
-c_1_1_a_myr
+c_1_1_a_phyrexian_myr
 c_2_2_a_spawn

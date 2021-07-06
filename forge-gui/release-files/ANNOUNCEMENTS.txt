@@ -1,6 +1,10 @@
 #Add one announcement per line
 Get in the discord if you aren't yet.
-Planar Conquest now has a new plane accessible - Ikoria.
-In Planar Conquest, it's now possible to collect C19 cards on Eldraine and ZNE/ZNC cards on Zendikar.
-In Planar Conquest, the Eldraine plane now holds a little secret that's rather unhinged. It may be difficult to find though.
-Quest Mode now has a preference option to enable or disable promos in random reward pool.
+Card support has been extended up to "Modern Horizons 2", including the available previews from the upcoming "Dungeons and Dragons: Adventures in the Forgotten Realms".
+Collector Number has been added to all cards in the Catalog.
+[Desktop] Card Catalog now adds the Cards' Collector Number as a sortable column.
+[Desktop] Improved support for Custom Editions: now custom editions appear with their own names within other official editions, and can be selected in Set filters.
+Net decks have been expanded and there are now tons of new decks in constructed, commander, brawl, oathbreaker and tiny leaders.
+Complete support to game mechanics for all cards in Modern format.
+Various other improvements to game mechanics and AI: please check the Git log for details if interested.
+Improvements to Italian translation.

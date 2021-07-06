@@ -3,7 +3,7 @@ ManaCost:3 R
 Types:Creature Cow
 PT:3/3
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRoll | TriggerDescription$ At the beginning of your upkeep, roll a six-sided die. If you a roll a 1, sacrifice Krazy Kow and it deals 3 damage to each creature and each player.
-SVar:TrigRoll:DB$ RollDice | On1$ DBSac
+SVar:TrigRoll:DB$ RollDice | ResultSubAbilities$ 1:DBSac
 SVar:DBSac:DB$ Sacrifice | Defined$ Self | SubAbility$ DBDamage
 SVar:DBDamage:DB$ DamageAll | ValidCards$ Creature | ValidPlayers$ Player | NumDmg$ 3
 Oracle:At the beginning of your upkeep, roll a six-sided die. If you a roll a 1, sacrifice Krazy Kow and it deals 3 damage to each creature and each player.

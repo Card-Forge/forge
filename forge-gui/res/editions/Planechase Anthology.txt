@@ -4,7 +4,7 @@ Date=2016-11-25
 Name=Planechase Anthology
 Code2=PCA
 MciCode=pca
-Type=Other
+Type=Multiplayer
 ScryfallCode=PCA
 
 [cards]
@@ -258,7 +258,7 @@ c_0_1_eldrazi_spawn_sac
 c_0_1_eldrazi_spawn_sac
 w_4_4_angel_flying
 w_0_1_goat
-b_0_0_germ
+b_0_0_phyrexian_germ
 b_2_4_spider_reach
 b_2_2_zombie
 r_5_5_dragon_flying

@@ -3,7 +3,7 @@ Code=DDO
 Date=2015-02-27
 Name=Duel Decks: Elspeth vs. Kiora
 MciCode=ddo
-Type=Duel_Decks
+Type=Duel_Deck
 ScryfallCode=DDO
 
 [cards]

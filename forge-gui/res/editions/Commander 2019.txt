@@ -4,7 +4,7 @@ Date=2019-08-23
 Name=Commander 2019
 Code2=C19
 MciCode=c19
-Type=Other
+Type=Commander
 ScryfallCode=C19
 
 [cards]
@@ -317,7 +317,7 @@ b_2_2_zombie
 c_3_4_a_gargoyle_flying
 c_10_10_eldrazi
 c_a_treasure_sac
-c_x_x_a_horror
+c_x_x_a_phyrexian_horror
 c_x_x_a_sculpture_total_sculptures
 g_0_1_egg_defender
 g_1_1_plant

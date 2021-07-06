@@ -2,7 +2,7 @@
 Code=JGP
 Date=1998-01-01
 Name=Judge Gift Cards 1998
-Type=Promos
+Type=Promo
 ScryfallCode=JGP
 
 [cards]

@@ -1,0 +1,10 @@
+Name:Find the Path
+ManaCost:2 G
+Types:Enchantment Aura
+K:Enchant land
+A:SP$ Attach | Cost$ 2 G | ValidTgts$ Land | AILogic$ Pump
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBVenture | TriggerDescription$ When CARDNAME enters the battlefield, venture into the dungeon. (Enter the first room or advance to the next room.)
+SVar:DBVenture:DB$ Venture | Defined$ You
+S:Mode$ Continuous | Affected$ Land.EnchantedBy | AddAbility$ ABMana | Description$ Enchanted land has "{T}: Add {G}{G}."
+SVar:ABMana:AB$ Mana | Cost$ T | Produced$ G | Amount$ 2 | SpellDescription$ Add {G}{G}.
+Oracle:Enchant land\nWhen Find the Path enters the battlefield, venture into the dungeon. (Enter the first room or advance to the next room.)\nEnchanted land has "{T}: Add {G}{G}."

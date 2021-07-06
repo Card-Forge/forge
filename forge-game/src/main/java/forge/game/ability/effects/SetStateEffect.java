@@ -160,7 +160,7 @@ public class SetStateEffect extends SpellAbilityEffect {
                 }
                 game.fireEvent(new GameEventCardStatsChanged(gameCard));
                 if (sa.hasParam("Mega")) {
-                    gameCard.addCounter(CounterEnumType.P1P1, 1, p, true, table);
+                    gameCard.addCounter(CounterEnumType.P1P1, 1, p, sa, true, table);
                 }
                 if (remChanged) {
                     host.addRemembered(gameCard);

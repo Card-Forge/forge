@@ -3,7 +3,7 @@ Code=DDU
 Date=2018-04-06
 Name=Duel Decks: Elves vs. Inventors
 MciCode=ddu
-Type=Duel_Decks
+Type=Duel_Deck
 ScryfallCode=DDU
 
 [cards]
@@ -87,5 +87,6 @@ ScryfallCode=DDU
 [tokens]
 g_1_1_elf_warrior
 c_1_1_a_myr
+c_1_1_a_phyrexian_myr
 c_1_1_a_thopter_flying
 c_1_1_a_thopter_flying

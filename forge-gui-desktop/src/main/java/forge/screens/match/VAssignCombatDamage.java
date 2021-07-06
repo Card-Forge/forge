@@ -44,11 +44,13 @@ import forge.toolbox.FButton;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
+import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.view.FDialog;
 import forge.view.arcane.CardPanel;
+import forge.view.arcane.MiscCardPanel;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -116,21 +118,28 @@ public class VAssignCombatDamage {
     private final MouseAdapter mad = new MouseAdapter() {
         @Override
         public void mouseEntered(final MouseEvent evt) {
-            CardView source = ((CardPanel) evt.getSource()).getCard();
-            if (!damage.containsKey(source)) source = null; // to get player instead of fake card
+            SkinnedPanel panel = (SkinnedPanel)evt.getSource();
+            CardView source = null;
+            if (panel instanceof CardPanel) {
+                source = ((CardPanel)panel).getCard();
+            }
 
             final FSkin.Colors brdrColor = VAssignCombatDamage.this.canAssignTo(source) ? FSkin.Colors.CLR_ACTIVE : FSkin.Colors.CLR_INACTIVE;
-            ((CardPanel) evt.getSource()).setBorder(new FSkin.LineSkinBorder(FSkin.getColor(brdrColor), 2));
+            panel.setBorder(new FSkin.LineSkinBorder(FSkin.getColor(brdrColor), 2));
         }
 
         @Override
         public void mouseExited(final MouseEvent evt) {
-            ((CardPanel) evt.getSource()).setBorder((Border)null);
+            ((SkinnedPanel) evt.getSource()).setBorder((Border)null);
         }
 
         @Override
         public void mousePressed(final MouseEvent evt) {
-            CardView source = ((CardPanel) evt.getSource()).getCard(); // will be NULL for player
+            SkinnedPanel panel = (SkinnedPanel)evt.getSource();
+            CardView source = null;
+            if (panel instanceof CardPanel) {
+                source = ((CardPanel)panel).getCard();
+            }
 
             boolean meta = evt.isControlDown();
             boolean isLMB = SwingUtilities.isLeftMouseButton(evt);
@@ -192,14 +201,7 @@ public class VAssignCombatDamage {
             final DamageTarget dt = new DamageTarget(null, new FLabel.Builder().text("0").fontSize(18).fontAlign(SwingConstants.CENTER).build());
             damage.put(null, dt);
             defenders.add(dt);
-            CardView fakeCard = null;
-            if (defender instanceof CardView) {
-                fakeCard = (CardView)defender;
-            } else if (defender instanceof PlayerView) {
-                final PlayerView p = (PlayerView)defender;
-                fakeCard = new CardView(-1, null, defender.toString(), p, matchUI.getAvatarImage(p.getLobbyPlayerName()));
-            }
-            addPanelForDefender(pnlDefenders, fakeCard);
+            addPanelForDefender(pnlDefenders, defender);
         }
 
         // Add "opponent placeholder" card if trample allowed
@@ -257,12 +259,21 @@ public class VAssignCombatDamage {
      * @param pnlDefenders
      * @param defender
      */
-    private void addPanelForDefender(final JPanel pnlDefenders, final CardView defender) {
-        final CardPanel cp = new CardPanel(matchUI, defender);
-        cp.setCardBounds(0, 0, 105, 150);
-        cp.setOpaque(true);
-        pnlDefenders.add(cp, "w 145px!, h 170px!, gap 5px 5px 3px 3px, ax center");
-        cp.addMouseListener(mad);
+    private void addPanelForDefender(final JPanel pnlDefenders, final GameEntityView defender) {
+        if (defender instanceof CardView) {
+            final CardPanel cp = new CardPanel(matchUI, (CardView)defender);
+            cp.setCardBounds(0, 0, 105, 150);
+            cp.setOpaque(true);
+            pnlDefenders.add(cp, "w 145px!, h 170px!, gap 5px 5px 3px 3px, ax center");
+            cp.addMouseListener(mad);
+        } else if (defender instanceof PlayerView) {
+            final PlayerView p = (PlayerView)defender;
+            SkinImage playerAvatar = matchUI.getPlayerAvatar(p, 0);
+            final MiscCardPanel mp = new MiscCardPanel(matchUI, p.getName(), playerAvatar);
+            mp.setCardBounds(0, 0, 105, 150);
+            pnlDefenders.add(mp, "w 145px!, h 170px!, gap 5px 5px 3px 3px, ax center");
+            mp.addMouseListener(mad);
+        }
     }
 
     /**

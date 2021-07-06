@@ -52,6 +52,7 @@ public final class CDev implements ICDoc {
         view.getLblRemoveFromGame().addMouseListener(madRemoveFromGame);
         view.getLblRiggedRoll().addMouseListener(madRiggedRoll);
         view.getLblWalkTo().addMouseListener(madWalkToPlane);
+        view.getLblAskAI().addMouseListener(madAskAI);
     }
     public IGameController getController() {
         return matchUI.getGameController();
@@ -307,6 +308,16 @@ public final class CDev implements ICDoc {
     };
     public void planeswalkTo() {
         getController().cheat().planeswalkTo();
+    }
+
+    private final MouseListener madAskAI = new MouseAdapter() {
+        @Override
+        public void mousePressed(final MouseEvent e) {
+            askAI();
+        }
+    };
+    public void askAI() {
+        getController().cheat().askAI();
     }
 
     //========== End mouse listener inits

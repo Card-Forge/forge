@@ -5,8 +5,9 @@ Name=Strixhaven: School of Mages
 Code2=STX
 MciCode=stx
 Type=Expansion
-BoosterCovers=3
-Booster=1 fromSheet("STX lesson"), 9 Common, 3 Uncommon, 1 RareMythic, 1 fromSheet("STA cards")
+BoosterCovers=5
+DraftBooster=1 fromSheet("STX lesson"), 9 Common, 3 Uncommon, 1 RareMythic, 1 Any STA
+CollectorBooster=1 Uncommon:fromSheet("STA borderless")+, 1 RareMythic:fromSheet("STA borderless")+, 1 Uncommon:fromSheet("STA etched")+, 1 RareMythic:fromSheet("STA etched")+, 1 RareMythic C21+, 1 RareMythic STA, 1 Uncommon STA, 1 fromSheet("STX lesson")+, 1 RareMythic+, 2 Uncommon+, 5 Common+
 Prerelease=6 Boosters, 1 RareMythic+
 ScryfallCode=STX
 
@@ -407,26 +408,26 @@ ScryfallCode=STX
 382 U Decisive Denial
 
 [lesson]
-383 Environmental Sciences
-384 Expanded Anatomy
-385 Introduction to Annihilation
-386 Introduction to Prophecy
-387 Mascot Exhibition
-388 Academic Probation
-389 Reduce to Memory
-390 Mercurial Transformation
-391 Teachings of the Archaics
-392 Confront the Past
-393 Necrotic Fumes
-394 Illuminate History
-395 Start from Scratch
-396 Basic Conjuration
-397 Containment Breach
-398 Elemental Summoning
-399 Fractal Summoning
-400 Inkling Summoning
-401 Pest Summoning
-402 Spirit Summoning
+2 Environmental Sciences
+2 Expanded Anatomy
+2 Introduction to Annihilation
+2 Introduction to Prophecy
+1 Mascot Exhibition
+1 Academic Probation
+2 Reduce to Memory
+2 Mercurial Transformation
+1 Teachings of the Archaics
+1 Confront the Past
+2 Necrotic Fumes
+1 Illuminate History
+2 Start from Scratch
+1 Basic Conjuration
+2 Containment Breach
+2 Elemental Summoning
+2 Fractal Summoning
+2 Inkling Summoning
+2 Pest Summoning
+2 Spirit Summoning
 
 [tokens]
 bg_1_1_pest_lifegain

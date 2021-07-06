@@ -2,7 +2,7 @@
 Code=PJUD
 Date=2002-05-27
 Name=Judgment Promos
-Type=Promos
+Type=Promo
 CardLang=he
 ScryfallCode=PJUD
 

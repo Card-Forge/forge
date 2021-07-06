@@ -385,7 +385,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         manaPart = manaPart0;
     }
 
-
     // Spell, and Ability, and other Ability objects override this method
     public abstract boolean canPlay();
 
@@ -765,6 +764,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         resetTriggeringObjects();
         resetTriggerRemembered();
 
+        if (isActivatedAbility()) {
+            setXManaCostPaid(null);
+        }
+
         // reset last state when finished resolving
         setLastStateBattlefield(CardCollection.EMPTY);
         setLastStateGraveyard(CardCollection.EMPTY);
@@ -804,7 +807,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return description;
     }
     public void setDescription(final String s) {
-        originalDescription = s;
+        originalDescription = TextUtil.fastReplace(s, "VERT", "|");
         description = originalDescription;
     }
 
@@ -956,7 +959,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public boolean isForetold() {
         return this.isAlternativeCost(AlternativeCost.Foretold);
     }
-
 
     /**
      * @return the aftermath

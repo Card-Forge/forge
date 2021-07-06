@@ -34,6 +34,7 @@ Chandra, Roaring Flame|Chandra's Roar|The opponent continues to burn...
 Chandra, the Firebrand|Chandra's Hex|When burning five is just not enough.
 Chandra, Torch of Defiance|Chandra's Defiance|Let's torch it!
 Dack Fayden|Dack's Discount|Do you have any evidence it was me?
+Dakkon, Shadow Slayer|Dakkon's Masterpiece|I put lots of my sweat and other people's blood into it.
 Daretti, Ingenious Iconoclast|Daretti's Mass Production|Imitation is the sincerest form of irritation.
 Daretti, Scrap Savant|Daretti's Recycler|Save the environment!
 Domri Rade|Domri's Surprise|That's GOTTA get me a date!
@@ -58,6 +59,7 @@ Garruk, Cursed Huntsman|Garruk's Cursed Overrun|Run wild / run free / here's you
 Garruk, Primal Hunter|Garruk's Garden|They came out after a rain...
 Garruk, Savage Herald|Garruk's Single Goal|Never mind those! Get HIM!
 Garruk, Unleashed|Garruk's Forces of Nature|Slow and steady smashes face.
+Geyadrone Dihada|Dihada's Master Plan|Pretty little pawns... Come fill your purpose.
 Gideon Blackblade|Gideon's Righteous Strike|Blackblade cleaving black heart!
 Gideon Jura|Gideon's Brawl|Are you man enough to mess with me?
 Gideon of the Trials|Gideon's Eternity|Justice will never die!
@@ -66,6 +68,7 @@ Gideon, Battle-Forged|Gideon's First Steps|I still have a long road ahead of me.
 Gideon, Champion of Justice|Gideon's Aftermath|Gideon stands alone!
 Gideon, Martial Paragon|Gideon's Alpha Strike|Geronimo!
 Gideon, the Oathsworn|Gideon's Ultimate Sacrifice|Follow me to oblivion.
+Grist, the Hunger Tide|Grist's Vengeance of the Dead|Bzzzzz!
 Huatli, Dinosaur Knight|Huatli's Dino Thunder|Victory is ours forever more!
 Huatli, Radiant Champion|Huatli's Herd|Seize. Release. Feast.
 Huatli, Warrior Poet|Huatli's Poetry|Knock knock, open up the door, it's real!

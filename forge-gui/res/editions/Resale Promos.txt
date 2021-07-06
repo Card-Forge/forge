@@ -2,7 +2,7 @@
 Code=PRES
 Date=2007-01-01
 Name=Resale Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PRES
 
 [cards]

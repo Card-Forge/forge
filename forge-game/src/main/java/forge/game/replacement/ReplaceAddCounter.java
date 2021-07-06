@@ -54,6 +54,10 @@ public class ReplaceAddCounter extends ReplacementEffect {
             return false;
         }
 
+        if (!matchesValidParam("ValidCause", runParams.get(AbilityKey.Cause))) {
+            return false;
+        }
+
         if (hasParam("ValidCounterType")) {
             String type = getParam("ValidCounterType");
             if (CounterType.getType(type) != runParams.get(AbilityKey.CounterType)) {

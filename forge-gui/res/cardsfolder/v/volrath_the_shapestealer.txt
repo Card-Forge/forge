@@ -1,6 +1,6 @@
 Name:Volrath, the Shapestealer
 ManaCost:2 B G U
-Types:Legendary Creature Shapeshifter
+Types:Legendary Creature Phyrexian Shapeshifter
 PT:7/5
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of combat on your turn, put a -1/-1 counter on up to one target creature.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ M1M1 | TargetMin$ 0 | TargetMax$ 1 | CounterNum$ 1 | IsCurse$ True

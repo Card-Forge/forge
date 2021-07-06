@@ -1,6 +1,6 @@
 Name:Vector Asp
 ManaCost:1
-Types:Artifact Creature Snake
+Types:Artifact Creature Phyrexian Snake
 PT:1/1
 A:AB$ Pump | Cost$ B | Defined$ Self | KW$ Infect | SpellDescription$ CARDNAME gains infect until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vector_asp.jpg

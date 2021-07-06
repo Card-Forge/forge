@@ -2,7 +2,7 @@
 Code=PPLC
 Date=2007-02-02
 Name=Planar Chaos Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PPLC
 
 [cards]

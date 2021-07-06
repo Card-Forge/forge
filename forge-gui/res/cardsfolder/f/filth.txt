@@ -3,7 +3,5 @@ ManaCost:3 B
 Types:Creature Incarnation
 PT:2/2
 K:Swampwalk
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | EffectZone$ Graveyard | AddKeyword$ Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.) | CheckSVar$ X | SVarCompare$ GE1 | Description$ As long as CARDNAME is in your graveyard and you control a Swamp, creatures you control have swampwalk.
-SVar:X:Count$Valid Swamp.YouCtrl
-SVar:Picture:http://www.wizards.com/global/images/magic/general/filth.jpg
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | EffectZone$ Graveyard | AddKeyword$ Swampwalk | IsPresent$ Swamp.YouCtrl | Description$ As long as CARDNAME is in your graveyard and you control a Swamp, creatures you control have swampwalk.
 Oracle:Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)\nAs long as Filth is in your graveyard and you control a Swamp, creatures you control have swampwalk.

@@ -2,7 +2,7 @@
 Code=PUDS
 Date=1999-06-07
 Name=Urza's Destiny Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PUDS
 
 [cards]

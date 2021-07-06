@@ -1,9 +1,9 @@
 [metadata]
 Code=MPS_WAR
-Date=2019-05-03
+Date=2018-10-05
 Name=Mythic Edition - War of the Spark
 MciCode=med
-Type=Other
+Type=Collector_Edition
 ScryfallCode=med
 
 [cards]

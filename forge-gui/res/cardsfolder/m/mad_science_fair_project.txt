@@ -2,7 +2,7 @@ Name:Mad Science Fair Project
 ManaCost:3
 Types:Artifact
 A:AB$ Pump | Cost$ T | ValidTgts$ Player | SubAbility$ DBRoll
-SVar:DBRoll:DB$ RollDice | On1$ AddC | On2$ AddC | On3$ AddC | Else$ AddAny | AILogic$ Main2 | SpellDescription$ {T}: Roll a six-sided die. On a 3 or lower, target player adds {C}. Otherwise, that player adds one mana of any color they choose.
+SVar:DBRoll:DB$ RollDice | ResultSubAbilities$ 1-3:AddC,Else:AddAny | AILogic$ Main2 | SpellDescription$ {T}: Roll a six-sided die. On a 3 or lower, target player adds {C}. Otherwise, that player adds one mana of any color they choose.
 SVar:AddC:DB$ Mana | Produced$ C | Defined$ Targeted
 SVar:AddAny:DB$ Mana | Produced$ Any | Defined$ Targeted
 SVar:PlayMain1:TRUE

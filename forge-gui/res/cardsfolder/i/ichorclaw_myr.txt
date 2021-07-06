@@ -1,6 +1,6 @@
 Name:Ichorclaw Myr
 ManaCost:2
-Types:Artifact Creature Myr
+Types:Artifact Creature Phyrexian Myr
 PT:1/1
 K:Infect
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME becomes blocked, it gets +2/+2 until end of turn.

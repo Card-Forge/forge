@@ -2,8 +2,7 @@ Name:Pious Evangel
 ManaCost:2 W
 Types:Creature Human Cleric
 PT:2/2
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigGainLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME or another creature enters the battlefield under your control, you gain 1 life.
-T:Mode$ ChangesZone | ValidCard$ Creature.Other+YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigGainLife | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another creature enters the battlefield under your control, you gain 1 life.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigGainLife | ValidCard$ Card.Self,Creature.Other+YouCtrl | TriggerDescription$ Whenever CARDNAME or another creature enters the battlefield under your control, you gain 1 life.
 SVar:TrigGainLife:DB$GainLife | Defined$ You | LifeAmount$ 1
 A:AB$SetState | Cost$ 2 T Sac<1/Permanent.Other/another permanent> | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pious_evangel.jpg
@@ -17,8 +16,7 @@ ManaCost:no cost
 Colors:black
 Types:Creature Human Cleric
 PT:2/4
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever CARDNAME or another creature you control dies, target opponent loses 1 life and you gain 1 life.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDrain | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another creature you control dies, target opponent loses 1 life and you gain 1 life.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self,Creature.Other+YouCtrl | Execute$ TrigDrain | TriggerDescription$ Whenever CARDNAME or another creature you control dies, target opponent loses 1 life and you gain 1 life.
 SVar:TrigDrain:DB$LoseLife | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wayward_disciple.jpg

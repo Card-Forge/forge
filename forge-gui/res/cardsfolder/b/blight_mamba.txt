@@ -1,6 +1,6 @@
 Name:Blight Mamba
 ManaCost:1 G
-Types:Creature Snake
+Types:Creature Phyrexian Snake
 PT:1/1
 K:Infect
 A:AB$ Regenerate | Cost$ 1 G | SpellDescription$ Regenerate CARDNAME.

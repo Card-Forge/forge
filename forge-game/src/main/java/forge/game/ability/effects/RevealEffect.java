@@ -59,7 +59,7 @@ public class RevealEffect extends SpellAbilityEffect {
                     if (valid.isEmpty())
                         continue;
                     
-                    if( cnt > valid.size() )
+                    if (cnt > valid.size())
                         cnt = valid.size();
 
                     int min = cnt;

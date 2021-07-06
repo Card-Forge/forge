@@ -4,8 +4,7 @@ Types:Creature Human Shaman
 PT:2/2
 T:Mode$ SpellCastOrCopy | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Magecraft — Whenever you cast or copy an instant or sorcery spell, CARDNAME can't be blocked this turn. If that spell has mana value 5 or greater, put a +1/+1 counter on CARDNAME.
 SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ HIDDEN Unblockable | SubAbility$ DBPutCounter
-SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE5
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | ConditionCheckSVar$ TriggerCount$CastSACMC | ConditionSVarCompare$ GE5
 DeckNeeds:Type$Instant|Sorcery
 DeckHas:Ability$Counters
-SVar:X:TriggeredCard$CardManaCost
 Oracle:Magecraft — Whenever you cast or copy an instant or sorcery spell, Prismari Apprentice can't be blocked this turn. If that spell has mana value 5 or greater, put a +1/+1 counter on Prismari Apprentice.

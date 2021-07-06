@@ -1,6 +1,6 @@
 Name:Clamor Shaman
 ManaCost:2 R
-Types:Creature Shaman
+Types:Creature Goblin Shaman
 PT:1/1
 K:Riot
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCanNotBlock | TriggerDescription$ Whenever CARDNAME attacks, target creature an opponent controls can't block this turn.

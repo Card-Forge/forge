@@ -1,6 +1,6 @@
 Name:Ravenous Skirge
 ManaCost:2 B
-Types:Creature Imp
+Types:Creature Phyrexian Imp
 PT:1/1
 K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +2/+0 until end of turn.

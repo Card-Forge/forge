@@ -1,6 +1,6 @@
 Name:Blackcleave Goblin
 ManaCost:3 B
-Types:Creature Goblin Zombie
+Types:Creature Phyrexian Goblin Zombie
 PT:2/1
 K:Haste
 K:Infect

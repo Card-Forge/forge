@@ -113,7 +113,7 @@ public class CardRenderer {
 
     static {
         try {
-            for (int fontSize = 11; fontSize <= 22; fontSize++) {
+            for (int fontSize = 8; fontSize <= 22; fontSize++) {
                 generateFontForCounters(fontSize);
             }
         } catch (Exception e) {
@@ -603,6 +603,13 @@ public class CardRenderer {
 
         }
 
+        if (card.getCurrentRoom() != null && !card.getCurrentRoom().isEmpty()) {
+            List<String> markers = new ArrayList<>();
+            markers.add("In Room:");
+            markers.add(card.getCurrentRoom());
+            drawMarkersTabs(markers, g, x, y, w, h);
+        }
+
         float otherSymbolsSize = w / 4f;
         final float combatXSymbols = (x + (w / 4)) - otherSymbolsSize / 2 - 10;
         final float stateXSymbols = (x + (w / 2)) - otherSymbolsSize / 2 - 10;
@@ -1073,6 +1080,38 @@ public class CardRenderer {
 
     }
 
+    private static void drawMarkersTabs(final List<String> markers, final Graphics g, final float x, final float y, final float w, final float h) {
+
+        int fontSize = Math.max(8, Math.min(22, (int) (h * 0.05)));
+        BitmapFont font = counterFonts.get(fontSize);
+
+        final float additionalXOffset = 3f * ((fontSize - 8) / 8f);
+
+        float otherSymbolsSize = w / 3.5f;
+        final float ySymbols = (h / 12) - otherSymbolsSize / 2;
+
+        final float markerBoxHeight = 9 + fontSize;
+        final float markerBoxBaseWidth = 8 + additionalXOffset * 2;
+        final float markerBoxSpacing = -4;
+
+        final float spaceFromTopOfCard = y + h - markerBoxHeight - markerBoxSpacing - otherSymbolsSize + ySymbols;
+
+        int markerCounter = markers.size() - 1;
+
+        for (String marker : markers) {
+            layout.setText(font, marker);
+            final float markerBoxRealWidth = markerBoxBaseWidth + layout.width + 4;
+
+            final float markerYOffset = spaceFromTopOfCard - (markerCounter-- * (markerBoxHeight + markerBoxSpacing));
+
+            g.fillRect(counterBackgroundColor, x - 3, markerYOffset, markerBoxRealWidth, markerBoxHeight);
+
+            Color markerColor = new Color(200.0f / 255.0f, 200.0f / 255.0f, 200.0f / 255.0f, 1.0f);
+
+            drawText(g, marker, font, markerColor, x + 2 + additionalXOffset, markerYOffset, markerBoxRealWidth, markerBoxHeight, Align.left);
+        }
+    }
+
     private static void drawPtBox(Graphics g, CardView card, CardStateView details, Color color, float x, float y, float w, float h) {
         //use array of strings to render separately with a tiny amount of space in between
         //instead of using actual spaces which are too wide
@@ -1202,7 +1241,7 @@ public class CardRenderer {
         int pageSize = 128;
 
         //only generate images for characters that could be used by Forge
-        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890/-+";
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890/-+:'";
 
         final PixmapPacker packer = new PixmapPacker(pageSize, pageSize, Pixmap.Format.RGBA8888, 2, false);
         final FreeTypeFontParameter parameter = new FreeTypeFontParameter();

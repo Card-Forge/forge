@@ -1,6 +1,6 @@
 Name:Rotted Hystrix
 ManaCost:4 G
-Types:Creature Beast
+Types:Creature Phyrexian Beast
 PT:3/6
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rotted_hystrix.jpg
 Oracle:

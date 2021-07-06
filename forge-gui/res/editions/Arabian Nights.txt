@@ -1,6 +1,6 @@
 [metadata]
 Code=ARN
-Date=1993-12-21
+Date=1993-12-17
 Name=Arabian Nights
 Code2=AN
 MciCode=an

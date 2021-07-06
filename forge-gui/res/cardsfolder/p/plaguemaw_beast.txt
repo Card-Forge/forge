@@ -1,6 +1,6 @@
 Name:Plaguemaw Beast
 ManaCost:3 G G
-Types:Creature Beast
+Types:Creature Phyrexian Beast
 PT:4/3
 A:AB$ Proliferate | Cost$ T Sac<1/Creature> | SpellDescription$ Proliferate.
 AI:RemoveDeck:All

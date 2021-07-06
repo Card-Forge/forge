@@ -3,8 +3,7 @@ ManaCost:2 R R
 Types:Creature Human Shaman
 PT:1/2
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
-R:Event$ Moved | ValidLKI$ Creature.DamagedBy | Destination$ Graveyard | ActiveZones$ Battlefield | ReplaceWith$ DBExile | Description$ CARDNAME deals 1 damage to any target.
+R:Event$ Moved | ValidLKI$ Creature.DamagedBy | Destination$ Graveyard | ActiveZones$ Battlefield | ReplaceWith$ DBExile | Description$ If a creature dealt damage by Frostwielder this turn would die, exile it instead.
 SVar:DBExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Battlefield | Destination$ Exile
 SVar:NonCombatPriority:1
-SVar:Picture:http://www.wizards.com/global/images/magic/general/frostwielder.jpg
 Oracle:If a creature dealt damage by Frostwielder this turn would die, exile it instead.\n{T}: Frostwielder deals 1 damage to any target.

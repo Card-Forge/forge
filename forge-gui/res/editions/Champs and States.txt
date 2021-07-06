@@ -2,7 +2,7 @@
 Code=PCMP
 Date=2006-03-18
 Name=Champs and States
-Type=Promos
+Type=Promo
 ScryfallCode=PCMP
 
 [cards]

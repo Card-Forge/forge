@@ -1,0 +1,13 @@
+Name:The Book of Exalted Deeds
+ManaCost:W W W
+Types:Legendary Artifact
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ LifeGained | SVarCompare$ GE3 | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, if you gained 3 or more life this turn, create a 3/3 white Angel creature token with flying.
+SVar:TrigToken:DB$Token | TokenAmount$ 1 | TokenScript$ w_3_3_angel_flying | TokenOwner$ You
+A:AB$ PutCounter | Cost$ W W W T Exile<1/CARDNAME> | ValidTgts$ Angel | TgtPrompt$ Select target Angel | CounterType$ ENLIGHTENED | CounterNum$ 1 | SorcerySpeed$ True | SubAbility$ DBAnimate | SpellDescription$ Put an enlightened counter on target Angel. It gains "You can't lose the game and your opponents can't win the game." Activate only as a sorcery.
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Duration$ Permanent | staticAbilities$ DBYouCantLose,DBOppCantWin | StackDescription$ None
+SVar:DBYouCantLose:Mode$ Continuous | Affected$ You | AddKeyword$ You can't lose the game. | Description$ You can't lose the game.
+SVar:DBOppCantWin:Mode$ Continuous | Affected$ Opponent | AddKeyword$ You can't win the game. | Description$ Opponents can't win the game.
+SVar:LifeGained:Count$LifeYouGainedThisTurn
+DeckHints:Ability$LifeGain
+DeckHas:Ability$Token
+Oracle:At the beginning of your end step, if you gained 3 or more life this turn, create a 3/3 white Angel creature token with flying.\n{W}{W}{W}, {T}, Exile The Book of Exalted Deeds: Put an enlightened counter on target Angel. It gains "You can't lose the game and your opponents can't win the game." Activate only as a sorcery.

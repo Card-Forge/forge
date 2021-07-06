@@ -152,7 +152,7 @@ public class CardFactory {
             }
             final String finalColors = tmp;
 
-            c.addColor(finalColors, !sourceSA.hasParam("OverwriteColors"), c.getTimestamp());
+            c.addColor(finalColors, !sourceSA.hasParam("OverwriteColors"), c.getTimestamp(), false);
         }
 
         c.clearControllers();
@@ -231,7 +231,6 @@ public class CardFactory {
 
         // Would like to move this away from in-game entities
         String originalPicture = cp.getImageKey(false);
-        //System.out.println(c.getName() + " -> " + originalPicture);
         c.setImageKey(originalPicture);
         c.setToken(cp.isToken());
 
@@ -535,7 +534,6 @@ public class CardFactory {
     }
 
     public static void copySpellAbility(SpellAbility from, SpellAbility to, final Card host, final Player p, final boolean lki) {
-
         if (from.getTargetRestrictions() != null) {
             to.setTargetRestrictions(from.getTargetRestrictions());
         }
@@ -563,7 +561,7 @@ public class CardFactory {
             to.setConditions((SpellAbilityCondition) from.getConditions().copy());
         }
 
-        // do this after other abilties are copied
+        // do this after other abilities are copied
         if (p != null) {
             to.setActivatingPlayer(p, lki);
         }

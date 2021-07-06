@@ -1,10 +1,10 @@
 Name:Goblin Tutor
 ManaCost:R
 Types:Instant
-A:SP$ RollDice | Cost$ R | On2$ GetGobTut | On3$ GetEnch | On4$ GetArtif | On5$ GetCreat| On6$ GetSpell | SpellDescription$ Roll a six-sided die. Search your library for the indicated card, reveal it, put it into your hand, then shuffle.\n2 — A card named Goblin Tutor\n3 — An enchantment\n4 — An artifact\n5 — A creature\n6 — An instant or sorcery
-SVar:GetGobTut:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.namedGoblin Tutor | ChangeNum$ 1
-SVar:GetEnch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Enchantment | ChangeNum$ 1
-SVar:GetArtif:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Artifact | ChangeNum$ 1
-SVar:GetCreat:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Creature | ChangeNum$ 1
-SVar:GetSpell:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Instant,Sorcery | ChangeNum$ 1
+A:SP$ RollDice | Cost$ R | ResultSubAbilities$ 2:GetGobTut,3:GetEnch,4:GetArtif,5:GetCreat,6:GetSpell | SpellDescription$ Roll a six-sided die. If you roll a 1, CARDNAME has no effect. Otherwise, search your library for the indicated card, reveal it, put it into your hand, then shuffle.
+SVar:GetGobTut:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.namedGoblin Tutor | ChangeNum$ 1 | SpellDescription$ 2 — A card named Goblin Tutor
+SVar:GetEnch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Enchantment | ChangeNum$ 1 | SpellDescription$ 3 — An enchantment
+SVar:GetArtif:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Artifact | ChangeNum$ 1 | SpellDescription$ 4 — An artifact
+SVar:GetCreat:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Creature | ChangeNum$ 1 | SpellDescription$ 5 — A creature
+SVar:GetSpell:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Instant,Sorcery | ChangeNum$ 1 | SpellDescription$ 6 — An instant or sorcery
 Oracle:Roll a six-sided die. If you roll a 1, Goblin Tutor has no effect. Otherwise, search your library for the indicated card, reveal it, put it into your hand, then shuffle.\n2 — A card named Goblin Tutor\n3 — An enchantment\n4 — An artifact\n5 — A creature\n6 — An instant or sorcery

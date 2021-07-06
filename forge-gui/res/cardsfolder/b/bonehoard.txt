@@ -8,4 +8,4 @@ SVar:X:Count$TypeInAllYards.Creature
 SVar:NeedsToPlayVar:X GE1
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bonehoard.jpg
-Oracle:Living weapon (When this Equipment enters the battlefield, create a 0/0 black Germ creature token, then attach this to it.)\nEquipped creature gets +X/+X, where X is the number of creature cards in all graveyards.\nEquip {2}
+Oracle:Living weapon (When this Equipment enters the battlefield, create a 0/0 black Phyrexian Germ creature token, then attach this to it.)\nEquipped creature gets +X/+X, where X is the number of creature cards in all graveyards.\nEquip {2}

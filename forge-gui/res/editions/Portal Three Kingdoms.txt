@@ -1,6 +1,6 @@
 [metadata]
 Code=PTK
-Date=1999-05
+Date=1999-07-06
 Name=Portal: Three Kingdoms
 Code2=P3
 MciCode=p3k

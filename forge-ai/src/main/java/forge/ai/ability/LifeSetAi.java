@@ -114,7 +114,7 @@ public class LifeSetAi extends SpellAbilityAi {
             sa.setXManaCostPaid(xPay);
             amount = xPay;
         } else {
-            amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
+            amount = AbilityUtils.calculateAmount(source, amountStr, sa);
         }
 
         // special cases when amount can't be calculated without targeting first

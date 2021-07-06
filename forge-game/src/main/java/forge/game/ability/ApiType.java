@@ -7,7 +7,7 @@ import java.util.Map;
 import forge.game.ability.effects.*;
 import forge.util.ReflectionUtil;
 
-/** 
+/**
  * TODO: Write javadoc for this type.
  *
  */
@@ -172,6 +172,7 @@ public enum ApiType {
     UnattachAll (UnattachAllEffect.class),
     Untap (UntapEffect.class),
     UntapAll (UntapAllEffect.class),
+    Venture (VentureEffect.class),
     Vote (VoteEffect.class),
     WinsGame (GameWinEffect.class),
 
@@ -187,7 +188,7 @@ public enum ApiType {
     private final Class<? extends SpellAbilityEffect> clsEffect;
 
     private static final Map<String, ApiType> allValues = new HashMap<>();
-    
+
     static {
     	for(ApiType t : ApiType.values()) {
     		allValues.put(t.name().toLowerCase(), t);
@@ -197,7 +198,7 @@ public enum ApiType {
     ApiType(Class<? extends SpellAbilityEffect> clsEf) { this(clsEf, true); }
     ApiType(Class<? extends SpellAbilityEffect> clsEf, final boolean isStateLess) {
         clsEffect = clsEf;
-        instanceEffect = isStateLess ? ReflectionUtil.makeDefaultInstanceOf(clsEf) : null; 
+        instanceEffect = isStateLess ? ReflectionUtil.makeDefaultInstanceOf(clsEf) : null;
     }
 
     public static ApiType smartValueOf(String value) {

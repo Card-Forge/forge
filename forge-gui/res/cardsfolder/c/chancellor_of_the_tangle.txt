@@ -1,6 +1,6 @@
 Name:Chancellor of the Tangle
 ManaCost:4 G G G
-Types:Creature Beast
+Types:Creature Phyrexian Beast
 PT:6/7
 K:MayEffectFromOpeningHand:ManaOnMain
 K:Vigilance

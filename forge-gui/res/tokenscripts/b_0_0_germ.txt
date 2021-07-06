@@ -1,6 +1,0 @@
-Name:Germ
-ManaCost:no cost
-Types:Creature Germ
-Colors:black
-PT:0/0
-Oracle:

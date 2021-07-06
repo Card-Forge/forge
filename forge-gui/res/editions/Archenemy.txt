@@ -4,7 +4,7 @@ Date=2010-06-18
 Name=Archenemy
 Code2=ARC
 MciCode=arc
-Type=Other
+Type=Multiplayer
 ScryfallCode=ARC
 
 [cards]

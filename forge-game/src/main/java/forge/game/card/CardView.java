@@ -389,6 +389,13 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.ChosenMode, c.getChosenMode());
     }
 
+    public String getCurrentRoom() {
+        return get(TrackableProperty.CurrentRoom);
+    }
+    void updateCurrentRoom(Card c) {
+        set(TrackableProperty.CurrentRoom, c.getCurrentRoom());
+    }
+
     private String getRemembered() {
         return get(TrackableProperty.Remembered);
     }

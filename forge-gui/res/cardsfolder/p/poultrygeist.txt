@@ -4,7 +4,7 @@ Types:Creature Bird Spirit
 PT:1/1
 K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigRoll | TriggerDescription$ Whenever a creature dies, you may roll a six-sided die. If you roll a 1, sacrifice CARDNAME. Otherwise, put a +1/+1 counter on CARDNAME.
-SVar:TrigRoll:DB$ RollDice | On1$ DBSac | Else$ DBCounter
+SVar:TrigRoll:DB$ RollDice | ResultSubAbilities$ 1:DBSac,Else:DBCounter
 SVar:DBSac:DB$ Sacrifice | Defined$ Self
 SVar:DBCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 DeckHas:Ability$Counters

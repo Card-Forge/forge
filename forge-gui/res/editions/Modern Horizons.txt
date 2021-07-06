@@ -4,7 +4,7 @@ Date=2019-06-14
 Name=Modern Horizons
 Code2=MH1
 MciCode=mh1
-Type=Other
+Type=Draft
 BoosterCovers=5
 Booster=10 Common:!fromSheet("MH1 Secret Cards"), 3 Uncommon:!fromSheet("MH1 Secret Cards"), 1 RareMythic:!fromSheet("MH1 Secret Cards"), 1 fromSheet("MH1 Lands")
 BoosterBox=24
@@ -273,7 +273,7 @@ b_2_2_zombie
 c_0_0_a_construct_total_artifacts
 c_1_1_a_myr
 c_2_2_shapeshifter_changeling
-c_3_3_a_golem
+c_3_3_a_phyrexian_golem
 g_1_1_squirrel
 g_1_2_spider_reach
 g_2_2_bear

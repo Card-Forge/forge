@@ -12,6 +12,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -36,6 +38,7 @@ import com.google.common.collect.Multimap;
 import forge.LobbyPlayer;
 import forge.StaticData;
 import forge.ai.GameState;
+import forge.ai.PlayerControllerAi;
 import forge.card.CardDb;
 import forge.card.CardStateName;
 import forge.card.CardType;
@@ -393,16 +396,38 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public Map<GameEntity, Integer> divideShield(Card effectSource, Map<GameEntity, Integer> affected, int shieldAmount) {
         final CardView vSource = CardView.get(effectSource);
-        final Map<GameEntityView, Integer> vAffected = new HashMap<>(affected.size());
+        final Map<Object, Integer> vAffected = new HashMap<>(affected.size());
         for (Map.Entry<GameEntity, Integer> e : affected.entrySet()) {
             vAffected.put(GameEntityView.get(e.getKey()), e.getValue());
         }
-        final Map<GameEntityView, Integer> vResult = getGui().assignGenericAmount(vSource, vAffected, shieldAmount, false,
+        final Map<Object, Integer> vResult = getGui().assignGenericAmount(vSource, vAffected, shieldAmount, false,
             localizer.getMessage("lblShield"));
         Map<GameEntity, Integer> result = new HashMap<>(vResult.size());
         for (Map.Entry<GameEntity, Integer> e : affected.entrySet()) {
             if (vResult.containsKey(GameEntityView.get(e.getKey()))) {
                 result.put(e.getKey(), vResult.get(GameEntityView.get(e.getKey())));
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public Map<Byte, Integer> specifyManaCombo(SpellAbility sa, ColorSet colorSet, int manaAmount, boolean different) {
+        final CardView vSource = CardView.get(sa.getHostCard());
+        final Map<Object, Integer> vAffected = new LinkedHashMap<>(manaAmount);
+        Integer maxAmount = different ? 1 : manaAmount;
+        Iterator<Byte> it = colorSet.iterator();
+        while (it.hasNext()) {
+            vAffected.put(it.next(), maxAmount);
+        }
+        final Map<Object, Integer> vResult = getGui().assignGenericAmount(vSource, vAffected, manaAmount, false,
+            localizer.getMessage("lblMana").toLowerCase());
+        Map<Byte, Integer> result = new HashMap<>(vResult.size());
+        it = colorSet.iterator();
+        while (it.hasNext()) {
+            Byte color = it.next();
+            if (vResult.containsKey(color)) {
+                result.put(color, vResult.get(color));
             }
         }
         return result;
@@ -487,7 +512,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     private boolean useSelectCardsInput(final FCollectionView<? extends GameEntity> sourceList) {
         // can't use InputSelect from GUI thread (e.g., DevMode Tutor)
-        if ( FThreads.isGuiThread() ) { return false; }
+        if (FThreads.isGuiThread()) { return false; }
 
         // if UI_SELECT_FROM_CARD_DISPLAYS not set use InputSelect only for battlefield and player hand
         // if UI_SELECT_FROM_CARD_DISPLAYS set and using desktop GUI use InputSelect for any zone that can be shown
@@ -576,8 +601,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             tempShow(delayedReveal.getCards());
         }
 
-        GameEntityViewMap<T, GameEntityView> gameCacheChoose = GameEntityView.getMap(optionList);
-
         if (useSelectCardsInput(optionList)) {
             final InputSelectEntitiesFromList<T> input = new InputSelectEntitiesFromList<>(this, isOptional ? 0 : 1, 1,
                     optionList, sa);
@@ -588,6 +611,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             return Iterables.getFirst(input.getSelected(), null);
         }
 
+        GameEntityViewMap<T, GameEntityView> gameCacheChoose = GameEntityView.getMap(optionList);
         final GameEntityView result = getGui().chooseSingleEntityForEffect(title,
                 gameCacheChoose.getTrackableKeys(), delayedReveal, isOptional);
         endTempShowCards();
@@ -601,8 +625,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public <T extends GameEntity> List<T> chooseEntitiesForEffect(final FCollectionView<T> optionList, final int  min, final int max,
             final DelayedReveal delayedReveal, final SpellAbility sa, final String title, final Player targetedPlayer, Map<String, Object> params) {
-
-
         // useful details for debugging problems with the mass select logic
         Sentry.getContext().addExtra("Card", sa.getCardView().toString());
         Sentry.getContext().addExtra("SpellAbility", sa.toString());
@@ -630,6 +652,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             endTempShowCards();
             return (List<T>) input.getSelected();
         }
+
         GameEntityViewMap<T, GameEntityView> gameCacheEntity = GameEntityView.getMap(optionList);
         final List<GameEntityView> views = getGui().chooseEntitiesForEffect(title, gameCacheEntity.getTrackableKeys(), min, max, delayedReveal);
         endTempShowCards();
@@ -675,8 +698,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         Map<SpellAbilityView, SpellAbility> spellViewCache = SpellAbilityView.getMap(spells);
         Object choice = getGui().one(title, Lists.newArrayList(spellViewCache.keySet()));
 
-        // Human is supposed to read the message and understand from it what to
-        // choose
+        // Human is supposed to read the message and understand from it what to choose
         return spellViewCache.get(choice);
     }
 
@@ -923,8 +945,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         CardCollection toTop = null;
 
         tempShowCards(topN);
-        if ( FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS) &&
-             (!GuiBase.getInterface().isLibgdxPort()) && (!GuiBase.isNetworkplay())) { //prevent crash for  desktop vs mobile port it will crash the netplay since mobile doesnt have manipulatecardlist, send the alternate below
+        if (FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS) &&
+             (!GuiBase.getInterface().isLibgdxPort()) && (!GuiBase.isNetworkplay())) { //prevent crash for desktop vs mobile port it will crash the netplay since mobile doesnt have manipulatecardlist, send the alternate below
             CardCollectionView cardList = player.getCardsIn(ZoneType.Library);
             ImmutablePair<CardCollection, CardCollection> result =
             arrangeForMove(localizer.getMessage("lblMoveCardstoToporBbottomofLibrary"), cardList, topN, true, true);
@@ -1541,8 +1563,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public List<SpellAbility> chooseSaToActivateFromOpeningHand(final List<SpellAbility> usableFromOpeningHand) {
-
-
         final CardCollection srcCards = new CardCollection();
         for (final SpellAbility sa : usableFromOpeningHand) {
             srcCards.add(sa.getHostCard());
@@ -1950,7 +1970,44 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             checkSA = checkSA.getSubAbility();
         }
 
-        return select.chooseTargets(null, null, null, false, canFilterMustTarget);
+        boolean result = select.chooseTargets(null, null, null, false, canFilterMustTarget);
+
+        // assign divided as you choose values
+        if (result && currentAbility.isDividedAsYouChoose() && currentAbility.getStillToDivide() > 0) {
+            int amount = currentAbility.getStillToDivide();
+            final List<GameEntity> targets = currentAbility.getTargets().getTargetEntities();
+            if (targets.size() == 1) {
+                currentAbility.addDividedAllocation(targets.get(0), amount);
+            } else if (targets.size() == amount) {
+                for (GameEntity e : targets) {
+                    currentAbility.addDividedAllocation(e, 1);
+                }
+            } else if (targets.size() > amount) {
+                return false;
+            } else {
+                String label = "lblDamage";
+                if (currentAbility.getApi() == ApiType.PreventDamage) {
+                    label = "lblShield";
+                } else if (currentAbility.getApi() == ApiType.PutCounter) {
+                    label = "lblCounters";
+                }
+                label = localizer.getMessage(label).toLowerCase();
+                final CardView vSource = CardView.get(currentAbility.getHostCard());
+                final Map<Object, Integer> vTargets = new HashMap<>(targets.size());
+                for (GameEntity e : targets) {
+                    vTargets.put(GameEntityView.get(e), amount);
+                }
+                final Map<Object, Integer> vResult = getGui().assignGenericAmount(vSource, vTargets, amount, true, label);
+                for (GameEntity e : targets) {
+                    currentAbility.addDividedAllocation(e, vResult.get(GameEntityView.get(e)));
+                }
+                if (currentAbility.getStillToDivide() > 0) {
+                    return false;
+                }
+            }
+        }
+
+        return result;
     }
 
     @Override
@@ -2431,7 +2488,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             if (subtract) {
                 card.subtractCounter(counter, count);
             } else {
-                card.addCounter(counter, count, card.getController(), false, null);
+                card.addCounter(counter, count, card.getController(), null, false, null);
             }
 
         }
@@ -2495,7 +2552,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
          */
         @Override
         public void setPlayerLife() {
-
             GameEntityViewMap<Player, PlayerView> gameCachePlayer = GameEntityView.getMap(getGame().getPlayers());
 
             final PlayerView pv = getGui().oneOrNone(localizer.getMessage("lblSetLifeforWhichPlayer"), gameCachePlayer.getTrackableKeys());
@@ -2941,6 +2997,18 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     PlanarDice.roll(p, PlanarDice.Planeswalk);
                 }
             });
+        }
+
+        public void askAI() {
+            PlayerControllerAi ai = new PlayerControllerAi(player.getGame(), player, player.getOriginalLobbyPlayer());
+            player.runWithController(new Runnable() {
+                @Override
+                public void run() {
+                    List<SpellAbility> sas = ai.chooseSpellAbilityToPlay();
+                    SpellAbility chosen = sas == null ? null : sas.get(0);
+                    getGui().message(chosen == null ? "AI doesn't want to play anything right now" : chosen.getHostCard().toString(), "AI Play Suggestion");
+                }
+            }, ai);
         }
     }
 

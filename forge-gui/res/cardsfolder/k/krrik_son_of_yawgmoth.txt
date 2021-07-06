@@ -1,6 +1,6 @@
 Name:K'rrik, Son of Yawgmoth
 ManaCost:4 B/P B/P B/P
-Types:Legendary Creature Horror Minion
+Types:Legendary Creature Phyrexian Horror Minion
 PT:2/2
 K:Lifelink
 S:Mode$ Continuous | Affected$ You | AddKeyword$ PayLifeInsteadOf:B | Description$ For each {B} in a cost, you may pay 2 life rather than pay that mana.

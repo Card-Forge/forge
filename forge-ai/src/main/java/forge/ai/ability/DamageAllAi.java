@@ -46,7 +46,7 @@ public class  DamageAllAi extends SpellAbilityAi {
 
         int x = -1;
         final String damage = sa.getParam("NumDmg");
-        int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
+        int dmg = AbilityUtils.calculateAmount(source, damage, sa);
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$Converge")) {
         	dmg = ComputerUtilMana.getConvergeCount(sa, ai);
         }
@@ -202,7 +202,7 @@ public class  DamageAllAi extends SpellAbilityAi {
             dmg = ComputerUtilCost.getMaxXValue(sa, ai);
             sa.setXManaCostPaid(dmg);
         } else {
-            dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
+            dmg = AbilityUtils.calculateAmount(source, damage, sa);
         }
 
         if (sa.hasParam("ValidPlayers")) {
@@ -286,7 +286,7 @@ public class  DamageAllAi extends SpellAbilityAi {
             dmg = ComputerUtilCost.getMaxXValue(sa, ai);
             sa.setXManaCostPaid(dmg);
         } else {
-            dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
+            dmg = AbilityUtils.calculateAmount(source, damage, sa);
         }
 
         if (sa.hasParam("ValidPlayers")) {

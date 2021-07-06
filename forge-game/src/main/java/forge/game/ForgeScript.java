@@ -11,6 +11,7 @@ import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
+import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 
 public class ForgeScript {
@@ -122,9 +123,7 @@ public class ForgeScript {
             return Expressions.compare(y, property, x);
         } else return cardState.getTypeWithChanges().hasStringType(property);
 
-
     }
-
 
     public static boolean spellAbilityHasProperty(SpellAbility sa, String property, Player sourceController,
             Card source, CardTraitBase spellAbility) {
@@ -155,6 +154,8 @@ public class ForgeScript {
             return sa.isAftermath();
         } else if (property.equals("MorphUp")) {
             return sa.isMorphUp();
+        } else if (property.equals("Modular")) {
+            return sa.hasParam("Modular");
         } else if (property.equals("Equip")) {
             return sa.hasParam("Equip");
         } else if (property.equals("Boast")) {
@@ -186,7 +187,14 @@ public class ForgeScript {
         } else if (property.equals("OppCtrl")) {
             return sa.getActivatingPlayer().isOpponentOf(sourceController);
         } else if (property.startsWith("cmc")) {
-            int y = sa.getPayCosts().getTotalMana().getCMC();
+            int y = 0;
+            // spell was on the stack
+            if (sa.getCardState().getCard().isInZone(ZoneType.Stack)) {
+                y = sa.getHostCard().getCMC();
+            }
+            else {
+                y = sa.getPayCosts().getTotalMana().getCMC();
+            }
             int x = AbilityUtils.calculateAmount(spellAbility.getHostCard(), property.substring(5), spellAbility);
             if (!Expressions.compare(y, property, x)) {
                 return false;

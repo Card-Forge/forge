@@ -20,7 +20,7 @@ ALTERNATE
 Name:Sanctum of the Sun
 ManaCost:no cost
 Colors:colorless
-Types:Land
+Types:Legendary Land
 A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ X | SpellDescription$ Add X mana of any one color, where X is your life total.
 SVar:X:Count$YourLifeTotal
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sanctum_of_the_sun.jpg

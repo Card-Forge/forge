@@ -2,7 +2,7 @@
 Code=F12
 Date=2012-01-01
 Name=Friday Night Magic 2012
-Type=Promos
+Type=Promo
 ScryfallCode=F12
 
 [cards]

@@ -1,0 +1,7 @@
+Name:Faerie Dragon
+ManaCost:no cost
+Types:Creature Faerie Dragon
+Colors:blue
+PT:1/1
+K:Flying
+Oracle:Flying

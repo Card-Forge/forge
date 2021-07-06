@@ -3,7 +3,7 @@ Code=DD2
 Date=2008-11-07
 Name=Duel Decks: Jace vs. Chandra
 MciCode=jvc
-Type=Duel_Decks
+Type=Duel_Deck
 ScryfallCode=DD2
 
 [cards]

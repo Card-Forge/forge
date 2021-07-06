@@ -349,7 +349,7 @@ public class Match {
 
             if (!lostOwnership.isEmpty()) {
                 List<PaperCard> lostPaperOwnership = new ArrayList<>();
-                for(Card c : lostOwnership) {
+                for (Card c : lostOwnership) {
                     lostPaperOwnership.add((PaperCard)c.getPaperCard());
                 }
                 outcome.addAnteLost(registered, lostPaperOwnership);
@@ -357,7 +357,7 @@ public class Match {
 
             if (!gainedOwnership.isEmpty()) {
                 List<PaperCard> gainedPaperOwnership = new ArrayList<>();
-                for(Card c : gainedOwnership) {
+                for (Card c : gainedOwnership) {
                     gainedPaperOwnership.add((PaperCard)c.getPaperCard());
                 }
                 outcome.addAnteWon(registered, gainedPaperOwnership);

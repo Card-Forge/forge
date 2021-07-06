@@ -3,7 +3,7 @@ Code=V14
 Date=2014-08-22
 Name=From the Vault: Annihilation
 MciCode=v14
-Type=From_the_Vault
+Type=Collector_Edition
 ScryfallCode=V14
 
 [cards]

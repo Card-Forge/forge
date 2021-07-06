@@ -1,6 +1,6 @@
 Name:Contagious Nim
 ManaCost:2 B
-Types:Creature Zombie
+Types:Creature Phyrexian Zombie
 PT:2/2
 K:Infect
 SVar:Picture:http://www.wizards.com/global/images/magic/general/contagious_nim.jpg

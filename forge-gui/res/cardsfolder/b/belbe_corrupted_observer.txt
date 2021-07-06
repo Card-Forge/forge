@@ -1,6 +1,6 @@
 Name:Belbe, Corrupted Observer
 ManaCost:B G
-Types:Legendary Creature Elf Zombie
+Types:Legendary Creature Phyrexian Zombie Elf
 PT:2/2
 T:Mode$ Phase | Phase$ Main2 | TriggerZones$ Battlefield | Execute$ TrigMana | TriggerDescription$ At the beginning of each player's postcombat main phase, that player adds {C}{C} for each of your opponents who lost life this turn. (Damage causes loss of life.)
 SVar:TrigMana:DB$ Mana | Produced$ C | Amount$ X | Defined$ TriggeredPlayer

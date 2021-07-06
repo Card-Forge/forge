@@ -126,7 +126,7 @@ public class CostSacrifice extends CostPartWithList {
     @Override
     protected Card doPayment(SpellAbility ability, Card targetCard) {
         // no table there, it is already handled by CostPartWithList
-        return targetCard.getGame().getAction().sacrifice(targetCard, ability, null);
+        return targetCard.getGame().getAction().sacrifice(targetCard, ability, null, null);
     }
 
     /* (non-Javadoc)

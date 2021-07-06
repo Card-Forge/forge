@@ -105,7 +105,6 @@ public class HumanPlay {
 
         sa = AbilityUtils.addSpliceEffects(sa);
 
-        // System.out.println("Playing:" + sa.getDescription() + " of " + sa.getHostCard() +  " new = " + newAbility);
         final HumanPlaySpellAbility req = new HumanPlaySpellAbility(controller, sa);
         if (!req.playAbility(true, false, false)) {
             if (flippedToCast && !castFaceDown) {
@@ -674,7 +673,7 @@ public class HumanPlay {
             final Card offering = ability.getSacrificedAsOffering();
             offering.setUsedToPay(false);
             if (!manaInputCancelled) {
-                game.getAction().sacrifice(offering, ability, table);
+                game.getAction().sacrifice(offering, ability, table, null);
             }
             ability.resetSacrificedAsOffering();
         }
@@ -682,7 +681,7 @@ public class HumanPlay {
             final Card emerge = ability.getSacrificedAsEmerge();
             emerge.setUsedToPay(false);
             if (!manaInputCancelled) {
-                game.getAction().sacrifice(emerge, ability, table);
+                game.getAction().sacrifice(emerge, ability, table, null);
             }
             ability.resetSacrificedAsEmerge();
         }
@@ -786,7 +785,7 @@ public class HumanPlay {
             if (ability.getSacrificedAsOffering() != null) {
                 System.out.println("Finishing up Offering");
                 offering.setUsedToPay(false);
-                activator.getGame().getAction().sacrifice(offering, ability, null);
+                activator.getGame().getAction().sacrifice(offering, ability, null, null);
                 ability.resetSacrificedAsOffering();
             }
         }
@@ -797,7 +796,7 @@ public class HumanPlay {
             if (ability.getSacrificedAsEmerge() != null) {
                 System.out.println("Finishing up Emerge");
                 emerge.setUsedToPay(false);
-                activator.getGame().getAction().sacrifice(emerge, ability, null);
+                activator.getGame().getAction().sacrifice(emerge, ability, null, null);
                 ability.resetSacrificedAsEmerge();
             }
         }

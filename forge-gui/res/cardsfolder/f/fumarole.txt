@@ -1,7 +1,7 @@
 Name:Fumarole
 ManaCost:3 B R
 Types:Sorcery
-A:SP$ Destroy | Cost$ 3 B R PayLife<3> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBDestroy | SpellDescription$ Destroy target creature and target land.
-SVar:DBDestroy:DB$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land
-SVar:Picture:http://www.wizards.com/global/images/magic/general/fumarole.jpg
+A:SP$ Pump | Cost$ 3 B R PayLife<3> | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Destroy | IsCurse$ True | SubAbility$ DBLand | SpellDescription$ Destroy target creature and target land. | StackDescription$ None
+SVar:DBLand:DB$ Pump | ValidTgts$ Land | TgtPrompt$ Select target land | AILogic$ Destroy | IsCurse$ True | SubAbility$ DBDestroy | StackDescription$ None
+SVar:DBDestroy:DB$ Destroy | Defined$ Targeted
 Oracle:As an additional cost to cast this spell, pay 3 life.\nDestroy target creature and target land.

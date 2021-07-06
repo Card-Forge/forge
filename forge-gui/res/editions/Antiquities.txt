@@ -1,6 +1,6 @@
 [metadata]
 Code=ATQ
-Date=1994-03-01
+Date=1994-03-04
 Name=Antiquities
 Code2=AQ
 MciCode=aq

@@ -4,7 +4,7 @@ Date=2014-05-30
 Name=Modern Event Deck
 Code2=MD1
 MciCode=md1
-Type=other
+Type=Boxed_Set
 ScryfallCode=MD1
 
 [cards]
@@ -38,4 +38,4 @@ ScryfallCode=MD1
 [tokens]
 w_1_1_soldier
 w_1_1_spirit_flying
-c_1_1_a_myr
+c_1_1_a_phyrexian_myr

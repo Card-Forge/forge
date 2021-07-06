@@ -1,6 +1,6 @@
 Name:Priest of Yawgmoth
 ManaCost:1 B
-Types:Creature Human Cleric
+Types:Creature Phyrexian Human Cleric
 PT:1/2
 A:AB$ Mana | Cost$ T Sac<1/Artifact> | Produced$ B | Amount$ X | SpellDescription$ Add an amount of black mana equal to the sacrificed artifact's mana value.
 SVar:X:Sacrificed$CardManaCost

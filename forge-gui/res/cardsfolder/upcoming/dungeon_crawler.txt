@@ -1,0 +1,8 @@
+Name:Dungeon Crawler
+ManaCost:B
+Types:Creature Zombie
+PT:2/1
+K:CARDNAME enters the battlefield tapped.
+T:Mode$ DungeonCompleted | ValidPlayer$ You | TriggerZones$ Graveyard | OptionalDecider$ You | Execute$ DBReturn | TriggerDescription$ Whenever you complete a dungeon, you may return CARDNAME from your graveyard to your hand.
+SVar:DBReturn:DB$ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ Self
+Oracle:Dungeon Crawler enters the battlefield tapped.\nWhenever you complete a dungeon, you may return Dungeon Crawler from your graveyard to your hand.

@@ -2,7 +2,7 @@
 Code=PCON
 Date=2009-02-06
 Name=Conflux Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PCON
 
 [cards]

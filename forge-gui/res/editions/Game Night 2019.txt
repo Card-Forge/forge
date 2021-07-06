@@ -4,7 +4,7 @@ Date=2019-11-15
 Name=Game Night 2019
 Code2=GN2
 MciCode=gn2
-Type=Other
+Type=Multiplayer
 ScryfallCode=GN2
 
 [cards]

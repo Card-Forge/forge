@@ -3,6 +3,7 @@ ManaCost:3 R
 Types:Creature Goblin
 PT:2/2
 T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDestroyCreature | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, you may sacrifice it. If you do, destroy target creature and target land.
-SVar:TrigDestroyCreature:AB$ Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBDestroyLand
-SVar:DBDestroyLand:DB$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land
+SVar:TrigDestroyCreature:AB$ Pump | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Destroy | IsCurse$ True | SubAbility$ DBLand
+SVar:DBLand:DB$ Pump | ValidTgts$ Land | TgtPrompt$ Select target land | AILogic$ Destroy | IsCurse$ True | SubAbility$ DBDestroy
+SVar:DBDestroy:DB$ Destroy | Defined$ Targeted
 Oracle:Whenever Goblin Grenadiers attacks and isn't blocked, you may sacrifice it. If you do, destroy target creature and target land.

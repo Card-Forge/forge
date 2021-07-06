@@ -164,7 +164,7 @@ public class SealedCardPoolGenerator {
         switch(poolType) {
             case Full:
                 // Choose number of boosters
-                if (!chooseNumberOfBoosters(new UnOpenedProduct(SealedProduct.Template.genericBooster))) {
+                if (!chooseNumberOfBoosters(new UnOpenedProduct(SealedProduct.Template.genericDraftBooster))) {
                     return;
                 }
                 landSetCode = CardEdition.Predicates.getRandomSetWithAllBasicLands(FModel.getMagicDb().getEditions()).getCode();
@@ -209,7 +209,7 @@ public class SealedCardPoolGenerator {
                             code = pieces[1];
                         }
 
-                        // Generate boosters
+                        // Generate draft boosters
                         for(int i = 0; i < num; i++) {
                             this.product.add(new UnOpenedProduct(FModel.getMagicDb().getBoosters().get(code)));
                         }

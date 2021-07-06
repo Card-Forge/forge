@@ -6,4 +6,4 @@ K:Equip:4
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 4 | AddKeyword$ Reach | Description$ Equipped creature gets +2/+4 and has reach.
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/strandwalker.jpg
-Oracle:Living weapon (When this Equipment enters the battlefield, create a 0/0 black Germ creature token, then attach this to it.)\nEquipped creature gets +2/+4 and has reach.\nEquip {4}
+Oracle:Living weapon (When this Equipment enters the battlefield, create a 0/0 black Phyrexian Germ creature token, then attach this to it.)\nEquipped creature gets +2/+4 and has reach.\nEquip {4}

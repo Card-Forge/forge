@@ -2,7 +2,7 @@
 Code=PF20
 Date=2020-01-01
 Name=MagicFest 2020
-Type=Promos
+Type=Promo
 ScryfallCode=PF20
 
 [cards]

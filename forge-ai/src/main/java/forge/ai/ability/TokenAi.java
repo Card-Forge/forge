@@ -50,7 +50,6 @@ public class TokenAi extends SpellAbilityAi {
 
     @Override
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
-
         final Card source = sa.getHostCard();
         // Planeswalker-related flags
         boolean pwMinus = false;
@@ -143,7 +142,7 @@ public class TokenAi extends SpellAbilityAi {
         final Player opp = ai.getWeakestOpponent();
 
         if (ComputerUtil.preventRunAwayActivations(sa)) {
-            return false;   // prevent infinite tokens?
+            return false; // prevent infinite tokens?
         }
         Card actualToken = spawnToken(ai, sa);
 

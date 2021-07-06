@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -59,7 +59,7 @@ import forge.util.collect.FCollectionView;
  * <p>
  * Combat class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id$
  */
@@ -78,7 +78,7 @@ public class Combat {
     private Map<GameEntity, CombatLki> lkiCache = Maps.newHashMap();
     private CardDamageMap damageMap = new CardDamageMap();
 
-    // List holds creatures who have dealt 1st strike damage to disallow them deal damage on regular basis (unless they have double-strike KW) 
+    // List holds creatures who have dealt 1st strike damage to disallow them deal damage on regular basis (unless they have double-strike KW)
     private CardCollection combatantsThatDealtFirstStrikeDamage = new CardCollection();
 
     public Combat(final Player attacker) {
@@ -110,7 +110,7 @@ public class Combat {
         for (Entry<AttackingBand, Card> entry : combat.blockedBands.entries()) {
             blockedBands.put(bandsMap.get(entry.getKey()), map.map(entry.getValue()));
         }
-        
+
         for (Entry<Card, CardCollection> entry : combat.attackersOrderedForDamageAssignment.entrySet()) {
             attackersOrderedForDamageAssignment.put(map.map(entry.getKey()), map.mapCollection(entry.getValue()));
         }
@@ -277,7 +277,7 @@ public class Combat {
             }
         }
         return null;
-    }    
+    }
 
     public final Player getDefenderPlayerByAttacker(final Card c) {
         GameEntity defender = getDefenderByAttacker(c);
@@ -300,10 +300,10 @@ public class Combat {
                 return ab;
             }
         }
-        CombatLki lki = lkiCache.get(c); 
+        CombatLki lki = lkiCache.get(c);
         return lki == null || !lki.isAttacker ? null : lki.getFirstBand();
     }
-    
+
     public final AttackingBand getBandOfAttackerNotNull(final Card c) {
         AttackingBand band = getBandOfAttacker(c);
         if (band == null) {
@@ -314,8 +314,8 @@ public class Combat {
 
     public final List<AttackingBand> getAttackingBands() {
         return Lists.newArrayList(attackedByBands.values());
-    } 
-    
+    }
+
     /**
      * Checks if a card is attacking, returns true if the card was attacking when it left the battlefield
      */
@@ -333,7 +333,7 @@ public class Combat {
         }
         return false;
     }
-  
+
     /**
      * Checks if a card is currently attacking, returns false if the card is not currently attacking, even if its LKI was.
      */
@@ -355,7 +355,7 @@ public class Combat {
     }
 
     public final CardCollection getBlockers(final Card card) {
-        // If requesting the ordered blocking list pass true, directly. 
+        // If requesting the ordered blocking list pass true, directly.
         AttackingBand band = getBandOfAttacker(card);
         Collection<Card> blockers = blockedBands.get(band);
         return blockers == null ? new CardCollection() : new CardCollection(blockers);
@@ -456,7 +456,7 @@ public class Combat {
     }
 
     /** If there are multiple blockers, the Attacker declares the Assignment Order */
-    public void orderBlockersForDamageAssignment() { // this method performs controller's role 
+    public void orderBlockersForDamageAssignment() { // this method performs controller's role
         List<Pair<Card, CardCollection>> blockersNeedManualOrdering = new ArrayList<>();
         for (AttackingBand band : attackedByBands.values()) {
             if (band.isEmpty()) continue;
@@ -475,15 +475,15 @@ public class Combat {
                 }
             }
         }
-        
-        // brought this out of iteration on bands to avoid concurrency problems 
+
+        // brought this out of iteration on bands to avoid concurrency problems
         for (Pair<Card, CardCollection> pair : blockersNeedManualOrdering) {
             orderBlockersForDamageAssignment(pair.getLeft(), pair.getRight());
         }
     }
-    
+
     /** If there are multiple blockers, the Attacker declares the Assignment Order */
-    public void orderBlockersForDamageAssignment(Card attacker, CardCollection blockers) { // this method performs controller's role 
+    public void orderBlockersForDamageAssignment(Card attacker, CardCollection blockers) { // this method performs controller's role
         if (blockers.size() <= 1) {
             blockersOrderedForDamageAssignment.put(attacker, new CardCollection(blockers));
             return;
@@ -513,7 +513,7 @@ public class Combat {
      * Add a blocker to the damage assignment order of an attacker. The
      * relative order of creatures already blocking the attacker may not be
      * changed. Performs controller's role.
-     * 
+     *
      * @param attacker the attacking creature.
      * @param blocker the blocking creature.
      */
@@ -527,7 +527,7 @@ public class Combat {
             blockersOrderedForDamageAssignment.put(attacker, orderedBlockers);
     	}
     }
-    
+
     public void orderAttackersForDamageAssignment() { // this method performs controller's role
         // If there are multiple blockers, the Attacker declares the Assignment Order
         for (final Card blocker : getAllBlockers()) {
@@ -538,7 +538,7 @@ public class Combat {
     public void orderAttackersForDamageAssignment(Card blocker) { // this method performs controller's role
         CardCollection attackers = getAttackersBlockedBy(blocker);
         // They need a reverse map here: Blocker => List<Attacker>
-        
+
         Player blockerCtrl = blocker.getController();
         CardCollection orderedAttacker = attackers.size() <= 1 ? attackers : blockerCtrl.getController().orderAttackers(blocker, attackers);
 
@@ -549,11 +549,11 @@ public class Combat {
     // removes references to this attacker from all indices and orders
     public void unregisterAttacker(final Card c, AttackingBand ab) {
         blockersOrderedForDamageAssignment.remove(c);
-        
+
         Collection<Card> blockers = blockedBands.get(ab);
         if (blockers != null) {
             for (Card b : blockers) {
-                // Clear removed attacker from assignment order 
+                // Clear removed attacker from assignment order
                 if (attackersOrderedForDamageAssignment.containsKey(b)) {
                     attackersOrderedForDamageAssignment.get(b).remove(c);
                 }
@@ -655,7 +655,7 @@ public class Combat {
         }
         return true;
     }
-    
+
     // Call this method right after turn-based action of declare blockers has been performed
     public final void fireTriggersForUnblockedAttackers(final Game game) {
         boolean bFlag = false;
@@ -698,7 +698,7 @@ public class Combat {
             if (!dealDamageThisPhase(blocker, firstStrikeDamage)) {
                 continue;
             }
-            
+
             if (firstStrikeDamage) {
                 combatantsThatDealtFirstStrikeDamage.add(blocker);
             }
@@ -737,7 +737,7 @@ public class Combat {
             if (!dealDamageThisPhase(attacker, firstStrikeDamage)) {
                 continue;
             }
-            
+
             if (firstStrikeDamage) {
                 combatantsThatDealtFirstStrikeDamage.add(attacker);
             }
@@ -750,7 +750,7 @@ public class Combat {
             if (damageDealt <= 0) {
                 continue;
             }
-            
+
             AttackingBand band = getBandOfAttacker(attacker);
             if (band == null) {
                 continue;
@@ -764,6 +764,13 @@ public class Combat {
                             CardTranslation.getTranslatedName(attacker.getName()))));
             boolean trampler = attacker.hasKeyword(Keyword.TRAMPLE);
             orderedBlockers = blockersOrderedForDamageAssignment.get(attacker);
+            boolean assignCombatDamageToCreature = ((orderedBlockers == null || orderedBlockers.isEmpty()) &&
+                    getDefendersCreatures().size() > 0 &&
+                    attacker.hasKeyword("If CARDNAME is unblocked, you may have it assign its combat damage to " +
+                            "a creature defending player controls.") &&
+                    attacker.getController().getController().confirmAction(null, null,
+                    Localizer.getInstance().getMessage("lblAssignCombatDamageToCreature",
+                            CardTranslation.getTranslatedName(attacker.getName()))));
             if (divideCombatDamageAsChoose) {
                 if (orderedBlockers == null || orderedBlockers.isEmpty()) {
                     orderedBlockers = getDefendersCreatures();
@@ -790,7 +797,11 @@ public class Combat {
                 defender = getDefenderPlayerByAttacker(attacker);
             }
             if (orderedBlockers == null || orderedBlockers.isEmpty()) {
-                if (trampler || !band.isBlocked()) { // this is called after declare blockers, no worries 'bout nulls in isBlocked
+                if (assignCombatDamageToCreature) {
+                    Card chosen = attacker.getController().getController().chooseCardsForEffect(getDefendersCreatures(),
+                            null, Localizer.getInstance().getMessage("lblChooseCreature"), 1, 1, false, null).get(0);
+                    damageMap.put(attacker, chosen, damageDealt);
+                } else if (trampler || !band.isBlocked()) { // this is called after declare blockers, no worries 'bout nulls in isBlocked
                     damageMap.put(attacker, defender, damageDealt);
                 } // No damage happens if blocked but no blockers left
             }
@@ -827,7 +838,7 @@ public class Combat {
         } // for
         return assignedDamage;
     }
-    
+
     private final boolean dealDamageThisPhase(Card combatant, boolean firstStrikeDamage) {
         // During first strike damage, double strike and first strike deal damage
         // During regular strike damage, double strike and anyone who hasn't dealt damage deal damage
@@ -885,7 +896,7 @@ public class Combat {
     public boolean isPlayerAttacked(Player who) {
         for (GameEntity defender : attackedByBands.keySet()) {
             Card defenderAsCard = defender instanceof Card ? (Card)defender : null;
-            if ((null != defenderAsCard && defenderAsCard.getController() != who) || 
+            if ((null != defenderAsCard && defenderAsCard.getController() != who) ||
                 (null == defenderAsCard && defender != who)) {
                 continue; // defender is not related to player 'who'
             }

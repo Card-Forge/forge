@@ -65,7 +65,7 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
             for (final Player p : tgtPlayers) {
                 if ((tgt == null) || p.canBeTargetedBy(sa)) {
                     String choice = p.getController().chooseSomeType(type, sa, validTypes, invalidTypes);
-                    if (!sa.hasParam("Secondary")) {
+                    if (!sa.hasParam("ChooseType2")) {
                         card.setChosenType(choice);
                     } else {
                         card.setChosenType2(choice);

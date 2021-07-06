@@ -1,6 +1,6 @@
 Name:Atraxa, Praetors' Voice
 ManaCost:G W U B
-Types:Legendary Creature Angel Horror
+Types:Legendary Creature Phyrexian Angel Horror
 PT:4/4
 K:Flying
 K:Vigilance

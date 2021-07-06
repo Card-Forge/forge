@@ -3,7 +3,7 @@ Code=DDM
 Date=2014-03-14
 Name=Duel Decks: Jace vs. Vraska
 MciCode=ddm
-Type=Duel_Decks
+Type=Duel_Deck
 ScryfallCode=DDM
 
 [cards]

@@ -49,6 +49,7 @@ public abstract class GameState {
         ZONES.put(ZoneType.Library, "library");
         ZONES.put(ZoneType.Exile, "exile");
         ZONES.put(ZoneType.Command, "command");
+        ZONES.put(ZoneType.Sideboard, "sideboard");
     }
 
     private int humanLife = -1;
@@ -398,6 +399,12 @@ public abstract class GameState {
                 // Need to figure out a better way to detect if it's actually on adventure.
                 newText.append("|OnAdventure");
             }
+            if (c.isForetold()) {
+                newText.append("|Foretold");
+            }
+            if (c.isForetoldThisTurn()) {
+                newText.append("|ForetoldThisTurn");
+            }
 
         }
 
@@ -563,6 +570,13 @@ public abstract class GameState {
                 humanCardTexts.put(ZoneType.Command, categoryValue);
             else
                 aiCardTexts.put(ZoneType.Command, categoryValue);
+        }
+
+        else if (categoryName.endsWith("sideboard")) {
+            if (isHuman)
+                humanCardTexts.put(ZoneType.Sideboard, categoryValue);
+            else
+                aiCardTexts.put(ZoneType.Sideboard, categoryValue);
         }
 
         else if (categoryName.startsWith("ability")) {
@@ -1175,7 +1189,7 @@ public abstract class GameState {
         String[] allCounterStrings = counterString.split(",");
         for (final String counterPair : allCounterStrings) {
             String[] pair = counterPair.split("=", 2);
-            entity.addCounter(CounterType.getType(pair[0]), Integer.parseInt(pair[1]), null, false, false, null);
+            entity.addCounter(CounterType.getType(pair[0]), Integer.parseInt(pair[1]), null, null, false, false, null);
         }
     }
 
@@ -1391,6 +1405,14 @@ public abstract class GameState {
                     }
                 } else if (info.equals("NoETBTrigs")) {
                     cardsWithoutETBTrigs.add(c);
+                } else if (info.equals("Foretold")) {
+                    c.setForetold(true);
+                    c.turnFaceDown(true);
+                    c.addMayLookTemp(c.getOwner());
+                } else if (info.equals("ForetoldThisTurn")) {
+                    c.setForetoldThisTurn(true);
+                } else if (info.equals("IsToken")) {
+                    c.setToken(true);
                 }
             }
 

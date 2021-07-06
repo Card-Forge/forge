@@ -281,7 +281,7 @@ public class ReplacementHandler {
         // Updated Replacements need to be logged elsewhere because its otherwise in the wrong order
         if (res != ReplacementResult.Updated) {
             String message = chosenRE.getDescription();
-            if ( !StringUtils.isEmpty(message))
+            if (!StringUtils.isEmpty(message))
                 if (chosenRE.getHostCard() != null) {
                     message = TextUtil.fastReplace(message, "CARDNAME", chosenRE.getHostCard().getName());
                 }
@@ -410,6 +410,7 @@ public class ReplacementHandler {
             final GameEntity target = et.getKey();
             int playerIndex = (target instanceof Player ? players.indexOf(((Player) target)) :
                                 players.indexOf(((Card) target).getController()));
+            if (playerIndex == -1) continue;
             Map<ReplacementEffect, List<Map<AbilityKey, Object>>> replaceCandidateMap = replaceDamageList.get(playerIndex);
             for (Map.Entry<Card, Integer> e : et.getValue().entrySet()) {
                 Card source = e.getKey();

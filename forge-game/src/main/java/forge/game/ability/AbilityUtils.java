@@ -173,15 +173,13 @@ public class AbilityUtils {
             }
         }
         else if (defined.equals("Targeted") && sa instanceof SpellAbility) {
-            final SpellAbility saTargeting = ((SpellAbility)sa).getSATargetingCard();
-            if (saTargeting != null) {
-                Iterables.addAll(cards, saTargeting.getTargets().getTargetCards());
+            for (TargetChoices tc : ((SpellAbility)sa).getAllTargetChoices()) {
+                Iterables.addAll(cards, tc.getTargetCards());
             }
         }
         else if (defined.equals("TargetedSource") && sa instanceof SpellAbility) {
-            final SpellAbility saTargeting = ((SpellAbility)sa).getSATargetingSA();
-            if (saTargeting != null) {
-                for (SpellAbility s : saTargeting.getTargets().getTargetSpells()) {
+            for (TargetChoices tc : ((SpellAbility)sa).getAllTargetChoices()) {
+                for (SpellAbility s : tc.getTargetSpells()) {
                     cards.add(s.getHostCard());
                 }
             }
@@ -742,7 +740,18 @@ public class AbilityUtils {
                 final SpellAbility root = sa.getRootAbility();
                 final String[] l = calcX[1].split("/");
                 final String m = CardFactoryUtil.extractOperators(calcX[1]);
-                final Integer count = (Integer) root.getTriggeringObject(AbilityKey.fromString(l[0]));
+                Integer count = null;
+                if (calcX[0].endsWith("Max")) {
+                    @SuppressWarnings("unchecked")
+                    Iterable<Integer> numbers = (Iterable<Integer>) root.getTriggeringObject(AbilityKey.fromString(l[0]));
+                    for (Integer n : numbers) {
+                        if (count == null || n > count) {
+                            count = n;
+                        }
+                    }
+                } else {
+                    count = (Integer) root.getTriggeringObject(AbilityKey.fromString(l[0]));
+                }
 
                 val = doXMath(ObjectUtils.firstNonNull(count, 0), m, card, ability);
             }
@@ -807,9 +816,9 @@ public class AbilityUtils {
                     final SpellAbility root = sa.getRootAbility();
                     list = new CardCollection((Card) root.getReplacingObject(AbilityKey.fromString(calcX[0].substring(8))));
                 }
-                // there could be null inside!
-                list = Iterables.filter(list, Card.class);
                 if (list != null) {
+                    // there could be null inside!
+                    list = Iterables.filter(list, Card.class);
                     val = handlePaid(list, calcX[1], card, ability);
                 }
             }
@@ -1008,9 +1017,8 @@ public class AbilityUtils {
             players.addAll(getDefinedPlayers(card, "TargetedController", sa));
         }
         else if ((defined.equals("Targeted") || defined.equals("TargetedPlayer")) && sa instanceof SpellAbility) {
-            final SpellAbility saTargeting = ((SpellAbility)sa).getSATargetingPlayer();
-            if (saTargeting != null) {
-                players.addAll(saTargeting.getTargets().getTargetPlayers());
+            for (TargetChoices tc : ((SpellAbility)sa).getAllTargetChoices()) {
+                players.addAll(tc.getTargetPlayers());
             }
         }
         else if (defined.equals("ParentTarget") && sa instanceof SpellAbility) {
@@ -1289,8 +1297,7 @@ public class AbilityUtils {
 
         SpellAbility s = null;
 
-        // TODO - this probably needs to be fleshed out a bit, but the basics
-        // work
+        // TODO - this probably needs to be fleshed out a bit, but the basics work
         if (defined.equals("Self") && sa instanceof SpellAbility) {
             s = (SpellAbility)sa;
         }
@@ -1298,9 +1305,8 @@ public class AbilityUtils {
             s = ((SpellAbility)sa).getRootAbility();
         }
         else if (defined.equals("Targeted") && sa instanceof SpellAbility) {
-            final SpellAbility saTargeting = ((SpellAbility)sa).getSATargetingSA();
-            if (saTargeting != null) {
-                for (SpellAbility targetSpell : saTargeting.getTargets().getTargetSpells()) {
+            for (TargetChoices tc : ((SpellAbility)sa).getAllTargetChoices()) {
+                for (SpellAbility targetSpell : tc.getTargetSpells()) {
                     SpellAbilityStackInstance stackInstance = game.getStack().getInstanceFromSpellAbility(targetSpell);
                     if (stackInstance != null) {
                         SpellAbility instanceSA = stackInstance.getSpellAbility(true);
@@ -1412,7 +1418,6 @@ public class AbilityUtils {
             }
             return;
         }
-
         AbilityUtils.resolveApiAbility(sa, game);
     }
 
@@ -2575,7 +2580,6 @@ public class AbilityUtils {
         // Count$ThisTurnCast <Valid>
         // Count$LastTurnCast <Valid>
         if (sq[0].startsWith("ThisTurnCast") || sq[0].startsWith("LastTurnCast")) {
-
             final String[] workingCopy = l[0].split("_");
             final String validFilter = workingCopy[1];
 
@@ -2735,7 +2739,6 @@ public class AbilityUtils {
             }
             return doXMath(powers.size(), expr, c, ctb);
         }
-
 
         if (sq[0].startsWith("MostProminentCreatureType")) {
             String restriction = l[0].split(" ")[1];
@@ -3366,6 +3369,29 @@ public class AbilityUtils {
             return doXMath(opps == null ? 0 : opps.size(), m, source, ctb);
         }
 
+        if (value.equals("DungeonsCompleted")) {
+            return doXMath(player.getCompletedDungeons().size(), m, source, ctb);
+        }
+        if (value.equals("DifferentlyNamedDungeonsCompleted")) {
+            int amount = 0;
+            List<Card> dungeons = player.getCompletedDungeons();
+            for (int i = 0; i < dungeons.size(); ++i) {
+                Card d1 = dungeons.get(i);
+                boolean hasSameName = false;
+                for (int j = i - 1; j >= 0; --j) {
+                    Card d2 = dungeons.get(j);
+                    if (d1.getName().equals(d2.getName())) {
+                        hasSameName = true;
+                        break;
+                    }
+                }
+                if (!hasSameName) {
+                    ++amount;
+                }
+            }
+            return doXMath(amount, m, source, ctb);
+        }
+
         return doXMath(0, m, source, ctb);
     }
 
@@ -3394,7 +3420,6 @@ public class AbilityUtils {
         int n = s.startsWith("Amount") ? objects.size() : 0;
         return doXMath(n, CardFactoryUtil.extractOperators(s), source, ctb);
     }
-
 
     /**
      * <p>

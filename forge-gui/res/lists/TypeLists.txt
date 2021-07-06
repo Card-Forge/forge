@@ -32,6 +32,7 @@ Avatar:Avatars
 Azra:Azra
 Badger:Badgers
 Barbarian:Barbarians
+Bard:Bards
 Basilisk:Basilisks
 Bat:Bats
 Bear:Bears
@@ -257,6 +258,7 @@ Tetravite:Tetravites
 Thalakos:Thalakoses
 Thopter:Thopters
 Thrull:Thrulls
+Tiefling:Tieflings
 Treefolk:Treefolks
 Trilobite:Trilobites
 Triskelavite:Triskelavites
@@ -324,7 +326,8 @@ Dihada
 Domri
 Dovin
 Duck
-Dungeon-Master
+Dungeon Master
+Ellywick
 Elspeth
 Estrid
 Freyalise

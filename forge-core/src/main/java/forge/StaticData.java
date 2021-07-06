@@ -167,6 +167,22 @@ public class StaticData {
         return sortedEditions;
     }
 
+    private TreeMap<CardEdition.Type, List<CardEdition>> editionsTypeMap;
+    public final Map<CardEdition.Type, List<CardEdition>> getEditionsTypeMap(){
+        if (editionsTypeMap == null){
+            editionsTypeMap = new TreeMap<>();
+            for (CardEdition.Type editionType : CardEdition.Type.values()){
+                editionsTypeMap.put(editionType, new ArrayList<>());
+            }
+            for (CardEdition edition : this.getSortedEditions()){
+                CardEdition.Type key = edition.getType();
+                List<CardEdition> editionsOfType = editionsTypeMap.get(key);
+                editionsOfType.add(edition);
+            }
+        }
+        return editionsTypeMap;
+    }
+
     public CardEdition getCardEdition(String setCode){
         CardEdition edition = this.editions.get(setCode);
         if (edition == null)  // try custom editions
@@ -284,7 +300,7 @@ public class StaticData {
         return CardDb.CardArtPreference.getPreferences();
     }
 
-    
+
 
     public void setStandardPredicate(Predicate<PaperCard> standardPredicate) { this.standardPredicate = standardPredicate; }
 

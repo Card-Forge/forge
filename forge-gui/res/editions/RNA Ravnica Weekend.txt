@@ -2,7 +2,7 @@
 Code=PRW2
 Date=2019-02-16
 Name=RNA Ravnica Weekend
-Type=Promos
+Type=Promo
 ScryfallCode=PRW2
 
 [cards]

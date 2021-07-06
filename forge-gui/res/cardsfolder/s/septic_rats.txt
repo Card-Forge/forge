@@ -1,6 +1,6 @@
 Name:Septic Rats
 ManaCost:1 B B
-Types:Creature Rat
+Types:Creature Phyrexian Rat
 PT:2/2
 K:Infect
 T:Mode$ Attacks | ValidCard$ Creature.Self | TriggerZones$ Battlefield | DefendingPlayerPoisoned$ True | Execute$ TrigPump | TriggerDescription$ When CARDNAME attacks, if defending player is poisoned, it gets +1/+1 until end of turn.

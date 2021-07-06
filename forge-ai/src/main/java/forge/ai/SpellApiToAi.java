@@ -171,6 +171,7 @@ public enum SpellApiToAi {
             .put(ApiType.UnattachAll, UnattachAllAi.class)
             .put(ApiType.Untap, UntapAi.class)
             .put(ApiType.UntapAll, UntapAllAi.class)
+            .put(ApiType.Venture, VentureAi.class)
             .put(ApiType.Vote, VoteAi.class)
             .put(ApiType.WinsGame, GameWinAi.class)
 
@@ -191,6 +192,6 @@ public enum SpellApiToAi {
             result = ReflectionUtil.makeDefaultInstanceOf(clz);
             apiToInstance.put(api, result);
         }
-        return result; 
+        return result;
     }
 }

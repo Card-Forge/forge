@@ -1,6 +1,6 @@
 Name:Priest of Urabrask
 ManaCost:2 R
-Types:Creature Human Cleric
+Types:Creature Phyrexian Human Cleric
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMana | TriggerDescription$ When CARDNAME enters the battlefield, add {R}{R}{R}.
 SVar:TrigMana:DB$Mana | Produced$ R | Amount$ 3

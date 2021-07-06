@@ -47,6 +47,7 @@ import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayEnergy;
+import forge.game.cost.CostRemoveCounter;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordCollection;
 import forge.game.keyword.KeywordInterface;
@@ -137,6 +138,56 @@ public class ComputerUtilCard {
         return Aggregates.itemWithMin(all, CardPredicates.Accessors.fnGetCmc);
     }
 
+    public static Card getBestPlaneswalkerToDamage(final List<Card> pws) {
+        Card bestTgt = null;
+
+        // As of right now, ranks planeswalkers by their Current Loyalty * 10 + Big buff if close to "Ultimate"
+        int bestScore = 0;
+        for (Card pw : pws) {
+            int curLoyalty = pw.getCounters(CounterEnumType.LOYALTY);
+            int pwScore = curLoyalty * 10;
+
+            for (SpellAbility sa : pw.getSpellAbilities()) {
+                if (sa.hasParam("Ultimate")) {
+                    Integer loyaltyCost = 0;
+                    CostRemoveCounter remLoyalty = sa.getPayCosts().getCostPartByType(CostRemoveCounter.class);
+                    if (remLoyalty != null) {
+                        // if remLoyalty is null, generally there's an AddCounter<0/LOYALTY> cost, like for Gideon Jura.
+                        loyaltyCost = remLoyalty.convertAmount();
+                    }
+
+                    if (loyaltyCost != null && loyaltyCost != 0 && loyaltyCost - curLoyalty <= 1) {
+                        // Will ultimate soon
+                        pwScore += 10000;
+                    }
+
+                    if (pwScore > bestScore) {
+                        bestScore = pwScore;
+                        bestTgt = pw;
+                    }
+                }
+            }
+        }
+
+        return bestTgt;
+    }
+
+    public static Card getWorstPlaneswalkerToDamage(final List<Card> pws) {
+        Card bestTgt = null;
+
+        int bestScore = Integer.MAX_VALUE;
+        for (Card pw : pws) {
+            int curLoyalty = pw.getCounters(CounterEnumType.LOYALTY);
+
+            if (curLoyalty < bestScore) {
+                bestScore = curLoyalty;
+                bestTgt = pw;
+            }
+        }
+
+        return bestTgt;
+    }
+
     // The AI doesn't really pick the best enchantment, just the most expensive.
     /**
      * <p>
@@ -215,6 +266,63 @@ public class ComputerUtilCard {
         }
     
         return Aggregates.random(bLand); // random tapped land of least represented type
+    }
+
+    /**
+     * <p>
+     * getWorstLand.
+     * </p>
+     * 
+     * @param lands
+     * @return a {@link forge.game.card.Card} object.
+     */
+    public static Card getWorstLand(final List<Card> lands) {
+        Card worstLand = null;
+        int maxScore = Integer.MIN_VALUE;
+        // first, check for tapped, basic lands
+        for (Card tmp : lands) {
+            int score = tmp.isTapped() ? 2 : 0;
+            score += tmp.isBasicLand() ? 1 : 0;
+            score -= tmp.isCreature() ? 4 : 0;
+            for (Card aura : tmp.getEnchantedBy()) {
+                if (aura.getController().isOpponentOf(tmp.getController())) {
+                    score += 5;
+                } else {
+                    score -= 5;
+                }
+            }
+            if (score == maxScore &&
+                    CardLists.count(lands, CardPredicates.sharesNameWith(tmp)) > CardLists.count(lands, CardPredicates.sharesNameWith(worstLand))) {
+                worstLand = tmp;
+            }
+            if (score > maxScore) {
+                worstLand = tmp;
+                maxScore = score;
+            }
+        }
+        return worstLand;
+    }
+
+    public static Card getBestLandToAnimate(final Iterable<Card> lands) {
+        Card land = null;
+        int maxScore = Integer.MIN_VALUE;
+        // first, check for tapped, basic lands
+        for (Card tmp : lands) {
+            int score = tmp.isTapped() ? 0 : 2;
+            score += tmp.isBasicLand() ? 2 : 0;
+            score -= tmp.isCreature() ? 4 : 0;
+            score -= 5 * tmp.getEnchantedBy().size();
+
+            if (score == maxScore &&
+                    CardLists.count(lands, CardPredicates.sharesNameWith(tmp)) > CardLists.count(lands, CardPredicates.sharesNameWith(land))) {
+                land = tmp;
+            }
+            if (score > maxScore) {
+                land = tmp;
+                maxScore = score;
+            }
+        }
+        return land;
     }
 
     /**
@@ -825,57 +933,6 @@ public class ComputerUtilCard {
         return result;
     }
 
-
-    /**
-     * <p>
-     * getWorstLand.
-     * </p>
-     * 
-     * @param lands
-     * @return a {@link forge.game.card.Card} object.
-     */
-    public static Card getWorstLand(final List<Card> lands) {
-        Card worstLand = null;
-        int maxScore = Integer.MIN_VALUE;
-        // first, check for tapped, basic lands
-        for (Card tmp : lands) {
-            int score = tmp.isTapped() ? 2 : 0;
-            score += tmp.isBasicLand() ? 1 : 0;
-            score -= tmp.isCreature() ? 4 : 0;
-            for (Card aura : tmp.getEnchantedBy()) {
-            	if (aura.getController().isOpponentOf(tmp.getController())) {
-            		score += 5;
-            	} else {
-            		score -= 5;
-            	}
-            }
-            if (score >= maxScore) {
-                worstLand = tmp;
-                maxScore = score;
-            }
-        }
-        return worstLand;
-    } // end getWorstLand
-
-    public static Card getBestLandToAnimate(final Iterable<Card> lands) {
-        Card land = null;
-        int maxScore = Integer.MIN_VALUE;
-        // first, check for tapped, basic lands
-        for (Card tmp : lands) {
-            // TODO Improve this by choosing basic lands that I have plenty of mana in
-            int score = tmp.isTapped() ? 0 : 2;
-            score += tmp.isBasicLand() ? 2 : 0;
-            score -= tmp.isCreature() ? 4 : 0;
-            score -= 5 * tmp.getEnchantedBy().size();
-
-            if (score >= maxScore) {
-                land = tmp;
-                maxScore = score;
-            }
-        }
-        return land;
-    } // end getBestLandToAnimate
-
     public static final Predicate<Deck> AI_KNOWS_HOW_TO_PLAY_ALL_CARDS = new Predicate<Deck>() {
         @Override
         public boolean apply(Deck d) {
@@ -888,6 +945,7 @@ public class ComputerUtilCard {
             return true;
         }
     };
+
     public static List<String> chooseColor(SpellAbility sa, int min, int max, List<String> colorChoices) {
         List<String> chosen = new ArrayList<>();
         Player ai = sa.getActivatingPlayer();
@@ -1592,7 +1650,7 @@ public class ComputerUtilCard {
      */
     public static Card getPumpedCreature(final Player ai, final SpellAbility sa,
             final Card c, int toughness, int power, final List<String> keywords) {
-        Card pumped = CardFactory.copyCard(c, true);
+        Card pumped = CardFactory.copyCard(c, false);
         pumped.setSickness(c.hasSickness());
         final long timestamp = c.getGame().getNextTimestamp();
         final List<String> kws = new ArrayList<>();
@@ -1630,7 +1688,7 @@ public class ComputerUtilCard {
         pumped.addChangedCardKeywords(kws, null, false, false, timestamp);
         Set<CounterType> types = c.getCounters().keySet();
         for(CounterType ct : types) {
-            pumped.addCounterFireNoEvents(ct, c.getCounters(ct), ai, true, null);
+            pumped.addCounterFireNoEvents(ct, c.getCounters(ct), ai, sa, true, null);
         }
         //Copies tap-state and extra keywords (auras, equipment, etc.) 
         if (c.isTapped()) {

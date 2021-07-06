@@ -3,7 +3,7 @@ Code=SS1
 Date=2018-06-15
 Name=Signature Spellbook: Jace
 MciCode=ss1
-Type=Reprint
+Type=Collector_Edition
 ScryfallCode=SS1
 
 [cards]

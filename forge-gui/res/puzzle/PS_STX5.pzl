@@ -1,0 +1,18 @@
+[metadata]
+Name:Possibility Storm - Strixhaven: School of Mages #05
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2021/06/176.-STX5-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Your opponent has 80 Righteous Valkyrie tokens (Don't ask how, some things just are!). They also have ten million life... no need to be precise on this one, just deal at least that much to win! Assume both graveyards start empty. Assume you have a Forest, an Island, and a Mountain in your deck. Assume any other cards you could draw are not relevant to the puzzle. You have three Lessons in your sideboard: Mercurial Transformation, Environmental Sciences, Illuminate History.
+[state]
+humanlife=20
+ailife=10000000
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Sea-Dasher Octopus;Exponential Growth;Mythos of Illuna;Academic Dispute;Prismari Command;Sleep of the Dead;Shatterskull Smashing
+humanlibrary=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Mountain;Island;Forest;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+humanbattlefield=Orvar, the All-Form;Storm-Kiln Artist;Dream Strix;Sneaking Guide;Warden of the Chained;Temple of Epiphany;Temple of Epiphany;Temple of Epiphany;Temple of Epiphany;Temple of Abandon;Temple of Abandon
+humansideboard=Mercurial Transformation;Environmental Sciences;Illuminate History
+aibattlefield=Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken;Righteous Valkyrie|IsToken

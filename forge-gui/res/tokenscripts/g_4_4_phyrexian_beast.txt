@@ -1,0 +1,6 @@
+Name:Phyrexian Beast
+Colors:green
+ManaCost:no cost
+PT:4/4
+Types:Creature Phyrexian Beast
+Oracle:

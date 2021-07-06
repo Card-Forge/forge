@@ -7,4 +7,4 @@ K:Evoke:G U
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigInvestigate | TriggerDescription$ When CARDNAME enters the battlefield, investigate twice. (To investigate, create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
 SVar:TrigInvestigate:DB$ Investigate | Num$ 2
 DeckHas:Ability$Token
-Oracle:Flying\nWhen Wavesifter enters the battlefield, investigate twice. (To investigate, create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")\nEvoke G U (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield.)
+Oracle:Flying\nWhen Wavesifter enters the battlefield, investigate twice. (To investigate, create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")\nEvoke {G}{U} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield.)

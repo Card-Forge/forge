@@ -3,7 +3,7 @@ Code=V15
 Date=2015-08-21
 Name=From the Vault: Angels
 MciCode=v15
-Type=From_the_Vault
+Type=Collector_Edition
 ScryfallCode=V15
 
 [cards]

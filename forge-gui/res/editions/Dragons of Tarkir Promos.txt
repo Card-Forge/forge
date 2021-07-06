@@ -1,8 +1,8 @@
 [metadata]
 Code=PDTK
-Date=2015-03-08
+Date=2015-03-27
 Name=Dragons of Tarkir Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PDTK
 
 [cards]

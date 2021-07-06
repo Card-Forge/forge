@@ -1,6 +1,6 @@
 Name:Vedalken Anatomist
 ManaCost:2 U
-Types:Creature Vedalken Wizard
+Types:Creature Phyrexian Vedalken Wizard
 PT:1/2
 A:AB$ PutCounter | Cost$ 2 U T | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ M1M1 | CounterNum$ 1 | SubAbility$ DBTapOrUntap | IsCurse$ True | SpellDescription$ Put a -1/-1 counter on target creature. You may tap or untap that creature.
 SVar:DBTapOrUntap:DB$ TapOrUntap | Defined$ Targeted

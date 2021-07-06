@@ -3,7 +3,7 @@ Code=DDE
 Date=2010-03-19
 Name=Duel Decks: Phyrexia vs. the Coalition
 MciCode=pvc
-Type=Duel_Decks
+Type=Duel_Deck
 ScryfallCode=DDE
 
 [cards]
@@ -81,5 +81,5 @@ ScryfallCode=DDE
 
 [tokens]
 hornet
-b_x_x_minion
+b_x_x_phyrexian_minion
 g_1_1_saproling

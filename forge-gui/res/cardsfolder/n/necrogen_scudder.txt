@@ -1,6 +1,6 @@
 Name:Necrogen Scudder
 ManaCost:2 B
-Types:Creature Horror
+Types:Creature Phyrexian Horror
 PT:3/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, you lose 3 life.

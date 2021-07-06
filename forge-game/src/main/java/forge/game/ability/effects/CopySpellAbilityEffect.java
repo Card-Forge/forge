@@ -73,9 +73,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
             controllers = AbilityUtils.getDefinedPlayers(card, sa.getParam("Controller"), sa);
         }
 
-
         final List<SpellAbility> tgtSpells = getTargetSpells(sa);
-
 
         if (tgtSpells.size() == 0 || amount == 0) {
             return;

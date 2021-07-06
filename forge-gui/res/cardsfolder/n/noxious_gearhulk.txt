@@ -1,6 +1,6 @@
 Name:Noxious Gearhulk
 ManaCost:4 B B
-Types: Artifact Creature Construct
+Types:Artifact Creature Construct
 PT:5/4
 K:Menace
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | RememberLKI$ True | TriggerDescription$ When CARDNAME enters the battlefield, you may destroy another target creature. If a creature is destroyed this way, you gain life equal to its toughness.

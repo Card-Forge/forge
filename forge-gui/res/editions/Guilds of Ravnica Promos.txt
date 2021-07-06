@@ -2,7 +2,7 @@
 Code=PGRN
 Date=2018-10-05
 Name=Guilds of Ravnica Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PGRN
 
 [cards]

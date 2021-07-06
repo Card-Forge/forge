@@ -2,7 +2,7 @@
 Code=PAL06
 Date=2006-01-01
 Name=Arena League 2006
-Type=Promos
+Type=Promo
 ScryfallCode=PAL06
 
 [cards]

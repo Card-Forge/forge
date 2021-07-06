@@ -844,12 +844,12 @@ public final class StaticAbilityContinuous {
             if ((addTypes != null) || (removeTypes != null)) {
                 affectedCard.addChangedCardTypes(addTypes, removeTypes, removeSuperTypes, removeCardTypes,
                         removeSubTypes, removeLandTypes, removeCreatureTypes, removeArtifactTypes,
-                        removeEnchantmentTypes, hostCard.getTimestamp());
+                        removeEnchantmentTypes, hostCard.getTimestamp(), true, stAb.hasParam("CharacteristicDefining"));
             }
 
             // add colors
             if (addColors != null) {
-                affectedCard.addColor(addColors, !overwriteColors, hostCard.getTimestamp());
+                affectedCard.addColor(addColors, !overwriteColors, hostCard.getTimestamp(), stAb.hasParam("CharacteristicDefining"));
             }
 
             if (layer == StaticAbilityLayer.RULES) {
@@ -966,6 +966,13 @@ public final class StaticAbilityContinuous {
         final Player controller = hostCard.getController();
 
         if (stAb.hasParam("CharacteristicDefining")) {
+            if (stAb.hasParam("ExcludeZone")) {
+                for (ZoneType zt : ZoneType.listValueOf(stAb.getParam("ExcludeZone"))) {
+                    if (hostCard.isInZone(zt)) {
+                        return CardCollection.EMPTY;
+                    }
+                }
+            }
             return new CardCollection(hostCard); // will always be the card itself
         }
 

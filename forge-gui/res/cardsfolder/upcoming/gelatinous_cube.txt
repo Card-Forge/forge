@@ -1,0 +1,13 @@
+Name:Gelatinous Cube
+ManaCost:2 B B
+Types:Creature Ooze
+PT:4/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Engulf — When CARDNAME enters the battlefield, exile target non-Ooze creature an opponent controls until CARDNAME leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.nonOoze+OppCtrl | TgtPrompt$ Select target non-Ooze creature an opponent controls | Duration$ UntilHostLeavesPlay | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | Duration$ Permanent | ForgetOnMoved$ Exile
+A:AB$ ChangeZone | Cost$ X B | Origin$ Exile | Destination$ Graveyard | TgtPrompt$ Select target creature card exiled with Gelatinous Cube with mana value X | ValidTgts$ Creature.IsRemembered+ExiledWithSource+cmcEQX | SpellDescription$ Dissolve — Put target creature card with mana value X exiled with CARDNAME into its owner's graveyard.
+SVar:X:Count$xPaid
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:PlayMain1:TRUE
+SVar:NeedsToPlay:Creature.nonOoze+OppCtrl
+Oracle:Engulf — When Gelatinous Cube enters the battlefield, exile target non-Ooze creature an opponent controls until Gelatinous Cube leaves the battlefield.\nDissolve — {X}{B}: Put target creature card with mana value X exiled with Gelatinous Cube into its owner's graveyard.

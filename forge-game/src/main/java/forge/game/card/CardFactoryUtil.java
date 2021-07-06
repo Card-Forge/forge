@@ -19,6 +19,7 @@ package forge.game.card;
 
 import java.util.Arrays;
 import java.util.EnumSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -517,28 +518,6 @@ public class CardFactoryUtil {
             Iterables.addAll(types, c1.getType().getCoreTypes());
         }
         return types.size();
-    }
-
-    /**
-     * <p>
-     * getNeededXDamage.
-     * </p>
-     *
-     * @param ability
-     *            a {@link forge.game.spellability.SpellAbility} object.
-     * @return a int.
-     */
-    public static int getNeededXDamage(final SpellAbility ability) {
-        // when targeting a creature, make sure the AI won't overkill on X
-        // damage
-        final Card target = ability.getTargetCard();
-        int neededDamage = -1;
-
-        if ((target != null)) {
-            neededDamage = target.getNetToughness() - target.getDamage();
-        }
-
-        return neededDamage;
     }
 
     /**
@@ -1295,7 +1274,7 @@ public class CardFactoryUtil {
             sbTrig.append("Living Weapon (").append(inst.getReminderText()).append(")");
 
             final StringBuilder sbGerm = new StringBuilder();
-            sbGerm.append("DB$ Token | TokenAmount$ 1 | TokenScript$ b_0_0_germ |TokenOwner$ You | RememberTokens$ True");
+            sbGerm.append("DB$ Token | TokenAmount$ 1 | TokenScript$ b_0_0_phyrexian_germ |TokenOwner$ You | RememberTokens$ True");
 
             final SpellAbility saGerm = AbilityFactory.getAbility(sbGerm.toString(), card);
 
@@ -1398,7 +1377,7 @@ public class CardFactoryUtil {
             inst.addTrigger(triggerDrawn);
         } else if (keyword.startsWith("Modular")) {
             final String abStr = "DB$ PutCounter | ValidTgts$ Artifact.Creature | " +
-                    "TgtPrompt$ Select target artifact creature | CounterType$ P1P1 | CounterNum$ ModularX";
+                    "TgtPrompt$ Select target artifact creature | CounterType$ P1P1 | CounterNum$ ModularX | Modular$ True";
 
             String trigStr = "Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard" +
                     " | OptionalDecider$ TriggeredCardController | TriggerController$ TriggeredCardController" +
@@ -1839,6 +1818,41 @@ public class CardFactoryUtil {
 
             inst.addTrigger(parsedUpkeepTrig);
             inst.addTrigger(parsedSacTrigger);
+        } else if (keyword.startsWith("Dungeon")) {
+            final List<String> abs = Arrays.asList(keyword.substring("Dungeon:".length()).split(","));
+            final Map<String, SpellAbility> saMap = new LinkedHashMap<>();
+
+            for(String ab : abs) {
+                saMap.put(ab, AbilityFactory.getAbility(card, ab));
+            }
+            for (SpellAbility sa : saMap.values()) {
+                String roomName = sa.getParam("RoomName");
+                StringBuilder trigStr = new StringBuilder("Mode$ RoomEntered | TriggerZones$ Command");
+                trigStr.append(" | ValidCard$ Card.Self | ValidRoom$ ").append(roomName);
+                trigStr.append(" | TriggerDescription$ ").append(roomName).append(" — ").append(sa.getDescription());
+                if (sa.hasParam("NextRoom")) {
+                    boolean first = true;
+                    StringBuilder nextRoomParam = new StringBuilder();
+                    trigStr.append("  (→ ");
+                    for (String nextRoomSVar : sa.getParam("NextRoom").split(",")) {
+                        if (!first) {
+                            trigStr.append(" or ");
+                            nextRoomParam.append(",");
+                        }
+                        String nextRoomName = saMap.get(nextRoomSVar).getParam("RoomName");
+                        trigStr.append(nextRoomName);
+                        nextRoomParam.append(nextRoomName);
+                        first = false;
+                    }
+                    trigStr.append(")");
+                    sa.putParam("NextRoomName", nextRoomParam.toString());
+                }
+
+                // Need to set intrinsic to false here, else the first room won't get triggered
+                final Trigger t = TriggerHandler.parseTrigger(trigStr.toString(), card, false);
+                t.setOverridingAbility(sa);
+                inst.addTrigger(t);
+            }
         } else if (keyword.startsWith("Ward")) {
             final String[] k = keyword.split(":");
             final Cost cost = new Cost(k[1], false);
@@ -3087,7 +3101,7 @@ public class CardFactoryUtil {
 
                     int counters = AbilityUtils.calculateAmount(c, k[1], this);
                     GameEntityCounterTable table = new GameEntityCounterTable();
-                    c.addCounter(CounterEnumType.TIME, counters, getActivatingPlayer(), true, table);
+                    c.addCounter(CounterEnumType.TIME, counters, getActivatingPlayer(), this, true, table);
                     table.triggerCountersPutAll(game);
 
                     String sb = TextUtil.concatWithSpace(getActivatingPlayer().toString(),"has suspended", c.getName(), "with", String.valueOf(counters),"time counters on it.");

@@ -3,7 +3,7 @@ Code=DDH
 Date=2011-09-02
 Name=Duel Decks: Ajani vs. Nicol Bolas
 MciCode=ddh
-Type=Duel_Decks
+Type=Duel_Deck
 ScryfallCode=DDH
 
 [cards]

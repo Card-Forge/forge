@@ -244,7 +244,7 @@ public class DrawAi extends SpellAbilityAi {
 
         int numCards = 1;
         if (sa.hasParam("NumCards")) {
-            numCards = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa);
+            numCards = AbilityUtils.calculateAmount(source, sa.getParam("NumCards"), sa);
         }
 
         boolean xPaid = false;

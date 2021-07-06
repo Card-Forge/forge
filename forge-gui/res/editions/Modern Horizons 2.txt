@@ -4,10 +4,11 @@ Date=2021-06-18
 Name=Modern Horizons 2
 Code2=MH2
 MciCode=mh2
-Type=Other
+Type=Draft
 Booster=10 Common:fromSheet("MH2 cards"), 3 Uncommon:fromSheet("MH2 cards"), 1 RareMythic:fromSheet("MH2 cards"), 1 fromSheet("MH2 Lands")
 BoosterReplaceSlotFromPrintSheet=MH2 NewToModern
 BoosterBox=36
+BoosterCovers=3
 ChaosDraftThemes=MASTERS_SET
 ScryfallCode=MH2
 
@@ -591,7 +592,7 @@ ScryfallCode=MH2
 6 Zuran Orb|MH2|1
 
 [tokens]
-b_0_0_germ
+b_0_0_phyrexian_germ
 b_0_0_zombie_army
 b_2_2_zombie
 bg_1_1_insect

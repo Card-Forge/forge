@@ -57,6 +57,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         Artifact(true, "artifacts"),
         Conspiracy(false, "conspiracies"),
         Creature(true, "creatures"),
+        Dungeon(false, "dungeons"),
         Emblem(false, "emblems"),
         Enchantment(true, "enchantments"),
         Instant(false, "instants"),
@@ -447,6 +448,11 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     }
 
     @Override
+    public boolean isDungeon() {
+        return coreTypes.contains(CoreType.Dungeon);
+    }
+
+    @Override
     public String toString() {
         if (calculatedType == null) {
             if (subtypes.isEmpty()) {
@@ -686,13 +692,11 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     }
 
     private static boolean isMultiwordType(final String type) {
-        final String[] multiWordTypes = { "Serra's Realm", "Bolas's Meditation Realm" };
-        // no need to loop for only 2 exceptions!
-        if (multiWordTypes[0].startsWith(type) && !multiWordTypes[0].equals(type)) {
-            return true;
-        }
-        if (multiWordTypes[1].startsWith(type) && !multiWordTypes[1].equals(type)) {
-            return true;
+        final String[] multiWordTypes = { "Serra's Realm", "Bolas's Meditation Realm", "Dungeon Master" };
+        for (int i = 0; i < multiWordTypes.length; ++i) {
+            if (multiWordTypes[i].startsWith(type) && !multiWordTypes[i].equals(type)) {
+                return true;
+            }
         }
         return false;
     }

@@ -136,56 +136,74 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
 
             lstSets.addGroup("Core Sets");
             lstSets.addGroup("Expansions");
-            lstSets.addGroup("Duel Decks");
-            lstSets.addGroup("From the Vault");
-            lstSets.addGroup("Premium Deck Series");
-            lstSets.addGroup("Reprint Sets");
             lstSets.addGroup("Starter Sets");
+            lstSets.addGroup("Reprint Sets");
+            lstSets.addGroup("Boxed Sets");
+
+            lstSets.addGroup("Collector's Edition");
+            lstSets.addGroup("Duel Decks");
             lstSets.addGroup("Promo Sets");
             lstSets.addGroup("Digital Sets");
+
+            lstSets.addGroup("Draft Innovation Sets");
+
+
+
+            lstSets.addGroup("Commander Sets");
+            lstSets.addGroup("Multiplayer Sets");
+            lstSets.addGroup("Other Supplemental Sets");
             lstSets.addGroup("Funny Sets");
+
             lstSets.addGroup("Custom Sets");
-            lstSets.addGroup("Other Sets");
 
             List<CardEdition> sets = FModel.getMagicDb().getSortedEditions();
             for (CardEdition set : sets) {
                 switch (set.getType()) {
-                case CORE:
-                    lstSets.addItem(set, 0);
-                    break;
-                case EXPANSION:
-                    lstSets.addItem(set, 1);
-                    break;
-                case DUEL_DECKS:
-                    lstSets.addItem(set, 2);
-                    break;
-                case FROM_THE_VAULT:
-                    lstSets.addItem(set, 3);
-                    break;
-                case PREMIUM_DECK_SERIES:
-                    lstSets.addItem(set, 4);
-                    break;
-                case REPRINT:
-                    lstSets.addItem(set, 5);
-                    break;
-                case STARTER:
-                    lstSets.addItem(set, 6);
-                    break;
-                case PROMOS:
-                    lstSets.addItem(set, 7);
-                    break;
-                case ONLINE:
-                    lstSets.addItem(set, 8);
-                    break;
-                case FUNNY:
-                    lstSets.addItem(set, 9);
-                    break;
-                case THIRDPARTY:
-                    lstSets.addItem(set, 10);
-                    break;
-                default:
-                    lstSets.addItem(set, 11);
-                    break;
+                    case CORE:
+                        lstSets.addItem(set, 0);
+                        break;
+                    case EXPANSION:
+                        lstSets.addItem(set, 1);
+                        break;
+                    case STARTER:
+                        lstSets.addItem(set, 2);
+                        break;
+                    case REPRINT:
+                        lstSets.addItem(set, 3);
+                        break;
+                    case BOXED_SET:
+                        lstSets.addItem(set,4);
+                        break;
+                    case COLLECTOR_EDITION:
+                        lstSets.addItem(set, 5);
+                        break;
+                    case DUEL_DECK:
+                        lstSets.addItem(set, 6);
+                        break;
+                    case PROMO:
+                        lstSets.addItem(set, 7);
+                        break;
+                    case ONLINE:
+                        lstSets.addItem(set, 8);
+                        break;
+                    case DRAFT:
+                        lstSets.addItem(set, 9);
+                        break;
+                    case COMMANDER:
+                        lstSets.addItem(set, 10);
+                        break;
+                    case MULTIPLAYER:
+                        lstSets.addItem(set, 11);
+                        break;
+                    case OTHER:
+                        lstSets.addItem(set, 12);
+                        break;
+                    case FUNNY:
+                        lstSets.addItem(set, 13);
+                        break;
+                    default:  // THIRDPARTY - Custom Sets
+                        lstSets.addItem(set, 14);
+                        break;
                 }
             }
 

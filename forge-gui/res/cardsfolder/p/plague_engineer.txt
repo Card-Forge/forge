@@ -1,6 +1,6 @@
 Name:Plague Engineer
 ManaCost:2 B
-Types:Creature Carrier
+Types:Creature Phyrexian Carrier
 PT:2/2
 K:Deathtouch
 K:ETBReplacement:Other:ChooseCT

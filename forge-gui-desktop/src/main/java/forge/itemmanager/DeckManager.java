@@ -4,9 +4,7 @@ import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
 import javax.swing.JMenu;
@@ -14,6 +12,8 @@ import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import forge.itemmanager.filters.*;
+import forge.localinstance.properties.ForgePreferences;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Singletons;
@@ -29,15 +29,6 @@ import forge.gui.GuiUtils;
 import forge.gui.UiCommand;
 import forge.gui.framework.FScreen;
 import forge.item.InventoryItem;
-import forge.itemmanager.filters.AdvancedSearchFilter;
-import forge.itemmanager.filters.DeckColorFilter;
-import forge.itemmanager.filters.DeckFolderFilter;
-import forge.itemmanager.filters.DeckFormatFilter;
-import forge.itemmanager.filters.DeckQuestWorldFilter;
-import forge.itemmanager.filters.DeckSearchFilter;
-import forge.itemmanager.filters.DeckSetFilter;
-import forge.itemmanager.filters.FormatFilter;
-import forge.itemmanager.filters.ItemFilter;
 import forge.itemmanager.views.ItemCellRenderer;
 import forge.itemmanager.views.ItemListView;
 import forge.itemmanager.views.ItemTableColumn;
@@ -123,7 +114,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
     /**
      * Sets the delete command.
      *
-     * @param c0 &emsp; {@link forge.forge.gui.UiCommand} command executed on delete.
+     * @param c0 &emsp; {@link forge.gui.UiCommand} command executed on delete.
      */
     public void setDeleteCommand(final UiCommand c0) {
         this.cmdDelete = c0;
@@ -132,7 +123,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
     /**
      * Sets the select command.
      *
-     * @param c0 &emsp; {@link forge.forge.gui.UiCommand} command executed on row select.
+     * @param c0 &emsp; {@link forge.gui.UiCommand} command executed on row select.
      */
     public void setSelectCommand(final UiCommand c0) {
         this.cmdSelect = c0;
@@ -288,6 +279,28 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
             }, DeckQuestWorldFilter.canAddQuestWorld(w, getFilter(DeckQuestWorldFilter.class)));
         }
         menu.add(world);
+
+        if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.LOAD_HISTORIC_FORMATS)) {
+            JMenu blocks = GuiUtils.createMenu(localizer.getMessage("lblBlock"));
+            List<GameFormat> blockFormats = new ArrayList<>();
+            for (GameFormat format : FModel.getFormats().getHistoricList()){
+                if (format.getFormatSubType() != GameFormat.FormatSubType.BLOCK)
+                    continue;
+                if (!format.getName().endsWith("Block"))
+                    continue;
+                blockFormats.add(format);
+            }
+            Collections.sort(blockFormats);  // GameFormat will be sorted by Index!
+            for (final GameFormat f : blockFormats) {
+                GuiUtils.addMenuItem(blocks, f.getName(), null, new Runnable() {
+                    @Override
+                    public void run() {
+                        addFilter(new DeckBlockFilter(DeckManager.this, f));
+                    }
+                }, DeckBlockFilter.canAddCardBlock(f, getFilter(DeckBlockFilter.class)));
+            }
+            menu.add(blocks);
+        }
 
         GuiUtils.addSeparator(menu);
 

@@ -2,7 +2,7 @@
 Code=PAVR
 Date=2012-04-28
 Name=Avacyn Restored Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PAVR
 
 [cards]

@@ -543,7 +543,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     }
 
     private final void finishResolving(final SpellAbility sa, final boolean fizzle) {
-
         // SpellAbility is removed from the stack here
         // temporarily removed removing SA after resolution
         final SpellAbilityStackInstance si = getInstanceFromSpellAbility(sa);
