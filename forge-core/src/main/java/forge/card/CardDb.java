@@ -53,10 +53,10 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     private List<String> filtered;
 
     public enum CardArtPreference {
-        LatestPrint(false, true),
-        LatestPrintNoPromoNoOnline(true, true),
-        OldPrint(false, false),
-        OldPrintNoPromoNoOnline(true, false);
+        LatestArtAllEditions(false, true),
+        LatestArtExcludedPromoAndOnlineEditions(true, true),
+        OldArtAllEditions(false, false),
+        OldArtExcludedPromoAndOnlineEditions(true, false);
 
         final boolean filterSets;
         final boolean latestFirst;
@@ -69,6 +69,13 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         public boolean accept(CardEdition ed) {
             if (ed == null) return false;
             return !filterSets || ed.getType() == Type.CORE || ed.getType() == Type.EXPANSION || ed.getType() == Type.REPRINT;
+        }
+
+        public static String[] getPreferences(){
+            return new String[]{"Latest Art (All Editions)",
+                    "Latest Art (Excluded Promo And Online Editions)",
+                    "Old Art (All Editions)",
+                    "Old Art (Excluded Promo And Online Editions)"};
         }
     }
 
@@ -213,11 +220,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 }
             }
         }
-        try{
-            this.defaultCardArtPreference = CardArtPreference.valueOf(preferredCardArt);
-        } catch (IllegalArgumentException ex){
-            this.defaultCardArtPreference = CardArtPreference.LatestPrint;
-        }
+        setCardArtPreference(preferredCardArt);
     }
 
     private void addSetCard(CardEdition e, CardInSet cis, CardRules cr) {
@@ -382,10 +385,13 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     public CardArtPreference getCardArtPreference(){ return this.defaultCardArtPreference; }
     public void setCardArtPreference(String artPreference){
+        artPreference = artPreference.replaceAll("[\\s\\(\\)]", "");
         CardArtPreference cardArtPreference = null;
         try{
             cardArtPreference = CardArtPreference.valueOf(artPreference);
-        } catch (IllegalArgumentException ex){}
+        } catch (IllegalArgumentException ex){
+            cardArtPreference = CardArtPreference.LatestArtAllEditions;  // default
+        }
         finally {
             if (cardArtPreference != null)
                 this.defaultCardArtPreference = cardArtPreference;
@@ -860,13 +866,13 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return sb;
     }
 
-    public PaperCard createUnsupportedCard(String cardName) {
+    public PaperCard createUnsupportedCard(String cardRequest) {
 
-        CardRequest request = CardRequest.fromString(cardName);
+        CardRequest request = CardRequest.fromString(cardRequest);
         CardEdition cardEdition = CardEdition.UNKNOWN;
         CardRarity cardRarity = CardRarity.Unknown;
 
-        // May iterate over editions and find out if there is any card named 'cardName' but not implemented with Forge script.
+        // May iterate over editions and find out if there is any card named 'cardRequest' but not implemented with Forge script.
         if (StringUtils.isBlank(request.edition)) {
             for (CardEdition edition : editions) {
                 for (CardInSet cardInSet : edition.getAllCardsInSet()) {
@@ -894,10 +900,11 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             }
         }
 
+        // Note for myself: no localisation needed here as this goes in logs
         if (cardRarity == CardRarity.Unknown) {
-            System.err.println("Forge does not know of such a card's existence. Have you mistyped the card name?");
+            System.err.println("Forge could not find this card in the Database. Any chance you might have mistyped the card name?");
         } else {
-            System.err.println("We're sorry, but you cannot use this card yet.");
+            System.err.println("We're sorry, but this card is not supported yet.");
         }
 
         return new PaperCard(CardRules.getUnsupportedCardNamed(request.cardName), cardEdition.getCode(), cardRarity);
