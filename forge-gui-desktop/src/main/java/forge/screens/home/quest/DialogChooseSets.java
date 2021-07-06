@@ -481,7 +481,6 @@ public class DialogChooseSets {
 
 	private int getMainDialogWidth() {
 		int winWidth = Singletons.getView().getFrame().getSize().width;
-		System.out.println("Win Width " + winWidth);
 		int[] sizeBoundaries = new int[] {800, 1024, 1280, 2048};
 		return calculateRelativePanelDimension(winWidth, 90, sizeBoundaries);
 	}
@@ -489,7 +488,6 @@ public class DialogChooseSets {
 	// So far, not yet used, but left here just in case
 	private int getMainDialogHeight() {
 		int winHeight = Singletons.getView().getFrame().getSize().height;
-		System.out.println("Win Height " + winHeight);
 		int[] sizeBoundaries = new int[] {600, 720, 780, 1024};
 		return calculateRelativePanelDimension(winHeight, 40, sizeBoundaries);
 	}

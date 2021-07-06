@@ -2,7 +2,6 @@ package forge.itemmanager.filters;
 
 import forge.deck.DeckProxy;
 import forge.game.GameFormat;
-import forge.item.PaperCard;
 import forge.itemmanager.ItemManager;
 import forge.model.FModel;
 
