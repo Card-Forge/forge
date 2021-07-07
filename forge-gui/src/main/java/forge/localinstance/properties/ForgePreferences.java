@@ -187,6 +187,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         SUBMENU_PUZZLE("false"),
         SUBMENU_SETTINGS ("false"),
         SUBMENU_UTILITIES ("false"),
+        SUBMENU_ADVENTURE("false"),
 
         MATCH_SIDEBOARD_FOR_AI("true"), // TODO What do when AI knows how to SIdeboard?
         ENFORCE_DECK_LEGALITY ("true"),
