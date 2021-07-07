@@ -10,3 +10,7 @@ ScryfallCode=AFC
 2 M Prosper, Tome-Bound
 3 M Sefris of the Hidden Ways
 4 M Vrondiss, Rage of Ancients
+317 M Galea, Kindler of Hope
+324 M Prosper, Tome-Bound
+326 M Sefris of the Hidden Ways
+328 M Vrondiss, Rage of Ancients
