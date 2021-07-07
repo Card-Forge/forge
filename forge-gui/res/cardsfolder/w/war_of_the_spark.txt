@@ -1,0 +1,15 @@
+Name:War of the Spark
+ManaCost:3 B
+Types:Enchantment Saga
+K:Saga:3:TrigChangeZone,TrigSac,TrigExile
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Hand,Graveyard | Destination$ Battlefield | ChangeType$ Creature.Zombie+setWAR,Planeswalker.setWAR | DefinedPlayer$ Player | ChangeNum$ 1 | SpellDescription$ Each player may put a planeswalker or Zombie card from War of the Spark from their hand or graveyard onto the battlefield.
+SVar:TrigSac:DB$ Sacrifice | Defined$ You | Amount$ SacX | SacValid$ Creature,Planeswalker | RememberSacrificed$ True | Optional$ True | SubAbility$ DBEdict | SpellDescription$ Sacrifice any number of creatures and/or planeswalkers. Each opponent sacrifices that many creatures and/or planeswalkers.
+SVar:DBEdict:DB$ Sacrifice | Defined$ Player.Opponent | SacValid$ Creature,Planeswalker | SacMessage$ Creature,Planeswalker | Amount$ EdictX
+SVar:TrigExile:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature.Bolas,Planeswalker.Bolas | TgtPrompt$ Select up to one target Bolas | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBProliferate | SpellDescription$ Exile up to one target Bolas. Proliferate three times.
+SVar:DBProliferate:DB$ Proliferate | SubAbility$ DBProliferate2 | SpellDescription$ Proliferate three times.
+SVar:DBProliferate2:DB$ Proliferate | SubAbility$ DBProliferate3
+SVar:DBProliferate3:DB$ Proliferate
+SVar:SacX:Count$Valid Creature.YouCtrl/Plus.SacPlanes
+SVar:SacPlanes:Count$Valid Planeswalker.YouCtrl
+SVar:EdictX:Remembered$Amount
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Each player may put a planeswalker or Zombie card from War of the Spark from their hand or graveyard onto the battlefield.\nII — Sacrifice any number of creatures and/or planeswalkers. Each opponent sacrifices that many creatures and/or planeswalkers.\nIII — Exile up to one target Bolas. Proliferate three times.
