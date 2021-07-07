@@ -2200,6 +2200,10 @@ public class AbilityUtils {
             return doXMath(player.getCycledThisTurn(), expr, c, ctb);
         }
 
+        if (sq[0].equals("YouEquippedThisTurn")) {
+            return doXMath(player.getEquippedThisTurn(), expr, c, ctb);
+        }
+
         if (sq[0].equals("YouDrewThisTurn")) {
             return doXMath(player.getNumDrawnThisTurn(), expr, c, ctb);
         }
