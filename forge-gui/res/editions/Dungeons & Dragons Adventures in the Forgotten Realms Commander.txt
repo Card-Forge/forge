@@ -1,0 +1,12 @@
+[metadata]
+Code=AFC
+Date=2021-07-23
+Name=Dungeons & Dragons: Adventures in the Forgotten Realms Commander
+Type=Commander
+ScryfallCode=AFC
+
+[cards]
+1 M Galea, Kindler of Hope
+2 M Prosper, Tome-Bound
+3 M Sefris of the Hidden Ways
+4 M Vrondiss, Rage of Ancients

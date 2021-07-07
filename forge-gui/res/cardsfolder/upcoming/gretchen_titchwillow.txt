@@ -1,0 +1,7 @@
+Name:Gretchen Titchwillow
+ManaCost:G U
+Types:Legendary Creature Halfling Druid
+PT:0/4
+A:AB$ Draw | Cost$ 2 G U | Defined$ You | NumCards$ 1 | SubAbility$ DBChangeZone | SpellDescription$ Draw a card.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Optional$ You | ChangeType$ Land | ChangeNum$ 1 | SpellDescription$ You may put a land card from your hand onto the battlefield.
+Oracle:{2}{G}{U}: Draw a card. You may put a land card from your hand onto the battlefield.

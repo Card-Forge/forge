@@ -102,6 +102,7 @@ Gamer:Gamers
 Gargoyle:Gargoyles
 Germ:Germs
 Giant:Giants
+Gnoll:Gnolls
 Gnome:Gnomes
 Goat:Goats
 Goblin:Goblins
@@ -113,6 +114,7 @@ Gremlin:Gremlins
 Griffin:Griffins
 Hag:Hags
 Halfling:Halflings
+Hamster:Hamsters
 Harpy:Harpies
 Hellion:Hellions
 Hippo:Hippos
@@ -314,6 +316,7 @@ Angrath
 Arlinn
 Ashiok
 B.O.B.
+Bahamut
 Basri
 Bolas
 Calix
@@ -347,6 +350,7 @@ Koth
 Liliana
 Lolth
 Lukka
+Mordenkainen
 Nahiri
 Narset
 Niko
@@ -378,3 +382,4 @@ Wrenn
 Xenagos
 Yanggu
 Yanling
+Zariel

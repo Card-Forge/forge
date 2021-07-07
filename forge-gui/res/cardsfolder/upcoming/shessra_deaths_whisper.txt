@@ -1,0 +1,10 @@
+Name:Shessra, Death's Whisper
+ManaCost:2 B G
+Types:Legendary Creature Human Elf Warlock
+PT:1/3
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigProvoke | TriggerDescription$ Bewitching Whispers — When CARDNAME enters the battlefield, target creature blocks this turn if able.
+SVar:TrigProvoke:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME blocks each combat if able.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Whispers of the Grave — At the beginning of your end step, if a creature died this turn, you may pay 2 life. If you do, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ PayLife<2> | NumCards$ 1
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+Oracle:Bewitching Whispers — When Shessra, Death’s Whisper enters the battlefield, target creature blocks this turn if able.\nWhispers of the Grave — At the beginning of your end step, if a creature died this turn, you may pay 2 life. If you do, draw a card.

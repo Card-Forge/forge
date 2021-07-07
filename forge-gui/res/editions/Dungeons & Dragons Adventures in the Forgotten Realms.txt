@@ -9,34 +9,48 @@ ScryfallCode=AFR
 
 [cards]
 1 C +2 Mace
+4 M The Book of Exalted Deeds
 5 C Celestial Unicorn
 6 U Cleric Class
 7 U Cloister Gargoyle
+8 R Dancing Sword
 9 C Dawnbringer Cleric
 10 C Delver's Torch
 11 C Devoted Paladin
+12 U Divine Smite
 13 U Dragon's Disciple
 14 C Dwarfhold Champion
 15 R Flumph
 16 C Gloom Stalker
+17 M Grand Master of Flowers
 18 R Guardian of Faith
 19 C Half-Elf Monk
 20 M Icingdeath, Frost Tyrant
+21 U Ingenious Smith
 22 U Keen-Eared Sentry
 24 C Minimus Containment
+25 U Monk of the Open Hand
 26 U Moon-Blessed Cleric
 27 R Nadaar, Selfless Paladin
 28 R Oswald Fiddlebender
+29 R Paladin Class
+30 C Paladin's Shield
 31 C Planar Ally
+32 U Plate Armor
 33 U Portable Hole
+34 C Potion of Healing
+36 U Rally Maneuver
 37 C Ranger's Hawk
+39 R Teleportation Circle
 40 C Veteran Dungeoneer
+41 U White Dragon
 42 C You Hear Something on Watch
 43 C You're Ambushed on the Road
 45 C Air-Cult Elemental
 46 C Arcane Investigator
 47 C Bar the Gate
 48 R The Blackstaff of Waterdeep
+49 U Blue Dragon
 50 C Charmed Sleep
 51 C Clever Conjurer
 52 C Contact Other Plane
@@ -49,6 +63,9 @@ ScryfallCode=AFR
 59 U Fly
 60 R Grazilaxx, Illithid Scholar
 61 U Guild Thief
+62 M Iymrith, Desert Doom
+63 R Mind Flayer
+64 M Mordenkainen
 65 C Mordenkainen's Polymorph
 66 C Pixie Guide
 67 U Power of Persuasion
@@ -58,7 +75,13 @@ ScryfallCode=AFR
 71 C Secret Door
 72 C Shocking Grasp
 73 C Shortcut Seeker
+74 C Silver Raven
+75 C Soulknife Spy
+76 U Split the Party
+77 U Sudden Insight
 78 R Tasha's Hideous Laughter
+80 R True Polymorph
+81 U Wizard Class
 82 R Wizard's Spellbook
 83 C You Come to a River
 84 C You Find the Villains' Lair
@@ -67,14 +90,17 @@ ScryfallCode=AFR
 89 C Baleful Beholder
 90 U Black Dragon
 91 M The Book of Vile Darkness
+92 U Check for Traps
 93 C Clattering Skeletons
 95 U Death-Priest of Myrkul
+96 U Demogorgon's Clutches
 97 C Devour Intellect
 98 U Drider
 99 U Dungeon Crawler
 100 M Ebondeath, Dracolich
 102 C Fates' Reversal
 103 C Feign Death
+104 R Forsworn Paladin
 105 R Gelatinous Cube
 107 U Grim Wanderer
 108 C Herald of Hadar
@@ -84,16 +110,21 @@ ScryfallCode=AFR
 113 C Manticore
 114 U Power Word Kill
 115 C Precipitous Drop
+116 U Ray of Enfeeblement
+118 C Sepulcher Ghoul
 119 C Shambling Ghast
 120 U Skullport Merchant
 121 R Sphere of Annihilation
+123 C Vampire Spawn
 124 R Vorpal Sword
 125 U Warlock Class
 127 R Wight
 128 C Yuan-Ti Fang-Blade
 129 C Zombie Ogre
+131 U Barbarian Class
 132 U Battle Cry Goblin
 134 C Brazen Dwarf
+135 U Burning Hands
 136 U Chaos Channeler
 137 U Critical Hit
 138 R Delina, Wild Mage
@@ -109,15 +140,20 @@ ScryfallCode=AFR
 150 C Improvised Weaponry
 152 C Jaded Sell-Sword
 153 C Kick in the Door
+154 U Magic Missile
 155 R Meteor Swarm
 156 R Minion of the Mighty
 157 R Orb of Dragonkind
 158 C Plundering Barbarian
+159 C Price of Loyalty
 160 U Red Dragon
+161 U Rust Monster
 162 C Swarming Goblins
 163 U Tiger-Tribe Hunter
+164 C Unexpected Windfall
 165 C Valor Singer
 166 R Wish
+167 R Xorn
 168 C You Come to the Gnoll Camp
 169 U You Find Some Prisoners
 170 U You See a Pair of Goblins
@@ -127,28 +163,36 @@ ScryfallCode=AFR
 174 C Bull's Strength
 175 U Choose Your Weapon
 176 R Circle of Dreams Druid
+179 C Dire Wolf Prowler
+180 U Druid Class
 181 M Ellywick Tumblestrum
 182 C Elturgard Ranger
 183 C Find the Path
 184 R Froghemoth
 185 C Gnoll Hunter
 186 U Green Dragon
-186 U Hunter's Mark
 187 C Hill Giant Herdgorger
+188 U Hunter's Mark
 189 C Inspiring Bard
 190 R Instrument of the Bards
 191 U Intrepid Outlander
 192 U Loathsome Troll
 194 U Lurking Roper
+193 R Long Rest
 196 R Ochre Jelly
+197 M Old Gnawbone
 198 C Owlbear
 200 U Prosperous Innkeeper
 201 U Purple Worm
+202 R Ranger Class
+204 C Scaled Herbalist
+205 C Spoils of the Hunt
 206 C Sylvan Shepherd
 207 M The Tarrasque
 209 R Varis, Silverymoon Ranger
 210 U Wandering Troubadour
 211 R Werewolf Pack Leader
+212 U Wild Shape
 213 C You Find a Cursed Idol
 214 U You Happen On a Glade
 215 U You Meet in a Tavern
@@ -158,12 +202,18 @@ ScryfallCode=AFR
 219 U Bruenor Battlehammer
 220 R Drizzt Do'Urden
 221 U Farideh, Devil's Chosen
+222 R Fighter Class
 223 U Gretchen Titchwillow
 224 U Hama Pashar, Ruin Seeker
 225 U Kalain, Reclusive Painter
 226 U Krydle of Baldur's Gate
+227 M Minsc, Beloved Ranger
+228 R Monk Class
 229 R Orcus, Prince of Undeath
+230 R Rogue Class
 231 U Shessra, Death's Whisper
+232 R Skeletal Swarming
+233 R Sorcerer Class
 234 U Targ Nar, Demon-Fang Gnoll
 235 M Tiamat
 236 U Trelasarra, Moon Dancer
@@ -173,6 +223,7 @@ ScryfallCode=AFR
 240 U Bag of Holding
 241 M The Deck of Many Things
 242 U Dungeon Map
+243 R Eye of Vecna
 244 U Fifty Feet of Rope
 249 C Mimic
 251 C Spiked Pit Trap
@@ -203,14 +254,21 @@ ScryfallCode=AFR
 279 L Forest
 280 L Forest
 281 L Forest
+261 R Treasure Vault
+282 M Grand Master of Flowers
+283 M Mordenkainen
 284 M Lolth, Spider Queen
 285 M Zariel, Archduke of Avernus
 286 M Ellywick Tumblestrum
 287 M Icingdeath, Frost Tyrant
+288 U White Dragon
+289 U Blue Dragon
+290 M Iymrith, Desert Doom
 291 U Black Dragon
 292 M Ebondeath, Dracolich
 294 U Red Dragon
 295 U Green Dragon
+296 M Old Gnawbone
 297 R Adult Gold Dragon
 298 M Tiamat
 301 C Celestial Unicorn
@@ -231,8 +289,10 @@ ScryfallCode=AFR
 318 C Goblin Javelineer
 319 U Hulking Bugbear
 320 R Minion of the Mighty
+322 R Xorn
 323 R Zalto, Fire Giant Duke
 324 C Bulette
+325 C Dire Wolf Prowler
 326 C Gnoll Hunter
 327 U Loathsome Troll
 328 U Lurking Roper
@@ -249,6 +309,7 @@ ScryfallCode=AFR
 341 U Hama Pashar, Ruin Seeker
 342 U Kalain, Reclusive Painter
 343 U Krydle of Baldur's Gate
+344 M Minsc, Beloved Ranger
 345 U Shessra, Death's Whisper
 346 U Trelasarra, Moon Dancer
 347 R Volo, Guide to Monsters
@@ -259,12 +320,15 @@ ScryfallCode=AFR
 353 C Evolving Wilds
 354 R Hall of Storm Giants
 355 R Hive of the Eye Tyrant
+360 R Dancing Sword
 361 R Flumph
 362 R Guardian of Faith
+364 R Teleportation Circle
 365 R The Blackstaff of Waterdeep
 366 M Demilich
 367 R Grazilaxx, Illithid Scholar
 368 R Tasha's Hideous Laughter
+369 R True Polymorph
 370 R Wizard's Spellbook
 371 R Yuan-Ti Malison
 374 M The Book of Vile Darkness
@@ -277,11 +341,13 @@ ScryfallCode=AFR
 383 R Circle of Dreams Druid
 384 R Froghemoth
 385 R Instrument of the Bards
+386 R Long Rest
 387 R Werewolf Pack Leader
 388 R Orcus, Prince of Undeath
 390 R Triumphant Adventurer
 391 M Xanathar, Guild Kingpin
 392 M The Deck of Many Things
+394 R Hand of Vecna
 395 R Treasure Chest
 396 R Vorpal Sword
 397 R Treasure Chest
