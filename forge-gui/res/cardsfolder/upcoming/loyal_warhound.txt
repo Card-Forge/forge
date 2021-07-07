@@ -1,0 +1,10 @@
+Name:Loyal Warhound
+ManaCost:1 W
+Types:Creature Dog
+PT:3/1
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | CheckSVar$ Y | SVarCompare$ GTX | TriggerDescription$ When CARDNAME enters the battlefield, if an opponent controls more lands than you, search your library for a basic Plains card, put it onto the battlefield tapped, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Plains.Basic | ChangeNum$ 1 | Mandatory$ True
+SVar:X:Count$Valid Land.YouCtrl
+SVar:Y:PlayerCountOpponents$HighestValid Land.YouCtrl
+Oracle:Vigilance\nWhen Loyal Warhound enters the battlefield, if an opponent controls more lands than you, search your library for a basic Plains card, put it onto the battlefield tapped, then shuffle.
