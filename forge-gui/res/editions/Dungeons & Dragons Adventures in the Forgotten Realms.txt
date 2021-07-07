@@ -289,6 +289,8 @@ ScryfallCode=AFR
 279 C Forest
 280 C Forest
 281 C Forest
+
+[borderless]
 282 M Grand Master of Flowers
 283 M Mordenkainen
 284 M Lolth, Spider Queen
@@ -306,8 +308,10 @@ ScryfallCode=AFR
 296 M Old Gnawbone
 297 R Adult Gold Dragon
 298 M Tiamat
+
+[showcase]
 299 C Arborea Pegasus
-300
+300 U Blink Dog
 301 C Celestial Unicorn
 302 U Cloister Gargoyle
 303 R Nadaar, Selfless Paladin
@@ -336,7 +340,7 @@ ScryfallCode=AFR
 326 C Gnoll Hunter
 327 U Loathsome Troll
 328 U Lurking Roper
-329
+329 C Neverwinter Dryad
 330 R Ochre Jelly
 331 C Owlbear
 332 U Purple Worm
@@ -364,13 +368,15 @@ ScryfallCode=AFR
 354 R Hall of Storm Giants
 355 R Hive of the Eye Tyrant
 356 R Lair of the Hydra
-357
+357 U Temple of the Dragon Queen
 358 R Treasure Vault
+
+[extended art]
 359 M The Book of Exalted Deeds
 360 R Dancing Sword
 361 R Flumph
 362 R Guardian of Faith
-363
+363 R Loyal Warhound
 364 R Teleportation Circle
 365 R The Blackstaff of Waterdeep
 366 M Demilich
@@ -380,7 +386,7 @@ ScryfallCode=AFR
 370 R Wizard's Spellbook
 371 R Yuan-Ti Malison
 372 M Acererak the Archlich
-373
+373 R Asmodeus the Archfiend
 374 M The Book of Vile Darkness
 375 R Forsworn Paladin
 376 R Sphere of Annihilation
@@ -403,7 +409,11 @@ ScryfallCode=AFR
 393 R Eye of Vecna
 394 R Hand of Vecna
 395 R Treasure Chest
+
+[buy a box]
 396 R Vorpal Sword
+
+[promo]
 397 R Treasure Chest
 398 U Portable Hole
 399 C You Find the Villains' Lair
