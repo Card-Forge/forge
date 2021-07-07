@@ -1,0 +1,15 @@
+Name:Acererak the Archlich
+ManaCost:2 B
+Types:Legendary Creature Zombie Wizard
+PT:5/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ X | SVarCompare$ LT1 | Execute$ TrigBounce | TriggerDescription$ When CARDNAME enters the battlefield, if you haven't completed Tomb of Annihilation, return CARDNAME to its owner's hand and venture into the dungeon.
+SVar:TrigBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBVenture
+SVar:DBVenture:DB$ Venture
+SVar:X:PlayerCountPropertyYou$DungeonCompletedNamed_Tomb of Annihilation
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigRepeat | TriggerDescription$ Whenever CARDNAME attacks, for each opponent, you create a 2/2 black Zombie creature token unless that player sacrifices a creature.
+SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ b_2_2_zombie | UnlessCost$ Sac<1/Creature> | UnlessPayer$ Player.IsRemembered
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token
+DeckHints:Type$Zombie
+Oracle:When Acererak the Archlich enters the battlefield, if you haven't completed Tomb of Annihilation, return Acererak the Archlich to its owner's hand and venture into the dungeon.\nWhenever Acererak the Archlich attacks, for each opponent, you create a 2/2 black Zombie creature token unless that player sacrifices a creature.
