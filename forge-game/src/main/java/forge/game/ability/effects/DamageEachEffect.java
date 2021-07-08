@@ -92,7 +92,6 @@ public class DamageEachEffect extends DamageBaseEffect {
                 // TODO shouldn't that be using Num or something first?
                 final int dmg = AbilityUtils.calculateAmount(source, "X", sa);
                 
-                // System.out.println(source+" deals "+dmg+" damage to "+o.toString());
                 if (o instanceof Card) {
                     final Card c = (Card) o;
                     if (c.isInPlay() && (!targeted || c.canBeTargetedBy(sa))) {
