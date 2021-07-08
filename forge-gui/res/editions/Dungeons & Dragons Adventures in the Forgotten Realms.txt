@@ -269,26 +269,26 @@ ScryfallCode=AFR
 259 R Lair of the Hydra
 260 U Temple of the Dragon Queen
 261 R Treasure Vault
-262 C Plains
-263 C Plains
-264 C Plains
-265 C Plains
-266 C Island
-267 C Island
-268 C Island
-269 C Island
-270 C Swamp
-271 C Swamp
-272 C Swamp
-273 C Swamp
-274 C Mountain
-275 C Mountain
-276 C Mountain
-277 C Mountain
-278 C Forest
-279 C Forest
-280 C Forest
-281 C Forest
+262 L Plains
+263 L Plains
+264 L Plains
+265 L Plains
+266 L Island
+267 L Island
+268 L Island
+269 L Island
+270 L Swamp
+271 L Swamp
+272 L Swamp
+273 L Swamp
+274 L Mountain
+275 L Mountain
+276 L Mountain
+277 L Mountain
+278 L Forest
+279 L Forest
+280 L Forest
+281 L Forest
 
 [borderless]
 282 M Grand Master of Flowers
