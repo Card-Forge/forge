@@ -113,10 +113,10 @@ public class DeckRecognizer {
             useLastSet = null;
         }
         else if (onlyCoreAndExp) {
-            useLastSet = CardArtPreference.LatestPrintNoPromoNoOnline;
+            useLastSet = CardArtPreference.LatestArtExcludedPromoAndOnlineEditions;
         }
         else {
-            useLastSet = CardArtPreference.LatestPrint;
+            useLastSet = CardArtPreference.LatestArtAllEditions;
         }
         this.db = db;
     }
