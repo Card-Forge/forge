@@ -50,7 +50,7 @@ public class OperatingSystem {
                 //use robot to simulate user action so system standby timer resets
                 java.awt.Robot robot = new java.awt.Robot();
                 if (isMac())
-                    robot.keyPress(KeyEvent.VK_F1); // F15 increases Display Brightness by default. Switch to F1
+                    robot.keyPress(KeyEvent.VK_F4); // F15 increases Display Brightness by default. Switch to F4 (F1 is help in some programs, e.g. Discord)
                 else
                     robot.keyPress(KeyEvent.VK_F15); //simulate F15 key press since that won't do anything noticeable
 
