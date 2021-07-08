@@ -1,18 +1,5 @@
 package forge.screens.home.settings;
 
-import java.awt.Desktop;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JCheckBox;
-import javax.swing.SwingUtilities;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
-
 import forge.MulliganDefs;
 import forge.Singletons;
 import forge.StaticData;
@@ -38,6 +25,16 @@ import forge.toolbox.FComboBoxPanel;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.util.Localizer;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Controls the preferences submenu in the home UI.
@@ -251,6 +248,7 @@ public enum CSubmenuPreferences implements ICDoc {
         initializeGameLogVerbosityComboBox();
         initializeCloseActionComboBox();
         initializeDefaultFontSizeComboBox();
+        initializeCardArtPreference();
         initializeAutoUpdaterComboBox();
         initializeMulliganRuleComboBox();
         initializeAiProfilesComboBox();
@@ -445,6 +443,15 @@ public enum CSubmenuPreferences implements ICDoc {
         final FPref userSetting = FPref.UI_CURRENT_AI_PROFILE;
         final FComboBoxPanel<String> panel = this.view.getAiProfilesComboBoxPanel();
         final FComboBox<String> comboBox = createComboBox(AiProfileUtil.getProfilesArray(), userSetting);
+        final String selectedItem = this.prefs.getPref(userSetting);
+        panel.setComboBox(comboBox, selectedItem);
+    }
+
+    private void initializeCardArtPreference() {
+        final String [] choices = FModel.getMagicDb().getCardArtAvailablePreferences();
+        final FPref userSetting = FPref.UI_PREFERRED_ART;
+        final FComboBoxPanel<String> panel = this.view.getCbpCardArtPreference();
+        final FComboBox<String> comboBox = createComboBox(choices, userSetting);
         final String selectedItem = this.prefs.getPref(userSetting);
         panel.setComboBox(comboBox, selectedItem);
     }

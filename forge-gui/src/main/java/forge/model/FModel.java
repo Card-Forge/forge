@@ -17,16 +17,10 @@
  */
 package forge.model;
 
-import java.io.File;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import com.google.common.base.Function;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
-
 import forge.CardStorageReader;
 import forge.CardStorageReader.ProgressObserver;
 import forge.ImageKeys;
@@ -60,24 +54,19 @@ import forge.gui.card.CardPreferences;
 import forge.gui.interfaces.IProgressBar;
 import forge.item.PaperCard;
 import forge.itemmanager.ItemManagerConfig;
-import forge.localinstance.achievements.AchievementCollection;
-import forge.localinstance.achievements.ConstructedAchievements;
-import forge.localinstance.achievements.DraftAchievements;
-import forge.localinstance.achievements.PlanarConquestAchievements;
-import forge.localinstance.achievements.PuzzleAchievements;
-import forge.localinstance.achievements.QuestAchievements;
-import forge.localinstance.achievements.SealedAchievements;
+import forge.localinstance.achievements.*;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.player.GamePlayerUtil;
-import forge.util.CardTranslation;
-import forge.util.FileUtil;
-import forge.util.ItemPool;
-import forge.util.Lang;
-import forge.util.Localizer;
+import forge.util.*;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
+
+import java.io.File;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * The default Model implementation for Forge.
@@ -191,7 +180,7 @@ public final class FModel {
         }
         magicDb = new StaticData(reader, tokenReader, customReader, ForgeConstants.EDITIONS_DIR,
                                  ForgeConstants.USER_CUSTOM_EDITIONS_DIR,ForgeConstants.BLOCK_DATA_DIR,
-                                 FModel.getPreferences().getPref(FPref.UI_PREFERRED_CARD_FRAME),
+                                 FModel.getPreferences().getPref(FPref.UI_PREFERRED_ART),
                                  FModel.getPreferences().getPrefBoolean(FPref.UI_LOAD_UNKNOWN_CARDS),
                                  FModel.getPreferences().getPrefBoolean(FPref.UI_LOAD_NONLEGAL_CARDS));
         CardTranslation.preloadTranslation(preferences.getPref(FPref.UI_LANGUAGE), ForgeConstants.LANG_DIR);
