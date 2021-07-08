@@ -1,0 +1,14 @@
+Name:Flameskull
+ManaCost:1 R R
+Types:Creature Skeleton
+PT:3/1
+K:Flying
+K:CARDNAME can't block.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigExile | TriggerDescription$ Rejuvenation – When CARDNAME dies, exile it. If you do, exile the top card of your library. Until the end of your next turn, you may play one of those cards. (If you cast CARDNAME this way, you can't play the other card, and vice versa.)
+SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | SubAbility$ DBExile
+SVar:DBExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ MayPlay | Duration$ UntilTheEndOfYourNextTurn | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:MayPlay:Mode$ Continuous | Affected$ Card.IsRemembered | MayPlay$ True | MayPlayLimit$ 1 | EffectZone$ Command | AffectedZone$ Exile | Description$ Until the end of your next turn, you may play one of these cards. (If you cast EFFECTSOURCE this way, you can't play the other card, and vice versa.)
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:SacMe:3
+Oracle:Flying\nFlameskull can’t block.\nRejuvenation — When Flameskull dies, exile it. If you do, exile the top card of your library. Until the end of your next turn, you may play one of those cards. (If you cast Flameskull this way, you can't play the other card, and vice versa.)

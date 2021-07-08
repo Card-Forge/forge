@@ -2200,6 +2200,10 @@ public class AbilityUtils {
             return doXMath(player.getCycledThisTurn(), expr, c, ctb);
         }
 
+        if (sq[0].equals("YouEquippedThisTurn")) {
+            return doXMath(player.getEquippedThisTurn(), expr, c, ctb);
+        }
+
         if (sq[0].equals("YouDrewThisTurn")) {
             return doXMath(player.getNumDrawnThisTurn(), expr, c, ctb);
         }
@@ -3371,6 +3375,18 @@ public class AbilityUtils {
 
         if (value.equals("DungeonsCompleted")) {
             return doXMath(player.getCompletedDungeons().size(), m, source, ctb);
+        }
+        if (value.startsWith("DungeonCompletedNamed")) {
+            String [] full = value.split("_");
+            String name = full[1];
+            int completed = 0;
+            List<Card> dungeons = player.getCompletedDungeons();
+            for (Card c : dungeons) {
+                if (c.getName().equals(name)) {
+                    ++completed;
+                }
+            }
+            return doXMath(completed, m, source, ctb);
         }
         if (value.equals("DifferentlyNamedDungeonsCompleted")) {
             int amount = 0;

@@ -1,0 +1,8 @@
+Name:Dog Illusion
+ManaCost:no cost
+Types:Creature Dog Illusion
+Colors:blue
+PT:*/*
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ This creature's power and toughness are each equal to twice the number of cards in your hand.
+SVar:X:Count$InYourHand/Times.2
+Oracle:This creature's power and toughness are each equal to twice the number of cards in your hand.

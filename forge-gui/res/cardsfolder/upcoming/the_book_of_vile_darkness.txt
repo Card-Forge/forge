@@ -1,0 +1,12 @@
+Name:The Book of Vile Darkness
+ManaCost:B B B
+Types:Legendary Artifact
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | CheckSVar$ X | SVarCompare$ GE2 | TriggerDescription$ At the beginning of your end step, if you lost 2 or more life this turn, create a 2/2 black Zombie creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ b_2_2_zombie
+SVar:X:PlayerCountPropertyYou$LifeLostThisTurn
+A:AB$ Token | Cost$ T Exile<1/CARDNAME> Exile<1/Artifact.YouCtrl+namedEye of Vecna> Exile<1/Artifact.YouCtrl+namedHand of Vecna> | RememberCostCards$ True | ImprintTokens$ True | CostDesc$ {T}, Exile CARDNAME and artifacts you control named Eye of Vecna and Hand of Vecna: | TokenScript$ vecna | SubAbility$ DBAnimate | SpellDescription$ Create Vecna, a legendary 8/8 black Zombie God creature token with indestructible. It gains all triggered abilities of the exiled cards.
+SVar:DBAnimate:DB$ Animate | Defined$ Imprinted | Duration$ Permanent | GainsTriggeredAbilitiesOf$ Remembered
+DeckHas:Ability$Token
+DeckHints:Type$Zombie
+DeckHints:Name$Eye of Vecna|Hand of Vecna
+Oracle:At the beginning of your end step, if you lost 2 or more life this turn, create a 2/2 black Zombie creature token.\n{T}, Exile The Book of Vile Darkness and artifacts you control named Eye of Vecna and Hand of Vecna: Create Vecna, a legendary 8/8 black Zombie God creature token with indestructible. It gains all triggered abilities of the exiled cards.

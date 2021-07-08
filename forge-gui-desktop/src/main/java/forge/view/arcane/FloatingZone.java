@@ -188,6 +188,15 @@ public class FloatingZone extends FloatingCardArea {
             case Flashback:
                 window.setIconImage(FSkin.getImage(FSkinProp.IMG_ZONE_FLASHBACK));
                 break;
+            case Command:
+                window.setIconImage(FSkin.getImage(FSkinProp.IMG_PLANESWALKER));
+                break;
+            case Ante:
+                window.setIconImage(FSkin.getImage(FSkinProp.IMG_ZONE_ANTE));
+                break;
+            case Sideboard:
+                window.setIconImage(FSkin.getImage(FSkinProp.IMG_ZONE_SIDEBOARD));
+                break;
             default:
                 locPref = null;
                 break;
@@ -246,6 +255,15 @@ public class FloatingZone extends FloatingCardArea {
                 break;
             case Flashback:
                 locPref = isAi ? FPref.ZONE_LOC_AI_FLASHBACK : FPref.ZONE_LOC_HUMAN_FLASHBACK;
+                break;
+            case Command:
+                locPref = isAi ? FPref.ZONE_LOC_AI_COMMAND : FPref.ZONE_LOC_HUMAN_COMMAND;
+                break;
+            case Ante:
+                locPref = isAi ? FPref.ZONE_LOC_AI_ANTE : FPref.ZONE_LOC_HUMAN_ANTE;
+                break;
+            case Sideboard:
+                locPref = isAi ? FPref.ZONE_LOC_AI_SIDEBOARD : FPref.ZONE_LOC_HUMAN_SIDEBOARD;
                 break;
             default:
                 locPref = null;

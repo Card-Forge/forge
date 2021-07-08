@@ -485,6 +485,7 @@ public final class CMatchUI
                         case Exile:
                         case Flashback:
                         case Command:
+                        case Ante:
                         case Sideboard:
                             if (FloatingZone.show(this,player,zone)) {
                                 updatedPlayerZones.add(update);
@@ -513,6 +514,8 @@ public final class CMatchUI
                         case Exile:
                         case Flashback:
                         case Command:
+                        case Ante:
+                        case Sideboard:
                             FloatingZone.hide(this,player,zone);
                             break;
                         default:

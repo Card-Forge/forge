@@ -1,0 +1,10 @@
+Name:Minsc, Beloved Ranger
+ManaCost:R G W
+Types:Legendary Creature Human Ranger
+PT:3/3
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigMinsc | TriggerDescription$ When CARDNAME enters the battlefield, create Boo, a legendary 1/1 red Hamster creature token with trample and haste.
+SVar:TrigMinsc:DB$ Token | TokenAmount$ 1 | TokenScript$ boo | TokenOwner$ You
+A:AB$ Animate | Cost$ X | Power$ X | Toughness$ X | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Types$ Giant | SorcerySpeed$ True | SpellDescription$ Until end of turn, target creature you control has base power and toughness X/X and becomes a Giant in addition to its other types. Activate only a sorcery.
+SVar:X:Count$xPaid
+DeckHas:Ability$Token
+Oracle:When Minsc, Beloved Ranger enters the battlefield, create Boo, a legendary 1/1 red Hamster creature token with trample and haste.\n{X}: Until end of turn, target creature you control has base power and toughness X/X and becomes a Giant in addition to its other types. Activate only a sorcery.

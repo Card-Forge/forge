@@ -1,0 +1,8 @@
+Name:Goblin Javelineer
+ManaCost:R
+Types:Creature Goblin Warrior
+PT:1/1
+K:Haste
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME becomes blocked, it deals 1 damage to target creature blocking it.
+SVar:TrigDealDamage:DB$ DealDamage | DamageSource$ TriggeredAttacker | NumDmg$ 1 | Defined$ TriggeredBlockers
+Oracle:Haste\nWhenever Goblin Javelineer becomes blocked, it deals 1 damage to target creature blocking it.

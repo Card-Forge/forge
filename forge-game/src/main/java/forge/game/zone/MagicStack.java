@@ -326,6 +326,11 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 activator.addCycled(sp);
             }
 
+            // Log number of Equips
+            if (sp.hasParam("Equip")) {
+                activator.addEquipped();
+            }
+
             if (sp.hasParam("Crew")) {
                 // Trigger crews!
                 runParams.put(AbilityKey.Vehicle, sp.getHostCard());
