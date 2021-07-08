@@ -601,8 +601,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             tempShow(delayedReveal.getCards());
         }
 
-        GameEntityViewMap<T, GameEntityView> gameCacheChoose = GameEntityView.getMap(optionList);
-
         if (useSelectCardsInput(optionList)) {
             final InputSelectEntitiesFromList<T> input = new InputSelectEntitiesFromList<>(this, isOptional ? 0 : 1, 1,
                     optionList, sa);
@@ -613,6 +611,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             return Iterables.getFirst(input.getSelected(), null);
         }
 
+        GameEntityViewMap<T, GameEntityView> gameCacheChoose = GameEntityView.getMap(optionList);
         final GameEntityView result = getGui().chooseSingleEntityForEffect(title,
                 gameCacheChoose.getTrackableKeys(), delayedReveal, isOptional);
         endTempShowCards();
@@ -626,8 +625,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public <T extends GameEntity> List<T> chooseEntitiesForEffect(final FCollectionView<T> optionList, final int  min, final int max,
             final DelayedReveal delayedReveal, final SpellAbility sa, final String title, final Player targetedPlayer, Map<String, Object> params) {
-
-
         // useful details for debugging problems with the mass select logic
         Sentry.getContext().addExtra("Card", sa.getCardView().toString());
         Sentry.getContext().addExtra("SpellAbility", sa.toString());
@@ -655,6 +652,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             endTempShowCards();
             return (List<T>) input.getSelected();
         }
+
         GameEntityViewMap<T, GameEntityView> gameCacheEntity = GameEntityView.getMap(optionList);
         final List<GameEntityView> views = getGui().chooseEntitiesForEffect(title, gameCacheEntity.getTrackableKeys(), min, max, delayedReveal);
         endTempShowCards();
@@ -700,8 +698,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         Map<SpellAbilityView, SpellAbility> spellViewCache = SpellAbilityView.getMap(spells);
         Object choice = getGui().one(title, Lists.newArrayList(spellViewCache.keySet()));
 
-        // Human is supposed to read the message and understand from it what to
-        // choose
+        // Human is supposed to read the message and understand from it what to choose
         return spellViewCache.get(choice);
     }
 
@@ -948,8 +945,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         CardCollection toTop = null;
 
         tempShowCards(topN);
-        if ( FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS) &&
-             (!GuiBase.getInterface().isLibgdxPort()) && (!GuiBase.isNetworkplay())) { //prevent crash for  desktop vs mobile port it will crash the netplay since mobile doesnt have manipulatecardlist, send the alternate below
+        if (FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS) &&
+             (!GuiBase.getInterface().isLibgdxPort()) && (!GuiBase.isNetworkplay())) { //prevent crash for desktop vs mobile port it will crash the netplay since mobile doesnt have manipulatecardlist, send the alternate below
             CardCollectionView cardList = player.getCardsIn(ZoneType.Library);
             ImmutablePair<CardCollection, CardCollection> result =
             arrangeForMove(localizer.getMessage("lblMoveCardstoToporBbottomofLibrary"), cardList, topN, true, true);
@@ -1566,8 +1563,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public List<SpellAbility> chooseSaToActivateFromOpeningHand(final List<SpellAbility> usableFromOpeningHand) {
-
-
         final CardCollection srcCards = new CardCollection();
         for (final SpellAbility sa : usableFromOpeningHand) {
             srcCards.add(sa.getHostCard());
@@ -2557,7 +2552,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
          */
         @Override
         public void setPlayerLife() {
-
             GameEntityViewMap<Player, PlayerView> gameCachePlayer = GameEntityView.getMap(getGame().getPlayers());
 
             final PlayerView pv = getGui().oneOrNone(localizer.getMessage("lblSetLifeforWhichPlayer"), gameCachePlayer.getTrackableKeys());

@@ -1,0 +1,10 @@
+Name:Lair of the Hydra
+ManaCost:no cost
+Types:Land
+K:ETBReplacement:Other:LandTapped
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionCheckSVar$ ETBCheckSVar2 | ConditionSVarCompare$ GT1 | SpellDescription$ If you control two or more other lands, CARDNAME enters the battlefield tapped.
+SVar:ETBCheckSVar2:Count$LastStateBattlefield Land.YouCtrl
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+A:AB$ Animate | Cost$ X G XCantBe0 | Defined$ Self | Power$ X | Toughness$ X | Types$ Creature,Hydra | Colors$ Green | SpellDescription$ Until end of turn, CARDNAME becomes an X/X green Hydra creature. It's still a land. X can't be 0.
+SVar:X:Count$xPaid
+Oracle:If you control two or more other lands, Lair of the Hydra enters the battlefield tapped.\n{T}: Add {G}.\n{X}{G}: Until end of turn, Lair of the Hydra becomes an X/X green Hydra creature. It's still a land. X can't be 0.

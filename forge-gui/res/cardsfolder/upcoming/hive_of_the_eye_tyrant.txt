@@ -1,0 +1,11 @@
+Name:Hive of the Eye Tyrant
+ManaCost:no cost
+Types:Land
+K:ETBReplacement:Other:LandTapped
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionCheckSVar$ ETBCheckSVar2 | ConditionSVarCompare$ GE2 | SpellDescription$ If you control two or more other lands, CARDNAME enters the battlefield tapped.
+SVar:ETBCheckSVar2:Count$LastStateBattlefield Land.YouCtrl
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
+A:AB$ Animate | Cost$ 3 B | Defined$ Self | Power$ 3 | Toughness$ 3 | Types$ Creature,Beholder | Colors$ Black | Keywords$ Menace | Triggers$ TrigAttack | SpellDescription$ Until end of turn, CARDNAME becomes a 3/3 black Beholder creature with menace and "Whenever this creature attacks, exile target card from defending player's graveyard." It's still a land.
+SVar:TrigAttack:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ TrigChangeZone | TriggerDescription$ Whenever this creature attacks, exile target card from defending player's graveyard.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card.DefendingPlayerCtrl | TgtPrompt$ Select target card in defending player's graveyard
+Oracle:If you control two or more other lands, Hive of the Eye Tyrant enters the battlefield tapped.\n{T}: Add {B}.\n{3}{B}: Until end of turn, Hive of the Eye Tyrant becomes a 3/3 black Beholder creature with menace and "Whenever this creature attacks, exile target card from defending player's graveyard." It's still a land.

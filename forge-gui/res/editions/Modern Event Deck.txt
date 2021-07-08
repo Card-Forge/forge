@@ -4,7 +4,7 @@ Date=2014-05-30
 Name=Modern Event Deck
 Code2=MD1
 MciCode=md1
-Type=other
+Type=Boxed_Set
 ScryfallCode=MD1
 
 [cards]

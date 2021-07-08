@@ -1,8 +1,8 @@
 [metadata]
 Code=CMR
-Date=2020-11-11
+Date=2020-11-20
 Name=Commander Legends
-Type=Other
+Type=Draft
 Booster=13 Common:fromSheet("CMR cards"), 3 fromSheet("CMR Non-Legendary Uncommons"), 1 fromSheet("CMR Non-Legendary RareMythics"), 1 fromSheet("CMR Foils"), 2 fromSheet("CMR Legendaries")
 Foil=NotSupported
 DoublePick=Always

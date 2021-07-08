@@ -1,0 +1,11 @@
+Name:Djinni Windseer
+ManaCost:3 U
+Types:Creature Djinn
+PT:3/3
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigRollDice | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
+SVar:TrigRollDice:DB$ RollDice | Sides$ 20 | ResultSubAbilities$ 1-9:Scry1,10-19:Scry2,20:Scry3 | SpellDescription$ roll a d20.
+SVar:Scry1:DB$ Scry | ScryNum$ 1 | SpellDescription$ 1-9 VERT Scry 1.
+SVar:Scry2:DB$ Scry | ScryNum$ 2 | SpellDescription$ 10-19 VERT Scry 2.
+SVar:Scry3:DB$ Scry | ScryNum$ 3 | SpellDescription$ 20 VERT Scry 3.
+Oracle:Flying\nWhen Djinni Windseer enters the battlefield, roll a d20.\n1-9 | Scry 1.\n10-19 | Scry 2.\n20 | Scry 3.

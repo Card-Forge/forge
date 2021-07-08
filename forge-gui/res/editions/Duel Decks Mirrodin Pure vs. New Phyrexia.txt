@@ -1,10 +1,10 @@
 [metadata]
 Code=TD2
-Date=2013-01-11
+Date=2011-05-14
 Name=Duel Decks: Mirrodin Pure vs. New Phyrexia
 MciCode=td2
 Type=Online
-Type=Duel_Decks
+Type=Online
 ScryfallCode=TD2
 
 [cards]

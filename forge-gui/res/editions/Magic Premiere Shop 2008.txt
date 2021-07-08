@@ -2,7 +2,7 @@
 Code=PMPS08
 Date=2008-01-01
 Name=Magic Premiere Shop 2008
-Type=Promos
+Type=Promo
 CardLang=ja
 ScryfallCode=PMPS08
 

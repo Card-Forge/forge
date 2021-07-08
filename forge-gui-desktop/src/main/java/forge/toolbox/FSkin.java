@@ -142,7 +142,7 @@ public class FSkin {
      *
      * @param clr0 {@link java.awt.Color}
      * @param step int
-     * @return {@link java.awt.CFaceolor}
+     * @return {@link java.awt.Color}
      */
     public static Color stepColor(final Color clr0, final int step) {
         int r = clr0.getRed();

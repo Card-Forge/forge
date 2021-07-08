@@ -2,7 +2,7 @@
 Code=PEXO
 Date=1998-06-15
 Name=Exodus Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PEXO
 
 [cards]

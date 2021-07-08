@@ -2,7 +2,7 @@
 Code=PHOU
 Date=2017-07-14
 Name=Hour of Devastation Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PHOU
 
 [cards]

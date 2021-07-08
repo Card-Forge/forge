@@ -1,0 +1,10 @@
+Name:Wight
+ManaCost:1 B
+Types:Creature Zombie Soldier
+PT:3/2
+K:CARDNAME enters the battlefield tapped.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.DamagedBy | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Life Drain — Whenever a creature dealt damage by CARDNAME this turn dies, create a tapped 2/2 black Zombie creature token and exile that card.
+SVar:TrigToken:DB$ Token | TokenScript$ b_2_2_zombie | TokenTapped$ True | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Defined$ TriggeredCard
+DeckHas:Ability$Token
+Oracle:Wight enters the battlefield tapped.\nLife Drain — Whenever a creature dealt damage by Wight this turn dies, create a tapped 2/2 black Zombie creature token and exile that card.

@@ -1,0 +1,9 @@
+Name:Cave of the Frost Dragon
+ManaCost:no cost
+Types:Land
+K:ETBReplacement:Other:LandTapped
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionCheckSVar$ ETBCheckSVar2 | ConditionSVarCompare$ GE2 | SpellDescription$ If you control two or more other lands, CARDNAME enters the battlefield tapped.
+SVar:ETBCheckSVar2:Count$LastStateBattlefield Land.YouCtrl
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
+A:AB$ Animate | Cost$ 4 W | Defined$ Self | Power$ 3 | Toughness$ 4 | Types$ Creature,Dragon | Colors$ White | Keywords$ Flying | SpellDescription$ CARDNAME becomes a 3/4 white Dragon creature with flying until end of turn. It’s still a land.
+Oracle:If you control two or more other lands, Cave of the Frost Dragon enters the battlefield tapped.\n{T}: Add {W}.\n{4}{W}: Cave of the Frost Dragon becomes a 3/4 white Dragon creature with flying until end of turn. It’s still a land.

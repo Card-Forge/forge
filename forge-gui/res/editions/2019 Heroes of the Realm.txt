@@ -1,0 +1,17 @@
+[metadata]
+Code=HTR19
+Date=2020-08-01
+Name=2019 Heroes of the Realm
+Code2=HTR19
+MciCode=htr19
+Type=Funny
+ScryfallCode=HTR19
+
+[cards]
+1 M Collectigull
+2 M Keeper of the Secret Lair
+3 M War of the Spark
+4 M Champions of Archery
+5 M Myntasha, Honored One
+6 M The Cinematic Phoenix
+7 M Fabled Path of Searo Point

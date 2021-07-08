@@ -2,7 +2,7 @@
 Code=CP1
 Date=2014-07-18
 Name=Magic 2015 Clash Pack
-Type=Promos
+Type=Starter
 ScryfallCode=CP1
 
 [cards]

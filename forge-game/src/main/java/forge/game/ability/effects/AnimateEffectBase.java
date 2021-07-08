@@ -120,7 +120,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
 
         if (!addType.isEmpty() || !removeType.isEmpty() || removeCreatureTypes) {
             c.addChangedCardTypes(addType, removeType, removeSuperTypes, removeCardTypes, removeSubTypes,
-                    removeLandTypes, removeCreatureTypes, removeArtifactTypes, removeEnchantmentTypes, timestamp);
+                    removeLandTypes, removeCreatureTypes, removeArtifactTypes, removeEnchantmentTypes, timestamp, true, false);
         }
 
         c.addChangedCardKeywords(keywords, removeKeywords, removeAll, removeLandTypes, timestamp);
@@ -133,7 +133,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             c.addHiddenExtrinsicKeyword(k);
         }
 
-        c.addColor(colors, !sa.hasParam("OverwriteColors"), timestamp);
+        c.addColor(colors, !sa.hasParam("OverwriteColors"), timestamp, false);
 
         if (sa.hasParam("LeaveBattlefield")) {
             addLeaveBattlefieldReplacement(c, sa, sa.getParam("LeaveBattlefield"));
@@ -163,6 +163,14 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         for (final String s : triggers) {
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(AbilityUtils.getSVar(sa, s), c, false, sa);
             addedTriggers.add(parsedTrigger);
+        }
+        if (sa.hasParam("GainsTriggeredAbilitiesOf")) {
+            final List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("GainsTriggeredAbilitiesOf"), sa);
+            for (final Card card : cards) {
+                for (Trigger t : card.getTriggers()) {
+                    addedTriggers.add(t.copy(c, false));
+                }
+            }
         }
 
         // give replacement effects

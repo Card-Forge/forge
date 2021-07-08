@@ -2,7 +2,7 @@
 Code=F06
 Date=2006-01-01
 Name=Friday Night Magic 2006
-Type=Promos
+Type=Promo
 ScryfallCode=F06
 
 [cards]

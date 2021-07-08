@@ -2,7 +2,7 @@
 Code=PMPS06
 Date=2006-01-01
 Name=Magic Premiere Shop 2006
-Type=Promos
+Type=Promo
 CardLang=ja
 ScryfallCode=PMPS06
 

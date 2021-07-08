@@ -1,8 +1,8 @@
 [metadata]
 Code=PBFZ
-Date=2015-10-03
+Date=2015-10-02
 Name=Battle for Zendikar Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PBFZ
 
 [cards]

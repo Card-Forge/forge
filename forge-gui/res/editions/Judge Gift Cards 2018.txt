@@ -2,7 +2,7 @@
 Code=J18
 Date=2018-01-01
 Name=Judge Gift Cards 2018
-Type=Promos
+Type=Promo
 ScryfallCode=J18
 
 [cards]

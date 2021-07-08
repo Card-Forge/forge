@@ -3,7 +3,7 @@ Code=DPA
 Date=2010-06-04
 Name=Duels of the Planeswalkers
 MciCode=dpa
-Type=Other
+Type=Boxed_Set
 ScryfallCode=DPA
 
 [cards]

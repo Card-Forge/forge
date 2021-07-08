@@ -1,0 +1,11 @@
+Name:Ingenious Smith
+ManaCost:1 W
+Types:Creature Human Artificer
+PT:1/1
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, look at the top four cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+SVar:TrigDig:DB$ Dig | DigNum$ 4 | ChangeNum$ 1 | Optional$ True | ForceRevealToController$ True | ChangeValid$ Artifact | RestRandomOrder$ True
+T:Mode$ ChangesZoneAll | ValidCards$ Artifact.YouCtrl | Destination$ Battlefield | TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ TrigPutCounter | TriggerDescription$ Whenever one or more artifacts enter the battlefield under your control, put a +1/+1 counter on CARDNAME. This ability triggers only once each turn.
+SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHints:Type$Artifact
+DeckHas:Ability$Counters
+Oracle:When Ingenious Smith enters the battlefield, look at the top four cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.\nWhenever one or more artifacts enter the battlefield under your control, put a +1/+1 counter on Ingenious Smith. This ability triggers only once each turn.

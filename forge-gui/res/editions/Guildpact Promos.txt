@@ -2,7 +2,7 @@
 Code=PGPT
 Date=2006-02-03
 Name=Guildpact Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PGPT
 
 [cards]

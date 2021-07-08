@@ -2,7 +2,7 @@
 Code=PAL99
 Date=1999-01-01
 Name=Arena League 1999
-Type=Promos
+Type=Promo
 ScryfallCode=PAL99
 
 [cards]

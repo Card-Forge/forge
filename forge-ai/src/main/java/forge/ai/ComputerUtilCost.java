@@ -346,6 +346,19 @@ public class ComputerUtilCost {
         return true;
     }
 
+    /**
+     * Check sacrifice cost.
+     *
+     * @param cost
+     *            the cost
+     * @param source
+     *            the source
+     * @return true, if successful
+     */
+    public static boolean checkSacrificeCost(final Player ai, final Cost cost, final Card source, final SpellAbility sourceAbility) {
+        return checkSacrificeCost(ai, cost, source, sourceAbility, true);
+    }
+
     public static boolean isSacrificeSelfCost(final Cost cost) {
         if (cost == null) {
             return false;
@@ -404,19 +417,6 @@ public class ComputerUtilCost {
             }
         }
         return true;
-    }
-
-    /**
-     * Check sacrifice cost.
-     *
-     * @param cost
-     *            the cost
-     * @param source
-     *            the source
-     * @return true, if successful
-     */
-    public static boolean checkSacrificeCost(final Player ai, final Cost cost, final Card source, final SpellAbility sourceAbility) {
-        return checkSacrificeCost(ai, cost, source, sourceAbility, true);
     }
 
     /**

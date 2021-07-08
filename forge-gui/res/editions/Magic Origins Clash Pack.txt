@@ -2,7 +2,7 @@
 Code=CP3
 Date=2015-07-17
 Name=Magic Origins Clash Pack
-Type=Promos
+Type=Starter
 ScryfallCode=CP3
 
 [cards]

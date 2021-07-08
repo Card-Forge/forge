@@ -3,7 +3,7 @@ Code=CST
 Date=2006-07-21
 Name=Coldsnap Theme Decks
 MciCode=cst
-Type=Other
+Type=Boxed_Set
 ScryfallCode=CST
 
 [cards]

@@ -1,6 +1,6 @@
 [metadata]
 Code=6ED
-Date=1999-04-28
+Date=1999-04-21
 Name=Classic Sixth Edition
 Code2=6E
 MciCode=6e

@@ -2,7 +2,7 @@
 Code=OLGC
 Date=2011-01-01
 Name=Legacy Championship
-Type=Promos
+Type=Promo
 ScryfallCode=OLGC
 
 [cards]

@@ -2,7 +2,7 @@
 Code=ZNC
 Date=2020-09-25
 Name=Zendikar Rising Commander
-Type=Other
+Type=Commander
 ScryfallCode=ZNC
 
 [cards]

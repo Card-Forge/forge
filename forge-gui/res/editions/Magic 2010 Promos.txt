@@ -2,7 +2,7 @@
 Code=PM10
 Date=2009-07-16
 Name=Magic 2010 Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PM10
 
 [cards]

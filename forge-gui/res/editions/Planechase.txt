@@ -5,7 +5,7 @@ Name=Planechase
 Alias=PCH
 Code2=HOP
 MciCode=pch
-Type=Other
+Type=Multiplayer
 ScryfallCode=HOP
 
 [cards]

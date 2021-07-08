@@ -2,7 +2,7 @@
 Code=PMPS09
 Date=2009-01-01
 Name=Magic Premiere Shop 2009
-Type=Promos
+Type=Promo
 CardLang=ja
 ScryfallCode=PMPS09
 

@@ -4,7 +4,7 @@ Date=2013-11-01
 Name=Commander 2013
 Code2=C13
 MciCode=c13
-Type=Other
+Type=Commander
 ScryfallCode=C13
 
 [cards]

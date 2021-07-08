@@ -2,7 +2,7 @@
 Code=PMPS10
 Date=2010-01-01
 Name=Magic Premiere Shop 2010
-Type=Promos
+Type=Promo
 CardLang=ja
 ScryfallCode=PMPS10
 

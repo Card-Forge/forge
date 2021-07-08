@@ -2,7 +2,7 @@
 Code=PNAT
 Date=2018-01-25
 Name=Nationals Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PNAT
 
 [cards]

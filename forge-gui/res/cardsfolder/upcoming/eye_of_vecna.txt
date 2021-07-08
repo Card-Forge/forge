@@ -1,0 +1,10 @@
+Name:Eye of Vecna
+ManaCost:2
+Types:Legendary Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, you draw a card and you lose 2 life.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | OptionalDecider$ You | Execute$ TrigDrawUpkeep | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may pay {2}. If you do, you draw a card and you lose 2 life.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife
+SVar:TrigDrawUpkeep:AB$ Draw | Cost$ 2 | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2
+DeckHints:Name$Hand of Vecna|The Book of Vile Darkness
+Oracle:When Eye of Vecna enters the battlefield, you draw a card and you lose 2 life.\nAt the beginning of your upkeep, you may pay {2}. If you do, you draw a card and you lose 2 life.

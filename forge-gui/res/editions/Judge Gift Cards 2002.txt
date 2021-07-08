@@ -2,7 +2,7 @@
 Code=G02
 Date=2002-01-01
 Name=Judge Gift Cards 2002
-Type=Promos
+Type=Promo
 ScryfallCode=G02
 
 [cards]

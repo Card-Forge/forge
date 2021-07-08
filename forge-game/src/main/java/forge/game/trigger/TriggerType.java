@@ -89,6 +89,7 @@ public enum TriggerType {
     Regenerated(TriggerRegenerated.class),
     Revealed(TriggerRevealed.class),
     RolledDie(TriggerRolledDie.class),
+    RolledDieOnce(TriggerRolledDieOnce.class),
     RoomEntered(TriggerEnteredRoom.class),
     Sacrificed(TriggerSacrificed.class),
     Scry(TriggerScry.class),

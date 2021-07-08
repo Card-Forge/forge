@@ -2,7 +2,7 @@
 Code=PWOS
 Date=1999-09-04
 Name=Wizards of the Coast Online Store
-Type=Promos
+Type=Promo
 ScryfallCode=PWOS
 
 [cards]

@@ -37,6 +37,7 @@ import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
@@ -52,11 +53,6 @@ import forge.card.CardDb.SetPreference;
 import forge.deck.CardPool;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
-import forge.util.Aggregates;
-import forge.util.FileSection;
-import forge.util.FileUtil;
-import forge.util.IItemReader;
-import forge.util.MyRandom;
 import forge.util.storage.StorageBase;
 import forge.util.storage.StorageReaderBase;
 import forge.util.storage.StorageReaderFolder;
@@ -78,19 +74,23 @@ public final class CardEdition implements Comparable<CardEdition> {
 
         CORE,
         EXPANSION,
-
-        REPRINT,
-        ONLINE,
         STARTER,
+        REPRINT,
+        BOXED_SET,
 
-        DUEL_DECKS,
-        PREMIUM_DECK_SERIES,
-        FROM_THE_VAULT,
+        COLLECTOR_EDITION,
+        DUEL_DECK,
+        PROMO,
+        ONLINE,
 
-        OTHER,
-        PROMOS,
+        DRAFT,
+
+        COMMANDER,
+        MULTIPLAYER,
         FUNNY,
-        THIRDPARTY; // custom sets
+
+        OTHER,  // FALLBACK CATEGORY
+        CUSTOM_SET; // custom sets
 
         public String getBoosterBoxDefault() {
             switch (this) {
@@ -100,6 +100,19 @@ public final class CardEdition implements Comparable<CardEdition> {
                 default:
                     return "0";
             }
+        }
+
+        public String toString(){
+            String[] names = TextUtil.splitWithParenthesis(this.name().toLowerCase(), '_');
+            for (int i = 0; i < names.length; i++)
+                names[i] = TextUtil.capitalize(names[i]);
+            return TextUtil.join(Arrays.asList(names), " ");
+        }
+
+        public static Type fromString(String label){
+            List<String> names = Arrays.asList(TextUtil.splitWithParenthesis(label.toUpperCase(), ' '));
+            String value = TextUtil.join(names, "_");
+            return Type.valueOf(value);
         }
     }
 
@@ -476,8 +489,16 @@ public final class CardEdition implements Comparable<CardEdition> {
     }
 
     public static class Reader extends StorageReaderFolder<CardEdition> {
+        private boolean isCustomEditions;
+
         public Reader(File path) {
             super(path, CardEdition.FN_GET_CODE);
+            this.isCustomEditions = false;
+        }
+
+        public Reader(File path, boolean isCustomEditions) {
+            super(path, CardEdition.FN_GET_CODE);
+            this.isCustomEditions = isCustomEditions;
         }
 
         @Override
@@ -596,15 +617,20 @@ public final class CardEdition implements Comparable<CardEdition> {
 
             res.alias = section.get("alias");
             res.borderColor = BorderColor.valueOf(section.get("border", "Black").toUpperCase(Locale.ENGLISH));
-            String type  = section.get("type");
             Type enumType = Type.UNKNOWN;
-            if (null != type && !type.isEmpty()) {
-                try {
-                    enumType = Type.valueOf(type.toUpperCase(Locale.ENGLISH));
-                } catch (IllegalArgumentException ignored) {
-                    // ignore; type will get UNKNOWN
-                    System.err.println("Ignoring unknown type in set definitions: name: " + res.name + "; type: " + type);
+            if (this.isCustomEditions){
+                enumType = Type.CUSTOM_SET;  // Forcing ThirdParty Edition Type to avoid inconsistencies
+            } else {
+                String type  = section.get("type");
+                if (null != type && !type.isEmpty()) {
+                    try {
+                        enumType = Type.valueOf(type.toUpperCase(Locale.ENGLISH));
+                    } catch (IllegalArgumentException ignored) {
+                        // ignore; type will get UNKNOWN
+                        System.err.println("Ignoring unknown type in set definitions: name: " + res.name + "; type: " + type);
+                    }
                 }
+
             }
             res.type = enumType;
             res.prerelease = section.get("Prerelease", null);

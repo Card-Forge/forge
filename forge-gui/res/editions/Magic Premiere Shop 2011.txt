@@ -2,7 +2,7 @@
 Code=PMPS11
 Date=2011-01-01
 Name=Magic Premiere Shop 2011
-Type=Promos
+Type=Promo
 CardLang=ja
 ScryfallCode=PMPS11
 

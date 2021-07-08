@@ -1,6 +1,6 @@
 [metadata]
 Code=ICE
-Date=1995-06-01
+Date=1995-06-03
 Name=Ice Age
 Code2=IA
 MciCode=ia

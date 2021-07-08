@@ -436,6 +436,13 @@ public class PlayerView extends GameEntityView {
         return getZoneSize(TrackableProperty.Library);
     }
 
+    public FCollectionView<CardView> getSideboard() {
+        return get(TrackableProperty.Sideboard);
+    }
+    public int getSideboardSize() {
+        return getZoneSize(TrackableProperty.Sideboard);
+    }
+
     public FCollectionView<CardView> getCards(final ZoneType zone) {
         TrackableProperty prop = getZoneProp(zone);
         if (prop != null) {

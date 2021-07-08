@@ -2,7 +2,7 @@
 Code=PEVE
 Date=2008-07-25
 Name=Eventide Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PEVE
 
 [cards]

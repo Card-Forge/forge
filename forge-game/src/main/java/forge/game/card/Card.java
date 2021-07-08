@@ -176,6 +176,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private final Map<Long, KeywordsChange> changedCardKeywords = Maps.newTreeMap();
     private final Map<Long, CardTraitChanges> changedCardTraits = Maps.newTreeMap();
     private final Map<Long, CardColor> changedCardColors = Maps.newTreeMap();
+
+    private final Map<Long, CardChangedType> changedCardTypesCharacterDefining = Maps.newTreeMap();
+    private final Map<Long, CardColor> changedCardColorsCharacterDefining = Maps.newTreeMap();
+
     private final NavigableMap<Long, CardCloneStates> clonedStates = Maps.newTreeMap();
     private final NavigableMap<Long, CardCloneStates> textChangeStates = Maps.newTreeMap();
 
@@ -3451,7 +3455,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public Iterable<CardChangedType> getChangedCardTypes() {
-        return Iterables.unmodifiableIterable(changedCardTypes.values());
+        return Iterables.unmodifiableIterable(Iterables.concat(changedCardTypesCharacterDefining.values(), changedCardTypes.values()));
     }
 
     public Map<Long, CardChangedType> getChangedCardTypesMap() {
@@ -3459,10 +3463,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public boolean clearChangedCardTypes() {
-        if (changedCardTypes.isEmpty())
-            return false;
+        boolean changed = false;
+
+        if (!changedCardTypesCharacterDefining.isEmpty())
+            changed = true;
+        changedCardTypesCharacterDefining.clear();
+
+        if (!changedCardTypes.isEmpty())
+            changed = true;
         changedCardTypes.clear();
-        return true;
+
+        return changed;
     }
 
     public boolean clearChangedCardKeywords() {
@@ -3473,10 +3484,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public boolean clearChangedCardColors() {
-        if (changedCardColors.isEmpty())
-            return false;
+        boolean changed = false;
+
+        if (!changedCardTypesCharacterDefining.isEmpty())
+            changed = true;
+        changedCardTypesCharacterDefining.clear();
+
+        if (!changedCardColors.isEmpty())
+            changed = true;
         changedCardColors.clear();
-        return true;
+
+        return changed;
     }
 
     public Map<Long, KeywordsChange> getChangedCardKeywords() {
@@ -3491,18 +3509,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             final boolean removeSuperTypes, final boolean removeCardTypes, final boolean removeSubTypes,
             final boolean removeLandTypes, final boolean removeCreatureTypes, final boolean removeArtifactTypes,
             final boolean removeEnchantmentTypes,
-            final long timestamp) {
-        addChangedCardTypes(addType, removeType, removeSuperTypes, removeCardTypes, removeSubTypes, removeLandTypes,
-                removeCreatureTypes, removeArtifactTypes, removeEnchantmentTypes, timestamp, true);
-    }
+            final long timestamp, final boolean updateView, final boolean cda) {
 
-    public final void addChangedCardTypes(final CardType addType, final CardType removeType,
-            final boolean removeSuperTypes, final boolean removeCardTypes, final boolean removeSubTypes,
-            final boolean removeLandTypes, final boolean removeCreatureTypes, final boolean removeArtifactTypes,
-            final boolean removeEnchantmentTypes,
-            final long timestamp, final boolean updateView) {
-
-        changedCardTypes.put(timestamp, new CardChangedType(
+        (cda ? changedCardTypesCharacterDefining : changedCardTypes).put(timestamp, new CardChangedType(
                 addType, removeType, removeSuperTypes, removeCardTypes, removeSubTypes,
                 removeLandTypes, removeCreatureTypes, removeArtifactTypes, removeEnchantmentTypes));
         if (updateView) {
@@ -3514,17 +3523,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             final boolean removeSuperTypes, final boolean removeCardTypes, final boolean removeSubTypes,
             final boolean removeLandTypes, final boolean removeCreatureTypes, final boolean removeArtifactTypes,
             final boolean removeEnchantmentTypes,
-            final long timestamp) {
-        addChangedCardTypes(types, removeTypes, removeSuperTypes, removeCardTypes, removeSubTypes,
-                removeLandTypes, removeCreatureTypes, removeArtifactTypes, removeEnchantmentTypes,
-                timestamp, true);
-    }
-
-    public final void addChangedCardTypes(final Iterable<String> types, final Iterable<String> removeTypes,
-            final boolean removeSuperTypes, final boolean removeCardTypes, final boolean removeSubTypes,
-            final boolean removeLandTypes, final boolean removeCreatureTypes, final boolean removeArtifactTypes,
-            final boolean removeEnchantmentTypes,
-            final long timestamp, final boolean updateView) {
+            final long timestamp, final boolean updateView, final boolean cda) {
         CardType addType = null;
         CardType removeType = null;
         if (types != null) {
@@ -3537,7 +3536,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
         addChangedCardTypes(addType, removeType, removeSuperTypes, removeCardTypes, removeSubTypes,
                 removeLandTypes, removeCreatureTypes, removeArtifactTypes, removeEnchantmentTypes,
-                timestamp, updateView);
+                timestamp, updateView, cda);
     }
 
     public final void removeChangedCardTypes(final long timestamp) {
@@ -3545,21 +3544,26 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final void removeChangedCardTypes(final long timestamp, final boolean updateView) {
-        if (changedCardTypes.remove(timestamp) != null && updateView) {
+        boolean removed = false;
+        removed |= changedCardTypes.remove(timestamp) != null;
+        removed |= changedCardTypesCharacterDefining.remove(timestamp) != null;
+        if (removed && updateView) {
             currentState.getView().updateType(currentState);
         }
     }
 
-    public final void addColor(final String s, final boolean addToColors, final long timestamp) {
-        changedCardColors.put(timestamp, new CardColor(s, addToColors, timestamp));
+    public final void addColor(final String s, final boolean addToColors, final long timestamp, final boolean cda) {
+        (cda ? changedCardColorsCharacterDefining : changedCardColors).put(timestamp, new CardColor(s, addToColors, timestamp));
         currentState.getView().updateColors(this);
         currentState.getView().updateHasChangeColors(!getChangedCardColors().isEmpty());
     }
 
     public final void removeColor(final long timestampIn) {
-        final CardColor removeCol = changedCardColors.remove(timestampIn);
+        boolean removed = false;
+        removed |= changedCardColors.remove(timestampIn) != null;
+        removed |= changedCardColorsCharacterDefining.remove(timestampIn) != null;
 
-        if (removeCol != null) {
+        if (removed) {
             currentState.getView().updateColors(this);
             currentState.getView().updateHasChangeColors(!getChangedCardColors().isEmpty());
         }
@@ -3576,9 +3580,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return determineColor(currentState);
     }
     public final ColorSet determineColor(CardState state) {
-        final Iterable<CardColor> colorList = changedCardColors.values();
         byte colors = state.getColor();
-        for (final CardColor cc : colorList) {
+        for (final CardColor cc : Iterables.concat(changedCardColorsCharacterDefining.values(), changedCardColors.values())) {
             if (cc.isAdditional()) {
                 colors |= cc.getColorMask();
             } else {
@@ -4297,7 +4300,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         changedTextTypes.add(timestamp, originalWord, newWord);
         if (getType().hasSubtype(originalWord)) {
             addChangedCardTypes(CardType.parse(newWord, true), CardType.parse(originalWord, true),
-                    false, false, false, false, false, false, false, timestamp);
+                    false, false, false, false, false, false, false, timestamp, true, false);
         }
         updateKeywordsChangedText(timestamp);
         updateChangedText();
@@ -4827,8 +4830,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             final String excR = incR[1];
             final String[] exRs = excR.split("\\+"); // Exclusive Restrictions are ...
             for (String exR : exRs) {
-                if (!hasProperty(exR, sourceController, source, spellAbility)) {
-                    return testFailed;
+                if (exR.startsWith("!")) {
+                    exR = exR.substring(1);
+                    if (hasProperty(exR, sourceController, source, spellAbility)) {
+                        return testFailed;
+                    }
+                } else {
+                    if (!hasProperty(exR, sourceController, source, spellAbility)) {
+                        return testFailed;
+                    }
                 }
             }
         }
@@ -5476,7 +5486,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         bestowTimestamp = getGame().getNextTimestamp();
         addChangedCardTypes(new CardType(Collections.singletonList("Aura"), true),
                 new CardType(Collections.singletonList("Creature"), true),
-                false, false, false, false, false, false, true, bestowTimestamp, updateView);
+                false, false, false, false, false, false, true, bestowTimestamp, updateView, false);
         addChangedCardKeywords(Collections.singletonList("Enchant creature"), Lists.newArrayList(),
                 false, false, bestowTimestamp, updateView);
     }

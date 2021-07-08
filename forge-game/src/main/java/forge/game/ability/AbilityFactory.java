@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -28,6 +28,7 @@ import forge.card.CardStateName;
 import forge.game.CardTraitBase;
 import forge.game.IHasSVars;
 import forge.game.ability.effects.CharmEffect;
+import forge.game.ability.effects.RollDiceEffect;
 import forge.game.card.Card;
 import forge.game.card.CardState;
 import forge.game.cost.Cost;
@@ -45,7 +46,7 @@ import io.sentry.event.BreadcrumbBuilder;
  * <p>
  * AbilityFactory class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id$
  */
@@ -71,7 +72,7 @@ public final class AbilityFactory {
         Spell("SP"),
         StaticAbility("ST"),
         SubAbility("DB");
-        
+
         private final String prefix;
         AbilityRecordType(String prefix) {
             this.prefix = prefix;
@@ -79,7 +80,7 @@ public final class AbilityFactory {
         public String getPrefix() {
             return prefix;
         }
-        
+
         public SpellAbility buildSpellAbility(ApiType api, Card hostCard, Cost abCost, TargetRestrictions abTgt, Map<String, String> mapParams ) {
             switch(this) {
                 case Ability: return new AbilityApiBased(api, hostCard, abCost, abTgt, mapParams);
@@ -89,11 +90,11 @@ public final class AbilityFactory {
             }
             return null; // exception here would be fine!
         }
-        
+
         public ApiType getApiTypeOf(Map<String, String> abParams) {
             return ApiType.smartValueOf(abParams.get(this.getPrefix()));
         }
-        
+
         public static AbilityRecordType getRecordType(Map<String, String> abParams) {
             if (abParams.containsKey(AbilityRecordType.Ability.getPrefix())) {
                 return AbilityRecordType.Ability;
@@ -108,7 +109,7 @@ public final class AbilityFactory {
             }
         }
     }
-    
+
     public static final SpellAbility getAbility(final String abString, final Card card) {
         return getAbility(abString, card, card.getCurrentState());
     }
@@ -119,7 +120,7 @@ public final class AbilityFactory {
      * <p>
      * getAbility.
      * </p>
-     * 
+     *
      * @param abString
      *            a {@link java.lang.String} object.
      * @param state
@@ -129,7 +130,7 @@ public final class AbilityFactory {
     public static final SpellAbility getAbility(final String abString, final CardState state) {
         return getAbility(abString, state, state);
     }
-    
+
     private static final SpellAbility getAbility(final String abString, final CardState state, final IHasSVars sVarHolder) {
         Map<String, String> mapParams;
         try {
@@ -155,7 +156,7 @@ public final class AbilityFactory {
             throw new RuntimeException(msg + " of card: " + state.getName(), ex);
         }
     }
-    
+
     public static final SpellAbility getAbility(final Card hostCard, final String svar) {
         return getAbility(hostCard, svar, hostCard.getCurrentState());
     }
@@ -163,7 +164,7 @@ public final class AbilityFactory {
     public static final SpellAbility getAbility(final Card hostCard, final String svar, final IHasSVars sVarHolder) {
         return getAbility(hostCard.getCurrentState(), svar, sVarHolder);
     }
-    
+
     public static final SpellAbility getAbility(final CardState state, final String svar, final IHasSVars sVarHolder) {
         if (!sVarHolder.hasSVar(svar)) {
             String source = state.getCard().getName();
@@ -285,15 +286,18 @@ public final class AbilityFactory {
                     @Override
                     public AbilitySub apply(String input) {
                         return getSubAbility(state, input, sVarHolder);
-                    } 
+                    }
                 }));
             }
         }
 
         if (api == ApiType.RollDice) {
-            for (String param : mapParams.keySet()) {
-                if (param.startsWith("On") || param.equals("Else")) {
-                    spellAbility.setAdditionalAbility(param, getSubAbility(state, mapParams.get(param), sVarHolder));
+            final String key = "ResultSubAbilities";
+            if (mapParams.containsKey(key)) {
+                String [] diceAbilities = mapParams.get(key).split(",");
+                for (String ab : diceAbilities) {
+                    String [] kv = ab.split(":");
+                    spellAbility.setAdditionalAbility(kv[0], getSubAbility(state, kv[1], sVarHolder));
                 }
             }
         }
@@ -311,12 +315,17 @@ public final class AbilityFactory {
             }
 
             sb.append(mapParams.get("SpellDescription"));
-
             spellAbility.setDescription(sb.toString());
         } else if (api == ApiType.Charm) {
             spellAbility.setDescription(CharmEffect.makeFormatedDescription(spellAbility));
         } else {
             spellAbility.setDescription("");
+        }
+
+        if (api == ApiType.RollDice) {
+            spellAbility.setDescription(spellAbility.getDescription() + RollDiceEffect.makeFormatedDescription(spellAbility));
+        } else if (api == ApiType.Repeat) {
+            spellAbility.setDescription(spellAbility.getDescription() + spellAbility.getAdditionalAbility("RepeatSubAbility").getDescription());
         }
 
         initializeParams(spellAbility);
@@ -399,7 +408,7 @@ public final class AbilityFactory {
      * <p>
      * initializeParams.
      * </p>
-     * 
+     *
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
@@ -414,7 +423,7 @@ public final class AbilityFactory {
      * <p>
      * makeRestrictions.
      * </p>
-     * 
+     *
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
@@ -428,7 +437,7 @@ public final class AbilityFactory {
      * <p>
      * makeConditions.
      * </p>
-     * 
+     *
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
@@ -444,7 +453,7 @@ public final class AbilityFactory {
      * getSubAbility.
      * </p>
      * @param sSub
-     * 
+     *
      * @return a {@link forge.game.spellability.AbilitySub} object.
      */
     private static final AbilitySub getSubAbility(CardState state, String sSub, final IHasSVars sVarHolder) {
@@ -466,19 +475,19 @@ public final class AbilityFactory {
             List<ZoneType> origin = ZoneType.listValueOf(params.get("Origin"));
 
             final TargetRestrictions tgt = sa.getTargetRestrictions();
-        
+
             // Don't set the zone if it targets a player
             if ((tgt != null) && !tgt.canTgtPlayer()) {
                 sa.getTargetRestrictions().setZone(origin);
             }
         }
-    
+
     }
 
     public static final SpellAbility buildFusedAbility(final Card card) {
-        if(!card.isSplitCard()) 
+        if(!card.isSplitCard())
             throw new IllegalStateException("Fuse ability may be built only on split cards");
-        
+
         CardState leftState = card.getState(CardStateName.LeftSplit);
         SpellAbility leftAbility = leftState.getFirstAbility();
         Map<String, String> leftMap = Maps.newHashMap(leftAbility.getMapParams());

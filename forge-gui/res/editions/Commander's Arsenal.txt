@@ -5,6 +5,7 @@ Date=2012-11-02
 Name=Commander's Arsenal
 ScryfallCode=CM1
 
+Type=Commander
 [cards]
 1 R Chaos Warp
 2 C Command Tower

@@ -2,7 +2,7 @@
 Code=PJJT
 Date=2003-01-01
 Name=Japan Junior Tournament
-Type=Promos
+Type=Promo
 CardLang=ja
 ScryfallCode=PJJT
 

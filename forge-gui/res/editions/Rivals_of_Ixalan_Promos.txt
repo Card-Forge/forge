@@ -2,7 +2,7 @@
 Code=PRIX
 Date=2018-01-19
 Name=Rivals of Ixalan Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PRIX
 
 [cards]

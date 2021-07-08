@@ -2,7 +2,7 @@
 Code=P8ED
 Date=2003-07-28
 Name=Eighth Edition Promos
-Type=Promos
+Type=Promo
 ScryfallCode=P8ED
 
 [cards]

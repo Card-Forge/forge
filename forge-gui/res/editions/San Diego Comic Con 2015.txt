@@ -2,7 +2,7 @@
 Code=PS15
 Date=2015-07-09
 Name=San Diego Comic-Con 2015
-Type=Promos
+Type=Promo
 ScryfallCode=PS15
 
 [cards]

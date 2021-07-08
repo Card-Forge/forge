@@ -2,7 +2,7 @@
 Code=PLG21
 Date=2021-06-22
 Name=Love Your LGS 2021
-Type=Promos
+Type=Promo
 ScryfallCode=PLG21
 
 [cards]

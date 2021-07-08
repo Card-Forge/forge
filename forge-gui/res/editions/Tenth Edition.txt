@@ -1,6 +1,6 @@
 [metadata]
 Code=10E
-Date=2007-07-14
+Date=2007-07-13
 Name=Tenth Edition
 Code2=10E
 MciCode=10e

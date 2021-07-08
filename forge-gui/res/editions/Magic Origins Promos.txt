@@ -2,7 +2,7 @@
 Code=PORI
 Date=2015-07-17
 Name=Magic Origins Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PORI
 
 [cards]

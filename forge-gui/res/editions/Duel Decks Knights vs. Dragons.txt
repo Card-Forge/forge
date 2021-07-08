@@ -3,7 +3,7 @@ Code=DDG
 Date=2011-04-01
 Name=Duel Decks: Knights vs. Dragons
 MciCode=ddg
-Type=Duel_Decks
+Type=Duel_Deck
 ScryfallCode=DDG
 
 [cards]

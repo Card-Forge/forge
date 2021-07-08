@@ -2,7 +2,7 @@
 Code=P2HG
 Date=2005-12-09
 Name=Two-Headed Giant Tournament
-Type=Promos
+Type=Promo
 ScryfallCode=P2HG
 
 [cards]

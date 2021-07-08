@@ -1,6 +1,6 @@
 [metadata]
 Code=TD0
-Date=2009-08-25
+Date=2010-11-08
 Name=Commander Theme Decks
 MciCode=td0
 Type=Online

@@ -1,0 +1,6 @@
+Name:Dungeon Map
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Venture | Cost$ 3 T | SorcerySpeed$ True | SpellDescription$ Venture into the dungeon. Activate only as a sorcery. (Enter the first room or advance to the next room.)
+Oracle:{T}: Add {C}.\n{3}, {T}: Venture into the dungeon. Activate only as a sorcery. (Enter the first room or advance to the next room.)

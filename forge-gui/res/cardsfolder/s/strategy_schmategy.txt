@@ -2,13 +2,14 @@ Name:Strategy, Schmategy
 ManaCost:1 R
 Types:Sorcery
 A:SP$ StoreSVar | Cost$ 1 R | SVar$ Left | Type$ Number | Expression$ 1 | SubAbility$ DBRepeat
-SVar:DBRepeat:DB$ Repeat | RepeatCheckSVar$ Left | RepeatSVarCompare$ GT0 | RepeatSubAbility$ Roll | StackDescription$ Roll a six-sided die. Strategy, Schmategy has the indicated effect. 1-Do nothing. 2-Destroy all artifacts. 3-Destroy all lands. 4-Strategy, Schmategy deals 3 damage to each creature and each player. 5-Each player discards their hand and draws seven cards. 6-Repeat this process two more times.
-SVar:Roll:DB$ RollDice | On2$ DBArtif | On3$ DBLand | On4$ DBDamage | On5$ DBWheel | On6$ DBTwoMore | SubAbility$ DBDecr
-SVar:DBArtif:DB$ DestroyAll | ValidCards$ Artifact
-SVar:DBLand:DB$ DestroyAll | ValidCards$ Land
-SVar:DBDamage:DB$ DamageAll | ValidCards$ Creature | ValidPlayers$ Player | NumDmg$ 3
-SVar:DBWheel:DB$ Discard | Mode$ Hand | Defined$ Player | SubAbility$ DBEachDraw
+SVar:DBRepeat:DB$ Repeat | RepeatCheckSVar$ Left | RepeatSVarCompare$ GT0 | RepeatSubAbility$ Roll | StackDescription$ Roll a six-sided die. CARDNAME has the indicated effect.
+SVar:Roll:DB$ RollDice | ResultSubAbilities$ 1:DBNothing,2:DBArtif,3:DBLand,4:DBDamage,5:DBWheel,6:DBTwoMore | SubAbility$ DBDecr
+SVar:DBNothing:DB$ Pump | SpellDescription$ 1 — Do nothing.
+SVar:DBArtif:DB$ DestroyAll | ValidCards$ Artifact | SpellDescription$ 2 — Destroy all artifacts.
+SVar:DBLand:DB$ DestroyAll | ValidCards$ Land | SpellDescription$ 3 — Destroy all lands.
+SVar:DBDamage:DB$ DamageAll | ValidCards$ Creature | ValidPlayers$ Player | NumDmg$ 3 | SpellDescription$ 4 — CARDNAME deals 3 damage to each creature and each player.
+SVar:DBWheel:DB$ Discard | Mode$ Hand | Defined$ Player | SubAbility$ DBEachDraw | SpellDescription$ 5 — Each player discards their hand and draws seven cards.
 SVar:DBEachDraw:DB$ Draw | Defined$ Player | NumCards$ 7
-SVar:DBTwoMore:DB$ StoreSVar | SVar$ Left | Type$ CountSVar | Expression$ Left/Plus.2
+SVar:DBTwoMore:DB$ StoreSVar | SVar$ Left | Type$ CountSVar | Expression$ Left/Plus.2 | SpellDescription$ 6 — Repeat this process two more times.
 SVar:DBDecr:DB$ StoreSVar | SVar$ Left | Type$ CountSVar | Expression$ Left/Minus.1
 Oracle:Roll a six-sided die. Strategy, Schmategy has the indicated effect.\n1 — Do nothing.\n2 — Destroy all artifacts.\n3 — Destroy all lands.\n4 — Strategy, Schmategy deals 3 damage to each creature and each player.\n5 — Each player discards their hand and draws seven cards.\n6 — Repeat this process two more times.

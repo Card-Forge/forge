@@ -34,6 +34,8 @@ public enum FSkinImage implements FImage {
     GRAVEYARD   (FSkinProp.IMG_ZONE_GRAVEYARD, SourceFile.ICONS),
     HDGRAVEYARD (FSkinProp.IMG_HDZONE_GRAVEYARD, SourceFile.BUTTONS),
 
+    SIDEBOARD   (FSkinProp.IMG_ZONE_SIDEBOARD, SourceFile.ICONS),
+
     HDMANAPOOL   (FSkinProp.IMG_HDZONE_MANAPOOL, SourceFile.BUTTONS),
 
     POISON      (FSkinProp.IMG_ZONE_POISON, SourceFile.ICONS),
@@ -482,7 +484,7 @@ public enum FSkinImage implements FImage {
                 // If any return true, image exists.
                 int x0 = 0, y0 = 0;
                 Color c;
-    
+
                 // Center
                 x0 = (x + w / 2);
                 y0 = (y + h / 2);
@@ -491,7 +493,7 @@ public enum FSkinImage implements FImage {
                     textureRegion = new TextureRegion(texture, x, y, w, h);
                     return;
                 }
-    
+
                 x0 += 2;
                 y0 += 2;
                 c = new Color(preferredIcons.getPixel(x0, y0));
@@ -499,21 +501,21 @@ public enum FSkinImage implements FImage {
                     textureRegion = new TextureRegion(texture, x, y, w, h);
                     return;
                 }
-    
+
                 x0 -= 4;
                 c = new Color(preferredIcons.getPixel(x0, y0));
                 if (c.a != 0) {
                     textureRegion = new TextureRegion(texture, x, y, w, h);
                     return;
                 }
-    
+
                 y0 -= 4;
                 c = new Color(preferredIcons.getPixel(x0, y0));
                 if (c.a != 0) {
                     textureRegion = new TextureRegion(texture, x, y, w, h);
                     return;
                 }
-    
+
                 x0 += 4;
                 c = new Color(preferredIcons.getPixel(x0, y0));
                 if (c.a != 0) {

@@ -2,7 +2,7 @@
 Code=PM13
 Date=2012-07-12
 Name=Magic 2013 Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PM13
 
 [cards]

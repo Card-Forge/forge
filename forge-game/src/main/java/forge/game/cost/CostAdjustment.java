@@ -45,7 +45,7 @@ public class CostAdjustment {
         }
 
         Cost result = cost.copy();
-    
+
         boolean isStateChangeToFaceDown = false;
         if (sa.isSpell() && sa.isCastFaceDown()) {
             // Turn face down to apply cost modifiers correctly
@@ -60,7 +60,7 @@ public class CostAdjustment {
                 result.add(new Cost(ManaCost.get(n), false));
             }
         }
-    
+
         CardCollection cardsOnBattlefield = new CardCollection(game.getCardsIn(ZoneType.Battlefield));
         cardsOnBattlefield.addAll(game.getCardsIn(ZoneType.Stack));
         cardsOnBattlefield.addAll(game.getCardsIn(ZoneType.Command));
@@ -68,7 +68,7 @@ public class CostAdjustment {
             cardsOnBattlefield.add(host);
         }
         final List<StaticAbility> raiseAbilities = Lists.newArrayList();
-    
+
         // Sort abilities to apply them in proper order
         for (Card c : cardsOnBattlefield) {
             for (final StaticAbility stAb : c.getStaticAbilities()) {
@@ -94,11 +94,10 @@ public class CostAdjustment {
         }
         return result;
     }
-    
+
     private static void applyRaise(final Cost cost, final SpellAbility sa, final StaticAbility st) {
         final Card hostCard = st.getHostCard();
-        final Card card = sa.getHostCard();
-        
+
         if (!checkRequirement(sa, st)) {
             return;
         }
@@ -121,7 +120,7 @@ public class CostAdjustment {
             String amount = st.getParam("Amount");
             if ("Escalate".equals(amount)) {
                 SpellAbility sub = sa;
-                while(sub != null) {
+                while (sub != null) {
                     if (sub.getDirectSVars().containsKey("CharmOrder")) {
                         count++;
                     }
@@ -138,7 +137,7 @@ public class CostAdjustment {
                     count = Integer.parseInt(amount);
                 } else {
                     if (st.hasParam("AffectedAmount")) {
-                        count = AbilityUtils.calculateAmount(card, amount, st);
+                        count = AbilityUtils.calculateAmount(hostCard, st.hasSVar(amount) ? st.getSVar(amount) : amount, sa);
                     } else {
                         count = AbilityUtils.calculateAmount(hostCard, amount, st);
                     }
@@ -148,17 +147,17 @@ public class CostAdjustment {
             // Amount 1 as default
             count = 1;
         }
-        for(int i = 0; i < count; ++i) {
+        for (int i = 0; i < count; ++i) {
             cost.add(part);
         }
     }
-    
+
     // If cardsToDelveOut is null, will immediately exile the delved cards and remember them on the host card.
     // Otherwise, will return them in cardsToDelveOut and the caller is responsible for doing the above.
     public static final void adjust(ManaCostBeingPaid cost, final SpellAbility sa, CardCollection cardsToDelveOut, boolean test) {
         final Game game = sa.getActivatingPlayer().getGame();
         final Card originalCard = sa.getHostCard();
-    
+
         if (sa.isTrigger()) {
             return;
         }
@@ -204,7 +203,7 @@ public class CostAdjustment {
         }
         // need to reduce generic extra because of 2 hybrid mana
         cost.decreaseGenericMana(sumGeneric);
-        
+
         if (sa.isSpell() && sa.isOffering()) { // cost reduction from offerings
             adjustCostByOffering(cost, sa);
         }
@@ -263,7 +262,7 @@ public class CostAdjustment {
         }
 
         Map<Card, ManaCostShard> convokedCards = sa.getActivatingPlayer().getController().chooseCardsForConvokeOrImprovise(sa, cost.toManaCost(), untappedCards, improvise);
-        
+
         // Convoked creats are tapped here, setting up their taps triggers,
         // Then again when payment is done(In InputPayManaCost.done()) with suppression of Taps triggers.
         // This is to make sure that triggers go off at the right time
@@ -296,35 +295,30 @@ public class CostAdjustment {
 
         final CardCollectionView toSacList = sa.getHostCard().getController().getController().choosePermanentsToSacrifice(sa, 0, 1, canOffer, offeringType);
 
-        if (!toSacList.isEmpty()) {
-            toSac = toSacList.getFirst();
-        }
-        else {
+        if (toSacList.isEmpty()) {
             return;
         }
-    
+        toSac = toSacList.getFirst();
+
         cost.subtractManaCost(toSac.getManaCost());
-    
+
         sa.setSacrificedAsOffering(toSac);
         toSac.setUsedToPay(true); //stop it from interfering with mana input
     }
 
     private static void adjustCostByEmerge(final ManaCostBeingPaid cost, final SpellAbility sa) {
-    
         Card toSac = null;
         CardCollectionView canEmerge = CardLists.filter(sa.getActivatingPlayer().getCreaturesInPlay(), CardPredicates.canBeSacrificedBy(sa));
 
         final CardCollectionView toSacList = sa.getHostCard().getController().getController().choosePermanentsToSacrifice(sa, 0, 1, canEmerge, "Creature");
 
-        if (!toSacList.isEmpty()) {
-            toSac = toSacList.getFirst();
-        }
-        else {
+        if (toSacList.isEmpty()) {
             return;
         }
-    
+        toSac = toSacList.getFirst();
+
         cost.decreaseGenericMana(toSac.getCMC());
-    
+
         sa.setSacrificedAsEmerge(toSac);
         toSac.setUsedToPay(true); //stop it from interfering with mana input
     }

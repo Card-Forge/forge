@@ -6,7 +6,7 @@ S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$
 T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigLoop | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, create a 4/4 gold Dragon creature token with flying and roll a d20 (a twenty-sided die). If you roll a 20, repeat this process.
 SVar:TrigLoop:DB$ Repeat | RepeatCheckSVar$ RepeatCheck | RepeatSVarCompare$ GT0 | RepeatSubAbility$ TrigToken | StackDescription$ Create a 4/4 gold Dragon creature token with flying and roll a d20. If you roll a 20, repeat this process.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_4_4_dragon_flying | TokenOwner$ You | SubAbility$ RollDie
-SVar:RollDie:DB$ RollDice | Sides$ 20 | On20$ Win | Else$ Lose
+SVar:RollDie:DB$ RollDice | Sides$ 20 | ResultSubAbilities$ 20:Win,Else:Lose
 SVar:Win:DB$ StoreSVar | SVar$ RepeatCheck | Type$ Number | Expression$ 1
 SVar:Lose:DB$ StoreSVar | SVar$ RepeatCheck | Type$ Number | Expression$ 0
 SVar:RepeatCheck:Number$ 1

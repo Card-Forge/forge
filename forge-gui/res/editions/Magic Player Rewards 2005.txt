@@ -2,7 +2,7 @@
 Code=P05
 Date=2005-01-01
 Name=Magic Player Rewards 2005
-Type=Promos
+Type=Promo
 ScryfallCode=P05
 
 [cards]

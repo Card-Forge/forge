@@ -2,7 +2,7 @@
 Code=PJOU
 Date=2014-04-26
 Name=Journey into Nyx Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PJOU
 
 [cards]

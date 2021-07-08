@@ -2,7 +2,7 @@
 Code=J12
 Date=2012-01-01
 Name=Judge Gift Cards 2012
-Type=Promos
+Type=Promo
 ScryfallCode=J12
 
 [cards]

@@ -276,8 +276,34 @@ public final class GameActionUtil {
                     continue;
                 }
 
-                // set the cost to this directly to buypass non mana cost
+                // set the cost to this directly to bypass non mana cost
                 final SpellAbility newSA = sa.copyWithDefinedCost("Discard<1/CARDNAME>");
+                newSA.setActivatingPlayer(activator);
+                newSA.putParam("CostDesc", ManaCostParser.parse("0"));
+
+                // need to build a new Keyword to get better Reminder Text
+                String data[] = inst.getOriginal().split(":");
+                data[1] = "0";
+                KeywordInterface newKi = Keyword.getInstance(StringUtils.join(data, ":"));
+
+                // makes new SpellDescription
+                final StringBuilder sb = new StringBuilder();
+                sb.append(newSA.getCostDescription());
+                sb.append("(").append(newKi.getReminderText()).append(")");
+                newSA.setDescription(sb.toString());
+
+                alternatives.add(newSA);
+            }
+        }
+        if (sa.hasParam("Equip") && activator.hasKeyword("You may pay 0 rather than pay equip costs.")) {
+            for (final KeywordInterface inst : source.getKeywords()) {
+                // need to find the correct Keyword from which this Ability is from
+                if (!inst.getAbilities().contains(sa)) {
+                    continue;
+                }
+
+                // set the cost to this directly to bypass non mana cost
+                SpellAbility newSA = sa.copyWithDefinedCost("0");
                 newSA.setActivatingPlayer(activator);
                 newSA.putParam("CostDesc", ManaCostParser.parse("0"));
 

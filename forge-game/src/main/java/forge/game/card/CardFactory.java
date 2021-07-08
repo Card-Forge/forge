@@ -152,7 +152,7 @@ public class CardFactory {
             }
             final String finalColors = tmp;
 
-            c.addColor(finalColors, !sourceSA.hasParam("OverwriteColors"), c.getTimestamp());
+            c.addColor(finalColors, !sourceSA.hasParam("OverwriteColors"), c.getTimestamp(), false);
         }
 
         c.clearControllers();

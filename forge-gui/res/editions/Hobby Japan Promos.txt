@@ -1,8 +1,8 @@
 [metadata]
 Code=PHJ
-Date=2002-07-21
+Date=2002-07-01
 Name=Hobby Japan Promos
-Type=Promos
+Type=Promo
 CardLang=ja
 ScryfallCode=PHJ
 

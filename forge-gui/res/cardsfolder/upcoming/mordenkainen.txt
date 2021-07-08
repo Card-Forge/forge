@@ -1,0 +1,15 @@
+Name:Mordenkainen
+ManaCost:4 U U
+Types:Legendary Planeswalker Mordenkainen
+Loyalty:5
+A:AB$ Draw | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | NumCards$ 2 | SubAbility$ DBBottom | SpellDescription$ Draw two cards, then put a card from your hand on the bottom of your library.
+SVar:DBBottom:DB$ ChangeZone | Origin$ Hand | Destination$ Library | Hand$ Library | LibraryPosition$ -1 | ChangeNum$ 1
+A:AB$ Token | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | TokenOwner$ You | TokenScript$ u_x_x_dog_illusion_cardsinhand | TokenAmount$ 1 | SpellDescription$ Create a blue Dog Illusion creature token with "This creature's power and toughness are each equal to twice the number of cards in your hand."
+A:AB$ ChangeZoneAll | Cost$ SubCounter<10/LOYALTY> | Planeswalker$ True | Ultimate$ True | ChangeType$ Card.YouCtrl | Origin$ Hand | Destination$ Library | RememberChanged$ True | SubAbility$ DBChangeZoneAll | SpellDescription$ Exchange your hand and library, then shuffle. You get an emblem with "You have no maximum hand size."
+SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Card.YouCtrl+IsNotRemembered | Origin$ Library | Destination$ Hand | SubAbility$ DBShuffle
+SVar:DBShuffle:DB$ Shuffle | Defined$ You | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBEmblem
+SVar:DBEmblem:DB$ Effect | Name$ Emblem - Mordenkainen | Image$ emblem_mordenkainen | StaticAbilities$ UnlimitedHand | Stackable$ False | Duration$ Permanent | AILogic$ Always
+SVar:UnlimitedHand:Mode$ Continuous | EffectZone$ Command | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
+DeckHas:Ability$Token
+Oracle:[+2]: Draw two cards, then put a card from your hand on the bottom of your library.\n[-2]: Create a blue Dog Illusion creature token with "This creature's power and toughness are each equal to twice the number of cards in your hand."\n[-10]: Exchange your hand and library, then shuffle. You get an emblem with "You have no maximum hand size."

@@ -2,7 +2,7 @@
 Code=PDP14
 Date=2013-01-01
 Name=Duels of the Planeswalkers 2014 Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PDP14
 
 [cards]

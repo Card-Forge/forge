@@ -1,0 +1,9 @@
+Name:Gnoll Hunter
+ManaCost:1 G
+Types:Creature Gnoll
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerZones$ Battlefield | CheckSVar$ PackTactics | SVarCompare$ GE6 | NoResolvingCheck$ True | TriggerDescription$ Pack tactics — Whenever CARDNAME attacks, if you attacked with creatures with total power 6 or greater this combat, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:PackTactics:Count$SumPower_Creature.attacking
+DeckHas:Ability$Counters
+Oracle:Pack tactics — Whenever Gnoll Hunter attacks, if you attacked with creatures with total power 6 or greater this combat, put a +1/+1 counter on Gnoll Hunter.

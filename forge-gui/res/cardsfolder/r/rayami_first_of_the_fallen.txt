@@ -2,7 +2,7 @@ Name:Rayami, First of the Fallen
 ManaCost:1 B G U
 Types:Legendary Creature Vampire
 PT:5/4
-R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.nonToken | ReplaceWith$ Exile | Description$ If a nontoken creature would die, exile that card with a blood counter on it instead.
-SVar:Exile:DB$ ChangeZone | Defined$ ReplacedCard | Hidden$ True | Origin$ All | Destination$ Exile | WithCountersType$ BLOOD | WithCountersAmount$ 1
+R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | Destination$ Graveyard | ValidLKI$ Creature.nonToken | ReplaceWith$ Exile | Description$ If a nontoken creature would die, exile that card with a blood counter on it instead.
+SVar:Exile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Battlefield | Destination$ Exile | WithCountersType$ BLOOD | WithCountersAmount$ 1
 S:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Card.Self | CharacteristicDefining$ True | SharedKeywordsZone$ Exile | SharedRestrictions$ Creature.counters_GE1_BLOOD | AddKeyword$ Flying & First Strike & Double Strike & Deathtouch & Haste & Hexproof & Indestructible & Lifelink & Menace & Protection & Reach & Trample & Vigilance | Description$ As long as an exiled creature card with a blood counter on it has flying, CARDNAME has flying. The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, protection, reach, trample, and vigilance.
 Oracle:If a nontoken creature would die, exile that card with a blood counter on it instead.\nAs long as an exiled creature card with a blood counter on it has flying, Rayami, First of the Fallen has flying. The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, protection, reach, trample, and vigilance.

@@ -23,21 +23,23 @@ import forge.util.collect.FCollection;
 public class CharmAi extends SpellAbilityAi {
     @Override
     protected boolean checkApiLogic(Player ai, SpellAbility sa) {
-        // sa is Entwined, no need for extra logic
-        if (sa.isEntwine()) {
-            return true;
-        }
-
         final Card source = sa.getHostCard();
+        List<AbilitySub> choices = CharmEffect.makePossibleOptions(sa);
 
-        final int num = AbilityUtils.calculateAmount(source, sa.getParamOrDefault("CharmNum", "1"), sa);
-        final int min = sa.hasParam("MinCharmNum") ? AbilityUtils.calculateAmount(source, sa.getParamOrDefault("MinCharmNum", "1"), sa) : num;
+        final int num;
+        final int min;
+        if (sa.isEntwine()) {
+            num = min = choices.size();
+        }
+        else {
+            num = AbilityUtils.calculateAmount(source, sa.getParamOrDefault("CharmNum", "1"), sa);
+            min = sa.hasParam("MinCharmNum") ? AbilityUtils.calculateAmount(source, sa.getParamOrDefault("MinCharmNum", "1"), sa) : num;
+        }
 
         boolean timingRight = sa.isTrigger(); //is there a reason to play the charm now?
 
         // Reset the chosen list otherwise it will be locked in forever by earlier calls
         sa.setChosenList(null);
-        List<AbilitySub> choices = CharmEffect.makePossibleOptions(sa);
         List<AbilitySub> chosenList;
         
         if (!ai.equals(sa.getActivatingPlayer())) {
@@ -159,7 +161,7 @@ public class CharmAi extends SpellAbilityAi {
             chosenList.add(allyTainted ? gain : lose);
         } else if (oppTainted || ai.getGame().isCardInPlay("Rain of Gore")) {
             // Rain of Gore does negate lifegain, so don't benefit the others
-            // same for if a oppoent does control Tainted Remedy
+            // same for if a opponent does control Tainted Remedy
             // but if ai cant gain life, the effects are negated
             chosenList.add(ai.canGainLife() ? lose : gain);
         } else if (ai.getGame().isCardInPlay("Sulfuric Vortex")) {
@@ -177,13 +179,13 @@ public class CharmAi extends SpellAbilityAi {
             chosenList.add(gain);
         } else if(!ai.canGainLife() && aiLife == 14 ) {
             // ai cant gain life, but try to avoid falling to 13
-            // but if a oppoent does control Tainted Remedy its irrelevant
+            // but if a opponent does control Tainted Remedy its irrelevant
             chosenList.add(oppTainted ? lose : gain);
         } else if (allyTainted) {
             // Tainted Remedy negation logic, try gain instead of lose
             // because negation does turn it into lose for opponents
             boolean oppCritical = false;
-            // an oppoent is Critical = 14, and can't gain life, try to lose life instead
+            // an opponent is Critical = 14, and can't gain life, try to lose life instead
             // but only if ai doesn't kill itself with that.
             if (aiLife != 14) {
                 for (Player p : opponents) {
@@ -197,7 +199,7 @@ public class CharmAi extends SpellAbilityAi {
         } else {
             // normal logic, try to gain life if its critical
             boolean oppCritical = false;
-            // an oppoent is Critical = 12, and can gain life, try to gain life instead
+            // an opponent is Critical = 12, and can gain life, try to gain life instead
             // but only if ai doesn't kill itself with that.
             if (aiLife != 12) {
                 for (Player p : opponents) {
@@ -224,6 +226,8 @@ public class CharmAi extends SpellAbilityAi {
                 goodChoice = sub;
             } else {
                 // Standard canPlayAi()
+                sub.setActivatingPlayer(ai);
+                sub.getRestrictions().setZone(sub.getParent().getRestrictions().getZone());
                 if (AiPlayDecision.WillPlay == aic.canPlaySa(sub)) {
                     chosenList.add(sub);
                     if (chosenList.size() == min) {

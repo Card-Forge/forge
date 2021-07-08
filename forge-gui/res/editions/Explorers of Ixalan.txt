@@ -4,7 +4,7 @@ Date=2017-11-24
 Name=Explorers of Ixalan
 Code2=E02
 MciCode=E02
-Type=Other
+Type=Boxed_Set
 ScryfallCode=E02
 
 [cards]

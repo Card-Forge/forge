@@ -2,7 +2,7 @@
 Code=PZEN
 Date=2009-10-02
 Name=Zendikar Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PZEN
 
 [cards]
