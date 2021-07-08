@@ -23,7 +23,7 @@ public class CardEditionCollectionTestCase extends ForgeCardMockTestCase {
         for (int i=0; i < 5; i++){
             String cardName = cardNames[i];
             String expectedSet = expectedSets[i];
-            PaperCard card = cardDb.getCardFromEditions(cardName, CardDb.CardArtPreference.OldPrint);
+            PaperCard card = cardDb.getCardFromEditions(cardName, CardDb.CardArtPreference.OldArtAllEditions);
             assertEquals(card.getEdition(), expectedSet);
             cards.add(card);
         }
