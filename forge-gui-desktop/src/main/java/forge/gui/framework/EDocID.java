@@ -15,7 +15,6 @@ import forge.screens.deckeditor.views.VOathbreakerDecks;
 import forge.screens.deckeditor.views.VProbabilities;
 import forge.screens.deckeditor.views.VStatistics;
 import forge.screens.deckeditor.views.VTinyLeadersDecks;
-import forge.screens.home.adventure.VSubmenuAdventureLoadData;
 import forge.screens.home.gauntlet.VSubmenuGauntletBuild;
 import forge.screens.home.gauntlet.VSubmenuGauntletContests;
 import forge.screens.home.gauntlet.VSubmenuGauntletLoad;
@@ -77,7 +76,6 @@ public enum EDocID {
     HOME_QUESTDUELS (VSubmenuDuels.SINGLETON_INSTANCE),
     HOME_QUESTDECKS (VSubmenuQuestDecks.SINGLETON_INSTANCE),
     HOME_QUESTPREFS (VSubmenuQuestPrefs.SINGLETON_INSTANCE),
-    HOME_ADVANTURELOADDATA(VSubmenuAdventureLoadData.SINGLETON_INSTANCE),
     HOME_GAUNTLETBUILD (VSubmenuGauntletBuild.SINGLETON_INSTANCE),
     HOME_GAUNTLETLOAD (VSubmenuGauntletLoad.SINGLETON_INSTANCE),
     HOME_GAUNTLETQUICK (VSubmenuGauntletQuick.SINGLETON_INSTANCE),

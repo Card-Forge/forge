@@ -183,11 +183,6 @@
             <artifactId>imageio-jpeg</artifactId>
             <version>3.7.0</version>
         </dependency>
-        <dependency>
-            <groupId>forge</groupId>
-            <artifactId>forge-adventure</artifactId>
-            <version>${project.version}</version>
-        </dependency>
     </dependencies>
 
     <profiles>
