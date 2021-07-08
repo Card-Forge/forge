@@ -1,0 +1,6 @@
+Name:Steadfast Paladin
+ManaCost:1 W
+Types:Creature Dwarf Knight
+PT:2/2
+K:Lifelink
+Oracle:Lifelink
