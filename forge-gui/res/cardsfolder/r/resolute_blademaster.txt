@@ -2,8 +2,7 @@ Name:Resolute Blademaster
 ManaCost:3 R W
 Types:Creature Human Soldier Ally
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ Rally — Whenever CARDNAME or another Ally enters the battlefield under your control, creatures you control gain double strike until end of turn.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Ally.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPumpAll | Secondary$ True | TriggerDescription$ Rally — Whenever CARDNAME or another Ally enters the battlefield under your control, creatures you control gain double strike until end of turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Ally.Other+YouCtrl | Execute$ TrigPumpAll | TriggerDescription$ Rally — Whenever CARDNAME or another Ally enters the battlefield under your control, creatures you control gain double strike until end of turn.
 SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Double Strike
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Ally
