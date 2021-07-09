@@ -1972,15 +1972,23 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         boolean result = select.chooseTargets(null, null, null, false, canFilterMustTarget);
 
+        final List<GameEntity> targets = currentAbility.getTargets().getTargetEntities();
+        int amount = currentAbility.getStillToDivide();
+
         // assign divided as you choose values
-        if (result && currentAbility.isDividedAsYouChoose() && currentAbility.getStillToDivide() > 0) {
-            int amount = currentAbility.getStillToDivide();
-            final List<GameEntity> targets = currentAbility.getTargets().getTargetEntities();
+        if (result && targets.size() > 0 && amount > 0) {
+            if (currentAbility.hasParam("DividedUpTo")) {
+                amount = chooseNumber(currentAbility, localizer.getMessage("lblHowMany"), targets.size(), amount);
+            }
             if (targets.size() == 1) {
                 currentAbility.addDividedAllocation(targets.get(0), amount);
             } else if (targets.size() == amount) {
                 for (GameEntity e : targets) {
                     currentAbility.addDividedAllocation(e, 1);
+                }
+            } else if (amount == 0) {
+                for (GameEntity e : targets) {
+                    currentAbility.addDividedAllocation(e, 0);
                 }
             } else if (targets.size() > amount) {
                 return false;

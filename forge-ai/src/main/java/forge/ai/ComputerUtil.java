@@ -1554,7 +1554,7 @@ public class ComputerUtil {
                 Iterables.addAll(objects, ComputerUtil.predictThreatenedObjects(ai, sa, spell));
             }
             if (top) {
-                break;  // only evaluate top-stack
+                break; // only evaluate top-stack
             }
         }
 

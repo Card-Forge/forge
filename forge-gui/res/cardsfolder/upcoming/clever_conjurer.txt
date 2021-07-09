@@ -2,5 +2,5 @@ Name:Clever Conjurer
 ManaCost:2 U
 Types:Creature Gnome Wizard
 PT:2/3
-A:AB$ Untap | Cost$ T | ValidTgts$ Permanent.Other+notnamedClever Conjurer | TgtPrompt$ Select another target permanent not named Clever Conjurer | SorcerySpeed$ True | SpellDescription$ Untap target permanent not named Clever Conjurer. Activate only as a sorcery.
+A:AB$ Untap | Cost$ T | ValidTgts$ Permanent.Other+notnamedClever Conjurer | TgtPrompt$ Select another target permanent not named CARDNAME | SorcerySpeed$ True | PrecostDesc$ Mage Hand — | SpellDescription$ Untap target permanent not named CARDNAME. Activate only as a sorcery.
 Oracle:Mage Hand — {T}: Untap target permanent not named Clever Conjurer. Activate only as a sorcery.

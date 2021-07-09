@@ -1,0 +1,13 @@
+Name:Ochre Jelly
+ManaCost:X G
+Types:Creature Ooze
+PT:0/0
+K:Trample
+K:etbCounter:P1P1:X
+SVar:X:Count$xPaid
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+counters_GE2_P1P1 | TriggerZones$ Battlefield | Execute$ TrigDelayTrigger | TriggerDescription$ Split – When CARDNAME dies, if it had two or more +1/+1 counters on it, create a token that’s a copy of it at the beginning of the next end step. That token enters the battlefield with half that many +1/+1 counters on it, rounded down.
+SVar:TrigDelayTrigger:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | RememberObjects$ TriggeredCardLKICopy | CopyTriggeringObjects$ True | Execute$ TrigCopy | TriggerDescription$ Create a token that’s a copy of it at the beginning of the next end step. That token enters the battlefield with half that many +1/+1 counters on it, rounded down.
+SVar:TrigCopy:DB$ CopyPermanent | Defined$ DelayTriggerRememberedLKI | WithCountersType$ P1P1 | WithCountersAmount$ Y
+SVar:Y:TriggeredCard$CardCounters.P1P1/HalfDown
+DeckHas:Ability$Counters & Ability$Token
+Oracle:Trample\nOchre Jelly enters the battlefield with X +1/+1 counters on it.\nSplit — When Ochre Jelly dies, if it had two or more +1/+1 counters on it, create a token that’s a copy of it at the beginning of the next end step. That token enters the battlefield with half that many +1/+1 counters on it, rounded down.

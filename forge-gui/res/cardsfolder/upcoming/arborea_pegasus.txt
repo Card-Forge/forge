@@ -1,0 +1,9 @@
+Name:Arborea Pegasus
+ManaCost:3 W
+Types:Creature Pegasus
+PT:2/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature gets +1/+1 and gains flying until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 1 | NumDef$ 1 | KW$ Flying
+SVar:PlayMain1:TRUE
+Oracle:Flying\nWhen Arborea Pegasus enters the battlefield, target creature gets +1/+1 and gains flying until end of turn.

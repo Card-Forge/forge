@@ -1,0 +1,12 @@
+Name:Long Rest
+ManaCost:X G G G
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TargetMin$ X | TargetMax$ X | TgtPrompt$ Choose X target cards to return from your graveyard | TargetsWithDifferentCMC$ True | ValidTgts$ Card.YouOwn | RememberChanged$ True | SubAbility$ DBSetLife | StackDescription$ Return X target cards with different mana values from your graveyard to your hand. ({c:Targeted}) | SpellDescription$ Return X target cards with different mana values from your graveyard to your hand. If eight or more cards were returned to your hand this way, your life total becomes equal to your starting life total. Exile Long Rest.
+SVar:DBSetLife:DB$ SetLife | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE8 | Defined$ You | LifeAmount$ Y | SubAbility$ DBExile | StackDescription$ If eight or more cards were returned to your hand this way, your life total becomes equal to your starting life total.
+SVar:DBExile:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$xPaid
+SVar:Y:Count$YourStartingLife
+DeckHas:Ability$Graveyard
+DeckHints:Type$Discard
+Oracle:Return X target cards with different mana values from your graveyard to your hand. If eight or more cards were returned to your hand this way, your life total becomes equal to your starting life total. Exile Long Rest.

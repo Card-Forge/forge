@@ -76,6 +76,9 @@ public class RollDiceEffect extends SpellAbilityEffect {
             int roll = MyRandom.getRandom().nextInt(sides) + 1;
             rolls.add(roll);
             total += roll;
+            if (sa.hasParam("RememberRoll")) {
+                host.addRemembered(roll);
+            }
         }
 
         if (amount > 0) {

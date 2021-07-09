@@ -2,8 +2,7 @@ Name:Tajuru Warcaller
 ManaCost:3 G G
 Types:Creature Elf Warrior Ally
 PT:2/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ Rally — Whenever CARDNAME or another Ally enters the battlefield under your control, creatures you control get +2/+2 until end of turn.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Ally.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPumpAll | Secondary$ True | TriggerDescription$ Rally — Whenever CARDNAME or another Ally enters the battlefield under your control, creatures you control get +2/+2 until end of turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Ally.Other+YouCtrl | Execute$ TrigPumpAll | TriggerDescription$ Rally — Whenever CARDNAME or another Ally enters the battlefield under your control, creatures you control get +2/+2 until end of turn.
 SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +2
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Ally
