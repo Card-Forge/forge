@@ -1703,7 +1703,7 @@ public class CardProperty {
         } else if (property.startsWith("set")) {
             final String setCode = property.substring(3, 6);
             final PaperCard setCard = StaticData.instance().getCommonCards().getCardFromEditions(card.getName(),
-                                                                                     CardDb.CardArtPreference.OldArtAllEditions);
+                                                                                     CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS);
             if (!setCard.getEdition().equals(setCode)) {
                 return false;
             }

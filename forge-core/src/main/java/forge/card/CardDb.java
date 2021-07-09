@@ -53,10 +53,10 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     private List<String> filtered;
 
     public enum CardArtPreference {
-        LatestArtAllEditions(false, true),
-        LatestArtExcludedPromoAndOnlineEditions(true, true),
-        OldArtAllEditions(false, false),
-        OldArtExcludedPromoAndOnlineEditions(true, false);
+        LATEST_ART_ALL_EDITIONS(false, true),
+        LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY(true, true),
+        ORIGINAL_ART_ALL_EDITIONS(false, false),
+        ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY(true, false);
 
         final boolean filterSets;
         final boolean latestFirst;
@@ -72,15 +72,33 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
 
         public static String[] getPreferences(){
-            return new String[]{"Latest Art (All Editions)",
-                    "Latest Art (Excluded Promo And Online Editions)",
-                    "Old Art (All Editions)",
-                    "Old Art (Excluded Promo And Online Editions)"};
+            return new String[]{"Latest Card Art (All Editions)",
+                    "Latest Card Art (Core, Expansions and Reprint Only)",
+                    "Original Card Art (All Editions)",
+                    "Original Card Art (Core, Expansions and Reprint Only)"};
+        }
+
+        public static CardArtPreference fromForgePreference(final String preference){
+            String prefLabel = preference.trim().toLowerCase();
+            if (prefLabel.contains("latest")){
+                if (prefLabel.contains("core"))
+                    return LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY;
+                return LATEST_ART_ALL_EDITIONS;
+            }
+
+            if (prefLabel.contains("old") || prefLabel.contains("original") || prefLabel.contains("earliest")){
+                if (prefLabel.contains("core"))
+                    return ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY;
+                return ORIGINAL_ART_ALL_EDITIONS;
+            }
+
+            return LATEST_ART_ALL_EDITIONS; // DEFAULT fall back
         }
     }
 
     // Placeholder to setup default art Preference - to be moved from Static Data!
     private CardArtPreference defaultCardArtPreference;
+    private static final CardArtPreference DEFAULT_ART_PREFERENCE = CardArtPreference.LATEST_ART_ALL_EDITIONS;
 
     public static class CardRequest {
         public String cardName;
@@ -385,17 +403,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     public CardArtPreference getCardArtPreference(){ return this.defaultCardArtPreference; }
     public void setCardArtPreference(String artPreference){
-        artPreference = artPreference.replaceAll("[\\s\\(\\)]", "");
-        CardArtPreference cardArtPreference = null;
-        try{
-            cardArtPreference = CardArtPreference.valueOf(artPreference);
-        } catch (IllegalArgumentException ex){
-            cardArtPreference = CardArtPreference.LatestArtAllEditions;  // default
-        }
-        finally {
-            if (cardArtPreference != null)
-                this.defaultCardArtPreference = cardArtPreference;
-        }
+        this.defaultCardArtPreference = CardArtPreference.fromForgePreference(artPreference);
     }
 
     /*

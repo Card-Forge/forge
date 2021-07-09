@@ -6368,7 +6368,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return cp == null ? StaticData.instance().getCommonCards().getCard(name, set) : cp;
         }
         cp = StaticData.instance().getVariantCards().getCard(name);
-        return cp == null ? StaticData.instance().getCommonCards().getCardFromEditions(name, CardArtPreference.LatestArtAllEditions) : cp;
+        return cp == null ? StaticData.instance().getCommonCards().getCardFromEditions(name, CardArtPreference.LATEST_ART_ALL_EDITIONS) : cp;
     }
 
     /**
