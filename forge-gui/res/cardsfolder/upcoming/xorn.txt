@@ -1,0 +1,10 @@
+Name:Xorn
+ManaCost:2 R
+Types:Creature Elemental
+PT:3/2
+R:Event$ CreateToken | ValidPlayer$ You | ValidToken$ Treasure | ReplaceWith$ AdditionalToken | Description$ If you would create one or more Treasure tokens, instead create those tokens plus an additional Treasure token.
+SVar:AdditionalToken:DB$ ReplaceEffect | VarName$ TokenNum | VarValue$ X
+SVar:X:ReplaceCount$TokenNum/Plus.1
+DeckNeeds:Type$Token
+AI:RemoveDeck:Random
+Oracle:If you would create one or more Treasure tokens, instead create those tokens plus an additional Treasure token.
