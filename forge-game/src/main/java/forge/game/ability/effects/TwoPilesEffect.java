@@ -17,10 +17,6 @@ import forge.util.Localizer;
 
 public class TwoPilesEffect extends SpellAbilityEffect {
 
-    // *************************************************************************
-    // ***************************** TwoPiles **********************************
-    // *************************************************************************
-
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
@@ -105,10 +101,6 @@ public class TwoPilesEffect extends SpellAbilityEffect {
                 final CardCollectionView pile1 = separator.getController().chooseCardsForEffect(pool, sa, title, 0, size, false, null);
                 final CardCollection pile2 = new CardCollection(pool);
                 pile2.removeAll(pile1);
-
-                //System.out.println("Pile 1:" + pile1);
-                //System.out.println("Pile 2:" + pile2);
-
 
                 if (isLeftRightPile) {
                     pile1WasChosen = true;

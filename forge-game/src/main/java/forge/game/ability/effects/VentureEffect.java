@@ -42,7 +42,7 @@ public class VentureEffect  extends SpellAbilityEffect {
             }
         }
 
-        // Create a new dugeon card chosen by player in command zone.
+        // Create a new dungeon card chosen by player in command zone.
         List<PaperCard> dungeonCards = StaticData.instance().getVariantCards().getAllCards(
             Predicates.compose(CardRulesPredicates.Presets.IS_DUNGEON, PaperCard.FN_GET_RULES));
         List<ICardFace> faces = new ArrayList<>();
