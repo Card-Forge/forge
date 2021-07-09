@@ -1,0 +1,7 @@
+Name:Moon-Blessed Cleric
+ManaCost:2 W
+Types:Creature Human Elf Cleric
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ Divine Intervention — When CARDNAME enters the battlefield, you may search your library for an enchantment card, reveal it, then shuffle and put that card on top.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Enchantment.YouOwn | ChangeNum$ 1 | ShuffleNonMandatory$ True
+Oracle:Divine Intervention — When Moon-Blessed Cleric enters the battlefield, you may search your library for an enchantment card, reveal it, then shuffle and put that card on top.

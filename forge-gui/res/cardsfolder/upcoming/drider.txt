@@ -1,0 +1,9 @@
+Name:Drider
+ManaCost:4 B
+Types:Creature Elf Spider
+PT:4/3
+K:Reach
+T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigToken | CombatDamage$ True | ValidTarget$ Player | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, create a 2/1 black Spider creature token with menace and reach.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_2_1_spider_menace_reach | TokenOwner$ You
+DeckHas:Ability$Token
+Oracle:Reach\nWhenever Drider deals combat damage to a player, create a 2/1 black Spider creature token with menace and reach.
