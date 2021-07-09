@@ -2,8 +2,7 @@ Name:Highland Berserker
 ManaCost:1 R
 Types:Creature Human Berserker Ally
 PT:2/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME or another Ally enters the battlefield under your control, you may have Ally creatures you control gain first strike until end of turn.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Ally.Other+YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPump | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another Ally enters the battlefield under your control, you may have Ally creatures you control gain first strike until end of turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Ally.Other+YouCtrl | OptionalDecider$ You | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME or another Ally enters the battlefield under your control, you may have Ally creatures you control gain first strike until end of turn.
 SVar:TrigPump:DB$ PumpAll | ValidCards$ Ally.YouCtrl | KW$ First Strike
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Ally
