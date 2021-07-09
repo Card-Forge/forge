@@ -11,5 +11,5 @@ Name:Done
 ManaCost:3 U
 Types:Instant
 A:SP$ Tap | Cost$ 3 U | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose up to two target creatures | ValidTgts$ Creature | SubAbility$ TrigPump | StackDescription$ SpellDescription | SpellDescription$ Tap up to two target creatures. They don't untap during their controllers' next untap step.
-SVar:TrigPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True | StackDescription$ None
+SVar:TrigPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent | StackDescription$ None
 Oracle:Tap up to two target creatures. They don't untap during their controllers' next untap step.
