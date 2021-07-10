@@ -1,0 +1,10 @@
+Name:Forsworn Paladin
+ManaCost:B
+Types:Creature Human Knight
+PT:1/1
+K:Menace
+A:AB$ Token | Cost$ 1 B T PayLife<1> | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SpellDescription$ Create a Treasure token.
+A:AB$ Pump | Cost$ 2 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | SubAbility$ DBDeathtouch | AIManaPref$ Treasure | SpellDescription$ Target creature gets +2/+0 until end of turn. If mana from a Treasure was spent to activate this ability, that creature also gains deathtouch until end of turn.
+SVar:DBDeathtouch:DB$ Pump | KW$ Deathtouch | Defined$ ParentTarget | ConditionCheckSVar$ TreasureCheck
+SVar:TreasureCheck:Count$TotalManaSpent Treasure
+Oracle:Menace\n{1}{B}, {T}, Pay 1 life: Create a Treasure token.\n{2}{B}: Target creature gets +2/+0 until end of turn. If mana from a Treasure was spent to activate this ability, that creature also gains deathtouch until end of turn.
