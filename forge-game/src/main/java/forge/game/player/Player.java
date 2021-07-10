@@ -2203,8 +2203,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         if (incR.length > 1) {
             final String excR = incR[1];
-            final String[] exR = excR.split("\\+"); // Exclusive Restrictions
-            // are ...
+            final String[] exR = excR.split("\\+"); // Exclusive Restrictions are ...
             for (int j = 0; j < exR.length; j++) {
                 if (!hasProperty(exR[j], sourceController, source, spellAbility)) {
                     return false;
