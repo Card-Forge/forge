@@ -1836,25 +1836,26 @@ public class AbilityUtils {
                     return doXMath(list.size(), expr, c, ctb);
                 }
 
-                if (sq[0].startsWith("CastTotalManaSpent")) {
-                    return doXMath(c.getCastSA() != null ? c.getCastSA().getTotalManaSpent() : 0, expr, c, ctb);
+                if (sq[0].equals("ResolvedThisTurn")) {
+                    return doXMath(sa.getResolvedThisTurn(), expr, c, ctb);
                 }
 
-                if (sq[0].equals("CastTotalSnowManaSpent")) {
+                if (sq[0].startsWith("TotalManaSpent ")) {
+                    final String[] k = sq[0].split(" ");
                     int v = 0;
-                    if (c.getCastSA() != null) {
-                        for (Mana m : c.getCastSA().getPayingMana()) {
-                            if (m.isSnow()) {
-                                v += 1;
+                    if (sa.getRootAbility().getPayingMana() != null) {
+                        for (Mana m : sa.getRootAbility().getPayingMana()) {
+                            Card source = m.getSourceCard();
+                            if (source != null) {
+                                if (source.isValid(k[1].split(","), player, c, sa)) {
+                                    v += 1;
+                                }
                             }
                         }
                     }
                     return doXMath(v, expr, c, ctb);
                 }
 
-                if (sq[0].equals("ResolvedThisTurn")) {
-                    return doXMath(sa.getResolvedThisTurn(), expr, c, ctb);
-                }
             } else {
                 // fallback if ctb isn't a spellability
                 if (sq[0].startsWith("LastStateBattlefield")) {
@@ -1874,7 +1875,28 @@ public class AbilityUtils {
                 if (sq[0].startsWith("xPaid")) {
                     return doXMath(c.getXManaCostPaid(), expr, c, ctb);
                 }
+
             } // end SpellAbility
+
+            if (sq[0].equals("CastTotalManaSpent")) {
+                return doXMath(c.getCastSA() != null ? c.getCastSA().getTotalManaSpent() : 0, expr, c, ctb);
+            }
+
+            if (sq[0].startsWith("CastTotalManaSpent ")) {
+                final String[] k = sq[0].split(" ");
+                int v = 0;
+                if (c.getCastSA() != null) {
+                    for (Mana m : c.getCastSA().getPayingMana()) {
+                        Card source = m.getSourceCard();
+                        if (source != null) {
+                            if (source.isValid(k[1].split(","), player, c, ctb)) {
+                                v += 1;
+                            }
+                        }
+                    }
+                }
+                return doXMath(v, expr, c, ctb);
+            }
 
             // Count$TargetedLifeTotal (targeted player's life total)
             // Not optimal but since xCount doesn't take SAs, we need to replicate while we have it

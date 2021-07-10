@@ -3,6 +3,7 @@ ManaCost:3 U U
 Types:Snow Instant
 A:SP$ Scry | Cost$ 3 U U | ScryNum$ X | SubAbility$ DBDraw | SpellDescription$ Scry X, where X is the amount of {S} spent to cast this spell, then draw three cards. ({S} is mana from a snow source.)
 SVar:DBDraw:DB$ Draw | NumCards$ 3
-SVar:X:Count$CastTotalSnowManaSpent
+SVar:X:Count$CastTotalManaSpent Snow
+SVar:AIPreference:ManaFrom$Snow
 DeckNeeds:Type$Snow
 Oracle:Scry X, where X is the amount of {S} spent to cast this spell, then draw three cards. ({S} is mana from a snow source.)

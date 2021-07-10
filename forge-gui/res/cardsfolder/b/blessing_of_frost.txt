@@ -2,9 +2,10 @@ Name:Blessing of Frost
 ManaCost:3 G
 Types:Snow Sorcery
 A:SP$ PutCounter | Cost$ 3 G | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose any number of creatures you control to distribute counters to | CounterType$ P1P1 | CounterNum$ X | ChoiceAmount$ X | MinChoiceAmount$ 1 | DividedAsYouChoose$ X | SubAbility$ DBDraw | SpellDescription$ Distribute X +1/+1 counters among any number of creatures you control, where X is the amount of {S} spent to cast this spell.
-SVar:X:Count$CastTotalSnowManaSpent
+SVar:X:Count$CastTotalManaSpent Snow
 SVar:DBDraw:DB$ Draw | NumCards$ Y | SpellDescription$ Then draw a card for each creature you control with power 4 or greater.
 SVar:Y:Count$Valid Creature.powerGE4+YouCtrl
+SVar:AIPreference:ManaFrom$Snow
 DeckHints:Type$Snow
 DeckHas:Ability$Counters
 Oracle:Distribute X +1/+1 counters among any number of creatures you control, where X is the amount of {S} spent to cast this spell. Then draw a card for each creature you control with power 4 or greater.

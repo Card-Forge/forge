@@ -3,6 +3,7 @@ ManaCost:1 R R
 Types:Snow Sorcery
 A:SP$ DealDamage | Cost$ 1 R R | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker. | NumDmg$ 4 | SubAbility$ DBColorlessMana | SpellDescription$ CARDNAME deals 4 damage to target creature or planeswalker. Add {C} for each {S} spent to cast this spell. Until end of turn, you don't lose this mana as steps and phases end. | StackDescription$ SpellDescription
 SVar:DBColorlessMana:DB$ Mana | Produced$ C | Amount$ X | PersistentMana$ True
-SVar:X:Count$CastTotalSnowManaSpent
+SVar:X:Count$CastTotalManaSpent Snow
+SVar:AIPreference:ManaFrom$Snow
 DeckHints:Type$Snow
 Oracle:Tundra Fumarole deals 4 damage to target creature or planeswalker. Add {C} for each {S} spent to cast this spell. Until end of turn, you don't lose this mana as steps and phases end. ({S} is mana from a snow source.)
