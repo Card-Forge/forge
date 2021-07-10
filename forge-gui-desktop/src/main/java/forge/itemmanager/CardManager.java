@@ -1,9 +1,6 @@
 package forge.itemmanager;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.Map.Entry;
 
 import javax.swing.JMenu;
@@ -126,13 +123,14 @@ public class CardManager extends ItemManager<PaperCard> {
                     existingFilter.edit(itemManager);
                 }
                 else {
-                    final DialogChooseSets dialog = new DialogChooseSets(null, null, true);
+                    List<String> limitedSets = getFilteredSetCodesInCatalog();
+                    final DialogChooseSets dialog = new DialogChooseSets(null, null, limitedSets, true);
                     dialog.setOkCallback(new Runnable() {
                         @Override
                         public void run() {
                             List<String> sets = dialog.getSelectedSets();
                             if (!sets.isEmpty()) {
-                                itemManager.addFilter(new CardSetFilter(itemManager, sets, dialog.getWantReprints()));
+                                itemManager.addFilter(new CardSetFilter(itemManager, sets, limitedSets, dialog.getWantReprints()));
                             }
                         }
                     });
