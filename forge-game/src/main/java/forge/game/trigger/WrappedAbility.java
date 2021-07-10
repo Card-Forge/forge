@@ -25,7 +25,6 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.AlternativeCost;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityRestriction;
-import forge.game.spellability.SpellAbilityView;
 import forge.game.spellability.TargetChoices;
 import forge.game.spellability.TargetRestrictions;
 
@@ -62,12 +61,11 @@ public class WrappedAbility extends Ability {
     boolean mandatory = false;
 
     public WrappedAbility(final Trigger regtrig0, final SpellAbility sa0, final Player decider0) {
-        super(sa0.getHostCard(), ManaCost.ZERO, sa0.getView());
+        super(sa0.getHostCard(), ManaCost.ZERO);
         setTrigger(regtrig0);
         sa = sa0;
         sa.setTrigger(regtrig0);
         decider = decider0;
-        sa.setDescription(this.getStackDescription());
     }
 
     public SpellAbility getWrappedAbility() {
@@ -202,16 +200,6 @@ public class WrappedAbility extends Ability {
         return sa.getSATargetingCard();
     }
 
-    @Override
-    public Card getHostCard() {
-        return sa.getHostCard();
-    }
-
-    @Override
-    public SpellAbilityView getView() {
-        return sa.getView();
-    }
-
     // key for autoyield - if there is a trigger use its description as the wrapper now has triggering information in its description
     @Override
     public String yieldKey() {
@@ -241,6 +229,7 @@ public class WrappedAbility extends Ability {
     @Override
     public String getStackDescription() {
         final Trigger regtrig = getTrigger();
+        if (regtrig == null) return "";
         final StringBuilder sb = new StringBuilder(regtrig.replaceAbilityText(regtrig.toString(true), this));
         List<TargetChoices> allTargets = sa.getAllTargetChoices();
         if (!allTargets.isEmpty()) {

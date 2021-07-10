@@ -193,13 +193,13 @@ public abstract class Trigger extends TriggerReplacementBase {
                 if (ApiType.Charm.equals(sa.getApi())) {
                     saDesc = sa.getStackDescription();
                 } else {
-                    saDesc = sa.getDescription();
+                    saDesc = sa.toString();
                 }
             } else if (ApiType.Charm.equals(sa.getApi())) {
                 // use special formating, can be used in Card Description
                 saDesc = CharmEffect.makeFormatedDescription(sa);
             } else {
-                saDesc = sa.getDescription();
+                saDesc = sa.toString();
             }
             // string might have leading whitespace
             saDesc = saDesc.trim();
