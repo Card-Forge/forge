@@ -14,12 +14,19 @@ import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 
 public class DeckSetFilter extends DeckFormatFilter {
     protected final Set<String> sets = new HashSet<>();
+    protected final Set<String> limitedSets = new HashSet<>(); // Set of all sets constrained by catalog
 
     public DeckSetFilter(ItemManager<? super DeckProxy> itemManager0, Collection<String> sets0, boolean allowReprints0) {
         super(itemManager0);
         this.sets.addAll(sets0);
         this.formats.add(new GameFormat(null, this.sets, null));
         this.allowReprints = allowReprints0;
+    }
+
+    public DeckSetFilter(ItemManager<? super DeckProxy> itemManager0, Collection<String> sets0,
+                         Collection<String> limitedSets0, boolean allowReprints0) {
+        this(itemManager0, sets0, allowReprints0);
+        this.limitedSets.addAll(limitedSets0);
     }
 
     @Override
@@ -42,6 +49,7 @@ public class DeckSetFilter extends DeckFormatFilter {
     public boolean merge(ItemFilter<?> filter) {
         DeckSetFilter cardSetFilter = (DeckSetFilter)filter;
         this.sets.addAll(cardSetFilter.sets);
+        this.limitedSets.addAll(cardSetFilter.limitedSets);
         this.allowReprints = cardSetFilter.allowReprints;
         this.formats.clear();
         this.formats.add(new GameFormat(null, this.sets, null));
@@ -49,8 +57,10 @@ public class DeckSetFilter extends DeckFormatFilter {
     }
 
     public void edit() {
-        final DialogChooseSets dialog = new DialogChooseSets(this.sets, null, true,
-                                                             this.allowReprints);
+        final DialogChooseSets dialog = new DialogChooseSets(this.sets, null, this.limitedSets,
+                                                            true, this.allowReprints);
+        final DeckSetFilter itemFilter = this;
+
         dialog.setOkCallback(new Runnable() {
             @Override
             public void run() {
@@ -59,6 +69,7 @@ public class DeckSetFilter extends DeckFormatFilter {
                 allowReprints = dialog.getWantReprints();
                 formats.clear();
                 formats.add(new GameFormat(null, sets, null));
+                itemManager.addFilter(itemFilter); // this adds/updates the current filter
             }
         });
     }
