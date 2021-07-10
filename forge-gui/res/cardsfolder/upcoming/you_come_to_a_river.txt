@@ -1,0 +1,7 @@
+Name:You Come to a River 
+ManaCost:1 U
+Types:Instant
+A:SP$ Charm | Cost$ 1 U | Choices$ FightTheCurrent,FindACrossing
+SVar:FightTheCurrent:DB$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Fight the Current — Return target nonland permanent to its owner's hand.
+SVar:FindACrossing:DB$ Pump | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 1 | KW$ HIDDEN Unblockable | SpellDescription$ Find a Crossing — Target creature gets +1/+0 until end of turn and can't be blocked this turn.
+Oracle:Choose one —\n• Fight the Current — Return target nonland permanent to its owner's hand.\n• Find a Crossing — Target creature gets +1/+0 until end of turn and can't be blocked this turn.
