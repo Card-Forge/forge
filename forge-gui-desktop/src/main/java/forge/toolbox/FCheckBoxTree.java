@@ -346,6 +346,13 @@ public class FCheckBoxTree extends JTree {
         }
         if (lastChildNodePath != null)
             updatePredecessors(lastChildNodePath);
+        else {
+            // leafNode
+            if (selectStatus)
+                checkedPaths.add(treePath);
+            else
+                checkedPaths.remove(treePath);
+        }
     }
 
     private void setPathCheckStatus(TreePath tp, boolean checkStatus) {
