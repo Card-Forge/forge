@@ -28,7 +28,7 @@ public class RollDiceEffect extends SpellAbilityEffect {
                 String [] kv = ab.split(":");
                 String desc = sa.getAdditionalAbility(kv[0]).getDescription();
                 if (!desc.isEmpty()) {
-                    sb.append("\n\n").append(desc);
+                    sb.append("\n").append(desc);
                 }
             }
         }
