@@ -839,7 +839,6 @@ public class CardFactoryUtil {
 
             inst.addTrigger(cascadeTrigger);
         } else if (keyword.startsWith("Champion")){
-
             final String[] k = keyword.split(":");
             final String[] valid = k[1].split(",");
             String desc = Lang.joinHomogenous(Lists.newArrayList(valid), null, "or");
