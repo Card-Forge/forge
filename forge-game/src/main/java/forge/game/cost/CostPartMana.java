@@ -124,7 +124,7 @@ public class CostPartMana extends CostPart {
         return true;
     }
 
-    public String getRestiction() {
+    public String getRestriction() {
         return restriction;
     }
 
@@ -136,11 +136,11 @@ public class CostPartMana extends CostPart {
         if (isExiledCreatureCost() && sa.getPaidList(CostExile.HashLKIListKey)!= null && !sa.getPaidList(CostExile.HashLKIListKey).isEmpty()) {
             // back from the brink
             return sa.getPaidList(CostExile.HashLKIListKey).get(0).getManaCost();
-        } if (isEnchantedCreatureCost() && sa.getHostCard().getEnchantingCard() != null) {
-            return sa.getHostCard().getEnchantingCard().getManaCost();
-        } else {
-        	return getManaToPay();
         }
+        if (isEnchantedCreatureCost() && sa.getHostCard().getEnchantingCard() != null) {
+            return sa.getHostCard().getEnchantingCard().getManaCost();
+        }
+        return getManaToPay();
     }
 
     @Override

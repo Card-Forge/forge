@@ -3000,7 +3000,7 @@ public class CardFactoryUtil {
                     "| SpellDescription$ (" + inst.getReminderText() + ")";
 
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
-            sa.setSVar("ScavengeX", "Count$CardPower");
+            sa.setSVar("ScavengeX", "Exiled$CardPower");
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
 

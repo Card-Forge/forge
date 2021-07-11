@@ -1482,7 +1482,7 @@ public class ComputerUtilMana {
 
         String restriction = null;
         if (payCosts != null && payCosts.getCostMana() != null) {
-            restriction = payCosts.getCostMana().getRestiction();
+            restriction = payCosts.getCostMana().getRestriction();
         }
         ManaCostBeingPaid cost = new ManaCostBeingPaid(mana, restriction);
 
