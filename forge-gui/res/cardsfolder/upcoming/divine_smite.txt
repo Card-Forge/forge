@@ -1,0 +1,9 @@
+Name:Divine Smite
+ManaCost:1 W
+Types:Instant
+A:SP$ Pump | Cost$ 1 W | ValidTgts$ Creature,Planeswalker | IsCurse$ True | RememberObjects$ Targeted | SubAbility$ DBDefaultAction | StackDescription$ SpellDescription | SpellDescription$ Target creature or planeswalker an opponent controls phases out. If that permanent is black, exile it instead. (If it phases out, treat it and anything attached to it as though they don't exist until its controller's next turn.)
+SVar:DBDefaultAction:DB$ Phases | Defined$ Remembered | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBExile | StackDescription$ None
+SVar:DBExile:DB$ ChangeZone | Defined$ Remembered | Origin$ Battlefield | Destination$ Exile | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Valid Creature.IsRemembered+Black,Planeswalker.IsRemembered+Black
+Oracle:Target creature or planeswalker an opponent controls phases out. If that permanent is black, exile it instead. (If it phases out, treat it and anything attached to it as though they don't exist until its controller's next turn.)
