@@ -3495,7 +3495,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final CardTypeView getType(CardState state) {
-        if (changedCardTypes.isEmpty()) {
+        if (changedCardTypes.isEmpty() && changedCardTypesCharacterDefining.isEmpty()) {
             return state.getType();
         }
         return state.getType().getTypeWithChanges(getChangedCardTypes());
@@ -3507,6 +3507,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public Map<Long, CardChangedType> getChangedCardTypesMap() {
         return Collections.unmodifiableMap(changedCardTypes);
+    }
+    public Map<Long, CardChangedType> getChangedCardTypesCharacterDefiningMap() {
+        return Collections.unmodifiableMap(changedCardTypesCharacterDefining);
     }
 
     public boolean clearChangedCardTypes() {
@@ -3548,8 +3551,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return changedCardKeywords;
     }
 
-    public Map<Long, CardColor> getChangedCardColors() {
+    public Map<Long, CardColor> getChangedCardColorsMap() {
         return changedCardColors;
+    }
+    public Map<Long, CardColor> getChangedCardColorsCharacterDefiningMap() {
+        return changedCardColorsCharacterDefining;
+    }
+    public Iterable<CardColor> getChangedCardColors() {
+        return Iterables.concat(changedCardColorsCharacterDefining.values(), changedCardColors.values());
     }
 
     public final void addChangedCardTypes(final CardType addType, final CardType removeType,
@@ -3602,7 +3611,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void addColor(final String s, final boolean addToColors, final long timestamp, final boolean cda) {
         (cda ? changedCardColorsCharacterDefining : changedCardColors).put(timestamp, new CardColor(s, addToColors, timestamp));
         currentState.getView().updateColors(this);
-        currentState.getView().updateHasChangeColors(!getChangedCardColors().isEmpty());
+        currentState.getView().updateHasChangeColors(!Iterables.isEmpty(getChangedCardColors()));
     }
 
     public final void removeColor(final long timestampIn) {
@@ -3612,7 +3621,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
         if (removed) {
             currentState.getView().updateColors(this);
-            currentState.getView().updateHasChangeColors(!getChangedCardColors().isEmpty());
+            currentState.getView().updateHasChangeColors(!Iterables.isEmpty(getChangedCardColors()));
         }
     }
 
@@ -3628,7 +3637,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public final ColorSet determineColor(CardState state) {
         byte colors = state.getColor();
-        for (final CardColor cc : Iterables.concat(changedCardColorsCharacterDefining.values(), changedCardColors.values())) {
+        for (final CardColor cc : getChangedCardColors()) {
             if (cc.isAdditional()) {
                 colors |= cc.getColorMask();
             } else {
@@ -6604,6 +6613,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             this.changedCardTypes.put(entry.getKey(), entry.getValue());
         }
     }
+    public void setChangedCardTypesCharacterDefining(Map<Long, CardChangedType> changedCardTypes) {
+        this.changedCardTypesCharacterDefining.clear();
+        for (Entry<Long, CardChangedType> entry : changedCardTypes.entrySet()) {
+            this.changedCardTypesCharacterDefining.put(entry.getKey(), entry.getValue());
+        }
+    }
 
     public void setChangedCardKeywords(Map<Long, KeywordsChange> changedCardKeywords) {
         this.changedCardKeywords.clear();
@@ -6616,6 +6631,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         this.changedCardColors.clear();
         for (Entry<Long, CardColor> entry : changedCardColors.entrySet()) {
             this.changedCardColors.put(entry.getKey(), entry.getValue());
+        }
+    }
+    public void setChangedCardColorsCharacterDefining(Map<Long, CardColor> changedCardColors) {
+        this.changedCardColorsCharacterDefining.clear();
+        for (Entry<Long, CardColor> entry : changedCardColors.entrySet()) {
+            this.changedCardColorsCharacterDefining.put(entry.getKey(), entry.getValue());
         }
     }
 
