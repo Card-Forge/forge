@@ -15,6 +15,7 @@ import forge.screens.home.quest.DialogChooseSets;
  */
 public class CardSetFilter extends CardFormatFilter {
     protected final Set<String> sets = new HashSet<>();
+    protected final Set<String> limitedSets = new HashSet<>();
 
     public CardSetFilter(ItemManager<? super PaperCard> itemManager0, Collection<String> sets0, boolean allowReprints0) {
         super(itemManager0);
@@ -23,9 +24,14 @@ public class CardSetFilter extends CardFormatFilter {
         this.allowReprints = allowReprints0;
     }
 
+    public CardSetFilter(ItemManager<? super PaperCard> itemManager0, Collection<String> sets0, Collection<String> limitedSets0, boolean allowReprints0){
+        this(itemManager0, sets0, allowReprints0);
+        this.limitedSets.addAll(limitedSets0);
+    }
+
     @Override
     public ItemFilter<PaperCard> createCopy() {
-        return new CardSetFilter(itemManager, this.sets, this.allowReprints);
+        return new CardSetFilter(itemManager, this.sets, this.limitedSets, this.allowReprints);
     }
 
     @Override
@@ -43,6 +49,7 @@ public class CardSetFilter extends CardFormatFilter {
     public boolean merge(ItemFilter<?> filter) {
         CardSetFilter cardSetFilter = (CardSetFilter)filter;
         this.sets.addAll(cardSetFilter.sets);
+        this.limitedSets.addAll(cardSetFilter.limitedSets);
         this.allowReprints = cardSetFilter.allowReprints;
         this.formats.clear();
         this.formats.add(new GameFormat(null, this.sets, null));
@@ -50,8 +57,8 @@ public class CardSetFilter extends CardFormatFilter {
     }
 
     public void edit(final ItemManager<? super PaperCard> itemManager) {
-        final DialogChooseSets dialog = new DialogChooseSets(this.sets, null, true,
-                                                             this.allowReprints);
+        final DialogChooseSets dialog = new DialogChooseSets(this.sets, null, this.limitedSets,
+                                                            true, this.allowReprints);
         final CardSetFilter itemFilter = this;
         
         dialog.setOkCallback(new Runnable() {

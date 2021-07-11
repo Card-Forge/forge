@@ -257,12 +257,13 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
                 if (existingFilter != null) {
                     existingFilter.edit();
                 } else {
-                    final DialogChooseSets dialog = new DialogChooseSets(null, null, true);
+                    List<String> limitedSets = getFilteredSetCodesInCatalog();
+                    final DialogChooseSets dialog = new DialogChooseSets(null, null, limitedSets, true);
                     dialog.setOkCallback(new Runnable() {
                         @Override public void run() {
                             final List<String> sets = dialog.getSelectedSets();
                             if (!sets.isEmpty()) {
-                                addFilter(new DeckSetFilter(DeckManager.this, sets, dialog.getWantReprints()));
+                                addFilter(new DeckSetFilter(DeckManager.this, sets, limitedSets, dialog.getWantReprints()));
                             }
                         }
                     });
@@ -332,6 +333,16 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
                 }
             }
         });
+    }
+
+    @Override
+    protected List<String> getFilteredSetCodesInCatalog(){
+        GameType gameType = getGameType();
+        if (gameType == GameType.Brawl) {
+            filteredSetCodesInCatalog = FModel.getFormats().get("Brawl").getAllowedSetCodes();
+            return filteredSetCodesInCatalog;
+        }
+        return super.getFilteredSetCodesInCatalog();
     }
 
     public void editDeck(final DeckProxy deck) {

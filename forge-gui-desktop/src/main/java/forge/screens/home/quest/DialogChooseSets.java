@@ -36,7 +36,49 @@ public class DialogChooseSets {
 	}
 
 	public DialogChooseSets(Collection<String> preselectedSets, Collection<String> unselectableSets,
+							Collection<String> limitedSets, boolean showWantReprintsCheckbox) {
+		this(preselectedSets, unselectableSets, limitedSets, showWantReprintsCheckbox, false);
+	}
+
+	public DialogChooseSets(Collection<String> preselectedSets, Collection<String> unselectableSets,
 							boolean showWantReprintsCheckbox, boolean allowReprints) {
+		this(preselectedSets, unselectableSets, null, showWantReprintsCheckbox, allowReprints);
+	}
+
+	public DialogChooseSets(Collection<String> preselectedSets, Collection<String> unselectableSets,
+							Collection<String> limitedSets, boolean showWantReprintsCheckbox, boolean allowReprints) {
+
+		if (limitedSets != null && limitedSets.size() == 0)
+			limitedSets = null;
+
+		// Sanitise input set lists to avoid any inconsistency
+		// Sanitise Unselectable Sets, by checking with limitedSets (if any)
+		if (unselectableSets != null && limitedSets != null){
+			Set<String> blackList = new HashSet<>();
+			for (String set: unselectableSets){
+				if (!limitedSets.contains(set))
+					blackList.add(set);
+			}
+
+			if (blackList.size() > 0){
+				for (String setToRemove : blackList)
+					unselectableSets.remove(setToRemove);
+			}
+		}
+		// Sanitise Preselected Sets
+		if (preselectedSets != null){
+			Set<String> blackList = new HashSet<>();
+			for (String set : preselectedSets){
+				if (unselectableSets != null && unselectableSets.contains(set))
+					blackList.add(set);
+				if (limitedSets != null && !limitedSets.contains(set))
+					blackList.add(set);
+			}
+			if (blackList.size() > 0){
+				for (String setToRemove : blackList)
+					preselectedSets.remove(setToRemove);
+			}
+		}
 
 		// get the map of each editions per type
 		Map<CardEdition.Type, List<CardEdition>> editionsTypeMap = FModel.getMagicDb().getEditionsTypeMap();
@@ -52,7 +94,18 @@ public class DialogChooseSets {
 			preselectedTypes = new TreeSet<>();
 			for (String code: preselectedSets){
 				CardEdition edition = FModel.getMagicDb().getCardEdition(code);
-				preselectedTypes.add(edition.getType());
+				if (edition != null)
+					preselectedTypes.add(edition.getType());
+			}
+		}
+
+		Set<CardEdition.Type> limitedSetTypes = null;
+		if (limitedSets != null){
+			limitedSetTypes = new TreeSet<>();
+			for (String code: limitedSets){
+				CardEdition edition = FModel.getMagicDb().getCardEdition(code);
+				if (edition != null)
+					limitedSetTypes.add(edition.getType());
 			}
 		}
 
@@ -63,11 +116,15 @@ public class DialogChooseSets {
 			List<CardEdition> editionsOfType = editionsTypeMap.get(editionType);
 			if (editionsOfType.size() == 0)  // skip empty set types
 				continue;
+			if (limitedSetTypes != null && !limitedSetTypes.contains(editionType))
+				continue;
 			List<FTreeNodeData> editionPerTypeNodes = new ArrayList<>();
 			allCardEditions.addAll(editionsOfType);
 			int enabledEditionsOfTypeCounter = 0;
 			for (CardEdition ce: editionsOfType){
 				String code = ce.getCode();
+				if (limitedSets != null && !limitedSets.contains(code))
+					continue;
 				boolean isSelected = null != preselectedSets && preselectedSets.contains(code);
 				boolean isEnabled = null == unselectableSets || !unselectableSets.contains(code);
 				FTreeNodeData editionNode = new FTreeNodeData(ce, ce.getName(), ce.getCode());
