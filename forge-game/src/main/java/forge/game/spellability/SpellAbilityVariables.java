@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -30,7 +30,7 @@ import forge.game.zone.ZoneType;
  * <p>
  * SpellAbilityVariables class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id$
  * @since 1.0.15
@@ -51,7 +51,7 @@ public class SpellAbilityVariables implements Cloneable {
     }
 
     /**
-     * 
+     *
      * @param sav
      * SpellAbilityVariables
      */
@@ -93,6 +93,8 @@ public class SpellAbilityVariables implements Cloneable {
         this.targetValidTargeting = sav.getTargetValidTargeting();
         this.targetsSingleTarget = sav.targetsSingleTarget();
         this.presenceCondition = sav.getPresenceCondition();
+        this.classLevel = sav.getClassLevel();
+        this.classLevelOperator = sav.getClassLevelOperator();
     }
 
     // default values for Sorcery speed abilities
@@ -193,7 +195,7 @@ public class SpellAbilityVariables implements Cloneable {
 
     /** The chosen colors string. */
     private String chosenColors = null;
-    
+
     /** The target valid targeting */
     private String targetValidTargeting = null;
 
@@ -203,11 +205,15 @@ public class SpellAbilityVariables implements Cloneable {
     /** The Presence keyword value containing the relevant condition */
     private String presenceCondition = "";
 
+    /** The class level. */
+    private String classLevel = null;
+    private String classLevelOperator = "EQ";
+
     /**
      * <p>
      * Setter for the field <code>manaSpent</code>.
      * </p>
-     * 
+     *
      * @param s
      *            a {@link java.lang.String} object.
      */
@@ -219,7 +225,7 @@ public class SpellAbilityVariables implements Cloneable {
      * <p>
      * Getter for the field <code>manaSpent</code>.
      * </p>
-     * 
+     *
      * @return a {@link java.lang.String} object.
      */
     public final String getManaSpent() {
@@ -237,7 +243,7 @@ public class SpellAbilityVariables implements Cloneable {
      * <p>
      * Setter for the field <code>zone</code>.
      * </p>
-     * 
+     *
      * @param zone
      *            a {@link java.lang.String} object.
      */
@@ -249,7 +255,7 @@ public class SpellAbilityVariables implements Cloneable {
      * <p>
      * Getter for the field <code>zone</code>.
      * </p>
-     * 
+     *
      * @return a {@link java.lang.String} object.
      */
     public final ZoneType getZone() {
@@ -284,7 +290,7 @@ public class SpellAbilityVariables implements Cloneable {
      * <p>
      * setPlayerTurn.
      * </p>
-     * 
+     *
      * @param bTurn
      *            a boolean.
      */
@@ -296,7 +302,7 @@ public class SpellAbilityVariables implements Cloneable {
      * <p>
      * getPlayerTurn.
      * </p>
-     * 
+     *
      * @return a boolean.
      */
     public final boolean getPlayerTurn() {
@@ -307,7 +313,7 @@ public class SpellAbilityVariables implements Cloneable {
      * <p>
      * setOpponentTurn.
      * </p>
-     * 
+     *
      * @param bTurn
      *            a boolean.
      */
@@ -319,7 +325,7 @@ public class SpellAbilityVariables implements Cloneable {
      * <p>
      * getOpponentTurn.
      * </p>
-     * 
+     *
      * @return a boolean.
      */
     public final boolean getOpponentTurn() {
@@ -330,7 +336,7 @@ public class SpellAbilityVariables implements Cloneable {
      * <p>
      * Setter for the field <code>activationLimit</code>.
      * </p>
-     * 
+     *
      * @param limit
      *            a int.
      */
@@ -342,7 +348,7 @@ public class SpellAbilityVariables implements Cloneable {
      * <p>
      * Setter for the field <code>gameActivationLimit</code>.
      * </p>
-     * 
+     *
      * @param limit
      *            a int.
      */
@@ -354,7 +360,7 @@ public class SpellAbilityVariables implements Cloneable {
      * <p>
      * Setter for the field <code>phases</code>.
      * </p>
-     * 
+     *
      * @param phases
      *            a {@link java.lang.String} object.
      */
@@ -378,7 +384,7 @@ public class SpellAbilityVariables implements Cloneable {
      * <p>
      * setActivateCardsInHand.
      * </p>
-     * 
+     *
      * @param cards
      *            a int.
      */
@@ -405,7 +411,7 @@ public class SpellAbilityVariables implements Cloneable {
     public void setRevolt(final boolean bRevolt) { revolt = bRevolt; }
 
     public void setDesert(final boolean bDesert) { desert = bDesert; }
-    
+
     public void setBlessing(final boolean bBlessing) { blessing = bBlessing; }
 
     /** Optional Costs */
@@ -438,7 +444,7 @@ public class SpellAbilityVariables implements Cloneable {
      * <p>
      * setIsPresent.
      * </p>
-     * 
+     *
      * @param present
      *            a {@link java.lang.String} object.
      */
@@ -450,7 +456,7 @@ public class SpellAbilityVariables implements Cloneable {
      * <p>
      * Setter for the field <code>presentCompare</code>.
      * </p>
-     * 
+     *
      * @param compare
      *            a {@link java.lang.String} object.
      */
@@ -460,7 +466,7 @@ public class SpellAbilityVariables implements Cloneable {
 
     /**
      * Gets the present zone.
-     * 
+     *
      * @return the present zone
      */
     public final ZoneType getPresentZone() {
@@ -469,7 +475,7 @@ public class SpellAbilityVariables implements Cloneable {
 
     /**
      * Sets the present zone.
-     * 
+     *
      * @param presentZone
      *            the new present zone
      */
@@ -481,7 +487,7 @@ public class SpellAbilityVariables implements Cloneable {
      * <p>
      * Setter for the field <code>presentDefined</code>.
      * </p>
-     * 
+     *
      * @param defined
      *            a {@link java.lang.String} object.
      */
@@ -494,7 +500,7 @@ public class SpellAbilityVariables implements Cloneable {
      * <p>
      * Setter for the field <code>svarToCheck</code>.
      * </p>
-     * 
+     *
      * @param sVar
      *            a {@link java.lang.String} object.
      */
@@ -509,7 +515,7 @@ public class SpellAbilityVariables implements Cloneable {
      * <p>
      * Setter for the field <code>svarOperator</code>.
      * </p>
-     * 
+     *
      * @param operator
      *            a {@link java.lang.String} object.
      */
@@ -521,7 +527,7 @@ public class SpellAbilityVariables implements Cloneable {
      * <p>
      * Setter for the field <code>svarOperand</code>.
      * </p>
-     * 
+     *
      * @param operand
      *            a {@link java.lang.String} object.
      */
@@ -539,7 +545,7 @@ public class SpellAbilityVariables implements Cloneable {
 
     /**
      * Gets the activation limit.
-     * 
+     *
      * @return the activationLimit
      */
     public final int getActivationLimit() {
@@ -548,7 +554,7 @@ public class SpellAbilityVariables implements Cloneable {
 
     /**
      * Gets the activation limit.
-     * 
+     *
      * @return the activationLimit
      */
     public final int getGameActivationLimit() {
@@ -559,7 +565,7 @@ public class SpellAbilityVariables implements Cloneable {
      * <p>
      * Setter for the field <code>limitToCheck</code>.
      * </p>
-     * 
+     *
      * @param limit
      *            a {@link java.lang.String} object.
      */
@@ -571,7 +577,7 @@ public class SpellAbilityVariables implements Cloneable {
      * <p>
      * Setter for the field <code>GamelimitToCheck</code>.
      * </p>
-     * 
+     *
      * @param limit
      *            a {@link java.lang.String} object.
      */
@@ -583,7 +589,7 @@ public class SpellAbilityVariables implements Cloneable {
      * <p>
      * Getter for the field <code>limitToCheck</code>.
      * </p>
-     * 
+     *
      * @return the limitToCheck
      *            a {@link java.lang.String} object.
      */
@@ -595,7 +601,7 @@ public class SpellAbilityVariables implements Cloneable {
      * <p>
      * Getter for the field <code>getGameLimitToCheck</code>.
      * </p>
-     * 
+     *
      * @return the getGameLimitToCheck
      *            a {@link java.lang.String} object.
      */
@@ -610,7 +616,7 @@ public class SpellAbilityVariables implements Cloneable {
     public final boolean isDelirium() {     return this.delirium;  }
 
     public final boolean isHellbent() {     return this.hellbent;  }
-    
+
     public final boolean isRevolt() {     return this.revolt;  }
 
     public final boolean isDesert() {     return this.desert;  }
@@ -626,7 +632,7 @@ public class SpellAbilityVariables implements Cloneable {
 
     /**
      * Checks if is player turn.
-     * 
+     *
      * @return the playerTurn
      */
     public final boolean isPlayerTurn() {
@@ -635,7 +641,7 @@ public class SpellAbilityVariables implements Cloneable {
 
     /**
      * Gets the present compare.
-     * 
+     *
      * @return the presentCompare
      */
     public final String getPresentCompare() {
@@ -644,7 +650,7 @@ public class SpellAbilityVariables implements Cloneable {
 
     /**
      * Gets the life total.
-     * 
+     *
      * @return the lifeTotal
      */
     public final String getLifeTotal() {
@@ -653,7 +659,7 @@ public class SpellAbilityVariables implements Cloneable {
 
     /**
      * Sets the life total.
-     * 
+     *
      * @param lifeTotal0
      *            the lifeTotal to set
      */
@@ -663,7 +669,7 @@ public class SpellAbilityVariables implements Cloneable {
 
     /**
      * Gets the life amount.
-     * 
+     *
      * @return the lifeAmount
      */
     public final String getLifeAmount() {
@@ -672,7 +678,7 @@ public class SpellAbilityVariables implements Cloneable {
 
     /**
      * Sets the life amount.
-     * 
+     *
      * @param lifeAmount0
      *            the lifeAmount to set
      */
@@ -682,7 +688,7 @@ public class SpellAbilityVariables implements Cloneable {
 
     /**
      * Gets the phases.
-     * 
+     *
      * @return the phases
      */
     public final Set<PhaseType> getPhases() {
@@ -701,7 +707,7 @@ public class SpellAbilityVariables implements Cloneable {
 
     /**
      * Gets the present defined.
-     * 
+     *
      * @return the presentDefined
      */
     public final String getPresentDefined() {
@@ -710,7 +716,7 @@ public class SpellAbilityVariables implements Cloneable {
 
     /**
      * Set the player defined.
-     * 
+     *
      */
     public final void setPlayerDefined(final String b) {
         this.playerDefined = b;
@@ -718,7 +724,7 @@ public class SpellAbilityVariables implements Cloneable {
 
     /**
      * Gets the player defined.
-     * 
+     *
      * @return the playerDefined
      */
     public final String getPlayerDefined() {
@@ -727,7 +733,7 @@ public class SpellAbilityVariables implements Cloneable {
 
     /**
      * Gets the player contains.
-     * 
+     *
      * @return the playerContains
      */
     public final String getPlayerContains() {
@@ -736,7 +742,7 @@ public class SpellAbilityVariables implements Cloneable {
 
     /**
      * Set the player contains.
-     * 
+     *
      */
     public final void setPlayerContains(final String contains) {
         this.playerContains = contains;
@@ -744,7 +750,7 @@ public class SpellAbilityVariables implements Cloneable {
 
     /**
      * Gets the s var operand.
-     * 
+     *
      * @return the sVarOperand
      */
     public final String getsVarOperand() {
@@ -756,7 +762,7 @@ public class SpellAbilityVariables implements Cloneable {
 
     /**
      * Sets the s var operand.
-     * 
+     *
      * @param sVarOperand0
      *            the sVarOperand to set
      */
@@ -769,7 +775,7 @@ public class SpellAbilityVariables implements Cloneable {
 
     /**
      * Gets the s var to check.
-     * 
+     *
      * @return the sVarToCheck
      */
     public final String getsVarToCheck() {
@@ -781,7 +787,7 @@ public class SpellAbilityVariables implements Cloneable {
 
     /**
      * Sets the s var to check.
-     * 
+     *
      * @param sVarToCheck
      *            the sVarToCheck to set
      */
@@ -794,7 +800,7 @@ public class SpellAbilityVariables implements Cloneable {
 
     /**
      * Gets the s var operator.
-     * 
+     *
      * @return the sVarOperator
      */
     public final String getsVarOperator() {
@@ -806,7 +812,7 @@ public class SpellAbilityVariables implements Cloneable {
 
     /**
      * Sets the s var operator.
-     * 
+     *
      * @param sVarOperator0
      *            the sVarOperator to set
      */
@@ -819,7 +825,7 @@ public class SpellAbilityVariables implements Cloneable {
 
     /**
      * Checks if is opponent turn.
-     * 
+     *
      * @return the opponentTurn
      */
     public final boolean isOpponentTurn() {
@@ -828,7 +834,7 @@ public class SpellAbilityVariables implements Cloneable {
 
     /**
      * Gets the cards in hand.
-     * 
+     *
      * @return the cardsInHand
      */
     public final int getCardsInHand() {
@@ -840,7 +846,7 @@ public class SpellAbilityVariables implements Cloneable {
 
     /**
      * Sets the cards in hand.
-     * 
+     *
      * @param cardsInHand0
      *            the cardsInHand to set
      */
@@ -853,7 +859,7 @@ public class SpellAbilityVariables implements Cloneable {
 
     /**
      * Gets the checks if is present.
-     * 
+     *
      * @return the isPresent
      */
     public final String getIsPresent() {
@@ -868,7 +874,7 @@ public class SpellAbilityVariables implements Cloneable {
      * <p>
      * Getter for the field <code>ColorToCheck</code>.
      * </p>
-     * 
+     *
      * @return the String, chosenColors.
      */
     public final String getColorToCheck() {
@@ -888,14 +894,14 @@ public class SpellAbilityVariables implements Cloneable {
 	public void setTargetValidTargeting(String targetValidTargeting) {
 		this.targetValidTargeting = targetValidTargeting;
 	}
-	
+
     /**
      * @return the targetsSingleTarget
      */
 	public boolean targetsSingleTarget() {
 		return targetsSingleTarget;
 	}
-    
+
     /**
      * @param b the targetsSingleTarget to set
      */
@@ -924,5 +930,19 @@ public class SpellAbilityVariables implements Cloneable {
      */
     public void setPresenceCondition(String s) {
         this.presenceCondition = s;
+    }
+
+    public String getClassLevel() {
+        return classLevel;
+    }
+    public void setClassLevel(String level) {
+        classLevel = level;
+    }
+
+    public String getClassLevelOperator() {
+        return classLevelOperator;
+    }
+    public void setClassLevelOperator(String op) {
+        classLevelOperator = op;
     }
 } // end class SpellAbilityVariables

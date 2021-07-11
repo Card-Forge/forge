@@ -396,6 +396,13 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.CurrentRoom, c.getCurrentRoom());
     }
 
+    public int getClassLevel() {
+        return get(TrackableProperty.ClassLevel);
+    }
+    void updateClassLevel(Card c) {
+        set(TrackableProperty.ClassLevel, c.getClassLevel());
+    }
+
     private String getRemembered() {
         return get(TrackableProperty.Remembered);
     }

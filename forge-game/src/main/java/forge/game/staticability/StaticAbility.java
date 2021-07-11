@@ -585,6 +585,14 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             }
         }
 
+        if (hasParam("ClassLevel")) {
+            final int level = this.hostCard.getClassLevel();
+            final int levelMin = Integer.parseInt(getParam("ClassLevel"));
+            if (level < levelMin) {
+                return false;
+            }
+        }
+
         if (hasParam("CheckSVar")) {
             final int sVar = AbilityUtils.calculateAmount(this.hostCard, getParam("CheckSVar"), this);
             String comparator = "GE1";

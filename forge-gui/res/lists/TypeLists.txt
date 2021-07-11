@@ -295,6 +295,7 @@ Trap
 [EnchantmentTypes]
 Aura
 Cartouche
+Class
 Curse
 Rune
 Saga

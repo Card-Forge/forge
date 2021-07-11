@@ -1,0 +1,10 @@
+Name:Paladin Class
+ManaCost:W
+Types:Enchantment Class
+K:Class:3:2 W,4 W
+S:Mode$ RaiseCost | ClassLevel$ 1 | ValidCard$ Card | Activator$ Opponent | ValidSpell$ Spell | Amount$ 1 | Condition$ PlayerTurn | Description$ Spells your opponents cast during your turn cost {1} more to cast.
+S:Mode$ Continuous | ClassLevel$ 2 | Affected$ Creature.YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Creatures you control get +1/+1.
+T:Mode$ AttackersDeclared | ClassLevel$ 3 | AttackingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you attack, until end of turn, target attacking creature gets +1/+1 for each other attacking creature and gains double strike.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking | NumAtt$ X | NumDef$ X | KW$ Double Strike
+SVar:X:Count$Valid Creature.attacking/Minus.1
+Oracle:(Gain the next level as a sorcery to add its ability.)\nSpells your opponents cast during your turn cost {1} more to cast.\n{2}{W}: Level 2\nCreatures you control get +1/+1.\n{4}{W}: Level 3\nWhenever you attack, until end of turn, target attacking creature gets +1/+1 for each other attacking creature and gains double strike.

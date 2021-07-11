@@ -2557,6 +2557,25 @@ public class CardFactoryUtil {
             sa.setAlternativeCost(AlternativeCost.Bestow);
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
+        } else if (keyword.startsWith("Class")) {
+            final String[] k = keyword.split(":");
+            final String[] costs = k[2].split(",");
+            if (costs.length != Integer.valueOf(k[1]) - 1) {
+                throw new RuntimeException("Class max differ from cost amount");
+            }
+
+            for (int i = 0; i < costs.length; ++i) {
+                final String cost = costs[i];
+                final StringBuilder sbClass = new StringBuilder();
+                sbClass.append("AB$ ClassLevelUp | Cost$ ").append(cost);
+                sbClass.append(" | ClassLevel$ EQ").append(i + 1);
+                sbClass.append(" | SorcerySpeed$ True");
+                sbClass.append(" | StackDescription$ SpellDescription | SpellDescription$ Level ").append(i + 2);
+
+                final SpellAbility sa = AbilityFactory.getAbility(sbClass.toString(), card);
+                sa.setIntrinsic(intrinsic);
+                inst.addSpellAbility(sa);
+            }
         } else if (keyword.startsWith("Dash")) {
             final String[] k = keyword.split(":");
             final Cost dashCost = new Cost(k[1], false);

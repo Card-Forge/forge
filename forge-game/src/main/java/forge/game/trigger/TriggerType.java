@@ -38,6 +38,7 @@ public enum TriggerType {
     ChangesZone(TriggerChangesZone.class),
     ChangesZoneAll(TriggerChangesZoneAll.class),
     Clashed(TriggerClashed.class),
+    ClassLevelGained(TriggerClassLevelGained.class),
     CounterAdded(TriggerCounterAdded.class),
     CounterAddedOnce(TriggerCounterAddedOnce.class),
     CounterPlayerAddedAll(TriggerCounterPlayerAddedAll.class),
