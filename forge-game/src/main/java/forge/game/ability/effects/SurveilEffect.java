@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
+import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Lang;
@@ -32,15 +33,18 @@ public class SurveilEffect extends SpellAbilityEffect {
 
         boolean isOptional = sa.hasParam("Optional");
 
+        CardZoneTable table = new CardZoneTable();
+
         for (final Player p : getTargetPlayers(sa)) {
             if (!sa.usesTargeting() || p.canBeTargetedBy(sa)) {
                 if (isOptional && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantSurveil"))) {
                     continue;
                 }
 
-                p.surveil(num, sa);
+                p.surveil(num, sa, table);
             }
         }
+        table.triggerChangesZoneAll(sa.getHostCard().getGame(), sa);
     }
 
 
