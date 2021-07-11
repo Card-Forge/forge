@@ -1,0 +1,11 @@
+{
+    "invertHeight": true,
+		"name": "ocean",
+		"startPointX": 0.5,
+		"startPointY": 0.5,
+		"noiceWeight": 0,
+		"distWeight": 0,
+		"sizeX": 1,
+		"sizeY": 1,
+		"color": "0054a2"
+}

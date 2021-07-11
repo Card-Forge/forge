@@ -1,0 +1,34 @@
+
+autotiles.png
+size: 384,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+TileSet1
+  rotate: false
+  xy: 0, 512
+  size: 96, 128
+  orig: 0, 0
+  offset: 0, 0
+  index: 0  
+TileSet2
+  rotate: false
+  xy: 96, 512
+  size: 96, 128
+  orig: 0, 0
+  offset: 0, 0
+  index: 0        
+TileSet3
+  rotate: false
+  xy: 192, 512
+  size: 96, 128
+  orig: 0, 0
+  offset: 0, 0
+  index: 0     
+TileSet4
+  rotate: false
+  xy: 288, 512
+  size: 96, 128
+  orig: 0, 0
+  offset: 0, 0
+  index: 0 

@@ -1,0 +1,10 @@
+{		
+"startPointX": 0.5,
+		"startPointY": 0.22,
+		"name": "white",
+			"noiceWeight": 0.5,
+			"distWeight": 1.5,
+			"sizeX": 0.5,
+			"sizeY": 0.5,
+		"color": "efe697"
+}

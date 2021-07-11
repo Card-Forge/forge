@@ -1,0 +1,10 @@
+{
+		"startPointX": 0.5,
+		"startPointY": 0.5,
+		"name": "waste",
+		"noiceWeight": 0.3,
+		"distWeight": 1.0,
+		"sizeX": 0.95,
+		"sizeY": 0.95,
+		"color": "aeaeae"
+}
