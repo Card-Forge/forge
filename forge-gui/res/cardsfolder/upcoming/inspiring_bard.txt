@@ -1,0 +1,10 @@
+Name:Inspiring Bard 
+ManaCost:3 G
+Types:Creature Elf Bard 
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ BardicInspiration,SongofRest
+SVar:BardicInspiration:DB$ Pump | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SpellDescription$  Bardic Inspiration — Target creature gets +2/+2 until end of turn.
+SVar:SongofRest:DB$  GainLife | LifeAmount$ 3 | SpellDescription$ Song of Rest — You gain 3 life.
+DeckHas:Ability$LifeGain
+Oracle:When Inspiring Bard enters the battlefield, choose one —\n• Bardic Inspiration — Target creature gets +2/+2 until end of turn.\n• Song of Rest — You gain 3 life.
