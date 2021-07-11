@@ -1,14 +1,28 @@
 package forge.screens.match;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import forge.ai.GameState;
+import forge.item.IPaperCard;
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
+
 import forge.Forge;
 import forge.Graphics;
 import forge.LobbyPlayer;
-import forge.ai.GameState;
-import forge.assets.*;
+import forge.assets.FImage;
+import forge.assets.FSkin;
+import forge.assets.FSkinImage;
+import forge.assets.FTextureRegionImage;
+import forge.assets.ImageCache;
 import forge.card.CardAvatarImage;
 import forge.card.GameEntityPicker;
 import forge.deck.CardPool;
@@ -27,7 +41,6 @@ import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.util.SGuiChoose;
 import forge.gui.util.SOptionPane;
-import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -35,9 +48,13 @@ import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
-import forge.screens.match.views.*;
+import forge.screens.match.views.VAssignCombatDamage;
+import forge.screens.match.views.VAssignGenericAmount;
+import forge.screens.match.views.VPhaseIndicator;
 import forge.screens.match.views.VPhaseIndicator.PhaseLabel;
+import forge.screens.match.views.VPlayerPanel;
 import forge.screens.match.views.VPlayerPanel.InfoTab;
+import forge.screens.match.views.VPrompt;
 import forge.screens.match.winlose.ViewWinLose;
 import forge.toolbox.FButton;
 import forge.toolbox.FDisplayObject;
@@ -48,9 +65,6 @@ import forge.util.Localizer;
 import forge.util.MessageUtil;
 import forge.util.WaitCallback;
 import forge.util.collect.FCollectionView;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.*;
 
 public class MatchController extends AbstractGuiGame {
     private MatchController() { }
