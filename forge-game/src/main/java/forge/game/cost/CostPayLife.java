@@ -37,8 +37,8 @@ public class CostPayLife extends CostPart {
      * @param amount
      *            the amount
      */
-    public CostPayLife(final String amount) {
-        this.setAmount(amount);
+    public CostPayLife(final String amount, final String description) {
+        super(amount, "card", description);
     }
 
     @Override
@@ -52,7 +52,13 @@ public class CostPayLife extends CostPart {
     @Override
     public final String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("Pay ").append(this.getAmount()).append(" Life");
+        sb.append("Pay ");
+        String desc = this.getTypeDescription();
+        if (desc != null) {
+            sb.append(desc);
+        } else {
+            sb.append(this.getAmount()).append(" Life");
+        }
         return sb.toString();
     }
 
