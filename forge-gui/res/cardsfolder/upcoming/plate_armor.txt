@@ -1,0 +1,7 @@
+Name:Plate Armor
+ManaCost:2 W
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | AddToughness$ 3 | AddKeyword$ Ward:1 | Description$ Equipped creature gets +3/+3 and has ward {1}. (Whenever equipped creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {1}.)
+K:Equip:3:::ReduceCost$ Y:This ability costs {1} less to activate for each other Equipment you control
+SVar:Y:Count$Valid Equipment.YouCtrl+Other
+Oracle:Equipped creature gets +3/+3 and has ward {1}. (Whenever equipped creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {1}.)\nEquip {3}. This ability costs {1} less to activate for each other Equipment you control.

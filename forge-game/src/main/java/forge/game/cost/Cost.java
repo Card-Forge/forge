@@ -309,8 +309,9 @@ public class Cost implements Serializable {
         // Changes Cost by adding a Life Payment
         if (parse.startsWith("PayLife<")) {
             // PayLife<LifeCost>
-            final String[] splitStr = abCostParse(parse, 1);
-            return new CostPayLife(splitStr[0]);
+            final String[] splitStr = abCostParse(parse, 2);
+            final String description = splitStr.length > 1 ? splitStr[1] : null;
+            return new CostPayLife(splitStr[0], description);
         }
 
         if (parse.startsWith("PayEnergy<")) {
@@ -908,7 +909,7 @@ public class Cost implements Serializable {
                         } else if (part instanceof CostAddMana) {
                             costParts.add(new CostAddMana(amount, part.getType(), part.getTypeDescription()));
                         } else if (part instanceof CostPayLife) {
-                            costParts.add(new CostPayLife(amount));
+                            costParts.add(new CostPayLife(amount, part.getTypeDescription()));
                         }
                         toRemove.add(other);
                         alreadyAdded = true;
