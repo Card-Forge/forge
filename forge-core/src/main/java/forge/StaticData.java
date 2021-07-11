@@ -46,6 +46,7 @@ public class StaticData {
     private MulliganDefs.MulliganRule mulliganRule = MulliganDefs.getDefaultRule();
 
     private String prefferedArt;
+    private boolean enableCustomCardsInDecks = false;  // default
 
     // Loaded lazily:
     private IStorage<SealedProduct.Template> boosters;
@@ -58,10 +59,10 @@ public class StaticData {
     private static StaticData lastInstance = null;
 
     public StaticData(CardStorageReader cardReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String prefferedArt, boolean enableUnknownCards, boolean loadNonLegalCards) {
-        this(cardReader, null, customCardReader, editionFolder, customEditionsFolder, blockDataFolder, prefferedArt, enableUnknownCards, loadNonLegalCards);
+        this(cardReader, null, customCardReader, editionFolder, customEditionsFolder, blockDataFolder, prefferedArt, enableUnknownCards, loadNonLegalCards, false);
     }
 
-    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String prefferedArt, boolean enableUnknownCards, boolean loadNonLegalCards) {
+    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String prefferedArt, boolean enableUnknownCards, boolean loadNonLegalCards, boolean enableCustomCardsInDecks) {
         this.cardReader = cardReader;
         this.tokenReader = tokenReader;
         this.editions = new CardEdition.Collection(new CardEdition.Reader(new File(editionFolder)));
@@ -69,6 +70,7 @@ public class StaticData {
         this.customCardReader = customCardReader;
         this.customEditions = new CardEdition.Collection(new CardEdition.Reader(new File(customEditionsFolder), true));
         this.prefferedArt = prefferedArt;
+        this.enableCustomCardsInDecks = enableCustomCardsInDecks;
         lastInstance = this;
         List<String> funnyCards = new ArrayList<>();
         List<String> filtered = new ArrayList<>();
@@ -285,7 +287,9 @@ public class StaticData {
 
     public TokenDb getAllTokens() { return allTokens; }
 
-    
+    public boolean isEnableCustomCardsInDecks() {
+        return this.enableCustomCardsInDecks;
+    }
 
     public void setStandardPredicate(Predicate<PaperCard> standardPredicate) { this.standardPredicate = standardPredicate; }
 
