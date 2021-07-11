@@ -1,20 +1,41 @@
 package forge.adventure.world;
 
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.utils.Json;
 import forge.adventure.data.BiomData;
 import forge.adventure.data.WorldData;
+import forge.adventure.util.Res;
+import forge.deck.Deck;
+import forge.deck.io.DeckSerializer;
 
-import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.Random;
 
 public class World {
 
 
-    public Pixmap GenerateNew() {
+    private double[][] NoiseData;
+    private Pixmap BiomImage;
+    private Pixmap NoiseImage;
+    private WorldData Data;
+    static public Deck[] StarterDecks() {
 
-        FileHandle handle= forge.adventure.util.Res.CurrentRes.GetFile("world/word.json");
+        FileHandle handle = forge.adventure.util.Res.CurrentRes.GetFile("world/world.json");
+        String rawJson=handle.readString();
+        WorldData data = (new Json()).fromJson(WorldData.class,rawJson);
+        Deck[] deck=new Deck[data.starterDecks.size()];
+        for(int i=0;i<data.starterDecks.size();i++)
+        {
+            deck[i]= DeckSerializer.fromFile(new File(Res.CurrentRes.GetFilePath(data.starterDecks.get(i))));
+        }
+        return deck;
+    }
+
+    public World GenerateNew() {
+
+        FileHandle handle= forge.adventure.util.Res.CurrentRes.GetFile("world/world.json");
         String rawJson=handle.readString();
         WorldData data = (new Json()).fromJson(WorldData.class,rawJson);
         int seed= new Random().nextInt();
@@ -24,18 +45,19 @@ public class World {
 
         //save at all data
         double[][] noiseData=new double[data.sizeX][data.sizeY];
+        Pixmap pix=new Pixmap(data.sizeX,data.sizeY, Pixmap.Format.RGB888);
+        Pixmap noicePix=new Pixmap(data.sizeX,data.sizeY, Pixmap.Format.RGB888);
 
         for(int x=0;x<data.sizeX;x++)
         {
             for(int y=0;y<data.sizeY;y++)
             {
-                noiseData[x][y]=noise.eval(x/data.sizeX*noiceZoom,y/data.sizeY*noiceZoom);
+                noiseData[x][y]=(noise.eval(x/(double)data.sizeX*noiceZoom,y/(double)data.sizeY*noiceZoom)+1)/2;
+                noicePix.setColor((float)noiseData[x][y],(float)noiseData[x][y],(float)noiseData[x][y],1);
+                noicePix.drawPixel(x,y);
             }
         }
-        BufferedImage image = new BufferedImage(data.sizeX, data.sizeY, BufferedImage.TYPE_4BYTE_ABGR);
-        byte[] imagedata = new byte[data.sizeX* data.sizeY*4];
 
-        Pixmap pix=new Pixmap(data.sizeX,data.sizeY, Pixmap.Format.RGB888);
         pix.setColor(1,0,0,1);
         pix.fill();
 
@@ -46,52 +68,56 @@ public class World {
                 //value 0-1 based on noise
                 ;
                 float value=(float)noise.eval((double) x/(double)data.sizeX*noiceZoom,(double)y/(double)data.sizeY*noiceZoom);
-                value=(value+1)/2;
-                pix.setColor(value,value,value,1);
-                pix.drawPixel((int)x,(int)y);
+
 
             }
         }*/
-        for(BiomData biom:data.bioms)
+        for(BiomData biom:data.GetBioms())
         {
-         long biomXStart=Math.round(biom.startPointX * (double)data.sizeX);
-         long biomYStart=Math.round(biom.startPointY * (double)data.sizeY);
-            long biomXSize=Math.round(biom.sizeX * (double)data.sizeX);
-            long biomYSize=Math.round(biom.sizeY * (double)data.sizeY);
+            int biomXStart=(int)Math.round(biom.startPointX * (double)data.sizeX);
+            int biomYStart=(int)Math.round(biom.startPointY * (double)data.sizeY);
+            int biomXSize=(int)Math.round(biom.sizeX * (double)data.sizeX);
+            int biomYSize=(int)Math.round(biom.sizeY * (double)data.sizeY);
 
+            int beginx=Math.max(biomXStart-biomXSize/2,0);
+            int beginy=Math.max(biomYStart-biomYSize/2,0);
+            int endx=Math.min(biomXStart+biomXSize,data.sizeX);
+            int endy=Math.min(biomYStart+biomYSize,data.sizeY);
             if(biom.sizeX==1.0&&biom.sizeY==1.0)
             {
-                pix.setColor(biom.GetColor().r,biom.GetColor().g,biom.GetColor().b,1);
-                pix.fill();
+                beginx=0;
+                beginy=0;
+                endx=data.sizeX;
+                endy=data.sizeY;
             }
-            else
+            for(int x=beginx;x<endx;x++)
             {
-                for(long x=Math.max(biomXStart-biomXSize/2,0);x<biomXStart+biomXSize;x++)
+                for(int y=beginy;y<endy;y++)
                 {
-                    for(long y=Math.max(biomYStart-biomYSize/2,0);y<biomYStart+biomYSize;y++)
+                    //value 0-1 based on noise
+                    double noiseValue=noiseData[x][y];
+                    noiseValue*=biom.noiceWeight;
+                    //value 0-1 based on dist to origin
+                    double distanceValue=(Math.sqrt((x-biomXStart)*(x-biomXStart) + (y-biomYStart)*(y-biomYStart)))/(Math.max(biomXSize,biomYSize)/2);
+                    distanceValue*=biom.distWeight;
+                    if(noiseValue+distanceValue<1.0||biom.invertHeight&&(1-noiseValue)+distanceValue<1.0)
                     {
-                        //value 0-1 based on noise
-                        double noiseValue=noise.eval((double) x/(double)data.sizeX*noiceZoom,(double)y/(double)data.sizeY*noiceZoom);
-                        noiseValue*=biom.noiceWeight;
-                        //value 0-1 based on dist to origin
-                        double distanceValue=(Math.sqrt((x-biomXStart)*(x-biomXStart) + (y-biomYStart)*(y-biomYStart)))/(Math.max(biomXSize,biomYSize)/2);
-                        distanceValue*=biom.distWeight;
-                        if(noiseValue+distanceValue<1.0||biom.invertHeight&&(1-noiseValue)+distanceValue<1.0)
-                        {
-                            imagedata[(((int)y*data.sizeX)+(int)x*4)]=(byte)(biom.GetColor().r*255);
-                            imagedata[(((int)y*data.sizeX)+(int)x*4)+1]=(byte)(biom.GetColor().g*255);
-                            imagedata[(((int)y*data.sizeX)+(int)x*4)+2]=(byte)(biom.GetColor().b*255);
-                            pix.setColor(biom.GetColor().r,biom.GetColor().g,biom.GetColor().b,1);
-                            pix.drawPixel((int)x,(int)y);
-                        }
-
+                        Color color=biom.GetColor();
+                        pix.setColor(color.r,color.g,color.b,1);
+                        pix.drawPixel(x,y);
                     }
+
                 }
             }
 
         }
 
+        World ret=new World();
+        ret.Data=data;
+        ret.NoiseImage=noicePix;
+        ret.BiomImage=pix;
+        ret.NoiseData=noiseData;
 
-        return pix;//new World();
+        return ret;//new World();
     }
 }

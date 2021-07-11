@@ -1,11 +1,14 @@
 package forge.adventure.util;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Scaling;
 
 import java.util.concurrent.Callable;
+import java.util.function.Function;
 
 public class Controls {
     private static  Skin SelectedSkin=null;
@@ -13,6 +16,59 @@ public class Controls {
     static public TextButton newTextButton(String text)
     {
         TextButton ret=new TextButton(text,GetSkin());
+
+        return ret;
+    }
+    static public SelectBox newComboBox(Object[] text, Function<Object, Void> func)
+    {
+        SelectBox ret=new SelectBox(GetSkin());
+        ret.setItems(text);
+        ret.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor)
+            {
+                try {
+                    func.apply(((SelectBox)actor).getSelected());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        return ret;
+    }
+    static public SelectBox newComboBoxInt(Object[] text, Function<Integer, Void> func)
+    {
+        SelectBox ret=new SelectBox(GetSkin());
+        ret.setItems(text);
+        ret.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor)
+            {
+                try {
+                    func.apply(((SelectBox)actor).getSelectedIndex());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        return ret;
+    }
+    static public TextField newTextField(String text, Function<String, Void> func)
+    {
+        TextField ret=new TextField(text,GetSkin());
+        ret.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor)
+            {
+                try {
+                    func.apply(((TextField)actor).getText());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         return ret;
     }

@@ -2,16 +2,19 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import forge.adventure.AdventureApplicationAdapter;
 import forge.adventure.util.Controls;
+import forge.adventure.world.World;
+import forge.adventure.world.WorldSave;
+import forge.deck.Deck;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
-import forge.adventure.world.WorldSave;
+import forge.util.NameGenerator;
+
 
 public class NewGameScene extends Scene {
     Texture Background;
@@ -47,9 +50,9 @@ public class NewGameScene extends Scene {
     public boolean Start()
     {
         FModel.getPreferences().setPref(ForgePreferences.FPref.UI_ENABLE_MUSIC,false);
-        //AdventureApplicationAdapter.CurrentAdapter.SwitchScene(SceneType.GameScene);
-        Pixmap img=WorldSave.GenerateNewWorld();
-        image = new Texture(img);
+        WorldSave.GenerateNewWorld(selectedName,starterDeck,selectedDiff);
+        //image = new Texture(img);
+        AdventureApplicationAdapter.CurrentAdapter.SwitchScene(SceneType.GameScene.instance);
         return true;
     }
     public boolean Back()
@@ -57,16 +60,23 @@ public class NewGameScene extends Scene {
         AdventureApplicationAdapter.CurrentAdapter.SwitchScene(SceneType.StartScene.instance);
         return true;
     }
+    String selectedName;
+    WorldSave.Difficulty selectedDiff;
+    Deck starterDeck;
     @Override
-    public void create() {
-       // FModel.getPreferences().setPref(ForgePreferences.FPref.UI_ENABLE_MUSIC,false);
+    public void ResLoaded()
+    {
+        // FModel.getPreferences().setPref(ForgePreferences.FPref.UI_ENABLE_MUSIC,false);
         Stage = new Stage(new StretchViewport(IntendedWidth,IntendedHeight));
         Background = new Texture(AdventureApplicationAdapter.CurrentAdapter.GetRes().GetFile("img/title_bg.png"));
 
         VerticalGroup nameGroup =new VerticalGroup();
 
 
-        nameGroup.addActor(Controls.newTextButton("Start",()->Start()));
+        nameGroup.addActor(Controls.newTextField(NameGenerator.getRandomName("Any", "Any", ""), s -> {selectedName=s;return null;}));
+        nameGroup.addActor(Controls.newComboBox(WorldSave.Difficulty.values(), s -> {selectedDiff=(WorldSave.Difficulty)s;return null;}));
+        nameGroup.addActor(Controls.newComboBox(World.StarterDecks(), s -> {starterDeck=(Deck)s;return null;}));
+
         nameGroup.addActor(Controls.newTextButton("Back",()->Back()));
 
         nameGroup.addActor(Controls.newTextButton("Start",()->Start()));
@@ -75,5 +85,9 @@ public class NewGameScene extends Scene {
 
         nameGroup.setPosition(900,500);
         Stage.addActor(nameGroup);
+    }
+    @Override
+    public void create() {
+
     }
 }

@@ -4,13 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import forge.Graphics;
 import forge.adventure.AdventureApplicationAdapter;
+import forge.adventure.world.WorldSave;
 import forge.animation.ForgeAnimation;
 import forge.assets.ImageCache;
 import forge.deck.io.DeckSerializer;
 import forge.game.GameType;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
-import forge.gamemodes.match.GameLobby;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.match.LobbySlotType;
 import forge.gui.interfaces.IGuiGame;
@@ -104,7 +104,7 @@ public class DuelScene extends Scene implements IUpdateable {
         appliedVariants.add(GameType.Constructed);
 
         List<RegisteredPlayer> players = new ArrayList<>();
-        RegisteredPlayer humanPlayer = RegisteredPlayer.forVariants(2, appliedVariants, DeckSerializer.fromFile(new File("../forge-gui/res/quest/duels/Agent K 1.dck")), null, false, null, null);
+        RegisteredPlayer humanPlayer = RegisteredPlayer.forVariants(2, appliedVariants, WorldSave.getCurrentSave().player.getDeck(), null, false, null, null);
         humanPlayer.setPlayer(GamePlayerUtil.getGuiPlayer());
         RegisteredPlayer aiPlayer = RegisteredPlayer.forVariants(2, appliedVariants, DeckSerializer.fromFile(new File("../forge-gui/res/quest/duels/Agent K 1.dck")), null, false, null, null);
         aiPlayer.setPlayer(GamePlayerUtil.createAiPlayer());
@@ -153,18 +153,7 @@ public class DuelScene extends Scene implements IUpdateable {
 
 
     }
-    protected void initLobby(GameLobby lobby) {
-        lobby.setListener(this);
 
-        boolean hasControl = lobby.hasControl();
-        while (lobby.getNumberOfSlots() < 2){
-            lobby.addSlot();
-        }
-        for(int i=0;i<lobby.getNumberOfSlots();i++)
-        {
-            lobby.getSlot(i).setDeck(DeckSerializer.fromFile(new File("../forge-gui/res/quest/duels/Agent K 1.dck")));
-        }
-    }
 
     @Override
     public void update(boolean fullUpdate) {

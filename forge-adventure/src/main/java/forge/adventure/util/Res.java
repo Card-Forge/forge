@@ -22,7 +22,10 @@ public class Res {
             Lang= FModel.getPreferences().getPref(ForgePreferences.FPref.UI_LANGUAGE);
 
     }
-
+    public String GetFilePath(String path)
+    {
+        return Prefix+path;
+    }
     public FileHandle GetFile(String path)
     {
         String fullPath=Prefix+path;

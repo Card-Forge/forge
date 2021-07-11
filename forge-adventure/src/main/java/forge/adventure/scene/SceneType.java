@@ -9,7 +9,7 @@ public enum SceneType {
     DuelScene(new forge.adventure.scene.DuelScene())
     ;
     public final forge.adventure.scene.Scene instance;
-    private SceneType(forge.adventure.scene.Scene scene) {
+    SceneType(forge.adventure.scene.Scene scene) {
         this.instance = scene;
     }
 }

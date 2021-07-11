@@ -28,24 +28,6 @@ public class GameScene extends Scene {
         //Batch.end();
     }
 
-    public boolean NewGame()
-    {
-
-        return true;
-    }
-    public boolean Load()
-    {
-        return true;
-    }
-    public boolean Resume()
-    {
-        return true;
-    }
-    public boolean Exit()
-    {
-        Gdx.app.exit();
-        return true;
-    }
     @Override
     public void create() {
         Stage = new GameStage();
