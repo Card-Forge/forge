@@ -1,0 +1,10 @@
+Name:Barbarian Class
+ManaCost:R
+Types:Enchantment Class
+K:Class:3:1 R,2 R
+S:Mode$ Continuous | ClassLevel$ 1 | Affected$ You | AddKeyword$ If you would roll one or more dice, instead roll that many dice plus one and ignore the lowest roll. | Description$ If you would roll one or more dice, instead roll that many dice plus one and ignore the lowest roll.
+T:Mode$ RolledDieOnce | ClassLevel$ 2 | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigPump | TriggerDescription$ Whenever you roll one or more dice, target creature you control gets +2/+0 and gains menace until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | NumAtt$ 2 | KW$ Menace
+S:Mode$ Continuous | ClassLevel$ 3 | EffectZone$ Battlefield | Affected$ Creature.YouCtrl | AddKeyword$ Haste | Description$ Creatures you control have haste.
+SVar:PlayMain1:TRUE
+Oracle:(Gain the next level as a sorcery to add its ability.)\nIf you would roll one or more dice, instead roll that many dice plus one and ignore the lowest roll.\n{1}{R}: Level 2\nWhenever you roll one or more dice, target creature you control gets +2/+0 and gains menace until end of turn.\n{2}{R}: Level 3\nCreatures you control have haste.

@@ -47,6 +47,7 @@ public enum ApiType {
     ChooseSource (ChooseSourceEffect.class),
     ChooseType (ChooseTypeEffect.class),
     Clash (ClashEffect.class),
+    ClassLevelUp (ClassLevelUpEffect.class),
     Cleanup (CleanUpEffect.class),
     Clone (CloneEffect.class),
     CompanionChoose (ChooseCompanionEffect.class),
