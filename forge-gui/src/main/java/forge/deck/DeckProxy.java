@@ -1,14 +1,7 @@
 package forge.deck;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
-
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
@@ -302,7 +295,28 @@ public class DeckProxy implements InventoryItem {
     }
 
     public String getFormatsString() {
-        return StringUtils.join(Iterables.transform(getFormats(), GameFormat.FN_GET_NAME), ", ");
+        Set<GameFormat> formats = getFormats();
+        if (formats.size() > 1)
+            return StringUtils.join(Iterables.transform(formats, GameFormat.FN_GET_NAME), ", ");
+        Object[] formatArray = formats.toArray();
+        GameFormat format = (GameFormat)formatArray[0];
+        if (format != GameFormat.NoFormat)
+            return format.getName();
+        if (isCustomDeckFormat())
+            return "Custom Cards Deck";
+        return "No Format";
+    }
+
+    private boolean isCustomDeckFormat(){
+        Deck deck = this.getDeck();
+        CardPool cards = deck.getAllCardsInASinglePool();
+        CardEdition.Collection customEditions = StaticData.instance().getCustomEditions();
+        for (Entry<PaperCard, Integer> entry : cards){
+            String setCode = entry.getKey().getEdition();
+            if (customEditions.contains(setCode))
+                return true;
+        }
+        return false;
     }
 
     public int getMainSize() {
