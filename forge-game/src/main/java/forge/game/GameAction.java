@@ -244,9 +244,11 @@ public class GameAction {
 
                 if (zoneTo.is(ZoneType.Stack)) {
                     // when moving to stack, copy changed card information
-                    copied.setChangedCardColors(c.getChangedCardColors());
+                    copied.setChangedCardColors(c.getChangedCardColorsMap());
+                    copied.setChangedCardColorsCharacterDefining(c.getChangedCardColorsCharacterDefiningMap());
                     copied.setChangedCardKeywords(c.getChangedCardKeywords());
                     copied.setChangedCardTypes(c.getChangedCardTypesMap());
+                    copied.setChangedCardTypesCharacterDefining(c.getChangedCardTypesCharacterDefiningMap());
                     copied.setChangedCardNames(c.getChangedCardNames());
                     copied.setChangedCardTraits(c.getChangedCardTraits());
 
@@ -266,6 +268,9 @@ public class GameAction {
                     // on Transformed objects)
                     copied.setState(CardStateName.Original, false);
                     copied.setBackSide(false);
+
+                    // reset timestamp in changezone effects so they have same timestamp if ETB simutaneously
+                    copied.setTimestamp(game.getNextTimestamp());
                 }
 
                 copied.setUnearthed(c.isUnearthed());
@@ -278,6 +283,7 @@ public class GameAction {
                 }
             } else { //Token
                 copied = c;
+                copied.setTimestamp(game.getNextTimestamp());
             }
         }
 
@@ -603,8 +609,6 @@ public class GameAction {
             }
             unattachCardLeavingBattlefield(copied);
         } else if (toBattlefield) {
-            // reset timestamp in changezone effects so they have same timestamp if ETB simutaneously
-            copied.setTimestamp(game.getNextTimestamp());
             for (Player p : game.getPlayers()) {
                 copied.getDamageHistory().setNotAttackedSinceLastUpkeepOf(p);
                 copied.getDamageHistory().setNotBlockedSinceLastUpkeepOf(p);
@@ -619,7 +623,6 @@ public class GameAction {
                 || zoneTo.is(ZoneType.Hand)
                 || zoneTo.is(ZoneType.Library)
                 || zoneTo.is(ZoneType.Exile)) {
-            copied.setTimestamp(game.getNextTimestamp());
             copied.clearOptionalCostsPaid();
             if (copied.isFaceDown()) {
                 copied.setState(CardStateName.Original, true);

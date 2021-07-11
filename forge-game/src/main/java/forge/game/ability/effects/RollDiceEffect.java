@@ -54,31 +54,29 @@ public class RollDiceEffect extends SpellAbilityEffect {
         } else {
             stringBuilder.append(player).append(" rolls ");
         }
-        stringBuilder.append(sa.getParamOrDefault("Amount", "a")).append(" ");
-        stringBuilder.append(sa.getParamOrDefault("Sides", "6")).append("-sided ");
-        if (sa.getParamOrDefault("Amount", "1").equals("1")) {
-            stringBuilder.append("die.");
-        } else {
-            stringBuilder.append("dice.");
+        stringBuilder.append(sa.getParamOrDefault("Amount", "a")).append(" d");
+        stringBuilder.append(sa.getParamOrDefault("Sides", "6"));
+        if (sa.hasParam("IgnoreLower")) {
+            stringBuilder.append(" and ignore the lower roll");
         }
+        stringBuilder.append(".");
         return stringBuilder.toString();
     }
 
-    private void rollDice(SpellAbility sa, Player player, int amount, int sides) {
-        final Card host = sa.getHostCard();
-        final int modifier = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Modifier", "0"), sa);
-        final int advantage = getRollAdvange(player);
+    public static int rollDiceForPlayer(SpellAbility sa, Player player, int amount, int sides) {
+        return rollDiceForPlayer(sa, player, amount, sides, 0, null);
+    }
+
+    private static int rollDiceForPlayer(SpellAbility sa, Player player, int amount, int sides, int ignore, List<Integer> rollsResult) {
+        int advantage = getRollAdvange(player);
         amount += advantage;
         int total = 0;
-        List<Integer> rolls = new ArrayList<>();
+        List<Integer> rolls = (rollsResult == null ? new ArrayList<>() : rollsResult);
 
         for (int i = 0; i < amount; i++) {
             int roll = MyRandom.getRandom().nextInt(sides) + 1;
             rolls.add(roll);
             total += roll;
-            if (sa.hasParam("RememberRoll")) {
-                host.addRemembered(roll);
-            }
         }
 
         if (amount > 0) {
@@ -86,9 +84,11 @@ public class RollDiceEffect extends SpellAbilityEffect {
             player.getGame().getAction().notifyOfValue(sa, player, message, null);
         }
 
+        rolls.sort(null);
+
         // Ignore lowest rolls
+        advantage += ignore;
         if (advantage > 0) {
-            rolls.sort(null);
             for (int i = advantage - 1; i >= 0; --i) {
                 total -= rolls.get(i);
                 rolls.remove(i);
@@ -99,17 +99,46 @@ public class RollDiceEffect extends SpellAbilityEffect {
         for (Integer roll : rolls) {
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.Player, player);
+            runParams.put(AbilityKey.Sides, sides);
             runParams.put(AbilityKey.Result, roll);
             player.getGame().getTriggerHandler().runTrigger(TriggerType.RolledDie, runParams, false);
         }
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.Player, player);
+        runParams.put(AbilityKey.Sides, sides);
         runParams.put(AbilityKey.Result, rolls);
         player.getGame().getTriggerHandler().runTrigger(TriggerType.RolledDieOnce, runParams, false);
+
+        return total;
+    }
+
+    private int rollDice(SpellAbility sa, Player player, int amount, int sides) {
+        final Card host = sa.getHostCard();
+        final int modifier = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Modifier", "0"), sa);
+        final int ignore = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("IgnoreLower", "0"), sa);
+
+        List<Integer> rolls = new ArrayList<>();
+        int total = rollDiceForPlayer(sa, player, amount, sides, ignore, rolls);
 
         total += modifier;
         if (sa.hasParam("ResultSVar")) {
             host.setSVar(sa.getParam("ResultSVar"), Integer.toString(total));
+        }
+        if (sa.hasParam("ChosenSVar")) {
+            int chosen = player.getController().chooseNumber(sa, Localizer.getInstance().getMessage("lblChooseAResult"), rolls, player);
+            String message = Localizer.getInstance().getMessage("lblPlayerChooseValue", player, chosen);
+            player.getGame().getAction().notifyOfValue(sa, player, message, player);
+            host.setSVar(sa.getParam("ChosenSVar"), Integer.toString(chosen));
+            if (sa.hasParam("OtherSVar")) {
+                int other = rolls.get(0);
+                for (int i = 1; i < rolls.size(); ++i) {
+                    if (rolls.get(i) != chosen) {
+                        other = rolls.get(i);
+                        break;
+                    }
+                }
+                host.setSVar(sa.getParam("OtherSVar"), Integer.toString(other));
+            }
         }
 
         Map<String, SpellAbility> diceAbilities = sa.getAdditionalAbilities();
@@ -132,6 +161,7 @@ public class RollDiceEffect extends SpellAbilityEffect {
         } else if (sa.hasAdditionalAbility("Else")) {
             AbilityUtils.resolve(sa.getAdditionalAbility("Else"));
         }
+        return total;
     }
 
     /* (non-Javadoc)
@@ -143,11 +173,27 @@ public class RollDiceEffect extends SpellAbilityEffect {
 
         int amount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Amount", "1"), sa);
         int sides = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Sides", "6"), sa);
+        boolean rememberHighest = sa.hasParam("RememberHighestPlayer");
 
         final PlayerCollection playersToRoll = getTargetPlayers(sa);
+        List<Integer> results = new ArrayList<>(playersToRoll.size());
 
         for (Player player : playersToRoll) {
-            rollDice(sa, player, amount, sides);
+            int result = rollDice(sa, player, amount, sides);
+            results.add(result);
+        }
+        if (rememberHighest) {
+            int highest = 0;
+            for (int i = 0; i < results.size(); ++i) {
+                if (highest < results.get(i)) {
+                    highest = results.get(i);
+                }
+            }
+            for (int i = 0; i < results.size(); ++i) {
+                if (highest == results.get(i)) {
+                    host.addRemembered(playersToRoll.get(i));
+                }
+            }
         }
     }
 }

@@ -396,6 +396,13 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.CurrentRoom, c.getCurrentRoom());
     }
 
+    public int getClassLevel() {
+        return get(TrackableProperty.ClassLevel);
+    }
+    void updateClassLevel(Card c) {
+        set(TrackableProperty.ClassLevel, c.getClassLevel());
+    }
+
     private String getRemembered() {
         return get(TrackableProperty.Remembered);
     }
@@ -862,7 +869,7 @@ public class CardView extends GameEntityView {
             // update the color only while in Game
             if (c.getGame() != null) {
                 currentStateView.updateColors(currentState);
-                currentStateView.updateHasChangeColors(!c.getChangedCardColors().isEmpty());
+                currentStateView.updateHasChangeColors(!Iterables.isEmpty(c.getChangedCardColors()));
             }
         } else {
             currentStateView.updateLoyalty(currentState);

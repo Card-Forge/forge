@@ -1,0 +1,13 @@
+Name:Chaos Dragon
+ManaCost:1 R R
+Types:Creature Dragon
+PT:4/4
+K:Flying
+K:Haste
+K:CARDNAME attacks each combat if able.
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRollDice | TriggerDescription$ At the beginning of combat on your turn, each player rolls a d20. If one or more opponents had the highest result, CARDNAME can't attack those players or planeswalkers they control this combat.
+SVar:TrigRollDice:DB$ RollDice | Defined$ Player | Sides$ 20 | RememberHighestPlayer$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STCantAttack | RememberObjects$ Player.Opponent+IsRemembered | Duration$ UntilEndOfCombat | SubAbility$ DBCleanup
+SVar:STCantAttack:Mode$ CantAttack | EffectZone$ Command | ValidCard$ Card.EffectSource | Target$ Player.IsRemembered,Planeswalker.RememberedPlayerCtrl | Description$ EFFECTSOURCE can't attack those players or planeswalkers they control this combat.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Flying, haste\nChaos Dragon attacks each combat if able.\nAt the beginning of combat on your turn, each player rolls a d20. If one or more opponents had the highest result, Chaos Dragon can't attack those players or planeswalkers they control this combat.

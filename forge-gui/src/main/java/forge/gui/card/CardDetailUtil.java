@@ -19,6 +19,7 @@ import forge.game.GameView;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
+import forge.game.zone.ZoneType;
 import forge.game.card.CounterType;
 import forge.item.InventoryItemFromSet;
 import forge.item.PaperCard;
@@ -480,10 +481,18 @@ public class CardDetailUtil {
         // dungeon room
         if (card.getCurrentRoom() != null && !card.getCurrentRoom().isEmpty()) {
             if (area.length() != 0) {
-                area.append("\n");
+                area.append("\n\n");
             }
             area.append("(In room: ");
             area.append(card.getCurrentRoom()).append(")");
+        }
+
+        // class level
+        if (card.getId() >= 0 && card.getCurrentState().getType().hasStringType("Class") && card.getZone() == ZoneType.Battlefield) {
+            if (area.length() != 0) {
+                area.append("\n\n");
+            }
+            area.append("(Class Level:").append(card.getClassLevel()).append(")");
         }
 
         // a card has something attached to it
