@@ -77,24 +77,36 @@ public class CardPool extends ItemPool<PaperCard> {
     public void add(String cardName, String setCode, final int artIndex, final int amount) {
 
         PaperCard paperCard = StaticData.instance().getCommonCards().getCard(cardName, setCode, artIndex);
-        final boolean isCommonCard = paperCard != null;
+        boolean isCommonCard = paperCard != null;
         boolean isCustomCard = !(isCommonCard);
 
         if (!isCommonCard) {
             paperCard = StaticData.instance().getCustomCards().getCard(cardName, setCode);
             isCustomCard = paperCard != null;
-            if (isCustomCard && !StaticData.instance().isEnableCustomCardsInDecks()) {
-                String errMsg = String.format("Custom Card \"%s\" from Set \"%s\" was found but could not be loaded. Please enable the use of Custom Cards in Forge Preferences to use this card.", paperCard.getName(), paperCard.getEdition());
-                System.err.println(errMsg);
-                paperCard = null;
-            }
 
             if (!isCustomCard)
                 paperCard = StaticData.instance().getVariantCards().getCard(cardName, setCode);
 
-            if (paperCard == null && !isCustomCard) {
+            if (paperCard == null) {
+                // Attempt to load the card first
                 StaticData.instance().attemptToLoadCard(cardName, setCode);
-                paperCard = StaticData.instance().getVariantCards().getCard(cardName, setCode);
+                // Now try again all the three available DBs
+                // we simply don't know which db the card has been added to (in case)
+                // so we will try all of them again in this second round of attempt.
+                CardDb[] dbs = new CardDb[] {StaticData.instance().getCommonCards(),
+                                             StaticData.instance().getCustomCards(),
+                                             StaticData.instance().getVariantCards()};
+                for (int i = 0; i < 3; i++) {
+                    CardDb db = dbs[i];
+                    paperCard = db.getCard(cardName, setCode);
+                    if (paperCard != null){
+                        if (i == 0)
+                            isCommonCard = true;
+                        else if (i == 1)
+                            isCustomCard = true;
+                        break;
+                    }
+                }
             }
         }
 
@@ -102,10 +114,8 @@ public class CardPool extends ItemPool<PaperCard> {
         if (paperCard != null) {
             setCode = paperCard.getEdition();
             cardName = paperCard.getName();
-            if (isCommonCard)
-                artCount = StaticData.instance().getCommonCards().getArtCount(cardName, setCode);
-            else if (isCustomCard)
-                artCount = StaticData.instance().getCustomCards().getArtCount(cardName, setCode);
+            CardDb cardDb = isCustomCard ? StaticData.instance().getCustomCards() : StaticData.instance().getCommonCards();
+            artCount = cardDb.getArtCount(cardName, setCode);
         } else {
             System.err.println("An unsupported card was requested: \"" + cardName + "\" from \"" + setCode + "\". \n");
             paperCard = StaticData.instance().getCommonCards().createUnsupportedCard(cardName);
