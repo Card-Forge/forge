@@ -10,6 +10,48 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>forge-adventure</artifactId>
+    <packaging>jar</packaging>
+    <name>Forge Adventure</name>
+
+    <build>
+        <sourceDirectory>src</sourceDirectory>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <attach>false</attach>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <mainClass>forge.adventure.Main</mainClass>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                        </manifest>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <!-- this is used for inheritance merges -->
+                        <phase>package</phase>
+                        <!-- bind to the packaging phase -->
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
     <dependencies>
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
@@ -38,6 +80,12 @@
             <artifactId>gdx-backend-lwjgl3</artifactId>
             <version>1.10.0</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx-freetype-platform</artifactId>
+            <version>1.10.0</version>
+            <classifier>natives-desktop</classifier>
         </dependency>
         <dependency>
             <groupId>forge</groupId>

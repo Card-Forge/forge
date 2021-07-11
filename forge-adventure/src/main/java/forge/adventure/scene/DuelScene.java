@@ -2,22 +2,25 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
 import forge.Graphics;
+import forge.adventure.AdventureApplicationAdapter;
+import forge.animation.ForgeAnimation;
+import forge.assets.ImageCache;
 import forge.deck.io.DeckSerializer;
 import forge.game.GameType;
+import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.match.GameLobby;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.match.LobbySlotType;
-import forge.gui.GuiBase;
 import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.IUpdateable;
 import forge.player.GamePlayerUtil;
+import forge.player.PlayerControllerHuman;
 import forge.screens.FScreen;
 import forge.screens.match.MatchController;
 import forge.toolbox.FOverlay;
+import forge.trackable.TrackableCollection;
 
 import java.io.File;
 import java.util.*;
@@ -26,7 +29,7 @@ public class DuelScene extends Scene implements IUpdateable {
 
     //GameLobby lobby;
     FScreen screen;
-    Graphics graphics;
+    Graphics localGraphics;
     HostedMatch hostedMatch;
     public DuelScene() {
 
@@ -34,7 +37,8 @@ public class DuelScene extends Scene implements IUpdateable {
 
     @Override
     public void dispose() {
-        Stage.dispose();
+        if(Stage!=null)
+            Stage.dispose();
     }
 
     @Override
@@ -49,45 +53,50 @@ public class DuelScene extends Scene implements IUpdateable {
         Stage.act(Gdx.graphics.getDeltaTime());
         Stage.draw();
         */
+        ImageCache.allowSingleLoad();
+        ForgeAnimation.advanceAll();
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Clear the screen.
         if(hostedMatch== null || hostedMatch .getGameView()==null)
             return;
         if (screen==null)
         {
 
-            screen =  MatchController.getView();
-            screen.setSize(IntendedWidth, IntendedHeight);
+            return;
         }
 
-        graphics.begin(IntendedWidth, IntendedHeight);
-        screen.screenPos.setSize(IntendedWidth, IntendedHeight);
+        localGraphics.begin(AdventureApplicationAdapter.CurrentAdapter.getCurrentWidth(), AdventureApplicationAdapter.CurrentAdapter.getCurrentHeight());
+        screen.screenPos.setSize(AdventureApplicationAdapter.CurrentAdapter.getCurrentWidth(), AdventureApplicationAdapter.CurrentAdapter.getCurrentHeight());
         if (screen.getRotate180()) {
-            graphics.startRotateTransform(IntendedWidth / 2, IntendedHeight / 2, 180);
+            localGraphics.startRotateTransform(AdventureApplicationAdapter.CurrentAdapter.getCurrentWidth() / 2, AdventureApplicationAdapter.CurrentAdapter.getCurrentHeight() / 2, 180);
         }
-        screen.draw(graphics);
+        screen.draw(localGraphics);
         if (screen.getRotate180()) {
-            graphics.endTransform();
+            localGraphics.endTransform();
         }
         for (FOverlay overlay : FOverlay.getOverlays()) {
             if (overlay.isVisibleOnScreen(screen)) {
-                overlay.screenPos.setSize(IntendedWidth, IntendedHeight);
-                overlay.setSize(IntendedWidth, IntendedHeight); //update overlay sizes as they're rendered
+                overlay.screenPos.setSize(AdventureApplicationAdapter.CurrentAdapter.getCurrentWidth(), AdventureApplicationAdapter.CurrentAdapter.getCurrentHeight());
+                overlay.setSize(AdventureApplicationAdapter.CurrentAdapter.getCurrentWidth(), AdventureApplicationAdapter.CurrentAdapter.getCurrentHeight()); //update overlay sizes as they're rendered
                 if (overlay.getRotate180()) {
-                    graphics.startRotateTransform(IntendedWidth / 2, IntendedHeight / 2, 180);
+                    localGraphics.startRotateTransform(AdventureApplicationAdapter.CurrentAdapter.getCurrentHeight() / 2, AdventureApplicationAdapter.CurrentAdapter.getCurrentHeight() / 2, 180);
                 }
-                overlay.draw(graphics);
+                overlay.draw(localGraphics);
                 if (overlay.getRotate180()) {
-                    graphics.endTransform();
+                    localGraphics.endTransform();
                 }
             }
         }
-        graphics.end();
-
+        localGraphics.end();
 
         //Batch.end();
     }
 
+    public void GameEnd()
+    {
 
+    }
+
+    private DuelInput duelInput;
     @Override
     public void Enter()
     {
@@ -105,26 +114,37 @@ public class DuelScene extends Scene implements IUpdateable {
         final Map<RegisteredPlayer, IGuiGame> guiMap = new HashMap<>();
         guiMap.put(humanPlayer, MatchController.instance);
 
-        hostedMatch = GuiBase.getInterface().hostMatch();
+        hostedMatch = MatchController.instance.hostMatch();
+
+        hostedMatch.setEndGameHook(()->GameEnd());
         hostedMatch.startMatch(GameType.Constructed, appliedVariants, players, guiMap);
 
-        Gdx.input.setInputProcessor(new DuelInput(hostedMatch));
+        MatchController.instance.setGameView(hostedMatch.getGameView());
+
+
+        for (final Player p :         hostedMatch.getGame().getPlayers()) {
+            if (p.getController() instanceof PlayerControllerHuman) {
+                final PlayerControllerHuman humanController = (PlayerControllerHuman) p.getController();
+                humanController.setGui(MatchController.instance);
+                MatchController.instance.setOriginalGameController(p.getView(), humanController);
+                MatchController.instance.openView(new TrackableCollection<>(p.getView()));
+            }
+        }
+
+        screen =  MatchController.getView();
+        screen.setHeaderCaption("DUUUUUUUELLL");
+        screen.setSize(AdventureApplicationAdapter.CurrentAdapter.getCurrentWidth(), AdventureApplicationAdapter.CurrentAdapter.getCurrentHeight());
+
+
+        Gdx.input.setInputProcessor(duelInput);
 
     }
-    public boolean Resume()
-    {
-        return true;
-    }
-    public boolean Exit()
-    {
-        Gdx.app.exit();
-        return true;
-    }
+
     @Override
     public void create() {
-        Stage = new Stage(new StretchViewport(IntendedWidth,IntendedHeight));
+        duelInput=new DuelInput();
+        localGraphics= AdventureApplicationAdapter.CurrentAdapter.getGraphics();
         //lobby = new LocalLobby();
-        graphics=new Graphics();
         //initLobby(lobby);
 
 

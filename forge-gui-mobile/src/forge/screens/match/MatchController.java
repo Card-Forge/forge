@@ -165,6 +165,7 @@ public class MatchController extends AbstractGuiGame {
 
         actuateMatchPreferences();
 
+        Forge.openScreen(view);
     }
 
     @Override

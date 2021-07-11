@@ -2,7 +2,6 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.Input;
 import forge.Forge;
-import forge.gamemodes.match.HostedMatch;
 import forge.gui.error.BugReporter;
 import forge.screens.match.MatchController;
 import forge.toolbox.FContainer;
@@ -21,7 +20,7 @@ public class DuelInput extends FGestureAdapter {
     private static boolean keyTyped, shiftKeyDown;
     private Forge.KeyInputAdapter  keyInputAdapter=null;
 
-    public DuelInput(HostedMatch hMatch) {
+    public DuelInput() {
     }
 
     @Override

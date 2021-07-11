@@ -279,7 +279,7 @@ public class HostedMatch {
     public Game getGame() {
         return game;
     }
-public GameView getGameView() {
+    public GameView getGameView() {
         return game == null ? null : game.getView();
     }
 

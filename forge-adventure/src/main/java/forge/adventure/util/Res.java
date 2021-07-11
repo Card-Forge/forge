@@ -1,7 +1,6 @@
 package forge.adventure.util;
 
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
@@ -13,8 +12,9 @@ public class Res {
     public static Res CurrentRes;
     private String Prefix;
     private String Lang="en-us";
-    private Skin SelectedSkin=null;
     private HashMap<String,FileHandle> Cache=new HashMap<String,FileHandle>();
+
+    public String GetPrefix(){return Prefix;}
     public Res(String plane) {
         CurrentRes=this;
         Prefix= GuiBase.getInterface().getAssetsDir()+"/res/adventure/"+plane+"/";
@@ -28,6 +28,7 @@ public class Res {
         String fullPath=Prefix+path;
         if(!Cache.containsKey(fullPath))
         {
+
             String fileName = fullPath.replaceFirst("[.][^.]+$", "");
             String ext= fullPath.substring(fullPath.lastIndexOf('.'));
             String langFile=fileName+"-"+Lang+ext;
@@ -43,10 +44,7 @@ public class Res {
         return Cache.get(fullPath);
     }
 
-    public Skin GetSkin() {
 
-        if(SelectedSkin==null)
-            SelectedSkin=new Skin(GetFile("skin/uiskin.json"));
-        return SelectedSkin;
-    }
+
+
 }

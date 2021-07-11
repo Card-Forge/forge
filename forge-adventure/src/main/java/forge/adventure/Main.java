@@ -1,15 +1,15 @@
 package forge.adventure;
 
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Clipboard;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.Clipboard;
 import forge.Forge;
 import forge.FrameRate;
-import forge.Graphics;
 import forge.GuiMobile;
+import forge.adventure.scene.SettingsScene;
 import forge.assets.AssetsDownloader;
 import forge.assets.FSkin;
 import forge.assets.FSkinFont;
@@ -39,9 +39,6 @@ class StartAdvanture extends AdventureApplicationAdapter
 {
         private static Clipboard clipboard;
         private static IDeviceAdapter deviceAdapter;
-        private static int screenWidth;
-        private static int screenHeight;
-        private static Graphics graphics;
         private static FrameRate frameRate;
         private static FScreen currentScreen;
         private static SplashScreen splashScreen;
@@ -75,22 +72,62 @@ class StartAdvanture extends AdventureApplicationAdapter
         public StartAdvanture(String plane) {
 
                 super(plane);
+
+                Forge.isTabletDevice=true;
+                Forge.isPortraitMode=false;
+                Forge.hdbuttons = true;
+                Forge.hdstart = true;
+                Forge app= (Forge) Forge.getApp(new Lwjgl3Clipboard(),null,"../forge-gui/",true,false,0,true,0,"","");
+
+                app.resize(1920,1080);
                 clipboard = new Lwjgl3Clipboard();
                 GuiBase.setUsingAppDirectory(false); //obb directory on android uses the package name as entrypoint
                 GuiBase.setInterface(new GuiMobile("../forge-gui/"));
                 GuiBase.enablePropertyConfig(true);
                 isPortraitMode = true;
                 totalDeviceRAM = 0;
+
+
+                GuiBase.setDeviceInfo("", "", 0, 0);
+
+
+        }
+        @Override
+        public void render()
+        {
+                if(splashScreen!=null)
+                {
+                        Gdx.gl.glClearColor(1,0,1,1);
+                        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Clear the screen.
+                        getGraphics().begin(getCurrentWidth(), getCurrentHeight());
+                        splashScreen.setSize(getCurrentWidth(), getCurrentHeight());
+                        splashScreen.screenPos.setSize(getCurrentWidth(), getCurrentHeight());
+                        if (splashScreen.getRotate180()) {
+                                getGraphics().startRotateTransform(getCurrentWidth() / 2, getCurrentHeight() / 2, 180);
+                        }
+                        splashScreen.draw(getGraphics());
+                        if (splashScreen.getRotate180()) {
+                                getGraphics().endTransform();
+                        }
+
+                        getGraphics().end();
+                }
+                else
+                {
+                        super.render();
+                }
+        }
+        @Override
+        public void resize(int width, int height) {
+                super.resize(width,height);
+                if (splashScreen != null)
+                        splashScreen.setSize(width, height);
         }
         @Override
         public void create()
         {
                 //install our error handler
                 ExceptionHandler.registerErrorHandling();
-
-                GuiBase.setIsAndroid(Gdx.app.getType() == Application.ApplicationType.Android);
-
-                graphics = new Graphics();
                 splashScreen = new SplashScreen();
                 frameRate = new FrameRate();
         /*
@@ -101,7 +138,7 @@ class StartAdvanture extends AdventureApplicationAdapter
          */
                 Gdx.input.setCatchKey(Input.Keys.BACK, true);
                 destroyThis = true; //Prevent back()
-                ForgePreferences prefs = new ForgePreferences();
+                ForgePreferences prefs = SettingsScene.Preference = new ForgePreferences();
 
                 String skinName;
                 if (FileUtil.doesFileExist(ForgeConstants.MAIN_PREFS_FILE)) {
@@ -137,6 +174,7 @@ class StartAdvanture extends AdventureApplicationAdapter
                 final Localizer localizer = Localizer.getInstance();
 
                 //load model on background thread (using progress bar to report progress)
+                super.create();
                 FThreads.invokeInBackgroundThread(new Runnable() {
                         @Override
                         public void run() {
@@ -144,7 +182,7 @@ class StartAdvanture extends AdventureApplicationAdapter
                                 AssetsDownloader.checkForUpdates(splashScreen);
                                 if (exited) { return; } //don't continue if user chose to exit or couldn't download required assets
 
-                                FModel.initialize(splashScreen.getProgressBar(), null);
+                                FModel.initialize(splashScreen.getProgressBar(),null);
 
                                 splashScreen.getProgressBar().setDescription(localizer.getMessage("lblLoadingFonts"));
                                 FSkinFont.preloadAll(locale);
@@ -176,8 +214,24 @@ class StartAdvanture extends AdventureApplicationAdapter
                                                 SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS); //start background music
                                                 destroyThis = false; //Allow back()
                                                 Gdx.input.setCatchKey(Input.Keys.MENU, true);
+                                                //openHomeScreen(-1); //default for startup
                                                 splashScreen = null;
+                                                /*
+                                                boolean isLandscapeMode = isLandscapeMode();
+                                                if (isLandscapeMode) { //open preferred new game screen by default if landscape mode
+                                                        NewGameMenu.getPreferredScreen().open();
+                                                }
+                                                */
 
+                                                //adjust height modifier
+
+                                                //update landscape mode preference if it doesn't match what the app loaded as
+                                                if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_LANDSCAPE_MODE) != true) {
+                                                        FModel.getPreferences().setPref(ForgePreferences.FPref.UI_LANDSCAPE_MODE, true);
+                                                        FModel.getPreferences().save();
+                                                }
+
+                                                ResLoaded();
                                                 if (!enablePreloadExtendedArt)
                                                         return;
                                                 List<String> borderlessCardlistkeys = FileUtil.readFile(ForgeConstants.BORDERLESS_CARD_LIST_FILE);
@@ -198,23 +252,17 @@ class StartAdvanture extends AdventureApplicationAdapter
                                 });
                         }
                 });
-                super.create();
+
         }
+
 }
 public class Main {
 
         public static void main(String[] args) {
-
-
-
-
-
                 AdventureApplicationConfiguration config=new AdventureApplicationConfiguration();
-
                 config.SetPlane("Shandalar");
                 config.setFullScreen(false);
-
-                new Lwjgl3Application(new StartAdvanture(config.Plane), config);
+                new Lwjgl3Application(new StartAdvanture(config.Plane), config );
 
         }
 }

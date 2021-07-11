@@ -5,11 +5,11 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import forge.adventure.AdventureApplicationAdapter;
+import forge.adventure.util.Controls;
 
 import java.util.concurrent.Callable;
 
@@ -47,14 +47,10 @@ public class StartScene extends Scene {
 
     private void AddButton(String name, Callable func, int ypos)
     {
-
-        ImageButton button = new ImageButton(DrawableImage("img/title_"+name+".png")) ;
-        Button.ButtonStyle style=new ImageButton.ImageButtonStyle();
-        style.up=DrawableImage("img/title_"+name+".png");
-        style.down=DrawableImage("img/title_"+name+"_pressed.png");
-        style.over=DrawableImage("img/title_"+name+"_hover.png");
-        button.setStyle(style);
-        button.setPosition((IntendedWidth/2)-(button.getWidth()/2),ypos);
+        TextButton button = Controls.newTextButton(name) ;
+        button.getLabel().setFontScale(3);
+        button.setPosition(1200,ypos);
+        button.setSize(400,80);
         button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -68,7 +64,7 @@ public class StartScene extends Scene {
     }
     public boolean NewGame()
     {
-        AdventureApplicationAdapter.CurrentAdapter.SwitchScene(SceneType.NewGameScene);
+        AdventureApplicationAdapter.CurrentAdapter.SwitchScene(forge.adventure.scene.SceneType.NewGameScene.instance);
         return true;
     }
     public boolean Load()
@@ -77,6 +73,11 @@ public class StartScene extends Scene {
     }
     public boolean Resume()
     {
+        return true;
+    }
+    public boolean settings()
+    {
+        AdventureApplicationAdapter.CurrentAdapter.SwitchScene(forge.adventure.scene.SceneType.SettingsScene.instance);
         return true;
     }
     public boolean Exit()
@@ -90,10 +91,12 @@ public class StartScene extends Scene {
         Background = new Texture( AdventureApplicationAdapter.CurrentAdapter.GetRes().GetFile("img/title_bg.png"));
         Title = new Texture( AdventureApplicationAdapter.CurrentAdapter.GetRes().GetFile("img/title.png"));
 
-        AddButton("new_game", () -> NewGame(), (IntendedHeight / 6) * 3);
-        AddButton("load",() -> Load(),(IntendedHeight/6)*2);
-        AddButton("resume",() -> Resume(),(IntendedHeight/6)*1);
-        AddButton("exit",() -> Exit(),0);
+        AddButton("new game", () -> NewGame(), 800);
+        AddButton("load",() -> Load(),700);
+        AddButton("save",() -> Load(),600);
+        AddButton("resume",() -> Resume(),500);
+        AddButton("settings",() -> settings(),400);
+        AddButton("exit",() -> Exit(),300);
 
 
 

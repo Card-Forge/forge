@@ -1,35 +1,54 @@
 package forge.adventure;
 
 import com.badlogic.gdx.ApplicationAdapter;
-import forge.adventure.scene.*;
+import forge.Graphics;
+import forge.adventure.scene.Scene;
+import forge.adventure.scene.SceneType;
 import forge.adventure.util.Res;
-
-import java.util.HashMap;
 
 public class AdventureApplicationAdapter extends ApplicationAdapter {
     public static AdventureApplicationAdapter CurrentAdapter;
     String strPlane;
     Scene currentScene=null;
-    HashMap<SceneType,Scene> allScenes= new HashMap<>();
+    Scene lastScene=null;
     Res resourcesLoader;
+    private int currentWidth;
+    private int currentHeight;
+    private Graphics graphics;
+
+    public int getCurrentWidth(){return currentWidth;}
+    public int getCurrentHeight(){return currentHeight;}
+    public Graphics getGraphics(){return graphics;}
+    @Override
+    public void resize(int w,int h)
+    {
+        currentWidth=w;
+        currentHeight=h;
+        super.resize(w,h);
+    }
     public AdventureApplicationAdapter(String plane) {
         CurrentAdapter=this;
         strPlane=plane;
-        allScenes.put(SceneType.StartScene,new StartScene());
-        allScenes.put(SceneType.NewGameScene,new NewGameScene());
-        allScenes.put(SceneType.GameScene,new GameScene());
-        allScenes.put(SceneType.DuelScene,new DuelScene());
     }
-    public boolean SwitchScene(SceneType newScene)
+    public boolean SwitchScene(Scene newScene)
     {
         if(currentScene!=null)
         {
             if(!currentScene.Leave())
                 return false;
         }
-        currentScene=allScenes.get(newScene);
+        lastScene=currentScene;
+        currentScene=newScene;
         currentScene.Enter();
         return true;
+    }
+    public void ResLoaded()
+    {
+        for( forge.adventure.scene.SceneType entry:SceneType.values())
+        {
+            entry.instance.ResLoaded();
+        }
+
     }
     public Res GetRes()
     {
@@ -38,12 +57,13 @@ public class AdventureApplicationAdapter extends ApplicationAdapter {
     @Override
     public void create ()
     {
+        graphics = new Graphics();
         resourcesLoader=new Res(strPlane);
-        for(HashMap.Entry<SceneType, Scene>  entry:allScenes.entrySet())
+        for( forge.adventure.scene.SceneType entry:SceneType.values())
         {
-            entry.getValue().create();
+            entry.instance.create();
         }
-        SwitchScene(SceneType.StartScene);
+        SwitchScene(SceneType.StartScene.instance);
     }
     @Override
     public void render(){
@@ -52,5 +72,9 @@ public class AdventureApplicationAdapter extends ApplicationAdapter {
     @Override
     public void dispose(){
         currentScene.dispose();
+    }
+
+    public Scene GetLastScene() {
+        return lastScene;
     }
 }
