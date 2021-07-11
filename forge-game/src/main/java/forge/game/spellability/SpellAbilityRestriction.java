@@ -182,6 +182,11 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             this.setSvarOperator(params.get("SVarCompare").substring(0, 2));
             this.setSvarOperand(params.get("SVarCompare").substring(2));
         }
+
+        if (params.containsKey("ClassLevel")) {
+            this.setClassLevelOperator(params.get("ClassLevel").substring(0, 2));
+            this.setClassLevel(params.get("ClassLevel").substring(2));
+        }
     } // end setRestrictions()
 
     /**
@@ -521,6 +526,15 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             final int operandValue = AbilityUtils.calculateAmount(c, this.getsVarOperand(), sa);
 
             if (!Expressions.compare(svarValue, this.getsVarOperator(), operandValue)) {
+                return false;
+            }
+        }
+
+        if (this.getClassLevel() != null) {
+            final int level = c.getClassLevel();
+            final int levelOperand = AbilityUtils.calculateAmount(c, this.getClassLevel(), sa);
+
+            if (!Expressions.compare(level, this.getClassLevelOperator(), levelOperand)) {
                 return false;
             }
         }

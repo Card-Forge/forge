@@ -33,6 +33,9 @@ public class TriggerRolledDie extends Trigger {
             for (String param : params) {
                 if (StringUtils.isNumeric(param)) {
                     if (param.equals("" + result)) return true;
+                } else if (param.equals("Highest")) {
+                    final int sides = (int) runParams.get(AbilityKey.Sides);
+                    if (result == sides) return true;
                 } else {
                     final String comp = param.substring(0, 2);
                     final int rightSide = Integer.parseInt(param.substring(2));

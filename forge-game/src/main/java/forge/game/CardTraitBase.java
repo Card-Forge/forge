@@ -148,6 +148,18 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         return getParamOrDefault("Secondary", "False").equals("True");
     }
 
+
+    public final boolean isClassAbility() {
+        return hasParam("ClassLevel");
+    }
+    public final boolean isClassLevelNAbility(int level) {
+        String classLevel = getParamOrDefault("ClassLevel", "0");
+        if (!StringUtils.isNumeric(classLevel)) {
+            classLevel = classLevel.substring(2);
+        }
+        return level == Integer.parseInt(classLevel);
+    }
+
     /**
      * <p>
      * matchesValid.
@@ -460,6 +472,15 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
             final Player active = game.getPhaseHandler().getPlayerTurn();
             return !active.getActivateLoyaltyAbilityThisTurn();
         }
+
+        if (params.containsKey("ClassLevel")) {
+            final int level = getHostCard().getClassLevel();
+            final int levelMin = Integer.parseInt(params.get("ClassLevel"));
+            if (level < levelMin) {
+                return false;
+            }
+        }
+
         return true;
     }
 
