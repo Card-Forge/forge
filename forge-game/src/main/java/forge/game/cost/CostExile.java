@@ -59,7 +59,6 @@ public class CostExile extends CostPartWithList {
         this.sameZone = sameZone;
     }
 
-
     @Override
     public Integer getMaxAmountX(SpellAbility ability, Player payer) {
         final Card source = ability.getHostCard();

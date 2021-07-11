@@ -220,5 +220,3 @@ public class CopyPermanentEffect extends TokenEffectBase {
         return copy;
     }
 }
-
-
