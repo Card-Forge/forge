@@ -139,6 +139,8 @@ public enum CounterEnumType {
 
     GROWTH("GRWTH", 87, 226, 32),
 
+    HARMONY("HRMNY", 0, 230, 155),
+
     HATCHLING("HATCH", 201, 199, 186),
 
     HEALING("HEAL", 255, 166, 236),
