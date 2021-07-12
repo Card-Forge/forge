@@ -77,13 +77,36 @@ public class CardPool extends ItemPool<PaperCard> {
     public void add(String cardName, String setCode, final int artIndex, final int amount) {
 
         PaperCard paperCard = StaticData.instance().getCommonCards().getCard(cardName, setCode, artIndex);
-        final boolean isCommonCard = paperCard != null;
+        boolean isCommonCard = paperCard != null;
+        boolean isCustomCard = !(isCommonCard);
 
         if (!isCommonCard) {
-            paperCard = StaticData.instance().getVariantCards().getCard(cardName, setCode);
-            if (paperCard == null) {
-                StaticData.instance().attemptToLoadCard(cardName, setCode);
+            paperCard = StaticData.instance().getCustomCards().getCard(cardName, setCode);
+            isCustomCard = paperCard != null;
+
+            if (!isCustomCard)
                 paperCard = StaticData.instance().getVariantCards().getCard(cardName, setCode);
+
+            if (paperCard == null) {
+                // Attempt to load the card first
+                StaticData.instance().attemptToLoadCard(cardName, setCode);
+                // Now try again all the three available DBs
+                // we simply don't know which db the card has been added to (in case)
+                // so we will try all of them again in this second round of attempt.
+                CardDb[] dbs = new CardDb[] {StaticData.instance().getCommonCards(),
+                                             StaticData.instance().getCustomCards(),
+                                             StaticData.instance().getVariantCards()};
+                for (int i = 0; i < 3; i++) {
+                    CardDb db = dbs[i];
+                    paperCard = db.getCard(cardName, setCode);
+                    if (paperCard != null){
+                        if (i == 0)
+                            isCommonCard = true;
+                        else if (i == 1)
+                            isCustomCard = true;
+                        break;
+                    }
+                }
             }
         }
 
@@ -91,10 +114,14 @@ public class CardPool extends ItemPool<PaperCard> {
         if (paperCard != null) {
             setCode = paperCard.getEdition();
             cardName = paperCard.getName();
-            artCount = isCommonCard ? StaticData.instance().getCommonCards().getArtCount(cardName, setCode) : 1;
+            CardDb cardDb = isCustomCard ? StaticData.instance().getCustomCards() : StaticData.instance().getCommonCards();
+            artCount = cardDb.getArtCount(cardName, setCode);
         } else {
-            System.err.print("An unsupported card was requested: \"" + cardName + "\" from \"" + setCode + "\". ");
+            System.err.println("An unsupported card was requested: \"" + cardName + "\" from \"" + setCode + "\". \n");
             paperCard = StaticData.instance().getCommonCards().createUnsupportedCard(cardName);
+            // the unsupported card will be temporarily added to common cards (for no use, really)
+            // this would happen only if custom cards has been found but option is disabled!
+            isCustomCard = false;
         }
 
         boolean artIndexExplicitlySet = artIndex > 0 || Character.isDigit(cardName.charAt(cardName.length() - 1)) && cardName.charAt(cardName.length() - 2) == CardDb.NameSetSeparator;
@@ -105,24 +132,23 @@ public class CardPool extends ItemPool<PaperCard> {
         } else {
             // random art index specified, make sure we get different groups of cards with different art
             int[] artGroups = MyRandom.splitIntoRandomGroups(amount, artCount);
+            CardDb cardDb = isCustomCard ? StaticData.instance().getCustomCards() : StaticData.instance().getCommonCards();
             for (int i = 1; i <= artGroups.length; i++) {
                 int cnt = artGroups[i - 1];
                 if (cnt <= 0) {
                     continue;
                 }
-                PaperCard randomCard = StaticData.instance().getCommonCards().getCard(cardName, setCode, i);
+                PaperCard randomCard = cardDb.getCard(cardName, setCode, i);
                 this.add(randomCard, cnt);
             }
         }
     }
 
 
-
     /**
      * Add all from a List of CardPrinted.
      *
-     * @param list
-     *            CardPrinteds to add
+     * @param list CardPrinteds to add
      */
     public void add(final Iterable<PaperCard> list) {
         for (PaperCard cp : list) {
@@ -132,13 +158,14 @@ public class CardPool extends ItemPool<PaperCard> {
 
     /**
      * returns n-th card from this DeckSection. LINEAR time. No fixed order between changes
+     *
      * @param n
      * @return
      */
     public PaperCard get(int n) {
         for (Entry<PaperCard, Integer> e : this) {
             n -= e.getValue();
-            if ( n <= 0 ) return e.getKey();
+            if (n <= 0) return e.getKey();
         }
         return null;
     }
@@ -153,7 +180,9 @@ public class CardPool extends ItemPool<PaperCard> {
 
     @Override
     public String toString() {
-        if (this.isEmpty()) { return "[]"; }
+        if (this.isEmpty()) {
+            return "[]";
+        }
 
         boolean isFirst = true;
         StringBuilder sb = new StringBuilder();
@@ -161,8 +190,7 @@ public class CardPool extends ItemPool<PaperCard> {
         for (Entry<PaperCard, Integer> e : this) {
             if (isFirst) {
                 isFirst = false;
-            }
-            else {
+            } else {
                 sb.append(", ");
             }
             sb.append(e.getValue()).append(" x ").append(e.getKey().getName());
@@ -171,6 +199,7 @@ public class CardPool extends ItemPool<PaperCard> {
     }
 
     private final static Pattern p = Pattern.compile("((\\d+)\\s+)?(.*?)");
+
     public static CardPool fromCardList(final Iterable<String> lines) {
         CardPool pool = new CardPool();
 
@@ -182,7 +211,9 @@ public class CardPool extends ItemPool<PaperCard> {
         final Iterator<String> lineIterator = lines.iterator();
         while (lineIterator.hasNext()) {
             final String line = lineIterator.next();
-            if (line.startsWith(";") || line.startsWith("#")) { continue; } // that is a comment or not-yet-supported card
+            if (line.startsWith(";") || line.startsWith("#")) {
+                continue;
+            } // that is a comment or not-yet-supported card
 
             final Matcher m = p.matcher(line.trim());
             m.matches();
@@ -207,7 +238,7 @@ public class CardPool extends ItemPool<PaperCard> {
         boolean isFirst = true;
 
         for (final Entry<PaperCard, Integer> e : main2sort) {
-            if(!isFirst)
+            if (!isFirst)
                 sb.append(separator);
             else
                 isFirst = false;
@@ -222,13 +253,14 @@ public class CardPool extends ItemPool<PaperCard> {
 
     /**
      * Applies a predicate to this CardPool's cards.
+     *
      * @param predicate the Predicate to apply to this CardPool
      * @return a new CardPool made from this CardPool with only the cards that agree with the provided Predicate
      */
-    public CardPool getFilteredPool(Predicate<PaperCard> predicate){
+    public CardPool getFilteredPool(Predicate<PaperCard> predicate) {
         CardPool filteredPool = new CardPool();
-        for(PaperCard pc : this.items.keySet()){
-            if(predicate.apply(pc)) filteredPool.add(pc);
+        for (PaperCard pc : this.items.keySet()) {
+            if (predicate.apply(pc)) filteredPool.add(pc);
         }
         return filteredPool;
     }
