@@ -193,7 +193,7 @@ public class Cost implements Serializable {
     }
 
     private Cost() {
-    	
+
     }
 
     private Cost(int genericMana) {
@@ -440,7 +440,13 @@ public class Cost implements Serializable {
         if (parse.startsWith("RevealFromExile<")) {
             final String[] splitStr = abCostParse(parse, 3);
             final String description = splitStr.length > 2 ? splitStr[2] : null;
-            return new CostReveal(splitStr[0], splitStr[1], description, ZoneType.Exile);
+            return new CostReveal(splitStr[0], splitStr[1], description, "Exile");
+        }
+
+        if (parse.startsWith("RevealOrChoose<")) {
+            final String[] splitStr = abCostParse(parse, 3);
+            final String description = splitStr.length > 2 ? splitStr[2] : null;
+            return new CostReveal(splitStr[0], splitStr[1], description, "Hand,Battlefield");
         }
 
         if (parse.startsWith("ExiledMoveToGrave<")) {

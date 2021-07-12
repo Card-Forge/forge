@@ -1,0 +1,11 @@
+Name:Reaper's Talisman
+ManaCost:B
+Types:Artifact Equipment
+K:Equip:2
+T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Execute$ TripPump | TriggerDescription$ Whenever equipped creature attacks, it gains deathtouch until end of turn.
+SVar:TripPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | KW$ Deathtouch
+T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Alone$ True | Execute$ TrigLoseLife | TriggerDescription$ Whenever equipped creature attacks alone, defending player loses 2 life and you gain 2 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredDefendingPlayer | LifeAmount$ 2 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
+DeckHas:Ability$LifeGain
+Oracle:Whenever equipped creature attacks, it gains deathtouch until end of turn.\nWhenever equipped creature attacks alone, defending player loses 2 life and you gain 2 life.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

@@ -1,0 +1,10 @@
+Name:Devour Intellect
+ManaCost:B
+Types:Sorcery
+A:SP$ Pump | TgtPrompt$ Select target opponent | ValidTgt$ Opponent | SubAbility$ DBBranch
+SVar:DBBranch:DB$ Branch | BranchConditionSVar$ TreasureCheck | BranchConditionSVarCompare$ GE1 | FalseSubAbility$ DBDiscard | TrueSubAbility$ DBTreasureDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ Targeted | NumCards$ 1 | Mode$ TgtChoose
+SVar:DBTreasureDiscard:DB$ Discard | Defined$ Targeted | NumCards$ 1 | Mode$ RevealYouChoose | DiscardValid$ Card.nonLand
+SVar:TreasureCheck:Count$CastTotalManaSpent Treasure
+SVar:AIPreference:ManaFrom$Treasure
+Oracle:Target opponent discards a card. If mana from a Treasure was spent to cast this spell, instead that player reveals their hand, you choose a nonland card from it, then that player discards that card.
