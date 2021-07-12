@@ -1,0 +1,9 @@
+Name:Elturgard Ranger
+ManaCost:4 G
+Types:Creature Human Elf Ranger
+PT:4/1
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 2/2 green Wolf creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_2_2_wolf | TokenOwner$ You 
+DeckHas:Ability$Token
+Oracle:Reach\nWhen Elturgard Ranger enters the battlefield, create a 2/2 green Wolf creature token.
