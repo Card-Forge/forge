@@ -1,0 +1,8 @@
+Name:Sudden Insight
+ManaCost:4 U U
+Types:Instant
+A:SP$ PumpAll | ValidCards$ Card.YouOwn+nonLand | PumpZone$ Graveyard | RememberAllPumped$ True | SubAbility$ DBDraw | StackDescription$ SpellDescription | SpellDescription$ Draw a card for each different mana value among nonland cards in your graveyard.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$DifferentCMC
+Oracle:Draw a card for each different mana value among nonland cards in your graveyard.
