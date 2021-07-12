@@ -533,7 +533,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             return null;
         }
 
-        if (cost.getRevealFrom().equals(ZoneType.Exile)) {
+        if (cost.getRevealFrom().get(0).equals(ZoneType.Exile)) {
             hand = CardLists.getValidCards(hand, type.split(";"), player, source, ability);
             return PaymentDecision.card(getBestCreatureAI(hand));
         }
