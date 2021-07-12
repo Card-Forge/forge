@@ -1,0 +1,6 @@
+Name:Boots of Speed
+ManaCost:R
+Types:Artifact Equipment
+K:Equip:1
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Haste | AddPower$ 1 | Description$ Equipped creature gets +1/+0 and has haste.
+Oracle:Equipped creature gets +1/+0 and has haste.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
