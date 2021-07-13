@@ -29,7 +29,6 @@ import forge.util.MyRandom;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
@@ -48,10 +47,35 @@ public class CardPool extends ItemPool<PaperCard> {
         this.addAll(cards);
     }
 
-    public void add(final String cardName, final int amount) {
-        if (cardName.contains("|")) {
-            // an encoded cardName with set and possibly art index was passed, split it and pass in full
-            String[] splitCardName = StringUtils.split(cardName, "|");
+    public void add(final String cardRequest, final int amount) {
+
+        PaperCard paperCard = StaticData.instance().getCommonCards().getCard(cardRequest);
+        final boolean isCommonCard = paperCard != null;
+
+        if (!isCommonCard) {
+            paperCard = StaticData.instance().getCustomCards().getCard(cardRequest);
+
+            if (paperCard == null) // not a custom card
+                paperCard = StaticData.instance().getVariantCards().getCard(cardRequest);
+
+            if (paperCard == null) {  // not even a variant then
+                StaticData.instance().attemptToLoadCard(cardRequest);
+                paperCard = StaticData.instance().getVariantCards().getCard(cardRequest);
+            }
+        }
+
+        if (paperCard == null){
+            System.err.print("An unsupported card was requested: \"" + cardRequest + "\". ");
+            paperCard = StaticData.instance().getCommonCards().createUnsupportedCard(cardRequest);
+        }
+        this.add(paperCard, amount);
+
+        // @leriomaggio: The following is a useless replication of the logic already in CardDb for CardRequest parsing!
+        // This should be removed
+        /*
+        if (cardRequest.contains("|")) {
+            // an encoded cardRequest with set and possibly art index was passed, split it and pass in full
+            String[] splitCardName = StringUtils.split(cardRequest, "|");
             if (splitCardName.length == 2) {
                 // set specified
                 this.add(splitCardName[0], splitCardName[1], amount);
@@ -60,8 +84,8 @@ public class CardPool extends ItemPool<PaperCard> {
                 this.add(splitCardName[0], splitCardName[1], Integer.parseInt(splitCardName[2]), amount);
             }
         } else {
-            this.add(cardName, null, IPaperCard.DEFAULT_ART_INDEX, amount);
-        }
+            this.add(cardRequest, null, IPaperCard.DEFAULT_ART_INDEX, amount);
+        } */
     }
 
     public void add(final String cardName, final String setCode) {
@@ -86,6 +110,7 @@ public class CardPool extends ItemPool<PaperCard> {
             }
         }
 
+        // TODO: @leriomaggio from here on, this could be optimised!
         int artCount = IPaperCard.DEFAULT_ART_INDEX;
         if (paperCard != null) {
             setCode = paperCard.getEdition();
@@ -172,27 +197,24 @@ public class CardPool extends ItemPool<PaperCard> {
     private final static Pattern p = Pattern.compile("((\\d+)\\s+)?(.*?)");
     public static CardPool fromCardList(final Iterable<String> lines) {
         CardPool pool = new CardPool();
-
-
         if (lines == null) {
             return pool;
         }
-
-        final Iterator<String> lineIterator = lines.iterator();
-        while (lineIterator.hasNext()) {
-            final String line = lineIterator.next();
-            if (line.startsWith(";") || line.startsWith("#")) { continue; } // that is a comment or not-yet-supported card
+        for (String line : lines) {
+            if (line.startsWith(";") || line.startsWith("#")) {
+                continue;
+            } // that is a comment or not-yet-supported card
 
             final Matcher m = p.matcher(line.trim());
-            m.matches();
-            final String sCnt = m.group(2);
-            final String cardName = m.group(3);
-            if (StringUtils.isBlank(cardName)) {
+            boolean matches = m.matches();
+            if (!matches)
                 continue;
-            }
-
+            final String sCnt = m.group(2);
+            final String cardRequest = m.group(3);
+            if (StringUtils.isBlank(cardRequest))
+                continue;
             final int count = sCnt == null ? 1 : Integer.parseInt(sCnt);
-            pool.add(cardName, count);
+            pool.add(cardRequest, count);
         }
         return pool;
     }
