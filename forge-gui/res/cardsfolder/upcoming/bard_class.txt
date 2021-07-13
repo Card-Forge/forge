@@ -1,0 +1,14 @@
+Name:Bard Class
+ManaCost:R G
+Types:Enchantment Class
+K:Class:3:R G,3 R G
+R:Event$ Moved | ClassLevel$ 1 | ActiveZones$ Battlefield | ValidCard$ Creature.Legendary+YouCtrl | ReplaceWith$ EtbAddCounter | Destination$ Battlefield | Description$ Legendary creatures you control enter the battlefield with an additional +1/+1 counter on them.
+SVar:EtbAddCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ ToBattlefield
+SVar:ToBattlefield:DB$ InternalEtbReplacement
+S:Mode$ ReduceCost | ClassLevel$ 2 | ValidCard$ Legendary | Type$ Spell | Activator$ You | Amount$ 1 | Color$ R G | Description$ Legendary spells you cast cost {R}{G} less to cast. This effect reduces only the amount of colored mana you pay.
+T:Mode$ SpellCast | ClassLevel$ 3 | ValidCard$ Legendary | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigImpulsiveDraw | TriggerDescription$ Whenever you cast a legendary spell, exile the top two cards of your library. You may play them this turn.
+SVar:TrigImpulsiveDraw:DB$ Dig | Defined$ TriggeredPlayer | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | EffectOwner$ TriggeredPlayer | RememberObjects$ RememberedCard | StaticAbilities$ StPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
+SVar:StPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play them this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:(Gain the next level as a sorcery to add its ability.)\nLegendary creatures you control enter the battlefield with an additional +1/+1 counter on them.\n{R}{G}: Level 2\nLegendary spells you cast cost {R}{G} less to cast. This effect reduces only the amount of colored mana you pay.\n{3}{R}{G}: Level 3\nWhenever you cast a legendary spell, exile the top two cards of your library. You may play them this turn.

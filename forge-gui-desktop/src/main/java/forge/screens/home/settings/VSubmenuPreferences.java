@@ -111,6 +111,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbUseSentry = new OptionsCheckBox(localizer.getMessage("cbUseSentry"));
     private final JCheckBox cbEnableUnknownCards = new OptionsCheckBox(localizer.getMessage("lblEnableUnknownCards"));
     private final JCheckBox cbEnableNonLegalCards = new OptionsCheckBox(localizer.getMessage("lblEnableNonLegalCards"));
+    private final JCheckBox cbEnableCustomCards = new OptionsCheckBox(localizer.getMessage("lblEnableCustomCards"));
     private final JCheckBox cbUseExperimentalNetworkStream = new OptionsCheckBox(localizer.getMessage("lblExperimentalNetworkCompatibility"));
 
     private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<>();
@@ -303,6 +304,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbEnableNonLegalCards, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlEnableNonLegalCards")), descriptionConstraints);
+
+        pnlPrefs.add(cbEnableCustomCards, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlEnableCustomCards")), descriptionConstraints);
 
         pnlPrefs.add(cbUseExperimentalNetworkStream, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlExperimentalNetworkCompatibility")), descriptionConstraints);
@@ -617,6 +621,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbEnableNonLegalCards() {
         return cbEnableNonLegalCards;
+    }
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbEnableCustomCards() {
+        return cbEnableCustomCards;
     }
 
     /** @return {@link javax.swing.JCheckBox} */

@@ -1,0 +1,6 @@
+Name:Burning Hands
+ManaCost:1 R
+Types:Instant
+A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature,Planeswalker | NumDmg$ 2 | ConditionDefined$ Targeted | ConditionPresent$ Card.Green | ConditionCompare$ EQ0 | SubAbility$ DBExtra | StackDescription$ SpellDescription | SpellDescription$ CARDNAME deals 2 damage to target creature or planeswalker. If that permanent is green, CARDNAME deals 6 damage instead.
+SVar:DBExtra:DB$ DealDamage | Defined$ Targeted | NumDmg$ 6 | ConditionDefined$ Targeted | ConditionPresent$ Card.Green | ConditionCompare$ EQ1 | StackDescription$ None
+Oracle:Burning Hands deals 2 damage to target creature or planeswalker. If that permanent is green, Burning Hands deals 6 damage instead.

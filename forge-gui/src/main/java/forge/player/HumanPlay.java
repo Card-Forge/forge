@@ -702,7 +702,7 @@ public class HumanPlay {
 
     public static boolean payManaCost(final PlayerControllerHuman controller, final ManaCost realCost, final CostPartMana mc, final SpellAbility ability, final Player activator, String prompt, ManaConversionMatrix matrix, boolean isActivatedSa) {
         final Card source = ability.getHostCard();
-        ManaCostBeingPaid toPay = new ManaCostBeingPaid(realCost, mc.getRestiction());
+        ManaCostBeingPaid toPay = new ManaCostBeingPaid(realCost, mc.getRestriction());
 
         String xInCard = source.getSVar("X");
         String xColor = ability.getParam("XColor");

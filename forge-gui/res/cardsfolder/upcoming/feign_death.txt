@@ -1,0 +1,9 @@
+Name:Feign Death 
+ManaCost:B
+Types:Instant
+A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBAnimate | StackDescription$ Until end of turn, {c:Targeted} gains "When this creature dies, return it to the battlefield tapped under its owner's control with a +1/+1 counter on it." | SpellDescription$ Until end of turn, target creature gains "When this creature dies, return it to the battlefield tapped under its owner's control with a +1/+1 counter on it."
+SVar:DBAnimate:DB$ Animate | Triggers$ DiesTrigger | Defined$ ParentTarget | StackDescription$ None
+SVar:DiesTrigger:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When this creature dies, return it to the battlefield tapped under its owner's control with a +1/+1 counter on it.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True  | Defined$ TriggeredNewCardLKICopy | SubAbility$ TrigPuCounter
+SVar:TrigPuCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | Defined$ TriggeredNewCardLKICopy
+Oracle:Until end of turn, target creature gains "When this creature dies, return it to the battlefield tapped under its owner's control with a +1/+1 counter on it."

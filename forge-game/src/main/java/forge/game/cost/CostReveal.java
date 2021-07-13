@@ -17,6 +17,9 @@
  */
 package forge.game.cost;
 
+import java.util.Arrays;
+import java.util.List;
+
 import com.google.common.base.Predicate;
 
 import forge.game.GameLogEntryType;
@@ -39,15 +42,15 @@ public class CostReveal extends CostPartWithList {
      */
     private static final long serialVersionUID = 1L;
 
-    private ZoneType revealFrom = ZoneType.Hand;
+    private List<ZoneType> revealFrom = Arrays.asList(ZoneType.Hand);
 
     public CostReveal(final String amount, final String type, final String description) {
         super(amount, type, description);
     }
 
-    public CostReveal(final String amount, final String type, final String description, final ZoneType zoneType) {
+    public CostReveal(final String amount, final String type, final String description, final String zoneType) {
         super(amount, type, description);
-        this.revealFrom = zoneType;
+        this.revealFrom = ZoneType.listValueOf(zoneType);
     }
 
     @Override
@@ -56,7 +59,7 @@ public class CostReveal extends CostPartWithList {
     @Override
     public boolean isRenewable() { return true; }
 
-    public ZoneType getRevealFrom() {
+    public List<ZoneType> getRevealFrom() {
         return revealFrom;
     }
 
@@ -83,7 +86,7 @@ public class CostReveal extends CostPartWithList {
         final Integer amount = this.convertAmount();
 
         if (this.payCostFromSource()) {
-            return source.isInZone(revealFrom);
+            return revealFrom.contains(source.getLastKnownZone().getZoneType());
         } else if (this.getType().equals("Hand")) {
             return true;
         } else if (this.getType().equals("SameColor")) {
@@ -134,7 +137,16 @@ public class CostReveal extends CostPartWithList {
         }
 
         sb.append(" from your ");
-        sb.append(revealFrom.getTranslatedName());
+        sb.append(revealFrom.get(0).getTranslatedName());
+
+        if (revealFrom.size() > 1) {
+            final StringBuilder desc = new StringBuilder();
+            desc.append(this.getTypeDescription() == null ? this.getType() : this.getTypeDescription());
+            desc.append(" card");
+            sb.append(" or choose ");
+            sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), desc.toString()));
+            sb.append(" you control");
+        }
 
         return sb.toString();
     }
@@ -143,7 +155,13 @@ public class CostReveal extends CostPartWithList {
     protected Card doPayment(SpellAbility ability, Card targetCard) {
         targetCard.getGame().getAction().reveal(new CardCollection(targetCard), ability.getActivatingPlayer());
         StringBuilder sb = new StringBuilder();
-        sb.append(ability.getActivatingPlayer()).append(" reveals ").append(targetCard).append(" to pay a cost for ");
+        sb.append(ability.getActivatingPlayer());
+        if (targetCard.isInZone(ZoneType.Hand)) {
+            sb.append(" reveals ");
+        } else {
+            sb.append(" chooses ");
+        }
+        sb.append(targetCard).append(" to pay a cost for ");
         sb.append(ability);
         targetCard.getGame().getGameLog().add(GameLogEntryType.INFORMATION, sb.toString());
         return targetCard;
@@ -177,7 +195,7 @@ public class CostReveal extends CostPartWithList {
     @Override
     public int paymentOrder() {
         // Caller of the Untamed needs the reveal to happen before the mana cost
-        if (!revealFrom.equals(ZoneType.Hand)) { return -1; }
+        if (!revealFrom.get(0).equals(ZoneType.Hand)) { return -1; }
         return 5;
     }
 }

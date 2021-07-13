@@ -1,0 +1,11 @@
+Name:Kalain, Reclusive Painter
+ManaCost:B R
+Types:Legendary Creature Human Elf Bard
+PT:1/2
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ DBToken | TriggerDescription$ When CARDNAME enters the battlefield, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac
+R:Event$ Moved | ActiveZones$ Battlefield | ValidCard$ Creature.YouCtrl+Other | Destination$ Battlefield | ReplaceWith$ EnterWithP1P1 | Description$ Other creatures you control enter the battlefield with an additional +1/+1 counter on them for each mana from a Treasure spent to cast them.
+SVar:EnterWithP1P1:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | WithCountersType$ P1P1 | WithCountersAmount$ Treasure | Defined$ ReplacedCard
+SVar:Treasure:ReplacedCardLKI$CastTotalManaSpent Treasure
+DeckHas:Ability$Token & Ability$Sacrifice & Ability$Counters
+Oracle:When Kalain, Reclusive Painter enters the battlefield, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")\nOther creatures you control enter the battlefield with an additional +1/+1 counter on them for each mana from a Treasure spent to cast them.

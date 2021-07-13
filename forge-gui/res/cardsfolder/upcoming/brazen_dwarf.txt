@@ -1,0 +1,7 @@
+Name:Brazen Dwarf
+ManaCost:1 R
+Types:Creature Dwarf Shaman
+PT:1/3
+T:Mode$ RolledDieOnce | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigDamage | TriggerDescription$ Whenever you roll one or more dice, CARDNAME deals 1 damage to each opponent.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 1
+Oracle:Whenever you roll one or more dice, Brazen Dwarf deals 1 damage to each opponent.

@@ -1,0 +1,7 @@
+Name:Mimic
+ManaCost:2
+Types:Artifact Treasure
+A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ Animate | Cost$ 2 | Defined$ Self | Power$ 3 | Toughness$ 3 | Types$ Artifact,Creature,Shapeshifter | SpellDescription$ CARDNAME becomes a Shapeshifter artifact creature with base power and toughness 3/3 until end of turn.
+AI:RemoveDeck:Random
+Oracle:{T}, Sacrifice Mimic: Add one mana of any color.\n{2}: Mimic becomes a Shapeshifter artifact creature with base power and toughness 3/3 until end of turn.

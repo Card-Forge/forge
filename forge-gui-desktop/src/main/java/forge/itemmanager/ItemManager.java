@@ -22,12 +22,7 @@ import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
 import javax.swing.JMenu;
@@ -48,12 +43,14 @@ import com.google.common.collect.Lists;
 import forge.gui.GuiUtils;
 import forge.gui.UiCommand;
 import forge.item.InventoryItem;
+import forge.item.PaperCard;
 import forge.itemmanager.filters.ItemFilter;
 import forge.itemmanager.views.ImageView;
 import forge.itemmanager.views.ItemListView;
 import forge.itemmanager.views.ItemTableColumn;
 import forge.itemmanager.views.ItemView;
 import forge.localinstance.skin.FSkinProp;
+import forge.screens.deckeditor.views.VCardCatalog;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.ContextMenuBuilder;
 import forge.toolbox.FComboBox;
@@ -1278,5 +1275,24 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         }
 
         menu.show(e.getComponent(), e.getX(), e.getY());
+    }
+
+    protected List<String> filteredSetCodesInCatalog = null;
+    protected List<String> getFilteredSetCodesInCatalog(){
+        if (filteredSetCodesInCatalog == null) {
+            ItemManager<? extends InventoryItem> cardsManager = VCardCatalog.SINGLETON_INSTANCE.getItemManager();
+            if (cardsManager == null)
+                return null;
+            try {
+                ItemPool<PaperCard> cardsPool = (ItemPool<PaperCard>) cardsManager.getPool();
+                Set<String> uniqueSetCodes = new HashSet<>();  // init
+                for (Entry<PaperCard, Integer> entry : cardsPool)
+                    uniqueSetCodes.add(entry.getKey().getEdition());
+                filteredSetCodesInCatalog = new ArrayList<>(uniqueSetCodes);
+            } catch (ClassCastException ex) {
+                return null;
+            }
+        }
+        return filteredSetCodesInCatalog;
     }
 }

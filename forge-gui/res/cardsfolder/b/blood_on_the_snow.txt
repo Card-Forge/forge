@@ -5,7 +5,8 @@ A:SP$ Charm | Cost$ 4 B B | Choices$ DestroyCtrs,DestroyPWs | CharmNum$ 1 | Spel
 SVar:DestroyCtrs:DB$ DestroyAll | ValidCards$ Creature | SubAbility$ DBReturn | SpellDescription$ Destroy all creatures.
 SVar:DestroyPWs:DB$ DestroyAll | ValidCards$ Planeswalker | SubAbility$ DBReturn | SpellDescription$ Destroy all planeswalkers.
 SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Hidden$ True | Mandatory$ True | ChangeType$ Creature.YouOwn+cmcLEX,Planeswalker.YouOwn+cmcLEX | SpellDescription$ Then return a creature or planeswalker card with mana value X or less from your graveyard to the battlefield, where X is the amount of {S} spent to cast this spell. ({S} is mana from a snow source.)
-SVar:X:Count$CastTotalSnowManaSpent
+SVar:X:Count$CastTotalManaSpent Snow
+SVar:AIPreference:ManaFrom$Snow
 AI:RemoveDeck:Random
 DeckHints:Type$Snow
 Oracle:Choose one —\n• Destroy all creatures.\n• Destroy all planeswalkers.\nThen return a creature or planeswalker card with mana value X or less from your graveyard to the battlefield, where X is the amount of {S} spent to cast this spell. ({S} is mana from a snow source.)

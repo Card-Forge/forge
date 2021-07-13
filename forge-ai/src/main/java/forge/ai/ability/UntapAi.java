@@ -374,7 +374,7 @@ public class UntapAi extends SpellAbilityAi {
                     if (!ComputerUtilMana.hasEnoughManaSourcesToCast(ab, ai)) {
                         // TODO: Currently limited to predicting something that can be paid with any color,
                         // can ideally be improved to work by color.
-                        ManaCostBeingPaid reduced = new ManaCostBeingPaid(ab.getPayCosts().getCostMana().getManaCostFor(ab), ab.getPayCosts().getCostMana().getRestiction());
+                        ManaCostBeingPaid reduced = new ManaCostBeingPaid(ab.getPayCosts().getCostMana().getManaCostFor(ab), ab.getPayCosts().getCostMana().getRestriction());
                         reduced.decreaseShard(ManaCostShard.GENERIC, untappingCards.size());
                         if (ComputerUtilMana.canPayManaCost(reduced, ab, ai)) {
                             CardCollection manaLandsTapped = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),

@@ -1234,7 +1234,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         return drawCards(1, null);
     }
 
-    public void surveil(int num, SpellAbility cause) {
+    public void surveil(int num, SpellAbility cause, CardZoneTable table) {
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
         repParams.put(AbilityKey.Source, cause);
         repParams.put(AbilityKey.SurveilNum, num);
@@ -1265,7 +1265,9 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         if (toGrave != null) {
             for (Card c : toGrave) {
-                getGame().getAction().moveToGraveyard(c, cause);
+                ZoneType oZone = c.getZone().getZoneType();
+                Card moved = getGame().getAction().moveToGraveyard(c, cause);
+                table.put(oZone, moved.getZone().getZoneType(), moved);
                 numToGrave++;
             }
         }
@@ -2203,8 +2205,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         if (incR.length > 1) {
             final String excR = incR[1];
-            final String[] exR = excR.split("\\+"); // Exclusive Restrictions
-            // are ...
+            final String[] exR = excR.split("\\+"); // Exclusive Restrictions are ...
             for (int j = 0; j < exR.length; j++) {
                 if (!hasProperty(exR[j], sourceController, source, spellAbility)) {
                     return false;

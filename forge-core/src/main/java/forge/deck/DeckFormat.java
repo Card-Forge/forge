@@ -337,7 +337,12 @@ public enum DeckFormat {
 
         // should group all cards by name, so that different editions of same card are really counted as the same card
         for (final Entry<String, Integer> cp : Aggregates.groupSumBy(allCards, PaperCard.FN_GET_NAME)) {
-            final IPaperCard simpleCard = StaticData.instance().getCommonCards().getCard(cp.getKey());
+            IPaperCard simpleCard = StaticData.instance().getCommonCards().getCard(cp.getKey());
+            if (simpleCard == null) {
+                simpleCard = StaticData.instance().getCustomCards().getCard(cp.getKey());
+                if (simpleCard != null && !StaticData.instance().isEnableCustomCardsInDecks())
+                    return TextUtil.concatWithSpace("contains a Custom Card:", cp.getKey(), "\nPlease Enable Custom Cards in Forge Preferences to use this deck.");
+            }
             // Might cause issues since it ignores "Special" Cards
             if (simpleCard == null) {
                 return TextUtil.concatWithSpace("contains the nonexisting card", cp.getKey());

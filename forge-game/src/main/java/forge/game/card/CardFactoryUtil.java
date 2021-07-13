@@ -839,7 +839,6 @@ public class CardFactoryUtil {
 
             inst.addTrigger(cascadeTrigger);
         } else if (keyword.startsWith("Champion")){
-
             final String[] k = keyword.split(":");
             final String[] valid = k[1].split(",");
             String desc = Lang.joinHomogenous(Lists.newArrayList(valid), null, "or");
@@ -2557,6 +2556,25 @@ public class CardFactoryUtil {
             sa.setAlternativeCost(AlternativeCost.Bestow);
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
+        } else if (keyword.startsWith("Class")) {
+            final String[] k = keyword.split(":");
+            final String[] costs = k[2].split(",");
+            if (costs.length != Integer.valueOf(k[1]) - 1) {
+                throw new RuntimeException("Class max differ from cost amount");
+            }
+
+            for (int i = 0; i < costs.length; ++i) {
+                final String cost = costs[i];
+                final StringBuilder sbClass = new StringBuilder();
+                sbClass.append("AB$ ClassLevelUp | Cost$ ").append(cost);
+                sbClass.append(" | ClassLevel$ EQ").append(i + 1);
+                sbClass.append(" | SorcerySpeed$ True");
+                sbClass.append(" | StackDescription$ SpellDescription | SpellDescription$ Level ").append(i + 2);
+
+                final SpellAbility sa = AbilityFactory.getAbility(sbClass.toString(), card);
+                sa.setIntrinsic(intrinsic);
+                inst.addSpellAbility(sa);
+            }
         } else if (keyword.startsWith("Dash")) {
             final String[] k = keyword.split(":");
             final Cost dashCost = new Cost(k[1], false);
@@ -2628,8 +2646,10 @@ public class CardFactoryUtil {
             String[] k = keyword.split(":");
             // Get cost string
             String equipCost = k[1];
-            String valid = k.length > 2 ? k[2] : "Creature.YouCtrl";
-            String vstr = k.length > 3 ? k[3] : "creature";
+            String valid = k.length > 2 && !k[2].isEmpty() ? k[2] : "Creature.YouCtrl";
+            String vstr = k.length > 3 && !k[3].isEmpty() ? k[3] : "creature";
+            String extra =  k.length > 4 ? k[4] : "";
+            String extraDesc =  k.length > 5 ? k[5] : "";
             // Create attach ability string
             final StringBuilder abilityStr = new StringBuilder();
             abilityStr.append("AB$ Attach | Cost$ ");
@@ -2642,7 +2662,7 @@ public class CardFactoryUtil {
                 abilityStr.append("| ").append(card.getSVar("AttachAi"));
             }
             abilityStr.append("| PrecostDesc$ Equip");
-            if (k.length > 3) {
+            if (k.length > 3 && !k[3].isEmpty()) {
                 abilityStr.append(" ").append(vstr);
             }
             Cost cost = new Cost(equipCost, true);
@@ -2652,7 +2672,14 @@ public class CardFactoryUtil {
                 abilityStr.append(" ");
             }
             abilityStr.append("| CostDesc$ ").append(cost.toSimpleString()).append(" ");
-            abilityStr.append("| SpellDescription$ (").append(inst.getReminderText()).append(")");
+            abilityStr.append("| SpellDescription$ ");
+            if (!extraDesc.isEmpty()) {
+                abilityStr.append(". ").append(extraDesc).append(". ");
+            }
+            abilityStr.append("(").append(inst.getReminderText()).append(")");
+            if (!extra.isEmpty()) {
+                abilityStr.append("| ").append(extra);
+            }
             // instantiate attach ability
             final SpellAbility newSA = AbilityFactory.getAbility(abilityStr.toString(), card);
             newSA.setIntrinsic(intrinsic);
@@ -2992,7 +3019,7 @@ public class CardFactoryUtil {
                     "| SpellDescription$ (" + inst.getReminderText() + ")";
 
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
-            sa.setSVar("ScavengeX", "Count$CardPower");
+            sa.setSVar("ScavengeX", "Exiled$CardPower");
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
 

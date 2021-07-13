@@ -182,6 +182,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private boolean foretoldThisTurn = false;
     private boolean foretoldByEffect = false;
 
+    private int classLevel = 1;
+
     private long bestowTimestamp = -1;
     private long transformedTimestamp = 0;
     private long mutatedTimestamp = -1;
@@ -331,6 +333,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         view.updateChangedColorWords(this);
         view.updateChangedTypes(this);
         view.updateSickness(this);
+        view.updateClassLevel(this);
     }
 
     public boolean changeToState(final CardStateName state) {
@@ -2100,6 +2103,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     String desc = "(As this Saga enters and after your draw step, "
                         + " add a lore counter. Sacrifice after " + Strings.repeat("I", Integer.valueOf(k[1])) + ".)";
                     sbLong.append(desc);
+                } else if (keyword.startsWith("Class")) {
+                    sbLong.append("(Gain the next level as a sorcery to add its ability.)");
                 }
                 else {
                     if ((i != 0) && (sb.length() != 0)) {
@@ -2189,7 +2194,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         // here. The rest will be printed later.
         StringBuilder replacementEffects = new StringBuilder();
         for (final ReplacementEffect replacementEffect : state.getReplacementEffects()) {
-            if (!replacementEffect.isSecondary()) {
+            if (!replacementEffect.isSecondary() && !replacementEffect.isClassAbility()) {
                 String text = replacementEffect.getDescription();
                 // Get original description since text might be translated
                 if (replacementEffect.hasParam("Description") &&
@@ -2234,7 +2239,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
         // Triggered abilities
         for (final Trigger trig : state.getTriggers()) {
-            if (!trig.isSecondary()) {
+            if (!trig.isSecondary() && !trig.isClassAbility()) {
                 String trigStr = trig.replaceAbilityText(trig.toString(), state);
                 sb.append(trigStr.replaceAll("\\\\r\\\\n", "\r\n")).append("\r\n");
             }
@@ -2245,7 +2250,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
         // static abilities
         for (final StaticAbility stAb : state.getStaticAbilities()) {
-            if (!stAb.isSecondary()) {
+            if (!stAb.isSecondary() && !stAb.isClassAbility()) {
                 final String stAbD = stAb.toString();
                 if (!stAbD.equals("")) {
                     sb.append(stAbD).append("\r\n");
@@ -2257,7 +2262,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
         for (final SpellAbility sa : state.getSpellAbilities()) {
             // This code block is not shared by instants or sorceries. We don't need to check for permanence.
-            if (sa == null || sa.isSecondary()) {
+            if (sa == null || sa.isSecondary() || sa.isClassAbility()) {
                 continue;
             }
 
@@ -2322,6 +2327,48 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         }
                         sb.append(desc);
                         sb.append("\r\n");
+                    }
+                }
+            }
+        }
+
+        // Class Abilities
+        if (isClassCard()) {
+            String linebreak = "\r\n\r\n";
+            sb.append(linebreak);
+            // Currently the maximum levels of all Class cards are all 3
+            for (int level = 1; level <= 3; ++level) {
+                boolean disabled = level > getClassLevel() && isInZone(ZoneType.Battlefield);
+                final String grayTag = "<span style=\"color:gray;\">";
+                final String endTag = "</span>";
+                for (final Trigger trig : state.getTriggers()) {
+                    if (trig.isClassLevelNAbility(level) && !trig.isSecondary()) {
+                        if (disabled) sb.append(grayTag);
+                        sb.append(trig.toString());
+                        if (disabled) sb.append(endTag);
+                        sb.append(linebreak);
+                    }
+                }
+                for (final ReplacementEffect re : state.getReplacementEffects()) {
+                    if (re.isClassLevelNAbility(level) && !re.isSecondary()) {
+                        if (disabled) sb.append(grayTag);
+                        sb.append(re.getDescription());
+                        if (disabled) sb.append(endTag);
+                        sb.append(linebreak);
+                    }
+                }
+                for (final StaticAbility st : state.getStaticAbilities()) {
+                    if (st.isClassLevelNAbility(level) && !st.isSecondary()) {
+                        if (disabled) sb.append(grayTag);
+                        sb.append(st.toString());
+                        if (disabled) sb.append(endTag);
+                        sb.append(linebreak);
+                    }
+                }
+                // Currently all activated abilities on Class cards are level up abilities
+                for (final SpellAbility sa : state.getSpellAbilities()) {
+                    if (sa.isClassLevelNAbility(level) && !sa.isSecondary()) {
+                        sb.append(sa.toString()).append(linebreak);
                     }
                 }
             }
@@ -3390,7 +3437,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final CardTypeView getType(CardState state) {
-        if (changedCardTypes.isEmpty()) {
+        if (changedCardTypes.isEmpty() && changedCardTypesCharacterDefining.isEmpty()) {
             return state.getType();
         }
         return state.getType().getTypeWithChanges(getChangedCardTypes());
@@ -3402,6 +3449,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public Map<Long, CardChangedType> getChangedCardTypesMap() {
         return Collections.unmodifiableMap(changedCardTypes);
+    }
+    public Map<Long, CardChangedType> getChangedCardTypesCharacterDefiningMap() {
+        return Collections.unmodifiableMap(changedCardTypesCharacterDefining);
     }
 
     public boolean clearChangedCardTypes() {
@@ -3443,8 +3493,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return changedCardKeywords;
     }
 
-    public Map<Long, CardColor> getChangedCardColors() {
+    public Map<Long, CardColor> getChangedCardColorsMap() {
         return changedCardColors;
+    }
+    public Map<Long, CardColor> getChangedCardColorsCharacterDefiningMap() {
+        return changedCardColorsCharacterDefining;
+    }
+    public Iterable<CardColor> getChangedCardColors() {
+        return Iterables.concat(changedCardColorsCharacterDefining.values(), changedCardColors.values());
     }
 
     public final void addChangedCardTypes(final CardType addType, final CardType removeType,
@@ -3497,7 +3553,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void addColor(final String s, final boolean addToColors, final long timestamp, final boolean cda) {
         (cda ? changedCardColorsCharacterDefining : changedCardColors).put(timestamp, new CardColor(s, addToColors, timestamp));
         currentState.getView().updateColors(this);
-        currentState.getView().updateHasChangeColors(!getChangedCardColors().isEmpty());
+        currentState.getView().updateHasChangeColors(!Iterables.isEmpty(getChangedCardColors()));
     }
 
     public final void removeColor(final long timestampIn) {
@@ -3507,7 +3563,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
         if (removed) {
             currentState.getView().updateColors(this);
-            currentState.getView().updateHasChangeColors(!getChangedCardColors().isEmpty());
+            currentState.getView().updateHasChangeColors(!Iterables.isEmpty(getChangedCardColors()));
         }
     }
 
@@ -3523,7 +3579,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public final ColorSet determineColor(CardState state) {
         byte colors = state.getColor();
-        for (final CardColor cc : Iterables.concat(changedCardColorsCharacterDefining.values(), changedCardColors.values())) {
+        for (final CardColor cc : getChangedCardColors()) {
             if (cc.isAdditional()) {
                 colors |= cc.getColorMask();
             } else {
@@ -5416,6 +5472,18 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         foretoldThisTurn = false;
     }
 
+    public final int getClassLevel() {
+        return classLevel;
+    }
+    public void setClassLevel(int level) {
+        classLevel = level;
+        view.updateClassLevel(this);
+        view.getCurrentState().updateAbilityText(this, getCurrentState());
+    }
+    public boolean isClassCard() {
+        return getType().hasStringType("Class");
+    }
+
     public final void animateBestow() {
         animateBestow(true);
     }
@@ -6487,6 +6555,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             this.changedCardTypes.put(entry.getKey(), entry.getValue());
         }
     }
+    public void setChangedCardTypesCharacterDefining(Map<Long, CardChangedType> changedCardTypes) {
+        this.changedCardTypesCharacterDefining.clear();
+        for (Entry<Long, CardChangedType> entry : changedCardTypes.entrySet()) {
+            this.changedCardTypesCharacterDefining.put(entry.getKey(), entry.getValue());
+        }
+    }
 
     public void setChangedCardKeywords(Map<Long, KeywordsChange> changedCardKeywords) {
         this.changedCardKeywords.clear();
@@ -6499,6 +6573,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         this.changedCardColors.clear();
         for (Entry<Long, CardColor> entry : changedCardColors.entrySet()) {
             this.changedCardColors.put(entry.getKey(), entry.getValue());
+        }
+    }
+    public void setChangedCardColorsCharacterDefining(Map<Long, CardColor> changedCardColors) {
+        this.changedCardColorsCharacterDefining.clear();
+        for (Entry<Long, CardColor> entry : changedCardColors.entrySet()) {
+            this.changedCardColorsCharacterDefining.put(entry.getKey(), entry.getValue());
         }
     }
 

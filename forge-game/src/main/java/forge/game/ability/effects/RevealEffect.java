@@ -25,13 +25,14 @@ public class RevealEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
         final boolean anyNumber = sa.hasParam("AnyNumber");
+        final boolean optional = sa.hasParam("Optional");
         int cnt = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(host, sa.getParam("NumCards"), sa) : 1;
 
         for (final Player p : getTargetPlayers(sa)) {
             if (!sa.usesTargeting() || p.canBeTargetedBy(sa)) {
                 final CardCollectionView cardsInHand = p.getZone(ZoneType.Hand).getCards();
                 if (cardsInHand.isEmpty()) {
-                    continue; 
+                    continue;
                 }
                 final CardCollection revealed = new CardCollection();
                 if (sa.hasParam("Random")) {
@@ -46,7 +47,7 @@ public class RevealEffect extends SpellAbilityEffect {
                     } else {
                         revealed.add(Aggregates.random(cardsInHand));
                     }
-                    
+
                 } else if (sa.hasParam("RevealDefined")) {
                     revealed.addAll(AbilityUtils.getDefinedCards(host, sa.getParam("RevealDefined"), sa));
                 } else {
@@ -55,10 +56,10 @@ public class RevealEffect extends SpellAbilityEffect {
                     if (sa.hasParam("RevealValid")) {
                         valid = CardLists.getValidCards(valid, sa.getParam("RevealValid"), p, host, sa);
                     }
-                    
+
                     if (valid.isEmpty())
                         continue;
-                    
+
                     if (cnt > valid.size())
                         cnt = valid.size();
 
@@ -66,8 +67,10 @@ public class RevealEffect extends SpellAbilityEffect {
                     if (anyNumber) {
                         cnt = valid.size();
                         min = 0;
+                    } else if (optional) {
+                        min = 0;
                     }
-                    
+
                     revealed.addAll(p.getController().chooseCardsToRevealFromHand(min, cnt, valid));
                 }
 
