@@ -1,0 +1,271 @@
+[metadata]
+Code=AFR
+Date=2021-07-16
+Name=Adventures in the Forgotten Realms
+MciCode=afr
+Type=Expansion
+BoosterCovers=5
+Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
+ScryfallCode=AFR
+
+[cards]
+1 C +2 Mace
+2 C Arborea Pegasus
+3 U Blink Dog
+4 M The Book of Exalted Deeds
+5 C Celestial Unicorn
+6 U Cleric Class
+7 U Cloister Gargoyle
+8 R Dancing Sword
+9 C Dawnbringer Cleric
+10 C Delver's Torch
+11 C Devoted Paladin
+12 U Divine Smite
+13 U Dragon's Disciple
+14 C Dwarfhold Champion
+15 R Flumph
+16 C Gloom Stalker
+17 M Grand Master of Flowers
+18 R Guardian of Faith
+19 C Half-Elf Monk
+20 M Icingdeath, Frost Tyrant
+21 U Ingenious Smith
+22 U Keen-Eared Sentry
+23 R Loyal Warhound
+24 C Minimus Containment
+25 U Monk of the Open Hand
+26 U Moon-Blessed Cleric
+27 R Nadaar, Selfless Paladin
+28 R Oswald Fiddlebender
+29 R Paladin Class
+30 C Paladin's Shield
+31 C Planar Ally
+32 U Plate Armor
+33 U Portable Hole
+34 C Potion of Healing
+35 C Priest of Ancient Lore
+36 U Rally Maneuver
+37 C Ranger's Hawk
+38 C Steadfast Paladin
+39 R Teleportation Circle
+40 C Veteran Dungeoneer
+41 U White Dragon
+42 C You Hear Something on Watch
+43 C You're Ambushed on the Road
+44 U Aberrant Mind Sorcerer
+45 C Air-Cult Elemental
+46 C Arcane Investigator
+47 C Bar the Gate
+48 R The Blackstaff of Waterdeep
+49 U Blue Dragon
+51 C Clever Conjurer
+52 C Contact Other Plane
+53 M Demilich
+54 U Displacer Beast
+55 C Djinni Windseer
+56 R Dragon Turtle
+57 U Eccentric Apprentice
+58 U Feywild Trickster
+59 U Fly
+60 R Grazilaxx, Illithid Scholar
+61 U Guild Thief
+62 M Iymrith, Desert Doom
+63 R Mind Flayer
+64 M Mordenkainen
+65 C Mordenkainen's Polymorph
+66 C Pixie Guide
+67 U Power of Persuasion
+68 U Ray of Frost
+69 C Rimeshield Frost Giant
+70 C Scion of Stygia
+71 C Secret Door
+72 C Shocking Grasp
+73 C Shortcut Seeker
+74 C Silver Raven
+75 C Soulknife Spy
+76 C Split the Party
+77 U Sudden Insight
+78 R Tasha's Hideous Laughter
+79 U Trickster's Talisman
+80 R True Polymorph
+81 C Wizard Class
+82 R Wizard's Spellbook
+83 C You Come to a River
+84 C You Find the Villains' Lair
+85 C You See a Guard Approach
+86 R Yuan-Ti Malison
+87 M Acererak the Archlich
+88 M Asmodeus the Archfiend
+89 C Baleful Beholder
+90 U Black Dragon
+91 M The Book of Vile Darkness
+92 U Check for Traps
+93 C Clattering Skeletons
+94 C Deadly Dispute
+95 U Death-Priest of Myrkul
+96 U Demogorgon's Clutches
+97 C Devour Intellect
+98 U Drider
+99 U Dungeon Crawler
+100 M Ebondeath, Dracolich
+101 U Eyes of the Beholder
+102 C Fates' Reversal
+103 C Feign Death
+104 R Forsworn Paladin
+105 R Gelatinous Cube
+106 C Grim Bounty
+107 U Grim Wanderer
+108 C Herald of Hadar
+109 C Hired Hexblade
+110 C Hoard Robber
+111 U Lightfoot Rogue
+112 M Lolth, Spider Queen
+113 C Manticore
+114 U Power Word Kill
+115 C Precipitous Drop
+116 U Ray of Enfeeblement
+117 U Reaper's Talisman
+118 C Sepulcher Ghoul
+119 C Shambling Ghast
+120 U Skullport Merchant
+121 R Sphere of Annihilation
+122 C Thieves' Tools
+123 C Vampire Spawn
+124 R Vorpal Sword
+125 U Warlock Class
+126 R Westgate Regent
+127 R Wight
+128 C Yuan-Ti Fang-Blade
+129 C Zombie Ogre
+130 C Armory Veteran
+131 U Barbarian Class
+132 U Battle Cry Goblin
+133 C Boots of Speed
+134 C Brazen Dwarf
+135 U Burning Hands
+136 U Chaos Channeler
+137 U Critical Hit
+138 R Delina, Wild Mage
+139 C Dragon's Fire
+140 C Dueling Rapier
+141 C Earth-Cult Elemental
+142 C Farideh's Fireball
+143 M Flameskull
+144 C Goblin Javelineer
+145 U Goblin Morningstar
+146 C Hoarding Ogre
+147 R Hobgoblin Bandit Lord
+148 C Hobgoblin Captain
+149 U Hulking Bugbear
+150 C Improvised Weaponry
+151 M Inferno of the Star Mounts
+152 C Jaded Sell-Sword
+153 C Kick in the Door
+154 U Magic Missile
+155 R Meteor Swarm
+156 R Minion of the Mighty
+157 R Orb of Dragonkind
+158 C Plundering Barbarian
+159 C Price of Loyalty
+160 U Red Dragon
+161 U Rust Monster
+162 C Swarming Goblins
+163 U Tiger-Tribe Hunter
+164 C Unexpected Windfall
+165 C Valor Singer
+166 R Wish
+167 R Xorn
+168 C You Come to the Gnoll Camp
+169 U You Find Some Prisoners
+170 U You See a Pair of Goblins
+171 R Zalto, Fire Giant Duke
+172 M Zariel, Archduke of Avernus
+173 C Bulette
+174 C Bull's Strength
+175 U Choose Your Weapon
+176 R Circle of Dreams Druid
+177 C Circle of the Moon Druid
+178 C Compelled Duel
+179 C Dire Wolf Prowler
+180 U Druid Class
+181 M Ellywick Tumblestrum
+182 C Elturgard Ranger
+183 R Find the Path
+184 R Froghemoth
+185 C Gnoll Hunter
+186 U Green Dragon
+187 C Hill Giant Herdgorger
+188 U Hunter's Mark
+189 C Inspiring Bard
+190 R Instrument of the Bards
+191 U Intrepid Outlander
+192 U Loathsome Troll
+193 R Long Rest
+194 U Lurking Roper
+195 C Neverwinter Dryad
+196 R Ochre Jelly
+197 M Old Gnawbone
+198 C Owlbear
+200 U Prosperous Innkeeper
+201 U Purple Worm
+202 U Ranger Class
+203 C Ranger's Longbow
+204 C Scaled Herbalist
+205 C Spoils of the Hunt
+206 C Sylvan Shepherd
+207 M The Tarrasque
+208 U Underdark Basilisk
+209 R Varis, Silverymoon Ranger
+210 U Wandering Troubadour
+211 R Werewolf Pack Leader
+212 U Wild Shape
+213 C You Find a Cursed Idol
+214 U You Happen On a Glade
+215 U You Meet in a Tavern
+216 R Adult Gold Dragon
+217 R Bard Class
+218 U Barrowin of Clan Undurr
+219 U Bruenor Battlehammer
+220 R Drizzt Do'Urden
+221 U Farideh, Devil's Chosen
+222 R Fighter Class
+223 U Gretchen Titchwillow
+224 U Hama Pashar, Ruin Seeker
+225 U Kalain, Reclusive Painter
+226 U Krydle of Baldur's Gate
+227 M Minsc, Beloved Ranger
+228 R Monk Class
+229 R Orcus, Prince of Undeath
+230 R Rogue Class
+231 U Shessra, Death's Whisper
+232 R Skeletal Swarming
+233 R Sorcerer Class
+234 U Targ Nar, Demon-Fang Gnoll
+235 M Tiamat
+236 U Trelasarra, Moon Dancer
+237 R Triumphant Adventurer
+238 R Volo, Guide to Monsters
+239 M Xanathar, Guild Kingpin
+241 M The Deck of Many Things
+242 U Dungeon Map
+243 R Eye of Vecna
+244 U Fifty Feet of Rope
+245 C Greataxe
+246 R Hand of Vecna
+247 C Iron Golem
+248 C Leather Armor
+249 C Mimic
+250 C Spare Dagger
+251 C Spiked Pit Trap
+252 R Treasure Chest
+253 R Cave of the Frost Dragon
+254 R Den of the Bugbear
+255 R Dungeon Descent
+257 R Hall of Storm Giants
+258 R Hive of the Eye Tyrant
+259 R Lair of the Hydra
+260 U Temple of the Dragon Queen
+261 R Treasure Vault
+
+
+[tokens]
