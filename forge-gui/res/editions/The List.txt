@@ -459,3 +459,52 @@ ScryfallCode=PLIST
 451 R Petrified Field
 452 R Urborg, Tomb of Yawgmoth
 453 L Mountain
+454 U Quest for the Holy Relic
+455 C Resurrection
+456 S Silence
+457 U Twinblade Paladin
+458 U Undead Slayer
+459 U Air Elemental
+460 C Invisibility
+461 U Invisible Stalker
+462 C Jump
+463 R Polymorph
+464 U Raven Familiar
+465 U Sleep
+466 C Sleeping Potion
+467 R Tempest Djinn
+468 R Trade Routes
+469 U Treasure Trove
+470 U Assassin's Blade
+471 R Captivating Vampire
+472 R Demonic Tutor
+473 C Dungeon Shade
+474 R Nightmare
+475 U Noxious Ghoul
+476 U Tymaret, Chosen from Death
+477 U Will-o'-the-Wisp
+478 M Balefire Dragon
+479 U Fireball
+480 C Orcish Lumberjack
+481 R Sneak Attack
+482 U Stone Giant
+483 R Hermit Druid
+484 R Traverse the Outlands
+485 R Yisan, the Wanderer Bard
+486 M Arcades, the Strategist
+487 M Daxos the Returned
+488 M Dragonlord Dromoka
+489 R Grenzo, Dungeon Warden
+490 M Hellkite Overlord
+491 R Cloud Key
+492 R Coveted Jewel
+493 R Doubling Cube
+494 C Expedition Map
+495 R Gauntlet of Power
+496 U Golem's Heart
+497 R Haunted Plate Mail
+498 U Sorcerer's Wand
+499 R Staff of Domination
+500 R Transmogrifying Wand
+501 R Eiganjo Castle
+502 R Gemstone Caverns
