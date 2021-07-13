@@ -232,8 +232,8 @@ public class WrappedAbility extends Ability {
         if (regtrig == null) return "";
         final StringBuilder sb = new StringBuilder(regtrig.replaceAbilityText(regtrig.toString(true), this));
         List<TargetChoices> allTargets = sa.getAllTargetChoices();
-        if (!allTargets.isEmpty()) {
-            sb.append(" (Targeting ");
+        if (!allTargets.isEmpty() && !sb.toString().contains("(Targeting:")) {
+            sb.append(" (Targeting: ");
             sb.append(allTargets);
             sb.append(")");
         }
