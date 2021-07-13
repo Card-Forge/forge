@@ -6,9 +6,9 @@ Type=Promo
 ScryfallCode=PL21
 
 [cards]
-1 R Sethron, Hurloon General
-2 M Moraug, Fury of Akoum
-3 M Ox of Agonas
+1 M Moraug, Fury of Akoum
+1★ R Sethron, Hurloon General
+2 M Ox of Agonas
 
 [tokens]
 r_2_3_minotaur
