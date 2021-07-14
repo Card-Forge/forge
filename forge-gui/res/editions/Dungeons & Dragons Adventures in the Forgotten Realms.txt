@@ -432,7 +432,7 @@ S Tomb of Annihilation
 b_1_1_skeleton
 b_2_1_spider_menace_reach
 b_2_2_zombie
-b_4_4_the_atropal_deathtouch
+the_atropal
 boo
 c_a_treasure_sac
 g_2_2_wolf
