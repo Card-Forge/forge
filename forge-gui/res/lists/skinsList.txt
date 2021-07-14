@@ -131,3 +131,17 @@ https://downloads.cardforge.org/skins/magic/sprite_manaicons.png
 https://downloads.cardforge.org/skins/magic/sprite_planar_conquest.png
 https://downloads.cardforge.org/skins/magic/sprite_start.png
 https://downloads.cardforge.org/skins/magic/sprite_trophies.png
+https://downloads.cardforge.org/skins/magic_blue/bg_chaos_wheel.png
+https://downloads.cardforge.org/skins/magic_blue/bg_match.jpg
+https://downloads.cardforge.org/skins/magic_blue/bg_splash.png
+https://downloads.cardforge.org/skins/magic_blue/bg_splash_hd.png
+https://downloads.cardforge.org/skins/magic_blue/bg_texture.jpg
+https://downloads.cardforge.org/skins/magic_blue/font1.ttf
+https://downloads.cardforge.org/skins/magic_blue/hd_logo.png
+https://downloads.cardforge.org/skins/magic_blue/sprite_avatars.png
+https://downloads.cardforge.org/skins/magic_blue/sprite_buttons.png
+https://downloads.cardforge.org/skins/magic_blue/sprite_icons.png
+https://downloads.cardforge.org/skins/magic_blue/sprite_manaicons.png
+https://downloads.cardforge.org/skins/magic_blue/sprite_planar_conquest.png
+https://downloads.cardforge.org/skins/magic_blue/sprite_start.png
+https://downloads.cardforge.org/skins/magic_blue/sprite_trophies.png
