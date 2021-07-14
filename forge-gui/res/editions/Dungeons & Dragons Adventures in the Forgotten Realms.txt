@@ -427,3 +427,20 @@ Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
 S Dungeon of the Mad Mage
 S Lost Mine of Phandelver
 S Tomb of Annihilation
+
+[tokens]
+w_3_3_angel_flying
+boo
+r_1_1_devil_burn
+u_x_x_dog_illusion_cardsinhand
+u_1_1_faerie_dragon_flying
+r_1_1_goblin
+guenhwyvar
+icingdeath_frost_tongue
+b_1_1_skeleton
+b_2_1_spider_menace_reach
+b_4_4_the_atropal_deathtouch
+c_a_treasure_sac
+vecna
+g_2_2_wolf
+b_2_2_zombie
