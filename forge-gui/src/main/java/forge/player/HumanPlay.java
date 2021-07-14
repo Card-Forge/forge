@@ -349,6 +349,18 @@ public class HumanPlay {
                 else
                     part.payAsDecided(p, pd, sourceAbility);
             }
+            else if (part instanceof CostRollDice) {
+                if (!part.canPay(sourceAbility, p)) {
+                    return false;
+                }
+
+                PaymentDecision pd = part.accept(hcd);
+
+                if (pd == null)
+                    return false;
+                else
+                    part.payAsDecided(p, pd, sourceAbility);
+            }
             else if (part instanceof CostDamage) {
                 if (!part.canPay(sourceAbility, p)) {
                     return false;

@@ -268,6 +268,15 @@ public class AiCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
+    public PaymentDecision visit(CostRollDice cost) {
+        Integer c = cost.convertAmount();
+        if (c == null) {
+            c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
+        }
+        return PaymentDecision.number(c);
+    }
+
+    @Override
     public PaymentDecision visit(CostGainControl cost) {
         if (cost.payCostFromSource()) {
             return PaymentDecision.card(source);
