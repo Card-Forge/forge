@@ -47,7 +47,6 @@ public class StaticData {
 
     private MulliganDefs.MulliganRule mulliganRule = MulliganDefs.getDefaultRule();
 
-    private String prefferedArt;
     private boolean enableCustomCardsInDecks = false;  // default
 
     // Loaded lazily:
