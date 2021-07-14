@@ -7,9 +7,8 @@ SVar:DBDungeon:DB$ Scry | ScryNum$ 1 | RoomName$ Dungeon Level | SpellDescriptio
 SVar:DBBazaar:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ You | RoomName$ Goblin Bazaar | SpellDescription$ Create a Treasure token. | NextRoom$ DBLost
 SVar:DBCaverns:DB$ Pump | ValidTgts$ Creature | KW$ HIDDEN CARDNAME can't attack. | Duration$ UntilYourNextTurn | IsCurse$ True | RoomName$ Twisted Caverns | SpellDescription$ Target creature can't attack until your next turn. | NextRoom$ DBLost
 SVar:DBLost:DB$ Scry | ScryNum$ 2 | RoomName$ Lost Level | SpellDescription$ Scry 2. | NextRoom$ DBRunestone,DBGraveyard
-SVar:DBRunestone:DB$ Dig | Defined$ You | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | RoomName$ Runestone Caverns | SpellDescription$ Exile the top two cards of your library. You may play them. | NextRoom$ DBMines
-SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ RememberedCard | Duration$ Permanent | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
-SVar:STPlay:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Exile | Affected$ Card.IsRemembered | MayPlay$ True | Description$ You may play them.
+SVar:DBRunestone:DB$ Dig | Defined$ You | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBPlayExiled | RoomName$ Runestone Caverns | SpellDescription$ Exile the top two cards of your library. You may play them. | NextRoom$ DBMines
+SVar:DBPlayExiled:DB$ Play | Valid$ Card.IsRemembered | ValidZone$ Exile | Controller$ You | Optional$ True | Amount$ All | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:DBGraveyard:DB$ Token | TokenScript$ b_1_1_skeleton | TokenOwner$ You | TokenAmount$ 2 | RoomName$ Muiral's Graveyard | SpellDescription$ Create two 1/1 black Skeleton creature tokens. | NextRoom$ DBMines
 SVar:DBMines:DB$ Scry | ScryNum$ 3 | RoomName$ Deep Mines | SpellDescription$ Scry 3. | NextRoom$ DBLair

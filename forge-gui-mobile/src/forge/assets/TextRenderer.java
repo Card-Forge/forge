@@ -291,6 +291,19 @@ public class TextRenderer {
                         case "clr":
                             colorOverride = value != null ? new Color(Integer.parseInt(value)) : null;
                             break;
+                        case "span":
+                            // <span style="color:gray;">
+                            if (value != null && value.contains("color:")) {
+                                int startIdx = value.indexOf(':') + 1;
+                                int endIdx = value.indexOf(';');
+                                String colorName = value.substring(startIdx, endIdx);
+                                if (colorName.equals("gray")) {
+                                    colorOverride = Color.GRAY;
+                                }
+                            } else {
+                                colorOverride = null;
+                            }
+                            break;
                         default:
                             validKeyword = false;
                             break;

@@ -1796,6 +1796,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public void setCurrentRoom(String room) {
         currentRoom = room;
         view.updateCurrentRoom(this);
+        view.getCurrentState().updateAbilityText(this, getCurrentState());
     }
     public boolean isInLastRoom() {
         for (final Trigger t : getTriggers()) {
@@ -2212,6 +2213,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public String getAbilityText(final CardState state) {
+        final String grayTag = "<span style=\"color:gray;\">";
+        final String endTag = "</span>";
         final CardTypeView type = state.getType();
 
         final StringBuilder sb = new StringBuilder();
@@ -2298,8 +2301,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         // Triggered abilities
         for (final Trigger trig : state.getTriggers()) {
             if (!trig.isSecondary() && !trig.isClassAbility()) {
+                boolean disabled = false;
+                // Disable text of other rooms
+                if (type.isDungeon() && !trig.getOverridingAbility().getParam("RoomName").equals(getCurrentRoom())) {
+                    disabled = true;
+                }
                 String trigStr = trig.replaceAbilityText(trig.toString(), state);
-                sb.append(trigStr.replaceAll("\\\\r\\\\n", "\r\n")).append("\r\n");
+                if (disabled) sb.append(grayTag);
+                sb.append(trigStr.replaceAll("\\\\r\\\\n", "\r\n"));
+                if (disabled) sb.append(endTag);
+                sb.append("\r\n");
             }
         }
 
@@ -2397,8 +2408,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             // Currently the maximum levels of all Class cards are all 3
             for (int level = 1; level <= 3; ++level) {
                 boolean disabled = level > getClassLevel() && isInZone(ZoneType.Battlefield);
-                final String grayTag = "<span style=\"color:gray;\">";
-                final String endTag = "</span>";
                 for (final Trigger trig : state.getTriggers()) {
                     if (trig.isClassLevelNAbility(level) && !trig.isSecondary()) {
                         if (disabled) sb.append(grayTag);

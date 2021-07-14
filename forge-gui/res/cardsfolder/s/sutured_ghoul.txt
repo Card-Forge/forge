@@ -3,14 +3,14 @@ ManaCost:4 B B B
 Types:Creature Zombie
 PT:*/*
 K:Trample
-K:ETBReplacement:Copy:ChooseCreatures
-SVar:ChooseCreatures:DB$ ChooseCard | Defined$ You | Amount$ X | Choices$ Creature.YouOwn | ChoiceTitle$ Exile any number of creature cards from your graveyard. | ChoiceZone$ Graveyard | RememberChosen$ True | SubAbility$ ExileCreatures | SpellDescription$ As CARDNAME enters the battlefield, exile any number of creature cards from your graveyard. CARDNAME's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness.
-SVar:ExileCreatures:DB$ ChangeZoneAll | ChangeType$ Remembered | Origin$ Graveyard | Destination$ Exile | SubAbility$ AnimateSuture
-SVar:AnimateSuture:DB$ Animate | Defined$ Self | Power$ TotalPower | Toughness$ TotalToughness | Duration$ Permanent | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+K:ETBReplacement:Other:ETBPrep
+SVar:ETBPrep:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBChoose
+SVar:DBChoose:DB$ ChooseCard | Defined$ You | MinAmount$ 0 | Amount$ X | Choices$ Creature.YouOwn+Other | ChoiceTitle$ Exile any number of creature cards from your graveyard | ChoiceZone$ Graveyard | RememberChosen$ True | SubAbility$ ExileCreatures | SpellDescription$ As CARDNAME enters the battlefield, exile any number of creature cards from your graveyard. CARDNAME's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness.
+SVar:ExileCreatures:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Graveyard | Destination$ Exile | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+S:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Card.Self | SetPower$ TotalPower | SetToughness$ TotalToughness | Description$ CARDNAME's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness.
 SVar:TotalPower:Remembered$CardPower
 SVar:TotalToughness:Remembered$CardToughness
 SVar:X:Count$TypeInYourYard.Creature
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sutured_ghoul.jpg
 Oracle:Trample\nAs Sutured Ghoul enters the battlefield, exile any number of creature cards from your graveyard.\nSutured Ghoul's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness.

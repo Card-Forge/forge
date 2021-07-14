@@ -483,6 +483,22 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
+    public PaymentDecision visit(final CostRollDice cost) {
+        final String amount = cost.getAmount();
+        Integer c = cost.convertAmount();
+
+        if (c == null) {
+            c = AbilityUtils.calculateAmount(source, amount, ability);
+        }
+
+        if (!player.getController().confirmPayment(cost, Localizer.getInstance().getMessage("lblDoYouWantRollNDiceAction", String.valueOf(c), "d" + cost.getType()), ability)) {
+            return null;
+        }
+
+        return PaymentDecision.number(c);
+    }
+
+    @Override
     public PaymentDecision visit(final CostGainControl cost) {
         final String amount = cost.getAmount();
 
