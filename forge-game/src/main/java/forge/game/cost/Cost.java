@@ -363,6 +363,13 @@ public class Cost implements Serializable {
             return new CostFlipCoin(splitStr[0]);
         }
 
+        if (parse.startsWith("RollDice<")) {
+            // RollDice<NumDice/Sides/ResultSVar>
+            final String[] splitStr = abCostParse(parse, 4);
+            final String description = splitStr.length > 3 ? splitStr[3] : null;
+            return new CostRollDice(splitStr[0], splitStr[1], splitStr[2], description);
+        }
+
         if (parse.startsWith("Discard<")) {
             // Discard<NumCards/Type>
             final String[] splitStr = abCostParse(parse, 3);
