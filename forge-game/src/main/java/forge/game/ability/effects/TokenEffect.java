@@ -23,10 +23,8 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardZoneTable;
-import forge.game.card.token.TokenInfo;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.event.GameEventTokenCreated;
-import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
 public class TokenEffect extends TokenEffectBase {
@@ -34,20 +32,6 @@ public class TokenEffect extends TokenEffectBase {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         return sa.getDescription();
-    }
-
-    public Card loadTokenPrototype(SpellAbility sa) {
-        if (!sa.hasParam("TokenScript")) {
-            return null;
-        }
-
-        final Card result = TokenInfo.getProtoType(sa.getParam("TokenScript"), sa);
-
-        if (result == null) {
-            throw new RuntimeException("don't find Token for TokenScript: " + sa.getParam("TokenScript"));
-        }
-
-        return result;
     }
 
     @Override
@@ -67,9 +51,8 @@ public class TokenEffect extends TokenEffectBase {
             }
         }
 
-        Card prototype = loadTokenPrototype(sa);
-
         final int finalAmount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("TokenAmount", "1"), sa);
+        MutableBoolean combatChanged = new MutableBoolean(false);
 
         boolean useZoneTable = true;
         CardZoneTable triggerList = sa.getChangeZoneTable();
@@ -82,10 +65,8 @@ public class TokenEffect extends TokenEffectBase {
             useZoneTable = true;
         }
 
-        MutableBoolean combatChanged = new MutableBoolean(false);
-        for (final Player owner : AbilityUtils.getDefinedPlayers(host, sa.getParamOrDefault("TokenOwner", "You"), sa)) {
-            makeTokens(prototype, owner, sa, finalAmount, true, false, triggerList, combatChanged);
-        }
+        makeTokenTable(AbilityUtils.getDefinedPlayers(host, sa.getParamOrDefault("TokenOwner", "You"), sa),
+                sa.getParam("TokenScript").split(","), finalAmount, false, triggerList, combatChanged, sa);
 
         if (!useZoneTable) {
             triggerList.triggerChangesZoneAll(game, sa);

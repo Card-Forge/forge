@@ -4,6 +4,7 @@ import java.util.Map;
 
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
+import forge.game.card.TokenCreateTable;
 import forge.game.spellability.SpellAbility;
 
 /** 
@@ -27,9 +28,11 @@ public class ReplaceToken extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<AbilityKey, Object> runParams) {
+        /*
         if (((int) runParams.get(AbilityKey.TokenNum)) <= 0) {
             return false;
         }
+        //*/
 
         if (hasParam("EffectOnly")) {
             final Boolean effectOnly = (Boolean) runParams.get(AbilityKey.EffectOnly);
@@ -41,10 +44,16 @@ public class ReplaceToken extends ReplacementEffect {
         if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Affected))) {
             return false;
         }
+
+        /*/
         if (!matchesValidParam("ValidToken", runParams.get(AbilityKey.Token))) {
             return false;
         }
+        //*/
 
+        if (filterAmount((TokenCreateTable) runParams.get(AbilityKey.Token)) <= 0) {
+            return false;
+        }
 
         return true;
     }
@@ -54,8 +63,13 @@ public class ReplaceToken extends ReplacementEffect {
      */
     @Override
     public void setReplacingObjects(Map<AbilityKey, Object> runParams, SpellAbility sa) {
-        sa.setReplacingObject(AbilityKey.TokenNum, runParams.get(AbilityKey.TokenNum));
+        sa.setReplacingObject(AbilityKey.TokenNum, filterAmount((TokenCreateTable) runParams.get(AbilityKey.Token)));
+        sa.setReplacingObject(AbilityKey.Token, runParams.get(AbilityKey.Token));
         sa.setReplacingObject(AbilityKey.Player, runParams.get(AbilityKey.Affected));
     }
 
+    
+    public int filterAmount(final TokenCreateTable table) {
+        return table.getFilterAmount(getParamOrDefault("ValidPlayer", null), getParamOrDefault("ValidToken", null), this);
+    }
 }

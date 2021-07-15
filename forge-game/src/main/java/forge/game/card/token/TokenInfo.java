@@ -15,15 +15,12 @@ import forge.StaticData;
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.game.Game;
-import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
-import forge.game.card.CardFactory;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardUtil;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
-import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.item.PaperToken;
 
@@ -138,59 +135,6 @@ public class TokenInfo {
         sb.append("Keywords:").append(Joiner.on('-').join(intrinsicKeywords)).append(',');
         sb.append("Image:").append(imageName);
         return sb.toString();
-    }
-
-    public static List<Card> makeToken(final Card prototype, final Player owner,
-            final boolean applyMultiplier, final int num) {
-        final List<Card> list = Lists.newArrayList();
-
-        final Game game = owner.getGame();
-        int multiplier = num;
-        Player player = owner;
-        Card proto = prototype;
-
-        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(player);
-        repParams.put(AbilityKey.Token, prototype);
-        repParams.put(AbilityKey.TokenNum, multiplier);
-        repParams.put(AbilityKey.EffectOnly, applyMultiplier);
-
-        switch (game.getReplacementHandler().run(ReplacementType.CreateToken, repParams)) {
-            case NotReplaced:
-                break;
-            case Updated: {
-                multiplier = (int) repParams.get(AbilityKey.TokenNum);
-                player = (Player) repParams.get(AbilityKey.Affected);
-                proto = (Card) repParams.get(AbilityKey.Token);
-                break;
-            }
-            default:
-                multiplier = 0;
-                break;
-        }
-        if (multiplier <= 0) {
-            return list;
-        }
-
-        long timestamp = game.getNextTimestamp();
-
-        for (int i = 0; i < multiplier; i++) {
-            // need to set owner or copyCard will fail with assign new ID
-            proto.setOwner(owner);
-            Card copy = CardFactory.copyCard(proto, true);
-            // need to assign player after token is copied
-            if (player != owner) {
-                copy.setController(player, timestamp);
-            }
-            copy.setTimestamp(timestamp);
-            copy.setToken(true);
-            list.add(copy);
-        }
-
-        return list;
-    }
-
-    static public List<Card> makeTokensFromPrototype(Card prototype, final Player owner, int amount, final boolean applyMultiplier) {
-        return makeToken(prototype, owner, applyMultiplier, amount);
     }
 
     public Card makeOneToken(final Player controller) {
@@ -321,10 +265,10 @@ public class TokenInfo {
         result.getCurrentState().changeTextIntrinsic(colorMap, typeMap);
     }
 
-    static public Card getProtoType(final String script, final SpellAbility sa) {
-        return getProtoType(script, sa, true);
+    static public Card getProtoType(final String script, final SpellAbility sa, final Player owner) {
+        return getProtoType(script, sa, owner, true);
     }
-    static public Card getProtoType(final String script, final SpellAbility sa, boolean applyTextChange) {
+    static public Card getProtoType(final String script, final SpellAbility sa, final Player owner, boolean applyTextChange) {
         // script might be null, or sa might be null
         if (script == null || sa == null) {
             return null;
@@ -338,7 +282,7 @@ public class TokenInfo {
         if (token == null) {
             return null;
         }
-        final Card result = Card.fromPaperCard(token, null, game);
+        final Card result = Card.fromPaperCard(token, owner, game);
 
         if (sa.hasParam("TokenPower")) {
             String str = sa.getParam("TokenPower");

@@ -142,6 +142,7 @@ public enum ApiType {
     ReplaceEffect (ReplaceEffect.class),
     ReplaceMana (ReplaceManaEffect.class),
     ReplaceDamage (ReplaceDamageEffect.class),
+    ReplaceToken (ReplaceTokenEffect.class),
     ReplaceSplitDamage (ReplaceSplitDamageEffect.class),
     RestartGame (RestartGameEffect.class),
     Reveal (RevealEffect.class),

@@ -1324,7 +1324,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 }
                 if (sa.hasParam("TokenScript")) {
                     sa.setActivatingPlayer(player);
-                    Card protoType = TokenInfo.getProtoType(sa.getParam("TokenScript"), sa);
+                    Card protoType = TokenInfo.getProtoType(sa.getParam("TokenScript"), sa, null);
                     for (String type : protoType.getType().getCreatureTypes()) {
                         Integer count = typesInDeck.get(type);
                         if (count == null) {
@@ -1340,7 +1340,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 if (sa != null) {
                     if (sa.hasParam("TokenScript")) {
                         sa.setActivatingPlayer(player);
-                        Card protoType = TokenInfo.getProtoType(sa.getParam("TokenScript"), sa);
+                        Card protoType = TokenInfo.getProtoType(sa.getParam("TokenScript"), sa, null);
                         for (String type : protoType.getType().getCreatureTypes()) {
                             Integer count = typesInDeck.get(type);
                             if (count == null) {

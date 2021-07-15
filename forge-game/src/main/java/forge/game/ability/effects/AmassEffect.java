@@ -16,7 +16,6 @@ import forge.game.card.CardPredicates;
 import forge.game.card.CardZoneTable;
 import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
-import forge.game.card.token.TokenInfo;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.event.GameEventTokenCreated;
 import forge.game.player.Player;
@@ -53,37 +52,24 @@ public class AmassEffect extends TokenEffectBase {
         final int amount = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("Num", "1"), sa);
         final boolean remember = sa.hasParam("RememberAmass");
 
-        boolean useZoneTable = true;
-        CardZoneTable triggerList = sa.getChangeZoneTable();
-        if (triggerList == null) {
-            triggerList = new CardZoneTable();
-            useZoneTable = false;
-        }
-        if (sa.hasParam("ChangeZoneTable")) {
-            sa.setChangeZoneTable(triggerList);
-            useZoneTable = true;
-        }
-
-        MutableBoolean combatChanged = new MutableBoolean(false);
         // create army token if needed
         if (CardLists.count(activator.getCardsIn(ZoneType.Battlefield), CardPredicates.isType("Army")) == 0) {
-            final String tokenScript = "b_0_0_zombie_army";
+            CardZoneTable triggerList = new CardZoneTable();
+            MutableBoolean combatChanged = new MutableBoolean(false);
 
-            final Card prototype = TokenInfo.getProtoType(tokenScript, sa, false);
+            makeTokenTable(makeTokenTableInternal(activator, "b_0_0_zombie_army", 1, sa), false, triggerList, combatChanged, sa);
 
-            makeTokens(prototype, activator, sa, 1, true, false, triggerList, combatChanged);
+            triggerList.triggerChangesZoneAll(game, sa);
+            triggerList.clear();
 
-            if (!useZoneTable) {
-                triggerList.triggerChangesZoneAll(game, sa);
-                triggerList.clear();
-            }
             game.fireEvent(new GameEventTokenCreated());
+
+            if (combatChanged.isTrue()) {
+                game.updateCombatForView();
+                game.fireEvent(new GameEventCombatChanged());
+            }
         }
 
-        if (combatChanged.isTrue()) {
-            game.updateCombatForView();
-            game.fireEvent(new GameEventCombatChanged());
-        }
         Map<String, Object> params = Maps.newHashMap();
         params.put("CounterType", CounterType.get(CounterEnumType.P1P1));
         params.put("Amount", 1);

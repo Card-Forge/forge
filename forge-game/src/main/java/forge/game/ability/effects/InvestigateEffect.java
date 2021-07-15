@@ -6,7 +6,6 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardZoneTable;
-import forge.game.card.token.TokenInfo;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.event.GameEventTokenCreated;
 import forge.game.player.Player;
@@ -36,14 +35,13 @@ public class InvestigateEffect extends TokenEffectBase {
 
         final int amount = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("Num", "1"), sa);
 
-        final String tokenScript = "c_a_clue_draw";
-        final Card prototype = TokenInfo.getProtoType(tokenScript, sa, false);
-
+        // Investigate in Sequence
         for (final Player p : getTargetPlayers(sa)) {
             for (int i = 0; i < amount; i++) {
                 CardZoneTable triggerList = new CardZoneTable();
                 MutableBoolean combatChanged = new MutableBoolean(false);
-                makeTokens(prototype, p, sa, 1, true, false, triggerList, combatChanged);
+
+                makeTokenTable(makeTokenTableInternal(p, "c_a_clue_draw", 1, sa), false, triggerList, combatChanged, sa);
 
                 triggerList.triggerChangesZoneAll(game, sa);
                 p.addInvestigatedThisTurn();
