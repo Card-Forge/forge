@@ -20,7 +20,7 @@ import forge.gamesimulationtests.util.playeractions.testactions.EndTestAction;
 import forge.gamesimulationtests.util.playeractions.testactions.PlayerAssertAction;
 
 public class ComprehensiveRulesSection104 extends BaseGameSimulationTest {
-	@Test(enabled = false)
+	@Test
 	public void test_104_2a_player_wins_if_all_opponents_left_even_if_he_couldnt_win() {
 		/*Due to 1's Abyssal Persecutor, he can't win and 2 can't lose (despite the fact that he attempts to draw from an empty deck on turn 2)
 		2 concedes during turn 3 (after 1 drew his last card), and 1 wins after all...*/
@@ -36,7 +36,7 @@ public class ComprehensiveRulesSection104 extends BaseGameSimulationTest {
 		runGame( gameWrapper, PlayerSpecification.PLAYER_1, 3 );
 	}
 	
-	@Test(enabled = false)
+	@Test
 	public void test_104_2b_effect_may_state_that_player_wins() {
 		GameWrapper gameWrapper = new GameWrapper(
 				new GameStateSpecificationBuilder()
@@ -48,7 +48,7 @@ public class ComprehensiveRulesSection104 extends BaseGameSimulationTest {
 		runGame( gameWrapper, PlayerSpecification.PLAYER_2, 2 );
 	}
 	
-	@Test(enabled = false)
+	@Test
 	public void test_104_3b_player_with_zero_life_loses_the_game() {
 		GameWrapper gameWrapper = new GameWrapper(
 				new GameStateSpecificationBuilder()
@@ -59,7 +59,7 @@ public class ComprehensiveRulesSection104 extends BaseGameSimulationTest {
 		runGame( gameWrapper, PlayerSpecification.PLAYER_1, 1 );
 	}
 	
-	@Test(enabled = false)
+	@Test
 	public void test_104_3b_player_with_less_than_zero_life_loses_the_game() {
 		GameWrapper gameWrapper = new GameWrapper(
 				new GameStateSpecificationBuilder()
@@ -70,7 +70,7 @@ public class ComprehensiveRulesSection104 extends BaseGameSimulationTest {
 		runGame( gameWrapper, PlayerSpecification.PLAYER_1, 1 );
 	}
 	
-	@Test(enabled = false)
+	@Test
 	public void test_104_3b_player_with_less_than_zero_life_loses_the_game_only_when_a_player_receives_priority() {
 		//The Lightning Helix targeting himself theoretically drops him to -1, but he's back up to 2 before he could lose
 		GameWrapper gameWrapper = new GameWrapper(
@@ -89,7 +89,7 @@ public class ComprehensiveRulesSection104 extends BaseGameSimulationTest {
 		runGame( gameWrapper, PlayerSpecification.PLAYER_1, 1 );
 	}
 	
-	@Test(enabled = false)
+	@Test
 	public void test_104_3b_player_with_less_than_zero_life_loses_the_game_only_when_a_player_receives_priority_variant_with_combat() {
 		//Player 2 has 2 life, then takes 3 combat damage but also gains 2 life from lifelink
 		//TODO: is it actually this rule that makes this situation work, or is combat damage handled simultaneously due to another rule?
@@ -114,13 +114,13 @@ public class ComprehensiveRulesSection104 extends BaseGameSimulationTest {
 		runGame( gameWrapper, PlayerSpecification.PLAYER_2, 1 );
 	}
 	
-	@Test(enabled = false)
+	@Test
 	public void test_104_3c_player_who_draws_card_with_empty_library_loses() {
 		GameWrapper gameWrapper = new GameWrapper( null, null );
 		runGame( gameWrapper, PlayerSpecification.PLAYER_1, 2 );
 	}
 	
-	@Test(enabled = false)
+	@Test
 	public void test_104_3c_player_who_draws_more_cards_than_library_contains_draw_as_much_as_possible_and_loses() {
 		GameWrapper gameWrapper = new GameWrapper( 
 				new GameStateSpecificationBuilder()
@@ -138,7 +138,7 @@ public class ComprehensiveRulesSection104 extends BaseGameSimulationTest {
 		);
 	}
 	
-	@Test(enabled = false)
+	@Test
 	public void test_104_3d_player_with_ten_poison_counters_loses() {
 		GameWrapper gameWrapper = new GameWrapper(
 				new GameStateSpecificationBuilder()
@@ -149,7 +149,7 @@ public class ComprehensiveRulesSection104 extends BaseGameSimulationTest {
 		runGame( gameWrapper, PlayerSpecification.PLAYER_1, 1 );
 	}
 	
-	@Test(enabled = false)
+	@Test
 	public void test_104_3d_player_with_more_than_ten_poison_counters_loses() {
 		GameWrapper gameWrapper = new GameWrapper(
 				new GameStateSpecificationBuilder()
@@ -160,7 +160,7 @@ public class ComprehensiveRulesSection104 extends BaseGameSimulationTest {
 		runGame( gameWrapper, PlayerSpecification.PLAYER_1, 1 );
 	}
 	
-	@Test(enabled = false)
+	@Test
 	public void test_104_3e_effect_may_state_that_player_loses() {
 		GameWrapper gameWrapper = new GameWrapper(
 				new GameStateSpecificationBuilder()
