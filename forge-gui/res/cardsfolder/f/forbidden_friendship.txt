@@ -1,8 +1,6 @@
 Name:Forbidden Friendship
 ManaCost:1 R
 Types:Sorcery
-A:SP$ Token | Cost$ 1 R | TokenAmount$ 1 | TokenScript$ r_1_1_dinosaur_haste | TokenOwner$ You | LegacyImage$ r 1 1 dinosaur haste iko | ChangeZoneTable$ True | SubAbility$ DBToken | SpellDescription$ Create a 1/1 red Dinosaur creature token with haste and a 1/1 white Human Soldier creature token.
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_human_soldier | TokenOwner$ You | LegacyImage$ w 1 1 human soldier iko | SubAbility$ DBResolve
-SVar:DBResolve:DB$ ChangeZoneResolve
+A:SP$ Token | Cost$ 1 R | TokenAmount$ 1 | TokenScript$ r_1_1_dinosaur_haste,w_1_1_human_soldier | TokenOwner$ You | SpellDescription$ Create a 1/1 red Dinosaur creature token with haste and a 1/1 white Human Soldier creature token.
 DeckHas:Ability$Token
 Oracle:Create a 1/1 red Dinosaur creature token with haste and a 1/1 white Human Soldier creature token.
