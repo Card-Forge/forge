@@ -108,6 +108,10 @@ public class ForgeCardMockTestCase extends PowerMockTestCase {
         String userCustomEditionDir = userCustomDir + "editions" + File.separator;
         Field fUserCustomEditionDir = PowerMockito.field(ForgeConstants.class, "USER_CUSTOM_EDITIONS_DIR");
         fUserCustomEditionDir.set(ForgeConstants.class, userCustomEditionDir);
+        // Lang Dir
+        String langDir = resDir + "languages" + File.separator;
+        Field fLangDir = PowerMockito.field(ForgeConstants.class, "LANG_DIR");
+        fLangDir.set(ForgeConstants.class, langDir);
     }
 
     private void setMock(Localizer mock) {
