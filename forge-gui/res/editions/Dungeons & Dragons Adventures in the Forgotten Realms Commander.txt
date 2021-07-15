@@ -75,7 +75,7 @@ ScryfallCode=AFC
 67 U Gryff's Boon
 68 R Karmic Guide
 69 R Puresteel Paladin
-70 M Realm-Cloaked Giant // Cast Off
+70 M Realm-Cloaked Giant
 71 C Ronom Unicorn
 72 R Sram, Senior Edificer
 73 M Sun Titan
