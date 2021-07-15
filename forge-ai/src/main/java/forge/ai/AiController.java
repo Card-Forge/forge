@@ -533,6 +533,7 @@ public class AiController {
                     }
                 }
 
+                // TODO if this is the only source for a color we need badly prioritize it instead
                 if (foundTapped) {
                     continue;
                 }
@@ -812,7 +813,7 @@ public class AiController {
         }
         else {
             Cost payCosts = sa.getPayCosts();
-            if(payCosts != null) {
+            if (payCosts != null) {
                 ManaCost mana = payCosts.getTotalMana();
                 if (mana != null) {
                     if (mana.countX() > 0) {
@@ -2218,7 +2219,7 @@ public class AiController {
         }
         return ComputerUtil.chooseSacrificeType(player, type, ability, ability.getTargetCard(), amount);
     }
-    
+
     private boolean checkAiSpecificRestrictions(final SpellAbility sa) {
         // AI-specific restrictions specified as activation parameters in spell abilities
 
@@ -2270,5 +2271,5 @@ public class AiController {
         // AI logic for choosing which replacement effect to apply happens here.
         return Iterables.getFirst(list, null);
     }
-    
+
 }

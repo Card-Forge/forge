@@ -1899,8 +1899,7 @@ public class ComputerUtilMana {
             if (!res.contains(a)) {
                 if (cost.isReusuableResource()) {
                     res.add(0, a);
-                }
-                else {
+                } else {
                     res.add(res.size(), a);
                 }
             }
