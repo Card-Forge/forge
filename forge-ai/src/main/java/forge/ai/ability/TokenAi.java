@@ -95,7 +95,7 @@ public class TokenAi extends SpellAbilityAi {
             if (sa.getSVar("X").equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
                 x = ComputerUtilCost.getMaxXValue(sa, ai);
-                sa.setXManaCostPaid(x);
+                sa.getRootAbility().setXManaCostPaid(x);
             }
             if (x <= 0) {
                 return false; // 0 tokens or 0 toughness token(s)
