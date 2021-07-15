@@ -510,7 +510,6 @@ public class AiController {
             landList = unreflectedLands;
         }
 
-
         //try to skip lands that enter the battlefield tapped
         if (!nonLandsInHand.isEmpty()) {
             CardCollection nonTappedLands = new CardCollection();
@@ -1916,7 +1915,7 @@ public class AiController {
         if (sa.hasParam("AIMaxAmount")) {
             max = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("AIMaxAmount"), sa);
         }
-        switch(sa.getApi()) {
+        switch (sa.getApi()) {
             case TwoPiles:
                 // TODO: improve AI
                 Card biggest = null;
@@ -2013,7 +2012,7 @@ public class AiController {
 
         final CardCollection library = new CardCollection(in);
         CardLists.shuffle(library);
-    
+
         // remove all land, keep non-basicland in there, shuffled
         CardCollection land = CardLists.filter(library, CardPredicates.Presets.LANDS);
         for (Card c : land) {
@@ -2021,7 +2020,7 @@ public class AiController {
                 library.remove(c);
             }
         }
-    
+
         try {
             // mana weave, total of 7 land
             // The Following have all been reduced by 1, to account for the
@@ -2038,19 +2037,14 @@ public class AiController {
             System.err.println("Error: cannot smooth mana curve, not enough land");
             return in;
         }
-    
+
         // add the rest of land to the end of the deck
         for (int i = 0; i < land.size(); i++) {
             if (!library.contains(land.get(i))) {
                 library.add(land.get(i));
             }
         }
-    
-        // check
-        for (int i = 0; i < library.size(); i++) {
-            System.out.println(library.get(i));
-        }
-    
+
         return library;
     } // smoothComputerManaCurve()
 
