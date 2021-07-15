@@ -4,6 +4,7 @@ import forge.ImageCache;
 import forge.ImageKeys;
 import forge.Singletons;
 import forge.card.ForgeCardMockTestCase;
+import forge.game.GameLogFormatter;
 import forge.gamesimulationtests.util.GameWrapper;
 import forge.gamesimulationtests.util.player.PlayerSpecification;
 import forge.gamesimulationtests.util.player.PlayerSpecificationHandler;
@@ -25,7 +26,7 @@ import java.util.ResourceBundle;
 
 @PrepareForTest(value = {FModel.class, Singletons.class, ResourceBundle.class,
 		ImageCache.class, ImageIO.class, ImageKeys.class,
-		ForgeConstants.class, Localizer.class, Sentry.class})
+		ForgeConstants.class, Localizer.class, Sentry.class, GameLogFormatter.class})
 @SuppressStaticInitializationFor({"forge.ImageCache", "forge.localinstance.properties.ForgeConstants"})
 public class BaseGameSimulationTest extends ForgeCardMockTestCase {
 
@@ -34,6 +35,7 @@ public class BaseGameSimulationTest extends ForgeCardMockTestCase {
 	protected void initMocks() throws Exception {
 		super.initMocks();
 		PowerMockito.mockStatic(Sentry.class);
+		PowerMockito.mockStatic(GameLogFormatter.class);
 		PowerMockito.when(Sentry.getContext()).thenReturn(new Context());
 		Lang.createInstance("en-US");
 	}
