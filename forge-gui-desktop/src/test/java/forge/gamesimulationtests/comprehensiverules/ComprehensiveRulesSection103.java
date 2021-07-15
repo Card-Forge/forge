@@ -16,7 +16,7 @@ import forge.gamesimulationtests.util.playeractions.testactions.EndTestAction;
 import forge.gamesimulationtests.util.playeractions.testactions.PlayerAssertAction;
 
 public class ComprehensiveRulesSection103 extends BaseGameSimulationTest {
-	@Test(enabled = false)
+	@Test
 	public void test_103_3_players_start_at_20_life() {
 		GameWrapper gameWrapper = new GameWrapper( 
 				null, 
@@ -29,7 +29,7 @@ public class ComprehensiveRulesSection103 extends BaseGameSimulationTest {
 		runGame( gameWrapper, PlayerSpecification.PLAYER_2, 1 );
 	}
 	
-	@Test(enabled = false)
+	@Test
 	public void test_103_7a_first_player_skips_draw_step_of_first_turn() {
 		GameWrapper gameWrapper = new GameWrapper(
 				new GameStateSpecificationBuilder()
