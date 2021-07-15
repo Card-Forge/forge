@@ -34,7 +34,8 @@ public class CastSpellFromHandAction extends BasePlayerAction {
 		SpellAbility spellAbility = cardToPlay.getSpells().get(0);
 		spellAbility.setActivatingPlayer(player);
 		spellAbility.setHostCard(game.getAction().moveToStack(cardToPlay, spellAbility));
-		spellAbility.getTargets().add(player);
+		if (spellAbility.usesTargeting())
+			spellAbility.getTargets().add(player);
 		game.getStack().freezeStack();
 		game.getStack().addAndUnfreeze(spellAbility);
 	}
