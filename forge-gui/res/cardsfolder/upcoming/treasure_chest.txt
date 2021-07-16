@@ -1,7 +1,7 @@
 Name:Treasure Chest
 ManaCost:3
 Types:Artifact
-A:AB$ RollDice | Cost$ Sac<1/CARDNAME> | Sides$ 20 | ResultSubAbilities$ 1:Trapped,2-9:DBToken,10-19:DBGainLife,20:DBChangeZone | SpellDescription$ Roll a d20.
+A:AB$ RollDice | Cost$ 4 Sac<1/CARDNAME> | Sides$ 20 | ResultSubAbilities$ 1:Trapped,2-9:DBToken,10-19:DBGainLife,20:DBChangeZone | SpellDescription$ Roll a d20.
 SVar:Trapped:DB$ LoseLife | Defined$ You | LifeAmount$ 3 | SpellDescription$ 1 VERT Trapped! — You lose 3 life.
 SVar:DBToken:DB$ Token | TokenAmount$ 5 | TokenScript$ c_a_treasure_sac | SpellDescription$ 2-9 VERT Create five Treasure tokens.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3 | SubAbility$ DBDraw | SpellDescription$ 10-19 VERT You gain 3 life and draw three cards.
