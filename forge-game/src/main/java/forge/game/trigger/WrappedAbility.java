@@ -549,7 +549,6 @@ public class WrappedAbility extends Ability {
         sa.setXManaCostPaid(n);
     }
 
-
     public CardState getCardState() {
         return sa.getCardState();
     }
