@@ -453,6 +453,9 @@ public class CardProperty {
             }
         } else if (property.startsWith("CanEnchant")) {
             final String restriction = property.substring(10);
+            if (restriction.equals("EquippedBy")) {
+                if (!source.getEquipping().canBeAttached(card)) return false;
+            }
             if (restriction.equals("Remembered")) {
                 for (final Object rem : source.getRemembered()) {
                     if (!(rem instanceof Card) || !((Card) rem).canBeAttached(card))
