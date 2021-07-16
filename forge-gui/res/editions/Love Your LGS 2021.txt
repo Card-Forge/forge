@@ -7,7 +7,10 @@ ScryfallCode=PLG21
 
 [cards]
 1 R Aven Mindcensor
+J1 R Orb of Dragonkind
 2 R Dig Through Time
+J2 R Orb of Dragonkind
 3 R Bolas's Citadel
+J3 R Orb of Dragonkind
 4 R Goblin Guide
 5 R Scavenging Ooze
