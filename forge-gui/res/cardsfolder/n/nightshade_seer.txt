@@ -3,9 +3,9 @@ ManaCost:3 B
 Types:Creature Human Wizard
 PT:1/1
 A:AB$ Reveal | Cost$ 2 B T | Defined$ You | RevealValid$ Card.Black | AnyNumber$ True | RememberRevealed$ True | SubAbility$ DBNightshadePump | SpellDescription$ Reveal any number of black cards in your hand. Target creature gets -X/-X until end of turn, where X is the number of cards revealed this way.
-SVar:DBNightshadePump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ NightshadeX | NumDef$ NightshadeX | IsCurse$ True | SubAbility$ DBNightshadeCleanup
+SVar:DBNightshadePump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -NightshadeX | NumDef$ -NightshadeX | IsCurse$ True | SubAbility$ DBNightshadeCleanup
 SVar:DBNightshadeCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:NightshadeX:Remembered$Amount.Negative
+SVar:NightshadeX:Remembered$Amount
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nightshade_seer.jpg
 Oracle:{2}{B}, {T}: Reveal any number of black cards in your hand. Target creature gets -X/-X until end of turn, where X is the number of cards revealed this way.

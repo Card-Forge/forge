@@ -72,8 +72,7 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
                     }
                 }
             }
-        }
-        else {
+        } else {
             throw new InvalidParameterException(sa.getHostCard() + "'s ability resulted in no types to choose from");
         }
     }

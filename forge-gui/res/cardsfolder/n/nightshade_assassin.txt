@@ -6,9 +6,9 @@ K:First Strike
 K:Madness:1 B
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigReveal | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may reveal X black cards in your hand. If you do, target creature gets -X/-X until end of turn.
 SVar:TrigReveal:DB$ Reveal | Defined$ You | RevealValid$ Card.Black | AnyNumber$ True | RememberRevealed$ True | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ X | NumDef$ X | IsCurse$ True | SubAbility$ DBNightshadeCleanup
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SubAbility$ DBNightshadeCleanup
 SVar:DBNightshadeCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Remembered$Amount.Negative
+SVar:X:Remembered$Amount
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nightshade_assassin.jpg
 Oracle:First strike\nWhen Nightshade Assassin enters the battlefield, you may reveal X black cards in your hand. If you do, target creature gets -X/-X until end of turn.\nMadness {1}{B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)

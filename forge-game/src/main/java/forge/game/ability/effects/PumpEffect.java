@@ -158,7 +158,6 @@ public class PumpEffect extends SpellAbilityEffect {
         }
 
         if (tgts.size() > 0) {
-
             for (final GameEntity c : tgts) {
                 sb.append(c).append(" ");
             }
