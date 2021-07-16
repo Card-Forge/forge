@@ -49,7 +49,7 @@ public class RepeatEffect extends SpellAbilityEffect {
                 // TODO Replace Infinite Loop Break with a game draw. Here are the scenarios that can cause this:
                 // Helm of Obedience vs Graveyard to Library replacement effect
 
-                if(source.getName().equals("Helm of Obedience")) {
+                if (source.getName().equals("Helm of Obedience")) {
                 StringBuilder infLoop = new StringBuilder(sa.getHostCard().toString());
                     infLoop.append(" - To avoid an infinite loop, this repeat has been broken ");
                     infLoop.append(" and the game will now continue in the current state, ending the loop early. ");

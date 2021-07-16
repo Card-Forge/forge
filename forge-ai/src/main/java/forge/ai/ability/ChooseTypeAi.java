@@ -34,6 +34,7 @@ public class ChooseTypeAi extends SpellAbilityAi {
             if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Mirror Entity Avatar")) {
                 return doMirrorEntityLogic(aiPlayer, sa);
             }
+            return !chooseType(sa, aiPlayer.getCardsIn(ZoneType.Battlefield)).isEmpty();
         } else if ("MostProminentOppControls".equals(sa.getParam("AILogic"))) {
             return !chooseType(sa, aiPlayer.getOpponents().getCardsIn(ZoneType.Battlefield)).isEmpty();
         }
