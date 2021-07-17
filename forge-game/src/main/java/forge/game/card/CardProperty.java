@@ -1690,16 +1690,15 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("wasCast")) {
-            if (null == card.getCastFrom()) {
+            if (!card.wasCast()) {
                 return false;
             }
         } else if (property.equals("wasNotCast")) {
-            if (null != card.getCastFrom()) {
+            if (card.wasCast()) {
                 return false;
             }
         } else if (property.startsWith("wasCastFrom")) {
-            // How are we getting in here with a comma?
-            final String strZone = property.split(",")[0].substring(11);
+            final String strZone = property.substring(11);
             final ZoneType realZone = ZoneType.smartValueOf(strZone);
             if (realZone != card.getCastFrom()) {
                 return false;
