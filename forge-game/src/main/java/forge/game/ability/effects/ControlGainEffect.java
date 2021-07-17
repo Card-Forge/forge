@@ -67,7 +67,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
             if (tapOnLose) {
                 c.tap();
             }
-        } // if
+        }
         host.removeGainControlTargets(c);
     }
 
@@ -103,7 +103,6 @@ public class ControlGainEffect extends SpellAbilityEffect {
 
         boolean combatChanged = false;
         for (Card tgtC : tgtCards) {
-
             if (!tgtC.isInPlay() || !tgtC.canBeControlledBy(newController)) {
                 continue;
             }
