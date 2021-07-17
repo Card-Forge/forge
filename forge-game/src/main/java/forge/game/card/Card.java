@@ -2213,6 +2213,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public String getAbilityText(final CardState state) {
+        final String linebreak = "\r\n\r\n";
         final String grayTag = "<span style=\"color:gray;\">";
         final String endTag = "</span>";
         final CardTypeView type = state.getType();
@@ -2260,9 +2261,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 // Get original description since text might be translated
                 if (replacementEffect.hasParam("Description") &&
                         replacementEffect.getParam("Description").contains("enters the battlefield")) {
-                    sb.append(text).append("\r\n");
+                    sb.append(text).append(linebreak);
                 } else {
-                    replacementEffects.append(text).append("\r\n");
+                    replacementEffects.append(text).append(linebreak);
                 }
             }
         }
@@ -2274,7 +2275,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 Cost cost = first.getPayCosts();
                 if (cost != null && !cost.isOnlyManaCost()) {
                     sb.append(cost.toString());
-                    sb.append("\r\n");
+                    sb.append(linebreak);
                 }
             }
         }
@@ -2294,9 +2295,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
 
         // Give spellText line breaks for easier reading
-        sb.append("\r\n");
         sb.append(text.replaceAll("\\\\r\\\\n", "\r\n"));
-        sb.append("\r\n");
+        sb.append(linebreak);
 
         // Triggered abilities
         for (final Trigger trig : state.getTriggers()) {
@@ -2310,7 +2310,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 if (disabled) sb.append(grayTag);
                 sb.append(trigStr.replaceAll("\\\\r\\\\n", "\r\n"));
                 if (disabled) sb.append(endTag);
-                sb.append("\r\n");
+                sb.append(linebreak);
             }
         }
 
@@ -2322,7 +2322,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             if (!stAb.isSecondary() && !stAb.isClassAbility()) {
                 final String stAbD = stAb.toString();
                 if (!stAbD.equals("")) {
-                    sb.append(stAbD).append("\r\n");
+                    sb.append(stAbD).append(linebreak);
                 }
             }
         }
@@ -2395,7 +2395,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                             desc = TextUtil.fastReplace(desc, "EFFECTSOURCE", host.getEffectSource().getName());
                         }
                         sb.append(desc);
-                        sb.append("\r\n");
+                        sb.append(linebreak);
                     }
                 }
             }
@@ -2403,7 +2403,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
         // Class Abilities
         if (isClassCard()) {
-            String linebreak = "\r\n\r\n";
             sb.append(linebreak);
             // Currently the maximum levels of all Class cards are all 3
             for (int level = 1; level <= 3; ++level) {
@@ -4895,15 +4894,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             final String excR = incR[1];
             final String[] exRs = excR.split("\\+"); // Exclusive Restrictions are ...
             for (String exR : exRs) {
-                if (exR.startsWith("!")) {
-                    exR = exR.substring(1);
-                    if (hasProperty(exR, sourceController, source, spellAbility)) {
-                        return testFailed;
-                    }
-                } else {
-                    if (!hasProperty(exR, sourceController, source, spellAbility)) {
-                        return testFailed;
-                    }
+                if (!hasProperty(exR, sourceController, source, spellAbility)) {
+                    return testFailed;
                 }
             }
         }
@@ -4913,6 +4905,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     // Takes arguments like Blue or withFlying
     @Override
     public boolean hasProperty(final String property, final Player sourceController, final Card source, CardTraitBase spellAbility) {
+        if (property.startsWith("!")) {
+            return !CardProperty.cardHasProperty(this, property.substring(1), sourceController, source, spellAbility);
+        }
         return CardProperty.cardHasProperty(this, property, sourceController, source, spellAbility);
     }
 
