@@ -1,0 +1,19 @@
+[metadata]
+Name:Possibility Storm - Modern Horizons 2 #01
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2021/07/178.-MH2_1-1-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Both graveyards start empty. Assume you have one additional Power Depot and Rustvale Bridge in your deck.
+[state]
+humanlife=20
+ailife=14
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Mogg Salvage|Set:MH2;Kaleidoscorch|Set:MH2;Fury|Set:MH2;Zuran Orb|Set:MH2;Sojourner's Companion|Set:MH2
+humanlibrary=Rustvale Bridge|Set:MH2;Power Depot|Set:MH2
+humanbattlefield=Arcbound Tracker|Counters:P1P1=2|Set:MH2;Arcbound Whelp|Counters:P1P1=2|Set:MH2;Viashino Lashclaw|Set:MH2;Altar of the Goyf|Set:MH2;Sol Talisman|Set:MH2;Sol Talisman|Set:MH2;Power Depot|Counters:P1P1=1|NoETBTrigs|Set:MH2;Rustvale Bridge|Set:MH2;Rustvale Bridge|Set:MH2;Rustvale Bridge|Set:MH2
+aibattlefield=Glimmer Bairn|Counters:P1P1=1;Glimmer Bairn|Counters:P1P1=1;Void Mirror
+aiprecast=Fairgrounds Patrol:CustomScript:DB$ Token | TokenScript$ c_1_1_a_thopter_flying
+removesummoningsickness=true
