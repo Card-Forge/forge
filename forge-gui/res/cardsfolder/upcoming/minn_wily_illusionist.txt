@@ -7,6 +7,6 @@ SVar:TrigToken:DB$ Token | TokenScript$ u_1_1_illusion_other_illusions
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Illusion.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ Whenever an Illusion you control dies, you may put a permanent card with mana value less than or equal to that creature's power from your hand onto the battlefield.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Permanent.cmcLEX+YouOwn | ChangeNum$ 1 | StackDescription$ None
 SVar:X:TriggeredCard$CardPower
-DeckHas:Ablility$Token
+DeckHas:Ability$Token
 DeckHints:Type$Illusion
 Oracle:Whenever you draw your second card each turn, create a 1/1 blue Illusion creature token with "This creature gets +1/+0 for each other Illusion you control."\nWhenever an Illusion you control dies, you may put a permanent card with mana value less than or equal to that creature's power from your hand onto the battlefield.
