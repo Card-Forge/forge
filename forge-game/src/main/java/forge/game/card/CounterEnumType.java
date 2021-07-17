@@ -65,6 +65,8 @@ public enum CounterEnumType {
 
     COIN("COIN",255,215,0),
 
+    COMPONENT("COMPN", 224, 160, 48),
+
     CORPSE("CRPSE", 230, 186, 209),
 
     CORRUPTION("CRPTN", 210, 121, 210),

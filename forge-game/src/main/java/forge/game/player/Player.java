@@ -2217,6 +2217,9 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     @Override
     public final boolean hasProperty(final String property, final Player sourceController, final Card source, CardTraitBase spellAbility) {
+        if (property.startsWith("!")) {
+            return !PlayerProperty.playerHasProperty(this, property.substring(1), sourceController, source, spellAbility);
+        }
         return PlayerProperty.playerHasProperty(this, property, sourceController, source, spellAbility);
     }
 

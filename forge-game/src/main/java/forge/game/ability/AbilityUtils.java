@@ -31,6 +31,7 @@ import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.card.mana.ManaCostShard;
 import forge.game.CardTraitBase;
+import forge.game.Direction;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
@@ -1268,6 +1269,9 @@ public class AbilityUtils {
         }
         else if (defined.equals("Opponent")) {
             players.addAll(player.getOpponents());
+        } else if (defined.startsWith("NextPlayerToYour")) {
+            Direction dir = defined.substring(16).equals("Left") ? Direction.Left : Direction.Right;
+            players.add(game.getNextPlayerAfter(player, dir));
         }
         else {
             for (Player p : game.getPlayersInTurnOrder()) {
