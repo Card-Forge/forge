@@ -6036,6 +6036,19 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public void setCastFrom(final ZoneType castFrom0) {
         castFrom = castFrom0;
     }
+    public boolean wasCast() {
+        if (hasMergedCard()) {
+            boolean wasCast = false;
+            for (Card c : getMergedCards()) {
+                if (null != c.getCastFrom()) {
+                    wasCast = true;
+                    break;
+                }
+            }
+            return wasCast;
+        }
+        return getCastFrom() != null;
+    }
 
     public SpellAbility getCastSA() {
         return castSA;

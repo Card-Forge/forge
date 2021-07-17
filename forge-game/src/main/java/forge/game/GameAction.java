@@ -705,17 +705,20 @@ public class GameAction {
             }
         }
 
-        if (zoneFrom == null) {
-            c.setCastFrom(null);
-            c.setCastSA(null);
-        } else if (zoneTo.is(ZoneType.Stack)) {
-            c.setCastFrom(zoneFrom.getZoneType());
+        if (zoneTo.is(ZoneType.Stack)) {
+            // zoneFrom maybe null if the spell is cast from "Ouside the game", ex. ability of Garth One-Eye
+            if (zoneFrom == null) {
+                c.setCastFrom(null);
+            } else {
+                c.setCastFrom(zoneFrom.getZoneType());
+            }
             if (cause != null && cause.isSpell() && c.equals(cause.getHostCard()) && !c.isCopiedSpell()) {
                 c.setCastSA(cause);
             } else {
                 c.setCastSA(null);
             }
-        } else if (!(zoneTo.is(ZoneType.Battlefield) && zoneFrom.is(ZoneType.Stack))) {
+        } else if (zoneFrom == null || !(zoneFrom.is(ZoneType.Stack) &&
+                (zoneTo.is(ZoneType.Battlefield) || zoneTo.is(ZoneType.Merged)))) {
             c.setCastFrom(null);
             c.setCastSA(null);
         }
