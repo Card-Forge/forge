@@ -7,4 +7,5 @@ SVar:TrigChoice:DB$ RepeatEach | RepeatPlayers$ Player | StartingWithActivator$ 
 SVar:DBChoosePermanent:DB$ ChooseCard | Defined$ Remembered | Choices$ Artifact.YouDontCtrl,Enchantment.YouDontCtrl | Optional$ True | ChoiceTitle$ Choose an artifact or enchantment | RememberChosen$ True
 SVar:DBDestroy:DB$ Destroy | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AI:RemoveDeck:Random
 Oracle:When Druid of Purification enters the battlefield, starting with you, each player may choose an artifact or enchantment you don't control. Destroy each permanent chosen this way.
