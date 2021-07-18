@@ -2,6 +2,7 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import forge.Graphics;
 import forge.adventure.AdventureApplicationAdapter;
 import forge.adventure.world.WorldSave;
@@ -31,14 +32,15 @@ public class DuelScene extends Scene implements IUpdateable {
     FScreen screen;
     Graphics localGraphics;
     HostedMatch hostedMatch;
+    Stage stage;
     public DuelScene() {
 
     }
 
     @Override
     public void dispose() {
-        if(Stage!=null)
-            Stage.dispose();
+        if(stage!=null)
+            stage.dispose();
     }
 
     @Override
@@ -106,6 +108,7 @@ public class DuelScene extends Scene implements IUpdateable {
         List<RegisteredPlayer> players = new ArrayList<>();
         RegisteredPlayer humanPlayer = RegisteredPlayer.forVariants(2, appliedVariants, WorldSave.getCurrentSave().player.getDeck(), null, false, null, null);
         humanPlayer.setPlayer(GamePlayerUtil.getGuiPlayer());
+
         RegisteredPlayer aiPlayer = RegisteredPlayer.forVariants(2, appliedVariants, DeckSerializer.fromFile(new File("../forge-gui/res/quest/duels/Agent K 1.dck")), null, false, null, null);
         aiPlayer.setPlayer(GamePlayerUtil.createAiPlayer());
         players.add(humanPlayer);
@@ -132,7 +135,7 @@ public class DuelScene extends Scene implements IUpdateable {
         }
 
         screen =  MatchController.getView();
-        screen.setHeaderCaption("DUUUUUUUELLL");
+
         screen.setSize(AdventureApplicationAdapter.CurrentAdapter.getCurrentWidth(), AdventureApplicationAdapter.CurrentAdapter.getCurrentHeight());
 
 

@@ -12,10 +12,12 @@ public class Res {
     public static Res CurrentRes;
     private String Prefix;
     private String Lang="en-us";
+    private String plane="";
     private HashMap<String,FileHandle> Cache=new HashMap<String,FileHandle>();
 
     public String GetPrefix(){return Prefix;}
     public Res(String plane) {
+        this.plane=plane;
         CurrentRes=this;
         Prefix= GuiBase.getInterface().getAssetsDir()+"/res/adventure/"+plane+"/";
         if(FModel.getPreferences()!=null)
@@ -48,6 +50,7 @@ public class Res {
     }
 
 
-
-
+    public String GetPlane() {
+        return plane;
+    }
 }

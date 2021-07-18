@@ -3,8 +3,12 @@
 		"startPointY": 0.22,
 		"name": "white",
 			"noiceWeight": 0.5,
-			"distWeight": 1.5,
-			"sizeX": 0.5,
-			"sizeY": 0.5,
-		"color": "efe697"
+			"distWeight": 1.5,        
+    "tileset":"world/tilesets/white.atlas",
+			"width": 0.5,
+			"height": 0.5,
+		"color": "efe697" ,
+    "spriteNames":[ 
+"sprites/plainstree.json" 
+] 
 }

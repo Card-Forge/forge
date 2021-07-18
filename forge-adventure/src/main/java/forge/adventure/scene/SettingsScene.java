@@ -5,11 +5,9 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Slider;
-import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import forge.adventure.AdventureApplicationAdapter;
 import forge.adventure.util.Controls;
@@ -21,13 +19,19 @@ public class SettingsScene extends  Scene {
 
 
     static public ForgePreferences Preference;
-    private VerticalGroup settingGroup;
-    private VerticalGroup nameGroup;
+    private Table settingGroup;
+    private ScrollPane scrollPane;
 
     @Override
+    public void Enter()
+    {
+        Gdx.input.setInputProcessor(stage); //Start taking input from the ui
+    }
+    Stage stage;
+    @Override
     public void dispose() {
-        if(Stage!=null)
-            Stage.dispose();
+        if(stage!=null)
+            stage.dispose();
     }
     Texture Background;
     @Override
@@ -36,13 +40,13 @@ public class SettingsScene extends  Scene {
 
         Gdx.gl.glClearColor(1,0,1,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        Stage.getBatch().begin();
-        Stage.getBatch().disableBlending();
-        Stage.getBatch().draw(Background,0,0,IntendedWidth,IntendedHeight);
-        Stage.getBatch().enableBlending();
-        Stage.getBatch().end();
-        Stage.act(Gdx.graphics.getDeltaTime());
-        Stage.draw();
+        stage.getBatch().begin();
+        stage.getBatch().disableBlending();
+        stage.getBatch().draw(Background,0,0,IntendedWidth,IntendedHeight);
+        stage.getBatch().enableBlending();
+        stage.getBatch().end();
+        stage.act(Gdx.graphics.getDeltaTime());
+        stage.draw();
 
     }
 
@@ -50,6 +54,12 @@ public class SettingsScene extends  Scene {
     {
         AdventureApplicationAdapter.CurrentAdapter.SwitchScene(AdventureApplicationAdapter.CurrentAdapter.GetLastScene());
         return true;
+    }
+    enum ControlTypes
+    {
+        CheckBox,
+        Slider,
+        Resolution
     }
     private void AddSettingButton(String name, Class type, ForgePreferences.FPref pref, Object[] para)
     {
@@ -86,6 +96,26 @@ public class SettingsScene extends  Scene {
             });
 
         }
+        else if (int.class.equals(type))
+        {
+            TextField text = Controls.newTextField(Preference.getPref(pref));
+            control=text;
+            text.setTextFieldFilter(new TextField.TextFieldFilter() {
+                @Override
+                public boolean acceptChar(TextField textField, char c) {
+                    return Character.isDigit(c);
+                }
+            });
+            text.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor)
+                {
+                    Preference.setPref(pref, String.valueOf((int)((Slider)actor).getValue()));
+                    Preference.save();
+                }
+            });
+
+        }
         else
         {
             control=Controls.newLabel("");
@@ -93,23 +123,23 @@ public class SettingsScene extends  Scene {
         }
         control.setHeight(40);
         Label label=Controls.newLabel(name);
-        nameGroup.addActor(label);
-        settingGroup.addActor(control);
+        //nameGroup.addActor(label);
+        settingGroup.row();
+        settingGroup.add(label).align(Align.left);
+        settingGroup.add(control);
     }
     @Override
     public void ResLoaded()
     {
-        Stage = new Stage(new StretchViewport(IntendedWidth,IntendedHeight));
+        stage = new Stage(new StretchViewport(IntendedWidth,IntendedHeight));
         Background = new Texture( forge.adventure.AdventureApplicationAdapter.CurrentAdapter.GetRes().GetFile("img/title_bg.png"));
-        settingGroup=new VerticalGroup();
-        nameGroup =new VerticalGroup();
+        settingGroup=new Table();
         if(Preference==null)
         {
             Preference = new ForgePreferences();
         }
         Localizer localizer = Localizer.getInstance();
 
-        AddSettingButton("Enable Music", boolean.class,ForgePreferences.FPref.UI_ENABLE_MUSIC, new Object[]{});
         AddSettingButton(localizer.getMessage("lblCardName"), boolean.class,ForgePreferences.FPref.UI_OVERLAY_CARD_NAME, new Object[]{});
         AddSettingButton(localizer.getMessage("cbAdjustMusicVolume"), int.class,ForgePreferences.FPref.UI_VOL_MUSIC, new Object[]{0,100});
         AddSettingButton(localizer.getMessage("cbAdjustSoundsVolume"), int.class,ForgePreferences.FPref.UI_VOL_SOUNDS, new Object[]{0,100});
@@ -117,18 +147,17 @@ public class SettingsScene extends  Scene {
         AddSettingButton(localizer.getMessage("lblPowerOrToughness"), boolean.class,ForgePreferences.FPref.UI_OVERLAY_CARD_POWER, new Object[]{});
         AddSettingButton(localizer.getMessage("lblCardID"), boolean.class,ForgePreferences.FPref.UI_OVERLAY_CARD_ID, new Object[]{});
         AddSettingButton(localizer.getMessage("lblAbilityIcon"), boolean.class,ForgePreferences.FPref.UI_OVERLAY_ABILITY_ICONS, new Object[]{});
+        AddSettingButton(localizer.getMessage("nlImageFetcher"), boolean.class,ForgePreferences.FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER, new Object[]{});
 
 
 
-        //settingGroup.pack();
-       // nameGroup.pack();
-        nameGroup.setPosition(130,600);
-        settingGroup.setPosition(500,600);
+        settingGroup.row();
+        settingGroup.add(Controls.newTextButton("Return",()->Back()));
 
-        nameGroup.addActor(Controls.newTextButton("Return",()->Back()));
-
-        Stage.addActor(settingGroup);
-        Stage.addActor(nameGroup);
+        scrollPane=new ScrollPane(settingGroup,Controls.GetSkin());
+        scrollPane.setScrollingDisabled(true,false);
+        scrollPane.setFillParent(true);
+        stage.addActor(scrollPane);
     }
     @Override
     public void create() {

@@ -35,7 +35,7 @@ import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 
-class StartAdvanture extends AdventureApplicationAdapter
+class StartAdventure extends AdventureApplicationAdapter
 {
         private static Clipboard clipboard;
         private static IDeviceAdapter deviceAdapter;
@@ -69,7 +69,7 @@ class StartAdvanture extends AdventureApplicationAdapter
         public static boolean autoCache = false;
         public static int lastButtonIndex = 0;
         public static String CJK_Font = "";
-        public StartAdvanture(String plane) {
+        public StartAdventure(String plane) {
 
                 super(plane);
 
@@ -77,7 +77,7 @@ class StartAdvanture extends AdventureApplicationAdapter
                 Forge.isPortraitMode=false;
                 Forge.hdbuttons = true;
                 Forge.hdstart = true;
-                Forge app= (Forge) Forge.getApp(new Lwjgl3Clipboard(),null,"../forge-gui/",true,false,0,true,0,"","");
+                Forge app= (Forge) Forge.getApp(new Lwjgl3Clipboard(),new DesktopAdapter(""),"../forge-gui/",true,false,0,true,0,"","");
 
                 app.resize(1920,1080);
                 clipboard = new Lwjgl3Clipboard();
@@ -86,10 +86,7 @@ class StartAdvanture extends AdventureApplicationAdapter
                 GuiBase.enablePropertyConfig(true);
                 isPortraitMode = true;
                 totalDeviceRAM = 0;
-
-
                 GuiBase.setDeviceInfo("", "", 0, 0);
-
 
         }
         @Override
@@ -262,7 +259,7 @@ public class Main {
                 AdventureApplicationConfiguration config=new AdventureApplicationConfiguration();
                 config.SetPlane("Shandalar");
                 config.setFullScreen(false);
-                new Lwjgl3Application(new StartAdvanture(config.Plane), config );
+                new Lwjgl3Application(new StartAdventure(config.Plane), config );
 
         }
 }

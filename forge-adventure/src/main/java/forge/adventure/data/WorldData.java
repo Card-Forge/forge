@@ -7,8 +7,11 @@ import java.util.List;
 public class WorldData
 {
 
-    public int sizeX;
-    public int sizeY;
+    public int width;
+    public int height;
+
+    public float playerStartPosX;
+    public float playerStartPosY;
 
     public int tileSize;
     public List<String> biomNames;

@@ -3,8 +3,13 @@
 		"startPointY": 0.43,
 		"name": "green",
 		"noiceWeight": 0.5,
-		"distWeight": 1.5,
-		"sizeX": 0.5,
-		"sizeY": 0.5,
-		"color": "59a650"
+		"distWeight": 1.5,            
+    "tileset":"world/tilesets/green.atlas",
+		"width": 0.5,
+		"height": 0.5,
+		"color": "59a650"  ,
+    "spriteNames":[ 
+"sprites/tree.json",      
+"sprites/bush.json"
+] 
 }

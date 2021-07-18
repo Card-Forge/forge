@@ -3,8 +3,12 @@
 		"startPointY": 0.43,
 		  "name": "blue",
 		  "noiceWeight": 0.5,
-		  "distWeight": 1.5,
-		  "sizeX": 0.5,
-		  "sizeY": 0.5,
-		"color": "10a2e0"
+		  "distWeight": 1.5,    
+    "tileset":"world/tilesets/blue.atlas",
+		  "width": 0.5,
+		  "height": 0.5,
+		"color": "10a2e0",
+    "spriteNames":[ 
+"sprites/palmtree.json" 
+] 
 }

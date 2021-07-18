@@ -3,8 +3,13 @@
 		"startPointY": 0.78,
 		  "name": "black",
 		  "noiceWeight": 0.5,
-		  "distWeight": 1.5,
-		  "sizeX": 0.5,
-		  "sizeY": 0.5,
-		"color": "110903"
+		  "distWeight": 1.5,       
+    "tileset":"world/tilesets/black.atlas",
+		  "width": 0.5,
+		  "height": 0.5,
+		"color": "110903",
+    "spriteNames":[ 
+"sprites/swamptree.json" 
+] 
+    
       }

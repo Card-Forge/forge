@@ -19,8 +19,9 @@ public class Controls {
 
         return ret;
     }
-    static public SelectBox newComboBox(Object[] text, Function<Object, Void> func)
+    static public SelectBox newComboBox(Object[] text,Object item, Function<Object, Void> func)
     {
+
         SelectBox ret=new SelectBox(GetSkin());
         ret.setItems(text);
         ret.addListener(new ChangeListener() {
@@ -34,7 +35,9 @@ public class Controls {
                 }
             }
         });
+        func.apply(item);
 
+        ret.setSelected(item);
         return ret;
     }
     static public SelectBox newComboBoxInt(Object[] text, Function<Integer, Void> func)
@@ -54,6 +57,10 @@ public class Controls {
         });
 
         return ret;
+    }
+    static public TextField newTextField(String text)
+    {
+        return new TextField(text,GetSkin());
     }
     static public TextField newTextField(String text, Function<String, Void> func)
     {
@@ -114,6 +121,12 @@ public class Controls {
     public static Label newLabel(String name) {
 
         Label ret=new Label(name,GetSkin());
+        return ret;
+    }
+
+    public static Dialog newDialog(String title) {
+        Dialog ret=new Dialog(title,GetSkin());
+
         return ret;
     }
 }

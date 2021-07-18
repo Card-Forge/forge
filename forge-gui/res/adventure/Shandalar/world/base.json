@@ -5,7 +5,9 @@
 		"startPointY": 0.5,
 		"noiceWeight": 0,
 		"distWeight": 0,
-		"sizeX": 1,
-		"sizeY": 1,
-		"color": "0054a2"
+    "tileset":"world/tilesets/base.atlas",
+		"width": 1,
+		"height": 1,
+		"color": "0054a2"      ,
+    "spriteNames":[ ]
 }

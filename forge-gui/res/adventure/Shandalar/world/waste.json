@@ -3,8 +3,13 @@
 		"startPointY": 0.5,
 		"name": "waste",
 		"noiceWeight": 0.3,
-		"distWeight": 1.0,
-		"sizeX": 0.95,
-		"sizeY": 0.95,
-		"color": "aeaeae"
+		"distWeight": 1.0,     
+    "tileset":"world/tilesets/waste.atlas",
+		"width": 0.95,
+		"height": 0.95,
+		"color": "aeaeae",
+    "spriteNames":[ 
+"sprites/wasteRock1.json",
+"sprites/wasteRock2.json" 
+] 
 }

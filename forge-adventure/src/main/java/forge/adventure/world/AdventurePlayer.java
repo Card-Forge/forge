@@ -3,6 +3,9 @@ package forge.adventure.world;
 import forge.deck.Deck;
 
 public class AdventurePlayer {
+    private int worldPosX;
+    private int worldPosY;
+
     private String name;
     private Deck deck;
     private WorldSave.Difficulty difficulty;
@@ -25,5 +28,21 @@ public class AdventurePlayer {
 
     public String getName() {
         return name;
+    }
+
+    public int getWorldPosX() {
+        return worldPosX;
+    }
+
+    public int getWorldPosY() {
+        return worldPosY;
+    }
+
+    public void setWorldPosX(int worldPosX) {
+        this.worldPosX = worldPosX;
+    }
+
+    public void setWorldPosY(int worldPosY) {
+        this.worldPosY = worldPosY;
     }
 }

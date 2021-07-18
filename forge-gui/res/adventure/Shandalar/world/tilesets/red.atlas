@@ -4,31 +4,31 @@ size: 384,1024
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-TileSet1
+TileSet
   rotate: false
   xy: 0, 256
   size: 96, 128
   orig: 0, 0
   offset: 0, 0
   index: 0  
-TileSet2
+TileSet
   rotate: false
   xy: 96, 256
   size: 96, 128
   orig: 0, 0
   offset: 0, 0
   index: 0        
-TileSet3
+TileSet
   rotate: false
   xy: 192, 256
   size: 96, 128
   orig: 0, 0
   offset: 0, 0
   index: 0     
-TileSet4
+TileSet
   rotate: false
   xy: 288, 256
   size: 96, 128
   orig: 0, 0
   offset: 0, 0
-  index: 0 
+  index: 0

@@ -1,6 +1,8 @@
 {
-"sizeX": 1000,
-"sizeY": 1000,
+"width": 1000,
+"height": 1000,
+"playerStartPosY": 0.5,
+"playerStartPosX": 0.5,
 "tileSize": 32,
 "biomNames": [ "base.json","waste.json","white.json","blue.json","black.json","red.json","green.json"],
 "starterDecks": 

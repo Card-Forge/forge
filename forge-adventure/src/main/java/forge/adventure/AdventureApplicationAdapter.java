@@ -77,4 +77,8 @@ public class AdventureApplicationAdapter extends ApplicationAdapter {
     public Scene GetLastScene() {
         return lastScene;
     }
+
+    public void SwitchToLast() {
+        SwitchScene(lastScene);
+    }
 }
