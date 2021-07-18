@@ -132,7 +132,7 @@ public abstract class Trigger extends TriggerReplacementBase {
 
             StringBuilder sb = new StringBuilder();
             String currentName;
-            if (this.isIntrinsic() && !this.getHostCard().isMutated() && cardState != null) {
+            if (this.isIntrinsic() && cardState != null && cardState.getCard() == getHostCard()) {
                 currentName = cardState.getName();
             }
             else {
