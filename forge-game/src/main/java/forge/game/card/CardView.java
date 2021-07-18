@@ -233,6 +233,20 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.Token, c.isToken());
     }
 
+    public boolean isImmutable() {
+        return get(TrackableProperty.IsImmutable);
+    }
+    public void updateImmutable(Card c) {
+        set(TrackableProperty.IsImmutable, c.isImmutable());
+    }
+
+    public boolean isEmblem() {
+        return get(TrackableProperty.IsEmblem);
+    }
+    public void updateEmblem(Card c) {
+        set(TrackableProperty.IsEmblem, c.isEmblem());
+    }
+
     public boolean isTokenCard() { return get(TrackableProperty.TokenCard); }
     void updateTokenCard(Card c) { set(TrackableProperty.TokenCard, c.isTokenCard()); }
 

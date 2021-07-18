@@ -242,6 +242,7 @@ public final class CardUtil {
         newCopy.setToken(in.isToken());
         newCopy.setCopiedSpell(in.isCopiedSpell());
         newCopy.setImmutable(in.isImmutable());
+        newCopy.setEmblem(in.isEmblem());
 
         // lock in the current P/T
         newCopy.setBasePower(in.getCurrentPower());

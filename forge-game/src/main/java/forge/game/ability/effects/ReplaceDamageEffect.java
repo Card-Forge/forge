@@ -47,7 +47,7 @@ public class ReplaceDamageEffect extends SpellAbilityEffect {
             prevent -= n;
 
             if (!StringUtils.isNumeric(varValue) && card.getSVar(varValue).startsWith("Number$")) {
-                if (card.getType().hasStringType("Effect") && prevent <= 0) {
+                if (card.isImmutable() && prevent <= 0) {
                     game.getAction().exile(card, null);
                 } else {
                     card.setSVar(varValue, "Number$" + prevent);
