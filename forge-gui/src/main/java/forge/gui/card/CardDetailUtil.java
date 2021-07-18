@@ -221,7 +221,7 @@ public class CardDetailUtil {
         String curColors = "";
 
         // do not show current colors for temp effect cards, emblems and the like
-        if (state.getType().isEmblem() || state.getType().hasSubtype("Effect")) {
+        if (state.getCard().isImmutable()) {
             return "";
         }
 
@@ -275,16 +275,14 @@ public class CardDetailUtil {
 
         // Token
         if (card.isToken()) {
-            if(card.getCurrentState().getType().hasSubtype("Effect"))
-                area.append("Effect");
-            else if(card.getCurrentState().getType().isEmblem())
-                area.append("Emblem");
-            else
-                area.append("Token");
+            area.append("Token");
         } else if (card.isTokenCard()) {
             area.append("Token card");
+        } else if(card.isEmblem()) {
+            area.append("Emblem");
+        } else if(card.isImmutable()) {
+            area.append("Effect");
         }
-
         // card text
         if (area.length() != 0) {
             area.append("\n");

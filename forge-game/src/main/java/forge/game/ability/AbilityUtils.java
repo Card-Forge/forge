@@ -112,9 +112,9 @@ public class AbilityUtils {
     // Probably will move to One function solution sometime in the future
     public static CardCollection getDefinedCards(final Card hostCard, final String def, final CardTraitBase sa) {
         CardCollection cards = new CardCollection();
-        String defined = (def == null) ? "Self" : applyAbilityTextChangeEffects(def, sa); // default to Self
-        final String[] incR = defined.split("\\.", 2);
-        defined = incR[0];
+        String changedDef = (def == null) ? "Self" : applyAbilityTextChangeEffects(def, sa); // default to Self
+        final String[] incR = changedDef.split("\\.", 2);
+        String defined = incR[0];
         final Game game = hostCard.getGame();
 
         Card c = null;
@@ -132,7 +132,7 @@ public class AbilityUtils {
             }
         }
         else if (defined.equals("EffectSource")) {
-            if (hostCard.isEmblem() || hostCard.getType().hasSubtype("Effect")) {
+            if (hostCard.isImmutable()) {
                 c = findEffectRoot(hostCard);
             }
         }
@@ -346,6 +346,23 @@ public class AbilityUtils {
                     cards.add(game.getCardState(cardByID));
                 }
             }
+        } else if (defined.startsWith("Valid")) {
+            Iterable<Card> candidates;
+            String validDefined;
+            if (defined.startsWith("Valid ")) {
+                candidates = game.getCardsIn(ZoneType.Battlefield);
+                validDefined = changedDef.substring("Valid ".length());
+            } else if (defined.startsWith("ValidAll ")) {
+                candidates = game.getCardsInGame();
+                validDefined = changedDef.substring("ValidAll ".length());
+            } else {
+                String[] s = changedDef.split(" ", 2);
+                String zone = s[0].substring("Valid".length());
+                candidates = game.getCardsIn(ZoneType.smartValueOf(zone));
+                validDefined = s[1];
+            }
+            cards.addAll(CardLists.getValidCards(candidates, validDefined.split(","), hostCard.getController(), hostCard, sa));
+            return cards;
         } else {
             CardCollection list = null;
             if (sa instanceof SpellAbility) {
@@ -375,19 +392,6 @@ public class AbilityUtils {
                 } else if (defined.startsWith("Untapped")) {
                     list = root.getPaidList("Untapped");
                 }
-            }
-
-            if (defined.startsWith("Valid ")) {
-                String validDefined = defined.substring("Valid ".length());
-                list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), validDefined.split(","), hostCard.getController(), hostCard, sa);
-            } else if (defined.startsWith("ValidAll ")) {
-                String validDefined = defined.substring("ValidAll ".length());
-                list = CardLists.getValidCards(game.getCardsInGame(), validDefined.split(","), hostCard.getController(), hostCard, sa);
-            } else if (defined.startsWith("Valid")) {
-                String[] s = defined.split(" ");
-                String zone = s[0].substring("Valid".length());
-                String validDefined = s[1];
-                list = CardLists.getValidCards(game.getCardsIn(ZoneType.smartValueOf(zone)), validDefined.split(","), hostCard.getController(), hostCard, sa);
             }
 
             if (list != null) {
@@ -421,7 +425,7 @@ public class AbilityUtils {
     private static Card findEffectRoot(Card startCard) {
         Card cc = startCard.getEffectSource();
         if (cc != null) {
-            if (cc.isEmblem() || cc.getType().hasSubtype("Effect")) {
+            if (cc.isImmutable()) {
                 return findEffectRoot(cc);
             }
             return cc;

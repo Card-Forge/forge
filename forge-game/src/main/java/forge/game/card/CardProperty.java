@@ -357,7 +357,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("EffectSource")) {
-            if (!source.isEmblem() && !source.getType().hasSubtype("Effect")) {
+            if (!source.isImmutable()) {
                 return false;
             }
 

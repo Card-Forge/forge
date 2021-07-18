@@ -13,7 +13,6 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
 
 import forge.GameCommand;
-import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -457,25 +456,19 @@ public abstract class SpellAbilityEffect {
         final Card eff = new Card(game.nextCardId(), game);
         eff.setTimestamp(game.getNextTimestamp());
         eff.setName(name);
+        eff.setColor(hostCard.determineColor().getColor());
         // if name includes emblem then it should be one
-        eff.addType(name.startsWith("Emblem") ? "Emblem" : "Effect");
-        // add Planeswalker types into Emblem for fun
-        if (name.startsWith("Emblem") && hostCard.isPlaneswalker()) {
-            for (final String type : hostCard.getType().getSubtypes()) {
-                if (CardType.isAPlaneswalkerType(type)) {
-                    eff.addType(type);
-                }
-            }
+        if (name.startsWith("Emblem")) {
+            eff.setEmblem(true);
+            // Emblem needs to be colorless
+            eff.setColor(MagicColor.COLORLESS);
         }
+
         eff.setOwner(controller);
         eff.setSVars(sa.getSVars());
 
         eff.setImageKey(image);
-        if (eff.getType().hasType(CardType.CoreType.Emblem)) {
-            eff.setColor(MagicColor.COLORLESS);
-        } else {
-            eff.setColor(hostCard.determineColor().getColor());
-        }
+
         eff.setImmutable(true);
         eff.setEffectSource(sa);
 

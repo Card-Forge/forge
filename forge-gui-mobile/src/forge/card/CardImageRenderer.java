@@ -362,8 +362,7 @@ public class CardImageRenderer {
             drawDetails(g, card, gameView, altState, x, y, w, h);
             return;
         }
-        if(card.isToken() && card.getCurrentState().getType().hasSubtype("Effect")
-                && FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DISABLE_IMAGES_EFFECT_CARDS)){
+        if(card.isImmutable() && FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DISABLE_IMAGES_EFFECT_CARDS)){
             drawDetails(g, card, gameView, altState, x, y, w, h);
             return;
         }

@@ -1,0 +1,8 @@
+Name:Illusion
+ManaCost:no cost
+Types:Creature Illusion
+Colors:blue
+PT:1/1
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ This creature gets +1/+0 for each other Illusion you control.
+SVar:X:Count$Valid Illusion.Other+YouCtrl
+Oracle:This creature gets +1/+0 for each other Illusion you control.

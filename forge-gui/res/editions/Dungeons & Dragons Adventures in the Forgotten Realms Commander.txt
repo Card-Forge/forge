@@ -348,6 +348,6 @@ g_1_1_saproling
 g_3_3_beast
 r_5_5_dragon_flying
 rg_5_4_dragon_spirit_damagesac
-u_1_1_illusion
+u_1_1_illusion_other_illusions
 w_2_2 knight_vigilance
 w_4_4_angel_flying

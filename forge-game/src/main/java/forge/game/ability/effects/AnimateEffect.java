@@ -190,11 +190,6 @@ public class AnimateEffect extends AnimateEffectBase {
                 }
             }
 
-            // Restore immutable to effect
-            if (sa.hasParam("Immutable")) {
-                c.setImmutable(true);
-            }
-
             game.fireEvent(new GameEventCardStatsChanged(c));
         }
 
