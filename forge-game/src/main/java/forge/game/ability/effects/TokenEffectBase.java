@@ -31,6 +31,7 @@ import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.Trigger;
 import forge.game.zone.ZoneType;
 
 public abstract class TokenEffectBase extends SpellAbilityEffect {
@@ -118,7 +119,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                 }
                 tok.setTimestamp(timestamp);
                 tok.setToken(true);
-                
+
                 // do effect stuff with the token
                 if (sa.hasParam("TokenTapped")) {
                     tok.setTapped(true);
@@ -136,6 +137,15 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                     CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
                     int cAmount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("WithCountersAmount", "1"), sa);
                     tok.addEtbCounter(cType, cAmount, creator);
+                }
+
+                if (sa.hasParam("AddTriggersFrom")) {
+                    final List<Card> cards = AbilityUtils.getDefinedCards(host, sa.getParam("AddTriggersFrom"), sa);
+                    for (final Card card : cards) {
+                        for (final Trigger trig : card.getTriggers()) {
+                            tok.addTrigger(trig.copy(tok, false));
+                        }
+                    }
                 }
 
                 if (clone) {
