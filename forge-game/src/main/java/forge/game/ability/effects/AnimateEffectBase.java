@@ -164,14 +164,6 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(AbilityUtils.getSVar(sa, s), c, false, sa);
             addedTriggers.add(parsedTrigger);
         }
-        if (sa.hasParam("GainsTriggeredAbilitiesOf")) {
-            final List<Card> cards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("GainsTriggeredAbilitiesOf"), sa);
-            for (final Card card : cards) {
-                for (Trigger t : card.getTriggers()) {
-                    addedTriggers.add(t.copy(c, false));
-                }
-            }
-        }
 
         // give replacement effects
         final List<ReplacementEffect> addedReplacements = Lists.newArrayList();
