@@ -1,0 +1,11 @@
+Name:Druid of Purification
+ManaCost:3 G
+Types:Creature Human Druid
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoice | TriggerDescription$ When CARDNAME enters the battlefield, starting with you, each player may choose an artifact or enchantment you don’t control. Destroy each permanent chosen this way.
+SVar:TrigChoice:DB$ RepeatEach | RepeatPlayers$ Player | StartingWithActivator$ True | RepeatSubAbility$ DBChoosePermanent | SubAbility$ DBDestroy
+SVar:DBChoosePermanent:DB$ ChooseCard | Defined$ Remembered | Choices$ Artifact.YouDontCtrl,Enchantment.YouDontCtrl | Optional$ True | ChoiceTitle$ Choose an artifact or enchantment | RememberChosen$ True
+SVar:DBDestroy:DB$ Destroy | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AI:RemoveDeck:Random
+Oracle:When Druid of Purification enters the battlefield, starting with you, each player may choose an artifact or enchantment you don't control. Destroy each permanent chosen this way.
