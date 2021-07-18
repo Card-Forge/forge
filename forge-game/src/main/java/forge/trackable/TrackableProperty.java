@@ -24,6 +24,9 @@ public enum TrackableProperty {
     Controller(TrackableTypes.PlayerViewType),
     Zone(TrackableTypes.EnumType(ZoneType.class)),
 
+    IsImmutable(TrackableTypes.BooleanType),
+    IsEmblem(TrackableTypes.BooleanType),
+
     Flipped(TrackableTypes.BooleanType),
     Facedown(TrackableTypes.BooleanType),
     Foretold(TrackableTypes.BooleanType),

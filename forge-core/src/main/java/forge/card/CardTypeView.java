@@ -42,7 +42,6 @@ public interface CardTypeView extends Iterable<String>, Serializable {
     boolean isBasicLand();
     boolean isPlane();
     boolean isPhenomenon();
-    boolean isEmblem();
     boolean isTribal();
     boolean isDungeon();
     CardTypeView getTypeWithChanges(Iterable<CardChangedType> changedCardTypes);

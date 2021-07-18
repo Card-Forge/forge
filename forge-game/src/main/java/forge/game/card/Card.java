@@ -264,6 +264,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     // for Vanguard / Manapool / Emblems etc.
     private boolean isImmutable = false;
+    private boolean isEmblem = false;
 
     private int exertThisTurn = 0;
     private PlayerCollection exertedByPlayer = new PlayerCollection();
@@ -4598,14 +4599,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final boolean isPermanent() {
-        return !isImmutable && (isInZone(ZoneType.Battlefield) || getType().isPermanent());
+        return !isImmutable() && (isInZone(ZoneType.Battlefield) || getType().isPermanent());
     }
 
     public final boolean isSpell() {
         return (isInstant() || isSorcery() || (isAura() && !isInZone((ZoneType.Battlefield))));
     }
-
-    public final boolean isEmblem()     { return getType().isEmblem(); }
 
     public final boolean isLand()       { return getType().isLand(); }
     public final boolean isBasicLand()  { return getType().isBasicLand(); }
@@ -4865,11 +4864,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     // Takes one argument like Permanent.Blue+withFlying
     @Override
     public final boolean isValid(final String restriction, final Player sourceController, final Card source, CardTraitBase spellAbility) {
-        if (isImmutable() && source != null && !source.isRemembered(this) &&
-                !(restriction.startsWith("Emblem") || restriction.startsWith("Effect"))) { // special case exclusion
-            return false;
-        }
-
         // Inclusive restrictions are Card types
         final String[] incR = restriction.split("\\.", 2);
 
@@ -4879,14 +4873,27 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             incR[0] = incR[0].substring(1); // consume negation sign
         }
 
-        if (incR[0].equals("Spell") && !isSpell()) {
-            return testFailed;
-        }
-        if (incR[0].equals("Permanent") && !isPermanent()) {
-            return testFailed;
-        }
-        if (!incR[0].equals("card") && !incR[0].equals("Card") && !incR[0].equals("Spell")
-                && !incR[0].equals("Permanent") && !getType().hasStringType(incR[0])) {
+        if (incR[0].equals("Spell")) {
+            if (!isSpell()) {
+                return testFailed;
+            }
+        } else if (incR[0].equals("Permanent")) {
+            if (!isPermanent()) {
+                return testFailed;
+            }
+        } else if (incR[0].equals("Effect")) {
+            if (!isImmutable()) {
+                return testFailed;
+            }
+        } else if (incR[0].equals("Emblem")) {
+            if (!isEmblem()) {
+                return testFailed;
+            }
+        } else if (incR[0].equals("card") || incR[0].equals("Card")) {
+            if (isImmutable()) {
+                return testFailed;
+            }
+        } else if (!getType().hasStringType(incR[0])) {
             return testFailed; // Check for wrong type
         }
 
@@ -4916,6 +4923,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public final void setImmutable(final boolean isImmutable0) {
         isImmutable = isImmutable0;
+        view.updateImmutable(this);
+    }
+
+    public final boolean isEmblem() {
+        return isEmblem;
+    }
+    public final void setEmblem(final boolean isEmblem0) {
+        isEmblem = isEmblem0;
+        view.updateEmblem(this);
     }
 
     /*
