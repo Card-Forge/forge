@@ -314,6 +314,10 @@ public class AbilityUtils {
             for (final Card imprint : hostCard.getImprintedCards()) {
                 cards.add(game.getCardState(imprint));
             }
+        } else if (defined.equals("UntilLeavesBattlefield")) {
+            for (final Card ulb : hostCard.getUntilLeavesBattlefield()) {
+                cards.add(game.getCardState(ulb));
+            }
         } else if (defined.startsWith("ThisTurnEntered")) {
             final String[] workingCopy = defined.split("_");
             ZoneType destination, origin;
