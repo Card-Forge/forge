@@ -1,0 +1,6 @@
+Name:Winged Boots
+ManaCost:1 U
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Flying & Ward:4 | Description$ Equipped creature has flying and ward {4}.
+K:Equip:1
+Oracle:Equipped creature has flying and ward {4}. (Whenever equipped creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {4}.)\nEquip {1}
