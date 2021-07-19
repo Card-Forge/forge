@@ -573,7 +573,7 @@ public class CardDetailUtil {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            area.append("Until leaves the Battlefield: ").append(card.getUntilLeavesBattlefield());
+            area.append("Exiled until this leaves the battlefield: ").append(card.getUntilLeavesBattlefield());
         }
 
         // must block
