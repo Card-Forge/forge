@@ -334,7 +334,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 String errMsg;
                 if (newMain.size() < deckMinSize) {
                     errMsg = TextUtil.concatNoSpace(localizer.getMessage("lblTooFewCardsMainDeck", String.valueOf(deckMinSize)));
-
                 } else {
                     errMsg = TextUtil.concatNoSpace(localizer.getMessage("lblTooManyCardsSideboard", String.valueOf(sbMax)));
                 }

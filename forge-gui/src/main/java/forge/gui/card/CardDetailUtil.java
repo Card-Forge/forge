@@ -200,8 +200,7 @@ public class CardDetailUtil {
             if (ptText.length() > 0) {
                 ptText.insert(0, "P/T: ");
                 ptText.append(" - ").append("Loy: ");
-            }
-            else {
+            } else {
                 ptText.append("Loyalty: ");
             }
 
@@ -278,9 +277,9 @@ public class CardDetailUtil {
             area.append("Token");
         } else if (card.isTokenCard()) {
             area.append("Token card");
-        } else if(card.isEmblem()) {
+        } else if (card.isEmblem()) {
             area.append("Emblem");
-        } else if(card.isImmutable()) {
+        } else if (card.isImmutable()) {
             area.append("Effect");
         }
         // card text
@@ -296,7 +295,6 @@ public class CardDetailUtil {
         String text = !card.isSplitCard() ?
             card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(state.getName(), "") : null) :
             card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(card.getLeftSplitState().getName(), card.getRightSplitState().getName()) : null );
-
 
         // LEVEL [0-9]+-[0-9]+
         // LEVEL [0-9]+\+

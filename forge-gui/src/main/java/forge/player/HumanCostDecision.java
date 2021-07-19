@@ -277,8 +277,6 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         return exileFromSame(cost, list, c, payableZone);
     }
 
-
-
     // Inputs
 
     // Exile<Num/Type{/TypeDescription}>

@@ -879,7 +879,7 @@ public class AiController {
     public boolean isNonDisabledCardInPlay(final String cardName) {
         for (Card card : player.getCardsIn(ZoneType.Battlefield)) {
             if (card.getName().equals(cardName)) {
-                // TODO - Better logic to detemine if a permanent is disabled by local effects
+                // TODO - Better logic to determine if a permanent is disabled by local effects
                 // currently assuming any permanent enchanted by another player
                 // is disabled and a second copy is necessary
                 // will need actual logic that determines if the enchantment is able

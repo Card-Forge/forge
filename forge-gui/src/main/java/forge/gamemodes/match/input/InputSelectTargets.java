@@ -392,8 +392,8 @@ public final class InputSelectTargets extends InputSyncronizedBase {
 
     @Override
     protected void onStop() {
-	getController().getGui().clearSelectables();
-	super.onStop();
+        getController().getGui().clearSelectables();
+        super.onStop();
     }
 
 }
