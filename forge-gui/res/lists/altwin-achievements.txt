@@ -32,6 +32,7 @@ Strixhaven Stadium|The Mage Tower|And that's game, set, and match!
 Test of Endurance|The Test|So... did I pass?
 Thassa's Oracle|The Prophecy of Victory|I see... nothing. We must've won.
 The Cheese Stands Alone|The Cheese|It's cheesy, but hey, it works!
+The Deck of Many Things|Down on the Deck|Lucky draw!
 Triskaidekaphobia|The Fear of 13|It's just a silly ancient superstition... right?
-Vorpal Sword|Snicker-Snack!|"And hast thou slain the Jabberwock? Come to my arms, my beamish boy!"
+Vorpal Sword|Snicker-Snack!|He left it dead, and with its head / He went galumphing back.
 Emblem - Vraska, Golgari Queen|The Flurry of Assassins|How good is your dodging?
