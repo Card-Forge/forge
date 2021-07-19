@@ -505,7 +505,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
 
             hasColor = Predicates.or(new DeckGeneratorBase.MatchColorIdentity(colors),
                     DeckGeneratorBase.COLORLESS_CARDS);
-            final Iterable<PaperCard> threeColorList = Iterables.filter(aiPlayables,
+            final Iterable<PaperCard> threeColorList = Iterables.filter(rankedOthers,
                     Predicates.compose(hasColor, PaperCard.FN_GET_RULES));
             for (final PaperCard card : threeColorList) {
                 if (num > 0) {
