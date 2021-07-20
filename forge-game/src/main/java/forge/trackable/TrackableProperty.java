@@ -77,6 +77,7 @@ public enum TrackableProperty {
     UntilLeavesBattlefield(TrackableTypes.CardViewCollectionType),
     GainControlTargets(TrackableTypes.CardViewCollectionType),
     CloneOrigin(TrackableTypes.CardViewType),
+    ExiledWith(TrackableTypes.CardViewType),
 
     ImprintedCards(TrackableTypes.CardViewCollectionType),
     HauntedBy(TrackableTypes.CardViewCollectionType),
