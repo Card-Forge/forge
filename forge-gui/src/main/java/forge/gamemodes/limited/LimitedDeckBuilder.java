@@ -189,17 +189,13 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
         // to try and avoid adding purely random cards.
         addThirdColorCards(numSpellsNeeded - deckList.size());
 
-        // 8. Check for DeckNeeds cards.
-        checkRemRandomDeckCards();
-
-        // 9. If there are still less than 22 non-land cards add off-color
-        // cards. This is probably worse than adding basic lands.
-        // addRandomCards(numSpellsNeeded - deckList.size());
-
-        // 10. Add non-basic lands that were drafted.
+        // 8. Add non-basic lands that were drafted.
         addNonBasicLands();
 
-        // 11. Fill up with basic lands.
+        // 9. Check for DeckNeeds cards.
+        checkRemRandomDeckCards();
+
+        // 10. Fill up with basic lands.
         final int[] clrCnts = calculateLandNeeds();
         if (landsNeeded > 0) {
             addLands(clrCnts, landSetCode);
@@ -610,6 +606,8 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
                     availableList.add(card);
                     if (card.getRules().getType().isCreature()) {
                         numCreatures++;
+                    } else if (card.getRules().getType().isLand()) {
+                    	// Do nothing, it will be replaced with basics later.
                     } else {
                         numOthers++;
                     }
