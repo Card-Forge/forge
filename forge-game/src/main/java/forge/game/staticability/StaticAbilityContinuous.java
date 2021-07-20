@@ -809,6 +809,18 @@ public final class StaticAbilityContinuous {
                         // with that the TargetedCard does not need the Svars added to them anymore
                         // but only do it if the trigger doesn't already have a overriding ability
                         addedTrigger.add(actualTrigger);
+                        if (params.containsKey("TriggerRememberDefined")) {
+                            String triggerRemembered = (params.get("TriggerRememberDefined"));
+                            for (final String rem : triggerRemembered.split(",")) {
+                                for (final Object o : AbilityUtils.getDefinedObjects(hostCard, rem, stAb)) {
+                                    if (o instanceof SpellAbility) {
+                                        // "RememberObjects$ Remembered" don't remember spellability
+                                        continue;
+                                    }
+                                    actualTrigger.addRemembered(o);
+                                }
+                            }
+                        }
                     }
                 }
 
