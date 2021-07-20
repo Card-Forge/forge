@@ -294,8 +294,7 @@ public class DeckController<T extends DeckBase> {
         final String name = getModelName();
         if (name.isEmpty()) {
             newModel();
-        }
-        else {
+        } else {
             load(name);
         }
     }
@@ -303,8 +302,7 @@ public class DeckController<T extends DeckBase> {
     public void load(final String path, final String name) {
         if (StringUtils.isBlank(path)) {
             currentFolder = rootFolder;
-        }
-        else {
+        } else {
             currentFolder = rootFolder.tryGetFolder(path);
         }
         modelPath = path;
@@ -386,8 +384,7 @@ public class DeckController<T extends DeckBase> {
     public void refreshModel() {
         if (model == null) {
             newModel();
-        }
-        else {
+        } else {
             setModel(model, modelInStorage);
         }
     }

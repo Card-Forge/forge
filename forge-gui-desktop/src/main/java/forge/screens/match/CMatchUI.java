@@ -501,7 +501,7 @@ public final class CMatchUI
 
     @Override
     public void hideZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
-        if ( zonesToUpdate != null ) {
+        if (zonesToUpdate != null) {
             for (final PlayerZoneUpdate update : zonesToUpdate) {
                 final PlayerView player = update.getPlayer();
                 for (final ZoneType zone : update.getZones()) {
@@ -532,7 +532,6 @@ public final class CMatchUI
         for (final PlayerView p : manaPoolUpdate) {
             getFieldViewFor(p).updateManaPool();
         }
-
     }
 
     // Player's lives and poison counters
@@ -575,15 +574,15 @@ public final class CMatchUI
 
     @Override
     public void setSelectables(final Iterable<CardView> cards) {
-	super.setSelectables(cards);
-	// update zones on tabletop and floating zones - non-selectable cards may be rendered differently
-	FThreads.invokeInEdtNowOrLater(new Runnable() {
+        super.setSelectables(cards);
+        // update zones on tabletop and floating zones - non-selectable cards may be rendered differently
+        FThreads.invokeInEdtNowOrLater(new Runnable() {
             @Override public final void run() {
                 for (final PlayerView p : getGameView().getPlayers()) {
-                    if ( p.getCards(ZoneType.Battlefield) != null ) {
+                    if (p.getCards(ZoneType.Battlefield) != null) {
                         updateCards(p.getCards(ZoneType.Battlefield));
                     }
-                    if ( p.getCards(ZoneType.Hand) != null ) {
+                    if (p.getCards(ZoneType.Hand) != null) {
                         updateCards(p.getCards(ZoneType.Hand));
                     }
                 }
@@ -594,15 +593,15 @@ public final class CMatchUI
 
     @Override
     public void clearSelectables() {
-	super.clearSelectables();
-	// update zones on tabletop and floating zones - non-selectable cards may be rendered differently
-	FThreads.invokeInEdtNowOrLater(new Runnable() {
+        super.clearSelectables();
+        // update zones on tabletop and floating zones - non-selectable cards may be rendered differently
+        FThreads.invokeInEdtNowOrLater(new Runnable() {
             @Override public final void run() {
                 for (final PlayerView p : getGameView().getPlayers()) {
-                    if ( p.getCards(ZoneType.Battlefield) != null ) {
+                    if (p.getCards(ZoneType.Battlefield) != null) {
                         updateCards(p.getCards(ZoneType.Battlefield));
                     }
-                    if ( p.getCards(ZoneType.Hand) != null ) {
+                    if (p.getCards(ZoneType.Hand) != null) {
                         updateCards(p.getCards(ZoneType.Hand));
                     }
                 }
@@ -617,7 +616,7 @@ public final class CMatchUI
         FThreads.invokeInEdtNowOrLater(new Runnable() {
             @Override public final void run() {
                 for (final PlayerView p : getGameView().getPlayers()) {
-                    if ( p.getCards(ZoneType.Battlefield) != null ) {
+                    if (p.getCards(ZoneType.Battlefield) != null) {
                         updateCards(p.getCards(ZoneType.Battlefield));
                     }
                 }
@@ -787,7 +786,7 @@ public final class CMatchUI
         final PhaseType ph = getGameView().getPhase();
         // this should never happen, but I've seen it periodically... so, need to get to the bottom of it
         PhaseLabel lbl = null;
-        if (ph != null ) {
+        if (ph != null) {
             lbl = p == null ? null : getFieldViewFor(p).getPhaseIndicator().getLabelFor(ph);
         } else {
             // not sure what debugging information would help here, log for now
@@ -1295,79 +1294,78 @@ public final class CMatchUI
         boolean isAi = sa.getActivatingPlayer().isAI();
         boolean isTrigger = sa.isTrigger();
         int stackIndex = event.stackIndex;
-        if(stackIndex == nextNotifiableStackIndex) {
-            if(ForgeConstants.STACK_EFFECT_NOTIFICATION_ALWAYS.equals(stackNotificationPolicy) || (ForgeConstants.STACK_EFFECT_NOTIFICATION_AI_AND_TRIGGERED.equals(stackNotificationPolicy) && (isAi || isTrigger))) {
-            // We can go and show the modal
-            SpellAbilityStackInstance si = event.si;
+        if (stackIndex == nextNotifiableStackIndex) {
+            if (ForgeConstants.STACK_EFFECT_NOTIFICATION_ALWAYS.equals(stackNotificationPolicy) || (ForgeConstants.STACK_EFFECT_NOTIFICATION_AI_AND_TRIGGERED.equals(stackNotificationPolicy) && (isAi || isTrigger))) {
+                // We can go and show the modal
+                SpellAbilityStackInstance si = event.si;
 
-            MigLayout migLayout = new MigLayout("insets 15, left, gap 30, fill");
-            JPanel mainPanel = new JPanel(migLayout);
-            final Dimension parentSize = JOptionPane.getRootFrame().getSize();
-            Dimension maxSize = new Dimension(1400, parentSize.height - 100);
-            mainPanel.setMaximumSize(maxSize);
-            mainPanel.setOpaque(false);
+                MigLayout migLayout = new MigLayout("insets 15, left, gap 30, fill");
+                JPanel mainPanel = new JPanel(migLayout);
+                final Dimension parentSize = JOptionPane.getRootFrame().getSize();
+                Dimension maxSize = new Dimension(1400, parentSize.height - 100);
+                mainPanel.setMaximumSize(maxSize);
+                mainPanel.setOpaque(false);
 
-            // Big Image
-            addBigImageToStackModalPanel(mainPanel, si);
+                // Big Image
+                addBigImageToStackModalPanel(mainPanel, si);
 
-            // Text
-            addTextToStackModalPanel(mainPanel,sa,si);
+                // Text
+                addTextToStackModalPanel(mainPanel,sa,si);
 
-            // Small images
-            int numSmallImages = 0;
+                // Small images
+                int numSmallImages = 0;
 
-            // If current effect is a triggered/activated ability of an enchantment card, I want to show the enchanted card
-            GameEntityView enchantedEntityView = null;
-            Card hostCard = sa.getHostCard();
-            if(hostCard.isEnchantment()) {
-                GameEntity enchantedEntity = hostCard.getEntityAttachedTo();
-                if(enchantedEntity != null) {
-                    enchantedEntityView = enchantedEntity.getView();
-                    numSmallImages++;
-                } else if ((sa.getRootAbility() != null)
-                        && (sa.getRootAbility().getPaidList("Sacrificed") != null)
-                        && !sa.getRootAbility().getPaidList("Sacrificed").isEmpty()) {
-                    // If the player activated its ability by sacrificing the enchantment, the enchantment has not anything attached anymore and the ex-enchanted card has to be searched in other ways.. for example, the green enchantment "Carapace"
-                    enchantedEntity = sa.getRootAbility().getPaidList("Sacrificed").get(0).getEnchantingCard();
-                    if(enchantedEntity != null) {
+                // If current effect is a triggered/activated ability of an enchantment card, I want to show the enchanted card
+                GameEntityView enchantedEntityView = null;
+                Card hostCard = sa.getHostCard();
+                if (hostCard.isEnchantment()) {
+                    GameEntity enchantedEntity = hostCard.getEntityAttachedTo();
+                    if (enchantedEntity != null) {
                         enchantedEntityView = enchantedEntity.getView();
                         numSmallImages++;
+                    } else if ((sa.getRootAbility() != null)
+                            && (sa.getRootAbility().getPaidList("Sacrificed") != null)
+                            && !sa.getRootAbility().getPaidList("Sacrificed").isEmpty()) {
+                        // If the player activated its ability by sacrificing the enchantment, the enchantment has not anything attached anymore and the ex-enchanted card has to be searched in other ways.. for example, the green enchantment "Carapace"
+                        enchantedEntity = sa.getRootAbility().getPaidList("Sacrificed").get(0).getEnchantingCard();
+                        if (enchantedEntity != null) {
+                            enchantedEntityView = enchantedEntity.getView();
+                            numSmallImages++;
+                        }
                     }
                 }
-            }
 
-            // If current effect is a triggered ability, I want to show the triggering card if present
-            SpellAbility sourceSA = (SpellAbility) si.getTriggeringObject(AbilityKey.SourceSA);
-            CardView sourceCardView = null;
-            if(sourceSA != null) {
-                sourceCardView = sourceSA.getHostCard().getView();
-                numSmallImages++;
-            }
+                // If current effect is a triggered ability, I want to show the triggering card if present
+                SpellAbility sourceSA = (SpellAbility) si.getTriggeringObject(AbilityKey.SourceSA);
+                CardView sourceCardView = null;
+                if (sourceSA != null) {
+                    sourceCardView = sourceSA.getHostCard().getView();
+                    numSmallImages++;
+                }
 
-            // I also want to show each type of targets (both cards and players)
-            List<GameEntityView> targets = getTargets(si,new ArrayList<GameEntityView>());
-            numSmallImages = numSmallImages + targets.size();
+                // I also want to show each type of targets (both cards and players)
+                List<GameEntityView> targets = getTargets(si,new ArrayList<GameEntityView>());
+                numSmallImages = numSmallImages + targets.size();
 
-            // Now I know how many small images - on to render them
-            if(enchantedEntityView != null) {
-                addSmallImageToStackModalPanel(enchantedEntityView,mainPanel,numSmallImages);
-            }
-            if(sourceCardView != null) {
-                addSmallImageToStackModalPanel(sourceCardView,mainPanel,numSmallImages);
-            }
-            for(GameEntityView gev : targets) {
-                addSmallImageToStackModalPanel(gev, mainPanel, numSmallImages);
-            }
+                // Now I know how many small images - on to render them
+                if (enchantedEntityView != null) {
+                    addSmallImageToStackModalPanel(enchantedEntityView,mainPanel,numSmallImages);
+                }
+                if (sourceCardView != null) {
+                    addSmallImageToStackModalPanel(sourceCardView,mainPanel,numSmallImages);
+                }
+                for (GameEntityView gev : targets) {
+                    addSmallImageToStackModalPanel(gev, mainPanel, numSmallImages);
+                }
 
-            FOptionPane.showOptionDialog(null, "Forge", null, mainPanel, ImmutableList.of(Localizer.getInstance().getMessage("lblOK")));
-            // here the user closed the modal - time to update the next notifiable stack index
+                FOptionPane.showOptionDialog(null, "Forge", null, mainPanel, ImmutableList.of(Localizer.getInstance().getMessage("lblOK")));
+                // here the user closed the modal - time to update the next notifiable stack index
 
             }
             // In any case, I have to increase the counter
             nextNotifiableStackIndex++;
 
         } else {
-
             // Not yet time to show the modal - schedule the method again, and try again later
             Runnable tryAgainThread = new Runnable() {
                 @Override
@@ -1381,21 +1379,21 @@ public final class CMatchUI
     }
 
     private List<GameEntityView> getTargets(SpellAbilityStackInstance si, List<GameEntityView> result){
-        if(si == null) {
+        if (si == null) {
             return result;
         }
         FCollectionView<CardView> targetCards = CardView.getCollection(si.getTargetChoices().getTargetCards());
-        for(CardView currCardView: targetCards) {
+        for (CardView currCardView: targetCards) {
             result.add(currCardView);
         }
 
-        for(SpellAbility currSA : si.getTargetChoices().getTargetSpells()) {
+        for (SpellAbility currSA : si.getTargetChoices().getTargetSpells()) {
             CardView currCardView = currSA.getCardView();
             result.add(currCardView);
         }
 
         FCollectionView<PlayerView> targetPlayers = PlayerView.getCollection(si.getTargetChoices().getTargetPlayers());
-        for(PlayerView currPlayerView : targetPlayers) {
+        for (PlayerView currPlayerView : targetPlayers) {
             result.add(currPlayerView);
         }
 
@@ -1443,7 +1441,7 @@ public final class CMatchUI
     }
 
     private void addSmallImageToStackModalPanel(GameEntityView gameEntityView, JPanel mainPanel, int numTarget) {
-        if(gameEntityView instanceof CardView) {
+        if (gameEntityView instanceof CardView) {
             CardView cardView = (CardView) gameEntityView;
             int currRotation = getRotation(cardView);
             FImagePanel targetPanel = new FImagePanel();
@@ -1454,7 +1452,7 @@ public final class CMatchUI
             Dimension targetPanelDimension = new Dimension(imageWidth,imageHeight);
             targetPanel.setMinimumSize(targetPanelDimension);
             mainPanel.add(targetPanel, "cell 1 1, split " + numTarget+ ",  aligny bottom");
-        } else if(gameEntityView instanceof PlayerView) {
+        } else if (gameEntityView instanceof PlayerView) {
             PlayerView playerView = (PlayerView) gameEntityView;
             SkinImage playerAvatar = getPlayerAvatar(playerView, 0);
             final FLabel lblIcon = new FLabel.Builder().icon(playerAvatar).build();
@@ -1499,11 +1497,10 @@ public final class CMatchUI
     }
 
     private void createLandPopupPanel(Card land) {
-
         String landPlayedNotificationPolicy = FModel.getPreferences().getPref(FPref.UI_LAND_PLAYED_NOTIFICATION_POLICY);
         Player cardController = land.getController();
         boolean isAi = cardController.isAI();
-        if(ForgeConstants.LAND_PLAYED_NOTIFICATION_ALWAYS.equals(landPlayedNotificationPolicy)
+        if (ForgeConstants.LAND_PLAYED_NOTIFICATION_ALWAYS.equals(landPlayedNotificationPolicy)
                 || (ForgeConstants.LAND_PLAYED_NOTIFICATION_AI.equals(landPlayedNotificationPolicy) && (isAi))
                 || (ForgeConstants.LAND_PLAYED_NOTIFICATION_ALWAYS_FOR_NONBASIC_LANDS.equals(landPlayedNotificationPolicy) && !land.isBasicLand())
                 || (ForgeConstants.LAND_PLAYED_NOTIFICATION_AI_FOR_NONBASIC_LANDS.equals(landPlayedNotificationPolicy) && !land.isBasicLand()) && (isAi)) {

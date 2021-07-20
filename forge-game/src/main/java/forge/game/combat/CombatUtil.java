@@ -1080,7 +1080,7 @@ public class CombatUtil {
         return canAttackerBeBlockedWithAmount(attacker, amount, combat != null ? combat.getDefenderPlayerByAttacker(attacker) : null);
     }
     public static boolean canAttackerBeBlockedWithAmount(Card attacker, int amount, Player defender) {
-        if(amount == 0 )
+        if (amount == 0)
             return false; // no block
 
         List<String> restrictions = Lists.newArrayList();
@@ -1093,7 +1093,7 @@ public class CombatUtil {
             	restrictions.add("LT2");
             }
         }
-        for ( String res : restrictions ) {
+        for (String res : restrictions) {
             int operand = Integer.parseInt(res.substring(2));
             String operator = res.substring(0,2);
             if (Expressions.compare(amount, operator, operand) )
@@ -1118,7 +1118,7 @@ public class CombatUtil {
             }
         }
         int minBlockers = 1;
-        for ( String res : restrictions ) {
+        for (String res : restrictions) {
             int operand = Integer.parseInt(res.substring(2));
             String operator = res.substring(0, 2);
             if (operator.equals("LT") || operator.equals("GE")) {

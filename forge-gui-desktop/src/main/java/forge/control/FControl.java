@@ -414,4 +414,3 @@ public enum FControl implements KeyEventDispatcher {
         return GamePlayerUtil.getGuiPlayer();
     }
 }
-

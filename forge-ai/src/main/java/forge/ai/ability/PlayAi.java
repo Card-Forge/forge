@@ -1,41 +1,25 @@
 package forge.ai.ability;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-
-import forge.ai.AiController;
-import forge.ai.AiPlayDecision;
-import forge.ai.AiProps;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCard;
-import forge.ai.PlayerControllerAi;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.card.CardStateName;
 import forge.card.CardTypeView;
 import forge.game.Game;
 import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
+import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
-import forge.game.spellability.Spell;
-import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityPredicates;
-import forge.game.spellability.SpellPermanent;
-import forge.game.spellability.TargetRestrictions;
+import forge.game.spellability.*;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 public class PlayAi extends SpellAbilityAi {
 
@@ -70,13 +54,12 @@ public class PlayAi extends SpellAbilityAi {
             }
         }
 
-        if (sa.hasParam("ValidSA")) {
+        if (cards != null & sa.hasParam("ValidSA")) {
             final String valid[] = {sa.getParam("ValidSA")};
             final Iterator<Card> itr = cards.iterator();
             while (itr.hasNext()) {
                 final Card c = itr.next();
-                final List<SpellAbility> validSA = Lists.newArrayList(Iterables.filter(AbilityUtils.getBasicSpellsFromPlayEffect(c, ai), SpellAbilityPredicates.isValid(valid, ai , c, sa)));
-                if (validSA.size() == 0) {
+                if (!Iterables.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, ai), SpellAbilityPredicates.isValid(valid, ai , c, sa))) {
                     itr.remove();
                 }
             }
@@ -173,6 +156,8 @@ public class PlayAi extends SpellAbilityAi {
         List<Card> tgtCards = CardLists.filter(options, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
+                // TODO needs to be aligned for MDFC along with getAbilityToPlay so the knowledge
+                // of which spell was the reason for the choice can be used there
                 for (SpellAbility s : c.getBasicSpells(c.getState(CardStateName.Original))) {
                     Spell spell = (Spell) s;
                     s.setActivatingPlayer(ai);
