@@ -1688,7 +1688,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return exiledWith;
     }
     public final void setExiledWith(final Card e) {
-        exiledWith = e;
+        exiledWith = view.setCard(exiledWith, e, TrackableProperty.ExiledWith);
     }
 
     public final void cleanupExiledWith() {
