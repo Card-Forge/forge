@@ -104,7 +104,7 @@ public final class GamePlayerUtil {
         final String oldPlayerName = FModel.getPreferences().getPref(FPref.PLAYER_NAME);
 
         String newPlayerName;
-        try{
+        try {
             if (StringUtils.isBlank(oldPlayerName)) {
                 newPlayerName = getVerifiedPlayerName(getPlayerNameUsingFirstTimePrompt(), oldPlayerName);
             } else {

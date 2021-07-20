@@ -70,13 +70,12 @@ public class PlayAi extends SpellAbilityAi {
             }
         }
 
-        if (sa.hasParam("ValidSA")) {
+        if (cards != null & sa.hasParam("ValidSA")) {
             final String valid[] = {sa.getParam("ValidSA")};
             final Iterator<Card> itr = cards.iterator();
             while (itr.hasNext()) {
                 final Card c = itr.next();
-                final List<SpellAbility> validSA = Lists.newArrayList(Iterables.filter(AbilityUtils.getBasicSpellsFromPlayEffect(c, ai), SpellAbilityPredicates.isValid(valid, ai , c, sa)));
-                if (validSA.size() == 0) {
+                if (!Iterables.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, ai), SpellAbilityPredicates.isValid(valid, ai , c, sa))) {
                     itr.remove();
                 }
             }
@@ -173,6 +172,8 @@ public class PlayAi extends SpellAbilityAi {
         List<Card> tgtCards = CardLists.filter(options, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
+                // TODO needs to be aligned for MDFC along with getAbilityToPlay so the knowledge
+                // of which spell was the reason for the choice can be used there
                 for (SpellAbility s : c.getBasicSpells(c.getState(CardStateName.Original))) {
                     Spell spell = (Spell) s;
                     s.setActivatingPlayer(ai);

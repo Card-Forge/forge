@@ -716,6 +716,7 @@ public class ComputerUtilCard {
     
         int bigCMC = -1;
         for (final Card card : all) {
+            // TODO when PlayAi can consider MDFC this should also look at the back face (if not on stack or battlefield)
             int curCMC = card.getCMC();
     
             // Add all cost of all auras with the same controller

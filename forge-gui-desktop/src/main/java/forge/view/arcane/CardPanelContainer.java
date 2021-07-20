@@ -183,7 +183,7 @@ public abstract class CardPanelContainer extends SkinnedPanel {
     }
 
     protected boolean cardPanelDraggable(final CardPanel panel) {
-	return true;
+        return true;
     }
 
     private MouseMotionListener setupMotionMouseListener() {
@@ -212,22 +212,22 @@ public abstract class CardPanelContainer extends SkinnedPanel {
                     return;
                 }
 
-		if (cardPanelDraggable(panel)) { // allow for non-draggable cards
-		    if (intialMouseDragX == -1) {
-			intialMouseDragX = x;
-			intialMouseDragY = y;
-			return;
-		    }
-		    if ((Math.abs(x - intialMouseDragX) < CardPanelContainer.DRAG_SMUDGE)
-                        && (Math.abs(y - intialMouseDragY) < CardPanelContainer.DRAG_SMUDGE)) {
-			return;
-		    }
-		    mouseDownPanel = null;
-		    setMouseDragPanel(panel);
-		    mouseDragOffsetX = panel.getX() - intialMouseDragX;
-		    mouseDragOffsetY = panel.getY() - intialMouseDragY;
-		    mouseDragStart(getMouseDragPanel(), evt);
-		}
+                if (cardPanelDraggable(panel)) { // allow for non-draggable cards
+                    if (intialMouseDragX == -1) {
+                        intialMouseDragX = x;
+                        intialMouseDragY = y;
+                        return;
+                    }
+                    if ((Math.abs(x - intialMouseDragX) < CardPanelContainer.DRAG_SMUDGE)
+                            && (Math.abs(y - intialMouseDragY) < CardPanelContainer.DRAG_SMUDGE)) {
+                        return;
+                    }
+                    mouseDownPanel = null;
+                    setMouseDragPanel(panel);
+                    mouseDragOffsetX = panel.getX() - intialMouseDragX;
+                    mouseDragOffsetY = panel.getY() - intialMouseDragY;
+                    mouseDragStart(getMouseDragPanel(), evt);
+                }
             }
 
             @Override
@@ -291,7 +291,7 @@ public abstract class CardPanelContainer extends SkinnedPanel {
     }
 
     public final void removeCardPanel(final CardPanel fromPanel) {
-	removeCardPanel(fromPanel,true);
+        removeCardPanel(fromPanel,true);
     }
 
     public final void removeCardPanel(final CardPanel fromPanel, final boolean repaint) {
@@ -307,11 +307,11 @@ public abstract class CardPanelContainer extends SkinnedPanel {
         fromPanel.dispose();
         getCardPanels().remove(fromPanel);
         remove(fromPanel);
-	if ( repaint ) {
-	    invalidate();
-	    repaint();
-	    doingLayout();
-	}
+        if (repaint) {
+            invalidate();
+            repaint();
+            doingLayout();
+        }
     }
 
     public final void setCardPanels(final List<CardPanel> cardPanels) {
@@ -331,14 +331,14 @@ public abstract class CardPanelContainer extends SkinnedPanel {
         for (final CardPanel cardPanel : cardPanels) {
             this.add(cardPanel);
         }
-	//pfps the validate just below will do the layout, so don't do it here        this.doLayout();
+        //pfps the validate just below will do the layout, so don't do it here        this.doLayout();
         this.invalidate();
         this.getParent().validate();
         this.repaint();
     }
 
     public final void clear() {
-	clear(true);
+        clear(true);
     }
     public final void clear(final boolean repaint) {
         FThreads.assertExecutedByEdt(true);
@@ -347,12 +347,12 @@ public abstract class CardPanelContainer extends SkinnedPanel {
         }
         getCardPanels().clear();
         removeAll();
-	if ( repaint ) {
-	    setPreferredSize(new Dimension(0, 0));
-	    invalidate();
-	    getParent().validate();
-	    repaint();
-	}
+        if (repaint) {
+            setPreferredSize(new Dimension(0, 0));
+            invalidate();
+            getParent().validate();
+            repaint();
+        }
     }
 
     public final FScrollPane getScrollPane() {
