@@ -120,7 +120,7 @@ public final class CardUtil {
         List<Card> res = Lists.newArrayList();
         final Game game = src.getGame();
         if (to != ZoneType.Stack) {
-            for (Player p : game.getPlayers()) {
+            for (Player p : game.getRegisteredPlayers()) {
                 res.addAll(p.getZone(to).getCardsAddedThisTurn(from));
             }
         }
