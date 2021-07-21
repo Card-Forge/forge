@@ -17,7 +17,6 @@ import com.google.common.collect.Lists;
 import forge.GameCommand;
 import forge.StaticData;
 import forge.card.CardRulesPredicates;
-import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
@@ -169,13 +168,15 @@ public class PlayEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("ValidSA")) {
             final String valid[] = {sa.getParam("ValidSA")};
-            List<Card> toRemove = Lists.newArrayList();
-            for (Card c : tgtCards) {
+            Iterator<Card> it = tgtCards.iterator();
+            while (it.hasNext()) {
+                Card c = it.next();
                 if (!Iterables.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, controller), SpellAbilityPredicates.isValid(valid, controller , c, sa))) {
-                    toRemove.add(c);
+                    // it.remove will only remove item from the list part of CardCollection
+                    tgtCards.asSet().remove(c);
+                    it.remove();
                 }
             }
-            tgtCards.removeAll(toRemove);
             if (tgtCards.isEmpty()) {
                 return;
             }
@@ -198,21 +199,12 @@ public class PlayEffect extends SpellAbilityEffect {
 
         while (!tgtCards.isEmpty() && amount > 0 && totalCMCLimit >= 0) {
             if (hasTotalCMCLimit) {
-                // filter out cars with mana value greater than limit
+                // filter out cards with mana value greater than limit
                 Iterator<Card> it = tgtCards.iterator();
+                final String [] valid = {"Spell.cmcLE"+totalCMCLimit};
                 while (it.hasNext()) {
                     Card c = it.next();
-                    if (c.isSplitCard()) {
-                        if (c.getState(CardStateName.LeftSplit).getManaCost().getCMC() <= totalCMCLimit)
-                            continue;
-                        if (c.getState(CardStateName.RightSplit).getManaCost().getCMC() <= totalCMCLimit)
-                            continue;
-                        it.remove();
-                    } else {
-                        if (c.getState(CardStateName.Original).getManaCost().getCMC() <= totalCMCLimit)
-                            continue;
-                        if (c.hasAlternateState() && c.getAlternateState().getManaCost().getCMC() <= totalCMCLimit)
-                            continue;
+                    if (!Iterables.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, controller), SpellAbilityPredicates.isValid(valid, controller , c, sa))) {
                         // it.remove will only remove item from the list part of CardCollection
                         tgtCards.asSet().remove(c);
                         it.remove();
