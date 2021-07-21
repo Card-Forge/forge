@@ -98,7 +98,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     // Placeholder to setup default art Preference - to be moved from Static Data!
     private CardArtPreference defaultCardArtPreference;
-    private static final CardArtPreference DEFAULT_ART_PREFERENCE = CardArtPreference.LATEST_ART_ALL_EDITIONS;
 
     public static class CardRequest {
         public String cardName;
@@ -213,9 +212,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
     }
 
-    public CardDb(Map<String, CardRules> rules, CardEdition.Collection editions0, List<String> filteredCards){
-        this(rules, editions0, filteredCards, "LatestPrint");
-    }
     public CardDb(Map<String, CardRules> rules, CardEdition.Collection editions0, List<String> filteredCards, String preferredCardArt) {
         this.filtered = filteredCards;
         this.rulesByName = rules;
