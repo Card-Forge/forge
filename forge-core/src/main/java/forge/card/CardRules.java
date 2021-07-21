@@ -424,9 +424,9 @@ public final class CardRules implements ICardCharacteristics {
                         value = colonPos > 0 ? value.substring(1+colonPos) : null;
 
                         if ( "RemoveDeck".equals(variable) ) {
-                            this.removedFromAIDecks = "All".equalsIgnoreCase(value);
-                            this.removedFromRandomDecks = "Random".equalsIgnoreCase(value);
-                            this.removedFromNonCommanderDecks = "NonCommander".equalsIgnoreCase(value);
+                            this.removedFromAIDecks |= "All".equalsIgnoreCase(value);
+                            this.removedFromRandomDecks |= "Random".equalsIgnoreCase(value);
+                            this.removedFromNonCommanderDecks |= "NonCommander".equalsIgnoreCase(value);
                         }
                     } else if ("AlternateMode".equals(key)) {
                         this.altMode = CardSplitType.smartValueOf(value);

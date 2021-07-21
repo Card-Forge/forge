@@ -1,0 +1,12 @@
+Name:Storvald, Frost Giant Jarl
+ManaCost:4 G W U
+Types:Legendary Creature Giant
+PT:7/7
+K:Ward:3
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddKeyword$ Ward:3 | Description$ Other creatures you control have ward {3}.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ Whenever NICKNAME enters the battlefield or attacks, ABILITY
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCharm | Secondary$ True | TriggerDescription$ Whenever NICKNAME enters the battlefield or attacks, ABILITY
+SVar:TrigCharm:DB$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBAnimate7,DBAnimate1
+SVar:DBAnimate7:DB$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Power$ 7 | Toughness$ 7 | SpellDescription$ Target creature has base power and toughness 7/7 until end of turn.
+SVar:DBAnimate1:DB$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Power$ 1 | Toughness$ 1 | SpellDescription$ Target creature has base power and toughness 1/1 until end of turn.
+Oracle:Ward {3}\nOther creatures you control have ward {3}.\nWhenever Storvald enters the battlefield or attacks, choose one or both —\n• Target creature has base power and toughness 7/7 until end of turn.\n• Target creature has base power and toughness 1/1 until end of turn.

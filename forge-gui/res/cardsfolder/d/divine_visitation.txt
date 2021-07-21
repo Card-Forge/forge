@@ -1,7 +1,7 @@
 Name:Divine Visitation
 ManaCost:3 W W
 Types:Enchantment
-R:Event$ CreateToken | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ TokenReplace | ValidToken$ Creature | Description$ If one or more creature tokens would be created under your control, that many 4/4 white Angel creature tokens with flying and vigilance are created instead.
-SVar:TokenReplace:DB$ ReplaceEffect | VarName$ Token | VarValue$ w_4_4_angel_flying_vigilance | VarType$ TokenScript
+R:Event$ CreateToken | ActiveZones$ Battlefield | ValidToken$ Creature.YouCtrl | ReplaceWith$ TokenReplace | Description$ If one or more creature tokens would be created under your control, that many 4/4 white Angel creature tokens with flying and vigilance are created instead.
+SVar:TokenReplace:DB$ ReplaceToken | Type$ ReplaceToken | ValidCard$ Creature.YouCtrl | TokenScript$ w_4_4_angel_flying_vigilance
 DeckNeeds:Ability$Token
 Oracle:If one or more creature tokens would be created under your control, that many 4/4 white Angel creature tokens with flying and vigilance are created instead.

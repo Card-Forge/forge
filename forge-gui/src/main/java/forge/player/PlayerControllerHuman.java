@@ -334,7 +334,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 String errMsg;
                 if (newMain.size() < deckMinSize) {
                     errMsg = TextUtil.concatNoSpace(localizer.getMessage("lblTooFewCardsMainDeck", String.valueOf(deckMinSize)));
-
                 } else {
                     errMsg = TextUtil.concatNoSpace(localizer.getMessage("lblTooManyCardsSideboard", String.valueOf(sbMax)));
                 }
@@ -1324,7 +1323,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 }
                 if (sa.hasParam("TokenScript")) {
                     sa.setActivatingPlayer(player);
-                    Card protoType = TokenInfo.getProtoType(sa.getParam("TokenScript"), sa);
+                    Card protoType = TokenInfo.getProtoType(sa.getParam("TokenScript"), sa, null);
                     for (String type : protoType.getType().getCreatureTypes()) {
                         Integer count = typesInDeck.get(type);
                         if (count == null) {
@@ -1340,7 +1339,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 if (sa != null) {
                     if (sa.hasParam("TokenScript")) {
                         sa.setActivatingPlayer(player);
-                        Card protoType = TokenInfo.getProtoType(sa.getParam("TokenScript"), sa);
+                        Card protoType = TokenInfo.getProtoType(sa.getParam("TokenScript"), sa, null);
                         for (String type : protoType.getType().getCreatureTypes()) {
                             Integer count = typesInDeck.get(type);
                             if (count == null) {

@@ -34,7 +34,7 @@ public class AmassAi extends SpellAbilityAi {
         final String tokenScript = "b_0_0_zombie_army";
         final int amount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Num", "1"), sa);
 
-        Card token = TokenInfo.getProtoType(tokenScript, sa, false);
+        Card token = TokenInfo.getProtoType(tokenScript, sa, ai, false);
 
         if (token == null) {
             return false;

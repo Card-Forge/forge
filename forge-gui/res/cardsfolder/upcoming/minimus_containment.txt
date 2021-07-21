@@ -1,8 +1,0 @@
-Name:Minimus Containment
-ManaCost:2 W
-Types:Enchantment Aura
-K:Enchant nonland permanent
-A:SP$ Attach | Cost$ 2 W | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | AILogic$ Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddType$ Artifact & Treasure | RemoveCardTypes$ True | AddAbility$ TreasureSac | RemoveAllAbilities$ True | Description$ Enchanted permanent is a Treasure artifact with "{T}, Sacrifice this artifact: Add one mana of any color," and it loses all other abilities. (If it was a creature, it's no longer a creature.)
-SVar:TreasureSac:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | SpellDescription$ Add one mana of any color.
-Oracle:Enchant nonland permanent\nEnchanted permanent is a Treasure artifact with "{T}, Sacrifice this artifact: Add one mana of any color," and it loses all other abilities. (If it was a creature, it's no longer a creature.)

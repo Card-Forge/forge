@@ -269,7 +269,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             g2d.rotate(getTappedAngle(), cardXOffset + edgeOffset, (cardYOffset + cardHeight)
                     - edgeOffset);
         }
-	super.paint(g2d);
+        super.paint(g2d);
     }
 
     @Override
@@ -284,12 +284,12 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         final int cornerSize = noBorderPref && !cardImgHasAlpha ? 0 : Math.max(4, Math.round(cardWidth * CardPanel.ROUNDED_CORNER_SIZE));
         final int offset = isTapped() && (!noBorderPref || cardImgHasAlpha) ? 1 : 0;
 
-	// Magenta outline for when card is chosen
+        // Magenta outline for when card is chosen
         if (matchUI.isUsedToPay(getCard())) {
             g2d.setColor(Color.magenta);
             final int n2 = Math.max(1, Math.round(2 * cardWidth * CardPanel.SELECTED_BORDER_SIZE));
             g2d.fillRoundRect(cardXOffset - n2, (cardYOffset - n2) + offset, cardWidth + (n2 * 2), cardHeight + (n2 * 2), cornerSize + n2, cornerSize + n2);
-	}
+        }
 
         // Green outline for hover
         if (isSelected) {
@@ -311,24 +311,24 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             final CardStateView state = getCard().getCurrentState();
             final CardEdition ed = FModel.getMagicDb().getEditions().get(state.getSetCode());
             boolean colorIsSet = false;
-            if (state.getType().isEmblem() || state.getType().hasStringType("Effect")) {
+            if (getCard().isImmutable()) {
                 // Effects are drawn with orange border
                 g2d.setColor(Color.ORANGE);
                 colorIsSet = true;
             } else if (ed != null && state.getFoilIndex() == 0) {
                 // Non-foil cards from white-bordered sets are drawn with white border
                 switch (ed.getBorderColor()) {
-                    case WHITE:
-                        g2d.setColor(Color.WHITE);
-                        colorIsSet = true;
-                        break;
-                    case GOLD:
-                        g2d.setColor(Color.ORANGE);
-                        colorIsSet = true;
-                        break;
-                    case SILVER:
-                        g2d.setColor(Color.GRAY);
-                        colorIsSet = true;
+                case WHITE:
+                    g2d.setColor(Color.WHITE);
+                    colorIsSet = true;
+                    break;
+                case GOLD:
+                    g2d.setColor(Color.ORANGE);
+                    colorIsSet = true;
+                    break;
+                case SILVER:
+                    g2d.setColor(Color.GRAY);
+                    colorIsSet = true;
                 }
             }
             if (colorIsSet) {
@@ -337,11 +337,11 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             }
         }
 
-	if (matchUI.isSelectable(getCard())) { // White border for selectable cards to further highlight them
-	    g2d.setColor(Color.WHITE);
-	    final int ins = 1;
-	    g2d.fillRoundRect(cardXOffset+ins, cardYOffset+ins, cardWidth-ins*2, cardHeight-ins*2, cornerSize-ins, cornerSize-ins);
-	}
+        if (matchUI.isSelectable(getCard())) { // White border for selectable cards to further highlight them
+            g2d.setColor(Color.WHITE);
+            final int ins = 1;
+            g2d.fillRoundRect(cardXOffset+ins, cardYOffset+ins, cardWidth-ins*2, cardHeight-ins*2, cornerSize-ins, cornerSize-ins);
+        }
     }
 
     private void drawManaCost(final Graphics g, final ManaCost cost, final int deltaY) {
@@ -366,16 +366,16 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                     cardWidth, cardHeight, Math.round(cardWidth * BLACK_BORDER_SIZE));
         }
 
-	boolean nonselectable = matchUI.isSelecting() && !matchUI.isSelectable(getCard());
-	// if selecting, darken non-selectable cards
-	if ( nonselectable ) {
-	    boolean noBorderPref = !isPreferenceEnabled(FPref.UI_RENDER_BLACK_BORDERS);
-	    boolean cardImgHasAlpha = imagePanel != null && imagePanel.getSrcImage() != null && imagePanel.getSrcImage().getColorModel().hasAlpha();
-	    final int cornerSize = noBorderPref && !cardImgHasAlpha ? 0 : Math.max(4, Math.round(cardWidth * CardPanel.ROUNDED_CORNER_SIZE));
-	    final int offset = isTapped() && (!noBorderPref || cardImgHasAlpha) ? 1 : 0;
-	    g.setColor(new Color(0.0f,0.0f,0.0f,0.6f));
-	    g.fillRoundRect(cardXOffset, cardYOffset  + offset, cardWidth, cardHeight, cornerSize, cornerSize);
-	}
+        boolean nonselectable = matchUI.isSelecting() && !matchUI.isSelectable(getCard());
+        // if selecting, darken non-selectable cards
+        if (nonselectable) {
+            boolean noBorderPref = !isPreferenceEnabled(FPref.UI_RENDER_BLACK_BORDERS);
+            boolean cardImgHasAlpha = imagePanel != null && imagePanel.getSrcImage() != null && imagePanel.getSrcImage().getColorModel().hasAlpha();
+            final int cornerSize = noBorderPref && !cardImgHasAlpha ? 0 : Math.max(4, Math.round(cardWidth * CardPanel.ROUNDED_CORNER_SIZE));
+            final int offset = isTapped() && (!noBorderPref || cardImgHasAlpha) ? 1 : 0;
+            g.setColor(new Color(0.0f,0.0f,0.0f,0.6f));
+            g.fillRoundRect(cardXOffset, cardYOffset  + offset, cardWidth, cardHeight, cornerSize, cornerSize);
+        }
     }
 
     public static void drawFoilEffect(final Graphics g, final CardView card2, final int x, final int y, final int width, final int height, final int borderSize) {
@@ -390,7 +390,6 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
     @Override
     public final void doLayout() {
-
         int borderSize = calculateBorderSize();
 
         final Point imgPos = new Point(cardXOffset + borderSize, cardYOffset + borderSize);
@@ -408,7 +407,6 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     }
 
     private int calculateBorderSize() {
-
         // Determine whether to render border from properties
         boolean noBorderPref = !isPreferenceEnabled(FPref.UI_RENDER_BLACK_BORDERS);
 
@@ -426,7 +424,6 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         }
 
         return 0;
-
     }
 
     private Dimension calculateImageSize() {
@@ -490,7 +487,6 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                 }
             }
         }
-
 
         if (card.getCounters() != null && !card.getCounters().isEmpty()) {
 
@@ -734,8 +730,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                         abiY += abiSpace;
                     }
                 }
-            }
-            else {
+            } else {
                 String keywordKey = card.getCurrentState().getKeywordKey();
                 String abilityText = card.getCurrentState().getAbilityText();
                 if (((keywordKey.indexOf("Flashback") == -1)
@@ -752,7 +747,6 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     }
 
     private void drawCounterTabs(final Graphics g) {
-
         final Dimension imgSize = calculateImageSize();
         final int titleY = Math.round(imgSize.height * (54f / 640)) - 15;
 
@@ -767,7 +761,6 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         FontMetrics largeFontMetrics = g.getFontMetrics(largeCounterFont);
 
         if (CounterDisplayType.from(FModel.getPreferences().getPref(FPref.UI_CARD_COUNTER_DISPLAY_TYPE)) == CounterDisplayType.OLD_WHEN_SMALL) {
-
             int maxCounters = 0;
             for (Integer numberOfCounters : card.getCounters().values()) {
                 maxCounters = Math.max(maxCounters, numberOfCounters);
@@ -780,9 +773,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
         }
 
-
         for (Map.Entry<CounterType, Integer> counterEntry : card.getCounters().entrySet()) {
-
             final CounterType counter = counterEntry.getKey();
             final int numberOfCounters = counterEntry.getValue();
             final int counterBoxRealWidth = counterBoxBaseWidth + largeFontMetrics.stringWidth(String.valueOf(numberOfCounters));
@@ -827,7 +818,6 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     }
 
     private void drawCounterImage(final Graphics g) {
-
         int counters = 0;
         for (final Integer i : card.getCounters().values()) {
             counters += i;
@@ -848,7 +838,6 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     }
 
     private void drawMarkersTabs(final Graphics g, List<String> markers) {
-
         final Dimension imgSize = calculateImageSize();
         final int titleY = Math.round(imgSize.height * (54f / 640)) - 15;
 
@@ -862,7 +851,6 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         FontMetrics smallFontMetrics = g.getFontMetrics(smallCounterFont);
 
         for (String marker : markers) {
-
             final int markerBoxRealWidth = markerBoxBaseWidth + smallFontMetrics.stringWidth(marker);
             final int markerYOffset;
 
@@ -907,7 +895,6 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
      * @param font The font to use to draw the text.
      */
     private void drawVerticallyCenteredString(Graphics g, String text, Rectangle area, Font font, final FontMetrics fontMetrics) {
-
         Font oldFont = g.getFont();
 
         int x = area.x;
@@ -1114,8 +1101,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     }
 
     private boolean showCardManaCostOverlay() {
-        return isShowingOverlays() &&
-                isPreferenceEnabled(FPref.UI_OVERLAY_CARD_MANA_COST);
+        return isShowingOverlays() && isPreferenceEnabled(FPref.UI_OVERLAY_CARD_MANA_COST);
     }
 
     private boolean showCardIdOverlay() {

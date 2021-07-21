@@ -58,7 +58,6 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         Conspiracy(false, "conspiracies"),
         Creature(true, "creatures"),
         Dungeon(false, "dungeons"),
-        Emblem(false, "emblems"),
         Enchantment(true, "enchantments"),
         Instant(false, "instants"),
         Land(true, "lands"),
@@ -438,11 +437,6 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     }
 
     @Override
-    public boolean isEmblem() {
-        return coreTypes.contains(CoreType.Emblem);
-    }
-
-    @Override
     public boolean isTribal() {
         return coreTypes.contains(CoreType.Tribal);
     }
@@ -547,7 +541,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         if (!isInstant() && !isSorcery()) {
             Iterables.removeIf(subtypes, Predicates.IS_SPELL_TYPE);
         }
-        if (!isPlaneswalker() && !isEmblem()) {
+        if (!isPlaneswalker()) {
             Iterables.removeIf(subtypes, Predicates.IS_WALKER_TYPE);
         }
     }

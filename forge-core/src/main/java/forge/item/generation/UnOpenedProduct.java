@@ -31,7 +31,6 @@ public class UnOpenedProduct implements IUnOpenedProduct {
         this.poolLimited = considerNumbersInPool; // TODO: Add 0 to parameter's name.
     }
 
-
     // Means to select from all unique cards (from base game, ie. no schemes or avatars)
     public UnOpenedProduct(SealedProduct.Template template) {
         tpl = template;

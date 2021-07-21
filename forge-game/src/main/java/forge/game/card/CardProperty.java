@@ -350,7 +350,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("EffectSource")) {
-            if (!source.isEmblem() && !source.getType().hasSubtype("Effect")) {
+            if (!source.isImmutable()) {
                 return false;
             }
 
@@ -446,6 +446,9 @@ public class CardProperty {
             }
         } else if (property.startsWith("CanEnchant")) {
             final String restriction = property.substring(10);
+            if (restriction.equals("EquippedBy")) {
+                if (!source.getEquipping().canBeAttached(card)) return false;
+            }
             if (restriction.equals("Remembered")) {
                 for (final Object rem : source.getRemembered()) {
                     if (!(rem instanceof Card) || !((Card) rem).canBeAttached(card))
@@ -1658,6 +1661,10 @@ public class CardProperty {
             if (source.hasImprintedCard(card)) {
                 return false;
             }
+        } else if (property.equals("IsGoaded")) {
+            if (!card.isGoaded()) {
+                return false;
+            }
         } else if (property.equals("NoAbilities")) {
             if (!card.hasNoAbilities()) {
                 return false;
@@ -1680,16 +1687,15 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("wasCast")) {
-            if (null == card.getCastFrom()) {
+            if (!card.wasCast()) {
                 return false;
             }
         } else if (property.equals("wasNotCast")) {
-            if (null != card.getCastFrom()) {
+            if (card.wasCast()) {
                 return false;
             }
         } else if (property.startsWith("wasCastFrom")) {
-            // How are we getting in here with a comma?
-            final String strZone = property.split(",")[0].substring(11);
+            final String strZone = property.substring(11);
             final ZoneType realZone = ZoneType.smartValueOf(strZone);
             if (realZone != card.getCastFrom()) {
                 return false;

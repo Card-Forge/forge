@@ -1,0 +1,9 @@
+Name:Extract Brain
+ManaCost:X U B
+Types:Sorcery
+A:SP$ Reveal | Cost$ X U B | ValidTgts$ Opponent | IsCurse$ True | NumCards$ X | RememberRevealed$ True | SubAbility$ PickOne |StackDescription$ {p:Targeted} chooses X cards from their hand. Look at those cards. You may cast a spell from among them without paying its mana cost. | SpellDescription$ Target opponent chooses X cards from their hand. Look at those cards. You may cast a spell from among them without paying its mana cost.
+SVar:PickOne:DB$ ChooseCard | Defined$ You | Amount$ 1 | ChoiceTitle$ Choose card to cast | Choices$ Card.IsRemembered | ChoiceZone$ Hand | SubAbility$ PlayChosen | StackDescription$ None
+SVar:PlayChosen:DB$ Play | Defined$ ChosenCard | Controller$ You | WithoutManaCost$ True | Optional$ True | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
+SVar:X:Count$xPaid
+Oracle:Target opponent chooses X cards from their hand. Look at those cards. You may cast a spell from among them without paying its mana cost.

@@ -1,0 +1,16 @@
+Name:Bag of Devouring
+ManaCost:B
+Types:Artifact
+T:Mode$ Sacrificed | ValidCard$ Artifact.nontoken+Other,Creature.nontoken+Other | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever you sacrifice another nontoken artifact or creature, exile it.
+SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True
+A:AB$ Draw | Cost$ 2 T Sac<1/Artifact.Other;Creature.Other/another artifact or creature> | NumCards$ 1 | SpellDescription$ Draw a card.
+A:AB$ RollDice | Cost$ 3 T Sac<1/CARDNAME> | Sides$ 10 | ResultSVar$ X | SubAbility$ DBChoose | SpellDescription$ Roll a d10. Return up to X cards from among cards exiled with CARDNAME to their owners' hands, where X is the result.
+SVar:DBChoose:DB$ ChooseCard | ChoiceZone$ Exile | Choices$ Card.IsRemembered+ExiledWithSource | Amount$ X | MinAmount$ 0 | SubAbility$ DBReturn | StackDescription$ None
+SVar:DBReturn:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Exile | Destination$ Hand | StackDescription$ Return up to X cards from among cards exiled with CARDNAME to their owners' hands, where X is the result.
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
+SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
+SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:NonStackingEffect:True
+DeckHas:Ability$Sacrifice
+Oracle:Whenever you sacrifice another nontoken artifact or creature, exile it.\n{2}, {T}, Sacrifice another artifact or creature: Draw a card.\n{3}, {T}, Sacrifice Bag of Devouring: Roll a d10. Return up to X cards from among cards exiled with Bag of Devouring to their owners' hands, where X is the result.

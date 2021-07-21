@@ -1,11 +1,9 @@
 Name:Doubling Season
 ManaCost:4 G
 Types:Enchantment
-R:Event$ CreateToken | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ DoubleToken | EffectOnly$ True | Description$ If an effect would create one or more tokens under your control, it creates twice that many of those tokens instead.
-SVar:DoubleToken:DB$ ReplaceEffect | VarName$ TokenNum | VarValue$ X
+R:Event$ CreateToken | ActiveZones$ Battlefield | ValidToken$ Card.YouCtrl | ReplaceWith$ DoubleToken | EffectOnly$ True | Description$ If an effect would create one or more tokens under your control, it creates twice that many of those tokens instead.
+SVar:DoubleToken:DB$ ReplaceToken | Type$ Amount | ValidCard$ Card.YouCtrl
 R:Event$ AddCounter | ActiveZones$ Battlefield | ValidCard$ Permanent.YouCtrl | EffectOnly$ True | ReplaceWith$ DoubleCounters | Description$ If an effect would put one or more counters on a permanent you control, it puts twice that many of those counters on that permanent instead.
 SVar:DoubleCounters:DB$ ReplaceEffect | VarName$ CounterNum | VarValue$ Y
-SVar:X:ReplaceCount$TokenNum/Twice
 SVar:Y:ReplaceCount$CounterNum/Twice
-SVar:Picture:http://www.wizards.com/global/images/magic/general/doubling_season.jpg
 Oracle:If an effect would create one or more tokens under your control, it creates twice that many of those tokens instead.\nIf an effect would put one or more counters on a permanent you control, it puts twice that many of those counters on that permanent instead.

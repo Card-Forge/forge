@@ -1,0 +1,12 @@
+Name:Radiant Solar
+ManaCost:5 W
+Types:Creature Angel
+PT:3/6
+K:Flying
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Creature.Other+nonToken+YouCtrl | Execute$ DBVenture | TriggerDescription$ Whenever CARDNAME or another nontoken creature enters the battlefield under your control, venture into the dungeon. (Enter the first room or advance to the next room.)
+SVar:DBVenture:DB$ Venture
+A:AB$ Venture | Cost$ W Discard<1/CARDNAME> | SubAbility$ DBGainLife | ActivationZone$ Hand | Defined$ You | SpellDescription$ Venture into the dungeon and you gain 3 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3 | StackDescription$ None
+DeckHas:Ability$LifeGain & Ability$Discard
+Oracle:Flying, lifelink\nWhenever Radiant Solar or another nontoken creature enters the battlefield under your control, venture into the dungeon. (Enter the first room or advance to the next room.)\n{W}, Discard Radiant Solar: Venture into the dungeon and you gain 3 life.

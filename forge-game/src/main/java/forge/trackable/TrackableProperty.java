@@ -24,6 +24,9 @@ public enum TrackableProperty {
     Controller(TrackableTypes.PlayerViewType),
     Zone(TrackableTypes.EnumType(ZoneType.class)),
 
+    IsImmutable(TrackableTypes.BooleanType),
+    IsEmblem(TrackableTypes.BooleanType),
+
     Flipped(TrackableTypes.BooleanType),
     Facedown(TrackableTypes.BooleanType),
     Foretold(TrackableTypes.BooleanType),
@@ -74,6 +77,7 @@ public enum TrackableProperty {
     UntilLeavesBattlefield(TrackableTypes.CardViewCollectionType),
     GainControlTargets(TrackableTypes.CardViewCollectionType),
     CloneOrigin(TrackableTypes.CardViewType),
+    ExiledWith(TrackableTypes.CardViewType),
 
     ImprintedCards(TrackableTypes.CardViewCollectionType),
     HauntedBy(TrackableTypes.CardViewCollectionType),

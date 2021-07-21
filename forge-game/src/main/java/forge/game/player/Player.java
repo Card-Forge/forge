@@ -2217,6 +2217,9 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     @Override
     public final boolean hasProperty(final String property, final Player sourceController, final Card source, CardTraitBase spellAbility) {
+        if (property.startsWith("!")) {
+            return !PlayerProperty.playerHasProperty(this, property.substring(1), sourceController, source, spellAbility);
+        }
         return PlayerProperty.playerHasProperty(this, property, sourceController, source, spellAbility);
     }
 
@@ -3173,6 +3176,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (monarchEffect == null) {
             monarchEffect = new Card(game.nextCardId(), null, game);
             monarchEffect.setOwner(this);
+            monarchEffect.setImmutable(true);
             if (set != null) {
                 monarchEffect.setImageKey("t:monarch_" + set.toLowerCase());
                 monarchEffect.setSetCode(set);
@@ -3180,7 +3184,6 @@ public class Player extends GameEntity implements Comparable<Player> {
                 monarchEffect.setImageKey("t:monarch");
             }
             monarchEffect.setName("The Monarch");
-            monarchEffect.addType("Effect");
 
             {
                 final String drawTrig = "Mode$ Phase | Phase$ End of Turn | TriggerZones$ Command | " +
@@ -3277,8 +3280,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             blessingEffect.setOwner(this);
             blessingEffect.setImageKey("t:blessing");
             blessingEffect.setName("City's Blessing");
-            blessingEffect.addType("Effect");
-
+            blessingEffect.setImmutable(true);
 
             blessingEffect.updateStateForView();
 
@@ -3350,7 +3352,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         keywordEffect.setOwner(this);
         keywordEffect.setName("Keyword Effects");
         keywordEffect.setImageKey(ImageKeys.HIDDEN_CARD);
-        keywordEffect.addType("Effect");
 
         keywordEffect.updateStateForView();
 

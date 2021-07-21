@@ -2,11 +2,8 @@ Name:Academy Manufactor
 ManaCost:3
 Types:Artifact Creature Assembly-Worker
 PT:1/3
-R:Event$ CreateToken | ActiveZones$ Battlefield | ValidPlayer$ You | ValidToken$ Clue,Food,Treasure | ReplaceWith$ DBToken | Description$ If you would create a Clue, Food, or Treasure token, instead create one of each.
-SVar:DBToken:DB$ Token | TokenScript$ c_a_clue_draw | TokenAmount$ X | SubAbility$ DBToken2
-SVar:DBToken2:DB$ Token | TokenScript$ c_a_food_sac | TokenAmount$ X | SubAbility$ DBToken3
-SVar:DBToken3:DB$ Token | TokenScript$ c_a_treasure_sac | TokenAmount$ X
-SVar:X:ReplaceCount$TokenNum
+R:Event$ CreateToken | ActiveZones$ Battlefield | ValidPlayer$ You | ValidToken$ Clue,Food,Treasure | ReplaceWith$ TokenReplace | Description$ If you would create a Clue, Food, or Treasure token, instead create one of each.
+SVar:TokenReplace:DB$ ReplaceToken | Type$ ReplaceToken | ValidCard$ Clue,Food,Treasure | TokenScript$ c_a_clue_draw,c_a_food_sac,c_a_treasure_sac
 DeckHas:Ability$Sacrifice & Ability$Token & Ability$LifeGain
 DeckHints:Ability$Investigate
 Oracle:If you would create a Clue, Food, or Treasure token, instead create one of each.

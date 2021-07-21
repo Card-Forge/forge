@@ -156,7 +156,7 @@ public class CCombat implements ICDoc {
         sb.append("( ").append(state.getPower()).append(" / ").append(state.getToughness()).append(" ) ... ");
         if (c.isFaceDown()) {
             sb.append("Morph");
-        }  else {
+        } else {
             sb.append(name);
         }
         sb.append(" [").append(state.getDisplayId()).append("] ");

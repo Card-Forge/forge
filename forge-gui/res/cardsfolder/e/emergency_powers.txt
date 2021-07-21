@@ -1,10 +1,8 @@
 Name:Emergency Powers
 ManaCost:5 W U
 Types:Instant
-A:SP$ ChangeZoneAll | Cost$ 5 W U | ChangeType$ Card | Origin$ Hand,Graveyard | Destination$ Library | Shuffle$ True | Random$ True | SubAbility$ DBDraw | UseAllOriginZones$ True | AILogic$ Timetwister | StackDescription$ SpellDescription | SpellDescription$ Each player shuffles their hand and hand into their library, then draws seven cards. Exile CARDNAME.
+A:SP$ ChangeZoneAll | ChangeType$ Card | Origin$ Hand,Graveyard | Destination$ Library | Shuffle$ True | Random$ True | SubAbility$ DBDraw | UseAllOriginZones$ True | AILogic$ Timetwister | StackDescription$ SpellDescription | SpellDescription$ Each player shuffles their hand and hand into their library, then draws seven cards. Exile CARDNAME.
 SVar:DBDraw:DB$ Draw | NumCards$ 7 | Defined$ Player | SubAbility$ DBAddendum | StackDescription$ None
-SVar:DBAddendum:DB$ ChooseCard | ChoiceZone$ Hand | Defined$ You | Amount$ 1 | Choices$ Permanent.cmcLE7+YouCtrl | AILogic$ BestCard | ConditionPlayerTurn$ True | ConditionPhases$ Main1,Main2 | ConditionDefined$ Self | ConditionPresent$ Card.wasCast | SubAbility$ DBChange | StackDescription$ SpellDescription | SpellDescription$ Addendum - If you cast this spell during your main phase, you may put a permanent card with mana value 7 or less from your hand onto the battlefield.
-SVar:DBChange:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Defined$ ChosenCard | ConditionPlayerTurn$ True | ConditionPhases$ Main1,Main2 | ConditionDefined$ Self | ConditionPresent$ Card.wasCast | SubAbility$ DBCleanup | StackDescription$ None
-SVar:DBCleanup:DB$ Cleanup | ClearChosen$ True | SubAbility$ DBExile
+SVar:DBAddendum:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChoiceZone$ Hand | Amount$ 1 | ChangeType$ Permanent.cmcLE7+YouCtrl | ChangeNum$ 1 | AILogic$ BestCard | ConditionPlayerTurn$ True | ConditionPhases$ Main1,Main2 | ConditionDefined$ Self | ConditionPresent$ Card.wasCast | SubAbility$ DBExile | StackDescription$ SpellDescription | SpellDescription$ Addendum - If you cast this spell during your main phase, you may put a permanent card with mana value 7 or less from your hand onto the battlefield.
 SVar:DBExile:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | StackDescription$ None
 Oracle:Each player shuffles their hand and graveyard into their library, then draws seven cards. Exile Emergency Powers.\nAddendum — If you cast this spell during your main phase, you may put a permanent card with mana value 7 or less from your hand onto the battlefield.

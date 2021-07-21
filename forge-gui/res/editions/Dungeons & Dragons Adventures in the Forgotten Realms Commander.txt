@@ -10,7 +10,346 @@ ScryfallCode=AFC
 2 M Prosper, Tome-Bound
 3 M Sefris of the Hidden Ways
 4 M Vrondiss, Rage of Ancients
+5 R Fey Steed
+6 R Holy Avenger
+7 R Immovable Rod
+8 R Mantle of the Ancients
+9 R Radiant Solar
+10 R Revivify
+11 R Robe of Stars
+12 R Thorough Investigation
+13 R Valiant Endeavor
+14 R Arcane Endeavor
+15 R Diviner's Portent
+16 R Minn, Wily Illusionist
+17 R Netherese Puzzle-Ward
+18 R Phantom Steed
+19 R Rod of Absorption
+20 R Winged Boots
+21 R Bag of Devouring
+22 R Danse Macabre
+23 R Death Tyrant
+24 R Grave Endeavor
+25 R Grim Hireling
+26 R Hellish Rebuke
+27 R Lorcan, Warlock Collector
+28 R Wand of Orcus
+29 R Berserker's Frenzy
+30 R Chaos Dragon
+31 R Fiendlash
+32 R Maddening Hex
+33 R Reckless Endeavor
+34 R Share the Spoils
+35 R Vengeful Ancestor
+36 R Wild-Magic Sorcerer
+37 R Bag of Tricks
+38 R Belt of Giant Strength
+39 R Druid of Purification
+40 R Indomitable Might
+41 R Neverwinter Hydra
+42 R Song of Inspiration
+43 R Wild Endeavor
+44 R Catti-brie of Mithral Hall
+45 R Dragonborn Champion
+46 R Extract Brain
+47 R Fevered Suspicion
+48 R Hurl Through Hell
+49 M Karazikar, the Eye Tyrant
+50 M Klauth, Unrivaled Ancient
+51 R Klauth's Will
+52 R Midnight Pathlighter
+53 M Nihiloor
+54 R Ride the Avalanche
+55 M Storvald, Frost Giant Jarl
+56 R Wulfgar of Icewind Dale
+57 U Bucknard's Everfull Purse
+58 U Clay Golem
+59 U Component Pouch
+60 U Ebony Fly
+61 U Sword of Hours
+62 U Underdark Rift
+63 R Angel of Finality
+64 C Angelic Gift
+65 M Cataclysmic Gearhulk
+66 R Eternal Dragon
+67 U Gryff's Boon
+68 R Karmic Guide
+69 R Puresteel Paladin
+70 M Realm-Cloaked Giant
+71 C Ronom Unicorn
+72 R Sram, Senior Edificer
+73 M Sun Titan
+74 R Sunblast Angel
+75 U Swords to Plowshares
+76 U Valorous Stance
+77 U Wall of Omens
+78 R Winds of Rath
+79 C Brainstorm
+80 R Champion of Wits
+81 R Curator of Mysteries
+82 U Curse of Verbosity
+83 C Eel Umbra
+84 U Forbidden Alchemy
+85 R Imprisoned in the Moon
+86 U Merfolk Looter
+87 U Mulldrifter
+88 U Murder of Crows
+89 R Phantasmal Image
+90 R Prognostic Sphinx
+91 U Propaganda
+92 U Psychic Impetus
+93 U Riverwise Augur
+94 U Serum Visions
+95 R Chittering Witch
+96 R Consuming Vapors
+97 R Dead Man's Chest
+98 R Doomed Necromancer
+99 R Fiend of the Shadows
+100 R Gonti, Lord of Luxury
+101 R Hex
+102 R Marionette Master
+103 R Necromantic Selection
+104 R Ogre Slumlord
+105 U Phthisis
+106 R Piper of the Swarm
+107 U Plaguecrafter
+108 R Pontiff of Blight
+109 U Reassembling Skeleton
+110 U Shriekmaw
+111 U Unburial Rites
+112 U Victimize
+113 U Anger
+114 M Apex of Power
+115 M Bogardan Hellkite
+116 R Chain Reaction
+117 R Chaos Warp
+118 R Commune with Lava
+119 R Dark-Dweller Oracle
+120 R Demanding Dragon
+121 R Dire Fleet Daredevil
+122 R Disrupt Decorum
+123 U Dragonlord's Servant
+124 M Dragonmaster Outcast
+125 R Dream Pillager
+126 R Etali, Primal Storm
+127 R Gratuitous Violence
+128 R Hoard-Smelter Dragon
+129 R Ignite the Future
+130 R Izzet Chemister
+131 U Light Up the Stage
+132 U Loyal Apprentice
+133 R Magmaquake
+134 R Opportunistic Dragon
+135 R Outpost Siege
+136 C Rile
+137 R Scourge of Valkas
+138 U Shiny Impetus
+139 R Shivan Hellkite
+140 R Skyline Despot
+141 R Skyship Stalker
+142 R Spit Flame
+143 R Taurean Mauler
+144 R Tectonic Giant
+145 R Terror of Mount Velus
+146 U Throes of Chaos
+147 R Thunderbreak Regent
+148 U Vandalblast
+149 R Warstorm Surge
+150 C Abundant Growth
+151 U Acidic Slime
+152 U Beast Within
+153 R Chameleon Colossus
+154 U Colossal Majesty
+155 U Cultivate
+156 R Decree of Savagery
+157 C Explore
+158 C Fertile Ground
+159 U Garruk's Uprising
+160 R Greater Good
+161 R Heroic Intervention
+162 U Kenrith's Transformation
+163 R Kindred Summons
+164 C Nature's Lore
+165 U Paradise Druid
+166 C Rampant Growth
+167 U Rancor
+168 R Return of the Wildspeaker
+169 C Return to Nature
+170 R Rishkar's Expertise
+171 R Shamanic Revelation
+172 U Utopia Sprawl
+173 R Verdant Embrace
+174 C Wild Growth
+175 M Ashen Rider
+176 R Atarka, World Render
+177 R Baleful Strix
+178 U Bant Charm
+179 R Bedevil
+180 U Behemoth Sledge
+181 U Bituminous Blast
+182 U Cloudblazer
+183 R Cold-Eyed Selkie
+184 U Despark
+185 R Fleecemane Lion
+186 R Hostage Taker
+187 R Knight of Autumn
+188 U Necrotic Sliver
+189 U Obsessive Stitcher
+190 U Rakdos Charm
+191 U Savage Ventmaw
+192 C Shielding Plax
+193 U Terminate
+194 R Theater of Horrors
+195 R Utter End
+196 U Vanish into Memory
+197 C Arcane Signet
+198 R Argentum Armor
+199 R Basilisk Collar
+200 U Burnished Hart
+201 R Chaos Wand
+202 U Colossus Hammer
+203 C Commander's Sphere
+204 R Dragon's Hoard
+205 C Explorer's Scope
+206 U Fellwar Stone
+207 U Gruul Signet
+208 U Heirloom Blade
+209 R Masterwork of Ingenuity
+210 U Meteor Golem
+211 U Mind Stone
+212 R Moonsilver Spear
+213 C Orazca Relic
+214 U Rakdos Signet
+215 U Sol Ring
+216 R Solemn Simulacrum
+217 U Swiftfoot Boots
+218 R Sword of the Animist
+219 U Talisman of Indulgence
+220 U Unstable Obelisk
+221 C Viridian Longbow
+222 C Wayfarer's Bauble
+223 U Arcane Sanctum
+224 U Azorius Chancery
+225 C Bant Panorama
+226 C Bojuka Bog
+227 R Canopy Vista
+228 R Choked Estuary
+229 R Cinder Glade
+230 C Command Tower
+231 R Crucible of the Spirit Dragon
+232 R Darkwater Catacombs
+233 U Desert
+234 U Dimir Aqueduct
+235 C Esper Panorama
+236 R Exotic Orchard
+237 U Flood Plain
+238 R Foreboding Ruins
+239 R Fortified Village
+240 R Game Trail
+241 R Geier Reach Sanitarium
+242 U Grasslands
+243 U Gruul Turf
+244 C Halimar Depths
+245 R Haven of the Spirit Dragon
+246 R High Market
+247 R Lumbering Falls
+248 U Mishra's Factory
+249 C Mortuary Mire
+250 R Mossfire Valley
+251 R Mosswort Bridge
+252 R Nimbus Maze
+253 U Orzhov Basilica
+254 C Path of Ancestry
+255 R Port Town
+256 R Prairie Stream
+257 U Rakdos Carnarium
+258 U Seaside Citadel
+259 R Shadowblood Ridge
+260 U Simic Growth Chamber
+261 R Skycloud Expanse
+262 R Smoldering Marsh
+263 R Spinerock Knoll
+264 R Sungrass Prairie
+265 R Sunken Hollow
+266 U Tainted Peak
+267 C Terramorphic Expanse
+268 C Thriving Grove
+269 C Thriving Heath
+270 C Thriving Isle
+271 C Thriving Moor
+272 U Vitu-Ghazi, the City-Tree
+273 U Zhalfirin Void
+274 R Fey Steed
+275 R Holy Avenger
+276 R Immovable Rod
+277 R Mantle of the Ancients
+278 R Radiant Solar
+279 R Revivify
+280 R Robe of Stars
+281 R Thorough Investigation
+282 R Valiant Endeavor
+283 R Arcane Endeavor
+284 R Diviner's Portent
+285 R Minn, Wily Illusionist
+286 R Netherese Puzzle-Ward
+287 R Phantom Steed
+288 R Rod of Absorption
+289 R Winged Boots
+290 R Bag of Devouring
+291 R Danse Macabre
+292 R Death Tyrant
+293 R Grave Endeavor
+294 R Grim Hireling
+295 R Hellish Rebuke
+296 R Lorcan, Warlock Collector
+297 R Wand of Orcus
+298 R Berserker's Frenzy
+299 R Chaos Dragon
+300 R Fiendlash
+301 R Maddening Hex
+302 R Reckless Endeavor
+303 R Share the Spoils
+304 R Vengeful Ancestor
+305 R Wild-Magic Sorcerer
+306 R Bag of Tricks
+307 R Belt of Giant Strength
+308 R Druid of Purification
+309 R Indomitable Might
+310 R Neverwinter Hydra
+311 R Song of Inspiration
+312 R Wild Endeavor
+313 R Catti-brie of Mithral Hall
+314 R Dragonborn Champion
+315 R Extract Brain
+316 R Fevered Suspicion
 317 M Galea, Kindler of Hope
+318 R Hurl Through Hell
+319 M Karazikar, the Eye Tyrant
+320 M Klauth, Unrivaled Ancient
+321 C Klauth's Will
+322 R Midnight Pathlighter
+323 M Nihiloor
 324 M Prosper, Tome-Bound
+325 R Ride the Avalanche
 326 M Sefris of the Hidden Ways
+327 M Storvald, Frost Giant Jarl
 328 M Vrondiss, Rage of Ancients
+329 R Wulfgar of Icewind Dale
+330 U Dragonspeaker Shaman
+331 U Lightning Greaves
+
+[tokens]
+b_1_1_rat
+c_1_1_a_servo
+c_1_1_a_thopter_flying
+c_a_clue_draw
+g_1_1_saproling
+g_3_3_beast
+r_5_5_dragon_flying
+rg_5_4_dragon_spirit_damagesac
+u_1_1_illusion_other_illusions
+w_2_2_knight_vigilance
+w_4_4_angel_flying
+
+[other]
+eternalize_champion_of_wits

@@ -206,6 +206,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     // for Vanguard / Manapool / Emblems etc.
     private boolean isImmutable = false;
+    private boolean isEmblem = false;
 
     private int exertThisTurn = 0;
     private PlayerCollection exertedByPlayer = new PlayerCollection();
@@ -1629,7 +1630,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return exiledWith;
     }
     public final void setExiledWith(final Card e) {
-        exiledWith = e;
+        exiledWith = view.setCard(exiledWith, e, TrackableProperty.ExiledWith);
     }
 
     public final void cleanupExiledWith() {
@@ -1738,6 +1739,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public void setCurrentRoom(String room) {
         currentRoom = room;
         view.updateCurrentRoom(this);
+        view.getCurrentState().updateAbilityText(this, getCurrentState());
     }
     public boolean isInLastRoom() {
         for (final Trigger t : getTriggers()) {
@@ -2154,6 +2156,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public String getAbilityText(final CardState state) {
+        final String linebreak = "\r\n\r\n";
+        final String grayTag = "<span style=\"color:gray;\">";
+        final String endTag = "</span>";
         final CardTypeView type = state.getType();
 
         final StringBuilder sb = new StringBuilder();
@@ -2199,9 +2204,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 // Get original description since text might be translated
                 if (replacementEffect.hasParam("Description") &&
                         replacementEffect.getParam("Description").contains("enters the battlefield")) {
-                    sb.append(text).append("\r\n");
+                    sb.append(text).append(linebreak);
                 } else {
-                    replacementEffects.append(text).append("\r\n");
+                    replacementEffects.append(text).append(linebreak);
                 }
             }
         }
@@ -2213,7 +2218,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 Cost cost = first.getPayCosts();
                 if (cost != null && !cost.isOnlyManaCost()) {
                     sb.append(cost.toString());
-                    sb.append("\r\n");
+                    sb.append(linebreak);
                 }
             }
         }
@@ -2233,15 +2238,22 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
 
         // Give spellText line breaks for easier reading
-        sb.append("\r\n");
         sb.append(text.replaceAll("\\\\r\\\\n", "\r\n"));
-        sb.append("\r\n");
+        sb.append(linebreak);
 
         // Triggered abilities
         for (final Trigger trig : state.getTriggers()) {
             if (!trig.isSecondary() && !trig.isClassAbility()) {
+                boolean disabled = false;
+                // Disable text of other rooms
+                if (type.isDungeon() && !trig.getOverridingAbility().getParam("RoomName").equals(getCurrentRoom())) {
+                    disabled = true;
+                }
                 String trigStr = trig.replaceAbilityText(trig.toString(), state);
-                sb.append(trigStr.replaceAll("\\\\r\\\\n", "\r\n")).append("\r\n");
+                if (disabled) sb.append(grayTag);
+                sb.append(trigStr.replaceAll("\\\\r\\\\n", "\r\n"));
+                if (disabled) sb.append(endTag);
+                sb.append(linebreak);
             }
         }
 
@@ -2253,7 +2265,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             if (!stAb.isSecondary() && !stAb.isClassAbility()) {
                 final String stAbD = stAb.toString();
                 if (!stAbD.equals("")) {
-                    sb.append(stAbD).append("\r\n");
+                    sb.append(stAbD).append(linebreak);
                 }
             }
         }
@@ -2326,7 +2338,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                             desc = TextUtil.fastReplace(desc, "EFFECTSOURCE", host.getEffectSource().getName());
                         }
                         sb.append(desc);
-                        sb.append("\r\n");
+                        sb.append(linebreak);
                     }
                 }
             }
@@ -2334,13 +2346,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
         // Class Abilities
         if (isClassCard()) {
-            String linebreak = "\r\n\r\n";
             sb.append(linebreak);
             // Currently the maximum levels of all Class cards are all 3
             for (int level = 1; level <= 3; ++level) {
                 boolean disabled = level > getClassLevel() && isInZone(ZoneType.Battlefield);
-                final String grayTag = "<span style=\"color:gray;\">";
-                final String endTag = "</span>";
                 for (final Trigger trig : state.getTriggers()) {
                     if (trig.isClassLevelNAbility(level) && !trig.isSecondary()) {
                         if (disabled) sb.append(grayTag);
@@ -4532,14 +4541,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final boolean isPermanent() {
-        return !isImmutable && (isInZone(ZoneType.Battlefield) || getType().isPermanent());
+        return !isImmutable() && (isInZone(ZoneType.Battlefield) || getType().isPermanent());
     }
 
     public final boolean isSpell() {
         return (isInstant() || isSorcery() || (isAura() && !isInZone((ZoneType.Battlefield))));
     }
-
-    public final boolean isEmblem()     { return getType().isEmblem(); }
 
     public final boolean isLand()       { return getType().isLand(); }
     public final boolean isBasicLand()  { return getType().isBasicLand(); }
@@ -4799,11 +4806,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     // Takes one argument like Permanent.Blue+withFlying
     @Override
     public final boolean isValid(final String restriction, final Player sourceController, final Card source, CardTraitBase spellAbility) {
-        if (isImmutable() && source != null && !source.isRemembered(this) &&
-                !(restriction.startsWith("Emblem") || restriction.startsWith("Effect"))) { // special case exclusion
-            return false;
-        }
-
         // Inclusive restrictions are Card types
         final String[] incR = restriction.split("\\.", 2);
 
@@ -4813,14 +4815,27 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             incR[0] = incR[0].substring(1); // consume negation sign
         }
 
-        if (incR[0].equals("Spell") && !isSpell()) {
-            return testFailed;
-        }
-        if (incR[0].equals("Permanent") && !isPermanent()) {
-            return testFailed;
-        }
-        if (!incR[0].equals("card") && !incR[0].equals("Card") && !incR[0].equals("Spell")
-                && !incR[0].equals("Permanent") && !getType().hasStringType(incR[0])) {
+        if (incR[0].equals("Spell")) {
+            if (!isSpell()) {
+                return testFailed;
+            }
+        } else if (incR[0].equals("Permanent")) {
+            if (!isPermanent()) {
+                return testFailed;
+            }
+        } else if (incR[0].equals("Effect")) {
+            if (!isImmutable()) {
+                return testFailed;
+            }
+        } else if (incR[0].equals("Emblem")) {
+            if (!isEmblem()) {
+                return testFailed;
+            }
+        } else if (incR[0].equals("card") || incR[0].equals("Card")) {
+            if (isImmutable()) {
+                return testFailed;
+            }
+        } else if (!getType().hasStringType(incR[0])) {
             return testFailed; // Check for wrong type
         }
 
@@ -4828,15 +4843,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             final String excR = incR[1];
             final String[] exRs = excR.split("\\+"); // Exclusive Restrictions are ...
             for (String exR : exRs) {
-                if (exR.startsWith("!")) {
-                    exR = exR.substring(1);
-                    if (hasProperty(exR, sourceController, source, spellAbility)) {
-                        return testFailed;
-                    }
-                } else {
-                    if (!hasProperty(exR, sourceController, source, spellAbility)) {
-                        return testFailed;
-                    }
+                if (!hasProperty(exR, sourceController, source, spellAbility)) {
+                    return testFailed;
                 }
             }
         }
@@ -4846,6 +4854,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     // Takes arguments like Blue or withFlying
     @Override
     public boolean hasProperty(final String property, final Player sourceController, final Card source, CardTraitBase spellAbility) {
+        if (property.startsWith("!")) {
+            return !CardProperty.cardHasProperty(this, property.substring(1), sourceController, source, spellAbility);
+        }
         return CardProperty.cardHasProperty(this, property, sourceController, source, spellAbility);
     }
 
@@ -4854,6 +4865,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public final void setImmutable(final boolean isImmutable0) {
         isImmutable = isImmutable0;
+        view.updateImmutable(this);
+    }
+
+    public final boolean isEmblem() {
+        return isEmblem;
+    }
+    public final void setEmblem(final boolean isEmblem0) {
+        isEmblem = isEmblem0;
+        view.updateEmblem(this);
     }
 
     /*
@@ -5968,6 +5988,19 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public void setCastFrom(final ZoneType castFrom0) {
         castFrom = castFrom0;
+    }
+    public boolean wasCast() {
+        if (hasMergedCard()) {
+            boolean wasCast = false;
+            for (Card c : getMergedCards()) {
+                if (null != c.getCastFrom()) {
+                    wasCast = true;
+                    break;
+                }
+            }
+            return wasCast;
+        }
+        return getCastFrom() != null;
     }
 
     public SpellAbility getCastSA() {

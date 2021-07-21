@@ -211,7 +211,7 @@ public class CostPayment extends ManaConversionMatrix {
                 return false;
             }
             // abilities care what was used to pay for them
-            if( part instanceof CostPartWithList ) {
+            if (part instanceof CostPartWithList) {
                 ((CostPartWithList) part).resetLists();
             }
 

@@ -87,7 +87,6 @@ public class DeckGeneratorMonoColor extends DeckGeneratorBase {
         }
     }
 
-
     @Override
     public final CardPool getDeck(final int size, final boolean forAi) {
         addCreaturesAndSpells(size, cmcLevels, forAi);

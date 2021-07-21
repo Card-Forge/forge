@@ -6,6 +6,9 @@ Code2=AFR
 MciCode=afr
 Type=Expansion
 ScryfallCode=AFR
+BoosterCovers=5
+Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
+Prerelease=6 Boosters, 1 RareMythic+
 
 [cards]
 1 C +2 Mace
@@ -425,3 +428,20 @@ ScryfallCode=AFR
 S Dungeon of the Mad Mage
 S Lost Mine of Phandelver
 S Tomb of Annihilation
+
+[tokens]
+b_1_1_skeleton
+b_2_1_spider_menace_reach
+b_2_2_zombie
+the_atropal
+boo
+c_a_treasure_sac
+g_2_2_wolf
+guenhwyvar
+icingdeath_frost_tongue
+r_1_1_devil_burn
+r_1_1_goblin
+u_1_1_faerie_dragon_flying
+u_x_x_dog_illusion_cardsinhand
+vecna
+w_3_3_angel_flying

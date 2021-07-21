@@ -44,6 +44,7 @@ Dovin Baan|Dovin's Static|Have you tried to turn it off and on again?
 Dovin, Architect of Law|Dovin's Freeze|With one gear out of place, the whole machine grinds to halt.
 Dovin, Grand Arbiter|Dovin's Modern Recall|The best solutions for the worst problems.
 Dungeon Master|Dungeons and Dragons|A fighter, a wizard, a rogue, and a cleric walk into a dungeon...
+Ellywick Tumblestrum|Ellywick's Song|Hear the tale of dungeons... and dragons!
 Elspeth Tirel|Elspeth's Solitude|Tokens are my only friends...
 Elspeth, Knight-Errant|Elspeth's Endurance|Bant will prevail!
 Elspeth, Sun's Champion|Elspeth's Crusade|With Heliod on my side, I'm invincible!
@@ -106,8 +107,10 @@ Liliana, the Necromancer|Liliana's Recycling|Old foes to new servants, and it's 
 Liliana, Untouched by Death|Liliana's Graveyard Party|What? I'm not touching you!
 Liliana, Waker of the Dead|Liliana's Rotten Reserves|They awaken, feeling well-rested.
 Lord Windgrace|Windgrace's Hunting Party|Let me show you a true cat-astrophe.
+Lolth, Spider Queen|Lolth's Eight-legged Strike|I eight all my opponents alive.
 Lukka, Coppercoat Outcast|Lukka's Ultimatum|Get them.
 Lukka, Wayward Bonder|Lukka's Pandemonium|At them, girl!
+Mordenkainen|Mordenkainen's Library|All the manuals you could ever need.
 Nahiri, Heir of the Ancients|Swiss-Army Nahiri|It pays to be well-equipped.
 Nahiri, the Harbinger|Nahiri's Mystery Guest|This should be your cue to run.
 Nahiri, the Lithomancer|Nahiri's Gift|I pulled it out! Now I'm a king!
@@ -191,3 +194,4 @@ Jiang Yanggu|Yanggu's Giant Growth|Now, Mowu! Fetch that tree!
 Mu Yanling|Yanling's Time Manipulation|Sleep now, for three days and three nights.
 Mu Yanling, Celestial Wind|Yanling's Wind of Heavens|Let's clear the skies.
 Mu Yanling, Sky Dancer|Yanling's Secrets of the Deep|The water knows. Read in it.
+Zariel, Archduke of Avernus|Zariel's Relentless Assault|Attack! For victory and/or death!

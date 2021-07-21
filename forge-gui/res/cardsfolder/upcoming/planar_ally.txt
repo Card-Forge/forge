@@ -1,8 +1,0 @@
-Name:Planar Ally
-ManaCost:3 W W
-Types:Creature Angel
-PT:3/3
-K:Flying
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBVenture | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, venture into the dungeon. (Enter the first room or advance to the next room.)
-SVar:DBVenture:DB$ Venture | Defined$ You
-Oracle:Flying\nWhenever Planar Ally attacks, venture into the dungeon.

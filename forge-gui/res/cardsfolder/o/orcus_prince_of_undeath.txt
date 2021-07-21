@@ -1,0 +1,16 @@
+Name:Orcus, Prince of Undeath
+ManaCost:X 2 B R
+Types:Legendary Creature Demon
+PT:5/3
+K:Flying
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBPumpAll,DBReturn
+SVar:DBPumpAll:DB$ PumpAll | NumAtt$ -X | NumDef$ -X | ValidCards$ Creature.Other | IsCurse$ True | SubAbility$ DBLoseLife | SpellDescription$ Each other creature gets -X/-X until end of turn. You lose X life.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | StackDescription$ None
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TargetMin$ 0 | TargetMax$ X | MaxTotalTargetCMC$ X | ValidTgts$ Creature.YouOwn | SubAbility$ DBPump | TgtPrompt$ Select up to X target creature cards with total mana value X or less | SpellDescription$ Return up to X target creature cards with total mana value X or less from your graveyard to the battlefield. They gain haste until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Haste | StackDescription$ None
+SVar:X:Count$xPaid
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Graveyard
+Oracle:Flying, trample\nWhen Orcus, Prince of Undeath enters the battlefield, choose one —\n• Each other creature gets -X/-X until end of turn. You lose X life.\n• Return up to X target creature cards with total mana value X or less from your graveyard to the battlefield. They gain haste until end of turn.

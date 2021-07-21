@@ -1,0 +1,19 @@
+Name:Rogue Class
+ManaCost:U B
+Types:Enchantment Class
+K:Class:3:1 U B,2 U B
+T:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Exile | ExcludedDestinations$ Stack | Destination$ Any | TriggerZones$ Battlefield | Execute$ TrigForget | Static$ True
+T:Mode$ SpellCast | ValidCard$ Card.IsRemembered | TriggerZones$ Battlefield | Execute$ TrigForget | Static$ True
+SVar:TrigForget:DB$ Pump | ForgetObjects$ TriggeredCard
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigCleanup | Static$ True
+SVar:TrigCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+T:Mode$ DamageDone | ClassLevel$ 1 | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDig | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control deals combat damage to a player, exile the top card of that player's library face down. You may look at it for as long as it remains exiled.
+SVar:TrigDig:DB$ Dig | DigNum$ 1 | Defined$ TriggeredTarget | DestinationZone$ Exile | ExileFaceDown$ True | RememberChanged$ True | ChangeNum$ All | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | Defined$ Imprinted | Origin$ Command | Destination$ Exile | SubAbility$ DBUnimprint
+SVar:DBUnimprint:DB$ Cleanup | ClearImprinted $True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | ImprintOnHost$ True | StaticAbilities$ STMayLook | Duration$ Permanent | ForgetOnMoved$ Exile
+SVar:STMayLook:Mode$ Continuous | MayLookAt$ You | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may look at it for as long as it remains exiled.
+S:Mode$ Continuous | ClassLevel$ 2 | Affected$ Creature.YouCtrl | AddKeyword$ Menace | Description$ Creatures you control have menace.
+S:Mode$ Continuous | ClassLevel$ 3 | MayPlay$ True | MayPlayIgnoreType$ True | EffectZone$ Battlefield | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play cards exiled with CARDNAME, and you may spend mana as though it were mana of any color to cast those spells.
+SVar:PlayMain1:TRUE
+Oracle:(Gain the next level as a sorcery to add its ability.)\nWhenever a creature you control deals combat damage to a player, exile the top card of that player's library face down. You may look at it for as long as it remains exiled.\n{1}{U}{B}: Level 2\nCreatures you control have menace.\n{2}{U}{B}: Level 3\nYou may play cards exiled with Rogue Class, and you may spend mana as though it were mana of any color to cast those spells.

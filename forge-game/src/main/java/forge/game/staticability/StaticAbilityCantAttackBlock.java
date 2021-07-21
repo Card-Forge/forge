@@ -92,7 +92,7 @@ public class StaticAbilityCantAttackBlock {
     }
 
     /**
-     * returns true if attacker can be blocked by blocker
+     * returns true if attacker can't be blocked by blocker
      * @param stAb
      * @param attacker
      * @param blocker
@@ -104,9 +104,10 @@ public class StaticAbilityCantAttackBlock {
             return false;
         }
         if (stAb.hasParam("ValidBlocker")) {
+            boolean stillblock = true;
             for (final String v : stAb.getParam("ValidBlocker").split(",")) {
                 if (blocker.isValid(v, host.getController(), host, stAb)) {
-                    boolean stillblock = false;
+                    stillblock = false;
                     //Dragon Hunter check
                     if (v.contains("withoutReach") && blocker.hasStartOfKeyword("IfReach")) {
                         for (KeywordInterface inst : blocker.getKeywords()) {
@@ -120,12 +121,13 @@ public class StaticAbilityCantAttackBlock {
                             }
                         }
                     }
-                    if (stillblock) {
-                        return false;
+                    if (!stillblock) {
+                        break;
                     }
-                } else {
-                    return false;
                 }
+            }
+            if (stillblock) {
+                return false;
             }
         }
         // relative valid relative to each other

@@ -103,8 +103,6 @@ public class ScaledImagePanel extends JPanel {
         if (src == null) {
             return;
         }
-
-        //System.out.println(sz + " -- " + src);
         
         //ResampleOp resizer = new ResampleOp(DimensionConstrain.createMaxDimension(this.getWidth(), this.getHeight(), !scaleLarger));
         //resizer.setUnsharpenMask(UnsharpenMask.Soft);
@@ -112,10 +110,7 @@ public class ScaledImagePanel extends JPanel {
 
         boolean needsScale = img.getWidth() < sz.width;
         float scaleFactor = ((float)img.getWidth()) / sz.width;
-        if ( needsScale && ( scaleFactor < 0.95 || scaleFactor > 1.05 ) ) { // This should very low-quality scaling to draw during animation
-            
-            //System.out.println("Painting: " + img.getWidth() + " -> " + sz.width );
-            
+        if (needsScale && ( scaleFactor < 0.95 || scaleFactor > 1.05 )) { // This should very low-quality scaling to draw during animation            
             float maxZoomX = ((float)sz.width) / img.getWidth();
             float maxZoomY = ((float)sz.height) / img.getHeight();
             float zoom = Math.min(maxZoomX, maxZoomY);

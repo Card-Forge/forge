@@ -72,7 +72,7 @@ public final class CardScriptInfo {
             final String filename = name.toLowerCase().replaceAll("[^-a-z0-9\\s]","").replaceAll("[-\\s]","_").replaceAll("__","_") + ".txt";
             String[] folders = { String.valueOf(filename.charAt(0)), "upcoming"};
             
-            for(String folder : folders){
+            for (String folder : folders) {
                final File file = new File(ForgeConstants.CARD_DATA_DIR + folder + File.separator + filename);
                if (file.exists()) {
                    script = new CardScriptInfo(FileUtil.readFileToString(file), file);

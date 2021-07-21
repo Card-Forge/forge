@@ -209,7 +209,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
     public final String toString() {
         if (hasParam("Description") && !this.isSuppressed()) {
             String currentName;
-            if (this.isIntrinsic() && !this.getHostCard().isMutated() && cardState != null) {
+            if (this.isIntrinsic() && cardState != null && cardState.getCard() == getHostCard()) {
                 currentName = cardState.getName();
             }
             else {

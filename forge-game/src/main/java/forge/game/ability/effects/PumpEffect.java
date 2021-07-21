@@ -121,7 +121,7 @@ public class PumpEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         //if host is not on the battlefield don't apply
         // Suspend should does Affect the Stack
-        if ((sa.hasParam("UntilLoseControlOfHost") || sa.hasParam("UntilHostLeavesPlay"))
+        if (("UntilHostLeavesPlay".equals(sa.getParam("Duration")) || "UntilLoseControlOfHost".equals(sa.getParam("Duration")))
                 && !(host.isInPlay() || host.isInZone(ZoneType.Stack))) {
             return;
         }
@@ -158,7 +158,6 @@ public class PumpEffect extends SpellAbilityEffect {
         }
 
         if (tgts.size() > 0) {
-
             for (final GameEntity c : tgts) {
                 sb.append(c).append(" ");
             }

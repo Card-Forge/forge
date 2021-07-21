@@ -1,7 +1,10 @@
 package forge.game.ability.effects;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -69,6 +72,8 @@ public class PlayEffect extends SpellAbilityEffect {
         final boolean optional = sa.hasParam("Optional");
         boolean remember = sa.hasParam("RememberPlayed");
         int amount = 1;
+        boolean hasTotalCMCLimit = sa.hasParam("WithTotalCMC");
+        int totalCMCLimit = Integer.MAX_VALUE;
         if (sa.hasParam("Amount") && !sa.getParam("Amount").equals("All")) {
             amount = AbilityUtils.calculateAmount(source, sa.getParam("Amount"), sa);
         }
@@ -163,13 +168,15 @@ public class PlayEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("ValidSA")) {
             final String valid[] = {sa.getParam("ValidSA")};
-            List<Card> toRemove = Lists.newArrayList();
-            for (Card c : tgtCards) {
+            Iterator<Card> it = tgtCards.iterator();
+            while (it.hasNext()) {
+                Card c = it.next();
                 if (!Iterables.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, controller), SpellAbilityPredicates.isValid(valid, controller , c, sa))) {
-                    toRemove.add(c);
+                    // it.remove will only remove item from the list part of CardCollection
+                    tgtCards.asSet().remove(c);
+                    it.remove();
                 }
             }
-            tgtCards.removeAll(toRemove);
             if (tgtCards.isEmpty()) {
                 return;
             }
@@ -179,15 +186,37 @@ public class PlayEffect extends SpellAbilityEffect {
             amount = tgtCards.size();
         }
 
+        if (hasTotalCMCLimit) {
+            totalCMCLimit = AbilityUtils.calculateAmount(source, sa.getParam("WithTotalCMC"), sa);
+        }
+
         if (controlledByPlayer != null) {
             activator.addController(controlledByTimeStamp, controlledByPlayer);
         }
 
         boolean singleOption = tgtCards.size() == 1 && amount == 1 && optional;
+        Map<String, Object> params = hasTotalCMCLimit ? new HashMap<>() : null;
 
-        while (!tgtCards.isEmpty() && amount > 0) {
+        while (!tgtCards.isEmpty() && amount > 0 && totalCMCLimit >= 0) {
+            if (hasTotalCMCLimit) {
+                // filter out cards with mana value greater than limit
+                Iterator<Card> it = tgtCards.iterator();
+                final String [] valid = {"Spell.cmcLE"+totalCMCLimit};
+                while (it.hasNext()) {
+                    Card c = it.next();
+                    if (!Iterables.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, controller), SpellAbilityPredicates.isValid(valid, controller , c, sa))) {
+                        // it.remove will only remove item from the list part of CardCollection
+                        tgtCards.asSet().remove(c);
+                        it.remove();
+                    }
+                }
+                if (tgtCards.isEmpty())
+                    break;
+                params.put("CMCLimit", totalCMCLimit);
+            }
+
             activator.getController().tempShowCards(showCards);
-            Card tgtCard = controller.getController().chooseSingleEntityForEffect(tgtCards, sa, Localizer.getInstance().getMessage("lblSelectCardToPlay"), !singleOption && optional, null);
+            Card tgtCard = controller.getController().chooseSingleEntityForEffect(tgtCards, sa, Localizer.getInstance().getMessage("lblSelectCardToPlay"), !singleOption && optional, params);
             activator.getController().endTempShowCards();
             if (tgtCard == null) {
                 break;
@@ -248,6 +277,14 @@ public class PlayEffect extends SpellAbilityEffect {
                 final String valid[] = {sa.getParam("ValidSA")};
                 sas = Lists.newArrayList(Iterables.filter(sas, SpellAbilityPredicates.isValid(valid, controller , source, sa)));
             }
+            if (hasTotalCMCLimit) {
+                Iterator<SpellAbility> it = sas.iterator();
+                while (it.hasNext()) {
+                    SpellAbility s = it.next();
+                    if (s.getPayCosts().getTotalMana().getCMC() > totalCMCLimit)
+                        it.remove();
+                }
+            }
 
             if (sas.isEmpty()) {
                 continue;
@@ -275,6 +312,8 @@ public class PlayEffect extends SpellAbilityEffect {
                 }
                 continue;
             }
+
+            final int tgtCMC = tgtSA.getPayCosts().getTotalMana().getCMC();
 
             if (sa.hasParam("WithoutManaCost")) {
                 tgtSA = tgtSA.copyWithNoManaCost();
@@ -341,6 +380,7 @@ public class PlayEffect extends SpellAbilityEffect {
             }
 
             amount--;
+            totalCMCLimit -= tgtCMC;
         }
 
         // Remove controlled by player if any

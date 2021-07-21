@@ -510,7 +510,6 @@ public class AiController {
             landList = unreflectedLands;
         }
 
-
         //try to skip lands that enter the battlefield tapped
         if (!nonLandsInHand.isEmpty()) {
             CardCollection nonTappedLands = new CardCollection();
@@ -534,6 +533,7 @@ public class AiController {
                     }
                 }
 
+                // TODO if this is the only source for a color we need badly prioritize it instead
                 if (foundTapped) {
                     continue;
                 }
@@ -813,7 +813,7 @@ public class AiController {
         }
         else {
             Cost payCosts = sa.getPayCosts();
-            if(payCosts != null) {
+            if (payCosts != null) {
                 ManaCost mana = payCosts.getTotalMana();
                 if (mana != null) {
                     if (mana.countX() > 0) {
@@ -879,7 +879,7 @@ public class AiController {
     public boolean isNonDisabledCardInPlay(final String cardName) {
         for (Card card : player.getCardsIn(ZoneType.Battlefield)) {
             if (card.getName().equals(cardName)) {
-                // TODO - Better logic to detemine if a permanent is disabled by local effects
+                // TODO - Better logic to determine if a permanent is disabled by local effects
                 // currently assuming any permanent enchanted by another player
                 // is disabled and a second copy is necessary
                 // will need actual logic that determines if the enchantment is able
@@ -1916,7 +1916,7 @@ public class AiController {
         if (sa.hasParam("AIMaxAmount")) {
             max = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("AIMaxAmount"), sa);
         }
-        switch(sa.getApi()) {
+        switch (sa.getApi()) {
             case TwoPiles:
                 // TODO: improve AI
                 Card biggest = null;
@@ -2013,7 +2013,7 @@ public class AiController {
 
         final CardCollection library = new CardCollection(in);
         CardLists.shuffle(library);
-    
+
         // remove all land, keep non-basicland in there, shuffled
         CardCollection land = CardLists.filter(library, CardPredicates.Presets.LANDS);
         for (Card c : land) {
@@ -2021,7 +2021,7 @@ public class AiController {
                 library.remove(c);
             }
         }
-    
+
         try {
             // mana weave, total of 7 land
             // The Following have all been reduced by 1, to account for the
@@ -2038,19 +2038,14 @@ public class AiController {
             System.err.println("Error: cannot smooth mana curve, not enough land");
             return in;
         }
-    
+
         // add the rest of land to the end of the deck
         for (int i = 0; i < land.size(); i++) {
             if (!library.contains(land.get(i))) {
                 library.add(land.get(i));
             }
         }
-    
-        // check
-        for (int i = 0; i < library.size(); i++) {
-            System.out.println(library.get(i));
-        }
-    
+
         return library;
     } // smoothComputerManaCurve()
 
@@ -2224,7 +2219,7 @@ public class AiController {
         }
         return ComputerUtil.chooseSacrificeType(player, type, ability, ability.getTargetCard(), amount);
     }
-    
+
     private boolean checkAiSpecificRestrictions(final SpellAbility sa) {
         // AI-specific restrictions specified as activation parameters in spell abilities
 
@@ -2276,5 +2271,5 @@ public class AiController {
         // AI logic for choosing which replacement effect to apply happens here.
         return Iterables.getFirst(list, null);
     }
-    
+
 }
