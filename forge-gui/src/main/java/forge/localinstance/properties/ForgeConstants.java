@@ -17,12 +17,12 @@
  */
 package forge.localinstance.properties;
 
+import forge.gui.GuiBase;
+import forge.util.FileUtil;
+
 import java.io.File;
 import java.util.Collections;
 import java.util.Map;
-
-import forge.gui.GuiBase;
-import forge.util.FileUtil;
 
 public final class ForgeConstants {
     public static final String PATH_SEPARATOR        = File.separator;
@@ -59,6 +59,7 @@ public final class ForgeConstants {
     public static final String NET_ARCHIVE_LEGACY_DECKS_LIST_FILE    = LISTS_DIR + "net-decks-archive-legacy.txt";
     public static final String NET_ARCHIVE_VINTAGE_DECKS_LIST_FILE   = LISTS_DIR + "net-decks-archive-vintage.txt";
     public static final String NET_ARCHIVE_BLOCK_DECKS_LIST_FILE     = LISTS_DIR + "net-decks-archive-block.txt";
+    public static final String NET_ARCHIVE_PAUPER_DECKS_LIST_FILE    = LISTS_DIR + "net-decks-archive-pauper.txt";
 
 
     public static final String CHANGES_FILE            = ASSETS_DIR + "README.txt";

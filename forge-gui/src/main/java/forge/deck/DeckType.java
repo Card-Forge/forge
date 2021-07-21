@@ -37,7 +37,8 @@ public enum DeckType {
     NET_ARCHIVE_MODERN_DECK("lblNetArchiveModernDecks"),
     NET_ARCHIVE_LEGACY_DECK("lblNetArchiveLegacyDecks"),
     NET_ARCHIVE_VINTAGE_DECK("lblNetArchiveVintageDecks"),
-    NET_ARCHIVE_BLOCK_DECK("lblNetArchiveBlockDecks");
+    NET_ARCHIVE_BLOCK_DECK("lblNetArchiveBlockDecks"),
+    NET_ARCHIVE_PAUPER_DECK("lblNetArchivePauperDecks");
 
     public static DeckType[] ConstructedOptions;
     public static DeckType[] CommanderOptions;
@@ -65,7 +66,8 @@ public enum DeckType {
                     DeckType.NET_ARCHIVE_MODERN_DECK,
                     DeckType.NET_ARCHIVE_LEGACY_DECK,
                     DeckType.NET_ARCHIVE_VINTAGE_DECK,
-                    DeckType.NET_ARCHIVE_BLOCK_DECK
+                    DeckType.NET_ARCHIVE_BLOCK_DECK,
+                    DeckType.NET_ARCHIVE_PAUPER_DECK
             };
         } else {
             ConstructedOptions = new DeckType[]{
@@ -82,7 +84,9 @@ public enum DeckType {
                     DeckType.NET_ARCHIVE_PIONEER_DECK,
                     DeckType.NET_ARCHIVE_MODERN_DECK,
                     DeckType.NET_ARCHIVE_LEGACY_DECK,
-                    DeckType.NET_ARCHIVE_VINTAGE_DECK
+                    DeckType.NET_ARCHIVE_VINTAGE_DECK,
+                    DeckType.NET_ARCHIVE_BLOCK_DECK,
+                    DeckType.NET_ARCHIVE_PAUPER_DECK
             };
         }
     }

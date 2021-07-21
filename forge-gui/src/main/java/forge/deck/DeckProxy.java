@@ -1,22 +1,11 @@
 package forge.deck;
 
-import java.util.*;
-import java.util.Map.Entry;
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
-
 import forge.StaticData;
-import forge.card.CardEdition;
-import forge.card.CardRarity;
-import forge.card.CardRules;
-import forge.card.CardSplitType;
-import forge.card.CardType;
-import forge.card.ColorSet;
-import forge.card.MagicColor;
+import forge.card.*;
 import forge.card.mana.ManaCostShard;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameFormat;
@@ -32,6 +21,10 @@ import forge.model.FModel;
 import forge.util.BinaryUtil;
 import forge.util.IHasName;
 import forge.util.storage.IStorage;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 // Adding a generic to this class creates compile problems in ItemManager (that I can not fix)
 public class DeckProxy implements InventoryItem {
@@ -677,7 +670,15 @@ public class DeckProxy implements InventoryItem {
         return decks;
     }
 
-    public static List<DeckProxy> getNetArchiveBlockecks(final NetDeckArchiveBlock category) {
+    public static List<DeckProxy> getNetArchiveBlockDecks(final NetDeckArchiveBlock category) {
+        final List<DeckProxy> decks = new ArrayList<>();
+        if (category != null) {
+            addDecksRecursivelly("Constructed", GameType.Constructed, decks, "", category, null);
+        }
+        return decks;
+    }
+
+    public static List<DeckProxy> getNetArchivePauperDecks(final NetDeckArchivePauper category) {
         final List<DeckProxy> decks = new ArrayList<>();
         if (category != null) {
             addDecksRecursivelly("Constructed", GameType.Constructed, decks, "", category, null);

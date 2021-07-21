@@ -1,18 +1,7 @@
 package forge.deck;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.badlogic.gdx.utils.Align;
 import com.google.common.collect.ImmutableList;
-
 import forge.Forge;
 import forge.assets.ImageCache;
 import forge.deck.FDeckEditor.EditorType;
@@ -41,18 +30,15 @@ import forge.screens.FScreen;
 import forge.screens.LoadingOverlay;
 import forge.screens.home.NewGameMenu.NewGameScreen;
 import forge.screens.match.MatchController;
-import forge.toolbox.FButton;
-import forge.toolbox.FComboBox;
-import forge.toolbox.FContainer;
-import forge.toolbox.FEvent;
+import forge.toolbox.*;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.toolbox.FOptionPane;
-import forge.toolbox.GuiChoose;
-import forge.toolbox.ListChooser;
 import forge.util.Callback;
 import forge.util.Localizer;
 import forge.util.Utils;
 import forge.util.storage.IStorage;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.*;
 
 public class FDeckChooser extends FScreen {
     public static final float PADDING = Utils.scale(5);
@@ -68,6 +54,7 @@ public class FDeckChooser extends FScreen {
     private NetDeckArchiveLegacy NetDeckArchiveLegacy;
     private NetDeckArchiveVintage NetDeckArchiveVintage;
     private NetDeckArchiveBlock NetDeckArchiveBlock;
+    private NetDeckArchivePauper NetDeckArchivePauper;
     private boolean refreshingDeckType;
     private boolean firstActivation = true;
 
@@ -545,6 +532,7 @@ public class FDeckChooser extends FScreen {
                 cmbDeckTypes.addItem(DeckType.NET_ARCHIVE_LEGACY_DECK);
                 cmbDeckTypes.addItem(DeckType.NET_ARCHIVE_VINTAGE_DECK);
                 cmbDeckTypes.addItem(DeckType.NET_ARCHIVE_BLOCK_DECK);
+                cmbDeckTypes.addItem(DeckType.NET_ARCHIVE_PAUPER_DECK);
 
                 break;
             case Commander:
@@ -581,6 +569,7 @@ public class FDeckChooser extends FScreen {
                 cmbDeckTypes.addItem(DeckType.NET_ARCHIVE_LEGACY_DECK);
                 cmbDeckTypes.addItem(DeckType.NET_ARCHIVE_VINTAGE_DECK);
                 cmbDeckTypes.addItem(DeckType.NET_ARCHIVE_BLOCK_DECK);
+                cmbDeckTypes.addItem(DeckType.NET_ARCHIVE_PAUPER_DECK);
                 break;
             default:
                 cmbDeckTypes.addItem(DeckType.CUSTOM_DECK);
@@ -785,6 +774,34 @@ public class FDeckChooser extends FScreen {
                         return;
                     }
 
+
+
+                    if (!refreshingDeckType&&(deckType == DeckType.NET_ARCHIVE_PAUPER_DECK)) {
+                        FThreads.invokeInBackgroundThread(new Runnable() { //needed for loading net decks
+                            @Override
+                            public void run() {
+                                GameType gameType = lstDecks.getGameType();
+                                final NetDeckArchivePauper category = NetDeckArchivePauper.selectAndLoad(gameType);
+
+                                FThreads.invokeInEdtLater(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (category == null) {
+                                            cmbDeckTypes.setSelectedItem(selectedDeckType); //restore old selection if user cancels
+                                            if (selectedDeckType == deckType && NetDeckArchivePauper != null) {
+                                                cmbDeckTypes.setText(NetDeckArchivePauper.getDeckType());
+                                            }
+                                            return;
+                                        }
+
+                                        NetDeckArchivePauper = category;
+                                        refreshDecksList(deckType, true, e);
+                                    }
+                                });
+                            }
+                        });
+                        return;
+                    }
 
 
 
@@ -1028,8 +1045,15 @@ public class FDeckChooser extends FScreen {
                 if (NetDeckArchiveBlock!= null) {
                     cmbDeckTypes.setText(NetDeckArchiveBlock.getDeckType());
                 }
-                pool = DeckProxy.getNetArchiveBlockecks(NetDeckArchiveBlock);
+                pool = DeckProxy.getNetArchiveBlockDecks(NetDeckArchiveBlock);
                 config = ItemManagerConfig.NET_ARCHIVE_BLOCK_DECKS;
+                break;
+            case NET_ARCHIVE_PAUPER_DECK:
+                if (NetDeckArchivePauper!= null) {
+                    cmbDeckTypes.setText(NetDeckArchivePauper.getDeckType());
+                }
+                pool = DeckProxy.getNetArchivePauperDecks(NetDeckArchivePauper);
+                config = ItemManagerConfig.NET_ARCHIVE_PAUPER_DECKS;
                 break;
         case NET_DECK:
         case NET_COMMANDER_DECK:
@@ -1318,6 +1342,10 @@ public class FDeckChooser extends FScreen {
                     NetDeckArchiveBlock = NetDeckArchiveBlock.selectAndLoad(lstDecks.getGameType(), deckType.substring(NetDeckArchiveBlock.PREFIX.length()));
                     return DeckType.NET_ARCHIVE_BLOCK_DECK;
                 }
+                if (deckType.startsWith(NetDeckArchivePauper.PREFIX)) {
+                    NetDeckArchivePauper = NetDeckArchivePauper.selectAndLoad(lstDecks.getGameType(), deckType.substring(NetDeckArchivePauper.PREFIX.length()));
+                    return DeckType.NET_ARCHIVE_PAUPER_DECK;
+                }
                 return DeckType.valueOf(deckType);
             }
         }
@@ -1400,7 +1428,9 @@ public class FDeckChooser extends FScreen {
                         DeckType.NET_ARCHIVE_PIONEER_DECK,
                         DeckType.NET_ARCHIVE_MODERN_DECK,
                         DeckType.NET_ARCHIVE_VINTAGE_DECK,
-                        DeckType.NET_ARCHIVE_LEGACY_DECK
+                        DeckType.NET_ARCHIVE_LEGACY_DECK,
+                        DeckType.NET_ARCHIVE_BLOCK_DECK,
+                        DeckType.NET_ARCHIVE_PAUPER_DECK
 
                 );
                 if (!FModel.isdeckGenMatrixLoaded()) {
