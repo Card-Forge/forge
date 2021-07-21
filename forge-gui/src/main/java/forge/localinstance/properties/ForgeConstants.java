@@ -17,12 +17,12 @@
  */
 package forge.localinstance.properties;
 
-import forge.gui.GuiBase;
-import forge.util.FileUtil;
-
 import java.io.File;
 import java.util.Collections;
 import java.util.Map;
+
+import forge.gui.GuiBase;
+import forge.util.FileUtil;
 
 public final class ForgeConstants {
     public static final String PATH_SEPARATOR        = File.separator;

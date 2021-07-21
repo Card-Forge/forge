@@ -1,8 +1,34 @@
 package forge.deckchooser;
 
+import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
-import forge.deck.*;
+
+import forge.deck.ArchetypeDeckGenerator;
+import forge.deck.ColorDeckGenerator;
+import forge.deck.CommanderDeckGenerator;
+import forge.deck.Deck;
+import forge.deck.DeckFormat;
+import forge.deck.DeckProxy;
+import forge.deck.DeckType;
+import forge.deck.DeckgenUtil;
+import forge.deck.NetDeckArchiveBlock;
+import forge.deck.NetDeckArchiveLegacy;
+import forge.deck.NetDeckArchiveModern;
+import forge.deck.NetDeckArchivePioneer;
+import forge.deck.NetDeckArchiveStandard;
+import forge.deck.NetDeckArchiveVintage;
+import forge.deck.NetDeckCategory;
+import forge.deck.RandomDeckGenerator;
 import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
@@ -24,13 +50,6 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
-import org.apache.commons.lang3.StringUtils;
-
-import javax.swing.*;
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 @SuppressWarnings("serial")
 public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
