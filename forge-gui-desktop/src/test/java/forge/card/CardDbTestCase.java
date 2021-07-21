@@ -38,7 +38,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
     private final String oldFrameShivanDragonEdition = "LEA";
     private final String newFrameShivanDragonEdition = "M20";
 
-    private final String oldFrameLightningDragonEdition = "MBP";
+    private final String oldFrameLightningDragonEdition = "USG";
     private final String oldFrameLightningDragonEditionNoPromo = "USG";
 
     private final String newFrameLightningDragonEdition = "VMA";
@@ -53,12 +53,26 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
     private final String printedBeforeFromTheVaultDate = "2008-10-01";
     private final String latestFrameShivanDragonEditionBefore = "DRB";
     private final String latestFrameShivanDragonEditionBeforeNoPromo = "10E";
-    private final String latestFrameLightningDragonEditionBefore = "PUSG";
+    private final String latestFrameLightningDragonEditionBefore = "MBP";
     private final String latestFrameLightningDragonEditionBeforeNoPromo = "USG";
     private final String printedBeforeEternalMasters = "2015-01-01";
     private final String latestFrameHymnToTourachEditionBefore = "VMA";
-    private final String latestFrameHymnToTourachEditionBeforeNoPromo = "ATH";
+    private final String latestFrameHymnToTourachEditionBeforeNoPromo = "FEM";
 
+    // Get a card that has lots of editions so that we can test fetching for specific editions and print dates
+    private final String cardNameCounterspell = "Counterspell";
+    private final String[] editionsCounterspell = {"3ED", "4ED", "ICE", "5ED", "TMP", "S99", "MMQ", "A25", "MH2"};
+    private final String counterspellPrintedBeforeMasters25 = "2018-03-15";  // One day before Master25 release
+    private final String[] counterspellLatestBeforeMasters25 = {"MPS_AKH", "EMA"};
+    private final String counterspellPrintedBeforeEternalMasters = "2016-06-09";  // One day before Eternal Masters release
+    private final String[] counterspellLatestBeforeEternalMasters = {"TPR", "7ED"};
+
+
+    // CardArt Preferences Fixture
+    public static final String ORIGINAL_CARDART_PREFERENCE = "Original Art (All Editions)";
+    public static final String LATEST_CARDART_PREFERENCE = "Latest Art (All Editions)";
+    public static final String ORIGINAL_CORE_EXP_ONLY_CARDART_PREFERENCE = "Original Art (Core, Expansions, and Reprint only)";
+    public static final String LATEST_CORE_EXP_ONLY_CARDART_PREFERENCE = "Latest Art (Core, Expansions, and Reprint only)";
 
     @BeforeMethod
     public void setup(){
@@ -286,7 +300,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         /* --------------
             Latest Print
            -------------*/
-        CardDb.CardArtPreference frame = CardDb.CardArtPreference.LatestArtAllEditions;
+        CardDb.CardArtPreference frame = CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS;
 
         PaperCard sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame);
         assertEquals(sdCard.getName(), cardNameShivanDragon);
@@ -309,7 +323,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         /* ----------------------
             Latest Print No Promo
            ----------------------*/
-        frame = CardDb.CardArtPreference.LatestArtExcludedPromoAndOnlineEditions;
+        frame = CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY;
 
         sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame);
         assertEquals(sdCard.getName(), cardNameShivanDragon);
@@ -332,7 +346,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         /* --------------
             Old Print
            -------------*/
-        frame = CardDb.CardArtPreference.OldArtAllEditions;
+        frame = CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS;
 
         sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame);
         assertEquals(sdCard.getName(), cardNameShivanDragon);
@@ -355,7 +369,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         /* --------------------
             Old Print No Promo
          ----------------------*/
-        frame = CardDb.CardArtPreference.OldArtExcludedPromoAndOnlineEditions;
+        frame = CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY;
 
         sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame);
         assertEquals(sdCard.getName(), cardNameShivanDragon);
@@ -381,7 +395,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         /* --------------
             Latest Print
            -------------*/
-        CardDb.CardArtPreference frame = CardDb.CardArtPreference.LatestArtAllEditions;
+        CardDb.CardArtPreference frame = CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS;
         LegacyCardDb.LegacySetPreference setPreference = LegacyCardDb.LegacySetPreference.Latest;
 
         PaperCard sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame);
@@ -399,7 +413,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         /* ----------------------
             Latest Print No Promo
            ----------------------*/
-        frame = CardDb.CardArtPreference.LatestArtExcludedPromoAndOnlineEditions;
+        frame = CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY;
         setPreference = LegacyCardDb.LegacySetPreference.LatestCoreExp;
 
         sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame);
@@ -417,7 +431,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         /* --------------
             Old Print
            -------------*/
-        frame = CardDb.CardArtPreference.OldArtAllEditions;
+        frame = CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS;
         setPreference = LegacyCardDb.LegacySetPreference.Earliest;
 
         sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame);
@@ -435,7 +449,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         /* --------------------
             Old Print No Promo
          ----------------------*/
-        frame = CardDb.CardArtPreference.LatestArtExcludedPromoAndOnlineEditions;
+        frame = CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY;
         setPreference = LegacyCardDb.LegacySetPreference.LatestCoreExp;
 
         sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame);
@@ -469,7 +483,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         /* --------------
             Latest Print
            -------------*/
-        CardDb.CardArtPreference frame = CardDb.CardArtPreference.LatestArtAllEditions;
+        CardDb.CardArtPreference frame = CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS;
 
         PaperCard sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame, sdReleaseDate);
         assertEquals(sdCard.getName(), cardNameShivanDragon);
@@ -488,7 +502,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         /* ----------------------
             Latest Print No Promo
            ----------------------*/
-        frame = CardDb.CardArtPreference.LatestArtExcludedPromoAndOnlineEditions;
+        frame = CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY;
 
         sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame, sdReleaseDate);
         assertEquals(sdCard.getName(), cardNameShivanDragon);
@@ -507,7 +521,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
          /* --------------
             Old Print
            -------------*/
-        frame = CardDb.CardArtPreference.OldArtAllEditions;
+        frame = CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS;
 
         sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame, sdReleaseDate);
         assertEquals(sdCard.getName(), cardNameShivanDragon);
@@ -526,7 +540,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         /* --------------------
             Old Print No Promo
          ----------------------*/
-        frame = CardDb.CardArtPreference.OldArtExcludedPromoAndOnlineEditions;
+        frame = CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY;
 
         sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame, sdReleaseDate);
         assertEquals(sdCard.getName(), cardNameShivanDragon);
@@ -561,7 +575,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         /* --------------
             Latest Print
            -------------*/
-        CardDb.CardArtPreference frame = CardDb.CardArtPreference.LatestArtAllEditions;
+        CardDb.CardArtPreference frame = CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS;
         LegacyCardDb.LegacySetPreference setPref = LegacyCardDb.LegacySetPreference.Latest;
 
         PaperCard sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame, sdReleaseDate);
@@ -582,7 +596,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         /* ----------------------
             Latest Print No Promo
            ----------------------*/
-        frame = CardDb.CardArtPreference.LatestArtExcludedPromoAndOnlineEditions;
+        frame = CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY;
         setPref = LegacyCardDb.LegacySetPreference.LatestCoreExp;
 
         sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame, sdReleaseDate);
@@ -603,7 +617,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         /* --------------
             Old Print
            -------------*/
-        frame = CardDb.CardArtPreference.OldArtAllEditions;
+        frame = CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS;
         setPref = LegacyCardDb.LegacySetPreference.Earliest;
 
         sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame, sdReleaseDate);
@@ -624,7 +638,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         /* --------------------
             Old Print No Promo
          ----------------------*/
-        frame = CardDb.CardArtPreference.OldArtExcludedPromoAndOnlineEditions;
+        frame = CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY;
         setPref = LegacyCardDb.LegacySetPreference.EarliestCoreExp;
 
         sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame, sdReleaseDate);
@@ -652,7 +666,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         /* --------------
             Latest Print
            -------------*/
-        CardDb.CardArtPreference frame = CardDb.CardArtPreference.LatestArtAllEditions;
+        CardDb.CardArtPreference frame = CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS;
 
         PaperCard httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, frame, 1);
         assertEquals(httCard.getName(), cardNameHymnToTourach);
@@ -669,7 +683,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         /* ----------------------
             Latest Print No Promo
            ----------------------*/
-        frame = CardDb.CardArtPreference.LatestArtExcludedPromoAndOnlineEditions;
+        frame = CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY;
 
         httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, frame, 1);
         assertEquals(httCard.getName(), cardNameHymnToTourach);
@@ -686,7 +700,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         /* --------------
             Old Print
            -------------*/
-        frame = CardDb.CardArtPreference.OldArtAllEditions;
+        frame = CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS;
 
         for (int artIdx = 1; artIdx <= 4; artIdx++) {
             httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, frame, artIdx);
@@ -706,7 +720,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         /* --------------------
             Old Print No Promo
          ----------------------*/
-        frame = CardDb.CardArtPreference.OldArtExcludedPromoAndOnlineEditions;
+        frame = CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY;
 
         for (int artIdx = 1; artIdx <= 4; artIdx++) {
             httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, frame, artIdx);
@@ -746,7 +760,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         /* --------------
             Latest Print
            -------------*/
-        CardDb.CardArtPreference frame = CardDb.CardArtPreference.LatestArtAllEditions;
+        CardDb.CardArtPreference frame = CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS;
 
         PaperCard sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame, 1, sdReleaseDate);
         assertEquals(sdCard.getName(), cardNameShivanDragon);
@@ -765,7 +779,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         /* ----------------------
             Latest Print No Promo
            ----------------------*/
-        frame = CardDb.CardArtPreference.LatestArtExcludedPromoAndOnlineEditions;
+        frame = CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY;
 
         sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame, sdReleaseDate);
         assertEquals(sdCard.getName(), cardNameShivanDragon);
@@ -784,7 +798,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         /* --------------
             Old Print
            -------------*/
-        frame = CardDb.CardArtPreference.OldArtAllEditions;
+        frame = CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS;
 
         sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame, 1, sdReleaseDate);
         assertEquals(sdCard.getName(), cardNameShivanDragon);
@@ -807,7 +821,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         /* --------------------
             Old Print No Promo
          ----------------------*/
-        frame = CardDb.CardArtPreference.OldArtExcludedPromoAndOnlineEditions;
+        frame = CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY;
 
         sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame, sdReleaseDate);
         assertEquals(sdCard.getName(), cardNameShivanDragon);
@@ -846,7 +860,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         /* --------------
             Latest Print
            -------------*/
-        CardDb.CardArtPreference frame = CardDb.CardArtPreference.LatestArtAllEditions;
+        CardDb.CardArtPreference frame = CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS;
         LegacyCardDb.LegacySetPreference setPref = LegacyCardDb.LegacySetPreference.Latest;
 
         PaperCard sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame, 1, sdReleaseDate);
@@ -867,7 +881,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         /* ----------------------
             Latest Print No Promo
            ----------------------*/
-        frame = CardDb.CardArtPreference.LatestArtExcludedPromoAndOnlineEditions;
+        frame = CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY;
         setPref = LegacyCardDb.LegacySetPreference.LatestCoreExp;
 
         sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame, 1, sdReleaseDate);
@@ -888,7 +902,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         /* --------------
             Old Print
            -------------*/
-        frame = CardDb.CardArtPreference.OldArtAllEditions;
+        frame = CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS;
         setPref = LegacyCardDb.LegacySetPreference.Earliest;
 
         sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame, 1, sdReleaseDate);
@@ -911,7 +925,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         /* --------------------
             Old Print No Promo
          ----------------------*/
-        frame = CardDb.CardArtPreference.OldArtExcludedPromoAndOnlineEditions;
+        frame = CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY;
         setPref = LegacyCardDb.LegacySetPreference.EarliestCoreExp;
 
         sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame, sdReleaseDate);
@@ -930,6 +944,77 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
             assertEquals(httCard.getCollectorNumber(), collectorNumbersHymnToTourach[artIdx-1]);
             assertEquals(httCard, httCardLegacy);
         }
+    }
+
+    @Test
+    public void testCounterSpellManyEditionsAlsoWithDateRestrictionsAndCardArtPreferences(){
+        // Test fetching counterspell at different editions
+        for (String setCode : this.editionsCounterspell){
+            PaperCard counterSpell = this.cardDb.getCard(this.cardNameCounterspell, setCode);
+            assertEquals(counterSpell.getName(), this.cardNameCounterspell);
+            assertEquals(counterSpell.getEdition(), setCode);
+            assertFalse(counterSpell.isFoil());
+        }
+
+        Date beforeMaster25Date = null;
+        Date beforeEternalMastersDate = null;
+
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            beforeMaster25Date = format.parse(counterspellPrintedBeforeMasters25);
+            beforeEternalMastersDate = format.parse(counterspellPrintedBeforeEternalMasters);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            fail();
+        }
+
+        // Before Master25
+        PaperCard counterSpellCard = null;
+        // All Editions
+        counterSpellCard = this.cardDb.getCardFromEditions(cardNameCounterspell,
+                CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS, beforeMaster25Date);
+        assertEquals(counterSpellCard.getName(), cardNameCounterspell);
+        assertEquals(counterSpellCard.getEdition(), counterspellLatestBeforeMasters25[0]);
+
+        counterSpellCard = this.cardDb.getCardFromEditions(cardNameCounterspell,
+                CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS, beforeEternalMastersDate);
+        assertEquals(counterSpellCard.getName(), cardNameCounterspell);
+        assertEquals(counterSpellCard.getEdition(), counterspellLatestBeforeEternalMasters[0]);
+
+        // No Promo
+        counterSpellCard = this.cardDb.getCardFromEditions(cardNameCounterspell,
+                CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY, beforeMaster25Date);
+        assertEquals(counterSpellCard.getName(), cardNameCounterspell);
+        assertEquals(counterSpellCard.getEdition(), counterspellLatestBeforeMasters25[1]);
+
+        counterSpellCard = this.cardDb.getCardFromEditions(cardNameCounterspell,
+                CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY, beforeEternalMastersDate);
+        assertEquals(counterSpellCard.getName(), cardNameCounterspell);
+        assertEquals(counterSpellCard.getEdition(), counterspellLatestBeforeEternalMasters[1]);
+
+        // Now with setting preferences - so going with default cardArt preference.
+
+        this.cardDb.setCardArtPreference(LATEST_CARDART_PREFERENCE);
+        counterSpellCard = this.cardDb.getCardFromEditions(cardNameCounterspell, beforeMaster25Date);
+        assertEquals(counterSpellCard.getName(), cardNameCounterspell);
+        assertEquals(counterSpellCard.getEdition(), counterspellLatestBeforeMasters25[0]);
+
+        counterSpellCard = this.cardDb.getCardFromEditions(cardNameCounterspell, beforeEternalMastersDate);
+        assertEquals(counterSpellCard.getName(), cardNameCounterspell);
+        assertEquals(counterSpellCard.getEdition(), counterspellLatestBeforeEternalMasters[0]);
+
+        this.cardDb.setCardArtPreference(LATEST_CORE_EXP_ONLY_CARDART_PREFERENCE);
+        counterSpellCard = this.cardDb.getCardFromEditions(cardNameCounterspell, beforeMaster25Date);
+        assertEquals(counterSpellCard.getName(), cardNameCounterspell);
+        assertEquals(counterSpellCard.getEdition(), counterspellLatestBeforeMasters25[1]);
+
+        counterSpellCard = this.cardDb.getCardFromEditions(cardNameCounterspell, beforeEternalMastersDate);
+        assertEquals(counterSpellCard.getName(), cardNameCounterspell);
+        assertEquals(counterSpellCard.getEdition(), counterspellLatestBeforeEternalMasters[1]);
+
+        // restore default
+        this.cardDb.setCardArtPreference(LATEST_CARDART_PREFERENCE);
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
     }
 
     @Test
@@ -965,39 +1050,39 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         }
 
         // Passing null preference
-        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LatestArtAllEditions);
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
         PaperCard httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, null, null);
         assertNotNull(httCard);
         assertEquals(httCard.getName(), cardNameHymnToTourach);
         assertEquals(httCard.getEdition(), newFrameHymnToTourachEdition);
 
         // Changing default value for default card art preference
-        this.cardDb.setCardArtPreference("Old Art All Editions");
-        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.OldArtAllEditions);
+        this.cardDb.setCardArtPreference(ORIGINAL_CARDART_PREFERENCE);
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS);
         httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, null, null);
         assertNotNull(httCard);
         assertEquals(httCard.getName(), cardNameHymnToTourach);
         assertEquals(httCard.getEdition(), oldFrameHymnToTourachEdition);
         // restore default
-        this.cardDb.setCardArtPreference("Latest Art All Editions");
-        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LatestArtAllEditions);
+        this.cardDb.setCardArtPreference(LATEST_CARDART_PREFERENCE);
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
     }
 
     @Test
     public void testGetCardFromEditionsUsingDefaultCardArtPreference(){
         // Test default value first
-        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LatestArtAllEditions);
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
         PaperCard shivanDragonCard = this.cardDb.getCardFromEditions(cardNameShivanDragon);
         assertEquals(shivanDragonCard.getEdition(), newFrameShivanDragonEdition);
 
         // Try changing the policy
-        this.cardDb.setCardArtPreference("Old Art All Editions");
-        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.OldArtAllEditions);
+        this.cardDb.setCardArtPreference(ORIGINAL_CARDART_PREFERENCE);
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS);
         shivanDragonCard = this.cardDb.getCardFromEditions(cardNameShivanDragon);
         assertEquals(shivanDragonCard.getEdition(), oldFrameShivanDragonEdition);
         // restore default
-        this.cardDb.setCardArtPreference("Latest Art All Editions");
-        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LatestArtAllEditions);
+        this.cardDb.setCardArtPreference(LATEST_CARDART_PREFERENCE);
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
     }
 
     @Test
@@ -1015,16 +1100,16 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         assertNotNull(httCard);
         assertEquals(httCard.getName(), cardNameHymnToTourach);
         // If not specified, card art preference should be LatestPrint
-        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LatestArtAllEditions);
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
         assertEquals(httCard.getEdition(), newFrameHymnToTourachEdition);
         // Try changing the policy
-        this.cardDb.setCardArtPreference("Old Art Excluded Promo And Online Editions");
-        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.OldArtExcludedPromoAndOnlineEditions);
+        this.cardDb.setCardArtPreference(ORIGINAL_CORE_EXP_ONLY_CARDART_PREFERENCE);
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY);
         httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach);
         assertEquals(httCard.getEdition(), oldFrameHymnToTourachEditionNoPromo);
         // restore default
-        this.cardDb.setCardArtPreference("Latest Art All Editions");
-        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LatestArtAllEditions);
+        this.cardDb.setCardArtPreference(LATEST_CARDART_PREFERENCE);
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
     }
 
     @Test
@@ -1045,7 +1130,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         httCard = this.cardDb.getCard(cardNameHymnToTourach, editionHymnToTourach, null);
         assertNotNull(httCard);
         assertEquals(httCard.getName(), cardNameHymnToTourach);
-        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LatestArtAllEditions);
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
         assertEquals(httCard.getEdition(), editionHymnToTourach);
         assertEquals(httCard.getCollectorNumber(), collectorNumbersHymnToTourach[0]);
     }
@@ -1125,29 +1210,44 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
     public void testSetCardArtPreference() {
         // First Off try and see if using constants returned by CardArtPreference.getPreferences will work
         String[] preferenceNames = CardDb.CardArtPreference.getPreferences();
-        CardDb.CardArtPreference[] prefs = {CardDb.CardArtPreference.LatestArtAllEditions,
-                                            CardDb.CardArtPreference.LatestArtExcludedPromoAndOnlineEditions,
-                                            CardDb.CardArtPreference.OldArtAllEditions,
-                                            CardDb.CardArtPreference.OldArtExcludedPromoAndOnlineEditions};
+        CardDb.CardArtPreference[] prefs = {CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS,
+                                            CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY,
+                                            CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS,
+                                            CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY};
         for (int i = 0; i < 4; i++){
             this.cardDb.setCardArtPreference(preferenceNames[i]);
             assertEquals(this.cardDb.getCardArtPreference(), prefs[i]);
         }
 
         // Test different wording
-        this.cardDb.setCardArtPreference("Old Art All Editions");
-        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.OldArtAllEditions);
+        this.cardDb.setCardArtPreference("Earliest Editions");
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS);
+
+        this.cardDb.setCardArtPreference("Earliest Editions (Core Expansions Reprint)");
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY);
+
+        this.cardDb.setCardArtPreference("Old Card Frame");
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS);
+
+        this.cardDb.setCardArtPreference("Latest Editions");
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
+
+        this.cardDb.setCardArtPreference("Latest Editions (Core Expansions Reprint)");
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY);
+
+        this.cardDb.setCardArtPreference("Latest (All Editions)");
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
 
         // Test non existing option
         this.cardDb.setCardArtPreference("Non existing option");
         // default goes to Latest Art All Editions
-        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LatestArtAllEditions);
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
     }
 
     @Test
     public void testSnowCoveredBasicLandsWithCartArtPreference(){
-        this.cardDb.setCardArtPreference("Latest Art All Editions");
-        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LatestArtAllEditions);
+        this.cardDb.setCardArtPreference(LATEST_CARDART_PREFERENCE);
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
 
         String snowCoveredLand = "Snow-Covered Island";
         PaperCard landCard = this.cardDb.getCard(snowCoveredLand);
@@ -1155,8 +1255,8 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         assertEquals(landCard.getName(), snowCoveredLand);
         assertEquals(landCard.getEdition(), "KHM");
 
-        this.cardDb.setCardArtPreference("Latest Art (Excluded Promo And Online Editions)");
-        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LatestArtExcludedPromoAndOnlineEditions);
+        this.cardDb.setCardArtPreference(LATEST_CORE_EXP_ONLY_CARDART_PREFERENCE);
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY);
 
         landCard = this.cardDb.getCard(snowCoveredLand);
         assertNotNull(landCard);
@@ -1164,13 +1264,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         assertEquals(landCard.getEdition(), "KHM");
     }
 
-    @Test
-    public void testForceOfNegation(){
-        PaperCard fon = this.cardDb.getCard("Force of Negation");
-        assertNotNull(fon);
-    }
-
-    @Test
+    @Test(enabled = false)
     public void testCardsNotFoundWhileLoadingDecks(){
         String cardName = "Yavimaya, Cradle of Growth";
         PaperCard cardInDb = this.cardDb.getCard(cardName);
