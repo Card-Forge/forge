@@ -21,6 +21,7 @@ import forge.deck.DeckFormat;
 import forge.deck.DeckProxy;
 import forge.deck.DeckType;
 import forge.deck.DeckgenUtil;
+import forge.deck.NetDeckArchivePauper;
 import forge.deck.NetDeckArchiveBlock;
 import forge.deck.NetDeckArchiveLegacy;
 import forge.deck.NetDeckArchiveModern;
@@ -60,10 +61,10 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     private NetDeckArchiveStandard NetDeckArchiveStandard;
     private NetDeckArchivePioneer NetDeckArchivePioneer;
     private NetDeckArchiveModern NetDeckArchiveModern;
+    private NetDeckArchivePauper NetDeckArchivePauper;
     private NetDeckArchiveLegacy NetDeckArchiveLegacy;
     private NetDeckArchiveVintage NetDeckArchiveVintage;
     private NetDeckArchiveBlock NetDeckArchiveBlock;
-    private NetDeckArchivePauper NetDeckArchivePauper;
 
     private boolean refreshingDeckType;
     private boolean isForCommander;
@@ -298,6 +299,13 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         updateDecks(DeckProxy.getNetArchiveModernDecks(NetDeckArchiveModern), ItemManagerConfig.NET_DECKS);
     }
 
+    private void updateNetArchivePauperDecks() {
+        if (NetDeckArchivePauper != null) {
+            decksComboBox.setText(NetDeckArchivePauper.getDeckType());
+        }
+        updateDecks(DeckProxy.getNetArchivePauperDecks(NetDeckArchivePauper), ItemManagerConfig.NET_DECKS);
+    }
+
     private void updateNetArchivePioneerDecks() {
         if (NetDeckArchivePioneer != null) {
             decksComboBox.setText(NetDeckArchivePioneer.getDeckType());
@@ -326,12 +334,6 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         updateDecks(DeckProxy.getNetArchiveBlockDecks(NetDeckArchiveBlock), ItemManagerConfig.NET_DECKS);
     }
 
-    private void updateNetArchivePauperDecks() {
-        if (NetDeckArchivePauper != null) {
-            decksComboBox.setText(NetDeckArchivePauper.getDeckType());
-        }
-        updateDecks(DeckProxy.getNetArchivePauperDecks(NetDeckArchivePauper), ItemManagerConfig.NET_DECKS);
-    }
     public Deck getDeck() {
         final DeckProxy proxy = lstDecks.getSelectedItem();
         if (proxy == null) {
@@ -467,6 +469,32 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             });
             return;
 
+        } else if (ev.getDeckType() == DeckType.NET_ARCHIVE_PAUPER_DECK&& !refreshingDeckType) {
+            if(lstDecks.getGameType() != GameType.Constructed)
+                return;
+            FThreads.invokeInBackgroundThread(new Runnable() { //needed for loading net decks
+                @Override
+                public void run() {
+                    final NetDeckArchivePauper category = NetDeckArchivePauper.selectAndLoad(lstDecks.getGameType());
+                    FThreads.invokeInEdtLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (category == null) {
+                                decksComboBox.setDeckType(selectedDeckType); //restore old selection if user cancels
+                                if (selectedDeckType == DeckType.NET_ARCHIVE_PAUPER_DECK && NetDeckArchivePauper != null) {
+                                    decksComboBox.setText(NetDeckArchivePauper.getDeckType());
+                                }
+                                return;
+                            }
+
+                            NetDeckArchivePauper = category;
+                            refreshDecksList(ev.getDeckType(), true, ev);
+                        }
+                    });
+                }
+            });
+            return;
+
         } else if (ev.getDeckType() == DeckType.NET_ARCHIVE_LEGACY_DECK&& !refreshingDeckType) {
             if(lstDecks.getGameType() != GameType.Constructed)
                 return;
@@ -519,7 +547,6 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             });
             return;
 
-
         } else if (ev.getDeckType() == DeckType.NET_ARCHIVE_BLOCK_DECK&& !refreshingDeckType) {
             if(lstDecks.getGameType() != GameType.Constructed)
                 return;
@@ -545,34 +572,6 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                 }
             });
             return;
-
-
-        } else if (ev.getDeckType() == DeckType.NET_ARCHIVE_PAUPER_DECK&& !refreshingDeckType) {
-            if(lstDecks.getGameType() != GameType.Constructed)
-                return;
-            FThreads.invokeInBackgroundThread(new Runnable() { //needed for loading net decks
-                @Override
-                public void run() {
-                    final NetDeckArchivePauper category = NetDeckArchivePauper.selectAndLoad(lstDecks.getGameType());
-                    FThreads.invokeInEdtLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (category == null) {
-                                decksComboBox.setDeckType(selectedDeckType); //restore old selection if user cancels
-                                if (selectedDeckType == DeckType.NET_ARCHIVE_PAUPER_DECK && NetDeckArchivePauper != null) {
-                                    decksComboBox.setText(NetDeckArchivePauper.getDeckType());
-                                }
-                                return;
-                            }
-
-                            NetDeckArchivePauper = category;
-                            refreshDecksList(ev.getDeckType(), true, ev);
-                        }
-                    });
-                }
-            });
-            return;
-
 
         } else if ((ev.getDeckType() == DeckType.NET_DECK || ev.getDeckType() == DeckType.NET_COMMANDER_DECK) && !refreshingDeckType) {
             FThreads.invokeInBackgroundThread(new Runnable() { //needed for loading net decks
@@ -703,6 +702,9 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             case NET_ARCHIVE_MODERN_DECK:
                 updateNetArchiveModernDecks();
                 break;
+            case NET_ARCHIVE_PAUPER_DECK:
+                updateNetArchivePauperDecks();
+                break;
             case NET_ARCHIVE_PIONEER_DECK:
                 updateNetArchivePioneerDecks();
                 break;
@@ -714,9 +716,6 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                 break;
             case NET_ARCHIVE_BLOCK_DECK:
                 updateNetArchiveBlockDecks();
-                break;
-            case NET_ARCHIVE_PAUPER_DECK:
-                updateNetArchivePauperDecks();
                 break;
             default:
                 break; //other deck types not currently supported here
@@ -745,6 +744,9 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         } else if (decksComboBox.getDeckType() == DeckType.NET_ARCHIVE_MODERN_DECK) {
             if (NetDeckArchiveModern == null) { return ""; }
             state.append(NetDeckArchiveModern.PREFIX).append(NetDeckArchiveModern.getName());
+        } else if (decksComboBox.getDeckType() == DeckType.NET_ARCHIVE_PAUPER_DECK) {
+            if (NetDeckArchivePauper == null) { return ""; }
+            state.append(NetDeckArchivePauper.PREFIX).append(NetDeckArchivePauper.getName());
         } else if (decksComboBox.getDeckType() == DeckType.NET_ARCHIVE_LEGACY_DECK) {
             if (NetDeckArchiveLegacy == null) { return ""; }
             state.append(NetDeckArchiveLegacy.PREFIX).append(NetDeckArchiveLegacy.getName());
@@ -754,9 +756,6 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         } else if (decksComboBox.getDeckType() == DeckType.NET_ARCHIVE_BLOCK_DECK) {
             if (NetDeckArchiveBlock == null) { return ""; }
             state.append(NetDeckArchiveBlock.PREFIX).append(NetDeckArchiveBlock.getName());
-        } else if (decksComboBox.getDeckType() == DeckType.NET_ARCHIVE_PAUPER_DECK) {
-            if (NetDeckArchivePauper == null) { return ""; }
-            state.append(NetDeckArchivePauper.PREFIX).append(NetDeckArchivePauper.getName());
         } else if (decksComboBox.getDeckType() == null || decksComboBox.getDeckType() == DeckType.NET_DECK) {
             //handle special case of net decks
             if (netDeckCategory == null) { return ""; }
@@ -827,6 +826,10 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                     NetDeckArchiveModern = NetDeckArchiveModern.selectAndLoad(lstDecks.getGameType(), deckType.substring(NetDeckArchiveModern.PREFIX.length()));
                     return DeckType.NET_ARCHIVE_MODERN_DECK;
                 }
+                if (deckType.startsWith(NetDeckArchivePauper.PREFIX)) {
+                    NetDeckArchivePauper = NetDeckArchivePauper.selectAndLoad(lstDecks.getGameType(), deckType.substring(NetDeckArchivePauper.PREFIX.length()));
+                    return DeckType.NET_ARCHIVE_PAUPER_DECK;
+                }
                 if (deckType.startsWith(NetDeckArchiveLegacy.PREFIX)) {
                     NetDeckArchiveLegacy = NetDeckArchiveLegacy.selectAndLoad(lstDecks.getGameType(), deckType.substring(NetDeckArchiveLegacy.PREFIX.length()));
                     return DeckType.NET_ARCHIVE_LEGACY_DECK;
@@ -838,10 +841,6 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                 if (deckType.startsWith(NetDeckArchiveBlock.PREFIX)) {
                     NetDeckArchiveBlock = NetDeckArchiveBlock.selectAndLoad(lstDecks.getGameType(), deckType.substring(NetDeckArchiveBlock.PREFIX.length()));
                     return DeckType.NET_ARCHIVE_BLOCK_DECK;
-                }
-                if (deckType.startsWith(NetDeckArchivePauper.PREFIX)) {
-                    NetDeckArchivePauper = NetDeckArchivePauper.selectAndLoad(lstDecks.getGameType(), deckType.substring(NetDeckArchivePauper.PREFIX.length()));
-                    return DeckType.NET_ARCHIVE_PAUPER_DECK;
                 }
                 return DeckType.valueOf(deckType);
             }
