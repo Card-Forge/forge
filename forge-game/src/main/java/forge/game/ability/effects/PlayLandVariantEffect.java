@@ -12,16 +12,12 @@ import forge.card.CardRulesPredicates;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.game.Game;
-import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardFactory;
 import forge.game.card.CardUtil;
-import forge.game.event.GameEventLandPlayed;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.trigger.TriggerType;
-import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
 
@@ -60,28 +56,18 @@ public class PlayLandVariantEffect extends SpellAbilityEffect {
         }, PaperCard.FN_GET_NAME);
         cards = Lists.newArrayList(Iterables.filter(cards, cp));
         // get a random basic land
-        PaperCard ran = Aggregates.random(cards);
-        Card random = CardFactory.getCard(ran, activator, source.getGame());
+        Card random;
         // if activator cannot play the random land, loop
-        while (!activator.canPlayLand(random, false) && !cards.isEmpty()) {
-            cards.remove(ran);
+        do {
             if (cards.isEmpty()) return;
-            ran = Aggregates.random(cards);
+            PaperCard ran = Aggregates.random(cards);
             random = CardFactory.getCard(ran, activator, game);
-        }
+            cards.remove(ran);
+        } while (!activator.canPlayLand(random, false));
 
         source.addCloneState(CardFactory.getCloneStates(random, source, sa), game.getNextTimestamp());
         source.updateStateForView();
 
-        source.setController(activator, 0);
-        game.getAction().moveTo(activator.getZone(ZoneType.Battlefield), source, sa);
-
-        // play a sound
-        game.fireEvent(new GameEventLandPlayed(activator, source));
-        
-        // Run triggers
-        game.getTriggerHandler().runTrigger(TriggerType.LandPlayed, AbilityKey.mapFromCard(source), false);
-        game.getStack().unfreezeStack();
-        activator.addLandPlayedThisTurn();
+        activator.playLandNoCheck(source, sa);
     }
 }

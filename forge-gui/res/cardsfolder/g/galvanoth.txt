@@ -4,6 +4,6 @@ Types:Creature Beast
 PT:3/3
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDig | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may look at the top card of your library. You may cast it without paying its mana cost if it's an instant or sorcery spell.
 SVar:TrigDig:DB$ Dig | DigNum$ 1 | NoMove$ True | SubAbility$ TrigPlay
-SVar:TrigPlay:DB$ Play | Defined$ TopOfLibrary | WithoutManaCost$ True | Optional$ True | ConditionDefined$ TopOfLibrary | ConditionPresent$ Instant,Sorcery | ConditionCompare$ EQ1
+SVar:TrigPlay:DB$ Play | Defined$ TopOfLibrary | WithoutManaCost$ True | ValidSA$ Spell | Optional$ True | ConditionDefined$ TopOfLibrary | ConditionPresent$ Instant,Sorcery | ConditionCompare$ EQ1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/galvanoth.jpg
 Oracle:At the beginning of your upkeep, you may look at the top card of your library. You may cast it without paying its mana cost if it's an instant or sorcery spell.

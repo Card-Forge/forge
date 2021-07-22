@@ -11,7 +11,7 @@ import forge.game.spellability.TargetRestrictions;
 public class SpellApiBased extends Spell {
     private static final long serialVersionUID = -6741797239508483250L;
     private final SpellAbilityEffect effect;
-    
+
     public SpellApiBased(ApiType api0, Card sourceCard, Cost abCost, TargetRestrictions tgt, Map<String, String> params0) {
         super(sourceCard, abCost);
         this.setTargetRestrictions(tgt);
