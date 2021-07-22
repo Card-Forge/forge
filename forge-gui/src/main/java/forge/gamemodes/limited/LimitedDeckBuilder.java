@@ -84,7 +84,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
 
         // remove Unplayables
         final Iterable<PaperCard> playables = Iterables.filter(availableList,
-                Predicates.compose(CardRulesPredicates.IS_KEPT_IN_AI_DECKS, PaperCard.FN_GET_RULES));
+                Predicates.compose(CardRulesPredicates.IS_KEPT_IN_AI_LIMITED_DECKS, PaperCard.FN_GET_RULES));
         this.aiPlayables = Lists.newArrayList(playables);
         this.availableList.removeAll(aiPlayables);
 
