@@ -4,6 +4,5 @@ Types:Creature Ogre
 PT:3/2
 T:Mode$ Attacks | ValidCard$ Creature.Self | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME attacks, it deals 3 damage to you unless you pay {2}.
 SVar:TrigDamage:DB$DealDamage | Defined$ You | NumDmg$ 3 | UnlessCost$ 2 | UnlessPayer$ You
-AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hasran_ogress.jpg
 Oracle:Whenever Hasran Ogress attacks, it deals 3 damage to you unless you pay {2}.
