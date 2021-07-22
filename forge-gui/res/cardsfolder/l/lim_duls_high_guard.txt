@@ -3,6 +3,6 @@ ManaCost:1 B B
 Types:Creature Skeleton
 PT:2/1
 K:First Strike
-A:AB$ Regenerate | Cost$ 1 B | SpellDescription$ Regenerate Lim-Dûl's High Guard.
+A:AB$ Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lim_duls_high_guard.jpg
 Oracle:First strike\n{1}{B}: Regenerate Lim-Dûl's High Guard.
