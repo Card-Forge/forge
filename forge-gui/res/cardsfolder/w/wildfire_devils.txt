@@ -6,6 +6,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigChoosePlayer | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield and at the beginning of your upkeep, choose a player at random. That player exiles an instant or sorcery card from their graveyard. Copy that card. You may cast the copy without paying its mana cost.
 SVar:TrigChoosePlayer:DB$ ChoosePlayer | Defined$ You | Choices$ Player | Random$ True | SubAbility$ DBExile
 SVar:DBExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | DefinedPlayer$ ChosenPlayer | Mandatory$ True | ChangeType$ Instant,Sorcery | ChangeNum$ 1 | Hidden$ True | IsCurse$ True | Chooser$ ChosenPlayer | RememberChanged$ True | SubAbility$ DBPlay
-SVar:DBPlay:DB$ Play | Valid$ Card.IsRemembered+ExiledWithSource | ValidZone$ Exile | Amount$ All | CopyOnce$ True | WithoutManaCost$ True | Optional$ True | CopyCard$ True | SubAbility$ DBCleanup
+SVar:DBPlay:DB$ Play | Valid$ Card.IsRemembered+ExiledWithSource | ValidSA$ Spell | ValidZone$ Exile | Amount$ All | WithoutManaCost$ True | Optional$ True | CopyCard$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenPlayer$ True
 Oracle:When Wildfire Devils enters the battlefield and at the beginning of your upkeep, choose a player at random. That player exiles an instant or sorcery card from their graveyard. Copy that card. You may cast the copy without paying its mana cost.

@@ -9,7 +9,7 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:TrigRemoveCounter:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Exile | Execute$ DBRemoveCounter | TriggerDescription$ At the beginning of your upkeep, if this card is exiled, remove a hone counter from it.
 SVar:DBRemoveCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ HONE | CounterNum$ 1
 SVar:TrigCast:Mode$ CounterRemoved | TriggerZones$ Exile | ValidCard$ Card.Self | CounterType$ HONE | NewCounterAmount$ 0 | Execute$ DBCast | TriggerDescription$ When the last hone counter is removed from this card, if it’s exiled, you may cast it. It costs {4} less to cast this way.
-SVar:DBCast:DB$ Play | Defined$ Self | PlayReduceCost$ 4
+SVar:DBCast:DB$ Play | Defined$ Self | PlayReduceCost$ 4 | ValidSA$ Spell
 AlternateMode:Modal
 SVar:BuffedBy:Instant,Sorcery
 DeckHints:Type$Instant|Sorcery

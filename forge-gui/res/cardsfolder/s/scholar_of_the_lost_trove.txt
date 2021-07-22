@@ -4,7 +4,7 @@ Types:Creature Sphinx
 PT:5/5
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPlay | TriggerDescription$ When CARDNAME enters the battlefield, you may cast target instant, sorcery, or artifact card from your graveyard without paying its mana cost. If an instant or sorcery spell cast this way would be put into your graveyard this turn, exile it instead.
-SVar:TrigPlay:DB$ Play | ValidTgts$ Instant.YouOwn,Sorcery.YouOwn,Artifact.YouOwn | TgtPrompt$ Choose target instant, sorcery, or artifact card in your graveyard | TgtZone$ Graveyard | WithoutManaCost$ True | Optional$ True | ReplaceGraveyard$ Exile | AILogic$ ReplaySpell
+SVar:TrigPlay:DB$ Play | ValidTgts$ Instant.YouOwn,Sorcery.YouOwn,Artifact.YouOwn | TgtPrompt$ Choose target instant, sorcery, or artifact card in your graveyard | TgtZone$ Graveyard | WithoutManaCost$ True | ValidSA$ Spell | Optional$ True | ReplaceGraveyard$ Exile | AILogic$ ReplaySpell
 DeckHints:Type$Instant|Sorcery|Artifact
 DeckHas:Ability$Graveyard
 Oracle:Flying\nWhen Scholar of the Lost Trove enters the battlefield, you may cast target instant, sorcery, or artifact card from your graveyard without paying its mana cost. If an instant or sorcery spell cast this way would be put into your graveyard this turn, exile it instead.

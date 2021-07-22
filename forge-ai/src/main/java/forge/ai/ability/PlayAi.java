@@ -56,7 +56,7 @@ public class PlayAi extends SpellAbilityAi {
         }
 
         if (cards != null & sa.hasParam("ValidSA")) {
-            final String valid[] = {sa.getParam("ValidSA")};
+            final String valid[] = sa.getParam("ValidSA").split(",");
             final Iterator<Card> itr = cards.iterator();
             while (itr.hasNext()) {
                 final Card c = itr.next();

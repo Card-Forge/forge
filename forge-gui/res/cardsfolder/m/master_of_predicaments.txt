@@ -7,6 +7,6 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage
 SVar:TrigGuess:DB$ ChooseCard | ChoiceZone$ Hand | Defined$ You | Choices$ Card.YouOwn | AILogic$ RandomNonLand | SubAbility$ DBGuess
 SVar:DBGuess:DB$ GenericChoice | Defined$ TriggeredTarget | Choices$ GuessGreaterThanFour,GuessNotGreaterThanFour | AILogic$ Random | ShowChoice$ True
 SVar:GuessGreaterThanFour:DB$ Play | Controller$ You | Defined$ ChosenCard | Optional$ True | WithoutManaCost$ True | ConditionDefined$ ChosenCard | ConditionPresent$ Card.cmcLE4+nonLand | ConditionCompare$ GE1 | SpellDescription$ That card's mana value is greater than 4
-SVar:GuessNotGreaterThanFour:DB$ Play | Controller$ You | Defined$ ChosenCard | Optional$ True | WithoutManaCost$ True | ConditionDefined$ ChosenCard | ConditionPresent$ Card.cmcGT4+nonLand | ConditionCompare$ GE1 | SpellDescription$ That card's mana value is not greater than 4
+SVar:GuessNotGreaterThanFour:DB$ Play | Controller$ You | Defined$ ChosenCard | Optional$ True | WithoutManaCost$ True | ValidSA$ Spell | ConditionDefined$ ChosenCard | ConditionPresent$ Card.cmcGT4+nonLand | ConditionCompare$ GE1 | SpellDescription$ That card's mana value is not greater than 4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/master_of_predicaments.jpg
 Oracle:Flying\nWhenever Master of Predicaments deals combat damage to a player, choose a card in your hand. That player guesses whether the card's mana value is greater than 4. If the player guessed wrong, you may cast the card without paying its mana cost.
