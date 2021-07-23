@@ -805,7 +805,7 @@ public class Game {
                     getTriggerHandler().clearDelayedTrigger(c);
                 } else {
                     // return stolen permanents
-                    if ((c.getController().equals(p) || c.getZone().getPlayer().equals(p)) && c.isInZone(ZoneType.Battlefield)) {
+                    if (c.isInZone(ZoneType.Battlefield) && (c.getController().equals(p) || c.getZone().getPlayer().equals(p))) {
                         c.removeTempController(p);
                         getAction().controllerChangeZoneCorrection(c);
                     }

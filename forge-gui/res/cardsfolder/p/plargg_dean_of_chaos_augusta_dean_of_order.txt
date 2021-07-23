@@ -4,7 +4,7 @@ Types:Legendary Creature Orc Shaman
 PT:2/2
 A:AB$ Draw | Cost$ T Discard<1/Card> | NumCards$ 1 | Defined$ You | SpellDescription$ Draw a card.
 A:AB$ DigUntil | Cost$ 4 R T | Defined$ You | Amount$ 1 | Valid$ Card.nonLand+nonLegendary+cmcLE3 | FoundDestination$ Library | RevealRandomOrder$ True | RevealedDestination$ Library | ImprintRevealed$ True | RememberFound$ True | SubAbility$ CascadeCast | StackDescription$ SpellDescription | SpellDescription$ Reveal cards from the top of your library until you reveal a nonlegendary, nonland card with mana value 3 or less. You may cast that card without paying its mana cost. Put all revealed cards not cast this way on the bottom of your library in a random order.
-SVar:CascadeCast:DB$ Play | Defined$ Remembered | WithoutManaCost$ True | Optional$ True | SubAbility$ CascadeMoveToLib
+SVar:CascadeCast:DB$ Play | Defined$ Remembered | WithoutManaCost$ True | ValidSA$ Spell | Optional$ True | SubAbility$ CascadeMoveToLib
 SVar:CascadeMoveToLib:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered,Card.IsImprinted | Origin$ Library | Destination$ Library | RandomOrder$ True | LibraryPosition$ -1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 AlternateMode:Modal

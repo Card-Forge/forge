@@ -4,7 +4,7 @@ Types:Creature Avatar
 PT:5/5
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ CastEach | TriggerDescription$ When CARDNAME enters the battlefield, for each opponent, you may cast up to one target instant or sorcery card from that player's graveyard without paying its mana cost. If a spell cast this way would be put into a graveyard this turn, exile it instead.
-SVar:CastEach:DB$ Play | ValidTgts$ Instant.OppCtrl,Sorcery.OppCtrl | TgtZone$ Graveyard | TgtPrompt$ Select target instant or sorcery card in each opponent's graveyard | TargetMin$ 0 | TargetMax$ OneEach | TargetsWithDifferentControllers$ True | Amount$ All | WithoutManaCost$ True | Optional$ True | ReplaceGraveyard$ Exile | AILogic$ ReplaySpell
+SVar:CastEach:DB$ Play | ValidTgts$ Instant.OppCtrl,Sorcery.OppCtrl | TgtZone$ Graveyard | TgtPrompt$ Select target instant or sorcery card in each opponent's graveyard | TargetMin$ 0 | TargetMax$ OneEach | TargetsWithDifferentControllers$ True | Amount$ All | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | ReplaceGraveyard$ Exile | AILogic$ ReplaySpell
 SVar:OneEach:PlayerCountOpponents$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diluvian_primordial.jpg
 Oracle:Flying\nWhen Diluvian Primordial enters the battlefield, for each opponent, you may cast up to one target instant or sorcery card from that player's graveyard without paying its mana cost. If a spell cast this way would be put into a graveyard this turn, exile it instead.

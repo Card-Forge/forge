@@ -7,7 +7,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigExile:DB$ Dig | Defined$ Player | DigNum$ X | ChangeNum$ All | RememberChanged$ True | DestinationZone$ Exile
 SVar:X:Count$CastTotalManaSpent
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPlay | OptionalDecider$ You| TriggerDescription$ Whenever CARDNAME attacks, you may cast an instant or sorcery card exiled with it without paying its mana cost.
-SVar:TrigPlay:DB$ Play | ValidZone$ Exile | Valid$ Instant.IsRemembered+ExiledWithSource,Sorcery.IsRemembered+ExiledWithSource | Controller$ You | WithoutManaCost$ True | Amount$ 1
+SVar:TrigPlay:DB$ Play | ValidZone$ Exile | Valid$ Instant.IsRemembered+ExiledWithSource,Sorcery.IsRemembered+ExiledWithSource | ValidSA$ Spell | Controller$ You | WithoutManaCost$ True | Amount$ 1
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
 SVar:DBForget:DB$ Pump | Defined$ TriggeredCard | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup

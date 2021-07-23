@@ -31,6 +31,7 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementLayer;
 import forge.game.spellability.AlternativeCost;
+import forge.game.spellability.LandAbility;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.trigger.TriggerType;
@@ -167,7 +168,7 @@ public class PlayEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasParam("ValidSA")) {
-            final String valid[] = {sa.getParam("ValidSA")};
+            final String valid[] = sa.getParam("ValidSA").split(",");
             Iterator<Card> it = tgtCards.iterator();
             while (it.hasNext()) {
                 Card c = it.next();
@@ -244,8 +245,8 @@ public class PlayEffect extends SpellAbilityEffect {
                 tgtCards.remove(tgtCard);
             }
 
-            final Card original = tgtCard;
             if (sa.hasParam("CopyCard")) {
+                final Card original = tgtCard;
                 final Zone zone = tgtCard.getZone();
                 tgtCard = Card.fromPaperCard(tgtCard.getPaperCard(), sa.getActivatingPlayer());
 
@@ -258,23 +259,10 @@ public class PlayEffect extends SpellAbilityEffect {
                 }
             }
 
-            // lands will be played
-            if (tgtCard.isLand()) {
-                if (controller.playLand(tgtCard, true)) {
-                    amount--;
-                    if (remember) {
-                        source.addRemembered(tgtCard);
-                    }
-                } else {
-                    tgtCards.remove(tgtCard);
-                }
-                continue;
-            }
-
             // get basic spells (no flashback, etc.)
             List<SpellAbility> sas = AbilityUtils.getBasicSpellsFromPlayEffect(tgtCard, controller);
             if (sa.hasParam("ValidSA")) {
-                final String valid[] = {sa.getParam("ValidSA")};
+                final String valid[] = sa.getParam("ValidSA").split(",");
                 sas = Lists.newArrayList(Iterables.filter(sas, SpellAbilityPredicates.isValid(valid, controller , source, sa)));
             }
             if (hasTotalCMCLimit) {
@@ -288,11 +276,6 @@ public class PlayEffect extends SpellAbilityEffect {
 
             if (sas.isEmpty()) {
                 continue;
-            }
-
-            // play copied cards with linked abilities, e.g. Elite Arcanist
-            if (sa.hasParam("CopyOnce")) {
-                tgtCards.remove(original);
             }
 
             SpellAbility tgtSA;
@@ -313,8 +296,22 @@ public class PlayEffect extends SpellAbilityEffect {
                 continue;
             }
 
+            // lands will be played
+            if (tgtSA instanceof LandAbility) {
+                tgtSA.resolve();
+                amount--;
+                if (remember) {
+                    source.addRemembered(tgtCard);
+                }
+                continue;
+            }
+
             final int tgtCMC = tgtSA.getPayCosts().getTotalMana().getCMC();
 
+            // illegal action, cancel early
+            if ((sa.hasParam("WithoutManaCost") || sa.hasParam("PlayCost")) && tgtSA.costHasManaX() && !tgtSA.getPayCosts().getCostMana().canXbe0()) {
+                continue;
+            }
             if (sa.hasParam("WithoutManaCost")) {
                 tgtSA = tgtSA.copyWithNoManaCost();
             } else if (sa.hasParam("PlayCost")) {

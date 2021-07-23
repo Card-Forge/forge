@@ -468,8 +468,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (cost.isMandatory()) {
             return chooseNumber(ability, localizer.getMessage("lblChooseAnnounceForCard", announce,
                     CardTranslation.getTranslatedName(ability.getHostCard().getName())) , min, max);
-        }
-        else {
+        } else {
             return getGui().getInteger(localizer.getMessage("lblChooseAnnounceForCard", announce,
                     CardTranslation.getTranslatedName(ability.getHostCard().getName())) , min, max, min + 9);
         }
@@ -497,8 +496,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         String inpMessage = null;
         if (min == 0) {
             inpMessage = localizer.getMessage("lblSelectUpToNumTargetToAction", message, action);
-        }
-        else {
+        } else {
             inpMessage = localizer.getMessage("lblSelectNumTargetToAction", message, action);
         }
 
@@ -816,8 +814,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             String prompt = null;
             if (isFirstGame) {
                 prompt = localizer.getMessage("lblYouHaveWonTheCoinToss", player.getName());
-            }
-            else {
+            } else {
                 prompt = localizer.getMessage("lblYouLostTheLastGame", player.getName());
             }
             prompt += "\n\n" + localizer.getMessage("lblWouldYouLiketoPlayorDraw");
@@ -828,8 +825,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             String prompt = null;
             if (isFirstGame) {
                 prompt = localizer.getMessage("lblYouHaveWonTheCoinToss", player.getName());
-            }
-            else {
+            } else {
                 prompt = localizer.getMessage("lblYouLostTheLastGame", player.getName());
             }
             prompt += "\n\n" + localizer.getMessage("lblWhoWouldYouLiketoStartthisGame");
@@ -2679,12 +2675,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             String message = null;
             if (targetZone != ZoneType.Battlefield) {
                 message = localizer.getMessage("lblPutCardInWhichPlayerZone", targetZone.getTranslatedName().toLowerCase());
-            }
-            else {
+            } else {
                 if (noTriggers) {
                     message = localizer.getMessage("lblPutCardInWhichPlayerBattlefield");
-                }
-                else {
+                } else {
                     message = localizer.getMessage("lblPutCardInWhichPlayerPlayOrStack");
                 }
             }

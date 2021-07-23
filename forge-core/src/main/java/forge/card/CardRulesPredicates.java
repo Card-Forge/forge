@@ -26,6 +26,14 @@ public final class CardRulesPredicates {
         }
     };
 
+    /** The Constant isKeptInAiLimitedDecks. */
+    public static final Predicate<CardRules> IS_KEPT_IN_AI_LIMITED_DECKS = new Predicate<CardRules>() {
+        @Override
+        public boolean apply(final CardRules card) {
+            return !card.getAiHints().getRemAIDecks() && !card.getAiHints().getRemNonCommanderDecks();
+        }
+    };
+
     /** The Constant isKeptInRandomDecks. */
     public static final Predicate<CardRules> IS_KEPT_IN_RANDOM_DECKS = new Predicate<CardRules>() {
         @Override

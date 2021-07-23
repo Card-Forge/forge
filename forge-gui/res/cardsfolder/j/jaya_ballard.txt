@@ -8,7 +8,7 @@ SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 A:AB$ Effect | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Jaya Ballard | Image$ emblem_jaya_ballard | StaticAbilities$ STJaya | ReplacementEffects$ JayaReplace | Stackable$ False | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "You may cast instant and sorcery spells from your graveyard. If a spell cast this way would be put into your graveyard, exile it instead."
-SVar:STJaya:Mode$ Continuous | EffectZone$ Command | Affected$ Instant.YouCtrl,Sorcery.YouCtrl | MayPlay$ True | AffectedZone$ Graveyard | Description$ You may cast instant and sorcery cards from your graveyard. If a card cast this way would be put into your graveyard, exile it instead.
+SVar:STJaya:Mode$ Continuous | EffectZone$ Command | Affected$ Instant.YouCtrl,Sorcery.YouCtrl | MayPlay$ True | AffectedZone$ Graveyard | Description$ You may cast instant and sorcery spells from your graveyard. If a spell cast this way would be put into your graveyard, exile it instead.
 SVar:JayaReplace:Event$ Moved | EffectZone$ Command | ValidLKI$ Card.CastSa Spell.MayPlaySource | Origin$ Stack | Destination$ Graveyard | ReplaceWith$ JayaMoveExile
 SVar:JayaMoveExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ Exile
 SVar:PlayMain1:ALWAYS
