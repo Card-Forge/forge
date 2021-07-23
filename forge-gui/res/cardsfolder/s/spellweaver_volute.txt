@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant instant card in a graveyard
 A:SP$ Attach | Cost$ 3 U U | ValidTgts$ Instant | TgtZone$ Graveyard | TgtPrompt$ Select target instant card in a graveyard | AILogic$ Pump
 T:Mode$ SpellCast | ValidCard$ Sorcery | ValidActivatingPlayer$ You | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a sorcery spell, copy the enchanted instant card. You may cast the copy without paying its mana cost. If you do, exile the enchanted card and attach CARDNAME to another instant card in a graveyard.
-SVar:TrigCopy:DB$ Play | Defined$ Enchanted | WithoutManaCost$ True | Optional$ True | CopyCard$ True | RememberPlayed$ True | SubAbility$ DBExile
+SVar:TrigCopy:DB$ Play | Defined$ Enchanted | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | CopyCard$ True | RememberPlayed$ True | SubAbility$ DBExile
 SVar:DBExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Defined$ Enchanted | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBChooseCard
 SVar:DBChooseCard:DB$ ChooseCard | Choices$ Instant | ChoiceZone$ Graveyard | Amount$ 1 | Mandatory$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBAttach
 SVar:DBAttach:DB$ Attach | Defined$ ChosenCard | Object$ Self | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup

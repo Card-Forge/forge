@@ -877,7 +877,9 @@ public final class StaticAbilityContinuous {
                     mayPlayAltCost = mayPlayAltCost.replace("ConvertedManaCost", costcmc);
                 }
 
-                Player mayPlayController = params.containsKey("MayPlayCardOwner") ? affectedCard.getOwner() : controller;
+                Player mayPlayController = params.containsKey("MayPlayPlayer") ?
+                    AbilityUtils.getDefinedPlayers(affectedCard, params.get("MayPlayPlayer"), stAb).get(0) :
+                    controller;
                 affectedCard.setMayPlay(mayPlayController, mayPlayWithoutManaCost,
                         mayPlayAltCost != null ? new Cost(mayPlayAltCost, false) : null,
                         mayPlayWithFlash, mayPlayGrantZonePermissions, stAb);

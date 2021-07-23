@@ -148,7 +148,6 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         return getParamOrDefault("Secondary", "False").equals("True");
     }
 
-
     public final boolean isClassAbility() {
         return hasParam("ClassLevel");
     }

@@ -1,6 +1,6 @@
 Name:Birchlore Rangers
 ManaCost:G
-Types:Creature Elf Druid
+Types:Creature Elf Druid Ranger
 PT:1/1
 A:AB$ Mana | Cost$ tapXType<2/Elf> | Produced$ Any | SpellDescription$ Add one mana of any color.
 K:Morph:G

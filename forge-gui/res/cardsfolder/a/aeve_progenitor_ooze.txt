@@ -3,8 +3,8 @@ ManaCost:2 G G G
 Types:Legendary Creature Ooze
 PT:2/2
 K:Storm
-S:Mode$ Continuous | Affected$ Card.token+Self | RemoveType$ Legendary | Description$ CARDNAME isn't legendary as long as it's a token.
+S:Mode$ Continuous | Affected$ Card.token+Self | RemoveType$ Legendary | Description$ CARDNAME isn't legendary if it's a token.
 K:etbCounter:P1P1:X:no condition:CARDNAME enters the battlefield with a +1/+1 counter on it for each other Ooze you control.
 SVar:X:Count$LastStateBattlefield Ooze.YouCtrl+Other
 DeckHas:Ability$Counters
-Oracle:Storm (When you cast this spell, copy it for each spell cast before it this turn. Copies become tokens.)\nAeve, Progenitor Ooze isn't legendary as long as it's a token.\nAeve enters the battlefield with a +1/+1 counter on it for each other Ooze you control.
+Oracle:Storm (When you cast this spell, copy it for each spell cast before it this turn. Copies become tokens.)\nAeve, Progenitor Ooze isn't legendary if it's a token.\nAeve enters the battlefield with a +1/+1 counter on it for each other Ooze you control.

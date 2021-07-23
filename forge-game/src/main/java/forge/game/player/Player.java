@@ -1695,8 +1695,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         for (int i = 0; i < max; i++) {
             if (bottom) {
                 milled.add(lib.get(lib.size() - i - 1));
-            }
-            else {
+            } else {
                 milled.add(lib.get(i));
             }
         }
@@ -1758,7 +1757,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final boolean playLand(final Card land, final boolean ignoreZoneAndTiming) {
         // Dakkon Blackblade Avatar will use a similar effect
         if (canPlayLand(land, ignoreZoneAndTiming)) {
-            playLandNoCheck(land);
+            playLandNoCheck(land, null);
             return true;
         }
 
@@ -1766,20 +1765,22 @@ public class Player extends GameEntity implements Comparable<Player> {
         return false;
     }
 
-    public final Card playLandNoCheck(final Card land) {
+    public final Card playLandNoCheck(final Card land, SpellAbility cause) {
         land.setController(this, 0);
         if (land.isFaceDown()) {
             land.turnFaceUp(null);
         }
         game.copyLastState();
-        final Card c = game.getAction().moveTo(getZone(ZoneType.Battlefield), land, null);
+        final Card c = game.getAction().moveTo(getZone(ZoneType.Battlefield), land, cause);
         game.updateLastStateForCard(c);
 
         // play a sound
         game.fireEvent(new GameEventLandPlayed(this, land));
 
         // Run triggers
-        game.getTriggerHandler().runTrigger(TriggerType.LandPlayed, AbilityKey.mapFromCard(land), false);
+        Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(land);
+        runParams.put(AbilityKey.SpellAbility, cause);
+        game.getTriggerHandler().runTrigger(TriggerType.LandPlayed, runParams, false);
         game.getStack().unfreezeStack();
         addLandPlayedThisTurn();
 

@@ -1,0 +1,15 @@
+Name:Share the Spoils
+ManaCost:1 R
+Types:Enchantment
+T:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Exile | Destination$ Any | TriggerZones$ Battlefield | Execute$ TrigForget | Static$ True
+SVar:TrigForget:DB$ Pump | ForgetObjects$ TriggeredCard
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ DBCleanup | Static$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield or an opponent loses the game, exile the top card of each player's library.
+T:Mode$ LosesGame | ValidPlayer$ Player.Opponent | TriggerZones$ Battlefield | Execute$ TrigExile | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or an opponent loses the game, exile the top card of each player's library.
+SVar:TrigExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | Defined$ Player | DestinationZone$ Exile | RememberChanged$ True
+S:Mode$ Continuous | Affected$ Card.IsRemembered | MayPlay$ True | MayPlayLimit$ 1 | MayPlayIgnoreColor$ True | MayPlayPlayer$ ActivePlayer | EffectZone$ Battlefield | AffectedZone$ Exile | Description$ During each player's turn, that player may play a land or cast a spell from among cards exiled with CARDNAME, and they may spend mana as though it were mana of any color to cast that spell. When they do, exile the top card of their library.
+T:Mode$ SpellCast | ValidCard$ Card | ValidSA$ Spell.MayPlaySource | TriggerZones$ Battlefield | Execute$ TrigExileTop | Secondary$ True | TriggerDescription$ When they do, exile the top card of their library.
+T:Mode$ LandPlayed | ValidCard$ Land | ValidSA$ SpellAbility.MayPlaySource | TriggerZones$ Battlefield | Execute$ TrigExileTop | Secondary$ True | TriggerDescription$ When they do, exile the top card of their library.
+SVar:TrigExileTop:DB$ Dig | DigNum$ 1 | ChangeNum$ All | Defined$ TriggeredCardController | DestinationZone$ Exile | RememberChanged$ True
+Oracle:When Share the Spoils enters the battlefield or an opponent loses the game, exile the top card of each player's library.\nDuring each player's turn, that player may play a land or cast a spell from among cards exiled with Share the Spoils, and they may spend mana as though it were mana of any color to cast that spell. When they do, exile the top card of their library.

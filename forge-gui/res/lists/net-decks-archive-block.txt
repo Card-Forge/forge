@@ -971,3 +971,6 @@
 2021-05-10 Sealed Stx Block Mocs (8 decks) | https://downloads.cardforge.org/decks/archive/block/2021-05-10-sealed-stx-block-mocs.zip
 2021-05-16 Sealed Stx Block Champ Qual (8 decks) | https://downloads.cardforge.org/decks/archive/block/2021-05-16-sealed-stx-block-champ-qual.zip
 2021-05-17 Sealed Stx Block Champ Qual (7 decks) | https://downloads.cardforge.org/decks/archive/block/2021-05-17-sealed-stx-block-champ-qual.zip
+2021-05-02 Sealed Stx Block Champ Qual (8 decks) | https://downloads.cardforge.org/decks/archive/block/2021-05-02-sealed-stx-block-champ-qual.zip
+2021-05-17 Sealed Stx Block Champ Qual (8 decks) | https://downloads.cardforge.org/decks/archive/block/2021-05-17-sealed-stx-block-champ-qual.zip
+2021-06-27 Sealed Mh2 Block Champs (4 decks) | https://downloads.cardforge.org/decks/archive/block/2021-06-27-sealed-mh2-block-champs.zip

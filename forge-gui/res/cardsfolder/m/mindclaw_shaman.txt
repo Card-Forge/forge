@@ -4,7 +4,7 @@ Types:Creature Viashino Shaman
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReveal | TriggerDescription$ When CARDNAME enters the battlefield, target opponent reveals their hand. You may cast an instant or sorcery spell from among those cards without paying its mana cost.
 SVar:TrigReveal:DB$ RevealHand | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | RememberTargets$ True | SubAbility$ TrigPlay
-SVar:TrigPlay:DB$ Play | Valid$ Instant.RememberedPlayerCtrl,Sorcery.RememberedPlayerCtrl | ValidZone$ Hand | WithoutManaCost$ True | Optional$ True | SubAbility$ DBCleanup
+SVar:TrigPlay:DB$ Play | Valid$ Card.RememberedPlayerCtrl | ValidSA$ Instant,Sorcery | ValidZone$ Hand | WithoutManaCost$ True | Optional$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mindclaw_shaman.jpg
 Oracle:When Mindclaw Shaman enters the battlefield, target opponent reveals their hand. You may cast an instant or sorcery spell from among those cards without paying its mana cost.

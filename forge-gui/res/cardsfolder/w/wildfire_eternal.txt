@@ -4,6 +4,6 @@ Types:Creature Zombie Jackal Cleric
 PT:1/4
 K:Afflict:4
 T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPlay | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, you may cast an instant or sorcery spell from your hand without paying its mana cost.
-SVar:TrigPlay:DB$ Play | ValidZone$ Hand | Valid$ Instant.YouOwn,Sorcery.YouOwn | Controller$ You | WithoutManaCost$ True | Optional$ True | Amount$ 1
+SVar:TrigPlay:DB$ Play | ValidZone$ Hand | Valid$ Card.YouOwn | ValidSA$ Instant,Sorcery | Controller$ You | WithoutManaCost$ True | Optional$ True | Amount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wildfire_eternal.jpg
 Oracle:Afflict 4 (Whenever this creature becomes blocked, defending player loses 4 life.)\nWhenever Wildfire Eternal attacks and isn't blocked, you may cast an instant or sorcery spell from your hand without paying its mana cost.

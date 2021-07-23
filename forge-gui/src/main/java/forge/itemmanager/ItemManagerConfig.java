@@ -106,6 +106,8 @@ public enum ItemManagerConfig {
             null, null, 3, 0),
     NET_ARCHIVE_MODERN_DECKS(SColumnUtil.getDecksDefaultColumns(false, false), false, false, false,
             null, null, 3, 0),
+    NET_ARCHIVE_PAUPER_DECKS(SColumnUtil.getDecksDefaultColumns(false, false), false, false, false,
+            null, null, 3, 0),
     NET_ARCHIVE_LEGACY_DECKS(SColumnUtil.getDecksDefaultColumns(false, false), false, false, false,
             null, null, 3, 0),
     NET_ARCHIVE_VINTAGE_DECKS(SColumnUtil.getDecksDefaultColumns(false, false), false, false, false,
