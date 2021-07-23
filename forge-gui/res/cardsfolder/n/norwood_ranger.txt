@@ -1,6 +1,6 @@
 Name:Norwood Ranger
 ManaCost:G
-Types:Creature Elf Scout
+Types:Creature Elf Scout Ranger
 PT:1/2
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83188.jpg
 Oracle:

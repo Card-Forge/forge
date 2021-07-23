@@ -1832,10 +1832,10 @@ public class CardFactoryUtil {
                 if (sa.hasParam("NextRoom")) {
                     boolean first = true;
                     StringBuilder nextRoomParam = new StringBuilder();
-                    trigStr.append("  (→ ");
+                    trigStr.append("  (Leads to: ");
                     for (String nextRoomSVar : sa.getParam("NextRoom").split(",")) {
                         if (!first) {
-                            trigStr.append(" or ");
+                            trigStr.append(", ");
                             nextRoomParam.append(",");
                         }
                         String nextRoomName = saMap.get(nextRoomSVar).getParam("RoomName");

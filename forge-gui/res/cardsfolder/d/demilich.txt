@@ -10,4 +10,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:AltCost:Cost$ U U U U ExileFromGrave<4/Instant;Sorcery/instant or sorcery cards> | ActivationZone$ Graveyard | Description$ You may cast CARDNAME from your graveyard by exiling four instant and/or sorcery cards from your graveyard in addition to paying its other costs.
 SVar:X:Count$ThisTurnCast_Instant.YouCtrl,Sorcery.YouCtrl
 DeckNeeds:Type$Instant|Sorcery
-Oracle:This spell costs {U} less to cast for each instant and sorcery spell you've cast this turn.\nWhenever Demilich attacks, exile up to one target instant or sorcery card from your graveyard. Copy it. You may cast the copy.\nYou may cast Demilich from your graveyard by exiling four instants and/or sorcery cards from your graveyard in addition to paying its other costs.
+Oracle:This spell costs {U} less to cast for each instant and sorcery spell you've cast this turn.\nWhenever Demilich attacks, exile up to one target instant or sorcery card from your graveyard. Copy it. You may cast the copy.\nYou may cast Demilich from your graveyard by exiling four instant and/or sorcery cards from your graveyard in addition to paying its other costs.

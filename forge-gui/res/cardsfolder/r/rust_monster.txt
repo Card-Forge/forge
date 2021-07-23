@@ -6,4 +6,4 @@ K:First Strike
 A:AB$ Pump | Cost$ Sac<1/Artifact> | Defined$ Self | NumAtt$ 2 | SpellDescription$ CARDNAME gets +2/+0 until end of turn.
 DeckNeeds:Type$Artifact
 DeckHas:Ability$Sacrifice
-Oracle:Sacrifice an artifact: Rust Monster gets +2/+0 until end of turn.
+Oracle:First strike\nSacrifice an artifact: Rust Monster gets +2/+0 until end of turn.

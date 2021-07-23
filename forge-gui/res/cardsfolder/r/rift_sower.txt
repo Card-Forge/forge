@@ -4,4 +4,4 @@ Types:Creature Elf Druid
 PT:1/3
 K:Suspend:2:G
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
-Oracle:{T}: Add one mana of any color.\nSuspend 2—{G} (Rather than cast this card from your hand, pay {G} and exile it with two time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)
+Oracle:{T}: Add one mana of any color.\nSuspend 2—{G} (Rather than cast this card from your hand, you may pay {G} and exile it with two time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost. It has haste.)

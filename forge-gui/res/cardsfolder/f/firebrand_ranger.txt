@@ -1,6 +1,6 @@
 Name:Firebrand Ranger
 ManaCost:1 R
-Types:Creature Human Soldier
+Types:Creature Human Soldier Ranger
 PT:2/1
 A:AB$ ChangeZone | Cost$ G T | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 1 | Optional$ You | AILogic$ AtOppEOT | SpellDescription$ You may put a basic land card from your hand onto the battlefield.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/firebrand_ranger.jpg

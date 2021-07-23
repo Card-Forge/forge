@@ -11,4 +11,4 @@ SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Ma
 SVar:MayPlay:Mode$ Continuous | Affected$ Card.IsRemembered | MayPlay$ True | MayPlayLimit$ 1 | EffectZone$ Command | AffectedZone$ Exile | Description$ Until the end of your next turn, you may play one of these cards. (If you cast EFFECTSOURCE this way, you can't play the other card, and vice versa.)
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:SacMe:3
-Oracle:Flying\nFlameskull can’t block.\nRejuvenation — When Flameskull dies, exile it. If you do, exile the top card of your library. Until the end of your next turn, you may play one of those cards. (If you cast Flameskull this way, you can't play the other card, and vice versa.)
+Oracle:Flying\nFlameskull can't block.\nRejuvenation — When Flameskull dies, exile it. If you do, exile the top card of your library. Until the end of your next turn, you may play one of those cards. (If you cast Flameskull this way, you can't play the other card, and vice versa.)

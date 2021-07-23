@@ -1,6 +1,6 @@
 Name:Yisan, the Wanderer Bard
 ManaCost:2 G
-Types:Legendary Creature Human Rogue
+Types:Legendary Creature Human Rogue Bard
 PT:2/3
 A:AB$ ChangeZone | Cost$ 2 G T AddCounter<1/VERSE> | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature.cmcEQX | ChangeNum$ 1 | StackDescription$ SpellDescription | SpellDescription$ Search your library for a creature card with mana value equal to the number of verse counters on CARDNAME, put it onto the battlefield, then shuffle.
 SVar:X:Count$CardCounters.VERSE

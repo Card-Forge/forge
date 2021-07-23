@@ -1,6 +1,6 @@
 Name:Elvish Bard
 ManaCost:3 G G
-Types:Creature Elf Shaman
+Types:Creature Elf Shaman Bard
 PT:2/4
 K:All creatures able to block CARDNAME do so.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_bard.jpg

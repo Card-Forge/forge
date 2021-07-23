@@ -1,6 +1,6 @@
 Name:Skyshroud Ranger
 ManaCost:G
-Types:Creature Elf
+Types:Creature Elf Ranger
 PT:1/1
 A:AB$ ChangeZone | Cost$ T | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1 | Optional$ You | SorcerySpeed$ True | SpellDescription$ You may put a land card from your hand onto the battlefield. Activate only as a sorcery.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshroud_ranger.jpg
