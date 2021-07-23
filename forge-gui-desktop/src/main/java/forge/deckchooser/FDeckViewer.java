@@ -1,24 +1,5 @@
 package forge.deckchooser;
 
-import java.awt.Dimension;
-import java.awt.GraphicsConfiguration;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.geom.AffineTransform;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.SortedMap;
-import java.util.TreeMap;
-
-import javax.swing.JPanel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -39,6 +20,19 @@ import forge.toolbox.FOptionPane;
 import forge.util.Localizer;
 import forge.view.FDialog;
 import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 @SuppressWarnings("serial")
 public class FDeckViewer extends FDialog {
@@ -135,13 +129,8 @@ public class FDeckViewer extends FDialog {
         }
         else {
             GraphicsDevice gd = this.getGraphicsConfiguration().getDevice();
-            GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
-            AffineTransform t = gc.getDefaultTransform();
-            double scaleX = t.getScaleX();
-            double scaleY = t.getScaleY();
-
-            width = (int)(gd.getDisplayMode().getWidth() * 0.8 / scaleX);
-            height = (int)(gd.getDisplayMode().getHeight() * 0.9 / scaleY);
+            width = (int)(gd.getDisplayMode().getWidth() * 0.7);
+            height = (int)(gd.getDisplayMode().getHeight() * 0.8);
         }
 
         this.setPreferredSize(new Dimension(width, height));
