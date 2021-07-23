@@ -1,6 +1,6 @@
 Name:Oakhame Ranger
 ManaCost:G/W G/W G/W G/W
-Types:Creature Elf Knight
+Types:Creature Elf Knight Ranger
 PT:2/2
 A:AB$ PumpAll | Cost$ T | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Creatures you control get +1/+1 until end of turn.
 Oracle:{T}: Creatures you control get +1/+1 until end of turn.

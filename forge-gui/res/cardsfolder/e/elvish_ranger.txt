@@ -1,6 +1,6 @@
 Name:Elvish Ranger
 ManaCost:2 G
-Types:Creature Elf
+Types:Creature Elf Ranger
 PT:4/1
 SVar:Picture:http://resources.wizards.com/magic/cards/po/en-us/card4296.jpg
 Oracle:

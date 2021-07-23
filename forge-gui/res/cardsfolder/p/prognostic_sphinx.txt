@@ -5,7 +5,7 @@ PT:3/5
 K:Flying
 A:AB$ Pump | Cost$ Discard<1/Card> | Defined$ Self | KW$ Hexproof | SubAbility$ DBTap | SpellDescription$ CARDNAME gains hexproof until end of turn. Tap it.
 SVar:DBTap:DB$ Tap | Defined$ Self
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ Whenever CARDNAME attacks, scry 3. (Look at the top three cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ Whenever CARDNAME attacks, scry 3.
 SVar:TrigScry:DB$ Scry | ScryNum$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prognostic_sphinx.jpg
-Oracle:Flying\nDiscard a card: Prognostic Sphinx gains hexproof until end of turn. Tap it.\nWhenever Prognostic Sphinx attacks, scry 3. (Look at the top three cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
+Oracle:Flying\nDiscard a card: Prognostic Sphinx gains hexproof until end of turn. Tap it.\nWhenever Prognostic Sphinx attacks, scry 3.

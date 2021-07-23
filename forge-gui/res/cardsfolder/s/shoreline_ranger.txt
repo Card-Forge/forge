@@ -1,6 +1,6 @@
 Name:Shoreline Ranger
 ManaCost:5 U
-Types:Creature Bird Soldier
+Types:Creature Bird Soldier Ranger
 PT:3/4
 K:Flying
 K:TypeCycling:Island:2

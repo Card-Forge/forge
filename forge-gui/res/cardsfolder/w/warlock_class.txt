@@ -12,4 +12,4 @@ SVar:RepeatOpps:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbili
 SVar:TrigLoseAgain:DB$ LoseLife | Defined$ Remembered | LifeAmount$ Y
 SVar:Y:PlayerCountRemembered$LifeLostThisTurn
 DeckHas:Ability$Graveyard
-Oracle:(Gain the next level as a sorcery to add its ability.)\nAt the beginning of your end step, if a creature died this turn, each opponent loses 1 life.\n{1}{B}: Level 2\nWhen this Class becomes level 2, look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard.\n{6}{B}: Level 2\nAt the beginning of your end step, each opponent loses life equal to the life they lost this turn. (Damage causes loss of life.)
+Oracle:(Gain the next level as a sorcery to add its ability.)\nAt the beginning of your end step, if a creature died this turn, each opponent loses 1 life.\n{1}{B}: Level 2\nWhen this Class becomes level 2, look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard.\n{6}{B}: Level 3\nAt the beginning of your end step, each opponent loses life equal to the life they lost this turn. (Damage causes loss of life.)
