@@ -4,7 +4,7 @@ Types:World Enchantment
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ At the beginning of each player's upkeep, that player exiles a card at random from their hand. The player may play that card this turn. At the beginning of the next end step, if the player hasn't played the card, they put it into their graveyard.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ChangeType$ Card | DefinedPlayer$ TriggeredPlayer | ChangeNum$ 1 | Hidden$ True | Mandatory$ True | AtRandom$ True | RememberChanged$ True | SubAbility$ ElkinEffect
 SVar:ElkinEffect:DB$ Effect | StaticAbilities$ ElkinPlay | Duration$ Permanent | ExileOnMoved$ True | RememberObjects$ RememberedCard | Triggers$ TrigReturn,TrigDuration | SubAbility$ DBResetSVar
-SVar:ElkinPlay:Mode$ Continuous | Affected$ Card.IsRemembered | MayPlay$ True | MayPlayCardOwner$ True | EffectZone$ Command | AffectedZone$ Exile | CheckSVar$ ElkinSVar | Description$ The player may play that card this turn.
+SVar:ElkinPlay:Mode$ Continuous | Affected$ Card.IsRemembered | MayPlay$ True | MayPlayPlayer$ CardOwner | EffectZone$ Command | AffectedZone$ Exile | CheckSVar$ ElkinSVar | Description$ The player may play that card this turn.
 # Even though the Effect is "Permanent", it's not really permanent
 SVar:DBResetSVar:DB$ StoreSVar | SVar$ ElkinSVar | Type$ Number | Expression$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
