@@ -340,4 +340,3 @@ public enum CDeckEditorUI implements ICDoc {
     @Override
     public void update() { }
 }
-

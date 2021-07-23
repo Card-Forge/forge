@@ -1668,6 +1668,10 @@ public class CardProperty {
             if (source.hasImprintedCard(card)) {
                 return false;
             }
+        } else if (property.equals("IsGoaded")) {
+            if (!card.isGoaded()) {
+                return false;
+            }
         } else if (property.equals("NoAbilities")) {
             if (!card.hasNoAbilities()) {
                 return false;

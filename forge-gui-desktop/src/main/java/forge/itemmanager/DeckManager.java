@@ -194,7 +194,6 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
     }
 
     @Override
-
     protected void buildAddFilterMenu(final JMenu menu) {
         GuiUtils.addSeparator(menu); //separate from current search item
 
@@ -227,7 +226,6 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
             }, FormatFilter.canAddFormat(f, getFilter(DeckFormatFilter.class)));
         }
         menu.add(fmt);
-
 
         GuiUtils.addMenuItem(menu, localizer.getMessage("lblFormats") + "...", null, new Runnable() {
             @Override public void run() {

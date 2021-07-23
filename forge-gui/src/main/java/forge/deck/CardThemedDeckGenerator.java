@@ -14,9 +14,9 @@ import forge.model.FModel;
 public class CardThemedDeckGenerator extends DeckProxy implements Comparable<CardThemedDeckGenerator> {
     public static List<DeckProxy> getMatrixDecks(GameFormat format, boolean isForAi){
         final List<DeckProxy> decks = new ArrayList<>();
-            for(String card: CardArchetypeLDAGenerator.ldaPools.get(format.getName()).keySet()) {
+            for (String card: CardArchetypeLDAGenerator.ldaPools.get(format.getName()).keySet()) {
                 //exclude non AI playables as keycards for AI decks
-                if(isForAi&&FModel.getMagicDb().getCommonCards().getUniqueByName(card).getRules().getAiHints().getRemAIDecks()){
+                if (isForAi&&FModel.getMagicDb().getCommonCards().getUniqueByName(card).getRules().getAiHints().getRemAIDecks()) {
                     continue;
                 }
                 decks.add(new CardThemedDeckGenerator(card, format, isForAi));
@@ -41,7 +41,6 @@ public class CardThemedDeckGenerator extends DeckProxy implements Comparable<Car
     public CardEdition getEdition() {
         return CardEdition.UNKNOWN;
     }
-
 
     @Override
     public String getName() {

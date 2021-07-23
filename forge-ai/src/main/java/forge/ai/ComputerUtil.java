@@ -947,7 +947,7 @@ public class ComputerUtil {
                         canRegen = true;
                     }
 
-                }  catch (final Exception ex) {
+                } catch (final Exception ex) {
                     throw new RuntimeException(TextUtil.concatNoSpace("There is an error in the card code for ", c.getName(), ":", ex.getMessage()), ex);
                 }
             }
@@ -2832,7 +2832,6 @@ public class ComputerUtil {
     }
 
     public static boolean lifegainPositive(final Player player, final Card source) {
-
         if (!player.canGainLife()) {
             return false;
         }

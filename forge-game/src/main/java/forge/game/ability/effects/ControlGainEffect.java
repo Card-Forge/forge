@@ -91,7 +91,12 @@ public class ControlGainEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("ControlledByTarget")) {
         	tgtCards = CardLists.filterControlledBy(tgtCards, getTargetPlayers(sa));
-        } 
+        }
+
+        // in case source was LKI or still resolving
+        if (source.isLKI() || source.getZone().is(ZoneType.Stack)) {
+            source = game.getCardState(source);
+        }
 
         // check for lose control criteria right away
         if (lose != null && lose.contains("LeavesPlay") && !source.isInZone(ZoneType.Battlefield)) {

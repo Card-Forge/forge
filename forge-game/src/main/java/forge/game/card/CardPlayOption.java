@@ -80,7 +80,7 @@ public final class CardPlayOption {
         return toString(true);
     }
 
-    public String toString( final boolean withPlayer) {
+    public String toString(final boolean withPlayer) {
         StringBuilder sb = new StringBuilder(withPlayer ? this.player.toString() : StringUtils.EMPTY);
 
         switch (getPayManaCost()) {

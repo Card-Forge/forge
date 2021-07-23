@@ -1,10 +1,7 @@
 #Add one announcement per line
-Get in the discord if you aren't yet.
-Card support has been extended up to "Modern Horizons 2", including the available previews from the upcoming "Dungeons and Dragons: Adventures in the Forgotten Realms".
-Collector Number has been added to all cards in the Catalog.
-[Desktop] Card Catalog now adds the Cards' Collector Number as a sortable column.
-[Desktop] Improved support for Custom Editions: now custom editions appear with their own names within other official editions, and can be selected in Set filters.
-Net decks have been expanded and there are now tons of new decks in constructed, commander, brawl, oathbreaker and tiny leaders.
-Complete support to game mechanics for all cards in Modern format.
-Various other improvements to game mechanics and AI: please check the Git log for details if interested.
-Improvements to Italian translation.
+Get in the discord if you aren't yet. https://discord.gg/3v9JCVr
+Pre-release build for "Dungeons and Dragons: Adventures in the Forgotten Realms", please report any bugs!
+Commander cards for the D&D set are still being worked on.
+Custom cards can now be loaded from your user profile. Enable it your preferences.
+Add support for Collector Boosters (not implemented everywhere yet)
+*** Android 7 & 8 support is now deprecated. Support will be dropped in an upcoming release. ***

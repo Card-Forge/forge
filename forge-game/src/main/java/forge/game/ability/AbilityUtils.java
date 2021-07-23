@@ -42,6 +42,7 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.card.CardState;
 import forge.game.card.CardUtil;
 import forge.game.card.CounterType;
 import forge.game.card.CardPredicates.Presets;
@@ -56,6 +57,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.AbilitySub;
+import forge.game.spellability.LandAbility;
 import forge.game.spellability.OptionalCost;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
@@ -313,6 +315,10 @@ public class AbilityUtils {
         } else if (defined.equals("Imprinted")) {
             for (final Card imprint : hostCard.getImprintedCards()) {
                 cards.add(game.getCardState(imprint));
+            }
+        } else if (defined.equals("UntilLeavesBattlefield")) {
+            for (final Card ulb : hostCard.getUntilLeavesBattlefield()) {
+                cards.add(game.getCardState(ulb));
             }
         } else if (defined.startsWith("ThisTurnEntered")) {
             final String[] workingCopy = defined.split("_");
@@ -2852,24 +2858,45 @@ public class AbilityUtils {
     public static final List<SpellAbility> getBasicSpellsFromPlayEffect(final Card tgtCard, final Player controller) {
         List<SpellAbility> sas = new ArrayList<>();
         List<SpellAbility> list = Lists.newArrayList(tgtCard.getBasicSpells());
-        if (tgtCard.isModal()) {
-            list.addAll(Lists.newArrayList(tgtCard.getBasicSpells(tgtCard.getState(CardStateName.Modal))));
+
+        CardState original = tgtCard.getState(CardStateName.Original);
+        if (tgtCard.isLand()) {
+            LandAbility la = new LandAbility(tgtCard, controller, null);
+            la.setCardState(original);
+            list.add(la);
         }
+        if (tgtCard.isModal()) {
+            CardState modal = tgtCard.getState(CardStateName.Modal);
+            list.addAll(Lists.newArrayList(tgtCard.getBasicSpells(modal)));
+            if (modal.getType().isLand()) {
+                LandAbility la = new LandAbility(tgtCard, controller, null);
+                la.setCardState(modal);
+                list.add(la);
+            }
+        }
+
         for (SpellAbility s : list) {
-            final Spell newSA = (Spell) s.copy();
-            newSA.setActivatingPlayer(controller);
-            SpellAbilityRestriction res = new SpellAbilityRestriction();
-            // timing restrictions still apply
-            res.setPlayerTurn(s.getRestrictions().getPlayerTurn());
-            res.setOpponentTurn(s.getRestrictions().getOpponentTurn());
-            res.setPhases(s.getRestrictions().getPhases());
-            res.setZone(null);
-            newSA.setRestrictions(res);
-            // timing restrictions still apply
-            if (res.checkTimingRestrictions(tgtCard, newSA)
-                    // still need to check the other restrictions like Aftermath
-                    && res.checkOtherRestrictions(tgtCard, newSA, controller)) {
-                sas.add(newSA);
+            if (s instanceof LandAbility) {
+                // CR 305.3
+                if (controller.getGame().getPhaseHandler().isPlayerTurn(controller) && controller.canPlayLand(tgtCard, true, s)) {
+                    sas.add(s);
+                }
+            } else {
+                final Spell newSA = (Spell) s.copy();
+                newSA.setActivatingPlayer(controller);
+                SpellAbilityRestriction res = new SpellAbilityRestriction();
+                // timing restrictions still apply
+                res.setPlayerTurn(s.getRestrictions().getPlayerTurn());
+                res.setOpponentTurn(s.getRestrictions().getOpponentTurn());
+                res.setPhases(s.getRestrictions().getPhases());
+                res.setZone(null);
+                newSA.setRestrictions(res);
+                // timing restrictions still apply
+                if (res.checkTimingRestrictions(tgtCard, newSA)
+                        // still need to check the other restrictions like Aftermath
+                        && res.checkOtherRestrictions(tgtCard, newSA, controller)) {
+                    sas.add(newSA);
+                }
             }
         }
         return sas;

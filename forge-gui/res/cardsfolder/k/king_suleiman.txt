@@ -3,6 +3,5 @@ ManaCost:1 W
 Types:Creature Human Noble
 PT:1/1
 A:AB$ Destroy | Cost$ T | ValidTgts$ Djinn,Efreet | TgtPrompt$ Select target Djinn or Efreet | SpellDescription$ Destroy target Djinn or Efreet.
-AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/king_suleiman.jpg
 Oracle:{T}: Destroy target Djinn or Efreet.

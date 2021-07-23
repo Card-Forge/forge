@@ -119,6 +119,12 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                     Aggregates.random(choices, validAmount, chosen);
                 } else {
                     String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseaCard") + " ";
+                    if (sa.hasParam ("ChoiceTitleAppendDefined")) {
+                        String defined = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("ChoiceTitleAppendDefined"), sa).toString();
+                        final StringBuilder sb = new StringBuilder();
+                        sb.append(title).append(" ").append(defined);
+                        title = sb.toString();
+                    }
                     chosen.addAll(p.getController().chooseCardsForEffect(choices, sa, title, minAmount, validAmount, !sa.hasParam("Mandatory"), null));
                 }
             }

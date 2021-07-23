@@ -107,8 +107,8 @@ public class VAssignCombatDamage {
 
     private boolean canAssignTo(final CardView card) {
         for (DamageTarget dt : defenders) {
-            if (dt.card == card ) return true;
-            if (getDamageToKill(dt.card) > dt.damage )
+            if (dt.card == card) return true;
+            if (getDamageToKill(dt.card) > dt.damage)
                 return false;
         }
         throw new RuntimeException("Asking to assign damage to object which is not present in defenders list");
@@ -145,7 +145,7 @@ public class VAssignCombatDamage {
             boolean isLMB = SwingUtilities.isLeftMouseButton(evt);
             boolean isRMB = SwingUtilities.isRightMouseButton(evt);
 
-            if ( isLMB || isRMB)
+            if (isLMB || isRMB)
                 assignDamageTo(source, meta, isLMB);
         }
     };
@@ -305,7 +305,7 @@ public class VAssignCombatDamage {
         int leftToAssign = getRemainingDamage();
         // Left click adds damage, right click substracts damage.
         // Hold Ctrl to assign lethal damage, Ctrl-click again on a creature with lethal damage to assign all available damage to it
-        if ( meta )  {
+        if (meta)  {
             if (isAdding) {
                 damageToAdd = leftToKill > 0 ? leftToKill : leftToAssign;
             } else {
@@ -313,7 +313,7 @@ public class VAssignCombatDamage {
             }
         }
 
-        if ( damageToAdd > leftToAssign )
+        if (damageToAdd > leftToAssign)
             damageToAdd = leftToAssign;
 
         // cannot assign first blocker less than lethal damage except when overriding order
@@ -321,7 +321,7 @@ public class VAssignCombatDamage {
         if (!overrideCombatantOrder && isFirstBlocker && damageToAdd + damageItHad < lethalDamage )
             return;
 
-        if ( 0 == damageToAdd || damageToAdd + damageItHad < 0)
+        if (0 == damageToAdd || damageToAdd + damageItHad < 0)
             return;
 
         addDamage(source, damageToAdd);
@@ -335,12 +335,12 @@ public class VAssignCombatDamage {
         }
         // Clear out any Damage that shouldn't be assigned to other combatants
         boolean hasAliveEnemy = false;
-        for(DamageTarget dt : defenders) {
+        for (DamageTarget dt : defenders) {
             int lethal = getDamageToKill(dt.card);
             int damage = dt.damage;
             // If overriding combatant order, make sure everything has lethal if defender has damage assigned to it
             // Otherwise, follow normal combatant order
-            if ( hasAliveEnemy && (!overrideCombatantOrder || dt.card == null || dt.card == defender))
+            if (hasAliveEnemy && (!overrideCombatantOrder || dt.card == null || dt.card == defender))
                 dt.damage = 0;
             else
                 hasAliveEnemy |= damage < lethal;
@@ -357,15 +357,15 @@ public class VAssignCombatDamage {
 
         int dmgLeft = totalDamageToAssign;
         DamageTarget dtLast = null;
-        for(DamageTarget dt : defenders) { // MUST NOT RUN WITH EMPTY collection
+        for (DamageTarget dt : defenders) { // MUST NOT RUN WITH EMPTY collection
             int lethal = getDamageToKill(dt.card);
             int damage = Math.min(lethal, dmgLeft);
             addDamage(dt.card, damage);
             dmgLeft -= damage;
             dtLast = dt;
-            if ( dmgLeft <= 0 || !toAllBlockers ) break;
+            if (dmgLeft <= 0 || !toAllBlockers) break;
         }
-        if ( dmgLeft < 0 )
+        if (dmgLeft < 0)
             throw new RuntimeException("initialAssignDamage managed to assign more damage than it could");
         if (toAllBlockers && dmgLeft > 0) {
             // flush the remaining damage into last defender if assigning all damage
@@ -376,7 +376,7 @@ public class VAssignCombatDamage {
 
     /** Reset Assign Damage back to how it was at the beginning. */
     private void resetAssignedDamage() {
-        for(DamageTarget dt : defenders)
+        for (DamageTarget dt : defenders)
             dt.damage = 0;
     }
 
@@ -398,7 +398,7 @@ public class VAssignCombatDamage {
      */
     private int getRemainingDamage() {
         int spent = 0;
-        for(DamageTarget dt : defenders) {
+        for (DamageTarget dt : defenders) {
             spent += dt.damage;
         }
         return totalDamageToAssign - spent;
@@ -407,11 +407,10 @@ public class VAssignCombatDamage {
     /** Updates labels and other UI elements.
      * @param index index of the last assigned damage*/
     private void updateLabels() {
-
         int damageLeft = totalDamageToAssign;
         boolean allHaveLethal = true;
 
-        for ( DamageTarget dt : defenders )
+        for (DamageTarget dt : defenders)
         {
             int dmg = dt.damage;
             damageLeft -= dmg;
@@ -438,7 +437,7 @@ public class VAssignCombatDamage {
     // assigned dynamically, the cards die off and further damage to them can't
     // be modified.
     private void finish() {
-        if ( getRemainingDamage() > 0 )
+        if (getRemainingDamage() > 0)
             return;
 
         dlg.dispose();
@@ -456,8 +455,7 @@ public class VAssignCombatDamage {
                 final CardView pw = (CardView)defender;
                 lethalDamage = Integer.valueOf(pw.getCurrentState().getLoyalty());
             }
-        }
-        else {
+        } else {
             lethalDamage = Math.max(0, card.getLethalDamage());
             if (card.getCurrentState().getType().isPlaneswalker()) {
                 lethalDamage = Integer.valueOf(card.getCurrentState().getLoyalty());

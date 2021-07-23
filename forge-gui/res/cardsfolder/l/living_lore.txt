@@ -7,7 +7,7 @@ SVar:ChooseSpell:DB$ ChangeZone | ChangeType$ Instant.YouOwn,Sorcery.YouOwn | Ch
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the exiled card's mana value.
 SVar:X:Count$RememberedCardManaCost
 T:Mode$ DamageDealtOnce | CombatDamage$ True | ValidSource$ Card.Self | Execute$ TrigSacLore | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage, you may sacrifice it. If you do, you may cast the exiled card without paying its mana cost.
-SVar:TrigSacLore:AB$ Play | Cost$ Sac<1/CARDNAME> | Defined$ Remembered | Amount$ All | Controller$ You | WithoutManaCost$ True | Optional$ True | ForgetRemembered$ True
+SVar:TrigSacLore:AB$ Play | Cost$ Sac<1/CARDNAME> | Defined$ Remembered | Amount$ All | Controller$ You | WithoutManaCost$ True | ValidSA$ Spell | Optional$ True | ForgetRemembered$ True
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:Random
