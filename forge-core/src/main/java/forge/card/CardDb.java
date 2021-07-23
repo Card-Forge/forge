@@ -58,8 +58,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         ORIGINAL_ART_ALL_EDITIONS(false, false),
         ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY(true, false);
 
-        final boolean filterSets;
-        final boolean latestFirst;
+        public final boolean filterSets;
+        public final boolean latestFirst;
 
         CardArtPreference(boolean filterIrregularSets, boolean latestSetFirst) {
             filterSets = filterIrregularSets;
@@ -69,30 +69,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         public boolean accept(CardEdition ed) {
             if (ed == null) return false;
             return !filterSets || ed.getType() == Type.CORE || ed.getType() == Type.EXPANSION || ed.getType() == Type.REPRINT;
-        }
-
-        public static String[] getPreferences(){
-            return new String[]{"Latest Card Art (All Editions)",
-                    "Latest Card Art (Core, Expansions and Reprint Only)",
-                    "Original Card Art (All Editions)",
-                    "Original Card Art (Core, Expansions and Reprint Only)"};
-        }
-
-        public static CardArtPreference fromForgePreference(final String preference){
-            String prefLabel = preference.trim().toLowerCase();
-            if (prefLabel.contains("latest")){
-                if (prefLabel.contains("core"))
-                    return LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY;
-                return LATEST_ART_ALL_EDITIONS;
-            }
-
-            if (prefLabel.contains("old") || prefLabel.contains("original") || prefLabel.contains("earliest")){
-                if (prefLabel.contains("core"))
-                    return ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY;
-                return ORIGINAL_ART_ALL_EDITIONS;
-            }
-
-            return LATEST_ART_ALL_EDITIONS; // DEFAULT fall back
         }
     }
 
@@ -398,9 +374,24 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     public CardArtPreference getCardArtPreference(){ return this.defaultCardArtPreference; }
-    public void setCardArtPreference(String artPreference){
-        this.defaultCardArtPreference = CardArtPreference.fromForgePreference(artPreference);
+    public void setCardArtPreference(boolean latestArt, boolean coreExpansionOnly){
+        if (coreExpansionOnly){
+            this.defaultCardArtPreference = latestArt ? CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY : CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY;
+        } else {
+            this.defaultCardArtPreference = latestArt ? CardArtPreference.LATEST_ART_ALL_EDITIONS : CardArtPreference.ORIGINAL_ART_ALL_EDITIONS;
+        }
     }
+
+    public void setCardArtPreference(String artPreference){
+        artPreference = artPreference.toLowerCase().trim();
+        boolean isLatest = artPreference.contains("latest");
+        // additional check in case of unrecognised values wrt. to legacy opts
+        if (!artPreference.contains("original") && !artPreference.contains("earliest"))
+            isLatest = true;  // this must be default
+        boolean hasFilter = artPreference.contains("core");
+        this.setCardArtPreference(isLatest, hasFilter);
+    }
+
 
     /*
      * ======================

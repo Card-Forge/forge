@@ -67,13 +67,6 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
     private final String counterspellPrintedBeforeEternalMasters = "2016-06-09";  // One day before Eternal Masters release
     private final String[] counterspellLatestBeforeEternalMasters = {"TPR", "7ED"};
 
-
-    // CardArt Preferences Fixture
-    public static final String ORIGINAL_CARDART_PREFERENCE = "Original Art (All Editions)";
-    public static final String LATEST_CARDART_PREFERENCE = "Latest Art (All Editions)";
-    public static final String ORIGINAL_CORE_EXP_ONLY_CARDART_PREFERENCE = "Original Art (Core, Expansions, and Reprint only)";
-    public static final String LATEST_CORE_EXP_ONLY_CARDART_PREFERENCE = "Latest Art (Core, Expansions, and Reprint only)";
-
     @BeforeMethod
     public void setup(){
         StaticData data = FModel.getMagicDb();
@@ -994,7 +987,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
 
         // Now with setting preferences - so going with default cardArt preference.
 
-        this.cardDb.setCardArtPreference(LATEST_CARDART_PREFERENCE);
+        this.cardDb.setCardArtPreference(true, false);
         counterSpellCard = this.cardDb.getCardFromEditions(cardNameCounterspell, beforeMaster25Date);
         assertEquals(counterSpellCard.getName(), cardNameCounterspell);
         assertEquals(counterSpellCard.getEdition(), counterspellLatestBeforeMasters25[0]);
@@ -1003,7 +996,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         assertEquals(counterSpellCard.getName(), cardNameCounterspell);
         assertEquals(counterSpellCard.getEdition(), counterspellLatestBeforeEternalMasters[0]);
 
-        this.cardDb.setCardArtPreference(LATEST_CORE_EXP_ONLY_CARDART_PREFERENCE);
+        this.cardDb.setCardArtPreference(true, true);
         counterSpellCard = this.cardDb.getCardFromEditions(cardNameCounterspell, beforeMaster25Date);
         assertEquals(counterSpellCard.getName(), cardNameCounterspell);
         assertEquals(counterSpellCard.getEdition(), counterspellLatestBeforeMasters25[1]);
@@ -1013,7 +1006,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         assertEquals(counterSpellCard.getEdition(), counterspellLatestBeforeEternalMasters[1]);
 
         // restore default
-        this.cardDb.setCardArtPreference(LATEST_CARDART_PREFERENCE);
+        this.cardDb.setCardArtPreference(true, false);
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
     }
 
@@ -1057,14 +1050,14 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         assertEquals(httCard.getEdition(), newFrameHymnToTourachEdition);
 
         // Changing default value for default card art preference
-        this.cardDb.setCardArtPreference(ORIGINAL_CARDART_PREFERENCE);
+        this.cardDb.setCardArtPreference(false, false);
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS);
         httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, null, null);
         assertNotNull(httCard);
         assertEquals(httCard.getName(), cardNameHymnToTourach);
         assertEquals(httCard.getEdition(), oldFrameHymnToTourachEdition);
         // restore default
-        this.cardDb.setCardArtPreference(LATEST_CARDART_PREFERENCE);
+        this.cardDb.setCardArtPreference(true, false);
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
     }
 
@@ -1076,12 +1069,12 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         assertEquals(shivanDragonCard.getEdition(), newFrameShivanDragonEdition);
 
         // Try changing the policy
-        this.cardDb.setCardArtPreference(ORIGINAL_CARDART_PREFERENCE);
+        this.cardDb.setCardArtPreference(false, false);
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS);
         shivanDragonCard = this.cardDb.getCardFromEditions(cardNameShivanDragon);
         assertEquals(shivanDragonCard.getEdition(), oldFrameShivanDragonEdition);
         // restore default
-        this.cardDb.setCardArtPreference(LATEST_CARDART_PREFERENCE);
+        this.cardDb.setCardArtPreference(true, false);
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
     }
 
@@ -1103,12 +1096,12 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
         assertEquals(httCard.getEdition(), newFrameHymnToTourachEdition);
         // Try changing the policy
-        this.cardDb.setCardArtPreference(ORIGINAL_CORE_EXP_ONLY_CARDART_PREFERENCE);
+        this.cardDb.setCardArtPreference(false, true);
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY);
         httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach);
         assertEquals(httCard.getEdition(), oldFrameHymnToTourachEditionNoPromo);
         // restore default
-        this.cardDb.setCardArtPreference(LATEST_CARDART_PREFERENCE);
+        this.cardDb.setCardArtPreference(true, false);
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
     }
 
@@ -1209,17 +1202,36 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
     @Test
     public void testSetCardArtPreference() {
         // First Off try and see if using constants returned by CardArtPreference.getPreferences will work
-        String[] preferenceNames = CardDb.CardArtPreference.getPreferences();
         CardDb.CardArtPreference[] prefs = {CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS,
                                             CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY,
                                             CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS,
                                             CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY};
         for (int i = 0; i < 4; i++){
-            this.cardDb.setCardArtPreference(preferenceNames[i]);
+            boolean latest = prefs[i].latestFirst;
+            boolean coreExpFilter = prefs[i].filterSets;
+            this.cardDb.setCardArtPreference(latest, coreExpFilter);
             assertEquals(this.cardDb.getCardArtPreference(), prefs[i]);
         }
 
-        // Test different wording
+        // Test different wording and Legacy Options (esp. for legacy w/ Mobile)
+
+        // LEGACY OPTIONS
+        this.cardDb.setCardArtPreference("LatestCoreExp");
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY);
+
+        this.cardDb.setCardArtPreference("Earliest");
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS);
+
+        this.cardDb.setCardArtPreference("EarliestCoreExp");
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY);
+
+        this.cardDb.setCardArtPreference("Latest");
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
+
+        this.cardDb.setCardArtPreference("Random");
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
+
+        // DIFFERENT WORDINGS
         this.cardDb.setCardArtPreference("Earliest Editions");
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS);
 
@@ -1227,7 +1239,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY);
 
         this.cardDb.setCardArtPreference("Old Card Frame");
-        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS);
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
 
         this.cardDb.setCardArtPreference("Latest Editions");
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
@@ -1238,6 +1250,18 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         this.cardDb.setCardArtPreference("Latest (All Editions)");
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
 
+        this.cardDb.setCardArtPreference("LATEST_ART_ALL_EDITIONS");
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
+
+        this.cardDb.setCardArtPreference("ORIGINAL_ART_ALL_EDITIONS");
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS);
+
+        this.cardDb.setCardArtPreference("LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY");
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY);
+
+        this.cardDb.setCardArtPreference("ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY");
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY);
+
         // Test non existing option
         this.cardDb.setCardArtPreference("Non existing option");
         // default goes to Latest Art All Editions
@@ -1246,7 +1270,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
 
     @Test
     public void testSnowCoveredBasicLandsWithCartArtPreference(){
-        this.cardDb.setCardArtPreference(LATEST_CARDART_PREFERENCE);
+        this.cardDb.setCardArtPreference(true, false);
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
 
         String snowCoveredLand = "Snow-Covered Island";
@@ -1255,13 +1279,17 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         assertEquals(landCard.getName(), snowCoveredLand);
         assertEquals(landCard.getEdition(), "KHM");
 
-        this.cardDb.setCardArtPreference(LATEST_CORE_EXP_ONLY_CARDART_PREFERENCE);
+        this.cardDb.setCardArtPreference(true, true);
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY);
 
         landCard = this.cardDb.getCard(snowCoveredLand);
         assertNotNull(landCard);
         assertEquals(landCard.getName(), snowCoveredLand);
         assertEquals(landCard.getEdition(), "KHM");
+
+        // reset default
+        this.cardDb.setCardArtPreference(true, false);
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
     }
 
     @Test(enabled = false)
