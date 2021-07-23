@@ -11,6 +11,7 @@ import forge.item.FatPack;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.token.TokenDb;
+import forge.util.TextUtil;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
 
@@ -59,11 +60,11 @@ public class StaticData {
 
     private static StaticData lastInstance = null;
 
-    public StaticData(CardStorageReader cardReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String preferredCardArt, boolean enableUnknownCards, boolean loadNonLegalCards) {
-        this(cardReader, null, customCardReader, editionFolder, customEditionsFolder, blockDataFolder, preferredCardArt, enableUnknownCards, loadNonLegalCards, false);
+    public StaticData(CardStorageReader cardReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String cardArtPreference, boolean enableUnknownCards, boolean loadNonLegalCards) {
+        this(cardReader, null, customCardReader, editionFolder, customEditionsFolder, blockDataFolder, cardArtPreference, enableUnknownCards, loadNonLegalCards, false);
     }
 
-    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String preferredCardArt, boolean enableUnknownCards, boolean loadNonLegalCards, boolean enableCustomCardsInDecks) {
+    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String cardArtPreference, boolean enableUnknownCards, boolean loadNonLegalCards, boolean enableCustomCardsInDecks) {
         this.cardReader = cardReader;
         this.tokenReader = tokenReader;
         this.editions = new CardEdition.Collection(new CardEdition.Reader(new File(editionFolder)));
@@ -115,9 +116,9 @@ public class StaticData {
                 Collections.sort(filtered);
             }
 
-            commonCards = new CardDb(regularCards, editions, filtered, preferredCardArt);
-            variantCards = new CardDb(variantsCards, editions, filtered, preferredCardArt);
-            customCards = new CardDb(customizedCards, customEditions, filtered, preferredCardArt);
+            commonCards = new CardDb(regularCards, editions, filtered, cardArtPreference);
+            variantCards = new CardDb(variantsCards, editions, filtered, cardArtPreference);
+            customCards = new CardDb(customizedCards, customEditions, filtered, cardArtPreference);
 
             //must initialize after establish field values for the sake of card image logic
             commonCards.initialize(false, false, enableUnknownCards);
@@ -299,10 +300,6 @@ public class StaticData {
 
     public TokenDb getAllTokens() { return allTokens; }
 
-    public String[] getCardArtAvailablePreferences() {
-        return CardDb.CardArtPreference.getPreferences();
-    }
-
     public boolean isEnableCustomCardsInDecks() {
         return this.enableCustomCardsInDecks;
     }
@@ -352,6 +349,44 @@ public class StaticData {
 
     public MulliganDefs.MulliganRule getMulliganRule() {
         return mulliganRule;
+    }
+
+    public void setCardArtPreference(boolean latestArt, boolean coreExpansionOnly){
+        this.commonCards.setCardArtPreference(latestArt, coreExpansionOnly);
+        this.variantCards.setCardArtPreference(latestArt, coreExpansionOnly);
+        this.customCards.setCardArtPreference(latestArt, coreExpansionOnly);
+    }
+
+    public String getCardArtPreference(){
+        return this.commonCards.getCardArtPreference().toString();
+    }
+
+    public boolean cardArtPreferenceHasFilter(){
+        return this.commonCards.getCardArtPreference().filterSets;
+    }
+
+    public boolean cardArtPreferenceIsLatest(){
+        return this.commonCards.getCardArtPreference().latestFirst;
+    }
+
+    // === MOBILE APP Alternative Methods (using String Labels, not yet localised!!) ===
+    // Note: only used in mobile
+    public String[] getCardArtAvailablePreferences(){
+        CardDb.CardArtPreference[] preferences = CardDb.CardArtPreference.values();
+        String[] preferences_avails = new String[preferences.length];
+        for (int i = 0; i < preferences.length; i++) {
+            StringBuilder label = new StringBuilder();
+            String[] fullNames = preferences[i].toString().split("_");
+            for (String name : fullNames)
+                label.append(TextUtil.capitalize(name.toLowerCase())).append(" ");
+            preferences_avails[i] = label.toString().trim();
+        }
+        return preferences_avails;
+    }
+    public void setCardArtPreference(String artPreference){
+        this.commonCards.setCardArtPreference(artPreference);
+        this.variantCards.setCardArtPreference(artPreference);
+        this.customCards.setCardArtPreference(artPreference);
     }
 
 }
