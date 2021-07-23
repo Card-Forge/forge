@@ -28,11 +28,16 @@ public class CardDatabaseHelper {
     private static void initialize() {
         final CardStorageReader reader = new CardStorageReader(ForgeConstants.CARD_DATA_DIR,
                 null, false);
-        final CardStorageReader customReader = new CardStorageReader(ForgeConstants.USER_CUSTOM_CARDS_DIR,
-                null, false);
+        CardStorageReader customReader;
+        try {
+            customReader  = new CardStorageReader(ForgeConstants.USER_CUSTOM_CARDS_DIR,
+                    null, false);
+        } catch (Exception e) {
+            customReader = null;
+        }
         staticData = new StaticData(reader, customReader, ForgeConstants.EDITIONS_DIR,
                 ForgeConstants.USER_CUSTOM_EDITIONS_DIR ,ForgeConstants.BLOCK_DATA_DIR,
-                "Latest",
+                "Latest Art All Editions",
                 true,
                 false);
     }
