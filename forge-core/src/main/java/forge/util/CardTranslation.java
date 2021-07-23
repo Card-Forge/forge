@@ -34,7 +34,12 @@ public class CardTranslation {
                     translatedtypes.put(matches[0], matches[2]);
                 }
                 if (matches.length >= 4) {
-                    translatedoracles.put(matches[0], matches[3].replace("\\n", "\r\n\r\n"));
+                    String toracle = matches[3];
+                    // Workaround to remove additional //Level_2// and //Level_3// lines from non-English Class cards
+                    toracle = toracle.replace("//Level_2//\\n", "").replace("//Level_3//\\n", "");
+                    // Workaround for roll dice cards
+                    toracle = toracle.replace("\\n", "\r\n\r\n").replace("VERT", "|");
+                    translatedoracles.put(matches[0], toracle);
                 }
             }
         } catch (IOException e) {
@@ -91,7 +96,7 @@ public class CardTranslation {
 
     public static void preloadTranslation(String language, String languagesDirectory) {
         languageSelected = language;
-        
+
         if (needsTranslation()) {
             translatednames = new HashMap<>();
             translatedtypes = new HashMap<>();
@@ -137,9 +142,10 @@ public class CardTranslation {
 
     public static String translateMultipleDescriptionText(String descText, String cardName) {
         if (!needsTranslation()) return descText;
-        String [] splitDescText = descText.split("\r\n");
+        String [] splitDescText = descText.split("\n");
         String result = descText;
         for (String text : splitDescText) {
+            text = text.trim();
             if (text.isEmpty()) continue;
             String translated = translateSingleDescriptionText(text, cardName);
             if (!text.equals(translated)) {
