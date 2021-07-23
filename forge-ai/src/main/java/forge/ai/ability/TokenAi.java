@@ -358,7 +358,8 @@ public class TokenAi extends SpellAbilityAi {
         if (!sa.hasParam("TokenScript")) {
             throw new RuntimeException("Spell Ability has no TokenScript: " + sa);
         }
-        Card result = TokenInfo.getProtoType(sa.getParam("TokenScript"), sa, ai);
+        // TODO for now, only checking the first token is good enough
+        Card result = TokenInfo.getProtoType(sa.getParam("TokenScript").split(",")[0], sa, ai);
 
         if (result == null) {
             throw new RuntimeException("don't find Token for TokenScript: " + sa.getParam("TokenScript"));
