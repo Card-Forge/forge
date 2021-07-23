@@ -36,8 +36,7 @@ public class ManaConversionMatrix {
         rowIdx = rowIdx < 0 ? identityMatrix.length - 1 : rowIdx;
         if (additive) {
             colorConversionMatrix[rowIdx] |= replacementColor;
-        }
-        else {
+        } else {
             colorRestrictionMatrix[rowIdx] &= replacementColor;
         }
     }

@@ -29,8 +29,8 @@ public class PrintSheet {
     public static final IStorage<PrintSheet> initializePrintSheets(File sheetsFile, CardEdition.Collection editions) {
         IStorage<PrintSheet> sheets = new StorageExtendable<>("Special print runs", new PrintSheet.Reader(sheetsFile));
 
-        for(CardEdition edition : editions) {
-            for(PrintSheet ps : edition.getPrintSheetsBySection()) {
+        for (CardEdition edition : editions) {
+            for (PrintSheet ps : edition.getPrintSheetsBySection()) {
                 sheets.add(ps.name, ps);
             }
         }
@@ -64,7 +64,7 @@ public class PrintSheet {
     }
 
     public void addAll(Iterable<PaperCard> cards, int weight) {
-        for(PaperCard card : cards)
+        for (PaperCard card : cards)
             cardsWithWeights.add(card, weight);
     }
 
@@ -78,15 +78,15 @@ public class PrintSheet {
     private PaperCard fetchRoulette(int start, int roulette, Collection<PaperCard> toSkip) {
         int sum = start;
         boolean isSecondRun = start > 0;
-        for(Entry<PaperCard, Integer> cc : cardsWithWeights ) {
+        for (Entry<PaperCard, Integer> cc : cardsWithWeights ) {
             sum += cc.getValue();
-            if( sum > roulette ) {
-                if( toSkip != null && toSkip.contains(cc.getKey()))
+            if (sum > roulette) {
+                if (toSkip != null && toSkip.contains(cc.getKey()))
                     continue;
                 return cc.getKey();
             }
         }
-        if( isSecondRun )
+        if (isSecondRun)
             throw new IllegalStateException("Print sheet does not have enough unique cards");
 
         return fetchRoulette(sum + 1, roulette, toSkip); // start over from beginning, in case last cards were to skip
@@ -94,8 +94,8 @@ public class PrintSheet {
 
     public List<PaperCard> all() {
         List<PaperCard> result = new ArrayList<>();
-        for(Entry<PaperCard, Integer> kv : cardsWithWeights) {
-            for(int i = 0; i < kv.getValue(); i++) {
+        for (Entry<PaperCard, Integer> kv : cardsWithWeights) {
+            for (int i = 0; i < kv.getValue(); i++) {
                 result.add(kv.getKey());
             }
         }
@@ -106,26 +106,26 @@ public class PrintSheet {
         List<PaperCard> result = new ArrayList<>();
 
         int totalWeight = cardsWithWeights.countAll();
-        if( totalWeight == 0) {
+        if (totalWeight == 0) {
             System.err.println("No cards were found on sheet " + name);
             return result;
         }
 
         // If they ask for 40 unique basic lands (to make a fatpack) out of 20 distinct possible, add the whole print run N times.
         int uniqueCards = cardsWithWeights.countDistinct();
-        while ( number >= uniqueCards ) {
-            for(Entry<PaperCard, Integer> kv : cardsWithWeights) {
+        while (number >= uniqueCards) {
+            for (Entry<PaperCard, Integer> kv : cardsWithWeights) {
                 result.add(kv.getKey());
             }
             number -= uniqueCards;
         }
 
         List<PaperCard> uniques = wantUnique ? new ArrayList<>() : null;
-        for(int iC = 0; iC < number; iC++) {
+        for (int iC = 0; iC < number; iC++) {
             int index = MyRandom.getRandom().nextInt(totalWeight);
             PaperCard toAdd = fetchRoulette(0, index, wantUnique ? uniques : null);
             result.add(toAdd);
-            if( wantUnique )
+            if (wantUnique)
                 uniques.add(toAdd);
         }
         return result;

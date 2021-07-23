@@ -138,7 +138,7 @@ public class CardStorageReader {
         final CardRules.Reader rulesReader = new CardRules.Reader();
 
         final List<CardRules> result = new ArrayList<>();
-        for(int i = from; i < to; i++) {
+        for (int i = from; i < to; i++) {
             final ZipEntry ze = files.get(i);
             // if (ze.getName().endsWith(CardStorageReader.CARD_FILE_DOT_EXTENSION))  // already filtered!
             result.add(this.loadCard(rulesReader, ze));
@@ -315,11 +315,11 @@ public class CardStorageReader {
                 final List<Future<List<CardRules>>> parts = executor.invokeAll(tasks);
                 executor.shutdown();
                 cdl.await();
-                for(final Future<List<CardRules>> pp : parts) {
+                for (final Future<List<CardRules>> pp : parts) {
                     result.addAll(pp.get());
                 }
             } else {
-                for(final Callable<List<CardRules>> c : tasks) {
+                for (final Callable<List<CardRules>> c : tasks) {
                     result.addAll(c.call());
                 }
             }

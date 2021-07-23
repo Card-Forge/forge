@@ -258,8 +258,7 @@ public class ManaCostBeingPaid {
         ManaCostShard shard;
         if (StringUtils.isEmpty(xColor)) {
             shard = ManaCostShard.GENERIC;
-        }
-        else {
+        } else {
             shard = ManaCostShard.parseNonGeneric(xColor);
         }
         increaseShard(shard, xCost, true);

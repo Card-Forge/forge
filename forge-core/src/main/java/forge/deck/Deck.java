@@ -244,7 +244,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             CardPool pool = CardPool.fromCardList(cardsInSection);
             // I used to store planes and schemes under sideboard header, so this will assign them to a correct section
             IPaperCard sample = pool.get(0);
-            if (sample != null && ( sample.getRules().getType().isPlane() || sample.getRules().getType().isPhenomenon())) {
+            if (sample != null && (sample.getRules().getType().isPlane() || sample.getRules().getType().isPhenomenon())) {
                 sec = DeckSection.Planes;
             }
             if (sample != null && sample.getRules().getType().isScheme()) {
@@ -263,13 +263,13 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         Date dateWithAllCards = StaticData.instance().getEditions().getEarliestDateWithAllCards(getAllCardsInASinglePool());
         String artOption = StaticData.instance().getPrefferedArtOption();
 
-        for(Entry<DeckSection, CardPool> p : parts.entrySet()) {
-            if( p.getKey() == DeckSection.Planes || p.getKey() == DeckSection.Schemes || p.getKey() == DeckSection.Avatar)
+        for (Entry<DeckSection, CardPool> p : parts.entrySet()) {
+            if (p.getKey() == DeckSection.Planes || p.getKey() == DeckSection.Schemes || p.getKey() == DeckSection.Avatar)
                 continue;
 
             CardPool newPool = new CardPool();
 
-            for(Entry<PaperCard, Integer> cp : p.getValue()){
+            for (Entry<PaperCard, Integer> cp : p.getValue()) {
                 PaperCard card = cp.getKey();
                 int count = cp.getValue();
 

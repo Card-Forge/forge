@@ -75,8 +75,7 @@ public class DamageAllEffect extends DamageBaseEffect {
         CardCollectionView list;
         if (sa.hasParam("ValidCards")) {
             list = game.getCardsIn(ZoneType.Battlefield);
-        }
-        else {
+        } else {
             list = CardCollection.EMPTY;
         }
 

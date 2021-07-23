@@ -451,8 +451,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         if (calculatedType == null) {
             if (subtypes.isEmpty()) {
                 calculatedType = StringUtils.join(getTypesBeforeDash(), ' ');
-            }
-            else {
+            } else {
                 calculatedType = StringUtils.join(getTypesBeforeDash(), ' ') + " - " + StringUtils.join(subtypes, " ");
             }
         }

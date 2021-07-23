@@ -136,7 +136,7 @@ public class RegisteredPlayer {
     	}
         if (appliedVariants.contains(GameType.Vanguard) || appliedVariants.contains(GameType.MomirBasic)
                 || appliedVariants.contains(GameType.MoJhoSto)) { //fix the crash, if somehow the avatar is null, get it directly from the deck
-            start.setVanguardAvatars(vanguardAvatar == null ? deck.get(DeckSection.Avatar).toFlatList():vanguardAvatar.toFlatList());
+            start.setVanguardAvatars(vanguardAvatar == null ? deck.get(DeckSection.Avatar).toFlatList() : vanguardAvatar.toFlatList());
         }
     	return start;
     }
@@ -167,7 +167,7 @@ public class RegisteredPlayer {
     private void setVanguardAvatars(List<PaperCard> vanguardAvatars0) {
         vanguardAvatars = vanguardAvatars0;
         if (vanguardAvatars == null) { return; }
-        for(PaperCard avatar: vanguardAvatars){
+        for (PaperCard avatar: vanguardAvatars) {
             setStartingLife(getStartingLife() + avatar.getRules().getLife());
             setStartingHand(getStartingHand() + avatar.getRules().getHand());
         }

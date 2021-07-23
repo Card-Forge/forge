@@ -513,14 +513,14 @@ public final class CardRules implements ICardCharacteristics {
                 case 'S':
                     if ("S".equals(key)) {
                         this.faces[this.curFace].addStaticAbility(value);
-                    } else if ( "SVar".equals(key) ) {
-                        if ( null == value ) throw new IllegalArgumentException("SVar has no variable name");
+                    } else if ("SVar".equals(key)) {
+                        if (null == value) throw new IllegalArgumentException("SVar has no variable name");
 
                         colonPos = value.indexOf(':');
                         String variable = colonPos > 0 ? value.substring(0, colonPos) : value;
                         value = colonPos > 0 ? value.substring(1+colonPos) : null;
 
-                        if ( "Picture".equals(variable) ) {
+                        if ("Picture".equals(variable)) {
                             this.pictureUrl[this.curFace] = value;
                         } else
                             this.faces[curFace].addSVar(variable, value);

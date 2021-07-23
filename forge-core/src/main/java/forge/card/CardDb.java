@@ -212,16 +212,14 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 CardRules cr = rulesByName.get(cis.name);
                 if (cr != null) {
                     addSetCard(e, cis, cr);
-                }
-                else {
+                } else {
                     missingCards.add(cis.name);
                 }
             }
             if (isCoreExpSet && logMissingPerEdition) {
                 if (missingCards.isEmpty()) {
                     System.out.println(" ... 100% ");
-                }
-                else {
+                } else {
                     int missing = (e.getAllCardsInSet().size() - missingCards.size()) * 10000 / e.getAllCardsInSet().size();
                     System.out.printf(" ... %.2f%% (%s missing: %s)%n", missing * 0.01f, Lang.nounWithAmount(missingCards.size(), "card"), StringUtils.join(missingCards, " | "));
                 }
@@ -245,7 +243,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             if (!contains(cr.getName())) {
                 if (upcomingSet != null) {
                     addCard(new PaperCard(cr, upcomingSet.getCode(), CardRarity.Unknown, 1));
-                } else if(enableUnknownCards) {
+                } else if (enableUnknownCards) {
                     System.err.println("The card " + cr.getName() + " was not assigned to any set. Adding it to UNKNOWN set... to fix see res/editions/ folder. ");
                     addCard(new PaperCard(cr, CardEdition.UNKNOWN.getCode(), CardRarity.Special, 1));
                 }
@@ -505,17 +503,16 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                             if (pc.hasImage()) {
                                 return pc;
                             }
-                            else {
-                                if (firstWithoutImage == null) {
-                                    firstWithoutImage = pc; //ensure first without image returns if none have image
-                                }
-                                if (cardsListReadOnly) { //ensure we don't modify a cached collection
-                                    cards = new ArrayList<>(cards);
-                                    cardsListReadOnly = false;
-                                }
-                                cards.remove(randomIndex); //remove card from collection and try another random card
-                                sz--;
+                            if (firstWithoutImage == null) {
+                                firstWithoutImage = pc; //ensure first without image returns if none have image
                             }
+                            if (cardsListReadOnly) { //ensure we don't modify a cached collection
+                                cards = new ArrayList<>(cards);
+                                cardsListReadOnly = false;
+                            }
+                            cards.remove(randomIndex); //remove card from collection and try another random card
+                            sz--;
+
                         }
                     }
                 }
