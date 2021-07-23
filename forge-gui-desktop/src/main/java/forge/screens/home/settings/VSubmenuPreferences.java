@@ -113,6 +113,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbEnableNonLegalCards = new OptionsCheckBox(localizer.getMessage("lblEnableNonLegalCards"));
     private final JCheckBox cbEnableCustomCards = new OptionsCheckBox(localizer.getMessage("lblEnableCustomCards"));
     private final JCheckBox cbUseExperimentalNetworkStream = new OptionsCheckBox(localizer.getMessage("lblExperimentalNetworkCompatibility"));
+    private final JCheckBox cbCardArtCoreExpansionsOnlyOpt = new OptionsCheckBox(localizer.getMessage("lblPrefArtExpansionOnly"));
 
     private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<>();
 
@@ -272,11 +273,17 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbCardBased, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlCardBased")), descriptionConstraints);
 
-        // Deck building options
+        // Deck Editor options
         pnlPrefs.add(new SectionLabel(localizer.getMessage("DeckEditorOptions")), sectionConstraints);
 
         pnlPrefs.add(cbFilterLandsByColorId, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlFilterLandsByColorId")), descriptionConstraints);
+
+        pnlPrefs.add(cbpCardArtPreference, comboBoxConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlPreferredArt")), descriptionConstraints);
+
+        pnlPrefs.add(cbCardArtCoreExpansionsOnlyOpt, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlPrefArtExpansionOnly")), descriptionConstraints);
 
         // Advanced
         pnlPrefs.add(new SectionLabel(localizer.getMessage("AdvancedSettings")), sectionConstraints);
@@ -319,9 +326,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbImageFetcher, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlImageFetcher")), descriptionConstraints);
-
-        pnlPrefs.add(cbpCardArtPreference, comboBoxConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlPreferredArt")), descriptionConstraints);
 
         pnlPrefs.add(cbDisableCardImages, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlDisableCardImages")), descriptionConstraints);
@@ -747,10 +751,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         return cbpDefaultFontSize;
     }
 
-    public FComboBoxPanel<String> getCbpCardArtPreference() {
-        return cbpCardArtPreference;
-    }
-
     public FComboBoxPanel<String> getCbpDefaultLanguageComboBoxPanel() {
         return cbpDefaultLanguage;
     }
@@ -766,6 +766,15 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     public FComboBoxPanel<String> getCounterDisplayLocationComboBoxPanel() {
         return cbpCounterDisplayLocation;
+    }
+
+    public FComboBoxPanel<String> getCbpCardArtPreference() {
+        return cbpCardArtPreference;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbCardArtCoreExpansionsOnlyOpt() {
+        return cbCardArtCoreExpansionsOnlyOpt;
     }
 
     /** @return {@link javax.swing.JCheckBox} */

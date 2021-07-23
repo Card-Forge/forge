@@ -20,10 +20,7 @@ import forge.player.GamePlayerUtil;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorTokenViewer;
 import forge.sound.SoundSystem;
-import forge.toolbox.FComboBox;
-import forge.toolbox.FComboBoxPanel;
-import forge.toolbox.FLabel;
-import forge.toolbox.FOptionPane;
+import forge.toolbox.*;
 import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
@@ -449,12 +446,43 @@ public enum CSubmenuPreferences implements ICDoc {
     }
 
     private void initializeCardArtPreference() {
-        final String [] choices = FModel.getMagicDb().getCardArtAvailablePreferences();
-        final FPref userSetting = FPref.UI_PREFERRED_ART;
+        final String latestOpt = Localizer.getInstance().getMessage("latestArtOpt");
+        final String originalOpt = Localizer.getInstance().getMessage("originalArtOpt");
+        final String [] choices = {latestOpt, originalOpt};
+        final FPref uiPreferredArt = FPref.UI_PREFERRED_ART;
+
         final FComboBoxPanel<String> panel = this.view.getCbpCardArtPreference();
-        final FComboBox<String> comboBox = createComboBox(choices, userSetting);
-        final String selectedItem = this.prefs.getPref(userSetting);
+        final FComboBox<String> comboBox = new FComboBox<>(choices);
+        comboBox.addItemListener(new ItemListener() {
+            @Override public void itemStateChanged(final ItemEvent e) {
+                String artPreference = comboBox.getSelectedItem();
+                if (artPreference == null)
+                    artPreference = latestOpt;  // default, just in case
+                boolean latestArt = artPreference.equalsIgnoreCase(latestOpt);
+                boolean coreExpFilter = FModel.getMagicDb().cardArtPreferenceHasFilter();
+                FModel.getMagicDb().setCardArtPreference(latestArt, coreExpFilter);
+                String preferenceOpt = FModel.getMagicDb().getCardArtPreference();
+                CSubmenuPreferences.this.prefs.setPref(uiPreferredArt, preferenceOpt);
+                CSubmenuPreferences.this.prefs.save();
+            }
+        });
+        final String selectedItem = FModel.getMagicDb().cardArtPreferenceIsLatest() ? latestOpt : originalOpt;
         panel.setComboBox(comboBox, selectedItem);
+
+        final JCheckBox coreExpFilter = this.view.getCbCardArtCoreExpansionsOnlyOpt();
+        boolean selected = FModel.getMagicDb().cardArtPreferenceHasFilter();
+        coreExpFilter.setSelected(selected);
+        coreExpFilter.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                boolean latestArt = FModel.getMagicDb().cardArtPreferenceIsLatest();
+                boolean coreExpFilter = e.getStateChange() == ItemEvent.SELECTED;
+                FModel.getMagicDb().setCardArtPreference(latestArt, coreExpFilter);
+                String preferenceOpt = FModel.getMagicDb().getCardArtPreference();
+                CSubmenuPreferences.this.prefs.setPref(uiPreferredArt, preferenceOpt);
+                CSubmenuPreferences.this.prefs.save();
+            }
+        });
     }
 
     private void initializeStackAdditionsComboBox() {
