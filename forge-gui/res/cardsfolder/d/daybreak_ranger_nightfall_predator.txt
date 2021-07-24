@@ -1,6 +1,6 @@
 Name:Daybreak Ranger
 ManaCost:2 G
-Types:Creature Human Archer Werewolf
+Types:Creature Human Archer Ranger Werewolf
 PT:2/2
 A:AB$DealDamage | Cost$ T | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying. | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature with flying.
 T:Mode$Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.

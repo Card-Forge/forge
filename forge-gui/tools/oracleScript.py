@@ -34,7 +34,7 @@ def load_oracle_cards():
         oracle_json = json.load(oracle_file)
     oracle_cards = {}
     for card in oracle_json:
-        if (card['layout'] == 'token'):
+        if (card['layout'] == 'token' and card['type_line'] != 'Dungeon'):
             continue
         name = unidecode.unidecode(card['name'])
         oracle_cards[name] = card
@@ -102,6 +102,8 @@ def write_card_script(cardfile, lines, oracle_texts):
 def update_oracle(name, lines, oracle_text, new_oracle, type_line, alternate_line):
     updated = False
     # Update type line first
+    type_line = type_line.replace('Summon', 'Creature')
+    type_line = type_line.replace('’', "'")
     for i, line in enumerate(lines):
         if i <= alternate_line:
             continue
@@ -131,6 +133,7 @@ def update_oracle(name, lines, oracle_text, new_oracle, type_line, alternate_lin
     for org_line, new_line in zip(oracle_lines, new_lines):
         org_line = org_line.replace(name, 'CARDNAME')
         org_line = org_line.replace(nickname, 'NICKNAME')
+        org_line = org_line.replace('|', 'VERT')
         if org_line.find(':') != -1:
             if org_line.find('"') == -1 or org_line.find('"') > org_line.find(':'):
                 org_line = org_line[org_line.find(':') + 1:].lstrip()
@@ -140,6 +143,7 @@ def update_oracle(name, lines, oracle_text, new_oracle, type_line, alternate_lin
             continue
         new_line = new_line.replace(name, 'CARDNAME')
         new_line = new_line.replace(nickname, 'NICKNAME')
+        new_line = new_line.replace('|', 'VERT')
         if new_line.find(':') != -1:
             if new_line.find('"') == -1 or new_line.find('"') > new_line.find(':'):
                 new_line = new_line[new_line.find(':') + 1:].lstrip()

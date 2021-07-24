@@ -1319,14 +1319,17 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 }
                 if (sa.hasParam("TokenScript")) {
                     sa.setActivatingPlayer(player);
-                    Card protoType = TokenInfo.getProtoType(sa.getParam("TokenScript"), sa, null);
-                    for (String type : protoType.getType().getCreatureTypes()) {
-                        Integer count = typesInDeck.get(type);
-                        if (count == null) {
-                            count = 0;
+                    for (String token : sa.getParam("TokenScript").split(",")) {
+                        Card protoType = TokenInfo.getProtoType(token, sa, null);
+                        for (String type : protoType.getType().getCreatureTypes()) {
+                            Integer count = typesInDeck.get(type);
+                            if (count == null) {
+                                count = 0;
+                            }
+                            typesInDeck.put(type, count + 1);
                         }
-                        typesInDeck.put(type, count + 1);
                     }
+
                 }
             }
             // same for Trigger that does make Tokens
@@ -1335,13 +1338,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 if (sa != null) {
                     if (sa.hasParam("TokenScript")) {
                         sa.setActivatingPlayer(player);
-                        Card protoType = TokenInfo.getProtoType(sa.getParam("TokenScript"), sa, null);
-                        for (String type : protoType.getType().getCreatureTypes()) {
-                            Integer count = typesInDeck.get(type);
-                            if (count == null) {
-                                count = 0;
+                        for (String token : sa.getParam("TokenScript").split(",")) {
+                            Card protoType = TokenInfo.getProtoType(token, sa, null);
+                            for (String type : protoType.getType().getCreatureTypes()) {
+                                Integer count = typesInDeck.get(type);
+                                if (count == null) {
+                                    count = 0;
+                                }
+                                typesInDeck.put(type, count + 1);
                             }
-                            typesInDeck.put(type, count + 1);
                         }
                     }
                 }

@@ -7,4 +7,4 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerZones$ Batt
 SVar:TrigToken:DB$Token | TokenAmount$ 1 | TokenScript$ r_1_1_goblin | TokenOwner$ You | TokenTapped$ True | TokenAttacking$ True
 SVar:PackTactics:Count$SumPower_Creature.attacking
 DeckHas:Ability$Token
-Oracle:{1}{R}: Goblins you control get +1/+0 and gain haste until end of turn.\nPack tactics — Whenever Battle Cry Goblin attacks, if you attacked with creatures with total power 6 or greater this combat, create a 1/1 red Goblin creature token that’s tapped and attacking.
+Oracle:{1}{R}: Goblins you control get +1/+0 and gain haste until end of turn.\nPack tactics — Whenever Battle Cry Goblin attacks, if you attacked with creatures with total power 6 or greater this combat, create a 1/1 red Goblin creature token that's tapped and attacking.

@@ -60,7 +60,7 @@ def patchtranslations(filename):
                     if oname == pname:
                         patchedline = pline
                         break
-            
+
             if patchedline != "":
                 ffinal.write(patchedline)
             else:
@@ -130,6 +130,7 @@ with open('cards.json', mode='r', encoding='utf8') as json_file:
                     #make zh-CN reminder text work
                     toracle = toracle.replace('（','(')
                     toracle = toracle.replace('）',')')
+                    toracle = toracle.replace('|', 'VERT')
                 except:
                     pass
 
@@ -230,5 +231,5 @@ for lang in languages.keys():
     cleanfile("cardnames-{0}".format(languages[lang]), ".tmp3", ".txt")
 
 # Call the Japanese translation script
-import JapaneseTranslations
-JapaneseTranslations.main()
+# import JapaneseTranslations
+# JapaneseTranslations.main()

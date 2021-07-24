@@ -1,6 +1,6 @@
 Name:Verge Rangers
 ManaCost:2 W
-Types:Creature Human Scout
+Types:Creature Human Scout Ranger
 PT:3/3
 K:First strike
 S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.

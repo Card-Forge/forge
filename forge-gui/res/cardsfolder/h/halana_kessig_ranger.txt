@@ -1,6 +1,6 @@
 Name:Halana, Kessig Ranger
 ManaCost:3 G
-Types:Legendary Creature Human Archer
+Types:Legendary Creature Human Archer Ranger
 PT:3/4
 K:Reach
 K:Partner

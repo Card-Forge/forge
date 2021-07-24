@@ -1,6 +1,6 @@
 Name:Jadelight Ranger
 ManaCost:1 G G
-Types:Creature Merfolk Scout
+Types:Creature Merfolk Scout Ranger
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExplore | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME enters the battlefield, it explores, then it explores again. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard. Then repeat this process.)
 SVar:TrigExplore:DB$ Explore | SubAbility$ DBExplore

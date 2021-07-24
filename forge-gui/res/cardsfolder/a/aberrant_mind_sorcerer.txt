@@ -1,0 +1,10 @@
+Name:Aberrant Mind Sorcerer
+ManaCost:4 U
+Types:Creature Human Elf Shaman
+PT:3/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigPump | TriggerDescription$ Psionic Spells – When CARDNAME enters the battlefield, choose target instant or sorcery card in your graveyard, then ABILITY
+SVar:TrigPump:DB$ Pump | ValidTgts$ Instant.YouOwn,Sorcery.YouOwn | TgtZone$ Graveyard | TgtPrompt$ Choose target instant or sorcery card in your graveyard | SubAbility$ DBRollDice
+SVar:DBRollDice:DB$ RollDice | Sides$ 20 | ResultSubAbilities$ 1-9:DBLibrary,10-20:DBHand | SpellDescription$ roll a d20.
+SVar:DBLibrary:DB$ ChangeZone | Defined$ Targeted | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 0 | Optional$ True | SpellDescription$ 1—9 VERT You may put that card on top of your library.
+SVar:DBHand:DB$ ChangeZone | Defined$ Targeted | Origin$ Graveyard | Destination$ Hand | SpellDescription$ 10—20 VERT Return that card to your hand.
+Oracle:Psionic Spells — When Aberrant Mind Sorcerer enters the battlefield, choose target instant or sorcery card in your graveyard, then roll a d20.\n1—9 | You may put that card on top of your library.\n10—20 | Return that card to your hand.
