@@ -48,7 +48,6 @@ public class ImageUtil {
             hasManyPictures = cntPictures > 1;
         } else {
             cntPictures = 1;
-
             // raise the art index limit to the maximum of the sets this card was printed in
             int maxCntPictures = db.getMaxArtIndex(card.getName());
             hasManyPictures = maxCntPictures > 1;
