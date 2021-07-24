@@ -1,15 +1,14 @@
 package forge;
 
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
-
 import forge.item.PaperCard;
 import forge.util.FileUtil;
 import forge.util.ImageUtil;
 import forge.util.TextUtil;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 public final class ImageKeys {
     public static final String CARD_PREFIX           = "c:";
@@ -216,6 +215,6 @@ public final class ImageKeys {
             editionImageLookup.put(pc.getEdition(), editionHasImage);
         }
         //avoid checking for file if edition doesn't have any images
-        return editionHasImage && findFile(CACHE_CARD_PICS_DIR, ImageUtil.getImageKey(pc, false, true)) != null;
+        return editionHasImage && getImageFile(ImageUtil.getImageKey(pc, false, true)) != null;
     }
 }
