@@ -2187,8 +2187,8 @@ public class GameAction {
                 if (e.getValue() <= 0) {
                     continue;
                 }
+                e.setValue(Integer.valueOf(e.getKey().addDamageAfterPrevention(e.getValue(), sourceLKI, isCombat, counterTable)));
                 sum += e.getValue();
-                e.getKey().addDamageAfterPrevention(e.getValue(), sourceLKI, isCombat, counterTable);
             }
 
             if (sourceLKI.hasKeyword(Keyword.LIFELINK)) {
