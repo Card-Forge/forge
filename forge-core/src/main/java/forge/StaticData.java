@@ -7,8 +7,6 @@ import com.google.common.base.Predicate;
 
 import forge.card.*;
 import forge.card.CardDb.CardRequest;
-import forge.item.BoosterBox;
-import forge.item.FatPack;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.token.TokenDb;
