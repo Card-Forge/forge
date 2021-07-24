@@ -55,7 +55,7 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
     private String collectorNumber = null;
     private final int artIndex;
     private final boolean foil;
-    private Boolean hasImage;
+    private Boolean hasImage = null;
 
     // Calculated fields are below:
     private transient CardRarity rarity; // rarity is given in ctor when set is assigned
