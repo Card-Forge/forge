@@ -52,8 +52,6 @@ public class StaticData {
     private IStorage<SealedProduct.Template> boosters;
     private IStorage<SealedProduct.Template> specialBoosters;
     private IStorage<SealedProduct.Template> tournaments;
-    private IStorage<FatPack.Template> fatPacks;
-    private IStorage<BoosterBox.Template> boosterBoxes;
     private IStorage<PrintSheet> printSheets;
 
     private static StaticData lastInstance = null;
@@ -237,14 +235,6 @@ public class StaticData {
         if (customRules != null) {
             customCards.loadCard(cardName, customRules);
         }
-    }
-
-    // TODO Remove these in favor of them being associated to the Edition
-    /** @return {@link forge.util.storage.IStorage}<{@link forge.item.SealedProduct.Template}> */
-    public IStorage<FatPack.Template> getFatPacks() {
-        if (fatPacks == null)
-            fatPacks = new StorageBase<>("Fat packs", new FatPack.Template.Reader(blockDataFolder + "fatpacks.txt"));
-        return fatPacks;
     }
 
     /** @return {@link forge.util.storage.IStorage}<{@link forge.item.SealedProduct.Template}> */

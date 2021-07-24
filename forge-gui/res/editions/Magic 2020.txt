@@ -6,6 +6,7 @@ MciCode=m20
 Type=Core
 BoosterCovers=3
 Booster=10 Common:!fromSheet("M20 Secret Cards"), 3 Uncommon:!fromSheet("M20 Secret Cards"), 1 RareMythic:!fromSheet("M20 Secret Cards"), 1 fromSheet("M20 Lands")
+FatPackExtraSlots=80 BasicLands
 ChaosDraftThemes=CORE_SET
 ScryfallCode=M20
 

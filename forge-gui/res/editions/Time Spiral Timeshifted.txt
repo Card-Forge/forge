@@ -6,6 +6,8 @@ Code2=TSB
 MciCode=tsts
 Type=Expansion
 ScryfallCode=TSB
+BoosterBox=0
+FatPack=0
 
 [cards]
 1 S Akroma, Angel of Wrath

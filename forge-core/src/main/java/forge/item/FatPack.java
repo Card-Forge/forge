@@ -18,10 +18,8 @@
 
 package forge.item;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Function;
@@ -30,16 +28,17 @@ import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardEdition;
 import forge.item.generation.BoosterGenerator;
-import forge.util.TextUtil;
-import forge.util.storage.StorageReaderFile;
 
 public class FatPack extends BoxedProduct {
     public static final Function<CardEdition, FatPack> FN_FROM_SET = new Function<CardEdition, FatPack>() {
         @Override
-        public FatPack apply(final CardEdition arg1) {
-            FatPack.Template d = StaticData.instance().getFatPacks().get(arg1.getCode());
+        public FatPack apply(final CardEdition edition) {
+            int boosters = edition.getFatPackCount();
+            if (boosters <= 0) { return null; }
+
+            FatPack.Template d = new Template(edition);
             if (d == null) { return null; }
-            return new FatPack(arg1.getName(), d, d.cntBoosters);
+            return new FatPack(edition.getName(), d, d.cntBoosters);
         }
     };
 
@@ -68,17 +67,6 @@ public class FatPack extends BoxedProduct {
         return BoosterGenerator.getBoosterPack(fpData);
     }
 
-    /*@Override
-    protected List<PaperCard> generate() {
-        List<PaperCard> result = new ArrayList<PaperCard>();
-        for (int i = 0; i < fpData.getCntBoosters(); i++) {
-            result.addAll(super.generate());
-        }
-        // Add any extra cards that may come in the fatpack after Boosters
-        result.addAll(BoosterGenerator.getBoosterPack(fpData));
-        return result;
-    }*/
-
     @Override
     public final Object clone() {
         return new FatPack(name, fpData, fpData.cntBoosters);
@@ -92,38 +80,12 @@ public class FatPack extends BoxedProduct {
     public static class Template extends SealedProduct.Template {
         private final int cntBoosters;
 
-
         public int getCntBoosters() { return cntBoosters; }
 
-        private Template(String edition, int boosters, Iterable<Pair<String, Integer>> itrSlots)
-        {
-            super(edition, itrSlots);
-            cntBoosters = boosters;
-        }
+        private Template(CardEdition edition) {
+            super(edition.getCode(), edition.getFatPackExtraSlots());
 
-        public static final class Reader extends StorageReaderFile<Template> {
-            public Reader(String pathname) {
-                super(pathname, FN_GET_NAME);
-            }
-
-            @Override
-            protected Template read(String line, int i) {
-                String[] headAndData = TextUtil.split(line, ':', 2);
-                final String edition = headAndData[0];
-                final String[] data = TextUtil.splitWithParenthesis(headAndData[1], ',');
-                int nBoosters = 6;
-
-                List<Pair<String, Integer>> slots = new ArrayList<>();
-                for(String slotDesc : data) {
-                    String[] kv = TextUtil.split(slotDesc, ' ', 2);
-                    if (kv[1].startsWith("Booster"))
-                        nBoosters = Integer.parseInt(kv[0]);
-                    else
-                        slots.add(ImmutablePair.of(kv[1], Integer.parseInt(kv[0])));
-                }
-
-                return new FatPack.Template(edition, nBoosters, slots);
-            }
+            cntBoosters = edition.getFatPackCount();
         }
         
         @Override

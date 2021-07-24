@@ -8,6 +8,8 @@ MciCode=eve
 Type=Expansion
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 Rare
+FatPack=8
+FatPackExtraSlots=40 BasicLands SHM
 ScryfallCode=EVE
 
 [cards]

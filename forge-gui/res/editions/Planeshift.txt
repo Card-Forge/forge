@@ -7,6 +7,7 @@ MciCode=ps
 Type=Expansion
 BoosterCovers=1
 Booster=11 Common, 3 Uncommon, 1 Rare, 0 Special
+FatPack=6
 Foil=OldStyle
 FoilAlwaysInCommonSlot=False
 ScryfallCode=PLS

@@ -4,12 +4,14 @@ Date=1999-10-04
 Name=Mercadian Masques
 Code2=MM
 MciCode=mm
+ScryfallCode=MMQ
 Type=Expansion
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 Rare
+FatPack=6
+FatPackExtraSlots=30 BasicLands
 Foil=OldStyle
 FoilAlwaysInCommonSlot=False
-ScryfallCode=MMQ
 
 [cards]
 58 R Aerial Caravan

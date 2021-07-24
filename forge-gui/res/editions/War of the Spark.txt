@@ -8,6 +8,8 @@ Type=Expansion
 BoosterCovers=3
 Booster=10 Common:!fromSheet("WAR Secret Cards"), 3 Uncommon:!fromSheet("WAR Secret Cards"), 1 RareMythic:!fromSheet("WAR Secret Cards"), 1 BasicLand
 BoosterMustContain=Planeswalker
+FatPack=10
+FatPackExtraSlots=80 BasicLands
 ChaosDraftThemes=RAVNICA
 ScryfallCode=WAR
 

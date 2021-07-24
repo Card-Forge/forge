@@ -8,6 +8,8 @@ Type=Expansion
 BoosterCovers=5
 Booster=10 Common:!fromSheet("GRN Secret Cards"), 3 Uncommon:!fromSheet("GRN Secret Cards"), 1 RareMythic:!fromSheet("GRN Secret Cards"), 1 fromSheet("GRN Lands")
 AdditionalSetUnlockedInQuest=GK1
+FatPack=10
+FatPackExtraSlots=80 BasicLands
 ChaosDraftThemes=RAVNICA;GRAVEYARD_MATTERS
 ScryfallCode=GRN
 

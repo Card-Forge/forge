@@ -9,6 +9,7 @@ BoosterCovers=5
 DraftBooster=1 fromSheet("STX lesson"), 9 Common, 3 Uncommon, 1 RareMythic, 1 Any STA
 CollectorBooster=1 Uncommon:fromSheet("STA borderless")+, 1 RareMythic:fromSheet("STA borderless")+, 1 Uncommon:fromSheet("STA etched")+, 1 RareMythic:fromSheet("STA etched")+, 1 RareMythic C21+, 1 RareMythic STA, 1 Uncommon STA, 1 fromSheet("STX lesson")+, 1 RareMythic+, 2 Uncommon+, 5 Common+
 Prerelease=6 Boosters, 1 RareMythic+
+FatPackExtraSlots=20 BasicLands, 20 BasicLands+
 ScryfallCode=STX
 
 [cards]
