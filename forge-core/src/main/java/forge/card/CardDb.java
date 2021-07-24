@@ -464,6 +464,11 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
      * ==========================================
      * 2. CARD LOOKUP FROM A SINGLE EXPANSION SET
      * ==========================================
+     *
+     * NOTE: All these methods always try to return a PaperCard instance
+     * that has an Image (if any).
+     * Therefore, the single Edition request can be overruled if no image is found
+     * for the corresponding requested edition.
      */
     @Override
     public PaperCard getCardFromSet(String cardName, CardEdition edition, boolean isFoil) {
@@ -514,7 +519,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
         PaperCard candidate = candidates.get(0);
         // Before returning make sure that actual candidate has Image.
-        // If not, try to replace current candidate with one having image, so to align this implementation with old one.
+        // If not, try to replace current candidate with one having image,
+        // so to align this implementation with old one.
         if (!candidate.hasImage()) {
             for (PaperCard card : candidates) {
                 if (card.hasImage()) {
@@ -622,6 +628,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 break;  // we're done here: found card **with Image**
             }
         }
+        //If any, we're sure that at least one candidate is always returned nevertheless it has image or not
         return candidate;  // any foil request already handled in getCardFromSet
     }
 
