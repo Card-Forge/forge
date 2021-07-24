@@ -653,8 +653,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 loseLife(Math.min(amount, life - 7));
             } else if (hasKeyword("DamageLifeThreshold:1") && life <= amount) {
                 loseLife(Math.min(amount, life - 1));
-            }
-            else {
+            } else {
                 // rule 118.2. Damage dealt to a player normally causes that player to lose that much life.
                 loseLife(amount);
             }
