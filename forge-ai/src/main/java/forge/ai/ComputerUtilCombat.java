@@ -291,14 +291,12 @@ public class ComputerUtilCombat {
      * @return a int.
      */
     public static int lifeThatWouldRemain(final Player ai, final Combat combat) {
-
         int damage = 0;
 
         final List<Card> attackers = combat.getAttackersOf(ai);
         final List<Card> unblocked = Lists.newArrayList();
 
         for (final Card attacker : attackers) {
-
             final List<Card> blockers = combat.getBlockers(attacker);
 
             if ((blockers.size() == 0)
@@ -418,7 +416,6 @@ public class ComputerUtilCombat {
         final List<Card> threateningCommanders = getLifeThreateningCommanders(ai,combat);
 
         for (final Card attacker : attackers) {
-
             final List<Card> blockers = combat.getBlockers(attacker);
 
             if (blockers.isEmpty()) {
@@ -2266,7 +2263,7 @@ public class ComputerUtilCombat {
                 if (!re.matchesValidParam("ValidSource", source)) {
                     continue;
                 }
-                if (!re.matchesValidParam("ValidTarget", source)) {
+                if (!re.matchesValidParam("ValidTarget", target)) {
                     continue;
                 }
                 if (re.hasParam("IsCombat")) {
