@@ -545,7 +545,7 @@ public class GameAction {
         if (fromBattlefield && !zoneFrom.getPlayer().equals(zoneTo.getPlayer())) {
             final Map<AbilityKey, Object> runParams2 = AbilityKey.mapFromCard(lastKnownInfo);
             runParams2.put(AbilityKey.OriginalController, zoneFrom.getPlayer());
-            if(params != null) {
+            if (params != null) {
                 runParams2.putAll(params);
             }
             game.getTriggerHandler().runTrigger(TriggerType.ChangesController, runParams2, false);

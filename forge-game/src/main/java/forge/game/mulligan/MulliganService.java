@@ -63,7 +63,7 @@ public class MulliganService {
         boolean allKept;
         do {
             allKept = true;
-            for(AbstractMulligan mulligan : mulligans) {
+            for (AbstractMulligan mulligan : mulligans) {
                 if (mulligan.hasKept()) {
                     continue;
                 }
@@ -85,7 +85,7 @@ public class MulliganService {
             }
         } while (!allKept);
 
-        for(AbstractMulligan mulligan : mulligans) {
+        for (AbstractMulligan mulligan : mulligans) {
             mulligan.afterMulligan();
         }
     }

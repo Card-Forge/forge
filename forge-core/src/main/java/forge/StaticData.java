@@ -322,7 +322,6 @@ public class StaticData {
     }
 
     public PaperCard getCardByEditionDate(PaperCard card, Date editionDate) {
-
         PaperCard c = this.getCommonCards().getCardFromEdition(card.getName(), editionDate, CardDb.SetPreference.LatestCoreExp, card.getArtIndex());
 
         if (null != c) {
@@ -346,7 +345,6 @@ public class StaticData {
     }
 
     public PaperCard getCardFromLatestorEarliest(PaperCard card) {
-
         PaperCard c = this.getCommonCards().getCardFromEdition(card.getName(), null, CardDb.SetPreference.Latest, card.getArtIndex());
 
         if (null != c && c.hasImage()) {
@@ -376,7 +374,6 @@ public class StaticData {
     }
 
     public PaperCard getCardFromEarliestCoreExp(PaperCard card) {
-
         PaperCard c = this.getCommonCards().getCardFromEdition(card.getName(), null, CardDb.SetPreference.EarliestCoreExp, card.getArtIndex());
 
         if (null != c && c.hasImage()) {
