@@ -7,6 +7,7 @@ MciCode=tr
 Type=Expansion
 BoosterCovers=1
 Booster=11 Common, 3 Uncommon, 1 Rare
+FatPack=6
 Foil=OldStyle
 FoilAlwaysInCommonSlot=False
 ChaosDraftThemes=GRAVEYARD_MATTERS

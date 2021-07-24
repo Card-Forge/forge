@@ -7,6 +7,8 @@ MciCode=gtc
 Type=Expansion
 BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand RTR
+FatPack=9
+FatPackExtraSlots=80 BasicLands RTR
 ChaosDraftThemes=RAVNICA
 ScryfallCode=GTC
 

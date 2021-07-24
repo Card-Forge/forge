@@ -7,6 +7,8 @@ MciCode=wwk
 Type=Expansion
 BoosterCovers=3
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand ZEN
+FatPack=8
+FatPackExtraSlots=40 BasicLands ZEN
 ScryfallCode=WWK
 
 [cards]

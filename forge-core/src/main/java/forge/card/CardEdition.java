@@ -102,6 +102,16 @@ public final class CardEdition implements Comparable<CardEdition> {
             }
         }
 
+        public String getFatPackDefault() {
+            switch (this) {
+                case CORE:
+                case EXPANSION:
+                    return "10";
+                default:
+                    return "0";
+            }
+        }
+
         public String toString(){
             String[] names = TextUtil.splitWithParenthesis(this.name().toLowerCase(), '_');
             for (int i = 0; i < names.length; i++)
@@ -260,6 +270,8 @@ public final class CardEdition implements Comparable<CardEdition> {
     // SealedProduct
     private String prerelease = null;
     private int boosterBoxCount = 36;
+    private int fatPackCount = 10;
+    private String fatPackExtraSlots = "";
 
     // Booster/draft info
     private boolean smallSetOverride = false;
@@ -350,6 +362,8 @@ public final class CardEdition implements Comparable<CardEdition> {
 
     public String getPrerelease() { return prerelease; }
     public int getBoosterBoxCount() { return boosterBoxCount; }
+    public int getFatPackCount() { return fatPackCount; }
+    public String getFatPackExtraSlots() { return fatPackExtraSlots; }
 
     public FoilType getFoilType() { return foilType; }
     public double getFoilChanceInBooster() { return foilChanceInBooster; }
@@ -635,6 +649,8 @@ public final class CardEdition implements Comparable<CardEdition> {
             res.type = enumType;
             res.prerelease = section.get("Prerelease", null);
             res.boosterBoxCount = Integer.parseInt(section.get("BoosterBox", enumType.getBoosterBoxDefault()));
+            res.fatPackCount = Integer.parseInt(section.get("FatPack", enumType.getFatPackDefault()));
+            res.fatPackExtraSlots = section.get("FatPackExtraSlots", "");
 
             switch(section.get("foil", "newstyle").toLowerCase()) {
                 case "notsupported":
@@ -852,7 +868,7 @@ public final class CardEdition implements Comparable<CardEdition> {
         private static class CanMakeFatPack implements Predicate<CardEdition> {
             @Override
             public boolean apply(final CardEdition subject) {
-                return StaticData.instance().getFatPacks().contains(subject.getCode());
+                return subject.getFatPackCount() > 0;
             }
         }
 

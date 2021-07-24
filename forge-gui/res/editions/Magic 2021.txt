@@ -6,6 +6,7 @@ Type=Core
 BoosterCovers=3
 Booster=10 Common:fromSheet("M21 cards"):!fromSheet("M21 Lands"), 3 Uncommon:fromSheet("M21 cards"), 1 RareMythic:fromSheet("M21 cards"), 1 fromSheet("M21 Lands")
 Prerelease=6 Boosters, 1 RareMythic+
+FatPackExtraSlots=20 BasicLands, 20 BasicLands+, 1 Pack Leader+|M21|3
 ChaosDraftThemes=CORE_SET
 ScryfallCode=M21
 

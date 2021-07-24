@@ -7,6 +7,8 @@ MciCode=ts
 Type=Expansion
 BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 Rare, 1 TimeShifted TSB
+FatPack=6
+FatPackExtraSlots=40 BasicLands
 AdditionalSetUnlockedInQuest=TSB
 ScryfallCode=TSP
 

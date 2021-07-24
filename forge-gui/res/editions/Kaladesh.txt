@@ -8,6 +8,8 @@ MciCode=kld
 BoosterCovers=3
 Booster=10 Common:fromSheet("KLD cards"), 3 Uncommon:fromSheet("KLD cards"), 1 RareMythic:fromSheet("KLD cards"), 1 BasicLand
 AdditionalSheetForFoils=fromSheet("KLD Kaladesh Inventions")
+FatPack=10
+FatPackExtraSlots=80 BasicLands
 AdditionalSetUnlockedInQuest=MPS_KLD
 ScryfallCode=KLD
 

@@ -7,6 +7,8 @@ MciCode=dka
 Type=Expansion
 BoosterCovers=3
 Booster=9 Common:!dfc, 3 Uncommon:!dfc, 1 RareMythic:!dfc, 1 dfc, 1 BasicLand ISD
+FatPack=9
+FatPackExtraSlots=70 BasicLands ISD
 ChaosDraftThemes=GRAVEYARD_MATTERS
 ScryfallCode=DKA
 

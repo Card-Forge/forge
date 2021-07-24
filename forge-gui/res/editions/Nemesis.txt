@@ -5,12 +5,13 @@ Name=Nemesis
 Code2=NE
 Alias=NEM
 MciCode=ne
+ScryfallCode=NEM
 Type=Expansion
 BoosterCovers=1
 Booster=11 Common, 3 Uncommon, 1 Rare
+FatPack=6
 Foil=OldStyle
 FoilAlwaysInCommonSlot=False
-ScryfallCode=NEM
 
 [cards]
 27 R AEther Barrier

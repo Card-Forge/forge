@@ -8,6 +8,8 @@ MciCode=aer
 BoosterCovers=3
 Booster=10 Common:fromSheet("AER cards"), 3 Uncommon:fromSheet("AER cards"), 1 RareMythic:fromSheet("AER cards"), 1 BasicLand KLD
 AdditionalSheetForFoils=fromSheet("AER Aether Revolt Inventions")
+FatPack=10
+FatPackExtraSlots=80 BasicLands KLD
 AdditionalSetUnlockedInQuest=MPS_KLD
 ScryfallCode=AER
 
