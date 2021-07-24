@@ -114,6 +114,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbEnableCustomCards = new OptionsCheckBox(localizer.getMessage("lblEnableCustomCards"));
     private final JCheckBox cbUseExperimentalNetworkStream = new OptionsCheckBox(localizer.getMessage("lblExperimentalNetworkCompatibility"));
     private final JCheckBox cbCardArtCoreExpansionsOnlyOpt = new OptionsCheckBox(localizer.getMessage("lblPrefArtExpansionOnly"));
+    private final JCheckBox cbSmartCardArtSelectionOpt = new OptionsCheckBox(localizer.getMessage("lblSmartCardArtOpt"));
 
     private final Map<FPref, KeyboardShortcutField> shortcutFields = new HashMap<>();
 
@@ -284,6 +285,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbCardArtCoreExpansionsOnlyOpt, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlPrefArtExpansionOnly")), descriptionConstraints);
+
+        pnlPrefs.add(cbSmartCardArtSelectionOpt, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlSmartCardArtOpt")), "w 80%!, h 22px!, gap 28px 0 0 0, span 2 1");
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlSmartCardArtOptNote")), descriptionConstraints);
 
         // Advanced
         pnlPrefs.add(new SectionLabel(localizer.getMessage("AdvancedSettings")), sectionConstraints);
@@ -773,9 +778,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     }
 
     /** @return {@link javax.swing.JCheckBox} */
-    public JCheckBox getCbCardArtCoreExpansionsOnlyOpt() {
-        return cbCardArtCoreExpansionsOnlyOpt;
-    }
+    public JCheckBox getCbCardArtCoreExpansionsOnlyOpt() { return cbCardArtCoreExpansionsOnlyOpt; }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbSmartCardArtSelectionOpt() { return cbSmartCardArtSelectionOpt; }
 
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbEnforceDeckLegality() {

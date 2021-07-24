@@ -160,10 +160,9 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbRemindOnPriority(), FPref.UI_REMIND_ON_PRIORITY));
 
         lstControls.add(Pair.of(view.getCbFilterLandsByColorId(), FPref.UI_FILTER_LANDS_BY_COLOR_IDENTITY));
-
         lstControls.add(Pair.of(view.getCbLoadCardsLazily(), FPref.LOAD_CARD_SCRIPTS_LAZILY));
-
         lstControls.add(Pair.of(view.getCbLoadHistoricFormats(), FPref.LOAD_HISTORIC_FORMATS));
+        lstControls.add(Pair.of(view.getCbSmartCardArtSelectionOpt(), FPref.UI_SMART_CARD_ART));
 
 
         for(final Pair<JCheckBox, FPref> kv : lstControls) {
@@ -177,6 +176,15 @@ public enum CSubmenuPreferences implements ICDoc {
                 }
             });
         }
+
+        view.getCbSmartCardArtSelectionOpt().addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(final ItemEvent e) {
+                if (updating) { return; }
+                boolean isEnabled = e.getStateChange() == ItemEvent.SELECTED;
+                FModel.getMagicDb().setEnableSmartCardArtSelection(isEnabled);
+            }
+        });
 
         view.getBtnReset().setCommand(new UiCommand() {
             @Override

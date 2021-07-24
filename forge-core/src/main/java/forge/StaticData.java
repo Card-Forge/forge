@@ -48,7 +48,8 @@ public class StaticData {
 
     private MulliganDefs.MulliganRule mulliganRule = MulliganDefs.getDefaultRule();
 
-    private boolean enableCustomCardsInDecks = false;  // default
+    private boolean enableCustomCardsInDecks;  // default
+    private boolean enableSmartCardArtSelection;
 
     // Loaded lazily:
     private IStorage<SealedProduct.Template> boosters;
@@ -64,7 +65,11 @@ public class StaticData {
         this(cardReader, null, customCardReader, editionFolder, customEditionsFolder, blockDataFolder, cardArtPreference, enableUnknownCards, loadNonLegalCards, false);
     }
 
-    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String cardArtPreference, boolean enableUnknownCards, boolean loadNonLegalCards, boolean enableCustomCardsInDecks) {
+    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String cardArtPreference, boolean enableUnknownCards, boolean loadNonLegalCards, boolean enableCustomCardsInDecks){
+        this(cardReader, tokenReader, customCardReader, editionFolder, customEditionsFolder, blockDataFolder, cardArtPreference, enableUnknownCards, loadNonLegalCards, enableCustomCardsInDecks, false);
+    }
+
+    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String cardArtPreference, boolean enableUnknownCards, boolean loadNonLegalCards, boolean enableCustomCardsInDecks, boolean enableSmartCardArtSelection) {
         this.cardReader = cardReader;
         this.tokenReader = tokenReader;
         this.editions = new CardEdition.Collection(new CardEdition.Reader(new File(editionFolder)));
@@ -72,6 +77,7 @@ public class StaticData {
         this.customCardReader = customCardReader;
         this.customEditions = new CardEdition.Collection(new CardEdition.Reader(new File(customEditionsFolder), true));
         this.enableCustomCardsInDecks = enableCustomCardsInDecks;
+        this.enableSmartCardArtSelection = enableSmartCardArtSelection;
         lastInstance = this;
         List<String> funnyCards = new ArrayList<>();
         List<String> filtered = new ArrayList<>();
@@ -334,9 +340,16 @@ public class StaticData {
     }
 
     public PaperCard getAlternativeCardPrint(PaperCard card, final Date setReleasedBefore) {
-        PaperCard c = this.getCommonCards().getCardFromEditions(card.getName(), card.getArtIndex(), setReleasedBefore);
+        // NOTE this method forces the LATEST selection policy since we do always want to pick the
+        // edition that is the closest in time to the release date
+        CardDb.CardArtPreference artPref;
+        if (this.cardArtPreferenceHasFilter())
+            artPref = CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY;
+        else
+            artPref = CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS;
+        PaperCard c = this.getCommonCards().getCardFromEditions(card.getName(), artPref, card.getArtIndex(), setReleasedBefore);
         // NOTE: if c is null, is necessarily due to the artIndex, so remove it!
-        return c != null ? c : this.getCommonCards().getCardFromEditions(card.getName(), setReleasedBefore);
+        return c != null ? c : this.getCommonCards().getCardFromEditions(card.getName(), artPref, setReleasedBefore);
     }
 
     public boolean getFilteredHandsEnabled(){
@@ -387,6 +400,14 @@ public class StaticData {
         this.commonCards.setCardArtPreference(artPreference);
         this.variantCards.setCardArtPreference(artPreference);
         this.customCards.setCardArtPreference(artPreference);
+    }
+
+    //
+    public boolean smartCardArtSelectionIsEnabled(){
+        return this.enableSmartCardArtSelection;
+    }
+    public void setEnableSmartCardArtSelection(boolean isEnabled){
+        this.enableSmartCardArtSelection = isEnabled;
     }
 
 }

@@ -181,7 +181,9 @@ public final class FModel {
         magicDb = new StaticData(reader, tokenReader, customReader, ForgeConstants.EDITIONS_DIR, ForgeConstants.USER_CUSTOM_EDITIONS_DIR,ForgeConstants.BLOCK_DATA_DIR, FModel.getPreferences().getPref(FPref.UI_PREFERRED_ART),
                                  FModel.getPreferences().getPrefBoolean(FPref.UI_LOAD_UNKNOWN_CARDS),
                                  FModel.getPreferences().getPrefBoolean(FPref.UI_LOAD_NONLEGAL_CARDS),
-                                 FModel.getPreferences().getPrefBoolean(FPref.UI_LOAD_CUSTOM_CARDS));
+                                 FModel.getPreferences().getPrefBoolean(FPref.UI_LOAD_CUSTOM_CARDS),
+                                 FModel.getPreferences().getPrefBoolean(FPref.UI_SMART_CARD_ART)
+                );
         CardTranslation.preloadTranslation(preferences.getPref(FPref.UI_LANGUAGE), ForgeConstants.LANG_DIR);
 
         //create profile dirs if they don't already exist
