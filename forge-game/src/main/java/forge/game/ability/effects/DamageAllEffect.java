@@ -3,7 +3,6 @@ package forge.game.ability.effects;
 import java.util.List;
 
 import forge.game.Game;
-import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
