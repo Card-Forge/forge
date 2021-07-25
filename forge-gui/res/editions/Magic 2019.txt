@@ -8,6 +8,8 @@ Type=Core
 BoosterCovers=5
 Booster=10 Common:!fromSheet("M19 Secret Cards"), 3 Uncommon:!fromSheet("M19 Secret Cards"), 1 RareMythic:!fromSheet("M19 Secret Cards"), 1 fromSheet("M19 Lands")
 ChaosDraftThemes=CORE_SET
+FatPack=10
+FatPackExtraSlots=80 BasicLands
 ScryfallCode=M19
 
 [cards]

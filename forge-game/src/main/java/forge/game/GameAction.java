@@ -545,7 +545,7 @@ public class GameAction {
         if (fromBattlefield && !zoneFrom.getPlayer().equals(zoneTo.getPlayer())) {
             final Map<AbilityKey, Object> runParams2 = AbilityKey.mapFromCard(lastKnownInfo);
             runParams2.put(AbilityKey.OriginalController, zoneFrom.getPlayer());
-            if(params != null) {
+            if (params != null) {
                 runParams2.putAll(params);
             }
             game.getTriggerHandler().runTrigger(TriggerType.ChangesController, runParams2, false);
@@ -2193,6 +2193,22 @@ public class GameAction {
 
             if (sourceLKI.hasKeyword(Keyword.LIFELINK)) {
                 sourceLKI.getController().gainLife(sum, sourceLKI, cause);
+            }
+        }
+
+        if (cause != null) {
+            // Remember objects as needed
+            final Card sourceLKI = game.getChangeZoneLKIInfo(cause.getHostCard());
+            final boolean rememberCard = cause.hasParam("RememberDamaged") || cause.hasParam("RememberDamagedCreature");
+            final boolean rememberPlayer = cause.hasParam("RememberDamaged") || cause.hasParam("RememberDamagedPlayer");
+            if (rememberCard || rememberPlayer) {
+                for (GameEntity e : damageMap.row(sourceLKI).keySet()) {
+                    if (e instanceof Card && rememberCard) {
+                        cause.getHostCard().addRemembered(e);
+                    } else if (e instanceof Player && rememberPlayer) {
+                        cause.getHostCard().addRemembered(e);
+                    }
+                }
             }
         }
 

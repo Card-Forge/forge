@@ -7,6 +7,7 @@ MciCode=ds
 Type=Expansion
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 Rare
+FatPack=6
 FoilAlwaysInCommonSlot=False
 ChaosDraftThemes=MIRRODIN
 ScryfallCode=DST

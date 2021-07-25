@@ -6,6 +6,8 @@ MciCode=frf
 Type=Expansion
 BoosterCovers=3
 Booster=10 Common:!land, 3 Uncommon, 1 RareMythic, 1 fromSheet("FRF Lands"), 0 fromSheet("FRF Basic Lands")
+FatPack=9
+FatPackExtraSlots=80 BasicLands
 ChaosDraftThemes=GRAVEYARD_MATTERS
 ScryfallCode=FRF
 

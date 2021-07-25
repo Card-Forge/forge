@@ -7,6 +7,8 @@ MciCode=ori
 Type=Core
 BoosterCovers=5
 Booster=10 Common:!fromSheet("ORI Sample Cards"), 3 Uncommon:!fromSheet("ORI Sample Cards"), 1 RareMythic:!fromSheet("ORI Sample Cards"), 1 BasicLand
+FatPack=9
+FatPackExtraSlots=80 BasicLands
 ChaosDraftThemes=CORE_SET
 ScryfallCode=ORI
 

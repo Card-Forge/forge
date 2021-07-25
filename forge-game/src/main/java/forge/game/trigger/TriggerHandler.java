@@ -335,7 +335,7 @@ public class TriggerHandler {
         waitingTriggers.clear();
     }
 
-    public void resetTurnTriggerState()    {
+    public void resetTurnTriggerState() {
         for(final Trigger t : activeTriggers) {
             t.resetTurnState();
         }

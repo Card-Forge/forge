@@ -48,11 +48,7 @@ public class StaticAbilityCastWithFlash {
         return false;
     }
 
-
-
-
     public static boolean commonParts(final StaticAbility stAb, final SpellAbility sa, final Card card, final Player activator) {
-
         if (!stAb.matchesValidParam("ValidCard", card)) {
             return false;
         }

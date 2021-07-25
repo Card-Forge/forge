@@ -240,7 +240,6 @@ public class StaticData {
     private void tryToLoadCard(String requestInfo){
         CardDb.CardRequest r = CardRequest.fromString(requestInfo);
         String cardName = r.cardName;
-        String setCode = r.edition;
         CardRules rules = cardReader.attemptToLoadCard(cardName, setCode);
         CardRules customRules = null;
         if (customCardReader != null) {
@@ -256,14 +255,6 @@ public class StaticData {
         if (customRules != null) {
             customCards.loadCard(cardName, customRules);
         }
-    }
-
-    // TODO Remove these in favor of them being associated to the Edition
-    /** @return {@link forge.util.storage.IStorage}<{@link forge.item.SealedProduct.Template}> */
-    public IStorage<FatPack.Template> getFatPacks() {
-        if (fatPacks == null)
-            fatPacks = new StorageBase<>("Fat packs", new FatPack.Template.Reader(blockDataFolder + "fatpacks.txt"));
-        return fatPacks;
     }
 
     /** @return {@link forge.util.storage.IStorage}<{@link forge.item.SealedProduct.Template}> */

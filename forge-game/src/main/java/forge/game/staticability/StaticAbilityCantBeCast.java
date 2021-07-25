@@ -163,7 +163,6 @@ public class StaticAbilityCantBeCast {
             return false;
         }
 
-
         if (stAb.hasParam("AffectedZone") && !card.isInZone(ZoneType.smartValueOf(stAb.getParam("AffectedZone")))) {
             return false;
         }

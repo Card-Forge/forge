@@ -839,7 +839,7 @@ public class VLobby implements ILobbyView {
     }
 
     private boolean isPlayerAI(final int playernum) {
-        if(playernum < activePlayersNum){
+        if (playernum < activePlayersNum) {
             return playerPanels.get(playernum).isAi();
         }
         return true;

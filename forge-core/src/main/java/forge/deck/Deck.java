@@ -257,7 +257,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
 
             // I used to store planes and schemes under sideboard header, so this will assign them to a correct section
             IPaperCard sample = pool.get(0);
-            if (sample != null && ( sample.getRules().getType().isPlane() || sample.getRules().getType().isPhenomenon()))
+            if (sample != null && (sample.getRules().getType().isPlane() || sample.getRules().getType().isPhenomenon()))
                 sec = DeckSection.Planes;
             if (sample != null && sample.getRules().getType().isScheme())
                 sec = DeckSection.Schemes;
@@ -331,7 +331,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
                 }
             }
             // == 3. Last step, update the pool!
-            // Get Reference release date as two days AFTER the actual release date 
+            // Get Reference release date as two days AFTER the actual release date
             // of the reference date so that in case, the reference date will be counted in too!
             Calendar cal = Calendar.getInstance();
             cal.setTime(referenceEdition.getDate());
@@ -339,7 +339,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             Date releaseDateReferenceEdition = cal.getTime();
 
             CardPool newPool = new CardPool();
-            for(Entry<PaperCard, Integer> cp : pool) {
+            for (Entry<PaperCard, Integer> cp : pool) {
                 PaperCard card = cp.getKey();
                 int count = cp.getValue();
                 if (!cardNamesWithNoEditionInSection.contains(card.getName()))

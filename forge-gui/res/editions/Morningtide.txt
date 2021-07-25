@@ -7,6 +7,8 @@ MciCode=mt
 Type=Expansion
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 Rare
+FatPack=6
+FatPackExtraSlots=40 BasicLands LRW
 ScryfallCode=MOR
 
 [cards]

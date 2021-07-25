@@ -535,14 +535,12 @@ public abstract class Trigger extends TriggerReplacementBase {
         return this.numberTurnActivations;
     }
 
-    public void triggerRun()
-    {
+    public void triggerRun() {
         this.numberTurnActivations++;
     }
 
     // Resets the state stored each turn for per-turn and per-instance restriction
-    public void resetTurnState()
-    {
+    public void resetTurnState() {
         this.numberTurnActivations = 0;
     }
 

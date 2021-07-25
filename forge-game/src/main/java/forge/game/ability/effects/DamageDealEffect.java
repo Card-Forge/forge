@@ -166,8 +166,7 @@ public class DamageDealEffect extends DamageBaseEffect {
 
         final CardCollection untargetedCards = CardUtil.getRadiance(sa);
 
-        final boolean remember = sa.hasParam("RememberDamaged");
-
+        //Remember params from this effect have been moved to dealDamage in GameAction
         boolean usedDamageMap = true;
         CardDamageMap damageMap = sa.getDamageMap();
         CardDamageMap preventMap = sa.getPreventMap();
@@ -251,10 +250,6 @@ public class DamageDealEffect extends DamageBaseEffect {
                 if (unTgtC.isInPlay()) {
                     internalDamageDeal(sa, sourceLKI, unTgtC, dmg, damageMap);
                 }
-            }
-
-            if (remember) {
-                source.addRemembered(damageMap.row(sourceLKI).keySet());
             }
         }
         if (!usedDamageMap) {
