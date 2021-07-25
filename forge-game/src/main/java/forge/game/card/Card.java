@@ -6342,7 +6342,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
 
         if (isFaceDown() && isInZone(ZoneType.Exile)) {
-            for (final SpellAbility sa : getState(CardStateName.Original).getSpellAbilities()) {
+            for (final SpellAbility sa : oState.getSpellAbilities()) {
                 abilities.addAll(GameActionUtil.getAlternativeCosts(sa, player));
             }
         }
