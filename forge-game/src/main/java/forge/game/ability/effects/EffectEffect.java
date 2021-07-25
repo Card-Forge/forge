@@ -9,6 +9,7 @@ import com.google.common.collect.Lists;
 
 import forge.GameCommand;
 import forge.ImageKeys;
+import forge.card.CardRarity;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityFactory;
@@ -123,6 +124,8 @@ public class EffectEffect extends SpellAbilityEffect {
         }
 
         String image;
+        String set = hostCard.getSetCode().toLowerCase();
+        StringBuilder imageSet = new StringBuilder();
         if (sa.hasParam("Image")) {
             image = ImageKeys.getTokenKey(sa.getParam("Image"));
         } else if (name.startsWith("Emblem")) { // try to get the image from name
@@ -135,11 +138,17 @@ public class EffectEffect extends SpellAbilityEffect {
         } else { // use host image
             image = hostCard.getImageKey();
         }
+        imageSet.append(image).append("_").append(set);
+        image = imageSet.toString();
 
         for (Player controller : effectOwner) {
             final Card eff = createEffect(sa, controller, name, image);
             eff.setSetCode(sa.getHostCard().getSetCode());
-            eff.setRarity(sa.getHostCard().getRarity());
+            if (name.startsWith("Emblem")) {
+                eff.setRarity(CardRarity.Common);
+            } else {
+                eff.setRarity(sa.getHostCard().getRarity());
+            }
 
             // Abilities and triggers work the same as they do for Token
             // Grant abilities
