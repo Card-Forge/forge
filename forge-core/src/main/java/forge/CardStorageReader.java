@@ -17,39 +17,20 @@
  */
 package forge;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.concurrent.Callable;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
-
-import org.apache.commons.lang3.time.StopWatch;
-
 import com.google.common.io.Files;
-
 import forge.card.CardRules;
 import forge.util.BuildInfo;
 import forge.util.FileUtil;
 import forge.util.Localizer;
 import forge.util.ThreadUtil;
+import org.apache.commons.lang3.time.StopWatch;
+
+import java.io.*;
+import java.nio.charset.Charset;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 /**
  * <p>
@@ -218,7 +199,7 @@ public class CardStorageReader {
         return file;
     }
 
-    public final CardRules attemptToLoadCard(String cardName, String setCode) {
+    public final CardRules attemptToLoadCard(String cardName) {
         String transformedName = transformName(cardName);
         CardRules rules = null;
 
