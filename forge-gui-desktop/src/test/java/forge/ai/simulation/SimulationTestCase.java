@@ -1,23 +1,14 @@
 package forge.ai.simulation;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
-
 import forge.GuiDesktop;
 import forge.StaticData;
 import forge.ai.AIOption;
 import forge.ai.LobbyPlayerAi;
 import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.deck.Deck;
-import forge.game.Game;
-import forge.game.GameRules;
-import forge.game.GameStage;
-import forge.game.GameType;
-import forge.game.Match;
+import forge.game.*;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
@@ -30,6 +21,10 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import junit.framework.TestCase;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class SimulationTestCase extends TestCase {
     private static boolean initialized = false;
@@ -122,7 +117,7 @@ public class SimulationTestCase extends TestCase {
     protected Card createCard(String name, Player p) {
         IPaperCard paperCard = FModel.getMagicDb().getCommonCards().getCard(name);
         if (paperCard == null) {
-            StaticData.instance().attemptToLoadCard(name, "");
+            StaticData.instance().attemptToLoadCard(name);
             paperCard = FModel.getMagicDb().getCommonCards().getCard(name);
         }
         return Card.fromPaperCard(paperCard, p);

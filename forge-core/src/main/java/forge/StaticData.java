@@ -2,7 +2,6 @@ package forge;
 
 import com.google.common.base.Predicate;
 import forge.card.CardDb;
-import forge.card.CardDb.CardRequest;
 import forge.card.CardEdition;
 import forge.card.CardRules;
 import forge.card.PrintSheet;
@@ -204,7 +203,7 @@ public class StaticData {
         PaperCard card = commonCards.getCard(cardName, setCode, artIndex);
         boolean isCustom = false;
         if (card == null) {
-            attemptToLoadCard(cardName, setCode);
+            attemptToLoadCard(cardName);
             card = commonCards.getCard(cardName, setCode, artIndex);
         }
         if (card == null) {
@@ -229,21 +228,10 @@ public class StaticData {
     }
 
     public void attemptToLoadCard(String cardName){
-        tryToLoadCard(cardName);
-    }
-
-    public void attemptToLoadCard(String encodedCardName, String setCode) {
-        String requestInfo = CardRequest.compose(encodedCardName, setCode);
-        tryToLoadCard(requestInfo);
-    }
-
-    private void tryToLoadCard(String requestInfo){
-        CardDb.CardRequest r = CardRequest.fromString(requestInfo);
-        String cardName = r.cardName;
-        CardRules rules = cardReader.attemptToLoadCard(cardName, setCode);
+        CardRules rules = cardReader.attemptToLoadCard(cardName);
         CardRules customRules = null;
         if (customCardReader != null) {
-            customRules = customCardReader.attemptToLoadCard(cardName, setCode);
+            customRules = customCardReader.attemptToLoadCard(cardName);
         }
         if (rules != null) {
             if (rules.isVariant()) {
