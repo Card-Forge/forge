@@ -4,6 +4,6 @@ Types:Creature Giant Shaman
 PT:3/3
 K:Bloodthirst:3
 A:AB$ DealDamage | Cost$ 1 Sac<1/CARDNAME> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to its power to any target.
-SVar:X:Count$CardPower
+SVar:X:Sacrificed$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skarrgan_skybreaker.jpg
 Oracle:Bloodthirst 3 (If an opponent was dealt damage this turn, this creature enters the battlefield with three +1/+1 counters on it.)\n{1}, Sacrifice Skarrgan Skybreaker: It deals damage equal to its power to any target.
