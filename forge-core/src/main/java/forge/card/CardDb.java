@@ -188,7 +188,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
     }
 
-    public CardDb(Map<String, CardRules> rules, CardEdition.Collection editions0, List<String> filteredCards, String preferredCardArt) {
+    public CardDb(Map<String, CardRules> rules, CardEdition.Collection editions0, List<String> filteredCards, String cardArtPreference) {
         this.filtered = filteredCards;
         this.rulesByName = rules;
         this.editions = editions0;
@@ -210,7 +210,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 }
             }
         }
-        setCardArtPreference(preferredCardArt);
+        setCardArtPreference(cardArtPreference);
     }
 
     private void addSetCard(CardEdition e, CardInSet cis, CardRules cr) {
@@ -291,7 +291,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             if (!contains(cr.getName())) {
                 if (upcomingSet != null) {
                     addCard(new PaperCard(cr, upcomingSet.getCode(), CardRarity.Unknown));
-                } else if (enableUnknownCards) {
+                } else if (enableUnknownCards && !this.filtered.contains(cr.getName())) {
                     System.err.println("The card " + cr.getName() + " was not assigned to any set. Adding it to UNKNOWN set... to fix see res/editions/ folder. ");
                     addCard(new PaperCard(cr, CardEdition.UNKNOWN.getCode(), CardRarity.Special));
                 }
