@@ -7,6 +7,7 @@ import com.google.common.collect.Sets;
 
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
+import forge.game.card.CardUtil;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
 
@@ -53,7 +54,7 @@ public class TriggerDamageDoneOnce extends Trigger {
         @SuppressWarnings("unchecked")
         final Map<Card, Integer> damageMap = (Map<Card, Integer>) runParams.get(AbilityKey.DamageMap);
 
-        sa.setTriggeringObject(AbilityKey.Target, runParams.get(AbilityKey.DamageTarget));
+        sa.setTriggeringObject(AbilityKey.Target, CardUtil.getLKICopy((Card)runParams.get(AbilityKey.DamageTarget)));
         sa.setTriggeringObject(AbilityKey.Sources, getDamageSources(damageMap));
         sa.setTriggeringObject(AbilityKey.DamageAmount, getDamageAmount(damageMap));
     }
