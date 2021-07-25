@@ -19,6 +19,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.SpellPermanent;
 import forge.game.trigger.TriggerType;
+import forge.game.zone.Zone;
 import forge.util.Localizer;
 
 public class CounterEffect extends SpellAbilityEffect {
@@ -136,7 +137,7 @@ public class CounterEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            removeFromStack(tgtSA, sa, si);
+            removeFromStack(tgtSA, sa, si, table);
 
             // Destroy Permanent may be able to be turned into a SubAbility
             if (tgtSA.isAbility() && sa.hasParam("DestroyPermanent")) {
@@ -171,9 +172,11 @@ public class CounterEffect extends SpellAbilityEffect {
      *            a {@link forge.game.spellability.SpellAbilityStackInstance}
      *            object.
      */
-    private static void removeFromStack(final SpellAbility tgtSA,
-            final SpellAbility srcSA, final SpellAbilityStackInstance si) {
+    private static void removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbilityStackInstance si, CardZoneTable triggerList) {
         final Game game = tgtSA.getActivatingPlayer().getGame();
+        Card movedCard = null;
+        final Zone originZone = tgtSA.getHostCard().getZone();
+
         // Run any applicable replacement effects. 
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(tgtSA.getHostCard());
         repParams.put(AbilityKey.TgtSA, tgtSA);
@@ -201,26 +204,26 @@ public class CounterEffect extends SpellAbilityEffect {
             // For Ability-targeted counterspells - do not move it anywhere,
             // even if Destination$ is specified.
         } else if (destination.equals("Graveyard")) {
-            game.getAction().moveToGraveyard(tgtSA.getHostCard(), srcSA, params);
+            movedCard = game.getAction().moveToGraveyard(tgtSA.getHostCard(), srcSA, params);
         } else if (destination.equals("Exile")) {
-            game.getAction().exile(tgtSA.getHostCard(), srcSA, params);
+            movedCard = game.getAction().exile(tgtSA.getHostCard(), srcSA, params);
         } else if (destination.equals("TopOfLibrary")) {
-            game.getAction().moveToLibrary(tgtSA.getHostCard(), srcSA, params);
+            movedCard = game.getAction().moveToLibrary(tgtSA.getHostCard(), srcSA, params);
         } else if (destination.equals("Hand")) {
-            game.getAction().moveToHand(tgtSA.getHostCard(), srcSA, params);
+            movedCard = game.getAction().moveToHand(tgtSA.getHostCard(), srcSA, params);
         } else if (destination.equals("Battlefield")) {
             if (tgtSA instanceof SpellPermanent) {
                 Card c = tgtSA.getHostCard();
                 c.setController(srcSA.getActivatingPlayer(), 0);
-                game.getAction().moveToPlay(c, srcSA.getActivatingPlayer(), srcSA, params);
+                movedCard = game.getAction().moveToPlay(c, srcSA.getActivatingPlayer(), srcSA, params);
             } else {
-                Card c = game.getAction().moveToPlay(tgtSA.getHostCard(), srcSA.getActivatingPlayer(), srcSA, params);
-                c.setController(srcSA.getActivatingPlayer(), 0);
+                movedCard = game.getAction().moveToPlay(tgtSA.getHostCard(), srcSA.getActivatingPlayer(), srcSA, params);
+                movedCard.setController(srcSA.getActivatingPlayer(), 0);
             }
         } else if (destination.equals("BottomOfLibrary")) {
-            game.getAction().moveToBottomOfLibrary(tgtSA.getHostCard(), srcSA, params);
+            movedCard = game.getAction().moveToBottomOfLibrary(tgtSA.getHostCard(), srcSA, params);
         } else if (destination.equals("ShuffleIntoLibrary")) {
-            game.getAction().moveToBottomOfLibrary(tgtSA.getHostCard(), srcSA, params);
+            movedCard = game.getAction().moveToBottomOfLibrary(tgtSA.getHostCard(), srcSA, params);
             tgtSA.getHostCard().getController().shuffle(srcSA);
         } else {
             throw new IllegalArgumentException("AbilityFactory_CounterMagic: Invalid Destination argument for card "
@@ -232,10 +235,13 @@ public class CounterEffect extends SpellAbilityEffect {
         runParams.put(AbilityKey.Cause, srcSA.getHostCard());
         runParams.put(AbilityKey.CounteredSA, tgtSA);
         game.getTriggerHandler().runTrigger(TriggerType.Countered, runParams, false);
-        
 
         if (!tgtSA.isAbility()) {
             game.getGameLog().add(GameLogEntryType.ZONE_CHANGE, "Send countered spell to " + destination);
+        }
+
+        if (originZone != null && movedCard != null) {
+            triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), movedCard);
         }
     }
 
