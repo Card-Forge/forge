@@ -58,7 +58,7 @@ public abstract class SealedProduct implements InventoryItemFromSet {
     }
 
     public SealedProduct(String name0, Template boosterData) {
-        if (null == name0)       { throw new IllegalArgumentException("name0 must not be null");       }
+        if (null == name0)       { throw new IllegalArgumentException("name0 must not be null"); }
         if (null == boosterData) {
             throw new IllegalArgumentException("boosterData for " + name0 + " must not be null");
         }
@@ -193,7 +193,6 @@ public abstract class SealedProduct implements InventoryItemFromSet {
         public String toString() {
             StringBuilder s = new StringBuilder();
 
-
             s.append("consisting of ");
             for(Pair<String, Integer> p : slots) {
                 s.append(p.getRight()).append(" ").append(p.getLeft()).append(", ");
@@ -236,9 +235,9 @@ public abstract class SealedProduct implements InventoryItemFromSet {
             public static List<Pair<String, Integer>> parseSlots(String data) {
                 final String[] dataz = TextUtil.splitWithParenthesis(data, ',');
                 List<Pair<String, Integer>> slots = new ArrayList<>();
-                for(String slotDesc : dataz) {
+                for (String slotDesc : dataz) {
                     String[] kv = TextUtil.splitWithParenthesis(slotDesc, ' ', 2);
-                    slots.add(ImmutablePair.of(kv[1], Integer.parseInt(kv[0])));
+                    slots.add(ImmutablePair.of(kv[1].replace(";", ","), Integer.parseInt(kv[0])));
                 }
                 return slots;
             }
