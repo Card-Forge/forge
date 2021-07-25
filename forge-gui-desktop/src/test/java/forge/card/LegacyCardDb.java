@@ -14,6 +14,13 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 
+/**
+ * Test Class (only for test purposes) to compare previous method implementations
+ * with the new refactored ones. This class has been updated to the latest version
+ * available of methods' implementation before the change is going to be submitted.
+ * This is also a useful way to keep a backlog of changes whenever major
+ * API changes like this MR are going to happen.
+ */
 public class LegacyCardDb {
     public CardEdition.Collection editions;
     public ListMultimap<String, PaperCard> allCardsByName = Multimaps.newListMultimap(new TreeMap<>(String.CASE_INSENSITIVE_ORDER), CollectionSuppliers.arrayLists());
@@ -94,10 +101,6 @@ public class LegacyCardDb {
 
     private ListMultimap<String, PaperCard> getAllCardsByName() {
         return allCardsByName;
-    }
-
-    public Collection<PaperCard> getAllCards() {
-        return Collections.unmodifiableCollection(getAllCardsByName().values());
     }
 
     public List<PaperCard> getAllCards(String cardName) {
