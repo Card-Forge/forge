@@ -88,6 +88,19 @@ public class SwingImageFetcher extends ImageFetcher {
                     break;
                 } catch (IOException e) {
                     System.err.println("Failed to download card [" + destPath + "] image: " + e.getMessage());
+                    if (urlToDownload.contains("tokens")) {
+                        int setIndex = urlToDownload.lastIndexOf('_');
+                        int typeIndex = urlToDownload.lastIndexOf('.');
+                        String setlessFilename = urlToDownload.substring(0, setIndex);
+                        String extension = urlToDownload.substring(typeIndex);
+                        urlToDownload = setlessFilename+extension;
+                        try {
+                            doFetch(tofullBorder(urlToDownload));
+                            break;
+                        } catch (IOException t) {
+                            System.err.println("Failed to download setless token [" + destPath + "]: " + e.getMessage());
+                        }
+                    }
                 }
             }
         }
