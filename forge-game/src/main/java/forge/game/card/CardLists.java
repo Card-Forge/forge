@@ -122,7 +122,7 @@ public class CardLists {
      */
     public static void sortByCmcDesc(final List<Card> list) {
         Collections.sort(list, CmcComparatorInv);
-    } // sortByCmcDesc
+    }
 
     /**
      * <p>
@@ -133,7 +133,7 @@ public class CardLists {
      */
     public static void sortByToughnessAsc(final List<Card> list) {
         Collections.sort(list, ToughnessComparator);
-    } // sortByToughnessAsc()
+    }
 
     /**
      * <p>
@@ -144,7 +144,7 @@ public class CardLists {
      */
     public static void sortByToughnessDesc(final List<Card> list) {
         Collections.sort(list, ToughnessComparatorInv);
-    } // sortByToughnessDesc()
+    }
 
     /**
      * <p>
@@ -155,7 +155,7 @@ public class CardLists {
      */
     public static void sortByPowerAsc(final List<Card> list) {
         Collections.sort(list, PowerComparator);
-    } // sortAttackLowFirst()
+    }
 
     // the higher the attack the better
     /**
@@ -167,7 +167,7 @@ public class CardLists {
      */
     public static void sortByPowerDesc(final List<Card> list) {
         Collections.sort(list, Collections.reverseOrder(PowerComparator));
-    } // sortAttack()
+    }
 
 
     /**
