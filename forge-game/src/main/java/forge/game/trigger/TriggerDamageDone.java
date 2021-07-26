@@ -69,6 +69,15 @@ public class TriggerDamageDone extends Trigger {
             }
         }
 
+        if (hasParam("Condition")) {
+            if (getParam("Condition").equalsIgnoreCase("TargetIsTriggerRemembered")) {
+                final Object target = runParams.get(AbilityKey.DamageTarget);
+                if (!this.getTriggerRemembered().contains(target)) {
+                    return false;
+                }
+            }
+        }
+
         if (hasParam("DamageAmount")) {
             final String fullParam = getParam("DamageAmount");
 
