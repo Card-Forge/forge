@@ -205,7 +205,8 @@ public class ImageCache {
             if (pc != null) {
                 original = new BufferedImage(480, 680, BufferedImage.TYPE_INT_ARGB);
                 FCardImageRenderer.drawCardImage(original.createGraphics(), pc, altState, 480, 680);
-                _CACHE.put(imageKey, original);
+                if (!isPreferenceEnabled(ForgePreferences.FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER))
+                    _CACHE.put(imageKey, original);
             } else {
                 original = _defaultImage;
             }
