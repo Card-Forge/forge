@@ -596,7 +596,7 @@ public class PumpAi extends PumpAiBase {
         }
 
         if ("Snapcaster".equals(sa.getParam("AILogic"))) {
-            if (!ComputerUtil.targetPlayableSpellCard(ai, list, sa, false)) {
+            if (!ComputerUtil.targetPlayableSpellCard(ai, list, sa, false, false)) {
                 return false;
             }
         }
