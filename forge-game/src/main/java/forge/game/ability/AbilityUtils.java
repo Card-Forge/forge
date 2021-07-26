@@ -1271,6 +1271,9 @@ public class AbilityUtils {
                 }
             }
         }
+        else if (defined.equals("Caster") && sa.getHostCard().wasCast()) {
+            players.add((sa.getHostCard().getCastSA().getActivatingPlayer()));
+        }
         else if (defined.equals("ActivePlayer")) {
             players.add(game.getPhaseHandler().getPlayerTurn());
         }
