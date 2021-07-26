@@ -9,10 +9,14 @@ import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.text.BreakIterator;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
-import javax.swing.JEditorPane;
+import java.util.Locale;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -24,7 +28,9 @@ import forge.game.card.CardView.CardStateView;
 import forge.gui.card.CardDetailUtil;
 import forge.gui.card.CardDetailUtil.DetailColors;
 import forge.item.PaperCard;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
+import forge.model.FModel;
 import forge.toolbox.CardFaceSymbols;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinIcon;
@@ -34,14 +40,21 @@ public class FCardImageRenderer {
     private static final float BASE_IMAGE_WIDTH = 480;
     private static final float BASE_IMAGE_HEIGHT = 680;
     private static float MANA_SYMBOL_SIZE, PT_BOX_WIDTH, HEADER_PADDING, BORDER_THICKNESS;
-    private static Font NAME_FONT, TYPE_FONT, TEXT_FONT, PT_FONT;
-    private static FontMetrics NAME_METRICS, TYPE_METRICS, TEXT_METRICS, PT_METRICS;
+    private static Font NAME_FONT, TYPE_FONT, TEXT_FONT, REMINDER_FONT, PT_FONT;
+    private static FontMetrics NAME_METRICS, TYPE_METRICS, TEXT_METRICS, REMINDER_METRICS, PT_METRICS;
     private static float prevImageWidth, prevImageHeight;
     private static final float BLACK_BORDER_THICKNESS_RATIO = 0.021f;
     private static final float NAME_BOX_TINT = 0.2f;
     private static final float TEXT_BOX_TINT = 0.1f;
     private static final float PT_BOX_TINT = 0.2f;
     private static final float CARD_ART_RATIO = 1.32f;
+
+    private static Locale locale;
+    private static BreakIterator boundary;
+    private static Pattern linebreakPattern;
+    private static Pattern reminderPattern;
+    private static Pattern symbolPattern;
+    private static final Map<Font, Font[]> shrinkFonts = new HashMap<>();
 
     private static Color tintColor(Color source, Color tint, float alpha) {
         float r = (tint.getRed() - source.getRed()) * alpha + source.getRed();
@@ -83,11 +96,26 @@ public class FCardImageRenderer {
         }
     }
 
+    private static Font getShrinkFont(Font orgFont, int newSize) {
+        Font font = shrinkFonts.get(orgFont)[newSize];
+        if (font == null) {
+            font = orgFont.deriveFont((float)newSize);
+            shrinkFonts.get(orgFont)[newSize] = font;
+        }
+        return font;
+    }
+
     private static void updateStaticFields(Graphics2D g, float w, float h) {
         if (w == prevImageWidth && h == prevImageHeight) {
             //for performance sake, only update static fields if card image size is different than previous rendered card
             return;
         }
+
+        locale = new Locale(FModel.getPreferences().getPref(FPref.UI_LANGUAGE));
+        boundary = BreakIterator.getLineInstance(locale);
+        linebreakPattern = Pattern.compile("(\r\n\r\n)|(\n)");
+        reminderPattern = Pattern.compile("\\((.+?)\\)");
+        symbolPattern = Pattern.compile("\\{([A-Z0-9]+)\\}|\\{([A-Z0-9]+)/([A-Z0-9]+)\\}");
 
         float ratio = Math.min(w / BASE_IMAGE_WIDTH, h / BASE_IMAGE_HEIGHT);
 
@@ -96,13 +124,25 @@ public class FCardImageRenderer {
         HEADER_PADDING = 7 * ratio;
         NAME_FONT = new Font(Font.SERIF, Font.BOLD, Math.round(MANA_SYMBOL_SIZE));
         TYPE_FONT = new Font(Font.SERIF, Font.BOLD, Math.round(MANA_SYMBOL_SIZE * 0.8f));
-        TEXT_FONT = new Font(Font.SERIF, Font.PLAIN, Math.round(MANA_SYMBOL_SIZE * 0.7f));
+        if ("ja-JP".equals(FModel.getPreferences().getPref(FPref.UI_LANGUAGE)) || "zh-CN".equals(FModel.getPreferences().getPref(FPref.UI_LANGUAGE))) {
+            TEXT_FONT = new Font(Font.SANS_SERIF, Font.PLAIN, Math.round(MANA_SYMBOL_SIZE * 0.93f));
+            REMINDER_FONT = new Font(Font.SANS_SERIF, Font.PLAIN, Math.round(MANA_SYMBOL_SIZE * 0.93f) - 2);
+        } else {
+            TEXT_FONT = new Font(Font.SERIF, Font.PLAIN, Math.round(MANA_SYMBOL_SIZE * 0.93f));
+            REMINDER_FONT = new Font(Font.SERIF, Font.ITALIC, Math.round(MANA_SYMBOL_SIZE * 0.93f));
+        }
         PT_FONT = NAME_FONT;
         NAME_METRICS = g.getFontMetrics(NAME_FONT);
         TYPE_METRICS = g.getFontMetrics(TYPE_FONT);
         TEXT_METRICS = g.getFontMetrics(TEXT_FONT);
+        REMINDER_METRICS = g.getFontMetrics(REMINDER_FONT);
         PT_METRICS = NAME_METRICS;
         BORDER_THICKNESS = Math.max(2 * ratio, 1f); //don't let border go below 1
+
+        shrinkFonts.put(NAME_FONT, new Font[NAME_FONT.getSize()]);
+        shrinkFonts.put(TYPE_FONT, new Font[TYPE_FONT.getSize()]);
+        shrinkFonts.put(TEXT_FONT, new Font[TEXT_FONT.getSize()]);
+        shrinkFonts.put(REMINDER_FONT, new Font[REMINDER_FONT.getSize()]);
 
         prevImageWidth = w;
         prevImageHeight = h;
@@ -155,7 +195,7 @@ public class FCardImageRenderer {
 
         //draw text box
         Color[] textBoxColors = tintColors(Color.WHITE, colors, TEXT_BOX_TINT);
-        drawTextBox(g, card, state, textBoxColors, x + artInset, textY, w - 2 * artInset, textBoxHeight);
+        drawTextBox(g, card, state, textBoxColors, x + artInset, textY, w - 2 * artInset, textBoxHeight, ptBoxHeight > 0);
 
         //draw header containing name and mana cost
         Color[] headerColors = tintColors(Color.WHITE, colors, NAME_BOX_TINT);
@@ -206,16 +246,21 @@ public class FCardImageRenderer {
         g.setPaint(oldPaint);
     }
 
-    private static void drawVerticallyCenteredString(Graphics2D g, String text, Rectangle area, Font font, final FontMetrics fontMetrics) {
-        Font oldFont = g.getFont();
+    private static void drawVerticallyCenteredString(Graphics2D g, String text, Rectangle area, Font font, FontMetrics fontMetrics) {
+        Font originalFont = font;
+
+        // Shrink font if the text is too long
+        while (fontMetrics.stringWidth(text) > area.width) {
+            int newSize = font.getSize() - 1;
+            font = getShrinkFont(originalFont, newSize);
+            fontMetrics = g.getFontMetrics(font);
+        }
 
         int x = area.x;
         int y = area.y + (area.height - fontMetrics.getHeight()) / 2 + fontMetrics.getAscent();
 
         g.setFont(font);
         g.drawString(text, x, y);
-        g.setFont(oldFont);
-
     }
 
     private static void drawHeader(Graphics2D g, CardView card, CardStateView state, Color[] colors, float x, float y, float w, float h) {
@@ -293,7 +338,7 @@ public class FCardImageRenderer {
             TYPE_FONT, TYPE_METRICS);
     }
 
-    private static void drawTextBox(Graphics2D g, CardView card, CardStateView state, Color[] colors, float x, float y, float w, float h) {
+    private static void drawTextBox(Graphics2D g, CardView card, CardStateView state, Color[] colors, float x, float y, float w, float h, boolean hasPTBox) {
         fillColorBackground(g, colors, x, y, w, h);
         g.setStroke(new BasicStroke(BORDER_THICKNESS));
         g.setColor(Color.BLACK);
@@ -339,14 +384,7 @@ public class FCardImageRenderer {
             float padding = TEXT_METRICS.getAscent() * 0.25f;
             x += padding;
             w -= 2 * padding;
-            String textShow = text.replaceAll("(\r\n\r\n)|(\n)", "<br>");
-            textShow = FSkin.encodeSymbols(textShow, true);
-            JEditorPane textArea = new JEditorPane("text/html", textShow);
-            textArea.putClientProperty(JEditorPane.HONOR_DISPLAY_PROPERTIES, Boolean.TRUE);
-            textArea.setOpaque(false);
-            textArea.setFont(TEXT_FONT);
-            textArea.setSize(Math.round(w), Math.round(h));
-            textArea.print(g.create(Math.round(x), Math.round(y), Math.round(w), Math.round(h)));
+            drawTextBoxText(g, text, Math.round(x), Math.round(y), Math.round(w), Math.round(h), hasPTBox);
         }
     }
 
@@ -396,6 +434,240 @@ public class FCardImageRenderer {
                 new Rectangle(Math.round(x), Math.round(y), Math.round(w), Math.round(h)),
                 PT_FONT, PT_METRICS);
             x += pieceWidths[i];
+        }
+    }
+
+    private static abstract class Piece {
+        protected final boolean isReminder;
+
+        protected Piece(boolean isReminder) {
+            this.isReminder = isReminder;
+        }
+
+        public abstract void restart();
+        public abstract int getNextWidth(FontMetrics txMetrics, FontMetrics rmMetrics);
+        public abstract void drawPrev(Graphics2D g, int x, int y, Font txFont, Font rmFont, FontMetrics txMetrics);
+    }
+
+    private static class TextPiece extends Piece {
+        private String text;
+        private int index;
+        private List<Integer> boundaryList;
+
+        private void buildBoundaryList() {
+            boundaryList = new ArrayList<>();
+            boundary.setText(text);
+            boundaryList.add(boundary.first());
+            for (int next = boundary.next(); next != BreakIterator.DONE; next = boundary.next()) {
+                boundaryList.add(next);
+            }
+        }
+
+        public TextPiece(String text, boolean isReminder) {
+            super(isReminder);
+            this.text = text;
+            buildBoundaryList();
+        }
+
+        public void restart()
+        {
+            index = 0;
+        }
+
+        public int getNextWidth(FontMetrics txMetrics, FontMetrics rmMetrics) {
+            ++index;
+            if (index == boundaryList.size()) {
+                return -1;
+            }
+            String subtext = text.substring(boundaryList.get(index - 1), boundaryList.get(index));
+            if (isReminder) {
+                return rmMetrics.stringWidth(subtext);
+            }
+            return txMetrics.stringWidth(subtext);
+        }
+
+        public void drawPrev(Graphics2D g, int x, int y, Font txFont, Font rmFont, FontMetrics txMetrics) {
+            int ascent = txMetrics.getAscent();
+            String subtext = text.substring(boundaryList.get(index - 1), boundaryList.get(index));
+            if (isReminder) {
+                g.setFont(rmFont);
+            } else {
+                g.setFont(txFont);
+            }
+            g.drawString(subtext, x, y + ascent);
+        }
+    }
+
+    private static class SymbolPiece extends Piece {
+        private List<String> symbols;
+        private boolean restarted;
+
+        public SymbolPiece(List<String> symbols) {
+            super(false);
+            this.symbols = symbols;
+            restarted = false;
+        }
+
+        public void restart() {
+            restarted = true;
+        }
+
+        public int getNextWidth(FontMetrics txMetrics, FontMetrics rmMetrics) {
+            if (restarted) {
+                int offset = Math.round(txMetrics.getAscent() * 0.8f);
+                restarted = false;
+                return offset * symbols.size();
+            }
+            return -1;
+        }
+
+        public void drawPrev(Graphics2D g, int x, int y, Font txFont, Font rmFont, FontMetrics txMetrics) {
+            int xoffset = Math.round(txMetrics.getAscent() * 0.8f);
+            int yoffset = txMetrics.getAscent() - xoffset + 1;
+            for (String s : symbols) {
+                CardFaceSymbols.drawSymbol(s, g, x, y + yoffset, xoffset - 1);
+                x += xoffset;
+            }
+        }
+    }
+
+    private static class Paragraph {
+        private String text;
+        private List<Piece> pieces;
+
+        private void parseSymbols(String subtext, boolean isReminder) {
+            List<String> symbols = new ArrayList<>();
+            Matcher sbMatcher = symbolPattern.matcher(subtext);
+            int parsed = 0;
+            while (sbMatcher.find()) {
+                if (sbMatcher.start() > parsed) {
+                    if (!symbols.isEmpty()) {
+                        pieces.add(new SymbolPiece(symbols));
+                        symbols = new ArrayList<>();
+                    }
+                    pieces.add(new TextPiece(subtext.substring(parsed, sbMatcher.start()), isReminder));
+                }
+                symbols.add(sbMatcher.group(1) != null ? sbMatcher.group(1) : sbMatcher.group(2) + sbMatcher.group(3));
+                parsed = sbMatcher.end();
+            }
+            if (!symbols.isEmpty()) {
+                pieces.add(new SymbolPiece(symbols));
+            }
+            if (parsed < subtext.length())
+                pieces.add(new TextPiece(subtext.substring(parsed, subtext.length()), isReminder));
+        }
+
+        private void buildPieceList() {
+            pieces = new ArrayList<>();
+            Matcher rmMatcher = reminderPattern.matcher(text);
+            int parsed = 0;
+            while (rmMatcher.find()) {
+                // Non-reminder text
+                if (rmMatcher.start() > parsed) {
+                    parseSymbols(text.substring(parsed, rmMatcher.start()), false);
+                }
+                parseSymbols(text.substring(rmMatcher.start(), rmMatcher.end()), true);
+                parsed = rmMatcher.end();
+            }
+            // Remaining text
+            if (parsed < text.length())
+                parseSymbols(text.substring(parsed, text.length()), false);
+        }
+
+        public Paragraph(String text) {
+            this.text = text;
+            buildPieceList();
+        }
+
+        public int calculateLines(int width, FontMetrics txMetrics, FontMetrics rmMetrics, boolean hasPTBox) {
+            int pos = 0;
+            int lines = 1;
+            for (Piece p : pieces) {
+                p.restart();
+                int w = p.getNextWidth(txMetrics, rmMetrics);
+                while (w != -1) {
+                    if (pos + w > width) {
+                        ++lines;
+                        pos = 0;
+                    }
+                    pos += w;
+                    w = p.getNextWidth(txMetrics, rmMetrics);
+                }
+            }
+            // If last line will overlapp with PT box, add one more line.
+            if (hasPTBox && pos >= width - PT_BOX_WIDTH)
+                ++lines;
+            return lines;
+        }
+
+        public int drawPieces(Graphics2D g, int x, int y, int width, int lineHeight,
+                Font txFont, FontMetrics txMetrics, Font rmFont, FontMetrics rmMetrics) {
+            int pos = 0;
+            int lines = 1;
+            for (Piece p : pieces) {
+                p.restart();
+                int w = p.getNextWidth(txMetrics, rmMetrics);
+                while (w != -1) {
+                    if (pos + w > width) {
+                        ++lines;
+                        pos = 0;
+                        y += lineHeight;
+                    }
+                    p.drawPrev(g, x + pos, y, txFont, rmFont, txMetrics);
+                    pos += w;
+                    w = p.getNextWidth(txMetrics, rmMetrics);
+                }
+            }
+            return lines * lineHeight;
+        }
+    }
+
+    private static void drawTextBoxText(Graphics2D g, final String text, int x, int y, int w, int h, boolean hasPTBox) {
+        String [] paragraphs = linebreakPattern.split(text);
+        List<Paragraph> pgList = new ArrayList<>();
+        for (String pg : paragraphs) {
+            pgList.add(new Paragraph(pg));
+        }
+
+        // Find font size that fit in the text box area
+        Font txFont = TEXT_FONT, rmFont = REMINDER_FONT;
+        FontMetrics txMetrics = TEXT_METRICS, rmMetrics = REMINDER_METRICS;
+        int txFontSize = txFont.getSize(), rmFontSize = rmFont.getSize();
+        int lineHeight, paraSpacing, lineSpacing, totalHeight;
+        do {
+            int totalLineSpacings = 0;
+            totalHeight = 0;
+            paraSpacing = txMetrics.getLeading() + txMetrics.getDescent();
+            lineHeight = txMetrics.getAscent() + txMetrics.getDescent();
+            lineSpacing = -2;
+            for (int i = 0; i < pgList.size(); ++i) {
+                boolean ptBox = (i < pgList.size() - 1) ? false : hasPTBox;
+                Paragraph pg = pgList.get(i);
+                totalHeight += paraSpacing;
+                int lines = pg.calculateLines(w, txMetrics, rmMetrics, ptBox);
+                totalLineSpacings += lines - 1;
+                totalHeight += lines * lineHeight + (lines - 1) * lineSpacing;
+            }
+            while (totalHeight > h && lineSpacing > -txMetrics.getDescent()) {
+                --lineSpacing;
+                totalHeight -= totalLineSpacings;
+            }
+            if (totalHeight <= h)
+                break;
+            //Shrink font and do again
+            --txFontSize;
+            txFont = getShrinkFont(TEXT_FONT, txFontSize);
+            txMetrics = g.getFontMetrics(txFont);
+            --rmFontSize;
+            rmFont = getShrinkFont(REMINDER_FONT, rmFontSize);
+            rmMetrics = g.getFontMetrics(rmFont);
+        } while (txFontSize >= 8 && rmFontSize >= 8);
+
+        // Draw text
+        y += (h - totalHeight - paraSpacing / 2) / 2;
+        for (Paragraph pg : pgList) {
+            y += pg.drawPieces(g, x, y, w, lineSpacing + lineHeight, txFont, txMetrics, rmFont, rmMetrics);
+            y += paraSpacing - lineSpacing;
         }
     }
 }
