@@ -42,44 +42,46 @@ public class CardFaceSymbols {
         DECK_COLORSET.put("W", FSkin.getImage(FSkinProp.IMG_MANA_W));
 
         for (int i = 0; i <= 20; i++) {
-            MANA_IMAGES.put(String.valueOf(i), FSkin.getImage(FSkinProp.valueOf("IMG_MANA_" + i), manaImageSize, manaImageSize));
+            MANA_IMAGES.put(String.valueOf(i), FSkin.getImage(FSkinProp.valueOf("IMG_MANA_" + i)));
         }
-        MANA_IMAGES.put("X", FSkin.getImage(FSkinProp.IMG_MANA_X, manaImageSize, manaImageSize));
-        MANA_IMAGES.put("Y", FSkin.getImage(FSkinProp.IMG_MANA_Y, manaImageSize, manaImageSize));
-        MANA_IMAGES.put("Z", FSkin.getImage(FSkinProp.IMG_MANA_Z, manaImageSize, manaImageSize));
-        MANA_IMAGES.put("C", FSkin.getImage(FSkinProp.IMG_MANA_COLORLESS, manaImageSize, manaImageSize));
+        MANA_IMAGES.put("X", FSkin.getImage(FSkinProp.IMG_MANA_X));
+        MANA_IMAGES.put("Y", FSkin.getImage(FSkinProp.IMG_MANA_Y));
+        MANA_IMAGES.put("Z", FSkin.getImage(FSkinProp.IMG_MANA_Z));
+        MANA_IMAGES.put("C", FSkin.getImage(FSkinProp.IMG_MANA_COLORLESS));
 
-        MANA_IMAGES.put("B",  FSkin.getImage(FSkinProp.IMG_MANA_B, manaImageSize, manaImageSize));
-        MANA_IMAGES.put("BG", FSkin.getImage(FSkinProp.IMG_MANA_HYBRID_BG, manaImageSize, manaImageSize));
-        MANA_IMAGES.put("BR", FSkin.getImage(FSkinProp.IMG_MANA_HYBRID_BR, manaImageSize, manaImageSize));
-        MANA_IMAGES.put("G",  FSkin.getImage(FSkinProp.IMG_MANA_G, manaImageSize, manaImageSize));
-        MANA_IMAGES.put("GU", FSkin.getImage(FSkinProp.IMG_MANA_HYBRID_GU, manaImageSize, manaImageSize));
-        MANA_IMAGES.put("GW", FSkin.getImage(FSkinProp.IMG_MANA_HYBRID_GW, manaImageSize, manaImageSize));
-        MANA_IMAGES.put("R",  FSkin.getImage(FSkinProp.IMG_MANA_R, manaImageSize, manaImageSize));
-        MANA_IMAGES.put("RG", FSkin.getImage(FSkinProp.IMG_MANA_HYBRID_RG, manaImageSize, manaImageSize));
-        MANA_IMAGES.put("RW", FSkin.getImage(FSkinProp.IMG_MANA_HYBRID_RW, manaImageSize, manaImageSize));
-        MANA_IMAGES.put("U",  FSkin.getImage(FSkinProp.IMG_MANA_U, manaImageSize, manaImageSize));
-        MANA_IMAGES.put("UB", FSkin.getImage(FSkinProp.IMG_MANA_HYBRID_UB, manaImageSize, manaImageSize));
-        MANA_IMAGES.put("UR", FSkin.getImage(FSkinProp.IMG_MANA_HYBRID_UR, manaImageSize, manaImageSize));
-        MANA_IMAGES.put("W",  FSkin.getImage(FSkinProp.IMG_MANA_W, manaImageSize, manaImageSize));
-        MANA_IMAGES.put("WB", FSkin.getImage(FSkinProp.IMG_MANA_HYBRID_WB, manaImageSize, manaImageSize));
-        MANA_IMAGES.put("WU", FSkin.getImage(FSkinProp.IMG_MANA_HYBRID_WU, manaImageSize, manaImageSize));
-        MANA_IMAGES.put("PW", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_W, manaImageSize, manaImageSize));
-        MANA_IMAGES.put("PR", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_R, manaImageSize, manaImageSize));
-        MANA_IMAGES.put("PU", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_U, manaImageSize, manaImageSize));
-        MANA_IMAGES.put("PB", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_B, manaImageSize, manaImageSize));
-        MANA_IMAGES.put("PG", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_G, manaImageSize, manaImageSize));
-        MANA_IMAGES.put("2W", FSkin.getImage(FSkinProp.IMG_MANA_2W, manaImageSize, manaImageSize));
-        MANA_IMAGES.put("2U", FSkin.getImage(FSkinProp.IMG_MANA_2U, manaImageSize, manaImageSize));
-        MANA_IMAGES.put("2R", FSkin.getImage(FSkinProp.IMG_MANA_2R, manaImageSize, manaImageSize));
-        MANA_IMAGES.put("2G", FSkin.getImage(FSkinProp.IMG_MANA_2G, manaImageSize, manaImageSize));
-        MANA_IMAGES.put("2B", FSkin.getImage(FSkinProp.IMG_MANA_2B, manaImageSize, manaImageSize));
+        MANA_IMAGES.put("B",  FSkin.getImage(FSkinProp.IMG_MANA_B));
+        MANA_IMAGES.put("BG", FSkin.getImage(FSkinProp.IMG_MANA_HYBRID_BG));
+        MANA_IMAGES.put("BR", FSkin.getImage(FSkinProp.IMG_MANA_HYBRID_BR));
+        MANA_IMAGES.put("G",  FSkin.getImage(FSkinProp.IMG_MANA_G));
+        MANA_IMAGES.put("GU", FSkin.getImage(FSkinProp.IMG_MANA_HYBRID_GU));
+        MANA_IMAGES.put("GW", FSkin.getImage(FSkinProp.IMG_MANA_HYBRID_GW));
+        MANA_IMAGES.put("R",  FSkin.getImage(FSkinProp.IMG_MANA_R));
+        MANA_IMAGES.put("RG", FSkin.getImage(FSkinProp.IMG_MANA_HYBRID_RG));
+        MANA_IMAGES.put("RW", FSkin.getImage(FSkinProp.IMG_MANA_HYBRID_RW));
+        MANA_IMAGES.put("U",  FSkin.getImage(FSkinProp.IMG_MANA_U));
+        MANA_IMAGES.put("UB", FSkin.getImage(FSkinProp.IMG_MANA_HYBRID_UB));
+        MANA_IMAGES.put("UR", FSkin.getImage(FSkinProp.IMG_MANA_HYBRID_UR));
+        MANA_IMAGES.put("W",  FSkin.getImage(FSkinProp.IMG_MANA_W));
+        MANA_IMAGES.put("WB", FSkin.getImage(FSkinProp.IMG_MANA_HYBRID_WB));
+        MANA_IMAGES.put("WU", FSkin.getImage(FSkinProp.IMG_MANA_HYBRID_WU));
+        MANA_IMAGES.put("PW", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_W));
+        MANA_IMAGES.put("PR", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_R));
+        MANA_IMAGES.put("PU", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_U));
+        MANA_IMAGES.put("PB", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_B));
+        MANA_IMAGES.put("PG", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_G));
+        MANA_IMAGES.put("2W", FSkin.getImage(FSkinProp.IMG_MANA_2W));
+        MANA_IMAGES.put("2U", FSkin.getImage(FSkinProp.IMG_MANA_2U));
+        MANA_IMAGES.put("2R", FSkin.getImage(FSkinProp.IMG_MANA_2R));
+        MANA_IMAGES.put("2G", FSkin.getImage(FSkinProp.IMG_MANA_2G));
+        MANA_IMAGES.put("2B", FSkin.getImage(FSkinProp.IMG_MANA_2B));
 
-        MANA_IMAGES.put("S", FSkin.getImage(FSkinProp.IMG_MANA_SNOW, manaImageSize, manaImageSize));
-        MANA_IMAGES.put("T", FSkin.getImage(FSkinProp.IMG_TAP, manaImageSize, manaImageSize));
+        MANA_IMAGES.put("S", FSkin.getImage(FSkinProp.IMG_MANA_SNOW));
+        MANA_IMAGES.put("T", FSkin.getImage(FSkinProp.IMG_TAP));
+        MANA_IMAGES.put("Q", FSkin.getImage(FSkinProp.IMG_UNTAP));
         MANA_IMAGES.put("E", FSkin.getImage(FSkinProp.IMG_ENERGY, 40, 40));
         MANA_IMAGES.put("EXPERIENCE", FSkin.getImage(FSkinProp.IMG_EXPERIENCE, 40, 30));
-        MANA_IMAGES.put("slash", FSkin.getImage(FSkinProp.IMG_SLASH, manaImageSize, manaImageSize));
+        MANA_IMAGES.put("CHAOS", FSkin.getImage(FSkinProp.IMG_CHAOS));
+        MANA_IMAGES.put("slash", FSkin.getImage(FSkinProp.IMG_SLASH));
         MANA_IMAGES.put("attack", FSkin.getImage(FSkinProp.IMG_ATTACK, 32, 32));
         MANA_IMAGES.put("defend", FSkin.getImage(FSkinProp.IMG_DEFEND, 32, 32));
         MANA_IMAGES.put("summonsick", FSkin.getImage(FSkinProp.IMG_SUMMONSICK, 32, 32));
@@ -179,37 +181,40 @@ public class CardFaceSymbols {
      *            a int.
      */
     public static void draw(final Graphics g, final ManaCost manaCost, final int x, final int y) {
+        draw(g, manaCost, x, y, manaImageSize);
+    }
+    public static void draw(final Graphics g, final ManaCost manaCost, final int x, final int y, final int size) {
         if (manaCost.isNoCost()) {
             return;
         }
 
         int xpos = x;
-        final int offset = 14;
+        final int offset = size + 1;
         final int genericManaCost = manaCost.getGenericCost();
         final boolean hasGeneric = (genericManaCost > 0) || manaCost.isPureGeneric();
 
         if (hasGeneric) {
             for (final ManaCostShard s : manaCost) { //render X shards before generic
                 if (s == ManaCostShard.X) {
-                    CardFaceSymbols.drawSymbol(s.getImageKey(), g, xpos, y);
+                    CardFaceSymbols.drawSymbol(s.getImageKey(), g, xpos, y, size);
                     xpos += offset;
                 }
             }
 
             final String sGeneric = Integer.toString(genericManaCost);
-            CardFaceSymbols.drawSymbol(sGeneric, g, xpos, y);
+            CardFaceSymbols.drawSymbol(sGeneric, g, xpos, y, size);
             xpos += offset;
 
             for (final ManaCostShard s : manaCost) { //render non-X shards after generic
                 if (s != ManaCostShard.X) {
-                    CardFaceSymbols.drawSymbol(s.getImageKey(), g, xpos, y);
+                    CardFaceSymbols.drawSymbol(s.getImageKey(), g, xpos, y, size);
                     xpos += offset;
                 }
             }
         }
         else { //if no generic, just render shards in order
             for (final ManaCostShard s : manaCost) {
-                CardFaceSymbols.drawSymbol(s.getImageKey(), g, xpos, y);
+                CardFaceSymbols.drawSymbol(s.getImageKey(), g, xpos, y, size);
                 xpos += offset;
             }
         }
@@ -270,6 +275,12 @@ public class CardFaceSymbols {
     public static void drawSymbol(final String imageName, final Graphics g, final int x, final int y) {
         FSkin.drawImage(g, MANA_IMAGES.get(imageName), x, y);
     }
+    public static void drawManaSymbol(final String imageName, final Graphics g, final int x, final int y) {
+        FSkin.drawImage(g, MANA_IMAGES.get(imageName).resize(manaImageSize, manaImageSize), x, y);
+    }
+    public static void drawSymbol(final String imageName, final Graphics g, final int x, final int y, final int size) {
+        FSkin.drawImage(g, MANA_IMAGES.get(imageName).resize(size, size), x, y);
+    }
     public static void drawAbilitySymbol(final String imageName, final Graphics g, final int x, final int y, final int w, final int h) {
         FSkin.drawImage(g, MANA_IMAGES.get(imageName), x, y, w, h);
     }
@@ -284,7 +295,7 @@ public class CardFaceSymbols {
      * @return a int.
      */
     public static int getWidth(final ManaCost manaCost) {
-        return manaCost.getGlyphCount() * 14;
+        return manaCost.getGlyphCount() * (manaImageSize + 1);
     }
 
     public static int getHeight() {
