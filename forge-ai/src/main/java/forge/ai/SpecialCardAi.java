@@ -1099,7 +1099,7 @@ public class SpecialCardAi {
 
             for (final SpellAbility testSa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, ai)) {
                 ManaCost cost = testSa.getPayCosts().getTotalMana();
-                boolean canPayWithAvailableColors = cost.canBePaidWithAvaliable(ColorSet.fromNames(
+                boolean canPayWithAvailableColors = cost.canBePaidWithAvailable(ColorSet.fromNames(
                     ComputerUtilCost.getAvailableManaColors(ai, sa.getHostCard())).getColor());
                 
                 byte colorProfile = cost.getColorProfile();

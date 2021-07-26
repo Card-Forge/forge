@@ -2913,9 +2913,7 @@ public class ComputerUtil {
                 // at this point, we're assuming that card will be castable from whichever zone it's in by the AI player.
                 abTest.setActivatingPlayer(ai);
                 abTest.getRestrictions().setZone(c.getZone().getZoneType());
-                final boolean play = AiPlayDecision.WillPlay == aic.canPlaySa(abTest);
-                final boolean pay = ComputerUtilCost.canPayCost(abTest, ai);
-                if (play && pay) {
+                if (AiPlayDecision.WillPlay == aic.canPlaySa(abTest) && ComputerUtilCost.canPayCost(abTest, ai)) {
                     targetSpellCard = c;
                     break;
                 }

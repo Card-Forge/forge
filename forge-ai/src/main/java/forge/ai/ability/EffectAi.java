@@ -313,6 +313,5 @@ public class EffectAi extends SpellAbilityAi {
         }
 
         return super.doTriggerAINoCost(aiPlayer, sa, mandatory);
-
     }
 }
