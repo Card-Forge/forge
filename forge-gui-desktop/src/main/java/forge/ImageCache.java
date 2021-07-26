@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -42,6 +42,7 @@ import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.gui.FThreads;
 import forge.item.InventoryItem;
+import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -49,6 +50,7 @@ import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinIcon;
+import forge.toolbox.imaging.FCardImageRenderer;
 import forge.util.ImageUtil;
 
 /**
@@ -61,7 +63,7 @@ import forge.util.ImageUtil;
  * <li>Keys start with the file name, extension is skipped</li>
  * <li>The key without suffix belongs to the unmodified image from the file</li>
  * </ul>
- * 
+ *
  * @author Forge
  * @version $Id: ImageCache.java 25093 2014-03-08 05:36:37Z drdev $
  */
@@ -81,7 +83,7 @@ public class ImageCache {
         } catch (Exception ex) {
             System.err.println("could not load default card image");
         } finally {
-            _defaultImage = (null == defImage) ? new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB) : defImage; 
+            _defaultImage = (null == defImage) ? new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB) : defImage;
         }
     }
 
@@ -133,31 +135,33 @@ public class ImageCache {
         }
         return new FSkin.UnskinnedIcon(i);
     }
-    
+
     /**
      * This requests the original unscaled image from the cache for the given key.
      * If the image does not exist then it can return a default image if desired.
      * <p>
      * If the requested image is not present in the cache then it attempts to load
-     * the image from file (slower) and then add it to the cache for fast future access. 
+     * the image from file (slower) and then add it to the cache for fast future access.
      * </p>
      */
     public static BufferedImage getOriginalImage(String imageKey, boolean useDefaultIfNotFound) {
-        if (null == imageKey) { 
+        if (null == imageKey) {
             return null;
         }
-        
+
+        PaperCard pc = null;
         boolean altState = imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX);
         if(altState)
             imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.BACKFACE_POSTFIX.length());
         if (imageKey.startsWith(ImageKeys.CARD_PREFIX)) {
-            imageKey = ImageUtil.getImageKey(ImageUtil.getPaperCardFromImageKey(imageKey), altState, true);
-            if (StringUtils.isBlank(imageKey)) { 
+            pc = ImageUtil.getPaperCardFromImageKey(imageKey);
+            imageKey = ImageUtil.getImageKey(pc, altState, true);
+            if (StringUtils.isBlank(imageKey)) {
                 return _defaultImage;
             }
         }
 
-        // Load from file and add to cache if not found in cache initially. 
+        // Load from file and add to cache if not found in cache initially.
         BufferedImage original = getImage(imageKey);
 
         // If the user has indicated that they prefer Forge NOT render a black border, round the image corners
@@ -197,8 +201,14 @@ public class ImageCache {
         // No image file exists for the given key so optionally associate with
         // a default "not available" image, however do not add it to the cache,
         // as otherwise it's problematic to update if the real image gets fetched.
-        if (original == null && useDefaultIfNotFound) { 
-            original = _defaultImage;
+        if (original == null && useDefaultIfNotFound) {
+            if (pc != null) {
+                original = new BufferedImage(480, 680, BufferedImage.TYPE_INT_ARGB);
+                FCardImageRenderer.drawCardImage(original.createGraphics(), pc, altState, 480, 680);
+                _CACHE.put(imageKey, original);
+            } else {
+                original = _defaultImage;
+            }
         }
 
         return original;
@@ -217,7 +227,7 @@ public class ImageCache {
             //System.out.println("found cached image: " + resizedKey);
             return cached;
         }
-        
+
         BufferedImage original = getOriginalImage(key, useDefaultImage);
         if (original == null) { return null; }
 
@@ -232,7 +242,7 @@ public class ImageCache {
                 return cachedDefault;
             }
         }
-        
+
         // Calculate the scale required to best fit the image into the requested
         // (width x height) dimensions whilst retaining aspect ratio.
         double scaleX = (-1 == width ? 1 : (double)width / original.getWidth());
@@ -243,17 +253,17 @@ public class ImageCache {
         }
 
         BufferedImage result;
-        if (1 == bestFitScale) { 
+        if (1 == bestFitScale) {
             result = original;
         } else {
-            
+
             int destWidth  = (int)(original.getWidth()  * bestFitScale);
             int destHeight = (int)(original.getHeight() * bestFitScale);
-                         
+
             ResampleOp resampler = new ResampleOp(destWidth, destHeight);
             result = resampler.filter(original, null);
         }
-        
+
         //System.out.println("caching image: " + resizedKey);
         _CACHE.put(resizedKey, result);
         return result;

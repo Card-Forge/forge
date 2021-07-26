@@ -20,7 +20,7 @@ public class ColorSetRenderer extends ItemCellRenderer {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see
      * javax.swing.table.DefaultTableCellRenderer#getTableCellRendererComponent
      * (javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)
@@ -41,7 +41,7 @@ public class ColorSetRenderer extends ItemCellRenderer {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see javax.swing.JComponent#paint(java.awt.Graphics)
      */
     @Override
@@ -58,7 +58,7 @@ public class ColorSetRenderer extends ItemCellRenderer {
         final int dx = Math.min(elemtWidth + elemtGap, offsetIfNoSpace);
 
         for (final ManaCostShard s : cs.getOrderedShards()) {
-            CardFaceSymbols.drawSymbol(s.getImageKey(), g, x, y);
+            CardFaceSymbols.drawManaSymbol(s.getImageKey(), g, x, y);
             x += dx;
         }
     }
