@@ -421,7 +421,7 @@ public class CardFactoryUtil {
 
     /**
      * <p>
-     * getMostProminentCreatureType.
+     * getMostProminentCreatureTypeSize.
      * </p>
      *
      * @param list
@@ -455,6 +455,49 @@ public class CardFactoryUtil {
             }
         }
         return max + allCreatureType;
+    }
+
+    /**
+     * <p>
+     * getMostProminentCreatureType.
+     * </p>
+     *
+     * @param list
+     *            a {@link forge.game.card.CardCollection} object.
+     * @return a string.
+     */
+    public static String[] getMostProminentCreatureType(final CardCollectionView list) {
+        if (list.isEmpty()) {
+            return null;
+        }
+
+        final Map<String, Integer> map = Maps.newHashMap();
+        for (final Card c : list) {
+            // Remove Duplicated types
+            final Set<String> creatureTypes = c.getType().getCreatureTypes();
+            for (String creatureType : creatureTypes) {
+                Integer count = map.get(creatureType);
+                map.put(creatureType, count == null ? 1 : count + 1);
+            }
+        }
+
+        int max = 0;
+        for (final Entry<String, Integer> entry : map.entrySet()) {
+            if (max < entry.getValue()) {
+                max = entry.getValue();
+            }
+        }
+        if (max == 0) {
+            return null;
+        }
+        StringBuilder sb = new StringBuilder();
+        for (final Entry<String, Integer> entry : map.entrySet()) {
+            if (max == entry.getValue()) {
+                sb.append(entry.getKey()).append(",");
+            }
+        }
+
+        return sb.toString().split(",");
     }
 
     /**
