@@ -612,10 +612,20 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 return artPref.accept(ed);
             }
         }));
+
+        /* At this point, it may be possible that Art Preference is too-strict for the requested card!
+            i.e. acceptedEditions.size() == 0!
+            This may be the case of Cards Only available in NON-CORE/EXPANSIONS/REPRINT sets.
+            (NOTE: We've already checked that any print of the request card exists in the DB)
+            If this happens, we won't try to iterate over an empty list. Instead, we will fall back
+            to original lists of editions (unfiltered, of course) AND STILL sorted according to chosen art preference.
+         */
+        if (acceptedEditions.size() == 0)
+            acceptedEditions.addAll(cardEditions);
+
         Collections.sort(acceptedEditions);  // CardEdition correctly sort by (release) date
         if (artPref.latestFirst)
             Collections.reverse(acceptedEditions);  // newest editions first
-
         PaperCard candidate = null;
         for (CardEdition ed : acceptedEditions) {
             PaperCard cardFromSet = getCardFromSet(cr.cardName, ed, artIndex, cr.isFoil);

@@ -15,57 +15,57 @@ import static org.testng.Assert.*;
 
 public class CardDbTestCase extends ForgeCardMockTestCase {
 
-    private LegacyCardDb legacyCardDb;
-    private CardDb cardDb;
+    protected LegacyCardDb legacyCardDb;
+    protected CardDb cardDb;
 
     // Shivan Dragon is great as it has multiple arts from re-prints
-    private final String cardNameShivanDragon = "Shivan Dragon";
-    private final String editionShivanDragon = "2ED";
-    private final String collNrShivanDragon = "175";
+    protected final String cardNameShivanDragon = "Shivan Dragon";
+    protected final String editionShivanDragon = "2ED";
+    protected final String collNrShivanDragon = "175";
 
     // Test Foil case - first foil ever printed!
-    private final String cardNameFoilLightningDragon = "Lightning Dragon+";
-    private final String cardNameLightningDragon = "Lightning Dragon";
-    private final String editionLightningDragon = "PUSG";
-    private final String collNrLightningDragon = "202";
+    protected final String cardNameFoilLightningDragon = "Lightning Dragon+";
+    protected final String cardNameLightningDragon = "Lightning Dragon";
+    protected final String editionLightningDragon = "PUSG";
+    protected final String collNrLightningDragon = "202";
 
     // Get a card with multiple arts
-    private final String cardNameHymnToTourach = "Hymn to Tourach";  // good 'ol hymn w/ four different art
-    private final String[] collectorNumbersHymnToTourach = {"38a", "38b", "38c", "38d"};
-    private final String editionHymnToTourach = "FEM";
+    protected final String cardNameHymnToTourach = "Hymn to Tourach";  // good 'ol hymn w/ four different art
+    protected final String[] collectorNumbersHymnToTourach = {"38a", "38b", "38c", "38d"};
+    protected final String editionHymnToTourach = "FEM";
 
     //Get Card From Editions Test fixtures
-    private final String oldFrameShivanDragonEdition = "LEA";
-    private final String newFrameShivanDragonEdition = "M20";
+    protected final String oldFrameShivanDragonEdition = "LEA";
+    protected final String newFrameShivanDragonEdition = "M20";
 
-    private final String oldFrameLightningDragonEdition = "USG";
-    private final String oldFrameLightningDragonEditionNoPromo = "USG";
+    protected final String oldFrameLightningDragonEdition = "USG";
+    protected final String oldFrameLightningDragonEditionNoPromo = "USG";
 
-    private final String newFrameLightningDragonEdition = "VMA";
-    private final String newFrameLightningDragonEditionNoPromo = "USG";
+    protected final String newFrameLightningDragonEdition = "VMA";
+    protected final String newFrameLightningDragonEditionNoPromo = "USG";
 
-    private final String newFrameHymnToTourachEdition = "EMA";
-    private final String newFrameHymnToTourachEditionNoPromo = "EMA";
-    private final String oldFrameHymnToTourachEdition = "FEM";
-    private final String oldFrameHymnToTourachEditionNoPromo = "FEM";
+    protected final String newFrameHymnToTourachEdition = "EMA";
+    protected final String newFrameHymnToTourachEditionNoPromo = "EMA";
+    protected final String oldFrameHymnToTourachEdition = "FEM";
+    protected final String oldFrameHymnToTourachEditionNoPromo = "FEM";
 
     // Test Dates and Editions
-    private final String printedBeforeFromTheVaultDate = "2008-10-01";
-    private final String latestFrameShivanDragonEditionBefore = "DRB";
-    private final String latestFrameShivanDragonEditionBeforeNoPromo = "10E";
-    private final String latestFrameLightningDragonEditionBefore = "MBP";
-    private final String latestFrameLightningDragonEditionBeforeNoPromo = "USG";
-    private final String printedBeforeEternalMasters = "2015-01-01";
-    private final String latestFrameHymnToTourachEditionBefore = "VMA";
-    private final String latestFrameHymnToTourachEditionBeforeNoPromo = "FEM";
+    protected final String printedBeforeFromTheVaultDate = "2008-10-01";
+    protected final String latestFrameShivanDragonEditionBefore = "DRB";
+    protected final String latestFrameShivanDragonEditionBeforeNoPromo = "10E";
+    protected final String latestFrameLightningDragonEditionBefore = "MBP";
+    protected final String latestFrameLightningDragonEditionBeforeNoPromo = "USG";
+    protected final String printedBeforeEternalMasters = "2015-01-01";
+    protected final String latestFrameHymnToTourachEditionBefore = "VMA";
+    protected final String latestFrameHymnToTourachEditionBeforeNoPromo = "FEM";
 
     // Get a card that has lots of editions so that we can test fetching for specific editions and print dates
-    private final String cardNameCounterspell = "Counterspell";
-    private final String[] editionsCounterspell = {"3ED", "4ED", "ICE", "5ED", "TMP", "S99", "MMQ", "A25", "MH2"};
-    private final String counterspellPrintedBeforeMasters25 = "2018-03-15";  // One day before Master25 release
-    private final String[] counterspellLatestBeforeMasters25 = {"MPS_AKH", "EMA"};
-    private final String counterspellPrintedBeforeEternalMasters = "2016-06-09";  // One day before Eternal Masters release
-    private final String[] counterspellLatestBeforeEternalMasters = {"TPR", "7ED"};
+    protected final String cardNameCounterspell = "Counterspell";
+    protected final String[] editionsCounterspell = {"3ED", "4ED", "ICE", "5ED", "TMP", "S99", "MMQ", "A25", "MH2"};
+    protected final String counterspellPrintedBeforeMasters25 = "2018-03-15";  // One day before Master25 release
+    protected final String[] counterspellLatestBeforeMasters25 = {"MPS_AKH", "EMA"};
+    protected final String counterspellPrintedBeforeEternalMasters = "2016-06-09";  // One day before Eternal Masters release
+    protected final String[] counterspellLatestBeforeEternalMasters = {"TPR", "7ED"};
 
     @BeforeMethod
     public void setup(){
@@ -1292,16 +1292,118 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
     }
 
-    @Test(enabled = false)
-    public void testCardsNotFoundWhileLoadingDecks(){
-        String cardName = "Yavimaya, Cradle of Growth";
-        PaperCard cardInDb = this.cardDb.getCard(cardName);
-        assertNotNull(cardInDb);
-        assertEquals(cardInDb.getEdition(), "MH2");
+    /**
+     * This set is crucial to test Card Art Preference and Strict Policies.
+     * In particular, we wish to test whether the DB is robust enough to retrieve
+     * the card even if Art Preference is too strict, that is: the card is only
+     * available in Filtered sets.
+     *
+     * When this happens, we also want to be sure that retrieved card will be
+     * still compliant with Art Preference, when multiple candidates are possible
+     * (therefore, latest or original art first)
+     *
+     * For this test we will use the following card/editions as fixtures:
+     * - Militant Angel: ONLY available in forge in Game Night
+     * - Loyal Unicorn: Available in Forge in The List, and COMMANDER 2018
+     * - Selfless Squire: Available in Forge in COMMANDER 2021, Treasure Chest, and COMMANDER 2016
+     * - Atog: Test card available in Promo and Non-Promo Print. We will use this card as reference
+     *         which will have multiple editions returned over the preference selections.
+     */
+    @Test
+    public void testCardsAlwaysReturnedEvenIfCardArtPreferenceIsTooStrict(){
+        // REFERENCE CASE - NO FILTER
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
 
-        cardName = "Urza's Saga";
-        cardInDb = this.cardDb.getCard(cardName);
-        assertNotNull(cardInDb);
+        PaperCard atog = this.cardDb.getCard("Atog");
+        assertNotNull(atog);
+        assertEquals(atog.getEdition(), "ME4");  // Game Night
+
+        PaperCard militantAngel = this.cardDb.getCard("Militant Angel");
+        assertNotNull(militantAngel);
+        assertEquals(militantAngel.getEdition(), "GNT");  // Game Night
+
+        // Loyal Unicorn: Available in Forge in The List and COMMANDER 2018
+        PaperCard loyalUnicorn = this.cardDb.getCard("Loyal Unicorn");
+        assertNotNull(loyalUnicorn);
+        assertEquals(loyalUnicorn.getEdition(), "PLIST");  // The List
+
+        // Selfless Squire: Available in Forge in COMMANDER 2021; Treasure Chest; COMMANDER 2016
+        PaperCard selflessSquire = this.cardDb.getCard("Selfless Squire");
+        assertNotNull(selflessSquire);
+        assertEquals(selflessSquire.getEdition(), "C21");  // The List
+
+        // Set Strictness to Expansions and Reprint Only (LATEST)
+        this.cardDb.setCardArtPreference(true, true);
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY);
+
+        // ONLY CHANGE HERE IS FOR ATOG
+        atog = this.cardDb.getCard("Atog");
+        assertNotNull(atog);
+        assertEquals(atog.getEdition(), "MRD");  // Game Night
+
+        militantAngel = this.cardDb.getCard("Militant Angel");
+        assertNotNull(militantAngel);
+        assertEquals(militantAngel.getEdition(), "GNT");  // Game Night
+
+        // Loyal Unicorn: Available in Forge in The List and COMMANDER 2018
+        loyalUnicorn = this.cardDb.getCard("Loyal Unicorn");
+        assertNotNull(loyalUnicorn);
+        assertEquals(loyalUnicorn.getEdition(), "PLIST");  // The List
+
+        // Selfless Squire: Available in Forge in COMMANDER 2021; Treasure Chest; COMMANDER 2016
+        selflessSquire = this.cardDb.getCard("Selfless Squire");
+        assertNotNull(selflessSquire);
+        assertEquals(selflessSquire.getEdition(), "C21");  // The List
+
+        // Set Strictness to ORIGINAL ART NO FILTER - Ref case
+        this.cardDb.setCardArtPreference(false, false);
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS);
+
+        // ONLY CHANGE HERE IS FOR ATOG
+        atog = this.cardDb.getCard("Atog");
+        assertNotNull(atog);
+        assertEquals(atog.getEdition(), "ATQ");  // Game Night
+
+        militantAngel = this.cardDb.getCard("Militant Angel");
+        assertNotNull(militantAngel);
+        assertEquals(militantAngel.getEdition(), "GNT");
+
+        // Loyal Unicorn: Available in Forge in The List and COMMANDER 2018
+        loyalUnicorn = this.cardDb.getCard("Loyal Unicorn");
+        assertNotNull(loyalUnicorn);
+        assertEquals(loyalUnicorn.getEdition(), "C18");
+
+        // Selfless Squire: Available in Forge in COMMANDER 2021; Treasure Chest; COMMANDER 2016
+        selflessSquire = this.cardDb.getCard("Selfless Squire");
+        assertNotNull(selflessSquire);
+        assertEquals(selflessSquire.getEdition(), "C16");
+
+        // Set Strictness to ORIGINAL ART NO FILTER - Ref case
+        this.cardDb.setCardArtPreference(false, true);
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY);
+
+        // ONLY CHANGE HERE IS FOR ATOG
+        atog = this.cardDb.getCard("Atog");
+        assertNotNull(atog);
+        assertEquals(atog.getEdition(), "ATQ");  // Game Night
+
+        militantAngel = this.cardDb.getCard("Militant Angel");
+        assertNotNull(militantAngel);
+        assertEquals(militantAngel.getEdition(), "GNT");
+
+        // Loyal Unicorn: Available in Forge in The List and COMMANDER 2018
+        loyalUnicorn = this.cardDb.getCard("Loyal Unicorn");
+        assertNotNull(loyalUnicorn);
+        assertEquals(loyalUnicorn.getEdition(), "PLIST");  // This is returned as this is a REPRINT Set!!
+
+        // Selfless Squire: Available in Forge in COMMANDER 2021; Treasure Chest; COMMANDER 2016
+        selflessSquire = this.cardDb.getCard("Selfless Squire");
+        assertNotNull(selflessSquire);
+        assertEquals(selflessSquire.getEdition(), "C16");
+
+        // Set Art Preference back to default
+        this.cardDb.setCardArtPreference(true, false);
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
     }
 
 }

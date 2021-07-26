@@ -5,7 +5,6 @@ import forge.ImageKeys;
 import forge.Singletons;
 import forge.StaticData;
 import forge.gamesimulationtests.util.CardDatabaseHelper;
-import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
@@ -35,7 +34,7 @@ import java.util.ResourceBundle;
 @SuppressStaticInitializationFor({"forge.ImageCache", "forge.localinstance.properties.ForgeConstants"})
 public class ForgeCardMockTestCase extends PowerMockTestCase {
 
-    private static String getUserDir() {
+    protected static String getUserDir() {
         // Adapted - reduced version from ForgeProfileProperties (which is private)
         final String osName = System.getProperty("os.name");
         final String homeDir = System.getProperty("user.home");
@@ -59,7 +58,7 @@ public class ForgeCardMockTestCase extends PowerMockTestCase {
         return fallbackDataDir;
     }
 
-    private void initForgeConstants() throws IllegalAccessException {
+    protected void initForgeConstants() throws IllegalAccessException {
         PowerMockito.mockStatic(ForgeConstants.class);
         // Path Sep
         Field fPathSep = PowerMockito.field(ForgeConstants.class, "PATH_SEPARATOR");
@@ -132,7 +131,6 @@ public class ForgeCardMockTestCase extends PowerMockTestCase {
         PowerMockito.mockStatic(ImageIO.class);
         PowerMockito.mockStatic(ImageCache.class);
         PowerMockito.mockStatic(ImageKeys.class);
-        PowerMockito.when(ImageKeys.hasImage(Mockito.any(PaperCard.class))).thenReturn(true);
         initForgeConstants();
 
         //Mocking some more static stuff
