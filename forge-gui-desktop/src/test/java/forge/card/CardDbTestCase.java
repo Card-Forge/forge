@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.Date;
 
 import static org.testng.Assert.*;
@@ -35,37 +36,63 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
     protected final String editionHymnToTourach = "FEM";
 
     //Get Card From Editions Test fixtures
-    protected final String oldFrameShivanDragonEdition = "LEA";
-    protected final String newFrameShivanDragonEdition = "M20";
+    protected final String originalArtShivanDragonEdition = "LEA";
+    protected final String latestArtShivanDragonEdition = "M20";
 
-    protected final String oldFrameLightningDragonEdition = "USG";
-    protected final String oldFrameLightningDragonEditionNoPromo = "USG";
+    protected final String originalArtLightningDragonEdition = "USG";
+    protected final String originalArtLightningDragonEditionNoPromo = "USG";
 
-    protected final String newFrameLightningDragonEdition = "VMA";
-    protected final String newFrameLightningDragonEditionNoPromo = "USG";
+    protected final String latestArtLightningDragonEdition = "VMA";
+    protected final String latestArtLightningDragonEditionNoPromo = "USG";
 
-    protected final String newFrameHymnToTourachEdition = "EMA";
-    protected final String newFrameHymnToTourachEditionNoPromo = "EMA";
-    protected final String oldFrameHymnToTourachEdition = "FEM";
-    protected final String oldFrameHymnToTourachEditionNoPromo = "FEM";
+    protected final String latestArtHymnToTourachEdition = "EMA";
+    protected final String latestArtHymnToTourachEditionNoPromo = "EMA";
+    protected final String originalArtHymnToTourachEdition = "FEM";
+    protected final String originalArtHymnToTourachEditionNoPromo = "FEM";
 
     // Test Dates and Editions
-    protected final String printedBeforeFromTheVaultDate = "2008-10-01";
-    protected final String latestFrameShivanDragonEditionBefore = "DRB";
-    protected final String latestFrameShivanDragonEditionBeforeNoPromo = "10E";
-    protected final String latestFrameLightningDragonEditionBefore = "MBP";
-    protected final String latestFrameLightningDragonEditionBeforeNoPromo = "USG";
-    protected final String printedBeforeEternalMasters = "2015-01-01";
-    protected final String latestFrameHymnToTourachEditionBefore = "VMA";
-    protected final String latestFrameHymnToTourachEditionBeforeNoPromo = "FEM";
+    protected final String releasedBeforeFromTheVaultDate = "2008-10-01";
+
+    protected final String latestArtShivanDragonEditionReleasedBeforeFromTheVault = "DRB";
+    protected final String latestArtShivanDragonEditionReleasedBeforeFromTheVaultNoPromo = "10E";
+    protected final String latestArtLightningDragonEditionReleasedBeforeFromTheVault = "MBP";
+    protected final String latestArtLightningDragonEditionReleasedBeforeFromTheVaultNoPromo = "USG";
+
+    protected final String releasedAfterTenthEditionDate = "2007-07-13";
+
+    protected final String originalArtShivanDragonEditionReleasedAfterTenthEdition = "DRB";
+    protected final String originalArtShivanDragonEditionReleasedAfterTenthEditionNoPromo = "M10";
+    protected final String originalArtLightningDragonEditionReleasedAfterTenthEdition = "VMA";
+    // NOTE: too strict, therefore MBP should still be returned.
+    protected final String originalArtLightningDragonEditionReleasedAfterTenthEditionNoPromo = "VMA";
+
+    protected final String releasedBeforeEternalMastersDate = "2015-01-01";
+    protected final String latestArtHymnToTourachEditionReleasedBeforeEternalMasters = "VMA";
+    protected final String latestArtHymnToTourachEditionReleasedBeforeEternalMastersNoPromo = "FEM";
+
+    protected final String releasedAfterAnthologiesDate = "1998-11-01";
+    protected final String originalArtHymnToTourachEditionReleasedAfterAnthologies = "PRM";
+    // NOTE: This is the only edition (reprint) matching art preference after Anthologies
+    protected final String originalArtHymnToTourachEditionReleasedAfterAnthologiesNoPromo = "EMA";
 
     // Get a card that has lots of editions so that we can test fetching for specific editions and print dates
     protected final String cardNameCounterspell = "Counterspell";
-    protected final String[] editionsCounterspell = {"3ED", "4ED", "ICE", "5ED", "TMP", "S99", "MMQ", "A25", "MH2"};
-    protected final String counterspellPrintedBeforeMasters25 = "2018-03-15";  // One day before Master25 release
-    protected final String[] counterspellLatestBeforeMasters25 = {"MPS_AKH", "EMA"};
-    protected final String counterspellPrintedBeforeEternalMasters = "2016-06-09";  // One day before Eternal Masters release
-    protected final String[] counterspellLatestBeforeEternalMasters = {"TPR", "7ED"};
+    protected final String[] editionsCounterspell = {"3ED", "4ED", "ICE", "5ED", "TMP", "S99", "MMQ",
+                                                     "BTD", "BRB", "A25", "MH2", "SLD"};
+
+    protected final String counterspellReleasedBeforeMagicOnlinePromosDate = "2018-03-15";
+    protected final String[] counterspellLatestArtsReleasedBeforeMagicOnlinePromos = {"MPS_AKH", "EMA"};
+
+    protected final String counterspellReleasedBeforeEternalMastersDate = "2016-06-10";
+    protected final String[] counterspellLatestArtReleasedBeforeEternalMasters = {"TPR", "7ED"};
+    protected final String[] counterspellOriginalArtReleasedAfterEternalMasters = {"MPS_AKH", "A25"};
+
+    protected final String counterspellReleasedAfterBattleRoyaleDate = "1999-11-12";
+    protected final String[] counterspellOriginalArtReleasedAfterBattleRoyale = {"G00", "7ED"};
+
+    // test for date restrictions - boundary cases
+    protected final String alphaEditionReleaseDate = "1993-08-05";
+
 
     @BeforeMethod
     public void setup(){
@@ -75,7 +102,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
     }
 
     @Test
-    public void testGetCardbyName() {
+    public void testGetCardByName() {
         PaperCard legacyCard = this.legacyCardDb.getCard(cardNameShivanDragon);
         PaperCard card = this.cardDb.getCard(cardNameShivanDragon);
         assertNotNull(card);
@@ -289,7 +316,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
     }
 
     @Test
-    public void testGetCardFromEditionsWithCardNameAndFramePreference() {
+    public void testGetCardFromEditionsWithCardNameAndCardArtPreference() {
         /* --------------
             Latest Print
            -------------*/
@@ -297,21 +324,21 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
 
         PaperCard sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame);
         assertEquals(sdCard.getName(), cardNameShivanDragon);
-        assertEquals(sdCard.getEdition(), newFrameShivanDragonEdition);
+        assertEquals(sdCard.getEdition(), latestArtShivanDragonEdition);
 
         PaperCard ldCard = this.cardDb.getCardFromEditions(cardNameLightningDragon, frame);
         assertEquals(ldCard.getName(), cardNameLightningDragon);
-        assertEquals(ldCard.getEdition(), newFrameLightningDragonEdition);
+        assertEquals(ldCard.getEdition(), latestArtLightningDragonEdition);
 
         // foiled card request
         PaperCard ldFoilCard = this.cardDb.getCardFromEditions(cardNameFoilLightningDragon, frame);
         assertEquals(ldFoilCard.getName(), cardNameLightningDragon);
-        assertEquals(ldFoilCard.getEdition(), newFrameLightningDragonEdition);
+        assertEquals(ldFoilCard.getEdition(), latestArtLightningDragonEdition);
         assertTrue(ldFoilCard.isFoil());
 
         PaperCard httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, frame);
         assertEquals(httCard.getName(), cardNameHymnToTourach);
-        assertEquals(httCard.getEdition(), newFrameHymnToTourachEdition);
+        assertEquals(httCard.getEdition(), latestArtHymnToTourachEdition);
 
         /* ----------------------
             Latest Print No Promo
@@ -320,21 +347,21 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
 
         sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame);
         assertEquals(sdCard.getName(), cardNameShivanDragon);
-        assertEquals(sdCard.getEdition(), newFrameShivanDragonEdition);
+        assertEquals(sdCard.getEdition(), latestArtShivanDragonEdition);
 
         ldCard = this.cardDb.getCardFromEditions(cardNameLightningDragon, frame);
         assertEquals(ldCard.getName(), cardNameLightningDragon);
-        assertEquals(ldCard.getEdition(), newFrameLightningDragonEditionNoPromo);
+        assertEquals(ldCard.getEdition(), latestArtLightningDragonEditionNoPromo);
 
         // foiled card request
         ldFoilCard = this.cardDb.getCardFromEditions(cardNameFoilLightningDragon, frame);
         assertEquals(ldFoilCard.getName(), cardNameLightningDragon);
-        assertEquals(ldFoilCard.getEdition(), newFrameLightningDragonEditionNoPromo);
+        assertEquals(ldFoilCard.getEdition(), latestArtLightningDragonEditionNoPromo);
         assertTrue(ldFoilCard.isFoil());
 
         httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, frame);
         assertEquals(httCard.getName(), cardNameHymnToTourach);
-        assertEquals(httCard.getEdition(), newFrameHymnToTourachEditionNoPromo);
+        assertEquals(httCard.getEdition(), latestArtHymnToTourachEditionNoPromo);
 
         /* --------------
             Old Print
@@ -343,21 +370,21 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
 
         sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame);
         assertEquals(sdCard.getName(), cardNameShivanDragon);
-        assertEquals(sdCard.getEdition(), oldFrameShivanDragonEdition);
+        assertEquals(sdCard.getEdition(), originalArtShivanDragonEdition);
 
         ldCard = this.cardDb.getCardFromEditions(cardNameLightningDragon, frame);
         assertEquals(ldCard.getName(), cardNameLightningDragon);
-        assertEquals(ldCard.getEdition(), oldFrameLightningDragonEdition);
+        assertEquals(ldCard.getEdition(), originalArtLightningDragonEdition);
 
         // foiled card request
         ldFoilCard = this.cardDb.getCardFromEditions(cardNameFoilLightningDragon, frame);
         assertEquals(ldFoilCard.getName(), cardNameLightningDragon);
-        assertEquals(ldFoilCard.getEdition(), oldFrameLightningDragonEdition);
+        assertEquals(ldFoilCard.getEdition(), originalArtLightningDragonEdition);
         assertTrue(ldFoilCard.isFoil());
 
         httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, frame);
         assertEquals(httCard.getName(), cardNameHymnToTourach);
-        assertEquals(httCard.getEdition(), oldFrameHymnToTourachEdition);
+        assertEquals(httCard.getEdition(), originalArtHymnToTourachEdition);
 
         /* --------------------
             Old Print No Promo
@@ -366,25 +393,25 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
 
         sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame);
         assertEquals(sdCard.getName(), cardNameShivanDragon);
-        assertEquals(sdCard.getEdition(), oldFrameShivanDragonEdition);
+        assertEquals(sdCard.getEdition(), originalArtShivanDragonEdition);
 
         ldCard = this.cardDb.getCardFromEditions(cardNameLightningDragon, frame);
         assertEquals(ldCard.getName(), cardNameLightningDragon);
-        assertEquals(ldCard.getEdition(), oldFrameLightningDragonEditionNoPromo);
+        assertEquals(ldCard.getEdition(), originalArtLightningDragonEditionNoPromo);
 
         // foiled card request
         ldFoilCard = this.cardDb.getCardFromEditions(cardNameFoilLightningDragon, frame);
         assertEquals(ldFoilCard.getName(), cardNameLightningDragon);
-        assertEquals(ldFoilCard.getEdition(), oldFrameLightningDragonEditionNoPromo);
+        assertEquals(ldFoilCard.getEdition(), originalArtLightningDragonEditionNoPromo);
         assertTrue(ldFoilCard.isFoil());
 
         httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, frame);
         assertEquals(httCard.getName(), cardNameHymnToTourach);
-        assertEquals(httCard.getEdition(), oldFrameHymnToTourachEditionNoPromo);
+        assertEquals(httCard.getEdition(), originalArtHymnToTourachEditionNoPromo);
     }
 
     @Test
-    public void testGetCardFromEditionsWithCardNameAndFramePreferenceComparedWithLegacy() {
+    public void testGetCardFromEditionsWithCardNameAndCardArtPreferenceComparedWithLegacy() {
         /* --------------
             Latest Print
            -------------*/
@@ -459,198 +486,6 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
     }
 
     @Test
-    public void testGetCardFromEditionsWithCardNameAndFramePreferenceWithDate() {
-        // Set Reference Dates
-        Date sdReleaseDate = null;
-        Date httReleaseDate = null;
-
-        try {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            sdReleaseDate = format.parse(printedBeforeFromTheVaultDate);
-            httReleaseDate = format.parse(printedBeforeEternalMasters);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            fail();
-        }
-
-        /* --------------
-            Latest Print
-           -------------*/
-        CardDb.CardArtPreference frame = CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS;
-
-        PaperCard sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame, sdReleaseDate);
-        assertEquals(sdCard.getName(), cardNameShivanDragon);
-        assertEquals(sdCard.getEdition(), latestFrameShivanDragonEditionBefore);
-
-        // foiled card request
-        PaperCard ldFoilCard = this.cardDb.getCardFromEditions(cardNameFoilLightningDragon, frame, sdReleaseDate);
-        assertEquals(ldFoilCard.getName(), cardNameLightningDragon);
-        assertEquals(ldFoilCard.getEdition(), latestFrameLightningDragonEditionBefore);
-        assertTrue(ldFoilCard.isFoil());
-
-        PaperCard httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, frame, httReleaseDate);
-        assertEquals(httCard.getName(), cardNameHymnToTourach);
-        assertEquals(httCard.getEdition(), latestFrameHymnToTourachEditionBefore);
-
-        /* ----------------------
-            Latest Print No Promo
-           ----------------------*/
-        frame = CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY;
-
-        sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame, sdReleaseDate);
-        assertEquals(sdCard.getName(), cardNameShivanDragon);
-        assertEquals(sdCard.getEdition(), latestFrameShivanDragonEditionBeforeNoPromo);
-
-        // foiled card request
-        ldFoilCard = this.cardDb.getCardFromEditions(cardNameFoilLightningDragon, frame, sdReleaseDate);
-        assertEquals(ldFoilCard.getName(), cardNameLightningDragon);
-        assertEquals(ldFoilCard.getEdition(), latestFrameLightningDragonEditionBeforeNoPromo);
-        assertTrue(ldFoilCard.isFoil());
-
-        httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, frame, httReleaseDate);
-        assertEquals(httCard.getName(), cardNameHymnToTourach);
-        assertEquals(httCard.getEdition(), latestFrameHymnToTourachEditionBeforeNoPromo);
-
-         /* --------------
-            Old Print
-           -------------*/
-        frame = CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS;
-
-        sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame, sdReleaseDate);
-        assertEquals(sdCard.getName(), cardNameShivanDragon);
-        assertEquals(sdCard.getEdition(), oldFrameShivanDragonEdition);
-
-        // foiled card request
-        ldFoilCard = this.cardDb.getCardFromEditions(cardNameFoilLightningDragon, frame, sdReleaseDate);
-        assertEquals(ldFoilCard.getName(), cardNameLightningDragon);
-        assertEquals(ldFoilCard.getEdition(), oldFrameLightningDragonEdition);
-        assertTrue(ldFoilCard.isFoil());
-
-        httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, frame, httReleaseDate);
-        assertEquals(httCard.getName(), cardNameHymnToTourach);
-        assertEquals(httCard.getEdition(), oldFrameHymnToTourachEdition);
-
-        /* --------------------
-            Old Print No Promo
-         ----------------------*/
-        frame = CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY;
-
-        sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame, sdReleaseDate);
-        assertEquals(sdCard.getName(), cardNameShivanDragon);
-        assertEquals(sdCard.getEdition(), oldFrameShivanDragonEdition);
-
-        // foiled card request
-        ldFoilCard = this.cardDb.getCardFromEditions(cardNameFoilLightningDragon, frame, sdReleaseDate);
-        assertEquals(ldFoilCard.getName(), cardNameLightningDragon);
-        assertEquals(ldFoilCard.getEdition(), oldFrameLightningDragonEditionNoPromo);
-        assertTrue(ldFoilCard.isFoil());
-
-        httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, frame, httReleaseDate);
-        assertEquals(httCard.getName(), cardNameHymnToTourach);
-        assertEquals(httCard.getEdition(), oldFrameHymnToTourachEditionNoPromo);
-    }
-
-    @Test
-    public void testGetCardFromEditionsWithCardNameAndFramePreferenceWithDateCompareWithLegacy() {
-        // Set Reference Dates
-        Date sdReleaseDate = null;
-        Date httReleaseDate = null;
-
-        try {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            sdReleaseDate = format.parse(printedBeforeFromTheVaultDate);
-            httReleaseDate = format.parse(printedBeforeEternalMasters);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            fail();
-        }
-
-        /* --------------
-            Latest Print
-           -------------*/
-        CardDb.CardArtPreference frame = CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS;
-        LegacyCardDb.LegacySetPreference setPref = LegacyCardDb.LegacySetPreference.Latest;
-
-        PaperCard sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame, sdReleaseDate);
-        PaperCard sdCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameShivanDragon, sdReleaseDate, setPref);
-        assertEquals(sdCard.getEdition(), latestFrameShivanDragonEditionBefore);
-        assertEquals(sdCard, sdCardLegacy);
-
-        PaperCard ldCard = this.cardDb.getCardFromEditions(cardNameLightningDragon, frame, sdReleaseDate);
-        PaperCard ldCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameLightningDragon, sdReleaseDate, setPref);
-        assertEquals(ldCard.getEdition(), latestFrameLightningDragonEditionBefore);
-        assertEquals(ldCard, ldCardLegacy);
-
-        PaperCard httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, frame, httReleaseDate);
-        PaperCard httCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameHymnToTourach, httReleaseDate, setPref);
-        assertEquals(httCard.getEdition(), latestFrameHymnToTourachEditionBefore);
-        assertEquals(httCard, httCardLegacy);
-
-        /* ----------------------
-            Latest Print No Promo
-           ----------------------*/
-        frame = CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY;
-        setPref = LegacyCardDb.LegacySetPreference.LatestCoreExp;
-
-        sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame, sdReleaseDate);
-        sdCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameShivanDragon, sdReleaseDate, setPref);
-        assertEquals(sdCard.getEdition(), latestFrameShivanDragonEditionBeforeNoPromo);
-        assertEquals(sdCard, sdCardLegacy);
-
-        ldCard = this.cardDb.getCardFromEditions(cardNameLightningDragon, frame, sdReleaseDate);
-        ldCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameLightningDragon, sdReleaseDate, setPref);
-        assertEquals(ldCard.getEdition(), latestFrameLightningDragonEditionBeforeNoPromo);
-        assertEquals(ldCard, ldCardLegacy);
-
-        httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, frame, httReleaseDate);
-        httCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameHymnToTourach, httReleaseDate, setPref);
-        assertEquals(httCard.getEdition(), latestFrameHymnToTourachEditionBeforeNoPromo);
-        assertEquals(httCard, httCardLegacy);
-
-        /* --------------
-            Old Print
-           -------------*/
-        frame = CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS;
-        setPref = LegacyCardDb.LegacySetPreference.Earliest;
-
-        sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame, sdReleaseDate);
-        sdCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameShivanDragon, sdReleaseDate, setPref);
-        assertEquals(sdCard.getEdition(), oldFrameShivanDragonEdition);
-        assertEquals(sdCard, sdCardLegacy);
-
-        ldCard = this.cardDb.getCardFromEditions(cardNameLightningDragon, frame, sdReleaseDate);
-        ldCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameLightningDragon, sdReleaseDate, setPref);
-        assertEquals(ldCard.getEdition(), oldFrameLightningDragonEdition);
-        assertEquals(ldCard, ldCardLegacy);
-
-        httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, frame, httReleaseDate);
-        httCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameHymnToTourach, httReleaseDate, setPref);
-        assertEquals(httCard.getEdition(), oldFrameHymnToTourachEdition);
-        assertEquals(httCard, httCardLegacy);
-
-        /* --------------------
-            Old Print No Promo
-         ----------------------*/
-        frame = CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY;
-        setPref = LegacyCardDb.LegacySetPreference.EarliestCoreExp;
-
-        sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame, sdReleaseDate);
-        sdCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameShivanDragon, sdReleaseDate, setPref);
-        assertEquals(sdCard.getEdition(), oldFrameShivanDragonEdition);
-        assertEquals(sdCard, sdCardLegacy);
-
-        ldCard = this.cardDb.getCardFromEditions(cardNameLightningDragon, frame, sdReleaseDate);
-        ldCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameLightningDragon, sdReleaseDate, setPref);
-        assertEquals(ldCard.getEdition(), oldFrameLightningDragonEditionNoPromo);
-        assertEquals(ldCard, ldCardLegacy);
-
-        httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, frame, httReleaseDate);
-        httCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameHymnToTourach, httReleaseDate, setPref);
-        assertEquals(httCard.getEdition(), oldFrameHymnToTourachEditionNoPromo);
-        assertEquals(httCard, httCardLegacy);
-    }
-
-    @Test
     public void testGetCardFromEditionsWithCardNameAndFramePreferenceWithArtIndex() {
         /* NOTE:
          testing case of errors here - will do in a separate test.
@@ -663,13 +498,13 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
 
         PaperCard httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, frame, 1);
         assertEquals(httCard.getName(), cardNameHymnToTourach);
-        assertEquals(httCard.getEdition(), newFrameHymnToTourachEdition);
+        assertEquals(httCard.getEdition(), latestArtHymnToTourachEdition);
         assertEquals(httCard.getArtIndex(), 1);
 
         // foil card
         PaperCard ldFoilCard = this.cardDb.getCardFromEditions(cardNameFoilLightningDragon, frame, 1);
         assertEquals(ldFoilCard.getName(), cardNameLightningDragon);
-        assertEquals(ldFoilCard.getEdition(), newFrameLightningDragonEdition);
+        assertEquals(ldFoilCard.getEdition(), latestArtLightningDragonEdition);
         assertEquals(ldFoilCard.getArtIndex(), 1);
         assertTrue(ldFoilCard.isFoil());
 
@@ -681,12 +516,12 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, frame, 1);
         assertEquals(httCard.getName(), cardNameHymnToTourach);
         assertEquals(httCard.getArtIndex(), 1);
-        assertEquals(httCard.getEdition(), newFrameHymnToTourachEditionNoPromo);
+        assertEquals(httCard.getEdition(), latestArtHymnToTourachEditionNoPromo);
 
         // foil card
         ldFoilCard = this.cardDb.getCardFromEditions(cardNameFoilLightningDragon, frame, 1);
         assertEquals(ldFoilCard.getName(), cardNameLightningDragon);
-        assertEquals(ldFoilCard.getEdition(), newFrameLightningDragonEditionNoPromo);
+        assertEquals(ldFoilCard.getEdition(), latestArtLightningDragonEditionNoPromo);
         assertEquals(ldFoilCard.getArtIndex(), 1);
         assertTrue(ldFoilCard.isFoil());
 
@@ -698,7 +533,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         for (int artIdx = 1; artIdx <= 4; artIdx++) {
             httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, frame, artIdx);
             assertEquals(httCard.getName(), cardNameHymnToTourach);
-            assertEquals(httCard.getEdition(), oldFrameHymnToTourachEdition);
+            assertEquals(httCard.getEdition(), originalArtHymnToTourachEdition);
             assertEquals(httCard.getArtIndex(), artIdx);
             assertEquals(httCard.getCollectorNumber(), collectorNumbersHymnToTourach[artIdx-1]);
         }
@@ -706,7 +541,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         // foil card
         ldFoilCard = this.cardDb.getCardFromEditions(cardNameFoilLightningDragon, frame, 1);
         assertEquals(ldFoilCard.getName(), cardNameLightningDragon);
-        assertEquals(ldFoilCard.getEdition(), oldFrameLightningDragonEdition);
+        assertEquals(ldFoilCard.getEdition(), originalArtLightningDragonEdition);
         assertEquals(ldFoilCard.getArtIndex(), 1);
         assertTrue(ldFoilCard.isFoil());
 
@@ -718,7 +553,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         for (int artIdx = 1; artIdx <= 4; artIdx++) {
             httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, frame, artIdx);
             assertEquals(httCard.getName(), cardNameHymnToTourach);
-            assertEquals(httCard.getEdition(), oldFrameHymnToTourachEdition);
+            assertEquals(httCard.getEdition(), originalArtHymnToTourachEdition);
             assertEquals(httCard.getArtIndex(), artIdx);
             assertEquals(httCard.getCollectorNumber(), collectorNumbersHymnToTourach[artIdx-1]);
         }
@@ -726,303 +561,13 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         // foil card
         ldFoilCard = this.cardDb.getCardFromEditions(cardNameFoilLightningDragon, frame, 1);
         assertEquals(ldFoilCard.getName(), cardNameLightningDragon);
-        assertEquals(ldFoilCard.getEdition(), oldFrameLightningDragonEditionNoPromo);
+        assertEquals(ldFoilCard.getEdition(), originalArtLightningDragonEditionNoPromo);
         assertEquals(ldFoilCard.getArtIndex(), 1);
         assertTrue(ldFoilCard.isFoil());
-    }
-
-    @Test
-    public void testGetCardFromEditionsWithCardNameAndFramePreferenceWithDateAndArtIndex() {
-        /* NOTE:
-         testing case of errors here - will do in a separate test.
-         */
-
-        // Set Reference Dates
-        Date sdReleaseDate = null;
-        Date httReleaseDate = null;
-
-        try {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            sdReleaseDate = format.parse(printedBeforeFromTheVaultDate);
-            httReleaseDate = format.parse(printedBeforeEternalMasters);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            fail();
-        }
-
-        /* --------------
-            Latest Print
-           -------------*/
-        CardDb.CardArtPreference frame = CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS;
-
-        PaperCard sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame, 1, sdReleaseDate);
-        assertEquals(sdCard.getName(), cardNameShivanDragon);
-        assertEquals(sdCard.getEdition(), latestFrameShivanDragonEditionBefore);
-
-        // foiled card request
-        PaperCard ldFoilCard = this.cardDb.getCardFromEditions(cardNameFoilLightningDragon, frame, 1, sdReleaseDate);
-        assertEquals(ldFoilCard.getName(), cardNameLightningDragon);
-        assertEquals(ldFoilCard.getEdition(), latestFrameLightningDragonEditionBefore);
-        assertTrue(ldFoilCard.isFoil());
-
-        PaperCard httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, frame, 1, httReleaseDate);
-        assertEquals(httCard.getName(), cardNameHymnToTourach);
-        assertEquals(httCard.getEdition(), latestFrameHymnToTourachEditionBefore);
-
-        /* ----------------------
-            Latest Print No Promo
-           ----------------------*/
-        frame = CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY;
-
-        sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame, sdReleaseDate);
-        assertEquals(sdCard.getName(), cardNameShivanDragon);
-        assertEquals(sdCard.getEdition(), latestFrameShivanDragonEditionBeforeNoPromo);
-
-        // foiled card request
-        ldFoilCard = this.cardDb.getCardFromEditions(cardNameFoilLightningDragon, frame, 1, sdReleaseDate);
-        assertEquals(ldFoilCard.getName(), cardNameLightningDragon);
-        assertEquals(ldFoilCard.getEdition(), latestFrameLightningDragonEditionBeforeNoPromo);
-        assertTrue(ldFoilCard.isFoil());
-
-        httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, frame, 1, httReleaseDate);
-        assertEquals(httCard.getName(), cardNameHymnToTourach);
-        assertEquals(httCard.getEdition(), latestFrameHymnToTourachEditionBeforeNoPromo);
-
-        /* --------------
-            Old Print
-           -------------*/
-        frame = CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS;
-
-        sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame, 1, sdReleaseDate);
-        assertEquals(sdCard.getName(), cardNameShivanDragon);
-        assertEquals(sdCard.getEdition(), oldFrameShivanDragonEdition);
-
-        // foiled card request
-        ldFoilCard = this.cardDb.getCardFromEditions(cardNameFoilLightningDragon, frame, 1, sdReleaseDate);
-        assertEquals(ldFoilCard.getName(), cardNameLightningDragon);
-        assertEquals(ldFoilCard.getEdition(), oldFrameLightningDragonEdition);
-        assertTrue(ldFoilCard.isFoil());
-
-        for (int artIdx = 1; artIdx <= 4; artIdx++) {
-            httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, frame, artIdx, httReleaseDate);
-            assertEquals(httCard.getName(), cardNameHymnToTourach);
-            assertEquals(httCard.getEdition(), oldFrameHymnToTourachEdition);
-            assertEquals(httCard.getArtIndex(), artIdx);
-            assertEquals(httCard.getCollectorNumber(), collectorNumbersHymnToTourach[artIdx-1]);
-        }
-
-        /* --------------------
-            Old Print No Promo
-         ----------------------*/
-        frame = CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY;
-
-        sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame, sdReleaseDate);
-        assertEquals(sdCard.getName(), cardNameShivanDragon);
-        assertEquals(sdCard.getEdition(), oldFrameShivanDragonEdition);
-
-        // foiled card request
-        ldFoilCard = this.cardDb.getCardFromEditions(cardNameFoilLightningDragon, frame, sdReleaseDate);
-        assertEquals(ldFoilCard.getName(), cardNameLightningDragon);
-        assertEquals(ldFoilCard.getEdition(), oldFrameLightningDragonEditionNoPromo);
-        assertTrue(ldFoilCard.isFoil());
-
-        for (int artIdx = 1; artIdx <= 4; artIdx++) {
-            httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, frame, artIdx, httReleaseDate);
-            assertEquals(httCard.getName(), cardNameHymnToTourach);
-            assertEquals(httCard.getEdition(), oldFrameHymnToTourachEditionNoPromo);
-            assertEquals(httCard.getArtIndex(), artIdx);
-            assertEquals(httCard.getCollectorNumber(), collectorNumbersHymnToTourach[artIdx-1]);
-        }
-    }
-
-    @Test
-    public void testGetCardFromEditionsWithCardNameAndFramePreferenceWithDateAndArtIndexComparedWithLegacy() {
-        // Set Reference Dates
-        Date sdReleaseDate = null;
-        Date httReleaseDate = null;
-
-        try {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            sdReleaseDate = format.parse(printedBeforeFromTheVaultDate);
-            httReleaseDate = format.parse(printedBeforeEternalMasters);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            fail();
-        }
-
-        /* --------------
-            Latest Print
-           -------------*/
-        CardDb.CardArtPreference frame = CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS;
-        LegacyCardDb.LegacySetPreference setPref = LegacyCardDb.LegacySetPreference.Latest;
-
-        PaperCard sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame, 1, sdReleaseDate);
-        PaperCard sdCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameShivanDragon, sdReleaseDate, setPref, 1);
-        assertEquals(sdCard.getEdition(), latestFrameShivanDragonEditionBefore);
-        assertEquals(sdCard, sdCardLegacy);
-
-        PaperCard ldCard = this.cardDb.getCardFromEditions(cardNameLightningDragon, frame, 1, sdReleaseDate);
-        PaperCard ldCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameLightningDragon, sdReleaseDate, setPref, 1);
-        assertEquals(ldCard.getEdition(), latestFrameLightningDragonEditionBefore);
-        assertEquals(ldCard, ldCardLegacy);
-
-        PaperCard httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, frame, 1, httReleaseDate);
-        PaperCard httCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameHymnToTourach, httReleaseDate, setPref, 1);
-        assertEquals(httCard.getEdition(), latestFrameHymnToTourachEditionBefore);
-        assertEquals(httCard, httCardLegacy);
-
-        /* ----------------------
-            Latest Print No Promo
-           ----------------------*/
-        frame = CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY;
-        setPref = LegacyCardDb.LegacySetPreference.LatestCoreExp;
-
-        sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame, 1, sdReleaseDate);
-        sdCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameShivanDragon, sdReleaseDate, setPref, 1);
-        assertEquals(sdCard.getEdition(), latestFrameShivanDragonEditionBeforeNoPromo);
-        assertEquals(sdCard, sdCardLegacy);
-
-        ldCard = this.cardDb.getCardFromEditions(cardNameLightningDragon, frame, 1, sdReleaseDate);
-        ldCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameLightningDragon, sdReleaseDate, setPref, 1);
-        assertEquals(ldCard.getEdition(), latestFrameLightningDragonEditionBeforeNoPromo);
-        assertEquals(ldCard, ldCardLegacy);
-
-        httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, frame, 1, httReleaseDate);
-        httCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameHymnToTourach, httReleaseDate, setPref, 1);
-        assertEquals(httCard.getEdition(), latestFrameHymnToTourachEditionBeforeNoPromo);
-        assertEquals(httCard, httCardLegacy);
-
-        /* --------------
-            Old Print
-           -------------*/
-        frame = CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS;
-        setPref = LegacyCardDb.LegacySetPreference.Earliest;
-
-        sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame, 1, sdReleaseDate);
-        sdCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameShivanDragon, sdReleaseDate, setPref, 1);
-        assertEquals(sdCard.getEdition(), oldFrameShivanDragonEdition);
-        assertEquals(sdCard, sdCardLegacy);
-
-        ldCard = this.cardDb.getCardFromEditions(cardNameLightningDragon, frame, 1, sdReleaseDate);
-        ldCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameLightningDragon, sdReleaseDate, setPref, 1);
-        assertEquals(ldCard.getEdition(), oldFrameLightningDragonEdition);
-        assertEquals(ldCard, ldCardLegacy);
-
-        for (int artIdx = 1; artIdx <= 4; artIdx++) {
-            httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, frame, artIdx, httReleaseDate);
-            httCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameHymnToTourach, httReleaseDate, setPref, artIdx);
-            assertEquals(httCard.getCollectorNumber(), collectorNumbersHymnToTourach[artIdx-1]);
-            assertEquals(httCard, httCardLegacy);
-        }
-
-        /* --------------------
-            Old Print No Promo
-         ----------------------*/
-        frame = CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY;
-        setPref = LegacyCardDb.LegacySetPreference.EarliestCoreExp;
-
-        sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame, sdReleaseDate);
-        sdCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameShivanDragon, sdReleaseDate, setPref);
-        assertEquals(sdCard.getEdition(), oldFrameShivanDragonEdition);
-        assertEquals(sdCard, sdCardLegacy);
-
-        ldCard = this.cardDb.getCardFromEditions(cardNameLightningDragon, frame, sdReleaseDate);
-        ldCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameLightningDragon, sdReleaseDate, setPref);
-        assertEquals(ldCard.getEdition(), oldFrameLightningDragonEditionNoPromo);
-        assertEquals(ldCard, ldCardLegacy);
-
-        for (int artIdx = 1; artIdx <= 4; artIdx++) {
-            httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, frame, artIdx, httReleaseDate);
-            httCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameHymnToTourach, httReleaseDate, setPref, artIdx);
-            assertEquals(httCard.getCollectorNumber(), collectorNumbersHymnToTourach[artIdx-1]);
-            assertEquals(httCard, httCardLegacy);
-        }
-    }
-
-    @Test
-    public void testCounterSpellManyEditionsAlsoWithDateRestrictionsAndCardArtPreferences(){
-        // Test fetching counterspell at different editions
-        for (String setCode : this.editionsCounterspell){
-            PaperCard counterSpell = this.cardDb.getCard(this.cardNameCounterspell, setCode);
-            assertEquals(counterSpell.getName(), this.cardNameCounterspell);
-            assertEquals(counterSpell.getEdition(), setCode);
-            assertFalse(counterSpell.isFoil());
-        }
-
-        Date beforeMaster25Date = null;
-        Date beforeEternalMastersDate = null;
-
-        try {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            beforeMaster25Date = format.parse(counterspellPrintedBeforeMasters25);
-            beforeEternalMastersDate = format.parse(counterspellPrintedBeforeEternalMasters);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            fail();
-        }
-
-        // Before Master25
-        PaperCard counterSpellCard = null;
-        // All Editions
-        counterSpellCard = this.cardDb.getCardFromEditions(cardNameCounterspell,
-                CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS, beforeMaster25Date);
-        assertEquals(counterSpellCard.getName(), cardNameCounterspell);
-        assertEquals(counterSpellCard.getEdition(), counterspellLatestBeforeMasters25[0]);
-
-        counterSpellCard = this.cardDb.getCardFromEditions(cardNameCounterspell,
-                CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS, beforeEternalMastersDate);
-        assertEquals(counterSpellCard.getName(), cardNameCounterspell);
-        assertEquals(counterSpellCard.getEdition(), counterspellLatestBeforeEternalMasters[0]);
-
-        // No Promo
-        counterSpellCard = this.cardDb.getCardFromEditions(cardNameCounterspell,
-                CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY, beforeMaster25Date);
-        assertEquals(counterSpellCard.getName(), cardNameCounterspell);
-        assertEquals(counterSpellCard.getEdition(), counterspellLatestBeforeMasters25[1]);
-
-        counterSpellCard = this.cardDb.getCardFromEditions(cardNameCounterspell,
-                CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY, beforeEternalMastersDate);
-        assertEquals(counterSpellCard.getName(), cardNameCounterspell);
-        assertEquals(counterSpellCard.getEdition(), counterspellLatestBeforeEternalMasters[1]);
-
-        // Now with setting preferences - so going with default cardArt preference.
-
-        this.cardDb.setCardArtPreference(true, false);
-        counterSpellCard = this.cardDb.getCardFromEditions(cardNameCounterspell, beforeMaster25Date);
-        assertEquals(counterSpellCard.getName(), cardNameCounterspell);
-        assertEquals(counterSpellCard.getEdition(), counterspellLatestBeforeMasters25[0]);
-
-        counterSpellCard = this.cardDb.getCardFromEditions(cardNameCounterspell, beforeEternalMastersDate);
-        assertEquals(counterSpellCard.getName(), cardNameCounterspell);
-        assertEquals(counterSpellCard.getEdition(), counterspellLatestBeforeEternalMasters[0]);
-
-        this.cardDb.setCardArtPreference(true, true);
-        counterSpellCard = this.cardDb.getCardFromEditions(cardNameCounterspell, beforeMaster25Date);
-        assertEquals(counterSpellCard.getName(), cardNameCounterspell);
-        assertEquals(counterSpellCard.getEdition(), counterspellLatestBeforeMasters25[1]);
-
-        counterSpellCard = this.cardDb.getCardFromEditions(cardNameCounterspell, beforeEternalMastersDate);
-        assertEquals(counterSpellCard.getName(), cardNameCounterspell);
-        assertEquals(counterSpellCard.getEdition(), counterspellLatestBeforeEternalMasters[1]);
-
-        // restore default
-        this.cardDb.setCardArtPreference(true, false);
-        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
     }
 
     @Test
     public void testGetCardFromEditionsWrongInputReturnsNull() {
-        Date preMagicReleaseDate = null;
-        Date httPrereleaseDate = null;
-        try {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            preMagicReleaseDate = format.parse("1993-08-05");
-            httPrereleaseDate = format.parse(printedBeforeEternalMasters);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            fail();
-        }
-
         PaperCard nullCard;
         PaperCard shivanNotExistingDragon;
         for (CardDb.CardArtPreference preference : CardDb.CardArtPreference.values()) {
@@ -1035,27 +580,24 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
             shivanNotExistingDragon = this.cardDb.getCardFromEditions(cardNameShivanDragon, preference, 2);
             assertNull(shivanNotExistingDragon);
 
-            shivanNotExistingDragon = this.cardDb.getCardFromEditions(cardNameShivanDragon, preference, preMagicReleaseDate);
-            assertNull(shivanNotExistingDragon);
-
-            nullCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, preference, 5, httPrereleaseDate);
+            nullCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, preference, 5);
             assertNull(nullCard);
         }
 
         // Passing null preference
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
-        PaperCard httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, null, null);
+        PaperCard httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, null);
         assertNotNull(httCard);
         assertEquals(httCard.getName(), cardNameHymnToTourach);
-        assertEquals(httCard.getEdition(), newFrameHymnToTourachEdition);
+        assertEquals(httCard.getEdition(), latestArtHymnToTourachEdition);
 
         // Changing default value for default card art preference
         this.cardDb.setCardArtPreference(false, false);
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS);
-        httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, null, null);
+        httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, null);
         assertNotNull(httCard);
         assertEquals(httCard.getName(), cardNameHymnToTourach);
-        assertEquals(httCard.getEdition(), oldFrameHymnToTourachEdition);
+        assertEquals(httCard.getEdition(), originalArtHymnToTourachEdition);
         // restore default
         this.cardDb.setCardArtPreference(true, false);
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
@@ -1066,18 +608,746 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         // Test default value first
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
         PaperCard shivanDragonCard = this.cardDb.getCardFromEditions(cardNameShivanDragon);
-        assertEquals(shivanDragonCard.getEdition(), newFrameShivanDragonEdition);
+        assertEquals(shivanDragonCard.getEdition(), latestArtShivanDragonEdition);
 
         // Try changing the policy
         this.cardDb.setCardArtPreference(false, false);
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS);
         shivanDragonCard = this.cardDb.getCardFromEditions(cardNameShivanDragon);
-        assertEquals(shivanDragonCard.getEdition(), oldFrameShivanDragonEdition);
+        assertEquals(shivanDragonCard.getEdition(), originalArtShivanDragonEdition);
         // restore default
         this.cardDb.setCardArtPreference(true, false);
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
     }
 
+    // == Specialised Card Art Preference Retrieval and Release Date Constraint (BEFORE)
+    @Test
+    public void testGetCardFromEditionsWithCardNameAndCardArtPreferenceReleasedBeforeDate() {
+        // Set Reference Dates
+        Date fromTheVaultReleaseDate = null;
+        Date eternalMastersReleaseDate = null;
+
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            fromTheVaultReleaseDate = format.parse(releasedBeforeFromTheVaultDate);
+            eternalMastersReleaseDate = format.parse(releasedBeforeEternalMastersDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            fail();
+        }
+
+        /* --------------
+            Latest Print
+           -------------*/
+        CardDb.CardArtPreference artPreference = CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS;
+
+        PaperCard sdCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameShivanDragon, artPreference, fromTheVaultReleaseDate);
+        assertEquals(sdCard.getName(), cardNameShivanDragon);
+        assertEquals(sdCard.getEdition(), latestArtShivanDragonEditionReleasedBeforeFromTheVault);
+
+        // foiled card request
+        PaperCard ldFoilCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameFoilLightningDragon, artPreference, fromTheVaultReleaseDate);
+        assertEquals(ldFoilCard.getName(), cardNameLightningDragon);
+        assertEquals(ldFoilCard.getEdition(), latestArtLightningDragonEditionReleasedBeforeFromTheVault);
+        assertTrue(ldFoilCard.isFoil());
+
+        PaperCard httCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameHymnToTourach, artPreference, eternalMastersReleaseDate);
+        assertEquals(httCard.getName(), cardNameHymnToTourach);
+        assertEquals(httCard.getEdition(), latestArtHymnToTourachEditionReleasedBeforeEternalMasters);
+
+        /* ----------------------
+            Latest Print No Promo
+           ----------------------*/
+        artPreference = CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY;
+
+        sdCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameShivanDragon, artPreference, fromTheVaultReleaseDate);
+        assertEquals(sdCard.getName(), cardNameShivanDragon);
+        assertEquals(sdCard.getEdition(), latestArtShivanDragonEditionReleasedBeforeFromTheVaultNoPromo);
+
+        // foiled card request
+        ldFoilCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameFoilLightningDragon, artPreference, fromTheVaultReleaseDate);
+        assertEquals(ldFoilCard.getName(), cardNameLightningDragon);
+        assertEquals(ldFoilCard.getEdition(), latestArtLightningDragonEditionReleasedBeforeFromTheVaultNoPromo);
+        assertTrue(ldFoilCard.isFoil());
+
+        httCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameHymnToTourach, artPreference, eternalMastersReleaseDate);
+        assertEquals(httCard.getName(), cardNameHymnToTourach);
+        assertEquals(httCard.getEdition(), latestArtHymnToTourachEditionReleasedBeforeEternalMastersNoPromo);
+
+         /* --------------
+            Old Print
+           -------------*/
+        artPreference = CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS;
+
+        sdCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameShivanDragon, artPreference, fromTheVaultReleaseDate);
+        assertEquals(sdCard.getName(), cardNameShivanDragon);
+        assertEquals(sdCard.getEdition(), originalArtShivanDragonEdition);
+
+        // foiled card request
+        ldFoilCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameFoilLightningDragon, artPreference, fromTheVaultReleaseDate);
+        assertEquals(ldFoilCard.getName(), cardNameLightningDragon);
+        assertEquals(ldFoilCard.getEdition(), originalArtLightningDragonEdition);
+        assertTrue(ldFoilCard.isFoil());
+
+        httCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameHymnToTourach, artPreference, eternalMastersReleaseDate);
+        assertEquals(httCard.getName(), cardNameHymnToTourach);
+        assertEquals(httCard.getEdition(), originalArtHymnToTourachEdition);
+
+        /* --------------------
+            Old Print No Promo
+         ----------------------*/
+        artPreference = CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY;
+
+        sdCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameShivanDragon, artPreference, fromTheVaultReleaseDate);
+        assertEquals(sdCard.getName(), cardNameShivanDragon);
+        assertEquals(sdCard.getEdition(), originalArtShivanDragonEdition);
+
+        // foiled card request
+        ldFoilCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameFoilLightningDragon, artPreference, fromTheVaultReleaseDate);
+        assertEquals(ldFoilCard.getName(), cardNameLightningDragon);
+        assertEquals(ldFoilCard.getEdition(), originalArtLightningDragonEditionNoPromo);
+        assertTrue(ldFoilCard.isFoil());
+
+        httCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameHymnToTourach, artPreference, eternalMastersReleaseDate);
+        assertEquals(httCard.getName(), cardNameHymnToTourach);
+        assertEquals(httCard.getEdition(), originalArtHymnToTourachEditionNoPromo);
+    }
+
+    @Test
+    public void testGetCardFromEditionsWithCardNameAndCardArtPreferenceReleasedBeforeDateComparedWithLegacy() {
+        // Set Reference Dates
+        Date sdReleaseDate = null;
+        Date httReleaseDate = null;
+
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            sdReleaseDate = format.parse(releasedBeforeFromTheVaultDate);
+            httReleaseDate = format.parse(releasedBeforeEternalMastersDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            fail();
+        }
+
+        /* --------------
+            Latest Print
+           -------------*/
+        CardDb.CardArtPreference artPreference = CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS;
+        LegacyCardDb.LegacySetPreference setPref = LegacyCardDb.LegacySetPreference.Latest;
+
+        PaperCard sdCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameShivanDragon, artPreference, sdReleaseDate);
+        PaperCard sdCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameShivanDragon, sdReleaseDate, setPref);
+        assertEquals(sdCard.getEdition(), latestArtShivanDragonEditionReleasedBeforeFromTheVault);
+        assertEquals(sdCard, sdCardLegacy);
+
+        PaperCard ldCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameLightningDragon, artPreference, sdReleaseDate);
+        PaperCard ldCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameLightningDragon, sdReleaseDate, setPref);
+        assertEquals(ldCard.getEdition(), latestArtLightningDragonEditionReleasedBeforeFromTheVault);
+        assertEquals(ldCard, ldCardLegacy);
+
+        PaperCard httCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameHymnToTourach, artPreference, httReleaseDate);
+        PaperCard httCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameHymnToTourach, httReleaseDate, setPref);
+        assertEquals(httCard.getEdition(), latestArtHymnToTourachEditionReleasedBeforeEternalMasters);
+        assertEquals(httCard, httCardLegacy);
+
+        // Testing without passing explicit card art preference in CardDb
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
+
+        sdCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameShivanDragon, 1, sdReleaseDate);
+        sdCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameShivanDragon, sdReleaseDate, setPref);
+        assertEquals(sdCard.getEdition(), latestArtShivanDragonEditionReleasedBeforeFromTheVault);
+        assertEquals(sdCard, sdCardLegacy);
+
+        ldCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameLightningDragon, 1, sdReleaseDate);
+        ldCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameLightningDragon, sdReleaseDate, setPref);
+        assertEquals(ldCard.getEdition(), latestArtLightningDragonEditionReleasedBeforeFromTheVault);
+        assertEquals(ldCard, ldCardLegacy);
+
+        httCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameHymnToTourach, 1, httReleaseDate);
+        httCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameHymnToTourach, httReleaseDate, setPref);
+        assertEquals(httCard.getEdition(), latestArtHymnToTourachEditionReleasedBeforeEternalMasters);
+        assertEquals(httCard, httCardLegacy);
+
+        /* ----------------------
+            Latest Print No Promo
+           ----------------------*/
+        artPreference = CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY;
+        setPref = LegacyCardDb.LegacySetPreference.LatestCoreExp;
+
+        sdCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameShivanDragon, artPreference, sdReleaseDate);
+        sdCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameShivanDragon, sdReleaseDate, setPref);
+        assertEquals(sdCard.getEdition(), latestArtShivanDragonEditionReleasedBeforeFromTheVaultNoPromo);
+        assertEquals(sdCard, sdCardLegacy);
+
+        ldCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameLightningDragon, artPreference, sdReleaseDate);
+        ldCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameLightningDragon, sdReleaseDate, setPref);
+        assertEquals(ldCard.getEdition(), latestArtLightningDragonEditionReleasedBeforeFromTheVaultNoPromo);
+        assertEquals(ldCard, ldCardLegacy);
+
+        httCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameHymnToTourach, artPreference, httReleaseDate);
+        httCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameHymnToTourach, httReleaseDate, setPref);
+        assertEquals(httCard.getEdition(), latestArtHymnToTourachEditionReleasedBeforeEternalMastersNoPromo);
+        assertEquals(httCard, httCardLegacy);
+
+        /* --------------
+            Old Print
+           -------------*/
+        artPreference = CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS;
+        setPref = LegacyCardDb.LegacySetPreference.Earliest;
+
+        sdCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameShivanDragon, artPreference, sdReleaseDate);
+        sdCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameShivanDragon, sdReleaseDate, setPref);
+        assertEquals(sdCard.getEdition(), originalArtShivanDragonEdition);
+        assertEquals(sdCard, sdCardLegacy);
+
+        ldCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameLightningDragon, artPreference, sdReleaseDate);
+        ldCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameLightningDragon, sdReleaseDate, setPref);
+        assertEquals(ldCard.getEdition(), originalArtLightningDragonEdition);
+        assertEquals(ldCard, ldCardLegacy);
+
+        httCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameHymnToTourach, artPreference, httReleaseDate);
+        httCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameHymnToTourach, httReleaseDate, setPref);
+        assertEquals(httCard.getEdition(), originalArtHymnToTourachEdition);
+        assertEquals(httCard, httCardLegacy);
+
+        /* --------------------
+            Old Print No Promo
+         ----------------------*/
+        artPreference = CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY;
+        setPref = LegacyCardDb.LegacySetPreference.EarliestCoreExp;
+
+        sdCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameShivanDragon, artPreference, sdReleaseDate);
+        sdCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameShivanDragon, sdReleaseDate, setPref);
+        assertEquals(sdCard.getEdition(), originalArtShivanDragonEdition);
+        assertEquals(sdCard, sdCardLegacy);
+
+        ldCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameLightningDragon, artPreference, sdReleaseDate);
+        ldCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameLightningDragon, sdReleaseDate, setPref);
+        assertEquals(ldCard.getEdition(), originalArtLightningDragonEditionNoPromo);
+        assertEquals(ldCard, ldCardLegacy);
+
+        httCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameHymnToTourach, artPreference, httReleaseDate);
+        httCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameHymnToTourach, httReleaseDate, setPref);
+        assertEquals(httCard.getEdition(), originalArtHymnToTourachEditionNoPromo);
+        assertEquals(httCard, httCardLegacy);
+    }
+
+    @Test
+    public void testGetCardFromEditionsWithCardNameAndCardArtPreferenceReleasedBeforeDateComparedWithLegacyAlsoIncludingArtIndex() {
+        // NOTE: Not passing in ArtIndex (so testing w/ default value) whenever artIndex is irrelevant (already default)
+        // Set Reference Dates
+        Date sdReleaseDate = null;
+        Date httReleaseDate = null;
+
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            sdReleaseDate = format.parse(releasedBeforeFromTheVaultDate);
+            httReleaseDate = format.parse(releasedBeforeEternalMastersDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            fail();
+        }
+
+        /* --------------
+            Latest Print
+           -------------*/
+        CardDb.CardArtPreference artPreference = CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS;
+        LegacyCardDb.LegacySetPreference setPref = LegacyCardDb.LegacySetPreference.Latest;
+
+        PaperCard sdCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameShivanDragon, artPreference, sdReleaseDate);
+        PaperCard sdCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameShivanDragon, sdReleaseDate, setPref, 1);
+        assertEquals(sdCard.getEdition(), latestArtShivanDragonEditionReleasedBeforeFromTheVault);
+        assertEquals(sdCard, sdCardLegacy);
+
+        PaperCard ldCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameLightningDragon, artPreference, sdReleaseDate);
+        PaperCard ldCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameLightningDragon, sdReleaseDate, setPref, 1);
+        assertEquals(ldCard.getEdition(), latestArtLightningDragonEditionReleasedBeforeFromTheVault);
+        assertEquals(ldCard, ldCardLegacy);
+
+        PaperCard httCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameHymnToTourach, artPreference, httReleaseDate);
+        PaperCard httCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameHymnToTourach, httReleaseDate, setPref, 1);
+        assertEquals(httCard.getEdition(), latestArtHymnToTourachEditionReleasedBeforeEternalMasters);
+        assertEquals(httCard, httCardLegacy);
+
+        /* ----------------------
+            Latest Print No Promo
+           ----------------------*/
+        artPreference = CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY;
+        setPref = LegacyCardDb.LegacySetPreference.LatestCoreExp;
+
+        sdCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameShivanDragon, artPreference, sdReleaseDate);
+        sdCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameShivanDragon, sdReleaseDate, setPref, 1);
+        assertEquals(sdCard.getEdition(), latestArtShivanDragonEditionReleasedBeforeFromTheVaultNoPromo);
+        assertEquals(sdCard, sdCardLegacy);
+
+        ldCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameLightningDragon, artPreference, sdReleaseDate);
+        ldCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameLightningDragon, sdReleaseDate, setPref, 1);
+        assertEquals(ldCard.getEdition(), latestArtLightningDragonEditionReleasedBeforeFromTheVaultNoPromo);
+        assertEquals(ldCard, ldCardLegacy);
+
+        httCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameHymnToTourach, artPreference, httReleaseDate);
+        httCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameHymnToTourach, httReleaseDate, setPref, 1);
+        assertEquals(httCard.getEdition(), latestArtHymnToTourachEditionReleasedBeforeEternalMastersNoPromo);
+        assertEquals(httCard, httCardLegacy);
+
+        /* --------------
+            Old Print
+           -------------*/
+        artPreference = CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS;
+        setPref = LegacyCardDb.LegacySetPreference.Earliest;
+
+        sdCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameShivanDragon, artPreference, sdReleaseDate);
+        sdCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameShivanDragon, sdReleaseDate, setPref, 1);
+        assertEquals(sdCard.getEdition(), originalArtShivanDragonEdition);
+        assertEquals(sdCard, sdCardLegacy);
+
+        ldCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameLightningDragon, artPreference, sdReleaseDate);
+        ldCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameLightningDragon, sdReleaseDate, setPref, 1);
+        assertEquals(ldCard.getEdition(), originalArtLightningDragonEdition);
+        assertEquals(ldCard, ldCardLegacy);
+
+        for (int artIdx = 1; artIdx <= 4; artIdx++) {
+            httCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameHymnToTourach, artPreference, artIdx, httReleaseDate);
+            httCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameHymnToTourach, httReleaseDate, setPref, artIdx);
+            assertEquals(httCard.getCollectorNumber(), collectorNumbersHymnToTourach[artIdx-1]);
+            assertEquals(httCard, httCardLegacy);
+        }
+
+        /* --------------------
+            Old Print No Promo
+         ----------------------*/
+        artPreference = CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY;
+        setPref = LegacyCardDb.LegacySetPreference.EarliestCoreExp;
+
+        sdCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameShivanDragon, artPreference, sdReleaseDate);
+        sdCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameShivanDragon, sdReleaseDate, setPref);
+        assertEquals(sdCard.getEdition(), originalArtShivanDragonEdition);
+        assertEquals(sdCard, sdCardLegacy);
+
+        ldCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameLightningDragon, artPreference, sdReleaseDate);
+        ldCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameLightningDragon, sdReleaseDate, setPref);
+        assertEquals(ldCard.getEdition(), originalArtLightningDragonEditionNoPromo);
+        assertEquals(ldCard, ldCardLegacy);
+
+        for (int artIdx = 1; artIdx <= 4; artIdx++) {
+            httCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameHymnToTourach, artPreference, artIdx, httReleaseDate);
+            httCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameHymnToTourach, httReleaseDate, setPref, artIdx);
+            assertEquals(httCard.getCollectorNumber(), collectorNumbersHymnToTourach[artIdx-1]);
+            assertEquals(httCard, httCardLegacy);
+        }
+
+        // Testing with default value of CardArt Preference with multiple artIndex
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
+        this.cardDb.setCardArtPreference(false, true);  // Original Print, Filter on Core
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY);
+
+        for (int artIdx = 1; artIdx <= 4; artIdx++) {
+            httCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameHymnToTourach, artIdx, httReleaseDate);
+            httCardLegacy = this.legacyCardDb.getCardFromEdition(cardNameHymnToTourach, httReleaseDate, setPref, artIdx);
+            assertEquals(httCard.getCollectorNumber(), collectorNumbersHymnToTourach[artIdx-1]);
+            assertEquals(httCard, httCardLegacy);
+        }
+
+        // Restore Default Card Art Preference, for later use
+        this.cardDb.setCardArtPreference(true, false);  // Latest Print, NO Filter
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
+
+    }
+
+    // == Specialised Card Art Preference Retrieval and Release Date Constraint (AFTER)
+    @Test
+    public void testGetCardFromEditionsWithCardNameAndCardArtPreferenceReleasedAfterDate(){
+        // Set Reference Dates
+        Date tenthEditionReleaseDate = null;
+        Date anthologiesDate = null;
+
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            tenthEditionReleaseDate = format.parse(releasedAfterTenthEditionDate);
+            anthologiesDate = format.parse(releasedAfterAnthologiesDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            fail();
+        }
+
+        // == Original Art
+        CardDb.CardArtPreference artPreference = CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS;
+
+        PaperCard sdCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameShivanDragon, artPreference, tenthEditionReleaseDate);
+        assertEquals(sdCard.getName(), cardNameShivanDragon);
+        assertEquals(sdCard.getEdition(), originalArtShivanDragonEditionReleasedAfterTenthEdition);
+
+        // foiled card request
+        PaperCard ldFoilCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameFoilLightningDragon, artPreference, tenthEditionReleaseDate);
+        assertEquals(ldFoilCard.getName(), cardNameLightningDragon);
+        assertEquals(ldFoilCard.getEdition(), originalArtLightningDragonEditionReleasedAfterTenthEdition);
+        assertTrue(ldFoilCard.isFoil());
+
+        PaperCard httCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameHymnToTourach, artPreference, anthologiesDate);
+        assertEquals(httCard.getName(), cardNameHymnToTourach);
+        assertEquals(httCard.getEdition(), originalArtHymnToTourachEditionReleasedAfterAnthologies);
+
+        // == Original Art NO PROMO
+        artPreference = CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY;
+
+        sdCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameShivanDragon, artPreference, tenthEditionReleaseDate);
+        assertEquals(sdCard.getName(), cardNameShivanDragon);
+        assertEquals(sdCard.getEdition(), originalArtShivanDragonEditionReleasedAfterTenthEditionNoPromo);
+
+        // foiled card request
+        ldFoilCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameFoilLightningDragon, artPreference, tenthEditionReleaseDate);
+        assertEquals(ldFoilCard.getName(), cardNameLightningDragon);
+        assertEquals(ldFoilCard.getEdition(), originalArtLightningDragonEditionReleasedAfterTenthEditionNoPromo);
+        assertTrue(ldFoilCard.isFoil());
+
+        httCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameHymnToTourach, artPreference, anthologiesDate);
+        assertEquals(httCard.getName(), cardNameHymnToTourach);
+        assertEquals(httCard.getEdition(), originalArtHymnToTourachEditionReleasedAfterAnthologiesNoPromo);
+
+         // == Latest Art
+        artPreference = CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS;
+
+        sdCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameShivanDragon, artPreference, tenthEditionReleaseDate);
+        assertEquals(sdCard.getName(), cardNameShivanDragon);
+        assertEquals(sdCard.getEdition(), latestArtShivanDragonEdition);
+
+        // foiled card request
+        ldFoilCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameFoilLightningDragon, artPreference, tenthEditionReleaseDate);
+        assertEquals(ldFoilCard.getName(), cardNameLightningDragon);
+        assertEquals(ldFoilCard.getEdition(), latestArtLightningDragonEdition);
+        assertTrue(ldFoilCard.isFoil());
+
+        httCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameHymnToTourach, artPreference, anthologiesDate);
+        assertEquals(httCard.getName(), cardNameHymnToTourach);
+        assertEquals(httCard.getEdition(), latestArtHymnToTourachEdition);
+
+        // == Latest Art NO PROMO
+        artPreference = CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY;
+
+        sdCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameShivanDragon, artPreference, tenthEditionReleaseDate);
+        assertEquals(sdCard.getName(), cardNameShivanDragon);
+        assertEquals(sdCard.getEdition(), latestArtShivanDragonEdition);
+
+        // foiled card request
+        ldFoilCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameFoilLightningDragon, artPreference, tenthEditionReleaseDate);
+        assertEquals(ldFoilCard.getName(), cardNameLightningDragon);
+        assertEquals(ldFoilCard.getEdition(), latestArtLightningDragonEdition);
+        assertTrue(ldFoilCard.isFoil());
+
+        httCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameHymnToTourach, artPreference, anthologiesDate);
+        assertEquals(httCard.getName(), cardNameHymnToTourach);
+        assertEquals(httCard.getEdition(), latestArtHymnToTourachEditionNoPromo);
+    }
+
+    @Test
+    public void testGetCardFromEditionsWithCardNameAndCardArtPreferenceReleasedAfterDateAlsoIncludingArtIndex(){
+        // Set Reference Dates
+        Date tenthEditionReleaseDate = null;
+        Date anthologiesDate = null;
+        Date alphaRelaseDate = null;
+
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            tenthEditionReleaseDate = format.parse(releasedAfterTenthEditionDate);
+            anthologiesDate = format.parse(releasedAfterAnthologiesDate);
+            // used for art index for Hymn to Tourach
+            alphaRelaseDate = format.parse(alphaEditionReleaseDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            fail();
+        }
+
+        // == Original Art
+        CardDb.CardArtPreference artPreference = CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS;
+
+        PaperCard sdCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameShivanDragon, artPreference, 1, tenthEditionReleaseDate);
+        assertEquals(sdCard.getName(), cardNameShivanDragon);
+        assertEquals(sdCard.getEdition(), originalArtShivanDragonEditionReleasedAfterTenthEdition);
+        assertEquals(sdCard.getArtIndex(), 1);
+
+        // foiled card request
+        PaperCard ldFoilCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameFoilLightningDragon, artPreference, 1, tenthEditionReleaseDate);
+        assertEquals(ldFoilCard.getName(), cardNameLightningDragon);
+        assertEquals(ldFoilCard.getEdition(), originalArtLightningDragonEditionReleasedAfterTenthEdition);
+        assertTrue(ldFoilCard.isFoil());
+        assertEquals(ldFoilCard.getArtIndex(), 1);
+
+        PaperCard httCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameHymnToTourach, artPreference, 1, anthologiesDate);
+        assertEquals(httCard.getName(), cardNameHymnToTourach);
+        assertEquals(httCard.getEdition(), originalArtHymnToTourachEditionReleasedAfterAnthologies);
+        assertEquals(httCard.getArtIndex(), 1);
+
+        for (int artIdx = 1; artIdx <= 4; artIdx++) {
+            httCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameHymnToTourach, artPreference, artIdx, alphaRelaseDate);
+            assertEquals(httCard.getCollectorNumber(), collectorNumbersHymnToTourach[artIdx-1]);
+            assertEquals(httCard.getArtIndex(), artIdx);
+        }
+
+        // == Original Art NO PROMO
+        artPreference = CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY;
+
+        sdCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameShivanDragon, artPreference, 1, tenthEditionReleaseDate);
+        assertEquals(sdCard.getName(), cardNameShivanDragon);
+        assertEquals(sdCard.getEdition(), originalArtShivanDragonEditionReleasedAfterTenthEditionNoPromo);
+        assertEquals(sdCard.getArtIndex(), 1);
+
+        // foiled card request
+        ldFoilCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameFoilLightningDragon, artPreference, 1, tenthEditionReleaseDate);
+        assertEquals(ldFoilCard.getName(), cardNameLightningDragon);
+        assertEquals(ldFoilCard.getEdition(), originalArtLightningDragonEditionReleasedAfterTenthEditionNoPromo);
+        assertTrue(ldFoilCard.isFoil());
+        assertEquals(ldFoilCard.getArtIndex(), 1);
+
+        httCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameHymnToTourach, artPreference, 1, anthologiesDate);
+        assertEquals(httCard.getName(), cardNameHymnToTourach);
+        assertEquals(httCard.getEdition(), originalArtHymnToTourachEditionReleasedAfterAnthologiesNoPromo);
+        assertEquals(httCard.getArtIndex(), 1);
+
+        for (int artIdx = 1; artIdx <= 4; artIdx++) {
+            httCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameHymnToTourach, artPreference, artIdx, alphaRelaseDate);
+            assertEquals(httCard.getCollectorNumber(), collectorNumbersHymnToTourach[artIdx-1]);
+            assertEquals(httCard.getArtIndex(), artIdx);
+        }
+
+        // == Latest Art
+        artPreference = CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS;
+
+        sdCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameShivanDragon, artPreference, 1, tenthEditionReleaseDate);
+        assertEquals(sdCard.getName(), cardNameShivanDragon);
+        assertEquals(sdCard.getEdition(), latestArtShivanDragonEdition);
+        assertEquals(sdCard.getArtIndex(), 1);
+
+        // foiled card request
+        ldFoilCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameFoilLightningDragon, artPreference, 1, tenthEditionReleaseDate);
+        assertEquals(ldFoilCard.getName(), cardNameLightningDragon);
+        assertEquals(ldFoilCard.getEdition(), latestArtLightningDragonEdition);
+        assertTrue(ldFoilCard.isFoil());
+        assertEquals(ldFoilCard.getArtIndex(), 1);
+
+        httCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameHymnToTourach, artPreference, 1, anthologiesDate);
+        assertEquals(httCard.getName(), cardNameHymnToTourach);
+        assertEquals(httCard.getEdition(), latestArtHymnToTourachEdition);
+        assertEquals(httCard.getArtIndex(), 1);
+
+        // == Latest Art NO PROMO
+        artPreference = CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY;
+
+        sdCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameShivanDragon, artPreference, 1, tenthEditionReleaseDate);
+        assertEquals(sdCard.getName(), cardNameShivanDragon);
+        assertEquals(sdCard.getEdition(), latestArtShivanDragonEdition);
+        assertEquals(sdCard.getArtIndex(), 1);
+
+        // foiled card request
+        ldFoilCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameFoilLightningDragon, artPreference, 1, tenthEditionReleaseDate);
+        assertEquals(ldFoilCard.getName(), cardNameLightningDragon);
+        assertEquals(ldFoilCard.getEdition(), latestArtLightningDragonEdition);
+        assertTrue(ldFoilCard.isFoil());
+        assertEquals(ldFoilCard.getArtIndex(), 1);
+
+        httCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameHymnToTourach, artPreference, 1, anthologiesDate);
+        assertEquals(httCard.getName(), cardNameHymnToTourach);
+        assertEquals(httCard.getEdition(), latestArtHymnToTourachEditionNoPromo);
+        assertEquals(httCard.getArtIndex(), 1);
+    }
+
+    @Test
+    public void testGetCardFromEditionsAfterReleaseDateUsingDefaultCardArtPreference(){
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
+        // Set Reference Dates
+        Date tenthEditionReleaseDate = null;
+        Date anthologiesDate = null;
+        Date alphaRelaseDate = null;
+
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            tenthEditionReleaseDate = format.parse(releasedAfterTenthEditionDate);
+            anthologiesDate = format.parse(releasedAfterAnthologiesDate);
+            // used for art index for Hymn to Tourach
+            alphaRelaseDate = format.parse(alphaEditionReleaseDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            fail();
+        }
+
+        // == NOTE == Avoiding passing in also ArtIndex when it's not relevant (i.e. different than default)
+
+        // == Original Art
+        this.cardDb.setCardArtPreference(false, false);  // Original Print, Filter on Core
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS);
+
+        PaperCard sdCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameShivanDragon, tenthEditionReleaseDate);
+        assertEquals(sdCard.getName(), cardNameShivanDragon);
+        assertEquals(sdCard.getEdition(), originalArtShivanDragonEditionReleasedAfterTenthEdition);
+        assertEquals(sdCard.getArtIndex(), 1);
+
+        // foiled card request
+        PaperCard ldFoilCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameFoilLightningDragon, tenthEditionReleaseDate);
+        assertEquals(ldFoilCard.getName(), cardNameLightningDragon);
+        assertEquals(ldFoilCard.getEdition(), originalArtLightningDragonEditionReleasedAfterTenthEdition);
+        assertTrue(ldFoilCard.isFoil());
+        assertEquals(ldFoilCard.getArtIndex(), 1);
+
+        PaperCard httCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameHymnToTourach, anthologiesDate);
+        assertEquals(httCard.getName(), cardNameHymnToTourach);
+        assertEquals(httCard.getEdition(), originalArtHymnToTourachEditionReleasedAfterAnthologies);
+        assertEquals(httCard.getArtIndex(), 1);
+
+        for (int artIdx = 1; artIdx <= 4; artIdx++) {
+            httCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameHymnToTourach, artIdx, alphaRelaseDate);
+            assertEquals(httCard.getCollectorNumber(), collectorNumbersHymnToTourach[artIdx-1]);
+            assertEquals(httCard.getArtIndex(), artIdx);
+        }
+
+        // == Original Art NO PROMO
+        this.cardDb.setCardArtPreference(false, true);  // Original Print, Filter on Core
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY);
+
+        sdCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameShivanDragon, tenthEditionReleaseDate);
+        assertEquals(sdCard.getName(), cardNameShivanDragon);
+        assertEquals(sdCard.getEdition(), originalArtShivanDragonEditionReleasedAfterTenthEditionNoPromo);
+        assertEquals(sdCard.getArtIndex(), 1);
+
+        // foiled card request
+        ldFoilCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameFoilLightningDragon, tenthEditionReleaseDate);
+        assertEquals(ldFoilCard.getName(), cardNameLightningDragon);
+        assertEquals(ldFoilCard.getEdition(), originalArtLightningDragonEditionReleasedAfterTenthEditionNoPromo);
+        assertTrue(ldFoilCard.isFoil());
+        assertEquals(ldFoilCard.getArtIndex(), 1);
+
+        httCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameHymnToTourach, anthologiesDate);
+        assertEquals(httCard.getName(), cardNameHymnToTourach);
+        assertEquals(httCard.getEdition(), originalArtHymnToTourachEditionReleasedAfterAnthologiesNoPromo);
+        assertEquals(httCard.getArtIndex(), 1);
+
+        for (int artIdx = 1; artIdx <= 4; artIdx++) {
+            httCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameHymnToTourach, artIdx, alphaRelaseDate);
+            assertEquals(httCard.getCollectorNumber(), collectorNumbersHymnToTourach[artIdx-1]);
+            assertEquals(httCard.getArtIndex(), artIdx);
+        }
+
+        // Restore Default Card Art Preference, for later use
+        this.cardDb.setCardArtPreference(true, false);  // Latest Print, NO Filter
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
+    }
+
+    @Test
+    public void testCounterSpellManyEditionsAlsoWithDateRestrictionsAndCardArtPreferences(){
+        // Test fetching counterspell at different editions
+        for (String setCode : this.editionsCounterspell){
+            PaperCard counterSpell = this.cardDb.getCard(this.cardNameCounterspell, setCode);
+            assertEquals(counterSpell.getName(), this.cardNameCounterspell);
+            assertEquals(counterSpell.getEdition(), setCode);
+            assertFalse(counterSpell.isFoil());
+        }
+
+        Date releaseDatebeforeMagicOnlinePromos = null;
+        Date releaseDateBeforeEternalMasters = null;
+        Date releaseDateAfterBattleRoyale = null;
+
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            releaseDatebeforeMagicOnlinePromos = format.parse(counterspellReleasedBeforeMagicOnlinePromosDate);
+            releaseDateBeforeEternalMasters = format.parse(counterspellReleasedBeforeEternalMastersDate);
+            releaseDateAfterBattleRoyale = format.parse(counterspellReleasedAfterBattleRoyaleDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            fail();
+        }
+
+        PaperCard counterSpellCard = null;
+
+        // == LATEST ART All Editions
+        counterSpellCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameCounterspell,
+                CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS, releaseDatebeforeMagicOnlinePromos);
+        assertEquals(counterSpellCard.getName(), cardNameCounterspell);
+        assertEquals(counterSpellCard.getEdition(), counterspellLatestArtsReleasedBeforeMagicOnlinePromos[0]);
+
+        counterSpellCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameCounterspell,
+                CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS, releaseDateBeforeEternalMasters);
+        assertEquals(counterSpellCard.getName(), cardNameCounterspell);
+        assertEquals(counterSpellCard.getEdition(), counterspellLatestArtReleasedBeforeEternalMasters[0]);
+
+        // == LATEST ART No Promo
+        counterSpellCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameCounterspell,
+                CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY, releaseDatebeforeMagicOnlinePromos);
+        assertEquals(counterSpellCard.getName(), cardNameCounterspell);
+        assertEquals(counterSpellCard.getEdition(), counterspellLatestArtsReleasedBeforeMagicOnlinePromos[1]);
+
+        counterSpellCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameCounterspell,
+                CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY, releaseDateBeforeEternalMasters);
+        assertEquals(counterSpellCard.getName(), cardNameCounterspell);
+        assertEquals(counterSpellCard.getEdition(), counterspellLatestArtReleasedBeforeEternalMasters[1]);
+
+        // == ORIGINAL ART All Editions
+        counterSpellCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameCounterspell,
+                CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS, releaseDateBeforeEternalMasters);
+        assertEquals(counterSpellCard.getName(), cardNameCounterspell);
+        assertEquals(counterSpellCard.getEdition(), counterspellOriginalArtReleasedAfterEternalMasters[0]);
+
+        counterSpellCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameCounterspell,
+                CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS, releaseDateAfterBattleRoyale);
+        assertEquals(counterSpellCard.getName(), cardNameCounterspell);
+        assertEquals(counterSpellCard.getEdition(), counterspellOriginalArtReleasedAfterBattleRoyale[0]);
+
+        // == ORIGINAL ART No Promo
+        counterSpellCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameCounterspell,
+                CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY, releaseDateBeforeEternalMasters);
+        assertEquals(counterSpellCard.getName(), cardNameCounterspell);
+        assertEquals(counterSpellCard.getEdition(), counterspellOriginalArtReleasedAfterEternalMasters[1]);
+
+        counterSpellCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameCounterspell,
+                CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY, releaseDateAfterBattleRoyale);
+        assertEquals(counterSpellCard.getName(), cardNameCounterspell);
+        assertEquals(counterSpellCard.getEdition(), counterspellOriginalArtReleasedAfterBattleRoyale[1]);
+
+        // Now with setting preferences - so going with default cardArt preference.
+
+        // == Latest Art
+        this.cardDb.setCardArtPreference(true, false);
+        counterSpellCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameCounterspell, releaseDatebeforeMagicOnlinePromos);
+        assertEquals(counterSpellCard.getName(), cardNameCounterspell);
+        assertEquals(counterSpellCard.getEdition(), counterspellLatestArtsReleasedBeforeMagicOnlinePromos[0]);
+
+        counterSpellCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameCounterspell, releaseDateBeforeEternalMasters);
+        assertEquals(counterSpellCard.getName(), cardNameCounterspell);
+        assertEquals(counterSpellCard.getEdition(), counterspellLatestArtReleasedBeforeEternalMasters[0]);
+
+        // == Latest Art No Promo
+        this.cardDb.setCardArtPreference(true, true);
+        counterSpellCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameCounterspell, releaseDatebeforeMagicOnlinePromos);
+        assertEquals(counterSpellCard.getName(), cardNameCounterspell);
+        assertEquals(counterSpellCard.getEdition(), counterspellLatestArtsReleasedBeforeMagicOnlinePromos[1]);
+
+        counterSpellCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameCounterspell, releaseDateBeforeEternalMasters);
+        assertEquals(counterSpellCard.getName(), cardNameCounterspell);
+        assertEquals(counterSpellCard.getEdition(), counterspellLatestArtReleasedBeforeEternalMasters[1]);
+
+        // == Original Art
+        this.cardDb.setCardArtPreference(false, false);
+        counterSpellCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameCounterspell, releaseDateBeforeEternalMasters);
+        assertEquals(counterSpellCard.getName(), cardNameCounterspell);
+        assertEquals(counterSpellCard.getEdition(), counterspellOriginalArtReleasedAfterEternalMasters[0]);
+
+        counterSpellCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameCounterspell, releaseDateAfterBattleRoyale);
+        assertEquals(counterSpellCard.getName(), cardNameCounterspell);
+        assertEquals(counterSpellCard.getEdition(), counterspellOriginalArtReleasedAfterBattleRoyale[0]);
+
+        // == Original Art No Promo
+        this.cardDb.setCardArtPreference(false, true);
+        counterSpellCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameCounterspell, releaseDateBeforeEternalMasters);
+        assertEquals(counterSpellCard.getName(), cardNameCounterspell);
+        assertEquals(counterSpellCard.getEdition(), counterspellOriginalArtReleasedAfterEternalMasters[1]);
+
+        counterSpellCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameCounterspell, releaseDateAfterBattleRoyale);
+        assertEquals(counterSpellCard.getName(), cardNameCounterspell);
+        assertEquals(counterSpellCard.getEdition(), counterspellOriginalArtReleasedAfterBattleRoyale[1]);
+
+        // restore default
+        this.cardDb.setCardArtPreference(true, false);
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
+    }
+
+
+    // == Testing other Non-Correct Input Parameter values
     @Test
     public void testGetCardByNameWithNull(){
         PaperCard nullCard = this.cardDb.getCard(null);
@@ -1094,12 +1364,12 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         assertEquals(httCard.getName(), cardNameHymnToTourach);
         // If not specified, card art preference should be LatestPrint
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
-        assertEquals(httCard.getEdition(), newFrameHymnToTourachEdition);
+        assertEquals(httCard.getEdition(), latestArtHymnToTourachEdition);
         // Try changing the policy
         this.cardDb.setCardArtPreference(false, true);
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY);
         httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach);
-        assertEquals(httCard.getEdition(), oldFrameHymnToTourachEditionNoPromo);
+        assertEquals(httCard.getEdition(), originalArtHymnToTourachEditionNoPromo);
         // restore default
         this.cardDb.setCardArtPreference(true, false);
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
@@ -1164,6 +1434,33 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         assertEquals(shivanCard.getName(), cardNameShivanDragon);
         assertEquals(shivanCard.getEdition(), editionShivanDragon);
         assertEquals(shivanCard.getCollectorNumber(), collNrShivanDragon);
+    }
+
+    @Test
+    public void testNullAndBoundaryDateValuesForGetCardFromEditionsWithDateRestrictions(){
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
+        PaperCard shivanDragon = this.cardDb.getCardFromEditionsReleasedBefore(cardNameShivanDragon, null);
+        assertNotNull(shivanDragon);
+        assertEquals(shivanDragon.getName(), cardNameShivanDragon);
+        assertEquals(shivanDragon.getEdition(), latestArtShivanDragonEdition);
+
+        shivanDragon = this.cardDb.getCardFromEditionsReleasedAfter(cardNameShivanDragon, null);
+        assertNotNull(shivanDragon);
+        assertEquals(shivanDragon.getName(), cardNameShivanDragon);
+        assertEquals(shivanDragon.getEdition(), latestArtShivanDragonEdition);
+
+        Date alphaRelaseDate = null;
+        Date currentDate = Date.from(Instant.now());;
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            alphaRelaseDate = format.parse(alphaEditionReleaseDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            fail();
+        }
+
+        assertNull(this.cardDb.getCardFromEditionsReleasedBefore(cardNameShivanDragon, alphaRelaseDate));
+        assertNull(this.cardDb.getCardFromEditionsReleasedAfter(cardNameShivanDragon, currentDate));
     }
 
     @Test
@@ -1310,96 +1607,156 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
      *         which will have multiple editions returned over the preference selections.
      */
     @Test
-    public void testCardsAlwaysReturnedEvenIfCardArtPreferenceIsTooStrict(){
-        // REFERENCE CASE - NO FILTER
+    public void testCardsAlwaysReturnedEvenIfCardArtPreferenceIsTooStrictAlsoComparedWithLegacyDb(){
+        // == 1. REFERENCE CASE - Latest Art NO FILTER
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
 
-        PaperCard atog = this.cardDb.getCard("Atog");
+        String cnAtog = "Atog";
+        PaperCard atog = this.cardDb.getCard(cnAtog);
         assertNotNull(atog);
-        assertEquals(atog.getEdition(), "ME4");  // Game Night
+        assertEquals(atog.getEdition(), "ME4");  // Masters Edition IV
+        PaperCard legacyAtog = this.legacyCardDb.getCardFromEdition(cnAtog, LegacyCardDb.LegacySetPreference.Latest);
+        if (legacyAtog != null)
+            assertEquals(atog, legacyAtog);
 
-        PaperCard militantAngel = this.cardDb.getCard("Militant Angel");
+        String cnMilitantAngel = "Militant Angel";
+        PaperCard militantAngel = this.cardDb.getCard(cnMilitantAngel);
         assertNotNull(militantAngel);
         assertEquals(militantAngel.getEdition(), "GNT");  // Game Night
+        PaperCard legacyMilitantAngel = this.legacyCardDb.getCardFromEdition(cnMilitantAngel,
+                LegacyCardDb.LegacySetPreference.Latest);
+        if (legacyMilitantAngel != null)
+            assertEquals(militantAngel, legacyMilitantAngel);
 
         // Loyal Unicorn: Available in Forge in The List and COMMANDER 2018
-        PaperCard loyalUnicorn = this.cardDb.getCard("Loyal Unicorn");
+        String cnLoyalUnicorn = "Loyal Unicorn";
+        PaperCard loyalUnicorn = this.cardDb.getCard(cnLoyalUnicorn);
         assertNotNull(loyalUnicorn);
         assertEquals(loyalUnicorn.getEdition(), "PLIST");  // The List
+        PaperCard legacyLoyalUnicorn = this.legacyCardDb.getCardFromEdition(cnLoyalUnicorn,
+                LegacyCardDb.LegacySetPreference.Latest);
+        if (legacyLoyalUnicorn != null)
+            assertEquals(loyalUnicorn, legacyLoyalUnicorn);
 
         // Selfless Squire: Available in Forge in COMMANDER 2021; Treasure Chest; COMMANDER 2016
-        PaperCard selflessSquire = this.cardDb.getCard("Selfless Squire");
+        String cnSelflessSquire = "Selfless Squire";
+        PaperCard selflessSquire = this.cardDb.getCard(cnSelflessSquire);
         assertNotNull(selflessSquire);
-        assertEquals(selflessSquire.getEdition(), "C21");  // The List
+        assertEquals(selflessSquire.getEdition(), "C21");  // Commander 2021
+        PaperCard legacySelflessSquire = this.legacyCardDb.getCardFromEdition(cnSelflessSquire,
+                LegacyCardDb.LegacySetPreference.Latest);
+        if (legacySelflessSquire != null)
+            assertEquals(selflessSquire, legacySelflessSquire);
 
-        // Set Strictness to Expansions and Reprint Only (LATEST)
+        // == 2. Set Strictness to Expansions and Reprint Only (LATEST)
         this.cardDb.setCardArtPreference(true, true);
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY);
 
         // ONLY CHANGE HERE IS FOR ATOG
-        atog = this.cardDb.getCard("Atog");
+        atog = this.cardDb.getCard(cnAtog);
         assertNotNull(atog);
-        assertEquals(atog.getEdition(), "MRD");  // Game Night
+        assertEquals(atog.getEdition(), "MRD");
+        legacyAtog = this.legacyCardDb.getCardFromEdition(cnAtog, LegacyCardDb.LegacySetPreference.LatestCoreExp);
+        if (legacyAtog != null)
+            assertEquals(atog, legacyAtog);
 
-        militantAngel = this.cardDb.getCard("Militant Angel");
+        militantAngel = this.cardDb.getCard(cnMilitantAngel);
         assertNotNull(militantAngel);
-        assertEquals(militantAngel.getEdition(), "GNT");  // Game Night
+        assertEquals(militantAngel.getEdition(), "GNT");
+        legacyMilitantAngel = this.legacyCardDb.getCardFromEdition(cnMilitantAngel,
+                LegacyCardDb.LegacySetPreference.LatestCoreExp);
+        if (legacyMilitantAngel != null)
+            assertEquals(militantAngel, legacyMilitantAngel);
 
         // Loyal Unicorn: Available in Forge in The List and COMMANDER 2018
-        loyalUnicorn = this.cardDb.getCard("Loyal Unicorn");
+        loyalUnicorn = this.cardDb.getCard(cnLoyalUnicorn);
         assertNotNull(loyalUnicorn);
-        assertEquals(loyalUnicorn.getEdition(), "PLIST");  // The List
+        assertEquals(loyalUnicorn.getEdition(), "PLIST");
+        legacyLoyalUnicorn = this.legacyCardDb.getCardFromEdition(cnLoyalUnicorn,
+                LegacyCardDb.LegacySetPreference.LatestCoreExp);
+        if (legacyLoyalUnicorn != null)
+            assertEquals(loyalUnicorn, legacyLoyalUnicorn);
 
         // Selfless Squire: Available in Forge in COMMANDER 2021; Treasure Chest; COMMANDER 2016
-        selflessSquire = this.cardDb.getCard("Selfless Squire");
+        selflessSquire = this.cardDb.getCard(cnSelflessSquire);
         assertNotNull(selflessSquire);
-        assertEquals(selflessSquire.getEdition(), "C21");  // The List
+        assertEquals(selflessSquire.getEdition(), "C21");
+        legacySelflessSquire = this.legacyCardDb.getCardFromEdition(cnSelflessSquire,
+                LegacyCardDb.LegacySetPreference.LatestCoreExp);
+        if (legacySelflessSquire != null)
+            assertEquals(selflessSquire, legacySelflessSquire);
 
-        // Set Strictness to ORIGINAL ART NO FILTER - Ref case
+        // == 3. Set Strictness to ORIGINAL ART NO FILTER
         this.cardDb.setCardArtPreference(false, false);
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS);
 
-        // ONLY CHANGE HERE IS FOR ATOG
-        atog = this.cardDb.getCard("Atog");
+        atog = this.cardDb.getCard(cnAtog);
         assertNotNull(atog);
-        assertEquals(atog.getEdition(), "ATQ");  // Game Night
+        assertEquals(atog.getEdition(), "ATQ");
+        legacyAtog = this.legacyCardDb.getCardFromEdition(cnAtog, LegacyCardDb.LegacySetPreference.Earliest);
+        if (legacyAtog != null)
+            assertEquals(atog, legacyAtog);
 
-        militantAngel = this.cardDb.getCard("Militant Angel");
+        militantAngel = this.cardDb.getCard(cnMilitantAngel);
         assertNotNull(militantAngel);
         assertEquals(militantAngel.getEdition(), "GNT");
+        legacyMilitantAngel = this.legacyCardDb.getCardFromEdition(cnMilitantAngel,
+                LegacyCardDb.LegacySetPreference.Earliest);
+        if (legacyMilitantAngel != null)
+            assertEquals(militantAngel, legacyMilitantAngel);
 
         // Loyal Unicorn: Available in Forge in The List and COMMANDER 2018
-        loyalUnicorn = this.cardDb.getCard("Loyal Unicorn");
+        loyalUnicorn = this.cardDb.getCard(cnLoyalUnicorn);
         assertNotNull(loyalUnicorn);
         assertEquals(loyalUnicorn.getEdition(), "C18");
+        legacyLoyalUnicorn = this.legacyCardDb.getCardFromEdition(cnLoyalUnicorn,
+                LegacyCardDb.LegacySetPreference.Earliest);
+        if (legacyLoyalUnicorn != null)
+            assertEquals(loyalUnicorn, legacyLoyalUnicorn);
 
         // Selfless Squire: Available in Forge in COMMANDER 2021; Treasure Chest; COMMANDER 2016
-        selflessSquire = this.cardDb.getCard("Selfless Squire");
+        selflessSquire = this.cardDb.getCard(cnSelflessSquire);
         assertNotNull(selflessSquire);
         assertEquals(selflessSquire.getEdition(), "C16");
+        legacySelflessSquire = this.legacyCardDb.getCardFromEdition(cnSelflessSquire,
+                LegacyCardDb.LegacySetPreference.Earliest);
+        if (legacySelflessSquire != null)
+            assertEquals(selflessSquire, legacySelflessSquire);
 
-        // Set Strictness to ORIGINAL ART NO FILTER - Ref case
+        // == 4. Set Strictness to ORIGINAL ART WITH FILTER (*only*)
         this.cardDb.setCardArtPreference(false, true);
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY);
 
-        // ONLY CHANGE HERE IS FOR ATOG
-        atog = this.cardDb.getCard("Atog");
+        atog = this.cardDb.getCard(cnAtog);
         assertNotNull(atog);
-        assertEquals(atog.getEdition(), "ATQ");  // Game Night
+        assertEquals(atog.getEdition(), "ATQ");
+        legacyAtog = this.legacyCardDb.getCardFromEdition(cnAtog, LegacyCardDb.LegacySetPreference.EarliestCoreExp);
+        if (legacyAtog != null)
+            assertEquals(atog, legacyAtog);
 
-        militantAngel = this.cardDb.getCard("Militant Angel");
+        militantAngel = this.cardDb.getCard(cnMilitantAngel);
         assertNotNull(militantAngel);
         assertEquals(militantAngel.getEdition(), "GNT");
+        legacyMilitantAngel = this.legacyCardDb.getCardFromEdition(cnMilitantAngel,
+                LegacyCardDb.LegacySetPreference.EarliestCoreExp);
+        if (legacyMilitantAngel != null)
+            assertEquals(militantAngel, legacyMilitantAngel);
 
-        // Loyal Unicorn: Available in Forge in The List and COMMANDER 2018
-        loyalUnicorn = this.cardDb.getCard("Loyal Unicorn");
+        loyalUnicorn = this.cardDb.getCard(cnLoyalUnicorn);
         assertNotNull(loyalUnicorn);
-        assertEquals(loyalUnicorn.getEdition(), "PLIST");  // This is returned as this is a REPRINT Set!!
+        assertEquals(loyalUnicorn.getEdition(), "PLIST");
+        legacyLoyalUnicorn = this.legacyCardDb.getCardFromEdition(cnLoyalUnicorn,
+                LegacyCardDb.LegacySetPreference.EarliestCoreExp);
+        if (legacyLoyalUnicorn != null)
+            assertEquals(loyalUnicorn, legacyLoyalUnicorn);
 
-        // Selfless Squire: Available in Forge in COMMANDER 2021; Treasure Chest; COMMANDER 2016
-        selflessSquire = this.cardDb.getCard("Selfless Squire");
+        selflessSquire = this.cardDb.getCard(cnSelflessSquire);
         assertNotNull(selflessSquire);
         assertEquals(selflessSquire.getEdition(), "C16");
+        legacySelflessSquire = this.legacyCardDb.getCardFromEdition(cnSelflessSquire,
+                LegacyCardDb.LegacySetPreference.EarliestCoreExp);
+        if (legacySelflessSquire != null)
+            assertEquals(selflessSquire, legacySelflessSquire);
 
         // Set Art Preference back to default
         this.cardDb.setCardArtPreference(true, false);
