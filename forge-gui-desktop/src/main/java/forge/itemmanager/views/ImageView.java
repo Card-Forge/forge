@@ -511,7 +511,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         if (columnCount == columnCount0) { return; }
         columnCount = columnCount0;
         cbColumnCount.setSelectedIndex(columnCount - MIN_COLUMN_COUNT);
-        
+
         if (!forSetup) {
             if (itemManager.getConfig() != null) {
                 itemManager.getConfig().setImageColumnCount(columnCount);
@@ -523,7 +523,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 updateLayout(false);
                 return;
             }
-    
+
             int offsetTop = focalItem0.getTop() - getScrollValue();
             updateLayout(false);
             setScrollValue(focalItem0.getTop() - offsetTop);
@@ -1223,7 +1223,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         int scale = CardFaceSymbols.getHeight() * cornerSize/8;
                         int scaleArt = CardFaceSymbols.getHeight() * cornerSize/7;
 
-                        BufferedImage cardImage = ImageCache.scaleImage(deckImageKey, bounds.width, bounds.height, false);
+                        BufferedImage cardImage = ImageCache.scaleImage(deckImageKey, bounds.width, bounds.height, false, null);
 
                         if (cardImage == null) {
                             //draw generic box

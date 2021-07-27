@@ -22,12 +22,10 @@ import org.apache.commons.lang3.StringUtils;
 
 import forge.card.CardRarity;
 import forge.card.mana.ManaCost;
-import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.gui.card.CardDetailUtil;
 import forge.gui.card.CardDetailUtil.DetailColors;
-import forge.item.PaperCard;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
@@ -148,8 +146,7 @@ public class FCardImageRenderer {
         prevImageHeight = h;
     }
 
-    public static void drawCardImage(Graphics2D g, PaperCard pc, boolean altState, int width, int height) {
-        final CardView card = Card.getCardForUi(pc).getView();
+    public static void drawCardImage(Graphics2D g, CardView card, boolean altState, int width, int height) {
         float x = 0, y = 0, w = width, h = height;
         updateStaticFields(g, w, h);
         g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
