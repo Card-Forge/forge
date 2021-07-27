@@ -346,9 +346,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         }
                     },
                 3);
-        lstSettings.addItem(new BooleanSetting(FPref.UI_LOAD_CUSTOM_CARDS,
-                                    localizer.getMessage("lblEnableCustomCards"),
-                                    localizer.getMessage("nlEnableCustomCards")) {
+        lstSettings.addItem(new BooleanSetting(FPref.ALLOW_CUSTOM_CARDS_IN_DECKS_CONFORMANCE,
+                                    localizer.getMessage("lblAllowCustomCardsInDecks"),
+                                    localizer.getMessage("nlAllowCustomCardsInDecks")) {
                                 @Override
                                 public void select() {
                                     super.select();
