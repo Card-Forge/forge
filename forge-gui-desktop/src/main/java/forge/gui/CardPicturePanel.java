@@ -105,19 +105,19 @@ public final class CardPicturePanel extends JPanel implements ImageFetcher.Callb
 
     private BufferedImage getImage() {
         if (!mayView) {
-            return ImageCache.getOriginalImage(ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD), true);
+            return ImageCache.getOriginalImage(ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD), true, null);
         }
 
         if (displayed instanceof InventoryItem) {
             final InventoryItem item = (InventoryItem) displayed;
-            BufferedImage image = ImageCache.getOriginalImage(item.getImageKey(false), true);
+            BufferedImage image = ImageCache.getOriginalImage(item.getImageKey(false), true, null);
             if (ImageCache.isDefaultImage(image) && item instanceof PaperCard) {
                 GuiBase.getInterface().getImageFetcher().fetchImage(item.getImageKey(false), this);
             }
             return image;
         } else if (displayed instanceof CardStateView) {
             CardStateView card = (CardStateView) displayed;
-            BufferedImage image = ImageCache.getOriginalImage(card.getImageKey(), false);
+            BufferedImage image = ImageCache.getOriginalImage(card.getImageKey(), false, card.getCard());
             if (image == null) {
                 GuiBase.getInterface().getImageFetcher().fetchImage(card.getImageKey(), this);
             }

@@ -38,9 +38,11 @@ import com.google.common.cache.CacheLoader.InvalidCacheLoadException;
 import com.google.common.cache.LoadingCache;
 import com.mortennobel.imagescaling.ResampleOp;
 
+import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.gui.FThreads;
+import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
@@ -144,21 +146,24 @@ public class ImageCache {
      * the image from file (slower) and then add it to the cache for fast future access.
      * </p>
      */
-    public static BufferedImage getOriginalImage(String imageKey, boolean useDefaultIfNotFound) {
+    public static BufferedImage getOriginalImage(String imageKey, boolean useDefaultIfNotFound, CardView cardView) {
         if (null == imageKey) {
             return null;
         }
 
-        PaperCard pc = null;
+        IPaperCard ipc = null;
         boolean altState = imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX);
         if(altState)
             imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.BACKFACE_POSTFIX.length());
         if (imageKey.startsWith(ImageKeys.CARD_PREFIX)) {
-            pc = ImageUtil.getPaperCardFromImageKey(imageKey);
+            PaperCard pc = ImageUtil.getPaperCardFromImageKey(imageKey);
+            ipc = pc;
             imageKey = ImageUtil.getImageKey(pc, altState, true);
             if (StringUtils.isBlank(imageKey)) {
                 return _defaultImage;
             }
+        } else if (imageKey.startsWith(ImageKeys.TOKEN_PREFIX)) {
+            ipc = ImageUtil.getPaperTokenFromImageKey(imageKey);
         }
 
         // Load from file and add to cache if not found in cache initially.
@@ -202,9 +207,10 @@ public class ImageCache {
         // a default "not available" image, however do not add it to the cache,
         // as otherwise it's problematic to update if the real image gets fetched.
         if (original == null && useDefaultIfNotFound) {
-            if (pc != null) {
+            if (ipc != null || cardView != null) {
+                CardView card = ipc != null ? Card.getCardForUi(ipc).getView() : cardView;
                 original = new BufferedImage(480, 680, BufferedImage.TYPE_INT_ARGB);
-                FCardImageRenderer.drawCardImage(original.createGraphics(), pc, altState, 480, 680);
+                FCardImageRenderer.drawCardImage(original.createGraphics(), card, altState, 480, 680);
                 if (!isPreferenceEnabled(ForgePreferences.FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER))
                     _CACHE.put(imageKey, original);
             } else {
@@ -229,7 +235,7 @@ public class ImageCache {
             return cached;
         }
 
-        BufferedImage original = getOriginalImage(key, useDefaultImage);
+        BufferedImage original = getOriginalImage(key, useDefaultImage, null);
         if (original == null) { return null; }
 
         if (original == _defaultImage) {
