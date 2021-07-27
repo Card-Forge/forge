@@ -806,14 +806,16 @@ public class DamageDealAi extends DamageAiBase {
             } else if (o instanceof Player) {
                 final Player p = (Player) o;
                 final int restDamage = ComputerUtilCombat.predictDamageTo(p, dmg, saMe.getHostCard(), false);
-                if (!p.isOpponentOf(ai) && p.canLoseLife() && restDamage + 3 >= p.getLife() && restDamage > 0) {
-                    // from this spell will kill me
-                    return false;
-                }
-                if (p.isOpponentOf(ai) && p.canLoseLife()) {
-                    positive = true;
-                    if (p.getLife() + 3 <= restDamage) {
-                        urgent = true;
+                if (restDamage > 0 && p.canLoseLife()) {
+                    if (!p.isOpponentOf(ai) && restDamage + 3 >= p.getLife()) {
+                        // from this spell will kill me
+                        return false;
+                    }
+                    if (p.isOpponentOf(ai)) {
+                        positive = true;
+                        if (p.getLife() - 3 <= restDamage) {
+                            urgent = true;
+                        }
                     }
                 }
             }
