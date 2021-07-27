@@ -136,17 +136,14 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             if (mandatory && tgt.hasCandidates(sa, true)) {
                 // Player has to click on a target
                 getController().getGui().updateButtons(getOwner(), false, false, false);
-            }
-            else {
+            } else {
                 getController().getGui().updateButtons(getOwner(), false, true, false);
             }
-        }
-        else {
+        } else {
             if (mandatory && tgt.hasCandidates(sa, true)) {
                 // Player has to click on a target or ok
                 getController().getGui().updateButtons(getOwner(), true, false, true);
-            }
-            else {
+            } else {
                 getController().getGui().updateButtons(getOwner(), true, true, true);
             }
         }
@@ -387,7 +384,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
 
     private boolean hasAllTargets() {
         return sa.isMaxTargetChosen() || (divisionValues != null && sa.getStillToDivide() == 0)
-            || (sa.isDividedAsYouChoose() && sa.getTargets().size() == sa.getStillToDivide());
+            || (divisionValues == null && sa.isDividedAsYouChoose() && sa.getTargets().size() == sa.getStillToDivide());
     }
 
     @Override

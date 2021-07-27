@@ -1171,31 +1171,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
      * (non-Javadoc)
      *
      * @see
-     * forge.game.player.PlayerController#chooseTargets(forge.gui.card.spellability.
-     * SpellAbility, forge.gui.card.spellability.SpellAbilityStackInstance)
-     */
-    @Override
-    public TargetChoices chooseNewTargetsFor(final SpellAbility ability, Predicate<GameObject> filter, boolean optional) {
-        final SpellAbility sa = ability.isWrapper() ? ((WrappedAbility) ability).getWrappedAbility() : ability;
-        if (!sa.usesTargeting()) {
-            return null;
-        }
-        final TargetChoices oldTarget = sa.getTargets();
-        final TargetSelection select = new TargetSelection(this, sa);
-        sa.clearTargets();
-        if (select.chooseTargets(oldTarget.size(), Lists.newArrayList(oldTarget.getDividedValues()), filter, optional, false)) {
-            return sa.getTargets();
-        } else {
-            sa.setTargets(oldTarget);
-            // Return old target, since we had to reset them above
-            return null;
-        }
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see
      * forge.game.player.PlayerController#chooseCardsToDiscardUnlessType(int,
      * java.lang.String, forge.gui.card.spellability.SpellAbility)
      */
@@ -2016,6 +1991,31 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
 
         return result;
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * forge.game.player.PlayerController#chooseTargets(forge.gui.card.spellability.
+     * SpellAbility, forge.gui.card.spellability.SpellAbilityStackInstance)
+     */
+    @Override
+    public TargetChoices chooseNewTargetsFor(final SpellAbility ability, Predicate<GameObject> filter, boolean optional) {
+        final SpellAbility sa = ability.isWrapper() ? ((WrappedAbility) ability).getWrappedAbility() : ability;
+        if (!sa.usesTargeting()) {
+            return null;
+        }
+        final TargetChoices oldTarget = sa.getTargets();
+        final TargetSelection select = new TargetSelection(this, sa);
+        sa.clearTargets();
+        if (select.chooseTargets(oldTarget.size(), sa.isDividedAsYouChoose() ? Lists.newArrayList(oldTarget.getDividedValues()) : null, filter, optional, false)) {
+            return sa.getTargets();
+        } else {
+            sa.setTargets(oldTarget);
+            // Return old target, since we had to reset them above
+            return null;
+        }
     }
 
     @Override
