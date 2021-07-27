@@ -100,7 +100,7 @@ public class ImageCache {
      */
     public static BufferedImage getImage(final CardView card, final Iterable<PlayerView> viewers, final int width, final int height) {
         final String key = card.getCurrentState().getImageKey(viewers);
-        return scaleImage(key, width, height, true);
+        return scaleImage(key, width, height, true, card);
     }
 
     /**
@@ -110,7 +110,7 @@ public class ImageCache {
      */
     public static BufferedImage getImageNoDefault(final CardView card, final Iterable<PlayerView> viewers, final int width, final int height) {
         final String key = card.getCurrentState().getImageKey(viewers);
-        return scaleImage(key, width, height, false);
+        return scaleImage(key, width, height, false, card);
     }
 
     /**
@@ -121,7 +121,7 @@ public class ImageCache {
         return getImage(ii, width, height, false);
     }
     public static BufferedImage getImage(InventoryItem ii, int width, int height, boolean altState) {
-        return scaleImage(ii.getImageKey(altState), width, height, true);
+        return scaleImage(ii.getImageKey(altState), width, height, true, null);
     }
 
     /**
@@ -131,7 +131,7 @@ public class ImageCache {
     public static SkinIcon getIcon(String imageKey) {
         final BufferedImage i;
         if (_missingIconKeys.contains(imageKey) ||
-                null == (i = scaleImage(imageKey, -1, -1, false))) {
+                null == (i = scaleImage(imageKey, -1, -1, false, null))) {
             _missingIconKeys.add(imageKey);
             return FSkin.getIcon(FSkinProp.ICO_UNKNOWN);
         }
@@ -145,6 +145,9 @@ public class ImageCache {
      * If the requested image is not present in the cache then it attempts to load
      * the image from file (slower) and then add it to the cache for fast future access.
      * </p>
+     *
+     * @param cardView This is for emblem, since there is no paper card for them
+     *
      */
     public static BufferedImage getOriginalImage(String imageKey, boolean useDefaultIfNotFound, CardView cardView) {
         if (null == imageKey) {
@@ -221,7 +224,8 @@ public class ImageCache {
         return original;
     }
 
-    public static BufferedImage scaleImage(String key, final int width, final int height, boolean useDefaultImage) {
+    // cardView is for Emblem, since there is no paper card for them
+    public static BufferedImage scaleImage(String key, final int width, final int height, boolean useDefaultImage, CardView cardView) {
         if (StringUtils.isEmpty(key) || (3 > width && -1 != width) || (3 > height && -1 != height)) {
             // picture too small or key not defined; return a blank
             return null;
@@ -235,7 +239,7 @@ public class ImageCache {
             return cached;
         }
 
-        BufferedImage original = getOriginalImage(key, useDefaultImage, null);
+        BufferedImage original = getOriginalImage(key, useDefaultImage, cardView);
         if (original == null) { return null; }
 
         if (original == _defaultImage) {
