@@ -182,7 +182,7 @@ public final class CardRules implements ICardCharacteristics {
             //if card face has no cost, assume castable only by mana of its defined color
             return face.getColor().hasNoColorsExcept(colorCode);
         }
-        return face.getManaCost().canBePaidWithAvaliable(colorCode);
+        return face.getManaCost().canBePaidWithAvailable(colorCode);
     }
 
     public boolean canCastWithAvailable(byte colorCode) {

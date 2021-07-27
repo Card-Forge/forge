@@ -233,10 +233,10 @@ public class EffectAi extends SpellAbilityAi {
                     return ai.getCreaturesInPlay().size() >= i;
                 }
                 return true;
-            } else if (logic.equals("CastFromGraveThisTurn")) {
+            } else if (logic.equals("ReplaySpell")) {
                 CardCollection list = new CardCollection(game.getCardsIn(ZoneType.Graveyard));
                 list = CardLists.getValidCards(list, sa.getTargetRestrictions().getValidTgts(), ai, sa.getHostCard(), sa);
-                if (!ComputerUtil.targetPlayableSpellCard(ai, list, sa, false)) {
+                if (!ComputerUtil.targetPlayableSpellCard(ai, list, sa, false, false)) {
                     return false;
                 }
             } else if (logic.equals("Bribe")) {
@@ -313,6 +313,5 @@ public class EffectAi extends SpellAbilityAi {
         }
 
         return super.doTriggerAINoCost(aiPlayer, sa, mandatory);
-
     }
 }

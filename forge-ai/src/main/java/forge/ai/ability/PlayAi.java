@@ -40,33 +40,9 @@ public class PlayAi extends SpellAbilityAi {
             return false; // prevent infinite loop
         }
 
-        CardCollection cards = null;
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-        if (tgt != null) {
-            ZoneType zone = tgt.getZone().get(0);
-            cards = CardLists.getValidCards(game.getCardsIn(zone), tgt.getValidTgts(), ai, source, sa);
-            if (cards.isEmpty()) {
-                return false;
-            }
-        } else if (!sa.hasParam("Valid")) {
-            cards = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
-            if (cards.isEmpty()) {
-                return false;
-            }
-        }
-
-        if (cards != null & sa.hasParam("ValidSA")) {
-            final String valid[] = sa.getParam("ValidSA").split(",");
-            final Iterator<Card> itr = cards.iterator();
-            while (itr.hasNext()) {
-                final Card c = itr.next();
-                if (!Iterables.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, ai), SpellAbilityPredicates.isValid(valid, ai , c, sa))) {
-                    itr.remove();
-                }
-            }
-            if (cards.isEmpty()) {
-                return false;
-            }
+        CardCollection cards = getPlayableCards(sa, ai);
+        if (cards.isEmpty()) {
+            return false;
         }
 
         if (game.getRules().hasAppliedVariant(GameType.MoJhoSto) && source.getName().equals("Jhoira of the Ghitu Avatar")) {
@@ -85,25 +61,15 @@ public class PlayAi extends SpellAbilityAi {
             }
         }
 
-        // Ensure that if a ValidZone is specified, there's at least something to choose from in that zone.
-        CardCollectionView validOpts = new CardCollection();
-        if (sa.hasParam("ValidZone")) {
-            validOpts = AbilityUtils.filterListByType(game.getCardsIn(ZoneType.valueOf(sa.getParam("ValidZone"))),
-                    sa.getParam("Valid"), sa);
-            if (validOpts.isEmpty()) {
-                return false;
-            }
-        }
-
         if ("ReplaySpell".equals(logic)) {
-            return ComputerUtil.targetPlayableSpellCard(ai, cards, sa, sa.hasParam("WithoutManaCost"));
+            return ComputerUtil.targetPlayableSpellCard(ai, cards, sa, sa.hasParam("WithoutManaCost"), false);
         } else if (logic.startsWith("NeedsChosenCard")) {
             int minCMC = 0;
             if (sa.getPayCosts().getCostMana() != null) {
                 minCMC = sa.getPayCosts().getTotalMana().getCMC();
             }
-            validOpts = CardLists.filter(validOpts, CardPredicates.greaterCMC(minCMC));
-            return chooseSingleCard(ai, sa, validOpts, sa.hasParam("Optional"), null, null) != null;
+            cards = CardLists.filter(cards, CardPredicates.greaterCMC(minCMC));
+            return chooseSingleCard(ai, sa, cards, sa.hasParam("Optional"), null, null) != null;
         } else if ("WithTotalCMC".equals(logic)) {
             // Try to play only when there are more than three playable cards.
             if (cards.size() < 3)
@@ -153,6 +119,10 @@ public class PlayAi extends SpellAbilityAi {
             if (!sa.hasParam("AILogic")) {
                 return false;
             }
+
+            if ("ReplaySpell".equals(sa.getParam("AILogic"))) {
+                return ComputerUtil.targetPlayableSpellCard(ai, getPlayableCards(sa, ai), sa, sa.hasParam("WithoutManaCost"), mandatory);
+            } 
 
             return checkApiLogic(ai, sa);
         }
@@ -218,4 +188,36 @@ public class PlayAi extends SpellAbilityAi {
         });
         return ComputerUtilCard.getBestAI(tgtCards);
     }
+    
+    private static CardCollection getPlayableCards(SpellAbility sa, Player ai) {
+        CardCollection cards = new CardCollection();
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
+        final Card source = sa.getHostCard();
+
+        if (tgt != null) {
+            ZoneType zone = tgt.getZone().get(0);
+            cards = CardLists.getValidCards(ai.getGame().getCardsIn(zone), tgt.getValidTgts(), ai, source, sa);
+        } else if (!sa.hasParam("Valid")) {
+            cards = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
+        }
+
+        if (cards != null & sa.hasParam("ValidSA")) {
+            final String valid[] = sa.getParam("ValidSA").split(",");
+            final Iterator<Card> itr = cards.iterator();
+            while (itr.hasNext()) {
+                final Card c = itr.next();
+                if (!Iterables.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, ai), SpellAbilityPredicates.isValid(valid, ai , c, sa))) {
+                    itr.remove();
+                }
+            }
+        }
+
+        // Ensure that if a ValidZone is specified, there's at least something to choose from in that zone.
+        if (sa.hasParam("ValidZone")) {
+            cards = new CardCollection(AbilityUtils.filterListByType(ai.getGame().getCardsIn(ZoneType.valueOf(sa.getParam("ValidZone"))),
+                    sa.getParam("Valid"), sa));
+        }
+        return cards;
+    }
+
 }

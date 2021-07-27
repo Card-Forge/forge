@@ -167,7 +167,7 @@ public class ManaEffectAi extends SpellAbilityAi {
         List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(ai.getCardsIn(ZoneType.Hand), ai);
         for (final SpellAbility testSa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, ai)) {
             ManaCost cost = testSa.getPayCosts().getTotalMana();
-            boolean canPayWithAvailableColors = cost.canBePaidWithAvaliable(ColorSet.fromNames(
+            boolean canPayWithAvailableColors = cost.canBePaidWithAvailable(ColorSet.fromNames(
                     ComputerUtilCost.getAvailableManaColors(ai, (List<Card>)null)).getColor());
             
             if (cost.getCMC() == 0 && cost.countX() == 0) {

@@ -18,7 +18,7 @@ public class AltWinAchievements extends AchievementCollection {
     }
 
     @Override
-    protected void addSharedAchivements() {
+    protected void addSharedAchievements() {
         //prevent including shared achievements
     }
 

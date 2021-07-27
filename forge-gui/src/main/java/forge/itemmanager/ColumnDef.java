@@ -697,9 +697,9 @@ public enum ColumnDef {
         return !(((IPaperCard) i).getRules().getType().isArtifact() && (toColor(i).isColorless() ||
                 //If it isn't colorless, see if it can be paid with only white, only blue, only black.
                 //No need to check others since three-color hybrid shards don't exist.
-                manaCost.canBePaidWithAvaliable(MagicColor.WHITE) &&
-                        manaCost.canBePaidWithAvaliable(MagicColor.BLUE) &&
-                        manaCost.canBePaidWithAvaliable(MagicColor.BLACK)))
+                manaCost.canBePaidWithAvailable(MagicColor.WHITE) &&
+                        manaCost.canBePaidWithAvailable(MagicColor.BLUE) &&
+                        manaCost.canBePaidWithAvailable(MagicColor.BLACK)))
                 ? "0" + toSplitLast(i) : "1";
     }
 
@@ -757,9 +757,9 @@ public enum ColumnDef {
     private static String toGoldFirst(final InventoryItem i) {
         forge.card.mana.ManaCost manaCost = ((IPaperCard) i).getRules().getManaCost();
 
-        return !(manaCost.canBePaidWithAvaliable(MagicColor.WHITE) | manaCost.canBePaidWithAvaliable(MagicColor.BLUE) |
-                manaCost.canBePaidWithAvaliable(MagicColor.BLACK) | manaCost.canBePaidWithAvaliable(MagicColor.RED) |
-                manaCost.canBePaidWithAvaliable(MagicColor.GREEN)) ? "0" : "1";
+        return !(manaCost.canBePaidWithAvailable(MagicColor.WHITE) | manaCost.canBePaidWithAvailable(MagicColor.BLUE) |
+                manaCost.canBePaidWithAvailable(MagicColor.BLACK) | manaCost.canBePaidWithAvailable(MagicColor.RED) |
+                manaCost.canBePaidWithAvailable(MagicColor.GREEN)) ? "0" : "1";
     }
 
     /**

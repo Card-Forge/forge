@@ -2890,10 +2890,10 @@ public class ComputerUtil {
         return false;
     }
 
-    public static boolean targetPlayableSpellCard(final Player ai, CardCollection options, final SpellAbility sa, final boolean withoutPayingManaCost) {
+    public static boolean targetPlayableSpellCard(final Player ai, CardCollection options, final SpellAbility sa, final boolean withoutPayingManaCost, boolean mandatory) {
             // determine and target a card with a SA that the AI can afford and will play
         AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-        Card targetSpellCard = null;
+        CardCollection targets = new CardCollection();
         for (Card c : options) {
             if (withoutPayingManaCost && c.getManaCost() != null && c.getManaCost().countX() > 0) {
                 // The AI will otherwise cheat with the mana payment, announcing X > 0 for spells like Heat Ray when replaying them
@@ -2913,18 +2913,19 @@ public class ComputerUtil {
                 // at this point, we're assuming that card will be castable from whichever zone it's in by the AI player.
                 abTest.setActivatingPlayer(ai);
                 abTest.getRestrictions().setZone(c.getZone().getZoneType());
-                final boolean play = AiPlayDecision.WillPlay == aic.canPlaySa(abTest);
-                final boolean pay = ComputerUtilCost.canPayCost(abTest, ai);
-                if (play && pay) {
-                    targetSpellCard = c;
-                    break;
+                if (AiPlayDecision.WillPlay == aic.canPlaySa(abTest) && ComputerUtilCost.canPayCost(abTest, ai)) {
+                    targets.add(c);
                 }
             }
         }
-        if (targetSpellCard == null) {
-            return false;
+        if (targets.isEmpty()) {
+            if (mandatory && !options.isEmpty()) {
+                targets = options;
+            } else {
+                return false;
+            }
         }
-        sa.getTargets().add(targetSpellCard);
+        sa.getTargets().add(ComputerUtilCard.getBestAI(targets));
         return true;
     }
 

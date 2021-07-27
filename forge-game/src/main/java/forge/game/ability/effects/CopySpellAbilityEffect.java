@@ -82,7 +82,6 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
         boolean isOptional = sa.hasParam("Optional");
 
         for (Player controller : controllers) {
-
             List<SpellAbility> copies = Lists.newArrayList();
 
             SpellAbility chosenSA = controller.getController().chooseSingleSpellForEffect(tgtSpells, sa,

@@ -484,7 +484,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             return PaymentDecision.card(source);
         }
         if (cost.getType().equals("OriginalHost")) {
-            return PaymentDecision.card(ability.getHostCard());
+            return PaymentDecision.card(ability.getOriginalHost());
         }
         if (cost.getAmount().equals("All")) {
             // Does the AI want to use Sacrifice All?
@@ -599,7 +599,6 @@ public class AiCostDecision extends CostDecisionMakerBase {
         // the amount might be different from 1, could be X
         // currently if amount is bigger than one,
         // it tries to remove all counters from one source and type at once
-
 
         int toRemove = 0;
         final GameEntityCounterTable table = new GameEntityCounterTable();
