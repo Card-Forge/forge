@@ -403,8 +403,9 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 candidates.remove(result);
                 result = Aggregates.random(candidates);
             }
-        }
-        else {
+        } else if (reqEdition == null) {
+            return cards.iterator().next();
+        } else {
             for (PaperCard pc : cards) {
                 if (pc.getEdition().equalsIgnoreCase(reqEdition) && request.artIndex == pc.getArtIndex()) {
                     result = pc;
