@@ -576,7 +576,20 @@ public class FCardImageRenderer {
             buildPieceList();
         }
 
-        public int calculateLines(int width, FontMetrics txMetrics, FontMetrics rmMetrics, boolean hasPTBox) {
+        public int getTotalWidth(FontMetrics txMetrics, FontMetrics rmMetrics) {
+            int width = 0;
+            for (Piece p : pieces) {
+                p.restart();
+                int w = p.getNextWidth(txMetrics, rmMetrics);
+                while (w != -1) {
+                    width += w;
+                    w = p.getNextWidth(txMetrics, rmMetrics);
+                }
+            }
+            return width;
+        }
+
+        public int calculateLines(int width, FontMetrics txMetrics, FontMetrics rmMetrics, int flagPTBox) {
             int pos = 0;
             int lines = 1;
             for (Piece p : pieces) {
@@ -591,9 +604,13 @@ public class FCardImageRenderer {
                     w = p.getNextWidth(txMetrics, rmMetrics);
                 }
             }
+            boolean hasPTBox = (flagPTBox & 1) == 1;
+            boolean hasMultipleParagraph = (flagPTBox & 2) == 2;
             // If last line will overlapp with PT box, add one more line.
-            if (hasPTBox && pos >= width - PT_BOX_WIDTH)
-                ++lines;
+            if (hasPTBox && pos >= width - PT_BOX_WIDTH) {
+                if (lines > 1 || hasMultipleParagraph)
+                    ++lines;
+            }
             return lines;
         }
 
@@ -630,18 +647,21 @@ public class FCardImageRenderer {
         Font txFont = TEXT_FONT, rmFont = REMINDER_FONT;
         FontMetrics txMetrics = TEXT_METRICS, rmMetrics = REMINDER_METRICS;
         int txFontSize = txFont.getSize(), rmFontSize = rmFont.getSize();
-        int lineHeight, paraSpacing, lineSpacing, totalHeight;
+        int lineHeight, paraSpacing, lineSpacing, totalHeight, totalLines;
         do {
             int totalLineSpacings = 0;
             totalHeight = 0;
+            totalLines = 0;
             paraSpacing = txMetrics.getLeading() + txMetrics.getDescent();
             lineHeight = txMetrics.getAscent() + txMetrics.getDescent();
             lineSpacing = -2;
             for (int i = 0; i < pgList.size(); ++i) {
-                boolean ptBox = (i < pgList.size() - 1) ? false : hasPTBox;
+                // [0] bit: hasPTBox or not, [1] bit: has multiple paragraph or not.
+                int flagPTBox = (i < pgList.size() - 1) ? 0 : (hasPTBox ? 1 : 0) + (i > 0 ? 2 : 0);
                 Paragraph pg = pgList.get(i);
                 totalHeight += paraSpacing;
-                int lines = pg.calculateLines(w, txMetrics, rmMetrics, ptBox);
+                int lines = pg.calculateLines(w, txMetrics, rmMetrics, flagPTBox);
+                totalLines += lines;
                 totalLineSpacings += lines - 1;
                 totalHeight += lines * lineHeight + (lines - 1) * lineSpacing;
             }
@@ -661,6 +681,12 @@ public class FCardImageRenderer {
         } while (txFontSize >= 8 && rmFontSize >= 8);
 
         // Draw text
+        // Center text is there is only one line
+        if (totalLines == 1) {
+            Paragraph pg = pgList.get(0);
+            int width = pg.getTotalWidth(txMetrics, rmMetrics);
+            x += (w - width) / 2;
+        }
         y += (h - totalHeight - paraSpacing / 2) / 2;
         for (Paragraph pg : pgList) {
             y += pg.drawPieces(g, x, y, w, lineSpacing + lineHeight, txFont, txMetrics, rmFont, rmMetrics);
