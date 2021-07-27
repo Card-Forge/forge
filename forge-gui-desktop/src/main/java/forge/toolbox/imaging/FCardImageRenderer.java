@@ -169,30 +169,48 @@ public class FCardImageRenderer {
         x += outerBorderThickness;
         y += outerBorderThickness;
         w -= 2 * outerBorderThickness;
-        float headerHeight = MANA_SYMBOL_SIZE + 2 * HEADER_PADDING + 2;
-
-        float artWidth = w - 2 * artInset;
-        float artHeight = artWidth / CARD_ART_RATIO;
-        float typeBoxHeight = TYPE_METRICS.getHeight() + HEADER_PADDING + 2;
+        float headerHeight = MANA_SYMBOL_SIZE + 2 * HEADER_PADDING;
+        float typeBoxHeight = headerHeight;
         float ptBoxHeight = 0;
-        float textBoxHeight = h - headerHeight - artHeight - typeBoxHeight - outerBorderThickness - artInset - PT_METRICS.getHeight() / 2f;
         if (state.isCreature() || state.isPlaneswalker() || state.getType().hasSubtype("Vehicle")) {
             //if P/T box needed, make room for it
             ptBoxHeight = MANA_SYMBOL_SIZE + HEADER_PADDING;
         }
+
+        float artWidth = w - 2 * artInset;
+        float artHeight = artWidth / CARD_ART_RATIO;
+        float textBoxHeight = h - headerHeight - artHeight - typeBoxHeight - outerBorderThickness - artInset - PT_METRICS.getHeight() / 2f;
 
         float artY = y + headerHeight;
         float typeY = artY + artHeight;
         float textY = typeY + typeBoxHeight;
         float ptY = textY + textBoxHeight;
 
+        // Adjust layout for Saga, Class and Dungeon cards
+        boolean isSaga = state.getType().hasSubtype("Saga");
+        boolean isClass = state.getType().hasSubtype("Class");
+        boolean isDungeon = state.getType().isDungeon();
+        if (isSaga || isClass || isDungeon) {
+            // Move type line to the bottom
+            typeY = ptY - typeBoxHeight;
+            if (!isDungeon)
+                artWidth = artWidth / 2f;
+            artHeight = typeY - artY;
+            textBoxHeight = artHeight;
+            textY = artY;
+        }
+
         //draw art box with Forge icon
-        Color[] artBoxColors = tintColors(Color.DARK_GRAY, colors, NAME_BOX_TINT);
-        drawArt(g, artBoxColors, x + artInset, artY, artWidth, artHeight);
+        if (!isDungeon) {
+            Color[] artBoxColors = tintColors(Color.DARK_GRAY, colors, NAME_BOX_TINT);
+            float artX = x + artInset + (isSaga ? artWidth : 0f);
+            drawArt(g, artBoxColors, artX, artY, artWidth, artHeight);
+        }
 
         //draw text box
         Color[] textBoxColors = tintColors(Color.WHITE, colors, TEXT_BOX_TINT);
-        drawTextBox(g, card, state, textBoxColors, x + artInset, textY, w - 2 * artInset, textBoxHeight, ptBoxHeight > 0);
+        float textX = x + artInset + (isClass ? artWidth : 0f);
+        drawTextBox(g, card, state, textBoxColors, textX, textY, artWidth, textBoxHeight, ptBoxHeight > 0);
 
         //draw header containing name and mana cost
         Color[] headerColors = tintColors(Color.WHITE, colors, NAME_BOX_TINT);
