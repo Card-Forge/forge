@@ -365,7 +365,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("CanBeSacrificedBy") && spellAbility instanceof SpellAbility) {
-            if (!card.canBeSacrificedBy((SpellAbility)spellAbility)) {
+            if (!card.canBeSacrificedBy((SpellAbility) spellAbility)) {
                 return false;
             }
         } else if (property.startsWith("AttachedBy")) {
@@ -716,6 +716,16 @@ public class CardProperty {
                 final String restriction = property.split("notSharesColorWith ")[1];
                 for (final Card c : sourceController.getCardsIn(ZoneType.Battlefield)) {
                     if (c.isValid(restriction, sourceController, source, spellAbility) && card.sharesColorWith(c)) {
+                        return false;
+                    }
+                }
+            }
+        } else if (property.startsWith("MostProminentCreatureTypeInLibrary")) {
+            final CardCollectionView list = sourceController.getCardsIn(ZoneType.Library);
+            String[] type = CardFactoryUtil.getMostProminentCreatureType(list);
+            if (type != null); {
+                for (String s : type) {
+                    if (!card.getType().hasCreatureType(s)) {
                         return false;
                     }
                 }
