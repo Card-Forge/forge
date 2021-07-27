@@ -27,7 +27,9 @@ import forge.util.ItemPool;
 import forge.util.ItemPoolSorter;
 import forge.util.MyRandom;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map.Entry;
@@ -112,7 +114,7 @@ public class CardPool extends ItemPool<PaperCard> {
 
             if (paperCard == null) {
                 // Attempt to load the card first
-                StaticData.instance().attemptToLoadCard(cardName, setCode);
+                StaticData.instance().attemptToLoadCard(cardName);
                 // Now try again all the three available DBs
                 // we simply don't know which db the card has been added to (in case)
                 // so we will try all of them again in this second round of attempt.
@@ -229,6 +231,20 @@ public class CardPool extends ItemPool<PaperCard> {
         if (lines == null) {
             return pool;
         }
+        List<Pair<String, Integer>> cardRequests = processCardList(lines);
+        for (Pair<String, Integer> pair : cardRequests) {
+            String cardRequest = pair.getLeft();
+            int count = pair.getRight();
+            pool.add(cardRequest, count);
+        }
+        return pool;
+    }
+
+    public static List<Pair<String, Integer>> processCardList(final Iterable<String> lines){
+        List<Pair<String, Integer>> cardRequests = new ArrayList<>();
+        if (lines == null)
+            return cardRequests;  // empty list
+
         for (String line : lines) {
             if (line.startsWith(";") || line.startsWith("#")) {
                 continue;
@@ -243,9 +259,9 @@ public class CardPool extends ItemPool<PaperCard> {
             if (StringUtils.isBlank(cardRequest))
                 continue;
             final int count = sCnt == null ? 1 : Integer.parseInt(sCnt);
-            pool.add(cardRequest, count);
+            cardRequests.add(Pair.of(cardRequest, count));
         }
-        return pool;
+        return cardRequests;
     }
 
     public String toCardList(String separator) {
