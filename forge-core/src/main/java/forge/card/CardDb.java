@@ -181,7 +181,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             }
             String collectorNumber = cNrPos > 0 ? info[cNrPos].substring(1, info[cNrPos].length() - 1) : IPaperCard.NO_COLLECTOR_NUMBER;
             String setName = setPos > 0 ? info[setPos] : null;
-            if ("???".equals(setName)) {
+            if (setName != null && setName.equals(CardEdition.UNKNOWN.getCode())) {  // ???
                 setName = null;
             }
             // finally, check whether any between artIndex and CollectorNumber has been set
@@ -456,10 +456,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         if (cards == null)
             return null;
         // Either No Edition has been specified OR as a fallback in case of any error!
-        // get card using the default policy strategy (Latest, Earliest, or Random)
-        // Note: Request is transformed back into the unique line,
-        // embedding all the information; Parameter Name is counter intuitive though.
-        result = getCardFromEditions(request.cardName);
+        // get card using the default card art preference
+        result = getCardFromEditions(request.cardName, this.defaultCardArtPreference, request.artIndex);
         return result != null && request.isFoil ? result.getFoiled() : result;
     }
 
@@ -647,8 +645,14 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         // Collect the list of all editions found for target card
         LinkedHashSet<CardEdition> cardEditions = new LinkedHashSet<>();
         for (PaperCard card : cards) {
-            CardEdition ed = editions.get(card.getEdition());
-            cardEditions.add(ed);
+            String setCode = card.getEdition();
+            if (setCode.equals(CardEdition.UNKNOWN.getCode()))
+                cardEditions.add(CardEdition.UNKNOWN);
+            else {
+                CardEdition ed = editions.get(card.getEdition());
+                if (ed != null)
+                    cardEditions.add(ed);
+            }
         }
         // Filter Cards Editions based on set preferences
         List<CardEdition> acceptedEditions = Lists.newArrayList(Iterables.filter(cardEditions, new Predicate<CardEdition>() {
@@ -906,7 +910,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     public StringBuilder appendCardToStringBuilder(PaperCard card, StringBuilder sb) {
-        final boolean hasBadSetInfo = "???".equals(card.getEdition()) || StringUtils.isBlank(card.getEdition());
+        final boolean hasBadSetInfo = (card.getEdition()).equals(CardEdition.UNKNOWN.getCode()) || StringUtils.isBlank(card.getEdition());
         sb.append(card.getName());
         if (card.isFoil()) {
             sb.append(CardDb.foilSuffix);

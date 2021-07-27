@@ -1929,5 +1929,21 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
     }
 
+    @Test
+    public void testCardFromUnknownSet(){
+        String unknownCardName = "Unkwnonw Card Name";
+        PaperCard unknownCard = new PaperCard(CardRules.getUnsupportedCardNamed(unknownCardName),
+                                              CardEdition.UNKNOWN.getCode(), CardRarity.Unknown);
+        this.cardDb.addCard(unknownCard);
+        assertTrue(this.cardDb.getAllCards().contains(unknownCard));
+        assertNotNull(this.cardDb.getAllCards(unknownCardName));
+        assertEquals(this.cardDb.getAllCards(unknownCardName).size(), 1);
+
+        PaperCard retrievedPaperCard = this.cardDb.getCard(unknownCardName);
+        assertNotNull(retrievedPaperCard);
+        assertEquals(retrievedPaperCard.getName(), unknownCardName);
+        assertEquals(retrievedPaperCard.getEdition(), CardEdition.UNKNOWN.getCode());
+    }
+
 }
 
