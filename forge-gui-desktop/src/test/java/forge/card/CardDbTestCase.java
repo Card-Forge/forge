@@ -1253,7 +1253,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
             fail();
         }
 
-        PaperCard counterSpellCard = null;
+        PaperCard counterSpellCard;
 
         // == LATEST ART All Editions
         counterSpellCard = this.cardDb.getCardFromEditionsReleasedBefore(cardNameCounterspell,
@@ -1450,7 +1450,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         assertEquals(shivanDragon.getEdition(), latestArtShivanDragonEdition);
 
         Date alphaRelaseDate = null;
-        Date currentDate = Date.from(Instant.now());;
+        Date currentDate = Date.from(Instant.now());
         try {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             alphaRelaseDate = format.parse(alphaEditionReleaseDate);
@@ -1488,7 +1488,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         assertEquals(lightningDragonPUSGArtCount, 1);
 
         int nonExistingCardArtCount = this.cardDb.getArtCount(cardNameShivanDragon, editionLightningDragon);
-        assertTrue(nonExistingCardArtCount == 0);
+        assertEquals(nonExistingCardArtCount, 0);
 
         // Compare with LegacyDB
         int httFEMArtCountLegacy = this.legacyCardDb.getPrintCount(cardNameHymnToTourach, editionHymnToTourach);
@@ -1615,6 +1615,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         PaperCard atog = this.cardDb.getCard(cnAtog);
         assertNotNull(atog);
         assertEquals(atog.getEdition(), "ME4");  // Masters Edition IV
+
         PaperCard legacyAtog = this.legacyCardDb.getCardFromEdition(cnAtog, LegacyCardDb.LegacySetPreference.Latest);
         if (legacyAtog != null)
             assertEquals(atog, legacyAtog);
@@ -1623,6 +1624,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         PaperCard militantAngel = this.cardDb.getCard(cnMilitantAngel);
         assertNotNull(militantAngel);
         assertEquals(militantAngel.getEdition(), "GNT");  // Game Night
+
         PaperCard legacyMilitantAngel = this.legacyCardDb.getCardFromEdition(cnMilitantAngel,
                 LegacyCardDb.LegacySetPreference.Latest);
         if (legacyMilitantAngel != null)
@@ -1633,6 +1635,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         PaperCard loyalUnicorn = this.cardDb.getCard(cnLoyalUnicorn);
         assertNotNull(loyalUnicorn);
         assertEquals(loyalUnicorn.getEdition(), "PLIST");  // The List
+
         PaperCard legacyLoyalUnicorn = this.legacyCardDb.getCardFromEdition(cnLoyalUnicorn,
                 LegacyCardDb.LegacySetPreference.Latest);
         if (legacyLoyalUnicorn != null)
@@ -1643,6 +1646,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         PaperCard selflessSquire = this.cardDb.getCard(cnSelflessSquire);
         assertNotNull(selflessSquire);
         assertEquals(selflessSquire.getEdition(), "C21");  // Commander 2021
+
         PaperCard legacySelflessSquire = this.legacyCardDb.getCardFromEdition(cnSelflessSquire,
                 LegacyCardDb.LegacySetPreference.Latest);
         if (legacySelflessSquire != null)
@@ -1656,6 +1660,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         atog = this.cardDb.getCard(cnAtog);
         assertNotNull(atog);
         assertEquals(atog.getEdition(), "MRD");
+
         legacyAtog = this.legacyCardDb.getCardFromEdition(cnAtog, LegacyCardDb.LegacySetPreference.LatestCoreExp);
         if (legacyAtog != null)
             assertEquals(atog, legacyAtog);
@@ -1663,6 +1668,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         militantAngel = this.cardDb.getCard(cnMilitantAngel);
         assertNotNull(militantAngel);
         assertEquals(militantAngel.getEdition(), "GNT");
+
         legacyMilitantAngel = this.legacyCardDb.getCardFromEdition(cnMilitantAngel,
                 LegacyCardDb.LegacySetPreference.LatestCoreExp);
         if (legacyMilitantAngel != null)
@@ -1672,6 +1678,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         loyalUnicorn = this.cardDb.getCard(cnLoyalUnicorn);
         assertNotNull(loyalUnicorn);
         assertEquals(loyalUnicorn.getEdition(), "PLIST");
+
         legacyLoyalUnicorn = this.legacyCardDb.getCardFromEdition(cnLoyalUnicorn,
                 LegacyCardDb.LegacySetPreference.LatestCoreExp);
         if (legacyLoyalUnicorn != null)
@@ -1681,6 +1688,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         selflessSquire = this.cardDb.getCard(cnSelflessSquire);
         assertNotNull(selflessSquire);
         assertEquals(selflessSquire.getEdition(), "C21");
+
         legacySelflessSquire = this.legacyCardDb.getCardFromEdition(cnSelflessSquire,
                 LegacyCardDb.LegacySetPreference.LatestCoreExp);
         if (legacySelflessSquire != null)
@@ -1693,6 +1701,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         atog = this.cardDb.getCard(cnAtog);
         assertNotNull(atog);
         assertEquals(atog.getEdition(), "ATQ");
+
         legacyAtog = this.legacyCardDb.getCardFromEdition(cnAtog, LegacyCardDb.LegacySetPreference.Earliest);
         if (legacyAtog != null)
             assertEquals(atog, legacyAtog);
@@ -1700,6 +1709,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         militantAngel = this.cardDb.getCard(cnMilitantAngel);
         assertNotNull(militantAngel);
         assertEquals(militantAngel.getEdition(), "GNT");
+
         legacyMilitantAngel = this.legacyCardDb.getCardFromEdition(cnMilitantAngel,
                 LegacyCardDb.LegacySetPreference.Earliest);
         if (legacyMilitantAngel != null)
@@ -1709,6 +1719,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         loyalUnicorn = this.cardDb.getCard(cnLoyalUnicorn);
         assertNotNull(loyalUnicorn);
         assertEquals(loyalUnicorn.getEdition(), "C18");
+
         legacyLoyalUnicorn = this.legacyCardDb.getCardFromEdition(cnLoyalUnicorn,
                 LegacyCardDb.LegacySetPreference.Earliest);
         if (legacyLoyalUnicorn != null)
@@ -1718,6 +1729,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         selflessSquire = this.cardDb.getCard(cnSelflessSquire);
         assertNotNull(selflessSquire);
         assertEquals(selflessSquire.getEdition(), "C16");
+
         legacySelflessSquire = this.legacyCardDb.getCardFromEdition(cnSelflessSquire,
                 LegacyCardDb.LegacySetPreference.Earliest);
         if (legacySelflessSquire != null)
@@ -1730,6 +1742,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         atog = this.cardDb.getCard(cnAtog);
         assertNotNull(atog);
         assertEquals(atog.getEdition(), "ATQ");
+
         legacyAtog = this.legacyCardDb.getCardFromEdition(cnAtog, LegacyCardDb.LegacySetPreference.EarliestCoreExp);
         if (legacyAtog != null)
             assertEquals(atog, legacyAtog);
@@ -1737,6 +1750,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         militantAngel = this.cardDb.getCard(cnMilitantAngel);
         assertNotNull(militantAngel);
         assertEquals(militantAngel.getEdition(), "GNT");
+
         legacyMilitantAngel = this.legacyCardDb.getCardFromEdition(cnMilitantAngel,
                 LegacyCardDb.LegacySetPreference.EarliestCoreExp);
         if (legacyMilitantAngel != null)
@@ -1745,6 +1759,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         loyalUnicorn = this.cardDb.getCard(cnLoyalUnicorn);
         assertNotNull(loyalUnicorn);
         assertEquals(loyalUnicorn.getEdition(), "PLIST");
+
         legacyLoyalUnicorn = this.legacyCardDb.getCardFromEdition(cnLoyalUnicorn,
                 LegacyCardDb.LegacySetPreference.EarliestCoreExp);
         if (legacyLoyalUnicorn != null)
@@ -1753,6 +1768,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         selflessSquire = this.cardDb.getCard(cnSelflessSquire);
         assertNotNull(selflessSquire);
         assertEquals(selflessSquire.getEdition(), "C16");
+
         legacySelflessSquire = this.legacyCardDb.getCardFromEdition(cnSelflessSquire,
                 LegacyCardDb.LegacySetPreference.EarliestCoreExp);
         if (legacySelflessSquire != null)
