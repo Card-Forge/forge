@@ -534,7 +534,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     /*
      * ====================================================
-     * 3. CARD LOOKUP BASED ON PREFERRED PRINT (FRAME) OPTION
+     * 3. CARD LOOKUP BASED ON CARD ART PREFERENCE OPTION
      * ====================================================
      */
 
@@ -548,47 +548,88 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return this.getCardFromEditions(cardName, this.defaultCardArtPreference);
     }
 
-    public PaperCard getCardFromEditions(final String cardName, final Date printedBefore) {
-        return this.getCardFromEditions(cardName, this.defaultCardArtPreference, IPaperCard.NO_ART_INDEX, printedBefore);
-    }
-
-    public PaperCard getCardFromEditions(final String cardName, final int artIndex, final Date printedBefore) {
-        return this.getCardFromEditions(cardName, this.defaultCardArtPreference, artIndex, printedBefore);
-    }
-
     @Override
     public PaperCard getCardFromEditions(final String cardName, CardArtPreference artPreference) {
-        return getCardFromEditions(cardName, artPreference, IPaperCard.NO_ART_INDEX, null);
+        return getCardFromEditions(cardName, artPreference, IPaperCard.NO_ART_INDEX);
     }
 
     @Override
-    public PaperCard getCardFromEditions(final String cardName, CardArtPreference artPreference, int artIndex) {
-        return getCardFromEditions(cardName, artPreference, artIndex, null);
+    public PaperCard getCardFromEditions(final String cardName, final CardArtPreference artPreference, int artIndex) {
+        return this.tryToGetCardFromEditions(cardName, artPreference, artIndex);
+    }
+
+    /*
+     * ===============================================
+     * 4. SPECIALISED CARD LOOKUP BASED ON
+     *    CARD ART PREFERENCE AND EDITION RELEASE DATE
+     * ===============================================
+     */
+
+    @Override
+    public PaperCard getCardFromEditionsReleasedBefore(String cardName, Date releaseDate){
+        return this.getCardFromEditionsReleasedBefore(cardName, this.defaultCardArtPreference, PaperCard.DEFAULT_ART_INDEX, releaseDate);
     }
 
     @Override
-    public PaperCard getCardFromEditions(final String cardName, final CardArtPreference artPreference, final Date printedBefore) {
-        return getCardFromEditions(cardName, artPreference, IPaperCard.NO_ART_INDEX, printedBefore);
+    public PaperCard getCardFromEditionsReleasedBefore(String cardName, int artIndex, Date releaseDate){
+        return this.getCardFromEditionsReleasedBefore(cardName, this.defaultCardArtPreference, artIndex, releaseDate);
     }
 
     @Override
-    public PaperCard getCardFromEditions(final String cardName, final CardArtPreference artPreference, int artIndex,
-                                         final Date printedBefore) {
-        if (cardName == null)
+    public PaperCard getCardFromEditionsReleasedBefore(String cardName, CardArtPreference artPreference, Date releaseDate){
+        return this.getCardFromEditionsReleasedBefore(cardName, artPreference, PaperCard.DEFAULT_ART_INDEX, releaseDate);
+    }
+
+    @Override
+    public PaperCard getCardFromEditionsReleasedBefore(String cardName, CardArtPreference artPreference, int artIndex, Date releaseDate){
+        return this.tryToGetCardFromEditions(cardName, artPreference, artIndex, releaseDate, true);
+    }
+
+    @Override
+    public PaperCard getCardFromEditionsReleasedAfter(String cardName, Date releaseDate){
+        return this.getCardFromEditionsReleasedAfter(cardName, this.defaultCardArtPreference, PaperCard.DEFAULT_ART_INDEX, releaseDate);
+    }
+
+    @Override
+    public PaperCard getCardFromEditionsReleasedAfter(String cardName, int artIndex, Date releaseDate){
+        return this.getCardFromEditionsReleasedAfter(cardName, this.defaultCardArtPreference, artIndex, releaseDate);
+    }
+
+    @Override
+    public PaperCard getCardFromEditionsReleasedAfter(String cardName, CardArtPreference artPreference, Date releaseDate){
+        return this.getCardFromEditionsReleasedAfter(cardName, artPreference, PaperCard.DEFAULT_ART_INDEX, releaseDate);
+    }
+
+    @Override
+    public PaperCard getCardFromEditionsReleasedAfter(String cardName, CardArtPreference artPreference, int artIndex, Date releaseDate){
+        return this.tryToGetCardFromEditions(cardName, artPreference, artIndex, releaseDate, false);
+    }
+
+    // Override when there is no date
+    private PaperCard tryToGetCardFromEditions(String cardInfo, CardArtPreference artPreference, int artIndex){
+        return this.tryToGetCardFromEditions(cardInfo, artPreference, artIndex, null, false);
+    }
+
+    private PaperCard tryToGetCardFromEditions(String cardInfo, CardArtPreference artPreference, int artIndex,
+                                               Date releaseDate, boolean releasedBeforeFlag){
+        if (cardInfo == null)
             return null;
-        final CardRequest cr = CardRequest.fromString(cardName);
+        final CardRequest cr = CardRequest.fromString(cardInfo);
         // Check whether input `frame` is null. In that case, fallback to default SetPreference !-)
         final CardArtPreference artPref = artPreference != null ? artPreference : this.defaultCardArtPreference;
         if (artIndex >= IPaperCard.DEFAULT_ART_INDEX && cr.artIndex < IPaperCard.DEFAULT_ART_INDEX) {
             cr.artIndex = artIndex;
         }
         List<PaperCard> cards = getAllCards(cr.cardName);
-        if (printedBefore != null) {
+        if (releaseDate != null) {
             cards = Lists.newArrayList(Iterables.filter(cards, new Predicate<PaperCard>() {
                 @Override
                 public boolean apply(PaperCard c) {
                     CardEdition ed = editions.get(c.getEdition());
-                    return ed.getDate().before(printedBefore);
+                    if (releasedBeforeFlag)
+                        return ed.getDate().before(releaseDate);
+                    else
+                        return ed.getDate().after(releaseDate);
                 }
             }));
         }

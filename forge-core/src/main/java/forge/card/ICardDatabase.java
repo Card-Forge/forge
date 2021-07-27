@@ -57,11 +57,22 @@ public interface ICardDatabase extends Iterable<PaperCard> {
     PaperCard getCardFromSet(String cardName, CardEdition edition, int artIndex, boolean isFoil);
     PaperCard getCardFromSet(String cardName, CardEdition edition, int artIndex, String collectorNumber, boolean isFoil);
 
-    // 3. Card lookup based on SetPreference Selection Policy and/or Date
+    // 3. Card lookup based on CardArtPreference Selection Policy
     PaperCard getCardFromEditions(String cardName, CardArtPreference artPreference);
-    PaperCard getCardFromEditions(String cardName, CardArtPreference artPreference, Date printedBefore);
     PaperCard getCardFromEditions(String cardName, CardArtPreference artPreference, int artIndex);
-    PaperCard getCardFromEditions(String cardName, CardArtPreference artPreference, int artIndex, Date printedBefore);
+
+    // 4. Specialised Card Lookup on CardArtPreference Selection and Release Date
+    PaperCard getCardFromEditionsReleasedBefore(String cardName, Date releaseDate);
+    PaperCard getCardFromEditionsReleasedBefore(String cardName, int artIndex, Date releaseDate);
+    PaperCard getCardFromEditionsReleasedBefore(String cardName, CardArtPreference artPreference, Date releaseDate);
+    PaperCard getCardFromEditionsReleasedBefore(String cardName, CardArtPreference artPreference, int artIndex, Date releaseDate);
+
+    PaperCard getCardFromEditionsReleasedAfter(String cardName, Date releaseDate);
+    PaperCard getCardFromEditionsReleasedAfter(String cardName, int artIndex, Date releaseDate);
+    PaperCard getCardFromEditionsReleasedAfter(String cardName, CardArtPreference artPreference, Date releaseDate);
+    PaperCard getCardFromEditionsReleasedAfter(String cardName, CardArtPreference artPreference, int artIndex, Date releaseDate);
+
+
 
     /* CARDS COLLECTION RETRIEVAL METHODS
      * ================================== */
