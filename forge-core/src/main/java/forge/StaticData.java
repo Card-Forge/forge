@@ -326,9 +326,9 @@ public class StaticData {
             artPref = CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY;
         else
             artPref = CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS;
-        PaperCard c = this.getCommonCards().getCardFromEditions(card.getName(), artPref, card.getArtIndex(), setReleasedBefore);
+        PaperCard c = this.getCommonCards().getCardFromEditionsReleasedBefore(card.getName(), artPref, card.getArtIndex(), setReleasedBefore);
         // NOTE: if c is null, is necessarily due to the artIndex, so remove it!
-        return c != null ? c : this.getCommonCards().getCardFromEditions(card.getName(), artPref, setReleasedBefore);
+        return c != null ? c : this.getCommonCards().getCardFromEditionsReleasedBefore(card.getName(), artPref, setReleasedBefore);
     }
 
     public boolean getFilteredHandsEnabled(){

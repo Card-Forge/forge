@@ -155,7 +155,7 @@ public class DeckRecognizer {
     }
 
     private PaperCard tryGetCard(String text) {
-        return db.getCardFromEditions(text, useLastSet, recognizeCardsPrintedBefore);
+        return db.getCardFromEditionsReleasedBefore(text, useLastSet, recognizeCardsPrintedBefore);
     }
     
     private Token recognizePossibleNameAndNumber(final String name, final int n) {
