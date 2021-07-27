@@ -1386,6 +1386,156 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
     }
 
     @Test
+    public void testThatCardRequestPassedInHaveNoSideEffectAndThatAreCorrectlyProcessed(){
+        String cardName = this.cardNameHymnToTourach;
+        String httEdition = this.originalArtHymnToTourachEdition;
+        int artIndexFEM = 3;
+        String requestInfo = CardDb.CardRequest.compose(cardName, httEdition, artIndexFEM);
+
+        // assert default condition
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
+
+        // === Get Card
+        // == 1. Pass in Request Info
+        PaperCard hymnToTourachCard = this.cardDb.getCard(requestInfo);
+        assertNotNull(hymnToTourachCard);
+        assertEquals(hymnToTourachCard.getName(), cardName);
+        assertEquals(hymnToTourachCard.getEdition(), httEdition);
+        assertEquals(hymnToTourachCard.getArtIndex(), artIndexFEM);
+
+        // == 2. Pass in Card Name, Set Code, ArtIndex
+        hymnToTourachCard = this.cardDb.getCard(cardName, httEdition, artIndexFEM);
+        assertNotNull(hymnToTourachCard);
+        assertEquals(hymnToTourachCard.getName(), cardName);
+        assertEquals(hymnToTourachCard.getEdition(), httEdition);
+        assertEquals(hymnToTourachCard.getArtIndex(), artIndexFEM);
+
+        // == 3. Pass in RequestInfo as Card Name
+        hymnToTourachCard = this.cardDb.getCard(requestInfo, httEdition, artIndexFEM);
+        assertNotNull(hymnToTourachCard);
+        assertEquals(hymnToTourachCard.getName(), cardName);
+        assertEquals(hymnToTourachCard.getEdition(), httEdition);
+        assertEquals(hymnToTourachCard.getArtIndex(), artIndexFEM);
+
+        // == 4. Pass in RequestInfo as CardName but then requesting for different artIndex
+        hymnToTourachCard = this.cardDb.getCard(requestInfo, httEdition, 2);
+        assertNotNull(hymnToTourachCard);
+        assertEquals(hymnToTourachCard.getName(), cardName);
+        assertEquals(hymnToTourachCard.getEdition(), httEdition);
+        assertEquals(hymnToTourachCard.getArtIndex(), 2);
+
+        // == 5. Pass in RequestInfo as CardName but then requesting for different edition and artIndex
+        hymnToTourachCard = this.cardDb.getCard(requestInfo, latestArtHymnToTourachEdition, 1);
+        assertNotNull(hymnToTourachCard);
+        assertEquals(hymnToTourachCard.getName(), cardName);
+        assertEquals(hymnToTourachCard.getEdition(), latestArtHymnToTourachEdition);
+        assertEquals(hymnToTourachCard.getArtIndex(), 1);
+
+        // === Get Card From Set
+
+        // == 1. Reference with all expected params
+        hymnToTourachCard = this.cardDb.getCardFromSet(cardName, StaticData.instance().getCardEdition(httEdition), artIndexFEM, false);
+        assertNotNull(hymnToTourachCard);
+        assertEquals(hymnToTourachCard.getName(), cardName);
+        assertEquals(hymnToTourachCard.getEdition(), httEdition);
+        assertEquals(hymnToTourachCard.getArtIndex(), artIndexFEM);
+
+        // == 2. Pass in RequestInfo as Card Name
+        hymnToTourachCard = this.cardDb.getCardFromSet(requestInfo, StaticData.instance().getCardEdition(httEdition), artIndexFEM, false);
+        assertNotNull(hymnToTourachCard);
+        assertEquals(hymnToTourachCard.getName(), cardName);
+        assertEquals(hymnToTourachCard.getEdition(), httEdition);
+        assertEquals(hymnToTourachCard.getArtIndex(), artIndexFEM);
+
+        // == 3. Pass in RequestInfo but request for a different art Index
+        hymnToTourachCard = this.cardDb.getCardFromSet(requestInfo, StaticData.instance().getCardEdition(httEdition), 2, false);
+        assertNotNull(hymnToTourachCard);
+        assertEquals(hymnToTourachCard.getName(), cardName);
+        assertEquals(hymnToTourachCard.getEdition(), httEdition);
+        assertEquals(hymnToTourachCard.getArtIndex(), 2);
+
+        // == 4. Pass in RequestInfo as Card Name but request for a different art Index and Edition
+        hymnToTourachCard = this.cardDb.getCardFromSet(requestInfo,
+                StaticData.instance().getCardEdition(latestArtHymnToTourachEdition), 1, false);
+        assertNotNull(hymnToTourachCard);
+        assertEquals(hymnToTourachCard.getName(), cardName);
+        assertEquals(hymnToTourachCard.getEdition(), latestArtHymnToTourachEdition);
+        assertEquals(hymnToTourachCard.getArtIndex(), 1);
+
+        // === Get Card From Editions
+
+        // == 1. Reference case
+        hymnToTourachCard = this.cardDb.getCardFromEditions(cardName, CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS);
+        assertNotNull(hymnToTourachCard);
+        assertEquals(hymnToTourachCard.getName(), cardName);
+        assertEquals(hymnToTourachCard.getEdition(), httEdition);
+        assertEquals(hymnToTourachCard.getArtIndex(), 1);
+
+        // == 2. Pass in Request String as CardName
+        hymnToTourachCard = this.cardDb.getCardFromEditions(requestInfo, CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS);
+        assertNotNull(hymnToTourachCard);
+        assertEquals(hymnToTourachCard.getName(), cardName);
+        assertEquals(hymnToTourachCard.getEdition(), httEdition);
+        // expecting this because artIndex is already in Request Info
+        assertEquals(hymnToTourachCard.getArtIndex(), artIndexFEM);
+
+        // == 3. Changing CardArtPreference so that it would not be compliant with request
+        // STILL expecting to get in return whatever is in request as no extra param has been provided.
+        hymnToTourachCard = this.cardDb.getCardFromEditions(requestInfo, CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
+        assertNotNull(hymnToTourachCard);
+        assertEquals(hymnToTourachCard.getName(), cardName);
+        // expecting this edition as present in request info
+        assertEquals(hymnToTourachCard.getEdition(), httEdition);
+        // expecting this because artIndex is already in Request Info
+        assertEquals(hymnToTourachCard.getArtIndex(), 3);
+
+        // == 4. Changing Art Index (not default) so still requesting card via request String
+        hymnToTourachCard = this.cardDb.getCardFromEditions(requestInfo,
+                CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS, 2);
+        assertNotNull(hymnToTourachCard);
+        assertEquals(hymnToTourachCard.getName(), cardName);
+        // expecting this edition as present in request info
+        assertEquals(hymnToTourachCard.getEdition(), httEdition);
+        // artIndex should be overwritten this time, as it's provided and not default
+        assertEquals(hymnToTourachCard.getArtIndex(), 2);
+
+        // == 4. Changing Art Index (this time with default) = so initially requested artIndex won't get changed!
+        hymnToTourachCard = this.cardDb.getCardFromEditions(requestInfo,
+                CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS, 1);
+        assertNotNull(hymnToTourachCard);
+        assertEquals(hymnToTourachCard.getName(), cardName);
+        // expecting this edition as present in request info
+        assertEquals(hymnToTourachCard.getEdition(), httEdition);
+        // artIndex should still be the one requested in CardRequest as value passed is default
+        assertEquals(hymnToTourachCard.getArtIndex(), artIndexFEM);
+
+        // == 5. Passing in Card Name Only
+        hymnToTourachCard = this.cardDb.getCardFromEditions(cardName, CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
+        assertNotNull(hymnToTourachCard);
+        assertEquals(hymnToTourachCard.getName(), cardName);
+        // expecting this edition as returned due to CardArtPreference
+        assertEquals(hymnToTourachCard.getEdition(), latestArtHymnToTourachEdition);
+        // artIndex should be overwritten this time, as it's provided and not default
+        assertEquals(hymnToTourachCard.getArtIndex(), 1);
+
+        // == 6. Forcing in a specific Art Index will overrule Art Preference
+        hymnToTourachCard = this.cardDb.getCardFromEditions(cardName,
+                CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS, artIndexFEM);
+        assertNotNull(hymnToTourachCard);
+        assertEquals(hymnToTourachCard.getName(), cardName);
+        // expecting this edition as returned due to CardArtPreference
+        assertEquals(hymnToTourachCard.getEdition(), httEdition);
+        // artIndex should be overwritten this time, as it's provided and not default
+        assertEquals(hymnToTourachCard.getArtIndex(), artIndexFEM);
+
+
+
+
+
+
+    }
+
+    @Test
     public void testGetCardByNameAndSetWithWrongORNullCollectorNumber(){
         PaperCard httCard = this.cardDb.getCard(cardNameHymnToTourach, editionHymnToTourach, "589b");
         assertNull(httCard);

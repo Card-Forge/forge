@@ -159,7 +159,7 @@ public class CardRequestTestCase {
         assertEquals(request.collectorNumber, IPaperCard.NO_COLLECTOR_NUMBER);
 
         // foil
-        requestString = foilCardNameFoil + sep + foilEdition + sep + "[" + foilCollNr + "]";;
+        requestString = foilCardNameFoil + sep + foilEdition + sep + "[" + foilCollNr + "]";
         request = CardRequest.fromString(requestString);
         assertEquals(request.cardName, foilCardName);
         assertEquals(request.edition, foilEdition);
@@ -185,13 +185,34 @@ public class CardRequestTestCase {
         assertEquals(request.collectorNumber, IPaperCard.NO_COLLECTOR_NUMBER);
 
         // foil
-        requestString = foilCardNameFoil + sep + foilEdition + sep + 3 + sep +"[" + foilCollNr + "]";;
+        requestString = foilCardNameFoil + sep + foilEdition + sep + 3 + sep +"[" + foilCollNr + "]";
         request = CardRequest.fromString(requestString);
         assertEquals(request.cardName, foilCardName);
         assertEquals(request.edition, foilEdition);
         assertEquals(request.artIndex,3);
         assertTrue(request.isFoil);
         assertEquals(request.collectorNumber, foilCollNr);
+    }
+
+    @Test
+    public void testCreatingCardRequestUsingAnotherRequestStringAsCardName(){
+        String requestString = CardRequest.compose(cardName, edition, 1);
+        CardRequest request = CardRequest.fromString(requestString);
+
+        assertEquals(request.cardName, cardName);
+        assertEquals(request.edition, edition);
+        assertEquals(request.artIndex, 1);
+
+        String newRequestString = CardRequest.compose(requestString, foilEdition, 2);
+        CardRequest newRequest = CardRequest.fromString(newRequestString);
+
+        assertEquals(newRequest.cardName, cardName);
+        assertEquals(newRequest.edition, foilEdition);
+        assertEquals(newRequest.artIndex, 2);
+
+        assertEquals(request.cardName, newRequest.cardName);
+        assertNotEquals(request.edition, newRequest.edition);
+        assertNotEquals(request.artIndex, newRequest.artIndex);
     }
 
 }

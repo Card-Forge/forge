@@ -93,6 +93,9 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         public static String compose(String cardName, String setCode) {
             setCode = setCode != null ? setCode : "";
             cardName = cardName != null ? cardName : "";
+            if (cardName.indexOf(NameSetSeparator) != -1)
+                // If cardName is another RequestString, just get card name and forget about the rest.
+                cardName = CardRequest.fromString(cardName).cardName;
             return cardName + NameSetSeparator + setCode;
         }
 
@@ -514,9 +517,9 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 return setFilter && artIndexFilter && collectorNumberFilter;
             }
         }));
-        if (candidates.isEmpty()) {
+        if (candidates.isEmpty())
             return null;
-        }
+
         PaperCard candidate = candidates.get(0);
         // Before returning make sure that actual candidate has Image.
         // If not, try to replace current candidate with one having image,
@@ -617,9 +620,10 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         final CardRequest cr = CardRequest.fromString(cardInfo);
         // Check whether input `frame` is null. In that case, fallback to default SetPreference !-)
         final CardArtPreference artPref = artPreference != null ? artPreference : this.defaultCardArtPreference;
-        if (artIndex >= IPaperCard.DEFAULT_ART_INDEX && cr.artIndex < IPaperCard.DEFAULT_ART_INDEX) {
-            cr.artIndex = artIndex;
-        }
+        cr.artIndex = Math.max(cr.artIndex, IPaperCard.DEFAULT_ART_INDEX);
+        if (cr.artIndex != artIndex && artIndex > IPaperCard.DEFAULT_ART_INDEX )
+            cr.artIndex = artIndex;  // 2nd cond. is to verify that some actual value has been passed in.
+
         List<PaperCard> cards = getAllCards(cr.cardName);
         if (releaseDate != null) {
             cards = Lists.newArrayList(Iterables.filter(cards, new Predicate<PaperCard>() {
@@ -669,7 +673,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             Collections.reverse(acceptedEditions);  // newest editions first
         PaperCard candidate = null;
         for (CardEdition ed : acceptedEditions) {
-            PaperCard cardFromSet = getCardFromSet(cr.cardName, ed, artIndex, cr.isFoil);
+            PaperCard cardFromSet = getCardFromSet(cr.cardName, ed, cr.artIndex, cr.isFoil);
             if (candidate == null && cardFromSet != null)
                 // save the first card found, as the last backup in case no other candidate *with image* will be found
                 candidate = cardFromSet;
