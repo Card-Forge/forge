@@ -1,12 +1,13 @@
 Name:Ranger Class
 ManaCost:1 G
 Types:Enchantment Class
-K:Class:3:1 G,3 G
-T:Mode$ ChangesZone | ClassLevel$ 1 | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 2/2 green Wolf creature token.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 2/2 green Wolf creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_2_2_wolf | TokenOwner$ You
-T:Mode$ AttackersDeclared | ClassLevel$ 2 | AttackingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you attack, put a +1/+1 counter on target attacking creature.
+K:Class:2:1 G:AddTrigger$ TriggerAttackersDeclared
+SVar:TriggerAttackersDeclared:Mode$ AttackersDeclared | AttackingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | Secondary$ True | TriggerDescription$ Whenever you attack, put a +1/+1 counter on target attacking creature.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | CounterType$ P1P1 | CounterNum$ 1
-S:Mode$ Continuous | ClassLevel$ 3 | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ Player | Description$ You may look at the top card of your library any time.
-S:Mode$ Continuous | ClassLevel$ 3 | Affected$ Creature.nonLand+TopLibrary+YouCtrl | AffectedZone$ Library | MayPlay$ True | Description$ You may cast creature spells from the top of your library.
+K:Class:3:3 G:AddStaticAbility$ SMayLook & SMayPlay
+SVar:SMayLook:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Secondary$ True | Description$ You may look at the top card of your library any time.
+SVar:SMayPlay:Mode$ Continuous | Affected$ Creature.nonLand+TopLibrary+YouCtrl | AffectedZone$ Library | MayPlay$ True | Secondary$ True | Description$ You may cast creature spells from the top of your library.
 DeckHas:Ability$Token & Ability$Counter
 Oracle:(Gain the next level as a sorcery to add its ability.)\nWhen Ranger Class enters the battlefield, create a 2/2 green Wolf creature token.\n{1}{G}: Level 2\nWhenever you attack, put a +1/+1 counter on target attacking creature.\n{3}{G}: Level 3\nYou may look at the top card of your library any time.\nYou may cast creature spells from the top of your library.

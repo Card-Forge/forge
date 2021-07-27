@@ -4,9 +4,6 @@ Types:Creature Human Cleric Avatar
 PT:3/3
 K:Level up:1
 SVar:maxLevel:12
-S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 6 | SetToughness$ 6 | AddKeyword$ Lifelink | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 6-11 6/6 Lifelink
-S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 9 | SetToughness$ 9 | AddKeyword$ Indestructible & Lifelink | CheckSVar$ Z | SVarCompare$ EQ1 | Description$ LEVEL 12+ 9/9 Lifelink, indestructible
-SVar:Y:Count$Valid Card.Self+counters_GE6_LEVEL+counters_LT12_LEVEL
-SVar:Z:Count$Valid Card.Self+counters_GE12_LEVEL
-SVar:Picture:http://www.wizards.com/global/images/magic/general/transcendent_master.jpg
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 6 | SetToughness$ 6 | AddKeyword$ Lifelink | IsPresent$ Card.Self+counters_GE6_LEVEL+counters_LE11_LEVEL | Description$ LEVEL 6-11 6/6 Lifelink
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 9 | SetToughness$ 9 | AddKeyword$ Indestructible & Lifelink | IsPresent$ Card.Self+counters_GE12_LEVEL | Description$ LEVEL 12+ 9/9 Lifelink, indestructible
 Oracle:Level up {1} ({1}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 6-11\n6/6\nLifelink\nLEVEL 12+\n9/9\nLifelink, indestructible

@@ -1,11 +1,12 @@
 Name:Druid Class
 ManaCost:1 G
 Types:Enchantment Class
-K:Class:3:2 G,4 G
-T:Mode$ ChangesZone | ClassLevel$ 1 | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a land enters the battlefield under your control, you gain 1 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a land enters the battlefield under your control, you gain 1 life.
 SVar:TrigGainLife:DB$GainLife | Defined$ You | LifeAmount$ 1
-S:Mode$ Continuous | ClassLevel$ 2 | Affected$ You | AdjustLandPlays$ 1 | Description$ You may play an additional land on each of your turns.
-T:Mode$ ClassLevelGained | ClassLevel$ 3 | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigAnimateLand | TriggerDescription$ When this Class becomes level 3, target land you control becomes a creature with haste and "This creature's power and toughness are each equal to the number of lands you control." It's still a land.
+K:Class:2:2 G:AddStaticAbility$ SLandPlay
+SVar:SLandPlay:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | Secondary$ True | Description$ You may play an additional land on each of your turns.
+K:Class:3:4 G:AddTrigger$ TriggerClassLevel
+SVar:TriggerClassLevel:Mode$ ClassLevelGained | ClassLevel$ 3 | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigAnimateLand | Secondary$ True | TriggerDescription$ When this Class becomes level 3, target land you control becomes a creature with haste and "This creature's power and toughness are each equal to the number of lands you control." It's still a land.
 SVar:TrigAnimateLand:DB$ Animate | ValidTgts$ Land.YouCtrl | Types$ Creature | Duration$ Permanent | Keywords$ Haste | staticAbilities$ StLandPT
 SVar:StLandPT:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ This creature's power and toughness are each equal to the number of lands you control.
 SVar:X:Count$Valid Land.YouCtrl

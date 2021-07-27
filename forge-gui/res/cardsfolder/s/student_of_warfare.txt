@@ -4,9 +4,6 @@ Types:Creature Human Knight
 PT:1/1
 K:Level up:W
 SVar:maxLevel:7
-S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 3 | SetToughness$ 3 | AddKeyword$ First Strike | CheckSVar$ X | SVarCompare$ EQ1 | Description$ LEVEL 2-6 3/3 CARDNAME has First Strike
-S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 4 | SetToughness$ 4 | AddKeyword$ Double Strike | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 7+ 4/4 CARDNAME has Double Strike
-SVar:X:Count$Valid Card.Self+counters_GE2_LEVEL+counters_LE6_LEVEL
-SVar:Y:Count$Valid Card.Self+counters_GE7_LEVEL
-SVar:Picture:http://www.wizards.com/global/images/magic/general/student_of_warfare.jpg
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 3 | SetToughness$ 3 | AddKeyword$ First Strike | IsPresent$ Card.Self+counters_GE2_LEVEL+counters_LE6_LEVEL | Description$ LEVEL 2-6 3/3 CARDNAME has First Strike
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 4 | SetToughness$ 4 | AddKeyword$ Double Strike | IsPresent$ Card.Self+counters_GE7_LEVEL | Description$ LEVEL 7+ 4/4 CARDNAME has Double Strike
 Oracle:Level up {W} ({W}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 2-6\n3/3\nFirst strike\nLEVEL 7+\n4/4\nDouble strike

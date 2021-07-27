@@ -4,12 +4,10 @@ Types:Creature Human Cleric
 PT:0/3
 K:Level up:2 W
 SVar:maxLevel:5
-S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 1 | SetToughness$ 4 | CheckSVar$ X | SVarCompare$ EQ1 | Description$ LEVEL 1-4 1/4 If a source would deal damage to you or a creature you control prevent 1 of that damage.
-S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 2 | SetToughness$ 5 | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 5+ 2/5 If a source would deal damage to you or a creature you control prevent 2 of that damage.
-R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ You,Creature.YouCtrl | ReplaceWith$ DBReplace1 | PreventionEffect$ True | CheckSVar$ X | SVarCompare$ EQ1
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 1 | SetToughness$ 4 | AddReplacementEffects$ RDamage1 | IsPresent$ Card.Self+counters_GE1_LEVEL+counters_LE4_LEVEL | Description$ LEVEL 1-4 1/4 If a source would deal damage to you or a creature you control prevent 1 of that damage.
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 2 | SetToughness$ 5 | AddReplacementEffects$ RDamage2 | IsPresent$ Card.Self+counters_GE5_LEVEL | Description$ LEVEL 5+ 2/5 If a source would deal damage to you or a creature you control prevent 2 of that damage.
+SVar:RDamage1:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ You,Creature.YouCtrl | ReplaceWith$ DBReplace1 | PreventionEffect$ True | Secondary$ True | Description$ If a source would deal damage to you or a creature you control prevent 1 of that damage.
 SVar:DBReplace1:DB$ ReplaceDamage | Amount$ 1
-R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ You,Creature.YouCtrl | ReplaceWith$ DBReplace2 | PreventionEffect$ True | CheckSVar$ Y | SVarCompare$ EQ1
+SVar:RDamage2:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ You,Creature.YouCtrl | ReplaceWith$ DBReplace2 | PreventionEffect$ True | Secondary$ True | Description$ If a source would deal damage to you or a creature you control prevent 2 of that damage.
 SVar:DBReplace2:DB$ ReplaceDamage | Amount$ 2
-SVar:X:Count$Valid Card.Self+counters_GE1_LEVEL+counters_LT5_LEVEL
-SVar:Y:Count$Valid Card.Self+counters_GE5_LEVEL
 Oracle:Level up {2}{W} ({2}{W}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 1-4\n1/4\nIf a source would deal damage to you or a creature you control, prevent 1 of that damage.\nLEVEL 5+\n2/5\nIf a source would deal damage to you or a creature you control, prevent 2 of that damage.

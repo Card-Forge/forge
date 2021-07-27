@@ -456,7 +456,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
      */
     public final boolean checkConditions() {
         final Player controller = getHostCard().getController();
-        final Game game = controller.getGame();
+        final Game game = getHostCard().getGame();
         final PhaseHandler ph = game.getPhaseHandler();
 
         if (getHostCard().isPhasedOut()) {

@@ -1,10 +1,11 @@
 Name:Fighter Class
 ManaCost:R W
 Types:Enchantment Class
-K:Class:3:1 R W,3 R W
-T:Mode$ ChangesZone | ClassLevel$ 1 | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, search your library for an Equipment card, reveal it, put it into your hand, then shuffle.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, search your library for an Equipment card, reveal it, put it into your hand, then shuffle.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.Equipment | ChangeNum$ 1
-S:Mode$ ReduceCost | ClassLevel$ 2 | ValidCard$ Card | ValidSpell$ Activated.Equip | Activator$ You | Amount$ 2 | Description$ Equip abilities you activate cost {2} less to activate.
-T:Mode$ Attacks | ClassLevel$ 3 | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigMustBlock | TriggerDescription$ Whenever a creature you control attacks, up to one target creature blocks it this combat if able.
+K:Class:2:1 R W:AddStaticAbility$ SReduceCost
+SVar:SReduceCost:Mode$ ReduceCost | ValidCard$ Card | ValidSpell$ Activated.Equip | Activator$ You | Amount$ 2 | Secondary$ True | Description$ Equip abilities you activate cost {2} less to activate.
+K:Class:3:3 R W:AddTrigger$ TriggerAttacks
+SVar:TriggerAttacks:Mode$ Attacks | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigMustBlock | Secondary$ True | TriggerDescription$ Whenever a creature you control attacks, up to one target creature blocks it this combat if able.
 SVar:TrigMustBlock:DB$ MustBlock | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | DefinedAttacker$ TriggeredAttacker | BlockAllDefined$ True
 Oracle:(Gain the next level as a sorcery to add its ability.)\nWhen Fighter Class enters the battlefield, search your library for an Equipment card, reveal it, put it into your hand, then shuffle.\n{1}{R}{W}: Level 2\nEquip abilities you activate cost {2} less to activate.\n{3}{R}{W}: Level 3\nWhenever a creature you control attacks, up to one target creature blocks it this combat if able.

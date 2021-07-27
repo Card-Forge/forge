@@ -2601,23 +2601,17 @@ public class CardFactoryUtil {
             inst.addSpellAbility(sa);
         } else if (keyword.startsWith("Class")) {
             final String[] k = keyword.split(":");
-            final String[] costs = k[2].split(",");
-            if (costs.length != Integer.valueOf(k[1]) - 1) {
-                throw new RuntimeException("Class max differ from cost amount");
-            }
+            final int level = Integer.valueOf(k[1]);
 
-            for (int i = 0; i < costs.length; ++i) {
-                final String cost = costs[i];
-                final StringBuilder sbClass = new StringBuilder();
-                sbClass.append("AB$ ClassLevelUp | Cost$ ").append(cost);
-                sbClass.append(" | ClassLevel$ EQ").append(i + 1);
-                sbClass.append(" | SorcerySpeed$ True");
-                sbClass.append(" | StackDescription$ SpellDescription | SpellDescription$ Level ").append(i + 2);
+            final StringBuilder sbClass = new StringBuilder();
+            sbClass.append("AB$ ClassLevelUp | Cost$ ").append(k[2]);
+            sbClass.append(" | ClassLevel$ EQ").append(level - 1);
+            sbClass.append(" | SorcerySpeed$ True");
+            sbClass.append(" | StackDescription$ SpellDescription | SpellDescription$ Level ").append(level);
 
-                final SpellAbility sa = AbilityFactory.getAbility(sbClass.toString(), card);
-                sa.setIntrinsic(intrinsic);
-                inst.addSpellAbility(sa);
-            }
+            final SpellAbility sa = AbilityFactory.getAbility(sbClass.toString(), card);
+            sa.setIntrinsic(intrinsic);
+            inst.addSpellAbility(sa);
         } else if (keyword.startsWith("Dash")) {
             final String[] k = keyword.split(":");
             final Cost dashCost = new Cost(k[1], false);
@@ -3368,6 +3362,38 @@ public class CardFactoryUtil {
 
             svars.put("CipherTrigger", trig);
             svars.put("PlayEncoded", ab);
+        } else if (keyword.startsWith("Class")) {
+            final String[] k = keyword.split(":");
+            final String level = k[1];
+            final String params = k[3];
+
+            // get Description from CardTraits
+            StringBuilder desc = new StringBuilder();
+            boolean descAdded = false;
+            Map<String, String> mapParams = AbilityFactory.getMapParams(params);
+            if (mapParams.containsKey("AddTrigger")) {
+                for (String s : mapParams.get("AddTrigger").split(" & ")) {
+                    if (descAdded) {
+                        desc.append("\r\n");
+                    }
+                    desc.append(AbilityFactory.getMapParams(state.getSVar(s)).get("TriggerDescription"));
+                    descAdded = true;
+                }
+            }
+            if (mapParams.containsKey("AddStaticAbility")) {
+                for (String s : mapParams.get("AddStaticAbility").split(" & ")) {
+                    if (descAdded) {
+                        desc.append("\r\n");
+                    }
+                    desc.append(AbilityFactory.getMapParams(state.getSVar(s)).get("Description"));
+                    descAdded = true;
+                }
+            }
+
+            effect = "Mode$ Continuous | Affected$ Card.Self | ClassLevel$ " + level + " | " + params;
+            if (descAdded) {
+                effect += " | Description$ " + desc.toString();
+            }
         } else if (keyword.startsWith("Dash")) {
             effect = "Mode$ Continuous | Affected$ Card.Self+dashed | AddKeyword$ Haste";
         } else if (keyword.equals("Defender")) {
