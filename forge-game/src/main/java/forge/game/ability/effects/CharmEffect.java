@@ -71,6 +71,7 @@ public class CharmEffect extends SpellAbilityEffect {
         boolean repeat = sa.hasParam("CanRepeatModes");
         boolean random = sa.hasParam("Random");
         boolean limit = sa.hasParam("ActivationLimit");
+        boolean gameLimit = sa.hasParam("GameActivationLimit");
         boolean oppChooses = "Opponent".equals(sa.getParam("Chooser"));
 
         StringBuilder sb = new StringBuilder();
@@ -108,6 +109,14 @@ public class CharmEffect extends SpellAbilityEffect {
                 sb.append(". Additional code needed in CharmEffect.");
             }
         }
+        if (gameLimit) {
+            int limitNum = AbilityUtils.calculateAmount(source, sa.getParam("GameActivationLimit"), sa);
+            if (limitNum == 1) {
+                sb.append(". Activate only once.");
+            } else {
+                sb.append(". Additional code needed in CharmEffect.");
+            }
+        }
 
         if (additionalDesc) {
             if (optional) {
@@ -118,7 +127,7 @@ public class CharmEffect extends SpellAbilityEffect {
         }
 
         if (!list.isEmpty()) {
-            if (!repeat && !additionalDesc && !limit) {
+            if (!repeat && !additionalDesc && !limit && !gameLimit) {
                 sb.append(" \u2014");
             }
             sb.append("\r\n");
