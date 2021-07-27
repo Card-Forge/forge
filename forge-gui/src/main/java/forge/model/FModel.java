@@ -178,10 +178,12 @@ public final class FModel {
         } catch (Exception e) {
             customReader = null;
         }
-        magicDb = new StaticData(reader, tokenReader, customReader, ForgeConstants.EDITIONS_DIR, ForgeConstants.USER_CUSTOM_EDITIONS_DIR,ForgeConstants.BLOCK_DATA_DIR, FModel.getPreferences().getPref(FPref.UI_PREFERRED_ART),
+        magicDb = new StaticData(reader, tokenReader, customReader, ForgeConstants.EDITIONS_DIR,
+                                 ForgeConstants.USER_CUSTOM_EDITIONS_DIR, ForgeConstants.BLOCK_DATA_DIR,
+                                 FModel.getPreferences().getPref(FPref.UI_PREFERRED_ART),
                                  FModel.getPreferences().getPrefBoolean(FPref.UI_LOAD_UNKNOWN_CARDS),
                                  FModel.getPreferences().getPrefBoolean(FPref.UI_LOAD_NONLEGAL_CARDS),
-                                 FModel.getPreferences().getPrefBoolean(FPref.UI_LOAD_CUSTOM_CARDS),
+                                 FModel.getPreferences().getPrefBoolean(FPref.ALLOW_CUSTOM_CARDS_IN_DECKS_CONFORMANCE),
                                  FModel.getPreferences().getPrefBoolean(FPref.UI_SMART_CARD_ART)
                 );
         CardTranslation.preloadTranslation(preferences.getPref(FPref.UI_LANGUAGE), ForgeConstants.LANG_DIR);
