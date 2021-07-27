@@ -1930,8 +1930,8 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
     }
 
     @Test
-    public void testCardFromUnknownSet(){
-        String unknownCardName = "Unkwnonw Card Name";
+    public void testGetCardFromUnknownSet(){
+        String unknownCardName = "Unknown Card Name";
         PaperCard unknownCard = new PaperCard(CardRules.getUnsupportedCardNamed(unknownCardName),
                                               CardEdition.UNKNOWN.getCode(), CardRarity.Unknown);
         this.cardDb.addCard(unknownCard);
