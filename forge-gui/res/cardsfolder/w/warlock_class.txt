@@ -1,13 +1,14 @@
 Name:Warlock Class
 ManaCost:B
 Types:Enchantment Class
-K:Class:3:1 B,6 B
-T:Mode$ Phase | ClassLevel$ 1 | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigLose1 | TriggerDescription$ At the beginning of your end step, if a creature died this turn, each opponent loses 1 life.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigLose1 | TriggerDescription$ At the beginning of your end step, if a creature died this turn, each opponent loses 1 life.
 SVar:TrigLose1:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
-T:Mode$ ClassLevelGained | ClassLevel$ 2 | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ When this Class becomes level 2, look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard.
+K:Class:2:1 B:AddTrigger$ TriggerClassLevel
+SVar:TriggerClassLevel:Mode$ ClassLevelGained | ClassLevel$ 2 | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDig | Secondary$ True | TriggerDescription$ When this Class becomes level 2, look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard.
 SVar:TrigDig:DB$ Dig | DigNum$ 3 | DestinationZone2$ Graveyard
-T:Mode$ Phase | ClassLevel$ 3 | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ RepeatOpps | TriggerDescription$ At the beginning of your end step, each opponent loses life equal to the life they lost this turn. (Damage causes loss of life.)
+K:Class:3:6 B:AddTrigger$ TriggerEndTurn
+SVar:TriggerEndTurn:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ RepeatOpps | Secondary$ True | TriggerDescription$ At the beginning of your end step, each opponent loses life equal to the life they lost this turn. (Damage causes loss of life.)
 SVar:RepeatOpps:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ TrigLoseAgain
 SVar:TrigLoseAgain:DB$ LoseLife | Defined$ Remembered | LifeAmount$ Y
 SVar:Y:PlayerCountRemembered$LifeLostThisTurn

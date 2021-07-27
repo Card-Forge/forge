@@ -34,7 +34,6 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicates;
-import com.google.common.base.Strings;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -2040,8 +2039,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 } else if (inst.getKeyword().equals(Keyword.COMPANION)) {
                     sbLong.append("Companion — ");
                     sbLong.append(((Companion)inst).getDescription());
-                } else if (keyword.endsWith(".") && !keyword.startsWith("Haunt")) {
-                    sbLong.append(keyword).append("\r\n");
                 } else if (keyword.startsWith("Presence") || keyword.startsWith("MayFlash")) {
                     // Pseudo keywords, only print Reminder
                     sbLong.append(inst.getReminderText());
@@ -2139,7 +2136,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.startsWith("Amplify") || keyword.startsWith("Ninjutsu") || keyword.startsWith("Adapt")
                         || keyword.startsWith("Transfigure") || keyword.startsWith("Aura swap")
                         || keyword.startsWith("Cycling") || keyword.startsWith("TypeCycling")
-                        || keyword.startsWith("Encore") || keyword.startsWith("Mutate") || keyword.startsWith("Dungeon")) {
+                        || keyword.startsWith("Encore") || keyword.startsWith("Mutate") || keyword.startsWith("Dungeon")
+                        || keyword.startsWith("Class") || keyword.startsWith("Saga")) {
                     // keyword parsing takes care of adding a proper description
                 } else if (keyword.startsWith("CantBeBlockedByAmount")) {
                     sbLong.append(getName()).append(" can't be blocked ");
@@ -2158,15 +2156,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     // need to get SpellDescription from Svar
                     String desc = AbilityFactory.getMapParams(getSVar(k[1])).get("SpellDescription");
                     sbLong.append(desc);
-                } else if (keyword.startsWith("Saga")) {
-                    String[] k = keyword.split(":");
-                    String desc = "(As this Saga enters and after your draw step, "
-                        + " add a lore counter. Sacrifice after " + Strings.repeat("I", Integer.valueOf(k[1])) + ".)";
-                    sbLong.append(desc);
-                } else if (keyword.startsWith("Class")) {
-                    sbLong.append("(Gain the next level as a sorcery to add its ability.)");
-                }
-                else {
+                } else if (keyword.endsWith(".") && !keyword.startsWith("Haunt")) {
+                    sbLong.append(keyword).append("\r\n");
+                } else {
                     if ((i != 0) && (sb.length() != 0)) {
                         sb.append(", ");
                     }
@@ -2241,6 +2233,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return TextUtil.fastReplace(result, "CARDNAME", CardTranslation.getTranslatedName(state.getName()));
         }
 
+        if (type.hasSubtype("Class")) {
+            sb.append("(Gain the next level as a sorcery to add its ability.)").append(linebreak);
+        }
+
+        if (type.hasSubtype("Saga")) {
+            sb.append("(As this Saga enters and after your draw step, add a lore counter. Sacrifice after ");
+            sb.append(TextUtil.toRoman(getFinalChapterNr())).append(".)").append(linebreak);
+        }
         if (monstrous) {
             sb.append("Monstrous\r\n");
         }
@@ -2304,8 +2304,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             if (!trig.isSecondary() && !trig.isClassAbility()) {
                 boolean disabled = false;
                 // Disable text of other rooms
-                if (type.isDungeon() && !trig.getOverridingAbility().getParam("RoomName").equals(getCurrentRoom())) {
-                    disabled = true;
+                if (type.isDungeon()) {
+                    disabled = !trig.getOverridingAbility().getParam("RoomName").equals(getCurrentRoom());
+                } else {
+                    disabled = getGame() != null && !trig.requirementsCheck(getGame());
                 }
                 String trigStr = trig.replaceAbilityText(trig.toString(), state);
                 if (disabled) sb.append(grayTag);
@@ -2323,7 +2325,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             if (!stAb.isSecondary() && !stAb.isClassAbility()) {
                 final String stAbD = stAb.toString();
                 if (!stAbD.equals("")) {
-                    sb.append(stAbD).append(linebreak);
+                    boolean disabled = getGame() != null && !stAb.checkConditions();
+                    if (disabled) sb.append(grayTag);
+                    sb.append(stAbD);
+                    if (disabled) sb.append(endTag);
+                    sb.append(linebreak);
                 }
             }
         }
@@ -2408,22 +2414,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             // Currently the maximum levels of all Class cards are all 3
             for (int level = 1; level <= 3; ++level) {
                 boolean disabled = level > getClassLevel() && isInZone(ZoneType.Battlefield);
-                for (final Trigger trig : state.getTriggers()) {
-                    if (trig.isClassLevelNAbility(level) && !trig.isSecondary()) {
-                        if (disabled) sb.append(grayTag);
-                        sb.append(trig.toString());
-                        if (disabled) sb.append(endTag);
-                        sb.append(linebreak);
-                    }
-                }
-                for (final ReplacementEffect re : state.getReplacementEffects()) {
-                    if (re.isClassLevelNAbility(level) && !re.isSecondary()) {
-                        if (disabled) sb.append(grayTag);
-                        sb.append(re.getDescription());
-                        if (disabled) sb.append(endTag);
-                        sb.append(linebreak);
-                    }
-                }
+                // Class second part is a static ability that grants the other abilities
                 for (final StaticAbility st : state.getStaticAbilities()) {
                     if (st.isClassLevelNAbility(level) && !st.isSecondary()) {
                         if (disabled) sb.append(grayTag);

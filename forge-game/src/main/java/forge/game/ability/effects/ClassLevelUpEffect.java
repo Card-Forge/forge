@@ -21,6 +21,13 @@ public class ClassLevelUpEffect extends SpellAbilityEffect {
         final int level = host.getClassLevel() + 1;
         host.setClassLevel(level);
 
+        // need to run static ability to get Trigger online
+        game.getAction().checkStaticAbilities();
+
+        // Re-register triggers for target card
+        game.getTriggerHandler().clearActiveTriggers(host, null);
+        game.getTriggerHandler().registerActiveTrigger(host, false);
+
         // Run ClassLevelGained trigger
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(host);
         runParams.put(AbilityKey.ClassLevel, level);

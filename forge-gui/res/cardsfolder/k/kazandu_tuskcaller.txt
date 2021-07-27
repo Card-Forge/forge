@@ -4,11 +4,8 @@ Types:Creature Human Shaman
 PT:1/1
 K:Level up:1 G
 SVar:maxLevel:6
-S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 1 | SetToughness$ 1 | AddAbility$ TokenLow | CheckSVar$ X | SVarCompare$ EQ1 | Description$ LEVEL 2-5 1/1 {T}: Create a 3/3 green Elephant creature token.
-S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 1 | SetToughness$ 1 | AddAbility$ TokenHigh | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 6+ 1/1 {T}: Create two 3/3 green Elephant creature tokens.
-SVar:TokenLow:AB$ Token | Cost$ T | TokenAmount$ 1 | TokenScript$ g_3_3_elephant | TokenOwner$ You | LegacyImage$ g 3 3 elephant roe | SpellDescription$ Create a 3/3 green Elephant creature token.
-SVar:TokenHigh:AB$ Token | Cost$ T | TokenAmount$ 2 | TokenScript$ g_3_3_elephant | TokenOwner$ You | LegacyImage$ g 3 3 elephant roe | SpellDescription$ Create two 3/3 green Elephant creature tokens.
-SVar:X:Count$Valid Card.Self+counters_GE2_LEVEL+counters_LE5_LEVEL
-SVar:Y:Count$Valid Card.Self+counters_GE6_LEVEL
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kazandu_tuskcaller.jpg
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 1 | SetToughness$ 1 | AddAbility$ TokenLow | IsPresent$ Card.Self+counters_GE2_LEVEL+counters_LE5_LEVEL | Description$ LEVEL 2-5 1/1 {T}: Create a 3/3 green Elephant creature token.
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 1 | SetToughness$ 1 | AddAbility$ TokenHigh | IsPresent$ Card.Self+counters_GE6_LEVEL | Description$ LEVEL 6+ 1/1 {T}: Create two 3/3 green Elephant creature tokens.
+SVar:TokenLow:AB$ Token | Cost$ T | TokenAmount$ 1 | TokenScript$ g_3_3_elephant | TokenOwner$ You | SpellDescription$ Create a 3/3 green Elephant creature token.
+SVar:TokenHigh:AB$ Token | Cost$ T | TokenAmount$ 2 | TokenScript$ g_3_3_elephant | TokenOwner$ You | SpellDescription$ Create two 3/3 green Elephant creature tokens.
 Oracle:Level up {1}{G} ({1}{G}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 2-5\n1/1\n{T}: Create a 3/3 green Elephant creature token.\nLEVEL 6+\n1/1\n{T}: Create two 3/3 green Elephant creature tokens.

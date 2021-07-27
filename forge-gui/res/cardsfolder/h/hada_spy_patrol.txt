@@ -4,9 +4,6 @@ Types:Creature Human Rogue
 PT:1/1
 K:Level up:2 U
 SVar:maxLevel:3
-S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 2 | SetToughness$ 2 | AddHiddenKeyword$ Unblockable | CheckSVar$ X | SVarCompare$ EQ1 | Description$ LEVEL 1-2 2/2 CARDNAME can't be blocked
-S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 3 | SetToughness$ 3 | AddKeyword$ Shroud | AddHiddenKeyword$ Unblockable | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 3+ 3/3 CARDNAME can't be blocked and has Shroud
-SVar:X:Count$Valid Card.Self+counters_GE1_LEVEL+counters_LE2_LEVEL
-SVar:Y:Count$Valid Card.Self+counters_GE3_LEVEL
-SVar:Picture:http://www.wizards.com/global/images/magic/general/hada_spy_patrol.jpg
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 2 | SetToughness$ 2 | AddHiddenKeyword$ Unblockable | IsPresent$ Card.Self+counters_GE1_LEVEL+counters_LE2_LEVEL | Description$ LEVEL 1-2 2/2 CARDNAME can't be blocked
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 3 | SetToughness$ 3 | AddKeyword$ Shroud | AddHiddenKeyword$ Unblockable | IsPresent$ Card.Self+counters_GE3_LEVEL | Description$ LEVEL 3+ 3/3 CARDNAME can't be blocked and has Shroud
 Oracle:Level up {2}{U} ({2}{U}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 1-2\n2/2\nHada Spy Patrol can't be blocked.\nLEVEL 3+\n3/3\nShroud (This creature can't be the target of spells or abilities.)\nHada Spy Patrol can't be blocked.
