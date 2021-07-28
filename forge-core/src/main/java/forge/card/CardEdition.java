@@ -791,34 +791,27 @@ public final class CardEdition implements Comparable<CardEdition> {
             };
         }
 
-        /* @leriomaggio [Note to self]
-         I am sure this method does not work the way it is expected - do some tests
-         The name is also misleading!
+        /* @leriomaggio
+          The original name "getEarliestEditionWithAllCards" was completely misleading, as it did
+          not reflect at all what the method really does (and what's the original goal).
 
-         What the method **really** does is to return the **latest** (as in the most recent)
-         Card Edition among the different (see Set<String>) sets found
-         that includes cards in the pool, picked by an "Old Art First" policy.
-         There is definitely no-guarantee that **all** cards in the pool will be
-         included in the set returned!
-
-         CounterExample: All cards from LEA, one card from USG.
-         USG will be returned!
-         See CardEditionCollectionTestCase.getEarliestEditionWithAllCardsNotWorkingAsExpected
-         test case that tackles exactly this example!
-
-         What I would do instead is to return the set containing the majority of the cards in
-         the pool (still picked with the same "Old Art First" policy!
-
-         A good renaming would be "getEarlierEditionWithMostOfTheCards"
+          What the method does is to return the **latest** (as in the most recent)
+          Card Edition among all the different "Original" sets (as in "first print") were cards
+          in the Pool can be found.
+          Therefore, nothing to do with an Edition "including" all the cards.
          */
-        public CardEdition getEarliestEditionWithAllCards(CardPool cards) {
+        public CardEdition getTheLatestOfAllTheOriginalEditionsOfCardsIn(CardPool cards) {
             Set<String> minEditions = new HashSet<>();
             CardDb db = StaticData.instance().getCommonCards();
             for (Entry<PaperCard, Integer> k : cards) {
+                // NOTE: Even if we do force a very stringent Policy on Editions
+                // (which only considers core, expansions, and reprint editions), the fetch method
+                // is flexible enough to relax the constraint automatically, if no card can be found
+                // under those conditions (i.e. ORIGINAL_ART_ALL_EDITIONS will be automatically used instead).
                 PaperCard cp = db.getCardFromEditions(k.getKey().getName(),
                                                       CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY);
-                if (cp == null)
-                    cp = k.getKey(); // it's unlikely, this code will ever run
+                if (cp == null)   // it's unlikely, this code will ever run. Only Happens if card does not exist.
+                    cp = k.getKey();
                 minEditions.add(cp.getEdition());
             }
             for (CardEdition ed : getOrderedEditions()) {
@@ -826,15 +819,6 @@ public final class CardEdition implements Comparable<CardEdition> {
                     return ed;
             }
             return UNKNOWN;
-        }
-
-        public Date getEarliestDateWithAllCards(CardPool cardPool) {
-            CardEdition earliestSet = StaticData.instance().getEditions().getEarliestEditionWithAllCards(cardPool);
-
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(earliestSet.getDate());
-            cal.add(Calendar.DATE, 1);
-            return cal.getTime();
         }
     }
 
