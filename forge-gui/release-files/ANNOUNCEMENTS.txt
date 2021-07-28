@@ -1,7 +1,5 @@
 #Add one announcement per line
 Get in the discord if you aren't yet. https://discord.gg/3v9JCVr
-Pre-release build for "Dungeons and Dragons: Adventures in the Forgotten Realms", please report any bugs!
-Commander cards for the D&D set are still being worked on.
 Custom cards can now be loaded from your user profile. Enable it your preferences.
-Add support for Collector Boosters (not implemented everywhere yet)
+Fat packs and Booster Box count are now set in the Edition file for easier customization
 *** Android 7 & 8 support is now deprecated. Support will be dropped in an upcoming release. ***

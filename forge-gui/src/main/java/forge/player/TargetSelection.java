@@ -184,8 +184,7 @@ public class TargetSelection {
                 choiceResult = !inp.hasCancelled();
                 bTargetingDone = inp.hasPressedOk();
                 controller.getGui().restoreOldZones(playerView, playerZoneUpdates);
-            }
-            else {
+            } else {
                 // for every other case an all-purpose GuiChoose
                 choiceResult = this.chooseCardFromList(validTargets, true, mandatory);
             }
@@ -257,8 +256,7 @@ public class TargetSelection {
         Object chosen = null;
         if (!choices.isEmpty() && mandatory) {
             chosen = controller.getGui().one(getTgt().getVTSelection(), choicesFiltered);
-        }
-        else {
+        } else {
             chosen = controller.getGui().oneOrNone(getTgt().getVTSelection(), choicesFiltered);
         }
         if (chosen == null) {
@@ -285,8 +283,7 @@ public class TargetSelection {
                         break;
                     }
                 }
-            }
-            else {
+            } else {
                 ability.getTargets().add(gameCacheChooseCard.get((CardView) chosen));
             }
         }
@@ -313,7 +310,7 @@ public class TargetSelection {
             }
         }
 
-        while(!bTargetingDone) {
+        while (!bTargetingDone) {
             if (ability.isMaxTargetChosen()) {
                 bTargetingDone = true;
                 return true;

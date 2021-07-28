@@ -18,7 +18,7 @@ public abstract class InputSyncronizedBase extends InputBase implements InputSyn
     @Override
     public void awaitLatchRelease() {
         FThreads.assertExecutedByEdt(false);
-        try{
+        try {
             cdlDone.await();
         } catch (final InterruptedException e) {
             BugReporter.reportException(e);

@@ -4,9 +4,6 @@ Types:Creature Human Soldier
 PT:1/2
 K:Level up:4
 SVar:maxLevel:4
-S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 2 | SetToughness$ 6 | AddKeyword$ Vigilance | CheckSVar$ X | SVarCompare$ EQ1 | Description$ LEVEL 1-3 2/6 CARDNAME has Vigilance
-S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 3 | SetToughness$ 10 | AddKeyword$ Vigilance | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 4+ 3/10 CARDNAME has Vigilance
-SVar:X:Count$Valid Card.Self+counters_GE1_LEVEL+counters_LE3_LEVEL
-SVar:Y:Count$Valid Card.Self+counters_GE4_LEVEL
-SVar:Picture:http://www.wizards.com/global/images/magic/general/ikiral_outrider.jpg
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 2 | SetToughness$ 6 | AddKeyword$ Vigilance | IsPresent$ Card.Self+counters_GE1_LEVEL+counters_LE3_LEVEL | Description$ LEVEL 1-3 2/6 CARDNAME has Vigilance
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 3 | SetToughness$ 10 | AddKeyword$ Vigilance | IsPresent$ Card.Self+counters_GE4_LEVEL | Description$ LEVEL 4+ 3/10 CARDNAME has Vigilance
 Oracle:Level up {4} ({4}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 1-3\n2/6\nVigilance\nLEVEL 4+\n3/10\nVigilance

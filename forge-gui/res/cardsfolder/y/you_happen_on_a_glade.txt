@@ -1,9 +1,7 @@
 Name:You Happen On a Glade
 ManaCost:2 G
 Types:Instant
-A:SP$ Charm | Cost$ 2 G | Choices$ JourneyOn,MakeCamp
-SVar:JourneyOn:DB$  ChangeZone | Origin$ Library | Destination$ Library | ChangeType$ Land.Basic | ChangeNum$ 2 | RememberChanged$ True | Reveal$ True | Shuffle$ False | StackDescription$ SpellDescription | SubAbility$ DBChangeZone1 | SpellDescription$ Journey On — Search your library for up to two basic land cards, reveal them, put them into your hand, then shuffle.
-SVar:DBChangeZone1:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.IsRemembered | ChangeNum$ 2 | Mandatory$ True | NoLooking$ True | SelectPrompt$ Select cards for your hand | StackDescription$ None | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:MakeCamp:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target permanent card in your graveyard | ValidTgts$ Permanent.YouCtrl | SpellDescription$ Make Camp — Return target permanent card from your graveyard to your hand.
+A:SP$ Charm | Choices$ JourneyOn,MakeCamp
+SVar:JourneyOn:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 2 | Reveal$ True | StackDescription$ SpellDescription | SpellDescription$ Journey On — Search your library for up to two basic land cards, reveal them, put them into your hand, then shuffle.
+SVar:MakeCamp:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target permanent card in your graveyard | ValidTgts$ Permanent.YouOwn | SpellDescription$ Make Camp — Return target permanent card from your graveyard to your hand.
 Oracle:Choose one —\n• Journey On — Search your library for up to two basic land cards, reveal them, put them into your hand, then shuffle.\n• Make Camp — Return target permanent card from your graveyard to your hand.

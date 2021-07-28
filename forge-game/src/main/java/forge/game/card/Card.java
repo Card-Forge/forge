@@ -17,17 +17,61 @@
  */
 package forge.game.card;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.EnumSet;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.NavigableMap;
+import java.util.Set;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.mutable.MutableBoolean;
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicates;
-import com.google.common.base.Strings;
-import com.google.common.collect.*;
+import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableTable;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.MultimapBuilder;
+import com.google.common.collect.Sets;
+import com.google.common.collect.Table;
+import com.google.common.collect.TreeBasedTable;
+
 import forge.GameCommand;
 import forge.StaticData;
-import forge.card.*;
-import forge.card.CardDb.CardArtPreference;
+import forge.card.CardChangedType;
+import forge.card.CardDb.SetPreference;
+import forge.card.CardEdition;
+import forge.card.CardRarity;
+import forge.card.CardRules;
+import forge.card.CardSplitType;
+import forge.card.CardStateName;
+import forge.card.CardType;
+import forge.card.CardTypeView;
+import forge.card.ColorSet;
+import forge.card.ICardFace;
+import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
-import forge.game.*;
+import forge.game.CardTraitBase;
+import forge.game.Direction;
+import forge.game.EvenOdd;
+import forge.game.Game;
+import forge.game.GameActionUtil;
+import forge.game.GameEntity;
+import forge.game.GameEntityCounterTable;
+import forge.game.GlobalRuleChange;
+import forge.game.IHasSVars;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -35,16 +79,31 @@ import forge.game.ability.ApiType;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.cost.CostSacrifice;
-import forge.game.event.*;
+import forge.game.event.GameEventCardAttachment;
+import forge.game.event.GameEventCardCounters;
+import forge.game.event.GameEventCardDamaged;
 import forge.game.event.GameEventCardDamaged.DamageType;
-import forge.game.keyword.*;
+import forge.game.event.GameEventCardPhased;
+import forge.game.event.GameEventCardStatsChanged;
+import forge.game.event.GameEventCardTapped;
+import forge.game.event.GameEventTokenStateUpdate;
+import forge.game.keyword.Companion;
+import forge.game.keyword.Keyword;
+import forge.game.keyword.KeywordCollection;
+import forge.game.keyword.KeywordInterface;
+import forge.game.keyword.KeywordsChange;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplaceMoved;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
-import forge.game.spellability.*;
+import forge.game.spellability.LandAbility;
+import forge.game.spellability.OptionalCost;
+import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityPredicates;
+import forge.game.spellability.SpellPermanent;
+import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
@@ -54,17 +113,15 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.trackable.TrackableProperty;
 import forge.trackable.Tracker;
-import forge.util.*;
+import forge.util.CardTranslation;
+import forge.util.Lang;
+import forge.util.Localizer;
+import forge.util.TextUtil;
+import forge.util.Visitor;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import io.sentry.Sentry;
 import io.sentry.event.BreadcrumbBuilder;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.mutable.MutableBoolean;
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.util.*;
-import java.util.Map.Entry;
 
 /**
  * <p>
@@ -1982,8 +2039,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 } else if (inst.getKeyword().equals(Keyword.COMPANION)) {
                     sbLong.append("Companion — ");
                     sbLong.append(((Companion)inst).getDescription());
-                } else if (keyword.endsWith(".") && !keyword.startsWith("Haunt")) {
-                    sbLong.append(keyword).append("\r\n");
                 } else if (keyword.startsWith("Presence") || keyword.startsWith("MayFlash")) {
                     // Pseudo keywords, only print Reminder
                     sbLong.append(inst.getReminderText());
@@ -2081,7 +2136,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.startsWith("Amplify") || keyword.startsWith("Ninjutsu") || keyword.startsWith("Adapt")
                         || keyword.startsWith("Transfigure") || keyword.startsWith("Aura swap")
                         || keyword.startsWith("Cycling") || keyword.startsWith("TypeCycling")
-                        || keyword.startsWith("Encore") || keyword.startsWith("Mutate") || keyword.startsWith("Dungeon")) {
+                        || keyword.startsWith("Encore") || keyword.startsWith("Mutate") || keyword.startsWith("Dungeon")
+                        || keyword.startsWith("Class") || keyword.startsWith("Saga")) {
                     // keyword parsing takes care of adding a proper description
                 } else if (keyword.startsWith("CantBeBlockedByAmount")) {
                     sbLong.append(getName()).append(" can't be blocked ");
@@ -2100,15 +2156,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     // need to get SpellDescription from Svar
                     String desc = AbilityFactory.getMapParams(getSVar(k[1])).get("SpellDescription");
                     sbLong.append(desc);
-                } else if (keyword.startsWith("Saga")) {
-                    String[] k = keyword.split(":");
-                    String desc = "(As this Saga enters and after your draw step, "
-                        + " add a lore counter. Sacrifice after " + Strings.repeat("I", Integer.valueOf(k[1])) + ".)";
-                    sbLong.append(desc);
-                } else if (keyword.startsWith("Class")) {
-                    sbLong.append("(Gain the next level as a sorcery to add its ability.)");
-                }
-                else {
+                } else if (keyword.endsWith(".") && !keyword.startsWith("Haunt")) {
+                    sbLong.append(keyword).append("\r\n");
+                } else {
                     if ((i != 0) && (sb.length() != 0)) {
                         sb.append(", ");
                     }
@@ -2183,6 +2233,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return TextUtil.fastReplace(result, "CARDNAME", CardTranslation.getTranslatedName(state.getName()));
         }
 
+        if (type.hasSubtype("Class")) {
+            sb.append("(Gain the next level as a sorcery to add its ability.)").append(linebreak);
+        }
+
+        if (type.hasSubtype("Saga")) {
+            sb.append("(As this Saga enters and after your draw step, add a lore counter. Sacrifice after ");
+            sb.append(TextUtil.toRoman(getFinalChapterNr())).append(".)").append(linebreak);
+        }
         if (monstrous) {
             sb.append("Monstrous\r\n");
         }
@@ -2246,8 +2304,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             if (!trig.isSecondary() && !trig.isClassAbility()) {
                 boolean disabled = false;
                 // Disable text of other rooms
-                if (type.isDungeon() && !trig.getOverridingAbility().getParam("RoomName").equals(getCurrentRoom())) {
-                    disabled = true;
+                if (type.isDungeon()) {
+                    disabled = !trig.getOverridingAbility().getParam("RoomName").equals(getCurrentRoom());
+                } else {
+                    disabled = getGame() != null && !trig.requirementsCheck(getGame());
                 }
                 String trigStr = trig.replaceAbilityText(trig.toString(), state);
                 if (disabled) sb.append(grayTag);
@@ -2265,7 +2325,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             if (!stAb.isSecondary() && !stAb.isClassAbility()) {
                 final String stAbD = stAb.toString();
                 if (!stAbD.equals("")) {
-                    sb.append(stAbD).append(linebreak);
+                    boolean disabled = getGame() != null && !stAb.checkConditions();
+                    if (disabled) sb.append(grayTag);
+                    sb.append(stAbD);
+                    if (disabled) sb.append(endTag);
+                    sb.append(linebreak);
                 }
             }
         }
@@ -2350,22 +2414,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             // Currently the maximum levels of all Class cards are all 3
             for (int level = 1; level <= 3; ++level) {
                 boolean disabled = level > getClassLevel() && isInZone(ZoneType.Battlefield);
-                for (final Trigger trig : state.getTriggers()) {
-                    if (trig.isClassLevelNAbility(level) && !trig.isSecondary()) {
-                        if (disabled) sb.append(grayTag);
-                        sb.append(trig.toString());
-                        if (disabled) sb.append(endTag);
-                        sb.append(linebreak);
-                    }
-                }
-                for (final ReplacementEffect re : state.getReplacementEffects()) {
-                    if (re.isClassLevelNAbility(level) && !re.isSecondary()) {
-                        if (disabled) sb.append(grayTag);
-                        sb.append(re.getDescription());
-                        if (disabled) sb.append(endTag);
-                        sb.append(linebreak);
-                    }
-                }
+                // Class second part is a static ability that grants the other abilities
                 for (final StaticAbility st : state.getStaticAbilities()) {
                     if (st.isClassLevelNAbility(level) && !st.isSecondary()) {
                         if (disabled) sb.append(grayTag);
@@ -6284,7 +6333,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
 
         if (isFaceDown() && isInZone(ZoneType.Exile)) {
-            for (final SpellAbility sa : getState(CardStateName.Original).getSpellAbilities()) {
+            for (final SpellAbility sa : oState.getSpellAbilities()) {
                 abilities.addAll(GameActionUtil.getAlternativeCosts(sa, player));
             }
         }
@@ -6469,7 +6518,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return cp == null ? StaticData.instance().getCommonCards().getCard(name, set) : cp;
         }
         cp = StaticData.instance().getVariantCards().getCard(name);
-        return cp == null ? StaticData.instance().getCommonCards().getCardFromEditions(name, CardArtPreference.LATEST_ART_ALL_EDITIONS) : cp;
+        return cp == null ? StaticData.instance().getCommonCards().getCardFromEdition(name, SetPreference.Latest) : cp;
     }
 
     /**

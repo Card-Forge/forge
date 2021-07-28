@@ -6,7 +6,7 @@ A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumCards$ 2 | Va
 SVar:DBDiscard:DB$ Discard | Defined$ Targeted | NumCards$ 2 | Mode$ TgtChoose
 A:AB$ GainControl | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Gain control of target artifact.
 A:AB$ Effect | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Dack Fayden | Triggers$ TrigSpellCast | Duration$ Permanent | AILogic$ Always | Stackable$ False | SpellDescription$ You get an emblem with "Whenever you cast a spell that targets one or more permanents, gain control of those permanents."
-SVar:TrigSpellCast:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Permanent | Execute$ EffSpellCast | TriggerDescription$ Whenever you cast a spell that targets one or more permanents, gain control of those permanents.
+SVar:TrigSpellCast:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Permanent.inZoneBattlefield | Execute$ EffSpellCast | TriggerDescription$ Whenever you cast a spell that targets one or more permanents, gain control of those permanents.
 SVar:EffSpellCast:DB$ GainControl | Defined$ TriggeredSpellAbilityTargetingCards
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dack_fayden.jpg

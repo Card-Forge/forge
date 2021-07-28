@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -44,7 +44,7 @@ public class ManaCostRenderer extends ItemCellRenderer {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see
      * javax.swing.table.DefaultTableCellRenderer#getTableCellRendererComponent
      * (javax.swing.JTable, java.lang.Object, boolean, boolean, int, int)
@@ -68,7 +68,7 @@ public class ManaCostRenderer extends ItemCellRenderer {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see javax.swing.JComponent#paint(java.awt.Graphics)
      */
     @Override
@@ -112,7 +112,7 @@ public class ManaCostRenderer extends ItemCellRenderer {
         // Display X Mana before any other type of mana
         if (xManaCosts > 0) {
             for (int i = 0; i < xManaCosts; i++) {
-                CardFaceSymbols.drawSymbol(ManaCostShard.X.getImageKey(), g, x, y);
+                CardFaceSymbols.drawManaSymbol(ManaCostShard.X.getImageKey(), g, x, y);
                 x += dx;
             }
         }
@@ -120,7 +120,7 @@ public class ManaCostRenderer extends ItemCellRenderer {
         // Display generic mana before colored mana
         if (hasGeneric) {
             final String sGeneric = Integer.toString(genericManaCost);
-            CardFaceSymbols.drawSymbol(sGeneric, g, x, y);
+            CardFaceSymbols.drawManaSymbol(sGeneric, g, x, y);
             x += dx;
         }
 
@@ -129,7 +129,7 @@ public class ManaCostRenderer extends ItemCellRenderer {
                 // X costs already drawn up above
                 continue;
             }
-            CardFaceSymbols.drawSymbol(s.getImageKey(), g, x, y);
+            CardFaceSymbols.drawManaSymbol(s.getImageKey(), g, x, y);
             x += dx;
         }
     }

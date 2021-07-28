@@ -633,7 +633,7 @@ public class ComputerUtilCost {
                             }
                             // Check if the AI intends to play the card and if it can pay for it with the mana it has
                             boolean willPlay = ComputerUtil.hasReasonToPlayCardThisTurn(payer, c);
-                            boolean canPay = c.getManaCost().canBePaidWithAvaliable(ColorSet.fromNames(getAvailableManaColors(payer, source)).getColor());
+                            boolean canPay = c.getManaCost().canBePaidWithAvailable(ColorSet.fromNames(getAvailableManaColors(payer, source)).getColor());
                             return canPay && willPlay;
                         }
                     }

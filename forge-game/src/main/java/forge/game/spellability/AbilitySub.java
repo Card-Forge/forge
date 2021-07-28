@@ -63,8 +63,6 @@ public final class AbilitySub extends SpellAbility implements java.io.Serializab
         return this.parent;
     }
 
-
-
     /** {@inheritDoc} */
     @Override
     public boolean canPlay() {
@@ -72,9 +70,7 @@ public final class AbilitySub extends SpellAbility implements java.io.Serializab
         return false;
     }
 
-    
     private final SpellAbilityEffect effect;
-
 
     public AbilitySub(ApiType api0, final Card ca, final TargetRestrictions tgt, Map<String, String> params0) {
         super(ca, Cost.Zero);

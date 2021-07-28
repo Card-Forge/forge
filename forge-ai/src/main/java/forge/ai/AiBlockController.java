@@ -917,7 +917,6 @@ public class AiBlockController {
     }
 
     private void clearBlockers(final Combat combat, final List<Card> possibleBlockers) {
-
         final List<Card> oldBlockers = combat.getAllBlockers();
         for (final Card blocker : oldBlockers) {
             if (blocker.getController() == ai) // don't touch other player's blockers
