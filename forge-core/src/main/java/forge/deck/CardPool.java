@@ -21,6 +21,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import forge.StaticData;
 import forge.card.CardDb;
+import forge.card.CardEdition;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.ItemPool;
@@ -29,9 +30,7 @@ import forge.util.MyRandom;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -202,6 +201,101 @@ public class CardPool extends ItemPool<PaperCard> {
                 : StaticData.instance().getVariantCards().getCard(cardName);
 
         return this.count(pc);
+    }
+
+    /**
+     * Get the Map of frequencies (i.e. counts) for all the CardEdition found
+     * among cards in the Pool.
+     *
+     * @param includeBasicLands determines whether or not basic lands should be counted in or
+     *                          not when gathering statistics
+     * @return Map<CardEdition, Integer>
+     * An HashMap mapping each CardEdition to its corresponding frequency count
+     */
+    public Map<CardEdition, Integer> getCardEditionFrequencyMap(boolean includeBasicLands) {
+        Map<CardEdition, Integer> editionStatistics = new HashMap<>();
+        for(Entry<PaperCard, Integer> cp : this.items.entrySet()) {
+            PaperCard card = cp.getKey();
+            // Check whether or not including basic land in stats count
+            if (card.getRules().getType().isBasicLand() && !includeBasicLands)
+                continue;
+            int count = cp.getValue();
+            CardEdition edition = StaticData.instance().getCardEdition(card.getEdition());
+            int currentCount = editionStatistics.getOrDefault(edition, 0);
+            currentCount += count;
+            editionStatistics.put(edition, currentCount);
+        }
+        return editionStatistics;
+    }
+
+    /** Determines the Pivot Edition for cards in the Pool, according to default
+     * Card Art Preference settings (@see forge.card.CardDb.CardArtPreference).
+     *
+     * For a more thorough explanation of Pivot Edition, please
+     * @see CardPool#getPivotEdition(boolean)
+     *
+     * @return CardEdition representing the reference edition for the card pool.
+     */
+    public CardEdition getPivotEdition(){
+        boolean isLatestCardArtPreference = StaticData.instance().cardArtPreferenceIsLatest();
+        return getPivotEdition(isLatestCardArtPreference);
+    }
+
+    /**
+     * Determines the Pivot Edition for cards in the Pool.
+     * <p>
+     * The Pivot Edition refers to <b>the Reference Edition</b> considered as the
+     * <i>most representative</i> for cards in the pool.
+     * The Pivot Edition simply corresponds to the edition having the majority of cards
+     * in the pool.
+     * <p>
+     * Whenever this Edition cannot be immediately determined
+     * (i.e. <i>the <code>max</code> is not unique</i>), the Pivot Edition will be chosen
+     * according to the specified set-preference criterion.
+     * <p>
+     * In other words:
+     * <ul>
+     *     <li><code>isLatestCardArtPreference=true</code>:</li> Pivot Edition will be
+     *     the earliest among the most recent editions (lower bound).
+     *     <li><code>isLatestCardArtPreference=false</code>:</li> Pivot Edition will be
+     *     the latest among the earliest editions (upper bound).
+     * </ul>
+     * <p>
+     * Note: Cards in the Pool may have been generated according to the specified CardArtPreference
+     * but we might be interested in "forcing" a specific selection criterion.
+     *
+     * @param isLatestCardArtPreference if true, precedence will be given to most recent editions
+     *                                  (Latest Card Art)
+     * @return CardEdition instance representing the Pivot Edition
+     */
+    public CardEdition getPivotEdition(boolean isLatestCardArtPreference) {
+        CardEdition pivotEdition = null;
+        int maxCardOccurrence = 0;
+        Map<CardEdition, Integer> editionsStatistics = this.getCardEditionFrequencyMap(false);
+
+        for(Entry<CardEdition, Integer> entry : editionsStatistics.entrySet()) {
+            Integer cardCount = entry.getValue();
+            CardEdition ed = entry.getKey();
+            if (cardCount < maxCardOccurrence)
+                continue;
+
+            if (pivotEdition == null || cardCount > maxCardOccurrence){
+                maxCardOccurrence = cardCount;
+                pivotEdition = ed;
+            }
+            else {  //  i.e. cardCount == maxCardOccurrence
+                if (isLatestCardArtPreference){
+                    // update only if older
+                    if (ed.getDate().compareTo(pivotEdition.getDate()) < 0)
+                        pivotEdition = ed;
+                } else {
+                    // update only if newer
+                    if (ed.getDate().compareTo(pivotEdition.getDate()) > 0)
+                        pivotEdition = ed;
+                }
+            }
+        }
+        return pivotEdition;
     }
 
     @Override
