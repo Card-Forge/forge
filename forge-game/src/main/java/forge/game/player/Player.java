@@ -634,7 +634,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     // This function handles damage after replacement and prevention effects are applied
     @Override
     public final int addDamageAfterPrevention(final int amount, final Card source, final boolean isCombat, GameEntityCounterTable counterTable) {
-        if (amount <= 0) {
+        if (amount <= 0 || hasLost()) {
             return 0;
         }
         //String additionalLog = "";
