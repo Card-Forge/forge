@@ -47,6 +47,7 @@ public class FCardImageRenderer {
     private static int PT_BOX_WIDTH, HEADER_PADDING, TYPE_PADDING, BLACK_BORDER_THICKNESS, BORDER_THICKNESS;
     private static Font NAME_FONT, TYPE_FONT, TEXT_FONT, REMINDER_FONT, PT_FONT;
     private static int NAME_SIZE, TYPE_SIZE, TEXT_SIZE, REMINDER_SIZE, PT_SIZE;
+    private static Color TEXT_COLOR;
 
     private static BreakIterator boundary;
     private static Pattern linebreakPattern;
@@ -137,6 +138,7 @@ public class FCardImageRenderer {
             initialize();
         g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         float ratio = Math.min((float)width / BASE_IMAGE_WIDTH, (float)height / BASE_IMAGE_HEIGHT);
+        TEXT_COLOR = Color.BLACK;
         if (card.isSplitCard()) {
             boolean needTranslation = !"en-US".equals(FModel.getPreferences().getPref(FPref.UI_LANGUAGE));
             final CardStateView leftState = card.getLeftSplitState();
@@ -170,11 +172,20 @@ public class FCardImageRenderer {
             boolean needTranslation = !card.isToken() || !(card.getCloneOrigin() == null);
             final CardStateView state = card.getState(altState);
             final String text = card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(state.getName(), "") : null);
-            CARD_ART_RATIO = 1.72f;
-            updateAreaSizes(ratio, ratio);
             final CardStateView flipState = card.getState(!altState);
             final String flipText = card.getText(flipState, needTranslation ? CardTranslation.getTranslationTexts(flipState.getName(), "") : null);
+            CARD_ART_RATIO = 1.72f;
+            updateAreaSizes(ratio, ratio);
             drawFlipCardImage(g, state, text, flipState, flipText, width, height, altState);
+        } else if (card.isAdventureCard()) {
+            boolean needTranslation = !card.isToken() || !(card.getCloneOrigin() == null);
+            final CardStateView state = card.getState(false);
+            final String text = card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(state.getName(), "") : null);
+            final CardStateView advState = card.getState(true);
+            final String advText = card.getText(advState, needTranslation ? CardTranslation.getTranslationTexts(advState.getName(), "") : null);
+            CARD_ART_RATIO = 1.32f;
+            updateAreaSizes(ratio, ratio);
+            drawAdvCardImage(g, state, text, advState, advText, width, height);
         } else {
             boolean needTranslation = !card.isToken() || !(card.getCloneOrigin() == null);
             final CardStateView state = card.getState(altState);
@@ -264,7 +275,7 @@ public class FCardImageRenderer {
         drawHeader(g, state, headerColors, x, y, w, headerHeight, true);
 
         //draw type line
-        drawTypeLine(g, state, headerColors, x, typeY, w, typeBoxHeight, 0);
+        drawTypeLine(g, state, headerColors, x, typeY, w, typeBoxHeight, 0, true);
 
         //draw P/T box
         if (ptBoxHeight > 0) {
@@ -323,7 +334,7 @@ public class FCardImageRenderer {
         drawHeader(g, state, headerColors, x, y, w, headerHeight, !isFlipped);
 
         //draw type line
-        drawTypeLine(g, state, headerColors, x, typeY, w, typeBoxHeight, state.isCreature() ? PT_BOX_WIDTH : 0);
+        drawTypeLine(g, state, headerColors, x, typeY, w, typeBoxHeight, state.isCreature() ? PT_BOX_WIDTH : 0, !isFlipped);
 
         //draw P/T box
         if (state.isCreature()) {
@@ -349,13 +360,89 @@ public class FCardImageRenderer {
         drawHeader(g, flipState, headerColors, x, y, w, headerHeight, isFlipped);
 
         //draw type line
-        drawTypeLine(g, flipState, headerColors, x, typeY, w, typeBoxHeight, flipState.isCreature() ? PT_BOX_WIDTH : 0);
+        drawTypeLine(g, flipState, headerColors, x, typeY, w, typeBoxHeight, flipState.isCreature() ? PT_BOX_WIDTH : 0, isFlipped);
 
         //draw P/T box
         if (flipState.isCreature()) {
             Color[] ptColors = tintColors(Color.WHITE, colors, PT_BOX_TINT);
             drawPTBox(g, flipState, ptColors, x, ptY, w, ptBoxHeight);
         }
+    }
+
+    private static void drawAdvCardImage(Graphics2D g, CardStateView state, String text, CardStateView advState, String advText, int w, int h) {
+        int x = 0, y = 0;
+        g.setColor(Color.BLACK);
+        g.fillRect(x, y, w, h);
+        x += BLACK_BORDER_THICKNESS;
+        y += BLACK_BORDER_THICKNESS;
+        w -= 2 * BLACK_BORDER_THICKNESS;
+        h -= 2 * BLACK_BORDER_THICKNESS;
+
+        //determine colors for borders
+        final List<DetailColors> borderColors = CardDetailUtil.getBorderColors(state, true);
+        Color[] colors = fillColorBackground(g, borderColors, x, y, w, h);
+
+        int artInset = Math.round(BLACK_BORDER_THICKNESS * 0.8f);
+        int outerBorderThickness = 2 * BLACK_BORDER_THICKNESS - artInset;
+        x += outerBorderThickness;
+        y += outerBorderThickness;
+        w -= 2 * outerBorderThickness;
+        int headerHeight = NAME_SIZE + 2 * HEADER_PADDING;
+        int typeBoxHeight = TYPE_SIZE + 2 * TYPE_PADDING;
+        int ptBoxHeight = NAME_SIZE + HEADER_PADDING;
+
+        int artWidth = w - 2 * artInset;
+        int artHeight = Math.round(artWidth / CARD_ART_RATIO);
+        int textBoxWidth = artWidth / 2;
+        int textBoxHeight = h - headerHeight - artHeight - typeBoxHeight - outerBorderThickness - artInset - PT_FONT.getSize() / 2;
+
+        int artY = y + headerHeight;
+        int typeY = artY + artHeight;
+        int textY = typeY + typeBoxHeight;
+        int ptY = textY + textBoxHeight;
+
+        //draw art box with Forge icon
+        Color[] artBoxColors = tintColors(Color.DARK_GRAY, colors, NAME_BOX_TINT);
+        int artX = x + artInset;
+        drawArt(g, artBoxColors, artX, artY, artWidth, artHeight);
+
+        //draw text box
+        Color[] textBoxColors = tintColors(Color.WHITE, colors, TEXT_BOX_TINT);
+        int textX = x + artInset + textBoxWidth;
+        drawTextBox(g, state, text, textBoxColors, textX, textY, textBoxWidth, textBoxHeight, true);
+
+        //draw header containing name and mana cost
+        Color[] headerColors = tintColors(Color.WHITE, colors, NAME_BOX_TINT);
+        drawHeader(g, state, headerColors, x, y, w, headerHeight, true);
+
+        //draw type line
+        drawTypeLine(g, state, headerColors, x, typeY, w, typeBoxHeight, 0, true);
+
+        //draw P/T box
+        Color[] ptColors = tintColors(Color.WHITE, colors, PT_BOX_TINT);
+        drawPTBox(g, state, ptColors, x, ptY - ptBoxHeight / 2, w, ptBoxHeight);
+
+        int advHeaderHeight = typeBoxHeight - 2;
+        int advTypeHeight = advHeaderHeight - 1;
+        NAME_SIZE = TYPE_SIZE - 2;
+        TYPE_SIZE = NAME_SIZE - 1;
+        textX = x + artInset;
+
+        //draw header containing name and mana cost
+        Color[] advheaderColors = tintColors(Color.GRAY, colors, 0.6f);
+        TEXT_COLOR = Color.WHITE;
+        drawHeader(g, advState, advheaderColors, textX, textY, textBoxWidth, advHeaderHeight, true);
+
+        //draw type line
+        Color[] advTypeColors = tintColors(Color.DARK_GRAY, colors, 0.6f);
+        textY += advHeaderHeight;
+        drawTypeLine(g, advState, advTypeColors, textX, textY, textBoxWidth, advTypeHeight, 0, false);
+
+        //draw text box
+        TEXT_COLOR = Color.BLACK;
+        textY += advTypeHeight;
+        textBoxHeight -= advHeaderHeight + advTypeHeight;
+        drawTextBox(g, advState, advText, textBoxColors, textX, textY, textBoxWidth, textBoxHeight, false);
     }
 
     private static Color[] fillColorBackground(Graphics2D g, List<DetailColors> backColors, int x, int y, int w, int h) {
@@ -407,6 +494,7 @@ public class FCardImageRenderer {
         int y = area.y + (area.height - fontMetrics.getHeight()) / 2 + fontMetrics.getAscent();
 
         g.setFont(font);
+        g.setColor(TEXT_COLOR);
         g.drawString(text, x, y);
     }
 
@@ -451,7 +539,7 @@ public class FCardImageRenderer {
         g.drawRect(x, y, w, h);
     }
 
-    private static void drawTypeLine(Graphics2D g, CardStateView state, Color[] colors, int x, int y, int w, int h, int adjust) {
+    private static void drawTypeLine(Graphics2D g, CardStateView state, Color[] colors, int x, int y, int w, int h, int adjust, boolean drawRarity) {
         fillColorBackground(g, colors, x, y, w, h);
         g.setStroke(new BasicStroke(BORDER_THICKNESS));
         g.setColor(Color.BLACK);
@@ -461,16 +549,17 @@ public class FCardImageRenderer {
         int padding = h / 4;
 
         //draw square icon for rarity
-        int iconSize = Math.round(h * 0.55f);
-        int iconPadding = (h - iconSize) / 2;
-        w -= iconSize + iconPadding * 2;
-        g.setColor(getRarityColor(state.getRarity()));
-        g.fillRect(x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
+        if (drawRarity) {
+            int iconSize = Math.round(h * 0.55f);
+            int iconPadding = (h - iconSize) / 2;
+            w -= iconSize + iconPadding * 2;
+            g.setColor(getRarityColor(state.getRarity()));
+            g.fillRect(x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
+        }
 
         //draw type
         x += padding;
         w -= padding;
-        g.setColor(Color.BLACK);
         String typeLine = CardDetailUtil.formatCardType(state, true).replace(" - ", " — ");
         drawVerticallyCenteredString(g, typeLine, new Rectangle(x, y, w, h), TYPE_FONT, TYPE_SIZE);
     }
