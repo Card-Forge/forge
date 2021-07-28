@@ -145,7 +145,7 @@ public class FCardImageRenderer {
             final String leftText = needTranslation ? CardTranslation.getTranslatedOracle(leftState.getName()) : leftState.getOracleText();
             final CardStateView rightState = card.getRightSplitState();
             String rightText = needTranslation ? CardTranslation.getTranslatedOracle(rightState.getName()) : rightState.getOracleText();
-            boolean isAftermath = (rightState.getKeywordKey().indexOf("Aftermath") != -1);
+            boolean isAftermath = (rightState.getKeywordKey().contains("Aftermath"));
             if (isAftermath) {
                 int halfHeight = Math.round(380 * ratio);
                 int halfWidth = Math.round((halfHeight - 10) * ratio);
@@ -265,10 +265,96 @@ public class FCardImageRenderer {
             drawArt(g, artBoxColors, artX, artY, artWidth, artHeight);
         }
 
-        //draw text box
-        Color[] textBoxColors = tintColors(Color.WHITE, colors, TEXT_BOX_TINT);
-        int textX = x + artInset + (isClass ? artWidth : 0);
-        drawTextBox(g, state, text, textBoxColors, textX, textY, artWidth, textBoxHeight, ptBoxHeight > 0);
+        //handle leveler cards
+        boolean isLevelup = (state.getKeywordKey().contains("Level up"));
+        if (isLevelup) {
+            int textBoxHeightDiv3 = Math.round(textBoxHeight / 3f);
+            String [] paragraphs = linebreakPattern.split(text);
+            StringBuilder sb = new StringBuilder();
+            String text1 = "", text2 = "", text3 = "";
+            String level2 = null, level3 = null;
+            String ptOverride2 = null, ptOverride3 = null;
+            boolean matchedLevel = false;
+            for (String pg : paragraphs) {
+                if (pg.matches(".*[0-9]+-[0-9]+")) {
+                    text1 = sb.toString();
+                    sb.setLength(0);
+                    level2 = pg;
+                    matchedLevel = true;
+                    continue;
+                } else if (pg.matches(".*[0-9]+\\+")) {
+                    text2 = sb.toString();
+                    sb.setLength(0);
+                    level3 = pg;
+                    matchedLevel = true;
+                    continue;
+                }
+                if (!matchedLevel) {
+                    if (sb.length() > 0)
+                        sb.append("\n");
+                    sb.append(pg);
+                } else {
+                    if (ptOverride2 == null)
+                        ptOverride2 = pg;
+                    else
+                        ptOverride3 = pg;
+                }
+                matchedLevel = false;
+            }
+            text3 = sb.toString();
+            int textX = x + artInset;
+
+            //draw text box
+            Color[] textBox1Colors = tintColors(Color.WHITE, colors, TEXT_BOX_TINT);
+            drawTextBox(g, state, text1, textBox1Colors, textX, textY, artWidth, textBoxHeightDiv3, 2);
+
+            //draw P/T box
+            Color[] pt1Colors = tintColors(Color.WHITE, colors, PT_BOX_TINT);
+            ptY = textY + (textBoxHeightDiv3 - ptBoxHeight) / 2;
+            drawPTBox(g, state, null, pt1Colors, x, ptY, w, ptBoxHeight);
+
+            textY += textBoxHeightDiv3;
+            ptY += textBoxHeightDiv3;
+            int orgTextSize = TEXT_SIZE;
+            int levelBoxWitdh = PT_BOX_WIDTH * 3 / 4;
+            //draw text box
+            Color lighterGray = new Color(224, 224, 224);
+            Color[] textBox2Colors = tintColors(lighterGray, colors, TEXT_BOX_TINT + 0.15f);
+            TEXT_SIZE = orgTextSize - 10;
+            drawTextBox(g, state, level2, textBox2Colors, textX, textY, levelBoxWitdh, textBoxHeightDiv3, 4);
+            TEXT_SIZE = orgTextSize;
+            drawTextBox(g, state, text2, textBox2Colors, textX + levelBoxWitdh, textY, artWidth - levelBoxWitdh, textBoxHeightDiv3, 2);
+
+            //draw P/T box
+            Color[] pt2Colors = tintColors(lighterGray, colors, PT_BOX_TINT + 0.15f);
+            drawPTBox(g, state, ptOverride2, pt2Colors, x, ptY, w, ptBoxHeight);
+
+            textY += textBoxHeightDiv3;
+            ptY += textBoxHeightDiv3;
+            textBoxHeightDiv3 = textBoxHeight - textBoxHeightDiv3 * 2;
+            //draw text box
+            Color[] textBox3Colors = tintColors(Color.LIGHT_GRAY, colors, TEXT_BOX_TINT + 0.3f);
+            TEXT_SIZE = orgTextSize - 10;
+            drawTextBox(g, state, level3, textBox3Colors, textX, textY, levelBoxWitdh, textBoxHeightDiv3, 4);
+            TEXT_SIZE = orgTextSize;
+            drawTextBox(g, state, text3, textBox3Colors, textX + levelBoxWitdh, textY, artWidth - levelBoxWitdh, textBoxHeightDiv3, 2);
+
+            //draw P/T box
+            Color[] pt3Colors = tintColors(Color.LIGHT_GRAY, colors, PT_BOX_TINT + 0.3f);
+            drawPTBox(g, state, ptOverride3, pt3Colors, x, ptY, w, ptBoxHeight);
+        } else {
+            //draw text box
+            Color[] textBoxColors = tintColors(Color.WHITE, colors, TEXT_BOX_TINT);
+            int textX = x + artInset + (isClass ? artWidth : 0);
+            drawTextBox(g, state, text, textBoxColors, textX, textY, artWidth, textBoxHeight, ptBoxHeight > 0 ? 1 : 0);
+
+            //draw P/T box
+            if (ptBoxHeight > 0) {
+                Color[] ptColors = tintColors(Color.WHITE, colors, PT_BOX_TINT);
+                ptY -= ptBoxHeight / 2;
+                drawPTBox(g, state, null, ptColors, x, ptY, w, ptBoxHeight);
+            }
+        }
 
         //draw header containing name and mana cost
         Color[] headerColors = tintColors(Color.WHITE, colors, NAME_BOX_TINT);
@@ -276,12 +362,6 @@ public class FCardImageRenderer {
 
         //draw type line
         drawTypeLine(g, state, headerColors, x, typeY, w, typeBoxHeight, 0, true);
-
-        //draw P/T box
-        if (ptBoxHeight > 0) {
-            Color[] ptColors = tintColors(Color.WHITE, colors, PT_BOX_TINT);
-            drawPTBox(g, state, ptColors, x, ptY - ptBoxHeight / 2, w, ptBoxHeight);
-        }
     }
 
     private static void drawFlipCardImage(Graphics2D g, CardStateView state, String text, CardStateView flipState, String flipText, int w, int h, boolean isFlipped) {
@@ -327,7 +407,7 @@ public class FCardImageRenderer {
         //draw text box
         Color[] textBoxColors = tintColors(Color.WHITE, colors, TEXT_BOX_TINT);
         int textX = x + artInset;
-        drawTextBox(g, state, text, textBoxColors, textX, textY, artWidth, textBoxHeight, false);
+        drawTextBox(g, state, text, textBoxColors, textX, textY, artWidth, textBoxHeight, 0);
 
         //draw header containing name and mana cost
         Color[] headerColors = tintColors(Color.WHITE, colors, NAME_BOX_TINT);
@@ -339,7 +419,7 @@ public class FCardImageRenderer {
         //draw P/T box
         if (state.isCreature()) {
             Color[] ptColors = tintColors(Color.WHITE, colors, PT_BOX_TINT);
-            drawPTBox(g, state, ptColors, x, ptY, w, ptBoxHeight);
+            drawPTBox(g, state, null, ptColors, x, ptY, w, ptBoxHeight);
         }
 
         //flip the card
@@ -354,7 +434,7 @@ public class FCardImageRenderer {
         }
 
         //draw text box
-        drawTextBox(g, flipState, flipText, textBoxColors, textX, textY, artWidth, textBoxHeight, false);
+        drawTextBox(g, flipState, flipText, textBoxColors, textX, textY, artWidth, textBoxHeight, 0);
 
         //draw header containing name and mana cost
         drawHeader(g, flipState, headerColors, x, y, w, headerHeight, isFlipped);
@@ -365,7 +445,7 @@ public class FCardImageRenderer {
         //draw P/T box
         if (flipState.isCreature()) {
             Color[] ptColors = tintColors(Color.WHITE, colors, PT_BOX_TINT);
-            drawPTBox(g, flipState, ptColors, x, ptY, w, ptBoxHeight);
+            drawPTBox(g, flipState, null, ptColors, x, ptY, w, ptBoxHeight);
         }
     }
 
@@ -409,7 +489,7 @@ public class FCardImageRenderer {
         //draw text box
         Color[] textBoxColors = tintColors(Color.WHITE, colors, TEXT_BOX_TINT);
         int textX = x + artInset + textBoxWidth;
-        drawTextBox(g, state, text, textBoxColors, textX, textY, textBoxWidth, textBoxHeight, true);
+        drawTextBox(g, state, text, textBoxColors, textX, textY, textBoxWidth, textBoxHeight, 1);
 
         //draw header containing name and mana cost
         Color[] headerColors = tintColors(Color.WHITE, colors, NAME_BOX_TINT);
@@ -420,7 +500,7 @@ public class FCardImageRenderer {
 
         //draw P/T box
         Color[] ptColors = tintColors(Color.WHITE, colors, PT_BOX_TINT);
-        drawPTBox(g, state, ptColors, x, ptY - ptBoxHeight / 2, w, ptBoxHeight);
+        drawPTBox(g, state, null, ptColors, x, ptY - ptBoxHeight / 2, w, ptBoxHeight);
 
         int advHeaderHeight = typeBoxHeight - 2;
         int advTypeHeight = advHeaderHeight - 1;
@@ -442,7 +522,7 @@ public class FCardImageRenderer {
         TEXT_COLOR = Color.BLACK;
         textY += advTypeHeight;
         textBoxHeight -= advHeaderHeight + advTypeHeight;
-        drawTextBox(g, advState, advText, textBoxColors, textX, textY, textBoxWidth, textBoxHeight, false);
+        drawTextBox(g, advState, advText, textBoxColors, textX, textY, textBoxWidth, textBoxHeight, 0);
     }
 
     private static Color[] fillColorBackground(Graphics2D g, List<DetailColors> backColors, int x, int y, int w, int h) {
@@ -564,8 +644,11 @@ public class FCardImageRenderer {
         drawVerticallyCenteredString(g, typeLine, new Rectangle(x, y, w, h), TYPE_FONT, TYPE_SIZE);
     }
 
+    /**
+     * @param flagPTBox [0] bit: has PT box, [1] bit: leveler PT box, [2] bit: leveler Level box
+     */
     private static void drawTextBox(Graphics2D g, CardStateView state, String text, Color[] colors,
-            int x, int y, int w, int h, boolean hasPTBox) {
+            int x, int y, int w, int h, int flagPTBox) {
         fillColorBackground(g, colors, x, y, w, h);
         g.setStroke(new BasicStroke(BORDER_THICKNESS));
         g.setColor(Color.BLACK);
@@ -603,16 +686,25 @@ public class FCardImageRenderer {
             int padding = TEXT_SIZE / 4;
             x += padding;
             w -= 2 * padding;
-            drawTextBoxText(g, text, x, y, w, h, hasPTBox);
+            if ((flagPTBox & 2) == 2)
+                w -= PT_BOX_WIDTH;
+            drawTextBoxText(g, text, x, y, w, h, flagPTBox);
         }
     }
 
-    private static void drawPTBox(Graphics2D g, CardStateView state, Color[] colors, int x, int y, int w, int h) {
+    private static void drawPTBox(Graphics2D g, CardStateView state, String ptOverride, Color[] colors, int x, int y, int w, int h) {
         List<String> pieces = new ArrayList<>();
         if (state.isCreature()) {
-            pieces.add(String.valueOf(state.getPower()));
-            pieces.add("/");
-            pieces.add(String.valueOf(state.getToughness()));
+            if (ptOverride != null) {
+                String [] pt = ptOverride.split("/");
+                pieces.add(pt[0]);
+                pieces.add("/");
+                pieces.add(pt[1]);
+            } else {
+                pieces.add(String.valueOf(state.getPower()));
+                pieces.add("/");
+                pieces.add(String.valueOf(state.getToughness()));
+            }
         }
         else if (state.isPlaneswalker()) {
             pieces.add(String.valueOf(state.getLoyalty()));
@@ -818,7 +910,7 @@ public class FCardImageRenderer {
                 p.restart();
                 int w = p.getNextWidth(txMetrics, rmMetrics);
                 while (w != -1) {
-                    if (pos + w > width) {
+                    if (pos + w > width && pos > 0) {
                         ++lines;
                         pos = 0;
                     }
@@ -844,7 +936,7 @@ public class FCardImageRenderer {
                 p.restart();
                 int w = p.getNextWidth(txMetrics, rmMetrics);
                 while (w != -1) {
-                    if (pos + w > width) {
+                    if (pos + w > width && pos > 0) {
                         ++lines;
                         pos = 0;
                         y += lineHeight;
@@ -858,8 +950,11 @@ public class FCardImageRenderer {
         }
     }
 
-    private static void drawTextBoxText(Graphics2D g, final String text, int x, int y, int w, int h, boolean hasPTBox) {
-        String [] paragraphs = linebreakPattern.split(text);
+    private static void drawTextBoxText(Graphics2D g, final String text, int x, int y, int w, int h, int flagPTBox) {
+        boolean hasPTBox = (flagPTBox & 1) == 1;
+        boolean isLevelup = (flagPTBox & 2) == 2;
+        boolean isLevelBox = (flagPTBox & 4) == 4;
+        String [] paragraphs = isLevelBox ? text.split(" ") : linebreakPattern.split(text);
         List<Paragraph> pgList = new ArrayList<>();
         for (String pg : paragraphs) {
             pgList.add(new Paragraph(pg));
@@ -881,7 +976,7 @@ public class FCardImageRenderer {
             lineSpacing = -2;
             for (int i = 0; i < pgList.size(); ++i) {
                 // [0] bit: hasPTBox or not, [1] bit: has multiple paragraph or not.
-                int flagPTBox = (i < pgList.size() - 1) ? 0 : (hasPTBox ? 1 : 0) + (i > 0 ? 2 : 0);
+                flagPTBox = (i < pgList.size() - 1) ? 0 : (hasPTBox ? 1 : 0) + (i > 0 ? 2 : 0);
                 Paragraph pg = pgList.get(i);
                 totalHeight += paraSpacing;
                 int lines = pg.calculateLines(w, txMetrics, rmMetrics, flagPTBox);
@@ -906,15 +1001,21 @@ public class FCardImageRenderer {
 
         // Draw text
         // Center text is there is only one line
-        if (totalLines == 1) {
+        if (totalLines == 1 && !isLevelup) {
             Paragraph pg = pgList.get(0);
             int width = pg.getTotalWidth(txMetrics, rmMetrics);
             x += (w - width) / 2;
         }
         y += (h - totalHeight - paraSpacing / 2) / 2;
         for (Paragraph pg : pgList) {
-            y += pg.drawPieces(g, x, y, w, lineSpacing + lineHeight, txFont, txMetrics, rmFont, rmMetrics);
+            int xoffset = isLevelBox ? (w - pg.getTotalWidth(txMetrics, rmMetrics)) / 2 : 0;
+            y += pg.drawPieces(g, x + xoffset, y, w, lineSpacing + lineHeight, txFont, txMetrics, rmFont, rmMetrics);
             y += paraSpacing - lineSpacing;
+            if (isLevelBox) {
+                txFont = getShrinkFont(TEXT_FONT, txFontSize + 10);
+                txMetrics = g.getFontMetrics(txFont);
+                y -= paraSpacing;
+            }
         }
     }
 }
