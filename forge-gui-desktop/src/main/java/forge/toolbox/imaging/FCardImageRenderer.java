@@ -44,7 +44,7 @@ public class FCardImageRenderer {
     private static final float TEXT_BOX_TINT = 0.1f;
     private static final float PT_BOX_TINT = 0.2f;
     private static float CARD_ART_RATIO;
-    private static int PT_BOX_WIDTH, HEADER_PADDING, BORDER_THICKNESS;
+    private static int PT_BOX_WIDTH, HEADER_PADDING, TYPE_PADDING, BLACK_BORDER_THICKNESS, BORDER_THICKNESS;
     private static Font NAME_FONT, TYPE_FONT, TEXT_FONT, REMINDER_FONT, PT_FONT;
     private static int NAME_SIZE, TYPE_SIZE, TEXT_SIZE, REMINDER_SIZE, PT_SIZE;
 
@@ -136,64 +136,79 @@ public class FCardImageRenderer {
         if (!isInitialed)
             initialize();
         g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        CARD_ART_RATIO = 1.32f;
+        float ratio = Math.min((float)width / BASE_IMAGE_WIDTH, (float)height / BASE_IMAGE_HEIGHT);
         if (card.isSplitCard()) {
             boolean needTranslation = !"en-US".equals(FModel.getPreferences().getPref(FPref.UI_LANGUAGE));
             final CardStateView leftState = card.getLeftSplitState();
             final String leftText = needTranslation ? CardTranslation.getTranslatedOracle(leftState.getName()) : leftState.getOracleText();
             final CardStateView rightState = card.getRightSplitState();
             String rightText = needTranslation ? CardTranslation.getTranslatedOracle(rightState.getName()) : rightState.getOracleText();
-            AffineTransform tf = g.getTransform();
-            g.translate(0., (double)height);
-            g.rotate(-Math.PI / 2.);
-            updateStaticFields((float)height / 2f / (float)width);
-            drawCardStateImage(g, leftState, leftText, height / 2, width);
-            g.setTransform(tf);
-            g.translate(0., (double)height / 2);
-            g.rotate(-Math.PI / 2.);
-            drawCardStateImage(g, rightState, rightText, height / 2, width);
+            boolean isAftermath = (rightState.getKeywordKey().indexOf("Aftermath") != -1);
+            if (isAftermath) {
+                int halfHeight = Math.round(380 * ratio);
+                int halfWidth = Math.round((halfHeight - 10) * ratio);
+                CARD_ART_RATIO = 2.68f;
+                updateAreaSizes(ratio, ratio);
+                drawCardStateImage(g, leftState, leftText, width, halfHeight);
+                CARD_ART_RATIO = 1.66f;
+                g.translate((double) width, (double)halfWidth);
+                g.rotate(Math.PI / 2.);
+                drawCardStateImage(g, rightState, rightText, height - halfWidth, width);
+            } else {
+                CARD_ART_RATIO = 1.36f;
+                updateAreaSizes(ratio, (float)height / 2f / (float)width);
+                AffineTransform tf = g.getTransform();
+                g.translate(0., (double)height);
+                g.rotate(-Math.PI / 2.);
+                drawCardStateImage(g, leftState, leftText, height / 2, width);
+                g.setTransform(tf);
+                g.translate(0., (double)height / 2);
+                g.rotate(-Math.PI / 2.);
+                drawCardStateImage(g, rightState, rightText, height / 2, width);
+            }
         } else {
             boolean needTranslation = !card.isToken() || !(card.getCloneOrigin() == null);
             final CardStateView state = card.getState(altState);
             final String text = card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(state.getName(), "") : null);
-            updateStaticFields(1f);
+            CARD_ART_RATIO = 1.32f;
+            updateAreaSizes(ratio, ratio);
             drawCardStateImage(g, state, text, width, height);
         }
     }
 
-    private static void updateStaticFields(float ratio) {
-        NAME_SIZE = Math.round(NAME_FONT.getSize() * ratio);
-        TYPE_SIZE = Math.round(TYPE_FONT.getSize() * ratio);
-        TEXT_SIZE = TEXT_FONT.getSize();
-        REMINDER_SIZE = REMINDER_FONT.getSize();
-        PT_SIZE = Math.round(PT_FONT.getSize() * ratio);
-        PT_BOX_WIDTH = Math.round(75 * ratio);
-        HEADER_PADDING = Math.round(7 * ratio);
-        BORDER_THICKNESS = 2;
+    private static void updateAreaSizes(float mainRatio, float subRatio) {
+        NAME_SIZE = Math.round(NAME_FONT.getSize() * mainRatio);
+        TYPE_SIZE = Math.round(TYPE_FONT.getSize() * subRatio);
+        TEXT_SIZE = Math.round(TEXT_FONT.getSize() * mainRatio);
+        REMINDER_SIZE = Math.round(REMINDER_FONT.getSize() * mainRatio);
+        PT_SIZE = Math.round(PT_FONT.getSize() * mainRatio);
+        PT_BOX_WIDTH = Math.round(75 * mainRatio);
+        HEADER_PADDING = Math.round(7 * mainRatio);
+        TYPE_PADDING = Math.round(7 * subRatio) + (mainRatio == subRatio ? (NAME_SIZE - TYPE_SIZE) / 2 : 0);
+        BORDER_THICKNESS = Math.max(Math.round(2 * mainRatio), 1);
+        BLACK_BORDER_THICKNESS = Math.round(10 * mainRatio);
     }
 
     private static void drawCardStateImage(Graphics2D g, CardStateView state, String text, int w, int h) {
         int x = 0, y = 0;
-
         g.setColor(Color.BLACK);
         g.fillRect(x, y, w, h);
-        int blackBorderThickness = Math.round(w * BLACK_BORDER_THICKNESS_RATIO);
-        x += blackBorderThickness;
-        y += blackBorderThickness;
-        w -= 2 * blackBorderThickness;
-        h -= 2 * blackBorderThickness;
+        x += BLACK_BORDER_THICKNESS;
+        y += BLACK_BORDER_THICKNESS;
+        w -= 2 * BLACK_BORDER_THICKNESS;
+        h -= 2 * BLACK_BORDER_THICKNESS;
 
         //determine colors for borders
         final List<DetailColors> borderColors = CardDetailUtil.getBorderColors(state, true);
         Color[] colors = fillColorBackground(g, borderColors, x, y, w, h);
 
-        int artInset = Math.round(blackBorderThickness * 0.8f);
-        int outerBorderThickness = 2 * blackBorderThickness - artInset;
+        int artInset = Math.round(BLACK_BORDER_THICKNESS * 0.8f);
+        int outerBorderThickness = 2 * BLACK_BORDER_THICKNESS - artInset;
         x += outerBorderThickness;
         y += outerBorderThickness;
         w -= 2 * outerBorderThickness;
         int headerHeight = NAME_SIZE + 2 * HEADER_PADDING;
-        int typeBoxHeight = headerHeight;
+        int typeBoxHeight = TYPE_SIZE + 2 * TYPE_PADDING;
         int ptBoxHeight = 0;
         if (state.isCreature() || state.isPlaneswalker() || state.getType().hasSubtype("Vehicle")) {
             //if P/T box needed, make room for it
