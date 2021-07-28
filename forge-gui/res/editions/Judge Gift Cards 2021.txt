@@ -1,9 +1,9 @@
 [metadata]
-Code=J21
+Code=PJ21
 Date=2021-01-01
 Name=Judge Gift Cards 2021
 Type=Promo
-ScryfallCode=J21
+ScryfallCode=PJ21
 
 [cards]
 5 M The Gitrog Monster
