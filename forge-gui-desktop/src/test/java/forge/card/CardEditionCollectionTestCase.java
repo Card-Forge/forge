@@ -23,7 +23,7 @@ public class CardEditionCollectionTestCase extends ForgeCardMockTestCase {
         for (int i=0; i < 5; i++){
             String cardName = cardNames[i];
             String expectedSet = expectedSets[i];
-            PaperCard card = cardDb.getCardFromEditions(cardName, CardDb.CardArtPreference.OldArtAllEditions);
+            PaperCard card = cardDb.getCardFromEditions(cardName, CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS);
             assertEquals(card.getEdition(), expectedSet);
             cards.add(card);
         }
@@ -31,6 +31,6 @@ public class CardEditionCollectionTestCase extends ForgeCardMockTestCase {
         CardPool pool = new CardPool();
         pool.add(cards);
         CardEdition ed = editions.getEarliestEditionWithAllCards(pool);
-        assertEquals(ed.getCode(), "LEA");
+        assertEquals(ed.getCode(), "ALL");
     }
 }

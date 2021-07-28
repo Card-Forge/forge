@@ -813,21 +813,14 @@ public final class CardEdition implements Comparable<CardEdition> {
          */
         public CardEdition getEarliestEditionWithAllCards(CardPool cards) {
             Set<String> minEditions = new HashSet<>();
-
-            CardArtPreference strictness = CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY;
-
+            CardDb db = StaticData.instance().getCommonCards();
             for (Entry<PaperCard, Integer> k : cards) {
-                PaperCard cp = StaticData.instance().getCommonCards().getCardFromEditions(k.getKey().getName(), strictness);
-                if( cp == null && strictness == CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY) {
-                    strictness = CardArtPreference.ORIGINAL_ART_ALL_EDITIONS; // card is not found in core and expansions only (probably something CMD or C13)
-                    cp = StaticData.instance().getCommonCards().getCardFromEditions(k.getKey().getName(), strictness);
-                }
+                PaperCard cp = db.getCardFromEditions(k.getKey().getName(),
+                                                      CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY);
                 if (cp == null)
                     cp = k.getKey(); // it's unlikely, this code will ever run
-
                 minEditions.add(cp.getEdition());
             }
-
             for (CardEdition ed : getOrderedEditions()) {
                 if (minEditions.contains(ed.getCode()))
                     return ed;
