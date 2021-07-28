@@ -235,7 +235,6 @@ public class ImageCache {
 
         final BufferedImage cached = _CACHE.getIfPresent(resizedKey);
         if (null != cached) {
-            //System.out.println("found cached image: " + resizedKey);
             return cached;
         }
 
@@ -275,7 +274,6 @@ public class ImageCache {
             result = resampler.filter(original, null);
         }
 
-        //System.out.println("caching image: " + resizedKey);
         _CACHE.put(resizedKey, result);
         return result;
     }
