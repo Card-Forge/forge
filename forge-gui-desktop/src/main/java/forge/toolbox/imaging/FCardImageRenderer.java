@@ -333,14 +333,15 @@ public class FCardImageRenderer {
             ptY += textBoxHeightDiv3;
             textBoxHeightDiv3 = textBoxHeight - textBoxHeightDiv3 * 2;
             //draw text box
-            Color[] textBox3Colors = tintColors(Color.LIGHT_GRAY, colors, TEXT_BOX_TINT + 0.3f);
+            Color lightGray = new Color(160, 160, 160);
+            Color[] textBox3Colors = tintColors(lightGray, colors, TEXT_BOX_TINT + 0.3f);
             TEXT_SIZE = orgTextSize - 10;
             drawTextBox(g, state, level3, textBox3Colors, textX, textY, levelBoxWitdh, textBoxHeightDiv3, 4);
             TEXT_SIZE = orgTextSize;
             drawTextBox(g, state, text3, textBox3Colors, textX + levelBoxWitdh, textY, artWidth - levelBoxWitdh, textBoxHeightDiv3, 2);
 
             //draw P/T box
-            Color[] pt3Colors = tintColors(Color.LIGHT_GRAY, colors, PT_BOX_TINT + 0.3f);
+            Color[] pt3Colors = tintColors(lightGray, colors, PT_BOX_TINT + 0.3f);
             drawPTBox(g, state, ptOverride3, pt3Colors, x, ptY, w, ptBoxHeight);
         } else {
             //draw text box
