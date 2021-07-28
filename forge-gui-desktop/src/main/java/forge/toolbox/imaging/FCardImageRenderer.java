@@ -166,6 +166,15 @@ public class FCardImageRenderer {
                 g.rotate(-Math.PI / 2.);
                 drawCardStateImage(g, rightState, rightText, height / 2, width);
             }
+        } else if (card.isFlipCard()) {
+            boolean needTranslation = !card.isToken() || !(card.getCloneOrigin() == null);
+            final CardStateView state = card.getState(altState);
+            final String text = card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(state.getName(), "") : null);
+            CARD_ART_RATIO = 1.72f;
+            updateAreaSizes(ratio, ratio);
+            final CardStateView flipState = card.getState(!altState);
+            final String flipText = card.getText(flipState, needTranslation ? CardTranslation.getTranslationTexts(flipState.getName(), "") : null);
+            drawFlipCardImage(g, state, text, flipState, flipText, width, height, altState);
         } else {
             boolean needTranslation = !card.isToken() || !(card.getCloneOrigin() == null);
             final CardStateView state = card.getState(altState);
@@ -252,16 +261,100 @@ public class FCardImageRenderer {
 
         //draw header containing name and mana cost
         Color[] headerColors = tintColors(Color.WHITE, colors, NAME_BOX_TINT);
-        drawHeader(g, state, headerColors, x, y, w, headerHeight);
+        drawHeader(g, state, headerColors, x, y, w, headerHeight, true);
 
         //draw type line
-        drawTypeLine(g, state, headerColors, x, typeY, w, typeBoxHeight);
+        drawTypeLine(g, state, headerColors, x, typeY, w, typeBoxHeight, 0);
 
         //draw P/T box
         if (ptBoxHeight > 0) {
-            //only needed if on top since otherwise P/T will be hidden
             Color[] ptColors = tintColors(Color.WHITE, colors, PT_BOX_TINT);
             drawPTBox(g, state, ptColors, x, ptY - ptBoxHeight / 2, w, ptBoxHeight);
+        }
+    }
+
+    private static void drawFlipCardImage(Graphics2D g, CardStateView state, String text, CardStateView flipState, String flipText, int w, int h, boolean isFlipped) {
+        int width = w, height = h;
+        int x = 0, y = 0;
+        g.setColor(Color.BLACK);
+        g.fillRect(x, y, w, h);
+        x += BLACK_BORDER_THICKNESS;
+        y += BLACK_BORDER_THICKNESS;
+        w -= 2 * BLACK_BORDER_THICKNESS;
+        h -= 2 * BLACK_BORDER_THICKNESS;
+
+        //determine colors for borders
+        final List<DetailColors> borderColors = CardDetailUtil.getBorderColors(state, true);
+        Color[] colors = fillColorBackground(g, borderColors, x, y, w, h);
+
+        int artInset = Math.round(BLACK_BORDER_THICKNESS * 0.8f);
+        int outerBorderThickness = 2 * BLACK_BORDER_THICKNESS - artInset;
+        x += outerBorderThickness;
+        y += outerBorderThickness;
+        w -= 2 * outerBorderThickness;
+        h -= 2 * outerBorderThickness;
+        int headerHeight = NAME_SIZE + 2 * HEADER_PADDING;
+        int typeBoxHeight = TYPE_SIZE + 2 * TYPE_PADDING;
+
+        int artWidth = w - 2 * artInset;
+        int artHeight = Math.round(artWidth / CARD_ART_RATIO);
+        int textBoxHeight = (h - (headerHeight + typeBoxHeight) * 2 - artHeight) / 2;
+        int ptBoxHeight = NAME_SIZE + HEADER_PADDING;
+
+        int textY = y + headerHeight;
+        int typeY = textY + textBoxHeight;
+        int artY = typeY + typeBoxHeight;
+        int ptY = typeY - 4;
+
+        //draw art box with Forge icon
+        if (!isFlipped) {
+            Color[] artBoxColors = tintColors(Color.DARK_GRAY, colors, NAME_BOX_TINT);
+            int artX = x + artInset;
+            drawArt(g, artBoxColors, artX, artY, artWidth, artHeight);
+        }
+
+        //draw text box
+        Color[] textBoxColors = tintColors(Color.WHITE, colors, TEXT_BOX_TINT);
+        int textX = x + artInset;
+        drawTextBox(g, state, text, textBoxColors, textX, textY, artWidth, textBoxHeight, false);
+
+        //draw header containing name and mana cost
+        Color[] headerColors = tintColors(Color.WHITE, colors, NAME_BOX_TINT);
+        drawHeader(g, state, headerColors, x, y, w, headerHeight, !isFlipped);
+
+        //draw type line
+        drawTypeLine(g, state, headerColors, x, typeY, w, typeBoxHeight, state.isCreature() ? PT_BOX_WIDTH : 0);
+
+        //draw P/T box
+        if (state.isCreature()) {
+            Color[] ptColors = tintColors(Color.WHITE, colors, PT_BOX_TINT);
+            drawPTBox(g, state, ptColors, x, ptY, w, ptBoxHeight);
+        }
+
+        //flip the card
+        g.translate(width, height);
+        g.rotate(Math.PI);
+
+        //draw art box with Forge icon
+        if (isFlipped) {
+            Color[] artBoxColors = tintColors(Color.DARK_GRAY, colors, NAME_BOX_TINT);
+            int artX = x + artInset;
+            drawArt(g, artBoxColors, artX, artY, artWidth, artHeight);
+        }
+
+        //draw text box
+        drawTextBox(g, flipState, flipText, textBoxColors, textX, textY, artWidth, textBoxHeight, false);
+
+        //draw header containing name and mana cost
+        drawHeader(g, flipState, headerColors, x, y, w, headerHeight, isFlipped);
+
+        //draw type line
+        drawTypeLine(g, flipState, headerColors, x, typeY, w, typeBoxHeight, flipState.isCreature() ? PT_BOX_WIDTH : 0);
+
+        //draw P/T box
+        if (flipState.isCreature()) {
+            Color[] ptColors = tintColors(Color.WHITE, colors, PT_BOX_TINT);
+            drawPTBox(g, flipState, ptColors, x, ptY, w, ptBoxHeight);
         }
     }
 
@@ -317,7 +410,7 @@ public class FCardImageRenderer {
         g.drawString(text, x, y);
     }
 
-    private static void drawHeader(Graphics2D g, CardStateView state, Color[] colors, int x, int y, int w, int h) {
+    private static void drawHeader(Graphics2D g, CardStateView state, Color[] colors, int x, int y, int w, int h, boolean drawMana) {
         fillColorBackground(g, colors, x, y, w, h);
         g.setStroke(new BasicStroke(BORDER_THICKNESS));
         g.setColor(Color.BLACK);
@@ -326,13 +419,16 @@ public class FCardImageRenderer {
         int padding = h / 4;
 
         //draw mana cost for card
-        ManaCost manaCost = state.getManaCost();
-        int manaCostWidth = manaCost.getGlyphCount() * NAME_SIZE + HEADER_PADDING;
-        CardFaceSymbols.draw(g, manaCost, x + w - manaCostWidth, y + (h - NAME_SIZE) / 2 + 1, NAME_SIZE);
+        if (drawMana) {
+            ManaCost manaCost = state.getManaCost();
+            int manaCostWidth = manaCost.getGlyphCount() * NAME_SIZE + HEADER_PADDING;
+            CardFaceSymbols.draw(g, manaCost, x + w - manaCostWidth, y + (h - NAME_SIZE) / 2 + 1, NAME_SIZE);
+            w -= padding + manaCostWidth;
+        }
 
         //draw name for card
         x += padding;
-        w -= 3 * padding + manaCostWidth;
+        w -= 2 * padding;
         drawVerticallyCenteredString(g, CardTranslation.getTranslatedName(state.getName()),
             new Rectangle(x, y, w, h), NAME_FONT, NAME_SIZE);
     }
@@ -355,12 +451,13 @@ public class FCardImageRenderer {
         g.drawRect(x, y, w, h);
     }
 
-    private static void drawTypeLine(Graphics2D g, CardStateView state, Color[] colors, int x, int y, int w, int h) {
+    private static void drawTypeLine(Graphics2D g, CardStateView state, Color[] colors, int x, int y, int w, int h, int adjust) {
         fillColorBackground(g, colors, x, y, w, h);
         g.setStroke(new BasicStroke(BORDER_THICKNESS));
         g.setColor(Color.BLACK);
         g.drawRect(x, y, w, h);
 
+        w -= adjust;
         int padding = h / 4;
 
         //draw square icon for rarity
@@ -372,6 +469,7 @@ public class FCardImageRenderer {
 
         //draw type
         x += padding;
+        w -= padding;
         g.setColor(Color.BLACK);
         String typeLine = CardDetailUtil.formatCardType(state, true).replace(" - ", " — ");
         drawVerticallyCenteredString(g, typeLine, new Rectangle(x, y, w, h), TYPE_FONT, TYPE_SIZE);
