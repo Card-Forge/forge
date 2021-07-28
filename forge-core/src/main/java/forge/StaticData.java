@@ -283,6 +283,15 @@ public class StaticData {
         return variantCards;
     }
 
+    public Map<String, CardDb> getAvailableDatabases(){
+        Map<String, CardDb> databases = new HashMap<>();
+        databases.put("Common", commonCards);
+        databases.put("Custom", customCards);
+        databases.put("Variant", variantCards);
+        return databases;
+    }
+
+
     public TokenDb getAllTokens() { return allTokens; }
 
     public boolean allowCustomCardsInDecksConformance() {
