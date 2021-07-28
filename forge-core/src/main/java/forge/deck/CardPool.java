@@ -49,16 +49,12 @@ public class CardPool extends ItemPool<PaperCard> {
     }
 
     public void add(final String cardRequest, final int amount) {
-
         PaperCard paperCard = StaticData.instance().getCommonCards().getCard(cardRequest);
         final boolean isCommonCard = paperCard != null;
-
         if (!isCommonCard) {
             paperCard = StaticData.instance().getCustomCards().getCard(cardRequest);
-
             if (paperCard == null) // not a custom card
                 paperCard = StaticData.instance().getVariantCards().getCard(cardRequest);
-
             if (paperCard == null) {  // not even a variant then
                 StaticData.instance().attemptToLoadCard(cardRequest);
                 paperCard = StaticData.instance().getVariantCards().getCard(cardRequest);
@@ -70,23 +66,6 @@ public class CardPool extends ItemPool<PaperCard> {
             paperCard = StaticData.instance().getCommonCards().createUnsupportedCard(cardRequest);
         }
         this.add(paperCard, amount);
-
-        // @leriomaggio: The following is a useless replication of the logic already in CardDb for CardRequest parsing!
-        // This should be removed
-        /*
-        if (cardRequest.contains("|")) {
-            // an encoded cardRequest with set and possibly art index was passed, split it and pass in full
-            String[] splitCardName = StringUtils.split(cardRequest, "|");
-            if (splitCardName.length == 2) {
-                // set specified
-                this.add(splitCardName[0], splitCardName[1], amount);
-            } else if (splitCardName.length == 3) {
-                // set and art specified
-                this.add(splitCardName[0], splitCardName[1], Integer.parseInt(splitCardName[2]), amount);
-            }
-        } else {
-            this.add(cardRequest, null, IPaperCard.DEFAULT_ART_INDEX, amount);
-        } */
     }
 
     public void add(final String cardName, final String setCode) {
@@ -98,71 +77,54 @@ public class CardPool extends ItemPool<PaperCard> {
     }
 
     // NOTE: ART indices are "1" -based
-    public void add(String cardName, String setCode, final int artIndex, final int amount) {
-
-        PaperCard paperCard = StaticData.instance().getCommonCards().getCard(cardName, setCode, artIndex);
-        boolean isCommonCard = paperCard != null;
-        boolean isCustomCard = !(isCommonCard);
-
-        if (!isCommonCard) {
-            paperCard = StaticData.instance().getCustomCards().getCard(cardName, setCode);
-            isCustomCard = paperCard != null;
-
-            if (!isCustomCard)
-                paperCard = StaticData.instance().getVariantCards().getCard(cardName, setCode);
-
-            if (paperCard == null) {
-                // Attempt to load the card first
-                StaticData.instance().attemptToLoadCard(cardName);
-                // Now try again all the three available DBs
-                // we simply don't know which db the card has been added to (in case)
-                // so we will try all of them again in this second round of attempt.
-                CardDb[] dbs = new CardDb[] {StaticData.instance().getCommonCards(),
-                                             StaticData.instance().getCustomCards(),
-                                             StaticData.instance().getVariantCards()};
-                for (int i = 0; i < 3; i++) {
-                    CardDb db = dbs[i];
-                    paperCard = db.getCard(cardName, setCode);
-                    if (paperCard != null){
-                        if (i == 0)
-                            isCommonCard = true;
-                        else if (i == 1)
-                            isCustomCard = true;
-                        break;
-                    }
+    public void add(String cardName, String setCode, int artIndex, final int amount) {
+        Map<String, CardDb> dbs = StaticData.instance().getAvailableDatabases();
+        PaperCard paperCard = null;
+        String selectedDbName = "";
+        artIndex = Math.max(artIndex, IPaperCard.DEFAULT_ART_INDEX);
+        int loadAttempt = 0;
+        while (paperCard == null && loadAttempt < 2) {
+            for (Map.Entry<String, CardDb> entry: dbs.entrySet()){
+                String dbName = entry.getKey();
+                CardDb db = entry.getValue();
+                paperCard = db.getCard(cardName, setCode, artIndex);
+                if (paperCard != null) {
+                    selectedDbName = dbName;
+                    break;
                 }
             }
+            loadAttempt += 1;
+            if (paperCard == null && loadAttempt < 2) {
+                /* Attempt to load the card first, and then try again all the three available DBs
+                 as we simply don't know which db the card has been added to (in case). */
+                StaticData.instance().attemptToLoadCard(cardName);
+                artIndex = IPaperCard.DEFAULT_ART_INDEX;  // Reset Any artIndex passed in, at this point
+            }
         }
-
-        // TODO: @leriomaggio from here on, this could be optimised!
-        int artCount = IPaperCard.DEFAULT_ART_INDEX;
-        if (paperCard != null) {
-            setCode = paperCard.getEdition();
-            cardName = paperCard.getName();
-            CardDb cardDb = isCustomCard ? StaticData.instance().getCustomCards() : StaticData.instance().getCommonCards();
-            artCount = cardDb.getArtCount(cardName, setCode);
-        } else {
+        if (paperCard == null){
+            // after all still null
             System.err.println("An unsupported card was requested: \"" + cardName + "\" from \"" + setCode + "\". \n");
             paperCard = StaticData.instance().getCommonCards().createUnsupportedCard(cardName);
-            // the unsupported card will be temporarily added to common cards (for no use, really)
-            // this would happen only if custom cards has been found but option is disabled!
-            isCustomCard = false;
+            selectedDbName = "Common";
         }
+        CardDb cardDb = dbs.getOrDefault(selectedDbName, StaticData.instance().getCommonCards());
+        // Determine Art Index
+        setCode = paperCard.getEdition();
+        cardName = paperCard.getName();
+        int artCount = cardDb.getArtCount(cardName, setCode);
+        boolean artIndexExplicitlySet = (artIndex > IPaperCard.DEFAULT_ART_INDEX) ||
+                (CardDb.CardRequest.fromString(cardName).artIndex > IPaperCard.NO_ART_INDEX);
 
-        boolean artIndexExplicitlySet = artIndex > IPaperCard.NO_ART_INDEX || Character.isDigit(cardName.charAt(cardName.length() - 1)) && cardName.charAt(cardName.length() - 2) == CardDb.NameSetSeparator;
-
-        if (artIndexExplicitlySet || artCount <= 1) {
+        if (artIndexExplicitlySet || artCount == 1) {
             // either a specific art index is specified, or there is only one art, so just add the card
             this.add(paperCard, amount);
         } else {
             // random art index specified, make sure we get different groups of cards with different art
             int[] artGroups = MyRandom.splitIntoRandomGroups(amount, artCount);
-            CardDb cardDb = isCustomCard ? StaticData.instance().getCustomCards() : StaticData.instance().getCommonCards();
             for (int i = 1; i <= artGroups.length; i++) {
                 int cnt = artGroups[i - 1];
-                if (cnt <= 0) {
+                if (cnt <= 0)
                     continue;
-                }
                 PaperCard randomCard = cardDb.getCard(cardName, setCode, i);
                 this.add(randomCard, cnt);
             }
