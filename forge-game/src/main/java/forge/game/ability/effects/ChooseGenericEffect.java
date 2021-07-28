@@ -66,7 +66,7 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
             }
 
             List<SpellAbility> chosenSAs = Lists.newArrayList();
-            String prompt = sa.getParamOrDefault(sa.getParam("ChoicePrompt"), "Choose");
+            String prompt = sa.getParamOrDefault("ChoicePrompt","Choose");
             if (sa.hasParam("AtRandom")) {
                 Aggregates.random(abilities, amount, chosenSAs);
             } else {
