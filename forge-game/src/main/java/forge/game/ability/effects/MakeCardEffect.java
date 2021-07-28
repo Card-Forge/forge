@@ -33,6 +33,9 @@ public class MakeCardEffect extends SpellAbilityEffect {
 
         for (final Card c : cards) {
             game.getAction().moveTo(zone, c, sa);
+            if (sa.hasParam("RememberMade")) {
+                sa.getHostCard().addRemembered(c);
+            }
         }
         if (zone.equals(ZoneType.Library)) {
             player.shuffle(sa);
