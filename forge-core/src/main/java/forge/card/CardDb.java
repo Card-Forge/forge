@@ -697,9 +697,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             return IPaperCard.NO_ART_INDEX;
         int max = IPaperCard.NO_ART_INDEX;
         for (PaperCard pc : getAllCards(cardName)) {
-            if (max < pc.getArtIndex()) {
+            if (max < pc.getArtIndex())
                 max = pc.getArtIndex();
-            }
         }
         return max;
     }
@@ -709,18 +708,13 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         int cnt = 0;
         if (cardName == null || setName == null)
             return cnt;
-
         Collection<PaperCard> cards = getAllCards(cardName);
-        if (null == cards) {
+        if (null == cards || cards.size() == 0)
             return 0;
-        }
-
         for (PaperCard pc : cards) {
-            if (pc.getEdition().equalsIgnoreCase(setName)) {
+            if (pc.getEdition().equalsIgnoreCase(setName))
                 cnt++;
-            }
         }
-
         return cnt;
     }
 
