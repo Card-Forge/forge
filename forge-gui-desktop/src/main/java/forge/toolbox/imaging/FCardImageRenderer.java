@@ -9,6 +9,7 @@ import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.geom.AffineTransform;
 import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,24 +36,50 @@ import forge.toolbox.FSkin.SkinIcon;
 import forge.util.CardTranslation;
 
 public class FCardImageRenderer {
+    private static boolean isInitialed = false;
     private static final float BASE_IMAGE_WIDTH = 480;
     private static final float BASE_IMAGE_HEIGHT = 680;
-    private static float MANA_SYMBOL_SIZE, PT_BOX_WIDTH, HEADER_PADDING, BORDER_THICKNESS;
-    private static Font NAME_FONT, TYPE_FONT, TEXT_FONT, REMINDER_FONT, PT_FONT;
-    private static FontMetrics NAME_METRICS, TYPE_METRICS, TEXT_METRICS, REMINDER_METRICS, PT_METRICS;
-    private static float prevImageWidth, prevImageHeight;
     private static final float BLACK_BORDER_THICKNESS_RATIO = 0.021f;
     private static final float NAME_BOX_TINT = 0.2f;
     private static final float TEXT_BOX_TINT = 0.1f;
     private static final float PT_BOX_TINT = 0.2f;
-    private static final float CARD_ART_RATIO = 1.32f;
+    private static float CARD_ART_RATIO;
+    private static int PT_BOX_WIDTH, HEADER_PADDING, BORDER_THICKNESS;
+    private static Font NAME_FONT, TYPE_FONT, TEXT_FONT, REMINDER_FONT, PT_FONT;
+    private static int NAME_SIZE, TYPE_SIZE, TEXT_SIZE, REMINDER_SIZE, PT_SIZE;
 
-    private static Locale locale;
     private static BreakIterator boundary;
     private static Pattern linebreakPattern;
     private static Pattern reminderPattern;
     private static Pattern symbolPattern;
-    private static final Map<Font, Font[]> shrinkFonts = new HashMap<>();
+    private static Map<Font, Font[]> shrinkFonts;
+
+    private static void initialize() {
+        Locale locale = new Locale(FModel.getPreferences().getPref(FPref.UI_LANGUAGE));
+        boundary = BreakIterator.getLineInstance(locale);
+        linebreakPattern = Pattern.compile("(\r\n\r\n)|(\n)");
+        reminderPattern = Pattern.compile("\\((.+?)\\)");
+        symbolPattern = Pattern.compile("\\{([A-Z0-9]+)\\}|\\{([A-Z0-9]+)/([A-Z0-9]+)\\}");
+
+        NAME_FONT = new Font(Font.SERIF, Font.BOLD, 26);
+        TYPE_FONT = new Font(Font.SERIF, Font.BOLD, 22);
+        if ("ja-JP".equals(FModel.getPreferences().getPref(FPref.UI_LANGUAGE)) || "zh-CN".equals(FModel.getPreferences().getPref(FPref.UI_LANGUAGE))) {
+            TEXT_FONT = new Font(Font.SANS_SERIF, Font.PLAIN, 24);
+            REMINDER_FONT = new Font(Font.SANS_SERIF, Font.PLAIN, 22);
+        } else {
+            TEXT_FONT = new Font(Font.SERIF, Font.PLAIN, 24);
+            REMINDER_FONT = new Font(Font.SERIF, Font.ITALIC, 24);
+        }
+        PT_FONT = NAME_FONT;
+
+        shrinkFonts = new HashMap<>();
+        shrinkFonts.put(NAME_FONT, new Font[NAME_FONT.getSize()]);
+        shrinkFonts.put(TYPE_FONT, new Font[TYPE_FONT.getSize()]);
+        shrinkFonts.put(TEXT_FONT, new Font[TEXT_FONT.getSize()]);
+        shrinkFonts.put(REMINDER_FONT, new Font[REMINDER_FONT.getSize()]);
+
+        isInitialed = true;
+    }
 
     private static Color tintColor(Color source, Color tint, float alpha) {
         float r = (tint.getRed() - source.getRed()) * alpha + source.getRed();
@@ -95,6 +122,8 @@ public class FCardImageRenderer {
     }
 
     private static Font getShrinkFont(Font orgFont, int newSize) {
+        if (newSize == orgFont.getSize())
+            return orgFont;
         Font font = shrinkFonts.get(orgFont)[newSize];
         if (font == null) {
             font = orgFont.deriveFont((float)newSize);
@@ -103,88 +132,82 @@ public class FCardImageRenderer {
         return font;
     }
 
-    private static void updateStaticFields(Graphics2D g, float w, float h) {
-        if (w == prevImageWidth && h == prevImageHeight) {
-            //for performance sake, only update static fields if card image size is different than previous rendered card
-            return;
-        }
-
-        locale = new Locale(FModel.getPreferences().getPref(FPref.UI_LANGUAGE));
-        boundary = BreakIterator.getLineInstance(locale);
-        linebreakPattern = Pattern.compile("(\r\n\r\n)|(\n)");
-        reminderPattern = Pattern.compile("\\((.+?)\\)");
-        symbolPattern = Pattern.compile("\\{([A-Z0-9]+)\\}|\\{([A-Z0-9]+)/([A-Z0-9]+)\\}");
-
-        float ratio = Math.min(w / BASE_IMAGE_WIDTH, h / BASE_IMAGE_HEIGHT);
-
-        MANA_SYMBOL_SIZE = 26 * ratio;
-        PT_BOX_WIDTH = 75 * ratio;
-        HEADER_PADDING = 7 * ratio;
-        NAME_FONT = new Font(Font.SERIF, Font.BOLD, Math.round(MANA_SYMBOL_SIZE));
-        TYPE_FONT = new Font(Font.SERIF, Font.BOLD, Math.round(MANA_SYMBOL_SIZE * 0.8f));
-        if ("ja-JP".equals(FModel.getPreferences().getPref(FPref.UI_LANGUAGE)) || "zh-CN".equals(FModel.getPreferences().getPref(FPref.UI_LANGUAGE))) {
-            TEXT_FONT = new Font(Font.SANS_SERIF, Font.PLAIN, Math.round(MANA_SYMBOL_SIZE * 0.93f));
-            REMINDER_FONT = new Font(Font.SANS_SERIF, Font.PLAIN, Math.round(MANA_SYMBOL_SIZE * 0.93f) - 2);
+    public static void drawCardImage(Graphics2D g, CardView card, boolean altState, int width, int height) {
+        if (!isInitialed)
+            initialize();
+        g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        CARD_ART_RATIO = 1.32f;
+        if (card.isSplitCard()) {
+            boolean needTranslation = !"en-US".equals(FModel.getPreferences().getPref(FPref.UI_LANGUAGE));
+            final CardStateView leftState = card.getLeftSplitState();
+            final String leftText = needTranslation ? CardTranslation.getTranslatedOracle(leftState.getName()) : leftState.getOracleText();
+            final CardStateView rightState = card.getRightSplitState();
+            String rightText = needTranslation ? CardTranslation.getTranslatedOracle(rightState.getName()) : rightState.getOracleText();
+            AffineTransform tf = g.getTransform();
+            g.translate(0., (double)height);
+            g.rotate(-Math.PI / 2.);
+            updateStaticFields((float)height / 2f / (float)width);
+            drawCardStateImage(g, leftState, leftText, height / 2, width);
+            g.setTransform(tf);
+            g.translate(0., (double)height / 2);
+            g.rotate(-Math.PI / 2.);
+            drawCardStateImage(g, rightState, rightText, height / 2, width);
         } else {
-            TEXT_FONT = new Font(Font.SERIF, Font.PLAIN, Math.round(MANA_SYMBOL_SIZE * 0.93f));
-            REMINDER_FONT = new Font(Font.SERIF, Font.ITALIC, Math.round(MANA_SYMBOL_SIZE * 0.93f));
+            boolean needTranslation = !card.isToken() || !(card.getCloneOrigin() == null);
+            final CardStateView state = card.getState(altState);
+            final String text = card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(state.getName(), "") : null);
+            updateStaticFields(1f);
+            drawCardStateImage(g, state, text, width, height);
         }
-        PT_FONT = NAME_FONT;
-        NAME_METRICS = g.getFontMetrics(NAME_FONT);
-        TYPE_METRICS = g.getFontMetrics(TYPE_FONT);
-        TEXT_METRICS = g.getFontMetrics(TEXT_FONT);
-        REMINDER_METRICS = g.getFontMetrics(REMINDER_FONT);
-        PT_METRICS = NAME_METRICS;
-        BORDER_THICKNESS = Math.max(2 * ratio, 1f); //don't let border go below 1
-
-        shrinkFonts.put(NAME_FONT, new Font[NAME_FONT.getSize()]);
-        shrinkFonts.put(TYPE_FONT, new Font[TYPE_FONT.getSize()]);
-        shrinkFonts.put(TEXT_FONT, new Font[TEXT_FONT.getSize()]);
-        shrinkFonts.put(REMINDER_FONT, new Font[REMINDER_FONT.getSize()]);
-
-        prevImageWidth = w;
-        prevImageHeight = h;
     }
 
-    public static void drawCardImage(Graphics2D g, CardView card, boolean altState, int width, int height) {
-        float x = 0, y = 0, w = width, h = height;
-        updateStaticFields(g, w, h);
-        g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+    private static void updateStaticFields(float ratio) {
+        NAME_SIZE = Math.round(NAME_FONT.getSize() * ratio);
+        TYPE_SIZE = Math.round(TYPE_FONT.getSize() * ratio);
+        TEXT_SIZE = TEXT_FONT.getSize();
+        REMINDER_SIZE = REMINDER_FONT.getSize();
+        PT_SIZE = Math.round(PT_FONT.getSize() * ratio);
+        PT_BOX_WIDTH = Math.round(75 * ratio);
+        HEADER_PADDING = Math.round(7 * ratio);
+        BORDER_THICKNESS = 2;
+    }
 
-        float blackBorderThickness = w * BLACK_BORDER_THICKNESS_RATIO;
+    private static void drawCardStateImage(Graphics2D g, CardStateView state, String text, int w, int h) {
+        int x = 0, y = 0;
+
         g.setColor(Color.BLACK);
-        g.fillRect((int)x, (int)y, (int)w, (int)h);
+        g.fillRect(x, y, w, h);
+        int blackBorderThickness = Math.round(w * BLACK_BORDER_THICKNESS_RATIO);
         x += blackBorderThickness;
         y += blackBorderThickness;
         w -= 2 * blackBorderThickness;
         h -= 2 * blackBorderThickness;
 
-        final CardStateView state = card.getState(altState);
         //determine colors for borders
         final List<DetailColors> borderColors = CardDetailUtil.getBorderColors(state, true);
         Color[] colors = fillColorBackground(g, borderColors, x, y, w, h);
 
-        float artInset = blackBorderThickness * 0.8f;
-        float outerBorderThickness = 2 * blackBorderThickness - artInset;
+        int artInset = Math.round(blackBorderThickness * 0.8f);
+        int outerBorderThickness = 2 * blackBorderThickness - artInset;
         x += outerBorderThickness;
         y += outerBorderThickness;
         w -= 2 * outerBorderThickness;
-        float headerHeight = MANA_SYMBOL_SIZE + 2 * HEADER_PADDING;
-        float typeBoxHeight = headerHeight;
-        float ptBoxHeight = 0;
+        int headerHeight = NAME_SIZE + 2 * HEADER_PADDING;
+        int typeBoxHeight = headerHeight;
+        int ptBoxHeight = 0;
         if (state.isCreature() || state.isPlaneswalker() || state.getType().hasSubtype("Vehicle")) {
             //if P/T box needed, make room for it
-            ptBoxHeight = MANA_SYMBOL_SIZE + HEADER_PADDING;
+            ptBoxHeight = NAME_SIZE + HEADER_PADDING;
         }
 
-        float artWidth = w - 2 * artInset;
-        float artHeight = artWidth / CARD_ART_RATIO;
-        float textBoxHeight = h - headerHeight - artHeight - typeBoxHeight - outerBorderThickness - artInset - PT_METRICS.getHeight() / 2f;
+        int artWidth = w - 2 * artInset;
+        int artHeight = Math.round(artWidth / CARD_ART_RATIO);
+        int textBoxHeight = h - headerHeight - artHeight - typeBoxHeight - outerBorderThickness - artInset - PT_FONT.getSize() / 2;
 
-        float artY = y + headerHeight;
-        float typeY = artY + artHeight;
-        float textY = typeY + typeBoxHeight;
-        float ptY = textY + textBoxHeight;
+        int artY = y + headerHeight;
+        int typeY = artY + artHeight;
+        int textY = typeY + typeBoxHeight;
+        int ptY = textY + textBoxHeight;
 
         // Adjust layout for Saga, Class and Dungeon cards
         boolean isSaga = state.getType().hasSubtype("Saga");
@@ -194,7 +217,7 @@ public class FCardImageRenderer {
             // Move type line to the bottom
             typeY = ptY - typeBoxHeight;
             if (!isDungeon)
-                artWidth = artWidth / 2f;
+                artWidth = artWidth / 2;
             artHeight = typeY - artY;
             textBoxHeight = artHeight;
             textY = artY;
@@ -203,31 +226,31 @@ public class FCardImageRenderer {
         //draw art box with Forge icon
         if (!isDungeon) {
             Color[] artBoxColors = tintColors(Color.DARK_GRAY, colors, NAME_BOX_TINT);
-            float artX = x + artInset + (isSaga ? artWidth : 0f);
+            int artX = x + artInset + (isSaga ? artWidth : 0);
             drawArt(g, artBoxColors, artX, artY, artWidth, artHeight);
         }
 
         //draw text box
         Color[] textBoxColors = tintColors(Color.WHITE, colors, TEXT_BOX_TINT);
-        float textX = x + artInset + (isClass ? artWidth : 0f);
-        drawTextBox(g, card, state, textBoxColors, textX, textY, artWidth, textBoxHeight, ptBoxHeight > 0);
+        int textX = x + artInset + (isClass ? artWidth : 0);
+        drawTextBox(g, state, text, textBoxColors, textX, textY, artWidth, textBoxHeight, ptBoxHeight > 0);
 
         //draw header containing name and mana cost
         Color[] headerColors = tintColors(Color.WHITE, colors, NAME_BOX_TINT);
-        drawHeader(g, card, state, headerColors, x, y, w, headerHeight);
+        drawHeader(g, state, headerColors, x, y, w, headerHeight);
 
         //draw type line
-        drawTypeLine(g, card, state, headerColors, x, typeY, w, typeBoxHeight);
+        drawTypeLine(g, state, headerColors, x, typeY, w, typeBoxHeight);
 
         //draw P/T box
         if (ptBoxHeight > 0) {
             //only needed if on top since otherwise P/T will be hidden
             Color[] ptColors = tintColors(Color.WHITE, colors, PT_BOX_TINT);
-            drawPtBox(g, card, state, ptColors, x, ptY - ptBoxHeight / 2f, w, ptBoxHeight);
+            drawPTBox(g, state, ptColors, x, ptY - ptBoxHeight / 2, w, ptBoxHeight);
         }
     }
 
-    private static Color[] fillColorBackground(Graphics2D g, List<DetailColors> backColors, float x, float y, float w, float h) {
+    private static Color[] fillColorBackground(Graphics2D g, List<DetailColors> backColors, int x, int y, int w, int h) {
         Color[] colors = new Color[backColors.size()];
         for (int i = 0; i < colors.length; i++) {
             DetailColors dc = backColors.get(i);
@@ -261,13 +284,14 @@ public class FCardImageRenderer {
         g.setPaint(oldPaint);
     }
 
-    private static void drawVerticallyCenteredString(Graphics2D g, String text, Rectangle area, Font font, FontMetrics fontMetrics) {
-        Font originalFont = font;
+    private static void drawVerticallyCenteredString(Graphics2D g, String text, Rectangle area, Font originalFont, int size) {
+        Font font = getShrinkFont(originalFont, size);
+        FontMetrics fontMetrics = g.getFontMetrics(font);
 
         // Shrink font if the text is too long
         while (fontMetrics.stringWidth(text) > area.width) {
-            int newSize = font.getSize() - 1;
-            font = getShrinkFont(originalFont, newSize);
+            --size;
+            font = getShrinkFont(originalFont, size);
             fontMetrics = g.getFontMetrics(font);
         }
 
@@ -278,86 +302,72 @@ public class FCardImageRenderer {
         g.drawString(text, x, y);
     }
 
-    private static void drawHeader(Graphics2D g, CardView card, CardStateView state, Color[] colors, float x, float y, float w, float h) {
+    private static void drawHeader(Graphics2D g, CardStateView state, Color[] colors, int x, int y, int w, int h) {
         fillColorBackground(g, colors, x, y, w, h);
         g.setStroke(new BasicStroke(BORDER_THICKNESS));
         g.setColor(Color.BLACK);
-        g.drawRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h));
+        g.drawRect(x, y, w, h);
 
-        float padding = h / 8;
+        int padding = h / 4;
 
         //draw mana cost for card
-        float manaCostWidth = 0;
-        ManaCost mainManaCost = state.getManaCost();
-        if (card.isSplitCard() && card.getAlternateState() != null) {
-            //handle rendering both parts of split card
-            mainManaCost = card.getLeftSplitState().getManaCost();
-            ManaCost otherManaCost = card.getAlternateState().getManaCost();
-            manaCostWidth = otherManaCost.getGlyphCount() * MANA_SYMBOL_SIZE + HEADER_PADDING;
-            CardFaceSymbols.draw(g, otherManaCost, Math.round(x + w - manaCostWidth), Math.round(y + (h - MANA_SYMBOL_SIZE) / 2), Math.round(MANA_SYMBOL_SIZE));
-            //draw "//" between two parts of mana cost
-            manaCostWidth += NAME_METRICS.stringWidth("//") + HEADER_PADDING;
-            drawVerticallyCenteredString(g, "//",
-                new Rectangle(Math.round(x + w - manaCostWidth), Math.round(y), Math.round(w), Math.round(h)),
-                NAME_FONT, NAME_METRICS);
-        }
-        manaCostWidth += mainManaCost.getGlyphCount() * MANA_SYMBOL_SIZE + HEADER_PADDING;
-        CardFaceSymbols.draw(g, mainManaCost, Math.round(x + w - manaCostWidth), Math.round(y + (h - MANA_SYMBOL_SIZE) / 2), Math.round(MANA_SYMBOL_SIZE));
+        ManaCost manaCost = state.getManaCost();
+        int manaCostWidth = manaCost.getGlyphCount() * NAME_SIZE + HEADER_PADDING;
+        CardFaceSymbols.draw(g, manaCost, x + w - manaCostWidth, y + (h - NAME_SIZE) / 2 + 1, NAME_SIZE);
 
         //draw name for card
         x += padding;
-        w -= 2 * padding;
+        w -= 3 * padding + manaCostWidth;
         drawVerticallyCenteredString(g, CardTranslation.getTranslatedName(state.getName()),
-            new Rectangle(Math.round(x), Math.round(y), Math.round(w - manaCostWidth - padding), Math.round(h)),
-            NAME_FONT, NAME_METRICS);
+            new Rectangle(x, y, w, h), NAME_FONT, NAME_SIZE);
     }
 
 
-    private static void drawArt(Graphics2D g, Color[] colors, float x, float y, float w, float h) {
+    private static void drawArt(Graphics2D g, Color[] colors, int x, int y, int w, int h) {
         fillColorBackground(g, colors, x, y, w, h);
         SkinIcon art = FSkin.getIcon(FSkinProp.ICO_LOGO);
         float artWidth = (float)art.getSizeForPaint(g).getWidth();
         float artHeight = (float)art.getSizeForPaint(g).getHeight();
-        if (artWidth / artHeight >= w / h) {
-            float newH = w * (artHeight / artWidth);
-            FSkin.drawImage(g, art, Math.round(x), Math.round(y + (h - newH) / 2), Math.round(w), Math.round(newH));
+        if (artWidth / artHeight >= (float)w / (float)h) {
+            int newH = Math.round(w * (artHeight / artWidth));
+            FSkin.drawImage(g, art, x, y + (h - newH) / 2, w, newH);
         } else {
-            float newW = h * (artWidth / artHeight);
-            FSkin.drawImage(g, art, Math.round(x + (w - newW) / 2), Math.round(y), Math.round(newW), Math.round(h));
+            int newW = Math.round(h * (artWidth / artHeight));
+            FSkin.drawImage(g, art, x + (w - newW) / 2, y, newW, h);
         }
         g.setStroke(new BasicStroke(BORDER_THICKNESS));
         g.setColor(Color.BLACK);
-        g.drawRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h));
+        g.drawRect(x, y, w, h);
     }
 
-    private static void drawTypeLine(Graphics2D g, CardView card, CardStateView state, Color[] colors, float x, float y, float w, float h) {
+    private static void drawTypeLine(Graphics2D g, CardStateView state, Color[] colors, int x, int y, int w, int h) {
         fillColorBackground(g, colors, x, y, w, h);
         g.setStroke(new BasicStroke(BORDER_THICKNESS));
         g.setColor(Color.BLACK);
-        g.drawRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h));
+        g.drawRect(x, y, w, h);
 
-        float padding = h / 8;
+        int padding = h / 4;
 
         //draw square icon for rarity
-        float iconSize = h * 0.55f;
-        float iconPadding = (h - iconSize) / 2;
+        int iconSize = Math.round(h * 0.55f);
+        int iconPadding = (h - iconSize) / 2;
         w -= iconSize + iconPadding * 2;
         g.setColor(getRarityColor(state.getRarity()));
-        g.fillRect(Math.round(x + w + iconPadding), Math.round(y + (h - iconSize) / 2), Math.round(iconSize), Math.round(iconSize));
+        g.fillRect(x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
 
         //draw type
         x += padding;
         g.setColor(Color.BLACK);
-        drawVerticallyCenteredString(g, CardDetailUtil.formatCardType(state, true),
-            new Rectangle(Math.round(x), Math.round(y), Math.round(w), Math.round(h)),
-            TYPE_FONT, TYPE_METRICS);
+        String typeLine = CardDetailUtil.formatCardType(state, true).replace(" - ", " — ");
+        drawVerticallyCenteredString(g, typeLine, new Rectangle(x, y, w, h), TYPE_FONT, TYPE_SIZE);
     }
 
-    private static void drawTextBox(Graphics2D g, CardView card, CardStateView state, Color[] colors, float x, float y, float w, float h, boolean hasPTBox) {
+    private static void drawTextBox(Graphics2D g, CardStateView state, String text, Color[] colors,
+            int x, int y, int w, int h, boolean hasPTBox) {
         fillColorBackground(g, colors, x, y, w, h);
         g.setStroke(new BasicStroke(BORDER_THICKNESS));
         g.setColor(Color.BLACK);
-        g.drawRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h));
+        g.drawRect(x, y, w, h);
 
         if (state.isBasicLand()) {
             //draw icons for basic lands
@@ -383,27 +393,19 @@ public class FCardImageRenderer {
                 break;
             }
             int iconSize = Math.round(h * 0.75f);
-            CardFaceSymbols.drawSymbol(imageKey, g, Math.round(x + (w - iconSize) / 2), Math.round(y + (h - iconSize) / 2), iconSize);
+            CardFaceSymbols.drawSymbol(imageKey, g, x + (w - iconSize) / 2, y + (h - iconSize) / 2, iconSize);
         } else {
-            boolean needTranslation = true;
-            if (card.isToken()) {
-                if (card.getCloneOrigin() == null)
-                    needTranslation = false;
-            }
-            final String text = !card.isSplitCard() ?
-                card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(state.getName(), "") : null) :
-                card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(card.getLeftSplitState().getName(), card.getRightSplitState().getName()) : null );
             if (StringUtils.isEmpty(text))
                 return;
 
-            float padding = TEXT_METRICS.getAscent() * 0.25f;
+            int padding = TEXT_SIZE / 4;
             x += padding;
             w -= 2 * padding;
-            drawTextBoxText(g, text, Math.round(x), Math.round(y), Math.round(w), Math.round(h), hasPTBox);
+            drawTextBoxText(g, text, x, y, w, h, hasPTBox);
         }
     }
 
-    private static void drawPtBox(Graphics2D g, CardView card, CardStateView state, Color[] colors, float x, float y, float w, float h) {
+    private static void drawPTBox(Graphics2D g, CardStateView state, Color[] colors, int x, int y, int w, int h) {
         List<String> pieces = new ArrayList<>();
         if (state.isCreature()) {
             pieces.add(String.valueOf(state.getPower()));
@@ -422,17 +424,19 @@ public class FCardImageRenderer {
         }
         else { return; }
 
-        float padding = PT_METRICS.getAscent() / 4f;
-        float totalPieceWidth = -padding;
-        float[] pieceWidths = new float[pieces.size()];
+        Font font = getShrinkFont(PT_FONT, PT_SIZE);
+        FontMetrics metrics = g.getFontMetrics(font);
+        int padding = PT_SIZE / 4;
+        int totalPieceWidth = -padding;
+        int[] pieceWidths = new int[pieces.size()];
         for (int i = 0; i < pieces.size(); i++) {
-            float pieceWidth = PT_METRICS.stringWidth(pieces.get(i)) + padding;
+            int pieceWidth = metrics.stringWidth(pieces.get(i)) + padding;
             pieceWidths[i] = pieceWidth;
             totalPieceWidth += pieceWidth;
         }
-        float boxHeight = PT_METRICS.getMaxAscent() + padding;
+        int boxHeight = metrics.getMaxAscent() + padding;
 
-        float boxWidth = Math.max(PT_BOX_WIDTH, totalPieceWidth + 2 * padding);
+        int boxWidth = Math.max(PT_BOX_WIDTH, totalPieceWidth + 2 * padding);
         x += w - boxWidth;
         y += h - boxHeight;
         w = boxWidth;
@@ -441,13 +445,11 @@ public class FCardImageRenderer {
         fillColorBackground(g, colors, x, y, w, h);
         g.setStroke(new BasicStroke(BORDER_THICKNESS));
         g.setColor(Color.BLACK);
-        g.drawRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h));
+        g.drawRect(x, y, w, h);
 
         x += (boxWidth - totalPieceWidth) / 2;
         for (int i = 0; i < pieces.size(); i++) {
-            drawVerticallyCenteredString(g, pieces.get(i),
-                new Rectangle(Math.round(x), Math.round(y), Math.round(w), Math.round(h)),
-                PT_FONT, PT_METRICS);
+            drawVerticallyCenteredString(g, pieces.get(i), new Rectangle(x, y - 2, w, h), PT_FONT, PT_SIZE);
             x += pieceWidths[i];
         }
     }
@@ -461,7 +463,7 @@ public class FCardImageRenderer {
 
         public abstract void restart();
         public abstract int getNextWidth(FontMetrics txMetrics, FontMetrics rmMetrics);
-        public abstract void drawPrev(Graphics2D g, int x, int y, Font txFont, Font rmFont, FontMetrics txMetrics);
+        public abstract void drawCurrent(Graphics2D g, int x, int y, Font txFont, Font rmFont, FontMetrics txMetrics);
     }
 
     private static class TextPiece extends Piece {
@@ -501,7 +503,7 @@ public class FCardImageRenderer {
             return txMetrics.stringWidth(subtext);
         }
 
-        public void drawPrev(Graphics2D g, int x, int y, Font txFont, Font rmFont, FontMetrics txMetrics) {
+        public void drawCurrent(Graphics2D g, int x, int y, Font txFont, Font rmFont, FontMetrics txMetrics) {
             int ascent = txMetrics.getAscent();
             String subtext = text.substring(boundaryList.get(index - 1), boundaryList.get(index));
             if (isReminder) {
@@ -536,9 +538,9 @@ public class FCardImageRenderer {
             return -1;
         }
 
-        public void drawPrev(Graphics2D g, int x, int y, Font txFont, Font rmFont, FontMetrics txMetrics) {
+        public void drawCurrent(Graphics2D g, int x, int y, Font txFont, Font rmFont, FontMetrics txMetrics) {
             int xoffset = Math.round(txMetrics.getAscent() * 0.8f);
-            int yoffset = txMetrics.getAscent() - xoffset + 1;
+            int yoffset = txMetrics.getAscent() - xoffset + 2;
             for (String s : symbols) {
                 CardFaceSymbols.drawSymbol(s, g, x, y + yoffset, xoffset - 1);
                 x += xoffset;
@@ -645,7 +647,7 @@ public class FCardImageRenderer {
                         pos = 0;
                         y += lineHeight;
                     }
-                    p.drawPrev(g, x + pos, y, txFont, rmFont, txMetrics);
+                    p.drawCurrent(g, x + pos, y, txFont, rmFont, txMetrics);
                     pos += w;
                     w = p.getNextWidth(txMetrics, rmMetrics);
                 }
@@ -662,8 +664,10 @@ public class FCardImageRenderer {
         }
 
         // Find font size that fit in the text box area
-        Font txFont = TEXT_FONT, rmFont = REMINDER_FONT;
-        FontMetrics txMetrics = TEXT_METRICS, rmMetrics = REMINDER_METRICS;
+        Font txFont = getShrinkFont(TEXT_FONT, TEXT_SIZE);
+        Font rmFont = getShrinkFont(REMINDER_FONT, REMINDER_SIZE);
+        FontMetrics txMetrics = g.getFontMetrics(txFont);
+        FontMetrics rmMetrics = g.getFontMetrics(rmFont);
         int txFontSize = txFont.getSize(), rmFontSize = rmFont.getSize();
         int lineHeight, paraSpacing, lineSpacing, totalHeight, totalLines;
         do {
