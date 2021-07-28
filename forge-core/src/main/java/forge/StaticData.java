@@ -47,7 +47,7 @@ public class StaticData {
 
     private MulliganDefs.MulliganRule mulliganRule = MulliganDefs.getDefaultRule();
 
-    private boolean enableCustomCardsInDecks;  // default
+    private boolean allowCustomCardsInDecksConformance;
     private boolean enableSmartCardArtSelection;
 
     // Loaded lazily:
@@ -61,21 +61,21 @@ public class StaticData {
     private static StaticData lastInstance = null;
 
     public StaticData(CardStorageReader cardReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String cardArtPreference, boolean enableUnknownCards, boolean loadNonLegalCards) {
-        this(cardReader, null, customCardReader, editionFolder, customEditionsFolder, blockDataFolder, cardArtPreference, enableUnknownCards, loadNonLegalCards, false);
+        this(cardReader, null, customCardReader, editionFolder, customEditionsFolder, blockDataFolder, cardArtPreference, enableUnknownCards, loadNonLegalCards, false, false);
     }
 
-    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String cardArtPreference, boolean enableUnknownCards, boolean loadNonLegalCards, boolean enableCustomCardsInDecks){
-        this(cardReader, tokenReader, customCardReader, editionFolder, customEditionsFolder, blockDataFolder, cardArtPreference, enableUnknownCards, loadNonLegalCards, enableCustomCardsInDecks, false);
+    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String cardArtPreference, boolean enableUnknownCards, boolean loadNonLegalCards, boolean allowCustomCardsInDecksConformance){
+        this(cardReader, tokenReader, customCardReader, editionFolder, customEditionsFolder, blockDataFolder, cardArtPreference, enableUnknownCards, loadNonLegalCards, allowCustomCardsInDecksConformance, false);
     }
 
-    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String cardArtPreference, boolean enableUnknownCards, boolean loadNonLegalCards, boolean enableCustomCardsInDecks, boolean enableSmartCardArtSelection) {
+    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String cardArtPreference, boolean enableUnknownCards, boolean loadNonLegalCards, boolean allowCustomCardsInDecksConformance, boolean enableSmartCardArtSelection) {
         this.cardReader = cardReader;
         this.tokenReader = tokenReader;
         this.editions = new CardEdition.Collection(new CardEdition.Reader(new File(editionFolder)));
         this.blockDataFolder = blockDataFolder;
         this.customCardReader = customCardReader;
         this.customEditions = new CardEdition.Collection(new CardEdition.Reader(new File(customEditionsFolder), true));
-        this.enableCustomCardsInDecks = enableCustomCardsInDecks;
+        this.allowCustomCardsInDecksConformance = allowCustomCardsInDecksConformance;
         this.enableSmartCardArtSelection = enableSmartCardArtSelection;
         lastInstance = this;
         List<String> funnyCards = new ArrayList<>();
@@ -285,8 +285,8 @@ public class StaticData {
 
     public TokenDb getAllTokens() { return allTokens; }
 
-    public boolean isEnableCustomCardsInDecks() {
-        return this.enableCustomCardsInDecks;
+    public boolean allowCustomCardsInDecksConformance() {
+        return this.allowCustomCardsInDecksConformance;
     }
 
 
@@ -318,17 +318,61 @@ public class StaticData {
         this.filteredHandsEnabled = filteredHandsEnabled;
     }
 
-    public PaperCard getAlternativeCardPrint(PaperCard card, final Date setReleasedBefore) {
-        // NOTE this method forces the LATEST selection policy since we do always want to pick the
-        // edition that is the closest in time to the release date
-        CardDb.CardArtPreference artPref;
-        if (this.cardArtPreferenceHasFilter())
-            artPref = CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY;
+    public PaperCard getAlternativeCardPrint(PaperCard card, final Date setReleaseDate) {
+        boolean isCardArtPreferenceLatestArt = this.cardArtPreferenceIsLatest();
+        boolean cardArtPreferenceHasFilter = this.cardArtPreferenceHasFilter();
+        return this.getAlternativeCardPrint(card, setReleaseDate, isCardArtPreferenceLatestArt, cardArtPreferenceHasFilter);
+    }
+
+    public PaperCard getAlternativeCardPrint(PaperCard card, Date setReleaseDate,
+                                             boolean isCardArtPreferenceLatestArt, boolean cardArtPreferenceHasFilter){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(setReleaseDate);
+
+        String cardName = card.getName();
+        int artIndex = card.getArtIndex();
+
+        PaperCard altCard = null;
+        CardDb.CardArtPreference artPreference;
+        // Note: this won't apply to Custom Cards, so won't bother including it!
+        CardDb[] databases = new CardDb[]{this.commonCards, this.variantCards};
+
+        if (isCardArtPreferenceLatestArt){
+            // Get Lower bound (w/ Original Art and Edition Released AFTER Pivot Date)
+            if (cardArtPreferenceHasFilter)
+                artPreference = CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY;  // keep the filter
+            else
+                artPreference = CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS;
+
+            cal.add(Calendar.DATE, -2);  // go two days behind to also include the original reference set
+            Date releaseDate = cal.getTime();
+            for (CardDb cardDb : databases) {
+                altCard = cardDb.getCardFromEditionsReleasedAfter(cardName, artPreference, artIndex, releaseDate);
+                if (altCard == null)  // relax artIndex condition
+                    altCard = cardDb.getCardFromEditionsReleasedAfter(cardName, artPreference, releaseDate);
+                if (altCard != null)
+                    break;
+            }
+            return altCard;
+        }
+        // Get Upper bound (w/ Latest Art and Edition released BEFORE Pivot Date)
+        if (cardArtPreferenceHasFilter)
+            artPreference = CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY;  // keep the filter
         else
-            artPref = CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS;
-        PaperCard c = this.getCommonCards().getCardFromEditionsReleasedBefore(card.getName(), artPref, card.getArtIndex(), setReleasedBefore);
-        // NOTE: if c is null, is necessarily due to the artIndex, so remove it!
-        return c != null ? c : this.getCommonCards().getCardFromEditionsReleasedBefore(card.getName(), artPref, setReleasedBefore);
+            artPreference = CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS;
+
+        cal.add(Calendar.DATE, 2);  // go two days ahead to also include the original reference set
+        Date releaseDate = cal.getTime();
+
+        for (CardDb cardDb : databases) {
+            altCard = cardDb.getCardFromEditionsReleasedBefore(cardName, artPreference, artIndex, releaseDate);
+            if (altCard == null)  // relax artIndex constraint
+                altCard = cardDb.getCardFromEditionsReleasedBefore(cardName, artPreference, releaseDate);
+            if (altCard != null)
+                break;
+        }
+        return altCard;
+
     }
 
     public boolean getFilteredHandsEnabled(){
