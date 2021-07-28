@@ -162,6 +162,12 @@ public class DamageDealAi extends DamageAiBase {
         String logic = sa.getParamOrDefault("AILogic", "");
         if ("DiscardLands".equals(logic)) {
             dmg = 2;
+        } else if ("OpponentHasCreatures".equals(logic)) {
+            for (Player opp : ai.getOpponents()) {
+                if (!opp.getCreaturesInPlay().isEmpty()){
+                    return true;
+                }
+            }
         } else if (logic.startsWith("ProcRaid.")) {
             if (ai.getGame().getPhaseHandler().isPlayerTurn(ai) && ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 for (Card potentialAtkr : ai.getCreaturesInPlay()) {
