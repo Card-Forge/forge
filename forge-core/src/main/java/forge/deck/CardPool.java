@@ -49,18 +49,13 @@ public class CardPool extends ItemPool<PaperCard> {
     }
 
     public void add(final String cardRequest, final int amount) {
-        PaperCard paperCard = StaticData.instance().getCommonCards().getCard(cardRequest);
-        final boolean isCommonCard = paperCard != null;
-        if (!isCommonCard) {
-            paperCard = StaticData.instance().getCustomCards().getCard(cardRequest);
-            if (paperCard == null) // not a custom card
-                paperCard = StaticData.instance().getVariantCards().getCard(cardRequest);
-            if (paperCard == null) {  // not even a variant then
-                StaticData.instance().attemptToLoadCard(cardRequest);
-                paperCard = StaticData.instance().getVariantCards().getCard(cardRequest);
-            }
+        Map<String, CardDb> dbs = StaticData.instance().getAvailableDatabases();
+        PaperCard paperCard = null;
+        for (CardDb db: dbs.values()){
+            paperCard = db.getCard(cardRequest);
+            if (paperCard != null)
+                break;
         }
-
         if (paperCard == null){
             System.err.print("An unsupported card was requested: \"" + cardRequest + "\". ");
             paperCard = StaticData.instance().getCommonCards().createUnsupportedCard(cardRequest);
