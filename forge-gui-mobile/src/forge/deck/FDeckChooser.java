@@ -633,6 +633,9 @@ public class FDeckChooser extends FScreen {
                             @Override
                             public void run() {
                                 GameType gameType = lstDecks.getGameType();
+                                if (gameType == GameType.DeckManager) {
+                                    gameType = GameType.Constructed;
+                                }
                                 final NetDeckArchiveStandard category = NetDeckArchiveStandard.selectAndLoad(gameType);
 
                                 FThreads.invokeInEdtLater(new Runnable() {
@@ -659,6 +662,9 @@ public class FDeckChooser extends FScreen {
                             @Override
                             public void run() {
                                 GameType gameType = lstDecks.getGameType();
+                                if (gameType == GameType.DeckManager) {
+                                    gameType = GameType.Constructed;
+                                }
                                 final NetDeckArchivePioneer category = NetDeckArchivePioneer.selectAndLoad(gameType);
 
                                 FThreads.invokeInEdtLater(new Runnable() {
@@ -685,6 +691,9 @@ public class FDeckChooser extends FScreen {
                             @Override
                             public void run() {
                                 GameType gameType = lstDecks.getGameType();
+                                if (gameType == GameType.DeckManager) {
+                                    gameType = GameType.Constructed;
+                                }
                                 final NetDeckArchiveModern category = NetDeckArchiveModern.selectAndLoad(gameType);
 
                                 FThreads.invokeInEdtLater(new Runnable() {
@@ -711,6 +720,9 @@ public class FDeckChooser extends FScreen {
                             @Override
                             public void run() {
                                 GameType gameType = lstDecks.getGameType();
+                                if (gameType == GameType.DeckManager) {
+                                    gameType = GameType.Constructed;
+                                }
                                 final NetDeckArchivePauper category = NetDeckArchivePauper.selectAndLoad(gameType);
 
                                 FThreads.invokeInEdtLater(new Runnable() {
@@ -737,6 +749,9 @@ public class FDeckChooser extends FScreen {
                             @Override
                             public void run() {
                                 GameType gameType = lstDecks.getGameType();
+                                if (gameType == GameType.DeckManager) {
+                                    gameType = GameType.Constructed;
+                                }
                                 final NetDeckArchiveLegacy category = NetDeckArchiveLegacy.selectAndLoad(gameType);
 
                                 FThreads.invokeInEdtLater(new Runnable() {
@@ -763,6 +778,9 @@ public class FDeckChooser extends FScreen {
                             @Override
                             public void run() {
                                 GameType gameType = lstDecks.getGameType();
+                                if (gameType == GameType.DeckManager) {
+                                    gameType = GameType.Constructed;
+                                }
                                 final NetDeckArchiveVintage category = NetDeckArchiveVintage.selectAndLoad(gameType);
 
                                 FThreads.invokeInEdtLater(new Runnable() {
@@ -789,6 +807,9 @@ public class FDeckChooser extends FScreen {
                             @Override
                             public void run() {
                                 GameType gameType = lstDecks.getGameType();
+                                if (gameType == GameType.DeckManager) {
+                                    gameType = GameType.Constructed;
+                                }
                                 final NetDeckArchiveBlock category = NetDeckArchiveBlock.selectAndLoad(gameType);
 
                                 FThreads.invokeInEdtLater(new Runnable() {
