@@ -52,6 +52,7 @@ public class FCardImageRenderer {
     private static BreakIterator boundary;
     private static Pattern linebreakPattern;
     private static Pattern reminderPattern;
+    private static Pattern reminderHidePattern;
     private static Pattern symbolPattern;
     private static Map<Font, Font[]> shrinkFonts;
 
@@ -60,6 +61,7 @@ public class FCardImageRenderer {
         boundary = BreakIterator.getLineInstance(locale);
         linebreakPattern = Pattern.compile("(\r\n\r\n)|(\n)");
         reminderPattern = Pattern.compile("\\((.+?)\\)");
+        reminderHidePattern = Pattern.compile(" \\((.+?)\\)");
         symbolPattern = Pattern.compile("\\{([A-Z0-9]+)\\}|\\{([A-Z0-9]+)/([A-Z0-9]+)\\}");
 
         NAME_FONT = new Font(Font.SERIF, Font.BOLD, 26);
@@ -68,8 +70,13 @@ public class FCardImageRenderer {
             TEXT_FONT = new Font(Font.SANS_SERIF, Font.PLAIN, 24);
             REMINDER_FONT = new Font(Font.SANS_SERIF, Font.PLAIN, 22);
         } else {
-            TEXT_FONT = new Font(Font.SERIF, Font.PLAIN, 24);
-            REMINDER_FONT = new Font(Font.SERIF, Font.ITALIC, 24);
+            if (FModel.getPreferences().getPrefBoolean(FPref.UI_CARD_IMAGE_RENDER_USE_SANS_SERIF_FONT)) {
+                TEXT_FONT = new Font(Font.SANS_SERIF, Font.PLAIN, 24);
+                REMINDER_FONT = new Font(Font.SANS_SERIF, Font.ITALIC, 24);
+            } else {
+                TEXT_FONT = new Font(Font.SERIF, Font.PLAIN, 24);
+                REMINDER_FONT = new Font(Font.SERIF, Font.ITALIC, 24);
+            }
         }
         PT_FONT = NAME_FONT;
 
@@ -966,10 +973,12 @@ public class FCardImageRenderer {
         }
     }
 
-    private static void drawTextBoxText(Graphics2D g, final String text, int x, int y, int w, int h, int flagPTBox) {
+    private static void drawTextBoxText(Graphics2D g, String text, int x, int y, int w, int h, int flagPTBox) {
         boolean hasPTBox = (flagPTBox & 1) == 1;
         boolean isLevelup = (flagPTBox & 2) == 2;
         boolean isLevelBox = (flagPTBox & 4) == 4;
+        if (FModel.getPreferences().getPrefBoolean(FPref.UI_CARD_IMAGE_RENDER_HIDE_REMINDER_TEXT))
+            text = reminderHidePattern.matcher(text).replaceAll("");
         String [] paragraphs = isLevelBox ? text.split(" ") : linebreakPattern.split(text);
         List<Paragraph> pgList = new ArrayList<>();
         for (String pg : paragraphs) {
