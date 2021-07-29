@@ -247,19 +247,19 @@ ScryfallCode=A25
 233 R Sundering Titan
 234 U Swiftfoot Boots
 235 U Treasure Keeper
-236 R Rishadan Port
-237 R Fetid Heath
-238 R Twilight Mire
-239 R Cascade Bluffs
-240 R Rugged Prairie
-241 R Flooded Grove
-242 R Mikokoro, Center of the Sea
-243 R Pendelhaven
-244 U Ash Barrens
-245 U Mishra's Factory
-246 C Haunted Fengraf
-247 U Myriad Landscape
-248 U Quicksand
+236 R Ash Barrens
+237 R Cascade Bluffs
+238 R Fetid Heath
+239 R Flooded Grove
+240 R Haunted Fengraf
+241 R Mikokoro, Center of the Sea
+242 R Mishra's Factory
+243 R Myriad Landscape
+244 U Pendelhaven
+245 U Quicksand
+246 C Rishadan Port
+247 U Rugged Prairie
+248 U Twilight Mire
 249 U Zoetic Cavern
 
 [tokens]
