@@ -163,8 +163,6 @@ public class DiscardAi extends SpellAbilityAi {
         return false;
     } // discardTargetAI()
 
-
-
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
@@ -211,9 +209,8 @@ public class DiscardAi extends SpellAbilityAi {
         return true;
     } // discardCheckDrawbackAI()
 
-
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
-        if ( mode == PlayerActionConfirmMode.Random ) { //
+        if ( mode == PlayerActionConfirmMode.Random ) {
             // TODO For now AI will always discard Random used currently with: Balduvian Horde and similar cards
             return true;
         }
