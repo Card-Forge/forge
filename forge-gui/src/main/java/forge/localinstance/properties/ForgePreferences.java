@@ -86,6 +86,8 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_IMAGE_CACHE_MAXIMUM("400"),
         UI_OVERLAY_FOIL_EFFECT ("true"),
         UI_HIDE_REMINDER_TEXT ("false"),
+        UI_CARD_IMAGE_RENDER_USE_SANS_SERIF_FONT ("true"),
+        UI_CARD_IMAGE_RENDER_HIDE_REMINDER_TEXT ("true"),
         UI_SR_OPTIMIZE ("false"),
         UI_OPEN_PACKS_INDIV ("false"),
         UI_STACK_CREATURES ("false"),
