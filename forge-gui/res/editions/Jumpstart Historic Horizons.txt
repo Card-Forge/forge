@@ -1,0 +1,22 @@
+[metadata]
+Code=J21
+Date=2021-08-12
+Name=Jumpstart: Historic Horizons
+Type=Draft
+ScryfallCode=J21
+
+[cards]
+0 C Baffling Defenses
+0 M Davriel, Soul Broker
+0 C Davriel's Withering
+0 C Ethereal Grasp
+0 C Faceless Agent
+0 C Lumbering Lightshield
+0 U Manor Guardian
+0 C Plaguecrafter's Familiar
+0 C Sarkhan's Scorn
+0 M Sarkhan, Wanderer to Shiv
+0 C Scion of Shiv
+0 R Subversive Acolyte
+0 R Tome of the Infinite
+0 U Wingsteed Trainer

@@ -47,7 +47,6 @@ public class DamageEachAi extends DamageAiBase {
      */
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-
         return mandatory || canPlayAI(ai, sa);
     }
 

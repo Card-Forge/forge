@@ -324,7 +324,7 @@ public class CountersPutAi extends SpellAbilityAi {
             return false;
         }
 
-        if (sourceName.equals("Feat of Resistance")) {    // sub-ability should take precedence
+        if (sourceName.equals("Feat of Resistance")) { // sub-ability should take precedence
             CardCollection prot = ProtectAi.getProtectCreatures(ai, sa.getSubAbility());
             if (!prot.isEmpty()) {
                 sa.getTargets().add(prot.get(0));
@@ -707,8 +707,7 @@ public class CountersPutAi extends SpellAbilityAi {
                 }
 
                 if (choice == null) { // can't find anything left
-                    if ((!sa.isTargetNumberValid())
-                            || (sa.getTargets().size() == 0)) {
+                    if ((!sa.isTargetNumberValid()) || (sa.getTargets().size() == 0)) {
                         sa.resetTargets();
                         return false;
                     } else {
