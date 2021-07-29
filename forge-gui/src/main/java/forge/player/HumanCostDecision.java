@@ -1023,7 +1023,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         if (cost.payCostFromSource()) {
             if (source.getController() == ability.getActivatingPlayer() && source.isInPlay()) {
-                return player.getController().confirmPayment(cost, Localizer.getInstance().getMessage("lblSacrificeCardConfirm", CardTranslation.getTranslatedName(source.getName())), ability) ? PaymentDecision.card(source) : null;
+                return ability.hasParam("CostMandatory") || player.getController().confirmPayment(cost, Localizer.getInstance().getMessage("lblSacrificeCardConfirm", CardTranslation.getTranslatedName(source.getName())), ability) ? PaymentDecision.card(source) : null;
             }
             return null;
         }
