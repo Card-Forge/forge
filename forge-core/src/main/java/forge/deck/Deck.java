@@ -331,7 +331,9 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         */
         boolean isLatestCardArtPreference = StaticData.instance().cardArtPreferenceIsLatest();
         CardEdition cardEdition = StaticData.instance().getCardEdition(card.getEdition());
+        if (cardEdition == null)  return false;
         Date releaseDate = cardEdition.getDate();
+        if (releaseDate == null)  return false;
         if (isLatestCardArtPreference)  // Latest Art
             return releaseDate.compareTo(referenceReleaseDate) > 0;
         // Original Art
