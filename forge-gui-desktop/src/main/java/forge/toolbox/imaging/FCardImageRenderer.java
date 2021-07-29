@@ -272,36 +272,47 @@ public class FCardImageRenderer {
             String [] paragraphs = linebreakPattern.split(text);
             StringBuilder sb = new StringBuilder();
             String text1 = "", text2 = "", text3 = "";
-            String level2 = null, level3 = null;
+            String level2 = "", level3 = "";
             String ptOverride2 = null, ptOverride3 = null;
-            boolean matchedLevel = false;
             for (String pg : paragraphs) {
-                if (pg.matches(".*[0-9]+-[0-9]+")) {
-                    text1 = sb.toString();
+                if (pg.matches("(.*[0-9]+-[0-9]+)|(.*[0-9]+\\+)")) {
+                    //add space before numbers in case there is no space.
+                    pg = pg.replaceAll("([^0-9 ]+)(([0-9]+-[0-9]+)|([0-9]+\\+))", "$1 $2");
+                    if (level2.isEmpty()) {
+                        text1 = sb.toString();
+                        level2 = pg;
+                    } else {
+                        text2 = sb.toString();
+                        level3 = pg;
+                    }
                     sb.setLength(0);
-                    level2 = pg;
-                    matchedLevel = true;
-                    continue;
-                } else if (pg.matches(".*[0-9]+\\+")) {
-                    text2 = sb.toString();
-                    sb.setLength(0);
-                    level3 = pg;
-                    matchedLevel = true;
                     continue;
                 }
-                if (!matchedLevel) {
-                    if (sb.length() > 0)
-                        sb.append("\n");
-                    sb.append(pg);
-                } else {
+                if (pg.matches("[0-9]+/[0-9]+")) {
                     if (ptOverride2 == null)
                         ptOverride2 = pg;
                     else
                         ptOverride3 = pg;
+                    continue;
                 }
-                matchedLevel = false;
+                if (sb.length() > 0)
+                    sb.append("\n");
+                sb.append(pg);
             }
             text3 = sb.toString();
+            //handle the case that translated text doesn't contains P/T info.
+            if (ptOverride2 == null) {
+                paragraphs = linebreakPattern.split(state.getOracleText());
+                for (String pg : paragraphs) {
+                    if (pg.matches("[0-9]+/[0-9]+")) {
+                        if (ptOverride2 == null)
+                            ptOverride2 = pg;
+                        else
+                            ptOverride3 = pg;
+                    }
+                }
+            }
+
             int textX = x + artInset;
 
             //draw text box
@@ -859,7 +870,11 @@ public class FCardImageRenderer {
                     }
                     pieces.add(new TextPiece(subtext.substring(parsed, sbMatcher.start()), isReminder));
                 }
-                symbols.add(sbMatcher.group(1) != null ? sbMatcher.group(1) : sbMatcher.group(2) + sbMatcher.group(3));
+                String symbol = sbMatcher.group(1) != null ? sbMatcher.group(1) :
+                    // switch position of "P" and mana color for phyrexian mana symbol.
+                    "P".equals(sbMatcher.group(3)) ? sbMatcher.group(3) + sbMatcher.group(2) :
+                    sbMatcher.group(2) + sbMatcher.group(3);
+                symbols.add(symbol);
                 parsed = sbMatcher.end();
             }
             if (!symbols.isEmpty()) {
