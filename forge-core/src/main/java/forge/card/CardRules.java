@@ -414,7 +414,7 @@ public final class CardRules implements ICardCharacteristics {
             String key = colonPos > 0 ? line.substring(0, colonPos) : line;
             String value = colonPos > 0 ? line.substring(1+colonPos).trim() : null;
 
-            switch(key.charAt(0)) {
+            switch (key.charAt(0)) {
                 case 'A':
                     if ("A".equals(key)) {
                         this.faces[curFace].addAbility(value);

@@ -759,7 +759,6 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         };
     }
 
-
     ///////// Utility methods
     public static boolean isACardType(final String cardType) {
         return CoreType.isValidEnum(cardType);
