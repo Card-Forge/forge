@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant creature you control
 A:SP$ Attach | Cost$ W | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Enchanted creature gets +1/+1.
-T:Mode$ DamageDone | ValidSource$ Card.EnchantedBy | ValidTarget$ Player | Execute$ TrigDestroy| CombatDamage$ True | TriggerDescription$ Whenever enchanted creature deals combat damage to a player, you may sacrifice CARDNAME. If you do, destroy target enchantment.
+T:Mode$ DamageDone | ValidSource$ Card.EnchantedBy | ValidTarget$ Player | Execute$ TrigDestroy | CombatDamage$ True | TriggerDescription$ Whenever enchanted creature deals combat damage to a player, you may sacrifice CARDNAME. If you do, destroy target enchantment.
 SVar:TrigDestroy:AB$ Destroy | Cost$ Sac<1/CARDNAME> | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mortal_obstinacy.jpg
 Oracle:Enchant creature you control\nEnchanted creature gets +1/+1.\nWhenever enchanted creature deals combat damage to a player, you may sacrifice Mortal Obstinacy. If you do, destroy target enchantment.

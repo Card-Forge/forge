@@ -4,8 +4,6 @@ Types:Creature Human Pilot
 PT:2/3
 K:First Strike
 T:Mode$ Taps | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigDiscard | TriggerDescription$ Whenever CARDNAME becomes tapped, you may discard a card. If you do, draw a card.
-SVar:TrigDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True 
+SVar:TrigDiscard:AB$ Draw | NumCards$ 1 | Cost$ Discard<1/Card>
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reckless_racer.jpg
 Oracle:First strike\nWhenever Reckless Racer becomes tapped, you may discard a card. If you do, draw a card.

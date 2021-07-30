@@ -3,9 +3,7 @@ ManaCost:2 R
 Types:Creature Human Rogue
 PT:2/1
 K:Riot
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ Whenever CARDNAME attacks, you may discard a card. If you do, draw a card.
-SVar:TrigDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | RememberDiscarded$ True | Optional$ True | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME attacks, you may discard a card. If you do, draw a card.
+SVar:TrigDraw:AB$ Draw | NumCards$ 1 | Cost$ Discard<1/Card>
 DeckHas:Ability$Counters
 Oracle:Riot (This creature enters the battlefield with your choice of a +1/+1 counter or haste.)\nWhenever Burning-Tree Vandal attacks, you may discard a card. If you do, draw a card.

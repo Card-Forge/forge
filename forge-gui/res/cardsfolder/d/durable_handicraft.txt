@@ -2,7 +2,7 @@ Name:Durable Handicraft
 ManaCost:1 G
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature enters the battlefield under your control, you may pay {1}. If you do, put a +1/+1 counter on that creature.
-SVar:TrigPutCounter:AB$PutCounter | Cost$ 1 | Defined$ TriggeredCardLKICopy | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigPutCounter:AB$ PutCounter | Cost$ 1 | Defined$ TriggeredCardLKICopy | CounterType$ P1P1 | CounterNum$ 1
 A:AB$ PutCounterAll | Cost$ 5 G Sac<1/CARDNAME> | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each creature you control.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/durable_handicraft.jpg
 Oracle:Whenever a creature enters the battlefield under your control, you may pay {1}. If you do, put a +1/+1 counter on that creature.\n{5}{G}, Sacrifice Durable Handicraft: Put a +1/+1 counter on each creature you control.

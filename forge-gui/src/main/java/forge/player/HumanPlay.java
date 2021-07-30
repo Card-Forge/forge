@@ -44,6 +44,7 @@ import forge.gamemodes.match.input.InputPayManaOfCostPayment;
 import forge.gamemodes.match.input.InputSelectCardsFromList;
 import forge.gui.FThreads;
 import forge.gui.util.SGuiChoose;
+import forge.util.Aggregates;
 import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
@@ -565,15 +566,21 @@ public class HumanPlay {
                 if (!hasPaid) { return false; }
             }
             else if (part instanceof CostDiscard) {
+                int amount = getAmountFromPartX(part, source, sourceAbility);
                 if ("Hand".equals(part.getType())) {
                     if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantDiscardYourHand"), sourceAbility)) {
                         return false;
                     }
 
                     ((CostDiscard)part).payAsDecided(p, PaymentDecision.card(p.getCardsIn(ZoneType.Hand)), sourceAbility);
+                } else if ("Random".equals(part.getType())) {
+                    if (!part.canPay(sourceAbility, p) || !p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblWouldYouLikeRandomDiscardTargetCard", amount), sourceAbility)) {
+                        return false;
+                    }
+
+                    ((CostDiscard)part).payAsDecided(p, (PaymentDecision.card(Aggregates.random(p.getCardsIn(ZoneType.Hand), amount, new CardCollection()))), sourceAbility);
                 } else {
                     CardCollectionView list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), part.getType(), p, source, sourceAbility);
-                    int amount = getAmountFromPartX(part, source, sourceAbility);
                     boolean hasPaid = payCostPart(controller, p, sourceAbility, (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lbldiscard") + orString);
                     if (!hasPaid) { return false; }
                 }
