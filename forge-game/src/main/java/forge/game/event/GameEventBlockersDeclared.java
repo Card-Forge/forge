@@ -20,7 +20,7 @@ public class GameEventBlockersDeclared extends GameEvent {
 
     public final Map<GameEntity, MapOfLists<Card, Card>> blockers;
     public final Player defendingPlayer;
-    
+
     public GameEventBlockersDeclared(Player who, Map<GameEntity, MapOfLists<Card, Card>> blockers) {
         this.blockers = blockers;
         defendingPlayer = who;

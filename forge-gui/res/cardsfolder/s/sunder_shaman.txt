@@ -4,5 +4,5 @@ Types:Creature Giant Shaman
 PT:5/5
 K:CantBeBlockedByAmount GT1
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, destroy target artifact or enchantment that player controls.
-SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact.DefenderCtrl,Enchantment.DefenderCtrl | TgtPrompt$ Select target artifact or enchantment that player controls.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact.ControlledBy TriggeredDefendingPlayer,Enchantment.ControlledBy TriggeredDefendingPlayer | TgtPrompt$ Select target artifact or enchantment that player controls.
 Oracle:Sunder Shaman can't be blocked by more than one creature.\nWhenever Sunder Shaman deals combat damage to a player, destroy target artifact or enchantment that player controls.

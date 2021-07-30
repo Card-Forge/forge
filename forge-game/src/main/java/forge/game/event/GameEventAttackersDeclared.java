@@ -14,7 +14,7 @@ public class GameEventAttackersDeclared extends GameEvent {
 
     public final Player player;
     public final Multimap<GameEntity, Card> attackersMap;
-    
+
     public GameEventAttackersDeclared(Player playerTurn, Multimap<GameEntity, Card> attackersMap) {
         this.player = playerTurn;
         this.attackersMap = attackersMap;

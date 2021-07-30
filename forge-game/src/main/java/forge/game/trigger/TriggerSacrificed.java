@@ -116,7 +116,6 @@ public class TriggerSacrificed extends Trigger {
         return true;
     }
 
-
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {

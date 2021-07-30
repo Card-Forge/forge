@@ -3,10 +3,10 @@ package forge.game.event;
 import forge.game.player.Player;
 
 public class GameEventSurveil extends GameEvent {
-    
+
     public final Player player;
     public final int toLibrary, toGraveyard;
-    
+
     public GameEventSurveil(Player player, int toLibrary, int toGraveyard) {
         this.player = player;
         this.toLibrary = toLibrary;
@@ -18,4 +18,3 @@ public class GameEventSurveil extends GameEvent {
         return visitor.visit(this);
     }
 }
-

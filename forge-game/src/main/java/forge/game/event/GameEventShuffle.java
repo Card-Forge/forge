@@ -5,9 +5,9 @@ import forge.util.Lang;
 import forge.util.TextUtil;
 
 public class GameEventShuffle extends GameEvent {
-    
+
     public final Player player;
-    
+
     public GameEventShuffle(Player player) {
         this.player = player;
     }
@@ -16,7 +16,7 @@ public class GameEventShuffle extends GameEvent {
     public <T> T visit(IGameEventVisitor<T> visitor) {
         return visitor.visit(this);
     }
-    
+
     /* (non-Javadoc)
      * @see java.lang.Object#toString()
      */

@@ -19,8 +19,7 @@ public class GameEventPlayerPoisoned extends GameEvent {
         oldValue = old;
         amount = num;
     }
-    
-    
+
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {
         return visitor.visit(this);

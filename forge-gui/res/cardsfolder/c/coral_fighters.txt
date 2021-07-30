@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Creature Merfolk Soldier
 PT:1/1
 T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, look at the top card of defending player's library. You may put that card on the bottom of that player's library.
-SVar:TrigDig:DB$ Dig | Defined$ DefendingPlayer | DigNum$ 1 | AnyNumber$ True | DestinationZone$ Library | LibraryPosition2$ 0
+SVar:TrigDig:DB$ Dig | Defined$ TriggeredDefendingPlayer | DigNum$ 1 | AnyNumber$ True | DestinationZone$ Library | LibraryPosition2$ 0
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coral_fighters.jpg
 Oracle:Whenever Coral Fighters attacks and isn't blocked, look at the top card of defending player's library. You may put that card on the bottom of that player's library.

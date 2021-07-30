@@ -4,6 +4,6 @@ Types:Creature Insect
 PT:0/1
 K:Flying
 T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPoison | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, defending player gets a poison counter. (A player with ten or more poison counters loses the game.)
-SVar:TrigPoison:DB$ Poison | Defined$ DefendingPlayer | Num$ 1
+SVar:TrigPoison:DB$ Poison | Defined$ TriggeredDefendingPlayer | Num$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/swamp_mosquito.jpg
 Oracle:Flying\nWhenever Swamp Mosquito attacks and isn't blocked, defending player gets a poison counter. (A player with ten or more poison counters loses the game.)

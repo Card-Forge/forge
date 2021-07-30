@@ -53,7 +53,6 @@ public class TriggerUnattach extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-
         if (!matchesValidParam("ValidObject", runParams.get(AbilityKey.Object))) {
             return false;
         }

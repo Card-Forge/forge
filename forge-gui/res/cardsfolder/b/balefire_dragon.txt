@@ -4,7 +4,7 @@ Types:Creature Dragon
 PT:6/6
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, it deals that much damage to each creature that player controls.
-SVar:TrigDamage:DB$ DamageAll | NumDmg$ X | ValidCards$ Creature.DefenderCtrl
+SVar:TrigDamage:DB$ DamageAll | NumDmg$ X | ValidCards$ Creature.ControlledBy TriggeredDefendingPlayer
 SVar:X:TriggerCount$DamageAmount
 SVar:MustBeBlocked:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/balefire_dragon.jpg

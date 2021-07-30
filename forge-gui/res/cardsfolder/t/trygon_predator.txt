@@ -4,6 +4,6 @@ Types:Creature Beast
 PT:2/3
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | OptionalDecider$ You | CombatDamage$ True | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may destroy target artifact or enchantment that player controls.
-SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact.DefenderCtrl,Enchantment.DefenderCtrl | TgtPrompt$ Select target artifact or enchantment you don't control.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact.ControlledBy TriggeredDefendingPlayer,Enchantment.ControlledBy TriggeredDefendingPlayer | TgtPrompt$ Select target artifact or enchantment you don't control.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/trygon_predator.jpg
 Oracle:Flying\nWhenever Trygon Predator deals combat damage to a player, you may destroy target artifact or enchantment that player controls.

@@ -77,6 +77,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.combat.Combat;
+import forge.game.combat.CombatLki;
 import forge.game.cost.Cost;
 import forge.game.cost.CostSacrifice;
 import forge.game.event.GameEventCardAttachment;
@@ -352,6 +353,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private final Table<SpellAbility, StaticAbility, List<String>> chosenModesTurnStatic = HashBasedTable.create();
     private final Table<SpellAbility, StaticAbility, List<String>> chosenModesGameStatic = HashBasedTable.create();
+
+    private CombatLki combatLKI = null;
 
     // Enumeration for CMC request types
     public enum SplitCMCMode {
@@ -4728,6 +4731,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         setPhasedOut(!phasedOut);
         final Combat combat = getGame().getPhaseHandler().getCombat();
         if (combat != null && phasedOut) {
+            combat.saveLKI(this);
             combat.removeFromCombat(this);
         }
 
@@ -6981,5 +6985,19 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public final void clearUntilLeavesBattlefield() {
         untilLeavesBattlefield = view.clearCards(untilLeavesBattlefield, TrackableProperty.UntilLeavesBattlefield);
+    }
+
+    public CombatLki getCombatLKI() {
+        return combatLKI;
+    }
+    public void setCombatLKI(CombatLki combatLKI) {
+        this.combatLKI = combatLKI;
+    }
+
+    public boolean isAttacking() {
+        if (getCombatLKI() != null) {
+            return getCombatLKI().isAttacker;
+        }
+        return getGame().getCombat().isAttacking(this);
     }
 }

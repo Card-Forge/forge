@@ -4,6 +4,6 @@ Types:Creature Spirit
 PT:5/6
 K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | OptionalDecider$ Opponent | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME attacks, defending player may draw a card.
-SVar:TrigDraw:DB$ Draw | Defined$ DefendingPlayer | NumCards$ 1
+SVar:TrigDraw:DB$ Draw | Defined$ TriggeredDefendingPlayer | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sibilant_spirit.jpg
 Oracle:Flying\nWhenever Sibilant Spirit attacks, defending player may draw a card.

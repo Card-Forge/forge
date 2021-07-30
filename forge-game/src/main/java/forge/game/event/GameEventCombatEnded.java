@@ -8,7 +8,7 @@ public class GameEventCombatEnded extends GameEvent {
 
     public final List<Card> attackers;
     public final List<Card> blockers;
-    
+
     public GameEventCombatEnded(List<Card> attackers, List<Card> blockers) {
         this.attackers = attackers;
         this.blockers = blockers;
