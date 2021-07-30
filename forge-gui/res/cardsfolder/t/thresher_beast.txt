@@ -3,7 +3,7 @@ ManaCost:3 G G
 Types:Creature Beast
 PT:4/4
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ Whenever CARDNAME becomes blocked, defending player sacrifices a land.
-SVar:TrigSac:DB$ Sacrifice | SacValid$ Land | Defined$ DefendingPlayer | ChangeNum$ 1
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Land | Defined$ TriggeredDefendingPlayer | ChangeNum$ 1
 SVar:HasAttackEffect:Blocked
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thresher_beast.jpg
 Oracle:Whenever Thresher Beast becomes blocked, defending player sacrifices a land.

@@ -70,4 +70,3 @@ public class TriggerFightOnce extends Trigger {
         return sb.toString();
     }
 }
-

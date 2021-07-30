@@ -59,6 +59,7 @@ public class RemoveFromCombatEffect extends SpellAbilityEffect {
                     }
                 }
 
+                game.getCombat().saveLKI(c);
                 combat.removeFromCombat(c);
 
                 if (rem) {

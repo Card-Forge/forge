@@ -55,7 +55,6 @@ public class TriggerDamagePreventedOnce extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-
         if (!matchesValidParam("ValidTarget", runParams.get(AbilityKey.DamageTarget))) {
             return false;
         }

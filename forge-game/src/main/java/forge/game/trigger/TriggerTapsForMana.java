@@ -56,8 +56,7 @@ public class TriggerTapsForMana extends Trigger {
     /** {@inheritDoc}
      * @param runParams*/
     @Override
-    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {        
         //Check for tapping
         if (!hasParam("NoTapCheck")) {
             final SpellAbility manaAbility = (SpellAbility) runParams.get(AbilityKey.AbilityMana);
@@ -93,7 +92,6 @@ public class TriggerTapsForMana extends Trigger {
 
         return true;
     }
-
 
     /** {@inheritDoc} */
     @Override

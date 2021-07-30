@@ -137,7 +137,6 @@ public enum TriggerType {
      * @return
      */
     public static TriggerType smartValueOf(String value) {
-
         final String valToCompate = value.trim();
         for (final TriggerType v : TriggerType.values()) {
             if (v.name().compareToIgnoreCase(valToCompate) == 0) {

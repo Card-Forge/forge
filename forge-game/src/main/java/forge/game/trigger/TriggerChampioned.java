@@ -55,7 +55,6 @@ public class TriggerChampioned extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-
         if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Championed))) {
             return false;
         }

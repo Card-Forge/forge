@@ -21,7 +21,6 @@ public class TriggerDamageDoneOnce extends Trigger {
     @SuppressWarnings("unchecked")
     @Override
     public boolean performTest(Map<AbilityKey, Object> runParams) {
-
         if (hasParam("CombatDamage")) {
             if (getParam("CombatDamage").equals("True")) {
                 if (!((Boolean) runParams.get(AbilityKey.IsCombatDamage))) {

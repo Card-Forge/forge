@@ -3,6 +3,6 @@ ManaCost:R
 Types:Creature Dwarf Wizard
 PT:1/1
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDamage | CombatDamage$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may have CARDNAME deal 1 damage to target creature that player controls.
-SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select target creature | NumDmg$ 1 | OptionalDecider$ You
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature.ControlledBy TriggeredDefendingPlayer | TgtPrompt$ Select target creature | NumDmg$ 1 | OptionalDecider$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spark_mage.jpg
 Oracle:Whenever Spark Mage deals combat damage to a player, you may have Spark Mage deal 1 damage to target creature that player controls.

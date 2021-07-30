@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Instant
 A:SP$ Animate | Cost$ 2 R | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Triggers$ TrigDamage | sVars$ Damage,CommandoRaidX | SpellDescription$ Until end of turn, target creature you control gains "When this creature deals combat damage to a player, you may have it deal damage equal to its power to target creature that player controls."
 SVar:TrigDamage:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ Damage | OptionalDecider$ You | TriggerDescription$ When this creature deals combat damage to a player, you may have it deal damage equal to its power to target creature that player controls.
-SVar:Damage:DB$ DealDamage | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select target creature defending player controls | NumDmg$ CommandoRaidX
+SVar:Damage:DB$ DealDamage | ValidTgts$ Creature.ControlledBy TriggeredDefendingPlayer | TgtPrompt$ Select target creature defending player controls | NumDmg$ CommandoRaidX
 SVar:CommandoRaidX:Count$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/commando_raid.jpg
 Oracle:Until end of turn, target creature you control gains "When this creature deals combat damage to a player, you may have it deal damage equal to its power to target creature that player controls."

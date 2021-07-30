@@ -22,12 +22,11 @@ public class GameEventGameStarted extends GameEvent {
         this.players = players;
     }
 
-    
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {
         return visitor.visit(this);
     }
-    
+
     /* (non-Javadoc)
      * @see java.lang.Object#toString()
      */

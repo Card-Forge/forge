@@ -12,8 +12,7 @@ public class GameEventGameOutcome extends GameEvent {
         this.result = lastOne;
         this.history = history;
     }
-    
-    
+
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {
         return visitor.visit(this);

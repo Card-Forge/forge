@@ -65,5 +65,4 @@ public class TriggerTransformed extends Trigger {
         return sb.toString();
     }
 
-
 }

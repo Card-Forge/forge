@@ -52,14 +52,12 @@ public class TriggerAbandoned extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-
         if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Scheme))) {
             return false;
         }
 
         return true;
     }
-
 
     /** {@inheritDoc} */
     @Override
@@ -72,4 +70,3 @@ public class TriggerAbandoned extends Trigger {
         return "";
     }
 }
-

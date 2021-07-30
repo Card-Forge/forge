@@ -5,7 +5,7 @@ PT:3/7
 K:Flying
 K:Hexproof
 T:Mode$ Attacks | ValidCard$ Dragon.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigMassacre | TriggerDescription$ Whenever a Dragon you control attacks, creatures defending player control each get -1/-1 until end of turn.
-SVar:TrigMassacre:DB$ PumpAll | NumAtt$ -1 | NumDef$ -1 | ValidCards$ TriggeredAttacker.Creature+DefenderCtrl | IsCurse$ True
+SVar:TrigMassacre:DB$ PumpAll | NumAtt$ -1 | NumDef$ -1 | ValidCards$ TriggeredAttacker.Creature+ControlledBy TriggeredDefendingPlayer | IsCurse$ True
 SVar:BuffedBy:Dragon
 DeckHints:Type$Dragon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silumgar_the_drifting_death.jpg
