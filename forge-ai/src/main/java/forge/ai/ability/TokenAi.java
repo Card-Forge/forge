@@ -250,9 +250,6 @@ public class TokenAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        String tokenAmount = sa.getParamOrDefault("TokenAmount", "1");
-
-        final Card source = sa.getHostCard();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
             sa.resetTargets();
@@ -262,16 +259,21 @@ public class TokenAi extends SpellAbilityAi {
                 sa.getTargets().add(ai);
             }
         }
+
         Card actualToken = spawnToken(ai, sa);
         String tokenPower = sa.getParamOrDefault("TokenPower", actualToken.getBasePowerString());
         String tokenToughness = sa.getParamOrDefault("TokenToughness", actualToken.getBaseToughnessString());
+        String tokenAmount = sa.getParamOrDefault("TokenAmount", "1");
+        final Card source = sa.getHostCard();
 
         if ("X".equals(tokenAmount) || "X".equals(tokenPower) || "X".equals(tokenToughness)) {
             int x = AbilityUtils.calculateAmount(source, tokenAmount, sa);
             if (sa.getSVar("X").equals("Count$xPaid")) {
-                // Set PayX here to maximum value.
-                x = ComputerUtilCost.getMaxXValue(sa, ai);
-                sa.setXManaCostPaid(x);
+                if (x == 0) { // already paid outside trigger
+                    // Set PayX here to maximum value.
+                    x = ComputerUtilCost.getMaxXValue(sa, ai);
+                    sa.setXManaCostPaid(x);
+                }
             }
             if (x <= 0) {
                 return false;

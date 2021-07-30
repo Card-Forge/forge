@@ -695,8 +695,9 @@ public class ComputerUtilCost {
 
     public static int getMaxXValue(SpellAbility sa, Player ai) {
         final Card source = sa.getHostCard();
-        final SpellAbility root = sa.getRootAbility();
+        SpellAbility root = sa.getRootAbility();
         final Cost abCost = root.getPayCosts();
+
         if (abCost == null || !abCost.hasXInAnyCostPart()) {
             return 0;
         }

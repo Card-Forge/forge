@@ -1412,7 +1412,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     @Override
     public int addCounter(final CounterType counterType, final int n, final Player source, final SpellAbility cause, final boolean applyMultiplier, final boolean fireEvents, GameEntityCounterTable table) {
         int addAmount = n;
-        if(addAmount <= 0 || !canReceiveCounters(counterType)) {
+        if (addAmount <= 0 || !canReceiveCounters(counterType)) {
             // As per rule 107.1b
             return 0;
         }
