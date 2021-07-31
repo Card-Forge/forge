@@ -53,7 +53,11 @@ public class TriggerDamageDoneOnce extends Trigger {
         @SuppressWarnings("unchecked")
         final Map<Card, Integer> damageMap = (Map<Card, Integer>) runParams.get(AbilityKey.DamageMap);
 
-        sa.setTriggeringObject(AbilityKey.Target, CardUtil.getLKICopy((Card)runParams.get(AbilityKey.DamageTarget)));
+        Object target = runParams.get(AbilityKey.DamageTarget);
+        if (target instanceof Card) {
+            target = CardUtil.getLKICopy((Card)runParams.get(AbilityKey.DamageTarget));
+        }
+        sa.setTriggeringObject(AbilityKey.Target, target);
         sa.setTriggeringObject(AbilityKey.Sources, getDamageSources(damageMap));
         sa.setTriggeringObject(AbilityKey.DamageAmount, getDamageAmount(damageMap));
     }
