@@ -15,7 +15,7 @@ public class ImageUtil {
     }
 
     public static PaperCard getPaperCardFromImageKey(String key) {
-        if ( key == null ) {
+        if (key == null) {
             return null;
         }
 
