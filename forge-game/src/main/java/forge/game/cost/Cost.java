@@ -240,8 +240,7 @@ public class Cost implements Serializable {
                 xCantBe0 = true;
             } else if ("Mandatory".equals(part)) {
                 this.isMandatory = true;
-            }
-            else {
+            } else {
                 CostPart cp = parseCostPart(part, tapCost, untapCost);
                 if (null != cp )
                     if (cp instanceof CostPartMana ) {
@@ -268,7 +267,6 @@ public class Cost implements Serializable {
     }
 
     private static CostPart parseCostPart(String parse, boolean tapCost, boolean untapCost) {
-
         if (parse.startsWith("Mana<")) {
             final String[] splitStr = TextUtil.split(abCostParse(parse, 1)[0], '\\');
             final String restriction = splitStr.length > 1 ? splitStr[1] : null;

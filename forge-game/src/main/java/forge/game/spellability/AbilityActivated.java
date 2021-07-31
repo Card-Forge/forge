@@ -65,7 +65,7 @@ public abstract class AbilityActivated extends SpellAbility implements Cloneable
         this.setTargetRestrictions(tgt);
     }
 
-    public boolean isActivatedAbility() { return true; }
+    public boolean isActivatedAbility() { return !isTrigger(); }
 
     /** {@inheritDoc} */
     @Override

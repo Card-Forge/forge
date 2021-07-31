@@ -178,7 +178,6 @@ public final class AbilityFactory {
         return getAbility(type, type.getApiTypeOf(mapParams), mapParams, parseAbilityCost(state, mapParams, type), state, sVarHolder);
     }
 
-
     public static Cost parseAbilityCost(final CardState state, Map<String, String> mapParams, AbilityRecordType type) {
         Cost abCost = null;
         if (type != AbilityRecordType.SubAbility) {
