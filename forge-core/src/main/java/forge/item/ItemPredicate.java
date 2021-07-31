@@ -3,9 +3,6 @@ package forge.item;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
-
-
-
 /**
  * Filtering conditions for miscellaneous InventoryItems.
  */
