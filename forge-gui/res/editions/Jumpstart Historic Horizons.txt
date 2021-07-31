@@ -14,7 +14,7 @@ ScryfallCode=J21
 0 C Ethereal Grasp
 0 C Faceless Agent
 0 M Kiora, the Tide's Fury
-0 C Longtusk Staker
+0 C Longtusk Stalker
 0 C Lumbering Lightshield
 0 R Managorger Phoenix
 0 U Manor Guardian
