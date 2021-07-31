@@ -6229,7 +6229,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return false;
         }
 
-        if (source == null){
+        if (source == null) {
             return true;
         }
 

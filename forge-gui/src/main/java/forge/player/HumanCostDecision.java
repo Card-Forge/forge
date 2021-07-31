@@ -567,7 +567,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         // for costs declared mandatory, this is only reachable with a valid amount
-        if (ability.getPayCosts().isMandatory() || (player.canPayLife(c) && player.getController().confirmPayment(cost, Localizer.getInstance().getMessage("lblPayNLifeConfirm", String.valueOf(c)),ability))) {
+        if (ability.getPayCosts().isMandatory() || (player.canPayLife(c) && player.getController().confirmPayment(cost, Localizer.getInstance().getMessage("lblPayNLifeConfirm", String.valueOf(c)), ability))) {
             return PaymentDecision.number(c);
         }
         return null;
@@ -1023,7 +1023,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         if (cost.payCostFromSource()) {
             if (source.getController() == ability.getActivatingPlayer() && source.isInPlay()) {
-                return ability.hasParam("CostMandatory") || player.getController().confirmPayment(cost, Localizer.getInstance().getMessage("lblSacrificeCardConfirm", CardTranslation.getTranslatedName(source.getName())), ability) ? PaymentDecision.card(source) : null;
+                return ability.getPayCosts().isMandatory() || player.getController().confirmPayment(cost, Localizer.getInstance().getMessage("lblSacrificeCardConfirm", CardTranslation.getTranslatedName(source.getName())), ability) ? PaymentDecision.card(source) : null;
             }
             return null;
         }
@@ -1059,7 +1059,6 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         return PaymentDecision.card(inp.getSelected());
-
     }
 
     @Override
