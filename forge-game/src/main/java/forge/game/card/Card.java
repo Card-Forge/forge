@@ -2035,6 +2035,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         sbx.append(" (").append(inst.getReminderText()).append(")");
                         sbLong.append(sbx).append("\r\n");
                     }
+                } else if (keyword.startsWith("Trample:")) {
+                    sbLong.append("Trample over planeswalkers").append(" (").append(inst.getReminderText()).append(")").append("\r\n");
                 } else if (keyword.startsWith("Hexproof:")) {
                     final String[] k = keyword.split(":");
                     sbLong.append("Hexproof from ").append(k[2])
@@ -2061,7 +2063,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.equals("Suspend") // for the ones without amount
                         || keyword.equals("Foretell") // for the ones without cost
                         || keyword.equals("Hideaway") || keyword.equals("Ascend")
-                        || keyword.equals("Trample over planeswalkers")
                         || keyword.equals("Totem armor") || keyword.equals("Battle cry")
                         || keyword.equals("Devoid") || keyword.equals("Riot")){
                     sbLong.append(keyword).append(" (").append(inst.getReminderText()).append(")");

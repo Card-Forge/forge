@@ -779,7 +779,7 @@ public class Combat {
             assignedDamage = true;
             GameEntity defender = getDefenderByAttacker(band);
             // If the Attacker is unblocked, or it's a trampler and has 0 blockers, deal damage to defender
-            if (defender instanceof Card && attacker.hasKeyword("Trample over planeswalkers")) {
+            if (defender instanceof Card && attacker.hasKeyword("Trample:Planeswalker")) {
                 if (orderedBlockers == null || orderedBlockers.isEmpty()) {
                     CardCollection cc = new CardCollection();
                     cc.add((Card)defender);
