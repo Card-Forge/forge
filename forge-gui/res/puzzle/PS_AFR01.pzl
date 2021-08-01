@@ -1,0 +1,18 @@
+[metadata]
+Name:Possibility Storm - Adventures in the Forgotten Realms #01
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2021/07/179.-AFR1-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Remember that your solution must satisfy all possible blocking options! Assume your opponent has no mana available.
+[state]
+humanlife=20
+ailife=20
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Choose Your Weapon;Old Gnawbone;Inferno of the Star Mounts;Titanic Growth
+humanbattlefield=Minion of the Mighty|Counters:P1P1=2;Leafkin Avenger;Belt of Giant Strength;Forest;Forest;Mountain;Mountain;Mountain
+aibattlefield=Faerie Formation
+aiprecast=Faerie Formation:CustomScript:DB$ Token | TokenScript$ u_1_1_faerie_flying;Faerie Formation:CustomScript:DB$ Token | TokenScript$ u_1_1_faerie_flying
+removesummoningsickness=true
