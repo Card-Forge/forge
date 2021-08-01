@@ -165,7 +165,7 @@ public class ImageCache {
             if (StringUtils.isBlank(imageKey)) {
                 return _defaultImage;
             }
-        } else if (imageKey.startsWith(ImageKeys.TOKEN_PREFIX) && cardView.isToken()) {
+        } else if (imageKey.startsWith(ImageKeys.TOKEN_PREFIX) && cardView != null && cardView.isToken()) {
             ipc = ImageUtil.getPaperTokenFromImageKey(imageKey);
         }
 
