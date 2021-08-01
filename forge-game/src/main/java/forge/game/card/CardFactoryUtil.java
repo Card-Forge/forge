@@ -518,6 +518,7 @@ public class CardFactoryUtil {
         final Set<String> protectionkw = Sets.newHashSet();
         final Set<String> protectionColorkw = Sets.newHashSet();
         final Set<String> hexproofkw = Sets.newHashSet();
+        final Set<String> tramplekw = Sets.newHashSet();
         final Set<String> allkw = Sets.newHashSet();
 
         for (Card c : CardLists.getValidCards(cardlist, restrictions, p, host, null)) {
@@ -535,6 +536,8 @@ public class CardFactoryUtil {
                     }
                 } else if (k.startsWith("Hexproof")) {
                     hexproofkw.add(k);
+                } else if (k.startsWith("Trample")) {
+                    tramplekw.add(k);
                 }
                 allkw.add(k);
             }
@@ -548,6 +551,8 @@ public class CardFactoryUtil {
                 filteredkw.addAll(landkw);
             } else if (keyword.equals("Hexproof")) {
                 filteredkw.addAll(hexproofkw);
+            } else if (keyword.equals("Trample")) {
+                filteredkw.addAll(tramplekw);
             } else if (allkw.contains(keyword)) {
                 filteredkw.add(keyword);
             }
