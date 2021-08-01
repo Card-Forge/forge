@@ -754,11 +754,11 @@ public class AiController {
         }
 
         // state needs to be switched here so API checks evaluate the right face
-        if (sa.getCardState().getStateName() == CardStateName.Modal) {
+        if (sa.getCardState() != null && sa.getCardState().getStateName() == CardStateName.Modal) {
             sa.getHostCard().setState(CardStateName.Modal, false);
         }
         AiPlayDecision canPlay = canPlaySa(sa); // this is the "heaviest" check, which also sets up targets, defines X, etc.
-        if (sa.getCardState().getStateName() == CardStateName.Modal) {
+        if (sa.getCardState() != null && sa.getCardState().getStateName() == CardStateName.Modal) {
             sa.getHostCard().setState(CardStateName.Original, false);
         }
 
