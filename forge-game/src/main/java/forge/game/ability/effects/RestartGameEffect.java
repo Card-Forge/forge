@@ -49,6 +49,7 @@ public class RestartGameEffect extends SpellAbilityEffect {
         game.clearCounterAddedThisTurn();
         game.resetPlayersAttackedOnNextTurn();
         game.resetPlayersAttackedOnNextTurn();
+        game.setMonarch(null);
         GameAction action = game.getAction();
 
         for (Player p: players) {
@@ -59,6 +60,7 @@ public class RestartGameEffect extends SpellAbilityEffect {
             p.setLandsPlayedLastTurn(0);
             p.resetCommanderStats();
             p.resetCompletedDungeons();
+            p.setBlessing(false);
 
             CardCollection newLibrary = new CardCollection(p.getCardsIn(restartZones, false));
             List<Card> filteredCards = null;
@@ -111,4 +113,3 @@ public class RestartGameEffect extends SpellAbilityEffect {
         return TextUtil.fastReplace(desc, "CARDNAME", sa.getHostCard().getName());
     }
 }
-

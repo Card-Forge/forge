@@ -3221,21 +3221,21 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public void updateKeywordCardAbilityText() {
-        if(getKeywordCard() == null)
+        if (getKeywordCard() == null)
             return;
         final PlayerZone com = getZone(ZoneType.Command);
         keywordEffect.setText("");
         keywordEffect.updateAbilityTextForView();
         boolean headerAdded = false;
         StringBuilder kw = new StringBuilder();
-        for(KeywordInterface k : keywords) {
-            if(!headerAdded) {
+        for (KeywordInterface k : keywords) {
+            if (!headerAdded) {
                 headerAdded = true;
                 kw.append(this.getName()).append(" has: \n");
             }
             kw.append(k).append("\n");
         }
-        if(!kw.toString().isEmpty()) {
+        if (!kw.toString().isEmpty()) {
             keywordEffect.setText(trimKeywords(kw.toString()));
             keywordEffect.updateAbilityTextForView();
         }
@@ -3275,7 +3275,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         final PlayerZone com = getZone(ZoneType.Command);
 
-        if(bless) {
+        if (bless) {
             blessingEffect = new Card(game.nextCardId(), null, game);
             blessingEffect.setOwner(this);
             blessingEffect.setImageKey("t:blessing");
