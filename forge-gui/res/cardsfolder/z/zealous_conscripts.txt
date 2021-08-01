@@ -4,7 +4,7 @@ Types:Creature Human Warrior
 PT:3/3
 K:Haste
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, untap target permanent and gain control of it until end of turn. It gains haste until end of turn.
-SVar:TrigChange:DB$GainControl | TgtPrompt$ Choose target permanent | ValidTgts$ Permanent | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Untap target permanent gain control of it until end of turn. It gains haste until end of turn.
+SVar:TrigChange:DB$ GainControl | TgtPrompt$ Choose target permanent | ValidTgts$ Permanent | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Untap target permanent gain control of it until end of turn. It gains haste until end of turn.
 SVar:PlayMain1:OPPONENTCREATURES
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zealous_conscripts.jpg
 Oracle:Haste\nWhen Zealous Conscripts enters the battlefield, gain control of target permanent until end of turn. Untap that permanent. It gains haste until end of turn.
