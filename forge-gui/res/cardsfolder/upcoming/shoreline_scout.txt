@@ -1,0 +1,12 @@
+Name:Shoreline Scout
+ManaCost:U
+Types:Creature Merfolk Scout
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may exile a Merfolk card or a land card from your hand. If you do, conjure a Tropical Island card into your hand.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | Hidden$ True | ChangeType$ Card.Merfolk,Card.Land | SelectPrompt$ Select target Merfolk card or land card | SubAbility$ DBConjure | RememberChanged$ True
+SVar:DBConjure:DB$ MakeCard | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ1 | Name$ Tropical Island | Zone$ Hand
+S:Mode$ Continuous | CheckSVar$ X | SVarCompare$ GE1 | Affected$ Card.Self | AddPower$ 1 | Description$ As long as another Merfolk or an Island entered the battlefield under your control this turn, CARDNAME gets +1/+0.
+SVar:X:Count$Valid Merfolk.Other+ThisTurnEntered+EnteredUnder You/Plus.Y
+SVar:Y:Count$Valid Island.ThisTurnEntered+EnteredUnder You
+DeckHints:Type$Merfolk
+Oracle:When Shoreline Scout enters the battlefield, you may exile a Merfolk card or a land card from your hand. If you do, conjure a Tropical Island card into your hand.\nAs long as another Merfolk or an Island entered the battlefield under your control this turn, Shoreline Scout gets +1/+0.
