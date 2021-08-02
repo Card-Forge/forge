@@ -7,16 +7,30 @@ ScryfallCode=J21
 
 [cards]
 0 C Baffling Defenses
+0 U Boneyard Aberration
+0 C Bounty of the Deep
 0 M Davriel, Soul Broker
 0 C Davriel's Withering
 0 C Ethereal Grasp
 0 C Faceless Agent
+0 M Kiora, the Tide's Fury
+0 C Longtusk Stalker
 0 C Lumbering Lightshield
+0 R Managorger Phoenix
 0 U Manor Guardian
 0 C Plaguecrafter's Familiar
+0 R Pool of Vigorous Growth
 0 C Sarkhan's Scorn
 0 M Sarkhan, Wanderer to Shiv
 0 C Scion of Shiv
+0 U Shoreline Scout
+0 C Skyshroud Ambush
+0 U Static Discharge
 0 R Subversive Acolyte
 0 R Tome of the Infinite
+0 C Veteran Charger
 0 U Wingsteed Trainer
+
+[tokens]
+
+u_8_8_kraken
