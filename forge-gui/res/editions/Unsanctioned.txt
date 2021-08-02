@@ -29,7 +29,7 @@ ScryfallCode=UND
 18 M B.O.B. (Bevy of Beebles) @Jeff Miracola
 19 C Carnivorous Death-Parrot @Greg Hildebrandt
 20 U Cheatyface @Doug Chaffee
-21 R Chicken a la King @Mark Zug
+21 R Chicken à la King @Mark Zug
 22 U Common Courtesy @Mike Raabe
 23 R Johnny, Combo Player @Kensuke Okabayashi
 24 C Magic Word @Carl Frank
