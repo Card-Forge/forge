@@ -24,7 +24,6 @@ public class SurveilAi extends SpellAbilityAi {
      */
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-
         if (sa.usesTargeting()) { // TODO: It doesn't appear that Surveil ever targets, is this necessary?
             sa.resetTargets();
             sa.getTargets().add(ai);
@@ -60,7 +59,7 @@ public class SurveilAi extends SpellAbilityAi {
         // in the player's turn Surveil should only be done in Main1 or in Upkeep if able
         if (ph.isPlayerTurn(ai)) {
             if (SpellAbilityAi.isSorcerySpeed(sa)) {
-                return ph.is(PhaseType.MAIN1) || sa.hasParam("Planeswalker");
+                return ph.is(PhaseType.MAIN1) || sa.isPwAbility();
             } else {
                 return ph.is(PhaseType.UPKEEP);
             }

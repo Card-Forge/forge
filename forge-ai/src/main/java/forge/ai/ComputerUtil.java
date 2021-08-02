@@ -1307,7 +1307,7 @@ public class ComputerUtil {
         }
         if (abCost.hasTapCost() && source.hasSVar("AITapDown")) {
             return true;
-        } else if (sa.hasParam("Planeswalker") && ai.getGame().getPhaseHandler().is(PhaseType.MAIN2)) {
+        } else if (sa.isPwAbility() && ai.getGame().getPhaseHandler().is(PhaseType.MAIN2)) {
             for (final CostPart part : abCost.getCostParts()) {
                 if (part instanceof CostPutCounter) {
                     return true;
@@ -2859,7 +2859,6 @@ public class ComputerUtil {
     public static boolean lifegainNegative(final Player player, final Card source) {
         return lifegainNegative(player, source, 1);
     }
-
     public static boolean lifegainNegative(final Player player, final Card source, final int n) {
         if (!player.canGainLife()) {
             return false;

@@ -56,7 +56,7 @@ public class ImageUtil {
 
         int artIdx = cp.getArtIndex() - 1;
         if (hasManyPictures) {
-            if ( cntPictures <= artIdx ) // prevent overflow
+            if (cntPictures <= artIdx) // prevent overflow
                 artIdx = cntPictures == 0 ? 0 : artIdx % cntPictures;
             s.append(artIdx + 1);
         }
@@ -91,8 +91,8 @@ public class ImageUtil {
 
     public static String getNameToUse(PaperCard cp, boolean backFace) {
         final CardRules card = cp.getRules();
-        if (backFace ) {
-            if ( hasBackFacePicture(cp) )
+        if (backFace) {
+            if (hasBackFacePicture(cp))
                 if (card.getOtherPart() != null) {
                     return card.getOtherPart().getName();
                 } else if (!card.getMeldWith().isEmpty()) {
