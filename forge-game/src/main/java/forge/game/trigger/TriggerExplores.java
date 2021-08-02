@@ -73,4 +73,3 @@ public class TriggerExplores extends Trigger {
         return sb.toString();
     }
 }
-

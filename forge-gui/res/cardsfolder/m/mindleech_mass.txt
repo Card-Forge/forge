@@ -5,6 +5,6 @@ PT:6/6
 K:Trample
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigReveal | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may look at that player's hand. If you do, you may cast a spell from among those cards without paying its mana cost.
 SVar:TrigReveal:DB$ RevealHand | Defined$ TriggeredTarget | SubAbility$ TrigPlay
-SVar:TrigPlay:DB$ Play | Valid$ Card.DefenderCtrl | ValidZone$ Hand | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True
+SVar:TrigPlay:DB$ Play | Valid$ Card.ControlledBy TriggeredDefendingPlayer | ValidZone$ Hand | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mindleech_mass.jpg
 Oracle:Trample\nWhenever Mindleech Mass deals combat damage to a player, you may look at that player's hand. If you do, you may cast a spell from among those cards without paying its mana cost.

@@ -40,7 +40,6 @@ public class PrintSheet {
 
     private final ItemPool<PaperCard> cardsWithWeights;
 
-
     private final String name;
     public PrintSheet(String name0) {
         this(name0, null);

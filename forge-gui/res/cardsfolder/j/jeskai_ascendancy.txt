@@ -2,11 +2,10 @@ Name:Jeskai Ascendancy
 ManaCost:U R W
 Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPumpAll | TriggerDescription$ Whenever you cast a noncreature spell, creatures you control get +1/+1 until end of turn. Untap those creatures.
-T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoot | OptionalDecider$ You | TriggerDescription$ Whenever you cast a noncreature spell, you may draw a card. If you do, discard a card.
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoot | TriggerDescription$ Whenever you cast a noncreature spell, you may draw a card. If you do, discard a card.
 SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ 1 | NumDef$ 1 | SubAbility$ TrigUntapAll
 SVar:TrigUntapAll:DB$ UntapAll | ValidCards$ Creature.YouCtrl
-SVar:TrigLoot:DB$Draw | NumCards$ 1 | SubAbility$ DBDiscard
-SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
+SVar:TrigLoot:AB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1 | Cost$ Draw<1/You>
 SVar:BuffedBy:Card.nonCreature+nonLand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jeskai_ascendancy.jpg
 Oracle:Whenever you cast a noncreature spell, creatures you control get +1/+1 until end of turn. Untap those creatures.\nWhenever you cast a noncreature spell, you may draw a card. If you do, discard a card.

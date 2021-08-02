@@ -46,7 +46,7 @@ public class RegenerateEffect extends RegenerateBaseEffect {
     @Override
     public void resolve(SpellAbility sa) {
         // create Effect for Regeneration
-        createRengenerationEffect(sa, getTargetCards(sa));
-    } // regenerateResolve
+        createRegenerationEffect(sa, getTargetCards(sa));
+    }
 
 }

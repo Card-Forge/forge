@@ -15,7 +15,7 @@ public class ImageUtil {
     }
 
     public static PaperCard getPaperCardFromImageKey(String key) {
-        if ( key == null ) {
+        if (key == null) {
             return null;
         }
 
@@ -42,6 +42,10 @@ public class ImageUtil {
             String edition = key.substring(index + 1);
             if (script.startsWith("emblem"))
                 return null;
+            if (null == StaticData.instance().getCardEdition(edition)) {
+                script = key;
+                edition = "???";
+            }
             script = script.replaceAll("[0-9]*$", "");
             return StaticData.instance().getAllTokens().getToken(script, edition);
         }

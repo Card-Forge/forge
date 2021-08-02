@@ -115,8 +115,7 @@ public class AttachAi extends SpellAbilityAi {
         }
 
         if (abCost.getTotalMana().countX() > 0 && sa.getSVar("X").equals("Count$xPaid")) {
-            // Set PayX here to maximum value. (Endless Scream and Venarian
-            // Gold)
+            // Set PayX here to maximum value. (Endless Scream and Venarian Gold)
             final int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
 
             if (xPay == 0) {

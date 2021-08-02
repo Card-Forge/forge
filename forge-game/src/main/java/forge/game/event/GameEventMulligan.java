@@ -12,8 +12,7 @@ public class GameEventMulligan extends GameEvent {
     public GameEventMulligan(Player p) {
         player = p;
     }
-    
-    
+
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {
         return visitor.visit(this);

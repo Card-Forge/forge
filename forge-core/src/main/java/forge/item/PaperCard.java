@@ -351,4 +351,3 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
                 || (this.getName().equals("Mountain"));
     }
 }
-

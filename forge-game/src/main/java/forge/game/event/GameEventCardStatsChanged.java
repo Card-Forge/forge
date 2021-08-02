@@ -18,7 +18,7 @@ public class GameEventCardStatsChanged extends GameEvent {
     public GameEventCardStatsChanged(Card affected) {
         cards = Arrays.asList(affected);
     }
-    
+
     public GameEventCardStatsChanged(Collection<Card> affected) {
         cards = affected;
     }
@@ -31,13 +31,13 @@ public class GameEventCardStatsChanged extends GameEvent {
         // TODO Auto-generated method stub
         return visitor.visit(this);
     }
-    
+
     @Override
     public String toString() {
         Card card = Iterables.getFirst(cards, null);
-        if ( null == card )
+        if (null == card)
             return "Card state changes: (empty list)";
-        if( cards.size() == 1) 
+        if (cards.size() == 1) 
             return "Card state changes: " + card.getName() +
                   " (" + StringUtils.join(card.getType(), ' ') + ") " +
                   card.getNetPower() + "/" + card.getNetToughness();

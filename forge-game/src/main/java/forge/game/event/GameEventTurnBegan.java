@@ -4,10 +4,10 @@ import forge.game.player.Player;
 import forge.util.TextUtil;
 
 public class GameEventTurnBegan extends GameEvent {
-    
+
     public final Player turnOwner;
     public final int turnNumber;
-    
+
     public GameEventTurnBegan(Player turnOwner, int turnNumber) {
         super();
         this.turnOwner = turnOwner;
@@ -18,7 +18,7 @@ public class GameEventTurnBegan extends GameEvent {
     public <T> T visit(IGameEventVisitor<T> visitor) {
         return visitor.visit(this);
     }
-    
+
     /* (non-Javadoc)
      * @see java.lang.Object#toString()
      */

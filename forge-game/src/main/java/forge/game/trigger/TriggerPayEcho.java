@@ -66,7 +66,6 @@ public class TriggerPayEcho extends Trigger {
         return true;
     }
 
-
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {

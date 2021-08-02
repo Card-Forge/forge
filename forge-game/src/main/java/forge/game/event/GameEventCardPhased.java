@@ -10,7 +10,7 @@ public class GameEventCardPhased extends GameEvent {
 
     public final Card card; 
     public final boolean phaseState;
-    
+
     public GameEventCardPhased(Card card, boolean state) {
         this.card = card;
         phaseState = state;
@@ -20,7 +20,7 @@ public class GameEventCardPhased extends GameEvent {
     public <T> T visit(IGameEventVisitor<T> visitor) {
         return visitor.visit(this);
     }
-    
+
     /* (non-Javadoc)
      * @see java.lang.Object#toString()
      */

@@ -17,7 +17,7 @@ import forge.game.zone.ZoneType;
 
 public abstract class RegenerateBaseEffect extends SpellAbilityEffect {
 
-    public void createRengenerationEffect(SpellAbility sa, final Iterable<Card> list) {
+    public void createRegenerationEffect(SpellAbility sa, final Iterable<Card> list) {
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
 

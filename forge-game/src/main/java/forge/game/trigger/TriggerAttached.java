@@ -63,7 +63,6 @@ public class TriggerAttached extends Trigger {
         
         return true;
     }
-    
 
     /** {@inheritDoc} */
     @Override

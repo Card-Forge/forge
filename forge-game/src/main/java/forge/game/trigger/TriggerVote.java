@@ -82,7 +82,6 @@ public class TriggerVote extends Trigger {
         return sb.toString();
     }
 
-
     private static FCollection<Player> getVoters(final Player player,
             final ListMultimap<Object, Player> votes,
             final boolean isOpponent, final boolean votedOtherchoice) {

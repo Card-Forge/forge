@@ -52,6 +52,7 @@ public class FCardImageRenderer {
     private static BreakIterator boundary;
     private static Pattern linebreakPattern;
     private static Pattern reminderPattern;
+    private static Pattern reminderHidePattern;
     private static Pattern symbolPattern;
     private static Map<Font, Font[]> shrinkFonts;
 
@@ -60,6 +61,7 @@ public class FCardImageRenderer {
         boundary = BreakIterator.getLineInstance(locale);
         linebreakPattern = Pattern.compile("(\r\n\r\n)|(\n)");
         reminderPattern = Pattern.compile("\\((.+?)\\)");
+        reminderHidePattern = Pattern.compile(" \\((.+?)\\)");
         symbolPattern = Pattern.compile("\\{([A-Z0-9]+)\\}|\\{([A-Z0-9]+)/([A-Z0-9]+)\\}");
 
         NAME_FONT = new Font(Font.SERIF, Font.BOLD, 26);
@@ -68,8 +70,13 @@ public class FCardImageRenderer {
             TEXT_FONT = new Font(Font.SANS_SERIF, Font.PLAIN, 24);
             REMINDER_FONT = new Font(Font.SANS_SERIF, Font.PLAIN, 22);
         } else {
-            TEXT_FONT = new Font(Font.SERIF, Font.PLAIN, 24);
-            REMINDER_FONT = new Font(Font.SERIF, Font.ITALIC, 24);
+            if (FModel.getPreferences().getPrefBoolean(FPref.UI_CARD_IMAGE_RENDER_USE_SANS_SERIF_FONT)) {
+                TEXT_FONT = new Font(Font.SANS_SERIF, Font.PLAIN, 24);
+                REMINDER_FONT = new Font(Font.SANS_SERIF, Font.ITALIC, 24);
+            } else {
+                TEXT_FONT = new Font(Font.SERIF, Font.PLAIN, 24);
+                REMINDER_FONT = new Font(Font.SERIF, Font.ITALIC, 24);
+            }
         }
         PT_FONT = NAME_FONT;
 
@@ -272,36 +279,47 @@ public class FCardImageRenderer {
             String [] paragraphs = linebreakPattern.split(text);
             StringBuilder sb = new StringBuilder();
             String text1 = "", text2 = "", text3 = "";
-            String level2 = null, level3 = null;
+            String level2 = "", level3 = "";
             String ptOverride2 = null, ptOverride3 = null;
-            boolean matchedLevel = false;
             for (String pg : paragraphs) {
-                if (pg.matches(".*[0-9]+-[0-9]+")) {
-                    text1 = sb.toString();
+                if (pg.matches("(.*[0-9]+-[0-9]+)|(.*[0-9]+\\+)")) {
+                    //add space before numbers in case there is no space.
+                    pg = pg.replaceAll("([^0-9 ]+)(([0-9]+-[0-9]+)|([0-9]+\\+))", "$1 $2");
+                    if (level2.isEmpty()) {
+                        text1 = sb.toString();
+                        level2 = pg;
+                    } else {
+                        text2 = sb.toString();
+                        level3 = pg;
+                    }
                     sb.setLength(0);
-                    level2 = pg;
-                    matchedLevel = true;
-                    continue;
-                } else if (pg.matches(".*[0-9]+\\+")) {
-                    text2 = sb.toString();
-                    sb.setLength(0);
-                    level3 = pg;
-                    matchedLevel = true;
                     continue;
                 }
-                if (!matchedLevel) {
-                    if (sb.length() > 0)
-                        sb.append("\n");
-                    sb.append(pg);
-                } else {
+                if (pg.matches("[0-9]+/[0-9]+")) {
                     if (ptOverride2 == null)
                         ptOverride2 = pg;
                     else
                         ptOverride3 = pg;
+                    continue;
                 }
-                matchedLevel = false;
+                if (sb.length() > 0)
+                    sb.append("\n");
+                sb.append(pg);
             }
             text3 = sb.toString();
+            //handle the case that translated text doesn't contains P/T info.
+            if (ptOverride2 == null) {
+                paragraphs = linebreakPattern.split(state.getOracleText());
+                for (String pg : paragraphs) {
+                    if (pg.matches("[0-9]+/[0-9]+")) {
+                        if (ptOverride2 == null)
+                            ptOverride2 = pg;
+                        else
+                            ptOverride3 = pg;
+                    }
+                }
+            }
+
             int textX = x + artInset;
 
             //draw text box
@@ -859,7 +877,11 @@ public class FCardImageRenderer {
                     }
                     pieces.add(new TextPiece(subtext.substring(parsed, sbMatcher.start()), isReminder));
                 }
-                symbols.add(sbMatcher.group(1) != null ? sbMatcher.group(1) : sbMatcher.group(2) + sbMatcher.group(3));
+                String symbol = sbMatcher.group(1) != null ? sbMatcher.group(1) :
+                    // switch position of "P" and mana color for phyrexian mana symbol.
+                    "P".equals(sbMatcher.group(3)) ? sbMatcher.group(3) + sbMatcher.group(2) :
+                    sbMatcher.group(2) + sbMatcher.group(3);
+                symbols.add(symbol);
                 parsed = sbMatcher.end();
             }
             if (!symbols.isEmpty()) {
@@ -951,10 +973,12 @@ public class FCardImageRenderer {
         }
     }
 
-    private static void drawTextBoxText(Graphics2D g, final String text, int x, int y, int w, int h, int flagPTBox) {
+    private static void drawTextBoxText(Graphics2D g, String text, int x, int y, int w, int h, int flagPTBox) {
         boolean hasPTBox = (flagPTBox & 1) == 1;
         boolean isLevelup = (flagPTBox & 2) == 2;
         boolean isLevelBox = (flagPTBox & 4) == 4;
+        if (FModel.getPreferences().getPrefBoolean(FPref.UI_CARD_IMAGE_RENDER_HIDE_REMINDER_TEXT))
+            text = reminderHidePattern.matcher(text).replaceAll("");
         String [] paragraphs = isLevelBox ? text.split(" ") : linebreakPattern.split(text);
         List<Paragraph> pgList = new ArrayList<>();
         for (String pg : paragraphs) {

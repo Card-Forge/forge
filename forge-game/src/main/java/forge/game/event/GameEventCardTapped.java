@@ -10,8 +10,7 @@ public class GameEventCardTapped extends GameEvent {
         this.tapped = tapped;
         this.card = card;
     }
-    
-    
+
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {
         return visitor.visit(this);

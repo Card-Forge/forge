@@ -3,6 +3,6 @@ ManaCost:3 G
 Types:Creature Elemental
 PT:2/2
 T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, you may destroy target artifact defending player controls. If you do, CARDNAME assigns no combat damage this turn.
-SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact.DefenderCtrl | TgtPrompt$ Select target artifact | SubAbility$ DBPump
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact.ControlledBy TriggeredDefendingPlayer | TgtPrompt$ Select target artifact | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME assigns no combat damage
 Oracle:Whenever Floral Spuzzem attacks and isn't blocked, you may destroy target artifact defending player controls. If you do, Floral Spuzzem assigns no combat damage this turn.

@@ -10,8 +10,7 @@ public class GameEventAnteCardsSelected extends GameEvent {
     public GameEventAnteCardsSelected(Multimap<Player, Card> list) {
         cards = list;
     }
-    
-    
+
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {
         return visitor.visit(this);

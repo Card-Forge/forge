@@ -97,6 +97,9 @@ public class CounterType implements Comparable<CounterType>, Serializable {
             final String[] k = sVal.split(":");
             return "Hexproof from " + k[2];
         }
+        if (sVal.startsWith("Trample:")) {
+            return "Trample over Planeswalkers";
+        }
         return sVal;
     }
 
@@ -117,6 +120,9 @@ public class CounterType implements Comparable<CounterType>, Serializable {
             return false;
         }
         if (sVal.startsWith("Hexproof:")) {
+            return true;
+        }
+        if (sVal.startsWith("Trample:")) {
             return true;
         }
         return keywordCounter.contains(sVal);

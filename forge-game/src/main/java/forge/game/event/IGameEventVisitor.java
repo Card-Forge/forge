@@ -105,4 +105,3 @@ public interface IGameEventVisitor<T> {
         public T visit(GameEventZone event) { return null; }
     }
 }
-

@@ -366,7 +366,6 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
             if (!Expressions.compare(left, presentCompare, right)) {
                 return false;
             }
-
         }
 
         if (params.containsKey("IsPresent2")) {

@@ -156,7 +156,7 @@ public class ImageCache {
 
         IPaperCard ipc = null;
         boolean altState = imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX);
-        if(altState)
+        if (altState)
             imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.BACKFACE_POSTFIX.length());
         if (imageKey.startsWith(ImageKeys.CARD_PREFIX)) {
             PaperCard pc = ImageUtil.getPaperCardFromImageKey(imageKey);
@@ -165,7 +165,7 @@ public class ImageCache {
             if (StringUtils.isBlank(imageKey)) {
                 return _defaultImage;
             }
-        } else if (imageKey.startsWith(ImageKeys.TOKEN_PREFIX)) {
+        } else if (imageKey.startsWith(ImageKeys.TOKEN_PREFIX) && cardView != null && cardView.isToken()) {
             ipc = ImageUtil.getPaperTokenFromImageKey(imageKey);
         }
 

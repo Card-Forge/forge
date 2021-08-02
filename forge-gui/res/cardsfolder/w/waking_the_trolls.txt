@@ -4,7 +4,7 @@ Types:Enchantment Saga
 K:Saga:3:DBDestroy,DBChangeZone,DBPump
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Land | TgtPrompt$ Choose target land. | SpellDescription$ Destroy target land.
 SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Land | TgtPrompt$ Choose target land card. | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | SpellDescription$ Put target land card from a graveyard onto the battlefield under your control.
-SVar:DBPump:DB$ Pump | ValidTgts$ Player.Opponent | RememberTargets$ True | TgtPrompt$ Choose target player. | SubAbility$ DBToken | SpellDescription$ Choose target player. If they control fewer lands than you, create a number of 4/4 green Troll Warrior creature tokens with trample equal to the difference.
+SVar:DBPump:DB$ Pump | ValidTgts$ Player.Opponent | RememberTargets$ True | IsCurse$ True | TgtPrompt$ Choose target player. | SubAbility$ DBToken | SpellDescription$ Choose target player. If they control fewer lands than you, create a number of 4/4 green Troll Warrior creature tokens with trample equal to the difference.
 SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ g_4_4_troll_warrior_trample | TokenOwner$ You | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Land.YouCtrl/Minus.Y

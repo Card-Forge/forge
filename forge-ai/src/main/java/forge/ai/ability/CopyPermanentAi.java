@@ -45,7 +45,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
         }
 
         if ("MomirAvatar".equals(aiLogic)) {
-                return SpecialCardAi.MomirVigAvatar.consider(aiPlayer, sa);
+            return SpecialCardAi.MomirVigAvatar.consider(aiPlayer, sa);
         } else if ("MimicVat".equals(aiLogic)) {
             return SpecialCardAi.MimicVat.considerCopy(aiPlayer, sa);
         } else if ("AtEOT".equals(aiLogic)) {
@@ -59,7 +59,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
             }
         }
 
-        if (sa.hasParam("AtEOT") && !aiPlayer.getGame().getPhaseHandler().is(PhaseType.MAIN1)) {
+        if (sa.hasParam("AtEOT") && !ph.is(PhaseType.MAIN1)) {
             return false;
         }
 
@@ -118,7 +118,6 @@ public class CopyPermanentAi extends SpellAbilityAi {
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         final boolean canCopyLegendary = sa.hasParam("NonLegendary");
 
-        
         // ////
         // Targeting
         if (sa.usesTargeting()) {

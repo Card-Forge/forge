@@ -2,9 +2,7 @@ Name:Standstill
 ManaCost:1 U
 Types:Enchantment
 T:Mode$ SpellCast | ValidActivatingPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When a player casts a spell, sacrifice CARDNAME. If you do, each of that player's opponents draws three cards.
-SVar:TrigSac:DB$ Sacrifice | SacValid$ Self | RememberSacrificed$ True | SubAbility$ DrawOpp
-SVar:DrawOpp:DB$ Draw | NumCards$ 3 | Defined$ TriggeredCardOpponent | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:TrigSac:AB$ Draw | NumCards$ 3 | Cost$ Mandatory Sac<1/CARDNAME> | Defined$ TriggeredCardOpponent
 SVar:X:Remembered$Amount
 SVar:Y:Count$Valid Creature.YouCtrl
 SVar:Z:Count$Valid Creature.OppCtrl

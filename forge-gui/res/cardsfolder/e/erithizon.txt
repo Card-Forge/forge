@@ -3,7 +3,7 @@ ManaCost:2 G G
 Types:Creature Beast
 PT:4/4
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME attacks, put a +1/+1 counter on target creature of defending player's choice.
-SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | TargetingPlayer$ DefendingPlayer
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | TargetingPlayer$ TriggeredDefendingPlayer
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/erithizon.jpg
 Oracle:Whenever Erithizon attacks, put a +1/+1 counter on target creature of defending player's choice.

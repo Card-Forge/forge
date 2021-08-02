@@ -2,8 +2,7 @@ Name:Shipwreck Looter
 ManaCost:1 U
 Types:Creature Human Pirate
 PT:2/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ RaidTest | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ Raid — When CARDNAME enters the battlefield, if you attacked this turn, you may draw a card. If you do, discard a card.
-SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBDiscard
-SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ RaidTest | Execute$ TrigDraw | TriggerDescription$ Raid — When CARDNAME enters the battlefield, if you attacked this turn, you may draw a card. If you do, discard a card.
+SVar:TrigDraw:AB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | Cost$ Draw<1/You>
 SVar:RaidTest:Count$AttackersDeclared
 Oracle:Raid — When Shipwreck Looter enters the battlefield, if you attacked this turn, you may draw a card. If you do, discard a card.

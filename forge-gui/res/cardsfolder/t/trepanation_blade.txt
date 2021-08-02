@@ -3,7 +3,7 @@ ManaCost:3
 Types:Artifact Equipment
 K:Equip:2
 T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Execute$ TrigDig | TriggerDescription$ Whenever equipped creature attacks, defending player reveals cards from the top of their library until their reveals a land card. The creature gets +1/+0 until end of turn for each card revealed this way. That player puts the revealed cards into their graveyard.
-SVar:TrigDig:DB$ DigUntil | Defined$ DefendingPlayer | Valid$ Land | ValidDescription$ land | RevealedDestination$ Graveyard | RememberRevealed$ True | SubAbility$ TrigPump
+SVar:TrigDig:DB$ DigUntil | Defined$ TriggeredDefendingPlayer | Valid$ Land | ValidDescription$ land | RevealedDestination$ Graveyard | RememberRevealed$ True | SubAbility$ TrigPump
 SVar:TrigPump:DB$ Pump | Defined$ Equipped | NumAtt$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount

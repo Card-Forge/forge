@@ -45,6 +45,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardDamageMap;
+import forge.game.card.CardUtil;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementType;
@@ -75,7 +76,7 @@ public class Combat {
 
     private Map<Card, CardCollection> attackersOrderedForDamageAssignment = Maps.newHashMap();
     private Map<Card, CardCollection> blockersOrderedForDamageAssignment = Maps.newHashMap();
-    private Map<GameEntity, CombatLki> lkiCache = Maps.newHashMap();
+    private CardCollection lkiCache = new CardCollection();
     private CardDamageMap damageMap = new CardDamageMap();
 
     // List holds creatures who have dealt 1st strike damage to disallow them deal damage on regular basis (unless they have double-strike KW)
@@ -300,7 +301,7 @@ public class Combat {
                 return ab;
             }
         }
-        CombatLki lki = lkiCache.get(c);
+        CombatLki lki = lkiCache.get(c).getCombatLKI();
         return lki == null || !lki.isAttacker ? null : lki.getFirstBand();
     }
 
@@ -314,14 +315,6 @@ public class Combat {
 
     public final List<AttackingBand> getAttackingBands() {
         return Lists.newArrayList(attackedByBands.values());
-    }
-
-    /**
-     * Checks if a card is attacking, returns true if the card was attacking when it left the battlefield
-     */
-    public final boolean isLKIAttacking(final Card c) {
-        AttackingBand ab = getBandOfAttacker(c);
-        return ab != null;
     }
 
     public boolean isAttacking(Card card, GameEntity defender) {
@@ -786,7 +779,7 @@ public class Combat {
             assignedDamage = true;
             GameEntity defender = getDefenderByAttacker(band);
             // If the Attacker is unblocked, or it's a trampler and has 0 blockers, deal damage to defender
-            if (defender instanceof Card && attacker.hasKeyword("Trample over planeswalkers")) {
+            if (defender instanceof Card && attacker.hasKeyword("Trample:Planeswalker")) {
                 if (orderedBlockers == null || orderedBlockers.isEmpty()) {
                     CardCollection cc = new CardCollection();
                     cc.add((Card)defender);
@@ -918,7 +911,7 @@ public class Combat {
             return false;
         }
 
-        CombatLki lki = lkiCache.get(blocker);
+        CombatLki lki = lkiCache.get(blocker).getCombatLKI();
         return null != lki && !lki.isAttacker; // was blocking something anyway
     }
 
@@ -933,21 +926,36 @@ public class Combat {
             return false;
         }
 
-        CombatLki lki = lkiCache.get(blocker);
+        CombatLki lki = lkiCache.get(blocker).getCombatLKI();
         return null != lki && !lki.isAttacker && lki.relatedBands.contains(ab); // was blocking that very band
     }
 
-    public void saveLKI(Card lastKnownInfo) {
+    public CombatLki saveLKI(Card lki) {
+        if (!lki.isLKI()) {
+            lki = CardUtil.getLKICopy(lki);
+        }
         FCollectionView<AttackingBand> attackersBlocked = null;
-        final AttackingBand attackingBand = getBandOfAttacker(lastKnownInfo);
+        final AttackingBand attackingBand = getBandOfAttacker(lki);
         final boolean isAttacker = attackingBand != null;
-        if (!isAttacker) {
-            attackersBlocked = getAttackingBandsBlockedBy(lastKnownInfo);
+        if (isAttacker) {
+            boolean found = false;
+            for (AttackingBand ab : attackedByBands.values()) {
+                if (ab.contains(lki)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                return null;
+            }
+        } else {
+            attackersBlocked = getAttackingBandsBlockedBy(lki);
             if (attackersBlocked.isEmpty()) {
-                return; // card was not even in combat
+                return null; // card was not even in combat
             }
         }
+        lkiCache.add(lki);
         final FCollectionView<AttackingBand> relatedBands = isAttacker ? new FCollection<>(attackingBand) : attackersBlocked;
-        lkiCache.put(lastKnownInfo, new CombatLki(isAttacker, relatedBands));
+        return new CombatLki(isAttacker, relatedBands);
     }
 }

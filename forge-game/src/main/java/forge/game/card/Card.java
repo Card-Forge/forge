@@ -32,6 +32,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.combat.Combat;
+import forge.game.combat.CombatLki;
 import forge.game.cost.Cost;
 import forge.game.cost.CostSacrifice;
 import forge.game.event.*;
@@ -294,6 +295,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private final Table<SpellAbility, StaticAbility, List<String>> chosenModesTurnStatic = HashBasedTable.create();
     private final Table<SpellAbility, StaticAbility, List<String>> chosenModesGameStatic = HashBasedTable.create();
+
+    private CombatLki combatLKI = null;
 
     // Enumeration for CMC request types
     public enum SplitCMCMode {
@@ -1354,7 +1357,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     @Override
     public int addCounter(final CounterType counterType, final int n, final Player source, final SpellAbility cause, final boolean applyMultiplier, final boolean fireEvents, GameEntityCounterTable table) {
         int addAmount = n;
-        if(addAmount <= 0 || !canReceiveCounters(counterType)) {
+        if (addAmount <= 0 || !canReceiveCounters(counterType)) {
             // As per rule 107.1b
             return 0;
         }
@@ -1974,6 +1977,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         sbx.append(" (").append(inst.getReminderText()).append(")");
                         sbLong.append(sbx).append("\r\n");
                     }
+                } else if (keyword.startsWith("Trample:")) {
+                    sbLong.append("Trample over planeswalkers").append(" (").append(inst.getReminderText()).append(")").append("\r\n");
                 } else if (keyword.startsWith("Hexproof:")) {
                     final String[] k = keyword.split(":");
                     sbLong.append("Hexproof from ").append(k[2])
@@ -2000,7 +2005,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.equals("Suspend") // for the ones without amount
                         || keyword.equals("Foretell") // for the ones without cost
                         || keyword.equals("Hideaway") || keyword.equals("Ascend")
-                        || keyword.equals("Trample over planeswalkers")
                         || keyword.equals("Totem armor") || keyword.equals("Battle cry")
                         || keyword.equals("Devoid") || keyword.equals("Riot")){
                     sbLong.append(keyword).append(" (").append(inst.getReminderText()).append(")");
@@ -4670,6 +4674,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         setPhasedOut(!phasedOut);
         final Combat combat = getGame().getPhaseHandler().getCombat();
         if (combat != null && phasedOut) {
+            combat.saveLKI(this);
             combat.removeFromCombat(this);
         }
 
@@ -6167,7 +6172,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return false;
         }
 
-        if (source == null){
+        if (source == null) {
             return true;
         }
 
@@ -6923,5 +6928,19 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public final void clearUntilLeavesBattlefield() {
         untilLeavesBattlefield = view.clearCards(untilLeavesBattlefield, TrackableProperty.UntilLeavesBattlefield);
+    }
+
+    public CombatLki getCombatLKI() {
+        return combatLKI;
+    }
+    public void setCombatLKI(CombatLki combatLKI) {
+        this.combatLKI = combatLKI;
+    }
+
+    public boolean isAttacking() {
+        if (getCombatLKI() != null) {
+            return getCombatLKI().isAttacker;
+        }
+        return getGame().getCombat().isAttacking(this);
     }
 }

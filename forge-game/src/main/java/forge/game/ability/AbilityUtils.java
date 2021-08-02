@@ -1282,7 +1282,8 @@ public class AbilityUtils {
         }
         else if (defined.equals("Opponent")) {
             players.addAll(player.getOpponents());
-        } else if (defined.startsWith("NextPlayerToYour")) {
+        }
+        else if (defined.startsWith("NextPlayerToYour")) {
             Direction dir = defined.substring(16).equals("Left") ? Direction.Left : Direction.Right;
             players.add(game.getNextPlayerAfter(player, dir));
         }
@@ -1806,6 +1807,19 @@ public class AbilityUtils {
                     }
                     return count;
                 }
+                // Count$TriggeredManaCostDevotion.<Color>
+                if (sq[0].startsWith("TriggeredManaCostDevotion")) {
+                    final SpellAbility root = sa.getRootAbility();
+                    Card triggeringObject = (Card) root.getTriggeringObject(AbilityKey.Card);
+                    int count = 0;
+                    byte colorCode = ManaAtom.fromName(sq[1]);
+                    for (ManaCostShard sh : triggeringObject.getManaCost()) {
+                        if (sh.isColor(colorCode)) {
+                            count++;
+                        }
+                    }
+                    return count;
+                }
                 // Count$TriggeredPayingMana.<Color1>.<Color2>
                 if (sq[0].startsWith("TriggeredPayingMana")) {
                     final SpellAbility root = sa.getRootAbility();
@@ -1927,7 +1941,7 @@ public class AbilityUtils {
             // Count$DevotionDual.<color name>.<color name>
             // Count$Devotion.<color name>
             if (sq[0].contains("Devotion")) {
-                int colorOcurrencices = 0;
+                int colorOccurrences = 0;
                 String colorName = sq[1];
                 if (colorName.contains("Chosen")) {
                     colorName = MagicColor.toShortString(c.getChosenColor());
@@ -1939,12 +1953,12 @@ public class AbilityUtils {
                 for (Card c0 : player.getCardsIn(ZoneType.Battlefield)) {
                     for (ManaCostShard sh : c0.getManaCost()) {
                         if (sh.isColor(colorCode)) {
-                            colorOcurrencices++;
+                            colorOccurrences++;
                         }
                     }
-                    colorOcurrencices += c0.getAmountOfKeyword("Your devotion to each color and each combination of colors is increased by one.");
+                    colorOccurrences += c0.getAmountOfKeyword("Your devotion to each color and each combination of colors is increased by one.");
                 }
-                return doXMath(colorOcurrencices, expr, c, ctb);
+                return doXMath(colorOccurrences, expr, c, ctb);
             }
 
         } // end ctb != null

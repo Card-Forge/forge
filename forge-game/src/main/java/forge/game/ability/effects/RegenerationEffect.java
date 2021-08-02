@@ -31,6 +31,7 @@ public class RegenerationEffect extends SpellAbilityEffect {
             c.addRegeneratedThisTurn();
 
             if (game.getCombat() != null) {
+                game.getCombat().saveLKI(c);
                 game.getCombat().removeFromCombat(c);
             }
 

@@ -4,6 +4,6 @@ Types:Creature Elemental Beast
 PT:0/4
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +X/+0 until end of turn, where X is the number of lands defending player controls.
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ X
-SVar:X:Count$Valid Land.DefenderCtrl
+SVar:X:Count$Valid Land.ControlledBy TriggeredDefendingPlayer
 SVar:Picture:http://www.wizards.com/global/images/magic/general/terra_ravager.jpg
 Oracle:Whenever Terra Ravager attacks, it gets +X/+0 until end of turn, where X is the number of lands defending player controls.

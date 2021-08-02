@@ -3,7 +3,7 @@ ManaCost:1 U U
 Types:Creature Cephalid Wizard
 PT:1/1
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigBounce | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, return up to that many target permanents that player controls to their owner's hand.
-SVar:TrigBounce:DB$ ChangeZone | ValidTgts$ Permanent.DefenderCtrl | TgtPrompt$ Select target permanent | TargetMin$ 0 | TargetMax$ X | Origin$ Battlefield | Destination$ Hand
+SVar:TrigBounce:DB$ ChangeZone | ValidTgts$ Permanent.ControlledBy TriggeredDefendingPlayer | TgtPrompt$ Select target permanent | TargetMin$ 0 | TargetMax$ X | Origin$ Battlefield | Destination$ Hand
 SVar:X:TriggeredSource$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cephalid_constable.jpg
 Oracle:Whenever Cephalid Constable deals combat damage to a player, return up to that many target permanents that player controls to their owner's hand.

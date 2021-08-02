@@ -4,10 +4,8 @@ Types:Legendary Creature Satyr
 PT:2/2
 K:Haste
 S:Mode$ Continuous | Affected$ Card.Satyr+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Haste | Description$ Other Satyrs you control get +1/+1 and have haste.
-T:Mode$ AttackersDeclared | Execute$ TrigDiscard | CheckSVar$ AttackerCount | SVarCompare$ GE3 | NoResolvingCheck$ True | TriggerZones$ Battlefield | AttackingPlayer$ You | OptionalDecider$ You | TriggerDescription$ Whenever you attack with three or more creatures, you may discard a card at random. If you do, draw two cards.
+T:Mode$ AttackersDeclared | Execute$ TrigDiscard | CheckSVar$ AttackerCount | SVarCompare$ GE3 | NoResolvingCheck$ True | TriggerZones$ Battlefield | AttackingPlayer$ You | TriggerDescription$ Whenever you attack with three or more creatures, you may discard a card at random. If you do, draw two cards.
 SVar:AttackerCount:Count$Valid Creature.attacking
-SVar:TrigDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ Random | RememberDiscarded$ True | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 2 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:TrigDiscard:AB$ Draw | Defined$ You | NumCards$ 2 | Cost$ Discard<1/Random>
 DeckHints:Type$Satyr
 Oracle:Haste\nOther Satyrs you control get +1/+1 and have haste.\nWhenever you attack with three or more creatures, you may discard a card at random. If you do, draw two cards.

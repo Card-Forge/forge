@@ -82,4 +82,3 @@ public class TriggerExcessDamage extends Trigger {
         return sb.toString();
     }
 }
-

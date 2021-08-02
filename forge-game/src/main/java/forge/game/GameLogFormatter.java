@@ -274,8 +274,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
                 blockers = att.getValue();
                 if (blockers.isEmpty()) {
                     sb.append(Localizer.getInstance().getMessage("lblLogPlayerDidntBlockAttacker", controllerName, att.getKey()));
-                }
-                else {
+                } else {
                     sb.append(Localizer.getInstance().getMessage("lblLogPlayerAssignedBlockerToBlockAttacker", controllerName, Lang.joinHomogenous(blockers), att.getKey()));
                 }
                 firstAttacker = false;

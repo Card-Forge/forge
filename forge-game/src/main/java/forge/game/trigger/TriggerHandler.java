@@ -579,7 +579,7 @@ public class TriggerHandler {
             sa.setOptionalTrigger(true);
             decider = AbilityUtils.getDefinedPlayers(host, regtrig.getParam("OptionalDecider"), sa).get(0);
         }
-        else if (sa instanceof AbilitySub || !sa.hasParam("Cost") || sa.getParam("Cost").equals("0")) {
+        else if (sa instanceof AbilitySub || !sa.hasParam("Cost") || (sa.getPayCosts() != null && sa.getPayCosts().isMandatory()) || sa.getParam("Cost").equals("0")) {
             isMandatory = true;
         } else { // triggers with a cost can't be mandatory
             sa.setOptionalTrigger(true);

@@ -23,8 +23,6 @@ public class GameEventSpellResolved extends GameEvent {
         this.hasFizzled = hasFizzled;
     }
 
-
-    
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {
         return visitor.visit(this);

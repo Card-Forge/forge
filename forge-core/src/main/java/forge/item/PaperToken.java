@@ -95,7 +95,7 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
         build.add(subtypes);
 
         // Are these keywords sorted?
-        for(String keyword : rules.getMainPart().getKeywords()) {
+        for (String keyword : rules.getMainPart().getKeywords()) {
             build.add(keyword);
         }
 

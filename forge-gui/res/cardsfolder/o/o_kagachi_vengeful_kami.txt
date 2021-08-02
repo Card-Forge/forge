@@ -5,6 +5,6 @@ PT:6/6
 K:Flying
 K:Trample
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigExile | CombatDamage$ True | Condition$ AttackedPlayerWhoAttackedYouLastTurn | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, if that player attacked you during their last turn, exile target nonland permanent that player controls.
-SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Permanent.nonLand+DefenderCtrl | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Exile
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Permanent.nonLand+ControlledBy TriggeredDefendingPlayer | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Exile
 SVar:Picture:http://www.wizards.com/global/images/magic/general/o-kagachi_vengeful_kami.jpg
 Oracle:Flying, trample\nWhenever O-Kagachi, Vengeful Kami deals combat damage to a player, if that player attacked you during their last turn, exile target nonland permanent that player controls.

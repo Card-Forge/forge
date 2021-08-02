@@ -5,7 +5,7 @@ PT:2/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create  two 1/1 black Insect creature tokens.
 SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ b_1_1_insect | TokenOwner$ You
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCurse | TriggerDescription$ Whenever CARDNAME attacks, you may sacrifice an Insect. When you do, curse defending player. (Create a black Aura Curse enchantment token that's attached to that player. It has enchant player and "At the beginning of your upkeep, you lose 1 life.")
-SVar:TrigCurse:AB$ Token | Cost$ Sac<1/Insect> | TokenAmount$ 1 | TokenScript$ b_aura_curse_life | TokenOwner$ You | AttachedTo$ DefendingPlayer
+SVar:TrigCurse:AB$ Token | Cost$ Sac<1/Insect> | TokenAmount$ 1 | TokenScript$ b_aura_curse_life | TokenOwner$ You | AttachedTo$ TriggeredDefendingPlayer
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Token
 Oracle:When Celestine Cave Witch enters the battlefield, create two 1/1 black Insect creature tokens.\nWhenever Celestine Cave Witch attacks, you may sacrifice an Insect. When you do, curse defending player. (Create a black Aura Curse enchantment token that's attached to that player. It has enchant player and "At the beginning of your upkeep, you lose 1 life.")

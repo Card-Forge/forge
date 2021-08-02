@@ -1633,7 +1633,7 @@ public class GameAction {
 
             recheck = true;
 
-            Card toKeep = p.getController().chooseSingleEntityForEffect(new CardCollection(cc), new SpellAbility.EmptySa(ApiType.InternalLegendaryRule, null, p),
+            Card toKeep = p.getController().chooseSingleEntityForEffect(new CardCollection(cc), new SpellAbility.EmptySa(ApiType.InternalLegendaryRule, new Card(-1, game), p),
                     "You have multiple legendary permanents named \""+name+"\" in play.\n\nChoose the one to stay on battlefield (the rest will be moved to graveyard)", null);
             for (Card c: cc) {
                 if (c != toKeep) {
@@ -1905,7 +1905,6 @@ public class GameAction {
             game.getTriggerHandler().runTrigger(TriggerType.NewGame, AbilityKey.newMap(), true);
             //</THIS CODE WILL WORK WITH PHASE = NULL>
 
-
             game.getPhaseHandler().startFirstTurn(first, startGameHook);
             //after game ends, ensure Auto-Pass canceled for all players so it doesn't apply to next game
             for (Player p : game.getRegisteredPlayers()) {
@@ -1980,7 +1979,6 @@ public class GameAction {
     private void runPreOpeningHandActions(final Player first) {
         Player takesAction = first;
         do {
-            //
             List<Card> ploys = CardLists.filter(takesAction.getCardsIn(ZoneType.Command), new Predicate<Card>() {
                 @Override
                 public boolean apply(Card input) {
@@ -2054,8 +2052,7 @@ public class GameAction {
     public void invoke(final Runnable proc) {
         if (ThreadUtil.isGameThread()) {
             proc.run();
-        }
-        else {
+        } else {
             ThreadUtil.invokeInGameThread(proc);
         }
     }

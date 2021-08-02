@@ -827,8 +827,7 @@ public class ComputerUtilMana {
 
                 // remove from available lists
                 Iterables.removeIf(sourcesForShards.values(), CardTraitPredicates.isHostCard(saPayment.getHostCard()));
-            }
-            else {
+            } else {
                 final CostPayment pay = new CostPayment(saPayment.getPayCosts(), saPayment);
                 if (!pay.payComputerCosts(new AiCostDecision(ai, saPayment))) {
                     saList.remove(saPayment);
@@ -863,8 +862,7 @@ public class ComputerUtilMana {
             if (test) {
                 resetPayment(paymentList);
                 return false;
-            }
-            else {
+            } else {
                 System.out.println("ComputerUtil : payManaCost() cost was not paid for " + sa.getHostCard().getName() + ". Didn't find what to pay for " + toPay);
                 return false;
             }
@@ -1233,8 +1231,7 @@ public class ComputerUtilMana {
             if (!(ai.getGame().getPhaseHandler().isPlayerTurn(ai))) {
                 AiCardMemory.clearMemorySet(ai, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_ENEMY_DECLBLK);
                 AiCardMemory.clearMemorySet(ai, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT);
-            }
-            else
+            } else
                 AiCardMemory.clearMemorySet(ai, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_DECLBLK);
         } else {
             if ((AiCardMemory.isRememberedCard(ai, sourceCard, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_DECLBLK)) ||
@@ -1255,8 +1252,7 @@ public class ComputerUtilMana {
 
         if (curPhase == PhaseType.MAIN2 || curPhase == PhaseType.CLEANUP) {
             AiCardMemory.clearMemorySet(ai, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_MAIN2);
-        }
-        else {
+        } else {
             if (AiCardMemory.isRememberedCard(ai, sourceCard, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_MAIN2)) {
                 // This mana source is held elsewhere for a Main Phase 2 spell.
                 return true;
@@ -1265,7 +1261,6 @@ public class ComputerUtilMana {
 
         return false;
     }
-
 
     private static ManaCostShard getNextShardToPay(ManaCostBeingPaid cost) {
         // mind the priorities
@@ -1352,8 +1347,7 @@ public class ComputerUtilMana {
                 String commonColor = ComputerUtilCard.getMostProminentColor(ai.getCardsIn(ZoneType.Hand));
                 if (!commonColor.isEmpty() && satisfiesColorChoice(abMana, choiceString, MagicColor.toShortString(commonColor)) && abMana.getComboColors().contains(MagicColor.toShortString(commonColor))) {
                     choice = MagicColor.toShortString(commonColor);
-                }
-                else {
+                } else {
                     // default to first available color
                     for (String c : comboColors) {
                         if (satisfiesColorChoice(abMana, choiceString, c)) {
@@ -1398,8 +1392,7 @@ public class ComputerUtilMana {
                         break;
                     }
                 }
-            }
-            else {
+            } else {
                 String color = MagicColor.toShortString(manaPart);
                 boolean wasNeeded = testCost.ai_payMana(color, p.getManaPool());
                 if (!wasNeeded) {

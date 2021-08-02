@@ -43,9 +43,8 @@ public class DeckGenPool implements IDeckGenPool {
         Iterable<PaperCard> editionCards=Iterables.filter(cards.values(), filter);
         if (editionCards.iterator().hasNext()){
             return editionCards.iterator().next();
-        }else {
-            return getCard(name);
         }
+        return getCard(name);
     }
 
     @Override

@@ -4,6 +4,6 @@ Types:Creature Human Minion
 PT:3/1
 A:AB$ Regenerate | Cost$ 2 B | SpellDescription$ Regenerate CARDNAME.
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ Whenever CARDNAME becomes blocked, defending player discards a card at random.
-SVar:TrigDiscard:DB$Discard | Defined$ DefendingPlayer | NumCards$ 1 | Mode$ Random
+SVar:TrigDiscard:DB$Discard | Defined$ TriggeredDefendingPlayer | NumCards$ 1 | Mode$ Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/corrupt_official.jpg
 Oracle:{2}{B}: Regenerate Corrupt Official.\nWhenever Corrupt Official becomes blocked, defending player discards a card at random.
