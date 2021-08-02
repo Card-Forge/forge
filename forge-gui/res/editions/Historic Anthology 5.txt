@@ -6,28 +6,28 @@ Type=Online
 ScryfallCode=HA5
 
 [cards]
-999-CH C Court Homunculus
-999-ENGC M Elesh Norn, Grand Cenobite
-999-IV U Intangible Virtue
-999-ROR C Ray of Revelation
-999-JGCA M Jin-Gitaxias, Core Augur
-999-ML C Merfolk Looter
-999-RE U Reverse Engineer
-999-S R Stifle
-999-WN U Whirler Rogue
-999-SWO M Sheoldred, Whispering One
-999-VS C Vault Skirge
-999-AG U Ancient Grudge
-999-DS R Dragonstorm
-999-TFT U Trash for Treasure
-999-UTH M Urabrask the Hidden
-999-ITN C Into the North
-999-VVOH M Vorinclex, Voice of Hunger
-999-OC R Ojutai's Command
-999-SC R Silumgar's Command
-999-KC R Kolaghan's Command
-999-AC R Atarka's Command
-999-DC R Dromoka's Command
-999-GS C Grisly Salvage
-999-IW C Ichor Wellspring
-999-ROP C Relic of Progenitus
+1 C Court Homunculus @Matt Cavotta
+2 M Elesh Norn, Grand Cenobite @Igor Kieryluk
+3 U Intangible Virtue @Clint Cearley
+4 C Ray of Revelation @Cliff Childs
+5 M Jin-Gitaxias, Core Augur @Eric Deschamps
+6 C Merfolk Looter @Austin Hsu
+7 U Reverse Engineer @Chase Stone
+8 R Stifle @Dany Orizio
+9 U Whirler Rogue @Winona Nelson
+10 M Sheoldred, Whispering One @Jana Schirmer & Johannes Voss
+11 C Vault Skirge @Brad Rigney
+12 U Ancient Grudge @Ryan Yee
+13 R Dragonstorm @Kev Walker
+14 U Trash for Treasure @Lars Grant-West
+15 M Urabrask the Hidden @Brad Rigney
+16 C Into the North @Richard Sardinha
+17 M Vorinclex, Voice of Hunger @Karl Kopinski
+18 R Ojutai's Command @Willian Murai
+19 R Silumgar's Command @Nils Hamm
+20 R Kolaghan's Command @Daarken
+21 R Atarka's Command @Chris Rahn
+22 R Dromoka's Command @James Ryman
+23 C Grisly Salvage @Dave Kendall
+24 C Ichor Wellspring @Steven Belledin
+25 C Relic of Progenitus @Jean-Sébastien Rossbach

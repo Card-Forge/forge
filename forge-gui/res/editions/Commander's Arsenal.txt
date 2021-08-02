@@ -7,24 +7,24 @@ ScryfallCode=CM1
 
 Type=Commander
 [cards]
-1 R Chaos Warp
-2 C Command Tower
-3 R Decree of Pain
-4 R Desertion
-5 R Diaochan, Artful Beauty
-6 R Dragonlair Spider
-7 R Duplicant
-8 R Edric, Spymaster of Trest
-9 M Kaalia of the Vast
-10 U Loyal Retainers
-11 M Maelstrom Wanderer
-12 M The Mimeoplasm
-13 R Mind's Eye
-14 R Mirari's Wake
-15 C Rhystic Study
-16 R Scroll Rack
-17 R Sylvan Library
-18 M Vela the Night-Clad
+1 R Chaos Warp @Trevor Claxton
+2 C Command Tower @Adam Paquette
+3 R Decree of Pain @Mathias Kollros
+4 R Desertion @Richard Kane Ferguson
+5 R Diaochan, Artful Beauty @Miao Aili
+6 R Dragonlair Spider @Carl Critchlow
+7 R Duplicant @Marco Nelor
+8 R Edric, Spymaster of Trest @Volkan Baǵa
+9 M Kaalia of the Vast @Michael Komarck
+10 U Loyal Retainers @Solomon Au Yeung
+11 M Maelstrom Wanderer @Thomas M. Baxa
+12 M The Mimeoplasm @Svetlin Velinov
+13 R Mind's Eye @Karl Kopinski
+14 R Mirari's Wake @Volkan Baǵa
+15 C Rhystic Study @Terese Nielsen
+16 R Scroll Rack @Heather Hudson
+17 R Sylvan Library @Yeong-Hao Han
+18 M Vela the Night-Clad @Allen Williams
 
 [tokens]
 c_1_1_sliver

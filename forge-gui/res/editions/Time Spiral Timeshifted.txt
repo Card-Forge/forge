@@ -10,127 +10,127 @@ BoosterBox=0
 FatPack=0
 
 [cards]
-1 S Akroma, Angel of Wrath
-117 S Arena
-106 S Assault // Battery
-2 S Auratog
-55 S Avalanche Riders
-37 S Avatar of Woe
-73 S Avoid Fate
-38 S Bad Moon
-56 S Browbeat
-74 S Call of the Herd
-3 S Celestial Dawn
-107 S Claws of Gix
-91 S Coalition Victory
-75 S Cockatrice
-4 S Consecrate Land
-39 S Conspiracy
-76 S Craw Giant
-19 S Dandan
-40 S Darkness
-41 S Dauthi Slayer
-5 S Defiant Vanguard
-118 S Desert
-57 S Desolation Giant
-6 S Disenchant
-58 S Disintegrate
-108 S Dodecapod
-59 S Dragon Whelp
-60 S Dragonstorm
-7 S Enduring Renewal
-61 S Eron the Relentless
-8 S Essence Sliver
-42 S Evil Eye of Orms-by-Gore
-43 S Faceless Butcher
-109 S Feldon's Cane
-92 S Fiery Justice
-62 S Fiery Temper
-63 S Fire Whip
-20 S Flying Men
-44 S Funeral Charm
-77 S Gaea's Blessing
-78 S Gaea's Liege
-119 S Gemstone Mine
-21 S Ghost Ship
-22 S Giant Oyster
-64 S Goblin Snowman
-110 S Grinning Totem
-79 S Hail Storm
-9 S Honorable Passage
-80 S Hunting Moa
-10 S Icatian Javelineers
-93 S Jasmine Boreal
-81 S Jolrael, Empress of Beasts
-65 S Kobold Taskmaster
-82 S Krosan Cloudscraper
-23 S Leviathan
-94 S Lightning Angel
-24 S Lord of Atlantis
-25 S Merfolk Assassin
-95 S Merieke Ri Berit
-111 S Mindless Automaton
-112 S Mirari
-26 S Mistform Ultimus
-11 S Moorish Cavalry
-96 S Mystic Enforcer
-97 S Mystic Snake
-98 S Nicol Bolas
-66 S Orcish Librarian
-67 S Orgg
-27 S Ovinomancer
-68 S Pandemonium
-120 S Pendelhaven
-28 S Pirate Ship
-29 S Prodigal Sorcerer
-30 S Psionic Blast
-12 S Resurrection
-13 S Sacred Mesa
-121 S Safe Haven
-83 S Scragnoth
-45 S Sengir Autocrat
-114 S Serrated Arrows
-46 S Shadow Guildmage
-99 S Shadowmage Infiltrator
-31 S Sindbad
-100 S Sol'kanar the Swamp King
-14 S Soltari Priest
-47 S Soul Collector
-84 S Spike Feeder
-101 S Spined Sliver
-85 S Spitting Slug
-15 S Squire
-102 S Stormbind
-32 S Stormscape Familiar
-48 S Stupor
-69 S Suq'Ata Lancer
-49 S Swamp Mosquito
-103 S Teferi's Moat
-86 S Thallid
-113 S The Rack
-87 S Thornscape Battlemage
-115 S Tormod's Crypt
-70 S Tribal Flames
-50 S Twisted Abomination
-51 S Uncle Istvan
-52 S Undead Warchief
-53 S Undertaker
-33 S Unstable Mutation
-71 S Uthden Troll
-16 S Valor
-88 S Verdeloth the Ancient
-104 S Vhati il-Dal
-105 S Void
-34 S Voidmage Prodigy
-89 S Wall of Roots
-116 S War Barge
-90 S Whirling Dervish
-35 S Whispers of the Muse
-72 S Wildfire Emissary
-36 S Willbender
-17 S Witch Hunter
-54 S Withered Wretch
-18 S Zhalfirin Commander
+1 S Akroma, Angel of Wrath @Ron Spears
+117 S Arena @Rob Alexander
+106 S Assault // Battery @Ben Thompson
+2 S Auratog @Jeff Miracola
+55 S Avalanche Riders @Edward P. Beard, Jr.
+37 S Avatar of Woe @rk post
+73 S Avoid Fate @Phil Foglio
+38 S Bad Moon @Jesper Myrfors
+56 S Browbeat @Mark Tedin
+74 S Call of the Herd @Carl Critchlow
+3 S Celestial Dawn @Liz Danforth
+107 S Claws of Gix @Henry G. Higginbotham
+91 S Coalition Victory @Eric Peterson
+75 S Cockatrice @Dan Frazier
+4 S Consecrate Land @Jeff A. Menges
+39 S Conspiracy @Jeff Easley
+76 S Craw Giant @Christopher Rush
+19 S Dandan @Drew Tucker
+40 S Darkness @Harold McNeill
+41 S Dauthi Slayer @Dermot Power
+5 S Defiant Vanguard @Pete Venters
+118 S Desert @Jesper Myrfors
+57 S Desolation Giant @Alan Pollack
+6 S Disenchant @Amy Weber
+58 S Disintegrate @Anson Maddocks
+108 S Dodecapod @John Howe
+59 S Dragon Whelp @Amy Weber
+60 S Dragonstorm @Kev Walker
+7 S Enduring Renewal @Harold McNeill
+61 S Eron the Relentless @Christopher Rush
+8 S Essence Sliver @Glen Angus
+42 S Evil Eye of Orms-by-Gore @Jesper Myrfors
+43 S Faceless Butcher @Daren Bader
+109 S Feldon's Cane @Mark Tedin
+92 S Fiery Justice @Melissa A. Benson
+62 S Fiery Temper @Greg Hildebrandt & Tim Hildebrandt
+63 S Fire Whip @Jeff Miracola
+20 S Flying Men @Christopher Rush
+44 S Funeral Charm @Greg Spalenka
+77 S Gaea's Blessing @Rebecca Guay
+78 S Gaea's Liege @Dameon Willich
+119 S Gemstone Mine @Brom
+21 S Ghost Ship @Tom Wänerstrand
+22 S Giant Oyster @Nicola Leonard
+64 S Goblin Snowman @Daniel Gelon
+110 S Grinning Totem @Donato Giancola
+79 S Hail Storm @Jeff A. Menges
+9 S Honorable Passage @Jeff Miracola
+80 S Hunting Moa @DiTerlizzi
+10 S Icatian Javelineers @Scott Kirschner
+93 S Jasmine Boreal @Richard Kane Ferguson
+81 S Jolrael, Empress of Beasts @Matthew D. Wilson
+65 S Kobold Taskmaster @Randy Asplund-Faith
+82 S Krosan Cloudscraper @Ron Spears
+23 S Leviathan @Mark Tedin
+94 S Lightning Angel @rk post
+24 S Lord of Atlantis @Melissa A. Benson
+25 S Merfolk Assassin @Dennis Detwiller
+95 S Merieke Ri Berit @Heather Hudson
+111 S Mindless Automaton @Brian Snõddy
+112 S Mirari @Donato Giancola
+26 S Mistform Ultimus @Anthony S. Waters
+11 S Moorish Cavalry @Dameon Willich
+96 S Mystic Enforcer @Gary Ruddell
+97 S Mystic Snake @Daren Bader
+98 S Nicol Bolas @Edward P. Beard, Jr.
+66 S Orcish Librarian @Phil Foglio
+67 S Orgg @Daniel Gelon
+27 S Ovinomancer @Kev Walker
+68 S Pandemonium @Pete Venters
+120 S Pendelhaven @Bryon Wackwitz
+28 S Pirate Ship @Tom Wänerstrand
+29 S Prodigal Sorcerer @Douglas Shuler
+30 S Psionic Blast @Douglas Shuler
+12 S Resurrection @Dan Frazier
+13 S Sacred Mesa @Margaret Organ-Kean
+121 S Safe Haven @Christopher Rush
+83 S Scragnoth @Jeff Laubenstein
+45 S Sengir Autocrat @David A. Cherry
+114 S Serrated Arrows @David A. Cherry
+46 S Shadow Guildmage @Mike Kimble
+99 S Shadowmage Infiltrator @Rick Farrell
+31 S Sindbad @Julie Baroh
+100 S Sol'kanar the Swamp King @Richard Kane Ferguson
+14 S Soltari Priest @Janet Aulisio
+47 S Soul Collector @Matthew D. Wilson
+84 S Spike Feeder @Heather Hudson
+101 S Spined Sliver @Ron Spencer
+85 S Spitting Slug @Anson Maddocks
+15 S Squire @Dennis Detwiller
+102 S Stormbind @NéNé Thomas & Phillip Mosness
+32 S Stormscape Familiar @Heather Hudson
+48 S Stupor @Mike Kimble
+69 S Suq'Ata Lancer @Jeff Miracola
+49 S Swamp Mosquito @Nicola Leonard
+103 S Teferi's Moat @rk post
+86 S Thallid @Ron Spencer
+113 S The Rack @Richard Thomas
+87 S Thornscape Battlemage @Matt Cavotta
+115 S Tormod's Crypt @Christopher Rush
+70 S Tribal Flames @Tony Szczudlo
+50 S Twisted Abomination @Daren Bader
+51 S Uncle Istvan @Daniel Gelon
+52 S Undead Warchief @Greg Hildebrandt
+53 S Undertaker @Jeff Easley
+33 S Unstable Mutation @Douglas Shuler
+71 S Uthden Troll @Douglas Shuler
+16 S Valor @Kev Walker
+88 S Verdeloth the Ancient @Daren Bader
+104 S Vhati il-Dal @Ron Spencer
+105 S Void @Kev Walker
+34 S Voidmage Prodigy @Christopher Moeller
+89 S Wall of Roots @John Matson
+116 S War Barge @Tom Wänerstrand
+90 S Whirling Dervish @Susan Van Camp
+35 S Whispers of the Muse @Quinton Hoover
+72 S Wildfire Emissary @Richard Kane Ferguson
+36 S Willbender @Eric Peterson
+17 S Witch Hunter @Jesper Myrfors
+54 S Withered Wretch @Tim Hildebrandt
+18 S Zhalfirin Commander @Stuart Griffin
 
 [tokens]
 w_1_1_pegasus_flying

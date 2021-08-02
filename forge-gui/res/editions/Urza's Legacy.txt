@@ -12,149 +12,149 @@ FoilAlwaysInCommonSlot=False
 ScryfallCode=ULG
 
 [cards]
-73 C About Face
-121 U Angel's Trumpet
-1 C Angelic Curator
-25 R Anthroplasm
-26 R Archivist
-27 C Aura Flux
-74 U Avalanche Riders
-122 R Beast of Burden
-2 R Blessed Reversal
-97 U Bloated Toad
-49 U Bone Shredder
-28 C Bouncing Beebles
-50 R Brink of Madness
-3 C Burst of Energy
-4 C Cessation
-29 C Cloud of Faeries
-123 R Crawlspace
-98 C Crop Rotation
-124 R Damping Engine
-99 U Darkwatch Elves
-75 C Defender of Chaos
-5 C Defender of Law
-125 R Defense Grid
-100 R Defense of the Heart
-30 R Delusions of Mediocrity
-101 R Deranged Hermit
-6 C Devout Harpist
-51 U Engineered Plague
-7 C Erase
-52 R Eviscerator
-8 C Expendable Troops
-139 U Faerie Conclave
-31 R Fleeting Image
-53 C Fog of Gnats
-140 U Forbidding Watchtower
-32 C Frantic Search
-102 U Gang of Elk
-141 U Ghitu Encampment
-76 U Ghitu Fire-Eater
-77 C Ghitu Slinger
-78 U Ghitu War Cry
-54 C Giant Cockroach
-79 C Goblin Medics
-80 R Goblin Welder
-81 C Granite Grip
-126 R Grim Monolith
-103 U Harmonic Convergence
-104 R Hidden Gibbons
-9 U Hope and Glory
-82 R Impending Disaster
-33 C Intervene
-127 R Iron Maiden
-10 C Iron Will
-128 U Jhoira's Toolbox
-11 R Karmic Guide
-34 U King Crab
-12 U Knighthood
-83 U Last-Ditch Effort
-84 C Lava Axe
-35 U Levitation
-105 U Lone Wolf
-55 R Lurking Skirge
-13 U Martyr's Cause
-129 R Memory Jar
-106 R Might of Oaks
-36 C Miscalculation
-85 R Molten Hydra
-14 U Mother of Runes
-108 C Multani's Acolyte
-109 U Multani's Presence
-107 R Multani, Maro-Sorcerer
-56 R No Mercy
-15 R Opal Avenger
-16 C Opal Champion
-37 U Opportunity
-57 C Ostracize
-38 R Palinchron
-86 C Parch
-17 U Peace and Quiet
-58 C Phyrexian Broodlings
-59 C Phyrexian Debaser
-60 U Phyrexian Defiler
-61 C Phyrexian Denouncer
-62 R Phyrexian Plaguelord
-63 U Phyrexian Reclamation
-64 C Plague Beetle
-18 R Planar Collapse
-19 R Purify
-87 C Pygmy Pyrosaur
-88 R Pyromancy
-130 R Quicksilver Amulet
-89 U Rack and Ruin
-21 U Radiant's Dragoons
-22 C Radiant's Judgment
-20 R Radiant, Archangel
-110 C Rancor
-65 U Rank and File
-39 U Raven Familiar
-40 U Rebuild
-111 C Repopulate
-131 R Ring of Gix
-90 R Rivalry
-132 R Scrapheap
-41 R Second Chance
-91 R Shivan Phoenix
-66 C Sick and Tired
-112 C Silk Net
-113 C Simian Grunts
-67 C Sleeper's Guile
-42 C Slow Motion
-92 C Sluggishness
-43 C Snap
-142 U Spawning Pool
-68 R Subversion
-23 U Sustainer of the Realm
-69 C Swat
-70 U Tethered Skirge
-44 C Thornwind Faeries
-133 R Thran Lens
-134 U Thran War Machine
-135 R Thran Weaponry
-136 U Ticking Gnomes
-45 U Tinker
-24 C Tragic Poet
-71 U Treacherous Link
-114 C Treefolk Mystic
-143 U Treetop Village
-72 C Unearth
-137 R Urza's Blueprints
-93 C Viashino Bey
-94 U Viashino Cutthroat
-95 U Viashino Heretic
-96 C Viashino Sandscout
-46 C Vigilant Drake
-47 U Walking Sponge
-115 C Weatherseed Elf
-48 C Weatherseed Faeries
-116 R Weatherseed Treefolk
-138 R Wheel of Torture
-117 U Wing Snare
-118 C Yavimaya Granger
-119 C Yavimaya Scion
-120 C Yavimaya Wurm
+73 C About Face @Melissa A. Benson
+121 U Angel's Trumpet @Kev Walker
+1 C Angelic Curator @Greg Staples
+25 R Anthroplasm @Ron Spencer
+26 R Archivist @Pete Venters
+27 C Aura Flux @John Avon
+74 U Avalanche Riders @Edward P. Beard, Jr.
+122 R Beast of Burden @Ron Spears
+2 R Blessed Reversal @Pete Venters
+97 U Bloated Toad @Una Fricker
+49 U Bone Shredder @Ron Spencer
+28 C Bouncing Beebles @Jeff Miracola
+50 R Brink of Madness @Donato Giancola
+3 C Burst of Energy @Mark Brill
+4 C Cessation @Mark Zug
+29 C Cloud of Faeries @Melissa A. Benson
+123 R Crawlspace @Douglas Shuler
+98 C Crop Rotation @DiTerlizzi
+124 R Damping Engine @rk post
+99 U Darkwatch Elves @Don Hazeltine
+75 C Defender of Chaos @Carl Critchlow
+5 C Defender of Law @Carl Critchlow
+125 R Defense Grid @Mark Tedin
+100 R Defense of the Heart @Rebecca Guay
+30 R Delusions of Mediocrity @Jeff Laubenstein
+101 R Deranged Hermit @Kev Walker
+6 C Devout Harpist @Rebecca Guay
+51 U Engineered Plague @Michael Sutfin
+7 C Erase @Ron Spears
+52 R Eviscerator @Michael Sutfin
+8 C Expendable Troops @Carl Critchlow
+139 U Faerie Conclave @Val Mayerik
+31 R Fleeting Image @Scott M. Fischer
+53 C Fog of Gnats @Jeff Miracola
+140 U Forbidding Watchtower @Mark Brill
+32 C Frantic Search @Jeff Miracola
+102 U Gang of Elk @Una Fricker
+141 U Ghitu Encampment @Don Hazeltine
+76 U Ghitu Fire-Eater @Melissa A. Benson
+77 C Ghitu Slinger @Melissa A. Benson
+78 U Ghitu War Cry @Douglas Shuler
+54 C Giant Cockroach @Heather Hudson
+79 C Goblin Medics @Jeff Laubenstein
+80 R Goblin Welder @Scott M. Fischer
+81 C Granite Grip @Mike Raabe
+126 R Grim Monolith @Chippy
+103 U Harmonic Convergence @John Avon
+104 R Hidden Gibbons @Una Fricker
+9 U Hope and Glory @Heather Hudson
+82 R Impending Disaster @Pete Venters
+33 C Intervene @Heather Hudson
+127 R Iron Maiden @Tom Wänerstrand
+10 C Iron Will @Val Mayerik
+128 U Jhoira's Toolbox @Mike Raabe
+11 R Karmic Guide @Heather Hudson
+34 U King Crab @Daniel Gelon
+12 U Knighthood @Kev Walker
+83 U Last-Ditch Effort @Dan Frazier
+84 C Lava Axe @Brian Snõddy
+35 U Levitation @Heather Hudson
+105 U Lone Wolf @Una Fricker
+55 R Lurking Skirge @Daren Bader
+13 U Martyr's Cause @Jeff Laubenstein
+129 R Memory Jar @Donato Giancola
+106 R Might of Oaks @Ron Spencer
+36 C Miscalculation @Jeff Laubenstein
+85 R Molten Hydra @Greg Staples
+14 U Mother of Runes @Scott M. Fischer
+108 C Multani's Acolyte @Edward P. Beard, Jr.
+109 U Multani's Presence @Scott M. Fischer
+107 R Multani, Maro-Sorcerer @Daren Bader
+56 R No Mercy @Mark Tedin
+15 R Opal Avenger @Edward P. Beard, Jr.
+16 C Opal Champion @Edward P. Beard, Jr.
+37 U Opportunity @Ron Spears
+57 C Ostracize @Chippy
+38 R Palinchron @Matthew D. Wilson
+86 C Parch @Ron Spencer
+17 U Peace and Quiet @Don Hazeltine
+58 C Phyrexian Broodlings @Daren Bader
+59 C Phyrexian Debaser @Mark Tedin
+60 U Phyrexian Defiler @DiTerlizzi
+61 C Phyrexian Denouncer @Brian Snõddy
+62 R Phyrexian Plaguelord @Kev Walker
+63 U Phyrexian Reclamation @rk post
+64 C Plague Beetle @Tom Fleming
+18 R Planar Collapse @Mark Zug
+19 R Purify @John Avon
+87 C Pygmy Pyrosaur @Dan Frazier
+88 R Pyromancy @Quinton Hoover
+130 R Quicksilver Amulet @Douglas Shuler
+89 U Rack and Ruin @Donato Giancola
+21 U Radiant's Dragoons @Pete Venters
+22 C Radiant's Judgment @Greg Staples
+20 R Radiant, Archangel @Michael Sutfin
+110 C Rancor @Kev Walker
+65 U Rank and File @Donato Giancola
+39 U Raven Familiar @Edward P. Beard, Jr.
+40 U Rebuild @Allen Williams
+111 C Repopulate @Una Fricker
+131 R Ring of Gix @Mark Tedin
+90 R Rivalry @Brian Snõddy
+132 R Scrapheap @Bradley Williams
+41 R Second Chance @Mark Tedin
+91 R Shivan Phoenix @Daren Bader
+66 C Sick and Tired @Val Mayerik
+112 C Silk Net @Rob Alexander
+113 C Simian Grunts @Pete Venters
+67 C Sleeper's Guile @Daren Bader
+42 C Slow Motion @Todd Lockwood
+92 C Sluggishness @Pete Venters
+43 C Snap @Mike Raabe
+142 U Spawning Pool @Rob Alexander
+68 R Subversion @Rob Alexander
+23 U Sustainer of the Realm @Greg Staples
+69 C Swat @Daren Bader
+70 U Tethered Skirge @Brian Snõddy
+44 C Thornwind Faeries @Rebecca Guay
+133 R Thran Lens @Allen Williams
+134 U Thran War Machine @Pete Venters
+135 R Thran Weaponry @Anthony S. Waters
+136 U Ticking Gnomes @Henry Van Der Linde
+45 U Tinker @Mike Raabe
+24 C Tragic Poet @Quinton Hoover
+71 U Treacherous Link @Carl Critchlow
+114 C Treefolk Mystic @DiTerlizzi
+143 U Treetop Village @Anthony S. Waters
+72 C Unearth @Don Hazeltine
+137 R Urza's Blueprints @Tom Wänerstrand
+93 C Viashino Bey @Bradley Williams
+94 U Viashino Cutthroat @Edward P. Beard, Jr.
+95 U Viashino Heretic @Douglas Shuler
+96 C Viashino Sandscout @Scott M. Fischer
+46 C Vigilant Drake @Greg Staples
+47 U Walking Sponge @Ron Spencer
+115 C Weatherseed Elf @Heather Hudson
+48 C Weatherseed Faeries @Don Hazeltine
+116 R Weatherseed Treefolk @Heather Hudson
+138 R Wheel of Torture @Henry Van Der Linde
+117 U Wing Snare @Henry Van Der Linde
+118 C Yavimaya Granger @Henry Van Der Linde
+119 C Yavimaya Scion @DiTerlizzi
+120 C Yavimaya Wurm @Melissa A. Benson
 
 [tokens]
 g_1_1_squirrel

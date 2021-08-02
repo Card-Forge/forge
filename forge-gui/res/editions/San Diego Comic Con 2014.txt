@@ -6,9 +6,9 @@ Type=Promo
 ScryfallCode=PS14
 
 [cards]
-1 M Ajani Steadfast
-62 M Jace, the Living Guildpact
-103 M Liliana Vess
-134 M Chandra, Pyromaster
-187 M Nissa, Worldwaker
-210 M Garruk, Apex Predator
+1 M Ajani Steadfast @Jae Lee
+62 M Jace, the Living Guildpact @Jae Lee
+103 M Liliana Vess @Jae Lee
+134 M Chandra, Pyromaster @Jae Lee
+187 M Nissa, Worldwaker @Jae Lee
+210 M Garruk, Apex Predator @Jae Lee

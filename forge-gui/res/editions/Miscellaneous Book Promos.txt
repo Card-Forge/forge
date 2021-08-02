@@ -6,4 +6,4 @@ Type=Promo
 ScryfallCode=PBOOK
 
 [cards]
-1 M Jace Beleren
+1 M Jace Beleren @Aleksi Briclot

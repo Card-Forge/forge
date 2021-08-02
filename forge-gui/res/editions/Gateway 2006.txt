@@ -6,6 +6,6 @@ Type=Promo
 ScryfallCode=PGTW
 
 [cards]
-1 R Wood Elves
-2 R Icatian Javelineers
-3 R Fiery Temper
+1 R Wood Elves @Rebecca Guay
+2 R Icatian Javelineers @Michael Phillippi
+3 R Fiery Temper @Ben Wootten

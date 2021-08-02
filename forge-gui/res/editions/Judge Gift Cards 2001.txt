@@ -6,5 +6,5 @@ Type=Promo
 ScryfallCode=G01
 
 [cards]
-1 R Ball Lightning
-2 R Oath of Druids
+1 R Ball Lightning @Quinton Hoover
+2 R Oath of Druids @Daren Bader

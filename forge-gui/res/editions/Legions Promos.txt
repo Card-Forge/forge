@@ -6,4 +6,4 @@ Type=Promo
 ScryfallCode=PLGN
 
 [cards]
-126 R Feral Throwback
+126 R Feral Throwback @Carl Critchlow

@@ -13,181 +13,181 @@ ChaosDraftThemes=MIRRODIN
 ScryfallCode=NPH
 
 [cards]
-78 U Act of Aggression
-129 U Alloy Myr
-2 C Apostle's Blessing
-27 U Argent Mutation
-28 U Arm with AEther
-79 C Artillerize
-3 U Auriok Survivors
-130 M Batterskull
-103 U Beast Within
-104 R Birthing Pod
-4 R Blade Splicer
-29 C Blighted Agent
-52 C Blind Zealot
-131 C Blinding Souleater
-80 R Bludgeon Brawl
-105 U Brutalizer Exarch
-132 R Caged Sun
-53 U Caress of Phyrexia
-5 U Cathedral Membrane
-30 C Chained Throatseeker
-6 R Chancellor of the Annex
-54 R Chancellor of the Dross
-81 R Chancellor of the Forge
-31 R Chancellor of the Spires
-106 R Chancellor of the Tangle
-133 U Conversion Chamber
-107 U Corrosive Gale
-32 U Corrupted Resolve
-134 U Darksteel Relic
-108 C Death-Hood Cobra
-33 U Deceiver Exarch
-34 C Defensive Stance
-55 C Dementia Bat
-56 U Despise
-57 U Dismember
-7 U Dispatch
-8 U Due Respect
-9 M Elesh Norn, Grand Cenobite
-58 U Enslave
-59 U Entomber Exarch
-135 M Etched Monstrosity
-60 C Evil Presence
-10 U Exclusion Ritual
-82 U Fallen Ferromancer
-83 C Flameborn Viron
-11 C Forced Worship
-174 L Forest
-174 L Forest
-109 R Fresh Meat
-84 C Furnace Scamp
-85 U Geosurge
-61 C Geth's Verdict
-35 C Gitaxian Probe
-110 C Glissa's Scorn
-111 C Glistener Elf
-62 R Glistening Oil
-112 U Greenhilt Trainee
-136 C Gremlin Mine
-63 C Grim Affliction
-86 U Gut Shot
-137 R Hex Parasite
-138 C Hovermyr
-64 U Ichor Explosion
-139 C Immolating Souleater
-36 C Impaler Shrike
-12 U Inquisitor Exarch
-140 C Insatiable Souleater
-87 R Invader Parasite
-169 L Island
-169 L Island
-141 U Isolation Cell
-37 M Jin-Gitaxias, Core Augur
-128 R Jor Kadeen, the Prevailer
-1 M Karn Liberated
-142 U Kiln Walker
-143 R Lashwrithe
-113 C Leeching Bite
-65 R Life's Finale
-13 C Lost Leonin
-14 C Loxodon Convert
-15 U Marrow Shards
-16 U Master Splicer
-114 C Maul Splicer
-115 R Melira, Sylvok Outcast
-38 U Mental Misstep
-144 U Mindcrank
-39 U Mindculling
-88 R Moltensteel Dragon
-66 C Mortis Dogs
-172 L Mountain
-172 L Mountain
-116 C Mutagenic Growth
-117 U Mycosynth Fiend
-145 C Mycosynth Wellspring
-146 R Myr Superion
-147 U Necropouncer
-17 R Norn's Annex
-118 U Noxious Revival
-40 C Numbing Dose
-89 C Ogre Menial
-148 R Omen Machine
-67 C Parasitic Implant
-149 C Pestilent Souleater
-165 U Phyrexia's Core
-150 C Phyrexian Hulk
-41 R Phyrexian Ingester
-42 R Phyrexian Metamorph
-68 M Phyrexian Obliterator
-119 R Phyrexian Swarmlord
-18 R Phyrexian Unlife
-69 C Pith Driller
-167 L Plains
-167 L Plains
-19 C Porcelain Legionnaire
-70 U Postmortem Lunge
-71 R Praetor's Grasp
-90 U Priest of Urabrask
-151 C Pristine Talisman
-43 C Psychic Barrier
-44 R Psychic Surgery
-20 R Puresteel Paladin
-91 U Rage Extractor
-92 C Razor Swine
-72 U Reaper of Sheoldred
-21 C Remember the Fallen
-120 C Rotted Hystrix
-93 C Ruthless Invasion
-94 C Scrapyard Salvo
-22 C Sensor Splicer
-23 U Shattered Angel
-73 M Sheoldred, Whispering One
-24 C Shriek Raptor
-152 U Shrine of Boundless Growth
-153 U Shrine of Burning Rage
-154 U Shrine of Limitless Power
-155 U Shrine of Loyal Legions
-156 U Shrine of Piercing Vision
-157 U Sickleslicer
-95 R Slag Fiend
-96 C Slash Panther
-158 R Soul Conduit
-159 R Spellskite
-121 U Spinebiter
-45 C Spined Thopter
-46 C Spire Monitor
-160 U Surge Node
-74 R Surgical Extraction
-25 C Suture Priest
-170 L Swamp
-170 L Swamp
-161 M Sword of War and Peace
-47 U Tezzeret's Gambit
-122 C Thundering Tanadon
-97 U Tormentor Exarch
-162 R Torpor Orb
-75 C Toxic Nim
-163 C Trespassing Souleater
-123 U Triumph of the Hordes
-164 R Unwinding Clock
-98 M Urabrask the Hidden
-48 C Vapor Snag
-76 C Vault Skirge
-99 C Victorious Destruction
-49 U Viral Drake
-124 C Viridian Betrayers
-125 C Viridian Harvest
-126 U Vital Splicer
-100 C Volt Charge
-127 M Vorinclex, Voice of Hunger
-101 U Vulshok Refugee
-26 C War Report
-102 U Whipflare
-77 U Whispering Specter
-50 U Wing Splicer
-51 R Xenograft
+78 U Act of Aggression @Whit Brachna
+129 U Alloy Myr @Matt Cavotta
+2 C Apostle's Blessing @Brad Rigney
+27 U Argent Mutation @Jana Schirmer & Johannes Voss
+28 U Arm with Aether @Austin Hsu
+79 C Artillerize @Johann Bodin
+3 U Auriok Survivors @James Ryman
+130 M Batterskull @Mark Zug
+103 U Beast Within @Dave Allsop
+104 R Birthing Pod @Daarken
+4 R Blade Splicer @Greg Staples
+29 C Blighted Agent @Anthony Francisco
+52 C Blind Zealot @Jana Schirmer & Johannes Voss
+131 C Blinding Souleater @Igor Kieryluk
+80 R Bludgeon Brawl @Kev Walker
+105 U Brutalizer Exarch @Mark Zug
+132 R Caged Sun @Scott Chou
+53 U Caress of Phyrexia @Karl Kopinski
+5 U Cathedral Membrane @Richard Whitters
+30 C Chained Throatseeker @Stephan Martiniere
+6 R Chancellor of the Annex @Min Yum
+54 R Chancellor of the Dross @Stephan Martiniere
+81 R Chancellor of the Forge @Chippy
+31 R Chancellor of the Spires @Nils Hamm
+106 R Chancellor of the Tangle @Steve Prescott
+133 U Conversion Chamber @Anthony Francisco
+107 U Corrosive Gale @Dan Scott
+32 U Corrupted Resolve @Greg Staples
+134 U Darksteel Relic @Daniel Ljunggren
+108 C Death-Hood Cobra @Jason Felix
+33 U Deceiver Exarch @Izzy
+34 C Defensive Stance @Dan Scott
+55 C Dementia Bat @Daarken
+56 U Despise @Terese Nielsen
+57 U Dismember @Terese Nielsen
+7 U Dispatch @Erica Yang
+8 U Due Respect @James Ryman
+9 M Elesh Norn, Grand Cenobite @Igor Kieryluk
+58 U Enslave @Chris Rahn
+59 U Entomber Exarch @Svetlin Velinov
+135 M Etched Monstrosity @Steven Belledin
+60 C Evil Presence @Scott Chou
+10 U Exclusion Ritual @Daniel Ljunggren
+82 U Fallen Ferromancer @David Rapoza
+83 C Flameborn Viron @Svetlin Velinov
+11 C Forced Worship @Karl Kopinski
+174 L Forest @Mark Tedin
+175 L Forest @Mark Tedin
+109 R Fresh Meat @Dave Allsop
+84 C Furnace Scamp @Karl Kopinski
+85 U Geosurge @Igor Kieryluk
+61 C Geth's Verdict @Whit Brachna
+35 C Gitaxian Probe @Chippy
+110 C Glissa's Scorn @Nils Hamm
+111 C Glistener Elf @Steve Argyle
+62 R Glistening Oil @Steven Belledin
+112 U Greenhilt Trainee @Chris Rahn
+136 C Gremlin Mine @Matt Stewart
+63 C Grim Affliction @Erica Yang
+86 U Gut Shot @Greg Staples
+137 R Hex Parasite @Raymond Swanland
+138 C Hovermyr @Dan Scott
+64 U Ichor Explosion @James Ryman
+139 C Immolating Souleater @Austin Hsu
+36 C Impaler Shrike @Nils Hamm
+12 U Inquisitor Exarch @Igor Kieryluk
+140 C Insatiable Souleater @Dave Kendall
+87 R Invader Parasite @Volkan Baǵa
+168 L Island @Jung Park
+169 L Island @Jung Park
+141 U Isolation Cell @Adrian Smith
+37 M Jin-Gitaxias, Core Augur @Eric Deschamps
+128 R Jor Kadeen, the Prevailer @Austin Hsu
+1 M Karn Liberated @Jason Chan
+142 U Kiln Walker @Volkan Baǵa
+143 R Lashwrithe @Jason Felix
+113 C Leeching Bite @Cos Koniotis
+65 R Life's Finale @Svetlin Velinov
+13 C Lost Leonin @Min Yum
+14 C Loxodon Convert @Adrian Smith
+15 U Marrow Shards @Raymond Swanland
+16 U Master Splicer @Chippy
+114 C Maul Splicer @Jason Chan
+115 R Melira, Sylvok Outcast @Min Yum
+38 U Mental Misstep @Erica Yang
+144 U Mindcrank @Chris Rahn
+39 U Mindculling @Cos Koniotis
+88 R Moltensteel Dragon @James Ryman
+66 C Mortis Dogs @Chippy
+172 L Mountain @Tomasz Jedruszek
+173 L Mountain @Tomasz Jedruszek
+116 C Mutagenic Growth @Dave Kendall
+117 U Mycosynth Fiend @Kev Walker
+145 C Mycosynth Wellspring @David Rapoza
+146 R Myr Superion @Jana Schirmer & Johannes Voss
+147 U Necropouncer @Cos Koniotis
+17 R Norn's Annex @James Paick
+118 U Noxious Revival @Matt Stewart
+40 C Numbing Dose @Brad Rigney
+89 C Ogre Menial @David Rapoza
+148 R Omen Machine @David Rapoza
+67 C Parasitic Implant @Jason Felix
+149 C Pestilent Souleater @Matt Stewart
+165 U Phyrexia's Core @Franz Vohwinkel
+150 C Phyrexian Hulk @Steven Belledin
+41 R Phyrexian Ingester @Chris Rahn
+42 R Phyrexian Metamorph @Jana Schirmer & Johannes Voss
+68 M Phyrexian Obliterator @Todd Lockwood
+119 R Phyrexian Swarmlord @Svetlin Velinov
+18 R Phyrexian Unlife @Jason Chan
+69 C Pith Driller @Nils Hamm
+166 L Plains @James Paick
+167 L Plains @James Paick
+19 C Porcelain Legionnaire @Eric Deschamps
+70 U Postmortem Lunge @Daarken
+71 R Praetor's Grasp @Steve Argyle
+90 U Priest of Urabrask @Kev Walker
+151 C Pristine Talisman @Matt Cavotta
+43 C Psychic Barrier @Dan Scott
+44 R Psychic Surgery @Anthony Francisco
+20 R Puresteel Paladin @Jason Chan
+91 U Rage Extractor @Raymond Swanland
+92 C Razor Swine @Dave Allsop
+72 U Reaper of Sheoldred @Stephan Martiniere
+21 C Remember the Fallen @Eric Deschamps
+120 C Rotted Hystrix @Dave Allsop
+93 C Ruthless Invasion @Svetlin Velinov
+94 C Scrapyard Salvo @Austin Hsu
+22 C Sensor Splicer @Izzy
+23 U Shattered Angel @Kev Walker
+73 M Sheoldred, Whispering One @Jana Schirmer & Johannes Voss
+24 C Shriek Raptor @Efrem Palacios
+152 U Shrine of Boundless Growth @Karl Kopinski
+153 U Shrine of Burning Rage @Dave Kendall
+154 U Shrine of Limitless Power @Min Yum
+155 U Shrine of Loyal Legions @Igor Kieryluk
+156 U Shrine of Piercing Vision @Jana Schirmer & Johannes Voss
+157 U Sickleslicer @Jason Felix
+95 R Slag Fiend @Mike Bierek
+96 C Slash Panther @Matt Stewart
+158 R Soul Conduit @Brad Rigney
+159 R Spellskite @Chippy
+121 U Spinebiter @Jaime Jones
+45 C Spined Thopter @Pete Venters
+46 C Spire Monitor @Daniel Ljunggren
+160 U Surge Node @Lars Grant-West
+74 R Surgical Extraction @Steven Belledin
+25 C Suture Priest @Igor Kieryluk
+170 L Swamp @Lars Grant-West
+171 L Swamp @Lars Grant-West
+161 M Sword of War and Peace @Chris Rahn
+47 U Tezzeret's Gambit @Karl Kopinski
+122 C Thundering Tanadon @Dan Scott
+97 U Tormentor Exarch @Brad Rigney
+162 R Torpor Orb @Svetlin Velinov
+75 C Toxic Nim @Karl Kopinski
+163 C Trespassing Souleater @Scott Chou
+123 U Triumph of the Hordes @Izzy
+164 R Unwinding Clock @Mike Bierek
+98 M Urabrask the Hidden @Brad Rigney
+48 C Vapor Snag @Raymond Swanland
+76 C Vault Skirge @Brad Rigney
+99 C Victorious Destruction @Jung Park
+49 U Viral Drake @Lars Grant-West
+124 C Viridian Betrayers @Karl Kopinski
+125 C Viridian Harvest @Johann Bodin
+126 U Vital Splicer @Daarken
+100 C Volt Charge @Jana Schirmer & Johannes Voss
+127 M Vorinclex, Voice of Hunger @Karl Kopinski
+101 U Vulshok Refugee @Wayne Reynolds
+26 C War Report @Mike Bierek
+102 U Whipflare @Johann Bodin
+77 U Whispering Specter @Jason Felix
+50 U Wing Splicer @Kev Walker
+51 R Xenograft @Daniel Ljunggren
 
 [tokens]
 b_0_0_phyrexian_germ

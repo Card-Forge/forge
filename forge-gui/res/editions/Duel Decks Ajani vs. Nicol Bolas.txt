@@ -7,86 +7,86 @@ Type=Duel_Deck
 ScryfallCode=DDH
 
 [cards]
-1 M Ajani Vengeant
-2 U Kird Ape
-3 C Essence Warden
-4 C Wild Nacatl
-5 U Loam Lion
-6 C Canyon Wildcat
-7 U Jade Mage
-8 C Sylvan Ranger
-9 U Ajani's Pridemate
-10 C Qasali Pridemage
-11 C Grazing Gladehart
-12 U Fleetfoot Panther
-13 U Woolly Thoctar
-14 U Briarhorn
-15 R Loxodon Hierarch
-16 U Spitemare
-17 U Marisi's Twinclaws
-18 R Ageless Entity
-19 U Pride of Lions
-20 U Nacatl Hunt-Pride
-21 R Firemane Angel
-22 C Ajani's Mantra
-23 U Lightning Helix
-24 U Lead the Stampede
-25 U Griffin Guide
-26 C Recumbent Bliss
-27 R Searing Meditation
-28 U Behemoth Sledge
-29 U Naya Charm
-30 C Sylvan Bounty
-31 R Titanic Ultimatum
-32 C Evolving Wilds
-33 U Graypelt Refuge
-34 U Jungle Shrine
-35 U Kazandu Refuge
-36 U Sapseep Forest
-37 U Vitu-Ghazi, the City-Tree
-38 L Forest
-39 L Forest
-40 L Plains
-41 L Mountain
-42 M Nicol Bolas, Planeswalker
-43 C Surveilling Sprite
-44 C Nightscape Familiar
-45 U Slavering Nulls
-46 C Brackwater Elemental
-47 C Morgue Toad
-48 U Hellfire Mongrel
-49 R Dimir Cutpurse
-50 C Steamcore Weird
-51 U Moroii
-52 R Blazing Specter
-53 U Fire-Field Ogre
-54 U Shriekmaw
-55 C Ogre Savant
-56 C Jhessian Zombies
-57 C Igneous Pouncer
-58 C Vapor Snag
-59 U Countersquall
-60 C Obelisk of Grixis
-61 C Recoil
-62 R Undermine
-63 U Grixis Charm
-64 U Icy Manipulator
-65 U Deep Analysis
-66 C Agonizing Demise
-67 U Slave of Bolas
-68 U Elder Mastery
-69 R Cruel Ultimatum
-70 R Profane Command
-71 U Spite // Malice
-72 U Pain // Suffering
-73 U Rise // Fall
-74 U Crumbling Necropolis
-75 C Rupture Spire
-76 C Terramorphic Expanse
-77 L Swamp
-78 L Swamp
-79 L Island
-80 L Mountain
+1 M Ajani Vengeant @Izzy
+2 U Kird Ape @Terese Nielsen
+3 C Essence Warden @Terese Nielsen
+4 C Wild Nacatl @Wayne Reynolds
+5 U Loam Lion @Daniel Ljunggren
+6 C Canyon Wildcat @Gary Leach
+7 U Jade Mage @Izzy
+8 C Sylvan Ranger @Christopher Moeller
+9 U Ajani's Pridemate @Svetlin Velinov
+10 C Qasali Pridemage @Chris Rahn
+11 C Grazing Gladehart @Ryan Pancoast
+12 U Fleetfoot Panther @Mark Brill
+13 U Woolly Thoctar @Wayne Reynolds
+14 U Briarhorn @Nils Hamm
+15 R Loxodon Hierarch @Kev Walker
+16 U Spitemare @Matt Cavotta
+17 U Marisi's Twinclaws @Izzy
+18 R Ageless Entity @Jeff Miracola
+19 U Pride of Lions @Carl Critchlow
+20 U Nacatl Hunt-Pride @Steve Prescott
+21 R Firemane Angel @Matt Cavotta
+22 C Ajani's Mantra @James Paick
+23 U Lightning Helix @Raymond Swanland
+24 U Lead the Stampede @Efrem Palacios
+25 U Griffin Guide @Jim Nelson
+26 C Recumbent Bliss @Todd Lockwood
+27 R Searing Meditation @Dave Dorman
+28 U Behemoth Sledge @Dave Allsop
+29 U Naya Charm @Jesper Ejsing
+30 C Sylvan Bounty @Chris Rahn
+31 R Titanic Ultimatum @Steve Prescott
+32 C Evolving Wilds @Steven Belledin
+33 U Graypelt Refuge @Philip Straub
+34 U Jungle Shrine @Wayne Reynolds
+35 U Kazandu Refuge @Franz Vohwinkel
+36 U Sapseep Forest @Aleksi Briclot
+37 U Vitu-Ghazi, the City-Tree @Martina Pilcerova
+38 L Forest @Zoltan Boros & Gabor Szikszai
+39 L Forest @Zoltan Boros & Gabor Szikszai
+40 L Plains @Zoltan Boros & Gabor Szikszai
+41 L Mountain @Zoltan Boros & Gabor Szikszai
+42 M Nicol Bolas, Planeswalker @Izzy
+43 C Surveilling Sprite @Terese Nielsen
+44 C Nightscape Familiar @Jeff Easley
+45 U Slavering Nulls @Dave Kendall
+46 C Brackwater Elemental @Thomas M. Baxa
+47 C Morgue Toad @Franz Vohwinkel
+48 U Hellfire Mongrel @Dan Scott
+49 R Dimir Cutpurse @Kev Walker
+50 C Steamcore Weird @Justin Norman
+51 U Moroii @Dan Scott
+52 R Blazing Specter @Marc Fishman
+53 U Fire-Field Ogre @Mitch Cotie
+54 U Shriekmaw @Steve Prescott
+55 C Ogre Savant @Paolo Parente
+56 C Jhessian Zombies @Ash Wood
+57 C Igneous Pouncer @Chippy
+58 C Vapor Snag @Raymond Swanland
+59 U Countersquall @Anthony Francisco
+60 C Obelisk of Grixis @Nils Hamm
+61 C Recoil @Alan Pollack
+62 R Undermine @Massimilano Frezzato
+63 U Grixis Charm @Lars Grant-West
+64 U Icy Manipulator @Matt Cavotta
+65 U Deep Analysis @Jesper Ejsing
+66 C Agonizing Demise @Mark Brill
+67 U Slave of Bolas @Steve Argyle
+68 U Elder Mastery @Dave Allsop
+69 R Cruel Ultimatum @Ralph Horsley
+70 R Profane Command @Wayne England
+71 U Spite // Malice @David Martin
+72 U Pain // Suffering @David Martin
+73 U Rise // Fall @Pete Venters
+74 U Crumbling Necropolis @Dave Kendall
+75 C Rupture Spire @Jaime Jones
+76 C Terramorphic Expanse @Dan Scott
+77 L Swamp @Mark Tedin
+78 L Swamp @Mark Tedin
+79 L Island @Mark Tedin
+80 L Mountain @Mark Tedin
 
 [tokens]
 w_2_2_griffin_flying

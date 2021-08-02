@@ -7,21 +7,21 @@ Type=Collector_Edition
 ScryfallCode=DRB
 
 [cards]
-1 R Bladewing the Risen
-2 R Bogardan Hellkite
-3 R Draco
-4 R Dragon Whelp
-5 R Dragonstorm
-6 R Ebon Dragon
-7 R Form of the Dragon
-8 R Hellkite Overlord
-9 R Kokusho, the Evening Star
-10 R Nicol Bolas
-11 R Niv-Mizzet, the Firemind
-12 R Rith, the Awakener
-13 R Shivan Dragon
-14 R Thunder Dragon
-15 R Two-Headed Dragon
+1 R Bladewing the Risen @Kev Walker
+2 R Bogardan Hellkite @Scott M. Fischer
+3 R Draco @Sam Wood
+4 R Dragon Whelp @Steven Belledin
+5 R Dragonstorm @Kev Walker
+6 R Ebon Dragon @Donato Giancola
+7 R Form of the Dragon @Daarken
+8 R Hellkite Overlord @Justin Sweet
+9 R Kokusho, the Evening Star @Tsutomu Kawade
+10 R Nicol Bolas @D. Alexander Gregory
+11 R Niv-Mizzet, the Firemind @Todd Lockwood
+12 R Rith, the Awakener @Todd Lockwood
+13 R Shivan Dragon @Justin Sweet
+14 R Thunder Dragon @Chris Rahn
+15 R Two-Headed Dragon @Sam Wood
 
 [tokens]
 g_1_1_saproling

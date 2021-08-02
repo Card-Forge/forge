@@ -7,80 +7,80 @@ Type=Duel_Deck
 ScryfallCode=DDI
 
 [cards]
-1 M Venser, the Sojourner
-2 C Whitemane Lion
-3 C Augury Owl
-4 U Coral Fighters
-5 U Minamo Sightbender
-6 U Mistmeadow Witch
-7 C Scroll Thief
-8 C Neurok Invisimancer
-9 U Slith Strider
-10 U Sky Spirit
-11 U Wall of Denial
-12 R Galepowder Mage
-13 C Kor Cartographer
-14 R Clone
-15 U Cryptic Annelid
-16 C Primal Plasma
-17 U Sawtooth Loon
-18 U Cache Raiders
-19 R Windreaver
-20 C Jedit's Dragoons
-21 R Sunblast Angel
-22 R Sphinx of Uthuun
-23 U Path to Exile
-24 C Preordain
-25 C Sigil of Sleep
-26 C Revoke Existence
-27 U Angelic Shield
-28 U Oblivion Ring
-29 C Safe Passage
-30 C Steel of the Godhead
-31 U Vanish into Memory
-32 C Overrule
-33 C Azorius Chancery
-34 U Flood Plain
-35 U New Benalia
-36 U Sejiri Refuge
-37 C Soaring Seacliff
-38 L Plains
-39 L Plains
-40 L Plains
-41 L Island
-42 L Island
-43 L Island
-44 M Koth of the Hammer
-45 C Plated Geopede
-46 C Pygmy Pyrosaur
-47 C Pilgrim's Eye
-48 U Aether Membrane
-49 C Fiery Hellhound
-50 C Vulshok Sorcerer
-51 U Anger
-52 C Cosi's Ravager
-53 C Vulshok Berserker
-54 U Bloodfire Kavu
-55 U Stone Giant
-56 U Geyser Glider
-57 R Lithophage
-58 R Torchling
-59 C Chartooth Cougar
-60 U Earth Servant
-61 U Greater Stone Spirit
-62 R Bloodfire Colossus
-63 C Wayfarer's Bauble
-64 C Armillary Sphere
-65 R Journeyer's Kite
-66 U Vulshok Morningstar
-67 C Searing Blaze
-68 U Vulshok Battlegear
-69 C Downhill Charge
-70 C Seismic Strike
-71 C Spire Barrage
-72 U Jaws of Stone
-73 R Volley of Boulders
-74 L Mountain
-75 L Mountain
-76 L Mountain
-77 L Mountain
+1 M Venser, the Sojourner @Eric Deschamps
+2 C Whitemane Lion @Zoltan Boros & Gabor Szikszai
+3 C Augury Owl @Jim Nelson
+4 U Coral Fighters @Steve Luke
+5 U Minamo Sightbender @Luca Zontini
+6 U Mistmeadow Witch @Greg Staples
+7 C Scroll Thief @Alex Horley-Orlandelli
+8 C Neurok Invisimancer @Izzy
+9 U Slith Strider @Justin Sweet
+10 U Sky Spirit @Rebecca Guay
+11 U Wall of Denial @Howard Lyon
+12 R Galepowder Mage @Jeremy Jarvis
+13 C Kor Cartographer @Ryan Pancoast
+14 R Clone @Kev Walker
+15 U Cryptic Annelid @Anthony S. Waters
+16 C Primal Plasma @Luca Zontini
+17 U Sawtooth Loon @Heather Hudson
+18 U Cache Raiders @Pete Venters
+19 R Windreaver @Aleksi Briclot
+20 C Jedit's Dragoons @John Matson
+21 R Sunblast Angel @Jason Chan
+22 R Sphinx of Uthuun @Kekai Kotaki
+23 U Path to Exile @Erica Yang
+24 C Preordain @Scott Chou
+25 C Sigil of Sleep @Greg Hildebrandt & Tim Hildebrandt
+26 C Revoke Existence @Allen Williams
+27 U Angelic Shield @Adam Rex
+28 U Oblivion Ring @Franz Vohwinkel
+29 C Safe Passage @Christopher Moeller
+30 C Steel of the Godhead @Jason Chan
+31 U Vanish into Memory @Rebekah Lynn
+32 C Overrule @Alan Pollack
+33 C Azorius Chancery @John Avon
+34 U Flood Plain @Pat Morrissey
+35 U New Benalia @Richard Wright
+36 U Sejiri Refuge @Ryan Pancoast
+37 C Soaring Seacliff @Izzy
+38 L Plains @John Avon
+39 L Plains @James Paick
+40 L Plains @Martina Pilcerova
+41 L Island @Rob Alexander
+42 L Island @Jung Park
+43 L Island @Martina Pilcerova
+44 M Koth of the Hammer @Eric Deschamps
+45 C Plated Geopede @Johann Bodin
+46 C Pygmy Pyrosaur @Dan Frazier
+47 C Pilgrim's Eye @Dan Scott
+48 U Aether Membrane @Zoltan Boros & Gabor Szikszai
+49 C Fiery Hellhound @Ted Galaday
+50 C Vulshok Sorcerer @rk post
+51 U Anger @Svetlin Velinov
+52 C Cosi's Ravager @Zoltan Boros & Gabor Szikszai
+53 C Vulshok Berserker @Pete Venters
+54 U Bloodfire Kavu @Greg Staples
+55 U Stone Giant @Warren Mahy
+56 U Geyser Glider @Warren Mahy
+57 R Lithophage @Mike Ploog
+58 R Torchling @rk post
+59 C Chartooth Cougar @Chase Stone
+60 U Earth Servant @Lucas Graciano
+61 U Greater Stone Spirit @Yokota Katsumi
+62 R Bloodfire Colossus @Greg Staples
+63 C Wayfarer's Bauble @Darrell Riche
+64 C Armillary Sphere @Franz Vohwinkel
+65 R Journeyer's Kite @Hiro Izawa
+66 U Vulshok Morningstar @David Martin
+67 C Searing Blaze @James Paick
+68 U Vulshok Battlegear @Kevin Dobler
+69 C Downhill Charge @Greg Hildebrandt & Tim Hildebrandt
+70 C Seismic Strike @Christopher Moeller
+71 C Spire Barrage @Ryan Pancoast
+72 U Jaws of Stone @Zoltan Boros & Gabor Szikszai
+73 R Volley of Boulders @Tony Szczudlo
+74 L Mountain @Tomasz Jedruszek
+75 L Mountain @Tomasz Jedruszek
+76 L Mountain @Martina Pilcerova
+77 L Mountain @Mark Tedin

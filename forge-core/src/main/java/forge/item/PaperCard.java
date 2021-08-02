@@ -54,6 +54,7 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
        (see getCollectorNumber())
     */
     private String collectorNumber = null;
+    private final String artist;
     private final int artIndex;
     private final boolean foil;
     private Boolean hasImage;
@@ -115,6 +116,11 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         return rarity;
     }
 
+    @Override
+    public String getArtist() {
+        return artist;
+    }
+
     /* FIXME: At the moment, every card can get Foiled, with no restriction on the
         corresponding Edition - so we could Foil even Alpha cards.
     */
@@ -124,7 +130,7 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
 
         if (this.foiledVersion == null) {
             this.foiledVersion = new PaperCard(this.rules, this.edition, this.rarity,
-                    this.artIndex, true, String.valueOf(collectorNumber));
+                    this.artIndex, true, String.valueOf(collectorNumber), this.artist);
         }
         return this.foiledVersion;
     }
@@ -163,16 +169,12 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         }
     };
 
-    public PaperCard(final CardRules rules0, final String edition0, final CardRarity rarity0) {
-        this(rules0, edition0, rarity0, IPaperCard.DEFAULT_ART_INDEX, false);
-    }
-
     public PaperCard(final CardRules rules0, final String edition0, final CardRarity rarity0, final int artIndex0) {
-        this(rules0, edition0, rarity0, artIndex0, false);
+        this(rules0, edition0, rarity0, artIndex0, false, "");
     }
 
     public PaperCard(final CardRules rules0, final String edition0, final CardRarity rarity0, final int artIndex0,
-                     final boolean foil0) {
+                     final boolean foil0, final String artist0) {
         if (rules0 == null || edition0 == null || rarity0 == null) {
             throw new IllegalArgumentException("Cannot create card without rules, edition or rarity");
         }
@@ -182,16 +184,12 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         artIndex = artIndex0;
         foil = foil0;
         rarity = rarity0;
-    }
-
-    public PaperCard(final CardRules rules0, final String edition0, final CardRarity rarity0, final int artIndex0,
-                     final String collectorNumber0) {
-        this(rules0, edition0, rarity0, artIndex0, false, collectorNumber0);
+        artist = (artist0 != null ? artist0 : "");
     }
 
     public PaperCard(final CardRules rules0, final String edition0, final CardRarity rarity0,
-                     final int artIndex0, final boolean foil0, final String collectorNumber0) {
-        this(rules0, edition0, rarity0, artIndex0, foil0);
+                     final int artIndex0, final boolean foil0, final String collectorNumber0, final String artist) {
+        this(rules0, edition0, rarity0, artIndex0, foil0, artist);
         collectorNumber = collectorNumber0;
     }
 

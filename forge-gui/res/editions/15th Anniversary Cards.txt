@@ -6,5 +6,5 @@ Type=Promo
 ScryfallCode=P15A
 
 [cards]
-1 R Char
-2 R Kamahl, Pit Fighter
+1 R Char @Dave Dorman
+2 R Kamahl, Pit Fighter @Kev Walker

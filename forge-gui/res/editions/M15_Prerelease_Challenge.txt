@@ -8,7 +8,7 @@ Type=Promo
 ScryfallCode=PPC1
 
 [cards]
-1 C Garruk the Slayer
+1 C Garruk the Slayer @Brad Rigney
 
 [tokens]
 g_2_2_wolf

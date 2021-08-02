@@ -6,26 +6,26 @@ Type=Promo
 ScryfallCode=OVNT
 
 [cards]
-2003 R Black Lotus
-2004 R Timetwister
-2005 R Ancestral Recall
-2006 R Mox Pearl
-2007 R Mox Jet
-2008 R Mox Ruby
-2009 R Mox Emerald
-2010 R Mox Sapphire
-2011 R Time Walk
-2012 R Timetwister
-2013 R Ancestral Recall
-2014 M Mox Pearl
-2015 M Mox Emerald
-2016EU M Mox Jet
-2016NA M Mox Sapphire
-2017EU M Mox Ruby
-2017NA M Black Lotus
-2018 M Ancestral Recall
-2018A M Timetwister
-2018NA M Time Walk
-2019 M Mox Pearl
-2019A M Mox Sapphire
-2019NA M Mox Jet
+2003 R Black Lotus @Christopher Rush
+2004 R Timetwister @Mark Tedin
+2005 R Ancestral Recall @Mark Poole
+2006 R Mox Pearl @Volkan Baǵa
+2007 R Mox Jet @Volkan Baǵa
+2008 R Mox Ruby @Volkan Baǵa
+2009 R Mox Emerald @Volkan Baǵa
+2010 R Mox Sapphire @Volkan Baǵa
+2011 R Time Walk @Chris Rahn
+2012 R Timetwister @Matt Stewart
+2013 R Ancestral Recall @Ryan Pancoast
+2014 M Mox Pearl @Raoul Vitale
+2015 M Mox Emerald @Raoul Vitale
+2016EU M Mox Jet @Raoul Vitale
+2016NA M Mox Sapphire @Raoul Vitale
+2017EU M Mox Ruby @Raoul Vitale
+2017NA M Black Lotus @Steven Belledin
+2018 M Ancestral Recall @Raoul Vitale
+2018A M Timetwister @Ralph Horsley
+2018NA M Time Walk @Chris Seaman
+2019 M Mox Pearl @Sidharth Chaturvedi
+2019A M Mox Sapphire @Tyler Walpole
+2019NA M Mox Jet @Filip Burburan

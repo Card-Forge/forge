@@ -6,4 +6,4 @@ Type=Promo
 ScryfallCode=PTMP
 
 [cards]
-221 R Dirtcowl Wurm
+221 R Dirtcowl Wurm @Dan Frazier

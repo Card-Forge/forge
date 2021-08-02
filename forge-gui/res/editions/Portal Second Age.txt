@@ -12,168 +12,168 @@ Foil=NotSupported
 ScryfallCode=P02
 
 [cards]
-61 U Abyssal Nightstalker
-31 U Air Elemental
-1 U Alaborn Cavalier
-2 C Alaborn Grenadier
-3 C Alaborn Musketeer
-4 C Alaborn Trooper
-5 R Alaborn Veteran
-6 U Alaborn Zealot
-121 R Alluring Scent
-62 R Ancient Craving
-7 R Angel of Fury
-8 U Angel of Mercy
-9 C Angelic Blessing
-10 C Angelic Wall
-32 U Apprentice Sorcerer
-11 R Archangel
-12 R Armageddon
-33 U Armored Galleon
-13 U Armored Griffin
-122 C Barbtooth Wurm
-14 U Bargain
-123 C Bear Cub
-124 U Bee Sting
-91 U Blaze
-63 U Bloodcurdling Scream
-15 C Breath of Life
-92 R Brimstone Dragon
-64 U Brutal Nightstalker
-65 C Chorus of Woe
-34 R Coastal Wizard
-66 U Coercion
-67 C Cruel Edict
-93 R Cunning Giant
-68 C Dakmor Bat
-69 U Dakmor Plague
-70 C Dakmor Scorpion
-71 R Dakmor Sorceress
-72 U Dark Offering
-125 R Deathcoil Wurm
-126 U Deep Wood
-36 C Deja Vu
-35 R Denizen of the Deep
-94 R Earthquake
-37 R Exhaustion
-38 C Extinguish
-39 U Eye Spy
-40 C False Summoning
-16 C Festival of Trokin
-163 L Forest
-164 L Forest
-165 L Forest
-73 U Foul Spirit
-95 C Goblin Cavaliers
-96 U Goblin Firestarter
-97 R Goblin General
-98 C Goblin Glider
-99 U Goblin Lore
-100 U Goblin Matron
-101 C Goblin Mountaineer
-102 C Goblin Piker
-103 C Goblin Raider
-104 U Goblin War Cry
-105 C Goblin War Strike
-127 C Golden Bear
-74 C Hand of Death
-128 U Harmony of Nature
-75 R Hidden Horror
-129 R Hurricane
-130 U Ironhoof Ox
-154 L Island
-155 L Island
-156 L Island
-106 U Jagged Lightning
-17 R Just Fate
-76 U Kiss of Death
-107 C Lava Axe
-131 U Lone Wolf
-77 C Lurking Nightstalker
-132 C Lynx
-108 R Magma Giant
-78 C Mind Rot
-79 C Moaning Spirit
-133 C Monstrous Growth
-160 L Mountain
-161 L Mountain
-162 L Mountain
-80 C Muck Rats
-41 U Mystic Denial
-134 C Natural Spring
-135 C Nature's Lore
-81 R Nightstalker Engine
-136 C Norwood Archers
-137 R Norwood Priestess
-138 C Norwood Ranger
-139 C Norwood Riders
-140 C Norwood Warrior
-109 U Obsidian Giant
-110 U Ogre Arsonist
-111 C Ogre Berserker
-112 U Ogre Taskmaster
-113 C Ogre Warrior
-18 C Path of Peace
-42 R Piracy
-151 L Plains
-152 L Plains
-153 L Plains
-141 C Plated Wurm
-82 U Predatory Nightstalker
-83 C Prowling Nightstalker
-114 C Raging Goblin
-84 C Raiding Nightstalker
-85 R Rain of Daggers
-86 C Raise Dead
-19 U Rally the Troops
-87 C Ravenous Rats
-142 R Razorclaw Bear
-115 R Relentless Assault
-43 U Remove
-143 U Renewing Touch
-88 R Return of the Nightstalkers
-20 C Righteous Charge
-21 R Righteous Fury
-144 U River Bear
-145 C Salvage
-44 C Screeching Drake
-45 U Sea Drake
-46 C Sleight of Hand
-116 C Spitting Earth
-22 R Steam Catapult
-47 C Steam Frigate
-117 C Stone Rain
-157 L Swamp
-158 L Swamp
-159 L Swamp
-89 C Swarm of Rats
-146 R Sylvan Basilisk
-147 R Sylvan Yeti
-48 C Talas Air Ship
-49 C Talas Explorer
-50 C Talas Merchant
-51 R Talas Researcher
-52 C Talas Scout
-53 R Talas Warrior
-23 C Temple Acolyte
-24 U Temple Elder
-54 R Temporal Manipulation
-55 U Theft of Dreams
-56 C Tidal Surge
-57 C Time Ebb
-58 C Touch of Brilliance
-25 C Town Sentry
-148 C Tree Monkey
-118 C Tremor
-26 C Trokin High Guard
-59 U Undo
-149 U Untamed Wilds
-90 R Vampiric Spirit
-27 U Vengeance
-119 C Volcanic Hammer
-28 C Volunteer Militia
-29 U Warrior's Stand
-30 C Wild Griffin
-150 U Wild Ox
-120 R Wildfire
-60 C Wind Sail
+61 U Abyssal Nightstalker @Sam Wood
+31 U Air Elemental @Doug Chaffee
+1 U Alaborn Cavalier @Kev Walker
+2 C Alaborn Grenadier @David A. Cherry
+3 C Alaborn Musketeer @Heather Hudson
+4 C Alaborn Trooper @Lubov
+5 R Alaborn Veteran @Henry Van Der Linde
+6 U Alaborn Zealot @David Horne
+121 R Alluring Scent @Melissa A. Benson
+62 R Ancient Craving @Rob Alexander
+7 R Angel of Fury @Keith Parkinson
+8 U Angel of Mercy @Melissa A. Benson
+9 C Angelic Blessing @Henry Van Der Linde
+10 C Angelic Wall @Rebecca Guay
+32 U Apprentice Sorcerer @Christopher Rush
+11 R Archangel @rk post
+12 R Armageddon @Rob Alexander
+33 U Armored Galleon @Doug Chaffee
+13 U Armored Griffin @Bradley Williams
+122 C Barbtooth Wurm @Rebecca Guay
+14 U Bargain @Phil Foglio
+123 C Bear Cub @Ron Spencer
+124 U Bee Sting @Cris Dornaus
+91 U Blaze @David A. Cherry
+63 U Bloodcurdling Scream @Dan Frazier
+15 C Breath of Life @Lubov
+92 R Brimstone Dragon @David A. Cherry
+64 U Brutal Nightstalker @Brom
+65 C Chorus of Woe @Randy Gallegos
+34 R Coastal Wizard @Edward P. Beard, Jr.
+66 U Coercion @Jeffrey R. Busch
+67 C Cruel Edict @Jeffrey R. Busch
+93 R Cunning Giant @Jeffrey R. Busch
+68 C Dakmor Bat @Una Fricker
+69 U Dakmor Plague @Jeff Miracola
+70 C Dakmor Scorpion @Randy Gallegos
+71 R Dakmor Sorceress @Matthew D. Wilson
+72 U Dark Offering @Edward P. Beard, Jr.
+125 R Deathcoil Wurm @Rebecca Guay
+126 U Deep Wood @Jeff Miracola
+36 C Deja Vu @David Horne
+35 R Denizen of the Deep @Anson Maddocks
+94 R Earthquake @Jeffrey R. Busch
+37 R Exhaustion @Kaja Foglio
+38 C Extinguish @Douglas Shuler
+39 U Eye Spy @DiTerlizzi
+40 C False Summoning @DiTerlizzi
+16 C Festival of Trokin @Jeffrey R. Busch
+163 L Forest @Quinton Hoover
+164 L Forest @Quinton Hoover
+165 L Forest @Quinton Hoover
+73 U Foul Spirit @rk post
+95 C Goblin Cavaliers @DiTerlizzi
+96 U Goblin Firestarter @Keith Parkinson
+97 R Goblin General @Keith Parkinson
+98 C Goblin Glider @Pete Venters
+99 U Goblin Lore @D. Alexander Gregory
+100 U Goblin Matron @Daniel Gelon
+101 C Goblin Mountaineer @DiTerlizzi
+102 C Goblin Piker @DiTerlizzi
+103 C Goblin Raider @Matt Stawicki
+104 U Goblin War Cry @Anson Maddocks
+105 C Goblin War Strike @Michael Weaver
+127 C Golden Bear @Una Fricker
+74 C Hand of Death @Heather Hudson
+128 U Harmony of Nature @Kaja Foglio
+75 R Hidden Horror @Brom
+129 R Hurricane @Rob Alexander
+130 U Ironhoof Ox @Una Fricker
+154 L Island @John Avon
+155 L Island @John Avon
+156 L Island @John Avon
+106 U Jagged Lightning @Michael Weaver
+17 R Just Fate @Bradley Williams
+76 U Kiss of Death @Melissa A. Benson
+107 C Lava Axe @Edward P. Beard, Jr.
+131 U Lone Wolf @Michael Weaver
+77 C Lurking Nightstalker @Kev Walker
+132 C Lynx @Rebecca Guay
+108 R Magma Giant @Michael Weaver
+78 C Mind Rot @Douglas Shuler
+79 C Moaning Spirit @Rebecca Guay
+133 C Monstrous Growth @Una Fricker
+160 L Mountain @Rob Alexander
+161 L Mountain @Rob Alexander
+162 L Mountain @Rob Alexander
+80 C Muck Rats @Una Fricker
+41 U Mystic Denial @DiTerlizzi
+134 C Natural Spring @Jeffrey R. Busch
+135 C Nature's Lore @Lubov
+81 R Nightstalker Engine @Mark Tedin
+136 C Norwood Archers @Rebecca Guay
+137 R Norwood Priestess @Melissa A. Benson
+138 C Norwood Ranger @Ron Spencer
+139 C Norwood Riders @Rebecca Guay
+140 C Norwood Warrior @Rebecca Guay
+109 U Obsidian Giant @David A. Cherry
+110 U Ogre Arsonist @Jeffrey R. Busch
+111 C Ogre Berserker @David A. Cherry
+112 U Ogre Taskmaster @Dan Frazier
+113 C Ogre Warrior @Jeff Miracola
+18 C Path of Peace @David A. Cherry
+42 R Piracy @Bradley Williams
+151 L Plains @Fred Fields
+152 L Plains @Fred Fields
+153 L Plains @Fred Fields
+141 C Plated Wurm @Daniel Gelon
+82 U Predatory Nightstalker @D. Alexander Gregory
+83 C Prowling Nightstalker @Keith Parkinson
+114 C Raging Goblin @Jeff Miracola
+84 C Raiding Nightstalker @Pete Venters
+85 R Rain of Daggers @Melissa A. Benson
+86 C Raise Dead @Anson Maddocks
+19 U Rally the Troops @Mark Poole
+87 C Ravenous Rats @Edward P. Beard, Jr.
+142 R Razorclaw Bear @Heather Hudson
+115 R Relentless Assault @Tom Wänerstrand
+43 U Remove @DiTerlizzi
+143 U Renewing Touch @Rebecca Guay
+88 R Return of the Nightstalkers @Randy Gallegos
+20 C Righteous Charge @Jeffrey R. Busch
+21 R Righteous Fury @Edward P. Beard, Jr.
+144 U River Bear @Una Fricker
+145 C Salvage @Keith Parkinson
+44 C Screeching Drake @Anson Maddocks
+45 U Sea Drake @Rebecca Guay
+46 C Sleight of Hand @Phil Foglio
+116 C Spitting Earth @David Horne
+22 R Steam Catapult @Mark Tedin
+47 C Steam Frigate @Mark Tedin
+117 C Stone Rain @Doug Chaffee
+157 L Swamp @Susan Van Camp
+158 L Swamp @Susan Van Camp
+159 L Swamp @Susan Van Camp
+89 C Swarm of Rats @Kev Walker
+146 R Sylvan Basilisk @Ron Spencer
+147 R Sylvan Yeti @Brom
+48 C Talas Air Ship @Mark Tedin
+49 C Talas Explorer @Douglas Shuler
+50 C Talas Merchant @Lubov
+51 R Talas Researcher @Kaja Foglio
+52 C Talas Scout @Heather Hudson
+53 R Talas Warrior @Douglas Shuler
+23 C Temple Acolyte @Lubov
+24 U Temple Elder @David Horne
+54 R Temporal Manipulation @Anson Maddocks
+55 U Theft of Dreams @Randy Gallegos
+56 C Tidal Surge @Phil Foglio
+57 C Time Ebb @Sam Wood
+58 C Touch of Brilliance @Kaja Foglio
+25 C Town Sentry @Bradley Williams
+148 C Tree Monkey @Una Fricker
+118 C Tremor @Pete Venters
+26 C Trokin High Guard @Ron Spencer
+59 U Undo @Henry Van Der Linde
+149 U Untamed Wilds @Jeffrey R. Busch
+90 R Vampiric Spirit @Anson Maddocks
+27 U Vengeance @Keith Parkinson
+119 C Volcanic Hammer @Edward P. Beard, Jr.
+28 C Volunteer Militia @Keith Parkinson
+29 U Warrior's Stand @Keith Parkinson
+30 C Wild Griffin @Jeff Miracola
+150 U Wild Ox @Jeffrey R. Busch
+120 R Wildfire @Rob Alexander
+60 C Wind Sail @Matt Stawicki

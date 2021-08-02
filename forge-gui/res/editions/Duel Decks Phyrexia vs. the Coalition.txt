@@ -7,77 +7,77 @@ Type=Duel_Deck
 ScryfallCode=DDE
 
 [cards]
-1 M Phyrexian Negator
-2 C Carrion Feeder
-3 C Phyrexian Battleflies
-4 C Phyrexian Denouncer
-5 U Bone Shredder
-6 C Phyrexian Ghoul
-7 U Priest of Gix
-8 C Phyrexian Broodlings
-9 U Sanguine Guard
-10 C Phyrexian Debaser
-11 U Order of Yawgmoth
-12 U Phyrexian Defiler
-13 R Phyrexian Plaguelord
-14 U Phyrexian Hulk
-15 U Phyrexian Gargantua
-16 R Phyrexian Colossus
-17 U Voltaic Key
-18 C Dark Ritual
-19 U Lightning Greaves
-20 U Phyrexian Totem
-21 U Phyrexian Vault
-22 U Puppet Strings
-23 U Whispersilk Cloak
-24 U Worn Powerstone
-25 U Slay
-26 C Hideous End
-27 R Phyrexian Arena
-28 U Hornet Cannon
-29 R Phyrexian Processor
-30 C Tendrils of Corruption
-31 R Living Death
-32 L Swamp
-33 L Swamp
-34 L Swamp
-35 L Swamp
-36 M Urza's Rage
-37 C Thornscape Apprentice
-38 C Nomadic Elf
-39 C Quirion Elves
-40 U Sunscape Battlemage
-41 U Thunderscape Battlemage
-42 U Thornscape Battlemage
-43 U Verduran Emissary
-44 C Yavimaya Elder
-45 U Charging Troll
-46 R Gerrard Capashen
-47 R Darigaaz, the Igniter
-48 R Rith, the Awakener
-49 R Treva, the Renewer
-50 U Evasive Action
-51 C Tribal Flames
-52 C Fertile Ground
-53 C Gerrard's Command
-54 R Coalition Relic
-55 C Narrow Escape
-56 C Exotic Curse
-57 C Harrow
-58 C Armadillo Cloak
-59 U Darigaaz's Charm
-60 U Rith's Charm
-61 U Treva's Charm
-62 U Power Armor
-63 U Allied Strategies
-64 U Elfhame Palace
-65 U Shivan Oasis
-66 C Terramorphic Expanse
-67 L Plains
-68 L Island
-69 L Mountain
-70 L Forest
-71 L Forest
+1 M Phyrexian Negator @Jim Murray
+2 C Carrion Feeder @Brian Snõddy
+3 C Phyrexian Battleflies @Dan Frazier
+4 C Phyrexian Denouncer @Brian Snõddy
+5 U Bone Shredder @Ron Spencer
+6 C Phyrexian Ghoul @Pete Venters
+7 U Priest of Gix @Brian Despain
+8 C Phyrexian Broodlings @Daren Bader
+9 U Sanguine Guard @Kev Walker
+10 C Phyrexian Debaser @Mark Tedin
+11 U Order of Yawgmoth @Chippy
+12 U Phyrexian Defiler @DiTerlizzi
+13 R Phyrexian Plaguelord @Kev Walker
+14 U Phyrexian Hulk @Matthew D. Wilson
+15 U Phyrexian Gargantua @Carl Critchlow
+16 R Phyrexian Colossus @Mark Tedin
+17 U Voltaic Key @Franz Vohwinkel
+18 C Dark Ritual @Tom Fleming
+19 U Lightning Greaves @Jeremy Jarvis
+20 U Phyrexian Totem @John Zeleznik
+21 U Phyrexian Vault @Hannibal King
+22 U Puppet Strings @Scott Kirschner
+23 U Whispersilk Cloak @Daren Bader
+24 U Worn Powerstone @Henry G. Higginbotham
+25 U Slay @Ben Thompson
+26 C Hideous End @Zoltan Boros & Gabor Szikszai
+27 R Phyrexian Arena @Pete Venters
+28 U Hornet Cannon @Ron Spencer
+29 R Phyrexian Processor @Dave Kendall
+30 C Tendrils of Corruption @Vance Kovacs
+31 R Living Death @Charles Gillespie
+32 L Swamp @Rob Alexander
+33 L Swamp @Rob Alexander
+34 L Swamp @Ron Spencer
+35 L Swamp @Ron Spencer
+36 M Urza's Rage @Jim Murray
+37 C Thornscape Apprentice @Randy Gallegos
+38 C Nomadic Elf @D. J. Cleland-Hura
+39 C Quirion Elves @Douglas Shuler
+40 U Sunscape Battlemage @Tony Szczudlo
+41 U Thunderscape Battlemage @Mike Ploog
+42 U Thornscape Battlemage @Matt Cavotta
+43 U Verduran Emissary @Alton Lawson
+44 C Yavimaya Elder @Matt Cavotta
+45 U Charging Troll @Dave Dorman
+46 R Gerrard Capashen @Brom
+47 R Darigaaz, the Igniter @Mark Zug
+48 R Rith, the Awakener @Carl Critchlow
+49 R Treva, the Renewer @Ciruelo
+50 U Evasive Action @Brian Snõddy
+51 C Tribal Flames @Tony Szczudlo
+52 C Fertile Ground @Carl Critchlow
+53 C Gerrard's Command @Roger Raupp
+54 R Coalition Relic @Donato Giancola
+55 C Narrow Escape @Karl Kopinski
+56 C Exotic Curse @Dany Orizio
+57 C Harrow @Rob Alexander
+58 C Armadillo Cloak @Wayne Reynolds
+59 U Darigaaz's Charm @David Martin
+60 U Rith's Charm @David Martin
+61 U Treva's Charm @David Martin
+62 U Power Armor @Doug Chaffee
+63 U Allied Strategies @Paolo Parente
+64 U Elfhame Palace @Jerry Tiritilli
+65 U Shivan Oasis @Rob Alexander
+66 C Terramorphic Expanse @Dan Scott
+67 L Plains @D. J. Cleland-Hura
+68 L Island @Terese Nielsen
+69 L Mountain @Scott Bailey
+70 L Forest @John Avon
+71 L Forest @Alan Pollack
 
 [tokens]
 hornet

@@ -6,148 +6,148 @@ Type=Commander
 ScryfallCode=ZNC
 
 [cards]
-1 M Anowon, the Ruin Thief
-2 M Obuun, Mul Daya Ancestor
-3 R Trove Warden
-4 R Enigma Thief
-5 R Whispersteel Dagger
-6 R Geode Rager
-7 M Anowon, the Ruin Thief
-8 M Obuun, Mul Daya Ancestor
-9 U Abzan Falconer
-10 M Admonition Angel
-11 U Banishing Light
-12 U Condemn
-13 U Crush Contraband
-14 U Elite Scaleguard
-15 R Emeria Angel
-16 R Emeria Shepherd
-17 R Hour of Revelation
-18 C Kor Cartographer
-19 R Planar Outburst
-20 U Retreat to Emeria
-21 M Sun Titan
-22 R Together Forever
-23 U Aetherize
-24 C Distant Melody
-25 U Fact or Fiction
-26 U Faerie Vandal
-27 U Invisible Stalker
-28 C Latchkey Faerie
-29 U Marang River Prowler
-30 U Master Thief
-31 U Military Intelligence
-32 U Nightveil Sprite
-33 R Notorious Throng
-34 U Open into Wonder
-35 R Scourge of Fleets
-36 C Slither Blade
-37 R Stolen Identity
-38 C Triton Shorestalker
-39 U Whirler Rogue
-40 C Changeling Outcast
-41 U Endless Obedience
-42 R Fated Return
-43 C Frogtosser Banneret
-44 R Gonti, Lord of Luxury
-45 R In Garruk's Wake
-46 U Marsh Flitter
-47 C Murder
-48 R Necromantic Selection
-49 R Nighthowler
-50 R Ogre Slumlord
-51 U Oona's Blackguard
-52 U Price of Fame
-53 U Rise from the Grave
-54 R Sepulchral Primordial
-55 U Stinkdrinker Bandit
-56 U Syr Konrad, the Grim
-57 U Zulaport Cutthroat
-58 R Abundance
-59 U Acidic Slime
-60 U Armorcraft Judge
-61 U Beanstalk Giant
-62 U Circuitous Route
-63 C Elvish Rejuvenator
-64 U Embodiment of Insight
-65 U Evolution Sage
-66 C Far Wanderings
-67 C Fertilid
-68 U Harmonize
-69 C Harrow
-70 U Inspiring Call
-71 U Keeper of Fables
-72 C Khalni Heart Expedition
-73 C Kodama's Reach
-74 R The Mending of Dominaria
-75 M Multani, Yavimaya's Avatar
-76 R Nissa's Renewal
-77 R Rampaging Baloths
-78 U Retreat to Kazandu
-79 R Return of the Wildspeaker
-80 R Rites of Flourishing
-81 C Satyr Wayfinder
-82 C Sporemound
-83 C Springbloom Druid
-84 R Sylvan Advocate
-85 U Tuskguard Captain
-86 R Waker of the Wilds
-87 C Yavimaya Elder
-88 U Zendikar's Roil
-89 R Consuming Aberration
-90 U Extract from Darkness
-91 U Ground Assault
-92 M Lazav, Dimir Mastermind
-93 R Living Twister
-94 R Mina and Denn, Wildborn
-95 U Naya Charm
-96 R Notion Thief
-97 M Omnath, Locus of Rage
-98 R Oona, Queen of the Fae
-99 R Silumgar's Command
-100 U Soul Manipulation
-101 R Spinal Embrace
-102 U Struggle // Survive
-103 R Sygg, River Cutthroat
-104 U Sylvan Reclamation
-105 U Treacherous Terrain
-106 C Arcane Signet
-107 R Blackblade Reforged
-108 R Bonehoard
-109 C Commander's Sphere
-110 U Dimir Keyrune
-111 C Dimir Locket
-112 U Dimir Signet
-113 U Heirloom Blade
-114 C Mind Stone
-115 R Obelisk of Urd
-116 U Sandstone Oracle
-117 C Scaretiller
-118 R Scytheclaw
-119 R Seer's Sundial
-120 U Sol Ring
-121 U Blighted Woodland
-122 C Boros Garrison
-123 C Boros Guildgate
-124 C Command Tower
-125 U Cryptic Caves
-126 U Dimir Aqueduct
-127 C Dimir Guildgate
-128 C Dismal Backwater
-129 C Evolving Wilds
-130 C Gruul Guildgate
-131 U Gruul Turf
-132 U Jungle Shrine
-133 U Jwar Isle Refuge
-134 U Krosan Verge
-135 U Myriad Landscape
-136 C Naya Panorama
-137 R Needle Spires
-138 U Rogue's Passage
-139 C Selesnya Guildgate
-140 C Selesnya Sanctuary
-141 U Submerged Boneyard
-142 C Terramorphic Expanse
+1 M Anowon, the Ruin Thief @Magali Villeneuve
+2 M Obuun, Mul Daya Ancestor @Chris Rallis
+3 R Trove Warden @Lars Grant-West
+4 R Enigma Thief @Victor Adame Minguez
+5 R Whispersteel Dagger @Svetlin Velinov
+6 R Geode Rager @Caio Monteiro
+7 M Anowon, the Ruin Thief @Magali Villeneuve
+8 M Obuun, Mul Daya Ancestor @Chris Rallis
+9 U Abzan Falconer @Steven Belledin
+10 M Admonition Angel @Steve Argyle
+11 U Banishing Light @Willian Murai
+12 U Condemn @Daren Bader
+13 U Crush Contraband @Jason A. Engle
+14 U Elite Scaleguard @Steve Prescott
+15 R Emeria Angel @Jim Murray
+16 R Emeria Shepherd @Cynthia Sheppard
+17 R Hour of Revelation @Raymond Swanland
+18 C Kor Cartographer @Ryan Pancoast
+19 R Planar Outburst @Vincent Proce
+20 U Retreat to Emeria @Kieran Yanner
+21 M Sun Titan @Todd Lockwood
+22 R Together Forever @Aaron Miller
+23 U Aetherize @Ryan Barger
+24 C Distant Melody @Omar Rayyan
+25 U Fact or Fiction @Matt Cavotta
+26 U Faerie Vandal @Paul Scott Canavan
+27 U Invisible Stalker @Bud Cook
+28 C Latchkey Faerie @Warren Mahy
+29 U Marang River Prowler @Yefim Kligerman
+30 U Master Thief @Christopher Moeller
+31 U Military Intelligence @Craig J Spearing
+32 U Nightveil Sprite @Uriah Voth
+33 R Notorious Throng @Thomas Denmark
+34 U Open into Wonder @Tyler Jacobson
+35 R Scourge of Fleets @Steven Belledin
+36 C Slither Blade @Zezhou Chen
+37 R Stolen Identity @Clint Cearley
+38 C Triton Shorestalker @Svetlin Velinov
+39 U Whirler Rogue @Winona Nelson
+40 C Changeling Outcast @Micah Epstein
+41 U Endless Obedience @Karl Kopinski
+42 R Fated Return @Peter Mohrbacher
+43 C Frogtosser Banneret @Ralph Horsley
+44 R Gonti, Lord of Luxury @Daarken
+45 R In Garruk's Wake @Chase Stone
+46 U Marsh Flitter @Wayne Reynolds
+47 C Murder @Allen Williams
+48 R Necromantic Selection @Dave Kendall
+49 R Nighthowler @Nils Hamm
+50 R Ogre Slumlord @Trevor Claxton
+51 U Oona's Blackguard @Kev Walker
+52 U Price of Fame @Winona Nelson
+53 U Rise from the Grave @Kieran Yanner
+54 R Sepulchral Primordial @Stephan Martiniere
+55 U Stinkdrinker Bandit @Brandon Dorman
+56 U Syr Konrad, the Grim @Anna Steinbauer
+57 U Zulaport Cutthroat @Jason Rainville
+58 R Abundance @Rebecca Guay
+59 U Acidic Slime @Karl Kopinski
+60 U Armorcraft Judge @David Palumbo
+61 U Beanstalk Giant @Jason A. Engle
+62 U Circuitous Route @Milivoj Ćeran
+63 C Elvish Rejuvenator @Winona Nelson
+64 U Embodiment of Insight @Marco Nelor
+65 U Evolution Sage @Simon Dominic
+66 C Far Wanderings @Darrell Riche
+67 C Fertilid @Nicholas Gregory
+68 U Harmonize @Dan Scott
+69 C Harrow @Izzy
+70 U Inspiring Call @Dan Scott
+71 U Keeper of Fables @Alex Konstad
+72 C Khalni Heart Expedition @Jason Chan
+73 C Kodama's Reach @John Avon
+74 R The Mending of Dominaria @Adam Paquette
+75 M Multani, Yavimaya's Avatar @Ryan Yee
+76 R Nissa's Renewal @Lius Lasahido
+77 R Rampaging Baloths @Steve Prescott
+78 U Retreat to Kazandu @Kieran Yanner
+79 R Return of the Wildspeaker @Chris Rallis
+80 R Rites of Flourishing @Brandon Kitkouski
+81 C Satyr Wayfinder @Steve Prescott
+82 C Sporemound @Svetlin Velinov
+83 C Springbloom Druid @Randy Gallegos
+84 R Sylvan Advocate @Volkan Baǵa
+85 U Tuskguard Captain @Aaron Miller
+86 R Waker of the Wilds @Shreya Shetty
+87 C Yavimaya Elder @Matt Cavotta
+88 U Zendikar's Roil @Sam Burley
+89 R Consuming Aberration @Volkan Baǵa
+90 U Extract from Darkness @Dallas Williams
+91 U Ground Assault @Karl Kopinski
+92 M Lazav, Dimir Mastermind @David Rapoza
+93 R Living Twister @James Paick
+94 R Mina and Denn, Wildborn @Izzy
+95 U Naya Charm @Jesper Ejsing
+96 R Notion Thief @Clint Cearley
+97 M Omnath, Locus of Rage @Brad Rigney
+98 R Oona, Queen of the Fae @Adam Rex
+99 R Silumgar's Command @Nils Hamm
+100 U Soul Manipulation @Carl Critchlow
+101 R Spinal Embrace @Donato Giancola
+102 U Struggle // Survive @Eric Deschamps
+103 R Sygg, River Cutthroat @Jeremy Enecio
+104 U Sylvan Reclamation @Seb McKinnon
+105 U Treacherous Terrain @Titus Lunter
+106 C Arcane Signet @Dan Scott
+107 R Blackblade Reforged @Chris Rahn
+108 R Bonehoard @Chippy
+109 C Commander's Sphere @Ryan Alexander Lee
+110 U Dimir Keyrune @Daniel Ljunggren
+111 C Dimir Locket @Zezhou Chen
+112 U Dimir Signet @Raoul Vitale
+113 U Heirloom Blade @Carmen Sinek
+114 C Mind Stone @Adam Rex
+115 R Obelisk of Urd @John Severin Brassell
+116 U Sandstone Oracle @Izzy
+117 C Scaretiller @Jakub Kasper
+118 R Scytheclaw @James Paick
+119 R Seer's Sundial @Franz Vohwinkel
+120 U Sol Ring @Mike Bierek
+121 U Blighted Woodland @Jason Felix
+122 C Boros Garrison @John Avon
+123 C Boros Guildgate @Noah Bradley
+124 C Command Tower @Ryan Yee
+125 U Cryptic Caves @Sung Choi
+126 U Dimir Aqueduct @John Avon
+127 C Dimir Guildgate @Cliff Childs
+128 C Dismal Backwater @Eytan Zana
+129 C Evolving Wilds @Steven Belledin
+130 C Gruul Guildgate @Randy Gallegos
+131 U Gruul Turf @John Avon
+132 U Jungle Shrine @Wayne Reynolds
+133 U Jwar Isle Refuge @Cyril Van Der Haegen
+134 U Krosan Verge @Ruxing Gao
+135 U Myriad Landscape @Jonas De Ro
+136 C Naya Panorama @Hideaki Takamura
+137 R Needle Spires @Jonas De Ro
+138 U Rogue's Passage @Christine Choi
+139 C Selesnya Guildgate @Howard Lyon
+140 C Selesnya Sanctuary @John Avon
+141 U Submerged Boneyard @Cliff Childs
+142 C Terramorphic Expanse @Dan Scott
 
 [tokens]
 w_1_1_bird_flying

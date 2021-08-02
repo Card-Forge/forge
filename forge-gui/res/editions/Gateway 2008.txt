@@ -6,11 +6,11 @@ Type=Promo
 ScryfallCode=PG08
 
 [cards]
-13 R Lava Axe
-14 R Cenn's Tactician
-15 R Oona's Blackguard
-16 R Gravedigger
-17 R Boggart Ram-Gang
-18 R Wilt-Leaf Cavaliers
-19 R Duergar Hedge-Mage
-20 R Selkie Hedge-Mage
+13 R Lava Axe @Ray Lago
+14 R Cenn's Tactician @Steven Belledin
+15 R Oona's Blackguard @Darrell Riche
+16 R Gravedigger @Tony Szczudlo
+17 R Boggart Ram-Gang @Lucio Parrillo
+18 R Wilt-Leaf Cavaliers @Steven Belledin
+19 R Duergar Hedge-Mage @Thomas M. Baxa
+20 R Selkie Hedge-Mage @Brandon Kitkouski

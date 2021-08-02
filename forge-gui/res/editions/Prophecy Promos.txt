@@ -6,4 +6,4 @@ Type=Promo
 ScryfallCode=PPCY
 
 [cards]
-3 R Avatar of Hope
+3 R Avatar of Hope @rk post

@@ -6,4 +6,4 @@ Type=Promo
 ScryfallCode=PMH1
 
 [cards]
-3 R Astral Drift
+3 R Astral Drift @Svetlin Velinov

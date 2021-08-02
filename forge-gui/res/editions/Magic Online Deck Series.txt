@@ -7,44 +7,44 @@ Type=Online
 ScryfallCode=td0
 
 [cards]
-B1 U Aura of Silence
-B2 C Benevolent Bodyguard
-B3 R Ethersworn Canonist
-B4 U Flickerwisp
-B5 U Jotun Grunt
-B6 U Kor Firewalker
-B7 R Mangara of Corondor
-B8 C Oblivion Ring
-B9 R Serra Avenger
-B10 R Silence
-B11 R Stoneforge Mystic
-B12 U Swords to Plowshares
-B13 R Weathered Wayfarer
-B14 C Chain Lightning
-B15 C Fireblast
-B16 U Flames of the Blood Hand
-B17 R Goblin Guide
-B18 U Hellspark Elemental
-B19 C Keldon Marauders
-B20 C Lava Spike
-B21 C Lightning Bolt
-B22 U Magma Jet
-B23 U Price of Progress
-B24 C Pyroblast
-B25 C Pyrostatic Pillar
-B26 C Rift Bolt
-B27 U Aether Vial
-B28 C Bonesplitter
-B29 U Relic of Progenitus
-B30 R Umezawa's Jitte
-B31 R Flagstones of Trokair
-B32 R Karakas
-B33 U Mishra's Factory
-B34 L Plains
-B35 L Plains
-B36 L Plains
-B37 L Plains
-B38 L Mountain
-B39 L Mountain
-B40 L Mountain
-B41 L Mountain
+B1 U Aura of Silence @D. Alexander Gregory
+B2 C Benevolent Bodyguard @Roger Raupp
+B3 R Ethersworn Canonist @Izzy
+B4 U Flickerwisp @Jeremy Enecio
+B5 U Jotun Grunt @Franz Vohwinkel
+B6 U Kor Firewalker @Matt Stewart
+B7 R Mangara of Corondor @Zoltan Boros & Gabor Szikszai
+B8 C Oblivion Ring @Wayne England
+B9 R Serra Avenger @Scott M. Fischer
+B10 R Silence @Wayne Reynolds
+B11 R Stoneforge Mystic @Mike Bierek
+B12 U Swords to Plowshares @Terese Nielsen
+B13 R Weathered Wayfarer @Greg Hildebrandt & Tim Hildebrandt
+B14 C Chain Lightning @Sandra Everingham
+B15 C Fireblast @Michael Danza
+B16 U Flames of the Blood Hand @Aleksi Briclot
+B17 R Goblin Guide @Warren Mahy
+B18 U Hellspark Elemental @Justin Sweet
+B19 C Keldon Marauders @Alex Horley-Orlandelli
+B20 C Lava Spike @Mark Tedin
+B21 C Lightning Bolt @Christopher Moeller
+B22 U Magma Jet @Justin Sweet
+B23 U Price of Progress @Richard Kane Ferguson
+B24 C Pyroblast @Kaja Foglio
+B25 C Pyrostatic Pillar @Pete Venters
+B26 C Rift Bolt @Michael Sutfin
+B27 U Aether Vial @Greg Hildebrandt
+B28 C Bonesplitter @Darrell Riche
+B29 U Relic of Progenitus @Jean-Sébastien Rossbach
+B30 R Umezawa's Jitte @Christopher Moeller
+B31 R Flagstones of Trokair @Rob Alexander
+B32 R Karakas @Nicola Leonard
+B33 U Mishra's Factory @Scott Chou
+B34 L Plains @John Avon
+B35 L Plains @Ryan Pancoast
+B36 L Plains @D. J. Cleland-Hura
+B37 L Plains @Don Hazeltine
+B38 L Mountain @Nils Hamm
+B39 L Mountain @Karl Kopinski
+B40 L Mountain @Rob Alexander
+B41 L Mountain @Rob Alexander

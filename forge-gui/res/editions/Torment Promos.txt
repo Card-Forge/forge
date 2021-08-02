@@ -7,4 +7,4 @@ CardLang=ru
 ScryfallCode=PTOR
 
 [cards]
-67 R Laquatus's Champion
+67 R Laquatus's Champion @Greg Staples

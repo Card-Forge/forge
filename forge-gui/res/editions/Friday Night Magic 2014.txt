@@ -6,15 +6,15 @@ Type=Promo
 ScryfallCode=F14
 
 [cards]
-1 R Warleader's Helix
-2 R Elvish Mystic
-3 R Banisher Priest
-4 R Encroaching Wastes
-5 R Tormented Hero
-6 R Dissolve
-7 R Magma Spray
-8 R Bile Blight
-9 R Banishing Light
-10 R Fanatic of Xenagos
-11 R Brain Maggot
-12 R Stoke the Flames
+1 R Warleader's Helix @Wesley Burt
+2 R Elvish Mystic @Winona Nelson
+3 R Banisher Priest @James Zapata
+4 R Encroaching Wastes @Richard Wright
+5 R Tormented Hero @Wesley Burt
+6 R Dissolve @Jeff Simpson
+7 R Magma Spray @Mathias Kollros
+8 R Bile Blight @Nils Hamm
+9 R Banishing Light @Wesley Burt
+10 R Fanatic of Xenagos @Zoltan Boros
+11 R Brain Maggot @Dave Kendall
+12 R Stoke the Flames @Mathias Kollros

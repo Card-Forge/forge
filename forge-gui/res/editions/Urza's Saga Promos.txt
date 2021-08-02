@@ -6,4 +6,4 @@ Type=Promo
 ScryfallCode=PUSG
 
 [cards]
-202 R Lightning Dragon
+202 R Lightning Dragon @Ron Spencer

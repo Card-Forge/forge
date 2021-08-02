@@ -7,14 +7,14 @@ Type=Collector_Edition
 ScryfallCode=med
 
 [cards]
-WS1 M Ugin, the Spirit Dragon
-WS2 M Gideon Blackblade
-WS3 M Jace, the Mind Sculptor
-WS4 M Tezzeret the Seeker
-WS5 M Garruk, Apex Predator
-WS6 M Nicol Bolas, Dragon-God
-WS7 M Nahiri, the Harbinger
-WS8 M Sarkhan Unbroken
+WS1 M Ugin, the Spirit Dragon @Chris Rahn
+WS2 M Gideon Blackblade @Kieran Yanner
+WS3 M Jace, the Mind Sculptor @Chris Rallis
+WS4 M Tezzeret the Seeker @Victor Adame Minguez
+WS5 M Garruk, Apex Predator @Victor Adame Minguez
+WS6 M Nicol Bolas, Dragon-God @Matt Stewart
+WS7 M Nahiri, the Harbinger @Kieran Yanner
+WS8 M Sarkhan Unbroken @Eric Deschamps
 
 [tokens]
 b_3_3_beast_deathtouch

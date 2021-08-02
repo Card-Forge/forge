@@ -7,4 +7,4 @@ CardLang=la
 ScryfallCode=PINV
 
 [cards]
-262 R Raging Kavu
+262 R Raging Kavu @Arnie Swekel

@@ -12,270 +12,270 @@ FatPackExtraSlots=80 BasicLands
 ScryfallCode=DTK
 
 [cards]
-1 U Scion of Ugin
-2 R Anafenza, Kin-Tree Spirit
-3 R Arashin Foremost
-4 C Artful Maneuver
-5 U Aven Sunstriker
-6 C Aven Tactician
-7 U Battle Mastery
-8 C Center Soul
-9 C Champion of Arashin
-10 U Dragon Hunter
-11 C Dragon's Eye Sentry
-12 U Dromoka Captain
-13 C Dromoka Dunecaster
-14 C Dromoka Warrior
-15 U Echoes of the Kin Tree
-16 C Enduring Victory
-17 C Fate Forgotten
-18 C Glaring Aegis
-19 R Gleam of Authority
-20 U Graceblade Artisan
-21 U Great Teacher's Decree
-22 C Herald of Dromoka
-23 R Hidden Dragonslayer
-24 C Lightwalker
-25 C Misthoof Kirin
-26 R Myth Realized
-27 M Ojutai Exemplars
-28 U Orator of Ojutai
-29 C Pacifism
-30 R Profound Journey
-31 R Radiant Purge
-32 C Resupply
-33 C Sandcrafter Mage
-34 C Sandstorm Charger
-35 U Scale Blessing
-36 R Secure the Wastes
-37 U Shieldhide Dragon
-38 U Silkwrap
-39 U Strongarm Monk
-40 C Student of Ojutai
-41 R Sunscorch Regent
-42 U Surge of Righteousness
-43 C Territorial Roc
-44 C Ancient Carp
-45 C Anticipate
-46 U Belltoll Dragon
-47 R Blessed Reincarnation
-48 M Clone Legion
-49 C Contradict
-50 U Dance of the Skywise
-51 C Dirgur Nemesis
-52 R Dragonlord's Prerogative
-53 C Elusive Spellfist
-54 U Encase in Ice
-55 C Glint
-56 U Gudul Lurker
-57 C Gurmag Drowner
-58 R Icefall Regent
-59 R Illusory Gains
-60 U Learn from the Past
-61 R Living Lore
-62 R Mirror Mockery
-63 C Monastery Loremaster
-64 C Mystic Meditation
-65 C Negate
-66 C Ojutai Interceptor
-67 C Ojutai's Breath
-68 C Ojutai's Summons
-69 C Palace Familiar
-70 R Profaner of the Dead
-71 U Qarsi Deceiver
-72 C Reduce in Stature
-73 M Shorecrasher Elemental
-74 C Sidisi's Faithful
-75 U Sight Beyond Sight
-76 U Silumgar Sorcerer
-77 U Silumgar Spell-Eater
-78 U Silumgar's Scorn
-79 U Skywise Teachings
-80 R Stratus Dancer
-81 C Taigam's Strike
-82 C Updraft Elemental
-83 U Void Squall
-84 U Youthful Scholar
-85 C Zephyr Scribe
-86 U Acid-Spewer Dragon
-87 U Ambuscade Shaman
-88 R Blood-Chin Fanatic
-89 U Blood-Chin Rager
-90 C Butcher's Glee
-91 C Coat with Venom
-92 R Corpseweft
-93 R Damnable Pact
-94 U Deadly Wanderings
-95 U Death Wind
-96 R Deathbringer Regent
-97 C Defeat
-98 C Duress
-99 C Dutiful Attendant
-100 C Flatten
-101 R Foul Renewal
-102 U Foul-Tongue Invocation
-103 C Foul-Tongue Shriek
-104 C Gravepurge
-105 C Hand of Silumgar
-106 R Hedonist's Trove
-107 C Kolaghan Skirmisher
-108 U Marang River Skeleton
-109 C Marsh Hulk
-110 C Mind Rot
-111 U Minister of Pain
-112 R Pitiless Horde
-113 C Qarsi Sadist
-114 U Rakshasa Gravecaller
-115 C Reckless Imp
-116 M Risen Executioner
-117 U Self-Inflicted Wound
-118 C Shambling Goblin
-119 C Sibsig Icebreakers
-120 R Sidisi, Undead Vizier
-121 R Silumgar Assassin
-122 C Silumgar Butcher
-123 U Ukud Cobra
-124 U Ultimate Price
-125 U Virulent Plague
-126 C Vulturous Aven
-127 C Wandering Tombshell
-128 C Atarka Efreet
-129 U Atarka Pummeler
-130 R Berserkers' Onslaught
-131 R Commune with Lava
-132 R Crater Elemental
-133 M Descent of the Dragons
-134 U Draconic Roar
-135 C Dragon Fodder
-136 R Dragon Tempest
-137 M Dragon Whisperer
-138 U Dragonlord's Servant
-139 C Hardened Berserker
-140 C Impact Tremors
-141 R Ire Shaman
-142 C Kindled Fury
-143 C Kolaghan Aspirant
-144 U Kolaghan Forerunners
-145 C Kolaghan Stormsinger
-146 U Lightning Berserker
-147 C Lose Calm
-148 C Magmatic Chasm
-149 U Qal Sisma Behemoth
-150 U Rending Volley
-151 U Roast
-152 C Sabertooth Outrider
-153 C Sarkhan's Rage
-154 U Sarkhan's Triumph
-155 C Screamreach Brawler
-156 U Seismic Rupture
-157 C Sprinting Warbrute
-158 U Stormcrag Elemental
-159 U Stormwing Dragon
-160 C Summit Prowler
-161 C Tail Slash
-162 R Thunderbreak Regent
-163 C Tormenting Voice
-164 C Twin Bolt
-165 C Vandalize
-166 C Volcanic Rush
-167 R Volcanic Vision
-168 U Warbringer
-169 R Zurgo Bellstriker
-170 C Aerie Bowmasters
-171 C Ainok Artillerist
-172 U Ainok Survivalist
-173 R Assault Formation
-174 C Atarka Beastbreaker
-175 R Avatar of the Resolute
-176 U Circle of Elders
-177 R Collected Company
-178 C Colossodon Yearling
-179 C Conifer Strider
-180 M Deathmist Raptor
-181 R Den Protector
-182 U Display of Dominance
-183 C Dragon-Scarred Bear
-184 U Dromoka's Gift
-185 C Epic Confrontation
-186 U Explosive Vegetation
-187 R Foe-Razer Regent
-188 C Glade Watcher
-189 C Guardian Shield-Bearer
-190 U Herdchaser Dragon
-191 U Inspiring Call
-192 U Lurking Arynx
-193 C Naturalize
-194 R Obscuring AEther
-195 C Pinion Feast
-196 U Press the Advantage
-197 C Revealing Wind
-198 U Salt Road Ambushers
-199 U Salt Road Quartermasters
-200 C Sandsteppe Scavenger
-201 U Scaleguard Sentinels
-202 C Segmented Krotiq
-203 C Servant of the Scale
-204 M Shaman of Forgotten Ways
-205 C Shape the Sands
-206 C Sheltered Aerie
-207 U Sight of the Scalelords
-208 C Stampeding Elk Herd
-209 R Sunbringer's Touch
-210 R Surrak, the Hunt Caller
-211 C Tread Upon
-212 R Arashin Sovereign
-213 R Atarka's Command
-214 R Boltwing Marauder
-215 U Cunning Breezedancer
-216 M Dragonlord Atarka
-217 M Dragonlord Dromoka
-218 M Dragonlord Kolaghan
-219 M Dragonlord Ojutai
-220 M Dragonlord Silumgar
-221 R Dromoka's Command
-222 U Enduring Scalelord
-223 R Harbinger of the Hunt
-224 R Kolaghan's Command
-225 M Narset Transcendent
-226 R Necromaster Dragon
-227 R Ojutai's Command
-228 R Pristine Skywise
-229 U Ruthless Deathfang
-230 M Sarkhan Unbroken
-231 U Savage Ventmaw
-232 R Silumgar's Command
-233 U Swift Warkite
-234 C Ancestral Statue
-235 U Atarka Monument
-236 C Custodian of the Trove
-237 U Dragonloft Idol
-238 U Dromoka Monument
-239 U Gate Smasher
-240 C Keeper of the Lens
-241 U Kolaghan Monument
-242 U Ojutai Monument
-243 U Silumgar Monument
-244 C Spidersilk Net
-245 U Stormrider Rig
-246 U Tapestry of the Ages
-247 C Vial of Dragonfire
-248 C Evolving Wilds
-249 R Haven of the Spirit Dragon
-252 L Plains
-252 L Plains
-252 L Plains
-253 L Island
-253 L Island
-253 L Island
-258 L Swamp
-258 L Swamp
-258 L Swamp
-261 L Mountain
-261 L Mountain
-261 L Mountain
-264 L Forest
-264 L Forest
-264 L Forest
+1 U Scion of Ugin @Cliff Childs
+2 R Anafenza, Kin-Tree Spirit @Ryan Yee
+3 R Arashin Foremost @David Palumbo
+4 C Artful Maneuver @Lars Grant-West
+5 U Aven Sunstriker @John Severin Brassell
+6 C Aven Tactician @Christopher Moeller
+7 U Battle Mastery @Viktor Titov
+8 C Center Soul @Igor Kieryluk
+9 C Champion of Arashin @Joseph Meehan
+10 U Dragon Hunter @Johannes Voss
+11 C Dragon's Eye Sentry @Anastasia Ovchinnikova
+12 U Dromoka Captain @Matt Stewart
+13 C Dromoka Dunecaster @Mark Winters
+14 C Dromoka Warrior @Zack Stella
+15 U Echoes of the Kin Tree @Ryan Alexander Lee
+16 C Enduring Victory @Mike Sass
+17 C Fate Forgotten @Cliff Childs
+18 C Glaring Aegis @Anthony Palumbo
+19 R Gleam of Authority @Jakub Kasper
+20 U Graceblade Artisan @Magali Villeneuve
+21 U Great Teacher's Decree @Zoltan Boros
+22 C Herald of Dromoka @Zack Stella
+23 R Hidden Dragonslayer @Anastasia Ovchinnikova
+24 C Lightwalker @Winona Nelson
+25 C Misthoof Kirin @Ryan Barger
+26 R Myth Realized @Jason Rainville
+27 M Ojutai Exemplars @Willian Murai
+28 U Orator of Ojutai @Zack Stella
+29 C Pacifism @Mark Zug
+30 R Profound Journey @Tomasz Jedruszek
+31 R Radiant Purge @Igor Kieryluk
+32 C Resupply @Filip Burburan
+33 C Sandcrafter Mage @Willian Murai
+34 C Sandstorm Charger @Dave Kendall
+35 U Scale Blessing @Matt Stewart
+36 R Secure the Wastes @Scott Murphy
+37 U Shieldhide Dragon @Chris Rallis
+38 U Silkwrap @David Gaillet
+39 U Strongarm Monk @Viktor Titov
+40 C Student of Ojutai @Jason A. Engle
+41 R Sunscorch Regent @Matt Stewart
+42 U Surge of Righteousness @Marco Nelor
+43 C Territorial Roc @YW Tang
+44 C Ancient Carp @Christopher Burdett
+45 C Anticipate @Lake Hurwitz
+46 U Belltoll Dragon @Zack Stella
+47 R Blessed Reincarnation @Kev Walker
+48 M Clone Legion @Svetlin Velinov
+49 C Contradict @Steve Prescott
+50 U Dance of the Skywise @Jack Wang
+51 C Dirgur Nemesis @Mathias Kollros
+52 R Dragonlord's Prerogative @Seb McKinnon
+53 C Elusive Spellfist @Viktor Titov
+54 U Encase in Ice @Mathias Kollros
+55 C Glint @Igor Kieryluk
+56 U Gudul Lurker @Christopher Burdett
+57 C Gurmag Drowner @Lake Hurwitz
+58 R Icefall Regent @David Gaillet
+59 R Illusory Gains @Kev Walker
+60 U Learn from the Past @Chase Stone
+61 R Living Lore @Jason Felix
+62 R Mirror Mockery @Ryan Alexander Lee
+63 C Monastery Loremaster @Ryan Alexander Lee
+64 C Mystic Meditation @Howard Lyon
+65 C Negate @Willian Murai
+66 C Ojutai Interceptor @Johann Bodin
+67 C Ojutai's Breath @Kev Walker
+68 C Ojutai's Summons @Jakub Kasper
+69 C Palace Familiar @Kev Walker
+70 R Profaner of the Dead @Vincent Proce
+71 U Qarsi Deceiver @Raymond Swanland
+72 C Reduce in Stature @Dan Scott
+73 M Shorecrasher Elemental @Igor Kieryluk
+74 C Sidisi's Faithful @Lius Lasahido
+75 U Sight Beyond Sight @Anastasia Ovchinnikova
+76 U Silumgar Sorcerer @Jeff Simpson
+77 U Silumgar Spell-Eater @Dave Kendall
+78 U Silumgar's Scorn @Ryan Yee
+79 U Skywise Teachings @Filip Burburan
+80 R Stratus Dancer @Anastasia Ovchinnikova
+81 C Taigam's Strike @David Gaillet
+82 C Updraft Elemental @Raf Sarmento
+83 U Void Squall @James Paick
+84 U Youthful Scholar @Cynthia Sheppard
+85 C Zephyr Scribe @Lius Lasahido
+86 U Acid-Spewer Dragon @James Zapata
+87 U Ambuscade Shaman @Anthony Palumbo
+88 R Blood-Chin Fanatic @David Palumbo
+89 U Blood-Chin Rager @Karl Kopinski
+90 C Butcher's Glee @Jesper Ejsing
+91 C Coat with Venom @Johann Bodin
+92 R Corpseweft @Nils Hamm
+93 R Damnable Pact @Zack Stella
+94 U Deadly Wanderings @David Palumbo
+95 U Death Wind @Nils Hamm
+96 R Deathbringer Regent @Adam Paquette
+97 C Defeat @Dave Kendall
+98 C Duress @Jason Rainville
+99 C Dutiful Attendant @Aaron Miller
+100 C Flatten @Raoul Vitale
+101 R Foul Renewal @Filip Burburan
+102 U Foul-Tongue Invocation @Daarken
+103 C Foul-Tongue Shriek @Dave Kendall
+104 C Gravepurge @Nils Hamm
+105 C Hand of Silumgar @Lius Lasahido
+106 R Hedonist's Trove @Peter Mohrbacher
+107 C Kolaghan Skirmisher @Anthony Palumbo
+108 U Marang River Skeleton @Jack Wang
+109 C Marsh Hulk @Raf Sarmento
+110 C Mind Rot @Clint Cearley
+111 U Minister of Pain @Izzy
+112 R Pitiless Horde @Viktor Titov
+113 C Qarsi Sadist @Volkan Baǵa
+114 U Rakshasa Gravecaller @Jakub Kasper
+115 C Reckless Imp @Torstein Nordstrand
+116 M Risen Executioner @Craig J Spearing
+117 U Self-Inflicted Wound @Mathias Kollros
+118 C Shambling Goblin @Yeong-Hao Han
+119 C Sibsig Icebreakers @Zoltan Boros
+120 R Sidisi, Undead Vizier @Min Yum
+121 R Silumgar Assassin @Yohann Schepacz
+122 C Silumgar Butcher @Dave Kendall
+123 U Ukud Cobra @Johann Bodin
+124 U Ultimate Price @Jack Wang
+125 U Virulent Plague @Johann Bodin
+126 C Vulturous Aven @Kev Walker
+127 C Wandering Tombshell @Yeong-Hao Han
+128 C Atarka Efreet @Izzy
+129 U Atarka Pummeler @Lucas Graciano
+130 R Berserkers' Onslaught @Zoltan Boros
+131 R Commune with Lava @Ryan Barger
+132 R Crater Elemental @Svetlin Velinov
+133 M Descent of the Dragons @Steve Prescott
+134 U Draconic Roar @Kev Walker
+135 C Dragon Fodder @Volkan Baǵa
+136 R Dragon Tempest @Willian Murai
+137 M Dragon Whisperer @Chris Rallis
+138 U Dragonlord's Servant @Steve Prescott
+139 C Hardened Berserker @Viktor Titov
+140 C Impact Tremors @Lake Hurwitz
+141 R Ire Shaman @Jack Wang
+142 C Kindled Fury @Dan Scott
+143 C Kolaghan Aspirant @Aaron Miller
+144 U Kolaghan Forerunners @Jason A. Engle
+145 C Kolaghan Stormsinger @Scott Murphy
+146 U Lightning Berserker @Joseph Meehan
+147 C Lose Calm @Jason A. Engle
+148 C Magmatic Chasm @Volkan Baǵa
+149 U Qal Sisma Behemoth @Evan Shipard
+150 U Rending Volley @Lucas Graciano
+151 U Roast @Zoltan Boros
+152 C Sabertooth Outrider @Winona Nelson
+153 C Sarkhan's Rage @Chris Rahn
+154 U Sarkhan's Triumph @Chris Rahn
+155 C Screamreach Brawler @Slawomir Maniak
+156 U Seismic Rupture @Jason A. Engle
+157 C Sprinting Warbrute @Lake Hurwitz
+158 U Stormcrag Elemental @Ralph Horsley
+159 U Stormwing Dragon @Svetlin Velinov
+160 C Summit Prowler @Filip Burburan
+161 C Tail Slash @Efrem Palacios
+162 R Thunderbreak Regent @Ryan Pancoast
+163 C Tormenting Voice @Volkan Baǵa
+164 C Twin Bolt @Svetlin Velinov
+165 C Vandalize @Ryan Barger
+166 C Volcanic Rush @Ryan Barger
+167 R Volcanic Vision @Noah Bradley
+168 U Warbringer @Raymond Swanland
+169 R Zurgo Bellstriker @Jason Rainville
+170 C Aerie Bowmasters @Matt Stewart
+171 C Ainok Artillerist @James Paick
+172 U Ainok Survivalist @Craig J Spearing
+173 R Assault Formation @Kieran Yanner
+174 C Atarka Beastbreaker @Johannes Voss
+175 R Avatar of the Resolute @Jeff Simpson
+176 U Circle of Elders @Jakub Kasper
+177 R Collected Company @Franz Vohwinkel
+178 C Colossodon Yearling @Yeong-Hao Han
+179 C Conifer Strider @YW Tang
+180 M Deathmist Raptor @Filip Burburan
+181 R Den Protector @Viktor Titov
+182 U Display of Dominance @Tomasz Jedruszek
+183 C Dragon-Scarred Bear @Lars Grant-West
+184 U Dromoka's Gift @Winona Nelson
+185 C Epic Confrontation @Wayne Reynolds
+186 U Explosive Vegetation @Florian de Gesincourt
+187 R Foe-Razer Regent @Lucas Graciano
+188 C Glade Watcher @Jesper Ejsing
+189 C Guardian Shield-Bearer @Lindsey Look
+190 U Herdchaser Dragon @Seb McKinnon
+191 U Inspiring Call @Dan Scott
+192 U Lurking Arynx @Carl Frank
+193 C Naturalize @James Paick
+194 R Obscuring Aether @Min Yum
+195 C Pinion Feast @Ryan Barger
+196 U Press the Advantage @Marco Nelor
+197 C Revealing Wind @Phill Simmer
+198 U Salt Road Ambushers @Joseph Meehan
+199 U Salt Road Quartermasters @Anthony Palumbo
+200 C Sandsteppe Scavenger @Kieran Yanner
+201 U Scaleguard Sentinels @Matt Stewart
+202 C Segmented Krotiq @Christopher Moeller
+203 C Servant of the Scale @Winona Nelson
+204 M Shaman of Forgotten Ways @Tyler Jacobson
+205 C Shape the Sands @Ryan Yee
+206 C Sheltered Aerie @Raoul Vitale
+207 U Sight of the Scalelords @Marc Simonetti
+208 C Stampeding Elk Herd @Carl Frank
+209 R Sunbringer's Touch @Lucas Graciano
+210 R Surrak, the Hunt Caller @Wesley Burt
+211 C Tread Upon @Efrem Palacios
+212 R Arashin Sovereign @Dan Scott
+213 R Atarka's Command @Chris Rahn
+214 R Boltwing Marauder @Raymond Swanland
+215 U Cunning Breezedancer @Todd Lockwood
+216 M Dragonlord Atarka @Karl Kopinski
+217 M Dragonlord Dromoka @Eric Deschamps
+218 M Dragonlord Kolaghan @Jaime Jones
+219 M Dragonlord Ojutai @Chase Stone
+220 M Dragonlord Silumgar @Steven Belledin
+221 R Dromoka's Command @James Ryman
+222 U Enduring Scalelord @Clint Cearley
+223 R Harbinger of the Hunt @Aaron Miller
+224 R Kolaghan's Command @Daarken
+225 M Narset Transcendent @Magali Villeneuve
+226 R Necromaster Dragon @Mark Zug
+227 R Ojutai's Command @Willian Murai
+228 R Pristine Skywise @Adam Paquette
+229 U Ruthless Deathfang @Filip Burburan
+230 M Sarkhan Unbroken @Aleksi Briclot
+231 U Savage Ventmaw @Slawomir Maniak
+232 R Silumgar's Command @Nils Hamm
+233 U Swift Warkite @Izzy
+234 C Ancestral Statue @Tomasz Jedruszek
+235 U Atarka Monument @Daniel Ljunggren
+236 C Custodian of the Trove @Raoul Vitale
+237 U Dragonloft Idol @Jung Park
+238 U Dromoka Monument @Daniel Ljunggren
+239 U Gate Smasher @Filip Burburan
+240 C Keeper of the Lens @Ryan Barger
+241 U Kolaghan Monument @Daniel Ljunggren
+242 U Ojutai Monument @Daniel Ljunggren
+243 U Silumgar Monument @Daniel Ljunggren
+244 C Spidersilk Net @Steve Argyle
+245 U Stormrider Rig @Min Yum
+246 U Tapestry of the Ages @Yeong-Hao Han
+247 C Vial of Dragonfire @Franz Vohwinkel
+248 C Evolving Wilds @Andreas Rocha
+249 R Haven of the Spirit Dragon @Raymond Swanland
+250 L Plains @Sam Burley
+251 L Plains @Sam Burley
+252 L Plains @Florian de Gesincourt
+253 L Island @Florian de Gesincourt
+254 L Island @Florian de Gesincourt
+255 L Island @Adam Paquette
+256 L Swamp @Noah Bradley
+257 L Swamp @Adam Paquette
+258 L Swamp @Adam Paquette
+259 L Mountain @Noah Bradley
+260 L Mountain @Noah Bradley
+261 L Mountain @Titus Lunter
+262 L Forest @Sam Burley
+263 L Forest @Titus Lunter
+264 L Forest @Titus Lunter
 
 [tokens]
 w_1_1_warrior

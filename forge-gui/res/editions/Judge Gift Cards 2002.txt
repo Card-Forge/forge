@@ -6,5 +6,5 @@ Type=Promo
 ScryfallCode=G02
 
 [cards]
-1 R Hammer of Bogardan
-2 R Tradewind Rider
+1 R Hammer of Bogardan @Ron Spencer
+2 R Tradewind Rider @John Matson

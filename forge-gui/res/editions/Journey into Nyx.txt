@@ -11,171 +11,171 @@ FatPackExtraSlots=80 BasicLands THS
 ScryfallCode=JOU
 
 [cards]
-1 R Aegis of the Gods
-2 C Ajani's Presence
-3 C Akroan Mastiff
-4 C Armament of Nyx
-5 U Banishing Light
-6 R Dawnbringer Charioteers
-7 R Deicide
-8 R Dictate of Heliod
-9 C Eagle of the Watch
-10 U Eidolon of Rhetoric
-11 C Font of Vigor
-12 M Godsend
-13 C Harvestguard Alseids
-14 C Lagonna-Band Trailblazer
-15 R Launch the Fleet
-16 U Leonin Iconoclast
-17 C Mortal Obstinacy
-18 U Nyx-Fleece Ram
-19 C Oppressive Rays
-20 C Oreskos Swiftclaw
-21 U Phalanx Formation
-22 U Quarry Colossus
-23 U Reprisal
-24 U Sightless Brawler
-25 R Skybind
-26 U Skyspear Cavalry
-27 C Stonewise Fortifier
-28 C Supply-Line Cranes
-29 U Tethmos High Priest
-30 C Aerial Formation
-31 R Battlefield Thaumaturge
-32 C Cloaked Siren
-33 C Countermand
-34 U Crystalline Nautilus
-35 U Dakra Mystic
-36 R Daring Thief
-37 R Dictate of Kruphix
-38 C Font of Fortunes
-39 C Godhunter Octopus
-40 U Hour of Need
-41 C Hubris
-42 R Hypnotic Siren
-43 U Interpret the Signs
-44 U Kiora's Dismissal
-45 C Pin to the Earth
-46 R Polymorphous Rush
-47 U Pull from the Deep
-48 U Riptide Chimera
-49 C Rise of Eagles
-50 M Sage of Hours
-51 R Scourge of Fleets
-52 C Sigiled Starfish
-53 C Thassa's Devourer
-54 U Thassa's Ire
-55 U Triton Cavalry
-56 C Triton Shorestalker
-57 C War-Wing Siren
-58 U Whitewater Naiads
-59 U Agent of Erebos
-60 C Aspect of Gorgon
-61 C Bloodcrazed Hoplite
-62 U Brain Maggot
-63 C Cast into Darkness
-64 C Cruel Feeding
-65 R Dictate of Erebos
-66 R Doomwake Giant
-67 C Dreadbringer Lampads
-68 R Extinguish All Hope
-69 C Feast of Dreams
-70 U Felhide Petrifier
-71 C Font of Return
-72 U Gnarled Scarhide
-73 C Grim Guardian
-74 R King Macar, the Gold-Cursed
-75 R Master of the Feast
-76 U Nightmarish End
-77 C Nyx Infusion
-78 C Pharika's Chosen
-79 C Returned Reveler
-80 U Ritual of the Returned
-81 C Rotted Hulk
-82 R Silence the Believers
-83 U Spiteful Blow
-84 U Squelching Leeches
-85 U Thoughtrender Lamia
-86 U Tormented Thoughts
-87 M Worst Fears
-88 U Akroan Line Breaker
-89 R Bearer of the Heavens
-90 C Bladetusk Boar
-91 U Blinding Flare
-92 U Cyclops of Eternal Fury
-93 R Dictate of the Twin Gods
-94 R Eidolon of the Great Revel
-95 C Flamespeaker's Will
-96 C Flurry of Horns
-97 C Font of Ire
-98 U Forgeborn Oreads
-99 C Gluttonous Cyclops
-100 R Harness by Force
-101 U Knowledge and Power
-102 C Lightning Diadem
-103 C Magma Spray
-104 U Mogis's Warhound
-105 C Pensive Minotaur
-106 M Prophetic Flamespeaker
-107 U Riddle of Lightning
-108 U Rollick of Abandon
-109 C Rouse the Mob
-110 C Satyr Hoplite
-111 C Sigiled Skink
-112 R Spawn of Thraxes
-113 U Spite of Mogis
-114 C Starfall
-115 R Twinflame
-116 U Wildfire Cerberus
-117 U Bassara Tower Archer
-118 U Colossal Heroics
-119 U Consign to Dust
-120 C Desecration Plague
-121 R Dictate of Karametra
-122 R Eidolon of Blossoms
-123 C Font of Fertility
-124 C Golden Hind
-125 U Goldenhide Ox
-126 R Heroes' Bane
-127 C Humbler of Mortals
-128 R Hydra Broodmaster
-129 C Kruphix's Insight
-130 C Market Festival
-131 C Nature's Panoply
-132 U Nessian Game Warden
-133 C Oakheart Dryads
-134 C Pheres-Band Thunderhoof
-135 R Pheres-Band Warchief
-136 C Ravenous Leucrocota
-137 C Renowned Weaver
-138 U Reviving Melody
-139 C Satyr Grovedancer
-140 R Setessan Tactics
-141 U Solidarity of Heroes
-142 U Spirespine
-143 U Strength from the Fallen
-144 U Swarmborn Giant
-145 M Ajani, Mentor of Heroes
-146 M Athreos, God of Passage
-147 U Desperate Stand
-148 U Disciple of Deceit
-149 U Fleetfeather Cockatrice
-150 M Iroas, God of Victory
-151 M Keranos, God of Storms
-152 M Kruphix, God of Horizons
-153 U Nyx Weaver
-154 M Pharika, God of Affliction
-155 R Revel of the Fallen God
-156 U Stormchaser Chimera
-157 U Underworld Coinsmith
-158 U Armory of Iroas
-159 U Chariot of Victory
-160 U Deserter's Quarters
-161 U Gold-Forged Sentinel
-162 R Hall of Triumph
-163 R Mana Confluence
-164 R Temple of Epiphany
-165 R Temple of Malady
+1 R Aegis of the Gods @Yefim Kligerman
+2 C Ajani's Presence @Raymond Swanland
+3 C Akroan Mastiff @Zoltan Boros
+4 C Armament of Nyx @Slawomir Maniak
+5 U Banishing Light @Willian Murai
+6 R Dawnbringer Charioteers @Ryan Alexander Lee
+7 R Deicide @Jason Chan
+8 R Dictate of Heliod @Terese Nielsen
+9 C Eagle of the Watch @Scott Murphy
+10 U Eidolon of Rhetoric @Ryan Yee
+11 C Font of Vigor @Noah Bradley
+12 M Godsend @Daniel Ljunggren
+13 C Harvestguard Alseids @Igor Kieryluk
+14 C Lagonna-Band Trailblazer @James Zapata
+15 R Launch the Fleet @Karl Kopinski
+16 U Leonin Iconoclast @Steve Prescott
+17 C Mortal Obstinacy @Slawomir Maniak
+18 U Nyx-Fleece Ram @Terese Nielsen
+19 C Oppressive Rays @Mark Zug
+20 C Oreskos Swiftclaw @James Ryman
+21 U Phalanx Formation @Dan Scott
+22 U Quarry Colossus @Todd Lockwood
+23 U Reprisal @Raymond Swanland
+24 U Sightless Brawler @Johann Bodin
+25 R Skybind @Igor Kieryluk
+26 U Skyspear Cavalry @Wayne Reynolds
+27 C Stonewise Fortifier @Ryan Alexander Lee
+28 C Supply-Line Cranes @Daniel Ljunggren
+29 U Tethmos High Priest @Mark Zug
+30 C Aerial Formation @Zack Stella
+31 R Battlefield Thaumaturge @Mike Sass
+32 C Cloaked Siren @Mark Zug
+33 C Countermand @Clint Cearley
+34 U Crystalline Nautilus @Brad Rigney
+35 U Dakra Mystic @Wesley Burt
+36 R Daring Thief @Johann Bodin
+37 R Dictate of Kruphix @Daarken
+38 C Font of Fortunes @Jonas De Ro
+39 C Godhunter Octopus @Tyler Jacobson
+40 U Hour of Need @Jesper Ejsing
+41 C Hubris @Seb McKinnon
+42 R Hypnotic Siren @James Ryman
+43 U Interpret the Signs @Cynthia Sheppard
+44 U Kiora's Dismissal @Mathias Kollros
+45 C Pin to the Earth @Johann Bodin
+46 R Polymorphous Rush @Ryan Barger
+47 U Pull from the Deep @Ryan Yee
+48 U Riptide Chimera @Ryan Barger
+49 C Rise of Eagles @Noah Bradley
+50 M Sage of Hours @Matt Stewart
+51 R Scourge of Fleets @Steven Belledin
+52 C Sigiled Starfish @Nils Hamm
+53 C Thassa's Devourer @David Palumbo
+54 U Thassa's Ire @Chris Rahn
+55 U Triton Cavalry @Kev Walker
+56 C Triton Shorestalker @Svetlin Velinov
+57 C War-Wing Siren @Magali Villeneuve
+58 U Whitewater Naiads @William Wu
+59 U Agent of Erebos @Cyril Van Der Haegen
+60 C Aspect of Gorgon @Willian Murai
+61 C Bloodcrazed Hoplite @Jeff Simpson
+62 U Brain Maggot @Min Yum
+63 C Cast into Darkness @Clint Cearley
+64 C Cruel Feeding @Jason A. Engle
+65 R Dictate of Erebos @Michael C. Hayes
+66 R Doomwake Giant @Kev Walker
+67 C Dreadbringer Lampads @Willian Murai
+68 R Extinguish All Hope @Chase Stone
+69 C Feast of Dreams @Clint Cearley
+70 U Felhide Petrifier @James Ryman
+71 C Font of Return @Daarken
+72 U Gnarled Scarhide @Greg Staples
+73 C Grim Guardian @Ryan Barger
+74 R King Macar, the Gold-Cursed @Greg Staples
+75 R Master of the Feast @Chris Rahn
+76 U Nightmarish End @Willian Murai
+77 C Nyx Infusion @Jason A. Engle
+78 C Pharika's Chosen @Jonas De Ro
+79 C Returned Reveler @Allen Williams
+80 U Ritual of the Returned @Zack Stella
+81 C Rotted Hulk @Raymond Swanland
+82 R Silence the Believers @Slawomir Maniak
+83 U Spiteful Blow @Jason Chan
+84 U Squelching Leeches @Svetlin Velinov
+85 U Thoughtrender Lamia @Magali Villeneuve
+86 U Tormented Thoughts @Allen Williams
+87 M Worst Fears @Eric Deschamps
+88 U Akroan Line Breaker @Marco Nelor
+89 R Bearer of the Heavens @Ryan Alexander Lee
+90 C Bladetusk Boar @Sam Burley
+91 U Blinding Flare @Evan Shipard
+92 U Cyclops of Eternal Fury @Matt Stewart
+93 R Dictate of the Twin Gods @Jaime Jones
+94 R Eidolon of the Great Revel @Cyril Van Der Haegen
+95 C Flamespeaker's Will @Daniel Ljunggren
+96 C Flurry of Horns @Phill Simmer
+97 C Font of Ire @Zack Stella
+98 U Forgeborn Oreads @Ryan Yee
+99 C Gluttonous Cyclops @Steve Prescott
+100 R Harness by Force @Yefim Kligerman
+101 U Knowledge and Power @Jung Park
+102 C Lightning Diadem @Ryan Alexander Lee
+103 C Magma Spray @Richard Wright
+104 U Mogis's Warhound @John Severin Brassell
+105 C Pensive Minotaur @Svetlin Velinov
+106 M Prophetic Flamespeaker @Cynthia Sheppard
+107 U Riddle of Lightning @Daarken
+108 U Rollick of Abandon @Mathias Kollros
+109 C Rouse the Mob @John Stanko
+110 C Satyr Hoplite @Mark Zug
+111 C Sigiled Skink @Yeong-Hao Han
+112 R Spawn of Thraxes @Svetlin Velinov
+113 U Spite of Mogis @Vincent Proce
+114 C Starfall @Chris Rahn
+115 R Twinflame @Chase Stone
+116 U Wildfire Cerberus @Slawomir Maniak
+117 U Bassara Tower Archer @Slawomir Maniak
+118 U Colossal Heroics @Seb McKinnon
+119 U Consign to Dust @Andreas Rocha
+120 C Desecration Plague @Ralph Horsley
+121 R Dictate of Karametra @Noah Bradley
+122 R Eidolon of Blossoms @Min Yum
+123 C Font of Fertility @Jack Wang
+124 C Golden Hind @Cyril Van Der Haegen
+125 U Goldenhide Ox @Jack Wang
+126 R Heroes' Bane @Raymond Swanland
+127 C Humbler of Mortals @Jason Felix
+128 R Hydra Broodmaster @Steve Prescott
+129 C Kruphix's Insight @Igor Kieryluk
+130 C Market Festival @Ryan Barger
+131 C Nature's Panoply @John Avon
+132 U Nessian Game Warden @Vincent Proce
+133 C Oakheart Dryads @Johann Bodin
+134 C Pheres-Band Thunderhoof @Christopher Moeller
+135 R Pheres-Band Warchief @James Ryman
+136 C Ravenous Leucrocota @Christopher Burdett
+137 C Renowned Weaver @Yohann Schepacz
+138 U Reviving Melody @Cynthia Sheppard
+139 C Satyr Grovedancer @Jason A. Engle
+140 R Setessan Tactics @Mark Winters
+141 U Solidarity of Heroes @Eric Deschamps
+142 U Spirespine @Sam Burley
+143 U Strength from the Fallen @Min Yum
+144 U Swarmborn Giant @Jaime Jones
+145 M Ajani, Mentor of Heroes @Aaron Miller
+146 M Athreos, God of Passage @Ryan Barger
+147 U Desperate Stand @Raymond Swanland
+148 U Disciple of Deceit @Daarken
+149 U Fleetfeather Cockatrice @Matt Stewart
+150 M Iroas, God of Victory @Slawomir Maniak
+151 M Keranos, God of Storms @Daarken
+152 M Kruphix, God of Horizons @Daarken
+153 U Nyx Weaver @Jack Wang
+154 M Pharika, God of Affliction @Peter Mohrbacher
+155 R Revel of the Fallen God @Adam Paquette
+156 U Stormchaser Chimera @Greg Staples
+157 U Underworld Coinsmith @Mark Winters
+158 U Armory of Iroas @Yeong-Hao Han
+159 U Chariot of Victory @John Stanko
+160 U Deserter's Quarters @Daniel Ljunggren
+161 U Gold-Forged Sentinel @James Zapata
+162 R Hall of Triumph @Ryan Yee
+163 R Mana Confluence @Richard Wright
+164 R Temple of Epiphany @Noah Bradley
+165 R Temple of Malady @James Paick
 
 [tokens]
 gold

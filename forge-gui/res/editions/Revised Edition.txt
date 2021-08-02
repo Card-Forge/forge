@@ -13,312 +13,312 @@ ChaosDraftThemes=CORE_SET
 ScryfallCode=3ED
 
 [cards]
-47 U Air Elemental
-231 R Aladdin's Lamp
-232 R Aladdin's Ring
-48 U Animate Artifact
-93 U Animate Dead
-1 R Animate Wall
-233 R Ankh of Mishra
-2 R Armageddon
-234 R Armageddon Clock
-186 R Aspect of Wolf
-139 C Atog
-282 R Badlands
-94 R Bad Moon
-3 R Balance
-235 U Basalt Monolith
-283 R Bayou
-4 C Benalish Hero
-187 R Birds of Paradise
-95 U Black Knight
-236 U Black Vise
-5 U Black Ward
-6 R Blessing
-49 C Blue Elemental Blast
-7 U Blue Ward
-96 U Bog Wraith
-237 R Bottle of Suleiman
-50 R Braingeyser
-238 U Brass Man
-140 U Burrowing
-8 U Castle
-239 U Celestial Prism
-188 U Channel
-141 R Chaoslace
-9 C Circle of Protection: Black
-10 C Circle of Protection: Blue
-11 C Circle of Protection: Green
-12 C Circle of Protection: Red
-13 C Circle of Protection: White
-240 R Clockwork Beast
-51 U Clone
-189 R Cockatrice
-241 U Conservator
-97 R Contract from Below
-52 U Control Magic
-14 U Conversion
-53 R Copy Artifact
-54 U Counterspell
-190 C Craw Wurm
-55 C Creature Bond
-191 U Crumble
-15 R Crusade
-242 U Crystal Rod
-98 U Cursed Land
-243 R Dancing Scimitar
-100 R Darkpact
-99 C Dark Ritual
-101 U Deathgrip
-102 R Deathlace
-16 C Death Ward
-103 R Demonic Attorney
-104 R Demonic Hordes
-105 U Demonic Tutor
-192 U Desert Twister
-244 R Dingus Egg
-17 C Disenchant
-142 C Disintegrate
-245 R Disrupting Scepter
-246 R Dragon Engine
-143 U Dragon Whelp
-106 C Drain Life
-56 R Drain Power
-107 C Drudge Skeletons
-144 C Dwarven Warriors
-145 U Dwarven Weaponsmith
-147 C Earthbind
-146 U Earth Elemental
-148 R Earthquake
-247 R Ebony Horse
-108 R El-Hajjaj
-193 R Elvish Archers
-57 U Energy Flux
-109 C Erg Raiders
-110 U Evil Presence
-18 R Eye for an Eye
-19 R Farmstead
-194 R Fastbond
-111 C Fear
-58 U Feedback
-150 C Fireball
-151 C Firebreathing
-149 U Fire Elemental
-152 U Flashfires
-59 C Flight
-248 R Flying Carpet
-195 C Fog
-196 R Force of Nature
-304 L Forest
-305 L Forest
-306 L Forest
-153 R Fork
-112 C Frozen Shade
-197 R Fungusaur
-198 R Gaea's Liege
-199 C Giant Growth
-200 C Giant Spider
-249 U Glasses of Urza
-113 U Gloom
-154 U Goblin Balloon Brigade
-155 R Goblin King
-156 R Granite Gargoyle
-157 C Gray Ogre
-20 U Green Ward
-201 C Grizzly Bears
-21 C Guardian Angel
-22 C Healing Salve
-250 R Helm of Chatzuk
-158 C Hill Giant
-23 C Holy Armor
-24 C Holy Strength
-114 C Howl from Beyond
-251 R Howling Mine
-60 R Hurkyl's Recall
-159 C Hurloon Minotaur
-202 U Hurricane
-115 U Hypnotic Specter
-203 U Instill Energy
-204 C Ironroot Treefolk
-252 U Iron Star
-295 L Island
-296 L Island
-297 L Island
-61 R Island Fish Jasconius
-25 R Island Sanctuary
-253 U Ivory Cup
-254 R Ivory Tower
-255 R Jade Monolith
-256 R Jandor's Ring
-257 R Jandor's Saddlebags
-258 R Jayemdae Tome
-259 U Juggernaut
-62 C Jump
-26 U Karma
-160 U Keldon Warlord
-161 C Kird Ape
-260 R Kormus Bell
-205 R Kudzu
-27 U Lance
-206 U Ley Druid
-261 U Library of Leng
-207 U Lifeforce
-208 R Lifelace
-63 U Lifetap
-162 C Lightning Bolt
-209 R Living Artifact
-210 R Living Lands
-262 U Living Wall
-211 C Llanowar Elves
-64 R Lord of Atlantis
-116 R Lord of the Pit
-212 U Lure
-65 R Magical Hack
-163 R Magnetic Mountain
-66 R Mahamoti Djinn
-165 R Manabarbs
-164 R Mana Flare
-67 R Mana Short
-263 R Mana Vault
-264 R Meekstone
-68 C Merfolk of the Pearl Trident
-28 C Mesa Pegasus
-166 R Mijae Djinn
-265 R Millstone
-117 R Mind Twist
-266 R Mishra's War Machine
-167 C Mons's Goblin Raiders
-301 L Mountain
-302 L Mountain
-303 L Mountain
-118 R Nether Shadow
-119 U Nettling Imp
-267 R Nevinyrral's Disk
-120 R Nightmare
-29 R Northern Paladin
-268 U Obsianus Golem
-269 R Onulet
-168 U Orcish Artillery
-169 U Orcish Oriflamme
-270 U Ornithopter
-121 C Paralyze
-30 C Pearled Unicorn
-31 R Personal Incarnation
-122 C Pestilence
-69 U Phantasmal Forces
-70 C Phantasmal Terrain
-71 U Phantom Monster
-72 R Pirate Ship
-123 C Plague Rats
-292 L Plains
-293 L Plains
-294 L Plains
-284 R Plateau
-73 C Power Leak
-74 C Power Sink
-170 R Power Surge
-271 R Primal Clay
-75 C Prodigal Sorcerer
-76 C Psychic Venom
-32 R Purelace
-124 C Raise Dead
-77 C Reconstruction
-171 C Red Elemental Blast
-33 U Red Ward
-213 C Regeneration
-214 U Regrowth
-34 U Resurrection
-35 R Reverse Damage
-36 U Reverse Polarity
-37 R Righteousness
-272 R Rocket Launcher
-173 R Rock Hydra
-172 R Roc of Kher Ridges
-273 U Rod of Ruin
-125 R Royal Assassin
-126 U Sacrifice
-38 C Samite Healer
-285 R Savannah
-39 R Savannah Lions
-127 C Scathe Zombies
-128 U Scavenging Ghoul
-286 R Scrubland
-215 C Scryb Sprites
-78 C Sea Serpent
-174 R Sedge Troll
-129 U Sengir Vampire
-79 R Serendib Efreet
-40 U Serra Angel
-216 C Shanodin Dryads
-175 C Shatter
-176 U Shatterstorm
-177 R Shivan Dragon
-130 U Simulacrum
-80 U Siren's Call
-81 R Sleight of Mind
-178 R Smoke
-274 U Sol Ring
-131 R Sorceress Queen
-275 U Soul Net
-82 C Spell Blast
-83 R Stasis
-84 U Steal Artifact
-179 U Stone Giant
-180 C Stone Rain
-217 C Stream of Life
-276 R Sunglasses of Urza
-298 L Swamp
-299 L Swamp
-300 L Swamp
-41 U Swords to Plowshares
-287 R Taiga
-132 C Terror
-277 R The Hive
-278 U The Rack
-218 U Thicket Basilisk
-85 R Thoughtlace
-279 U Throne of Bone
-219 R Timber Wolves
-220 R Titania's Song
-221 C Tranquility
-288 R Tropical Island
-222 U Tsunami
-289 R Tundra
-181 U Tunnel
-290 R Underground Sea
-133 C Unholy Strength
-86 C Unstable Mutation
-87 C Unsummon
-182 U Uthden Troll
-223 R Verduran Enchantress
-88 R Vesuvan Doppelganger
-42 R Veteran Bodyguard
-89 R Volcanic Eruption
-291 R Volcanic Island
-90 U Wall of Air
-134 U Wall of Bone
-224 U Wall of Brambles
-183 U Wall of Fire
-225 U Wall of Ice
-184 U Wall of Stone
-43 U Wall of Swords
-91 U Wall of Water
-226 C Wall of Wood
-227 U Wanderlust
-228 C War Mammoth
-135 R Warp Artifact
-92 U Water Elemental
-136 C Weakness
-229 R Web
-185 R Wheel of Fortune
-44 U White Knight
-45 U White Ward
-230 C Wild Growth
-137 R Will-o'-the-Wisp
-280 R Winter Orb
-281 U Wooden Sphere
-46 R Wrath of God
-138 R Zombie Master
+47 U Air Elemental @Richard Thomas
+231 R Aladdin's Lamp @Mark Tedin
+232 R Aladdin's Ring @Dan Frazier
+48 U Animate Artifact @Douglas Shuler
+93 U Animate Dead @Anson Maddocks
+1 R Animate Wall @Dan Frazier
+233 R Ankh of Mishra @Amy Weber
+2 R Armageddon @Jesper Myrfors
+234 R Armageddon Clock @Amy Weber
+186 R Aspect of Wolf @Jeff A. Menges
+139 C Atog @Jesper Myrfors
+282 R Badlands @Rob Alexander
+94 R Bad Moon @Jesper Myrfors
+3 R Balance @Mark Poole
+235 U Basalt Monolith @Jesper Myrfors
+283 R Bayou @Jesper Myrfors
+4 C Benalish Hero @Douglas Shuler
+187 R Birds of Paradise @Mark Poole
+95 U Black Knight @Jeff A. Menges
+236 U Black Vise @Richard Thomas
+5 U Black Ward @Dan Frazier
+6 R Blessing @Julie Baroh
+49 C Blue Elemental Blast @Richard Thomas
+7 U Blue Ward @Dan Frazier
+96 U Bog Wraith @Jeff A. Menges
+237 R Bottle of Suleiman @Jesper Myrfors
+50 R Braingeyser @Mark Tedin
+238 U Brass Man @Christopher Rush
+140 U Burrowing @Mark Poole
+8 U Castle @Dameon Willich
+239 U Celestial Prism @Amy Weber
+188 U Channel @Richard Thomas
+141 R Chaoslace @Dameon Willich
+9 C Circle of Protection: Black @Jesper Myrfors
+10 C Circle of Protection: Blue @Dameon Willich
+11 C Circle of Protection: Green @Sandra Everingham
+12 C Circle of Protection: Red @Mark Tedin
+13 C Circle of Protection: White @Douglas Shuler
+240 R Clockwork Beast @Drew Tucker
+51 U Clone @Julie Baroh
+189 R Cockatrice @Dan Frazier
+241 U Conservator @Amy Weber
+97 R Contract from Below @Douglas Shuler
+52 U Control Magic @Dameon Willich
+14 U Conversion @Jesper Myrfors
+53 R Copy Artifact @Amy Weber
+54 U Counterspell @Mark Poole
+190 C Craw Wurm @Daniel Gelon
+55 C Creature Bond @Anson Maddocks
+191 U Crumble @Jesper Myrfors
+15 R Crusade @Mark Poole
+242 U Crystal Rod @Amy Weber
+98 U Cursed Land @Jesper Myrfors
+243 R Dancing Scimitar @Anson Maddocks
+100 R Darkpact @Quinton Hoover
+99 C Dark Ritual @Sandra Everingham
+101 U Deathgrip @Anson Maddocks
+102 R Deathlace @Sandra Everingham
+16 C Death Ward @Mark Poole
+103 R Demonic Attorney @Daniel Gelon
+104 R Demonic Hordes @Jesper Myrfors
+105 U Demonic Tutor @Douglas Shuler
+192 U Desert Twister @Susan Van Camp
+244 R Dingus Egg @Dan Frazier
+17 C Disenchant @Amy Weber
+142 C Disintegrate @Anson Maddocks
+245 R Disrupting Scepter @Dan Frazier
+246 R Dragon Engine @Anson Maddocks
+143 U Dragon Whelp @Amy Weber
+106 C Drain Life @Douglas Shuler
+56 R Drain Power @Douglas Shuler
+107 C Drudge Skeletons @Sandra Everingham
+144 C Dwarven Warriors @Douglas Shuler
+145 U Dwarven Weaponsmith @Mark Poole
+147 C Earthbind @Quinton Hoover
+146 U Earth Elemental @Dan Frazier
+148 R Earthquake @Dan Frazier
+247 R Ebony Horse @Dameon Willich
+108 R El-Hajjaj @Dameon Willich
+193 R Elvish Archers @Anson Maddocks
+57 U Energy Flux @Kaja Foglio
+109 C Erg Raiders @Dameon Willich
+110 U Evil Presence @Sandra Everingham
+18 R Eye for an Eye @Mark Poole
+19 R Farmstead @Mark Poole
+194 R Fastbond @Mark Poole
+111 C Fear @Mark Poole
+58 U Feedback @Quinton Hoover
+150 C Fireball @Mark Tedin
+151 C Firebreathing @Dan Frazier
+149 U Fire Elemental @Melissa A. Benson
+152 U Flashfires @Dameon Willich
+59 C Flight @Anson Maddocks
+248 R Flying Carpet @Mark Tedin
+195 C Fog @Jesper Myrfors
+196 R Force of Nature @Douglas Shuler
+304 L Forest @Christopher Rush
+305 L Forest @Christopher Rush
+306 L Forest @Christopher Rush
+153 R Fork @Amy Weber
+112 C Frozen Shade @Douglas Shuler
+197 R Fungusaur @Daniel Gelon
+198 R Gaea's Liege @Dameon Willich
+199 C Giant Growth @Sandra Everingham
+200 C Giant Spider @Sandra Everingham
+249 U Glasses of Urza @Douglas Shuler
+113 U Gloom @Dan Frazier
+154 U Goblin Balloon Brigade @Andi Rusu
+155 R Goblin King @Jesper Myrfors
+156 R Granite Gargoyle @Christopher Rush
+157 C Gray Ogre @Dan Frazier
+20 U Green Ward @Dan Frazier
+201 C Grizzly Bears @Jeff A. Menges
+21 C Guardian Angel @Anson Maddocks
+22 C Healing Salve @Dan Frazier
+250 R Helm of Chatzuk @Mark Tedin
+158 C Hill Giant @Dan Frazier
+23 C Holy Armor @Melissa A. Benson
+24 C Holy Strength @Anson Maddocks
+114 C Howl from Beyond @Mark Poole
+251 R Howling Mine @Mark Poole
+60 R Hurkyl's Recall @NéNé Thomas
+159 C Hurloon Minotaur @Anson Maddocks
+202 U Hurricane @Dameon Willich
+115 U Hypnotic Specter @Douglas Shuler
+203 U Instill Energy @Dameon Willich
+204 C Ironroot Treefolk @Jesper Myrfors
+252 U Iron Star @Dan Frazier
+295 L Island @Mark Poole
+296 L Island @Mark Poole
+297 L Island @Mark Poole
+61 R Island Fish Jasconius @Jesper Myrfors
+25 R Island Sanctuary @Mark Poole
+253 U Ivory Cup @Anson Maddocks
+254 R Ivory Tower @Margaret Organ-Kean
+255 R Jade Monolith @Anson Maddocks
+256 R Jandor's Ring @Dan Frazier
+257 R Jandor's Saddlebags @Dameon Willich
+258 R Jayemdae Tome @Mark Tedin
+259 U Juggernaut @Dan Frazier
+62 C Jump @Mark Poole
+26 U Karma @Richard Thomas
+160 U Keldon Warlord @Kev Brockschmidt
+161 C Kird Ape @Ken Meyer, Jr.
+260 R Kormus Bell @Christopher Rush
+205 R Kudzu @Mark Poole
+27 U Lance @Rob Alexander
+206 U Ley Druid @Sandra Everingham
+261 U Library of Leng @Daniel Gelon
+207 U Lifeforce @Dameon Willich
+208 R Lifelace @Amy Weber
+63 U Lifetap @Anson Maddocks
+162 C Lightning Bolt @Christopher Rush
+209 R Living Artifact @Anson Maddocks
+210 R Living Lands @Jesper Myrfors
+262 U Living Wall @Anson Maddocks
+211 C Llanowar Elves @Anson Maddocks
+64 R Lord of Atlantis @Melissa A. Benson
+116 R Lord of the Pit @Mark Tedin
+212 U Lure @Anson Maddocks
+65 R Magical Hack @Julie Baroh
+163 R Magnetic Mountain @Susan Van Camp
+66 R Mahamoti Djinn @Dan Frazier
+165 R Manabarbs @Christopher Rush
+164 R Mana Flare @Christopher Rush
+67 R Mana Short @Dameon Willich
+263 R Mana Vault @Mark Tedin
+264 R Meekstone @Quinton Hoover
+68 C Merfolk of the Pearl Trident @Jeff A. Menges
+28 C Mesa Pegasus @Melissa A. Benson
+166 R Mijae Djinn @Susan Van Camp
+265 R Millstone @Kaja Foglio
+117 R Mind Twist @Julie Baroh
+266 R Mishra's War Machine @Amy Weber
+167 C Mons's Goblin Raiders @Jeff A. Menges
+301 L Mountain @Douglas Shuler
+302 L Mountain @Douglas Shuler
+303 L Mountain @Douglas Shuler
+118 R Nether Shadow @Christopher Rush
+119 U Nettling Imp @Quinton Hoover
+267 R Nevinyrral's Disk @Mark Tedin
+120 R Nightmare @Melissa A. Benson
+29 R Northern Paladin @Douglas Shuler
+268 U Obsianus Golem @Jesper Myrfors
+269 R Onulet @Anson Maddocks
+168 U Orcish Artillery @Anson Maddocks
+169 U Orcish Oriflamme @Dan Frazier
+270 U Ornithopter @Amy Weber
+121 C Paralyze @Anson Maddocks
+30 C Pearled Unicorn @Cornelius Brudi
+31 R Personal Incarnation @Kev Brockschmidt
+122 C Pestilence @Jesper Myrfors
+69 U Phantasmal Forces @Mark Poole
+70 C Phantasmal Terrain @Dameon Willich
+71 U Phantom Monster @Jesper Myrfors
+72 R Pirate Ship @Tom Wänerstrand
+123 C Plague Rats @Anson Maddocks
+292 L Plains @Jesper Myrfors
+293 L Plains @Jesper Myrfors
+294 L Plains @Jesper Myrfors
+284 R Plateau @Cornelius Brudi
+73 C Power Leak @Drew Tucker
+74 C Power Sink @Richard Thomas
+170 R Power Surge @Douglas Shuler
+271 R Primal Clay @Kaja Foglio
+75 C Prodigal Sorcerer @Douglas Shuler
+76 C Psychic Venom @Brian Snõddy
+32 R Purelace @Sandra Everingham
+124 C Raise Dead @Jeff A. Menges
+77 C Reconstruction @Anson Maddocks
+171 C Red Elemental Blast @Richard Thomas
+33 U Red Ward @Dan Frazier
+213 C Regeneration @Quinton Hoover
+214 U Regrowth @Dameon Willich
+34 U Resurrection @Dan Frazier
+35 R Reverse Damage @Dameon Willich
+36 U Reverse Polarity @Justin Hampton
+37 R Righteousness @Douglas Shuler
+272 R Rocket Launcher @Pete Venters
+173 R Rock Hydra @Jeff A. Menges
+172 R Roc of Kher Ridges @Andi Rusu
+273 U Rod of Ruin @Christopher Rush
+125 R Royal Assassin @Tom Wänerstrand
+126 U Sacrifice @Dan Frazier
+38 C Samite Healer @Tom Wänerstrand
+285 R Savannah @Rob Alexander
+39 R Savannah Lions @Daniel Gelon
+127 C Scathe Zombies @Jesper Myrfors
+128 U Scavenging Ghoul @Jeff A. Menges
+286 R Scrubland @Jesper Myrfors
+215 C Scryb Sprites @Amy Weber
+78 C Sea Serpent @Jeff A. Menges
+174 R Sedge Troll @Dan Frazier
+129 U Sengir Vampire @Anson Maddocks
+79 R Serendib Efreet @Jesper Myrfors
+40 U Serra Angel @Douglas Shuler
+216 C Shanodin Dryads @Anson Maddocks
+175 C Shatter @Amy Weber
+176 U Shatterstorm @Mark Poole
+177 R Shivan Dragon @Melissa A. Benson
+130 U Simulacrum @Mark Poole
+80 U Siren's Call @Anson Maddocks
+81 R Sleight of Mind @Mark Poole
+178 R Smoke @Jesper Myrfors
+274 U Sol Ring @Mark Tedin
+131 R Sorceress Queen @Kaja Foglio
+275 U Soul Net @Dameon Willich
+82 C Spell Blast @Brian Snõddy
+83 R Stasis @Fay Jones
+84 U Steal Artifact @Amy Weber
+179 U Stone Giant @Dameon Willich
+180 C Stone Rain @Daniel Gelon
+217 C Stream of Life @Mark Poole
+276 R Sunglasses of Urza @Dan Frazier
+298 L Swamp @Dan Frazier
+299 L Swamp @Dan Frazier
+300 L Swamp @Dan Frazier
+41 U Swords to Plowshares @Jeff A. Menges
+287 R Taiga @Rob Alexander
+132 C Terror @Ron Spencer
+277 R The Hive @Sandra Everingham
+278 U The Rack @Richard Thomas
+218 U Thicket Basilisk @Dan Frazier
+85 R Thoughtlace @Mark Poole
+279 U Throne of Bone @Anson Maddocks
+219 R Timber Wolves @Melissa A. Benson
+220 R Titania's Song @Kerstin Kaman
+221 C Tranquility @Douglas Shuler
+288 R Tropical Island @Jesper Myrfors
+222 U Tsunami @Richard Thomas
+289 R Tundra @Jesper Myrfors
+181 U Tunnel @Dan Frazier
+290 R Underground Sea @Rob Alexander
+133 C Unholy Strength @Douglas Shuler
+86 C Unstable Mutation @Douglas Shuler
+87 C Unsummon @Douglas Shuler
+182 U Uthden Troll @Douglas Shuler
+223 R Verduran Enchantress @Kev Brockschmidt
+88 R Vesuvan Doppelganger @Quinton Hoover
+42 R Veteran Bodyguard @Douglas Shuler
+89 R Volcanic Eruption @Douglas Shuler
+291 R Volcanic Island @Brian Snõddy
+90 U Wall of Air @Richard Thomas
+134 U Wall of Bone @Anson Maddocks
+224 U Wall of Brambles @Anson Maddocks
+183 U Wall of Fire @Richard Thomas
+225 U Wall of Ice @Richard Thomas
+184 U Wall of Stone @Dan Frazier
+43 U Wall of Swords @Mark Tedin
+91 U Wall of Water @Richard Thomas
+226 C Wall of Wood @Mark Tedin
+227 U Wanderlust @Cornelius Brudi
+228 C War Mammoth @Jeff A. Menges
+135 R Warp Artifact @Amy Weber
+92 U Water Elemental @Jeff A. Menges
+136 C Weakness @Douglas Shuler
+229 R Web @Rob Alexander
+185 R Wheel of Fortune @Daniel Gelon
+44 U White Knight @Daniel Gelon
+45 U White Ward @Dan Frazier
+230 C Wild Growth @Mark Poole
+137 R Will-o'-the-Wisp @Jesper Myrfors
+280 R Winter Orb @Mark Tedin
+281 U Wooden Sphere @Mark Tedin
+46 R Wrath of God @Quinton Hoover
+138 R Zombie Master @Jeff A. Menges
 
 [tokens]
 wasp

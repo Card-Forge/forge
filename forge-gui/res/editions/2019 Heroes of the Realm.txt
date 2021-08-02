@@ -8,10 +8,10 @@ Type=Funny
 ScryfallCode=HTR19
 
 [cards]
-1 M Collectigull
-2 M Keeper of the Secret Lair
-3 M War of the Spark
-4 M Champions of Archery
-5 M Myntasha, Honored One
-6 M The Cinematic Phoenix
-7 M Fabled Path of Searo Point
+1 M Collectigull @Wylie Beckert
+2 M Keeper of the Secret Lair @Brigitte Roka
+3 M War of the Spark @Chris Seaman
+4 M Champions of Archery @Donato Giancola
+5 M Myntasha, Honored One @Liiga Smilshkalne
+6 M The Cinematic Phoenix @Chuck Lukacs
+7 M Fabled Path of Searo Point @Tom Wänerstrand

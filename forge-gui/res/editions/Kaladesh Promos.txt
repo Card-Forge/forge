@@ -6,8 +6,8 @@ Type=Promo
 ScryfallCode=PKLD
 
 [cards]
-62 R Saheeli's Artistry
-80 U Essence Extraction
-130 R Skyship Stalker
-151 R Cultivator of Blades
-200 U Chief of the Foundry
+62 R Saheeli's Artistry @Wesley Burt
+80 U Essence Extraction @Tomasz Jedruszek
+130 R Skyship Stalker @Tyler Jacobson
+151 R Cultivator of Blades @Josu Hernaiz
+200 U Chief of the Foundry @Jung Park

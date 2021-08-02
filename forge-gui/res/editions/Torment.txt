@@ -14,149 +14,149 @@ ChaosDraftThemes=GRAVEYARD_MATTERS
 ScryfallCode=TOR
 
 [cards]
-90 C Accelerate
-118 C Acorn Harvest
-22 R Alter Reality
-23 R Ambassador Laquatus
-1 R Angel of Retribution
-119 U Anurid Scavenger
-24 C Aquamoeba
-120 U Arrogant Wurm
-2 C Aven Trooper
-25 U Balshan Collaborator
-91 R Balthor the Stout
-92 C Barbarian Outcast
-121 C Basking Rootwalla
-50 U Boneshard Slasher
-26 U Breakthrough
-139 U Cabal Coffers
-51 C Cabal Ritual
-52 C Cabal Surgeon
-53 C Cabal Torturer
-54 C Carrion Rats
-55 U Carrion Wurm
-122 U Centaur Chieftain
-123 C Centaur Veteran
-27 C Cephalid Aristocrat
-28 U Cephalid Illusionist
-29 U Cephalid Sage
-30 C Cephalid Snitch
-31 R Cephalid Vandal
-57 U Chainer's Edict
-56 R Chainer, Dementia Master
-32 C Churning Eddy
-33 U Circular Logic
-3 U Cleansing Meditation
-34 U Compulsion
-35 C Coral Net
-93 C Crackling Club
-94 U Crazed Firecat
-58 C Crippling Fatigue
-59 R Dawn of the Dead
-36 C Deep Analysis
-95 R Devastating Dreams
-124 U Dwell on the Past
-96 C Enslaved Dwarf
-4 U Equal Treatment
-60 C Faceless Butcher
-37 R False Memories
-125 C Far Wanderings
-97 C Fiery Temper
-98 U Flaming Gambit
-99 C Flash of Defiance
-5 C Floating Shield
-6 C Frantic Purification
-38 C Ghostly Wings
-61 U Gloomdrifter
-62 C Gravegouger
-100 R Grim Lavamancer
-63 U Grotesque Hybrid
-126 R Gurzigost
-101 R Hell-Bent Raider
-39 C Hydromorph Guardian
-40 U Hydromorph Gull
-64 R Hypnox
-7 U Hypochondria
-65 R Ichorid
-66 R Insidious Dreams
-127 R Insist
-128 C Invigorating Falls
-102 C Kamahl's Sledge
-129 C Krosan Constrictor
-130 C Krosan Restorer
-67 R Laquatus's Champion
-68 R Last Laugh
-41 C Liquify
-42 R Llawan, Cephalid Empress
-103 C Longhorn Firebeast
-8 R Major Teroh
-69 C Mesmeric Fiend
-9 C Militant Monk
-70 U Mind Sludge
-10 R Morningtide
-71 R Mortal Combat
-72 U Mortiphobia
-73 R Mutilate
-11 C Mystic Familiar
-131 R Nantuko Blightcutter
-132 C Nantuko Calmer
-133 R Nantuko Cultivator
-74 R Nantuko Shade
-134 U Narcissism
-135 R Nostalgic Dreams
-43 C Obsessive Search
-75 C Organ Grinder
-104 R Overmaster
-136 R Parallel Evolution
-105 U Pardic Arsonist
-106 U Pardic Collaborator
-107 C Pardic Lancer
-12 C Pay No Heed
-108 R Petradon
-109 C Petravark
-110 U Pitchstone Wall
-44 R Plagiarize
-45 R Possessed Aven
-111 R Possessed Barbarian
-137 R Possessed Centaur
-13 R Possessed Nomad
-76 C Psychotic Haze
-77 C Putrid Imp
-112 U Pyromania
-113 R Radiate
-78 C Rancid Earth
-14 R Reborn Hero
-79 C Restless Dreams
-46 R Retraced Image
-80 R Sengir Vampire
-138 U Seton's Scout
-81 C Shade's Form
-82 R Shambling Swarm
-83 U Sickening Dreams
-114 R Skullscorch
-47 C Skywing Aven
-84 U Slithery Stalker
-115 C Sonic Seizure
-85 C Soul Scourge
-15 C Spirit Flare
-16 U Stern Judge
-17 U Strength of Isolation
-86 U Strength of Lunacy
-48 U Stupefying Touch
-140 U Tainted Field
-141 U Tainted Isle
-142 U Tainted Peak
-143 U Tainted Wood
-116 U Temporary Insanity
-18 C Teroh's Faithful
-19 U Teroh's Vanguard
-20 R Transcendence
-49 R Turbulent Dreams
-87 C Unhinge
-21 R Vengeful Dreams
-117 U Violent Eruption
-88 C Waste Away
-89 U Zombie Trailblazer
+90 C Accelerate @Gary Ruddell
+118 C Acorn Harvest @Edward P. Beard, Jr.
+22 R Alter Reality @Justin Sweet
+23 R Ambassador Laquatus @Eric Peterson
+1 R Angel of Retribution @rk post
+119 U Anurid Scavenger @Bob Petillo
+24 C Aquamoeba @Arnie Swekel
+120 U Arrogant Wurm @John Avon
+2 C Aven Trooper @Greg Staples
+25 U Balshan Collaborator @DiTerlizzi
+91 R Balthor the Stout @Ron Spears
+92 C Barbarian Outcast @Mark Tedin
+121 C Basking Rootwalla @Heather Hudson
+50 U Boneshard Slasher @Ron Spencer
+26 U Breakthrough @Gary Ruddell
+139 U Cabal Coffers @Don Hazeltine
+51 C Cabal Ritual @Greg Hildebrandt
+52 C Cabal Surgeon @Donato Giancola
+53 C Cabal Torturer @Pete Venters
+54 C Carrion Rats @Edward P. Beard, Jr.
+55 U Carrion Wurm @Glen Angus
+122 U Centaur Chieftain @Justin Sweet
+123 C Centaur Veteran @Mark Zug
+27 C Cephalid Aristocrat @Rob Alexander
+28 U Cephalid Illusionist @Pete Venters
+29 U Cephalid Sage @Keith Garletts
+30 C Cephalid Snitch @Jerry Tiritilli
+31 R Cephalid Vandal @Alex Horley-Orlandelli
+57 U Chainer's Edict @Ben Thompson
+56 R Chainer, Dementia Master @Mark Zug
+32 C Churning Eddy @Thomas M. Baxa
+33 U Circular Logic @Anthony S. Waters
+3 U Cleansing Meditation @Ron Spears
+34 U Compulsion @Christopher Moeller
+35 C Coral Net @Roger Raupp
+93 C Crackling Club @Mike Ploog
+94 U Crazed Firecat @Ron Spears
+58 C Crippling Fatigue @Heather Hudson
+59 R Dawn of the Dead @Pete Venters
+36 C Deep Analysis @Daren Bader
+95 R Devastating Dreams @Tony Szczudlo
+124 U Dwell on the Past @Rebecca Guay
+96 C Enslaved Dwarf @Terese Nielsen
+4 U Equal Treatment @Greg Hildebrandt & Tim Hildebrandt
+60 C Faceless Butcher @Daren Bader
+37 R False Memories @Ron Spencer
+125 C Far Wanderings @Darrell Riche
+97 C Fiery Temper @Greg Hildebrandt & Tim Hildebrandt
+98 U Flaming Gambit @Donato Giancola
+99 C Flash of Defiance @Carl Critchlow
+5 C Floating Shield @Keith Garletts
+6 C Frantic Purification @Mark Brill
+38 C Ghostly Wings @David Martin
+61 U Gloomdrifter @Adam Rex
+62 C Gravegouger @Daren Bader
+100 R Grim Lavamancer @Jim Nelson
+63 U Grotesque Hybrid @Terese Nielsen
+126 R Gurzigost @Scott M. Fischer
+101 R Hell-Bent Raider @Mike Ploog
+39 C Hydromorph Guardian @Glen Angus
+40 U Hydromorph Gull @Arnie Swekel
+64 R Hypnox @Greg Staples
+7 U Hypochondria @Christopher Moeller
+65 R Ichorid @rk post
+66 R Insidious Dreams @John Avon
+127 R Insist @Franz Vohwinkel
+128 C Invigorating Falls @Rebecca Guay
+102 C Kamahl's Sledge @Don Hazeltine
+129 C Krosan Constrictor @Jim Nelson
+130 C Krosan Restorer @Clyde Caldwell
+67 R Laquatus's Champion @Greg Staples
+68 R Last Laugh @John Matson
+41 C Liquify @Ron Spencer
+42 R Llawan, Cephalid Empress @Mark Zug
+103 C Longhorn Firebeast @Glen Angus
+8 R Major Teroh @Daren Bader
+69 C Mesmeric Fiend @Dana Knutson
+9 C Militant Monk @Mark Brill
+70 U Mind Sludge @Eric Peterson
+10 R Morningtide @Tony Szczudlo
+71 R Mortal Combat @Mike Ploog
+72 U Mortiphobia @Christopher Moeller
+73 R Mutilate @Eric Peterson
+11 C Mystic Familiar @Edward P. Beard, Jr.
+131 R Nantuko Blightcutter @Matt Cavotta
+132 C Nantuko Calmer @Mark Romanoski
+133 R Nantuko Cultivator @Darrell Riche
+74 R Nantuko Shade @Brian Snõddy
+134 U Narcissism @Christopher Moeller
+135 R Nostalgic Dreams @Darrell Riche
+43 C Obsessive Search @Jim Nelson
+75 C Organ Grinder @Adam Rex
+104 R Overmaster @Anthony S. Waters
+136 R Parallel Evolution @Matt Cavotta
+105 U Pardic Arsonist @rk post
+106 U Pardic Collaborator @Pete Venters
+107 C Pardic Lancer @Justin Sweet
+12 C Pay No Heed @Adam Rex
+108 R Petradon @Jim Nelson
+109 C Petravark @Wayne England
+110 U Pitchstone Wall @David Martin
+44 R Plagiarize @Ben Thompson
+45 R Possessed Aven @Scott M. Fischer
+111 R Possessed Barbarian @Scott M. Fischer
+137 R Possessed Centaur @Alex Horley-Orlandelli
+13 R Possessed Nomad @Eric Peterson
+76 C Psychotic Haze @Alex Horley-Orlandelli
+77 C Putrid Imp @Wayne England
+112 U Pyromania @Christopher Moeller
+113 R Radiate @Carl Critchlow
+78 C Rancid Earth @Ciruelo
+14 R Reborn Hero @Gary Ruddell
+79 C Restless Dreams @John Matson
+46 R Retraced Image @Greg Staples
+80 R Sengir Vampire @Kev Walker
+138 U Seton's Scout @Mark Romanoski
+81 C Shade's Form @Clyde Caldwell
+82 R Shambling Swarm @Arnie Swekel
+83 U Sickening Dreams @Scott M. Fischer
+114 R Skullscorch @Bradley Williams
+47 C Skywing Aven @Matt Cavotta
+84 U Slithery Stalker @John Avon
+115 C Sonic Seizure @Terese Nielsen
+85 C Soul Scourge @Carl Critchlow
+15 C Spirit Flare @rk post
+16 U Stern Judge @Matt Cavotta
+17 U Strength of Isolation @Jerry Tiritilli
+86 U Strength of Lunacy @Greg Hildebrandt & Tim Hildebrandt
+48 U Stupefying Touch @Bradley Williams
+140 U Tainted Field @Don Hazeltine
+141 U Tainted Isle @Alan Pollack
+142 U Tainted Peak @Tony Szczudlo
+143 U Tainted Wood @Rob Alexander
+116 U Temporary Insanity @Mark Romanoski
+18 C Teroh's Faithful @Tim Hildebrandt
+19 U Teroh's Vanguard @Greg Hildebrandt & Tim Hildebrandt
+20 R Transcendence @Rebecca Guay
+49 R Turbulent Dreams @Wayne England
+87 C Unhinge @Keith Garletts
+21 R Vengeful Dreams @Mark Tedin
+117 U Violent Eruption @Bob Petillo
+88 C Waste Away @Alan Pollack
+89 U Zombie Trailblazer @Brian Snõddy
 
 [tokens]
 g_1_1_squirrel

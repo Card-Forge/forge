@@ -8,6 +8,6 @@ Type=Funny
 ScryfallCode=htr16
 
 [cards]
-1 M Chandra, Gremlin Wrangler
-2 M Dungeon Master
-3 M Nira, Hellkite Duelist
+1 M Chandra, Gremlin Wrangler @Kari Christensen
+2 M Dungeon Master @Mike Burns
+3 M Nira, Hellkite Duelist @Yoichi Ito

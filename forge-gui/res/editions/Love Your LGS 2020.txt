@@ -8,5 +8,5 @@ Type=Promo
 ScryfallCode=PLG20
 
 [cards]
-1 R Reliquary Tower
-2 R Hangarback Walker
+1 R Reliquary Tower @Daniel Ljunggren
+2 R Hangarback Walker @Nicholas Gregory

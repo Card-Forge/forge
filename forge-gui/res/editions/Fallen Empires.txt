@@ -12,193 +12,193 @@ Foil=NotSupported
 ScryfallCode=FEM
 
 [cards]
-81 R Aeolipile
-33a C Armor Thrull
-33b C Armor Thrull
-33c C Armor Thrull
-33d C Armor Thrull
-82 R Balm of Restoration
-34a C Basal Thrull
-34b C Basal Thrull
-34c C Basal Thrull
-34d C Basal Thrull
-92 R Bottomless Vault
-49a C Brassclaw Orcs
-49b C Brassclaw Orcs
-49c C Brassclaw Orcs
-49d C Brassclaw Orcs
-35 U Breeding Pit
-1a C Combat Medic
-1b C Combat Medic
-1c C Combat Medic
-1d C Combat Medic
-83 R Conch Horn
-17 U Deep Spawn
-84 C Delif's Cone
-85 R Delif's Cube
-36 R Derelor
-86 R Draconian Cylix
-50 R Dwarven Armorer
-51 U Dwarven Catapult
-93 R Dwarven Hold
-52 U Dwarven Lieutenant
-94 U Dwarven Ruins
-53a C Dwarven Soldier
-53b C Dwarven Soldier
-53c C Dwarven Soldier
-37 R Ebon Praetor
-95 U Ebon Stronghold
-65a C Elven Fortress
-65b C Elven Fortress
-65c C Elven Fortress
-65d C Elven Fortress
-87 R Elven Lyre
-66 R Elvish Farmer
-67a C Elvish Hunter
-67b C Elvish Hunter
-67c C Elvish Hunter
-68a C Elvish Scout
-68b C Elvish Scout
-68c C Elvish Scout
-2 U Farrel's Mantle
-3a C Farrel's Zealot
-3b C Farrel's Zealot
-3c C Farrel's Zealot
-4 U Farrelite Priest
-69 U Feral Thallid
-70 R Fungal Bloom
-54a C Goblin Chirurgeon
-54b C Goblin Chirurgeon
-54c C Goblin Chirurgeon
-55 R Goblin Flotilla
-56a C Goblin Grenade
-56b C Goblin Grenade
-56c C Goblin Grenade
-57 U Goblin Kites
-58a C Goblin War Drums
-58b C Goblin War Drums
-58c C Goblin War Drums
-58d C Goblin War Drums
-59 R Goblin Warrens
-5 R Hand of Justice
-96 U Havenwood Battleground
-6 U Heroism
-18a C High Tide
-18b C High Tide
-18c C High Tide
-97 R Hollow Trees
-19a C Homarid
-19b C Homarid
-19c C Homarid
-19d C Homarid
-20 R Homarid Shaman
-21 U Homarid Spawning Bed
-22a C Homarid Warrior
-22b C Homarid Warrior
-22c C Homarid Warrior
-38a C Hymn to Tourach
-38b C Hymn to Tourach
-38c C Hymn to Tourach
-38d C Hymn to Tourach
-7a C Icatian Infantry
-7b C Icatian Infantry
-7c C Icatian Infantry
-7d C Icatian Infantry
-8a C Icatian Javelineers
-8b C Icatian Javelineers
-8c C Icatian Javelineers
-9 R Icatian Lieutenant
-10a C Icatian Moneychanger
-10b C Icatian Moneychanger
-10c C Icatian Moneychanger
-11 U Icatian Phalanx
-12 U Icatian Priest
-13a C Icatian Scout
-13b C Icatian Scout
-13c C Icatian Scout
-13d C Icatian Scout
-14 R Icatian Skirmishers
-98 R Icatian Store
-15 R Icatian Town
-88 R Implements of Sacrifice
-39a C Initiates of the Ebon Hand
-39b C Initiates of the Ebon Hand
-39c C Initiates of the Ebon Hand
-23a C Merseine
-23b C Merseine
-23c C Merseine
-23d C Merseine
-40a C Mindstab Thrull
-40b C Mindstab Thrull
-40c C Mindstab Thrull
-41a C Necrite
-41b C Necrite
-41c C Necrite
-71a C Night Soil
-71b C Night Soil
-71c C Night Soil
-60 U Orcish Captain
-61a C Orcish Spy
-61b C Orcish Spy
-61c C Orcish Spy
-62a C Orcish Veteran
-62b C Orcish Veteran
-62c C Orcish Veteran
-62d C Orcish Veteran
-16a C Order of Leitbur
-16b C Order of Leitbur
-16c C Order of Leitbur
-42a C Order of the Ebon Hand
-42b C Order of the Ebon Hand
-42c C Order of the Ebon Hand
-63 R Orgg
-64 U Raiding Party
-99 R Rainbow Vale
-89 R Ring of Renewal
-24 R River Merfolk
-100 U Ruins of Trokair
-101 R Sand Silos
-25 U Seasinger
-43 U Soul Exchange
-90 R Spirit Shield
-72a C Spore Cloud
-72b C Spore Cloud
-72c C Spore Cloud
-73 U Spore Flower
-26 U Svyelunite Priest
-102 U Svyelunite Temple
-74a C Thallid
-74b C Thallid
-74c C Thallid
-74d C Thallid
-75 U Thallid Devourer
-76 U Thelon's Chant
-77 R Thelon's Curse
-78 U Thelonite Druid
-79 R Thelonite Monk
-80a C Thorn Thallid
-80b C Thorn Thallid
-80c C Thorn Thallid
-80d C Thorn Thallid
-44 R Thrull Champion
-45 U Thrull Retainer
-46 U Thrull Wizard
-27a C Tidal Flats
-27b C Tidal Flats
-27c C Tidal Flats
-28 U Tidal Influence
-47 U Tourach's Chant
-48 R Tourach's Gate
-29 R Vodalian Knights
-30a C Vodalian Mage
-30b C Vodalian Mage
-30c C Vodalian Mage
-31a C Vodalian Soldiers
-31b C Vodalian Soldiers
-31c C Vodalian Soldiers
-31d C Vodalian Soldiers
-32 R Vodalian War Machine
-91 R Zelyon Sword
+81 R Aeolipile @Heather Hudson
+33a C Armor Thrull @Pete Venters
+33b C Armor Thrull @Ron Spencer
+33c C Armor Thrull @Jeff A. Menges
+33d C Armor Thrull @Scott Kirschner
+82 R Balm of Restoration @Margaret Organ-Kean
+34a C Basal Thrull @Kaja Foglio
+34b C Basal Thrull @Phil Foglio
+34c C Basal Thrull @Richard Kane Ferguson
+34d C Basal Thrull @Christopher Rush
+92 R Bottomless Vault @Pat Morrissey
+49a C Brassclaw Orcs @Rob Alexander
+49b C Brassclaw Orcs @Dan Frazier
+49c C Brassclaw Orcs @Rob Alexander
+49d C Brassclaw Orcs @Heather Hudson
+35 U Breeding Pit @Anson Maddocks
+1a C Combat Medic @Edward P. Beard, Jr.
+1b C Combat Medic @Susan Van Camp
+1c C Combat Medic @Anson Maddocks
+1d C Combat Medic @Liz Danforth
+83 R Conch Horn @Phil Foglio
+17 U Deep Spawn @Mark Tedin
+84 C Delif's Cone @Mark Tedin
+85 R Delif's Cube @Mark Tedin
+36 R Derelor @Anson Maddocks
+86 R Draconian Cylix @Edward P. Beard, Jr.
+50 R Dwarven Armorer @Bryon Wackwitz
+51 U Dwarven Catapult @Jeff A. Menges
+93 R Dwarven Hold @Pat Morrissey
+52 U Dwarven Lieutenant @Jeff A. Menges
+94 U Dwarven Ruins @Mark Poole
+53a C Dwarven Soldier @Rob Alexander
+53b C Dwarven Soldier @Randy Asplund-Faith
+53c C Dwarven Soldier @Douglas Shuler
+37 R Ebon Praetor @Randy Asplund-Faith
+95 U Ebon Stronghold @Mark Poole
+65a C Elven Fortress @Pete Venters
+65b C Elven Fortress @Randy Asplund-Faith
+65c C Elven Fortress @Mark Poole
+65d C Elven Fortress @Tom Wänerstrand
+87 R Elven Lyre @Kaja Foglio
+66 R Elvish Farmer @Richard Kane Ferguson
+67a C Elvish Hunter @Mark Poole
+67b C Elvish Hunter @Anson Maddocks
+67c C Elvish Hunter @Susan Van Camp
+68a C Elvish Scout @Mark Poole
+68b C Elvish Scout @Pete Venters
+68c C Elvish Scout @Christopher Rush
+2 U Farrel's Mantle @Anthony S. Waters
+3a C Farrel's Zealot @Melissa A. Benson
+3b C Farrel's Zealot @Richard Kane Ferguson
+3c C Farrel's Zealot @Edward P. Beard, Jr.
+4 U Farrelite Priest @Phil Foglio
+69 U Feral Thallid @Rob Alexander
+70 R Fungal Bloom @Daniel Gelon
+54a C Goblin Chirurgeon @Daniel Gelon
+54b C Goblin Chirurgeon @Phil Foglio
+54c C Goblin Chirurgeon @Dan Frazier
+55 R Goblin Flotilla @Tom Wänerstrand
+56a C Goblin Grenade @Ron Spencer
+56b C Goblin Grenade @Dan Frazier
+56c C Goblin Grenade @Christopher Rush
+57 U Goblin Kites @Anson Maddocks
+58a C Goblin War Drums @Dan Frazier
+58b C Goblin War Drums @Richard Kane Ferguson
+58c C Goblin War Drums @Heather Hudson
+58d C Goblin War Drums @Jeff A. Menges
+59 R Goblin Warrens @Dan Frazier
+5 R Hand of Justice @Melissa A. Benson
+96 U Havenwood Battleground @Mark Poole
+6 U Heroism @Mark Poole
+18a C High Tide @Drew Tucker
+18b C High Tide @Anson Maddocks
+18c C High Tide @Amy Weber
+97 R Hollow Trees @Pat Morrissey
+19a C Homarid @Quinton Hoover
+19b C Homarid @Heather Hudson
+19c C Homarid @Mark Tedin
+19d C Homarid @Bryon Wackwitz
+20 R Homarid Shaman @Amy Weber
+21 U Homarid Spawning Bed @Douglas Shuler
+22a C Homarid Warrior @Daniel Gelon
+22b C Homarid Warrior @Randy Asplund-Faith
+22c C Homarid Warrior @Douglas Shuler
+38a C Hymn to Tourach @Susan Van Camp
+38b C Hymn to Tourach @Liz Danforth
+38c C Hymn to Tourach @Quinton Hoover
+38d C Hymn to Tourach @Scott Kirschner
+7a C Icatian Infantry @Edward P. Beard, Jr.
+7b C Icatian Infantry @Christopher Rush
+7c C Icatian Infantry @Douglas Shuler
+7d C Icatian Infantry @Drew Tucker
+8a C Icatian Javelineers @Melissa A. Benson
+8b C Icatian Javelineers @Edward P. Beard, Jr.
+8c C Icatian Javelineers @Scott Kirschner
+9 R Icatian Lieutenant @Pete Venters
+10a C Icatian Moneychanger @Drew Tucker
+10b C Icatian Moneychanger @Edward P. Beard, Jr.
+10c C Icatian Moneychanger @Melissa A. Benson
+11 U Icatian Phalanx @Kaja Foglio
+12 U Icatian Priest @Drew Tucker
+13a C Icatian Scout @Richard Kane Ferguson
+13b C Icatian Scout @Douglas Shuler
+13c C Icatian Scout @Rob Alexander
+13d C Icatian Scout @Phil Foglio
+14 R Icatian Skirmishers @Heather Hudson
+98 R Icatian Store @Pat Morrissey
+15 R Icatian Town @Tom Wänerstrand
+88 R Implements of Sacrifice @Margaret Organ-Kean
+39a C Initiates of the Ebon Hand @Heather Hudson
+39b C Initiates of the Ebon Hand @Liz Danforth
+39c C Initiates of the Ebon Hand @Kaja Foglio
+23a C Merseine @Heather Hudson
+23b C Merseine @Margaret Organ-Kean
+23c C Merseine @Drew Tucker
+23d C Merseine @Pete Venters
+40a C Mindstab Thrull @Richard Kane Ferguson
+40b C Mindstab Thrull @Heather Hudson
+40c C Mindstab Thrull @Mark Tedin
+41a C Necrite @Ron Spencer
+41b C Necrite @Christopher Rush
+41c C Necrite @Drew Tucker
+71a C Night Soil @Sandra Everingham
+71b C Night Soil @Heather Hudson
+71c C Night Soil @Drew Tucker
+60 U Orcish Captain @Mark Tedin
+61a C Orcish Spy @Susan Van Camp
+61b C Orcish Spy @Daniel Gelon
+61c C Orcish Spy @Pete Venters
+62a C Orcish Veteran @Douglas Shuler
+62b C Orcish Veteran @Dan Frazier
+62c C Orcish Veteran @Quinton Hoover
+62d C Orcish Veteran @Melissa A. Benson
+16a C Order of Leitbur @Bryon Wackwitz
+16b C Order of Leitbur @Bryon Wackwitz
+16c C Order of Leitbur @Randy Asplund-Faith
+42a C Order of the Ebon Hand @Melissa A. Benson
+42b C Order of the Ebon Hand @Christopher Rush
+42c C Order of the Ebon Hand @Ron Spencer
+63 R Orgg @Daniel Gelon
+64 U Raiding Party @Quinton Hoover
+99 R Rainbow Vale @Kaja Foglio
+89 R Ring of Renewal @Douglas Shuler
+24 R River Merfolk @Douglas Shuler
+100 U Ruins of Trokair @Mark Poole
+101 R Sand Silos @Pat Morrissey
+25 U Seasinger @Amy Weber
+43 U Soul Exchange @Anthony S. Waters
+90 R Spirit Shield @Scott Kirschner
+72a C Spore Cloud @Susan Van Camp
+72b C Spore Cloud @Jesper Myrfors
+72c C Spore Cloud @Amy Weber
+73 U Spore Flower @Margaret Organ-Kean
+26 U Svyelunite Priest @Ron Spencer
+102 U Svyelunite Temple @Mark Poole
+74a C Thallid @Edward P. Beard, Jr.
+74b C Thallid @Jesper Myrfors
+74c C Thallid @Ron Spencer
+74d C Thallid @Daniel Gelon
+75 U Thallid Devourer @Ron Spencer
+76 U Thelon's Chant @Melissa A. Benson
+77 R Thelon's Curse @Pete Venters
+78 U Thelonite Druid @Margaret Organ-Kean
+79 R Thelonite Monk @Bryon Wackwitz
+80a C Thorn Thallid @Daniel Gelon
+80b C Thorn Thallid @Heather Hudson
+80c C Thorn Thallid @Jesper Myrfors
+80d C Thorn Thallid @Mark Tedin
+44 R Thrull Champion @Daniel Gelon
+45 U Thrull Retainer @Ron Spencer
+46 U Thrull Wizard @Anson Maddocks
+27a C Tidal Flats @Rob Alexander
+27b C Tidal Flats @Rob Alexander
+27c C Tidal Flats @Sandra Everingham
+28 U Tidal Influence @Tom Wänerstrand
+47 U Tourach's Chant @Richard Kane Ferguson
+48 R Tourach's Gate @Sandra Everingham
+29 R Vodalian Knights @Susan Van Camp
+30a C Vodalian Mage @Susan Van Camp
+30b C Vodalian Mage @Mark Poole
+30c C Vodalian Mage @Quinton Hoover
+31a C Vodalian Soldiers @Melissa A. Benson
+31b C Vodalian Soldiers @Jeff A. Menges
+31c C Vodalian Soldiers @Richard Kane Ferguson
+31d C Vodalian Soldiers @Susan Van Camp
+32 R Vodalian War Machine @Amy Weber
+91 R Zelyon Sword @Scott Kirschner
 
 [tokens]
 w_1_1_citizen

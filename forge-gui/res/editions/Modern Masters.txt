@@ -12,235 +12,235 @@ ChaosDraftThemes=MASTERS_SET
 ScryfallCode=MMA
 
 [cards]
-1 R Adarkar Valkyrie
-2 C Amrou Scout
-3 C Amrou Seekers
-4 R Angel's Grace
-5 R Auriok Salvagers
-6 C Avian Changeling
-7 C Blinding Beam
-8 C Bound in Silence
-9 C Cenn's Enlistment
-10 U Cloudgoat Ranger
-11 C Court Homunculus
-12 C Dispeller's Capsule
-13 M Elspeth, Knight-Errant
-14 R Ethersworn Canonist
-15 U Feudkiller's Verdict
-16 U Flickerwisp
-17 C Gleam of Resistance
-18 C Hillcomber Giant
-19 C Ivory Giant
-20 R Kataki, War's Wage
-21 C Kithkin Greatheart
-22 U Meadowboon
-23 C Otherworldly Journey
-24 C Pallid Mycoderm
-25 U Path to Exile
-26 R Reveillark
-27 C Saltfield Recluse
-28 C Sanctum Gargoyle
-29 U Sandsower
-30 U Stir the Pride
-31 R Stonehewer Giant
-32 U Terashi's Grasp
-33 C Test of Faith
-34 C Veteran Armorer
-35 M Yosei, the Morning Star
-36 C AEthersnipe
-37 U Careful Consideration
-38 R Cryptic Command
-39 C Dampen Thought
-40 C Echoing Truth
-41 C Errant Ephemeron
-42 C Erratic Mutation
-43 U Esperzoa
-44 C Etherium Sculptor
-45 C Faerie Mechanist
-46 R Gifts Ungiven
-47 R Glen Elendra Archmage
-48 M Keiga, the Tide Star
-49 R Kira, Great Glass-Spinner
-50 C Latchkey Faerie
-51 C Logic Knot
-52 R Meloku the Clouded Mirror
-53 C Mothdust Changeling
-54 U Mulldrifter
-55 U Narcomoeba
-56 R Pact of Negation
-57 C Peer Through Depths
-58 C Perilous Research
-59 C Pestermite
-60 C Petals of Insight
-61 C Reach Through Mists
-62 U Riftwing Cloudskate
-63 R Scion of Oona
-64 U Spell Snare
-65 C Spellstutter Sprite
-66 U Take Possession
-67 U Thirst for Knowledge
-68 C Traumatic Visions
-69 C Vedalken Dismisser
-70 M Vendilion Clique
-71 C Absorb Vis
-72 U Auntie's Snitch
-73 C Blightspeaker
-74 R Bridge from Below
-75 M Dark Confidant
-76 R Death Cloud
-77 C Death Denied
-78 U Death Rattle
-79 C Deepcavern Imp
-80 C Drag Down
-81 C Dreamspoiler Witches
-82 R Earwig Squad
-83 U Executioner's Capsule
-84 R Extirpate
-85 C Facevaulter
-86 C Faerie Macabre
-87 C Festering Goblin
-88 U Horobi's Whisper
-89 M Kokusho, the Evening Star
-90 U Mad Auntie
-91 U Marsh Flitter
-92 C Peppersmoke
-93 U Phthisis
-94 C Rathi Trapper
-95 C Raven's Crime
-96 R Skeletal Vampire
-97 R Slaughter Pact
-98 C Stinkweed Imp
-99 C Street Wraith
-100 C Syphon Life
-101 C Thieving Sprite
-102 R Tombstalker
-103 C Warren Pilferers
-104 C Warren Weirding
-105 C Blind-Spot Giant
-106 R Blood Moon
-107 C Brute Force
-108 R Countryside Crusher
-109 C Crush Underfoot
-110 U Desperate Ritual
-111 R Dragonstorm
-112 C Empty the Warrens
-113 C Fiery Fall
-114 C Fury Charm
-115 C Glacial Ray
-116 C Grapeshot
-117 R Greater Gargadon
-118 U Grinning Ignus
-119 C Hammerheim Deadeye
-120 M Kiki-Jiki, Mirror Breaker
-121 C Lava Spike
-122 C Mogg War Marshal
-123 R Molten Disaster
-124 U Pardic Dragon
-125 R Pyromancer's Swath
-126 C Rift Bolt
-127 C Rift Elemental
-128 M Ryusei, the Falling Star
-129 U Shrapnel Blast
-130 R Squee, Goblin Nabob
-131 C Stingscourger
-132 C Stinkdrinker Daredevil
-133 U Sudden Shock
-134 U Tar Pitcher
-135 U Thundercloud Shaman
-136 C Thundering Giant
-137 C Torrent of Stone
-138 U Tribal Flames
-139 C War-Spike Changeling
-140 C Citanul Woodreaders
-141 R Doubling Season
-142 C Durkwood Baloth
-143 C Echoing Courage
-144 U Eternal Witness
-145 C Giant Dustwasp
-146 C Greater Mossdog
-147 C Hana Kami
-148 C Imperiosaur
-149 U Incremental Growth
-150 M Jugan, the Rising Star
-151 C Kodama's Reach
-152 U Krosan Grip
-153 R Life from the Loam
-154 U Masked Admirers
-155 C Moldervine Cloak
-156 C Nantuko Shaman
-157 C Penumbra Spider
-158 U Reach of Branches
-159 U Riftsweeper
-160 R Rude Awakening
-161 C Search for Tomorrow
-162 U Sporesower Thallid
-163 C Sporoloth Ancient
-164 R Summoner's Pact
-165 C Sylvan Bounty
-166 M Tarmogoyf
-167 C Thallid
-168 C Thallid Germinator
-169 C Thallid Shell-Dweller
-170 R Tooth and Nail
-171 U Tromp the Domains
-172 R Verdeloth the Ancient
-173 C Walker of the Grove
-174 R Woodfall Primus
-175 U Electrolyze
-176 R Grand Arbiter Augustin IV
-177 R Jhoira of the Ghitu
-178 R Knight of the Reliquary
-179 U Lightning Helix
-180 R Maelstrom Pulse
-181 U Mind Funeral
-182 M Progenitus
-183 M Sarkhan Vol
-184 U Tidehollow Sculler
-185 U Trygon Predator
-186 R Cold-Eyed Selkie
-187 R Demigod of Revenge
-188 R Divinity of Pride
-189 R Figure of Destiny
-190 U Kitchen Finks
-191 U Manamorphose
-192 U Murderous Redcap
-193 R Oona, Queen of the Fae
-194 U Plumeveil
-195 U Worm Harvest
-196 C AEther Spellbomb
-197 R AEther Vial
-198 R Arcbound Ravager
-199 C Arcbound Stinger
-200 C Arcbound Wanderer
-201 C Arcbound Worker
-202 C Bonesplitter
-203 R Chalice of the Void
-204 R Engineered Explosives
-205 U Epochrasite
-206 U Etched Oracle
-207 C Frogmite
-208 R Lotus Bloom
-209 C Myr Enforcer
-210 U Myr Retriever
-211 U Paradise Mantle
-212 C Pyrite Spellbomb
-213 U Relic of Progenitus
-214 C Runed Stalactite
-215 C Skyreach Manta
-216 M Sword of Fire and Ice
-217 M Sword of Light and Shadow
-218 M Vedalken Shackles
-219 R Academy Ruins
-220 R Blinkmoth Nexus
-221 R City of Brass
-222 U Dakmor Salvage
-223 R Glimmervoid
-224 C Terramorphic Expanse
-225 U Vivid Crag
-226 U Vivid Creek
-227 U Vivid Grove
-228 U Vivid Marsh
-229 U Vivid Meadow
+1 R Adarkar Valkyrie @Jeremy Jarvis
+2 C Amrou Scout @Quinton Hoover
+3 C Amrou Seekers @Quinton Hoover
+4 R Angel's Grace @Mark Zug
+5 R Auriok Salvagers @Randy Gallegos
+6 C Avian Changeling @Heather Hudson
+7 C Blinding Beam @Doug Chaffee
+8 C Bound in Silence @William Simpson
+9 C Cenn's Enlistment @Matt Cavotta
+10 U Cloudgoat Ranger @Adam Rex
+11 C Court Homunculus @Matt Cavotta
+12 C Dispeller's Capsule @Franz Vohwinkel
+13 M Elspeth, Knight-Errant @Volkan Baǵa
+14 R Ethersworn Canonist @Izzy
+15 U Feudkiller's Verdict @Dan Scott
+16 U Flickerwisp @Jeremy Enecio
+17 C Gleam of Resistance @Matt Stewart
+18 C Hillcomber Giant @Ralph Horsley
+19 C Ivory Giant @Zack Stella
+20 R Kataki, War's Wage @Matt Thompson
+21 C Kithkin Greatheart @Greg Staples
+22 U Meadowboon @Steven Belledin
+23 C Otherworldly Journey @Vance Kovacs
+24 C Pallid Mycoderm @Jim Nelson
+25 U Path to Exile @Todd Lockwood
+26 R Reveillark @Jim Murray
+27 C Saltfield Recluse @Brian Despain
+28 C Sanctum Gargoyle @Shelly Wan
+29 U Sandsower @Kev Walker
+30 U Stir the Pride @Matt Cavotta
+31 R Stonehewer Giant @Steve Prescott
+32 U Terashi's Grasp @Mark Tedin
+33 C Test of Faith @Vance Kovacs
+34 C Veteran Armorer @Kev Walker
+35 M Yosei, the Morning Star @Hiro Izawa
+36 C Aethersnipe @Zoltan Boros & Gabor Szikszai
+37 U Careful Consideration @Janine Johnston
+38 R Cryptic Command @Wayne England
+39 C Dampen Thought @Arnie Swekel
+40 C Echoing Truth @Greg Staples
+41 C Errant Ephemeron @Luca Zontini
+42 C Erratic Mutation @Zoltan Boros & Gabor Szikszai
+43 U Esperzoa @Warren Mahy
+44 C Etherium Sculptor @Steven Belledin
+45 C Faerie Mechanist @Matt Cavotta
+46 R Gifts Ungiven @D. Alexander Gregory
+47 R Glen Elendra Archmage @Warren Mahy
+48 M Keiga, the Tide Star @Ittoku
+49 R Kira, Great Glass-Spinner @Kev Walker
+50 C Latchkey Faerie @Warren Mahy
+51 C Logic Knot @Glen Angus
+52 R Meloku the Clouded Mirror @Scott M. Fischer
+53 C Mothdust Changeling @Shelly Wan
+54 U Mulldrifter @Eric Fortune
+55 U Narcomoeba @Matt Stewart
+56 R Pact of Negation @Jason Chan
+57 C Peer Through Depths @Anthony S. Waters
+58 C Perilous Research @Donato Giancola
+59 C Pestermite @Christopher Moeller
+60 C Petals of Insight @Anthony S. Waters
+61 C Reach Through Mists @Anthony S. Waters
+62 U Riftwing Cloudskate @Carl Critchlow
+63 R Scion of Oona @Eric Fortune
+64 U Spell Snare @Hideaki Takamura
+65 C Spellstutter Sprite @Rebecca Guay
+66 U Take Possession @Michael Phillippi
+67 U Thirst for Knowledge @Anthony Francisco
+68 C Traumatic Visions @Cyril Van Der Haegen
+69 C Vedalken Dismisser @Dan Scott
+70 M Vendilion Clique @Michael Sutfin
+71 C Absorb Vis @Brandon Kitkouski
+72 U Auntie's Snitch @Warren Mahy
+73 C Blightspeaker @Ron Spears
+74 R Bridge from Below @Daarken
+75 M Dark Confidant @Scott M. Fischer
+76 R Death Cloud @Stephen Tappin
+77 C Death Denied @James Paick
+78 U Death Rattle @Vance Kovacs
+79 C Deepcavern Imp @Scott Altmann
+80 C Drag Down @Trevor Claxton
+81 C Dreamspoiler Witches @Jeff Easley
+82 R Earwig Squad @Warren Mahy
+83 U Executioner's Capsule @Warren Mahy
+84 R Extirpate @Jon Foster
+85 C Facevaulter @Wayne Reynolds
+86 C Faerie Macabre @rk post
+87 C Festering Goblin @Thomas M. Baxa
+88 U Horobi's Whisper @Aleksi Briclot
+89 M Kokusho, the Evening Star @Tsutomu Kawade
+90 U Mad Auntie @Wayne Reynolds
+91 U Marsh Flitter @Wayne Reynolds
+92 C Peppersmoke @Rebecca Guay
+93 U Phthisis @Carl Critchlow
+94 C Rathi Trapper @Pete Venters
+95 C Raven's Crime @Warren Mahy
+96 R Skeletal Vampire @Wayne Reynolds
+97 R Slaughter Pact @Kev Walker
+98 C Stinkweed Imp @Nils Hamm
+99 C Street Wraith @Cyril Van Der Haegen
+100 C Syphon Life @Dan Seagrave
+101 C Thieving Sprite @Dan Scott
+102 R Tombstalker @Aleksi Briclot
+103 C Warren Pilferers @Wayne Reynolds
+104 C Warren Weirding @Matt Cavotta
+105 C Blind-Spot Giant @Jim Murray
+106 R Blood Moon @Franz Vohwinkel
+107 C Brute Force @Wayne Reynolds
+108 R Countryside Crusher @Volkan Baǵa
+109 C Crush Underfoot @Steven Belledin
+110 U Desperate Ritual @Darrell Riche
+111 R Dragonstorm @Kev Walker
+112 C Empty the Warrens @Jasper Sandner
+113 C Fiery Fall @Daarken
+114 C Fury Charm @John Avon
+115 C Glacial Ray @Jim Murray
+116 C Grapeshot @Clint Cearley
+117 R Greater Gargadon @Rob Alexander
+118 U Grinning Ignus @James Kei
+119 C Hammerheim Deadeye @Carl Critchlow
+120 M Kiki-Jiki, Mirror Breaker @Steven Belledin
+121 C Lava Spike @Mark Tedin
+122 C Mogg War Marshal @Wayne England
+123 R Molten Disaster @Ittoku
+124 U Pardic Dragon @Zoltan Boros & Gabor Szikszai
+125 R Pyromancer's Swath @Hideaki Takamura
+126 C Rift Bolt @Daniel Ljunggren
+127 C Rift Elemental @Ron Spears
+128 M Ryusei, the Falling Star @Nottsuo
+129 U Shrapnel Blast @Hideaki Takamura
+130 R Squee, Goblin Nabob @Greg Staples
+131 C Stingscourger @Wayne Reynolds
+132 C Stinkdrinker Daredevil @Pete Venters
+133 U Sudden Shock @Vance Kovacs
+134 U Tar Pitcher @Omar Rayyan
+135 U Thundercloud Shaman @Greg Staples
+136 C Thundering Giant @Mark Zug
+137 C Torrent of Stone @Greg Staples
+138 U Tribal Flames @Zack Stella
+139 C War-Spike Changeling @Mark Poole
+140 C Citanul Woodreaders @Steven Belledin
+141 R Doubling Season @Chuck Lukacs
+142 C Durkwood Baloth @Dan Frazier
+143 C Echoing Courage @Greg Staples
+144 U Eternal Witness @Terese Nielsen
+145 C Giant Dustwasp @Greg Hildebrandt
+146 C Greater Mossdog @Chippy
+147 C Hana Kami @Rebecca Guay
+148 C Imperiosaur @Lars Grant-West
+149 U Incremental Growth @Chuck Lukacs
+150 M Jugan, the Rising Star @Shishizaru
+151 C Kodama's Reach @Heather Hudson
+152 U Krosan Grip @Zoltan Boros & Gabor Szikszai
+153 R Life from the Loam @Terese Nielsen
+154 U Masked Admirers @Eric Fortune
+155 C Moldervine Cloak @Wayne England
+156 C Nantuko Shaman @Daren Bader
+157 C Penumbra Spider @Jeff Easley
+158 U Reach of Branches @Zack Stella
+159 U Riftsweeper @Brian Despain
+160 R Rude Awakening @Ittoku
+161 C Search for Tomorrow @Randy Gallegos
+162 U Sporesower Thallid @Ron Spencer
+163 C Sporoloth Ancient @James Kei
+164 R Summoner's Pact @Chippy
+165 C Sylvan Bounty @Chris Rahn
+166 M Tarmogoyf @Ryan Barger
+167 C Thallid @Trevor Claxton
+168 C Thallid Germinator @Marco Nelor
+169 C Thallid Shell-Dweller @Carl Critchlow
+170 R Tooth and Nail @Jesper Ejsing
+171 U Tromp the Domains @Mike Dringenberg
+172 R Verdeloth the Ancient @Daren Bader
+173 C Walker of the Grove @Todd Lockwood
+174 R Woodfall Primus @Adam Rex
+175 U Electrolyze @Zoltan Boros & Gabor Szikszai
+176 R Grand Arbiter Augustin IV @Zoltan Boros & Gabor Szikszai
+177 R Jhoira of the Ghitu @Kev Walker
+178 R Knight of the Reliquary @Michael Komarck
+179 U Lightning Helix @Raymond Swanland
+180 R Maelstrom Pulse @John Avon
+181 U Mind Funeral @rk post
+182 M Progenitus @Jaime Jones
+183 M Sarkhan Vol @Daarken
+184 U Tidehollow Sculler @rk post
+185 U Trygon Predator @Jack Wang
+186 R Cold-Eyed Selkie @Jaime Jones
+187 R Demigod of Revenge @Jim Murray
+188 R Divinity of Pride @Greg Staples
+189 R Figure of Destiny @Scott M. Fischer
+190 U Kitchen Finks @Kev Walker
+191 U Manamorphose @Adam Paquette
+192 U Murderous Redcap @Dave Allsop
+193 R Oona, Queen of the Fae @Adam Rex
+194 U Plumeveil @Nils Hamm
+195 U Worm Harvest @Chuck Lukacs
+196 C Aether Spellbomb @Jim Nelson
+197 R Aether Vial @Karl Kopinski
+198 R Arcbound Ravager @Kev Walker
+199 C Arcbound Stinger @Darrell Riche
+200 C Arcbound Wanderer @Christopher Moeller
+201 C Arcbound Worker @Darrell Riche
+202 C Bonesplitter @Darrell Riche
+203 R Chalice of the Void @Mark Zug
+204 R Engineered Explosives @Lars Grant-West
+205 U Epochrasite @Michael Bruinsma
+206 U Etched Oracle @Matt Cavotta
+207 C Frogmite @Terese Nielsen
+208 R Lotus Bloom @Mark Zug
+209 C Myr Enforcer @Jim Murray
+210 U Myr Retriever @Trevor Hairsine
+211 U Paradise Mantle @Greg Hildebrandt
+212 C Pyrite Spellbomb @Jim Nelson
+213 U Relic of Progenitus @Jean-Sébastien Rossbach
+214 C Runed Stalactite @Jim Pavelec
+215 C Skyreach Manta @Christopher Moeller
+216 M Sword of Fire and Ice @Chris Rahn
+217 M Sword of Light and Shadow @Chris Rahn
+218 M Vedalken Shackles @Svetlin Velinov
+219 R Academy Ruins @Zoltan Boros & Gabor Szikszai
+220 R Blinkmoth Nexus @Sam Burley
+221 R City of Brass @Jung Park
+222 U Dakmor Salvage @John Avon
+223 R Glimmervoid @Lars Grant-West
+224 C Terramorphic Expanse @Dan Scott
+225 U Vivid Crag @Martina Pilcerova
+226 U Vivid Creek @Fred Fields
+227 U Vivid Grove @Howard Lyon
+228 U Vivid Marsh @John Avon
+229 U Vivid Meadow @Rob Alexander
 
 [tokens]
 w_5_5_giant_warrior

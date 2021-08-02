@@ -6,8 +6,8 @@ Type=Promo
 ScryfallCode=PGRU
 
 [cards]
-1 R Plains
-2 R Island
-3 R Swamp
-4 R Mountain
-5 R Forest
+1 R Plains @Terese Nielsen
+2 R Island @Terese Nielsen
+3 R Swamp @Terese Nielsen
+4 R Mountain @Terese Nielsen
+5 R Forest @Terese Nielsen

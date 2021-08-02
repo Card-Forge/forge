@@ -13,151 +13,151 @@ FoilAlwaysInCommonSlot=False
 ScryfallCode=LGN
 
 [cards]
-2 U Akroma's Devoted
-1 R Akroma, Angel of Wrath
-59 U Aphetto Exterminator
-30 C Aven Envoy
-3 C Aven Redeemer
-4 U Aven Warhawk
-60 R Bane of the Living
-5 R Beacon of Destiny
-117 C Berserk Murlodont
-88 U Blade Sliver
-61 C Blood Celebrant
-89 C Bloodstoke Howler
-118 U Branchsnap Lorian
-119 U Brontotherium
-120 R Brood Sliver
-121 R Caller of the Claw
-122 U Canopy Crawler
-6 R Celestial Gatekeeper
-31 C Cephalid Pathmage
-32 R Chromeshell Crab
-90 R Clickslither
-7 U Cloudreach Cavalry
-62 U Corpse Harvester
-33 C Covert Operative
-91 C Crested Craghorn
-34 U Crookclaw Elder
-63 C Crypt Sliver
-64 U Dark Supplicant
-8 U Daru Mender
-9 C Daru Sanctifier
-10 C Daru Stinger
-65 U Deathmark Prelate
-11 R Defender of the Order
-123 C Defiant Elf
-12 C Deftblade Elite
-35 R Dermoplasm
-36 R Dreamborn Muse
-66 R Drinker of Sorrow
-67 C Dripping Dead
-68 U Earthblighter
-37 C Echo Tracer
-124 R Elvish Soultiller
-69 C Embalmed Brawler
-125 U Enormous Baloth
-13 R Essence Sliver
-126 R Feral Throwback
-92 C Flamewave Invoker
-93 U Frenetic Raptor
-38 C Fugitive Wizard
-14 C Gempalm Avenger
-94 U Gempalm Incinerator
-70 C Gempalm Polluter
-39 U Gempalm Sorcerer
-127 U Gempalm Strider
-71 R Ghastly Remains
-40 C Glintwing Invoker
-128 C Glowering Rogon
-15 R Glowrider
-95 U Goblin Assassin
-96 U Goblin Clearcutter
-97 U Goblin Dynamo
-98 C Goblin Firebug
-99 R Goblin Goon
-100 C Goblin Grappler
-101 C Goblin Lookout
-72 C Goblin Turncoat
-73 R Graveborn Muse
-74 R Havoc Demon
-75 R Hollow Specter
-129 C Hundroog
-102 C Hunter Sliver
-103 R Imperial Hellkite
-76 C Infernal Caretaker
-41 C Keeneye Aven
-42 R Keeper of the Nine Gales
-104 R Kilnmouth Dragon
-130 R Krosan Cloudscraper
-131 C Krosan Vorine
-105 R Lavaborn Muse
-16 U Liege of the Axe
-17 C Lowland Tracker
-106 C Macetail Hystrodon
-107 R Magma Sliver
-43 U Master of the Veil
-44 C Merchant of Secrets
-45 C Mistform Seaswift
-46 C Mistform Sliver
-47 R Mistform Ultimus
-48 U Mistform Wakecaster
-132 C Nantuko Vigilante
-133 C Needleshot Gourna
-77 U Noxious Ghoul
-134 C Patron of the Wild
-78 R Phage the Untouchable
-18 R Planar Guide
-19 C Plated Sliver
-135 R Primal Whisperer
-49 U Primoc Escapee
-136 C Quick Sliver
-108 U Ridgetop Raptor
-50 R Riptide Director
-51 R Riptide Mangler
-109 R Rockshard Elemental
-137 U Root Sliver
-79 R Scion of Darkness
-138 R Seedborn Muse
-110 C Shaleskin Plower
-52 U Shifting Sliver
-80 C Skinthinner
-111 R Skirk Alarmist
-112 U Skirk Drill Sergeant
-113 C Skirk Marauder
-114 C Skirk Outrider
-81 C Smokespew Invoker
-82 C Sootfeather Flock
-83 U Spectral Sliver
-20 C Starlight Invoker
-21 U Stoic Champion
-139 C Stonewood Invoker
-22 R Sunstrike Legionnaire
-23 U Swooping Talon
-53 R Synapse Sliver
-140 C Timberwatch Elf
-141 U Totem Speaker
-84 R Toxin Sliver
-142 R Tribal Forcemage
-115 R Unstable Hulk
-143 R Vexing Beetle
-85 C Vile Deacon
-54 C Voidmage Apprentice
-55 U Wall of Deceit
-24 C Wall of Hope
-116 U Warbreak Trumpeter
-25 U Ward Sliver
-56 U Warped Researcher
-57 R Weaver of Lies
-26 C Whipgrass Entangler
-27 U White Knight
-58 U Willbender
-28 R Windborn Muse
-29 C Wingbeat Warrior
-144 U Wirewood Channeler
-145 U Wirewood Hivemaster
-86 U Withered Wretch
-87 U Zombie Brute
+2 U Akroma's Devoted @Dave Dorman
+1 R Akroma, Angel of Wrath @Ron Spears
+59 U Aphetto Exterminator @Scott M. Fischer
+30 C Aven Envoy @Alex Horley-Orlandelli
+3 C Aven Redeemer @Tim Hildebrandt
+4 U Aven Warhawk @Glen Angus
+60 R Bane of the Living @Justin Sweet
+5 R Beacon of Destiny @Tim Hildebrandt
+117 C Berserk Murlodont @Arnie Swekel
+88 U Blade Sliver @David Martin
+61 C Blood Celebrant @Ben Thompson
+89 C Bloodstoke Howler @Christopher Moeller
+118 U Branchsnap Lorian @Heather Hudson
+119 U Brontotherium @Carl Critchlow
+120 R Brood Sliver @Ron Spears
+121 R Caller of the Claw @Matt Cavotta
+122 U Canopy Crawler @Anthony S. Waters
+6 R Celestial Gatekeeper @Christopher Moeller
+31 C Cephalid Pathmage @Alex Horley-Orlandelli
+32 R Chromeshell Crab @Ron Spencer
+90 R Clickslither @Kev Walker
+7 U Cloudreach Cavalry @Kev Walker
+62 U Corpse Harvester @Mark Tedin
+33 C Covert Operative @Kev Walker
+91 C Crested Craghorn @Matt Cavotta
+34 U Crookclaw Elder @Ron Spencer
+63 C Crypt Sliver @Edward P. Beard, Jr.
+64 U Dark Supplicant @Mark Zug
+8 U Daru Mender @Ben Thompson
+9 C Daru Sanctifier @Tony Szczudlo
+10 C Daru Stinger @Greg Staples
+65 U Deathmark Prelate @Tony Szczudlo
+11 R Defender of the Order @Darrell Riche
+123 C Defiant Elf @Pete Venters
+12 C Deftblade Elite @Alan Pollack
+35 R Dermoplasm @John Avon
+36 R Dreamborn Muse @Kev Walker
+66 R Drinker of Sorrow @Carl Critchlow
+67 C Dripping Dead @Thomas M. Baxa
+68 U Earthblighter @Alex Horley-Orlandelli
+37 C Echo Tracer @Scott M. Fischer
+124 R Elvish Soultiller @Ron Spears
+69 C Embalmed Brawler @Justin Sweet
+125 U Enormous Baloth @Mark Tedin
+13 R Essence Sliver @Glen Angus
+126 R Feral Throwback @Carl Critchlow
+92 C Flamewave Invoker @Dave Dorman
+93 U Frenetic Raptor @Daren Bader
+38 C Fugitive Wizard @Jim Nelson
+14 C Gempalm Avenger @Tim Hildebrandt
+94 U Gempalm Incinerator @Luca Zontini
+70 C Gempalm Polluter @Dany Orizio
+39 U Gempalm Sorcerer @Greg Hildebrandt
+127 U Gempalm Strider @Tim Hildebrandt
+71 R Ghastly Remains @Edward P. Beard, Jr.
+40 C Glintwing Invoker @Jim Nelson
+128 C Glowering Rogon @Kev Walker
+15 R Glowrider @Scott M. Fischer
+95 U Goblin Assassin @Dave Dorman
+96 U Goblin Clearcutter @Eric Peterson
+97 U Goblin Dynamo @Ron Spencer
+98 C Goblin Firebug @Christopher Moeller
+99 R Goblin Goon @Greg Staples
+100 C Goblin Grappler @Christopher Moeller
+101 C Goblin Lookout @Jim Nelson
+72 C Goblin Turncoat @Jim Nelson
+73 R Graveborn Muse @Kev Walker
+74 R Havoc Demon @Thomas M. Baxa
+75 R Hollow Specter @rk post
+129 C Hundroog @Wayne England
+102 C Hunter Sliver @Kev Walker
+103 R Imperial Hellkite @Matt Cavotta
+76 C Infernal Caretaker @Christopher Moeller
+41 C Keeneye Aven @Greg Hildebrandt
+42 R Keeper of the Nine Gales @Jim Nelson
+104 R Kilnmouth Dragon @Carl Critchlow
+130 R Krosan Cloudscraper @Ron Spears
+131 C Krosan Vorine @Carl Critchlow
+105 R Lavaborn Muse @Brian Snõddy
+16 U Liege of the Axe @Christopher Moeller
+17 C Lowland Tracker @Brian Snõddy
+106 C Macetail Hystrodon @Daren Bader
+107 R Magma Sliver @Wayne England
+43 U Master of the Veil @Ron Spears
+44 C Merchant of Secrets @Greg Hildebrandt
+45 C Mistform Seaswift @Dany Orizio
+46 C Mistform Sliver @Ben Thompson
+47 R Mistform Ultimus @Anthony S. Waters
+48 U Mistform Wakecaster @Glen Angus
+132 C Nantuko Vigilante @Alex Horley-Orlandelli
+133 C Needleshot Gourna @Edward P. Beard, Jr.
+77 U Noxious Ghoul @Luca Zontini
+134 C Patron of the Wild @Dave Dorman
+78 R Phage the Untouchable @Ron Spears
+18 R Planar Guide @Eric Peterson
+19 C Plated Sliver @Greg Staples
+135 R Primal Whisperer @Greg Staples
+49 U Primoc Escapee @Tony Szczudlo
+136 C Quick Sliver @John Avon
+108 U Ridgetop Raptor @Daren Bader
+50 R Riptide Director @Scott M. Fischer
+51 R Riptide Mangler @Arnie Swekel
+109 R Rockshard Elemental @Anthony S. Waters
+137 U Root Sliver @Matt Thompson
+79 R Scion of Darkness @Mark Zug
+138 R Seedborn Muse @Adam Rex
+110 C Shaleskin Plower @Daren Bader
+52 U Shifting Sliver @Darrell Riche
+80 C Skinthinner @Dany Orizio
+111 R Skirk Alarmist @Justin Sweet
+112 U Skirk Drill Sergeant @Alex Horley-Orlandelli
+113 C Skirk Marauder @Pete Venters
+114 C Skirk Outrider @Greg Staples
+81 C Smokespew Invoker @Thomas M. Baxa
+82 C Sootfeather Flock @David Martin
+83 U Spectral Sliver @Pete Venters
+20 C Starlight Invoker @Glen Angus
+21 U Stoic Champion @Greg Hildebrandt
+139 C Stonewood Invoker @Eric Peterson
+22 R Sunstrike Legionnaire @Mark Zug
+23 U Swooping Talon @Mark Zug
+53 R Synapse Sliver @Thomas M. Baxa
+140 C Timberwatch Elf @Dave Dorman
+141 U Totem Speaker @Darrell Riche
+84 R Toxin Sliver @Lars Grant-West
+142 R Tribal Forcemage @Greg Staples
+115 R Unstable Hulk @Ron Spencer
+143 R Vexing Beetle @Matt Thompson
+85 C Vile Deacon @Matthew D. Wilson
+54 C Voidmage Apprentice @Jim Nelson
+55 U Wall of Deceit @John Avon
+24 C Wall of Hope @David Martin
+116 U Warbreak Trumpeter @Dany Orizio
+25 U Ward Sliver @Pete Venters
+56 U Warped Researcher @rk post
+57 R Weaver of Lies @Luca Zontini
+26 C Whipgrass Entangler @Ben Thompson
+27 U White Knight @Edward P. Beard, Jr.
+58 U Willbender @Eric Peterson
+28 R Windborn Muse @Adam Rex
+29 C Wingbeat Warrior @Kev Walker
+144 U Wirewood Channeler @Alan Pollack
+145 U Wirewood Hivemaster @Darrell Riche
+86 U Withered Wretch @Tim Hildebrandt
+87 U Zombie Brute @Greg Hildebrandt
 
 [tokens]
 c_1_1_sliver

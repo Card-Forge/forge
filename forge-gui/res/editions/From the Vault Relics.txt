@@ -8,21 +8,21 @@ Alias=V10
 ScryfallCode=V10
 
 [cards]
-1 M AEther Vial
-2 M Black Vise
-3 M Isochron Scepter
-4 M Ivory Tower
-5 M Jester's Cap
-6 M Karn, Silver Golem
-7 M Masticore
-8 M Memory Jar
-9 M Mirari
-10 M Mox Diamond
-11 M Nevinyrral's Disk
-12 M Sol Ring
-13 M Sundering Titan
-14 M Sword of Body and Mind
-15 M Zuran Orb
+1 M Aether Vial @Karl Kopinski
+2 M Black Vise @Dan Scott
+3 M Isochron Scepter @Chippy
+4 M Ivory Tower @Jason Chan
+5 M Jester's Cap @D. Alexander Gregory
+6 M Karn, Silver Golem @Mark Zug
+7 M Masticore @Steven Belledin
+8 M Memory Jar @Donato Giancola
+9 M Mirari @Donato Giancola
+10 M Mox Diamond @Volkan Baǵa
+11 M Nevinyrral's Disk @Steve Argyle
+12 M Sol Ring @Mike Bierek
+13 M Sundering Titan @Jim Murray
+14 M Sword of Body and Mind @Chris Rahn
+15 M Zuran Orb @Ryan Pancoast
 
 [tokens]
 g_2_2_wolf

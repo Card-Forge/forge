@@ -7,8 +7,8 @@ CardLang=ja
 ScryfallCode=PMPS06
 
 [cards]
-1 R Plains
-2 R Island
-3 R Swamp
-4 R Mountain
-5 R Forest
+1 R Plains @Daren Bader
+2 R Island @John Avon
+3 R Swamp @Puddnhead
+4 R Mountain @Kev Walker
+5 R Forest @Martina Pilcerova

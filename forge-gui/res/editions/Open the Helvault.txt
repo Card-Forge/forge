@@ -6,11 +6,11 @@ Type=Promo
 ScryfallCode=PHEL
 
 [cards]
-6 M Avacyn, Angel of Hope
-106 M Griselbrand
-208 M Bruna, Light of Alabaster
-209 M Gisela, Blade of Goldnight
-210 M Sigarda, Host of Herons
+6 M Avacyn, Angel of Hope @Jason Chan
+106 M Griselbrand @Igor Kieryluk
+208 M Bruna, Light of Alabaster @Winona Nelson
+209 M Gisela, Blade of Goldnight @Jason Chan
+210 M Sigarda, Host of Herons @Chris Rahn
 
 [tokens]
 w_4_4_angel_flying

@@ -6,12 +6,12 @@ Type=Promo
 ScryfallCode=P09
 
 [cards]
-1 R Cryptic Command
-2 R Flame Javelin
-3 R Unmake
-4 R Nameless Inversion
-5 R Remove Soul
-6 R Blightning
-7 R Rampant Growth
-8 R Negate
-9 R Terminate
+1 R Cryptic Command @Wayne England
+2 R Flame Javelin @Zoltan Boros & Gabor Szikszai
+3 R Unmake @Chris Rahn
+4 R Nameless Inversion @Jesper Ejsing
+5 R Remove Soul @Mike Dringenberg
+6 R Blightning @Jim Pavelec
+7 R Rampant Growth @Terese Nielsen
+8 R Negate @Ralph Horsley
+9 R Terminate @Thomas M. Baxa

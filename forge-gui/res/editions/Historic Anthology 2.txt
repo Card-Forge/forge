@@ -6,28 +6,28 @@ Type=Online
 ScryfallCode=HA2
 
 [cards]
-1 U Nyx-Fleece Ram
-2 R Ranger of Eos
-3 R Sigil of the Empty Throne
-4 R Thalia, Guardian of Thraben
-5 U Merrow Reejerey
-6 R Inexorable Tide
-7 U Brain Maggot
-8 R Pack Rat
-9 U Virulent Plague
-10 R Waste Not
-11 M Dragonmaster Outcast
-12 U Goblin Ruinblaster
-13 C Ancestral Mask
-14 R Terravore
-15 R Knight of the Reliquary
-16 R Maelstrom Pulse
-17 R Meddling Mage
-18 M Platinum Angel
-19 C Barren Moor
-20 C Bojuka Bog
-21 C Forgotten Cave
-22 U Ghost Quarter
-23 C Lonely Sandbar
-24 C Secluded Steppe
-25 C Tranquil Thicket
+1 U Nyx-Fleece Ram @Terese Nielsen
+2 R Ranger of Eos @Volkan Baǵa
+3 R Sigil of the Empty Throne @Cyril Van Der Haegen
+4 R Thalia, Guardian of Thraben @Jana Schirmer & Johannes Voss
+5 U Merrow Reejerey @Greg Staples
+6 R Inexorable Tide @Dave Kendall
+7 U Brain Maggot @Min Yum
+8 R Pack Rat @Kev Walker
+9 U Virulent Plague @Johann Bodin
+10 R Waste Not @Matt Stewart
+11 M Dragonmaster Outcast @Raymond Swanland
+12 U Goblin Ruinblaster @Matt Cavotta
+13 C Ancestral Mask @Massimilano Frezzato
+14 R Terravore @Jim Nelson
+15 R Knight of the Reliquary @Michael Komarck
+16 R Maelstrom Pulse @Anthony Francisco
+17 R Meddling Mage @Todd Lockwood
+18 M Platinum Angel @Brom
+19 C Barren Moor @Heather Hudson
+20 C Bojuka Bog @Howard Lyon
+21 C Forgotten Cave @Tony Szczudlo
+22 U Ghost Quarter @Peter Mohrbacher
+23 C Lonely Sandbar @Heather Hudson
+24 C Secluded Steppe @Heather Hudson
+25 C Tranquil Thicket @Heather Hudson

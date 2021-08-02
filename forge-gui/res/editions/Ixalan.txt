@@ -12,297 +12,297 @@ FatPackExtraSlots=80 BasicLands
 ScryfallCode=XLN
 
 [cards]
-1 U Adanto Vanguard
-2 R Ashes of the Abhorrent
-3 M Axis of Mortality
-4 U Bellowing Aegisaur
-5 R Bishop of Rebirth
-6 C Bishop's Soldier
-7 U Bright Reprisal
-8 C Demystify
-9 U Duskborne Skymarcher
-10 U Emissary of Sunrise
-11 C Encampment Keeper
-12 U Glorifier of Dusk
-13 R Goring Ceratops
-14 U Imperial Aerosaur
-15 U Imperial Lancer
-16 U Inspiring Cleric
-17 U Ixalan's Binding
-18 C Kinjalli's Caller
-19 R Kinjalli's Sunwing
-20 C Legion Conquistador
-21 C Legion's Judgment
-22 R Legion's Landing
-23 C Looming Altisaur
-24 R Mavren Fein, Dusk Apostle
-25 C Paladin of the Bloodstained
-26 C Pious Interdiction
-27 R Priest of the Wakening Sun
-28 C Pterodon Knight
-29 C Queen's Commission
-30 U Rallying Roar
-31 C Raptor Companion
-32 C Ritual of Rejuvenation
-33 R Sanguine Sacrament
-34 R Settle the Wreckage
-35 U Sheltering Light
-36 C Shining Aerosaur
-37 C Skyblade of the Legion
-38 C Slash of Talons
-39 U Steadfast Armasaur
-40 C Sunrise Seeker
-41 C Territorial Hammerskull
-42 R Tocatli Honor Guard
-43 C Vampire's Zeal
-44 M Wakening Sun's Avatar
-45 U Air Elemental
-46 R Arcane Adaptation
-47 C Cancel
-48 U Chart a Course
-49 R Daring Saboteur
-50 U Deadeye Quartermaster
-51 U Deeproot Waters
-52 C Depths of Desire
-53 C Dive Down
-54 R Dreamcaller Siren
-55 R Entrancing Melody
-56 U Favorable Winds
-57 R Fleet Swallower
-58 C Headwater Sentries
-59 R Herald of Secret Streams
-60 M Jace, Cunning Castaway
-61 R Kopala, Warden of Waves
-62 U Lookout's Dispersal
-63 U Navigator's Ruin
-64 C One With the Wind
-65 C Opt
-66 M Overflowing Insight
-67 U Perilous Voyage
-68 C Pirate's Prize
-69 C Prosperous Pirates
-70 U River Sneak
-71 R River's Rebuke
-72 C Run Aground
-73 C Sailor of Means
-74 R Search for Azcanta
-75 C Shaper Apprentice
-76 C Shipwreck Looter
-77 C Shore Keeper
-78 C Siren Lookout
-79 U Siren Stormtamer
-80 C Siren's Ruse
-81 C Spell Pierce
-82 R Spell Swindle
-83 U Storm Fleet Aerialist
-84 U Storm Fleet Spy
-85 C Storm Sculptor
-86 U Tempest Caller
-87 C Watertrap Weaver
-88 C Wind Strider
-89 C Anointed Deacon
-90 R Arguel's Blood Fast
-91 U Bishop of the Bloodstained
-92 C Blight Keeper
-93 R Bloodcrazed Paladin
-94 M Boneyard Parley
-95 C Contract Killing
-96 C Costly Plunder
-97 U Dark Nourishment
-98 C Deadeye Tormentor
-99 R Deadeye Tracker
-100 U Deathless Ancient
-101 C Desperate Castaways
-102 C Dire Fleet Hoarder
-103 C Dire Fleet Interloper
-104 M Dire Fleet Ravager
-105 C Duress
-106 R Fathom Fleet Captain
-107 C Fathom Fleet Cutthroat
-108 U Grim Captain's Call
-109 U Heartless Pillage
-110 U Kitesail Freebooter
-111 U Lurking Chupacabra
-112 C March of the Drowned
-113 C Mark of the Vampire
-114 C Queen's Agent
-115 C Queen's Bay Soldier
-116 U Raiders' Wake
-117 R Revel in Riches
-118 R Ruin Raider
-119 U Ruthless Knave
-120 R Sanctum Seeker
-121 U Seekers' Squire
-122 C Skittering Heartstopper
-123 C Skulduggery
-124 C Skymarch Bloodletter
-125 C Spreading Rot
-126 R Sword-Point Diplomacy
-127 C Vanquish the Weak
-128 U Vicious Conquistador
-129 R Vraska's Contempt
-130 U Walk the Plank
-131 U Wanted Scoundrels
-132 R Angrath's Marauders
-133 U Bonded Horncrest
-134 C Brazen Buccaneers
-135 R Burning Sun's Avatar
-136 R Captain Lannery Storm
-137 R Captivating Crew
-138 U Charging Monstrosaur
-139 C Demolish
-140 U Dinosaur Stampede
-141 C Dual Shot
-142 C Fathom Fleet Firebrand
-143 U Fiery Cannonade
-144 C Fire Shrine Keeper
-145 C Firecannon Blast
-146 C Frenzied Raptor
-147 C Headstrong Brute
-148 C Hijack
-149 U Lightning Strike
-150 U Lightning-Rig Crew
-151 U Makeshift Munitions
-152 C Nest Robber
-153 U Otepec Huntmaster
-154 R Rampaging Ferocidon
-155 U Raptor Hatchling
-156 R Repeating Barrage
-157 U Rigging Runner
-158 C Rile
-159 M Rowdy Crew
-160 C Rummaging Goblin
-161 M Star of Extinction
-162 U Storm Fleet Arsonist
-163 C Storm Fleet Pyromancer
-164 C Sun-Crowned Hunters
-165 R Sunbird's Invocation
-166 C Sure Strike
-167 C Swashbuckling
-168 C Thrash of Raptors
-169 C Tilonalli's Knight
-170 R Tilonalli's Skinshifter
-171 U Trove of Temptation
-172 C Unfriendly Fire
-173 R Vance's Blasting Cannons
-174 U Wily Goblin
-175 C Ancient Brontodon
-176 U Atzocan Archer
-177 C Blinding Fog
-178 C Blossom Dryad
-179 M Carnage Tyrant
-180 C Colossal Dreadmaw
-181 C Commune with Dinosaurs
-182 C Crash the Ramparts
-183 C Crushing Canopy
-184 R Deathgorge Scavenger
-185 R Deeproot Champion
-186 C Deeproot Warrior
-187 U Drover of the Mighty
-188 U Emergent Growth
-189 R Emperor's Vanguard
-190 C Grazing Whiptail
-191 R Growing Rites of Itlimoc
-192 C Ixalli's Diviner
-193 C Ixalli's Keeper
-194 C Jade Guardian
-195 C Jungle Delver
-196 U Kumena's Speaker
-197 U Merfolk Branchwalker
-198 C New Horizons
-199 R Old-Growth Dryads
-200 C Pounce
-201 U Ranging Raptors
-202 C Ravenous Daggertooth
-203 R Ripjaw Raptor
-204 C River Heralds' Boon
-205 U Savage Stomp
-206 R Shapers' Sanctuary
-207 U Slice in Twain
-208 U Snapping Sailback
-209 C Spike-Tailed Ceratops
-210 U Thundering Spineback
-211 C Tishana's Wayfinder
-212 U Verdant Rebirth
-213 R Verdant Sun's Avatar
-214 U Vineshaper Mystic
-215 R Waker of the Wilds
-216 U Wildgrowth Walker
-217 M Admiral Beckett Brass
-218 U Belligerent Brontodon
-219 U Call to the Feast
-220 U Deadeye Plunderers
-221 U Dire Fleet Captain
-222 M Gishath, Sun's Avatar
-223 R Hostage Taker
-224 M Huatli, Warrior Poet
-225 U Marauding Looter
-226 U Raging Swordtooth
-227 R Regisaur Alpha
-228 U Shapers of Nature
-229 U Sky Terror
-230 M Tishana, Voice of Thunder
-231 M Vona, Butcher of Magan
-232 M Vraska, Relic Seeker
-233 C Cobbled Wings
-234 R Conqueror's Galleon
-235 R Dowsing Dagger
-236 U Dusk Legion Dreadnought
-237 U Elaborate Firecannon
-238 R Fell Flagship
-239 C Gilded Sentinel
-240 C Hierophant's Chalice
-241 U Pillar of Origins
-242 C Pirate's Cutlass
-243 R Primal Amulet
-244 C Prying Blade
-245 U Sentinel Totem
-246 R Shadowed Caravel
-247 U Sleek Schooner
-248 R Sorcerous Spyglass
-249 R Thaumatic Compass
-250 R Treasure Map
-251 R Vanquisher's Banner
-252 R Dragonskull Summit
-253 R Drowned Catacomb
-254 U Field of Ruin
-255 R Glacial Fortress
-256 R Rootbound Crag
-257 R Sunpetal Grove
-258 U Unclaimed Territory
-259 C Unknown Shores
-260 L Plains
-261 L Plains
-262 L Plains
-263 L Plains
-264 L Island
-265 L Island
-266 L Island
-267 L Island
-268 L Swamp
-269 L Swamp
-270 L Swamp
-271 L Swamp
-272 L Mountain
-273 L Mountain
-274 L Mountain
-275 L Mountain
-276 L Forest
-277 L Forest
-278 L Forest
-279 L Forest
+1 U Adanto Vanguard @Anna Steinbauer
+2 R Ashes of the Abhorrent @Daarken
+3 M Axis of Mortality @Bastien L. Deharme
+4 U Bellowing Aegisaur @Craig J Spearing
+5 R Bishop of Rebirth @Tommy Arnold
+6 C Bishop's Soldier @Scott Murphy
+7 U Bright Reprisal @Ryan Alexander Lee
+8 C Demystify @Igor Kieryluk
+9 U Duskborne Skymarcher @Seb McKinnon
+10 U Emissary of Sunrise @Deruchenko Alexander
+11 C Encampment Keeper @Craig J Spearing
+12 U Glorifier of Dusk @Viktor Titov
+13 R Goring Ceratops @Zezhou Chen
+14 U Imperial Aerosaur @Jesper Ejsing
+15 U Imperial Lancer @Viktor Titov
+16 U Inspiring Cleric @Randy Gallegos
+17 U Ixalan's Binding @Chase Stone
+18 C Kinjalli's Caller @Sara Winters
+19 R Kinjalli's Sunwing @Simon Dominic
+20 C Legion Conquistador @Sidharth Chaturvedi
+21 C Legion's Judgment @Lucas Graciano
+22 R Legion's Landing @Svetlin Velinov
+23 C Looming Altisaur @Lars Grant-West
+24 R Mavren Fein, Dusk Apostle @Daarken
+25 C Paladin of the Bloodstained @Bastien L. Deharme
+26 C Pious Interdiction @Lake Hurwitz
+27 R Priest of the Wakening Sun @Bastien L. Deharme
+28 C Pterodon Knight @Anthony Palumbo
+29 C Queen's Commission @Mark Behm
+30 U Rallying Roar @John Stanko
+31 C Raptor Companion @Slawomir Maniak
+32 C Ritual of Rejuvenation @Bastien L. Deharme
+33 R Sanguine Sacrament @Bastien L. Deharme
+34 R Settle the Wreckage @Dimitar Marinski
+35 U Sheltering Light @Gabor Szikszai
+36 C Shining Aerosaur @Dan Scott
+37 C Skyblade of the Legion @Daarken
+38 C Slash of Talons @Magali Villeneuve
+39 U Steadfast Armasaur @Greg Opalinski
+40 C Sunrise Seeker @Filip Burburan
+41 C Territorial Hammerskull @Lars Grant-West
+42 R Tocatli Honor Guard @Sara Winters
+43 C Vampire's Zeal @Gabor Szikszai
+44 M Wakening Sun's Avatar @Tyler Jacobson
+45 U Air Elemental @Tomasz Jedruszek
+46 R Arcane Adaptation @Mark Behm
+47 C Cancel @Mathias Kollros
+48 U Chart a Course @James Ryman
+49 R Daring Saboteur @Victor Adame Minguez
+50 U Deadeye Quartermaster @Josh Hass
+51 U Deeproot Waters @Zezhou Chen
+52 C Depths of Desire @John Stanko
+53 C Dive Down @Magali Villeneuve
+54 R Dreamcaller Siren @Eric Deschamps
+55 R Entrancing Melody @Winona Nelson
+56 U Favorable Winds @Shreya Shetty
+57 R Fleet Swallower @Tomasz Jedruszek
+58 C Headwater Sentries @Naomi Baker
+59 R Herald of Secret Streams @Sara Winters
+60 M Jace, Cunning Castaway @Kieran Yanner
+61 R Kopala, Warden of Waves @Magali Villeneuve
+62 U Lookout's Dispersal @Ryan Yee
+63 U Navigator's Ruin @Zoltan Boros
+64 C One With the Wind @Naomi Baker
+65 C Opt @Craig J Spearing
+66 M Overflowing Insight @Lucas Graciano
+67 U Perilous Voyage @Wesley Burt
+68 C Pirate's Prize @Deruchenko Alexander
+69 C Prosperous Pirates @Josh Hass
+70 U River Sneak @Slawomir Maniak
+71 R River's Rebuke @Raymond Swanland
+72 C Run Aground @Sara Winters
+73 C Sailor of Means @Ryan Pancoast
+74 R Search for Azcanta @Magali Villeneuve
+75 C Shaper Apprentice @Yongjae Choi
+76 C Shipwreck Looter @Wayne Reynolds
+77 C Shore Keeper @YW Tang
+78 C Siren Lookout @Chris Rallis
+79 U Siren Stormtamer @Josu Hernaiz
+80 C Siren's Ruse @Ben Maier
+81 C Spell Pierce @Deruchenko Alexander
+82 R Spell Swindle @Victor Adame Minguez
+83 U Storm Fleet Aerialist @Jesper Ejsing
+84 U Storm Fleet Spy @Scott Murphy
+85 C Storm Sculptor @Sidharth Chaturvedi
+86 U Tempest Caller @Ryan Alexander Lee
+87 C Watertrap Weaver @Josu Hernaiz
+88 C Wind Strider @Magali Villeneuve
+89 C Anointed Deacon @Winona Nelson
+90 R Arguel's Blood Fast @Daarken
+91 U Bishop of the Bloodstained @Yongjae Choi
+92 C Blight Keeper @Ben Wootten
+93 R Bloodcrazed Paladin @Daarken
+94 M Boneyard Parley @James Ryman
+95 C Contract Killing @Winona Nelson
+96 C Costly Plunder @Ben Maier
+97 U Dark Nourishment @Josh Hass
+98 C Deadeye Tormentor @Eric Deschamps
+99 R Deadeye Tracker @Deruchenko Alexander
+100 U Deathless Ancient @Nils Hamm
+101 C Desperate Castaways @Zoltan Boros
+102 C Dire Fleet Hoarder @Deruchenko Alexander
+103 C Dire Fleet Interloper @John Severin Brassell
+104 M Dire Fleet Ravager @Bram Sels
+105 C Duress @Lucas Graciano
+106 R Fathom Fleet Captain @Matt Stewart
+107 C Fathom Fleet Cutthroat @Josu Hernaiz
+108 U Grim Captain's Call @Winona Nelson
+109 U Heartless Pillage @Sara Winters
+110 U Kitesail Freebooter @Dan Scott
+111 U Lurking Chupacabra @YW Tang
+112 C March of the Drowned @Ben Wootten
+113 C Mark of the Vampire @Yongjae Choi
+114 C Queen's Agent @Winona Nelson
+115 C Queen's Bay Soldier @Jesper Ejsing
+116 U Raiders' Wake @Zack Stella
+117 R Revel in Riches @Eric Deschamps
+118 R Ruin Raider @Kieran Yanner
+119 U Ruthless Knave @Aaron Miller
+120 R Sanctum Seeker @Volkan Baǵa
+121 U Seekers' Squire @Anthony Palumbo
+122 C Skittering Heartstopper @Aaron Miller
+123 C Skulduggery @Deruchenko Alexander
+124 C Skymarch Bloodletter @Tomasz Jedruszek
+125 C Spreading Rot @Yeong-Hao Han
+126 R Sword-Point Diplomacy @Eric Deschamps
+127 C Vanquish the Weak @David Palumbo
+128 U Vicious Conquistador @Kieran Yanner
+129 R Vraska's Contempt @Clint Cearley
+130 U Walk the Plank @Kieran Yanner
+131 U Wanted Scoundrels @Volkan Baǵa
+132 R Angrath's Marauders @Victor Adame Minguez
+133 U Bonded Horncrest @Jesper Ejsing
+134 C Brazen Buccaneers @Joseph Meehan
+135 R Burning Sun's Avatar @Randy Vargas
+136 R Captain Lannery Storm @Chris Rallis
+137 R Captivating Crew @Winona Nelson
+138 U Charging Monstrosaur @Zack Stella
+139 C Demolish @Jesper Ejsing
+140 U Dinosaur Stampede @Bram Sels
+141 C Dual Shot @Sara Winters
+142 C Fathom Fleet Firebrand @Zezhou Chen
+143 U Fiery Cannonade @Ben Wootten
+144 C Fire Shrine Keeper @Zoltan Boros
+145 C Firecannon Blast @Svetlin Velinov
+146 C Frenzied Raptor @Jesper Ejsing
+147 C Headstrong Brute @Yongjae Choi
+148 C Hijack @Svetlin Velinov
+149 U Lightning Strike @Craig J Spearing
+150 U Lightning-Rig Crew @Filip Burburan
+151 U Makeshift Munitions @Filip Burburan
+152 C Nest Robber @Jonathan Kuo
+153 U Otepec Huntmaster @Daarken
+154 R Rampaging Ferocidon @Jonathan Kuo
+155 U Raptor Hatchling @Even Amundsen
+156 R Repeating Barrage @Dan Scott
+157 U Rigging Runner @Simon Dominic
+158 C Rile @Igor Kieryluk
+159 M Rowdy Crew @Steve Prescott
+160 C Rummaging Goblin @Slawomir Maniak
+161 M Star of Extinction @Chris Rahn
+162 U Storm Fleet Arsonist @Jason A. Engle
+163 C Storm Fleet Pyromancer @Kieran Yanner
+164 C Sun-Crowned Hunters @Aaron Miller
+165 R Sunbird's Invocation @Christine Choi
+166 C Sure Strike @Izzy
+167 C Swashbuckling @Josu Hernaiz
+168 C Thrash of Raptors @Jonathan Kuo
+169 C Tilonalli's Knight @Lius Lasahido
+170 R Tilonalli's Skinshifter @Jason Rainville
+171 U Trove of Temptation @Jonas De Ro
+172 C Unfriendly Fire @Josu Hernaiz
+173 R Vance's Blasting Cannons @Jonas De Ro
+174 U Wily Goblin @Steve Prescott
+175 C Ancient Brontodon @Jakub Kasper
+176 U Atzocan Archer @Naomi Baker
+177 C Blinding Fog @Igor Kieryluk
+178 C Blossom Dryad @Shreya Shetty
+179 M Carnage Tyrant @Yeong-Hao Han
+180 C Colossal Dreadmaw @Jesper Ejsing
+181 C Commune with Dinosaurs @Jonathan Kuo
+182 C Crash the Ramparts @Mark Behm
+183 C Crushing Canopy @Tomasz Jedruszek
+184 R Deathgorge Scavenger @Tyler Jacobson
+185 R Deeproot Champion @Raymond Swanland
+186 C Deeproot Warrior @Slawomir Maniak
+187 U Drover of the Mighty @Eric Deschamps
+188 U Emergent Growth @Daniel Ljunggren
+189 R Emperor's Vanguard @Victor Adame Minguez
+190 C Grazing Whiptail @Gabor Szikszai
+191 R Growing Rites of Itlimoc @Grzegorz Rutkowski
+192 C Ixalli's Diviner @Lucas Graciano
+193 C Ixalli's Keeper @Lake Hurwitz
+194 C Jade Guardian @Chris Seaman
+195 C Jungle Delver @Kieran Yanner
+196 U Kumena's Speaker @Johann Bodin
+197 U Merfolk Branchwalker @Kieran Yanner
+198 C New Horizons @Noah Bradley
+199 R Old-Growth Dryads @Yongjae Choi
+200 C Pounce @Lucas Graciano
+201 U Ranging Raptors @Simon Dominic
+202 C Ravenous Daggertooth @Jakub Kasper
+203 R Ripjaw Raptor @Ryan Pancoast
+204 C River Heralds' Boon @Alex Konstad
+205 U Savage Stomp @Wayne Reynolds
+206 R Shapers' Sanctuary @Zezhou Chen
+207 U Slice in Twain @Even Amundsen
+208 U Snapping Sailback @Dan Scott
+209 C Spike-Tailed Ceratops @Lius Lasahido
+210 U Thundering Spineback @Tomasz Jedruszek
+211 C Tishana's Wayfinder @Shreya Shetty
+212 U Verdant Rebirth @Josu Hernaiz
+213 R Verdant Sun's Avatar @Izzy
+214 U Vineshaper Mystic @Kieran Yanner
+215 R Waker of the Wilds @Shreya Shetty
+216 U Wildgrowth Walker @Ryan Alexander Lee
+217 M Admiral Beckett Brass @Jason Rainville
+218 U Belligerent Brontodon @Dan Scott
+219 U Call to the Feast @Yongjae Choi
+220 U Deadeye Plunderers @Greg Opalinski
+221 U Dire Fleet Captain @Yongjae Choi
+222 M Gishath, Sun's Avatar @Zack Stella
+223 R Hostage Taker @Wayne Reynolds
+224 M Huatli, Warrior Poet @Tyler Jacobson
+225 U Marauding Looter @Jason A. Engle
+226 U Raging Swordtooth @Izzy
+227 R Regisaur Alpha @Jonathan Kuo
+228 U Shapers of Nature @Chris Seaman
+229 U Sky Terror @Johann Bodin
+230 M Tishana, Voice of Thunder @Anna Steinbauer
+231 M Vona, Butcher of Magan @Volkan Baǵa
+232 M Vraska, Relic Seeker @Chris Rahn
+233 C Cobbled Wings @Kev Walker
+234 R Conqueror's Galleon @Emrah Elmasli
+235 R Dowsing Dagger @Florian de Gesincourt
+236 U Dusk Legion Dreadnought @Titus Lunter
+237 U Elaborate Firecannon @Adrian Majkrzak
+238 R Fell Flagship @Titus Lunter
+239 C Gilded Sentinel @Izzy
+240 C Hierophant's Chalice @John Stanko
+241 U Pillar of Origins @Dimitar Marinski
+242 C Pirate's Cutlass @John Stanko
+243 R Primal Amulet @John Avon
+244 C Prying Blade @Aaron Miller
+245 U Sentinel Totem @Anthony Palumbo
+246 R Shadowed Caravel @Jason Felix
+247 U Sleek Schooner @Mark Winters
+248 R Sorcerous Spyglass @Kieran Yanner
+249 R Thaumatic Compass @Yeong-Hao Han
+250 R Treasure Map @Cliff Childs
+251 R Vanquisher's Banner @Milivoj Ćeran
+252 R Dragonskull Summit @Alayna Danner
+253 R Drowned Catacomb @Jung Park
+254 U Field of Ruin @Dimitar Marinski
+255 R Glacial Fortress @James Paick
+256 R Rootbound Crag @Grzegorz Rutkowski
+257 R Sunpetal Grove @Dimitar Marinski
+258 U Unclaimed Territory @Dimitar Marinski
+259 C Unknown Shores @Rob Alexander
+260 L Plains @Christine Choi
+261 L Plains @Titus Lunter
+262 L Plains @Raoul Vitale
+263 L Plains @Min Yum
+264 L Island @Christine Choi
+265 L Island @Titus Lunter
+266 L Island @Raoul Vitale
+267 L Island @Min Yum
+268 L Swamp @Christine Choi
+269 L Swamp @Titus Lunter
+270 L Swamp @Raoul Vitale
+271 L Swamp @Min Yum
+272 L Mountain @Christine Choi
+273 L Mountain @Titus Lunter
+274 L Mountain @Raoul Vitale
+275 L Mountain @Min Yum
+276 L Forest @Christine Choi
+277 L Forest @Titus Lunter
+278 L Forest @Raoul Vitale
+279 L Forest @Min Yum
 
 [precon product]
-280 M Jace, Ingenious Mind-Mage
-281 C Castaway's Despair
-282 R Grasping Current
-283 U Jace's Sentinel
-284 C Woodland Stream
-285 M Huatli, Dinosaur Knight
-286 C Huatli's Snubhorn
-287 U Huatli's Spurring
-288 R Sun-Blessed Mount
-289 C Stone Quarry
+280 M Jace, Ingenious Mind-Mage @Clint Cearley
+281 C Castaway's Despair @Chris Rahn
+282 R Grasping Current @Yongjae Choi
+283 U Jace's Sentinel @Alex Konstad
+284 C Woodland Stream @James Paick
+285 M Huatli, Dinosaur Knight @Anna Steinbauer
+286 C Huatli's Snubhorn @Randy Vargas
+287 U Huatli's Spurring @Zack Stella
+288 R Sun-Blessed Mount @Joe Slucher
+289 C Stone Quarry @Noah Bradley
 
 [tokens]
 w_1_1_vampire_lifelink

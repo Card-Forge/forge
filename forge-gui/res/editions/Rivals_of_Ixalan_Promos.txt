@@ -6,8 +6,8 @@ Type=Promo
 ScryfallCode=PRIX
 
 [cards]
-53 U Silvergill Adept
-94 R Brass's Bounty
-130 R Ghalta, Primal Hunger
-177 R Captain's Hook
-186 C Evolving Wilds
+53 U Silvergill Adept @Slawomir Maniak
+94 R Brass's Bounty @Dimitar Marinski
+130 R Ghalta, Primal Hunger @Johann Bodin
+177 R Captain's Hook @Kev Walker
+186 C Evolving Wilds @Daniel Ljunggren

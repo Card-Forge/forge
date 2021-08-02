@@ -7,46 +7,46 @@ Type=Duel_Deck
 ScryfallCode=GS1
 
 [cards]
-1 M Mu Yanling
-2 C Colorful Feiyi Sparrow
-3 C Purple-Crystal Crab
-4 C Vivid Flying Fish
-5 C Welkin Tern
-6 C Heavenly Qilin
-7 C Armored Whirl Turtle
-8 C Nine-Tail White Fox
-9 C Earth-Origin Yak
-10 U Moon-Eating Dog
-11 U Stormcloud Spirit
-12 R Ancestor Dragon
-13 C Cloak of Mists
-14 C Qilin's Blessing
-15 C Drown in Shapelessness
-16 C Dragon's Presence
-17 U Brilliant Plan
-18 R Rhythmic Water Vortex
-19 C Meandering River
-20 L Plains
-21 L Island
-22 M Jiang Yanggu
-23 C Leopard-Spotted Jiao
-24 C Feiyi Snake
-25 U Sacred White Deer
-26 C Reckless Pangolin
-27 C Giant Spider
-28 C Ferocious Zheng
-29 U Fire-Omen Crane
-30 R Screeching Phoenix
-31 C Earthshaking Si
-32 C Hardened-Scale Armor
-33 C Breath of Fire
-34 C Aggressive Instinct
-35 C Confidence from Strength
-36 M Journey for the Elixir
-37 C Cleansing Screech
-38 C Timber Gorge
-39 L Mountain
-40 L Forest
+1 M Mu Yanling @林玄泰
+2 C Colorful Feiyi Sparrow @Kee Lo
+3 C Purple-Crystal Crab @Tan Yan Yao
+4 C Vivid Flying Fish @Tingting Yeh
+5 C Welkin Tern @Yutaka Li
+6 C Heavenly Qilin @Xin-Yu Liu
+7 C Armored Whirl Turtle @Tingting Yeh
+8 C Nine-Tail White Fox @林玄泰
+9 C Earth-Origin Yak @Tan Yan Yao
+10 U Moon-Eating Dog @Tingting Yeh
+11 U Stormcloud Spirit @Kee Lo
+12 R Ancestor Dragon @Shinchuen Chen
+13 C Cloak of Mists @Tingting Yeh
+14 C Qilin's Blessing @Wolk Sheep
+15 C Drown in Shapelessness @Pon Lee
+16 C Dragon's Presence @Tan Yan Yao
+17 U Brilliant Plan @Yutaka Li
+18 R Rhythmic Water Vortex @Xin-Yu Liu
+19 C Meandering River @Gaga Zeng
+20 L Plains @Tingting Yeh
+21 L Island @Babyson Chen & Uzhen Lin
+22 M Jiang Yanggu @Tingting Yeh
+23 C Leopard-Spotted Jiao @Shinchuen Chen
+24 C Feiyi Snake @Qiu De En
+25 U Sacred White Deer @G-host Lee
+26 C Reckless Pangolin @Wolk Sheep
+27 C Giant Spider @Qiu De En
+28 C Ferocious Zheng @Yutaka Li
+29 U Fire-Omen Crane @Tan Yan Yao
+30 R Screeching Phoenix @Tingting Yeh
+31 C Earthshaking Si @Shinchuen Chen
+32 C Hardened-Scale Armor @Tan Yan Yao
+33 C Breath of Fire @Xin-Yu Liu
+34 C Aggressive Instinct @Wolk Sheep
+35 C Confidence from Strength @Shinchuen Chen
+36 M Journey for the Elixir @Qiu De En
+37 C Cleansing Screech @Tingting Yeh
+38 C Timber Gorge @Babyson Chen & Uzhen Lin
+39 L Mountain @Gaga Zeng
+40 L Forest @Xin-Yu Liu
 
 [tokens]
 mowu

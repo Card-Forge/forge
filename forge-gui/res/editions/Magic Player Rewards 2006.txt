@@ -6,10 +6,10 @@ Type=Promo
 ScryfallCode=P06
 
 [cards]
-1 R Hypnotic Specter
-2 R Hinder
-3 R Pyroclasm
-4 R Giant Growth
-5 R Putrefy
-6 R Zombify
-7 R lightning Helix
+1 R Hypnotic Specter @Douglas Shuler
+2 R Hinder @Anthony S. Waters
+3 R Pyroclasm @Dave Dorman
+4 R Giant Growth @Joel Thomas
+5 R Putrefy @Richard Sardinha
+6 R Zombify @Alan Pollack
+7 R Lightning Helix @Kev Walker

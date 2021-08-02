@@ -12,122 +12,122 @@ Foil=NotSupported
 ScryfallCode=DRK
 
 [cards]
-20 U Amnesia
-1 U Angry Mob
-21 R Apprentice Wizard
-39 C Ashes to Ashes
-57 R Ball Lightning
-40 U Banshee
-96 R Barl's Cage
-58 R Blood Moon
-2 U Blood of the Martyr
-41 C Bog Imp
-42 C Bog Rats
-97 U Bone Flute
-98 U Book of Rass
-3 C Brainwash
-59 U Brothers of Fire
-75 C Carnivorous Plant
-60 U Cave People
-116 R City of Shadows
-4 R Cleansing
-99 U Coal Golem
-43 U Curse Artifact
-22 R Dance of Many
-95 C Dark Heart of the Wood
-100 U Dark Sphere
-23 C Deep Water
-101 U Diabolic Machine
-24 C Drowned
-5 C Dust to Dust
-44 U Eater of the Dead
-25 U Electric Eel
-76 U Elves of Deep Shadow
-26 C Erosion
-61 R Eternal Flame
-6 R Exorcist
-7 U Fasting
-102 U Fellwar Stone
-8 C Festival
-9 U Fire and Brimstone
-62 U Fire Drake
-63 C Fissure
-27 U Flood
-103 U Fountain of Youth
-45 R Frankenstein's Monster
-77 C Gaea's Touch
-28 C Ghost Ship
-29 C Giant Shark
-64 C Goblin Caves
-65 C Goblin Digging Team
-66 C Goblin Hero
-67 C Goblin Rock Sled
-68 C Goblin Shrine
-70 C Goblins of the Flarg
-69 R Goblin Wizard
-46 R Grave Robbers
-78 R Hidden Path
-10 C Holy Light
-71 R Inferno
-47 C Inquisition
-11 R Knights of Thorn
-79 C Land Leeches
-30 R Leviathan
-104 U Living Armor
-80 R Lurker
-72 R Mana Clash
-31 R Mana Vortex
-48 C Marsh Gas
-93 C Marsh Goblins
-81 C Marsh Viper
-12 R Martyr's Cry
-117 U Maze of Ith
-32 U Merfolk Assassin
-33 R Mind Bomb
-13 C Miracle Worker
-14 C Morale
-49 C Murk Dwellers
-50 R Nameless Race
-105 U Necropolis
-82 R Niall Silvain
-73 U Orc General
-83 U People of the Woods
-15 C Pikemen
-16 R Preacher
-34 R Psychic Allergy
-51 R Rag Man
-106 U Reflecting Mirror
-35 C Riptide
-107 U Runesword
-118 R Safe Haven
-84 C Savaen Elves
-108 U Scarecrow
-85 R Scarwood Bandits
-94 C Scarwood Goblins
-86 U Scarwood Hag
-87 C Scavenger Folk
-52 R Season of the Witch
-74 U Sisters of the Flame
-109 U Skull of Orm
-119 R Sorrow's Path
-88 U Spitting Slug
-17 C Squire
-110 U Standing Stones
-111 R Stone Calendar
-36 C Sunken City
-37 U Tangle Kelp
-53 U The Fallen
-18 U Tivadar's Crusade
-112 U Tormod's Crypt
-113 U Tower of Coireall
-89 R Tracker
-54 U Uncle Istvan
-90 C Venom
-114 U Wand of Ith
-115 U War Barge
-38 C Water Wurm
-91 U Whippoorwill
-19 R Witch Hunter
-55 C Word of Binding
-56 R Worms of the Earth
-92 R Wormwood Treefolk
+20 U Amnesia @Mark Poole
+1 U Angry Mob @Drew Tucker
+21 R Apprentice Wizard @Dan Frazier
+39 C Ashes to Ashes @Drew Tucker
+57 R Ball Lightning @Quinton Hoover
+40 U Banshee @Jesper Myrfors
+96 R Barl's Cage @Tom Wänerstrand
+58 R Blood Moon @Tom Wänerstrand
+2 U Blood of the Martyr @Christopher Rush
+41 C Bog Imp @Ron Spencer
+42 C Bog Rats @Ron Spencer
+97 U Bone Flute @Christopher Rush
+98 U Book of Rass @Sandra Everingham
+3 C Brainwash @Pete Venters
+59 U Brothers of Fire @Mark Tedin
+75 C Carnivorous Plant @Quinton Hoover
+60 U Cave People @Drew Tucker
+116 R City of Shadows @Tom Wänerstrand
+4 R Cleansing @Pete Venters
+99 U Coal Golem @Christopher Rush
+43 U Curse Artifact @Mark Tedin
+22 R Dance of Many @Sandra Everingham
+95 C Dark Heart of the Wood @Christopher Rush
+100 U Dark Sphere @Mark Tedin
+23 C Deep Water @Jeff A. Menges
+101 U Diabolic Machine @Anson Maddocks
+24 C Drowned @Quinton Hoover
+5 C Dust to Dust @Drew Tucker
+44 U Eater of the Dead @Jesper Myrfors
+25 U Electric Eel @Anson Maddocks
+76 U Elves of Deep Shadow @Jesper Myrfors
+26 C Erosion @Pete Venters
+61 R Eternal Flame @Mark Poole
+6 R Exorcist @Drew Tucker
+7 U Fasting @Douglas Shuler
+102 U Fellwar Stone @Quinton Hoover
+8 C Festival @Mark Poole
+9 U Fire and Brimstone @Jeff A. Menges
+62 U Fire Drake @Christopher Rush
+63 C Fissure @Douglas Shuler
+27 U Flood @Dennis Detwiller
+103 U Fountain of Youth @Daniel Gelon
+45 R Frankenstein's Monster @Anson Maddocks
+77 C Gaea's Touch @Mark Poole
+28 C Ghost Ship @Tom Wänerstrand
+29 C Giant Shark @Tom Wänerstrand
+64 C Goblin Caves @Drew Tucker
+65 C Goblin Digging Team @Ron Spencer
+66 C Goblin Hero @Mark Tedin
+67 C Goblin Rock Sled @Dennis Detwiller
+68 C Goblin Shrine @Ron Spencer
+70 C Goblins of the Flarg @Tom Wänerstrand
+69 R Goblin Wizard @Daniel Gelon
+46 R Grave Robbers @Quinton Hoover
+78 R Hidden Path @Rob Alexander
+10 C Holy Light @Drew Tucker
+71 R Inferno @Randy Asplund-Faith
+47 C Inquisition @Anson Maddocks
+11 R Knights of Thorn @Christopher Rush
+79 C Land Leeches @Quinton Hoover
+30 R Leviathan @Mark Tedin
+104 U Living Armor @Anson Maddocks
+80 R Lurker @Anson Maddocks
+72 R Mana Clash @Mark Tedin
+31 R Mana Vortex @Douglas Shuler
+48 C Marsh Gas @Douglas Shuler
+93 C Marsh Goblins @Quinton Hoover
+81 C Marsh Viper @Ron Spencer
+12 R Martyr's Cry @Jeff A. Menges
+117 U Maze of Ith @Anson Maddocks
+32 U Merfolk Assassin @Dennis Detwiller
+33 R Mind Bomb @Mark Tedin
+13 C Miracle Worker @Ron Spencer
+14 C Morale @Mark Poole
+49 C Murk Dwellers @Drew Tucker
+50 R Nameless Race @Quinton Hoover
+105 U Necropolis @NéNé Thomas
+82 R Niall Silvain @Christopher Rush
+73 U Orc General @Jesper Myrfors
+83 U People of the Woods @Drew Tucker
+15 C Pikemen @Dennis Detwiller
+16 R Preacher @Quinton Hoover
+34 R Psychic Allergy @Mark Tedin
+51 R Rag Man @Daniel Gelon
+106 U Reflecting Mirror @Mark Poole
+35 C Riptide @Randy Asplund-Faith
+107 U Runesword @Christopher Rush
+118 R Safe Haven @Christopher Rush
+84 C Savaen Elves @Ron Spencer
+108 U Scarecrow @Anson Maddocks
+85 R Scarwood Bandits @Mark Poole
+94 C Scarwood Goblins @Ron Spencer
+86 U Scarwood Hag @Anson Maddocks
+87 C Scavenger Folk @Dennis Detwiller
+52 R Season of the Witch @Jesper Myrfors
+74 U Sisters of the Flame @Jesper Myrfors
+109 U Skull of Orm @Tom Wänerstrand
+119 R Sorrow's Path @Randy Asplund-Faith
+88 U Spitting Slug @Anson Maddocks
+17 C Squire @Dennis Detwiller
+110 U Standing Stones @Sandra Everingham
+111 R Stone Calendar @Amy Weber
+36 C Sunken City @Jesper Myrfors
+37 U Tangle Kelp @Rob Alexander
+53 U The Fallen @Jesper Myrfors
+18 U Tivadar's Crusade @Dennis Detwiller
+112 U Tormod's Crypt @Christopher Rush
+113 U Tower of Coireall @Dan Frazier
+89 R Tracker @Jeff A. Menges
+54 U Uncle Istvan @Daniel Gelon
+90 C Venom @Tom Wänerstrand
+114 U Wand of Ith @Quinton Hoover
+115 U War Barge @Tom Wänerstrand
+38 C Water Wurm @Ron Spencer
+91 U Whippoorwill @Douglas Shuler
+19 R Witch Hunter @Jesper Myrfors
+55 C Word of Binding @Ron Spencer
+56 R Worms of the Earth @Anson Maddocks
+92 R Wormwood Treefolk @Jesper Myrfors

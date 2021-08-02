@@ -6,12 +6,12 @@ Type=Promo
 ScryfallCode=PDTK
 
 [cards]
-96 R Deathbringer Regent
-162 R Thunderbreak Regent
-201 U Scaleguard Sentinels
-212 R Arashin Sovereign
-214 R Boltwing Marauder
-223 R Harbinger of the Hunt
-226 R Necromaster Dragon
-227 R Ojutai's Command
-228 R Pristine Skywise
+96 R Deathbringer Regent @Chris Rallis
+162 R Thunderbreak Regent @Jason Rainville
+201 U Scaleguard Sentinels @David Gaillet
+212 R Arashin Sovereign @David Palumbo
+214 R Boltwing Marauder @Daarken
+223 R Harbinger of the Hunt @Chris Rahn
+226 R Necromaster Dragon @Peter Mohrbacher
+227 R Ojutai's Command @Craig J Spearing
+228 R Pristine Skywise @Dan Scott

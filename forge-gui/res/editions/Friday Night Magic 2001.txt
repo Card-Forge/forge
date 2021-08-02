@@ -6,10 +6,10 @@ Type=Promo
 ScryfallCode=F01
 
 [cards]
-6 R Swords to Plowshares
-7 R Ophidian
-8 R Jackal Pup
-9 R Quirion Ranger
-10 R Carnophage
-11 R Impulse
-12 R Fireblast
+6 R Swords to Plowshares @Jeff A. Menges
+7 R Ophidian @Cliff Nielsen
+8 R Jackal Pup @Susan Van Camp
+9 R Quirion Ranger @Tom Kyffin
+10 R Carnophage @Pete Venters
+11 R Impulse @Bryan Talbot
+12 R Fireblast @Michael Danza

@@ -6,12 +6,12 @@ Type=Promo
 ScryfallCode=P10
 
 [cards]
-1 R Lightning Bolt
-2 R Cancel
-3 R Sign in Blood
-4 R Infest
-5 R Volcanic Fallout
-6 R Celestial Purge
-7 R Bituminous Blast
-8 R Burst Lightning
-9 R Harrow
+1 R Lightning Bolt @Véronique Meignaud
+2 R Cancel @Izzy
+3 R Sign in Blood @Alan Pollack
+4 R Infest @Pete Venters
+5 R Volcanic Fallout @Jim Pavelec
+6 R Celestial Purge @Nils Hamm
+7 R Bituminous Blast @Aleksi Briclot
+8 R Burst Lightning @Jung Park
+9 R Harrow @Lars Grant-West

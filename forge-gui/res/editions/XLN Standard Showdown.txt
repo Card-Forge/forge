@@ -6,8 +6,8 @@ Type=Promo
 ScryfallCode=PSS2
 
 [cards]
-1 R Plains
-2 R Island
-3 R Swamp
-4 R Mountain
-5 R Forest
+1 R Plains @Rebecca Guay
+2 R Island @Rebecca Guay
+3 R Swamp @Rebecca Guay
+4 R Mountain @Rebecca Guay
+5 R Forest @Rebecca Guay

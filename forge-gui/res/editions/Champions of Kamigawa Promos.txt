@@ -6,4 +6,4 @@ Type=Promo
 ScryfallCode=PCHK
 
 [cards]
-185★ R Ryusei, the Falling Star
+185★ R Ryusei, the Falling Star @Nottsuo

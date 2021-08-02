@@ -7,21 +7,21 @@ Type=Collector_Edition
 ScryfallCode=V14
 
 [cards]
-1 M Armageddon
-2 M Burning of Xinye
-3 M Cataclysm
-4 M Child of Alara
-5 M Decree of Annihilation
-6 M Firespout
-7 M Fracturing Gust
-8 M Living Death
-9 M Martial Coup
-10 M Rolling Earthquake
-11 M Smokestack
-12 M Terminus
-13 M Upheaval
-14 M Virtue's Ruin
-15 M Wrath of God
+1 M Armageddon @Chris Rahn
+2 M Burning of Xinye @Yang Hong
+3 M Cataclysm @Eric Deschamps
+4 M Child of Alara @Steve Argyle
+5 M Decree of Annihilation @John Avon
+6 M Firespout @Raymond Swanland
+7 M Fracturing Gust @Michael Sutfin
+8 M Living Death @Mark Winters
+9 M Martial Coup @Greg Staples
+10 M Rolling Earthquake @Yang Hong
+11 M Smokestack @Daniel Ljunggren
+12 M Terminus @James Paick
+13 M Upheaval @Kev Walker
+14 M Virtue's Ruin @Mike Dringenberg
+15 M Wrath of God @Willian Murai
 
 [tokens]
 w_1_1_soldier

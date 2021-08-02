@@ -7,87 +7,87 @@ Type=Duel_Deck
 ScryfallCode=DDN
 
 [cards]
-1 M Zurgo Helmsmasher
-2 U Frenzied Goblin
-3 C Infantry Veteran
-4 C Leonin Snarecaster
-5 C Dregscape Zombie
-6 C Goblin Deathraiders
-7 U Hellraiser Goblin
-8 U Fleshbag Marauder
-9 U Goblin Warchief
-10 R Hell's Thunder
-11 C Kathari Bomber
-12 U Shambling Remains
-13 U Mardu Heart-Piercer
-14 U Beetleback Chief
-15 R Krenko, Mob Boss
-16 R Ogre Battledriver
-17 U Flame-Kin Zealot
-18 U Scourge Devil
-19 U Oni of Wild Places
-20 C Reckless Abandon
-21 C Shock
-22 C Bone Splinters
-23 U Arc Trail
-24 U Goblin Bombardment
-25 C Krenko's Command
-26 C Act of Treason
-27 U Dauntless Onslaught
-28 C Orcish Cannonade
-29 C Fiery Fall
-30 R Fury of the Horde
-31 R Banefire
-32 C Evolving Wilds
-33 U Ghitu Encampment
-34 U Nomad Outpost
-35 L Mountain
-36 L Mountain
-37 L Mountain
-38 L Plains
-39 L Swamp
-40 L Swamp
-41 L Swamp
-42 M Arcanis the Omnipotent
-43 U Faerie Impostor
-44 C Coral Trickster
-45 C Fathom Seer
-46 U Jeskai Elder
-47 U Willbender
-48 C Sparkmage Apprentice
-49 C Lone Missionary
-50 C Master Decoy
-51 C Echo Tracer
-52 C Kor Hookmaster
-53 U Stonecloaker
-54 C Aquamorph Entity
-55 C Hussar Patrol
-56 R Lightning Angel
-57 C Faerie Invaders
-58 R Thousand Winds
-59 R Sphinx of Uthuun
-60 C Fleeting Distraction
-61 C Stave Off
-62 C Swift Justice
-63 C Impulse
-64 C Mana Leak
-65 U Lightning Helix
-66 R Hold the Line
-67 U Inferno Trap
-68 R Steam Augury
-69 C Traumatic Visions
-70 C Whiplash Trap
-71 U Arrow Volley Trap
-72 C Repeal
-73 U Mystic Monastery
-74 C Terramorphic Expanse
-75 L Island
-76 L Island
-77 L Island
-78 L Mountain
-79 L Plains
-80 L Plains
-81 L Plains
+1 M Zurgo Helmsmasher @Ryan Alexander Lee
+2 U Frenzied Goblin @Carl Critchlow
+3 C Infantry Veteran @Zoltan Boros
+4 C Leonin Snarecaster @Kev Walker
+5 C Dregscape Zombie @Lars Grant-West
+6 C Goblin Deathraiders @Raymond Swanland
+7 U Hellraiser Goblin @Karl Kopinski
+8 U Fleshbag Marauder @Mark Zug
+9 U Goblin Warchief @Greg Hildebrandt & Tim Hildebrandt
+10 R Hell's Thunder @Karl Kopinski
+11 C Kathari Bomber @Carl Critchlow
+12 U Shambling Remains @Nils Hamm
+13 U Mardu Heart-Piercer @Karl Kopinski
+14 U Beetleback Chief @Wayne England
+15 R Krenko, Mob Boss @Karl Kopinski
+16 R Ogre Battledriver @Greg Staples
+17 U Flame-Kin Zealot @Arnie Swekel
+18 U Scourge Devil @Dave Kendall
+19 U Oni of Wild Places @Mark Tedin
+20 C Reckless Abandon @Ron Spears
+21 C Shock @Jon Foster
+22 C Bone Splinters @Cole Eastburn
+23 U Arc Trail @Marc Simonetti
+24 U Goblin Bombardment @Dave Kendall
+25 C Krenko's Command @Karl Kopinski
+26 C Act of Treason @Eric Deschamps
+27 U Dauntless Onslaught @Peter Mohrbacher
+28 C Orcish Cannonade @Pete Venters
+29 C Fiery Fall @Daarken
+30 R Fury of the Horde @Stephen Tappin
+31 R Banefire @Raymond Swanland
+32 C Evolving Wilds @Steven Belledin
+33 U Ghitu Encampment @John Avon
+34 U Nomad Outpost @Noah Bradley
+35 L Mountain @Jonas De Ro
+36 L Mountain @Karl Kopinski
+37 L Mountain @Andreas Rocha
+38 L Plains @Jonas De Ro
+39 L Swamp @Adam Paquette
+40 L Swamp @Jung Park
+41 L Swamp @Andreas Rocha
+42 M Arcanis the Omnipotent @Ryan Alexander Lee
+43 U Faerie Impostor @Johann Bodin
+44 C Coral Trickster @D. Alexander Gregory
+45 C Fathom Seer @Ralph Horsley
+46 U Jeskai Elder @Craig J Spearing
+47 U Willbender @Eric Peterson
+48 C Sparkmage Apprentice @Jaime Jones
+49 C Lone Missionary @Svetlin Velinov
+50 C Master Decoy @Ben Thompson
+51 C Echo Tracer @Scott M. Fischer
+52 C Kor Hookmaster @Wayne Reynolds
+53 U Stonecloaker @Tomas Giorello
+54 C Aquamorph Entity @Brian Despain
+55 C Hussar Patrol @Seb McKinnon
+56 R Lightning Angel @rk post
+57 C Faerie Invaders @Ryan Pancoast
+58 R Thousand Winds @Raymond Swanland
+59 R Sphinx of Uthuun @Kekai Kotaki
+60 C Fleeting Distraction @Ryan Yee
+61 C Stave Off @Mark Zug
+62 C Swift Justice @Karl Kopinski
+63 C Impulse @Izzy
+64 C Mana Leak @Howard Lyon
+65 U Lightning Helix @Kev Walker
+66 R Hold the Line @Ron Spears
+67 U Inferno Trap @Philip Straub
+68 R Steam Augury @Dave Kendall
+69 C Traumatic Visions @Cyril Van Der Haegen
+70 C Whiplash Trap @Zoltan Boros & Gabor Szikszai
+71 U Arrow Volley Trap @Steve Argyle
+72 C Repeal @Anthony Palumbo
+73 U Mystic Monastery @Florian de Gesincourt
+74 C Terramorphic Expanse @Dan Scott
+75 L Island @Rob Alexander
+76 L Island @Rob Alexander
+77 L Island @Andreas Rocha
+78 L Mountain @Raoul Vitale
+79 L Plains @Adam Paquette
+80 L Plains @Jung Park
+81 L Plains @Andreas Rocha
 
 [tokens]
 r_1_1_goblin

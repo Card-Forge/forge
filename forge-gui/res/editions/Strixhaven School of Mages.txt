@@ -13,400 +13,400 @@ FatPackExtraSlots=20 BasicLands, 20 BasicLands+
 ScryfallCode=STX
 
 [cards]
-1 C Environmental Sciences
-2 C Expanded Anatomy
-3 C Introduction to Annihilation
-4 C Introduction to Prophecy
-5 M Mascot Exhibition
-6 R Wandering Archaic
-7 R Academic Probation
-8 C Ageless Guardian
-9 C Beaming Defiance
-10 U Clever Lumimancer
-11 C Combat Professor
-12 C Defend the Campus
-13 U Detention Vortex
-14 R Devastating Mastery
-15 U Dueling Coach
-16 C Eager First-Year
-17 R Elite Spellbinder
-18 C Expel
-19 C Guiding Voice
-20 R Leonin Lightscribe
-21 M Mavinda, Students' Advocate
-22 C Pilgrim of the Ages
-23 C Pillardrop Rescuer
-24 U Professor of Symbology
-25 U Reduce to Memory
-26 U Secret Rendezvous
-27 R Semester's End
-28 U Show of Confidence
-29 R Sparring Regimen
-30 C Star Pupil
-31 U Stonebinder's Familiar
-32 C Stonerise Spirit
-33 R Strict Proctor
-34 C Study Break
-35 U Thunderous Orator
-36 C Arcane Subtraction
-37 R Archmage Emeritus
-38 C Burrog Befuddler
-39 C Bury in Books
-40 C Curate
-41 U Divide by Zero
-42 R Dream Strix
-43 C Frost Trickster
-44 R Ingenious Mastery
-45 U Kelpie Guide
-46 U Mentor's Guidance
-47 U Mercurial Transformation
-48 R Multiple Choice
-49 C Pop Quiz
-50 C Reject
-51 C Resculpt
-52 C Serpentine Curve
-53 U Snow Day
-54 U Solve the Equation
-55 C Soothsayer Adept
-56 U Symmetry Sage
-57 R Teachings of the Archaics
-58 R Tempted by the Oriq
-59 U Test of Talents
-60 C Vortex Runner
-61 C Waterfall Aerialist
-62 U Wormhole Serpent
-63 C Arrogant Poet
-64 R Baleful Mastery
-65 U Brackish Trudge
-66 R Callous Bloodmage
-67 R Confront the Past
-68 C Crushing Disappointment
-69 C Essence Infusion
-70 U Eyetwitch
-71 U Flunk
-72 U Go Blank
-73 C Hunt for Specimens
-74 C Lash of Malice
-75 C Leech Fanatic
-76 U Mage Hunter
-77 C Mage Hunters' Onslaught
-78 U Necrotic Fumes
-79 C Novice Dissector
-80 R Oriq Loremage
-81 U Plumb the Forbidden
-82 R Poet's Quill
-83 M Professor Onyx
-84 C Professor's Warning
-85 C Promising Duskmage
-86 R Sedgemoor Witch
-87 C Specter of the Fens
-88 U Tenured Inkcaster
-89 U Umbral Juke
-90 C Unwilling Ingredient
-91 U Academic Dispute
-92 U Ardent Dustspeaker
-93 C Blood Age General
-94 R Conspiracy Theorist
-95 M Crackle with Power
-96 R Draconic Intervention
-97 C Dragon's Approach
-98 R Efreet Flamepainter
-99 C Enthusiastic Study
-100 U Explosive Welcome
-101 R Fervent Mastery
-102 C First Day of Class
-103 C Fuming Effigy
-104 U Grinning Ignus
-105 U Hall Monitor
-106 C Heated Debate
-107 U Igneous Inspiration
-108 R Illuminate History
-109 C Illustrious Historian
-110 U Mascot Interception
-111 C Pigment Storm
-112 C Pillardrop Warden
-113 R Retriever Phoenix
-114 U Start from Scratch
-115 U Storm-Kiln Artist
-116 C Sudden Breakthrough
-117 C Tome Shredder
-118 C Twinscroll Shaman
-119 R Accomplished Alchemist
-120 R Basic Conjuration
-121 C Bayou Groff
-122 C Big Play
-123 U Bookwurm
-124 C Charge Through
-125 U Containment Breach
-126 U Devouring Tendrils
-127 R Dragonsguard Elite
-128 M Ecological Appreciation
-129 U Emergent Sequence
-130 R Exponential Growth
-131 C Field Trip
-132 U Fortifying Draught
-133 R Gnarled Professor
-134 U Honor Troll
-135 U Karok Wrangler
-136 C Leyline Invocation
-137 C Mage Duel
-138 U Master Symmetrist
-139 U Overgrown Arch
-140 C Professor of Zoomancy
-141 C Reckless Amplimancer
-142 C Scurrid Colony
-143 C Spined Karok
-144 C Springmane Cervin
-145 C Tangletrap
-146 R Verdant Mastery
-147 R Augmenter Pugilist
-148 M Blex, Vexing Pest
-149 M Extus, Oriq Overlord
-150 R Flamescroll Celebrant
-151 M Jadzi, Oracle of Arcavios
-152 R Kianne, Dean of Substance
-153 M Mila, Crafty Companion
-154 R Pestilent Cauldron
-155 R Plargg, Dean of Chaos
-156 M Rowan, Scholar of Sparks
-157 R Selfless Glyphweaver
-158 R Shaile, Dean of Radiance
-159 R Torrent Sculptor
-160 R Uvilda, Dean of Perfection
-161 R Valentin, Dean of the Vein
-162 U Aether Helix
-163 M Beledros Witherbloom
-164 C Biomathematician
-165 R Blade Historian
-166 C Blood Researcher
-167 M Blot Out the Sky
-168 M Body of Research
-169 U Closing Statement
-170 C Cram Session
-171 U Creative Outburst
-172 R Culling Ritual
-173 R Culmination of Studies
-174 R Daemogoth Titan
-175 U Daemogoth Woe-Eater
-176 U Deadly Brew
-177 U Decisive Denial
-178 U Dina, Soul Steeper
-179 R Double Major
-180 R Dramatic Finale
-181 R Elemental Expressionist
-182 C Elemental Masterpiece
-183 C Elemental Summoning
-184 C Eureka Moment
-185 C Exhilarating Elocution
-186 U Expressive Iteration
-187 C Fractal Summoning
-188 U Fracture
-189 M Galazeth Prismari
-190 U Golden Ratio
-191 M Harness Infinity
-192 M Hofri Ghostforge
-193 U Humiliate
-194 C Infuse with Vitality
-195 C Inkling Summoning
-196 M Kasmina, Enigma Sage
-197 U Killian, Ink Duelist
-198 U Lorehold Apprentice
-199 R Lorehold Command
-200 U Lorehold Excavation
-201 C Lorehold Pledgemage
-202 U Maelstrom Muse
-203 M Magma Opus
-204 C Make Your Mark
-205 R Manifestation Sage
-206 C Moldering Karok
-207 U Mortality Spear
-208 C Needlethorn Drake
-209 C Oggyar Battle-Seer
-210 C Owlin Shieldmage
-211 C Pest Summoning
-212 U Practical Research
-213 U Prismari Apprentice
-214 R Prismari Command
-215 C Prismari Pledgemage
-216 U Quandrix Apprentice
-217 R Quandrix Command
-218 U Quandrix Cultivator
-219 C Quandrix Pledgemage
-220 U Quintorius, Field Historian
-221 R Radiant Scrollwielder
-222 U Reconstruct History
-223 C Relic Sloth
-224 U Returned Pastcaller
-225 U Rip Apart
-226 C Rise of Extus
-227 U Rootha, Mercurial Artist
-228 R Rushed Rebirth
-229 U Shadewing Laureate
-230 M Shadrix Silverquill
-231 U Silverquill Apprentice
-232 R Silverquill Command
-233 C Silverquill Pledgemage
-234 R Silverquill Silencer
-235 C Spectacle Mage
-236 C Spirit Summoning
-237 C Spiteful Squad
-238 C Square Up
-239 C Stonebound Mentor
-240 M Tanazir Quandrix
-241 C Teach by Example
-242 U Tend the Pests
-243 C Thrilling Discovery
-244 R Vanishing Verse
-245 M Velomachus Lorehold
-246 R Venerable Warsinger
-247 U Witherbloom Apprentice
-248 R Witherbloom Command
-249 C Witherbloom Pledgemage
-250 U Zimone, Quandrix Prodigy
-251 C Biblioplex Assistant
-252 C Campus Guide
-253 R Codie, Vociferous Codex
-254 C Cogwork Archivist
-255 C Excavated Wall
-256 C Letter of Acceptance
-257 U Reflective Golem
-258 U Spell Satchel
-259 R Strixhaven Stadium
-260 U Team Pennant
-261 U Zephyr Boots
-262 U Access Tunnel
-263 C Archway Commons
-264 R The Biblioplex
-265 R Frostboil Snarl
-266 R Furycalm Snarl
-267 R Hall of Oracles
-268 C Lorehold Campus
-269 R Necroblossom Snarl
-270 C Prismari Campus
-271 C Quandrix Campus
-272 R Shineshadow Snarl
-273 C Silverquill Campus
-274 R Vineglimmer Snarl
-275 C Witherbloom Campus
+1 C Environmental Sciences @Jokubas Uogintas
+2 C Expanded Anatomy @Slawomir Maniak
+3 C Introduction to Annihilation @Nicholas Gregory
+4 C Introduction to Prophecy @Micah Epstein
+5 M Mascot Exhibition @Randy Vargas
+6 R Wandering Archaic @Wayne Reynolds
+7 R Academic Probation @Cristi Balanescu
+8 C Ageless Guardian @Nicholas Gregory
+9 C Beaming Defiance @Manuel Castañón
+10 U Clever Lumimancer @Lie Setiawan
+11 C Combat Professor @Andrey Kuzinskiy
+12 C Defend the Campus @Izzy
+13 U Detention Vortex @Campbell White
+14 R Devastating Mastery @Jake Murray
+15 U Dueling Coach @Caio Monteiro
+16 C Eager First-Year @Cristi Balanescu
+17 R Elite Spellbinder @Ryan Pancoast
+18 C Expel @Billy Christian
+19 C Guiding Voice @Steve Argyle
+20 R Leonin Lightscribe @Steven Belledin
+21 M Mavinda, Students' Advocate @Wesley Burt
+22 C Pilgrim of the Ages @JiHun Lee
+23 C Pillardrop Rescuer @Jason A. Engle
+24 U Professor of Symbology @Jason Rainville
+25 U Reduce to Memory @Campbell White
+26 U Secret Rendezvous @Manuel Castañón
+27 R Semester's End @Alayna Danner
+28 U Show of Confidence @Paul Scott Canavan
+29 R Sparring Regimen @Tomasz Jedruszek
+30 C Star Pupil @Howard Lyon
+31 U Stonebinder's Familiar @Sam Rowan
+32 C Stonerise Spirit @Uriah Voth
+33 R Strict Proctor @Jokubas Uogintas
+34 C Study Break @Cristi Balanescu
+35 U Thunderous Orator @Brian Valeza
+36 C Arcane Subtraction @Anastasia Ovchinnikova
+37 R Archmage Emeritus @Caio Monteiro
+38 C Burrog Befuddler @Zoltan Boros
+39 C Bury in Books @Zoltan Boros
+40 C Curate @Izzy
+41 U Divide by Zero @Liiga Smilshkalne
+42 R Dream Strix @YW Tang
+43 C Frost Trickster @Uriah Voth
+44 R Ingenious Mastery @Cristi Balanescu
+45 U Kelpie Guide @Ilse Gort
+46 U Mentor's Guidance @Brian Valeza
+47 U Mercurial Transformation @Craig J Spearing
+48 R Multiple Choice @Campbell White
+49 C Pop Quiz @Matt Stewart
+50 C Reject @Zoltan Boros
+51 C Resculpt @Torstein Nordstrand
+52 C Serpentine Curve @Kekai Kotaki
+53 U Snow Day @Forrest Imel
+54 U Solve the Equation @Lie Setiawan
+55 C Soothsayer Adept @Cristi Balanescu
+56 U Symmetry Sage @Jehan Choo
+57 R Teachings of the Archaics @Lius Lasahido
+58 R Tempted by the Oriq @Billy Christian
+59 U Test of Talents @Lie Setiawan
+60 C Vortex Runner @Billy Christian
+61 C Waterfall Aerialist @Lie Setiawan
+62 U Wormhole Serpent @Tomasz Jedruszek
+63 C Arrogant Poet @Billy Christian
+64 R Baleful Mastery @Chris Cold
+65 U Brackish Trudge @Tomasz Jedruszek
+66 R Callous Bloodmage @Jokubas Uogintas
+67 R Confront the Past @Kieran Yanner
+68 C Crushing Disappointment @Andrey Kuzinskiy
+69 C Essence Infusion @Randy Vargas
+70 U Eyetwitch @Karl Kopinski
+71 U Flunk @Randy Vargas
+72 U Go Blank @Wylie Beckert
+73 C Hunt for Specimens @Randy Vargas
+74 C Lash of Malice @Slawomir Maniak
+75 C Leech Fanatic @Sean Sevestre
+76 U Mage Hunter @Mathias Kollros
+77 C Mage Hunters' Onslaught @Lie Setiawan
+78 U Necrotic Fumes @David Rapoza
+79 C Novice Dissector @Mads Ahm
+80 R Oriq Loremage @JiHun Lee
+81 U Plumb the Forbidden @Andrey Kuzinskiy
+82 R Poet's Quill @Anna Fehr
+83 M Professor Onyx @Kieran Yanner
+84 C Professor's Warning @Kieran Yanner
+85 C Promising Duskmage @Johan Grenier
+86 R Sedgemoor Witch @Igor Kieryluk
+87 C Specter of the Fens @G-host Lee
+88 U Tenured Inkcaster @Jake Murray
+89 U Umbral Juke @Bram Sels
+90 C Unwilling Ingredient @David Auden Nash
+91 U Academic Dispute @Manuel Castañón
+92 U Ardent Dustspeaker @Mads Ahm
+93 C Blood Age General @Johan Grenier
+94 R Conspiracy Theorist @Svetlin Velinov
+95 M Crackle with Power @Micah Epstein
+96 R Draconic Intervention @Johan Grenier
+97 C Dragon's Approach @Andrew Mar
+98 R Efreet Flamepainter @Marta Nael
+99 C Enthusiastic Study @Jesper Ejsing
+100 U Explosive Welcome @Mathias Kollros
+101 R Fervent Mastery @Sean Sevestre
+102 C First Day of Class @Paul Scott Canavan
+103 C Fuming Effigy @Ryan Alexander Lee
+104 U Grinning Ignus @Alayna Danner
+105 U Hall Monitor @Forrest Imel
+106 C Heated Debate @Bayard Wu
+107 U Igneous Inspiration @PINDURSKI
+108 R Illuminate History @Jokubas Uogintas
+109 C Illustrious Historian @Brian Valeza
+110 U Mascot Interception @Bryan Sola
+111 C Pigment Storm @Bayard Wu
+112 C Pillardrop Warden @Antonio José Manzanedo
+113 R Retriever Phoenix @Karl Kopinski
+114 U Start from Scratch @Bayard Wu
+115 U Storm-Kiln Artist @Manuel Castañón
+116 C Sudden Breakthrough @Colin Boyer
+117 C Tome Shredder @Sam Rowan
+118 C Twinscroll Shaman @Chris Seaman
+119 R Accomplished Alchemist @Randy Vargas
+120 R Basic Conjuration @Randy Vargas
+121 C Bayou Groff @Ilse Gort
+122 C Big Play @Nicholas Gregory
+123 U Bookwurm @Wayne Reynolds
+124 C Charge Through @Craig J Spearing
+125 U Containment Breach @Campbell White
+126 U Devouring Tendrils @Campbell White
+127 R Dragonsguard Elite @David Rapoza
+128 M Ecological Appreciation @Lie Setiawan
+129 U Emergent Sequence @Andreas Zafiratos
+130 R Exponential Growth @Izzy
+131 C Field Trip @Piotr Dura
+132 U Fortifying Draught @Andrey Kuzinskiy
+133 R Gnarled Professor @Simon Dominic
+134 U Honor Troll @Jesper Ejsing
+135 U Karok Wrangler @Dan Scott
+136 C Leyline Invocation @Liiga Smilshkalne
+137 C Mage Duel @Randy Vargas
+138 U Master Symmetrist @Forrest Imel
+139 U Overgrown Arch @Simon Dominic
+140 C Professor of Zoomancy @Rudy Siswanto
+141 C Reckless Amplimancer @Yigit Koroglu
+142 C Scurrid Colony @Lars Grant-West
+143 C Spined Karok @Filip Burburan
+144 C Springmane Cervin @Ilse Gort
+145 C Tangletrap @Suzanne Helmigh
+146 R Verdant Mastery @Cristi Balanescu
+147 R Augmenter Pugilist @Volkan Baǵa
+148 M Blex, Vexing Pest @Ekaterina Burmak
+149 M Extus, Oriq Overlord @Chase Stone & Kekai Kotaki
+150 R Flamescroll Celebrant @Uriah Voth
+151 M Jadzi, Oracle of Arcavios @Chris Rahn
+152 R Kianne, Dean of Substance @Ryan Pancoast
+153 M Mila, Crafty Companion @Kieran Yanner
+154 R Pestilent Cauldron @Dan Scott
+155 R Plargg, Dean of Chaos @Bryan Sola
+156 M Rowan, Scholar of Sparks @Magali Villeneuve
+157 R Selfless Glyphweaver @Johannes Voss
+158 R Shaile, Dean of Radiance @Yongjae Choi
+159 R Torrent Sculptor @Slawomir Maniak
+160 R Uvilda, Dean of Perfection @Jason Rainville
+161 R Valentin, Dean of the Vein @Jesper Ejsing
+162 U Aether Helix @Torstein Nordstrand
+163 M Beledros Witherbloom @Raymond Swanland
+164 C Biomathematician @Igor Kieryluk
+165 R Blade Historian @Cristi Balanescu
+166 C Blood Researcher @Cristi Balanescu
+167 M Blot Out the Sky @Olena Richards
+168 M Body of Research @Antonio José Manzanedo
+169 U Closing Statement @Craig J Spearing
+170 C Cram Session @Marta Nael
+171 U Creative Outburst @Igor Kieryluk
+172 R Culling Ritual @Lorenzo Mastroianni
+173 R Culmination of Studies @Bryan Sola
+174 R Daemogoth Titan @Chris Cold
+175 U Daemogoth Woe-Eater @Alex Brock
+176 U Deadly Brew @Randy Vargas
+177 U Decisive Denial @Lorenzo Mastroianni
+178 U Dina, Soul Steeper @Chris Rahn
+179 R Double Major @Suzanne Helmigh
+180 R Dramatic Finale @Steve Argyle
+181 R Elemental Expressionist @Zack Stella
+182 C Elemental Masterpiece @Marta Nael
+183 C Elemental Summoning @Marta Nael
+184 C Eureka Moment @Anna Steinbauer
+185 C Exhilarating Elocution @Randy Vargas
+186 U Expressive Iteration @Anastasia Ovchinnikova
+187 C Fractal Summoning @Livia Prima
+188 U Fracture @Miranda Meeks
+189 M Galazeth Prismari @Raymond Swanland
+190 U Golden Ratio @Alix Branwyn
+191 M Harness Infinity @Seb McKinnon
+192 M Hofri Ghostforge @Daarken
+193 U Humiliate @Randy Vargas
+194 C Infuse with Vitality @Andrey Kuzinskiy
+195 C Inkling Summoning @Scott Murphy
+196 M Kasmina, Enigma Sage @Tyler Jacobson
+197 U Killian, Ink Duelist @Ryan Pancoast
+198 U Lorehold Apprentice @Manuel Castañón
+199 R Lorehold Command @Jason Rainville
+200 U Lorehold Excavation @Jinho Bae
+201 C Lorehold Pledgemage @Jake Murray
+202 U Maelstrom Muse @Michele Parisi
+203 M Magma Opus @Liiga Smilshkalne
+204 C Make Your Mark @Bryan Sola
+205 R Manifestation Sage @Darren Tan
+206 C Moldering Karok @Nicholas Gregory
+207 U Mortality Spear @PINDURSKI
+208 C Needlethorn Drake @Donato Giancola
+209 C Oggyar Battle-Seer @Karl Kopinski
+210 C Owlin Shieldmage @Raoul Vitale
+211 C Pest Summoning @Zoltan Boros
+212 U Practical Research @Ekaterina Burmak
+213 U Prismari Apprentice @Igor Kieryluk
+214 R Prismari Command @Johannes Voss
+215 C Prismari Pledgemage @Marta Nael
+216 U Quandrix Apprentice @Ryan Alexander Lee
+217 R Quandrix Command @Viktor Titov
+218 U Quandrix Cultivator @Filip Burburan
+219 C Quandrix Pledgemage @Caroline Gariba
+220 U Quintorius, Field Historian @Bryan Sola
+221 R Radiant Scrollwielder @Campbell White
+222 U Reconstruct History @Campbell White
+223 C Relic Sloth @Ilse Gort
+224 U Returned Pastcaller @Grzegorz Rutkowski
+225 U Rip Apart @Anna Podedworna
+226 C Rise of Extus @Wylie Beckert
+227 U Rootha, Mercurial Artist @Chris Rahn
+228 R Rushed Rebirth @Jason Kang
+229 U Shadewing Laureate @Igor Kieryluk
+230 M Shadrix Silverquill @Raymond Swanland
+231 U Silverquill Apprentice @Mike Bierek
+232 R Silverquill Command @Bryan Sola
+233 C Silverquill Pledgemage @Denman Rooke
+234 R Silverquill Silencer @Zezhou Chen
+235 C Spectacle Mage @Caroline Gariba
+236 C Spirit Summoning @Andrey Kuzinskiy
+237 C Spiteful Squad @Manuel Castañón
+238 C Square Up @Manuel Castañón
+239 C Stonebound Mentor @Svetlin Velinov
+240 M Tanazir Quandrix @Raymond Swanland
+241 C Teach by Example @Johan Grenier
+242 U Tend the Pests @David Auden Nash
+243 C Thrilling Discovery @Campbell White
+244 R Vanishing Verse @Chris Seaman
+245 M Velomachus Lorehold @Raymond Swanland
+246 R Venerable Warsinger @Jokubas Uogintas
+247 U Witherbloom Apprentice @Josh Hass
+248 R Witherbloom Command @Dmitry Burmak
+249 C Witherbloom Pledgemage @Filip Burburan
+250 U Zimone, Quandrix Prodigy @Ryan Pancoast
+251 C Biblioplex Assistant @Raoul Vitale
+252 C Campus Guide @Slawomir Maniak
+253 R Codie, Vociferous Codex @Daniel Ljunggren
+254 C Cogwork Archivist @Joseph Meehan
+255 C Excavated Wall @Zezhou Chen
+256 C Letter of Acceptance @Daniel Ljunggren
+257 U Reflective Golem @Daniel Ljunggren
+258 U Spell Satchel @YW Tang
+259 R Strixhaven Stadium @Piotr Dura
+260 U Team Pennant @Anna Fehr
+261 U Zephyr Boots @YW Tang
+262 U Access Tunnel @Alayna Danner
+263 C Archway Commons @Piotr Dura
+264 R The Biblioplex @Piotr Dura
+265 R Frostboil Snarl @Sam Burley
+266 R Furycalm Snarl @Sam Burley
+267 R Hall of Oracles @Piotr Dura
+268 C Lorehold Campus @Titus Lunter
+269 R Necroblossom Snarl @Sam Burley
+270 C Prismari Campus @Adam Paquette
+271 C Quandrix Campus @Piotr Dura
+272 R Shineshadow Snarl @Sam Burley
+273 C Silverquill Campus @Titus Lunter
+274 R Vineglimmer Snarl @Sam Burley
+275 C Witherbloom Campus @Alayna Danner
 
 [borderless]
-276 M Professor Onyx
-277 M Mila, Crafty Companion
-278 M Rowan, Scholar of Sparks
-279 M Kasmina, Enigma Sage
+276 M Professor Onyx @Kieran Yanner
+277 M Mila, Crafty Companion @Yongjae Choi
+278 M Rowan, Scholar of Sparks @Anna Steinbauer
+279 M Kasmina, Enigma Sage @Ryan Pancoast
 
 [showcase]
-280 M Shadrix Silverquill
-281 M Galazeth Prismari
-282 M Beledros Witherbloom
-283 M Velomachus Lorehold
-284 M Tanazir Quandrix
+280 M Shadrix Silverquill @Kekai Kotaki
+281 M Galazeth Prismari @Iain McCaig
+282 M Beledros Witherbloom @Daarken
+283 M Velomachus Lorehold @Karl Kopinski
+284 M Tanazir Quandrix @Kekai Kotaki
 
 [extended art]
-285 M Mascot Exhibition
-286 R Wandering Archaic
-287 R Academic Probation
-288 R Devastating Mastery
-289 R Elite Spellbinder
-290 R Leonin Lightscribe
-291 M Mavinda, Students' Advocate
-292 R Semester's End
-293 R Sparring Regimen
-294 R Strict Proctor
-295 R Archmage Emeritus
-296 R Dream Strix
-297 R Ingenious Mastery
-298 R Multiple Choice
-299 R Teachings of the Archaics
-300 R Tempted by the Oriq
-301 R Baleful Mastery
-302 R Callous Bloodmage
-303 R Confront the Past
-304 R Oriq Loremage
-305 R Poet's Quill
-306 R Sedgemoor Witch
-307 R Conspiracy Theorist
-308 M Crackle with Power
-309 R Draconic Intervention
-310 R Efreet Flamepainter
-311 R Fervent Mastery
-312 R Illuminate History
-313 R Retriever Phoenix
-314 R Accomplished Alchemist
-315 R Basic Conjuration
-316 R Dragonsguard Elite
-317 M Ecological Appreciation
-318 R Exponential Growth
-319 R Gnarled Professor
-320 R Verdant Mastery
-321 R Augmenter Pugilist
-322 M Blex, Vexing Pest
-323 M Extus, Oriq Overlord
-324 R Flamescroll Celebrant
-325 M Jadzi, Oracle of Arcavios
-326 R Kianne, Dean of Substance
-327 R Pestilent Cauldron
-328 R Plargg, Dean of Chaos
-329 R Selfless Glyphweaver
-330 R Shaile, Dean of Radiance
-331 R Torrent Sculptor
-332 R Uvilda, Dean of Perfection
-333 R Valentin, Dean of the Vein
-334 R Blade Historian
-335 M Blot Out the Sky
-336 M Body of Research
-337 R Culling Ritual
-338 R Culmination of Studies
-339 R Daemogoth Titan
-340 R Double Major
-341 R Dramatic Finale
-342 R Elemental Expressionist
-343 M Harness Infinity
-344 M Hofri Ghostforge
-345 R Lorehold Command
-346 M Magma Opus
-347 R Manifestation Sage
-348 R Prismari Command
-349 R Quandrix Command
-350 R Radiant Scrollwielder
-351 R Rushed Rebirth
-352 R Silverquill Command
-353 R Silverquill Silencer
-354 R Vanishing Verse
-355 R Venerable Warsinger
-356 R Witherbloom Command
-357 R Codie, Vociferous Codex
-358 R Strixhaven Stadium
-359 R The Biblioplex
-360 R Frostboil Snarl
-361 R Furycalm Snarl
-362 R Hall of Oracles
-363 R Necroblossom Snarl
-364 R Shineshadow Snarl
-365 R Vineglimmer Snarl
+285 M Mascot Exhibition @Randy Vargas
+286 R Wandering Archaic @Wayne Reynolds
+287 R Academic Probation @Cristi Balanescu
+288 R Devastating Mastery @Jake Murray
+289 R Elite Spellbinder @Ryan Pancoast
+290 R Leonin Lightscribe @Steven Belledin
+291 M Mavinda, Students' Advocate @Wesley Burt
+292 R Semester's End @Alayna Danner
+293 R Sparring Regimen @Tomasz Jedruszek
+294 R Strict Proctor @Jokubas Uogintas
+295 R Archmage Emeritus @Caio Monteiro
+296 R Dream Strix @YW Tang
+297 R Ingenious Mastery @Cristi Balanescu
+298 R Multiple Choice @Campbell White
+299 R Teachings of the Archaics @Lius Lasahido
+300 R Tempted by the Oriq @Billy Christian
+301 R Baleful Mastery @Chris Cold
+302 R Callous Bloodmage @Jokubas Uogintas
+303 R Confront the Past @Kieran Yanner
+304 R Oriq Loremage @JiHun Lee
+305 R Poet's Quill @Anna Fehr
+306 R Sedgemoor Witch @Igor Kieryluk
+307 R Conspiracy Theorist @Svetlin Velinov
+308 M Crackle with Power @Micah Epstein
+309 R Draconic Intervention @Johan Grenier
+310 R Efreet Flamepainter @Marta Nael
+311 R Fervent Mastery @Sean Sevestre
+312 R Illuminate History @Jokubas Uogintas
+313 R Retriever Phoenix @Karl Kopinski
+314 R Accomplished Alchemist @Randy Vargas
+315 R Basic Conjuration @Randy Vargas
+316 R Dragonsguard Elite @David Rapoza
+317 M Ecological Appreciation @Lie Setiawan
+318 R Exponential Growth @Izzy
+319 R Gnarled Professor @Simon Dominic
+320 R Verdant Mastery @Cristi Balanescu
+321 R Augmenter Pugilist @Volkan Baǵa
+322 M Blex, Vexing Pest @Ekaterina Burmak
+323 M Extus, Oriq Overlord @Chase Stone & Kekai Kotaki
+324 R Flamescroll Celebrant @Uriah Voth
+325 M Jadzi, Oracle of Arcavios @Chris Rahn
+326 R Kianne, Dean of Substance @Ryan Pancoast
+327 R Pestilent Cauldron @Dan Scott
+328 R Plargg, Dean of Chaos @Bryan Sola
+329 R Selfless Glyphweaver @Johannes Voss
+330 R Shaile, Dean of Radiance @Yongjae Choi
+331 R Torrent Sculptor @Slawomir Maniak
+332 R Uvilda, Dean of Perfection @Jason Rainville
+333 R Valentin, Dean of the Vein @Jesper Ejsing
+334 R Blade Historian @Cristi Balanescu
+335 M Blot Out the Sky @Olena Richards
+336 M Body of Research @Antonio José Manzanedo
+337 R Culling Ritual @Lorenzo Mastroianni
+338 R Culmination of Studies @Bryan Sola
+339 R Daemogoth Titan @Chris Cold
+340 R Double Major @Suzanne Helmigh
+341 R Dramatic Finale @Steve Argyle
+342 R Elemental Expressionist @Zack Stella
+343 M Harness Infinity @Seb McKinnon
+344 M Hofri Ghostforge @Daarken
+345 R Lorehold Command @Jason Rainville
+346 M Magma Opus @Liiga Smilshkalne
+347 R Manifestation Sage @Darren Tan
+348 R Prismari Command @Johannes Voss
+349 R Quandrix Command @Viktor Titov
+350 R Radiant Scrollwielder @Campbell White
+351 R Rushed Rebirth @Jason Kang
+352 R Silverquill Command @Bryan Sola
+353 R Silverquill Silencer @Zezhou Chen
+354 R Vanishing Verse @Chris Seaman
+355 R Venerable Warsinger @Jokubas Uogintas
+356 R Witherbloom Command @Dmitry Burmak
+357 R Codie, Vociferous Codex @Daniel Ljunggren
+358 R Strixhaven Stadium @Piotr Dura
+359 R The Biblioplex @Piotr Dura
+360 R Frostboil Snarl @Sam Burley
+361 R Furycalm Snarl @Sam Burley
+362 R Hall of Oracles @Piotr Dura
+363 R Necroblossom Snarl @Sam Burley
+364 R Shineshadow Snarl @Sam Burley
+365 R Vineglimmer Snarl @Sam Burley
 
 [precon product]
-366 L Plains
-367 L Plains
-368 L Island
-369 L Island
-370 L Swamp
-371 L Swamp
-372 L Mountain
-373 L Mountain
-374 L Forest
-375 L Forest
+366 L Plains @Jonas De Ro
+367 L Plains @Titus Lunter
+368 L Island @Adam Paquette
+369 L Island @Lucas Staniec
+370 L Swamp @Titus Lunter
+371 L Swamp @Adam Paquette
+372 L Mountain @Jonas De Ro
+373 L Mountain @Grady Frederick
+374 L Forest @Grady Frederick
+375 L Forest @Adam Paquette
 
 [buy a box]
-376 R Dragonsguard Elite
+376 R Dragonsguard Elite @Daarken
 
 [promo]
-377 R Archmage Emeritus
-378 U Fracture
-379 U Expressive Iteration
-380 U Mortality Spear
-381 U Rip Apart
-382 U Decisive Denial
+377 R Archmage Emeritus @Micah Epstein
+378 U Fracture @Miranda Meeks
+379 U Expressive Iteration @Anastasia Ovchinnikova
+380 U Mortality Spear @PINDURSKI
+381 U Rip Apart @Anna Podedworna
+382 U Decisive Denial @Lorenzo Mastroianni
 
 [lesson]
 2 Environmental Sciences

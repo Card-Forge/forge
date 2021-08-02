@@ -6,13 +6,13 @@ Type=Promo
 ScryfallCode=G09
 
 [cards]
-1 R Dark Ritual
-2 R Maze of Ith
-3 R Stifle
-4 R Survival of the Fittest
-5 R Burning Wish
-6 R Bloodstained Mire
-7 R Flooded Strand
-8 R Polluted Delta
-9 R Windswept Heath
-10 R Wooded Foothills
+1 R Dark Ritual @Mark Hyzer
+2 R Maze of Ith @Zoltan Boros & Gabor Szikszai
+3 R Stifle @Eric Fortune
+4 R Survival of the Fittest @Shelly Wan
+5 R Burning Wish @Ariel Olivetti
+6 R Bloodstained Mire @Rob Alexander
+7 R Flooded Strand @Rob Alexander
+8 R Polluted Delta @Rob Alexander
+9 R Windswept Heath @Anthony S. Waters
+10 R Wooded Foothills @Rob Alexander

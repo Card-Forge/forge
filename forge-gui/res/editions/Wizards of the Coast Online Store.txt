@@ -6,4 +6,4 @@ Type=Promo
 ScryfallCode=PWOS
 
 [cards]
-1 R Serra Angel
+1 R Serra Angel @Douglas Shuler

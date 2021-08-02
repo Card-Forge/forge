@@ -13,171 +13,171 @@ ChaosDraftThemes=MIRRODIN
 ScryfallCode=DST
 
 [cards]
-37 R AEther Snap
-91 U AEther Vial
-73 R Ageless Entity
-92 U Angel's Feather
-93 C Arcane Spyglass
-94 C Arcbound Bruiser
-95 U Arcbound Crusher
-96 U Arcbound Fiend
-97 C Arcbound Hybrid
-98 U Arcbound Lancer
-99 R Arcbound Overseer
-100 R Arcbound Ravager
-101 R Arcbound Reclaimer
-102 U Arcbound Slith
-103 C Arcbound Stinger
-104 C Arcbound Worker
-1 C Auriok Glaivemaster
-105 U Auriok Siege Sled
-55 C Barbed Lightning
-163 R Blinkmoth Nexus
-38 C Burden of Greed
-19 U Carry Away
-106 U Chimeric Egg
-39 C Chittering Rats
-20 R Chromescale Drake
-107 U Coretapper
-56 C Crazed Goblin
-108 U Darksteel Brute
-164 C Darksteel Citadel
-109 R Darksteel Colossus
-110 R Darksteel Forge
-111 U Darksteel Gargoyle
-112 C Darksteel Ingot
-113 C Darksteel Pendant
-114 R Darksteel Reactor
-40 R Death Cloud
-115 U Death-Mask Duplicant
-116 U Demon's Horn
-57 U Dismantle
-117 U Dragon's Claw
-118 C Drill-Skimmer
-58 C Drooling Ogre
-119 C Dross Golem
-120 R Eater of Days
-2 C Echoing Calm
-74 C Echoing Courage
-41 C Echoing Decay
-59 C Echoing Ruin
-21 C Echoing Truth
-42 U Emissary of Despair
-3 U Emissary of Hope
-43 C Essence Drain
-75 R Fangren Firstborn
-60 U Fireball
-61 R Flamebreak
-62 R Furnace Dragon
-121 R Gemini Engine
-122 U Genesis Chamber
-123 U Geth's Grimoire
-63 U Goblin Archaeologist
-44 R Greater Harvester
-45 C Grimclaw Bats
-4 C Hallow
-124 R Heartseeker
-22 U Hoverguard Observer
-46 C Hunger of the Nim
-76 U Infested Roothold
-64 C Inflame
-125 U Juggernaut
-77 U Karstoderm
-126 U Kraken's Eye
-65 C Krark-Clan Stoker
-23 R Last Word
-5 U Leonin Battlemage
-127 C Leonin Bola
-6 R Leonin Shikari
-128 R Lich's Tomb
-7 C Loxodon Mystic
-24 C Machinate
-25 C Magnetic Flux
-129 R Memnarch
-47 R Mephitic Ooze
-8 C Metal Fatigue
-165 U Mirrodin's Core
-48 U Murderous Spoils
-130 R Mycosynth Lattice
-131 C Myr Landshaper
-132 R Myr Matrix
-133 C Myr Moonvessel
-134 U Nemesis Mask
-26 C Neurok Prodigy
-27 U Neurok Transmuter
-49 U Nim Abomination
-78 C Nourish
-135 C Oxidda Golem
-79 U Oxidize
-136 R Panoptic Mirror
-9 R Pristine Angel
-28 U Psychic Overload
-10 C Pteron Ghost
-50 R Pulse of the Dross
-11 R Pulse of the Fields
-66 R Pulse of the Forge
-29 R Pulse of the Grid
-80 R Pulse of the Tangle
-12 U Purge
-30 C Quicksilver Behemoth
-137 C Razor Golem
-81 C Reap and Sow
-82 R Rebuking Ceremony
-31 R Reshape
-32 R Retract
-13 C Ritual of Restoration
-83 R Roaring Slagwurm
-67 R Savage Beating
-51 C Scavenging Scarab
-52 U Screams from Within
-53 U Scrounge
-33 U Second Sight
-138 R Serum Powder
-139 R Shield of Kaldra
-54 R Shriveling Rot
-68 R Shunt
-140 U Skullclamp
-69 R Slobad, Goblin Tinkerer
-14 R Soulscour
-141 U Spawning Pit
-142 U Specter's Shroud
-143 R Spellbinder
-144 U Spincrusher
-145 C Spire Golem
-84 U Stand Together
-15 R Steelshaper Apprentice
-16 U Stir the Pride
-146 R Sundering Titan
-147 U Surestrike Trident
-148 R Sword of Fire and Ice
-149 R Sword of Light and Shadow
-34 R Synod Artificer
-150 U Talon of Pain
-151 C Tangle Golem
-85 C Tangle Spider
-86 U Tanglewalker
-70 U Tears of Rage
-87 C Tel-Jilad Outrider
-88 C Tel-Jilad Wolf
-17 U Test of Faith
-152 R Thought Dissector
-153 U Thunderstaff
-154 R Trinisphere
-18 R Turn the Tables
-71 C Unforge
-155 C Ur-Golem's Eye
-35 C Vedalken Engineer
-36 C Vex
-89 C Viridian Acolyte
-90 R Viridian Zealot
-156 U Voltaic Construct
-157 C Vulshok Morningstar
-72 U Vulshok War Boar
-158 R Wand of the Elements
-159 R Well of Lost Dreams
-160 C Whispersilk Cloak
-161 U Wirefly Hive
-162 U Wurm's Tooth
+37 R Aether Snap @Kev Walker
+91 U Aether Vial @Greg Hildebrandt
+73 R Ageless Entity @Jeff Miracola
+92 U Angel's Feather @Alan Pollack
+93 C Arcane Spyglass @Trevor Hairsine
+94 C Arcbound Bruiser @Christopher Moeller
+95 U Arcbound Crusher @Michael Sutfin
+96 U Arcbound Fiend @Ittoku
+97 C Arcbound Hybrid @Alan Pollack
+98 U Arcbound Lancer @John Avon
+99 R Arcbound Overseer @Carl Critchlow
+100 R Arcbound Ravager @Carl Critchlow
+101 R Arcbound Reclaimer @Jon Foster
+102 U Arcbound Slith @Vance Kovacs
+103 C Arcbound Stinger @Darrell Riche
+104 C Arcbound Worker @Darrell Riche
+1 C Auriok Glaivemaster @John Matson
+105 U Auriok Siege Sled @Jim Murray
+55 C Barbed Lightning @Hugh Jamieson
+163 R Blinkmoth Nexus @Brian Snõddy
+38 C Burden of Greed @Vance Kovacs
+19 U Carry Away @Jim Nelson
+106 U Chimeric Egg @Michael Sutfin
+39 C Chittering Rats @Tom Wänerstrand
+20 R Chromescale Drake @Ben Thompson
+107 U Coretapper @Dany Orizio
+56 C Crazed Goblin @Darrell Riche
+108 U Darksteel Brute @Nottsuo
+164 C Darksteel Citadel @John Avon
+109 R Darksteel Colossus @Carl Critchlow
+110 R Darksteel Forge @Martina Pilcerova
+111 U Darksteel Gargoyle @Ron Spencer
+112 C Darksteel Ingot @Martina Pilcerova
+113 C Darksteel Pendant @Terese Nielsen
+114 R Darksteel Reactor @Kev Walker
+40 R Death Cloud @Stephen Tappin
+115 U Death-Mask Duplicant @Thomas M. Baxa
+116 U Demon's Horn @Alan Pollack
+57 U Dismantle @Brian Snõddy
+117 U Dragon's Claw @Alan Pollack
+118 C Drill-Skimmer @Mark Zug
+58 C Drooling Ogre @Brian Snõddy
+119 C Dross Golem @Adam Rex
+120 R Eater of Days @Mark Tedin
+2 C Echoing Calm @Greg Staples
+74 C Echoing Courage @Greg Staples
+41 C Echoing Decay @Greg Staples
+59 C Echoing Ruin @Greg Staples
+21 C Echoing Truth @Greg Staples
+42 U Emissary of Despair @rk post
+3 U Emissary of Hope @rk post
+43 C Essence Drain @Tony Szczudlo
+75 R Fangren Firstborn @Tim Hildebrandt
+60 U Fireball @Dave Dorman
+61 R Flamebreak @Trevor Hairsine
+62 R Furnace Dragon @Matthew D. Wilson
+121 R Gemini Engine @Nottsuo
+122 U Genesis Chamber @Mark Tedin
+123 U Geth's Grimoire @Heather Hudson
+63 U Goblin Archaeologist @Jim Nelson
+44 R Greater Harvester @Daren Bader
+45 C Grimclaw Bats @Tom Wänerstrand
+4 C Hallow @Alex Horley-Orlandelli
+124 R Heartseeker @Michael Sutfin
+22 U Hoverguard Observer @Kev Walker
+46 C Hunger of the Nim @Puddnhead
+76 U Infested Roothold @Terese Nielsen
+64 C Inflame @Hugh Jamieson
+125 U Juggernaut @Arnie Swekel
+77 U Karstoderm @Tony Szczudlo
+126 U Kraken's Eye @Alan Pollack
+65 C Krark-Clan Stoker @Pete Venters
+23 R Last Word @Scott M. Fischer
+5 U Leonin Battlemage @Stephen Tappin
+127 C Leonin Bola @Christopher Moeller
+6 R Leonin Shikari @Wayne England
+128 R Lich's Tomb @Matt Cavotta
+7 C Loxodon Mystic @Edward P. Beard, Jr.
+24 C Machinate @Wayne England
+25 C Magnetic Flux @Alan Rabinowitz
+129 R Memnarch @Carl Critchlow
+47 R Mephitic Ooze @Alex Horley-Orlandelli
+8 C Metal Fatigue @Arnie Swekel
+165 U Mirrodin's Core @Greg Staples
+48 U Murderous Spoils @Adam Rex
+130 R Mycosynth Lattice @Anthony S. Waters
+131 C Myr Landshaper @Greg Staples
+132 R Myr Matrix @Mark Tedin
+133 C Myr Moonvessel @Dany Orizio
+134 U Nemesis Mask @Adam Rex
+26 C Neurok Prodigy @Puddnhead
+27 U Neurok Transmuter @Mark Zug
+49 U Nim Abomination @Jim Murray
+78 C Nourish @Scott M. Fischer
+135 C Oxidda Golem @Greg Staples
+79 U Oxidize @Kev Walker
+136 R Panoptic Mirror @Glen Angus
+9 R Pristine Angel @Scott M. Fischer
+28 U Psychic Overload @Jeremy Jarvis
+10 C Pteron Ghost @Edward P. Beard, Jr.
+50 R Pulse of the Dross @Paolo Parente
+11 R Pulse of the Fields @Paolo Parente
+66 R Pulse of the Forge @Paolo Parente
+29 R Pulse of the Grid @Wayne England
+80 R Pulse of the Tangle @Wayne England
+12 U Purge @Pete Venters
+30 C Quicksilver Behemoth @Anthony S. Waters
+137 C Razor Golem @Christopher Moeller
+81 C Reap and Sow @Rob Alexander
+82 R Rebuking Ceremony @Ittoku
+31 R Reshape @Jon Foster
+32 R Retract @Matt Cavotta
+13 C Ritual of Restoration @Dany Orizio
+83 R Roaring Slagwurm @David Martin
+67 R Savage Beating @Matt Thompson
+51 C Scavenging Scarab @Jeff Easley
+52 U Screams from Within @Hugh Jamieson
+53 U Scrounge @Pete Venters
+33 U Second Sight @Luca Zontini
+138 R Serum Powder @Matt Thompson
+139 R Shield of Kaldra @Donato Giancola
+54 R Shriveling Rot @Alex Horley-Orlandelli
+68 R Shunt @Greg Hildebrandt
+140 U Skullclamp @Luca Zontini
+69 R Slobad, Goblin Tinkerer @Kev Walker
+14 R Soulscour @Kev Walker
+141 U Spawning Pit @Tony Szczudlo
+142 U Specter's Shroud @Greg Hildebrandt
+143 R Spellbinder @Ron Spencer
+144 U Spincrusher @Greg Staples
+145 C Spire Golem @Daren Bader
+84 U Stand Together @Luca Zontini
+15 R Steelshaper Apprentice @Tim Hildebrandt
+16 U Stir the Pride @Matt Cavotta
+146 R Sundering Titan @Jim Murray
+147 U Surestrike Trident @Ben Thompson
+148 R Sword of Fire and Ice @Mark Zug
+149 R Sword of Light and Shadow @Mark Zug
+34 R Synod Artificer @Mark Zug
+150 U Talon of Pain @Daren Bader
+151 C Tangle Golem @Arnie Swekel
+85 C Tangle Spider @Terese Nielsen
+86 U Tanglewalker @Pete Venters
+70 U Tears of Rage @Pete Venters
+87 C Tel-Jilad Outrider @Paolo Parente
+88 C Tel-Jilad Wolf @Paolo Parente
+17 U Test of Faith @Vance Kovacs
+152 R Thought Dissector @Matt Cavotta
+153 U Thunderstaff @Kaja Foglio
+154 R Trinisphere @Tim Hildebrandt
+18 R Turn the Tables @Christopher Moeller
+71 C Unforge @Kev Walker
+155 C Ur-Golem's Eye @Heather Hudson
+35 C Vedalken Engineer @Lars Grant-West
+36 C Vex @Brian Snõddy
+89 C Viridian Acolyte @D. Alexander Gregory
+90 R Viridian Zealot @Kev Walker
+156 U Voltaic Construct @Jeff Easley
+157 C Vulshok Morningstar @David Martin
+72 U Vulshok War Boar @Pete Venters
+158 R Wand of the Elements @Thomas M. Baxa
+159 R Well of Lost Dreams @Jeff Miracola
+160 C Whispersilk Cloak @Luca Zontini
+161 U Wirefly Hive @Nottsuo
+162 U Wurm's Tooth @Alan Pollack
 
 [tokens]
 twin

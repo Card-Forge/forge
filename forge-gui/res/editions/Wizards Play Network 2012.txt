@@ -6,6 +6,6 @@ Type=Promo
 ScryfallCode=PWP12
 
 [cards]
-79 R Gather the Townsfolk
-81 R Curse of Thirst
-82 R Nearheath Stalker
+79 R Gather the Townsfolk @Bud Cook
+81 R Curse of Thirst @Dave Kendall
+82 R Nearheath Stalker @Steve Prescott

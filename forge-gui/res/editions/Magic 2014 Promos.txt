@@ -6,8 +6,8 @@ Type=Promo
 ScryfallCode=PM14
 
 [cards]
-21★ C Hive Stirrings
-48★ R Colossal Whale
-141★ R Goblin Diplomats
-185★ R Megantic Sliver
-215★ R Ratchet Bomb
+21★ C Hive Stirrings @Johann Bodin
+48★ R Colossal Whale @Erica Yang
+141★ R Goblin Diplomats @Jesper Ejsing
+185★ R Megantic Sliver @Lucas Graciano
+215★ R Ratchet Bomb @Dan Scott

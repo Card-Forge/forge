@@ -7,21 +7,21 @@ Type=Collector_Edition
 ScryfallCode=V12
 
 [cards]
-1 M Ancient Tomb
-2 M Boseiju, Who Shelters All
-3 M Cephalid Coliseum
-4 M Desert
-5 M Dryad Arbor
-6 M Forbidden Orchard
-7 M Glacial Chasm
-8 M Grove of the Burnwillows
-9 M High Market
-10 M Maze of Ith
-11 M Murmuring Bosk
-12 M Shivan Gorge
-13 M Urborg, Tomb of Yawgmoth
-14 M Vesuva
-15 M Windbrisk Heights
+1 M Ancient Tomb @Colin MacNeil
+2 M Boseiju, Who Shelters All @Ralph Horsley
+3 M Cephalid Coliseum @Cliff Childs
+4 M Desert @Glen Angus
+5 M Dryad Arbor @Brad Rigney
+6 M Forbidden Orchard @Daniel Ljunggren
+7 M Glacial Chasm @Mike Bierek
+8 M Grove of the Burnwillows @Cliff Childs
+9 M High Market @Carl Critchlow
+10 M Maze of Ith @Yeong-Hao Han
+11 M Murmuring Bosk @John Avon
+12 M Shivan Gorge @Adam Paquette
+13 M Urborg, Tomb of Yawgmoth @John Avon
+14 M Vesuva @Zoltan Boros & Gabor Szikszai
+15 M Windbrisk Heights @Omar Rayyan
 
 [tokens]
 c_1_1_spirit

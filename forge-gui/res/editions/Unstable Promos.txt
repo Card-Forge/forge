@@ -7,4 +7,4 @@ Border=Silver
 ScryfallCode=PUST
 
 [cards]
-108 R Earl of Squirrel
+108 R Earl of Squirrel @Matt Cavotta

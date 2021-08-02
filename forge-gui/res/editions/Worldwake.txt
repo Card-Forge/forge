@@ -12,151 +12,151 @@ FatPackExtraSlots=40 BasicLands ZEN
 ScryfallCode=WWK
 
 [cards]
-24 C AEther Tradewinds
-47 M Abyssal Persecutor
-1 M Admonition Angel
-48 R Agadeem Occultist
-71 C Akoum Battlesinger
-121 R Amulet of Vigor
-49 R Anowon, the Ruin Sage
-2 C Apex Hawks
-95 C Arbor Elf
-3 R Archon of Redemption
-96 M Avenger of Zendikar
-122 R Basilisk Collar
-4 C Battle Hurda
-72 R Bazaar Trader
-97 U Bestial Menace
-50 U Bloodhusk Ritualist
-132 C Bojuka Bog
-51 C Bojuka Brigand
-52 C Brink of Disaster
-73 C Bull Rush
-53 R Butcher of Malakir
-25 C Calcite Snapper
-98 U Canopy Cover
-54 U Caustic Crawler
-133 R Celestial Colonnade
-74 R Chain Reaction
-75 C Claws of Valakut
-76 M Comet Storm
-55 C Corrupted Zendikon
-77 C Cosi's Ravager
-134 R Creeping Tar Pit
-78 C Crusher Zendikon
-79 U Cunning Sparkmage
-56 C Dead Reckoning
-57 R Death's Shadow
-80 U Deathforge Shaman
-26 C Dispel
-81 M Dragonmaster Outcast
-135 U Dread Statuary
-27 C Enclave Elite
-123 U Everflowing Chalice
-99 C Explore
-136 M Eye of Ugin
-100 C Feral Contest
-5 C Fledgling Griffin
-101 C Gnarlid Pack
-82 C Goblin Roughrider
-28 R Goliath Sphinx
-102 C Grappler Spider
-103 C Graypelt Hunter
-83 C Grotag Thrasher
-104 C Groundswell
-6 C Guardian Zendikon
-7 U Hada Freeblade
-137 C Halimar Depths
-29 C Halimar Excavator
-124 U Hammer of Ruin
-105 R Harabaz Druid
-125 C Hedron Rover
-30 U Horizon Drake
-8 C Iona's Judgment
-31 M Jace, the Mind Sculptor
-58 C Jagwasp Swarm
-9 C Join the Ranks
-106 R Joraga Warcaller
-32 R Jwari Shapeshifter
-59 R Kalastria Highborn
-84 R Kazuul, Tyrant of the Cliffs
-138 C Khalni Garden
-126 C Kitesail
-10 C Kitesail Apprentice
-11 U Kor Firewalker
-139 R Lavaclaw Reaches
-107 U Leatherback Baloth
-12 U Lightkeeper of Emeria
-13 U Loam Lion
-127 R Lodestone Golem
-14 C Marsh Threader
-15 R Marshal's Anthem
-60 C Mire's Toll
-85 R Mordant Dragon
-33 C Mysteries of the Deep
-108 C Nature's Claim
-61 U Nemesis Trap
-119 M Novablast Wurm
-109 M Omnath, Locus of Mana
-16 U Perimeter Captain
-34 U Permafrost Trap
-128 C Pilgrim's Eye
-62 C Pulse Tracker
-63 C Quag Vampires
-110 U Quest for Renewal
-35 R Quest for Ula's Temple
-86 U Quest for the Goblin Lord
-64 R Quest for the Nihil Stone
-140 C Quicksand
-141 R Raging Ravine
-129 U Razor Boomerang
-17 U Refraction Trap
-18 C Rest for the Weary
-87 U Ricochet Trap
-88 C Roiling Terrain
-19 U Ruin Ghost
-89 U Rumbling Aftershocks
-65 C Ruthless Cullblade
-66 U Scrib Nibblers
-90 C Searing Blaze
-130 R Seer's Sundial
-36 U Sejiri Merfolk
-142 C Sejiri Steppe
-37 R Selective Memory
-67 U Shoreline Salvager
-91 C Skitter of Lizards
-92 U Slavering Nulls
-111 U Slingbow Trap
-143 C Smoldering Spires
-68 U Smother
-112 C Snapping Creeper
-38 U Spell Contortion
-144 R Stirring Wildwood
-93 R Stone Idol Trap
-20 R Stoneforge Mystic
-113 R Strength of the Tajuru
-114 U Summit Apes
-39 C Surrakar Banisher
-21 R Talus Paladin
-145 U Tectonic Edge
-115 R Terastodon
-22 R Terra Eternal
-40 R Thada Adel, Acquisitor
-41 U Tideforce Elemental
-69 C Tomb Hex
-42 C Treasure Hunt
-94 U Tuktuk Scrapper
-43 C Twitch
-70 U Urge to Feed
-44 U Vapor Snare
-116 U Vastwood Animist
-117 C Vastwood Zendikon
-23 C Veteran's Reflexes
-45 U Voyager Drake
-131 C Walking Atlas
-46 C Wind Zendikon
-118 R Wolfbriar Elemental
-120 M Wrexial, the Risen Deep
+24 C Aether Tradewinds @Kieran Yanner
+47 M Abyssal Persecutor @Chippy
+1 M Admonition Angel @Steve Argyle
+48 R Agadeem Occultist @Vance Kovacs
+71 C Akoum Battlesinger @Adi Granov
+121 R Amulet of Vigor @Warren Mahy
+49 R Anowon, the Ruin Sage @Dan Scott
+2 C Apex Hawks @David Palumbo
+95 C Arbor Elf @rk post
+3 R Archon of Redemption @Steven Belledin
+96 M Avenger of Zendikar @Zoltan Boros & Gabor Szikszai
+122 R Basilisk Collar @Howard Lyon
+4 C Battle Hurda @Christopher Moeller
+72 R Bazaar Trader @Matt Cavotta
+97 U Bestial Menace @Andrew Robinson
+50 U Bloodhusk Ritualist @Daarken
+132 C Bojuka Bog @Howard Lyon
+51 C Bojuka Brigand @Johann Bodin
+52 C Brink of Disaster @Alex Horley-Orlandelli
+73 C Bull Rush @Christopher Moeller
+53 R Butcher of Malakir @Jason Chan
+25 C Calcite Snapper @David Palumbo
+98 U Canopy Cover @Igor Kieryluk
+54 U Caustic Crawler @Raymond Swanland
+133 R Celestial Colonnade @Eric Deschamps
+74 R Chain Reaction @Trevor Claxton
+75 C Claws of Valakut @Igor Kieryluk
+76 M Comet Storm @Jung Park
+55 C Corrupted Zendikon @John Avon
+77 C Cosi's Ravager @Zoltan Boros & Gabor Szikszai
+134 R Creeping Tar Pit @Jason Felix
+78 C Crusher Zendikon @Ryan Pancoast
+79 U Cunning Sparkmage @Wayne Reynolds
+56 C Dead Reckoning @Svetlin Velinov
+57 R Death's Shadow @Howard Lyon
+80 U Deathforge Shaman @Dave Kendall
+26 C Dispel @Vance Kovacs
+81 M Dragonmaster Outcast @Raymond Swanland
+135 U Dread Statuary @Jason A. Engle
+27 C Enclave Elite @Igor Kieryluk
+123 U Everflowing Chalice @Steve Argyle
+99 C Explore @John Avon
+136 M Eye of Ugin @James Paick
+100 C Feral Contest @Daarken
+5 C Fledgling Griffin @Christopher Moeller
+101 C Gnarlid Pack @Johann Bodin
+82 C Goblin Roughrider @Jesper Ejsing
+28 R Goliath Sphinx @Greg Staples
+102 C Grappler Spider @Austin Hsu
+103 C Graypelt Hunter @Svetlin Velinov
+83 C Grotag Thrasher @Jesper Ejsing
+104 C Groundswell @Chris Rahn
+6 C Guardian Zendikon @John Avon
+7 U Hada Freeblade @Cyril Van Der Haegen
+137 C Halimar Depths @Volkan Baǵa
+29 C Halimar Excavator @Kev Walker
+124 U Hammer of Ruin @Vincent Proce
+105 R Harabaz Druid @Wayne Reynolds
+125 C Hedron Rover @Jason Felix
+30 U Horizon Drake @Adi Granov
+8 C Iona's Judgment @Mike Bierek
+31 M Jace, the Mind Sculptor @Jason Chan
+58 C Jagwasp Swarm @Austin Hsu
+9 C Join the Ranks @Kekai Kotaki
+106 R Joraga Warcaller @Steven Belledin
+32 R Jwari Shapeshifter @Kev Walker
+59 R Kalastria Highborn @D. Alexander Gregory
+84 R Kazuul, Tyrant of the Cliffs @Paul Bonner
+138 C Khalni Garden @Ryan Pancoast
+126 C Kitesail @Cyril Van Der Haegen
+10 C Kitesail Apprentice @Austin Hsu
+11 U Kor Firewalker @Matt Stewart
+139 R Lavaclaw Reaches @Véronique Meignaud
+107 U Leatherback Baloth @Dave Kendall
+12 U Lightkeeper of Emeria @James Ryman
+13 U Loam Lion @Daniel Ljunggren
+127 R Lodestone Golem @Chris Rahn
+14 C Marsh Threader @David Palumbo
+15 R Marshal's Anthem @Matt Stewart
+60 C Mire's Toll @Alex Horley-Orlandelli
+85 R Mordant Dragon @Scott Chou
+33 C Mysteries of the Deep @Véronique Meignaud
+108 C Nature's Claim @Daarken
+61 U Nemesis Trap @Ryan Pancoast
+119 M Novablast Wurm @Michael Komarck
+109 M Omnath, Locus of Mana @Mike Bierek
+16 U Perimeter Captain @Steven Belledin
+34 U Permafrost Trap @Howard Lyon
+128 C Pilgrim's Eye @Dan Scott
+62 C Pulse Tracker @Andrew Robinson
+63 C Quag Vampires @Jason Felix
+110 U Quest for Renewal @Tomasz Jedruszek
+35 R Quest for Ula's Temple @Rob Alexander
+86 U Quest for the Goblin Lord @Jesper Ejsing
+64 R Quest for the Nihil Stone @Mike Bierek
+140 C Quicksand @Matt Stewart
+141 R Raging Ravine @Todd Lockwood
+129 U Razor Boomerang @Franz Vohwinkel
+17 U Refraction Trap @Zoltan Boros & Gabor Szikszai
+18 C Rest for the Weary @James Paick
+87 U Ricochet Trap @Jaime Jones
+88 C Roiling Terrain @Steve Prescott
+19 U Ruin Ghost @Jason A. Engle
+89 U Rumbling Aftershocks @Tomasz Jedruszek
+65 C Ruthless Cullblade @rk post
+66 U Scrib Nibblers @Daren Bader
+90 C Searing Blaze @James Paick
+130 R Seer's Sundial @Franz Vohwinkel
+36 U Sejiri Merfolk @Anthony Francisco
+142 C Sejiri Steppe @Anthony Francisco
+37 R Selective Memory @Chippy
+67 U Shoreline Salvager @Igor Kieryluk
+91 C Skitter of Lizards @Warren Mahy
+92 U Slavering Nulls @Dave Kendall
+111 U Slingbow Trap @Daniel Ljunggren
+143 C Smoldering Spires @Rob Alexander
+68 U Smother @Karl Kopinski
+112 C Snapping Creeper @Cyril Van Der Haegen
+38 U Spell Contortion @Wayne Reynolds
+144 R Stirring Wildwood @Eric Deschamps
+93 R Stone Idol Trap @Jung Park
+20 R Stoneforge Mystic @Mike Bierek
+113 R Strength of the Tajuru @Christopher Moeller
+114 U Summit Apes @Véronique Meignaud
+39 C Surrakar Banisher @Matt Cavotta
+21 R Talus Paladin @Svetlin Velinov
+145 U Tectonic Edge @Vincent Proce
+115 R Terastodon @Lars Grant-West
+22 R Terra Eternal @Daniel Ljunggren
+40 R Thada Adel, Acquisitor @Andrew Robinson
+41 U Tideforce Elemental @Donato Giancola
+69 C Tomb Hex @Izzy
+42 C Treasure Hunt @Daren Bader
+94 U Tuktuk Scrapper @Matt Cavotta
+43 C Twitch @Scott Chou
+70 U Urge to Feed @Johann Bodin
+44 U Vapor Snare @Trevor Claxton
+116 U Vastwood Animist @Raymond Swanland
+117 C Vastwood Zendikon @Rob Alexander
+23 C Veteran's Reflexes @Scott Chou
+45 U Voyager Drake @Kieran Yanner
+131 C Walking Atlas @Rob Alexander
+46 C Wind Zendikon @Vincent Proce
+118 R Wolfbriar Elemental @Chippy
+120 M Wrexial, the Risen Deep @Eric Deschamps
 
 [tokens]
 w_1_1_soldier_ally

@@ -6,8 +6,8 @@ Type=Promo
 ScryfallCode=PISD
 
 [cards]
-13 R Elite Inquisitor
-64 R Ludevic's Test Subject
-97 U Diregraf Ghoul
-140 R Devil's Play
-193 R Mayor of Avabruck
+13 R Elite Inquisitor @Igor Kieryluk
+64★ R Ludevic's Test Subject @Karl Kopinski
+97 U Diregraf Ghoul @Austin Hsu
+140 R Devil's Play @Raymond Swanland
+193★ R Mayor of Avabruck @Ryan Pancoast

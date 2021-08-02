@@ -8,44 +8,44 @@ Alias=H09
 ScryfallCode=H09
 
 [cards]
-13 U Acidic Sliver
-3 C Amoeboid Changeling
-31 U Ancient Ziggurat
-28 C Aphetto Dredging
-16 U Armor Sliver
-18 U Barbed Sliver
-22 R Brood Sliver
-5 C Clot Sliver
-29 R Coat of Arms
-11 U Crystalline Sliver
-27 C Distant Melody
-41 L Forest
-6 C Frenzy Sliver
-21 R Fungus Sliver
-25 U Fury Sliver
-8 C Gemhide Sliver
-7 C Heart Sliver
-26 U Heartstone
-12 U Hibernation Sliver
-19 C Homing Sliver
-38 L Island
-1 C Metallic Sliver
-23 U Might Sliver
-40 L Mountain
-9 C Muscle Sliver
-20 U Necrotic Sliver
-37 L Plains
-10 C Quick Sliver
-32 R Rootbound Crag
-33 C Rupture Spire
-24 M Sliver Overlord
-17 U Spectral Sliver
-14 U Spined Sliver
-39 L Swamp
-34 C Terramorphic Expanse
-15 U Victual Sliver
-2 C Virulent Sliver
-35 U Vivid Creek
-36 U Vivid Grove
-30 R Wild Pair
-4 C Winged Sliver
+13 U Acidic Sliver @Jeff Miracola
+3 C Amoeboid Changeling @Nils Hamm
+31 U Ancient Ziggurat @John Avon
+28 C Aphetto Dredging @Monte Michael Moore
+16 U Armor Sliver @Scott Kirschner
+18 U Barbed Sliver @Scott Kirschner
+22 R Brood Sliver @Ron Spears
+5 C Clot Sliver @Jeff Laubenstein
+29 R Coat of Arms @Scott M. Fischer
+11 U Crystalline Sliver @Allen Williams
+27 C Distant Melody @Omar Rayyan
+41 L Forest @Douglas Shuler
+6 C Frenzy Sliver @Glen Angus
+21 R Fungus Sliver @Daniel Gelon
+25 U Fury Sliver @Paolo Parente
+8 C Gemhide Sliver @John Matson
+7 C Heart Sliver @Ron Spencer
+26 U Heartstone @John Matson
+12 U Hibernation Sliver @Scott Kirschner
+19 C Homing Sliver @Trevor Hairsine
+38 L Island @Randy Gallegos
+1 C Metallic Sliver @Allen Williams
+23 U Might Sliver @Jeff Miracola
+40 L Mountain @Mark Poole
+9 C Muscle Sliver @Richard Kane Ferguson
+20 U Necrotic Sliver @Dave Allsop
+37 L Plains @Terese Nielsen
+10 C Quick Sliver @John Avon
+32 R Rootbound Crag @Matt Stewart
+33 C Rupture Spire @Jaime Jones
+24 M Sliver Overlord @Tony Szczudlo
+17 U Spectral Sliver @Pete Venters
+14 U Spined Sliver @Ron Spencer
+39 L Swamp @Brom
+34 C Terramorphic Expanse @Dan Scott
+15 U Victual Sliver @Terese Nielsen
+2 C Virulent Sliver @Franz Vohwinkel
+35 U Vivid Creek @Fred Fields
+36 U Vivid Grove @Howard Lyon
+30 R Wild Pair @Mark Brill
+4 C Winged Sliver @Anthony S. Waters

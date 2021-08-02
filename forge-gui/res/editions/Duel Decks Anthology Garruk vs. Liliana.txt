@@ -7,69 +7,69 @@ Type=Duel_Deck
 ScryfallCode=GVL
 
 [cards]
-1 M Garruk Wildspeaker
-2 C Basking Rootwalla
-3 U Albino Troll
-4 C Vine Trellis
-5 C Wild Mongrel
-6 C Wirewood Savage
-7 C Blastoderm
-8 R Ravenous Baloth
-9 U Stampeding Wildebeests
-10 U Indrik Stomphowler
-11 C Krosan Tusker
-12 R Plated Slagwurm
-13 U Genju of the Cedars
-14 C Giant Growth
-15 C Rancor
-16 C Lignify
-17 C Nature's Lore
-18 U Elephant Guide
-19 C Invigorate
-20 C Serrated Arrows
-21 U Harmonize
-22 R Rude Awakening
-23 U Beast Attack
-24 U Overrun
-25 U Windstorm
-26 C Slippery Karst
-27 U Treetop Village
-28 L Forest
-29 L Forest
-30 L Forest
-31 L Forest
-32 M Liliana Vess
-33 C Deathgreeter
-34 U Ghost-Lit Stalker
-35 C Vampire Bats
-36 C Drudge Skeletons
-37 C Ravenous Rats
-38 U Fleshbag Marauder
-39 C Phyrexian Rager
-40 C Urborg Syphon-Mage
-41 U Wall of Bone
-42 C Faerie Macabre
-43 U Howling Banshee
-44 U Keening Banshee
-45 C Twisted Abomination
-46 R Skeletal Vampire
-47 U Genju of the Fens
-48 R Bad Moon
-49 C Sign in Blood
-50 C Vicious Hunger
-51 C Ichor Slick
-52 C Hideous End
-53 C Snuff Out
-54 C Tendrils of Corruption
-55 R Mutilate
-56 U Rise from the Grave
-57 U Corrupt
-58 U Enslave
-59 C Polluted Mire
-60 L Swamp
-61 L Swamp
-62 L Swamp
-63 L Swamp
+1 M Garruk Wildspeaker @Terese Nielsen
+2 C Basking Rootwalla @Heather Hudson
+3 U Albino Troll @Paolo Parente
+4 C Vine Trellis @DiTerlizzi
+5 C Wild Mongrel @Anthony S. Waters
+6 C Wirewood Savage @DiTerlizzi
+7 C Blastoderm @Nils Hamm
+8 R Ravenous Baloth @Arnie Swekel
+9 U Stampeding Wildebeests @Randy Gallegos
+10 U Indrik Stomphowler @Carl Critchlow
+11 C Krosan Tusker @Kev Walker
+12 R Plated Slagwurm @Justin Sweet
+13 U Genju of the Cedars @Arnie Swekel
+14 C Giant Growth @Matt Cavotta
+15 C Rancor @Kev Walker
+16 C Lignify @Jesper Ejsing
+17 C Nature's Lore @Terese Nielsen
+18 U Elephant Guide @Jim Nelson
+19 C Invigorate @Dan Frazier
+20 C Serrated Arrows @John Avon
+21 U Harmonize @Paul Lee
+22 R Rude Awakening @Ittoku
+23 U Beast Attack @Ciruelo
+24 U Overrun @Carl Critchlow
+25 U Windstorm @Rob Alexander
+26 C Slippery Karst @Stephen Daniele
+27 U Treetop Village @Rob Alexander
+28 L Forest @Rob Alexander
+29 L Forest @Glen Angus
+30 L Forest @Steven Belledin
+31 L Forest @Jim Nelson
+32 M Liliana Vess @Terese Nielsen
+33 C Deathgreeter @Dominick Domingo
+34 U Ghost-Lit Stalker @Hideaki Takamura
+35 C Vampire Bats @Chippy
+36 C Drudge Skeletons @Daarken
+37 C Ravenous Rats @Carl Critchlow
+38 U Fleshbag Marauder @Pete Venters
+39 C Phyrexian Rager @Mark Tedin
+40 C Urborg Syphon-Mage @Greg Staples
+41 U Wall of Bone @Jaime Jones
+42 C Faerie Macabre @rk post
+43 U Howling Banshee @Andrew Robinson
+44 U Keening Banshee @Robert Bliss
+45 C Twisted Abomination @Daren Bader
+46 R Skeletal Vampire @Wayne Reynolds
+47 U Genju of the Fens @Tsutomu Kawade
+48 R Bad Moon @Gary Leach
+49 C Sign in Blood @Howard Lyon
+50 C Vicious Hunger @Massimilano Frezzato
+51 C Ichor Slick @Zoltan Boros & Gabor Szikszai
+52 C Hideous End @Zoltan Boros & Gabor Szikszai
+53 C Snuff Out @Steve Argyle
+54 C Tendrils of Corruption @Vance Kovacs
+55 R Mutilate @Zoltan Boros & Gabor Szikszai
+56 U Rise from the Grave @Vance Kovacs
+57 U Corrupt @Dave Allsop
+58 U Enslave @Zoltan Boros & Gabor Szikszai
+59 C Polluted Mire @Stephen Daniele
+60 L Swamp @Stephan Martiniere
+61 L Swamp @Christopher Moeller
+62 L Swamp @Anthony S. Waters
+63 L Swamp @Richard Wright
 
 [tokens]
 b_1_1_bat_flying

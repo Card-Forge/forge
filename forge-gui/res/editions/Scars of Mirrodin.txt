@@ -13,255 +13,255 @@ ChaosDraftThemes=MIRRODIN
 ScryfallCode=SOM
 
 [cards]
-1 U Abuna Acolyte
-136 C Accorder's Shield
-108 U Acid Web Spider
-109 C Alpha Tyrranax
-81 U Arc Trail
-28 R Argent Sphinx
-137 R Argentum Armor
-2 C Arrest
-110 R Asceticism
-82 C Assault Strobe
-3 U Auriok Edgewright
-138 C Auriok Replica
-4 C Auriok Sunchaser
-139 U Barbed Battlegear
-83 U Barrage Ogre
-111 U Bellowing Tanglewurm
-224 R Blackcleave Cliffs
-54 C Blackcleave Goblin
-84 C Blade-Tribe Berserkers
-140 C Bladed Pinions
-55 C Bleak Coven Vampires
-112 C Blight Mamba
-56 C Blistergrub
-85 U Bloodshot Trainee
-113 C Blunt the Assault
-29 C Bonds of Quicksilver
-114 C Carapace Forger
-57 R Carnifex Demon
-115 U Carrion Call
-86 R Cerebral Eruption
-141 R Chimeric Mass
-142 C Chrome Steed
-143 U Clone Shell
-144 U Contagion Clasp
-145 R Contagion Engine
-58 C Contagious Nim
-146 C Copper Myr
-116 C Copperhorn Scout
-225 R Copperline Gorge
-147 C Corpse Cur
-59 U Corrupted Harvester
-148 U Culling Dais
-117 C Cystbearer
-30 U Darkslick Drake
-226 R Darkslick Shores
-149 U Darksteel Axe
-150 R Darksteel Juggernaut
-151 U Darksteel Myr
-152 U Darksteel Sentinel
-5 U Dispense Justice
-31 C Disperse
-32 R Dissipation Field
-60 C Dross Hopper
-153 C Echo Circlet
-6 M Elspeth Tirel
-87 U Embersmith
-118 R Engulfing Slagwurm
-154 R Etched Champion
-61 U Exsanguinate
-120 C Ezuri's Archers
-121 R Ezuri's Brigade
-119 R Ezuri, Renegade Leader
-88 C Ferrovore
-89 C Flameborn Hellion
-62 U Flesh Allergy
-155 C Flight Spellbomb
-246 L Forest
-246 L Forest
-246 L Forest
-246 L Forest
-7 C Fulgent Distraction
-63 C Fume Spitter
-90 U Furnace Celebration
-91 C Galvanic Blast
-122 R Genesis Wave
-64 M Geth, Lord of the Vault
-8 C Ghalma's Warden
-9 U Glimmerpoint Stag
-227 C Glimmerpost
-10 C Glint Hawk
-156 C Glint Hawk Idol
-92 C Goblin Gaveleer
-157 C Gold Myr
-158 C Golden Urn
-159 U Golem Artisan
-160 C Golem Foundry
-161 U Golem's Heart
-162 U Grafted Exoskeleton
-33 R Grand Architect
-65 C Grasp of Darkness
-163 R Grindclock
-34 U Halt Order
-66 R Hand of the Praetors
-164 U Heavy Arbalest
-93 R Hoard-Smelter Dragon
-165 C Horizon Spellbomb
-67 U Ichor Rats
-166 C Ichorclaw Myr
-11 M Indomitable Archangel
-35 R Inexorable Tide
-167 U Infiltration Lens
-68 C Instill Infection
-168 C Iron Myr
-235 L Island
-235 L Island
-235 L Island
-235 L Island
-13 C Kemba's Skyguard
-12 R Kemba, Kha Regent
-94 M Koth of the Hammer
-169 R Kuldotha Forgemaster
-95 R Kuldotha Phoenix
-96 C Kuldotha Rebirth
-170 C Leaden Myr
-14 R Leonin Arbiter
-123 M Liege of the Tangle
-124 U Lifesmith
-171 U Liquimetal Coating
-172 R Livewire Lash
-15 C Loxodon Wayfarer
-36 C Lumengrid Drake
-173 M Lux Cannon
-97 C Melt Terrain
-174 U Memnite
-69 R Memoricide
-175 R Mimic Vat
-176 M Mindslaver
-125 C Molder Beast
-98 R Molten Psyche
-177 M Molten-Tail Masticore
-70 C Moriok Reaver
-178 C Moriok Replica
-242 L Mountain
-242 L Mountain
-242 L Mountain
-242 L Mountain
-179 M Mox Opal
-180 R Myr Battlesphere
-181 U Myr Galvanizer
-182 R Myr Propagator
-183 R Myr Reservoir
-16 U Myrsmith
-184 C Necrogen Censer
-71 U Necrogen Scudder
-185 U Necropede
-72 R Necrotic Ooze
-37 C Neurok Invisimancer
-186 C Neurok Replica
-187 C Nihil Spellbomb
-188 R Nim Deathmantle
-99 U Ogre Geargrabber
-189 C Origin Spellbomb
-100 C Oxidda Daredevil
-101 U Oxidda Scrapmelter
-73 R Painful Quandary
-74 U Painsmith
-190 U Palladium Myr
-191 C Panic Spellbomb
-192 C Perilous Myr
-75 C Plague Stinger
-233 L Plains
-233 L Plains
-233 L Plains
-233 L Plains
-38 C Plated Seastrider
-193 M Platinum Emperion
-194 R Precursor Golem
-195 R Prototype Portal
-76 C Psychic Miasma
-126 R Putrefax
-39 M Quicksilver Gargantuan
-196 R Ratchet Bomb
-17 U Razor Hippogriff
-197 C Razorfield Thresher
-228 R Razorverge Thicket
-77 C Relic Putrescence
-18 C Revoke Existence
-40 U Riddlesmith
-198 U Rust Tick
-199 U Rusted Relic
-200 C Saberclaw Golem
-19 C Salvage Scout
-102 C Scoria Elemental
-41 C Scrapdiver Serpent
-42 C Screeching Silcaw
-229 R Seachrome Coast
-20 C Seize the Initiative
-201 R Semblance Anvil
-43 R Shape Anew
-103 C Shatter
-202 C Silver Myr
-78 U Skinrender
-79 M Skithiryx, the Blight Dragon
-44 C Sky-Eel School
-127 U Slice in Twain
-203 C Snapsail Glider
-204 C Soliton
-21 C Soul Parry
-104 R Spikeshot Elder
-45 C Steady Progress
-205 R Steel Hellkite
-46 C Stoic Rebuttal
-206 R Strata Scythe
-207 C Strider Harness
-22 R Sunblast Angel
-23 C Sunspear Shikari
-241 L Swamp
-241 L Swamp
-241 L Swamp
-241 L Swamp
-208 M Sword of Body and Mind
-209 C Sylvok Lifestaff
-210 C Sylvok Replica
-80 C Tainted Strike
-128 U Tangle Angler
-129 C Tel-Jilad Defiance
-130 C Tel-Jilad Fallen
-24 R Tempered Steel
-211 U Throne of Geth
-47 U Thrummingbird
-212 R Tower of Calamities
-213 U Trigon of Corruption
-214 U Trigon of Infestation
-215 U Trigon of Mending
-216 U Trigon of Rage
-217 U Trigon of Thought
-48 U Trinket Mage
-25 R True Conviction
-218 C Tumble Magnet
-105 R Tunnel Ignus
-49 C Turn Aside
-106 C Turn to Slag
-50 U Twisted Image
-131 C Untamed Might
-51 C Vault Skyward
-219 C Vector Asp
-52 C Vedalken Certarch
-220 R Venser's Journal
-135 M Venser, the Sojourner
-26 U Vigil for the Lost
-132 U Viridian Revel
-53 U Volition Reins
-107 C Vulshok Heartstoker
-221 C Vulshok Replica
-222 C Wall of Tanglecord
-27 C Whitesun's Passage
-133 C Wing Puncture
-134 C Withstand Death
-223 M Wurmcoil Engine
+1 U Abuna Acolyte @Igor Kieryluk
+136 C Accorder's Shield @Alan Pollack
+108 U Acid Web Spider @Austin Hsu
+109 C Alpha Tyrranax @Dave Kendall
+81 U Arc Trail @Marc Simonetti
+28 R Argent Sphinx @Chris Rahn
+137 R Argentum Armor @Matt Cavotta
+2 C Arrest @Daarken
+110 R Asceticism @Daarken
+82 C Assault Strobe @Kev Walker
+3 U Auriok Edgewright @Mike Bierek
+138 C Auriok Replica @Zoltan Boros & Gabor Szikszai
+4 C Auriok Sunchaser @James Ryman
+139 U Barbed Battlegear @Steve Argyle
+83 U Barrage Ogre @David Rapoza
+111 U Bellowing Tanglewurm @jD
+224 R Blackcleave Cliffs @Dave Kendall
+54 C Blackcleave Goblin @Nils Hamm
+84 C Blade-Tribe Berserkers @Kev Walker
+140 C Bladed Pinions @Steve Argyle
+55 C Bleak Coven Vampires @Randis Albion
+112 C Blight Mamba @Drew Baker
+56 C Blistergrub @Daarken
+85 U Bloodshot Trainee @Matt Stewart
+113 C Blunt the Assault @Matt Stewart
+29 C Bonds of Quicksilver @Steven Belledin
+114 C Carapace Forger @Matt Cavotta
+57 R Carnifex Demon @Aleksi Briclot
+115 U Carrion Call @Adrian Smith
+86 R Cerebral Eruption @Kev Walker
+141 R Chimeric Mass @David Palumbo
+142 C Chrome Steed @Jana Schirmer & Johannes Voss
+143 U Clone Shell @Volkan Baǵa
+144 U Contagion Clasp @Anthony Palumbo
+145 R Contagion Engine @Daarken
+58 C Contagious Nim @Efrem Palacios
+146 C Copper Myr @Alan Pollack
+116 C Copperhorn Scout @Shelly Wan
+225 R Copperline Gorge @Zoltan Boros & Gabor Szikszai
+147 C Corpse Cur @Pete Venters
+59 U Corrupted Harvester @Nils Hamm
+148 U Culling Dais @Anthony Palumbo
+117 C Cystbearer @Kev Walker
+30 U Darkslick Drake @Chippy
+226 R Darkslick Shores @Charles Urbach
+149 U Darksteel Axe @Daniel Ljunggren
+150 R Darksteel Juggernaut @Randis Albion
+151 U Darksteel Myr @Randis Albion
+152 U Darksteel Sentinel @Erica Yang
+5 U Dispense Justice @Austin Hsu
+31 C Disperse @Adrian Smith
+32 R Dissipation Field @Matt Cavotta
+60 C Dross Hopper @Dave Allsop
+153 C Echo Circlet @Daarken
+6 M Elspeth Tirel @Michael Komarck
+87 U Embersmith @Eric Deschamps
+118 R Engulfing Slagwurm @Jaime Jones
+154 R Etched Champion @Matt Cavotta
+61 U Exsanguinate @Carl Critchlow
+120 C Ezuri's Archers @Shelly Wan
+121 R Ezuri's Brigade @Nic Klein
+119 R Ezuri, Renegade Leader @Karl Kopinski
+88 C Ferrovore @Austin Hsu
+89 C Flameborn Hellion @Aleksi Briclot
+62 U Flesh Allergy @Vance Kovacs
+155 C Flight Spellbomb @Franz Vohwinkel
+246 L Forest @Mark Tedin
+247 L Forest @Mark Tedin
+248 L Forest @Mark Tedin
+249 L Forest @Mark Tedin
+7 C Fulgent Distraction @Nic Klein
+63 C Fume Spitter @Nils Hamm
+90 U Furnace Celebration @Svetlin Velinov
+91 C Galvanic Blast @Marc Simonetti
+122 R Genesis Wave @James Paick
+64 M Geth, Lord of the Vault @Whit Brachna
+8 C Ghalma's Warden @Mike Bierek
+9 U Glimmerpoint Stag @Ryan Pancoast
+227 C Glimmerpost @Matt Cavotta
+10 C Glint Hawk @Dave Allsop
+156 C Glint Hawk Idol @Dave Allsop
+92 C Goblin Gaveleer @Svetlin Velinov
+157 C Gold Myr @Alan Pollack
+158 C Golden Urn @Charles Urbach
+159 U Golem Artisan @Nic Klein
+160 C Golem Foundry @Nic Klein
+161 U Golem's Heart @Matt Cavotta
+162 U Grafted Exoskeleton @Allen Williams
+33 R Grand Architect @Steven Belledin
+65 C Grasp of Darkness @Johann Bodin
+163 R Grindclock @Nils Hamm
+34 U Halt Order @Izzy
+66 R Hand of the Praetors @Izzy
+164 U Heavy Arbalest @David Rapoza
+93 R Hoard-Smelter Dragon @Eric Deschamps
+165 C Horizon Spellbomb @Franz Vohwinkel
+67 U Ichor Rats @Matt Stewart
+166 C Ichorclaw Myr @Eric Deschamps
+11 M Indomitable Archangel @Allen Williams
+35 R Inexorable Tide @Dave Kendall
+167 U Infiltration Lens @Izzy
+68 C Instill Infection @Chris Rahn
+168 C Iron Myr @Alan Pollack
+234 L Island @Jung Park
+235 L Island @Jung Park
+236 L Island @Jung Park
+237 L Island @Jung Park
+13 C Kemba's Skyguard @Whit Brachna
+12 R Kemba, Kha Regent @Todd Lockwood
+94 M Koth of the Hammer @Jason Chan
+169 R Kuldotha Forgemaster @jD
+95 R Kuldotha Phoenix @Mike Bierek
+96 C Kuldotha Rebirth @Goran Josic
+170 C Leaden Myr @Alan Pollack
+14 R Leonin Arbiter @Shelly Wan
+123 M Liege of the Tangle @Jason Chan
+124 U Lifesmith @Eric Deschamps
+171 U Liquimetal Coating @Johann Bodin
+172 R Livewire Lash @Daniel Ljunggren
+15 C Loxodon Wayfarer @Steven Belledin
+36 C Lumengrid Drake @Johann Bodin
+173 M Lux Cannon @Martina Pilcerova
+97 C Melt Terrain @John Avon
+174 U Memnite @Svetlin Velinov
+69 R Memoricide @James Ryman
+175 R Mimic Vat @Matt Cavotta
+176 M Mindslaver @Volkan Baǵa
+125 C Molder Beast @Randis Albion
+98 R Molten Psyche @Ryan Yee
+177 M Molten-Tail Masticore @Whit Brachna
+70 C Moriok Reaver @Marc Simonetti
+178 C Moriok Replica @Zoltan Boros & Gabor Szikszai
+242 L Mountain @Tomasz Jedruszek
+243 L Mountain @Tomasz Jedruszek
+244 L Mountain @Tomasz Jedruszek
+245 L Mountain @Tomasz Jedruszek
+179 M Mox Opal @Volkan Baǵa
+180 R Myr Battlesphere @Franz Vohwinkel
+181 U Myr Galvanizer @Greg Staples
+182 R Myr Propagator @Ryan Pancoast
+183 R Myr Reservoir @Jung Park
+16 U Myrsmith @Eric Deschamps
+184 C Necrogen Censer @Pete Venters
+71 U Necrogen Scudder @Raymond Swanland
+185 U Necropede @Nic Klein
+72 R Necrotic Ooze @James Ryman
+37 C Neurok Invisimancer @Izzy
+186 C Neurok Replica @Zoltan Boros & Gabor Szikszai
+187 C Nihil Spellbomb @Franz Vohwinkel
+188 R Nim Deathmantle @Karl Kopinski
+99 U Ogre Geargrabber @David Rapoza
+189 C Origin Spellbomb @Franz Vohwinkel
+100 C Oxidda Daredevil @Pete Venters
+101 U Oxidda Scrapmelter @Igor Kieryluk
+73 R Painful Quandary @Whit Brachna
+74 U Painsmith @Eric Deschamps
+190 U Palladium Myr @Alan Pollack
+191 C Panic Spellbomb @Franz Vohwinkel
+192 C Perilous Myr @Jason Felix
+75 C Plague Stinger @Ryan Pancoast
+230 L Plains @James Paick
+231 L Plains @James Paick
+232 L Plains @James Paick
+233 L Plains @James Paick
+38 C Plated Seastrider @Izzy
+193 M Platinum Emperion @Chris Rahn
+194 R Precursor Golem @Chippy
+195 R Prototype Portal @Drew Baker
+76 C Psychic Miasma @Svetlin Velinov
+126 R Putrefax @Steven Belledin
+39 M Quicksilver Gargantuan @Steven Belledin
+196 R Ratchet Bomb @Austin Hsu
+17 U Razor Hippogriff @David Rapoza
+197 C Razorfield Thresher @Karl Kopinski
+228 R Razorverge Thicket @James Paick
+77 C Relic Putrescence @Allen Williams
+18 C Revoke Existence @Allen Williams
+40 U Riddlesmith @Eric Deschamps
+198 U Rust Tick @Carl Critchlow
+199 U Rusted Relic @Igor Kieryluk
+200 C Saberclaw Golem @Mike Bierek
+19 C Salvage Scout @Randis Albion
+102 C Scoria Elemental @Karl Kopinski
+41 C Scrapdiver Serpent @Adrian Smith
+42 C Screeching Silcaw @Mike Bierek
+229 R Seachrome Coast @Lars Grant-West
+20 C Seize the Initiative @Steve Argyle
+201 R Semblance Anvil @Dan Scott
+43 R Shape Anew @Zoltan Boros & Gabor Szikszai
+103 C Shatter @jD
+202 C Silver Myr @Alan Pollack
+78 U Skinrender @David Rapoza
+79 M Skithiryx, the Blight Dragon @Chippy
+44 C Sky-Eel School @Daniel Ljunggren
+127 U Slice in Twain @Efrem Palacios
+203 C Snapsail Glider @Efrem Palacios
+204 C Soliton @Jason Felix
+21 C Soul Parry @Igor Kieryluk
+104 R Spikeshot Elder @Izzy
+45 C Steady Progress @Efrem Palacios
+205 R Steel Hellkite @James Paick
+46 C Stoic Rebuttal @Chris Rahn
+206 R Strata Scythe @Scott Chou
+207 C Strider Harness @Matt Stewart
+22 R Sunblast Angel @Jason Chan
+23 C Sunspear Shikari @Allen Williams
+238 L Swamp @Lars Grant-West
+239 L Swamp @Lars Grant-West
+240 L Swamp @Lars Grant-West
+241 L Swamp @Lars Grant-West
+208 M Sword of Body and Mind @Chris Rahn
+209 C Sylvok Lifestaff @Martina Pilcerova
+210 C Sylvok Replica @Zoltan Boros & Gabor Szikszai
+80 C Tainted Strike @James Ryman
+128 U Tangle Angler @Igor Kieryluk
+129 C Tel-Jilad Defiance @Goran Josic
+130 C Tel-Jilad Fallen @James Ryman
+24 R Tempered Steel @Wayne Reynolds
+211 U Throne of Geth @Jana Schirmer & Johannes Voss
+47 U Thrummingbird @Efrem Palacios
+212 R Tower of Calamities @Aleksi Briclot
+213 U Trigon of Corruption @Nils Hamm
+214 U Trigon of Infestation @Dave Allsop
+215 U Trigon of Mending @Igor Kieryluk
+216 U Trigon of Rage @Marc Simonetti
+217 U Trigon of Thought @Mike Bierek
+48 U Trinket Mage @Scott Chou
+25 R True Conviction @Svetlin Velinov
+218 C Tumble Magnet @Drew Baker
+105 R Tunnel Ignus @Scott Chou
+49 C Turn Aside @Shelly Wan
+106 C Turn to Slag @Zoltan Boros & Gabor Szikszai
+50 U Twisted Image @Izzy
+131 C Untamed Might @Erica Yang
+51 C Vault Skyward @Dan Scott
+219 C Vector Asp @Erica Yang
+52 C Vedalken Certarch @Karl Kopinski
+220 R Venser's Journal @Christopher Moeller
+135 M Venser, the Sojourner @Eric Deschamps
+26 U Vigil for the Lost @Igor Kieryluk
+132 U Viridian Revel @rk post
+53 U Volition Reins @Svetlin Velinov
+107 C Vulshok Heartstoker @Shelly Wan
+221 C Vulshok Replica @Zoltan Boros & Gabor Szikszai
+222 C Wall of Tanglecord @Vance Kovacs
+27 C Whitesun's Passage @John Avon
+133 C Wing Puncture @jD
+134 C Withstand Death @Tomasz Jedruszek
+223 M Wurmcoil Engine @Raymond Swanland
 
 [tokens]
 w_2_2_cat

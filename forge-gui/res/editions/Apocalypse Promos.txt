@@ -7,4 +7,4 @@ CardLang=sa
 ScryfallCode=PAPC
 
 [cards]
-100 R Fungal Shambler
+100 R Fungal Shambler @Jim Nelson

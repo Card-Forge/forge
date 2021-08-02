@@ -6,17 +6,17 @@ Type=Promo
 ScryfallCode=PAL04
 
 [cards]
-1 R Plains
-2 R Island
-3 R Swamp
-4 R Mountain
-5 R Forest
-6 R Darksteel Ingot
-7 R Serum Visions
-8 R Glacial Ray
-9 R Circle of Protection:Art
-10 R Mise
-11 R Booster Tutor
-12 R Goblin Mime
-13 R Granny's Payback
-14 R Ashnod's Coupon
+1 R Plains @John Avon
+2 R Island @John Avon
+3 R Swamp @John Avon
+4 R Mountain @John Avon
+5 R Forest @John Avon
+6 R Darksteel Ingot @Martina Pilcerova
+7 R Serum Visions @Ben Thompson
+8 R Glacial Ray @Jim Murray
+9 R Circle of Protection: Art @Mark “It’s teh-DEEN” Tedin
+10 R Mise @Mark Zug
+11 R Booster Tutor @Heather Hudson
+12 R Goblin Mime @Dan Frazier
+13 R Granny's Payback @Kaja Foglio
+14 R Ashnod's Coupon @Edward P. Beard, Jr.

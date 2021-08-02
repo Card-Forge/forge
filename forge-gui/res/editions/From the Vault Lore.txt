@@ -7,21 +7,21 @@ Type=Collector_Edition
 ScryfallCode=V16
 
 [cards]
-1 M Beseech the Queen
-2 M Cabal Ritual
-3 M Conflux
-4 M Dark Depths
-5 M Glissa, the Traitor
-6 M Helvault
-7 M Memnarch
-8 M Mind's Desire
-9 M Momir Vig, Simic Visionary
-10 M Near-Death Experience
-11 M Obliterate
-12 M Phyrexian Processor
-13 M Tolaria West
-14 M Umezawa's Jitte
-15 M Unmask
+1 M Beseech the Queen @Jason Chan
+2 M Cabal Ritual @Kieran Yanner
+3 M Conflux @Karl Kopinski
+4 M Dark Depths @Stephan Martiniere
+5 M Glissa, the Traitor @Chris Rahn
+6 M Helvault @Jaime Jones
+7 M Memnarch @Carl Critchlow
+8 M Mind's Desire @Adam Paquette
+9 M Momir Vig, Simic Visionary @Victor Adame Minguez
+10 M Near-Death Experience @Dan Scott
+11 M Obliterate @Kev Walker
+12 M Phyrexian Processor @Dave Kendall
+13 M Tolaria West @Khang Le
+14 M Umezawa's Jitte @Christopher Moeller
+15 M Unmask @rk post
 
 [tokens]
 marit_lage

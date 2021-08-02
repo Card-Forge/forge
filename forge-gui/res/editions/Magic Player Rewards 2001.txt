@@ -6,7 +6,7 @@ Type=Promo
 ScryfallCode=MPR
 
 [cards]
-1 R Wasteland
+1 R Wasteland @Una Fricker
 
 [tokens]
 g_1_1_saproling

@@ -24,6 +24,7 @@ import java.awt.RenderingHints;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
@@ -32,12 +33,14 @@ import java.util.concurrent.TimeUnit;
 import javax.imageio.ImageIO;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader.InvalidCacheLoadException;
 import com.google.common.cache.LoadingCache;
 import com.mortennobel.imagescaling.ResampleOp;
 
+import forge.card.CardSplitType;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
@@ -54,6 +57,7 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinIcon;
 import forge.toolbox.imaging.FCardImageRenderer;
 import forge.util.ImageUtil;
+import forge.util.TextUtil;
 
 /**
  * This class stores ALL card images in a cache with soft values. this means
@@ -150,8 +154,13 @@ public class ImageCache {
      *
      */
     public static BufferedImage getOriginalImage(String imageKey, boolean useDefaultIfNotFound, CardView cardView) {
+        return getOriginalImageInternal(imageKey, useDefaultIfNotFound, cardView).getLeft();
+    }
+
+    // return the pair of image and a flag to indicate if it is a placeholder image.
+    private static Pair<BufferedImage, Boolean> getOriginalImageInternal(String imageKey, boolean useDefaultIfNotFound, CardView cardView) {
         if (null == imageKey) {
-            return null;
+            return Pair.of(null, false);
         }
 
         IPaperCard ipc = null;
@@ -163,18 +172,44 @@ public class ImageCache {
             ipc = pc;
             imageKey = ImageUtil.getImageKey(pc, altState, true);
             if (StringUtils.isBlank(imageKey)) {
-                return _defaultImage;
+                return Pair.of(_defaultImage, true);
             }
+        }
+
+        // Replace .full to .artcrop if art crop is preferred
+        // Only allow use art if the artist info is available
+        boolean useArtCrop = "Crop".equals(FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_ART_FORMAT))
+            && ipc != null && !ipc.getArtist().isEmpty();
+        String originalKey = imageKey;
+        if (useArtCrop) {
+            if (ipc != null && ipc.getRules().getSplitType() == CardSplitType.Flip) {
+                // Art crop will always use front face as image key for flip cards
+                imageKey = ImageUtil.getImageKey((PaperCard) ipc, false, true);
+            }
+            imageKey = TextUtil.fastReplace(imageKey, ".full", ".artcrop");
         }
 
         // Load from file and add to cache if not found in cache initially.
         BufferedImage original = getImage(imageKey);
 
+        if (original == null && !useDefaultIfNotFound) {
+            return Pair.of(null, false);
+        }
+
+        // if art crop is exist, check also if the full card image is also cached.
+        if (useArtCrop && original != null) {
+            BufferedImage cached = _CACHE.getIfPresent(originalKey);
+            if (cached != null)
+                return Pair.of(cached, false);
+        }
+
+        boolean noBorder = !useArtCrop && !isPreferenceEnabled(ForgePreferences.FPref.UI_RENDER_BLACK_BORDERS);
+        boolean fetcherEnabled = isPreferenceEnabled(ForgePreferences.FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER);
+        boolean isPlaceholder = (original == null) && fetcherEnabled;
+
         // If the user has indicated that they prefer Forge NOT render a black border, round the image corners
         // to account for JPEG images that don't have a transparency.
-        boolean noBorder = !isPreferenceEnabled(ForgePreferences.FPref.UI_RENDER_BLACK_BORDERS);
         if (original != null && noBorder) {
-
             // use a quadratic equation to calculate the needed radius from an image dimension
             int radius;
             float width = original.getWidth();
@@ -207,19 +242,28 @@ public class ImageCache {
         // No image file exists for the given key so optionally associate with
         // a default "not available" image, however do not add it to the cache,
         // as otherwise it's problematic to update if the real image gets fetched.
-        if (original == null && useDefaultIfNotFound) {
+        if (original == null || useArtCrop) {
             if (ipc != null || cardView != null) {
+                int width = 488, height = 680;
+                BufferedImage art = original;
                 CardView card = ipc != null ? Card.getCardForUi(ipc).getView() : cardView;
-                original = new BufferedImage(480, 680, BufferedImage.TYPE_INT_ARGB);
-                FCardImageRenderer.drawCardImage(original.createGraphics(), card, altState, 480, 680);
-                if (!isPreferenceEnabled(ForgePreferences.FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER))
-                    _CACHE.put(imageKey, original);
+                String legalString = null;
+                original = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+                if (art != null) {
+                    Calendar cal = Calendar.getInstance();
+                    cal.setTime(StaticData.instance().getCardEdition(ipc.getEdition()).getDate());
+                    int year = cal.get(Calendar.YEAR);
+                    legalString = "Illus. " + ipc.getArtist() + "   ©" + year + " WOTC";
+                }
+                FCardImageRenderer.drawCardImage(original.createGraphics(), card, altState, width, height, art, legalString);
+                if (art != null || !fetcherEnabled)
+                    _CACHE.put(originalKey, original);
             } else {
                 original = _defaultImage;
             }
         }
 
-        return original;
+        return Pair.of(original, isPlaceholder);
     }
 
     // cardView is for Emblem, since there is no paper card for them
@@ -236,7 +280,9 @@ public class ImageCache {
             return cached;
         }
 
-        BufferedImage original = getOriginalImage(key, useDefaultImage, cardView);
+        Pair<BufferedImage, Boolean> orgImgs = getOriginalImageInternal(key, useDefaultImage, cardView);
+        BufferedImage original = orgImgs.getLeft();
+        boolean isPlaceholder = orgImgs.getRight();
         if (original == null) { return null; }
 
         if (original == _defaultImage) {
@@ -272,7 +318,9 @@ public class ImageCache {
             result = resampler.filter(original, null);
         }
 
-        _CACHE.put(resizedKey, result);
+        if (!isPlaceholder) {
+            _CACHE.put(resizedKey, result);
+        }
         return result;
     }
     /**

@@ -12,146 +12,146 @@ Foil=NotSupported
 ScryfallCode=HML
 
 [cards]
-21 U Aether Storm
-1 U Abbey Gargoyles
-2a C Abbey Matron
-2b C Abbey Matron
-61a C Aliban's Tower
-61b C Aliban's Tower
-62 C Ambush
-63a C Ambush Party
-63b C Ambush Party
-81 R An-Havva Constable
-82 U An-Havva Inn
-111 U An-Havva Township
-64 R An-Zerrin Ruins
-65 R Anaba Ancestor
-66a C Anaba Bodyguard
-66b C Anaba Bodyguard
-67a C Anaba Shaman
-67b C Anaba Shaman
-68 R Anaba Spirit Crafter
-101 R Apocalypse Chime
-83 R Autumn Willow
-112 U Aysen Abbey
-3a C Aysen Bureaucrats
-3b C Aysen Bureaucrats
-4 R Aysen Crusader
-5 R Aysen Highway
-22 R Baki's Curse
-41 R Baron Sengir
-6 R Beast Walkers
-42 R Black Carriage
-43 R Broken Visage
-84a C Carapace
-84b C Carapace
-113 U Castle Sengir
-44a C Cemetery Gate
-44b C Cemetery Gate
-23 R Chain Stasis
-69 C Chandler
-102 C Clockwork Gnomes
-103 C Clockwork Steed
-104 C Clockwork Swarm
-24 C Coral Reef
-25a C Dark Maze
-25b C Dark Maze
-85 R Daughter of Autumn
-7 U Death Speakers
-105 R Didgeridoo
-45 U Drudge Spell
-46a C Dry Spell
-46b C Dry Spell
-70 R Dwarven Pony
-71 R Dwarven Sea Clan
-72a C Dwarven Trader
-72b C Dwarven Trader
-106 C Ebony Rhino
-73 U Eron the Relentless
-74 U Evaporate
-86 R Faerie Noble
-47a C Feast of the Unicorn
-47b C Feast of the Unicorn
-107 R Feroz's Ban
-87a C Folk of An-Havva
-87b C Folk of An-Havva
-26 R Forget
-48 C Funeral March
-49 U Ghost Hounds
-27a C Giant Albatross
-27b C Giant Albatross
-28 U Giant Oyster
-50 R Grandmother Sengir
-51 C Greater Werewolf
-8 R Hazduhr the Abbot
-52 C Headstone
-75 R Heart Wolf
-88a C Hungry Mist
-88b C Hungry Mist
-53 U Ihsan's Shade
-54 U Irini Sengir
-76 R Ironclaw Curse
-29 C Jinx
-77 C Joven
-89 C Joven's Ferrets
-108 U Joven's Tools
-55 R Koskun Falls
-114 U Koskun Keep
-30a C Labyrinth Minotaur
-30b C Labyrinth Minotaur
-90 C Leaping Lizard
-9 R Leeches
-91 R Mammoth Harness
-31 R Marjhan
-32a C Memory Lapse
-32b C Memory Lapse
-33 C Merchant Scroll
-10a C Mesa Falcon
-10b C Mesa Falcon
-34 R Mystic Decree
-35 R Narwhal
-78 U Orcish Mine
-92 R Primal Order
-11 C Prophecy
-12 U Rashka the Slayer
-36a C Reef Pirates
-36b C Reef Pirates
-93 C Renewal
-79 U Retribution
-37 R Reveka, Wizard Savant
-94 U Root Spider
-95 U Roots
-109 C Roterothopter
-96 R Rysorian Badger
-13a C Samite Alchemist
-13b C Samite Alchemist
-38 U Sea Sprite
-39 U Sea Troll
-56 U Sengir Autocrat
-57a C Sengir Bats
-57b C Sengir Bats
-14 R Serra Aviary
-15 C Serra Bestiary
-16 U Serra Inquisitors
-17 C Serra Paladin
-110 C Serrated Arrows
-97a C Shrink
-97b C Shrink
-18 R Soraya the Falconer
-98 U Spectral Bears
-58 R Timmerian Fiends
-59a C Torture
-59b C Torture
-19a C Trade Caravan
-19b C Trade Caravan
-20 R Truce
-60 R Veldrane of Sengir
-40 R Wall of Kelp
-99a C Willow Faerie
-99b C Willow Faerie
-100 R Willow Priestess
-80 R Winter Sky
-115 U Wizards' School
+21 U Aether Storm @Mark Tedin
+1 U Abbey Gargoyles @Christopher Rush
+2a C Abbey Matron @Mike Kimble
+2b C Abbey Matron @Mike Kimble
+61a C Aliban's Tower @Jeff A. Menges
+61b C Aliban's Tower @Jeff A. Menges
+62 C Ambush @Alan Rabinowitz
+63a C Ambush Party @Mark Poole
+63b C Ambush Party @Mark Poole
+81 R An-Havva Constable @Dan Frazier
+82 U An-Havva Inn @Brian Snõddy
+111 U An-Havva Township @Liz Danforth
+64 R An-Zerrin Ruins @Dennis Detwiller
+65 R Anaba Ancestor @Anson Maddocks
+66a C Anaba Bodyguard @Anson Maddocks
+66b C Anaba Bodyguard @Anson Maddocks
+67a C Anaba Shaman @Anson Maddocks
+67b C Anaba Shaman @Anson Maddocks
+68 R Anaba Spirit Crafter @Anson Maddocks
+101 R Apocalypse Chime @Mark Poole
+83 R Autumn Willow @Margaret Organ-Kean
+112 U Aysen Abbey @Liz Danforth
+3a C Aysen Bureaucrats @Alan Rabinowitz
+3b C Aysen Bureaucrats @Alan Rabinowitz
+4 R Aysen Crusader @NéNé Thomas
+5 R Aysen Highway @NéNé Thomas
+22 R Baki's Curse @Nicola Leonard
+41 R Baron Sengir @Pete Venters
+6 R Beast Walkers @Heather Hudson
+42 R Black Carriage @David A. Cherry
+43 R Broken Visage @Mike Kimble
+84a C Carapace @Anson Maddocks
+84b C Carapace @Anson Maddocks
+113 U Castle Sengir @Pete Venters
+44a C Cemetery Gate @Melissa A. Benson
+44b C Cemetery Gate @Melissa A. Benson
+23 R Chain Stasis @Pat Morrissey
+69 C Chandler @Douglas Shuler
+102 C Clockwork Gnomes @Douglas Shuler
+103 C Clockwork Steed @Amy Weber
+104 C Clockwork Swarm @Amy Weber
+24 C Coral Reef @Amy Weber
+25a C Dark Maze @Rob Alexander
+25b C Dark Maze @Rob Alexander
+85 R Daughter of Autumn @Margaret Organ-Kean
+7 U Death Speakers @Douglas Shuler
+105 R Didgeridoo @Melissa A. Benson
+45 U Drudge Spell @NéNé Thomas
+46a C Dry Spell @Brian Snõddy
+46b C Dry Spell @Brian Snõddy
+70 R Dwarven Pony @Margaret Organ-Kean
+71 R Dwarven Sea Clan @Amy Weber
+72a C Dwarven Trader @Margaret Organ-Kean
+72b C Dwarven Trader @Margaret Organ-Kean
+106 C Ebony Rhino @Amy Weber
+73 U Eron the Relentless @Christopher Rush
+74 U Evaporate @Alan Rabinowitz
+86 R Faerie Noble @Susan Van Camp
+47a C Feast of the Unicorn @Dennis Detwiller
+47b C Feast of the Unicorn @Dennis Detwiller
+107 R Feroz's Ban @Heather Hudson
+87a C Folk of An-Havva @Julie Baroh
+87b C Folk of An-Havva @Julie Baroh
+26 R Forget @Mike Kimble
+48 C Funeral March @Melissa A. Benson
+49 U Ghost Hounds @Jeff A. Menges
+27a C Giant Albatross @David A. Cherry
+27b C Giant Albatross @David A. Cherry
+28 U Giant Oyster @Nicola Leonard
+50 R Grandmother Sengir @Pete Venters
+51 C Greater Werewolf @Dennis Detwiller
+8 R Hazduhr the Abbot @Dan Frazier
+52 C Headstone @David A. Cherry
+75 R Heart Wolf @Margaret Organ-Kean
+88a C Hungry Mist @Heather Hudson
+88b C Hungry Mist @Heather Hudson
+53 U Ihsan's Shade @Christopher Rush
+54 U Irini Sengir @Pete Venters
+76 R Ironclaw Curse @Dennis Detwiller
+29 C Jinx @Mike Kimble
+77 C Joven @Douglas Shuler
+89 C Joven's Ferrets @Amy Weber
+108 U Joven's Tools @Nicola Leonard
+55 R Koskun Falls @Rob Alexander
+114 U Koskun Keep @Pat Morrissey
+30a C Labyrinth Minotaur @Anson Maddocks
+30b C Labyrinth Minotaur @Anson Maddocks
+90 C Leaping Lizard @Amy Weber
+9 R Leeches @Alan Rabinowitz
+91 R Mammoth Harness @Melissa A. Benson
+31 R Marjhan @Daniel Gelon
+32a C Memory Lapse @Mark Tedin
+32b C Memory Lapse @Mark Tedin
+33 C Merchant Scroll @Liz Danforth
+10a C Mesa Falcon @Mark Poole
+10b C Mesa Falcon @Mark Poole
+34 R Mystic Decree @Liz Danforth
+35 R Narwhal @David A. Cherry
+78 U Orcish Mine @Kaja Foglio
+92 R Primal Order @Rob Alexander
+11 C Prophecy @Christopher Rush
+12 U Rashka the Slayer @Christopher Rush
+36a C Reef Pirates @Tom Wänerstrand
+36b C Reef Pirates @Tom Wänerstrand
+93 C Renewal @Kaja Foglio
+79 U Retribution @Mark Tedin
+37 R Reveka, Wizard Savant @Susan Van Camp
+94 U Root Spider @Mike Kimble
+95 U Roots @Nicola Leonard
+109 C Roterothopter @Amy Weber
+96 R Rysorian Badger @Heather Hudson
+13a C Samite Alchemist @Tom Wänerstrand
+13b C Samite Alchemist @Tom Wänerstrand
+38 U Sea Sprite @Susan Van Camp
+39 U Sea Troll @Daniel Gelon
+56 U Sengir Autocrat @David A. Cherry
+57a C Sengir Bats @Dan Frazier
+57b C Sengir Bats @Dan Frazier
+14 R Serra Aviary @Nicola Leonard
+15 C Serra Bestiary @Anson Maddocks
+16 U Serra Inquisitors @Dennis Detwiller
+17 C Serra Paladin @Pete Venters
+110 C Serrated Arrows @David A. Cherry
+97a C Shrink @Liz Danforth
+97b C Shrink @Liz Danforth
+18 R Soraya the Falconer @Dennis Detwiller
+98 U Spectral Bears @Pat Morrissey
+58 R Timmerian Fiends @Mike Kimble
+59a C Torture @Mark Tedin
+59b C Torture @Mark Tedin
+19a C Trade Caravan @Kaja Foglio
+19b C Trade Caravan @Kaja Foglio
+20 R Truce @Melissa A. Benson
+60 R Veldrane of Sengir @Susan Van Camp
+40 R Wall of Kelp @Alan Rabinowitz
+99a C Willow Faerie @Susan Van Camp
+99b C Willow Faerie @Susan Van Camp
+100 R Willow Priestess @Susan Van Camp
+80 R Winter Sky @Mike Kimble
+115 U Wizards' School @Pat Morrissey
 
 [tokens]
 kelp

@@ -8,124 +8,124 @@ Type=Funny
 ScryfallCode=CMB1
 
 [cards]
-1 R Ral's Vanguard
-2 R Banding Sliver
-3 R Baneslayer Aspirant
-4 R Enroll in the Coalition
-5 R Five Kids in a Trenchcoat
-6 R Frontier Explorer
-7 R Imaginary Friends
-8 R Metagamer
-9 R Priority Avenger
-10 R Ruff, Underdog Champ
-11 R Sarah's Wings
-12 R Scaled Destruction
-13 R Stack of Paperwork
-14 R Wizened Arbiter
-15 R You're in Command
-16 R Animate Spell
-17 R Biting Remark
-18 R Command the Chaff
-19 R Control Win Condition
-20 R Do-Over
-21 R Enchantmentize
-22 R Form of the Mulldrifter
-23 R Innocuous Insect
-24 R Khod, Etlan Shiis Envoy
-25 R Learned Learner
-26 R Loopy Lobster
-27 R Memory Bank
-28 R Recycla-bird
-29 R Squidnapper
-30 R The Grand Tour
-31 R Time Sidewalk
-32 R Truth or Dare
-33 R Visitor from Planet Q
-34 R Blood Poet
-35 R Bone Rattler
-36 R Buried Ogre
-37 R Celestine Cave Witch
-38 R Chimney Goyf
-39 R Corrupted Key
-40 R Cyclopean Titan
-41 R Everlasting Lich
-42 R Frogkin Kidnapper
-43 R Gunk Slug
-44 R Largepox
-45 R One with Death
-46 R Spellmorph Raise Dead
-47 R Sunimret
-48 R Swarm of Locus
-49 R Underdark Beholder
-50 R Witty Demon
-51 R Xyru Specter
-52 R Yawgmoth's Testament
-53 R Bombardment
-54 R High Troller
-55 R Impatient Iguana
-56 R Lazier Goblin
-57 R Lightning Colt
-58 R Mana Abundance
-59 R Planequake
-60 R Problematic Volcano
-61 R Queue of Beetles
-62 R Red Herring
-63 R Seasoned Weaponsmith
-64 R Siege Elemental
-65 R Throat Wolf
-66 R Tibalt the Chaotic
-67 R Transcantation
-68 R Trial and Error
-69 R Geometric Weird
-70 R Whammy Burn
-71 R Bear with Set's Mechanic
-72 R Domesticated Mammoth
-73 R Experiment Five
-74 R Frenemy of the Guildpact
-75 R Generated Horizons
-76 R Gorilla Tactics
-77 R Growth Charm
-78 R Inspirational Antelope
-79 R Interplanar Brushwagg
-80 R Krosan Adaptation
-81 R Maro's Gone Nuts
-82 R Patient Turtle
-83 R Plane-Merge Elf
-84 R Soulmates
-85 R Vazal, the Compleat
-86 R A Good Thing
-87 R Abian, Luvion Usurper
-88 R Bind // Liberate
-89 R Bucket List
-90 R Evil Boros Charm
-91 R Golgari Death Swarm
-92 R Graveyard Dig
-93 R How to Keep an Izzet Mage Busy
-94 R Kaya, Ghost Haunter
-95 R Louvaq, the Aberrant
-96 R Personal Decoy
-97 R Pick Your Poison
-98 R Seek Bolas's Counsel
-99 R Sliv-Mizzet, Hivemind
-100 R Smelt // Herd // Saw
-101 R Start // Fire
-102 R Slivdrazi Monstrosity
-103 R Wrath of Sod
-104 R Zyym, Mesmeric Lord
-105 R Chronobot
-106 R Lantern of Undersight
-107 R Mirrored Lotus
-108 R Pithing Spyglass
-109 R Puresteel Angel
-110 R Unicycle
-111 R Weaponized Scrap
-112 R Aggressive Crag
-113 L Barry's Land
-114 R Domesticated Watercourse
-115 R Enchanted Prairie
-116 R Gold Mine
-117 R Jasconian Isle
-118 R Noxious Bayou
-119 R Rift
-120 R Taiga Stadium
-121 R Waste Land
+1 R Ral's Vanguard @David McDarby
+2 R Banding Sliver @Alicia Mickes
+3 R Baneslayer Aspirant @Taylor Ingvarsson
+4 R Enroll in the Coalition @Chris Mooney
+5 R Five Kids in a Trenchcoat @Emily Teng
+6 R Frontier Explorer @Mary Josberger
+7 R Imaginary Friends @Daniel Holt
+8 R Metagamer @Francisco Martin
+9 R Priority Avenger @Chris Haukap
+10 R Ruff, Underdog Champ @Seth Conley
+11 R Sarah's Wings @Sarah Keortge
+12 R Scaled Destruction @Daniel Ketchum
+13 R Stack of Paperwork @Hanspeter Ziegler
+14 R Wizened Arbiter @Kelly Hamilton
+15 R You're in Command @Cody Culp
+16 R Animate Spell @Alli Steele
+17 R Biting Remark @Josh Thomas
+18 R Command the Chaff @George Fan
+19 R Control Win Condition @Sean Mayovsky
+20 R Do-Over @Madison Mosley
+21 R Enchantmentize @Rebecca On
+22 R Form of the Mulldrifter @George Fan
+23 R Innocuous Insect @Jehan Choo
+24 R Khod, Etlan Shiis Envoy @Dave Humpherys
+25 R Learned Learner @Nick Southam
+26 R Loopy Lobster @Rachel Turian
+27 R Memory Bank @Pete White
+28 R Recycla-bird @Kevin Yee
+29 R Squidnapper @Jeff Carpenter
+30 R The Grand Tour @Ethan Fleischer
+31 R Time Sidewalk @Steve Sunu
+32 R Truth or Dare @Mollie Harms
+33 R Visitor from Planet Q @Lucy Meaden
+34 R Blood Poet @Marsha Rivera
+35 R Bone Rattler @Ira Humphrey
+36 R Buried Ogre @Dave Geyer
+37 R Celestine Cave Witch @Bonnie Gabriel
+38 R Chimney Goyf @Glenn Jones
+39 R Corrupted Key @Tom Wänerstrand
+40 R Cyclopean Titan @Matt Smith
+41 R Everlasting Lich @Aaron Forsythe
+42 R Frogkin Kidnapper @Mark Heggen
+43 R Gunk Slug @Casey Gustafson
+44 R Largepox @Maxx Marshall
+45 R One with Death @Robert J Schuster
+46 R Spellmorph Raise Dead @Seth Conley
+47 R Sunimret @Kelly McBride
+48 R Swarm of Locus @Emily Maltby
+49 R Underdark Beholder @Chris Tulach
+50 R Witty Demon @Brittany Austin
+51 R Xyru Specter @Jeff Stewart
+52 R Yawgmoth's Testament @Eli Shiffrin
+53 R Bombardment @James Arnold
+54 R High Troller @Graeme Hopkins
+55 R Impatient Iguana @Brandi Reece
+56 R Lazier Goblin @Mark Price
+57 R Lightning Colt @Christine Lee Risinger
+58 R Mana Abundance @Ken Nagle
+59 R Planequake @Chris Kiritz
+60 R Problematic Volcano @Gavin Verhey
+61 R Queue of Beetles @Brendan Sell
+62 R Red Herring @Chris Mooney
+63 R Seasoned Weaponsmith @Mark L. Gottlieb
+64 R Siege Elemental @Levi Parker
+65 R Throat Wolf @Sam Stoddard
+66 R Tibalt the Chaotic @Zach Francks
+67 R Transcantation @Ryan Printz
+68 R Trial and Error @Chris Clay
+69 R Geometric Weird @Matthew Gregory
+70 R Whammy Burn @Melissa DeTora
+71 R Bear with Set's Mechanic @Annie Sardelis
+72 R Domesticated Mammoth @Jade Granger
+73 R Experiment Five @Gavin Verhey
+74 R Frenemy of the Guildpact @Jacob Nourigat
+75 R Generated Horizons @Daniel Holt
+76 R Gorilla Tactics @Jiachen Tao
+77 R Growth Charm @Chris Bellach
+78 R Inspirational Antelope @Mike Demaine
+79 R Interplanar Brushwagg @John Penick
+80 R Krosan Adaptation @Zach Francks
+81 R Maro's Gone Nuts @Mark Rosewater
+82 R Patient Turtle @Katie Allison
+83 R Plane-Merge Elf @Nataly Anderson
+84 R Soulmates @Victoria Caña
+85 R Vazal, the Compleat @Damian Tedrow
+86 R A Good Thing @Yoni Skolnik
+87 R Abian, Luvion Usurper @James Kooi
+88 R Bind // Liberate @Talia Armato-Helle
+89 R Bucket List @Nathan Ian Greene
+90 R Evil Boros Charm @Mark Purvis
+91 R Golgari Death Swarm @Ovidio Cartagena
+92 R Graveyard Dig @Sandra Everingham
+93 R How to Keep an Izzet Mage Busy @Scott Van Essen
+94 R Kaya, Ghost Haunter @Sydney Adams
+95 R Louvaq, the Aberrant @Cynthia Sheppard
+96 R Personal Decoy @Alison Luhrs
+97 R Pick Your Poison @Corey Bowen
+98 R Seek Bolas's Counsel @Matt Warren
+99 R Sliv-Mizzet, Hivemind @Jeff Stewart
+100 R Smelt // Herd // Saw @Alli Steele
+101 R Start // Fire @Nelson Brown
+102 R Slivdrazi Monstrosity @Justin Cornell
+103 R Wrath of Sod @Chad Kanotz
+104 R Zyym, Mesmeric Lord @Nick Bartoletti
+105 R Chronobot @Stephanie Mitchell
+106 R Lantern of Undersight @Trick Jarrett
+107 R Mirrored Lotus @Meris Mullaley
+108 R Pithing Spyglass @Melissa DeTora
+109 R Puresteel Angel @Lukas Litzsinger
+110 R Unicycle @Ari Nieh
+111 R Weaponized Scrap @Tyler Wright
+112 R Aggressive Crag @Demitrios Feredinos
+113 L Barry's Land @Matt Tabak
+114 R Domesticated Watercourse @Joe Torra
+115 R Enchanted Prairie @James Arnold
+116 R Gold Mine @Max McCall
+117 R Jasconian Isle @Aaron Reed
+118 R Noxious Bayou @James Rose
+119 R Rift @Zach Francks
+120 R Taiga Stadium @Tara Rueping
+121 R Waste Land @Patrick Kuhlman

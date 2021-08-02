@@ -6,5 +6,5 @@ Type=Promo
 ScryfallCode=PCON
 
 [cards]
-117★ R Malfegor
-140★ R Obelisk of Alara
+117★ R Malfegor @Karl Kopinski
+140★ R Obelisk of Alara @John Avon

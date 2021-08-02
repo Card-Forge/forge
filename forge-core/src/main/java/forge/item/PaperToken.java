@@ -143,6 +143,7 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
     @Override public CardRules getRules() { return card; }
 
     @Override public CardRarity getRarity() { return CardRarity.None; }
+    @Override public String getArtist() { /*TODO*/ return ""; }
 
     // Unfortunately this is a property of token, cannot move it outside of class
     public String getImageFilename() { return getImageFilename(1); }

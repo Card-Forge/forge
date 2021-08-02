@@ -14,202 +14,202 @@ AdditionalSetUnlockedInQuest=MPS_KLD
 ScryfallCode=AER
 
 [cards]
-1 U Aerial Modification
-2 U Aeronaut Admiral
-3 C Aether Inspector
-4 R Aethergeode Miner
-5 U Airdrop Aeronauts
-6 C Alley Evasion
-7 C Audacious Infiltrator
-8 C Bastion Enforcer
-9 R Call for Unity
-10 C Caught in the Brights
-11 R Consulate Crackdown
-12 C Conviction
-13 C Countless Gears Renegade
-14 C Dawnfeather Eagle
-15 U Deadeye Harpooner
-16 C Decommission
-17 U Deft Dismissal
-18 M Exquisite Archangel
-19 U Felidar Guardian
-20 C Ghirapur Osprey
-21 U Restoration Specialist
-22 R Solemn Recruit
-23 R Sram, Senior Edificer
-24 R Sram's Expertise
-25 U Thopter Arrest
-26 C Aether Swooper
-27 R Aethertide Whale
-28 R Baral, Chief of Compliance
-29 R Baral's Expertise
-30 C Bastion Inventor
-31 R Disallow
-32 C Dispersal Technician
-33 U Efficient Construction
-34 C Hinterland Drake
-35 C Ice Over
-36 U Illusionist's Stratagem
-37 C Leave in the Dust
-38 M Mechanized Production
-39 C Metallic Rebuke
-40 C Negate
-41 R Quicksmith Spy
-42 U Reverse Engineer
-43 U Salvage Scuttler
-44 U Shielded Aether Thief
-45 C Shipwreck Moray
-46 U Skyship Plunderer
-47 C Take into Custody
-48 U Trophy Mage
-49 R Whir of Invention
-50 U Wind-Kin Raiders
-51 C Aether Poisoner
-52 C Alley Strangler
-53 R Battle at the Bridge
-54 C Cruel Finality
-55 C Daring Demolition
-56 C Defiant Salvager
-57 U Fatal Push
-58 C Fen Hauler
-59 U Foundry Hornet
-60 C Fourth Bridge Prowler
-61 U Gifted Aetherborn
-62 R Glint-Sleeve Siphoner
-63 U Gonti's Machinations
-64 M Herald of Anguish
-65 U Ironclad Revolutionary
-66 R Midnight Entourage
-67 C Night Market Aeronaut
-68 U Perilous Predicament
-69 C Renegade's Getaway
-70 C Resourceful Return
-71 R Secret Salvage
-72 U Sly Requisitioner
-73 U Vengeful Rebel
-74 R Yahenni, Undying Partisan
-75 R Yahenni's Expertise
-76 C Aether Chaser
-77 C Chandra's Revolution
-78 C Destructive Tampering
-79 C Embraal Gear-Smasher
-80 U Enraged Giant
-81 R Freejam Regent
-82 C Frontline Rebel
-83 U Gremlin Infestation
-84 U Hungry Flames
-85 M Indomitable Creativity
-86 U Invigorated Rampage
-87 R Kari Zev, Skyship Raider
-88 R Kari Zev's Expertise
-89 C Lathnu Sailback
-90 M Lightning Runner
-91 R Pia's Revolution
-92 C Precise Strike
-93 R Quicksmith Rebel
-94 U Ravenous Intruder
-95 U Reckless Racer
-96 R Release the Gremlins
-97 U Scrapper Champion
-98 C Shock
-99 U Siege Modification
-100 C Sweatworks Brawler
-101 C Wrangle
-102 C Aether Herder
-103 C Aetherstream Leopard
-104 M Aetherwind Basker
-105 R Aid from the Cowl
-106 C Druid of the Cowl
-107 R Greenbelt Rampager
-108 R Greenwheel Liberator
-109 R Heroic Intervention
-110 U Hidden Herbalists
-111 C Highspire Infusion
-112 U Lifecraft Awakening
-113 C Lifecraft Cavalry
-114 U Lifecrafter's Gift
-115 U Maulfist Revolutionary
-116 U Monstrous Onslaught
-117 U Narnam Renegade
-118 C Natural Obsolescence
-119 U Peema Aether-Seer
-120 C Prey Upon
-121 U Ridgescale Tusker
-122 R Rishkar, Peema Renegade
-123 R Rishkar's Expertise
-124 C Scrounging Bandar
-125 C Silkweaver Elite
-126 C Unbridled Growth
-127 M Ajani Unyielding
-128 R Dark Intimations
-129 U Hidden Stockpile
-130 U Maverick Thopterist
-131 R Oath of Ajani
-132 U Outland Boar
-133 U Renegade Rallier
-134 U Renegade Wheelsmith
-135 U Rogue Refiner
-136 U Spire Patrol
-137 M Tezzeret the Schemer
-138 U Tezzeret's Touch
-139 U Weldfast Engineer
-140 U Winding Constrictor
-141 C Aegis Automaton
-142 R Aethersphere Harvester
-143 C Augmenting Automaton
-144 U Barricade Breaker
-145 U Cogwork Assembler
-146 U Consulate Dreadnought
-147 C Consulate Turret
-148 U Crackdown Construct
-149 U Daredevil Dragster
-150 C Filigree Crawler
-151 C Foundry Assembler
-152 M Gonti's Aether Heart
-153 M Heart of Kiran
-154 R Hope of Ghirapur
-155 C Implement of Combustion
-156 C Implement of Examination
-157 C Implement of Ferocity
-158 C Implement of Improvement
-159 C Implement of Malice
-160 R Inspiring Statuary
-161 C Irontread Crusher
-162 R Lifecrafter's Bestiary
-163 R Merchant's Dockhand
-164 R Metallic Mimic
-165 C Mobile Garrison
-166 C Night Market Guard
-167 U Ornithopter
-168 U Pacification Array
-169 M Paradox Engine
-170 R Peacewalker Colossus
-171 M Planar Bridge
-172 C Prizefighter Construct
-173 C Renegade Map
-174 C Reservoir Walker
-175 R Scrap Trawler
-176 U Servo Schematic
-177 U Treasure Keeper
-178 C Universal Solvent
-179 U Untethered Express
-180 C Verdant Automaton
-181 R Walking Ballista
-182 C Watchful Automaton
-183 C Welder Automaton
-184 R Spire of Industry
-185 M Ajani, Valiant Protector
-186 C Inspiring Roar
+1 U Aerial Modification @Jung Park
+2 U Aeronaut Admiral @E. M. Gist
+3 C Aether Inspector @Sidharth Chaturvedi
+4 R Aethergeode Miner @Winona Nelson
+5 U Airdrop Aeronauts @Greg Opalinski
+6 C Alley Evasion @Scott Murphy
+7 C Audacious Infiltrator @Jakub Kasper
+8 C Bastion Enforcer @Matt Stewart
+9 R Call for Unity @John Severin Brassell
+10 C Caught in the Brights @Kieran Yanner
+11 R Consulate Crackdown @Jonas De Ro
+12 C Conviction @John Stanko
+13 C Countless Gears Renegade @Dan Scott
+14 C Dawnfeather Eagle @Sidharth Chaturvedi
+15 U Deadeye Harpooner @Ryan Pancoast
+16 C Decommission @Josh Hass
+17 U Deft Dismissal @Izzy
+18 M Exquisite Archangel @Brad Rigney
+19 U Felidar Guardian @Jakub Kasper
+20 C Ghirapur Osprey @Zezhou Chen
+21 U Restoration Specialist @David Palumbo
+22 R Solemn Recruit @Eric Deschamps
+23 R Sram, Senior Edificer @Chris Rahn
+24 R Sram's Expertise @Kieran Yanner
+25 U Thopter Arrest @Kieran Yanner
+26 C Aether Swooper @James Ryman
+27 R Aethertide Whale @Steven Belledin
+28 R Baral, Chief of Compliance @Wesley Burt
+29 R Baral's Expertise @Todd Lockwood
+30 C Bastion Inventor @Tony Foti
+31 R Disallow @Min Yum
+32 C Dispersal Technician @Scott Murphy
+33 U Efficient Construction @Jonas De Ro
+34 C Hinterland Drake @Lake Hurwitz
+35 C Ice Over @Sidharth Chaturvedi
+36 U Illusionist's Stratagem @Svetlin Velinov
+37 C Leave in the Dust @Vincent Proce
+38 M Mechanized Production @Adam Paquette
+39 C Metallic Rebuke @Eric Deschamps
+40 C Negate @Zack Stella
+41 R Quicksmith Spy @Ryan Alexander Lee
+42 U Reverse Engineer @Chase Stone
+43 U Salvage Scuttler @Tony Foti
+44 U Shielded Aether Thief @Lake Hurwitz
+45 C Shipwreck Moray @Mike Bierek
+46 U Skyship Plunderer @Slawomir Maniak
+47 C Take into Custody @David Palumbo
+48 U Trophy Mage @Anna Steinbauer
+49 R Whir of Invention @Christine Choi
+50 U Wind-Kin Raiders @Shreya Shetty
+51 C Aether Poisoner @Yongjae Choi
+52 C Alley Strangler @Efflam Mercier
+53 R Battle at the Bridge @Chris Rallis
+54 C Cruel Finality @Svetlin Velinov
+55 C Daring Demolition @Svetlin Velinov
+56 C Defiant Salvager @Volkan Baǵa
+57 U Fatal Push @Eric Deschamps
+58 C Fen Hauler @Sidharth Chaturvedi
+59 U Foundry Hornet @Christopher Moeller
+60 C Fourth Bridge Prowler @John Silva
+61 U Gifted Aetherborn @Ryan Yee
+62 R Glint-Sleeve Siphoner @Greg Opalinski
+63 U Gonti's Machinations @Daarken
+64 M Herald of Anguish @Vincent Proce
+65 U Ironclad Revolutionary @Eric Deschamps
+66 R Midnight Entourage @Lius Lasahido
+67 C Night Market Aeronaut @Tyler Jacobson
+68 U Perilous Predicament @Ryan Alexander Lee
+69 C Renegade's Getaway @Ryan Yee
+70 C Resourceful Return @Titus Lunter
+71 R Secret Salvage @Tommy Arnold
+72 U Sly Requisitioner @Dan Scott
+73 U Vengeful Rebel @Tomasz Jedruszek
+74 R Yahenni, Undying Partisan @Lius Lasahido
+75 R Yahenni's Expertise @Daarken
+76 C Aether Chaser @Jason Rainville
+77 C Chandra's Revolution @Clint Cearley
+78 C Destructive Tampering @Titus Lunter
+79 C Embraal Gear-Smasher @Joseph Meehan
+80 U Enraged Giant @Anthony Palumbo
+81 R Freejam Regent @Volkan Baǵa
+82 C Frontline Rebel @Winona Nelson
+83 U Gremlin Infestation @Slawomir Maniak
+84 U Hungry Flames @Izzy
+85 M Indomitable Creativity @Deruchenko Alexander
+86 U Invigorated Rampage @Craig J Spearing
+87 R Kari Zev, Skyship Raider @Brad Rigney
+88 R Kari Zev's Expertise @Jason Rainville
+89 C Lathnu Sailback @Christopher Burdett
+90 M Lightning Runner @Raymond Swanland
+91 R Pia's Revolution @Clint Cearley
+92 C Precise Strike @Tyler Jacobson
+93 R Quicksmith Rebel @Kieran Yanner
+94 U Ravenous Intruder @Mathias Kollros
+95 U Reckless Racer @Viktor Titov
+96 R Release the Gremlins @Izzy
+97 U Scrapper Champion @Magali Villeneuve
+98 C Shock @Jason Rainville
+99 U Siege Modification @Sung Choi
+100 C Sweatworks Brawler @Zack Stella
+101 C Wrangle @Jason Rainville
+102 C Aether Herder @Victor Adame Minguez
+103 C Aetherstream Leopard @Winona Nelson
+104 M Aetherwind Basker @Svetlin Velinov
+105 R Aid from the Cowl @Viktor Titov
+106 C Druid of the Cowl @Magali Villeneuve
+107 R Greenbelt Rampager @Filip Burburan
+108 R Greenwheel Liberator @Todd Lockwood
+109 R Heroic Intervention @James Ryman
+110 U Hidden Herbalists @Bastien L. Deharme
+111 C Highspire Infusion @Anna Steinbauer
+112 U Lifecraft Awakening @Raoul Vitale
+113 C Lifecraft Cavalry @Svetlin Velinov
+114 U Lifecrafter's Gift @Winona Nelson
+115 U Maulfist Revolutionary @Scott Murphy
+116 U Monstrous Onslaught @Slawomir Maniak
+117 U Narnam Renegade @Greg Opalinski
+118 C Natural Obsolescence @Eytan Zana
+119 U Peema Aether-Seer @Howard Lyon
+120 C Prey Upon @Ryan Pancoast
+121 U Ridgescale Tusker @Winona Nelson
+122 R Rishkar, Peema Renegade @Todd Lockwood
+123 R Rishkar's Expertise @Magali Villeneuve
+124 C Scrounging Bandar @Shreya Shetty
+125 C Silkweaver Elite @Magali Villeneuve
+126 C Unbridled Growth @Ryan Pancoast
+127 M Ajani Unyielding @Kieran Yanner
+128 R Dark Intimations @Chase Stone
+129 U Hidden Stockpile @Darek Zabrocki
+130 U Maverick Thopterist @Zack Stella
+131 R Oath of Ajani @Wesley Burt
+132 U Outland Boar @Winona Nelson
+133 U Renegade Rallier @Kieran Yanner
+134 U Renegade Wheelsmith @Darek Zabrocki
+135 U Rogue Refiner @Victor Adame Minguez
+136 U Spire Patrol @Dan Scott
+137 M Tezzeret the Schemer @Ryan Alexander Lee
+138 U Tezzeret's Touch @Chris Rallis
+139 U Weldfast Engineer @Sara Winters
+140 U Winding Constrictor @Izzy
+141 C Aegis Automaton @Kieran Yanner
+142 R Aethersphere Harvester @Christine Choi
+143 C Augmenting Automaton @Jason Rainville
+144 U Barricade Breaker @Karl Kopinski
+145 U Cogwork Assembler @Joseph Meehan
+146 U Consulate Dreadnought @Cliff Childs
+147 C Consulate Turret @Eric Deschamps
+148 U Crackdown Construct @Johannes Voss
+149 U Daredevil Dragster @Titus Lunter
+150 C Filigree Crawler @James Paick
+151 C Foundry Assembler @Karl Kopinski
+152 M Gonti's Aether Heart @Vincent Proce
+153 M Heart of Kiran @Jaime Jones
+154 R Hope of Ghirapur @Lius Lasahido
+155 C Implement of Combustion @Efflam Mercier
+156 C Implement of Examination @Darek Zabrocki
+157 C Implement of Ferocity @Jason Kang
+158 C Implement of Improvement @Kieran Yanner
+159 C Implement of Malice @Titus Lunter
+160 R Inspiring Statuary @Kirsten Zirngibl
+161 C Irontread Crusher @Jason A. Engle
+162 R Lifecrafter's Bestiary @Izzy
+163 R Merchant's Dockhand @Christine Choi
+164 R Metallic Mimic @Zack Stella
+165 C Mobile Garrison @Cliff Childs
+166 C Night Market Guard @Steve Argyle
+167 U Ornithopter @Mathias Kollros
+168 U Pacification Array @Joseph Meehan
+169 M Paradox Engine @Christine Choi
+170 R Peacewalker Colossus @Vincent Proce
+171 M Planar Bridge @Chase Stone
+172 C Prizefighter Construct @Daniel Ljunggren
+173 C Renegade Map @Lake Hurwitz
+174 C Reservoir Walker @Johann Bodin
+175 R Scrap Trawler @Daarken
+176 U Servo Schematic @Titus Lunter
+177 U Treasure Keeper @James Paick
+178 C Universal Solvent @Christopher Moeller
+179 U Untethered Express @James Ryman
+180 C Verdant Automaton @Ryan Alexander Lee
+181 R Walking Ballista @Daniel Ljunggren
+182 C Watchful Automaton @Eric Deschamps
+183 C Welder Automaton @Victor Adame Minguez
+184 R Spire of Industry @John Avon
+185 M Ajani, Valiant Protector @Anna Steinbauer
+186 C Inspiring Roar @Chris Rahn
 
 [precon product]
-187 U Ajani's Comrade
-188 R Ajani's Aid
-189 C Tranquil Expanse
-190 M Tezzeret, Master of Metal
-191 R Tezzeret's Betrayal
-192 C Pendulum of Patterns
-193 U Tezzeret's Simulacrum
-194 C Submerged Boneyard
+187 U Ajani's Comrade @James Ryman
+188 R Ajani's Aid @Terese Nielsen
+189 C Tranquil Expanse @Sam Burley
+190 M Tezzeret, Master of Metal @Tyler Jacobson
+191 R Tezzeret's Betrayal @Tyler Jacobson
+192 C Pendulum of Patterns @Raoul Vitale
+193 U Tezzeret's Simulacrum @Craig J Spearing
+194 C Submerged Boneyard @Christine Choi
 
 [Aether Revolt Inventions]
 Arcbound Ravager|MPS_KLD

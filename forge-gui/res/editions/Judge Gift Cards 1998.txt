@@ -6,6 +6,6 @@ Type=Promo
 ScryfallCode=JGP
 
 [cards]
-1 R Lightning Bolt
-2 R Stroke of Genius
-3 R Gaea's Cradle
+1 R Lightning Bolt @Christopher Rush
+2 R Stroke of Genius @Stephen Daniele
+3 R Gaea's Cradle @Mark Zug

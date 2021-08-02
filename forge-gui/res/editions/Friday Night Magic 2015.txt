@@ -6,15 +6,15 @@ Type=Promo
 ScryfallCode=F15
 
 [cards]
-1 R Frenzied Goblin
-2 R Disdainful Stroke
-3 R Hordeling Outburst
-4 R Suspension Field
-5 R Abzan Beastmaster
-6 R Frost Walker
-7 R Path to Exile
-8 R Serum Visions
-9 R Orator of Ojutai
-10 R Ultimate Price
-11 R Roast
-12 R Anticipate
+1 R Frenzied Goblin @Kev Walker
+2 R Disdainful Stroke @Svetlin Velinov
+3 R Hordeling Outburst @Zoltan Boros
+4 R Suspension Field @Seb McKinnon
+5 R Abzan Beastmaster @Scott Murphy
+6 R Frost Walker @Peter Mohrbacher
+7 R Path to Exile @Raf Sarmento
+8 R Serum Visions @Dan Scott
+9 R Orator of Ojutai @David Gaillet
+10 R Ultimate Price @Scott Murphy
+11 R Roast @Zoltan Boros
+12 R Anticipate @Volkan Baǵa

@@ -6,12 +6,12 @@ Type=Promo
 ScryfallCode=PJOU
 
 [cards]
-6★ R Dawnbringer Charioteers
-37 R Dictate of Kruphix
-51★ R Scourge of Fleets
-66★ R Doomwake Giant
-84 U Squelching Leeches
-93★ R Dictate of the Twin Gods
-112★ R Spawn of Thraxes
-*122 R Eidolon of Blossoms
-126★ R Heroes' Bane
+6★ R Dawnbringer Charioteers @Volkan Baǵa
+37 R Dictate of Kruphix @Ryan Barger
+51★ R Scourge of Fleets @Adam Paquette
+66★ R Doomwake Giant @Nils Hamm
+84 U Squelching Leeches @Tomasz Jedruszek
+93★ R Dictate of the Twin Gods @Chase Stone
+112★ R Spawn of Thraxes @Jason Rainville
+*122 R Eidolon of Blossoms @Seb McKinnon
+126★ R Heroes' Bane @Volkan Baǵa

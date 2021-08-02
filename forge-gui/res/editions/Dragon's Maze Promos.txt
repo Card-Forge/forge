@@ -6,9 +6,9 @@ Type=Promo
 ScryfallCode=PDGM
 
 [cards]
-84 R Melek, Izzet Paragon
-96 R Render Silent
-110 U Trostani's Summoner
-124 R Breaking // Entering
-152 M Maze's End
-157 C Plains
+84 R Melek, Izzet Paragon @Johann Bodin
+*96 R Render Silent @Kev Walker
+110 U Trostani's Summoner @Nils Hamm
+124★ R Breaking // Entering @Igor Kieryluk
+152★ M Maze's End @Cliff Childs
+157★ C Plains @Eric Deschamps

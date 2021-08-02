@@ -6,8 +6,8 @@ Type=Promo
 ScryfallCode=PI13
 
 [cards]
-10 R Voidmage Husher
-11 R Ogre Arsonist
-12 R Corrupt
-13 R High Tide
-14 R Gaze of Granite
+10 R Voidmage Husher @Ryan Pancoast
+11 R Ogre Arsonist @Chris Rahn
+12 R Corrupt @Alex Horley-Orlandelli
+13 R High Tide @Eric Deschamps
+14 R Gaze of Granite @Dan Scott

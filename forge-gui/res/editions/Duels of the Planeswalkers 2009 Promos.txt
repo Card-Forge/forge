@@ -6,4 +6,4 @@ Type=Promo
 ScryfallCode=PDTP
 
 [cards]
-1 M Garruk Wildspeaker
+1 M Garruk Wildspeaker @Nils Hamm

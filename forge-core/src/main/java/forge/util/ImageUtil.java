@@ -118,7 +118,7 @@ public class ImageUtil {
         return getImageRelativePath(cp, backFace, true, true);
     }
 
-    public static String getScryfallDownloadUrl(PaperCard cp, boolean backFace, String setCode, String langCode){
+    public static String getScryfallDownloadUrl(PaperCard cp, boolean backFace, String setCode, String langCode, boolean useArtCrop){
         String editionCode;
         if ((setCode != null) && (setCode.length() > 0))
             editionCode = setCode;
@@ -127,12 +127,13 @@ public class ImageUtil {
         String cardCollectorNumber = cp.getCollectorNumber();
         // Hack to account for variations in Arabian Nights
         cardCollectorNumber = cardCollectorNumber.replace("+", "†");
+        String versionParam = useArtCrop ? "art_crop" : "normal";
         String faceParam = "";
         if (cp.getRules().getOtherPart() != null) {
             faceParam = (backFace ? "&face=back" : "&face=front");
         }
-        return String.format("%s/%s/%s?format=image&version=normal%s", editionCode, cardCollectorNumber,
-                langCode, faceParam);
+        return String.format("%s/%s/%s?format=image&version=%s%s", editionCode, cardCollectorNumber,
+                langCode, versionParam, faceParam);
     }
 
     public static String toMWSFilename(String in) {

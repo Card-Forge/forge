@@ -11,255 +11,255 @@ ChaosDraftThemes=MASTERS_SET
 ScryfallCode=EMA
 
 [cards]
-1 C Aven Riftwatcher
-2 M Balance
-3 C Ballynock Cohort
-4 C Benevolent Bodyguard
-5 U Calciderm
-6 C Coalition Honor Guard
-7 R Eight-and-a-Half-Tails
-8 C Elite Vanguard
-9 R Enlightened Tutor
-10 U Faith's Fetters
-11 U Field of Souls
-12 U Glimmerpoint Stag
-13 U Honden of Cleansing Fire
-14 C Humble
-15 U Intangible Virtue
-16 R Jareth, Leonine Titan
-17 R Karmic Guide
-18 C Kor Hookmaster
-19 U Mesa Enchantress
-20 C Mistral Charger
-21 C Monk Idealist
-22 R Mother of Runes
-23 C Pacifism
-24 C Raise the Alarm
-25 C Rally the Peasants
-26 C Seal of Cleansing
-27 C Second Thoughts
-28 U Serra Angel
-29 C Shelter
-30 U Soulcatcher
-31 C Squadron Hawk
-32 U Swords to Plowshares
-33 R Unexpectedly Absent
-34 U Wall of Omens
-35 U War Priest of Thune
-36 C Welkin Guide
-37 C Whitemane Lion
-38 R Wrath of God
-39 R Arcanis the Omnipotent
-40 U Brainstorm
-41 C Cephalid Sage
-42 R Control Magic
-43 C Counterspell
-44 U Daze
-45 C Deep Analysis
-46 R Diminishing Returns
-47 C Dream Twist
-48 U Fact or Fiction
-49 M Force of Will
-50 R Future Sight
-51 C Gaseous Form
-52 C Giant Tortoise
-53 C Glacial Wall
-54 U Honden of Seeing Winds
-55 U Hydroblast
-56 R Inkwell Leviathan
-57 M Jace, the Mind Sculptor
-58 U Jetting Glasskite
-59 C Man-o'-War
-60 C Memory Lapse
-61 U Merfolk Looter
-62 R Mystical Tutor
-63 C Oona's Grace
-64 C Peregrine Drake
-65 C Phantom Monster
-66 U Phyrexian Ingester
-67 U Prodigal Sorcerer
-68 U Quiet Speculation
-69 C Screeching Skaab
-70 R Serendib Efreet
-71 C Shoreline Ranger
-72 C Silent Departure
-73 U Sprite Noble
-74 C Stupefying Touch
-75 C Tidal Wave
-76 C Warden of Evos Isle
-77 U Wonder
-78 U Animate Dead
-79 U Annihilate
-80 C Blightsoil Druid
-81 U Blood Artist
-82 R Braids, Cabal Minion
-83 U Cabal Therapy
-84 C Carrion Feeder
-85 C Deadbridge Shaman
-86 C Duress
-87 R Entomb
-88 C Eyeblight's Ending
-89 C Gravedigger
-90 U Havoc Demon
-91 U Honden of Night's Reach
-92 U Hymn to Tourach
-93 R Ichorid
-94 C Innocent Blood
-95 U Lys Alana Scarblade
-96 R Malicious Affliction
-97 C Nausea
-98 M Necropotence
-99 U Nekrataal
-100 C Night's Whisper
-101 U Phyrexian Gargantua
-102 C Phyrexian Rager
-103 C Plague Witch
-104 C Prowling Pangolin
-105 U Sengir Autocrat
-106 R Sinkhole
-107 C Skulking Ghost
-108 R Toxic Deluge
-109 C Tragic Slip
-110 C Twisted Abomination
-111 C Urborg Uprising
-112 M Vampiric Tutor
-113 U Victimize
-114 R Visara the Dreadful
-115 C Wake of Vultures
-116 C Wakedancer
-117 C Avarax
-118 U Battle Squadron
-119 U Beetleback Chief
-120 C Borderland Marauder
-121 U Burning Vengeance
-122 C Carbonize
-123 U Chain Lightning
-124 R Crater Hellion
-125 C Desperate Ravings
-126 C Dragon Egg
-127 R Dualcaster Mage
-128 C Faithless Looting
-129 C Fervent Cathar
-130 C Firebolt
-131 U Flame Jab
-132 R Gamble
-133 U Ghitu Slinger
-134 U Honden of Infinite Rage
-135 U Keldon Champion
-136 C Keldon Marauders
-137 C Kird Ape
-138 C Mogg Fanatic
-139 C Mogg War Marshal
-140 C Orcish Oriflamme
-141 U Price of Progress
-142 U Pyroblast
-143 R Pyrokinesis
-144 C Reckless Charge
-145 R Rorix Bladewing
-146 C Seismic Stomp
-147 R Siege-Gang Commander
-148 M Sneak Attack
-149 C Stingscourger
-150 R Sulfuric Vortex
-151 U Tooth and Claw
-152 C Undying Rage
-153 C Wildfire Emissary
-154 M Worldgorger Dragon
-155 U Young Pyromancer
-156 C Abundant Growth
-157 U Ancestral Mask
-158 M Argothian Enchantress
-159 U Brawn
-160 U Centaur Chieftain
-161 C Civic Wayfinder
-162 C Commune with the Gods
-163 C Elephant Guide
-164 C Elvish Vanguard
-165 C Emperor Crocodile
-166 U Flinthoof Boar
-167 C Fog
-168 U Gaea's Blessing
-169 R Green Sun's Zenith
-170 U Harmonize
-171 R Heritage Druid
-172 U Honden of Life's Web
-173 R Imperious Perfect
-174 U Invigorate
-175 C Llanowar Elves
-176 C Lys Alana Huntmaster
-177 M Natural Order
-178 C Nature's Claim
-179 C Nimble Mongoose
-180 U Rancor
-181 R Regal Force
-182 U Roar of the Wurm
-183 C Roots
-184 C Seal of Strength
-185 C Sentinel Spider
-186 R Silvos, Rogue Elemental
-187 R Sylvan Library
-188 C Sylvan Might
-189 C Thornweald Archer
-190 U Timberwatch Elf
-191 C Werebear
-192 U Wirewood Symbiote
-193 R Xantid Swarm
-194 C Yavimaya Enchantress
-195 U Armadillo Cloak
-196 R Baleful Strix
-197 U Bloodbraid Elf
-198 R Brago, King Eternal
-199 M Dack Fayden
-200 U Extract from Darkness
-201 U Flame-Kin Zealot
-202 R Glare of Subdual
-203 R Goblin Trenches
-204 M Maelstrom Wanderer
-205 U Shaman of the Pack
-206 R Shardless Agent
-207 M Sphinx of the Steel Wind
-208 U Thunderclap Wyvern
-209 U Trygon Predator
-210 R Vindicate
-211 R Void
-212 U Wee Dragonauts
-213 U Zealous Persecution
-214 R Call the Skybreaker
-215 R Deathrite Shaman
-216 R Giant Solifuge
-217 U Torrent of Souls
-218 U Ashnod's Altar
-219 M Chrome Mox
-220 R Duplicant
-221 U Emmessi Tome
-222 R Goblin Charbelcher
-223 R Isochron Scepter
-224 U Juggernaut
-225 M Mana Crypt
-226 U Millikin
-227 U Mindless Automaton
-228 R Nevinyrral's Disk
-229 C Pilgrim's Eye
-230 U Prismatic Lens
-231 U Relic of Progenitus
-232 R Sensei's Divining Top
-233 U Ticking Gnomes
-234 R Winter Orb
-235 U Worn Powerstone
-236 C Bloodfell Caves
-237 C Blossoming Sands
-238 C Dismal Backwater
-239 C Jungle Hollow
-240 M Karakas
-241 R Maze of Ith
-242 U Mishra's Factory
-243 C Rugged Highlands
-244 C Scoured Barrens
-245 C Swiftwater Cliffs
-246 C Thornwood Falls
-247 C Tranquil Cove
-248 R Wasteland
-249 C Wind-Scarred Crag
+1 C Aven Riftwatcher @Don Hazeltine
+2 M Balance @Kev Walker
+3 C Ballynock Cohort @Jesper Ejsing
+4 C Benevolent Bodyguard @Roger Raupp
+5 U Calciderm @Dave Kendall
+6 C Coalition Honor Guard @Eric Peterson
+7 R Eight-and-a-Half-Tails @Daren Bader
+8 C Elite Vanguard @Mark Tedin
+9 R Enlightened Tutor @Howard Lyon
+10 U Faith's Fetters @Chippy
+11 U Field of Souls @Richard Kane Ferguson
+12 U Glimmerpoint Stag @Ryan Pancoast
+13 U Honden of Cleansing Fire @Greg Staples
+14 C Humble @Chris Rallis
+15 U Intangible Virtue @Clint Cearley
+16 R Jareth, Leonine Titan @Daren Bader
+17 R Karmic Guide @Allen Williams
+18 C Kor Hookmaster @Wayne Reynolds
+19 U Mesa Enchantress @Randy Gallegos
+20 C Mistral Charger @Terese Nielsen
+21 C Monk Idealist @Daren Bader
+22 R Mother of Runes @Terese Nielsen
+23 C Pacifism @Robert Bliss
+24 C Raise the Alarm @Zoltan Boros
+25 C Rally the Peasants @Jaime Jones
+26 C Seal of Cleansing @Noah Bradley
+27 C Second Thoughts @Ray Lago
+28 U Serra Angel @Greg Staples
+29 C Shelter @Christopher Moeller
+30 U Soulcatcher @Julie Dillon
+31 C Squadron Hawk @Martina Pilcerova
+32 U Swords to Plowshares @Terese Nielsen
+33 R Unexpectedly Absent @Min Yum
+34 U Wall of Omens @James Paick
+35 U War Priest of Thune @Izzy
+36 C Welkin Guide @David Palumbo
+37 C Whitemane Lion @Zoltan Boros & Gabor Szikszai
+38 R Wrath of God @Kev Walker
+39 R Arcanis the Omnipotent @Justin Sweet
+40 U Brainstorm @Willian Murai
+41 C Cephalid Sage @Keith Garletts
+42 R Control Magic @Terese Nielsen
+43 C Counterspell @Zack Stella
+44 U Daze @Min Yum
+45 C Deep Analysis @Jesper Ejsing
+46 R Diminishing Returns @Greg Opalinski
+47 C Dream Twist @Dan Scott
+48 U Fact or Fiction @Terese Nielsen
+49 M Force of Will @Terese Nielsen
+50 R Future Sight @Dan Scott
+51 C Gaseous Form @Roger Raupp
+52 C Giant Tortoise @Richard Wright
+53 C Glacial Wall @Craig Mullins
+54 U Honden of Seeing Winds @Martina Pilcerova
+55 U Hydroblast @Lake Hurwitz
+56 R Inkwell Leviathan @Anthony Francisco
+57 M Jace, the Mind Sculptor @Jason Chan
+58 U Jetting Glasskite @Shishizaru
+59 C Man-o'-War @Jon J Muth
+60 C Memory Lapse @Greg Staples
+61 U Merfolk Looter @Austin Hsu
+62 R Mystical Tutor @Lindsey Look
+63 C Oona's Grace @Rebecca Guay
+64 C Peregrine Drake @Mike Bierek
+65 C Phantom Monster @Richard Wright
+66 U Phyrexian Ingester @Chris Rahn
+67 U Prodigal Sorcerer @Eric Deschamps
+68 U Quiet Speculation @John Avon
+69 C Screeching Skaab @Clint Cearley
+70 R Serendib Efreet @Matt Stewart
+71 C Shoreline Ranger @Michael Sutfin
+72 C Silent Departure @John Avon
+73 U Sprite Noble @Randy Gallegos
+74 C Stupefying Touch @Greg Opalinski
+75 C Tidal Wave @Brian Snõddy
+76 C Warden of Evos Isle @Nils Hamm
+77 U Wonder @Rebecca Guay
+78 U Animate Dead @Bastien L. Deharme
+79 U Annihilate @Kev Walker
+80 C Blightsoil Druid @Nils Hamm
+81 U Blood Artist @Johannes Voss
+82 R Braids, Cabal Minion @Eric Peterson
+83 U Cabal Therapy @Raymond Swanland
+84 C Carrion Feeder @Brian Snõddy
+85 C Deadbridge Shaman @Nils Hamm
+86 C Duress @Steven Belledin
+87 R Entomb @Seb McKinnon
+88 C Eyeblight's Ending @Ron Spears
+89 C Gravedigger @Dermot Power
+90 U Havoc Demon @Jack Wang
+91 U Honden of Night's Reach @Jim Nelson
+92 U Hymn to Tourach @Greg Staples
+93 R Ichorid @rk post
+94 C Innocent Blood @Carl Critchlow
+95 U Lys Alana Scarblade @Christopher Moeller
+96 R Malicious Affliction @Erica Yang
+97 C Nausea @Willian Murai
+98 M Necropotence @Dave Kendall
+99 U Nekrataal @Christopher Moeller
+100 C Night's Whisper @John Severin Brassell
+101 U Phyrexian Gargantua @Igor Kieryluk
+102 C Phyrexian Rager @Stephan Martiniere
+103 C Plague Witch @Nelson DeCastro
+104 C Prowling Pangolin @Tomasz Jedruszek
+105 U Sengir Autocrat @Aaron Miller
+106 R Sinkhole @Jonas De Ro
+107 C Skulking Ghost @Robert Bliss
+108 R Toxic Deluge @Svetlin Velinov
+109 C Tragic Slip @Christopher Moeller
+110 C Twisted Abomination @Daren Bader
+111 C Urborg Uprising @Adam Rex
+112 M Vampiric Tutor @Raymond Swanland
+113 U Victimize @Craig J Spearing
+114 R Visara the Dreadful @Kev Walker
+115 C Wake of Vultures @Jeff Miracola
+116 C Wakedancer @Austin Hsu
+117 C Avarax @Greg Staples
+118 U Battle Squadron @Mark Tedin
+119 U Beetleback Chief @Wayne England
+120 C Borderland Marauder @Scott M. Fischer
+121 U Burning Vengeance @Raymond Swanland
+122 C Carbonize @Lake Hurwitz
+123 U Chain Lightning @Christopher Moeller
+124 R Crater Hellion @Daren Bader
+125 C Desperate Ravings @John Stanko
+126 C Dragon Egg @Jack Wang
+127 R Dualcaster Mage @Matt Stewart
+128 C Faithless Looting @Gabor Szikszai
+129 C Fervent Cathar @Steven Belledin
+130 C Firebolt @Chris Rallis
+131 U Flame Jab @rk post
+132 R Gamble @Winona Nelson
+133 U Ghitu Slinger @Clint Cearley
+134 U Honden of Infinite Rage @John Avon
+135 U Keldon Champion @Mark Tedin
+136 C Keldon Marauders @Alex Horley-Orlandelli
+137 C Kird Ape @Terese Nielsen
+138 C Mogg Fanatic @Brom
+139 C Mogg War Marshal @Jesper Ejsing
+140 C Orcish Oriflamme @Ben Thompson
+141 U Price of Progress @Yohann Schepacz
+142 U Pyroblast @Lake Hurwitz
+143 R Pyrokinesis @Igor Kieryluk
+144 C Reckless Charge @Scott M. Fischer
+145 R Rorix Bladewing @Clint Cearley
+146 C Seismic Stomp @Chase Stone
+147 R Siege-Gang Commander @Lucio Parrillo
+148 M Sneak Attack @Tyler Jacobson
+149 C Stingscourger @Wayne Reynolds
+150 R Sulfuric Vortex @Greg Staples
+151 U Tooth and Claw @Johann Bodin
+152 C Undying Rage @Scott M. Fischer
+153 C Wildfire Emissary @Richard Kane Ferguson
+154 M Worldgorger Dragon @Wayne England
+155 U Young Pyromancer @Cynthia Sheppard
+156 C Abundant Growth @Vincent Proce
+157 U Ancestral Mask @Magali Villeneuve
+158 M Argothian Enchantress @Daren Bader
+159 U Brawn @Matt Cavotta
+160 U Centaur Chieftain @Justin Sweet
+161 C Civic Wayfinder @Cyril Van Der Haegen
+162 C Commune with the Gods @Aleksi Briclot
+163 C Elephant Guide @Tomasz Jedruszek
+164 C Elvish Vanguard @Steve Prescott
+165 C Emperor Crocodile @Kev Walker
+166 U Flinthoof Boar @Erica Yang
+167 C Fog @Jaime Jones
+168 U Gaea's Blessing @Rebecca Guay
+169 R Green Sun's Zenith @David Rapoza
+170 U Harmonize @Paul Lee
+171 R Heritage Druid @Larry MacDougall
+172 U Honden of Life's Web @Rob Alexander
+173 R Imperious Perfect @Scott M. Fischer
+174 U Invigorate @Mark Zug
+175 C Llanowar Elves @Kev Walker
+176 C Lys Alana Huntmaster @Pete Venters
+177 M Natural Order @Terese Nielsen
+178 C Nature's Claim @Raoul Vitale
+179 C Nimble Mongoose @Kev Walker
+180 U Rancor @Kev Walker
+181 R Regal Force @Brandon Kitkouski
+182 U Roar of the Wurm @Kev Walker
+183 C Roots @Scott Murphy
+184 C Seal of Strength @Noah Bradley
+185 C Sentinel Spider @Vincent Proce
+186 R Silvos, Rogue Elemental @Carl Critchlow
+187 R Sylvan Library @Yeong-Hao Han
+188 C Sylvan Might @Arnie Swekel
+189 C Thornweald Archer @Dave Kendall
+190 U Timberwatch Elf @Yohann Schepacz
+191 C Werebear @Filip Burburan
+192 U Wirewood Symbiote @Yohann Schepacz
+193 R Xantid Swarm @David Martin
+194 C Yavimaya Enchantress @Terese Nielsen
+195 U Armadillo Cloak @Wayne Reynolds
+196 R Baleful Strix @Nils Hamm
+197 U Bloodbraid Elf @Raymond Swanland
+198 R Brago, King Eternal @Karla Ortiz
+199 M Dack Fayden @Eric Deschamps
+200 U Extract from Darkness @Dallas Williams
+201 U Flame-Kin Zealot @Arnie Swekel
+202 R Glare of Subdual @Zoltan Boros & Gabor Szikszai
+203 R Goblin Trenches @Filip Burburan
+204 M Maelstrom Wanderer @Victor Adame Minguez
+205 U Shaman of the Pack @Dan Scott
+206 R Shardless Agent @Izzy
+207 M Sphinx of the Steel Wind @Kev Walker
+208 U Thunderclap Wyvern @Jason Felix
+209 U Trygon Predator @Jack Wang
+210 R Vindicate @Karla Ortiz
+211 R Void @Jakub Kasper
+212 U Wee Dragonauts @Greg Staples
+213 U Zealous Persecution @Christopher Moeller
+214 R Call the Skybreaker @Randy Gallegos
+215 R Deathrite Shaman @Steve Argyle
+216 R Giant Solifuge @Svetlin Velinov
+217 U Torrent of Souls @Ian Edward Ameling
+218 U Ashnod's Altar @Greg Staples
+219 M Chrome Mox @Volkan Baǵa
+220 R Duplicant @Marco Nelor
+221 U Emmessi Tome @Craig J Spearing
+222 R Goblin Charbelcher @Jesper Ejsing
+223 R Isochron Scepter @Chippy
+224 U Juggernaut @Kev Walker
+225 M Mana Crypt @Matt Stewart
+226 U Millikin @Alex Horley-Orlandelli
+227 U Mindless Automaton @Brian Snõddy
+228 R Nevinyrral's Disk @Steve Argyle
+229 C Pilgrim's Eye @Dan Scott
+230 U Prismatic Lens @Alan Pollack
+231 U Relic of Progenitus @Jean-Sébastien Rossbach
+232 R Sensei's Divining Top @Rob Alexander
+233 U Ticking Gnomes @Wayne Reynolds
+234 R Winter Orb @Brian Snõddy
+235 U Worn Powerstone @Henry G. Higginbotham
+236 C Bloodfell Caves @Adam Paquette
+237 C Blossoming Sands @Sam Burley
+238 C Dismal Backwater @Sam Burley
+239 C Jungle Hollow @Eytan Zana
+240 M Karakas @Drew Baker
+241 R Maze of Ith @Yeong-Hao Han
+242 U Mishra's Factory @Scott Chou
+243 C Rugged Highlands @Eytan Zana
+244 C Scoured Barrens @Eytan Zana
+245 C Swiftwater Cliffs @Eytan Zana
+246 C Thornwood Falls @Eytan Zana
+247 C Tranquil Cove @John Avon
+248 R Wasteland @Eytan Zana
+249 C Wind-Scarred Crag @Eytan Zana
 
 [tokens]
 carnivore
