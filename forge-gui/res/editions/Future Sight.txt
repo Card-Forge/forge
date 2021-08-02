@@ -12,186 +12,186 @@ FatPackExtraSlots=40 BasicLands TSP
 ScryfallCode=FUT
 
 [cards]
-159 R Akroma's Memorial
-1 R Angel of Salvation
-94 U Arc Blade
-48 U Arcanum Wings
-2 C Augur il-Vec
-63 C Augur of Skulls
-32 C Aven Augur
-18 U Aven Mindcensor
-3 R Barren Glory
-142 R Baru, Fist of Krosa
-80 R Bitter Ordeal
-19 C Blade of the Sixth Pride
-49 C Blind Phantasm
-110 U Bloodshot Trainee
-95 C Bogardan Lancer
-111 U Boldwyr Intimidator
-50 U Bonded Fetch
-20 U Bound in Silence
-81 R Bridge from Below
-143 U Centaur Omenreader
-96 U Char-Rumbler
-4 U Chronomantic Escape
-160 R Cloud Key
-33 U Cloudseeder
-161 R Coalition Relic
-34 U Cryptic Annelid
-64 C Cutthroat il-Dal
-125 U Cyclical Evolution
-169 U Dakmor Salvage
-167 R Darksteel Garrison
-21 R Daybreak Coronet
-82 C Death Rattle
-83 C Deepcavern Imp
-35 U Delay
-174 U Dryad Arbor
-5 U Dust of Moments
-144 C Edge of Autumn
-97 C Emberwilde Augur
-112 U Emblem of the Warmind
-162 R Epochrasite
-6 U Even the Odds
-98 C Fatal Attraction
-65 U Festering March
-84 U Fleshwrither
-113 C Flowstone Embrace
-114 C Fomori Nomad
-126 R Force of Savagery
-36 C Foresee
-85 C Frenzy Sliver
-99 C Gathan Raiders
-115 C Ghostfire
-66 R Gibbering Descent
-7 C Gift of Granite
-156 R Glittering Wish
-22 U Goldmeadow Lookout
-67 C Grave Peril
-86 C Grave Scrabbler
-175 R Graven Cairns
-116 C Grinning Ignus
-176 R Grove of the Burnwillows
-100 U Haze of Rage
-127 R Heartwood Storyteller
-117 C Henchfiend of Ukor
-118 C Homing Sliver
-177 R Horizon Canopy
-68 C Ichor Slick
-23 R Imperial Mask
-145 U Imperiosaur
-37 C Infiltrator il-Kor
-8 R Intervention Pact
-157 R Jhoira of the Ghitu
-9 C Judge Unworthy
-128 C Kavu Primarch
-170 U Keldon Megaliths
-10 C Knight of Sursi
-87 R Korlash, Heir to Blackblade
-38 C Leaden Fists
-51 R Linessa, Zephyr Mage
-129 C Llanowar Augur
-130 C Llanowar Empath
-131 U Llanowar Mentor
-171 U Llanowar Reborn
-52 C Logic Knot
-11 U Lost Auramancers
-69 C Lost Hours
-24 C Lucent Liminid
-25 C Lumithread Field
-26 C Lymph Sliver
-39 R Maelstrom Djinn
-70 R Magus of the Abyss
-40 R Magus of the Future
-12 R Magus of the Moat
-101 R Magus of the Moon
-132 R Magus of the Vineyard
-13 C Marshaling Cry
-88 C Mass of Ghouls
-53 C Mesmeric Sliver
-71 U Minions' Murmurs
-27 U Mistmeadow Skulk
-102 R Molten Disaster
-146 R Muraganda Petroglyphs
-41 U Mystic Speculation
-147 U Nacatl War-Pride
-54 U Narcomoeba
-148 C Nessian Courser
-172 U New Benalia
-72 R Nihilith
-178 R Nimbus Maze
-55 R Nix
-73 C Oblivion Crown
-28 R Oriss, Samite Guardian
-42 R Pact of Negation
-103 R Pact of the Titan
-29 C Patrician's Scorn
-133 C Petrified Plating
-149 U Phosphorescent Feast
-74 U Pooling Venom
-75 C Putrid Cyclops
-104 R Pyromancer's Swath
-150 R Quagnoth
-134 C Quiet Disrepair
-30 U Ramosian Revivalist
-135 U Ravaging Riftwurm
-43 U Reality Strobe
-105 C Riddle of Lightning
-106 C Rift Elemental
-136 U Riftsweeper
-137 R Rites of Flourishing
-179 R River of Tears
-14 C Saltskitter
-15 C Samite Censer-Bearer
-56 C Sarcomite Myr
-107 R Scourge of Kher Ridges
-16 R Scout's Warning
-57 U Second Wind
-31 R Seht's Tiger
-119 R Shah of Naar Isle
-58 R Shapeshifter's Marrow
-76 R Shimian Specter
-108 U Shivan Sand-Mage
-77 U Skirk Ridge Exhumer
-120 U Skizzik Surger
-78 R Slaughter Pact
-158 R Sliver Legion
-163 U Sliversmith
-89 U Snake Cult Initiation
-164 U Soultether Golem
-109 U Sparkspitter
-59 R Spellweaver Volute
-151 U Spellwild Ouphe
-60 U Spin into Myth
-17 U Spirit en-Dal
-152 C Sporoloth Ancient
-138 C Sprout Swarm
-121 R Steamflogger Boss
-122 U Storm Entity
-90 U Street Wraith
-79 U Stronghold Rats
-139 R Summoner's Pact
-165 U Sword of the Meek
-44 R Take Possession
-153 R Tarmogoyf
-123 R Tarox Bladewing
-154 C Thornweald Archer
-124 R Thunderblade Charge
-173 U Tolaria West
-91 R Tombstalker
-45 C Unblinking Bleb
-140 U Utopia Mycon
-61 C Vedalken AEthermage
-166 R Veilstone Amulet
-47 C Venser's Diffusion
-46 R Venser, Shaper Savant
-155 C Virulent Sliver
-168 R Whetwheel
-62 C Whip-Spine Drake
-92 U Witch's Mist
-141 C Wrap in Vigor
-93 U Yixlid Jailer
-180 U Zoetic Cavern
+159 R Akroma's Memorial @Dan Scott
+1 R Angel of Salvation @D. Alexander Gregory
+94 U Arc Blade @Shishizaru
+48 U Arcanum Wings @Carl Frank
+2 C Augur il-Vec @Daren Bader
+63 C Augur of Skulls @Chippy
+32 C Aven Augur @Dan Scott
+18 U Aven Mindcensor @Rebecca Guay
+3 R Barren Glory @Dave Kendall
+142 R Baru, Fist of Krosa @Lucio Parrillo
+80 R Bitter Ordeal @Daarken
+19 C Blade of the Sixth Pride @Justin Sweet
+49 C Blind Phantasm @Khang Le
+110 U Bloodshot Trainee @Lucio Parrillo
+95 C Bogardan Lancer @Jim Murray
+111 U Boldwyr Intimidator @Esad Ribic
+50 U Bonded Fetch @Brandon Kitkouski
+20 U Bound in Silence @William Simpson
+81 R Bridge from Below @Greg Hildebrandt & Tim Hildebrandt
+143 U Centaur Omenreader @Justin Sweet
+96 U Char-Rumbler @Kev Walker
+4 U Chronomantic Escape @Franz Vohwinkel
+160 R Cloud Key @Trevor Hairsine
+33 U Cloudseeder @Tsutomu Kawade
+161 R Coalition Relic @Donato Giancola
+34 U Cryptic Annelid @Anthony S. Waters
+64 C Cutthroat il-Dal @Vance Kovacs
+125 U Cyclical Evolution @Matt Cavotta
+169 U Dakmor Salvage @John Avon
+167 R Darksteel Garrison @David Martin
+21 R Daybreak Coronet @Scott Hampton
+82 C Death Rattle @Vance Kovacs
+83 C Deepcavern Imp @Scott Altmann
+35 U Delay @Ron Spears
+174 U Dryad Arbor @Eric Fortune
+5 U Dust of Moments @Zoltan Boros & Gabor Szikszai
+144 C Edge of Autumn @Jean-Sébastien Rossbach
+97 C Emberwilde Augur @Brandon Kitkouski
+112 U Emblem of the Warmind @Paolo Parente
+162 R Epochrasite @Michael Bruinsma
+6 U Even the Odds @Shishizaru
+98 C Fatal Attraction @Zoltan Boros & Gabor Szikszai
+65 U Festering March @Brandon Kitkouski
+84 U Fleshwrither @Dave Allsop
+113 C Flowstone Embrace @Vance Kovacs
+114 C Fomori Nomad @Raymond Swanland
+126 R Force of Savagery @Dan Scott
+36 C Foresee @Ron Spears
+85 C Frenzy Sliver @Glen Angus
+99 C Gathan Raiders @Paolo Parente
+115 C Ghostfire @Cyril Van Der Haegen
+66 R Gibbering Descent @Ittoku
+7 C Gift of Granite @Hideaki Takamura
+156 R Glittering Wish @John Donahue
+22 U Goldmeadow Lookout @Steve Prescott
+67 C Grave Peril @Daarken
+86 C Grave Scrabbler @Dave Allsop
+175 R Graven Cairns @Anthony S. Waters
+116 C Grinning Ignus @James Kei
+176 R Grove of the Burnwillows @David Hudnut
+100 U Haze of Rage @Paolo Parente
+127 R Heartwood Storyteller @Anthony S. Waters
+117 C Henchfiend of Ukor @Nils Hamm
+118 C Homing Sliver @Trevor Hairsine
+177 R Horizon Canopy @Michael Komarck
+68 C Ichor Slick @Zoltan Boros & Gabor Szikszai
+23 R Imperial Mask @Christopher Moeller
+145 U Imperiosaur @Lars Grant-West
+37 C Infiltrator il-Kor @Jon Foster
+8 R Intervention Pact @Dave Kendall
+157 R Jhoira of the Ghitu @Kev Walker
+9 C Judge Unworthy @Greg Staples
+128 C Kavu Primarch @Kev Walker
+170 U Keldon Megaliths @Philip Straub
+10 C Knight of Sursi @Cyril Van Der Haegen
+87 R Korlash, Heir to Blackblade @Daarken
+38 C Leaden Fists @Shishizaru
+51 R Linessa, Zephyr Mage @Jim Murray
+129 C Llanowar Augur @Tsutomu Kawade
+130 C Llanowar Empath @Warren Mahy
+131 U Llanowar Mentor @Trevor Hairsine
+171 U Llanowar Reborn @Philip Straub
+52 C Logic Knot @Glen Angus
+11 U Lost Auramancers @Brandon Kitkouski
+69 C Lost Hours @Jon Foster
+24 C Lucent Liminid @Eric Fortune
+25 C Lumithread Field @Scott Altmann
+26 C Lymph Sliver @Ittoku
+39 R Maelstrom Djinn @Hideaki Takamura
+70 R Magus of the Abyss @Kev Walker
+40 R Magus of the Future @Anthony Francisco
+12 R Magus of the Moat @John Avon
+101 R Magus of the Moon @Franz Vohwinkel
+132 R Magus of the Vineyard @Jim Murray
+13 C Marshaling Cry @Vance Kovacs
+88 C Mass of Ghouls @Lucio Parrillo
+53 C Mesmeric Sliver @Michael Bruinsma
+71 U Minions' Murmurs @Nils Hamm
+27 U Mistmeadow Skulk @Omar Rayyan
+102 R Molten Disaster @Ittoku
+146 R Muraganda Petroglyphs @Scott Altmann
+41 U Mystic Speculation @Trevor Hairsine
+147 U Nacatl War-Pride @James Kei
+54 U Narcomoeba @Matt Stewart
+148 C Nessian Courser @Vance Kovacs
+172 U New Benalia @Richard Wright
+72 R Nihilith @Dave Allsop
+178 R Nimbus Maze @Jason Chan
+55 R Nix @Brian Despain
+73 C Oblivion Crown @Kev Walker
+28 R Oriss, Samite Guardian @Michael Komarck
+42 R Pact of Negation @Jason Chan
+103 R Pact of the Titan @Raymond Swanland
+29 C Patrician's Scorn @John Avon
+133 C Petrified Plating @Zoltan Boros & Gabor Szikszai
+149 U Phosphorescent Feast @David Hudnut
+74 U Pooling Venom @Ron Spears
+75 C Putrid Cyclops @Matt Cavotta
+104 R Pyromancer's Swath @Hideaki Takamura
+150 R Quagnoth @Thomas M. Baxa
+134 C Quiet Disrepair @Glen Angus
+30 U Ramosian Revivalist @Matt Stewart
+135 U Ravaging Riftwurm @Michael Phillippi
+43 U Reality Strobe @Dan Scott
+105 C Riddle of Lightning @Daren Bader
+106 C Rift Elemental @Ron Spears
+136 U Riftsweeper @Brian Despain
+137 R Rites of Flourishing @Brandon Kitkouski
+179 R River of Tears @Chris J. Anderson
+14 C Saltskitter @Chippy
+15 C Samite Censer-Bearer @William Simpson
+56 C Sarcomite Myr @Michael Bruinsma
+107 R Scourge of Kher Ridges @Daren Bader
+16 R Scout's Warning @Zoltan Boros & Gabor Szikszai
+57 U Second Wind @Matt Stewart
+31 R Seht's Tiger @Thomas Gianni
+119 R Shah of Naar Isle @Jon Foster
+58 R Shapeshifter's Marrow @Chippy
+76 R Shimian Specter @Anthony S. Waters
+108 U Shivan Sand-Mage @Dave Kendall
+77 U Skirk Ridge Exhumer @Michael Phillippi
+120 U Skizzik Surger @Lucio Parrillo
+78 R Slaughter Pact @Kev Walker
+158 R Sliver Legion @Ron Spears
+163 U Sliversmith @John Avon
+89 U Snake Cult Initiation @Justin Sweet
+164 U Soultether Golem @Paolo Parente
+109 U Sparkspitter @Dan Scott
+59 R Spellweaver Volute @Bud Cook
+151 U Spellwild Ouphe @Scott Altmann
+60 U Spin into Myth @David Day
+17 U Spirit en-Dal @Daren Bader
+152 C Sporoloth Ancient @James Kei
+138 C Sprout Swarm @Chippy
+121 R Steamflogger Boss @Warren Mahy
+122 U Storm Entity @Lucio Parrillo
+90 U Street Wraith @Cyril Van Der Haegen
+79 U Stronghold Rats @Brandon Kitkouski
+139 R Summoner's Pact @Chippy
+165 U Sword of the Meek @Franz Vohwinkel
+44 R Take Possession @Michael Phillippi
+153 R Tarmogoyf @Justin Murray
+123 R Tarox Bladewing @Aleksi Briclot
+154 C Thornweald Archer @Dave Kendall
+124 R Thunderblade Charge @Justin Murray
+173 U Tolaria West @Khang Le
+91 R Tombstalker @Aleksi Briclot
+45 C Unblinking Bleb @Shishizaru
+140 U Utopia Mycon @Anthony S. Waters
+61 C Vedalken Aethermage @William Simpson
+166 R Veilstone Amulet @Martina Pilcerova
+47 C Venser's Diffusion @Hideaki Takamura
+46 R Venser, Shaper Savant @Aleksi Briclot
+155 C Virulent Sliver @Franz Vohwinkel
+168 R Whetwheel @Cyril Van Der Haegen
+62 C Whip-Spine Drake @Eric Fortune
+92 U Witch's Mist @Ittoku
+141 C Wrap in Vigor @John Donahue
+93 U Yixlid Jailer @Matt Cavotta
+180 U Zoetic Cavern @Lars Grant-West
 
 [tokens]
 goldmeadow_harrier

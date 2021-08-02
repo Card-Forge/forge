@@ -6,7 +6,7 @@ Type=Promo
 ScryfallCode=PCSP
 
 [cards]
-101★ R Allosaurus Rider
+101★ R Allosaurus Rider @Daren Bader
 
 [tokens]
 marit_lage

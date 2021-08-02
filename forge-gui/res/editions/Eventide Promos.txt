@@ -6,5 +6,5 @@ Type=Promo
 ScryfallCode=PEVE
 
 [cards]
-139★ R Figure of Destiny
-157★ R Overbeing of Myth
+139★ R Figure of Destiny @Scott M. Fischer
+157★ R Overbeing of Myth @Zoltan Boros & Gabor Szikszai

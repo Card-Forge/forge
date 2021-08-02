@@ -7,8 +7,8 @@ CardLang=ja
 ScryfallCode=PHJ
 
 [cards]
-1 R Goblin Mutant
-2 R Ihsan's Shade
-3 R Krovikan Vampire
-4 R Surge of Strength
-5 R Yavimaya Ants
+1 R Goblin Mutant @Daniel Gelon
+2 R Ihsan's Shade @Christopher Rush
+3 R Krovikan Vampire @Quinton Hoover
+4 R Surge of Strength @Ruth Thompson
+5 R Yavimaya Ants @Pat Lewis

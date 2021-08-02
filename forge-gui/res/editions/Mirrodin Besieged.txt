@@ -13,161 +13,161 @@ ChaosDraftThemes=MIRRODIN
 ScryfallCode=MBS
 
 [cards]
-1 U Accorder Paladin
-2 C Ardent Recruit
-3 C Banishment Decree
-39 R Black Sun's Zenith
-98 C Bladed Sentinel
-99 M Blightsteel Colossus
-77 C Blightwidow
-58 C Blisterstick Shaman
-20 R Blue Sun's Zenith
-100 R Bonehoard
-101 U Brass Squire
-59 C Burn the Impure
-40 C Caustic Hound
-4 U Choking Fumes
-60 C Concussive Bolt
-21 M Consecrated Sphinx
-144 R Contested War Zone
-102 C Copper Carapace
-103 U Core Prowler
-22 U Corrupted Conscience
-78 R Creeping Corrosion
-61 C Crush
-23 R Cryptoplasm
-104 R Darksteel Plate
-105 R Decimator Web
-24 R Distant Memories
-5 C Divine Offering
-106 C Dross Ripper
-79 C Fangren Marauder
-107 C Flayer Husk
-41 C Flensermite
-42 U Flesh-Eater Imp
-155 L Forest
-155 L Forest
-6 C Frantic Salvage
-25 C Fuel for the Cause
-62 R Galvanoth
-80 C Glissa's Courier
-96 M Glissa, the Traitor
-63 C Gnathosaur
-43 U Go for the Throat
-64 U Goblin Wardriver
-7 U Gore Vassal
-81 R Green Sun's Zenith
-44 U Gruesome Encore
-108 C Gust-Skimmer
-65 R Hellkite Igniter
-8 M Hero of Bladehold
-66 M Hero of Oxid Ridge
-109 C Hexplate Golem
-45 C Horrifying Revelation
-110 C Ichor Wellspring
-145 R Inkmoth Nexus
-67 U Into the Core
-149 L Island
-149 L Island
-9 U Kemba's Legion
-111 R Knowledge Pool
-68 C Koth's Courier
-69 U Kuldotha Flamefiend
-70 C Kuldotha Ringleader
-82 U Lead the Stampede
-10 U Leonin Relic-Warder
-11 C Leonin Skyhunter
-12 C Loxodon Partisan
-112 U Lumengrid Gargoyle
-113 R Magnetic Mine
-46 M Massacre Wurm
-13 C Master's Call
-83 U Melira's Keepers
-71 U Metallic Mastery
-14 R Mirran Crusader
-84 C Mirran Mettle
-26 C Mirran Spy
-114 R Mirrorworks
-27 R Mitotic Manipulation
-47 C Morbid Plunder
-115 U Mortarpod
-153 L Mountain
-153 L Mountain
-116 C Myr Sire
-117 R Myr Turbine
-118 R Myr Welder
-48 U Nested Ghoul
-28 U Neurok Commando
-29 C Oculus
-72 C Ogre Resister
-119 U Peace Strider
-49 C Phyresis
-50 R Phyrexian Crusader
-120 C Phyrexian Digester
-85 R Phyrexian Hydra
-121 U Phyrexian Juggernaut
-51 C Phyrexian Rager
-15 R Phyrexian Rebirth
-122 R Phyrexian Revoker
-52 R Phyrexian Vatmother
-123 U Pierce Strider
-124 U Piston Sledge
-86 C Pistus Strike
-125 U Plague Myr
-87 U Plaguemaw Beast
-147 L Plains
-147 L Plains
-88 M Praetor's Counsel
-16 C Priests of Norn
-126 R Psychosis Crawler
-30 C Quicksilver Geyser
-89 U Quilled Slagwurm
-73 C Rally the Forces
-127 C Razorfield Rhino
-74 R Red Sun's Zenith
-90 C Rot Wolf
-128 C Rusted Slasher
-53 R Sangromancer
-54 C Scourge Servant
-55 U Septic Rats
-31 C Serum Raker
-129 R Shimmer Myr
-130 C Shriekhorn
-131 U Signal Pest
-132 U Silverskin Armor
-133 U Skinwing
-75 R Slagstorm
-134 U Sphere of the Suns
-135 C Spin Engine
-136 R Spine of Ish Sah
-76 U Spiraling Duelist
-32 C Spire Serpent
-56 C Spread the Sickness
-33 C Steel Sabotage
-137 U Strandwalker
-150 L Swamp
-150 L Swamp
-138 M Sword of Feast and Famine
-139 C Tangle Hulk
-91 C Tangle Mantis
-97 M Tezzeret, Agent of Bolas
-140 R Thopter Assembly
-92 M Thrun, the Last Troll
-17 C Tine Shrike
-141 R Titan Forge
-142 C Training Drone
-34 U Treasure Mage
-35 C Turn the Tide
-93 C Unnatural Predation
-36 U Vedalken Anatomist
-37 U Vedalken Infuser
-18 R Victory's Herald
-143 U Viridian Claw
-94 U Viridian Corrupter
-95 C Viridian Emissary
-57 C Virulent Wound
-38 C Vivisection
-19 R White Sun's Zenith
+1 U Accorder Paladin @Kekai Kotaki
+2 C Ardent Recruit @Mike Bierek
+3 C Banishment Decree @James Ryman
+39 R Black Sun's Zenith @Daniel Ljunggren
+98 C Bladed Sentinel @Tomasz Jedruszek
+99 M Blightsteel Colossus @Chris Rahn
+77 C Blightwidow @Daniel Ljunggren
+58 C Blisterstick Shaman @Svetlin Velinov
+20 R Blue Sun's Zenith @Izzy
+100 R Bonehoard @Chippy
+101 U Brass Squire @Ryan Pancoast
+59 C Burn the Impure @Nic Klein
+40 C Caustic Hound @Dave Allsop
+4 U Choking Fumes @Scott Chou
+60 C Concussive Bolt @Johann Bodin
+21 M Consecrated Sphinx @Mark Zug
+144 R Contested War Zone @Scott Chou
+102 C Copper Carapace @Franz Vohwinkel
+103 U Core Prowler @Dave Allsop
+22 U Corrupted Conscience @Jason Chan
+78 R Creeping Corrosion @Ryan Pancoast
+61 C Crush @Matt Stewart
+23 R Cryptoplasm @Eric Deschamps
+104 R Darksteel Plate @Daniel Ljunggren
+105 R Decimator Web @Daniel Ljunggren
+24 R Distant Memories @Karl Kopinski
+5 C Divine Offering @Terese Nielsen
+106 C Dross Ripper @David Rapoza
+79 C Fangren Marauder @James Ryman
+107 C Flayer Husk @Igor Kieryluk
+41 C Flensermite @Dave Allsop
+42 U Flesh-Eater Imp @Johann Bodin
+154 L Forest @Mark Tedin
+155 L Forest @Mark Tedin
+6 C Frantic Salvage @Scott Chou
+25 C Fuel for the Cause @Steven Belledin
+62 R Galvanoth @Kev Walker
+80 C Glissa's Courier @Dave Kendall
+96 M Glissa, the Traitor @Chris Rahn
+63 C Gnathosaur @Jason Chan
+43 U Go for the Throat @David Rapoza
+64 U Goblin Wardriver @Chippy
+7 U Gore Vassal @Matt Cavotta
+81 R Green Sun's Zenith @David Rapoza
+44 U Gruesome Encore @Adrian Smith
+108 C Gust-Skimmer @Dan Scott
+65 R Hellkite Igniter @Jason Chan
+8 M Hero of Bladehold @Austin Hsu
+66 M Hero of Oxid Ridge @Eric Deschamps
+109 C Hexplate Golem @Matt Cavotta
+45 C Horrifying Revelation @Shelly Wan
+110 C Ichor Wellspring @Steven Belledin
+145 R Inkmoth Nexus @Jung Park
+67 U Into the Core @Whit Brachna
+148 L Island @Jung Park
+149 L Island @Jung Park
+9 U Kemba's Legion @Anthony Francisco
+111 R Knowledge Pool @Mike Bierek
+68 C Koth's Courier @Wayne Reynolds
+69 U Kuldotha Flamefiend @Raymond Swanland
+70 C Kuldotha Ringleader @Greg Staples
+82 U Lead the Stampede @Efrem Palacios
+10 U Leonin Relic-Warder @Greg Staples
+11 C Leonin Skyhunter @Jana Schirmer & Johannes Voss
+12 C Loxodon Partisan @Matt Stewart
+112 U Lumengrid Gargoyle @Randis Albion
+113 R Magnetic Mine @David Rapoza
+46 M Massacre Wurm @Jason Chan
+13 C Master's Call @David Rapoza
+83 U Melira's Keepers @Eric Deschamps
+71 U Metallic Mastery @Erica Yang
+14 R Mirran Crusader @Eric Deschamps
+84 C Mirran Mettle @Karl Kopinski
+26 C Mirran Spy @Dave Kendall
+114 R Mirrorworks @John Avon
+27 R Mitotic Manipulation @Dan Scott
+47 C Morbid Plunder @Mike Bierek
+115 U Mortarpod @Eric Deschamps
+152 L Mountain @Tomasz Jedruszek
+153 L Mountain @Tomasz Jedruszek
+116 C Myr Sire @Jaime Jones
+117 R Myr Turbine @Randis Albion
+118 R Myr Welder @Austin Hsu
+48 U Nested Ghoul @Dave Kendall
+28 U Neurok Commando @Matt Stewart
+29 C Oculus @Dan Scott
+72 C Ogre Resister @Efrem Palacios
+119 U Peace Strider @Igor Kieryluk
+49 C Phyresis @Izzy
+50 R Phyrexian Crusader @Eric Deschamps
+120 C Phyrexian Digester @Dave Allsop
+85 R Phyrexian Hydra @Mike Bierek
+121 U Phyrexian Juggernaut @Kev Walker
+51 C Phyrexian Rager @Stephan Martiniere
+15 R Phyrexian Rebirth @Scott Chou
+122 R Phyrexian Revoker @Kev Walker
+52 R Phyrexian Vatmother @Stephan Martiniere
+123 U Pierce Strider @Igor Kieryluk
+124 U Piston Sledge @Pete Venters
+86 C Pistus Strike @Jaime Jones
+125 U Plague Myr @Efrem Palacios
+87 U Plaguemaw Beast @Whit Brachna
+146 L Plains @James Paick
+147 L Plains @James Paick
+88 M Praetor's Counsel @Daarken
+16 C Priests of Norn @Igor Kieryluk
+126 R Psychosis Crawler @Stephan Martiniere
+30 C Quicksilver Geyser @Erica Yang
+89 U Quilled Slagwurm @Matt Stewart
+73 C Rally the Forces @Steven Belledin
+127 C Razorfield Rhino @Kekai Kotaki
+74 R Red Sun's Zenith @Svetlin Velinov
+90 C Rot Wolf @Nils Hamm
+128 C Rusted Slasher @Adrian Smith
+53 R Sangromancer @Igor Kieryluk
+54 C Scourge Servant @Daarken
+55 U Septic Rats @Cos Koniotis
+31 C Serum Raker @Austin Hsu
+129 R Shimmer Myr @Jana Schirmer & Johannes Voss
+130 C Shriekhorn @Erica Yang
+131 U Signal Pest @Mark Zug
+132 U Silverskin Armor @Terese Nielsen
+133 U Skinwing @Igor Kieryluk
+75 R Slagstorm @Dan Scott
+134 U Sphere of the Suns @Jana Schirmer & Johannes Voss
+135 C Spin Engine @Pete Venters
+136 R Spine of Ish Sah @Daniel Ljunggren
+76 U Spiraling Duelist @Karl Kopinski
+32 C Spire Serpent @Johann Bodin
+56 C Spread the Sickness @Jaime Jones
+33 C Steel Sabotage @Daarken
+137 U Strandwalker @Igor Kieryluk
+150 L Swamp @Lars Grant-West
+151 L Swamp @Lars Grant-West
+138 M Sword of Feast and Famine @Chris Rahn
+139 C Tangle Hulk @Mark Zug
+91 C Tangle Mantis @Chris Rahn
+97 M Tezzeret, Agent of Bolas @Aleksi Briclot
+140 R Thopter Assembly @Volkan Baǵa
+92 M Thrun, the Last Troll @Jason Chan
+17 C Tine Shrike @Adrian Smith
+141 R Titan Forge @Svetlin Velinov
+142 C Training Drone @Matt Cavotta
+34 U Treasure Mage @Ryan Pancoast
+35 C Turn the Tide @Jason Felix
+93 C Unnatural Predation @Shelly Wan
+36 U Vedalken Anatomist @Greg Staples
+37 U Vedalken Infuser @Ryan Pancoast
+18 R Victory's Herald @rk post
+143 U Viridian Claw @Marc Simonetti
+94 U Viridian Corrupter @Matt Cavotta
+95 C Viridian Emissary @Matt Stewart
+57 C Virulent Wound @Whit Brachna
+38 C Vivisection @Anthony Francisco
+19 R White Sun's Zenith @Mike Bierek
 
 [tokens]
 w_2_2_cat

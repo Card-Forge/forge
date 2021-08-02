@@ -7,82 +7,82 @@ Type=Duel_Deck
 ScryfallCode=DDU
 
 [cards]
-1 M Ezuri, Renegade Leader
-2 R Dwynen, Gilt-Leaf Daen
-3 U Dwynen's Elite
-4 C Elvish Aberration
-5 R Elvish Archdruid
-6 C Elvish Branchbender
-7 C Elvish Mystic
-8 C Elvish Vanguard
-9 C Ezuri's Archers
-10 C Fierce Empath
-11 R Gladehart Cavalry
-12 C Ivy Lane Denizen
-13 U Jagged-Scar Archers
-14 C Krosan Tusker
-15 C Kujar Seedsculptor
-16 C Lead the Stampede
-17 C Leaf Gilder
-18 C Llanowar Empath
-19 C Naturalize
-20 U Nature's Way
-21 U Nissa's Judgment
-22 R Regal Force
-23 R Sylvan Advocate
-24 R Talara's Battalion
-25 U Viridian Shaman
-26 C Wildheart Invoker
-27 R Yeva, Nature's Herald
-28 R Oran-Rief, the Vastwood
-29 C Tranquil Thicket
-30 U Treetop Village
-31 L Forest
-32 L Forest
-33 L Forest
-34 L Forest
-35 M Goblin Welder
-36 C Artificer's Epiphany
-37 C Etherium Sculptor
-38 C Faerie Mechanist
-39 U Riddlesmith
-40 U Treasure Mage
-41 C Trinket Mage
-42 U Trophy Mage
-43 U Whirler Rogue
-44 U Barrage Ogre
-45 C Galvanic Blast
-46 C Ghirapur Gearcrafter
-47 R Pia and Kiran Nalaar
-48 U Shrapnel Blast
-49 C Welding Sparks
-50 U Maverick Thopterist
-51 U Reclusive Artificer
-52 R Darksteel Plate
-53 U Filigree Familiar
-54 C Ichor Wellspring
-55 C Inventor's Goggles
-56 C Mycosynth Wellspring
-57 R Myr Battlesphere
-58 C Myr Sire
-59 C Neurok Replica
-60 C Pyrite Spellbomb
-61 R Scuttling Doom Engine
-62 R Solemn Simulacrum
-63 R Thopter Assembly
-64 U Voyager Staff
-65 U Darksteel Citadel
-66 U Foundry of the Consuls
-67 C Great Furnace
-68 U Phyrexia's Core
-69 C Seat of the Synod
-70 R Shivan Reef
-71 C Swiftwater Cliffs
-72 R Temple of Epiphany
-73 L Island
-74 L Island
-75 L Mountain
-76 L Mountain
+1 M Ezuri, Renegade Leader @Victor Adame Minguez
+2 R Dwynen, Gilt-Leaf Daen @Johannes Voss
+3 U Dwynen's Elite @Volkan Baǵa
+4 C Elvish Aberration @Johann Bodin
+5 R Elvish Archdruid @Raymond Swanland
+6 C Elvish Branchbender @Ralph Horsley
+7 C Elvish Mystic @Wesley Burt
+8 C Elvish Vanguard @Steve Prescott
+9 C Ezuri's Archers @Shelly Wan
+10 C Fierce Empath @Johann Bodin
+11 R Gladehart Cavalry @Steven Belledin
+12 C Ivy Lane Denizen @Winona Nelson
+13 U Jagged-Scar Archers @Paolo Parente
+14 C Krosan Tusker @Kev Walker
+15 C Kujar Seedsculptor @Anna Steinbauer
+16 C Lead the Stampede @Efrem Palacios
+17 C Leaf Gilder @Quinton Hoover
+18 C Llanowar Empath @Warren Mahy
+19 C Naturalize @James Paick
+20 U Nature's Way @Zack Stella
+21 U Nissa's Judgment @Tyler Jacobson
+22 R Regal Force @Brandon Kitkouski
+23 R Sylvan Advocate @Volkan Baǵa
+24 R Talara's Battalion @Todd Lockwood
+25 U Viridian Shaman @Scott M. Fischer
+26 C Wildheart Invoker @Erica Yang
+27 R Yeva, Nature's Herald @Eric Deschamps
+28 R Oran-Rief, the Vastwood @Mike Bierek
+29 C Tranquil Thicket @Heather Hudson
+30 U Treetop Village @Rob Alexander
+31 L Forest @John Avon
+32 L Forest @Volkan Baǵa
+33 L Forest @Jim Nelson
+34 L Forest @Mark Tedin
+35 M Goblin Welder @Victor Adame Minguez
+36 C Artificer's Epiphany @Kieran Yanner
+37 C Etherium Sculptor @Steven Belledin
+38 C Faerie Mechanist @Matt Cavotta
+39 U Riddlesmith @Eric Deschamps
+40 U Treasure Mage @Ryan Pancoast
+41 C Trinket Mage @Scott Chou
+42 U Trophy Mage @Anna Steinbauer
+43 U Whirler Rogue @Winona Nelson
+44 U Barrage Ogre @David Rapoza
+45 C Galvanic Blast @Marc Simonetti
+46 C Ghirapur Gearcrafter @Victor Adame Minguez
+47 R Pia and Kiran Nalaar @Eric Deschamps
+48 U Shrapnel Blast @Hideaki Takamura
+49 C Welding Sparks @Raymond Swanland
+50 U Maverick Thopterist @Zack Stella
+51 U Reclusive Artificer @Cynthia Sheppard
+52 R Darksteel Plate @Daniel Ljunggren
+53 U Filigree Familiar @Izzy
+54 C Ichor Wellspring @Steven Belledin
+55 C Inventor's Goggles @Jason Felix
+56 C Mycosynth Wellspring @David Rapoza
+57 R Myr Battlesphere @Franz Vohwinkel
+58 C Myr Sire @Jaime Jones
+59 C Neurok Replica @Zoltan Boros & Gabor Szikszai
+60 C Pyrite Spellbomb @Jim Nelson
+61 R Scuttling Doom Engine @Filip Burburan
+62 R Solemn Simulacrum @Dan Scott
+63 R Thopter Assembly @Svetlin Velinov
+64 U Voyager Staff @Tsutomu Kawade
+65 U Darksteel Citadel @John Avon
+66 U Foundry of the Consuls @Sam Burley
+67 C Great Furnace @Rob Alexander
+68 U Phyrexia's Core @Franz Vohwinkel
+69 C Seat of the Synod @John Avon
+70 R Shivan Reef @Rob Alexander
+71 C Swiftwater Cliffs @Eytan Zana
+72 R Temple of Epiphany @Yeong-Hao Han
+73 L Island @Jung Park
+74 L Island @Johannes Voss
+75 L Mountain @Tomasz Jedruszek
+76 L Mountain @Eytan Zana
 
 [tokens]
 g_1_1_elf_warrior

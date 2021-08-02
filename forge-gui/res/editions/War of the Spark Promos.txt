@@ -6,10 +6,10 @@ Type=Promo
 ScryfallCode=PWAR
 
 [cards]
-41 U Augur of Bolas
-79 R Bolas's Citadel
-98 U Liliana's Triumph
-171 U Paradise Druid
-193 U Dovin's Veto
-223 R Time Wipe
-248 R Karn's Bastion
+41 U Augur of Bolas @Alex Konstad
+79 R Bolas's Citadel @Piotr Dura
+98 U Liliana's Triumph @Heonhwa Choe
+171 U Paradise Druid @Nils Hamm
+193 U Dovin's Veto @Izzy
+223 R Time Wipe @Heonhwa Choe
+248 R Karn's Bastion @Piotr Dura

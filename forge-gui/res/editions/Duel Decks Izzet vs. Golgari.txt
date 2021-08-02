@@ -7,96 +7,96 @@ Type=Duel_Deck
 ScryfallCode=DDJ
 
 [cards]
-1 M Niv-Mizzet, the Firemind
-2 C Kiln Fiend
-3 C Goblin Electromancer
-4 U Izzet Guildmage
-5 U Gelectrode
-6 C Wee Dragonauts
-7 C Steamcore Weird
-8 U Shrewd Hatchling
-9 C Ogre Savant
-10 R Galvanoth
-11 C Izzet Chronarch
-12 R Djinn Illuminatus
-13 C Brainstorm
-14 C Force Spike
-15 C Magma Spray
-16 U Isochron Scepter
-17 C Izzet Signet
-18 C Call to Heel
-19 C Train of Thought
-20 C Pyromatics
-21 U Izzet Charm
-22 U Reminisce
-23 U Thunderheads
-24 U Vacuumelt
-25 U Dissipate
-26 C Quicksilver Dagger
-27 R Prophetic Bolt
-28 U Overwhelming Intellect
-29 R Sphinx-Bone Wand
-30 U Street Spasm
-31 R Invoke the Firemind
-32 U Fire // Ice
-33 C Forgotten Cave
-34 C Izzet Boilerworks
-35 C Lonely Sandbar
-36 U Nivix, Aerie of the Firemind
-37 L Island
-38 L Island
-39 L Island
-40 L Island
-41 L Mountain
-42 L Mountain
-43 L Mountain
-44 L Mountain
-45 M Jarad, Golgari Lich Lord
-46 U Plagued Rusalka
-47 C Elves of Deep Shadow
-48 U Golgari Thug
-49 C Ravenous Rats
-50 U Reassembling Skeleton
-51 U Boneyard Wurm
-52 U Korozda Guildmage
-53 C Putrid Leech
-54 C Stinkweed Imp
-55 U Eternal Witness
-56 U Dreg Mangler
-57 C Shambling Shell
-58 C Brain Weevil
-59 C Greater Mossdog
-60 R Golgari Grave-Troll
-61 U Stingerfling Spider
-62 U Sadistic Hypnotist
-63 C Golgari Rotwurm
-64 R Gleancrawler
-65 R Doomgape
-66 C Golgari Signet
-67 U Ghoul's Feast
-68 C Yoke of the Damned
-69 R Life from the Loam
-70 U Golgari Germination
-71 U Putrefy
-72 C Feast or Famine
-73 U Nightmare Void
-74 U Vigor Mortis
-75 U Grim Flowering
-76 R Twilight's Call
-77 U Life // Death
-78 C Barren Moor
-79 U Dakmor Salvage
-80 C Golgari Rot Farm
-81 U Svogthos, the Restless Tomb
-82 C Tranquil Thicket
-83 L Swamp
-84 L Swamp
-85 L Swamp
-86 L Swamp
-87 L Forest
-88 L Forest
-89 L Forest
-90 L Forest
+1 M Niv-Mizzet, the Firemind @Svetlin Velinov
+2 C Kiln Fiend @Adi Granov
+3 C Goblin Electromancer @Svetlin Velinov
+4 U Izzet Guildmage @Jim Murray
+5 U Gelectrode @Dan Scott
+6 C Wee Dragonauts @Greg Staples
+7 C Steamcore Weird @Justin Norman
+8 U Shrewd Hatchling @Carl Frank
+9 C Ogre Savant @Paolo Parente
+10 R Galvanoth @Kev Walker
+11 C Izzet Chronarch @Steven Belledin
+12 R Djinn Illuminatus @Carl Critchlow
+13 C Brainstorm @Willian Murai
+14 C Force Spike @Nelson DeCastro
+15 C Magma Spray @Jarreau Wimberly
+16 U Isochron Scepter @Mark Harrison
+17 C Izzet Signet @Raoul Vitale
+18 C Call to Heel @Randy Gallegos
+19 C Train of Thought @Matt Thompson
+20 C Pyromatics @Glen Angus
+21 U Izzet Charm @Zoltan Boros
+22 U Reminisce @Ralph Horsley
+23 U Thunderheads @Hideaki Takamura
+24 U Vacuumelt @Nottsuo
+25 U Dissipate @Tomasz Jedruszek
+26 C Quicksilver Dagger @Alex Horley-Orlandelli
+27 R Prophetic Bolt @Slawomir Maniak
+28 U Overwhelming Intellect @Alex Horley-Orlandelli
+29 R Sphinx-Bone Wand @Franz Vohwinkel
+30 U Street Spasm @Raymond Swanland
+31 R Invoke the Firemind @Zoltan Boros & Gabor Szikszai
+32 U Fire // Ice @Dan Scott
+33 C Forgotten Cave @Tony Szczudlo
+34 C Izzet Boilerworks @John Avon
+35 C Lonely Sandbar @Heather Hudson
+36 U Nivix, Aerie of the Firemind @Martina Pilcerova
+37 L Island @Stephan Martiniere
+38 L Island @Christopher Moeller
+39 L Island @Anthony S. Waters
+40 L Island @Richard Wright
+41 L Mountain @Stephan Martiniere
+42 L Mountain @Christopher Moeller
+43 L Mountain @Anthony S. Waters
+44 L Mountain @Richard Wright
+45 M Jarad, Golgari Lich Lord @Svetlin Velinov
+46 U Plagued Rusalka @Alex Horley-Orlandelli
+47 C Elves of Deep Shadow @Justin Sweet
+48 U Golgari Thug @Johann Bodin
+49 C Ravenous Rats @Carl Critchlow
+50 U Reassembling Skeleton @Austin Hsu
+51 U Boneyard Wurm @Jaime Jones
+52 U Korozda Guildmage @Ryan Pancoast
+53 C Putrid Leech @Dave Allsop
+54 C Stinkweed Imp @Nils Hamm
+55 U Eternal Witness @Terese Nielsen
+56 U Dreg Mangler @Peter Mohrbacher
+57 C Shambling Shell @Joel Thomas
+58 C Brain Weevil @Anthony Jones
+59 C Greater Mossdog @Chippy
+60 R Golgari Grave-Troll @Greg Hildebrandt
+61 U Stingerfling Spider @Dave Allsop
+62 U Sadistic Hypnotist @Paolo Parente
+63 C Golgari Rotwurm @Wayne England
+64 R Gleancrawler @Jeremy Jarvis
+65 R Doomgape @Dave Allsop
+66 C Golgari Signet @Raoul Vitale
+67 U Ghoul's Feast @Alan Pollack
+68 C Yoke of the Damned @Paul Bonner
+69 R Life from the Loam @Terese Nielsen
+70 U Golgari Germination @Thomas M. Baxa
+71 U Putrefy @Clint Cearley
+72 C Feast or Famine @Chase Stone
+73 U Nightmare Void @Chippy
+74 U Vigor Mortis @Dan Scott
+75 U Grim Flowering @Adam Paquette
+76 R Twilight's Call @Mark Romanoski
+77 U Life // Death @Ryan Barger
+78 C Barren Moor @Heather Hudson
+79 U Dakmor Salvage @John Avon
+80 C Golgari Rot Farm @John Avon
+81 U Svogthos, the Restless Tomb @Martina Pilcerova
+82 C Tranquil Thicket @Heather Hudson
+83 L Swamp @Stephan Martiniere
+84 L Swamp @Christopher Moeller
+85 L Swamp @Anthony S. Waters
+86 L Swamp @Richard Wright
+87 L Forest @Stephan Martiniere
+88 L Forest @Christopher Moeller
+89 L Forest @Anthony S. Waters
+90 L Forest @Richard Wright
 
 [tokens]
 u_3_3_weird_defender_flying

@@ -6,30 +6,30 @@ Type=Online
 ScryfallCode=HA3
 
 [cards]
-1 U Honden of Cleansing Fire
-2 C Momentary Blink
-3 R Tempered Steel
-4 U Timely Reinforcements
-5 R Body Double
-6 U Honden of Seeing Winds
-7 C Silent Departure
-8 R Swan Song
-9 U Chainer's Edict
-10 C Gempalm Polluter
-11 U Honden of Night's Reach
-12 M Phyrexian Obliterator
-13 U Unburial Rites
-14 R Devil's Play
-15 U Gempalm Incinerator
-16 U Honden of Infinite Rage
-17 R Tectonic Reformation
-18 R Enchantress's Presence
-19 U Honden of Life's Web
-20 C Krosan Tusker
-21 U Roar of the Wurm
-22 R Mirari's Wake
-23 M Akroma's Memorial
-24 R Ratchet Bomb
-25 M Ulamog, the Ceaseless Hunger
-26 U Ancient Ziggurat
-27 M Maze's End
+1 M Ulamog, the Ceaseless Hunger @Michael Komarck
+2 U Honden of Cleansing Fire @Greg Staples
+3 C Momentary Blink @Anthony S. Waters
+4 R Tempered Steel @Wayne Reynolds
+5 U Timely Reinforcements @Tomasz Jedruszek
+6 R Body Double @Steve Prescott
+7 U Honden of Seeing Winds @Martina Pilcerova
+8 C Silent Departure @John Avon
+9 R Swan Song @Peter Mohrbacher
+10 U Chainer's Edict @Ben Thompson
+11 C Gempalm Polluter @Dany Orizio
+12 U Honden of Night's Reach @Jim Nelson
+13 M Phyrexian Obliterator @Todd Lockwood
+14 U Unburial Rites @Ryan Pancoast
+15 R Devil's Play @Austin Hsu
+16 U Gempalm Incinerator @Luca Zontini
+17 U Honden of Infinite Rage @John Avon
+18 R Tectonic Reformation @James Paick
+19 R Enchantress's Presence @Rebecca Guay
+20 U Honden of Life's Web @Rob Alexander
+21 C Krosan Tusker @Kev Walker
+22 U Roar of the Wurm @Kev Walker
+23 R Mirari's Wake @David Martin
+24 M Akroma's Memorial @Dan Scott
+25 R Ratchet Bomb @Austin Hsu
+26 U Ancient Ziggurat @John Avon
+27 M Maze's End @Cliff Childs

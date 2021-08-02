@@ -16,215 +16,215 @@ ChaosDraftThemes=GRAVEYARD_MATTERS
 ScryfallCode=HOU
 
 [cards]
-1 C Act of Heroism
-2 R Adorned Pouncer
-3 R Angel of Condemnation
-4 U Angel of the God-Pharaoh
-5 C Aven of Enduring Hope
-6 M Crested Sunmare
-7 C Dauntless Aven
-8 U Desert's Hold
-9 C Disposal Mummy
-10 R Djeru, With Eyes Open
-11 C Djeru's Renunciation
-12 C Dutiful Servants
-13 U Gideon's Defeat
-14 C God-Pharaoh's Faithful
-15 R Hour of Revelation
-16 C Mummy Paramount
-17 C Oketra's Avenger
-18 R Oketra's Last Mercy
-19 M Overwhelming Splendor
-20 C Sandblast
-21 U Saving Grace
-22 R Solemnity
-23 C Solitary Camel
-24 C Steadfast Sentinel
-25 U Steward of Solidarity
-26 U Sunscourge Champion
-27 U Unconventional Tactics
-28 U Vizier of the True
-29 C Aerial Guide
-30 C Aven Reedstalker
-31 R Champion of Wits
-32 C Countervailing Winds
-33 C Cunning Survivor
-34 U Eternal of Harsh Truths
-35 R Fraying Sanity
-36 R Hour of Eternity
-37 U Imaginary Threats
-38 U Jace's Defeat
-39 R Kefnet's Last Word
-40 R Nimble Obstructionist
-41 U Ominous Sphinx
-42 C Proven Combatant
-43 U Riddleform
-44 C Seer of the Last Tomorrow
-45 U Sinuous Striker
-46 C Spellweaver Eternal
-47 C Strategic Planning
-48 C Striped Riverwinder
-49 U Supreme Will
-50 R Swarm Intelligence
-51 C Tragic Lesson
-52 M Unesh, Criosphinx Sovereign
-53 C Unquenchable Thirst
-54 C Unsummon
-55 U Vizier of the Anointed
-56 U Accursed Horde
-57 R Ammit Eternal
-58 R Apocalypse Demon
-59 U Banewhip Punisher
-60 R Bontu's Last Reckoning
-61 C Carrion Screecher
-62 U Doomfall
-63 R Dreamstealer
-64 C Grisly Survivor
-65 R Hour of Glory
-66 C Khenra Eternal
-67 C Lethal Sting
-68 U Liliana's Defeat
-69 C Lurching Rotbeast
-70 C Marauding Boneslasher
-71 U Merciless Eternal
-72 C Moaning Wall
-73 M Razaketh, the Foulblooded
-74 U Razaketh's Rite
-75 C Ruin Rat
-76 C Scrounger of Souls
-77 R Torment of Hailfire
-78 U Torment of Scarabs
-79 C Torment of Venom
-80 U Vile Manifestation
-81 C Without Weakness
-82 C Wretched Camel
-83 U Abrade
-84 C Blur of Blades
-85 U Burning-Fist Minotaur
-86 U Chandra's Defeat
-87 R Chaos Maw
-88 C Crash Through
-89 C Defiant Khenra
-90 R Earthshaker Khenra
-91 U Fervent Paincaster
-92 C Firebrand Archer
-93 C Frontline Devastator
-94 C Gilded Cerodon
-95 C Granitic Titan
-96 R Hazoret's Undying Fury
-97 R Hour of Devastation
-98 R Imminent Doom
-99 U Inferno Jet
-100 C Khenra Scrapper
-101 C Kindled Fury
-102 U Magmaroth
-103 U Manticore Eternal
-104 M Neheb, the Eternal
-105 C Open Fire
-106 C Puncturing Blow
-107 U Sand Strangler
-108 C Thorned Moloch
-109 R Wildfire Eternal
-110 C Ambuscade
-111 C Beneath the Sands
-112 C Bitterbow Sharpshooters
-113 U Devotee of Strength
-114 U Dune Diviner
-115 C Feral Prowler
-116 C Frilled Sandwalla
-117 C Gift of Strength
-118 C Harrier Naga
-119 U Hope Tender
-120 R Hour of Promise
-121 C Life Goes On
-122 M Majestic Myriarch
-123 U Nissa's Defeat
-124 C Oasis Ritualist
-125 U Overcome
-126 R Pride Sovereign
-127 U Quarry Beetle
-128 C Rampaging Hippo
-129 R Ramunap Excavator
-130 R Ramunap Hydra
-131 R Resilient Khenra
-132 R Rhonas's Last Stand
-133 C Rhonas's Stalwart
-134 C Sidewinder Naga
-135 U Sifter Wurm
-136 U Tenacious Hunter
-137 M Uncage the Menagerie
-138 U Bloodwater Entity
-139 M The Locust God
-140 M Nicol Bolas, God-Pharaoh
-141 U Obelisk Spider
-142 U Resolute Survivors
-143 U River Hoopoe
-144 M Samut, the Tested
-145 M The Scarab God
-146 M The Scorpion God
-147 U Unraveling Mummy
-148 U Farm // Market
-149 U Consign // Oblivion
-150 U Claim // Fame
-151 U Struggle // Survive
-152 U Appeal // Authority
-153 R Leave // Chance
-154 R Reason // Believe
-155 R Grind // Dust
-156 R Refuse // Cooperate
-157 R Driven // Despair
-158 R Abandoned Sarcophagus
-159 U Crook of Condemnation
-160 U Dagger of the Worthy
-161 R God-Pharaoh's Gift
-162 C Graven Abomination
-163 R Hollow One
-164 C Manalith
-165 R Mirage Mirror
-166 U Sunset Pyramid
-167 C Traveler's Amulet
-168 C Wall of Forgotten Pharaohs
-169 U Crypt of the Eternals
-170 C Desert of the Fervent
-171 C Desert of the Glorified
-172 C Desert of the Indomitable
-173 C Desert of the Mindful
-174 C Desert of the True
-175 U Dunes of the Dead
-176 R Endless Sands
-177 U Hashep Oasis
-178 R Hostile Desert
-179 U Ifnir Deadlands
-180 U Ipnu Rivulet
-181 U Ramunap Ruins
-182 R Scavenger Grounds
-183 U Shefet Dunes
-184 C Survivors' Encampment
-185 L Plains
-186 L Island
-187 L Swamp
-188 L Mountain
-189 L Forest
-190 L Plains
-191 L Plains
-192 L Island
-193 L Island
-194 L Swamp
-195 L Swamp
-196 L Mountain
-197 L Mountain
-198 L Forest
-199 L Forest
-200 M Nissa, Genesis Mage
-201 U Avid Reclaimer
-202 C Brambleweft Behemoth
-203 R Nissa's Encouragement
-204 C Woodland Stream
-205 M Nicol Bolas, the Deceiver
-206 U Wasp of the Bitter End
-207 C Zealot of the God-Pharaoh
-208 R Visage of Bolas
-209 C Cinder Barrens
+1 C Act of Heroism @Magali Villeneuve
+2 R Adorned Pouncer @Slawomir Maniak
+3 R Angel of Condemnation @Slawomir Maniak
+4 U Angel of the God-Pharaoh @E. M. Gist
+5 C Aven of Enduring Hope @James Ryman
+6 M Crested Sunmare @Lucas Graciano
+7 C Dauntless Aven @Zack Stella
+8 U Desert's Hold @Sara Winters
+9 C Disposal Mummy @Gabor Szikszai
+10 R Djeru, With Eyes Open @Kieran Yanner
+11 C Djeru's Renunciation @Kieran Yanner
+12 C Dutiful Servants @Volkan Baǵa
+13 U Gideon's Defeat @Kieran Yanner
+14 C God-Pharaoh's Faithful @Bastien L. Deharme
+15 R Hour of Revelation @Raymond Swanland
+16 C Mummy Paramount @Josu Hernaiz
+17 C Oketra's Avenger @Anthony Palumbo
+18 R Oketra's Last Mercy @Howard Lyon
+19 M Overwhelming Splendor @Richard Wright
+20 C Sandblast @Seb McKinnon
+21 U Saving Grace @McLean Kendree
+22 R Solemnity @Greg Opalinski
+23 C Solitary Camel @Aaron Miller
+24 C Steadfast Sentinel @Karl Kopinski
+25 U Steward of Solidarity @Sara Winters
+26 U Sunscourge Champion @Josu Hernaiz
+27 U Unconventional Tactics @Jason Felix
+28 U Vizier of the True @Ryan Alexander Lee
+29 C Aerial Guide @Sidharth Chaturvedi
+30 C Aven Reedstalker @Scott Murphy
+31 R Champion of Wits @Even Amundsen
+32 C Countervailing Winds @Tyler Jacobson
+33 C Cunning Survivor @Zoltan Boros
+34 U Eternal of Harsh Truths @Izzy
+35 R Fraying Sanity @Ryan Alexander Lee
+36 R Hour of Eternity @Tyler Jacobson
+37 U Imaginary Threats @Magali Villeneuve
+38 U Jace's Defeat @Kieran Yanner
+39 R Kefnet's Last Word @Clint Cearley
+40 R Nimble Obstructionist @Shreya Shetty
+41 U Ominous Sphinx @Lars Grant-West
+42 C Proven Combatant @Clint Cearley
+43 U Riddleform @Steve Argyle
+44 C Seer of the Last Tomorrow @Sara Winters
+45 U Sinuous Striker @Svetlin Velinov
+46 C Spellweaver Eternal @Jason Felix
+47 C Strategic Planning @Matt Stewart
+48 C Striped Riverwinder @Craig J Spearing
+49 U Supreme Will @Alayna Danner
+50 R Swarm Intelligence @Daniel Ljunggren
+51 C Tragic Lesson @Joseph Meehan
+52 M Unesh, Criosphinx Sovereign @Adrian Majkrzak
+53 C Unquenchable Thirst @Jeremy Wilson
+54 C Unsummon @Nils Hamm
+55 U Vizier of the Anointed @Jakub Kasper
+56 U Accursed Horde @Victor Adame Minguez
+57 R Ammit Eternal @Mike Bierek
+58 R Apocalypse Demon @Piotr Jabłoński
+59 U Banewhip Punisher @Scott Murphy
+60 R Bontu's Last Reckoning @Victor Adame Minguez
+61 C Carrion Screecher @Tomasz Jedruszek
+62 U Doomfall @Darek Zabrocki
+63 R Dreamstealer @Yongjae Choi
+64 C Grisly Survivor @Seb McKinnon
+65 R Hour of Glory @Svetlin Velinov
+66 C Khenra Eternal @Tomasz Jedruszek
+67 C Lethal Sting @Randy Vargas
+68 U Liliana's Defeat @Kieran Yanner
+69 C Lurching Rotbeast @Jason A. Engle
+70 C Marauding Boneslasher @Victor Adame Minguez
+71 U Merciless Eternal @Mathias Kollros
+72 C Moaning Wall @Piotr Jabłoński
+73 M Razaketh, the Foulblooded @Chris Rallis
+74 U Razaketh's Rite @Izzy
+75 C Ruin Rat @Shreya Shetty
+76 C Scrounger of Souls @Zezhou Chen
+77 R Torment of Hailfire @Grzegorz Rutkowski
+78 U Torment of Scarabs @Bastien L. Deharme
+79 C Torment of Venom @Johann Bodin
+80 U Vile Manifestation @Jason Felix
+81 C Without Weakness @Alex Konstad
+82 C Wretched Camel @Dan Scott
+83 U Abrade @Jonas De Ro
+84 C Blur of Blades @Anna Steinbauer
+85 U Burning-Fist Minotaur @Matt Stewart
+86 U Chandra's Defeat @Kieran Yanner
+87 R Chaos Maw @Steve Argyle
+88 C Crash Through @Izzy
+89 C Defiant Khenra @David Palumbo
+90 R Earthshaker Khenra @Jason A. Engle
+91 U Fervent Paincaster @Matt Stewart
+92 C Firebrand Archer @John Stanko
+93 C Frontline Devastator @Tommy Arnold
+94 C Gilded Cerodon @Matt Stewart
+95 C Granitic Titan @Yohann Schepacz
+96 R Hazoret's Undying Fury @Victor Adame Minguez
+97 R Hour of Devastation @Simon Dominic
+98 R Imminent Doom @Daniel Ljunggren
+99 U Inferno Jet @Jakub Kasper
+100 C Khenra Scrapper @Jesper Ejsing
+101 C Kindled Fury @Craig J Spearing
+102 U Magmaroth @Yeong-Hao Han
+103 U Manticore Eternal @Yeong-Hao Han
+104 M Neheb, the Eternal @Chris Rahn
+105 C Open Fire @Jason Kang
+106 C Puncturing Blow @Eric Deschamps
+107 U Sand Strangler @Aaron Miller
+108 C Thorned Moloch @James Paick
+109 R Wildfire Eternal @Magali Villeneuve
+110 C Ambuscade @Kev Walker
+111 C Beneath the Sands @Magali Villeneuve
+112 C Bitterbow Sharpshooters @Bram Sels
+113 U Devotee of Strength @Yeong-Hao Han
+114 U Dune Diviner @Min Yum
+115 C Feral Prowler @Ben Wootten
+116 C Frilled Sandwalla @Zezhou Chen
+117 C Gift of Strength @Kieran Yanner
+118 C Harrier Naga @Filip Burburan
+119 U Hope Tender @Magali Villeneuve
+120 R Hour of Promise @Jonas De Ro
+121 C Life Goes On @Daarken
+122 M Majestic Myriarch @Randy Vargas
+123 U Nissa's Defeat @Kieran Yanner
+124 C Oasis Ritualist @Josu Hernaiz
+125 U Overcome @Craig J Spearing
+126 R Pride Sovereign @Ryan Yee
+127 U Quarry Beetle @Mike Burns
+128 C Rampaging Hippo @Aaron Miller
+129 R Ramunap Excavator @Mark Behm
+130 R Ramunap Hydra @Mike Burns
+131 R Resilient Khenra @Svetlin Velinov
+132 R Rhonas's Last Stand @Winona Nelson
+133 C Rhonas's Stalwart @Bram Sels
+134 C Sidewinder Naga @Victor Adame Minguez
+135 U Sifter Wurm @Filip Burburan
+136 U Tenacious Hunter @Zezhou Chen
+137 M Uncage the Menagerie @Simon Dominic
+138 U Bloodwater Entity @Viktor Titov
+139 M The Locust God @Lius Lasahido
+140 M Nicol Bolas, God-Pharaoh @Raymond Swanland
+141 U Obelisk Spider @YW Tang
+142 U Resolute Survivors @David Palumbo
+143 U River Hoopoe @Ryan Pancoast
+144 M Samut, the Tested @Aleksi Briclot
+145 M The Scarab God @Lius Lasahido
+146 M The Scorpion God @Lius Lasahido
+147 U Unraveling Mummy @Tomasz Jedruszek
+148 U Farm // Market @Victor Adame Minguez
+149 U Consign // Oblivion @Sidharth Chaturvedi
+150 U Claim // Fame @Jason Rainville
+151 U Struggle // Survive @Eric Deschamps
+152 U Appeal // Authority @Jason Rainville
+153 R Leave // Chance @Dan Scott
+154 R Reason // Believe @Daarken
+155 R Grind // Dust @Josh Hass
+156 R Refuse // Cooperate @Yongjae Choi
+157 R Driven // Despair @Winona Nelson
+158 R Abandoned Sarcophagus @Daarken
+159 U Crook of Condemnation @Ben Maier
+160 U Dagger of the Worthy @Tommy Arnold
+161 R God-Pharaoh's Gift @Titus Lunter
+162 C Graven Abomination @Igor Kieryluk
+163 R Hollow One @Anthony Palumbo
+164 C Manalith @Ryan Yee
+165 R Mirage Mirror @Craig J Spearing
+166 U Sunset Pyramid @Jonas De Ro
+167 C Traveler's Amulet @Marco Nelor
+168 C Wall of Forgotten Pharaohs @Igor Kieryluk
+169 U Crypt of the Eternals @Titus Lunter
+170 C Desert of the Fervent @Titus Lunter
+171 C Desert of the Glorified @Jonas De Ro
+172 C Desert of the Indomitable @James Paick
+173 C Desert of the Mindful @Christine Choi
+174 C Desert of the True @Jung Park
+175 U Dunes of the Dead @E. M. Gist
+176 R Endless Sands @Noah Bradley
+177 U Hashep Oasis @Jonas De Ro
+178 R Hostile Desert @Josh Hass
+179 U Ifnir Deadlands @Jonas De Ro
+180 U Ipnu Rivulet @James Paick
+181 U Ramunap Ruins @Florian de Gesincourt
+182 R Scavenger Grounds @Steven Belledin
+183 U Shefet Dunes @Yeong-Hao Han
+184 C Survivors' Encampment @Jonas De Ro
+185 L Plains @Titus Lunter
+186 L Island @Richard Wright
+187 L Swamp @Clint Cearley
+188 L Mountain @Florian de Gesincourt
+189 L Forest @Yeong-Hao Han
+190 L Plains @Lars Grant-West
+191 L Plains @Titus Lunter
+192 L Island @Lucas Graciano
+193 L Island @Titus Lunter
+194 L Swamp @Titus Lunter
+195 L Swamp @Mark Zug
+196 L Mountain @Titus Lunter
+197 L Mountain @Kev Walker
+198 L Forest @Titus Lunter
+199 L Forest @Mark Poole
+200 M Nissa, Genesis Mage @Chris Rallis
+201 U Avid Reclaimer @Josu Hernaiz
+202 C Brambleweft Behemoth @Florian de Gesincourt
+203 R Nissa's Encouragement @Tommy Arnold
+204 C Woodland Stream @Florian de Gesincourt
+205 M Nicol Bolas, the Deceiver @Svetlin Velinov
+206 U Wasp of the Bitter End @Tomasz Jedruszek
+207 C Zealot of the God-Pharaoh @Gabor Szikszai
+208 R Visage of Bolas @Titus Lunter
+209 C Cinder Barrens @Titus Lunter
 
 [tokens]
 w_1_1_cat_lifelink

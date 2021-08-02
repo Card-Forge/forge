@@ -7,48 +7,48 @@ Type=Collector_Edition
 ScryfallCode=EXP
 
 [cards]
-1 M Prairie Stream
-2 M Sunken Hollow
-3 M Smoldering Marsh
-4 M Cinder Glade
-5 M Canopy Vista
-6 M Hallowed Fountain
-7 M Watery Grave
-8 M Blood Crypt
-9 M Stomping Ground
-10 M Temple Garden
-11 M Godless Shrine
-12 M Steam Vents
-13 M Overgrown Tomb
-14 M Sacred Foundry
-15 M Breeding Pool
-16 M Flooded Strand
-17 M Polluted Delta
-18 M Bloodstained Mire
-19 M Wooded Foothills
-20 M Windswept Heath
-21 M Marsh Flats
-22 M Scalding Tarn
-23 M Verdant Catacombs
-24 M Arid Mesa
-25 M Misty Rainforest
-26 M Mystic Gate
-27 M Sunken Ruins
-28 M Graven Cairns
-29 M Fire-Lit Thicket
-30 M Wooded Bastion
-31 M Fetid Heath
-32 M Cascade Bluffs
-33 M Twilight Mire
-34 M Rugged Prairie
-35 M Flooded Grove
-36 M Ancient Tomb
-37 M Dust Bowl
-38 M Eye of Ugin
-39 M Forbidden Orchard
-40 M Horizon Canopy
-41 M Kor Haven
-42 M Mana Confluence
-43 M Strip Mine
-44 M Tectonic Edge
-45 M Wasteland
+1 M Prairie Stream @Titus Lunter
+2 M Sunken Hollow @Titus Lunter
+3 M Smoldering Marsh @Titus Lunter
+4 M Cinder Glade @Titus Lunter
+5 M Canopy Vista @Titus Lunter
+6 M Hallowed Fountain @Min Yum
+7 M Watery Grave @Min Yum
+8 M Blood Crypt @Min Yum
+9 M Stomping Ground @Min Yum
+10 M Temple Garden @Min Yum
+11 M Godless Shrine @Noah Bradley
+12 M Steam Vents @Noah Bradley
+13 M Overgrown Tomb @Noah Bradley
+14 M Sacred Foundry @Noah Bradley
+15 M Breeding Pool @Noah Bradley
+16 M Flooded Strand @Véronique Meignaud
+17 M Polluted Delta @Véronique Meignaud
+18 M Bloodstained Mire @Véronique Meignaud
+19 M Wooded Foothills @Véronique Meignaud
+20 M Windswept Heath @Véronique Meignaud
+21 M Marsh Flats @Ryan Yee
+22 M Scalding Tarn @Ryan Yee
+23 M Verdant Catacombs @Ryan Yee
+24 M Arid Mesa @Ryan Yee
+25 M Misty Rainforest @Ryan Yee
+26 M Mystic Gate @Adam Paquette
+27 M Sunken Ruins @Adam Paquette
+28 M Graven Cairns @Adam Paquette
+29 M Fire-Lit Thicket @Adam Paquette
+30 M Wooded Bastion @Adam Paquette
+31 M Fetid Heath @Christine Choi
+32 M Cascade Bluffs @Christine Choi
+33 M Twilight Mire @Christine Choi
+34 M Rugged Prairie @Christine Choi
+35 M Flooded Grove @Christine Choi
+36 M Ancient Tomb @Howard Lyon
+37 M Dust Bowl @Florian de Gesincourt
+38 M Eye of Ugin @James Paick
+39 M Forbidden Orchard @Jesper Ejsing
+40 M Horizon Canopy @Florian de Gesincourt
+41 M Kor Haven @Jonas De Ro
+42 M Mana Confluence @Howard Lyon
+43 M Strip Mine @Howard Lyon
+44 M Tectonic Edge @Raymond Swanland
+45 M Wasteland @William Wu

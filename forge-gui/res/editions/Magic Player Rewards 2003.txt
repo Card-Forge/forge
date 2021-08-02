@@ -6,7 +6,7 @@ Type=Promo
 ScryfallCode=P03
 
 [cards]
-1 R Voidmage Prodigy
+1 R Voidmage Prodigy @Christopher Moeller
 
 [tokens]
 g_1_1_insect

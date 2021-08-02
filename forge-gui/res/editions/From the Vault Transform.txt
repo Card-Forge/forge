@@ -7,21 +7,21 @@ Type=Collector_Edition
 ScryfallCode=V17
 
 [cards]
-1 M Archangel Avacyn
-2 M Arguel's Blood Fast
-3 M Arlinn Kord
-4 M Bloodline Keeper
-5 M Bruna, the Fading Light
-6 M Chandra, Fire of Kaladesh
-7 M Delver of Secrets
-8 M Elbrus, the Binding Blade
-9 M Garruk Relentless
-10 M Gisela, the Broken Blade
-11 M Huntmaster of the Fells
-12 M Jace, Vryn's Prodigy
-13 M Kytheon, Hero of Akros
-14 M Liliana, Heretical Healer
-15 M Nissa, Vastwood Seer
+1 M Archangel Avacyn @James Ryman
+2 M Arguel's Blood Fast @Daarken
+3 M Arlinn Kord @Winona Nelson
+4 M Bloodline Keeper @Jason Chan
+5a M Bruna, the Fading Light @Clint Cearley
+6 M Chandra, Fire of Kaladesh @Eric Deschamps
+7 M Delver of Secrets @Lius Lasahido
+8 M Elbrus, the Binding Blade @Eric Deschamps
+9 M Garruk Relentless @Grzegorz Rutkowski
+10 M Gisela, the Broken Blade @Clint Cearley
+11 M Huntmaster of the Fells @Magali Villeneuve
+12 M Jace, Vryn's Prodigy @Jaime Jones
+13 M Kytheon, Hero of Akros @Willian Murai
+14 M Liliana, Heretical Healer @Karla Ortiz
+15 M Nissa, Vastwood Seer @Wesley Burt
 
 [tokens]
 ashaya_the_awoken_world

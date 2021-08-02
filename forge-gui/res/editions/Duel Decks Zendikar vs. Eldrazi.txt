@@ -8,81 +8,81 @@ Type=Duel_Deck
 ScryfallCode=DDP
 
 [cards]
-1 M Avenger of Zendikar
-2 U Affa Guard Hound
-3 C Caravan Escort
-4 U Kabira Vindicator
-5 C Knight of Cliffhaven
-6 C Makindi Griffin
-7 U Oust
-8 C Repel the Darkness
-9 C Sheer Drop
-10 U Beastbreaker of Bala Ged
-11 C Daggerback Basilisk
-12 U Frontier Guide
-13 C Graypelt Hunter
-14 C Grazing Gladehart
-15 C Groundswell
-16 C Harrow
-17 C Joraga Bard
-18 C Khalni Heart Expedition
-19 C Ondu Giant
-20 R Primal Command
-21 U Retreat to Kazandu
-22 R Scute Mob
-23 U Tajuru Archer
-24 C Territorial Baloth
-25 U Turntimber Basilisk
-26 C Wildheart Invoker
-27 R Veteran Warleader
-28 C Explorer's Scope
-29 R Seer's Sundial
-30 C Stonework Puma
-31 C Evolving Wilds
-32 U Graypelt Refuge
-33 R Stirring Wildwood
-34 C Turntimber Grove
-35 L Plains
-36 L Plains
-37 L Plains
-38 L Forest
-39 L Forest
-40 L Forest
-41 M Oblivion Sower
-42 U Artisan of Kozilek
-43 R It That Betrays
-44 C Ulamog's Crusher
-45 C Bloodrite Invoker
-46 C Bloodthrone Vampire
-47 R Butcher of Malakir
-48 C Cadaver Imp
-49 R Consume the Meek
-50 U Corpsehatch
-51 C Dominator Drone
-52 C Heartstabber Mosquito
-53 C Induce Despair
-54 U Marsh Casualties
-55 U Pawn of Ulamog
-56 C Read the Bones
-57 U Smother
-58 U Vampire Nighthawk
-59 C Emrakul's Hatcher
-60 C Forked Bolt
-61 R Hellion Eruption
-62 R Magmaw
-63 C Torch Slinger
-64 U Forerunner of Slaughter
-65 U Mind Stone
-66 U Runed Servitor
-67 U Akoum Refuge
-68 U Eldrazi Temple
-69 U Rocky Tar Pit
-70 L Swamp
-71 L Swamp
-72 L Swamp
-73 L Mountain
-74 L Mountain
-75 L Mountain
+1 M Avenger of Zendikar @Aleksi Briclot
+2 U Affa Guard Hound @Ryan Pancoast
+3 C Caravan Escort @Goran Josic
+4 U Kabira Vindicator @Steven Belledin
+5 C Knight of Cliffhaven @Matt Cavotta
+6 C Makindi Griffin @Izzy
+7 U Oust @Mike Bierek
+8 C Repel the Darkness @Scott Chou
+9 C Sheer Drop @Clint Cearley
+10 U Beastbreaker of Bala Ged @Karl Kopinski
+11 C Daggerback Basilisk @Jesper Ejsing
+12 U Frontier Guide @Wayne Reynolds
+13 C Graypelt Hunter @Svetlin Velinov
+14 C Grazing Gladehart @Ryan Pancoast
+15 C Groundswell @Chris Rahn
+16 C Harrow @Izzy
+17 C Joraga Bard @Volkan Baǵa
+18 C Khalni Heart Expedition @Jason Chan
+19 C Ondu Giant @Igor Kieryluk
+20 R Primal Command @Magali Villeneuve
+21 U Retreat to Kazandu @Kieran Yanner
+22 R Scute Mob @Zoltan Boros & Gabor Szikszai
+23 U Tajuru Archer @Chris Rahn
+24 C Territorial Baloth @Jesper Ejsing
+25 U Turntimber Basilisk @Goran Josic
+26 C Wildheart Invoker @Erica Yang
+27 R Veteran Warleader @Josu Hernaiz
+28 C Explorer's Scope @Vincent Proce
+29 R Seer's Sundial @Franz Vohwinkel
+30 C Stonework Puma @Christopher Moeller
+31 C Evolving Wilds @Steven Belledin
+32 U Graypelt Refuge @Philip Straub
+33 R Stirring Wildwood @Eric Deschamps
+34 C Turntimber Grove @Rob Alexander
+35 L Plains @John Avon
+36 L Plains @Jung Park
+37 L Plains @Vincent Proce
+38 L Forest @John Avon
+39 L Forest @Véronique Meignaud
+40 L Forest @Vincent Proce
+41 M Oblivion Sower @Aleksi Briclot
+42 U Artisan of Kozilek @Jason Felix
+43 R It That Betrays @Tomasz Jedruszek
+44 C Ulamog's Crusher @Todd Lockwood
+45 C Bloodrite Invoker @Svetlin Velinov
+46 C Bloodthrone Vampire @Steve Argyle
+47 R Butcher of Malakir @Jason Chan
+48 C Cadaver Imp @Dave Kendall
+49 R Consume the Meek @Richard Wright
+50 U Corpsehatch @Kekai Kotaki
+51 C Dominator Drone @James Zapata
+52 C Heartstabber Mosquito @Jason Felix
+53 C Induce Despair @Igor Kieryluk
+54 U Marsh Casualties @Scott Chou
+55 U Pawn of Ulamog @Daarken
+56 C Read the Bones @Lars Grant-West
+57 U Smother @Karl Kopinski
+58 U Vampire Nighthawk @Jason Chan
+59 C Emrakul's Hatcher @Jaime Jones
+60 C Forked Bolt @Tomasz Jedruszek
+61 R Hellion Eruption @Anthony Francisco
+62 R Magmaw @Karl Kopinski
+63 C Torch Slinger @Andrew Robinson
+64 U Forerunner of Slaughter @James Zapata
+65 U Mind Stone @Adam Rex
+66 U Runed Servitor @Mike Bierek
+67 U Akoum Refuge @Fred Fields
+68 U Eldrazi Temple @James Paick
+69 U Rocky Tar Pit @Jeff Miracola
+70 L Swamp @Véronique Meignaud
+71 L Swamp @Véronique Meignaud
+72 L Swamp @Véronique Meignaud
+73 L Mountain @James Paick
+74 L Mountain @James Paick
+75 L Mountain @James Paick
 
 [tokens]
 c_0_1_eldrazi_spawn_sac

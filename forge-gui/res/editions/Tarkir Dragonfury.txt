@@ -6,7 +6,7 @@ Type=Promo
 ScryfallCode=PTKDF
 
 [cards]
-135 C Dragon Fodder
-138 U Dragonlord's Servant
-187 R Foe-Razer Regent
-248 C Evolving Wilds
+135 C Dragon Fodder @Jesper Ejsing
+138 U Dragonlord's Servant @Carl Frank
+187 R Foe-Razer Regent @Svetlin Velinov
+248 C Evolving Wilds @Noah Bradley

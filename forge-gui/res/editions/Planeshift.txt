@@ -13,152 +13,152 @@ FoilAlwaysInCommonSlot=False
 ScryfallCode=PLS
 
 [cards]
-20 U Allied Strategies
-77 U Alpha Kavu
-78 C Amphibious Kavu
-96 R Ancient Spider
-21 C Arctic Merfolk
-1 C Aura Blast
-2 C Aurora Griffin
-39 C Bog Down
-58 C Caldera Kavu
-97 C Cavern Harpy
-98 R Cloud Cover
-22 C Confound
-136 U Crosis's Catacombs
-99 U Crosis's Charm
-137 U Darigaaz's Caldera
-100 U Darigaaz's Charm
-101 C Daring Leap
-40 R Dark Suspicions
-59 R Deadapult
-41 C Death Bomb
-102 R Destructive Flow
-42 R Diabolic Intent
-3 C Disciple of Kangee
-4 R Dominaria's Judgment
-103 R Doomsday Specter
-131 R Draco
-104 R Dralnu's Crusade
-23 R Dralnu's Pet
-138 U Dromar's Cavern
-105 U Dromar's Charm
-106 R Eladamri's Call
-24 U Ertai's Trickery
-107 R Ertai, the Corrupted
-107 S Ertai, the Corrupted
-25 C Escape Routes
-43 U Exotic Disease
-79 C Falling Timber
-60 U Flametongue Kavu
-108 U Fleetfoot Panther
-139 R Forsaken City
-80 R Gaea's Herald
-81 C Gaea's Might
-26 U Gainsay
-109 C Gerrard's Command
-61 R Goblin Game
-5 U Guard Dogs
-6 C Heroic Defiance
-7 C Hobble
-8 C Honorable Scout
-110 C Horned Kavu
-111 C Hull Breach
-27 C Hunting Drake
-62 U Implode
-63 C Insolence
-64 C Kavu Recluse
-65 C Keldon Mantle
-112 R Keldon Twilight
-9 U Lashknife Barrier
-113 C Lava Zombie
-44 R Lord of the Undead
-45 C Maggot Carrier
-66 C Magma Burst
-82 R Magnigoth Treefolk
-114 C Malicious Advice
-132 U Mana Cylix
-10 R March of Souls
-115 U Marsh Crocodile
-116 R Meddling Mage
-140 R Meteor Crater
-67 C Mire Kavu
-83 U Mirrorwood Treefolk
-68 U Mogg Jailer
-69 R Mogg Sentry
-46 C Morgue Toad
-84 U Multani's Harmony
-117 R Natural Emergence
-85 R Nemata, Grove Guardian
-47 U Nightscape Battlemage
-48 C Nightscape Familiar
-49 U Noxious Vapors
-11 R Orim's Chant
-50 C Phyrexian Bloodstock
-51 R Phyrexian Scuta
-118 R Phyrexian Tyranny
-28 R Planar Overlay
-86 R Planeswalker's Favor
-70 R Planeswalker's Fury
-12 R Planeswalker's Mirth
-29 R Planeswalker's Mischief
-52 R Planeswalker's Scorn
-13 C Pollen Remedy
-87 C Primal Growth
-88 C Pygmy Kavu
-119 R Questing Phelddagrif
-89 R Quirion Dryad
-90 C Quirion Explorer
-120 R Radiant Kavu
-121 U Razing Snidd
-122 U Rith's Charm
-141 U Rith's Grove
-91 C Root Greevil
-30 C Rushing River
-14 R Samite Elder
-15 C Samite Pilgrim
-123 U Sawtooth Loon
-31 C Sea Snidd
-32 U Shifting Sky
-124 R Shivan Wurm
-53 C Shriek of Dread
-125 C Silver Drake
-71 C Singe
-54 C Sinister Strength
-33 C Sisay's Ingenuity
-133 R Skyship Weatherlight
-133 S Skyship Weatherlight
-92 U Skyshroud Blessing
-55 U Slay
-34 C Sleeping Potion
-72 C Slingshot Goblin
-126 U Sparkcaster
-134 U Star Compass
-127 C Steel Leaf Paladin
-93 C Stone Kavu
-35 U Stormscape Battlemage
-36 C Stormscape Familiar
-73 U Strafe
-135 U Stratadon
-37 R Sunken Hope
-16 U Sunscape Battlemage
-17 C Sunscape Familiar
-18 U Surprise Deployment
-74 S Tahngarth, Talruum Hero
-74 R Tahngarth, Talruum Hero
-142 U Terminal Moraine
-128 C Terminate
-94 U Thornscape Battlemage
-95 C Thornscape Familiar
-75 U Thunderscape Battlemage
-76 C Thunderscape Familiar
-129 U Treva's Charm
-143 U Treva's Ruins
-130 R Urza's Guilt
-19 U Voice of All
-56 C Volcano Imp
-57 U Warped Devotion
-38 R Waterspout Elemental
+20 U Allied Strategies @Paolo Parente
+77 U Alpha Kavu @Matt Cavotta
+78 C Amphibious Kavu @Wayne England
+96 R Ancient Spider @Greg Staples
+21 C Arctic Merfolk @Ron Spears
+1 C Aura Blast @Ron Walotsky
+2 C Aurora Griffin @Ciruelo
+39 C Bog Down @Andrew Goldhawk
+58 C Caldera Kavu @Arnie Swekel
+97 C Cavern Harpy @Daren Bader
+98 R Cloud Cover @Marc Fishman
+22 C Confound @Doug Chaffee
+136 U Crosis's Catacombs @Edward P. Beard, Jr.
+99 U Crosis's Charm @David Martin
+137 U Darigaaz's Caldera @Franz Vohwinkel
+100 U Darigaaz's Charm @David Martin
+101 C Daring Leap @Paolo Parente
+40 R Dark Suspicions @Matt Cavotta
+59 R Deadapult @Mark Brill
+41 C Death Bomb @Dan Frazier
+102 R Destructive Flow @Don Hazeltine
+42 R Diabolic Intent @Dave Dorman
+3 C Disciple of Kangee @Wayne England
+4 R Dominaria's Judgment @John Avon
+103 R Doomsday Specter @Donato Giancola
+131 R Draco @Sam Wood
+104 R Dralnu's Crusade @Arnie Swekel
+23 R Dralnu's Pet @Glen Angus
+138 U Dromar's Cavern @Franz Vohwinkel
+105 U Dromar's Charm @David Martin
+106 R Eladamri's Call @Kev Walker
+24 U Ertai's Trickery @Kev Walker
+107 R Ertai, the Corrupted @Mark Tedin
+107 S Ertai, the Corrupted @Mark Tedin
+25 C Escape Routes @Marc Fishman
+43 U Exotic Disease @Kev Walker
+79 C Falling Timber @Eric Peterson
+60 U Flametongue Kavu @Pete Venters
+108 U Fleetfoot Panther @Mark Brill
+139 R Forsaken City @Dana Knutson
+80 R Gaea's Herald @Dan Frazier
+81 C Gaea's Might @Ron Spencer
+26 U Gainsay @Roger Raupp
+109 C Gerrard's Command @Roger Raupp
+61 R Goblin Game @DiTerlizzi
+5 U Guard Dogs @Mike Raabe
+6 C Heroic Defiance @Terese Nielsen
+7 C Hobble @Alan Pollack
+8 C Honorable Scout @Mike Ploog
+110 C Horned Kavu @Michael Sutfin
+111 C Hull Breach @Brian Snõddy
+27 C Hunting Drake @Wayne England
+62 U Implode @Arnie Swekel
+63 C Insolence @Carl Critchlow
+64 C Kavu Recluse @Aaron Boyd
+65 C Keldon Mantle @Rebecca Guay
+112 R Keldon Twilight @Franz Vohwinkel
+9 U Lashknife Barrier @Paolo Parente
+113 C Lava Zombie @Tom Wänerstrand
+44 R Lord of the Undead @Brom
+45 C Maggot Carrier @Ron Spencer
+66 C Magma Burst @Bradley Williams
+82 R Magnigoth Treefolk @Peter Bollinger
+114 C Malicious Advice @Glen Angus
+132 U Mana Cylix @Donato Giancola
+10 R March of Souls @Marc Fishman
+115 U Marsh Crocodile @Kev Walker
+116 R Meddling Mage @Christopher Moeller
+140 R Meteor Crater @John Avon
+67 C Mire Kavu @Wayne England
+83 U Mirrorwood Treefolk @Arnie Swekel
+68 U Mogg Jailer @Mark Romanoski
+69 R Mogg Sentry @Edward P. Beard, Jr.
+46 C Morgue Toad @Franz Vohwinkel
+84 U Multani's Harmony @Darrell Riche
+117 R Natural Emergence @Heather Hudson
+85 R Nemata, Grove Guardian @John Avon
+47 U Nightscape Battlemage @Andrew Goldhawk
+48 C Nightscape Familiar @Jeff Easley
+49 U Noxious Vapors @Ben Thompson
+11 R Orim's Chant @Kev Walker
+50 C Phyrexian Bloodstock @Mark Tedin
+51 R Phyrexian Scuta @Scott M. Fischer
+118 R Phyrexian Tyranny @Kev Walker
+28 R Planar Overlay @Ron Walotsky
+86 R Planeswalker's Favor @Rebecca Guay
+70 R Planeswalker's Fury @Christopher Moeller
+12 R Planeswalker's Mirth @John Matson
+29 R Planeswalker's Mischief @Pete Venters
+52 R Planeswalker's Scorn @Glen Angus
+13 C Pollen Remedy @Ben Thompson
+87 C Primal Growth @rk post
+88 C Pygmy Kavu @Greg Staples
+119 R Questing Phelddagrif @Matt Cavotta
+89 R Quirion Dryad @Don Hazeltine
+90 C Quirion Explorer @Ron Spears
+120 R Radiant Kavu @Ron Spencer
+121 U Razing Snidd @Alan Pollack
+122 U Rith's Charm @David Martin
+141 U Rith's Grove @Scott Bailey
+91 C Root Greevil @Andrew Robinson
+30 C Rushing River @Don Hazeltine
+14 R Samite Elder @Terese Nielsen
+15 C Samite Pilgrim @D. J. Cleland-Hura
+123 U Sawtooth Loon @Heather Hudson
+31 C Sea Snidd @Chippy
+32 U Shifting Sky @Jerry Tiritilli
+124 R Shivan Wurm @Scott M. Fischer
+53 C Shriek of Dread @Nelson DeCastro
+125 C Silver Drake @Alan Pollack
+71 C Singe @John Avon
+54 C Sinister Strength @Terese Nielsen
+33 C Sisay's Ingenuity @Paolo Parente
+133 R Skyship Weatherlight @Mark Tedin
+133 S Skyship Weatherlight @Mark Tedin
+92 U Skyshroud Blessing @Jerry Tiritilli
+55 U Slay @Ben Thompson
+34 C Sleeping Potion @Daren Bader
+72 C Slingshot Goblin @Jeff Easley
+126 U Sparkcaster @Adam Rex
+134 U Star Compass @Donato Giancola
+127 C Steel Leaf Paladin @Paolo Parente
+93 C Stone Kavu @Adam Rex
+35 U Stormscape Battlemage @Christopher Moeller
+36 C Stormscape Familiar @Heather Hudson
+73 U Strafe @Jim Nelson
+135 U Stratadon @Brian Snõddy
+37 R Sunken Hope @Greg Staples
+16 U Sunscape Battlemage @Tony Szczudlo
+17 C Sunscape Familiar @Brian Despain
+18 U Surprise Deployment @Bradley Williams
+74 S Tahngarth, Talruum Hero @Dave Dorman
+74 R Tahngarth, Talruum Hero @Dave Dorman
+142 U Terminal Moraine @Scott Bailey
+128 C Terminate @DiTerlizzi
+94 U Thornscape Battlemage @Matt Cavotta
+95 C Thornscape Familiar @Heather Hudson
+75 U Thunderscape Battlemage @Mike Ploog
+76 C Thunderscape Familiar @Daren Bader
+129 U Treva's Charm @David Martin
+143 U Treva's Ruins @Jerry Tiritilli
+130 R Urza's Guilt @Paolo Parente
+19 U Voice of All @rk post
+56 C Volcano Imp @Thomas M. Baxa
+57 U Warped Devotion @Dany Orizio
+38 R Waterspout Elemental @Mark Romanoski
 
 [tokens]
 w_1_1_spirit_flying

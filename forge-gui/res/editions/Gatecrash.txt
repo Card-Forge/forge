@@ -13,255 +13,255 @@ ChaosDraftThemes=RAVNICA
 ScryfallCode=GTC
 
 [cards]
-29 U AEtherize
-85 C Act of Treason
-113 C Adaptive Snapjaw
-1 C Aerial Maneuver
-30 U Agoraphobia
-141 R Alms Beast
-114 U Alpha Authority
-2 C Angelic Edict
-3 R Angelic Skirmisher
-226 C Armored Transport
-211 U Arrows of Justice
-4 C Assault Griffin
-142 R Assemble the Legion
-144 M Aurelia's Fury
-143 M Aurelia, the Warleader
-57 C Balustrade Spy
-145 U Bane Alley Broker
-5 C Basilica Guards
-58 C Basilica Screecher
-212 C Beckon Apparition
-213 R Biomass Mutation
-214 C Bioshift
-146 R Biovisionary
-6 R Blind Obedience
-86 C Bomber Corps
-147 M Borborygmos Enraged
-148 U Boros Charm
-7 U Boros Elite
-239 C Boros Guildgate
-227 U Boros Keyrune
-215 R Boros Reckoner
-240 R Breeding Pool
-216 U Burning-Tree Emissary
-115 C Burst of Strength
-149 U Call of the Nightwing
-150 U Cartel Aristocrat
-87 U Cinder Elemental
-151 R Clan Defiance
-31 C Clinging Anemones
-32 C Cloudfin Raptor
-217 U Coerced Confession
-152 R Consuming Aberration
-59 C Contaminated Ground
-60 C Corpse Blockade
-8 C Court Street Denizen
-88 U Crackling Perimeter
-116 C Crocanura
-117 U Crowned Ceratok
-61 R Crypt Ghast
-9 C Daring Skyjek
-62 C Death's Approach
-218 C Deathcult Rogue
-153 M Deathpact Angel
-10 U Debtor's Pulpit
-63 C Devour Flesh
-33 R Diluvian Primordial
-154 U Dimir Charm
-241 C Dimir Guildgate
-228 U Dimir Keyrune
-155 U Dinrova Horror
-118 C Disciple of the Old Ways
-156 M Domri Rade
-157 C Drakewing Krasis
-158 U Duskmantle Guildmage
-159 M Duskmantle Seer
-11 C Dutiful Thrull
-64 U Dying Wish
-160 U Elusive Krasis
-89 C Ember Beast
-34 M Enter the Infinite
-161 C Executioner's Swing
-119 U Experiment One
-162 R Fathom Mage
-90 U Firefist Striker
-163 R Firemane Avenger
-91 R Five-Alarm Fire
-120 C Forced Adaptation
-164 U Fortress Cyclops
-165 R Foundry Champion
-92 C Foundry Street Denizen
-166 U Frenzied Tilling
-35 C Frilled Oculus
-12 R Frontline Medic
-93 C Furious Resistance
-65 U Gateway Shade
-167 U Ghor-Clan Rampager
-121 M Giant Adephage
-13 M Gideon, Champion of Justice
-219 U Gift of Orzhova
-229 R Glaring Spotlight
-242 R Godless Shrine
-122 C Greenside Watcher
-36 U Gridlock
-66 C Grisly Spectacle
-168 U Ground Assault
-169 U Gruul Charm
-243 C Gruul Guildgate
-230 U Gruul Keyrune
-170 R Gruul Ragebeast
-14 U Guardian of the Gateless
-15 C Guildscorn Ward
-67 C Gutter Skulk
-123 R Gyre Sage
-37 C Hands of Binding
-94 M Hellkite Tyrant
-95 U Hellraiser Goblin
-171 R High Priest of Penance
-124 U Hindervines
-16 U Hold the Gates
-17 U Holy Mantle
-96 U Homing Lightning
-68 C Horror of the Dim
-172 C Hydroform
-69 U Illness in the Ranks
-231 R Illusionist's Bracers
-220 R Immortal Servitude
-38 U Incursion Specialist
-125 C Ivy Lane Denizen
-39 C Keymaster Rogue
-70 U Killing Glare
-173 C Kingpin's Pet
-19 C Knight Watch
-18 U Knight of Obligation
-40 C Last Thoughts
-174 M Lazav, Dimir Mastermind
-97 R Legion Loyalist
-41 C Leyline Phantom
-71 M Lord of the Void
-20 R Luminate Primordial
-98 C Madcap Skills
-99 U Mark for Death
-175 C Martial Glory
-100 C Massive Raid
-176 M Master Biomancer
-72 U Mental Vapors
-177 R Merciless Eviction
-221 U Merfolk of the Depths
-42 C Metropolis Sprite
-73 C Midnight Recovery
-232 C Millennial Gargoyle
-126 U Miming Slime
-178 R Mind Grind
-43 U Mindeye Drake
-101 R Molten Primordial
-179 C Mortus Strider
-102 C Mugging
-21 U Murder Investigation
-180 R Mystic Genesis
-127 C Naturalize
-22 C Nav Squad Commandos
-222 R Nightveil Specter
-181 U Nimbus Swimmer
-182 M Obzedat, Ghost Council
-74 R Ogre Slumlord
-183 U One Thousand Lashes
-128 R Ooze Flux
-184 U Ordruun Veteran
-185 U Orzhov Charm
-244 C Orzhov Guildgate
-233 U Orzhov Keyrune
-186 C Paranoid Delusions
-223 C Pit Fight
-129 C Predator's Rapport
-187 C Primal Visitation
-188 M Prime Speaker Zegana
-234 C Prophetic Prism
-189 C Psychic Strike
-190 C Purge the Profane
-44 U Rapid Hybridization
-235 C Razortip Whip
-45 R Realmwright
-23 U Righteous Charge
-236 C Riot Gear
-103 U Ripscale Predator
-224 R Rubblebelt Raiders
-191 R Rubblehulk
-192 C Ruination Wurm
-130 U Rust Scarab
-245 R Sacred Foundry
-46 C Sage's Row Denizen
-47 U Sapphire Drake
-131 C Scab-Clan Charger
-48 C Scatter Arc
-104 C Scorchwalker
-75 R Sepulchral Primordial
-132 U Serene Remembrance
-76 C Shadow Alley Denizen
-77 C Shadow Slice
-193 C Shambleshark
-225 C Shattering Blow
-24 C Shielded Passage
-194 R Signal the Clans
-195 U Simic Charm
-49 U Simic Fluxmage
-246 C Simic Guildgate
-237 U Simic Keyrune
-50 R Simic Manipulator
-133 R Skarrg Goliath
-196 U Skarrg Guildmage
-105 C Skinbrand Goblin
-106 U Skullcrack
-238 C Skyblinder Staff
-51 C Skygames
-197 C Skyknight Legionnaire
-78 C Slate Street Ruffian
-134 C Slaughterhorn
-25 C Smite
-79 U Smog Elemental
-198 R Soul Ransom
-199 R Spark Trooper
-52 C Spell Rupture
-135 C Spire Tracer
-53 R Stolen Identity
-247 R Stomping Ground
-107 C Structural Collapse
-200 U Sunhome Guildmage
-136 R Sylvan Primordial
-26 C Syndic of Tithes
-80 C Syndicate Enforcer
-248 R Thespian's Stage
-81 U Thrull Parasite
-108 C Tin Street Market
-54 C Totally Lost
-137 U Tower Defense
-109 C Towering Thunderfist
-201 R Treasury Thrull
-202 U Truefire Paladin
-82 U Undercity Informer
-83 R Undercity Plague
-203 R Unexpected Results
-204 U Urban Evolution
-27 U Urbis Protector
-138 C Verdant Haven
-110 U Viashino Shanktail
-205 U Vizkopa Confessor
-206 U Vizkopa Guildmage
-55 U Voidwalk
-111 C Warmind Infantry
-139 U Wasteland Viper
-249 R Watery Grave
-56 C Way of the Thief
-207 R Whispering Madness
-84 U Wight of Precinct Six
-140 C Wildwood Rebirth
-208 C Wojek Halberdiers
-112 R Wrecking Ogre
-209 U Zameck Guildmage
-28 C Zarichi Tiger
-210 C Zhur-Taa Swine
+29 U Aetherize @Ryan Barger
+85 C Act of Treason @Matt Stewart
+113 C Adaptive Snapjaw @Tomasz Jedruszek
+1 C Aerial Maneuver @Scott Chou
+30 U Agoraphobia @Jim Murray
+141 R Alms Beast @Dan Scott
+114 U Alpha Authority @Dave Kendall
+2 C Angelic Edict @Trevor Claxton
+3 R Angelic Skirmisher @David Rapoza
+226 C Armored Transport @Cliff Childs
+211 U Arrows of Justice @James Ryman
+4 C Assault Griffin @Eric Velhagen
+142 R Assemble the Legion @Eric Deschamps
+144 M Aurelia's Fury @Tyler Jacobson
+143 M Aurelia, the Warleader @Slawomir Maniak
+57 C Balustrade Spy @Jaime Jones
+145 U Bane Alley Broker @Clint Cearley
+5 C Basilica Guards @Dan Scott
+58 C Basilica Screecher @Christine Choi
+212 C Beckon Apparition @Cliff Childs
+213 R Biomass Mutation @Dan Scott
+214 C Bioshift @Scott Chou
+146 R Biovisionary @Ryan Barger
+6 R Blind Obedience @Seb McKinnon
+86 C Bomber Corps @Chase Stone
+147 M Borborygmos Enraged @Aleksi Briclot
+148 U Boros Charm @Zoltan Boros
+7 U Boros Elite @Willian Murai
+239 C Boros Guildgate @Noah Bradley
+227 U Boros Keyrune @Daniel Ljunggren
+215 R Boros Reckoner @Howard Lyon
+240 R Breeding Pool @Mike Bierek
+216 U Burning-Tree Emissary @Izzy
+115 C Burst of Strength @Marco Nelor
+149 U Call of the Nightwing @Adam Paquette
+150 U Cartel Aristocrat @James Ryman
+87 U Cinder Elemental @Svetlin Velinov
+151 R Clan Defiance @Daarken
+31 C Clinging Anemones @Mike Bierek
+32 C Cloudfin Raptor @Peter Mohrbacher
+217 U Coerced Confession @Mathias Kollros
+152 R Consuming Aberration @Karl Kopinski
+59 C Contaminated Ground @Christine Choi
+60 C Corpse Blockade @Lucas Graciano
+8 C Court Street Denizen @Volkan Baǵa
+88 U Crackling Perimeter @Yeong-Hao Han
+116 C Crocanura @Jack Wang
+117 U Crowned Ceratok @Steve Prescott
+61 R Crypt Ghast @Chris Rahn
+9 C Daring Skyjek @Jason Chan
+62 C Death's Approach @Terese Nielsen
+218 C Deathcult Rogue @David Palumbo
+153 M Deathpact Angel @Jason Chan
+10 U Debtor's Pulpit @James Paick
+63 C Devour Flesh @Kev Walker
+33 R Diluvian Primordial @Stephan Martiniere
+154 U Dimir Charm @Zoltan Boros
+241 C Dimir Guildgate @Cliff Childs
+228 U Dimir Keyrune @Daniel Ljunggren
+155 U Dinrova Horror @Johann Bodin
+118 C Disciple of the Old Ways @Anthony Palumbo
+156 M Domri Rade @Tyler Jacobson
+157 C Drakewing Krasis @Johann Bodin
+158 U Duskmantle Guildmage @Slawomir Maniak
+159 M Duskmantle Seer @Kev Walker
+11 C Dutiful Thrull @Daarken
+64 U Dying Wish @Scott Chou
+160 U Elusive Krasis @Wesley Burt
+89 C Ember Beast @David Rapoza
+34 M Enter the Infinite @Terese Nielsen
+161 C Executioner's Swing @Karl Kopinski
+119 U Experiment One @Chase Stone
+162 R Fathom Mage @Ryan Pancoast
+90 U Firefist Striker @Tyler Jacobson
+163 R Firemane Avenger @Wayne Reynolds
+91 R Five-Alarm Fire @Karl Kopinski
+120 C Forced Adaptation @Trevor Claxton
+164 U Fortress Cyclops @Maciej Kuciara
+165 R Foundry Champion @Todd Lockwood
+92 C Foundry Street Denizen @Raoul Vitale
+166 U Frenzied Tilling @Noah Bradley
+35 C Frilled Oculus @Marco Nelor
+12 R Frontline Medic @Willian Murai
+93 C Furious Resistance @Slawomir Maniak
+65 U Gateway Shade @Ryan Yee
+167 U Ghor-Clan Rampager @Charles Urbach
+121 M Giant Adephage @Christine Choi
+13 M Gideon, Champion of Justice @David Rapoza
+219 U Gift of Orzhova @Johannes Voss
+229 R Glaring Spotlight @Adam Paquette
+242 R Godless Shrine @Cliff Childs
+122 C Greenside Watcher @Ryan Barger
+36 U Gridlock @Yeong-Hao Han
+66 C Grisly Spectacle @Zoltan Boros
+168 U Ground Assault @Karl Kopinski
+169 U Gruul Charm @Zoltan Boros
+243 C Gruul Guildgate @Randy Gallegos
+230 U Gruul Keyrune @Daniel Ljunggren
+170 R Gruul Ragebeast @Dave Kendall
+14 U Guardian of the Gateless @Wesley Burt
+15 C Guildscorn Ward @Ryan Barger
+67 C Gutter Skulk @Mark Winters
+123 R Gyre Sage @Tyler Jacobson
+37 C Hands of Binding @Raymond Swanland
+94 M Hellkite Tyrant @Aleksi Briclot
+95 U Hellraiser Goblin @Karl Kopinski
+171 R High Priest of Penance @Mark Zug
+124 U Hindervines @Svetlin Velinov
+16 U Hold the Gates @Zoltan Boros
+17 U Holy Mantle @Maciej Kuciara
+96 U Homing Lightning @Slawomir Maniak
+68 C Horror of the Dim @Jack Wang
+172 C Hydroform @Howard Lyon
+69 U Illness in the Ranks @Nils Hamm
+231 R Illusionist's Bracers @Svetlin Velinov
+220 R Immortal Servitude @Seb McKinnon
+38 U Incursion Specialist @Svetlin Velinov
+125 C Ivy Lane Denizen @Winona Nelson
+39 C Keymaster Rogue @Winona Nelson
+70 U Killing Glare @Peter Mohrbacher
+173 C Kingpin's Pet @Mark Zug
+19 C Knight Watch @Matt Stewart
+18 U Knight of Obligation @Ryan Barger
+40 C Last Thoughts @Peter Mohrbacher
+174 M Lazav, Dimir Mastermind @David Rapoza
+97 R Legion Loyalist @Eric Deschamps
+41 C Leyline Phantom @Ryan Yee
+71 M Lord of the Void @Chris Rahn
+20 R Luminate Primordial @Stephan Martiniere
+98 C Madcap Skills @Anthony Palumbo
+99 U Mark for Death @Mathias Kollros
+175 C Martial Glory @Raymond Swanland
+100 C Massive Raid @Zoltan Boros
+176 M Master Biomancer @Willian Murai
+72 U Mental Vapors @Mark Winters
+177 R Merciless Eviction @Richard Wright
+221 U Merfolk of the Depths @Scott Chou
+42 C Metropolis Sprite @Scott Chou
+73 C Midnight Recovery @Peter Mohrbacher
+232 C Millennial Gargoyle @Seb McKinnon
+126 U Miming Slime @Svetlin Velinov
+178 R Mind Grind @Daarken
+43 U Mindeye Drake @Lars Grant-West
+101 R Molten Primordial @Stephan Martiniere
+179 C Mortus Strider @Tomasz Jedruszek
+102 C Mugging @Greg Staples
+21 U Murder Investigation @Igor Kieryluk
+180 R Mystic Genesis @Mike Bierek
+127 C Naturalize @Daniel Ljunggren
+22 C Nav Squad Commandos @Steve Prescott
+222 R Nightveil Specter @Min Yum
+181 U Nimbus Swimmer @Howard Lyon
+182 M Obzedat, Ghost Council @Svetlin Velinov
+74 R Ogre Slumlord @Trevor Claxton
+183 U One Thousand Lashes @Daarken
+128 R Ooze Flux @Zoltan Boros
+184 U Ordruun Veteran @Greg Staples
+185 U Orzhov Charm @Zoltan Boros
+244 C Orzhov Guildgate @John Avon
+233 U Orzhov Keyrune @Daniel Ljunggren
+186 C Paranoid Delusions @Christopher Moeller
+223 C Pit Fight @Matt Stewart
+129 C Predator's Rapport @Matt Stewart
+187 C Primal Visitation @Christopher Moeller
+188 M Prime Speaker Zegana @Willian Murai
+234 C Prophetic Prism @Daniel Ljunggren
+189 C Psychic Strike @Mathias Kollros
+190 C Purge the Profane @Michael C. Hayes
+44 U Rapid Hybridization @Jack Wang
+235 C Razortip Whip @James Paick
+45 R Realmwright @Slawomir Maniak
+23 U Righteous Charge @Svetlin Velinov
+236 C Riot Gear @Jack Wang
+103 U Ripscale Predator @Volkan Baǵa
+224 R Rubblebelt Raiders @Chippy
+191 R Rubblehulk @Raymond Swanland
+192 C Ruination Wurm @Dave Kendall
+130 U Rust Scarab @Adam Paquette
+245 R Sacred Foundry @Sam Burley
+46 C Sage's Row Denizen @Svetlin Velinov
+47 U Sapphire Drake @Steve Prescott
+131 C Scab-Clan Charger @Nils Hamm
+48 C Scatter Arc @Peter Mohrbacher
+104 C Scorchwalker @Anthony Palumbo
+75 R Sepulchral Primordial @Stephan Martiniere
+132 U Serene Remembrance @David Palumbo
+76 C Shadow Alley Denizen @Cynthia Sheppard
+77 C Shadow Slice @Raymond Swanland
+193 C Shambleshark @Wesley Burt
+225 C Shattering Blow @Steve Prescott
+24 C Shielded Passage @Raymond Swanland
+194 R Signal the Clans @Dave Kendall
+195 U Simic Charm @Zoltan Boros
+49 U Simic Fluxmage @Karl Kopinski
+246 C Simic Guildgate @Svetlin Velinov
+237 U Simic Keyrune @Daniel Ljunggren
+50 R Simic Manipulator @Maciej Kuciara
+133 R Skarrg Goliath @Scott Chou
+196 U Skarrg Guildmage @Aleksi Briclot
+105 C Skinbrand Goblin @Marco Nelor
+106 U Skullcrack @Dave Kendall
+238 C Skyblinder Staff @Mark Winters
+51 C Skygames @Sam Burley
+197 C Skyknight Legionnaire @Anthony Palumbo
+78 C Slate Street Ruffian @Jim Murray
+134 C Slaughterhorn @Steve Prescott
+25 C Smite @Zoltan Boros
+79 U Smog Elemental @Yeong-Hao Han
+198 R Soul Ransom @Steve Argyle
+199 R Spark Trooper @James Ryman
+52 C Spell Rupture @Kev Walker
+135 C Spire Tracer @Christopher Moeller
+53 R Stolen Identity @Clint Cearley
+247 R Stomping Ground @David Palumbo
+107 C Structural Collapse @Sam Burley
+200 U Sunhome Guildmage @Eric Deschamps
+136 R Sylvan Primordial @Stephan Martiniere
+26 C Syndic of Tithes @Steve Prescott
+80 C Syndicate Enforcer @Steven Belledin
+248 R Thespian's Stage @John Avon
+81 U Thrull Parasite @Clint Cearley
+108 C Tin Street Market @Noah Bradley
+54 C Totally Lost @David Palumbo
+137 U Tower Defense @Seb McKinnon
+109 C Towering Thunderfist @Zoltan Boros
+201 R Treasury Thrull @Mark Zug
+202 U Truefire Paladin @Michael C. Hayes
+82 U Undercity Informer @Raymond Swanland
+83 R Undercity Plague @Vincent Proce
+203 R Unexpected Results @Mike Bierek
+204 U Urban Evolution @Eytan Zana
+27 U Urbis Protector @Steve Argyle
+138 C Verdant Haven @Daniel Ljunggren
+110 U Viashino Shanktail @Kev Walker
+205 U Vizkopa Confessor @Ryan Pancoast
+206 U Vizkopa Guildmage @Tyler Jacobson
+55 U Voidwalk @James Ryman
+111 C Warmind Infantry @Greg Staples
+139 U Wasteland Viper @Lucas Graciano
+249 R Watery Grave @Raymond Swanland
+56 C Way of the Thief @Igor Kieryluk
+207 R Whispering Madness @Clint Cearley
+84 U Wight of Precinct Six @Ryan Barger
+140 C Wildwood Rebirth @Dan Scott
+208 C Wojek Halberdiers @Nic Klein
+112 R Wrecking Ogre @Nils Hamm
+209 U Zameck Guildmage @Chase Stone
+28 C Zarichi Tiger @Nic Klein
+210 C Zhur-Taa Swine @Yeong-Hao Han
 
 [tokens]
 w_4_4_angel_flying

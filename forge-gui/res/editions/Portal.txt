@@ -11,225 +11,225 @@ Foil=NotSupported
 ScryfallCode=POR
 
 [cards]
-1 R Alabaster Dragon
-157 R Alluring Scent
-158 U Anaconda
-158† U Anaconda
-40 R Ancestral Memories
-2 C Angelic Blessing
-3 R Archangel
-4 U Ardent Militia
-5 R Armageddon
-6 C Armored Pegasus
-79 U Arrogant Vampire
-80 U Assassin's Blade
-41 R Balance of Power
-42 U Baleful Stare
-159 U Bee Sting
-118 U Blaze
-118s U Blaze
-7 R Blessed Reversal
-8 R Blinding Light
-81 C Bog Imp
-82 C Bog Raiders
-83 U Bog Wraith
-119 U Boiling Seas
-9 C Border Guard
-10 C Breath of Life
-160 U Bull Hippo
-120 C Burning Cloak
-43 R Capricious Sorcerer
-84 U Charging Bandits
-11 U Charging Paladin
-161 R Charging Rhino
-44 C Cloak of Feathers
-45 R Cloud Dragon
-46 C Cloud Pirates
-47 U Cloud Spirit
-48 U Command of Unsummoning
-49 C Coral Eel
-121 C Craven Giant
-85 C Craven Knight
-86 R Cruel Bargain
-50 R Cruel Fate
-87 R Cruel Tutor
-51 U Deep-Sea Serpent
-162 U Deep Wood
-12 U Defiant Stand
-53 C Deja Vu
-122 U Desert Drake
-123 R Devastation
-13 C Devoted Hero
-52 R Djinn of the Lamp
-88 R Dread Charge
-89 R Dread Reaper
-90 U Dry Spell
-124 R Earthquake
-91 R Ebon Dragon
-163 C Elite Cat Warrior
-163† C Elite Cat Warrior
-164 C Elven Cache
-165 C Elvish Ranger
-92 R Endless Cockroaches
-54 R Exhaustion
-14 C False Peace
-93 C Feral Shadow
-94 R Final Strike
-125 R Fire Dragon
-126 U Fire Imp
-127 C Fire Snake
-128 R Fire Tempest
-129 U Flashfires
-15 C Fleet-Footed Monk
-55 U Flux
-16 C Foot Soldiers
-212 L Forest
-213 L Forest
-214 L Forest
-215 L Forest
-130 R Forked Lightning
-166 C Fruition
-56 C Giant Octopus
-167 C Giant Spider
-17 R Gift of Estates
-131 C Goblin Bully
-168 C Gorilla Warrior
-95 U Gravedigger
-169 C Grizzly Bears
-96 C Hand of Death
-96† C Hand of Death
-18 R Harsh Justice
-132 C Highland Giant
-133 C Hill Giant
-57 C Horned Turtle
-97 C Howling Fury
-134 U Hulking Cyclops
-135 C Hulking Goblin
-170 R Hurricane
-58 U Ingenious Thief
-200 L Island
-201 L Island
-202 L Island
-203 L Island
-171 C Jungle Lion
-19 C Keen-Eyed Archers
-98 R King's Assassin
-20 C Knight Errant
-136 R Last Chance
-137 C Lava Axe
-138 U Lava Flow
-139 C Lizard Warrior
-59 U Man-o'-War
-99 R Mercenary Knight
-60 C Merfolk of the Pearl Trident
-100 C Mind Knives
-101 C Mind Rot
-140 C Minotaur Warrior
-172 C Mobilize
-173 C Monstrous Growth
-173† C Monstrous Growth
-174 U Moon Sprite
-208 L Mountain
-209 L Mountain
-210 L Mountain
-211 L Mountain
-141 U Mountain Goat
-102 C Muck Rats
-61 U Mystic Denial
-175 R Natural Order
-176 U Natural Spring
-177 R Nature's Cloak
-178 C Nature's Lore
-103 U Nature's Ruin
-179 U Needle Storm
-104 U Noxious Toad
-62 C Omen
-63 C Owl Familiar
-180 C Panther Warriors
-21 C Path of Peace
-64 U Personal Tutor
-65 R Phantom Warrior
-142 R Pillaging Horde
-196 L Plains
-197 L Plains
-198 L Plains
-199 L Plains
-181 U Plant Elemental
-182 R Primeval Force
-66 R Prosperity
-143 R Pyroclasm
-105 C Python
-144 C Raging Cougar
-145 C Raging Goblin
-145† C Raging Goblin
-146 C Raging Minotaur
-147 U Rain of Salt
-106 U Rain of Tears
-107 C Raise Dead
-183 C Redwood Treefolk
-22 C Regal Unicorn
-23 U Renewing Dawn
-184 C Rowan Treefolk
-24 C Sacred Knight
-25 C Sacred Nectar
-148 C Scorching Spear
-149 U Scorching Winds
-26 U Seasoned Marshal
-108 R Serpent Assassin
-109 C Serpent Warrior
-110 C Skeletal Crocodile
-111 C Skeletal Snake
-67 C Snapping Drake
-68 C Sorcerous Sight
-112 C Soul Shred
-185 C Spined Wurm
-27 R Spiritual Guardian
-150 C Spitting Earth
-28 C Spotted Griffin
-186 C Stalking Tiger
-29 U Starlight
-30 U Starlit Angel
-31 C Steadfastness
-32 R Stern Marshal
-151 C Stone Rain
-69 C Storm Crow
-187 R Summer Bloom
-204 L Swamp
-205 L Swamp
-206 L Swamp
-207 L Swamp
-188 R Sylvan Tutor
-70 C Symbol of Unsummoning
-71 R Taunt
-33 R Temporary Truce
-72 U Theft of Dreams
-73 R Thing from the Deep
-189 R Thundering Wurm
-152 R Thundermare
-74 C Tidal Surge
-75 C Time Ebb
-76 C Touch of Brilliance
-190 R Treetop Defense
-113 C Undying Beast
-191 U Untamed Wilds
-34 U Valorous Charge
-114 U Vampiric Feast
-115 C Vampiric Touch
-35 U Venerable Monk
-36 U Vengeance
-116 U Virtue's Ruin
-153 R Volcanic Dragon
-154 C Volcanic Hammer
-155 U Wall of Granite
-37 U Wall of Swords
-38 C Warrior's Charge
-38† C Warrior's Charge
-192 U Whiptail Wurm
-117 R Wicked Pact
-193 C Willow Dryad
-77 C Wind Drake
-156 R Winds of Change
-194 U Winter's Grasp
-78 U Withering Gaze
-195 R Wood Elves
-39 R Wrath of God
+1 R Alabaster Dragon @Ted Naifeh
+157 R Alluring Scent @Ted Naifeh
+158 U Anaconda @Andrew Robinson
+158† U Anaconda @Andrew Robinson
+40 R Ancestral Memories @Dan Frazier
+2 C Angelic Blessing @DiTerlizzi
+3 R Archangel @Quinton Hoover
+4 U Ardent Militia @Mike Raabe
+5 R Armageddon @John Avon
+6 C Armored Pegasus @Andrew Robinson
+79 U Arrogant Vampire @Zina Saunders
+80 U Assassin's Blade @John Matson
+41 R Balance of Power @Adam Rex
+42 U Baleful Stare @John Coulthart
+159 U Bee Sting @Phil Foglio
+118 U Blaze @Gerry Grace
+118s U Blaze @David A. Cherry
+7 R Blessed Reversal @Zina Saunders
+8 R Blinding Light @John Coulthart
+81 C Bog Imp @Christopher Rush
+82 C Bog Raiders @Steve Luke
+83 U Bog Wraith @Ted Naifeh
+119 U Boiling Seas @Tom Wänerstrand
+9 C Border Guard @Kev Walker
+10 C Breath of Life @DiTerlizzi
+160 U Bull Hippo @Roger Raupp
+120 C Burning Cloak @Scott M. Fischer
+43 R Capricious Sorcerer @Zina Saunders
+84 U Charging Bandits @Dermot Power
+11 U Charging Paladin @Kev Walker
+161 R Charging Rhino @Una Fricker
+44 C Cloak of Feathers @Rebecca Guay
+45 R Cloud Dragon @John Avon
+46 C Cloud Pirates @Phil Foglio
+47 U Cloud Spirit @DiTerlizzi
+48 U Command of Unsummoning @Phil Foglio
+49 C Coral Eel @Una Fricker
+121 C Craven Giant @Ron Spencer
+85 C Craven Knight @Charles Gillespie
+86 R Cruel Bargain @Adrian Smith
+50 R Cruel Fate @Adrian Smith
+87 R Cruel Tutor @Kev Walker
+51 U Deep-Sea Serpent @Scott M. Fischer
+162 U Deep Wood @Paolo Parente
+12 U Defiant Stand @Hannibal King
+53 C Deja Vu @Hannibal King
+122 U Desert Drake @Gerry Grace
+123 R Devastation @Steve Luke
+13 C Devoted Hero @DiTerlizzi
+52 R Djinn of the Lamp @DiTerlizzi
+88 R Dread Charge @Ted Naifeh
+89 R Dread Reaper @Christopher Rush
+90 U Dry Spell @Roger Raupp
+124 R Earthquake @Adrian Smith
+91 R Ebon Dragon @Donato Giancola
+163 C Elite Cat Warrior @Eric Peterson
+163† C Elite Cat Warrior @Eric Peterson
+164 C Elven Cache @Rebecca Guay
+165 C Elvish Ranger @DiTerlizzi
+92 R Endless Cockroaches @Ron Spencer
+54 R Exhaustion @DiTerlizzi
+14 C False Peace @Zina Saunders
+93 C Feral Shadow @Colin MacNeil
+94 R Final Strike @John Coulthart
+125 R Fire Dragon @William Simpson
+126 U Fire Imp @DiTerlizzi
+127 C Fire Snake @Steve Luke
+128 R Fire Tempest @Mike Dringenberg
+129 U Flashfires @Randy Gallegos
+15 C Fleet-Footed Monk @D. Alexander Gregory
+55 U Flux @Ted Naifeh
+16 C Foot Soldiers @Kev Walker
+212 L Forest @John Avon
+212s L Forest @李铁
+213 L Forest @John Avon
+213s L Forest @李铁
+130 R Forked Lightning @Ted Naifeh
+166 C Fruition @Steve Luke
+56 C Giant Octopus @John Matson
+167 C Giant Spider @Randy Gallegos
+17 R Gift of Estates @Kaja Foglio
+131 C Goblin Bully @Pete Venters
+168 C Gorilla Warrior @John Matson
+95 U Gravedigger @Scott M. Fischer
+169 C Grizzly Bears @Zina Saunders
+96 C Hand of Death @John Coulthart
+96† C Hand of Death @John Coulthart
+18 R Harsh Justice @John Coulthart
+132 C Highland Giant @Ron Spencer
+133 C Hill Giant @Randy Gallegos
+57 C Horned Turtle @Adrian Smith
+97 C Howling Fury @Mike Dringenberg
+134 U Hulking Cyclops @Paolo Parente
+135 C Hulking Goblin @Pete Venters
+170 R Hurricane @Andrew Robinson
+58 U Ingenious Thief @Dan Frazier
+200 L Island @Eric Peterson
+200s L Island @库雪明
+201 L Island @Eric Peterson
+201s L Island @库雪明
+171 C Jungle Lion @Janine Johnston
+19 C Keen-Eyed Archers @Alan Rabinowitz
+98 R King's Assassin @Zina Saunders
+20 C Knight Errant @Dan Frazier
+136 R Last Chance @Hannibal King
+137 C Lava Axe @Adrian Smith
+138 U Lava Flow @Mike Dringenberg
+139 C Lizard Warrior @Roger Raupp
+59 U Man-o'-War @Una Fricker
+99 R Mercenary Knight @Adrian Smith
+60 C Merfolk of the Pearl Trident @DiTerlizzi
+100 C Mind Knives @Rebecca Guay
+101 C Mind Rot @Steve Luke
+140 C Minotaur Warrior @Scott M. Fischer
+172 C Mobilize @Rebecca Guay
+173 C Monstrous Growth @Dan Frazier
+173† C Monstrous Growth @Dan Frazier
+174 U Moon Sprite @Terese Nielsen
+208 L Mountain @Brian Durfee
+208s L Mountain @康羽
+209 L Mountain @Brian Durfee
+209s L Mountain @康羽
+141 U Mountain Goat @Una Fricker
+102 C Muck Rats @Colin MacNeil
+61 U Mystic Denial @Hannibal King
+175 R Natural Order @Alan Rabinowitz
+176 U Natural Spring @Janine Johnston
+177 R Nature's Cloak @Rebecca Guay
+178 C Nature's Lore @Terese Nielsen
+103 U Nature's Ruin @Mike Dringenberg
+179 U Needle Storm @Charles Gillespie
+104 U Noxious Toad @Adrian Smith
+62 C Omen @Eric Peterson
+63 C Owl Familiar @Janine Johnston
+180 C Panther Warriors @Eric Peterson
+21 C Path of Peace @Pete Venters
+64 U Personal Tutor @D. Alexander Gregory
+65 R Phantom Warrior @Dan Frazier
+142 R Pillaging Horde @Kev Walker
+196 L Plains @Douglas Shuler
+196s L Plains @Jack Wei
+197 L Plains @Douglas Shuler
+197s L Plains @Jack Wei
+181 U Plant Elemental @Ted Naifeh
+182 R Primeval Force @Randy Gallegos
+66 R Prosperity @Phil Foglio
+143 R Pyroclasm @John Matson
+105 C Python @Alan Rabinowitz
+144 C Raging Cougar @Terese Nielsen
+145 C Raging Goblin @Pete Venters
+145† C Raging Goblin @Pete Venters
+146 C Raging Minotaur @Scott M. Fischer
+147 U Rain of Salt @Charles Gillespie
+106 U Rain of Tears @Eric Peterson
+107 C Raise Dead @Charles Gillespie
+183 C Redwood Treefolk @Steve Luke
+22 C Regal Unicorn @Zina Saunders
+23 U Renewing Dawn @John Avon
+184 C Rowan Treefolk @Gerry Grace
+24 C Sacred Knight @Donato Giancola
+25 C Sacred Nectar @Janine Johnston
+148 C Scorching Spear @Mike Raabe
+149 U Scorching Winds @D. Alexander Gregory
+26 U Seasoned Marshal @Zina Saunders
+108 R Serpent Assassin @Roger Raupp
+109 C Serpent Warrior @Roger Raupp
+110 C Skeletal Crocodile @Mike Dringenberg
+111 C Skeletal Snake @John Matson
+67 C Snapping Drake @Christopher Rush
+68 C Sorcerous Sight @Kaja Foglio
+112 C Soul Shred @Alan Rabinowitz
+185 C Spined Wurm @Colin MacNeil
+27 R Spiritual Guardian @Terese Nielsen
+150 C Spitting Earth @Hannibal King
+28 C Spotted Griffin @William Simpson
+186 C Stalking Tiger @Colin MacNeil
+29 U Starlight @John Avon
+30 U Starlit Angel @Rebecca Guay
+31 C Steadfastness @Kev Walker
+32 R Stern Marshal @D. Alexander Gregory
+151 C Stone Rain @John Matson
+69 C Storm Crow @Una Fricker
+187 R Summer Bloom @Kaja Foglio
+204 L Swamp @Romas Kukalis
+205 L Swamp @Romas Kukalis
+206 L Swamp @Romas Kukalis
+207 L Swamp @Romas Kukalis
+188 R Sylvan Tutor @Kaja Foglio
+70 C Symbol of Unsummoning @Adam Rex
+71 R Taunt @Phil Foglio
+33 R Temporary Truce @Mike Raabe
+72 U Theft of Dreams @Adam Rex
+73 R Thing from the Deep @Paolo Parente
+189 R Thundering Wurm @Paolo Parente
+152 R Thundermare @Bob Eggleton
+74 C Tidal Surge @Douglas Shuler
+75 C Time Ebb @Alan Rabinowitz
+76 C Touch of Brilliance @John Coulthart
+190 R Treetop Defense @Zina Saunders
+113 C Undying Beast @Steve Luke
+191 U Untamed Wilds @Romas Kukalis
+34 U Valorous Charge @Douglas Shuler
+114 U Vampiric Feast @D. Alexander Gregory
+115 C Vampiric Touch @Zina Saunders
+35 U Venerable Monk @D. Alexander Gregory
+36 U Vengeance @Andrew Robinson
+116 U Virtue's Ruin @Mike Dringenberg
+153 R Volcanic Dragon @Tom Wänerstrand
+154 C Volcanic Hammer @Christopher Rush
+155 U Wall of Granite @Kev Walker
+37 U Wall of Swords @Douglas Shuler
+38 C Warrior's Charge @Ted Naifeh
+38† C Warrior's Charge @Ted Naifeh
+192 U Whiptail Wurm @Una Fricker
+117 R Wicked Pact @Adam Rex
+193 C Willow Dryad @D. Alexander Gregory
+77 C Wind Drake @Zina Saunders
+156 R Winds of Change @Adam Rex
+194 U Winter's Grasp @Paolo Parente
+78 U Withering Gaze @Scott M. Fischer
+195 R Wood Elves @Rebecca Guay
+39 R Wrath of God @Mike Raabe

@@ -6,7 +6,7 @@ Type=Promo
 ScryfallCode=G05
 
 [cards]
-1 R Gemstone Mine
-2 R Regrowth
-3 R Sol Ring
-4 R Mishra's Factory
+1 R Gemstone Mine @Brom
+2 R Regrowth @Dameon Willich
+3 R Sol Ring @Mark Tedin
+4 R Mishra's Factory @Kaja Foglio & Phil Foglio

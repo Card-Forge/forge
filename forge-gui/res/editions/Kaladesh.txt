@@ -14,282 +14,282 @@ AdditionalSetUnlockedInQuest=MPS_KLD
 ScryfallCode=KLD
 
 [cards]
-1 C Acrobatic Maneuver
-2 U Aerial Responder
-3 R Aetherstorm Roc
-4 M Angel of Invention
-5 R Authority of the Consuls
-6 C Aviary Mechanic
-7 C Built to Last
-8 R Captured by the Consulate
-9 M Cataclysmic Gearhulk
-10 U Consulate Surveillance
-11 U Consul's Shieldguard
-12 C Eddytrail Hawk
-13 U Fairgrounds Warden
-14 C Fragmentize
-15 R Fumigate
-16 U Gearshift Ace
-17 C Glint-Sleeve Artisan
-18 C Herald of the Fair
-19 C Impeccable Timing
-20 C Inspired Charge
-21 R Master Trinketeer
-22 C Ninth Bridge Patrol
-23 C Pressure Point
-24 C Propeller Pioneer
-25 U Refurbish
-26 C Revoke Privileges
-27 U Servo Exhibition
-28 C Skyswirl Harrier
-29 U Skywhaler's Shot
-30 C Tasseled Dromedary
-31 C Thriving Ibex
-32 R Toolcraft Exemplar
-33 U Trusty Companion
-34 U Visionary Augmenter
-35 U Wispweaver Angel
-36 U Aether Meltdown
-37 C Aether Theorist
-38 C AEther Tradewinds
-39 R Aethersquall Ancient
-40 U Ceremonious Rejection
-41 R Confiscation Coup
-42 C Curio Vendor
-43 U Disappearing Act
-44 C Dramatic Reversal
-45 U Era of Innovation
-46 U Experimental Aviator
-47 C Failed Inspection
-48 C Gearseeker Serpent
-49 U Glimmer of Genius
-50 U Glint-Nest Crane
-51 C Hightide Hermit
-52 R Insidious Will
-53 U Janjeet Sentry
-54 U Long-Finned Skywhale
-55 C Malfunction
-56 M Metallurgic Summonings
-57 U Minister of Inquiries
-58 C Nimble Innovator
-59 R Padeem, Consul of Innovation
-60 R Paradoxical Outcome
-61 C Revolutionary Rebuff
-62 R Saheeli's Artistry
-63 C Select for Inspection
-64 U Shrewd Negotiation
-65 C Tezzeret's Ambition
-66 C Thriving Turtle
-67 M Torrential Gearhulk
-68 C Vedalken Blademaster
-69 C Weldfast Wingsmith
-70 C Wind Drake
-71 U Aetherborn Marauder
-72 C Ambitious Aetherborn
-73 M Demon of Dark Schemes
-74 C Dhund Operative
-75 U Diabolic Tutor
-76 C Die Young
-77 C Dukhara Scavenger
-78 R Eliminate the Competition
-79 U Embraal Bruiser
-80 U Essence Extraction
-81 C Fortuitous Find
-82 C Foundry Screecher
-83 U Fretwork Colony
-84 R Gonti, Lord of Luxury
-85 U Harsh Scrutiny
-86 C Lawless Broker
-87 C Live Fast
-88 R Lost Legacy
-89 U Make Obsolete
-90 R Marionette Master
-91 C Maulfist Squad
-92 R Midnight Oil
-93 C Mind Rot
-94 U Morbid Curiosity
-95 C Night Market Lookout
-96 M Noxious Gearhulk
-97 U Ovalchase Daredevil
-98 C Prakhata Club Security
-99 C Rush of Vitality
-100 C Subtle Strike
-101 R Syndicate Trafficker
-102 C Thriving Rats
-103 C Tidy Conclusion
-104 U Underhanded Designs
-105 U Weaponcraft Enthusiast
-106 U Aethertorch Renegade
-107 U Brazen Scourge
-108 C Built to Smash
-109 C Cathartic Reunion
-110 M Chandra, Torch of Defiance
-111 C Chandra's Pyrohelix
-112 M Combustible Gearhulk
-113 C Demolish
-114 R Fateful Showdown
-115 U Furious Reprisal
-116 C Giant Spectacle
-117 U Harnessed Lightning
-118 C Hijack
-119 U Incendiary Sabotage
-120 U Inventor's Apprentice
-121 R Lathnu Hellion
-122 R Madcap Experiment
-123 U Maulfist Doorbuster
-124 R Pia Nalaar
-125 U Quicksmith Genius
-126 C Reckless Fireweaver
-127 C Renegade Tactics
-128 C Ruinous Gremlin
-129 C Salivating Gremlins
-130 R Skyship Stalker
-131 U Spark of Creativity
-132 U Speedway Fanatic
-133 C Spireside Infiltrator
-134 C Spontaneous Artist
-135 U Start Your Engines
-136 R Territorial Gorger
-137 C Terror of the Fairgrounds
-138 C Thriving Grubs
-139 C Wayward Giant
-140 C Welding Sparks
-141 C Appetite for the Unnatural
-142 U Arborback Stomper
-143 R Architect of the Untamed
-144 U Armorcraft Judge
-145 C Attune with Aether
-146 U Blossoming Defense
-147 R Bristling Hydra
-148 C Commencement of Festivities
-149 C Cowl Prowler
-150 U Creeping Mold
-151 R Cultivator of Blades
-152 R Dubious Challenge
-153 U Durable Handicraft
-154 U Elegant Edgecrafters
-155 U Fairgrounds Trumpeter
-156 U Ghirapur Guide
-157 C Highspire Artisan
-158 C Hunt the Weak
-159 C Kujar Seedsculptor
-160 C Larger Than Life
-161 U Longtusk Cub
-162 U Nature's Way
-163 M Nissa, Vital Force
-164 C Ornamental Courage
-165 R Oviya Pashiri, Sage Lifecrafter
-166 C Peema Outrider
-167 C Riparian Tiger
-168 C Sage of Shaila's Claim
-169 U Servant of the Conduit
-170 C Take Down
-171 C Thriving Rhino
-172 M Verdurous Gearhulk
-173 C Wild Wanderer
-174 R Wildest Dreams
-175 C Wily Bandar
-176 U Cloudblazer
-177 U Contraband Kingpin
-178 R Depala, Pilot Exemplar
-179 M Dovin Baan
-180 U Empyreal Voyager
-181 U Engineered Might
-182 U Hazardous Conditions
-183 R Kambal, Consul of Allocation
-184 M Rashmi, Eternities Crafter
-185 U Restoration Gearsmith
-186 M Saheeli Rai
-187 U Unlicensed Disintegration
-188 U Veteran Motorist
-189 U Voltaic Brawler
-190 U Whirler Virtuoso
-191 C Accomplished Automaton
-192 R Aetherflux Reservoir
-193 M Aetherworks Marvel
-194 R Animation Module
-195 C Aradara Express
-196 U Ballista Charger
-197 C Bastion Mastodon
-198 U Bomat Bazaar Barge
-199 R Bomat Courier
-200 U Chief of the Foundry
-201 C Cogworker's Puzzleknot
-202 C Consulate Skygate
-203 R Cultivator's Caravan
-204 R Deadlock Trap
-205 U Decoction Module
-206 U Demolition Stomper
-207 C Dukhara Peafowl
-208 R Dynavolt Tower
-209 C Eager Construct
-210 R Electrostatic Pummeler
-211 U Fabrication Module
-212 U Filigree Familiar
-213 C Fireforger's Puzzleknot
-214 R Fleetwheel Cruiser
-215 U Foundry Inspector
-216 R Ghirapur Orrery
-217 C Glassblower's Puzzleknot
-218 C Inventor's Goggles
-219 U Iron League Steed
-220 R Key to the City
-221 C Metalspinner's Puzzleknot
-222 R Metalwork Colossus
-223 R Multiform Wonder
-224 C Narnam Cobra
-225 U Ovalchase Dragster
-226 R Panharmonicon
-227 U Perpetual Timepiece
-228 C Prakhata Pillar-Bug
-229 C Prophetic Prism
-230 C Renegade Freighter
-231 R Scrapheap Scrounger
-232 C Self-Assembler
-233 C Sky Skiff
-234 M Skysovereign, Consul Flagship
-235 R Smuggler's Copter
-236 U Snare Thopter
-237 C Torch Gauntlet
-238 C Weldfast Monitor
-239 U Whirlermaker
-240 C Woodweaver's Puzzleknot
-241 C Workshop Assistant
-242 U Aether Hub
-243 R Blooming Marsh
-244 R Botanical Sanctum
-245 R Concealed Courtyard
-246 R Inspiring Vantage
-247 R Inventors' Fair
-248 U Sequestered Stash
-249 R Spirebluff Canal
-250 L Plains
-251 L Plains
-252 L Plains
-253 L Island
-254 L Island
-255 L Island
-256 L Swamp
-257 L Swamp
-258 L Swamp
-259 L Mountain
-260 L Mountain
-261 L Mountain
-262 L Forest
-263 L Forest
-264 L Forest
+1 C Acrobatic Maneuver @Winona Nelson
+2 U Aerial Responder @Raoul Vitale
+3 R Aetherstorm Roc @Scott Murphy
+4 M Angel of Invention @Volkan Baǵa
+5 R Authority of the Consuls @Lake Hurwitz
+6 C Aviary Mechanic @Mark Zug
+7 C Built to Last @Svetlin Velinov
+8 R Captured by the Consulate @Tyler Jacobson
+9 M Cataclysmic Gearhulk @Victor Adame Minguez
+10 U Consulate Surveillance @Daniel Ljunggren
+11 U Consul's Shieldguard @David Gaillet
+12 C Eddytrail Hawk @James Paick
+13 U Fairgrounds Warden @Izzy
+14 C Fragmentize @Jason Felix
+15 R Fumigate @Svetlin Velinov
+16 U Gearshift Ace @Winona Nelson
+17 C Glint-Sleeve Artisan @Ryan Pancoast
+18 C Herald of the Fair @Steven Belledin
+19 C Impeccable Timing @Chris Rallis
+20 C Inspired Charge @Deruchenko Alexander
+21 R Master Trinketeer @Matt Stewart
+22 C Ninth Bridge Patrol @Ryan Alexander Lee
+23 C Pressure Point @Jakub Kasper
+24 C Propeller Pioneer @Winona Nelson
+25 U Refurbish @Johann Bodin
+26 C Revoke Privileges @James Ryman
+27 U Servo Exhibition @Sara Winters
+28 C Skyswirl Harrier @John Severin Brassell
+29 U Skywhaler's Shot @Chris Rallis
+30 C Tasseled Dromedary @Raoul Vitale
+31 C Thriving Ibex @Sidharth Chaturvedi
+32 R Toolcraft Exemplar @Zezhou Chen
+33 U Trusty Companion @Jakub Kasper
+34 U Visionary Augmenter @James Paick
+35 U Wispweaver Angel @James Ryman
+36 U Aether Meltdown @Jason Felix
+37 C Aether Theorist @Lucas Graciano
+38 C Aether Tradewinds @Lius Lasahido
+39 R Aethersquall Ancient @Sam Burley
+40 U Ceremonious Rejection @Chris Rahn
+41 R Confiscation Coup @Joseph Meehan
+42 C Curio Vendor @Igor Kieryluk
+43 U Disappearing Act @Anthony Palumbo
+44 C Dramatic Reversal @Eric Deschamps
+45 U Era of Innovation @Jason Rainville
+46 U Experimental Aviator @Jesper Ejsing
+47 C Failed Inspection @Matt Stewart
+48 C Gearseeker Serpent @Filip Burburan
+49 U Glimmer of Genius @Tommy Arnold
+50 U Glint-Nest Crane @Christopher Moeller
+51 C Hightide Hermit @Jason Kang
+52 R Insidious Will @Anthony Palumbo
+53 U Janjeet Sentry @Dan Scott
+54 U Long-Finned Skywhale @Cliff Childs
+55 C Malfunction @Izzy
+56 M Metallurgic Summonings @Kieran Yanner
+57 U Minister of Inquiries @Dan Scott
+58 C Nimble Innovator @Slawomir Maniak
+59 R Padeem, Consul of Innovation @Matt Stewart
+60 R Paradoxical Outcome @Nils Hamm
+61 C Revolutionary Rebuff @Zack Stella
+62 R Saheeli's Artistry @Kieran Yanner
+63 C Select for Inspection @James Paick
+64 U Shrewd Negotiation @Slawomir Maniak
+65 C Tezzeret's Ambition @Tyler Jacobson
+66 C Thriving Turtle @Jeff Simpson
+67 M Torrential Gearhulk @Svetlin Velinov
+68 C Vedalken Blademaster @Lake Hurwitz
+69 C Weldfast Wingsmith @Dan Scott
+70 C Wind Drake @Todd Lockwood
+71 U Aetherborn Marauder @Kieran Yanner
+72 C Ambitious Aetherborn @Josu Hernaiz
+73 M Demon of Dark Schemes @Daarken
+74 C Dhund Operative @Magali Villeneuve
+75 U Diabolic Tutor @Mark Winters
+76 C Die Young @Ryan Yee
+77 C Dukhara Scavenger @Sidharth Chaturvedi
+78 R Eliminate the Competition @Joseph Meehan
+79 U Embraal Bruiser @Sidharth Chaturvedi
+80 U Essence Extraction @Min Yum
+81 C Fortuitous Find @Tomasz Jedruszek
+82 C Foundry Screecher @Dan Scott
+83 U Fretwork Colony @Christopher Burdett
+84 R Gonti, Lord of Luxury @Daarken
+85 U Harsh Scrutiny @Vincent Proce
+86 C Lawless Broker @Darek Zabrocki
+87 C Live Fast @Ryan Yee
+88 R Lost Legacy @Greg Opalinski
+89 U Make Obsolete @Darek Zabrocki
+90 R Marionette Master @James Ryman
+91 C Maulfist Squad @Matt Stewart
+92 R Midnight Oil @Daniel Ljunggren
+93 C Mind Rot @Seb McKinnon
+94 U Morbid Curiosity @Kieran Yanner
+95 C Night Market Lookout @Nils Hamm
+96 M Noxious Gearhulk @Lius Lasahido
+97 U Ovalchase Daredevil @Winona Nelson
+98 C Prakhata Club Security @Igor Kieryluk
+99 C Rush of Vitality @Lindsey Look
+100 C Subtle Strike @David Palumbo
+101 R Syndicate Trafficker @Tony Foti
+102 C Thriving Rats @Tom Babbey
+103 C Tidy Conclusion @Bastien L. Deharme
+104 U Underhanded Designs @Anastasia Ovchinnikova
+105 U Weaponcraft Enthusiast @Mike Bierek
+106 U Aethertorch Renegade @Johann Bodin
+107 U Brazen Scourge @Kev Walker
+108 C Built to Smash @Svetlin Velinov
+109 C Cathartic Reunion @Howard Lyon
+110 M Chandra, Torch of Defiance @Magali Villeneuve
+111 C Chandra's Pyrohelix @Kieran Yanner
+112 M Combustible Gearhulk @Daarken
+113 C Demolish @Steven Belledin
+114 R Fateful Showdown @Chris Rallis
+115 U Furious Reprisal @Svetlin Velinov
+116 C Giant Spectacle @Johann Bodin
+117 U Harnessed Lightning @Chris Rallis
+118 C Hijack @Victor Adame Minguez
+119 U Incendiary Sabotage @Ben Maier
+120 U Inventor's Apprentice @Ryan Pancoast
+121 R Lathnu Hellion @Lars Grant-West
+122 R Madcap Experiment @Joseph Meehan
+123 U Maulfist Doorbuster @Josh Hass
+124 R Pia Nalaar @Tyler Jacobson
+125 U Quicksmith Genius @David Gaillet
+126 C Reckless Fireweaver @Deruchenko Alexander
+127 C Renegade Tactics @Yeong-Hao Han
+128 C Ruinous Gremlin @Steve Prescott
+129 C Salivating Gremlins @Christopher Burdett
+130 R Skyship Stalker @Chris Rahn
+131 U Spark of Creativity @Johann Bodin
+132 U Speedway Fanatic @Slawomir Maniak
+133 C Spireside Infiltrator @Deruchenko Alexander
+134 C Spontaneous Artist @Viktor Titov
+135 U Start Your Engines @Darek Zabrocki
+136 R Territorial Gorger @Lius Lasahido
+137 C Terror of the Fairgrounds @Filip Burburan
+138 C Thriving Grubs @Steve Prescott
+139 C Wayward Giant @Filip Burburan
+140 C Welding Sparks @Raymond Swanland
+141 C Appetite for the Unnatural @Zoltan Boros
+142 U Arborback Stomper @Dan Scott
+143 R Architect of the Untamed @Sara Winters
+144 U Armorcraft Judge @David Palumbo
+145 C Attune with Aether @Wesley Burt
+146 U Blossoming Defense @Anastasia Ovchinnikova
+147 R Bristling Hydra @Chris Rahn
+148 C Commencement of Festivities @Zack Stella
+149 C Cowl Prowler @Tomasz Jedruszek
+150 U Creeping Mold @Cliff Childs
+151 R Cultivator of Blades @Bastien L. Deharme
+152 R Dubious Challenge @Scott Murphy
+153 U Durable Handicraft @Raoul Vitale
+154 U Elegant Edgecrafters @Sean Sevestre
+155 U Fairgrounds Trumpeter @Jesper Ejsing
+156 U Ghirapur Guide @Scott Murphy
+157 C Highspire Artisan @Anna Steinbauer
+158 C Hunt the Weak @Raoul Vitale
+159 C Kujar Seedsculptor @Anna Steinbauer
+160 C Larger Than Life @Jaime Jones
+161 U Longtusk Cub @Zoltan Boros
+162 U Nature's Way @Zack Stella
+163 M Nissa, Vital Force @Clint Cearley
+164 C Ornamental Courage @Anthony Palumbo
+165 R Oviya Pashiri, Sage Lifecrafter @Magali Villeneuve
+166 C Peema Outrider @Craig J Spearing
+167 C Riparian Tiger @Igor Kieryluk
+168 C Sage of Shaila's Claim @Howard Lyon
+169 U Servant of the Conduit @Magali Villeneuve
+170 C Take Down @Izzy
+171 C Thriving Rhino @Matt Stewart
+172 M Verdurous Gearhulk @Jaime Jones
+173 C Wild Wanderer @Sidharth Chaturvedi
+174 R Wildest Dreams @Daniel Ljunggren
+175 C Wily Bandar @Yeong-Hao Han
+176 U Cloudblazer @Dan Scott
+177 U Contraband Kingpin @Anna Steinbauer
+178 R Depala, Pilot Exemplar @Greg Opalinski
+179 M Dovin Baan @Tyler Jacobson
+180 U Empyreal Voyager @David Gaillet
+181 U Engineered Might @Lake Hurwitz
+182 U Hazardous Conditions @Anastasia Ovchinnikova
+183 R Kambal, Consul of Allocation @Vincent Proce
+184 M Rashmi, Eternities Crafter @Magali Villeneuve
+185 U Restoration Gearsmith @John Severin Brassell
+186 M Saheeli Rai @Willian Murai
+187 U Unlicensed Disintegration @Izzy
+188 U Veteran Motorist @Christopher Moeller
+189 U Voltaic Brawler @Raymond Swanland
+190 U Whirler Virtuoso @Lake Hurwitz
+191 C Accomplished Automaton @Daarken
+192 R Aetherflux Reservoir @Cliff Childs
+193 M Aetherworks Marvel @James Paick
+194 R Animation Module @Aaron Miller
+195 C Aradara Express @Adam Paquette
+196 U Ballista Charger @Sung Choi
+197 C Bastion Mastodon @Victor Adame Minguez
+198 U Bomat Bazaar Barge @Christine Choi
+199 R Bomat Courier @Craig J Spearing
+200 U Chief of the Foundry @Daniel Ljunggren
+201 C Cogworker's Puzzleknot @Cliff Childs
+202 C Consulate Skygate @John Avon
+203 R Cultivator's Caravan @Mark Zug
+204 R Deadlock Trap @Jason Rainville
+205 U Decoction Module @Aaron Miller
+206 U Demolition Stomper @James Paick
+207 C Dukhara Peafowl @Craig J Spearing
+208 R Dynavolt Tower @Titus Lunter
+209 C Eager Construct @Craig J Spearing
+210 R Electrostatic Pummeler @Slawomir Maniak
+211 U Fabrication Module @Aaron Miller
+212 U Filigree Familiar @Izzy
+213 C Fireforger's Puzzleknot @Zezhou Chen
+214 R Fleetwheel Cruiser @Sung Choi
+215 U Foundry Inspector @Jason A. Engle
+216 R Ghirapur Orrery @Kirsten Zirngibl
+217 C Glassblower's Puzzleknot @Kieran Yanner
+218 C Inventor's Goggles @Jason Felix
+219 U Iron League Steed @Darek Zabrocki
+220 R Key to the City @Sean Murray
+221 C Metalspinner's Puzzleknot @Vincent Proce
+222 R Metalwork Colossus @Jaime Jones
+223 R Multiform Wonder @Daarken
+224 C Narnam Cobra @Christopher Burdett
+225 U Ovalchase Dragster @Victor Adame Minguez
+226 R Panharmonicon @Volkan Baǵa
+227 U Perpetual Timepiece @Cliff Childs
+228 C Prakhata Pillar-Bug @Jason Felix
+229 C Prophetic Prism @Noah Bradley
+230 C Renegade Freighter @Izzy
+231 R Scrapheap Scrounger @Jason A. Engle
+232 C Self-Assembler @Noah Bradley
+233 C Sky Skiff @Richard Wright
+234 M Skysovereign, Consul Flagship @Jung Park
+235 R Smuggler's Copter @Florian de Gesincourt
+236 U Snare Thopter @John Avon
+237 C Torch Gauntlet @Igor Kieryluk
+238 C Weldfast Monitor @Jakub Kasper
+239 U Whirlermaker @Victor Adame Minguez
+240 C Woodweaver's Puzzleknot @Volkan Baǵa
+241 C Workshop Assistant @Victor Adame Minguez
+242 U Aether Hub @Sam Burley
+243 R Blooming Marsh @Adam Paquette
+244 R Botanical Sanctum @Christine Choi
+245 R Concealed Courtyard @Jung Park
+246 R Inspiring Vantage @Jonas De Ro
+247 R Inventors' Fair @Jonas De Ro
+248 U Sequestered Stash @Yeong-Hao Han
+249 R Spirebluff Canal @Adam Paquette
+250 L Plains @John Avon
+251 L Plains @John Avon
+252 L Plains @Clint Cearley
+253 L Island @Yeong-Hao Han
+254 L Island @Yeong-Hao Han
+255 L Island @Johannes Voss
+256 L Swamp @James Paick
+257 L Swamp @Adam Paquette
+258 L Swamp @Adam Paquette
+259 L Mountain @Richard Wright
+260 L Mountain @Eytan Zana
+261 L Mountain @Eytan Zana
+262 L Forest @Christine Choi
+263 L Forest @Christine Choi
+264 L Forest @Chase Stone
 
 [precon product]
-265 M Chandra, Pyrogenius
-266 C Flame Lash
-267 R Liberating Combustion
-268 U Renegade Firebrand
-269 C Stone Quarry
-270 M Nissa, Nature's Artisan
-271 U Guardian of the Great Conduit
-272 C Terrain Elemental
-272 R Verdant Crescendo
-273 C Woodland Stream
+265 M Chandra, Pyrogenius @Jason Rainville
+266 C Flame Lash @Viktor Titov
+267 R Liberating Combustion @Lius Lasahido
+268 U Renegade Firebrand @John Stanko
+269 C Stone Quarry @Efflam Mercier
+270 M Nissa, Nature's Artisan @Willian Murai
+271 U Guardian of the Great Conduit @Christine Choi
+272 C Terrain Elemental @Magali Villeneuve
+273 R Verdant Crescendo @Zack Stella
+274 C Woodland Stream @Efflam Mercier
 
 [Kaladesh Inventions]
 Cataclysmic Gearhulk|MPS_KLD

@@ -6,12 +6,12 @@ Type=Promo
 ScryfallCode=PFRF
 
 [cards]
-11 R Dragonscale General
-50 R Sage-Eye Avengers
-54 R Supplant Form
-62 R Archfiend of Depravity
-74 U Mardu Shadowspear
-99 R Flamerush Rider
-137 R Sandsteppe Mastodon
-138 R Shamanic Revelation
-142 R Temur War Shaman
+11 R Dragonscale General @Willian Murai
+50 R Sage-Eye Avengers @Viktor Titov
+54 R Supplant Form @Mike Bierek
+62 R Archfiend of Depravity @Volkan Baǵa
+74 U Mardu Shadowspear @Dan Scott
+99 R Flamerush Rider @Viktor Titov
+137 R Sandsteppe Mastodon @Kev Walker
+138 R Shamanic Revelation @Matt Stewart
+142 R Temur War Shaman @Raymond Swanland

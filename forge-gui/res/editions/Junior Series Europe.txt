@@ -6,11 +6,11 @@ Type=Promo
 ScryfallCode=PJSE
 
 [cards]
-1E05 R Slith Firewalker
-1E06 R Sakura-Tribe Elder
-1E07 R Soltari Priest
-1E08 R Glorious Anthem
-2E05 R Royal Assassin
-2E06 R Shard Phoenix
-2E07 R Whirling Dervish
-2E08 R Elvish Champion
+1E05 R Slith Firewalker @Justin Sweet
+1E06 R Sakura-Tribe Elder @Carl Critchlow
+1E07 R Soltari Priest @Dany Orizio
+1E08 R Glorious Anthem @Raymond Swanland
+2E05 R Royal Assassin @Tom Wänerstrand
+2E06 R Shard Phoenix @Ron Spencer
+2E07 R Whirling Dervish @Alex Horley-Orlandelli
+2E08 R Elvish Champion @Matt Cavotta

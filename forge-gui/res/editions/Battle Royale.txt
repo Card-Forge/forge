@@ -9,139 +9,139 @@ Foil=NotSupported
 ScryfallCode=BRB
 
 [cards]
-1 U Abyssal Specter
-2 C Advance Scout
-3 U Air Elemental
-4 C Angelic Page
-5 C Arc Lightning
-6 U Argothian Elder
-7 C Armored Pegasus
-8 U Azure Drake
-9 R Blinking Spirit
-10 C Broken Fall
-11 C Cackling Fiend
-12 R Catastrophe
-13 U Cinder Marsh
-14 U Control Magic
-15 C Counterspell
-16 U Crazed Skirge
-17 C Curfew
-18 C Dark Ritual
-19 R Dirtcowl Wurm
-20 C Disenchant
-21 C Disruptive Student
-22 C Drifting Meadow
-23 U Elvish Lyrist
-24 C Exhume
-25 U Fecundity
-26 C Fertile Ground
-27 U Fire Ants
-28 C Flood
-29 C Giant Growth
-30 C Gorilla Warrior
-31 C Healing Salve
-32 C Heat Ray
-33 U Hurricane
-34 C Infantry Veteran
-35 U Land Tax
-36 R Lhurgoyf
-37 C Lightning Elemental
-38 R Living Death
-39 C Llanowar Elves
-40 C Man-o'-War
-41 C Mana Leak
-42 C Maniacal Rage
-43 C Manta Riders
-44 C Master Decoy
-45 U Mogg Hollows
-46 U Nekrataal
-47 U Opportunity
-48 C Pacifism
-49 U Pestilence
-50 C Phyrexian Ghoul
-51 C Pincher Beetles
-52 C Plated Rootwalla
-53 C Polluted Mire
-54 C Prodigal Sorcerer
-55 C Raging Goblin
-56 C Ray of Command
-57 U Reanimate
-58 C Remote Isle
-59 U River Boa
-60 C Rolling Thunder
-61 C Sadistic Glee
-62 C Sanctum Custodian
-63 U Sanctum Guardian
-64 C Sandstorm
-65 C Scaled Wurm
-66 C Scryb Sprites
-67 U Seasoned Marshal
-68 C Seeker of Skybreak
-69 U Sengir Vampire
-70 C Sewer Rats
-71 C Shower of Sparks
-72 U Skyshroud Elite
-73 C Slippery Karst
-74 C Soltari Foot Soldier
-75 U Songstitcher
-76 C Soul Warden
-77 C Spike Colony
-78 U Spike Feeder
-79 R Spike Weaver
-80 C Spike Worker
-81 U Steam Blast
-82 R Subversion
-83 C Sun Clasp
-84 U Swords to Plowshares
-85 C Symbiosis
-86 C Syphon Soul
-87 C Terror
-88 U Thalakos Lowlands
-89 C Tranquility
-90 U Trumpeting Armodon
-91 C Unnerve
-92 U Uthden Troll
-93 U Vec Townships
-94 C Village Elder
-95 C Wall of Heat
-96 C Weakness
-97 U Wildfire Emissary
-98 C Wind Drake
-99 U Windfall
-100 R Wrath of God
-101 L Forest
-102 L Forest
-103 L Forest
-104 L Forest
-105 L Forest
-106 L Forest
-107 L Forest
-108 L Forest
-109 L Forest
-110 L Island
-111 L Island
-112 L Island
-113 L Island
-114 L Island
-115 L Mountain
-116 L Mountain
-117 L Mountain
-118 L Mountain
-119 L Mountain
-120 L Mountain
-121 L Mountain
-122 L Mountain
-123 L Mountain
-124 L Plains
-125 L Plains
-126 L Plains
-127 L Plains
-128 L Plains
-129 L Plains
-130 L Plains
-131 L Plains
-132 L Plains
-133 L Swamp
-134 L Swamp
-135 L Swamp
-136 L Swamp
+1 U Abyssal Specter @George Pratt
+2 C Advance Scout @Heather Hudson
+3 U Air Elemental @D. Alexander Gregory
+4 C Angelic Page @Rebecca Guay
+5 C Arc Lightning @Andrew Goldhawk
+6 U Argothian Elder @DiTerlizzi
+7 C Armored Pegasus @Una Fricker
+8 U Azure Drake @Janine Johnston
+9 R Blinking Spirit @Allen Williams
+10 C Broken Fall @Zina Saunders
+11 C Cackling Fiend @Brian Despain
+12 R Catastrophe @Andrew Robinson
+13 U Cinder Marsh @John Matson
+14 U Control Magic @Dameon Willich
+15 C Counterspell @Hannibal King
+16 U Crazed Skirge @Ron Spencer
+17 C Curfew @Randy Gallegos
+18 C Dark Ritual @Clint Langley
+19 R Dirtcowl Wurm @Dan Frazier
+20 C Disenchant @Brian Snõddy
+21 C Disruptive Student @Randy Gallegos
+22 C Drifting Meadow @Bob Eggleton
+23 U Elvish Lyrist @Rebecca Guay
+24 C Exhume @Carl Critchlow
+25 U Fecundity @Rebecca Guay
+26 C Fertile Ground @Heather Hudson
+27 U Fire Ants @Tom Fleming
+28 C Flood @Dennis Detwiller
+29 C Giant Growth @DiTerlizzi
+30 C Gorilla Warrior @John Matson
+31 C Healing Salve @Zina Saunders
+32 C Heat Ray @Brian Snõddy
+33 U Hurricane @Rob Alexander
+34 C Infantry Veteran @Christopher Rush
+35 U Land Tax @Brian Snõddy
+36 R Lhurgoyf @Pete Venters
+37 C Lightning Elemental @D. Alexander Gregory
+38 R Living Death @Charles Gillespie
+39 C Llanowar Elves @Anson Maddocks
+40 C Man-o'-War @Jon J Muth
+41 C Mana Leak @Christopher Rush
+42 C Maniacal Rage @Pete Venters
+43 C Manta Riders @Kaja Foglio
+44 C Master Decoy @Phil Foglio
+45 U Mogg Hollows @Jeff Laubenstein
+46 U Nekrataal @Adrian Smith
+47 U Opportunity @Ron Spears
+48 C Pacifism @Robert Bliss
+49 U Pestilence @Pete Venters
+50 C Phyrexian Ghoul @Pete Venters
+51 C Pincher Beetles @Stephen Daniele
+52 C Plated Rootwalla @Randy Elliott
+53 C Polluted Mire @Stephen Daniele
+54 C Prodigal Sorcerer @Douglas Shuler
+55 C Raging Goblin @Jeff Miracola
+56 C Ray of Command @Andrew Robinson
+57 U Reanimate @Robert Bliss
+58 C Remote Isle @Ciruelo
+59 U River Boa @Steve White
+60 C Rolling Thunder @Richard Thomas
+61 C Sadistic Glee @Pete Venters
+62 C Sanctum Custodian @Paolo Parente
+63 U Sanctum Guardian @Donato Giancola
+64 C Sandstorm @Brian Snõddy
+65 C Scaled Wurm @Daniel Gelon
+66 C Scryb Sprites @Amy Weber
+67 U Seasoned Marshal @Matthew D. Wilson
+68 C Seeker of Skybreak @Daren Bader
+69 U Sengir Vampire @Anson Maddocks
+70 C Sewer Rats @Martin McKenna
+71 C Shower of Sparks @Christopher Moeller
+72 U Skyshroud Elite @Paolo Parente
+73 C Slippery Karst @Stephen Daniele
+74 C Soltari Foot Soldier @Janet Aulisio
+75 U Songstitcher @Berry
+76 C Soul Warden @Randy Gallegos
+77 C Spike Colony @Douglas Shuler
+78 U Spike Feeder @Heather Hudson
+79 R Spike Weaver @Mike Raabe
+80 C Spike Worker @Daniel Gelon
+81 U Steam Blast @Mike Raabe
+82 R Subversion @Rob Alexander
+83 C Sun Clasp @John Coulthart
+84 U Swords to Plowshares @Jeff A. Menges
+85 C Symbiosis @Jeff Miracola
+86 C Syphon Soul @Melissa A. Benson
+87 C Terror @Ron Spencer
+88 U Thalakos Lowlands @Jeff A. Menges
+89 C Tranquility @Douglas Shuler
+90 U Trumpeting Armodon @Gary Leach
+91 C Unnerve @Terese Nielsen
+92 U Uthden Troll @Douglas Shuler
+93 U Vec Townships @Eric David Anderson
+94 C Village Elder @Donato Giancola
+95 C Wall of Heat @Richard Thomas
+96 C Weakness @Kev Walker
+97 U Wildfire Emissary @Richard Kane Ferguson
+98 C Wind Drake @Zina Saunders
+99 U Windfall @Pete Venters
+100 R Wrath of God @Quinton Hoover
+101 L Forest @David O'Connor
+102 L Forest @David O'Connor
+103 L Forest @John Avon
+104 L Forest @John Avon
+105 L Forest @John Avon
+106 L Forest @John Avon
+107 L Forest @Ji Yong
+108 L Forest @Ji Yong
+109 L Forest @Ji Yong
+110 L Island @Donato Giancola
+111 L Island @Donato Giancola
+112 L Island @Ku Xueming
+113 L Island @Ku Xueming
+114 L Island @Ku Xueming
+115 L Mountain @John Avon
+116 L Mountain @Mark Poole
+117 L Mountain @Mark Poole
+118 L Mountain @Rob Alexander
+119 L Mountain @John Avon
+120 L Mountain @John Avon
+121 L Mountain @John Avon
+122 L Mountain @John Avon
+123 L Mountain @John Avon
+124 L Plains @Pat Morrissey
+125 L Plains @Pat Morrissey
+126 L Plains @Pat Morrissey
+127 L Plains @Douglas Shuler
+128 L Plains @Douglas Shuler
+129 L Plains @Douglas Shuler
+130 L Plains @He Jiancheng
+131 L Plains @He Jiancheng
+132 L Plains @He Jiancheng
+133 L Swamp @John Avon
+134 L Swamp @John Avon
+135 L Swamp @John Avon
+136 L Swamp @John Avon

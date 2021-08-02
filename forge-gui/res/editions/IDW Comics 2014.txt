@@ -6,6 +6,6 @@ Type=Promo
 ScryfallCode=PI14
 
 [cards]
-15 R Wash Out
-16 R Acquire
-17 R Duress
+15 R Wash Out @Volkan Baǵa
+16 R Acquire @Anthony Francisco
+17 R Duress @Michael Komarck

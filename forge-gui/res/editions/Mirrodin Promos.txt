@@ -6,4 +6,4 @@ Type=Promo
 ScryfallCode=PMRD
 
 [cards]
-251★ R Sword of Kaldra
+251★ R Sword of Kaldra @Donato Giancola

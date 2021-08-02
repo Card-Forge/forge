@@ -181,11 +181,13 @@ public final class CardEdition implements Comparable<CardEdition> {
         public final CardRarity rarity;
         public final String collectorNumber;
         public final String name;
+        public final String artistName;
 
-        public CardInSet(final String name, final String collectorNumber, final CardRarity rarity) {
+        public CardInSet(final String name, final String collectorNumber, final CardRarity rarity, final String artistName) {
             this.name = name;
             this.collectorNumber = collectorNumber;
             this.rarity = rarity;
+            this.artistName = artistName;
         }
  
         public String toString() {
@@ -199,6 +201,10 @@ public final class CardEdition implements Comparable<CardEdition> {
                 sb.append(' ');
             }
             sb.append(name);
+            if (artistName != null) {
+                sb.append(" @");
+                sb.append(artistName);
+            }
             return sb.toString();
         }
 
@@ -537,7 +543,7 @@ public final class CardEdition implements Comparable<CardEdition> {
                     * name - grouping #5
              */
 //                "(^(.?[0-9A-Z]+.?))?(([SCURML]) )?(.*)$"
-                "(^(.?[0-9A-Z]+\\S?[A-Z]*)\\s)?(([SCURML])\\s)?(.*)$"
+                "(^(.?[0-9A-Z]+\\S?[A-Z]*)\\s)?(([SCURML])\\s)?([^@]*)( @(.*))?$"
             );
 
             ListMultimap<String, CardInSet> cardMap = ArrayListMultimap.create();
@@ -562,7 +568,8 @@ public final class CardEdition implements Comparable<CardEdition> {
                         String collectorNumber = matcher.group(2);
                         CardRarity r = CardRarity.smartValueOf(matcher.group(4));
                         String cardName = matcher.group(5);
-                        CardInSet cis = new CardInSet(cardName, collectorNumber, r);
+                        String artistName = matcher.group(7);
+                        CardInSet cis = new CardInSet(cardName, collectorNumber, r, artistName);
 
                         cardMap.put(sectionName, cis);
                     }

@@ -6,11 +6,11 @@ Type=Promo
 ScryfallCode=PWP09
 
 [cards]
-24 R Path to Exile
-25 R Hellspark Elemental
-26 R Marisi's Twinclaws
-27 R Slave of Bolas
-30 R Mind Control
-31 R Rise from the Grave
-32 R Kor Duelist
-33 R Vampire Nighthawk
+24 R Path to Exile @Rebecca Guay
+25 R Hellspark Elemental @Nils Hamm
+26 R Marisi's Twinclaws @Dominick Domingo
+27 R Slave of Bolas @Karl Kopinski
+30 R Mind Control @Keith Garletts
+31 R Rise from the Grave @Thomas M. Baxa
+32 R Kor Duelist @Kekai Kotaki
+33 R Vampire Nighthawk @Karl Kopinski

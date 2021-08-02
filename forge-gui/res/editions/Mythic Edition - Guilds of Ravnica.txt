@@ -7,14 +7,14 @@ Type=Collector_Edition
 ScryfallCode=med
 
 [cards]
-GR1 M Elspeth, Knight-Errant
-GR2 M Liliana, the Last Hope
-GR3 M Daretti, Ingenious Iconoclast
-GR4 M Nicol Bolas, Planeswalker
-GR5 M Ral, Izzet Viceroy
-GR6 M Teferi, Hero of Dominaria
-GR7 M Tezzeret, Agent of Bolas
-GR8 M Vraska, Golgari Queen
+GR1 M Elspeth, Knight-Errant @Zack Stella
+GR2 M Liliana, the Last Hope @Kieran Yanner
+GR3 M Daretti, Ingenious Iconoclast @Svetlin Velinov
+GR4 M Nicol Bolas, Planeswalker @Slawomir Maniak
+GR5 M Ral, Izzet Viceroy @Daniel Ljunggren
+GR6 M Teferi, Hero of Dominaria @Yongjae Choi
+GR7 M Tezzeret, Agent of Bolas @Aleksi Briclot
+GR8 M Vraska, Golgari Queen @Livia Prima
 
 [tokens]
 w_1_1_soldier

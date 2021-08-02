@@ -8,59 +8,59 @@ Border=White
 ScryfallCode=DKM
 
 [cards]
-1 U Abyssal Specter
-2 U Contagion
-3 C Dark Banishing
-4 C Dark Ritual
-5 C Foul Familiar
-6 C Lim-Dul's High Guard
-7 R Necropotence
-8 C Phantasmal Fiend
-9 C Soul Burn
-10 R Balduvian Horde
-11 U Death Spark
-12 U Goblin Mutant
-13 C Guerrilla Tactics
-14 C Incinerate
-15 R Jokulhaups
-16 C Lava Burst
-17 U Orcish Cannoneers
-18 U Pillage
-19 U Pyroclasm
-20 C Shatter
-21 C Storm Shaman
-22 C Balduvian Bears
-23 U Bounty of the Hunt
-24 U Elvish Bard
-25 C Folk of the Pines
-26 C Fyndhorn Elves
-27 C Giant Growth
-28 U Hurricane
-29 R Lhurgoyf
-30 C Woolly Spider
-31 C Yavimaya Ancients
-32 U Yavimaya Ants
-33 U Giant Trap Door Spider
-34 C Barbed Sextant
-35 R Elkin Bottle
-36 U Icy Manipulator
-37 C Phyrexian War Beast
-38 U Walking Wall
-39 R Karplusan Forest
-40 R Sulfurous Springs
-41 R Underground River
-42 L Swamp
-43 L Swamp
-44 L Swamp
-45 L Mountain
-46 L Mountain
-47 L Mountain
-48 L Forest
-49 L Forest
-50 L Forest
-51 C Lim-Dul's High Guard
-52 C Phantasmal Fiend
-53 C Guerrilla Tactics
-54 C Storm Shaman
-55 C Yavimaya Ancients
-56 C Phyrexian War Beast
+1 U Abyssal Specter @Ruth Thompson
+2 U Contagion @Mike Raabe
+3 C Dark Banishing @Drew Tucker
+4 C Dark Ritual @Justin Hampton
+5 C Foul Familiar @Anson Maddocks
+6a C Lim-Dul's High Guard @Anson Maddocks
+6b C Lim-Dul's High Guard @Anson Maddocks
+7 R Necropotence @Mark Tedin
+8a C Phantasmal Fiend @Scott Kirschner
+8b C Phantasmal Fiend @Scott Kirschner
+9 C Soul Burn @Rob Alexander
+10 R Balduvian Horde @Brian Snõddy
+11 U Death Spark @Mark Tedin
+12 U Goblin Mutant @Daniel Gelon
+13a C Guerrilla Tactics @Randy Asplund-Faith
+13b C Guerrilla Tactics @Randy Asplund-Faith
+14 C Incinerate @Mark Poole
+15 R Jokulhaups @Richard Thomas
+16 C Lava Burst @Tom Wänerstrand
+17 U Orcish Cannoneers @Dan Frazier
+18 U Pillage @Richard Kane Ferguson
+19 U Pyroclasm @Pat Morrissey
+20 C Shatter @Bryon Wackwitz
+21a C Storm Shaman @Carol Heyer
+21b C Storm Shaman @Carol Heyer
+22 C Balduvian Bears @Quinton Hoover
+23 U Bounty of the Hunt @Jeff A. Menges
+24 U Elvish Bard @Susan Van Camp
+25 C Folk of the Pines @NéNé Thomas & Catherine Buck
+26 C Fyndhorn Elves @Justin Hampton
+27 C Giant Growth @Allen Williams
+28 U Hurricane @Cornelius Brudi
+29 R Lhurgoyf @Pete Venters
+30 C Woolly Spider @Daniel Gelon
+31a C Yavimaya Ancients @Quinton Hoover
+31b C Yavimaya Ancients @Quinton Hoover
+32 U Yavimaya Ants @Pat Morrissey
+33 U Giant Trap Door Spider @Heather Hudson
+34 C Barbed Sextant @Amy Weber
+35 R Elkin Bottle @Quinton Hoover
+36 U Icy Manipulator @Amy Weber
+37a C Phyrexian War Beast @Bill Sienkiewicz
+37b C Phyrexian War Beast @Bill Sienkiewicz
+38 U Walking Wall @Anthony S. Waters
+39 R Karplusan Forest @Nicola Leonard
+40 R Sulfurous Springs @Phil Foglio
+41 R Underground River @NéNé Thomas
+42 L Swamp @Douglas Shuler
+43 L Swamp @Douglas Shuler
+44 L Swamp @Douglas Shuler
+45 L Mountain @Tom Wänerstrand
+46 L Mountain @Tom Wänerstrand
+47 L Mountain @Tom Wänerstrand
+48 L Forest @Pat Morrissey
+49 L Forest @Pat Morrissey
+50 L Forest @Pat Morrissey

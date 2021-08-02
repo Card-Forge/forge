@@ -7,68 +7,68 @@ Type=Duel_Deck
 ScryfallCode=EVG
 
 [cards]
-1 R Ambush Commander
-2 R Allosaurus Rider
-3 C Elvish Eulogist
-4 U Elvish Harbinger
-5 C Elvish Warrior
-6 U Gempalm Strider
-7 U Heedless One
-8 U Imperious Perfect
-9 C Llanowar Elves
-10 C Lys Alana Huntmaster
-11 C Stonewood Invoker
-12 U Sylvan Messenger
-13 C Timberwatch Elf
-14 R Voice of the Woods
-15 C Wellwisher
-16 C Wirewood Herald
-17 U Wirewood Symbiote
-18 C Wood Elves
-19 U Wren's Run Vanquisher
-20 U Elvish Promenade
-21 C Giant Growth
-22 U Harmonize
-23 C Wildsize
-24 C Moonglove Extract
-25 R Slate of Ancestry
-26 U Wirewood Lodge
-27 C Tranquil Thicket
-28 L Forest
-29 L Forest
-30 L Forest
-31 L Forest
-32 R Siege-Gang Commander
-33 U Akki Coalflinger
-34 R Clickslither
-35 C Emberwilde Augur
-36 U Flamewave Invoker
-37 U Gempalm Incinerator
-38 C Goblin Cohort
-39 U Goblin Matron
-40 U Goblin Ringleader
-41 C Goblin Sledder
-42 U Goblin Warchief
-43 R Ib Halfheart, Goblin Tactician
-44 U Mogg Fanatic
-45 C Mogg War Marshal
-46 C Mudbutton Torchrunner
-47 C Raging Goblin
-48 U Reckless One
-49 U Skirk Drill Sergeant
-50 R Skirk Fire Marshal
-51 C Skirk Prospector
-52 C Skirk Shaman
-53 U Tar Pitcher
-54 U Boggart Shenanigans
-55 C Spitting Earth
-56 C Tarfire
-57 C Forgotten Cave
-58 U Goblin Burrows
-59 L Mountain
-60 L Mountain
-61 L Mountain
-62 L Mountain
+1 R Ambush Commander @Lucio Parrillo
+2 R Allosaurus Rider @Daren Bader
+3 C Elvish Eulogist @Ben Thompson
+4 U Elvish Harbinger @Larry MacDougall
+5 C Elvish Warrior @Christopher Moeller
+6 U Gempalm Strider @Tim Hildebrandt
+7 U Heedless One @Mark Zug
+8 U Imperious Perfect @Scott M. Fischer
+9 C Llanowar Elves @Kev Walker
+10 C Lys Alana Huntmaster @Pete Venters
+11 C Stonewood Invoker @Eric Peterson
+12 U Sylvan Messenger @Heather Hudson
+13 C Timberwatch Elf @Dave Dorman
+14 R Voice of the Woods @Pete Venters
+15 C Wellwisher @Christopher Rush
+16 C Wirewood Herald @Alex Horley-Orlandelli
+17 U Wirewood Symbiote @Thomas M. Baxa
+18 C Wood Elves @Christopher Moeller
+19 U Wren's Run Vanquisher @Paolo Parente
+20 U Elvish Promenade @Steve Ellis
+21 C Giant Growth @Matt Cavotta
+22 U Harmonize @Rob Alexander
+23 C Wildsize @Jim Murray
+24 C Moonglove Extract @Terese Nielsen
+25 R Slate of Ancestry @Corey D. Macourek
+26 C Tranquil Thicket @Heather Hudson
+27 U Wirewood Lodge @Anthony S. Waters
+28 L Forest @Glen Angus
+29 L Forest @John Avon
+30 L Forest @John Avon
+31 L Forest @Rob Alexander
+32 R Siege-Gang Commander @Lucio Parrillo
+33 U Akki Coalflinger @Nottsuo
+34 R Clickslither @Kev Walker
+35 C Emberwilde Augur @Brandon Kitkouski
+36 U Flamewave Invoker @Dave Dorman
+37 U Gempalm Incinerator @Luca Zontini
+38 C Goblin Cohort @Darrell Riche
+39 U Goblin Matron @Daniel Gelon
+40 U Goblin Ringleader @Mark Romanoski
+41 C Goblin Sledder @Ron Spencer
+42 U Goblin Warchief @Greg Hildebrandt & Tim Hildebrandt
+43 R Ib Halfheart, Goblin Tactician @Wayne Reynolds
+44 U Mogg Fanatic @Brom
+45 C Mogg War Marshal @Wayne England
+46 C Mudbutton Torchrunner @Steve Ellis
+47 C Raging Goblin @Jeff Miracola
+48 U Reckless One @Ron Spencer
+49 U Skirk Drill Sergeant @Alex Horley-Orlandelli
+50 R Skirk Fire Marshal @Greg Hildebrandt & Tim Hildebrandt
+51 C Skirk Prospector @Doug Chaffee
+52 C Skirk Shaman @Chippy
+53 U Tar Pitcher @Omar Rayyan
+54 U Boggart Shenanigans @Warren Mahy
+55 C Spitting Earth @Michael Koelsch
+56 C Tarfire @Omar Rayyan
+57 C Forgotten Cave @Tony Szczudlo
+58 U Goblin Burrows @David Martin
+59 L Mountain @David Day
+60 L Mountain @Jeff Miracola
+61 L Mountain @Rob Alexander
+62 L Mountain @Sam Wood
 
 [tokens]
 r_1_1_goblin

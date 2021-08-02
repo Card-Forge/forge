@@ -8,71 +8,71 @@ Type=Duel_Deck
 ScryfallCode=DDS
 
 [cards]
-1 M Jhoira of the Ghitu
-2 R Beacon of Tomorrows
-3 R Deep-Sea Kraken
-4 R Mind's Desire
-5 C Peer Through Depths
-6 R Quicken
-7 C Reach Through Mists
-8 R Sage-Eye Avengers
-9 C Sift Through Sands
-10 C Snap
-11 R Talrand, Sky Summoner
-12 C Temporal Fissure
-13 R The Unspeakable
-14 U Desperate Ritual
-15 C Empty the Warrens
-16 C Grapeshot
-17 C Rift Bolt
-18 U Shivan Meteor
-19 R Volcanic Vision
-20 U Young Pyromancer
-21 R Firemind's Foresight
-22 C Goblin Electromancer
-23 R Jori En, Ruin Diver
-24 C Nivix Cyclops
-25 U Spellheart Chimera
-26 U Nucklavee
-27 C Swiftwater Cliffs
-28 L Island
-29 L Island
-30 L Island
-31 L Mountain
-32 L Mountain
-33 L Mountain
-34 M Lovisa Coldeyes
-35 R Beacon of Destruction
-36 U Boldwyr Intimidator
-37 C Firebolt
-38 C Gorehorn Minotaurs
-39 R Kamahl, Pit Fighter
-40 C Kruin Striker
-41 R Zo-Zu the Punisher
-42 C Ambassador Oak
-43 U Beast Attack
-44 R Call of the Herd
-45 C Cloudcrown Oak
-46 U Harmonize
-47 R Increasing Savagery
-48 C Rampant Growth
-49 U Roar of the Wurm
-50 C Skarrgan Pit-Skulk
-51 C Sylvan Might
-52 R Talara's Battalion
-53 R Radha, Heir to Keld
-54 U Relentless Hunter
-55 U Burning-Tree Emissary
-56 U Guttural Response
-57 R Rubblebelt Raiders
-58 R Coat of Arms
-59 C Rugged Highlands
-60 L Mountain
-61 L Mountain
-62 L Mountain
-63 L Forest
-64 L Forest
-65 L Forest
+1 M Jhoira of the Ghitu @Magali Villeneuve
+2 R Beacon of Tomorrows @Jeremy Jarvis
+3 R Deep-Sea Kraken @Christopher Moeller
+4 R Mind's Desire @Anthony Francisco
+5 C Peer Through Depths @Anthony S. Waters
+6 R Quicken @Aleksi Briclot
+7 C Reach Through Mists @Anthony S. Waters
+8 R Sage-Eye Avengers @Dan Scott
+9 C Sift Through Sands @Anthony S. Waters
+10 C Snap @Véronique Meignaud
+11 R Talrand, Sky Summoner @Svetlin Velinov
+12 C Temporal Fissure @Seb McKinnon
+13 R The Unspeakable @Daarken
+14 U Desperate Ritual @Wayne Reynolds
+15 C Empty the Warrens @Jasper Sandner
+16 C Grapeshot @Clint Cearley
+17 C Rift Bolt @Daniel Ljunggren
+18 U Shivan Meteor @Chippy
+19 R Volcanic Vision @Noah Bradley
+20 U Young Pyromancer @Cynthia Sheppard
+21 R Firemind's Foresight @Dan Scott
+22 C Goblin Electromancer @Svetlin Velinov
+23 R Jori En, Ruin Diver @Igor Kieryluk
+24 C Nivix Cyclops @Wayne Reynolds
+25 U Spellheart Chimera @Svetlin Velinov
+26 U Nucklavee @Trevor Hairsine
+27 C Swiftwater Cliffs @Eytan Zana
+28 L Island @Rob Alexander
+29 L Island @John Avon
+30 L Island @Cliff Childs
+31 L Mountain @John Avon
+32 L Mountain @Cliff Childs
+33 L Mountain @Craig Mullins
+34 M Lovisa Coldeyes @Anna Steinbauer
+35 R Beacon of Destruction @Greg Hildebrandt
+36 U Boldwyr Intimidator @Esad Ribic
+37 C Firebolt @Chris Rallis
+38 C Gorehorn Minotaurs @Wayne Reynolds
+39 R Kamahl, Pit Fighter @Kev Walker
+40 C Kruin Striker @Christopher Moeller
+41 R Zo-Zu the Punisher @Wayne Reynolds
+42 C Ambassador Oak @Steve Prescott
+43 U Beast Attack @Ciruelo
+44 R Call of the Herd @Carl Critchlow
+45 C Cloudcrown Oak @Rebecca Guay
+46 U Harmonize @Paul Lee
+47 R Increasing Savagery @Steve Prescott
+48 C Rampant Growth @Steven Belledin
+49 U Roar of the Wurm @Kev Walker
+50 C Skarrgan Pit-Skulk @Liam Sharp
+51 C Sylvan Might @Arnie Swekel
+52 R Talara's Battalion @Todd Lockwood
+53 R Radha, Heir to Keld @Jim Murray
+54 U Relentless Hunter @Matt Stewart
+55 U Burning-Tree Emissary @Izzy
+56 U Guttural Response @Ben Wootten
+57 R Rubblebelt Raiders @Chippy
+58 R Coat of Arms @Scott M. Fischer
+59 C Rugged Highlands @Eytan Zana
+60 L Mountain @Jonas De Ro
+61 L Mountain @Nils Hamm
+62 L Mountain @Karl Kopinski
+63 L Forest @John Avon
+64 L Forest @Jim Nelson
+65 L Forest @Stephen Tappin
 
 [tokens]
 u_2_2_drake_flying

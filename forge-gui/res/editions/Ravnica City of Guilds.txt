@@ -14,312 +14,312 @@ ChaosDraftThemes=RAVNICA
 ScryfallCode=RAV
 
 [cards]
-190 R Agrus Kos, Wojek Veteran
-1 U Auratouched Mage
-191 R Autochthon Wurm
-114 C Barbarian Riftcutter
-2 U Bathe in Light
-38 U Belltower Sphinx
-3 C Benevolent Ancestor
-153 R Birds of Paradise
-4 R Blazing Archon
-115 U Blockbuster
-77 R Blood Funnel
-192 R Bloodbond March
-254 R Bloodletter Quill
-5 C Boros Fury-Shield
-275 C Boros Garrison
-242 U Boros Guildmage
-243 C Boros Recruit
-255 C Boros Signet
-193 U Boros Swiftblade
-256 R Bottled Cloister
-78 C Brainspoil
-154 C Bramble Elemental
-116 R Breath of Fury
-194 R Brightflame
-6 C Caregiver
-79 U Carrion Howler
-155 U Carven Caryatid
-244 C Centaur Safeguard
-39 R Cerulean Sphinx
-7 U Chant of Vitu-Ghazi
-117 R Char
-156 R Chord of Calling
-195 R Chorus of the Conclave
-196 R Circu, Dimir Lobotomist
-157 C Civic Wayfinder
-118 U Cleansing Beam
-80 C Clinging Darkness
-257 R Cloudstone Curio
-197 U Clutch of the Undercity
-119 C Coalhauler Swine
-40 C Compulsive Research
-8 R Concerted Effort
-9 C Conclave Equenaut
-10 U Conclave Phalanx
-11 C Conclave's Blessing
-198 U Congregation at Dawn
-199 C Consult the Necrosages
-41 C Convolute
-42 R Copy Enchantment
-12 C Courier Hawk
-258 R Crown of Convergence
-259 U Cyclopean Snare
-81 R Dark Confidant
-200 U Dark Heart of the Wood
-82 U Darkblast
-13 U Devouring Light
-276 C Dimir Aqueduct
-201 R Dimir Cutpurse
-202 R Dimir Doppelganger
-245 U Dimir Guildmage
-83 C Dimir House Guard
-203 C Dimir Infiltrator
-84 U Dimir Machinations
-260 C Dimir Signet
-85 C Disembowel
-14 U Divebomber Griffin
-43 C Dizzy Spell
-120 C Dogpile
-158 R Doubling Season
-159 U Dowsing Shaman
-44 C Drake Familiar
-45 R Dream Leash
-46 C Drift of Phantasms
-15 C Dromad Purebred
-204 U Drooling Groodion
-160 C Dryad's Caress
-277 U Duskmantle, House of Shadow
-161 C Elves of Deep Shadow
-162 C Elvish Skysweeper
-86 R Empty the Catacombs
-47 U Ethereal Usher
-121 R Excruciator
-48 R Eye of the Storm
-16 C Faith's Fetters
-163 C Farseek
-17 U Festival of the Guildpact
-122 C Fiery Conclusion
-205 R Firemane Angel
-164 C Fists of Ironwood
-123 R Flame Fusillade
-206 U Flame-Kin Zealot
-124 U Flash Conscription
-18 R Flickerform
-49 C Flight of Fancy
-50 U Flow of Ideas
-51 R Followed Footsteps
-303 L Forest
-303 L Forest
-303 L Forest
-303 L Forest
-125 U Frenzied Goblin
-126 C Galvanic Arc
-19 C Gate Hound
-165 C Gather Courage
-246 C Gaze of the Gorgon
-20 R Ghosts of the Innocent
-207 R Glare of Subdual
-261 U Glass Golem
-247 R Gleancrawler
-208 R Glimpse the Unthinkable
-127 C Goblin Fire Fiend
-128 C Goblin Spelunkers
-166 C Golgari Brownscale
-209 U Golgari Germination
-167 R Golgari Grave-Troll
-248 U Golgari Guildmage
-278 C Golgari Rot Farm
-210 C Golgari Rotwurm
-262 C Golgari Signet
-87 U Golgari Thug
-168 U Goliath Spider
-211 R Grave-Shell Scarab
-52 C Grayscaled Gharial
-129 U Greater Forgeling
-169 C Greater Mossdog
-263 U Grifter's Blade
-53 R Grozoth
-212 C Guardian of Vitu-Ghazi
-54 U Halcyon Glaze
-130 R Hammerfist Giant
-88 R Helldozer
-89 R Hex
-21 R Hour of Reckoning
-131 R Hunted Dragon
-90 R Hunted Horror
-22 R Hunted Lammasu
-55 R Hunted Phantasm
-170 R Hunted Troll
-132 C Incite Hysteria
-133 U Indentured Oaf
-56 C Induce Paranoia
-91 C Infectious Host
-134 U Instill Furor
-292 L Island
-292 L Island
-292 L Island
-292 L Island
-171 U Ivy Dancer
-264 U Junktroller
-92 U Keening Banshee
-93 C Last Gasp
-265 U Leashling
-23 C Leave No Trace
-172 R Life from the Loam
-24 R Light of Sanction
-213 U Lightning Helix
-57 U Lore Broker
-25 R Loxodon Gatekeeper
-214 R Loxodon Hierarch
-249 C Lurking Informant
-58 U Mark of Eviction
-250 R Master Warcraft
-94 U Mausoleum Turnkey
-215 R Mindleech Mass
-135 R Mindmoil
-59 U Mnemonic Nexus
-173 U Moldervine Cloak
-136 R Molten Sentry
-95 R Moonlight Bargain
-216 U Moroii
-96 C Mortipede
-301 L Mountain
-301 L Mountain
-301 L Mountain
-301 L Mountain
-60 C Muddle the Mixture
-97 C Necromantic Thirst
-98 R Necroplasm
-99 U Netherborn Phalanx
-26 C Nightguard Patrol
-100 U Nightmare Void
-174 U Nullmage Shepherd
-266 R Nullstone Gargoyle
-27 U Oathsworn Giant
-137 C Ordruun Commando
-279 R Overgrown Tomb
-175 U Overwhelm
-267 R Pariah's Shield
-61 C Peel from Reality
-268 U Peregrine Mask
-176 U Perilous Forays
-217 C Perplex
-218 R Phytohydra
-269 R Plague Boiler
-287 L Plains
-287 L Plains
-287 L Plains
-287 L Plains
-219 U Pollenbright Wings
-177 R Primordial Sage
-251 R Privileged Position
-220 U Psychic Drain
-221 U Putrefy
-62 C Quickchange
-138 C Rain of Embers
-222 C Rally the Righteous
-224 R Razia's Purification
-223 R Razia, Boros Archangel
-178 U Recollect
-63 U Remand
-139 U Reroute
-101 U Ribbons of Night
-179 U Rolling Spoil
-102 C Roofstalker Wight
-180 U Root-Kin Ally
-140 C Sabertooth Alley Cat
-280 R Sacred Foundry
-103 C Sadistic Augermage
-28 U Sandsower
-225 R Savra, Queen of the Golgari
-181 C Scatter the Seeds
-182 R Scion of the Wild
-29 C Screeching Griffin
-226 R Searing Meditation
-30 U Seed Spark
-227 C Seeds of Strength
-141 C Seismic Spike
-228 C Selesnya Evangel
-252 U Selesnya Guildmage
-229 U Selesnya Sagittars
-281 C Selesnya Sanctuary
-270 C Selesnya Signet
-142 C Sell-Sword Brute
-104 C Sewerdreg
-253 R Shadow of Doubt
-230 C Shambling Shell
-105 C Shred Memory
-183 C Siege Wurm
-106 R Sins of the Past
-231 R Sisters of Stone Death
-232 C Skyknight Legionnaire
-143 C Smash
-64 C Snapping Drake
-144 C Sparkmage Apprentice
-65 R Spawnbroker
-271 U Spectral Searchlight
-66 C Stasis Cell
-107 C Stinkweed Imp
-184 C Stone-Seeder Hierophant
-145 U Stoneshaker Shaman
-108 C Strands of Undeath
-185 C Sundering Vitae
-272 R Sunforger
-233 U Sunhome Enforcer
-282 U Sunhome, Fortress of the Legion
-31 U Suppression Field
-146 C Surge of Zeal
-67 C Surveilling Sprite
-283 U Svogthos, the Restless Tomb
-296 L Swamp
-296 L Swamp
-296 L Swamp
-296 L Swamp
-234 R Szadek, Lord of Secrets
-68 C Tattered Drake
-69 U Telling Time
-284 R Temple Garden
-70 C Terraformer
-273 C Terrarion
-109 C Thoughtpicker Witch
-32 R Three Dreams
-235 C Thundersong Trumpeter
-71 C Tidewater Minion
-236 R Tolsimir Wolfblood
-147 C Torpid Moloch
-186 C Transluminant
-187 U Trophy Hunter
-72 R Tunnel Vision
-33 R Twilight Drover
-237 U Twisted Justice
-110 U Undercity Shade
-188 R Ursapine
-73 C Vedalken Dismisser
-74 C Vedalken Entrancer
-34 C Veteran Armorer
-148 C Viashino Fangtail
-149 C Viashino Slasher
-111 U Vigor Mortis
-112 U Vindictive Mob
-189 R Vinelasher Kudzu
-285 U Vitu-Ghazi, the City-Tree
-35 C Votary of the Conclave
-274 U Voyager Staff
-238 R Vulturous Zombie
-151 C War-Torch Goblin
-150 R Warp World
-239 U Watchwolf
-286 R Watery Grave
-75 U Wizened Snitches
-113 R Woebringer Demon
-36 U Wojek Apothecary
-152 U Wojek Embermage
-37 C Wojek Siren
-240 R Woodwraith Corrupter
-241 C Woodwraith Strangler
-76 C Zephyr Spirit
+190 R Agrus Kos, Wojek Veteran @Donato Giancola
+1 U Auratouched Mage @Jeff Miracola
+191 R Autochthon Wurm @Michael Phillippi
+114 C Barbarian Riftcutter @Carl Critchlow
+2 U Bathe in Light @Alex Horley-Orlandelli
+38 U Belltower Sphinx @Jim Nelson
+3 C Benevolent Ancestor @Nick Percival
+153 R Birds of Paradise @Marcelo Vignali
+4 R Blazing Archon @Zoltan Boros & Gabor Szikszai
+115 U Blockbuster @Dave Dorman
+77 R Blood Funnel @Thomas M. Baxa
+192 R Bloodbond March @Jim Nelson
+254 R Bloodletter Quill @Dan Scott
+5 C Boros Fury-Shield @Wayne England
+275 C Boros Garrison @John Avon
+242 U Boros Guildmage @Paolo Parente
+243 C Boros Recruit @Keith Garletts
+255 C Boros Signet @Greg Hildebrandt
+193 U Boros Swiftblade @Doug Chaffee
+256 R Bottled Cloister @Luca Zontini
+78 C Brainspoil @Tomas Giorello
+154 C Bramble Elemental @Tomas Giorello
+116 R Breath of Fury @Kev Walker
+194 R Brightflame @Dave Dorman
+6 C Caregiver @William Simpson
+79 U Carrion Howler @John Zeleznik
+155 U Carven Caryatid @Jim Nelson
+244 C Centaur Safeguard @Glenn Fabry
+39 R Cerulean Sphinx @Jim Murray
+7 U Chant of Vitu-Ghazi @Stephen Tappin
+117 R Char @Adam Rex
+156 R Chord of Calling @Heather Hudson
+195 R Chorus of the Conclave @Brian Despain
+196 R Circu, Dimir Lobotomist @Cyril Van Der Haegen
+157 C Civic Wayfinder @Cyril Van Der Haegen
+118 U Cleansing Beam @Pat Lee
+80 C Clinging Darkness @Glen Angus
+257 R Cloudstone Curio @Heather Hudson
+197 U Clutch of the Undercity @Pete Venters
+119 C Coalhauler Swine @Daren Bader
+40 C Compulsive Research @Michael Sutfin
+8 R Concerted Effort @Michael Sutfin
+9 C Conclave Equenaut @Terese Nielsen
+10 U Conclave Phalanx @Wayne Reynolds
+11 C Conclave's Blessing @Shishizaru
+198 U Congregation at Dawn @Randy Gallegos
+199 C Consult the Necrosages @Paolo Parente
+41 C Convolute @Dany Orizio
+42 R Copy Enchantment @Joel Thomas
+12 C Courier Hawk @Mark Poole
+258 R Crown of Convergence @Jen Page
+259 U Cyclopean Snare @Keith Garletts
+81 R Dark Confidant @Ron Spears
+200 U Dark Heart of the Wood @Mark Tedin
+82 U Darkblast @Randy Gallegos
+13 U Devouring Light @Pete Venters
+276 C Dimir Aqueduct @John Avon
+201 R Dimir Cutpurse @Kev Walker
+202 R Dimir Doppelganger @Jim Murray
+245 U Dimir Guildmage @Adam Rex
+83 C Dimir House Guard @John Zeleznik
+203 C Dimir Infiltrator @Jim Nelson
+84 U Dimir Machinations @Greg Staples
+260 C Dimir Signet @Greg Hildebrandt
+85 C Disembowel @Chengo McFlingers
+14 U Divebomber Griffin @Kev Walker
+43 C Dizzy Spell @Christopher Moeller
+120 C Dogpile @Jeff Miracola
+158 R Doubling Season @Wayne Reynolds
+159 U Dowsing Shaman @Wayne Reynolds
+44 C Drake Familiar @Darrell Riche
+45 R Dream Leash @Alex Horley-Orlandelli
+46 C Drift of Phantasms @Michael Phillippi
+15 C Dromad Purebred @Carl Critchlow
+204 U Drooling Groodion @Kev Walker
+160 C Dryad's Caress @Randy Gallegos
+277 U Duskmantle, House of Shadow @Martina Pilcerova
+161 C Elves of Deep Shadow @Justin Sweet
+162 C Elvish Skysweeper @Mark Tedin
+86 R Empty the Catacombs @Mark A. Nelson
+47 U Ethereal Usher @Mark A. Nelson
+121 R Excruciator @Paolo Parente
+48 R Eye of the Storm @Hideaki Takamura
+16 C Faith's Fetters @Chippy
+163 C Farseek @Martina Pilcerova
+17 U Festival of the Guildpact @Alex Horley-Orlandelli
+122 C Fiery Conclusion @Paolo Parente
+205 R Firemane Angel @Matt Cavotta
+164 C Fists of Ironwood @Glen Angus
+123 R Flame Fusillade @Dany Orizio
+206 U Flame-Kin Zealot @Arnie Swekel
+124 U Flash Conscription @Stephen Tappin
+18 R Flickerform @Ron Spears
+49 C Flight of Fancy @Glen Angus
+50 U Flow of Ideas @Dan Scott
+51 R Followed Footsteps @Glen Angus
+303 L Forest @Stephan Martiniere
+304 L Forest @Christopher Moeller
+305 L Forest @Anthony S. Waters
+306 L Forest @Richard Wright
+125 U Frenzied Goblin @Carl Critchlow
+126 C Galvanic Arc @Michael Sutfin
+19 C Gate Hound @Ralph Horsley
+165 C Gather Courage @Brian Despain
+246 C Gaze of the Gorgon @Stephen Tappin
+20 R Ghosts of the Innocent @Kev Walker
+207 R Glare of Subdual @Zoltan Boros & Gabor Szikszai
+261 U Glass Golem @Glen Angus
+247 R Gleancrawler @Dave Allsop
+208 R Glimpse the Unthinkable @Brandon Kitkouski
+127 C Goblin Fire Fiend @Paolo Parente
+128 C Goblin Spelunkers @Glenn Fabry
+166 C Golgari Brownscale @Carl Critchlow
+209 U Golgari Germination @Thomas M. Baxa
+167 R Golgari Grave-Troll @Greg Hildebrandt
+248 U Golgari Guildmage @Zoltan Boros & Gabor Szikszai
+278 C Golgari Rot Farm @John Avon
+210 C Golgari Rotwurm @Wayne England
+262 C Golgari Signet @Greg Hildebrandt
+87 U Golgari Thug @Kev Walker
+168 U Goliath Spider @Alan Pollack
+211 R Grave-Shell Scarab @Pete Venters
+52 C Grayscaled Gharial @Chris Dien
+129 U Greater Forgeling @Marcelo Vignali
+169 C Greater Mossdog @Chippy
+263 U Grifter's Blade @Alan Pollack
+53 R Grozoth @Cyril Van Der Haegen
+212 C Guardian of Vitu-Ghazi @Wayne Reynolds
+54 U Halcyon Glaze @John Avon
+130 R Hammerfist Giant @Carl Critchlow
+88 R Helldozer @Zoltan Boros & Gabor Szikszai
+89 R Hex @Michael Sutfin
+21 R Hour of Reckoning @Randy Gallegos
+131 R Hunted Dragon @Mark Zug
+90 R Hunted Horror @Paolo Parente
+22 R Hunted Lammasu @Mark Zug
+55 R Hunted Phantasm @Justin Sweet
+170 R Hunted Troll @Greg Staples
+132 C Incite Hysteria @Paolo Parente
+133 U Indentured Oaf @Glenn Fabry
+56 C Induce Paranoia @Jim Murray
+91 C Infectious Host @rk post
+134 U Instill Furor @Jim Nelson
+291 L Island @Stephan Martiniere
+292 L Island @Christopher Moeller
+293 L Island @Anthony S. Waters
+294 L Island @Richard Wright
+171 U Ivy Dancer @Terese Nielsen
+264 U Junktroller @Chippy
+92 U Keening Banshee @Robert Bliss
+93 C Last Gasp @Thomas M. Baxa
+265 U Leashling @Carl Critchlow
+23 C Leave No Trace @Pat Lee
+172 R Life from the Loam @Terese Nielsen
+24 R Light of Sanction @Michael Phillippi
+213 U Lightning Helix @Kev Walker
+57 U Lore Broker @Alan Pollack
+25 R Loxodon Gatekeeper @Carl Critchlow
+214 R Loxodon Hierarch @Kev Walker
+249 C Lurking Informant @Ron Spears
+58 U Mark of Eviction @Tsutomu Kawade
+250 R Master Warcraft @Zoltan Boros & Gabor Szikszai
+94 U Mausoleum Turnkey @Darrell Riche
+215 R Mindleech Mass @Kev Walker
+135 R Mindmoil @Alex Horley-Orlandelli
+59 U Mnemonic Nexus @Stephen Tappin
+173 U Moldervine Cloak @Wayne England
+136 R Molten Sentry @Kev Walker
+95 R Moonlight Bargain @Nick Percival
+216 U Moroii @Dan Scott
+96 C Mortipede @Dave Dorman
+299 L Mountain @Stephan Martiniere
+300 L Mountain @Christopher Moeller
+301 L Mountain @Anthony S. Waters
+302 L Mountain @Richard Wright
+60 C Muddle the Mixture @Luca Zontini
+97 C Necromantic Thirst @Brandon Kitkouski
+98 R Necroplasm @rk post
+99 U Netherborn Phalanx @Christopher Rush
+26 C Nightguard Patrol @Dany Orizio
+100 U Nightmare Void @Chippy
+174 U Nullmage Shepherd @Stephen Tappin
+266 R Nullstone Gargoyle @Glenn Fabry
+27 U Oathsworn Giant @Daren Bader
+137 C Ordruun Commando @Stephen Tappin
+279 R Overgrown Tomb @Rob Alexander
+175 U Overwhelm @Wayne Reynolds
+267 R Pariah's Shield @Doug Chaffee
+61 C Peel from Reality @Puddnhead
+268 U Peregrine Mask @Edward P. Beard, Jr.
+176 U Perilous Forays @Chris Dien
+217 C Perplex @Tsutomu Kawade
+218 R Phytohydra @Jim Murray
+269 R Plague Boiler @Mark Tedin
+287 L Plains @Stephan Martiniere
+288 L Plains @Christopher Moeller
+289 L Plains @Anthony S. Waters
+290 L Plains @Richard Wright
+219 U Pollenbright Wings @Terese Nielsen
+177 R Primordial Sage @Justin Sweet
+251 R Privileged Position @Wayne England
+220 U Psychic Drain @Nick Percival
+221 U Putrefy @Jim Nelson
+62 C Quickchange @Christopher Moeller
+138 C Rain of Embers @Tsutomu Kawade
+222 C Rally the Righteous @Dan Scott
+224 R Razia's Purification @Shishizaru
+223 R Razia, Boros Archangel @Donato Giancola
+178 U Recollect @Pete Venters
+63 U Remand @Mark A. Nelson
+139 U Reroute @Christopher Rush
+101 U Ribbons of Night @Ron Spears
+179 U Rolling Spoil @Ron Spencer
+102 C Roofstalker Wight @Puddnhead
+180 U Root-Kin Ally @Arnie Swekel
+140 C Sabertooth Alley Cat @Carl Critchlow
+280 R Sacred Foundry @Rob Alexander
+103 C Sadistic Augermage @Nick Percival
+28 U Sandsower @Kev Walker
+225 R Savra, Queen of the Golgari @Scott M. Fischer
+181 C Scatter the Seeds @Rob Alexander
+182 R Scion of the Wild @Kev Walker
+29 C Screeching Griffin @Tim Hildebrandt
+226 R Searing Meditation @Dave Dorman
+30 U Seed Spark @Jeff Miracola
+227 C Seeds of Strength @Ralph Horsley
+141 C Seismic Spike @John Avon
+228 C Selesnya Evangel @Rob Alexander
+252 U Selesnya Guildmage @Mark Zug
+229 U Selesnya Sagittars @Edward P. Beard, Jr.
+281 C Selesnya Sanctuary @John Avon
+270 C Selesnya Signet @Greg Hildebrandt
+142 C Sell-Sword Brute @Jeff Miracola
+104 C Sewerdreg @Joel Thomas
+253 R Shadow of Doubt @Greg Staples
+230 C Shambling Shell @Joel Thomas
+105 C Shred Memory @Hideaki Takamura
+183 C Siege Wurm @Carl Critchlow
+106 R Sins of the Past @Jeremy Jarvis
+231 R Sisters of Stone Death @Donato Giancola
+232 C Skyknight Legionnaire @Jim Murray
+143 C Smash @Paolo Parente
+64 C Snapping Drake @Dave Dorman
+144 C Sparkmage Apprentice @Mark Poole
+65 R Spawnbroker @Wayne England
+271 U Spectral Searchlight @Martina Pilcerova
+66 C Stasis Cell @Mark A. Nelson
+107 C Stinkweed Imp @Edward P. Beard, Jr.
+184 C Stone-Seeder Hierophant @William Simpson
+145 U Stoneshaker Shaman @Jeff Miracola
+108 C Strands of Undeath @Dave Allsop
+185 C Sundering Vitae @Shishizaru
+272 R Sunforger @Darrell Riche
+233 U Sunhome Enforcer @Greg Staples
+282 U Sunhome, Fortress of the Legion @Martina Pilcerova
+31 U Suppression Field @John Avon
+146 C Surge of Zeal @Justin Sweet
+67 C Surveilling Sprite @Terese Nielsen
+283 U Svogthos, the Restless Tomb @Martina Pilcerova
+295 L Swamp @Stephan Martiniere
+296 L Swamp @Christopher Moeller
+297 L Swamp @Anthony S. Waters
+298 L Swamp @Richard Wright
+234 R Szadek, Lord of Secrets @Donato Giancola
+68 C Tattered Drake @Glenn Fabry
+69 U Telling Time @Scott M. Fischer
+284 R Temple Garden @Rob Alexander
+70 C Terraformer @Luca Zontini
+273 C Terrarion @Luca Zontini
+109 C Thoughtpicker Witch @Pete Venters
+32 R Three Dreams @Shishizaru
+235 C Thundersong Trumpeter @Michael Sutfin
+71 C Tidewater Minion @Tomas Giorello
+236 R Tolsimir Wolfblood @Donato Giancola
+147 C Torpid Moloch @Paolo Parente
+186 C Transluminant @Greg Hildebrandt
+187 U Trophy Hunter @rk post
+72 R Tunnel Vision @Dany Orizio
+33 R Twilight Drover @Dave Allsop
+237 U Twisted Justice @Ralph Horsley
+110 U Undercity Shade @Dana Knutson
+188 R Ursapine @Jim Murray
+73 C Vedalken Dismisser @Dan Scott
+74 C Vedalken Entrancer @Dan Scott
+34 C Veteran Armorer @Ralph Horsley
+148 C Viashino Fangtail @Alex Horley-Orlandelli
+149 C Viashino Slasher @Glenn Fabry
+111 U Vigor Mortis @Dan Scott
+112 U Vindictive Mob @Wayne Reynolds
+189 R Vinelasher Kudzu @Mark Tedin
+285 U Vitu-Ghazi, the City-Tree @Martina Pilcerova
+35 C Votary of the Conclave @Alan Pollack
+274 U Voyager Staff @Tsutomu Kawade
+238 R Vulturous Zombie @Greg Staples
+151 C War-Torch Goblin @Alex Horley-Orlandelli
+150 R Warp World @Ron Spencer
+239 U Watchwolf @Kev Walker
+286 R Watery Grave @Rob Alexander
+75 U Wizened Snitches @Greg Staples
+113 R Woebringer Demon @Daren Bader
+36 U Wojek Apothecary @Keith Garletts
+152 U Wojek Embermage @Luca Zontini
+37 C Wojek Siren @Zoltan Boros & Gabor Szikszai
+240 R Woodwraith Corrupter @Greg Staples
+241 C Woodwraith Strangler @Pat Lee
+76 C Zephyr Spirit @Tomas Giorello
 
 [tokens]
 voja

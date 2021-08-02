@@ -6,10 +6,10 @@ Type=Promo
 ScryfallCode=PM20
 
 [cards]
-69 C Negate
-95 U Disfigure
-131 R Chandra's Regulator
-139 U Flame Sweep
-185 R Nightpack Ambusher
-197 U Thrashing Brontodon
-206 U Corpse Knight
+69 C Negate @Magali Villeneuve
+95 U Disfigure @Justin Sweet
+131 R Chandra's Regulator @Mathias Kollros
+139 U Flame Sweep @Viktor Titov
+185 R Nightpack Ambusher @Sam Rowan
+197 U Thrashing Brontodon @Jakub Kasper
+206 U Corpse Knight @Karl Kopinski

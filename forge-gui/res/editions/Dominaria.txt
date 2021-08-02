@@ -12,286 +12,286 @@ FatPackExtraSlots=80 BasicLands
 ScryfallCode=DOM
 
 [cards]
-1 M Karn, Scion of Urza
-2 C Adamant Will
-3 C Aven Sentry
-4 U Baird, Steward of Argive
-5 C Benalish Honor Guard
-6 R Benalish Marshal
-7 C Blessed Light
-8 U Board the Weatherlight
-9 C Call the Cavalry
-10 C Charge
-11 C D'Avenant Trapper
-12 U Danitha Capashen, Paragon
-13 R Daring Archaeologist
-14 U Dauntless Bodyguard
-15 C Dub
-16 R Evra, Halcyon Witness
-17 C Excavation Elephant
-18 R Fall of the Thran
-19 C Gideon's Reproach
-20 C Healing Grace
-21 M History of Benalia
-22 C Invoke the Divine
-23 U Knight of Grace
-24 C Knight of New Benalia
-25 U Kwende, Pride of Femeref
-26 M Lyra Dawnbringer
-27 C Mesa Unicorn
-28 U On Serra's Wings
-29 C Pegasus Courser
-30 U Sanctum Spirit
-31 U Seal Away
-32 C Sergeant-at-Arms
-33 U Serra Angel
-34 C Serra Disciple
-35 R Shalai, Voice of Plenty
-36 R Teshar, Ancestor's Apostle
-37 C Tragic Poet
-38 U Triumph of Gerrard
-39 R Urza's Ruinous Blast
-40 C Academy Drake
-41 C Academy Journeymage
-42 R The Antiquities War
-43 C Arcane Flight
-44 C Artificer's Assistant
-45 C Befuddle
-46 C Blink of an Eye
-47 C Cloudreader Sphinx
-48 C Cold-Water Snapper
-49 U Curator's Ward
-50 C Deep Freeze
-51 U Diligent Excavator
-52 C Divination
-53 C Homarid Explorer
-54 U In Bolas's Clutches
-55 R Karn's Temporal Sundering
-56 U Merfolk Trickster
-57 R The Mirari Conjecture
-58 R Naban, Dean of Iteration
-59 M Naru Meha, Master Wizard
-60 C Opt
-61 R Precognition Field
-62 C Relic Runner
-63 C Rescue
-64 U Sage of Lat-Nam
-65 U Sentinel of the Pearl Trident
-66 U Slinn Voda, the Rising Deep
-67 C Syncopate
-68 R Tempest Djinn
-69 U Tetsuko Umezawa, Fugitive
-70 U Time of Ice
-71 C Tolarian Scholar
-72 C Unwind
-73 C Vodalian Arcanist
-74 U Weight of Memory
-75 U Wizard's Retort
-76 R Zahid, Djinn of the Lamp
-77 C Blessing of Belzenlok
-78 C Cabal Evangel
-79 C Cabal Paladin
-80 C Caligo Skin-Witch
-81 U Cast Down
-82 U Chainer's Torment
-83 C Dark Bargain
-84 C Deathbloom Thallid
-85 C Demonic Vigor
-86 M Demonlord Belzenlok
-87 C Divest
-88 R Dread Shade
-89 C Drudge Sentinel
-90 U The Eldest Reborn
-91 C Eviscerate
-92 C Feral Abomination
-93 U Final Parting
-94 C Fungal Infection
-95 R Josu Vess, Lich Knight
-96 R Kazarov, Sengir Pureblood
-97 U Knight of Malice
-98 R Lich's Mastery
-99 U Lingering Phantom
-100 M Phyrexian Scriptures
-101 C Rat Colony
-102 R Rite of Belzenlok
-103 U Settle the Score
-104 C Soul Salvage
-105 C Stronghold Confessor
-106 C Thallid Omnivore
-107 U Thallid Soothsayer
-108 R Torgaar, Famine Incarnate
-109 U Urgoros, the Empty One
-110 C Vicious Offering
-111 U Whisper, Blood Liturgist
-112 C Windgrace Acolyte
-113 U Yargle, Glutton of Urborg
-114 R Yawgmoth's Vile Offering
-115 C Bloodstone Goblin
-116 U Champion of the Flame
-117 C Fervent Strike
-118 C Fiery Intervention
-119 U Fight with Fire
-120 C Fire Elemental
-121 U Firefist Adept
-122 R The First Eruption
-123 U The Flame of Keld
-124 C Frenzied Rage
-125 C Ghitu Chronicler
-126 C Ghitu Journeymage
-127 C Ghitu Lavarunner
-128 U Goblin Barrage
-129 R Goblin Chainwhirler
-130 U Goblin Warchief
-131 R Haphazard Bombardment
-132 M Jaya Ballard
-133 R Jaya's Immolating Inferno
-134 C Keldon Overseer
-135 C Keldon Raider
-136 C Keldon Warcaller
-137 U Orcish Vandal
-138 C Radiating Lightning
-139 C Rampaging Cyclops
-140 C Run Amok
-141 C Seismic Shift
-142 C Shivan Fire
-143 R Siege-Gang Commander
-144 C Skirk Prospector
-145 U Skizzik
-146 R Squee, the Immortal
-147 R Two-Headed Giant
-148 U Valduk, Keeper of the Flame
-149 M Verix Bladewing
-150 U Warcry Phoenix
-151 C Warlord's Fury
-152 U Wizard's Lightning
-153 C Adventurous Impulse
-154 C Ancient Animus
-155 C Arbor Armament
-156 C Baloth Gorger
-157 C Broken Bond
-158 C Corrosive Ooze
-159 U Elfhame Druid
-160 U Fungal Plots
-161 U Gaea's Blessing
-162 C Gaea's Protector
-163 C Gift of Growth
-164 C Grow from the Ashes
-165 U Grunn, the Lonely King
-166 R Kamahl's Druidic Vow
-167 C Krosan Druid
-168 C Llanowar Elves
-169 C Llanowar Envoy
-170 C Llanowar Scout
-171 C Mammoth Spider
-172 R Marwyn, the Nurturer
-173 R The Mending of Dominaria
-174 M Multani, Yavimaya's Avatar
-175 U Nature's Spiral
-176 C Pierce the Sky
-177 C Primordial Wurm
-178 C Saproling Migration
-179 U Song of Freyalise
-180 U Spore Swarm
-181 U Sporecrown Thallid
-182 R Steel Leaf Champion
-183 R Sylvan Awakening
-184 R Territorial Allosaurus
-185 U Thorn Elemental
-186 U Untamed Kavu
-187 R Verdant Force
-188 U Wild Onslaught
-189 C Yavimaya Sapherd
-190 U Adeliz, the Cinder Wind
-191 U Arvad the Cursed
-192 R Aryel, Knight of Windgrace
-193 M Darigaaz Reincarnated
-194 U Garna, the Bloodflame
-195 R Grand Warlord Radha
-196 U Hallar, the Firefletcher
-197 M Jhoira, Weatherlight Captain
-198 R Jodah, Archmage Eternal
-199 M Muldrotha, the Gravetide
-200 R Oath of Teferi
-201 R Primevals' Glorious Rebirth
-202 U Raff Capashen, Ship's Mage
-203 U Rona, Disciple of Gix
-204 U Shanna, Sisay's Legacy
-205 U Slimefoot, the Stowaway
-206 U Tatyova, Benthic Druid
-207 M Teferi, Hero of Dominaria
-208 U Tiana, Ship's Caretaker
-209 C Aesthir Glider
-210 U Amaranthine Wall
-211 R Blackblade Reforged
-212 C Bloodtallow Candle
-213 U Damping Sphere
-214 R Forebear's Blade
-215 R Gilded Lotus
-216 C Guardians of Koilos
-217 R Helm of the Host
-218 U Howling Golem
-219 U Icy Manipulator
-220 U Jhoira's Familiar
-221 C Jousting Lance
-222 U Juggernaut
-223 R Mishra's Self-Replicator
-224 M Mox Amber
-225 C Navigator's Compass
-226 C Pardic Wanderer
-227 C Powerstone Shard
-228 U Shield of the Realm
-229 C Short Sword
-230 C Skittering Surveyor
-231 U Sorcerer's Wand
-232 C Sparring Construct
-233 R Thran Temporal Gateway
-234 R Traxos, Scourge of Kroog
-235 U Urza's Tome
-236 C Voltaic Servant
-237 M Weatherlight
-238 R Cabal Stronghold
-239 R Clifftop Retreat
-240 R Hinterland Harbor
-241 R Isolated Chapel
-242 U Memorial to Folly
-243 U Memorial to Genius
-244 U Memorial to Glory
-245 U Memorial to Unity
-246 U Memorial to War
-247 R Sulfur Falls
-248 R Woodland Cemetery
-249 U Zhalfirin Void
-250 L Plains
-251 L Plains
-252 L Plains
-253 L Plains
-254 L Island
-255 L Island
-256 L Island
-257 L Island
-258 L Swamp
-259 L Swamp
-260 L Swamp
-261 L Swamp
-262 L Mountain
-263 L Mountain
-264 L Mountain
-265 L Mountain
-266 L Forest
-267 L Forest
-268 L Forest
-269 L Forest
-270 M Teferi, Timebender
-271 C Temporal Machinations
-272 R Niambi, Faithful Healer
-273 U Teferi's Sentinel
-274 C Meandering River
-275 M Chandra, Bold Pyromancer
-276 R Chandra's Outburst
-277 U Karplusan Hound
-278 C Pyromantic Pilgrim
-279 C Timber Gorge
-280 R Firesong and Sunspeaker
+1 M Karn, Scion of Urza @Chase Stone
+2 C Adamant Will @Alex Konstad
+3 C Aven Sentry @Dan Scott
+4 U Baird, Steward of Argive @Christine Choi
+5 C Benalish Honor Guard @Ryan Pancoast
+6 R Benalish Marshal @Mark Zug
+7 C Blessed Light @Anthony Palumbo
+8 U Board the Weatherlight @Tyler Jacobson
+9 C Call the Cavalry @Scott Murphy
+10 C Charge @Zezhou Chen
+11 C D'Avenant Trapper @Winona Nelson
+12 U Danitha Capashen, Paragon @Chris Rallis
+13 R Daring Archaeologist @Sidharth Chaturvedi
+14 U Dauntless Bodyguard @Manuel Castañón
+15 C Dub @Bastien L. Deharme
+16 R Evra, Halcyon Witness @Johannes Voss
+17 C Excavation Elephant @Viktor Titov
+18 R Fall of the Thran @Jason Felix
+19 C Gideon's Reproach @Izzy
+20 C Healing Grace @Magali Villeneuve
+21 M History of Benalia @Noah Bradley
+22 C Invoke the Divine @Magali Villeneuve
+23 U Knight of Grace @Sidharth Chaturvedi
+24 C Knight of New Benalia @Josu Hernaiz
+25 U Kwende, Pride of Femeref @Daarken
+26 M Lyra Dawnbringer @Chris Rahn
+27 C Mesa Unicorn @Winona Nelson
+28 U On Serra's Wings @Johannes Voss
+29 C Pegasus Courser @Mathias Kollros
+30 U Sanctum Spirit @Nils Hamm
+31 U Seal Away @Joseph Meehan
+32 C Sergeant-at-Arms @Scott Murphy
+33 U Serra Angel @Donato Giancola
+34 C Serra Disciple @Victor Adame Minguez
+35 R Shalai, Voice of Plenty @Victor Adame Minguez
+36 R Teshar, Ancestor's Apostle @Even Amundsen
+37 C Tragic Poet @Anthony Palumbo
+38 U Triumph of Gerrard @Daniel Ljunggren
+39 R Urza's Ruinous Blast @Noah Bradley
+40 C Academy Drake @Svetlin Velinov
+41 C Academy Journeymage @Magali Villeneuve
+42 R The Antiquities War @Mark Tedin
+43 C Arcane Flight @Steve Prescott
+44 C Artificer's Assistant @Chris Seaman
+45 C Befuddle @Svetlin Velinov
+46 C Blink of an Eye @Igor Kieryluk
+47 C Cloudreader Sphinx @Kev Walker
+48 C Cold-Water Snapper @Jason Kang
+49 U Curator's Ward @Josu Hernaiz
+50 C Deep Freeze @Svetlin Velinov
+51 U Diligent Excavator @Mark Behm
+52 C Divination @Matt Stewart
+53 C Homarid Explorer @Jehan Choo
+54 U In Bolas's Clutches @Zack Stella
+55 R Karn's Temporal Sundering @Noah Bradley
+56 U Merfolk Trickster @Jesper Ejsing
+57 R The Mirari Conjecture @James Arnold
+58 R Naban, Dean of Iteration @Ryan Alexander Lee
+59 M Naru Meha, Master Wizard @Matt Stewart
+60 C Opt @Tyler Jacobson
+61 R Precognition Field @Adam Paquette
+62 C Relic Runner @Josu Hernaiz
+63 C Rescue @Joe Slucher
+64 U Sage of Lat-Nam @Matt Stewart
+65 U Sentinel of the Pearl Trident @Jonas De Ro
+66 U Slinn Voda, the Rising Deep @Grzegorz Rutkowski
+67 C Syncopate @Tommy Arnold
+68 R Tempest Djinn @Zezhou Chen
+69 U Tetsuko Umezawa, Fugitive @Randy Vargas
+70 U Time of Ice @Franz Vohwinkel
+71 C Tolarian Scholar @Sara Winters
+72 C Unwind @Anna Steinbauer
+73 C Vodalian Arcanist @Tyler Walpole
+74 U Weight of Memory @Eric Deschamps
+75 U Wizard's Retort @Grzegorz Rutkowski
+76 R Zahid, Djinn of the Lamp @Magali Villeneuve
+77 C Blessing of Belzenlok @Joe Slucher
+78 C Cabal Evangel @Lius Lasahido
+79 C Cabal Paladin @Lius Lasahido
+80 C Caligo Skin-Witch @Daarken
+81 U Cast Down @Bastien L. Deharme
+82 U Chainer's Torment @Vincent Proce
+83 C Dark Bargain @Tyler Jacobson
+84 C Deathbloom Thallid @Mike Burns
+85 C Demonic Vigor @Zoltan Boros
+86 M Demonlord Belzenlok @Tyler Jacobson
+87 C Divest @Jesper Ejsing
+88 R Dread Shade @G-host Lee
+89 C Drudge Sentinel @Sara Winters
+90 U The Eldest Reborn @Ravenna Tran
+91 C Eviscerate @Min Yum
+92 C Feral Abomination @Darek Zabrocki
+93 U Final Parting @Eric Deschamps
+94 C Fungal Infection @Filip Burburan
+95 R Josu Vess, Lich Knight @Tyler Jacobson
+96 R Kazarov, Sengir Pureblood @Igor Kieryluk
+97 U Knight of Malice @Sidharth Chaturvedi
+98 R Lich's Mastery @Daarken
+99 U Lingering Phantom @YW Tang
+100 M Phyrexian Scriptures @Joseph Meehan
+101 C Rat Colony @Suzanne Helmigh
+102 R Rite of Belzenlok @Seb McKinnon
+103 U Settle the Score @Yongjae Choi
+104 C Soul Salvage @Daarken
+105 C Stronghold Confessor @Igor Kieryluk
+106 C Thallid Omnivore @Mathias Kollros
+107 U Thallid Soothsayer @Jason A. Engle
+108 R Torgaar, Famine Incarnate @Lius Lasahido
+109 U Urgoros, the Empty One @Daarken
+110 C Vicious Offering @Anthony Palumbo
+111 U Whisper, Blood Liturgist @Kieran Yanner
+112 C Windgrace Acolyte @Bayard Wu
+113 U Yargle, Glutton of Urborg @Jehan Choo
+114 R Yawgmoth's Vile Offering @Noah Bradley
+115 C Bloodstone Goblin @Magali Villeneuve
+116 U Champion of the Flame @Wayne Reynolds
+117 C Fervent Strike @Winona Nelson
+118 C Fiery Intervention @Adam Paquette
+119 U Fight with Fire @Yongjae Choi
+120 C Fire Elemental @Joe Slucher
+121 U Firefist Adept @Lucas Graciano
+122 R The First Eruption @Steven Belledin
+123 U The Flame of Keld @Lake Hurwitz
+124 C Frenzied Rage @Simon Dominic
+125 C Ghitu Chronicler @Anthony Palumbo
+126 C Ghitu Journeymage @Jason Rainville
+127 C Ghitu Lavarunner @Jesper Ejsing
+128 U Goblin Barrage @Bram Sels
+129 R Goblin Chainwhirler @Svetlin Velinov
+130 U Goblin Warchief @Karl Kopinski
+131 R Haphazard Bombardment @Jesper Ejsing
+132 M Jaya Ballard @Magali Villeneuve
+133 R Jaya's Immolating Inferno @Noah Bradley
+134 C Keldon Overseer @Jason A. Engle
+135 C Keldon Raider @Chris Seaman
+136 C Keldon Warcaller @Aaron Miller
+137 U Orcish Vandal @Alex Konstad
+138 C Radiating Lightning @Suzanne Helmigh
+139 C Rampaging Cyclops @Tomasz Jedruszek
+140 C Run Amok @Svetlin Velinov
+141 C Seismic Shift @James Paick
+142 C Shivan Fire @Grzegorz Rutkowski
+143 R Siege-Gang Commander @Aaron Miller
+144 C Skirk Prospector @Slawomir Maniak
+145 U Skizzik @Tomasz Jedruszek
+146 R Squee, the Immortal @Svetlin Velinov
+147 R Two-Headed Giant @Simon Dominic
+148 U Valduk, Keeper of the Flame @Victor Adame Minguez
+149 M Verix Bladewing @XiaoDi Jin
+150 U Warcry Phoenix @Daarken
+151 C Warlord's Fury @Volkan Baǵa
+152 U Wizard's Lightning @Grzegorz Rutkowski
+153 C Adventurous Impulse @Titus Lunter
+154 C Ancient Animus @Titus Lunter
+155 C Arbor Armament @Bayard Wu
+156 C Baloth Gorger @Zezhou Chen
+157 C Broken Bond @Ryan Yee
+158 C Corrosive Ooze @Daniel Ljunggren
+159 U Elfhame Druid @Yongjae Choi
+160 U Fungal Plots @Even Amundsen
+161 U Gaea's Blessing @David Palumbo
+162 C Gaea's Protector @Grzegorz Rutkowski
+163 C Gift of Growth @YW Tang
+164 C Grow from the Ashes @Richard Wright
+165 U Grunn, the Lonely King @Mathias Kollros
+166 R Kamahl's Druidic Vow @Noah Bradley
+167 C Krosan Druid @Bastien L. Deharme
+168 C Llanowar Elves @Chris Rahn
+169 C Llanowar Envoy @Daniel Ljunggren
+170 C Llanowar Scout @Wayne Reynolds
+171 C Mammoth Spider @Lars Grant-West
+172 R Marwyn, the Nurturer @Chris Rahn
+173 R The Mending of Dominaria @Adam Paquette
+174 M Multani, Yavimaya's Avatar @Ryan Yee
+175 U Nature's Spiral @Florian de Gesincourt
+176 C Pierce the Sky @Slawomir Maniak
+177 C Primordial Wurm @Yeong-Hao Han
+178 C Saproling Migration @Christine Choi
+179 U Song of Freyalise @Min Yum
+180 U Spore Swarm @Mathias Kollros
+181 U Sporecrown Thallid @Bram Sels
+182 R Steel Leaf Champion @Chris Rahn
+183 R Sylvan Awakening @Adam Paquette
+184 R Territorial Allosaurus @Jonathan Kuo
+185 U Thorn Elemental @Daarken
+186 U Untamed Kavu @Yongjae Choi
+187 R Verdant Force @Viktor Titov
+188 U Wild Onslaught @Simon Dominic
+189 C Yavimaya Sapherd @Christine Choi
+190 U Adeliz, the Cinder Wind @Zezhou Chen
+191 U Arvad the Cursed @Lius Lasahido
+192 R Aryel, Knight of Windgrace @Grzegorz Rutkowski
+193 M Darigaaz Reincarnated @Grzegorz Rutkowski
+194 U Garna, the Bloodflame @Winona Nelson
+195 R Grand Warlord Radha @Anna Steinbauer
+196 U Hallar, the Firefletcher @Bram Sels
+197 M Jhoira, Weatherlight Captain @Brad Rigney
+198 R Jodah, Archmage Eternal @Yongjae Choi
+199 M Muldrotha, the Gravetide @Jason Rainville
+200 R Oath of Teferi @Wesley Burt
+201 R Primevals' Glorious Rebirth @Noah Bradley
+202 U Raff Capashen, Ship's Mage @John Stanko
+203 U Rona, Disciple of Gix @Tommy Arnold
+204 U Shanna, Sisay's Legacy @Magali Villeneuve
+205 U Slimefoot, the Stowaway @Alex Konstad
+206 U Tatyova, Benthic Druid @Mathias Kollros
+207 M Teferi, Hero of Dominaria @Chris Rallis
+208 U Tiana, Ship's Caretaker @Eric Deschamps
+209 C Aesthir Glider @James Paick
+210 U Amaranthine Wall @Jason Felix
+211 R Blackblade Reforged @Chris Rahn
+212 C Bloodtallow Candle @Alayna Danner
+213 U Damping Sphere @Adam Paquette
+214 R Forebear's Blade @Scott Murphy
+215 R Gilded Lotus @Volkan Baǵa
+216 C Guardians of Koilos @Yeong-Hao Han
+217 R Helm of the Host @Igor Kieryluk
+218 U Howling Golem @Grzegorz Rutkowski
+219 U Icy Manipulator @Titus Lunter
+220 U Jhoira's Familiar @Kev Walker
+221 C Jousting Lance @Alayna Danner
+222 U Juggernaut @Jonas De Ro
+223 R Mishra's Self-Replicator @Joseph Meehan
+224 M Mox Amber @Steven Belledin
+225 C Navigator's Compass @Sung Choi
+226 C Pardic Wanderer @Igor Kieryluk
+227 C Powerstone Shard @Lindsey Look
+228 U Shield of the Realm @Manuel Castañón
+229 C Short Sword @John Severin Brassell
+230 C Skittering Surveyor @Dan Scott
+231 U Sorcerer's Wand @Matt Stewart
+232 C Sparring Construct @Mark Behm
+233 R Thran Temporal Gateway @Jason Felix
+234 R Traxos, Scourge of Kroog @Lius Lasahido
+235 U Urza's Tome @Aaron Miller
+236 C Voltaic Servant @Jonas De Ro
+237 M Weatherlight @Jaime Jones
+238 R Cabal Stronghold @Dimitar Marinski
+239 R Clifftop Retreat @Christine Choi
+240 R Hinterland Harbor @Daniel Ljunggren
+241 R Isolated Chapel @Richard Wright
+242 U Memorial to Folly @Sung Choi
+243 U Memorial to Genius @James Paick
+244 U Memorial to Glory @James Paick
+245 U Memorial to Unity @Cliff Childs
+246 U Memorial to War @Richard Wright
+247 R Sulfur Falls @Cliff Childs
+248 R Woodland Cemetery @Christine Choi
+249 U Zhalfirin Void @Chase Stone
+250 L Plains @Jonas De Ro
+251 L Plains @Titus Lunter
+252 L Plains @Dimitar Marinski
+253 L Plains @Mark Poole
+254 L Island @Jonas De Ro
+255 L Island @Titus Lunter
+256 L Island @Dimitar Marinski
+257 L Island @Mark Poole
+258 L Swamp @Jonas De Ro
+259 L Swamp @Titus Lunter
+260 L Swamp @Dimitar Marinski
+261 L Swamp @Mark Poole
+262 L Mountain @Jonas De Ro
+263 L Mountain @Titus Lunter
+264 L Mountain @Dimitar Marinski
+265 L Mountain @Mark Poole
+266 L Forest @Jonas De Ro
+267 L Forest @Titus Lunter
+268 L Forest @Dimitar Marinski
+269 L Forest @Mark Poole
+270 M Teferi, Timebender @Zack Stella
+271 C Temporal Machinations @Zack Stella
+272 R Niambi, Faithful Healer @Greg Opalinski
+273 U Teferi's Sentinel @Titus Lunter
+274 C Meandering River @James Paick
+275 M Chandra, Bold Pyromancer @Zack Stella
+276 R Chandra's Outburst @Yongjae Choi
+277 U Karplusan Hound @Viktor Titov
+278 C Pyromantic Pilgrim @Magali Villeneuve
+279 C Timber Gorge @YW Tang
+280 R Firesong and Sunspeaker @Zoltan Boros
 
 [tokens]
 karox_bladewing

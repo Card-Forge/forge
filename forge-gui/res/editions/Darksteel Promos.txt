@@ -6,4 +6,4 @@ Type=Promo
 ScryfallCode=PDST
 
 [cards]
-139★ R Shield of Kaldra
+139★ R Shield of Kaldra @Donato Giancola

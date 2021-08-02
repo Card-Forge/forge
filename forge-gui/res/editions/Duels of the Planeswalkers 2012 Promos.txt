@@ -6,6 +6,6 @@ Type=Promo
 ScryfallCode=PDP12
 
 [cards]
-1 M Frost Titan
-2 M Grave Titan
-3 M Inferno Titan
+1 M Frost Titan @Mike Sass
+2 M Grave Titan @Lucas Graciano
+3 M Inferno Titan @Sam Burley

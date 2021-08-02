@@ -11,171 +11,171 @@ FatPackExtraSlots=80 BasicLands THS
 ScryfallCode=BNG
 
 [cards]
-1 U Acolyte's Reward
-2 U Akroan Phalanx
-3 C Akroan Skyguard
-4 U Archetype of Courage
-5 M Brimaz, King of Oreskos
-6 U Dawn to Dusk
-7 R Eidolon of Countless Battles
-8 C Elite Skirmisher
-9 C Ephara's Radiance
-10 C Excoriate
-11 R Fated Retribution
-12 U Ghostblade Eidolon
-13 U Glimpse the Sun God
-14 U God-Favored General
-15 C Great Hart
-16 C Griffin Dreamfinder
-17 R Hero of Iroas
-18 C Hold at Bay
-19 C Loyal Pegasus
-20 C Mortal's Ardor
-21 C Nyxborn Shieldmate
-22 C Oreskos Sun Guide
-23 U Ornitharch
-24 R Plea for Guidance
-25 C Revoke Existence
-26 R Silent Sentinel
-27 R Spirit of the Labyrinth
-28 U Sunbond
-29 U Vanguard of Brimaz
-30 U Aerie Worshippers
-31 R Arbiter of the Ideal
-32 U Archetype of Imagination
-33 C Chorus of the Tides
-34 C Crypsis
-35 C Deepwater Hypnotist
-36 C Divination
-37 U Eternity Snare
-38 C Evanescent Intellect
-39 R Fated Infatuation
-40 U Flitterstep Eidolon
-41 C Floodtide Serpent
-42 U Kraken of the Straits
-43 U Meletis Astronomer
-44 R Mindreaver
-45 C Nullify
-46 C Nyxborn Triton
-47 U Oracle's Insight
-48 R Perplexing Chimera
-49 C Retraction Helix
-50 U Siren of the Fanged Coast
-51 C Sphinx's Disciple
-52 C Stratus Walk
-53 C Sudden Storm
-54 U Thassa's Rebuff
-55 R Tromokratis
-56 U Vortex Elemental
-57 R Whelming Wave
-58 U Archetype of Finality
-59 U Ashiok's Adept
-60 C Asphyxiate
-61 U Bile Blight
-62 U Black Oak of Odunos
-63 M Champion of Stray Souls
-64 C Claim of Erebos
-65 U Drown in Sorrow
-66 R Eater of Hope
-67 C Eye Gouge
-68 R Fate Unraveler
-69 R Fated Return
-70 C Felhide Brawler
-71 U Forlorn Pseudamma
-72 C Forsaken Drifters
-73 R Gild
-74 C Grisly Transformation
-75 R Herald of Torment
-76 C Marshmist Titan
-77 C Necrobite
-78 C Nyxborn Eidolon
-79 U Odunos River Trawler
-80 R Pain Seer
-81 U Sanguimancy
-82 C Servant of Tymaret
-83 U Shrike Harpy
-84 U Spiteful Returned
-85 C Warchanter of Mogis
-86 C Weight of the Underworld
-87 U Akroan Conscriptor
-88 U Archetype of Aggression
-89 C Bolt of Keranos
-90 C Cyclops of One-Eyed Pass
-91 C Epiphany Storm
-92 U Everflame Eidolon
-93 C Fall of the Hammer
-94 R Fated Conflagration
-95 C Fearsome Temper
-96 R Felhide Spiritbinder
-97 M Flame-Wreathed Phoenix
-98 R Forgestoker Dragon
-99 C Impetuous Sunchaser
-100 C Kragma Butcher
-101 U Lightning Volley
-102 C Nyxborn Rollicker
-103 R Oracle of Bones
-104 C Pharagax Giant
-105 U Pinnacle of Rage
-106 C Reckless Reveler
-107 C Rise to the Challenge
-108 R Satyr Firedancer
-109 U Satyr Nyx-Smith
-110 C Scouring Sands
-111 U Searing Blood
-112 U Stormcaller of Keranos
-113 U Thunder Brute
-114 U Thunderous Might
-115 R Whims of the Fates
-116 U Archetype of Endurance
-117 C Aspect of Hydra
-118 C Charging Badger
-119 R Courser of Kruphix
-120 C Culling Mark
-121 R Fated Intervention
-122 U Graverobber Spider
-123 R Hero of Leina Tower
-124 R Hunter's Prowess
-125 C Karametra's Favor
-126 U Mischief and Mayhem
-127 C Mortal's Resolve
-128 U Nessian Demolok
-129 R Nessian Wilds Ravager
-130 U Noble Quarry
-131 C Nyxborn Wolf
-132 U Peregrination
-133 U Pheres-Band Raiders
-134 C Pheres-Band Tromper
-135 U Raised by Wolves
-136 C Satyr Wayfinder
-137 R Scourge of Skola Vale
-138 C Setessan Oathsworn
-139 C Setessan Starbreaker
-140 U Skyreaping
-141 C Snake of the Golden Grove
-142 C Swordwise Centaur
-143 U Unravel the AEther
-144 M Chromanticore
-145 M Ephara, God of the Polis
-146 U Ephara's Enlightenment
-147 U Fanatic of Xenagos
-148 M Karametra, God of Harvests
-149 M Kiora, the Crashing Wave
-150 U Kiora's Follower
-151 M Mogis, God of Slaughter
-152 M Phenax, God of Deception
-153 U Ragemonger
-154 U Reap What Is Sown
-155 U Siren of the Silent Song
-156 M Xenagos, God of Revels
-157 R Astral Cornucopia
-158 U Gorgon's Head
-159 R Heroes' Podium
-160 U Pillar of War
-161 U Siren Song Lyre
-162 U Springleaf Drum
-163 R Temple of Enlightenment
-164 R Temple of Malice
-165 R Temple of Plenty
+1 U Acolyte's Reward @Slawomir Maniak
+2 U Akroan Phalanx @Steve Prescott
+3 C Akroan Skyguard @Mark Winters
+4 U Archetype of Courage @Willian Murai
+5 M Brimaz, King of Oreskos @Peter Mohrbacher
+6 U Dawn to Dusk @Robbie Trevino
+7 R Eidolon of Countless Battles @Raymond Swanland
+8 C Elite Skirmisher @Mark Winters
+9 C Ephara's Radiance @James Ryman
+10 C Excoriate @Johann Bodin
+11 R Fated Retribution @Jonas De Ro
+12 U Ghostblade Eidolon @Ryan Yee
+13 U Glimpse the Sun God @Aleksi Briclot
+14 U God-Favored General @David Palumbo
+15 C Great Hart @Christopher Moeller
+16 C Griffin Dreamfinder @Adam Paquette
+17 R Hero of Iroas @Willian Murai
+18 C Hold at Bay @Nils Hamm
+19 C Loyal Pegasus @John Severin Brassell
+20 C Mortal's Ardor @Kev Walker
+21 C Nyxborn Shieldmate @Eric Deschamps
+22 C Oreskos Sun Guide @Mathias Kollros
+23 U Ornitharch @Clint Cearley
+24 R Plea for Guidance @Terese Nielsen
+25 C Revoke Existence @Adam Paquette
+26 R Silent Sentinel @Slawomir Maniak
+27 R Spirit of the Labyrinth @Jason Chan
+28 U Sunbond @Noah Bradley
+29 U Vanguard of Brimaz @Mark Zug
+30 U Aerie Worshippers @Mike Sass
+31 R Arbiter of the Ideal @Svetlin Velinov
+32 U Archetype of Imagination @Robbie Trevino
+33 C Chorus of the Tides @Steve Prescott
+34 C Crypsis @Daarken
+35 C Deepwater Hypnotist @Christopher Moeller
+36 C Divination @Willian Murai
+37 U Eternity Snare @Min Yum
+38 C Evanescent Intellect @Dan Scott
+39 R Fated Infatuation @Winona Nelson
+40 U Flitterstep Eidolon @Chase Stone
+41 C Floodtide Serpent @Steven Belledin
+42 U Kraken of the Straits @Richard Wright
+43 U Meletis Astronomer @Dan Scott
+44 R Mindreaver @Wesley Burt
+45 C Nullify @Adam Paquette
+46 C Nyxborn Triton @Clint Cearley
+47 U Oracle's Insight @Raymond Swanland
+48 R Perplexing Chimera @Tyler Jacobson
+49 C Retraction Helix @Phill Simmer
+50 U Siren of the Fanged Coast @Michael C. Hayes
+51 C Sphinx's Disciple @Ryan Alexander Lee
+52 C Stratus Walk @Aaron Miller
+53 C Sudden Storm @Adam Paquette
+54 U Thassa's Rebuff @Lucas Graciano
+55 R Tromokratis @Matt Stewart
+56 U Vortex Elemental @Jack Wang
+57 R Whelming Wave @Slawomir Maniak
+58 U Archetype of Finality @Chris Rahn
+59 U Ashiok's Adept @Karla Ortiz
+60 C Asphyxiate @Kev Walker
+61 U Bile Blight @Vincent Proce
+62 U Black Oak of Odunos @Chris Rahn
+63 M Champion of Stray Souls @Aleksi Briclot
+64 C Claim of Erebos @Zack Stella
+65 U Drown in Sorrow @Noah Bradley
+66 R Eater of Hope @Peter Mohrbacher
+67 C Eye Gouge @Tyler Jacobson
+68 R Fate Unraveler @David Palumbo
+69 R Fated Return @Peter Mohrbacher
+70 C Felhide Brawler @Nils Hamm
+71 U Forlorn Pseudamma @Winona Nelson
+72 C Forsaken Drifters @Min Yum
+73 R Gild @Richard Wright
+74 C Grisly Transformation @Tyler Jacobson
+75 R Herald of Torment @Vance Kovacs
+76 C Marshmist Titan @Volkan Baǵa
+77 C Necrobite @Igor Kieryluk
+78 C Nyxborn Eidolon @Nils Hamm
+79 U Odunos River Trawler @Seb McKinnon
+80 R Pain Seer @Tyler Jacobson
+81 U Sanguimancy @Dave Kendall
+82 C Servant of Tymaret @Karl Kopinski
+83 U Shrike Harpy @Christopher Moeller
+84 U Spiteful Returned @Raymond Swanland
+85 C Warchanter of Mogis @Mike Bierek
+86 C Weight of the Underworld @Wesley Burt
+87 U Akroan Conscriptor @James Ryman
+88 U Archetype of Aggression @Mathias Kollros
+89 C Bolt of Keranos @Karl Kopinski
+90 C Cyclops of One-Eyed Pass @Kev Walker
+91 C Epiphany Storm @Clint Cearley
+92 U Everflame Eidolon @Daarken
+93 C Fall of the Hammer @Adam Paquette
+94 R Fated Conflagration @Adam Paquette
+95 C Fearsome Temper @Seb McKinnon
+96 R Felhide Spiritbinder @Mathias Kollros
+97 M Flame-Wreathed Phoenix @James Ryman
+98 R Forgestoker Dragon @Todd Lockwood
+99 C Impetuous Sunchaser @Cynthia Sheppard
+100 C Kragma Butcher @Daarken
+101 U Lightning Volley @John Avon
+102 C Nyxborn Rollicker @Seb McKinnon
+103 R Oracle of Bones @Greg Staples
+104 C Pharagax Giant @Ryan Pancoast
+105 U Pinnacle of Rage @Noah Bradley
+106 C Reckless Reveler @Mike Sass
+107 C Rise to the Challenge @Anthony Palumbo
+108 R Satyr Firedancer @Chris Rahn
+109 U Satyr Nyx-Smith @Greg Staples
+110 C Scouring Sands @Jonas De Ro
+111 U Searing Blood @Daniel Ljunggren
+112 U Stormcaller of Keranos @Marco Nelor
+113 U Thunder Brute @Phill Simmer
+114 U Thunderous Might @Jaime Jones
+115 R Whims of the Fates @Seb McKinnon
+116 U Archetype of Endurance @Slawomir Maniak
+117 C Aspect of Hydra @Mark Winters
+118 C Charging Badger @Raoul Vitale
+119 R Courser of Kruphix @Eric Deschamps
+120 C Culling Mark @Tomasz Jedruszek
+121 R Fated Intervention @Svetlin Velinov
+122 U Graverobber Spider @Richard Wright
+123 R Hero of Leina Tower @Aaron Miller
+124 R Hunter's Prowess @Greg Staples
+125 C Karametra's Favor @Chase Stone
+126 U Mischief and Mayhem @Zack Stella
+127 C Mortal's Resolve @Svetlin Velinov
+128 U Nessian Demolok @Daarken
+129 R Nessian Wilds Ravager @Richard Wright
+130 U Noble Quarry @Michael C. Hayes
+131 C Nyxborn Wolf @Lucas Graciano
+132 U Peregrination @Jonas De Ro
+133 U Pheres-Band Raiders @Ryan Barger
+134 C Pheres-Band Tromper @Volkan Baǵa
+135 U Raised by Wolves @Raymond Swanland
+136 C Satyr Wayfinder @Steve Prescott
+137 R Scourge of Skola Vale @Dave Kendall
+138 C Setessan Oathsworn @Scott Murphy
+139 C Setessan Starbreaker @Chase Stone
+140 U Skyreaping @Seb McKinnon
+141 C Snake of the Golden Grove @Mathias Kollros
+142 C Swordwise Centaur @Slawomir Maniak
+143 U Unravel the Aether @Jung Park
+144 M Chromanticore @Min Yum
+145 M Ephara, God of the Polis @Eric Deschamps
+146 U Ephara's Enlightenment @Wesley Burt
+147 U Fanatic of Xenagos @Volkan Baǵa
+148 M Karametra, God of Harvests @Eric Deschamps
+149 M Kiora, the Crashing Wave @Scott M. Fischer
+150 U Kiora's Follower @Eric Deschamps
+151 M Mogis, God of Slaughter @Peter Mohrbacher
+152 M Phenax, God of Deception @Ryan Barger
+153 U Ragemonger @Karl Kopinski
+154 U Reap What Is Sown @Cynthia Sheppard
+155 U Siren of the Silent Song @Anthony Palumbo
+156 M Xenagos, God of Revels @Jason Chan
+157 R Astral Cornucopia @Aleksi Briclot
+158 U Gorgon's Head @Michael C. Hayes
+159 R Heroes' Podium @Willian Murai
+160 U Pillar of War @Aleksi Briclot
+161 U Siren Song Lyre @James Paick
+162 U Springleaf Drum @Seb McKinnon
+163 R Temple of Enlightenment @Svetlin Velinov
+164 R Temple of Malice @Sam Burley
+165 R Temple of Plenty @Noah Bradley
 
 [tokens]
 gold

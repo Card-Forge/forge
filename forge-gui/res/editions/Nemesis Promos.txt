@@ -6,4 +6,4 @@ Type=Promo
 ScryfallCode=PNEM
 
 [cards]
-67 R Rathi Assassin
+67 R Rathi Assassin @Dana Knutson

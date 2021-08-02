@@ -13,171 +13,171 @@ ChaosDraftThemes=MIRRODIN
 ScryfallCode=5DN
 
 [cards]
-1 C Abuna's Chant
-21 R Acquire
-22 C Advanced Hoverguard
-81 R All Suns' Dawn
-101 C Anodet Lurker
-102 U Arachnoid
-103 U Arcbound Wanderer
-2 C Armed Response
-23 R Artificer's Intuition
-3 R Auriok Champion
-4 U Auriok Salvagers
-5 R Auriok Windwalker
-104 U Avarice Totem
-105 C Baton of Courage
-106 C Battered Golem
-82 R Beacon of Creation
-61 R Beacon of Destruction
-6 R Beacon of Immortality
-24 R Beacon of Tomorrows
-41 R Beacon of Unrest
-107 U Blasting Station
-42 C Blind Creeper
-25 R Blinkmoth Infusion
-43 R Bringer of the Black Dawn
-26 R Bringer of the Blue Dawn
-83 R Bringer of the Green Dawn
-62 R Bringer of the Red Dawn
-7 R Bringer of the White Dawn
-44 C Cackling Imp
-84 U Channel the Suns
-108 U Chimeric Coils
-8 U Circle of Protection: Artifacts
-109 R Clearwater Goblet
-110 U Clock of Omens
-111 U Composite Golem
-27 C Condescend
-112 C Conjurer's Bauble
-63 R Cosmic Larva
-113 C Cranial Plating
-114 R Crucible of Worlds
-85 C Dawn's Reflection
-45 R Desecration Elemental
-46 U Devour in Shadow
-28 U Disruption Aura
-115 R Door to Nothingness
-116 R Doubling Cube
-47 C Dross Crocodile
-29 C Early Frost
-48 U Ebon Drake
-49 R Endless Whispers
-117 U Energy Chamber
-118 R Engineered Explosives
-119 U Ensouled Scimitar
-120 R Eon Hub
-121 U Etched Oracle
-86 U Eternal Witness
-30 U Eyes of the Watcher
-87 U Fangren Pathcutter
-64 U Feedback Bolt
-88 C Ferocious Charge
-122 U Ferropede
-50 C Fill with Fright
-123 R Fist of Suns
-51 C Fleshgrafter
-31 U Fold into AEther
-65 U Furnace Whelp
-124 U Gemstone Array
-66 C Goblin Brawler
-125 U Goblin Cannon
-126 U Grafted Wargear
-67 R Granulate
-127 U Grinding Station
-128 U Guardian Idol
-129 C Healer's Headdress
-130 C Heliophial
-131 R Helm of Kaldra
-132 C Horned Helm
-32 R Hoverguard Sweepers
-133 U Infused Arrows
-33 C Into Thin Air
-68 R Ion Storm
-69 U Iron-Barb Hellion
-89 R Joiner Adept
-70 U Krark-Clan Engineers
-134 U Krark-Clan Ironworks
-71 C Krark-Clan Ogre
-135 U Lantern of Insight
-9 C Leonin Squire
-52 C Lose Hope
-10 C Loxodon Anchorite
-11 U Loxodon Stalwart
-136 U Lunar Avenger
-72 R Magma Giant
-73 U Magma Jet
-74 U Magnetic Theft
-75 C Mana Geyser
-53 R Mephidross Vampire
-54 R Moriok Rigger
-137 R Mycosynth Golem
-138 C Myr Quadropod
-139 C Myr Servitor
-140 C Neurok Stealthsuit
-55 U Night's Whisper
-56 U Nim Grotesque
-141 C Opaline Bracers
-90 U Ouphe Vandals
-142 U Paradise Mantle
-143 C Pentad Prism
-34 U Plasma Elemental
-57 R Plunge into Darkness
-144 R Possessed Portal
-35 U Qumulox
-76 C Rain of Rust
-12 R Raksha Golden Cub
-145 C Razorgrass Screen
-146 R Razormane Masticore
-58 U Relentless Rats
-147 U Relic Barrier
-13 R Retaliate
-77 R Reversal of Fortune
-91 R Rite of Passage
-14 R Roar of Reclamation
-92 R Rude Awakening
-148 R Salvaging Station
-149 C Sawtooth Thresher
-78 C Screaming Fury
-36 C Serum Visions
-59 U Shattered Dreams
-150 R Silent Arbiter
-151 U Skullcage
-15 C Skyhunter Prowler
-16 U Skyhunter Skirmisher
-152 C Skyreach Manta
-153 R Solarion
-79 C Spark Elemental
-154 C Sparring Collar
-37 R Spectral Shift
-155 U Spinal Parasite
-156 R Staff of Domination
-17 C Stand Firm
-18 C Stasis Cocoon
-19 U Steelshaper's Gift
-157 R Summoner's Egg
-158 R Summoning Station
-159 R Suncrusher
-160 C Suntouched Myr
-93 C Sylvok Explorer
-161 U Synod Centurion
-94 C Tangle Asp
-95 U Tel-Jilad Justice
-96 C Tel-Jilad Lifebreather
-162 C Thermal Navigator
-38 C Thought Courier
-97 R Tornado Elemental
-39 C Trinket Mage
-98 C Tyrranax
-20 U Vanquish
-40 U Vedalken Mastermind
-163 R Vedalken Orrery
-164 R Vedalken Shackles
-60 C Vicious Betrayal
-99 U Viridian Lorebearers
-100 C Viridian Scout
-80 C Vulshok Sorcerer
-165 C Wayfarer's Bauble
+1 C Abuna's Chant @John Matson
+21 R Acquire @Daren Bader
+22 C Advanced Hoverguard @Scott M. Fischer
+81 R All Suns' Dawn @Glen Angus
+101 C Anodet Lurker @Jeff Easley
+102 U Arachnoid @Greg Staples
+103 U Arcbound Wanderer @Christopher Moeller
+2 C Armed Response @Doug Chaffee
+23 R Artificer's Intuition @Wayne England
+3 R Auriok Champion @Michael Sutfin
+4 U Auriok Salvagers @Randy Gallegos
+5 R Auriok Windwalker @Jeremy Jarvis
+104 U Avarice Totem @Ben Thompson
+105 C Baton of Courage @Heather Hudson
+106 C Battered Golem @Carl Critchlow
+82 R Beacon of Creation @Mark Tedin
+61 R Beacon of Destruction @Greg Hildebrandt
+6 R Beacon of Immortality @Rob Alexander
+24 R Beacon of Tomorrows @Jeremy Jarvis
+41 R Beacon of Unrest @Alan Pollack
+107 U Blasting Station @Stephen Tappin
+42 C Blind Creeper @Carl Critchlow
+25 R Blinkmoth Infusion @Alan Pollack
+43 R Bringer of the Black Dawn @Carl Critchlow
+26 R Bringer of the Blue Dawn @Greg Staples
+83 R Bringer of the Green Dawn @Jim Murray
+62 R Bringer of the Red Dawn @Christopher Moeller
+7 R Bringer of the White Dawn @Kev Walker
+44 C Cackling Imp @Matt Thompson
+84 U Channel the Suns @Rob Alexander
+108 U Chimeric Coils @Michael Sutfin
+8 U Circle of Protection: Artifacts @Terese Nielsen
+109 R Clearwater Goblet @Dany Orizio
+110 U Clock of Omens @Alex Horley-Orlandelli
+111 U Composite Golem @Mark Tedin
+27 C Condescend @Ron Spears
+112 C Conjurer's Bauble @Darrell Riche
+63 R Cosmic Larva @Jeff Easley
+113 C Cranial Plating @Adam Rex
+114 R Crucible of Worlds @Ron Spencer
+85 C Dawn's Reflection @John Avon
+45 R Desecration Elemental @Pete Venters
+46 U Devour in Shadow @Thomas M. Baxa
+28 U Disruption Aura @Ron Spears
+115 R Door to Nothingness @Puddnhead
+116 R Doubling Cube @Mark Tedin
+47 C Dross Crocodile @Edward P. Beard, Jr.
+29 C Early Frost @Ben Thompson
+48 U Ebon Drake @Pete Venters
+49 R Endless Whispers @Carl Critchlow
+117 U Energy Chamber @Kev Walker
+118 R Engineered Explosives @Ron Spears
+119 U Ensouled Scimitar @Edward P. Beard, Jr.
+120 R Eon Hub @Daren Bader
+121 U Etched Oracle @Matt Cavotta
+86 U Eternal Witness @Terese Nielsen
+30 U Eyes of the Watcher @Ron Spears
+87 U Fangren Pathcutter @Rob Alexander
+64 U Feedback Bolt @Ron Spencer
+88 C Ferocious Charge @Anthony S. Waters
+122 U Ferropede @Jeff Easley
+50 C Fill with Fright @Luca Zontini
+123 R Fist of Suns @Arnie Swekel
+51 C Fleshgrafter @Jim Murray
+31 U Fold into Aether @Anthony S. Waters
+65 U Furnace Whelp @Matt Cavotta
+124 U Gemstone Array @Ittoku
+66 C Goblin Brawler @Heather Hudson
+125 U Goblin Cannon @Doug Chaffee
+126 U Grafted Wargear @Alex Horley-Orlandelli
+67 R Granulate @Brian Snõddy
+127 U Grinding Station @Greg Staples
+128 U Guardian Idol @Edward P. Beard, Jr.
+129 C Healer's Headdress @Carl Critchlow
+130 C Heliophial @Wayne England
+131 R Helm of Kaldra @Donato Giancola
+132 C Horned Helm @Martina Pilcerova
+32 R Hoverguard Sweepers @Mark A. Nelson
+133 U Infused Arrows @Stephen Tappin
+33 C Into Thin Air @Ittoku
+68 R Ion Storm @Michael Sutfin
+69 U Iron-Barb Hellion @Doug Chaffee
+89 R Joiner Adept @Christopher Rush
+70 U Krark-Clan Engineers @Pete Venters
+134 U Krark-Clan Ironworks @Tim Hildebrandt
+71 C Krark-Clan Ogre @Paolo Parente
+135 U Lantern of Insight @Tim Hildebrandt
+9 C Leonin Squire @Pete Venters
+52 C Lose Hope @Matt Cavotta
+10 C Loxodon Anchorite @Jim Nelson
+11 U Loxodon Stalwart @Paolo Parente
+136 U Lunar Avenger @Paolo Parente
+72 R Magma Giant @Nottsuo
+73 U Magma Jet @Justin Sweet
+74 U Magnetic Theft @Dave Dorman
+75 C Mana Geyser @Martina Pilcerova
+53 R Mephidross Vampire @Matthew D. Wilson
+54 R Moriok Rigger @Wayne England
+137 R Mycosynth Golem @Paolo Parente
+138 C Myr Quadropod @Christopher Rush
+139 C Myr Servitor @John Matson
+140 C Neurok Stealthsuit @Francis Tsai
+55 U Night's Whisper @David Martin
+56 U Nim Grotesque @Anthony S. Waters
+141 C Opaline Bracers @Anthony S. Waters
+90 U Ouphe Vandals @Thomas M. Baxa
+142 U Paradise Mantle @Greg Hildebrandt
+143 C Pentad Prism @David Martin
+34 U Plasma Elemental @Kev Walker
+57 R Plunge into Darkness @Justin Sweet
+144 R Possessed Portal @Tony Szczudlo
+35 U Qumulox @Carl Critchlow
+76 C Rain of Rust @Tim Hildebrandt
+12 R Raksha Golden Cub @Pete Venters
+145 C Razorgrass Screen @Tony Szczudlo
+146 R Razormane Masticore @Jim Murray
+58 U Relentless Rats @Thomas M. Baxa
+147 U Relic Barrier @Nottsuo
+13 R Retaliate @Vance Kovacs
+77 R Reversal of Fortune @Greg Hildebrandt
+91 R Rite of Passage @Kev Walker
+14 R Roar of Reclamation @Justin Sweet
+92 R Rude Awakening @Ittoku
+148 R Salvaging Station @Greg Staples
+149 C Sawtooth Thresher @Alan Pollack
+78 C Screaming Fury @Edward P. Beard, Jr.
+36 C Serum Visions @Ben Thompson
+59 U Shattered Dreams @Greg Staples
+150 R Silent Arbiter @Mark Zug
+151 U Skullcage @Ron Spencer
+15 C Skyhunter Prowler @Vance Kovacs
+16 U Skyhunter Skirmisher @Greg Staples
+152 C Skyreach Manta @Christopher Moeller
+153 R Solarion @Jim Murray
+79 C Spark Elemental @John Avon
+154 C Sparring Collar @Christopher Moeller
+37 R Spectral Shift @John Avon
+155 U Spinal Parasite @Cyril Van Der Haegen
+156 R Staff of Domination @Ben Thompson
+17 C Stand Firm @Matt Cavotta
+18 C Stasis Cocoon @Kev Walker
+19 U Steelshaper's Gift @Greg Hildebrandt
+157 R Summoner's Egg @Jim Nelson
+158 R Summoning Station @Stephen Tappin
+159 R Suncrusher @Dave Dorman
+160 C Suntouched Myr @Greg Hildebrandt
+93 C Sylvok Explorer @Wayne England
+161 U Synod Centurion @Kev Walker
+94 C Tangle Asp @Daren Bader
+95 U Tel-Jilad Justice @Alex Horley-Orlandelli
+96 C Tel-Jilad Lifebreather @Jim Nelson
+162 C Thermal Navigator @Jim Murray
+38 C Thought Courier @Stephen Tappin
+97 R Tornado Elemental @Alex Horley-Orlandelli
+39 C Trinket Mage @Mark A. Nelson
+98 C Tyrranax @Carl Critchlow
+20 U Vanquish @Carl Critchlow
+40 U Vedalken Mastermind @Darrell Riche
+163 R Vedalken Orrery @John Avon
+164 R Vedalken Shackles @Mark Zug
+60 C Vicious Betrayal @Tomas Giorello
+99 U Viridian Lorebearers @Darrell Riche
+100 C Viridian Scout @Daren Bader
+80 C Vulshok Sorcerer @rk post
+165 C Wayfarer's Bauble @Darrell Riche
 
 [tokens]
 kaldra

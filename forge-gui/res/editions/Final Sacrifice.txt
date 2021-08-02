@@ -6,4 +6,4 @@ Type=Promo
 ScryfallCode=PHPR
 
 [cards]
-5 C Mana Crypt
+5 C Mana Crypt @Mark Tedin

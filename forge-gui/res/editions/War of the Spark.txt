@@ -14,317 +14,317 @@ ChaosDraftThemes=RAVNICA
 ScryfallCode=WAR
 
 [cards]
-1 R Karn, the Great Creator
-2 R Ugin, the Ineffable
-3 U Ugin's Conjurant
-4 U Ajani's Pridemate
-5 C Battlefield Promotion
-6 U Bond of Discipline
-7 C Bulwark Giant
-8 C Charmed Stray
-9 C Defiant Strike
-10 C Divine Arrow
-11 C Enforcer Griffin
-12 M Finale of Glory
-13 M Gideon Blackblade
-14 C Gideon's Sacrifice
-15 U Gideon's Triumph
-16 M God-Eternal Oketra
-17 U Grateful Apparition
-18 R Ignite the Beacon
-19 C Ironclad Krovod
-20 C Law-Rune Enforcer
-21 C Loxodon Sergeant
-22 C Makeshift Battalion
-23 C Martyr for the Cause
-24 R Parhelion II
-25 C Pouncing Lynx
-26 U Prison Realm
-27 U Rally of Wings
-28 R Ravnica at War
-29 C Rising Populace
-30 R Single Combat
-31 U Sunblade Angel
-32 U Teyo, the Shieldmage
-33 C Teyo's Lightshield
-34 R Tomik, Distinguished Advokist
-35 C Topple the Statue
-36 C Trusted Pegasus
-37 U The Wanderer
-38 C Wanderer's Strike
-39 C War Screecher
-40 C Ashiok's Skulker
-41 U Augur of Bolas
-42 C Aven Eternal
-43 U Bond of Insight
-44 C Callous Dismissal
-45 R Commence the Endgame
-46 C Contentious Plan
-47 C Crush Dissent
-48 C Erratic Visionary
-49 U Eternal Skylord
-50 R Fblthp, the Lost
-51 M Finale of Revelation
-52 U Flux Channeler
-53 M God-Eternal Kefnet
-54 R Jace, Wielder of Mysteries
-55 U Jace's Triumph
-56 U Kasmina, Enigmatic Mentor
-57 C Kasmina's Transmutation
-58 C Kiora's Dambreaker
-59 U Lazotep Plating
-60 C Naga Eternal
-61 U Narset, Parter of Veils
-62 R Narset's Reversal
-63 C No Escape
-64 C Relentless Advance
-65 U Rescuer Sphinx
-66 R Silent Submersible
-67 C Sky Theater Strix
-68 R Spark Double
-69 C Spellkeeper Weird
-70 C Stealth Mission
-71 C Tamiyo's Epiphany
-72 C Teferi's Time Twist
-73 C Thunder Drake
-74 C Totally Lost
-75 C Wall of Runes
-76 C Aid the Fallen
-77 C Banehound
-78 U Bleeding Edge
-79 R Bolas's Citadel
-80 U Bond of Revival
-81 C Charity Extractor
-82 R Command the Dreadhorde
-83 U Davriel, Rogue Shadowmage
-84 C Davriel's Shadowfugue
-85 R Deliver Unto Evil
-86 R Dreadhorde Invasion
-87 U Dreadmalkin
-88 C Duskmantle Operative
-89 R The Elderspell
-90 U Eternal Taskmaster
-91 M Finale of Eternity
-92 M God-Eternal Bontu
-93 C Herald of the Dreadhorde
-94 C Kaya's Ghostform
-95 C Lazotep Behemoth
-96 C Lazotep Reaver
-97 M Liliana, Dreadhorde General
-98 U Liliana's Triumph
-99 R Massacre Girl
-100 U Ob Nixilis, the Hate-Twisted
-101 C Ob Nixilis's Cruelty
-102 U Price of Betrayal
-103 C Shriekdiver
-104 C Sorin's Thirst
-105 C Spark Harvest
-106 C Spark Reaper
-107 C Tithebearer Giant
-108 C Toll of the Invasion
-109 C Unlikely Aid
-110 C Vampire Opportunist
-111 U Vizier of the Scorpion
-112 C Vraska's Finisher
-113 C Ahn-Crop Invader
-114 C Blindblast
-115 U Bolt Bend
-116 U Bond of Passion
-117 C Burning Prophet
-118 C Chainwhip Cyclops
-119 R Chandra, Fire Artisan
-120 C Chandra's Pyrohelix
-121 U Chandra's Triumph
-122 U Cyclops Electromancer
-123 C Demolish
-124 U Devouring Hellion
-125 R Dreadhorde Arcanist
-126 U Dreadhorde Twins
-127 M Finale of Promise
-128 C Goblin Assailant
-129 C Goblin Assault Team
-130 C Grim Initiate
-131 C Heartfire
-132 C Honor the God-Pharaoh
-133 M Ilharg, the Raze-Boar
-134 C Invading Manticore
-135 U Jaya, Venerated Firemage
-136 C Jaya's Greeting
-137 R Krenko, Tin Street Kingpin
-138 R Mizzium Tank
-139 C Nahiri's Stoneblades
-140 R Neheb, Dreadhorde Champion
-141 C Raging Kronch
-142 C Samut's Sprint
-143 R Sarkhan the Masterless
-144 C Sarkhan's Catharsis
-145 C Spellgorger Weird
-146 U Tibalt, Rakish Instigator
-147 U Tibalt's Rager
-148 C Turret Ogre
-149 C Arboreal Grazer
-150 U Arlinn, Voice of the Pack
-151 C Arlinn's Wolf
-152 R Awakening of Vitu-Ghazi
-153 C Band Together
-154 C Bloom Hulk
-155 U Bond of Flourishing
-156 C Centaur Nurturer
-157 U Challenger Troll
-158 C Courage in Crisis
-159 U Evolution Sage
-160 M Finale of Devastation
-161 C Forced Landing
-162 C Giant Growth
-163 M God-Eternal Rhonas
-164 U Jiang Yanggu, Wildcrafter
-165 C Kraul Stinger
-166 C Kronch Wrangler
-167 U Mowu, Loyal Companion
-168 C New Horizons
-169 R Nissa, Who Shakes the World
-170 U Nissa's Triumph
-171 U Paradise Druid
-172 R Planewide Celebration
-173 C Pollenbright Druid
-174 C Primordial Wurm
-175 C Return to Nature
-176 C Snarespinner
-177 C Steady Aim
-178 U Storm the Citadel
-179 C Thundering Ceratok
-180 R Vivien, Champion of the Wilds
-181 R Vivien's Arkbow
-182 C Vivien's Grizzly
-183 C Wardscale Crocodile
-184 R Ajani, the Greathearted
-185 U Angrath's Rampage
-186 R Bioessence Hydra
-187 R Casualties of War
-188 U Cruel Celebrant
-189 U Deathsprout
-190 U Despark
-191 R Domri, Anarch of Bolas
-192 U Domri's Ambush
-193 U Dovin's Veto
-194 R Dreadhorde Butcher
-195 U Elite Guardmage
-196 R Enter the God-Eternals
-197 R Feather, the Redeemed
-198 U Gleaming Overseer
-199 U Heartwarming Redemption
-200 U Huatli's Raptor
-201 U Invade the City
-202 U Leyline Prowler
-203 R Living Twister
-204 U Mayhem Devil
-205 U Merfolk Skydiver
-206 U Neoform
-207 M Nicol Bolas, Dragon-God
-208 M Niv-Mizzet Reborn
-209 R Oath of Kaya
-210 U Pledge of Unity
-211 R Ral, Storm Conduit
-212 U Ral's Outburst
-213 M Roalesk, Apex Hybrid
-214 R Role Reversal
-215 U Rubblebelt Rioters
-216 R Solar Blaze
-217 R Sorin, Vengeful Bloodlord
-218 R Soul Diviner
-219 R Storrev, Devkarin Lich
-220 R Tamiyo, Collector of Tales
-221 R Teferi, Time Raveler
-222 U Tenth District Legionnaire
-223 R Time Wipe
-224 R Tolsimir, Friend to Wolves
-225 U Tyrant's Scorn
-226 R Widespread Brutality
-227 U Angrath, Captain of Chaos
-228 U Ashiok, Dream Render
-229 U Dovin, Hand of Control
-230 U Huatli, the Sun's Heart
-231 U Kaya, Bane of the Dead
-232 U Kiora, Behemoth Beckoner
-233 U Nahiri, Storm of Stone
-234 U Saheeli, Sublime Artificer
-235 U Samut, Tyrant Smasher
-236 U Vraska, Swarm's Eminence
-237 U Firemind Vessel
-238 U God-Pharaoh's Statue
-239 C Guild Globe
-240 C Iron Bully
-241 C Mana Geode
-242 C Prismite
-243 C Saheeli's Silverwing
-244 R Blast Zone
-245 U Emergence Zone
-246 C Gateway Plaza
-247 U Interplanar Beacon
-248 R Karn's Bastion
-249 R Mobilized District
-250 L Plains
-251 L Plains
-252 L Plains
-253 L Island
-254 L Island
-255 L Island
-256 L Swamp
-257 L Swamp
-258 L Swamp
-259 L Mountain
-260 L Mountain
-261 L Mountain
-262 L Forest
-263 L Forest
-264 L Forest
-265 M Gideon, the Oathsworn
-266 C Desperate Lunge
-267 R Gideon's Battle Cry
-268 U Gideon's Company
-269 C Orzhov Guildgate
-270 M Jace, Arcane Strategist
-271 C Guildpact Informant
-272 U Jace's Projection
-273 R Jace's Ruse
-274 C Simic Guildgate
-275 M Tezzeret, Master of the Bridge
-1★ R Karn, the Great Creator
-2★ R Ugin, the Ineffable
-13★ M Gideon Blackblade
-32★ U Teyo, the Shieldmage
-37★ U The Wanderer
-54★ R Jace, Wielder of Mysteries
-56★ U Kasmina, Enigmatic Mentor
-61★ U Narset, Parter of Veils
-83★ U Davriel, Rogue Shadowmage
-97★ M Liliana, Dreadhorde General
-100★ U Ob Nixilis, the Hate-Twisted
-119★ R Chandra, Fire Artisan
-135★ U Jaya, Venerated Firemage
-143★ R Sarkhan the Masterless
-146★ U Tibalt, Rakish Instigator
-150★ U Arlinn, Voice of the Pack
-164★ U Jiang Yanggu, Wildcrafter
-169★ R Nissa, Who Shakes the World
-180★ R Vivien, Champion of the Wilds
-184★ R Ajani, the Greathearted
-191★ R Domri, Anarch of Bolas
-207★ M Nicol Bolas, Dragon-God
-211★ R Ral, Storm Conduit
-217★ R Sorin, Vengeful Bloodlord
-220★ R Tamiyo, Collector of Tales
-221★ R Teferi, Time Raveler
-227★ U Angrath, Captain of Chaos
-228★ U Ashiok, Dream Render
-229★ U Dovin, Hand of Control
-230★ U Huatli, the Sun's Heart
-231★ U Kaya, Bane of the Dead
-232★ U Kiora, Behemoth Beckoner
-233★ U Nahiri, Storm of Stone
-234★ U Saheeli, Sublime Artificer
-235★ U Samut, Tyrant Smasher
-236★ U Vraska, Swarm's Eminence
+1 R Karn, the Great Creator @Wisnu Tan
+2 R Ugin, the Ineffable @Daarken
+3 U Ugin's Conjurant @Ryan Yee
+4 U Ajani's Pridemate @Sidharth Chaturvedi
+5 C Battlefield Promotion @Scott Murphy
+6 U Bond of Discipline @Zezhou Chen
+7 C Bulwark Giant @Victor Adame Minguez
+8 C Charmed Stray @Chris Rahn
+9 C Defiant Strike @Gabor Szikszai
+10 C Divine Arrow @Kieran Yanner
+11 C Enforcer Griffin @Johan Grenier
+12 M Finale of Glory @Stanton Feng
+13 M Gideon Blackblade @Viktor Titov
+14 C Gideon's Sacrifice @Chris Rallis
+15 U Gideon's Triumph @Kieran Yanner
+16 M God-Eternal Oketra @Grzegorz Rutkowski
+17 U Grateful Apparition @Izzy
+18 R Ignite the Beacon @Slawomir Maniak
+19 C Ironclad Krovod @Sam Rowan
+20 C Law-Rune Enforcer @Eric Deschamps
+21 C Loxodon Sergeant @Jesper Ejsing
+22 C Makeshift Battalion @Zoltan Boros
+23 C Martyr for the Cause @Zoltan Boros
+24 R Parhelion II @Adam Paquette
+25 C Pouncing Lynx @Sidharth Chaturvedi
+26 U Prison Realm @Daarken
+27 U Rally of Wings @Magali Villeneuve
+28 R Ravnica at War @Adam Paquette
+29 C Rising Populace @Tomasz Jedruszek
+30 R Single Combat @Livia Prima
+31 U Sunblade Angel @Johannes Voss
+32 U Teyo, the Shieldmage @Magali Villeneuve
+33 C Teyo's Lightshield @Igor Kieryluk
+34 R Tomik, Distinguished Advokist @Johannes Voss
+35 C Topple the Statue @Sidharth Chaturvedi
+36 C Trusted Pegasus @Chris Rahn
+37 U The Wanderer @Wesley Burt
+38 C Wanderer's Strike @Sara Winters
+39 C War Screecher @Dan Scott
+40 C Ashiok's Skulker @Livia Prima
+41 U Augur of Bolas @Alex Konstad
+42 C Aven Eternal @Johan Grenier
+43 U Bond of Insight @Joe Slucher
+44 C Callous Dismissal @Mathias Kollros
+45 R Commence the Endgame @Noah Bradley
+46 C Contentious Plan @Eric Deschamps
+47 C Crush Dissent @Mike Bierek
+48 C Erratic Visionary @Randy Vargas
+49 U Eternal Skylord @Johan Grenier
+50 R Fblthp, the Lost @Jesper Ejsing
+51 M Finale of Revelation @Johann Bodin
+52 U Flux Channeler @Heonhwa Choe
+53 M God-Eternal Kefnet @Lius Lasahido
+54 R Jace, Wielder of Mysteries @Anna Steinbauer
+55 U Jace's Triumph @Kieran Yanner
+56 U Kasmina, Enigmatic Mentor @Magali Villeneuve
+57 C Kasmina's Transmutation @Uriah Voth
+58 C Kiora's Dambreaker @Mathias Kollros
+59 U Lazotep Plating @Yeong-Hao Han
+60 C Naga Eternal @Johann Bodin
+61 U Narset, Parter of Veils @Magali Villeneuve
+62 R Narset's Reversal @Viktor Titov
+63 C No Escape @G-host Lee
+64 C Relentless Advance @Stanton Feng
+65 U Rescuer Sphinx @Jesper Ejsing
+66 R Silent Submersible @Daniel Ljunggren
+67 C Sky Theater Strix @Chris Seaman
+68 R Spark Double @Eric Deschamps
+69 C Spellkeeper Weird @James Paick
+70 C Stealth Mission @Heonhwa Choe
+71 C Tamiyo's Epiphany @Lake Hurwitz
+72 C Teferi's Time Twist @Ralph Horsley
+73 C Thunder Drake @Yeong-Hao Han
+74 C Totally Lost @Aaron Miller
+75 C Wall of Runes @Zezhou Chen
+76 C Aid the Fallen @Sara Winters
+77 C Banehound @YW Tang
+78 U Bleeding Edge @Mike Bierek
+79 R Bolas's Citadel @Jonas De Ro
+80 U Bond of Revival @Lake Hurwitz
+81 C Charity Extractor @Matt Stewart
+82 R Command the Dreadhorde @Daarken
+83 U Davriel, Rogue Shadowmage @Daarken
+84 C Davriel's Shadowfugue @Daarken
+85 R Deliver Unto Evil @Seb McKinnon
+86 R Dreadhorde Invasion @Stanton Feng
+87 U Dreadmalkin @Aaron Miller
+88 C Duskmantle Operative @Anna Steinbauer
+89 R The Elderspell @Daarken
+90 U Eternal Taskmaster @Tomasz Jedruszek
+91 M Finale of Eternity @Daarken
+92 M God-Eternal Bontu @Lius Lasahido
+93 C Herald of the Dreadhorde @Heonhwa Choe
+94 C Kaya's Ghostform @Johan Grenier
+95 C Lazotep Behemoth @Zezhou Chen
+96 C Lazotep Reaver @Craig J Spearing
+97 M Liliana, Dreadhorde General @Chris Rallis
+98 U Liliana's Triumph @Kieran Yanner
+99 R Massacre Girl @Chris Rallis
+100 U Ob Nixilis, the Hate-Twisted @Yongjae Choi
+101 C Ob Nixilis's Cruelty @Igor Kieryluk
+102 U Price of Betrayal @Ryan Yee
+103 C Shriekdiver @Piotr Dura
+104 C Sorin's Thirst @Daarken
+105 C Spark Harvest @Kieran Yanner
+106 C Spark Reaper @Zoltan Boros
+107 C Tithebearer Giant @Wisnu Tan
+108 C Toll of the Invasion @Joe Slucher
+109 C Unlikely Aid @Viktor Titov
+110 C Vampire Opportunist @Jason Rainville
+111 U Vizier of the Scorpion @Zack Stella
+112 C Vraska's Finisher @Igor Kieryluk
+113 C Ahn-Crop Invader @Tomasz Jedruszek
+114 C Blindblast @Sidharth Chaturvedi
+115 U Bolt Bend @Svetlin Velinov
+116 U Bond of Passion @Izzy
+117 C Burning Prophet @Mathias Kollros
+118 C Chainwhip Cyclops @Johann Bodin
+119 R Chandra, Fire Artisan @Yongjae Choi
+120 C Chandra's Pyrohelix @Aleksi Briclot
+121 U Chandra's Triumph @Kieran Yanner
+122 U Cyclops Electromancer @Jason Felix
+123 C Demolish @Adam Paquette
+124 U Devouring Hellion @Bayard Wu
+125 R Dreadhorde Arcanist @G-host Lee
+126 U Dreadhorde Twins @Johannes Voss
+127 M Finale of Promise @Jaime Jones
+128 C Goblin Assailant @Jesper Ejsing
+129 C Goblin Assault Team @Zoltan Boros
+130 C Grim Initiate @Jason Felix
+131 C Heartfire @Craig J Spearing
+132 C Honor the God-Pharaoh @David Palumbo
+133 M Ilharg, the Raze-Boar @Filip Burburan
+134 C Invading Manticore @Jehan Choo
+135 U Jaya, Venerated Firemage @Yongjae Choi
+136 C Jaya's Greeting @Victor Adame Minguez
+137 R Krenko, Tin Street Kingpin @Mark Behm
+138 R Mizzium Tank @Wayne Reynolds
+139 C Nahiri's Stoneblades @Micah Epstein
+140 R Neheb, Dreadhorde Champion @Igor Kieryluk
+141 C Raging Kronch @Steve Prescott
+142 C Samut's Sprint @Aleksi Briclot
+143 R Sarkhan the Masterless @Kieran Yanner
+144 C Sarkhan's Catharsis @Zack Stella
+145 C Spellgorger Weird @James Paick
+146 U Tibalt, Rakish Instigator @Chase Stone
+147 U Tibalt's Rager @Yongjae Choi
+148 C Turret Ogre @Johann Bodin
+149 C Arboreal Grazer @Jason Rainville
+150 U Arlinn, Voice of the Pack @Ryan Pancoast
+151 C Arlinn's Wolf @Kimonas Theodossiou
+152 R Awakening of Vitu-Ghazi @Jaime Jones
+153 C Band Together @Josh Hass
+154 C Bloom Hulk @Even Amundsen
+155 U Bond of Flourishing @Tyler Walpole
+156 C Centaur Nurturer @Even Amundsen
+157 U Challenger Troll @Svetlin Velinov
+158 C Courage in Crisis @Micah Epstein
+159 U Evolution Sage @Simon Dominic
+160 M Finale of Devastation @Bayard Wu
+161 C Forced Landing @Svetlin Velinov
+162 C Giant Growth @Dmitry Burmak
+163 M God-Eternal Rhonas @Lius Lasahido
+164 U Jiang Yanggu, Wildcrafter @Anna Steinbauer
+165 C Kraul Stinger @Randy Vargas
+166 C Kronch Wrangler @Steve Prescott
+167 U Mowu, Loyal Companion @Kimonas Theodossiou
+168 C New Horizons @Eytan Zana
+169 R Nissa, Who Shakes the World @Chris Rallis
+170 U Nissa's Triumph @Kieran Yanner
+171 U Paradise Druid @Nils Hamm
+172 R Planewide Celebration @Wisnu Tan
+173 C Pollenbright Druid @Matt Stewart
+174 C Primordial Wurm @Svetlin Velinov
+175 C Return to Nature @Alayna Danner
+176 C Snarespinner @Yeong-Hao Han
+177 C Steady Aim @Ralph Horsley
+178 U Storm the Citadel @Grzegorz Rutkowski
+179 C Thundering Ceratok @Izzy
+180 R Vivien, Champion of the Wilds @Magali Villeneuve
+181 R Vivien's Arkbow @Zack Stella
+182 C Vivien's Grizzly @Lius Lasahido
+183 C Wardscale Crocodile @Zezhou Chen
+184 R Ajani, the Greathearted @Victor Adame Minguez
+185 U Angrath's Rampage @Victor Adame Minguez
+186 R Bioessence Hydra @Mathias Kollros
+187 R Casualties of War @Tomasz Jedruszek
+188 U Cruel Celebrant @Bastien L. Deharme
+189 U Deathsprout @Seb McKinnon
+190 U Despark @Slawomir Maniak
+191 R Domri, Anarch of Bolas @Raymond Swanland
+192 U Domri's Ambush @Victor Adame Minguez
+193 U Dovin's Veto @Izzy
+194 R Dreadhorde Butcher @Piotr Dura
+195 U Elite Guardmage @PINDURSKI
+196 R Enter the God-Eternals @Daniel Ljunggren
+197 R Feather, the Redeemed @Wayne Reynolds
+198 U Gleaming Overseer @Volkan Baǵa
+199 U Heartwarming Redemption @Howard Lyon
+200 U Huatli's Raptor @Randy Vargas
+201 U Invade the City @Sung Choi
+202 U Leyline Prowler @YW Tang
+203 R Living Twister @James Paick
+204 U Mayhem Devil @Dmitry Burmak
+205 U Merfolk Skydiver @Sara Winters
+206 U Neoform @Bram Sels
+207 M Nicol Bolas, Dragon-God @Raymond Swanland
+208 M Niv-Mizzet Reborn @Raymond Swanland
+209 R Oath of Kaya @Wesley Burt
+210 U Pledge of Unity @Chris Rallis
+211 R Ral, Storm Conduit @Wesley Burt
+212 U Ral's Outburst @Joseph Meehan
+213 M Roalesk, Apex Hybrid @Svetlin Velinov
+214 R Role Reversal @Mathias Kollros
+215 U Rubblebelt Rioters @Tomasz Jedruszek
+216 R Solar Blaze @Adam Paquette
+217 R Sorin, Vengeful Bloodlord @Tommy Arnold
+218 R Soul Diviner @Randy Vargas
+219 R Storrev, Devkarin Lich @Igor Kieryluk
+220 R Tamiyo, Collector of Tales @Chase Stone
+221 R Teferi, Time Raveler @Chris Rallis
+222 U Tenth District Legionnaire @Victor Adame Minguez
+223 R Time Wipe @Svetlin Velinov
+224 R Tolsimir, Friend to Wolves @Ryan Pancoast
+225 U Tyrant's Scorn @Svetlin Velinov
+226 R Widespread Brutality @Victor Adame Minguez
+227 U Angrath, Captain of Chaos @Slawomir Maniak
+228 U Ashiok, Dream Render @Cynthia Sheppard
+229 U Dovin, Hand of Control @Kieran Yanner
+230 U Huatli, the Sun's Heart @Lius Lasahido
+231 U Kaya, Bane of the Dead @Magali Villeneuve
+232 U Kiora, Behemoth Beckoner @Jaime Jones
+233 U Nahiri, Storm of Stone @Aleksi Briclot
+234 U Saheeli, Sublime Artificer @Wesley Burt
+235 U Samut, Tyrant Smasher @Aleksi Briclot
+236 U Vraska, Swarm's Eminence @Anna Steinbauer
+237 U Firemind Vessel @Ravenna Tran
+238 U God-Pharaoh's Statue @Igor Kieryluk
+239 C Guild Globe @Daniel Ljunggren
+240 C Iron Bully @Aaron Miller
+241 C Mana Geode @Raoul Vitale
+242 C Prismite @Alayna Danner
+243 C Saheeli's Silverwing @Daniel Ljunggren
+244 R Blast Zone @Chris Ostrowski
+245 U Emergence Zone @Jonas De Ro
+246 C Gateway Plaza @Sung Choi
+247 U Interplanar Beacon @Adam Paquette
+248 R Karn's Bastion @Adam Paquette
+249 R Mobilized District @Jedd Chevrier
+250 L Plains @Jonas De Ro
+251 L Plains @Adam Paquette
+252 L Plains @Richard Wright
+253 L Island @Adam Paquette
+254 L Island @Richard Wright
+255 L Island @Kirsten Zirngibl
+256 L Swamp @Titus Lunter
+257 L Swamp @Adam Paquette
+258 L Swamp @Richard Wright
+259 L Mountain @Titus Lunter
+260 L Mountain @Adam Paquette
+261 L Mountain @Richard Wright
+262 L Forest @Jonas De Ro
+263 L Forest @Titus Lunter
+264 L Forest @Richard Wright
+265 M Gideon, the Oathsworn @Kieran Yanner
+266 C Desperate Lunge @Deruchenko Alexander
+267 R Gideon's Battle Cry @Zoltan Boros
+268 U Gideon's Company @Milivoj Ćeran
+269 C Orzhov Guildgate @Cliff Childs
+270 M Jace, Arcane Strategist @Kieran Yanner
+271 C Guildpact Informant @Randy Gallegos
+272 U Jace's Projection @Darek Zabrocki
+273 R Jace's Ruse @Clint Cearley
+274 C Simic Guildgate @Adam Paquette
+275 M Tezzeret, Master of the Bridge @Chase Stone
+1★ R Karn, the Great Creator @Naochika Morishita
+2★ R Ugin, the Ineffable @Maekawa Yuichi
+13★ M Gideon Blackblade @Tada
+32★ U Teyo, the Shieldmage @Foo Midori
+37★ U The Wanderer @Norikatsu Miyoshi
+54★ R Jace, Wielder of Mysteries @Toshiaki Takayama
+56★ U Kasmina, Enigmatic Mentor @Mid
+61★ U Narset, Parter of Veils @Foo Midori
+83★ U Davriel, Rogue Shadowmage @Hagiya Kaoru
+97★ M Liliana, Dreadhorde General @Yoshitaka Amano
+100★ U Ob Nixilis, the Hate-Twisted @Sansyu
+119★ R Chandra, Fire Artisan @Ryota-H
+135★ U Jaya, Venerated Firemage @Maekawa Yuichi
+143★ R Sarkhan the Masterless @Lack
+146★ U Tibalt, Rakish Instigator @Clover.K
+150★ U Arlinn, Voice of the Pack @D-suzuki
+164★ U Jiang Yanggu, Wildcrafter @Daisuke Izuka
+169★ R Nissa, Who Shakes the World @Hitowa
+180★ R Vivien, Champion of the Wilds @Hisashi Momose
+184★ R Ajani, the Greathearted @Miho Midorikawa
+191★ R Domri, Anarch of Bolas @Raita Kazama
+207★ M Nicol Bolas, Dragon-God @Kaida Yuji
+211★ R Ral, Storm Conduit @Naochika Morishita
+217★ R Sorin, Vengeful Bloodlord @Yukie Tajima
+220★ R Tamiyo, Collector of Tales @Fuzichoco
+221★ R Teferi, Time Raveler @Shishizaru
+227★ U Angrath, Captain of Chaos @Sansyu
+228★ U Ashiok, Dream Render @Hozan Shinomaru
+229★ U Dovin, Hand of Control @Nablange
+230★ U Huatli, the Sun's Heart @Masuda Mikio
+231★ U Kaya, Bane of the Dead @Mid
+232★ U Kiora, Behemoth Beckoner @Yamamoto Akifumi
+233★ U Nahiri, Storm of Stone @Yukie Tajima
+234★ U Saheeli, Sublime Artificer @Hisashi Momose
+235★ U Samut, Tyrant Smasher @Norikatsu Miyoshi
+236★ U Vraska, Swarm's Eminence @Ryota Murayama
 
 [tokens]
 wubrg_2_2_citizen

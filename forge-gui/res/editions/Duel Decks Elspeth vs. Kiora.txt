@@ -7,71 +7,71 @@ Type=Duel_Deck
 ScryfallCode=DDO
 
 [cards]
-1 M Elspeth, Sun's Champion
-2 U Banisher Priest
-3 R Captain of the Watch
-4 C Celestial Flare
-5 C Court Street Denizen
-6 U Dauntless Onslaught
-7 R Decree of Justice
-8 R Dictate of Heliod
-9 C Gempalm Avenger
-10 C Gustcloak Harrier
-11 R Gustcloak Savior
-12 U Gustcloak Sentinel
-13 U Gustcloak Skirmisher
-14 C Icatian Javelineers
-15 C Kinsbaile Skirmisher
-16 C Kor Skyfisher
-17 C Loxodon Partisan
-18 C Mighty Leap
-19 C Mortal's Ardor
-20 U Mother of Runes
-21 C Noble Templar
-22 R Precinct Captain
-23 C Raise the Alarm
-24 C Soul Parry
-25 C Standing Troops
-26 C Sunlance
-27 C Veteran Armorsmith
-28 C Veteran Swordsmith
-29 C Secluded Steppe
-32 L Plains
-32 L Plains
-32 L Plains
-32 L Plains
-34 M Kiora, the Crashing Wave
-35 C Accumulated Knowledge
-36 U AEtherize
-37 R Inkwell Leviathan
-38 C Man-o'-War
-39 C Omenspeaker
-40 C Peel from Reality
-41 R Scourge of Fleets
-42 U Sealock Monster
-43 C Surrakar Banisher
-44 R Whelming Wave
-45 C Explore
-46 U Explosive Vegetation
-47 C Grazing Gladehart
-48 C Nessian Asp
-49 C Netcaster Spider
-50 C Time to Feed
-51 C Coiling Oracle
-52 U Kiora's Follower
-53 U Lorescale Coatl
-54 U Nimbus Swimmer
-55 R Plasm Capture
-56 R Simic Sky Swallower
-57 U Urban Evolution
-58 C Evolving Wilds
-59 U Temple of the False God
-60 L Island
-60 L Island
-60 L Island
-63 L Forest
-63 L Forest
-63 L Forest
+1 M Elspeth, Sun's Champion @Tyler Jacobson
+2 U Banisher Priest @Willian Murai
+3 R Captain of the Watch @Greg Staples
+4 C Celestial Flare @Clint Cearley
+5 C Court Street Denizen @Volkan Baǵa
+6 U Dauntless Onslaught @Peter Mohrbacher
+7 R Decree of Justice @Lius Lasahido
+8 R Dictate of Heliod @Terese Nielsen
+9 C Gempalm Avenger @Tim Hildebrandt
+10 C Gustcloak Harrier @Dan Frazier
+11 R Gustcloak Savior @Jim Nelson
+12 U Gustcloak Sentinel @Mark Zug
+13 U Gustcloak Skirmisher @Dan Frazier
+14 C Icatian Javelineers @Michael Phillippi
+15 C Kinsbaile Skirmisher @Thomas Denmark
+16 C Kor Skyfisher @Dan Scott
+17 C Loxodon Partisan @Matt Stewart
+18 C Mighty Leap @rk post
+19 C Mortal's Ardor @Kev Walker
+20 U Mother of Runes @Terese Nielsen
+21 C Noble Templar @Alex Horley-Orlandelli
+22 R Precinct Captain @Steve Prescott
+23 C Raise the Alarm @Zoltan Boros
+24 C Soul Parry @Igor Kieryluk
+25 C Standing Troops @Zoltan Boros
+26 C Sunlance @Volkan Baǵa
+27 C Veteran Armorsmith @Michael Komarck
+28 C Veteran Swordsmith @Michael Komarck
+29 C Secluded Steppe @Heather Hudson
+30 L Plains @Rob Alexander
+31 L Plains @Steven Belledin
+32 L Plains @Adam Paquette
+33 L Plains @Raoul Vitale
+34 M Kiora, the Crashing Wave @Tyler Jacobson
+35 C Accumulated Knowledge @David Palumbo
+36 U Aetherize @Ryan Barger
+37 R Inkwell Leviathan @Anthony Francisco
+38 C Man-o'-War @Jon J Muth
+39 C Omenspeaker @Dallas Williams
+40 C Peel from Reality @Jason Felix
+41 R Scourge of Fleets @Steven Belledin
+42 U Sealock Monster @Adam Paquette
+43 C Surrakar Banisher @Matt Cavotta
+44 R Whelming Wave @Slawomir Maniak
+45 C Explore @Johann Bodin
+46 U Explosive Vegetation @John Avon
+47 C Grazing Gladehart @Ryan Pancoast
+48 C Nessian Asp @Alex Horley-Orlandelli
+49 C Netcaster Spider @Yohann Schepacz
+50 C Time to Feed @Wayne Reynolds
+51 C Coiling Oracle @Mark Zug
+52 U Kiora's Follower @Eric Deschamps
+53 U Lorescale Coatl @Greg Staples
+54 U Nimbus Swimmer @Howard Lyon
+55 R Plasm Capture @Chase Stone
+56 R Simic Sky Swallower @rk post
+57 U Urban Evolution @Eytan Zana
+58 C Evolving Wilds @Steven Belledin
+59 U Temple of the False God @James Zapata
+60 L Island @Steven Belledin
+61 L Island @Adam Paquette
+62 L Island @Raoul Vitale
+63 L Forest @Steven Belledin
+64 L Forest @Adam Paquette
+65 L Forest @Raoul Vitale
 
 [tokens]
 w_4_4_angel_flying

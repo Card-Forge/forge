@@ -6,4 +6,4 @@ Type=Promo
 ScryfallCode=PHPR
 
 [cards]
-3 C Windseeker Centaur
+3 C Windseeker Centaur @Anson Maddocks

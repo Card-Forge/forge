@@ -6,10 +6,10 @@ Type=Promo
 ScryfallCode=PF19
 
 [cards]
-1 R Lightning Bolt
-2 R Plains
-3 R Island
-4 R Swamp
-5 R Mountain
-6 R Forest
-7 R Sol Ring
+1 R Lightning Bolt @Kekai Kotaki
+2 R Plains @Sam Burley
+3 R Island @Sam Burley
+4 R Swamp @Sam Burley
+5 R Mountain @Sam Burley
+6 R Forest @Sam Burley
+7 R Sol Ring @Mark Tedin

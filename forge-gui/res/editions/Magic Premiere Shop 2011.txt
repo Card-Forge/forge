@@ -7,8 +7,8 @@ CardLang=ja
 ScryfallCode=PMPS11
 
 [cards]
-1 R Plains
-2 R Island
-3 R Swamp
-4 R Mountain
-5 R Forest
+1 R Plains @Adam Paquette
+2 R Island @Adam Paquette
+3 R Swamp @Adam Paquette
+4 R Mountain @Adam Paquette
+5 R Forest @Adam Paquette

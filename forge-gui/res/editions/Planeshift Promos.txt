@@ -7,4 +7,4 @@ CardLang=grc
 ScryfallCode=PPLS
 
 [cards]
-119 R Questing Phelddagrif
+119 R Questing Phelddagrif @Matt Cavotta

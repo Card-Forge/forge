@@ -7,70 +7,70 @@ Type=Duel_Deck
 ScryfallCode=DD2
 
 [cards]
-1 M Jace Beleren
-2 C Martyr of Frost
-3 C Fathom Seer
-4 C Voidmage Apprentice
-5 U Wall of Deceit
-6 U Willbender
-7 U Bottle Gnomes
-8 C Man-o'-War
-9 C Ophidian
-10 U Fledgling Mawcor
-11 U Waterspout Djinn
-12 C Mulldrifter
-13 U Air Elemental
-14 R Guile
-15 U Riftwing Cloudskate
-16 C Spire Golem
-17 C AEthersnipe
-18 U Brine Elemental
-19 R Quicksilver Dragon
-20 C Errant Ephemeron
-21 R Ancestral Vision
-22 U Mind Stone
-23 C Daze
-24 C Counterspell
-25 C Repulse
-26 U Fact or Fiction
-27 C Gush
-28 C Condescend
-29 U Terrain Generator
-30 L Island
-31 L Island
-32 L Island
-33 L Island
-34 M Chandra Nalaar
-35 C Flamekin Brawler
-36 C Fireslinger
-37 C Soulbright Flamekin
-38 U Pyre Charger
-39 U Slith Firewalker
-40 U Flamewave Invoker
-41 C Inner-Flame Acolyte
-42 U Flametongue Kavu
-43 U Furnace Whelp
-44 R Rakdos Pit Dragon
-45 C Ingot Chewer
-46 C Oxidda Golem
-47 C Chartooth Cougar
-48 R Hostility
-49 C Firebolt
-50 C Seal of Fire
-51 C Incinerate
-52 U Magma Jet
-53 U Flame Javelin
-54 U Cone of Flame
-55 C Fireblast
-56 U Fireball
-57 R Demonfire
-58 U Keldon Megaliths
-59 L Mountain
-60 L Mountain
-61 L Mountain
-62 L Mountain
-1★ M Jace Beleren
-34★ M Chandra Nalaar
+1 M Jace Beleren @Kev Walker
+2 C Martyr of Frost @Wayne England
+3 C Fathom Seer @Ralph Horsley
+4 C Voidmage Apprentice @Jim Nelson
+5 U Wall of Deceit @John Avon
+6 U Willbender @Eric Peterson
+7 U Bottle Gnomes @Ben Thompson
+8 C Man-o'-War @Jon J Muth
+9 C Ophidian @Cliff Nielsen
+10 U Fledgling Mawcor @Kev Walker
+11 U Waterspout Djinn @Thomas Gianni
+12 C Mulldrifter @Eric Fortune
+13 U Air Elemental @Kev Walker
+14 R Guile @Zoltan Boros & Gabor Szikszai
+15 U Riftwing Cloudskate @Carl Critchlow
+16 C Spire Golem @Daren Bader
+17 C Aethersnipe @Zoltan Boros & Gabor Szikszai
+18 U Brine Elemental @Stephen Tappin
+19 R Quicksilver Dragon @Ron Spencer
+20 C Errant Ephemeron @Luca Zontini
+21 R Ancestral Vision @Mark Poole
+22 U Mind Stone @Adam Rex
+23 C Daze @Matthew D. Wilson
+24 C Counterspell @Jason Chan
+25 C Repulse @Aaron Boyd
+26 U Fact or Fiction @Matt Cavotta
+27 C Gush @Kev Walker
+28 C Condescend @Ron Spears
+29 U Terrain Generator @Alan Pollack
+30 L Island @John Avon
+31 L Island @Scott Bailey
+32 L Island @Donato Giancola
+33 L Island @Christopher Moeller
+34 M Chandra Nalaar @Kev Walker
+35 C Flamekin Brawler @Daren Bader
+36 C Fireslinger @Jeff Reitz
+37 C Soulbright Flamekin @Kev Walker
+38 U Pyre Charger @Mark Zug
+39 U Slith Firewalker @Justin Sweet
+40 U Flamewave Invoker @Dave Dorman
+41 C Inner-Flame Acolyte @Ron Spears
+42 U Flametongue Kavu @Pete Venters
+43 U Furnace Whelp @Matt Cavotta
+44 R Rakdos Pit Dragon @Kev Walker
+45 C Ingot Chewer @Kev Walker
+46 C Oxidda Golem @Greg Staples
+47 C Chartooth Cougar @Tony Szczudlo
+48 R Hostility @Omar Rayyan
+49 C Firebolt @Ron Spencer
+50 C Seal of Fire @Christopher Moeller
+51 C Incinerate @Steve Prescott
+52 U Magma Jet @Justin Sweet
+53 U Flame Javelin @Trevor Hairsine
+54 U Cone of Flame @Chippy
+55 C Fireblast @Michael Danza
+56 U Fireball @Dave Dorman
+57 R Demonfire @Greg Staples
+58 U Keldon Megaliths @Philip Straub
+59 L Mountain @Rob Alexander
+60 L Mountain @Christopher Moeller
+61 L Mountain @Greg Staples
+62 L Mountain @Mark Tedin
+1★ M Jace Beleren @Yoshino Himori
+34★ M Chandra Nalaar @Yoshino Himori
 
 [tokens]
 r_3_1_elemental_shaman_haste

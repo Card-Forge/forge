@@ -6,11 +6,11 @@ Type=Promo
 ScryfallCode=J16
 
 [cards]
-1 R Stoneforge Mystic
-2 R Mana Drain
-3 R Azusa, Lost but Seeking
-4 R Command Beacon
-5 R Mystic Confluence
-6 R Imperial Seal
-7 R Defense of the Heart
-8 R Zur the Enchanter
+1 R Stoneforge Mystic @Johannes Voss
+2 R Mana Drain @Mike Bierek
+3 R Azusa, Lost but Seeking @Winona Nelson
+4 R Command Beacon @Jonas De Ro
+5 R Mystic Confluence @Kieran Yanner
+6 R Imperial Seal @Li Tie
+7 R Defense of the Heart @Jack Wang
+8 R Zur the Enchanter @Josu Hernaiz

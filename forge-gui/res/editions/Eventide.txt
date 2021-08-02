@@ -13,186 +13,186 @@ FatPackExtraSlots=40 BasicLands SHM
 ScryfallCode=EVE
 
 [cards]
-65 C Aerie Ouphes
-166 R Altar Golem
-167 C Antler Skulkin
-1 R Archon of Justice
-33 R Ashling, the Extinguisher
-132 R Balefire Liege
-2 C Ballynock Trapper
-17 C Banishing Knack
-133 C Battlegate Mimic
-81 U Batwing Brume
-82 C Beckon Apparition
-134 U Belligerent Hatchling
-83 U Bloodied Ghost
-66 R Bloom Tender
-18 U Cache Raiders
-98 R Call the Skybreaker
-115 U Canker Abomination
-116 U Cankerous Thirst
-175 R Cascade Bluffs
-84 U Cauldron Haze
-3 C Cenn's Enlistment
-49 U Chaotic Backlash
-50 C Cinder Pyromancer
-99 C Clout of the Dominus
-149 R Cold-Eyed Selkie
-100 R Crackleburr
-101 U Crag Puca
-34 U Creakwood Ghoul
-117 R Creakwood Liege
-35 U Crumbling Ashes
-85 R Deathbringer Liege
-118 R Deity of Scars
-119 C Desecrator Hag
-86 R Divinity of Pride
-102 R Dominus of Fealty
-120 R Doomgape
-135 C Double Cleave
-121 C Drain the Well
-19 U Dream Fracture
-20 C Dream Thief
-136 C Duergar Assailant
-51 U Duergar Cave-Guard
-137 U Duergar Hedge-Mage
-138 U Duergar Mine-Captain
-67 U Duskdale Wurm
-87 C Edge of the Divinity
-4 R Endless Horizons
-5 U Endure
-88 R Evershrike
-150 R Fable of Wolf and Owl
-168 C Fang Skulkin
-151 C Favor of the Overbeing
-176 R Fetid Heath
-52 R Fiery Bombardment
-139 R Figure of Destiny
-140 C Fire at Will
-53 C Flame Jab
-6 U Flickerwisp
-177 R Flooded Grove
-122 C Gift of the Deity
-152 U Gilder Bairn
-21 R Glamerdye
-22 R Glen Elendra Archmage
-153 C Grazing Kelpie
-154 U Groundling Pouncer
-89 U Gwyllion Hedge-Mage
-123 U Hag Hedge-Mage
-7 R Hallowed Burial
-90 C Harvest Gwyllion
-54 U Hatchet Bully
-55 R Hateflayer
-141 U Hearthfire Hobgoblin
-56 C Heartlash Cinder
-68 R Helix Pinnacle
-142 C Hobgoblin Dragoon
-169 C Hoof Skulkin
-57 C Hotheaded Giant
-23 U Idle Thoughts
-58 U Impelled Giant
-24 U Indigo Faerie
-103 C Inside Out
-25 R Inundate
-155 U Invert the Skies
-170 C Jawbone Skulkin
-8 C Kithkin Spellduster
-9 C Kithkin Zealot
-171 R Leering Emblem
-10 R Light from Within
-36 U Lingering Tormentor
-11 U Loyal Gyrfalcon
-69 U Marshdrinker Giant
-37 C Merrow Bonegnawer
-26 C Merrow Levitator
-104 R Mindwrack Liege
-105 R Mirror Sheen
-70 C Monstrify
-143 U Moonhold
-156 R Murkfiend Liege
-38 R Necroskitter
-39 R Needle Specter
-71 C Nettle Sentinel
-40 R Nightmare Incursion
-91 C Nightsky Mimic
-92 C Nip Gwyllion
-144 R Nobilis of War
-106 C Noggle Bandit
-107 C Noggle Bridgebreaker
-108 U Noggle Hedge-Mage
-109 U Noggle Ransacker
-124 U Noxious Hatchling
-110 U Nucklavee
-125 C Odious Trow
-27 C Oona's Grace
-59 U Outrage Shaman
-157 R Overbeing of Myth
-12 U Patrol Signaler
-72 U Phosphorescent Feast
-73 R Primalcrux
-60 C Puncture Blast
-93 R Pyrrhic Revival
-126 U Quillspike
-41 C Raven's Crime
-28 U Razorfin Abolisher
-13 C Recumbent Bliss
-74 R Regal Force
-61 R Rekindled Flame
-127 C Rendclaw Trow
-94 U Restless Apparition
-145 R Rise of the Hobgoblins
-111 C Riverfall Mimic
-178 R Rugged Prairie
-29 R Sanity Grinding
-128 R Sapling of Colfenor
-75 U Savage Conception
-172 R Scarecrone
-146 C Scourge of the Nobilis
-158 U Selkie Hedge-Mage
-173 C Shell Skulkin
-159 C Shorecrasher Mimic
-112 U Shrewd Hatchling
-160 C Slippery Bogle
-42 C Smoldering Butcher
-161 C Snakeform
-43 U Soot Imp
-44 C Soul Reap
-45 U Soul Snuffers
-14 R Spirit of the Hearth
-147 U Spitemare
-162 R Spitting Image
-179 R Springjack Pasture
-15 U Springjack Shepherd
-129 U Stalker Hag
-62 R Stigma Lasher
-95 R Stillmoon Cavalier
-113 C Stream Hopper
-163 U Sturdy Hatchling
-16 U Suture Spirit
-76 U Swirling Spriggan
-46 U Syphon Life
-47 C Talara's Bane
-77 R Talara's Battalion
-30 U Talonrend
-63 R Thunderblust
-78 C Tilling Treefolk
-164 C Trapjaw Kelpie
-180 R Twilight Mire
-79 U Twinblade Slasher
-48 R Umbra Stalker
-96 C Unmake
-114 U Unnerving Assault
-64 U Unwilling Recruit
-97 U Voracious Hatchling
-31 R Wake Thrasher
-174 R Ward of Bones
-148 R Waves of Aggression
-80 C Wickerbough Elder
-32 C Wilderness Hypnotist
-165 U Wistful Selkie
-130 C Woodlurker Mimic
-131 R Worm Harvest
+65 C Aerie Ouphes @Jesper Ejsing
+166 R Altar Golem @Rob Alexander
+167 C Antler Skulkin @Dave Kendall
+1 R Archon of Justice @Jason Chan
+33 R Ashling, the Extinguisher @Wayne Reynolds
+132 R Balefire Liege @Ralph Horsley
+2 C Ballynock Trapper @Randy Gallegos
+17 C Banishing Knack @Howard Lyon
+133 C Battlegate Mimic @Franz Vohwinkel
+81 U Batwing Brume @Richard Kane Ferguson
+82 C Beckon Apparition @Larry MacDougall
+134 U Belligerent Hatchling @Steve Prescott
+83 U Bloodied Ghost @Mike Dringenberg
+66 R Bloom Tender @Chippy
+18 U Cache Raiders @Pete Venters
+98 R Call the Skybreaker @Randy Gallegos
+115 U Canker Abomination @Brandon Kitkouski
+116 U Cankerous Thirst @Carl Frank
+175 R Cascade Bluffs @Brandon Kitkouski
+84 U Cauldron Haze @Brandon Kitkouski
+3 C Cenn's Enlistment @Matt Cavotta
+49 U Chaotic Backlash @Carl Frank
+50 C Cinder Pyromancer @Greg Staples
+99 C Clout of the Dominus @Jaime Jones
+149 R Cold-Eyed Selkie @Jaime Jones
+100 R Crackleburr @Mike Dringenberg
+101 U Crag Puca @John Howe (Lorywn)
+34 U Creakwood Ghoul @Thomas M. Baxa
+117 R Creakwood Liege @Cole Eastburn
+35 U Crumbling Ashes @Chuck Lukacs
+85 R Deathbringer Liege @Drew Tucker
+118 R Deity of Scars @Steve Prescott
+119 C Desecrator Hag @Fred Harper
+86 R Divinity of Pride @Greg Staples
+102 R Dominus of Fealty @Kev Walker
+120 R Doomgape @Dave Allsop
+135 C Double Cleave @rk post
+121 C Drain the Well @Warren Mahy
+19 U Dream Fracture @Howard Lyon
+20 C Dream Thief @Howard Lyon
+136 C Duergar Assailant @Paul Bonner
+51 U Duergar Cave-Guard @Dave Allsop
+137 U Duergar Hedge-Mage @Dave Allsop
+138 U Duergar Mine-Captain @Matt Cavotta
+67 U Duskdale Wurm @Dan Dos Santos
+87 C Edge of the Divinity @Dan Scott
+4 R Endless Horizons @Joshua Hagler
+5 U Endure @Ralph Horsley
+88 R Evershrike @Dan Dos Santos
+150 R Fable of Wolf and Owl @Heather Hudson
+168 C Fang Skulkin @Ron Brown
+151 C Favor of the Overbeing @Chippy
+176 R Fetid Heath @Daarken
+52 R Fiery Bombardment @Nils Hamm
+139 R Figure of Destiny @Scott M. Fischer
+140 C Fire at Will @Pete Venters
+53 C Flame Jab @rk post
+6 U Flickerwisp @Jeremy Enecio
+177 R Flooded Grove @Dave Kendall
+122 C Gift of the Deity @Steve Prescott
+152 U Gilder Bairn @Nils Hamm
+21 R Glamerdye @Ralph Horsley
+22 R Glen Elendra Archmage @Warren Mahy
+153 C Grazing Kelpie @Drew Tucker
+154 U Groundling Pouncer @Richard Whitters
+89 U Gwyllion Hedge-Mage @Todd Lockwood
+123 U Hag Hedge-Mage @Scott Altmann
+7 R Hallowed Burial @Dave Kendall
+90 C Harvest Gwyllion @Nils Hamm
+54 U Hatchet Bully @Paul Bonner
+55 R Hateflayer @Thomas M. Baxa
+141 U Hearthfire Hobgoblin @Steven Belledin
+56 C Heartlash Cinder @Steve Prescott
+68 R Helix Pinnacle @Dan Scott
+142 C Hobgoblin Dragoon @Matt Cavotta
+169 C Hoof Skulkin @Joshua Hagler
+57 C Hotheaded Giant @Fred Harper
+23 U Idle Thoughts @Steven Belledin
+58 U Impelled Giant @Mark Zug
+24 U Indigo Faerie @Steve Prescott
+103 C Inside Out @Zoltan Boros & Gabor Szikszai
+25 R Inundate @Mark Zug
+155 U Invert the Skies @Randy Gallegos
+170 C Jawbone Skulkin @Jeff Easley
+8 C Kithkin Spellduster @Trevor Hairsine
+9 C Kithkin Zealot @Scott Altmann
+171 R Leering Emblem @Ron Brown
+10 R Light from Within @Aleksi Briclot
+36 U Lingering Tormentor @Joshua Hagler
+11 U Loyal Gyrfalcon @Darrell Riche
+69 U Marshdrinker Giant @Daarken
+37 C Merrow Bonegnawer @Jim Nelson
+26 C Merrow Levitator @Jim Pavelec
+104 R Mindwrack Liege @Richard Whitters
+105 R Mirror Sheen @John Avon
+70 C Monstrify @Lars Grant-West
+143 U Moonhold @Mike Dringenberg
+156 R Murkfiend Liege @Carl Critchlow
+38 R Necroskitter @Jaime Jones
+39 R Needle Specter @Christopher Moeller
+71 C Nettle Sentinel @Kev Walker
+40 R Nightmare Incursion @Chuck Lukacs
+91 C Nightsky Mimic @Franz Vohwinkel
+92 C Nip Gwyllion @Alex Horley-Orlandelli
+144 R Nobilis of War @Christopher Moeller
+106 C Noggle Bandit @Thomas Denmark
+107 C Noggle Bridgebreaker @Thomas M. Baxa
+108 U Noggle Hedge-Mage @Larry MacDougall
+109 U Noggle Ransacker @Alex Horley-Orlandelli
+124 U Noxious Hatchling @Nils Hamm
+110 U Nucklavee @Trevor Hairsine
+125 C Odious Trow @Warren Mahy
+27 C Oona's Grace @Rebecca Guay
+59 U Outrage Shaman @Cole Eastburn
+157 R Overbeing of Myth @Chippy
+12 U Patrol Signaler @Steve Prescott
+72 U Phosphorescent Feast @Ron Spencer
+73 R Primalcrux @Wayne Reynolds
+60 C Puncture Blast @Carl Critchlow
+93 R Pyrrhic Revival @Richard Kane Ferguson
+126 U Quillspike @Carl Critchlow
+41 C Raven's Crime @Warren Mahy
+28 U Razorfin Abolisher @William O'Connor
+13 C Recumbent Bliss @Todd Lockwood
+74 R Regal Force @Brandon Kitkouski
+61 R Rekindled Flame @Zoltan Boros & Gabor Szikszai
+127 C Rendclaw Trow @Warren Mahy
+94 U Restless Apparition @Jeff Easley
+145 R Rise of the Hobgoblins @Jeff Miracola
+111 C Riverfall Mimic @Franz Vohwinkel
+178 R Rugged Prairie @Fred Fields
+29 R Sanity Grinding @Lars Grant-West
+128 R Sapling of Colfenor @John Avon
+75 U Savage Conception @William O'Connor
+172 R Scarecrone @Jesper Ejsing
+146 C Scourge of the Nobilis @Dan Scott
+158 U Selkie Hedge-Mage @Larry MacDougall
+173 C Shell Skulkin @Cole Eastburn
+159 C Shorecrasher Mimic @Franz Vohwinkel
+112 U Shrewd Hatchling @Carl Frank
+160 C Slippery Bogle @Dave Allsop
+42 C Smoldering Butcher @Zoltan Boros & Gabor Szikszai
+161 C Snakeform @Jim Nelson
+43 U Soot Imp @Jesper Ejsing
+44 C Soul Reap @Izzy
+45 U Soul Snuffers @Izzy
+14 R Spirit of the Hearth @Jason Chan
+147 U Spitemare @Matt Cavotta
+162 R Spitting Image @Jim Nelson
+179 R Springjack Pasture @Terese Nielsen
+15 U Springjack Shepherd @Thomas Denmark
+129 U Stalker Hag @Dave Kendall
+62 R Stigma Lasher @Aleksi Briclot
+95 R Stillmoon Cavalier @Christopher Moeller
+113 C Stream Hopper @Dave Allsop
+163 U Sturdy Hatchling @Darrell Riche
+16 U Suture Spirit @Larry MacDougall
+76 U Swirling Spriggan @Thomas M. Baxa
+46 U Syphon Life @Dan Seagrave
+47 C Talara's Bane @Joshua Hagler
+77 R Talara's Battalion @Todd Lockwood
+30 U Talonrend @Nils Hamm
+63 R Thunderblust @Dan Scott
+78 C Tilling Treefolk @rk post
+164 C Trapjaw Kelpie @Lars Grant-West
+180 R Twilight Mire @Rob Alexander
+79 U Twinblade Slasher @Trevor Hairsine
+48 R Umbra Stalker @Daarken
+96 C Unmake @Steven Belledin
+114 U Unnerving Assault @Ron Spencer
+64 U Unwilling Recruit @Dave Allsop
+97 U Voracious Hatchling @Jeremy Enecio
+31 R Wake Thrasher @Jesper Ejsing
+174 R Ward of Bones @David Martin
+148 R Waves of Aggression @Jim Pavelec
+80 C Wickerbough Elder @Jesper Ejsing
+32 C Wilderness Hypnotist @Rebecca Guay
+165 U Wistful Selkie @Mark Tedin
+130 C Woodlurker Mimic @Franz Vohwinkel
+131 R Worm Harvest @Chuck Lukacs
 
 [tokens]
 w_0_1_goat

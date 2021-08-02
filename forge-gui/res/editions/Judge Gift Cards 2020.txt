@@ -6,13 +6,13 @@ Type=Promo
 ScryfallCode=J20
 
 [cards]
-1 R Arena Rector
-2 R Enlightened Tutor
-3 R Spellseeker
-4 R Demonic Tutor
-5 R Infernal Tutor
-6 R Gamble
-7 R Birthing Pod
-8 R Sylvan Tutor
-9 R Sterling Grove
-10 R Eye of Ugin
+1 R Arena Rector @Jason Rainville
+2 R Enlightened Tutor @Aaron Miller
+3 R Spellseeker @Anna Podedworna
+4 R Demonic Tutor @Anna Steinbauer
+5 R Infernal Tutor @Jason A. Engle
+6 R Gamble @Rudy Siswanto
+7 R Birthing Pod @Titus Lunter
+8 R Sylvan Tutor @Iris Compiet
+9 R Sterling Grove @Seb McKinnon
+10 R Eye of Ugin @Daniel Ljunggren

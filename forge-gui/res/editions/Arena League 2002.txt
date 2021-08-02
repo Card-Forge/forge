@@ -6,8 +6,8 @@ Type=Promo
 ScryfallCode=PAL02
 
 [cards]
-1 R Island
-2 R Man-o'-War
-3 R Arc Lightning
-4 R Dauthi Slayer
-5 R Mana Leak
+1 R Island @Mark Poole
+2 R Man-o'-War @Jon J Muth
+3 R Arc Lightning @Andrew Goldhawk
+4 R Dauthi Slayer @Dermot Power
+5 R Mana Leak @Christopher Rush

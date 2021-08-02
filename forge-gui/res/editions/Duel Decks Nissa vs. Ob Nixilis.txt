@@ -8,76 +8,76 @@ Type=Duel_Deck
 ScryfallCode=DDR
 
 [cards]
-1 M Nissa, Voice of Zendikar
-2 R Abundance
-3 U Briarhorn
-4 C Citanul Woodreaders
-5 C Civic Wayfinder
-6 R Cloudthresher
-7 C Crop Rotation
-8 C Elvish Visionary
-9 C Fertilid
-10 U Gaea's Blessing
-11 C Gilt-Leaf Seer
-12 U Jaddi Lifestrider
-13 C Natural Connection
-14 C Nissa's Chosen
-15 C Oakgnarl Warrior
-16 R Oran-Rief Hydra
-17 C Oran-Rief Invoker
-18 C Saddleback Lagac
-19 U Scythe Leopard
-20 U Seek the Horizon
-21 R Thicket Elemental
-22 C Thornweald Archer
-23 C Vines of the Recluse
-24 U Walker of the Grove
-25 C Wood Elves
-26 U Woodborn Behemoth
-27 C Fertile Thicket
-28 C Khalni Garden
-29 R Mosswort Bridge
-30 U Treetop Village
-31 L Forest
-32 L Forest
-33 L Forest
-34 L Forest
-35 L Forest
-36 M Ob Nixilis Reignited
-37 C Altar's Reap
-38 U Ambition's Cost
-39 C Bala Ged Scorpion
-40 C Blistergrub
-41 C Cadaver Imp
-42 U Carrier Thrall
-43 C Demon's Grasp
-44 R Desecration Demon
-45 R Despoiler of Souls
-46 C Disfigure
-47 U Doom Blade
-48 C Fetid Imp
-49 C Foul Imp
-50 C Giant Scorpion
-51 C Grim Discovery
-52 C Hideous End
-53 R Indulgent Tormentor
-54 C Innocent Blood
-55 C Mire's Toll
-56 R Pestilence Demon
-57 R Priest of the Blood Rite
-58 U Quest for the Gravelord
-59 C Renegade Demon
-60 U Shadows of the Past
-61 U Smallpox
-62 U Squelching Leeches
-63 C Tendrils of Corruption
-64 C Unhallowed Pact
-65 U Leechridden Swamp
-66 L Swamp
-67 L Swamp
-68 L Swamp
-69 L Swamp
-70 L Swamp
+1 M Nissa, Voice of Zendikar @Raymond Swanland
+2 R Abundance @Rebecca Guay
+3 U Briarhorn @Nils Hamm
+4 C Citanul Woodreaders @Steven Belledin
+5 C Civic Wayfinder @Cyril Van Der Haegen
+6 R Cloudthresher @Christopher Moeller
+7 C Crop Rotation @Daniel Ljunggren
+8 C Elvish Visionary @D. Alexander Gregory
+9 C Fertilid @Wayne Reynolds
+10 U Gaea's Blessing @Rebecca Guay
+11 C Gilt-Leaf Seer @Darrell Riche
+12 U Jaddi Lifestrider @Vincent Proce
+13 C Natural Connection @Wesley Burt
+14 C Nissa's Chosen @Jaime Jones
+15 C Oakgnarl Warrior @Jim Nelson
+16 R Oran-Rief Hydra @Chris Rahn
+17 C Oran-Rief Invoker @Anastasia Ovchinnikova
+18 C Saddleback Lagac @Jason Kang
+19 U Scythe Leopard @Daniel Ljunggren
+20 U Seek the Horizon @Min Yum
+21 R Thicket Elemental @Ron Spencer
+22 C Thornweald Archer @Dave Kendall
+23 C Vines of the Recluse @Dan Scott
+24 U Walker of the Grove @Todd Lockwood
+25 C Wood Elves @Josh Hass
+26 U Woodborn Behemoth @Matt Stewart
+27 C Fertile Thicket @Andreas Rocha
+28 C Khalni Garden @Ryan Pancoast
+29 R Mosswort Bridge @Jeremy Jarvis
+30 U Treetop Village @Rob Alexander
+31 L Forest @Noah Bradley
+32 L Forest @Sam Burley
+33 L Forest @Adam Paquette
+34 L Forest @Vincent Proce
+35 L Forest @Tianhua X
+36 M Ob Nixilis Reignited @Raymond Swanland
+37 C Altar's Reap @Tyler Jacobson
+38 U Ambition's Cost @Zezhou Chen
+39 C Bala Ged Scorpion @Daarken
+40 C Blistergrub @Daarken
+41 C Cadaver Imp @Dave Kendall
+42 U Carrier Thrall @Lius Lasahido
+43 C Demon's Grasp @David Gaillet
+44 R Desecration Demon @Jason Chan
+45 R Despoiler of Souls @Greg Staples
+46 C Disfigure @Justin Sweet
+47 U Doom Blade @Raymond Swanland
+48 C Fetid Imp @Nils Hamm
+49 C Foul Imp @Kev Walker
+50 C Giant Scorpion @Raymond Swanland
+51 C Grim Discovery @Christopher Moeller
+52 C Hideous End @Zoltan Boros & Gabor Szikszai
+53 R Indulgent Tormentor @Wesley Burt
+54 C Innocent Blood @Carl Critchlow
+55 C Mire's Toll @Alex Horley-Orlandelli
+56 R Pestilence Demon @Justin Sweet
+57 R Priest of the Blood Rite @David Palumbo
+58 U Quest for the Gravelord @Chris Rahn
+59 C Renegade Demon @Tomasz Jedruszek
+60 U Shadows of the Past @Ryan Yee
+61 U Smallpox @Ryan Pancoast
+62 U Squelching Leeches @Svetlin Velinov
+63 C Tendrils of Corruption @Vance Kovacs
+64 C Unhallowed Pact @Volkan Baǵa
+65 U Leechridden Swamp @Lars Grant-West
+66 L Swamp @Noah Bradley
+67 L Swamp @Sam Burley
+68 L Swamp @Adam Paquette
+69 L Swamp @Jung Park
+70 L Swamp @Tianhua X
 
 [tokens]
 c_1_1_eldrazi_scion_sac

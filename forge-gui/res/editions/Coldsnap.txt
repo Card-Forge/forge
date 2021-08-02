@@ -12,161 +12,161 @@ FatPackExtraSlots=40 BasicLands
 ScryfallCode=CSP
 
 [cards]
-1 R Adarkar Valkyrie
-26 U Adarkar Windform
-101 R Allosaurus Rider
-143 U Arctic Flats
-102 U Arctic Nishoba
-27 R Arcum Dagsson
-103 C Aurochs Herd
-51 U Balduvian Fallen
-28 U Balduvian Frostwaker
-76 U Balduvian Rage
-77 U Balduvian Warlord
-126 U Blizzard Specter
-104 C Boreal Centaur
-105 C Boreal Druid
-2 C Boreal Griffin
-144 U Boreal Shelf
-78 R Braid of Fire
-106 R Brooding Saurian
-107 C Bull Aurochs
-52 C Chill to the Bone
-53 C Chilling Shade
-136 U Coldsteel Heart
-29 R Commandeer
-30 U Controvert
-31 U Counterbalance
-3 R Cover of Winter
-79 U Cryoclasm
-4 R Darien, King of Kjeldor
-145 R Dark Depths
-54 U Deathmark
-127 U Deepfire Elemental
-128 R Diamond Faerie
-55 C Disciple of Tevesh Szat
-32 C Drelnoch
-80 U Earthen Goo
-56 C Feast of Flesh
-5 R Field Marshal
-33 U Flashfreeze
-108 U Freyalise's Radiance
-146 U Frost Marsh
-34 C Frost Raptor
-109 C Frostweb Spider
-35 C Frozen Solid
-81 R Fury of the Horde
-129 R Garza Zol, Plague Queen
-57 R Garza's Assassin
-6 C Gelid Shackles
-7 U Glacial Plating
-82 C Goblin Furrier
-83 C Goblin Rimerunner
-84 U Greater Stone Spirit
-58 C Grim Harvest
-59 U Gristle Grinner
-60 C Gutless Ghoul
-61 R Haakon, Stromgald Scourge
-36 R Heidar, Rimewind Master
-62 R Herald of Leshrac
-110 R Hibernation's End
-147 U Highland Weald
-85 C Icefall
-111 C Into the North
-137 R Jester's Scepter
-37 R Jokulmorder
-8 U Jotun Grunt
-9 U Jotun Owl Keeper
-130 U Juniper Order Ranger
-86 R Karplusan Minotaur
-112 U Karplusan Strider
-87 C Karplusan Wolverine
-10 U Kjeldoran Gargoyle
-11 C Kjeldoran Javelineer
-12 C Kjeldoran Outrider
-13 C Kjeldoran War Cry
-38 C Krovikan Mist
-63 U Krovikan Rot
-64 C Krovikan Scoundrel
-39 U Krovikan Whispers
-88 R Lightning Serpent
-89 U Lightning Storm
-90 R Lovisa Coldeyes
-14 U Luminesce
-91 U Magmatic Core
-92 C Martyr of Ashes
-65 C Martyr of Bones
-40 C Martyr of Frost
-15 C Martyr of Sands
-113 C Martyr of Spores
-138 U Mishra's Bauble
-148 U Mouth of Ronom
-114 U Mystic Melting
-115 R Ohran Viper
-93 C Ohran Yeti
-94 C Orcish Bloodpainter
-116 R Panglacial Wurm
-41 U Perilous Research
-66 U Phobian Phantasm
-67 R Phyrexian Etchings
-139 U Phyrexian Ironfoot
-140 U Phyrexian Snowcrusher
-141 R Phyrexian Soulgorger
-117 U Resize
-68 U Rime Transfusion
-69 C Rimebound Dead
-42 R Rimefeather Owl
-118 U Rimehorn Aurochs
-95 R Rimescale Dragon
-43 U Rimewind Cryomancer
-44 C Rimewind Taskmage
-96 C Rite of Flame
-119 C Ronom Hulk
-45 C Ronom Serpent
-16 C Ronom Unicorn
-46 C Rune Snag
-149 R Scrying Sheets
-131 R Sek'Kuar, Deathkeeper
-120 R Shape of the Wiitigo
-121 U Sheltering Ancient
-122 C Simian Brawler
-97 C Skred
-155 C Snow-Covered Forest
-152 C Snow-Covered Island
-154 C Snow-Covered Mountain
-151 C Snow-Covered Plains
-153 C Snow-Covered Swamp
-70 R Soul Spike
-123 C Sound the Call
-17 C Squall Drifter
-98 U Stalking Yeti
-124 U Steam Spitter
-71 U Stromgald Crusader
-18 C Sun's Bounty
-19 R Sunscour
-47 C Surging AEther
-72 C Surging Dementia
-99 C Surging Flame
-125 C Surging Might
-20 C Surging Sentinels
-48 C Survivor of the Unseen
-21 C Swift Maneuver
-132 R Tamanoa
-49 C Thermal Flux
-100 C Thermopod
-142 R Thrumming Stone
-150 U Tresserhorn Sinks
-73 U Tresserhorn Skyknight
-22 U Ursine Fylgja
-133 U Vanish into Memory
-50 R Vexing Sphinx
-74 R Void Maw
-23 U Wall of Shards
-24 U White Shield Crusader
-134 U Wilderness Elemental
-25 R Woolly Razorback
-75 C Zombie Musher
-135 R Zur the Enchanter
+1 R Adarkar Valkyrie @Jeremy Jarvis
+26 U Adarkar Windform @Randy Gallegos
+101 R Allosaurus Rider @Daren Bader
+143 U Arctic Flats @John Avon
+102 U Arctic Nishoba @Dave Kendall
+27 R Arcum Dagsson @Pete Venters
+103 C Aurochs Herd @Darrell Riche
+51 U Balduvian Fallen @Dave Kendall
+28 U Balduvian Frostwaker @Stephen Tappin
+76 U Balduvian Rage @John Matson
+77 U Balduvian Warlord @Paolo Parente
+126 U Blizzard Specter @Hideaki Takamura
+104 C Boreal Centaur @Marcelo Vignali
+105 C Boreal Druid @Dan Dos Santos
+2 C Boreal Griffin @Cyril Van Der Haegen
+144 U Boreal Shelf @Heather Hudson
+78 R Braid of Fire @Cyril Van Der Haegen
+106 R Brooding Saurian @rk post
+107 C Bull Aurochs @Kev Walker
+52 C Chill to the Bone @Jim Murray
+53 C Chilling Shade @Jeff Nentrup
+136 U Coldsteel Heart @Mark Romanoski
+29 R Commandeer @John Matson
+30 U Controvert @Joel Thomas
+31 U Counterbalance @John Zeleznik
+3 R Cover of Winter @Wayne Reynolds
+79 U Cryoclasm @Zoltan Boros & Gabor Szikszai
+4 R Darien, King of Kjeldor @Michael Phillippi
+145 R Dark Depths @Stephan Martiniere
+54 U Deathmark @Jeremy Jarvis
+127 U Deepfire Elemental @Joel Thomas
+128 R Diamond Faerie @Heather Hudson
+55 C Disciple of Tevesh Szat @Pete Venters
+32 C Drelnoch @Zoltan Boros & Gabor Szikszai
+80 U Earthen Goo @Nick Percival
+56 C Feast of Flesh @Volkan Baǵa
+5 R Field Marshal @Stephen Tappin
+33 U Flashfreeze @Brian Despain
+108 U Freyalise's Radiance @Thomas M. Baxa
+146 U Frost Marsh @Jim Pavelec
+34 C Frost Raptor @Lars Grant-West
+109 C Frostweb Spider @Greg Hildebrandt
+35 C Frozen Solid @Ralph Horsley
+81 R Fury of the Horde @Stephen Tappin
+129 R Garza Zol, Plague Queen @Darrell Riche
+57 R Garza's Assassin @Paolo Parente
+6 C Gelid Shackles @Alex Horley-Orlandelli
+7 U Glacial Plating @Brian Despain
+82 C Goblin Furrier @Warren Mahy
+83 C Goblin Rimerunner @Christopher Rush
+84 U Greater Stone Spirit @Yokota Katsumi
+58 C Grim Harvest @Zoltan Boros & Gabor Szikszai
+59 U Gristle Grinner @Dave Allsop
+60 C Gutless Ghoul @Kensuke Okabayashi
+61 R Haakon, Stromgald Scourge @Mark Zug
+36 R Heidar, Rimewind Master @Ron Spears
+62 R Herald of Leshrac @Alex Horley-Orlandelli
+110 R Hibernation's End @Steven Belledin
+147 U Highland Weald @John Avon
+85 C Icefall @Warren Mahy
+111 C Into the North @Richard Sardinha
+137 R Jester's Scepter @Matt Cavotta
+37 R Jokulmorder @Mark Zug
+8 U Jotun Grunt @Franz Vohwinkel
+9 U Jotun Owl Keeper @Dave Dorman
+130 U Juniper Order Ranger @Greg Hildebrandt
+86 R Karplusan Minotaur @Wayne England
+112 U Karplusan Strider @Dan Scott
+87 C Karplusan Wolverine @Greg Hildebrandt
+10 U Kjeldoran Gargoyle @Marcelo Vignali
+11 C Kjeldoran Javelineer @Dave Dorman
+12 C Kjeldoran Outrider @Carl Critchlow
+13 C Kjeldoran War Cry @Michael Phillippi
+38 C Krovikan Mist @Jeremy Jarvis
+63 U Krovikan Rot @Michael Sutfin
+64 C Krovikan Scoundrel @Ralph Horsley
+39 U Krovikan Whispers @Nick Percival
+88 R Lightning Serpent @John Avon
+89 U Lightning Storm @Luca Zontini
+90 R Lovisa Coldeyes @Brian Snõddy
+14 U Luminesce @Daren Bader
+91 U Magmatic Core @Matt Cavotta
+92 C Martyr of Ashes @Ralph Horsley
+65 C Martyr of Bones @E. M. Gist
+40 C Martyr of Frost @Wayne England
+15 C Martyr of Sands @Randy Gallegos
+113 C Martyr of Spores @Dan Scott
+138 U Mishra's Bauble @Chippy
+148 U Mouth of Ronom @Daren Bader
+114 U Mystic Melting @Chippy
+115 R Ohran Viper @Kev Walker
+93 C Ohran Yeti @Wayne Reynolds
+94 C Orcish Bloodpainter @Alan Pollack
+116 R Panglacial Wurm @Jim Pavelec
+41 U Perilous Research @Dany Orizio
+66 U Phobian Phantasm @Steven Belledin
+67 R Phyrexian Etchings @Ron Spears
+139 U Phyrexian Ironfoot @Stephan Martiniere
+140 U Phyrexian Snowcrusher @Dave Allsop
+141 R Phyrexian Soulgorger @Brian Snõddy
+117 U Resize @Daren Bader
+68 U Rime Transfusion @Jeff Nentrup
+69 C Rimebound Dead @Dave Kendall
+42 R Rimefeather Owl @Kensuke Okabayashi
+118 U Rimehorn Aurochs @Brian Despain
+95 R Rimescale Dragon @Jeff Easley
+43 U Rimewind Cryomancer @Dan Scott
+44 C Rimewind Taskmage @Ron Spears
+96 C Rite of Flame @Dany Orizio
+119 C Ronom Hulk @Zoltan Boros & Gabor Szikszai
+45 C Ronom Serpent @Ron Spencer
+16 C Ronom Unicorn @Carl Critchlow
+46 C Rune Snag @Dave Dorman
+149 R Scrying Sheets @Thomas M. Baxa
+131 R Sek'Kuar, Deathkeeper @Jeff Miracola
+120 R Shape of the Wiitigo @Ron Spencer
+121 U Sheltering Ancient @Pete Venters
+122 C Simian Brawler @Warren Mahy
+97 C Skred @Christopher Moeller
+155 C Snow-Covered Forest @Jim Nelson
+152 C Snow-Covered Island @Franz Vohwinkel
+154 C Snow-Covered Mountain @John Zeleznik
+151 C Snow-Covered Plains @Mark Romanoski
+153 C Snow-Covered Swamp @Rob Alexander
+70 R Soul Spike @Wayne England
+123 C Sound the Call @Jim Nelson
+17 C Squall Drifter @Joel Thomas
+98 U Stalking Yeti @Brian Snõddy
+124 U Steam Spitter @Christopher Rush
+71 U Stromgald Crusader @Volkan Baǵa
+18 C Sun's Bounty @Michael Sutfin
+19 R Sunscour @Jim Murray
+47 C Surging Aether @Anthony S. Waters
+72 C Surging Dementia @Hideaki Takamura
+99 C Surging Flame @Ron Spencer
+125 C Surging Might @Luca Zontini
+20 C Surging Sentinels @Christopher Moeller
+48 C Survivor of the Unseen @Alan Pollack
+21 C Swift Maneuver @Michael Sutfin
+132 R Tamanoa @rk post
+49 C Thermal Flux @Jeff Miracola
+100 C Thermopod @Dan Dos Santos
+142 R Thrumming Stone @Rob Alexander
+150 U Tresserhorn Sinks @Darrell Riche
+73 U Tresserhorn Skyknight @Dan Dos Santos
+22 U Ursine Fylgja @Yokota Katsumi
+133 U Vanish into Memory @Rebekah Lynn
+50 R Vexing Sphinx @Lars Grant-West
+74 R Void Maw @E. M. Gist
+23 U Wall of Shards @Alex Horley-Orlandelli
+24 U White Shield Crusader @Jeff Easley
+134 U Wilderness Elemental @Anthony S. Waters
+25 R Woolly Razorback @Richard Sardinha
+75 C Zombie Musher @Kev Walker
+135 R Zur the Enchanter @Pete Venters
 
 [tokens]
 marit_lage

@@ -6,11 +6,11 @@ Type=Promo
 ScryfallCode=PDOM
 
 [cards]
-60 C Opt
-76 R Zahid, Djinn of the Lamp
-81 U Cast Down
-168 C Llanowar Elves
-182 R Steel Leaf Champion
-204 U Shanna, Sisay's Legacy
-249 U Zhalfirin Void
-33c U Serra Angel
+60 C Opt @Tyler Jacobson
+76 R Zahid, Djinn of the Lamp @Tyler Jacobson
+81 U Cast Down @Bastien L. Deharme
+168 C Llanowar Elves @Victor Adame Minguez
+182 R Steel Leaf Champion @Simon Dominic
+204 U Shanna, Sisay's Legacy @Magali Villeneuve
+249 U Zhalfirin Void @John Avon
+33c U Serra Angel @Scott M. Fischer

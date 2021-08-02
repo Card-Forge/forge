@@ -6,4 +6,4 @@ Type=Promo
 ScryfallCode=PCNS
 
 [cards]
-48★ R Magister of Worth
+48★ R Magister of Worth @rk post

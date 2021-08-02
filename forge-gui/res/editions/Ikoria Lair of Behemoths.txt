@@ -12,403 +12,403 @@ FatPackExtraSlots=20 BasicLands, 20 BasicLands+, 1 Colossification+|IKO|3
 ScryfallCode=IKO
 
 [cards]
-1 C Adaptive Shimmerer
-2 C Farfinder
-3 C Mysterious Egg
-4 C Blade Banish
-5 C Checkpoint Officer
-6 C Coordinated Charge
-7 R Cubwarden
-8 C Daysquad Marshal
-9 C Divine Arrow
-10 C Drannith Healer
-11 R Drannith Magistrate
-12 U Fight as One
-13 U Flourishing Fox
-14 C Garrison Cat
-15 C Helica Glider
-16 U Huntmaster Liger
-17 C Imposing Vantasaur
-18 U Keensight Mentor
-19 R Lavabrink Venturer
-20 C Light of Hope
-21 M Luminous Broodmoth
-22 U Majestic Auricorn
-23 C Maned Serval
-24 R Mythos of Snapdax
-25 C Pacifism
-26 C Patagia Tiger
-27 C Perimeter Sergeant
-28 U Sanctuary Lockdown
-29 C Savai Sabertooth
-30 C Snare Tactician
-31 C Solid Footing
-32 U Splendor Mare
-33 C Spontaneous Flight
-34 U Stormwild Capridor
-35 U Swallow Whole
-36 U Valiant Rescuer
-37 C Vulpikeet
-38 U Will of the All-Hunter
-39 C Aegis Turtle
-40 C Anticipate
-41 U Archipelagore
-42 U Avian Oddity
-43 U Boon of the Wish-Giver
-44 C Capture Sphere
-45 C Convolute
-46 C Crystacean
-47 C Dreamtail Heron
-48 U Escape Protocol
-49 C Essence Scatter
-50 C Facet Reader
-51 C Frost Lynx
-52 C Frostveil Ambush
-53 C Glimmerbell
-54 C Gust of Wind
-55 C Hampering Snare
-56 C Keep Safe
-57 U Mystic Subdual
-58 R Mythos of Illuna
-59 U Neutralize
-60 C Of One Mind
-61 U Ominous Seas
-62 C Phase Dolphin
-63 U Pollywog Symbiote
-64 U Pouncing Shoreshark
-65 U Reconnaissance Mission
-66 R Sea-Dasher Octopus
-67 R Shark Typhoon
-68 C Startling Development
-69 C Thieving Otter
-70 R Voracious Greatshark
-71 C Wingfold Pteron
-72 U Wingspan Mentor
-73 U Bastion of Remembrance
-74 C Blitz Leech
-75 C Blood Curdle
-76 C Boot Nipper
-77 C Bushmeat Poacher
-78 U Call of the Death-Dweller
-79 C Cavern Whisperer
-80 U Chittering Harvester
-81 C Corpse Churn
-82 C Dark Bargain
-83 C Dead Weight
-84 R Dirge Bat
-85 C Durable Coilbug
-86 U Duskfang Mentor
-87 U Easy Prey
-88 R Extinction Event
-89 C Gloom Pangolin
-90 U Grimdancer
-91 U Heartless Act
-92 R Hunted Nightmare
-93 U Insatiable Hemophage
-94 C Lurking Deadeye
-95 C Memory Leak
-96 C Mutual Destruction
-97 R Mythos of Nethroi
-98 C Nightsquad Commando
-99 C Serrated Scorpion
-100 C Suffocating Fumes
-101 U Unbreakable Bond
-102 C Unexpected Fangs
-103 C Unlikely Aid
-104 U Void Beckoner
-105 C Whisper Squad
-106 U Zagoth Mamba
-107 C Blazing Volley
-108 C Blisterspit Gremlin
-109 U Blitz of the Thunder-Raptor
-110 C Cathartic Reunion
-111 U Clash of Titans
-112 C Cloudpiercer
-113 C Drannith Stinger
-114 R Everquill Phoenix
-115 C Ferocious Tigorilla
-116 C Fire Prophecy
-117 U Flame Spill
-118 U Footfall Crater
-119 C Forbidden Friendship
-120 C Frenzied Raptor
-121 U Frillscare Mentor
-122 C Go for Blood
-123 C Heightened Reflexes
-124 C Lava Serpent
-125 M Lukka, Coppercoat Outcast
-126 U Momentum Rumbler
-127 R Mythos of Vadrok
-128 U Porcuparrot
-129 C Prickly Marmoset
-130 C Pyroceratops
-131 C Raking Claws
-132 U Reptilian Reflection
-133 U Rooting Moloch
-134 C Rumbling Rockslide
-135 U Sanctuary Smasher
-136 C Shredded Sails
-137 C Spelleater Wolverine
-138 C Tentative Connection
-139 R Unpredictable Cyclone
-140 U Weaponize the Monsters
-141 R Yidaro, Wandering Monster
-142 C Adventurous Impulse
-143 C Almighty Brushwagg
-144 U Auspicious Starrix
-145 U Barrier Breach
-146 C Bristling Boar
-147 U Charge of the Forever-Beast
-148 R Colossification
-149 C Essence Symbiote
-150 C Excavation Mole
-151 U Exuberant Wolfbear
-152 C Fertilid
-153 C Flycatcher Giraffid
-154 C Fully Grown
-155 R Gemrazer
-156 U Glowstone Recluse
-157 C Greater Sandwurm
-158 C Honey Mammoth
-159 U Hornbash Mentor
-160 C Humble Naturalist
-161 U Ivy Elemental
-162 R Kogla, the Titan Ape
-163 U Lead the Stampede
-164 U Migration Path
-165 C Migratory Greathorn
-166 U Monstrous Step
-167 C Mosscoat Goriak
-168 R Mythos of Brokkos
-169 C Plummet
-170 C Ram Through
-171 C Sudden Spinnerets
-172 C Survivors' Bond
-173 C Thwart the Enemy
-174 U Titanoth Rex
-175 M Vivien, Monsters' Advocate
-176 C Wilt
-177 U Back for More
-178 U Boneyard Lurker
-179 M Brokkos, Apex of Forever
-180 U Channeled Force
-181 M Chevill, Bane of Monsters
-182 R Death's Oasis
-183 U Dire Tactics
-184 R Eerie Ultimatum
-185 R Emergent Ultimatum
-186 R Frondland Felidar
-187 M General Kudro of Drannith
-188 U General's Enforcer
-189 R Genesis Ultimatum
-190 M Illuna, Apex of Wishes
-191 R Inspired Ultimatum
-192 M Kinnan, Bonder Prodigy
-193 R Labyrinth Raptor
-194 U Lore Drakkis
-195 M Narset of the Ancient Way
-196 U Necropanther
-197 M Nethroi, Apex of Death
-198 R Offspring's Revenge
-199 U Parcelbeast
-200 U Primal Empathy
-201 R Quartzwood Crasher
-202 U Regal Leosaur
-203 M Rielle, the Everwise
-204 R Ruinous Ultimatum
-205 U Savai Thundermane
-206 U Skull Prophet
-207 R Skycat Sovereign
-208 R Slitherwisp
-209 M Snapdax, Apex of the Hunt
-210 R Song of Creation
-211 U Sprite Dragon
-212 R Titans' Nest
-213 U Trumpeting Gnarr
-214 M Vadrok, Apex of Thunder
-215 R Whirlwind of Thought
-216 M Winota, Joiner of Forces
-217 U Zenith Flare
-218 U Alert Heedbonder
-219 U Cunning Nightbonder
-220 M Fiend Artisan
-221 R Gyruda, Doom of Depths
-222 R Jegantha, the Wellspring
-223 U Jubilant Skybonder
-224 R Kaheera, the Orphanguard
-225 R Keruga, the Macrosage
-226 R Lurrus of the Dream-Den
-227 R Lutri, the Spellchaser
-228 R Obosh, the Preypiercer
-229 U Proud Wildbonder
-230 U Sonorous Howlbonder
-231 R Umori, the Collector
-232 R Yorion, Sky Nomad
-233 R Zirda, the Dawnwaker
-234 R Crystalline Giant
-235 U Indatha Crystal
-236 U Ketria Crystal
-237 R The Ozolith
-238 U Raugrin Crystal
-239 U Savai Crystal
-240 C Sleeper Dart
-241 C Springjaw Trap
-242 U Zagoth Crystal
-243 C Bloodfell Caves
-244 C Blossoming Sands
-245 R Bonders' Enclave
-246 C Dismal Backwater
-247 C Evolving Wilds
-248 R Indatha Triome
-249 C Jungle Hollow
-250 R Ketria Triome
-251 R Raugrin Triome
-252 C Rugged Highlands
-253 R Savai Triome
-254 C Scoured Barrens
-255 C Swiftwater Cliffs
-256 C Thornwood Falls
-257 C Tranquil Cove
-258 C Wind-Scarred Crag
-259 R Zagoth Triome
-260 L Plains
-261 L Plains
-262 L Plains
-263 L Island
-264 L Island
-265 L Island
-266 L Swamp
-267 L Swamp
-268 L Swamp
-269 L Mountain
-270 L Mountain
-271 L Mountain
-272 L Forest
-273 L Forest
-274 L Forest
+1 C Adaptive Shimmerer @Jason Felix
+2 C Farfinder @Leesha Hannigan
+3 C Mysterious Egg @Volkan Baǵa
+4 C Blade Banish @Lie Setiawan
+5 C Checkpoint Officer @Manuel Castañón
+6 C Coordinated Charge @Zoltan Boros
+7 R Cubwarden @Kekai Kotaki
+8 C Daysquad Marshal @Micah Epstein
+9 C Divine Arrow @Slawomir Maniak
+10 C Drannith Healer @Scott Murphy
+11 R Drannith Magistrate @Kieran Yanner
+12 U Fight as One @Bryan Sola
+13 U Flourishing Fox @Ilse Gort
+14 C Garrison Cat @Sidharth Chaturvedi
+15 C Helica Glider @Jehan Choo
+16 U Huntmaster Liger @Leesha Hannigan
+17 C Imposing Vantasaur @Jonathan Kuo
+18 U Keensight Mentor @Yongjae Choi
+19 R Lavabrink Venturer @Zoltan Boros
+20 C Light of Hope @Kimonas Theodossiou
+21 M Luminous Broodmoth @Lie Setiawan
+22 U Majestic Auricorn @Jonathan Kuo
+23 C Maned Serval @Jonathan Kuo
+24 R Mythos of Snapdax @Seb McKinnon
+25 C Pacifism @Kev Walker
+26 C Patagia Tiger @Micah Epstein
+27 C Perimeter Sergeant @Stepan Alekseev
+28 U Sanctuary Lockdown @Lius Lasahido
+29 C Savai Sabertooth @Ilse Gort
+30 C Snare Tactician @Micah Epstein
+31 C Solid Footing @Wisnu Tan
+32 U Splendor Mare @Lucas Graciano
+33 C Spontaneous Flight @Gabor Szikszai
+34 U Stormwild Capridor @Dmitry Burmak
+35 U Swallow Whole @Svetlin Velinov
+36 U Valiant Rescuer @Bram Sels
+37 C Vulpikeet @Leesha Hannigan
+38 U Will of the All-Hunter @Viktor Titov
+39 C Aegis Turtle @Milivoj Ćeran
+40 C Anticipate @Kieran Yanner
+41 U Archipelagore @Svetlin Velinov
+42 U Avian Oddity @Simon Dominic
+43 U Boon of the Wish-Giver @Chris Rahn
+44 C Capture Sphere @Jakub Kasper
+45 C Convolute @Jason Rainville
+46 C Crystacean @Mathias Kollros
+47 C Dreamtail Heron @Caio Monteiro
+48 U Escape Protocol @Deruchenko Alexander
+49 C Essence Scatter @Seb McKinnon
+50 C Facet Reader @Matt Stewart
+51 C Frost Lynx @Ilse Gort
+52 C Frostveil Ambush @Johan Grenier
+53 C Glimmerbell @Simon Dominic
+54 C Gust of Wind @Adam Paquette
+55 C Hampering Snare @Svetlin Velinov
+56 C Keep Safe @Ekaterina Burmak
+57 U Mystic Subdual @Filip Burburan
+58 R Mythos of Illuna @Seb McKinnon
+59 U Neutralize @Yongjae Choi
+60 C Of One Mind @Matt Stewart
+61 U Ominous Seas @Vincent Proce
+62 C Phase Dolphin @Lie Setiawan
+63 U Pollywog Symbiote @Simon Dominic
+64 U Pouncing Shoreshark @Dan Scott
+65 U Reconnaissance Mission @Johannes Voss
+66 R Sea-Dasher Octopus @Chris Seaman
+67 R Shark Typhoon @Caio Monteiro
+68 C Startling Development @Simon Dominic
+69 C Thieving Otter @Jakub Kasper
+70 R Voracious Greatshark @Mathias Kollros
+71 C Wingfold Pteron @Johann Bodin
+72 U Wingspan Mentor @Sidharth Chaturvedi
+73 U Bastion of Remembrance @Volkan Baǵa
+74 C Blitz Leech @Nicholas Gregory
+75 C Blood Curdle @Antonio José Manzanedo
+76 C Boot Nipper @Nicholas Gregory
+77 C Bushmeat Poacher @Randy Vargas
+78 U Call of the Death-Dweller @Vincent Proce
+79 C Cavern Whisperer @Antonio José Manzanedo
+80 U Chittering Harvester @Grzegorz Rutkowski
+81 C Corpse Churn @Lars Grant-West
+82 C Dark Bargain @Scott Murphy
+83 C Dead Weight @Kev Walker
+84 R Dirge Bat @Paul Scott Canavan
+85 C Durable Coilbug @Milivoj Ćeran
+86 U Duskfang Mentor @Livia Prima
+87 U Easy Prey @Ekaterina Burmak
+88 R Extinction Event @Filip Burburan
+89 C Gloom Pangolin @YW Tang
+90 U Grimdancer @Randy Vargas
+91 U Heartless Act @Ryan Pancoast
+92 R Hunted Nightmare @Antonio José Manzanedo
+93 U Insatiable Hemophage @Antonio José Manzanedo
+94 C Lurking Deadeye @Livia Prima
+95 C Memory Leak @Karl Kopinski
+96 C Mutual Destruction @PINDURSKI
+97 R Mythos of Nethroi @Seb McKinnon
+98 C Nightsquad Commando @Evyn Fong
+99 C Serrated Scorpion @Chris Seaman
+100 C Suffocating Fumes @Anastasia Ovchinnikova
+101 U Unbreakable Bond @Randy Vargas
+102 C Unexpected Fangs @Jesper Ejsing
+103 C Unlikely Aid @Randy Vargas
+104 U Void Beckoner @Daarken
+105 C Whisper Squad @Stepan Alekseev
+106 U Zagoth Mamba @Yeong-Hao Han
+107 C Blazing Volley @Heonhwa Choe
+108 C Blisterspit Gremlin @Simon Dominic
+109 U Blitz of the Thunder-Raptor @Zack Stella
+110 C Cathartic Reunion @Jakub Kasper
+111 U Clash of Titans @Viktor Titov
+112 C Cloudpiercer @Dan Scott
+113 C Drannith Stinger @Denman Rooke
+114 R Everquill Phoenix @Lie Setiawan
+115 C Ferocious Tigorilla @Antonio José Manzanedo
+116 C Fire Prophecy @Kieran Yanner
+117 U Flame Spill @Zoltan Boros
+118 U Footfall Crater @Ravenna Tran
+119 C Forbidden Friendship @Jakub Kasper
+120 C Frenzied Raptor @Jonathan Kuo
+121 U Frillscare Mentor @Jason A. Engle
+122 C Go for Blood @Chris Rallis
+123 C Heightened Reflexes @Caio Monteiro
+124 C Lava Serpent @Jason A. Engle
+125 M Lukka, Coppercoat Outcast @Chris Rallis
+126 U Momentum Rumbler @Andrey Kuzinskiy
+127 R Mythos of Vadrok @Seb McKinnon
+128 U Porcuparrot @Chris Seaman
+129 C Prickly Marmoset @Simon Dominic
+130 C Pyroceratops @Jason A. Engle
+131 C Raking Claws @Slawomir Maniak
+132 U Reptilian Reflection @Antonio José Manzanedo
+133 U Rooting Moloch @Andrey Kuzinskiy
+134 C Rumbling Rockslide @Adam Paquette
+135 U Sanctuary Smasher @Mathias Kollros
+136 C Shredded Sails @Titus Lunter
+137 C Spelleater Wolverine @Uriah Voth
+138 C Tentative Connection @Kieran Yanner
+139 R Unpredictable Cyclone @Noah Bradley
+140 U Weaponize the Monsters @Magali Villeneuve
+141 R Yidaro, Wandering Monster @Jesper Ejsing
+142 C Adventurous Impulse @Victor Adame Minguez
+143 C Almighty Brushwagg @Dmitry Burmak
+144 U Auspicious Starrix @Lucas Graciano
+145 U Barrier Breach @Mathias Kollros
+146 C Bristling Boar @Zezhou Chen
+147 U Charge of the Forever-Beast @Filip Burburan
+148 R Colossification @Johan Grenier
+149 C Essence Symbiote @Jason Felix
+150 C Excavation Mole @Lars Grant-West
+151 U Exuberant Wolfbear @Jesper Ejsing
+152 C Fertilid @Nicholas Gregory
+153 C Flycatcher Giraffid @Dan Scott
+154 C Fully Grown @Dmitry Burmak
+155 R Gemrazer @Svetlin Velinov
+156 U Glowstone Recluse @Yeong-Hao Han
+157 C Greater Sandwurm @Grzegorz Rutkowski
+158 C Honey Mammoth @Lars Grant-West
+159 U Hornbash Mentor @Wisnu Tan
+160 C Humble Naturalist @Matt Stewart
+161 U Ivy Elemental @Uriah Voth
+162 R Kogla, the Titan Ape @Chris Rahn
+163 U Lead the Stampede @Lius Lasahido
+164 U Migration Path @Grzegorz Rutkowski
+165 C Migratory Greathorn @Filip Burburan
+166 U Monstrous Step @Chris Seaman
+167 C Mosscoat Goriak @Dan Scott
+168 R Mythos of Brokkos @Seb McKinnon
+169 C Plummet @Sidharth Chaturvedi
+170 C Ram Through @Zoltan Boros
+171 C Sudden Spinnerets @Nicholas Gregory
+172 C Survivors' Bond @Randy Vargas
+173 C Thwart the Enemy @Chris Rallis
+174 U Titanoth Rex @Svetlin Velinov
+175 M Vivien, Monsters' Advocate @Lius Lasahido
+176 C Wilt @Volkan Baǵa
+177 U Back for More @Daarken
+178 U Boneyard Lurker @Nils Hamm
+179 M Brokkos, Apex of Forever @Filip Burburan
+180 U Channeled Force @Randy Vargas
+181 M Chevill, Bane of Monsters @Yongjae Choi
+182 R Death's Oasis @Grzegorz Rutkowski
+183 U Dire Tactics @Daarken
+184 R Eerie Ultimatum @Jason A. Engle
+185 R Emergent Ultimatum @Zack Stella
+186 R Frondland Felidar @Steve Prescott
+187 M General Kudro of Drannith @Ryan Pancoast
+188 U General's Enforcer @Wisnu Tan
+189 R Genesis Ultimatum @Jason Rainville
+190 M Illuna, Apex of Wishes @Chris Rahn
+191 R Inspired Ultimatum @Tyler Jacobson
+192 M Kinnan, Bonder Prodigy @Jason Rainville
+193 R Labyrinth Raptor @Daarken
+194 U Lore Drakkis @Lucas Graciano
+195 M Narset of the Ancient Way @Yongjae Choi
+196 U Necropanther @Jason A. Engle
+197 M Nethroi, Apex of Death @Slawomir Maniak
+198 R Offspring's Revenge @Daarken
+199 U Parcelbeast @Milivoj Ćeran
+200 U Primal Empathy @Micah Epstein
+201 R Quartzwood Crasher @Antonio José Manzanedo
+202 U Regal Leosaur @Ilse Gort
+203 M Rielle, the Everwise @Yongjae Choi
+204 R Ruinous Ultimatum @Chase Stone
+205 U Savai Thundermane @Svetlin Velinov
+206 U Skull Prophet @Nils Hamm
+207 R Skycat Sovereign @Slawomir Maniak
+208 R Slitherwisp @Yigit Koroglu
+209 M Snapdax, Apex of the Hunt @Viktor Titov
+210 R Song of Creation @Noah Bradley
+211 U Sprite Dragon @Gabor Szikszai
+212 R Titans' Nest @Cliff Childs
+213 U Trumpeting Gnarr @Aaron Miller
+214 M Vadrok, Apex of Thunder @Zack Stella
+215 R Whirlwind of Thought @Bram Sels
+216 M Winota, Joiner of Forces @Magali Villeneuve
+217 U Zenith Flare @Jonas De Ro
+218 U Alert Heedbonder @Randy Vargas
+219 U Cunning Nightbonder @Ekaterina Burmak
+220 M Fiend Artisan @Yigit Koroglu
+221 R Gyruda, Doom of Depths @Tyler Jacobson
+222 R Jegantha, the Wellspring @Chris Rahn
+223 U Jubilant Skybonder @Jesper Ejsing
+224 R Kaheera, the Orphanguard @Ryan Pancoast
+225 R Keruga, the Macrosage @Dan Scott
+226 R Lurrus of the Dream-Den @Slawomir Maniak
+227 R Lutri, the Spellchaser @Lie Setiawan
+228 R Obosh, the Preypiercer @Daarken
+229 U Proud Wildbonder @Dmitry Burmak
+230 U Sonorous Howlbonder @Kimonas Theodossiou
+231 R Umori, the Collector @Jehan Choo
+232 R Yorion, Sky Nomad @Steven Belledin
+233 R Zirda, the Dawnwaker @Jesper Ejsing
+234 R Crystalline Giant @Jason Rainville
+235 U Indatha Crystal @Raoul Vitale
+236 U Ketria Crystal @Yeong-Hao Han
+237 R The Ozolith @Sam Burley
+238 U Raugrin Crystal @Kirsten Zirngibl
+239 U Savai Crystal @Daniel Ljunggren
+240 C Sleeper Dart @Sidharth Chaturvedi
+241 C Springjaw Trap @Zoltan Boros
+242 U Zagoth Crystal @Raoul Vitale
+243 C Bloodfell Caves @Titus Lunter
+244 C Blossoming Sands @Jonas De Ro
+245 R Bonders' Enclave @Cliff Childs
+246 C Dismal Backwater @Eytan Zana
+247 C Evolving Wilds @Jonas De Ro
+248 R Indatha Triome @Noah Bradley
+249 C Jungle Hollow @Jonas De Ro
+250 R Ketria Triome @Sam Burley
+251 R Raugrin Triome @Jonas De Ro
+252 C Rugged Highlands @Adam Paquette
+253 R Savai Triome @Titus Lunter
+254 C Scoured Barrens @Cliff Childs
+255 C Swiftwater Cliffs @Adam Paquette
+256 C Thornwood Falls @Adam Paquette
+257 C Tranquil Cove @Jonas De Ro
+258 C Wind-Scarred Crag @Titus Lunter
+259 R Zagoth Triome @Eytan Zana
+260 L Plains @Cliff Childs
+261 L Plains @Alayna Danner
+262 L Plains @Jesper Ejsing
+263 L Island @Alayna Danner
+264 L Island @Jesper Ejsing
+265 L Island @Nick Southam
+266 L Swamp @Alayna Danner
+267 L Swamp @Jesper Ejsing
+268 L Swamp @Svetlin Velinov
+269 L Mountain @Alayna Danner
+270 L Mountain @Jesper Ejsing
+271 L Mountain @Adam Paquette
+272 L Forest @Alayna Danner
+273 L Forest @Jesper Ejsing
+274 L Forest @Yeong-Hao Han
 
 [buy a box]
-275 M Zilortha, Strength Incarnate
+275 M Zilortha, Strength Incarnate @Antonio José Manzanedo
 
 [borderless]
-276 M Lukka, Coppercoat Outcast
-277 M Vivien, Monsters' Advocate
-278 M Narset of the Ancient Way
+276 M Lukka, Coppercoat Outcast @Kieran Yanner
+277 M Vivien, Monsters' Advocate @Kev Walker
+278 M Narset of the Ancient Way @Kev Walker
 
 [showcase]
-279 R Cubwarden
-280 U Huntmaster Liger
-281 U Majestic Auricorn
-282 C Vulpikeet
-283 U Archipelagore
-284 C Dreamtail Heron
-285 U Pouncing Shoreshark
-286 R Sea-Dasher Octopus
-287 C Cavern Whisperer
-288 U Chittering Harvester
-289 R Dirge Bat
-290 U Insatiable Hemophage
-291 C Cloudpiercer
-292 R Everquill Phoenix
-293 U Porcuparrot
-294 U Auspicious Starrix
-295 R Gemrazer
-296 U Glowstone Recluse
-297 C Migratory Greathorn
-298 U Boneyard Lurker
-299 M Brokkos, Apex of Forever
-300 M Illuna, Apex of Wishes
-301 U Lore Drakkis
-302 U Necropanther
-303 M Nethroi, Apex of Death
-304 U Parcelbeast
-305 U Regal Leosaur
-306 M Snapdax, Apex of the Hunt
-307 U Trumpeting Gnarr
-308 M Vadrok, Apex of Thunder
-309 R Indatha Triome
-310 R Ketria Triome
-311 R Raugrin Triome
-312 R Savai Triome
-313 R Zagoth Triome
+279 R Cubwarden @Denis Medri
+280 U Huntmaster Liger @Steve Ellis
+281 U Majestic Auricorn @Steve Ellis
+282 C Vulpikeet @Justine Mara Andersen
+283 U Archipelagore @Kev Walker
+284 C Dreamtail Heron @Tomasz Jedruszek
+285 U Pouncing Shoreshark @Daniel Warren Johnson
+286 R Sea-Dasher Octopus @Antonio Bravo
+287 C Cavern Whisperer @Steve Ellis
+288 U Chittering Harvester @Carl Critchlow
+289 R Dirge Bat @Kev Walker
+290 U Insatiable Hemophage @Steve Ellis
+291 C Cloudpiercer @Steve Ellis
+292 R Everquill Phoenix @Daniel Warren Johnson
+293 U Porcuparrot @Denis Medri
+294 U Auspicious Starrix @Justine Mara Andersen
+295 R Gemrazer @Andrew Huerta
+296 U Glowstone Recluse @Denis Medri
+297 C Migratory Greathorn @Kev Walker
+298 U Boneyard Lurker @Carl Critchlow
+299 M Brokkos, Apex of Forever @Daniel Warren Johnson
+300 M Illuna, Apex of Wishes @Justine Mara Andersen
+301 U Lore Drakkis @Andrew Huerta
+302 U Necropanther @Kev Walker
+303 M Nethroi, Apex of Death @Tomasz Jedruszek
+304 U Parcelbeast @Justine Mara Andersen
+305 U Regal Leosaur @Tomasz Jedruszek
+306 M Snapdax, Apex of the Hunt @Andrew Huerta
+307 U Trumpeting Gnarr @Justine Mara Andersen
+308 M Vadrok, Apex of Thunder @Tomasz Jedruszek
+309 R Indatha Triome @Robbie Trevino
+310 R Ketria Triome @Robbie Trevino
+311 R Raugrin Triome @Robbie Trevino
+312 R Savai Triome @Robbie Trevino
+313 R Zagoth Triome @Robbie Trevino
 
 [extended art]
-314 R Drannith Magistrate
-315 R Lavabrink Venturer
-316 M Luminous Broodmoth
-317 R Mythos of Snapdax
-318 R Mythos of Illuna
-319 R Shark Typhoon
-320 R Voracious Greatshark
-321 R Extinction Event
-322 R Hunted Nightmare
-323 R Mythos of Nethroi
-324 R Mythos of Vadrok
-325 R Unpredictable Cyclone
-326 R Yidaro, Wandering Monster
-327 R Colossification
-328 R Kogla, the Titan Ape
-329 R Mythos of Brokkos
-330 M Chevill, Bane of Monsters
-331 R Death's Oasis
-332 R Eerie Ultimatum
-333 R Emergent Ultimatum
-334 R Frondland Felidar
-335 M General Kudro of Drannith
-336 R Genesis Ultimatum
-337 R Inspired Ultimatum
-338 M Kinnan, Bonder Prodigy
-339 R Labyrinth Raptor
-340 R Offspring's Revenge
-341 R Quartzwood Crasher
-342 M Rielle, the Everwise
-343 R Ruinous Ultimatum
-344 R Skycat Sovereign
-345 R Slitherwisp
-346 R Song of Creation
-347 R Titans' Nest
-348 R Whirlwind of Thought
-349 M Winota, Joiner of Forces
-350 M Fiend Artisan
-351 R Gyruda, Doom of Depths
-352 R Jegantha, the Wellspring
-353 R Kaheera, the Orphanguard
-354 R Keruga, the Macrosage
-355 R Lurrus of the Dream-Den
-356 R Lutri, the Spellchaser
-357 R Obosh, the Preypiercer
-358 R Umori, the Collector
-359 R Yorion, Sky Nomad
-360 R Zirda, the Dawnwaker
-361 R Crystalline Giant
-362 R The Ozolith
-363 R Bonders' Enclave
+314 R Drannith Magistrate @Kieran Yanner
+315 R Lavabrink Venturer @Zoltan Boros
+316 M Luminous Broodmoth @Lie Setiawan
+317 R Mythos of Snapdax @Seb McKinnon
+318 R Mythos of Illuna @Seb McKinnon
+319 R Shark Typhoon @Caio Monteiro
+320 R Voracious Greatshark @Mathias Kollros
+321 R Extinction Event @Filip Burburan
+322 R Hunted Nightmare @Antonio José Manzanedo
+323 R Mythos of Nethroi @Seb McKinnon
+324 R Mythos of Vadrok @Seb McKinnon
+325 R Unpredictable Cyclone @Noah Bradley
+326 R Yidaro, Wandering Monster @Jesper Ejsing
+327 R Colossification @Johan Grenier
+328 R Kogla, the Titan Ape @Chris Rahn
+329 R Mythos of Brokkos @Seb McKinnon
+330 M Chevill, Bane of Monsters @Yongjae Choi
+331 R Death's Oasis @Grzegorz Rutkowski
+332 R Eerie Ultimatum @Jason A. Engle
+333 R Emergent Ultimatum @Zack Stella
+334 R Frondland Felidar @Steve Prescott
+335 M General Kudro of Drannith @Ryan Pancoast
+336 R Genesis Ultimatum @Jason Rainville
+337 R Inspired Ultimatum @Tyler Jacobson
+338 M Kinnan, Bonder Prodigy @Jason Rainville
+339 R Labyrinth Raptor @Daarken
+340 R Offspring's Revenge @Daarken
+341 R Quartzwood Crasher @Antonio José Manzanedo
+342 M Rielle, the Everwise @Yongjae Choi
+343 R Ruinous Ultimatum @Chase Stone
+344 R Skycat Sovereign @Slawomir Maniak
+345 R Slitherwisp @Yigit Koroglu
+346 R Song of Creation @Noah Bradley
+347 R Titans' Nest @Cliff Childs
+348 R Whirlwind of Thought @Bram Sels
+349 M Winota, Joiner of Forces @Magali Villeneuve
+350 M Fiend Artisan @Yigit Koroglu
+351 R Gyruda, Doom of Depths @Tyler Jacobson
+352 R Jegantha, the Wellspring @Chris Rahn
+353 R Kaheera, the Orphanguard @Ryan Pancoast
+354 R Keruga, the Macrosage @Dan Scott
+355 R Lurrus of the Dream-Den @Slawomir Maniak
+356 R Lutri, the Spellchaser @Lie Setiawan
+357 R Obosh, the Preypiercer @Daarken
+358 R Umori, the Collector @Jehan Choo
+359 R Yorion, Sky Nomad @Steven Belledin
+360 R Zirda, the Dawnwaker @Jesper Ejsing
+361 R Crystalline Giant @Jason Rainville
+362 R The Ozolith @Sam Burley
+363 R Bonders' Enclave @Cliff Childs
 
 [promo]
-364 R Colossification
-365 U Flourishing Fox
-366 U Heartless Act
-367 C Forbidden Friendship
-368 U Migration Path
-369 U Sprite Dragon
-370 U Huntmaster Liger
-371 M Luminous Broodmoth
-372 U Pollywog Symbiote
-373 U Void Beckoner
-374 R Everquill Phoenix
-375 R Yidaro, Wandering Monster
-376 R Gemrazer
-377 U Titanoth Rex
-378 M Brokkos, Apex of Forever
-379 M Illuna, Apex of Wishes
-380 M Nethroi, Apex of Death
-381 M Snapdax, Apex of the Hunt
-382 U Sprite Dragon
-383 M Vadrok, Apex of Thunder
-384 R Gyruda, Doom of Depths
-385 C Mysterious Egg
-386 R Dirge Bat
-387 R Crystalline Giant
+364 R Colossification @Mathias Kollros
+365 U Flourishing Fox @Ilse Gort
+366 U Heartless Act @Ryan Pancoast
+367 C Forbidden Friendship @Jakub Kasper
+368 U Migration Path @Grzegorz Rutkowski
+369 U Sprite Dragon @Gabor Szikszai
+370 U Huntmaster Liger @Slawomir Maniak
+371 M Luminous Broodmoth @Nick Southam
+372 U Pollywog Symbiote @Simon Dominic
+373 U Void Beckoner @Zezhou Chen
+374 R Everquill Phoenix @JOZ
+375 R Yidaro, Wandering Monster @Yigit Koroglu
+376 R Gemrazer @Sam Rowan
+377 U Titanoth Rex @Lius Lasahido
+378 M Brokkos, Apex of Forever @Svetlin Velinov
+379 M Illuna, Apex of Wishes @Nicholas Gregory
+380 M Nethroi, Apex of Death @Torstein Nordstrand
+381 M Snapdax, Apex of the Hunt @YW Tang
+382 U Sprite Dragon @Simon Dominic
+383 M Vadrok, Apex of Thunder @Johann Bodin
+384 R Gyruda, Doom of Depths @Jesper Ejsing
+385 C Mysterious Egg @ヨロイコウジ
+386 R Dirge Bat @羽山晃平
+387 R Crystalline Giant @Kotakan
 
 [Lands]
 10 Bloodfell Caves|IKO

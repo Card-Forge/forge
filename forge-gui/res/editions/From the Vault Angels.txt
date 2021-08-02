@@ -7,21 +7,21 @@ Type=Collector_Edition
 ScryfallCode=V15
 
 [cards]
-1 M Akroma, Angel of Fury
-2 M Akroma, Angel of Wrath
-3 M Archangel of Strife
-4 M Aurelia, the Warleader
-5 M Avacyn, Angel of Hope
-6 M Baneslayer Angel
-7 M Entreat the Angels
-8 M Exalted Angel
-9 M Iona, Shield of Emeria
-10 M Iridescent Angel
-11 M Jenara, Asura of War
-12 M Lightning Angel
-13 M Platinum Angel
-14 M Serra Angel
-15 M Tariel, Reckoner of Souls
+1 M Akroma, Angel of Fury @Terese Nielsen
+2 M Akroma, Angel of Wrath @Terese Nielsen
+3 M Archangel of Strife @Greg Staples
+4 M Aurelia, the Warleader @Slawomir Maniak
+5 M Avacyn, Angel of Hope @Jason Chan
+6 M Baneslayer Angel @Greg Staples
+7 M Entreat the Angels @Todd Lockwood
+8 M Exalted Angel @Tyler Jacobson
+9 M Iona, Shield of Emeria @Jason Chan
+10 M Iridescent Angel @Ryan Alexander Lee
+11 M Jenara, Asura of War @Chris Rahn
+12 M Lightning Angel @rk post
+13 M Platinum Angel @Brom
+14 M Serra Angel @Rebecca Guay
+15 M Tariel, Reckoner of Souls @Wayne Reynolds
 
 [tokens]
 w_4_4_angel_flying

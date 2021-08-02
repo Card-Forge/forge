@@ -6,13 +6,13 @@ Type=Promo
 ScryfallCode=PTHS
 
 [cards]
-3★ R Celestial Archon
-26 U Phalanx Leader
-42★ R Bident of Thassa
-63★ R Shipbreaker Kraken
-75★ R Abhorrent Overlord
-98 R Nighthowler
-120★ R Ember Swallower
-149★ R Anthousa, Setessan Hero
-160 U Karametra's Acolyte
-*180 R Sylvan Caryatid
+3★ R Celestial Archon @Wesley Burt
+26 U Phalanx Leader @Raymond Swanland
+42★ R Bident of Thassa @Ryan Yee
+63★ R Shipbreaker Kraken @Svetlin Velinov
+75★ R Abhorrent Overlord @Dave Kendall
+98 R Nighthowler @Seb McKinnon
+120★ R Ember Swallower @Vincent Proce
+149★ R Anthousa, Setessan Hero @Howard Lyon
+160 U Karametra's Acolyte @Dan Scott
+*180 R Sylvan Caryatid @Lars Grant-West

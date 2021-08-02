@@ -6,9 +6,9 @@ Type=Promo
 ScryfallCode=P05
 
 [cards]
-1 R Psychatog
-2 R Terror
-3 R Fireball
-4 R Oxidize
-5 R Mana Leak
-6 R Reciprocate
+1 R Psychatog @Edward P. Beard, Jr.
+2 R Terror @Ron Spencer
+3 R Fireball @Mark Tedin
+4 R Oxidize @Scott M. Fischer
+5 R Mana Leak @Christopher Rush
+6 R Reciprocate @Jim Murray

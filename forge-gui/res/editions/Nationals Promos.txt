@@ -6,4 +6,4 @@ Type=Promo
 ScryfallCode=PNAT
 
 [cards]
-2018 R Flooded Strand
+2018 R Flooded Strand @Zack Stella

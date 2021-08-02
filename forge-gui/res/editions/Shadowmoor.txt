@@ -12,307 +12,307 @@ FatPackExtraSlots=40 BasicLands
 ScryfallCode=SHM
 
 [cards]
-136 C AEthertow
-28 U Advice from the Fae
-55 C Aphotic Wisps
-1 C Apothecary Initiate
-2 U Armored Ascension
-56 C Ashenmoor Cohort
-180 U Ashenmoor Gouger
-181 R Ashenmoor Liege
-137 R Augury Adept
-3 C Ballynock Cohort
-224 C Barkshell Blessing
-138 C Barrenton Cragtreads
-4 C Barrenton Medic
-57 U Beseech the Queen
-29 U Biting Tether
-246 C Blazethorn Scarecrow
-247 C Blight Sickle
-82 C Blistering Dieflyn
-83 U Bloodmark Mentor
-84 C Bloodshed Fever
-58 U Blowfly Infestation
-202 R Boartusk Liege
-85 C Boggart Arsonists
-203 U Boggart Ram-Gang
-5 R Boon Reflection
-30 C Briarberry Cohort
-86 C Burn Trail
-248 R Cauldron of Souls
-158 R Cemetery Puca
-31 C Cerulean Wisps
-249 C Chainbreaker
-59 C Cinderbones
-60 C Cinderhaze Wretch
-32 C Consign to Dream
-61 U Corrosive Mentor
-62 U Corrupt
-33 R Counterbore
-109 C Crabapple Cohort
-87 R Cragganwick Cremator
-88 C Crimson Wisps
-63 U Crowd of Cinders
-182 C Cultbrand Cinder
-139 C Curse of Chains
-34 U Cursecatcher
-225 U Dawnglow Infusion
-89 R Deep-Slumber Titan
-35 U Deepchannel Mentor
-183 R Demigod of Revenge
-204 R Deus of Calamity
-110 C Devoted Druid
-184 R Din of the Fireherd
-159 R Dire Undercurrents
-64 C Disturbing Plot
-111 R Dramatic Entrance
-160 U Dream Salvage
-112 U Drove of Elves
-36 C Drowner Initiate
-65 R Dusk Urchins
-90 R Elemental Mastery
-250 C Elsewhere Flask
-226 C Elvish Hexhunter
-91 C Ember Gale
-185 C Emberstrike Duo
-140 R Enchanted Evening
-186 R Everlasting Torment
-66 C Faerie Macabre
-37 U Faerie Swarm
-113 C Farhaven Elf
-161 C Fate Transfer
-271 R Fire-Lit Thicket
-205 U Firespout
-187 C Fists of the Demigod
-92 U Flame Javelin
-114 U Flourishing Defenses
-38 U Flow of Ideas
-298 L Forest
-298 L Forest
-298 L Forest
-298 L Forest
-206 U Fossil Find
-115 C Foxfire Oak
-227 R Fracturing Gust
-188 R Fulminator Mage
-93 R Furystoke Giant
-162 R Ghastlord of Fugue
-39 C Ghastly Discovery
-207 C Giantbaiting
-141 U Glamer Spinners
-116 C Gleeful Sabotage
-163 R Glen Elendra Liege
-67 C Gloomlance
-117 U Gloomwidow
-118 C Gloomwidow's Feast
-251 U Gnarled Effigy
-142 R Godhead of Awe
-6 C Goldenglow Moth
-164 C Gravelgill Axeshark
-165 C Gravelgill Duo
-272 R Graven Cairns
-7 R Greater Auramancy
-189 U Grief Tyrant
-252 R Grim Poppet
-208 U Guttural Response
-253 U Heap Doll
-228 R Heartmender
-166 C Helm of the Ghastlord
-68 R Hollowborn Barghest
-69 U Hollowsage
-94 U Horde of Boggarts
-119 U Howl of the Night Pack
-120 C Hungry Spriggan
-254 U Illuminated Folio
-209 R Impromptu Raid
-70 U Incremental Blight
-95 C Inescapable Brute
-167 U Inkfathom Infiltrator
-168 U Inkfathom Witch
-8 C Inquisitor's Snare
-96 C Intimidator Initiate
-288 L Island
-288 L Island
-288 L Island
-288 L Island
-40 R Isleback Spawn
-97 U Jaws of Stone
-121 C Juvenile Gloomwidow
-41 C Kinscaer Harpoonist
-229 U Kitchen Finks
-9 U Kithkin Rabble
-10 C Kithkin Shielddare
-42 R Knacksaw Clique
-98 R Knollspine Dragon
-99 R Knollspine Invocation
-190 U Kulrath Knight
-11 C Last Breath
-43 U Leech Bonder
-273 U Leechridden Swamp
-210 C Loamdragger Giant
-71 C Loch Korrigan
-255 U Lockjaw Snapper
-256 U Lurebound Scarecrow
-274 U Madblind Mountain
-122 R Mana Reflection
-191 C Manaforge Cinder
-211 C Manamorphose
-12 R Mass Calcify
-230 C Medicine Runner
-169 R Memory Plunder
-170 C Memory Sluice
-231 U Mercy Killing
-171 U Merrow Grimeblotter
-44 C Merrow Wavebreakers
-72 R Midnight Banshee
-13 C Mine Excavation
-143 R Mirrorweave
-14 U Mistmeadow Skulk
-144 U Mistmeadow Witch
-275 U Mistveil Plains
-276 U Moonring Island
-212 C Morselhoarder
-123 R Mossbridge Troll
-295 L Mountain
-295 L Mountain
-295 L Mountain
-295 L Mountain
-100 C Mudbrawler Cohort
-213 C Mudbrawler Raiders
-192 U Murderous Redcap
-277 R Mystic Gate
-15 C Niveous Wisps
-124 C Nurturer Initiate
-232 C Old Ghastbark
-173 C Oona's Gatewarden
-172 R Oona, Queen of the Fae
-233 R Oracle of Nectars
-16 R Order of Whiteclay
-234 R Oversoul of Dusk
-257 R Painter's Servant
-17 U Pale Wayfarer
-45 C Parapet Watchers
-258 C Pili-Pala
-73 R Plague of Vermin
-285 L Plains
-285 L Plains
-285 L Plains
-285 L Plains
-145 U Plumeveil
-193 C Poison the Well
-74 R Polluted Bonds
-101 C Power of Fire
-125 C Presence of Gond
-126 R Prismatic Omen
-46 C Prismwake Merrow
-18 U Prison Term
-47 R Puca's Mischief
-102 C Puncture Bolt
-75 R Puppeteer Clique
-146 U Puresight Merrow
-48 C Put Away
-103 U Pyre Charger
-104 R Rage Reflection
-127 U Raking Canopy
-259 C Rattleblaze Scarecrow
-235 C Raven's Run Dragoon
-260 R Reaper King
-278 R Reflecting Pool
-236 U Reknit
-147 U Repel Intruders
-19 U Resplendent Mentor
-261 U Revelsong Horn
-237 R Rhys the Redeemed
-76 C Rite of Consumption
-49 R River Kelpie
-174 U River's Grasp
-214 R Rosheen Meanderer
-128 U Roughshod Mentor
-20 C Rune-Cervin Rider
-21 R Runed Halo
-215 C Runes of the Deus
-105 C Rustrazor Butcher
-238 C Safehold Duo
-239 C Safehold Elite
-22 C Safehold Sentry
-240 C Safewright Quest
-279 U Sapseep Forest
-50 R Savor the Moment
-194 C Scar
-175 C Scarscale Ritual
-262 C Scrapbasket
-263 C Scuttlemutt
-216 C Scuzzback Marauders
-217 C Scuzzback Scrapper
-241 U Seedcradle Witch
-242 C Shield of the Oversoul
-77 C Sickle Ripper
-148 C Silkbind Faerie
-51 C Sinking Feeling
-106 U Slinking Giant
-107 C Smash to Smithereens
-78 C Smolder Initiate
-149 C Somnomancer
-195 C Sootstoke Kindler
-196 C Sootwalkers
-129 R Spawnwrithe
-23 U Spectral Procession
-52 C Spell Syphon
-197 U Spiteflame Witch
-198 R Spiteful Visions
-79 C Splitting Headache
-150 C Steel of the Godhead
-24 C Strip Bare
-280 R Sunken Ruins
-293 L Swamp
-293 L Swamp
-293 L Swamp
-293 L Swamp
-151 R Swans of Bryn Argoll
-176 R Sygg, River Cutthroat
-264 U Tatterkite
-218 C Tattermunge Duo
-219 U Tattermunge Maniac
-220 U Tattermunge Witch
-152 C Thistledown Duo
-153 R Thistledown Liege
-265 C Thornwatch Scarecrow
-53 R Thought Reflection
-154 U Thoughtweft Gambit
-130 C Toil to Renown
-177 C Torpor Dust
-199 U Torrent of Souls
-80 C Torture
-131 U Tower Above
-200 C Traitor's Roar
-266 U Trip Noose
-155 C Turn to Mist
-25 R Twilight Shepherd
-201 R Tyrannize
-267 U Umbral Mantle
-221 R Valleymaker
-222 R Vexing Shusher
-132 C Viridescent Wisps
-178 C Wanderbrine Rootcutters
-179 U Wasp Lancer
-268 C Watchwing Scarecrow
-243 R Wheel of Sun and Moon
-54 C Whimwader
-269 U Wicker Warcrawler
-108 U Wild Swing
-133 C Wildslayer Elves
-244 U Wilt-Leaf Cavaliers
-245 R Wilt-Leaf Liege
-26 R Windbrisk Raptor
-270 C Wingrattle Scarecrow
-134 R Witherscale Wurm
-27 C Woeleecher
-281 R Wooded Bastion
-135 R Woodfall Primus
-156 R Worldpurge
-223 R Wort, the Raidmother
-81 R Wound Reflection
-157 C Zealous Guardian
+136 C Aethertow @Warren Mahy
+28 U Advice from the Fae @Chippy
+55 C Aphotic Wisps @Jim Nelson
+1 C Apothecary Initiate @Kev Walker
+2 U Armored Ascension @Matt Cavotta
+56 C Ashenmoor Cohort @Lucio Parrillo
+180 U Ashenmoor Gouger @Matt Cavotta
+181 R Ashenmoor Liege @Mark Zug
+137 R Augury Adept @Steve Prescott
+3 C Ballynock Cohort @Jesper Ejsing
+224 C Barkshell Blessing @Steven Belledin
+138 C Barrenton Cragtreads @Daren Bader
+4 C Barrenton Medic @Trevor Hairsine
+57 U Beseech the Queen @Jason Chan
+29 U Biting Tether @Thomas Denmark
+246 C Blazethorn Scarecrow @Dave Kendall
+247 C Blight Sickle @John Avon
+82 C Blistering Dieflyn @Scott Altmann
+83 U Bloodmark Mentor @Dave Allsop
+84 C Bloodshed Fever @Dan Scott
+58 U Blowfly Infestation @Drew Tucker
+202 R Boartusk Liege @Jesper Ejsing
+85 C Boggart Arsonists @Jesper Ejsing
+203 U Boggart Ram-Gang @Dave Allsop
+5 R Boon Reflection @Terese Nielsen & Ron Spencer
+30 C Briarberry Cohort @Carl Critchlow
+86 C Burn Trail @Nils Hamm
+248 R Cauldron of Souls @Ron Brown
+158 R Cemetery Puca @Omar Rayyan
+31 C Cerulean Wisps @Jim Nelson
+249 C Chainbreaker @Jeff Miracola
+59 C Cinderbones @Carl Critchlow
+60 C Cinderhaze Wretch @Steven Belledin
+32 C Consign to Dream @Richard Kane Ferguson
+61 U Corrosive Mentor @Daarken
+62 U Corrupt @Dave Allsop
+33 R Counterbore @Wayne England
+109 C Crabapple Cohort @Richard Whitters
+87 R Cragganwick Cremator @Jeremy Enecio
+88 C Crimson Wisps @Jim Nelson
+63 U Crowd of Cinders @Carl Frank
+182 C Cultbrand Cinder @Christopher Moeller
+139 C Curse of Chains @Drew Tucker
+34 U Cursecatcher @Warren Mahy
+225 U Dawnglow Infusion @Rebecca Guay
+89 R Deep-Slumber Titan @Steve Prescott
+35 U Deepchannel Mentor @Jesper Ejsing
+183 R Demigod of Revenge @Jim Murray
+204 R Deus of Calamity @Todd Lockwood
+110 C Devoted Druid @Darrell Riche
+184 R Din of the Fireherd @Dave Dorman
+159 R Dire Undercurrents @Franz Vohwinkel
+64 C Disturbing Plot @Larry MacDougall
+111 R Dramatic Entrance @Mike Dringenberg
+160 U Dream Salvage @Howard Lyon
+112 U Drove of Elves @Larry MacDougall
+36 C Drowner Initiate @E. M. Gist
+65 R Dusk Urchins @Darrell Riche
+90 R Elemental Mastery @Cyril Van Der Haegen
+250 C Elsewhere Flask @Carl Frank
+226 C Elvish Hexhunter @Alex Horley-Orlandelli
+91 C Ember Gale @Steve Prescott
+185 C Emberstrike Duo @Aleksi Briclot
+140 R Enchanted Evening @Rebecca Guay
+186 R Everlasting Torment @Richard Kane Ferguson
+66 C Faerie Macabre @rk post
+37 U Faerie Swarm @Zoltan Boros & Gabor Szikszai
+113 C Farhaven Elf @Brandon Kitkouski
+161 C Fate Transfer @Wayne England
+271 R Fire-Lit Thicket @Ralph Horsley
+205 U Firespout @Jeff Miracola
+187 C Fists of the Demigod @Dan Scott
+92 U Flame Javelin @Trevor Hairsine
+114 U Flourishing Defenses @Dan Scott
+38 U Flow of Ideas @Mike Dringenberg
+298 L Forest @Larry MacDougall
+299 L Forest @Rob Alexander
+300 L Forest @Chippy
+301 L Forest @Steve Prescott
+206 U Fossil Find @Dave DeVries
+115 C Foxfire Oak @Dave Kendall
+227 R Fracturing Gust @Michael Sutfin
+188 R Fulminator Mage @rk post
+93 R Furystoke Giant @Ralph Horsley
+162 R Ghastlord of Fugue @Mike Dringenberg
+39 C Ghastly Discovery @Howard Lyon
+207 C Giantbaiting @Trevor Hairsine
+141 U Glamer Spinners @Jesper Ejsing
+116 C Gleeful Sabotage @Todd Lockwood
+163 R Glen Elendra Liege @Kev Walker
+67 C Gloomlance @Zoltan Boros & Gabor Szikszai
+117 U Gloomwidow @Mark Tedin
+118 C Gloomwidow's Feast @Thomas M. Baxa
+251 U Gnarled Effigy @Ron Brown
+142 R Godhead of Awe @Mark Zug
+6 C Goldenglow Moth @Howard Lyon
+164 C Gravelgill Axeshark @Dave Kendall
+165 C Gravelgill Duo @Brandon Kitkouski
+272 R Graven Cairns @Rob Alexander
+7 R Greater Auramancy @Chuck Lukacs
+189 U Grief Tyrant @Izzy
+252 R Grim Poppet @Kev Walker
+208 U Guttural Response @Matt Cavotta
+253 U Heap Doll @John Avon
+228 R Heartmender @Rebecca Guay
+166 C Helm of the Ghastlord @Franz Vohwinkel
+68 R Hollowborn Barghest @Eric Fortune
+69 U Hollowsage @Lucio Parrillo
+94 U Horde of Boggarts @Steve Prescott
+119 U Howl of the Night Pack @Lars Grant-West
+120 C Hungry Spriggan @Drew Tucker
+254 U Illuminated Folio @Jim Pavelec
+209 R Impromptu Raid @Randy Gallegos
+70 U Incremental Blight @Chuck Lukacs
+95 C Inescapable Brute @Nils Hamm
+167 U Inkfathom Infiltrator @Jesper Ejsing
+168 U Inkfathom Witch @Larry MacDougall
+8 C Inquisitor's Snare @Michael Sutfin
+96 C Intimidator Initiate @Ralph Horsley
+286 L Island @Omar Rayyan
+287 L Island @Warren Mahy
+288 L Island @Brandon Kitkouski
+289 L Island @Rob Alexander
+40 R Isleback Spawn @Mark Tedin
+97 U Jaws of Stone @Zoltan Boros & Gabor Szikszai
+121 C Juvenile Gloomwidow @Thomas M. Baxa
+41 C Kinscaer Harpoonist @Thomas M. Baxa
+229 U Kitchen Finks @Kev Walker
+9 U Kithkin Rabble @Omar Rayyan
+10 C Kithkin Shielddare @Christopher Moeller
+42 R Knacksaw Clique @Steven Belledin
+98 R Knollspine Dragon @Steve Prescott
+99 R Knollspine Invocation @Dave Dorman
+190 U Kulrath Knight @Daarken
+11 C Last Breath @Thomas Denmark
+43 U Leech Bonder @E. M. Gist
+273 U Leechridden Swamp @Lars Grant-West
+210 C Loamdragger Giant @Pete Venters
+71 C Loch Korrigan @Daarken
+255 U Lockjaw Snapper @Daren Bader
+256 U Lurebound Scarecrow @Nils Hamm
+274 U Madblind Mountain @Fred Fields
+122 R Mana Reflection @Terese Nielsen & Ron Spencer
+191 C Manaforge Cinder @Izzy
+211 C Manamorphose @Jeff Miracola
+12 R Mass Calcify @Brandon Kitkouski
+230 C Medicine Runner @Chippy
+169 R Memory Plunder @Dan Scott
+170 C Memory Sluice @Wayne England
+231 U Mercy Killing @Dave Kendall
+171 U Merrow Grimeblotter @Cyril Van Der Haegen
+44 C Merrow Wavebreakers @Alex Horley-Orlandelli
+72 R Midnight Banshee @Daarken
+13 C Mine Excavation @Chippy
+143 R Mirrorweave @Jim Pavelec
+14 U Mistmeadow Skulk @Omar Rayyan
+144 U Mistmeadow Witch @Greg Staples
+275 U Mistveil Plains @Rob Alexander
+276 U Moonring Island @Brandon Kitkouski
+212 C Morselhoarder @Anthony S. Waters
+123 R Mossbridge Troll @Jeremy Jarvis
+294 L Mountain @Dave Kendall
+295 L Mountain @Brandon Kitkouski
+296 L Mountain @rk post
+297 L Mountain @Steve Prescott
+100 C Mudbrawler Cohort @Lucio Parrillo
+213 C Mudbrawler Raiders @Ron Spencer
+192 U Murderous Redcap @Dave Allsop
+277 R Mystic Gate @Fred Fields
+15 C Niveous Wisps @Jim Nelson
+124 C Nurturer Initiate @Jim Pavelec
+232 C Old Ghastbark @Thomas M. Baxa
+173 C Oona's Gatewarden @Mike Dringenberg
+172 R Oona, Queen of the Fae @Adam Rex
+233 R Oracle of Nectars @Brandon Kitkouski
+16 R Order of Whiteclay @Steven Belledin
+234 R Oversoul of Dusk @Scott M. Fischer
+257 R Painter's Servant @Mike Dringenberg
+17 U Pale Wayfarer @Heather Hudson
+45 C Parapet Watchers @Scott Altmann
+258 C Pili-Pala @Ron Spencer
+73 R Plague of Vermin @Carl Critchlow
+282 L Plains @Omar Rayyan
+283 L Plains @Lars Grant-West
+284 L Plains @Dave Kendall
+285 L Plains @Larry MacDougall
+145 U Plumeveil @Nils Hamm
+193 C Poison the Well @Zoltan Boros & Gabor Szikszai
+74 R Polluted Bonds @Michael Sutfin
+101 C Power of Fire @Trevor Hairsine
+125 C Presence of Gond @Brandon Kitkouski
+126 R Prismatic Omen @John Avon
+46 C Prismwake Merrow @Wayne England
+18 U Prison Term @Zoltan Boros & Gabor Szikszai
+47 R Puca's Mischief @Scott Altmann
+102 C Puncture Bolt @Franz Vohwinkel
+75 R Puppeteer Clique @Daren Bader
+146 U Puresight Merrow @Carl Critchlow
+48 C Put Away @Matt Cavotta
+103 U Pyre Charger @Mark Zug
+104 R Rage Reflection @Terese Nielsen & Ron Spencer
+127 U Raking Canopy @Heather Hudson
+259 C Rattleblaze Scarecrow @Trevor Hairsine
+235 C Raven's Run Dragoon @Daren Bader
+260 R Reaper King @Jim Murray
+278 R Reflecting Pool @Fred Fields
+236 U Reknit @Zoltan Boros & Gabor Szikszai
+147 U Repel Intruders @Trevor Hairsine
+19 U Resplendent Mentor @Franz Vohwinkel
+261 U Revelsong Horn @Franz Vohwinkel
+237 R Rhys the Redeemed @Steve Prescott
+76 C Rite of Consumption @Ron Spencer
+49 R River Kelpie @Jeff Easley
+174 U River's Grasp @Steven Belledin
+214 R Rosheen Meanderer @Aleksi Briclot
+128 U Roughshod Mentor @Steven Belledin
+20 C Rune-Cervin Rider @Dan Scott
+21 R Runed Halo @Steve Prescott
+215 C Runes of the Deus @Warren Mahy
+105 C Rustrazor Butcher @Ron Spencer
+238 C Safehold Duo @Izzy
+239 C Safehold Elite @Richard Whitters
+22 C Safehold Sentry @William O'Connor
+240 C Safewright Quest @Dan Scott
+279 U Sapseep Forest @Aleksi Briclot
+50 R Savor the Moment @Warren Mahy
+194 C Scar @Pete Venters
+175 C Scarscale Ritual @Richard Sardinha
+262 C Scrapbasket @Heather Hudson
+263 C Scuttlemutt @Jeremy Jarvis
+216 C Scuzzback Marauders @Pete Venters
+217 C Scuzzback Scrapper @Scott Altmann
+241 U Seedcradle Witch @Steven Belledin
+242 C Shield of the Oversoul @Steven Belledin
+77 C Sickle Ripper @Dan Scott
+148 C Silkbind Faerie @Matt Cavotta
+51 C Sinking Feeling @Ron Brown
+106 U Slinking Giant @Dave Kendall
+107 C Smash to Smithereens @Pete Venters
+78 C Smolder Initiate @Chippy
+149 C Somnomancer @Lars Grant-West
+195 C Sootstoke Kindler @Mark Zug
+196 C Sootwalkers @Nils Hamm
+129 R Spawnwrithe @Daarken
+23 U Spectral Procession @Jeremy Enecio
+52 C Spell Syphon @John Avon
+197 U Spiteflame Witch @William O'Connor
+198 R Spiteful Visions @Brandon Kitkouski
+79 C Splitting Headache @Thomas Denmark
+150 C Steel of the Godhead @Jason Chan
+24 C Strip Bare @Ralph Horsley
+280 R Sunken Ruins @Warren Mahy
+290 L Swamp @Lars Grant-West
+291 L Swamp @Warren Mahy
+292 L Swamp @rk post
+293 L Swamp @Chippy
+151 R Swans of Bryn Argoll @Eric Fortune
+176 R Sygg, River Cutthroat @Jeremy Enecio
+264 U Tatterkite @Ron Brown
+218 C Tattermunge Duo @Jesper Ejsing
+219 U Tattermunge Maniac @Matt Cavotta
+220 U Tattermunge Witch @Warren Mahy
+152 C Thistledown Duo @Zoltan Boros & Gabor Szikszai
+153 R Thistledown Liege @Adam Rex
+265 C Thornwatch Scarecrow @Chuck Lukacs
+53 R Thought Reflection @Terese Nielsen & Ron Spencer
+154 U Thoughtweft Gambit @Steve Prescott
+130 C Toil to Renown @Larry MacDougall
+177 C Torpor Dust @Jesper Ejsing
+199 U Torrent of Souls @Ian Edward Ameling
+80 C Torture @E. M. Gist
+131 U Tower Above @Thomas Denmark
+200 C Traitor's Roar @Jim Pavelec
+266 U Trip Noose @Randy Gallegos
+155 C Turn to Mist @Greg Staples
+25 R Twilight Shepherd @Jason Chan
+201 R Tyrannize @Mark Tedin
+267 U Umbral Mantle @Richard Sardinha
+221 R Valleymaker @Randy Gallegos
+222 R Vexing Shusher @Cyril Van Der Haegen
+132 C Viridescent Wisps @Jim Nelson
+178 C Wanderbrine Rootcutters @Chippy
+179 U Wasp Lancer @Warren Mahy
+268 C Watchwing Scarecrow @Chuck Lukacs
+243 R Wheel of Sun and Moon @Zoltan Boros & Gabor Szikszai
+54 C Whimwader @Jeff Easley
+269 U Wicker Warcrawler @Carl Critchlow
+108 U Wild Swing @Richard Kane Ferguson
+133 C Wildslayer Elves @Dave Kendall
+244 U Wilt-Leaf Cavaliers @Steve Prescott
+245 R Wilt-Leaf Liege @Jason Chan
+26 R Windbrisk Raptor @Omar Rayyan
+270 C Wingrattle Scarecrow @Trevor Hairsine
+134 R Witherscale Wurm @Thomas M. Baxa
+27 C Woeleecher @Izzy
+281 R Wooded Bastion @Christopher Moeller
+135 R Woodfall Primus @Adam Rex
+156 R Worldpurge @Chippy
+223 R Wort, the Raidmother @Dave Allsop
+81 R Wound Reflection @Terese Nielsen & Ron Spencer
+157 C Zealous Guardian @Steven Belledin
 
 [tokens]
 w_1_1_kithkin_soldier

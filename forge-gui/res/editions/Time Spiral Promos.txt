@@ -6,5 +6,5 @@ Type=Promo
 ScryfallCode=PTSP
 
 [cards]
-179★ R Sudden Shock
-259★ R Lotus Bloom
+179★ R Sudden Shock @Vance Kovacs
+259★ R Lotus Bloom @Christopher Rush

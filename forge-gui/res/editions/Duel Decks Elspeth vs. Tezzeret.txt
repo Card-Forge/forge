@@ -7,85 +7,85 @@ Type=Duel_Deck
 ScryfallCode=DDF
 
 [cards]
-1 M Elspeth, Knight-Errant
-2 U Elite Vanguard
-3 C Goldmeadow Harrier
-4 C Infantry Veteran
-5 R Loyal Sentry
-6 C Mosquito Guard
-7 C Glory Seeker
-8 C Kor Skyfisher
-9 C Temple Acolyte
-10 U Kor Aeronaut
-11 C Burrenton Bombardier
-12 C Kor Hookmaster
-13 C Kemba's Skyguard
-14 U Celestial Crusader
-15 U Seasoned Marshal
-16 U Conclave Phalanx
-17 U Stormfront Riders
-18 R Catapult Master
-19 C Conclave Equenaut
-20 R Angel of Salvation
-21 C Sunlance
-22 U Swords to Plowshares
-23 C Journey to Nowhere
-24 C Mighty Leap
-25 C Raise the Alarm
-26 C Razor Barrier
-27 R Crusade
-28 C Blinding Beam
-29 U Abolish
-30 U Saltblast
-31 U Swell of Courage
-32 U Daru Encampment
-33 C Kabira Crossroads
-34 R Rustic Clachan
-35 L Plains
-36 L Plains
-37 L Plains
-38 L Plains
-39 M Tezzeret the Seeker
-40 C Arcbound Worker
-41 C Steel Wall
-42 U Runed Servitor
-43 C Silver Myr
-44 R Steel Overseer
-45 U Assembly-Worker
-46 U Serrated Biskelion
-47 U Esperzoa
-48 R Master of Etherium
-49 C Trinket Mage
-50 C Clockwork Condor
-51 C Frogmite
-52 U Juggernaut
-53 U Synod Centurion
-54 C Faerie Mechanist
-55 U Clockwork Hydra
-56 R Razormane Masticore
-57 R Triskelion
-58 R Pentavus
-59 U Qumulox
-60 U Everflowing Chalice
-61 C Aether Spellbomb
-62 U Elixir of Immortality
-63 U Contagion Clasp
-64 U Energy Chamber
-65 U Trip Noose
-66 C Echoing Truth
-67 C Moonglove Extract
-68 U Thirst for Knowledge
-69 U Argivian Restoration
-70 U Foil
-71 C Thoughtcast
-72 C Darksteel Citadel
-73 U Mishra's Factory
-74 C Seat of the Synod
-75 U Stalking Stones
-76 L Island
-77 L Island
-78 L Island
-79 L Island
+1 M Elspeth, Knight-Errant @Igor Kieryluk
+2 U Elite Vanguard @Mark Tedin
+3 C Goldmeadow Harrier @Steve Prescott
+4 C Infantry Veteran @Christopher Rush
+5 R Loyal Sentry @Michael Sutfin
+6 C Mosquito Guard @Randy Gallegos
+7 C Glory Seeker @Matt Cavotta
+8 C Kor Skyfisher @Dan Scott
+9 C Temple Acolyte @Lubov
+10 U Kor Aeronaut @Karl Kopinski
+11 C Burrenton Bombardier @Ron Spencer
+12 C Kor Hookmaster @Wayne Reynolds
+13 C Kemba's Skyguard @Whit Brachna
+14 U Celestial Crusader @Jim Murray
+15 U Seasoned Marshal @Matthew D. Wilson
+16 U Conclave Phalanx @Wayne Reynolds
+17 U Stormfront Riders @Wayne Reynolds
+18 R Catapult Master @Terese Nielsen
+19 C Conclave Equenaut @Terese Nielsen
+20 R Angel of Salvation @D. Alexander Gregory
+21 C Sunlance @Volkan Baǵa
+22 U Swords to Plowshares @Terese Nielsen
+23 C Journey to Nowhere @Warren Mahy
+24 C Mighty Leap @rk post
+25 C Raise the Alarm @John Matson
+26 C Razor Barrier @Ron Spencer
+27 R Crusade @Howard Lyon
+28 C Blinding Beam @Doug Chaffee
+29 U Abolish @Kev Walker
+30 U Saltblast @Paolo Parente
+31 U Swell of Courage @Jim Nelson
+32 U Daru Encampment @Tony Szczudlo
+33 C Kabira Crossroads @James Paick
+34 R Rustic Clachan @Fred Fields
+35 L Plains @Rob Alexander
+36 L Plains @Michael Komarck
+37 L Plains @Michael Komarck
+38 L Plains @Martina Pilcerova
+39 M Tezzeret the Seeker @Igor Kieryluk
+40 C Arcbound Worker @Darrell Riche
+41 C Steel Wall @David Day
+42 U Runed Servitor @Mike Bierek
+43 C Silver Myr @Kev Walker
+44 R Steel Overseer @Chris Rahn
+45 U Assembly-Worker @Chippy
+46 U Serrated Biskelion @Ron Spencer
+47 U Esperzoa @Warren Mahy
+48 R Master of Etherium @Matt Cavotta
+49 C Trinket Mage @Mark A. Nelson
+50 C Clockwork Condor @Arnie Swekel
+51 C Frogmite @Terese Nielsen
+52 U Juggernaut @Mark Hyzer
+53 U Synod Centurion @Kev Walker
+54 C Faerie Mechanist @Matt Cavotta
+55 U Clockwork Hydra @Daren Bader
+56 R Razormane Masticore @Jim Murray
+57 R Triskelion @Christopher Moeller
+58 R Pentavus @Greg Staples
+59 U Qumulox @Carl Critchlow
+60 U Everflowing Chalice @Steve Argyle
+61 C Aether Spellbomb @Jim Nelson
+62 U Elixir of Immortality @Zoltan Boros & Gabor Szikszai
+63 U Contagion Clasp @Anthony Palumbo
+64 U Energy Chamber @Kev Walker
+65 U Trip Noose @Randy Gallegos
+66 C Echoing Truth @Greg Staples
+67 C Moonglove Extract @Terese Nielsen
+68 U Thirst for Knowledge @Anthony Francisco
+69 U Argivian Restoration @Roger Raupp
+70 U Foil @Bradley Williams
+71 C Thoughtcast @Greg Hildebrandt
+72 C Darksteel Citadel @John Avon
+73 U Mishra's Factory @Scott Chou
+74 C Seat of the Synod @John Avon
+75 U Stalking Stones @David Day
+76 L Island @Rob Alexander
+77 L Island @John Avon
+78 L Island @Chippy
+79 L Island @Chippy
 
 [tokens]
 w_1_1_soldier

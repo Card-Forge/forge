@@ -12,171 +12,171 @@ FoilAlwaysInCommonSlot=False
 ScryfallCode=BOK
 
 [cards]
-91 C Akki Blizzard-Herder
-92 U Akki Raider
-93 U Ashen Monstrosity
-94 U Aura Barbs
-152 R Baku Altar
-61 C Bile Urchin
-95 C Blademane Baku
-96 R Blazing Shoal
-62 C Blessing of Leeches
-153 U Blinding Powder
-121 U Body of Jukai
-122 U Budoka Pupil
-63 C Call for Blood
-31 U Callow Jushi
-123 C Child of Thorns
-32 R Chisei, Heart of Oceans
-97 R Clash of Realities
-98 C Crack the Earth
-64 C Crawling Filth
-99 U Cunning Bandit
-1 R Day of Destiny
-33 R Disrupting Shoal
-2 U Empty-Shrine Kannushi
-124 R Enshrined Memories
-65 U Eradicate
-3 U Faithful Squire
-4 R Final Judgment
-100 C First Volley
-101 U Flames of the Blood Hand
-34 C Floodbringer
-125 U Forked-Branch Garami
-102 C Frost Ogre
-103 C Frostling
-104 R Fumiko the Lowblood
-126 U Genju of the Cedars
-35 U Genju of the Falls
-66 U Genju of the Fens
-5 U Genju of the Fields
-151 R Genju of the Realm
-105 U Genju of the Spires
-127 C Gnarled Mass
-106 C Goblin Cohort
-164 U Gods' Eye, Gate to the Reikai
-67 R Goryo's Vengeance
-128 C Harbinger of Spring
-6 C Heart of Light
-107 R Heartless Hidetsugu
-36 U Heed the Mists
-68 R Hero's Demise
-37 R Higure, the Still Wind
-69 U Hired Muscle
-7 R Hokori, Dust Drinker
-70 C Horobi's Whisper
-8 C Hundred-Talon Strike
-108 R In the Web of War
-9 U Indebted Samurai
-71 R Ink-Eyes, Servant of Oni
-109 C Ire of Kaminari
-129 R Isao, Enlightened Bushi
-110 R Ishi-Ishi, Akki Crackshot
-130 R Iwamori of the Open Fist
-38 U Jetting Glasskite
-39 U Kaijin of the Vanishing Touch
-10 C Kami of False Hope
-11 C Kami of Tattered Shoji
-12 U Kami of the Honored Dead
-13 R Kentaro, the Smiling Cat
-40 R Kira, Great Glass-Spinner
-14 U Kitsune Palliator
-131 R Kodama of the Center Tree
-111 C Kumano's Blessing
-72 R Kyoki, Sanity's Eclipse
-132 R Lifegift
-133 U Lifespinner
-134 U Loam Dweller
-112 R Mannichi, the Fevered Dream
-135 U Mark of Sakiko
-73 U Mark of the Oni
-136 C Matsu-Tribe Sniper
-15 C Mending Hands
-41 U Minamo Sightbender
-42 C Minamo's Meddling
-154 R Mirror Gallery
-43 C Mistblade Shinobi
-16 C Moonlit Strider
-155 R Neko-Te
-74 U Nezumi Shadow-Watcher
-44 C Ninja of the Deep Hours
-137 R Nourishing Shoal
-75 U Ogre Marauder
-113 U Ogre Recluse
-76 C Okiba-Gang Shinobi
-17 R Opal-Eye, Konda's Yojimbo
-156 R Orb of Dreams
-157 R Ornate Kanzashi
-114 U Overblaze
-18 R Oyobi, Who Split the Heavens
-115 R Patron of the Akki
-19 R Patron of the Kitsune
-45 R Patron of the Moon
-77 R Patron of the Nezumi
-138 R Patron of the Orochi
-139 C Petalmane Baku
-46 C Phantom Wings
-78 C Psychic Spear
-79 U Pus Kami
-47 U Quash
-48 C Quillmane Baku
-49 R Reduce to Dreams
-50 C Ribbons of the Reikai
-140 C Roar of Jukai
-116 U Ronin Cliffrider
-158 U Ronin Warclub
-141 R Sakiko, Mother of Summer
-142 C Sakura-Tribe Springcaller
-143 C Scaled Hulk
-20 U Scour
-80 U Scourge of Numai
-51 C Shimmering Glasskite
-21 R Shining Shoal
-117 C Shinka Gatekeeper
-81 R Shirei, Shizo's Caretaker
-144 R Shizuko, Caller of Autumn
-159 U Shuko
-160 U Shuriken
-82 R Sickening Shoal
-22 C Silverstorm Samurai
-83 C Skullmane Baku
-84 C Skullsnatcher
-161 R Slumbering Tora
-52 U Soratami Mindsweeper
-145 U Sosuke's Summons
-118 U Sowing Salt
-146 U Splinter
-23 C Split-Tail Miko
-85 C Stir the Grave
-53 U Stream of Consciousness
-54 R Sway of the Stars
-24 C Takeno's Cavalry
-86 C Takenuma Bleeder
-25 U Tallowisp
-55 C Teardrop Kami
-165 R Tendo Ice Bridge
-26 C Terashi's Grasp
-27 U Terashi's Verdict
-162 R That Which Was Taken
-56 R Threads of Disloyalty
-87 U Three Tragedies
-88 U Throat Slitter
-57 C Toils of Night and Day
-58 R Tomorrow, Azami's Familiar
-119 C Torrent of Stone
-89 R Toshiro Umezawa
-147 C Traproot Kami
-120 R Twist Allegiance
-163 R Umezawa's Jitte
-148 U Unchecked Growth
-149 C Uproot
-59 C Veil of Secrecy
-150 C Vital Surge
-60 U Walker of Secret Ways
-28 U Ward of Piety
-29 C Waxmane Baku
-30 R Yomiji, Who Bars the Way
-90 R Yukora, the Prisoner
+91 C Akki Blizzard-Herder @Pete Venters
+92 U Akki Raider @Martina Pilcerova
+93 U Ashen Monstrosity @Chris Appelhans
+94 U Aura Barbs @Aleksi Briclot
+152 R Baku Altar @Edward P. Beard, Jr.
+61 C Bile Urchin @Dany Orizio
+95 C Blademane Baku @Edward P. Beard, Jr.
+96 R Blazing Shoal @Glen Angus
+62 C Blessing of Leeches @Rebecca Guay
+153 U Blinding Powder @Greg Hildebrandt
+121 U Body of Jukai @Luca Zontini
+122 U Budoka Pupil @Shishizaru
+63 C Call for Blood @Carl Critchlow
+31 U Callow Jushi @Tsutomu Kawade
+123 C Child of Thorns @Jeff Easley
+32 R Chisei, Heart of Oceans @Matt Cavotta
+97 R Clash of Realities @Jim Nelson
+98 C Crack the Earth @Wayne Reynolds
+64 C Crawling Filth @Martina Pilcerova
+99 U Cunning Bandit @Paolo Parente
+1 R Day of Destiny @Daren Bader
+33 R Disrupting Shoal @Scott M. Fischer
+2 U Empty-Shrine Kannushi @Ron Spears
+124 R Enshrined Memories @Jeff Easley
+65 U Eradicate @Glen Angus
+3 U Faithful Squire @Mark Zug
+4 R Final Judgment @Kev Walker
+100 C First Volley @Glen Angus
+101 U Flames of the Blood Hand @Aleksi Briclot
+34 C Floodbringer @Ittoku
+125 U Forked-Branch Garami @Dany Orizio
+102 C Frost Ogre @Dan Scott
+103 C Frostling @Carl Critchlow
+104 R Fumiko the Lowblood @Michael Sutfin
+126 U Genju of the Cedars @Arnie Swekel
+35 U Genju of the Falls @Glen Angus
+66 U Genju of the Fens @Tsutomu Kawade
+5 U Genju of the Fields @Greg Staples
+151 R Genju of the Realm @Scott M. Fischer
+105 U Genju of the Spires @Joel Thomas
+127 C Gnarled Mass @Tony Szczudlo
+106 C Goblin Cohort @Darrell Riche
+164 U Gods' Eye, Gate to the Reikai @John Avon
+67 R Goryo's Vengeance @Ittoku
+128 C Harbinger of Spring @Cara Mitten
+6 C Heart of Light @Luca Zontini
+107 R Heartless Hidetsugu @Carl Critchlow
+36 U Heed the Mists @Christopher Rush
+68 R Hero's Demise @Jim Nelson
+37 R Higure, the Still Wind @Christopher Moeller
+69 U Hired Muscle @Arnie Swekel
+7 R Hokori, Dust Drinker @Darrell Riche
+70 C Horobi's Whisper @Aleksi Briclot
+8 C Hundred-Talon Strike @Matt Cavotta
+108 R In the Web of War @Ron Spencer
+9 U Indebted Samurai @Carl Critchlow
+71 R Ink-Eyes, Servant of Oni @Wayne Reynolds
+109 C Ire of Kaminari @Kev Walker
+129 R Isao, Enlightened Bushi @Christopher Moeller
+110 R Ishi-Ishi, Akki Crackshot @Christopher Rush
+130 R Iwamori of the Open Fist @Paolo Parente
+38 U Jetting Glasskite @Shishizaru
+39 U Kaijin of the Vanishing Touch @Randy Gallegos
+10 C Kami of False Hope @Daren Bader
+11 C Kami of Tattered Shoji @Shishizaru
+12 U Kami of the Honored Dead @Mark Zug
+13 R Kentaro, the Smiling Cat @Donato Giancola
+40 R Kira, Great Glass-Spinner @Kev Walker
+14 U Kitsune Palliator @Dave Dorman
+131 R Kodama of the Center Tree @Jim Murray
+111 C Kumano's Blessing @Keith Garletts
+72 R Kyoki, Sanity's Eclipse @Paolo Parente
+132 R Lifegift @John Matson
+133 U Lifespinner @Cara Mitten
+134 U Loam Dweller @Paolo Parente
+112 R Mannichi, the Fevered Dream @Martina Pilcerova
+135 U Mark of Sakiko @Alex Horley-Orlandelli
+73 U Mark of the Oni @Heather Hudson
+136 C Matsu-Tribe Sniper @Carl Critchlow
+15 C Mending Hands @Douglas Shuler
+41 U Minamo Sightbender @Luca Zontini
+42 C Minamo's Meddling @Alex Horley-Orlandelli
+154 R Mirror Gallery @Scott M. Fischer
+43 C Mistblade Shinobi @Kev Walker
+16 C Moonlit Strider @John Avon
+155 R Neko-Te @Alex Horley-Orlandelli
+74 U Nezumi Shadow-Watcher @Pete Venters
+44 C Ninja of the Deep Hours @Dan Scott
+137 R Nourishing Shoal @Greg Staples
+75 U Ogre Marauder @Adam Rex
+113 U Ogre Recluse @Jim Murray
+76 C Okiba-Gang Shinobi @Mark Zug
+17 R Opal-Eye, Konda's Yojimbo @Greg Staples
+156 R Orb of Dreams @Dany Orizio
+157 R Ornate Kanzashi @Heather Hudson
+114 U Overblaze @Ron Spencer
+18 R Oyobi, Who Split the Heavens @Christopher Moeller
+115 R Patron of the Akki @Jim Nelson
+19 R Patron of the Kitsune @Ben Thompson
+45 R Patron of the Moon @Scott M. Fischer
+77 R Patron of the Nezumi @Kev Walker
+138 R Patron of the Orochi @Christopher Moeller
+139 C Petalmane Baku @Rebecca Guay
+46 C Phantom Wings @Greg Staples
+78 C Psychic Spear @Ron Spears
+79 U Pus Kami @Dave Allsop
+47 U Quash @Shishizaru
+48 C Quillmane Baku @David Martin
+49 R Reduce to Dreams @Daren Bader
+50 C Ribbons of the Reikai @Martina Pilcerova
+140 C Roar of Jukai @Ron Spencer
+116 U Ronin Cliffrider @Dan Scott
+158 U Ronin Warclub @Pete Venters
+141 R Sakiko, Mother of Summer @Michael Sutfin
+142 C Sakura-Tribe Springcaller @Pete Venters
+143 C Scaled Hulk @Arnie Swekel
+20 U Scour @Ittoku
+80 U Scourge of Numai @Arnie Swekel
+51 C Shimmering Glasskite @John Avon
+21 R Shining Shoal @Ben Thompson
+117 C Shinka Gatekeeper @Pete Venters
+81 R Shirei, Shizo's Caretaker @Wayne Reynolds
+144 R Shizuko, Caller of Autumn @Michael Sutfin
+159 U Shuko @Tim Hildebrandt
+160 U Shuriken @Matt Cavotta
+82 R Sickening Shoal @Dan Scott
+22 C Silverstorm Samurai @Michael Sutfin
+83 C Skullmane Baku @Tim Hildebrandt
+84 C Skullsnatcher @Matt Cavotta
+161 R Slumbering Tora @Doug Chaffee
+52 U Soratami Mindsweeper @Alex Horley-Orlandelli
+145 U Sosuke's Summons @Kev Walker
+118 U Sowing Salt @Hideaki Takamura
+146 U Splinter @Tsutomu Kawade
+23 C Split-Tail Miko @Kev Walker
+85 C Stir the Grave @Jim Nelson
+53 U Stream of Consciousness @John Avon
+54 R Sway of the Stars @Randy Gallegos
+24 C Takeno's Cavalry @Darrell Riche
+86 C Takenuma Bleeder @Kev Walker
+25 U Tallowisp @Ron Spears
+55 C Teardrop Kami @Michael Sutfin
+165 R Tendo Ice Bridge @Rob Alexander
+26 C Terashi's Grasp @Mark Tedin
+27 U Terashi's Verdict @Ron Spears
+162 R That Which Was Taken @Adam Rex
+56 R Threads of Disloyalty @Anthony S. Waters
+87 U Three Tragedies @Darrell Riche
+88 U Throat Slitter @Paolo Parente
+57 C Toils of Night and Day @Matt Cavotta
+58 R Tomorrow, Azami's Familiar @Christopher Rush
+119 C Torrent of Stone @Greg Staples
+89 R Toshiro Umezawa @Christopher Moeller
+147 C Traproot Kami @Carl Critchlow
+120 R Twist Allegiance @Wayne Reynolds
+163 R Umezawa's Jitte @Christopher Moeller
+148 U Unchecked Growth @Tsutomu Kawade
+149 C Uproot @Heather Hudson
+59 C Veil of Secrecy @Arnie Swekel
+150 C Vital Surge @Douglas Shuler
+60 U Walker of Secret Ways @Scott M. Fischer
+28 U Ward of Piety @Tim Hildebrandt
+29 C Waxmane Baku @Greg Hildebrandt
+30 R Yomiji, Who Bars the Way @Hideaki Takamura
+90 R Yukora, the Prisoner @Tony Szczudlo
 
 [tokens]
 c_1_1_spirit

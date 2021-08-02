@@ -6,5 +6,5 @@ Type=Promo
 ScryfallCode=PMOR
 
 [cards]
-60★ R Earwig Squad
-143★ R Door of Destinies
+60★ R Earwig Squad @Warren Mahy
+143★ R Door of Destinies @Rob Alexander

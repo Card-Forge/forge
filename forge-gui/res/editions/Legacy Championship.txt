@@ -6,18 +6,18 @@ Type=Promo
 ScryfallCode=OLGC
 
 [cards]
-2011 R Force of Will
-2012 R Brainstorm
-2013 U Wasteland
-2014 M Gaea's Cradle
-2015 M Tundra
-2016 M Underground Sea
-2017 M Badlands
-2018 M Taiga
-2019 M Savannah
-2020 M Scrubland
-2021 M Plateau
-2022 M Volcanic Island
-2023 M Tropical Island
-2024 M Bayou
-2025 M City of Traitors
+2011 R Force of Will @Matt Stewart
+2012 R Brainstorm @Chris Rahn
+2013 U Wasteland @Steven Belledin
+2014 M Gaea's Cradle @Filip Burburan
+2015 M Tundra @Raoul Vitale
+2016EU M Underground Sea @Filip Burburan
+2016NA M Badlands @Filip Burburan
+2017EU M Taiga @Mark Poole
+2017NA M Savannah @Mark Poole
+2018 M Scrubland @Mark Poole
+2018A M Plateau @Mark Poole
+2018NA M Volcanic Island @Mark Poole
+2019 M Tropical Island @Mark Poole
+2019A M Bayou @Raoul Vitale
+2019NA M City of Traitors @Ralph Horsley

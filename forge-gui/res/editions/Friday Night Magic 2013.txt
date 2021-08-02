@@ -6,15 +6,15 @@ Type=Promo
 ScryfallCode=F13
 
 [cards]
-1 R Searing Spear
-2 R Reliquary Tower
-3 R Farseek
-4 R Call of the Conclave
-5 R Judge's Familiar
-6 R Izzet Charm
-7 R Rakdos Cackler
-8 R Dimir Charm
-9 R Experiment One
-10 R Ghor-Clan Rampager
-11 R Grisly Salvage
-12 R Sin Collector
+1 R Searing Spear @Christopher Moeller
+2 R Reliquary Tower @Drew Baker
+3 R Farseek @Michael Komarck
+4 R Call of the Conclave @Anthony Palumbo
+5 R Judge's Familiar @Ryan Yee
+6 R Izzet Charm @Zoltan Boros
+7 R Rakdos Cackler @Dave Kendall
+8 R Dimir Charm @Zoltan Boros
+9 R Experiment One @Jack Wang
+10 R Ghor-Clan Rampager @Dave Kendall
+11 R Grisly Salvage @Maciej Kuciara
+12 R Sin Collector @Izzy

@@ -6,14 +6,14 @@ Type=Promo
 ScryfallCode=J13
 
 [cards]
-1 R Swords to Plowshares
-2 R Bribery
-3 R Imperial Recruiter
-4 R Crucible of Worlds
-5 R Genesis
-6 R Overwhelming Forces
-7 R Vindicate
-8 R Show and Tell
+1 R Swords to Plowshares @Sam Wolfe Connelly
+2 R Bribery @Cynthia Sheppard
+3 R Imperial Recruiter @Mitsuaki Sagiri
+4 R Crucible of Worlds @Ron Spencer
+5 R Genesis @Mark Zug
+6 R Overwhelming Forces @Gao Yan
+7 R Vindicate @Karla Ortiz
+8 R Show and Tell @Zack Stella
 
 [tokens]
 c_3_3_e_a_golem

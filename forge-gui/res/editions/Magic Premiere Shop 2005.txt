@@ -7,23 +7,23 @@ CardLang=ja
 ScryfallCode=PMPS
 
 [cards]
-287 C Plains
-288 C Plains
-289 C Plains
-290 C Plains
-291 C Island
-292 C Island
-293 C Island
-294 C Island
-295 C Swamp
-296 C Swamp
-297 C Swamp
-298 C Swamp
-299 C Mountain
-300 C Mountain
-301 C Mountain
-302 C Mountain
-303 C Forest
-304 C Forest
-305 C Forest
-306 C Forest
+287 C Plains @Stephan Martiniere
+288 C Plains @Christopher Moeller
+289 C Plains @Anthony S. Waters
+290 C Plains @Richard Wright
+291 C Island @Stephan Martiniere
+292 C Island @Christopher Moeller
+293 C Island @Anthony S. Waters
+294 C Island @Richard Wright
+295 C Swamp @Stephan Martiniere
+296 C Swamp @Christopher Moeller
+297 C Swamp @Anthony S. Waters
+298 C Swamp @Richard Wright
+299 C Mountain @Stephan Martiniere
+300 C Mountain @Christopher Moeller
+301 C Mountain @Anthony S. Waters
+302 C Mountain @Richard Wright
+303 C Forest @Stephan Martiniere
+304 C Forest @Christopher Moeller
+305 C Forest @Anthony S. Waters
+306 C Forest @Richard Wright

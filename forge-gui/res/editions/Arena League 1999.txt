@@ -6,12 +6,12 @@ Type=Promo
 ScryfallCode=PAL99
 
 [cards]
-1 R Forest
-2 R Pouncing Jaguar
-3 R Island
-4 R Skittering Skirge
-5 R Mountain
-6 R Rewind
-7 R Plains
-9 R Swamp
-10 R Island
+1 R Forest @Anthony S. Waters
+2 R Pouncing Jaguar @Daren Bader
+3 R Island @Donato Giancola
+4 R Skittering Skirge @Ron Spencer
+5 R Mountain @John Avon
+6 R Rewind @Dermot Power
+7 R Plains @Rob Alexander
+9 R Swamp @John Avon
+3† R Island @Donato Giancola

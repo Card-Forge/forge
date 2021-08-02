@@ -11,147 +11,147 @@ FoilAlwaysInCommonSlot=False
 ScryfallCode=UNH
 
 [cards]
-1 U Atinlay Igpay
-2 C AWOL
-3 U Bosom Buddy
-4 C Cardpecker
-5 C Cheap Ass
-6 C Circle of Protection: Art
-7 R Collector Protector
-8 R Drawn Together
-9 U Emcee
-10 C Erase (Not the Urza's Legacy One)
-11 C Fascist Art Director
-12 U First Come, First Served
-13 R Frankie Peanuts
-14 U Head to Head
-15 U Ladies' Knight
-16 C Little Girl
-17 R Look at Me, I'm R&D
-18 C Man of Measure
-19 U Save Life
-20 C Standing Army
-21 R Staying Power
-22 C Wordmail
-23 U _
-24 R Ambiguity
-25 C Artful Looter
-26 R Avatar of Me
-27 C Brushstroke Paintermage
-28 C Bursting Beebles
-29 C Carnivorous Death-Parrot
-30 U Cheatyface
-31 C Double Header
-32 C Flaccify
-33 C Framed!
-34 R Greater Morphling
-35 R Johnny, Combo Player
-36 C Loose Lips
-37 U Magical Hacker
-38 U Mise
-39 C Moniker Mage
-40 U Mouth to Mouth
-41 R Now I Know My ABC's
-42 C Number Crunch
-43 U Question Elemental?
-44 R Richard Garfield, Ph.D.
-45 C Smart Ass
-46 U Spell Counter
-47 R Topsy Turvy
-48 R Aesthetic Consultation
-49 C Bad Ass
-50 C Bloodletter
-51 U Booster Tutor
-52 C Duh
-53 R Enter the Dungeon
-54 U Eye to Eye
-55 C The Fallen Apart
-56 C Farewell to Arms
-57 R Infernal Spawn of Infernal Spawn of Evil
-58 U Kill! Destroy!
-59 C Mother of Goons
-60 R Necro-Impotence
-61 U Persecute Artist
-62 U Phyrexian Librarian
-63 C Stop That
-64 C Tainted Monkey
-65 C Vile Bile
-66 C Wet Willie of the Damned
-67 C When Fluffy Bunnies Attack
-68 U Working Stiff
-69 U Zombie Fanboy
-70 R Zzzyxas's Abyss
-71 R Assquatch
-72 R Blast from the Past
-73 R Curse of the Fire Penguin
-74 U Deal Damage
-75 C Dumb Ass
-76 U Face to Face
-77 C Frazzled Editor
-78 C Goblin Mime
-79 C Goblin Secret Agent
-80 C Goblin S.W.A.T. Team
-81 C Mana Flair
-82 C Mons's Goblin Waiters
-83 C Orcish Paratroopers
-84 C Punctuate
-85 U Pygmy Giant
-86 C Red-Hot Hottie
-87 U Rocket-Powered Turbo Slug
-88 C Saute
-89 U Six-y Beast
-90 C Touch and Go
-91 R Yet Another Aether Vortex
-92 R B-I-N-G-O
-93 U Creature Guy
-94 U Elvish House Party
-95 C Fat Ass
-96 R Form of the Squirrel
-97 R Fraction Jackson
-98 U Gluetius Maximus
-99 U Granny's Payback
-100 C Graphic Violence
-101 C Keeper of the Sacred Word
-102 C Land Aid '04
-103 C Laughing Hyena
-104 C Monkey Monkey Monkey
-105 U Name Dropping
-106 R Old Fogey
-107 C Our Market Research Shows That Players Like Really Long Card Names So We Made this Card to Have the Absolute Longest Card Name Ever Elemental
-108 C Remodel
-109 C Shoe Tree
-110 U Side to Side
-111 C S.N.O.T.
-112 U Stone-Cold Basilisk
-113 C Supersize
-114 U Symbol Status
-115 R Uktabi Kong
-116 R "Ach! Hans, Run!"
-117 R Ass Whuppin'
-118 R Meddling Kids
-119 R Rare-B-Gone
-120 R Who // What // When // Where // Why
-121 R Gleemax
-122 R Letter Bomb
-123 U Mana Screw
-124 R Mox Lotus
-125 U My First Tome
-126 R Pointy Finger of Doom
-127 U Rod of Spanking
-128 R Time Machine
-129 U Togglodyte
-130 U Toy Boat
-131 U Urza's Hot Tub
-132 R Water Gun Balloon Game
-133 R World-Bottling Kit
-134 R City of Ass
-135 R R&D's Secret Lair
-136 L Plains
-137 L Island
-138 L Swamp
-139 L Mountain
-140 L Forest
-141 S Super Secret Tech
+1 U Atinlay Igpay @Evkay Alkerway
+2 C AWOL @Stephen Tappin
+3 U Bosom Buddy @Dan Scott
+4 C Cardpecker @Richard Sardinha
+5 C Cheap Ass @Randy Gallegos
+6 C Circle of Protection: Art @Jim “Stop the Da Vinci Beatdown” Pavelec
+7 R Collector Protector @Christopher Rush
+8 R Drawn Together @Pete “Fear Me” Venters
+9 U Emcee @Quinton Hoover
+10 C Erase (Not the Urza's Legacy One) @Pete “Yes the Urza's Legacy One” Venters
+11 C Fascist Art Director @Edward P. “Feed Me” Beard, Jr.
+12 U First Come, First Served @Thomas Gianni
+13 R Frankie Peanuts @Thomas M. Baxa
+14 U Head to Head @Thomas Gianni
+15 U Ladies' Knight @Ron Spears
+16 C Little Girl @Rebecca Guay
+17 R Look at Me, I'm R&D @
+18 C Man of Measure @Edward P. Beard, Jr.
+19 U Save Life @Ray Lago
+20 C Standing Army @Randy Gallegos
+21 R Staying Power @Richard Sardinha
+22 C Wordmail @Ron Spencer
+23 U _ @Ron Spears
+24 R Ambiguity @Stephen Daniele
+25 C Artful Looter @Heather “Erica Gassalasca-Jape” Hudson
+26 R Avatar of Me @Greg Hildebrandt
+27 C Brushstroke Paintermage @Ron “Don't You Dare Change Me” Spears
+28 C Bursting Beebles @David “Beeblemania” Martin
+29 C Carnivorous Death-Parrot @Tim Hildebrandt
+30 U Cheatyface @Doug Chaffee
+31 C Double Header @Richard Sardinha
+32 C Flaccify @Tim Hildebrandt
+33 C Framed! @Alan “Don't Feel Like You Have to Pick Me” Pollack
+34 R Greater Morphling @Greg “Six-Pack” Staples
+35 R Johnny, Combo Player @Kensuke Okabayashi
+36 C Loose Lips @John Matson
+37 U Magical Hacker @Doug Chaffee
+38 U Mise @Matt Cavotta
+39 C Moniker Mage @Keith Garletts
+40 U Mouth to Mouth @Alan Pollack
+41 R Now I Know My ABC's @Tony Szczudlo
+42 C Number Crunch @Stephen Daniele
+43 U Question Elemental? @Edward P. Beard, Jr.
+44 R Richard Garfield, Ph.D. @Dave Dorman
+45 C Smart Ass @Trevor Hairsine
+46 U Spell Counter @Doug Chaffee
+47 R Topsy Turvy @Jeff Miracola
+48 R Aesthetic Consultation @David “Help Me” Martin
+49 C Bad Ass @Thomas M. Baxa
+50 C Bloodletter @Daren Bader
+51 U Booster Tutor @Christopher Rush
+52 C Duh @Dave Dorman
+53 R Enter the Dungeon @Luca Zontini
+54 U Eye to Eye @Michael Sutfin
+55 C The Fallen Apart @Corey D. Macourek
+56 C Farewell to Arms @Ron Lemen
+57 R Infernal Spawn of Infernal Spawn of Evil @Ron Spencer
+58 U Kill! Destroy! @Corey D. Macourek
+59 C Mother of Goons @Darrell Riche
+60 R Necro-Impotence @Mark Tedin
+61 U Persecute Artist @Rebecca “Don't Mess with Me” Guay
+62 U Phyrexian Librarian @Kev Walker
+63 C Stop That @Anson Maddocks
+64 C Tainted Monkey @Mark Zug
+65 C Vile Bile @Tony Szczudlo
+66 C Wet Willie of the Damned @Greg Staples
+67 C When Fluffy Bunnies Attack @Ray Lago
+68 U Working Stiff @Darrell Riche
+69 U Zombie Fanboy @Matt “I'm Your Boy” Cavotta
+70 R Zzzyxas's Abyss @Pete Venters
+71 R Assquatch @Jeremy Jarvis
+72 R Blast from the Past @Douglas Shuler
+73 R Curse of the Fire Penguin @Matt Thompson
+74 U Deal Damage @Scott M. Fischer
+75 C Dumb Ass @Bradley Williams
+76 U Face to Face @Randy Gallegos
+77 C Frazzled Editor @Jim Pavelec
+78 C Goblin Mime @Franz Vohwinkel
+79 C Goblin Secret Agent @Tony Szczudlo
+80 C Goblin S.W.A.T. Team @Eric Deschamps
+81 C Mana Flair @Paolo “That's Actually Me” Parente
+82 C Mons's Goblin Waiters @Pete Venters
+83 C Orcish Paratroopers @Matt Thompson
+84 C Punctuate @Jim Pavelec
+85 U Pygmy Giant @Eric Deschamps
+86 C Red-Hot Hottie @Jeremy Jarvis
+87 U Rocket-Powered Turbo Slug @Franz Vohwinkel
+88 C Saute @Jeff Miracola
+89 U Six-y Beast @Anson Maddocks
+90 C Touch and Go @Ben Thompson
+91 R Yet Another Aether Vortex @David Day
+92 R B-I-N-G-O @Ron Spencer
+93 U Creature Guy @Jeff Easley
+94 U Elvish House Party @Thomas Manning
+95 C Fat Ass @Jeremy Jarvis
+96 R Form of the Squirrel @Carl Critchlow
+97 R Fraction Jackson @Mark Poole
+98 U Gluetius Maximus @Jeff Easley
+99 U Granny's Payback @Joel Thomas
+100 C Graphic Violence @Wayne “King of” England
+101 C Keeper of the Sacred Word @Dany Orizio
+102 C Land Aid '04 @Jim Nelson
+103 C Laughing Hyena @Mark Poole
+104 C Monkey Monkey Monkey @Liz Danforth
+105 U Name Dropping @Tony Szczudlo
+106 R Old Fogey @Douglas Shuler
+107 C Our Market Research Shows That Players Like Really Long Card Names So We Made this Card to Have the Absolute Longest Card Name Ever Elemental @Greg Hildebrandt
+108 C Remodel @Lars Grant-“Wild Wild”-West
+109 C Shoe Tree @Francis Tsai
+110 U Side to Side @Jim Nelson
+111 C S.N.O.T. @Cyril Van Der Haegen
+112 U Stone-Cold Basilisk @Don Hazeltine
+113 C Supersize @DiTerlizzi
+114 U Symbol Status @Liz Danforth
+115 R Uktabi Kong @Una Fricker
+116 R "Ach! Hans, Run!" @Quinton Hoover
+117 R Ass Whuppin' @Don Hazeltine
+118 R Meddling Kids @Christopher Moeller
+119 R Rare-B-Gone @John Matson
+120 R Who // What // When // Where // Why @Dan Frazier
+121 R Gleemax @Richard Thomas
+122 R Letter Bomb @Daniel Gelon
+123 U Mana Screw @Mike Raabe
+124 R Mox Lotus @Kevin Dobler
+125 U My First Tome @Heather Hudson
+126 R Pointy Finger of Doom @Martina Pilcerova
+127 U Rod of Spanking @Mark Brill
+128 R Time Machine @John Avon
+129 U Togglodyte @Dan Frazier
+130 U Toy Boat @Lars Grant-West
+131 U Urza's Hot Tub @Stephen Tappin
+132 R Water Gun Balloon Game @Mark Brill
+133 R World-Bottling Kit @Alan Rabinowitz
+134 R City of Ass @John Avon
+135 R R&D's Secret Lair @John Avon
+136 L Plains @John Avon
+137 L Island @John Avon
+138 L Swamp @John Avon
+139 L Mountain @John Avon
+140 L Forest @John Avon
+141 S Super Secret Tech @Dan Frazier
 
 [tokens]
 r_1_1_goblin

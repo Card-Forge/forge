@@ -6,7 +6,7 @@ Type=Promo
 ScryfallCode=PJ21
 
 [cards]
-5 M The Gitrog Monster
-6 R Grand Arbiter Augustin IV
-7 M Karlov of the Ghost Council
-9 M Nicol Bolas, the Ravager
+5 M The Gitrog Monster @Nils Hamm
+6 R Grand Arbiter Augustin IV @Matt Stewart
+7 M Karlov of the Ghost Council @Wisnu Tan
+9 M Nicol Bolas, the Ravager @Lie Setiawan

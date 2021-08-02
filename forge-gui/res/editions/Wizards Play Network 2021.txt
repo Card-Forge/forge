@@ -6,4 +6,4 @@ Type=Promo
 ScryfallCode=PWP21
 
 [cards]
-1 R Fabled Passage
+1 R Fabled Passage @Howard Lyon

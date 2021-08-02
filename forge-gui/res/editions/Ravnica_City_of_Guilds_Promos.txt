@@ -6,5 +6,5 @@ Type=Promo
 ScryfallCode=PRAV
 
 [cards]
-245★ R Dimir Guildmage
-247★ R Gleancrawler
+245★ R Dimir Guildmage @Adam Rex
+247★ R Gleancrawler @Jeremy Jarvis

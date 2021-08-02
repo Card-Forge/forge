@@ -7,139 +7,139 @@ Type=Boxed_Set
 ScryfallCode=GK2
 
 [cards]
-1 M Isperia, Supreme Judge
-2 U Azorius Herald
-3 U Azorius Justiciar
-4 U Stoic Ephemera
-5 U Court Hussar
-6 U Hover Barrier
-7 R Archon of the Triumvirate
-8 U Azorius Charm
-9 U Azorius Guildmage
-10 R Detention Sphere
-11 R Dovescape
-12 C Dramatic Rescue
-13 R Isperia the Inscrutable
-14 U Judge's Familiar
-15 R Lavinia of the Tenth
-16 U Lyev Skyknight
-17 R Pride of the Clouds
-18 R Render Silent
-19 U Sky Hussar
-20 U Skymark Roc
-21 M Sphinx's Revelation
-22 R Windreaver
-23 U Azorius Keyrune
-24 U Azorius Signet
-25 U Azorius Chancery
-26 L Plains
-27 L Island
-28 R Teysa, Orzhov Scion
-29 U Belfry Spirit
-30 U Martyred Rusalka
-31 U Keening Banshee
-32 U Plagued Rusalka
-33 R Pontiff of Blight
-34 R Skeletal Vampire
-35 U Stab Wound
-36 U Ultimate Price
-37 R Angel of Despair
-38 M Deathpact Angel
-39 R Debtors' Knell
-40 R Ghost Council of Orzhova
-41 U One Thousand Lashes
-42 U Orzhov Charm
-43 R Orzhov Pontiff
-44 U Pillory of the Sleepless
-45 U Sin Collector
-46 R Treasury Thrull
-47 U Vizkopa Guildmage
-48 C Orzhov Signet
-49 C Orzhov Basilica
-50 L Plains
-51 L Swamp
-52 M Rakdos, Lord of Riots
-53 U Crypt Champion
-54 U Thrill-Kill Assassin
-55 C Cackling Flames
-56 R Demonfire
-57 R Rakdos Pit Dragon
-58 C Splatter Thug
-59 M Utvara Hellkite
-60 C Auger Spree
-61 R Avatar of Discord
-62 R Carnival Hellsteed
-63 R Dreadbore
-64 U Jagged Poppet
-65 R Lyzolda, the Blood Witch
-66 M Master of Cruelties
-67 U Rakdos Cackler
-68 U Rakdos Charm
-69 U Rakdos Guildmage
-70 C Rakdos Shred-Freak
-71 R Rakdos the Defiler
-72 M Rakdos's Return
-73 C Riot Spikes
-74 C Wrecking Ball
-75 U Rakdos Keyrune
-76 U Rakdos Signet
-77 C Rakdos Carnarium
-78 L Swamp
-79 L Mountain
-80 R Ruric Thar, the Unbowed
-81 R Skarrgan Firebird
-82 R Birds of Paradise
-83 R Protean Hulk
-84 C Skarrgan Pit-Skulk
-85 U Wasteland Viper
-86 R Wurmweaver Coil
-87 R Borborygmos
-88 U Burning-Tree Emissary
-89 R Burning-Tree Shaman
-90 U Ghor-Clan Rampager
-91 R Giant Solifuge
-92 U Gruul Charm
-93 C Pit Fight
-94 R Rubblebelt Raiders
-95 R Rubblehulk
-96 R Rumbling Slum
-97 U Savage Twister
-98 M Savageborn Hydra
-99 C Scab-Clan Mauler
-100 R Ulasht, the Hate Seed
-101 C Zhur-Taa Druid
-102 C Zhur-Taa Swine
-103 U Gruul Signet
-104 C Gruul Turf
-105 L Mountain
-106 L Forest
-107 R Zegana, Utopian Speaker
-108 C Cloudfin Raptor
-109 U Rapid Hybridization
-110 R Cytoplast Root-Kin
-111 U Experiment One
-112 R Gyre Sage
-113 C Miming Slime
-114 R Vinelasher Kudzu
-115 C Coiling Oracle
-116 U Elusive Krasis
-117 R Experiment Kraj
-118 R Fathom Mage
-119 R Momir Vig, Simic Visionary
-120 U Nimbus Swimmer
-121 R Omnibian
-122 U Plaxcaster Frogling
-123 M Progenitor Mimic
-124 R Simic Sky Swallower
-125 U Trygon Predator
-126 U Urban Evolution
-127 R Voidslime
-128 R Vorel of the Hull Clade
-129 U Zameck Guildmage
-130 U Simic Signet
-131 U Simic Growth Chamber
-132 L Island
-133 L Forest
+1 M Isperia, Supreme Judge @Lucas Graciano
+2 U Azorius Herald @Justin Sweet
+3 U Azorius Justiciar @Chris Rahn
+4 U Stoic Ephemera @Randy Gallegos
+5 U Court Hussar @Ron Spears
+6 U Hover Barrier @Mathias Kollros
+7 R Archon of the Triumvirate @David Rapoza
+8 U Azorius Charm @Zoltan Boros
+9 U Azorius Guildmage @Christopher Moeller
+10 R Detention Sphere @Kev Walker
+11 R Dovescape @Shishizaru
+12 C Dramatic Rescue @Ryan Pancoast
+13 R Isperia the Inscrutable @Greg Staples
+14 U Judge's Familiar @Jack Wang
+15 R Lavinia of the Tenth @Willian Murai
+16 U Lyev Skyknight @Johannes Voss
+17 R Pride of the Clouds @Rebecca Guay
+18 R Render Silent @Matt Stewart
+19 U Sky Hussar @Kev Walker
+20 U Skymark Roc @Christopher Moeller
+21 M Sphinx's Revelation @Slawomir Maniak
+22 R Windreaver @Aleksi Briclot
+23 U Azorius Keyrune @Daniel Ljunggren
+24 U Azorius Signet @Raoul Vitale
+25 U Azorius Chancery @John Avon
+26 L Plains @Alayna Danner
+27 L Island @Alayna Danner
+28 R Teysa, Orzhov Scion @Sara Winters
+29 U Belfry Spirit @Daren Bader
+30 U Martyred Rusalka @Alex Horley-Orlandelli
+31 U Keening Banshee @Robert Bliss
+32 U Plagued Rusalka @Alex Horley-Orlandelli
+33 R Pontiff of Blight @Seb McKinnon
+34 R Skeletal Vampire @Wayne Reynolds
+35 U Stab Wound @Scott Chou
+36 U Ultimate Price @Karl Kopinski
+37 R Angel of Despair @Todd Lockwood
+38 M Deathpact Angel @Jason Chan
+39 R Debtors' Knell @Kev Walker
+40 R Ghost Council of Orzhova @Greg Staples
+41 U One Thousand Lashes @Daarken
+42 U Orzhov Charm @Zoltan Boros
+43 R Orzhov Pontiff @Adam Rex
+44 U Pillory of the Sleepless @Marc Simonetti
+45 U Sin Collector @Mike Bierek
+46 R Treasury Thrull @Mark Zug
+47 U Vizkopa Guildmage @Tyler Jacobson
+48 C Orzhov Signet @Martina Pilcerova
+49 C Orzhov Basilica @John Avon
+50 L Plains @Ravenna Tran
+51 L Swamp @Ravenna Tran
+52 M Rakdos, Lord of Riots @Yigit Koroglu
+53 U Crypt Champion @Pete Venters
+54 U Thrill-Kill Assassin @Tyler Jacobson
+55 C Cackling Flames @Shishizaru
+56 R Demonfire @Greg Staples
+57 R Rakdos Pit Dragon @Kev Walker
+58 C Splatter Thug @Kev Walker
+59 M Utvara Hellkite @Mark Zug
+60 C Auger Spree @Raymond Swanland
+61 R Avatar of Discord @rk post
+62 R Carnival Hellsteed @Chase Stone
+63 R Dreadbore @Wayne Reynolds
+64 U Jagged Poppet @Jeff Miracola
+65 R Lyzolda, the Blood Witch @Jim Nelson
+66 M Master of Cruelties @Chase Stone
+67 U Rakdos Cackler @Ryan Barger
+68 U Rakdos Charm @Zoltan Boros
+69 U Rakdos Guildmage @Jeremy Jarvis
+70 C Rakdos Shred-Freak @Wayne Reynolds
+71 R Rakdos the Defiler @Zoltan Boros & Gabor Szikszai
+72 M Rakdos's Return @Daarken
+73 C Riot Spikes @Christopher Moeller
+74 C Wrecking Ball @Ron Spears
+75 U Rakdos Keyrune @Daniel Ljunggren
+76 U Rakdos Signet @Martina Pilcerova
+77 C Rakdos Carnarium @John Avon
+78 L Swamp @Dimitar Marinski
+79 L Mountain @Dimitar Marinski
+80 R Ruric Thar, the Unbowed @Jason A. Engle
+81 R Skarrgan Firebird @Kev Walker
+82 R Birds of Paradise @Marcelo Vignali
+83 R Protean Hulk @Matt Cavotta
+84 C Skarrgan Pit-Skulk @Liam Sharp
+85 U Wasteland Viper @Lucas Graciano
+86 R Wurmweaver Coil @Mitch Cotie
+87 R Borborygmos @Todd Lockwood
+88 U Burning-Tree Emissary @Izzy
+89 R Burning-Tree Shaman @Dan Scott
+90 U Ghor-Clan Rampager @Charles Urbach
+91 R Giant Solifuge @Pat Lee
+92 U Gruul Charm @Zoltan Boros
+93 C Pit Fight @Matt Stewart
+94 R Rubblebelt Raiders @Chippy
+95 R Rubblehulk @Raymond Swanland
+96 R Rumbling Slum @Carl Critchlow
+97 U Savage Twister @Luca Zontini
+98 M Savageborn Hydra @Raymond Swanland
+99 C Scab-Clan Mauler @Liam Sharp
+100 R Ulasht, the Hate Seed @Nottsuo
+101 C Zhur-Taa Druid @Mark Winters
+102 C Zhur-Taa Swine @Yeong-Hao Han
+103 U Gruul Signet @Efrem Palacios
+104 C Gruul Turf @John Avon
+105 L Mountain @James Paick
+106 L Forest @James Paick
+107 R Zegana, Utopian Speaker @Ekaterina Burmak
+108 C Cloudfin Raptor @Peter Mohrbacher
+109 U Rapid Hybridization @Jack Wang
+110 R Cytoplast Root-Kin @Thomas M. Baxa
+111 U Experiment One @Chase Stone
+112 R Gyre Sage @Tyler Jacobson
+113 C Miming Slime @Svetlin Velinov
+114 R Vinelasher Kudzu @Mark Tedin
+115 C Coiling Oracle @Mark Zug
+116 U Elusive Krasis @Wesley Burt
+117 R Experiment Kraj @Mark Tedin
+118 R Fathom Mage @Ryan Pancoast
+119 R Momir Vig, Simic Visionary @Victor Adame Minguez
+120 U Nimbus Swimmer @Howard Lyon
+121 R Omnibian @Jim Nelson
+122 U Plaxcaster Frogling @Greg Staples
+123 M Progenitor Mimic @Daarken
+124 R Simic Sky Swallower @rk post
+125 U Trygon Predator @Jack Wang
+126 U Urban Evolution @Eytan Zana
+127 R Voidslime @Jim Murray
+128 R Vorel of the Hull Clade @Mike Bierek
+129 U Zameck Guildmage @Chase Stone
+130 U Simic Signet @Mike Sass
+131 U Simic Growth Chamber @John Avon
+132 L Island @Yeong-Hao Han
+133 L Forest @Yeong-Hao Han
 
 [tokens]
 w_1_1_spirit_flying

@@ -6,4 +6,4 @@ Type=Promo
 ScryfallCode=PONS
 
 [cards]
-169 R Silent Specter
+169 R Silent Specter @Daren Bader

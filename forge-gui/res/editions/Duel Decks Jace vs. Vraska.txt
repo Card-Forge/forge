@@ -7,94 +7,94 @@ Type=Duel_Deck
 ScryfallCode=DDM
 
 [cards]
-1 M Jace, Architect of Thought
-2 U Chronomaton
-3 U Jace's Phantasm
-4 C Phantasmal Bear
-5 U AEther Figment
-6 C Crosstown Courier
-7 C Dream Stalker
-8 C Krovikan Mist
-9 U Merfolk Wayfinder
-10 C Sea Gate Oracle
-11 C Stealer of Secrets
-12 C AEther Adept
-13 C Archaeomancer
-14 U Phantasmal Dragon
-15 R Body Double
-16 C Leyline Phantom
-17 R Aeon Chronicler
-18 U Riftwing Cloudskate
-19 R Jace's Mindseeker
-20 C Errant Ephemeron
-21 C Thought Scour
-22 U Agoraphobia
-23 C Into the Roil
-24 C Memory Lapse
-25 C Prohibit
-26 U Remand
-27 C Claustrophobia
-28 C Griptide
-29 C Ray of Command
-30 U Control Magic
-31 U Summoner's Bane
-32 U Jace's Ingenuity
-33 R Future Sight
-34 R Spelltwine
-35 U Dread Statuary
-36 C Halimar Depths
-38 L Island
-38 L Island
-38 L Island
-38 L Island
-38 L Island
-42 M Vraska the Unseen
-43 C Pulse Tracker
-44 C Shadow Alley Denizen
-45 U Tavern Swindler
-46 U Wight of Precinct Six
-47 C Death-Hood Cobra
-48 C Gatecreeper Vine
-49 U River Boa
-50 R Vinelasher Kudzu
-51 C Putrid Leech
-52 C Sadistic Augermage
-53 C Slate Street Ruffian
-54 C Oran-Rief Recluse
-55 R Spawnwrithe
-56 C Stonefare Crocodile
-57 R Ohran Viper
-58 U Corpse Traders
-59 C Festerhide Boar
-60 C Mold Shambler
-61 C Highway Robber
-62 U Nekrataal
-63 R Reaper of the Wilds
-64 U Acidic Slime
-65 U Drooling Groodion
-66 C Tragic Slip
-67 C Hypnotic Cloud
-68 U Night's Whisper
-69 U Marsh Casualties
-70 U Treasured Find
-71 C Last Kiss
-72 C Stab Wound
-73 R Underworld Connections
-74 C Consume Strength
-75 C Grisly Spectacle
-76 C Golgari Guildgate
-77 U Rogue's Passage
-78 U Tainted Wood
-83 L Swamp
-83 L Swamp
-83 L Swamp
-83 L Swamp
-83 L Swamp
-84 L Forest
-84 L Forest
-84 L Forest
-84 L Forest
-84 L Forest
+1 M Jace, Architect of Thought @Igor Kieryluk
+2 U Chronomaton @Vincent Proce
+3 U Jace's Phantasm @Johann Bodin
+4 C Phantasmal Bear @Ryan Yee
+5 U Aether Figment @Thomas M. Baxa
+6 C Crosstown Courier @Chase Stone
+7 C Dream Stalker @Brian Despain
+8 C Krovikan Mist @Jeremy Jarvis
+9 U Merfolk Wayfinder @Christopher Moeller
+10 C Sea Gate Oracle @Daniel Ljunggren
+11 C Stealer of Secrets @Michael C. Hayes
+12 C Aether Adept @Eric Deschamps
+13 C Archaeomancer @Zoltan Boros
+14 U Phantasmal Dragon @Wayne Reynolds
+15 R Body Double @Winona Nelson
+16 C Leyline Phantom @Ryan Yee
+17 R Aeon Chronicler @Dan Dos Santos
+18 U Riftwing Cloudskate @Carl Critchlow
+19 R Jace's Mindseeker @Greg Staples
+20 C Errant Ephemeron @Luca Zontini
+21 C Thought Scour @David Rapoza
+22 U Agoraphobia @Jim Murray
+23 C Into the Roil @Kieran Yanner
+24 C Memory Lapse @Rebecca Guay
+25 C Prohibit @Adam Rex
+26 U Remand @Zoltan Boros
+27 C Claustrophobia @Ryan Pancoast
+28 C Griptide @Igor Kieryluk
+29 C Ray of Command @Andrew Robinson
+30 U Control Magic @Clint Cearley
+31 U Summoner's Bane @Cyril Van Der Haegen
+32 U Jace's Ingenuity @Igor Kieryluk
+33 R Future Sight @Dan Scott
+34 R Spelltwine @Noah Bradley
+35 U Dread Statuary @Jason A. Engle
+36 C Halimar Depths @Volkan Baǵa
+37 L Island @John Avon
+38 L Island @Yeong-Hao Han
+39 L Island @Adam Paquette
+40 L Island @Richard Wright
+41 L Island @Richard Wright
+42 M Vraska the Unseen @Igor Kieryluk
+43 C Pulse Tracker @Andrew Robinson
+44 C Shadow Alley Denizen @Cynthia Sheppard
+45 U Tavern Swindler @Cynthia Sheppard
+46 U Wight of Precinct Six @Ryan Barger
+47 C Death-Hood Cobra @Jason Felix
+48 C Gatecreeper Vine @Trevor Claxton
+49 U River Boa @Paul Bonner
+50 R Vinelasher Kudzu @Mark Tedin
+51 C Putrid Leech @Craig J Spearing
+52 C Sadistic Augermage @Nick Percival
+53 C Slate Street Ruffian @Jim Murray
+54 C Oran-Rief Recluse @Lars Grant-West
+55 R Spawnwrithe @Daarken
+56 C Stonefare Crocodile @Tomasz Jedruszek
+57 R Ohran Viper @Kev Walker
+58 U Corpse Traders @Kev Walker
+59 C Festerhide Boar @Nils Hamm
+60 C Mold Shambler @Karl Kopinski
+61 C Highway Robber @Kev Walker
+62 U Nekrataal @Christopher Moeller
+63 R Reaper of the Wilds @Karl Kopinski
+64 U Acidic Slime @Karl Kopinski
+65 U Drooling Groodion @Kev Walker
+66 C Tragic Slip @Christopher Moeller
+67 C Hypnotic Cloud @Randy Gallegos
+68 U Night's Whisper @John Severin Brassell
+69 U Marsh Casualties @Scott Chou
+70 U Treasured Find @Jason Chan
+71 C Last Kiss @Vance Kovacs
+72 C Stab Wound @Scott Chou
+73 R Underworld Connections @Yeong-Hao Han
+74 C Consume Strength @Adam Rex
+75 C Grisly Spectacle @Zoltan Boros
+76 C Golgari Guildgate @Eytan Zana
+77 U Rogue's Passage @Christine Choi
+78 U Tainted Wood @Rob Alexander
+79 L Swamp @John Avon
+80 L Swamp @Yeong-Hao Han
+81 L Swamp @Adam Paquette
+82 L Swamp @Richard Wright
+83 L Swamp @Richard Wright
+84 L Forest @John Avon
+85 L Forest @Yeong-Hao Han
+86 L Forest @Adam Paquette
+87 L Forest @Richard Wright
+88 L Forest @Richard Wright
 
 [tokens]
 u_2_2_illusion

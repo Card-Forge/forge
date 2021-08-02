@@ -13,255 +13,255 @@ ChaosDraftThemes=CORE_SET
 ScryfallCode=M14
 
 [cards]
-1 M Ajani, Caller of the Pride
-2 R Ajani's Chosen
-3 U Angelic Accord
-4 C Angelic Wall
-5 M Archangel of Thune
-6 C Auramancer
-7 U Banisher Priest
-8 U Blessing
-9 R Bonescythe Sliver
-10 U Brave the Elements
-11 C Capashen Knight
-12 C Celestial Flare
-13 C Charging Griffin
-14 U Congregate
-15 C Dawnstrike Paladin
-16 M Devout Invocation
-17 C Divine Favor
-18 R Fiendslayer Paladin
-19 C Fortify
-20 C Griffin Sentinel
-21 C Hive Stirrings
-22 R Imposing Sovereign
-23 R Indestructibility
-24 C Master of Diversion
-25 C Pacifism
-26 R Path of Bravery
-27 C Pay No Heed
-28 C Pillarfield Ox
-29 R Planar Cleansing
-30 C Sentinel Sliver
-31 R Seraph of the Sword
-32 U Serra Angel
-33 C Show of Valor
-34 C Siege Mastodon
-35 R Silence
-36 C Solemn Offering
-37 C Soulmender
-38 U Steelform Sliver
-39 U Stonehorn Chanter
-40 C Suntail Hawk
-41 U Wall of Swords
-42 U Air Servant
-43 C Archaeomancer
-44 C Armored Cancrix
-45 C Cancel
-46 C Claustrophobia
-47 R Clone
-48 R Colossal Whale
-49 C Coral Merfolk
-50 R Dismiss into Dream
-51 C Disperse
-52 C Divination
-53 R Domestication
-54 R Elite Arcanist
-55 C Essence Scatter
-56 C Frost Breath
-57 R Galerider Sliver
-58 U Glimpse the Future
-59 U Illusionary Armor
-60 M Jace, Memory Adept
-61 R Jace's Mindseeker
-62 C Merfolk Spy
-63 C Messenger Drake
-64 C Negate
-65 C Nephalia Seakite
-66 U Opportunity
-67 U Phantom Warrior
-68 R Quicken
-69 C Scroll Thief
-70 C Seacoast Drake
-71 C Sensory Deprivation
-72 U Spell Blast
-73 R Tidebinder Mage
-74 C Time Ebb
-75 C Tome Scour
-76 C Trained Condor
-77 R Traumatize
-78 U Wall of Frost
-79 U Warden of Evos Isle
-80 U Water Servant
-81 M Windreader Sphinx
-82 C Zephyr Charge
-83 C Accursed Spirit
-84 C Altar's Reap
-85 U Artificer's Hex
-86 U Blightcaster
-87 C Blood Bairn
-88 R Bogbrew Witch
-89 C Child of Night
-90 C Corpse Hauler
-91 U Corrupt
-92 C Dark Favor
-93 R Dark Prophecy
-94 C Deathgaze Cockatrice
-95 U Diabolic Tutor
-96 U Doom Blade
-97 C Duress
-98 C Festering Newt
-99 U Gnawing Zombie
-100 R Grim Return
-101 R Lifebane Zombie
-102 M Liliana of the Dark Realms
-103 R Liliana's Reaver
-104 C Liturgy of Blood
-105 C Mark of the Vampire
-106 C Mind Rot
-107 C Minotaur Abomination
-108 R Nightmare
-109 C Nightwing Shade
-110 C Quag Sickness
-111 M Rise of the Dark Realms
-112 R Sanguine Bond
-113 U Sengir Vampire
-114 C Shadowborn Apostle
-115 M Shadowborn Demon
-116 C Shrivel
-117 R Syphon Sliver
-118 U Tenacious Dead
-119 C Undead Minotaur
-120 U Vampire Warlord
-121 C Vile Rebirth
-122 C Wring Flesh
-123 R Xathrid Necromancer
-124 C Academy Raider
-125 C Act of Treason
-126 R Awaken the Ancient
-127 U Barrage of Expendables
-128 U Battle Sliver
-129 C Blur Sliver
-130 R Burning Earth
-131 C Canyon Minotaur
-132 M Chandra, Pyromaster
-133 C Chandra's Outrage
-134 R Chandra's Phoenix
-135 C Cyclops Tyrant
-136 C Demolish
-137 U Dragon Egg
-138 C Dragon Hatchling
-139 U Flames of the Firebrand
-140 U Fleshpulper Giant
-141 R Goblin Diplomats
-142 C Goblin Shortcutter
-143 C Lava Axe
-144 C Lightning Talons
-145 C Marauding Maulhorn
-146 R Mindsparker
-147 U Molten Birth
-148 R Ogre Battledriver
-149 C Pitchburn Devils
-150 C Regathan Firecat
-151 M Scourge of Valkas
-152 C Seismic Stomp
-153 U Shiv's Embrace
-154 R Shivan Dragon
-155 C Shock
-156 C Smelt
-157 C Striking Sliver
-158 R Thorncaster Sliver
-159 C Thunder Strike
-160 U Volcanic Geyser
-161 C Wild Guess
-162 R Wild Ricochet
-163 U Young Pyromancer
-164 C Advocate of the Beast
-165 U Bramblecrush
-166 U Briarpack Alpha
-167 C Brindle Boar
-168 C Deadly Recluse
-169 C Elvish Mystic
-170 U Enlarge
-171 C Fog
-172 M Garruk, Caller of Beasts
-173 R Garruk's Horde
-174 C Giant Growth
-175 C Giant Spider
-176 C Gladecover Scout
-177 C Groundshaker Sliver
-178 U Howl of the Night Pack
-179 C Hunt the Weak
-180 R Into the Wilds
-181 M Kalonian Hydra
-182 U Kalonian Tusker
-183 C Lay of the Land
-184 U Manaweft Sliver
-185 R Megantic Sliver
-186 C Naturalize
-187 R Oath of the Ancient Wood
-188 C Plummet
-189 C Predatory Sliver
-190 M Primeval Bounty
-191 C Ranger's Guile
-192 C Rootwalla
-193 C Rumbling Baloth
-194 R Savage Summoning
-195 R Scavenging Ooze
-196 C Sporemound
-197 C Trollhide
-198 R Vastwood Hydra
-199 C Verdant Haven
-200 U Voracious Wurm
-201 U Windstorm
-202 R Witchstalker
-203 U Woodborn Behemoth
-204 U Accorder's Shield
-205 U Bubbling Cauldron
-206 M Darksteel Forge
-207 U Darksteel Ingot
-208 R Door of Destinies
-209 U Elixir of Immortality
-210 U Fireshrieker
-211 R Guardian of the Ages
-212 R Haunted Plate Mail
-213 U Millstone
-214 R Pyromancer's Gauntlet
-215 R Ratchet Bomb
-216 M Ring of Three Wishes
-217 U Rod of Ruin
-218 C Sliver Construct
-219 U Staff of the Death Magus
-220 U Staff of the Flame Magus
-221 U Staff of the Mind Magus
-222 U Staff of the Sun Magus
-223 U Staff of the Wild Magus
-224 R Strionic Resonator
-225 R Trading Post
-226 U Vial of Poison
-227 U Encroaching Wastes
-228 R Mutavault
-229 U Shimmering Grotto
-230 L Plains
-231 L Plains
-232 L Plains
-233 L Plains
-234 L Island
-235 L Island
-236 L Island
-237 L Island
-238 L Swamp
-239 L Swamp
-240 L Swamp
-241 L Swamp
-242 L Mountain
-243 L Mountain
-244 L Mountain
-245 L Mountain
-246 L Forest
-247 L Forest
-248 L Forest
-249 L Forest
+1 M Ajani, Caller of the Pride @D. Alexander Gregory
+2 R Ajani's Chosen @Wayne Reynolds
+3 U Angelic Accord @Michael C. Hayes
+4 C Angelic Wall @Allen Williams
+5 M Archangel of Thune @James Ryman
+6 C Auramancer @Rebecca Guay
+7 U Banisher Priest @Willian Murai
+8 U Blessing @Jason A. Engle
+9 R Bonescythe Sliver @Trevor Claxton
+10 U Brave the Elements @Goran Josic
+11 C Capashen Knight @Jasper Sandner
+12 C Celestial Flare @Clint Cearley
+13 C Charging Griffin @Erica Yang
+14 U Congregate @Mark Zug
+15 C Dawnstrike Paladin @Tyler Jacobson
+16 M Devout Invocation @David Palumbo
+17 C Divine Favor @Allen Williams
+18 R Fiendslayer Paladin @Wesley Burt
+19 C Fortify @Christopher Moeller
+20 C Griffin Sentinel @Warren Mahy
+21 C Hive Stirrings @Maciej Kuciara
+22 R Imposing Sovereign @Scott M. Fischer
+23 R Indestructibility @Darrell Riche
+24 C Master of Diversion @Michael Komarck
+25 C Pacifism @Robert Bliss
+26 R Path of Bravery @Chris Rahn
+27 C Pay No Heed @Adam Rex
+28 C Pillarfield Ox @Andrew Robinson
+29 R Planar Cleansing @Michael Komarck
+30 C Sentinel Sliver @Maciej Kuciara
+31 R Seraph of the Sword @Jaime Jones
+32 U Serra Angel @Greg Staples
+33 C Show of Valor @Anthony Palumbo
+34 C Siege Mastodon @Matt Cavotta
+35 R Silence @Wayne Reynolds
+36 C Solemn Offering @Sam Wood
+37 C Soulmender @James Ryman
+38 U Steelform Sliver @Chase Stone
+39 U Stonehorn Chanter @Raymond Swanland
+40 C Suntail Hawk @Heather Hudson
+41 U Wall of Swords @Zoltan Boros & Gabor Szikszai
+42 U Air Servant @Lars Grant-West
+43 C Archaeomancer @Zoltan Boros
+44 C Armored Cancrix @Tomasz Jedruszek
+45 C Cancel @David Palumbo
+46 C Claustrophobia @Ryan Pancoast
+47 R Clone @Kev Walker
+48 R Colossal Whale @Adam Paquette
+49 C Coral Merfolk @rk post
+50 R Dismiss into Dream @Sam Wolfe Connelly
+51 C Disperse @Steve Ellis
+52 C Divination @Howard Lyon
+53 R Domestication @Jesper Ejsing
+54 R Elite Arcanist @James Zapata
+55 C Essence Scatter @Jon Foster
+56 C Frost Breath @Mike Bierek
+57 R Galerider Sliver @James Zapata
+58 U Glimpse the Future @Andrew Robinson
+59 U Illusionary Armor @Mathias Kollros
+60 M Jace, Memory Adept @D. Alexander Gregory
+61 R Jace's Mindseeker @Greg Staples
+62 C Merfolk Spy @Matt Cavotta & Richard Whitters
+63 C Messenger Drake @Yeong-Hao Han
+64 C Negate @Jeremy Jarvis
+65 C Nephalia Seakite @Wayne England
+66 U Opportunity @Allen Williams
+67 U Phantom Warrior @Greg Staples
+68 R Quicken @Aleksi Briclot
+69 C Scroll Thief @Alex Horley-Orlandelli
+70 C Seacoast Drake @Scott Chou
+71 C Sensory Deprivation @Steven Belledin
+72 U Spell Blast @Jaime Jones
+73 R Tidebinder Mage @John Severin Brassell
+74 C Time Ebb @Alan Rabinowitz
+75 C Tome Scour @Steven Belledin
+76 C Trained Condor @Alex Horley-Orlandelli
+77 R Traumatize @Greg Staples
+78 U Wall of Frost @Mike Bierek
+79 U Warden of Evos Isle @Nils Hamm
+80 U Water Servant @Igor Kieryluk
+81 M Windreader Sphinx @Min Yum
+82 C Zephyr Charge @Steve Prescott
+83 C Accursed Spirit @Kev Walker
+84 C Altar's Reap @Donato Giancola
+85 U Artificer's Hex @Franz Vohwinkel
+86 U Blightcaster @Winona Nelson
+87 C Blood Bairn @Ryan Yee
+88 R Bogbrew Witch @Eric Deschamps
+89 C Child of Night @Ash Wood
+90 C Corpse Hauler @Jesper Ejsing
+91 U Corrupt @Dave Allsop
+92 C Dark Favor @Allen Williams
+93 R Dark Prophecy @Scott Chou
+94 C Deathgaze Cockatrice @Kev Walker
+95 U Diabolic Tutor @Greg Staples
+96 U Doom Blade @Chippy
+97 C Duress @Steven Belledin
+98 C Festering Newt @Eric Deschamps
+99 U Gnawing Zombie @Greg Staples
+100 R Grim Return @Seb McKinnon
+101 R Lifebane Zombie @Min Yum
+102 M Liliana of the Dark Realms @D. Alexander Gregory
+103 R Liliana's Reaver @Karl Kopinski
+104 C Liturgy of Blood @Zack Stella
+105 C Mark of the Vampire @Winona Nelson
+106 C Mind Rot @Steve Luke
+107 C Minotaur Abomination @Karl Kopinski
+108 R Nightmare @Vance Kovacs
+109 C Nightwing Shade @Lucas Graciano
+110 C Quag Sickness @Martina Pilcerova
+111 M Rise of the Dark Realms @Michael Komarck
+112 R Sanguine Bond @Jaime Jones
+113 U Sengir Vampire @Kev Walker
+114 C Shadowborn Apostle @Lucas Graciano
+115 M Shadowborn Demon @Lucas Graciano
+116 C Shrivel @Jung Park
+117 R Syphon Sliver @Tyler Jacobson
+118 U Tenacious Dead @John Stanko
+119 C Undead Minotaur @Karl Kopinski
+120 U Vampire Warlord @Wesley Burt
+121 C Vile Rebirth @Erica Yang
+122 C Wring Flesh @Izzy
+123 R Xathrid Necromancer @Maciej Kuciara
+124 C Academy Raider @Karl Kopinski
+125 C Act of Treason @Eric Deschamps
+126 R Awaken the Ancient @Jaime Jones
+127 U Barrage of Expendables @Trevor Claxton
+128 U Battle Sliver @Slawomir Maniak
+129 C Blur Sliver @Daarken
+130 R Burning Earth @rk post
+131 C Canyon Minotaur @Steve Prescott
+132 M Chandra, Pyromaster @Winona Nelson
+133 C Chandra's Outrage @Christopher Moeller
+134 R Chandra's Phoenix @Aleksi Briclot
+135 C Cyclops Tyrant @Zack Stella
+136 C Demolish @John Avon
+137 U Dragon Egg @Jack Wang
+138 C Dragon Hatchling @David Palumbo
+139 U Flames of the Firebrand @Steve Argyle
+140 U Fleshpulper Giant @Alex Horley-Orlandelli
+141 R Goblin Diplomats @Izzy
+142 C Goblin Shortcutter @Jesper Ejsing
+143 C Lava Axe @Brian Snõddy
+144 C Lightning Talons @Johann Bodin
+145 C Marauding Maulhorn @Jesper Ejsing
+146 R Mindsparker @Wayne Reynolds
+147 U Molten Birth @Jaime Jones
+148 R Ogre Battledriver @Greg Staples
+149 C Pitchburn Devils @Johann Bodin
+150 C Regathan Firecat @Eric Velhagen
+151 M Scourge of Valkas @Lucas Graciano
+152 C Seismic Stomp @Chase Stone
+153 U Shiv's Embrace @Dave Kendall
+154 R Shivan Dragon @Donato Giancola
+155 C Shock @Jon Foster
+156 C Smelt @Zoltan Boros
+157 C Striking Sliver @Maciej Kuciara
+158 R Thorncaster Sliver @Trevor Claxton
+159 C Thunder Strike @Wayne Reynolds
+160 U Volcanic Geyser @Clint Cearley
+161 C Wild Guess @Lucas Graciano
+162 R Wild Ricochet @Dan Scott
+163 U Young Pyromancer @Cynthia Sheppard
+164 C Advocate of the Beast @Jesper Ejsing
+165 U Bramblecrush @Drew Baker
+166 U Briarpack Alpha @Daarken
+167 C Brindle Boar @Dave Allsop
+168 C Deadly Recluse @Warren Mahy
+169 C Elvish Mystic @Wesley Burt
+170 U Enlarge @Michael Komarck
+171 C Fog @Jaime Jones
+172 M Garruk, Caller of Beasts @Karl Kopinski
+173 R Garruk's Horde @Steve Prescott
+174 C Giant Growth @Matt Cavotta
+175 C Giant Spider @Randy Gallegos
+176 C Gladecover Scout @Allen Williams
+177 C Groundshaker Sliver @Chase Stone
+178 U Howl of the Night Pack @Lars Grant-West
+179 C Hunt the Weak @Raoul Vitale
+180 R Into the Wilds @Véronique Meignaud
+181 M Kalonian Hydra @Chris Rahn
+182 U Kalonian Tusker @Svetlin Velinov
+183 C Lay of the Land @Chuck Lukacs
+184 U Manaweft Sliver @Trevor Claxton
+185 R Megantic Sliver @Ryan Barger
+186 C Naturalize @Tim Hildebrandt
+187 R Oath of the Ancient Wood @Dan Scott
+188 C Plummet @Pete Venters
+189 C Predatory Sliver @Mathias Kollros
+190 M Primeval Bounty @Christine Choi
+191 C Ranger's Guile @Steve Prescott
+192 C Rootwalla @Roger Raupp
+193 C Rumbling Baloth @Jesper Ejsing
+194 R Savage Summoning @Johann Bodin
+195 R Scavenging Ooze @Austin Hsu
+196 C Sporemound @Svetlin Velinov
+197 C Trollhide @Steven Belledin
+198 R Vastwood Hydra @Slawomir Maniak
+199 C Verdant Haven @Daniel Ljunggren
+200 U Voracious Wurm @Igor Kieryluk
+201 U Windstorm @Rob Alexander
+202 R Witchstalker @Christopher Moeller
+203 U Woodborn Behemoth @Matt Stewart
+204 U Accorder's Shield @Alan Pollack
+205 U Bubbling Cauldron @Eric Deschamps
+206 M Darksteel Forge @Martina Pilcerova
+207 U Darksteel Ingot @Martina Pilcerova
+208 R Door of Destinies @Larry MacDougall
+209 U Elixir of Immortality @Zoltan Boros & Gabor Szikszai
+210 U Fireshrieker @Christopher Moeller
+211 R Guardian of the Ages @Ryan Pancoast
+212 R Haunted Plate Mail @Izzy
+213 U Millstone @Yeong-Hao Han
+214 R Pyromancer's Gauntlet @Christine Choi
+215 R Ratchet Bomb @Austin Hsu
+216 M Ring of Three Wishes @Mark Winters
+217 U Rod of Ruin @Mark Zug
+218 C Sliver Construct @Mathias Kollros
+219 U Staff of the Death Magus @Daniel Ljunggren
+220 U Staff of the Flame Magus @Daniel Ljunggren
+221 U Staff of the Mind Magus @Daniel Ljunggren
+222 U Staff of the Sun Magus @Daniel Ljunggren
+223 U Staff of the Wild Magus @Daniel Ljunggren
+224 R Strionic Resonator @Noah Bradley
+225 R Trading Post @Adam Paquette
+226 U Vial of Poison @Franz Vohwinkel
+227 U Encroaching Wastes @Noah Bradley
+228 R Mutavault @Fred Fields
+229 U Shimmering Grotto @Cliff Childs
+230 L Plains @John Avon
+231 L Plains @Jonas De Ro
+232 L Plains @Nils Hamm
+233 L Plains @Andreas Rocha
+234 L Island @Noah Bradley
+235 L Island @Cliff Childs
+236 L Island @Jonas De Ro
+237 L Island @Andreas Rocha
+238 L Swamp @Cliff Childs
+239 L Swamp @Jonas De Ro
+240 L Swamp @Jung Park
+241 L Swamp @Andreas Rocha
+242 L Mountain @Cliff Childs
+243 L Mountain @Jonas De Ro
+244 L Mountain @Karl Kopinski
+245 L Mountain @Andreas Rocha
+246 L Forest @Volkan Baǵa
+247 L Forest @Steven Belledin
+248 L Forest @Jonas De Ro
+249 L Forest @Andreas Rocha
 
 [tokens]
 c_1_1_sliver

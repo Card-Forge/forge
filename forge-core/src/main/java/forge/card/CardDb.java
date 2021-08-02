@@ -173,7 +173,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
 
         artIds.put(key, artIdx);
-        addCard(new PaperCard(cr, e.getCode(), cis.rarity, artIdx));
+        addCard(new PaperCard(cr, e.getCode(), cis.rarity, artIdx, false, cis.collectorNumber, cis.artistName));
     }
 
     public void loadCard(String cardName, CardRules cr) {
@@ -525,7 +525,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     public PaperCard getFoiled(PaperCard card0) {
         // Here - I am still unsure if there should be a cache Card->Card from unfoiled to foiled, to avoid creation of N instances of single plains
-        return new PaperCard(card0.getRules(), card0.getEdition(), card0.getRarity(), card0.getArtIndex(), true);
+        return new PaperCard(card0.getRules(), card0.getEdition(), card0.getRarity(), card0.getArtIndex(), true,
+            card0.getCollectorNumber(), card0.getArtist());
     }
 
     @Override

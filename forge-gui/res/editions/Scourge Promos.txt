@@ -6,4 +6,4 @@ Type=Promo
 ScryfallCode=PSCG
 
 [cards]
-74 R Soul Collector
+74 R Soul Collector @Matthew D. Wilson

@@ -6,8 +6,8 @@ Type=Promo
 ScryfallCode=P11
 
 [cards]
-1 R Day of Judgment
-2 R Brave the Elements
-3 R Doom Blade
-4 R Treasure Hunt
-5 R Searing Blaze
+1 R Day of Judgment @Svetlin Velinov
+2 R Brave the Elements @Kekai Kotaki
+3 R Doom Blade @Carl Critchlow
+4 R Treasure Hunt @Steve Prescott
+5 R Searing Blaze @Jaime Jones

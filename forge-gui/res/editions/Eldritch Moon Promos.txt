@@ -6,12 +6,12 @@ Type=Promo
 ScryfallCode=PEMN
 
 [cards]
-39 R Sanctifier of Souls
-46 R Thalia, Heretic Cathar
-64 R Identity Thief
-72 R Niblis of Frost
-79 U Unsubstantiate
-98 R Noosegraf Mob
-117 R Assembled Alphas
-176 R Ulvenwald Observer
-185 R Heron's Grace Champion
+39 R Sanctifier of Souls @David Palumbo
+46 R Thalia, Heretic Cathar @Johannes Voss
+64 R Identity Thief @Dan Scott
+72 R Niblis of Frost @Igor Kieryluk
+79 U Unsubstantiate @Svetlin Velinov
+98 R Noosegraf Mob @Winona Nelson
+117 R Assembled Alphas @Dan Scott
+176 R Ulvenwald Observer @Adam Paquette
+185 R Heron's Grace Champion @Viktor Titov

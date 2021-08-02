@@ -12,313 +12,313 @@ FoilAlwaysInCommonSlot=False
 ScryfallCode=CHK
 
 [cards]
-151 C Akki Avalanchers
-152 U Akki Coalflinger
-153 R Akki Lavarunner
-154 C Akki Rockspeaker
-155 U Akki Underminer
-101 C Ashen-Skin Zubera
-51 U Aura of Dominion
-52 R Azami, Lady of Scrolls
-201 R Azusa, Lost but Seeking
-156 C Battle-Mad Ronin
-102 C Befoul
-157 R Ben-Ben, Akki Hermit
-1 C Blessed Breath
-158 U Blind with Anger
-159 U Blood Rites
-103 U Blood Speaker
-104 U Bloodthirsty Ogre
-273 R Boseiju, Who Shelters All
-160 U Brothers Yamazaki
-160 U Brothers Yamazaki
-161 C Brutal Deceiver
-202 R Budoka Gardener
-203 C Burr Grafter
-2 U Bushi Tenderfoot
-3 C Cage of Hands
-4 C Call to Glory
-53 C Callous Deceiver
-5 U Candles' Glow
-6 U Cleanfall
-274 U Cloudcrest Lake
-204 C Commune with Nature
-54 C Consuming Vortex
-55 C Counsel of the Soratami
-105 R Cranial Extraction
-106 C Cruel Deceiver
-162 C Crushing Pain
-107 C Cursed Ronin
-56 U Cut the Tethers
-57 U Dampen Thought
-108 U Dance of Shadows
-109 C Deathcurse Ogre
-163 C Desperate Ritual
-7 C Devoted Retainer
-110 C Devouring Greed
-164 C Devouring Rage
-111 C Distress
-205 R Dosan the Falling Leaf
-206 C Dripping-Tongue Zubera
-165 U Earthshaker
-58 U Eerie Procession
-275 R Eiganjo Castle
-8 R Eight-and-a-Half-Tails
-166 C Ember-Fist Zubera
-9 C Ethereal Haze
-59 C Eye of Nowhere
-207 U Feast of Worms
-208 C Feral Deceiver
-60 C Field of Reality
-61 C Floating-Dream Zubera
-276 R Forbidden Orchard
-303 L Forest
-303 L Forest
-303 L Forest
-303 L Forest
-167 C Frostwielder
-209 U Gale Force
-251 R General's Kabuto
-10 U Ghostly Prison
-112 C Gibbering Kami
-62 R Gifts Ungiven
-168 C Glacial Ray
-210 R Glimpse of Nature
-169 R Godo, Bandit Warlord
-63 U Graceful Adept
-64 U Guardian of Solitude
-113 U Gutwrencher Oni
-252 R Hair-Strung Koto
-277 R Hall of the Bandit Lord
-211 U Hana Kami
-170 U Hanabi Blast
-253 U Hankyu
-11 C Harsh Deceiver
-114 R He Who Hungers
-212 R Heartbeat of Spring
-171 C Hearth Kami
-115 U Hideous Laughter
-12 R Hikari, Twilight Guardian
-65 U Hinder
-67 C Hisoka's Defiance
-68 C Hisoka's Guard
-66 R Hisoka, Minamo Sensei
-13 R Hold the Line
-14 U Honden of Cleansing Fire
-172 U Honden of Infinite Rage
-213 U Honden of Life's Web
-116 U Honden of Night's Reach
-69 U Honden of Seeing Winds
-254 U Honor-Worn Shaku
-15 U Horizon Seed
-117 R Horobi, Death's Wail
-214 C Humble Budoka
-16 C Hundred-Talon Kami
-255 R Imi Statue
-118 R Iname, Death Aspect
-215 R Iname, Life Aspect
-17 C Indomitable Will
-173 U Initiate of Blood
-18 U Innocence Kami
-19 R Isamaru, Hound of Konda
-291 L Island
-291 L Island
-291 L Island
-291 L Island
-256 U Jade Idol
-257 R Journeyer's Kite
-216 C Joyous Respite
-217 R Jugan, the Rising Star
-218 C Jukai Messenger
-258 R Junkyo Bell
-70 R Jushi Apprentice
-20 C Kabuto Moth
-21 C Kami of Ancient Law
-174 C Kami of Fire's Roar
-119 U Kami of Lunacy
-22 U Kami of Old Stone
-71 C Kami of Twisted Reflection
-219 C Kami of the Hunt
-23 C Kami of the Painted Road
-24 U Kami of the Palace Fields
-120 C Kami of the Waning Moon
-220 U Kashi-Tribe Reaver
-221 C Kashi-Tribe Warriors
-72 R Keiga, the Tide Star
-175 R Kiki-Jiki, Mirror Breaker
-121 R Kiku, Night's Flower
-25 C Kitsune Blademaster
-26 C Kitsune Diviner
-27 C Kitsune Healer
-28 R Kitsune Mystic
-29 C Kitsune Riftwalker
-222 R Kodama of the North Tree
-223 R Kodama of the South Tree
-224 C Kodama's Might
-225 C Kodama's Reach
-122 R Kokusho, the Evening Star
-259 R Konda's Banner
-31 U Konda's Hatamoto
-30 R Konda, Lord of Eiganjo
-177 U Kumano's Pupils
-176 R Kumano, Master Yamabushi
-123 R Kuro, Pitlord
-260 R Kusari-Gama
-32 C Lantern Kami
-278 U Lantern-Lit Graveyard
-178 C Lava Spike
-73 C Lifted by Clouds
-261 R Long-Forgotten Gohei
-226 U Lure
-179 U Mana Seism
-124 R Marrow-Gnawer
-33 R Masako the Humorless
-227 C Matsu-Tribe Decoy
-74 R Meloku the Clouded Mirror
-125 C Midnight Covenant
-279 R Minamo, School at Water's Edge
-180 R Mindblaze
-262 R Moonring Mirror
-228 C Moss Kami
-34 C Mothrider Samurai
-299 L Mountain
-299 L Mountain
-299 L Mountain
-299 L Mountain
-35 R Myojin of Cleansing Fire
-181 R Myojin of Infinite Rage
-229 R Myojin of Life's Web
-126 R Myojin of Night's Reach
-75 R Myojin of Seeing Winds
-76 C Mystic Restraints
-36 U Nagao, Bound by Honor
-230 R Nature's Will
-127 U Nezumi Bone-Reader
-128 C Nezumi Cutthroat
-129 U Nezumi Graverobber
-130 C Nezumi Ronin
-131 R Nezumi Shortfang
-132 R Night Dealings
-133 R Night of Souls' Betrayal
-263 U Nine-Ringed Bo
-264 U No-Dachi
-134 U Numai Outcast
-265 R Oathkeeper, Takeno's Daisho
-280 R Okina, Temple to the Grandfathers
-135 U Oni Possession
-231 U Orbweaver Kumo
-232 C Order of the Sacred Bell
-182 U Ore Gorger
-233 U Orochi Eggwatcher
-266 R Orochi Hatchery
-234 C Orochi Leafcaller
-235 C Orochi Ranger
-236 C Orochi Sustainer
-37 U Otherworldly Journey
-183 U Pain Kami
-136 U Painwracker Oni
-77 R Part the Veil
-78 C Peer Through Depths
-79 U Petals of Insight
-281 U Pinecrest Ridge
-38 C Pious Kitsune
-287 L Plains
-287 L Plains
-287 L Plains
-287 L Plains
-80 C Psychic Puppetry
-137 C Pull Under
-39 C Quiet Purity
-138 C Rag Dealer
-139 C Ragged Veins
-81 C Reach Through Mists
-40 U Reciprocate
-267 U Reito Lantern
-140 C Rend Flesh
-141 C Rend Spirit
-41 R Reverse the Sands
-82 R Reweave
-83 C River Kaijin
-184 C Ronin Houndmaster
-237 U Rootrunner
-185 R Ryusei, the Falling Star
-238 U Sachi, Daughter of Seshiro
-239 C Sakura-Tribe Elder
-42 U Samurai Enforcers
-43 U Samurai of the Pale Curtain
-142 C Scuttling Death
-143 R Seizan, Perverter of Truth
-44 R Sensei Golden-Tail
-268 U Sensei's Divining Top
-240 C Serpent Skin
-241 R Seshiro the Anointed
-269 R Shell of the Last Kappa
-186 R Shimatsu the Bloodcloaked
-282 R Shinka, the Bloodsoaked Keep
-242 R Shisato, Whispering Hunter
-283 R Shizo, Death's Storehouse
-187 U Sideswipe
-84 C Sift Through Sands
-45 C Silent-Chant Zubera
-85 U Sire of the Storm
-243 U Soilshaper
-188 C Sokenzan Bruiser
-86 C Soratami Cloudskater
-87 C Soratami Mirror-Guard
-88 U Soratami Mirror-Mage
-89 C Soratami Rainshaper
-90 U Soratami Savant
-91 U Soratami Seer
-244 U Sosuke, Son of Seshiro
-189 C Soul of Magma
-190 R Soulblast
-144 C Soulless Revival
-92 U Squelch
-191 C Stone Rain
-192 U Strange Inversion
-245 U Strength of Cedars
-145 U Struggle for Sanity
-93 U Student of Elements
-146 U Swallowing Plague
-295 L Swamp
-295 L Swamp
-295 L Swamp
-295 L Swamp
-94 R Swirl the Mists
-46 R Takeno, Samurai General
-270 R Tatsumasa, the Dragon's Fang
-95 C Teller of Tales
-271 U Tenza, Godo's Maul
-47 C Terashi's Cry
-98 R The Unspeakable
-147 U Thief of Hope
-96 C Thoughtbind
-246 U Thousand-legged Kami
-193 R Through the Breach
-194 R Tide of War
-97 R Time Stop
-247 U Time of Need
-284 U Tranquil Garden
-272 R Uba Mask
-195 C Uncontrollable Anger
-196 C Unearthly Blizzard
-197 C Unnatural Speed
-285 R Untaidake, the Cloud Keeper
-99 R Uyo, Silent Prophet
-48 R Vassal's Duty
-248 C Venerable Kumo
-49 C Vigilance
-148 C Villainous Ogre
-249 C Vine Kami
-149 C Waking Nightmare
-100 C Wandering Ones
-286 U Waterveil Cavern
-250 C Wear Away
-150 C Wicked Akuba
-198 C Yamabushi's Flame
-199 C Yamabushi's Storm
-50 R Yosei, the Morning Star
-200 R Zo-Zu the Punisher
+151 C Akki Avalanchers @Matt Thompson
+152 U Akki Coalflinger @Nottsuo
+153 R Akki Lavarunner @Matt Cavotta
+154 C Akki Rockspeaker @David Martin
+155 U Akki Underminer @Thomas M. Baxa
+101 C Ashen-Skin Zubera @Wayne Reynolds
+51 U Aura of Dominion @Randy Gallegos
+52 R Azami, Lady of Scrolls @Ittoku
+201 R Azusa, Lost but Seeking @Todd Lockwood
+156 C Battle-Mad Ronin @Wayne England
+102 C Befoul @Luca Zontini
+157 R Ben-Ben, Akki Hermit @Greg Staples
+1 C Blessed Breath @Tsutomu Kawade
+158 U Blind with Anger @Dave Dorman
+159 U Blood Rites @Paolo Parente
+103 U Blood Speaker @Adam Rex
+104 U Bloodthirsty Ogre @Thomas M. Baxa
+273 R Boseiju, Who Shelters All @Ralph Horsley
+160a U Brothers Yamazaki @Ron Spears
+160b U Brothers Yamazaki @Ron Spears
+161 C Brutal Deceiver @Jon Foster
+202 R Budoka Gardener @Kev Walker
+203 C Burr Grafter @Heather Hudson
+2 U Bushi Tenderfoot @Mark Zug
+3 C Cage of Hands @Mark Tedin
+4 C Call to Glory @Wayne Reynolds
+53 C Callous Deceiver @Kensuke Okabayashi
+5 U Candles' Glow @Alan Pollack
+6 U Cleanfall @Daren Bader
+274 U Cloudcrest Lake @John Avon
+204 C Commune with Nature @Edward P. Beard, Jr.
+54 C Consuming Vortex @Pete Venters
+55 C Counsel of the Soratami @Randy Gallegos
+105 R Cranial Extraction @Dave Allsop
+106 C Cruel Deceiver @Nottsuo
+162 C Crushing Pain @Carl Critchlow
+107 C Cursed Ronin @Carl Critchlow
+56 U Cut the Tethers @Ron Spears
+57 U Dampen Thought @Arnie Swekel
+108 U Dance of Shadows @Chippy
+109 C Deathcurse Ogre @Mark Tedin
+163 C Desperate Ritual @Darrell Riche
+7 C Devoted Retainer @Greg Hildebrandt
+110 C Devouring Greed @Vance Kovacs
+164 C Devouring Rage @Vance Kovacs
+111 C Distress @Michael Sutfin
+205 R Dosan the Falling Leaf @Mark Zug
+206 C Dripping-Tongue Zubera @Tsutomu Kawade
+165 U Earthshaker @Ron Spencer
+58 U Eerie Procession @Jim Murray
+275 R Eiganjo Castle @Wayne England
+8 R Eight-and-a-Half-Tails @Daren Bader
+166 C Ember-Fist Zubera @Ron Spencer
+9 C Ethereal Haze @Chris Appelhans
+59 C Eye of Nowhere @Alan Pollack
+207 U Feast of Worms @Chippy
+208 C Feral Deceiver @Glen Angus
+60 C Field of Reality @Christopher Rush
+61 C Floating-Dream Zubera @Shishizaru
+276 R Forbidden Orchard @Dany Orizio
+303 L Forest @Rob Alexander
+304 L Forest @Rob Alexander
+305 L Forest @Rob Alexander
+306 L Forest @Rob Alexander
+167 C Frostwielder @Christopher Moeller
+209 U Gale Force @Lars Grant-West
+251 R General's Kabuto @Alex Horley-Orlandelli
+10 U Ghostly Prison @Lars Grant-West
+112 C Gibbering Kami @Jim Pavelec
+62 R Gifts Ungiven @D. Alexander Gregory
+168 C Glacial Ray @Jim Murray
+210 R Glimpse of Nature @Shishizaru
+169 R Godo, Bandit Warlord @Paolo Parente
+63 U Graceful Adept @Scott M. Fischer
+64 U Guardian of Solitude @Stephen Tappin
+113 U Gutwrencher Oni @Hideaki Takamura
+252 R Hair-Strung Koto @Rebecca Guay
+277 R Hall of the Bandit Lord @Paolo Parente
+211 U Hana Kami @Rebecca Guay
+170 U Hanabi Blast @Paolo Parente
+253 U Hankyu @Ben Thompson
+11 C Harsh Deceiver @Heather Hudson
+114 R He Who Hungers @Kev Walker
+212 R Heartbeat of Spring @Rob Alexander
+171 C Hearth Kami @Luca Zontini
+115 U Hideous Laughter @Greg Staples
+12 R Hikari, Twilight Guardian @Glen Angus
+65 U Hinder @Wayne Reynolds
+67 C Hisoka's Defiance @Greg Hildebrandt
+68 C Hisoka's Guard @Wayne England
+66 R Hisoka, Minamo Sensei @Donato Giancola
+13 R Hold the Line @Ron Spears
+14 U Honden of Cleansing Fire @Greg Staples
+172 U Honden of Infinite Rage @John Avon
+213 U Honden of Life's Web @Rob Alexander
+116 U Honden of Night's Reach @Jim Nelson
+69 U Honden of Seeing Winds @Martina Pilcerova
+254 U Honor-Worn Shaku @Tony Szczudlo
+15 U Horizon Seed @Matt Cavotta
+117 R Horobi, Death's Wail @John Bolton
+214 C Humble Budoka @Christopher Moeller
+16 C Hundred-Talon Kami @Paolo Parente
+255 R Imi Statue @Todd Lockwood
+118 R Iname, Death Aspect @Justin Sweet
+215 R Iname, Life Aspect @Justin Sweet
+17 C Indomitable Will @Christopher Rush
+173 U Initiate of Blood @Carl Critchlow
+18 U Innocence Kami @Mark Zug
+19 R Isamaru, Hound of Konda @Christopher Moeller
+291 L Island @Martina Pilcerova
+292 L Island @Martina Pilcerova
+293 L Island @Martina Pilcerova
+294 L Island @Martina Pilcerova
+256 U Jade Idol @Ben Thompson
+257 R Journeyer's Kite @Hiro Izawa
+216 C Joyous Respite @Rebecca Guay
+217 R Jugan, the Rising Star @Shishizaru
+218 C Jukai Messenger @Terese Nielsen
+258 R Junkyo Bell @Kensuke Okabayashi
+70 R Jushi Apprentice @Glen Angus
+20 C Kabuto Moth @Tomas Giorello
+21 C Kami of Ancient Law @Mark Tedin
+174 C Kami of Fire's Roar @Dave Dorman
+119 U Kami of Lunacy @Daren Bader
+22 U Kami of Old Stone @Stephen Tappin
+71 C Kami of Twisted Reflection @Mark Tedin
+219 C Kami of the Hunt @Alex Horley-Orlandelli
+23 C Kami of the Painted Road @Ron Spencer
+24 U Kami of the Palace Fields @Matt Cavotta
+120 C Kami of the Waning Moon @Matt Thompson
+220 U Kashi-Tribe Reaver @Anthony S. Waters
+221 C Kashi-Tribe Warriors @Stephen Tappin
+72 R Keiga, the Tide Star @Ittoku
+175 R Kiki-Jiki, Mirror Breaker @Pete Venters
+121 R Kiku, Night's Flower @Jim Murray
+25 C Kitsune Blademaster @Keith Garletts
+26 C Kitsune Diviner @Pete Venters
+27 C Kitsune Healer @Michael Sutfin
+28 R Kitsune Mystic @Jim Murray
+29 C Kitsune Riftwalker @Pete Venters
+222 R Kodama of the North Tree @Shishizaru
+223 R Kodama of the South Tree @Ron Spears
+224 C Kodama's Might @Terese Nielsen
+225 C Kodama's Reach @Heather Hudson
+122 R Kokusho, the Evening Star @Tsutomu Kawade
+259 R Konda's Banner @Donato Giancola
+31 U Konda's Hatamoto @Lars Grant-West
+30 R Konda, Lord of Eiganjo @John Bolton
+177 U Kumano's Pupils @Greg Hildebrandt
+176 R Kumano, Master Yamabushi @Adam Rex
+123 R Kuro, Pitlord @Jon Foster
+260 R Kusari-Gama @Tomas Giorello
+32 C Lantern Kami @John Avon
+278 U Lantern-Lit Graveyard @John Avon
+178 C Lava Spike @Mark Tedin
+73 C Lifted by Clouds @Darrell Riche
+261 R Long-Forgotten Gohei @Alan Pollack
+226 U Lure @D. Alexander Gregory
+179 U Mana Seism @Edward P. Beard, Jr.
+124 R Marrow-Gnawer @Wayne Reynolds
+33 R Masako the Humorless @Ben Thompson
+227 C Matsu-Tribe Decoy @Alan Pollack
+74 R Meloku the Clouded Mirror @Scott M. Fischer
+125 C Midnight Covenant @Pete Venters
+279 R Minamo, School at Water's Edge @Jeremy Jarvis
+180 R Mindblaze @John Avon
+262 R Moonring Mirror @Christopher Rush
+228 C Moss Kami @Hugh Jamieson
+34 C Mothrider Samurai @Mark Zug
+299 L Mountain @John Avon
+300 L Mountain @John Avon
+301 L Mountain @John Avon
+302 L Mountain @John Avon
+35 R Myojin of Cleansing Fire @Kev Walker
+181 R Myojin of Infinite Rage @Kev Walker
+229 R Myojin of Life's Web @Kev Walker
+126 R Myojin of Night's Reach @Kev Walker
+75 R Myojin of Seeing Winds @Kev Walker
+76 C Mystic Restraints @Christopher Rush
+36 U Nagao, Bound by Honor @Dave Dorman
+230 R Nature's Will @Mitch Cotie
+127 U Nezumi Bone-Reader @Dan Scott
+128 C Nezumi Cutthroat @Carl Critchlow
+129 U Nezumi Graverobber @Jim Nelson
+130 C Nezumi Ronin @Scott M. Fischer
+131 R Nezumi Shortfang @Daren Bader
+132 R Night Dealings @Darrell Riche
+133 R Night of Souls' Betrayal @Greg Staples
+263 U Nine-Ringed Bo @Ralph Horsley
+264 U No-Dachi @Christopher Rush
+134 U Numai Outcast @Adam Rex
+265 R Oathkeeper, Takeno's Daisho @Arnie Swekel
+280 R Okina, Temple to the Grandfathers @Keith Garletts
+135 U Oni Possession @Aleksi Briclot
+231 U Orbweaver Kumo @Dan Scott
+232 C Order of the Sacred Bell @Carl Critchlow
+182 U Ore Gorger @rk post
+233 U Orochi Eggwatcher @Dan Scott
+266 R Orochi Hatchery @Alex Horley-Orlandelli
+234 C Orochi Leafcaller @Joel Thomas
+235 C Orochi Ranger @Greg Hildebrandt
+236 C Orochi Sustainer @rk post
+37 U Otherworldly Journey @Vance Kovacs
+183 U Pain Kami @Tomas Giorello
+136 U Painwracker Oni @Hideaki Takamura
+77 R Part the Veil @Arnie Swekel
+78 C Peer Through Depths @Anthony S. Waters
+79 U Petals of Insight @Anthony S. Waters
+281 U Pinecrest Ridge @John Avon
+38 C Pious Kitsune @Anthony S. Waters
+287 L Plains @Greg Staples
+288 L Plains @Greg Staples
+289 L Plains @Greg Staples
+290 L Plains @Greg Staples
+80 C Psychic Puppetry @Joel Thomas
+137 C Pull Under @Ron Spencer
+39 C Quiet Purity @Shishizaru
+138 C Rag Dealer @Ralph Horsley
+139 C Ragged Veins @Chippy
+81 C Reach Through Mists @Anthony S. Waters
+40 U Reciprocate @Pat Lee
+267 U Reito Lantern @Greg Hildebrandt
+140 C Rend Flesh @Stephen Tappin
+141 C Rend Spirit @Stephen Tappin
+41 R Reverse the Sands @Jeremy Jarvis
+82 R Reweave @Alex Horley-Orlandelli
+83 C River Kaijin @Luca Zontini
+184 C Ronin Houndmaster @Edward P. Beard, Jr.
+237 U Rootrunner @Adam Rex
+185 R Ryusei, the Falling Star @Nottsuo
+238 U Sachi, Daughter of Seshiro @Nottsuo
+239 C Sakura-Tribe Elder @Carl Critchlow
+42 U Samurai Enforcers @Mitch Cotie
+43 U Samurai of the Pale Curtain @Christopher Moeller
+142 C Scuttling Death @Thomas M. Baxa
+143 R Seizan, Perverter of Truth @Kev Walker
+44 R Sensei Golden-Tail @Stephen Tappin
+268 U Sensei's Divining Top @Michael Sutfin
+240 C Serpent Skin @Rob Alexander
+241 R Seshiro the Anointed @Daren Bader
+269 R Shell of the Last Kappa @David Martin
+186 R Shimatsu the Bloodcloaked @Dave Allsop
+282 R Shinka, the Bloodsoaked Keep @Thomas M. Baxa
+242 R Shisato, Whispering Hunter @John Bolton
+283 R Shizo, Death's Storehouse @John Matson
+187 U Sideswipe @Ron Spears
+84 C Sift Through Sands @Anthony S. Waters
+45 C Silent-Chant Zubera @Ben Thompson
+85 U Sire of the Storm @Arnie Swekel
+243 U Soilshaper @Thomas M. Baxa
+188 C Sokenzan Bruiser @Paolo Parente
+86 C Soratami Cloudskater @Michael Sutfin
+87 C Soratami Mirror-Guard @Wayne England
+88 U Soratami Mirror-Mage @Ron Spears
+89 C Soratami Rainshaper @Ittoku
+90 U Soratami Savant @Jim Nelson
+91 U Soratami Seer @Glen Angus
+244 U Sosuke, Son of Seshiro @Carl Critchlow
+189 C Soul of Magma @Darrell Riche
+190 R Soulblast @Wayne Reynolds
+144 C Soulless Revival @Ron Spencer
+92 U Squelch @Matt Cavotta
+191 C Stone Rain @Greg Staples
+192 U Strange Inversion @Khang Le
+245 U Strength of Cedars @Edward P. Beard, Jr.
+145 U Struggle for Sanity @Randy Gallegos
+93 U Student of Elements @Ittoku
+146 U Swallowing Plague @Dave Dorman
+295 L Swamp @Jim Nelson
+296 L Swamp @Jim Nelson
+297 L Swamp @Jim Nelson
+298 L Swamp @Jim Nelson
+94 R Swirl the Mists @Arnie Swekel
+46 R Takeno, Samurai General @Matt Cavotta
+270 R Tatsumasa, the Dragon's Fang @Martina Pilcerova
+95 C Teller of Tales @Jim Murray
+271 U Tenza, Godo's Maul @Paolo Parente
+47 C Terashi's Cry @Jim Murray
+98 R The Unspeakable @Khang Le
+147 U Thief of Hope @Greg Hildebrandt
+96 C Thoughtbind @Rob Alexander
+246 U Thousand-legged Kami @Nottsuo
+193 R Through the Breach @Hugh Jamieson
+194 R Tide of War @Wayne Reynolds
+97 R Time Stop @Scott M. Fischer
+247 U Time of Need @Dany Orizio
+284 U Tranquil Garden @John Avon
+272 R Uba Mask @Randy Gallegos
+195 C Uncontrollable Anger @Matt Thompson
+196 C Unearthly Blizzard @Joel Thomas
+197 C Unnatural Speed @Wayne Reynolds
+285 R Untaidake, the Cloud Keeper @John Avon
+99 R Uyo, Silent Prophet @John Bolton
+48 R Vassal's Duty @Dave Dorman
+248 C Venerable Kumo @Carl Critchlow
+49 C Vigilance @Tsutomu Kawade
+148 C Villainous Ogre @Tony Szczudlo
+249 C Vine Kami @Tsutomu Kawade
+149 C Waking Nightmare @Mitch Cotie
+100 C Wandering Ones @Heather Hudson
+286 U Waterveil Cavern @John Avon
+250 C Wear Away @Tim Hildebrandt
+150 C Wicked Akuba @Ittoku
+198 C Yamabushi's Flame @Christopher Moeller
+199 C Yamabushi's Storm @Wayne England
+50 R Yosei, the Morning Star @Hiro Izawa
+200 R Zo-Zu the Punisher @Matt Cavotta
 
 [tokens]
 c_1_1_spirit

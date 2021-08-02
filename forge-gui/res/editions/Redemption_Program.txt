@@ -7,4 +7,4 @@ CardLang=ja
 ScryfallCode=PRED
 
 [cards]
-1 R Nalathni Dragon
+1 R Nalathni Dragon @Michael Whelan

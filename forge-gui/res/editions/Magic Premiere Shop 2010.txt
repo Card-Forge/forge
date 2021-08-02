@@ -7,8 +7,8 @@ CardLang=ja
 ScryfallCode=PMPS10
 
 [cards]
-1 R Plains
-2 R Island
-3 R Swamp
-4 R Mountain
-5 R Forest
+1 R Plains @John Avon
+2 R Island @John Avon
+3 R Swamp @John Avon
+4 R Mountain @John Avon
+5 R Forest @John Avon

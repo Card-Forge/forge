@@ -6,13 +6,13 @@ Type=Promo
 ScryfallCode=PRTR
 
 [cards]
-120★ R Deadbridge Goliath
-142★ R Archon of the Triumvirate
-147★ R Carnival Hellsteed
-152★ R Corpsejack Menace
-158 U Dreg Mangler
-170★ R Hypersonic Dragon
-*201 R Supreme Verdict
-212 R Cryptborn Horror
-214 U Dryad Militant
-240★ R Grove of the Guardian
+120★ R Deadbridge Goliath @Nils Hamm
+142★ R Archon of the Triumvirate @Svetlin Velinov
+147★ R Carnival Hellsteed @Min Yum
+152★ R Corpsejack Menace @Vincent Proce
+158 U Dreg Mangler @Svetlin Velinov
+170★ R Hypersonic Dragon @Volkan Baǵa
+*201 R Supreme Verdict @John Avon
+212 R Cryptborn Horror @Nils Hamm
+214 U Dryad Militant @Ryan Pancoast
+240★ R Grove of the Guardian @Yeong-Hao Han

@@ -6,10 +6,10 @@ Type=Promo
 ScryfallCode=P07
 
 [cards]
-1 R Wrath of God
-2 R Condemn
-3 R Mortify
-4 R Psionic Blast
-5 R Cruel Edict
-6 R Disenchant
-7 R Recollect
+1 R Wrath of God @Ron Spencer
+2 R Condemn @Kev Walker
+3 R Mortify @Brian Snõddy
+4 R Psionic Blast @Aleksi Briclot
+5 R Cruel Edict @Steve Ellis
+6 R Disenchant @Heather Hudson
+7 R Recollect @Michael Sutfin

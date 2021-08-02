@@ -13,307 +13,307 @@ AdditionalSetUnlockedInQuest=TSB
 ScryfallCode=TSP
 
 [cards]
-189 C AEther Web
-142 C AEtherflame Wall
-269 R Academy Ruins
-1 C Amrou Scout
-2 C Amrou Seekers
-48 R Ancestral Vision
-143 C Ancient Grudge
-3 R Angel's Grace
-190 C Ashcoat Bear
-191 U Aspect of Mongoose
-95 C Assassinate
-248 U Assembly-Worker
-144 U Barbed Shocker
-96 C Basal Sliver
-145 U Basalt Gargoyle
-4 C Benalish Cavalry
-49 C Bewilder
-146 C Blazing Blade Askari
-147 R Bogardan Hellkite
-148 C Bogardan Rager
-149 C Bonesplitter Sliver
-249 C Brass Gnat
-50 U Brine Elemental
-270 U Calciform Pools
-97 C Call to the Netherworld
-51 C Cancel
-250 R Candles of Leng
-52 U Careful Consideration
-5 C Castle Raptors
-6 U Cavalry Master
-7 U Celestial Crusader
-192 C Chameleon Blur
-8 C Children of Korlis
-251 C Chromatic Star
-252 U Chronatog Totem
-9 R Chronosavant
-53 C Clockspinning
-253 U Clockwork Hydra
-10 C Cloudchaser Kestrel
-150 C Coal Stoker
-151 U Conflagrate
-54 C Coral Trickster
-98 C Corpulent Corpse
-55 C Crookclaw Transmuter
-99 R Curse of the Cabal
-100 C Cyclopean Giant
-11 C D'Avenant Healer
-101 C Dark Withering
-102 C Deathspore Thallid
-56 R Deep-Sea Kraken
-236 U Dementia Sliver
-103 R Demonic Collusion
-12 C Detainment Spell
-13 C Divine Congregation
-57 R Draining Whelk
-237 R Dralnu, Lich Lord
-104 U Dread Return
-271 U Dreadship Reef
-58 C Dream Stalker
-59 C Drifter il-Dal
-105 C Drudge Reavers
-193 C Durkwood Baloth
-194 U Durkwood Tracker
-14 U Duskrider Peregrine
-152 C Empty the Warrens
-106 R Endrek Sahr, Master Breeder
-15 C Errant Doomsayers
-60 C Errant Ephemeron
-61 C Eternity Snare
-16 R Evangelize
-107 U Evil Eye of Urborg
-108 U Faceless Devourer
-109 U Fallen Ideal
-62 C Fathom Seer
-110 C Feebleness
-153 U Firemaw Kavu
-238 U Firewake Sliver
-272 R Flagstones of Trokair
-154 C Flamecore Elemental
-63 U Fledgling Mawcor
-17 C Flickering Spirit
-155 C Flowstone Channeler
-64 U Fool's Demise
-300 L Forest
-300 L Forest
-300 L Forest
-300 L Forest
-18 C Foriysian Interceptor
-254 U Foriysian Totem
-19 C Fortify
-156 R Fortune Thief
-273 U Fungal Reaches
-195 R Fungus Sliver
-157 U Fury Sliver
-255 R Gauntlet of Power
-20 C Gaze of Justice
-196 C Gemhide Sliver
-274 R Gemstone Caverns
-158 C Ghitu Firebreathing
-239 U Ghostflame Sliver
-197 C Glass Asp
-159 C Goblin Skycutter
-111 C Gorgon Recluse
-160 C Grapeshot
-161 R Greater Gargadon
-198 C Greenseeker
-21 U Griffin Guide
-162 C Ground Rift
-22 U Gustcloak Cavalier
-240 U Harmonic Sliver
-112 U Haunting Hymn
-199 C Havenwood Wurm
-200 C Herd Gnarr
-256 R Hivestone
-201 R Hypergenesis
-163 R Ib Halfheart, Goblin Tactician
-23 C Icatian Crier
-164 U Ignite Memories
-165 C Ironclaw Buzzardiers
-288 L Island
-288 L Island
-288 L Island
-288 L Island
-241 R Ith, High Arcanist
-24 C Ivory Giant
-65 R Ixidron
-166 R Jaya Ballard, Task Mage
-25 C Jedit's Dragoons
-257 C Jhoira's Timebug
-242 R Kaervek the Merciless
-167 C Keldon Halberdier
-275 R Kher Keep
-26 U Knight of the Holy Nimbus
-202 U Krosan Grip
-113 R Liege of the Pit
-168 C Lightning Axe
-114 R Lim-Dul the Necromancer
-115 R Living End
-258 U Locket of Yesterdays
-66 C Looter il-Kor
-259 R Lotus Bloom
-203 R Magus of the Candelabra
-27 R Magus of the Disk
-67 R Magus of the Jar
-116 R Magus of the Mirror
-169 R Magus of the Scroll
-117 C Mana Skimmer
-28 R Mangara of Corondor
-205 U Might Sliver
-204 U Might of Old Krosa
-118 C Mindlash Sliver
-119 C Mindstab
-243 R Mishra, Artificer Prodigy
-170 C Mogg War Marshal
-206 C Molder
-276 U Molten Slagheap
-29 C Momentary Blink
-68 R Moonlace
-294 L Mountain
-294 L Mountain
-294 L Mountain
-294 L Mountain
-207 C Mwonvuli Acid-Moss
-69 C Mystical Teachings
-208 C Nantuko Shaman
-120 R Nether Traitor
-121 U Nightshade Assassin
-171 R Norin the Wary
-30 R Opal Guardian
-244 U Opaline Sliver
-70 C Ophidian Eye
-172 C Orcish Cannonade
-31 U Outrider en-Kor
-260 U Paradise Plume
-71 U Paradox Haze
-173 R Pardic Dragon
-209 U Pendelhaven Elder
-32 R Pentarch Paladin
-33 C Pentarch Ward
-210 C Penumbra Spider
-211 U Phantom Wurm
-122 U Phthisis
-261 U Phyrexian Totem
-123 C Pit Keeper
-124 R Plague Sliver
-285 L Plains
-285 L Plains
-285 L Plains
-285 L Plains
-34 U Plated Pegasus
-174 C Plunder
-125 U Premature Burial
-212 U Primal Forcemage
-262 C Prismatic Lens
-72 R Psionic Sliver
-126 C Psychotic Episode
-35 U Pull from Eternity
-36 R Pulmonic Sliver
-37 U Quilled Sliver
-175 R Reiterate
-38 R Restore Balance
-39 U Return to Dust
-176 C Rift Bolt
-73 U Riftwing Cloudskate
-245 R Saffi Eriksdotter
-74 C Sage of Epityr
-277 U Saltcrusted Steppe
-127 C Sangrophage
-263 R Sarpadian Empires, Vol. VII
-213 C Savage Thallid
-214 C Scarwood Treefolk
-246 R Scion of the Ur-Dragon
-75 C Screeching Sliver
-215 U Scryb Ranger
-216 C Search for Tomorrow
-177 R Sedge Sliver
-128 R Sengir Nosferatu
-40 R Serra Avenger
-76 C Shadow Sliver
-41 C Sidewinder Sliver
-129 U Skittering Monstrosity
-130 C Skulking Knight
-77 C Slipstream Serpent
-131 U Smallpox
-78 C Snapback
-217 R Spectral Force
-79 U Spell Burst
-218 R Spike Tiller
-80 C Spiketail Drakeling
-219 C Spinneret Sliver
-42 U Spirit Loop
-220 U Sporesower Thallid
-81 R Sprite Noble
-221 C Sprout
-222 R Squall Line
-247 R Stonebrow, Krosan Hero
-223 R Stonewood Invocation
-82 U Stormcloud Djinn
-132 C Strangling Soot
-224 C Strength in Numbers
-133 R Stronghold Overseer
-264 R Stuffy Doll
-178 C Subterranean Shambler
-134 U Sudden Death
-179 U Sudden Shock
-135 R Sudden Spoiling
-180 U Sulfurous Blast
-293 L Swamp
-293 L Swamp
-293 L Swamp
-293 L Swamp
-278 R Swarmyard
-181 U Tectonic Fiend
-83 R Teferi, Mage of Zhalfir
-84 U Telekinetic Sliver
-85 C Temporal Eddy
-43 C Temporal Isolation
-136 C Tendrils of Corruption
-279 C Terramorphic Expanse
-225 C Thallid Germinator
-226 C Thallid Shell-Dweller
-227 R Thelon of Havenwood
-228 R Thelonite Hermit
-182 U Thick-Skinned Goblin
-86 C Think Twice
-229 C Thrill of the Hunt
-265 U Thunder Totem
-44 R Tivadar of Thorn
-87 C Tolarian Sentinel
-137 C Traitor's Clutch
-138 C Trespasser il-Vec
-88 R Trickbind
-266 R Triskelavus
-230 U Tromp the Domains
-89 U Truth or Tale
-183 C Two-Headed Sliver
-184 U Undying Rage
-231 R Unyaro Bees
-139 C Urborg Syphon-Mage
-280 U Urza's Factory
-140 U Vampiric Sliver
-267 C Venser's Sliver
-232 R Verdant Embrace
-281 R Vesuva
-90 R Vesuvan Shapeshifter
-185 C Viashino Bladescout
-91 C Viscerid Deepwalker
-141 C Viscid Lemures
-92 U Voidmage Husher
-186 U Volcanic Awakening
-93 R Walk the Aeons
-45 C Watcher Sliver
-46 R Weathered Bodyguards
-268 U Weatherseed Totem
-187 R Wheel of Fate
-94 U Wipe Away
-188 R Word of Seizing
-233 C Wormwood Dryad
-234 R Wurmcalling
-235 U Yavimaya Dryad
-47 C Zealot il-Vec
+189 C Aether Web @Justin Sweet
+142 C Aetherflame Wall @Justin Sweet
+269 R Academy Ruins @Zoltan Boros & Gabor Szikszai
+1 C Amrou Scout @Quinton Hoover
+2 C Amrou Seekers @Quinton Hoover
+48 R Ancestral Vision @Mark Poole
+143 C Ancient Grudge @Jim Nelson
+3 R Angel's Grace @Mark Zug
+190 C Ashcoat Bear @Carl Critchlow
+191 U Aspect of Mongoose @Dave Dorman
+95 C Assassinate @Kev Walker
+248 U Assembly-Worker @Chippy
+144 U Barbed Shocker @Tony Szczudlo
+96 C Basal Sliver @Drew Tucker
+145 U Basalt Gargoyle @Clint Langley
+4 C Benalish Cavalry @Paolo Parente
+49 C Bewilder @Ralph Horsley
+146 C Blazing Blade Askari @Dan Frazier
+147 R Bogardan Hellkite @Scott M. Fischer
+148 C Bogardan Rager @Clint Langley
+149 C Bonesplitter Sliver @Dany Orizio
+249 C Brass Gnat @Martina Pilcerova
+50 U Brine Elemental @Stephen Tappin
+270 U Calciform Pools @Darrell Riche
+97 C Call to the Netherworld @Vance Kovacs
+51 C Cancel @Mark Poole
+250 R Candles of Leng @Daniel Gelon
+52 U Careful Consideration @Janine Johnston
+5 C Castle Raptors @Christopher Moeller
+6 U Cavalry Master @Thomas M. Baxa
+7 U Celestial Crusader @Jim Murray
+192 C Chameleon Blur @Anthony S. Waters
+8 C Children of Korlis @Quinton Hoover
+251 C Chromatic Star @Alex Horley-Orlandelli
+252 U Chronatog Totem @Christopher Rush
+9 R Chronosavant @Pete Venters
+53 C Clockspinning @Zoltan Boros & Gabor Szikszai
+253 U Clockwork Hydra @Daren Bader
+10 C Cloudchaser Kestrel @Daren Bader
+150 C Coal Stoker @Mark Zug
+151 U Conflagrate @Warren Mahy
+54 C Coral Trickster @D. Alexander Gregory
+98 C Corpulent Corpse @Doug Chaffee
+55 C Crookclaw Transmuter @Ron Spencer
+99 R Curse of the Cabal @John Avon
+100 C Cyclopean Giant @Mark Tedin
+11 C D'Avenant Healer @Michael Sutfin
+101 C Dark Withering @Wayne Reynolds
+102 C Deathspore Thallid @Randy Elliott
+56 R Deep-Sea Kraken @Christopher Moeller
+236 U Dementia Sliver @Una Fricker
+103 R Demonic Collusion @Jim Nelson
+12 C Detainment Spell @Darrell Riche
+13 C Divine Congregation @Jeremy Jarvis
+57 R Draining Whelk @Mark Tedin
+237 R Dralnu, Lich Lord @Greg Staples
+104 U Dread Return @Kev Walker
+271 U Dreadship Reef @Lars Grant-West
+58 C Dream Stalker @Brian Despain
+59 C Drifter il-Dal @Justin Sweet
+105 C Drudge Reavers @Greg Staples
+193 C Durkwood Baloth @Dan Frazier
+194 U Durkwood Tracker @Michael Phillippi
+14 U Duskrider Peregrine @Una Fricker
+152 C Empty the Warrens @Mark Brill
+106 R Endrek Sahr, Master Breeder @Mark Tedin
+15 C Errant Doomsayers @Liz Danforth
+60 C Errant Ephemeron @Luca Zontini
+61 C Eternity Snare @Drew Tucker
+16 R Evangelize @Randy Elliott
+107 U Evil Eye of Urborg @Clint Langley
+108 U Faceless Devourer @Chippy
+109 U Fallen Ideal @Anson Maddocks
+62 C Fathom Seer @Ralph Horsley
+110 C Feebleness @Kev Walker
+153 U Firemaw Kavu @Greg Hildebrandt
+238 U Firewake Sliver @Anthony S. Waters
+272 R Flagstones of Trokair @Rob Alexander
+154 C Flamecore Elemental @Dave Dorman
+63 U Fledgling Mawcor @Kev Walker
+17 C Flickering Spirit @Alex Horley-Orlandelli
+155 C Flowstone Channeler @Alan Pollack
+64 U Fool's Demise @Zoltan Boros & Gabor Szikszai
+298 L Forest @Rob Alexander
+299 L Forest @Vance Kovacs
+300 L Forest @Craig Mullins
+301 L Forest @Stephen Tappin
+18 C Foriysian Interceptor @Anson Maddocks
+254 U Foriysian Totem @Anson Maddocks
+19 C Fortify @Christopher Moeller
+156 R Fortune Thief @Christopher Moeller
+273 U Fungal Reaches @Martina Pilcerova
+195 R Fungus Sliver @Daniel Gelon
+157 U Fury Sliver @Paolo Parente
+255 R Gauntlet of Power @Greg Hildebrandt
+20 C Gaze of Justice @John Avon
+196 C Gemhide Sliver @John Matson
+274 R Gemstone Caverns @Martina Pilcerova
+158 C Ghitu Firebreathing @Jim Nelson
+239 U Ghostflame Sliver @Luca Zontini
+197 C Glass Asp @Richard Kane Ferguson
+159 C Goblin Skycutter @Clint Langley
+111 C Gorgon Recluse @Darrell Riche
+160 C Grapeshot @Pete Venters
+161 R Greater Gargadon @Rob Alexander
+198 C Greenseeker @Rebecca Guay
+21 U Griffin Guide @Jim Nelson
+162 C Ground Rift @Thomas M. Baxa
+22 U Gustcloak Cavalier @Stuart Griffin
+240 U Harmonic Sliver @Luca Zontini
+112 U Haunting Hymn @rk post
+199 C Havenwood Wurm @Stuart Griffin
+200 C Herd Gnarr @Daren Bader
+256 R Hivestone @Dave Allsop
+201 R Hypergenesis @Ron Spears
+163 R Ib Halfheart, Goblin Tactician @Wayne Reynolds
+23 C Icatian Crier @Michael Phillippi
+164 U Ignite Memories @Justin Sweet
+165 C Ironclaw Buzzardiers @Carl Critchlow
+286 L Island @Rob Alexander
+287 L Island @Jeremy Jarvis
+288 L Island @Craig Mullins
+289 L Island @Richard Wright
+241 R Ith, High Arcanist @Zoltan Boros & Gabor Szikszai
+24 C Ivory Giant @Jeff Miracola
+65 R Ixidron @Terese Nielsen
+166 R Jaya Ballard, Task Mage @Matt Cavotta
+25 C Jedit's Dragoons @John Matson
+257 C Jhoira's Timebug @Dan Frazier
+242 R Kaervek the Merciless @rk post
+167 C Keldon Halberdier @Paolo Parente
+275 R Kher Keep @Paolo Parente
+26 U Knight of the Holy Nimbus @Wayne England
+202 U Krosan Grip @Zoltan Boros & Gabor Szikszai
+113 R Liege of the Pit @Jeremy Jarvis
+168 C Lightning Axe @Dan Scott
+114 R Lim-Dul the Necromancer @Matt Cavotta
+115 R Living End @Greg Staples
+258 U Locket of Yesterdays @Dany Orizio
+66 C Looter il-Kor @Mike Dringenberg
+259 R Lotus Bloom @Mark Zug
+203 R Magus of the Candelabra @Terese Nielsen
+27 R Magus of the Disk @Jeremy Jarvis
+67 R Magus of the Jar @Zoltan Boros & Gabor Szikszai
+116 R Magus of the Mirror @Christopher Moeller
+169 R Magus of the Scroll @Greg Staples
+117 C Mana Skimmer @Daniel Gelon
+28 R Mangara of Corondor @Zoltan Boros & Gabor Szikszai
+205 U Might Sliver @Jeff Miracola
+204 U Might of Old Krosa @Una Fricker
+118 C Mindlash Sliver @Jeff Miracola
+119 C Mindstab @Mark Tedin
+243 R Mishra, Artificer Prodigy @Scott M. Fischer
+170 C Mogg War Marshal @Wayne England
+206 C Molder @Greg Hildebrandt
+276 U Molten Slagheap @Daren Bader
+29 C Momentary Blink @Anthony S. Waters
+68 R Moonlace @Mike Dringenberg
+294 L Mountain @John Avon
+295 L Mountain @D. Alexander Gregory
+296 L Mountain @Craig Mullins
+297 L Mountain @Greg Staples
+207 C Mwonvuli Acid-Moss @Randy Gallegos
+69 C Mystical Teachings @Ron Spears
+208 C Nantuko Shaman @Daren Bader
+120 R Nether Traitor @Vance Kovacs
+121 U Nightshade Assassin @Alan Pollack
+171 R Norin the Wary @Heather Hudson
+30 R Opal Guardian @Christopher Rush
+244 U Opaline Sliver @Dave Dorman
+70 C Ophidian Eye @Zoltan Boros & Gabor Szikszai
+172 C Orcish Cannonade @Pete Venters
+31 U Outrider en-Kor @D. Alexander Gregory
+260 U Paradise Plume @Wayne England
+71 U Paradox Haze @Greg Staples
+173 R Pardic Dragon @Zoltan Boros & Gabor Szikszai
+209 U Pendelhaven Elder @Pete Venters
+32 R Pentarch Paladin @Jim Murray
+33 C Pentarch Ward @Dany Orizio
+210 C Penumbra Spider @Jeff Easley
+211 U Phantom Wurm @Alan Pollack
+122 U Phthisis @Carl Critchlow
+261 U Phyrexian Totem @John Zeleznik
+123 C Pit Keeper @Anthony S. Waters
+124 R Plague Sliver @Dave Allsop
+282 L Plains @Rob Alexander
+283 L Plains @Craig Mullins
+284 L Plains @Justin Sweet
+285 L Plains @Richard Wright
+34 U Plated Pegasus @Greg Hildebrandt
+174 C Plunder @Thomas M. Baxa
+125 U Premature Burial @Clint Langley
+212 U Primal Forcemage @Jeff Miracola
+262 C Prismatic Lens @Alan Pollack
+72 R Psionic Sliver @Wayne England
+126 C Psychotic Episode @Drew Tucker
+35 U Pull from Eternity @Ron Spears
+36 R Pulmonic Sliver @Jeff Easley
+37 U Quilled Sliver @John Matson
+175 R Reiterate @Dan Scott
+38 R Restore Balance @Mark Poole
+39 U Return to Dust @Wayne Reynolds
+176 C Rift Bolt @Michael Sutfin
+73 U Riftwing Cloudskate @Carl Critchlow
+245 R Saffi Eriksdotter @Christopher Moeller
+74 C Sage of Epityr @Randy Gallegos
+277 U Saltcrusted Steppe @Greg Staples
+127 C Sangrophage @Pete Venters
+263 R Sarpadian Empires, Vol. VII @Doug Chaffee
+213 C Savage Thallid @Luca Zontini
+214 C Scarwood Treefolk @Stuart Griffin
+246 R Scion of the Ur-Dragon @Jim Murray
+75 C Screeching Sliver @Stuart Griffin
+215 U Scryb Ranger @Rebecca Guay
+216 C Search for Tomorrow @Randy Gallegos
+177 R Sedge Sliver @Richard Kane Ferguson
+128 R Sengir Nosferatu @Scott M. Fischer
+40 R Serra Avenger @Scott M. Fischer
+76 C Shadow Sliver @Warren Mahy
+41 C Sidewinder Sliver @Ron Spencer
+129 U Skittering Monstrosity @rk post
+130 C Skulking Knight @rk post
+77 C Slipstream Serpent @Darrell Riche
+131 U Smallpox @Janine Johnston
+78 C Snapback @Alan Pollack
+217 R Spectral Force @Dan Scott
+79 U Spell Burst @Terese Nielsen
+218 R Spike Tiller @Tony Szczudlo
+80 C Spiketail Drakeling @Dave Dorman
+219 C Spinneret Sliver @Michael Sutfin
+42 U Spirit Loop @Wayne Reynolds
+220 U Sporesower Thallid @Ron Spencer
+81 R Sprite Noble @Randy Gallegos
+221 C Sprout @Anthony S. Waters
+222 R Squall Line @Lars Grant-West
+247 R Stonebrow, Krosan Hero @Ron Spears
+223 R Stonewood Invocation @Pete Venters
+82 U Stormcloud Djinn @Greg Staples
+132 C Strangling Soot @Jim Murray
+224 C Strength in Numbers @Ron Spencer
+133 R Stronghold Overseer @Puddnhead
+264 R Stuffy Doll @Dave Allsop
+178 C Subterranean Shambler @Kev Walker
+134 U Sudden Death @Dave Allsop
+179 U Sudden Shock @Vance Kovacs
+135 R Sudden Spoiling @Alan Pollack
+180 U Sulfurous Blast @Jeff Miracola
+290 L Swamp @John Avon
+291 L Swamp @Vance Kovacs
+292 L Swamp @Craig Mullins
+293 L Swamp @Richard Wright
+278 R Swarmyard @Thomas M. Baxa
+181 U Tectonic Fiend @Mark Tedin
+83 R Teferi, Mage of Zhalfir @D. Alexander Gregory & Jeremy Jarvis
+84 U Telekinetic Sliver @Randy Elliott
+85 C Temporal Eddy @Wayne England
+43 C Temporal Isolation @Stephen Tappin
+136 C Tendrils of Corruption @Mike Dringenberg
+279 C Terramorphic Expanse @Dan Scott
+225 C Thallid Germinator @Tom Wänerstrand
+226 C Thallid Shell-Dweller @Carl Critchlow
+227 R Thelon of Havenwood @Kev Walker
+228 R Thelonite Hermit @Chippy
+182 U Thick-Skinned Goblin @Ralph Horsley
+86 C Think Twice @Jim Nelson
+229 C Thrill of the Hunt @Stephen Tappin
+265 U Thunder Totem @Randy Gallegos
+44 R Tivadar of Thorn @Carl Critchlow
+87 C Tolarian Sentinel @Thomas M. Baxa
+137 C Traitor's Clutch @Dave Allsop
+138 C Trespasser il-Vec @Jim Murray
+88 R Trickbind @John Zeleznik
+266 R Triskelavus @Mark Zug
+230 U Tromp the Domains @Mike Dringenberg
+89 U Truth or Tale @Michael Phillippi
+183 C Two-Headed Sliver @Dany Orizio
+184 U Undying Rage @Scott M. Fischer
+231 R Unyaro Bees @Tom Wänerstrand
+139 C Urborg Syphon-Mage @Greg Staples
+280 U Urza's Factory @Mark Tedin
+140 U Vampiric Sliver @Thomas M. Baxa
+267 C Venser's Sliver @Carl Critchlow
+232 R Verdant Embrace @Stephen Tappin
+281 R Vesuva @Zoltan Boros & Gabor Szikszai
+90 R Vesuvan Shapeshifter @Quinton Hoover
+185 C Viashino Bladescout @Dany Orizio
+91 C Viscerid Deepwalker @Heather Hudson
+141 C Viscid Lemures @Drew Tucker
+92 U Voidmage Husher @Chippy
+186 U Volcanic Awakening @Dan Scott
+93 R Walk the Aeons @Jeremy Jarvis
+45 C Watcher Sliver @Liz Danforth
+46 R Weathered Bodyguards @Wayne Reynolds
+268 U Weatherseed Totem @Heather Hudson
+187 R Wheel of Fate @Kev Walker
+94 U Wipe Away @Jeff Miracola
+188 R Word of Seizing @Vance Kovacs
+233 C Wormwood Dryad @Warren Mahy
+234 R Wurmcalling @Jeff Easley
+235 U Yavimaya Dryad @Rebecca Guay
+47 C Zealot il-Vec @Chippy
 
 [tokens]
 kobolds_of_kher_keep

@@ -6,5 +6,5 @@ Type=Promo
 ScryfallCode=PDP15
 
 [cards]
-1 M Soul of Ravnica
-2 M Soul of Zendikar
+1 M Soul of Ravnica @Lucas Graciano
+2 M Soul of Zendikar @Eytan Zana

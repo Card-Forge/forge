@@ -6,11 +6,11 @@ Type=Promo
 ScryfallCode=PM19
 
 [cards]
-29 U Militia Bugler
-90 R Death Baron
-91 R Demon of Catastrophes
-110 U Murder
-145 U Guttersnipe
-180 C Elvish Rejuvenator
-230 R Desecrated Tomb
-254 U Reliquary Tower
+29 U Militia Bugler @David Gaillet
+90 R Death Baron @Slawomir Maniak
+91 R Demon of Catastrophes @Igor Kieryluk
+110 U Murder @Tyler Jacobson
+145 U Guttersnipe @Izzy
+180 C Elvish Rejuvenator @Winona Nelson
+230 R Desecrated Tomb @Mark Poole
+254 U Reliquary Tower @Mark Poole

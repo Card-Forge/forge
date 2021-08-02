@@ -6,9 +6,9 @@ Type=Promo
 ScryfallCode=PROE
 
 [cards]
-4★ M Emrakul, the Aeons Torn
-48 R Staggershock
-49 R Deathless Angel
-*112 R Guul Draz Assassin
-*124 R Pestilence Demon
-156★ R Lord of Shatterskull Pass
+4★ M Emrakul, the Aeons Torn @Justin Sweet
+48 R Staggershock @Raymond Swanland
+49 R Deathless Angel @Johann Bodin
+*112 R Guul Draz Assassin @Jason A. Engle
+*124 R Pestilence Demon @Justin Sweet
+156★ R Lord of Shatterskull Pass @Igor Kieryluk

@@ -6,5 +6,5 @@ Type=Promo
 ScryfallCode=PFUT
 
 [cards]
-87★ R Korlash, Heir to Blackblade
-122★ R Storm Entity
+87★ R Korlash, Heir to Blackblade @Richard Kane Ferguson
+122★ R Storm Entity @Lucio Parrillo

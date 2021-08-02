@@ -6,7 +6,7 @@ Type=Promo
 ScryfallCode=P04
 
 [cards]
-1 R Powder Keg
+1 R Powder Keg @Dan Frazier
 
 [tokens]
 w_4_4_angel_flying

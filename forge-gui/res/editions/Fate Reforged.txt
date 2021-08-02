@@ -12,191 +12,191 @@ ChaosDraftThemes=GRAVEYARD_MATTERS
 ScryfallCode=FRF
 
 [cards]
-1 M Ugin, the Spirit Dragon
-2 C Abzan Advantage
-3 C Abzan Runemark
-4 C Abzan Skycaptain
-5 C Arashin Cleric
-6 C Aven Skirmisher
-7 U Channel Harm
-8 R Citadel Siege
-9 R Daghatar the Adamant
-10 C Dragon Bell Monk
-11 R Dragonscale General
-12 U Elite Scaleguard
-13 C Great-Horn Krushok
-14 U Honor's Reward
-15 U Jeskai Barricade
-16 U Lightform
-17 U Lotus-Eye Mystics
-18 U Mardu Woe-Reaper
-19 R Mastery of the Unseen
-20 M Monastery Mentor
-21 C Pressure Point
-22 R Rally the Ancestors
-23 U Sage's Reverie
-24 C Sandblast
-25 C Sandsteppe Outcast
-26 C Soul Summons
-27 M Soulfire Grand Master
-28 U Valorous Stance
-29 U Wandering Champion
-30 U Wardscale Dragon
-31 C Aven Surveyor
-32 U Cloudform
-33 C Enhanced Awareness
-34 U Fascination
-35 U Frost Walker
-36 R Jeskai Infiltrator
-37 C Jeskai Runemark
-38 C Jeskai Sage
-39 C Lotus Path Djinn
-40 U Marang River Prowler
-41 U Mindscour Dragon
-42 U Mistfire Adept
-43 R Monastery Siege
-44 U Neutralizing Blast
-45 C Rakshasa's Disdain
-46 U Reality Shift
-47 C Refocus
-48 U Renowned Weaponsmith
-49 U Rite of Undoing
-50 R Sage-Eye Avengers
-51 U Shifting Loyalties
-52 R Shu Yun, the Silent Tempest
-53 C Sultai Skullkeeper
-54 R Supplant Form
-55 M Temporal Trespass
-56 M Torrent Elemental
-57 C Whisk Away
-58 C Will of the Naga
-59 C Write into Being
-60 C Alesha's Vanguard
-61 C Ancestral Vengeance
-62 R Archfiend of Depravity
-63 U Battle Brawler
-64 M Brutal Hordechief
-65 R Crux of Fate
-66 U Dark Deal
-67 U Diplomacy of the Wastes
-68 C Douse in Gloom
-69 U Fearsome Awakening
-70 M Ghastly Conscription
-71 U Grave Strength
-72 C Gurmag Angler
-73 C Hooded Assassin
-74 U Mardu Shadowspear
-75 R Mardu Strike Leader
-76 U Merciless Executioner
-77 U Noxious Dragon
-78 U Orc Sureshot
-79 R Palace Siege
-80 U Qarsi High Priest
-81 C Reach of Shadows
-82 C Sibsig Host
-83 U Sibsig Muckdraggers
-84 R Soulflayer
-85 C Sultai Emissary
-86 C Sultai Runemark
-87 R Tasigur, the Golden Fang
-88 C Tasigur's Cruelty
-89 C Typhoid Rats
-90 R Alesha, Who Smiles at Death
-91 R Arcbond
-92 C Bathe in Dragonfire
-93 U Bloodfire Enforcers
-94 U Break Through the Line
-95 C Collateral Damage
-96 C Defiant Ogre
-97 U Dragonrage
-98 C Fierce Invocation
-99 R Flamerush Rider
-100 R Flamewake Phoenix
-101 U Friendly Fire
-102 C Goblin Heelcutter
-103 C Gore Swine
-104 U Humble Defector
-105 U Hungering Yeti
-106 C Lightning Shrieker
-107 C Mardu Runemark
-108 C Mardu Scout
-109 R Mob Rule
-110 R Outpost Siege
-111 U Pyrotechnics
-112 U Rageform
-113 M Shaman of the Great Hunt
-114 U Shockmaw Dragon
-115 C Smoldering Efreet
-116 C Temur Battle Rage
-117 U Vaultbreaker
-118 U Wild Slash
-119 U Abzan Beastmaster
-120 U Abzan Kin-Guard
-121 C Ainok Guide
-122 C Ambush Krotiq
-123 U Arashin War Beast
-124 C Archers of Qarsi
-125 U Battlefront Krushok
-126 U Cached Defenses
-127 U Destructor Dragon
-128 C Feral Krushok
-129 C Formless Nurturing
-130 C Frontier Mastodon
-131 R Frontier Siege
-132 U Fruit of the First Tree
-133 C Hunt the Weak
-134 C Map the Wastes
-135 C Return to the Earth
-136 U Ruthless Instincts
-137 R Sandsteppe Mastodon
-138 R Shamanic Revelation
-139 U Sudden Reclamation
-140 C Temur Runemark
-141 U Temur Sabertooth
-142 R Temur War Shaman
-143 M Warden of the First Tree
-144 C Whisperer of the Wilds
-145 M Whisperwood Elemental
-146 R Wildcall
-147 U Winds of Qal Sisma
-148 R Yasova Dragonclaw
-149 R Atarka, World Render
-150 C Cunning Strike
-151 R Dromoka, the Eternal
-152 C Ethereal Ambush
-153 C Grim Contest
-154 C Harsh Sustenance
-155 R Kolaghan, the Storm's Fury
-156 R Ojutai, Soul of Winter
-157 R Silumgar, the Drifting Death
-158 C War Flare
-159 U Goblin Boom Keg
-160 U Hero's Blade
-161 U Hewed Stone Retainers
-162 U Pilgrim of the Fires
-163 R Scroll of the Masters
-164 U Ugin's Construct
-165 C Bloodfell Caves
-166 C Blossoming Sands
-167 R Crucible of the Spirit Dragon
-168 C Dismal Backwater
-169 C Jungle Hollow
-170 C Rugged Highlands
-171 C Scoured Barrens
-172 C Swiftwater Cliffs
-173 C Thornwood Falls
-174 C Tranquil Cove
-175 C Wind-Scarred Crag
-176 L Plains
-177 L Plains
-178 L Island
-179 L Island
-180 L Swamp
-181 L Swamp
-182 L Mountain
-183 L Mountain
-184 L Forest
-185 L Forest
+1 M Ugin, the Spirit Dragon @Raymond Swanland
+2 C Abzan Advantage @Winona Nelson
+3 C Abzan Runemark @James Ryman
+4 C Abzan Skycaptain @Matt Stewart
+5 C Arashin Cleric @Chris Rahn
+6 C Aven Skirmisher @Jason Rainville
+7 U Channel Harm @David Gaillet
+8 R Citadel Siege @Steven Belledin
+9 R Daghatar the Adamant @Zack Stella
+10 C Dragon Bell Monk @Lius Lasahido
+11 R Dragonscale General @Volkan Baǵa
+12 U Elite Scaleguard @Steve Prescott
+13 C Great-Horn Krushok @YW Tang
+14 U Honor's Reward @Izzy
+15 U Jeskai Barricade @Noah Bradley
+16 U Lightform @Steve Prescott
+17 U Lotus-Eye Mystics @Dan Scott
+18 U Mardu Woe-Reaper @Willian Murai
+19 R Mastery of the Unseen @Daniel Ljunggren
+20 M Monastery Mentor @Magali Villeneuve
+21 C Pressure Point @Chase Stone
+22 R Rally the Ancestors @Nils Hamm
+23 U Sage's Reverie @Jason Rainville
+24 C Sandblast @Min Yum
+25 C Sandsteppe Outcast @Wesley Burt
+26 C Soul Summons @Johann Bodin
+27 M Soulfire Grand Master @Johannes Voss
+28 U Valorous Stance @Willian Murai
+29 U Wandering Champion @Willian Murai
+30 U Wardscale Dragon @Jason Rainville
+31 C Aven Surveyor @David Gaillet
+32 U Cloudform @Noah Bradley
+33 C Enhanced Awareness @Ryan Alexander Lee
+34 U Fascination @Svetlin Velinov
+35 U Frost Walker @Mike Bierek
+36 R Jeskai Infiltrator @Cynthia Sheppard
+37 C Jeskai Runemark @Jaime Jones
+38 C Jeskai Sage @Craig J Spearing
+39 C Lotus Path Djinn @Steve Argyle
+40 U Marang River Prowler @Yefim Kligerman
+41 U Mindscour Dragon @Wesley Burt
+42 U Mistfire Adept @Clint Cearley
+43 R Monastery Siege @Mark Winters
+44 U Neutralizing Blast @Dan Scott
+45 C Rakshasa's Disdain @Seb McKinnon
+46 U Reality Shift @Howard Lyon
+47 C Refocus @Kev Walker
+48 U Renowned Weaponsmith @Eric Deschamps
+49 U Rite of Undoing @Anastasia Ovchinnikova
+50 R Sage-Eye Avengers @Dan Scott
+51 U Shifting Loyalties @James Ryman
+52 R Shu Yun, the Silent Tempest @David Gaillet
+53 C Sultai Skullkeeper @Ryan Barger
+54 R Supplant Form @Adam Paquette
+55 M Temporal Trespass @Clint Cearley
+56 M Torrent Elemental @James Paick
+57 C Whisk Away @Zack Stella
+58 C Will of the Naga @Wayne Reynolds
+59 C Write into Being @Yeong-Hao Han
+60 C Alesha's Vanguard @Torstein Nordstrand
+61 C Ancestral Vengeance @Yohann Schepacz
+62 R Archfiend of Depravity @Daarken
+63 U Battle Brawler @Karl Kopinski
+64 M Brutal Hordechief @Tyler Jacobson
+65 R Crux of Fate @Michael Komarck
+66 U Dark Deal @Scott Murphy
+67 U Diplomacy of the Wastes @Jack Wang
+68 C Douse in Gloom @Ryan Yee
+69 U Fearsome Awakening @Véronique Meignaud
+70 M Ghastly Conscription @YW Tang
+71 U Grave Strength @Jeff Simpson
+72 C Gurmag Angler @YW Tang
+73 C Hooded Assassin @Matt Stewart
+74 U Mardu Shadowspear @Mark Poole
+75 R Mardu Strike Leader @Jason Rainville
+76 U Merciless Executioner @David Palumbo
+77 U Noxious Dragon @Svetlin Velinov
+78 U Orc Sureshot @Kev Walker
+79 R Palace Siege @Slawomir Maniak
+80 U Qarsi High Priest @Viktor Titov
+81 C Reach of Shadows @Daarken
+82 C Sibsig Host @Steve Prescott
+83 U Sibsig Muckdraggers @Zack Stella
+84 R Soulflayer @Seb McKinnon
+85 C Sultai Emissary @Mathias Kollros
+86 C Sultai Runemark @Volkan Baǵa
+87 R Tasigur, the Golden Fang @Chris Rahn
+88 C Tasigur's Cruelty @Chris Rahn
+89 C Typhoid Rats @Dave Kendall
+90 R Alesha, Who Smiles at Death @Anastasia Ovchinnikova
+91 R Arcbond @Slawomir Maniak
+92 C Bathe in Dragonfire @Chris Rallis
+93 U Bloodfire Enforcers @Yefim Kligerman
+94 U Break Through the Line @Clint Cearley
+95 C Collateral Damage @Ryan Barger
+96 C Defiant Ogre @Craig J Spearing
+97 U Dragonrage @Tomasz Jedruszek
+98 C Fierce Invocation @Tyler Jacobson
+99 R Flamerush Rider @Min Yum
+100 R Flamewake Phoenix @Min Yum
+101 U Friendly Fire @Anthony Palumbo
+102 C Goblin Heelcutter @Jesper Ejsing
+103 C Gore Swine @Jack Wang
+104 U Humble Defector @Slawomir Maniak
+105 U Hungering Yeti @Tyler Jacobson
+106 C Lightning Shrieker @Slawomir Maniak
+107 C Mardu Runemark @Viktor Titov
+108 C Mardu Scout @Zoltan Boros
+109 R Mob Rule @Jakub Kasper
+110 R Outpost Siege @Daarken
+111 U Pyrotechnics @Matt Stewart
+112 U Rageform @Richard Wright
+113 M Shaman of the Great Hunt @Ryan Alexander Lee
+114 U Shockmaw Dragon @Alejandro Mirabal
+115 C Smoldering Efreet @Chase Stone
+116 C Temur Battle Rage @Jaime Jones
+117 U Vaultbreaker @Wayne Reynolds
+118 U Wild Slash @Raymond Swanland
+119 U Abzan Beastmaster @Winona Nelson
+120 U Abzan Kin-Guard @Craig J Spearing
+121 C Ainok Guide @Lucas Graciano
+122 C Ambush Krotiq @Filip Burburan
+123 U Arashin War Beast @Eric Deschamps
+124 C Archers of Qarsi @Alejandro Mirabal
+125 U Battlefront Krushok @Steve Prescott
+126 U Cached Defenses @Zack Stella
+127 U Destructor Dragon @Peter Mohrbacher
+128 C Feral Krushok @Kev Walker
+129 C Formless Nurturing @Cliff Childs
+130 C Frontier Mastodon @Nils Hamm
+131 R Frontier Siege @James Ryman
+132 U Fruit of the First Tree @Ryan Yee
+133 C Hunt the Weak @Lars Grant-West
+134 C Map the Wastes @Volkan Baǵa
+135 C Return to the Earth @Mark Winters
+136 U Ruthless Instincts @Lius Lasahido
+137 R Sandsteppe Mastodon @James Zapata
+138 R Shamanic Revelation @Cynthia Sheppard
+139 U Sudden Reclamation @Jack Wang
+140 C Temur Runemark @Ryan Alexander Lee
+141 U Temur Sabertooth @Mike Sass
+142 R Temur War Shaman @Nils Hamm
+143 M Warden of the First Tree @Ryan Alexander Lee
+144 C Whisperer of the Wilds @David Gaillet
+145 M Whisperwood Elemental @Raymond Swanland
+146 R Wildcall @Adam Paquette
+147 U Winds of Qal Sisma @Howard Lyon
+148 R Yasova Dragonclaw @Winona Nelson
+149 R Atarka, World Render @Karl Kopinski
+150 C Cunning Strike @Clint Cearley
+151 R Dromoka, the Eternal @Eric Deschamps
+152 C Ethereal Ambush @Lius Lasahido
+153 C Grim Contest @Phill Simmer
+154 C Harsh Sustenance @Cynthia Sheppard
+155 R Kolaghan, the Storm's Fury @Jaime Jones
+156 R Ojutai, Soul of Winter @Chase Stone
+157 R Silumgar, the Drifting Death @Steven Belledin
+158 C War Flare @Karl Kopinski
+159 U Goblin Boom Keg @Viktor Titov
+160 U Hero's Blade @Aaron Miller
+161 U Hewed Stone Retainers @David Seguin
+162 U Pilgrim of the Fires @Izzy
+163 R Scroll of the Masters @Lake Hurwitz
+164 U Ugin's Construct @Peter Mohrbacher
+165 C Bloodfell Caves @Adam Paquette
+166 C Blossoming Sands @Sam Burley
+167 R Crucible of the Spirit Dragon @Jung Park
+168 C Dismal Backwater @Sam Burley
+169 C Jungle Hollow @Eytan Zana
+170 C Rugged Highlands @Eytan Zana
+171 C Scoured Barrens @Eytan Zana
+172 C Swiftwater Cliffs @Eytan Zana
+173 C Thornwood Falls @Eytan Zana
+174 C Tranquil Cove @John Avon
+175 C Wind-Scarred Crag @Eytan Zana
+176 L Plains @Noah Bradley
+177 L Plains @Sam Burley
+178 L Island @Florian de Gesincourt
+179 L Island @Titus Lunter
+180 L Swamp @Sam Burley
+181 L Swamp @Adam Paquette
+182 L Mountain @Noah Bradley
+183 L Mountain @Florian de Gesincourt
+184 L Forest @Titus Lunter
+185 L Forest @Adam Paquette
 
 [Lands]
 4 Bloodstained Mire|KTK

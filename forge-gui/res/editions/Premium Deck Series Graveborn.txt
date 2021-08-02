@@ -7,36 +7,36 @@ Type=Collector_Edition
 ScryfallCode=PD3
 
 [cards]
-16 U Animate Dead
-6 R Avatar of Woe
-11 R Blazing Archon
-20 U Buried Alive
-12 U Cabal Therapy
-5 R Crosis, the Purger
-24 U Crystal Vein
-22 U Diabolic Servitude
-23 U Dread Return
-13 C Duress
-25 U Ebon Stronghold
-14 R Entomb
-17 C Exhume
-3 C Faceless Butcher
-2 U Hidden Horror
-10 R Inkwell Leviathan
-21 C Last Rites
-26 C Polluted Mire
-1 C Putrid Imp
-15 U Reanimate
-18 U Sickening Dreams
-9 M Sphinx of the Steel Wind
-28 L Swamp
-28 L Swamp
-28 L Swamp
-28 L Swamp
-7 R Terastodon
-4 C Twisted Abomination
-8 R Verdant Force
-19 U Zombie Infestation
+16 U Animate Dead @Anthony Jones
+6 R Avatar of Woe @rk post
+11 R Blazing Archon @Zoltan Boros & Gabor Szikszai
+20 U Buried Alive @Greg Staples
+12 U Cabal Therapy @Raymond Swanland
+5 R Crosis, the Purger @Chris Rahn
+24 U Crystal Vein @Pat Morrissey
+22 U Diabolic Servitude @Scott M. Fischer
+23 U Dread Return @Kev Walker
+13 C Duress @Steven Belledin
+25 U Ebon Stronghold @Liz Danforth
+14 R Entomb @Ron Spears
+17 C Exhume @Carl Critchlow
+3 C Faceless Butcher @Daren Bader
+2 U Hidden Horror @Brom
+10 R Inkwell Leviathan @Anthony Francisco
+21 C Last Rites @Bradley Williams
+26 C Polluted Mire @Stephen Daniele
+1 C Putrid Imp @Wayne England
+15 U Reanimate @Robert Bliss
+18 U Sickening Dreams @Scott M. Fischer
+9 M Sphinx of the Steel Wind @Kev Walker
+27 L Swamp @Aleksi Briclot
+28 L Swamp @James Paick
+29 L Swamp @Jung Park
+30 L Swamp @Alan Pollack
+7 R Terastodon @Lars Grant-West
+4 C Twisted Abomination @Daren Bader
+8 R Verdant Force @DiTerlizzi
+19 U Zombie Infestation @Thomas M. Baxa
 
 [tokens]
 b_2_2_zombie
