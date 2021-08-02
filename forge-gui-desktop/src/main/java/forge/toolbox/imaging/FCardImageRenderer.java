@@ -212,7 +212,7 @@ public class FCardImageRenderer {
                     rightArt = art.getSubimage(leftWidth, 0, art.getWidth() - leftWidth, art.getHeight());
                 }
                 int halfHeight = Math.round(370 * ratio);
-                int halfWidth = Math.round((halfHeight - 10) * ratio);
+                int halfWidth = Math.round(360 * ratio);
                 CARD_ART_RATIO = 2.719f;
                 updateAreaSizes(ratio, ratio);
                 drawCardStateImage(g, leftState, leftText, width, halfHeight, leftArt);
@@ -228,7 +228,7 @@ public class FCardImageRenderer {
                     rightArt = art.getSubimage(art.getWidth() / 2, 0, art.getWidth() / 2, art.getHeight());
                 }
                 CARD_ART_RATIO = 1.443f;
-                updateAreaSizes(ratio, (float)height / 2f / (float)width);
+                updateAreaSizes(ratio, ((float)height / 2f / (float)width) * ratio);
                 int widthAdjust = OUTER_BORDER_THICKNESS + PT_SIZE / 2;
                 int heightAdjust = height - widthAdjust - BLACK_BORDER_THICKNESS;
                 AffineTransform tf = g.getTransform();
