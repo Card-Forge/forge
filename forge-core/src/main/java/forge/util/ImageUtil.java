@@ -6,7 +6,6 @@ import forge.card.CardDb;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.item.PaperCard;
-import forge.item.PaperToken;
 
 public class ImageUtil {
     public static float getNearestHQSize(float baseSize, float actualSize) {
@@ -28,28 +27,6 @@ public class ImageUtil {
             cp = StaticData.instance().getVariantCards().getCard(key);
         }
         return cp;
-    }
-
-    public static PaperToken getPaperTokenFromImageKey(String key) {
-        if ( key == null ) {
-            return null;
-        }
-
-        key = key.substring(2);
-        int index = key.lastIndexOf('_');
-        if (index != -1) {
-            String script = key.substring(0, index);
-            String edition = key.substring(index + 1);
-            if (script.startsWith("emblem"))
-                return null;
-            if (null == StaticData.instance().getCardEdition(edition)) {
-                script = key;
-                edition = "???";
-            }
-            script = script.replaceAll("[0-9]*$", "");
-            return StaticData.instance().getAllTokens().getToken(script, edition);
-        }
-        return null;
     }
 
     public static String getImageRelativePath(PaperCard cp, boolean backFace, boolean includeSet, boolean isDownloadUrl) {
