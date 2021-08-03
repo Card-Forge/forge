@@ -123,7 +123,7 @@ public class EffectEffect extends SpellAbilityEffect {
             imprintOnHost = true;
         }
 
-        StringBuilder imageSet = new StringBuilder();
+        String image;
         if (sa.hasParam("Image")) {
             image = ImageKeys.getTokenKey(sa.getParam("Image"));
         } else if (name.startsWith("Emblem")) { // try to get the image from name
