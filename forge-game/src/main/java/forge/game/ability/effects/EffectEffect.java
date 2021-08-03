@@ -123,8 +123,6 @@ public class EffectEffect extends SpellAbilityEffect {
             imprintOnHost = true;
         }
 
-        String image;
-        String set = hostCard.getSetCode().toLowerCase();
         StringBuilder imageSet = new StringBuilder();
         if (sa.hasParam("Image")) {
             image = ImageKeys.getTokenKey(sa.getParam("Image"));
@@ -138,8 +136,6 @@ public class EffectEffect extends SpellAbilityEffect {
         } else { // use host image
             image = hostCard.getImageKey();
         }
-        imageSet.append(image).append("_").append(set);
-        image = imageSet.toString();
 
         for (Player controller : effectOwner) {
             final Card eff = createEffect(sa, controller, name, image);
