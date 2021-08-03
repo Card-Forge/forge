@@ -64,7 +64,6 @@ public class CounterAi extends SpellAbilityAi {
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
-
             final SpellAbility topSA = ComputerUtilAbility.getTopSpellAbilityOnStack(game, sa);
             if (!CardFactoryUtil.isCounterableBy(topSA.getHostCard(), sa) || topSA.getActivatingPlayer() == ai
                     || ai.getAllies().contains(topSA.getActivatingPlayer())) {
@@ -317,7 +316,7 @@ public class CounterAi extends SpellAbilityAi {
 
         Iterator<SpellAbilityStackInstance> it = game.getStack().iterator();
         SpellAbilityStackInstance si = null;
-        while(it.hasNext()) {
+        while (it.hasNext()) {
             si = it.next();
             tgtSA = si.getSpellAbility(true);
             if (!sa.canTargetSpellAbility(tgtSA)) {

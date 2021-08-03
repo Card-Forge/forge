@@ -24,7 +24,6 @@ public class ScryAi extends SpellAbilityAi {
      */
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-
         if (sa.usesTargeting()) { // It doesn't appear that Scry ever targets
             // ability is targeted
             sa.resetTargets();
@@ -69,7 +68,7 @@ public class ScryAi extends SpellAbilityAi {
         // in the playerturn Scry should only be done in Main1 or in upkeep if able
         if (ph.isPlayerTurn(ai)) {
             if (SpellAbilityAi.isSorcerySpeed(sa)) {
-                return ph.is(PhaseType.MAIN1) || sa.hasParam("Planeswalker");
+                return ph.is(PhaseType.MAIN1) || sa.isPwAbility();
             } else {
                 return ph.is(PhaseType.UPKEEP);
             }

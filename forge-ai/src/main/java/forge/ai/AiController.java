@@ -389,7 +389,7 @@ public class AiController {
         final List<SpellAbility> spellAbility = Lists.newArrayList();
         for (final Card c : l) {
             for (final SpellAbility sa : c.getNonManaAbilities()) {
-                // Check if this AF is a Counterpsell
+                // Check if this AF is a Counterspell
                 if (sa.getApi() == ApiType.Counter) {
                     spellAbility.add(sa);
                 }
