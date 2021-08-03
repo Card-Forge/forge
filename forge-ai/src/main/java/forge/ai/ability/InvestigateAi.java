@@ -24,4 +24,3 @@ public class InvestigateAi extends SpellAbilityAi {
         return true;
     }
 }
-

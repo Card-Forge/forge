@@ -199,7 +199,6 @@ public class SetStateAi extends SpellAbilityAi {
             return false;
         }
 
-
         // check which state would be better for attacking
         if (ph.isPlayerTurn(ai) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
             boolean transformAttack = false;

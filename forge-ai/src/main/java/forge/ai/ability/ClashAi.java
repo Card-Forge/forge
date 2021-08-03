@@ -33,7 +33,6 @@ public class ClashAi extends SpellAbilityAi {
         return legalAction;
     }
 
-
     /*
      * (non-Javadoc)
      * 

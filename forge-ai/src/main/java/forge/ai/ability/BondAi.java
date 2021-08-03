@@ -49,7 +49,6 @@ public final class BondAi extends SpellAbilityAi {
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         return true;
     } // end bondCanPlayAI()
-    
 
     @Override
     protected Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
