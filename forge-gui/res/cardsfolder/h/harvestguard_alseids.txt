@@ -2,8 +2,7 @@ Name:Harvestguard Alseids
 ManaCost:2 W
 Types:Enchantment Creature Nymph
 PT:2/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment enters the battlefield under your control, prevent all damage that would be dealt to target creature this turn.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.Other+YouCtrl | TriggerZones$ Battlefield | Secondary$ True | Execute$ TrigPump | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment enters the battlefield under your control, prevent all damage that would be dealt to target creature this turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Enchantment.Other+YouCtrl | Execute$ TrigPump | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment enters the battlefield under your control, prevent all damage that would be dealt to target creature this turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Prevent all damage that would be dealt to CARDNAME.
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Enchantment

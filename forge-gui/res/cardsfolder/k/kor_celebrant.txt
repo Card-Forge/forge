@@ -2,8 +2,7 @@ Name:Kor Celebrant
 ManaCost:2 W
 Types:Creature Kor Cleric
 PT:1/4
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigGainLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME or another creature enters the battlefield under your control, you gain 1 life.
-T:Mode$ ChangesZone | ValidCard$ Creature.Other+YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigGainLife | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another creature enters the battlefield under your control, you gain 1 life.
+T:Mode$ ChangesZone | ValidCard$ Card.Self,Creature.Other+YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigGainLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME or another creature enters the battlefield under your control, you gain 1 life.
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 DeckHas:Ability$LifeGain
 Oracle:Whenever Kor Celebrant or another creature enters the battlefield under your control, you gain 1 life.

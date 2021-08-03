@@ -413,33 +413,29 @@ public final class StaticAbilityContinuous {
             });
         }
 
-        if (layer == StaticAbilityLayer.TYPE && params.containsKey("RemoveType")) {
-            removeTypes = Lists.newArrayList(Arrays.asList(params.get("RemoveType").split(" & ")));
-
-            Iterables.removeIf(removeTypes, new Predicate<String>() {
-                @Override
-                public boolean apply(String input) {
-                    if (input.equals("ChosenType") && !hostCard.hasChosenType()) {
-                        return true;
-                    }
-                    return false;
-                }
-            });
-        }
-
         if (layer == StaticAbilityLayer.TYPE) {
+            if (params.containsKey("RemoveType")) {
+                removeTypes = Lists.newArrayList(Arrays.asList(params.get("RemoveType").split(" & ")));
+
+                Iterables.removeIf(removeTypes, new Predicate<String>() {
+                    @Override
+                    public boolean apply(String input) {
+                        if (input.equals("ChosenType") && !hostCard.hasChosenType()) {
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+            }
             if (params.containsKey("RemoveSuperTypes")) {
                 removeSuperTypes = true;
             }
-
             if (params.containsKey("RemoveCardTypes")) {
                 removeCardTypes = true;
             }
-
             if (params.containsKey("RemoveSubTypes")) {
                 removeSubTypes = true;
             }
-
             if (params.containsKey("RemoveLandTypes")) {
                 removeLandTypes = true;
             }

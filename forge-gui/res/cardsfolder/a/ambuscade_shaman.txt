@@ -3,8 +3,7 @@ ManaCost:2 B
 Types:Creature Orc Shaman
 PT:2/2
 K:Dash:3 B
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME or another creature enters the battlefield under your control, that creature gets +2/+2.
-T:Mode$ ChangesZone | ValidCard$ Creature.Other+YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigPump | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another creature enters the battlefield under your control, that creature gets +2/+2.
+T:Mode$ ChangesZone | ValidCard$ Card.Self,Creature.YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME or another creature enters the battlefield under your control, that creature gets +2/+2.
 SVar:TrigPump:DB$ Pump | Defined$ TriggeredCard | NumAtt$ +2 | NumDef$ +2
 SVar:BuffedBy:Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ambuscade_shaman.jpg

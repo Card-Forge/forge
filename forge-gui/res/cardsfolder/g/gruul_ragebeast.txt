@@ -2,8 +2,7 @@ Name:Gruul Ragebeast
 ManaCost:5 R G
 Types:Creature Beast
 PT:6/6
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFight | TriggerDescription$ Whenever CARDNAME or another creature enters the battlefield under your control, that creature fights target creature an opponent controls.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigFight | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another creature enters the battlefield under your control, that creature fights target creature an opponent controls.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Creature.Other+YouCtrl | Execute$ TrigFight | TriggerDescription$ Whenever CARDNAME or another creature enters the battlefield under your control, that creature fights target creature an opponent controls.
 SVar:TrigFight:DB$ Fight | Defined$ TriggeredCardLKICopy | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gruul_ragebeast.jpg
 Oracle:Whenever Gruul Ragebeast or another creature enters the battlefield under your control, that creature fights target creature an opponent controls.

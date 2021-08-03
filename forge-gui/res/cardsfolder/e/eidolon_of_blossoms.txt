@@ -2,8 +2,7 @@ Name:Eidolon of Blossoms
 ManaCost:2 G G
 Types:Enchantment Creature Spirit
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment enters the battlefield under your control, draw a card.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.Other+YouCtrl | TriggerZones$ Battlefield | Secondary$ True | Execute$ TrigDraw | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment enters the battlefield under your control, draw a card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Enchantment.Other+YouCtrl | Execute$ TrigDraw | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment enters the battlefield under your control, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:BuffedBy:Enchantment
 SVar:Picture:http://www.wizards.com/global/images/magic/general/eidolon_of_blossoms.jpg

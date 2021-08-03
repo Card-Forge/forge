@@ -2,8 +2,7 @@ Name:Coercive Recruiter
 ManaCost:4 R
 Types:Creature Orc Pirate
 PT:4/3
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigGainControl | TriggerDescription$ Whenever CARDNAME or another Pirate enters the battlefield under your control, gain control of target creature until end of turn. Untap that creature. Until end of turn, it gains haste and becomes a Pirate in addition to its other types.
-T:Mode$ ChangesZone | ValidCard$ Pirate.Other+YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigGainControl | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME or another Pirate enters the battlefield under your control, gain control of target creature until end of turn. Untap that creature. Until end of turn, it gains haste and becomes a Pirate in addition to its other types.
+T:Mode$ ChangesZone | ValidCard$ Card.Self,Pirate.Other+YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigGainControl | TriggerDescription$ Whenever CARDNAME or another Pirate enters the battlefield under your control, gain control of target creature until end of turn. Untap that creature. Until end of turn, it gains haste and becomes a Pirate in addition to its other types.
 SVar:TrigGainControl:DB$ GainControl | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SubAbility$ DBAnimate
 SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Types$ Pirate | UntilEndOfTurn$ True
 DeckNeeds:Type$Pirate

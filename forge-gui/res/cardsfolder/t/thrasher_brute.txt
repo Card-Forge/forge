@@ -2,8 +2,7 @@ Name:Thrasher Brute
 ManaCost:3 B
 Types:Creature Orc Warrior
 PT:4/3
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDrain | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME or another Warrior enters the battlefield under your team's control, target opponent loses 1 life and you gain 1 life.
-T:Mode$ ChangesZone | ValidCard$ Warrior.Other+YourTeamCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigDrain | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another Warrior enters the battlefield under your team's control, target opponent loses 1 life and you gain 1 life.
+T:Mode$ ChangesZone | ValidCard$ Card.Self,Warrior.Other+YourTeamCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigDrain | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME or another Warrior enters the battlefield under your team's control, target opponent loses 1 life and you gain 1 life.
 SVar:TrigDrain:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 SVar:BuffedBy:Warrior

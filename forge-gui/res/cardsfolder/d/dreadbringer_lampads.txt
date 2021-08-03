@@ -2,8 +2,7 @@ Name:Dreadbringer Lampads
 ManaCost:4 B
 Types:Enchantment Creature Nymph
 PT:4/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment enters the battlefield under your control, target creature gains intimidate until end of turn.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | Secondary$ True | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment enters the battlefield under your control, target creature gains intimidate until end of turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Enchantment.Other+YouCtrl | Execute$ TrigPump | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment enters the battlefield under your control, target creature gains intimidate until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Intimidate
 SVar:BuffedBy:Enchantment
 SVar:PlayMain1:TRUE

@@ -2,8 +2,7 @@ Name:Ayara, First of Locthwain
 ManaCost:B B B
 Types:Legendary Creature Elf Noble
 PT:2/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDrain | TriggerDescription$ Whenever CARDNAME or another black creature enters the battlefield under your control, each opponent loses 1 life and you gain 1 life.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Black+Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDrain | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another black creature enters the battlefield under your control, each opponent loses 1 life and you gain 1 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Creature.Black+Other+YouCtrl | Execute$ TrigDrain | TriggerDescription$ Whenever CARDNAME or another black creature enters the battlefield under your control, each opponent loses 1 life and you gain 1 life.
 SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 A:AB$ Draw | Cost$ T Sac<1/Creature.Other+Black/another black creature> | NumCards$ 1 | SpellDescription$ Draw a card.
