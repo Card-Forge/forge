@@ -227,17 +227,31 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         addCard(new PaperCard(cr, e.getCode(), cis.rarity, artIdx, false, cis.collectorNumber, cis.artistName));
     }
 
-    public void loadCard(String cardName, CardRules cr) {
+    public void loadCard(String cardName, String setCode, CardRules cr) {
         // @leriomaggio: This method is called when lazy-loading is set
-        System.out.println("Lazy Loading Card: " + cardName);
+        System.out.println("[LOG]: (Lazy) Loading Card: " + cardName);
         rulesByName.put(cardName, cr);
-        for (CardEdition e : editions) {
+        boolean reIndexNecessary = false;
+        if ((setCode == null) || setCode.length() == 0 || setCode.equals(CardEdition.UNKNOWN.getCode())) {
+            // look for all possible editions
+            for (CardEdition e : editions) {
+                List<CardInSet> cardsInSet = e.getCardInSet(cardName);  // empty collection if not present
+                for (CardInSet cis : cardsInSet) {
+                    addSetCard(e, cis, cr);
+                    reIndexNecessary = true;
+                }
+            }
+        } else {
+            CardEdition e = editions.get(setCode);
             List<CardInSet> cardsInSet = e.getCardInSet(cardName);  // empty collection if not present
-            for (CardInSet cis : cardsInSet)
+            for (CardInSet cis : cardsInSet) {
                 addSetCard(e, cis, cr);
+                reIndexNecessary = true;
+            }
         }
 
-        reIndex();
+        if (reIndexNecessary)
+            reIndex();
     }
 
     public void initialize(boolean logMissingPerEdition, boolean logMissingSummary, boolean enableUnknownCards) {
@@ -441,7 +455,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         if ((reqEditionCode != null) && (reqEditionCode.length() > 0)) {
             // This get is robust even against expansion aliases (e.g. TE and TMP both valid for Tempest) -
             // MOST of the extensions have two short codes, 141 out of 221 (so far)
-            CardEdition edition = editions.get(reqEditionCode);
+            // ALSO: Set Code are always UpperCase
+            CardEdition edition = editions.get(reqEditionCode.toUpperCase());
             return this.getCardFromSet(request.cardName, edition, request.artIndex,
                     request.collectorNumber, request.isFoil);
         }

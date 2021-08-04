@@ -1945,5 +1945,83 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         assertEquals(retrievedPaperCard.getEdition(), CardEdition.UNKNOWN.getCode());
     }
 
+    @Test
+    public void testGetCardFromWrongEditionOrNonExistingEditionReturnsNullResult(){
+        String cardName = "Blinding Angel";
+        String wrongSetCode = "LEA";  // obiviously wrong
+
+        String requestInfo = CardDb.CardRequest.compose(cardName, wrongSetCode);
+        PaperCard blindingAngelCard = this.cardDb.getCard(requestInfo);
+        PaperCard legacyBlindingAngelCard = this.legacyCardDb.getCard(requestInfo);
+        assertNull(legacyBlindingAngelCard);  // be sure behaviour is the same
+        assertNull(blindingAngelCard);
+
+        String nonExistingSetCode = "9TH";  // non-existing, should be 9ED
+        requestInfo = CardDb.CardRequest.compose(cardName, nonExistingSetCode);
+        blindingAngelCard = this.cardDb.getCard(requestInfo);
+        legacyBlindingAngelCard = this.legacyCardDb.getCard(requestInfo);
+        assertNull(legacyBlindingAngelCard);  // be sure behaviour is the same
+        assertNull(blindingAngelCard);
+    }
+
+    // Case Insensitive Search/Retrieval Tests
+    @Test
+    public void testUpdatedCardDBAPICardNameWithWrongCaseWillStillReturnTheCorrectCard() {
+        String cardName = "AEther baRRIER"; // wrong case
+        String setCode = "NMS";
+        String requestInfo = CardDb.CardRequest.compose(cardName, setCode);
+        PaperCard aetherBarrierCard = this.cardDb.getCard(requestInfo);
+        assertNotNull(aetherBarrierCard);
+        assertEquals(aetherBarrierCard.getName(), "Aether Barrier");
+        assertEquals(aetherBarrierCard.getEdition(), "NMS");
+
+        // Compare w/ LegacyDb
+        PaperCard legacyAetherBarrierCard = this.legacyCardDb.getCard(requestInfo);
+        assertEquals(aetherBarrierCard, legacyAetherBarrierCard);
+    }
+
+    @Test
+    public void testWrongCaseInEditionSetCodeReturnsNull(){
+        String cardName = "Aether Barrier"; // correct name
+        String setCode = "nmS";  // wrong case, non-existing
+        String requestInfo = CardDb.CardRequest.compose(cardName, setCode);
+        PaperCard aetherBarrierCard = this.cardDb.getCard(requestInfo);
+        assertNotNull(aetherBarrierCard);
+        assertEquals(aetherBarrierCard.getName(), cardName);
+        assertEquals(aetherBarrierCard.getEdition(), setCode.toUpperCase());
+
+        // Compare w/ LegacyDb
+        PaperCard legacyAetherBarrierCard = this.legacyCardDb.getCard(requestInfo);
+        assertNotNull(legacyAetherBarrierCard);
+        assertEquals(legacyAetherBarrierCard, aetherBarrierCard);
+    }
+
+    // "Problematic" Card names
+    @Test
+    public void testRetrievingBorrowing100_000ArrowsCard(){
+        String cardName = "Borrowing 100,000 Arrows";
+        PaperCard borrowingCard = this.cardDb.getCard(cardName);
+        assertNotNull(borrowingCard);
+        assertEquals(borrowingCard.getName(), cardName);
+
+        // Compare w/ LegacyDb
+        PaperCard legacyBorrowingCard = this.legacyCardDb.getCardFromEdition(cardName, LegacyCardDb.LegacySetPreference.Latest);
+        assertEquals(legacyBorrowingCard, borrowingCard);
+    }
+
+    @Test
+    public void testGetCardWithDashInNameAndWrongCaseToo(){
+        String requestInfo = "Ainok Bond-kin|KTK";  // wrong case for last 'k' and dash in name
+        PaperCard ainokCard = this.cardDb.getCard(requestInfo);
+        assertNotNull(ainokCard);
+        assertEquals(ainokCard.getName(), "Ainok Bond-Kin");
+        assertEquals(ainokCard.getEdition(), "KTK");
+
+        // Compare w/ LegacyDb
+        PaperCard legacyAinokCard = this.legacyCardDb.getCard(requestInfo);
+        assertEquals(legacyAinokCard, ainokCard);
+    }
+
+
 }
 
