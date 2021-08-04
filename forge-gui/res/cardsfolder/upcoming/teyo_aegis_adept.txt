@@ -1,0 +1,15 @@
+Name:Teyo, Aegis Adept
+ManaCost:2 W W
+Types:Legendary Planeswalker Teyo
+Loyalty:4
+A:AB$ Effect | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | TargetMin$ 0 | TargetMax$ 1 | RememberObjects$ Targeted | StaticAbilities$ PerpetualStatic | Duration$ Permanent | SpellDescription$ Up to one target creature's base power perpetually becomes equal to its toughness. It perpetually gains "This creature can attack as though it didn't have defender."
+SVar:PerpetualStatic:Mode$ Continuous | Affected$ Card.IsRemembered | SetPower$ X | AddHiddenKeyword$ CARDNAME can attack as though it didn't have defender. | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature's base power perpetually becomes equal to its toughness. It perpetually gains "This creature can attack as though it didn't have defender."
+SVar:X:Remembered$CardToughness
+A:AB$ MakeCard | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | Name$ Lumbering Lightshield | Zone$ Battlefield | SpellDescription$ Conjure a Lumbering Lightshield card onto the battlefield.
+A:AB$ Effect | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Teyo, Aegis Adept | Triggers$ EndStepTrig | Duration$ Permanent | SpellDescription$ You get an emblem with "At the beginning of your end step, return target white creature card from your graveyard to the battlefield. You gain life equal to its toughness."
+SVar:EndStepTrig:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigReturn | TriggerDescription$ At the beginning of your end step, return target white creature card from your graveyard to the battlefield. You gain life equal to its toughness.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn+White | TgtPrompt$ Select target white creature card | RememberChanged$ True | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$LifeGain & Ability$Graveyard
+Oracle:[+1]: Up to one target creature's base power perpetually becomes equal to its toughness. It perpetually gains "This creature can attack as though it didn't have defender."\n[-2]: Conjure a Lumbering Lightshield card onto the battlefield.\n[-6]: You get an emblem with "At the beginning of your end step, return target white creature card from your graveyard to the battlefield. You gain life equal to its toughness."
