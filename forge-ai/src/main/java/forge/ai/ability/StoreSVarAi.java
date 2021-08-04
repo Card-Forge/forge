@@ -66,7 +66,6 @@ public class StoreSVarAi extends SpellAbilityAi {
             return false;
         }
 
-
         return true;
     }
 

@@ -3,7 +3,6 @@ ManaCost:5 G G
 Types:Creature Elephant
 PT:6/6
 K:Trample
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFight | TriggerDescription$ Whenever CARDNAME or another creature enters the battlefield under your control, CARDNAME fights up to one target creature you don't control.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigFight | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another creature enters the battlefield under your control, CARDNAME fights up to one target creature you don't control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Creature.Other+YouCtrl | Execute$ TrigFight | TriggerDescription$ Whenever CARDNAME or another creature enters the battlefield under your control, CARDNAME fights up to one target creature you don't control.
 SVar:TrigFight:DB$ Fight | Defined$ Self | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control | TargetMin$ 0 | TargetMax$ 1
 Oracle:Trample\nWhenever Thorn Mammoth or another creature enters the battlefield under your control, Thorn Mammoth fights up to one target creature you don't control.

@@ -69,4 +69,3 @@ public class ExploreAi extends SpellAbilityAi {
     }
 
 }
-

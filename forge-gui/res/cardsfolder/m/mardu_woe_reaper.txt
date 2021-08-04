@@ -2,8 +2,7 @@ Name:Mardu Woe-Reaper
 ManaCost:W
 Types:Creature Human Warrior
 PT:2/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigExile| TriggerDescription$ Whenever CARDNAME or another Warrior enters the battlefield under your control, you may exile target creature card from a graveyard. If you do, you gain 1 life.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Warrior.Other+YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigExile | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another Warrior enters the battlefield under your control, you may exile target creature card from a graveyard. If you do, you gain 1 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Warrior.Other+YouCtrl | OptionalDecider$ You | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME or another Warrior enters the battlefield under your control, you may exile target creature card from a graveyard. If you do, you gain 1 life.
 SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature card | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

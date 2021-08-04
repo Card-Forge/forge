@@ -2,8 +2,7 @@ Name:Thoughtrender Lamia
 ManaCost:4 B B
 Types:Enchantment Creature Lamia
 PT:5/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment enters the battlefield under your control, each opponent discards a card.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.Other+YouCtrl | TriggerZones$ Battlefield | Secondary$ True | Execute$ TrigDiscard | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment enters the battlefield under your control, each opponent discards a card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Enchantment.Other+YouCtrl | Execute$ TrigDiscard | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment enters the battlefield under your control, each opponent discards a card.
 SVar:TrigDiscard:DB$ Discard | Defined$ Player.Opponent | NumCards$ 1 | Mode$ TgtChoose
 SVar:BuffedBy:Enchantment
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thoughtrender_lamia.jpg

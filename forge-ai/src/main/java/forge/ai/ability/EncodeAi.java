@@ -56,7 +56,6 @@ public final class EncodeAi extends SpellAbilityAi {
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         return true;
     }
-    
 
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {

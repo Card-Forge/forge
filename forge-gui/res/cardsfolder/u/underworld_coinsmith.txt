@@ -2,8 +2,7 @@ Name:Underworld Coinsmith
 ManaCost:W B
 Types:Enchantment Creature Human Cleric
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment enters the battlefield under your control, you gain 1 life.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.Other+YouCtrl | TriggerZones$ Battlefield | Secondary$ True | Execute$ TrigGainLife | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment enters the battlefield under your control, you gain 1 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Enchantment.Other+YouCtrl | Execute$ TrigGainLife | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment enters the battlefield under your control, you gain 1 life.
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 A:AB$ LoseLife | Cost$ W B PayLife<1> | Defined$ Player.Opponent | LifeAmount$ 1 | SpellDescription$ Each Opponent Loses 1 life.
 SVar:BuffedBy:Enchantment

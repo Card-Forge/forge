@@ -1024,7 +1024,6 @@ public class Game {
     }
 
     public void clearCaches() {
-
         lastStateBattlefield.clear();
         lastStateGraveyard.clear();
         //playerCache.clear();

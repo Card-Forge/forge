@@ -2,8 +2,7 @@ Name:Doomwake Giant
 ManaCost:4 B
 Types:Enchantment Creature Giant
 PT:4/6
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMassacre | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment enters the battlefield under your control, creatures your opponents control get -1/-1 until end of turn.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigMassacre | Secondary$ True | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment enters the battlefield under your control, creatures your opponents control get -1/-1 until end of turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Enchantment.Other+YouCtrl | Execute$ TrigMassacre | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment enters the battlefield under your control, creatures your opponents control get -1/-1 until end of turn.
 SVar:TrigMassacre:DB$ PumpAll | NumAtt$ -1 | NumDef$ -1 | ValidCards$ Creature.OppCtrl | IsCurse$ True
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Enchantment

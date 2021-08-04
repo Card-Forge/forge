@@ -47,8 +47,7 @@ public class TwoPilesAi extends SpellAbilityAi {
         CardCollectionView pool;
         if (sa.hasParam("DefinedCards")) {
             pool = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("DefinedCards"), sa);
-        }
-        else {
+        } else {
             pool = p.getCardsIn(zone);
         }
         pool = CardLists.getValidCards(pool, valid, card.getController(), card, sa);

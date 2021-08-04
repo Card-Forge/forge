@@ -284,7 +284,7 @@ public class FightAi extends SpellAbilityAi {
         }
         return 0;
     }
-    
+
     private static boolean shouldFight(Card fighter, Card opponent, int pumpAttack, int pumpDefense) {
     	if (canKill(fighter, opponent, pumpAttack)) {
     		if (!canKill(opponent, fighter, -pumpDefense)) {	// can survive

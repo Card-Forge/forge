@@ -2,8 +2,7 @@ Name:Grim Guardian
 ManaCost:2 B
 Types:Enchantment Creature Zombie
 PT:1/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDrain | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment enters the battlefield under your control, each opponent loses 1 life.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDrain | Secondary$ True | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment enters the battlefield under your control, each opponent loses 1 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Enchantment.Other+YouCtrl | Execute$ TrigDrain | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment enters the battlefield under your control, each opponent loses 1 life.
 SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grim_guardian.jpg
 Oracle:Constellation — Whenever Grim Guardian or another enchantment enters the battlefield under your control, each opponent loses 1 life.

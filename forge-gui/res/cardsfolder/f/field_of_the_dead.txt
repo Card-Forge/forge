@@ -3,8 +3,7 @@ ManaCost:no cost
 Types:Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ X | SVarCompare$ GE7 | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME or another land enters the battlefield under your control, if you control seven or more lands with different names, create a 2/2 black Zombie creature token.
-T:Mode$ ChangesZone | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE7 | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.Other+YouCtrl | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another land enters the battlefield under your control, if you control seven or more lands with different names, create a 2/2 black Zombie creature token.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Land.Other+YouCtrl | CheckSVar$ X | SVarCompare$ GE7 | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME or another land enters the battlefield under your control, if you control seven or more lands with different names, create a 2/2 black Zombie creature token.
 SVar:TrigToken:DB$ Token | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenAmount$ 1 | LegacyImage$ b 2 2 zombie m20
 SVar:X:Count$DifferentCardNames_Land.YouCtrl+inZoneBattlefield
 DeckHas:Ability$Token
