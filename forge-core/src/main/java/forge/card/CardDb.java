@@ -290,10 +290,10 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         for (CardRules cr : rulesByName.values()) {
             if (!contains(cr.getName())) {
                 if (upcomingSet != null) {
-                    addCard(new PaperCard(cr, upcomingSet.getCode(), CardRarity.Unknown, IPaperCard.DEFAULT_ART_INDEX));
+                    addCard(new PaperCard(cr, upcomingSet.getCode(), CardRarity.Unknown));
                 } else if (enableUnknownCards && !this.filtered.contains(cr.getName())) {
                     System.err.println("The card " + cr.getName() + " was not assigned to any set. Adding it to UNKNOWN set... to fix see res/editions/ folder. ");
-                    addCard(new PaperCard(cr, CardEdition.UNKNOWN.getCode(), CardRarity.Special, IPaperCard.DEFAULT_ART_INDEX));
+                    addCard(new PaperCard(cr, CardEdition.UNKNOWN.getCode(), CardRarity.Special));
                 }
             }
         }
@@ -959,7 +959,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             System.err.println("We're sorry, but this card is not supported yet.");
         }
 
-        return new PaperCard(CardRules.getUnsupportedCardNamed(request.cardName), cardEdition.getCode(), cardRarity, IPaperCard.DEFAULT_ART_INDEX);
+        return new PaperCard(CardRules.getUnsupportedCardNamed(request.cardName), cardEdition.getCode(), cardRarity);
 
     }
 
@@ -1017,7 +1017,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 }
             }
             if (paperCards.isEmpty()) {
-                paperCards.add(new PaperCard(rules, CardEdition.UNKNOWN.getCode(), CardRarity.Special, IPaperCard.DEFAULT_ART_INDEX));
+                paperCards.add(new PaperCard(rules, CardEdition.UNKNOWN.getCode(), CardRarity.Special));
             }
             // 2. add them to db
             for (PaperCard paperCard : paperCards) {
