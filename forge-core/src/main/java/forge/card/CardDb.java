@@ -228,18 +228,14 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     public void loadCard(String cardName, CardRules cr) {
+        // @leriomaggio: This method is called when lazy-loading is set
+        System.out.println("Lazy Loading Card: " + cardName);
         rulesByName.put(cardName, cr);
-        // This seems very unperformant. Does this get called often?
-        System.out.println("Inside loading card");
-
         for (CardEdition e : editions) {
-            for (CardInSet cis : e.getAllCardsInSet()) {
-                if (cis.name.equalsIgnoreCase(cardName)) {
-                    addSetCard(e, cis, cr);
-                }
-            }
+            List<CardInSet> cardsInSet = e.getCardInSet(cardName);  // empty collection if not present
+            for (CardInSet cis : cardsInSet)
+                addSetCard(e, cis, cr);
         }
-
         reIndex();
     }
 
