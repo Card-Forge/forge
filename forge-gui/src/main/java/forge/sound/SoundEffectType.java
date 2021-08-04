@@ -79,6 +79,7 @@ public enum SoundEffectType {
     RedLand("red_land.mp3", false),
     Regen("regeneration.mp3", false),
     RemoveCounter("remove_counter.mp3", true),
+    RollDie("roll_die.mp3", false),
     Sacrifice("sacrifice.mp3", true),
     ScriptedEffect("", false), // Plays the effect defined by SVar:SoundEffect
     Shuffle("shuffle.mp3", false),
