@@ -138,10 +138,13 @@ public class CardStorageReader {
             if (c == '\'') {
                 continue;
             }
-            if (c < 'a' || c > 'z') {
+            if ((c < 'a' || c > 'z') && (c < '0' || c > '9')) {
                 if (charIndex > 0 && chars[charIndex - 1] == '_') {
                     continue;
                 }
+                // Comma separator in numbers: "Borrowing 100,000 Arrows"
+                if ((c == ',') && (charIndex > 0) && (chars[charIndex-1] >= '0' || chars[charIndex-1] <= '9'))
+                    continue;
                 c = '_';
             }
             chars[charIndex++] = c;
