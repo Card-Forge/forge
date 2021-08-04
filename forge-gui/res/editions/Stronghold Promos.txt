@@ -6,4 +6,4 @@ Type=Promo
 ScryfallCode=PSTH
 
 [cards]
-68 R Revenant
+68 R Revenant @Terese Nielsen

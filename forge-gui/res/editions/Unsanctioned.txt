@@ -9,102 +9,102 @@ Border=Silver
 ScryfallCode=UND
 
 [cards]
-1 C Adorable Kitten
-2 C AWOL
-3 U Emcee
-4 R Flavor Judge
-5 R Frankie Peanuts
-6 C GO TO JAIL
-7 C Humming-
-8 C Knight of the Hokey Pokey
-9 R Look at Me, I'm R&D
-10 R Look at Me, I'm the DCI
-11 C Old Guard
-12 C Ordinary Pony
-13 R Staying Power
-14 U Strutting Turkey
-15 R Syr Cadian, Knight Owl
-16 R Alexander Clamilton
-17 R Avatar of Me
-18 M B.O.B. (Bevy of Beebles)
-19 C Carnivorous Death-Parrot
-20 U Cheatyface
-21 R Chicken à la King
-22 U Common Courtesy
-23 R Johnny, Combo Player
-24 C Magic Word
-25 C Mer Man
-26 R Richard Garfield, Ph.D.
-27 U Rings a Bell
-28 C Time Out
-29 U Topsy Turvy
-30 C Wall of Fortune
-31 R Acornelia, Fashionable Filcher
-32 U Bat-
-33 U Booster Tutor
-34 C Dirty Rat
-35 C Duh
-36 R Enter the Dungeon
-37 C Hoisted Hireling
-38 R Infernal Spawn of Evil
-39 R Infernal Spawn of Infernal Spawn of Evil
-40 R Infernius Spawnington III, Esq.
-41 U Inhumaniac
-42 U Jumbo Imp
-43 C Poultrygeist
-44 U Skull Saucer
-45 C Snickering Squirrel
-46 C Stinging Scorpion
-47 U Abstract Iguanart
-48 R Blast from the Past
-49 R Boomstacker
-50 C Common Iguana
-51 U Goblin Haberdasher
-52 C Goblin S.W.A.T. Team
-53 U Goblin Tutor
-54 M Infinity Elemental
-55 C Painiac
-56 U Six-y Beast
-57 R Stet, Draconic Proofreader
-58 R Strategy, Schmategy
-59 U Super-Duper Death Ray
-60 R Yet Another Aether Vortex
-61 R B-I-N-G-O
-62 C Elvish Impersonators
-63 C Free-Range Chicken
-64 C Growth Spurt
-65 U Half-Squirrel, Half-
-66 C Mother Kangaroo
-67 R Old Fogey
-68 R Pippa, Duchess of Dice
-69 U Slaying Mantis
-70 U Spirit of the Season
-71 R Squirrel Farm
-72 M Surgeon Commander
-73 R Timmy, Power Gamer
-74 C Wild Crocodile
-75 R Who // What // When // Where // Why
-76 U Bronze Calendar
-77 U Entirely Normal Armchair
-78 R Jack-in-the-Mox
-79 U Krark's Other Thumb
-80 C Paper Tiger
-81 R Pointy Finger of Doom
-82 C Rock Lobster
-83 C Scissors Lizard
-84 M Sword of Dungeons & Dragons
-85 R Water Balloon Game
-86 C Underdome
-87 L Plains
-88 L Plains
-89 L Island
-90 L Island
-91 L Swamp
-92 L Swamp
-93 L Mountain
-94 L Mountain
-95 L Forest
-96 L Forest
+1 C Adorable Kitten @Andrea Radeck
+2 C AWOL @Stephen Tappin
+3 U Emcee @Quinton Hoover
+4 R Flavor Judge @Mike Burns
+5 R Frankie Peanuts @Thomas M. Baxa
+6 C GO TO JAIL @Marco Teixeira
+7 C Humming- @Mark Behm
+8 C Knight of the Hokey Pokey @Kev Walker
+9 R Look at Me, I'm R&D @
+10 R Look at Me, I'm the DCI @Mark Rosewater
+11 C Old Guard @David Sladek
+12 C Ordinary Pony @Andrea Radeck
+13 R Staying Power @Richard Sardinha
+14 U Strutting Turkey @Andrea Radeck
+15 R Syr Cadian, Knight Owl @Andrea Radeck
+16 R Alexander Clamilton @Dmitry Burmak
+17 R Avatar of Me @Greg Hildebrandt
+18 M B.O.B. (Bevy of Beebles) @Jeff Miracola
+19 C Carnivorous Death-Parrot @Greg Hildebrandt
+20 U Cheatyface @Doug Chaffee
+21 R Chicken à la King @Mark Zug
+22 U Common Courtesy @Mike Raabe
+23 R Johnny, Combo Player @Kensuke Okabayashi
+24 C Magic Word @Carl Frank
+25 C Mer Man @Mark Behm
+26 R Richard Garfield, Ph.D. @Dave Dorman
+27 U Rings a Bell @Chris Seaman
+28 C Time Out @Dave Allsop
+29 U Topsy Turvy @Jeff Miracola
+30 C Wall of Fortune @Tom Babbey
+31 R Acornelia, Fashionable Filcher @Bram Sels
+32 U Bat- @Mark Behm
+33 U Booster Tutor @Heather Hudson
+34 C Dirty Rat @Kari Christensen
+35 C Duh @Dave Dorman
+36 R Enter the Dungeon @Luca Zontini
+37 C Hoisted Hireling @Alex Konstad
+38 R Infernal Spawn of Evil @Ron Spencer
+39 R Infernal Spawn of Infernal Spawn of Evil @Ron Spencer
+40 R Infernius Spawnington III, Esq. @Ron Spencer
+41 U Inhumaniac @Matt Dixon
+42 U Jumbo Imp @Pete Venters
+43 C Poultrygeist @Daren Bader
+44 U Skull Saucer @Mike Burns
+45 C Snickering Squirrel @Michael Phillippi
+46 C Stinging Scorpion @YW Tang
+47 U Abstract Iguanart @Chris Seaman
+48 R Blast from the Past @Douglas Shuler
+49 R Boomstacker @Jesper Ejsing
+50 C Common Iguana @Brynn Metheney
+51 U Goblin Haberdasher @Jesper Ejsing
+52 C Goblin S.W.A.T. Team @Eric Deschamps
+53 U Goblin Tutor @Quinton Hoover
+54 M Infinity Elemental @Seb McKinnon
+55 C Painiac @McLean Kendree
+56 U Six-y Beast @Anson Maddocks
+57 R Stet, Draconic Proofreader @Dmitry Burmak
+58 R Strategy, Schmategy @Daniel Gelon
+59 U Super-Duper Death Ray @Even Amundsen
+60 R Yet Another Aether Vortex @David Day
+61 R B-I-N-G-O @Ron Spencer
+62 C Elvish Impersonators @Phil Foglio
+63 C Free-Range Chicken @Mike Raabe
+64 C Growth Spurt @Jeff Laubenstein
+65 U Half-Squirrel, Half- @Andrea Radeck
+66 C Mother Kangaroo @Andrea Radeck
+67 R Old Fogey @Douglas Shuler
+68 R Pippa, Duchess of Dice @Simon Dominic
+69 U Slaying Mantis @Ben Wootten
+70 U Spirit of the Season @Emrah Elmasli
+71 R Squirrel Farm @Ron Spencer
+72 M Surgeon General Commander @Simon Dominic
+73 R Timmy, Power Gamer @Karl Kopinski
+74 C Wild Crocodile @Brynn Metheney
+75 R Who // What // When // Where // Why @Dan Frazier
+76 U Bronze Calendar @Melissa A. Benson
+77 U Entirely Normal Armchair @Tom Babbey
+78 R Jack-in-the-Mox @Dan Frazier
+79 U Krark's Other Thumb @Jeff Miracola
+80 C Paper Tiger @Heather Hudson
+81 R Pointy Finger of Doom @Martina Pilcerova
+82 C Rock Lobster @Heather Hudson
+83 C Scissors Lizard @Heather Hudson
+84 M Sword of Dungeons & Dragons @Chris Rahn
+85 R Water Gun Balloon Game @Mark Brill
+86 C Underdome @Matt Gaser
+87 L Plains @Sam Burley
+88 L Plains @Adam Paquette
+89 L Island @John Avon
+90 L Island @Adam Paquette
+91 L Swamp @Mike Bierek
+92 L Swamp @Adam Paquette
+93 L Mountain @Rob Alexander
+94 L Mountain @Adam Paquette
+95 L Forest @Mark Poole
+96 L Forest @Adam Paquette
 
 [tokens]
 u_1_1_beeble

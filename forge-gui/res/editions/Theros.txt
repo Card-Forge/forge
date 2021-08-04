@@ -11,255 +11,255 @@ FatPackExtraSlots=80 BasicLands
 ScryfallCode=THS
 
 [cards]
-1 C Battlewise Valor
-2 C Cavalry Pegasus
-3 R Celestial Archon
-4 R Chained to the Rocks
-5 C Chosen by Heliod
-6 U Dauntless Onslaught
-7 U Decorated Griffin
-8 C Divine Verdict
-9 M Elspeth, Sun's Champion
-10 C Ephara's Warden
-11 U Evangel of Heliod
-12 R Fabled Hero
-13 U Favored Hoplite
-14 R Gift of Immortality
-15 U Glare of Heresy
-16 C Gods Willing
-17 M Heliod, God of the Sun
-18 U Heliod's Emissary
-19 C Hopeful Eidolon
-20 R Hundred-Handed One
-21 C Lagonna-Band Elder
-22 C Last Breath
-23 C Leonin Snarecaster
-24 C Observant Alseid
-25 U Ordeal of Heliod
-26 U Phalanx Leader
-27 C Ray of Dissolution
-28 C Scholar of Athreos
-29 C Setessan Battle Priest
-30 C Setessan Griffin
-31 C Silent Artisan
-32 R Soldier of the Pantheon
-33 R Spear of Heliod
-34 C Traveling Philosopher
-35 U Vanquish the Foul
-36 C Wingsteed Rider
-37 C Yoked Ox
-38 C Annul
-39 C Aqueous Form
-40 R Artisan of Forms
-41 C Benthic Giant
-42 R Bident of Thassa
-43 C Breaching Hippocamp
-44 C Coastline Chimera
-45 C Crackling Triton
-46 R Curse of the Swine
-47 U Dissolve
-48 C Fate Foretold
-49 U Gainsay
-50 C Griptide
-51 U Horizon Scholar
-52 C Lost in a Labyrinth
-53 M Master of Waves
-54 R Meletis Charlatan
-55 C Mnemonic Wall
-56 C Nimbus Naiad
-57 C Omenspeaker
-58 U Ordeal of Thassa
-59 C Prescient Chimera
-60 R Prognostic Sphinx
-61 U Sea God's Revenge
-62 U Sealock Monster
-63 R Shipbreaker Kraken
-64 C Stymied Hopes
-65 R Swan Song
-66 M Thassa, God of the Sea
-67 C Thassa's Bounty
-68 U Thassa's Emissary
-69 U Triton Fortune Hunter
-70 C Triton Shorethief
-71 U Triton Tactics
-72 C Vaporkin
-73 C Voyage's End
-74 C Wavecrash Triton
-75 R Abhorrent Overlord
-76 R Agent of the Fates
-77 C Asphodel Wanderer
-78 C Baleful Eidolon
-79 C Blood-Toll Harpy
-80 C Boon of Erebos
-81 C Cavern Lampad
-82 U Cutthroat Maneuver
-83 U Dark Betrayal
-84 C Disciple of Phenax
-85 M Erebos, God of the Dead
-86 U Erebos's Emissary
-87 C Felhide Minotaur
-88 C Fleshmad Steed
-89 C Gray Merchant of Asphodel
-90 R Hero's Downfall
-91 M Hythonia the Cruel
-92 U Insatiable Harpy
-93 U Keepsake Gorgon
-94 C Lash of the Whip
-95 C Loathsome Catoblepas
-96 C March of the Returned
-97 U Mogis's Marauder
-98 R Nighthowler
-99 U Ordeal of Erebos
-100 C Pharika's Cure
-101 C Read the Bones
-102 U Rescue from the Underworld
-103 C Returned Centaur
-104 C Returned Phalanx
-105 C Scourgemark
-106 C Sip of Hemlock
-107 R Thoughtseize
-108 U Tormented Hero
-109 C Viper's Kiss
-110 R Whip of Erebos
-111 C Akroan Crusader
-112 R Anger of the Gods
-113 U Arena Athlete
-114 C Borderland Minotaur
-115 C Boulderfall
-116 U Coordinated Assault
-117 C Deathbellow Raider
-118 C Demolish
-119 C Dragon Mantle
-120 R Ember Swallower
-121 U Fanatic of Mogis
-122 R Firedrinker Satyr
-123 U Flamespeaker Adept
-124 R Hammer of Purphoros
-125 C Ill-Tempered Cyclops
-126 R Labyrinth Champion
-127 C Lightning Strike
-128 U Magma Jet
-129 C Messenger's Speed
-130 C Minotaur Skullcleaver
-131 U Ordeal of Purphoros
-132 U Peak Eruption
-133 C Portent of Betrayal
-134 C Priest of Iroas
-135 M Purphoros, God of the Forge
-136 U Purphoros's Emissary
-137 C Rage of Purphoros
-138 R Rageblood Shaman
-139 C Satyr Rambler
-140 C Spark Jolt
-141 C Spearpoint Oread
-142 U Stoneshock Giant
-143 M Stormbreath Dragon
-144 R Titan of Eternal Fire
-145 C Titan's Strength
-146 C Two-Headed Cerberus
-147 C Wild Celebrants
-148 C Agent of Horizons
-149 R Anthousa, Setessan Hero
-150 R Arbor Colossus
-151 U Artisan's Sorrow
-152 R Boon Satyr
-153 R Bow of Nylea
-154 U Centaur Battlemaster
-155 C Commune with the Gods
-156 C Defend the Hearth
-157 C Fade into Antiquity
-158 C Feral Invocation
-159 U Hunt the Hunter
-160 U Karametra's Acolyte
-161 C Leafcrown Dryad
-162 R Mistcutter Hydra
-163 U Nemesis of Mortals
-164 C Nessian Asp
-165 C Nessian Courser
-166 M Nylea, God of the Hunt
-167 C Nylea's Disciple
-168 U Nylea's Emissary
-169 C Nylea's Presence
-170 U Ordeal of Nylea
-171 C Pheres-Band Centaurs
-172 M Polukranos, World Eater
-173 R Reverent Hunter
-174 C Satyr Hedonist
-175 U Satyr Piper
-176 C Savage Surge
-177 C Sedge Scorpion
-178 C Shredding Winds
-179 C Staunch-Hearted Warrior
-180 R Sylvan Caryatid
-181 C Time to Feed
-182 C Voyaging Satyr
-183 C Vulpine Goliath
-184 U Warriors' Lesson
-185 U Akroan Hoplite
-186 R Anax and Cymede
-187 M Ashen Rider
-188 M Ashiok, Nightmare Weaver
-189 U Battlewise Hoplite
-190 U Chronicler of Heroes
-191 R Daxos of Meletis
-192 U Destructive Revelry
-193 R Fleecemane Lion
-194 U Horizon Chimera
-195 U Kragma Warcaller
-196 M Medomai the Ageless
-197 U Pharika's Mender
-198 R Polis Crusher
-199 R Prophet of Kruphix
-200 R Psychic Intrusion
-201 R Reaper of the Wilds
-202 U Sentry of the Underworld
-203 U Shipwreck Singer
-204 U Spellheart Chimera
-205 R Steam Augury
-206 R Triad of Fates
-207 R Tymaret, the Murder King
-208 M Underworld Cerberus
-209 M Xenagos, the Reveler
-210 R Akroan Horse
-211 U Anvilwrought Raptor
-212 C Bronze Sable
-213 U Burnished Hart
-214 R Colossus of Akros
-215 U Flamecast Wheel
-216 C Fleetfeather Sandals
-217 C Guardians of Meletis
-218 C Opaline Unicorn
-219 U Prowler's Helm
-220 R Pyxis of Pandemonium
-221 C Traveler's Amulet
-222 U Witches' Eye
-223 R Nykthos, Shrine to Nyx
-224 R Temple of Abandon
-225 R Temple of Deceit
-226 R Temple of Mystery
-227 R Temple of Silence
-228 R Temple of Triumph
-229 C Unknown Shores
-230 L Plains
-230 L Plains
-230 L Plains
-230 L Plains
-236 L Island
-236 L Island
-236 L Island
-236 L Island
-240 L Swamp
-240 L Swamp
-240 L Swamp
-240 L Swamp
-243 L Mountain
-243 L Mountain
-243 L Mountain
-243 L Mountain
-248 L Forest
-248 L Forest
-248 L Forest
-248 L Forest
+1 C Battlewise Valor @Zack Stella
+2 C Cavalry Pegasus @Kev Walker
+3 R Celestial Archon @Matt Stewart
+4 R Chained to the Rocks @Aaron Miller
+5 C Chosen by Heliod @Zack Stella
+6 U Dauntless Onslaught @Peter Mohrbacher
+7 U Decorated Griffin @Phill Simmer
+8 C Divine Verdict @Raymond Swanland
+9 M Elspeth, Sun's Champion @Eric Deschamps
+10 C Ephara's Warden @Zack Stella
+11 U Evangel of Heliod @Nils Hamm
+12 R Fabled Hero @Aaron Miller
+13 U Favored Hoplite @Winona Nelson
+14 R Gift of Immortality @Matt Stewart
+15 U Glare of Heresy @Raymond Swanland
+16 C Gods Willing @Mark Winters
+17 M Heliod, God of the Sun @Jaime Jones
+18 U Heliod's Emissary @Sam Burley
+19 C Hopeful Eidolon @Min Yum
+20 R Hundred-Handed One @Brad Rigney
+21 C Lagonna-Band Elder @Min Yum
+22 C Last Breath @Nils Hamm
+23 C Leonin Snarecaster @Kev Walker
+24 C Observant Alseid @Todd Lockwood
+25 U Ordeal of Heliod @Lucas Graciano
+26 U Phalanx Leader @David Palumbo
+27 C Ray of Dissolution @Terese Nielsen
+28 C Scholar of Athreos @Cynthia Sheppard
+29 C Setessan Battle Priest @Wesley Burt
+30 C Setessan Griffin @Greg Staples
+31 C Silent Artisan @Anthony Palumbo
+32 R Soldier of the Pantheon @Eric Deschamps
+33 R Spear of Heliod @Yeong-Hao Han
+34 C Traveling Philosopher @James Ryman
+35 U Vanquish the Foul @Eric Deschamps
+36 C Wingsteed Rider @Cynthia Sheppard
+37 C Yoked Ox @Ryan Yee
+38 C Annul @Christine Choi
+39 C Aqueous Form @Slawomir Maniak
+40 R Artisan of Forms @Min Yum
+41 C Benthic Giant @Jaime Jones
+42 R Bident of Thassa @Yeong-Hao Han
+43 C Breaching Hippocamp @Christopher Burdett
+44 C Coastline Chimera @Dan Scott
+45 C Crackling Triton @Greg Staples
+46 R Curse of the Swine @James Ryman
+47 U Dissolve @Wesley Burt
+48 C Fate Foretold @Dan Scott
+49 U Gainsay @Clint Cearley
+50 C Griptide @Adam Paquette
+51 U Horizon Scholar @Karl Kopinski
+52 C Lost in a Labyrinth @Winona Nelson
+53 M Master of Waves @Karl Kopinski
+54 R Meletis Charlatan @Jason A. Engle
+55 C Mnemonic Wall @Trevor Claxton
+56 C Nimbus Naiad @David Palumbo
+57 C Omenspeaker @Dallas Williams
+58 U Ordeal of Thassa @Howard Lyon
+59 C Prescient Chimera @Daarken
+60 R Prognostic Sphinx @Steve Prescott
+61 U Sea God's Revenge @Eric Velhagen
+62 U Sealock Monster @Adam Paquette
+63 R Shipbreaker Kraken @Jack Wang
+64 C Stymied Hopes @Peter Mohrbacher
+65 R Swan Song @Peter Mohrbacher
+66 M Thassa, God of the Sea @Jason Chan
+67 C Thassa's Bounty @Ryan Yee
+68 U Thassa's Emissary @Sam Burley
+69 U Triton Fortune Hunter @Clint Cearley
+70 C Triton Shorethief @Howard Lyon
+71 U Triton Tactics @Jack Wang
+72 C Vaporkin @Seb McKinnon
+73 C Voyage's End @Chris Rahn
+74 C Wavecrash Triton @Ryan Barger
+75 R Abhorrent Overlord @Slawomir Maniak
+76 R Agent of the Fates @Matt Stewart
+77 C Asphodel Wanderer @Scott Chou
+78 C Baleful Eidolon @Min Yum
+79 C Blood-Toll Harpy @Kev Walker
+80 C Boon of Erebos @James Ryman
+81 C Cavern Lampad @Volkan Baǵa
+82 U Cutthroat Maneuver @Brad Rigney
+83 U Dark Betrayal @Nils Hamm
+84 C Disciple of Phenax @John Severin Brassell
+85 M Erebos, God of the Dead @Peter Mohrbacher
+86 U Erebos's Emissary @Sam Burley
+87 C Felhide Minotaur @Kev Walker
+88 C Fleshmad Steed @Robbie Trevino
+89 C Gray Merchant of Asphodel @Robbie Trevino
+90 R Hero's Downfall @Ryan Pancoast
+91 M Hythonia the Cruel @Chris Rahn
+92 U Insatiable Harpy @Matt Stewart
+93 U Keepsake Gorgon @Aaron Miller
+94 C Lash of the Whip @Dan Scott
+95 C Loathsome Catoblepas @Christopher Burdett
+96 C March of the Returned @Mark Zug
+97 U Mogis's Marauder @Chase Stone
+98 R Nighthowler @Nils Hamm
+99 U Ordeal of Erebos @Tyler Jacobson
+100 C Pharika's Cure @Igor Kieryluk
+101 C Read the Bones @Lars Grant-West
+102 U Rescue from the Underworld @Raymond Swanland
+103 C Returned Centaur @Lucas Graciano
+104 C Returned Phalanx @Seb McKinnon
+105 C Scourgemark @Franz Vohwinkel
+106 C Sip of Hemlock @Nils Hamm
+107 R Thoughtseize @Lucas Graciano
+108 U Tormented Hero @Winona Nelson
+109 C Viper's Kiss @Svetlin Velinov
+110 R Whip of Erebos @Yeong-Hao Han
+111 C Akroan Crusader @Johann Bodin
+112 R Anger of the Gods @Noah Bradley
+113 U Arena Athlete @Jason Chan
+114 C Borderland Minotaur @Greg Staples
+115 C Boulderfall @Ralph Horsley
+116 U Coordinated Assault @John Severin Brassell
+117 C Deathbellow Raider @Wayne Reynolds
+118 C Demolish @Volkan Baǵa
+119 C Dragon Mantle @Anthony Palumbo
+120 R Ember Swallower @Slawomir Maniak
+121 U Fanatic of Mogis @Matt Stewart
+122 R Firedrinker Satyr @Anthony Palumbo
+123 U Flamespeaker Adept @Lucas Graciano
+124 R Hammer of Purphoros @Yeong-Hao Han
+125 C Ill-Tempered Cyclops @Peter Mohrbacher
+126 R Labyrinth Champion @Chase Stone
+127 C Lightning Strike @Adam Paquette
+128 U Magma Jet @Maciej Kuciara
+129 C Messenger's Speed @Clint Cearley
+130 C Minotaur Skullcleaver @Phill Simmer
+131 U Ordeal of Purphoros @Maciej Kuciara
+132 U Peak Eruption @Adam Paquette
+133 C Portent of Betrayal @Daarken
+134 C Priest of Iroas @Clint Cearley
+135 M Purphoros, God of the Forge @Eric Deschamps
+136 U Purphoros's Emissary @Sam Burley
+137 C Rage of Purphoros @Mathias Kollros
+138 R Rageblood Shaman @Mike Bierek
+139 C Satyr Rambler @John Stanko
+140 C Spark Jolt @Mike Bierek
+141 C Spearpoint Oread @Todd Lockwood
+142 U Stoneshock Giant @Lars Grant-West
+143 M Stormbreath Dragon @Slawomir Maniak
+144 R Titan of Eternal Fire @Aleksi Briclot
+145 C Titan's Strength @Karl Kopinski
+146 C Two-Headed Cerberus @Karl Kopinski
+147 C Wild Celebrants @Igor Kieryluk
+148 C Agent of Horizons @Clint Cearley
+149 R Anthousa, Setessan Hero @Howard Lyon
+150 R Arbor Colossus @Jaime Jones
+151 U Artisan's Sorrow @Jung Park
+152 R Boon Satyr @Wesley Burt
+153 R Bow of Nylea @Yeong-Hao Han
+154 U Centaur Battlemaster @Kev Walker
+155 C Commune with the Gods @Aleksi Briclot
+156 C Defend the Hearth @Raymond Swanland
+157 C Fade into Antiquity @Noah Bradley
+158 C Feral Invocation @Mathias Kollros
+159 U Hunt the Hunter @Ryan Barger
+160 U Karametra's Acolyte @Chase Stone
+161 C Leafcrown Dryad @Volkan Baǵa
+162 R Mistcutter Hydra @Ryan Pancoast
+163 U Nemesis of Mortals @Mathias Kollros
+164 C Nessian Asp @Alex Horley-Orlandelli
+165 C Nessian Courser @Steve Prescott
+166 M Nylea, God of the Hunt @Chris Rahn
+167 C Nylea's Disciple @Trevor Claxton
+168 U Nylea's Emissary @Sam Burley
+169 C Nylea's Presence @Ralph Horsley
+170 U Ordeal of Nylea @David Palumbo
+171 C Pheres-Band Centaurs @Mark Winters
+172 M Polukranos, World Eater @Johann Bodin
+173 R Reverent Hunter @Wesley Burt
+174 C Satyr Hedonist @Chase Stone
+175 U Satyr Piper @Christopher Moeller
+176 C Savage Surge @Jasper Sandner
+177 C Sedge Scorpion @John Stanko
+178 C Shredding Winds @Christopher Moeller
+179 C Staunch-Hearted Warrior @Greg Staples
+180 R Sylvan Caryatid @Chase Stone
+181 C Time to Feed @Wayne Reynolds
+182 C Voyaging Satyr @Tyler Jacobson
+183 C Vulpine Goliath @Adam Paquette
+184 U Warriors' Lesson @Steve Prescott
+185 U Akroan Hoplite @Igor Kieryluk
+186 R Anax and Cymede @Willian Murai
+187 M Ashen Rider @Chris Rahn
+188 M Ashiok, Nightmare Weaver @Karla Ortiz
+189 U Battlewise Hoplite @Willian Murai
+190 U Chronicler of Heroes @John Stanko
+191 R Daxos of Meletis @Karla Ortiz
+192 U Destructive Revelry @Kev Walker
+193 R Fleecemane Lion @Slawomir Maniak
+194 U Horizon Chimera @Sam Burley
+195 U Kragma Warcaller @Gabor Szikszai
+196 M Medomai the Ageless @David Palumbo
+197 U Pharika's Mender @Peter Mohrbacher
+198 R Polis Crusher @Chase Stone
+199 R Prophet of Kruphix @Winona Nelson
+200 R Psychic Intrusion @Jaime Jones
+201 R Reaper of the Wilds @Karl Kopinski
+202 U Sentry of the Underworld @Dave Kendall
+203 U Shipwreck Singer @Daarken
+204 U Spellheart Chimera @Svetlin Velinov
+205 R Steam Augury @Dave Kendall
+206 R Triad of Fates @Daarken
+207 R Tymaret, the Murder King @Volkan Baǵa
+208 M Underworld Cerberus @Svetlin Velinov
+209 M Xenagos, the Reveler @Jason Chan
+210 R Akroan Horse @Seb McKinnon
+211 U Anvilwrought Raptor @James Zapata
+212 C Bronze Sable @Jasper Sandner
+213 U Burnished Hart @Yeong-Hao Han
+214 R Colossus of Akros @Zack Stella
+215 U Flamecast Wheel @Jasper Sandner
+216 C Fleetfeather Sandals @Steve Prescott
+217 C Guardians of Meletis @Magali Villeneuve
+218 C Opaline Unicorn @Christine Choi
+219 U Prowler's Helm @Igor Kieryluk
+220 R Pyxis of Pandemonium @David Palumbo
+221 C Traveler's Amulet @Franz Vohwinkel
+222 U Witches' Eye @Daniel Ljunggren
+223 R Nykthos, Shrine to Nyx @Jung Park
+224 R Temple of Abandon @Mike Bierek
+225 R Temple of Deceit @Raymond Swanland
+226 R Temple of Mystery @Noah Bradley
+227 R Temple of Silence @Karl Kopinski
+228 R Temple of Triumph @Jason Felix
+229 C Unknown Shores @Seb McKinnon
+230 L Plains @Rob Alexander
+231 L Plains @Steven Belledin
+232 L Plains @Adam Paquette
+233 L Plains @Raoul Vitale
+234 L Island @Rob Alexander
+235 L Island @Steven Belledin
+236 L Island @Adam Paquette
+237 L Island @Raoul Vitale
+238 L Swamp @Rob Alexander
+239 L Swamp @Steven Belledin
+240 L Swamp @Adam Paquette
+241 L Swamp @Raoul Vitale
+242 L Mountain @Rob Alexander
+243 L Mountain @Steven Belledin
+244 L Mountain @Adam Paquette
+245 L Mountain @Raoul Vitale
+246 L Forest @Rob Alexander
+247 L Forest @Steven Belledin
+248 L Forest @Adam Paquette
+249 L Forest @Raoul Vitale
 
 [tokens]
 w_2_1_e_cleric

@@ -8,53 +8,53 @@ Type=Boxed_Set
 ScryfallCode=E02
 
 [cards]
-1 R Beacon of Immortality
-2 R Day of Judgment
-3 U Path to Exile
-4 R Shielded by Faith
-5 C Veteran's Reflexes
-6 U Vow of Duty
-7 R Aether Gale
-8 R Blatant Thievery
-9 U Concentrate
-10 R Merfolk Sovereign
-11 R Threads of Disloyalty
-12 M Time Warp
-13 C Unsummon
-14 U Vow of Flight
-15 U Bloodbond Vampire
-16 C Child of Night
-17 C Coat with Venom
-18 U Doom Blade
-19 C Innocent Blood
-20 M Necropolis Regent
-21 U Urge to Feed
-22 C Vampire Interloper
-23 U Vampire Nighthawk
-24 C Vampire Noble
-25 R Aggravated Assault
-26 R Disaster Radius
-27 R Mass Mutiny
-28 C Rush of Adrenaline
-29 R Shared Animosity
-30 U Vow of Lightning
-31 C Borderland Ranger
-32 C Giant Growth
-33 R Hunter's Prowess
-34 C Prey Upon
-35 U Rancor
-36 R Soul of the Harvest
-37 U Vow of Wildness
-38 U Jungle Barrier
-39 U Lightning Helix
-40 U Mortify
-41 U Zealous Persecution
-42 R Adaptive Automaton
-43 U Prismatic Lens
-44 R Quicksilver Amulet
-45 U Crumbling Necropolis
-46 U Jungle Shrine
-47 U Tainted Field
+1 R Beacon of Immortality @Rob Alexander
+2 R Day of Judgment @Vincent Proce
+3 U Path to Exile @Todd Lockwood
+4 R Shielded by Faith @David Palumbo
+5 C Veteran's Reflexes @Scott Chou
+6 U Vow of Duty @Wayne Reynolds
+7 R Aether Gale @Jack Wang
+8 R Blatant Thievery @Victor Adame Minguez
+9 U Concentrate @rk post
+10 R Merfolk Sovereign @Slawomir Maniak
+11 R Threads of Disloyalty @Anthony S. Waters
+12 M Time Warp @Jon Foster
+13 C Unsummon @Izzy
+14 U Vow of Flight @Erica Yang
+15 U Bloodbond Vampire @Anna Steinbauer
+16 C Child of Night @Ash Wood
+17 C Coat with Venom @Johann Bodin
+18 U Doom Blade @Chippy
+19 C Innocent Blood @Carl Critchlow
+20 M Necropolis Regent @Winona Nelson
+21 U Urge to Feed @Johann Bodin
+22 C Vampire Interloper @James Ryman
+23 U Vampire Nighthawk @Jason Chan
+24 C Vampire Noble @Ryan Alexander Lee
+25 R Aggravated Assault @Greg Staples
+26 R Disaster Radius @James Paick
+27 R Mass Mutiny @Sidharth Chaturvedi
+28 C Rush of Adrenaline @Chris Rallis
+29 R Shared Animosity @Chuck Lukacs
+30 U Vow of Lightning @Svetlin Velinov
+31 C Borderland Ranger @Zoltan Boros
+32 C Giant Growth @Matt Cavotta
+33 R Hunter's Prowess @Greg Staples
+34 C Prey Upon @Deruchenko Alexander
+35 U Rancor @Kev Walker
+36 R Soul of the Harvest @Eytan Zana
+37 U Vow of Wildness @Jim Pavelec
+38 U Jungle Barrier @Christine Choi
+39 U Lightning Helix @Kev Walker
+40 U Mortify @Nils Hamm
+41 U Zealous Persecution @Sara Winters
+42 R Adaptive Automaton @Igor Kieryluk
+43 U Prismatic Lens @Alan Pollack
+44 R Quicksilver Amulet @Brad Rigney
+45 U Crumbling Necropolis @Volkan Baǵa
+46 U Jungle Shrine @Rob Alexander
+47 U Tainted Field @Don Hazeltine
 
 [tokens]
 g_1_1_saproling

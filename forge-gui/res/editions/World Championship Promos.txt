@@ -6,5 +6,5 @@ Type=Promo
 ScryfallCode=PWOR
 
 [cards]
-1 R Balduvian Horde
-2019 M Crucible of Worlds
+1 R Balduvian Horde @Brian Snõddy
+2019 M Crucible of Worlds @Ralph Horsley

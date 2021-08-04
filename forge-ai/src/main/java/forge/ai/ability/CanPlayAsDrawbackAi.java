@@ -36,7 +36,6 @@ public class CanPlayAsDrawbackAi extends SpellAbilityAi {
         return false;
     }
 
-    
     @Override
     public SpellAbility chooseSingleSpellAbility(Player player, SpellAbility sa, List<SpellAbility> spells,
             Map<String, Object> params) {

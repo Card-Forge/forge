@@ -6,5 +6,5 @@ Type=Promo
 ScryfallCode=PGPT
 
 [cards]
-142★ R Djinn Illuminatus
-144★ R Gruul Guildmage
+142★ R Djinn Illuminatus @Michael Sutfin
+144★ R Gruul Guildmage @Paolo Parente

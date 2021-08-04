@@ -6,9 +6,9 @@ Type=Promo
 ScryfallCode=PF20
 
 [cards]
-1 R Path to Exile
-2 R Plains
-3 R Island
-4 R Swamp
-5 R Mountain
-6 R Forest
+1 R Path to Exile @Chris Seaman
+2 R Plains @Jonas De Ro
+3 R Island @Jonas De Ro
+4 R Swamp @Jonas De Ro
+5 R Mountain @Jonas De Ro
+6 R Forest @Jonas De Ro

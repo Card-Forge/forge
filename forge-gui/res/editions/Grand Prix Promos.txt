@@ -8,23 +8,23 @@ Type=Promo
 ScryfallCode=PGPX
 
 [cards]
-2007 R Spiritmonger
-2008 R Call of the Herd
-2009 R Chrome Mox
-2010 R Umezawa's Jitte
-2011 R Maelstrom Pulse
-2012a R Goblin Guide
-2012b R Lotus Cobra
-2013a M Primeval Titan
-2013b R All Is Dust
-2014 M Batterskull
-2015 M Griselbrand
-2016 R Stoneforge Mystic
-2016b R Sword of Feast and Famine
-2017 M Progenitus
-2018 R Mutavault
-2018a L Plains
-2018b L Island
-2018c L Swamp
-2018d L Mountain
-2018f L Forest
+2007 R Spiritmonger @Kev Walker
+2008 R Call of the Herd @Lars Grant-West
+2009 R Chrome Mox @Alan Pollack
+2010 R Umezawa's Jitte @Svetlin Velinov
+2011 R Maelstrom Pulse @John Avon
+2012a R Goblin Guide @Steve Prescott
+2012b R Lotus Cobra @Terese Nielsen
+2013a M Primeval Titan @Peter Mohrbacher
+2013b R All Is Dust @Vincent Proce
+2014 M Batterskull @Igor Kieryluk
+2015 M Griselbrand @Jaime Jones
+2016 R Stoneforge Mystic @Johannes Voss
+2016b R Sword of Feast and Famine @Efrem Palacios
+2017 M Progenitus @Jaime Jones
+2018 R Mutavault @John Avon
+2018a L Plains @Donato Giancola
+2018b L Island @Donato Giancola
+2018c L Swamp @Donato Giancola
+2018d L Mountain @Donato Giancola
+2018f L Forest @Donato Giancola

@@ -12,183 +12,183 @@ Foil=NotSupported
 ScryfallCode=PTK
 
 [cards]
-1 U Alert Shu Infantry
-67 R Ambition's Cost
-34 R Balance of Power
-100 U Barbarian General
-101 C Barbarian Horde
-102 U Blaze
-35 U Borrowing 100,000 Arrows
-133 R Borrowing the East Wind
-36 U Brilliant Plan
-37 C Broken Dam
-103 C Burning Fields
-104 R Burning of Xinye
-68 R Cao Cao, Lord of Wei
-69 R Cao Ren, Wei Commander
-38 R Capture of Jingzhou
-39 U Champion's Victory
-70 U Coercion
-105 U Control of the Court
-71 U Corrupt Court Official
-106 U Corrupt Eunuchs
-40 U Council of Advisors
-41 U Counterintelligence
-72 U Cunning Advisor
-73 C Deception
-107 C Desert Sandstorm
-74 U Desperate Charge
-108 R Diaochan, Artful Beauty
-109 R Dong Zhou, the Tyrant
-2 R Eightfold Maze
-3 U Empty City Ruse
-110 U Eunuchs' Intrigues
-42 R Exhaustion
-43 C Extinguish
-4 C False Defeat
-134 U False Mourning
-75 U Famine
-111 C Fire Ambush
-112 U Fire Bowman
-5 U Flanking Troops
-44 C Forced Retreat
-179 L Forest
-179 L Forest
-179 L Forest
-135 C Forest Bear
-76 C Ghostly Visit
-7 R Guan Yu's 1,000-Li March
-6 R Guan Yu, Sainted Warrior
-136 U Heavy Fog
-137 R Hua Tuo, Honored Physician
-8 R Huang Zhong, Shu General
-138 U Hunting Cheetah
-77 C Imperial Edict
-113 U Imperial Recruiter
-78 R Imperial Seal
-114 C Independent Troops
-169 L Island
-169 L Island
-169 L Island
-10 R Kongming's Contraptions
-9 R Kongming, "Sleeping Dragon"
-45 R Lady Sun
-139 R Lady Zhurong, Warrior Queen
-11 R Liu Bei, Lord of Shu
-140 U Lone Wolf
-12 U Loyal Retainers
-115 R Lu Bu, Master-at-Arms
-46 R Lu Meng, Wu General
-47 R Lu Su, Wu Advisor
-48 R Lu Xun, Scholar General
-116 R Ma Chao, Western Warrior
-141 R Marshaling the Troops
-143 C Meng Huo's Horde
-142 R Meng Huo, Barbarian King
-13 C Misfortune's Gain
-175 L Mountain
-175 L Mountain
-175 L Mountain
-117 C Mountain Bandit
-49 U Mystic Denial
-79 R Overwhelming Forces
-14 R Pang Tong, "Young Phoenix"
-15 U Peach Garden Oath
-168 L Plains
-168 L Plains
-168 L Plains
-80 U Poison Arrow
-50 C Preemptive Strike
-16 U Rally the Troops
-17 R Ravages of War
-118 U Ravaging Horde
-51 U Red Cliffs Armada
-119 R Relentless Assault
-120 U Renegade Troops
-81 C Return to Battle
-18 C Riding Red Hare
-144 R Riding the Dilu Horse
-121 U Rockslide Ambush
-122 R Rolling Earthquake
-52 C Sage's Knowledge
-19 C Shu Cavalry
-20 C Shu Defender
-21 U Shu Elite Companions
-22 C Shu Elite Infantry
-23 C Shu Farmer
-24 C Shu Foot Soldiers
-25 U Shu General
-26 C Shu Grain Caravan
-27 U Shu Soldier-Farmers
-82 R Sima Yi, Wei Field Marshal
-145 R Slashing Tiger
-146 C Southern Elephant
-147 U Spoils of Victory
-148 C Spring of Eternal Peace
-149 C Stalking Tiger
-83 U Stolen Grain
-84 R Stone Catapult
-123 C Stone Rain
-53 U Strategic Planning
-54 C Straw Soldiers
-55 R Sun Ce, Young Conquerer
-56 R Sun Quan, Lord of Wu
-173 L Swamp
-173 L Swamp
-173 L Swamp
-150 U Taoist Hermit
-151 R Taoist Mystic
-152 R Taunting Challenge
-153 C Three Visits
-154 U Trained Cheetah
-155 C Trained Jackal
-156 U Trip Wire
-28 U Vengeance
-29 C Virtuous Charge
-30 C Volunteer Militia
-124 R Warrior's Oath
-31 U Warrior's Stand
-85 C Wei Ambush Force
-86 U Wei Assassins
-87 U Wei Elite Companions
-88 C Wei Infantry
-89 U Wei Night Raiders
-90 C Wei Scout
-91 C Wei Strike Force
-157 C Wielding the Green Dragon
-158 R Wolf Pack
-57 U Wu Admiral
-58 C Wu Elite Cavalry
-59 C Wu Infantry
-60 C Wu Light Cavalry
-61 U Wu Longbowman
-62 C Wu Scout
-63 U Wu Spy
-64 C Wu Warship
-92 R Xiahou Dun, the One-Eyed
-93 R Xun Yu, Wei Advisor
-125 C Yellow Scarves Cavalry
-126 R Yellow Scarves General
-127 C Yellow Scarves Troops
-94 C Young Wei Recruits
-129 U Yuan Shao's Infantry
-128 R Yuan Shao, the Indecisive
-32 R Zhang Fei, Fierce Warrior
-95 R Zhang He, Wei General
-96 R Zhang Liao, Hero of Hefei
-33 R Zhao Zilong, Tiger General
-65 R Zhou Yu, Chief Commander
-66 R Zhuge Jin, Wu Strategist
-130 C Zodiac Dog
-131 R Zodiac Dragon
-132 C Zodiac Goat
-159 U Zodiac Horse
-160 C Zodiac Monkey
-161 U Zodiac Ox
-97 U Zodiac Pig
-162 C Zodiac Rabbit
-98 C Zodiac Rat
-163 C Zodiac Rooster
-99 C Zodiac Snake
-164 U Zodiac Tiger
-165 R Zuo Ci, the Mocking Sage
+1 U Alert Shu Infantry @Solomon Au Yeung
+67 R Ambition's Cost @Junko Taguchi
+34 R Balance of Power @Quan Xuejun
+100 U Barbarian General @Kuang Sheng
+101 C Barbarian Horde @Kuang Sheng
+102 U Blaze @Qu Xin
+35 U Borrowing 100,000 Arrows @Song Shikai
+133 R Borrowing the East Wind @Gao Yan
+36 U Brilliant Plan @Song Shikai
+37 C Broken Dam @Jiang Zhuqing
+103 C Burning Fields @Yang Hong
+104 R Burning of Xinye @Yang Hong
+68 R Cao Cao, Lord of Wei @Gao Jianzhang
+69 R Cao Ren, Wei Commander @Junko Taguchi
+38 R Capture of Jingzhou @Jack Wei
+39 U Champion's Victory @Hong Yan
+70 U Coercion @Kang Yu
+105 U Control of the Court @Li Yousong
+71 U Corrupt Court Official @Li Yousong
+106 U Corrupt Eunuchs @Li Yousong
+40 U Council of Advisors @Liu Shangying
+41 U Counterintelligence @Wang Feng
+72 U Cunning Advisor @Gao Jianzhang
+73 C Deception @Wang Feng
+107 C Desert Sandstorm @Xu Tan
+74 U Desperate Charge @Chen Weidong
+108 R Diaochan, Artful Beauty @Miao Aili
+109 R Dong Zhou, the Tyrant @Inoue Junichi
+2 R Eightfold Maze @Shang Huitong
+3 U Empty City Ruse @Qu Xin
+110 U Eunuchs' Intrigues @Li Yousong
+42 R Exhaustion @Qu Xin
+43 C Extinguish @Ding Songjian
+4 C False Defeat @Li Wang
+134 U False Mourning @Koji
+75 U Famine @Sun Nan
+111 C Fire Ambush @Tang Xiaogu
+112 U Fire Bowman @Cai Tingting
+5 U Flanking Troops @Li Wang
+44 C Forced Retreat @Huang Qishi
+178 L Forest @Ji Yong
+179 L Forest @Ji Yong
+180 L Forest @Ji Yong
+135 C Forest Bear @Wang Yuqun
+76 C Ghostly Visit @Kang Yu
+7 R Guan Yu's 1,000-Li March @Yang Guangmai
+6 R Guan Yu, Sainted Warrior @Qiao Dafu
+136 U Heavy Fog @Liu Shangying
+137 R Hua Tuo, Honored Physician @Gao Jianzhang
+8 R Huang Zhong, Shu General @Quan Xuejun
+138 U Hunting Cheetah @Fang Yue
+77 C Imperial Edict @Xu Xiaoming
+113 U Imperial Recruiter @Mitsuaki Sagiri
+78 R Imperial Seal @Li Tie
+114 C Independent Troops @Kuang Sheng
+169 L Island @Ku Xueming
+170 L Island @Ku Xueming
+171 L Island @Ku Xueming
+10 R Kongming's Contraptions @Jiaming
+9 R Kongming, "Sleeping Dragon" @Gao Yan
+45 R Lady Sun @Miao Aili
+139 R Lady Zhurong, Warrior Queen @Miao Aili
+11 R Liu Bei, Lord of Shu @Qiao Dafu
+140 U Lone Wolf @Yang Jun Kwon
+12 U Loyal Retainers @Solomon Au Yeung
+115 R Lu Bu, Master-at-Arms @Gao Jianzhang
+46 R Lu Meng, Wu General @Gao Yan
+47 R Lu Su, Wu Advisor @Zhao Tan
+48 R Lu Xun, Scholar General @Xu Xiaoming
+116 R Ma Chao, Western Warrior @Koji
+141 R Marshaling the Troops @Liu Shangying
+143 C Meng Huo's Horde @Li Tie
+142 R Meng Huo, Barbarian King @Yang Guangmai
+13 C Misfortune's Gain @Jiaming
+175 L Mountain @Qin Jun
+176 L Mountain @Qin Jun
+177 L Mountain @Qin Jun
+117 C Mountain Bandit @Xu Xiaoming
+49 U Mystic Denial @Kang Yu
+79 R Overwhelming Forces @Gao Yan
+14 R Pang Tong, "Young Phoenix" @Li Tie
+15 U Peach Garden Oath @Qiao Dafu
+166 L Plains @He Jiancheng
+167 L Plains @He Jiancheng
+168 L Plains @He Jiancheng
+80 U Poison Arrow @Li Tie
+50 C Preemptive Strike @Jiaming
+16 U Rally the Troops @Shang Huitong
+17 R Ravages of War @Fang Yue
+118 U Ravaging Horde @Liu Jianjian
+51 U Red Cliffs Armada @Zhang Jiazhen
+119 R Relentless Assault @He Jiancheng
+120 U Renegade Troops @Liu Jianjian
+81 C Return to Battle @Ding Songjian
+18 C Riding Red Hare @Qi Baocheng
+144 R Riding the Dilu Horse @Hong Yan
+121 U Rockslide Ambush @Inoue Junichi
+122 R Rolling Earthquake @Yang Hong
+52 C Sage's Knowledge @Ding Songjian
+19 C Shu Cavalry @Li Xiaohua
+20 C Shu Defender @Sun Nan
+21 U Shu Elite Companions @Qiao Dafu
+22 C Shu Elite Infantry @Song Shikai
+23 C Shu Farmer @Li Xiaohua
+24 C Shu Foot Soldiers @Xu Tan
+25 U Shu General @Li Xiaohua
+26 C Shu Grain Caravan @Li Wang
+27 U Shu Soldier-Farmers @Li Xiaohua
+82 R Sima Yi, Wei Field Marshal @Gao Yan
+145 R Slashing Tiger @Yang Jun Kwon
+146 C Southern Elephant @Wang Yuqun
+147 U Spoils of Victory @Sun Nan
+148 C Spring of Eternal Peace @Wang Yuqun
+149 C Stalking Tiger @Kang Yu
+83 U Stolen Grain @LHQ
+84 R Stone Catapult @Shang Huitong
+123 C Stone Rain @Mitsuaki Sagiri
+53 U Strategic Planning @Zhang Jiazhen
+54 C Straw Soldiers @Cai Tingting
+55 R Sun Ce, Young Conquerer @Yang Guangmai
+56 R Sun Quan, Lord of Wu @Xu Xiaoming
+172 L Swamp @Wang Chuxiong
+173 L Swamp @Wang Chuxiong
+174 L Swamp @Wang Chuxiong
+150 U Taoist Hermit @Wang Yuqun
+151 R Taoist Mystic @Qu Xin
+152 R Taunting Challenge @Gao Yan
+153 C Three Visits @Qu Xin
+154 U Trained Cheetah @Fang Yue
+155 C Trained Jackal @Yang Jun Kwon
+156 U Trip Wire @Hong Yan
+28 U Vengeance @Solomon Au Yeung
+29 C Virtuous Charge @Qu Xin
+30 C Volunteer Militia @Lin Yan
+124 R Warrior's Oath @Mitsuaki Sagiri
+31 U Warrior's Stand @Qiao Dafu
+85 C Wei Ambush Force @Ku Xueming
+86 U Wei Assassins @Xu Tan
+87 U Wei Elite Companions @Li Youliang
+88 C Wei Infantry @LHQ
+89 U Wei Night Raiders @Wang Feng
+90 C Wei Scout @Jiang Zhuqing
+91 C Wei Strike Force @Tang Xiaogu
+157 C Wielding the Green Dragon @Quan Xuejun
+158 R Wolf Pack @Yang Jun Kwon
+57 U Wu Admiral @Zhang Jiazhen
+58 C Wu Elite Cavalry @Li Wang
+59 C Wu Infantry @Xu Xiaoming
+60 C Wu Light Cavalry @Huang Qishi
+61 U Wu Longbowman @Xu Tan
+62 C Wu Scout @Jiaming
+63 U Wu Spy @Zhao Tan
+64 C Wu Warship @Jiang Zhuqing
+92 R Xiahou Dun, the One-Eyed @Junko Taguchi
+93 R Xun Yu, Wei Advisor @Jack Wei
+125 C Yellow Scarves Cavalry @Chen Weidong
+126 R Yellow Scarves General @Chen Weidong
+127 C Yellow Scarves Troops @Chen Weidong
+94 C Young Wei Recruits @Li Youliang
+129 U Yuan Shao's Infantry @Lin Yan
+128 R Yuan Shao, the Indecisive @Inoue Junichi
+32 R Zhang Fei, Fierce Warrior @Qiao Dafu
+95 R Zhang He, Wei General @Jack Wei
+96 R Zhang Liao, Hero of Hefei @Li Youliang
+33 R Zhao Zilong, Tiger General @Quan Xuejun
+65 R Zhou Yu, Chief Commander @Xu Xiaoming
+66 R Zhuge Jin, Wu Strategist @Song Shikai
+130 C Zodiac Dog @Qi Baocheng
+131 R Zodiac Dragon @Qi Baocheng
+132 C Zodiac Goat @Qi Baocheng
+159 U Zodiac Horse @Ai Desheng
+160 C Zodiac Monkey @Ai Desheng
+161 U Zodiac Ox @Ai Desheng
+97 U Zodiac Pig @Qi Baocheng
+162 C Zodiac Rabbit @Ai Desheng
+98 C Zodiac Rat @Qi Baocheng
+163 C Zodiac Rooster @Ai Desheng
+99 C Zodiac Snake @Qi Baocheng
+164 U Zodiac Tiger @Ai Desheng
+165 R Zuo Ci, the Mocking Sage @Wang Yuqun

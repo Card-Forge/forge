@@ -3,8 +3,7 @@ ManaCost:2 R R R
 Types:Creature Dragon
 PT:4/4
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME or another Dragon enters the battlefield under your control, it deals X damage to any target, where X is the number of Dragons you control.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Dragon.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another Dragon enters the battlefield under your control, it deals X damage to any target, where X is the number of Dragons you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Dragon.Other+YouCtrl | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME or another Dragon enters the battlefield under your control, it deals X damage to any target, where X is the number of Dragons you control.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | NumDmg$ NumDragons | TgtPrompt$ Select any target | DamageSource$ TriggeredCard
 SVar:NumDragons:Count$Valid Dragon.YouCtrl
 A:AB$ Pump | Cost$ R | Defined$ Self | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.

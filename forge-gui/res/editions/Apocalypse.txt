@@ -13,149 +13,149 @@ FoilAlwaysInCommonSlot=False
 ScryfallCode=APC
 
 [cards]
-91 U AEther Mutation
-73 C Ana Disciple
-74 U Ana Sanctuary
-75 R Anavolver
-1 C Angelfire Crusader
-139 R Battlefield Forge
-55 R Bloodfire Colossus
-56 C Bloodfire Dwarf
-57 C Bloodfire Infusion
-58 U Bloodfire Kavu
-76 C Bog Gnarr
-133 U Brass Herald
-92 U Captain's Maneuver
-140 R Caves of Koilos
-19 C Ceta Disciple
-20 U Ceta Sanctuary
-21 R Cetavolver
-2 U Coalition Flag
-3 C Coalition Honor Guard
-22 C Coastal Drake
-93 C Consume Strength
-94 R Cromat
-37 C Dead Ringers
-95 R Death Grasp
-96 U Death Mutation
-4 C Dega Disciple
-5 U Dega Sanctuary
-6 R Degavolver
-38 R Desolation Angel
-59 R Desolation Giant
-7 U Diversionary Tactics
-8 C Divine Light
-134 U Dodecapod
-135 U Dragon Arch
-60 C Dwarven Landslide
-61 U Dwarven Patrol
-97 U Ebony Treefolk
-136 U Emblazoned Golem
-9 U Enlistment Officer
-23 U Evasive Action
-10 R False Dawn
-98 R Fervent Charge
-128 U Fire // Ice
-99 U Flowstone Charger
-39 U Foul Presence
-100 R Fungal Shambler
-77 U Gaea's Balance
-101 C Gaea's Skyfolk
-11 R Gerrard Capashen
-102 U Gerrard's Verdict
-78 C Glade Gnarr
-103 C Goblin Legionnaire
-62 U Goblin Ringleader
-104 R Goblin Trenches
-40 U Grave Defiler
-105 R Guided Passage
-12 U Haunted Angel
-13 C Helionaut
-24 R Ice Cave
-63 U Illuminate
-129 U Illusion // Reality
-25 C Index
-26 C Jaded Response
-27 C Jilt
-106 U Jungle Barrier
-64 C Kavu Glider
-79 U Kavu Howler
-80 R Kavu Mauler
-41 C Last Caress
-107 R Last Stand
-81 C Lay of the Land
-137 R Legacy Weapon
-130 U Life // Death
-108 R Lightning Angel
-28 C Living Airship
-109 C Llanowar Dead
-141 R Llanowar Wastes
-14 C Manacles of Decay
-110 U Martyrs' Tomb
-138 R Mask of Intolerance
-42 C Mind Extraction
-111 U Minotaur Illusionist
-65 C Minotaur Tactician
-43 C Mournful Zombie
-112 R Mystic Snake
-44 C Necra Disciple
-45 U Necra Sanctuary
-46 R Necravolver
-131 U Night // Day
-132 U Order // Chaos
-15 C Orim's Thunder
-113 R Overgrown Estate
-82 C Penumbra Bobcat
-83 U Penumbra Kavu
-84 R Penumbra Wurm
-114 R Pernicious Deed
-47 R Phyrexian Arena
-48 U Phyrexian Gargantua
-49 C Phyrexian Rager
-50 R Planar Despair
-115 R Powerstone Minefield
-116 R Prophetic Bolt
-117 C Putrid Warrior
-51 C Quagmire Druid
-118 C Quicksilver Dagger
-66 C Raka Disciple
-67 U Raka Sanctuary
-68 R Rakavolver
-119 C Razorfin Hunter
-29 C Reef Shaman
-85 C Savage Gorilla
-16 C Shield of Duty and Reason
-30 C Shimmering Mirage
-142 R Shivan Reef
-69 C Smash
-120 C Soul Link
-17 R Spectral Lynx
-121 R Spiritmonger
-122 C Squee's Embrace
-123 U Squee's Revenge
-18 C Standard Bearer
-86 C Strength of Night
-124 R Suffocating Blast
-52 U Suppress
-87 U Sylvan Messenger
-88 R Symbiotic Deployment
-70 C Tahngarth's Glare
-125 C Temporal Spring
-31 U Tidal Courier
-89 C Tranquil Path
-71 C Tundra Kavu
-32 R Unnatural Selection
-90 C Urborg Elf
-53 C Urborg Uprising
-126 R Vindicate
-33 U Vodalian Mystic
-34 U Whirlpool Drake
-35 C Whirlpool Rider
-36 R Whirlpool Warrior
-72 R Wild Research
-143 R Yavimaya Coast
-127 R Yavimaya's Embrace
-54 C Zombie Boa
+91 U Aether Mutation @Ron Spencer
+73 C Ana Disciple @Darrell Riche
+74 U Ana Sanctuary @Rob Alexander
+75 R Anavolver @Matt Cavotta
+1 C Angelfire Crusader @Edward P. Beard, Jr.
+139 R Battlefield Forge @Darrell Riche
+55 R Bloodfire Colossus @Greg Staples
+56 C Bloodfire Dwarf @Ron Spencer
+57 C Bloodfire Infusion @Anthony S. Waters
+58 U Bloodfire Kavu @Greg Staples
+76 C Bog Gnarr @Daren Bader
+133 U Brass Herald @Daren Bader
+92 U Captain's Maneuver @Ben Thompson
+140 R Caves of Koilos @Jim Nelson
+19 C Ceta Disciple @Greg Hildebrandt & Tim Hildebrandt
+20 U Ceta Sanctuary @Franz Vohwinkel
+21 R Cetavolver @Gary Ruddell
+2 U Coalition Flag @Darrell Riche
+3 C Coalition Honor Guard @Eric Peterson
+22 C Coastal Drake @John Gallagher
+93 C Consume Strength @Adam Rex
+94 R Cromat @Donato Giancola
+37 C Dead Ringers @Greg Staples
+95 R Death Grasp @Eric Peterson
+96 U Death Mutation @Carl Critchlow
+4 C Dega Disciple @Alan Pollack
+5 U Dega Sanctuary @Ben Thompson
+6 R Degavolver @Ron Spencer
+38 R Desolation Angel @Brom
+59 R Desolation Giant @Alan Pollack
+7 U Diversionary Tactics @Jerry Tiritilli
+8 C Divine Light @Christopher Moeller
+134 U Dodecapod @John Howe
+135 U Dragon Arch @Dana Knutson
+60 C Dwarven Landslide @Tony Szczudlo
+61 U Dwarven Patrol @Greg Hildebrandt & Tim Hildebrandt
+97 U Ebony Treefolk @Matt Cavotta
+136 U Emblazoned Golem @Greg Staples
+9 U Enlistment Officer @Wayne England
+23 U Evasive Action @Brian Snõddy
+10 R False Dawn @Dave Dorman
+98 R Fervent Charge @Mark Tedin
+128 U Fire // Ice @David Martin & Franz Vohwinkel
+99 U Flowstone Charger @John Gallagher
+39 U Foul Presence @Ray Lago
+100 R Fungal Shambler @Jim Nelson
+77 U Gaea's Balance @Rebecca Guay
+101 C Gaea's Skyfolk @Terese Nielsen
+11 R Gerrard Capashen @Brom
+102 U Gerrard's Verdict @Carl Critchlow
+78 C Glade Gnarr @Daren Bader
+103 C Goblin Legionnaire @Mark Romanoski
+62 U Goblin Ringleader @Mark Romanoski
+104 R Goblin Trenches @Wayne England
+40 U Grave Defiler @Tony Szczudlo
+105 R Guided Passage @Alex Horley-Orlandelli
+12 U Haunted Angel @Arnie Swekel
+13 C Helionaut @Franz Vohwinkel
+24 R Ice Cave @Jerry Tiritilli
+63 U Illuminate @Christopher Moeller
+129 U Illusion // Reality @John Avon & David Martin
+25 C Index @Kev Walker
+26 C Jaded Response @Matt Cavotta
+27 C Jilt @Terese Nielsen
+106 U Jungle Barrier @Edward P. Beard, Jr.
+64 C Kavu Glider @Heather Hudson
+79 U Kavu Howler @Wayne England
+80 R Kavu Mauler @Daren Bader
+41 C Last Caress @Eric Peterson
+107 R Last Stand @Ron Spencer
+81 C Lay of the Land @Mark Zug
+137 R Legacy Weapon @John Avon
+130 U Life // Death @Anthony S. Waters & Edward P. Beard, Jr.
+108 R Lightning Angel @rk post
+28 C Living Airship @Mark Tedin
+109 C Llanowar Dead @Ben Thompson
+141 R Llanowar Wastes @Rob Alexander
+14 C Manacles of Decay @Gary Ruddell
+110 U Martyrs' Tomb @Anthony S. Waters
+138 R Mask of Intolerance @Glen Angus
+42 C Mind Extraction @Adam Rex
+111 U Minotaur Illusionist @Mark Zug
+65 C Minotaur Tactician @Carl Critchlow
+43 C Mournful Zombie @John Matson
+112 R Mystic Snake @Daren Bader
+44 C Necra Disciple @Jeff Miracola
+45 U Necra Sanctuary @Eric Peterson
+46 R Necravolver @Dave Dorman
+131 U Night // Day @Christopher Moeller & Anthony S. Waters
+132 U Order // Chaos @Tim Hildebrandt
+15 C Orim's Thunder @Carl Critchlow
+113 R Overgrown Estate @Brian Snõddy
+82 C Penumbra Bobcat @Heather Hudson
+83 U Penumbra Kavu @Tony Szczudlo
+84 R Penumbra Wurm @Jeff Easley
+114 R Pernicious Deed @Christopher Moeller
+47 R Phyrexian Arena @Pete Venters
+48 U Phyrexian Gargantua @Carl Critchlow
+49 C Phyrexian Rager @Mark Tedin
+50 R Planar Despair @Mike Sass
+115 R Powerstone Minefield @Greg Hildebrandt & Tim Hildebrandt
+116 R Prophetic Bolt @Dave Dorman
+117 C Putrid Warrior @Ray Lago
+51 C Quagmire Druid @Dana Knutson
+118 C Quicksilver Dagger @Alex Horley-Orlandelli
+66 C Raka Disciple @Arnie Swekel
+67 U Raka Sanctuary @David Martin
+68 R Rakavolver @Scott M. Fischer
+119 C Razorfin Hunter @Jeff Easley
+29 C Reef Shaman @Scott M. Fischer
+85 C Savage Gorilla @Dave Dorman
+16 C Shield of Duty and Reason @Anthony S. Waters
+30 C Shimmering Mirage @Rebecca Guay
+142 R Shivan Reef @Rob Alexander
+69 C Smash @Pete Venters
+120 C Soul Link @Jeff Easley
+17 R Spectral Lynx @Heather Hudson
+121 R Spiritmonger @Glen Angus
+122 C Squee's Embrace @Rebecca Guay
+123 U Squee's Revenge @Kev Walker
+18 C Standard Bearer @Ron Spencer
+86 C Strength of Night @John Avon
+124 R Suffocating Blast @Christopher Moeller
+52 U Suppress @Terese Nielsen & Thomas M. Baxa
+87 U Sylvan Messenger @Heather Hudson
+88 R Symbiotic Deployment @Kev Walker
+70 C Tahngarth's Glare @Pete Venters
+125 C Temporal Spring @John Matson
+31 U Tidal Courier @Wayne England
+89 C Tranquil Path @John Avon
+71 C Tundra Kavu @Matt Cavotta
+32 R Unnatural Selection @Kev Walker
+90 C Urborg Elf @Bob Petillo
+53 C Urborg Uprising @Adam Rex
+126 R Vindicate @Brian Snõddy
+33 U Vodalian Mystic @Bob Petillo
+34 U Whirlpool Drake @Alan Pollack
+35 C Whirlpool Rider @Ray Lago
+36 R Whirlpool Warrior @Kev Walker
+72 R Wild Research @Gary Ruddell
+143 R Yavimaya Coast @Anthony S. Waters
+127 R Yavimaya's Embrace @Eric Peterson
+54 C Zombie Boa @Greg Staples
 
 [tokens]
 b_3_3_angel_flying

@@ -8,133 +8,133 @@ Type=Boxed_Set
 ScryfallCode=GK1
 
 [cards]
-1 R Etrata, the Silencer
-2 R Stolen Identity
-3 U Syncopate
-4 U Telling Time
-5 C Last Gasp
-6 U Netherborn Phalanx
-7 U Ribbons of Night
-8 U Call of the Nightwing
-9 R Circu, Dimir Lobotomist
-10 R Consuming Aberration
-11 U Dimir Charm
-12 R Dimir Doppelganger
-13 U Dimir Guildmage
-14 U Dinrova Horror
-15 R Glimpse the Unthinkable
-16 M Lazav, Dimir Mastermind
-17 R Mirko Vosk, Mind Drinker
-18 U Moroii
-19 R Nightveil Specter
-20 R Szadek, Lord of Secrets
-21 U Warped Physique
-22 C Dimir Signet
-23 C Dimir Aqueduct
-24 L Island
-25 L Swamp
-26 R Niv-Mizzet, the Firemind
-27 U Thunderheads
-28 R Char
-29 C Electrickery
-30 U Goblin Rally
-31 U Guttersnipe
-32 R Mizzium Mortars
-33 C Pyromatics
-34 U Shattering Spree
-35 R Cerebral Vortex
-36 R Djinn Illuminatus
-37 U Electrolyze
-38 U Gelectrode
-39 R Hypersonic Dragon
-40 R Invoke the Firemind
-41 U Izzet Charm
-42 U Nivix Guildmage
-43 R Stitch in Time
-44 R Tibor and Lumia
-45 U Turn // Burn
-46 C Izzet Signet
-47 C Izzet Boilerworks
-48 L Island
-49 L Mountain
-50 R Izoni, Thousand-Eyed
-51 U Darkblast
-52 U Slum Reaper
-53 C Stinkweed Imp
-54 U Vigor Mortis
-55 R Deadbridge Goliath
-56 C Elves of Deep Shadow
-57 R Abrupt Decay
-58 M Deadbridge Chant
-59 R Deathrite Shaman
-60 C Drown in Filth
-61 R Gaze of Granite
-62 U Golgari Charm
-63 R Grave-Shell Scarab
-64 C Grisly Salvage
-65 M Jarad, Golgari Lich Lord
-66 U Korozda Guildmage
-67 R Lotleth Troll
-68 U Putrefy
-69 R Savra, Queen of the Golgari
-70 C Shambling Shell
-71 R Sisters of Stone Death
-72 U Treasured Find
-73 C Golgari Signet
-74 C Golgari Rot Farm
-75 L Swamp
-76 L Forest
-77 M Aurelia, the Warleader
-78 U Boros Elite
-79 C Daring Skyjek
-80 C Bomber Corps
-81 U Frenzied Goblin
-82 R Legion Loyalist
-83 R Agrus Kos, Wojek Veteran
-84 U Boros Charm
-85 R Boros Reckoner
-86 U Boros Swiftblade
-87 R Brightflame
-88 R Firemane Angel
-89 R Firemane Avenger
-90 U Lightning Helix
-91 C Martial Glory
-92 R Master Warcraft
-93 R Razia, Boros Archangel
-94 R Spark Trooper
-95 U Sunhome Guildmage
-96 U Boros Keyrune
-97 C Boros Signet
-98 C Boros Garrison
-99 U Sunhome, Fortress of the Legion
-100 L Plains
-101 L Mountain
-102 M Trostani, Selesnya's Voice
-103 U Devouring Light
-104 R Hour of Reckoning
-105 C Gather Courage
-106 C Scatter the Seeds
-107 R Advent of the Wurm
-108 M Armada Wurm
-109 U Call of the Conclave
-110 C Centaur Healer
-111 U Dryad Militant
-112 R Glare of Subdual
-113 R Growing Ranks
-114 R Loxodon Hierarch
-115 U Pollenbright Wings
-116 R Privileged Position
-117 U Selesnya Charm
-118 C Selesnya Evangel
-119 U Selesnya Guildmage
-120 C Sundering Growth
-121 R Tolsimir Wolfblood
-122 U Watchwolf
-123 C Selesnya Signet
-124 R Grove of the Guardian
-125 C Selesnya Sanctuary
-126 L Plains
-127 L Forest
+1 R Etrata, the Silencer @Igor Kieryluk
+2 R Stolen Identity @Clint Cearley
+3 U Syncopate @Clint Cearley
+4 U Telling Time @Scott M. Fischer
+5 C Last Gasp @Thomas M. Baxa
+6 U Netherborn Phalanx @Christopher Rush
+7 U Ribbons of Night @Ron Spears
+8 U Call of the Nightwing @Adam Paquette
+9 R Circu, Dimir Lobotomist @Cyril Van Der Haegen
+10 R Consuming Aberration @Karl Kopinski
+11 U Dimir Charm @Zoltan Boros
+12 R Dimir Doppelganger @Jim Murray
+13 U Dimir Guildmage @Adam Rex
+14 U Dinrova Horror @Johann Bodin
+15 R Glimpse the Unthinkable @Brandon Kitkouski
+16 M Lazav, Dimir Mastermind @David Rapoza
+17 R Mirko Vosk, Mind Drinker @Chase Stone
+18 U Moroii @Dan Scott
+19 R Nightveil Specter @Min Yum
+20 R Szadek, Lord of Secrets @Donato Giancola
+21 U Warped Physique @Karl Kopinski
+22 C Dimir Signet @Raoul Vitale
+23 C Dimir Aqueduct @John Avon
+24 L Island @Jung Park
+25 L Swamp @Noah Bradley
+26 R Niv-Mizzet, the Firemind @Daarken
+27 U Thunderheads @Hideaki Takamura
+28 R Char @Adam Rex
+29 C Electrickery @Greg Staples
+30 U Goblin Rally @Nic Klein
+31 U Guttersnipe @Steve Prescott
+32 R Mizzium Mortars @Noah Bradley
+33 C Pyromatics @Glen Angus
+34 U Shattering Spree @Pat Lee
+35 R Cerebral Vortex @Jeremy Jarvis
+36 R Djinn Illuminatus @Carl Critchlow
+37 U Electrolyze @Zoltan Boros & Gabor Szikszai
+38 U Gelectrode @Dan Scott
+39 R Hypersonic Dragon @Dan Scott
+40 R Invoke the Firemind @Zoltan Boros & Gabor Szikszai
+41 U Izzet Charm @Zoltan Boros
+42 U Nivix Guildmage @Scott M. Fischer
+43 R Stitch in Time @Jon Foster
+44 R Tibor and Lumia @Jim Murray
+45 U Turn // Burn @Ryan Barger
+46 C Izzet Signet @Raoul Vitale
+47 C Izzet Boilerworks @John Avon
+48 L Island @Adam Paquette
+49 L Mountain @Svetlin Velinov
+50 R Izoni, Thousand-Eyed @Winona Nelson
+51 U Darkblast @Randy Gallegos
+52 U Slum Reaper @Karl Kopinski
+53 C Stinkweed Imp @Nils Hamm
+54 U Vigor Mortis @Dan Scott
+55 R Deadbridge Goliath @Chase Stone
+56 C Elves of Deep Shadow @Justin Sweet
+57 R Abrupt Decay @Svetlin Velinov
+58 M Deadbridge Chant @Zoltan Boros
+59 R Deathrite Shaman @Steve Argyle
+60 C Drown in Filth @Seb McKinnon
+61 R Gaze of Granite @Nils Hamm
+62 U Golgari Charm @Zoltan Boros
+63 R Grave-Shell Scarab @Pete Venters
+64 C Grisly Salvage @Dave Kendall
+65 M Jarad, Golgari Lich Lord @Eric Deschamps
+66 U Korozda Guildmage @Ryan Pancoast
+67 R Lotleth Troll @Vincent Proce
+68 U Putrefy @Clint Cearley
+69 R Savra, Queen of the Golgari @Scott M. Fischer
+70 C Shambling Shell @Joel Thomas
+71 R Sisters of Stone Death @Donato Giancola
+72 U Treasured Find @Jason Chan
+73 C Golgari Signet @Raoul Vitale
+74 C Golgari Rot Farm @John Avon
+75 L Swamp @Florian de Gesincourt
+76 L Forest @Svetlin Velinov
+77 M Aurelia, the Warleader @Paul Scott Canavan
+78 U Boros Elite @Willian Murai
+79 C Daring Skyjek @Jason Chan
+80 C Bomber Corps @Chase Stone
+81 U Frenzied Goblin @Carl Critchlow
+82 R Legion Loyalist @Eric Deschamps
+83 R Agrus Kos, Wojek Veteran @Donato Giancola
+84 U Boros Charm @Zoltan Boros
+85 R Boros Reckoner @Howard Lyon
+86 U Boros Swiftblade @Doug Chaffee
+87 R Brightflame @Dave Dorman
+88 R Firemane Angel @Matt Cavotta
+89 R Firemane Avenger @Wayne Reynolds
+90 U Lightning Helix @Kev Walker
+91 C Martial Glory @Raymond Swanland
+92 R Master Warcraft @Zoltan Boros & Gabor Szikszai
+93 R Razia, Boros Archangel @Donato Giancola
+94 R Spark Trooper @James Ryman
+95 U Sunhome Guildmage @Eric Deschamps
+96 U Boros Keyrune @Daniel Ljunggren
+97 C Boros Signet @Mike Sass
+98 C Boros Garrison @John Avon
+99 U Sunhome, Fortress of the Legion @Martina Pilcerova
+100 L Plains @Yeong-Hao Han
+101 L Mountain @Noah Bradley
+102 M Trostani, Selesnya's Voice @Sidharth Chaturvedi
+103 U Devouring Light @Pete Venters
+104 R Hour of Reckoning @Randy Gallegos
+105 C Gather Courage @Brian Despain
+106 C Scatter the Seeds @Rob Alexander
+107 R Advent of the Wurm @Lucas Graciano
+108 M Armada Wurm @Volkan Baǵa
+109 U Call of the Conclave @Terese Nielsen
+110 C Centaur Healer @Mark Zug
+111 U Dryad Militant @Terese Nielsen
+112 R Glare of Subdual @Zoltan Boros & Gabor Szikszai
+113 R Growing Ranks @Seb McKinnon
+114 R Loxodon Hierarch @Kev Walker
+115 U Pollenbright Wings @Terese Nielsen
+116 R Privileged Position @Wayne England
+117 U Selesnya Charm @Zoltan Boros
+118 C Selesnya Evangel @Rob Alexander
+119 U Selesnya Guildmage @Mark Zug
+120 C Sundering Growth @David Palumbo
+121 R Tolsimir Wolfblood @Donato Giancola
+122 U Watchwolf @Kev Walker
+123 C Selesnya Signet @Raoul Vitale
+124 R Grove of the Guardian @Christine Choi
+125 C Selesnya Sanctuary @John Avon
+126 L Plains @James Paick
+127 L Forest @Alayna Danner
 
 [tokens]
 voja

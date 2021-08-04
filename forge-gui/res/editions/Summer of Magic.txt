@@ -6,5 +6,5 @@ Type=Promo
 ScryfallCode=PSUM
 
 [cards]
-1 R Faerie Conclave
-2 R Treetop Village
+1 R Faerie Conclave @Stephan Martiniere
+2 R Treetop Village @Rob Alexander

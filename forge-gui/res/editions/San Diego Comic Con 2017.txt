@@ -6,9 +6,9 @@ Type=Promo
 ScryfallCode=PS17
 
 [cards]
-14 M Gideon of the Trials
-69 M Jace, Unraveler of Secrets
-97 M Liliana, Death's Majesty
-110 M Chandra, Torch of Defiance
-140 M Nicol Bolas, God-Pharaoh
-204 M Nissa, Steward of Elements
+14 M Gideon of the Trials @Vincent Proce
+69 M Jace, Unraveler of Secrets @Vincent Proce
+97 M Liliana, Death's Majesty @Vincent Proce
+110 M Chandra, Torch of Defiance @Vincent Proce
+140 M Nicol Bolas, God-Pharaoh @Vincent Proce
+204 M Nissa, Steward of Elements @Vincent Proce

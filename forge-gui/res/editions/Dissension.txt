@@ -14,186 +14,186 @@ ChaosDraftThemes=RAVNICA
 ScryfallCode=DIS
 
 [cards]
-1 C Aurora Eidolon
-2 U Azorius Herald
-3 C Beacon Hawk
-4 U Blessing of the Nephilim
-5 U Brace for Impact
-6 C Carom
-7 R Celestial Ancient
-8 U Condemn
-9 C Freewind Equenaut
-10 C Guardian of the Guildpact
-11 C Haazda Exonerator
-12 R Haazda Shield Mate
-13 U Mistral Charger
-14 U Paladin of Prahv
-15 R Proclamation of Rebirth
-16 R Proper Burial
-17 C Soulsworn Jury
-18 C Steeling Stance
-19 U Stoic Ephemera
-20 C Valor Made Real
-21 R Wakestone Gargoyle
-22 U Court Hussar
-23 R Cytoplast Manipulator
-24 C Enigma Eidolon
-25 R Govern the Guildless
-26 C Helium Squirter
-27 R Novijen Sages
-28 C Ocular Halo
-29 U Plaxmanta
-30 R Psychic Possession
-31 C Silkwing Scout
-32 U Skyscribing
-33 U Spell Snare
-34 R Tidespout Tyrant
-35 U Vigean Graftmage
-36 C Vision Skeins
-37 C Writ of Passage
-38 U Bond of Agony
-39 U Brain Pry
-40 U Crypt Champion
-41 C Delirium Skeins
-42 C Demon's Jester
-43 U Drekavac
-44 C Enemy of the Guildpact
-45 C Entropic Eidolon
-46 R Infernal Tutor
-47 C Macabre Waltz
-48 C Nettling Curse
-49 U Nightcreep
-50 R Nihilistic Glee
-51 U Ragamuffyn
-52 R Ratcatcher
-53 C Seal of Doom
-54 C Slaughterhouse Bouncer
-55 U Slithering Shade
-56 R Unliving Psychopath
-57 C Vesper Ghoul
-58 R Wit's End
-59 C Cackling Flames
-60 R Demonfire
-61 U Flame-Kin War Scout
-62 U Flaring Flame-Kin
-63 U Gnat Alley Creeper
-64 U Ignorant Bliss
-65 C Kill-Suit Cultist
-66 U Kindle the Carnage
-67 C Ogre Gatecrasher
-68 C Psychotic Fury
-69 R Rakdos Pit Dragon
-70 C Sandstorm Eidolon
-71 C Seal of Fire
-72 U Squealing Devil
-73 R Stalking Vengeance
-74 R Stormscale Anarch
-75 C Taste for Mayhem
-76 C Utvara Scalper
-77 R War's Toll
-78 U Weight of Spires
-79 C Whiptail Moloch
-80 C Aquastrand Spider
-81 R Cytoplast Root-Kin
-82 C Cytospawn Shambler
-83 R Elemental Resonance
-84 U Fertile Imagination
-85 U Flash Foliage
-86 U Indrik Stomphowler
-87 R Loaming Shaman
-88 U Might of the Nephilim
-89 U Patagia Viper
-90 R Protean Hulk
-91 U Simic Basilisk
-92 C Simic Initiate
-93 C Simic Ragworm
-94 C Sporeback Troll
-95 R Sprouting Phytohydra
-96 U Stomp and Howl
-97 C Street Savvy
-98 C Thrive
-99 C Utopia Sprawl
-100 C Verdant Eidolon
-101 R AEthermage's Touch
-102 R Anthem of Rakdos
-103 C Assault Zeppelid
-104 U Azorius AEthermage
-105 C Azorius First-Wing
-106 U Azorius Ploy
-107 C Coiling Oracle
-108 R Cytoshape
-109 R Dread Slag
-110 R Experiment Kraj
-111 C Gobhobbler Rats
-112 R Grand Arbiter Augustin IV
-113 U Hellhole Rats
-114 R Isperia the Inscrutable
-115 U Jagged Poppet
-116 U Leafdrake Roost
-117 R Lyzolda, the Blood Witch
-118 R Momir Vig, Simic Visionary
-119 R Omnibian
-120 C Overrule
-121 U Pain Magnification
-122 U Palliation Accord
-123 U Plaxcaster Frogling
-124 C Plumes of Peace
-125 R Pride of the Clouds
-126 R Rain of Gore
-127 R Rakdos Augermage
-128 C Rakdos Ickspitter
-129 R Rakdos the Defiler
-130 R Simic Sky Swallower
-131 U Sky Hussar
-132 R Swift Silence
-133 U Trygon Predator
-134 U Twinstrike
-135 C Vigean Hydropon
-136 U Vigean Intuition
-137 R Voidslime
-138 R Windreaver
-139 C Wrecking Ball
-140 R Avatar of Discord
-141 U Azorius Guildmage
-142 R Biomantic Mastery
-143 R Dovescape
-144 C Minister of Impediments
-145 U Rakdos Guildmage
-146 C Riot Spikes
-147 C Shielding Plax
-148 U Simic Guildmage
-149 R Bound // Determined
-150 R Crime // Punishment
-151 R Hide // Seek
-152 U Hit // Run
-153 R Odds // Ends
-154 U Pure // Simple
-155 R Research // Development
-156 U Rise // Fall
-157 U Supply // Demand
-158 U Trial // Error
-159 C Azorius Signet
-160 R Bronze Bombshell
-161 R Evolution Vat
-162 U Magewright's Stone
-163 R Muse Vessel
-164 R Rakdos Riteknife
-165 C Rakdos Signet
-166 C Simic Signet
-167 U Skullmead Cauldron
-168 U Transguild Courier
-169 R Walking Archive
-170 C Azorius Chancery
-171 R Blood Crypt
-172 R Breeding Pool
-173 U Ghost Quarter
-174 R Hallowed Fountain
-175 U Novijen, Heart of Progress
-176 R Pillar of the Paruns
-177 U Prahv, Spires of Order
-178 C Rakdos Carnarium
-179 U Rix Maadi, Dungeon Palace
-180 C Simic Growth Chamber
+1 C Aurora Eidolon @Justin Sweet
+2 U Azorius Herald @Justin Sweet
+3 C Beacon Hawk @William Simpson
+4 U Blessing of the Nephilim @Greg Hildebrandt
+5 U Brace for Impact @Dan Scott
+6 C Carom @Alex Horley-Orlandelli
+7 R Celestial Ancient @Mark Tedin
+8 U Condemn @Daren Bader
+9 C Freewind Equenaut @Rebecca Guay
+10 C Guardian of the Guildpact @Fred Hooper
+11 C Haazda Exonerator @Kev Walker
+12 R Haazda Shield Mate @Ron Spears
+13 U Mistral Charger @Terese Nielsen
+14 U Paladin of Prahv @William Simpson
+15 R Proclamation of Rebirth @William Simpson
+16 R Proper Burial @Luca Zontini
+17 C Soulsworn Jury @Zoltan Boros & Gabor Szikszai
+18 C Steeling Stance @Randy Gallegos
+19 U Stoic Ephemera @Randy Gallegos
+20 C Valor Made Real @Jeff Miracola
+21 R Wakestone Gargoyle @Jim Murray
+22 U Court Hussar @Ron Spears
+23 R Cytoplast Manipulator @Dan Scott
+24 C Enigma Eidolon @Shishizaru
+25 R Govern the Guildless @Alex Horley-Orlandelli
+26 C Helium Squirter @Hideaki Takamura
+27 R Novijen Sages @Luca Zontini
+28 C Ocular Halo @Ralph Horsley
+29 U Plaxmanta @Alan Pollack
+30 R Psychic Possession @Mark Tedin
+31 C Silkwing Scout @Rebecca Guay
+32 U Skyscribing @Luca Zontini
+33 U Spell Snare @Hideaki Takamura
+34 R Tidespout Tyrant @Dany Orizio
+35 U Vigean Graftmage @Alan Pollack
+36 C Vision Skeins @Aleksi Briclot
+37 C Writ of Passage @Luca Zontini
+38 U Bond of Agony @Luca Zontini
+39 U Brain Pry @Jim Nelson
+40 U Crypt Champion @Pete Venters
+41 C Delirium Skeins @Aleksi Briclot
+42 C Demon's Jester @Pete Venters
+43 U Drekavac @Carl Critchlow
+44 C Enemy of the Guildpact @Fred Hooper
+45 C Entropic Eidolon @Aleksi Briclot
+46 R Infernal Tutor @Kev Walker
+47 C Macabre Waltz @Jim Murray
+48 C Nettling Curse @Jeremy Jarvis & Wayne Reynolds
+49 U Nightcreep @Jeff Miracola
+50 R Nihilistic Glee @Ron Spears & Wayne Reynolds
+51 U Ragamuffyn @rk post
+52 R Ratcatcher @Dan Scott
+53 C Seal of Doom @Ralph Horsley
+54 C Slaughterhouse Bouncer @Greg Staples
+55 U Slithering Shade @Daren Bader
+56 R Unliving Psychopath @Greg Staples
+57 C Vesper Ghoul @Thomas M. Baxa
+58 R Wit's End @Kev Walker
+59 C Cackling Flames @Shishizaru
+60 R Demonfire @Greg Staples
+61 U Flame-Kin War Scout @Fred Hooper
+62 U Flaring Flame-Kin @Brian Hagan
+63 U Gnat Alley Creeper @Pete Venters
+64 U Ignorant Bliss @Jeff Miracola
+65 C Kill-Suit Cultist @Alex Horley-Orlandelli
+66 U Kindle the Carnage @Dany Orizio
+67 C Ogre Gatecrasher @Daren Bader
+68 C Psychotic Fury @Kev Walker
+69 R Rakdos Pit Dragon @Kev Walker
+70 C Sandstorm Eidolon @Brian Hagan
+71 C Seal of Fire @Ralph Horsley
+72 U Squealing Devil @Matt Cavotta
+73 R Stalking Vengeance @Anthony S. Waters
+74 R Stormscale Anarch @Ralph Horsley
+75 C Taste for Mayhem @Greg Hildebrandt
+76 C Utvara Scalper @Christopher Rush
+77 R War's Toll @Dana Knutson
+78 U Weight of Spires @Michael Sutfin
+79 C Whiptail Moloch @Darrell Riche
+80 C Aquastrand Spider @Dany Orizio
+81 R Cytoplast Root-Kin @Thomas M. Baxa
+82 C Cytospawn Shambler @Anthony S. Waters
+83 R Elemental Resonance @Mark Tedin
+84 U Fertile Imagination @Dan Scott
+85 U Flash Foliage @Ron Spears
+86 U Indrik Stomphowler @Carl Critchlow
+87 R Loaming Shaman @Carl Critchlow
+88 U Might of the Nephilim @Paolo Parente
+89 U Patagia Viper @Christopher Moeller
+90 R Protean Hulk @Matt Cavotta
+91 U Simic Basilisk @Luca Zontini
+92 C Simic Initiate @Dany Orizio
+93 C Simic Ragworm @Nick Percival
+94 C Sporeback Troll @Dan Scott
+95 R Sprouting Phytohydra @Heather Hudson
+96 U Stomp and Howl @Carl Critchlow
+97 C Street Savvy @Kev Walker
+98 C Thrive @Daren Bader
+99 C Utopia Sprawl @Ron Spears
+100 C Verdant Eidolon @Tsutomu Kawade
+101 R Aethermage's Touch @Randy Gallegos
+102 R Anthem of Rakdos @Ralph Horsley
+103 C Assault Zeppelid @Jeremy Jarvis
+104 U Azorius Aethermage @Heather Hudson
+105 C Azorius First-Wing @Alex Horley-Orlandelli
+106 U Azorius Ploy @Michael Sutfin
+107 C Coiling Oracle @Mark Zug
+108 R Cytoshape @Alan Pollack
+109 R Dread Slag @Anthony S. Waters
+110 R Experiment Kraj @Mark Tedin
+111 C Gobhobbler Rats @Michael Sutfin
+112 R Grand Arbiter Augustin IV @Zoltan Boros & Gabor Szikszai
+113 U Hellhole Rats @Kev Walker
+114 R Isperia the Inscrutable @Greg Staples
+115 U Jagged Poppet @Jeff Miracola
+116 U Leafdrake Roost @Nick Percival
+117 R Lyzolda, the Blood Witch @Jim Nelson
+118 R Momir Vig, Simic Visionary @Zoltan Boros & Gabor Szikszai
+119 R Omnibian @Jim Nelson
+120 C Overrule @Alan Pollack
+121 U Pain Magnification @Aleksi Briclot
+122 U Palliation Accord @William Simpson
+123 U Plaxcaster Frogling @Greg Staples
+124 C Plumes of Peace @Justin Sweet
+125 R Pride of the Clouds @Rebecca Guay
+126 R Rain of Gore @Fred Hooper
+127 R Rakdos Augermage @Zoltan Boros & Gabor Szikszai
+128 C Rakdos Ickspitter @Christopher Rush
+129 R Rakdos the Defiler @Zoltan Boros & Gabor Szikszai
+130 R Simic Sky Swallower @rk post
+131 U Sky Hussar @Kev Walker
+132 R Swift Silence @Greg Staples
+133 U Trygon Predator @Carl Critchlow
+134 U Twinstrike @Christopher Rush
+135 C Vigean Hydropon @Anthony S. Waters
+136 U Vigean Intuition @Alex Horley-Orlandelli
+137 R Voidslime @Jim Murray
+138 R Windreaver @Aleksi Briclot
+139 C Wrecking Ball @Ron Spears
+140 R Avatar of Discord @rk post
+141 U Azorius Guildmage @Christopher Moeller
+142 R Biomantic Mastery @Dan Scott
+143 R Dovescape @Shishizaru
+144 C Minister of Impediments @Brian Hagan
+145 U Rakdos Guildmage @Jeremy Jarvis
+146 C Riot Spikes @Christopher Moeller
+147 C Shielding Plax @Brian Hagan
+148 U Simic Guildmage @Aleksi Briclot
+149 R Bound // Determined @Jim Nelson
+150 R Crime // Punishment @Randy Gallegos
+151 R Hide // Seek @Zoltan Boros & Gabor Szikszai
+152 U Hit // Run @Darrell Riche
+153 R Odds // Ends @Michael Sutfin
+154 U Pure // Simple @Paolo Parente
+155 R Research // Development @Greg Staples
+156 U Rise // Fall @Pete Venters
+157 U Supply // Demand @Daren Bader
+158 U Trial // Error @Ron Spears & Wayne Reynolds
+159 C Azorius Signet @Greg Hildebrandt
+160 R Bronze Bombshell @Martina Pilcerova
+161 R Evolution Vat @John Avon
+162 U Magewright's Stone @Carl Critchlow
+163 R Muse Vessel @Christopher Rush
+164 R Rakdos Riteknife @Jim Nelson
+165 C Rakdos Signet @Greg Hildebrandt
+166 C Simic Signet @Greg Hildebrandt
+167 U Skullmead Cauldron @Martina Pilcerova
+168 U Transguild Courier @John Avon
+169 R Walking Archive @Heather Hudson
+170 C Azorius Chancery @John Avon
+171 R Blood Crypt @Rob Alexander
+172 R Breeding Pool @Rob Alexander
+173 U Ghost Quarter @Heather Hudson
+174 R Hallowed Fountain @Rob Alexander
+175 U Novijen, Heart of Progress @Martina Pilcerova
+176 R Pillar of the Paruns @Dany Orizio
+177 U Prahv, Spires of Order @Martina Pilcerova
+178 C Rakdos Carnarium @John Avon
+179 U Rix Maadi, Dungeon Palace @Martina Pilcerova
+180 C Simic Growth Chamber @John Avon
 
 [tokens]
 r_3_1_elemental

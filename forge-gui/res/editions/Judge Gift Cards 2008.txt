@@ -6,8 +6,8 @@ Type=Promo
 ScryfallCode=G08
 
 [cards]
-1 R Orim's Chant
-2 R Mind's Desire
-3 R Demonic Tutor
-4 R Goblin Piledriver
-5 R Living Wish
+1 R Orim's Chant @Chippy
+2 R Mind's Desire @Anthony Francisco
+3 R Demonic Tutor @Daarken
+4 R Goblin Piledriver @Dave Kendall
+5 R Living Wish @Hideaki Takamura

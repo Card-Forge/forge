@@ -13,162 +13,162 @@ ChaosDraftThemes=RAVNICA
 ScryfallCode=DGM
 
 [cards]
-1 C Boros Mastiff
-2 C Haazda Snare Squad
-3 C Lyev Decree
-4 C Maze Sentinel
-5 R Renounce the Guilds
-6 C Riot Control
-7 R Scion of Vitu-Ghazi
-8 C Steeple Roc
-9 C Sunspire Gatekeepers
-10 C Wake the Reflections
-11 R AEtherling
-12 C Hidden Strings
-13 C Maze Glider
-14 C Mindstatic
-15 C Murmuring Phantasm
-16 C Opal Lake Gatekeepers
-17 C Runner's Bane
-18 R Trait Doctoring
-19 C Uncovered Clues
-20 C Wind Drake
-21 C Bane Alley Blackguard
-22 R Blood Scrivener
-23 C Crypt Incursion
-24 C Fatal Fumes
-25 C Hired Torturer
-26 C Maze Abomination
-27 R Pontiff of Blight
-28 C Rakdos Drake
-29 C Sinister Possession
-30 C Ubul Sar Gatekeepers
-31 C Awe for the Guilds
-32 C Clear a Path
-33 C Maze Rusher
-34 R Possibility Storm
-35 C Punish the Enemy
-36 R Pyrewild Shaman
-37 C Riot Piker
-38 C Rubblebelt Maaka
-39 C Smelt-Ward Gatekeepers
-40 C Weapon Surge
-41 C Battering Krasis
-42 C Kraul Warrior
-43 C Maze Behemoth
-44 C Mending Touch
-45 C Mutant's Prey
-46 C Phytoburst
-47 R Renegade Krasis
-48 C Saruli Gatekeepers
-49 R Skylasher
-50 C Thrashing Mossdog
-51 R Advent of the Wurm
-52 C Armored Wolf-Rider
-53 U Ascended Lawmage
-54 C Beetleform Mage
-55 U Blast of Genius
-56 U Blaze Commando
-57 M Blood Baron of Vizkopa
-58 R Boros Battleshaper
-59 U Bred for the Hunt
-60 U Bronzebeak Moa
-61 U Carnage Gladiator
-62 M Council of the Absolute
-63 M Deadbridge Chant
-64 U Debt to the Deathless
-65 C Deputy of Acquittals
-66 R Dragonshift
-67 C Drown in Filth
-68 R Emmara Tandris
-69 R Exava, Rakdos Blood Witch
-70 U Feral Animist
-71 U Fluxcharger
-72 R Gaze of Granite
-73 U Gleam of Battle
-74 U Goblin Test Pilot
-75 U Gruul War Chant
-76 U Haunter of Nightveil
-77 U Jelenn Sphinx
-78 U Korozda Gorgon
-79 U Krasis Incubation
-80 R Lavinia of the Tenth
-81 M Legion's Initiative
-82 M Master of Cruelties
-83 U Maw of the Obzedat
-84 R Melek, Izzet Paragon
-85 R Mirko Vosk, Mind Drinker
-86 C Morgue Burst
-87 C Nivix Cyclops
-88 R Notion Thief
-89 R Obzedat's Aid
-90 C Pilfered Plans
-91 R Plasm Capture
-92 M Progenitor Mimic
-93 U Putrefy
-94 M Ral Zarek
-95 M Reap Intellect
-96 R Render Silent
-97 U Restore the Peace
-98 U Rot Farm Skeleton
-99 R Ruric Thar, the Unbowed
-100 M Savageborn Hydra
-101 U Scab-Clan Giant
-102 U Showstopper
-103 U Sin Collector
-104 R Sire of Insanity
-105 U Species Gorger
-106 U Spike Jester
-107 R Tajic, Blade of the Legion
-108 R Teysa, Envoy of Ghosts
-109 C Tithe Drinker
-110 U Trostani's Summoner
-111 U Unflinching Courage
-112 R Varolz, the Scar-Striped
-113 C Viashino Firstblade
-114 M Voice of Resurgence
-115 R Vorel of the Hull Clade
-116 U Warleader's Helix
-117 U Warped Physique
-118 U Woodlot Crawler
-119 R Zhur-Taa Ancient
-120 C Zhur-Taa Druid
-121 U Alive // Well
-122 U Armed // Dangerous
-123 R Beck // Call
-124 R Breaking // Entering
-125 R Catch // Release
-126 U Down // Dirty
-127 U Far // Away
-128 R Flesh // Blood
-129 U Give // Take
-130 U Profit // Loss
-131 U Protect // Serve
-132 R Ready // Willing
-133 U Toil // Trouble
-134 U Turn // Burn
-135 U Wear // Tear
-136 C Azorius Cluestone
-137 C Boros Cluestone
-138 C Dimir Cluestone
-139 C Golgari Cluestone
-140 C Gruul Cluestone
-141 C Izzet Cluestone
-142 C Orzhov Cluestone
-143 C Rakdos Cluestone
-144 C Selesnya Cluestone
-145 C Simic Cluestone
-146 C Azorius Guildgate
-147 C Boros Guildgate
-148 C Dimir Guildgate
-149 C Golgari Guildgate
-150 C Gruul Guildgate
-151 C Izzet Guildgate
-152 M Maze's End
-153 C Orzhov Guildgate
-154 C Rakdos Guildgate
-155 C Selesnya Guildgate
-156 C Simic Guildgate
+1 C Boros Mastiff @Kev Walker
+2 C Haazda Snare Squad @David Palumbo
+3 C Lyev Decree @Kev Walker
+4 C Maze Sentinel @Yeong-Hao Han
+5 R Renounce the Guilds @Daarken
+6 C Riot Control @Slawomir Maniak
+7 R Scion of Vitu-Ghazi @Willian Murai
+8 C Steeple Roc @David Palumbo
+9 C Sunspire Gatekeepers @Chippy
+10 C Wake the Reflections @Cynthia Sheppard
+11 R Aetherling @Tyler Jacobson
+12 C Hidden Strings @Daarken
+13 C Maze Glider @Yeong-Hao Han
+14 C Mindstatic @Johann Bodin
+15 C Murmuring Phantasm @Peter Mohrbacher
+16 C Opal Lake Gatekeepers @Seb McKinnon
+17 C Runner's Bane @Karl Kopinski
+18 R Trait Doctoring @Clint Cearley
+19 C Uncovered Clues @Jaime Jones
+20 C Wind Drake @John Severin Brassell
+21 C Bane Alley Blackguard @Mike Bierek
+22 R Blood Scrivener @Peter Mohrbacher
+23 C Crypt Incursion @Svetlin Velinov
+24 C Fatal Fumes @Kev Walker
+25 C Hired Torturer @Winona Nelson
+26 C Maze Abomination @Yeong-Hao Han
+27 R Pontiff of Blight @Seb McKinnon
+28 C Rakdos Drake @Karl Kopinski
+29 C Sinister Possession @Anthony Palumbo
+30 C Ubul Sar Gatekeepers @Volkan Baǵa
+31 C Awe for the Guilds @Mathias Kollros
+32 C Clear a Path @Karl Kopinski
+33 C Maze Rusher @Yeong-Hao Han
+34 R Possibility Storm @Jason Felix
+35 C Punish the Enemy @Slawomir Maniak
+36 R Pyrewild Shaman @Lucas Graciano
+37 C Riot Piker @Christopher Moeller
+38 C Rubblebelt Maaka @Eric Velhagen
+39 C Smelt-Ward Gatekeepers @Daarken
+40 C Weapon Surge @Jason Felix
+41 C Battering Krasis @Jack Wang
+42 C Kraul Warrior @David Rapoza
+43 C Maze Behemoth @Yeong-Hao Han
+44 C Mending Touch @Karla Ortiz
+45 C Mutant's Prey @Ryan Barger
+46 C Phytoburst @Izzy
+47 R Renegade Krasis @Howard Lyon
+48 C Saruli Gatekeepers @Chris Rahn
+49 R Skylasher @Dan Scott
+50 C Thrashing Mossdog @Ryan Barger
+51 R Advent of the Wurm @Lucas Graciano
+52 C Armored Wolf-Rider @Matt Stewart
+53 U Ascended Lawmage @Ryan Yee
+54 C Beetleform Mage @Marco Nelor
+55 U Blast of Genius @Terese Nielsen
+56 U Blaze Commando @James Ryman
+57 M Blood Baron of Vizkopa @Anthony Palumbo
+58 R Boros Battleshaper @Zoltan Boros
+59 U Bred for the Hunt @Karl Kopinski
+60 U Bronzebeak Moa @James Ryman
+61 U Carnage Gladiator @Ryan Barger
+62 M Council of the Absolute @Zoltan Boros
+63 M Deadbridge Chant @Zoltan Boros
+64 U Debt to the Deathless @Seb McKinnon
+65 C Deputy of Acquittals @James Ryman
+66 R Dragonshift @Svetlin Velinov
+67 C Drown in Filth @Seb McKinnon
+68 R Emmara Tandris @Mark Winters
+69 R Exava, Rakdos Blood Witch @Aleksi Briclot
+70 U Feral Animist @Dave Kendall
+71 U Fluxcharger @Willian Murai
+72 R Gaze of Granite @Nils Hamm
+73 U Gleam of Battle @Raymond Swanland
+74 U Goblin Test Pilot @Svetlin Velinov
+75 U Gruul War Chant @Dave Kendall
+76 U Haunter of Nightveil @Igor Kieryluk
+77 U Jelenn Sphinx @Wesley Burt
+78 U Korozda Gorgon @Volkan Baǵa
+79 U Krasis Incubation @Marco Nelor
+80 R Lavinia of the Tenth @Willian Murai
+81 M Legion's Initiative @Jaime Jones
+82 M Master of Cruelties @Chase Stone
+83 U Maw of the Obzedat @Randy Gallegos
+84 R Melek, Izzet Paragon @Jason Chan
+85 R Mirko Vosk, Mind Drinker @Chase Stone
+86 C Morgue Burst @Raymond Swanland
+87 C Nivix Cyclops @Wayne Reynolds
+88 R Notion Thief @Clint Cearley
+89 R Obzedat's Aid @Dan Scott
+90 C Pilfered Plans @Michael C. Hayes
+91 R Plasm Capture @Chase Stone
+92 M Progenitor Mimic @Daarken
+93 U Putrefy @Igor Kieryluk
+94 M Ral Zarek @Eric Deschamps
+95 M Reap Intellect @Steven Belledin
+96 R Render Silent @Matt Stewart
+97 U Restore the Peace @Kev Walker
+98 U Rot Farm Skeleton @Maciej Kuciara
+99 R Ruric Thar, the Unbowed @Tyler Jacobson
+100 M Savageborn Hydra @Raymond Swanland
+101 U Scab-Clan Giant @Zoltan Boros
+102 U Showstopper @Steve Prescott
+103 U Sin Collector @Mike Bierek
+104 R Sire of Insanity @Peter Mohrbacher
+105 U Species Gorger @Min Yum
+106 U Spike Jester @Ryan Barger
+107 R Tajic, Blade of the Legion @James Ryman
+108 R Teysa, Envoy of Ghosts @Karla Ortiz
+109 C Tithe Drinker @Slawomir Maniak
+110 U Trostani's Summoner @Howard Lyon
+111 U Unflinching Courage @Mike Bierek
+112 R Varolz, the Scar-Striped @Adam Paquette
+113 C Viashino Firstblade @Matt Stewart
+114 M Voice of Resurgence @Winona Nelson
+115 R Vorel of the Hull Clade @Mike Bierek
+116 U Warleader's Helix @Greg Staples
+117 U Warped Physique @Karl Kopinski
+118 U Woodlot Crawler @Greg Staples
+119 R Zhur-Taa Ancient @Adam Paquette
+120 C Zhur-Taa Druid @Mark Winters
+121 U Alive // Well @Nils Hamm
+122 U Armed // Dangerous @David Palumbo
+123 R Beck // Call @Adam Paquette
+124 R Breaking // Entering @Mathias Kollros
+125 R Catch // Release @Kev Walker
+126 U Down // Dirty @Svetlin Velinov
+127 U Far // Away @Greg Staples
+128 R Flesh // Blood @Lucas Graciano
+129 U Give // Take @Steve Prescott
+130 U Profit // Loss @Kev Walker
+131 U Protect // Serve @Ryan Barger
+132 R Ready // Willing @Zoltan Boros
+133 U Toil // Trouble @Nils Hamm
+134 U Turn // Burn @Ryan Barger
+135 U Wear // Tear @Ryan Pancoast
+136 C Azorius Cluestone @Raoul Vitale
+137 C Boros Cluestone @Raoul Vitale
+138 C Dimir Cluestone @Raoul Vitale
+139 C Golgari Cluestone @Raoul Vitale
+140 C Gruul Cluestone @Raoul Vitale
+141 C Izzet Cluestone @Raoul Vitale
+142 C Orzhov Cluestone @Raoul Vitale
+143 C Rakdos Cluestone @Raoul Vitale
+144 C Selesnya Cluestone @Raoul Vitale
+145 C Simic Cluestone @Raoul Vitale
+146 C Azorius Guildgate @Drew Baker
+147 C Boros Guildgate @Noah Bradley
+148 C Dimir Guildgate @Cliff Childs
+149 C Golgari Guildgate @Eytan Zana
+150 C Gruul Guildgate @Randy Gallegos
+151 C Izzet Guildgate @Noah Bradley
+152 M Maze's End @Cliff Childs
+153 C Orzhov Guildgate @John Avon
+154 C Rakdos Guildgate @Eytan Zana
+155 C Selesnya Guildgate @Howard Lyon
+156 C Simic Guildgate @Svetlin Velinov
 
 [Lands]
 10 Azorius Guildgate|DGM

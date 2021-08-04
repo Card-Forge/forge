@@ -7,119 +7,119 @@ Type=Boxed_Set
 ScryfallCode=DPA
 
 [cards]
-1 U Air Elemental
-2 C Boomerang
-3 C Cancel
-4 C Cloud Sprite
-5 R Counterbore
-6 U Deluge
-7 R Denizen of the Deep
-8 C Essence Scatter
-9 R Evacuation
-10 R Mahamoti Djinn
-11 U Mind Control
-12 R Mind Spring
-13 C Negate
-14 U Phantom Warrior
-15 C Snapping Drake
-16 U Thieving Magpie
-17 C Unsummon
-18 U Abyssal Specter
-19 R Ascendant Evincar
-20 U Consume Spirit
-21 U Crowd of Cinders
-22 C Drudge Skeletons
-23 C Dusk Imp
-24 C Essence Drain
-25 C Eyeblight's Ending
-26 U Megrim
-27 C Mind Rot
-28 R Mind Shatter
-29 C Moonglove Winnower
-30 R Mortivore
-31 C Ravenous Rats
-32 R Sengir Vampire
-33 C Severed Legion
-34 C Terror
-35 R Underworld Dreams
-36 C Unholy Strength
-37 U Act of Treason
-38 R Banefire
-39 U Blaze
-40 U Bloodmark Mentor
-41 C Cinder Pyromancer
-42 U Earth Elemental
-43 U Enrage
-44 R Furnace of Rath
-45 C Goblin Piker
-46 C Goblin Sky Raider
-47 C Hill Giant
-48 C Incinerate
-49 R Kamahl, Pit Fighter
-50 C Lightning Elemental
-51 U Prodigal Pyromancer
-52 R Rage Reflection
-53 R Shivan Dragon
-54 C Shock
-55 U Blanchwood Armor
-56 C Civic Wayfinder
-57 U Drove of Elves
-58 U Duskdale Wurm
-59 U Elven Riders
-60 R Elvish Champion
-61 C Elvish Eulogist
-62 U Elvish Promenade
-63 C Elvish Visionary
-64 C Elvish Warrior
-65 R Gaea's Herald
-66 C Giant Growth
-67 C Giant Spider
-68 U Greenweaver Druid
-69 U Howl of the Night Pack
-70 R Immaculate Magistrate
-71 U Imperious Perfect
-72 U Jagged-Scar Archers
-73 C Lys Alana Huntmaster
-74 R Molimo, Maro-Sorcerer
-75 C Natural Spring
-76 C Naturalize
-77 U Nature's Spiral
-78 U Overrun
-79 C Rampant Growth
-80 U River Boa
-81 U Roughshod Mentor
-82 C Runeclaw Bear
-83 C Spined Wurm
-84 R Talara's Battalion
-85 C Trained Armodon
-86 R Troll Ascetic
-87 R Verdant Force
-88 R Vigor
-89 C Wall of Wood
-90 R Coat of Arms
-91 U Demon's Horn
-92 U Dragon's Claw
-93 U Kraken's Eye
-94 R Loxodon Warhammer
-95 U The Rack
-96 C Wall of Spears
-97 U Wurm's Tooth
-98 L Island
-99 L Island
-100 L Island
-101 L Island
-102 L Swamp
-103 L Swamp
-104 L Swamp
-105 L Swamp
-106 L Mountain
-107 L Mountain
-108 L Mountain
-109 L Mountain
-110 L Forest
-111 L Forest
-112 L Forest
-113 L Forest
+1 U Air Elemental @Kev Walker
+2 C Boomerang @Arnie Swekel
+3 C Cancel @David Palumbo
+4 C Cloud Sprite @Mark Zug
+5 R Counterbore @Wayne England
+6 U Deluge @Wayne England
+7 R Denizen of the Deep @Jim Pavelec
+8 C Essence Scatter @Jon Foster
+9 R Evacuation @Franz Vohwinkel
+10 R Mahamoti Djinn @Greg Staples
+11 U Mind Control @Ryan Pancoast
+12 R Mind Spring @Mark Zug
+13 C Negate @Jeremy Jarvis
+14 U Phantom Warrior @Greg Staples
+15 C Snapping Drake @Todd Lockwood
+16 U Thieving Magpie @Una Fricker
+17 C Unsummon @Izzy
+18 U Abyssal Specter @Michael Sutfin
+19 R Ascendant Evincar @Mark Zug
+20 U Consume Spirit @Justin Sweet
+21 U Crowd of Cinders @Carl Frank
+22 C Drudge Skeletons @Daarken
+23 C Dusk Imp @Pete Venters
+24 C Essence Drain @Jim Nelson
+25 C Eyeblight's Ending @Ron Spears
+26 U Megrim @Nick Percival
+27 C Mind Rot @Steve Luke
+28 R Mind Shatter @Michael Sutfin
+29 C Moonglove Winnower @William O'Connor
+30 R Mortivore @Anthony S. Waters
+31 C Ravenous Rats @Carl Critchlow
+32 R Sengir Vampire @Kev Walker
+33 C Severed Legion @Dany Orizio
+34 C Terror @Adam Rex
+35 R Underworld Dreams @Carl Critchlow
+36 C Unholy Strength @Terese Nielsen
+37 U Act of Treason @Eric Deschamps
+38 R Banefire @Raymond Swanland
+39 U Blaze @Alex Horley-Orlandelli
+40 U Bloodmark Mentor @Dave Allsop
+41 C Cinder Pyromancer @Greg Staples
+42 U Earth Elemental @Anthony S. Waters
+43 U Enrage @Justin Sweet
+44 R Furnace of Rath @John Matson
+45 C Goblin Piker @DiTerlizzi
+46 C Goblin Sky Raider @Daren Bader
+47 C Hill Giant @Kev Walker
+48 C Incinerate @Zoltan Boros & Gabor Szikszai
+49 R Kamahl, Pit Fighter @Kev Walker
+50 C Lightning Elemental @Kev Walker
+51 U Prodigal Pyromancer @Jeremy Jarvis
+52 R Rage Reflection @Terese Nielsen & Ron Spencer
+53 R Shivan Dragon @Donato Giancola
+54 C Shock @Jon Foster
+55 U Blanchwood Armor @Paolo Parente
+56 C Civic Wayfinder @Cyril Van Der Haegen
+57 U Drove of Elves @Larry MacDougall
+58 U Duskdale Wurm @Dan Dos Santos
+59 U Elven Riders @Darrell Riche
+60 R Elvish Champion @D. Alexander Gregory
+61 C Elvish Eulogist @Ben Thompson
+62 U Elvish Promenade @Steve Ellis
+63 C Elvish Visionary @D. Alexander Gregory
+64 C Elvish Warrior @Kev Walker
+65 R Gaea's Herald @Jim Murray
+66 C Giant Growth @Matt Cavotta
+67 C Giant Spider @Randy Gallegos
+68 U Greenweaver Druid @Justin Sweet
+69 U Howl of the Night Pack @Lars Grant-West
+70 R Immaculate Magistrate @Jim Nelson
+71 U Imperious Perfect @Scott M. Fischer
+72 U Jagged-Scar Archers @Paolo Parente
+73 C Lys Alana Huntmaster @Pete Venters
+74 R Molimo, Maro-Sorcerer @Mark Zug
+75 C Natural Spring @Jeffrey R. Busch
+76 C Naturalize @Tim Hildebrandt
+77 U Nature's Spiral @Terese Nielsen
+78 U Overrun @Carl Critchlow
+79 C Rampant Growth @Steven Belledin
+80 U River Boa @Paul Bonner
+81 U Roughshod Mentor @Steven Belledin
+82 C Runeclaw Bear @Jesper Ejsing
+83 C Spined Wurm @Carl Critchlow
+84 R Talara's Battalion @Todd Lockwood
+85 C Trained Armodon @Gary Leach
+86 R Troll Ascetic @Puddnhead
+87 R Verdant Force @DiTerlizzi
+88 R Vigor @Jim Murray
+89 C Wall of Wood @Rebecca Guay
+90 R Coat of Arms @Scott M. Fischer
+91 U Demon's Horn @Alan Pollack
+92 U Dragon's Claw @Alan Pollack
+93 U Kraken's Eye @Alan Pollack
+94 R Loxodon Warhammer @Jeremy Jarvis
+95 U The Rack @Nic Klein
+96 C Wall of Spears @Christopher Moeller
+97 U Wurm's Tooth @Alan Pollack
+98 L Island @Rob Alexander
+99 L Island @John Avon
+100 L Island @Scott Bailey
+101 L Island @Fred Fields
+102 L Swamp @Dan Frazier
+103 L Swamp @Alex Horley-Orlandelli
+104 L Swamp @Jim Pavelec
+105 L Swamp @Alan Pollack
+106 L Mountain @Rob Alexander
+107 L Mountain @Nils Hamm
+108 L Mountain @Karl Kopinski
+109 L Mountain @Sam Wood
+110 L Forest @Glen Angus
+111 L Forest @John Avon
+112 L Forest @Steven Belledin
+113 L Forest @Jim Nelson
 
 [tokens]
 g_1_1_elf_warrior

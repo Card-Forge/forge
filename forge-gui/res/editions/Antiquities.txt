@@ -12,106 +12,106 @@ Foil=NotSupported
 ScryfallCode=ATQ
 
 [cards]
-36 C Amulet of Kroog
-1 R Argivian Archaeologist
-2 C Argivian Blacksmith
-29 C Argothian Pixies
-30 C Argothian Treefolk
-37 U Armageddon Clock
-22 C Artifact Blast
-15 C Artifact Possession
-3 C Artifact Ward
-38 U Ashnod's Altar
-39 U Ashnod's Battle Gear
-40 U Ashnod's Transmogrant
-23 C Atog
-41 C Battering Ram
-42 R Bronze Tablet
-43 R Candelabra of Tawnos
-4 U Circle of Protection: Artifacts
-31 U Citanul Druid
-44 C Clay Statue
-45 R Clockwork Avian
-46 R Colossus of Sardia
-47 R Coral Helm
-32 C Crumble
-48 U Cursed Rack
-5 U Damping Field
-24 U Detonate
-8 C Drafna's Restoration
-49 C Dragon Engine
-25 U Dwarven Weaponsmith
-9 U Energy Flux
-50 U Feldon's Cane
-33 R Gaea's Avenger
-16 U Gate to Phyrexia
-26 U Goblin Artisans
-51 R Golgothian Sylex
-52 C Grapeshot Catapult
-17 U Haunting Wind
-10 R Hurkyl's Recall
-53 U Ivory Tower
-54 U Jalum Tome
-6 U Martyrs of Korlis
-55 U Mightstone
-56 U Millstone
-80c R Mishra's Factory
-80b R Mishra's Factory
-80a U Mishra's Factory
-80d R Mishra's Factory
-57 R Mishra's War Machine
-81 R Mishra's Workshop
-58 R Obelisk of Undoing
-59 U Onulet
-27 C Orcish Mechanics
-60 C Ornithopter
-18 C Phyrexian Gremlins
-11 U Power Artifact
-34 U Powerleech
-19 C Priest of Yawgmoth
-61 U Primal Clay
-62 U Rakalite
-12 C Reconstruction
-7 C Reverse Polarity
-63 U Rocket Launcher
-13 C Sage of Lat-Nam
-64 R Shapeshifter
-28 R Shatterstorm
-65 C Staff of Zegon
-82d R Strip Mine
-82b R Strip Mine
-82c R Strip Mine
-82a U Strip Mine
-66 U Su-Chi
-67 C Tablet of Epityr
-68 R Tawnos's Coffin
-69 U Tawnos's Wand
-70 U Tawnos's Weaponry
-71 R Tetravus
-72 U The Rack
-35 U Titania's Song
-14 U Transmute Artifact
-73 R Triskelion
-74 R Urza's Avenger
-75 C Urza's Chalice
-83c C Urza's Mine
-83b U Urza's Mine
-83a C Urza's Mine
-83d U Urza's Mine
-76 R Urza's Miter
-84b U Urza's Power Plant
-84a C Urza's Power Plant
-84c C Urza's Power Plant
-84d U Urza's Power Plant
-85c U Urza's Tower
-85b U Urza's Tower
-85a C Urza's Tower
-85d U Urza's Tower
-77 U Wall of Spears
-78 U Weakstone
-20 U Xenic Poltergeist
-21 R Yawgmoth Demon
-79 C Yotian Soldier
+36 C Amulet of Kroog @Margaret Organ-Kean
+1 R Argivian Archaeologist @Amy Weber
+2 C Argivian Blacksmith @Kerstin Kaman
+29 C Argothian Pixies @Amy Weber
+30 C Argothian Treefolk @Amy Weber
+37 U Armageddon Clock @Amy Weber
+22 C Artifact Blast @Mark Poole
+15 C Artifact Possession @Christopher Rush
+3 C Artifact Ward @Douglas Shuler
+38 U Ashnod's Altar @Anson Maddocks
+39 U Ashnod's Battle Gear @Mark Poole
+40 U Ashnod's Transmogrant @Mark Tedin
+23 C Atog @Jesper Myrfors
+41 C Battering Ram @Jeff A. Menges
+42 R Bronze Tablet @Tom Wänerstrand
+43 R Candelabra of Tawnos @Douglas Shuler
+4 U Circle of Protection: Artifacts @Pete Venters
+31 U Citanul Druid @Jeff A. Menges
+44 C Clay Statue @Jesper Myrfors
+45 R Clockwork Avian @Randy Asplund-Faith
+46 R Colossus of Sardia @Jesper Myrfors
+47 R Coral Helm @Amy Weber
+32 C Crumble @Jesper Myrfors
+48 U Cursed Rack @Richard Thomas
+5 U Damping Field @Justin Hampton
+24 U Detonate @Randy Asplund-Faith
+8 C Drafna's Restoration @Amy Weber
+49 C Dragon Engine @Anson Maddocks
+25 U Dwarven Weaponsmith @Mark Poole
+9 U Energy Flux @Kaja Foglio
+50 U Feldon's Cane @Mark Tedin
+33 R Gaea's Avenger @Pete Venters
+16 U Gate to Phyrexia @Sandra Everingham
+26 U Goblin Artisans @Julie Baroh
+51 R Golgothian Sylex @Kerstin Kaman
+52 C Grapeshot Catapult @Dan Frazier
+17 U Haunting Wind @Jeff A. Menges
+10 R Hurkyl's Recall @NéNé Thomas
+53 U Ivory Tower @Margaret Organ-Kean
+54 U Jalum Tome @Tom Wänerstrand
+6 U Martyrs of Korlis @Margaret Organ-Kean
+55 U Mightstone @Pete Venters
+56 U Millstone @Kaja Foglio
+80c R Mishra's Factory @Kaja Foglio & Phil Foglio
+80b R Mishra's Factory @Kaja Foglio & Phil Foglio
+80a U Mishra's Factory @Kaja Foglio & Phil Foglio
+80d R Mishra's Factory @Kaja Foglio & Phil Foglio
+57 R Mishra's War Machine @Amy Weber
+81 R Mishra's Workshop @Kaja Foglio
+58 R Obelisk of Undoing @Tom Wänerstrand
+59 U Onulet @Anson Maddocks
+27 C Orcish Mechanics @Pete Venters
+60 C Ornithopter @Amy Weber
+18 C Phyrexian Gremlins @Amy Weber
+11 U Power Artifact @Douglas Shuler
+34 U Powerleech @Christopher Rush
+19 C Priest of Yawgmoth @Mark Tedin
+61 U Primal Clay @Kaja Foglio
+62 U Rakalite @Christopher Rush
+12 C Reconstruction @Anson Maddocks
+7 C Reverse Polarity @Justin Hampton
+63 U Rocket Launcher @Pete Venters
+13 C Sage of Lat-Nam @Pete Venters
+64 R Shapeshifter @Dan Frazier
+28 R Shatterstorm @Mark Poole
+65 C Staff of Zegon @Mark Poole
+82d R Strip Mine @Daniel Gelon
+82b R Strip Mine @Daniel Gelon
+82c R Strip Mine @Daniel Gelon
+82a U Strip Mine @Daniel Gelon
+66 U Su-Chi @Christopher Rush
+67 C Tablet of Epityr @Christopher Rush
+68 R Tawnos's Coffin @Christopher Rush
+69 U Tawnos's Wand @Douglas Shuler
+70 U Tawnos's Weaponry @Dan Frazier
+71 R Tetravus @Mark Tedin
+72 U The Rack @Richard Thomas
+35 U Titania's Song @Kerstin Kaman
+14 U Transmute Artifact @Anson Maddocks
+73 R Triskelion @Douglas Shuler
+74 R Urza's Avenger @Amy Weber
+75 C Urza's Chalice @Jeff A. Menges
+83c C Urza's Mine @Anson Maddocks
+83b U Urza's Mine @Anson Maddocks
+83a C Urza's Mine @Anson Maddocks
+83d U Urza's Mine @Anson Maddocks
+76 R Urza's Miter @Randy Asplund-Faith
+84b U Urza's Power Plant @Mark Tedin
+84a C Urza's Power Plant @Mark Tedin
+84c C Urza's Power Plant @Mark Tedin
+84d U Urza's Power Plant @Mark Tedin
+85c U Urza's Tower @Mark Poole
+85b U Urza's Tower @Mark Poole
+85a C Urza's Tower @Mark Poole
+85d U Urza's Tower @Mark Poole
+77 U Wall of Spears @Sandra Everingham
+78 U Weakstone @Justin Hampton
+20 U Xenic Poltergeist @Dan Frazier
+21 R Yawgmoth Demon @Sandra Everingham
+79 C Yotian Soldier @Christopher Rush
 
 [tokens]
 c_1_1_a_tetravite_flying_noenchant

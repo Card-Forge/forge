@@ -11,94 +11,94 @@ FoilAlwaysInCommonSlot=False
 ScryfallCode=UGL
 
 [cards]
-1 U Charm School
-2 R The Cheese Stands Alone
-3 C Double Dip
-4 U Get a Life
-5 R I'm Rubber, You're Glue
-6 C Knight of the Hokey Pokey
-7 U Lexivore
-8 R Look at Me, I'm the DCI
-9 C Mesa Chicken
-10 U Miss Demeanor
-11 R Once More with Feeling
-12 C Prismatic Wardrobe
-13 C Sex Appeal
-14 R Bureaucracy
-15 U Censorship
-16 U Checks and Balances
-17 R Chicken a la King
-18 C Clambassadors
-19 C Clam-I-Am
-20 C Clam Session
-21 C Common Courtesy
-22 C Denied!
-23 C Double Take
-24 C Fowl Play
-25 R Free-for-All
-26 R Psychic Network
-27 U Sorry
-28 R B.F.M. (Big Furry Monster) A
-29 R B.F.M. (Big Furry Monster) B
-30 C Deadhead
-31 C Double Cross
-32 U Handcuffs
-33 R Infernal Spawn of Evil
-34 U Jumbo Imp
-35 C Organ Harvest
-36 R Ow
-37 C Poultrygeist
-38 C Temp of the Damned
-39 U Volrath's Motion Sensor
-40 R Burning Cinder Fury of Crimson Chaos Fire
-41 C Chicken Egg
-42 C Double Deal
-43 C Goblin Bookie
-44 C Goblin Bowling Team
-45 U Goblin Tutor
-46 C Hurloon Wrangler
-47 R Jalum Grifter
-48 C Krazy Kow
-49 R Landfill
-50 U Ricochet
-51 R Spark Fiend
-52 R Strategy, Schmategy
-53 U The Ultimate Nightmare of Wizards of the Coast Customer Service
-54 R Cardboard Carapace
-55 C Double Play
-56 C Elvish Impersonators
-57 U Flock of Rabid Sheep
-58 C Free-Range Chicken
-59 U Gerrymandering
-60 C Ghazban Ogress
-61 C Growth Spurt
-62 C Gus
-63 U Hungry Hungry Heifer
-64 R Incoming!
-65 R Mine, Mine, Mine!
-66 R Squirrel Farm
-67 C Team Spirit
-68 R Timmy, Power Gamer
-69 R Ashnod's Coupon
-70 R Blacker Lotus
-71 U Bronze Calendar
-72 C Chaos Confetti
-73 U Clay Pigeon
-74 R Giant Fan
-75 R Jack-in-the-Mox
-76 R Jester's Sombrero
-77 R Mirror Mirror
-78 C Paper Tiger
-79 C Rock Lobster
-80 C Scissors Lizard
-81 U Spatula of the Ages
-82 U Urza's Contact Lenses
-83 U Urza's Science Fair Project
-84 L Plains
-85 L Island
-86 L Swamp
-87 L Mountain
-88 L Forest
+1 U Charm School @Kaja Foglio
+2 R The Cheese Stands Alone @Randy Elliott
+3 C Double Dip @D. Alexander Gregory
+4 U Get a Life @Melissa A. Benson
+5 R I'm Rubber, You're Glue @Claymore J. Flapdoodle
+6 C Knight of the Hokey Pokey @Kev Walker
+7 U Lexivore @Daniel Gelon
+8 R Look at Me, I'm the DCI @Mark Rosewater
+9 C Mesa Chicken @Kev Walker
+10 U Miss Demeanor @Matthew D. Wilson
+11 R Once More with Feeling @Terese Nielsen
+12 C Prismatic Wardrobe @D. Alexander Gregory
+13 C Sex Appeal @Matthew D. Wilson
+14 R Bureaucracy @Mark Zug
+15 U Censorship @Matthew D. Wilson
+16 U Checks and Balances @David A. Cherry
+17 R Chicken à la King @Mark Zug
+18 C Clambassadors @Randy Elliott
+19 C Clam-I-Am @Randy Elliott
+20 C Clam Session @Randy Elliott
+21 C Common Courtesy @Mike Raabe
+22 C Denied! @Quinton Hoover
+23 C Double Take @Claymore J. Flapdoodle
+24 C Fowl Play @Mark Poole
+25 R Free-for-All @Claymore J. Flapdoodle
+26 R Psychic Network @Claymore J. Flapdoodle
+27 U Sorry @Kaja Foglio
+28 R B.F.M. (Big Furry Monster) A @Douglas Shuler
+29 R B.F.M. (Big Furry Monster) B @Douglas Shuler
+30 C Deadhead @Daren Bader
+31 C Double Cross @Jeff Laubenstein
+32 U Handcuffs @Jeff Laubenstein
+33 R Infernal Spawn of Evil @Ron Spencer
+34 U Jumbo Imp @Pete Venters
+35 C Organ Harvest @Terese Nielsen
+36 R Ow @Edward P. Beard, Jr.
+37 C Poultrygeist @Daren Bader
+38 C Temp of the Damned @Adam Rex
+39 U Volrath's Motion Sensor @Mark Tedin
+40 R Burning Cinder Fury of Crimson Chaos Fire @Richard Kane Ferguson
+41 C Chicken Egg @Christopher Rush
+42 C Double Deal @Edward P. Beard, Jr.
+43 C Goblin Bookie @Claymore J. Flapdoodle
+44 C Goblin Bowling Team @Pete Venters
+45 U Goblin Tutor @Quinton Hoover
+46 C Hurloon Wrangler @Kaja Foglio
+47 R Jalum Grifter @Claymore J. Flapdoodle
+48 C Krazy Kow @Ron Spencer
+49 R Landfill @Daren Bader
+50 U Ricochet @David A. Cherry
+51 R Spark Fiend @Pete Venters
+52 R Strategy, Schmategy @Daniel Gelon
+53 U The Ultimate Nightmare of Wizards of the Coast Customer Service @Melissa A. Benson
+54 R Cardboard Carapace @Douglas Shuler
+55 C Double Play @Claymore J. Flapdoodle
+56 C Elvish Impersonators @Claymore J. Flapdoodle
+57 U Flock of Rabid Sheep @Anthony S. Waters
+58 C Free-Range Chicken @Mike Raabe
+59 U Gerrymandering @Doug Chaffee
+60 C Ghazban Ogress @Mike Raabe
+61 C Growth Spurt @Jeff Laubenstein
+62 C Gus @DiTerlizzi
+63 U Hungry Hungry Heifer @Randy Gallegos
+64 R Incoming! @Quinton Hoover
+65 R Mine, Mine, Mine! @Heather Hudson
+66 R Squirrel Farm @Ron Spencer
+67 C Team Spirit @Terese Nielsen
+68 R Timmy, Power Gamer @Edward P. Beard, Jr.
+69 R Ashnod's Coupon @Edward P. Beard, Jr.
+70 R Blacker Lotus @Christopher Rush
+71 U Bronze Calendar @Melissa A. Benson
+72 C Chaos Confetti @Mark Tedin
+73 U Clay Pigeon @D. Alexander Gregory
+74 R Giant Fan @Randy Gallegos
+75 R Jack-in-the-Mox @Dan Frazier
+76 R Jester's Sombrero @Dan Frazier
+77 R Mirror Mirror @Kaja Foglio
+78 C Paper Tiger @Heather Hudson
+79 C Rock Lobster @Heather Hudson
+80 C Scissors Lizard @Heather Hudson
+81 U Spatula of the Ages @Melissa A. Benson
+82 U Urza's Contact Lenses @David A. Cherry
+83 U Urza's Science Fair Project @Claymore J. Flapdoodle
+84 L Plains @Christopher Rush
+85 L Island @Daren Bader
+86 L Swamp @Mark Zug
+87 L Mountain @Tom Wänerstrand
+88 L Forest @Terese Nielsen
 
 [tokens]
 rabid_sheep

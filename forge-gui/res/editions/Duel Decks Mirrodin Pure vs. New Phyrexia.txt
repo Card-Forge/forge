@@ -8,94 +8,94 @@ Type=Online
 ScryfallCode=TD2
 
 [cards]
-1 M Platinum Angel
-2 U Memnite
-3 C Steel Wall
-4 C Ardent Recruit
-5 C Vedalken Certarch
-6 C Gold Myr
-7 U Myr Retriever
-8 C Silver Myr
-9 U Trinket Mage
-10 R Grand Architect
-11 R Silent Arbiter
-12 U Glimmerpoint Stag
-13 R Argent Sphinx
-14 R Kuldotha Forgemaster
-15 C Spire Serpent
-16 U Darksteel Sentinel
-17 R Duplicant
-18 U Lumengrid Gargoyle
-19 U Darksteel Gargoyle
-20 C Bonesplitter
-21 C Slagwurm Armor
-22 U Condemn
-23 U Dispatch
-24 U Steelshaper's Gift
-25 C Neurok Stealthsuit
-26 U Talisman of Progress
-27 U Viridian Claw
-28 U Purge
-29 U Test of Faith
-30 C Turn the Tide
-31 U Thunderstaff
-32 C Arrest
-33 U Thirst for Knowledge
-34 C Stoic Rebuttal
-35 R White Sun's Zenith
-36 C Ancient Den
-37 R Blinkmoth Nexus
-38 U Coastal Tower
-39 U Forbidding Watchtower
-40 C Seat of the Synod
-41 C Terramorphic Expanse
-42 L Plains
-43 L Plains
-44 L Plains
-45 L Island
-46 L Island
-47 L Island
-48 M Phyrexian Plaguelord
-49 C Fume Spitter
-50 C Myr Sire
-51 U Plague Myr
-52 C Viridian Emissary
-53 C Phyrexian Ghoul
-54 C Rot Wolf
-55 R Necroskitter
-56 U Viridian Corrupter
-57 R Desecration Elemental
-58 U Flesh-Eater Imp
-59 C Symbiotic Elf
-60 U Soul Snuffers
-61 R Mitotic Slime
-62 U Plaguemaw Beast
-63 U Phyrexian Juggernaut
-64 U Drooling Groodion
-65 R Protean Hulk
-66 C Innocent Blood
-67 U Contagion Clasp
-68 U Mortarpod
-69 U Spawning Pit
-70 U Exhume
-71 R Phyrexian Altar
-72 C Morbid Plunder
-73 U Putrefy
-74 U Grafted Exoskeleton
-75 U Diabolic Servitude
-76 U Barter in Blood
-77 R Reprocess
-78 U Triumph of the Hordes
-79 C Spread the Sickness
-80 U One Dozen Eyes
-81 R Black Sun's Zenith
-82 U Tainted Wood
-83 L Swamp
-84 L Swamp
-85 L Swamp
-86 L Forest
-87 L Forest
-88 L Forest
+1 M Platinum Angel @Brom
+2 U Memnite @Svetlin Velinov
+3 C Steel Wall @David Day
+4 C Ardent Recruit @Mike Bierek
+5 C Vedalken Certarch @Karl Kopinski
+6 C Gold Myr @Alan Pollack
+7 U Myr Retriever @Trevor Hairsine
+8 C Silver Myr @Alan Pollack
+9 U Trinket Mage @Scott Chou
+10 R Grand Architect @Steven Belledin
+11 R Silent Arbiter @Mark Zug
+12 U Glimmerpoint Stag @Ryan Pancoast
+13 R Argent Sphinx @Chris Rahn
+14 R Kuldotha Forgemaster @jD
+15 C Spire Serpent @Johann Bodin
+16 U Darksteel Sentinel @Erica Yang
+17 R Duplicant @Thomas M. Baxa
+18 U Lumengrid Gargoyle @Randis Albion
+19 U Darksteel Gargoyle @Ron Spencer
+20 C Bonesplitter @Darrell Riche
+21 C Slagwurm Armor @Justin Sweet
+22 U Condemn @Daren Bader
+23 U Dispatch @Erica Yang
+24 U Steelshaper's Gift @Greg Hildebrandt
+25 C Neurok Stealthsuit @Francis Tsai
+26 U Talisman of Progress @Mike Dringenberg
+27 U Viridian Claw @Marc Simonetti
+28 U Purge @Pete Venters
+29 U Test of Faith @Vance Kovacs
+30 C Turn the Tide @Jason Felix
+31 U Thunderstaff @Kaja Foglio
+32 C Arrest @Daarken
+33 U Thirst for Knowledge @Ben Thompson
+34 C Stoic Rebuttal @Chris Rahn
+35 R White Sun's Zenith @Mike Bierek
+36 C Ancient Den @Rob Alexander
+37 R Blinkmoth Nexus @Brian Snõddy
+38 U Coastal Tower @Don Hazeltine
+39 U Forbidding Watchtower @Aleksi Briclot
+40 C Seat of the Synod @John Avon
+41 C Terramorphic Expanse @Dan Scott
+42 L Plains @James Paick
+43 L Plains @John Avon
+44 L Plains @Martina Pilcerova
+45 L Island @John Avon
+46 L Island @Jung Park
+47 L Island @Jung Park
+48 M Phyrexian Plaguelord @Kev Walker
+49 C Fume Spitter @Nils Hamm
+50 C Myr Sire @Jaime Jones
+51 U Plague Myr @Efrem Palacios
+52 C Viridian Emissary @Matt Stewart
+53 C Phyrexian Ghoul @Pete Venters
+54 C Rot Wolf @Nils Hamm
+55 R Necroskitter @Jaime Jones
+56 U Viridian Corrupter @Matt Cavotta
+57 R Desecration Elemental @Pete Venters
+58 U Flesh-Eater Imp @Johann Bodin
+59 C Symbiotic Elf @Wayne England
+60 U Soul Snuffers @Izzy
+61 R Mitotic Slime @Raymond Swanland
+62 U Plaguemaw Beast @Whit Brachna
+63 U Phyrexian Juggernaut @Kev Walker
+64 U Drooling Groodion @Kev Walker
+65 R Protean Hulk @Matt Cavotta
+66 C Innocent Blood @Carl Critchlow
+67 U Contagion Clasp @Anthony Palumbo
+68 U Mortarpod @Eric Deschamps
+69 U Spawning Pit @Tony Szczudlo
+70 U Exhume @Carl Critchlow
+71 R Phyrexian Altar @Ron Spears
+72 C Morbid Plunder @Mike Bierek
+73 U Putrefy @Jim Nelson
+74 U Grafted Exoskeleton @Allen Williams
+75 U Diabolic Servitude @Scott M. Fischer
+76 U Barter in Blood @Paolo Parente
+77 R Reprocess @Mark Tedin
+78 U Triumph of the Hordes @Izzy
+79 C Spread the Sickness @Jaime Jones
+80 U One Dozen Eyes @Darrell Riche
+81 R Black Sun's Zenith @Daniel Ljunggren
+82 U Tainted Wood @Rob Alexander
+83 L Swamp @Lars Grant-West
+84 L Swamp @Lars Grant-West
+85 L Swamp @Lars Grant-West
+86 L Forest @Mark Tedin
+87 L Forest @Mark Tedin
+88 L Forest @Mark Tedin
 
 [tokens]
 w_2_2_cat

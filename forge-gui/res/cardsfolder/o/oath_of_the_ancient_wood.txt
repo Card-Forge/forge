@@ -1,8 +1,7 @@
 Name:Oath of the Ancient Wood
 ManaCost:2 G
 Types:Enchantment
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.Other+YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME or another enchantment enters the battlefield under your control, you may put a +1/+1 counter on target creature.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | Secondary$ True | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME or another enchantment enters the battlefield under your control, you may put a +1/+1 counter on target creature.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Enchantment.Other+YouCtrl | Execute$ TrigPutCounter | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME or another enchantment enters the battlefield under your control, you may put a +1/+1 counter on target creature.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oath_of_the_ancient_wood.jpg

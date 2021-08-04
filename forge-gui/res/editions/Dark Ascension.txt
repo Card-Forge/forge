@@ -13,164 +13,164 @@ ChaosDraftThemes=GRAVEYARD_MATTERS
 ScryfallCode=DKA
 
 [cards]
-81 U Afflicted Deserter
-82 R Alpha Brawl
-144 U Altar of the Lost
-1 M Archangel's Light
-27 C Artful Dodge
-145 U Avacyn's Collar
-2 C Bar the Door
-28 M Beguiler of Wills
-54 C Black Cat
-83 U Blood Feud
-29 C Bone to Ash
-3 C Break of Day
-108 U Briarpack Alpha
-4 C Burden of Guilt
-84 U Burning Oil
-30 R Call to the Kindred
-146 U Chalice of Life
-31 C Chant of the Skifsang
-32 U Chill of Foreboding
-55 C Chosen of Markov
-109 C Clinging Mists
-33 R Counterlash
-110 C Crushing Vines
-85 R Curse of Bloodletting
-34 R Curse of Echoes
-5 U Curse of Exhaustion
-56 R Curse of Misfortunes
-57 U Curse of Thirst
-111 C Dawntreader Elk
-58 U Deadly Allure
-59 C Death's Caress
-112 R Deranged Outcast
-135 U Diregraf Captain
-35 C Divination
-136 U Drogskol Captain
-137 M Drogskol Reaver
-36 R Dungeon Geists
-147 M Elbrus, the Binding Blade
-6 C Elgaud Inquisitor
-86 C Erdwal Ripper
-155 C Evolving Wilds
-148 C Executioner's Hood
-7 U Faith's Shield
-87 C Faithless Looting
-138 M Falkenrath Aristocrat
-60 C Falkenrath Torturer
-61 U Farbog Boneflinger
-113 C Favor of the Woods
-114 R Feed the Pack
-62 R Fiend of the Shadows
-88 C Fires of Undeath
-89 R Flayer of the Hatebound
-90 C Fling
-91 C Forge Devil
-8 C Gather the Townsfolk
-9 U Gavony Ironwright
-63 R Geralf's Messenger
-37 R Geralf's Mindcrusher
-115 R Ghoultree
-149 R Grafdigger's Cage
-64 R Gravecrawler
-65 C Gravepurge
-116 U Gravetiller Wurm
-156 R Grim Backwoods
-117 U Grim Flowering
-38 C Griptide
-66 C Gruesome Discovery
-67 U Harrowing Journey
-157 C Haunted Fengraf
-139 M Havengul Lich
-39 R Havengul Runebinder
-40 C Headless Skaab
-150 C Heavy Mattock
-92 U Heckling Fiends
-93 R Hellrider
-151 M Helvault
-68 C Highborn Ghoul
-94 C Hinterland Hermit
-118 C Hollowhenge Beast
-10 U Hollowhenge Spirit
-119 C Hunger of the Howlpack
-140 M Huntmaster of the Fells
-141 U Immerwolf
-69 R Increasing Ambition
-41 R Increasing Confusion
-11 R Increasing Devotion
-120 R Increasing Savagery
-95 R Increasing Vengeance
-152 R Jar of Eyeballs
-121 C Kessig Recluse
-122 U Lambholt Elder
-12 U Lingering Souls
-123 R Lost in the Woods
-13 C Loyal Cathar
-96 R Markov Blademaster
-97 U Markov Warlord
-14 C Midnight Guard
-70 M Mikaeus, the Unhallowed
-98 R Mondronen Shaman
-99 M Moonveil Dragon
-42 U Mystic Retrieval
-100 C Nearheath Stalker
-43 C Nephalia Seakite
-44 U Niblis of the Breath
-15 C Niblis of the Mist
-16 U Niblis of the Urn
-124 R Predator Ooze
-101 U Pyreheart Wolf
-71 R Ravenous Demon
-17 C Ray of Revelation
-72 C Reap the Seagraf
-45 U Relentless Skaabs
-18 R Requiem Angel
-102 C Russet Wolves
-19 C Sanctuary Cat
-46 C Saving Grasp
-103 C Scorch the Fields
-125 C Scorned Villager
-47 C Screeching Skaab
-20 R Seance
-48 U Secrets of the Dead
-104 U Shattered Perception
-49 C Shriekgeist
-73 C Sightless Ghoul
-21 C Silverclaw Griffin
-22 C Skillful Lunge
-74 U Skirsdag Flayer
-126 C Somberwald Dryad
-142 M Sorin, Lord of Innistrad
-50 U Soul Seizer
-75 C Spiteful Shadows
-51 C Stormbound Geist
-127 U Strangleroot Geist
-143 U Stromkirk Captain
-23 R Sudden Disappearance
-105 C Talons of Falkenrath
-24 R Thalia, Guardian of Thraben
-52 C Thought Scour
-25 R Thraben Doomsayer
-26 U Thraben Heretic
-106 C Torch Fiend
-53 U Tower Geist
-128 U Tracker's Instincts
-76 C Tragic Slip
-129 C Ulvenwald Bear
-77 C Undying Evil
-158 R Vault of the Archangel
-78 U Vengeful Vampire
-130 U Village Survivors
-131 M Vorapede
-79 U Wakedancer
-153 U Warden of the Wall
-132 C Wild Hunger
-133 R Wolfbitten Captive
-154 U Wolfhunter's Quiver
-107 C Wrack with Madness
-134 C Young Wolf
-80 R Zombie Apocalypse
+81 U Afflicted Deserter @David Palumbo
+82 R Alpha Brawl @Randy Gallegos
+144 U Altar of the Lost @Daarken
+1 M Archangel's Light @Volkan Baǵa
+27 C Artful Dodge @Tomasz Jedruszek
+145 U Avacyn's Collar @James Paick
+2 C Bar the Door @Ryan Pancoast
+28 M Beguiler of Wills @Eric Deschamps
+54 C Black Cat @David Palumbo
+83 U Blood Feud @Winona Nelson
+29 C Bone to Ash @Clint Cearley
+3 C Break of Day @Karl Kopinski
+108 U Briarpack Alpha @Daarken
+4 C Burden of Guilt @John Stanko
+84 U Burning Oil @Trevor Claxton
+30 R Call to the Kindred @Jason A. Engle
+146 U Chalice of Life @Ryan Yee
+31 C Chant of the Skifsang @Nils Hamm
+32 U Chill of Foreboding @Terese Nielsen
+55 C Chosen of Markov @Steve Argyle
+109 C Clinging Mists @Anthony Francisco
+33 R Counterlash @Austin Hsu
+110 C Crushing Vines @Scott Chou
+85 R Curse of Bloodletting @Michael C. Hayes
+34 R Curse of Echoes @Slawomir Maniak
+5 U Curse of Exhaustion @Slawomir Maniak
+56 R Curse of Misfortunes @Terese Nielsen
+57 U Curse of Thirst @Christopher Moeller
+111 C Dawntreader Elk @John Avon
+58 U Deadly Allure @Steve Argyle
+59 C Death's Caress @James Ryman
+112 R Deranged Outcast @Nils Hamm
+135 U Diregraf Captain @Slawomir Maniak
+35 C Divination @Scott Chou
+136 U Drogskol Captain @Peter Mohrbacher
+137 M Drogskol Reaver @Vincent Proce
+36 R Dungeon Geists @Nils Hamm
+147 M Elbrus, the Binding Blade @Eric Deschamps
+6 C Elgaud Inquisitor @Slawomir Maniak
+86 C Erdwal Ripper @Kev Walker
+155 C Evolving Wilds @Cliff Childs
+148 C Executioner's Hood @Anthony Palumbo
+7 U Faith's Shield @Svetlin Velinov
+87 C Faithless Looting @Gabor Szikszai
+138 M Falkenrath Aristocrat @Igor Kieryluk
+60 C Falkenrath Torturer @Steve Argyle
+61 U Farbog Boneflinger @Tomasz Jedruszek
+113 C Favor of the Woods @Tomasz Jedruszek
+114 R Feed the Pack @Steve Prescott
+62 R Fiend of the Shadows @Igor Kieryluk
+88 C Fires of Undeath @Jason Chan
+89 R Flayer of the Hatebound @Jana Schirmer & Johannes Voss
+90 C Fling @Izzy
+91 C Forge Devil @Austin Hsu
+8 C Gather the Townsfolk @Dan Scott
+9 U Gavony Ironwright @Karl Kopinski
+63 R Geralf's Messenger @Kev Walker
+37 R Geralf's Mindcrusher @Steven Belledin
+115 R Ghoultree @Volkan Baǵa
+149 R Grafdigger's Cage @Daniel Ljunggren
+64 R Gravecrawler @Steven Belledin
+65 C Gravepurge @Zoltan Boros
+116 U Gravetiller Wurm @Slawomir Maniak
+156 R Grim Backwoods @Vincent Proce
+117 U Grim Flowering @Adam Paquette
+38 C Griptide @Igor Kieryluk
+66 C Gruesome Discovery @John Stanko
+67 U Harrowing Journey @James Paick
+157 C Haunted Fengraf @Adam Paquette
+139 M Havengul Lich @James Ryman
+39 R Havengul Runebinder @Bud Cook
+40 C Headless Skaab @Johann Bodin
+150 C Heavy Mattock @Winona Nelson
+92 U Heckling Fiends @Clint Cearley
+93 R Hellrider @Svetlin Velinov
+151 M Helvault @Jaime Jones
+68 C Highborn Ghoul @Volkan Baǵa
+94 C Hinterland Hermit @Steven Belledin
+118 C Hollowhenge Beast @Dave Kendall
+10 U Hollowhenge Spirit @Lars Grant-West
+119 C Hunger of the Howlpack @Nils Hamm
+140 M Huntmaster of the Fells @Chris Rahn
+141 U Immerwolf @Terese Nielsen
+69 R Increasing Ambition @Volkan Baǵa
+41 R Increasing Confusion @Dan Scott
+11 R Increasing Devotion @Daniel Ljunggren
+120 R Increasing Savagery @Steve Prescott
+95 R Increasing Vengeance @Anthony Francisco
+152 R Jar of Eyeballs @Jaime Jones
+121 C Kessig Recluse @Vincent Proce
+122 U Lambholt Elder @Matt Stewart
+12 U Lingering Souls @Bud Cook
+123 R Lost in the Woods @Matt Stewart
+13 C Loyal Cathar @Ryan Pancoast
+96 R Markov Blademaster @Jana Schirmer & Johannes Voss
+97 U Markov Warlord @Cynthia Sheppard
+14 C Midnight Guard @Jason A. Engle
+70 M Mikaeus, the Unhallowed @Chris Rahn
+98 R Mondronen Shaman @Mike Sass
+99 M Moonveil Dragon @Todd Lockwood
+42 U Mystic Retrieval @Scott Chou
+100 C Nearheath Stalker @Michael C. Hayes
+43 C Nephalia Seakite @Wayne England
+44 U Niblis of the Breath @Igor Kieryluk
+15 C Niblis of the Mist @Igor Kieryluk
+16 U Niblis of the Urn @Igor Kieryluk
+124 R Predator Ooze @Ryan Yee
+101 U Pyreheart Wolf @Lars Grant-West
+71 R Ravenous Demon @Igor Kieryluk
+17 C Ray of Revelation @Cliff Childs
+72 C Reap the Seagraf @James Ryman
+45 U Relentless Skaabs @Karl Kopinski
+18 R Requiem Angel @Eric Deschamps
+102 C Russet Wolves @Christopher Moeller
+19 C Sanctuary Cat @David Palumbo
+46 C Saving Grasp @Matt Stewart
+103 C Scorch the Fields @Jaime Jones
+125 C Scorned Villager @Cynthia Sheppard
+47 C Screeching Skaab @Clint Cearley
+20 R Seance @David Rapoza
+48 U Secrets of the Dead @Eytan Zana
+104 U Shattered Perception @Terese Nielsen
+49 C Shriekgeist @Raymond Swanland
+73 C Sightless Ghoul @Svetlin Velinov
+21 C Silverclaw Griffin @Daniel Ljunggren
+22 C Skillful Lunge @Jason Felix
+74 U Skirsdag Flayer @Austin Hsu
+126 C Somberwald Dryad @Jaime Jones
+142 M Sorin, Lord of Innistrad @Michael Komarck
+50 U Soul Seizer @Lucas Graciano
+75 C Spiteful Shadows @John Stanko
+51 C Stormbound Geist @Dan Scott
+127 U Strangleroot Geist @Jason Chan
+143 U Stromkirk Captain @Jana Schirmer & Johannes Voss
+23 R Sudden Disappearance @Cliff Childs
+105 C Talons of Falkenrath @Svetlin Velinov
+24 R Thalia, Guardian of Thraben @Jana Schirmer & Johannes Voss
+52 C Thought Scour @David Rapoza
+25 R Thraben Doomsayer @John Stanko
+26 U Thraben Heretic @James Ryman
+106 C Torch Fiend @Winona Nelson
+53 U Tower Geist @Izzy
+128 U Tracker's Instincts @Jung Park
+76 C Tragic Slip @Christopher Moeller
+129 C Ulvenwald Bear @Jason A. Engle
+77 C Undying Evil @Kev Walker
+158 R Vault of the Archangel @John Avon
+78 U Vengeful Vampire @Lucas Graciano
+130 U Village Survivors @David Rapoza
+131 M Vorapede @Slawomir Maniak
+79 U Wakedancer @Austin Hsu
+153 U Warden of the Wall @Daniel Ljunggren
+132 C Wild Hunger @Karl Kopinski
+133 R Wolfbitten Captive @Zoltan Boros
+154 U Wolfhunter's Quiver @Daniel Ljunggren
+107 C Wrack with Madness @Todd Lockwood
+134 C Young Wolf @Ryan Pancoast
+80 R Zombie Apocalypse @Peter Mohrbacher
 
 [tokens]
 w_1_1_human

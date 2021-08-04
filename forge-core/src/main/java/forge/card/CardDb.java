@@ -224,7 +224,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
 
         artIds.put(key, artIdx);
-        addCard(new PaperCard(cr, e.getCode(), cis.rarity, artIdx, cis.collectorNumber));
+        addCard(new PaperCard(cr, e.getCode(), cis.rarity, artIdx, false, cis.collectorNumber, cis.artistName));
     }
 
     public void loadCard(String cardName, CardRules cr) {
@@ -236,6 +236,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             for (CardInSet cis : cardsInSet)
                 addSetCard(e, cis, cr);
         }
+
         reIndex();
     }
 
@@ -289,10 +290,10 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         for (CardRules cr : rulesByName.values()) {
             if (!contains(cr.getName())) {
                 if (upcomingSet != null) {
-                    addCard(new PaperCard(cr, upcomingSet.getCode(), CardRarity.Unknown));
+                    addCard(new PaperCard(cr, upcomingSet.getCode(), CardRarity.Unknown, IPaperCard.DEFAULT_ART_INDEX));
                 } else if (enableUnknownCards && !this.filtered.contains(cr.getName())) {
                     System.err.println("The card " + cr.getName() + " was not assigned to any set. Adding it to UNKNOWN set... to fix see res/editions/ folder. ");
-                    addCard(new PaperCard(cr, CardEdition.UNKNOWN.getCode(), CardRarity.Special));
+                    addCard(new PaperCard(cr, CardEdition.UNKNOWN.getCode(), CardRarity.Special, IPaperCard.DEFAULT_ART_INDEX));
                 }
             }
         }
@@ -958,7 +959,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             System.err.println("We're sorry, but this card is not supported yet.");
         }
 
-        return new PaperCard(CardRules.getUnsupportedCardNamed(request.cardName), cardEdition.getCode(), cardRarity);
+        return new PaperCard(CardRules.getUnsupportedCardNamed(request.cardName), cardEdition.getCode(), cardRarity, IPaperCard.DEFAULT_ART_INDEX);
 
     }
 
@@ -1016,7 +1017,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 }
             }
             if (paperCards.isEmpty()) {
-                paperCards.add(new PaperCard(rules, CardEdition.UNKNOWN.getCode(), CardRarity.Special));
+                paperCards.add(new PaperCard(rules, CardEdition.UNKNOWN.getCode(), CardRarity.Special, IPaperCard.DEFAULT_ART_INDEX));
             }
             // 2. add them to db
             for (PaperCard paperCard : paperCards) {

@@ -6,9 +6,9 @@ Type=Promo
 ScryfallCode=PJAS
 
 [cards]
-1U06 R Sakura-Tribe Elder
-1U07 R Soltari Priest
-1U08 R Glorious Anthem
-2U06 R Shard Phoenix
-2U07 R Whirling Dervish
-2U08 R Elvish Champion
+1U06 R Sakura-Tribe Elder @Carl Critchlow
+1U07 R Soltari Priest @Dany Orizio
+1U08 R Glorious Anthem @Raymond Swanland
+2U06 R Shard Phoenix @Ron Spencer
+2U07 R Whirling Dervish @Alex Horley-Orlandelli
+2U08 R Elvish Champion @Matt Cavotta

@@ -39,7 +39,7 @@ public abstract class ImageFetcher {
     private HashMap<String, HashSet<Callback>> currentFetches = new HashMap<>();
     private HashMap<String, String> tokenImages;
 
-    private String getScryfallDownloadURL(PaperCard c, boolean backFace){
+    private String getScryfallDownloadURL(PaperCard c, boolean backFace, boolean useArtCrop){
         StaticData data = StaticData.instance();
         CardEdition edition = data.getEditions().get(c.getEdition());
         if (edition == null) // edition does not exist - some error occurred with card data
@@ -48,7 +48,7 @@ public abstract class ImageFetcher {
         String setCode = edition.getScryfallCode();
         String langCode = edition.getCardsLangCode();
         return ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD +
-                ImageUtil.getScryfallDownloadUrl(c, backFace, setCode, langCode);
+                ImageUtil.getScryfallDownloadUrl(c, backFace, setCode, langCode, useArtCrop);
     }
 
     public void fetchImage(final String imageKey, final Callback callback) {
@@ -64,6 +64,7 @@ public abstract class ImageFetcher {
         if (imageKey.length() < 2)
             return;
 
+        boolean useArtCrop = "Crop".equals(FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_ART_FORMAT));
         final String prefix = imageKey.substring(0, 2);
         final ArrayList<String> downloadUrls = new ArrayList<>();
         File destFile = null;
@@ -73,17 +74,28 @@ public abstract class ImageFetcher {
                 System.err.println("Paper card not found for: " + imageKey);
                 return;
             }
+            // Skip fetching if artist info is not available for art crop
+            if (useArtCrop && paperCard.getArtist().isEmpty())
+                return;
+
             final boolean backFace = imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX);
-            final String filename = ImageUtil.getImageKey(paperCard, backFace, true);
+            String filename = ImageUtil.getImageKey(paperCard, backFace, true);
+            if (useArtCrop) {
+                filename = TextUtil.fastReplace(filename, ".full", ".artcrop");
+            }
             destFile = new File(ForgeConstants.CACHE_CARD_PICS_DIR, filename + ".jpg");
 
-            //move priority of ftp image here
-            StringBuilder setDownload = new StringBuilder(ForgeConstants.URL_PIC_DOWNLOAD);
-            setDownload.append(ImageUtil.getDownloadUrl(paperCard, backFace));
-            downloadUrls.add(setDownload.toString());
+            //skip ftp if using art crop
+            if (!useArtCrop) {
+                //move priority of ftp image here
+                StringBuilder setDownload = new StringBuilder(ForgeConstants.URL_PIC_DOWNLOAD);
+                setDownload.append(ImageUtil.getDownloadUrl(paperCard, backFace));
+                downloadUrls.add(setDownload.toString());
+            }
+
             final String cardCollectorNumber = paperCard.getCollectorNumber();
             if (!cardCollectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER)){
-                final String scryfallURL = this.getScryfallDownloadURL(paperCard, backFace);
+                final String scryfallURL = this.getScryfallDownloadURL(paperCard, backFace, useArtCrop);
                 if (scryfallURL != null)
                     downloadUrls.add(scryfallURL);
             }

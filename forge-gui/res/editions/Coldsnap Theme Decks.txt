@@ -7,68 +7,68 @@ Type=Boxed_Set
 ScryfallCode=CST
 
 [cards]
-8 U Kjeldoran Home Guard
-9 C Kjeldoran Pride
-12 C Reinforcements
-16 U Scars of the Veteran
-20 C Disenchant
-25 U Browse
-30 C Lat-Nam's Legacy
-34 C Kjeldoran Elite Guard
-37 U Storm Elemental
-42 U Viscerid Drone
-43 U Balduvian Dead
-44 C Casting of Bones
-51 C Insidious Bookworms
-54 C Swords to Plowshares
-57 C Phantasmal Fiend
-60 U Binding Grasp
-61 C Brainstorm
-69 C Essence Flare
-70 U Death Spark
-72 C Gorilla Shaman
-73 U Iceberg
-84 C Mistfolk
-85 U Bounty of the Hunt
-86 C Deadly Insect
-90 C Portent
-100 C Snow Devil
-112 C Zuran Spellcaster
-114 U Ashen Ghoul
-119 C Dark Banishing
-120 C Dark Ritual
-123 U Drift of the Dead
-127 C Gangrenous Zombies
-137 C Kjeldoran Dead
-142 C Legions of Lim-Dul
-161 C Soul Burn
-194 C Incinerate
-208 U Orcish Healer
-210 C Orcish Lumberjack
-225 C Aurochs
-270 C Tinder Wall
-278 C Woolly Mammoths
-293 U Giant Trap Door Spider
-305 U Wings of Aesthir
-310 U Arcum's Weathervane
-312 C Barbed Sextant
-336 U Skull Catapult
-349 U Whalebone Glider
-369 L Plains
-370 L Plains
-371 L Plains
-372 L Island
-373 L Island
-374 L Island
-375 L Swamp
-376 L Swamp
-377 L Swamp
-378 L Mountain
-379 L Mountain
-380 L Mountain
-381 L Forest
-382 L Forest
-383 L Forest
+8 U Kjeldoran Home Guard @Andi Rusu
+9b C Kjeldoran Pride @Kaja Foglio
+12b C Reinforcements @Diana Vick
+16 U Scars of the Veteran @Dan Frazier
+20 C Disenchant @Brian Snõddy
+25 U Browse @Phil Foglio
+30b C Lat-Nam's Legacy @Tom Wänerstrand
+34 C Kjeldoran Elite Guard @Melissa A. Benson
+37 U Storm Elemental @John Matson
+42 U Viscerid Drone @Heather Hudson
+43 U Balduvian Dead @Mike Kimble
+44b C Casting of Bones @Anson Maddocks
+51a C Insidious Bookworms @Greg Simanson
+54 C Swords to Plowshares @Kaja Foglio
+57a C Phantasmal Fiend @Scott Kirschner
+60 U Binding Grasp @Ruth Thompson
+61 C Brainstorm @Christopher Rush
+69 C Essence Flare @Richard Kane Ferguson
+70 U Death Spark @Mark Tedin
+72a C Gorilla Shaman @Anthony S. Waters
+73 U Iceberg @Jeff A. Menges
+84 C Mistfolk @Quinton Hoover
+85 U Bounty of the Hunt @Jeff A. Menges
+86a C Deadly Insect @Scott Kirschner
+90 C Portent @Liz Danforth
+100 C Snow Devil @Ken Meyer, Jr.
+112 C Zuran Spellcaster @Edward P. Beard, Jr.
+114 U Ashen Ghoul @Ron Spencer
+119 C Dark Banishing @Drew Tucker
+120 C Dark Ritual @Justin Hampton
+123 U Drift of the Dead @Brian Snõddy
+127 C Gangrenous Zombies @Brian Snõddy
+137 C Kjeldoran Dead @Melissa A. Benson
+142 C Legions of Lim-Dul @Anson Maddocks
+161 C Soul Burn @Rob Alexander
+194 C Incinerate @Mark Poole
+208 U Orcish Healer @Quinton Hoover
+210 C Orcish Lumberjack @Dan Frazier
+225 C Aurochs @Ken Meyer, Jr.
+270 C Tinder Wall @Rick Emond
+278 C Woolly Mammoths @Dan Frazier
+293 U Giant Trap Door Spider @Heather Hudson
+305 U Wings of Aesthir @Edward P. Beard, Jr.
+310 U Arcum's Weathervane @Tom Wänerstrand
+312 C Barbed Sextant @Amy Weber
+336 U Skull Catapult @Bryon Wackwitz
+349 U Whalebone Glider @Amy Weber
+369 L Plains @Christopher Rush
+370 L Plains @Christopher Rush
+371 L Plains @Christopher Rush
+372 L Island @Anson Maddocks
+373 L Island @Anson Maddocks
+374 L Island @Anson Maddocks
+375 L Swamp @Douglas Shuler
+376 L Swamp @Douglas Shuler
+377 L Swamp @Douglas Shuler
+378 L Mountain @Tom Wänerstrand
+379 L Mountain @Tom Wänerstrand
+380 L Mountain @Tom Wänerstrand
+381 L Forest @Pat Morrissey
+382 L Forest @Pat Morrissey
+383 L Forest @Pat Morrissey
 
 [tokens]
 w_0_1_deserter

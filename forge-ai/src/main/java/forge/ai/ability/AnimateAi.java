@@ -252,7 +252,7 @@ public class AnimateAi extends SpellAbilityAi {
     private boolean animateTgtAI(final SpellAbility sa) {
         final Player ai = sa.getActivatingPlayer();
         final PhaseHandler ph = ai.getGame().getPhaseHandler();
-        final boolean alwaysActivatePWAbility = sa.hasParam("Planeswalker")
+        final boolean alwaysActivatePWAbility = sa.isPwAbility()
                 && sa.getPayCosts().hasSpecificCostType(CostPutCounter.class)
                 && sa.getTargetRestrictions() != null
                 && sa.getTargetRestrictions().getMinTargets(sa.getHostCard(), sa) == 0;

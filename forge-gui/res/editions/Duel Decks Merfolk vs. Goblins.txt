@@ -8,69 +8,69 @@ Type=Duel_Deck
 ScryfallCode=DDT
 
 [cards]
-1 M Master of Waves
-2 C Aquitect's Will
-3 C Claustrophobia
-4 U Concentrate
-5 R Engulf the Shore
-6 C Essence Scatter
-7 R Harbinger of the Tides
-8 C Inkfathom Divers
-9 R Master of the Pearl Trident
-10 U Merfolk Looter
-11 R Merfolk Sovereign
-12 U Merfolk Wayfinder
-13 U Merrow Reejerey
-14 R Mind Spring
-15 R Misdirection
-16 U Rootwater Hunter
-17 C Scroll Thief
-18 C Streambed Aquitects
-19 U Tidal Courier
-20 C Tidal Warrior
-21 C Tidal Wave
-22 R Tidebinder Mage
-23 U Triton Tactics
-24 R Wake Thrasher
-25 R Cold-Eyed Selkie
-26 U Blighted Cataract
-27 C Lonely Sandbar
-28 L Island
-29 L Island
-30 L Island
-31 L Island
-32 M Warren Instigator
-33 U Battle Squadron
-34 C Boggart Brute
-35 C Brute Strength
-36 U Cleaver Riot
-37 U Ember Hauler
-38 C Foundry Street Denizen
-39 U Gempalm Incinerator
-40 C Ghostfire
-41 R Goblin Chieftain
-42 R Goblin Diplomats
-43 U Goblin Glory Chaser
-44 R Goblin Goon
-45 U Goblin Grenade
-46 R Goblin Rabblemaster
-47 R Goblin Razerunners
-48 U Goblin Ringleader
-49 C Goblin Tunneler
-50 U Goblin Wardriver
-51 U Hordeling Outburst
-52 R Krenko, Mob Boss
-53 C Krenko's Command
-54 R Relentless Assault
-55 C Tarfire
-56 R Brittle Effigy
-57 R Goblin Charbelcher
-58 U Blighted Gorge
-59 C Forgotten Cave
-60 L Mountain
-61 L Mountain
-62 L Mountain
-63 L Mountain
+1 M Master of Waves @Svetlin Velinov
+2 C Aquitect's Will @Dimitar Marinski
+3 C Claustrophobia @Ryan Pancoast
+4 U Concentrate @rk post
+5 R Engulf the Shore @Cliff Childs
+6 C Essence Scatter @Jon Foster
+7 R Harbinger of the Tides @Svetlin Velinov
+8 C Inkfathom Divers @Steven Belledin
+9 R Master of the Pearl Trident @Ryan Pancoast
+10 U Merfolk Looter @Austin Hsu
+11 R Merfolk Sovereign @Jesper Ejsing
+12 U Merfolk Wayfinder @Christopher Moeller
+13 U Merrow Reejerey @Greg Staples
+14 R Mind Spring @Mark Zug
+15 R Misdirection @Mathias Kollros
+16 U Rootwater Hunter @Brom
+17 C Scroll Thief @Alex Horley-Orlandelli
+18 C Streambed Aquitects @William O'Connor
+19 U Tidal Courier @Slawomir Maniak
+20 C Tidal Warrior @Daren Bader
+21 C Tidal Wave @Brian Snõddy
+22 R Tidebinder Mage @John Severin Brassell
+23 U Triton Tactics @Jack Wang
+24 R Wake Thrasher @Jesper Ejsing
+25 R Cold-Eyed Selkie @Jaime Jones
+26 U Blighted Cataract @Vincent Proce
+27 C Lonely Sandbar @Noah Bradley
+28 L Island @Rob Alexander
+29 L Island @Steven Belledin
+30 L Island @Martina Pilcerova
+31 L Island @Raoul Vitale
+32 M Warren Instigator @Svetlin Velinov
+33 U Battle Squadron @Mark Tedin
+34 C Boggart Brute @Igor Kieryluk
+35 C Brute Strength @Wayne Reynolds
+36 U Cleaver Riot @Dave Kendall
+37 U Ember Hauler @Steve Prescott
+38 C Foundry Street Denizen @Raoul Vitale
+39 U Gempalm Incinerator @Mark Behm
+40 C Ghostfire @Cyril Van Der Haegen
+41 R Goblin Chieftain @Sam Wood
+42 R Goblin Diplomats @Izzy
+43 U Goblin Glory Chaser @Greg Staples
+44 R Goblin Goon @Steve Prescott
+45 U Goblin Grenade @Kev Walker
+46 R Goblin Rabblemaster @Svetlin Velinov
+47 R Goblin Razerunners @Raymond Swanland
+48 U Goblin Ringleader @Gabor Szikszai
+49 C Goblin Tunneler @Jesper Ejsing
+50 U Goblin Wardriver @Chippy
+51 U Hordeling Outburst @Zoltan Boros
+52 R Krenko, Mob Boss @Karl Kopinski
+53 C Krenko's Command @Karl Kopinski
+54 R Relentless Assault @Christopher Moeller
+55 C Tarfire @Omar Rayyan
+56 R Brittle Effigy @John Avon
+57 R Goblin Charbelcher @Jesper Ejsing
+58 U Blighted Gorge @Jung Park
+59 C Forgotten Cave @Noah Bradley
+60 L Mountain @John Avon
+61 L Mountain @Steven Belledin
+62 L Mountain @Martina Pilcerova
+63 L Mountain @Raoul Vitale
 
 [tokens]
 u_1_0_elemental

@@ -7,86 +7,86 @@ Type=Duel_Deck
 ScryfallCode=DDK
 
 [cards]
-1 M Sorin, Lord of Innistrad
-2 C Doomed Traveler
-3 C Vampire Lacerator
-4 U Wall of Omens
-5 C Child of Night
-6 C Duskhunter Bat
-7 C Mesmeric Fiend
-8 U Gatekeeper of Malakir
-9 R Twilight Drover
-10 C Bloodrage Vampire
-11 U Fiend Hunter
-12 U Vampire Nighthawk
-13 U Mausoleum Guard
-14 U Phantom General
-15 U Vampire Outcasts
-16 U Revenant Patriarch
-17 U Sengir Vampire
-18 R Butcher of Malakir
-19 C Vampire's Bite
-20 U Decompose
-21 C Sorin's Thirst
-22 U Urge to Feed
-23 U Zealous Persecution
-24 U Lingering Souls
-25 U Mortify
-26 U Spectral Procession
-27 C Unmake
-28 R Ancient Craving
-29 C Mark of the Vampire
-30 R Field of Souls
-31 C Absorb Vis
-32 R Death Grasp
-33 C Evolving Wilds
-34 U Tainted Field
-35 L Swamp
-36 L Swamp
-37 L Swamp
-38 L Plains
-39 L Plains
-40 L Plains
-41 M Tibalt, the Fiend-Blooded
-42 C Goblin Arsonist
-43 U Scorched Rusalka
-44 U Reassembling Skeleton
-45 C Ashmouth Hound
-46 U Hellspark Elemental
-47 C Vithian Stinger
-48 U Shambling Remains
-49 C Coal Stoker
-50 R Lavaborn Muse
-51 C Mad Prophet
-52 R Hellrider
-53 U Skirsdag Cultist
-54 U Corpse Connoisseur
-55 U Scourge Devil
-56 U Gang of Devils
-57 C Bump in the Night
-58 C Blazing Salvo
-59 C Faithless Looting
-60 C Flame Slash
-61 C Geistflame
-62 U Pyroclasm
-63 U Recoup
-64 C Terminate
-65 C Strangling Soot
-66 U Browbeat
-67 R Breaking Point
-68 R Sulfuric Vortex
-69 C Blightning
-70 U Flame Javelin
-71 U Torrent of Souls
-72 R Devil's Play
-73 U Akoum Refuge
-74 C Rakdos Carnarium
-75 L Mountain
-76 L Mountain
-77 L Mountain
-78 L Swamp
-79 L Swamp
-80 L Swamp
+1 M Sorin, Lord of Innistrad @Chase Stone
+2 C Doomed Traveler @Lars Grant-West
+3 C Vampire Lacerator @Steve Argyle
+4 U Wall of Omens @James Paick
+5 C Child of Night @Ash Wood
+6 C Duskhunter Bat @Jesper Ejsing
+7 C Mesmeric Fiend @Dana Knutson
+8 U Gatekeeper of Malakir @Karl Kopinski
+9 R Twilight Drover @Dave Allsop
+10 C Bloodrage Vampire @Steve Prescott
+11 U Fiend Hunter @Wayne Reynolds
+12 U Vampire Nighthawk @Jason Chan
+13 U Mausoleum Guard @David Palumbo
+14 U Phantom General @Christopher Moeller
+15 U Vampire Outcasts @Clint Cearley
+16 U Revenant Patriarch @Nick Percival
+17 U Sengir Vampire @Kev Walker
+18 R Butcher of Malakir @Jason Chan
+19 C Vampire's Bite @Christopher Moeller
+20 U Decompose @Tony Szczudlo
+21 C Sorin's Thirst @Karl Kopinski
+22 U Urge to Feed @Johann Bodin
+23 U Zealous Persecution @Christopher Moeller
+24 U Lingering Souls @John Stanko
+25 U Mortify @Nils Hamm
+26 U Spectral Procession @Tomasz Jedruszek
+27 C Unmake @Steven Belledin
+28 R Ancient Craving @Rob Alexander
+29 C Mark of the Vampire @Winona Nelson
+30 R Field of Souls @Richard Kane Ferguson
+31 C Absorb Vis @Brandon Kitkouski
+32 R Death Grasp @Raymond Swanland
+33 C Evolving Wilds @Steven Belledin
+34 U Tainted Field @Don Hazeltine
+35 L Swamp @James Paick
+36 L Swamp @Adam Paquette
+37 L Swamp @Jung Park
+38 L Plains @Adam Paquette
+39 L Plains @Jung Park
+40 L Plains @Eytan Zana
+41 M Tibalt, the Fiend-Blooded @Chase Stone
+42 C Goblin Arsonist @Wayne Reynolds
+43 U Scorched Rusalka @Luca Zontini
+44 U Reassembling Skeleton @Austin Hsu
+45 C Ashmouth Hound @Daarken
+46 U Hellspark Elemental @Justin Sweet
+47 C Vithian Stinger @Dave Kendall
+48 U Shambling Remains @Nils Hamm
+49 C Coal Stoker @Mark Zug
+50 R Lavaborn Muse @Brian Snõddy
+51 C Mad Prophet @Wayne Reynolds
+52 R Hellrider @Svetlin Velinov
+53 U Skirsdag Cultist @Slawomir Maniak
+54 U Corpse Connoisseur @Mark Hyzer
+55 U Scourge Devil @Dave Kendall
+56 U Gang of Devils @Erica Yang
+57 C Bump in the Night @Kev Walker
+58 C Blazing Salvo @rk post
+59 C Faithless Looting @Gabor Szikszai
+60 C Flame Slash @Raymond Swanland
+61 C Geistflame @Scott Chou
+62 U Pyroclasm @John Avon
+63 U Recoup @Dave Dorman
+64 C Terminate @Wayne Reynolds
+65 C Strangling Soot @Jim Murray
+66 U Browbeat @Chris Rahn
+67 R Breaking Point @Matthew D. Wilson
+68 R Sulfuric Vortex @Greg Staples
+69 C Blightning @Dan Scott
+70 U Flame Javelin @Trevor Hairsine
+71 U Torrent of Souls @Ian Edward Ameling
+72 R Devil's Play @Austin Hsu
+73 U Akoum Refuge @Fred Fields
+74 C Rakdos Carnarium @John Avon
+75 L Mountain @James Paick
+76 L Mountain @Adam Paquette
+77 L Mountain @Eytan Zana
+78 L Swamp @James Paick
+79 L Swamp @Adam Paquette
+80 L Swamp @Jung Park
 
 [tokens]
 w_1_1_spirit_flying

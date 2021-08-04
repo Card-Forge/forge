@@ -11,356 +11,356 @@ Foil=NotSupported
 ScryfallCode=MIR
 
 [cards]
-103 R Abyssal Hunter
-291 R Acidic Dagger
-205 R Afiya Grove
-1 U Afterlife
-154 C Agility
-2 C Alarum
-155 U Aleatory
-292 R Amber Prison
-293 R Amulet of Unmaking
-52 R Ancestral Memories
-206 C Armor of Thorns
-156 C Armorer Guildmage
-104 R Ashen Powder
-256 R Asmira, Holy Avenger
-3 R Auspicious Ancestor
-53 C Azimaet Drake
-324 U Bad River
-207 U Barbed Foliage
-105 U Barbed-Back Wurm
-157 R Barreling Attack
-294 U Basalt Golem
-54 C Bay Falcon
-55 R Bazaar of Wonders
-4 C Benevolent Unicorn
-257 R Benthic Djinn
-106 C Binding Agony
-107 U Blighted Shaman
-158 U Blind Fury
-5 U Blinding Light
-159 C Blistering Barrier
-108 C Bone Harvest
-295 R Bone Mask
-56 C Boomerang
-109 C Breathstealer
-208 R Brushwagg
-160 C Builder's Bane
-161 U Burning Palm Efreet
-162 C Burning Shield Askari
-258 R Cadaverous Bloom
-110 C Cadaverous Knight
-209 R Canopy Dragon
-111 R Carrion
-112 R Catacomb Dragon
-6 R Celestial Dawn
-57 U Cerulean Wyvern
-163 C Chaos Charm
-164 R Chaosphere
-296 U Charcoal Diamond
-297 U Chariot of the Sun
-113 C Choking Sands
-165 U Cinder Cloud
-259 R Circle of Despair
-7 C Civic Guildmage
-58 C Cloak of Invisibility
-166 U Consuming Ferocity
-59 U Coral Fighters
-210 C Crash of Rhinos
-167 R Crimson Hellkite
-168 U Crimson Roc
-114 U Crypt Cobra
-298 U Crystal Golem
-325 U Crystal Vein
-299 R Cursed Totem
-211 R Cycle of Life
-60 R Daring Apprentice
-115 C Dark Banishing
-116 C Dark Ritual
-8 C Dazzling Beauty
-212 U Decomposition
-260 U Delirium
-117 C Dirtwater Wraith
-261 R Discordant Spirit
-9 C Disempower
-10 C Disenchant
-61 U Dissipate
-11 C Divine Offering
-12 R Divine Retribution
-118 C Drain Life
-119 U Dread Specter
-62 C Dream Cache
-63 C Dream Fighter
-169 U Dwarven Miner
-170 C Dwarven Nomad
-213 R Early Harvest
-120 C Ebony Charm
-171 C Ekundu Cyclops
-13 C Ekundu Griffin
-300 U Elixir of Vitality
-262 R Emberwilde Caliph
-172 R Emberwilde Djinn
-263 R Energy Bolt
-64 R Energy Vortex
-121 C Enfeeblement
-14 U Enlightened Tutor
-301 U Ersatz Gnomes
-65 U Ether Well
-15 R Ethereal Champion
-214 U Fallow Earth
-16 U Favorable Destiny
-215 U Femeref Archers
-17 C Femeref Healer
-18 C Femeref Knight
-19 C Femeref Scouts
-122 C Feral Shadow
-123 C Fetid Horror
-173 R Final Fortune
-302 U Fire Diamond
-174 C Firebreathing
-175 U Flame Elemental
-176 C Flare
-66 R Flash
-326 U Flood Plain
-67 U Floodgate
-216 C Fog
-217 U Foratog
-124 R Forbidden Crypt
-347 L Forest
-348 L Forest
-349 L Forest
-350 L Forest
-125 R Forsaken Wastes
-264 R Frenetic Efreet
-218 C Giant Mantis
-219 C Gibbering Hyenas
-177 C Goblin Elite Infantry
-178 U Goblin Scouts
-179 U Goblin Soothsayer
-180 C Goblin Tinkerer
-220 C Granger Guildmage
-327 U Grasslands
-126 C Grave Servitude
-127 C Gravebane Zombie
-265 R Grim Feast
-303 R Grinning Totem
-68 R Hakim, Loreweaver
-221 R Hall of Gemstone
-181 R Hammer of Bogardan
-128 R Harbinger of Night
-266 U Harbor Guardian
-69 U Harmattan Efreet
-267 U Haunting Apparition
-268 U Hazerider Drake
-20 C Healing Salve
-182 R Hivis of the Scale
-304 U Horrible Hordes
-305 U Igneous Golem
-183 R Illicit Auction
-21 U Illumination
-184 C Incinerate
-129 R Infernal Contract
-22 U Iron Tusk Elephant
-335 L Island
-336 L Island
-337 L Island
-338 L Island
-23 C Ivory Charm
-24 R Jabari's Influence
-222 C Jolrael's Centaur
-70 C Jolt
-223 R Jungle Patrol
-269 U Jungle Troll
-224 C Jungle Wurm
-130 U Kaervek's Hex
-270 U Kaervek's Purge
-185 C Kaervek's Torch
-225 U Karoo Meerkat
-71 R Kukemssa Pirates
-72 C Kukemssa Serpent
-306 U Lead Golem
-271 R Leering Gargoyle
-186 C Lightning Reflexes
-307 R Lion's Eye Diamond
-226 U Locust Swarm
-227 R Lure of Prey
-272 R Malignant Growth
-308 U Mana Prism
-25 U Mangara's Blessing
-26 U Mangara's Equity
-309 R Mangara's Tome
-310 U Marble Diamond
-228 R Maro
-73 U Meddle
-27 U Melesse Spirit
-74 C Memory Lapse
-75 C Merfolk Raiders
-76 C Merfolk Seer
-77 U Mind Bend
-78 U Mind Harness
-229 R Mindbender Spores
-131 U Mire Shade
-311 R Misers' Cage
-79 R Mist Dragon
-312 U Moss Diamond
-343 L Mountain
-344 L Mountain
-345 L Mountain
-346 L Mountain
-328 U Mountain Valley
-28 U Mtenda Griffin
-29 C Mtenda Herder
-230 C Mtenda Lion
-80 U Mystical Tutor
-231 R Natural Balance
-232 U Nettletooth Djinn
-30 C Noble Elephant
-132 U Nocturnal Raid
-31 R Null Chamber
-32 C Pacifism
-133 U Painful Memories
-313 U Patagia Golem
-314 R Paupers' Cage
-33 R Pearl Dragon
-315 R Phyrexian Dreadnought
-273 R Phyrexian Purge
-134 R Phyrexian Tribute
-316 U Phyrexian Vault
-331 L Plains
-332 L Plains
-333 L Plains
-334 L Plains
-81 R Political Trickery
-82 R Polymorph
-83 C Power Sink
-233 R Preferred Selection
-274 U Prismatic Boon
-34 C Prismatic Circle
-84 R Prismatic Lace
-85 R Psychic Transfer
-275 R Purgatory
-135 R Purraj of Urborg
-187 C Pyric Salamander
-234 C Quirion Elves
-276 U Radiant Essence
-188 C Raging Spirit
-235 C Rampant Growth
-35 R Rashida Scalebane
-136 U Ravenous Vampire
-86 C Ray of Command
-317 R Razor Pendulum
-87 C Reality Ripple
-189 R Reckless Embermage
-277 R Reflect Damage
-236 C Regeneration
-190 U Reign of Chaos
-137 U Reign of Terror
-278 R Reparations
-138 C Restless Dead
-36 C Ritual of Steel
-279 R Rock Basilisk
-329 U Rocky Tar Pit
-237 U Roots of Life
-238 C Sabertooth Cobra
-37 R Sacred Mesa
-318 U Sand Golem
-88 C Sandbar Crocodile
-239 C Sandstorm
-89 C Sapphire Charm
-280 U Savage Twister
-281 R Sawback Manticore
-90 C Sea Scryer
-282 U Sealed Fate
-191 C Searing Spear Askari
-240 C Seedling Charm
-241 R Seeds of Innocence
-242 C Serene Heart
-139 C Sewer Rats
-140 C Shadow Guildmage
-38 U Shadowbane
-141 R Shallow Grave
-91 C Shaper Guildmage
-142 R Shauku, Endbringer
-283 U Shauku's Minion
-92 R Shimmer
-39 R Sidar Jabari
-192 U Sirocco
-143 C Skulking Ghost
-319 U Sky Diamond
-93 C Soar
-40 R Soul Echo
-144 U Soul Rend
-145 C Soulshriek
-284 U Spatial Binding
-41 R Spectral Guardian
-146 R Spirit of the Night
-193 C Spitting Earth
-243 C Stalking Tiger
-194 C Stone Rain
-147 U Stupor
-195 R Subterranean Spirit
-42 R Sunweb
-244 U Superior Numbers
-94 U Suq'Ata Firewalker
-339 L Swamp
-340 L Swamp
-341 L Swamp
-342 L Swamp
-148 R Tainted Specter
-196 C Talruum Minotaur
-95 R Taniwha
-320 R Teeka's Dragon
-96 C Teferi's Curse
-97 C Teferi's Drake
-98 R Teferi's Imp
-330 R Teferi's Isle
-197 R Telim'Tor
-321 U Telim'Tor's Darts
-198 R Telim'Tor's Edict
-43 C Teremko Griffin
-99 C Thirst
-100 U Tidal Wave
-149 R Tombstone Stairwell
-199 R Torrent of Lava
-245 C Tranquil Domain
-246 U Tropical Storm
-247 C Uktabi Faerie
-248 R Uktabi Wildcats
-322 U Unerring Sling
-285 R Unfulfilled Desires
-249 U Unseen Walker
-250 U Unyaro Bee Sting
-44 U Unyaro Griffin
-150 C Urborg Panther
-101 U Vaporous Djinn
-323 R Ventifact Bottle
-200 C Viashino Warrior
-45 U Vigilant Martyr
-251 C Village Elder
-286 U Vitalizing Cascade
-201 R Volcanic Dragon
-202 U Volcanic Geyser
-252 R Waiting in the Weeds
-151 C Wall of Corpses
-46 C Wall of Resistance
-253 C Wall of Roots
-47 C Ward of Lights
-287 R Warping Wurm
-102 U Wave Elemental
-288 R Wellspring
-254 C Wild Elephant
-203 U Wildfire Emissary
-289 U Windreaper Falcon
-152 U Withering Boon
-255 U Worldly Tutor
-48 R Yare
-290 U Zebra Unicorn
-49 U Zhalfirin Commander
-50 C Zhalfirin Knight
-204 R Zirilan of the Claw
-153 U Zombie Mob
-51 R Zuberi, Golden Feather
+103 R Abyssal Hunter @Steve Luke
+291 R Acidic Dagger @Stuart Beel
+205 R Afiya Grove @Stuart Griffin
+1 U Afterlife @Pete Venters
+154 C Agility @Drew Tucker
+2 C Alarum @Andrew Robinson
+155 U Aleatory @Kev Walker
+292 R Amber Prison @Donato Giancola
+293 R Amulet of Unmaking @Kaja Foglio
+52 R Ancestral Memories @William Donohoe
+206 C Armor of Thorns @Alan Rabinowitz
+156 C Armorer Guildmage @Martin McKenna
+104 R Ashen Powder @Geofrey Darrow
+256 R Asmira, Holy Avenger @Rebecca Guay
+3 R Auspicious Ancestor @Zina Saunders
+53 C Azimaet Drake @Gerry Grace
+324 U Bad River @Terese Nielsen
+207 U Barbed Foliage @Mark Poole
+105 U Barbed-Back Wurm @Gary Leach
+157 R Barreling Attack @Ian Miller
+294 U Basalt Golem @Scott Kirschner
+54 C Bay Falcon @Una Fricker
+55 R Bazaar of Wonders @Liz Danforth
+4 C Benevolent Unicorn @David A. Cherry
+257 R Benthic Djinn @Adam Rex
+106 C Binding Agony @Robert Bliss
+107 U Blighted Shaman @Ian Miller
+158 U Blind Fury @John Coulthart
+5 U Blinding Light @Hannibal King
+159 C Blistering Barrier @David Ho
+108 C Bone Harvest @Greg Simanson
+295 R Bone Mask @D. Alexander Gregory
+56 C Boomerang @Richard Kane Ferguson
+109 C Breathstealer @Cliff Nielsen
+208 R Brushwagg @Ian Miller
+160 C Builder's Bane @Charles Gillespie
+161 U Burning Palm Efreet @Dermot Power
+162 C Burning Shield Askari @Dan Frazier
+258 R Cadaverous Bloom @Alan Rabinowitz
+110 C Cadaverous Knight @Dermot Power
+209 R Canopy Dragon @Alan Rabinowitz
+111 R Carrion @Geofrey Darrow
+112 R Catacomb Dragon @David O'Connor
+6 R Celestial Dawn @Liz Danforth
+57 U Cerulean Wyvern @Gerry Grace
+163 C Chaos Charm @Steve Luke
+164 R Chaosphere @Steve Luke
+296 U Charcoal Diamond @Drew Tucker
+297 U Chariot of the Sun @Gerry Grace
+113 C Choking Sands @Roger Raupp
+165 U Cinder Cloud @Jock
+259 R Circle of Despair @Scott M. Fischer
+7 C Civic Guildmage @Andrew Robinson
+58 C Cloak of Invisibility @John Coulthart
+166 U Consuming Ferocity @Scott Kirschner
+59 U Coral Fighters @Steve Luke
+210 C Crash of Rhinos @Steve White
+167 R Crimson Hellkite @Gerry Grace
+168 U Crimson Roc @Ian Miller
+114 U Crypt Cobra @Ron Spencer
+298 U Crystal Golem @Mike Dringenberg
+325 U Crystal Vein @Pat Morrissey
+299 R Cursed Totem @D. Alexander Gregory
+211 R Cycle of Life @Chippy
+60 R Daring Apprentice @Kaja Foglio
+115 C Dark Banishing @Dermot Power
+116 C Dark Ritual @John Coulthart
+8 C Dazzling Beauty @Harold McNeill
+212 U Decomposition @Drew Tucker
+260 U Delirium @Terese Nielsen
+117 C Dirtwater Wraith @Steve Luke
+261 R Discordant Spirit @Alan Rabinowitz
+9 C Disempower @John Matson
+10 C Disenchant @Charles Gillespie
+61 U Dissipate @Richard Kane Ferguson
+11 C Divine Offering @Terese Nielsen
+12 R Divine Retribution @Charles Gillespie
+118 C Drain Life @Richard Kane Ferguson
+119 U Dread Specter @Kathryn Rathke
+62 C Dream Cache @D. Alexander Gregory
+63 C Dream Fighter @Drew Tucker
+169 U Dwarven Miner @Jock
+170 C Dwarven Nomad @Mike Kimble
+213 R Early Harvest @Janine Johnston
+120 C Ebony Charm @Gerry Grace
+171 C Ekundu Cyclops @Robert Bliss
+13 C Ekundu Griffin @David A. Cherry
+300 U Elixir of Vitality @Douglas Shuler
+262 R Emberwilde Caliph @Jennifer Law
+172 R Emberwilde Djinn @Mike Dringenberg
+263 R Energy Bolt @Scott Kirschner
+64 R Energy Vortex @Tom Wänerstrand
+121 C Enfeeblement @John Bolton
+14 U Enlightened Tutor @Dan Frazier
+301 U Ersatz Gnomes @Ron Spencer
+65 U Ether Well @Charles Gillespie
+15 R Ethereal Champion @Terese Nielsen
+214 U Fallow Earth @Janine Johnston
+16 U Favorable Destiny @Thomas Gianni
+215 U Femeref Archers @William Donohoe
+17 C Femeref Healer @Steve Luke
+18 C Femeref Knight @Tony Roberts
+19 C Femeref Scouts @Zak Plucinski
+122 C Feral Shadow @Cliff Nielsen
+123 C Fetid Horror @Gary Leach
+173 R Final Fortune @D. Alexander Gregory
+302 U Fire Diamond @Richard Thomas
+174 C Firebreathing @Mike Kerr
+175 U Flame Elemental @Richard Kane Ferguson
+176 C Flare @Greg Simanson
+66 R Flash @David Ho
+326 U Flood Plain @Pat Morrissey
+67 U Floodgate @Jeff Miracola
+216 C Fog @Harold McNeill
+217 U Foratog @Mark Poole
+124 R Forbidden Crypt @D. Alexander Gregory
+347 L Forest @Tony Roberts
+348 L Forest @Tony Roberts
+349 L Forest @Tony Roberts
+350 L Forest @Tony Roberts
+125 R Forsaken Wastes @Kev Walker
+264 R Frenetic Efreet @Thomas Gianni
+218 C Giant Mantis @Randy Gallegos
+219 C Gibbering Hyenas @Una Fricker
+177 C Goblin Elite Infantry @Robert Bliss
+178 U Goblin Scouts @Geofrey Darrow
+179 U Goblin Soothsayer @Robert Bliss
+180 C Goblin Tinkerer @Hannibal King
+220 C Granger Guildmage @Dan Frazier
+327 U Grasslands @John Avon
+126 C Grave Servitude @Adrian Smith
+127 C Gravebane Zombie @Gary Leach
+265 R Grim Feast @Mike Kimble
+303 R Grinning Totem @Donato Giancola
+68 R Hakim, Loreweaver @Alan Rabinowitz
+221 R Hall of Gemstone @David A. Cherry
+181 R Hammer of Bogardan @Ron Spencer
+128 R Harbinger of Night @Tom Kyffin
+266 U Harbor Guardian @Stuart Beel
+69 U Harmattan Efreet @Drew Tucker
+267 U Haunting Apparition @Chippy
+268 U Hazerider Drake @Zina Saunders
+20 C Healing Salve @Hannibal King
+182 R Hivis of the Scale @Andrew Robinson
+304 U Horrible Hordes @Ian Miller
+305 U Igneous Golem @Adam Rex
+183 R Illicit Auction @Scott Kirschner
+21 U Illumination @David O'Connor
+184 C Incinerate @Brian Snõddy
+129 R Infernal Contract @Roger Raupp
+22 U Iron Tusk Elephant @Tony Roberts
+335 L Island @Douglas Shuler
+336 L Island @Douglas Shuler
+337 L Island @Douglas Shuler
+338 L Island @Douglas Shuler
+23 C Ivory Charm @Gerry Grace
+24 R Jabari's Influence @Gerry Grace
+222 C Jolrael's Centaur @Junior Tomlin
+70 C Jolt @John Matson
+223 R Jungle Patrol @Mark Poole
+269 U Jungle Troll @John Bolton
+224 C Jungle Wurm @Tom Kyffin
+130 U Kaervek's Hex @Ian Miller
+270 U Kaervek's Purge @Richard Kane Ferguson
+185 C Kaervek's Torch @John Coulthart
+225 U Karoo Meerkat @Janine Johnston
+71 R Kukemssa Pirates @Jock
+72 C Kukemssa Serpent @Ian Miller
+306 U Lead Golem @Hannibal King
+271 R Leering Gargoyle @Dermot Power
+186 C Lightning Reflexes @Tom Kyffin
+307 R Lion's Eye Diamond @Margaret Organ-Kean
+226 U Locust Swarm @William Donohoe
+227 R Lure of Prey @Andrew Robinson
+272 R Malignant Growth @Scott M. Fischer
+308 U Mana Prism @Margaret Organ-Kean
+25 U Mangara's Blessing @David A. Cherry
+26 U Mangara's Equity @Alan Rabinowitz
+309 R Mangara's Tome @John Bolton
+310 U Marble Diamond @Jeff Miracola
+228 R Maro @Stuart Griffin
+73 U Meddle @Brian Snõddy
+27 U Melesse Spirit @Gerry Grace
+74 C Memory Lapse @Rebecca Guay
+75 C Merfolk Raiders @Steve Luke
+76 C Merfolk Seer @Steve Luke
+77 U Mind Bend @Mike Dringenberg
+78 U Mind Harness @John Malloy
+229 R Mindbender Spores @Ian Miller
+131 U Mire Shade @Randy Gallegos
+311 R Misers' Cage @Jeff Miracola
+79 R Mist Dragon @Al Davidson
+312 U Moss Diamond @Donato Giancola
+343 L Mountain @John Avon
+344 L Mountain @John Avon
+345 L Mountain @John Avon
+346 L Mountain @John Avon
+328 U Mountain Valley @Kari Johnson
+28 U Mtenda Griffin @Janine Johnston
+29 C Mtenda Herder @Zina Saunders
+230 C Mtenda Lion @Stuart Griffin
+80 U Mystical Tutor @David O'Connor
+231 R Natural Balance @John Malloy
+232 U Nettletooth Djinn @Janine Johnston
+30 C Noble Elephant @Tony Roberts
+132 U Nocturnal Raid @John Matson
+31 R Null Chamber @Douglas Shuler
+32 C Pacifism @Robert Bliss
+133 U Painful Memories @John Coulthart
+313 U Patagia Golem @Scott Kirschner
+314 R Paupers' Cage @Mike Kimble
+33 R Pearl Dragon @Ian Miller
+315 R Phyrexian Dreadnought @Pete Venters
+273 R Phyrexian Purge @Robert Bliss
+134 R Phyrexian Tribute @John Matson
+316 U Phyrexian Vault @Hannibal King
+331 L Plains @Tom Wänerstrand
+332 L Plains @Tom Wänerstrand
+333 L Plains @Tom Wänerstrand
+334 L Plains @Tom Wänerstrand
+81 R Political Trickery @Scott Kirschner
+82 R Polymorph @Robert Bliss
+83 C Power Sink @Charles Gillespie
+233 R Preferred Selection @Kev Walker
+274 U Prismatic Boon @Thomas Gianni
+34 C Prismatic Circle @Pete Venters
+84 R Prismatic Lace @David O'Connor
+85 R Psychic Transfer @Dom!
+275 R Purgatory @Mike Dringenberg
+135 R Purraj of Urborg @John Matson
+187 C Pyric Salamander @Tony Roberts
+234 C Quirion Elves @Randy Gallegos
+276 U Radiant Essence @Jennifer Law
+188 C Raging Spirit @Scott M. Fischer
+235 C Rampant Growth @Pat Morrissey
+35 R Rashida Scalebane @Randy Gallegos
+136 U Ravenous Vampire @John Bolton
+86 C Ray of Command @Andrew Robinson
+317 R Razor Pendulum @Zak Plucinski
+87 C Reality Ripple @Alan Rabinowitz
+189 R Reckless Embermage @Tom Kyffin
+277 R Reflect Damage @Ron Spencer
+236 C Regeneration @Charles Gillespie
+190 U Reign of Chaos @Kathryn Rathke
+137 U Reign of Terror @Gary Leach
+278 R Reparations @Douglas Shuler
+138 C Restless Dead @Ian Miller
+36 C Ritual of Steel @Mark Poole
+279 R Rock Basilisk @Ian Miller
+329 U Rocky Tar Pit @Jeff Miracola
+237 U Roots of Life @Tony Roberts
+238 C Sabertooth Cobra @Andrew Robinson
+37 R Sacred Mesa @Margaret Organ-Kean
+318 U Sand Golem @John Matson
+88 C Sandbar Crocodile @Una Fricker
+239 C Sandstorm @Mike Kimble
+89 C Sapphire Charm @Steve Luke
+280 U Savage Twister @Bob Eggleton
+281 R Sawback Manticore @Martin McKenna
+90 C Sea Scryer @Martin McKenna
+282 U Sealed Fate @Terese Nielsen
+191 C Searing Spear Askari @Richard Kane Ferguson
+240 C Seedling Charm @Stuart Griffin
+241 R Seeds of Innocence @Junior Tomlin
+242 C Serene Heart @D. Alexander Gregory
+139 C Sewer Rats @Martin McKenna
+140 C Shadow Guildmage @Mike Kimble
+38 U Shadowbane @Douglas Shuler
+141 R Shallow Grave @John Coulthart
+91 C Shaper Guildmage @D. Alexander Gregory
+142 R Shauku, Endbringer @Pete Venters
+283 U Shauku's Minion @Greg Simanson
+92 R Shimmer @David A. Cherry
+39 R Sidar Jabari @Gerry Grace
+192 U Sirocco @Alan Rabinowitz
+143 C Skulking Ghost @Robert Bliss
+319 U Sky Diamond @D. Alexander Gregory
+93 C Soar @Tony Roberts
+40 R Soul Echo @Ron Spencer
+144 U Soul Rend @Jeff Miracola
+145 C Soulshriek @John Bolton
+284 U Spatial Binding @Dom!
+41 R Spectral Guardian @Mike Dringenberg
+146 R Spirit of the Night @Cliff Nielsen
+193 C Spitting Earth @Brian Snõddy
+243 C Stalking Tiger @Terese Nielsen
+194 C Stone Rain @Tony Roberts
+147 U Stupor @Mike Kimble
+195 R Subterranean Spirit @John Bolton
+42 R Sunweb @Dan Frazier
+244 U Superior Numbers @Geofrey Darrow
+94 U Suq'Ata Firewalker @David O'Connor
+339 L Swamp @Bob Eggleton
+340 L Swamp @Bob Eggleton
+341 L Swamp @Bob Eggleton
+342 L Swamp @Bob Eggleton
+148 R Tainted Specter @Chippy
+196 C Talruum Minotaur @Pete Venters
+95 R Taniwha @Ian Miller
+320 R Teeka's Dragon @Liz Danforth
+96 C Teferi's Curse @Robert Bliss
+97 C Teferi's Drake @Kari Johnson
+98 R Teferi's Imp @Una Fricker
+330 R Teferi's Isle @Gerry Grace
+197 R Telim'Tor @Kev Walker
+321 U Telim'Tor's Darts @Kev Walker
+198 R Telim'Tor's Edict @Kev Walker
+43 C Teremko Griffin @Martin McKenna
+99 C Thirst @Roger Raupp
+100 U Tidal Wave @Brian Snõddy
+149 R Tombstone Stairwell @Dom!
+199 R Torrent of Lava @Kathryn Rathke
+245 C Tranquil Domain @D. Alexander Gregory
+246 U Tropical Storm @Richard Kane Ferguson
+247 C Uktabi Faerie @Junior Tomlin
+248 R Uktabi Wildcats @John Matson
+322 U Unerring Sling @Zak Plucinski
+285 R Unfulfilled Desires @D. Alexander Gregory
+249 U Unseen Walker @Alan Rabinowitz
+250 U Unyaro Bee Sting @Pat Morrissey
+44 U Unyaro Griffin @Al Davidson
+150 C Urborg Panther @Cliff Nielsen
+101 U Vaporous Djinn @Adam Rex
+323 R Ventifact Bottle @Ron Spencer
+200 C Viashino Warrior @Roger Raupp
+45 U Vigilant Martyr @Rebecca Guay
+251 C Village Elder @Donato Giancola
+286 U Vitalizing Cascade @Rebecca Guay
+201 R Volcanic Dragon @Janine Johnston
+202 U Volcanic Geyser @David O'Connor
+252 R Waiting in the Weeds @Susan Van Camp
+151 C Wall of Corpses @Gary Leach
+46 C Wall of Resistance @Harold McNeill
+253 C Wall of Roots @John Matson
+47 C Ward of Lights @Mike Dringenberg
+287 R Warping Wurm @Scott M. Fischer
+102 U Wave Elemental @Zak Plucinski
+288 R Wellspring @Susan Van Camp
+254 C Wild Elephant @Junior Tomlin
+203 U Wildfire Emissary @Richard Kane Ferguson
+289 U Windreaper Falcon @Tony Roberts
+152 U Withering Boon @Robert Bliss
+255 U Worldly Tutor @David O'Connor
+48 R Yare @Ron Spencer
+290 U Zebra Unicorn @Margaret Organ-Kean
+49 U Zhalfirin Commander @Stuart Griffin
+50 C Zhalfirin Knight @John Bolton
+204 R Zirilan of the Claw @Andrew Robinson
+153 U Zombie Mob @Terese Nielsen
+51 R Zuberi, Golden Feather @Alan Rabinowitz
 
 [tokens]
 tombspawn

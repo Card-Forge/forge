@@ -6,4 +6,4 @@ Type=Promo
 ScryfallCode=PALA
 
 [cards]
-154★ M Ajani Vengeant
+154★ M Ajani Vengeant @Jason Chan

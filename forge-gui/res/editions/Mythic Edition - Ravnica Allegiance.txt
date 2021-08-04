@@ -7,14 +7,14 @@ Type=Collector_Edition
 ScryfallCode=med
 
 [cards]
-RA1 M Karn, Scion of Urza
-RA2 M Tamiyo, the Moon Sage
-RA3 M Sorin Markov
-RA4 M Jaya Ballard
-RA5 M Ajani, Mentor of Heroes
-RA6 M Dack Fayden
-RA7 M Domri, Chaos Bringer
-RA8 M Kaya, Orzhov Usurper
+RA1 M Karn, Scion of Urza @Adam Paquette
+RA2 M Tamiyo, the Moon Sage @Lius Lasahido
+RA3 M Sorin Markov @Kieran Yanner
+RA4 M Jaya Ballard @Kieran Yanner
+RA5 M Ajani, Mentor of Heroes @Bram Sels
+RA6 M Dack Fayden @Jason Rainville
+RA7 M Domri, Chaos Bringer @Jason Rainville
+RA8 M Kaya, Orzhov Usurper @Chris Rallis
 
 [tokens]
 c_0_0_a_construct_total_artifacts

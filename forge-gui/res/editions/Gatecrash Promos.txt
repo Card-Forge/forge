@@ -6,12 +6,12 @@ Type=Promo
 ScryfallCode=PGTC
 
 [cards]
-133★ R Skarrg Goliath
-152★ R Consuming Aberration
-162★ R Fathom Mage
-163 R Firemane Avenger
-165★ R Foundry Champion
-191★ R Rubblehulk
-201★ R Treasury Thrull
-209 U Zameck Guildmage
-*222 R Nightveil Specter
+133★ R Skarrg Goliath @Karl Kopinski
+152★ R Consuming Aberration @Volkan Baǵa
+162★ R Fathom Mage @Dan Scott
+163 R Firemane Avenger @Ryan Barger
+165★ R Foundry Champion @James Ryman
+191★ R Rubblehulk @Cliff Childs
+201★ R Treasury Thrull @Lucas Graciano
+209 U Zameck Guildmage @Raymond Swanland
+*222 R Nightveil Specter @Steven Belledin

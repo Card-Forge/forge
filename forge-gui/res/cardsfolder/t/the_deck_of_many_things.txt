@@ -8,9 +8,11 @@ SVar:DBReturn:DB$ ChangeZone | ChangeType$ Card.YouCtrl | ChangeNum$ 1 | Hidden$
 SVar:DBDrawTwo:DB$ Draw | NumCards$ 2 | SpellDescription$ 10—19 VERT Draw two cards.
 SVar:DBReanimate:DB$ ChooseCard | Choices$ Creature | ChoiceZone$ Graveyard | Amount$ 1 | SubAbility$ DBChangeZone | SpellDescription$ 20 VERT Put a creature card from any graveyard onto the battlefield under your control. When that creature dies, its owner loses the game.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ ChosenCard | GainControl$ True | RememberChanged$ True | SubAbility$ DBLoseEffect
-SVar:DBLoseEffect:DB$ Effect | Triggers$ TrigDie | RememberObjects$ ChosenCard | Duration$ Permanent | ExileOnMoved$ Battlefield | SubAbility$ DBCleanup
-SVar:TrigDie:Mode$ ChangesZone | ValidCard$ Creature.IsRemembered | Origin$ Battlefield | Destination$ Graveyard | Execute$ DBLose | TriggerDescription$ When that creature dies, its owner loses the game.
-SVar:DBLose:DB$ LosesGame | Defined$ RememberedOwner
-SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+SVar:DBLoseEffect:DB$ Effect | Triggers$ TrigExile,TrigDie | RememberObjects$ RememberedCard | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:TrigExile:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Battlefield | Destination$ Any | ExcludedDestinations$ Graveyard | Execute$ DBExile | Static$ True
+SVar:TrigDie:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Battlefield | Destination$ Graveyard | Execute$ DBLose | TriggerDescription$ When that creature dies, its owner loses the game.
+SVar:DBLose:DB$ LosesGame | Defined$ RememberedOwner | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | ClearRemembered$ True
 DeckHas:Ability$Discard & Ability$Graveyard
 Oracle:{2}, {T}: Roll a d20 and subtract the number of cards in your hand. If the result is 0 or less, discard your hand.\n1—9 | Return a card at random from your graveyard to your hand.\n10—19 | Draw two cards.\n20 | Put a creature card from any graveyard onto the battlefield under your control. When that creature dies, its owner loses the game.

@@ -6,7 +6,6 @@ import forge.card.CardDb;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
 import forge.item.PaperCard;
-import forge.item.PaperToken;
 
 public class ImageUtil {
     public static float getNearestHQSize(float baseSize, float actualSize) {
@@ -28,28 +27,6 @@ public class ImageUtil {
             cp = StaticData.instance().getVariantCards().getCard(key);
         }
         return cp;
-    }
-
-    public static PaperToken getPaperTokenFromImageKey(String key) {
-        if ( key == null ) {
-            return null;
-        }
-
-        key = key.substring(2);
-        int index = key.lastIndexOf('_');
-        if (index != -1) {
-            String script = key.substring(0, index);
-            String edition = key.substring(index + 1);
-            if (script.startsWith("emblem"))
-                return null;
-            if (null == StaticData.instance().getCardEdition(edition)) {
-                script = key;
-                edition = "???";
-            }
-            script = script.replaceAll("[0-9]*$", "");
-            return StaticData.instance().getAllTokens().getToken(script, edition);
-        }
-        return null;
     }
 
     public static String getImageRelativePath(PaperCard cp, boolean backFace, boolean includeSet, boolean isDownloadUrl) {
@@ -78,7 +55,7 @@ public class ImageUtil {
 
         int artIdx = cp.getArtIndex() - 1;
         if (hasManyPictures) {
-            if ( cntPictures <= artIdx ) // prevent overflow
+            if (cntPictures <= artIdx) // prevent overflow
                 artIdx = cntPictures == 0 ? 0 : artIdx % cntPictures;
             s.append(artIdx + 1);
         }
@@ -113,8 +90,8 @@ public class ImageUtil {
 
     public static String getNameToUse(PaperCard cp, boolean backFace) {
         final CardRules card = cp.getRules();
-        if (backFace ) {
-            if ( hasBackFacePicture(cp) )
+        if (backFace) {
+            if (hasBackFacePicture(cp))
                 if (card.getOtherPart() != null) {
                     return card.getOtherPart().getName();
                 } else if (!card.getMeldWith().isEmpty()) {
@@ -140,7 +117,7 @@ public class ImageUtil {
         return getImageRelativePath(cp, backFace, true, true);
     }
 
-    public static String getScryfallDownloadUrl(PaperCard cp, boolean backFace, String setCode, String langCode){
+    public static String getScryfallDownloadUrl(PaperCard cp, boolean backFace, String setCode, String langCode, boolean useArtCrop){
         String editionCode;
         if ((setCode != null) && (setCode.length() > 0))
             editionCode = setCode;
@@ -149,12 +126,13 @@ public class ImageUtil {
         String cardCollectorNumber = cp.getCollectorNumber();
         // Hack to account for variations in Arabian Nights
         cardCollectorNumber = cardCollectorNumber.replace("+", "†");
+        String versionParam = useArtCrop ? "art_crop" : "normal";
         String faceParam = "";
         if (cp.getRules().getOtherPart() != null) {
             faceParam = (backFace ? "&face=back" : "&face=front");
         }
-        return String.format("%s/%s/%s?format=image&version=normal%s", editionCode, cardCollectorNumber,
-                langCode, faceParam);
+        return String.format("%s/%s/%s?format=image&version=%s%s", editionCode, cardCollectorNumber,
+                langCode, versionParam, faceParam);
     }
 
     public static String toMWSFilename(String in) {

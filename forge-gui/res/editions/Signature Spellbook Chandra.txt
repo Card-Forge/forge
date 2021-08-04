@@ -6,11 +6,11 @@ Type=Collector_Edition
 ScryfallCode=SS3
 
 [cards]
-1 M Chandra, Torch of Defiance
-2 R Cathartic Reunion
-3 R Fiery Confluence
-4 M Past in Flames
-5 M Pyroblast
-6 R Pyromancer Ascension
-7 R Rite of Flame
-8 R Young Pyromancer
+1 M Chandra, Torch of Defiance @Magali Villeneuve
+2 R Cathartic Reunion @Howard Lyon
+3 R Fiery Confluence @Micah Epstein
+4 M Past in Flames @Josu Hernaiz
+5 M Pyroblast @Yongjae Choi
+6 R Pyromancer Ascension @Karl Kopinski
+7 R Rite of Flame @Kieran Yanner
+8 R Young Pyromancer @Cynthia Sheppard

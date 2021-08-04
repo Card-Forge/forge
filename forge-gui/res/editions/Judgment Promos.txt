@@ -7,4 +7,4 @@ CardLang=he
 ScryfallCode=PJUD
 
 [cards]
-11 R Glory
+11 R Glory @Donato Giancola

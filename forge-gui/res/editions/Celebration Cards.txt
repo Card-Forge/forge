@@ -6,10 +6,10 @@ Type=Promo
 ScryfallCode=PCEL
 
 [cards]
-1 M 1996 World Champion
-2 R Shichifukujin Dragon
-3 R Proposal
-4 R Splendid Genesis
-5 R Fraternal Exaltation
-6 M Robot Chicken
-7 M Phoenix Heart
+1 M 1996 World Champion @Christopher Rush
+2 R Shichifukujin Dragon @Christopher Rush
+3 R Proposal @Quinton Hoover
+4 R Splendid Genesis @Monique Thirifay
+5 R Fraternal Exaltation @Susan Garfield
+6 M Robot Chicken @Robot Chicken
+7 M Phoenix Heart @Drew Tucker

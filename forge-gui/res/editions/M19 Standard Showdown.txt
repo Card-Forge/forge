@@ -6,8 +6,8 @@ Type=Promo
 ScryfallCode=PSS3
 
 [cards]
-1 R Plains
-2 R Island
-3 R Swamp
-4 R Mountain
-5 R Forest
+1 R Plains @Alayna Danner
+2 R Island @Alayna Danner
+3 R Swamp @Alayna Danner
+4 R Mountain @Alayna Danner
+5 R Forest @Alayna Danner

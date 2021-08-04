@@ -6,15 +6,15 @@ Type=Promo
 ScryfallCode=PAL01
 
 [cards]
-1 R Forest
-2 R Creeping Mold
-3 R Island
-4 R Dismiss
-5 R Mountain
-6 R Fling
-7 R Plains
-8 R Empyrial Armor
-9 R Swamp
-10 R Diabolic Edict
-11 R Forest
-12 R Gaea's Blessing
+1 R Forest @Pat Morrissey
+2 R Creeping Mold @David Seeley
+3 R Island @Anson Maddocks
+4 R Dismiss @Donato Giancola
+5 R Mountain @Tom Wänerstrand
+6 R Fling @Paolo Parente
+7 R Plains @Christopher Rush
+8 R Empyrial Armor @D. Alexander Gregory
+9 R Swamp @Douglas Shuler
+10 R Diabolic Edict @Ron Spencer
+11 R Forest @Christopher Rush
+12 R Gaea's Blessing @Rebecca Guay

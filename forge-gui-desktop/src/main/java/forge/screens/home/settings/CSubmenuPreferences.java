@@ -256,6 +256,7 @@ public enum CSubmenuPreferences implements ICDoc {
         initializeGameLogVerbosityComboBox();
         initializeCloseActionComboBox();
         initializeDefaultFontSizeComboBox();
+        initializeCardArtFormatComboBox();
         initializeCardArtPreference();
         initializeAutoUpdaterComboBox();
         initializeMulliganRuleComboBox();
@@ -442,6 +443,15 @@ public enum CSubmenuPreferences implements ICDoc {
         final String [] choices = {"10", "11", "12", "13", "14", "15", "16", "17", "18"};
         final FPref userSetting = FPref.UI_DEFAULT_FONT_SIZE;
         final FComboBoxPanel<String> panel = this.view.getCbpDefaultFontSizeComboBoxPanel();
+        final FComboBox<String> comboBox = createComboBox(choices, userSetting);
+        final String selectedItem = this.prefs.getPref(userSetting);
+        panel.setComboBox(comboBox, selectedItem);
+    }
+
+    private void initializeCardArtFormatComboBox() {
+        final String [] choices = {"Full", "Crop"};
+        final FPref userSetting = FPref.UI_CARD_ART_FORMAT;
+        final FComboBoxPanel<String> panel = this.view.getCbpCardArtFormatComboBoxPanel();
         final FComboBox<String> comboBox = createComboBox(choices, userSetting);
         final String selectedItem = this.prefs.getPref(userSetting);
         panel.setComboBox(comboBox, selectedItem);

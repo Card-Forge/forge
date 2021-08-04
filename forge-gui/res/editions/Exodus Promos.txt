@@ -6,4 +6,4 @@ Type=Promo
 ScryfallCode=PEXO
 
 [cards]
-89 R Monstrous Hound
+89 R Monstrous Hound @Dermot Power

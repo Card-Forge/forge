@@ -6,11 +6,11 @@ Type=Collector_Edition
 ScryfallCode=CC1
 
 [cards]
-1 R Freyalise, Llanowar's Fury
-2 M Omnath, Locus of Mana
-3 R Bane of Progress
-4 R Seedborn Muse
-5 R Sylvan Library
-6 R Worldly Tutor
-7 R Sol Ring
-8 R Command Tower
+1 R Freyalise, Llanowar's Fury @Kieran Yanner
+2 M Omnath, Locus of Mana @Chase Stone
+3 R Bane of Progress @Grzegorz Rutkowski
+4 R Seedborn Muse @Forrest Imel
+5 R Sylvan Library @Bryan Sola
+6 R Worldly Tutor @Cristi Balanescu
+7 R Sol Ring @Joseph Meehan
+8 R Command Tower @Joseph Meehan

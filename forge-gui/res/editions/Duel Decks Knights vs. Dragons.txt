@@ -7,87 +7,87 @@ Type=Duel_Deck
 ScryfallCode=DDG
 
 [cards]
-1 M Knight of the Reliquary
-2 C Caravan Escort
-3 C Lionheart Maverick
-4 C Knight of Cliffhaven
-5 U Knight of Meadowgrain
-6 R Knight of the White Orchid
-7 U Leonin Skyhunter
-8 U Silver Knight
-9 U White Knight
-10 R Knotvine Paladin
-11 C Steward of Valeron
-12 C Benalish Lancer
-13 U Zhalfirin Commander
-14 R Knight Exemplar
-15 U Wilt-Leaf Cavaliers
-16 U Kabira Vindicator
-17 R Kinsbaile Cavalier
-18 U Alaborn Cavalier
-19 C Skyhunter Patrol
-20 C Plover Knights
-21 U Juniper Order Ranger
-22 U Paladin of Prahv
-23 U Harm's Way
-24 U Reciprocate
-25 C Edge of Autumn
-26 C Mighty Leap
-27 U Reprisal
-28 U Test of Faith
-29 U Heroes' Reunion
-30 C Sigil Blessing
-31 R Loxodon Warhammer
-32 C Spidersilk Armor
-33 U Griffin Guide
-34 C Oblivion Ring
-35 U Grasslands
-36 C Sejiri Steppe
-37 C Selesnya Sanctuary
-38 U Treetop Village
-39 L Plains
-40 L Plains
-41 L Plains
-42 L Plains
-43 L Forest
-44 L Forest
-45 L Forest
-46 L Forest
-47 M Bogardan Hellkite
-48 C Cinder Wall
-49 C Skirk Prospector
-50 U Bloodmark Mentor
-51 C Fire-Belly Changeling
-52 C Mudbutton Torchrunner
-53 U Dragonspeaker Shaman
-54 U Dragon Whelp
-55 U Henge Guardian
-56 R Voracious Dragon
-57 C Bogardan Rager
-58 R Mordant Dragon
-59 R Kilnmouth Dragon
-60 R Shivan Hellkite
-61 R Thunder Dragon
-62 C Armillary Sphere
-63 U Dragon's Claw
-64 U Breath of Darigaaz
-65 C Dragon Fodder
-66 U Punishing Fire
-67 C Spitting Earth
-68 U Captive Flame
-69 C Ghostfire
-70 C Seething Song
-71 C Seismic Strike
-72 C Claws of Valakut
-73 U Temporary Insanity
-74 U Shiv's Embrace
-75 U Cone of Flame
-76 C Fiery Fall
-77 U Jaws of Stone
-78 L Mountain
-79 L Mountain
-80 L Mountain
-81 L Mountain
+1 M Knight of the Reliquary @Wayne Reynolds
+2 C Caravan Escort @Goran Josic
+3 C Lionheart Maverick @Hideaki Takamura
+4 C Knight of Cliffhaven @Matt Cavotta
+5 U Knight of Meadowgrain @Larry MacDougall
+6 R Knight of the White Orchid @Mark Zug
+7 U Leonin Skyhunter @Kev Walker
+8 U Silver Knight @Steve Prescott
+9 U White Knight @Christopher Moeller
+10 R Knotvine Paladin @Matt Stewart
+11 C Steward of Valeron @Greg Staples
+12 C Benalish Lancer @Paolo Parente
+13 U Zhalfirin Commander @Stuart Griffin
+14 R Knight Exemplar @Jason Chan
+15 U Wilt-Leaf Cavaliers @Steve Prescott
+16 U Kabira Vindicator @Steven Belledin
+17 R Kinsbaile Cavalier @Wayne Reynolds
+18 U Alaborn Cavalier @Kev Walker
+19 C Skyhunter Patrol @Matt Cavotta
+20 C Plover Knights @Quinton Hoover
+21 U Juniper Order Ranger @Greg Hildebrandt
+22 U Paladin of Prahv @William Simpson
+23 U Harm's Way @Dan Scott
+24 U Reciprocate @Pat Lee
+25 C Edge of Autumn @Jean-Sébastien Rossbach
+26 C Mighty Leap @rk post
+27 U Reprisal @Ciruelo
+28 U Test of Faith @Vance Kovacs
+29 U Heroes' Reunion @Terese Nielsen
+30 C Sigil Blessing @Matt Stewart
+31 R Loxodon Warhammer @Terese Nielsen
+32 C Spidersilk Armor @Scott Hampton
+33 U Griffin Guide @Jim Nelson
+34 C Oblivion Ring @Chuck Lukacs
+35 U Grasslands @John Avon
+36 C Sejiri Steppe @Anthony Francisco
+37 C Selesnya Sanctuary @John Avon
+38 U Treetop Village @Rob Alexander
+39 L Plains @Scott Bailey
+40 L Plains @Scott Bailey
+41 L Plains @Michael Komarck
+42 L Plains @Michael Komarck
+43 L Forest @Scott Bailey
+44 L Forest @Mike Ploog
+45 L Forest @Larry Elmore
+46 L Forest @Michael Komarck
+47 M Bogardan Hellkite @Wayne Reynolds
+48 C Cinder Wall @Anthony S. Waters
+49 C Skirk Prospector @Doug Chaffee
+50 U Bloodmark Mentor @Dave Allsop
+51 C Fire-Belly Changeling @Randy Gallegos
+52 C Mudbutton Torchrunner @Steve Ellis
+53 U Dragonspeaker Shaman @Kev Walker
+54 U Dragon Whelp @Steven Belledin
+55 U Henge Guardian @Chippy
+56 R Voracious Dragon @Dominick Domingo
+57 C Bogardan Rager @Clint Langley
+58 R Mordant Dragon @Scott Chou
+59 R Kilnmouth Dragon @Carl Critchlow
+60 R Shivan Hellkite @Kev Walker
+61 R Thunder Dragon @Chris Rahn
+62 C Armillary Sphere @Franz Vohwinkel
+63 U Dragon's Claw @Alan Pollack
+64 U Breath of Darigaaz @Greg Hildebrandt & Tim Hildebrandt
+65 C Dragon Fodder @Jaime Jones
+66 U Punishing Fire @Greg Staples
+67 C Spitting Earth @Michael Koelsch
+68 U Captive Flame @Keith Garletts
+69 C Ghostfire @Cyril Van Der Haegen
+70 C Seething Song @Jaime Jones
+71 C Seismic Strike @Christopher Moeller
+72 C Claws of Valakut @Igor Kieryluk
+73 U Temporary Insanity @Mark Romanoski
+74 U Shiv's Embrace @Dave Kendall
+75 U Cone of Flame @Chippy
+76 C Fiery Fall @Daarken
+77 U Jaws of Stone @Zoltan Boros & Gabor Szikszai
+78 L Mountain @Aleksi Briclot
+79 L Mountain @Aleksi Briclot
+80 L Mountain @Glen Angus
+81 L Mountain @Matt Cavotta
 
 [tokens]
 w_2_2_griffin_flying

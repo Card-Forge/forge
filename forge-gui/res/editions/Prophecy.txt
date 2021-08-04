@@ -13,149 +13,149 @@ Foil=OldStyle
 FoilAlwaysInCommonSlot=False
 
 [cards]
-1 U Abolish
-55 C Agent of Shauku
-29 C Alexi's Cloak
-28 R Alexi, Zephyr Mage
-2 C Aura Fracture
-82 R Avatar of Fury
-3 R Avatar of Hope
-109 R Avatar of Might
-30 R Avatar of Will
-56 R Avatar of Woe
-83 U Barbed Field
-4 R Blessed Wind
-57 R Bog Elemental
-58 C Bog Glider
-84 C Branded Brawlers
-85 U Brutal Suppression
-110 C Calming Verse
-5 R Celestial Convergence
-59 U Chilling Apparition
-136 U Chimeric Idol
-86 U Citadel of Pain
-31 C Coastal Hornclaw
-60 R Coffin Puppets
-137 R Copper-Leaf Angel
-111 U Darba
-61 C Death Charmer
-32 R Denying Wind
-62 C Despoil
-87 C Devastate
-6 C Diving Griffin
-112 R Dual Nature
-113 R Elephant Resurgence
-63 U Endbringer's Revel
-7 U Entangler
-33 U Excavation
-8 C Excise
-88 C Fault Riders
-64 C Fen Stalker
-89 R Fickle Efreet
-90 U Flameshot
-65 C Flay
-9 U Flowering Field
-34 U Foil
-114 R Forgotten Harvest
-10 U Glittering Lion
-11 C Glittering Lynx
-67 C Greel's Caress
-66 R Greel, Mind Raker
-35 C Gulf Squid
-36 C Hazy Homunculus
-37 R Heightened Awareness
-138 U Hollow Warrior
-68 R Infernal Genesis
-91 C Inflame
-12 R Jeweled Spirit
-116 C Jolrael's Favor
-115 R Jolrael, Empress of Beasts
-92 U Keldon Arsonist
-139 R Keldon Battlewagon
-93 C Keldon Berserker
-94 R Keldon Firebombers
-96 C Latulla's Orders
-95 R Latulla, Keldon Overseer
-97 U Lesser Gargadon
-117 U Living Terrain
-13 R Mageta the Lion
-14 C Mageta's Boon
-38 U Mana Vapors
-118 C Marsh Boa
-15 R Mercenary Informer
-16 C Mine Bearer
-17 U Mirror Strike
-119 R Mungha Wurm
-69 U Nakaya Shade
-70 U Noxious Field
-71 U Outbreak
-39 R Overburden
-98 C Panic Attack
-72 U Pit Raptor
-73 C Plague Fiend
-74 R Plague Wind
-40 R Psychic Theft
-120 C Pygmy Razorback
-41 U Quicksilver Wall
-75 R Rebel Informer
-42 C Rethink
-18 U Reveille Squad
-142 U Rhystic Cave
-19 C Rhystic Circle
-43 C Rhystic Deluge
-99 C Rhystic Lightning
-44 U Rhystic Scrying
-20 C Rhystic Shield
-45 C Rhystic Study
-76 U Rhystic Syphon
-77 R Rhystic Tutor
-121 C Rib Cage Spider
-46 C Ribbon Snake
-100 C Ridgeline Rager
-122 U Root Cage
-21 R Samite Sanctuary
-101 U Scoria Cat
-102 R Search for Survivors
-103 R Searing Wind
-22 R Sheltering Prayers
-23 U Shield Dancer
-47 R Shrouded Serpent
-123 C Silt Crawler
-124 U Snag
-24 C Soul Charmer
-78 C Soul Strings
-48 U Spiketail Drake
-49 C Spiketail Hatchling
-125 U Spitting Spider
-126 C Spore Frog
-104 C Spur Grappler
-127 R Squirrel Wrangler
-79 C Steal Strength
-50 C Stormwatch Eagle
-51 U Sunken Field
-25 U Sword Dancer
-105 R Task Mage Assembly
-128 C Thresher Beast
-129 C Thrive
-26 C Trenching Steed
-27 C Troubled Healer
-52 R Troublesome Spirit
-130 U Verdant Field
-106 R Veteran Brawlers
-131 C Vintara Elephant
-132 U Vintara Snapper
-133 R Vitalizing Wind
-80 U Wall of Vipers
-140 R Well of Discovery
-141 U Well of Life
-107 U Whip Sergeant
-81 C Whipstitched Zombie
-134 C Wild Might
-53 U Windscouter
-135 U Wing Storm
-143 R Wintermoon Mesa
-54 C Withdraw
-108 C Zerapa Minotaur
+1 U Abolish @Kev Walker
+55 C Agent of Shauku @Donato Giancola
+29 C Alexi's Cloak @Alan Rabinowitz
+28 R Alexi, Zephyr Mage @Mark Zug
+2 C Aura Fracture @Rebecca Guay
+82 R Avatar of Fury @rk post
+3 R Avatar of Hope @rk post
+109 R Avatar of Might @rk post
+30 R Avatar of Will @rk post
+56 R Avatar of Woe @rk post
+83 U Barbed Field @Carl Critchlow
+4 R Blessed Wind @Anthony S. Waters
+57 R Bog Elemental @Glen Angus
+58 C Bog Glider @Brian Snõddy
+84 C Branded Brawlers @Scott M. Fischer
+85 U Brutal Suppression @Val Mayerik
+110 C Calming Verse @Rebecca Guay
+5 R Celestial Convergence @Ray Lago
+59 U Chilling Apparition @Ron Spears
+136 U Chimeric Idol @Mark Tedin
+86 U Citadel of Pain @Darrell Riche
+31 C Coastal Hornclaw @DiTerlizzi
+60 R Coffin Puppets @Arnie Swekel
+137 R Copper-Leaf Angel @Christopher Moeller
+111 U Darba @Heather Hudson
+61 C Death Charmer @David Martin
+32 R Denying Wind @Tony Szczudlo
+62 C Despoil @Scott M. Fischer
+87 C Devastate @Greg Staples
+6 C Diving Griffin @John Howe
+112 R Dual Nature @Arnie Swekel
+113 R Elephant Resurgence @DiTerlizzi
+63 U Endbringer's Revel @Pete Venters
+7 U Entangler @D. Alexander Gregory
+33 U Excavation @Terese Nielsen
+8 C Excise @Joel Biske
+88 C Fault Riders @Dave Dorman
+64 C Fen Stalker @Edward P. Beard, Jr.
+89 R Fickle Efreet @Dave Dorman
+90 U Flameshot @Mark Brill
+65 C Flay @Matthew D. Wilson
+9 U Flowering Field @Jeff Miracola
+34 U Foil @Bradley Williams
+114 R Forgotten Harvest @DiTerlizzi
+10 U Glittering Lion @Don Hazeltine
+11 C Glittering Lynx @Dan Frazier
+67 C Greel's Caress @Chippy
+66 R Greel, Mind Raker @Brom
+35 C Gulf Squid @Wayne England
+36 C Hazy Homunculus @Anthony S. Waters
+37 R Heightened Awareness @Pete Venters
+138 U Hollow Warrior @Adam Rex
+68 R Infernal Genesis @Ron Spencer
+91 C Inflame @Eric Peterson
+12 R Jeweled Spirit @Christopher Moeller
+116 C Jolrael's Favor @Daren Bader
+115 R Jolrael, Empress of Beasts @Matthew D. Wilson
+92 U Keldon Arsonist @Paolo Parente
+139 R Keldon Battlewagon @Kev Walker
+93 C Keldon Berserker @Paolo Parente
+94 R Keldon Firebombers @Randy Gallegos
+96 C Latulla's Orders @Ben Thompson
+95 R Latulla, Keldon Overseer @Brom
+97 U Lesser Gargadon @Rob Alexander
+117 U Living Terrain @Andrew Goldhawk
+13 R Mageta the Lion @Brom
+14 C Mageta's Boon @Bradley Williams
+38 U Mana Vapors @Mark Romanoski
+118 C Marsh Boa @Heather Hudson
+15 R Mercenary Informer @Nelson DeCastro
+16 C Mine Bearer @D. Alexander Gregory
+17 U Mirror Strike @Dave Dorman
+119 R Mungha Wurm @Greg Staples
+69 U Nakaya Shade @Ray Lago
+70 U Noxious Field @Eric Peterson
+71 U Outbreak @Quinton Hoover
+39 R Overburden @John Matson
+98 C Panic Attack @Mike Ploog
+72 U Pit Raptor @Thomas Gianni
+73 C Plague Fiend @David Martin
+74 R Plague Wind @Alan Pollack
+40 R Psychic Theft @Don Hazeltine
+120 C Pygmy Razorback @Matt Cavotta
+41 U Quicksilver Wall @Matt Cavotta
+75 R Rebel Informer @Scott M. Fischer
+42 C Rethink @Matt Cavotta
+18 U Reveille Squad @Greg Hildebrandt & Tim Hildebrandt
+142 U Rhystic Cave @Rob Alexander
+19 C Rhystic Circle @Alan Pollack
+43 C Rhystic Deluge @Pete Venters
+99 C Rhystic Lightning @Roger Raupp
+44 U Rhystic Scrying @Roger Raupp
+20 C Rhystic Shield @Kev Walker
+45 C Rhystic Study @Terese Nielsen
+76 U Rhystic Syphon @Ron Spencer
+77 R Rhystic Tutor @Dan Frazier
+121 C Rib Cage Spider @Dana Knutson
+46 C Ribbon Snake @Mark Zug
+100 C Ridgeline Rager @Chippy
+122 U Root Cage @Glen Angus
+21 R Samite Sanctuary @Ben Thompson
+101 U Scoria Cat @Andrew Goldhawk
+102 R Search for Survivors @Mark Romanoski
+103 R Searing Wind @John Matson
+22 R Sheltering Prayers @Nelson DeCastro
+23 U Shield Dancer @Mike Ploog
+47 R Shrouded Serpent @Dana Knutson
+123 C Silt Crawler @Arnie Swekel
+124 U Snag @Ron Spencer
+24 C Soul Charmer @Glen Angus
+78 C Soul Strings @Daren Bader
+48 U Spiketail Drake @Michael Sutfin
+49 C Spiketail Hatchling @Greg Staples
+125 U Spitting Spider @Edward P. Beard, Jr.
+126 C Spore Frog @Donato Giancola
+104 C Spur Grappler @Randy Gallegos
+127 R Squirrel Wrangler @Carl Critchlow
+79 C Steal Strength @D. Alexander Gregory
+50 C Stormwatch Eagle @Aaron Boyd
+51 U Sunken Field @Donato Giancola
+25 U Sword Dancer @Roger Raupp
+105 R Task Mage Assembly @Val Mayerik
+128 C Thresher Beast @Jeff Easley
+129 C Thrive @Mike Ploog
+26 C Trenching Steed @Greg Hildebrandt & Tim Hildebrandt
+27 C Troubled Healer @Terese Nielsen
+52 R Troublesome Spirit @Adam Rex
+130 U Verdant Field @Ron Spears
+106 R Veteran Brawlers @Paolo Parente
+131 C Vintara Elephant @Tony Szczudlo
+132 U Vintara Snapper @Joel Biske
+133 R Vitalizing Wind @Jeff Easley
+80 U Wall of Vipers @Marc Fishman
+140 R Well of Discovery @Alan Rabinowitz
+141 U Well of Life @Tom Wänerstrand
+107 U Whip Sergeant @Paolo Parente
+81 C Whipstitched Zombie @Mark Tedin
+134 C Wild Might @Carl Critchlow
+53 U Windscouter @Brian Snõddy
+135 U Wing Storm @Heather Hudson
+143 R Wintermoon Mesa @Tom Wänerstrand
+54 C Withdraw @Adam Rex
+108 C Zerapa Minotaur @Mark Zug
 
 [tokens]
 b_1_1_minion

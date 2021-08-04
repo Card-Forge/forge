@@ -6,9 +6,9 @@ Type=Starter
 ScryfallCode=CP1
 
 [cards]
-1 R Prognostic Sphinx
-2 R Fated Intervention
-3 R Font of Fertility
-4 R Hydra Broodmaster
-5 R Prophet of Kruphix
-6 R Temple of Mystery
+1 R Prognostic Sphinx @Jesper Ejsing
+2 R Fated Intervention @Eric Deschamps
+3 R Font of Fertility @Jung Park
+4 R Hydra Broodmaster @Vincent Proce
+5 R Prophet of Kruphix @Anastasia Ovchinnikova
+6 R Temple of Mystery @Adam Paquette

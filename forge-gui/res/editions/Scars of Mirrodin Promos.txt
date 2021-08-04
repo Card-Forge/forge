@@ -6,8 +6,8 @@ Type=Promo
 ScryfallCode=PSOM
 
 [cards]
-24 R Tempered Steel
-69 R Memoricide
-174 U Memnite
-205 R Steel Hellkite
-223 M Wurmcoil Engine
+24 R Tempered Steel @jD
+*69 R Memoricide @Erica Yang
+174 U Memnite @rk post
+205★ R Steel Hellkite @Jaime Jones
+223★ M Wurmcoil Engine @Raymond Swanland

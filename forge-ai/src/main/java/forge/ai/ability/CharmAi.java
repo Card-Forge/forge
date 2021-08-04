@@ -30,8 +30,7 @@ public class CharmAi extends SpellAbilityAi {
         final int min;
         if (sa.isEntwine()) {
             num = min = choices.size();
-        }
-        else {
+        } else {
             num = AbilityUtils.calculateAmount(source, sa.getParamOrDefault("CharmNum", "1"), sa);
             min = sa.hasParam("MinCharmNum") ? AbilityUtils.calculateAmount(source, sa.getParamOrDefault("MinCharmNum", "1"), sa) : num;
         }

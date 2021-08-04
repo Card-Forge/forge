@@ -124,8 +124,6 @@ public class EffectEffect extends SpellAbilityEffect {
         }
 
         String image;
-        String set = hostCard.getSetCode().toLowerCase();
-        StringBuilder imageSet = new StringBuilder();
         if (sa.hasParam("Image")) {
             image = ImageKeys.getTokenKey(sa.getParam("Image"));
         } else if (name.startsWith("Emblem")) { // try to get the image from name
@@ -138,8 +136,6 @@ public class EffectEffect extends SpellAbilityEffect {
         } else { // use host image
             image = hostCard.getImageKey();
         }
-        imageSet.append(image).append("_").append(set);
-        image = imageSet.toString();
 
         for (Player controller : effectOwner) {
             final Card eff = createEffect(sa, controller, name, image);

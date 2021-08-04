@@ -8,37 +8,37 @@ Type=Collector_Edition
 ScryfallCode=PD2
 
 [cards]
-12 R Ball Lightning
-28 U Barbarian Ring
-13 U Boggart Ram-Gang
-21 U Browbeat
-16 C Chain Lightning
-9 C Cinder Pyromancer
-5 R Figure of Destiny
-15 U Fire Servant
-27 U Fireball
-26 C Fireblast
-22 U Flames of the Blood Hand
-29 U Ghitu Encampment
-1 R Grim Lavamancer
-23 R Hammer of Bogardan
-6 U Hellspark Elemental
-2 U Jackal Pup
-10 R Jaya Ballard, Task Mage
-14 U Keldon Champion
-7 C Keldon Marauders
-17 C Lightning Bolt
-3 U Mogg Fanatic
-8 C Mogg Flunkies
-32 L Mountain
-32 L Mountain
-32 L Mountain
-32 L Mountain
-24 U Pillage
-18 U Price of Progress
-20 R Reverberate
-4 U Spark Elemental
-25 U Sudden Impact
-30 C Teetering Peaks
-19 C Thunderbolt
-11 C Vulshok Sorcerer
+12 R Ball Lightning @Trevor Claxton
+28 U Barbarian Ring @John Avon
+13 U Boggart Ram-Gang @Dave Allsop
+21 U Browbeat @Mark Tedin
+16 C Chain Lightning @Christopher Moeller
+9 C Cinder Pyromancer @Greg Staples
+5 R Figure of Destiny @Scott M. Fischer
+15 U Fire Servant @Ryan Yee
+27 U Fireball @Dave Dorman
+26 C Fireblast @Michael Danza
+22 U Flames of the Blood Hand @Aleksi Briclot
+29 U Ghitu Encampment @John Avon
+1 R Grim Lavamancer @Michael Sutfin
+23 R Hammer of Bogardan @Ron Spencer
+6 U Hellspark Elemental @Justin Sweet
+2 U Jackal Pup @Kev Walker
+10 R Jaya Ballard, Task Mage @Matt Cavotta
+14 U Keldon Champion @Mark Tedin
+7 C Keldon Marauders @Alex Horley-Orlandelli
+17 C Lightning Bolt @Christopher Moeller
+3 U Mogg Fanatic @Brom
+8 C Mogg Flunkies @Brom
+31 L Mountain @John Avon
+32 L Mountain @Aleksi Briclot
+33 L Mountain @Aleksi Briclot
+34 L Mountain @Richard Wright
+24 U Pillage @Bradley Williams
+18 U Price of Progress @Richard Kane Ferguson
+20 R Reverberate @jD
+4 U Spark Elemental @John Avon
+25 U Sudden Impact @Wayne Reynolds
+30 C Teetering Peaks @Fred Fields
+19 C Thunderbolt @Dylan Martens
+11 C Vulshok Sorcerer @rk post

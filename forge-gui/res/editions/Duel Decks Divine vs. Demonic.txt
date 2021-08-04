@@ -8,68 +8,68 @@ Type=Duel_Deck
 ScryfallCode=DDC
 
 [cards]
-1 M Akroma, Angel of Wrath
-2 U Icatian Priest
-3 C Angelic Page
-4 C Charging Paladin
-5 C Venerable Monk
-6 U Angelic Protector
-7 U Serra Advocate
-8 U Sustainer of the Realm
-9 U Angel of Mercy
-10 R Serra Angel
-11 R Twilight Shepherd
-12 R Luminous Angel
-13 R Reya Dawnbringer
-14 C Healing Salve
-15 C Angelsong
-16 U Otherworldly Journey
-17 C Pacifism
-18 U Serra's Boon
-19 U Angelic Benediction
-20 C Faith's Fetters
-21 U Serra's Embrace
-22 U Righteous Cause
-23 U Angel's Feather
-24 U Marble Diamond
-25 C Secluded Steppe
-26 L Plains
-27 L Plains
-28 L Plains
-29 L Plains
-30 M Lord of the Pit
-31 C Abyssal Gatekeeper
-32 C Foul Imp
-33 U Daggerclaw Imp
-34 C Dusk Imp
-35 C Overeager Apprentice
-36 C Stinkweed Imp
-37 U Soot Imp
-38 C Demon's Jester
-39 U Souldrinker
-40 U Abyssal Specter
-41 C Cackling Imp
-42 R Fallen Angel
-43 R Reiver Demon
-44 R Kuro, Pitlord
-45 C Dark Ritual
-46 C Duress
-47 C Unholy Strength
-48 U Cruel Edict
-49 U Demonic Tutor
-50 C Dark Banishing
-51 U Oni Possession
-52 U Barter in Blood
-53 U Breeding Pit
-54 R Promise of Power
-55 U Corrupt
-56 U Consume Spirit
-57 U Demon's Horn
-58 C Barren Moor
-59 L Swamp
-60 L Swamp
-61 L Swamp
-62 L Swamp
+1 M Akroma, Angel of Wrath @Chippy
+2 U Icatian Priest @Stephen Tappin
+3 C Angelic Page @Marc Fishman
+4 C Charging Paladin @Ciruelo
+5 C Venerable Monk @D. Alexander Gregory
+6 U Angelic Protector @DiTerlizzi
+7 U Serra Advocate @Matthew D. Wilson
+8 U Sustainer of the Realm @Mark Zug
+9 U Angel of Mercy @Volkan Baǵa
+10 R Serra Angel @Greg Staples
+11 R Twilight Shepherd @Jason Chan
+12 R Luminous Angel @Jason Chan
+13 R Reya Dawnbringer @Matthew D. Wilson
+14 C Healing Salve @Greg Hildebrandt & Tim Hildebrandt
+15 C Angelsong @Sal Villagran
+16 U Otherworldly Journey @Vance Kovacs
+17 C Pacifism @Matthew D. Wilson
+18 U Serra's Boon @Steven Belledin
+19 U Angelic Benediction @Michael Komarck
+20 C Faith's Fetters @Brian Despain
+21 U Serra's Embrace @Zoltan Boros & Gabor Szikszai
+22 U Righteous Cause @Scott M. Fischer
+23 U Angel's Feather @Alan Pollack
+24 U Marble Diamond @David Martin
+25 C Secluded Steppe @Heather Hudson
+26 L Plains @Rob Alexander
+27 L Plains @Rob Alexander
+28 L Plains @Rob Alexander
+29 L Plains @Rob Alexander
+30 M Lord of the Pit @Chippy
+31 C Abyssal Gatekeeper @Mark Tedin
+32 C Foul Imp @Kev Walker
+33 U Daggerclaw Imp @Pete Venters
+34 C Dusk Imp @Pete Venters
+35 C Overeager Apprentice @Ray Lago
+36 C Stinkweed Imp @Nils Hamm
+37 U Soot Imp @Jesper Ejsing
+38 C Demon's Jester @Pete Venters
+39 U Souldrinker @Dermot Power
+40 U Abyssal Specter @Michael Sutfin
+41 C Cackling Imp @Matt Thompson
+42 R Fallen Angel @Matthew D. Wilson
+43 R Reiver Demon @Brom
+44 R Kuro, Pitlord @Jon Foster
+45 C Dark Ritual @Clint Langley
+46 C Duress @Steven Belledin
+47 C Unholy Strength @Terese Nielsen
+48 U Cruel Edict @Michael Sutfin
+49 U Demonic Tutor @Scott Chou
+50 C Dark Banishing @Dermot Power
+51 U Oni Possession @Aleksi Briclot
+52 U Barter in Blood @Paolo Parente
+53 U Breeding Pit @Adrian Smith
+54 R Promise of Power @Kev Walker
+55 U Corrupt @Dave Allsop
+56 U Consume Spirit @Matt Thompson
+57 U Demon's Horn @Alan Pollack
+58 C Barren Moor @Heather Hudson
+59 L Swamp @Mark Tedin
+60 L Swamp @Mark Tedin
+61 L Swamp @John Avon
+62 L Swamp @Vance Kovacs
 
 [tokens]
 w_1_1_spirit_flying

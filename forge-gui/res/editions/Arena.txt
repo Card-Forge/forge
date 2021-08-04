@@ -6,5 +6,5 @@ Type=Promo
 ScryfallCode=PHPR
 
 [cards]
-1 C Arena
-2 C Sewers of Estark
+1 C Arena @Rob Alexander
+2 C Sewers of Estark @Melissa A. Benson

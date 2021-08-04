@@ -8,87 +8,87 @@ Type=Duel_Deck
 ScryfallCode=DDL
 
 [cards]
-1 M Sun Titan
-2 C Somberwald Vigilante
-3 R Figure of Destiny
-4 C Cavalry Pegasus
-5 U Fencing Ace
-6 C Thraben Valiant
-7 U Stun Sniper
-8 U Truefire Paladin
-9 C Auramancer
-10 C Freewind Equenaut
-11 R Anax and Cymede
-12 C Armory Guard
-13 U Gustcloak Sentinel
-14 C Dawnstrike Paladin
-15 R Nobilis of War
-16 R Kamahl, Pit Fighter
-17 U Condemn
-18 U Daily Regimen
-19 C Pay No Heed
-20 U Righteousness
-21 C Stand Firm
-22 U Magma Jet
-23 U Ordeal of Purphoros
-24 C Bonds of Faith
-25 C Moment of Heroism
-26 U Undying Rage
-27 U Battle Mastery
-28 U Griffin Guide
-29 C Smite the Monstrous
-30 U Miraculous Recovery
-31 R Winds of Rath
-32 U Pyrokinesis
-33 C Boros Guildgate
-34 U New Benalia
-35 L Mountain
-36 L Mountain
-37 L Mountain
-38 L Mountain
-39 L Plains
-40 L Plains
-41 L Plains
-42 L Plains
-43 M Polukranos, World Eater
-44 C Orcish Lumberjack
-45 C Deadly Recluse
-46 U Kavu Predator
-47 C Satyr Hedonist
-48 C Zhur-Taa Druid
-49 C Blood Ogre
-50 R Troll Ascetic
-51 U Crowned Ceratok
-52 C Gorehorn Minotaurs
-53 C Ghor-Clan Savage
-54 R Deus of Calamity
-55 R Conquering Manticore
-56 R Crater Hellion
-57 R Skarrgan Firebird
-58 C Valley Rannet
-59 C Krosan Tusker
-60 U Skarrgan Skybreaker
-61 C Shower of Sparks
-62 C Prey Upon
-63 U Pyroclasm
-64 U Regrowth
-65 C Terrifying Presence
-66 U Destructive Revelry
-67 U Dragon Blood
-68 C Volt Charge
-69 U Beast Within
-70 U Fires of Yavimaya
-71 U Kazandu Refuge
-72 U Llanowar Reborn
-73 U Skarrg, the Rage Pits
-74 L Mountain
-75 L Mountain
-76 L Mountain
-77 L Mountain
-78 L Forest
-79 L Forest
-80 L Forest
-81 L Forest
+1 M Sun Titan @Karl Kopinski
+2 C Somberwald Vigilante @John Stanko
+3 R Figure of Destiny @Scott M. Fischer
+4 C Cavalry Pegasus @Kev Walker
+5 U Fencing Ace @David Rapoza
+6 C Thraben Valiant @Jason Chan
+7 U Stun Sniper @Steve Prescott
+8 U Truefire Paladin @Michael C. Hayes
+9 C Auramancer @Rebecca Guay
+10 C Freewind Equenaut @Rebecca Guay
+11 R Anax and Cymede @Willian Murai
+12 C Armory Guard @Karl Kopinski
+13 U Gustcloak Sentinel @Mark Zug
+14 C Dawnstrike Paladin @Tyler Jacobson
+15 R Nobilis of War @Christopher Moeller
+16 R Kamahl, Pit Fighter @Kev Walker
+17 U Condemn @Daren Bader
+18 U Daily Regimen @Warren Mahy
+19 C Pay No Heed @Adam Rex
+20 U Righteousness @Wayne England
+21 C Stand Firm @Matt Cavotta
+22 U Magma Jet @Justin Sweet
+23 U Ordeal of Purphoros @Maciej Kuciara
+24 C Bonds of Faith @Steve Argyle
+25 C Moment of Heroism @Christopher Moeller
+26 U Undying Rage @Scott M. Fischer
+27 U Battle Mastery @Zoltan Boros & Gabor Szikszai
+28 U Griffin Guide @Johann Bodin
+29 C Smite the Monstrous @Jason Felix
+30 U Miraculous Recovery @Mark Winters
+31 R Winds of Rath @Drew Tucker
+32 U Pyrokinesis @Igor Kieryluk
+33 C Boros Guildgate @Noah Bradley
+34 U New Benalia @Richard Wright
+35 L Mountain @Cliff Childs
+36 L Mountain @Jonas De Ro
+37 L Mountain @Karl Kopinski
+38 L Mountain @Adam Paquette
+39 L Plains @Rob Alexander
+40 L Plains @John Avon
+41 L Plains @Michael Komarck
+42 L Plains @Adam Paquette
+43 M Polukranos, World Eater @Karl Kopinski
+44 C Orcish Lumberjack @Steve Prescott
+45 C Deadly Recluse @Warren Mahy
+46 U Kavu Predator @Dan Scott
+47 C Satyr Hedonist @Chase Stone
+48 C Zhur-Taa Druid @Mark Winters
+49 C Blood Ogre @Christopher Moeller
+50 R Troll Ascetic @Puddnhead
+51 U Crowned Ceratok @Steve Prescott
+52 C Gorehorn Minotaurs @Wayne Reynolds
+53 C Ghor-Clan Savage @Greg Staples
+54 R Deus of Calamity @Todd Lockwood
+55 R Conquering Manticore @Chris Rahn
+56 R Crater Hellion @Daren Bader
+57 R Skarrgan Firebird @Kev Walker
+58 C Valley Rannet @Dave Allsop
+59 C Krosan Tusker @Kev Walker
+60 U Skarrgan Skybreaker @Dan Scott
+61 C Shower of Sparks @Christopher Moeller
+62 C Prey Upon @Dave Kendall
+63 U Pyroclasm @John Avon
+64 U Regrowth @Dan Scott
+65 C Terrifying Presence @Jaime Jones
+66 U Destructive Revelry @Kev Walker
+67 U Dragon Blood @Ron Spencer
+68 C Volt Charge @Jana Schirmer & Johannes Voss
+69 U Beast Within @Jesper Ejsing
+70 U Fires of Yavimaya @Izzy
+71 U Kazandu Refuge @Franz Vohwinkel
+72 U Llanowar Reborn @Philip Straub
+73 U Skarrg, the Rage Pits @Martina Pilcerova
+74 L Mountain @John Avon
+75 L Mountain @D. Alexander Gregory
+76 L Mountain @Dave Kendall
+77 L Mountain @Andreas Rocha
+78 L Forest @John Avon
+79 L Forest @Chippy
+80 L Forest @Jonas De Ro
+81 L Forest @Ryan Pancoast
 
 [tokens]
 w_2_2_griffin_flying

@@ -6,10 +6,10 @@ Type=Promo
 ScryfallCode=PGRN
 
 [cards]
-6 U Conclave Tribunal
-54 U Sinister Sabotage
-79 U Necrotic Wound
-156 U Boros Challenger
-168 R Emmara, Soul of the Accord
-171 R Firemind's Research
-206 U Thought Erasure
+6 U Conclave Tribunal @Seb McKinnon
+54 U Sinister Sabotage @Mathias Kollros
+79 U Necrotic Wound @Randy Vargas
+156 U Boros Challenger @Lucas Graciano
+168 R Emmara, Soul of the Accord @Randy Vargas
+171 R Firemind's Research @Robbie Trevino
+206 U Thought Erasure @Anna Steinbauer

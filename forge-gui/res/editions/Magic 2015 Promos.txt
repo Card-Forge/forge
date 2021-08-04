@@ -6,12 +6,12 @@ Type=Promo
 ScryfallCode=PM15
 
 [cards]
-28 R Resolute Archangel
-47 R Chief Engineer
-68 R Mercurial Pretender
-100 R In Garruk's Wake
-101 R Indulgent Tormentor
-145 R Goblin Rabblemaster
-162 R Siege Dragon
-191 R Phytotitan
-194 U Reclamation Sage
+28 R Resolute Archangel @Winona Nelson
+47 R Chief Engineer @Ryan Barger
+68 R Mercurial Pretender @Karla Ortiz
+100 R In Garruk's Wake @Brad Rigney
+101 R Indulgent Tormentor @Karl Kopinski
+145 R Goblin Rabblemaster @Zoltan Boros
+162 R Siege Dragon @Steve Prescott
+191 R Phytotitan @Marco Nelor
+194 U Reclamation Sage @Clint Cearley

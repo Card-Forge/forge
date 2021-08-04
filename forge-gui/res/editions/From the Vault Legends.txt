@@ -8,21 +8,21 @@ Alias=V11
 ScryfallCode=V11
 
 [cards]
-1 M Cao Cao, Lord of Wei
-2 M Captain Sisay
-3 M Doran, the Siege Tower
-4 M Kiki-Jiki, Mirror Breaker
-5 M Kresh the Bloodbraided
-6 M Mikaeus, the Lunarch
-7 M Omnath, Locus of Mana
-8 M Oona, Queen of the Fae
-9 M Progenitus
-10 M Rafiq of the Many
-11 M Sharuum the Hegemon
-12 M Sun Quan, Lord of Wu
-13 M Teferi, Mage of Zhalfir
-14 M Ulamog, the Infinite Gyre
-15 M Visara the Dreadful
+1 M Cao Cao, Lord of Wei @Gao Jianzhang
+2 M Captain Sisay @Ray Lago
+3 M Doran, the Siege Tower @Mark Zug
+4 M Kiki-Jiki, Mirror Breaker @Steven Belledin
+5 M Kresh the Bloodbraided @Steve Argyle
+6 M Mikaeus, the Lunarch @Steven Belledin
+7 M Omnath, Locus of Mana @Mike Bierek
+8 M Oona, Queen of the Fae @Adam Rex
+9 M Progenitus @Mike Bierek
+10 M Rafiq of the Many @Wayne Reynolds
+11 M Sharuum the Hegemon @Todd Lockwood
+12 M Sun Quan, Lord of Wu @Xu Xiaoming
+13 M Teferi, Mage of Zhalfir @Volkan Baǵa
+14 M Ulamog, the Infinite Gyre @Aleksi Briclot
+15 M Visara the Dreadful @Brad Rigney
 
 [tokens]
 ub_1_1_faerie_rogue_flying

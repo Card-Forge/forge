@@ -6,12 +6,12 @@ Type=Promo
 ScryfallCode=PIDW
 
 [cards]
-1 R Treasure Hunt
-2 R Faithless Looting
-3 R Electrolyze
-4 R Feast of Blood
-5 R Arrest
-6 R Consume Spirit
-7 R Standstill
-8 R Breath of Malfegor
-9 R Turnabout
+1 R Treasure Hunt @Aleksi Briclot
+2 R Faithless Looting @Karl Kopinski
+3 R Electrolyze @Karl Kopinski
+4 R Feast of Blood @Christopher Moeller
+5 R Arrest @Christopher Moeller
+6 R Consume Spirit @Dan Scott
+7 R Standstill @Matt Stewart
+8 R Breath of Malfegor @Alex Horley-Orlandelli
+9 R Turnabout @Dan Scott

@@ -6,5 +6,5 @@ Type=Promo
 ScryfallCode=PARB
 
 [cards]
-53★ M Dragon Broodmother
-70★ R Knight of New Alara
+53★ M Dragon Broodmother @Jean-Sébastien Rossbach
+70★ R Knight of New Alara @David Palumbo

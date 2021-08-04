@@ -6,4 +6,4 @@ Type=Promo
 ScryfallCode=PMMQ
 
 [cards]
-89 R Overtaker
+89 R Overtaker @Clyde Caldwell

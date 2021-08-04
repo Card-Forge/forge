@@ -13,250 +13,250 @@ ChaosDraftThemes=GRAVEYARD_MATTERS
 ScryfallCode=AVR
 
 [cards]
-167 C Abundant Growth
-125 U Aggravate
-42 C Alchemist's Apprentice
-225 R Alchemist's Refuge
-43 C Amass the Components
-1 R Angel of Glory's Rise
-2 R Angel of Jubilation
-3 C Angel's Mercy
-211 U Angel's Tomb
-212 U Angelic Armaments
-4 C Angelic Wall
-84 U Appetite for Brains
-44 R Arcane Melee
-5 U Archangel
-126 R Archwing Dragon
-6 M Avacyn, Angel of Hope
-7 U Banishing Stroke
-127 C Banners Raised
-85 U Barter in Blood
-128 C Battle Hymn
-213 C Bladed Bracers
-168 U Blessings of Nature
-86 U Blood Artist
-87 C Bloodflow Connoisseur
-88 C Bone Splinters
-129 M Bonfire of the Damned
-169 C Borderland Ranger
-170 U Bower Passage
-208 M Bruna, Light of Alabaster
-8 U Builder's Blessing
-130 R Burn at the Stake
-89 C Butcher Ghoul
-9 C Call to Serve
-45 R Captain of the Mists
-10 R Cathars' Crusade
-11 C Cathedral Sanctifier
-226 R Cavern of Souls
-171 R Champion of Lambholt
-12 C Cloudshift
-13 U Commander's Authority
-214 R Conjurer's Closet
-90 U Corpse Traders
-172 M Craterhoof Behemoth
-46 C Crippling Chill
-91 C Crypt Creeper
-14 C Cursebreak
-131 C Dangerous Wager
-92 R Dark Impostor
-47 R Deadeye Navigator
-93 C Death Wind
-15 C Defang
-16 U Defy Death
-132 C Demolish
-94 R Demonic Rising
-95 U Demonic Taskmaster
-96 R Demonlord of Ashmouth
-173 R Descendants' Path
-97 M Descent into Madness
-227 R Desolate Lighthouse
-48 R Devastation Tide
-17 U Devout Chaplain
-174 C Diregraf Escort
-18 R Divine Deflection
-98 R Dread Slaver
-49 C Dreadwaters
-99 C Driver of the Dead
-175 U Druid's Familiar
-176 R Druids' Repository
-133 R Dual Casting
-177 U Eaten by Spiders
-50 C Elgaud Shieldmate
-19 U Emancipation Angel
-20 M Entreat the Angels
-100 C Essence Harvest
-101 U Evernight Shade
-102 R Exquisite Blood
-134 U Falkenrath Exterminator
-21 C Farbog Explorer
-51 U Favorable Winds
-135 C Fervent Cathar
-52 U Fettergeist
-53 C Fleeting Distraction
-178 C Flowering Lumberknot
-244 L Forest
-244 L Forest
-244 L Forest
-215 R Gallows at Willow Hill
-54 C Galvanic Alchemist
-136 U Gang of Devils
-55 C Geist Snatch
-179 C Geist Trappers
-56 C Ghostform
-57 C Ghostly Flicker
-58 U Ghostly Touch
-103 C Ghoulflesh
-209 M Gisela, Blade of Goldnight
-104 R Gloom Surgeon
-180 U Gloomwidow
-22 U Goldnight Commander
-23 U Goldnight Redeemer
-105 C Grave Exchange
-106 M Griselbrand
-181 C Grounded
-59 C Gryff Vanguard
-137 C Guise of Fire
-138 C Hanweir Lancer
-107 R Harvester of Souls
-216 U Haunted Guardian
-60 C Havengul Skaab
-139 U Havengul Vampire
-140 C Heirs of Stromkirk
-24 R Herald of War
-25 U Holy Justiciar
-108 U Homicidal Seclusion
-141 R Hound of Griselbrand
-182 U Howlgeist
-109 U Human Frailty
-110 C Hunted Ghoul
-61 R Infinite Reflection
-62 U Into the Void
-235 L Island
-235 L Island
-235 L Island
-183 C Joint Assault
-142 U Kessig Malcontents
-111 R Killing Wave
-143 C Kruin Striker
-184 C Lair Delve
-63 U Latch Seeker
-26 C Leap of Faith
-144 U Lightning Mauler
-145 U Lightning Prowess
-64 R Lone Revenant
-65 R Lunar Mystic
-112 U Maalfeld Twins
-146 C Mad Prophet
-147 C Malicious Intent
-148 M Malignus
-113 U Marrow Bats
-66 U Mass Appeal
-114 C Mental Agony
-27 C Midnight Duelist
-28 C Midvast Protector
-67 C Mist Raven
-68 M Misthollow Griffin
-29 C Moonlight Geist
-217 R Moonsilver Spear
-30 C Moorland Inquisitor
-239 L Mountain
-239 L Mountain
-239 L Mountain
-218 C Narstad Scrapper
-185 C Natural End
-31 U Nearheath Pilgrim
-115 C Necrobite
-69 U Nephalia Smuggler
-186 C Nettle Swine
-187 C Nightshade Peddler
-219 R Otherworld Atlas
-70 C Outwit
-188 C Pathbreaker Wurm
-71 C Peel from Reality
-149 C Pillar of Flame
-232 L Plains
-232 L Plains
-232 L Plains
-116 C Polluted Dead
-117 C Predator's Gambit
-189 M Primal Surge
-150 C Raging Poltergeist
-190 U Rain of Thorns
-151 R Reforge the Soul
-118 C Renegade Demon
-32 R Restoration Angel
-191 R Revenge of the Hunted
-33 R Riders of Gavony
-34 C Righteous Blow
-152 C Riot Ringleader
-153 R Rite of Ruin
-72 C Rotcrown Ghoul
-154 U Rush of Blood
-155 C Scalding Devil
-73 C Scrapskin Drake
-220 C Scroll of Avacyn
-221 C Scroll of Griselbrand
-119 C Searchlight Geist
-74 U Second Guess
-228 C Seraph Sanctuary
-35 C Seraph of Dawn
-192 C Sheltering Word
-210 M Sigarda, Host of Herons
-36 R Silverblade Paladin
-229 R Slayers' Stronghold
-193 C Snare the Skies
-194 R Somberwald Sage
-156 C Somberwald Vigilante
-195 R Soul of the Harvest
-120 C Soulcage Fiend
-37 C Spectral Gateguards
-75 C Spectral Prison
-76 R Spirit Away
-77 U Stern Mentor
-78 R Stolen Goods
-157 U Stonewright
-238 L Swamp
-238 L Swamp
-238 L Swamp
-79 M Tamiyo, the Moon Sage
-80 U Tandem Lookout
-81 M Temporal Mastery
-38 R Terminus
-196 C Terrifying Presence
-158 C Thatcher Revolt
-39 C Thraben Valiant
-159 C Thunderbolt
-160 U Thunderous Wrath
-161 M Tibalt, the Fiend-Blooded
-197 C Timberland Guide
-222 U Tormentor's Trident
-121 R Treacherous Pit-Dweller
-122 U Triumph of Cruelty
-198 U Triumph of Ferocity
-199 C Trusted Forcemage
-162 R Tyrant of Discord
-200 R Ulvenwald Tracker
-163 C Uncanny Speed
-123 C Undead Executioner
-124 C Unhallowed Pact
-223 C Vanguard's Shield
-82 U Vanishment
-224 U Vessel of Endless Rest
-164 R Vexing Devil
-165 U Vigilante Justice
-40 C Voice of the Provinces
-201 U Vorstclaw
-202 C Wandering Wolf
-203 R Wild Defiance
-204 C Wildwood Geist
-83 C Wingcrafter
-205 U Wolfir Avenger
-206 R Wolfir Silverheart
-207 U Yew Spirit
-166 R Zealous Conscripts
-41 C Zealous Strike
+167 C Abundant Growth @Vincent Proce
+125 U Aggravate @Matt Stewart
+42 C Alchemist's Apprentice @David Palumbo
+225 R Alchemist's Refuge @Dan Scott
+43 C Amass the Components @Matt Stewart
+1 R Angel of Glory's Rise @James Ryman
+2 R Angel of Jubilation @Terese Nielsen
+3 C Angel's Mercy @Greg Staples
+211 U Angel's Tomb @Dan Scott
+212 U Angelic Armaments @Daniel Ljunggren
+4 C Angelic Wall @Allen Williams
+84 U Appetite for Brains @Michael C. Hayes
+44 R Arcane Melee @Jaime Jones
+5 U Archangel @Cynthia Sheppard
+126 R Archwing Dragon @Daarken
+6 M Avacyn, Angel of Hope @Jason Chan
+7 U Banishing Stroke @Igor Kieryluk
+127 C Banners Raised @Mike Bierek
+85 U Barter in Blood @Eric Deschamps
+128 C Battle Hymn @Nils Hamm
+213 C Bladed Bracers @Ryan Yee
+168 U Blessings of Nature @Anthony Francisco
+86 U Blood Artist @Johannes Voss
+87 C Bloodflow Connoisseur @Slawomir Maniak
+88 C Bone Splinters @Nils Hamm
+129 M Bonfire of the Damned @James Paick
+169 C Borderland Ranger @Zoltan Boros
+170 U Bower Passage @Cliff Childs
+208 M Bruna, Light of Alabaster @Winona Nelson
+8 U Builder's Blessing @John Stanko
+130 R Burn at the Stake @Zoltan Boros
+89 C Butcher Ghoul @Christopher Moeller
+9 C Call to Serve @Jaime Jones
+45 R Captain of the Mists @Allen Williams
+10 R Cathars' Crusade @Karl Kopinski
+11 C Cathedral Sanctifier @Michael C. Hayes
+226 R Cavern of Souls @Cliff Childs
+171 R Champion of Lambholt @Christopher Moeller
+12 C Cloudshift @Howard Lyon
+13 U Commander's Authority @Johannes Voss
+214 R Conjurer's Closet @Jason Felix
+90 U Corpse Traders @Kev Walker
+172 M Craterhoof Behemoth @Chris Rahn
+46 C Crippling Chill @Svetlin Velinov
+91 C Crypt Creeper @Scott Chou
+14 C Cursebreak @Sam Wolfe Connelly
+131 C Dangerous Wager @Drew Baker
+92 R Dark Impostor @Johannes Voss
+47 R Deadeye Navigator @Tomasz Jedruszek
+93 C Death Wind @Tomasz Jedruszek
+15 C Defang @Steven Belledin
+16 U Defy Death @Karl Kopinski
+132 C Demolish @Raymond Swanland
+94 R Demonic Rising @Trevor Claxton
+95 U Demonic Taskmaster @Chris Rahn
+96 R Demonlord of Ashmouth @Lucas Graciano
+173 R Descendants' Path @Terese Nielsen
+97 M Descent into Madness @Anthony Francisco
+227 R Desolate Lighthouse @Scott Chou
+48 R Devastation Tide @Raymond Swanland
+17 U Devout Chaplain @Lucas Graciano
+174 C Diregraf Escort @Ryan Pancoast
+18 R Divine Deflection @Steve Prescott
+98 R Dread Slaver @Dave Kendall
+49 C Dreadwaters @Cliff Childs
+99 C Driver of the Dead @James Ryman
+175 U Druid's Familiar @Adam Paquette
+176 R Druids' Repository @Daarken
+133 R Dual Casting @Johannes Voss
+177 U Eaten by Spiders @Slawomir Maniak
+50 C Elgaud Shieldmate @Anthony Palumbo
+19 U Emancipation Angel @Scott Chou
+20 M Entreat the Angels @Todd Lockwood
+100 C Essence Harvest @Daarken
+101 U Evernight Shade @Nic Klein
+102 R Exquisite Blood @Cynthia Sheppard
+134 U Falkenrath Exterminator @Winona Nelson
+21 C Farbog Explorer @Scott Chou
+51 U Favorable Winds @Winona Nelson
+135 C Fervent Cathar @Steven Belledin
+52 U Fettergeist @Izzy
+53 C Fleeting Distraction @Ryan Yee
+178 C Flowering Lumberknot @Nic Klein
+242 L Forest @James Paick
+243 L Forest @Jung Park
+244 L Forest @Eytan Zana
+215 R Gallows at Willow Hill @John Avon
+54 C Galvanic Alchemist @Svetlin Velinov
+136 U Gang of Devils @Erica Yang
+55 C Geist Snatch @Dan Scott
+179 C Geist Trappers @Anthony Palumbo
+56 C Ghostform @Scott Chou
+57 C Ghostly Flicker @Raymond Swanland
+58 U Ghostly Touch @Jason Felix
+103 C Ghoulflesh @Igor Kieryluk
+209 M Gisela, Blade of Goldnight @Jason Chan
+104 R Gloom Surgeon @Volkan Baǵa
+180 U Gloomwidow @Svetlin Velinov
+22 U Goldnight Commander @Chris Rahn
+23 U Goldnight Redeemer @Karl Kopinski
+105 C Grave Exchange @Sam Wolfe Connelly
+106 M Griselbrand @Igor Kieryluk
+181 C Grounded @Greg Staples
+59 C Gryff Vanguard @Jason Chan
+137 C Guise of Fire @Dave Kendall
+138 C Hanweir Lancer @Steve Prescott
+107 R Harvester of Souls @Slawomir Maniak
+216 U Haunted Guardian @Daniel Ljunggren
+60 C Havengul Skaab @Vincent Proce
+139 U Havengul Vampire @James Ryman
+140 C Heirs of Stromkirk @Winona Nelson
+24 R Herald of War @Eric Deschamps
+25 U Holy Justiciar @David Rapoza
+108 U Homicidal Seclusion @Cliff Childs
+141 R Hound of Griselbrand @Svetlin Velinov
+182 U Howlgeist @David Rapoza
+109 U Human Frailty @David Palumbo
+110 C Hunted Ghoul @Ryan Pancoast
+61 R Infinite Reflection @Igor Kieryluk
+62 U Into the Void @Daarken
+233 L Island @James Paick
+234 L Island @Adam Paquette
+235 L Island @Jung Park
+183 C Joint Assault @Raymond Swanland
+142 U Kessig Malcontents @John Stanko
+111 R Killing Wave @Steve Argyle
+143 C Kruin Striker @Christopher Moeller
+184 C Lair Delve @Jason A. Engle
+63 U Latch Seeker @Vincent Proce
+26 C Leap of Faith @Gabor Szikszai
+144 U Lightning Mauler @Dave Kendall
+145 U Lightning Prowess @David Rapoza
+64 R Lone Revenant @Jaime Jones
+65 R Lunar Mystic @Wesley Burt
+112 U Maalfeld Twins @Mike Sass
+146 C Mad Prophet @Wayne Reynolds
+147 C Malicious Intent @Kev Walker
+148 M Malignus @Jung Park
+113 U Marrow Bats @Jason A. Engle
+66 U Mass Appeal @Christopher Moeller
+114 C Mental Agony @Greg Staples
+27 C Midnight Duelist @Bud Cook
+28 C Midvast Protector @James Ryman
+67 C Mist Raven @John Avon
+68 M Misthollow Griffin @Jaime Jones
+29 C Moonlight Geist @Dan Scott
+217 R Moonsilver Spear @James Paick
+30 C Moorland Inquisitor @David Palumbo
+239 L Mountain @James Paick
+240 L Mountain @Adam Paquette
+241 L Mountain @Eytan Zana
+218 C Narstad Scrapper @Steven Belledin
+185 C Natural End @Scott Chou
+31 U Nearheath Pilgrim @Erica Yang
+115 C Necrobite @Nils Hamm
+69 U Nephalia Smuggler @Matt Stewart
+186 C Nettle Swine @Christopher Moeller
+187 C Nightshade Peddler @John Stanko
+219 R Otherworld Atlas @Sam Wolfe Connelly
+70 C Outwit @Erica Yang
+188 C Pathbreaker Wurm @Nils Hamm
+71 C Peel from Reality @Jason Felix
+149 C Pillar of Flame @Karl Kopinski
+230 L Plains @Adam Paquette
+231 L Plains @Jung Park
+232 L Plains @Eytan Zana
+116 C Polluted Dead @Jason A. Engle
+117 C Predator's Gambit @Zoltan Boros
+189 M Primal Surge @David Rapoza
+150 C Raging Poltergeist @Slawomir Maniak
+190 U Rain of Thorns @Sam Burley
+151 R Reforge the Soul @Jaime Jones
+118 C Renegade Demon @Tomasz Jedruszek
+32 R Restoration Angel @Johannes Voss
+191 R Revenge of the Hunted @Christopher Moeller
+33 R Riders of Gavony @Volkan Baǵa
+34 C Righteous Blow @Clint Cearley
+152 C Riot Ringleader @Gabor Szikszai
+153 R Rite of Ruin @Clint Cearley
+72 C Rotcrown Ghoul @Dave Kendall
+154 U Rush of Blood @Cynthia Sheppard
+155 C Scalding Devil @Erica Yang
+73 C Scrapskin Drake @Kev Walker
+220 C Scroll of Avacyn @Cliff Childs
+221 C Scroll of Griselbrand @Cliff Childs
+119 C Searchlight Geist @Steven Belledin
+74 U Second Guess @Karl Kopinski
+228 C Seraph Sanctuary @David Palumbo
+35 C Seraph of Dawn @Todd Lockwood
+192 C Sheltering Word @Igor Kieryluk
+210 M Sigarda, Host of Herons @Chris Rahn
+36 R Silverblade Paladin @Jason Chan
+229 R Slayers' Stronghold @Karl Kopinski
+193 C Snare the Skies @Ryan Yee
+194 R Somberwald Sage @Steve Argyle
+156 C Somberwald Vigilante @John Stanko
+195 R Soul of the Harvest @Eytan Zana
+120 C Soulcage Fiend @Jason A. Engle
+37 C Spectral Gateguards @Wayne England
+75 C Spectral Prison @Vincent Proce
+76 R Spirit Away @Greg Staples
+77 U Stern Mentor @Igor Kieryluk
+78 R Stolen Goods @Anthony Francisco
+157 U Stonewright @Wesley Burt
+236 L Swamp @James Paick
+237 L Swamp @Adam Paquette
+238 L Swamp @Jung Park
+79 M Tamiyo, the Moon Sage @Eric Deschamps
+80 U Tandem Lookout @Kev Walker
+81 M Temporal Mastery @Franz Vohwinkel
+38 R Terminus @James Paick
+196 C Terrifying Presence @Jaime Jones
+158 C Thatcher Revolt @Ryan Pancoast
+39 C Thraben Valiant @Jason Chan
+159 C Thunderbolt @Anthony Francisco
+160 U Thunderous Wrath @Adam Paquette
+161 M Tibalt, the Fiend-Blooded @Peter Mohrbacher
+197 C Timberland Guide @Zoltan Boros
+222 U Tormentor's Trident @Anthony Palumbo
+121 R Treacherous Pit-Dweller @Svetlin Velinov
+122 U Triumph of Cruelty @Izzy
+198 U Triumph of Ferocity @James Ryman
+199 C Trusted Forcemage @Cynthia Sheppard
+162 R Tyrant of Discord @Richard Wright
+200 R Ulvenwald Tracker @Christopher Moeller
+163 C Uncanny Speed @Raymond Swanland
+123 C Undead Executioner @Dave Kendall
+124 C Unhallowed Pact @Volkan Baǵa
+223 C Vanguard's Shield @Ryan Pancoast
+82 U Vanishment @Daarken
+224 U Vessel of Endless Rest @John Avon
+164 R Vexing Devil @Lucas Graciano
+165 U Vigilante Justice @Steve Prescott
+40 C Voice of the Provinces @Igor Kieryluk
+201 U Vorstclaw @Lucas Graciano
+202 C Wandering Wolf @Tomasz Jedruszek
+203 R Wild Defiance @Slawomir Maniak
+204 C Wildwood Geist @Lars Grant-West
+83 C Wingcrafter @Matt Stewart
+205 U Wolfir Avenger @Daniel Ljunggren
+206 R Wolfir Silverheart @Raymond Swanland
+207 U Yew Spirit @Dan Scott
+166 R Zealous Conscripts @Steve Prescott
+41 C Zealous Strike @Bud Cook
 
 [tokens]
 w_4_4_angel_flying

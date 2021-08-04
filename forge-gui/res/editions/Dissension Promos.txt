@@ -6,5 +6,5 @@ Type=Promo
 ScryfallCode=PDIS
 
 [cards]
-140★ R Avatar of Discord
-141★ R Azorius Guildmage
+140★ R Avatar of Discord @rk post
+141★ R Azorius Guildmage @Christopher Moeller

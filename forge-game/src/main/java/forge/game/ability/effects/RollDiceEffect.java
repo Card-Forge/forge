@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import forge.game.event.GameEventRollDie;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.game.ability.AbilityKey;
@@ -75,6 +76,8 @@ public class RollDiceEffect extends SpellAbilityEffect {
 
         for (int i = 0; i < amount; i++) {
             int roll = MyRandom.getRandom().nextInt(sides) + 1;
+            // Play the die roll sound
+            player.getGame().fireEvent(new GameEventRollDie());
             rolls.add(roll);
             total += roll;
         }

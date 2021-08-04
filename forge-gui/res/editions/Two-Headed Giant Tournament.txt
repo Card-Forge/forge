@@ -6,4 +6,4 @@ Type=Promo
 ScryfallCode=P2HG
 
 [cards]
-1 R Underworld Dreams
+1 R Underworld Dreams @Julie Baroh

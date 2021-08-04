@@ -3,8 +3,7 @@ ManaCost:1 W B
 Types:Legendary Creature Human Soldier
 PT:3/3
 S:Mode$ Continuous | Affected$ Human.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Humans you control get +1/+1.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME or another Human enters the battlefield under your control, exile target card from an opponent's graveyard.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+Human+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigExile | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another Human enters the battlefield under your control, exile target card from an opponent's graveyard.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Creature.Other+Human+YouCtrl | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME or another Human enters the battlefield under your control, exile target card from an opponent's graveyard.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in an opponent's graveyard | ValidTgts$ Card.OppOwn
 A:AB$ Destroy | Cost$ 2 Sac<2/Human> | ValidTgts$ Creature.powerGE4 | TgtPrompt$ Select target creature with power 4 or greater | SpellDescription$ Destroy target creature with power 4 or greater.
 DeckHints:Type$Human

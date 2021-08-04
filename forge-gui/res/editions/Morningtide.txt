@@ -12,156 +12,156 @@ FatPackExtraSlots=40 BasicLands LRW
 ScryfallCode=MOR
 
 [cards]
-113 C Ambassador Oak
-57 R Auntie's Snitch
-1 C Ballyrush Banneret
-2 R Battletide Alchemist
-58 R Bitterblossom
-59 C Blightsoil Druid
-85 R Boldwyr Heavyweights
-86 U Boldwyr Intimidator
-87 R Borderland Behemoth
-114 C Bosk Banneret
-115 U Bramblewood Paragon
-88 C Brighthearth Banneret
-3 C Burrenton Bombardier
-4 C Burrenton Shield-Bearers
-5 U Cenn's Tactician
-116 R Chameleon Colossus
-6 C Changeling Sentinel
-141 U Cloak and Dagger
-7 C Coordinated Barrage
-89 R Countryside Crusher
-117 R Cream of the Crop
-8 U Daily Regimen
-29 R Declaration of Naught
-118 C Deglamer
-30 C Dewdrop Spy
-31 C Disperse
-32 C Distant Melody
-142 U Diviner's Wand
-143 R Door of Destinies
-119 C Earthbrawn
-60 R Earwig Squad
-120 C Elvish Warrior
-121 C Everbark Shaman
-33 C Fencer Clique
-61 R Fendeep Summoner
-122 C Fertilid
-62 C Festercreep
-9 R Feudkiller's Verdict
-63 C Final-Sting Faerie
-90 C Fire Juggler
-34 C Floodchaser
-10 C Forfend
-64 C Frogtosser Banneret
-123 C Game-Trail Changeling
-124 R Gilt-Leaf Archdruid
-11 U Graceful Reprieve
-125 R Greatbow Doyen
-35 R Grimoire Thief
-126 U Heritage Druid
-91 C Hostile Realm
-127 U Hunting Triad
-12 R Idyllic Tutor
-13 R Indomitable Ancients
-36 C Ink Dissolver
-37 U Inspired Sprite
-92 C Kindled Fury
-14 R Kinsbaile Borderguard
-15 R Kinsbaile Cavalier
-16 C Kithkin Zephyrnaut
-38 R Knowledge Exploitation
-39 C Latchkey Faerie
-128 R Leaf-Crowned Elder
-93 R Lightning Crafter
-129 C Luminescent Rain
-94 C Lunk Errant
-130 C Lys Alana Bowmaster
-65 R Maralen of the Mornsong
-17 U Meadowboon
-40 C Merrow Witsniper
-66 R Mind Shatter
-41 R Mind Spring
-67 C Moonglove Changeling
-68 C Morsel Theft
-18 C Mosquito Guard
-42 C Mothdust Changeling
-95 C Mudbutton Clanger
-147 R Murmuring Bosk
-148 R Mutavault
-43 C Negate
-44 U Nevermaker
-69 U Nightshade Schemers
-70 U Noggin Whack
-45 R Notorious Throng
-144 U Obsidian Battle-Axe
-71 U Offalsnout
-72 U Oona's Blackguard
-131 U Orchard Warden
-19 C Order of the Golden Cricket
-73 C Pack's Disdain
-20 R Preeminent Captain
-74 C Prickly Boggart
-149 R Primal Beyond
-75 C Pulling Teeth
-96 U Pyroclast Consul
-97 U Rage Forger
-132 R Reach of Branches
-133 U Recross the Paths
-21 U Redeem the Lost
-134 C Reins of the Vinesteed
-98 U Release the Ants
-46 U Research the Deep
-22 R Reveillark
-76 U Revive the Fallen
-135 R Rhys the Exiled
-99 U Rivals' Duel
-100 C Roar of the Crowd
-150 R Rustic Clachan
-47 U Sage of Fables
-48 U Sage's Dousing
-136 R Scapeshift
-77 R Scarblade Elite
-101 C Seething Pathblazer
-102 R Sensation Gorger
-103 C Shard Volley
-104 R Shared Animosity
-23 C Shinewend
-49 R Sigil Tracer
-50 R Slithermuse
-105 U Spitebellows
-78 C Squeaking Pie Grubfellows
-79 R Stenchskipper
-106 C Stingmoggie
-80 U Stinkdrinker Bandit
-107 U Stomping Slabs
-24 R Stonehewer Giant
-51 C Stonybrook Banneret
-25 C Stonybrook Schoolmaster
-52 C Stream of Unconsciousness
-108 C Sunflare Shaman
-53 R Supreme Exemplar
-26 U Swell of Courage
-109 R Taurean Mauler
-54 U Thieves' Fortune
-145 U Thornbite Staff
-110 R Titan's Revenge
-137 R Unstoppable Ash
-55 R Vendilion Clique
-111 R Vengeful Firebrand
-146 U Veteran's Armaments
-81 C Violet Pall
-138 U Walker of the Grove
-27 U Wandering Graybeard
-112 C War-Spike Changeling
-82 U Warren Weirding
-56 U Waterspout Weavers
-83 C Weed-Pruner Poplar
-28 C Weight of Conscience
-84 R Weirding Shaman
-139 C Winnower Patrol
-140 U Wolf-Skull Shaman
+113 C Ambassador Oak @Steve Prescott
+57 R Auntie's Snitch @Warren Mahy
+1 C Ballyrush Banneret @Ralph Horsley
+2 R Battletide Alchemist @Steve Prescott
+58 R Bitterblossom @Rebecca Guay
+59 C Blightsoil Druid @Nils Hamm
+85 R Boldwyr Heavyweights @Wayne Reynolds
+86 U Boldwyr Intimidator @Christopher Moeller
+87 R Borderland Behemoth @Jesper Ejsing
+114 C Bosk Banneret @Ralph Horsley
+115 U Bramblewood Paragon @Jim Murray
+88 C Brighthearth Banneret @Ralph Horsley
+3 C Burrenton Bombardier @Ron Spencer
+4 C Burrenton Shield-Bearers @Daren Bader
+5 U Cenn's Tactician @Zoltan Boros & Gabor Szikszai
+116 R Chameleon Colossus @Darrell Riche
+6 C Changeling Sentinel @Chuck Lukacs
+141 U Cloak and Dagger @Daren Bader
+7 C Coordinated Barrage @Franz Vohwinkel
+89 R Countryside Crusher @Brian Snõddy
+117 R Cream of the Crop @Howard Lyon
+8 U Daily Regimen @Warren Mahy
+29 R Declaration of Naught @Rob Alexander
+118 C Deglamer @Zoltan Boros & Gabor Szikszai
+30 C Dewdrop Spy @Wayne England
+31 C Disperse @Steve Ellis
+32 C Distant Melody @Omar Rayyan
+142 U Diviner's Wand @Wayne England
+143 R Door of Destinies @Larry MacDougall
+119 C Earthbrawn @Kev Walker
+60 R Earwig Squad @Warren Mahy
+120 C Elvish Warrior @Kev Walker
+121 C Everbark Shaman @Larry MacDougall
+33 C Fencer Clique @William O'Connor
+61 R Fendeep Summoner @Jesper Ejsing
+122 C Fertilid @Wayne Reynolds
+62 C Festercreep @Jeff Easley
+9 R Feudkiller's Verdict @Dan Scott
+63 C Final-Sting Faerie @Wayne Reynolds
+90 C Fire Juggler @Thomas Denmark
+34 C Floodchaser @Eric Fortune
+10 C Forfend @Franz Vohwinkel
+64 C Frogtosser Banneret @Ralph Horsley
+123 C Game-Trail Changeling @Martina Pilcerova
+124 R Gilt-Leaf Archdruid @Steve Prescott
+11 U Graceful Reprieve @William O'Connor
+125 R Greatbow Doyen @Steven Belledin
+35 R Grimoire Thief @Randy Gallegos
+126 U Heritage Druid @Larry MacDougall
+91 C Hostile Realm @John Avon
+127 U Hunting Triad @Jim Nelson
+12 R Idyllic Tutor @Howard Lyon
+13 R Indomitable Ancients @Pete Venters
+36 C Ink Dissolver @Brandon Dorman
+37 U Inspired Sprite @Michael Sutfin
+92 C Kindled Fury @Shelly Wan
+14 R Kinsbaile Borderguard @Christopher Moeller
+15 R Kinsbaile Cavalier @Wayne Reynolds
+16 C Kithkin Zephyrnaut @Quinton Hoover & Val Mayerik
+38 R Knowledge Exploitation @Darrell Riche
+39 C Latchkey Faerie @Warren Mahy
+128 R Leaf-Crowned Elder @Wayne Reynolds
+93 R Lightning Crafter @Dan Scott
+129 C Luminescent Rain @John Avon
+94 C Lunk Errant @Warren Mahy
+130 C Lys Alana Bowmaster @Dan Scott
+65 R Maralen of the Mornsong @Mark Zug
+17 U Meadowboon @Steven Belledin
+40 C Merrow Witsniper @Steve Prescott
+66 R Mind Shatter @Michael Sutfin
+41 R Mind Spring @Mark Zug
+67 C Moonglove Changeling @Wayne England
+68 C Morsel Theft @Darrell Riche
+18 C Mosquito Guard @Randy Gallegos
+42 C Mothdust Changeling @Shelly Wan
+95 C Mudbutton Clanger @Larry MacDougall
+147 R Murmuring Bosk @John Avon
+148 R Mutavault @Fred Fields
+43 C Negate @Jeremy Jarvis
+44 U Nevermaker @Chuck Lukacs
+69 U Nightshade Schemers @Paolo Parente
+70 U Noggin Whack @Alan Pollack
+45 R Notorious Throng @Thomas Denmark
+144 U Obsidian Battle-Axe @Jeff Easley
+71 U Offalsnout @Alex Horley-Orlandelli
+72 U Oona's Blackguard @Kev Walker
+131 U Orchard Warden @Rebecca Guay
+19 C Order of the Golden Cricket @Mark Zug
+73 C Pack's Disdain @Pete Venters
+20 R Preeminent Captain @Greg Staples
+74 C Prickly Boggart @Jesper Ejsing
+149 R Primal Beyond @Mark Tedin
+75 C Pulling Teeth @Jim Pavelec
+96 U Pyroclast Consul @Christopher Moeller
+97 U Rage Forger @Dominick Domingo
+132 R Reach of Branches @Scott Hampton
+133 U Recross the Paths @Greg Hildebrandt
+21 U Redeem the Lost @Scott M. Fischer
+134 C Reins of the Vinesteed @Jim Pavelec
+98 U Release the Ants @Ron Spencer
+46 U Research the Deep @Eric Fortune
+22 R Reveillark @Jim Murray
+76 U Revive the Fallen @Steven Belledin
+135 R Rhys the Exiled @Steve Prescott
+99 U Rivals' Duel @Zoltan Boros & Gabor Szikszai
+100 C Roar of the Crowd @Dave Dorman
+150 R Rustic Clachan @Fred Fields
+47 U Sage of Fables @Shelly Wan
+48 U Sage's Dousing @Richard Sardinha
+136 R Scapeshift @Fred Fields
+77 R Scarblade Elite @Greg Staples
+101 C Seething Pathblazer @Steve Prescott
+102 R Sensation Gorger @Matt Cavotta
+103 C Shard Volley @Franz Vohwinkel
+104 R Shared Animosity @Chuck Lukacs
+23 C Shinewend @Terese Nielsen
+49 R Sigil Tracer @Dan Scott
+50 R Slithermuse @Steven Belledin
+105 U Spitebellows @Larry MacDougall
+78 C Squeaking Pie Grubfellows @Jim Pavelec
+79 R Stenchskipper @Howard Lyon
+106 C Stingmoggie @Omar Rayyan
+80 U Stinkdrinker Bandit @Brandon Dorman
+107 U Stomping Slabs @Alex Horley-Orlandelli
+24 R Stonehewer Giant @Steve Prescott
+51 C Stonybrook Banneret @Ralph Horsley
+25 C Stonybrook Schoolmaster @Quinton Hoover & Val Mayerik
+52 C Stream of Unconsciousness @Rebecca Guay
+108 C Sunflare Shaman @Dave Dorman
+53 R Supreme Exemplar @Mark Tedin
+26 U Swell of Courage @Jim Nelson
+109 R Taurean Mauler @Dominick Domingo
+54 U Thieves' Fortune @Zoltan Boros & Gabor Szikszai
+145 U Thornbite Staff @Jesper Ejsing
+110 R Titan's Revenge @Christopher Moeller
+137 R Unstoppable Ash @Brian Snõddy
+55 R Vendilion Clique @Michael Sutfin
+111 R Vengeful Firebrand @William O'Connor
+146 U Veteran's Armaments @Alan Pollack
+81 C Violet Pall @Jeff Miracola
+138 U Walker of the Grove @Todd Lockwood
+27 U Wandering Graybeard @Nils Hamm
+112 C War-Spike Changeling @Mark Poole
+82 U Warren Weirding @Matt Cavotta
+56 U Waterspout Weavers @Eric Fortune
+83 C Weed-Pruner Poplar @Jeff Miracola
+28 C Weight of Conscience @Heather Hudson
+84 R Weirding Shaman @Matt Cavotta
+139 C Winnower Patrol @Eric Fortune
+140 U Wolf-Skull Shaman @Jim Murray
 
 [tokens]
 w_5_5_giant_warrior

@@ -6,4 +6,4 @@ Type=Promo
 ScryfallCode=PHPR
 
 [cards]
-4 C Giant Badger
+4 C Giant Badger @Liz Danforth

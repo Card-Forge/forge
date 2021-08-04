@@ -8,60 +8,60 @@ Type=Collector_Edition
 ScryfallCode=mps
 
 [cards]
-1 M Cataclysmic Gearhulk
-2 M Torrential Gearhulk
-3 M Noxious Gearhulk
-4 M Combustible Gearhulk
-5 M Verdurous Gearhulk
-6 M AEther Vial
-7 M Champion's Helm
-8 M Chromatic Lantern
-9 M Chrome Mox
-10 M Cloudstone Curio
-11 M Crucible of Worlds
-12 M Gauntlet of Power
-13 M Hangarback Walker
-14 M Lightning Greaves
-15 M Lotus Petal
-16 M Mana Crypt
-17 M Mana Vault
-18 M Mind's Eye
-19 M Mox Opal
-20 M Painter's Servant
-21 M Rings of Brighthearth
-22 M Scroll Rack
-23 M Sculpting Steel
-24 M Sol Ring
-25 M Solemn Simulacrum
-26 M Static Orb
-27 M Steel Overseer
-28 M Sword of Feast and Famine
-29 M Sword of Fire and Ice
-30 M Sword of Light and Shadow
-31 M Arcbound Ravager
-32 M Black Vise
-33 M Chalice of the Void
-34 M Defense Grid
-35 M Duplicant
-36 M Engineered Explosives
-37 M Ensnaring Bridge
-38 M Extraplanar Lens
-39 M Grindstone
-40 M Meekstone
-41 M Oblivion Stone
-42 M Ornithopter
-43 M Paradox Engine
-44 M Pithing Needle
-45 M Planar Bridge
-46 M Platinum Angel
-47 M Sphere of Resistance
-48 M Staff of Domination
-49 M Sundering Titan
-50 M Sword of Body and Mind
-51 M Sword of War and Peace
-52 M Trinisphere
-53 M Vedalken Shackles
-54 M Wurmcoil Engine
+1 M Cataclysmic Gearhulk @Jason Rainville
+2 M Torrential Gearhulk @Jakub Kasper
+3 M Noxious Gearhulk @Vincent Proce
+4 M Combustible Gearhulk @Greg Opalinski
+5 M Verdurous Gearhulk @Zack Stella
+6 M Aether Vial @Raoul Vitale
+7 M Champion's Helm @Lindsey Look
+8 M Chromatic Lantern @Yeong-Hao Han
+9 M Chrome Mox @Kieran Yanner
+10 M Cloudstone Curio @Noah Bradley
+11 M Crucible of Worlds @Chris Rahn
+12 M Gauntlet of Power @John Severin Brassell
+13 M Hangarback Walker @Adam Paquette
+14 M Lightning Greaves @Slawomir Maniak
+15 M Lotus Petal @Slawomir Maniak
+16 M Mana Crypt @Volkan Baǵa
+17 M Mana Vault @Kirsten Zirngibl
+18 M Mind's Eye @David Gaillet
+19 M Mox Opal @Chris Rahn
+20 M Painter's Servant @Magali Villeneuve
+21 M Rings of Brighthearth @Yeong-Hao Han
+22 M Scroll Rack @Jason A. Engle
+23 M Sculpting Steel @Magali Villeneuve
+24 M Sol Ring @Volkan Baǵa
+25 M Solemn Simulacrum @Daarken
+26 M Static Orb @Tommy Arnold
+27 M Steel Overseer @Adam Paquette
+28 M Sword of Feast and Famine @Steven Belledin
+29 M Sword of Fire and Ice @Volkan Baǵa
+30 M Sword of Light and Shadow @Matt Stewart
+31 M Arcbound Ravager @Daarken
+32 M Black Vise @Igor Kieryluk
+33 M Chalice of the Void @Kieran Yanner
+34 M Defense Grid @Jonas De Ro
+35 M Duplicant @Slawomir Maniak
+36 M Engineered Explosives @James Paick
+37 M Ensnaring Bridge @Florian de Gesincourt
+38 M Extraplanar Lens @Noah Bradley
+39 M Grindstone @Johann Bodin
+40 M Meekstone @Steve Argyle
+41 M Oblivion Stone @Yeong-Hao Han
+42 M Ornithopter @Howard Lyon
+43 M Paradox Engine @Vincent Proce
+44 M Pithing Needle @Joseph Meehan
+45 M Planar Bridge @Raymond Swanland
+46 M Platinum Angel @Victor Adame Minguez
+47 M Sphere of Resistance @Richard Wright
+48 M Staff of Domination @Zezhou Chen
+49 M Sundering Titan @Lius Lasahido
+50 M Sword of Body and Mind @Mark Zug
+51 M Sword of War and Peace @Filip Burburan
+52 M Trinisphere @Daniel Ljunggren
+53 M Vedalken Shackles @Svetlin Velinov
+54 M Wurmcoil Engine @Aleksi Briclot
 
 [tokens]
 g_2_2_wolf

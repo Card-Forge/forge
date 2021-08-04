@@ -7,60 +7,60 @@ Type=Collector_Edition
 ScryfallCode=mp2
 
 [cards]
-1 M Austere Command
-2 M Aven Mindcensor
-3 M Containment Priest
-4 M Loyal Retainers
-5 M Oketra the True
-6 M Worship
-7 M Wrath of God
-8 M Consecrated Sphinx
-9 M Counterbalance
-10 M Counterspell
-11 M Cryptic Command
-12 M Daze
-13 M Divert
-14 M Force of Will
-15 M Kefnet the Mindful
-16 M Pact of Negation
-17 M Spell Pierce
-18 M Stifle
-19 M Attrition
-20 M Bontu the Glorified
-21 M Dark Ritual
-22 M Diabolic Intent
-23 M Entomb
-24 M Mind Twist
-25 M Aggravated Assault
-26 M Chain Lightning
-27 M Hazoret the Fervent
-28 M Rhonas the Indomitable
-29 M Maelstrom Pulse
-30 M Vindicate
-31 M Armageddon
-32 M Capsize
-33 M Forbid
-34 M Omniscience
-35 M Opposition
-36 M Sunder
-37 M Threads of Disloyalty
-38 M Avatar of Woe
-39 M Damnation
-40 M Desolation Angel
-41 M Diabolic Edict
-42 M Doomsday
-43 M No Mercy
-44 M Slaughter Pact
-45 M Thoughtseize
-46 M Blood Moon
-47 M Boil
-48 M Shatterstorm
-49 M Through the Breach
-50 M Choke
-51 M The Locust God
-52 M Lord of Extinction
-53 M The Scarab God
-54 M The Scorpion God
+1 M Austere Command @Richard Wright
+2 M Aven Mindcensor @Jose Cabrera
+3 M Containment Priest @Igor Kieryluk
+4 M Loyal Retainers @Bastien L. Deharme
+5 M Oketra the True @Bastien L. Deharme
+6 M Worship @Cliff Childs
+7 M Wrath of God @Titus Lunter
+8 M Consecrated Sphinx @Lius Lasahido
+9 M Counterbalance @Joseph Meehan
+10 M Counterspell @Chase Stone
+11 M Cryptic Command @Richard Wright
+12 M Daze @Richard Wright
+13 M Divert @Igor Kieryluk
+14 M Force of Will @Jaime Jones
+15 M Kefnet the Mindful @Jose Cabrera
+16 M Pact of Negation @Titus Lunter
+17 M Spell Pierce @Joseph Meehan
+18 M Stifle @Cliff Childs
+19 M Attrition @Jose Cabrera
+20 M Bontu the Glorified @Daniel Ljunggren
+21 M Dark Ritual @Richard Wright
+22 M Diabolic Intent @Joseph Meehan
+23 M Entomb @Eytan Zana
+24 M Mind Twist @Igor Kieryluk
+25 M Aggravated Assault @Greg Opalinski
+26 M Chain Lightning @Igor Kieryluk
+27 M Hazoret the Fervent @Joseph Meehan
+28 M Rhonas the Indomitable @Jack Wang
+29 M Maelstrom Pulse @Igor Kieryluk
+30 M Vindicate @Igor Kieryluk
+31 M Armageddon @Florian de Gesincourt
+32 M Capsize @Cliff Childs
+33 M Forbid @Richard Wright
+34 M Omniscience @Josh Hass
+35 M Opposition @Svetlin Velinov
+36 M Sunder @Titus Lunter
+37 M Threads of Disloyalty @Yongjae Choi
+38 M Avatar of Woe @Igor Kieryluk
+39 M Damnation @Zack Stella
+40 M Desolation Angel @Bastien L. Deharme
+41 M Diabolic Edict @Daarken
+42 M Doomsday @Jaime Jones
+43 M No Mercy @Jonas De Ro
+44 M Slaughter Pact @Josh Hass
+45 M Thoughtseize @James Ryman
+46 M Blood Moon @Christine Choi
+47 M Boil @Philip Straub
+48 M Shatterstorm @Johann Bodin
+49 M Through the Breach @Darek Zabrocki
+50 M Choke @Florian de Gesincourt
+51 M The Locust God @Grzegorz Rutkowski
+52 M Lord of Extinction @Jason A. Engle
+53 M The Scarab God @Grzegorz Rutkowski
+54 M The Scorpion God @Grzegorz Rutkowski
 
 [tokens]
 w_1_1_warrior_vigilance

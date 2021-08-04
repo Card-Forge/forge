@@ -13,131 +13,131 @@ Foil=NotSupported
 ScryfallCode=CHR
 
 [cards]
-1 U Abu Ja'far
-43 C Active Volcano
-2 R Akron Legionnaire
-44 U Aladdin
-3 R Angelic Voices
-71 R Arcades Sabboth
-91 R Arena of the Ancients
-57 C Argothian Pixies
-92 C Ashnod's Altar
-93 C Ashnod's Transmogrant
-72 R Axelrod Gunnarson
-73 R Ayesha Tanaka
-15 U Azure Drake
-29 U Banshee
-94 R Barl's Cage
-45 U Beasts of Bogardan
-46 R Blood Moon
-4 U Blood of the Martyr
-30 C Bog Rats
-95 R Book of Rass
-16 C Boomerang
-96 R Bronze Horse
-58 C Cat Warriors
-74 R Chromium
-112 R City of Brass
-59 U Cocoon
-60 R Concordant Crossroads
-61 U Craw Giant
-31 C Cuombajj Witches
-62 R Cyclone
-5 C D'Avenant Archer
-75 R Dakkon Blackblade
-17 R Dance of Many
-18 C Dandan
-6 C Divine Offering
-63 C Emerald Dragonfly
-19 U Enchantment Alteration
-64 U Erhnam Djinn
-32 U Fallen Angel
-97 C Feldon's Cane
-47 U Fire Drake
-20 C Fishliver Oil
-21 C Flash Flood
-98 C Fountain of Youth
-76 R Gabriel Angelfire
-99 R Gauntlets of Chaos
-65 C Ghazban Ogre
-33 C Giant Slug
-48 U Goblin Artisans
-49 C Goblin Digging Team
-50 C Goblin Shrine
-51 C Goblins of the Flarg
-34 C Hasran Ogress
-35 R Hell's Caretaker
-100 R Horn of Deafening
-7 C Indestructible Aura
-8 U Ivory Guardians
-101 R Jalum Tome
-102 R Jeweled Bird
-77 R Johan
-22 R Juxtapose
-9 C Keepers of the Faith
-78 U Kei Takahashi
-52 R Land's Edge
-103 C Living Armor
-79 U Marhault Elsdragon
-66 C Metamorphosis
-53 C Mountain Yeti
-80 R Nebuchadnezzar
-81 R Nicol Bolas
-104 R Obelisk of Undoing
-82 R Palladia-Mors
-10 R Petra Sphinx
-54 U Primordial Ooze
-23 U Puppet Master
-67 U Rabid Wombat
-105 R Rakalite
-24 U Recall
-25 C Remove Soul
-11 C Repentant Blacksmith
-68 R Revelation
-83 R Rubinia Soulsinger
-106 C Runesword
-113 R Safe Haven
-69 C Scavenger Folk
-107 R Sentinel
-108 R Serpent Generator
-12 U Shield Wall
-36 U Shimian Night Stalker
-84 U Sivitri Scarzam
-85 R Sol'kanar the Swamp King
-86 R Stangg
-70 U Storm Seeker
-37 U Takklemaggot
-26 R Teleport
-38 U The Fallen
-39 R The Wretched
-87 U Tobias Andrion
-88 U Tor Wauki
-109 C Tormod's Crypt
-40 C Transmutation
-110 R Triassic Egg
-114a U Urza's Mine
-114b U Urza's Mine
-114c U Urza's Mine
-114d U Urza's Mine
-115a U Urza's Power Plant
-115b U Urza's Power Plant
-115c U Urza's Power Plant
-115d U Urza's Power Plant
-116a U Urza's Tower
-116b U Urza's Tower
-116c U Urza's Tower
-116d U Urza's Tower
-89 R Vaevictis Asmadi
-111 R Voodoo Doll
-55 C Wall of Heat
-56 U Wall of Opposition
-41 C Wall of Shadows
-27 C Wall of Vapor
-28 U Wall of Wonder
-13 C War Elephant
-14 U Witch Hunter
-90 R Xira Arien
-42 R Yawgmoth Demon
+1 U Abu Ja'far @Ken Meyer, Jr.
+43 C Active Volcano @Justin Hampton
+2 R Akron Legionnaire @Mark Poole
+44 U Aladdin @Julie Baroh
+3 R Angelic Voices @Julie Baroh
+71 R Arcades Sabboth @Edward P. Beard, Jr.
+91 R Arena of the Ancients @Tom Wänerstrand
+57 C Argothian Pixies @Amy Weber
+92 C Ashnod's Altar @Anson Maddocks
+93 C Ashnod's Transmogrant @Mark Tedin
+72 R Axelrod Gunnarson @Scott Kirschner
+73 R Ayesha Tanaka @Bryon Wackwitz
+15 U Azure Drake @Dan Frazier
+29 U Banshee @Jesper Myrfors
+94 R Barl's Cage @Tom Wänerstrand
+45 U Beasts of Bogardan @Daniel Gelon
+46 R Blood Moon @Tom Wänerstrand
+4 U Blood of the Martyr @Christopher Rush
+30 C Bog Rats @Ron Spencer
+95 R Book of Rass @Sandra Everingham
+16 C Boomerang @Brian Snõddy
+96 R Bronze Horse @Mark Poole
+58 C Cat Warriors @Melissa A. Benson
+74 R Chromium @Edward P. Beard, Jr.
+112 R City of Brass @Mark Tedin
+59 U Cocoon @Mark Tedin
+60 R Concordant Crossroads @Amy Weber
+61 U Craw Giant @Christopher Rush
+31 C Cuombajj Witches @Kaja Foglio
+62 R Cyclone @Mark Tedin
+5 C D'Avenant Archer @Douglas Shuler
+75 R Dakkon Blackblade @Richard Kane Ferguson
+17 R Dance of Many @Sandra Everingham
+18 C Dandan @Drew Tucker
+6 C Divine Offering @Jeff A. Menges
+63 C Emerald Dragonfly @Quinton Hoover
+19 U Enchantment Alteration @Brian Snõddy
+64 U Erhnam Djinn @Ken Meyer, Jr.
+32 U Fallen Angel @Anson Maddocks
+97 C Feldon's Cane @Mark Tedin
+47 U Fire Drake @Christopher Rush
+20 C Fishliver Oil @Anson Maddocks
+21 C Flash Flood @Tom Wänerstrand
+98 C Fountain of Youth @Daniel Gelon
+76 R Gabriel Angelfire @Daniel Gelon
+99 R Gauntlets of Chaos @Dan Frazier
+65 C Ghazban Ogre @Jesper Myrfors
+33 C Giant Slug @Anson Maddocks
+48 U Goblin Artisans @Julie Baroh
+49 C Goblin Digging Team @Ron Spencer
+50 C Goblin Shrine @Ron Spencer
+51 C Goblins of the Flarg @Tom Wänerstrand
+34 C Hasran Ogress @Dan Frazier
+35 R Hell's Caretaker @Sandra Everingham
+100 R Horn of Deafening @Dan Frazier
+7 C Indestructible Aura @Mark Poole
+8 U Ivory Guardians @Melissa A. Benson
+101 R Jalum Tome @Tom Wänerstrand
+102 R Jeweled Bird @Amy Weber
+77 R Johan @Mark Tedin
+22 R Juxtapose @Justin Hampton
+9 C Keepers of the Faith @Daniel Gelon
+78 U Kei Takahashi @Scott Kirschner
+52 R Land's Edge @Brian Snõddy
+103 C Living Armor @Anson Maddocks
+79 U Marhault Elsdragon @Mark Poole
+66 C Metamorphosis @Christopher Rush
+53 C Mountain Yeti @Dan Frazier
+80 R Nebuchadnezzar @Richard Kane Ferguson
+81 R Nicol Bolas @Edward P. Beard, Jr.
+104 R Obelisk of Undoing @Tom Wänerstrand
+82 R Palladia-Mors @Edward P. Beard, Jr.
+10 R Petra Sphinx @Sandra Everingham
+54 U Primordial Ooze @Sandra Everingham
+23 U Puppet Master @Sandra Everingham
+67 U Rabid Wombat @Kaja Foglio
+105 R Rakalite @Christopher Rush
+24 U Recall @Brian Snõddy
+25 C Remove Soul @Brian Snõddy
+11 C Repentant Blacksmith @Drew Tucker
+68 R Revelation @Kaja Foglio
+83 R Rubinia Soulsinger @Rob Alexander
+106 C Runesword @Christopher Rush
+113 R Safe Haven @Christopher Rush
+69 C Scavenger Folk @Dennis Detwiller
+107 R Sentinel @Randy Asplund-Faith
+108 R Serpent Generator @Mark Tedin
+12 U Shield Wall @Douglas Shuler
+36 U Shimian Night Stalker @Jesper Myrfors
+84 U Sivitri Scarzam @NéNé Thomas
+85 R Sol'kanar the Swamp King @Richard Kane Ferguson
+86 R Stangg @Mark Poole
+70 U Storm Seeker @Mark Poole
+37 U Takklemaggot @Daniel Gelon
+26 R Teleport @Douglas Shuler
+38 U The Fallen @Jesper Myrfors
+39 R The Wretched @Christopher Rush
+87 U Tobias Andrion @Andi Rusu
+88 U Tor Wauki @Randy Asplund-Faith
+109 C Tormod's Crypt @Christopher Rush
+40 C Transmutation @Susan Van Camp
+110 R Triassic Egg @Dan Frazier
+114a U Urza's Mine @Anson Maddocks
+114b U Urza's Mine @Anson Maddocks
+114c U Urza's Mine @Anson Maddocks
+114d U Urza's Mine @Anson Maddocks
+115a U Urza's Power Plant @Mark Tedin
+115b U Urza's Power Plant @Mark Tedin
+115c U Urza's Power Plant @Mark Tedin
+115d U Urza's Power Plant @Mark Tedin
+116a U Urza's Tower @Mark Poole
+116b U Urza's Tower @Mark Poole
+116c U Urza's Tower @Mark Poole
+116d U Urza's Tower @Mark Poole
+89 R Vaevictis Asmadi @Andi Rusu
+111 R Voodoo Doll @Sandra Everingham
+55 C Wall of Heat @Richard Thomas
+56 U Wall of Opposition @Harold McNeill
+41 C Wall of Shadows @Pete Venters
+27 C Wall of Vapor @Richard Thomas
+28 U Wall of Wonder @Richard Thomas
+13 C War Elephant @Kristen Bishop
+14 U Witch Hunter @Jesper Myrfors
+90 R Xira Arien @Melissa A. Benson
+42 R Yawgmoth Demon @Sandra Everingham
 
 [tokens]
 stangg_twin

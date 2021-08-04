@@ -8,74 +8,74 @@ Type=Multiplayer
 ScryfallCode=GNT
 
 [cards]
-1 M Militant Angel
-2 M Inspired Sphinx
-3 M Rot Hulk
-4 M Goblin Goliath
-5 M Avatar of Growth
-6 U Aerial Responder
-7 R Always Watching
-8 R Benalish Marshal
-9 U Bright Reprisal
-10 C Call the Cavalry
-11 U Everdawn Champion
-12 C Fan Bearer
-13 C Inspired Charge
-14 C Inspiring Captain
-15 C Mesa Unicorn
-16 U Serra Angel
-17 U Subjugator Angel
-18 U Advanced Stitchwing
-19 U Air Elemental
-20 C Claustrophobia
-21 U Favorable Winds
-22 U Hydrolash
-23 U Reckless Scholar
-24 R Soulblade Djinn
-25 U Whirler Rogue
-26 R Zahid, Djinn of the Lamp
-27 C Bone Splinters
-28 U Cruel Revival
-29 U Fleshbag Marauder
-30 C Gruesome Fate
-31 R Languish
-32 R Liliana's Mastery
-33 U Lord of the Accursed
-34 C Tattered Mummy
-35 U Thallid Soothsayer
-36 U Zulaport Cutthroat
-37 C Bombard
-38 R Captivating Crew
-39 C Dragon Fodder
-40 U Rolling Thunder
-41 U Seismic Elemental
-42 R Siege-Gang Commander
-43 C Tormenting Voice
-44 R Ghalta, Primal Hunger
-45 C Jungle Delver
-46 C Llanowar Elves
-47 R Nissa's Revelation
-48 U Overcome
-49 C Seek the Wilds
-50 U Thrashing Brontodon
-51 C Eager Construct
-52 U Filigree Familiar
-53 U Howling Golem
-54 C Manalith
-55 U Pilgrim's Eye
-56 U Rhonas's Monument
-57 U Snare Thopter
-58 C Welder Automaton
-59 L Plains
-60 L Plains
-61 L Island
-62 L Island
-63 L Swamp
-64 L Swamp
-65 L Mountain
-66 L Mountain
-67 L Forest
-68 L Forest
+1 M Militant Angel @Victor Adame Minguez
+2 M Inspired Sphinx @Jesper Ejsing
+3 M Rot Hulk @Grzegorz Rutkowski
+4 M Goblin Goliath @Slawomir Maniak
+5 M Avatar of Growth @Grzegorz Rutkowski
+6 U Aerial Responder @Raoul Vitale
+7 R Always Watching @Chase Stone
+8 R Benalish Marshal @Mark Zug
+9 U Bright Reprisal @Ryan Alexander Lee
+10 C Call the Cavalry @Scott Murphy
+11 U Everdawn Champion @Sara Winters
+12 C Fan Bearer @Anthony Palumbo
+13 C Inspired Charge @Willian Murai
+14 C Inspiring Captain @Ben Maier
+15 C Mesa Unicorn @Winona Nelson
+16 U Serra Angel @Donato Giancola
+17 U Subjugator Angel @Lius Lasahido
+18 U Advanced Stitchwing @Johann Bodin
+19 U Air Elemental @Kev Walker
+20 C Claustrophobia @Ryan Pancoast
+21 U Favorable Winds @Shreya Shetty
+22 U Hydrolash @Clint Cearley
+23 U Reckless Scholar @Steve Prescott
+24 R Soulblade Djinn @Viktor Titov
+25 U Whirler Rogue @Winona Nelson
+26 R Zahid, Djinn of the Lamp @Magali Villeneuve
+27 C Bone Splinters @Deruchenko Alexander
+28 U Cruel Revival @Miles Johnston
+29 U Fleshbag Marauder @Mark Zug
+30 C Gruesome Fate @Even Amundsen
+31 R Languish @Jeff Simpson
+32 R Liliana's Mastery @Kieran Yanner
+33 U Lord of the Accursed @Grzegorz Rutkowski
+34 C Tattered Mummy @Slawomir Maniak
+35 U Thallid Soothsayer @Jason A. Engle
+36 U Zulaport Cutthroat @Jason Rainville
+37 C Bombard @Alex Konstad
+38 R Captivating Crew @Winona Nelson
+39 C Dragon Fodder @Jaime Jones
+40 U Rolling Thunder @Yohann Schepacz
+41 U Seismic Elemental @Jasper Sandner
+42 R Siege-Gang Commander @Aaron Miller
+43 C Tormenting Voice @Allen Williams
+44 R Ghalta, Primal Hunger @Chase Stone
+45 C Jungle Delver @Kieran Yanner
+46 C Llanowar Elves @Chris Rahn
+47 R Nissa's Revelation @Izzy
+48 U Overcome @Craig J Spearing
+49 C Seek the Wilds @Anna Steinbauer
+50 U Thrashing Brontodon @Jakub Kasper
+51 C Eager Construct @Craig J Spearing
+52 U Filigree Familiar @Izzy
+53 U Howling Golem @Grzegorz Rutkowski
+54 C Manalith @Ryan Yee
+55 U Pilgrim's Eye @Dan Scott
+56 U Rhonas's Monument @Cliff Childs
+57 U Snare Thopter @John Avon
+58 C Welder Automaton @Victor Adame Minguez
+59 L Plains @John Avon
+60 L Plains @Howard Lyon
+61 L Island @Florian de Gesincourt
+62 L Island @Mark Poole
+63 L Swamp @Jonas De Ro
+64 L Swamp @Jung Park
+65 L Mountain @Florian de Gesincourt
+66 L Mountain @Nils Hamm
+67 L Forest @Noah Bradley
+68 L Forest @Dimitar Marinski
 
 [tokens]
 w_2_2_knight_vigilance

@@ -6,32 +6,32 @@ Type=Promo
 ScryfallCode=PRES
 
 [cards]
-A1 R Jaya Ballard, Task Mage
-A2 R Brion Stoutarm
-A3 R Broodmate Dragon
-A4 R Retaliator Griffin
-A5 R Terra Stomper
-A6 R Terastodon
-A7 R Knight Exemplar
-A8 R Sunblast Angel
-A9 R Angel of Glory's Rise
-A10 R Hamletback Goliath
-A11 R Angelic Skirmisher
-A12 R Xathrid Necromancer
-13★ U Loam Lion
-26 R Felidar Sovereign
-47 R Thalia's Lancers
-49 R Curator of Mysteries
-100 R Etali, Primal Storm
-123 R Beast Whisperer
-133 R Opportunistic Dragon
-140 R Neheb, Dreadhorde Champion
-141★ R Goblin Chieftain
-147 R Bristling Hydra
-149 R Atarka, World Render
-149* R Lathliss, Dragon Queen
-172 R Gargos, Vicious Watcher
-174 R Genesis Hydra
-193 R Outland Colossus
-221★ R Oran-Rief, the Vastwood
-235 R Stonecoil Serpent
+A1 R Jaya Ballard, Task Mage @Matt Cavotta
+A2 R Brion Stoutarm @Zoltan Boros & Gabor Szikszai
+A3 R Broodmate Dragon @Vance Kovacs
+A4 R Retaliator Griffin @Jesper Ejsing
+A5 R Terra Stomper @Goran Josic
+A6 R Terastodon @Lars Grant-West
+A7 R Knight Exemplar @Jason Chan
+A8 R Sunblast Angel @Jason Chan
+A9 R Angel of Glory's Rise @James Ryman
+A10 R Hamletback Goliath @Paolo Parente & Brian Snõddy
+A11 R Angelic Skirmisher @David Rapoza
+A12 R Xathrid Necromancer @Maciej Kuciara
+13★ U Loam Lion @Daniel Ljunggren
+26 R Felidar Sovereign @Zoltan Boros & Gabor Szikszai
+47 R Thalia's Lancers @David Palumbo
+49 R Curator of Mysteries @Christine Choi
+100 R Etali, Primal Storm @Raymond Swanland
+123 R Beast Whisperer @Matt Stewart
+133 R Opportunistic Dragon @Chris Rahn
+140 R Neheb, Dreadhorde Champion @Igor Kieryluk
+141★ R Goblin Chieftain @Sam Wood
+147 R Bristling Hydra @Chris Rahn
+149 R Atarka, World Render @Karl Kopinski
+149* R Lathliss, Dragon Queen @Alex Konstad
+172 R Gargos, Vicious Watcher @Mathias Kollros
+176 R Genesis Hydra @Peter Mohrbacher
+193 R Outland Colossus @Ryan Pancoast
+221★ R Oran-Rief, the Vastwood @Mike Bierek
+235 R Stonecoil Serpent @Mark Poole

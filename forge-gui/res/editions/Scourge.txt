@@ -14,149 +14,149 @@ ChaosDraftThemes=GRAVEYARD_MATTERS
 ScryfallCode=SCG
 
 [cards]
-109 C Accelerated Mutation
-1 R Ageless Sentinels
-110 U Alpha Status
-111 R Ambush Commander
-112 R Ancient Ooze
-28 U Aphetto Runecaster
-140 U Ark of Blight
-2 C Astral Steel
-3 C Aven Farseer
-4 C Aven Liberator
-136 R Bladewing the Risen
-55 U Bladewing's Thrall
-82 C Bonethorn Valesk
-29 U Brain Freeze
-113 C Break Asunder
-56 R Cabal Conditioning
-57 U Cabal Interrogator
-58 R Call to the Grave
-83 U Carbonize
-59 C Carrion Feeder
-84 C Chartooth Cougar
-60 U Chill Haunting
-114 U Claws of Wirewood
-61 C Clutch of Undeath
-30 C Coast Watcher
-62 R Consumptive Goo
-5 C Daru Spiritualist
-6 U Daru Warchief
-7 R Dawn Elemental
-31 R Day of the Dragons
-63 C Death's-Head Buzzard
-85 R Decree of Annihilation
-8 R Decree of Justice
-64 R Decree of Pain
-115 R Decree of Savagery
-32 R Decree of Silence
-9 R Dimensional Breach
-33 C Dispersal Shield
-116 C Divergent Growth
-86 C Dragon Breath
-117 C Dragon Fangs
-87 R Dragon Mage
-10 C Dragon Scales
-65 C Dragon Shadow
-88 R Dragon Tyrant
-34 C Dragon Wings
-89 U Dragonspeaker Shaman
-11 U Dragonstalker
-90 R Dragonstorm
-137 U Edgewalker
-118 U Elvish Aberration
-91 U Enrage
-12 R Eternal Dragon
-13 R Exiled Doomsayer
-92 U Extra Arms
-35 R Faces of the Past
-66 U Fatal Mutation
-119 C Fierce Empath
-67 R Final Punishment
-14 R Force Bubble
-120 R Forgotten Ancient
-93 R Form of the Dragon
-15 C Frontline Strategist
-36 C Frozen Solid
-16 U Gilded Light
-94 C Goblin Brigand
-95 U Goblin Psychopath
-96 C Goblin War Strike
-97 U Goblin Warchief
-98 R Grip of Chaos
-17 C Guilty Conscience
-37 C Hindering Touch
-121 U Hunting Pack
-18 U Karona's Zealot
-138 R Karona, False God
-122 C Krosan Drover
-123 U Krosan Warchief
-124 U Kurgadon
-68 R Lethal Vapors
-69 C Lingering Death
-38 U Long-Term Plans
-39 C Mercurial Kite
-40 U Metamorphose
-41 R Mind's Desire
-42 R Mischievous Quanar
-99 C Misguided Rage
-43 U Mistform Warchief
-70 R Nefashu
-19 C Noble Templar
-125 U One with Nature
-44 R Parallel Thoughts
-45 U Pemmin's Aura
-126 R Primitive Etchings
-141 U Proteus Machine
-71 U Putrid Raptor
-100 U Pyrostatic Pillar
-20 U Rain of Blades
-46 C Raven Guild Initiate
-47 R Raven Guild Master
-72 C Reaping the Graves
-21 C Recuperate
-22 U Reward the Faithful
-48 U Riptide Survivor
-101 C Rock Jockey
-127 R Root Elemental
-49 C Rush of Knowledge
-102 C Scattershot
-50 C Scornful Egotist
-51 C Shoreline Ranger
-103 R Siege-Gang Commander
-23 U Silver Knight
-104 U Skirk Volcanist
-73 C Skulltap
-139 R Sliver Overlord
-74 R Soul Collector
-105 C Spark Spray
-128 C Sprouting Vines
-142 R Stabilizer
-52 R Stifle
-106 R Sulfuric Vortex
-143 U Temple of the False God
-53 C Temporal Fissure
-75 U Tendrils of Agony
-54 U Thundercloud Elemental
-129 C Titanic Bulvox
-107 C Torrent of Fire
-24 R Trap Digger
-130 C Treetop Scout
-76 C Twisted Abomination
-77 C Unburden
-108 C Uncontrolled Infestation
-78 U Undead Warchief
-79 U Unspeakable Symbol
-131 R Upwelling
-80 C Vengeful Dead
-25 U Wing Shards
-26 C Wipe Clean
-132 C Wirewood Guardian
-133 U Wirewood Symbiote
-134 C Woodcloaker
-135 R Xantid Swarm
-27 C Zealous Inquisitor
-81 C Zombie Cutthroat
+109 C Accelerated Mutation @Edward P. Beard, Jr.
+1 R Ageless Sentinels @Tony Szczudlo
+110 U Alpha Status @Darrell Riche
+111 R Ambush Commander @Darrell Riche
+112 R Ancient Ooze @Erica Gassalasca-Jape
+28 U Aphetto Runecaster @Scott M. Fischer
+140 U Ark of Blight @David Martin
+2 C Astral Steel @Matt Cavotta
+3 C Aven Farseer @Luca Zontini
+4 C Aven Liberator @Brian Snõddy
+136 R Bladewing the Risen @Kev Walker
+55 U Bladewing's Thrall @Kev Walker
+82 C Bonethorn Valesk @Alan Pollack
+29 U Brain Freeze @Tim Hildebrandt
+113 C Break Asunder @Jim Nelson
+56 R Cabal Conditioning @Scott M. Fischer
+57 U Cabal Interrogator @Tony Szczudlo
+58 R Call to the Grave @Daren Bader
+83 U Carbonize @Alex Horley-Orlandelli
+59 C Carrion Feeder @Brian Snõddy
+84 C Chartooth Cougar @Tony Szczudlo
+60 U Chill Haunting @Brian Snõddy
+114 U Claws of Wirewood @Tony Szczudlo
+61 C Clutch of Undeath @Greg Hildebrandt
+30 C Coast Watcher @Luca Zontini
+62 R Consumptive Goo @Carl Critchlow
+5 C Daru Spiritualist @Dave Dorman
+6 U Daru Warchief @Tim Hildebrandt
+7 R Dawn Elemental @Anthony S. Waters
+31 R Day of the Dragons @Matthew D. Wilson
+63 C Death's-Head Buzzard @Marcelo Vignali
+85 R Decree of Annihilation @John Avon
+8 R Decree of Justice @Adam Rex
+64 R Decree of Pain @Carl Critchlow
+115 R Decree of Savagery @Alex Horley-Orlandelli
+32 R Decree of Silence @Adam Rex
+9 R Dimensional Breach @Dave Dorman
+33 C Dispersal Shield @Dave Dorman
+116 C Divergent Growth @Rob Alexander
+86 C Dragon Breath @Greg Staples
+117 C Dragon Fangs @Carl Critchlow
+87 R Dragon Mage @Matthew D. Wilson
+10 C Dragon Scales @Darrell Riche
+65 C Dragon Shadow @Kev Walker
+88 R Dragon Tyrant @Kev Walker
+34 C Dragon Wings @Darrell Riche
+89 U Dragonspeaker Shaman @Kev Walker
+11 U Dragonstalker @Ron Spencer
+90 R Dragonstorm @Kev Walker
+137 U Edgewalker @Ben Thompson
+118 U Elvish Aberration @Matt Cavotta
+91 U Enrage @Justin Sweet
+12 R Eternal Dragon @Justin Sweet
+13 R Exiled Doomsayer @Brian Snõddy
+92 U Extra Arms @Greg Staples
+35 R Faces of the Past @Wayne England
+66 U Fatal Mutation @Erica Gassalasca-Jape
+119 C Fierce Empath @Alan Pollack
+67 R Final Punishment @Matt Thompson
+14 R Force Bubble @Alan Pollack
+120 R Forgotten Ancient @Mark Tedin
+93 R Form of the Dragon @Carl Critchlow
+15 C Frontline Strategist @Christopher Moeller
+36 C Frozen Solid @Glen Angus
+16 U Gilded Light @John Avon
+94 C Goblin Brigand @Arnie Swekel
+95 U Goblin Psychopath @Pete Venters
+96 C Goblin War Strike @Pete Venters
+97 U Goblin Warchief @Greg Hildebrandt & Tim Hildebrandt
+98 R Grip of Chaos @Mark Tedin
+17 C Guilty Conscience @Christopher Moeller
+37 C Hindering Touch @Glen Angus
+121 U Hunting Pack @Jim Nelson
+18 U Karona's Zealot @Alan Pollack
+138 R Karona, False God @Matthew D. Wilson
+122 C Krosan Drover @Arnie Swekel
+123 U Krosan Warchief @Greg Hildebrandt
+124 U Kurgadon @Carl Critchlow
+68 R Lethal Vapors @John Avon
+69 C Lingering Death @Matt Thompson
+38 U Long-Term Plans @Ben Thompson
+39 C Mercurial Kite @Richard Sardinha
+40 U Metamorphose @Ron Spencer
+41 R Mind's Desire @Ron Spencer
+42 R Mischievous Quanar @Lars Grant-West
+99 C Misguided Rage @Michael Sutfin
+43 U Mistform Warchief @Greg Hildebrandt
+70 R Nefashu @rk post
+19 C Noble Templar @Alex Horley-Orlandelli
+125 U One with Nature @Daren Bader
+44 R Parallel Thoughts @Ben Thompson
+45 U Pemmin's Aura @Greg Staples
+126 R Primitive Etchings @David Martin
+141 U Proteus Machine @Greg Staples
+71 U Putrid Raptor @Pete Venters
+100 U Pyrostatic Pillar @Pete Venters
+20 U Rain of Blades @Rob Alexander
+46 C Raven Guild Initiate @Christopher Moeller
+47 R Raven Guild Master @Kev Walker
+72 C Reaping the Graves @Ron Spencer
+21 C Recuperate @Tim Hildebrandt
+22 U Reward the Faithful @Matt Cavotta
+48 U Riptide Survivor @Thomas M. Baxa
+101 C Rock Jockey @Glen Angus
+127 R Root Elemental @Anthony S. Waters
+49 C Rush of Knowledge @Eric Peterson
+102 C Scattershot @Glen Angus
+50 C Scornful Egotist @Jim Nelson
+51 C Shoreline Ranger @Michael Sutfin
+103 R Siege-Gang Commander @Christopher Moeller
+23 U Silver Knight @Eric Peterson
+104 U Skirk Volcanist @Matt Cavotta
+73 C Skulltap @Adam Rex
+139 R Sliver Overlord @Tony Szczudlo
+74 R Soul Collector @Matthew D. Wilson
+105 C Spark Spray @Pete Venters
+128 C Sprouting Vines @John Avon
+142 R Stabilizer @David Martin
+52 R Stifle @Dany Orizio
+106 R Sulfuric Vortex @Greg Staples
+143 U Temple of the False God @Brian Snõddy
+53 C Temporal Fissure @Edward P. Beard, Jr.
+75 U Tendrils of Agony @Pete Venters
+54 U Thundercloud Elemental @Anthony S. Waters
+129 C Titanic Bulvox @Wayne England
+107 C Torrent of Fire @Thomas M. Baxa
+24 R Trap Digger @Christopher Moeller
+130 C Treetop Scout @Alan Pollack
+76 C Twisted Abomination @Daren Bader
+77 C Unburden @Wayne England
+108 C Uncontrolled Infestation @Tony Szczudlo
+78 U Undead Warchief @Greg Hildebrandt
+79 U Unspeakable Symbol @Arnie Swekel
+131 R Upwelling @John Avon
+80 C Vengeful Dead @Alex Horley-Orlandelli
+25 U Wing Shards @Daren Bader
+26 C Wipe Clean @Arnie Swekel
+132 C Wirewood Guardian @Mark Tedin
+133 U Wirewood Symbiote @Thomas M. Baxa
+134 C Woodcloaker @Jim Nelson
+135 R Xantid Swarm @David Martin
+27 C Zealous Inquisitor @Wayne England
+81 C Zombie Cutthroat @Thomas M. Baxa
 
 [tokens]
 w_4_4_angel_flying

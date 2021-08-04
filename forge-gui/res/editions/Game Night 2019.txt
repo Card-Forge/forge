@@ -8,70 +8,70 @@ Type=Multiplayer
 ScryfallCode=GN2
 
 [cards]
-1 M Highcliff Felidar
-2 M Sphinx of Enlightenment
-3 M Calculating Lich
-4 M Fiendish Duo
-5 M Earthshaker Giant
-6 U Consul's Lieutenant
-7 C Fiend Binder
-8 R Kytheon's Irregulars
-9 C Mighty Leap
-10 U Patron of the Valiant
-11 U Relief Captain
-12 U Steppe Glider
-13 C Take Vengeance
-14 C Topan Freeblade
-15 R Zetalpa, Primal Dawn
-16 C Aven Wind Mage
-17 C Claustrophobia
-18 U Cryptic Serpent
-19 C Decision Paralysis
-20 C Dramatic Reversal
-21 R Engulf the Shore
-22 U Galestrike
-23 U Rise from the Tides
-24 R River's Rebuke
-25 C Salvager of Secrets
-26 U Accursed Horde
-27 C Carrion Screecher
-28 C Crow of Dark Tidings
-29 C Gavony Unhallowed
-30 U Grasp of Darkness
-31 R Liliana's Mastery
-32 U Lord of the Accursed
-33 U Rise from the Grave
-34 C Tattered Mummy
-35 R Torgaar, Famine Incarnate
-36 R Akoum Hellkite
-37 C Brute Strength
-38 C Destructive Tampering
-39 U Dragon Egg
-40 C Kargan Dragonrider
-41 R Lathliss, Dragon Queen
-42 C Lightning Strike
-43 C Sparktongue Dragon
-44 C Voldaren Duelist
-45 C Zealot of the God-Pharaoh
-46 U Crested Herdcaller
-47 R Ghalta, Primal Hunger
-48 C Grazing Whiptail
-49 U Ranging Raptors
-50 R Ripjaw Raptor
-51 C Spidery Grasp
-52 U Thunderherd Migration
-53 U Thundering Spineback
-54 U Howling Golem
-55 L Plains
-56 L Plains
-57 L Island
-58 L Island
-59 L Swamp
-60 L Swamp
-61 L Mountain
-62 L Mountain
-63 L Forest
-64 L Forest
+1 M Highcliff Felidar @Kimonas Theodossiou
+2 M Sphinx of Enlightenment @Johan Grenier
+3 M Calculating Lich @Antonio José Manzanedo
+4 M Fiendish Duo @Lucas Graciano
+5 M Earthshaker Giant @Milivoj Ćeran
+6 U Consul's Lieutenant @Daarken
+7 C Fiend Binder @David Gaillet
+8 R Kytheon's Irregulars @Mark Winters
+9 C Mighty Leap @Sidharth Chaturvedi
+10 U Patron of the Valiant @Steve Argyle
+11 U Relief Captain @Anastasia Ovchinnikova
+12 U Steppe Glider @John Severin Brassell
+13 C Take Vengeance @Randy Vargas
+14 C Topan Freeblade @Johannes Voss
+15 R Zetalpa, Primal Dawn @Chris Rallis
+16 C Aven Wind Mage @Lius Lasahido
+17 C Claustrophobia @Ryan Pancoast
+18 U Cryptic Serpent @Lius Lasahido
+19 C Decision Paralysis @Vincent Proce
+20 C Dramatic Reversal @Eric Deschamps
+21 R Engulf the Shore @Cliff Childs
+22 U Galestrike @Mike Bierek
+23 U Rise from the Tides @Dave Kendall
+24 R River's Rebuke @Raymond Swanland
+25 C Salvager of Secrets @Lars Grant-West
+26 U Accursed Horde @Victor Adame Minguez
+27 C Carrion Screecher @Tomasz Jedruszek
+28 C Crow of Dark Tidings @Tianhua X
+29 C Gavony Unhallowed @Christopher Moeller
+30 U Grasp of Darkness @Daarken
+31 R Liliana's Mastery @Kieran Yanner
+32 U Lord of the Accursed @Grzegorz Rutkowski
+33 U Rise from the Grave @Kieran Yanner
+34 C Tattered Mummy @Slawomir Maniak
+35 R Torgaar, Famine Incarnate @Lius Lasahido
+36 R Akoum Hellkite @Jaime Jones
+37 C Brute Strength @Wayne Reynolds
+38 C Destructive Tampering @Titus Lunter
+39 U Dragon Egg @Jack Wang
+40 C Kargan Dragonrider @Greg Opalinski
+41 R Lathliss, Dragon Queen @Alex Konstad
+42 C Lightning Strike @Adam Paquette
+43 C Sparktongue Dragon @Daarken
+44 C Voldaren Duelist @Jason Rainville
+45 C Zealot of the God-Pharaoh @Gabor Szikszai
+46 U Crested Herdcaller @Lucas Graciano
+47 R Ghalta, Primal Hunger @Chase Stone
+48 C Grazing Whiptail @Gabor Szikszai
+49 U Ranging Raptors @Simon Dominic
+50 R Ripjaw Raptor @Ryan Pancoast
+51 C Spidery Grasp @James Ryman
+52 U Thunderherd Migration @Lars Grant-West
+53 U Thundering Spineback @Tomasz Jedruszek
+54 U Howling Golem @Grzegorz Rutkowski
+55 L Plains @John Avon
+56 L Plains @Howard Lyon
+57 L Island @Florian de Gesincourt
+58 L Island @Mark Poole
+59 L Swamp @Jonas De Ro
+60 L Swamp @Jung Park
+61 L Mountain @Florian de Gesincourt
+62 L Mountain @Nils Hamm
+63 L Forest @Noah Bradley
+64 L Forest @Dimitar Marinski
 
 [tokens]
 w_1_1_soldier

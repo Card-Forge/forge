@@ -6,5 +6,5 @@ Type=Promo
 ScryfallCode=PDP10
 
 [cards]
-1 M Liliana Vess
-2 M Nissa Revane
+1 M Liliana Vess @Kekai Kotaki
+2 M Nissa Revane @Jaime Jones

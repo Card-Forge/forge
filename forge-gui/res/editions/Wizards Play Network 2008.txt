@@ -6,5 +6,5 @@ Type=Promo
 ScryfallCode=PWPN
 
 [cards]
-21 R Sprouting Thrinax
-22 R Woolly Thoctar
+21 R Sprouting Thrinax @Jaime Jones
+22 R Woolly Thoctar @Steve Argyle

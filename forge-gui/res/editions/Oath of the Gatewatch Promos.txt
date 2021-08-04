@@ -6,12 +6,12 @@ Type=Promo
 ScryfallCode=POGW
 
 [cards]
-3 R Endbringer
-20 U Immolating Glare
-29 R Munda's Vanguard
-43 R Deepfathom Skulker
-68 R Dread Defiler
-110 R Goblin Dark-Dwellers
-119 R Tyrant of Valakut
-132 R Gladehart Cavalry
-155 R Jori En, Ruin Diver
+3 R Endbringer @Adam Paquette
+20 U Immolating Glare @Ryan Alexander Lee
+29 R Munda's Vanguard @Deruchenko Alexander
+43 R Deepfathom Skulker @Raymond Swanland
+68 R Dread Defiler @Joseph Meehan
+110 R Goblin Dark-Dwellers @Karl Kopinski
+119 R Tyrant of Valakut @Steven Belledin
+132 R Gladehart Cavalry @Dan Scott
+155 R Jori En, Ruin Diver @Matt Stewart

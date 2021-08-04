@@ -6,5 +6,5 @@ Type=Promo
 ScryfallCode=PULG
 
 [cards]
-122 R Beast of Burden
-123 R Beast of Burden
+122 R Beast of Burden @Ron Spears
+122† R Beast of Burden @Ron Spears

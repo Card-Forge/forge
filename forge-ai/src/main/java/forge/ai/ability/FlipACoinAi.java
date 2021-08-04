@@ -14,7 +14,6 @@ public class FlipACoinAi extends SpellAbilityAi {
      */
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-
         if (sa.hasParam("AILogic")) {
             String ailogic = sa.getParam("AILogic");
             if (ailogic.equals("Never")) {

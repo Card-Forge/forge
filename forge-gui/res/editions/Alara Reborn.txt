@@ -12,151 +12,151 @@ FatPackExtraSlots=40 BasicLands ALA
 ScryfallCode=ARB
 
 [cards]
-33 U Anathemancer
-17 C Architects of Will
-1 U Ardent Plea
-131 C Arsenal Thresher
-2 R Aven Mimeomancer
-125 C Bant Sojourners
-143 C Bant Sureblade
-65 U Behemoth Sledge
-34 U Bituminous Blast
-49 R Blitz Hellion
-50 U Bloodbraid Elf
-18 C Brainbite
-35 C Breath of Malfegor
-66 C Captured Sunlight
-96 C Cerodon Yearling
-86 R Cloven Casting
-51 C Colossal Might
-144 C Crystallization
-67 R Dauntless Escort
-52 C Deadshot Minotaur
-36 R Deathbringer Thoctar
-37 M Defiler of Souls
-38 C Demonic Dread
-39 U Demonspine Whip
-19 C Deny Reality
-87 U Double Negative
-115 U Dragon Appeasement
-53 M Dragon Broodmother
-111 U Drastic Revelation
-106 R Enigma Sphinx
-68 U Enlisted Wurm
-107 C Esper Sojourners
-132 C Esper Stormblade
-3 C Ethercaste Knight
-20 C Etherium Abomination
-4 C Ethersworn Shieldmage
-108 U Etherwrought Page
-5 C Fieldmist Borderpost
-97 R Fight to the Death
-6 R Filigree Angel
-126 R Finest Hour
-54 C Firewild Borderpost
-127 U Flurry of Wings
-137 U Giant Ambush Beetle
-7 C Glassdust Hulk
-98 R Glory of Warfare
-120 U Gloryscale Viashino
-55 C Godtracker of Jund
-56 C Gorger Wurm
-134 C Grixis Grimblade
-112 C Grixis Sojourners
-69 C Grizzled Leotau
-81 R Identity Crisis
-40 C Igneous Pouncer
-21 U Illusory Demon
-99 U Intimidation Bolt
-128 M Jenara, Asura of War
-22 C Jhessian Zombies
-138 C Jund Hackblade
-116 C Jund Sojourners
-117 M Karrthus, Tyrant of Jund
-41 C Kathari Bomber
-23 U Kathari Remnant
-70 R Knight of New Alara
-71 R Knotvine Paladin
-118 R Lavalanche
-72 C Leonin Armorguard
-24 R Lich Lord of Unx
-42 R Lightning Reaver
-91 M Lord of Extinction
-101 U Lorescale Coatl
-119 R Madrush Cyclops
-130 M Maelstrom Nexus
-92 R Maelstrom Pulse
-57 U Mage Slayer
-88 C Magefire Wings
-140 U Marisi's Twinclaws
-93 U Marrow Chomper
-25 U Mask of Riddles
-121 R Mayael's Aria
-8 R Meddling Mage
-145 U Messenger Falcons
-26 U Mind Funeral
-27 C Mistvein Borderpost
-43 C Monstrous Carabid
-94 U Morbid Bloom
-73 R Mycoid Shepherd
-141 C Naya Hushblade
-122 C Naya Sojourners
-82 R Necromancer's Covenant
-28 R Nemesis of Reason
-102 U Nulltread Gargantuan
-9 C Offering to Asha
-74 C Pale Recluse
-58 R Predatory Advantage
-95 C Putrid Leech
-75 C Qasali Pridemage
-76 U Reborn Hope
-123 R Retaliator Griffin
-59 C Rhox Brute
-103 R Sages of the Anima
-10 C Sanctum Plowbeast
-139 C Sangrite Backlash
-44 U Sanity Gnawers
-109 M Sen Triplets
-135 C Sewn-Eye Drake
-11 U Shield of the Righteous
-77 U Sigil Captain
-78 C Sigil of the Nayan Gods
-79 C Sigiled Behemoth
-45 C Singe-Mind Ogre
-89 U Skyclaw Thrash
-136 U Slave of Bolas
-29 C Soul Manipulation
-30 R Soulquake
-12 R Sovereigns of Lost Alara
-90 R Spellbound Dragon
-60 R Spellbreaker Behemoth
-110 M Sphinx of the Steel Wind
-13 C Stormcaller's Boon
-100 U Stun Sniper
-83 U Tainted Sigil
-14 C Talon Trooper
-46 C Terminate
-133 U Thopter Foundry
-47 R Thought Hemorrhage
-113 M Thraximundar
-31 R Time Sieve
-142 C Trace of Abundance
-15 U Unbender Tine
-114 R Unscythe, Killer of Kings
-124 M Uril, the Miststalker
-61 C Valley Rannet
-84 C Vectis Dominator
-32 C Vedalken Ghoul
-104 R Vedalken Heretic
-48 C Veinfire Borderpost
-62 U Vengeful Rebirth
-63 C Violent Outburst
-64 U Vithian Renegades
-16 U Wall of Denial
-129 R Wargate
-80 C Wildfield Borderpost
-105 C Winged Coatl
-85 U Zealous Persecution
+33 U Anathemancer @Richard Whitters
+17 C Architects of Will @Matt Stewart
+1 U Ardent Plea @Chippy
+131 C Arsenal Thresher @Ralph Horsley
+2 R Aven Mimeomancer @Jesper Ejsing
+125 C Bant Sojourners @John Avon
+143 C Bant Sureblade @Michael Komarck
+65 U Behemoth Sledge @Steve Prescott
+34 U Bituminous Blast @Raymond Swanland
+49 R Blitz Hellion @Anthony S. Waters
+50 U Bloodbraid Elf @Dominick Domingo
+18 C Brainbite @Mark Hyzer
+35 C Breath of Malfegor @Vance Kovacs
+66 C Captured Sunlight @Nils Hamm
+96 C Cerodon Yearling @Christopher Moeller
+86 R Cloven Casting @Vance Kovacs
+51 C Colossal Might @Justin Sweet
+144 C Crystallization @Zoltan Boros & Gabor Szikszai
+67 R Dauntless Escort @Volkan Baǵa
+52 C Deadshot Minotaur @Jason Chan
+36 R Deathbringer Thoctar @Karl Kopinski
+37 M Defiler of Souls @Paul Bonner
+38 C Demonic Dread @Thomas M. Baxa
+39 U Demonspine Whip @Mark Hyzer
+19 C Deny Reality @Jean-Sébastien Rossbach
+87 U Double Negative @Paolo Parente
+115 U Dragon Appeasement @Paul Bonner
+53 M Dragon Broodmother @Jaime Jones
+111 U Drastic Revelation @Trevor Claxton
+106 R Enigma Sphinx @Chris Rahn
+68 U Enlisted Wurm @Steve Prescott
+107 C Esper Sojourners @John Avon
+132 C Esper Stormblade @Matt Stewart
+3 C Ethercaste Knight @Steven Belledin
+20 C Etherium Abomination @Mitch Cotie
+4 C Ethersworn Shieldmage @Daarken
+108 U Etherwrought Page @Howard Lyon
+5 C Fieldmist Borderpost @Michael Bruinsma
+97 R Fight to the Death @Michael Komarck
+6 R Filigree Angel @Richard Whitters
+126 R Finest Hour @Michael Komarck
+54 C Firewild Borderpost @Jean-Sébastien Rossbach
+127 U Flurry of Wings @Matt Cavotta
+137 U Giant Ambush Beetle @Carl Critchlow
+7 C Glassdust Hulk @Franz Vohwinkel
+98 R Glory of Warfare @Paolo Parente
+120 U Gloryscale Viashino @Volkan Baǵa
+55 C Godtracker of Jund @Justin Sweet
+56 C Gorger Wurm @Paolo Parente
+134 C Grixis Grimblade @Trevor Claxton
+112 C Grixis Sojourners @John Avon
+69 C Grizzled Leotau @Lars Grant-West
+81 R Identity Crisis @Thomas M. Baxa
+40 C Igneous Pouncer @Chippy
+21 U Illusory Demon @Nils Hamm
+99 U Intimidation Bolt @Michael Bruinsma
+128 M Jenara, Asura of War @Chris Rahn
+22 C Jhessian Zombies @Ash Wood
+138 C Jund Hackblade @Dan Dos Santos
+116 C Jund Sojourners @John Avon
+117 M Karrthus, Tyrant of Jund @Dave Kendall
+41 C Kathari Bomber @Carl Critchlow
+23 U Kathari Remnant @Anthony S. Waters
+70 R Knight of New Alara @Chris Rahn
+71 R Knotvine Paladin @Matt Stewart
+118 R Lavalanche @Steve Argyle
+72 C Leonin Armorguard @Steven Belledin
+24 R Lich Lord of Unx @Dave Allsop
+42 R Lightning Reaver @Cyril Van Der Haegen
+91 M Lord of Extinction @Izzy
+101 U Lorescale Coatl @Greg Staples
+119 R Madrush Cyclops @Wayne Reynolds
+130 M Maelstrom Nexus @Steven Belledin
+92 R Maelstrom Pulse @Anthony Francisco
+57 U Mage Slayer @Lars Grant-West
+88 C Magefire Wings @Zoltan Boros & Gabor Szikszai
+140 U Marisi's Twinclaws @Izzy
+93 U Marrow Chomper @Lars Grant-West
+25 U Mask of Riddles @Matt Cavotta
+121 R Mayael's Aria @Steve Argyle
+8 R Meddling Mage @Todd Lockwood
+145 U Messenger Falcons @David Palumbo
+26 U Mind Funeral @rk post
+27 C Mistvein Borderpost @Pete Venters
+43 C Monstrous Carabid @Pete Venters
+94 U Morbid Bloom @Trevor Claxton
+73 R Mycoid Shepherd @Trevor Claxton
+141 C Naya Hushblade @Jason Chan
+122 C Naya Sojourners @John Avon
+82 R Necromancer's Covenant @Thomas M. Baxa
+28 R Nemesis of Reason @Mark Tedin
+102 U Nulltread Gargantuan @Anthony Francisco
+9 C Offering to Asha @Daarken
+74 C Pale Recluse @Cyril Van Der Haegen
+58 R Predatory Advantage @Raymond Swanland
+95 C Putrid Leech @Dave Allsop
+75 C Qasali Pridemage @Chris Rahn
+76 U Reborn Hope @Warren Mahy
+123 R Retaliator Griffin @Jesper Ejsing
+59 C Rhox Brute @Raymond Swanland
+103 R Sages of the Anima @Kev Walker
+10 C Sanctum Plowbeast @Anthony Francisco
+139 C Sangrite Backlash @Cyril Van Der Haegen
+44 U Sanity Gnawers @Pete Venters
+109 M Sen Triplets @Greg Staples
+135 C Sewn-Eye Drake @Anthony S. Waters
+11 U Shield of the Righteous @David Palumbo
+77 U Sigil Captain @Howard Lyon
+78 C Sigil of the Nayan Gods @Warren Mahy
+79 C Sigiled Behemoth @Donato Giancola
+45 C Singe-Mind Ogre @Daarken
+89 U Skyclaw Thrash @Jaime Jones
+136 U Slave of Bolas @Steve Argyle
+29 C Soul Manipulation @Carl Critchlow
+30 R Soulquake @Warren Mahy
+12 R Sovereigns of Lost Alara @Donato Giancola
+90 R Spellbound Dragon @Jesper Ejsing
+60 R Spellbreaker Behemoth @Jason Chan
+110 M Sphinx of the Steel Wind @Kev Walker
+13 C Stormcaller's Boon @Brandon Kitkouski
+100 U Stun Sniper @Steve Prescott
+83 U Tainted Sigil @Chippy
+14 C Talon Trooper @Matt Stewart
+46 C Terminate @Wayne Reynolds
+133 U Thopter Foundry @Ralph Horsley
+47 R Thought Hemorrhage @Chippy
+113 M Thraximundar @Raymond Swanland
+31 R Time Sieve @Franz Vohwinkel
+142 C Trace of Abundance @Dave Kendall
+15 U Unbender Tine @Greg Hildebrandt
+114 R Unscythe, Killer of Kings @Karl Kopinski
+124 M Uril, the Miststalker @Jaime Jones
+61 C Valley Rannet @Dave Allsop
+84 C Vectis Dominator @Zoltan Boros & Gabor Szikszai
+32 C Vedalken Ghoul @Dave Kendall
+104 R Vedalken Heretic @Greg Staples
+48 C Veinfire Borderpost @Ralph Horsley
+62 U Vengeful Rebirth @Vance Kovacs
+63 C Violent Outburst @Richard Whitters
+64 U Vithian Renegades @rk post
+16 U Wall of Denial @Howard Lyon
+129 R Wargate @Franz Vohwinkel
+80 C Wildfield Borderpost @Zoltan Boros & Gabor Szikszai
+105 C Winged Coatl @Izzy
+85 U Zealous Persecution @Christopher Moeller
 
 [tokens]
 w_1_1_bird_soldier_flying

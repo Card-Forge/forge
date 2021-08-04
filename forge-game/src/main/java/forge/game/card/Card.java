@@ -27,6 +27,16 @@ import forge.card.CardDb.CardArtPreference;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.*;
+import forge.game.CardTraitBase;
+import forge.game.Direction;
+import forge.game.EvenOdd;
+import forge.game.Game;
+import forge.game.GameActionUtil;
+import forge.game.GameEntity;
+import forge.game.GameEntityCounterTable;
+import forge.game.GameStage;
+import forge.game.GlobalRuleChange;
+import forge.game.IHasSVars;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -2271,7 +2281,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             if (!stAb.isSecondary() && !stAb.isClassAbility()) {
                 final String stAbD = stAb.toString();
                 if (!stAbD.equals("")) {
-                    boolean disabled = getGame() != null && !stAb.checkConditions();
+                    boolean disabled = getGame() != null && getController() != null && game.getAge() != GameStage.Play && !stAb.checkConditions();
                     if (disabled) sb.append(grayTag);
                     sb.append(stAbD);
                     if (disabled) sb.append(endTag);

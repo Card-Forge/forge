@@ -15,211 +15,211 @@ ChaosDraftThemes=GRAVEYARD_MATTERS
 ScryfallCode=EMN
 
 [cards]
-1 U Abundant Maw
-2 M Decimator of the Provinces
-3 R Distended Mindbender
-4 U Drownyard Behemoth
-5 R Elder Deep-Fiend
-6 M Emrakul, the Promised End
-7 R Eternal Scourge
-8 C It of the Horrid Swarm
-9 U Lashweed Lurker
-10 U Mockery of Nature
-11 U Vexing Scuttler
-12 C Wretched Gryff
-13 U Blessed Alliance
-14 C Borrowed Grace
-15 R Bruna, the Fading Light
-16 C Choking Restraints
-17 R Collective Effort
-18 U Courageous Outrider
-19 C Dawn Gryff
-20 M Deploy the Gatewatch
-21 C Desperate Sentry
-22 U Drogskol Shieldmate
-23 U Extricator of Sin
-24 U Faith Unbroken
-25 C Faithbearer Paladin
-26 C Fiend Binder
-27 U Geist of the Lonely Vigil
-28 M Gisela, the Broken Blade
-29 U Give No Ground
-30 C Guardian of Pilgrims
-31 C Ironclad Slayer
-32 C Ironwright's Cleansing
-33 U Lone Rider
-34 U Long Road Home
-35 C Lunarch Mantle
-36 U Peace of Mind
-37 R Providence
-38 U Repel the Abominable
-39 R Sanctifier of Souls
-40 R Selfless Spirit
-41 R Sigarda's Aid
-42 C Sigardian Priest
-43 C Spectral Reserves
-44 C Steadfast Cathar
-45 U Subjugator Angel
-46 R Thalia, Heretic Cathar
-47 R Thalia's Lancers
-48 C Thraben Standard Bearer
-49 U Advanced Stitchwing
-50 U Chilling Grasp
-51 R Coax from the Blind Eternities
-52 C Contingency Plan
-53 C Convolute
-54 U Curious Homunculus
-55 C Displace
-56 R Docent of Perfection
-57 C Drag Under
-58 C Enlightened Maniac
-59 C Exultant Cultist
-60 C Fogwalker
-61 U Fortune's Favor
-62 U Geist of the Archives
-63 U Grizzled Angler
-64 R Identity Thief
-65 R Imprisoned in the Moon
-66 C Ingenious Skaab
-67 C Laboratory Brute
-68 U Lunar Force
-69 R Mausoleum Wanderer
-70 M Mind's Dilation
-71 U Nebelgast Herald
-72 R Niblis of Frost
-73 U Scour the Laboratory
-74 C Spontaneous Mutation
-75 R Summary Dismissal
-76 C Take Inventory
-77 C Tattered Haunter
-78 C Turn Aside
-79 U Unsubstantiate
-80 R Wharf Infiltrator
-81 C Boon of Emrakul
-82 C Borrowed Malevolence
-83 C Cemetery Recruitment
-84 C Certain Death
-85 R Collective Brutality
-86 R Cryptbreaker
-87 R Dark Salvation
-88 U Dusk Feaster
-89 C Gavony Unhallowed
-90 U Graf Harvest
-91 C Graf Rats
-92 U Haunted Dead
-93 M Liliana, the Last Hope
-94 U Liliana's Elite
-95 U Markov Crusader
-96 C Midnight Scavengers
-97 U Murder
-98 R Noosegraf Mob
-99 R Oath of Liliana
-100 C Olivia's Dragoon
-101 U Prying Questions
-102 U Rise from the Grave
-103 U Ruthless Disposal
-104 C Skirsdag Supplicant
-105 C Strange Augmentation
-106 R Stromkirk Condemned
-107 C Succumb to Temptation
-108 C Thraben Foulbloods
-109 M Tree of Perdition
-110 U Vampire Cutthroat
-111 R Voldaren Pariah
-112 C Wailing Ghoul
-113 C Weirded Vampire
-114 U Whispers of Emrakul
-115 U Abandon Reason
-116 C Alchemist's Greeting
-117 R Assembled Alphas
-118 R Bedlam Reveler
-119 U Blood Mist
-120 C Bold Impaler
-121 C Borrowed Hostility
-122 C Brazen Wolves
-123 R Collective Defiance
-124 U Conduit of Storms
-125 U Deranged Whelp
-126 C Distemper of the Blood
-127 C Falkenrath Reaver
-128 U Furyblade Vampire
-129 C Galvanic Bombardment
-130 R Hanweir Garrison
-131 R Harmless Offering
-132 R Impetuous Devils
-133 U Incendiary Flow
-134 U Insatiable Gorgers
-135 C Make Mischief
-136 M Mirrorwing Dragon
-137 M Nahiri's Wrath
-138 C Otherworldly Outburst
-139 C Prophetic Ravings
-140 U Savage Alliance
-141 U Shreds of Sanity
-142 U Smoldering Werewolf
-143 U Spreading Flames
-144 C Stensia Banquet
-145 C Stensia Innkeeper
-146 R Stromkirk Occultist
-147 C Thermo-Alchemist
-148 C Vildin-Pack Outcast
-149 U Weaver of Lightning
-150 C Backwoods Survivalists
-151 C Bloodbriar
-152 U Clear Shot
-153 U Crop Sigil
-154 C Crossroads Consecrator
-155 R Eldritch Evolution
-156 R Emrakul's Evangel
-157 U Emrakul's Influence
-158 U Foul Emissary
-159 U Gnarlwood Dryad
-160 C Grapple with the Past
-161 U Hamlet Captain
-162 M Ishkanah, Grafwidow
-163 U Kessig Prowler
-164 U Noose Constrictor
-165 R Permeating Mass
-166 C Prey Upon
-167 C Primal Druid
-168 U Shrill Howler
-169 U Somberwald Stag
-170 R Spirit of the Hunt
-171 R Splendid Reclamation
-172 C Springsage Ritual
-173 C Swift Spinner
-174 U Tangleclaw Werewolf
-175 C Ulvenwald Captive
-176 R Ulvenwald Observer
-177 C Waxing Moon
-178 C Wolfkin Bond
-179 C Woodcutter's Grit
-180 C Woodland Patrol
-181 R Bloodhall Priest
-182 U Campaign of Vengeance
-183 M Gisa and Geralf
-184 M Grim Flayer
-185 R Heron's Grace Champion
-186 U Mercurial Geists
-187 U Mournwillow
-188 U Ride Down
-189 R Spell Queller
-190 M Tamiyo, Field Researcher
-191 M Ulrich of the Krallenhorde
-192 C Cathar's Shield
-193 U Cryptolith Fragment
-194 C Cultist's Staff
-195 C Field Creeper
-196 U Geist-Fueled Scarecrow
-197 R Lupine Prototype
-198 U Slayer's Cleaver
-199 R Soul Separator
-200 R Stitcher's Graft
-201 C Terrarion
-202 U Thirsting Axe
-203 R Geier Reach Sanitarium
-204 R Hanweir Battlements
-205 U Nephalia Academy
+1 U Abundant Maw @Greg Staples
+2 M Decimator of the Provinces @Svetlin Velinov
+3 R Distended Mindbender @Yohann Schepacz
+4 U Drownyard Behemoth @Jason Kang
+5 R Elder Deep-Fiend @Jason Felix
+6 M Emrakul, the Promised End @Jaime Jones
+7 R Eternal Scourge @Winona Nelson
+8 C It of the Horrid Swarm @Jason Felix
+9 U Lashweed Lurker @Igor Kieryluk
+10 U Mockery of Nature @James Ryman
+11 U Vexing Scuttler @James Paick
+12 C Wretched Gryff @Darek Zabrocki
+13 U Blessed Alliance @Johann Bodin
+14 C Borrowed Grace @Volkan Baǵa
+15a R Bruna, the Fading Light @Clint Cearley
+16 C Choking Restraints @John Stanko
+17 R Collective Effort @Eric Deschamps
+18 U Courageous Outrider @Ryan Alexander Lee
+19 C Dawn Gryff @Christine Choi
+20 M Deploy the Gatewatch @Wesley Burt
+21 C Desperate Sentry @Mathias Kollros
+22 U Drogskol Shieldmate @Nils Hamm
+23 U Extricator of Sin @Craig J Spearing
+24 U Faith Unbroken @Kev Walker
+25 C Faithbearer Paladin @Aaron Miller
+26 C Fiend Binder @David Gaillet
+27 U Geist of the Lonely Vigil @Ryan Yee
+28 M Gisela, the Broken Blade @Clint Cearley
+29 U Give No Ground @Tyler Jacobson
+30 C Guardian of Pilgrims @Noah Bradley
+31 C Ironclad Slayer @Ryan Pancoast
+32 C Ironwright's Cleansing @John Stanko
+33 U Lone Rider @Daarken
+34 U Long Road Home @Sidharth Chaturvedi
+35 C Lunarch Mantle @Anastasia Ovchinnikova
+36 U Peace of Mind @Christopher Moeller
+37 R Providence @Zack Stella
+38 U Repel the Abominable @Dan Scott
+39 R Sanctifier of Souls @Jesper Ejsing
+40 R Selfless Spirit @Seb McKinnon
+41 R Sigarda's Aid @Howard Lyon
+42 C Sigardian Priest @Terese Nielsen
+43 C Spectral Reserves @Seb McKinnon
+44 C Steadfast Cathar @Dan Scott
+45 U Subjugator Angel @Lius Lasahido
+46 R Thalia, Heretic Cathar @Magali Villeneuve
+47 R Thalia's Lancers @David Palumbo
+48 C Thraben Standard Bearer @Volkan Baǵa
+49 U Advanced Stitchwing @Johann Bodin
+50 U Chilling Grasp @Seb McKinnon
+51 R Coax from the Blind Eternities @Jaime Jones
+52 C Contingency Plan @Ryan Yee
+53 C Convolute @Viktor Titov
+54 U Curious Homunculus @Filip Burburan
+55 C Displace @Clint Cearley
+56 R Docent of Perfection @Nils Hamm
+57 C Drag Under @Tianhua X
+58 C Enlightened Maniac @Jaime Jones
+59 C Exultant Cultist @Joseph Meehan
+60 C Fogwalker @Seb McKinnon
+61 U Fortune's Favor @Yohann Schepacz
+62 U Geist of the Archives @Lake Hurwitz
+63 U Grizzled Angler @Kev Walker
+64 R Identity Thief @Magali Villeneuve
+65 R Imprisoned in the Moon @Ryan Alexander Lee
+66 C Ingenious Skaab @Jesper Ejsing
+67 C Laboratory Brute @Yeong-Hao Han
+68 U Lunar Force @Eric Deschamps
+69 R Mausoleum Wanderer @Kieran Yanner
+70 M Mind's Dilation @Iain McCaig
+71 U Nebelgast Herald @Zezhou Chen
+72 R Niblis of Frost @Josu Hernaiz
+73 U Scour the Laboratory @Greg Opalinski
+74 C Spontaneous Mutation @Christopher Moeller
+75 R Summary Dismissal @Igor Kieryluk
+76 C Take Inventory @Greg Staples
+77 C Tattered Haunter @Nils Hamm
+78 C Turn Aside @Jaime Jones
+79 U Unsubstantiate @Victor Adame Minguez
+80 R Wharf Infiltrator @Daarken
+81 C Boon of Emrakul @Svetlin Velinov
+82 C Borrowed Malevolence @Volkan Baǵa
+83 C Cemetery Recruitment @Kieran Yanner
+84 C Certain Death @Kev Walker
+85 R Collective Brutality @Johann Bodin
+86 R Cryptbreaker @Darek Zabrocki
+87 R Dark Salvation @Cynthia Sheppard
+88 U Dusk Feaster @Anastasia Ovchinnikova
+89 C Gavony Unhallowed @Christopher Moeller
+90 U Graf Harvest @Lake Hurwitz
+91 C Graf Rats @Jason Felix
+92 U Haunted Dead @Lake Hurwitz
+93 M Liliana, the Last Hope @Anna Steinbauer
+94 U Liliana's Elite @Deruchenko Alexander
+95 U Markov Crusader @Johannes Voss
+96a C Midnight Scavengers @Jason Felix
+97 U Murder @Tyler Jacobson
+98 R Noosegraf Mob @Seb McKinnon
+99 R Oath of Liliana @Wesley Burt
+100 C Olivia's Dragoon @Chris Rallis
+101 U Prying Questions @David Palumbo
+102 U Rise from the Grave @Kieran Yanner
+103 U Ruthless Disposal @Dave Kendall
+104 C Skirsdag Supplicant @Anastasia Ovchinnikova
+105 C Strange Augmentation @Josu Hernaiz
+106 R Stromkirk Condemned @Magali Villeneuve
+107 C Succumb to Temptation @Winona Nelson
+108 C Thraben Foulbloods @Deruchenko Alexander
+109 M Tree of Perdition @Jung Park
+110 U Vampire Cutthroat @Matt Stewart
+111 R Voldaren Pariah @James Ryman
+112 C Wailing Ghoul @Svetlin Velinov
+113 C Weirded Vampire @David Gaillet
+114 U Whispers of Emrakul @Jason Rainville
+115 U Abandon Reason @Josh Hass
+116 C Alchemist's Greeting @Jakub Kasper
+117 R Assembled Alphas @Christopher Moeller
+118 R Bedlam Reveler @Jama Jurabaev
+119 U Blood Mist @Joseph Meehan
+120 C Bold Impaler @Karl Kopinski
+121 C Borrowed Hostility @Volkan Baǵa
+122 C Brazen Wolves @Nils Hamm
+123 R Collective Defiance @Kieran Yanner
+124 U Conduit of Storms @Raymond Swanland
+125 U Deranged Whelp @Zoltan Boros
+126 C Distemper of the Blood @Ben Maier
+127 C Falkenrath Reaver @Daarken
+128 U Furyblade Vampire @Lius Lasahido
+129 C Galvanic Bombardment @Terese Nielsen
+130a R Hanweir Garrison @Vincent Proce
+131 R Harmless Offering @Howard Lyon
+132 R Impetuous Devils @Filip Burburan
+133 U Incendiary Flow @Raymond Swanland
+134 U Insatiable Gorgers @Nils Hamm
+135 C Make Mischief @Ben Maier
+136 M Mirrorwing Dragon @Min Yum
+137 M Nahiri's Wrath @Chris Rahn
+138 C Otherworldly Outburst @Kieran Yanner
+139 C Prophetic Ravings @Lucas Graciano
+140 U Savage Alliance @Johann Bodin
+141 U Shreds of Sanity @Yeong-Hao Han
+142 U Smoldering Werewolf @Zack Stella
+143 U Spreading Flames @Chase Stone
+144 C Stensia Banquet @Greg Opalinski
+145 C Stensia Innkeeper @Winona Nelson
+146 R Stromkirk Occultist @Magali Villeneuve
+147 C Thermo-Alchemist @Raymond Swanland
+148 C Vildin-Pack Outcast @Jose Cabrera
+149 U Weaver of Lightning @John Stanko
+150 C Backwoods Survivalists @Chris Rallis
+151 C Bloodbriar @Tomasz Jedruszek
+152 U Clear Shot @Craig J Spearing
+153 U Crop Sigil @Titus Lunter
+154 C Crossroads Consecrator @David Gaillet
+155 R Eldritch Evolution @Jason Rainville
+156 R Emrakul's Evangel @Jason Felix
+157 U Emrakul's Influence @Ryan Alexander Lee
+158 U Foul Emissary @Dan Scott
+159 U Gnarlwood Dryad @Raymond Swanland
+160 C Grapple with the Past @Howard Lyon
+161 U Hamlet Captain @Wayne Reynolds
+162 M Ishkanah, Grafwidow @Christine Choi
+163 U Kessig Prowler @Slawomir Maniak
+164 U Noose Constrictor @Igor Kieryluk
+165 R Permeating Mass @Joseph Meehan
+166 C Prey Upon @Dave Kendall
+167 C Primal Druid @Tomasz Jedruszek
+168 U Shrill Howler @Matt Stewart
+169 U Somberwald Stag @Lake Hurwitz
+170 R Spirit of the Hunt @Bastien L. Deharme
+171 R Splendid Reclamation @Wesley Burt
+172 C Springsage Ritual @Ben Maier
+173 C Swift Spinner @Nils Hamm
+174 U Tangleclaw Werewolf @Steven Belledin
+175 C Ulvenwald Captive @Chris Rahn
+176 R Ulvenwald Observer @Jaime Jones
+177 C Waxing Moon @Adam Paquette
+178 C Wolfkin Bond @Lindsey Look
+179 C Woodcutter's Grit @Anthony Palumbo
+180 C Woodland Patrol @James Ryman
+181 R Bloodhall Priest @Mark Winters
+182 U Campaign of Vengeance @Igor Kieryluk
+183 M Gisa and Geralf @Karla Ortiz
+184 M Grim Flayer @Mathias Kollros
+185 R Heron's Grace Champion @Todd Lockwood
+186 U Mercurial Geists @Lake Hurwitz
+187 U Mournwillow @Jeff Simpson
+188 U Ride Down @David Gaillet
+189 R Spell Queller @Adam Paquette
+190 M Tamiyo, Field Researcher @Tianhua X
+191 M Ulrich of the Krallenhorde @Slawomir Maniak
+192 C Cathar's Shield @Mark Zug
+193 U Cryptolith Fragment @John Avon
+194 C Cultist's Staff @Adam Paquette
+195 C Field Creeper @Anthony Palumbo
+196 U Geist-Fueled Scarecrow @Adam Paquette
+197 R Lupine Prototype @Deruchenko Alexander
+198 U Slayer's Cleaver @Daniel Ljunggren
+199 R Soul Separator @Daarken
+200 R Stitcher's Graft @Josh Hass
+201 C Terrarion @Titus Lunter
+202 U Thirsting Axe @Bastien L. Deharme
+203 R Geier Reach Sanitarium @Cliff Childs
+204 R Hanweir Battlements @Vincent Proce
+205 U Nephalia Academy @Adam Paquette
 
 [tokens]
 c_3_2_eldrazi_horror

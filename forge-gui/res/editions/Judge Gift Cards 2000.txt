@@ -6,5 +6,5 @@ Type=Promo
 ScryfallCode=G00
 
 [cards]
-1 R Counterspell
-2 R Vampiric Tutor
+1 R Counterspell @Dom!
+2 R Vampiric Tutor @Gary Leach

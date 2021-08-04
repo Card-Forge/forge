@@ -6,8 +6,8 @@ Type=Promo
 ScryfallCode=PS15
 
 [cards]
-23 M Kytheon, Hero of Akros
-60 M Jace, Vryn's Prodigy
-106 M Liliana, Heretical Healer
-135 M Chandra, Fire of Kaladesh
-189 M Nissa, Vastwood Seer
+23 M Kytheon, Hero of Akros @Wayne Reynolds
+60 M Jace, Vryn's Prodigy @Wayne Reynolds
+106 M Liliana, Heretical Healer @Wayne Reynolds
+135 M Chandra, Fire of Kaladesh @Wayne Reynolds
+189 M Nissa, Vastwood Seer @Wayne Reynolds

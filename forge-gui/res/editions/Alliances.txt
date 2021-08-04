@@ -12,205 +12,205 @@ Foil=NotSupported
 ScryfallCode=ALL
 
 [cards]
-116a C Aesthir Glider
-116b C Aesthir Glider
-64a C Agent of Stromgald
-64b C Agent of Stromgald
-22a C Arcane Denial
-22b C Arcane Denial
-117 R Ashnod's Cylix
-118a C Astrolabe
-118b C Astrolabe
-23a C Awesome Presence
-23b C Awesome Presence
-43 U Balduvian Dead
-65 R Balduvian Horde
-137 R Balduvian Trading Post
-66a C Balduvian War-Makers
-66b C Balduvian War-Makers
-24a C Benthic Explorers
-24b C Benthic Explorers
-67a C Bestial Fury
-67b C Bestial Fury
-85 U Bounty of the Hunt
-25 U Browse
-68 U Burnout
-1a C Carrier Pigeons
-1b C Carrier Pigeons
-44a C Casting of Bones
-44b C Casting of Bones
-69 R Chaos Harlequin
-45 U Contagion
-86a C Deadly Insect
-86b C Deadly Insect
-70 U Death Spark
-26 R Diminishing Returns
-46 U Diseased Vermin
-47 R Dystopia
-87 U Elvish Bard
-88a C Elvish Ranger
-88b C Elvish Ranger
-89 U Elvish Spirit Guide
-106 U Energy Arc
-71a C Enslaved Scout
-71b C Enslaved Scout
-2a C Errand of Duty
-2b C Errand of Duty
-3 R Exile
-27a C False Demise
-27b C False Demise
-48 R Fatal Lore
-49a C Feast or Famine
-49b C Feast or Famine
-50a C Fevered Strength
-50b C Fevered Strength
-119 R Floodwater Dam
-28 U Force of Will
-29a C Foresight
-29b C Foresight
-90a C Fyndhorn Druid
-90b C Fyndhorn Druid
-91 R Gargantuan Gorilla
-92a C Gift of the Woods
-92b C Gift of the Woods
-93a C Gorilla Berserkers
-93b C Gorilla Berserkers
-94a C Gorilla Chieftain
-94b C Gorilla Chieftain
-72a C Gorilla Shaman
-72b C Gorilla Shaman
-73a C Gorilla War Cry
-73b C Gorilla War Cry
-74a C Guerrilla Tactics
-74b C Guerrilla Tactics
-120 R Gustha's Scepter
-95 U Hail Storm
-138 R Heart of Yavimaya
-121 R Helm of Obedience
-4 U Inheritance
-51a C Insidious Bookworms
-51b C Insidious Bookworms
-5 R Ivory Gargoyle
-6 U Juniper Order Advocate
-96 R Kaysa
-52 R Keeper of Tresserhorn
-7a C Kjeldoran Escort
-7b C Kjeldoran Escort
-8 U Kjeldoran Home Guard
-139 R Kjeldoran Outpost
-9a C Kjeldoran Pride
-9b C Kjeldoran Pride
-53 R Krovikan Horror
-54 U Krovikan Plague
-140 R Lake of the Dead
-30a C Lat-Nam's Legacy
-30b C Lat-Nam's Legacy
-31 R Library of Lat-Nam
-55a C Lim-Dul's High Guard
-55b C Lim-Dul's High Guard
-108 U Lim-Dul's Paladin
-107 U Lim-Dul's Vault
-122 R Lodestone Bauble
-112 R Lord of Tresserhorn
-10a C Martyrdom
-10b C Martyrdom
-113 R Misfortune
-123 U Mishra's Groundbreaker
-56 U Misinformation
-124 U Mystic Compass
-110 U Nature's Blessing
-97 U Nature's Chosen
-98 R Nature's Wrath
-11a C Noble Steeds
-11b C Noble Steeds
-75 R Omen of Fire
-57a C Phantasmal Fiend
-57b C Phantasmal Fiend
-32 R Phantasmal Sphere
-115 R Phelddagrif
-58a C Phyrexian Boon
-58b C Phyrexian Boon
-125 R Phyrexian Devourer
-126 R Phyrexian Portal
-127a C Phyrexian War Beast
-127b C Phyrexian War Beast
-76 U Pillage
-77 U Primitive Justice
-78 U Pyrokinesis
-12a C Reinforcements
-12b C Reinforcements
-13a C Reprisal
-13b C Reprisal
-59 R Ritual of the Machine
-79 R Rogue Skycaptain
-14 R Royal Decree
-15a C Royal Herbalist
-15b C Royal Herbalist
-128 U Scarab of the Unseen
-16 U Scars of the Veteran
-141 U School of the Unseen
-17 U Seasoned Tactician
-142 R Sheltered Valley
-129 U Shield Sphere
-130 U Sol Grail
-60a C Soldevi Adnate
-60b C Soldevi Adnate
-131 R Soldevi Digger
-143 R Soldevi Excavations
-33a C Soldevi Heretic
-33b C Soldevi Heretic
-34a C Soldevi Sage
-34b C Soldevi Sage
-132a C Soldevi Sentry
-132b C Soldevi Sentry
-133a C Soldevi Steam Beast
-133b C Soldevi Steam Beast
-80 U Soldier of Fortune
-35 U Spiny Starfish
-99 R Splintering Wind
-61a C Stench of Decay
-61b C Stench of Decay
-134 R Storm Cauldron
-36a C Storm Crow
-36b C Storm Crow
-37 U Storm Elemental
-81a C Storm Shaman
-81b C Storm Shaman
-62 U Stromgald Spy
-38 U Suffocation
-109 U Surge of Strength
-18 R Sustaining Spirit
-63a C Swamp Mosquito
-63b C Swamp Mosquito
-19 R Sworn Defender
-100a C Taste of Paradise
-100b C Taste of Paradise
-144 R Thawing Glaciers
-39 R Thought Lash
-40 R Tidal Control
-101 R Tornado
-102a C Undergrowth
-102b C Undergrowth
-20 U Unlikely Alliance
-135 U Urza's Engine
-82a C Varchild's Crusader
-82b C Varchild's Crusader
-83 R Varchild's War-Riders
-84a C Veteran's Voice
-84b C Veteran's Voice
-41a C Viscerid Armor
-41b C Viscerid Armor
-42 U Viscerid Drone
-111 R Wandering Mage
-103a C Whip Vine
-103b C Whip Vine
-136 U Whirling Catapult
-21a C Wild Aesthir
-21b C Wild Aesthir
-114 R Winter's Night
-104a C Yavimaya Ancients
-104b C Yavimaya Ancients
-105 U Yavimaya Ants
+116a C Aesthir Glider @Ruth Thompson
+116b C Aesthir Glider @Ruth Thompson
+64a C Agent of Stromgald @Alan Rabinowitz
+64b C Agent of Stromgald @Alan Rabinowitz
+22a C Arcane Denial @Richard Kane Ferguson
+22b C Arcane Denial @Richard Kane Ferguson
+117 R Ashnod's Cylix @Nicola Leonard
+118a C Astrolabe @Amy Weber
+118b C Astrolabe @Amy Weber
+23a C Awesome Presence @Lawrence Snelly
+23b C Awesome Presence @Lawrence Snelly
+43 U Balduvian Dead @Mike Kimble
+65 R Balduvian Horde @Brian Snõddy
+137 R Balduvian Trading Post @Tom Wänerstrand
+66a C Balduvian War-Makers @Mike Kimble
+66b C Balduvian War-Makers @Mike Kimble
+24a C Benthic Explorers @Greg Simanson
+24b C Benthic Explorers @Greg Simanson
+67a C Bestial Fury @Mike Raabe
+67b C Bestial Fury @Mike Raabe
+85 U Bounty of the Hunt @Jeff A. Menges
+25 U Browse @Phil Foglio
+68 U Burnout @Mike Raabe
+1a C Carrier Pigeons @Pat Morrissey
+1b C Carrier Pigeons @Pat Morrissey
+44a C Casting of Bones @Anson Maddocks
+44b C Casting of Bones @Anson Maddocks
+69 R Chaos Harlequin @Alan Rabinowitz
+45 U Contagion @Mike Raabe
+86a C Deadly Insect @Scott Kirschner
+86b C Deadly Insect @Scott Kirschner
+70 U Death Spark @Mark Tedin
+26 R Diminishing Returns @Allen Williams
+46 U Diseased Vermin @Scott Kirschner
+47 R Dystopia @Ruth Thompson
+87 U Elvish Bard @Susan Van Camp
+88a C Elvish Ranger @Terese Nielsen
+88b C Elvish Ranger @Terese Nielsen
+89 U Elvish Spirit Guide @Julie Baroh
+106 U Energy Arc @Terese Nielsen
+71a C Enslaved Scout @Rebecca Guay
+71b C Enslaved Scout @Rebecca Guay
+2a C Errand of Duty @Julie Baroh
+2b C Errand of Duty @Julie Baroh
+3 R Exile @Rob Alexander
+27a C False Demise @Randy Gallegos
+27b C False Demise @Randy Gallegos
+48 R Fatal Lore @Lawrence Snelly
+49a C Feast or Famine @Pete Venters
+49b C Feast or Famine @Pete Venters
+50a C Fevered Strength @Brian Snõddy
+50b C Fevered Strength @Brian Snõddy
+119 R Floodwater Dam @Randy Gallegos
+28 U Force of Will @Terese Nielsen
+29a C Foresight @Terese Nielsen
+29b C Foresight @Terese Nielsen
+90a C Fyndhorn Druid @Rob Alexander
+90b C Fyndhorn Druid @Rob Alexander
+91 R Gargantuan Gorilla @Greg Simanson
+92a C Gift of the Woods @Susan Van Camp
+92b C Gift of the Woods @Susan Van Camp
+93a C Gorilla Berserkers @John Matson
+93b C Gorilla Berserkers @John Matson
+94a C Gorilla Chieftain @Quinton Hoover
+94b C Gorilla Chieftain @Quinton Hoover
+72a C Gorilla Shaman @Anthony S. Waters
+72b C Gorilla Shaman @Anthony S. Waters
+73a C Gorilla War Cry @Bryon Wackwitz
+73b C Gorilla War Cry @Bryon Wackwitz
+74a C Guerrilla Tactics @Randy Asplund-Faith
+74b C Guerrilla Tactics @Randy Asplund-Faith
+120 R Gustha's Scepter @Sandra Everingham
+95 U Hail Storm @Jeff A. Menges
+138 R Heart of Yavimaya @Pete Venters
+121 R Helm of Obedience @Brian Snõddy
+4 U Inheritance @Kaja Foglio
+51a C Insidious Bookworms @Greg Simanson
+51b C Insidious Bookworms @Greg Simanson
+5 R Ivory Gargoyle @Quinton Hoover
+6 U Juniper Order Advocate @Douglas Shuler
+96 R Kaysa @Rebecca Guay
+52 R Keeper of Tresserhorn @Zak Plucinski & D. Alexander Gregory
+7a C Kjeldoran Escort @Bryon Wackwitz
+7b C Kjeldoran Escort @Bryon Wackwitz
+8 U Kjeldoran Home Guard @Andi Rusu
+139 R Kjeldoran Outpost @Jeff A. Menges
+9a C Kjeldoran Pride @Kaja Foglio
+9b C Kjeldoran Pride @Kaja Foglio
+53 R Krovikan Horror @Christopher Rush
+54 U Krovikan Plague @Liz Danforth
+140 R Lake of the Dead @Pete Venters
+30a C Lat-Nam's Legacy @Tom Wänerstrand
+30b C Lat-Nam's Legacy @Tom Wänerstrand
+31 R Library of Lat-Nam @Alan Rabinowitz
+55a C Lim-Dul's High Guard @Anson Maddocks
+55b C Lim-Dul's High Guard @Anson Maddocks
+108 U Lim-Dul's Paladin @Christopher Rush
+107 U Lim-Dul's Vault @Rob Alexander
+122 R Lodestone Bauble @Douglas Shuler
+112 R Lord of Tresserhorn @Anson Maddocks
+10a C Martyrdom @Mark Poole
+10b C Martyrdom @Mark Poole
+113 R Misfortune @Ron Spencer
+123 U Mishra's Groundbreaker @Randy Gallegos
+56 U Misinformation @Richard Kane Ferguson
+124 U Mystic Compass @Amy Weber
+110 U Nature's Blessing @Sandra Everingham
+97 U Nature's Chosen @Rebecca Guay
+98 R Nature's Wrath @Liz Danforth
+11a C Noble Steeds @Rebecca Guay
+11b C Noble Steeds @Rebecca Guay
+75 R Omen of Fire @Pete Venters
+57a C Phantasmal Fiend @Scott Kirschner
+57b C Phantasmal Fiend @Scott Kirschner
+32 R Phantasmal Sphere @Mark Tedin
+115 R Phelddagrif @Amy Weber
+58a C Phyrexian Boon @Mark Tedin
+58b C Phyrexian Boon @Mark Tedin
+125 R Phyrexian Devourer @Mark Tedin
+126 R Phyrexian Portal @Pete Venters
+127a C Phyrexian War Beast @Bill Sienkiewicz
+127b C Phyrexian War Beast @Bill Sienkiewicz
+76 U Pillage @Richard Kane Ferguson
+77 U Primitive Justice @Anthony S. Waters
+78 U Pyrokinesis @Ron Spencer
+12a C Reinforcements @Diana Vick
+12b C Reinforcements @Diana Vick
+13a C Reprisal @Randy Asplund-Faith
+13b C Reprisal @Randy Asplund-Faith
+59 R Ritual of the Machine @Anson Maddocks
+79 R Rogue Skycaptain @Randy Asplund-Faith
+14 R Royal Decree @Pete Venters
+15a C Royal Herbalist @Douglas Shuler
+15b C Royal Herbalist @Douglas Shuler
+128 U Scarab of the Unseen @Sandra Everingham
+16 U Scars of the Veteran @Dan Frazier
+141 U School of the Unseen @Pat Morrissey
+17 U Seasoned Tactician @Dan Frazier
+142 R Sheltered Valley @Rob Alexander
+129 U Shield Sphere @Alan Rabinowitz
+130 U Sol Grail @Christopher Rush
+60a C Soldevi Adnate @Christopher Rush
+60b C Soldevi Adnate @Christopher Rush
+131 R Soldevi Digger @Amy Weber
+143 R Soldevi Excavations @Liz Danforth
+33a C Soldevi Heretic @Mike Kimble
+33b C Soldevi Heretic @Mike Kimble
+34a C Soldevi Sage @Carol Heyer
+34b C Soldevi Sage @Carol Heyer
+132a C Soldevi Sentry @Alan Rabinowitz
+132b C Soldevi Sentry @Alan Rabinowitz
+133a C Soldevi Steam Beast @Bill Sienkiewicz
+133b C Soldevi Steam Beast @Bill Sienkiewicz
+80 U Soldier of Fortune @Douglas Shuler
+35 U Spiny Starfish @Alan Rabinowitz
+99 R Splintering Wind @Ron Spencer
+61a C Stench of Decay @Heather Hudson
+61b C Stench of Decay @Heather Hudson
+134 R Storm Cauldron @Dan Frazier
+36a C Storm Crow @Sandra Everingham
+36b C Storm Crow @Sandra Everingham
+37 U Storm Elemental @John Matson
+81a C Storm Shaman @Carol Heyer
+81b C Storm Shaman @Carol Heyer
+62 U Stromgald Spy @Zak Plucinski
+38 U Suffocation @Allen Williams
+109 U Surge of Strength @Ruth Thompson
+18 R Sustaining Spirit @Rebecca Guay
+63a C Swamp Mosquito @Nicola Leonard
+63b C Swamp Mosquito @Nicola Leonard
+19 R Sworn Defender @D. Alexander Gregory
+100a C Taste of Paradise @Lawrence Snelly
+100b C Taste of Paradise @Lawrence Snelly
+144 R Thawing Glaciers @Jeff A. Menges
+39 R Thought Lash @Mark Tedin
+40 R Tidal Control @Randy Gallegos
+101 R Tornado @Susan Van Camp
+102a C Undergrowth @Pat Morrissey
+102b C Undergrowth @Pat Morrissey
+20 U Unlikely Alliance @Phil Foglio
+135 U Urza's Engine @Greg Simanson
+82a C Varchild's Crusader @Mark Poole
+82b C Varchild's Crusader @Mark Poole
+83 R Varchild's War-Riders @Susan Van Camp
+84a C Veteran's Voice @Andi Rusu
+84b C Veteran's Voice @Andi Rusu
+41a C Viscerid Armor @Heather Hudson
+41b C Viscerid Armor @Heather Hudson
+42 U Viscerid Drone @Heather Hudson
+111 R Wandering Mage @Pete Venters
+103a C Whip Vine @Allen Williams
+103b C Whip Vine @Allen Williams
+136 U Whirling Catapult @Dan Frazier
+21a C Wild Aesthir @Greg Simanson
+21b C Wild Aesthir @Greg Simanson
+114 R Winter's Night @Rob Alexander
+104a C Yavimaya Ancients @Quinton Hoover
+104b C Yavimaya Ancients @Quinton Hoover
+105 U Yavimaya Ants @Pat Morrissey
 
 [tokens]
 w_0_1_deserter

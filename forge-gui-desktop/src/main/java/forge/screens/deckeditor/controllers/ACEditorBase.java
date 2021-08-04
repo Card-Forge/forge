@@ -541,7 +541,8 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                                     existingCard.getEdition(),
                                     existingCard.getRarity(),
                                     existingCard.getArtIndex(),
-                                    true);
+                                    true,
+                                    existingCard.getArtist());
                             // remove *quantity* instances of existing card
                             CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(false, quantity);
                             // add *quantity* into the deck and set them as selected

@@ -6,4 +6,4 @@ Type=Promo
 ScryfallCode=PUDS
 
 [cards]
-6 R False Prophet
+6 R False Prophet @Eric Peterson

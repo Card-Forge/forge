@@ -12,149 +12,149 @@ FoilAlwaysInCommonSlot=False
 ScryfallCode=UDS
 
 [cards]
-76 U AEther Sting
-1 R Academy Rector
-101 R Ancient Silverback
-51 R Apprentice Necromancer
-2 U Archery Training
-52 R Attrition
-26 R Aura Thief
-27 R Blizzard Elemental
-77 R Bloodshot Cyclops
-53 R Body Snatcher
-126 U Braidwood Cup
-127 U Braidwood Sextant
-128 U Brass Secretary
-28 U Brine Seer
-29 C Bubbling Beebles
-54 C Bubbling Muck
-129 U Caltrops
-3 C Capashen Knight
-4 C Capashen Standard
-5 C Capashen Templar
-55 R Carnival of Souls
-56 C Chime of Night
-78 U Cinder Seer
-79 C Colos Yearling
-102 U Compost
-80 R Covetous Dragon
-30 U Disappear
-57 C Disease Carriers
-31 R Donate
-58 C Dying Wail
-103 C Elvish Lookout
-104 R Elvish Piper
-105 R Emperor Crocodile
-59 U Encroach
-60 U Eradicate
-130 U Extruder
-6 R False Prophet
-32 C Fatigue
-7 C Fend Off
-61 U Festering Wound
-8 C Field Surgeon
-81 C Flame Jet
-33 C Fledgling Osprey
-9 R Flicker
-131 U Fodder Cannon
-106 U Gamekeeper
-82 U Goblin Berserker
-83 R Goblin Festival
-84 C Goblin Gardener
-85 R Goblin Marshal
-86 C Goblin Masons
-107 C Goliath Beetle
-108 C Heart Warden
-87 C Hulking Ogre
-109 U Hunting Moa
-34 C Illuminated Wings
-88 R Impatience
-89 U Incendiary
-35 U Iridescent Drake
-110 U Ivy Seer
-10 U Jasmine Seer
-132 R Junk Diver
-90 U Keldon Champion
-91 C Keldon Vandals
-36 C Kingfisher
-92 U Landslide
-62 U Lurking Jackals
-111 C Magnify
-133 U Mantis Engine
-93 C Mark of Fury
-112 C Marker Beetles
-11 C Mask of Law and Grace
-12 R Master Healer
-134 R Masticore
-37 C Mental Discipline
-135 R Metalworker
-38 U Metathran Elite
-39 C Metathran Soldier
-113 U Momentum
-114 C Multani's Decree
-63 U Nightshade Seer
-13 R Opalescence
-40 R Opposition
-115 R Pattern of Rebirth
-64 C Phyrexian Monitor
-65 R Phyrexian Negator
-66 U Plague Dogs
-116 C Plated Spider
-117 R Plow Under
-136 R Powder Keg
-41 U Private Research
-42 U Quash
-67 R Rapid Decay
-68 C Ravenous Rats
-43 R Rayne, Academy Chancellor
-94 C Reckless Abandon
-14 C Reliquary Monk
-95 R Repercussion
-15 R Replenish
-44 C Rescue
-119 C Rofellos's Gift
-118 R Rofellos, Llanowar Emissary
-16 U Sanctimony
-45 C Scent of Brine
-96 C Scent of Cinder
-120 C Scent of Ivy
-17 C Scent of Jasmine
-69 C Scent of Nightshade
-18 U Scour
-137 R Scrying Glass
-19 U Serra Advocate
-46 C Sigil of Sleep
-70 C Skittering Horror
-71 C Slinking Skirge
-20 C Solidarity
-72 U Soul Feast
-97 U Sowing Salt
-121 U Splinter
-73 C Squirming Mass
-138 R Storage Matrix
-122 C Taunting Elf
-47 C Telepathic Spies
-48 R Temporal Adept
-21 R Tethered Griffin
-49 U Thieving Magpie
-123 R Thorn Elemental
-139 U Thran Dynamo
-140 U Thran Foundry
-141 R Thran Golem
-22 C Tormented Angel
-50 R Treachery
-98 C Trumpet Blast
-74 C Twisted Experiment
-142 R Urza's Incubator
-23 U Voice of Duty
-24 U Voice of Reason
-99 R Wake of Destruction
-25 C Wall of Glare
-100 C Wild Colos
-124 C Yavimaya Elder
-125 U Yavimaya Enchantress
-143 R Yavimaya Hollow
-75 R Yawgmoth's Bargain
+76 U Aether Sting @Pete Venters
+1 R Academy Rector @Heather Hudson
+101 R Ancient Silverback @Paolo Parente
+51 R Apprentice Necromancer @Pete Venters
+2 U Archery Training @Mark Brill
+52 R Attrition @Scott M. Fischer
+26 R Aura Thief @Ron Spears
+27 R Blizzard Elemental @Thomas M. Baxa
+77 R Bloodshot Cyclops @Ray Lago
+53 R Body Snatcher @Mark Zug
+126 U Braidwood Cup @Greg Hildebrandt & Tim Hildebrandt
+127 U Braidwood Sextant @Don Hazeltine
+128 U Brass Secretary @DiTerlizzi
+28 U Brine Seer @Donato Giancola
+29 C Bubbling Beebles @Jeff Miracola
+54 C Bubbling Muck @Greg Hildebrandt & Tim Hildebrandt
+129 U Caltrops @Jeff Laubenstein
+3 C Capashen Knight @Kev Walker
+4 C Capashen Standard @Todd Lockwood
+5 C Capashen Templar @Todd Lockwood
+55 R Carnival of Souls @Brian Snõddy
+56 C Chime of Night @Pete Venters
+78 U Cinder Seer @Donato Giancola
+79 C Colos Yearling @Patrick Ho
+102 U Compost @Douglas Shuler
+80 R Covetous Dragon @rk post
+30 U Disappear @Edward P. Beard, Jr.
+57 C Disease Carriers @Chippy & Matthew D. Wilson
+31 R Donate @Jeff Miracola
+58 C Dying Wail @Brian Snõddy
+103 C Elvish Lookout @Greg Hildebrandt & Tim Hildebrandt
+104 R Elvish Piper @Scott M. Fischer
+105 R Emperor Crocodile @Kev Walker
+59 U Encroach @rk post & Mark Tedin
+60 U Eradicate @Kev Walker
+130 U Extruder @Mark Tedin
+6 R False Prophet @Eric Peterson
+32 C Fatigue @Jeff Miracola
+7 C Fend Off @Paolo Parente
+61 U Festering Wound @Chippy & Matthew D. Wilson
+8 C Field Surgeon @Heather Hudson
+81 C Flame Jet @John Avon
+33 C Fledgling Osprey @Heather Hudson
+9 R Flicker @Douglas Shuler
+131 U Fodder Cannon @DiTerlizzi
+106 U Gamekeeper @Scott Hampton
+82 U Goblin Berserker @Christopher Rush
+83 R Goblin Festival @Jeff Laubenstein
+84 C Goblin Gardener @Dan Frazier
+85 R Goblin Marshal @DiTerlizzi
+86 C Goblin Masons @DiTerlizzi
+107 C Goliath Beetle @Don Hazeltine
+108 C Heart Warden @Adam Rex
+87 C Hulking Ogre @Greg Hildebrandt & Tim Hildebrandt
+109 U Hunting Moa @DiTerlizzi
+34 C Illuminated Wings @Jim Nelson
+88 R Impatience @Mark Brill
+89 U Incendiary @Jeff Laubenstein
+35 U Iridescent Drake @Jim Nelson
+110 U Ivy Seer @Donato Giancola
+10 U Jasmine Seer @Donato Giancola
+132 R Junk Diver @Eric Peterson
+90 U Keldon Champion @Mark Tedin
+91 C Keldon Vandals @Greg Staples
+36 C Kingfisher @Edward P. Beard, Jr.
+92 U Landslide @Jeff Laubenstein
+62 U Lurking Jackals @Greg Staples
+111 C Magnify @Michael Sutfin
+133 U Mantis Engine @John Zeleznik
+93 C Mark of Fury @Thomas M. Baxa
+112 C Marker Beetles @Ron Spencer
+11 C Mask of Law and Grace @Kev Walker
+12 R Master Healer @Adam Rex
+134 R Masticore @Paolo Parente
+37 C Mental Discipline @Edward P. Beard, Jr.
+135 R Metalworker @Don Hazeltine
+38 U Metathran Elite @Jim Nelson
+39 C Metathran Soldier @Paolo Parente
+113 U Momentum @Carl Critchlow
+114 C Multani's Decree @Eric Peterson
+63 U Nightshade Seer @Donato Giancola
+13 R Opalescence @John Avon
+40 R Opposition @Todd Lockwood
+115 R Pattern of Rebirth @Mark Brill
+64 C Phyrexian Monitor @Carl Critchlow
+65 R Phyrexian Negator @John Zeleznik
+66 U Plague Dogs @Chippy & Matthew D. Wilson
+116 C Plated Spider @Ron Spencer
+117 R Plow Under @Edward P. Beard, Jr.
+136 R Powder Keg @Dan Frazier
+41 U Private Research @Scott M. Fischer
+42 U Quash @Don Hazeltine
+67 R Rapid Decay @Chippy
+68 C Ravenous Rats @Carl Critchlow
+43 R Rayne, Academy Chancellor @Matthew D. Wilson
+94 C Reckless Abandon @Ron Spears
+14 C Reliquary Monk @Thomas M. Baxa
+95 R Repercussion @Michael Sutfin
+15 R Replenish @Jim Nelson
+44 C Rescue @Greg Staples
+119 C Rofellos's Gift @Pete Venters
+118 R Rofellos, Llanowar Emissary @Michael Sutfin
+16 U Sanctimony @Mark Brill
+45 C Scent of Brine @Greg Staples
+96 C Scent of Cinder @Marc Fishman
+120 C Scent of Ivy @John Avon
+17 C Scent of Jasmine @Douglas Shuler
+69 C Scent of Nightshade @John Avon
+18 U Scour @Eric Peterson
+137 R Scrying Glass @Patrick Ho
+19 U Serra Advocate @Scott Hampton
+46 C Sigil of Sleep @Greg Hildebrandt & Tim Hildebrandt
+70 C Skittering Horror @Mark Zug
+71 C Slinking Skirge @Ron Spencer
+20 C Solidarity @John Zeleznik
+72 U Soul Feast @Ray Lago
+97 U Sowing Salt @Todd Lockwood
+121 U Splinter @Daren Bader
+73 C Squirming Mass @Ron Spencer
+138 R Storage Matrix @Patrick Ho
+122 C Taunting Elf @Scott M. Fischer
+47 C Telepathic Spies @Thomas M. Baxa
+48 R Temporal Adept @Heather Hudson
+21 R Tethered Griffin @Matthew D. Wilson
+49 U Thieving Magpie @Una Fricker
+123 R Thorn Elemental @rk post
+139 U Thran Dynamo @Ron Spears
+140 U Thran Foundry @John Zeleznik
+141 R Thran Golem @Ron Spears
+22 C Tormented Angel @Greg Hildebrandt & Tim Hildebrandt
+50 R Treachery @Matthew D. Wilson
+98 C Trumpet Blast @Carl Critchlow
+74 C Twisted Experiment @rk post
+142 R Urza's Incubator @Pete Venters
+23 U Voice of Duty @Mark Zug
+24 U Voice of Reason @Ray Lago
+99 R Wake of Destruction @Todd Lockwood
+25 C Wall of Glare @Patrick Ho
+100 C Wild Colos @Marc Fishman
+124 C Yavimaya Elder @Ray Lago
+125 U Yavimaya Enchantress @Matthew D. Wilson
+143 R Yavimaya Hollow @Douglas Shuler
+75 R Yawgmoth's Bargain @Michael Sutfin
 
 [tokens]
 r_1_1_goblin

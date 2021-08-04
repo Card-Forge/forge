@@ -6,42 +6,42 @@ Type=Promo
 ScryfallCode=PMEI
 
 [cards]
-4 C Fireball
-5 C Blue Elemental Blast
-8 C Jamuraan Lion
-9 C Scent of Cinder
-10 C Lightning Hounds
-11 C Spined Wurm
-12 U Warmonger
-13 C Silver Drake
-14 C Phyrexian Rager
-15 R Shivan Dragon
-16 R Darksteel Juggernaut
-17 U Cunning Sparkmage
-18 C Chandra's Outrage
-19 U Chandra's Spitfire
-20 R Kuldotha Phoenix
-21 U Phantasmal Dragon
-22 C Sandbar Crocodile
-23 C Zhalfirin Knight
-24 C Shrieking Drake
-25 C Stream of Life
-26 R Thorn Elemental
-27 C Parallax Dementia
-28 R Ascendant Evincar
-29 R Archangel
-30 U Cast Down
-31 R Diabolic Edict
-32 R Shock
-33 U Lava Coil
-34 R Duress
-35 R Voltaic Key
-36 U Daxos, Blessed by the Sun
-37 R Staggering Insight
-38 C Dark Ritual
-39 R Sprite Dragon
-40 R Hypnotic Sprite
-41 R Heliod's Pilgrim
-42 R Crop Rotation
-43 R Tangled Florahedron
-44 R Counterspell
+4 C Fireball @Mark Tedin
+5 C Blue Elemental Blast @Richard Thomas
+9 C Scent of Cinder @Carl Critchlow
+10 C Lightning Hounds @Andrew Robinson
+10* C Jamuraan Lion @Stuart Griffin
+11 C Spined Wurm @Keith Parkinson
+12 U Warmonger @Heather Hudson
+13 C Silver Drake @Alan Pollack
+14 C Phyrexian Rager @Mark Tedin
+15 R Shivan Dragon @Donato Giancola
+16 R Darksteel Juggernaut @Randis Albion
+17 U Cunning Sparkmage @Wayne Reynolds
+18 C Chandra's Outrage @Christopher Moeller
+19 U Chandra's Spitfire @Justin Sweet
+20 R Kuldotha Phoenix @Mike Bierek
+21 U Phantasmal Dragon @Wayne Reynolds
+22 C Sandbar Crocodile @Una Fricker
+23 C Zhalfirin Knight @John Bolton
+24 C Shrieking Drake @Ian Miller
+25 C Stream of Life @Terese Nielsen
+26 R Thorn Elemental @rk post
+27 C Parallax Dementia @Eric Peterson
+28 R Ascendant Evincar @Mark Zug
+29 R Archangel @Donato Giancola
+30 U Cast Down @Ittoku
+31 R Diabolic Edict @Ron Spencer
+32 R Shock @Randy Gallegos
+33 U Lava Coil @Wesley Burt & コーヘー
+34 R Duress @Lawrence Snelly
+35 R Voltaic Key @Henry G. Higginbotham
+36 U Daxos, Blessed by the Sun @Lius Lasahido
+37 R Staggering Insight @Dmitry Burmak
+38 C Dark Ritual @Tom Fleming
+39 R Sprite Dragon @Gabor Szikszai
+40 R Hypnotic Sprite @Irina Nordsol
+41 R Heliod's Pilgrim @Micah Epstein
+42 R Crop Rotation @DiTerlizzi
+43 R Tangled Florahedron @Randy Vargas
+44 R Counterspell @Hannibal King

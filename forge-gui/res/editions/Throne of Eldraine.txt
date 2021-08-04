@@ -13,415 +13,415 @@ FatPackExtraSlots=20 BasicLands, 20 BasicLands+, 1 Piper of the Swarm+|ELD|3
 ScryfallCode=ELD
 
 [cards]
-1 R Acclaimed Contender
-2 U All That Glitters
-3 U Archon of Absolution
-4 C Ardenvale Paladin
-5 C Ardenvale Tactician
-6 C Bartered Cow
-7 C Beloved Princess
-8 R Charming Prince
-9 M The Circle of Loyalty
-10 U Deafening Silence
-11 C Faerie Guidemother
-12 C Flutterfox
-13 C Fortifying Provisions
-14 R Giant Killer
-15 U Glass Casket
-16 R Happily Ever After
-17 M Harmonious Archon
-18 R Hushbringer
-19 C Knight of the Keep
-20 R Linden, the Steadfast Queen
-21 C Lonesome Unicorn
-22 U Mysterious Pathlighter
-23 C Outflank
-24 C Prized Griffin
-25 U Rally for the Throne
-26 M Realm-Cloaked Giant
-27 U Righteousness
-28 U Shepherd of the Flock
-29 C Shining Armor
-30 C Silverflame Ritual
-31 C Silverflame Squire
-32 U Syr Alin, the Lion's Claw
-33 C Trapped in the Tower
-34 C True Love's Kiss
-35 U Venerable Knight
-36 R Worthy Knight
-37 C Youthful Knight
-38 U Animating Faerie
-39 M Brazen Borrower
-40 C Charmed Sleep
-41 C Corridor Monitor
-42 C Didn't Say Please
-43 R Emry, Lurker of the Loch
-44 R Fae of Wishes
-45 U Faerie Vandal
-46 R Folio of Fancies
-47 U Frogify
-48 R Gadwick, the Wizened
-49 U Hypnotic Sprite
-50 U Into the Story
-51 M The Magic Mirror
-52 C Mantle of Tides
-53 C Merfolk Secretkeeper
-54 R Midnight Clock
-55 R Mirrormade
-56 C Mistford River Turtle
-57 C Moonlit Scavengers
-58 U Mystical Dispute
-59 C Opt
-60 U Overwhelmed Apprentice
-61 C Queen of Ice
-62 C Run Away Together
-63 U Sage of the Falls
-64 C So Tiny
-65 C Steelgaze Griffin
-66 R Stolen by the Fae
-67 U Syr Elenora, the Discerning
-68 C Tome Raider
-69 U Turn into a Pumpkin
-70 C Unexplained Vision
-71 R Vantress Gargoyle
-72 C Vantress Paladin
-73 C Wishful Merfolk
-74 C Witching Well
-75 R Ayara, First of Locthwain
-76 C Bake into a Pie
-77 C Barrow Witches
-78 U Belle of the Brawl
-79 R Blacklance Paragon
-80 U Bog Naughty
-81 U Cauldron Familiar
-82 M The Cauldron of Eternity
-83 U Cauldron's Gift
-84 R Clackbridge Troll
-85 U Epic Downfall
-86 C Eye Collector
-87 C Festive Funeral
-88 C Foreboding Fruit
-89 C Forever Young
-90 U Foulmire Knight
-91 C Giant's Skewer
-92 C Lash of Thorns
-93 C Locthwain Paladin
-94 C Lost Legion
-95 C Malevolent Noble
-96 C Memory Theft
-97 R Murderous Rider
-98 R Oathsworn Knight
-99 U Order of Midnight
-100 R Piper of the Swarm
-101 M Rankle, Master of Pranks
-102 C Reaper of Night
-103 C Reave Soul
-104 U Revenge of Ravens
-105 C Smitten Swordmaster
-106 U Specter's Shriek
-107 U Syr Konrad, the Grim
-108 C Tempting Witch
-109 C Wicked Guardian
-110 R Wishclaw Talisman
-111 R Witch's Vengeance
-112 C Barge In
-113 C Bloodhaze Wolverine
-114 C Blow Your House Down
-115 R Bonecrusher Giant
-116 C Brimstone Trebuchet
-117 U Burning-Yard Trainer
-118 U Claim the Firstborn
-119 C Crystal Slipper
-120 M Embercleave
-121 C Embereth Paladin
-122 U Embereth Shieldbreaker
-123 U Ferocity of the Wilds
-124 R Fervent Champion
-125 R Fires of Invention
-126 C Fling
-127 R Irencrag Feat
-128 R Irencrag Pyromancer
-129 U Joust
-130 U Mad Ratter
-131 C Merchant of the Vale
-132 C Ogre Errant
-133 R Opportunistic Dragon
-134 C Raging Redcap
-135 U Redcap Melee
-136 C Redcap Raiders
-137 C Rimrock Knight
-138 M Robber of the Rich
-139 C Scorching Dragonfire
-140 C Searing Barrage
-141 C Seven Dwarves
-142 U Skullknocker Ogre
-143 U Slaying Fire
-144 R Sundering Stroke
-145 U Syr Carah, the Bold
-146 C Thrill of Possibility
-147 R Torbran, Thane of Red Fell
-148 C Weaselback Redcap
-149 U Beanstalk Giant
-150 C Curious Pair
-151 U Edgewall Innkeeper
-152 R Feasting Troll King
-153 C Fell the Pheasant
-154 C Fierce Witchstalker
-155 U Flaxen Intruder
-156 C Garenbrig Carver
-157 C Garenbrig Paladin
-158 C Garenbrig Squire
-159 U Giant Opportunity
-160 R Gilded Goose
-161 M The Great Henge
-162 C Insatiable Appetite
-163 U Keeper of Fables
-164 U Kenrith's Transformation
-165 R Lovestruck Beast
-166 C Maraleaf Rider
-167 U Oakhame Adversary
-168 U Once and Future
-169 R Once Upon a Time
-170 C Outmuscle
-171 M Questing Beast
-172 R Return of the Wildspeaker
-173 C Return to Nature
-174 C Rosethorn Acolyte
-175 C Rosethorn Halberd
-176 C Sporecap Spider
-177 U Syr Faren, the Hengehammer
-178 C Tall as a Beanstalk
-179 U Trail of Crumbs
-180 C Tuinvale Treefolk
-181 R Wicked Wolf
-182 R Wildborn Preserver
-183 C Wildwood Tracker
-184 C Wolf's Quarry
-185 R Yorvo, Lord of Garenbrig
-186 R Dance of the Manse
-187 R Doom Foretold
-188 U Drown in the Loch
-189 R Escape to the Wilds
-190 R Faeburrow Elder
-191 M Garruk, Cursed Huntsman
-192 U Grumgully, the Generous
-193 U Improbable Alliance
-194 U Inspiring Veteran
-195 R Lochmere Serpent
-196 U Maraleaf Pixie
-197 M Oko, Thief of Crowns
-198 M Outlaws' Merriment
-199 M The Royal Scions
-200 U Savvy Hunter
-201 U Shinechaser
-202 U Steelclaw Lance
-203 R Stormfist Crusader
-204 U Wandermare
-205 U Wintermoor Commander
-206 U Arcanist's Owl
-207 U Covetous Urge
-208 U Deathless Knight
-209 U Elite Headhunter
-210 U Fireborn Knight
-211 U Loch Dragon
-212 U Oakhame Ranger
-213 U Rampart Smasher
-214 U Resolute Rider
-215 U Thunderous Snapper
-216 U Clockwork Servant
-217 C Crashing Drawbridge
-218 U Enchanted Carriage
-219 C Gingerbrute
-220 C Golden Egg
-221 C Henge Walker
-222 U Heraldic Banner
-223 U Inquisitive Puppet
-224 C Jousting Dummy
-225 C Locthwain Gargoyle
-226 U Lucky Clover
-227 C Prophet of the Peak
-228 C Roving Keep
-229 C Scalding Cauldron
-230 U Shambling Suit
-231 C Signpost Scarecrow
-232 U Sorcerer's Broom
-233 R Sorcerous Spyglass
-234 U Spinning Wheel
-235 R Stonecoil Serpent
-236 C Weapon Rack
-237 U Witch's Oven
-238 R Castle Ardenvale
-239 R Castle Embereth
-240 R Castle Garenbrig
-241 R Castle Locthwain
-242 R Castle Vantress
-243 C Dwarven Mine
-244 R Fabled Passage
-245 C Gingerbread Cabin
-246 C Idyllic Grange
-247 C Mystic Sanctuary
-248 U Tournament Grounds
-249 C Witch's Cottage
-250 L Plains
-251 L Plains
-252 L Plains
-253 L Plains
-254 L Island
-255 L Island
-256 L Island
-257 L Island
-258 L Swamp
-259 L Swamp
-260 L Swamp
-261 L Swamp
-262 L Mountain
-263 L Mountain
-264 L Mountain
-265 L Mountain
-266 L Forest
-267 L Forest
-268 L Forest
-269 L Forest
+1 R Acclaimed Contender @David Gaillet
+2 U All That Glitters @Iain McCaig
+3 U Archon of Absolution @Igor Kieryluk
+4 C Ardenvale Paladin @Volkan Baǵa
+5 C Ardenvale Tactician @Jason Rainville
+6 C Bartered Cow @Deruchenko Alexander
+7 C Beloved Princess @Howard Lyon
+8 R Charming Prince @Randy Vargas
+9 M The Circle of Loyalty @Bastien L. Deharme
+10 U Deafening Silence @Igor Kieryluk
+11 C Faerie Guidemother @Mila Pesic
+12 C Flutterfox @Lucas Graciano
+13 C Fortifying Provisions @Scott Murphy
+14 R Giant Killer @Jesper Ejsing
+15 U Glass Casket @Anastasia Ovchinnikova
+16 R Happily Ever After @Matt Stewart
+17 M Harmonious Archon @Anastasia Ovchinnikova
+18 R Hushbringer @Bastien L. Deharme
+19 C Knight of the Keep @Bram Sels
+20 R Linden, the Steadfast Queen @Ryan Pancoast
+21 C Lonesome Unicorn @Winona Nelson
+22 U Mysterious Pathlighter @Kimonas Theodossiou
+23 C Outflank @Victor Adame Minguez
+24 C Prized Griffin @Jesper Ejsing
+25 U Rally for the Throne @James Paick
+26 M Realm-Cloaked Giant @Adam Paquette
+27 U Righteousness @Howard Lyon
+28 U Shepherd of the Flock @Drew Baker
+29 C Shining Armor @Eric Deschamps
+30 C Silverflame Ritual @Jason Felix
+31 C Silverflame Squire @Lie Setiawan
+32 U Syr Alin, the Lion's Claw @Paul Scott Canavan
+33 C Trapped in the Tower @Howard Lyon
+34 C True Love's Kiss @Donato Giancola
+35 U Venerable Knight @Colin Boyer
+36 R Worthy Knight @Yongjae Choi
+37 C Youthful Knight @Heonhwa Choe
+38 U Animating Faerie @Joseph Meehan
+39 M Brazen Borrower @Eric Deschamps
+40 C Charmed Sleep @Titus Lunter
+41 C Corridor Monitor @Jason Felix
+42 C Didn't Say Please @Jason A. Engle
+43 R Emry, Lurker of the Loch @Livia Prima
+44 R Fae of Wishes @Magali Villeneuve
+45 U Faerie Vandal @Paul Scott Canavan
+46 R Folio of Fancies @Colin Boyer
+47 U Frogify @Chris Seaman
+48 R Gadwick, the Wizened @Colin Boyer
+49 U Hypnotic Sprite @Irina Nordsol
+50 U Into the Story @Jason Rainville
+51 M The Magic Mirror @Anastasia Ovchinnikova
+52 C Mantle of Tides @Lie Setiawan
+53 C Merfolk Secretkeeper @Jana Schirmer
+54 R Midnight Clock @Alexander Forssberg
+55 R Mirrormade @Volkan Baǵa
+56 C Mistford River Turtle @Milivoj Ćeran
+57 C Moonlit Scavengers @Miranda Meeks
+58 U Mystical Dispute @Ekaterina Burmak
+59 C Opt @Dan Scott
+60 U Overwhelmed Apprentice @Jason Rainville
+61 C Queen of Ice @Eric Deschamps
+62 C Run Away Together @Filip Burburan
+63 U Sage of the Falls @Nicholas Gregory
+64 C So Tiny @Randy Vargas
+65 C Steelgaze Griffin @J.P. Targete
+66 R Stolen by the Fae @Ryan Alexander Lee
+67 U Syr Elenora, the Discerning @Mila Pesic
+68 C Tome Raider @Randy Vargas
+69 U Turn into a Pumpkin @Vincent Proce
+70 C Unexplained Vision @Bram Sels
+71 R Vantress Gargoyle @Cristi Balanescu
+72 C Vantress Paladin @Lucas Graciano
+73 C Wishful Merfolk @Livia Prima
+74 C Witching Well @John Avon
+75 R Ayara, First of Locthwain @Ryan Pancoast
+76 C Bake into a Pie @Zoltan Boros
+77 C Barrow Witches @Alex Brock
+78 U Belle of the Brawl @Magali Villeneuve
+79 R Blacklance Paragon @Victor Adame Minguez
+80 U Bog Naughty @Mila Pesic
+81 U Cauldron Familiar @Milivoj Ćeran
+82 M The Cauldron of Eternity @Tomasz Jedruszek
+83 U Cauldron's Gift @Anna Steinbauer
+84 R Clackbridge Troll @Svetlin Velinov
+85 U Epic Downfall @Eric Deschamps
+86 C Eye Collector @Uriah Voth
+87 C Festive Funeral @Zack Stella
+88 C Foreboding Fruit @Drew Baker
+89 C Forever Young @Volkan Baǵa
+90 U Foulmire Knight @Alex Brock
+91 C Giant's Skewer @James Paick
+92 C Lash of Thorns @Jeff Simpson
+93 C Locthwain Paladin @Zack Stella
+94 C Lost Legion @Anastasia Ovchinnikova
+95 C Malevolent Noble @Randy Vargas
+96 C Memory Theft @Micah Epstein
+97 R Murderous Rider @Josh Hass
+98 R Oathsworn Knight @Svetlin Velinov
+99 U Order of Midnight @Victor Adame Minguez
+100 R Piper of the Swarm @Irina Nordsol
+101 M Rankle, Master of Pranks @Dmitry Burmak
+102 C Reaper of Night @Jeff Simpson
+103 C Reave Soul @Naomi Baker
+104 U Revenge of Ravens @Dmitry Burmak
+105 C Smitten Swordmaster @Taylor Ingvarsson
+106 U Specter's Shriek @Svetlin Velinov
+107 U Syr Konrad, the Grim @Anna Steinbauer
+108 C Tempting Witch @Mila Pesic
+109 C Wicked Guardian @Matt Stewart
+110 R Wishclaw Talisman @Daarken
+111 R Witch's Vengeance @Titus Lunter
+112 C Barge In @Mark Behm
+113 C Bloodhaze Wolverine @Evan Shipard
+114 C Blow Your House Down @Ravenna Tran
+115 R Bonecrusher Giant @Victor Adame Minguez
+116 C Brimstone Trebuchet @Yeong-Hao Han
+117 U Burning-Yard Trainer @Yongjae Choi
+118 U Claim the Firstborn @Iain McCaig
+119 C Crystal Slipper @Howard Lyon
+120 M Embercleave @Joe Slucher
+121 C Embereth Paladin @Randy Vargas
+122 U Embereth Shieldbreaker @Randy Vargas
+123 U Ferocity of the Wilds @Josu Hernaiz
+124 R Fervent Champion @Steve Argyle
+125 R Fires of Invention @Stanton Feng
+126 C Fling @Lie Setiawan
+127 R Irencrag Feat @Yongjae Choi
+128 R Irencrag Pyromancer @Jason Rainville
+129 U Joust @Bram Sels
+130 U Mad Ratter @Johann Bodin
+131 C Merchant of the Vale @David Gaillet
+132 C Ogre Errant @Mitchell Malloy
+133 R Opportunistic Dragon @Chris Rahn
+134 C Raging Redcap @Dan Scott
+135 U Redcap Melee @Chris Rallis
+136 C Redcap Raiders @Lie Setiawan
+137 C Rimrock Knight @Chris Rallis
+138 M Robber of the Rich @Paul Scott Canavan
+139 C Scorching Dragonfire @Eric Velhagen
+140 C Searing Barrage @Allen Williams
+141 C Seven Dwarves @Jason Rainville
+142 U Skullknocker Ogre @Svetlin Velinov
+143 U Slaying Fire @Heonhwa Choe
+144 R Sundering Stroke @Stanton Feng
+145 U Syr Carah, the Bold @Wisnu Tan
+146 C Thrill of Possibility @Steve Argyle
+147 R Torbran, Thane of Red Fell @Grzegorz Rutkowski
+148 C Weaselback Redcap @Grzegorz Rutkowski
+149 U Beanstalk Giant @Jason A. Engle
+150 C Curious Pair @Daarken
+151 U Edgewall Innkeeper @Matt Stewart
+152 R Feasting Troll King @Nicholas Gregory
+153 C Fell the Pheasant @Randy Gallegos
+154 C Fierce Witchstalker @Nicholas Gregory
+155 U Flaxen Intruder @Gabor Szikszai
+156 C Garenbrig Carver @Lucas Graciano
+157 C Garenbrig Paladin @Nicholas Gregory
+158 C Garenbrig Squire @Dallas Williams
+159 U Giant Opportunity @James Paick
+160 R Gilded Goose @Lindsey Look
+161 M The Great Henge @Adam Paquette
+162 C Insatiable Appetite @Nils Hamm
+163 U Keeper of Fables @Alex Konstad
+164 U Kenrith's Transformation @Kimonas Theodossiou
+165 R Lovestruck Beast @Kev Walker
+166 C Maraleaf Rider @Kieran Yanner
+167 U Oakhame Adversary @Nicholas Gregory
+168 U Once and Future @Nils Hamm
+169 R Once Upon a Time @Matt Stewart
+170 C Outmuscle @Viktor Titov
+171 M Questing Beast @Igor Kieryluk
+172 R Return of the Wildspeaker @Chris Rallis
+173 C Return to Nature @Mark Poole
+174 C Rosethorn Acolyte @Johannes Voss
+175 C Rosethorn Halberd @Kari Christensen
+176 C Sporecap Spider @Josu Hernaiz
+177 U Syr Faren, the Hengehammer @Chris Rallis
+178 C Tall as a Beanstalk @Emrah Elmasli
+179 U Trail of Crumbs @Daarken
+180 C Tuinvale Treefolk @Jason A. Engle
+181 R Wicked Wolf @Tomasz Jedruszek
+182 R Wildborn Preserver @Lius Lasahido
+183 C Wildwood Tracker @Titus Lunter
+184 C Wolf's Quarry @Lars Grant-West
+185 R Yorvo, Lord of Garenbrig @Zack Stella
+186 R Dance of the Manse @Yeong-Hao Han
+187 R Doom Foretold @Daniel Ljunggren
+188 U Drown in the Loch @John Stanko
+189 R Escape to the Wilds @Chris Ostrowski
+190 R Faeburrow Elder @Raoul Vitale
+191 M Garruk, Cursed Huntsman @Eric Deschamps
+192 U Grumgully, the Generous @Milivoj Ćeran
+193 U Improbable Alliance @Zoltan Boros
+194 U Inspiring Veteran @Scott Murphy
+195 R Lochmere Serpent @Sam Burley
+196 U Maraleaf Pixie @Matt Cavotta
+197 M Oko, Thief of Crowns @Yongjae Choi
+198 M Outlaws' Merriment @Suzanne Helmigh
+199 M The Royal Scions @Paul Scott Canavan
+200 U Savvy Hunter @Dan Dos Santos
+201 U Shinechaser @Evan Shipard
+202 U Steelclaw Lance @Volkan Baǵa
+203 R Stormfist Crusader @Chris Rallis
+204 U Wandermare @Kari Christensen
+205 U Wintermoor Commander @Tyler Jacobson
+206 U Arcanist's Owl @Véronique Meignaud
+207 U Covetous Urge @Carmen Sinek
+208 U Deathless Knight @Igor Kieryluk
+209 U Elite Headhunter @Daarken
+210 U Fireborn Knight @Ben Maier
+211 U Loch Dragon @Mike Bierek
+212 U Oakhame Ranger @Mitchell Malloy & Maddie Julyk
+213 U Rampart Smasher @Emrah Elmasli
+214 U Resolute Rider @Carmen Sinek
+215 U Thunderous Snapper @Johann Bodin
+216 U Clockwork Servant @David Palumbo
+217 C Crashing Drawbridge @Mark Behm
+218 U Enchanted Carriage @Zoltan Boros
+219 C Gingerbrute @Vincent Proce
+220 C Golden Egg @Lindsey Look
+221 C Henge Walker @Titus Lunter
+222 U Heraldic Banner @Ravenna Tran
+223 U Inquisitive Puppet @Joseph Meehan
+224 C Jousting Dummy @Milivoj Ćeran
+225 C Locthwain Gargoyle @Nils Hamm
+226 U Lucky Clover @John Stanko
+227 C Prophet of the Peak @Titus Lunter
+228 C Roving Keep @Svetlin Velinov
+229 C Scalding Cauldron @Craig J Spearing
+230 U Shambling Suit @Nicholas Gregory
+231 C Signpost Scarecrow @Jung Park
+232 U Sorcerer's Broom @Jung Park
+233 R Sorcerous Spyglass @Aaron Miller
+234 U Spinning Wheel @Aaron Miller
+235 R Stonecoil Serpent @Mark Poole
+236 C Weapon Rack @Joe Slucher
+237 U Witch's Oven @Alexander Forssberg
+238 R Castle Ardenvale @Volkan Baǵa
+239 R Castle Embereth @Jaime Jones
+240 R Castle Garenbrig @Adam Paquette
+241 R Castle Locthwain @Titus Lunter
+242 R Castle Vantress @John Avon
+243 C Dwarven Mine @Alexander Forssberg
+244 R Fabled Passage @Howard Lyon
+245 C Gingerbread Cabin @Chris Ostrowski
+246 C Idyllic Grange @Howard Lyon
+247 C Mystic Sanctuary @Randy Vargas
+248 U Tournament Grounds @Cristi Balanescu
+249 C Witch's Cottage @Gabor Szikszai
+250 L Plains @Volkan Baǵa
+251 L Plains @Sidharth Chaturvedi
+252 L Plains @Alayna Danner
+253 L Plains @Howard Lyon
+254 L Island @John Avon
+255 L Island @Lucas Graciano
+256 L Island @Nils Hamm
+257 L Island @Mark Poole
+258 L Swamp @Paul Scott Canavan
+259 L Swamp @Daarken
+260 L Swamp @Victor Adame Minguez
+261 L Swamp @Svetlin Velinov
+262 L Mountain @Filip Burburan
+263 L Mountain @Jesper Ejsing
+264 L Mountain @Josu Hernaiz
+265 L Mountain @Mark Poole
+266 L Forest @Lars Grant-West
+267 L Forest @Tomasz Jedruszek
+268 L Forest @Scott Murphy
+269 L Forest @Adam Paquette
 
 [borderless]
-270 M Garruk, Cursed Huntsman
-271 M Oko, Thief of Crowns
-272 M The Royal Scions
+270 M Garruk, Cursed Huntsman @Dmitry Burmak
+271 M Oko, Thief of Crowns @Wesley Burt
+272 M The Royal Scions @Howard Lyon
 
 [showcase]
-273 C Ardenvale Tactician
-274 C Faerie Guidemother
-275 R Giant Killer
-276 C Lonesome Unicorn
-277 M Realm-Cloaked Giant
-278 U Shepherd of the Flock
-279 C Silverflame Squire
-280 U Animating Faerie
-281 M Brazen Borrower
-282 R Fae of Wishes
-283 U Hypnotic Sprite
-284 C Merfolk Secretkeeper
-285 C Queen of Ice
-286 U Foulmire Knight
-287 R Murderous Rider
-288 U Order of Midnight
-289 C Reaper of Night
-290 C Smitten Swordmaster
-291 R Bonecrusher Giant
-292 U Embereth Shieldbreaker
-293 C Merchant of the Vale
-294 C Rimrock Knight
-295 U Beanstalk Giant
-296 C Curious Pair
-297 U Flaxen Intruder
-298 C Garenbrig Carver
-299 R Lovestruck Beast
-300 C Rosethorn Acolyte
-301 C Tuinvale Treefolk
-302 U Oakhame Ranger
+273 C Ardenvale Tactician @Aaron Miller
+274 C Faerie Guidemother @Chuck Lukacs
+275 R Giant Killer @Shawn Wood
+276 C Lonesome Unicorn @Alayna Danner
+277 M Realm-Cloaked Giant @Alayna Danner
+278 U Shepherd of the Flock @Craig J Spearing
+279 C Silverflame Squire @Josu Hernaiz
+280 U Animating Faerie @Chris Seaman
+281 M Brazen Borrower @Iris Compiet
+282 R Fae of Wishes @Wylie Beckert
+283 U Hypnotic Sprite @Ravenna Tran
+284 C Merfolk Secretkeeper @Allen Williams
+285 C Queen of Ice @Allen Williams
+286 U Foulmire Knight @Rebecca On
+287 R Murderous Rider @Ravenna Tran
+288 U Order of Midnight @Seb McKinnon
+289 C Reaper of Night @Olena Richards
+290 C Smitten Swordmaster @Shawn Wood
+291 R Bonecrusher Giant @John Severin Brassell
+292 U Embereth Shieldbreaker @Jeremy Wilson
+293 C Merchant of the Vale @John Severin Brassell
+294 C Rimrock Knight @Josu Hernaiz
+295 U Beanstalk Giant @Nick Southam
+296 C Curious Pair @Josu Hernaiz
+297 U Flaxen Intruder @Omar Rayyan
+298 C Garenbrig Carver @Craig J Spearing
+299 R Lovestruck Beast @Tyler Walpole
+300 C Rosethorn Acolyte @Wylie Beckert
+301 C Tuinvale Treefolk @James Arnold
+302 U Oakhame Ranger @Omar Rayyan
 
 [buy a box]
-303 M Kenrith, the Returned King
+303 M Kenrith, the Returned King @Kieran Yanner
 
 [precon product]
-304 M Rowan, Fearless Sparkmage
-305 C Garrison Griffin
-306 U Rowan's Battleguard
-307 R Rowan's Stalwarts
-308 C Wind-Scarred Crag
-309 M Oko, the Trickster
-310 C Oko's Accomplices
-311 U Bramblefort Fink
-312 R Oko's Hospitality
-313 C Thornwood Falls
-314 R Mace of the Valiant
-315 R Silverwing Squadron
-316 R Faerie Formation
-317 R Shimmer Dragon
-318 R Workshop Elders
-319 R Chittering Witch
-320 R Taste of Death
-321 R Embereth Skyblazer
-322 R Steelbane Hydra
-323 R Thorn Mammoth
-324 M Alela, Artful Provocateur
-325 R Banish into Fable
-326 M Chulane, Teller of Tales
-327 R Gluttonous Troll
-328 R Knights' Charge
-329 M Korvold, Fae-Cursed King
-330 M Syr Gwyn, Hero of Ashvale
-331 C Arcane Signet
-332 R Tome of Legends
-333 C Command Tower
+304 M Rowan, Fearless Sparkmage @Zack Stella
+305 C Garrison Griffin @Jason Kang
+306 U Rowan's Battleguard @Sara Winters
+307 R Rowan's Stalwarts @Deruchenko Alexander
+308 C Wind-Scarred Crag @Jonas De Ro
+309 M Oko, the Trickster @Chris Rallis
+310 C Oko's Accomplices @Zezhou Chen
+311 U Bramblefort Fink @Uriah Voth
+312 R Oko's Hospitality @Deruchenko Alexander
+313 C Thornwood Falls @Ravenna Tran
+314 R Mace of the Valiant @Aaron Miller
+315 R Silverwing Squadron @Johannes Voss
+316 R Faerie Formation @Ryan Yee
+317 R Shimmer Dragon @Lie Setiawan
+318 R Workshop Elders @Iain McCaig
+319 R Chittering Witch @Winona Nelson
+320 R Taste of Death @Chris Rallis
+321 R Embereth Skyblazer @Daarken
+322 R Steelbane Hydra @Nicholas Gregory
+323 R Thorn Mammoth @Svetlin Velinov
+324 M Alela, Artful Provocateur @Grzegorz Rutkowski
+325 R Banish into Fable @Colin Boyer
+326 M Chulane, Teller of Tales @Victor Adame Minguez
+327 R Gluttonous Troll @Joe Slucher
+328 R Knights' Charge @Paul Scott Canavan
+329 M Korvold, Fae-Cursed King @Wisnu Tan
+330 M Syr Gwyn, Hero of Ashvale @Lie Setiawan
+331 C Arcane Signet @Dan Scott
+332 R Tome of Legends @Mila Pesic
+333 C Command Tower @Evan Shipard
 
 [extended art]
-334 R Acclaimed Contender
-335 R Charming Prince
-336 M The Circle of Loyalty
-337 R Happily Ever After
-338 M Harmonious Archon
-339 R Hushbringer
-340 R Linden, the Steadfast Queen
-341 R Worthy Knight
-342 R Emry, Lurker of the Loch
-343 R Folio of Fancies
-344 R Gadwick, the Wizened
-345 M The Magic Mirror
-346 R Midnight Clock
-347 R Mirrormade
-348 R Stolen by the Fae
-349 R Vantress Gargoyle
-350 R Ayara, First of Locthwain
-351 R Blacklance Paragon
-352 M The Cauldron of Eternity
-353 R Clackbridge Troll
-354 R Oathsworn Knight
-355 R Piper of the Swarm
-356 M Rankle, Master of Pranks
-357 R Wishclaw Talisman
-358 R Witch's Vengeance
-359 M Embercleave
-360 R Fervent Champion
-361 R Fires of Invention
-362 R Irencrag Feat
-363 R Irencrag Pyromancer
-364 R Opportunistic Dragon
-365 M Robber of the Rich
-366 R Sundering Stroke
-367 R Torbran, Thane of Red Fell
-368 R Feasting Troll King
-369 R Gilded Goose
-370 M The Great Henge
-371 R Once Upon a Time
-372 M Questing Beast
-373 R Return of the Wildspeaker
-374 R Wicked Wolf
-375 R Wildborn Preserver
-376 R Yorvo, Lord of Garenbrig
-377 R Dance of the Manse
-378 R Doom Foretold
-379 R Escape to the Wilds
-380 R Faeburrow Elder
-381 R Lochmere Serpent
-382 M Outlaws' Merriment
-383 R Stormfist Crusader
-384 R Sorcerous Spyglass
-385 R Stonecoil Serpent
-386 R Castle Ardenvale
-387 R Castle Embereth
-388 R Castle Garenbrig
-389 R Castle Locthwain
-390 R Castle Vantress
-391 R Fabled Passage
+334 R Acclaimed Contender @David Gaillet
+335 R Charming Prince @Randy Vargas
+336 M The Circle of Loyalty @Bastien L. Deharme
+337 R Happily Ever After @Matt Stewart
+338 M Harmonious Archon @Anastasia Ovchinnikova
+339 R Hushbringer @Bastien L. Deharme
+340 R Linden, the Steadfast Queen @Ryan Pancoast
+341 R Worthy Knight @Yongjae Choi
+342 R Emry, Lurker of the Loch @Livia Prima
+343 R Folio of Fancies @Colin Boyer
+344 R Gadwick, the Wizened @Colin Boyer
+345 M The Magic Mirror @Anastasia Ovchinnikova
+346 R Midnight Clock @Alexander Forssberg
+347 R Mirrormade @Volkan Baǵa
+348 R Stolen by the Fae @Ryan Alexander Lee
+349 R Vantress Gargoyle @Cristi Balanescu
+350 R Ayara, First of Locthwain @Ryan Pancoast
+351 R Blacklance Paragon @Victor Adame Minguez
+352 M The Cauldron of Eternity @Tomasz Jedruszek
+353 R Clackbridge Troll @Svetlin Velinov
+354 R Oathsworn Knight @Svetlin Velinov
+355 R Piper of the Swarm @Irina Nordsol
+356 M Rankle, Master of Pranks @Dmitry Burmak
+357 R Wishclaw Talisman @Daarken
+358 R Witch's Vengeance @Titus Lunter
+359 M Embercleave @Joe Slucher
+360 R Fervent Champion @Steve Argyle
+361 R Fires of Invention @Stanton Feng
+362 R Irencrag Feat @Yongjae Choi
+363 R Irencrag Pyromancer @Jason Rainville
+364 R Opportunistic Dragon @Chris Rahn
+365 M Robber of the Rich @Paul Scott Canavan
+366 R Sundering Stroke @Stanton Feng
+367 R Torbran, Thane of Red Fell @Grzegorz Rutkowski
+368 R Feasting Troll King @Nicholas Gregory
+369 R Gilded Goose @Lindsey Look
+370 M The Great Henge @Adam Paquette
+371 R Once Upon a Time @Matt Stewart
+372 M Questing Beast @Igor Kieryluk
+373 R Return of the Wildspeaker @Chris Rallis
+374 R Wicked Wolf @Tomasz Jedruszek
+375 R Wildborn Preserver @Lius Lasahido
+376 R Yorvo, Lord of Garenbrig @Zack Stella
+377 R Dance of the Manse @Yeong-Hao Han
+378 R Doom Foretold @Daniel Ljunggren
+379 R Escape to the Wilds @Chris Ostrowski
+380 R Faeburrow Elder @Raoul Vitale
+381 R Lochmere Serpent @Sam Burley
+382 M Outlaws' Merriment @Suzanne Helmigh
+383 R Stormfist Crusader @Chris Rallis
+384 R Sorcerous Spyglass @Aaron Miller
+385 R Stonecoil Serpent @Mark Poole
+386 R Castle Ardenvale @Volkan Baǵa
+387 R Castle Embereth @Jaime Jones
+388 R Castle Garenbrig @Adam Paquette
+389 R Castle Locthwain @Titus Lunter
+390 R Castle Vantress @John Avon
+391 R Fabled Passage @Howard Lyon
 
 [promo]
-392 R Piper of the Swarm
-393 U Glass Casket
-394 U Slaying Fire
-395 U Kenrith's Transformation
-396 U Improbable Alliance
-397 U Inspiring Veteran
+392 R Piper of the Swarm @Jesper Ejsing
+393 U Glass Casket @Anastasia Ovchinnikova
+394 U Slaying Fire @Heonhwa Choe
+395 U Kenrith's Transformation @Kimonas Theodossiou
+396 U Improbable Alliance @Zoltan Boros
+397 U Inspiring Veteran @Scott Murphy
 
 [tokens]
 w_0_1_goat

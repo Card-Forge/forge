@@ -13,151 +13,151 @@ FatPackExtraSlots=40 BasicLands ALA
 ScryfallCode=CON
 
 [cards]
-40 C Absorb Vis
-1 U Aerie Mystics
-141 U Ancient Ziggurat
-98 M Apocalypse Hydra
-134 C Armillary Sphere
-2 C Asha's Favor
-3 C Aven Squire
-4 C Aven Trailblazer
-58 R Banefire
-78 C Beacon Behemoth
-99 R Blood Tyrant
-59 R Bloodhall Ooze
-135 C Bone Saw
-21 C Brackwater Elemental
-60 C Canyon Minotaur
-5 U Celestial Purge
-100 R Charnelhoard Wurm
-101 M Child of Alara
-79 R Cliffrunner Behemoth
-102 M Conflux
-22 C Constricting Tendrils
-23 U Controlled Instincts
-41 U Corrupted Roots
-103 U Countersquall
-6 C Court Homunculus
-24 U Cumber Stone
-80 R Cylian Sunsinger
-61 C Dark Temper
-7 C Darklit Gargoyle
-42 C Drag Down
-62 U Dragonsoul Knight
-43 U Dreadwing
-104 U Elder Mastery
-81 C Ember Weaver
-105 C Esper Cormorants
-25 U Esperzoa
-26 M Ethersworn Adjudicator
-142 R Exotic Orchard
-106 C Exploding Borders
-44 R Extractor Demon
-27 C Faerie Mechanist
-63 C Fiery Fall
-82 U Filigree Fracture
-45 U Fleshformer
-136 R Font of Mythos
-28 C Frontline Sage
-107 U Fusion Elemental
-108 R Giltspire Avenger
-8 C Gleam of Resistance
-83 U Gluttonous Slime
-109 C Goblin Outlander
-64 R Goblin Razerunners
-29 C Grixis Illusionist
-46 U Grixis Slavedriver
-110 R Gwafa Hazid, Profiteer
-111 U Hellkite Hatchling
-65 U Hellspark Elemental
-66 U Ignite Disorder
-47 C Infectious Horror
-30 R Inkwell Leviathan
-112 U Jhessian Balmgiver
-137 C Kaleidostone
-48 R Kederekt Parasite
-113 R Knight of the Reliquary
-114 U Knotvine Mystic
-67 C Kranioceros
-9 C Lapse of Certainty
-115 M Maelstrom Archangel
-116 R Magister Sphinx
-117 M Malfegor
-138 C Mana Cylix
-139 U Manaforce Mace
-68 C Maniacal Rage
-10 R Mark of Asylum
-11 R Martial Coup
-31 R Master Transmuter
-84 C Matca Rioters
-118 R Meglonoth
-85 C Might of Alara
-12 M Mirror-Sigil Sergeant
-69 C Molten Frame
-13 U Nacatl Hunt-Pride
-119 C Nacatl Outlander
-86 C Nacatl Savage
-120 M Nicol Bolas, Planeswalker
-87 R Noble Hierarch
-49 R Nyxathid
-140 R Obelisk of Alara
-88 R Paleoloth
-14 U Paragon of the Amesha
-32 C Parasitic Strix
-15 U Path to Exile
-50 C Pestilent Kathari
-121 M Progenitus
-70 C Quenchable Fire
-71 R Rakka Mar
-143 U Reliquary Tower
-122 C Rhox Bodyguard
-16 C Rhox Meditant
-51 C Rotting Rats
-144 C Rupture Spire
-89 U Sacellum Archers
-52 C Salvage Slasher
-123 U Scarland Thrinax
-90 C Scattershot Archer
-17 R Scepter of Dominance
-53 R Scepter of Fugue
-33 R Scepter of Insight
-34 U Scornful AEther-Lich
-54 C Sedraxis Alchemist
-124 U Shambling Remains
-91 U Shard Convergence
-18 R Sigil of the Empty Throne
-125 U Skyward Eye Prophets
-126 U Sludge Strider
-92 R Soul's Majesty
-127 R Sphinx Summoner
-93 U Spore Burst
-128 C Suicidal Charge
-94 C Sylvan Bounty
-35 R Telemin Performance
-95 M Thornling
-72 C Toxic Iguanar
-36 C Traumatic Visions
-96 C Tukatongue Thallid
-145 U Unstable Frontier
-37 C Unsummon
-129 U Vagrant Plowbeasts
-130 C Valeron Outlander
-19 C Valiant Guard
-131 C Vectis Agents
-132 C Vedalken Outlander
-73 U Viashino Slaughtermaster
-38 U View from Above
-55 U Voices from the Void
-74 U Volcanic Fallout
-75 R Voracious Dragon
-20 R Wall of Reverence
-76 C Wandering Goblins
-97 C Wild Leotau
-77 R Worldheart Phoenix
-39 C Worldly Counsel
-56 C Wretched Banquet
-57 C Yoke of the Damned
-133 C Zombie Outlander
+40 C Absorb Vis @Brandon Kitkouski
+1 U Aerie Mystics @Mark Zug
+141 U Ancient Ziggurat @John Avon
+98 M Apocalypse Hydra @Jason Chan
+134 C Armillary Sphere @Franz Vohwinkel
+2 C Asha's Favor @Donato Giancola
+3 C Aven Squire @David Palumbo
+4 C Aven Trailblazer @Chris Rahn
+58 R Banefire @Raymond Swanland
+78 C Beacon Behemoth @Jesper Ejsing
+99 R Blood Tyrant @Karl Kopinski
+59 R Bloodhall Ooze @Jaime Jones
+135 C Bone Saw @Pete Venters
+21 C Brackwater Elemental @Thomas M. Baxa
+60 C Canyon Minotaur @Steve Prescott
+5 U Celestial Purge @David Palumbo
+100 R Charnelhoard Wurm @Lars Grant-West
+101 M Child of Alara @Steve Argyle
+79 R Cliffrunner Behemoth @Wayne Reynolds
+102 M Conflux @Karl Kopinski
+22 C Constricting Tendrils @David Palumbo
+23 U Controlled Instincts @Ralph Horsley
+41 U Corrupted Roots @Mark Hyzer
+103 U Countersquall @Anthony Francisco
+6 C Court Homunculus @Matt Cavotta
+24 U Cumber Stone @Warren Mahy
+80 R Cylian Sunsinger @Jesper Ejsing
+61 C Dark Temper @Jaime Jones
+7 C Darklit Gargoyle @Howard Lyon
+42 C Drag Down @Trevor Claxton
+62 U Dragonsoul Knight @Justin Sweet
+43 U Dreadwing @Mark Hyzer
+104 U Elder Mastery @Dave Allsop
+81 C Ember Weaver @Steve Prescott
+105 C Esper Cormorants @Warren Mahy
+25 U Esperzoa @Warren Mahy
+26 M Ethersworn Adjudicator @Dan Scott
+142 R Exotic Orchard @Steven Belledin
+106 C Exploding Borders @Zoltan Boros & Gabor Szikszai
+44 R Extractor Demon @Carl Critchlow
+27 C Faerie Mechanist @Matt Cavotta
+63 C Fiery Fall @Daarken
+82 U Filigree Fracture @Howard Lyon
+45 U Fleshformer @Dave Kendall
+136 R Font of Mythos @Dave Allsop
+28 C Frontline Sage @Volkan Baǵa
+107 U Fusion Elemental @Michael Komarck
+108 R Giltspire Avenger @Chris Rahn
+8 C Gleam of Resistance @Matt Stewart
+83 U Gluttonous Slime @Trevor Claxton
+109 C Goblin Outlander @Trevor Claxton
+64 R Goblin Razerunners @Raymond Swanland
+29 C Grixis Illusionist @Mark Tedin
+46 U Grixis Slavedriver @Dave Kendall
+110 R Gwafa Hazid, Profiteer @Todd Lockwood
+111 U Hellkite Hatchling @Daarken
+65 U Hellspark Elemental @Justin Sweet
+66 U Ignite Disorder @Zoltan Boros & Gabor Szikszai
+47 C Infectious Horror @Pete Venters
+30 R Inkwell Leviathan @Anthony Francisco
+112 U Jhessian Balmgiver @David Palumbo
+137 C Kaleidostone @Chippy
+48 R Kederekt Parasite @Dan Scott
+113 R Knight of the Reliquary @Michael Komarck
+114 U Knotvine Mystic @Ariel Olivetti
+67 C Kranioceros @Steve Argyle
+9 C Lapse of Certainty @Anthony Francisco
+115 M Maelstrom Archangel @Cyril Van Der Haegen
+116 R Magister Sphinx @Steven Belledin
+117 M Malfegor @Jason Chan
+138 C Mana Cylix @Howard Lyon
+139 U Manaforce Mace @Jeremy Jarvis
+68 C Maniacal Rage @Brandon Kitkouski
+10 R Mark of Asylum @Sal Villagran
+11 R Martial Coup @Greg Staples
+31 R Master Transmuter @Chippy
+84 C Matca Rioters @Steve Argyle
+118 R Meglonoth @Steve Prescott
+85 C Might of Alara @Steve Prescott
+12 M Mirror-Sigil Sergeant @Chris Rahn
+69 C Molten Frame @Izzy
+13 U Nacatl Hunt-Pride @Steve Prescott
+119 C Nacatl Outlander @Zoltan Boros & Gabor Szikszai
+86 C Nacatl Savage @Paolo Parente
+120 M Nicol Bolas, Planeswalker @D. Alexander Gregory
+87 R Noble Hierarch @Mark Zug
+49 R Nyxathid @Raymond Swanland
+140 R Obelisk of Alara @Jeremy Jarvis
+88 R Paleoloth @Christopher Moeller
+14 U Paragon of the Amesha @Chris Rahn
+32 C Parasitic Strix @Steven Belledin
+15 U Path to Exile @Todd Lockwood
+50 C Pestilent Kathari @Dave Kendall
+121 M Progenitus @Jaime Jones
+70 C Quenchable Fire @Jean-Sébastien Rossbach
+71 R Rakka Mar @Jason Chan
+143 U Reliquary Tower @Jesper Ejsing
+122 C Rhox Bodyguard @Sal Villagran
+16 C Rhox Meditant @Donato Giancola
+51 C Rotting Rats @Dave Allsop
+144 C Rupture Spire @Jaime Jones
+89 U Sacellum Archers @Kev Walker
+52 C Salvage Slasher @Anthony Francisco
+123 U Scarland Thrinax @Daarken
+90 C Scattershot Archer @Steve Argyle
+17 R Scepter of Dominance @Howard Lyon
+53 R Scepter of Fugue @Franz Vohwinkel
+33 R Scepter of Insight @Steven Belledin
+34 U Scornful Aether-Lich @Steven Belledin
+54 C Sedraxis Alchemist @Karl Kopinski
+124 U Shambling Remains @Nils Hamm
+91 U Shard Convergence @Vance Kovacs
+18 R Sigil of the Empty Throne @Cyril Van Der Haegen
+125 U Skyward Eye Prophets @Matt Stewart
+126 U Sludge Strider @Franz Vohwinkel
+92 R Soul's Majesty @Jesper Ejsing
+127 R Sphinx Summoner @Jaime Jones
+93 U Spore Burst @Daarken
+128 C Suicidal Charge @Daarken
+94 C Sylvan Bounty @Chris Rahn
+35 R Telemin Performance @Izzy
+95 M Thornling @Kev Walker
+72 C Toxic Iguanar @Brandon Kitkouski
+36 C Traumatic Visions @Cyril Van Der Haegen
+96 C Tukatongue Thallid @Vance Kovacs
+145 U Unstable Frontier @John Avon
+37 C Unsummon @Izzy
+129 U Vagrant Plowbeasts @Zoltan Boros & Gabor Szikszai
+130 C Valeron Outlander @Matt Stewart
+19 C Valiant Guard @Chris Rahn
+131 C Vectis Agents @Chippy
+132 C Vedalken Outlander @Izzy
+73 U Viashino Slaughtermaster @Raymond Swanland
+38 U View from Above @Howard Lyon
+55 U Voices from the Void @rk post
+74 U Volcanic Fallout @Zoltan Boros & Gabor Szikszai
+75 R Voracious Dragon @Dominick Domingo
+20 R Wall of Reverence @Wayne Reynolds
+76 C Wandering Goblins @Karl Kopinski
+97 C Wild Leotau @Michael Komarck
+77 R Worldheart Phoenix @Aleksi Briclot
+39 C Worldly Counsel @Matt Cavotta
+56 C Wretched Banquet @Nils Hamm
+57 C Yoke of the Damned @Paul Bonner
+133 C Zombie Outlander @Nils Hamm
 
 [tokens]
 w_4_4_angel_flying

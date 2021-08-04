@@ -98,4 +98,3 @@ public class AmassAi extends SpellAbilityAi {
         return ComputerUtilCard.getBestAI(better);
     }
 }
-

@@ -6,4 +6,4 @@ Type=Promo
 ScryfallCode=P8ED
 
 [cards]
-216★ R Rukh Egg
+216★ R Rukh Egg @Mark Zug

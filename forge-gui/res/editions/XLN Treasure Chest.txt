@@ -6,13 +6,13 @@ Type=Promo
 ScryfallCode=PXTC
 
 [cards]
-22 R Legion's Landing
-74 R Search for Azcanta
-90 R Arguel's Blood Fast
-173 R Vance's Blasting Cannons
-191 R Growing Rites of Itlimoc
-234 R Conqueror's Galleon
-235 R Dowsing Dagger
-243 R Primal Amulet
-249 R Thaumatic Compass
-250 R Treasure Map
+22 R Legion's Landing @Svetlin Velinov & Jared Blando
+74 R Search for Azcanta @Magali Villeneuve & Jared Blando
+90 R Arguel's Blood Fast @Daarken & Jared Blando
+173 R Vance's Blasting Cannons @Jonas De Ro & Jared Blando
+191 R Growing Rites of Itlimoc @Grzegorz Rutkowski & Jared Blando
+234 R Conqueror's Galleon @Emrah Elmasli & Jared Blando
+235 R Dowsing Dagger @Florian de Gesincourt & Jared Blando
+243 R Primal Amulet @John Avon & Jared Blando
+249 R Thaumatic Compass @Yeong-Hao Han & Jared Blando
+250 R Treasure Map @Cliff Childs & Jared Blando

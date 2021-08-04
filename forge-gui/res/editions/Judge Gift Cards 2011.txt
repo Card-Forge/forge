@@ -6,14 +6,14 @@ Type=Promo
 ScryfallCode=G11
 
 [cards]
-1 R Bitterblossom
-2 R Sword of Fire and Ice
-3 R Vendilion Clique
-4 R Entomb
-5 R Mana Crypt
-6 R Dark Confidant
-7 R Doubling Season
-8 R Goblin Welder
+1 R Bitterblossom @Nils Hamm
+2 R Sword of Fire and Ice @Mark Zug
+3 R Vendilion Clique @Jesper Ejsing
+4 R Entomb @Ron Spears
+5 R Mana Crypt @Matt Stewart
+6 R Dark Confidant @Ron Spears
+7 R Doubling Season @Chuck Lukacs
+8 R Goblin Welder @Scott M. Fischer
 
 [tokens]
 g_2_2_wolf

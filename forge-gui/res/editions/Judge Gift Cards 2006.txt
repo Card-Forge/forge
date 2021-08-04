@@ -6,7 +6,7 @@ Type=Promo
 ScryfallCode=G06
 
 [cards]
-1 R Exalted Angel
-2 R Grim Lavamancer
-3 R Meddling Mage
-4 R Pernicious Deed
+1 R Exalted Angel @Rob Alexander
+2 R Grim Lavamancer @Michael Sutfin
+3 R Meddling Mage @Nottsuo
+4 R Pernicious Deed @Ittoku
