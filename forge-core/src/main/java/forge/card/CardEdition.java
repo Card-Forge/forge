@@ -366,6 +366,22 @@ public final class CardEdition implements Comparable<CardEdition> {
         return cardsInSet;
     }
 
+    private Map<String, List<CardInSet>> cardsInSetLookupMap = null;
+    public List<CardInSet> getCardInSet(String cardName){
+        if (cardsInSetLookupMap == null) {
+            // initialise
+            cardsInSetLookupMap = new TreeMap<>();
+            List<CardInSet> cardsInSet = this.getAllCardsInSet();
+            for (CardInSet cis : cardsInSet){
+                String key = cis.name.toLowerCase();
+                List<CardInSet> versions = cardsInSetLookupMap.getOrDefault(key, new ArrayList<>());
+                versions.add(cis);
+                cardsInSetLookupMap.put(key, versions);
+            }
+        }
+        return this.cardsInSetLookupMap.getOrDefault(cardName.toLowerCase(), new ArrayList<>());
+    }
+
     public boolean isModern() { return getDate().after(parseDate("2003-07-27")); } //8ED and above are modern except some promo cards and others
 
     public Map<String, Integer> getTokens() { return tokenNormalized; }
