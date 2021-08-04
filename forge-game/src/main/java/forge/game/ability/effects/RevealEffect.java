@@ -36,16 +36,25 @@ public class RevealEffect extends SpellAbilityEffect {
                 }
                 final CardCollection revealed = new CardCollection();
                 if (sa.hasParam("Random")) {
+                    CardCollection valid = new CardCollection(cardsInHand);
+
+                    if (sa.hasParam("RevealValid")) {
+                        valid = CardLists.getValidCards(valid, sa.getParam("RevealValid"), p, host, sa);
+                    }
+
+                    if (valid.isEmpty())
+                        continue;
+
                     if (sa.hasParam("NumCards")) {
                         final int revealnum = Math.min(cardsInHand.size(), cnt);
                         final CardCollection hand = new CardCollection(cardsInHand);
                         for (int i = 0; i < revealnum; i++) {
-                            final Card random = Aggregates.random(hand);
+                            final Card random = Aggregates.random(valid);
                             revealed.add(random);
-                            hand.remove(random);
+                            valid.remove(random);
                         }
                     } else {
-                        revealed.add(Aggregates.random(cardsInHand));
+                        revealed.add(Aggregates.random(valid));
                     }
 
                 } else if (sa.hasParam("RevealDefined")) {
