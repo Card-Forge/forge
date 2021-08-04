@@ -1,0 +1,8 @@
+Name:Scion of Shiv
+ManaCost:2 R R
+Types:Creature Dragon
+PT:3/3
+K:Flying
+A:AB$ Effect | Cost$ 2 R | StaticAbilities$ PerpetualPump | RememberObjects$ Self | Name$ Scion of Shiv's Perpetual Effect | Duration$ Permanent | SpellDescription$ CARDNAME perpetually gets +1/+0.
+SVar:PerpetualPump:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ EFFECTSOURCE perpetually gets +1/+0.
+Oracle:Flying\n{2}{R}: Scion of Shiv perpetually gets +1/+0.

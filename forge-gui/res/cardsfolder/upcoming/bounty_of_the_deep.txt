@@ -1,0 +1,9 @@
+Name:Bounty of the Deep
+ManaCost:2 U
+Types:Sorcery
+A:SP$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ GE1 | TrueSubAbility$ Seek2NonLand | FalseSubAbility$ Seek1Land | StackDescription$ SpellDescription | SpellDescription$ If you have no land cards in your hand, seek a land card and a nonland card. Otherwise, seek two nonland cards.
+SVar:Seek1Land:DB$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Card.Land | ChangeNum$ 1 | SubAbility$ Seek1NonLand
+SVar:Seek1NonLand:DB$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Card.nonLand | ChangeNum$ 1
+SVar:Seek2NonLand:DB$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Card.nonLand | ChangeNum$ 2
+SVar:X:Count$ValidHand Land.YouCtrl
+Oracle:If you have no land cards in your hand, seek a land card and a nonland card. Otherwise, seek two nonland cards.

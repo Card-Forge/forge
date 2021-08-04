@@ -1,0 +1,9 @@
+Name:Skyshroud Lookout
+ManaCost:1 G
+Types:Creature Elf Archer
+PT:1/1
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSeek | TriggerDescription$ When CARDNAME enters the battlefield, seek an Elf card.
+SVar:TrigSeek:DB$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Card.Elf | ChangeNum$ 1
+DeckHints:Type$Elf
+Oracle:Reach\nWhen Skyshroud Lookout enters the battlefield, seek an Elf card.
