@@ -379,13 +379,13 @@ public final class CardEdition implements Comparable<CardEdition> {
             cardsInSetLookupMap = new TreeMap<>();
             List<CardInSet> cardsInSet = this.getAllCardsInSet();
             for (CardInSet cis : cardsInSet){
-                String key = cis.name.toLowerCase();
+                String key = cis.name;
                 List<CardInSet> versions = cardsInSetLookupMap.getOrDefault(key, new ArrayList<>());
                 versions.add(cis);
                 cardsInSetLookupMap.put(key, versions);
             }
         }
-        return this.cardsInSetLookupMap.getOrDefault(cardName.toLowerCase(), new ArrayList<>());
+        return this.cardsInSetLookupMap.getOrDefault(cardName, new ArrayList<>());
     }
 
     public boolean isModern() { return getDate().after(parseDate("2003-07-27")); } //8ED and above are modern except some promo cards and others
