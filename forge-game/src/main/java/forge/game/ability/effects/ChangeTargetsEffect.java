@@ -56,10 +56,10 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
             if (sa.hasParam("ChangeSingleTarget")) {
                 // 1. choose a target of target spell
                 List<Pair<SpellAbilityStackInstance, GameObject>> allTargets = new ArrayList<>();
-                while(changingTgtSI != null) {
+                while (changingTgtSI != null) {
                     SpellAbility changedSa = changingTgtSI.getSpellAbility(true);
                     if (changedSa.usesTargeting()) {
-                        for(GameObject it : changedSa.getTargets())
+                        for (GameObject it : changedSa.getTargets())
                             allTargets.add(ImmutablePair.of(changingTgtSI, it));
                     }
                     changingTgtSI = changingTgtSI.getSubInstance();
@@ -76,12 +76,14 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                 GameObject oldTarget = chosenTarget.getValue();
                 TargetChoices oldTargetBlock = replaceIn.getTargetChoices();
                 TargetChoices newTargetBlock = oldTargetBlock.clone();
-                // gets the divied value from old target
+                // gets the divided value from old target
                 Integer div = oldTargetBlock.getDividedValue(oldTarget);
                 // 3. test if updated choices would be correct.
                 GameObject newTarget = Iterables.getFirst(getDefinedCardsOrTargeted(sa, "DefinedMagnet"), null);
 
-                if (replaceIn.getSpellAbility(true).canTarget(newTarget)) {
+                // CR 115.3. The same target can’t be chosen multiple times for
+                // any one instance of the word “target” on a spell or ability. 
+                if (!oldTargetBlock.contains(newTarget) && replaceIn.getSpellAbility(true).canTarget(newTarget)) {
                     newTargetBlock.remove(oldTarget);
                     newTargetBlock.add(newTarget);
                     if (div != null) {
@@ -89,9 +91,8 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                     }
                     replaceIn.updateTarget(newTargetBlock, sa.getHostCard());
                 }
-            }
-            else {
-                while(changingTgtSI != null) {
+            } else {
+                while (changingTgtSI != null) {
                     SpellAbility changingTgtSA = changingTgtSI.getSpellAbility(true);
                     if (changingTgtSA.usesTargeting()) {
                         // random target and DefinedMagnet works on single targets
@@ -126,8 +127,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                                     changingTgtSA.addDividedAllocation(newTarget, div);
                                 }
                             }
-                        }
-                        else {
+                        } else {
                             // Update targets, with a potential new target
                             Predicate<GameObject> filter = sa.hasParam("TargetRestriction") ? GameObjectPredicates.restriction(sa.getParam("TargetRestriction").split(","), activator, sa.getHostCard(), sa) : null;
                             // TODO Creature.Other might not work yet as it should
