@@ -203,7 +203,7 @@ public class StaticData {
         PaperCard card = commonCards.getCard(cardName, setCode, artIndex);
         boolean isCustom = false;
         if (card == null) {
-            attemptToLoadCard(cardName);
+            attemptToLoadCard(cardName, setCode);
             card = commonCards.getCard(cardName, setCode, artIndex);
         }
         if (card == null) {
@@ -228,6 +228,10 @@ public class StaticData {
     }
 
     public void attemptToLoadCard(String cardName){
+        this.attemptToLoadCard(cardName, null);
+    }
+
+    public void attemptToLoadCard(String cardName, String setCode){
         CardRules rules = cardReader.attemptToLoadCard(cardName);
         CardRules customRules = null;
         if (customCardReader != null) {
@@ -235,13 +239,13 @@ public class StaticData {
         }
         if (rules != null) {
             if (rules.isVariant()) {
-                variantCards.loadCard(cardName, rules);
+                variantCards.loadCard(cardName, setCode, rules);
             } else {
-                commonCards.loadCard(cardName, rules);
+                commonCards.loadCard(cardName, setCode, rules);
             }
         }
         if (customRules != null) {
-            customCards.loadCard(cardName, customRules);
+            customCards.loadCard(cardName, setCode, customRules);
         }
     }
 
