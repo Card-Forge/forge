@@ -156,8 +156,11 @@ public class ForgeCardMockTestCase extends PowerMockTestCase {
         setMock(localizerMock);
         PowerMockito.field(Localizer.class, "resourceBundle").set(localizerMock, dummyResourceBundle);
         PowerMockito.when(localizerMock.getMessage(Mockito.anyString())).thenReturn("any string");
-
         PowerMockito.when(FModel.getPreferences()).thenReturn(forgePreferences);
+        initializeStaticData();
+    }
+
+    protected void initializeStaticData() {
         StaticData data = CardDatabaseHelper.getStaticDataToPopulateOtherMocks();
         PowerMockito.when(FModel.getMagicDb()).thenReturn(data);
     }

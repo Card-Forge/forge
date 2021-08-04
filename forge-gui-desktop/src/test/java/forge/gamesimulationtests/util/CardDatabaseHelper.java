@@ -9,7 +9,7 @@ public class CardDatabaseHelper {
     private static StaticData staticData;
 
     public static PaperCard getCard(String name) {
-        initializeIfNeeded();
+        initializeIfNeeded(false);
 
         PaperCard result = staticData.getCommonCards().getCard(name);
         if (result == null) {
@@ -18,20 +18,20 @@ public class CardDatabaseHelper {
         return result;
     }
 
-    private static void initializeIfNeeded() {
+    private static void initializeIfNeeded(boolean lazyLoad) {
         if (hasBeenInitialized()) {
             return;
         }
-        initialize();
+        initialize(lazyLoad);
     }
 
-    private static void initialize() {
+    private static void initialize(boolean loadCardsLazily) {
         final CardStorageReader reader = new CardStorageReader(ForgeConstants.CARD_DATA_DIR,
-                null, false);
+                null, loadCardsLazily);
         CardStorageReader customReader;
         try {
             customReader  = new CardStorageReader(ForgeConstants.USER_CUSTOM_CARDS_DIR,
-                    null, false);
+                    null, loadCardsLazily);
         } catch (Exception e) {
             customReader = null;
         }
@@ -47,7 +47,12 @@ public class CardDatabaseHelper {
     }
 
     public static StaticData getStaticDataToPopulateOtherMocks() {
-        initializeIfNeeded();
+        initializeIfNeeded(false);
+        return staticData;
+    }
+
+    public static StaticData getStaticDataToPopulateOtherMocks(boolean lazyLoad) {
+        initializeIfNeeded(lazyLoad);
         return staticData;
     }
 }
