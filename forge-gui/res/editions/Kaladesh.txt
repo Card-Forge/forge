@@ -297,7 +297,7 @@ Torrential Gearhulk|MPS_KLD
 Noxious Gearhulk|MPS_KLD
 Combustible Gearhulk|MPS_KLD
 Verdurous Gearhulk|MPS_KLD
-AEther Vial|MPS_KLD
+Aether Vial|MPS_KLD
 Champion's Helm|MPS_KLD
 Chromatic Lantern|MPS_KLD
 Chrome Mox|MPS_KLD

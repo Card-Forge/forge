@@ -8,7 +8,7 @@ Type=Multiplayer
 ScryfallCode=PCA
 
 [cards]
-1 C Chaotic AEther
+1 C Chaotic Aether
 2 C Interplanar Tunnel
 3 C Morphic Tide
 4 C Mutual Epiphany
@@ -17,7 +17,7 @@ ScryfallCode=PCA
 7 C Spatial Merging
 8 C Time Distortion
 9 C Academy at Tolaria West
-10 C The AEther Flues
+10 C The Aether Flues
 11 C Agyrem
 12 C Akoum
 13 C Aretopolis

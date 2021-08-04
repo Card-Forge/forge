@@ -34,7 +34,7 @@ ScryfallCode=PC2
 4 C Cage of Hands
 15 C Cancel
 5 R Celestial Ancient
-1 C Chaotic AEther
+1 C Chaotic Aether
 16 U Concentrate
 62 C Cultivate
 32 R Dark Hatchling

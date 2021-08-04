@@ -9,7 +9,7 @@ ScryfallCode=ARC
 
 [cards]
 8 C A Display of My Dark Power
-102 C AEther Spellbomb
+102 C Aether Spellbomb
 76 C Agony Warp
 2 C All Shall Smolder in My Wake
 1 C All in Good Time
