@@ -44,14 +44,11 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     private final Set<String> tags = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
     // Supports deferring loading a deck until we actually need its contents. This works in conjunction with
     // the lazy card load feature to ensure we don't need to load all cards on start up.
-    private Map<String, List<String>> deferredSections;
+    private Map<String, List<String>> deferredSections = null;
+    private Map<String, List<String>> loadedSections = null;
+    private String latestCardArtPreferenceUsed = "";
+    private boolean includeCardsFromUnspecifiedSet = false;
 
-    // gameType is from Constant.GameType, like GameType.Regular
-    /**
-     * <p>
-     * Decks have their named finalled.
-     * </p>
-     */
     public Deck() {
         this("");
     }
@@ -217,17 +214,32 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     }
 
     private void loadDeferredSections() {
-        if (deferredSections == null) {
+        if ((deferredSections == null) && (loadedSections == null))
             return;
-        }
 
+        if (loadedSections != null && !includeCardsFromUnspecifiedSet)
+            return;  // deck loaded, nothing to update: all good!
+
+        String cardArtPreference = StaticData.instance().getCardArtPreference();
+        if (loadedSections != null && cardArtPreference.equals(latestCardArtPreferenceUsed))
+            return;  // deck loaded already - card with no set have been found, but no change since last time: all good!
+
+        Map<String, List<String>> referenceDeckLoadingMap;
+        if (deferredSections != null)
+            referenceDeckLoadingMap = new HashMap<>(deferredSections);
+        else
+            referenceDeckLoadingMap = new HashMap<>(loadedSections);
+
+        loadedSections = new HashMap<>();
+        latestCardArtPreferenceUsed = cardArtPreference;
         boolean smartCardArtSelection = StaticData.instance().smartCardArtSelectionIsEnabled();
-        boolean foundCardsWithUnspecifiedEditions = false;
         Map<DeckSection, ArrayList<String>> cardsWithNoEdition = null;
         if (smartCardArtSelection)
              cardsWithNoEdition = new EnumMap<>(DeckSection.class);
 
-        for (Entry<String, List<String>> s : deferredSections.entrySet()) {
+        for (Entry<String, List<String>> s : referenceDeckLoadingMap.entrySet()) {
+            // first thing, update loaded section
+            loadedSections.put(s.getKey(), s.getValue());
             DeckSection sec = DeckSection.smartValueOf(s.getKey());
             if (sec == null)
                 continue;
@@ -235,7 +247,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             if (smartCardArtSelection){
                 ArrayList<String> cardNamesWithNoEdition = getAllCardNamesWithNoSpecifiedEdition(cardsInSection);
                 if (cardNamesWithNoEdition.size() > 0){
-                    foundCardsWithUnspecifiedEditions = true;
+                    includeCardsFromUnspecifiedSet = true;
                     cardsWithNoEdition.put(sec, cardNamesWithNoEdition);
                 }
             }
@@ -251,9 +263,8 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
                 sec = DeckSection.Schemes;
             putSection(sec, pool);
         }
-        // FIXME: temporary disabled for testing!
-//        deferredSections = null;
-        if (foundCardsWithUnspecifiedEditions)
+        deferredSections = null;  // set to null, just in case!
+        if (includeCardsFromUnspecifiedSet)
             optimiseCardArtSelectionInDeckSections(cardsWithNoEdition);
 
     }
