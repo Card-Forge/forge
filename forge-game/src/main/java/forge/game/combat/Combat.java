@@ -301,7 +301,7 @@ public class Combat {
                 return ab;
             }
         }
-        CombatLki lki = lkiCache.get(c).getCombatLKI();
+        CombatLki lki = lkiCache.get(c) != null ? lkiCache.get(c).getCombatLKI() : null;
         return lki == null || !lki.isAttacker ? null : lki.getFirstBand();
     }
 
@@ -911,7 +911,7 @@ public class Combat {
             return false;
         }
 
-        CombatLki lki = lkiCache.get(blocker).getCombatLKI();
+        CombatLki lki = lkiCache.get(blocker) != null ? lkiCache.get(blocker).getCombatLKI() : null;
         return null != lki && !lki.isAttacker; // was blocking something anyway
     }
 
@@ -926,7 +926,7 @@ public class Combat {
             return false;
         }
 
-        CombatLki lki = lkiCache.get(blocker).getCombatLKI();
+        CombatLki lki = lkiCache.get(blocker) != null ? lkiCache.get(blocker).getCombatLKI() : null;
         return null != lki && !lki.isAttacker && lki.relatedBands.contains(ab); // was blocking that very band
     }
 
