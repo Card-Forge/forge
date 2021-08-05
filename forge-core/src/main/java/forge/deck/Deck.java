@@ -46,7 +46,8 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     // the lazy card load feature to ensure we don't need to load all cards on start up.
     private Map<String, List<String>> deferredSections = null;
     private Map<String, List<String>> loadedSections = null;
-    private String latestCardArtPreferenceUsed = "";
+    private String lastCardArtPreferenceUsed = "";
+    private Boolean lastCardArtOptimisationOptionUsed = null;
     private boolean includeCardsFromUnspecifiedSet = false;
 
     public Deck() {
@@ -218,10 +219,16 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             return;
 
         if (loadedSections != null && !includeCardsFromUnspecifiedSet)
-            return;  // deck loaded, nothing to update: all good!
+            return;  // deck loaded, and does not include ANY card with no specified edition: all good!
 
         String cardArtPreference = StaticData.instance().getCardArtPreference();
-        if (loadedSections != null && cardArtPreference.equals(latestCardArtPreferenceUsed))
+        boolean smartCardArtSelection = StaticData.instance().isEnabledCardArtSmartSelection();
+
+        if (lastCardArtOptimisationOptionUsed == null)  // first time here
+            lastCardArtOptimisationOptionUsed = smartCardArtSelection;
+
+        if (loadedSections != null && cardArtPreference.equals(lastCardArtPreferenceUsed) &&
+                lastCardArtOptimisationOptionUsed == smartCardArtSelection)
             return;  // deck loaded already - card with no set have been found, but no change since last time: all good!
 
         Map<String, List<String>> referenceDeckLoadingMap;
@@ -231,8 +238,8 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             referenceDeckLoadingMap = new HashMap<>(loadedSections);
 
         loadedSections = new HashMap<>();
-        latestCardArtPreferenceUsed = cardArtPreference;
-        boolean smartCardArtSelection = StaticData.instance().smartCardArtSelectionIsEnabled();
+        lastCardArtPreferenceUsed = cardArtPreference;
+        lastCardArtOptimisationOptionUsed = smartCardArtSelection;
         Map<DeckSection, ArrayList<String>> cardsWithNoEdition = null;
         if (smartCardArtSelection)
              cardsWithNoEdition = new EnumMap<>(DeckSection.class);
@@ -244,13 +251,13 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             if (sec == null)
                 continue;
             final List<String> cardsInSection = s.getValue();
-            if (smartCardArtSelection){
-                ArrayList<String> cardNamesWithNoEdition = getAllCardNamesWithNoSpecifiedEdition(cardsInSection);
-                if (cardNamesWithNoEdition.size() > 0){
-                    includeCardsFromUnspecifiedSet = true;
+            ArrayList<String> cardNamesWithNoEdition = getAllCardNamesWithNoSpecifiedEdition(cardsInSection);
+            if (cardNamesWithNoEdition.size() > 0){
+                includeCardsFromUnspecifiedSet = true;
+                if (smartCardArtSelection)
                     cardsWithNoEdition.put(sec, cardNamesWithNoEdition);
-                }
             }
+
             CardPool pool = CardPool.fromCardList(cardsInSection);
             // TODO: @Leriomaggio
             // this will need improvements with a validation schema for each section to avoid
@@ -264,7 +271,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             putSection(sec, pool);
         }
         deferredSections = null;  // set to null, just in case!
-        if (includeCardsFromUnspecifiedSet)
+        if (includeCardsFromUnspecifiedSet && smartCardArtSelection)
             optimiseCardArtSelectionInDeckSections(cardsWithNoEdition);
 
     }
