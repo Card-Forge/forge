@@ -3450,7 +3450,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         runParams.put(AbilityKey.AttachSource, this);
         runParams.put(AbilityKey.AttachTarget, entity);
         getController().getGame().getTriggerHandler().runTrigger(TriggerType.Attached, runParams, false);
-
     }
 
     public final void unattachFromEntity(final GameEntity entity) {

@@ -370,8 +370,7 @@ public class CountersMoveAi extends SpellAbilityAi {
             Card lki = CardUtil.getLKICopy(src);
             if (cType == null) {
                 lki.clearCounters();
-            }
-            else {
+            } else {
                 lki.setCounters(cType, 0);
             }
             // go for opponent when higher value implies debuff
