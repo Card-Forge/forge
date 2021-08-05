@@ -3,7 +3,7 @@ ManaCost:3 R
 Types:Legendary Planeswalker Sarkhan
 Loyalty:4
 A:AB$ PumpAll | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidCards$ Dragon.YouOwn | RememberAllPumped$ True | PumpZone$ Hand | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ DragonReduceCost,DragonAltCost | Duration$ Permanent | SubAbility$ DBCleanup | SpellDescription$ Dragon cards in your hand perpetually gain "This spell costs {1} less to cast," and "You may pay {X} rather than pay this spell's mana cost, where X is its mana value."
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ DragonReduceCost,DragonAltCost | Duration$ Permanent | Name$ Sarkhan, Wanderer to Shiv's Perpetual Effect | SubAbility$ DBCleanup | SpellDescription$ Dragon cards in your hand perpetually gain "This spell costs {1} less to cast," and "You may pay {X} rather than pay this spell's mana cost, where X is its mana value."
 SVar:DragonReduceCost:Mode$ ReduceCost | ValidCard$ Card.IsRemembered | Type$ Spell | Amount$ 1 | EffectZone$ All | Description$ This spell costs {1} less to cast.
 SVar:DragonAltCost:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$ Alternative Cost:ConvertedManaCost | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ You may pay {X} rather than pay this spell's mana cost, where X is its mana value.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
