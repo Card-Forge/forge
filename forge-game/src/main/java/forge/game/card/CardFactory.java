@@ -116,7 +116,6 @@ public class CardFactory {
         //out.setFaceDown(in.isFaceDown());
 
         return out;
-
     }
 
     /**
@@ -739,7 +738,6 @@ public class CardFactory {
                     }
                 }
             }
-
 
             if (sa.hasParam("GainThisAbility") && (sa instanceof SpellAbility)) {
                 SpellAbility root = ((SpellAbility) sa).getRootAbility();
