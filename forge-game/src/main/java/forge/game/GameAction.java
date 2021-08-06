@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import forge.game.spellability.SpellAbilityStackInstance;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import com.google.common.base.Predicate;
@@ -1157,7 +1158,11 @@ public class GameAction {
         // sol(10/29) added for Phase updates, state effects shouldn't be
         // checked during Spell Resolution (except when persist-returning
         if (game.getStack().isResolving()) {
-            return;
+            Iterator<SpellAbilityStackInstance> it = game.getStack().iterator();
+            SpellAbility top = it.next().getSpellAbility(true);
+            if (!top.hasParam("CheckStates") && !top.getSubAbility().hasParam("CheckStates")) {
+                return;
+            }
         }
 
         if (game.isGameOver()) {
