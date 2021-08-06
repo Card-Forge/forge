@@ -29,6 +29,7 @@ public abstract class AbstractMulligan {
 
     public void mulligan() {
         CardCollection toMulligan = new CardCollection(player.getCardsIn(ZoneType.Hand));
+        if (toMulligan.isEmpty()) return;
         revealPreMulligan(toMulligan);
         for (final Card c : toMulligan) {
             player.getGame().getAction().moveToLibrary(c, null);
