@@ -62,6 +62,7 @@ public enum FSkinImage implements FImage {
     MANA_HYBRID_UR (FSkinProp.IMG_MANA_HYBRID_UR, SourceFile.MANAICONS),
     MANA_HYBRID_WB (FSkinProp.IMG_MANA_HYBRID_WB, SourceFile.MANAICONS),
     MANA_HYBRID_WU (FSkinProp.IMG_MANA_HYBRID_WU, SourceFile.MANAICONS),
+    MANA_PHRYX     (FSkinProp.IMG_MANA_PHRYX, SourceFile.MANAICONS),
     MANA_PHRYX_U   (FSkinProp.IMG_MANA_PHRYX_U, SourceFile.MANAICONS),
     MANA_PHRYX_W   (FSkinProp.IMG_MANA_PHRYX_W, SourceFile.MANAICONS),
     MANA_PHRYX_R   (FSkinProp.IMG_MANA_PHRYX_R, SourceFile.MANAICONS),

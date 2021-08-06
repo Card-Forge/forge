@@ -93,6 +93,7 @@ public enum FSkinProp {
     IMG_MANA_HYBRID_UR (new int[] {412, 330, 80, 80}, PropType.MANAICONS),
     IMG_MANA_HYBRID_WB (new int[] {330, 412, 80, 80}, PropType.MANAICONS),
     IMG_MANA_HYBRID_WU (new int[] {412, 412, 80, 80}, PropType.MANAICONS),
+    IMG_MANA_PHRYX     (new int[] {166, 822, 80, 80}, PropType.MANAICONS),
     IMG_MANA_PHRYX_U   (new int[] {330, 248, 80, 80}, PropType.MANAICONS),
     IMG_MANA_PHRYX_W   (new int[] {412, 248, 80, 80}, PropType.MANAICONS),
     IMG_MANA_PHRYX_R   (new int[] {412, 166, 80, 80}, PropType.MANAICONS),

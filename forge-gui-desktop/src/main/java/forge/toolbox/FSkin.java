@@ -1405,6 +1405,7 @@ public class FSkin {
         addEncodingSymbol("2/B", FSkinProp.IMG_MANA_2B);
         addEncodingSymbol("2/R", FSkinProp.IMG_MANA_2R);
         addEncodingSymbol("2/G", FSkinProp.IMG_MANA_2G);
+        addEncodingSymbol("P", FSkinProp.IMG_MANA_PHRYX);
         addEncodingSymbol("P/W", FSkinProp.IMG_MANA_PHRYX_W);
         addEncodingSymbol("P/U", FSkinProp.IMG_MANA_PHRYX_U);
         addEncodingSymbol("P/B", FSkinProp.IMG_MANA_PHRYX_B);
