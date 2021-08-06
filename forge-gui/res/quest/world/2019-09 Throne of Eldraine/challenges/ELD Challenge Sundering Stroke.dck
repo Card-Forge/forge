@@ -1,0 +1,20 @@
+[quest]
+id=ELD Challenge: Sundering Stroke
+OpponentName=The Highlander
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=Castle Embereth|Castle Embereth|Castle Embereth
+HumanExtras=
+[metadata]
+Title=Sundering Stroke
+Difficulty=very hard
+Description=The Highlander starts with three lands.\n\n"There can be only one!"\n-Connor McLeod from the clan McLeod, Highlander
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+Name=ELD Challenge: Sundering Stroke
+[Main]
+30 Mountain|ELD|4
+30 Sundering Stroke|ELD|2

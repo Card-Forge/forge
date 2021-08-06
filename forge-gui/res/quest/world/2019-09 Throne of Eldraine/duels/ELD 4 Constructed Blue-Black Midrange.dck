@@ -1,0 +1,26 @@
+[metadata]
+Title=Blue-Black Midrange
+Difficulty=very hard
+Description=Played in the Eldraine Constructed Event, 19 October 2019.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 4 Constructed: Blue-Black Midrange
+[Main]
+3 Brazen Borrower|ELD|1
+1 Castle Locthwain|ELD|1
+3 Didn't Say Please|ELD
+4 Drown in the Loch|ELD
+4 Fabled Passage|ELD|1
+1 Gadwick, the Wizened|ELD|1
+3 Into the Story|ELD
+11 Island|ELD|4
+1 Lochmere Serpent|ELD|1
+4 Murderous Rider|ELD|1
+4 Opt|ELD
+4 Overwhelmed Apprentice|ELD
+3 Rankle, Master of Pranks|ELD|1
+9 Swamp|ELD|3
+4 Vantress Gargoyle|ELD|1
+[Sideboard]
+2 Castle Vantress|ELD|1
+1 Covetous Urge|ELD

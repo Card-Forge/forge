@@ -11,7 +11,7 @@ Name:Mirrodin|Dir:mirrodin|Sets:MRD, DST, 5DN, SOM, MBS, NPH
 Name:Ravnica|Dir:ravnica|Sets:RAV, GPT, DIS, RTR, GTC, DGM
 Name:Shandalar|Dir:shandalar|Sets:2ED, ARN, ATQ, 3ED, LEG, DRK, 4ED|Banned:Chaos Orb; Falling Star
 Name:Zendikar|Dir:zendikar|Sets:ZEN, WWK, ROE
-Name:The Domains: The Golden Age of Magic|Dir:1993-10 Limited Edition Beta|Sets:LEA, LEB|Banned:Chaos Orb
+Name:The Domains: The Golden Age of Magic|Dir:1993-10 Limited Edition Beta|Sets:LEB|Banned:Chaos Orb
 Name:Rabiah|Dir:1993-12 Arabian Nights|Sets:ARN|Banned:City in a Bottle
 Name:Terisiare: The Brothers' War|Dir:1994-03 Antiquities|Sets:ATQ|Banned:Golgothian Sylex
 Name:Dominaria: Legends|Dir:1994-06 Legends|Sets:LEG|Banned:Arena of the Ancients; Falling Star; Karakas
@@ -24,6 +24,7 @@ Name:Portal|Dir:1997-05 Portal|Sets:POR
 Name:Caliman|Dir:1998-06 Portal Second Age|Sets:PO2
 Name:The Three Kingdoms|Dir:1999-05 Portal Three Kingdoms|Sets:PTK
 Name:Theros: The Hero's Path|Dir:2014-05 Theros|Sets:THS, BNG, JOU
+Name:Eldraine: Throne of Eldraine|Dir:2019-09 Throne of Eldraine|Sets:ELD
 Name:Urza's Block|Dir:Urza|Sets:USG, ULG, UDS|Banned:Gaea's Cradle;Memory Jar;Serra's Sanctum;Time Spiral;Tolarian Academy;Voltaic Key;Windfall
 Name:The Gates of Magic|Dir:Starter|Sets:POR, PO2, S99, S00, PTK
 Name:Invasion|Dir:Invasion|Sets:INV, PLS, APC

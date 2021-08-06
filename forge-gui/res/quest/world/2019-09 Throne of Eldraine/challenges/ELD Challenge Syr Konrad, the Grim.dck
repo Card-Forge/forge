@@ -1,0 +1,20 @@
+[quest]
+id=ELD Challenge: Syr Konrad, the Grim
+OpponentName=Syr Konrad
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=Witch's Cottage|Witch's Cottage|Witch's Cottage|Witch's Cottage
+HumanExtras=Roving Keep
+[metadata]
+Title=Syr Konrad, the Grim
+Difficulty=medium
+Description=Syr Konrad starts with four lands.\nYou start with a Roving Keep.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+Name=ELD Challenge: Syr Konrad, the Grim
+[Main]
+20 Syr Konrad, the Grim|ELD
+40 Witch's Cottage|ELD

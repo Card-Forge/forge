@@ -1,0 +1,23 @@
+[metadata]
+Title=Sacrifice
+Difficulty=hard
+Description=Nothing remains of his foes but the gripping story of their downfall.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 3 Sacrifice
+[Main]
+4 Cauldron Familiar|ELD
+4 Chittering Witch|ELD
+4 Claim the Firstborn|ELD
+4 Dwarven Mine|ELD
+4 Elite Headhunter|ELD
+4 Fabled Passage|ELD|1
+6 Mountain|ELD|3
+4 Opportunistic Dragon|ELD|1
+4 Piper of the Swarm|ELD|1
+4 Rankle, Master of Pranks|ELD|1
+4 Redcap Melee|ELD
+4 Sorcerer's Broom|ELD
+10 Swamp|ELD|4
+[Sideboard]
+4 Witch's Oven|ELD

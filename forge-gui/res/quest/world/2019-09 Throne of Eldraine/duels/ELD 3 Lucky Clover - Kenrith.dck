@@ -1,0 +1,42 @@
+[metadata]
+Title=Lucky Clover
+Difficulty=hard
+Description="I know what you're thinking: 'Is this the one with the Beanstalk Giants or the one with the Faerie Guidemothers?' Well, to tell you the truth, in all this excitement, I've kinda lost track myself. But being this is a Lucky Clover, the most powerful artifact in Eldraine, you've got to ask yourself one question: 'Do I feel lucky?' Well, do you, punk?"\n-Harry Callahan, Dirty Harry
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 3 Lucky Clover - Kenrith
+[Main]
+4 Beanstalk Giant|ELD|2
+2 Bonecrusher Giant|ELD|2
+2 Brazen Borrower|ELD|2
+2 Embereth Shieldbreaker|ELD|2
+4 Fabled Passage|ELD|1
+4 Fae of Wishes|ELD|2
+4 Fires of Invention|ELD|1
+6 Forest|ELD|4
+2 Giant Killer|ELD|2
+2 Island|ELD|1
+2 Kenrith, the Returned King|ELD
+2 Lonesome Unicorn|ELD|2
+4 Lovestruck Beast|ELD|2
+4 Lucky Clover|ELD
+6 Mountain|ELD|1
+2 Plains|ELD|1
+4 Thornwood Falls|ELD
+4 Wind-Scarred Crag|ELD
+[Sideboard]
+1 Embercleave|ELD|1
+1 Enchanted Carriage|ELD
+1 Escape to the Wilds|ELD|1
+1 Glass Casket|ELD|1
+1 Oko, Thief of Crowns|ELD|1
+1 Return of the Wildspeaker|ELD|1
+1 Rowan, Fearless Sparkmage|ELD
+1 Scorching Dragonfire|ELD
+1 Searing Barrage|ELD
+1 Spinning Wheel|ELD
+1 Sundering Stroke|ELD|1
+1 The Circle of Loyalty|ELD|1
+1 The Great Henge|ELD|1
+1 The Royal Scions|ELD|1
+1 Witching Well|ELD

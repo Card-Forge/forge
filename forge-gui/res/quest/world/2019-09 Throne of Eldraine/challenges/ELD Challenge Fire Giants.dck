@@ -1,0 +1,20 @@
+[quest]
+id=ELD Challenge: Fire Giants
+OpponentName=The Giants
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=Fires of Invention
+HumanExtras=
+[metadata]
+Title=Fire Giants
+Difficulty=hard
+Description=The giants start with the Fires of Invention.
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+Name=ELD Challenge: Fire Giants
+[Main]
+30 Beanstalk Giant|ELD|2
+30 Forest|ELD|3

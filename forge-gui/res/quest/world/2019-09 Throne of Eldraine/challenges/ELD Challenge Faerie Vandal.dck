@@ -1,0 +1,20 @@
+[quest]
+id=ELD Challenge: Faerie Vandal
+OpponentName=The Vandals
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=The Magic Mirror
+HumanExtras=
+[metadata]
+Title=Faerie Vandal
+Difficulty=hard
+Description=The vandals start with the Magic Mirror.
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+Name=ELD Challenge: Faerie Vandal
+[Main]
+30 Faerie Vandal|ELD
+30 Island|ELD|2

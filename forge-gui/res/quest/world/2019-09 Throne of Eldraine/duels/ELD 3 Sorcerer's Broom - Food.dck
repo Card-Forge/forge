@@ -1,0 +1,23 @@
+[metadata]
+Title=Sorcerer's Broom
+Difficulty=hard
+Description="Gingerbread, gingerbread, gingerbread house / Gingerbread floor and gingerbread door\nThat's the gingerbread, that's the gingerbread, that's the gingerbread lock!"\n-Bobby Helms
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 3 Sorcerer's Broom - Food
+[Main]
+4 Bake into a Pie|ELD
+4 Cauldron Familiar|ELD
+4 Fabled Passage|ELD|1
+8 Forest|ELD|1
+2 Giant's Skewer|ELD
+4 Gilded Goose|ELD|1
+4 Gingerbread Cabin|ELD
+4 Golden Egg|ELD
+2 Rankle, Master of Pranks|ELD|1
+4 Savvy Hunter|ELD
+4 Sorcerer's Broom|ELD
+12 Swamp|ELD|3
+4 Trail of Crumbs|ELD
+[Sideboard]
+4 Witch's Oven|ELD

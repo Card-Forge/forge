@@ -1,0 +1,22 @@
+[metadata]
+Title=Oathsworn Knight
+Difficulty=hard
+Description="Tis but a scratch!"\n-The Black Knight, Monty Python and the Holy Grail
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 3 Oathsworn Knight
+[Main]
+4 Barrow Witches|ELD
+4 Belle of the Brawl|ELD
+4 Fabled Passage|ELD|1
+9 Forest|ELD|3
+4 Giant's Skewer|ELD
+4 Oathsworn Knight|ELD|2
+4 Outmuscle|ELD
+11 Swamp|ELD|2
+4 The Great Henge|ELD|1
+4 Tuinvale Treefolk|ELD|1
+4 Witch's Cottage|ELD
+4 Witch's Vengeance|ELD|1
+[Sideboard]
+4 Weapon Rack|ELD

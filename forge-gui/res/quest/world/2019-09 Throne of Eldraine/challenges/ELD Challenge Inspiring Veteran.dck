@@ -1,0 +1,20 @@
+[quest]
+id=ELD Challenge: Inspiring Veteran
+OpponentName=The Veterans
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Title=Inspiring Veteran
+Difficulty=very hard
+Description="I fight for my daughter, who may not set foot on a battlefield for many years. Remember who you fight for."
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD Challenge: Inspiring Veteran
+[Main]
+40 Inspiring Veteran|ELD|2
+20 Tournament Grounds|ELD

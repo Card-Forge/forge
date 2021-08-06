@@ -1,0 +1,20 @@
+[quest]
+id=ELD Challenge: Wintermoor Commander
+OpponentName=The Commanders
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=Doom Foretold|Golden Egg
+HumanExtras=
+[metadata]
+Title=Wintermoor Commander
+Difficulty=hard
+Description=The commanders start with Doom Foretold.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD Challenge: Wintermoor Commander
+[Main]
+20 Tournament Grounds|ELD
+40 Wintermoor Commander|ELD

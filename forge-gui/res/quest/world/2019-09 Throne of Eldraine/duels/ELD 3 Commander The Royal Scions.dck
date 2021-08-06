@@ -1,0 +1,26 @@
+[metadata]
+Title=Commander: The Royal Scions
+Difficulty=hard
+Description="Ready, Will?"\n"With you by my side, I am always ready."\n-Rowan and Will Kenrith, the Royal Scions
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 3 Commander: The Royal Scions
+[Main]
+4 Bonecrusher Giant|ELD|1
+4 Brazen Borrower|ELD|1
+2 Dwarven Mine|ELD
+2 Embereth Shieldbreaker|ELD|1
+4 Fabled Passage|ELD|1
+4 Fae of Wishes|ELD|1
+4 Improbable Alliance|ELD|1
+4 Irencrag Pyromancer|ELD|1
+10 Island|ELD|2
+4 Mad Ratter|ELD
+10 Mountain|ELD|4
+4 Stonecoil Serpent|ELD|1
+4 The Royal Scions|ELD|2
+[Sideboard]
+1 Embercleave|ELD|1
+1 Searing Barrage|ELD
+1 Sundering Stroke|ELD|1
+1 Turn into a Pumpkin|ELD

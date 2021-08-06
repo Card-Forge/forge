@@ -1,0 +1,20 @@
+[quest]
+id=ELD Challenge: Worthy Knight
+OpponentName=The Knights
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Title=Worthy Knight
+Difficulty=hard
+Description=Every Ardenvale aspirant must step through the flame. Their honor determines whether they burn or shine.
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+Name=ELD Challenge: Worthy Knight
+[Main]
+30 Plains|ELD|1
+30 Worthy Knight|ELD|2

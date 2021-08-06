@@ -1,0 +1,21 @@
+[metadata]
+Title=Robber of the Rich
+Difficulty=hard
+Description="The deal was struck and the favor had been done. And so, under the cover of night, the debt was paid."\n-Tales of the Fae
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 3 Robber of the Rich - Rogues
+[Main]
+4 Barge In|ELD
+4 Brazen Borrower|ELD|1
+4 Claim the Firstborn|ELD
+4 Fabled Passage|ELD|1
+4 Faerie Vandal|ELD
+4 Fervent Champion|ELD|1
+4 Gingerbrute|ELD
+4 Inquisitive Puppet|ELD
+7 Island|ELD|3
+9 Mountain|ELD|4
+4 Redcap Melee|ELD
+4 Robber of the Rich|ELD|2
+4 Stonecoil Serpent|ELD|1

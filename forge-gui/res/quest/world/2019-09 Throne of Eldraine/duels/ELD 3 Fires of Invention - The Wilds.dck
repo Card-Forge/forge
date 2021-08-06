@@ -1,0 +1,29 @@
+[metadata]
+Title=Fires of Invention
+Difficulty=hard
+Description=The guards kindled the hearth and locked the door to Ellwen's chamber. By morning, the fire was out and Ellwen was gone.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 3 Fires of Invention - The Wilds
+[Main]
+4 Beanstalk Giant|ELD|1
+4 Bonecrusher Giant|ELD|1
+4 Edgewall Innkeeper|ELD
+4 Escape to the Wilds|ELD|1
+4 Fabled Passage|ELD|1
+4 Fires of Invention|ELD|2
+12 Forest|ELD|1
+2 Keeper of Fables|ELD
+4 Lovestruck Beast|ELD|1
+10 Mountain|ELD|2
+2 The Great Henge|ELD|1
+2 Tuinvale Treefolk|ELD|1
+4 Wildborn Preserver|ELD|1
+[Sideboard]
+1 Embercleave|ELD|1
+1 Enchanted Carriage|ELD
+1 Rowan, Fearless Sparkmage|ELD
+4 Scorching Dragonfire|ELD
+1 Sundering Stroke|ELD|1
+1 The Royal Scions|ELD|1
+1 Unexplained Vision|ELD
