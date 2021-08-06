@@ -56,6 +56,7 @@ public class CardFaceSymbols {
         MANA_IMAGES.put("W", FSkinImage.MANA_W);
         MANA_IMAGES.put("WB", FSkinImage.MANA_HYBRID_WB);
         MANA_IMAGES.put("WU", FSkinImage.MANA_HYBRID_WU);
+        MANA_IMAGES.put("P", FSkinImage.MANA_PHRYX);
         MANA_IMAGES.put("PW", FSkinImage.MANA_PHRYX_W);
         MANA_IMAGES.put("PR", FSkinImage.MANA_PHRYX_R);
         MANA_IMAGES.put("PU", FSkinImage.MANA_PHRYX_U);

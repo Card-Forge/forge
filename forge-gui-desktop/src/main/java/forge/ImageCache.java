@@ -256,8 +256,10 @@ public class ImageCache {
                     legalString = "Illus. " + ipc.getArtist() + "   ©" + year + " WOTC";
                 }
                 FCardImageRenderer.drawCardImage(original.createGraphics(), card, altState, width, height, art, legalString);
-                if (art != null || !fetcherEnabled)
-                    _CACHE.put(originalKey, original);
+                // Skip store cache since the rendering speed seems to be fast enough
+                // Also the scaleImage below will already cache re-sized image for CardPanel anyway
+                // if (art != null || !fetcherEnabled)
+                //     _CACHE.put(originalKey, original);
             } else {
                 original = _defaultImage;
             }
