@@ -2070,7 +2070,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return false;
     }
 
-    public void checkActivationResloveSubs() {
+    public void checkActivationResolveSubs() {
         if (hasParam("ActivationNumberSacrifice")) {
             String comp = getParam("ActivationNumberSacrifice");
             int right = Integer.parseInt(comp.substring(2));

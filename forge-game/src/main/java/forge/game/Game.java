@@ -118,6 +118,8 @@ public class Game {
 
     private Table<CounterType, Player, List<Pair<Card, Integer>>> countersAddedThisTurn = HashBasedTable.create();
 
+    private Map<Player, Card> topLibsCast = Maps.newHashMap();
+    
     private Player monarch = null;
     private Player monarchBeginTurn = null;
 
@@ -1101,5 +1103,17 @@ public class Game {
 
     public void clearCounterAddedThisTurn() {
         countersAddedThisTurn.clear();
+    }
+
+    public Card getTopLibForPlayer(Player P) {
+        return topLibsCast.get(P);
+    }
+    public void setTopLibsCast() {
+        for (Player p : getPlayers()) {
+            topLibsCast.put(p, p.getTopXCardsFromLibrary(1).isEmpty() ? null : p.getTopXCardsFromLibrary(1).get(0));
+        }
+    }
+    public void clearTopLibsCast() {
+        topLibsCast.clear();
     }
 }
