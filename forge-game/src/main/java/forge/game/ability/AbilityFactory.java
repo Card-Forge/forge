@@ -338,7 +338,6 @@ public final class AbilityFactory {
         final String min = mapParams.containsKey("TargetMin") ? mapParams.get("TargetMin") : "1";
         final String max = mapParams.containsKey("TargetMax") ? mapParams.get("TargetMax") : "1";
 
-
         // TgtPrompt now optional
         final String prompt = mapParams.containsKey("TgtPrompt") ? mapParams.get("TgtPrompt") : "Select target " + mapParams.get("ValidTgts");
 
@@ -412,7 +411,6 @@ public final class AbilityFactory {
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
     private static final void initializeParams(final SpellAbility sa) {
-
         if (sa.hasParam("NonBasicSpell")) {
             sa.setBasicSpell(false);
         }
@@ -456,7 +454,6 @@ public final class AbilityFactory {
      * @return a {@link forge.game.spellability.AbilitySub} object.
      */
     private static final AbilitySub getSubAbility(CardState state, String sSub, final IHasSVars sVarHolder) {
-
         if (sVarHolder.hasSVar(sSub)) {
             return (AbilitySub) AbilityFactory.getAbility(state, sSub, sVarHolder);
         }
@@ -484,7 +481,7 @@ public final class AbilityFactory {
     }
 
     public static final SpellAbility buildFusedAbility(final Card card) {
-        if(!card.isSplitCard())
+        if (!card.isSplitCard())
             throw new IllegalStateException("Fuse ability may be built only on split cards");
 
         CardState leftState = card.getState(CardStateName.LeftSplit);
