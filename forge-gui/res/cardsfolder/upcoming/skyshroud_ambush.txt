@@ -1,0 +1,9 @@
+Name:Skyshroud Ambush
+ManaCost:1 G
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | ImprintCards$ ThisTargetedCard | SubAbility$ DBFight | StackDescription$ Target creature you control [{c:ThisTargetedCard}] | SpellDescription$ Target creature you control fights target creature you don't control. When the creature you control wins the fight, draw a card.
+SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control | RememberObjects$ ThisTargetedCard | ConditionWinnerDefined$ Imprinted | WinSubAbility$ DBImmediateTrigger | CheckStates$ True | SubAbility$ DBCleanup | StackDescription$ fights target creature you don't control [{c:ThisTargetedCard}]. When the creature you control wins the fight, draw a card.
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | Execute$ TrigDraw | Secondary$ True | StackDescription$ None | TriggerDescription$ When the creature you control wins the fight, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+Oracle:Target creature you control fights target creature you don't control. When the creature you control wins the fight, draw a card.
