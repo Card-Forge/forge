@@ -119,7 +119,7 @@ public class Game {
     private Table<CounterType, Player, List<Pair<Card, Integer>>> countersAddedThisTurn = HashBasedTable.create();
 
     private Map<Player, Card> topLibsCast = Maps.newHashMap();
-    
+
     private Player monarch = null;
     private Player monarchBeginTurn = null;
 

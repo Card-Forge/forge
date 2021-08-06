@@ -74,7 +74,7 @@ public enum Direction {
 	 * {@inheritDoc}
 	 */
 	public String toString() {
-		switch(this) {
+		switch (this) {
 		case Left:
 			return LEFT;
 		case Right:
