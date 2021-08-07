@@ -3164,7 +3164,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         paidForStack.push(sa);
     }
     public void popPaidForSA() {
-        paidForStack.pop();
+        // it could be empty if spell couldn't be cast
+        paidForStack.poll();
     }
 
     public boolean isMonarch() {
