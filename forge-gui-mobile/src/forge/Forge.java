@@ -46,7 +46,7 @@ import forge.util.Localizer;
 import forge.util.Utils;
 
 public class Forge implements ApplicationListener {
-    public static final String CURRENT_VERSION = "1.6.43.001";
+    public static final String CURRENT_VERSION = "1.6.44.001";
 
     private static final ApplicationListener app = new Forge();
     private static Clipboard clipboard;
