@@ -171,7 +171,7 @@ public class HumanPlaySpellAbility {
                 manapool.restoreColorReplacements();
                 human.decNumManaConversion();
             }
-            game.clearTopLibsCast();
+            game.clearTopLibsCast(ability);
             return false;
         }
 
@@ -197,7 +197,7 @@ public class HumanPlaySpellAbility {
                 manapool.restoreColorReplacements();
             }
         }
-        game.clearTopLibsCast();
+        game.clearTopLibsCast(ability);
         return true;
     }
 

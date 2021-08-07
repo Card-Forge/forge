@@ -86,6 +86,18 @@ public class TriggerDrawn extends Trigger {
             return false;
         }
 
+        if (runParams.containsKey(AbilityKey.CanReveal)) {
+            // while drawing this is only set if false
+            boolean canReveal = (boolean) runParams.get(AbilityKey.CanReveal);
+            if (hasParam("ForReveal")) {
+                if (!canReveal) {
+                    return false;
+                }
+            } else if (canReveal) {
+                return false;
+            }
+        }
+
         return true;
     }
 

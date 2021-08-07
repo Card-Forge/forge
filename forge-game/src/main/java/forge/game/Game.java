@@ -119,6 +119,7 @@ public class Game {
     private Table<CounterType, Player, List<Pair<Card, Integer>>> countersAddedThisTurn = HashBasedTable.create();
 
     private Map<Player, Card> topLibsCast = Maps.newHashMap();
+    private Map<Card, Integer>  facedownWhileCasting = Maps.newHashMap();
 
     private Player monarch = null;
     private Player monarchBeginTurn = null;
@@ -1113,7 +1114,29 @@ public class Game {
             topLibsCast.put(p, p.getTopXCardsFromLibrary(1).isEmpty() ? null : p.getTopXCardsFromLibrary(1).get(0));
         }
     }
-    public void clearTopLibsCast() {
-        topLibsCast.clear();
+    public void clearTopLibsCast(SpellAbility sa) {
+        // if nothing left to pay
+        if (sa.getActivatingPlayer().getPaidForSA() == null) {
+            topLibsCast.clear();
+            for (Card c : facedownWhileCasting.keySet()) {
+                // maybe it was discarded as payment?
+                if (c.isInZone(ZoneType.Hand)) {
+                    c.forceTurnFaceUp();
+
+                    // run triggers for cards that need reveal
+                    final Map<AbilityKey, Object> runParams = Maps.newHashMap();
+                    runParams.put(AbilityKey.Card, c);
+                    runParams.put(AbilityKey.Number, facedownWhileCasting.get(c));
+                    runParams.put(AbilityKey.Player, this);
+                    runParams.put(AbilityKey.CanReveal, true);
+                    // need to hold trigger to clear list first
+                    getTriggerHandler().runTrigger(TriggerType.Drawn, runParams, true);
+                }
+            }
+            facedownWhileCasting.clear();
+        }
+    }
+    public void addFacedownWhileCasting(Card c, int numDrawn) {
+        facedownWhileCasting.put(c, Integer.valueOf(numDrawn));
     }
 }
