@@ -1123,7 +1123,8 @@ public class Game {
                 if (c.isInZone(ZoneType.Hand)) {
                     c.forceTurnFaceUp();
 
-                    // run triggers for cards that need reveal
+                    // If an effect allows or instructs a player to reveal the card as it’s being drawn,
+                    // it’s revealed after the spell becomes cast or the ability becomes activated.
                     final Map<AbilityKey, Object> runParams = Maps.newHashMap();
                     runParams.put(AbilityKey.Card, c);
                     runParams.put(AbilityKey.Number, facedownWhileCasting.get(c));
