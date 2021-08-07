@@ -1,0 +1,20 @@
+[quest]
+id=ELD Challenge: Cauldron Familiar
+OpponentName=The Familiars
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=Midnight Clock
+HumanExtras=
+[metadata]
+Title=Cauldron Familiar
+Difficulty=medium
+Description=Every day the cat returns to kill the same mouse, which sinks again into the cauldron's brew.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+Name=ELD Challenge: Cauldron Familiar
+[Main]
+40 Cauldron Familiar|ELD
+20 Swamp|ELD|1

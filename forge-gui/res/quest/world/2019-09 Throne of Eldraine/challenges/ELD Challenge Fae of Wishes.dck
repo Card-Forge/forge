@@ -1,0 +1,22 @@
+[quest]
+id=ELD Challenge: Fae of Wishes
+OpponentName=The Fae
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=Lucky Clover
+HumanExtras=
+[metadata]
+Title=Fae of Wishes
+Difficulty=medium
+Description=The fae start with a Lucky Clover.
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+Name=ELD Challenge: Fae of Wishes
+[Main]
+30 Fae of Wishes|ELD|2
+30 Island|ELD|4
+[Sideboard]
+100 Heraldic Banner|ELD

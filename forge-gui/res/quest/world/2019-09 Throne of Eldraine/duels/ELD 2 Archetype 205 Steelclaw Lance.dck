@@ -1,0 +1,20 @@
+[metadata]
+Title=Archetype: Steelclaw Lance
+Difficulty=medium
+Description="A traditional lance is fine for the Burning Yard, but in the wilds you need a nastier bite."\n-Kenver, Embereth weaponsmith
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 2 Archetype 205 Steelclaw Lance
+[Main]
+4 Belle of the Brawl|ELD
+4 Elite Headhunter|ELD
+4 Epic Downfall|ELD
+4 Joust|ELD
+11 Mountain|ELD|4
+4 Order of Midnight|ELD|1
+4 Raging Redcap|ELD
+4 Smitten Swordmaster|ELD|1
+4 Steelclaw Lance|ELD
+11 Swamp|ELD|2
+2 Syr Konrad, the Grim|ELD
+4 Tournament Grounds|ELD

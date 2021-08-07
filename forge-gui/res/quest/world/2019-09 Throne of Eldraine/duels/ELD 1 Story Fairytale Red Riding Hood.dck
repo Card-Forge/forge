@@ -1,0 +1,23 @@
+[metadata]
+Title=Fairytale: Red Riding Hood
+Difficulty=easy
+Description="Hey there Little Red Riding Hood / You sure are looking good
+You're everything a big bad wolf could want"\nLi'l Red Riding Hood, Sam the Sham and the Pharoahs
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 1 Story: Fairytale: Red Riding Hood
+[Main]
+4 Blow Your House Down|ELD
+4 Fabled Passage|ELD|1
+4 Fierce Witchstalker|ELD
+11 Forest|ELD|3
+4 Golden Egg|ELD
+4 Insatiable Appetite|ELD
+8 Mountain|ELD|4
+4 Once Upon a Time|ELD|1
+4 Rowan, Fearless Sparkmage|ELD
+4 Savvy Hunter|ELD
+4 Sundering Stroke|ELD|1
+5 Swamp|ELD|2
+[Sideboard]
+4 Wicked Wolf|ELD|1

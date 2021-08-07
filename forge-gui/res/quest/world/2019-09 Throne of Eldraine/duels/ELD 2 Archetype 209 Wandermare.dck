@@ -1,0 +1,19 @@
+[metadata]
+Title=Archetype: Wandermare
+Difficulty=medium
+Description="A good steed will carry you home. A great steed will carry you to glory."\n-Syr Alin, the Lion's Claw
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 2 Archetype 209 Wandermare
+[Main]
+4 Ardenvale Tactician|ELD|1
+4 Edgewall Innkeeper|ELD
+4 Flaxen Intruder|ELD|1
+13 Forest|ELD|4
+4 Garenbrig Squire|ELD
+4 Lonesome Unicorn|ELD|1
+4 Mysterious Pathlighter|ELD
+4 Oakhame Ranger|ELD|1
+13 Plains|ELD|2
+2 Rosethorn Acolyte|ELD|1
+4 Wandermare|ELD

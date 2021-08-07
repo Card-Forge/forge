@@ -1,0 +1,19 @@
+[metadata]
+Title=The Realm: Edgewall Keep
+Difficulty=easy
+Description="Warmth. Safety. A fully-stocked larder. You'll find nothing like Edgewall Keep in the wilds, I promise you that!"
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 1 The Realm: Edgewall Keep
+[Main]
+4 Edgewall Innkeeper|ELD
+11 Forest|ELD|4
+4 Fortifying Provisions|ELD
+4 Knight of the Keep|ELD
+4 Lonesome Unicorn|ELD|1
+4 Lucky Clover|ELD
+4 Once and Future|ELD
+4 Outflank|ELD
+4 Outmuscle|ELD
+13 Plains|ELD|3
+4 Wandermare|ELD

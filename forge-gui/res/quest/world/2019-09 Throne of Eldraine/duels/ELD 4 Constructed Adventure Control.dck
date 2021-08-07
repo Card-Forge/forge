@@ -1,0 +1,29 @@
+[metadata]
+Title=Adventure Control
+Difficulty=very hard
+Description=Played in the Eldraine Constructed Event, 19 October 2019.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 4 Constructed: Adventure Control
+[Main]
+4 Beanstalk Giant|ELD|1
+1 Castle Locthwain|ELD|1
+4 Doom Foretold|ELD|1
+4 Edgewall Innkeeper|ELD
+4 Fabled Passage|ELD|1
+6 Forest|ELD|1
+4 Foulmire Knight|ELD|1
+3 Lucky Clover|ELD
+4 Murderous Rider|ELD|1
+1 Once Upon a Time|ELD|1
+3 Order of Midnight|ELD|1
+4 Plains|ELD|1
+4 Shepherd of the Flock|ELD|1
+4 Smitten Swordmaster|ELD|1
+6 Swamp|ELD|1
+[Sideboard]
+1 Forest|ELD|1
+1 Lucky Clover|ELD
+2 Sorcerous Spyglass|ELD|1
+1 The Great Henge|ELD|1
+2 Wishclaw Talisman|ELD|1

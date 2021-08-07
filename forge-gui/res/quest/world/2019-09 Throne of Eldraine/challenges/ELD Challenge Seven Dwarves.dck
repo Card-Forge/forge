@@ -1,0 +1,20 @@
+[quest]
+id=ELD Challenge: Seven Dwarves
+OpponentName=The Dwarves
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Name=ELD Challenge: Seven Dwarves
+Title=Seven Dwarves
+Difficulty=very hard
+Description="The gleam of rubies and my brothers and sisters by my side... what more could I want?"\n-Brognold the Third
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+[Main]
+40 Seven Dwarves|ELD
+20 Mountain|ELD|4

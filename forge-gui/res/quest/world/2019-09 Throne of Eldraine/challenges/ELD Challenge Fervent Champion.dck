@@ -1,0 +1,20 @@
+[quest]
+id=ELD Challenge: Fervent Champion
+OpponentName=The Champions
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=Embercleave
+HumanExtras=
+[metadata]
+Title=Fervent Champion
+Difficulty=hard
+Description=The champions start with Embercleave.
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+Name=ELD Challenge: Fervent Champion
+[Main]
+40 Fervent Champion|ELD|2
+20 Mountain|ELD|1

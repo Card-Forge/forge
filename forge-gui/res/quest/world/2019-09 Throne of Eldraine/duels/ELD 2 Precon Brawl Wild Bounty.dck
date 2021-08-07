@@ -1,0 +1,22 @@
+[metadata]
+Title=Brawl Deck: Wild Bounty
+Difficulty=medium
+Description=A curated version of the official Brawl Deck, with the non-Eldraine cards replaced.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 2 Precon: Brawl: Wild Bounty
+[Main]
+4 Beanstalk Giant|ELD|1
+4 Chulane, Teller of Tales|ELD
+4 Faerie Formation|ELD
+4 Faerie Vandal|ELD
+10 Forest|ELD|2
+7 Island|ELD|1
+4 Keeper of Fables|ELD
+4 Maraleaf Pixie|ELD
+7 Plains|ELD|2
+4 Rosethorn Acolyte|ELD|1
+4 Steelbane Hydra|ELD
+4 Thornwood Falls|ELD
+[Sideboard]
+1 Run Away Together|ELD

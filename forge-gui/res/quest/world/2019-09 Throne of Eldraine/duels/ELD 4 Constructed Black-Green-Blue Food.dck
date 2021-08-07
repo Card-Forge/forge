@@ -1,0 +1,27 @@
+[metadata]
+Title=Black-Green-Blue Food
+Difficulty=very hard
+Description=Played in the Eldraine Constructed Event, 19 October 2019.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 4 Constructed: Black-Green-Blue Food
+[Main]
+4 Deathless Knight|ELD
+4 Fabled Passage|ELD|1
+3 Feasting Troll King|ELD|1
+12 Forest|ELD|1
+4 Gilded Goose|ELD|1
+2 Gingerbread Cabin|ELD
+2 Island|ELD|3
+4 Lovestruck Beast|ELD|1
+4 Oko, Thief of Crowns|ELD|1
+4 Once Upon a Time|ELD|1
+3 Questing Beast|ELD|1
+4 Savvy Hunter|ELD
+2 Swamp|ELD|3
+2 The Great Henge|ELD|1
+1 Trail of Crumbs|ELD
+[Sideboard]
+3 Castle Garenbrig|ELD|1
+1 Forest|ELD|1
+4 Wicked Wolf|ELD|1

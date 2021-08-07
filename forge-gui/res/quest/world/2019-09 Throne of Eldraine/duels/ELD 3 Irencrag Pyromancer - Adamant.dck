@@ -1,0 +1,20 @@
+[metadata]
+Title=Irencrag Pyromancer
+Difficulty=hard
+Description=Mages who draw their power from the Irencrag must harness their emotions to wield it to its full potential. This often manifests as fire magic, but a rarer form of Embereth magic is "phobomancy," the power to harness fear. Knights can magically convert their fear into focus mid-battle or use fear to overwhelm and enervate their opponents.
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+Name=ELD 3 Irencrag Pyromancer - Adamant
+[Main]
+4 Bloodhaze Wolverine|ELD
+4 Castle Embereth|ELD|1
+4 Clockwork Servant|ELD
+4 Dwarven Mine|ELD
+4 Golden Egg|ELD
+4 Irencrag Pyromancer|ELD|2
+4 Loch Dragon|ELD
+4 Mad Ratter|ELD
+4 Merchant of the Vale|ELD|1
+16 Mountain|ELD|4
+4 Thrill of Possibility|ELD
+4 Torbran, Thane of Red Fell|ELD|1
