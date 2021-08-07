@@ -6,37 +6,37 @@ Type=Draft
 ScryfallCode=J21
 
 [cards]
-0 C Baffling Defenses
-0 U Boneyard Aberration
-0 C Bounty of the Deep
-0 M Davriel, Soul Broker
-0 C Davriel's Withering
-0 C Ethereal Grasp
-0 C Faceless Agent
-0 M Freyalise, Skyshroud Partisan
-0 M Kiora, the Tide's Fury
-0 C Leonin Sanctifier
-0 C Longtusk Stalker
-0 C Lumbering Lightshield
-0 R Managorger Phoenix
-0 U Manor Guardian
-0 C Mentor of Evos Isle
-0 C Plaguecrafter's Familiar
-0 R Pool of Vigorous Growth
-0 C Reckless Ringleader
-0 C Sarkhan's Scorn
-0 M Sarkhan, Wanderer to Shiv
-0 C Scion of Shiv
-0 U Shoreline Scout
-0 C Skyshroud Ambush
-0 U Skyshroud Lookout
-0 U Static Discharge
-0 R Subversive Acolyte
-0 M Teyo, Aegis Adept
-0 R Tome of the Infinite
-0 C Veteran Charger
-0 U Wingsteed Trainer
+0 C Baffling Defenses @Andrey Kuzinskiy
+0 R Benalish Partisan @Francisco Miyara
+0 U Boneyard Aberration @Slawomir Maniak
+0 C Bounty of the Deep @Olena Richards
+0 M Davriel, Soul Broker @Justine Cruz
+0 C Davriel's Withering @Alex Brock
+0 C Ethereal Grasp @Miranda Meeks
+0 C Faceless Agent @Nicholas Gregory
+0 M Freyalise, Skyshroud Partisan @Daarken
+0 M Kiora, the Tide's Fury @Magali Villeneuve
+0 C Leonin Sanctifier @Jokubas Uogintas
+0 C Longtusk Stalker @Vincent Christiaens
+0 C Lumbering Lightshield @Leanna Crossan
+0 R Managorger Phoenix @Brian Valeza
+0 U Manor Guardian @Slawomir Maniak
+0 C Mentor of Evos Isle @Shreya Shetty
+0 C Plaguecrafter's Familiar @Nicholas Gregory
+0 R Pool of Vigorous Growth @Jokubas Uogintas
+0 C Reckless Ringleader @Brian Valeza
+0 C Sarkhan's Scorn @Daarken
+0 M Sarkhan, Wanderer to Shiv @Grzegorz Rutkowski
+0 C Scion of Shiv @Grzegorz Rutkowski
+0 U Shoreline Scout @Shreya Shetty
+0 C Skyshroud Ambush @Andreas Zafiratos
+0 U Skyshroud Lookout @Olena Richards
+0 U Static Discharge @Liiga Smilshkalne
+0 R Subversive Acolyte @Darren Tan
+0 M Teyo, Aegis Adept @Billy Christian
+0 R Tome of the Infinite @Joseph Meehan
+0 C Veteran Charger @Leanna Crossan
+0 U Wingsteed Trainer @Valera Lutfullina
 
 [tokens]
-
 u_8_8_kraken

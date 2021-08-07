@@ -1,0 +1,39 @@
+[metadata]
+Code=MID
+Date=2021-09-24
+Name=Innistrad: Midnight Hunt
+Code2=MID
+MciCode=mid
+Type=Expansion
+ScryfallCode=MID
+
+[cards]
+44 C Consider @Zezhou Chen
+81 R Triskaidekaphile @Slawomir Maniak
+91 R Champion of the Perished @Kekai Kotaki
+107 U Infernal Grasp @Naomi Baker
+154 U Play with Fire @Svetlin Velinov
+208 M Wrenn and Seven @Heonhwa Choe
+229 U Join the Dance @Raoul Vitale
+268 L Plains @Alayna Danner
+269 L Plains @Dan Mumford
+270 L Island @Evan Cagle
+271 L Island @Dan Mumford
+272 L Swamp @Alayna Danner
+273 L Swamp @Dan Mumford
+274 L Mountain @Daria Khlebnikova
+275 L Mountain @Dan Mumford
+276 L Forest @Alayna Danner
+277 L Forest @Dan Mumford
+278 M Wrenn and Seven @Bram Sels
+380 L Plains @Andreas Rocha
+381 L Island @Andreas Rocha
+382 L Swamp @Kasia 'Kafis' Zielińska
+383 L Mountain @Muhammad Firdaus
+384 L Forest @Andreas Rocha
+385 R Champion of the Perished @Daarken
+386 R Triskaidekaphile @Mathias Kollros
+388 C Consider @Zezhou Chen
+389 U Infernal Grasp @Naomi Baker
+390 U Play with Fire @Svetlin Velinov
+391 U Join the Dance @Raoul Vitale
