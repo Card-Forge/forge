@@ -144,6 +144,9 @@ public class HumanPlaySpellAbility {
             }
         }
 
+        // reset is also done early here, because if an ability is canceled from targeting it might otherwise lead to refunding mana from earlier cast
+        ability.clearManaPaid();
+
         // This line makes use of short-circuit evaluation of boolean values, that is each subsequent argument
         // is only executed or evaluated if the first argument does not suffice to determine the value of the expression
         // because of Selective Snare do announceType first
