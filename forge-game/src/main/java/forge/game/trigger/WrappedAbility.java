@@ -555,4 +555,11 @@ public class WrappedAbility extends Ability {
     public void setCardState(CardState state) {
         sa.setCardState(state);
     }
+
+    public List<AbilitySub> getChosenList() {
+        return sa.getChosenList();
+    }
+    public void setChosenList(List<AbilitySub> choices) {
+        sa.setChosenList(choices);
+    }
 }
