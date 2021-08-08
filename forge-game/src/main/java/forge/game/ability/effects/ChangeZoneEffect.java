@@ -919,8 +919,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 String prompt;
                 if (defined) {
                     prompt = Localizer.getInstance().getMessage("lblPutThatCardFromPlayerOriginToDestination", "{player's}", Lang.joinHomogenous(origin, ZoneType.Accessors.GET_TRANSLATED_NAME).toLowerCase(), destination.getTranslatedName().toLowerCase());
-                }
-                else {
+                } else {
                     prompt = Localizer.getInstance().getMessage("lblSearchPlayerZoneConfirm", "{player's}", Lang.joinHomogenous(origin, ZoneType.Accessors.GET_TRANSLATED_NAME).toLowerCase());
                 }
                 String message = MessageUtil.formatMessage(prompt , decider, player);

@@ -4,7 +4,6 @@ Types:Sorcery
 A:SP$ RepeatEach | Cost$ 2 G | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ TyphoonDmg | DamageMap$ True | SpellDescription$ Typhoon deals damage to each opponent equal to the number of Islands that player controls.
 SVar:TyphoonDmg:DB$ DealDamage | Defined$ Remembered | NumDmg$ X
 SVar:X:Count$Valid Island.RememberedPlayerCtrl
-SVar:AIPlayForSub:True
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/typhoon.jpg
 Oracle:Typhoon deals damage to each opponent equal to the number of Islands that player controls.

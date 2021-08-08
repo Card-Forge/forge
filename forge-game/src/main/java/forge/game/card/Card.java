@@ -5237,7 +5237,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     // This is used by the AI to forecast an effect (so it must not change the game state)
     @Override
     public final int staticReplaceDamage(final int damage, final Card source, final boolean isCombat) {
-
         int restDamage = damage;
         for (Card c : getGame().getCardsIn(ZoneType.Battlefield)) {
             if (c.getName().equals("Sulfuric Vapors")) {
@@ -5313,8 +5312,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     /**
-     * This function handles damage after replacement and prevention effects are
-     * applied.
+     * This function handles damage after replacement and prevention effects are applied.
      */
     @Override
     public final int addDamageAfterPrevention(final int damageIn, final Card source, final boolean isCombat, GameEntityCounterTable counterTable) {

@@ -63,6 +63,9 @@ public class HumanPlaySpellAbility {
         final Player human = ability.getActivatingPlayer();
         final Game game = ability.getActivatingPlayer().getGame();
 
+        // CR 401.5: freeze top library cards until cast so player can't cheat and see the next
+        game.setTopLibsCast();
+
         // used to rollback
         Zone fromZone = null;
         int zonePosition = 0;
@@ -168,6 +171,7 @@ public class HumanPlaySpellAbility {
                 manapool.restoreColorReplacements();
                 human.decNumManaConversion();
             }
+            game.clearTopLibsCast(ability);
             return false;
         }
 
@@ -180,7 +184,7 @@ public class HumanPlaySpellAbility {
                 // Should unfreeze stack
                 game.getStack().unfreezeStack();
             } else {
-                enusureAbilityHasDescription(ability);
+                ensureAbilityHasDescription(ability);
                 game.getStack().addAndUnfreeze(ability);
             }
 
@@ -193,6 +197,7 @@ public class HumanPlaySpellAbility {
                 manapool.restoreColorReplacements();
             }
         }
+        game.clearTopLibsCast(ability);
         return true;
     }
 
@@ -256,8 +261,7 @@ public class HumanPlaySpellAbility {
                     card.setKickerMagnitude(value);
                 } else if ("Pseudo-multikicker".equals(varName)) {
                     card.setPseudoMultiKickerMagnitude(value);
-                }
-                else {
+                } else {
                     card.setSVar(varName, value.toString());
                 }
             }
@@ -305,7 +309,7 @@ public class HumanPlaySpellAbility {
         return true;
     }
 
-    private static void enusureAbilityHasDescription(final SpellAbility ability) {
+    private static void ensureAbilityHasDescription(final SpellAbility ability) {
         if (!StringUtils.isBlank(ability.getStackDescription())) {
             return;
         }

@@ -59,7 +59,7 @@ public class InputConfirm extends InputSyncronizedBase {
              return controller.getGui().confirm(card, message, defaultIsYes, options);
          } else {
              InputConfirm inp;
-             if ( options.size() == 2 ) {
+             if (options.size() == 2) {
                  inp = new InputConfirm(controller, message, options.get(0), options.get(1), defaultIsYes, card);
              } else { 
                  inp = new InputConfirm(controller, message, defaultOptions.get(0), defaultOptions.get(1), defaultIsYes, card);
@@ -76,7 +76,7 @@ public class InputConfirm extends InputSyncronizedBase {
              return controller.getGui().confirm((sa==null)?null:CardView.get(sa.getHostCard()), message, defaultIsYes, options);
          } else {
              InputConfirm inp;
-             if ( options.size() == 2 ) {
+             if (options.size() == 2) {
                  inp = new InputConfirm(controller, message, options.get(0), options.get(1), defaultIsYes, sa);
              } else { 
                  inp = new InputConfirm(controller, message, defaultOptions.get(0), defaultOptions.get(1), defaultIsYes, sa);
@@ -147,17 +147,16 @@ public class InputConfirm extends InputSyncronizedBase {
     @Override
     protected final void showMessage() {
         getController().getGui().updateButtons(getOwner(), yesButtonText, noButtonText, true, true, defaultYes);
-        if ( FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DETAILED_SPELLDESC_IN_PROMPT) &&
-             (card!=null) ) {
+        if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DETAILED_SPELLDESC_IN_PROMPT) && card != null) {
             final StringBuilder sb = new StringBuilder();
             sb.append(card.toString());
-            if ( (sa != null) && (sa.toString().length()>1) ) { // some spell abilities have no useful string value
+            if (sa != null && sa.toString().length() > 1) { // some spell abilities have no useful string value
                 sb.append(" - ").append(sa.toString());
             }
             sb.append("\n\n").append(message);
             showMessage(sb.toString(), card);
         } else {
-            if ( card!=null ) {
+            if (card != null) {
                 showMessage(message, card);
             } else {
                 showMessage(message);

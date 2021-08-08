@@ -134,7 +134,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         if (!ability.isCopied()) {
             // Copied abilities aren't activated, so they shouldn't change these values
             source.addAbilityActivated(ability);
-            ability.checkActivationResloveSubs();
+            ability.checkActivationResolveSubs();
         }
 
         // if the ability is a spell, but not a copied spell and its not already

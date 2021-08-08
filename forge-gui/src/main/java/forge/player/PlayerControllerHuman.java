@@ -785,8 +785,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         buildQuestion.append(regtrig.getHostCard().toString()).append("?");
         if (!FModel.getPreferences().getPrefBoolean(FPref.UI_COMPACT_PROMPT)
                 && !FModel.getPreferences().getPrefBoolean(FPref.UI_DETAILED_SPELLDESC_IN_PROMPT)) {
-            // append trigger description unless prompt is compact or detailed
-            // descriptions are on
+            // append trigger description unless prompt is compact or detailed descriptions are on
             buildQuestion.append("\n(");
             buildQuestion.append(regtrig.toString());
             buildQuestion.append(")");
@@ -1405,22 +1404,19 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             if (CombatUtil.validateAttackers(combat)) {
                 return; // don't prompt to declare attackers if user chose to
                         // end the turn and not attacking is legal
-            } else {
-                autoPassCancel(); // otherwise: cancel auto pass because of this
-                                  // unexpected attack
             }
+            // otherwise: cancel auto pass because of this unexpected attack
+            autoPassCancel();
         }
 
-        // This input should not modify combat object itself, but should return
-        // user choice
+        // This input should not modify combat object itself, but should return user choice
         final InputAttack inpAttack = new InputAttack(this, attackingPlayer, combat);
         inpAttack.showAndWait();
     }
 
     @Override
     public void declareBlockers(final Player defender, final Combat combat) {
-        // This input should not modify combat object itself, but should return
-        // user choice
+        // This input should not modify combat object itself, but should return user choice
         final InputBlock inpBlock = new InputBlock(this, defender, combat);
         inpBlock.showAndWait();
         getGui().updateAutoPassPrompt();
@@ -1796,8 +1792,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 return getGui().one(prompt, possibleReplacers);
             }
         }
-        return first; // return first option without prompting if all options
-                      // are the same
+        // return first option without prompting if all options are the same
+        return first;
     }
 
     @Override
@@ -1808,8 +1804,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public boolean payCostToPreventEffect(final Cost cost, final SpellAbility sa, final boolean alreadyPaid,
             final FCollectionView<Player> allPayers) {
-        // if it's paid by the AI already the human can pay, but it won't change
-        // anything
+        // if it's paid by the AI already the human can pay, but it won't change anything
         return HumanPlay.payCostDuringAbilityResolve(this, player, sa.getHostCard(), cost, sa, null);
     }
 
@@ -2075,8 +2070,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public List<PaperCard> chooseCardsYouWonToAddToDeck(final List<PaperCard> losses) {
-        return getGui().many(localizer.getMessage("lblSelectCardstoAddtoYourDeck"), localizer.getMessage("lblAddTheseToMyDeck"), 0, losses.size(), losses,
-                null);
+        return getGui().many(localizer.getMessage("lblSelectCardstoAddtoYourDeck"), localizer.getMessage("lblAddTheseToMyDeck"), 0, losses.size(), losses, null);
     }
 
     @Override
@@ -3278,8 +3272,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public int chooseNumberForKeywordCost(SpellAbility sa, Cost cost, KeywordInterface keyword, String prompt,
-            int max) {
+    public int chooseNumberForKeywordCost(SpellAbility sa, Cost cost, KeywordInterface keyword, String prompt, int max) {
         if (max <= 0) {
             return 0;
         }
