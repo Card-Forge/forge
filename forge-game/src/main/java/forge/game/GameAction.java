@@ -1229,7 +1229,7 @@ public class GameAction {
                     }
                     // Rule 704.5g - Destroy due to lethal damage
                     // Rule 704.5h - Destroy due to deathtouch
-                    else if (c.getDamage() > 0 && (c.getLethal() <= c.getDamage() || c.hasBeenDealtDeathtouchDamage())) {
+                    else if (c.hasBeenDealtDeathtouchDamage() || (c.getDamage() > 0 && c.getLethal() <= c.getDamage())) {
                         if (desCreats == null) {
                             desCreats = new CardCollection();
                         }
