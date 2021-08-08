@@ -2090,7 +2090,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public List<AbilitySub> getChosenList() {
         return chosenList;
     }
-
     public void setChosenList(List<AbilitySub> choices) {
         chosenList = choices;
     }
