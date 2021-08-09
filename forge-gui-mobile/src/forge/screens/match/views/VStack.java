@@ -419,6 +419,7 @@ public class VStack extends FDropDown {
                     newtext = TextUtil.fastReplace(TextUtil.fastReplace(newtext, " and .", ".")," .", ".");
                     newtext = TextUtil.fastReplace(TextUtil.fastReplace(newtext, "- - ", "- "), ". .", ".");
                     newtext = TextUtil.fastReplace(newtext, "CARDNAME", name);
+                    newtext = TextUtil.fastReplace(newtext, name+name, name);
                     textRenderer.drawText(g, name+" "+cId + optionalCostString +newtext, FONT, foreColor, x, y, w, h, y, h, true, Align.left, true);
                 }
             }
