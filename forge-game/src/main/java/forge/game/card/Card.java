@@ -2054,7 +2054,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 } else if (keyword.startsWith("Strive") || keyword.startsWith("Escalate")
                         || keyword.startsWith("ETBReplacement")
                         || keyword.startsWith("Affinity")
-                        || keyword.equals("CARDNAME enters the battlefield tapped.")
                         || keyword.startsWith("UpkeepCost")) {
                 } else if (keyword.equals("Provoke") || keyword.equals("Ingest") || keyword.equals("Unleash")
                         || keyword.equals("Soulbond") || keyword.equals("Partner") || keyword.equals("Retrace")
