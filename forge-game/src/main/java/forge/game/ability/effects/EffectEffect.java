@@ -283,31 +283,24 @@ public class EffectEffect extends SpellAbilityEffect {
 
                 if ((duration == null) || duration.equals("EndOfTurn")) {
                     game.getEndOfTurn().addUntil(endEffect);
-                }
-                else if (duration.equals("UntilHostLeavesPlay")) {
+                } else if (duration.equals("UntilHostLeavesPlay")) {
                     hostCard.addLeavesPlayCommand(endEffect);
-                }
-                else if (duration.equals("UntilHostLeavesPlayOrEOT")) {
+                } else if (duration.equals("UntilHostLeavesPlayOrEOT")) {
                     game.getEndOfTurn().addUntil(endEffect);
                     hostCard.addLeavesPlayCommand(endEffect);
-                }
-                else if (duration.equals("UntilYourNextTurn")) {
+                } else if (duration.equals("UntilYourNextTurn")) {
                     game.getCleanup().addUntil(controller, endEffect);
-                }
-                else if (duration.equals("UntilYourNextUpkeep")) {
+                } else if (duration.equals("UntilYourNextUpkeep")) {
                     game.getUpkeep().addUntil(controller, endEffect);
-                }
-                else if (duration.equals("UntilEndOfCombat")) {
+                } else if (duration.equals("UntilEndOfCombat")) {
                     game.getEndOfCombat().addUntil(endEffect);
-                }
-                else if (duration.equals("UntilTheEndOfYourNextTurn")) {
+                } else if (duration.equals("UntilTheEndOfYourNextTurn")) {
                     if (game.getPhaseHandler().isPlayerTurn(controller)) {
                         game.getEndOfTurn().registerUntilEnd(controller, endEffect);
                     } else {
                         game.getEndOfTurn().addUntilEnd(controller, endEffect);
                     }
-                }
-                else if (duration.equals("ThisTurnAndNextTurn")) {
+                } else if (duration.equals("ThisTurnAndNextTurn")) {
                     game.getUntap().addAt(new GameCommand() {
                         private static final long serialVersionUID = -5054153666503075717L;
 
@@ -316,6 +309,8 @@ public class EffectEffect extends SpellAbilityEffect {
                             game.getEndOfTurn().addUntil(endEffect);
                         }
                     });
+                } else if (duration.equals("UntilStateBasedActionChecked")) {
+                    game.addSBACheckedCommand(endEffect);
                 }
             }
 
