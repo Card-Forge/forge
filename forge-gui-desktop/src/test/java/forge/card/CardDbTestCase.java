@@ -1527,12 +1527,6 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         assertEquals(hymnToTourachCard.getEdition(), httEdition);
         // artIndex should be overwritten this time, as it's provided and not default
         assertEquals(hymnToTourachCard.getArtIndex(), artIndexFEM);
-
-
-
-
-
-
     }
 
     @Test
@@ -1601,9 +1595,11 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
 
         Date alphaRelaseDate = null;
         Date currentDate = Date.from(Instant.now());
+        Date latestShivanDragonReleaseDateToDate = null;  // latest print to date for Shivan is in M20
         try {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             alphaRelaseDate = format.parse(alphaEditionReleaseDate);
+            latestShivanDragonReleaseDateToDate = format.parse("2019-07-12");
         } catch (ParseException e) {
             e.printStackTrace();
             fail();
@@ -1611,6 +1607,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
 
         assertNull(this.cardDb.getCardFromEditionsReleasedBefore(cardNameShivanDragon, alphaRelaseDate));
         assertNull(this.cardDb.getCardFromEditionsReleasedAfter(cardNameShivanDragon, currentDate));
+        assertNull(this.cardDb.getCardFromEditionsReleasedAfter(cardNameShivanDragon, latestShivanDragonReleaseDateToDate));
     }
 
     @Test
