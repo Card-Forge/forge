@@ -15,7 +15,6 @@ import forge.game.player.Player;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
-import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
 import forge.util.Localizer;
 
@@ -78,24 +77,6 @@ public class FightEffect extends DamageBaseEffect {
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.Fighters, fighters);
         game.getTriggerHandler().runTrigger(TriggerType.FightOnce, runParams, false);
-
-        if (sa.hasParam("ConditionWinnerDefined")) {
-            Card mustWin = AbilityUtils.getDefinedCards(host, sa.getParam("ConditionWinnerDefined"), sa).get(0);
-            Card mustLose = null;
-            for (Card l : fighters) {
-                if (l != mustWin) {
-                    mustLose = l;
-                }
-            }
-            game.getAction().checkStateEffects(true);
-            SpellAbility sub = sa.getAdditionalAbility("WinSubAbility");
-            if (mustWin.getZone().getZoneType().equals(ZoneType.Battlefield) && mustLose != null &&
-                    !mustLose.getZone().getZoneType().equals(ZoneType.Battlefield)) {
-                if (sub != null) {
-                    AbilityUtils.resolve(sub);
-                }
-            }
-        }
     }
 
     private static List<Card> getFighters(SpellAbility sa) {

@@ -39,6 +39,7 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Table;
 import com.google.common.eventbus.EventBus;
 
+import forge.GameCommand;
 import forge.card.CardRarity;
 import forge.card.CardStateName;
 import forge.card.CardType.Supertype;
@@ -99,6 +100,8 @@ public class Game {
     public final Phase endOfTurn;
     public final Untap untap;
     public final Phase upkeep;
+    // to execute commands for "current" phase each time state based action is checked
+    public final List<GameCommand> sbaCheckedCommandList;
     public final MagicStack stack;
     public final CostPaymentStack costPaymentStack = new CostPaymentStack();
     private final PhaseHandler phaseHandler;
@@ -308,6 +311,8 @@ public class Game {
         endOfCombat = new Phase(PhaseType.COMBAT_END);
         endOfTurn = new Phase(PhaseType.END_OF_TURN);
 
+        sbaCheckedCommandList = new ArrayList<>();
+
         // update players
         view.updatePlayers(this);
 
@@ -381,6 +386,17 @@ public class Game {
     public final Phase getCleanup() {
         return cleanup;
     }
+
+    public void addSBACheckedCommand(final GameCommand c) {
+        sbaCheckedCommandList.add(c);
+    }
+    public final void runSBACheckedCommands() {
+        for (final GameCommand c : sbaCheckedCommandList) {
+            c.run();
+        }
+        sbaCheckedCommandList.clear();
+    }
+
 
     public final PhaseHandler getPhaseHandler() {
         return phaseHandler;
