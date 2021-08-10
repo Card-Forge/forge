@@ -410,8 +410,7 @@ public class HumanPlay {
                     }
 
                     costExile.payAsDecided(p, PaymentDecision.card(p.getCardsIn(ZoneType.Graveyard)), sourceAbility);
-                }
-                else {
+                } else {
                     from = costExile.getFrom();
                     CardCollection list = CardLists.getValidCards(p.getCardsIn(from), part.getType().split(";"), p, source, sourceAbility);
                     final int nNeeded = getAmountFromPart(costPart, source, sourceAbility);
@@ -429,7 +428,12 @@ public class HumanPlay {
                         CardCollection newList = new CardCollection();
                         GameEntityViewMap<Card, CardView> gameCacheList = GameEntityView.getMap(list);
                         for (int i = 0; i < nNeeded; i++) {
-                            final CardView cv = SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblExileFromZone", from.getTranslatedName()), gameCacheList.getTrackableKeys());
+                            final CardView cv;
+                            if (mandatory) {
+                                cv = SGuiChoose.one(Localizer.getInstance().getMessage("lblExileFromZone", from.getTranslatedName()), gameCacheList.getTrackableKeys());
+                            } else {
+                                cv = SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblExileFromZone", from.getTranslatedName()), gameCacheList.getTrackableKeys());
+                            }
                             if (cv == null || !gameCacheList.containsKey(cv)) {
                                 return false;
                             }
