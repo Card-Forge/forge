@@ -753,10 +753,10 @@ public abstract class SpellAbilityEffect {
         } else if ("UntilUntaps".equals(duration)) {
             host.addUntapCommand(until);
         } else if ("UntilUnattached".equals(duration)) {
-            sa.getHostCard().addUnattachCommand(until);
+            host.addUnattachCommand(until);
         } else if ("UntilFacedown".equals(duration)) {
-            sa.getHostCard().addFacedownCommand(until);
-        }else {
+            host.addFacedownCommand(until);
+        } else {
             game.getEndOfTurn().addUntil(until);
         }
     }

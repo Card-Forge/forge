@@ -3,12 +3,9 @@ ManaCost:2 B
 Types:Legendary Creature God
 PT:6/6
 K:Deathtouch
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ At the beginning of your upkeep, exile two cards from your graveyard. If you can't, sacrifice NICKNAME and draw a card.
-SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card.YouOwn | ChangeNum$ 2 | RememberChanged$ True | Hidden$ True | Mandatory$ True | SubAbility$ DBSacSelf
-SVar:DBSacSelf:DB$ Sacrifice | Defined$ Self | ConditionCheckSVar$ X | ConditionSVarCompare$ LT2 | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ LT2 | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Remembered$Amount
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ DBSacSelf | TriggerDescription$ At the beginning of your upkeep, exile two cards from your graveyard. If you can't, sacrifice NICKNAME and draw a card.
+SVar:DBSacSelf:DB$ Sacrifice | Defined$ Self | UnlessCost$ Mandatory ExileFromGrave<2/Card> | UnlessPayer$ You | UnlessResolveSubs$ WhenNotPaid | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ 1
 AlternateMode:Modal
 DeckHints:Ability$Discard & Ability$Graveyard
 Oracle:Deathtouch\nAt the beginning of your upkeep, exile two cards from your graveyard. If you can't, sacrifice Egon and draw a card.
