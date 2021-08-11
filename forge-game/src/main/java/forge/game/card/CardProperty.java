@@ -1428,7 +1428,14 @@ public class CardProperty {
                 }
             }
             if (property.equals("attackingYouOrYourPW")) {
-                Player defender = combat.getDefenderPlayerByAttacker(card);
+                GameEntity defender = combat.getDefenderByAttacker(card);
+                if (defender instanceof Card) {
+                    // attack on a planeswalker that was removed from combat
+                    if (!((Card)defender).isPlaneswalker()) {
+                        return false;
+                    }
+                    defender = ((Card)defender).getController();
+                }
                 if (!sourceController.equals(defender)) {
                     return false;
                 }
