@@ -4,6 +4,6 @@ Types:Creature Dwarf Warrior
 PT:2/3
 S:Mode$ Continuous | Affected$ Card.Rune+YouCtrl | AddKeyword$ Alternative Cost:1 | AffectedZone$ Hand,Graveyard,Exile,Library,Command | Description$ You may pay {1} rather than pay the mana cost for Rune spells you cast.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library and/or graveyard for a Rune card, reveal it, and put it into your hand. If you search your library this way, shuffle.
-SVar:TrigChange:DB$ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Rune | ChangeNum$ 1 | ShuffleNonMandatory$ True
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | OriginChoice$ True | OriginAlternative$ Graveyard | AlternativeMessage$ Would you like to search your library with this ability? If you do, your library will be shuffled. | Destination$ Hand | ChangeType$ Rune | ChangeNum$ 1
 DeckNeeds:Type$Rune
 Oracle:When Runeforge Champion enters the battlefield, you may search your library and/or graveyard for a Rune card, reveal it, and put it into your hand. If you search your library this way, shuffle.\nYou may pay {1} rather than pay the mana cost for Rune spells you cast.
