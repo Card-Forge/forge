@@ -717,17 +717,17 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     @Override
     public int getArtCount(String cardName, String setName) {
-        int cnt = 0;
         if (cardName == null || setName == null)
-            return cnt;
+            return 0;
         Collection<PaperCard> cards = getAllCards(cardName);
         if (null == cards || cards.size() == 0)
             return 0;
+        int artCount = 0;
         for (PaperCard pc : cards) {
             if (pc.getEdition().equalsIgnoreCase(setName))
-                cnt++;
+                artCount++;
         }
-        return cnt;
+        return artCount;
     }
 
     // returns a list of all cards from their respective latest (or preferred) editions
