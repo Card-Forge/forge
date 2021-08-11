@@ -6,6 +6,8 @@ Code2=MID
 MciCode=mid
 Type=Expansion
 ScryfallCode=MID
+Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
+Prerelease=6 Boosters, 1 RareMythic+
 
 [cards]
 44 C Consider @Zezhou Chen
