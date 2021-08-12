@@ -479,7 +479,7 @@ public enum CSubmenuPreferences implements ICDoc {
                 if (artPreference == null)
                     artPreference = latestOpt;  // default, just in case
                 boolean latestArt = artPreference.equalsIgnoreCase(latestOpt);
-                boolean coreExpFilter = FModel.getMagicDb().cardArtPreferenceHasFilter();
+                boolean coreExpFilter = FModel.getMagicDb().isCoreExpansionOnlyFilterSet();
                 FModel.getMagicDb().setCardArtPreference(latestArt, coreExpFilter);
                 String preferenceOpt = FModel.getMagicDb().getCardArtPreference();
                 CSubmenuPreferences.this.prefs.setPref(uiPreferredArt, preferenceOpt);
@@ -490,7 +490,7 @@ public enum CSubmenuPreferences implements ICDoc {
         panel.setComboBox(comboBox, selectedItem);
 
         final JCheckBox coreExpFilter = this.view.getCbCardArtCoreExpansionsOnlyOpt();
-        boolean selected = FModel.getMagicDb().cardArtPreferenceHasFilter();
+        boolean selected = FModel.getMagicDb().isCoreExpansionOnlyFilterSet();
         coreExpFilter.setSelected(selected);
         coreExpFilter.addItemListener(new ItemListener() {
             @Override
