@@ -290,6 +290,10 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
 
     private void optimiseCardArtSelectionInDeckSections(Map<DeckSection, ArrayList<String>> cardsWithNoEdition) {
         StaticData data = StaticData.instance();
+        // Get current Card Art Preference Settings
+        boolean isCardArtPreferenceLatestArt = data.cardArtPreferenceIsLatest();
+        boolean cardArtPreferenceHasFilter = data.isCoreExpansionOnlyFilterSet();
+
         for(Entry<DeckSection, CardPool> part : parts.entrySet()) {
             DeckSection deckSection = part.getKey();
             if(deckSection == DeckSection.Planes || deckSection == DeckSection.Schemes || deckSection == DeckSection.Avatar)
@@ -301,35 +305,80 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
                 continue; // nothing to do here
 
             CardPool pool = part.getValue();
+            // Set options for the alternative card print search
+            boolean isExpansionTheMajorityInThePool = (pool.getTheMostFrequentEditionType() == CardEdition.Type.EXPANSION);
+            boolean isPoolModernFramed = pool.isModern();
+
             // == Get the most representative (Pivot) Edition in the Pool
             // Note: Card Art Updates (if any) will be determined based on the Pivot Edition.
-            CardEdition pivotEdition = pool.getPivotEdition();
+            CardEdition pivotEdition = pool.getPivotCardEdition(isCardArtPreferenceLatestArt);
 
             // == Inspect and Update the Pool
             Date releaseDatePivotEdition = pivotEdition.getDate();
             CardPool newPool = new CardPool();
             for (Entry<PaperCard, Integer> cp : pool) {
                 PaperCard card = cp.getKey();
-                int count = cp.getValue();
+                int totalToAddToPool = cp.getValue();
                 // A. Skip cards not requiring any update, because they add the edition specified!
                 if (!cardNamesWithNoEditionInSection.contains(card.getName())) {
-                    newPool.add(card, count);
+                    addCardToPool(newPool, card, totalToAddToPool, card.isFoil());
                     continue;
                 }
                 // B. Determine if current card requires update
                 boolean cardArtNeedsOptimisation = this.isCardArtUpdateRequired(card, releaseDatePivotEdition);
                 if (!cardArtNeedsOptimisation) {
-                    newPool.add(card, count);
+                    addCardToPool(newPool, card, totalToAddToPool, card.isFoil());
                     continue;
                 }
-                PaperCard alternativeArtCard = data.getAlternativeCardPrint(card, releaseDatePivotEdition);
-                if (alternativeArtCard == null)  // no alternative found, add original card in Pool
-                    newPool.add(card, count);
+                PaperCard alternativeCardPrint = data.getAlternativeCardPrint(card, releaseDatePivotEdition,
+                                                                              isCardArtPreferenceLatestArt,
+                                                                              cardArtPreferenceHasFilter,
+                                                                              isExpansionTheMajorityInThePool,
+                                                                              isPoolModernFramed);
+                if (alternativeCardPrint == null)  // no alternative found, add original card in Pool
+                    addCardToPool(newPool, card, totalToAddToPool, card.isFoil());
                 else
-                    newPool.add(alternativeArtCard, count);
+                    addCardToPool(newPool, alternativeCardPrint, totalToAddToPool, card.isFoil());
             }
             parts.put(deckSection, newPool);
         }
+    }
+
+    private void addCardToPool(CardPool pool, PaperCard card, int totalToAdd, boolean isFoil) {
+        StaticData data = StaticData.instance();
+        if (card.getArtIndex() != IPaperCard.NO_ART_INDEX && card.getArtIndex() != IPaperCard.DEFAULT_ART_INDEX)
+            pool.add(isFoil ? card.getFoiled() : card, totalToAdd);  // art index requested, keep that way!
+        else {
+            int artCount = data.getCardArtCount(card);
+            if (artCount > 1)
+                addAlternativeCardPrintInPoolWithMultipleArt(card, pool, totalToAdd, artCount);
+            else
+                pool.add(isFoil ? card.getFoiled() : card, totalToAdd);
+        }
+    }
+
+    private void addAlternativeCardPrintInPoolWithMultipleArt(PaperCard alternativeCardPrint, CardPool pool,
+                                                              int totalNrToAdd, int nrOfAvailableArts) {
+        StaticData data = StaticData.instance();
+
+        // distribute available card art
+        String cardName = alternativeCardPrint.getName();
+        String setCode = alternativeCardPrint.getEdition();
+        boolean isFoil = alternativeCardPrint.isFoil();
+        int cardsPerArtIndex = totalNrToAdd / nrOfAvailableArts;
+        cardsPerArtIndex = Math.max(1, cardsPerArtIndex);  // make sure is never zero
+        int restOfCardsToAdd = totalNrToAdd % nrOfAvailableArts;
+        int cardsAdded = 0;
+        PaperCard alternativeCardArt = null;
+        for (int artIndex = 1; artIndex <= nrOfAvailableArts; artIndex++){
+            alternativeCardArt = data.getOrLoadCommonCard(cardName, setCode, artIndex, isFoil);
+            cardsAdded += cardsPerArtIndex;
+            pool.add(alternativeCardArt, cardsPerArtIndex);
+            if (cardsAdded == totalNrToAdd)
+                break;
+        }
+        if (restOfCardsToAdd > 0)
+            pool.add(alternativeCardArt, restOfCardsToAdd);
     }
 
     private boolean isCardArtUpdateRequired(PaperCard card, Date referenceReleaseDate) {
@@ -347,6 +396,9 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         NOTE: the control implemented in release date also consider the case when the input PaperCard
         is exactly from the Pivot Edition. In this case, NO update will be required!
         */
+
+        if (card.getRules().isVariant())
+            return false;  // skip variant cards
         boolean isLatestCardArtPreference = StaticData.instance().cardArtPreferenceIsLatest();
         CardEdition cardEdition = StaticData.instance().getCardEdition(card.getEdition());
         if (cardEdition == null)  return false;
