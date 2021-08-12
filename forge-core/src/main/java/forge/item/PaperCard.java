@@ -309,6 +309,7 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         rarity = pc.getRarity();
     }
 
+    // FIXME: @leriomaggio - remember to get rid of this method once and for all :)
     private String retrieveCollectorNumber() {
         StaticData data = StaticData.instance();
         CardEdition edition = data.getEditions().get(this.edition);
