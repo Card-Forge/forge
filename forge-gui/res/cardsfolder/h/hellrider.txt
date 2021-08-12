@@ -4,7 +4,7 @@ Types:Creature Devil
 PT:3/3
 K:Haste
 T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | Execute$ TrigDealDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control attacks, CARDNAME deals 1 damage to the player or planeswalker it's attacking.
-SVar:TrigDealDamage:DB$DealDamage | Defined$ TriggeredDefendingPlayer | NumDmg$ 1
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ TriggeredDefender | NumDmg$ 1
 SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hellrider.jpg
 Oracle:Haste\nWhenever a creature you control attacks, Hellrider deals 1 damage to the player or planeswalker it's attacking.
