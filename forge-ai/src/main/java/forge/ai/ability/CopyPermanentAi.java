@@ -12,6 +12,7 @@ import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilCost;
 import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
@@ -35,7 +36,6 @@ import forge.game.zone.ZoneType;
 public class CopyPermanentAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
-        // TODO - I'm sure someone can do this AI better
         Card source = sa.getHostCard();
         PhaseHandler ph = aiPlayer.getGame().getPhaseHandler();
         String aiLogic = sa.getParamOrDefault("AILogic", "");
@@ -77,6 +77,13 @@ public class CopyPermanentAi extends SpellAbilityAi {
             }
         }
 
+        if (sa.costHasManaX() && sa.getSVar("X").equals("Count$xPaid")) {
+            // Set PayX here to maximum value. (Osgir)
+            final int xPay = ComputerUtilCost.getMaxXValue(sa, aiPlayer);
+
+            sa.setXManaCostPaid(xPay);
+        }
+
         if (sa.usesTargeting() && sa.hasParam("TargetingPlayer")) {
             sa.resetTargets();
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(source, sa.getParam("TargetingPlayer"), sa).get(0);
@@ -106,7 +113,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
                     return false;
                 }
         } else {
-            return this.doTriggerAINoCost(aiPlayer, sa, false);
+            return doTriggerAINoCost(aiPlayer, sa, false);
         }
     }
 

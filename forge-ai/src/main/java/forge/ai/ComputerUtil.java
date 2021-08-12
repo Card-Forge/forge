@@ -736,6 +736,7 @@ public class ComputerUtil {
         CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), activate.getController(), activate, sa);
 
         // don't bounce the card we're pumping
+        // TODO unless it can be used as a save
         typeList = ComputerUtilCost.paymentChoicesWithoutTargets(typeList, sa, ai);
 
         if (typeList.size() < amount) {
