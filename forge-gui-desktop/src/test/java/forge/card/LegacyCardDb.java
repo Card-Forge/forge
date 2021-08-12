@@ -183,8 +183,7 @@ public class LegacyCardDb {
     }
 
     public PaperCard getFoiled(PaperCard card0) {
-        // Here - I am still unsure if there should be a cache Card->Card from unfoiled to foiled, to avoid creation of N instances of single plains
-        return new PaperCard(card0.getRules(), card0.getEdition(), card0.getRarity(), card0.getArtIndex(), true);
+        return new PaperCard(card0.getRules(), card0.getEdition(), card0.getRarity(), card0.getArtIndex(), true, card0.getArtist());
     }
     
     public PaperCard getCardFromEdition(final String cardName, LegacySetPreference fromSet) {
