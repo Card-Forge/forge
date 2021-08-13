@@ -221,7 +221,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         if (loadedSections != null && !includeCardsFromUnspecifiedSet)
             return;  // deck loaded, and does not include ANY card with no specified edition: all good!
 
-        String cardArtPreference = StaticData.instance().getCardArtPreference();
+        String cardArtPreference = StaticData.instance().getCardArtPreferenceName();
         boolean smartCardArtSelection = StaticData.instance().isEnabledCardArtSmartSelection();
 
         if (lastCardArtOptimisationOptionUsed == null)  // first time here
