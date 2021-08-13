@@ -51,14 +51,14 @@ public class FightEffect extends DamageBaseEffect {
         if (fighters.size() < 2) {
             return;
         }
-        
+
         if (sa.hasParam("RememberObjects")) {
             final String remembered = sa.getParam("RememberObjects");
             for (final Object o : AbilityUtils.getDefinedObjects(host, remembered, sa)) {
                 host.addRemembered(o);
             }
         }
-        
+
         Player controller = host.getController();
         boolean isOptional = sa.hasParam("Optional");
 

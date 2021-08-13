@@ -39,6 +39,7 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Table;
 import com.google.common.eventbus.EventBus;
 
+import forge.GameCommand;
 import forge.card.CardRarity;
 import forge.card.CardStateName;
 import forge.card.CardType.Supertype;
@@ -99,6 +100,8 @@ public class Game {
     public final Phase endOfTurn;
     public final Untap untap;
     public final Phase upkeep;
+    // to execute commands for "current" phase each time state based action is checked
+    public final List<GameCommand> sbaCheckedCommandList;
     public final MagicStack stack;
     public final CostPaymentStack costPaymentStack = new CostPaymentStack();
     private final PhaseHandler phaseHandler;
@@ -117,6 +120,9 @@ public class Game {
     private Map<Player, PlayerCollection> attackedLastTurn = Maps.newHashMap();
 
     private Table<CounterType, Player, List<Pair<Card, Integer>>> countersAddedThisTurn = HashBasedTable.create();
+
+    private Map<Player, Card> topLibsCast = Maps.newHashMap();
+    private Map<Card, Integer>  facedownWhileCasting = Maps.newHashMap();
 
     private Player monarch = null;
     private Player monarchBeginTurn = null;
@@ -305,6 +311,8 @@ public class Game {
         endOfCombat = new Phase(PhaseType.COMBAT_END);
         endOfTurn = new Phase(PhaseType.END_OF_TURN);
 
+        sbaCheckedCommandList = new ArrayList<>();
+
         // update players
         view.updatePlayers(this);
 
@@ -378,6 +386,17 @@ public class Game {
     public final Phase getCleanup() {
         return cleanup;
     }
+
+    public void addSBACheckedCommand(final GameCommand c) {
+        sbaCheckedCommandList.add(c);
+    }
+    public final void runSBACheckedCommands() {
+        for (final GameCommand c : sbaCheckedCommandList) {
+            c.run();
+        }
+        sbaCheckedCommandList.clear();
+    }
+
 
     public final PhaseHandler getPhaseHandler() {
         return phaseHandler;
@@ -1101,5 +1120,40 @@ public class Game {
 
     public void clearCounterAddedThisTurn() {
         countersAddedThisTurn.clear();
+    }
+
+    public Card getTopLibForPlayer(Player P) {
+        return topLibsCast.get(P);
+    }
+    public void setTopLibsCast() {
+        for (Player p : getPlayers()) {
+            topLibsCast.put(p, p.getTopXCardsFromLibrary(1).isEmpty() ? null : p.getTopXCardsFromLibrary(1).get(0));
+        }
+    }
+    public void clearTopLibsCast(SpellAbility sa) {
+        // if nothing left to pay
+        if (sa.getActivatingPlayer().getPaidForSA() == null) {
+            topLibsCast.clear();
+            for (Card c : facedownWhileCasting.keySet()) {
+                // maybe it was discarded as payment?
+                if (c.isInZone(ZoneType.Hand)) {
+                    c.forceTurnFaceUp();
+
+                    // If an effect allows or instructs a player to reveal the card as it’s being drawn,
+                    // it’s revealed after the spell becomes cast or the ability becomes activated.
+                    final Map<AbilityKey, Object> runParams = Maps.newHashMap();
+                    runParams.put(AbilityKey.Card, c);
+                    runParams.put(AbilityKey.Number, facedownWhileCasting.get(c));
+                    runParams.put(AbilityKey.Player, this);
+                    runParams.put(AbilityKey.CanReveal, true);
+                    // need to hold trigger to clear list first
+                    getTriggerHandler().runTrigger(TriggerType.Drawn, runParams, true);
+                }
+            }
+            facedownWhileCasting.clear();
+        }
+    }
+    public void addFacedownWhileCasting(Card c, int numDrawn) {
+        facedownWhileCasting.put(c, Integer.valueOf(numDrawn));
     }
 }

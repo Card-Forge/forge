@@ -15,7 +15,7 @@ Name:Toralf's Hammer
 ManaCost:1 R
 Types:Legendary Artifact Equipment
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddAbility$ HammerDamage | Description$ Equipped creature has "{1}{R}, {T}, Unattach CARDNAME: It deals 3 damage to any target. Return CARDNAME to it owner’s hand."
-SVar:HammerDamage:AB$ DealDamage | Cost$ 1 R T Unattach<OriginalHost/Toralf's Hammer> | NumDmg$ 3 | DamageSource$ OriginalHost | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | SubAbility$ HammerCatch | SpellDescription$ ORIGINALHOST deals 1 damage to any target. Return ORIGINALHOST to its owner's hand.
+SVar:HammerDamage:AB$ DealDamage | Cost$ 1 R T Unattach<OriginalHost/Toralf's Hammer> | NumDmg$ 3 | DamageSource$ OriginalHost | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | SubAbility$ HammerCatch | SpellDescription$ ORIGINALHOST deals 3 damage to any target. Return ORIGINALHOST to its owner's hand.
 SVar:HammerCatch:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ OriginalHost
 S:Mode$ Continuous | Affected$ Card.EquippedBy+Legendary | AddPower$ 3 | Description$ Equipped creature gets +3/+0 as long as it's legendary.
 K:Equip:1 R

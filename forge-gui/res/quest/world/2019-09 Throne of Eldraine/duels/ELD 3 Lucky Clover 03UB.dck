@@ -1,0 +1,22 @@
+[metadata]
+Title=Lucky Clover
+Difficulty=hard
+Description="I know what you're thinking: 'Is this the one with the Beanstalk Giants or the one with the Faerie Guidemothers?' Well, to tell you the truth, in all this excitement, I've kinda lost track myself. But being this is a Lucky Clover, the most powerful artifact in Eldraine, you've got to ask yourself one question: 'Do I feel lucky?' Well, do you, punk?"\n-Harry Callahan, Dirty Harry
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 3 Lucky Clover 03UB
+[Main]
+2 Brazen Borrower|ELD|2
+4 Fabled Passage|ELD|1
+4 Fae of Wishes|ELD|2
+4 Foulmire Knight|ELD|2
+11 Island|ELD|2
+4 Lucky Clover|ELD
+4 Merfolk Secretkeeper|ELD|2
+2 Murderous Rider|ELD|2
+4 Queen of Ice|ELD|2
+4 Reaper of Night|ELD|2
+4 Smitten Swordmaster|ELD|2
+13 Swamp|ELD|1
+[Sideboard]
+4 Into the Story|ELD

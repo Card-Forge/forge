@@ -1,0 +1,21 @@
+[metadata]
+Title=Lucky Clover
+Difficulty=hard
+Description="I know what you're thinking: 'Is this the one with the Beanstalk Giants or the one with the Faerie Guidemothers?' Well, to tell you the truth, in all this excitement, I've kinda lost track myself. But being this is a Lucky Clover, the most powerful artifact in Eldraine, you've got to ask yourself one question: 'Do I feel lucky?' Well, do you, punk?"\n-Harry Callahan, Dirty Harry
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 3 Lucky Clover 07RG
+[Main]
+4 Beanstalk Giant|ELD|2
+2 Bonecrusher Giant|ELD|2
+4 Edgewall Innkeeper|ELD
+2 Embereth Shieldbreaker|ELD|2
+4 Fabled Passage|ELD|1
+2 Fires of Invention|ELD|1
+13 Forest|ELD|3
+4 Garenbrig Carver|ELD|2
+4 Lovestruck Beast|ELD|2
+4 Lucky Clover|ELD
+9 Mountain|ELD|4
+4 Rimrock Knight|ELD|2
+4 Tuinvale Treefolk|ELD|2

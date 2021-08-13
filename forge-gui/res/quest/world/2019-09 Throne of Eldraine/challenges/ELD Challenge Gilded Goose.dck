@@ -1,0 +1,21 @@
+[quest]
+id=ELD Challenge: Gilded Goose
+OpponentName=Gilded Goose
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=The Great Henge
+HumanExtras=
+[metadata]
+Title=Gilded Goose
+Difficulty=hard
+Description=The geese start with the Great Henge.
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+Name=ELD Challenge: Gilded Goose
+[Main]
+20 Forest|ELD|3
+34 Gilded Goose|ELD|2
+6 The Great Henge|ELD

@@ -1,0 +1,20 @@
+[quest]
+id=ELD Challenge: Clockwork Servant
+OpponentName=The Servants
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=Improbable Alliance
+HumanExtras=
+[metadata]
+Title=Clockwork Servant
+Difficulty=medium
+Description=The servants start with an Improbable Alliance.
+Icon=Dungeon Crawling Colorless.jpg
+Deck Type=constructed
+Name=ELD Challenge: Clockwork Servant
+[Main]
+30 Clockwork Servant|ELD
+30 Mountain|ELD|3

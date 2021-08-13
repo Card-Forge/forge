@@ -1,0 +1,24 @@
+[metadata]
+Title=Commander: Korvold
+Difficulty=hard
+Description=Transformed at his own wedding, he promptly ate the banquet, the gifts, and the guests.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 3 Commander: Korvold, Fae-Cursed King
+[Main]
+4 Bake into a Pie|ELD
+4 Chittering Witch|ELD
+4 Fabled Passage|ELD|1
+8 Forest|ELD|2
+4 Gilded Goose|ELD|1
+4 Korvold, Fae-Cursed King|ELD
+4 Mountain|ELD|1
+2 Piper of the Swarm|ELD|1
+2 Rankle, Master of Pranks|ELD|1
+4 Savvy Hunter|ELD
+4 Sorcerer's Broom|ELD
+12 Swamp|ELD|1
+4 Trail of Crumbs|ELD
+[Sideboard]
+4 Cauldron Familiar|ELD
+4 Witch's Oven|ELD

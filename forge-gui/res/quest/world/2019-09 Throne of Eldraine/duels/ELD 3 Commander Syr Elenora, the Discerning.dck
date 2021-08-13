@@ -1,0 +1,23 @@
+[metadata]
+Title=Commander: Syr Elenora
+Difficulty=hard
+Description=Vantress knights believe that knowledge is the highest virtue. Knowledge directs the proper application of every other virtue in varied circumstances and helps to prevent problems from worsening into deeper problems.
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+Name=ELD 3 Commander: Syr Elenora, the Discerning
+[Main]
+4 Clockwork Servant|ELD
+4 Fae of Wishes|ELD|1
+4 Faerie Formation|ELD
+4 Faerie Vandal|ELD
+2 Gadwick, the Wizened|ELD|1
+4 Heraldic Banner|ELD
+26 Island|ELD|1
+4 Syr Elenora, the Discerning|ELD
+4 Turn into a Pumpkin|ELD
+4 Witching Well|ELD
+[Sideboard]
+1 Charmed Sleep|ELD
+1 Frogify|ELD
+1 Scalding Cauldron|ELD
+1 So Tiny|ELD

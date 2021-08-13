@@ -155,7 +155,6 @@ public class CostPartMana extends CostPart {
 
     @Override
     public boolean payAsDecided(Player payer, PaymentDecision pd, SpellAbility sa) {
-        // TODO Auto-generated method stub
         sa.clearManaPaid();
 
         // decision not used here, the whole payment is interactive!

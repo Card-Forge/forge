@@ -1229,7 +1229,7 @@ public class GameAction {
                     }
                     // Rule 704.5g - Destroy due to lethal damage
                     // Rule 704.5h - Destroy due to deathtouch
-                    else if (c.getDamage() > 0 && (c.getLethal() <= c.getDamage() || c.hasBeenDealtDeathtouchDamage())) {
+                    else if (c.hasBeenDealtDeathtouchDamage() || (c.getDamage() > 0 && c.getLethal() <= c.getDamage())) {
                         if (desCreats == null) {
                             desCreats = new CardCollection();
                         }
@@ -1371,6 +1371,9 @@ public class GameAction {
         if (!refreeze) {
             game.getStack().unfreezeStack();
         }
+
+        // Run all commands that are queued to run after state based actions are checked
+        game.runSBACheckedCommands();
     }
 
     private boolean stateBasedAction_Saga(Card c, CardZoneTable table) {

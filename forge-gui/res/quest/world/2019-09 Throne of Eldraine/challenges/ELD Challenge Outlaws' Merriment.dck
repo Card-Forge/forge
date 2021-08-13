@@ -1,0 +1,20 @@
+[quest]
+id=ELD Challenge: Outlaws' Merriment
+OpponentName=The Outlaws
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=Outlaws' Merriment
+HumanExtras=
+[metadata]
+Title=Outlaws' Merriment
+Difficulty=very hard
+Description=The Outlaws start with Merriment.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD Challenge: Outlaws' Merriment
+[Main]
+30 Outlaws' Merriment|ELD
+30 Wind-Scarred Crag|ELD

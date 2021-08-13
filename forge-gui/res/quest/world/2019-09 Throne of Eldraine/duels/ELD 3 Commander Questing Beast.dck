@@ -1,0 +1,20 @@
+[metadata]
+Title=Commander: Questing Beast
+Difficulty=hard
+Description=At the edge of the trees stalked a shadow with three long necks and three faces, one angry, one solemn, and one laughing.\n"The Questing Beast!" Elowen cried. "I never thought I'd see it for myself!"\n-Throne of Eldraine by Kate Elliott
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+Name=ELD 3 Commander: Questing Beast
+[Main]
+4 Clockwork Servant|ELD
+26 Forest|ELD|2
+2 Keeper of Fables|ELD
+4 Lovestruck Beast|ELD|1
+2 Once Upon a Time|ELD|1
+4 Outmuscle|ELD
+4 Questing Beast|ELD|2
+2 Return of the Wildspeaker|ELD|1
+4 Stonecoil Serpent|ELD|1
+2 The Great Henge|ELD|1
+4 Wildborn Preserver|ELD|1
+2 Yorvo, Lord of Garenbrig|ELD|1

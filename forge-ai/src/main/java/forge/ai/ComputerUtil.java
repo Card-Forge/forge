@@ -736,6 +736,7 @@ public class ComputerUtil {
         CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), activate.getController(), activate, sa);
 
         // don't bounce the card we're pumping
+        // TODO unless it can be used as a save
         typeList = ComputerUtilCost.paymentChoicesWithoutTargets(typeList, sa, ai);
 
         if (typeList.size() < amount) {
@@ -2066,7 +2067,7 @@ public class ComputerUtil {
     // Computer mulligans if there are no cards with converted mana cost of 0 in its hand
     public static boolean wantMulligan(Player ai, int cardsToReturn) {
         final CardCollectionView handList = ai.getCardsIn(ZoneType.Hand);
-        return scoreHand(handList, ai, cardsToReturn) <= 0;
+        return !handList.isEmpty() && scoreHand(handList, ai, cardsToReturn) <= 0;
     }
 
     public static CardCollection getPartialParisCandidates(Player ai) {

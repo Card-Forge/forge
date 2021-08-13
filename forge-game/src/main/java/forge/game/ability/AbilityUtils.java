@@ -2456,11 +2456,11 @@ public class AbilityUtils {
                 partyTypes.removeAll(chosenParty.keySet());
 
                 // Here I'm left with just the party types that I haven't selected.
-                for(Card multi : multityped.keySet()) {
+                for (Card multi : multityped.keySet()) {
                     Set<String> types = multityped.get(multi);
                     types.retainAll(partyTypes);
 
-                    for(String type : types) {
+                    for (String type : types) {
                         chosenParty.put(type, multi);
                         partyTypes.remove(type);
                         break;

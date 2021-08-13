@@ -1,0 +1,21 @@
+[metadata]
+Title=Sorcerer's Broom
+Difficulty=hard
+Description="Reynald wished for an army to sweep away his enemies. The fae king smiled."\n-Beyond the Great Henge
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+Name=ELD 3 Sorcerer's Broom - Black
+[Main]
+2 Ayara, First of Locthwain|ELD|1
+4 Bake into a Pie|ELD
+4 Cauldron Familiar|ELD
+4 Chittering Witch|ELD
+4 Fabled Passage|ELD|1
+4 Foreboding Fruit|ELD
+2 Giant's Skewer|ELD
+4 Golden Egg|ELD
+4 Rankle, Master of Pranks|ELD|1
+4 Sorcerer's Broom|ELD
+24 Swamp|ELD|3
+[Sideboard]
+4 Witch's Oven|ELD

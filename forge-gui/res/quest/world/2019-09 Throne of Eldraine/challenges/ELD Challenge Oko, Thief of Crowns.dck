@@ -1,0 +1,21 @@
+[quest]
+id=ELD Challenge: Oko, Thief of Crowns
+OpponentName=Oko
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Title=Oko, Thief of Crowns
+Difficulty=medium
+Description="Oh deer!"\n-Oko
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD Challenge: Oko, Thief of Crowns
+[Main]
+20 Golden Egg|ELD
+20 Oko, Thief of Crowns|ELD|2
+20 Thornwood Falls|ELD

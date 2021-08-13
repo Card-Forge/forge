@@ -873,7 +873,7 @@ public final class StaticAbilityContinuous {
                 }
             }
 
-            if (mayLookAt != null) {
+            if (mayLookAt != null && (!affectedCard.getOwner().getTopXCardsFromLibrary(1).contains(affectedCard) || game.getTopLibForPlayer(affectedCard.getOwner()) == null || game.getTopLibForPlayer(affectedCard.getOwner()) == affectedCard)) {
                 affectedCard.addMayLookAt(se.getTimestamp(), mayLookAt);
             }
 

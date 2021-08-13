@@ -477,7 +477,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         }
         // we assume that changes are already correctly ordered (taken from TreeMap.values())
         for (final CardChangedType ct : changedCardTypes) {
-            if(null == newType)
+            if (null == newType)
                 newType = new CardType(CardType.this);
 
             if (ct.isRemoveCardTypes()) {

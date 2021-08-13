@@ -1219,20 +1219,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         return false;
     }
 
-    public final boolean canDraw() {
-        if (hasKeyword("You can't draw cards.")) {
-            return false;
-        }
-        if (hasKeyword("You can't draw more than one card each turn.")) {
-            return numDrawnThisTurn < 1;
-        }
-        return true;
-    }
-
-    public final CardCollectionView drawCard() {
-        return drawCards(1, null);
-    }
-
     public void surveil(int num, SpellAbility cause, CardZoneTable table) {
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
         repParams.put(AbilityKey.Source, cause);
@@ -1300,12 +1286,25 @@ public class Player extends GameEntity implements Comparable<Player> {
         return !getZone(ZoneType.Hand).isEmpty();
     }
 
+    public final boolean canDraw() {
+        if (hasKeyword("You can't draw cards.")) {
+            return false;
+        }
+        if (hasKeyword("You can't draw more than one card each turn.")) {
+            return numDrawnThisTurn < 1;
+        }
+        return true;
+    }
+
+    public final CardCollectionView drawCard() {
+        return drawCards(1, null);
+    }
+
     public final CardCollectionView drawCards(final int n) {
         return drawCards(n, null);
     }
     public final CardCollectionView drawCards(final int n, SpellAbility cause) {
         final CardCollection drawn = new CardCollection();
-        final Map<Player, CardCollection> toReveal = Maps.newHashMap();
 
         // Replacement effects
         final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromAffected(this);
@@ -1317,6 +1316,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         // always allow drawing cards before the game actually starts (e.g. Maralen of the Mornsong Avatar)
         final boolean gameStarted = game.getAge().ordinal() > GameStage.Mulligan.ordinal();
+        final Map<Player, CardCollection> toReveal = Maps.newHashMap();
 
         for (int i = 0; i < n; i++) {
             if (gameStarted && !canDraw()) {
@@ -1358,7 +1358,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
 
             List<Player> pList = Lists.newArrayList();
-
             for (Player p : getAllOtherPlayers()) {
                 if (c.mayPlayerLook(p)) {
                     pList.add(p);
@@ -1385,8 +1384,16 @@ public class Player extends GameEntity implements Comparable<Player> {
                 }
                 view.updateNumDrawnThisTurn(this);
 
-                // Run triggers
                 final Map<AbilityKey, Object> runParams = Maps.newHashMap();
+
+                // CR 121.8 card was drawn as part of another sa (e.g. paying with Chromantic Sphere), hide it temporarily
+                if (game.getTopLibForPlayer(this) != null && getPaidForSA() != null && cause != null && getPaidForSA() != cause.getRootAbility()) {
+                    c.turnFaceDown();
+                    game.addFacedownWhileCasting(c, numDrawnThisTurn);
+                    runParams.put(AbilityKey.CanReveal, false);
+                }
+
+                // Run triggers
                 runParams.put(AbilityKey.Card, c);
                 runParams.put(AbilityKey.Number, numDrawnThisTurn);
                 runParams.put(AbilityKey.Player, this);
@@ -3164,7 +3171,11 @@ public class Player extends GameEntity implements Comparable<Player> {
         paidForStack.push(sa);
     }
     public void popPaidForSA() {
-        paidForStack.pop();
+        // it could be empty if spell couldn't be cast
+        paidForStack.poll();
+    }
+    public void clearPaidForSA() {
+        paidForStack.clear();
     }
 
     public boolean isMonarch() {

@@ -43,6 +43,7 @@ public class TextRenderer {
         symbolLookup.put("2/B", FSkinImage.MANA_2B);
         symbolLookup.put("2/R", FSkinImage.MANA_2R);
         symbolLookup.put("2/G", FSkinImage.MANA_2G);
+        symbolLookup.put("P", FSkinImage.MANA_PHRYX);
         symbolLookup.put("P/W", FSkinImage.MANA_PHRYX_W);
         symbolLookup.put("P/U", FSkinImage.MANA_PHRYX_U);
         symbolLookup.put("P/B", FSkinImage.MANA_PHRYX_B);

@@ -1212,6 +1212,8 @@ public abstract class GameState {
         p.setLandsPlayedThisTurn(landsPlayed);
         p.setLandsPlayedLastTurn(landsPlayedLastTurn);
 
+        p.clearPaidForSA();
+
         for (Entry<ZoneType, CardCollectionView> kv : playerCards.entrySet()) {
             PlayerZone zone = p.getZone(kv.getKey());
             if (kv.getKey() == ZoneType.Battlefield) {

@@ -602,7 +602,7 @@ public class Combat {
         for (Card pw : getDefendingPlaneswalkers()) {
             if (pw.equals(c)) {
                 Multimap<GameEntity, AttackingBand> attackerBuffer = ArrayListMultimap.create();
-                Collection<AttackingBand> bands = attackedByBands.get(pw);
+                Collection<AttackingBand> bands = attackedByBands.get(c);
                 for (AttackingBand abPW : bands) {
                     unregisterDefender(c, abPW);
                     // Rule 506.4c workaround to keep creatures in combat
@@ -613,6 +613,7 @@ public class Combat {
                 }
                 bands.clear();
                 attackedByBands.putAll(attackerBuffer);
+                break;
             }
         }
 

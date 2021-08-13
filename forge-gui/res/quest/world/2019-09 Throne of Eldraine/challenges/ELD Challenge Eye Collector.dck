@@ -1,0 +1,20 @@
+[quest]
+id=ELD Challenge: Eye Collector
+OpponentName=The Collectors
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Title=Eye Collector
+Difficulty=easy
+Description="Lord Rankle will see you now--all he asks is a small token of tribute."
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+Name=ELD Challenge: Eye Collector
+[Main]
+40 Eye Collector|ELD
+20 Swamp|ELD|4

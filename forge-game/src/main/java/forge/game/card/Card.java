@@ -2005,7 +2005,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 } else if (keyword.startsWith("Strive") || keyword.startsWith("Escalate")
                         || keyword.startsWith("ETBReplacement")
                         || keyword.startsWith("Affinity")
-                        || keyword.equals("CARDNAME enters the battlefield tapped.")
                         || keyword.startsWith("UpkeepCost")) {
                 } else if (keyword.equals("Provoke") || keyword.equals("Ingest") || keyword.equals("Unleash")
                         || keyword.equals("Soulbond") || keyword.equals("Partner") || keyword.equals("Retrace")
@@ -3453,7 +3452,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (changedCardTypes.isEmpty() && changedCardTypesCharacterDefining.isEmpty()) {
             return state.getType();
         }
-        return state.getType().getTypeWithChanges(getChangedCardTypes());
+        // CR 506.4 attacked planeswalkers leave combat
+        boolean checkCombat = state.getType().isPlaneswalker() && game.getCombat() != null && !game.getCombat().getAttackersOf(this).isEmpty();
+        CardTypeView types = state.getType().getTypeWithChanges(getChangedCardTypes());
+        if (checkCombat && !types.isPlaneswalker()) {
+            game.getCombat().removeFromCombat(this);
+        }
+        return types;
     }
 
     public Iterable<CardChangedType> getChangedCardTypes() {
@@ -3521,7 +3526,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             final boolean removeLandTypes, final boolean removeCreatureTypes, final boolean removeArtifactTypes,
             final boolean removeEnchantmentTypes,
             final long timestamp, final boolean updateView, final boolean cda) {
-
         (cda ? changedCardTypesCharacterDefining : changedCardTypes).put(timestamp, new CardChangedType(
                 addType, removeType, removeSuperTypes, removeCardTypes, removeSubTypes,
                 removeLandTypes, removeCreatureTypes, removeArtifactTypes, removeEnchantmentTypes));
@@ -5188,7 +5192,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     // This is used by the AI to forecast an effect (so it must not change the game state)
     @Override
     public final int staticReplaceDamage(final int damage, final Card source, final boolean isCombat) {
-
         int restDamage = damage;
         for (Card c : getGame().getCardsIn(ZoneType.Battlefield)) {
             if (c.getName().equals("Sulfuric Vapors")) {
@@ -5264,8 +5267,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     /**
-     * This function handles damage after replacement and prevention effects are
-     * applied.
+     * This function handles damage after replacement and prevention effects are applied.
      */
     @Override
     public final int addDamageAfterPrevention(final int damageIn, final Card source, final boolean isCombat, GameEntityCounterTable counterTable) {

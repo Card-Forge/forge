@@ -1,5 +1,8 @@
 #Add one announcement per line
+The Throne of Eldraine quest world is the largest and most meticulously developed quest world to date, combining fascinating fairytales and interesting interactions. If you've never baked a pie into a pie, have you really played Magic?
 Get in the discord if you aren't yet. https://discord.gg/3v9JCVr
+New Graphic Options preference: display full card scan or cropped art with everything else rendered.
+Most cards from Jumpstart:Historic Horizons are now available for brewing. J:HH limited play experience is WIP.
 Custom cards can now be loaded from your user profile. Enable it your preferences.
 Fat packs and Booster Box count are now set in the Edition file for easier customization
 *** Android 7 & 8 support is now deprecated. Support will be dropped in an upcoming release. ***
