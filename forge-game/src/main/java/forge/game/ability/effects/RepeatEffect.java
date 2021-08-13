@@ -17,7 +17,7 @@ public class RepeatEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(final SpellAbility sa) {
         return "Repeat something. Somebody should really write a better StackDescription!";
-    } // end repeatStackDescription()
+    }
 
     @Override
     public void resolve(final SpellAbility sa) {

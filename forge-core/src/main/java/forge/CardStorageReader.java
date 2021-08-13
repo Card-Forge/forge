@@ -310,7 +310,7 @@ public class CardStorageReader {
 
     private void executeLoadTask(final Collection<CardRules> result, final List<Callable<List<CardRules>>> tasks, final CountDownLatch cdl) {
         try {
-            if ( useThreadPool ) {
+            if (useThreadPool) {
                 final ExecutorService executor = ThreadUtil.getComputingPool(0.5f);
                 final List<Future<List<CardRules>>> parts = executor.invokeAll(tasks);
                 executor.shutdown();
