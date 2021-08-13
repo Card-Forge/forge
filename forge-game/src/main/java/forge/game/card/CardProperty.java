@@ -1762,6 +1762,16 @@ public class CardProperty {
                 }
             }
             return false;
+        } else if (property.startsWith("Triggered")) {
+            if (spellAbility instanceof SpellAbility) {
+                final String key = property.substring(9);
+                CardCollection cc = (CardCollection) ((SpellAbility)spellAbility).getTriggeringObject(AbilityKey.fromString(key));
+                if (cc == null || !cc.contains(card)) {
+                    return false;
+                }
+            } else {
+                return false;
+            }
         } else if (property.startsWith("NotTriggered")) {
             final String key = property.substring("NotTriggered".length());
             if (spellAbility instanceof SpellAbility) {
