@@ -571,9 +571,14 @@ public class StaticData {
         this.customCards.setCardArtPreference(latestArt, coreExpansionOnly);
     }
 
-    public String getCardArtPreference(){
+    public String getCardArtPreferenceName(){
         return this.commonCards.getCardArtPreference().toString();
     }
+
+    public CardDb.CardArtPreference getCardArtPreference(){
+        return this.commonCards.getCardArtPreference();
+    }
+
 
     public boolean isCoreExpansionOnlyFilterSet(){ return this.commonCards.getCardArtPreference().filterSets; }
 

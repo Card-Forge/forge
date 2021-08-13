@@ -481,7 +481,7 @@ public enum CSubmenuPreferences implements ICDoc {
                 boolean latestArt = artPreference.equalsIgnoreCase(latestOpt);
                 boolean coreExpFilter = FModel.getMagicDb().isCoreExpansionOnlyFilterSet();
                 FModel.getMagicDb().setCardArtPreference(latestArt, coreExpFilter);
-                String preferenceOpt = FModel.getMagicDb().getCardArtPreference();
+                String preferenceOpt = FModel.getMagicDb().getCardArtPreferenceName();
                 CSubmenuPreferences.this.prefs.setPref(uiPreferredArt, preferenceOpt);
                 CSubmenuPreferences.this.prefs.save();
             }
@@ -498,7 +498,7 @@ public enum CSubmenuPreferences implements ICDoc {
                 boolean latestArt = FModel.getMagicDb().cardArtPreferenceIsLatest();
                 boolean coreExpFilter = e.getStateChange() == ItemEvent.SELECTED;
                 FModel.getMagicDb().setCardArtPreference(latestArt, coreExpFilter);
-                String preferenceOpt = FModel.getMagicDb().getCardArtPreference();
+                String preferenceOpt = FModel.getMagicDb().getCardArtPreferenceName();
                 CSubmenuPreferences.this.prefs.setPref(uiPreferredArt, preferenceOpt);
                 CSubmenuPreferences.this.prefs.save();
             }
