@@ -17,29 +17,10 @@
  */
 package forge.itemmanager;
 
-import java.awt.Component;
-import java.awt.Toolkit;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.util.*;
-import java.util.Map.Entry;
-
-import javax.swing.JMenu;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.KeyStroke;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.PopupMenuEvent;
-import javax.swing.event.PopupMenuListener;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.gui.GuiUtils;
 import forge.gui.UiCommand;
 import forge.item.InventoryItem;
@@ -52,20 +33,27 @@ import forge.itemmanager.views.ItemView;
 import forge.localinstance.skin.FSkinProp;
 import forge.screens.deckeditor.views.VCardCatalog;
 import forge.screens.match.controllers.CDetailPicture;
-import forge.toolbox.ContextMenuBuilder;
-import forge.toolbox.FComboBox;
-import forge.toolbox.FLabel;
-import forge.toolbox.FSkin;
+import forge.toolbox.*;
 import forge.toolbox.FSkin.Colors;
 import forge.toolbox.FSkin.SkinIcon;
 import forge.toolbox.FSkin.SkinnedPanel;
-import forge.toolbox.FTextField;
-import forge.toolbox.LayoutHelper;
 import forge.util.Aggregates;
 import forge.util.ItemPool;
 import forge.util.Localizer;
 import forge.util.ReflectionUtil;
 import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
+import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.util.List;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * ItemManager.
@@ -1117,7 +1105,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
      * @return true if the editor is in "unique item names only" mode.
      */
     public boolean getWantUnique() {
-        return this.wantUnique;
+        return this.wantUnique && !this.alwaysNonUnique;
     }
 
     /**
