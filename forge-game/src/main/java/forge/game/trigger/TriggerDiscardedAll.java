@@ -5,6 +5,7 @@ import java.util.Map;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardLists;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
 
@@ -22,6 +23,9 @@ public class TriggerDiscardedAll extends Trigger {
         if (!matchesValidParam("ValidCause", runParams.get(AbilityKey.Cause))) {
             return false;
         }
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Cards))) {
+            return false;
+        }
 
         if (hasParam("FirstTime")) {
             if (!(boolean) runParams.get(AbilityKey.FirstTime)) {
@@ -33,7 +37,11 @@ public class TriggerDiscardedAll extends Trigger {
 
     @Override
     public void setTriggeringObjects(SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        final CardCollection cards = (CardCollection) runParams.get(AbilityKey.Cards);
+        CardCollection cards = (CardCollection) runParams.get(AbilityKey.Cards);
+
+        if (hasParam("ValidCard")) {
+            cards = CardLists.getValidCards(cards, getParam("ValidCard"), getHostCard().getController(), getHostCard(), this);
+        }
 
         sa.setTriggeringObject(AbilityKey.Cards, cards);
         sa.setTriggeringObject(AbilityKey.Amount, cards.size());

@@ -234,9 +234,6 @@ public class PumpEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         final long timestamp = game.getNextTimestamp();
 
-        String pumpForget = null;
-        String pumpImprint = null;
-
         List<String> keywords = Lists.newArrayList();
         if (sa.hasParam("KW")) {
             keywords.addAll(Arrays.asList(sa.getParam("KW").split(" & ")));
@@ -324,10 +321,6 @@ public class PumpEffect extends SpellAbilityEffect {
             }
         }
 
-        if (sa.hasParam("ForgetObjects")) {
-            pumpForget = sa.getParam("ForgetObjects");
-        }
-
         if (sa.hasParam("NoteCardsFor")) {
             for (final Card c : AbilityUtils.getDefinedCards(host, sa.getParam("NoteCards"), sa)) {
                 for (Player p : tgtPlayers) {
@@ -336,17 +329,14 @@ public class PumpEffect extends SpellAbilityEffect {
             }
         }
 
-        if (pumpForget != null) {
-            for (final Object o : AbilityUtils.getDefinedObjects(host, pumpForget, sa)) {
+        if (sa.hasParam("ForgetObjects")) {
+            for (final Object o : AbilityUtils.getDefinedObjects(host, sa.getParam("ForgetObjects"), sa)) {
                 host.removeRemembered(o);
             }
         }
-        if (sa.hasParam("ImprintCards")) {
-            pumpImprint = sa.getParam("ImprintCards");
-        }
 
-        if (pumpImprint != null) {
-            for (final Card c : AbilityUtils.getDefinedCards(host, pumpImprint, sa)) {
+        if (sa.hasParam("ImprintCards")) {
+            for (final Card c : AbilityUtils.getDefinedCards(host, sa.getParam("ImprintCards"), sa)) {
                 host.addImprintedCard(c);
             }
         }

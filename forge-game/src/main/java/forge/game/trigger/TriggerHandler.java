@@ -560,13 +560,6 @@ public class TriggerHandler {
             host.addRemembered(triggeredCard);
         }
 
-        if (regtrig.hasParam("RememberTriggeringCards")) {
-            CardCollection triggeringCards = ((CardCollection) sa.getTriggeringObject(AbilityKey.Cards));
-            for (Card c : triggeringCards) {
-                host.addRemembered(c);
-            }
-        }
-
         if (regtrig.hasParam("RememberKey")) {
             host.addRemembered(runParams.get(AbilityKey.fromString(regtrig.getParam("RememberKey"))));
         }
