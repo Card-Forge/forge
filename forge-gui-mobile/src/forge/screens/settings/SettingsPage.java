@@ -450,6 +450,11 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     }
                 },
                 4);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_SMART_CARD_ART,
+                        localizer.getMessage("lblSmartCardArtOpt"),
+                        localizer.getMessage("nlSmartCardArtOpt") + "\n"
+                                + localizer.getMessage("nlSmartCardArtOptNote")),
+                4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_FOIL_EFFECT,
                 localizer.getMessage("cbDisplayFoil"),
                 localizer.getMessage("nlDisplayFoil")),
