@@ -59,32 +59,6 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
 
         boolean removeAll = sa.hasParam("RemoveAllAbilities");
 
-        if (sa.hasParam("OverwriteTypes")) {
-            removeSuperTypes = true;
-            removeCardTypes = true;
-            removeSubTypes = true;
-            removeLandTypes = true;
-            removeCreatureTypes = true;
-            removeArtifactTypes = true;
-            removeEnchantmentTypes = true;
-        }
-
-        if (sa.hasParam("KeepSupertypes")) {
-            removeSuperTypes = false;
-        }
-
-        if (sa.hasParam("KeepCardTypes")) {
-            removeCardTypes = false;
-        }
-
-        if (sa.hasParam("KeepSubtypes")) {
-            removeSubTypes = false;
-            removeLandTypes = false;
-            removeCreatureTypes = false;
-            removeArtifactTypes = false;
-            removeEnchantmentTypes = false;
-        }
-
         if (sa.hasParam("RemoveSuperTypes")) {
             removeSuperTypes = true;
         }

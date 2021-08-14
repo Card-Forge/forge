@@ -26,7 +26,6 @@ import forge.card.*;
 import forge.card.CardDb.CardArtPreference;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
-import forge.game.*;
 import forge.game.CardTraitBase;
 import forge.game.Direction;
 import forge.game.EvenOdd;
@@ -1438,7 +1437,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (newValue <= 0) {
             removeCounterTimestamp(counterType);
         } else {
-            addCounterTimestamp(counterType);
+            if (addCounterTimestamp(counterType)) {
+                updateAbilityTextForView();
+            }
         }
         if (table != null) {
             table.put(source, this, counterType, addAmount);
@@ -1450,6 +1451,22 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return addCounterTimestamp(counterType, true);
     }
     public boolean addCounterTimestamp(CounterType counterType, boolean updateView) {
+        if (counterType.is(CounterEnumType.MANABOND)) {
+            removeCounterTimestamp(counterType);
+
+            long timestamp = game.getNextTimestamp();
+            counterTypeTimestamps.put(counterType, timestamp);
+            // becomes land in instead of other card types
+            addChangedCardTypes(new CardType(ImmutableList.of("Land"), false), null, false, true, true, false, false, false, false, timestamp, updateView, false);
+
+            String abStr = "AB$ ManaReflected | Cost$ T | Valid$ Defined.Self | ColorOrType$ Color | ReflectProperty$ Is | SpellDescription$ Add one mana of any of this card's colors.";
+
+            SpellAbility sa = AbilityFactory.getAbility(abStr, this);
+            sa.setIntrinsic(false);
+
+            addChangedCardTraits(ImmutableList.of(sa), null, null, null, null, true, false, false, timestamp);
+            return true;
+        }
         if (!counterType.isKeywordCounter()) {
             return false;
         }
@@ -1467,6 +1484,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public boolean removeCounterTimestamp(CounterType counterType, boolean updateView) {
         Long old = counterTypeTimestamps.remove(counterType);
         if (old != null) {
+            removeChangedCardTypes(old, updateView);
+            removeChangedCardTraits(old);
             removeChangedCardKeywords(old, updateView);
         }
         return old != null;
@@ -1488,7 +1507,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         view.updateCounters(this);
 
         if (newValue <= 0) {
-            this.removeCounterTimestamp(counterName);
+            if (removeCounterTimestamp(counterName)) {
+                updateAbilityTextForView();
+            }
         }
 
         //fire card stats changed event if p/t bonuses or loyalty changed from subtracted counters
@@ -1529,6 +1550,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
         if (changed) {
             updateKeywords();
+            updateAbilityTextForView();
         }
     }
 
@@ -1546,6 +1568,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
         if (changed) {
             updateKeywords();
+            updateAbilityTextForView();
         }
     }
 
