@@ -4,7 +4,7 @@ Types:Creature Goblin Warrior
 PT:4/1
 K:CARDNAME can't block.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigClash | TriggerDescription$ When CARDNAME enters the battlefield, clash with an opponent. If you win, put a +1/+1 counter on CARDNAME.
-SVar:TrigClash:DB$Clash | WinSubAbility$ DBPutCounter
-SVar:DBPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigClash:DB$ Clash | WinSubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bog_hoodlums.jpg
 Oracle:Bog Hoodlums can't block.\nWhen Bog Hoodlums enters the battlefield, clash with an opponent. If you win, put a +1/+1 counter on Bog Hoodlums. (Each clashing player reveals the top card of their library, then puts that card on the top or bottom. A player wins if their card had a higher mana value.)

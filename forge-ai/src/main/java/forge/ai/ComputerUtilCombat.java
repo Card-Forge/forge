@@ -1264,8 +1264,9 @@ public class ComputerUtilCombat {
                 continue;
             }
 
+            sa.setActivatingPlayer(source.getController());
+
             if (sa.hasParam("Cost")) {
-                sa.setActivatingPlayer(source.getController());
                 if (!CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa)) {
                     continue;
                 }
