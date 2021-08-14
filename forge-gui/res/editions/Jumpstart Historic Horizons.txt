@@ -788,6 +788,11 @@ ScryfallCode=J21
 780 C Tranquil Thicket
 781 C Unknown Shores
 782 C Wind-Scarred Crag
+783 L Plains
+784 L Island
+785 L Swamp
+786 L Mountain
+787 L Forest
 
 [tokens]
 u_8_8_kraken

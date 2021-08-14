@@ -12,4 +12,4 @@ ScryfallCode=PMPS08
 3 R Swamp @John Avon
 4 R Mountain @John Avon
 5 R Forest @John Avon
-a1%202007 R Jaya Ballard, Task Mage @Matt Cavotta
+A1 R Jaya Ballard, Task Mage @Matt Cavotta

@@ -6,7 +6,7 @@ T:Mode$ Phase | Phase$ Upkeep | CheckSVar$ X | SVarCompare$ GE1 | TriggerZones$ 
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you gain life equal to its toughness.
 SVar:TrigGainLife:DB$GainLife | Defined$ TriggeredCardController | LifeAmount$ Y
-SVar:X:Count$Controller$LifeLostLastTurn
+SVar:X:PlayerCountPropertyYou$LifeLostLastTurn
 SVar:Y:TriggeredCard$CardToughness
 SVar:Picture:http://www.wizards.com/global/images/magic/general/paladin_of_atonement.jpg
 Oracle:At the beginning of each upkeep, if you lost life last turn, put a +1/+1 counter on Paladin of Atonement.\nWhen Paladin of Atonement dies, you gain life equal to its toughness.

@@ -314,14 +314,14 @@ public abstract class GameState {
             } else if (c.getCurrentStateName().equals(CardStateName.Modal)) {
                 newText.append("|Modal");
             }
-            if (c.isAttachedToEntity()) {
-                newText.append("|AttachedTo:").append(c.getEntityAttachedTo().getId());
-            }
+
             if (c.getPlayerAttachedTo() != null) {
                 // TODO: improve this for game states with more than two players
                 newText.append("|EnchantingPlayer:");
                 Player p = c.getPlayerAttachedTo();
                 newText.append(p.getController().isAI() ? "AI" : "HUMAN");
+            } else if (c.isAttachedToEntity()) {
+                newText.append("|AttachedTo:").append(c.getEntityAttachedTo().getId());
             }
 
             if (c.getDamage() > 0) {
