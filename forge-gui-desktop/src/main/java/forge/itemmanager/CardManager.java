@@ -70,7 +70,7 @@ public class CardManager extends ItemManager<PaperCard> {
             ListMultimap<CardEdition, Entry<PaperCard, Integer>> entriesByEdition = Multimaps.newListMultimap(new HashMap<>(), CollectionSuppliers.arrayLists());
             for (Entry<PaperCard, Integer> entry : entries) {
                 CardEdition ed = StaticData.instance().getCardEdition(entry.getKey().getEdition());
-                if (ed != null && StaticData.instance().getCardArtPreference().accept(ed))
+                if (ed != null)
                     entriesByEdition.put(ed, entry);
             }
             if (entriesByEdition.size() == 0)
@@ -102,10 +102,9 @@ public class CardManager extends ItemManager<PaperCard> {
                                                             List<CardEdition> acceptedEditions) {
         // Use standard sort + index, for better performance!
         Collections.sort(acceptedEditions);
-        int selectionIndex = 0;
         if (StaticData.instance().cardArtPreferenceIsLatest())
-            selectionIndex = acceptedEditions.size()-1;
-        CardEdition uniqueEdition = acceptedEditions.get(selectionIndex);
+            Collections.reverse(acceptedEditions);
+        CardEdition uniqueEdition = acceptedEditions.get(0);
 
         // These are now the entries to add to Cards Map
         List<Entry<PaperCard, Integer>> uniqueEntries = entriesByEdition.get(uniqueEdition);
@@ -122,13 +121,7 @@ public class CardManager extends ItemManager<PaperCard> {
 
         if (entriesToAdd.size() < entriesToReturn) {
             // some are missing, keep exploring other editions
-            int start = 1;
-            int end = acceptedEditions.size();
-            if (selectionIndex != 0) {  // latest art case: the last was selected
-                start = 0;
-                end = acceptedEditions.size() - 1;
-            }
-            for (int editionIndex = start; editionIndex < end; editionIndex++) {
+            for (int editionIndex = 1; editionIndex < acceptedEditions.size(); editionIndex++) {
                 CardEdition edition = acceptedEditions.get(editionIndex);
                 for (Entry<PaperCard, Integer> entry : entriesByEdition.get(edition)) {
                     if (!entry.getKey().hasImage())
@@ -137,6 +130,8 @@ public class CardManager extends ItemManager<PaperCard> {
                     if (entriesToAdd.size() == entriesToReturn)
                         break;
                 }
+                if (entriesToAdd.size() == entriesToReturn)
+                    break;
             }
             // if at this stage, there are still entries to add, fill missing ones from the original list
             for (Entry<PaperCard, Integer> entry : uniqueEntries) {
