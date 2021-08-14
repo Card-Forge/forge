@@ -202,7 +202,7 @@ S Mirrored Depths
 41 S Tazeem
 S Tember City
 139 C Terramorphic Expanse
-2 C The AEther Flues
+2 C The Aether Flues
 6 C The Dark Barony
 8 C The Eon Fog
 11 C The Fourth Sphere

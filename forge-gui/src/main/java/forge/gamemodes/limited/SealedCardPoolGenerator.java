@@ -17,18 +17,7 @@
  */
 package forge.gamemodes.limited;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Stack;
-
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.collect.Lists;
-
 import forge.StaticData;
 import forge.card.CardEdition;
 import forge.card.MagicColor;
@@ -53,6 +42,15 @@ import forge.util.Localizer;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.storage.IStorage;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Stack;
 
 /**
  * <p>
@@ -223,7 +221,7 @@ public class SealedCardPoolGenerator {
                         SealedProduct.Template promoProduct = new SealedProduct.Template("Prerelease Promo", promoSlot);
 
                         // Create a "booster" with just the promo card. Rarity + Edition into a Template
-                        this.product.add(new UnOpenedProduct(promoProduct, FModel.getMagicDb().getCommonCards().getAllCardsFromEdition(chosenEdition)));
+                        this.product.add(new UnOpenedProduct(promoProduct, FModel.getMagicDb().getCommonCards().getAllCards(chosenEdition)));
                         // TODO This product should be Foiled only. How do I do that?
                     }
                     // TODO Add support for special boosters like GuildPacks

@@ -44,13 +44,12 @@ public class ImageUtil {
         final boolean hasManyPictures;
         final CardDb db =  !card.isVariant() ? StaticData.instance().getCommonCards() : StaticData.instance().getVariantCards();
         if (includeSet) {
-            cntPictures = db.getPrintCount(card.getName(), edition);
+            cntPictures = db.getArtCount(card.getName(), edition);
             hasManyPictures = cntPictures > 1;
         } else {
             cntPictures = 1;
-
             // raise the art index limit to the maximum of the sets this card was printed in
-            int maxCntPictures = db.getMaxPrintCount(card.getName());
+            int maxCntPictures = db.getMaxArtIndex(card.getName());
             hasManyPictures = maxCntPictures > 1;
         }
 

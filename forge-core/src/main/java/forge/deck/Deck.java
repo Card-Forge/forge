@@ -17,24 +17,17 @@
  */
 package forge.deck;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.EnumMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeSet;
-
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
-
 import forge.StaticData;
 import forge.card.CardDb;
+import forge.card.CardEdition;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * <p>
@@ -51,14 +44,12 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     private final Set<String> tags = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
     // Supports deferring loading a deck until we actually need its contents. This works in conjunction with
     // the lazy card load feature to ensure we don't need to load all cards on start up.
-    private Map<String, List<String>> deferredSections;
+    private Map<String, List<String>> deferredSections = null;
+    private Map<String, List<String>> loadedSections = null;
+    private String lastCardArtPreferenceUsed = "";
+    private Boolean lastCardArtOptimisationOptionUsed = null;
+    private boolean includeCardsFromUnspecifiedSet = false;
 
-    // gameType is from Constant.GameType, like GameType.Regular
-    /**
-     * <p>
-     * Decks have their named finalled.
-     * </p>
-     */
     public Deck() {
         this("");
     }
@@ -183,9 +174,8 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     // will return new if it was absent
     public CardPool getOrCreate(DeckSection deckSection) {
         CardPool p = get(deckSection);
-        if (p != null) {
+        if (p != null)
             return p;
-        }
         p = new CardPool();
         this.parts.put(deckSection, p);
         return p;
@@ -225,82 +215,202 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     }
 
     private void loadDeferredSections() {
-        if (deferredSections == null) {
+        if ((deferredSections == null) && (loadedSections == null))
             return;
-        }
 
-        boolean hasExplicitlySpecifiedSet = false;
-        for (Entry<String, List<String>> s : deferredSections.entrySet()) {
+        if (loadedSections != null && !includeCardsFromUnspecifiedSet)
+            return;  // deck loaded, and does not include ANY card with no specified edition: all good!
+
+        String cardArtPreference = StaticData.instance().getCardArtPreferenceName();
+        boolean smartCardArtSelection = StaticData.instance().isEnabledCardArtSmartSelection();
+
+        if (lastCardArtOptimisationOptionUsed == null)  // first time here
+            lastCardArtOptimisationOptionUsed = smartCardArtSelection;
+
+        if (loadedSections != null && cardArtPreference.equals(lastCardArtPreferenceUsed) &&
+                lastCardArtOptimisationOptionUsed == smartCardArtSelection)
+            return;  // deck loaded already - card with no set have been found, but no change since last time: all good!
+
+        Map<String, List<String>> referenceDeckLoadingMap;
+        if (deferredSections != null)
+            referenceDeckLoadingMap = new HashMap<>(deferredSections);
+        else
+            referenceDeckLoadingMap = new HashMap<>(loadedSections);
+
+        loadedSections = new HashMap<>();
+        lastCardArtPreferenceUsed = cardArtPreference;
+        lastCardArtOptimisationOptionUsed = smartCardArtSelection;
+        Map<DeckSection, ArrayList<String>> cardsWithNoEdition = null;
+        if (smartCardArtSelection)
+             cardsWithNoEdition = new EnumMap<>(DeckSection.class);
+
+        for (Entry<String, List<String>> s : referenceDeckLoadingMap.entrySet()) {
+            // first thing, update loaded section
+            loadedSections.put(s.getKey(), s.getValue());
             DeckSection sec = DeckSection.smartValueOf(s.getKey());
-            if (sec == null) {
+            if (sec == null)
                 continue;
-            }
-
             final List<String> cardsInSection = s.getValue();
-            for (String k : cardsInSection) 
-                if (k.indexOf(CardDb.NameSetSeparator) > 0)
-                    hasExplicitlySpecifiedSet = true;
+            ArrayList<String> cardNamesWithNoEdition = getAllCardNamesWithNoSpecifiedEdition(cardsInSection);
+            if (cardNamesWithNoEdition.size() > 0){
+                includeCardsFromUnspecifiedSet = true;
+                if (smartCardArtSelection)
+                    cardsWithNoEdition.put(sec, cardNamesWithNoEdition);
+            }
 
             CardPool pool = CardPool.fromCardList(cardsInSection);
+            // TODO: @Leriomaggio
+            // this will need improvements with a validation schema for each section to avoid
+            // accidental additions and/or sanitise the content of each section.
             // I used to store planes and schemes under sideboard header, so this will assign them to a correct section
             IPaperCard sample = pool.get(0);
-            if (sample != null && (sample.getRules().getType().isPlane() || sample.getRules().getType().isPhenomenon())) {
+            if (sample != null && (sample.getRules().getType().isPlane() || sample.getRules().getType().isPhenomenon()))
                 sec = DeckSection.Planes;
-            }
-            if (sample != null && sample.getRules().getType().isScheme()) {
+            if (sample != null && sample.getRules().getType().isScheme())
                 sec = DeckSection.Schemes;
-            }
             putSection(sec, pool);
         }
+        deferredSections = null;  // set to null, just in case!
+        if (includeCardsFromUnspecifiedSet && smartCardArtSelection)
+            optimiseCardArtSelectionInDeckSections(cardsWithNoEdition);
 
-        deferredSections = null;
-        if (!hasExplicitlySpecifiedSet) {
-            convertByXitaxMethod();
-        }
     }
 
-    private void convertByXitaxMethod() {
-        Date dateWithAllCards = StaticData.instance().getEditions().getEarliestDateWithAllCards(getAllCardsInASinglePool());
-        String artOption = StaticData.instance().getPrefferedArtOption();
+    private ArrayList<String> getAllCardNamesWithNoSpecifiedEdition(List<String> cardsInSection) {
+        ArrayList<String> cardNamesWithNoEdition = new ArrayList<>();
+        List<Pair<String, Integer>> cardRequests = CardPool.processCardList(cardsInSection);
+        for (Pair<String, Integer> pair : cardRequests) {
+            String requestString = pair.getLeft();
+            CardDb.CardRequest request = CardDb.CardRequest.fromString(requestString);
+            if (request.edition == null)
+                cardNamesWithNoEdition.add(request.cardName);
+        }
+        return cardNamesWithNoEdition;
+    }
 
-        for (Entry<DeckSection, CardPool> p : parts.entrySet()) {
-            if (p.getKey() == DeckSection.Planes || p.getKey() == DeckSection.Schemes || p.getKey() == DeckSection.Avatar)
+    private void optimiseCardArtSelectionInDeckSections(Map<DeckSection, ArrayList<String>> cardsWithNoEdition) {
+        StaticData data = StaticData.instance();
+        // Get current Card Art Preference Settings
+        boolean isCardArtPreferenceLatestArt = data.cardArtPreferenceIsLatest();
+        boolean cardArtPreferenceHasFilter = data.isCoreExpansionOnlyFilterSet();
+
+        for(Entry<DeckSection, CardPool> part : parts.entrySet()) {
+            DeckSection deckSection = part.getKey();
+            if(deckSection == DeckSection.Planes || deckSection == DeckSection.Schemes || deckSection == DeckSection.Avatar)
                 continue;
 
+            // == 0. First Off, check if there is anything at all to do for the current section
+            ArrayList<String> cardNamesWithNoEditionInSection = cardsWithNoEdition.getOrDefault(deckSection, null);
+            if (cardNamesWithNoEditionInSection == null || cardNamesWithNoEditionInSection.size() == 0)
+                continue; // nothing to do here
+
+            CardPool pool = part.getValue();
+            // Set options for the alternative card print search
+            boolean isExpansionTheMajorityInThePool = (pool.getTheMostFrequentEditionType() == CardEdition.Type.EXPANSION);
+            boolean isPoolModernFramed = pool.isModern();
+
+            // == Get the most representative (Pivot) Edition in the Pool
+            // Note: Card Art Updates (if any) will be determined based on the Pivot Edition.
+            CardEdition pivotEdition = pool.getPivotCardEdition(isCardArtPreferenceLatestArt);
+
+            // == Inspect and Update the Pool
+            Date releaseDatePivotEdition = pivotEdition.getDate();
             CardPool newPool = new CardPool();
-
-            for (Entry<PaperCard, Integer> cp : p.getValue()) {
+            for (Entry<PaperCard, Integer> cp : pool) {
                 PaperCard card = cp.getKey();
-                int count = cp.getValue();
-
-                PaperCard replacementCard;
-                switch (artOption) {
-                    case "Latest":
-                        replacementCard = StaticData.instance().getCardFromLatestorEarliest(card);
-                        break;
-                    case "Earliest":
-                        replacementCard = StaticData.instance().getCardFromEarliestCoreExp(card);
-                        break;
-                    default:
-                        replacementCard = StaticData.instance().getCardByEditionDate(card, dateWithAllCards);
+                int totalToAddToPool = cp.getValue();
+                // A. Skip cards not requiring any update, because they add the edition specified!
+                if (!cardNamesWithNoEditionInSection.contains(card.getName())) {
+                    addCardToPool(newPool, card, totalToAddToPool, card.isFoil());
+                    continue;
                 }
-
-                if (replacementCard.getArtIndex() == card.getArtIndex()) {
-                    if (card.hasImage())
-                        newPool.add(card, count);
-                    else
-                        newPool.add(replacementCard, count);
-                } else {
-                    if (card.hasImage())
-                        newPool.add(card.getName(), card.getEdition(), count); // this is to randomize art
-                    else
-                        newPool.add(replacementCard, count);
+                // B. Determine if current card requires update
+                boolean cardArtNeedsOptimisation = this.isCardArtUpdateRequired(card, releaseDatePivotEdition);
+                if (!cardArtNeedsOptimisation) {
+                    addCardToPool(newPool, card, totalToAddToPool, card.isFoil());
+                    continue;
                 }
+                PaperCard alternativeCardPrint = data.getAlternativeCardPrint(card, releaseDatePivotEdition,
+                                                                              isCardArtPreferenceLatestArt,
+                                                                              cardArtPreferenceHasFilter,
+                                                                              isExpansionTheMajorityInThePool,
+                                                                              isPoolModernFramed);
+                if (alternativeCardPrint == null)  // no alternative found, add original card in Pool
+                    addCardToPool(newPool, card, totalToAddToPool, card.isFoil());
+                else
+                    addCardToPool(newPool, alternativeCardPrint, totalToAddToPool, card.isFoil());
             }
-
-            parts.put(p.getKey(), newPool);
+            parts.put(deckSection, newPool);
         }
     }
+
+    private void addCardToPool(CardPool pool, PaperCard card, int totalToAdd, boolean isFoil) {
+        StaticData data = StaticData.instance();
+        if (card.getArtIndex() != IPaperCard.NO_ART_INDEX && card.getArtIndex() != IPaperCard.DEFAULT_ART_INDEX)
+            pool.add(isFoil ? card.getFoiled() : card, totalToAdd);  // art index requested, keep that way!
+        else {
+            int artCount = data.getCardArtCount(card);
+            if (artCount > 1)
+                addAlternativeCardPrintInPoolWithMultipleArt(card, pool, totalToAdd, artCount);
+            else
+                pool.add(isFoil ? card.getFoiled() : card, totalToAdd);
+        }
+    }
+
+    private void addAlternativeCardPrintInPoolWithMultipleArt(PaperCard alternativeCardPrint, CardPool pool,
+                                                              int totalNrToAdd, int nrOfAvailableArts) {
+        StaticData data = StaticData.instance();
+
+        // distribute available card art
+        String cardName = alternativeCardPrint.getName();
+        String setCode = alternativeCardPrint.getEdition();
+        boolean isFoil = alternativeCardPrint.isFoil();
+        int cardsPerArtIndex = totalNrToAdd / nrOfAvailableArts;
+        cardsPerArtIndex = Math.max(1, cardsPerArtIndex);  // make sure is never zero
+        int restOfCardsToAdd = totalNrToAdd % nrOfAvailableArts;
+        int cardsAdded = 0;
+        PaperCard alternativeCardArt = null;
+        for (int artIndex = 1; artIndex <= nrOfAvailableArts; artIndex++){
+            alternativeCardArt = data.getOrLoadCommonCard(cardName, setCode, artIndex, isFoil);
+            cardsAdded += cardsPerArtIndex;
+            pool.add(alternativeCardArt, cardsPerArtIndex);
+            if (cardsAdded == totalNrToAdd)
+                break;
+        }
+        if (restOfCardsToAdd > 0)
+            pool.add(alternativeCardArt, restOfCardsToAdd);
+    }
+
+    private boolean isCardArtUpdateRequired(PaperCard card, Date referenceReleaseDate) {
+        /* A Card Art update is required ONLY IF the current edition of the card is either
+        newer (older) than pivot edition when LATEST ART (ORIGINAL ART) Card Art Preference
+        is selected.
+        This is because what we're trying to "FIX" is the card art selection that is
+        "too new" wrt. PivotEdition (or, "too old" with ORIGINAL ART Preference, respectively).
+        Example:
+        - Case 1: [Latest Art]
+        We don't want Lands automatically selected from AFR (too new) within a Deck of mostly Core21 (Pivot)
+        - Case 2: [Original Art]
+        We don't want an Atog from LEA (too old) in a Deck of Mirrodin (Pivot)
+
+        NOTE: the control implemented in release date also consider the case when the input PaperCard
+        is exactly from the Pivot Edition. In this case, NO update will be required!
+        */
+
+        if (card.getRules().isVariant())
+            return false;  // skip variant cards
+        boolean isLatestCardArtPreference = StaticData.instance().cardArtPreferenceIsLatest();
+        CardEdition cardEdition = StaticData.instance().getCardEdition(card.getEdition());
+        if (cardEdition == null)  return false;
+        Date releaseDate = cardEdition.getDate();
+        if (releaseDate == null)  return false;
+        if (isLatestCardArtPreference)  // Latest Art
+            return releaseDate.compareTo(referenceReleaseDate) > 0;
+        // Original Art
+        return releaseDate.compareTo(referenceReleaseDate) < 0;
+    }
+
+
 
     public static final Function<Deck, String> FN_NAME_SELECTOR = new Function<Deck, String>() {
         @Override

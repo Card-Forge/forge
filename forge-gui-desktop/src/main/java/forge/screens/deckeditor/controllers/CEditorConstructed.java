@@ -17,14 +17,7 @@
  */
 package forge.screens.deckeditor.controllers;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map.Entry;
-
 import com.google.common.base.Supplier;
-
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -42,6 +35,12 @@ import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FComboBox;
 import forge.util.ItemPool;
 import forge.util.Localizer;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map.Entry;
 
 /**
  * Child controller for constructed deck editor UI.
@@ -130,7 +129,8 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
         }
 
         catalogManager = new CardManager(getCDetailPicture(), wantUnique, false);
-        deckManager = new CardManager(getCDetailPicture(), wantUnique, false);
+        deckManager = new CardManager(getCDetailPicture(), false, false);
+        deckManager.setAlwaysNonUnique(true);
 
         final Localizer localizer = Localizer.getInstance();
 

@@ -1,13 +1,5 @@
 package forge.deck;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-
 import forge.deck.io.DeckSerializer;
 import forge.deck.io.DeckStorage;
 import forge.game.GameType;
@@ -18,6 +10,9 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
 import forge.util.WaitCallback;
 import forge.util.storage.StorageBase;
+
+import java.io.*;
+import java.util.*;
 
 public class NetDeckCategory extends StorageBase<Deck> {
     public static final String PREFIX = "NET_DECK_";
@@ -86,7 +81,7 @@ public class NetDeckCategory extends StorageBase<Deck> {
                 //if name passed in, try to load decks from current cached files
                 File downloadDir = new File(category.getFullPath());
                 if (downloadDir.exists()) {
-                    for (File file : downloadDir.listFiles(DeckStorage.DCK_FILE_FILTER)) {
+                    for (File file : getAllFilesList(downloadDir, DeckStorage.DCK_FILE_FILTER)) {
                         Deck deck = DeckSerializer.fromFile(file);
                         if (deck != null) {
                             category.map.put(deck.getName(), deck);

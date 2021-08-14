@@ -1,21 +1,20 @@
 package forge.token;
 
+import com.google.common.base.Predicate;
+import forge.card.CardDb;
+import forge.item.PaperToken;
+
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-
-import com.google.common.base.Predicate;
-
-import forge.card.CardDb;
-import forge.item.PaperToken;
 
 public interface ITokenDatabase extends Iterable<PaperToken> {
     PaperToken getToken(String tokenName);
     PaperToken getToken(String tokenName, String edition);
     PaperToken getToken(String tokenName, String edition, int artIndex);
-    PaperToken getTokenFromEdition(String tokenName, CardDb.SetPreference fromSet);
-    PaperToken getTokenFromEdition(String tokenName, Date printedBefore, CardDb.SetPreference fromSet);
-    PaperToken getTokenFromEdition(String tokenName, Date printedBefore, CardDb.SetPreference fromSet, int artIndex);
+    PaperToken getTokenFromEditions(String tokenName, CardDb.CardArtPreference fromSet);
+    PaperToken getTokenFromEditions(String tokenName, Date printedBefore, CardDb.CardArtPreference fromSet);
+    PaperToken getTokenFromEditions(String tokenName, Date printedBefore, CardDb.CardArtPreference fromSet, int artIndex);
 
     PaperToken getFoiled(PaperToken cpi);
 

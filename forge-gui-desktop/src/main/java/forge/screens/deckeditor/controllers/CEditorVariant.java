@@ -17,12 +17,9 @@
  */
 package forge.screens.deckeditor.controllers;
 
-import java.util.Map.Entry;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
 import com.google.common.collect.Iterables;
-
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.GameType;
@@ -41,6 +38,8 @@ import forge.screens.match.controllers.CDetailPicture;
 import forge.util.ItemPool;
 import forge.util.Localizer;
 import forge.util.storage.IStorage;
+
+import java.util.Map.Entry;
 
 /**
  * Child controller for constructed deck editor UI.
@@ -72,7 +71,9 @@ public final class CEditorVariant extends CDeckEditor<Deck> {
         this.sectionMode = deckSection0;
 
         final CardManager catalogManager = new CardManager(cDetailPicture0, true, false);
-        final CardManager deckManager = new CardManager(cDetailPicture0, true, false);
+        final CardManager deckManager = new CardManager(cDetailPicture0, false, false);
+        deckManager.setAlwaysNonUnique(true);
+
         final Localizer localizer = Localizer.getInstance();
 
         catalogManager.setCaption(localizer.getMessage("lblCatalog"));

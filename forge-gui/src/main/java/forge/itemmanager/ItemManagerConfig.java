@@ -1,21 +1,19 @@
 package forge.itemmanager;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Map;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-
 import forge.itemmanager.ItemColumnConfig.SortState;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.util.XmlUtil;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Map;
 
 /** 
  * Preferences associated with individual cards
@@ -26,7 +24,7 @@ public enum ItemManagerConfig {
             null, null, 1, 0),
     CARD_CATALOG(SColumnUtil.getCatalogDefaultColumns(true), true, false, false,
             null, null, 4, 0),
-    DECK_EDITOR(SColumnUtil.getDeckEditorDefaultColumns(), true, false, true,
+    DECK_EDITOR(SColumnUtil.getDeckEditorDefaultColumns(), false, false, true,
             GroupDef.DEFAULT, ColumnDef.CMC, 4, 1),
     DRAFT_PACK(SColumnUtil.getDraftPackDefaultColumns(), false, false, true,
             null, null, 4, 1),

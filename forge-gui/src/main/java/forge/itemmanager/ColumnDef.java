@@ -17,28 +17,13 @@
  */
 package forge.itemmanager;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.Map.Entry;
-
-import forge.gamemodes.limited.CardRanker;
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Function;
-
-import forge.card.CardAiHints;
-import forge.card.CardEdition;
-import forge.card.CardRarity;
-import forge.card.CardRules;
-import forge.card.CardSplitType;
-import forge.card.CardType;
-import forge.card.ColorSet;
-import forge.card.ICardFace;
-import forge.card.MagicColor;
+import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.deck.DeckProxy;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameFormat;
+import forge.gamemodes.limited.CardRanker;
 import forge.gui.card.CardPreferences;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
@@ -48,6 +33,11 @@ import forge.itemmanager.ItemColumnConfig.SortState;
 import forge.model.FModel;
 import forge.util.CardTranslation;
 import forge.util.Localizer;
+import org.apache.commons.lang3.StringUtils;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Map.Entry;
 
 public enum ColumnDef {
     /**
@@ -463,7 +453,10 @@ public enum ColumnDef {
             new Function<Entry<? extends InventoryItem, Integer>, Object>() {
                 @Override
                 public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return toDeck(from.getKey()).getEdition().getCode();
+                    CardEdition deckEdition = toDeck(from.getKey()).getEdition();
+                    if (deckEdition != null)
+                        return deckEdition.getCode();
+                    return null;
                 }
             }),
     /**

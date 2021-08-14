@@ -59,7 +59,7 @@ public class NetDeckArchivePauper extends StorageBase<Deck> {
                 //if name passed in, try to load decks from current cached files
                 File downloadDir = new File(category.getFullPath());
                 if (downloadDir.exists()) {
-                    for (File file : downloadDir.listFiles(DeckStorage.DCK_FILE_FILTER)) {
+                    for (File file : getAllFilesList(downloadDir, DeckStorage.DCK_FILE_FILTER)) {
                         Deck deck = DeckSerializer.fromFile(file);
                         if (deck != null) {
                             category.map.put(deck.getName(), deck);

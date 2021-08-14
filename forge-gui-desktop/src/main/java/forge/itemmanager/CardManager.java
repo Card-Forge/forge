@@ -1,10 +1,12 @@
 package forge.itemmanager;
 
-import java.util.*;
-import java.util.Map.Entry;
-
-import javax.swing.JMenu;
-
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.ListMultimap;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Multimaps;
+import forge.StaticData;
+import forge.card.CardEdition;
 import forge.game.GameFormat;
 import forge.gamemodes.quest.QuestWorld;
 import forge.gamemodes.quest.data.QuestPreferences;
@@ -16,7 +18,12 @@ import forge.model.FModel;
 import forge.screens.home.quest.DialogChooseFormats;
 import forge.screens.home.quest.DialogChooseSets;
 import forge.screens.match.controllers.CDetailPicture;
+import forge.util.CollectionSuppliers;
 import forge.util.Localizer;
+
+import javax.swing.*;
+import java.util.*;
+import java.util.Map.Entry;
 
 /** 
  * ItemManager for cards
@@ -49,16 +56,91 @@ public class CardManager extends ItemManager<PaperCard> {
 
     @Override
     protected Iterable<Entry<PaperCard, Integer>> getUnique(Iterable<Entry<PaperCard, Integer>> items) {
-        //use special technique for getting unique cards so that cards without art aren't shown
-        HashMap<String, Entry<PaperCard, Integer>> map = new HashMap<>();
+        ListMultimap<String, Entry<PaperCard, Integer>> entriesByName = Multimaps.newListMultimap(new TreeMap<>(String.CASE_INSENSITIVE_ORDER), CollectionSuppliers.arrayLists());
         for (Entry<PaperCard, Integer> item : items) {
-            final String key = item.getKey().getName();
-            final Entry<PaperCard, Integer> oldValue = map.get(key);
-            if (oldValue == null || !oldValue.getKey().hasImage()) { //only replace in map if old value doesn't have image
-                map.put(key, item);
+            final String cardName = item.getKey().getName();
+            entriesByName.put(cardName, item);
+        }
+
+        // Now we're ready to go on with retrieving cards to be returned
+        Map<PaperCard, Integer> cardsMap = new HashMap<>();
+        for (String cardName : entriesByName.keySet()) {
+            List<Entry<PaperCard, Integer>> entries = entriesByName.get(cardName);
+
+            ListMultimap<CardEdition, Entry<PaperCard, Integer>> entriesByEdition = Multimaps.newListMultimap(new HashMap<>(), CollectionSuppliers.arrayLists());
+            for (Entry<PaperCard, Integer> entry : entries) {
+                CardEdition ed = StaticData.instance().getCardEdition(entry.getKey().getEdition());
+                if (ed != null)
+                    entriesByEdition.put(ed, entry);
+            }
+            if (entriesByEdition.size() == 0)
+                continue;  // skip card
+            // Try to retain only those editions accepted by the current Card Art Preference Policy
+            List<CardEdition> acceptedEditions = Lists.newArrayList(Iterables.filter(entriesByEdition.keySet(), new Predicate<CardEdition>() {
+                @Override
+                public boolean apply(CardEdition ed) {
+                    return StaticData.instance().getCardArtPreference().accept(ed);
+                }
+            }));
+            // If policy too strict, fall back to getting all editions.
+            if (acceptedEditions.size() == 0)
+                // Policy is too strict for current PaperCard in Entry. Remove any filter
+                acceptedEditions.addAll(entriesByEdition.keySet());
+            List<Entry<PaperCard, Integer>> entriesToAdd = getEntriesToAdd(entriesByEdition, acceptedEditions);
+            for (Entry<PaperCard, Integer> entry : entriesToAdd)
+                cardsMap.put(entry.getKey(), entry.getValue());
+        }
+        return cardsMap.entrySet();
+    }
+
+    /*
+    Get all the Entries to Add, also accounting for missing images.
+    If in the end, not all entries found have image, the original ones are used to fill in the total number
+    of entries to return.
+     */
+    private List<Entry<PaperCard, Integer>> getEntriesToAdd(ListMultimap<CardEdition, Entry<PaperCard, Integer>> entriesByEdition,
+                                                            List<CardEdition> acceptedEditions) {
+        // Use standard sort + index, for better performance!
+        Collections.sort(acceptedEditions);
+        if (StaticData.instance().cardArtPreferenceIsLatest())
+            Collections.reverse(acceptedEditions);
+        CardEdition uniqueEdition = acceptedEditions.get(0);
+
+        // These are now the entries to add to Cards Map
+        List<Entry<PaperCard, Integer>> uniqueEntries = entriesByEdition.get(uniqueEdition);
+
+        // The last bit to check is whether all of them have a corresponding image. Otherwise, try to escalate
+        // others.
+        int entriesToReturn = uniqueEntries.size();
+        List<Entry<PaperCard, Integer>> entriesToAdd = new ArrayList<>();
+        for (Entry<PaperCard, Integer> entry : uniqueEntries) {
+            if (!entry.getKey().hasImage())
+                continue;  // Skip entries with no image
+            entriesToAdd.add(entry);
+        }
+
+        if (entriesToAdd.size() < entriesToReturn) {
+            // some are missing, keep exploring other editions
+            for (int editionIndex = 1; editionIndex < acceptedEditions.size(); editionIndex++) {
+                CardEdition edition = acceptedEditions.get(editionIndex);
+                for (Entry<PaperCard, Integer> entry : entriesByEdition.get(edition)) {
+                    if (!entry.getKey().hasImage())
+                        continue;  // Skip entries with no image
+                    entriesToAdd.add(entry);
+                    if (entriesToAdd.size() == entriesToReturn)
+                        break;
+                }
+                if (entriesToAdd.size() == entriesToReturn)
+                    break;
+            }
+            // if at this stage, there are still entries to add, fill missing ones from the original list
+            for (Entry<PaperCard, Integer> entry : uniqueEntries) {
+                entriesToAdd.add(entry);
+                if (entriesToAdd.size() == entriesToReturn)
+                    break;
             }
         }
-        return map.values();
+        return entriesToAdd;
     }
 
     /* Static overrides shared with SpellShopManager*/

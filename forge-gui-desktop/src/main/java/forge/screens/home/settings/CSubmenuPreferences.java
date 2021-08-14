@@ -1,18 +1,5 @@
 package forge.screens.home.settings;
 
-import java.awt.Desktop;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JCheckBox;
-import javax.swing.SwingUtilities;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
-
 import forge.MulliganDefs;
 import forge.Singletons;
 import forge.StaticData;
@@ -33,11 +20,18 @@ import forge.player.GamePlayerUtil;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorTokenViewer;
 import forge.sound.SoundSystem;
-import forge.toolbox.FComboBox;
-import forge.toolbox.FComboBoxPanel;
-import forge.toolbox.FLabel;
-import forge.toolbox.FOptionPane;
+import forge.toolbox.*;
 import forge.util.Localizer;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Controls the preferences submenu in the home UI.
@@ -136,7 +130,7 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbEnableAICheats(), FPref.UI_ENABLE_AI_CHEATS));
         lstControls.add(Pair.of(view.getCbEnableUnknownCards(), FPref.UI_LOAD_UNKNOWN_CARDS));
         lstControls.add(Pair.of(view.getCbEnableNonLegalCards(), FPref.UI_LOAD_NONLEGAL_CARDS));
-        lstControls.add(Pair.of(view.getCbEnableCustomCards(), FPref.UI_LOAD_CUSTOM_CARDS));
+        lstControls.add(Pair.of(view.getCbAllowCustomCardsDeckConformance(), FPref.ALLOW_CUSTOM_CARDS_IN_DECKS_CONFORMANCE));
         lstControls.add(Pair.of(view.getCbUseExperimentalNetworkStream(), FPref.UI_NETPLAY_COMPAT));
         lstControls.add(Pair.of(view.getCbImageFetcher(), FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER));
         lstControls.add(Pair.of(view.getCbDisableCardImages(), FPref.UI_DISABLE_CARD_IMAGES));
@@ -168,10 +162,9 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbRemindOnPriority(), FPref.UI_REMIND_ON_PRIORITY));
 
         lstControls.add(Pair.of(view.getCbFilterLandsByColorId(), FPref.UI_FILTER_LANDS_BY_COLOR_IDENTITY));
-
         lstControls.add(Pair.of(view.getCbLoadCardsLazily(), FPref.LOAD_CARD_SCRIPTS_LAZILY));
-
         lstControls.add(Pair.of(view.getCbLoadHistoricFormats(), FPref.LOAD_HISTORIC_FORMATS));
+        lstControls.add(Pair.of(view.getCbSmartCardArtSelectionOpt(), FPref.UI_SMART_CARD_ART));
 
 
         for(final Pair<JCheckBox, FPref> kv : lstControls) {
@@ -185,6 +178,15 @@ public enum CSubmenuPreferences implements ICDoc {
                 }
             });
         }
+
+        view.getCbSmartCardArtSelectionOpt().addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(final ItemEvent e) {
+                if (updating) { return; }
+                boolean isEnabled = e.getStateChange() == ItemEvent.SELECTED;
+                FModel.getMagicDb().setEnableSmartCardArtSelection(isEnabled);
+            }
+        });
 
         view.getBtnReset().setCommand(new UiCommand() {
             @Override
@@ -255,6 +257,7 @@ public enum CSubmenuPreferences implements ICDoc {
         initializeCloseActionComboBox();
         initializeDefaultFontSizeComboBox();
         initializeCardArtFormatComboBox();
+        initializeCardArtPreference();
         initializeAutoUpdaterComboBox();
         initializeMulliganRuleComboBox();
         initializeAiProfilesComboBox();
@@ -460,6 +463,46 @@ public enum CSubmenuPreferences implements ICDoc {
         final FComboBox<String> comboBox = createComboBox(AiProfileUtil.getProfilesArray(), userSetting);
         final String selectedItem = this.prefs.getPref(userSetting);
         panel.setComboBox(comboBox, selectedItem);
+    }
+
+    private void initializeCardArtPreference() {
+        final String latestOpt = Localizer.getInstance().getMessage("latestArtOpt");
+        final String originalOpt = Localizer.getInstance().getMessage("originalArtOpt");
+        final String [] choices = {latestOpt, originalOpt};
+        final FPref uiPreferredArt = FPref.UI_PREFERRED_ART;
+
+        final FComboBoxPanel<String> panel = this.view.getCbpCardArtPreference();
+        final FComboBox<String> comboBox = new FComboBox<>(choices);
+        comboBox.addItemListener(new ItemListener() {
+            @Override public void itemStateChanged(final ItemEvent e) {
+                String artPreference = comboBox.getSelectedItem();
+                if (artPreference == null)
+                    artPreference = latestOpt;  // default, just in case
+                boolean latestArt = artPreference.equalsIgnoreCase(latestOpt);
+                boolean coreExpFilter = FModel.getMagicDb().isCoreExpansionOnlyFilterSet();
+                FModel.getMagicDb().setCardArtPreference(latestArt, coreExpFilter);
+                String preferenceOpt = FModel.getMagicDb().getCardArtPreferenceName();
+                CSubmenuPreferences.this.prefs.setPref(uiPreferredArt, preferenceOpt);
+                CSubmenuPreferences.this.prefs.save();
+            }
+        });
+        final String selectedItem = FModel.getMagicDb().cardArtPreferenceIsLatest() ? latestOpt : originalOpt;
+        panel.setComboBox(comboBox, selectedItem);
+
+        final JCheckBox coreExpFilter = this.view.getCbCardArtCoreExpansionsOnlyOpt();
+        boolean selected = FModel.getMagicDb().isCoreExpansionOnlyFilterSet();
+        coreExpFilter.setSelected(selected);
+        coreExpFilter.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                boolean latestArt = FModel.getMagicDb().cardArtPreferenceIsLatest();
+                boolean coreExpFilter = e.getStateChange() == ItemEvent.SELECTED;
+                FModel.getMagicDb().setCardArtPreference(latestArt, coreExpFilter);
+                String preferenceOpt = FModel.getMagicDb().getCardArtPreferenceName();
+                CSubmenuPreferences.this.prefs.setPref(uiPreferredArt, preferenceOpt);
+                CSubmenuPreferences.this.prefs.save();
+            }
+        });
     }
 
     private void initializeStackAdditionsComboBox() {

@@ -17,12 +17,7 @@
  */
 package forge.item;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.Serializable;
-
 import com.google.common.base.Function;
-
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardDb;
@@ -32,6 +27,10 @@ import forge.card.CardRules;
 import forge.util.CardTranslation;
 import forge.util.Localizer;
 import forge.util.TextUtil;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
 
 /**
  * A lightweight version of a card that matches real-world cards, to use outside of games (eg. inventory, decks, trade).
@@ -169,6 +168,10 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         }
     };
 
+    public PaperCard(final CardRules rules0, final String edition0, final CardRarity rarity0){
+        this(rules0, edition0, rarity0, IPaperCard.DEFAULT_ART_INDEX);
+    }
+
     public PaperCard(final CardRules rules0, final String edition0, final CardRarity rarity0, final int artIndex0) {
         this(rules0, edition0, rarity0, artIndex0, false, "");
     }
@@ -181,7 +184,7 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         rules = rules0;
         name = rules0.getName();
         edition = edition0;
-        artIndex = artIndex0;
+        artIndex = Math.max(artIndex0, IPaperCard.DEFAULT_ART_INDEX);
         foil = foil0;
         rarity = rarity0;
         artist = (artist0 != null ? artist0 : "");
@@ -190,7 +193,10 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
     public PaperCard(final CardRules rules0, final String edition0, final CardRarity rarity0,
                      final int artIndex0, final boolean foil0, final String collectorNumber0, final String artist) {
         this(rules0, edition0, rarity0, artIndex0, foil0, artist);
-        collectorNumber = collectorNumber0;
+        if ((collectorNumber0 == null) || (collectorNumber0.length() == 0))
+            collectorNumber = IPaperCard.NO_COLLECTOR_NUMBER;
+        else
+            collectorNumber = collectorNumber0;
     }
 
     // Want this class to be a key for HashTable
@@ -303,6 +309,7 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         rarity = pc.getRarity();
     }
 
+    // FIXME: @leriomaggio - remember to get rid of this method once and for all :)
     private String retrieveCollectorNumber() {
         StaticData data = StaticData.instance();
         CardEdition edition = data.getEditions().get(this.edition);

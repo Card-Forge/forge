@@ -17,17 +17,8 @@
  */
 package forge.gamemodes.quest;
 
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TreeSet;
-
-import org.apache.commons.lang3.tuple.ImmutablePair;
-
 import com.google.common.collect.ImmutableMap;
-
 import forge.LobbyPlayer;
-import forge.card.CardDb.SetPreference;
 import forge.card.CardEdition;
 import forge.card.CardRules;
 import forge.deck.Deck;
@@ -54,6 +45,12 @@ import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.util.Localizer;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.TreeSet;
 
 /**
  * <p>
@@ -179,7 +176,7 @@ public class QuestUtil {
             return tempcard;
         }
         // Standard card creation
-        return FModel.getMagicDb().getCommonCards().getCardFromEdition(name, SetPreference.Latest);
+        return FModel.getMagicDb().getCommonCards().getCardFromEditions(name);
     }
 
     public static void travelWorld() {

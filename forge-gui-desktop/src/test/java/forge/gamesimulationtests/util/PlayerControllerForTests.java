@@ -1,19 +1,9 @@
 package forge.gamesimulationtests.util;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-import org.testng.collections.Lists;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Multimap;
-
 import forge.LobbyPlayer;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilMana;
@@ -21,6 +11,7 @@ import forge.ai.SpellAbilityAi;
 import forge.ai.SpellApiToAi;
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.DrawAi;
+import forge.ai.ability.GameLossAi;
 import forge.ai.ability.GameWinAi;
 import forge.card.ColorSet;
 import forge.card.ICardFace;
@@ -33,12 +24,7 @@ import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardView;
-import forge.game.card.CounterEnumType;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
@@ -48,34 +34,29 @@ import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
-import forge.game.player.DelayedReveal;
-import forge.game.player.Player;
-import forge.game.player.PlayerActionConfirmMode;
-import forge.game.player.PlayerController;
-import forge.game.player.PlayerView;
+import forge.game.player.*;
 import forge.game.replacement.ReplacementEffect;
-import forge.game.spellability.AbilitySub;
-import forge.game.spellability.OptionalCostValue;
-import forge.game.spellability.Spell;
-import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityStackInstance;
-import forge.game.spellability.TargetChoices;
+import forge.game.spellability.*;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.gamesimulationtests.util.card.CardSpecification;
 import forge.gamesimulationtests.util.card.CardSpecificationHandler;
 import forge.gamesimulationtests.util.player.PlayerSpecification;
 import forge.gamesimulationtests.util.player.PlayerSpecificationHandler;
-import forge.gamesimulationtests.util.playeractions.ActivateAbilityAction;
-import forge.gamesimulationtests.util.playeractions.CastSpellFromHandAction;
-import forge.gamesimulationtests.util.playeractions.DeclareAttackersAction;
-import forge.gamesimulationtests.util.playeractions.DeclareBlockersAction;
-import forge.gamesimulationtests.util.playeractions.PlayerActions;
+import forge.gamesimulationtests.util.playeractions.*;
 import forge.item.PaperCard;
 import forge.player.HumanPlay;
 import forge.util.ITriggerEvent;
 import forge.util.MyRandom;
 import forge.util.collect.FCollectionView;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+import org.testng.collections.Lists;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Default harmless implementation for tests.
@@ -120,7 +101,9 @@ public class PlayerControllerForTests extends PlayerController {
         if (
                 (effectSA.getHostCard().getName().equals("Nefarious Lich") && sai instanceof DrawAi) ||
                 (effectSA.getHostCard().getName().equals("Laboratory Maniac") && sai instanceof GameWinAi) ||
-                (effectSA.getHostCard().getName().equals("Nefarious Lich") && sai instanceof ChangeZoneAi)
+                (effectSA.getHostCard().getName().equals("Nefarious Lich") && sai instanceof ChangeZoneAi) ||
+                (effectSA.getHostCard().getName().equals("Near-Death Experience") && sai instanceof  GameWinAi) ||
+                (effectSA.getHostCard().getName().equals("Final Fortune") && sai instanceof GameLossAi)
         ) {//test_104_3f_if_a_player_would_win_and_lose_simultaneously_he_loses
             HumanPlay.playSpellAbilityNoStack(null, player, effectSA, !mayChoseNewTargets);
             return;

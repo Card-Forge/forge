@@ -17,45 +17,27 @@
  */
 package forge.card;
 
-import java.io.File;
-import java.io.FilenameFilter;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import forge.util.*;
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.ListMultimap;
-import com.google.common.collect.Lists;
-
+import com.google.common.collect.*;
 import forge.StaticData;
-import forge.card.CardDb.SetPreference;
+import forge.card.CardDb.CardArtPreference;
 import forge.deck.CardPool;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
+import forge.util.*;
 import forge.util.storage.StorageBase;
 import forge.util.storage.StorageReaderBase;
 import forge.util.storage.StorageReaderFolder;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.File;
+import java.io.FilenameFilter;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 /**
@@ -390,6 +372,20 @@ public final class CardEdition implements Comparable<CardEdition> {
         return cardsInSet;
     }
 
+    private ListMultimap<String, CardInSet> cardsInSetLookupMap = null;
+    public List<CardInSet> getCardInSet(String cardName){
+        if (cardsInSetLookupMap == null) {
+            // initialise
+            cardsInSetLookupMap = Multimaps.newListMultimap(new TreeMap<>(String.CASE_INSENSITIVE_ORDER), CollectionSuppliers.arrayLists());
+            List<CardInSet> cardsInSet = this.getAllCardsInSet();
+            for (CardInSet cis : cardsInSet){
+                String key = cis.name;
+                cardsInSetLookupMap.put(key, cis);
+            }
+        }
+        return this.cardsInSetLookupMap.get(cardName);
+    }
+
     public boolean isModern() { return getDate().after(parseDate("2003-07-27")); } //8ED and above are modern except some promo cards and others
 
     public Map<String, Integer> getTokens() { return tokenNormalized; }
@@ -530,7 +526,7 @@ public final class CardEdition implements Comparable<CardEdition> {
             /*
             The following pattern will match the WAR Japanese art entries,
             it should also match the Un-set and older alternate art cards
-            like Merseine from FEM (should the editions files ever be updated)
+            like Merseine from FEM.
              */
             //"(^(?<cnum>[0-9]+.?) )?((?<rarity>[SCURML]) )?(?<name>.*)$"
             /*  Ideally we'd use the named group above, but Android 6 and
@@ -816,37 +812,34 @@ public final class CardEdition implements Comparable<CardEdition> {
             };
         }
 
-        public CardEdition getEarliestEditionWithAllCards(CardPool cards) {
+        /* @leriomaggio
+          The original name "getEarliestEditionWithAllCards" was completely misleading, as it did
+          not reflect at all what the method really does (and what's the original goal).
+
+          What the method does is to return the **latest** (as in the most recent)
+          Card Edition among all the different "Original" sets (as in "first print") were cards
+          in the Pool can be found.
+          Therefore, nothing to do with an Edition "including" all the cards.
+         */
+        public CardEdition getTheLatestOfAllTheOriginalEditionsOfCardsIn(CardPool cards) {
             Set<String> minEditions = new HashSet<>();
-
-            SetPreference strictness = SetPreference.EarliestCoreExp;
-
+            CardDb db = StaticData.instance().getCommonCards();
             for (Entry<PaperCard, Integer> k : cards) {
-                PaperCard cp = StaticData.instance().getCommonCards().getCardFromEdition(k.getKey().getName(), strictness);
-                if (cp == null && strictness == SetPreference.EarliestCoreExp) {
-                    strictness = SetPreference.Earliest; // card is not found in core and expansions only (probably something CMD or C13)
-                    cp = StaticData.instance().getCommonCards().getCardFromEdition(k.getKey().getName(), strictness);
-                }
-                if (cp == null)
-                    cp = k.getKey(); // it's unlikely, this code will ever run
-
+                // NOTE: Even if we do force a very stringent Policy on Editions
+                // (which only considers core, expansions, and reprint editions), the fetch method
+                // is flexible enough to relax the constraint automatically, if no card can be found
+                // under those conditions (i.e. ORIGINAL_ART_ALL_EDITIONS will be automatically used instead).
+                PaperCard cp = db.getCardFromEditions(k.getKey().getName(),
+                                                      CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY);
+                if (cp == null)   // it's unlikely, this code will ever run. Only Happens if card does not exist.
+                    cp = k.getKey();
                 minEditions.add(cp.getEdition());
             }
-
             for (CardEdition ed : getOrderedEditions()) {
                 if (minEditions.contains(ed.getCode()))
                     return ed;
             }
             return UNKNOWN;
-        }
-
-        public Date getEarliestDateWithAllCards(CardPool cardPool) {
-            CardEdition earliestSet = StaticData.instance().getEditions().getEarliestEditionWithAllCards(cardPool);
-
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(earliestSet.getDate());
-            cal.add(Calendar.DATE, 1);
-            return cal.getTime();
         }
     }
 

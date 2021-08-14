@@ -1,25 +1,14 @@
 package forge.game.card;
 
-import java.util.Collections;
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.StaticData;
 import forge.card.CardDb;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
-import forge.game.CardTraitBase;
-import forge.game.Direction;
-import forge.game.EvenOdd;
-import forge.game.Game;
-import forge.game.GameEntity;
-import forge.game.GameObject;
+import forge.game.*;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.CardPredicates.Presets;
@@ -37,6 +26,10 @@ import forge.item.PaperCard;
 import forge.util.Expressions;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Collections;
+import java.util.List;
 
 public class CardProperty {
 
@@ -1729,11 +1722,9 @@ public class CardProperty {
             }
         } else if (property.startsWith("set")) {
             final String setCode = property.substring(3, 6);
-            if (card.getName().isEmpty()) {
-                return false;
-            }
-            final PaperCard setCard = StaticData.instance().getCommonCards().getCardFromEdition(card.getName(), CardDb.SetPreference.Earliest);
-            if (setCard != null && !setCard.getEdition().equals(setCode)) {
+            final PaperCard setCard = StaticData.instance().getCommonCards().getCardFromEditions(card.getName(),
+                                                                                     CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS);
+            if (!setCard.getEdition().equals(setCode)) {
                 return false;
             }
         } else if (property.startsWith("inZone")) {

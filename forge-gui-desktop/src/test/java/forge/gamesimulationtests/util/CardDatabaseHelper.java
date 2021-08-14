@@ -4,14 +4,12 @@ import forge.CardStorageReader;
 import forge.StaticData;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
-import forge.localinstance.properties.ForgePreferences.FPref;
-import forge.model.FModel;
 
 public class CardDatabaseHelper {
     private static StaticData staticData;
 
     public static PaperCard getCard(String name) {
-        initializeIfNeeded();
+        initializeIfNeeded(false);
 
         PaperCard result = staticData.getCommonCards().getCard(name);
         if (result == null) {
@@ -20,17 +18,28 @@ public class CardDatabaseHelper {
         return result;
     }
 
-    private static void initializeIfNeeded() {
+    private static void initializeIfNeeded(boolean lazyLoad) {
         if (hasBeenInitialized()) {
             return;
         }
-        initialize();
+        initialize(lazyLoad);
     }
 
-    private static void initialize() {
-        final CardStorageReader reader = new CardStorageReader(ForgeConstants.CARD_DATA_DIR, null, FModel.getPreferences().getPrefBoolean(FPref.LOAD_CARD_SCRIPTS_LAZILY));
-        final CardStorageReader customReader = new CardStorageReader(ForgeConstants.USER_CUSTOM_CARDS_DIR, null, FModel.getPreferences().getPrefBoolean(FPref.LOAD_CARD_SCRIPTS_LAZILY));
-        staticData = new StaticData(reader, customReader, ForgeConstants.EDITIONS_DIR, ForgeConstants.USER_CUSTOM_EDITIONS_DIR ,ForgeConstants.BLOCK_DATA_DIR, FModel.getPreferences().getPref(FPref.UI_PREFERRED_ART), FModel.getPreferences().getPrefBoolean(FPref.UI_LOAD_UNKNOWN_CARDS), FModel.getPreferences().getPrefBoolean(FPref.UI_LOAD_NONLEGAL_CARDS));
+    private static void initialize(boolean loadCardsLazily) {
+        final CardStorageReader reader = new CardStorageReader(ForgeConstants.CARD_DATA_DIR,
+                null, loadCardsLazily);
+        CardStorageReader customReader;
+        try {
+            customReader  = new CardStorageReader(ForgeConstants.USER_CUSTOM_CARDS_DIR,
+                    null, loadCardsLazily);
+        } catch (Exception e) {
+            customReader = null;
+        }
+        staticData = new StaticData(reader, customReader, ForgeConstants.EDITIONS_DIR,
+                ForgeConstants.USER_CUSTOM_EDITIONS_DIR ,ForgeConstants.BLOCK_DATA_DIR,
+                "Latest Art All Editions",
+                true,
+                false);
     }
 
     private static boolean hasBeenInitialized() {
@@ -38,7 +47,12 @@ public class CardDatabaseHelper {
     }
 
     public static StaticData getStaticDataToPopulateOtherMocks() {
-        initializeIfNeeded();
+        initializeIfNeeded(false);
+        return staticData;
+    }
+
+    public static StaticData getStaticDataToPopulateOtherMocks(boolean lazyLoad) {
+        initializeIfNeeded(lazyLoad);
         return staticData;
     }
 }

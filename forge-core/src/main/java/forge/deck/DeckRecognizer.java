@@ -17,17 +17,16 @@
  */
 package forge.deck;
 
+import forge.card.CardDb;
+import forge.card.CardDb.CardArtPreference;
+import forge.card.ICardDatabase;
+import forge.item.PaperCard;
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.apache.commons.lang3.StringUtils;
-
-import forge.card.CardDb;
-import forge.card.CardDb.SetPreference;
-import forge.card.ICardDatabase;
-import forge.item.PaperCard;
 
 /**
  * <p>
@@ -105,7 +104,7 @@ public class DeckRecognizer {
     //private static final Pattern READ_SEPARATED_EDITION = Pattern.compile("[[\\(\\{]([a-zA-Z0-9]){1,3})[]*\\s+(.*)");
     private static final Pattern SEARCH_SINGLE_SLASH = Pattern.compile("(?<=[^/])\\s*/\\s*(?=[^/])");
 
-    private final SetPreference useLastSet;
+    private final CardArtPreference useLastSet;
     private final ICardDatabase db;
     private Date recognizeCardsPrintedBefore = null;
     
@@ -114,10 +113,10 @@ public class DeckRecognizer {
             useLastSet = null;
         }
         else if (onlyCoreAndExp) {
-            useLastSet = SetPreference.LatestCoreExp;
+            useLastSet = CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY;
         }
         else {
-            useLastSet = SetPreference.Latest;
+            useLastSet = CardArtPreference.LATEST_ART_ALL_EDITIONS;
         }
         this.db = db;
     }
@@ -156,7 +155,7 @@ public class DeckRecognizer {
     }
 
     private PaperCard tryGetCard(String text) {
-        return db.getCardFromEdition(text, recognizeCardsPrintedBefore, useLastSet);
+        return db.getCardFromEditionsReleasedBefore(text, useLastSet, recognizeCardsPrintedBefore);
     }
     
     private Token recognizePossibleNameAndNumber(final String name, final int n) {

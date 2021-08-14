@@ -1,15 +1,6 @@
 package forge.item;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
-
 import com.google.common.collect.Iterables;
-
 import forge.GuiDesktop;
 import forge.card.CardRarity;
 import forge.card.CardRules;
@@ -18,6 +9,13 @@ import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
 import junit.framework.Assert;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Tests for DeckHints.
@@ -173,7 +171,7 @@ public class DeckHintsTest {
             crr.parseLine(line);
         }
         // Don't care what the actual set or rarity is here.
-        return new PaperCard(crr.getCard(), "M11", CardRarity.Common, 0);
+        return new PaperCard(crr.getCard(), "M11", CardRarity.Common);
     }
 
 }

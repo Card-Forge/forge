@@ -17,21 +17,10 @@
  */
 package forge.screens.deckeditor.controllers;
 
-import java.util.Date;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Supplier;
-
 import forge.StaticData;
-import forge.deck.CardPool;
-import forge.deck.Deck;
-import forge.deck.DeckBase;
-import forge.deck.DeckProxy;
-import forge.deck.DeckSection;
+import forge.card.CardEdition;
+import forge.deck.*;
 import forge.item.PaperCard;
 import forge.screens.deckeditor.menus.DeckFileMenu;
 import forge.screens.deckeditor.views.VCurrentDeck;
@@ -42,6 +31,12 @@ import forge.screens.home.sanctioned.VSubmenuConstructed;
 import forge.util.ItemPool;
 import forge.util.Localizer;
 import forge.util.storage.IStorage;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Date;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DeckController<T extends DeckBase> {
     private T model;
@@ -116,11 +111,13 @@ public class DeckController<T extends DeckBase> {
     }
 
     private Deck pickFromCatalog(Deck deck, CardPool catalog) {
-        Date dateWithAllCards = StaticData.instance().getEditions().getEarliestDateWithAllCards(catalog);
+        // Getting Latest among the earliest editions in catalog!
+        CardEdition referenceEdition = StaticData.instance().getEditions().getTheLatestOfAllTheOriginalEditionsOfCardsIn(catalog);
+        Date referenceReleaseDate = referenceEdition.getDate();
         Deck result = new Deck();
         for (DeckSection section: EnumSet.allOf(DeckSection.class)) {
             if (view.isSectionImportable(section)) {
-                CardPool cards = pickSectionFromCatalog(catalog, deck.getOrCreate(section), dateWithAllCards);
+                CardPool cards = pickSectionFromCatalog(catalog, deck.getOrCreate(section), referenceReleaseDate);
                 result.putSection(section, cards);
             }
         }
@@ -128,43 +125,35 @@ public class DeckController<T extends DeckBase> {
         return result;
     }
 
-    private CardPool pickSectionFromCatalog(CardPool catalog, CardPool sourceSection, Date dateWithAllCards) {
-        HashMap<String, Integer> countByName = groupByName(sourceSection);
-        HashMap<String, PaperCard> basicLandsByName = getBasicLandsByName(sourceSection);
+    private CardPool pickSectionFromCatalog(CardPool catalog, CardPool sourceSection, Date referenceReleaseDate) {
+        Map<String, Integer> countByName = groupByName(sourceSection);
+        Map<String, PaperCard> basicLandsByName = getBasicLandsByName(sourceSection);
 
         CardPool targetSection = new CardPool();
         pickFromCatalog(countByName, catalog, targetSection);
-        importBasicLands(countByName, basicLandsByName, dateWithAllCards, targetSection);
+        importBasicLands(countByName, basicLandsByName, referenceReleaseDate, targetSection);
 
         return targetSection;
     }
 
-    private HashMap<String, Integer> groupByName(CardPool section) {
-        HashMap<String, Integer> result = new HashMap<>();
-
+    private Map<String, Integer> groupByName(CardPool section) {
+        Map<String, Integer> result = new HashMap<>();
         for (Map.Entry<PaperCard, Integer> entry : section) {
             PaperCard importedCard = entry.getKey();
-
             Integer previousCount = result.getOrDefault(importedCard.getName(), 0);
             int countToAdd = entry.getValue();
-
             result.put(importedCard.getName(), countToAdd + previousCount);
         }
-
         return result;
     }
 
-    private void pickFromCatalog(HashMap<String, Integer> countByName, CardPool catalog, CardPool targetSection) {
+    private void pickFromCatalog(Map<String, Integer> countByName, CardPool catalog, CardPool targetSection) {
 
         CardPool catalogClone = new CardPool(catalog); // clone to iterate modified collection
         for (Map.Entry<PaperCard, Integer> entry : catalogClone) {
-
             PaperCard availableCard = entry.getKey();
-            if (availableCard.getRules().getType().isBasicLand()) {
-                // basic lands are added regardless of catalog cards
+            if (availableCard.getRules().getType().isBasicLand())  // basic lands are added regardless of catalog cards
                 continue;
-            }
-
             Integer availableCount = entry.getValue();
             int toAddByName = countByName.getOrDefault(availableCard.getName(), 0);
             int toAdd = Math.min(availableCount, toAddByName);
@@ -177,19 +166,17 @@ public class DeckController<T extends DeckBase> {
         }
     }
 
-    private void importBasicLands(HashMap<String, Integer> countByName, HashMap<String, PaperCard> basicLandsByName, Date dateWithAllCards, CardPool targetSection) {
+    private void importBasicLands(Map<String, Integer> countByName, Map<String, PaperCard> basicLandsByName,
+                                  Date referenceReleaseDate, CardPool targetSection) {
         for (String cardName : countByName.keySet()) {
-
             PaperCard card = basicLandsByName.getOrDefault(cardName, null);
-
-            if (card == null) {
+            if (card == null)
                 continue;
-            }
-
             int countToAdd = countByName.get(cardName);
-
-            card = StaticData.instance().getCardByEditionDate(card, dateWithAllCards);
-            targetSection.add(card.getName(), card.getEdition(), countToAdd);
+            card = StaticData.instance().getAlternativeCardPrint(card, referenceReleaseDate,
+                                        true, true);
+            if (card != null)
+                targetSection.add(card.getName(), card.getEdition(), countToAdd);
         }
     }
 
