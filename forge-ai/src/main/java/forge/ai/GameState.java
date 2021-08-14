@@ -1202,6 +1202,8 @@ public abstract class GameState {
             p.getZone(zt).removeAllCards(true);
         }
 
+        p.setCommanders(Lists.newArrayList());
+
         Map<ZoneType, CardCollectionView> playerCards = new EnumMap<>(ZoneType.class);
         for (Entry<ZoneType, String> kv : cardTexts.entrySet()) {
             String value = kv.getValue();
@@ -1345,7 +1347,9 @@ public abstract class GameState {
                     c.setExiledBy(c.getController());
                 } else if (info.startsWith("IsCommander")) {
                     c.setCommander(true);
-                    player.setCommanders(Lists.newArrayList(c));
+                    List<Card> cmd = Lists.newArrayList(player.getCommanders());
+                    cmd.add(c);
+                    player.setCommanders(cmd);
                 } else if (info.startsWith("Id:")) {
                     int id = Integer.parseInt(info.substring(3));
                     idToCard.put(id, c);

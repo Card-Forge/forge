@@ -4,7 +4,7 @@ Types:Creature Elemental Incarnation
 PT:6/6
 K:Trample
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Creature.YouCtrl+Other | ReplaceWith$ Counters | PreventionEffect$ True | ExecuteMode$ PerTarget | Description$ If damage would be dealt to another creature you control, prevent that damage. Put a +1/+1 counter on that creature for each 1 damage prevented this way.
-SVar:Counters:DB$PutCounter | Defined$ ReplacedTarget | CounterType$ P1P1 | CounterNum$ X
+SVar:Counters:DB$ PutCounter | Defined$ ReplacedTarget | CounterType$ P1P1 | CounterNum$ X
 SVar:X:ReplaceCount$DamageAmount
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Creature.Self | Execute$ TrigShuffle | TriggerDescription$ When CARDNAME is put into a graveyard from anywhere, shuffle it into its owner's library.
 SVar:TrigShuffle:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | Shuffle$ True | Defined$ TriggeredCardLKICopy
