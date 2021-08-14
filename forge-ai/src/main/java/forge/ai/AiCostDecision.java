@@ -60,7 +60,6 @@ public class AiCostDecision extends CostDecisionMakerBase {
         return PaymentDecision.number(c);
     }
 
-
     @Override
     public PaymentDecision visit(CostChooseCreatureType cost) {
         String choice = player.getController().chooseSomeType("Creature", ability, CardType.getAllCreatureTypes(),
@@ -187,7 +186,6 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(CostExileFromStack cost) {
-
         Integer c = cost.convertAmount();
         if (c == null) {
             c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
@@ -418,7 +416,6 @@ public class AiCostDecision extends CostDecisionMakerBase {
         return PaymentDecision.card(card);
     }
 
-
     @Override
     public PaymentDecision visit(CostTap cost) {
         return PaymentDecision.number(0);
@@ -477,7 +474,6 @@ public class AiCostDecision extends CostDecisionMakerBase {
         return PaymentDecision.card(totap);
     }
 
-
     @Override
     public PaymentDecision visit(CostSacrifice cost) {
         if (cost.payCostFromSource()) {
@@ -498,7 +494,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             c = AbilityUtils.calculateAmount(source, amount, ability);
         }
         final AiController aic = ((PlayerControllerAi)player.getController()).getAi();
-        CardCollectionView list = aic.chooseSacrificeType(cost.getType(), ability, c);
+        CardCollectionView list = aic.chooseSacrificeType(cost.getType(), ability, c, null);
         return PaymentDecision.card(list);
     }
 

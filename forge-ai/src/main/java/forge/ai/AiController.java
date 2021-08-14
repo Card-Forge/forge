@@ -138,11 +138,11 @@ public class AiController {
     public void setUseSimulation(boolean value) {
         this.useSimulation = value;
     }
-    
+
     public SpellAbilityPicker getSimulationPicker() {
         return simPicker;
     }
-    
+
     public Game getGame() {
         return game;
     }
@@ -683,18 +683,16 @@ public class AiController {
         return null;
     }
 
-    public boolean reserveManaSources(SpellAbility sa) {
-        return reserveManaSources(sa, PhaseType.MAIN2, false, false, null);
-    }
-
     public boolean reserveManaSourcesForNextSpell(SpellAbility sa, SpellAbility exceptForSa) {
         return reserveManaSources(sa, null, false, true, exceptForSa);
     }
 
+    public boolean reserveManaSources(SpellAbility sa) {
+        return reserveManaSources(sa, PhaseType.MAIN2, false, false, null);
+    }
     public boolean reserveManaSources(SpellAbility sa, PhaseType phaseType, boolean enemy) {
         return reserveManaSources(sa, phaseType, enemy, true, null);
     }
-
     public boolean reserveManaSources(SpellAbility sa, PhaseType phaseType, boolean enemy, boolean forNextSpell, SpellAbility exceptForThisSa) {
         ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(sa, true, 0);
         CardCollection manaSources = ComputerUtilMana.getManaSourcesToPayCost(cost, sa, player);
@@ -2223,11 +2221,11 @@ public class AiController {
         return null;
     }
 
-    public CardCollectionView chooseSacrificeType(String type, SpellAbility ability, int amount) {
+    public CardCollectionView chooseSacrificeType(String type, SpellAbility ability, int amount, final CardCollectionView exclude) {
         if (simPicker != null) {
-            return simPicker.chooseSacrificeType(type, ability, amount);
+            return simPicker.chooseSacrificeType(type, ability, amount, exclude);
         }
-        return ComputerUtil.chooseSacrificeType(player, type, ability, ability.getTargetCard(), amount);
+        return ComputerUtil.chooseSacrificeType(player, type, ability, ability.getTargetCard(), amount, exclude);
     }
 
     private boolean checkAiSpecificRestrictions(final SpellAbility sa) {

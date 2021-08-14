@@ -52,13 +52,11 @@ public class CostChooseCreatureType extends CostPart {
         return true;
     }
 
-    
     @Override
     public boolean payAsDecided(Player payer, PaymentDecision pd, SpellAbility sa) {
         sa.getHostCard().setChosenType(pd.type);
         return true;
     }
-    
 
     /*
      * (non-Javadoc)

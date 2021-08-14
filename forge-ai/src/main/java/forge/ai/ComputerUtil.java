@@ -555,9 +555,13 @@ public class ComputerUtil {
         return -1;
     }
 
-    public static CardCollection chooseSacrificeType(final Player ai, final String type, final SpellAbility ability, final Card target, final int amount) {
+    public static CardCollection chooseSacrificeType(final Player ai, final String type, final SpellAbility ability, final Card target, final int amount, final CardCollectionView exclude) {
         final Card source = ability.getHostCard();
         CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, ability);
+
+        if (exclude != null) {
+            typeList.removeAll(exclude);
+        }
 
         typeList = CardLists.filter(typeList, CardPredicates.canBeSacrificedBy(ability));
 

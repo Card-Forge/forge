@@ -3,6 +3,8 @@ package forge.ai;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.*;
+
+import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.AnimateAi;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -51,37 +53,19 @@ public class ComputerUtilMana {
         cost = new ManaCostBeingPaid(cost); //check copy of cost so it doesn't modify the exist cost being paid
         return payManaCost(cost, sa, ai, true, true);
     }
-
-    public static boolean payManaCost(ManaCostBeingPaid cost, final SpellAbility sa, final Player ai) {
-        return payManaCost(cost, sa, ai, false, true);
-    }
-
     public static boolean canPayManaCost(final SpellAbility sa, final Player ai, final int extraMana) {
         return payManaCost(sa, ai, true, extraMana, true);
     }
 
-    /**
-     * Return the number of colors used for payment for Converge
-     */
-    public static int getConvergeCount(final SpellAbility sa, final Player ai) {
-        ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(sa, true, 0);
-        if (payManaCost(cost, sa, ai, true, true)) {
-            return cost.getSunburst();
-        } else {
-            return 0;
-        }
+    public static boolean payManaCost(ManaCostBeingPaid cost, final SpellAbility sa, final Player ai) {
+        return payManaCost(cost, sa, ai, false, true);
     }
-
-    // Does not check if mana sources can be used right now, just checks for potential chance.
-    public static boolean hasEnoughManaSourcesToCast(final SpellAbility sa, final Player ai) {
-        if(ai == null || sa == null)
-            return false;
-        sa.setActivatingPlayer(ai);
-        return payManaCost(sa, ai, true, 0, false);
-    }
-
     public static boolean payManaCost(final Player ai, final SpellAbility sa) {
         return payManaCost(sa, ai, false, 0, true);
+    }
+    private static boolean payManaCost(final SpellAbility sa, final Player ai, final boolean test, final int extraMana, boolean checkPlayable) {
+        ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(sa, test, extraMana);
+        return payManaCost(cost, sa, ai, test, checkPlayable);
     }
 
     private static void refundMana(List<Mana> manaSpent, Player ai, SpellAbility sa) {
@@ -94,9 +78,23 @@ public class ComputerUtilMana {
         manaSpent.clear();
     }
 
-    private static boolean payManaCost(final SpellAbility sa, final Player ai, final boolean test, final int extraMana, boolean checkPlayable) {
-        ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(sa, test, extraMana);
-        return payManaCost(cost, sa, ai, test, checkPlayable);
+    /**
+     * Return the number of colors used for payment for Converge
+     */
+    public static int getConvergeCount(final SpellAbility sa, final Player ai) {
+        ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(sa, true, 0);
+        if (payManaCost(cost, sa, ai, true, true)) {
+            return cost.getSunburst();
+        }
+        return 0;
+    }
+
+    // Does not check if mana sources can be used right now, just checks for potential chance.
+    public static boolean hasEnoughManaSourcesToCast(final SpellAbility sa, final Player ai) {
+        if (ai == null || sa == null)
+            return false;
+        sa.setActivatingPlayer(ai);
+        return payManaCost(sa, ai, true, 0, false);
     }
 
     private static Integer scoreManaProducingCard(final Card card) {
@@ -313,6 +311,18 @@ public class ComputerUtilMana {
             }
 
             if (saHost != null) {
+                if (ma.getPayCosts().hasTapCost() && AiCardMemory.isRememberedCard(ai, ma.getHostCard(), MemorySet.PAYS_TAP_COST)) {
+                    continue;
+                }
+
+                if (!ComputerUtilCost.checkTapTypeCost(ai, ma.getPayCosts(), ma.getHostCard(), sa)) {
+                    continue;
+                }
+                
+                if (!ComputerUtilCost.checkForManaSacrificeCost(ai, ma.getPayCosts(), ma.getHostCard(), ma)) {
+                    continue;
+                }
+
                 if (sa.getApi() == ApiType.Animate) {
                     // For abilities like Genju of the Cedars, make sure that we're not activating the aura ability by tapping the enchanted card for mana
                     if (saHost.isAura() && "Enchanted".equals(sa.getParam("Defined"))
@@ -347,7 +357,6 @@ public class ComputerUtilMana {
                         }
                     }
                 }
-
             }
 
             SpellAbility paymentChoice = ma;
@@ -658,7 +667,10 @@ public class ComputerUtilMana {
     } // getManaSourcesToPayCost()
 
     private static boolean payManaCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean test, boolean checkPlayable) {
+        AiCardMemory.clearMemorySet(ai, MemorySet.PAYS_TAP_COST);
+        AiCardMemory.clearMemorySet(ai, MemorySet.PAYS_SAC_COST);
         adjustManaCostToAvoidNegEffects(cost, sa.getHostCard(), ai);
+
         List<Mana> manaSpentToPay = test ? new ArrayList<>() : sa.getPayingMana();
         boolean purePhyrexian = cost.containsOnlyPhyrexianMana();
         int testEnergyPool = ai.getCounters(CounterEnumType.ENERGY);
@@ -805,6 +817,10 @@ public class ComputerUtilMana {
 
             setExpressColorChoice(sa, ai, cost, toPay, saPayment);
 
+            if (saPayment.getPayCosts().hasTapCost()) {
+                AiCardMemory.rememberCard(ai, saPayment.getHostCard(), MemorySet.PAYS_TAP_COST);
+            }
+
             if (test) {
                 // Check energy when testing
                 CostPayEnergy energyCost = saPayment.getPayCosts().getCostEnergy();
@@ -863,7 +879,7 @@ public class ComputerUtilMana {
                 resetPayment(paymentList);
                 return false;
             } else {
-                System.out.println("ComputerUtil : payManaCost() cost was not paid for " + sa.getHostCard().getName() + ". Didn't find what to pay for " + toPay);
+                System.out.println("ComputerUtilMana: payManaCost() cost was not paid for " + sa.toString() + " (" +  sa.getHostCard().getName() + "). Didn't find what to pay for " + toPay);
                 return false;
             }
         }
@@ -1157,8 +1173,7 @@ public class ComputerUtilMana {
             // if the AI can't pay the additional costs skip the mana ability
             if (!CostPayment.canPayAdditionalCosts(ma.getPayCosts(), ma)) {
                 return false;
-            }
-            else if (sourceCard.isTapped()) {
+            } else if (sourceCard.isTapped()) {
                 return false;
             } else if (ma.getRestrictions() != null && ma.getRestrictions().isInstantSpeed()) {
                 return false;
@@ -1206,8 +1221,7 @@ public class ComputerUtilMana {
 
     // isManaSourceReserved returns true if sourceCard is reserved as a mana source for payment
     // for the future spell to be cast in another phase. However, if "sa" (the spell ability that is
-    // being considered for casting) is high priority, then mana source reservation will be
-    // ignored.
+    // being considered for casting) is high priority, then mana source reservation will be ignored.
     private static boolean isManaSourceReserved(Player ai, Card sourceCard, SpellAbility sa) {
         if (sa == null) {
             return false;
@@ -1528,7 +1542,6 @@ public class ComputerUtilMana {
     public static int getAvailableManaEstimate(final Player p) {
         return getAvailableManaEstimate(p, true);
     }
-
     public static int getAvailableManaEstimate(final Player p, final boolean checkPlayable) {
         int availableMana = 0;
 

@@ -35,7 +35,6 @@ public class CostReturn extends CostPartWithList {
      */
     private static final long serialVersionUID = 1L;
 
-
     /**
      * Instantiates a new cost return.
      * 
@@ -137,7 +136,5 @@ public class CostReturn extends CostPartWithList {
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);
     }
-
-
 
 }

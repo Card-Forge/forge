@@ -13,6 +13,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
+import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.AnimateAi;
 import forge.card.ColorSet;
 import forge.game.Game;
@@ -245,6 +246,47 @@ public class ComputerUtilCost {
         return true;
     }
 
+    public static boolean checkForManaSacrificeCost(final Player ai, final Cost cost, final Card source, final SpellAbility sourceAbility) {
+        if (cost == null) {
+            return true;
+        }
+        for (final CostPart part : cost.getCostParts()) {
+            if (part instanceof CostSacrifice) {
+                CardCollection list = new CardCollection();
+                final CardCollection exclude = new CardCollection(AiCardMemory.getMemorySet(ai, MemorySet.PAYS_SAC_COST));
+                if (part.payCostFromSource()) {
+                    list.add(source);
+                } else if (part.getType().equals("OriginalHost")) {
+                    list.add(sourceAbility.getOriginalHost());
+                } else if (part.getAmount().equals("All")) {
+                    // Does the AI want to use Sacrifice All?
+                    return false;
+                } else {
+                    final String amount = part.getAmount();
+                    Integer c = part.convertAmount();
+
+                    if (c == null) {
+                        c = AbilityUtils.calculateAmount(source, amount, sourceAbility);
+                    }
+                    final AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+                    CardCollectionView choices = aic.chooseSacrificeType(part.getType(), sourceAbility, c, exclude);
+                    if (choices != null) {
+                        list.addAll(choices);
+                    }
+                }
+                list.removeAll(exclude);
+                if (list.isEmpty()) {
+                    return false;
+                }
+                for (Card choice : list) {
+                    AiCardMemory.rememberCard(ai, choice, MemorySet.PAYS_SAC_COST);
+                }
+                return true;
+            }
+        }
+        return true;
+    }
+
     /**
      * Check creature sacrifice cost.
      *
@@ -388,6 +430,8 @@ public class ComputerUtilCost {
         }
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostTapType) {
+                String type = part.getType();
+
                 /*
                  * Only crew with creatures weaker than vehicle
                  *
@@ -398,7 +442,6 @@ public class ComputerUtilCost {
                 if (sa.hasParam("Crew")) {
                     Card vehicle = AnimateAi.becomeAnimated(source, sa);
                     final int vehicleValue = ComputerUtilCard.evaluateCreature(vehicle);
-                    String type = part.getType();
                     String totalP = type.split("withTotalPowerGE")[1];
                     type = TextUtil.fastReplace(type, TextUtil.concatNoSpace("+withTotalPowerGE", totalP), "");
                     CardCollection exclude = CardLists.getValidCards(
@@ -412,6 +455,32 @@ public class ComputerUtilCost {
                     }); // exclude creatures >= vehicle
                     return ComputerUtil.chooseTapTypeAccumulatePower(ai, type, sa, true,
                             Integer.parseInt(totalP), exclude) != null;
+                }
+
+                // check if we have a valid card to tap (e.g. Jaspera Sentinel)
+                Integer c = part.convertAmount();
+                if (c == null) {
+                    c = AbilityUtils.calculateAmount(source, part.getAmount(), sa);
+                }
+                CardCollection exclude = new CardCollection(AiCardMemory.getMemorySet(ai, MemorySet.PAYS_TAP_COST));
+                // trying to produce mana that includes tapping source that will already be tapped
+                if (exclude.contains(source) && cost.hasTapCost()) {
+                    return false;
+                }
+                // if we want to pay for an ability with tapping the source can't be chosen
+                if (sa.getPayCosts().hasTapCost()) {
+                    exclude.add(sa.getHostCard());
+                }
+                CardCollection tapChoices = ComputerUtil.chooseTapType(ai, type, source, cost.hasTapCost(), c, exclude, sa);
+                if (tapChoices != null) {
+                    for (Card choice : tapChoices) {
+                        AiCardMemory.rememberCard(ai, choice, MemorySet.PAYS_TAP_COST);
+                    }
+                    // if manasource gets tapped to produce it also can't help paying another
+                    if (cost.hasTapCost()) {
+                        AiCardMemory.rememberCard(ai, source, MemorySet.PAYS_TAP_COST);
+                    }
+                    return true;
                 }
                 return false;
             }
@@ -662,7 +731,6 @@ public class ComputerUtilCost {
     public static Set<String> getAvailableManaColors(Player ai, Card additionalLand) {
         return getAvailableManaColors(ai, Lists.newArrayList(additionalLand));
     }
-
     public static Set<String> getAvailableManaColors(Player ai, List<Card> additionalLands) {
         CardCollection cardsToConsider = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Presets.UNTAPPED);
         Set<String> colorsAvailable = Sets.newHashSet();
