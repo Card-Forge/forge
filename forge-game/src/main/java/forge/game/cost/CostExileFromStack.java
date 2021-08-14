@@ -97,7 +97,6 @@ public class CostExileFromStack extends CostPart {
         return (amount == null) || (list.size() >= amount);
     }
 
-
     /*
      * (non-Javadoc)
      * 

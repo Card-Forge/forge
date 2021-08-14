@@ -311,7 +311,8 @@ public abstract class TapAiBase extends SpellAbilityAi {
             }
 
             final List<Card> pDefined = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
-            return pDefined.isEmpty() || (pDefined.get(0).isUntapped() && pDefined.get(0).getController() != ai);
+            // might be from ETBreplacement
+            return pDefined.isEmpty() || !pDefined.get(0).isInPlay() || (pDefined.get(0).isUntapped() && pDefined.get(0).getController() != ai);
         } else {
             sa.resetTargets();
             if (tapPrefTargeting(ai, source, sa, mandatory)) {

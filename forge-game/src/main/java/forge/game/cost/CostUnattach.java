@@ -81,7 +81,6 @@ public class CostUnattach extends CostPartWithList {
         } else {
             return CardLists.getValidCards(source.getEquippedBy(), type, payer, source, ability).size() > 0;
         }
-
     }
 
     public Card findCardToUnattach(final Card source, Player activator, SpellAbility ability) {
@@ -122,7 +121,6 @@ public class CostUnattach extends CostPartWithList {
     	return "UnattachedCards";
     }
 
-   
     public <T> T accept(ICostVisitor<T> visitor) {
         return visitor.visit(this);
     }

@@ -57,7 +57,6 @@ public class CostSacrifice extends CostPartWithList {
     @Override
     public int paymentOrder() { return 15; }
 
-
     @Override
     public Integer getMaxAmountX(SpellAbility ability, Player payer) {
         final Card source = ability.getHostCard();

@@ -57,7 +57,9 @@ public class AiCardMemory {
         BOUNCED_THIS_TURN, // These cards were bounced this turn
         ACTIVATED_THIS_TURN, // These cards had their ability activated this turn
         CHOSEN_FOG_EFFECT, // These cards are marked as the Fog-like effect the AI is planning to cast this turn
-        MARKED_TO_AVOID_REENTRY // These cards may cause a stack smash when processed recursively, and are thus marked to avoid a crash
+        MARKED_TO_AVOID_REENTRY, // These cards may cause a stack smash when processed recursively, and are thus marked to avoid a crash
+        PAYS_TAP_COST, // These cards will be tapped as part of a cost and cannot be chosen in another part
+        PAYS_SAC_COST // These cards will be sacrificed as part of a cost and cannot be chosen in another part
         //REVEALED_CARDS // stub, not linked to AI code yet
     }
 
@@ -73,6 +75,8 @@ public class AiCardMemory {
     private final Set<Card> memActivatedThisTurn;
     private final Set<Card> memChosenFogEffect;
     private final Set<Card> memMarkedToAvoidReentry;
+    private final Set<Card> memPaysTapCost;
+    private final Set<Card> memPaysSacCost;
 
     public AiCardMemory() {
         this.memMandatoryAttackers = new HashSet<>();
@@ -87,6 +91,8 @@ public class AiCardMemory {
         this.memChosenFogEffect = new HashSet<>();
         this.memMarkedToAvoidReentry = new HashSet<>();
         this.memHeldManaSourcesForNextSpell = new HashSet<>();
+        this.memPaysTapCost = new HashSet<>();
+        this.memPaysSacCost = new HashSet<>();
     }
 
     private Set<Card> getMemorySet(MemorySet set) {
@@ -115,6 +121,10 @@ public class AiCardMemory {
                 return memChosenFogEffect;
             case MARKED_TO_AVOID_REENTRY:
                 return memMarkedToAvoidReentry;
+            case PAYS_TAP_COST:
+                return memPaysTapCost;
+            case PAYS_SAC_COST:
+                return memPaysSacCost;
             //case REVEALED_CARDS:
             //    return memRevealedCards;
             default:
@@ -313,6 +323,12 @@ public class AiCardMemory {
     }
 
     // Static functions to simplify access to AI card memory of a given AI player.
+    public static Set<Card> getMemorySet(Player ai, MemorySet set) {
+        if (!ai.getController().isAI()) {
+            return null;
+        }
+        return ((PlayerControllerAi)ai.getController()).getAi().getCardMemory().getMemorySet(set);
+    }
     public static void rememberCard(Player ai, Card c, MemorySet set) {
         if (!ai.getController().isAI()) {
             return;

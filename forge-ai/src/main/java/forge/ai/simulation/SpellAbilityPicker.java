@@ -431,7 +431,7 @@ public class SpellAbilityPicker {
         }
     }
 
-    public CardCollectionView chooseSacrificeType(String type, SpellAbility ability, int amount) {
+    public CardCollectionView chooseSacrificeType(String type, SpellAbility ability, int amount, final CardCollectionView exclude) {
         if (amount == 1) {
             Card source = ability.getHostCard();
             CardCollection cardList = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, null);
@@ -447,7 +447,7 @@ public class SpellAbilityPicker {
                 }
             }
         }
-        return ComputerUtil.chooseSacrificeType(player, type, ability, ability.getTargetCard(), amount);
+        return ComputerUtil.chooseSacrificeType(player, type, ability, ability.getTargetCard(), amount, exclude);
     }
 
     public static class PlayLandAbility extends LandAbility {

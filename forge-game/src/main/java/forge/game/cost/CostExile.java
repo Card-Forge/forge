@@ -143,7 +143,13 @@ public class CostExile extends CostPartWithList {
             list = CardLists.getValidCards(list, type.split(";"), payer, source, ability);
         }
 
-        final Integer amount = this.convertAmount();
+        Integer amount = this.convertAmount();
+
+        // for cards like Allosaurus Rider, do not count it
+        if (this.from == ZoneType.Hand && source.isInZone(ZoneType.Hand) && list.contains(source)) {
+            amount++;
+        }
+
         if ((amount != null) && (list.size() < amount)) {
             return false;
         }
