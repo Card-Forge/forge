@@ -1,12 +1,7 @@
 package forge.ai;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.card.CardStateName;
 import forge.card.ICardFace;
 import forge.card.mana.ManaCost;
@@ -24,7 +19,12 @@ import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityCondition;
+import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Base class for API-specific AI logic
@@ -72,10 +72,12 @@ public abstract class SpellAbilityAi {
 
         if (sa.hasParam("AILogic")) {
             final String logic = sa.getParam("AILogic");
+            final boolean alwaysOnDiscard = "AlwaysOnDiscard".equals(logic) && ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN, ai)
+                    && ai.getCardsIn(ZoneType.Hand).size() > ai.getMaxHandSize();
             if (!checkAiLogic(ai, sa, logic)) {
                 return false;
             }
-            if (!checkPhaseRestrictions(ai, sa, ai.getGame().getPhaseHandler(), logic)) {
+            if (!alwaysOnDiscard && !checkPhaseRestrictions(ai, sa, ai.getGame().getPhaseHandler(), logic)) {
                 return false;
             }
         } else {
