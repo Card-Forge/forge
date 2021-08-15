@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Creature Goblin Warrior
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigClash | TriggerDescription$ When CARDNAME enters the battlefield, clash with an opponent. If you win, put a +1/+1 counter on CARDNAME.
-SVar:TrigClash:DB$Clash | WinSubAbility$ DBPutCounter
-SVar:DBPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigClash:DB$ Clash | WinSubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/adder_staff_boggart.jpg
 Oracle:When Adder-Staff Boggart enters the battlefield, clash with an opponent. If you win, put a +1/+1 counter on Adder-Staff Boggart. (Each clashing player reveals the top card of their library, then puts that card on the top or bottom. A player wins if their card had a higher mana value.)
