@@ -1504,6 +1504,11 @@ public class ComputerUtilMana {
                 manaToAdd = AbilityUtils.calculateAmount(card, "X", sa) * xCounter;
             }
 
+            if (manaToAdd < 1 && !payCosts.getCostMana().canXbe0()) {
+                // AI cannot really handle X costs properly but this keeps AI form violating rules
+                manaToAdd = 1;
+            }
+
             String xColor = sa.getParamOrDefault("XColor", "1");
             if (card.hasKeyword("Spend only colored mana on X. No more than one mana of each color may be spent this way.")) {
                 xColor = "WUBRGX";
