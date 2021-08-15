@@ -146,6 +146,14 @@ public class AnimateAi extends SpellAbilityAi {
         if (!ComputerUtilCost.checkTapTypeCost(aiPlayer, sa.getPayCosts(), source, sa)) {
             return false;   // prevent crewing with equal or better creatures
         }
+
+        if (sa.costHasManaX() && sa.getSVar("X").equals("Count$xPaid")) {
+            // Set PayX here to maximum value.
+            final int xPay = ComputerUtilCost.getMaxXValue(sa, aiPlayer);
+
+            sa.setXManaCostPaid(xPay);
+        }
+
         if (!sa.usesTargeting()) {
             final List<Card> defined = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
             boolean bFlag = false;
