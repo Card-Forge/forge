@@ -154,12 +154,6 @@ public final class ImageKeys {
             file = findFile(dir, TextUtil.addSuffix(filename,".fullborder"));
             if (file != null) { return file; }
         }
-        // some S00 cards are really part of 6ED
-        String s2kAlias = getSetFolder("S00");
-        if (filename.startsWith(s2kAlias)) {
-            file = findFile(dir, TextUtil.fastReplace(filename, s2kAlias, getSetFolder("6ED")));
-            if (file != null) { return file; }
-        }
 
         if (dir.equals(CACHE_TOKEN_PICS_DIR)) {
             int index = filename.lastIndexOf('_');
