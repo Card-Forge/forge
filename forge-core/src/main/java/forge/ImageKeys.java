@@ -129,6 +129,23 @@ public final class ImageKeys {
             // if there's a 1st art variant try with it for .full images
             file = findFile(dir, filename.replaceAll("[0-9]*.full", "1.full"));
             if (file != null) { return file; }
+            //setlookup
+            if (!StaticData.instance().getSetLookup().isEmpty()) {
+                for (String setKey : StaticData.instance().getSetLookup().keySet()) {
+                    for (String setLookup : StaticData.instance().getSetLookup().get(setKey)) {
+                        //.fullborder lookup
+                        file = findFile(dir, TextUtil.fastReplace(fullborderFile, setKey, getSetFolder(setLookup)));
+                        if (file != null) { return file; }
+                        file = findFile(dir, TextUtil.fastReplace(fullborderFile, setKey, getSetFolder(setLookup)).replaceAll("[0-9]*.fullborder", "1.fullborder"));
+                        if (file != null) { return file; }
+                        //.full lookup
+                        file = findFile(dir, TextUtil.fastReplace(filename, setKey, getSetFolder(setLookup)));
+                        if (file != null) { return file; }
+                        file = findFile(dir, TextUtil.fastReplace(filename, setKey, getSetFolder(setLookup)).replaceAll("[0-9]*.fullborder", "1.fullborder"));
+                        if (file != null) { return file; }
+                    }
+                }
+            }
         }
         //if an image, like phenomenon or planes is missing .full in their filenames but you have an existing images that have .full/.fullborder
         if (!filename.contains(".full")) {

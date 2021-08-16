@@ -36,7 +36,7 @@ public class CardDatabaseHelper {
             customReader = null;
         }
         staticData = new StaticData(reader, customReader, ForgeConstants.EDITIONS_DIR,
-                ForgeConstants.USER_CUSTOM_EDITIONS_DIR ,ForgeConstants.BLOCK_DATA_DIR,
+                ForgeConstants.USER_CUSTOM_EDITIONS_DIR ,ForgeConstants.BLOCK_DATA_DIR, ForgeConstants.SETLOOKUP_DIR,
                 "Latest Art All Editions",
                 true,
                 false);
