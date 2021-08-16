@@ -10,6 +10,7 @@ import forge.item.FatPack;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.token.TokenDb;
+import forge.util.FileUtil;
 import forge.util.TextUtil;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
@@ -57,18 +58,19 @@ public class StaticData {
     private IStorage<FatPack.Template> fatPacks;
     private IStorage<BoosterBox.Template> boosterBoxes;
     private IStorage<PrintSheet> printSheets;
+    private final Map<String, List<String>> setLookup = new HashMap<>();
 
     private static StaticData lastInstance = null;
 
     public StaticData(CardStorageReader cardReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String cardArtPreference, boolean enableUnknownCards, boolean loadNonLegalCards) {
-        this(cardReader, null, customCardReader, editionFolder, customEditionsFolder, blockDataFolder, cardArtPreference, enableUnknownCards, loadNonLegalCards, false, false);
+        this(cardReader, null, customCardReader, editionFolder, customEditionsFolder, blockDataFolder, "", cardArtPreference, enableUnknownCards, loadNonLegalCards, false, false);
     }
 
-    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String cardArtPreference, boolean enableUnknownCards, boolean loadNonLegalCards, boolean allowCustomCardsInDecksConformance){
-        this(cardReader, tokenReader, customCardReader, editionFolder, customEditionsFolder, blockDataFolder, cardArtPreference, enableUnknownCards, loadNonLegalCards, allowCustomCardsInDecksConformance, false);
+    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String setLookupFolder, String cardArtPreference, boolean enableUnknownCards, boolean loadNonLegalCards, boolean allowCustomCardsInDecksConformance){
+        this(cardReader, tokenReader, customCardReader, editionFolder, customEditionsFolder, blockDataFolder, setLookupFolder, cardArtPreference, enableUnknownCards, loadNonLegalCards, allowCustomCardsInDecksConformance, false);
     }
 
-    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String cardArtPreference, boolean enableUnknownCards, boolean loadNonLegalCards, boolean allowCustomCardsInDecksConformance, boolean enableSmartCardArtSelection) {
+    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String setLookupFolder, String cardArtPreference, boolean enableUnknownCards, boolean loadNonLegalCards, boolean allowCustomCardsInDecksConformance, boolean enableSmartCardArtSelection) {
         this.cardReader = cardReader;
         this.tokenReader = tokenReader;
         this.editions = new CardEdition.Collection(new CardEdition.Reader(new File(editionFolder)));
@@ -143,10 +145,22 @@ public class StaticData {
         } else {
             allTokens = null;
         }
+        //initialize setLookup
+        if (FileUtil.isDirectoryWithFiles(setLookupFolder)){
+            for (File f : Objects.requireNonNull(new File(setLookupFolder).listFiles())){
+                if (f.isFile()) {
+                    setLookup.put(f.getName().replace(".txt",""), FileUtil.readFile(f));
+                }
+            }
+        }
     }
 
     public static StaticData instance() {
         return lastInstance;
+    }
+
+    public Map<String, List<String>> getSetLookup() {
+        return setLookup;
     }
 
     public final CardEdition.Collection getEditions() {
