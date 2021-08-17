@@ -141,7 +141,7 @@ public final class ImageKeys {
                         //.full lookup
                         file = findFile(dir, TextUtil.fastReplace(filename, setKey, getSetFolder(setLookup)));
                         if (file != null) { return file; }
-                        file = findFile(dir, TextUtil.fastReplace(filename, setKey, getSetFolder(setLookup)).replaceAll("[0-9]*.fullborder", "1.fullborder"));
+                        file = findFile(dir, TextUtil.fastReplace(filename, setKey, getSetFolder(setLookup)).replaceAll("[0-9]*.full", "1.full"));
                         if (file != null) { return file; }
                     }
                 }
