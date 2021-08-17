@@ -2,14 +2,17 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import forge.adventure.AdventureApplicationAdapter;
-import forge.adventure.util.Controls;
-import forge.adventure.world.World;
+import forge.adventure.data.HeroListData;
+import forge.adventure.util.Res;
+import forge.adventure.util.Selector;
+import forge.adventure.util.UIActor;
 import forge.adventure.world.WorldSave;
 import forge.deck.Deck;
 import forge.localinstance.properties.ForgePreferences;
@@ -19,91 +22,129 @@ import forge.util.NameGenerator;
 
 
 public class NewGameScene extends Scene {
-    Texture Background;
+    Stage stage;
+    TextField selectedName;
+    WorldSave.Difficulty selectedDiff = WorldSave.Difficulty.Medium;
+    Deck[] starterDeck;
+    private UIActor ui;
+    private Image avatarImage;
+    private int avatarIndex = 0;
+    private Selector race;
+    private Selector deck;
+    private Selector gender;
+    private Selector difficulty;
 
-    public NewGameScene( ) {
+    public NewGameScene() {
         super();
     }
 
-    Stage stage;
     @Override
     public void dispose() {
         stage.dispose();
-        Background.dispose();
     }
-    Texture image;
+
     @Override
     public void render() {
 
         //Batch.getProjectionMatrix().setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        Gdx.gl.glClearColor(1,0,1,1);
+        Gdx.gl.glClearColor(1, 0, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        stage.getBatch().begin();
-        stage.getBatch().disableBlending();
-        stage.getBatch().draw(Background,0,0,IntendedWidth,IntendedHeight);
-        stage.getBatch().enableBlending();
-        if(image!=null)
-            stage.getBatch().draw(image,0,0);
-        stage.getBatch().end();
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
         //Batch.end();
     }
 
-    public boolean Start()
-    {
-        FModel.getPreferences().setPref(ForgePreferences.FPref.UI_ENABLE_MUSIC,false);
-        WorldSave.GenerateNewWorld(selectedName,starterDeck,selectedDiff);
-        GamePlayerUtil.getGuiPlayer().setName(selectedName);
-        GamePlayerUtil.getGuiPlayer().setAvatarIndex(0);
+    public boolean start() {
+        FModel.getPreferences().setPref(ForgePreferences.FPref.UI_ENABLE_MUSIC, false);
+        WorldSave.GenerateNewWorld(selectedName.getText(),
+                gender.getCurrentIndex() == 0,
+                race.getCurrentIndex(),
+                avatarIndex,
+                starterDeck[deck.getCurrentIndex()],
+                WorldSave.Difficulty.values()[difficulty.getCurrentIndex()]);
+        GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
         //image = new Texture(img);
 
         AdventureApplicationAdapter.CurrentAdapter.SwitchScene(SceneType.GameScene.instance);
         return true;
     }
-    public boolean Back()
-    {
+
+    public boolean Back() {
         AdventureApplicationAdapter.CurrentAdapter.SwitchScene(SceneType.StartScene.instance);
         return true;
     }
-    String selectedName;
-    WorldSave.Difficulty selectedDiff= WorldSave.Difficulty.Medium;
-    Deck starterDeck;
+
     @Override
-    public void ResLoaded()
-    {
+    public void ResLoaded() {
         // FModel.getPreferences().setPref(ForgePreferences.FPref.UI_ENABLE_MUSIC,false);
-        stage = new Stage(new StretchViewport(IntendedWidth,IntendedHeight));
-        Background = new Texture(AdventureApplicationAdapter.CurrentAdapter.GetRes().GetFile("img/title_bg.png"));
+        stage = new Stage(new StretchViewport(GetIntendedWidth(), GetIntendedHeight()));
+        ui = new UIActor(AdventureApplicationAdapter.CurrentAdapter.GetRes().GetFile("ui/newgame.json"));
 
-        Table table =new Table(Controls.GetSkin());
+        selectedName = ui.findActor("nameField");
+        selectedName.setText(NameGenerator.getRandomName("Any", "Any", ""));
+        avatarImage = ui.findActor("avatarPreview");
+        gender = ui.findActor("gender");
+        gender.setTextList(new String[]{"Male", "Female"});
+        gender.addListener(event -> updateAvatar());
 
-        table.add("Name:").align(Align.left);
-        table.add(Controls.newTextField(NameGenerator.getRandomName("Any", "Any", ""), s -> {selectedName=s;return null;})).fillX().expandX().align(Align.right);
-        table.row();
-        table.add("Difficulty:").align(Align.left);
-        table.add(Controls.newComboBox(WorldSave.Difficulty.values(),WorldSave.Difficulty.Medium, s -> {selectedDiff=(WorldSave.Difficulty)s;return null;})).fillX().expandX().align(Align.right);
-        table.row();
-        table.add("StartingDeck:").align(Align.left).fillX().expandX().align(Align.right);
-        Deck[] decks=World.StarterDecks();
-        table.add(Controls.newComboBox(decks,decks[0], s -> {starterDeck=(Deck)s;return null;})).fillX().expandX().align(Align.right);
-        table.row();
+        deck = ui.findActor("deck");
 
-        table.add(Controls.newTextButton("Back",()->Back())).fillX().expandX().align(Align.right);
+        starterDeck = Res.CurrentRes.starterDecks();
+        Array<String> stringList = new Array<>(starterDeck.length);
+        for (Deck deckit : starterDeck)
+            stringList.add(deckit.getName());
 
-        table.add(Controls.newTextButton("Start",()->Start())).fillX().expandX().align(Align.right);
+        deck.setTextList(stringList);
 
+        race = ui.findActor("race");
+        race.addListener(event -> updateAvatar());
+        race.setTextList(HeroListData.getRaces());
+        difficulty = ui.findActor("difficulty");
 
-        table.setPosition(900,500);
-        stage.addActor(table);
+        stringList = new Array<>(WorldSave.Difficulty.values().length);
+        for (WorldSave.Difficulty diff : WorldSave.Difficulty.values())
+            stringList.add(diff.toString());
+        difficulty.setTextList(stringList);
+        difficulty.setCurrentIndex(1);
+
+        ui.onButtonPress("back", () -> Back());
+        ui.onButtonPress("start", () -> start());
+        ui.onButtonPress("leftAvatar", () -> leftAvatar());
+        ui.onButtonPress("rightAvatar", () -> rightAvatar());
+
+        //table.setPosition(900,500);
+        stage.addActor(ui);
+        updateAvatar();
     }
+
+    private boolean rightAvatar() {
+
+        avatarIndex++;
+        updateAvatar();
+        return false;
+    }
+
+    private boolean leftAvatar() {
+        avatarIndex--;
+        updateAvatar();
+        return false;
+    }
+
+    private boolean updateAvatar() {
+
+        avatarImage.setDrawable(new TextureRegionDrawable(HeroListData.getAvatar(race.getCurrentIndex(), gender.getCurrentIndex() != 0, avatarIndex)));
+        return false;
+    }
+
     @Override
     public void create() {
 
     }
+
     @Override
-    public void Enter()
-    {
+    public void Enter() {
         Gdx.input.setInputProcessor(stage); //Start taking input from the ui
+
+
     }
 }

@@ -5,37 +5,50 @@ import com.badlogic.gdx.graphics.PixmapIO;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 
-public  class Serializer   {
+public class Serializer {
 
 
-    static public void WritePixmap(java.io.ObjectOutputStream out,Pixmap pixmap) throws IOException {
+    static public void WritePixmap(java.io.ObjectOutputStream out, Pixmap pixmap) throws IOException {
 
-        if(pixmap!=null)
-        {
-            PixmapIO.PNG png=new PixmapIO.PNG();
-            ByteArrayOutputStream stream= new ByteArrayOutputStream();
-            png.write(stream,pixmap);
-            byte[] data=stream.toByteArray();
+        if (pixmap != null) {
+            PixmapIO.PNG png = new PixmapIO.PNG();
+            png.setFlipY(false);
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            png.write(stream, pixmap);
+            byte[] data = stream.toByteArray();
             out.writeInt(data.length);
             out.write(data);
-
-        }
-        else
-        {
+        } else {
             out.writeInt(0);
         }
     }
-     static public Pixmap ReadPixmap(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
 
-        int length=in.readInt();
-        if(length==0)
-            return new Pixmap(1,1, Pixmap.Format.RGBA8888);
+    static public Pixmap ReadPixmap(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
 
-        byte[] data=new byte[length];
-         in.readFully(data,0,length);
+        int length = in.readInt();
+        if (length == 0)
+            return new Pixmap(1, 1, Pixmap.Format.RGBA8888);
 
-        return new Pixmap(data,0,length);
+        byte[] data = new byte[length];
+        in.readFully(data, 0, length);
 
+        return new Pixmap(data, 0, length);
+
+    }
+
+    public static void WritePixmap(ObjectOutputStream out, Pixmap pixmap, boolean b) throws IOException {
+        if (pixmap != null) {
+            PixmapIO.PNG png = new PixmapIO.PNG();
+            png.setFlipY(b);
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            png.write(stream, pixmap);
+            byte[] data = stream.toByteArray();
+            out.writeInt(data.length);
+            out.write(data);
+        } else {
+            out.writeInt(0);
+        }
     }
 }

@@ -2,7 +2,7 @@
 small.png
 size: 64,192
 format: RGBA8888
-filter: Linear,Linear
+filter: Nearest,Nearest
 repeat: none
 Standing
   rotate: false

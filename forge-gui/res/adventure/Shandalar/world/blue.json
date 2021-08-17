@@ -8,7 +8,6 @@
 		  "width": 0.5,
 		  "height": 0.5,
 		"color": "10a2e0",
-    "spriteNames":[ 
-"sprites/palmtree.json" 
-] 
+    "spriteNames":["IslandTree","Coral","Shell"]       ,
+    "enemies":[ "Goblin"] 
 }

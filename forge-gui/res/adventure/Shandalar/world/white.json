@@ -8,7 +8,6 @@
 			"width": 0.5,
 			"height": 0.5,
 		"color": "efe697" ,
-    "spriteNames":[ 
-"sprites/plainstree.json" 
-] 
+    "spriteNames":[  "PlainsTree","Cactus","PlainsRock","LargePlainsRock","DarkGras"]  ,
+    "enemies":[ "Goblin"] 
 }

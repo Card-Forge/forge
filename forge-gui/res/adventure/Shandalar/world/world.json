@@ -1,16 +1,13 @@
 {
-"width": 1000,
-"height": 1000,
+"width": 2000,
+"height": 2000,
 "playerStartPosY": 0.5,
-"playerStartPosX": 0.5,
-"tileSize": 32,
-"biomNames": [ "base.json","waste.json","white.json","blue.json","black.json","red.json","green.json"],
-"starterDecks": 
-[ 
-"decks/starter/Angels.dck",
-"decks/starter/BlackRush2.dck",
-"decks/starter/BlueControl.dck",
-"decks/starter/Goblins.dck",
-"decks/starter/Stompy2.dck"
-] 
+"playerStartPosX": 0.5,    
+"noiceZoomBiom": 30,
+"noiceZoomObject":30,
+"tileSize": 16,      
+"maxRoadDistance": 300,
+"roadTileset":"world/tilesets/road.atlas",
+"biomSprites":"world/sprites/mapsprites.json"
+"biomNames": [ "world/base.json","world/waste.json","world/white.json","world/blue.json","world/black.json","world/red.json","world/green.json"]
 }

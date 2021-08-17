@@ -8,8 +8,7 @@
 		"width": 0.5,
 		"height": 0.5,
 		"color": "59a650"  ,
-    "spriteNames":[ 
-"sprites/tree.json",      
-"sprites/bush.json"
-] 
+    "spriteNames":[ "WoodTree","WoodTree2","Bush","Stump","Moss","Stone","Flower","Wood"]      ,
+    "enemies":[ "Goblin"]  ,
+    "pointsOfIntrest":[ "WasteTown"] 
 }

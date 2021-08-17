@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=MIR 2 Tribe: Golems
+Title=Golems
+Difficulty=medium
+Description="Once, a wealthy king commissioned an artificial creature to be crafted from the royal treasury, thinking it a clever ploy to have the jewels guard themselves." -Azeworai, "The Golem's Wish"
+Icon=Dungeon Crawling Colorless.jpg
+Deck Type=constructed
+[Main]
+4 Basalt Golem|MIR
+4 Crystal Golem|MIR
+4 Crystal Vein|MIR
+1 Forest|MIR|1
+1 Forest|MIR|2
+1 Forest|MIR|3
+1 Forest|MIR|4
+4 Igneous Golem|MIR
+1 Island|MIR|1
+1 Island|MIR|2
+1 Island|MIR|3
+1 Island|MIR|4
+4 Lead Golem|MIR
+4 Mana Prism|MIR
+4 Matopi Golem|VIS
+1 Mountain|MIR|1
+1 Mountain|MIR|2
+1 Mountain|MIR|3
+1 Mountain|MIR|4
+4 Patagia Golem|MIR
+1 Plains|MIR|1
+1 Plains|MIR|2
+1 Plains|MIR|3
+1 Plains|MIR|4
+4 Quicksand|VIS
+4 Sand Golem|MIR
+1 Swamp|MIR|1
+1 Swamp|MIR|2
+1 Swamp|MIR|3
+1 Swamp|MIR|4

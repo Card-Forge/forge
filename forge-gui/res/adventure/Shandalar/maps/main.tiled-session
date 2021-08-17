@@ -1,0 +1,215 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "map/wastetown.tmx",
+    "expandedProjectPaths": [
+        ".",
+        "tilesets",
+        "map",
+        "obj",
+        "tileset"
+    ],
+    "file.lastUsedOpenFilter": "Alle Dateien (*)",
+    "fileStates": {
+        "F:/Develop/Forge/autotiles.tsx": {
+            "scaleInEditor": 1
+        },
+        "F:/Develop/Forge/forge/forge-gui/res/adventure/Shandalar/iso.tmx": {
+            "scale": 0.6439903846153846,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 833.0869727510265,
+                "y": 361.8066442702501
+            }
+        },
+        "F:/Develop/Forge/forge/forge-gui/res/adventure/Shandalar/iso.tmx#isometric_grass_and_water": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "F:/Develop/Forge/libgdx-master/tests/gdx-tests-android/assets/data/maps/tiled-offsets/hex_x.tmx": {
+            "scale": 0.6378571428571428,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 842.6651735722285,
+                "y": 772.9003359462487
+            }
+        },
+        "F:/Develop/Forge/libgdx-master/tests/gdx-tests-android/assets/data/maps/tiled-offsets/hex_x.tmx#hexes": {
+            "scaleInDock": 1
+        },
+        "F:/Develop/Forge/libgdx-master/tests/gdx-tests-android/assets/data/maps/tiled-offsets/hex_y.tmx": {
+            "scale": 0.45716723549488053,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1173.531168346398,
+                "y": 568.7196715192237
+            }
+        },
+        "F:/Develop/Forge/libgdx-master/tests/gdx-tests-android/assets/data/maps/tiled-offsets/hex_y.tmx#hexes": {
+            "scaleInDock": 1
+        },
+        "F:/Develop/Forge/libgdx-master/tests/gdx-tests-android/assets/data/maps/tiled-offsets/iso.tmx": {
+            "scale": 0.6439903846153846,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 833.0869727510265,
+                "y": 360.25382605449806
+            }
+        },
+        "F:/Develop/Forge/libgdx-master/tests/gdx-tests-android/assets/data/maps/tiled-offsets/iso.tmx#isometric_grass_and_water": {
+            "scaleInDock": 1
+        },
+        "F:/Develop/Forge/libgdx-master/tests/gdx-tests-android/assets/data/maps/tiled-offsets/iso_stag.tmx": {
+            "scale": 1.326237623762376,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 404.527808883912,
+                "y": 196.04329973870858
+            }
+        },
+        "F:/Develop/Forge/libgdx-master/tests/gdx-tests-android/assets/data/maps/tiled-offsets/iso_stag.tmx#isometric_grass_and_water": {
+            "scaleInDock": 1
+        },
+        "F:/Develop/Forge/libgdx-master/tests/gdx-tests-android/assets/data/maps/tiled-offsets/ortho.tmx": {
+            "scale": 2.160483870967742,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 248.32400149309444,
+                "y": 152.28070175438597
+            }
+        },
+        "F:/Develop/Forge/libgdx-master/tests/gdx-tests-android/assets/data/maps/tiled/tiles.tsx": {
+            "scaleInDock": 1
+        },
+        "buildings.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "main.tsx": {
+            "scaleInDock": 4,
+            "scaleInEditor": 1
+        },
+        "map/wastetown..tmx": {
+            "scale": 3.940520833333333,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 240.06978772899103,
+                "y": 136.02262814243042
+            }
+        },
+        "map/wastetown.exported.tmx": {
+            "scale": 3.940520833333333,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 240.06978772899103,
+                "y": 136.02262814243042
+            }
+        },
+        "map/wastetown.tmx": {
+            "scale": 4.480833333333333,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 209.55923377347966,
+                "y": 136.13539148223919
+            }
+        },
+        "tileset/buildings.tsx": {
+            "scaleInDock": 3,
+            "scaleInEditor": 1
+        },
+        "tileset/main.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 4
+        },
+        "tilesets/autoTiles2.tsx": {
+            "scaleInDock": 3,
+            "scaleInEditor": 5.5
+        },
+        "tilesets/autotiles.json": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tilesets/autotiles.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 5.5
+        },
+        "tilesets/buildings.tsx": {
+            "scaleInDock": 4,
+            "scaleInEditor": 5.5
+        },
+        "tilesets/main.tsx": {
+            "scaleInDock": 2,
+            "scaleInEditor": 5.5
+        },
+        "town/town.tmx": {
+            "scale": 4,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 377.375,
+                "y": 238
+            }
+        },
+        "town/unbenannt.tmx": {
+            "scale": 11,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 106.04545454545455,
+                "y": 81.9090909090909
+            }
+        },
+        "waste/town.tmx": {
+            "scale": 5.64953125,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 160.10177835550513,
+                "y": 160.01327543767457
+            }
+        },
+        "wastetown.tmx": {
+            "scale": 4,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 219.375,
+                "y": 146.5
+            }
+        }
+    },
+    "last.exportedFilePath": "F:/Develop/Forge/forge/forge-gui/res/adventure/Shandalar/maps/map",
+    "last.imagePath": "F:/Develop/Forge/forge/forge-gui/res/adventure/Shandalar/world/tilesets",
+    "last.objectTemplatePath": "F:/Develop/Forge/forge/forge-gui/res/adventure/Shandalar/maps/obj",
+    "map.height": 10,
+    "map.lastUsedExportFilter": "Alle Dateien (*)",
+    "map.lastUsedFormat": "tmx",
+    "map.layerDataFormat": null,
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "map.width": 13,
+    "openFiles": [
+        "map/wastetown.tmx",
+        "tileset/buildings.tsx",
+        "tileset/main.tsx"
+    ],
+    "project": "main.tiled-project",
+    "property.type": "string",
+    "recentFiles": [
+        "tileset/main.tsx",
+        "tileset/buildings.tsx",
+        "map/wastetown.tmx",
+        "map/wastetown..tmx",
+        "map/wastetown.exported.tmx",
+        "wastetown.tmx",
+        "main.tsx",
+        "buildings.tsx",
+        "tilesets/main.tsx",
+        "tilesets/autotiles.json",
+        "tilesets/autotiles.tsx",
+        "tilesets/buildings.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}

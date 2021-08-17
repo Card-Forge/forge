@@ -1,11 +1,30 @@
 package forge.adventure.character;
 
-import forge.adventure.stage.GameStage;
-import forge.adventure.util.Res;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import forge.adventure.data.EnemyData;
 
 public class MobSprite extends CharacterSprite {
-    public MobSprite(GameStage stage) {
-        super(Res.CurrentRes.GetFile("sprites/mob.atlas"),stage);
+    EnemyData data;
+
+    public MobSprite(EnemyData enemyData) {
+        super(enemyData.sprite);
+
+        data = enemyData;
     }
+
+
+    public void moveTo(Actor other) {
+        Vector2 diff = new Vector2(other.getX(), other.getY()).sub(pos());
+
+        diff.setLength(data.speed);
+        moveBy(diff.x, diff.y);
+    }
+
+    public EnemyData getData() {
+        return data;
+    }
+
+
 }
 

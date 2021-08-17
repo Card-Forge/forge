@@ -1,0 +1,31 @@
+
+buildings.png
+size: 448,800
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none               
+Town 
+  xy: 144, 0
+  size: 48, 48      
+Town 
+  xy: 96, 0
+  size: 48, 48      
+Town 
+  xy: 272, 128
+  size: 48, 48      
+Town 
+  xy: 320, 128
+  size: 48, 48      
+Town 
+  xy: 384, 128
+  size: 64, 48              
+Town 
+  xy: 384, 592
+  size: 64, 64      
+Town 
+  xy: 0, 464
+  size: 64, 64      
+Town 
+  xy: 64, 464
+  size: 64, 64      
+ 

@@ -42,8 +42,7 @@ public class DesktopAdapter implements IDeviceAdapter {
         try {
             Desktop.getDesktop().open(new File(filename));
             return true;
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return false;
@@ -71,8 +70,7 @@ public class DesktopAdapter implements IDeviceAdapter {
         //create file to indicate that landscape mode should be used
         if (landscapeMode) {
             FileUtil.writeFile(switchOrientationFile, "1");
-        }
-        else {
+        } else {
             FileUtil.deleteFile(switchOrientationFile);
         }
     }

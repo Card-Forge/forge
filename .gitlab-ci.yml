@@ -1,0 +1,6 @@
+deploy:
+  image: maven:3.6-jdk-11
+  script:
+    - 'mvn deploy -s ci_settings.xml'
+  only:
+    - master

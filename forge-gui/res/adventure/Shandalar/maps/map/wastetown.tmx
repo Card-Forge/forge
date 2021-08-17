@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="27">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyr4GZgqBjFo3gUj+JRPIpH8YjAAA0oBQo=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFuMBjLgYGNyz4CRSD2E+5yDf7CRqGme0OxE3c+LErmXY3EjCXGOxKht9XclJuLww3cw+MvcT6+zGRcUhtf1MjbrHh5Zz47ZXnYWDgpmI4E2svrfxMTN6iZrqCYU6gmYo89LeXmPwEimMuoN0KRMY1yC9cUAxSzwnVy4UkTsivuNwAM5OQX0DqSbWDEMAV/qSUSeQAXHmMXHsBKHqPLA==
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAeTOEgQTESmExAHyF5XIBc94DADhYGBmka4l0s2P0Xykq+m4kB2MwHhdNA2ItPHB/QFmJg0BEijg0z/ysee/n5GRgE+Anb6w40z0OIODay+aDwhcUxun8duTDtec+OYNcIIdRUIrGnIrGnI7GJDecHQPXsnNjxUijtjKQGF9sFj71f8bgHBOyBYe6AFO4gP1QLIeJuChK7ColdIYQZv4T8iwyigXbGQO3V40SEHanxi618IZSe2Tgxw44UQI18hC3NEWsvellMqr0ajOTZS6w4LntJBbjM/8JKfPkOspfUeuQbmr3o4U2oTgO5G2QvJeU5yE4ASdk11g==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="10" template="../obj/entry.tx" x="215.027" y="249.563"/>
+  <object id="12" template="../obj/townCenter.tx" x="103.75" y="100.848">
+   <properties>
+    <property name="test2" value="2"/>
+   </properties>
+  </object>
+  <object id="13" template="../obj/shop.tx" x="296.25" y="102.75"/>
+  <object id="14" template="../obj/inn.tx" x="166.722" y="184.366"/>
+  <object id="15" template="../obj/shop.tx" x="247.75" y="102.5"/>
+  <object id="16" template="../obj/shop.tx" x="344.25" y="103.75"/>
+  <object id="17" template="../obj/shop.tx" x="248" y="174.75"/>
+  <object id="18" template="../obj/shop.tx" x="392.5" y="104.5"/>
+  <object id="19" template="../obj/shop.tx" x="296" y="174.75"/>
+  <object id="20" template="../obj/shop.tx" x="344" y="174.75"/>
+  <object id="21" template="../obj/shop.tx" x="390.75" y="175.25"/>
+  <object id="26" template="../obj/exit.tx" x="207.551" y="255.086"/>
+ </objectgroup>
+</map>

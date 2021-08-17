@@ -8,8 +8,7 @@
 		"width": 0.95,
 		"height": 0.95,
 		"color": "aeaeae",
-    "spriteNames":[ 
-"sprites/wasteRock1.json",
-"sprites/wasteRock2.json" 
-] 
+    "spriteNames":[ "WasteTree","Stone","WasteRock"]  ,
+    "enemies":[ "Golem"]  ,
+    "pointsOfIntrest":[ "WasteTown"] 
 }

@@ -8,7 +8,6 @@
 		"width": 0.5,
 		"height": 0.5,
 		"color": "e53b28",
-    "spriteNames":[ 
-"sprites/rock.json" 
-] 
+    "spriteNames":[ "MountainTree","MountainTree2","MountainRock","LargeMountainRock","Gravel"]    ,
+    "enemies":[ "Goblin"] 
 }

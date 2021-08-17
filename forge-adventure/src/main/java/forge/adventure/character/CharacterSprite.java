@@ -1,51 +1,243 @@
 package forge.adventure.character;
 
-import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import forge.adventure.stage.GameStage;
+import com.badlogic.gdx.utils.Array;
+import forge.adventure.stage.SpriteGroup;
+import forge.adventure.util.Res;
 
-public class CharacterSprite extends Actor {
+import java.util.HashMap;
 
-    private Sprite Standing;
-    GameStage stage;
-    public CharacterSprite(FileHandle atlas, GameStage stage)
-    {
-        this.stage=stage;
-        Standing=new TextureAtlas(atlas).createSprite("Standing");
+public class CharacterSprite extends MapActor {
+    private final HashMap<AnimationTypes, HashMap<AnimationDirections, Animation<TextureRegion>>> animations = new HashMap<>();
+    TextureAtlas atlas;
+    TextureRegion avatar;
+    Texture debugTexture;
+    float timer;
+    private Animation<TextureRegion> currentAnimation = null;
+    private AnimationTypes currentAnimationType = AnimationTypes.Idle;
+    private AnimationDirections currentAnimationDir = AnimationDirections.None;
 
-        setWidth(Standing.getWidth());
-        setHeight(Standing.getHeight());
+    public CharacterSprite(String path) {
+        atlas = Res.CurrentRes.getAtlas(path);
+        for (Texture texture : atlas.getTextures())
+            texture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
+
+        for (AnimationTypes stand : AnimationTypes.values()) {
+            if (stand == AnimationTypes.Avatar) {
+                avatar = atlas.createSprite(stand.toString());
+                continue;
+            }
+            HashMap<AnimationDirections, Animation<TextureRegion>> dirs = new HashMap<>();
+            for (AnimationDirections dir : AnimationDirections.values()) {
+
+                Array<Sprite> anim;
+                if (dir == AnimationDirections.None)
+                    anim = atlas.createSprites(stand.toString());
+                else
+                    anim = atlas.createSprites(stand.toString() + dir.toString());
+                if (anim.size != 0) {
+                    dirs.put(dir, new Animation<>(0.2f, anim));
+                }
+            }
+            animations.put(stand, dirs);
+
+        }
+
+
+        for (AnimationTypes stand : AnimationTypes.values()) {
+            if (stand == AnimationTypes.Avatar) {
+                continue;
+            }
+            HashMap<AnimationDirections, Animation<TextureRegion>> dirs = animations.get(stand);
+
+            if (!dirs.containsKey(AnimationDirections.None) && dirs.containsKey(AnimationDirections.Right)) {
+                dirs.put(AnimationDirections.None, (dirs.get(AnimationDirections.Right)));
+            }
+            if (!dirs.containsKey(AnimationDirections.Right) && dirs.containsKey(AnimationDirections.None)) {
+                dirs.put(AnimationDirections.Right, (dirs.get(AnimationDirections.None)));
+            }
+            if (!dirs.containsKey(AnimationDirections.Left) && dirs.containsKey(AnimationDirections.Right)) {
+                dirs.put(AnimationDirections.Left, FlipAnimation(dirs.get(AnimationDirections.Right)));
+            }
+            if (dirs.containsKey(AnimationDirections.Left) && !dirs.containsKey(AnimationDirections.Right)) {
+                dirs.put(AnimationDirections.Right, FlipAnimation(dirs.get(AnimationDirections.Left)));
+            }
+            if (!dirs.containsKey(AnimationDirections.LeftUp) && dirs.containsKey(AnimationDirections.Left)) {
+                dirs.put(AnimationDirections.LeftUp, dirs.get(AnimationDirections.Left));
+            }
+            if (!dirs.containsKey(AnimationDirections.LeftDown) && dirs.containsKey(AnimationDirections.Left)) {
+                dirs.put(AnimationDirections.LeftDown, dirs.get(AnimationDirections.Left));
+            }
+            if (!dirs.containsKey(AnimationDirections.RightDown) && dirs.containsKey(AnimationDirections.Right)) {
+                dirs.put(AnimationDirections.RightDown, dirs.get(AnimationDirections.Right));
+            }
+            if (!dirs.containsKey(AnimationDirections.RightUp) && dirs.containsKey(AnimationDirections.Right)) {
+                dirs.put(AnimationDirections.RightUp, dirs.get(AnimationDirections.Right));
+            }
+            if (!dirs.containsKey(AnimationDirections.Up) && dirs.containsKey(AnimationDirections.Right)) {
+                dirs.put(AnimationDirections.Up, dirs.get(AnimationDirections.Right));
+            }
+            if (!dirs.containsKey(AnimationDirections.Down) && dirs.containsKey(AnimationDirections.Left)) {
+                dirs.put(AnimationDirections.Down, dirs.get(AnimationDirections.Left));
+            }
+        }
+
+
+        setAnimation(AnimationTypes.Idle);
+        setDirection(AnimationDirections.Right);
     }
+
+    static public Animation<TextureRegion> FlipAnimation(Animation<TextureRegion> anim) {
+        TextureRegion[] texReg = anim.getKeyFrames();
+        Array<TextureRegion> newReg = new Array<>();
+        for (TextureRegion reg : texReg) {
+            TextureRegion cpy = new TextureRegion(reg);
+            cpy.flip(true, false);
+            newReg.add(cpy);
+        }
+        return new Animation<>(anim.getFrameDuration(), newReg);
+    }
+
+    public void setAnimation(AnimationTypes type) {
+        if (currentAnimationType != type) {
+            currentAnimationType = type;
+            updateAnimation();
+        }
+    }
+
+    private void updateAnimation() {
+        AnimationTypes aniType = currentAnimationType;
+        AnimationDirections aniDir = currentAnimationDir;
+        if (!animations.containsKey(aniType)) {
+            aniType = AnimationTypes.Idle;
+        }
+        if (!animations.containsKey(aniType)) {
+            return;
+        }
+        HashMap<AnimationDirections, Animation<TextureRegion>> dirs = animations.get(aniType);
+
+        if (!dirs.containsKey(aniDir)) {
+            aniDir = AnimationDirections.Right;
+        }
+        if (!dirs.containsKey(aniDir)) {
+            return;
+        }
+        currentAnimation = dirs.get(aniDir);
+    }
+
+    public void setDirection(AnimationDirections dir) {
+        if (currentAnimationDir != dir) {
+            currentAnimationDir = dir;
+            updateAnimation();
+        }
+    }
+
+    public TextureRegion getAvatar() {
+        return avatar;
+    }
+
     @Override
-    protected void positionChanged () {
-        stage.GetSpriteGroup().UpdateActorZ(this);
+    protected void positionChanged() {
+        Actor parent = getParent();
+        if (parent instanceof SpriteGroup) {
+            ((SpriteGroup) parent).UpdateActorZ(this);
+        }
+        super.positionChanged();
     }
 
-
-
-    public Vector2 pos()
-    {
-        return new Vector2(getX(),getY());
-    }
     @Override
-    public void draw(Batch batch, float parentAlpha)
-    {
-        Standing.setPosition(getX()-getWidth()/2,getY());
-        Standing.draw(batch);
-    }
-    public Rectangle BoundingRect()
-    {
-        return new Rectangle(getX(),getY(),getWidth(),getHeight());
+    public void moveBy(float x, float y) {
+        super.moveBy(x, y);
+        if (x == 0 && y == 0) {
+            setAnimation(AnimationTypes.Idle);
+            return;
+        }
+        Vector2 vec = new Vector2(x, y);
+        float degree = vec.angleDeg();
+
+        setAnimation(AnimationTypes.Walk);
+        if (x == 0 && y == 0)
+            return;
+        else if (degree < 22.5)
+            setDirection(AnimationDirections.Right);
+        else if (degree < 22.5 + 45)
+            setDirection(AnimationDirections.RightUp);
+        else if (degree < 22.5 + 45 * 2)
+            setDirection(AnimationDirections.Up);
+        else if (degree < 22.5 + 45 * 3)
+            setDirection(AnimationDirections.LeftUp);
+        else if (degree < 22.5 + 45 * 4)
+            setDirection(AnimationDirections.Left);
+        else if (degree < 22.5 + 45 * 5)
+            setDirection(AnimationDirections.LeftDown);
+        else if (degree < 22.5 + 45 * 6)
+            setDirection(AnimationDirections.Down);
+        else if (degree < 22.5 + 45 * 7)
+            setDirection(AnimationDirections.RightDown);
+        else
+            setDirection(AnimationDirections.Right);
+
     }
 
-    public boolean collideWith(CharacterSprite other) {
-        if(BoundingRect().overlaps(other.BoundingRect()))
-            return true;
-        return false;
+    public Vector2 pos() {
+        return new Vector2(getX(), getY());
     }
+
+    private Texture getDebugTexture() {
+        if (debugTexture == null) {
+            Pixmap pixmap = new Pixmap((int) getWidth(), (int) getHeight(), Pixmap.Format.RGBA8888);
+            pixmap.setColor(Color.RED);
+            pixmap.drawRectangle(0, 0, (int) getWidth(), (int) getHeight());
+            debugTexture = new Texture(pixmap);
+            pixmap.dispose();
+        }
+        return debugTexture;
+    }
+
+    @Override
+    public void act(float delta) {
+        timer += delta;
+        super.act(delta);
+
+    }
+
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        if (currentAnimation == null)
+            return;
+        TextureRegion currentFrame = currentAnimation.getKeyFrame(timer, true);
+        setHeight(currentFrame.getRegionHeight());
+        setWidth(currentFrame.getRegionWidth());
+        batch.draw(currentFrame, getX(), getY());
+        //batch.draw(getDebugTexture(),getX(),getY());
+
+    }
+
+    public enum AnimationTypes {
+        Idle,
+        Walk,
+        Death,
+        Attack,
+        Hit,
+        Avatar
+    }
+
+    public enum AnimationDirections {
+
+        None,
+        Right,
+        RightDown,
+        Down,
+        LeftDown,
+        Left,
+        LeftUp,
+        Up,
+        RightUp
+    }
+
 }

@@ -8,8 +8,7 @@
 		  "width": 0.5,
 		  "height": 0.5,
 		"color": "110903",
-    "spriteNames":[ 
-"sprites/swamptree.json" 
-] 
+    "spriteNames":[ "SwampTree","SwampTree2","DarkGras","Skull","SwampRock","DarkWood","Reed","Waterlily","Shroom","Shroom2"]   ,
+    "enemies":[ "Goblin"] 
     
       }

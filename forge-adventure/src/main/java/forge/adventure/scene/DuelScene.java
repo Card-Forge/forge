@@ -2,13 +2,18 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import forge.Graphics;
+import forge.adventure.libgdxgui.Graphics;
+import forge.LobbyPlayer;
 import forge.adventure.AdventureApplicationAdapter;
+import forge.adventure.character.MobSprite;
+import forge.adventure.character.PlayerSprite;
+import forge.adventure.util.Res;
 import forge.adventure.world.WorldSave;
-import forge.animation.ForgeAnimation;
-import forge.assets.ImageCache;
+import forge.adventure.libgdxgui.animation.ForgeAnimation;
+import forge.adventure.libgdxgui.assets.FSkin;
+import forge.adventure.libgdxgui.assets.ImageCache;
 import forge.deck.io.DeckSerializer;
+import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
@@ -18,9 +23,10 @@ import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.IUpdateable;
 import forge.player.GamePlayerUtil;
 import forge.player.PlayerControllerHuman;
-import forge.screens.FScreen;
-import forge.screens.match.MatchController;
-import forge.toolbox.FOverlay;
+import forge.adventure.libgdxgui.screens.FScreen;
+import forge.adventure.libgdxgui.screens.match.MatchController;
+import forge.adventure.libgdxgui.toolbox.FDisplayObject;
+import forge.adventure.libgdxgui.toolbox.FOverlay;
 import forge.trackable.TrackableCollection;
 
 import java.io.File;
@@ -32,15 +38,17 @@ public class DuelScene extends Scene implements IUpdateable {
     FScreen screen;
     Graphics localGraphics;
     HostedMatch hostedMatch;
-    Stage stage;
+    MobSprite enemy;
+    PlayerSprite player;
+    RegisteredPlayer humanPlayer;
+    private DuelInput duelInput;
+
     public DuelScene() {
 
     }
 
     @Override
     public void dispose() {
-        if(stage!=null)
-            stage.dispose();
     }
 
     @Override
@@ -58,13 +66,12 @@ public class DuelScene extends Scene implements IUpdateable {
         ImageCache.allowSingleLoad();
         ForgeAnimation.advanceAll();
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Clear the screen.
-        if(hostedMatch== null || hostedMatch .getGameView()==null)
+        if (hostedMatch == null || hostedMatch.getGameView() == null)
             return;
-        if (screen==null)
-        {
-
+        if (screen == null) {
             return;
         }
+
 
         localGraphics.begin(AdventureApplicationAdapter.CurrentAdapter.getCurrentWidth(), AdventureApplicationAdapter.CurrentAdapter.getCurrentHeight());
         screen.screenPos.setSize(AdventureApplicationAdapter.CurrentAdapter.getCurrentWidth(), AdventureApplicationAdapter.CurrentAdapter.getCurrentHeight());
@@ -93,39 +100,58 @@ public class DuelScene extends Scene implements IUpdateable {
         //Batch.end();
     }
 
-    public void GameEnd()
-    {
+    public void GameEnd() {
+        AdventureApplicationAdapter.CurrentAdapter.SwitchScene(AdventureApplicationAdapter.CurrentAdapter.GetLastScene());
+
+        ((GameScene) SceneType.GameScene.instance).stage.setWinner(humanPlayer == hostedMatch.getGame().getMatch().getWinner());
 
     }
 
-    private DuelInput duelInput;
     @Override
-    public void Enter()
-    {
+    public void Enter() {
         Set<GameType> appliedVariants = new HashSet<>();
         appliedVariants.add(GameType.Constructed);
 
         List<RegisteredPlayer> players = new ArrayList<>();
-        RegisteredPlayer humanPlayer = RegisteredPlayer.forVariants(2, appliedVariants, WorldSave.getCurrentSave().player.getDeck(), null, false, null, null);
-        humanPlayer.setPlayer(GamePlayerUtil.getGuiPlayer());
+        humanPlayer = RegisteredPlayer.forVariants(2, appliedVariants, WorldSave.getCurrentSave().player.getDeck(), null, false, null, null);
+        LobbyPlayer playerObject = GamePlayerUtil.getGuiPlayer();
+        FSkin.getAvatars().put(90001, player.getAvatar());
+        playerObject.setAvatarIndex(90001);
+        humanPlayer.setPlayer(playerObject);
 
-        RegisteredPlayer aiPlayer = RegisteredPlayer.forVariants(2, appliedVariants, DeckSerializer.fromFile(new File("../forge-gui/res/quest/duels/Agent K 1.dck")), null, false, null, null);
-        aiPlayer.setPlayer(GamePlayerUtil.createAiPlayer());
+
+        RegisteredPlayer aiPlayer = RegisteredPlayer.forVariants(2, appliedVariants, DeckSerializer.fromFile(new File(Res.CurrentRes.GetFilePath(enemy.getData().deck))), null, false, null, null);
+        LobbyPlayer enemyPlayer = GamePlayerUtil.createAiPlayer();
+
+        FSkin.getAvatars().put(90000, this.enemy.getAvatar());
+        enemyPlayer.setAvatarIndex(90000);
+
+        enemyPlayer.setName(this.enemy.getData().name);
+        aiPlayer.setPlayer(enemyPlayer);
+        aiPlayer.setStartingLife(enemy.getData().life);
+
         players.add(humanPlayer);
         players.add(aiPlayer);
 
         final Map<RegisteredPlayer, IGuiGame> guiMap = new HashMap<>();
         guiMap.put(humanPlayer, MatchController.instance);
 
-        hostedMatch = MatchController.instance.hostMatch();
+        hostedMatch = MatchController.hostMatch();
 
-        hostedMatch.setEndGameHook(()->GameEnd());
-        hostedMatch.startMatch(GameType.Constructed, appliedVariants, players, guiMap);
+
+        GameRules rules = new GameRules(GameType.Constructed);
+        rules.setPlayForAnte(false);
+        rules.setMatchAnteRarity(true);
+        rules.setGamesPerMatch(1);
+        rules.setManaBurn(false);
+
+        hostedMatch.setEndGameHook(() -> GameEnd());
+        hostedMatch.startMatch(rules, appliedVariants, players, guiMap);
 
         MatchController.instance.setGameView(hostedMatch.getGameView());
 
 
-        for (final Player p :         hostedMatch.getGame().getPlayers()) {
+        for (final Player p : hostedMatch.getGame().getPlayers()) {
             if (p.getController() instanceof PlayerControllerHuman) {
                 final PlayerControllerHuman humanController = (PlayerControllerHuman) p.getController();
                 humanController.setGui(MatchController.instance);
@@ -134,7 +160,7 @@ public class DuelScene extends Scene implements IUpdateable {
             }
         }
 
-        screen =  MatchController.getView();
+        screen = MatchController.getView();
 
         screen.setSize(AdventureApplicationAdapter.CurrentAdapter.getCurrentWidth(), AdventureApplicationAdapter.CurrentAdapter.getCurrentHeight());
 
@@ -143,18 +169,14 @@ public class DuelScene extends Scene implements IUpdateable {
 
     }
 
+    public void buildTouchListeners(int x, int y, List<FDisplayObject> potentialListeners) {
+        screen.buildTouchListeners(x, y, potentialListeners);
+    }
+
     @Override
-    public void create() {
-        duelInput=new DuelInput();
-        localGraphics= AdventureApplicationAdapter.CurrentAdapter.getGraphics();
-        //lobby = new LocalLobby();
-        //initLobby(lobby);
-
-
-
-
-
-
+    public void ResLoaded() {
+        duelInput = new DuelInput();
+        localGraphics = AdventureApplicationAdapter.CurrentAdapter.getGraphics();
     }
 
 
@@ -166,6 +188,19 @@ public class DuelScene extends Scene implements IUpdateable {
     @Override
     public void update(int slot, LobbySlotType type) {
 
+    }
+
+    @Override
+    public FScreen forgeScreen() {
+        return screen;
+    }
+
+    public void setEnemy(MobSprite data) {
+        this.enemy = data;
+    }
+
+    public void setPlayer(PlayerSprite sprite) {
+        this.player = sprite;
     }
 }
 

@@ -1,0 +1,64 @@
+{ 
+  "avatar":"sprites/heroes/avatar.atlas",  
+  "heroes":[
+  {
+    "name":"Devil",
+    "female":"sprites/heroes/Devil_f.atlas",      
+    "male":"sprites/heroes/Devil_m.atlas",      
+    "femaleAvatar":"Devil_f",      
+    "maleAvatar":"Devil_m" 
+  },
+  {
+    "name":"Kor",
+    "female":"sprites/heroes/Kor_f.atlas",      
+    "male":"sprites/heroes/Kor_m.atlas",      
+    "femaleAvatar":"Kor_f",      
+    "maleAvatar":"Kor_m" 
+  } ,
+  {
+    "name":"Human",
+    "female":"sprites/heroes/Human_f.atlas",      
+    "male":"sprites/heroes/Human_m.atlas",      
+    "femaleAvatar":"Human_f",      
+    "maleAvatar":"Human_m" 
+  },
+  {
+    "name":"Elf",
+    "female":"sprites/heroes/Elf_f.atlas",      
+    "male":"sprites/heroes/Elf_m.atlas",      
+    "femaleAvatar":"Elf_f",      
+    "maleAvatar":"Elf_m" 
+  },
+  {
+    "name":"Metathran",
+    "female":"sprites/heroes/Metathran_f.atlas",      
+    "male":"sprites/heroes/Metathran_m.atlas",      
+    "femaleAvatar":"Metathran_f",      
+    "maleAvatar":"Metathran_m" 
+  },
+  {
+    "name":"Undead",
+    "female":"sprites/heroes/Undead_f.atlas",      
+    "male":"sprites/heroes/Undead_m.atlas",      
+    "femaleAvatar":"Undead_f",      
+    "maleAvatar":"Undead_m" 
+  } ,
+  {
+    "name":"Viashino",
+    "female":"sprites/heroes/Viashino_f.atlas",      
+    "male":"sprites/heroes/Viashino_m.atlas",      
+    "femaleAvatar":"Viashino_f",      
+    "maleAvatar":"Viashino_m" 
+  }   ,
+  {
+    "name":"Drawf",
+    "female":"sprites/heroes/Dwarf_f.atlas",      
+    "male":"sprites/heroes/Dwarf_m.atlas",      
+    "femaleAvatar":"Dwarf_f",      
+    "maleAvatar":"Dwarf_m" 
+  }
+  
+  
+  ]
+
+}

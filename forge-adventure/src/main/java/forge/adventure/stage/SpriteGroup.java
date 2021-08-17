@@ -39,11 +39,10 @@ public class SpriteGroup extends Group {
         }
         super.addActor(actor);
     }
-    public void UpdateActorZ(Actor actor)
-    {
-        SnapshotArray<Actor> children= getChildren();
-        for(int i=0;i<children.size;i++)
-        {
+
+    public void UpdateActorZ(Actor actor) {
+        SnapshotArray<Actor> children = getChildren();
+        for (int i = 0; i < children.size; i++) {
             if (children.get(i).getY() < actor.getY()) {
                 actor.setZIndex(i);
                 return;

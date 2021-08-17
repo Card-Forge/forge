@@ -1,0 +1,173 @@
+package forge.adventure.util;
+
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.ObjectMap;
+import com.badlogic.gdx.utils.OrderedMap;
+import forge.adventure.data.UIData;
+
+import java.util.concurrent.Callable;
+
+public class UIActor extends Group {
+    UIData data;
+
+    public UIActor(FileHandle handle) {
+        data = (new Json()).fromJson(UIData.class, handle);
+
+        setWidth(data.width);
+        setHeight(data.height);
+
+        for (OrderedMap<String, String> element : data.elements) {
+            String type = element.get("type");
+            Actor newActor;
+            switch (type) {
+                case "Selector":
+                    newActor = new Selector();
+                    readSelectorProperties((Selector) newActor, element.entries());
+                    break;
+                case "Label":
+                    newActor = new Label("", Controls.GetSkin());
+                    readLabelProperties((Label) newActor, element.entries());
+                    break;
+                case "Image":
+                    newActor = new Image();
+                    readImageProperties((Image) newActor, element.entries());
+                    break;
+                case "ImageButton":
+                    newActor = new ImageButton(Controls.GetSkin());
+                    readImageButtonProperties((ImageButton) newActor, element.entries());
+                    break;
+                case "Window":
+                    newActor = new Window("", Controls.GetSkin());
+                    readWindowProperties((Window) newActor, element.entries());
+                    break;
+                case "TextButton":
+                    newActor = new TextButton("", Controls.GetSkin());
+                    readButtonProperties((TextButton) newActor, element.entries());
+                    break;
+                case "TextField":
+                    newActor = new TextField("", Controls.GetSkin());
+                    readTextFieldProperties((TextField) newActor, element.entries());
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + type);
+            }
+            //load Actor Properties
+            float yvalue = 0;
+            for (ObjectMap.Entry property : element.entries()) {
+                switch (property.key.toString()) {
+                    case "width":
+                        newActor.setWidth((Float) property.value);
+                        break;
+                    case "height":
+                        newActor.setHeight((Float) property.value);
+                        if (data.yDown)
+                            newActor.setY(data.height - yvalue - newActor.getHeight());
+                        break;
+                    case "x":
+                        newActor.setX((Float) property.value);
+                        break;
+                    case "y":
+                        yvalue = (Float) property.value;
+                        newActor.setY(data.yDown ? data.height - yvalue - newActor.getHeight() : yvalue);
+                        break;
+                    case "name":
+                        newActor.setName((String) property.value);
+                        break;
+                }
+            }
+            addActor(newActor);
+        }
+    }
+
+    private void readWindowProperties(Window newActor, ObjectMap.Entries<String, String> entries) {
+        for (ObjectMap.Entry property : entries) {
+            switch (property.key.toString()) {
+                case "style":
+                    newActor.setStyle(Controls.GetSkin().get(property.value.toString(), Window.WindowStyle.class));
+                    break;
+            }
+        }
+    }
+
+    private void readTextFieldProperties(TextField newActor, ObjectMap.Entries<String, String> entries) {
+        for (ObjectMap.Entry property : entries) {
+            switch (property.key.toString()) {
+                case "text":
+                    newActor.setText(property.value.toString());
+                    break;
+            }
+        }
+    }
+
+    private void readImageButtonProperties(ImageButton newActor, ObjectMap.Entries<String, String> entries) {
+        for (ObjectMap.Entry property : entries) {
+            switch (property.key.toString()) {
+                case "style":
+                    newActor.setStyle(Controls.GetSkin().get(property.value.toString(), ImageButton.ImageButtonStyle.class));
+                    break;
+            }
+        }
+    }
+
+    private void readLabelProperties(Label newActor, ObjectMap.Entries<String, String> entries) {
+        for (ObjectMap.Entry property : entries) {
+            switch (property.key.toString()) {
+                case "text":
+                    newActor.setText(property.value.toString());
+                    break;
+                case "font":
+                    Label.LabelStyle style = new Label.LabelStyle(newActor.getStyle());
+                    style.font = Controls.GetSkin().getFont(property.value.toString());
+                    newActor.setStyle(style);
+                    break;
+            }
+        }
+    }
+
+    private void readSelectorProperties(Selector newActor, ObjectMap.Entries<String, String> entries) {
+    }
+
+    private void readButtonProperties(TextButton newActor, ObjectMap.Entries<String, String> entries) {
+        for (ObjectMap.Entry property : entries) {
+            switch (property.key.toString()) {
+                case "text":
+                    newActor.setText(property.value.toString());
+                    break;
+            }
+        }
+    }
+
+    private void readImageProperties(Image newActor, ObjectMap.Entries<String, String> entries) {
+        for (ObjectMap.Entry property : entries) {
+            switch (property.key.toString()) {
+                case "image":
+                    newActor.setDrawable(new TextureRegionDrawable(new Texture(Res.CurrentRes.GetFile(property.value.toString()))));
+                    break;
+            }
+        }
+    }
+
+    public void onButtonPress(String name, Callable func) {
+
+        Actor button = findActor(name);
+        assert button != null;
+        button.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                try {
+                    func.call();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+}

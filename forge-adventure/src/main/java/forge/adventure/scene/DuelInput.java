@@ -1,14 +1,15 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.Input;
-import forge.Forge;
+import forge.adventure.libgdxgui.Forge;
+import forge.adventure.AdventureApplicationAdapter;
 import forge.gui.error.BugReporter;
-import forge.screens.match.MatchController;
-import forge.toolbox.FContainer;
-import forge.toolbox.FDisplayObject;
-import forge.toolbox.FGestureAdapter;
-import forge.toolbox.FOverlay;
-import forge.util.Utils;
+import forge.adventure.libgdxgui.screens.match.MatchController;
+import forge.adventure.libgdxgui.toolbox.FContainer;
+import forge.adventure.libgdxgui.toolbox.FDisplayObject;
+import forge.adventure.libgdxgui.toolbox.FGestureAdapter;
+import forge.adventure.libgdxgui.toolbox.FOverlay;
+import forge.adventure.libgdxgui.util.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,9 @@ public class DuelInput extends FGestureAdapter {
     private static final List<FDisplayObject> potentialListeners = new ArrayList<>();
     private static char lastKeyTyped;
     private static boolean keyTyped, shiftKeyDown;
-    private Forge.KeyInputAdapter  keyInputAdapter=null;
+    private final Forge.KeyInputAdapter keyInputAdapter = null;
+    //mouseMoved and scrolled events for desktop version
+    private int mouseMovedX, mouseMovedY;
 
     public DuelInput() {
     }
@@ -36,20 +39,20 @@ public class DuelInput extends FGestureAdapter {
         // Cursor keys emulate swipe gestures
         // First we touch the screen and later swipe (fling) in the direction of the key pressed
         if (keyCode == Input.Keys.LEFT) {
-            touchDown(0,0,0,0);
-            return fling(1000,0);
+            touchDown(0, 0, 0, 0);
+            return fling(1000, 0);
         }
         if (keyCode == Input.Keys.RIGHT) {
-            touchDown(0,0,0,0);
-            return fling(-1000,0);
+            touchDown(0, 0, 0, 0);
+            return fling(-1000, 0);
         }
         if (keyCode == Input.Keys.UP) {
-            touchDown(0,0,0,0);
-            return fling(0,-1000);
+            touchDown(0, 0, 0, 0);
+            return fling(0, -1000);
         }
         if (keyCode == Input.Keys.DOWN) {
-            touchDown(0,0,0,0);
-            return fling(0,1000);
+            touchDown(0, 0, 0, 0);
+            return fling(0, 1000);
         }
         /*
         if(keyCode == Input.Keys.BACK){
@@ -66,7 +69,7 @@ public class DuelInput extends FGestureAdapter {
             //if no active key input adapter, give current screen or overlay a chance to handle key
             FContainer container = FOverlay.getTopOverlay();
             if (container == null) {
-                container = MatchController.getView();;;
+                container = MatchController.getView();
                 if (container == null) {
                     return false;
                 }
@@ -108,16 +111,14 @@ public class DuelInput extends FGestureAdapter {
 
         //base potential listeners on object containing touch down point
         for (FOverlay overlay : FOverlay.getOverlaysTopDown()) {
-            if (overlay.isVisibleOnScreen(MatchController.getView())) {
+            if (overlay.isVisibleOnScreen(AdventureApplicationAdapter.CurrentAdapter.getCurrentScene().forgeScreen())) {
                 overlay.buildTouchListeners(x, y, potentialListeners);
                 if (overlay.preventInputBehindOverlay()) {
                     return;
                 }
             }
         }
-        if (MatchController.getView() != null) {
-            MatchController.getView().buildTouchListeners(x, y, potentialListeners);
-        }
+        AdventureApplicationAdapter.CurrentAdapter.getCurrentScene().buildTouchListeners(x, y, potentialListeners);
     }
 
     @Override
@@ -142,8 +143,7 @@ public class DuelInput extends FGestureAdapter {
                 }
             }
             return false;
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             BugReporter.reportException(ex);
             return true;
         }
@@ -158,8 +158,7 @@ public class DuelInput extends FGestureAdapter {
                 }
             }
             return false;
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             BugReporter.reportException(ex);
             return true;
         }
@@ -174,8 +173,7 @@ public class DuelInput extends FGestureAdapter {
                 }
             }
             return false;
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             BugReporter.reportException(ex);
             return true;
         }
@@ -193,8 +191,7 @@ public class DuelInput extends FGestureAdapter {
                 }
             }
             return false;
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             BugReporter.reportException(ex);
             return true;
         }
@@ -209,8 +206,7 @@ public class DuelInput extends FGestureAdapter {
                 }
             }
             return false;
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             BugReporter.reportException(ex);
             return true;
         }
@@ -225,8 +221,7 @@ public class DuelInput extends FGestureAdapter {
                 }
             }
             return false;
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             BugReporter.reportException(ex);
             return true;
         }
@@ -241,8 +236,7 @@ public class DuelInput extends FGestureAdapter {
                 }
             }
             return false;
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             BugReporter.reportException(ex);
             return true;
         }
@@ -257,8 +251,7 @@ public class DuelInput extends FGestureAdapter {
                 }
             }
             return false;
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             BugReporter.reportException(ex);
             return true;
         }
@@ -273,15 +266,11 @@ public class DuelInput extends FGestureAdapter {
                 }
             }
             return false;
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             BugReporter.reportException(ex);
             return true;
         }
     }
-
-    //mouseMoved and scrolled events for desktop version
-    private int mouseMovedX, mouseMovedY;
 
     @Override
     public boolean mouseMoved(int x, int y) {
@@ -301,8 +290,7 @@ public class DuelInput extends FGestureAdapter {
         boolean handled;
         if (Forge.KeyInputAdapter.isShiftKeyDown()) {
             handled = pan(mouseMovedX, mouseMovedY, -Utils.AVG_FINGER_WIDTH * amountX, 0, false);
-        }
-        else {
+        } else {
             handled = pan(mouseMovedX, mouseMovedY, 0, -Utils.AVG_FINGER_HEIGHT * amountY, true);
         }
         if (panStop(mouseMovedX, mouseMovedY)) {
