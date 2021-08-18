@@ -5,7 +5,7 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 2 R | ValidTgts$ Creature | AILogic$ Pump | SubAbility$ RememberSelf | SpellDescription$ Enchanted creature has haste and "At the beginning of your upkeep, destroy this creature. Reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield and attach CARDNAME to it, then put all other cards revealed this way on the bottom of your library in a random order."
 SVar:RememberSelf:DB$ Pump | Defined$ Creature.EnchantedBy | ImprintCards$ Self
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Haste | AddTrigger$ ShadowUpkeepTrig | AddSVar$ ShadowRememberSelf,ShadowDestroyEnchanted,ShadowRevealCards,ShadowReattach,DBCleanup
-T:Mode$ ChangesZone | Affected$ Self | Origin$ Battlefield | Destination$ Any | Execute$ DBCleanup | Static$ True
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ DBCleanup | Static$ True
 SVar:ShadowUpkeepTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ ShadowRememberSelf | TriggerDescription$ At the beginning of your upkeep, destroy this creature. Reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield and attach CARDNAME to it, then put all other cards revealed this way on the bottom of your library in a random order.
 SVar:ShadowRememberSelf:DB$ Pump | ImprintCards$ OriginalHost | SubAbility$ ShadowDestroyEnchanted
 SVar:ShadowDestroyEnchanted:DB$ Destroy | Defined$ Self | SubAbility$ ShadowRevealCards
