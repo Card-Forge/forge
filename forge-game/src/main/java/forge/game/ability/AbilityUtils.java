@@ -1473,8 +1473,7 @@ public class AbilityUtils {
         if (sa.metConditions()) {
             if (sa.isWrapper() || StringUtils.isBlank(sa.getParam("UnlessCost"))) {
                 sa.resolve();
-            }
-            else {
+            } else {
                 handleUnlessCost(sa, game);
                 return;
             }
