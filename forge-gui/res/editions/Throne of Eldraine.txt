@@ -9,7 +9,8 @@ BoosterCovers=3
 Booster=10 Common:fromSheet("ELD cards"), 3 Uncommon:fromSheet("ELD cards"), 1 RareMythic:fromSheet("ELD cards"), 1 BasicLand
 Prerelease=6 Boosters, 1 RareMythic+
 FatPack=10
-FatPackExtraSlots=20 BasicLands, 20 BasicLands+, 1 Piper of the Swarm+|ELD|3
+FatPackExtraSlots=20 BasicLands, 20 BasicLands+
+#, 1 Piper of the Swarm+|ELD|3
 ScryfallCode=ELD
 
 [cards]
