@@ -1118,8 +1118,7 @@ public class PhaseHandler implements java.io.Serializable {
                 else if (!game.getStack().hasSimultaneousStackEntries()) {
                     game.getStack().resolveStack();
                 }
-            }
-            else {
+            } else {
                 // pass the priority to other player
                 pPlayerPriority = nextPlayer;
             }
@@ -1134,7 +1133,7 @@ public class PhaseHandler implements java.io.Serializable {
 
             // update Priority for all players
             for (final Player p : game.getPlayers()) {
-                if(getPriorityPlayer() == p)
+                if (getPriorityPlayer() == p)
                     p.setHasPriority(true);
                 else
                     p.setHasPriority(false);
