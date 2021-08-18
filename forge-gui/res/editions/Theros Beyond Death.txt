@@ -7,7 +7,8 @@ Type=Expansion
 BoosterCovers=3
 Booster=10 Common:fromSheet("THB Commons"), 3 Uncommon:fromSheet("THB Uncommons"), 1 RareMythic:fromSheet("THB RareMythics"), 1 BasicLand
 Prerelease=6 Boosters, 1 RareMythic+
-FatPackExtraSlots=20 BasicLands, 20 BasicLands+, 1 Arasta of the Endless Web+|THB|3
+FatPackExtraSlots=20 BasicLands, 20 BasicLands+
+#, 1 Arasta of the Endless Web+|THB|3
 ChaosDraftThemes=GRAVEYARD_MATTERS
 ScryfallCode=THB
 

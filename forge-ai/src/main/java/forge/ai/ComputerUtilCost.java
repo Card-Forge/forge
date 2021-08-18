@@ -239,7 +239,10 @@ public class ComputerUtilCost {
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostSacrifice) {
                 CardCollection list = new CardCollection();
-                final CardCollection exclude = new CardCollection(AiCardMemory.getMemorySet(ai, MemorySet.PAYS_SAC_COST));
+                final CardCollection exclude = new CardCollection();
+                if (AiCardMemory.getMemorySet(ai, MemorySet.PAYS_SAC_COST) != null) {
+                    exclude.addAll(AiCardMemory.getMemorySet(ai, MemorySet.PAYS_SAC_COST));
+                }
                 if (part.payCostFromSource()) {
                     list.add(source);
                 } else if (part.getType().equals("OriginalHost")) {
@@ -448,7 +451,10 @@ public class ComputerUtilCost {
                 if (c == null) {
                     c = AbilityUtils.calculateAmount(source, part.getAmount(), sa);
                 }
-                CardCollection exclude = new CardCollection(AiCardMemory.getMemorySet(ai, MemorySet.PAYS_TAP_COST));
+                CardCollection exclude = new CardCollection();
+                if (AiCardMemory.getMemorySet(ai, MemorySet.PAYS_TAP_COST) != null) {
+                    exclude.addAll(AiCardMemory.getMemorySet(ai, MemorySet.PAYS_TAP_COST));
+                }
                 // trying to produce mana that includes tapping source that will already be tapped
                 if (exclude.contains(source) && cost.hasTapCost()) {
                     return false;
