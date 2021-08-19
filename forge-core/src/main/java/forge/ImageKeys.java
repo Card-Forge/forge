@@ -132,17 +132,19 @@ public final class ImageKeys {
             //setlookup
             if (!StaticData.instance().getSetLookup().isEmpty()) {
                 for (String setKey : StaticData.instance().getSetLookup().keySet()) {
-                    for (String setLookup : StaticData.instance().getSetLookup().get(setKey)) {
-                        //.fullborder lookup
-                        file = findFile(dir, TextUtil.fastReplace(fullborderFile, setKey, getSetFolder(setLookup)));
-                        if (file != null) { return file; }
-                        file = findFile(dir, TextUtil.fastReplace(fullborderFile, setKey, getSetFolder(setLookup)).replaceAll("[0-9]*.fullborder", "1.fullborder"));
-                        if (file != null) { return file; }
-                        //.full lookup
-                        file = findFile(dir, TextUtil.fastReplace(filename, setKey, getSetFolder(setLookup)));
-                        if (file != null) { return file; }
-                        file = findFile(dir, TextUtil.fastReplace(filename, setKey, getSetFolder(setLookup)).replaceAll("[0-9]*.full", "1.full"));
-                        if (file != null) { return file; }
+                    if (filename.startsWith(setKey)) {
+                        for (String setLookup : StaticData.instance().getSetLookup().get(setKey)) {
+                            //.fullborder lookup
+                            file = findFile(dir, TextUtil.fastReplace(fullborderFile, setKey, getSetFolder(setLookup)));
+                            if (file != null) { return file; }
+                            file = findFile(dir, TextUtil.fastReplace(fullborderFile, setKey, getSetFolder(setLookup)).replaceAll("[0-9]*.fullborder", "1.fullborder"));
+                            if (file != null) { return file; }
+                            //.full lookup
+                            file = findFile(dir, TextUtil.fastReplace(filename, setKey, getSetFolder(setLookup)));
+                            if (file != null) { return file; }
+                            file = findFile(dir, TextUtil.fastReplace(filename, setKey, getSetFolder(setLookup)).replaceAll("[0-9]*.full", "1.full"));
+                            if (file != null) { return file; }
+                        }
                     }
                 }
             }
