@@ -243,7 +243,7 @@ public class Cost implements Serializable {
             } else {
                 CostPart cp = parseCostPart(part, tapCost, untapCost);
                 if (null != cp )
-                    if (cp instanceof CostPartMana ) {
+                    if (cp instanceof CostPartMana) {
                         parsedMana = (CostPartMana) cp;
                     } else {
                         this.costParts.add(cp);
