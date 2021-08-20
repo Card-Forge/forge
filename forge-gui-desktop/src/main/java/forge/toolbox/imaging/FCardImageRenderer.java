@@ -717,11 +717,22 @@ public class FCardImageRenderer {
 
         //draw square icon for rarity
         if (drawRarity) {
-            int iconSize = Math.round(h * 0.55f);
+            int iconSize = Math.round(h * 0.9f);
             int iconPadding = (h - iconSize) / 2;
             w -= iconSize + iconPadding * 2;
-            g.setColor(getRarityColor(state.getRarity()));
-            g.fillRect(x + w + iconPadding, y + (h - iconSize + 1) / 2, iconSize, iconSize);
+            if (state.getRarity() == null) {
+                FSkin.drawImage(g, FSkin.getImage(FSkinProp.IMG_SETLOGO_SPECIAL), x + w + iconPadding, y + (h - iconSize + 1) / 2, iconSize, iconSize);
+            } else if (state.getRarity() == CardRarity.Special ) {
+                FSkin.drawImage(g, FSkin.getImage(FSkinProp.IMG_SETLOGO_SPECIAL), x + w + iconPadding, y + (h - iconSize + 1) / 2, iconSize, iconSize);
+            } else if (state.getRarity() == CardRarity.MythicRare) {
+                FSkin.drawImage(g, FSkin.getImage(FSkinProp.IMG_SETLOGO_MYTHIC), x + w + iconPadding, y + (h - iconSize + 1) / 2, iconSize, iconSize);
+            } else if (state.getRarity() == CardRarity.Rare) {
+                FSkin.drawImage(g, FSkin.getImage(FSkinProp.IMG_SETLOGO_RARE), x + w + iconPadding, y + (h - iconSize + 1) / 2, iconSize, iconSize);
+            } else if (state.getRarity() == CardRarity.Uncommon) {
+                FSkin.drawImage(g, FSkin.getImage(FSkinProp.IMG_SETLOGO_UNCOMMON), x + w + iconPadding, y + (h - iconSize + 1) / 2, iconSize, iconSize);
+            } else {
+                FSkin.drawImage(g, FSkin.getImage(FSkinProp.IMG_SETLOGO_COMMON), x + w + iconPadding, y + (h - iconSize + 1) / 2, iconSize, iconSize);
+            }
         }
 
         //draw type

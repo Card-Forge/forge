@@ -395,6 +395,13 @@ public enum FSkinProp {
     IMG_DECK_CARD_ART         (new int[] {492, 2, 488, 680}, PropType.DECKBOX),
     IMG_DECK_GENERIC          (new int[] {982, 2, 488, 680}, PropType.DECKBOX),
 
+    //FOR SETLOGO
+    IMG_SETLOGO_COMMON        (new int[] {2, 2, 520, 451}, PropType.SETLOGO),
+    IMG_SETLOGO_UNCOMMON      (new int[] {2, 455, 520, 451}, PropType.SETLOGO),
+    IMG_SETLOGO_RARE          (new int[] {2, 908, 520, 451}, PropType.SETLOGO),
+    IMG_SETLOGO_MYTHIC        (new int[] {2, 1361, 520, 451}, PropType.SETLOGO),
+    IMG_SETLOGO_SPECIAL       (new int[] {2, 1814, 520, 451}, PropType.SETLOGO),
+
     IMG_FAV1    (new int[] {0, 0, 100, 100}, PropType.FAVICON),
     IMG_FAV2    (new int[] {100, 0, 100, 100}, PropType.FAVICON),
     IMG_FAV3    (new int[] {200, 0, 100, 100}, PropType.FAVICON),
@@ -497,6 +504,7 @@ public enum FSkinProp {
         MANAICONS,
         PLANAR_CONQUEST,
         DECKBOX,
+        SETLOGO,
         FAVICON
     }
 }
