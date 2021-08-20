@@ -32,8 +32,6 @@ public class FSkin {
     private static final Map<Integer, TextureRegion> sleeves = new HashMap<>(64);
     private static final Map<Integer, TextureRegion> borders = new HashMap<>();
     private static final Map<Integer, TextureRegion> deckbox = new HashMap<>();
-    private static final Map<Integer, TextureRegion> setlogo = new HashMap<>();
-    private static final Map<Integer, TextureRegion> watermarks = new HashMap<>();
 
     private static Array<String> allSkins;
     private static FileHandle preferredDir;
