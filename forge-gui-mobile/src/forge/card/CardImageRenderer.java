@@ -233,10 +233,23 @@ public class CardImageRenderer {
         float padding = h / 8;
 
         //draw square icon for rarity
-        float iconSize = h * 0.55f;
+        float iconSize = h * 0.9f;
         float iconPadding = (h - iconSize) / 2;
         w -= iconSize + iconPadding * 2;
-        g.fillRect(CardRenderer.getRarityColor(state.getRarity()), x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
+        //g.fillRect(CardRenderer.getRarityColor(state.getRarity()), x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
+        if (state.getRarity() == null) {
+            g.drawImage(FSkinImage.SET_SPECIAL, x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
+        } else if (state.getRarity() == CardRarity.Special ) {
+            g.drawImage(FSkinImage.SET_SPECIAL, x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
+        } else if (state.getRarity() == CardRarity.MythicRare) {
+            g.drawImage(FSkinImage.SET_MYTHIC, x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
+        } else if (state.getRarity() == CardRarity.Rare) {
+            g.drawImage(FSkinImage.SET_RARE, x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
+        } else if (state.getRarity() == CardRarity.Uncommon) {
+            g.drawImage(FSkinImage.SET_UNCOMMON, x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
+        } else {
+            g.drawImage(FSkinImage.SET_COMMON, x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
+        }
 
         //draw type
         x += padding;
