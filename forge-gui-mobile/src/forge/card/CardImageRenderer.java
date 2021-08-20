@@ -270,22 +270,22 @@ public class CardImageRenderer {
             FSkinImage image;
             switch (state.getName().replaceFirst("^Snow-Covered ", "")) {
             case "Plains":
-                image = FSkinImage.MANA_W;
+                image = FSkinImage.WATERMARK_W;
                 break;
             case "Island":
-                image = FSkinImage.MANA_U;
+                image = FSkinImage.WATERMARK_U;
                 break;
             case "Swamp":
-                image = FSkinImage.MANA_B;
+                image = FSkinImage.WATERMARK_B;
                 break;
             case "Mountain":
-                image = FSkinImage.MANA_R;
+                image = FSkinImage.WATERMARK_R;
                 break;
             case "Forest":
-                image = FSkinImage.MANA_G;
+                image = FSkinImage.WATERMARK_G;
                 break;
             default:
-                image = FSkinImage.MANA_COLORLESS;
+                image = FSkinImage.WATERMARK_C;
                 break;
             }
             float iconSize = h * 0.75f;

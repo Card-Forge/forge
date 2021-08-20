@@ -777,7 +777,7 @@ public class FCardImageRenderer {
                 break;
             }
             int iconSize = Math.round(h * 0.75f);
-            CardFaceSymbols.drawSymbol(imageKey, g, x + (w - iconSize) / 2, y + (h - iconSize) / 2, iconSize);
+            CardFaceSymbols.drawWatermark(imageKey, g, x + (w - iconSize) / 2, y + (h - iconSize) / 2, iconSize);
         } else {
             if (StringUtils.isEmpty(text))
                 return;
