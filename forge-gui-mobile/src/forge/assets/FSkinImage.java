@@ -107,6 +107,14 @@ public enum FSkinImage implements FImage {
     SET_MYTHIC     (FSkinProp.IMG_SETLOGO_MYTHIC, SourceFile.SETLOGOS),
     SET_SPECIAL    (FSkinProp.IMG_SETLOGO_SPECIAL, SourceFile.SETLOGOS),
 
+    //Watermarks
+    WATERMARK_G    (FSkinProp.IMG_WATERMARK_G, SourceFile.WATERMARKS),
+    WATERMARK_R    (FSkinProp.IMG_WATERMARK_R, SourceFile.WATERMARKS),
+    WATERMARK_B    (FSkinProp.IMG_WATERMARK_B, SourceFile.WATERMARKS),
+    WATERMARK_U    (FSkinProp.IMG_WATERMARK_U, SourceFile.WATERMARKS),
+    WATERMARK_W    (FSkinProp.IMG_WATERMARK_W, SourceFile.WATERMARKS),
+    WATERMARK_C    (FSkinProp.IMG_WATERMARK_C, SourceFile.WATERMARKS),
+
     //Gameplay
     TAP             (FSkinProp.IMG_TAP, SourceFile.MANAICONS),
     UNTAP           (FSkinProp.IMG_UNTAP, SourceFile.MANAICONS),
@@ -430,6 +438,7 @@ public enum FSkinImage implements FImage {
         BTNSTART(ForgeConstants.SPRITE_START_FILE),
         MANAICONS(ForgeConstants.SPRITE_MANAICONS_FILE),
         SETLOGOS(ForgeConstants.SPRITE_SETLOGO_FILE),
+        WATERMARKS(ForgeConstants.SPRITE_WATERMARK_FILE),
         PLANAR_CONQUEST(ForgeConstants.SPRITE_PLANAR_CONQUEST_FILE);
 
         private final String filename;

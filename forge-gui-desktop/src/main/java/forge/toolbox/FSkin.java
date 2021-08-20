@@ -1108,7 +1108,7 @@ public class FSkin {
     private static String preferredDir;
     private static String preferredName;
     private static BufferedImage bimDefaultSprite, bimFavIcon, bimPreferredSprite, bimFoils, bimQuestDraftDeck, bimOldFoils,
-    bimDefaultAvatars, bimPreferredAvatars, bimTrophies, bimAbilities, bimManaIcons, bimDefaultSleeve, bimDefaultSleeve2, bimDefaultDeckbox, bimPrefferedSetLogo;
+    bimDefaultAvatars, bimPreferredAvatars, bimTrophies, bimAbilities, bimManaIcons, bimDefaultSleeve, bimDefaultSleeve2, bimDefaultDeckbox, bimPrefferedSetLogo, bimDefaultWatermark;
     private static int x0, y0, w0, h0, newW, newH, preferredW, preferredH;
     private static int[] tempCoords;
     private static int defaultFontSize = 12;
@@ -1248,6 +1248,7 @@ public class FSkin {
         final File f14 = new File(defaultDir + ForgeConstants.SPRITE_DECKBOX_FILE);
         final File f15 = new File(defaultDir + ForgeConstants.SPRITE_SETLOGO_FILE);
         final File f16 = new File(preferredDir + ForgeConstants.SPRITE_SETLOGO_FILE);
+        final File f17 = new File(defaultDir + ForgeConstants.SPRITE_WATERMARK_FILE);
 
         try {
             int p = 0;
@@ -1272,6 +1273,8 @@ public class FSkin {
             bimDefaultDeckbox = ImageIO.read(f14);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             bimPrefferedSetLogo = f16.exists() ? ImageIO.read(f16) : ImageIO.read(f15);
+            FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
+            bimDefaultWatermark = ImageIO.read(f17);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             bimTrophies = ImageIO.read(f7);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
@@ -1337,6 +1340,9 @@ public class FSkin {
                 case SETLOGO:
                     setImage(prop, bimPrefferedSetLogo);
                     break;
+                case WATERMARKS:
+                    setImage(prop, bimDefaultWatermark);
+                    break;
                 default:
                     break;
             }
@@ -1361,6 +1367,7 @@ public class FSkin {
         bimDefaultSleeve2.flush();
         bimDefaultDeckbox.flush();
         bimPrefferedSetLogo.flush();
+        bimDefaultWatermark.flush();
         bimQuestDraftDeck.flush();
         bimTrophies.flush();
         bimAbilities.flush();
@@ -1377,6 +1384,7 @@ public class FSkin {
         bimDefaultSleeve2 = null;
         bimDefaultDeckbox = null;
         bimPrefferedSetLogo = null;
+        bimDefaultWatermark = null;
         bimPreferredAvatars = null;
         bimQuestDraftDeck = null;
         bimTrophies = null;

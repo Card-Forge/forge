@@ -32,7 +32,6 @@ public class FSkin {
     private static final Map<Integer, TextureRegion> sleeves = new HashMap<>(64);
     private static final Map<Integer, TextureRegion> borders = new HashMap<>();
     private static final Map<Integer, TextureRegion> deckbox = new HashMap<>();
-    private static final Map<Integer, TextureRegion> setlogo = new HashMap<>();
 
     private static Array<String> allSkins;
     private static FileHandle preferredDir;
@@ -220,6 +219,7 @@ public class FSkin {
         final FileHandle f13 = getDefaultSkinFile(ForgeConstants.SPRITE_DECKBOX_FILE);
         final FileHandle f14 = getDefaultSkinFile(ForgeConstants.SPRITE_SETLOGO_FILE);
         final FileHandle f15 = getSkinFile(ForgeConstants.SPRITE_SETLOGO_FILE);
+        final FileHandle f16 = getDefaultSkinFile(ForgeConstants.SPRITE_WATERMARK_FILE);
 
         try {
             textures.put(f1.path(), new Texture(f1));
@@ -391,20 +391,6 @@ public class FSkin {
             FSkin.deckbox.put(1, new TextureRegion(deckboxes, 492, 2, 488, 680));
             //generic deck box
             FSkin.deckbox.put(2, new TextureRegion(deckboxes, 982, 2, 488, 680));
-            //setlogo
-            Texture setlogos = f15.exists() ? new Texture(f15, textureFilter) : new Texture(f14, textureFilter);
-            if (textureFilter)
-                setlogos.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
-            //common logo
-            FSkin.setlogo.put(0, new TextureRegion(setlogos, 2, 2, 520, 451));
-            //uncommon logo
-            FSkin.setlogo.put(1, new TextureRegion(setlogos, 2, 455, 520, 451));
-            //rare logo
-            FSkin.setlogo.put(2, new TextureRegion(setlogos, 2, 908, 520, 451));
-            //mythic logo
-            FSkin.setlogo.put(3, new TextureRegion(setlogos, 2, 1361, 520, 451));
-            //special logo
-            FSkin.setlogo.put(4, new TextureRegion(setlogos, 2, 1814, 520, 451));
 
             preferredIcons.dispose();
             pxDefaultAvatars.dispose();
