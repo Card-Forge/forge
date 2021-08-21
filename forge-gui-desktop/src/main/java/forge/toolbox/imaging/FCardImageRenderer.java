@@ -748,7 +748,29 @@ public class FCardImageRenderer {
     private static void drawTextBox(Graphics2D g, CardStateView state, String text, Color[] colors,
             int x, int y, int w, int h, int textBoxFlags) {
         int yAdjust = (textBoxFlags >> 16);
-        fillColorBackground(g, colors, x, y + yAdjust, w, h - yAdjust);
+        if (state.isLand()) {
+            DetailColors modColors = DetailColors.WHITE;
+            if (state.isBasicLand()) {
+                if (state.isForest())
+                    modColors = DetailColors.GREEN;
+                else if (state.isIsland())
+                    modColors = DetailColors.BLUE;
+                else if (state.isMountain())
+                    modColors = DetailColors.RED;
+                else if (state.isSwamp())
+                    modColors = DetailColors.BLACK;
+                else if (state.isPlains())
+                    modColors = DetailColors.LAND;
+            }
+            Color bgColor = fromDetailColor(modColors);
+            bgColor = tintColor(Color.WHITE, bgColor, NAME_BOX_TINT);
+            Paint oldPaint = g.getPaint();
+            g.setColor(bgColor);
+            g.fillRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h));
+            g.setPaint(oldPaint);
+        } else {
+            fillColorBackground(g, colors, x, y + yAdjust, w, h - yAdjust);
+        }
         g.setStroke(new BasicStroke(BOX_LINE_THICKNESS));
         g.setColor(Color.BLACK);
         g.drawRect(x, y, w, h);
