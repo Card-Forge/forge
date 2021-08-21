@@ -59,7 +59,7 @@ public class ControlSpellEffect extends SpellAbilityEffect {
 
         // If an Exchange needs to happen, make sure both parties are still in the right zones
 
-        for(SpellAbility spell : tgtSpells) {
+        for (SpellAbility spell : tgtSpells) {
             Card tgtC = spell.getHostCard();
             SpellAbilityStackInstance si = game.getStack().getInstanceFromSpellAbility(spell);
             long tStamp = game.getNextTimestamp();
