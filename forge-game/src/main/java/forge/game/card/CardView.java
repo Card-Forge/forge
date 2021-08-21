@@ -1360,6 +1360,21 @@ public class CardView extends GameEntityView {
         public boolean isPlaneswalker() {
             return getType().isPlaneswalker();
         }
+        public boolean isMountain() {
+            return getType().hasSubtype("Mountain");
+        }
+        public boolean isPlains() {
+            return getType().hasSubtype("Plains");
+        }
+        public boolean isSwamp() {
+            return getType().hasSubtype("Swamp");
+        }
+        public boolean isForest() {
+            return getType().hasSubtype("Forest");
+        }
+        public boolean isIsland() {
+            return getType().hasSubtype("Island");
+        }
     }
 
     //special methods for updating card and player properties as needed and returning the new collection
