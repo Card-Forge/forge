@@ -26,12 +26,14 @@ import javax.swing.BorderFactory;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import forge.deck.Deck;
-import forge.deck.DeckBase;
-import forge.deck.DeckImportController;
-import forge.deck.DeckRecognizer;
+import forge.StaticData;
+import forge.card.CardEdition;
+import forge.deck.*;
 import forge.deck.DeckRecognizer.TokenType;
+import forge.game.GameFormat;
+import forge.game.GameType;
 import forge.item.InventoryItem;
+import forge.model.FModel;
 import forge.screens.deckeditor.controllers.ACEditorBase;
 import forge.toolbox.FButton;
 import forge.toolbox.FCheckBox;
@@ -45,7 +47,7 @@ import forge.util.Localizer;
 import forge.view.FDialog;
 
 /**
- *
+  *
  * Dialog for quick import of decks.
  *
  * @param <TItem>
@@ -56,26 +58,56 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
 
     private final FTextArea txtInput = new FTextArea();
     private static final String STYLESHEET = "<style>"
-            + "body, h1, h2, h3, h4, h5, h6, table, tr, td, p {margin: 3px 1px; padding: 0; font-weight: "
-            + "normal; font-style: normal; text-decoration: none; font-family: Arial; font-size: 10px; background-color: white;} "
-            +
-            // "h1 {border-bottom: solid 1px black; color: blue; font-size: 12px; margin: 3px 0 9px 0; } "
-            // +
-            ".comment {color: #666666;} " + ".knowncard {color: #009900;} " + ".unknowncard {color: #990000;} "
-            + ".section {padding: 3px 10px; margin: 3px 0; font-weight: 700; background-color: #DDDDDD; } "
+            + "body, h1, h2, h3, h4, h5, h6, table, tr, td, p {padding: 0; font-weight: normal; "
+            + "text-decoration: none; font-family: Arial; font-size: 10px; color: #000000; background-color: white;} "
+            + " h3 {font-size: 12px; margin: 2px 0; padding: 0px 5px; } "
+            + " h4 {font-size: 11px; } "
+            + " code {font-size: 10px; color: #000000; background-color: white; } "
+            + "ul, ol, ul li, ol li {padding: 1px; margin 0; } "
+            + "p {padding: 2px 5px; margin: 2px 0; font-weight: 400 !important; color: #000000; text-align: justify } "
+            + ".unknowncard {color: #666666;} " + ".knowncard {color: #009900;} " + ".illegalcard {color: #990000;} "
+            + ".section {padding: 2px 5px; margin: 2px 0; font-weight: 700; background-color: #DDDDDD; color: #000000 } "
+            + ".cardtype {padding: 2px 20px; margin: 3px 0; font-weight: 400; background-color: #FFCC66; color: #000000 } "
+            + ".deckname {padding: 2px 20px; margin: 3px 0; font-weight: 400; background-color: #332200; color: #FFFFFF }"
             + "</style>";
+    //    TODO: Add localisation support
     private static final String HTML_WELCOME_TEXT = "<html>"
+            + "<head>"
             + DeckImport.STYLESHEET
-            + "<h3>You'll see recognized cards here</h3>"
-            + "<div class='section'>Legend</div>"
-            + "<ul>"
-            + "<li class='knowncard'>Recognized cards will be shown in green. These cards will be auto-imported into a new deck<BR></li>"
-            + "<li class='unknowncard'>Lines which seem to be cards but are either misspelled or unsupported by Forge, are shown in dark-red<BR></li>"
-            + "<li class='comment'>Lines that appear unsignificant will be shown in gray<BR><BR></li>" + "</ul>"
-            + "<div class='section'>Choosing source</div>"
-            + "<p>In most cases when you paste from clipboard a carefully selected area of a webpage, it works perfectly.</p>"
-            + "<p>Sometimes to filter out unneeded data you may have to export deck in MTGO format, and paste here downloaded file contents.</p>"
-            + "<p>Sideboard recognition is supported. Make sure that the sideboard cards are listed after a line that contains the word 'Sideboard'</p>"
+            + "</head>"
+            + "<body>"
+            + "<h3 id='how-to-use-the-deck-importer'>How to use the Deck Importer</h3>" +
+            "<p><strong>Quick Instructions</strong>:\n" +
+            "Using the Deck Importer is <strong>very simple</strong>: " +
+            "just type or paste the names of the cards you want (one per line in the <em>Card List</em>), " +
+            "and the Importer will automatically create the <em>Decklist</em> with M:TG cards in Forge." +
+            "You could also specify how many copies of each card you want (default: <code>1</code>), " +
+            "and their corresponding Edition.\nIf No Edition is specified, the card print will be " +
+            "selected automatically according to the <em>Card Art Preference</em> option in Game Settings.\n\n" +
+            "For example: <code>\"4 Power Sink TMP\"</code> will import:" +
+            "<ul><li><code>4</code> copies of <code>Power Sink</code> from <code>Tempest</code>.</li></ul>" +
+            "Each line in the list will be processed on-the-fly, and rendered in the Decklist with the following " +
+            "color-codes:" +
+            "<ul>" +
+            "<li> <span class=\"knowncard\">Card Recognized: Successful match in the database.</span></li>" +
+            "<li> <span class=\"unknowncard\">Card Not Found, or Not Supported yet in Forge.</span></li>" +
+            "<li> <span class=\"comment\">General text or Comment: Simply ignored by the Importer.</span></li>" +
+            "</ul></p>" +
+            "<p><b>Additional Options</b>:" +
+            "<ol>" +
+            "<li><strong>Deck Name</strong>: you can specify a name for your deck . Just type " +
+            "<code>Name: &lt;NAME OF YOUR DECK&gt;</code> in the Card List;</li>" +
+            "<li><strong>Card types</strong>: you can organise your list by types, e.g. " +
+            "<code>Creature</code>, <code>Instant</code>, <code>Land</code>, <code>Sorcery</code>;</li>" +
+            "<li><strong>Deck Section</strong>: Similarly, you can organise your list by Deck Sections, " +
+            "e.g. <code>Main</code>, <code>Sideboard</code>;</li>" +
+            "<li><strong>Collector Number</strong>: You can identify a specific Card Print by including its CollNr., " +
+            "e.g. <code>20 Island M21 265</code></li>" +
+            "</ol></p>" +
+            "<p><strong>Deck Formats</strong>:" +
+            "Card Lists in the following formats are supported : MTG Arena (<code>.MTGA</code>); " +
+            "MTG Goldfish (<code>.MTGO</code>); TappedOut; DeckStats.net; <code>.dec</code> files.</p>"
+            + "</body>"
             + "</html>";
 
     private final FHtmlViewer htmlOutput = new FHtmlViewer(DeckImport.HTML_WELCOME_TEXT);
@@ -83,30 +115,49 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
     private final FScrollPane scrollOutput = new FScrollPane(this.htmlOutput, false);
     private final FLabel summaryMain = new FLabel.Builder().text(Localizer.getInstance().getMessage("lblImportedDeckSummay")).build();
     private final FLabel summarySide = new FLabel.Builder().text(Localizer.getInstance().getMessage("lblSideboardSummayLine")).build();
-    private final FButton cmdAccept = new FButton(Localizer.getInstance().getMessage("lblImportDeck"));
     private final FButton cmdCancel = new FButton(Localizer.getInstance().getMessage("lblCancel"));
-    private final FCheckBox newEditionCheck = new FCheckBox(Localizer.getInstance().getMessage("lblImportLatestVersionCard"), true);
-    private final FCheckBox dateTimeCheck = new FCheckBox(Localizer.getInstance().getMessage("lblUseOnlySetsReleasedBefore"), false);
-    private final FCheckBox onlyCoreExpCheck = new FCheckBox(Localizer.getInstance().getMessage("lblUseOnlyCoreAndExpansionSets"), true);
 
-    private final FComboBox<String> monthDropdown = new FComboBox<>(); //don't need wrappers since skin can't change while this dialog is open
+    private FButton cmdAccept;  // Not initialised as label will be adaptive.
+    private final FCheckBox dateTimeCheck = new FCheckBox(Localizer.getInstance().getMessage("lblUseOnlySetsReleasedBefore"), false);
+    private final FCheckBox replaceDeckCheckbox = new FCheckBox(Localizer.getInstance().getMessage("lblReplaceDeck"), false);
+    private final DeckFormat deckFormat;
+
+    //don't need wrappers since skin can't change while this dialog is open
+    private final FComboBox<String> monthDropdown = new FComboBox<>();
     private final FComboBox<Integer> yearDropdown = new FComboBox<>();
 
     private final DeckImportController controller;
     private final ACEditorBase<TItem, TModel> host;
 
+    private final String IMPORT_CARDS_CMD_LABEL = Localizer.getInstance().getMessage("lblImportCardsCmd");
+    private final String IMPORT_DECK_CMD_LABEL = Localizer.getInstance().getMessage("lblImportDeckCmd");
+    private final String REPLACE_CARDS_CMD_LABEL = Localizer.getInstance().getMessage("lblReplaceCardsCmd");
 
-    public DeckImport(final ACEditorBase<TItem, TModel> g, final boolean allowCardsFromAllSets) {
-        this.controller = new DeckImportController(!g.getDeckController().isEmpty(),
-                newEditionCheck, dateTimeCheck, onlyCoreExpCheck, monthDropdown, yearDropdown);
+
+    public DeckImport(final ACEditorBase<TItem, TModel> g) {
+        boolean currentDeckIsNotEmpty = !(g.getDeckController().isEmpty());
+        DeckFormat currentDeckFormat = g.getGameType().getDeckFormat();
+        this.deckFormat = currentDeckFormat;
+        GameType currentGameType = g.getGameType();
+        // get the game format with the same name of current game type (if any)
+        GameFormat currentGameFormat = FModel.getFormats().get(currentGameType.name());
+        if (currentGameFormat == null)
+            currentGameFormat = FModel.getFormats().get("Vintage");  // default for constructed
+        List<String> allowedSetCodes = currentGameFormat.getAllowedSetCodes();
+        this.controller = new DeckImportController(dateTimeCheck, monthDropdown, yearDropdown,
+                currentDeckIsNotEmpty, allowedSetCodes, currentDeckFormat);
+        String cmdAcceptLabel = currentDeckIsNotEmpty ? IMPORT_CARDS_CMD_LABEL : IMPORT_DECK_CMD_LABEL;
+        this.cmdAccept = new FButton(cmdAcceptLabel);
+
         this.host = g;
 
-        final int wWidth = 700;
-        final int wHeight = 600;
+        final int wWidth = 900;
+        final int wHeight = 900;
 
         this.setPreferredSize(new java.awt.Dimension(wWidth, wHeight));
         this.setSize(wWidth, wHeight);
-        this.setTitle(Localizer.getInstance().getMessage("lblDeckImporter"));
+        String gameTypeName = String.format(" %s", currentGameType.name());
+        this.setTitle(Localizer.getInstance().getMessage("lblDeckImporter") + gameTypeName);
 
         txtInput.setFocusable(true);
         txtInput.setEditable(true);
@@ -118,18 +169,20 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         this.scrollOutput.setViewportBorder(BorderFactory.createLoweredBevelBorder());
 
         this.add(this.scrollInput, "cell 0 0, w 50%, growy, pushy");
-        this.add(this.newEditionCheck, "cell 0 1, w 50%, ax c");
         this.add(this.dateTimeCheck, "cell 0 2, w 50%, ax c");
 
         this.add(monthDropdown, "cell 0 3, w 20%, ax left, split 2, pad 0 4 0 0");
         this.add(yearDropdown, "w 15%");
 
-        this.onlyCoreExpCheck.setSelected(!allowCardsFromAllSets);
-        this.add(this.onlyCoreExpCheck, "cell 0 4, w 50%, ax c");
-
         this.add(this.scrollOutput, "cell 1 0, w 50%, growy, pushy");
         this.add(this.summaryMain, "cell 1 1, label");
         this.add(this.summarySide, "cell 1 2, label");
+
+        if (currentDeckIsNotEmpty){
+            // Disabled Default behaviour to replace current deck: bulk import cards into the existing deck!
+            //this.replaceDeckCheckbox.setSelected(currentDeckIsNotEmpty);
+            this.add(this.replaceDeckCheckbox, "cell 1 3, align r, ax r");
+        }
 
         this.add(this.cmdAccept, "cell 1 4, split 2, w 150, align r, h 26");
         this.add(this.cmdCancel, "w 150, h 26");
@@ -145,16 +198,27 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
             @SuppressWarnings("unchecked")
             @Override
             public void actionPerformed(final ActionEvent e) {
-                final Deck deck = controller.accept();
+                String currentDeckName = g.getDeckController().getModelName();
+                final Deck deck = controller.accept(currentDeckName);
                 if (deck == null) { return; }
+                // If the soon-to-import card list hasn't got any name specified in the list
+                // we set it to the current one (if any) or set a new one.
+                // In this way, if this deck will replace the current one, the name will be kept the same!
+                if (!deck.hasName()){
+                    if (currentDeckName.equals(""))
+                        deck.setName("New Deck");  // TODO: try to generate a deck name?
+                    else
+                        deck.setName(currentDeckName);
+                }
 
-                DeckImport.this.host.getDeckController().loadDeck(deck);
+                DeckImport.this.host.getDeckController().loadDeck(deck, controller.getReplacingDeck());
                 DeckImport.this.processWindowEvent(new WindowEvent(DeckImport.this, WindowEvent.WINDOW_CLOSING));
             }
         });
 
         final ActionListener updateDateCheck = new ActionListener() {
-            @Override public void actionPerformed(final ActionEvent e) {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
                 final boolean isSel = dateTimeCheck.isSelected();
                 monthDropdown.setEnabled(isSel);
                 yearDropdown.setEnabled(isSel);
@@ -169,14 +233,23 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
             }
         };
 
-        this.newEditionCheck.addActionListener(reparse);
-        this.onlyCoreExpCheck.addActionListener(reparse);
+        final ActionListener toggleDeckReplace = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { toggleDeckReplaceOption(); }
+        };
+
         this.yearDropdown.addActionListener(reparse);
         this.monthDropdown.addActionListener(reparse);
         updateDateCheck.actionPerformed(null); // update actual state
 
         this.txtInput.getDocument().addDocumentListener(new OnChangeTextUpdate());
         this.cmdAccept.setEnabled(false);
+
+
+        if (currentDeckIsNotEmpty){
+            this.replaceDeckCheckbox.setSelected(false);
+            this.replaceDeckCheckbox.addActionListener(toggleDeckReplace);
+        }
     }
 
     /**
@@ -208,11 +281,17 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         updateSummaries(tokens);
     }
 
+    private void toggleDeckReplaceOption(){
+        boolean replaceDeckStatus = this.replaceDeckCheckbox.isSelected();
+        this.controller.setReplacingDeck(replaceDeckStatus);
+        String cmdAcceptLabel = replaceDeckStatus ? this.REPLACE_CARDS_CMD_LABEL : this.IMPORT_CARDS_CMD_LABEL;
+        this.cmdAccept.setText(cmdAcceptLabel);
+    }
+
     private void displayTokens(final List<DeckRecognizer.Token> tokens) {
-        if (tokens.isEmpty()) {
+        if (tokens.isEmpty() || hasOnlyComment(tokens)) {
             htmlOutput.setText(HTML_WELCOME_TEXT);
-        }
-        else {
+        } else {
             final StringBuilder sbOut = new StringBuilder("<html>");
             sbOut.append(DeckImport.STYLESHEET);
             for (final DeckRecognizer.Token t : tokens) {
@@ -221,6 +300,14 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
             sbOut.append("</html>");
             htmlOutput.setText(sbOut.toString());
         }
+    }
+
+    private boolean hasOnlyComment(final List<DeckRecognizer.Token> tokens) {
+        for (DeckRecognizer.Token token : tokens) {
+            if (token.getType() != TokenType.Comment && token.getType() != TokenType.UnknownText)
+                return false;
+        }
+        return true;
     }
 
     private void updateSummaries(final List<DeckRecognizer.Token> tokens) {
@@ -234,7 +321,7 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
             if (t.getType() == TokenType.UnknownCard) {
                 cardsUnknown[idx] += t.getNumber();
             }
-            if ((t.getType() == TokenType.SectionName) && t.getText().toLowerCase().contains("side")) {
+            if ((t.getType() == TokenType.DeckSectionName) && t.getText().toLowerCase().contains("side")) {
                 idx = 1;
             }
         }
@@ -243,20 +330,57 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         cmdAccept.setEnabled(cardsOk[0] > 0);
     }
 
-    private static String makeHtmlViewOfToken(final DeckRecognizer.Token token) {
+//    private static String makeHtmlViewOfToken(final DeckRecognizer.Token token) {
+//        switch (token.getType()) {
+//            case KnownCard:
+//                return String.format("<div class='knowncard'>%s * %s [%s] %s</div>", token.getNumber(), token.getCard()
+//                        .getName(), token.getCard().getEdition(), token.getCard().isFoil() ? "<i>foil</i>" : "");
+//            case UnknownCard:
+//                return String.format("<div class='unknowncard'>%s * %s</div>", token.getNumber(), token.getText());
+//            case SectionName:
+//                return String.format("<div class='section'>%s</div>", token.getText());
+//            case UnknownText:
+//            case Comment:
+//                return String.format("<div class='comment'>%s</div>", token.getText());
+//            default:
+//                return "";
+//        }
+//    }
+
+    private String makeHtmlViewOfToken(final DeckRecognizer.Token token) {
         switch (token.getType()) {
-        case KnownCard:
-            return String.format("<div class='knowncard'>%s * %s [%s] %s</div>", token.getNumber(), token.getCard()
-                    .getName(), token.getCard().getEdition(), token.getCard().isFoil() ? "<i>foil</i>" : "");
-        case UnknownCard:
-            return String.format("<div class='unknowncard'>%s * %s</div>", token.getNumber(), token.getText());
-        case SectionName:
-            return String.format("<div class='section'>%s</div>", token.getText());
-        case UnknownText:
-        case Comment:
-            return String.format("<div class='comment'>%s</div>", token.getText());
-        default:
-            return "";
+            case KnownCard:
+                CardEdition edition = StaticData.instance().getEditions().get(token.getCard().getEdition());
+                String editionName;
+                if (edition == null)
+                    editionName = "Unknown Edition";
+                else
+                    editionName = edition.getName();
+                // TODO: String Padding for alignment
+                return String.format("<div class='knowncard'>%s x %s from %s (%s) %s</div>",
+                        token.getNumber(), token.getCard().getName(),
+                        editionName, token.getCard().getEdition(),
+                        token.getCard().isFoil() ? "<i>foil</i>" : "");
+            case UnknownCard:
+                return String.format("<div class='unknowncard'>%s x %s (%s)</div>",
+                        token.getNumber(), token.getText(),
+                        Localizer.getInstance().getMessage("lblUnknownCard"));
+            case IllegalCard:
+                return String.format("<div class='illegalcard'>%s x %s (%s %s)</div>",
+                        token.getNumber(), token.getText(),
+                        Localizer.getInstance().getMessage("lblIllegalCard"),
+                        this.deckFormat.name());
+            case DeckSectionName:
+                return String.format("<div class='section'>%s</div>", token.getText());
+            case CardType:
+                return String.format("<div class='cardtype'>%s</div>", token.getText());
+            case DeckName:
+                return String.format("<div class='deckname'>Deck Name: %s</div>", token.getText());
+            case UnknownText:
+            case Comment:
+            default:
+                return "";
+            // return String.format("<div class='comment'>%s</div>", token.getText());
         }
     }
 }
