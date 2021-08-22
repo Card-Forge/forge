@@ -86,9 +86,14 @@ public class DeckController<T extends DeckBase> {
     /**
      * Load deck from file or clipboard
      */
-    public void loadDeck(Deck deck) {
+    public void loadDeck(Deck deck){
+        this.loadDeck(deck, true);
+    }
+
+    public void loadDeck(Deck deck, boolean substituteCurrentDeck) {
         if (view.getCatalogManager().isInfinite()) {
-            if (deck.getName() == "") {
+            Deck currentDeck = view.getHumanDeck();
+            if (substituteCurrentDeck || currentDeck.isEmpty()) {
                 newModel();
             }
         } else {
@@ -99,14 +104,16 @@ public class DeckController<T extends DeckBase> {
             catalogPool.addAll(catalogClone);
         }
 
+        Deck currentDeck = view.getHumanDeck();
         for (DeckSection section: EnumSet.allOf(DeckSection.class)) {
             if (view.isSectionImportable(section)) {
-                CardPool sectionCards = view.getHumanDeck().getOrCreate(section);
-                sectionCards.clear();
+                CardPool sectionCards = currentDeck.getOrCreate(section);
                 sectionCards.addAll(deck.getOrCreate(section));
             }
         }
-
+        // Allow to specify the name of Deck in DeckImporter
+        if ((deck.hasName()) && (!currentDeck.hasName()))
+            view.getHumanDeck().setName(deck.getName());
         onModelChanged(false);
     }
 
