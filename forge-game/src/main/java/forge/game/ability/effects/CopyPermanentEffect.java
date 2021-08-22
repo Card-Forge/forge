@@ -107,6 +107,8 @@ public class CopyPermanentEffect extends TokenEffectBase {
                     Card possibleCard = Card.fromPaperCard(cp, activator); // Need to temporarily set the Owner so the Game is set
 
                     if (possibleCard.isValid(valid, host.getController(), host, sa)) {
+                        if (host.getController().isAI() && possibleCard.getRules() != null && possibleCard.getRules().getAiHints().getRemAIDecks())
+                            continue;
                         choice.add(possibleCard);
                         ncopied -= 1;
                     }
