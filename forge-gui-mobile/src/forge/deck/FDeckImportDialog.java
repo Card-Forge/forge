@@ -41,14 +41,7 @@ public class FDeckImportDialog extends FDialog {
     private final Callback<Deck> callback;
 
     private final FTextArea txtInput = add(new FTextArea(true));
-    private final FCheckBox newEditionCheck = add(new FCheckBox(Localizer.getInstance().getMessage("lblImportLatestVersionCard"), true));
     private final FCheckBox dateTimeCheck = add(new FCheckBox(Localizer.getInstance().getMessage("lblUseOnlySetsReleasedBefore"), false));
-    /*setting onlyCoreExpCheck to false allow the copied cards to pass the check of deck contents
-      forge-core\src\main\java\forge\deck\Deck.javaDeck.java starting @ Line 320 which is called by
-      forge-gui-mobile\src\forge\deck\FDeckEditor.java starting @ Line 373
-      (as of latest commit: 8e6655e3ee67688cff66b422d4722c58392eaa7e)
-    */
-    private final FCheckBox onlyCoreExpCheck = add(new FCheckBox(Localizer.getInstance().getMessage("lblUseOnlyCoreAndExpansionSets"), false));
 
     private final FComboBox<String> monthDropdown = add(new FComboBox<>()); //don't need wrappers since skin can't change while this dialog is open
     private final FComboBox<Integer> yearDropdown = add(new FComboBox<>());
@@ -62,7 +55,7 @@ public class FDeckImportDialog extends FDialog {
         super(Localizer.getInstance().getMessage("lblImportFromClipboard"), 2);
 
         callback = callback0;
-        controller = new DeckImportController(replacingDeck, newEditionCheck, dateTimeCheck, onlyCoreExpCheck, monthDropdown, yearDropdown);
+        controller = new DeckImportController(dateTimeCheck, monthDropdown, yearDropdown, replacingDeck);
         txtInput.setText(Forge.getClipboard().getContents()); //just pull import directly off the clipboard
 
         initButton(0, Localizer.getInstance().getMessage("lblImport"), new FEventHandler() {
@@ -159,7 +152,6 @@ public class FDeckImportDialog extends FDialog {
             h = monthDropdown.getHeight();
             float fieldPadding = padding / 2;
 
-            newEditionCheck.setBounds(x, y, w, h);
             y += h + fieldPadding;
             dateTimeCheck.setBounds(x, y, w, h);
             y += h + fieldPadding;
@@ -168,8 +160,6 @@ public class FDeckImportDialog extends FDialog {
             monthDropdown.setBounds(x, y, dropDownWidth, h);
             yearDropdown.setBounds(x + dropDownWidth + fieldPadding, y, dropDownWidth, h);
             y += h + fieldPadding;
-
-            onlyCoreExpCheck.setBounds(x, y, w, h);
             y += h + 2 * padding;
         }
         h = txtInput.getPreferredHeight(w);
@@ -179,9 +169,6 @@ public class FDeckImportDialog extends FDialog {
         }
         txtInput.setBounds(x, y, w, h);
         y += h + padding;
-        if (showOptions) {
-            h = newEditionCheck.getHeight();
-        }
         return y;
     }
 }
