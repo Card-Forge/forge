@@ -18,6 +18,7 @@
 package forge.deck;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import forge.StaticData;
 import forge.card.CardDb;
@@ -232,8 +233,10 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             return;  // deck loaded already - card with no set have been found, but no change since last time: all good!
 
         Map<String, List<String>> referenceDeckLoadingMap;
-        if (deferredSections != null)
-            referenceDeckLoadingMap = new HashMap<>(deferredSections);
+        if (deferredSections != null) {
+            this.validateDeferredSections();
+            referenceDeckLoadingMap = new HashMap<>(this.deferredSections);
+        }
         else
             referenceDeckLoadingMap = new HashMap<>(loadedSections);
 
@@ -274,6 +277,56 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         if (includeCardsFromUnspecifiedSet && smartCardArtSelection)
             optimiseCardArtSelectionInDeckSections(cardsWithNoEdition);
 
+    }
+
+    private void validateDeferredSections(){
+        /*
+         Construct a temporary (DeckSection, CardPool) Maps, to be sanitise and finalised
+         before copying into `this.parts`. This sanitisation is applied because of the
+         validation schema introduced in DeckSections.
+         */
+        for (Entry<String, List<String>> s : this.deferredSections.entrySet()) {
+            final DeckSection deckSection = DeckSection.smartValueOf(s.getKey());
+            if (deckSection == null)
+                continue;
+
+            final List<String> cardsInSection = s.getValue();
+            CardPool pool = CardPool.fromCardList(cardsInSection);
+            if (pool.countDistinct() == 0)
+                continue;  // pool empty, no card has been found!
+
+            // Filter pool by applying DeckSection Validation schema for Card Types (to avoid inconsistencies)
+            CardPool filteredPool = pool.getFilteredPoolWithCardsCount(new Predicate<PaperCard>() {
+                @Override
+                public boolean apply(PaperCard input) {
+                    return deckSection.validate(input);
+                }
+            });
+
+            if (filteredPool.countDistinct() != pool.countDistinct()) {  // Some cards have been filtered
+                CardPool blackListPool = pool.getFilteredPoolWithCardsCount(new Predicate<PaperCard>() {
+                    @Override
+                    public boolean apply(PaperCard input) {
+                        return !(deckSection.validate(input));
+                    }
+                });
+
+                List<Entry<PaperCard, Integer>> blackList = Lists.newArrayList(blackListPool);
+                for (Entry<PaperCard, Integer> entry : blackList) {
+                    PaperCard card = entry.getKey();
+                    DeckSection cardSection = DeckSection.matchingSection(card);
+                    if (cardSection == null)
+                        continue;  // No matching section could be found!
+                    String cardRequest = CardDb.CardRequest.compose(card.getName(), card.getEdition(), card.getArtIndex());
+                    String poolRequest = String.format("%d %s", entry.getValue(), cardRequest);
+                    List<String> sectionCardList = this.deferredSections.getOrDefault(cardSection.name(), null);
+                    if (sectionCardList == null)
+                        sectionCardList = new ArrayList<>();
+                    sectionCardList.add(poolRequest);
+                    this.deferredSections.put(cardSection.name(), sectionCardList);
+                }
+            }
+        }
     }
 
     private ArrayList<String> getAllCardNamesWithNoSpecifiedEdition(List<String> cardsInSection) {
