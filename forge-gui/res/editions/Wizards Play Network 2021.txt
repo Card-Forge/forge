@@ -7,3 +7,4 @@ ScryfallCode=PWP21
 
 [cards]
 1 R Fabled Passage @Howard Lyon
+2 R Mind Stone @Jason Felix

@@ -47,19 +47,22 @@ public class CostAdjustment {
         Cost result = cost.copy();
 
         boolean isStateChangeToFaceDown = false;
-        if (sa.isSpell() && sa.isCastFaceDown()) {
-            // Turn face down to apply cost modifiers correctly
-            host.turnFaceDownNoUpdate();
-            isStateChangeToFaceDown = true;
-        } // isSpell
 
-        // Commander Tax there
-        if (sa.isSpell() && host.isCommander() && ZoneType.Command.equals(host.getCastFrom())) {
-            int n = player.getCommanderCast(host) * 2;
-            if (n > 0) {
-                result.add(new Cost(ManaCost.get(n), false));
+        if (sa.isSpell()) {
+            if (sa.isCastFaceDown()) {
+                // Turn face down to apply cost modifiers correctly
+                host.turnFaceDownNoUpdate();
+                isStateChangeToFaceDown = true;
             }
-        }
+
+            // Commander Tax there
+            if (host.isCommander() && ZoneType.Command.equals(host.getCastFrom())) {
+                int n = player.getCommanderCast(host) * 2;
+                if (n > 0) {
+                    result.add(new Cost(ManaCost.get(n), false));
+                }
+            }
+        } // isSpell
 
         CardCollection cardsOnBattlefield = new CardCollection(game.getCardsIn(ZoneType.Battlefield));
         cardsOnBattlefield.addAll(game.getCardsIn(ZoneType.Stack));

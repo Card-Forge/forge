@@ -217,6 +217,9 @@ public class FSkin {
         final FileHandle f11 = getSkinFile(ForgeConstants.SPRITE_BUTTONS_FILE);
         final FileHandle f12 = getSkinFile(ForgeConstants.SPRITE_START_FILE);
         final FileHandle f13 = getDefaultSkinFile(ForgeConstants.SPRITE_DECKBOX_FILE);
+        final FileHandle f14 = getDefaultSkinFile(ForgeConstants.SPRITE_SETLOGO_FILE);
+        final FileHandle f15 = getSkinFile(ForgeConstants.SPRITE_SETLOGO_FILE);
+        final FileHandle f16 = getDefaultSkinFile(ForgeConstants.SPRITE_WATERMARK_FILE);
 
         try {
             textures.put(f1.path(), new Texture(f1));

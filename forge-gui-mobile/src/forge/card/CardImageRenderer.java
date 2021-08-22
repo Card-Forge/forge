@@ -233,10 +233,23 @@ public class CardImageRenderer {
         float padding = h / 8;
 
         //draw square icon for rarity
-        float iconSize = h * 0.55f;
+        float iconSize = h * 0.9f;
         float iconPadding = (h - iconSize) / 2;
         w -= iconSize + iconPadding * 2;
-        g.fillRect(CardRenderer.getRarityColor(state.getRarity()), x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
+        //g.fillRect(CardRenderer.getRarityColor(state.getRarity()), x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
+        if (state.getRarity() == null) {
+            g.drawImage(FSkinImage.SET_SPECIAL, x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
+        } else if (state.getRarity() == CardRarity.Special ) {
+            g.drawImage(FSkinImage.SET_SPECIAL, x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
+        } else if (state.getRarity() == CardRarity.MythicRare) {
+            g.drawImage(FSkinImage.SET_MYTHIC, x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
+        } else if (state.getRarity() == CardRarity.Rare) {
+            g.drawImage(FSkinImage.SET_RARE, x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
+        } else if (state.getRarity() == CardRarity.Uncommon) {
+            g.drawImage(FSkinImage.SET_UNCOMMON, x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
+        } else {
+            g.drawImage(FSkinImage.SET_COMMON, x + w + iconPadding, y + (h - iconSize) / 2, iconSize, iconSize);
+        }
 
         //draw type
         x += padding;
@@ -247,7 +260,26 @@ public class CardImageRenderer {
     private static final TextRenderer cardTextRenderer = new TextRenderer(true);
 
     private static void drawTextBox(Graphics g, CardView card, CardStateView state, Color[] colors, float x, float y, float w, float h, boolean onTop) {
-        fillColorBackground(g, colors, x, y, w, h);
+        if (state.isLand()) {
+            DetailColors modColors = DetailColors.WHITE;
+            if (state.isBasicLand()) {
+                if (state.isForest())
+                    modColors = DetailColors.GREEN;
+                else if (state.isIsland())
+                    modColors = DetailColors.BLUE;
+                else if (state.isMountain())
+                    modColors = DetailColors.RED;
+                else if (state.isSwamp())
+                    modColors = DetailColors.BLACK;
+                else if (state.isPlains())
+                    modColors = DetailColors.LAND;
+            }
+            Color bgColor = FSkinColor.fromRGB(modColors.r, modColors.g, modColors.b);
+            bgColor = FSkinColor.tintColor(Color.WHITE, bgColor, CardRenderer.NAME_BOX_TINT);
+            g.fillRect(bgColor, x, y, w, h);
+        } else {
+            fillColorBackground(g, colors, x, y, w, h);
+        }
         g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
 
         if (!onTop) { return; } //remaining rendering only needed if card on top
@@ -257,22 +289,22 @@ public class CardImageRenderer {
             FSkinImage image;
             switch (state.getName().replaceFirst("^Snow-Covered ", "")) {
             case "Plains":
-                image = FSkinImage.MANA_W;
+                image = FSkinImage.WATERMARK_W;
                 break;
             case "Island":
-                image = FSkinImage.MANA_U;
+                image = FSkinImage.WATERMARK_U;
                 break;
             case "Swamp":
-                image = FSkinImage.MANA_B;
+                image = FSkinImage.WATERMARK_B;
                 break;
             case "Mountain":
-                image = FSkinImage.MANA_R;
+                image = FSkinImage.WATERMARK_R;
                 break;
             case "Forest":
-                image = FSkinImage.MANA_G;
+                image = FSkinImage.WATERMARK_G;
                 break;
             default:
-                image = FSkinImage.MANA_COLORLESS;
+                image = FSkinImage.WATERMARK_C;
                 break;
             }
             float iconSize = h * 0.75f;

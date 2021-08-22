@@ -643,7 +643,7 @@ public final class GameActionUtil {
         }
 
         final StringBuilder sb = new StringBuilder();
-        if (amount == 0) {
+        if (amount <= 0) {
             sb.append("0");
         } else if (abMana.isComboMana()) {
             // amount is already taken care of in resolve method for combination mana, just append baseMana

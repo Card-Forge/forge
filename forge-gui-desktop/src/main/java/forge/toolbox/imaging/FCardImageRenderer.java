@@ -717,11 +717,22 @@ public class FCardImageRenderer {
 
         //draw square icon for rarity
         if (drawRarity) {
-            int iconSize = Math.round(h * 0.55f);
+            int iconSize = Math.round(h * 0.9f);
             int iconPadding = (h - iconSize) / 2;
             w -= iconSize + iconPadding * 2;
-            g.setColor(getRarityColor(state.getRarity()));
-            g.fillRect(x + w + iconPadding, y + (h - iconSize + 1) / 2, iconSize, iconSize);
+            if (state.getRarity() == null) {
+                FSkin.drawImage(g, FSkin.getImage(FSkinProp.IMG_SETLOGO_SPECIAL), x + w + iconPadding, y + (h - iconSize + 1) / 2, iconSize, iconSize);
+            } else if (state.getRarity() == CardRarity.Special ) {
+                FSkin.drawImage(g, FSkin.getImage(FSkinProp.IMG_SETLOGO_SPECIAL), x + w + iconPadding, y + (h - iconSize + 1) / 2, iconSize, iconSize);
+            } else if (state.getRarity() == CardRarity.MythicRare) {
+                FSkin.drawImage(g, FSkin.getImage(FSkinProp.IMG_SETLOGO_MYTHIC), x + w + iconPadding, y + (h - iconSize + 1) / 2, iconSize, iconSize);
+            } else if (state.getRarity() == CardRarity.Rare) {
+                FSkin.drawImage(g, FSkin.getImage(FSkinProp.IMG_SETLOGO_RARE), x + w + iconPadding, y + (h - iconSize + 1) / 2, iconSize, iconSize);
+            } else if (state.getRarity() == CardRarity.Uncommon) {
+                FSkin.drawImage(g, FSkin.getImage(FSkinProp.IMG_SETLOGO_UNCOMMON), x + w + iconPadding, y + (h - iconSize + 1) / 2, iconSize, iconSize);
+            } else {
+                FSkin.drawImage(g, FSkin.getImage(FSkinProp.IMG_SETLOGO_COMMON), x + w + iconPadding, y + (h - iconSize + 1) / 2, iconSize, iconSize);
+            }
         }
 
         //draw type
@@ -737,7 +748,29 @@ public class FCardImageRenderer {
     private static void drawTextBox(Graphics2D g, CardStateView state, String text, Color[] colors,
             int x, int y, int w, int h, int textBoxFlags) {
         int yAdjust = (textBoxFlags >> 16);
-        fillColorBackground(g, colors, x, y + yAdjust, w, h - yAdjust);
+        if (state.isLand()) {
+            DetailColors modColors = DetailColors.WHITE;
+            if (state.isBasicLand()) {
+                if (state.isForest())
+                    modColors = DetailColors.GREEN;
+                else if (state.isIsland())
+                    modColors = DetailColors.BLUE;
+                else if (state.isMountain())
+                    modColors = DetailColors.RED;
+                else if (state.isSwamp())
+                    modColors = DetailColors.BLACK;
+                else if (state.isPlains())
+                    modColors = DetailColors.LAND;
+            }
+            Color bgColor = fromDetailColor(modColors);
+            bgColor = tintColor(Color.WHITE, bgColor, NAME_BOX_TINT);
+            Paint oldPaint = g.getPaint();
+            g.setColor(bgColor);
+            g.fillRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h));
+            g.setPaint(oldPaint);
+        } else {
+            fillColorBackground(g, colors, x, y + yAdjust, w, h - yAdjust);
+        }
         g.setStroke(new BasicStroke(BOX_LINE_THICKNESS));
         g.setColor(Color.BLACK);
         g.drawRect(x, y, w, h);
@@ -766,7 +799,7 @@ public class FCardImageRenderer {
                 break;
             }
             int iconSize = Math.round(h * 0.75f);
-            CardFaceSymbols.drawSymbol(imageKey, g, x + (w - iconSize) / 2, y + (h - iconSize) / 2, iconSize);
+            CardFaceSymbols.drawWatermark(imageKey, g, x + (w - iconSize) / 2, y + (h - iconSize) / 2, iconSize);
         } else {
             if (StringUtils.isEmpty(text))
                 return;

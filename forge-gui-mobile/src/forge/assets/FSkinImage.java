@@ -95,10 +95,25 @@ public enum FSkinImage implements FImage {
     MANA_Z         (FSkinProp.IMG_MANA_Z, SourceFile.MANAICONS),
 
     //CMC ranges
-    CMC_LOW      (FSkinProp.IMG_CMC_LOW, SourceFile.MANAICONS),
-    CMC_LOW_MID  (FSkinProp.IMG_CMC_LOW_MID, SourceFile.MANAICONS),
-    CMC_MID_HIGH (FSkinProp.IMG_CMC_MID_HIGH, SourceFile.MANAICONS),
-    CMC_HIGH     (FSkinProp.IMG_CMC_HIGH, SourceFile.MANAICONS),
+    CMC_LOW        (FSkinProp.IMG_CMC_LOW, SourceFile.MANAICONS),
+    CMC_LOW_MID    (FSkinProp.IMG_CMC_LOW_MID, SourceFile.MANAICONS),
+    CMC_MID_HIGH   (FSkinProp.IMG_CMC_MID_HIGH, SourceFile.MANAICONS),
+    CMC_HIGH       (FSkinProp.IMG_CMC_HIGH, SourceFile.MANAICONS),
+
+    //Setlogo
+    SET_COMMON     (FSkinProp.IMG_SETLOGO_COMMON, SourceFile.SETLOGOS),
+    SET_UNCOMMON   (FSkinProp.IMG_SETLOGO_UNCOMMON, SourceFile.SETLOGOS),
+    SET_RARE       (FSkinProp.IMG_SETLOGO_RARE, SourceFile.SETLOGOS),
+    SET_MYTHIC     (FSkinProp.IMG_SETLOGO_MYTHIC, SourceFile.SETLOGOS),
+    SET_SPECIAL    (FSkinProp.IMG_SETLOGO_SPECIAL, SourceFile.SETLOGOS),
+
+    //Watermarks
+    WATERMARK_G    (FSkinProp.IMG_WATERMARK_G, SourceFile.WATERMARKS),
+    WATERMARK_R    (FSkinProp.IMG_WATERMARK_R, SourceFile.WATERMARKS),
+    WATERMARK_B    (FSkinProp.IMG_WATERMARK_B, SourceFile.WATERMARKS),
+    WATERMARK_U    (FSkinProp.IMG_WATERMARK_U, SourceFile.WATERMARKS),
+    WATERMARK_W    (FSkinProp.IMG_WATERMARK_W, SourceFile.WATERMARKS),
+    WATERMARK_C    (FSkinProp.IMG_WATERMARK_C, SourceFile.WATERMARKS),
 
     //Gameplay
     TAP             (FSkinProp.IMG_TAP, SourceFile.MANAICONS),
@@ -422,6 +437,8 @@ public enum FSkinImage implements FImage {
         BUTTONS(ForgeConstants.SPRITE_BUTTONS_FILE),
         BTNSTART(ForgeConstants.SPRITE_START_FILE),
         MANAICONS(ForgeConstants.SPRITE_MANAICONS_FILE),
+        SETLOGOS(ForgeConstants.SPRITE_SETLOGO_FILE),
+        WATERMARKS(ForgeConstants.SPRITE_WATERMARK_FILE),
         PLANAR_CONQUEST(ForgeConstants.SPRITE_PLANAR_CONQUEST_FILE);
 
         private final String filename;

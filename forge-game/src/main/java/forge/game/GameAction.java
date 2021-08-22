@@ -221,6 +221,10 @@ public class GameAction {
                 lastKnownInfo = CardUtil.getLKICopy(c);
             }
 
+            if (!suppress) {
+                copied.setTimestamp(game.getNextTimestamp());
+            }
+
             if (!lastKnownInfo.hasKeyword("Counters remain on CARDNAME as it moves to any zone other than a player's hand or library.")) {
                 copied.clearCounters();
             }
