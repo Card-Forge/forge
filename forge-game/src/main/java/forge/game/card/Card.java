@@ -5693,6 +5693,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 if (!source.isColorless() && !colorlessDamage) {
                     return true;
                 }
+            } else if (kw.equals("Protection from colorless")) {
+                if (source.isColorless() || colorlessDamage) {
+                    return true;
+                }
             } else if (kw.equals("Protection from everything")) {
                 return true;
             } else if (kw.startsWith("Protection:")) { // uses isValid; Protection:characteristic:desc:exception
