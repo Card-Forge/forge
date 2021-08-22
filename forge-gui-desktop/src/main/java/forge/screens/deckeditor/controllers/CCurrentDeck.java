@@ -122,8 +122,7 @@ public enum CCurrentDeck implements ICDoc {
     private <TItem extends InventoryItem, TModel extends DeckBase> void importDeck() {
         final ACEditorBase<TItem, TModel> ed = (ACEditorBase<TItem, TModel>)
                 CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
-
-        final DeckImport dImport = new DeckImport(ed, ed instanceof CEditorCommander);
+        final DeckImport dImport = new DeckImport(ed);
         dImport.setModalityType(ModalityType.APPLICATION_MODAL);
         dImport.setVisible(true);
     }
