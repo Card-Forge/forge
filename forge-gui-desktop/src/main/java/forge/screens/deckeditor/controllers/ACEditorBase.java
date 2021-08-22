@@ -139,6 +139,8 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
         return this.screen;
     }
 
+    public GameType getGameType() { return this.gameType; }
+
     public DeckSection getSectionMode() {
         return this.sectionMode;
     }
