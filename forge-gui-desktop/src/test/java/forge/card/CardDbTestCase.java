@@ -1,5 +1,6 @@
 package forge.card;
 
+import com.google.common.base.Predicate;
 import forge.StaticData;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
@@ -10,7 +11,10 @@ import org.testng.annotations.Test;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import static org.testng.Assert.*;
 
@@ -101,6 +105,46 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         this.legacyCardDb = new LegacyCardDb(data.getCommonCards().getAllCards(), data.getEditions());
     }
 
+    /*
+    * TEST FOR GET ALL CARDS
+     */
+
+    @Test
+    public void testGetAllCardsWithName(){
+        List<PaperCard> allCounterSpellPrints = this.cardDb.getAllCards(this.cardNameCounterspell);
+        assertNotNull(allCounterSpellPrints);
+        for (PaperCard card : allCounterSpellPrints)
+            assertEquals(card.getName(), this.cardNameCounterspell);
+    }
+
+    @Test
+    public void testGetAllCardsLegalInSets(){
+        List<String> allowedSets = new ArrayList<>();
+        allowedSets.add(this.latestArtShivanDragonEdition);
+        Predicate<PaperCard> legalInSets = (Predicate<PaperCard>) this.cardDb.isLegal(allowedSets);
+        List<PaperCard> allCardsInSet = this.cardDb.getAllCards(legalInSets);
+        assertNotNull(allCardsInSet);
+        for (PaperCard card : allCardsInSet)
+            assertEquals(card.getEdition(), this.latestArtShivanDragonEdition);
+    }
+
+    @Test void testGetAllCardsOfaGivenNameAndLegalInSets(){
+        List<String> allowedSets = new ArrayList<>(Arrays.asList(this.editionsCounterspell));
+        Predicate<PaperCard> legalInSets = (Predicate<PaperCard>) this.cardDb.isLegal(allowedSets);
+        List<PaperCard> allCounterSpellsInSets = this.cardDb.getAllCards(this.cardNameCounterspell, legalInSets);
+        assertNotNull(allCounterSpellsInSets);
+        assertTrue(allCounterSpellsInSets.size() > 0);
+        assertTrue(allCounterSpellsInSets.size() > 1);
+        for (PaperCard card : allCounterSpellsInSets) {
+            assertEquals(card.getName(), this.cardNameCounterspell);
+            assertTrue(allowedSets.contains(card.getEdition()));
+        }
+    }
+
+
+    /*
+    * TEST FOR CARD RETRIEVAL METHODS
+    */
     @Test
     public void testGetCardByName() {
         PaperCard legacyCard = this.legacyCardDb.getCard(cardNameShivanDragon);
@@ -586,7 +630,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
 
         // Passing null preference
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
-        PaperCard httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, null);
+        PaperCard httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, null, null);
         assertNotNull(httCard);
         assertEquals(httCard.getName(), cardNameHymnToTourach);
         assertEquals(httCard.getEdition(), latestArtHymnToTourachEdition);
@@ -594,7 +638,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         // Changing default value for default card art preference
         this.cardDb.setCardArtPreference(false, false);
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS);
-        httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, null);
+        httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, null, null);
         assertNotNull(httCard);
         assertEquals(httCard.getName(), cardNameHymnToTourach);
         assertEquals(httCard.getEdition(), originalArtHymnToTourachEdition);
@@ -2017,6 +2061,35 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         // Compare w/ LegacyDb
         PaperCard legacyAinokCard = this.legacyCardDb.getCard(requestInfo);
         assertEquals(legacyAinokCard, ainokCard);
+    }
+
+    @Test
+    public void testGetCardFromEditionsWithFilteredPool(){
+        // test initial conditions
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
+
+        // Set Allowed Editions
+        List<String> allowedSets = new ArrayList<>();
+        allowedSets.add(this.latestArtShivanDragonEdition);
+        allowedSets.add(this.originalArtShivanDragonEdition);
+        Predicate<PaperCard> printedInSetPredicate = (Predicate<PaperCard>) this.cardDb.wasPrintedInSets(allowedSets);
+        PaperCard shivanDragonCard = this.cardDb.getCardFromEditions(this.cardNameShivanDragon, printedInSetPredicate);
+        assertNotNull(shivanDragonCard);
+        assertEquals(shivanDragonCard.getName(), this.cardNameShivanDragon);
+        assertEquals(shivanDragonCard.getEdition(), this.latestArtShivanDragonEdition);
+
+        // Use Original Art Preference Now
+        shivanDragonCard = this.cardDb.getCardFromEditions(this.cardNameShivanDragon, CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS, printedInSetPredicate);
+        assertNotNull(shivanDragonCard);
+        assertEquals(shivanDragonCard.getName(), this.cardNameShivanDragon);
+        assertEquals(shivanDragonCard.getEdition(), this.originalArtShivanDragonEdition);
+
+        // Testing null cards
+        allowedSets.clear();
+        allowedSets.add(this.originalArtHymnToTourachEdition);  // FEM - it does not exist a shivan in FEM
+        printedInSetPredicate = (Predicate<PaperCard>) this.cardDb.wasPrintedInSets(allowedSets);
+        shivanDragonCard = this.cardDb.getCardFromEditions(this.cardNameShivanDragon, printedInSetPredicate);
+        assertNull(shivanDragonCard);
     }
 
 
