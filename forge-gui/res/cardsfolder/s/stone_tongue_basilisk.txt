@@ -4,7 +4,6 @@ Types:Creature Basilisk
 PT:4/5
 S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ All creatures able to block CARDNAME do so. | Condition$ Threshold | Description$ Threshold — As long as seven or more cards are in your graveyard, all creatures able to block CARDNAME do so.
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ DelTrig | TriggerDescription$ Whenever CARDNAME deals combat damage to a creature, destroy that creature at end of combat.
-SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroy | RememberObjects$ TriggeredTarget | TriggerDescription$ Destroy damaged creature at end of combat.
-SVar:TrigDestroy:DB$ Destroy | Defined$ DelayTriggerRemembered
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stone_tongue_basilisk.jpg
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroy | RememberObjects$ TriggeredTargetLKICopy | TriggerDescription$ Destroy damaged creature at end of combat.
+SVar:TrigDestroy:DB$ Destroy | Defined$ DelayTriggerRememberedLKI
 Oracle:Whenever Stone-Tongue Basilisk deals combat damage to a creature, destroy that creature at end of combat.\nThreshold — As long as seven or more cards are in your graveyard, all creatures able to block Stone-Tongue Basilisk do so.

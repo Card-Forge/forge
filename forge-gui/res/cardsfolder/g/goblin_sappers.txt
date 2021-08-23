@@ -2,13 +2,11 @@ Name:Goblin Sappers
 ManaCost:1 R
 Types:Creature Goblin
 PT:1/1
-A:AB$ Pump | Cost$ R R T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ HIDDEN Unblockable | SubAbility$ DelTrigBoth | RememberTargets$ True | SpellDescription$ Target creature you control can't be blocked this turn. Destroy it and Goblin Sappers at end of combat.
+A:AB$ Pump | Cost$ R R T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ HIDDEN Unblockable | SubAbility$ DelTrigBoth | RememberObjects$ Self | RememberTargets$ True | SpellDescription$ Target creature you control can't be blocked this turn. Destroy it and Goblin Sappers at end of combat.
 A:AB$ Pump | Cost$ R R R R T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ HIDDEN Unblockable | SubAbility$ DelTrigFriend | RememberTargets$ True | SpellDescription$ Target creature you control can't be blocked this turn. Destroy it at end of combat.
-SVar:DelTrigFriend:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroyFriend | TriggerDescription$ Destroy it at end of combat. | RememberObjects$ Remembered | SubAbility$ DBCleanup
-SVar:TrigDestroyFriend:DB$ Destroy | Defined$ DelayTriggerRemembered
-SVar:DelTrigBoth:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroySapper | TriggerDescription$ Destroy it and CARDNAME at end of combat. | RememberObjects$ Remembered | SubAbility$ DBCleanup
-SVar:TrigDestroySapper:DB$ Destroy | Defined$ Self | SubAbility$ TrigDestroyFriend
+SVar:DelTrigFriend:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroy | TriggerDescription$ Destroy it at end of combat. | RememberObjects$ Remembered | SubAbility$ DBCleanup
+SVar:TrigDestroy:DB$ Destroy | Defined$ DelayTriggerRememberedLKICopy
+SVar:DelTrigBoth:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroy | TriggerDescription$ Destroy it and CARDNAME at end of combat. | RememberObjects$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_sappers.jpg
 Oracle:{R}{R}, {T}: Target creature you control can't be blocked this turn. Destroy it and Goblin Sappers at end of combat.\n{R}{R}{R}{R}, {T}: Target creature you control can't be blocked this turn. Destroy it at end of combat.

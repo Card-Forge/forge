@@ -5,8 +5,7 @@ PT:1/1
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigBanding | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, CARDNAME gains banding until end of combat.
 SVar:TrigBanding:DB$ Pump | Defined$ Self | KW$ Banding | Duration$ UntilEndOfCombat
 T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature.Wall | Execute$ DelayAttackTrig | TriggerDescription$ Whenever CARDNAME becomes blocked by a Wall, destroy that Wall at end of combat.
-SVar:DelayAttackTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroyBlocker | RememberObjects$ TriggeredBlocker | TriggerDescription$ Destroy blocked creature at end of combat.
-SVar:TrigDestroyBlocker:DB$ Destroy | Defined$ DelayTriggerRemembered
+SVar:DelayAttackTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroyBlocker | RememberObjects$ TriggeredBlockerLKICopy | TriggerDescription$ Destroy blocked creature at end of combat.
+SVar:TrigDestroyBlocker:DB$ Destroy | Defined$ DelayTriggerRememberedLKI
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/battering_ram.jpg
 Oracle:At the beginning of combat on your turn, Battering Ram gains banding until end of combat. (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's blocking.)\nWhenever Battering Ram becomes blocked by a Wall, destroy that Wall at end of combat.
