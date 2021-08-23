@@ -54,7 +54,8 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 int chosen;
                 if (random) {
-                    chosen = MyRandom.getRandom().nextInt(max - min) + min;
+                    chosen = MyRandom.getRandom().nextInt((max - min) + 1) + min;
+                    //TODO more useful notify for RepeatEach -> ChooseNumber with random
                     p.getGame().getAction().notifyOfValue(sa, p, Integer.toString(chosen), null);
                 } else {
                     String title = sa.hasParam("ListTitle") ? sa.getParam("ListTitle") : Localizer.getInstance().getMessage("lblChooseNumber");
