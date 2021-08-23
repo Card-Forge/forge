@@ -124,6 +124,8 @@ public class PlayEffect extends SpellAbilityEffect {
                 int ncopied = AbilityUtils.calculateAmount(source, num, sa);
                 for (PaperCard cp : Aggregates.random(cards, ncopied)) {
                     final Card possibleCard = Card.fromPaperCard(cp, sa.getActivatingPlayer());
+                    if (sa.getActivatingPlayer().isAI() && possibleCard.getRules() != null && possibleCard.getRules().getAiHints().getRemAIDecks())
+                        continue;
                     // Need to temporarily set the Owner so the Game is set
                     possibleCard.setOwner(sa.getActivatingPlayer());
                     choice.add(possibleCard);
