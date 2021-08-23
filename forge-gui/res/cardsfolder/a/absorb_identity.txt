@@ -8,5 +8,4 @@ SVar:DBCopy:DB$ Clone | Defined$ Remembered | CloneTarget$ Imprinted | Duration$
 SVar:DBNoop:DB$ Cleanup | SpellDescription$ Do nothing.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 DeckHints:Type$Shapeshifter
-AI:RemoveDeck:All
 Oracle:Return target creature to its owner's hand. You may have Shapeshifters you control become copies of that creature until end of turn.

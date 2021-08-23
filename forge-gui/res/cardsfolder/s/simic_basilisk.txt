@@ -5,11 +5,10 @@ PT:0/0
 K:Graft:3
 A:AB$ Animate | Cost$ 1 G | ValidTgts$ Creature.counters_GE1_P1P1 | TgtPrompt$ Select target creature with a +1/+1 counter on it | Triggers$ DestroyTrigger | sVars$ DelTrigSimic,TrigDestroySimic | SpellDescription$ Until end of turn, target creature with a +1/+1 counter on it gains "Whenever this creature deals combat damage to a creature, destroy that creature at end of combat."
 SVar:DestroyTrigger:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ DelTrig | TriggerDescription$ Whenever CARDNAME deals combat damage to a creature, destroy that creature at end of combat.
-SVar:DelTrigSimic:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroySimic | RememberObjects$ TriggeredTarget | TriggerDescription$ Destroy damaged creature at end of combat.
-SVar:TrigDestroySimic:DB$ Destroy | Defined$ DelayTriggerRemembered
+SVar:DelTrigSimic:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroySimic | RememberObjects$ TriggeredTargetLKICopy | TriggerDescription$ Destroy damaged creature at end of combat.
+SVar:TrigDestroySimic:DB$ Destroy | Defined$ DelayTriggerRememberedLKI
 DeckNeeds:Ability$Counters
 DeckHas:Ability$Counters
 SVar:AIGraftPreference:DontMoveCounterIfLethal
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/simic_basilisk.jpg
 Oracle:Graft 3 (This creature enters the battlefield with three +1/+1 counters on it. Whenever another creature enters the battlefield, you may move a +1/+1 counter from this creature onto it.)\n{1}{G}: Until end of turn, target creature with a +1/+1 counter on it gains "Whenever this creature deals combat damage to a creature, destroy that creature at end of combat."

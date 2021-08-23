@@ -5,8 +5,7 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 1 G G | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature.nonWall | ValidBlocker$ Card.AttachedBy | Execute$ DelTrigBlocked | TriggerDescription$ Whenever enchanted creature blocks or becomes blocked by a non-Wall creature, destroy the other creature at end of combat.
 T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.AttachedBy | ValidBlocker$ Creature.nonWall | Execute$ DelTrigBlocker | Secondary$ True | TriggerDescription$ Whenever enchanted creature blocks or becomes blocked by a non-Wall creature, destroy the other creature at end of combat.
-SVar:DelTrigBlocked:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroy | RememberObjects$ TriggeredAttacker | TriggerDescription$ Destroy blocked creature at end of combat.
-SVar:DelTrigBlocker:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroy | RememberObjects$ TriggeredBlocker | TriggerDescription$ Destroy blocking creature at end of combat.
-SVar:TrigDestroy:DB$ Destroy | Defined$ DelayTriggerRemembered
-SVar:Picture:http://www.wizards.com/global/images/magic/general/venom.jpg
+SVar:DelTrigBlocked:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroy | RememberObjects$ TriggeredAttackerLKICopy | TriggerDescription$ Destroy blocked creature at end of combat.
+SVar:DelTrigBlocker:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroy | RememberObjects$ TriggeredBlockerLKICopy | TriggerDescription$ Destroy blocking creature at end of combat.
+SVar:TrigDestroy:DB$ Destroy | Defined$ DelayTriggerRememberedLKI
 Oracle:Enchant creature\nWhenever enchanted creature blocks or becomes blocked by a non-Wall creature, destroy the other creature at end of combat.

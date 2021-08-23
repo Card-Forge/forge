@@ -3,6 +3,6 @@ ManaCost:3
 Types:Artifact
 A:AB$ Pump | Cost$ 4 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | SubAbility$ DBDelay | AILogic$ Berserk | SpellDescription$ Target creature gets +X/+0 until end of turn, where X is its power. Sacrifice CARDNAME at the beginning of the next end step.
 SVar:DBDelay:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigSac | TriggerDescription$ Sacrifice CARDNAME at the beginning of the next end step.
-SVar:TrigSac:DB$ SacrificeAll | Defined$ DelayTriggerRememberedLKI | Controller$ You
+SVar:TrigSac:DB$ SacrificeAll | Defined$ Self | Controller$ You
 SVar:X:Targeted$CardPower
 Oracle:{4}: Target creature gets +X/+0 until end of turn, where X is its power. Sacrifice Wine of Blood and Iron at the beginning of the next end step.

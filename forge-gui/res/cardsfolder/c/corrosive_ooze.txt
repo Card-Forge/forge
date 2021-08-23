@@ -4,9 +4,10 @@ Types:Creature Ooze
 PT:2/2
 T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature.equipped | ValidBlocker$ Card.Self | Execute$ DelTrigAttacker | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by an equipped creature, destroy all Equipment attached to that creature at end of combat.
 T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature.equipped | Execute$ DelTrigBlocker | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by an equipped creature, destroy all Equipment attached to that creature at end of combat.
-SVar:DelTrigAttacker:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigRem | RememberObjects$ TriggeredAttacker | TriggerDescription$ Destroy all Equipment attached to blocked creature at end of combat.
-SVar:DelTrigBlocker:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigRem | RememberObjects$ TriggeredBlocker | TriggerDescription$ Destroy all Equipment attached to blocking creature at end of combat.
-SVar:TrigRem:DB$ Pump | RememberObjects$ DelayTriggerRemembered | SubAbility$ TrigDestroy
+SVar:DelTrigAttacker:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigRem | RememberObjects$ TriggeredAttackerLKICopy | TriggerDescription$ Destroy all Equipment attached to blocked creature at end of combat.
+SVar:DelTrigBlocker:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigRem | RememberObjects$ TriggeredBlockerLKICopy | TriggerDescription$ Destroy all Equipment attached to blocking creature at end of combat.
+#TODO check rules
+SVar:TrigRem:DB$ Pump | RememberObjects$ DelayTriggerRememberedLKI | SubAbility$ TrigDestroy
 SVar:TrigDestroy:DB$ DestroyAll | ValidCards$ Remembered.Equipment+Attached | SpellDescription$ Destroy all Equipment attached to that creature. | SubAbility$ Cleanup
 SVar:Cleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Whenever Corrosive Ooze blocks or becomes blocked by an equipped creature, destroy all Equipment attached to that creature at end of combat.
