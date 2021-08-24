@@ -142,7 +142,7 @@ public class ProtectEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            tgtC.addChangedCardKeywords(gainsKWList, null, false, false, timestamp, true);
+            tgtC.addChangedCardKeywords(gainsKWList, null, false, false, timestamp, 0, true);
 
             if (!"Permanent".equals(sa.getParam("Duration"))) {
                 // If not Permanent, remove protection at EOT
@@ -152,7 +152,7 @@ public class ProtectEffect extends SpellAbilityEffect {
                     @Override
                     public void run() {
                         if (tgtC.isInPlay()) {
-                            tgtC.removeChangedCardKeywords(timestamp, true);
+                            tgtC.removeChangedCardKeywords(timestamp, 0, true);
                         }
                     }
                 };
@@ -166,7 +166,7 @@ public class ProtectEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            unTgtC.addChangedCardKeywords(gainsKWList, null, false, false, timestamp, true);
+            unTgtC.addChangedCardKeywords(gainsKWList, null, false, false, timestamp, 0, true);
 
             if (!"Permanent".equals(sa.getParam("Duration"))) {
                 // If not Permanent, remove protection at EOT
@@ -176,7 +176,7 @@ public class ProtectEffect extends SpellAbilityEffect {
                     @Override
                     public void run() {
                         if (unTgtC.isInPlay()) {
-                            unTgtC.removeChangedCardKeywords(timestamp, true);
+                            unTgtC.removeChangedCardKeywords(timestamp, 0, true);
                         }
                     }
                 };

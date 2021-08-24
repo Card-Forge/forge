@@ -150,38 +150,6 @@ public class KeywordsChange  implements Cloneable {
     public final void addKeyword(final String keyword) {
         keywords.add(keyword);
     }
-    
-    public final KeywordsChange merge(
-            final Collection<KeywordInterface> keywordList,
-            final Collection<KeywordInterface> removeKeywordList,
-            final boolean removeAll,
-            final boolean removeIntrinsic) {
-        KeywordsChange result = new KeywordsChange(keywordList, removeKeywordList, removeAll, removeIntrinsic);
-        result.__merge(this);
-        return result;
-    }
-    
-    public final KeywordsChange merge(
-            final Iterable<String> keywordList,
-            final Collection<String> removeKeywordList,
-            final boolean removeAll,
-            final boolean removeIntrinsic) {
-        KeywordsChange result = new KeywordsChange(keywordList, removeKeywordList, removeAll, removeIntrinsic);
-        result.__merge(this);
-        return result;
-    }
-    
-    private void __merge(KeywordsChange other) {
-        keywords.insertAll(other.getKeywords());
-        removeKeywords.addAll(other.removeKeywords);
-        removeKeywordInterfaces.addAll(other.removeKeywordInterfaces);
-        if (other.removeAllKeywords) {
-            removeAllKeywords = true;
-        }
-        if (other.removeIntrinsicKeywords) {
-            removeIntrinsicKeywords = true;
-        }
-    }
 
     public void setHostCard(final Card host) {
         keywords.setHostCard(host);

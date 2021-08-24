@@ -139,7 +139,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
             }
 
             if (!kws.isEmpty()) {
-                tgtC.addChangedCardKeywords(kws, Lists.newArrayList(), false, false, tStamp);
+                tgtC.addChangedCardKeywords(kws, Lists.newArrayList(), false, false, tStamp, 0);
                 game.fireEvent(new GameEventCardStatsChanged(tgtC));
             }
 
@@ -197,7 +197,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
                                     tgtC.removeHiddenExtrinsicKeyword(kw);
                                 }
                             }
-                            tgtC.removeChangedCardKeywords(tStamp);
+                            tgtC.removeChangedCardKeywords(tStamp, 0);
                         }
                     }
                 };

@@ -137,7 +137,7 @@ public class DebuffEffect extends SpellAbilityEffect {
                 }
 
                 removedKW.addAll(kws);
-                tgtC.addChangedCardKeywords(addedKW, removedKW, false, false, timestamp);
+                tgtC.addChangedCardKeywords(addedKW, removedKW, false, false, timestamp, 0);
             }
             if (!"Permanent".equals(sa.getParam("Duration"))) {
                 final GameCommand until = new GameCommand() {
@@ -145,7 +145,7 @@ public class DebuffEffect extends SpellAbilityEffect {
 
                     @Override
                     public void run() {
-                        tgtC.removeChangedCardKeywords(timestamp);
+                        tgtC.removeChangedCardKeywords(timestamp, 0);
                     }
                 };
                 addUntilCommand(sa, until);
