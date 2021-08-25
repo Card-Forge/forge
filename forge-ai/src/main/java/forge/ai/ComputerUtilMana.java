@@ -530,7 +530,7 @@ public class ComputerUtilMana {
                 continue;
             }
             if (ApiType.Mana.equals(trSA.getApi())) {
-                int pAmount = AbilityUtils.calculateAmount(trSA.getHostCard(), trSA.getParamOrDefault("Amount",  "1"), trSA);
+                int pAmount = AbilityUtils.calculateAmount(trSA.getHostCard(), trSA.getParamOrDefault("Amount", "1"), trSA);
                 String produced = trSA.getParam("Produced");
                 if (produced.equals("Chosen")) {
                     produced = MagicColor.toShortString(trSA.getHostCard().getChosenColor());
@@ -1505,7 +1505,7 @@ public class ComputerUtilMana {
             }
 
             if (manaToAdd < 1 && !payCosts.getCostMana().canXbe0()) {
-                // AI cannot really handle X costs properly but this keeps AI form violating rules
+                // AI cannot really handle X costs properly but this keeps AI from violating rules
                 manaToAdd = 1;
             }
 

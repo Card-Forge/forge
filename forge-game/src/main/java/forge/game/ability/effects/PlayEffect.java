@@ -120,7 +120,7 @@ public class PlayEffect extends SpellAbilityEffect {
             }
             if (sa.hasParam("RandomCopied")) {
                 final CardCollection choice = new CardCollection();
-                final String num = sa.hasParam("RandomNum") ? sa.getParam("RandomNum") : "1";
+                final String num = sa.getParamOrDefault("RandomNum", "1");
                 int ncopied = AbilityUtils.calculateAmount(source, num, sa);
                 for (PaperCard cp : Aggregates.random(cards, ncopied)) {
                     final Card possibleCard = Card.fromPaperCard(cp, sa.getActivatingPlayer());
@@ -138,13 +138,11 @@ public class PlayEffect extends SpellAbilityEffect {
                             source + " - " + Localizer.getInstance().getMessage("lblChooseUpTo") + " " + Lang.nounWithNumeral(choicenum, "card"), 0, choicenum, true, null
                         )
                     );
-                }
-                else {
+                } else {
                     tgtCards = choice;
                 }
                 System.err.println("Copying random spell(s): " + tgtCards.toString());
-            }
-            else {
+            } else {
                 return;
             }
         } else if (sa.hasParam("CopyFromChosenName")) {

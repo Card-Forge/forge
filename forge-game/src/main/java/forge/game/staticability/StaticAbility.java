@@ -698,7 +698,6 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         return layers;
     }
 
-
     public int getMayPlayTurn() {
         return mayPlayTurn;
     }

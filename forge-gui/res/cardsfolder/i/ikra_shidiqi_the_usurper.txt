@@ -4,7 +4,7 @@ Types:Legendary Creature Naga Wizard
 PT:3/7
 K:Menace
 T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | TriggerZones$ Battlefield | CombatDamage$ True | Execute$ TrigGainLife | TriggerDescription$ Whenever a creature you control deals combat damage to a player, you gain life equal to that creature's toughness.
-SVar:TrigGainLife:DB$GainLife | Defined$ You | LifeAmount$ X
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:TriggeredSource$CardToughness
 K:Partner
 DeckHas:Ability$LifeGain

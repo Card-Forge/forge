@@ -135,8 +135,7 @@ public abstract class Trigger extends TriggerReplacementBase {
             String currentName;
             if (this.isIntrinsic() && cardState != null && cardState.getCard() == getHostCard()) {
                 currentName = cardState.getName();
-            }
-            else {
+            } else {
                 currentName = getHostCard().getName();
             }
             String desc = getParam("TriggerDescription");
@@ -146,7 +145,7 @@ public abstract class Trigger extends TriggerReplacementBase {
                 desc = TextUtil.fastReplace(desc,"NICKNAME", Lang.getInstance().getNickName(CardTranslation.getTranslatedName(currentName)));
             }
             if (getHostCard().getEffectSource() != null) {
-                if(active)
+                if (active)
                     desc = TextUtil.fastReplace(desc, "EFFECTSOURCE", getHostCard().getEffectSource().toString());
                 else
                     desc = TextUtil.fastReplace(desc, "EFFECTSOURCE", getHostCard().getEffectSource().getName());
@@ -169,7 +168,6 @@ public abstract class Trigger extends TriggerReplacementBase {
         SpellAbility sa = ensureAbility();
 
         return replaceAbilityText(desc, sa);
-
     }
 
     public final String replaceAbilityText(final String desc, SpellAbility sa) {
@@ -354,7 +352,6 @@ public abstract class Trigger extends TriggerReplacementBase {
 
         return true;
     }
-
 
     public boolean meetsRequirementsOnTriggeredObjects(Game game,  final Map<AbilityKey, Object> runParams) {
         if ("True".equals(getParam("EvolveCondition"))) {

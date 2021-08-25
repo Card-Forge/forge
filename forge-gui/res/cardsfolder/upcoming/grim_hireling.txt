@@ -4,7 +4,7 @@ Types:Creature Tiefling Rogue
 PT:3/2
 T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | Execute$ DBToken | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player, create two Treasure tokens.
 SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
-A:AB$ Pump | Cost$ 4 B Sac<X/Treasure>  | SorcerySpeed$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | NumAtt$ -X | NumDef$ -X | SpellDescription$ Target creature gets -X/-X until end of turn. Activate only as a sorcery.
+A:AB$ Pump | Cost$ B Sac<X/Treasure> | SorcerySpeed$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | NumAtt$ -X | NumDef$ -X | SpellDescription$ Target creature gets -X/-X until end of turn. Activate only as a sorcery.
 SVar:X:Count$xPaid
 DeckHas:Ability$Token & Ability$Sacrifice
 Oracle:Whenever one or more creatures you control deal combat damage to a player, create two Treasure tokens.\n{B}, Sacrifice X Treasures: Target creature gets -X/-X until end of turn. Activate only as a sorcery.
