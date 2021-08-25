@@ -83,4 +83,12 @@ public class CardDbPerformanceTests  extends CardDbTestCase {
             assertNotNull(card);
         }
     }
+
+    @Test
+    public void testGetCardFullDbLegacyImplementationToProfile(){
+        for (String name : this.fullDbCardNames) {
+            PaperCard card = this.legacyCardDb.getCard(name);
+            assertNotNull(card);
+        }
+    }
 }

@@ -90,6 +90,12 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             this.collectorNumber = collectorNumber;
         }
 
+        public static String compose(String cardName, boolean isFoil){
+            if (isFoil)
+                return cardName+foilSuffix;
+            return cardName;
+        }
+
         public static String compose(String cardName, String setCode) {
             setCode = setCode != null ? setCode : "";
             cardName = cardName != null ? cardName : "";
@@ -462,15 +468,15 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
 
         // 2. Card lookup in edition with specified filter didn't work.
-        // So now check whether the cards exists in the DB first,
+        // So now check whether the cards exist in the DB first,
         // and select pick the card based on current SetPreference policy as a fallback
         Collection<PaperCard> cards = getAllCards(request.cardName);
         if (cards.isEmpty())  // Never null being this a view in MultiMap
             return null;
         // Either No Edition has been specified OR as a fallback in case of any error!
         // get card using the default card art preference
-        result = getCardFromEditions(request.cardName, this.defaultCardArtPreference, request.artIndex);
-        return result != null && request.isFoil ? result.getFoiled() : result;
+        String cardRequest = CardRequest.compose(request.cardName, request.isFoil);
+        return getCardFromEditions(cardRequest, this.defaultCardArtPreference, request.artIndex);
     }
 
     /*
@@ -567,8 +573,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     @Override
-    public PaperCard getCardFromEditions(final String cardName, final CardArtPreference artPreference, int artIndex) {
-        return this.tryToGetCardFromEditions(cardName, artPreference, artIndex);
+    public PaperCard getCardFromEditions(final String cardInfo, final CardArtPreference artPreference, int artIndex) {
+        return this.tryToGetCardFromEditions(cardInfo, artPreference, artIndex);
     }
 
     /*
@@ -651,7 +657,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
         /* 2. Retrieve cards based of [Frame]Set Preference
            ================================================ */
-
         // Collect the list of all editions found for target card
         List<CardEdition> cardEditions = new ArrayList<>();
         Map<String, PaperCard> candidatesCard = new HashMap<>();
@@ -659,7 +664,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             if (card.getArtIndex() != cr.artIndex)
                 continue;
             String setCode = card.getEdition();
-            CardEdition ed = null;
+            CardEdition ed;
             if (setCode.equals(CardEdition.UNKNOWN.getCode()))
                 ed = CardEdition.UNKNOWN;
             else
@@ -669,6 +674,9 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 candidatesCard.put(setCode, card);
             }
         }
+        if (cardEditions.isEmpty())
+            return null;  // nothing to do
+
         // Filter Cards Editions based on set preferences
         List<CardEdition> acceptedEditions = Lists.newArrayList(Iterables.filter(cardEditions, new Predicate<CardEdition>() {
             @Override
@@ -693,22 +701,14 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 Collections.reverse(acceptedEditions);  // newest editions first
         }
 
-        PaperCard candidate = null;
-        for (CardEdition ed : acceptedEditions) {
-            PaperCard cardFromSet = candidatesCard.get(ed.getCode());  //getCardFromSet(cr.cardName, ed, cr.artIndex, cr.isFoil);
-            if (candidate == null)
-                // save the first card found, as the last backup in case no other candidate *with image* will be found
-                candidate = cardFromSet;
-
-            if (cardFromSet != null && cardFromSet.hasImage()) {
-                candidate = cardFromSet;
-                break;  // we're done here: found card **with Image**
-            }
+        final Iterator<CardEdition> editionIterator = acceptedEditions.iterator();
+        CardEdition ed = editionIterator.next();
+        PaperCard candidate = candidatesCard.get(ed.getCode());
+        while (!candidate.hasImage() && editionIterator.hasNext()) {
+            ed = editionIterator.next();
+            candidate = candidatesCard.get(ed.getCode());
         }
-        if (candidate == null)
-            return null;
-
-        //If any, we're sure that at least one candidate is always returned nevertheless it has image or not
+        //If any, we're sure that at least one candidate is always returned despite it having any image
         return cr.isFoil ? candidate.getFoiled() : candidate;
     }
 
