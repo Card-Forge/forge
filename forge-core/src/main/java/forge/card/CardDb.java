@@ -1006,29 +1006,33 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             // 1. generate all paper cards from edition data we have (either explicit, or found in res/editions, or add to unknown edition)
             List<PaperCard> paperCards = new ArrayList<>();
             if (null == whenItWasPrinted || whenItWasPrinted.isEmpty()) {
-                // TODO Not performant Each time we "putCard" we loop through ALL CARDS IN ALL editions
+                // @friarsol: Not performant Each time we "putCard" we loop through ALL CARDS IN ALL editions
+                // @leriomaggio: DONE! re-using here the same strategy implemented for lazy-loading!
                 for (CardEdition e : editions.getOrderedEditions()) {
                     int artIdx = IPaperCard.DEFAULT_ART_INDEX;
-                    for (CardInSet cis : e.getAllCardsInSet()) {
-                        if (!cis.name.equals(cardName)) {
-                            continue;
-                        }
-                        paperCards.add(new PaperCard(rules, e.getCode(), cis.rarity, artIdx++));
-                    }
+                    for (CardInSet cis : e.getCardInSet(cardName))
+                        paperCards.add(new PaperCard(rules, e.getCode(), cis.rarity, artIdx++, false,
+                                                     cis.collectorNumber, cis.artistName));
                 }
             } else {
                 String lastEdition = null;
                 int artIdx = 0;
                 for (Pair<String, CardRarity> tuple : whenItWasPrinted) {
                     if (!tuple.getKey().equals(lastEdition)) {
-                        artIdx = IPaperCard.DEFAULT_ART_INDEX;
+                        artIdx = IPaperCard.DEFAULT_ART_INDEX;  // reset artIndex
                         lastEdition = tuple.getKey();
                     }
                     CardEdition ed = editions.get(lastEdition);
-                    if (null == ed) {
+                    if (ed == null) {
                         continue;
                     }
-                    paperCards.add(new PaperCard(rules, lastEdition, tuple.getValue(), artIdx++));
+                    List<CardInSet> cardsInSet = ed.getCardInSet(cardName);
+                    if (cardsInSet.isEmpty())
+                        continue;
+                    int cardInSetIndex = Math.max(artIdx-1, 0); // make sure doesn't go below zero
+                    CardInSet cds = cardsInSet.get(cardInSetIndex);  // use ArtIndex to get the right Coll. Number
+                    paperCards.add(new PaperCard(rules, lastEdition, tuple.getValue(), artIdx++, false,
+                                                 cds.collectorNumber, cds.artistName));
                 }
             }
             if (paperCards.isEmpty()) {
