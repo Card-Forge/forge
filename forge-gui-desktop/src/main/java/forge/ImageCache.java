@@ -243,7 +243,7 @@ public class ImageCache {
         // a default "not available" image, however do not add it to the cache,
         // as otherwise it's problematic to update if the real image gets fetched.
         if (original == null || useArtCrop) {
-            if (ipc != null || cardView != null) {
+            if ((ipc != null || cardView != null) && !originalKey.equals(ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD))) {
                 int width = 488, height = 680;
                 BufferedImage art = original;
                 CardView card = ipc != null ? Card.getCardForUi(ipc).getView() : cardView;

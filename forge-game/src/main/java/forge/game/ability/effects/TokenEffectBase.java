@@ -167,7 +167,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                     moved.setCloneOrigin(host);
                 }
                 if (!pumpKeywords.isEmpty()) {
-                    moved.addChangedCardKeywords(pumpKeywords, Lists.newArrayList(), false, false, timestamp);
+                    moved.addChangedCardKeywords(pumpKeywords, Lists.newArrayList(), false, false, timestamp, 0);
                     addPumpUntil(sa, moved, timestamp);
                 }
 
@@ -266,7 +266,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
 
             @Override
             public void run() {
-                c.removeChangedCardKeywords(timestamp);
+                c.removeChangedCardKeywords(timestamp, 0);
                 game.fireEvent(new GameEventCardStatsChanged(c));
             }
         };

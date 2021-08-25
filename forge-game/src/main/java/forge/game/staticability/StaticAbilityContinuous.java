@@ -531,7 +531,7 @@ public final class StaticAbilityContinuous {
 
             // add keywords
             if (addKeywords != null) {
-                p.addChangedKeywords(addKeywords, removeKeywords, se.getTimestamp());
+                p.addChangedKeywords(addKeywords, removeKeywords, se.getTimestamp(), stAb.getId());
             }
 
             // add static abilities
@@ -626,7 +626,7 @@ public final class StaticAbilityContinuous {
 
                 if (color != 0) {
                     final String colorName = MagicColor.toLongString(color);
-                    affectedCard.addChangedTextColorWord("Any", colorName, se.getTimestamp());
+                    affectedCard.addChangedTextColorWord("Any", colorName, se.getTimestamp(), stAb.getId());
                 }
             }
 
@@ -703,7 +703,7 @@ public final class StaticAbilityContinuous {
 
                 affectedCard.addChangedCardKeywords(newKeywords, removeKeywords,
                         removeAllAbilities, removeLandTypes,
-                        hostCard.getTimestamp());
+                        hostCard.getTimestamp(), stAb.getId());
             }
 
             // add HIDDEN keywords
@@ -836,7 +836,10 @@ public final class StaticAbilityContinuous {
 
                 if (!addedAbilities.isEmpty() || addReplacements != null || addTriggers != null || addStatics != null
                     || removeAllAbilities) {
-                    affectedCard.addChangedCardTraits(addedAbilities, null, addedTrigger, addedReplacementEffects, addedStaticAbility, removeAllAbilities, removeNonMana, false, hostCard.getTimestamp());
+                    affectedCard.addChangedCardTraits(
+                        addedAbilities, null, addedTrigger, addedReplacementEffects, addedStaticAbility, removeAllAbilities, removeNonMana, false,
+                        hostCard.getTimestamp(), stAb.getId()
+                    );
                 }
 
                 if (cantHaveKeyword != null) {
@@ -845,7 +848,7 @@ public final class StaticAbilityContinuous {
             }
 
             if (layer == StaticAbilityLayer.TYPE && removeLandTypes) {
-                affectedCard.addChangedCardTraits(null, null, null, null, null, false, false, removeLandTypes, hostCard.getTimestamp());
+                affectedCard.addChangedCardTraits(null, null, null, null, null, false, false, true, hostCard.getTimestamp(), stAb.getId());
             }
 
             // add Types
@@ -934,7 +937,7 @@ public final class StaticAbilityContinuous {
         addIgnore.setIntrinsic(false);
         addIgnore.setApi(ApiType.InternalIgnoreEffect);
         addIgnore.setDescription(cost + " Ignore the effect until end of turn.");
-        sourceCard.addChangedCardTraits(ImmutableList.of(addIgnore), null, null, null, null, false, false, false, sourceCard.getTimestamp());
+        sourceCard.addChangedCardTraits(ImmutableList.of(addIgnore), null, null, null, null, false, false, false, sourceCard.getTimestamp(), stAb.getId());
 
         final GameCommand removeIgnore = new GameCommand() {
             private static final long serialVersionUID = -5415775215053216360L;

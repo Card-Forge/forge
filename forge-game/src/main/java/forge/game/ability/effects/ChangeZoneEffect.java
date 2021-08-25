@@ -651,7 +651,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (sa.hasParam("Unearth")) {
                         movedCard.setUnearthed(true);
                         movedCard.addChangedCardKeywords(Lists.newArrayList("Haste"), null, false, false,
-                                game.getNextTimestamp(), true);
+                                game.getNextTimestamp(), 0, true);
                         registerDelayedTrigger(sa, "Exile", Lists.newArrayList(movedCard));
                         addLeaveBattlefieldReplacement(movedCard, sa, "Exile");
                     }
