@@ -30,6 +30,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.google.common.collect.Table;
 
 import forge.game.CardTraitBase;
 import forge.game.Game;
@@ -117,9 +118,9 @@ public class ReplacementHandler {
             }
 
             // need to check non Intrinsic
-            for (Map.Entry<Long, CardTraitChanges> e : affectedLKI.getChangedCardTraits().entrySet()) {
+            for (Table.Cell<Long, Long, CardTraitChanges> e : affectedLKI.getChangedCardTraits().cellSet()) {
                 boolean hasRunRE = false;
-                String skey = String.valueOf(e.getKey());
+                String skey = String.valueOf(e.getRowKey()) + ":" + String.valueOf(e.getColumnKey());
 
                 for (ReplacementEffect re : this.hasRun) {
                     if (!re.isIntrinsic() && skey.equals(re.getSVar("_ReplacedTimestamp"))) {
@@ -135,9 +136,9 @@ public class ReplacementHandler {
                     }
                 }
             }
-            for (Map.Entry<Long, KeywordsChange> e : affectedLKI.getChangedCardKeywords().entrySet()) {
+            for (Table.Cell<Long, Long, KeywordsChange> e : affectedLKI.getChangedCardKeywords().cellSet()) {
                 boolean hasRunRE = false;
-                String skey = String.valueOf(e.getKey());
+                String skey = String.valueOf(e.getRowKey()) + ":" + String.valueOf(e.getColumnKey());
 
                 for (ReplacementEffect re : this.hasRun) {
                     if (!re.isIntrinsic() && skey.equals(re.getSVar("_ReplacedTimestamp"))) {

@@ -619,14 +619,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                         && host.getType().hasStringType(mana.getManaAbility().getAddsKeywordsType())) {
                     final long timestamp = host.getGame().getNextTimestamp();
                     final List<String> kws = Arrays.asList(mana.getAddedKeywords().split(" & "));
-                    host.addChangedCardKeywords(kws, null, false, false, timestamp);
+                    host.addChangedCardKeywords(kws, null, false, false, timestamp, 0);
                     if (mana.addsKeywordsUntil()) {
                         final GameCommand untilEOT = new GameCommand() {
                             private static final long serialVersionUID = -8285169579025607693L;
 
                             @Override
                             public void run() {
-                                host.removeChangedCardKeywords(timestamp);
+                                host.removeChangedCardKeywords(timestamp, 0);
                                 host.getGame().fireEvent(new GameEventCardStatsChanged(host));
                             }
                         };

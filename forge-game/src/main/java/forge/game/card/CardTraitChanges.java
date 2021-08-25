@@ -26,12 +26,6 @@ public class CardTraitChanges implements Cloneable {
     public CardTraitChanges(Collection<SpellAbility> spells, Collection<SpellAbility> removedAbilities,
             Collection<Trigger> trigger, Collection<ReplacementEffect> res, Collection<StaticAbility> st,
             boolean removeAll, boolean removeNonMana, boolean removeIntrinsic) {
-        merge(spells, removedAbilities, trigger, res, st, removeAll, removeNonMana, removeIntrinsic);
-    }
-
-    public void merge(Collection<SpellAbility> spells, Collection<SpellAbility> removedAbilities,
-            Collection<Trigger> trigger, Collection<ReplacementEffect> res, Collection<StaticAbility> st,
-            boolean removeAll, boolean removeNonMana, boolean removeIntrinsic) {
         if (spells != null) {
             this.abilities.addAll(spells);
         }
