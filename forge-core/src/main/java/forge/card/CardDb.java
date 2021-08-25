@@ -536,17 +536,13 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         if (candidates.isEmpty())
             return null;
 
-        PaperCard candidate = candidates.get(0);
+        Iterator<PaperCard> candidatesIterator = candidates.iterator();
+        PaperCard candidate = candidatesIterator.next();
         // Before returning make sure that actual candidate has Image.
         // If not, try to replace current candidate with one having image,
         // so to align this implementation with old one.
-        if (!candidate.hasImage()) {
-            for (PaperCard card : candidates) {
-                if (card.hasImage()) {
-                    candidate = card;
-                    break; // found, ready to go
-                }
-            }
+        while (!candidate.hasImage() && candidatesIterator.hasNext()) {
+            candidate = candidatesIterator.next();
         }
         return isFoil ? candidate.getFoiled() : candidate;
     }
