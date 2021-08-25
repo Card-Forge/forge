@@ -2061,6 +2061,24 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         assertEquals(legacyAinokCard, ainokCard);
     }
 
+    @Test
+    public void testGetIslandsFromEditionsWithSpecificArtIndex(){
+        String cardName = "Island";
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
+        PaperCard islandLatest = this.cardDb.getCardFromEditions(cardName, CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS, 12);
+        assertNotNull(islandLatest);
+        assertEquals(islandLatest.getName(), "Island");
+        assertEquals(islandLatest.getEdition(), "SLD");
+        assertEquals(islandLatest.getArtIndex(), 12);
+
+        // PALP
+        PaperCard islandOriginal = this.cardDb.getCardFromEditions(cardName, CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY, 12);
+        assertNotNull(islandOriginal);
+        assertEquals(islandOriginal.getName(), "Island");
+        assertEquals(islandOriginal.getEdition(), "SLD");
+        assertEquals(islandOriginal.getArtIndex(), 12);
+    }
+
 
 }
 

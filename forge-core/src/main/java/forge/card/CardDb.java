@@ -517,9 +517,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         cardName = cardNameRequest.cardName;
         isFoil = isFoil || cardNameRequest.isFoil;
 
-        List<PaperCard> cards = getAllCards(cardName);
-        // Look for Code or Code2 to make the retrieval more robust
-        List<PaperCard> candidates = Lists.newArrayList(Iterables.filter(cards, new Predicate<PaperCard>() {
+        List<PaperCard> candidates = getAllCards(cardName, new Predicate<PaperCard>() {
             @Override
             public boolean apply(PaperCard c) {
                 boolean artIndexFilter = true;
@@ -533,7 +531,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                     collectorNumberFilter = (c.getCollectorNumber().equals(collectorNumber));
                 return setFilter && artIndexFilter && collectorNumberFilter;
             }
-        }));
+        });
         if (candidates.isEmpty())
             return null;
 
@@ -637,11 +635,13 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         if (cr.artIndex != artIndex && artIndex > IPaperCard.DEFAULT_ART_INDEX )
             cr.artIndex = artIndex;  // 2nd cond. is to verify that some actual value has been passed in.
 
-        List<PaperCard> cards = getAllCards(cr.cardName);
+        List<PaperCard> cards;
         if (releaseDate != null) {
-            cards = Lists.newArrayList(Iterables.filter(cards, new Predicate<PaperCard>() {
+            cards = getAllCards(cr.cardName, new Predicate<PaperCard>() {
                 @Override
                 public boolean apply(PaperCard c) {
+                    if (c.getArtIndex() != cr.artIndex)
+                        return false;  // not interested anyway!
                     CardEdition ed = editions.get(c.getEdition());
                     if (ed == null) return false;
                     if (releasedBeforeFlag)
@@ -649,8 +649,17 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                     else
                         return ed.getDate().after(releaseDate);
                 }
-            }));
-        }
+            });
+        } else  // filter candidates based on requested artIndex
+            cards = getAllCards(cr.cardName, new Predicate<PaperCard>() {
+                @Override
+                public boolean apply(PaperCard card) {
+                    return card.getArtIndex() == cr.artIndex;
+                }
+            });
+
+        if (cards.size() == 1)  // if only one candidate, there much else we should do
+            return cr.isFoil ? cards.get(0).getFoiled() : cards.get(0);
 
         /* 2. Retrieve cards based of [Frame]Set Preference
            ================================================ */
@@ -658,8 +667,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         List<CardEdition> cardEditions = new ArrayList<>();
         Map<String, PaperCard> candidatesCard = new HashMap<>();
         for (PaperCard card : cards) {
-            if (card.getArtIndex() != cr.artIndex)
-                continue;
             String setCode = card.getEdition();
             CardEdition ed;
             if (setCode.equals(CardEdition.UNKNOWN.getCode()))
