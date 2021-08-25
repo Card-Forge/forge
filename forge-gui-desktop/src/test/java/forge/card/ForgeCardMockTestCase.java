@@ -135,7 +135,7 @@ public class ForgeCardMockTestCase extends PowerMockTestCase {
         initForgeConstants();
 
         // Always Has Image (there is a separated test case to cover the opposite case)
-        PowerMockito.when(ImageKeys.hasImage(Mockito.any(PaperCard.class))).thenReturn(false);
+        PowerMockito.when(ImageKeys.hasImage(Mockito.any(PaperCard.class))).thenReturn(true);
 
         //Mocking some more static stuff
         PowerMockito.mockStatic(Singletons.class);
