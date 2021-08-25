@@ -29,6 +29,7 @@ import forge.util.Lang;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
+import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -721,18 +722,16 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     @Override
-    public int getArtCount(String cardName, String setName) {
-        if (cardName == null || setName == null)
+    public int getArtCount(String cardName, String setCode) {
+        if (cardName == null || setCode == null)
             return 0;
-        Collection<PaperCard> cards = getAllCards(cardName);
-        if (null == cards || cards.size() == 0)
-            return 0;
-        int artCount = 0;
-        for (PaperCard pc : cards) {
-            if (pc.getEdition().equalsIgnoreCase(setName))
-                artCount++;
-        }
-        return artCount;
+        Collection<PaperCard> cardsInSet = getAllCards(cardName, new Predicate<PaperCard>() {
+            @Override
+            public boolean apply(PaperCard card) {
+                return card.getEdition().equalsIgnoreCase(setCode);
+            }
+        });
+        return cardsInSet.size();
     }
 
     // returns a list of all cards from their respective latest (or preferred) editions
@@ -837,6 +836,11 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     @Override
     public List<PaperCard> getAllCards(Predicate<PaperCard> predicate) {
         return Lists.newArrayList(Iterables.filter(getAllCards(), predicate));
+    }
+
+    @Override
+    public List<PaperCard> getAllCards(final String cardName, Predicate<PaperCard> predicate){
+        return Lists.newArrayList(Iterables.filter(getAllCards(cardName), predicate));
     }
 
     /**
