@@ -536,13 +536,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                             CardManager cardManager = (CardManager) CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckManager();
                             PaperCard existingCard = cardManager.getSelectedItem();
                             // make a foiled version based on the original
-                            PaperCard foiledCard = new PaperCard(
-                                    existingCard.getRules(),
-                                    existingCard.getEdition(),
-                                    existingCard.getRarity(),
-                                    existingCard.getArtIndex(),
-                                    true,
-                                    existingCard.getArtist());
+                            PaperCard foiledCard = existingCard.getFoiled();
                             // remove *quantity* instances of existing card
                             CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(false, quantity);
                             // add *quantity* into the deck and set them as selected
