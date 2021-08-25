@@ -126,7 +126,7 @@ public abstract class SpellAbilityEffect {
             int amount = AbilityUtils.calculateAmount(sa.getHostCard(), svar, sa);
             sb.append(" ");
             sb.append(TextUtil.enclosedParen(TextUtil.concatNoSpace(svar,"=",String.valueOf(amount))));
-        } else{
+        } else {
             if (sa.costHasManaX()) {
                 int amount = sa.getXManaCostPaid() == null ? 0 : sa.getXManaCostPaid();
                 sb.append(" ");

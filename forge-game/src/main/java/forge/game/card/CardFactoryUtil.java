@@ -1615,7 +1615,6 @@ public class CardFactoryUtil {
             replicateTrigger.setOverridingAbility(replicateAbility);
             replicateTrigger.setSVar("ReplicateAmount", "0");
             inst.addTrigger(replicateTrigger);
-
         } else if (keyword.startsWith("Ripple")) {
             final String[] k = keyword.split(":");
             final String num = k[1];
