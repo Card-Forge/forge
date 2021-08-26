@@ -56,7 +56,7 @@ public class ImageUtil {
         int artIdx = cp.getArtIndex() - 1;
         if (hasManyPictures) {
             if (cntPictures <= artIdx) // prevent overflow
-                artIdx = cntPictures == 0 ? 0 : artIdx % cntPictures;
+                artIdx = artIdx % cntPictures;
             s.append(artIdx + 1);
         }
 
