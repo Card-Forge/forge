@@ -215,4 +215,15 @@ public class CardRequestTestCase {
         assertNotEquals(request.artIndex, newRequest.artIndex);
     }
 
+    @Test
+    public void testCreatingCardRequestWithArtIndexGreaterThanNine(){
+        String requestString = CardRequest.compose("Island", "SLD", 13);
+        CardRequest request = CardRequest.fromString(requestString);
+
+        assertEquals(request.cardName, "Island");
+        assertEquals(request.edition, "SLD");
+        assertEquals(request.artIndex, 13);
+        assertEquals(request.collectorNumber, IPaperCard.NO_COLLECTOR_NUMBER);
+    }
+
 }

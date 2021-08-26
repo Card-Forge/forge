@@ -2079,6 +2079,12 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         assertEquals(islandOriginal.getArtIndex(), 12);
     }
 
+    @Test
+    public void testMaxArtCountForBasicLand(){
+        int maxArtIndex = this.cardDb.getMaxArtIndex("Island");
+        assertEquals(maxArtIndex, 13);
+    }
+
 
 }
 
