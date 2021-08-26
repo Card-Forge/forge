@@ -11,6 +11,7 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.util.Aggregates;
 
 public class ChooseTypeEffect extends SpellAbilityEffect {
 
@@ -63,8 +64,13 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
 
         if (!validTypes.isEmpty()) {
             for (final Player p : tgtPlayers) {
+                String choice;
                 if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                    String choice = p.getController().chooseSomeType(type, sa, validTypes, invalidTypes);
+                    if (sa.hasParam("AtRandom")) {
+                        choice = Aggregates.random(validTypes);
+                    } else {
+                        choice = p.getController().chooseSomeType(type, sa, validTypes, invalidTypes);
+                    }
                     if (!sa.hasParam("ChooseType2")) {
                         card.setChosenType(choice);
                     } else {
