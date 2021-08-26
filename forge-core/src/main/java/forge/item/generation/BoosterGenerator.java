@@ -63,7 +63,7 @@ public class BoosterGenerator {
 
     private final static Map<String, PrintSheet> cachedSheets = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
     private static synchronized PrintSheet getPrintSheet(String key) {
-        if( !cachedSheets.containsKey(key) )
+        if (!cachedSheets.containsKey(key))
             cachedSheets.put(key, makeSheet(key, StaticData.instance().getCommonCards().getAllCards()));
         return cachedSheets.get(key);
     }
@@ -369,7 +369,7 @@ public class BoosterGenerator {
             }
 
             String boosterReplaceSlotFromPrintSheet = edition.getBoosterReplaceSlotFromPrintSheet();
-            if(!boosterReplaceSlotFromPrintSheet.isEmpty()) {
+            if (!boosterReplaceSlotFromPrintSheet.isEmpty()) {
                 replaceCardFromExtraSheet(result, boosterReplaceSlotFromPrintSheet);
             }
         }
@@ -448,7 +448,7 @@ public class BoosterGenerator {
      */
     public static void replaceCard(List<PaperCard> booster, PaperCard toAdd) {
         Predicate<PaperCard> rarityPredicate = null;
-        switch(toAdd.getRarity()){
+        switch (toAdd.getRarity()) {
             case BasicLand:
                 rarityPredicate = Presets.IS_BASIC_LAND;
                 break;
@@ -469,7 +469,7 @@ public class BoosterGenerator {
         PaperCard toReplace = null;
         // Find first card in booster that matches the rarity
         for (PaperCard card : booster) {
-            if(rarityPredicate.apply(card)) {
+            if (rarityPredicate.apply(card)) {
                 toReplace = card;
                 break;
             }
@@ -506,7 +506,6 @@ public class BoosterGenerator {
 
     @SuppressWarnings("unchecked")
     public static PrintSheet makeSheet(String sheetKey, Iterable<PaperCard> src) {
-
         PrintSheet ps = new PrintSheet(sheetKey);
         String[] sKey = TextUtil.splitWithParenthesis(sheetKey, ' ', 2);
         Predicate<PaperCard> setPred = (Predicate<PaperCard>) (sKey.length > 1 ? IPaperCard.Predicates.printedInSets(sKey[1].split(" ")) : Predicates.alwaysTrue());
@@ -516,8 +515,7 @@ public class BoosterGenerator {
 
         // source replacement operators - if one is applied setPredicate will be ignored
         Iterator<String> itMod = operators.iterator();
-        while(itMod.hasNext()) {
-
+        while (itMod.hasNext()) {
             String mainCode = itMod.next();
 
             if (mainCode.regionMatches(true, 0, "fromSheet", 0, 9) ||
@@ -529,43 +527,38 @@ public class BoosterGenerator {
                 setPred = Predicates.alwaysTrue();
 
             } else if (mainCode.startsWith("promo") || mainCode.startsWith("name")) { // get exactly the named cards, that's a tiny inlined print sheet
-
                 String list = StringUtils.strip(mainCode.substring(5), "() ");
                 String[] cardNames = TextUtil.splitWithParenthesis(list, ',', '"', '"');
                 List<PaperCard> srcList = new ArrayList<>();
 
-                for(String cardName: cardNames) {
+                for (String cardName: cardNames) {
                     srcList.add(StaticData.instance().getCommonCards().getCard(cardName));
                 }
 
                 src = srcList;
                 setPred = Predicates.alwaysTrue();
-
             } else {
                 continue;
             }
 
             itMod.remove();
-
         }
 
         // only special operators should remain by now - the ones that could not be turned into one predicate
         String mainCode = operators.isEmpty() ? null : operators.get(0).trim();
 
-        if( null == mainCode || mainCode.equalsIgnoreCase(BoosterSlots.ANY) ) { // no restriction on rarity
-
+        if (null == mainCode || mainCode.equalsIgnoreCase(BoosterSlots.ANY)) { // no restriction on rarity
             Predicate<PaperCard> predicate = Predicates.and(setPred, extraPred);
             ps.addAll(Iterables.filter(src, predicate));
 
-        } else if ( mainCode.equalsIgnoreCase(BoosterSlots.UNCOMMON_RARE) ) { // for sets like ARN, where U1 cards are considered rare and U3 are uncommon
-
+        } else if (mainCode.equalsIgnoreCase(BoosterSlots.UNCOMMON_RARE)) { // for sets like ARN, where U1 cards are considered rare and U3 are uncommon
             Predicate<PaperCard> predicateRares = Predicates.and(setPred, IPaperCard.Predicates.Presets.IS_RARE, extraPred);
             ps.addAll(Iterables.filter(src, predicateRares));
 
             Predicate<PaperCard> predicateUncommon = Predicates.and( setPred, IPaperCard.Predicates.Presets.IS_UNCOMMON, extraPred);
             ps.addAll(Iterables.filter(src, predicateUncommon), 3);
 
-        } else if ( mainCode.equalsIgnoreCase(BoosterSlots.RARE_MYTHIC) ) {
+        } else if (mainCode.equalsIgnoreCase(BoosterSlots.RARE_MYTHIC)) {
             // Typical ratio of rares to mythics is 53:15, changing to 35:10 in smaller sets.
             // To achieve the desired 1:8 are all mythics are added once, and all rares added twice per print sheet.
 
@@ -574,32 +567,28 @@ public class BoosterGenerator {
 
             Predicate<PaperCard> predicateRare = Predicates.and( setPred, IPaperCard.Predicates.Presets.IS_RARE, extraPred);
             ps.addAll(Iterables.filter(src, predicateRare), 2);
-
         } else {
             throw new IllegalArgumentException("Booster generator: operator could not be parsed - " + mainCode);
         }
 
         return ps;
-
     }
 
     /**
      * This method also modifies passed parameter
      */
     private static Predicate<PaperCard> buildExtraPredicate(List<String> operators) {
-
         List<Predicate<PaperCard>> conditions = new ArrayList<>();
 
         Iterator<String> itOp = operators.iterator();
-        while(itOp.hasNext()) {
-
+        while (itOp.hasNext()) {
             String operator = itOp.next();
-            if(StringUtils.isEmpty(operator)) {
+            if (StringUtils.isEmpty(operator)) {
                 itOp.remove();
                 continue;
             }
 
-            if(operator.endsWith("s")) {
+            if (operator.endsWith("s")) {
                 operator = operator.substring(0, operator.length() - 1);
             }
 
@@ -669,7 +658,6 @@ public class BoosterGenerator {
                 toAdd = Predicates.not(toAdd);
             }
             conditions.add(toAdd);
-
         }
 
         if (conditions.isEmpty()) {

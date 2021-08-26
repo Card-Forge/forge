@@ -4116,7 +4116,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     // of lists. Optimizes common operations such as hasKeyword().
     public final void visitKeywords(CardState state, Visitor<KeywordInterface> visitor) {
         visitUnhiddenKeywords(state, visitor);
-        visitHiddenExtreinsicKeywords(visitor);
+        visitHiddenExtrinsicKeywords(visitor);
     }
 
     @Override
@@ -4417,10 +4417,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     // Hidden Keywords will be returned without the indicator HIDDEN
     public final List<KeywordInterface> getHiddenExtrinsicKeywords() {
         ListKeywordVisitor visitor = new ListKeywordVisitor();
-        visitHiddenExtreinsicKeywords(visitor);
+        visitHiddenExtrinsicKeywords(visitor);
         return visitor.getKeywords();
     }
-    private void visitHiddenExtreinsicKeywords(Visitor<KeywordInterface> visitor) {
+    private void visitHiddenExtrinsicKeywords(Visitor<KeywordInterface> visitor) {
         for (KeywordInterface inst : hiddenExtrinsicKeyword.getValues()) {
             if (!visitor.visit(inst)) {
                 return;
@@ -5492,7 +5492,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void animateBestow() {
         animateBestow(true);
     }
-
     public final void animateBestow(final boolean updateView) {
         if (isBestowed()) {
             return;
@@ -5509,7 +5508,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void unanimateBestow() {
         unanimateBestow(true);
     }
-
     public final void unanimateBestow(final boolean updateView) {
         if (!isBestowed()) {
             return;
@@ -5602,7 +5600,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public boolean hasProtectionFrom(final Card source, final boolean checkSBA) {
         return hasProtectionFrom(source, checkSBA, false);
     }
-
     public boolean hasProtectionFrom(final Card source, final boolean checkSBA, final boolean damageSource) {
         if (source == null) {
             return false;
@@ -5805,6 +5802,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         Collections.sort(ability);
         return StringUtils.join(ability.toArray(), ","); //fix nosuchmethod on some android devices...
     }
+
     public Zone getZone() {
         return currentZone;
     }

@@ -17,7 +17,6 @@ import forge.game.spellability.SpellAbility;
 public class TapAi extends TapAiBase {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-
         final PhaseHandler phase = ai.getGame().getPhaseHandler();
         final Player turn = phase.getPlayerTurn();
 
@@ -71,7 +70,6 @@ public class TapAi extends TapAiBase {
             sa.resetTargets();
             return tapPrefTargeting(ai, source, sa, false);
         }
-
     }
 
 }

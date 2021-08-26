@@ -312,7 +312,6 @@ public class ImageCache {
         if (1 == bestFitScale) {
             result = original;
         } else {
-
             int destWidth  = (int)(original.getWidth()  * bestFitScale);
             int destHeight = (int)(original.getHeight() * bestFitScale);
 
