@@ -59,6 +59,7 @@ public class StaticData {
     private IStorage<BoosterBox.Template> boosterBoxes;
     private IStorage<PrintSheet> printSheets;
     private final Map<String, List<String>> setLookup = new HashMap<>();
+    private List<String> blocksLandCodes = new ArrayList<>();
 
     private static StaticData lastInstance = null;
 
@@ -298,6 +299,9 @@ public class StaticData {
         return databases;
     }
 
+    public List<String> getBlockLands() {
+        return blocksLandCodes;
+    }
 
     public TokenDb getAllTokens() { return allTokens; }
 
