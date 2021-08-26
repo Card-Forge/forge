@@ -13,6 +13,7 @@ import forge.deck.DeckFormat;
 import forge.deck.DeckSection;
 import forge.game.player.RegisteredPlayer;
 import forge.util.Localizer;
+import forge.util.MyRandom;
 
 public enum GameType {
 
