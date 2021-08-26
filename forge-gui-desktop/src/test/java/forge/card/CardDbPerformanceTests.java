@@ -1,9 +1,6 @@
 package forge.card;
 
-import forge.ImageKeys;
 import forge.item.PaperCard;
-import org.mockito.Mockito;
-import org.powermock.api.mockito.PowerMockito;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
