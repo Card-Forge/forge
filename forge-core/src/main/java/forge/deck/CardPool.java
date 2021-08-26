@@ -65,7 +65,7 @@ public class CardPool extends ItemPool<PaperCard> {
     }
 
     public void add(final String cardName, final String setCode, final int amount, boolean addAny) {
-        this.add(cardName, setCode, IPaperCard.DEFAULT_ART_INDEX, amount, addAny);
+        this.add(cardName, setCode, IPaperCard.NO_ART_INDEX, amount, addAny);
     }
 
     // NOTE: ART indices are "1" -based
