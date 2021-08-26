@@ -64,8 +64,15 @@ public class CardPool extends ItemPool<PaperCard> {
         this.add(cardName, setCode, IPaperCard.DEFAULT_ART_INDEX, amount);
     }
 
+    public void add(final String cardName, final String setCode, final int amount, boolean addAny) {
+        this.add(cardName, setCode, IPaperCard.DEFAULT_ART_INDEX, amount, addAny);
+    }
+
     // NOTE: ART indices are "1" -based
     public void add(String cardName, String setCode, int artIndex, final int amount) {
+        this.add(cardName, setCode, artIndex, amount, false);
+    }
+    public void add(String cardName, String setCode, int artIndex, final int amount, boolean addAny) {
         Map<String, CardDb> dbs = StaticData.instance().getAvailableDatabases();
         PaperCard paperCard = null;
         String selectedDbName = "";
@@ -88,6 +95,10 @@ public class CardPool extends ItemPool<PaperCard> {
                 StaticData.instance().attemptToLoadCard(cardName, setCode);
                 artIndex = IPaperCard.DEFAULT_ART_INDEX;  // Reset Any artIndex passed in, at this point
             }
+        }
+        if (addAny && paperCard == null) {
+            paperCard = StaticData.instance().getCommonCards().getCard(cardName);
+            selectedDbName = "Common";
         }
         if (paperCard == null){
             // after all still null
