@@ -128,7 +128,7 @@ public class CardRequestTestCase {
         request = CardRequest.fromString(requestString);
         assertEquals(request.cardName, cardName);
         assertEquals(request.edition, edition);
-        assertEquals(request.artIndex, IPaperCard.DEFAULT_ART_INDEX);
+        assertEquals(request.artIndex, 20);
         assertEquals(request.collectorNumber, IPaperCard.NO_COLLECTOR_NUMBER);
 
 

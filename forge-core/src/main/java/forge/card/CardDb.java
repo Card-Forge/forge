@@ -142,7 +142,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
 
         private static boolean isArtIndex(String s) {
-            return StringUtils.isNumeric(s);
+            return StringUtils.isNumeric(s) && s.length() <= 2 ; // only artIndex between 1-99
         }
 
         private static boolean isSetCode(String s) {
