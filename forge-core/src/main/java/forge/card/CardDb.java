@@ -29,7 +29,6 @@ import forge.util.Lang;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
-import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 
 import java.util.*;
 import java.util.Map.Entry;
