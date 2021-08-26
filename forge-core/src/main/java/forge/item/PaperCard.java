@@ -25,6 +25,7 @@ import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.util.CardTranslation;
+import forge.util.ImageUtil;
 import forge.util.Localizer;
 import forge.util.TextUtil;
 
@@ -138,6 +139,13 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
             hasImage = ImageKeys.hasImage(this);
         }
         return hasImage;
+    }
+
+    private String imageKeyFromSet = null;
+    public String getImageKeyFromSet() {
+        if (this.imageKeyFromSet == null)
+            this.imageKeyFromSet = ImageUtil.getImageKey(this, false, true);
+        return imageKeyFromSet;
     }
 
     /**
