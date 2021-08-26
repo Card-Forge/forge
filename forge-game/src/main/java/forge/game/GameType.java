@@ -41,21 +41,21 @@ public enum GameType {
         public Deck apply(RegisteredPlayer player) {
             Deck deck = new Deck();
             CardPool mainDeck = deck.getMain();
-            mainDeck.add("Plains", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4);
-            mainDeck.add("Plains", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4);
-            mainDeck.add("Plains", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4);
-            mainDeck.add("Island", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4);
-            mainDeck.add("Island", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4);
-            mainDeck.add("Island", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4);
-            mainDeck.add("Swamp", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4);
-            mainDeck.add("Swamp", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4);
-            mainDeck.add("Swamp", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4);
-            mainDeck.add("Mountain", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4);
-            mainDeck.add("Mountain", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4);
-            mainDeck.add("Mountain", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4);
-            mainDeck.add("Forest", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4);
-            mainDeck.add("Forest", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4);
-            mainDeck.add("Forest", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4);
+            mainDeck.add("Plains", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4, true);
+            mainDeck.add("Plains", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4, true);
+            mainDeck.add("Plains", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4, true);
+            mainDeck.add("Island", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4, true);
+            mainDeck.add("Island", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4, true);
+            mainDeck.add("Island", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4, true);
+            mainDeck.add("Swamp", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4, true);
+            mainDeck.add("Swamp", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4, true);
+            mainDeck.add("Swamp", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4, true);
+            mainDeck.add("Mountain", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4, true);
+            mainDeck.add("Mountain", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4, true);
+            mainDeck.add("Mountain", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4, true);
+            mainDeck.add("Forest", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4, true);
+            mainDeck.add("Forest", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4, true);
+            mainDeck.add("Forest", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4, true);
             deck.getOrCreate(DeckSection.Avatar).add(StaticData.instance().getVariantCards()
                     .getCard("Momir Vig, Simic Visionary Avatar"), 1);
             return deck;
@@ -66,21 +66,21 @@ public enum GameType {
         public Deck apply(RegisteredPlayer player) {
             Deck deck = new Deck();
             CardPool mainDeck = deck.getMain();
-            mainDeck.add("Plains", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4);
-            mainDeck.add("Plains", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4);
-            mainDeck.add("Plains", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4);
-            mainDeck.add("Island", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4);
-            mainDeck.add("Island", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4);
-            mainDeck.add("Island", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4);
-            mainDeck.add("Swamp", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4);
-            mainDeck.add("Swamp", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4);
-            mainDeck.add("Swamp", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4);
-            mainDeck.add("Mountain", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4);
-            mainDeck.add("Mountain", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4);
-            mainDeck.add("Mountain", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4);
-            mainDeck.add("Forest", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4);
-            mainDeck.add("Forest", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4);
-            mainDeck.add("Forest", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4);
+            mainDeck.add("Plains", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4, true);
+            mainDeck.add("Plains", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4, true);
+            mainDeck.add("Plains", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4, true);
+            mainDeck.add("Island", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4, true);
+            mainDeck.add("Island", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4, true);
+            mainDeck.add("Island", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4, true);
+            mainDeck.add("Swamp", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4, true);
+            mainDeck.add("Swamp", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4, true);
+            mainDeck.add("Swamp", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4, true);
+            mainDeck.add("Mountain", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4, true);
+            mainDeck.add("Mountain", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4, true);
+            mainDeck.add("Mountain", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4, true);
+            mainDeck.add("Forest", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4, true);
+            mainDeck.add("Forest", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4, true);
+            mainDeck.add("Forest", StaticData.instance().getBlockLands().get(MyRandom.getRandom().nextInt(StaticData.instance().getBlockLands().size())), 4, true);
             deck.getOrCreate(DeckSection.Avatar).add(StaticData.instance().getVariantCards()
                     .getCard("Momir Vig, Simic Visionary Avatar"), 1);
             deck.getOrCreate(DeckSection.Avatar).add(StaticData.instance().getVariantCards()
