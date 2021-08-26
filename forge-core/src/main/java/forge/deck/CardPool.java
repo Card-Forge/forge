@@ -114,7 +114,7 @@ public class CardPool extends ItemPool<PaperCard> {
         boolean artIndexExplicitlySet = (artIndex > IPaperCard.DEFAULT_ART_INDEX) ||
                 (CardDb.CardRequest.fromString(cardName).artIndex > IPaperCard.NO_ART_INDEX);
 
-        if (artIndexExplicitlySet || artCount == 1) {
+        if ((artIndexExplicitlySet || artCount == 1) && !addAny) {
             // either a specific art index is specified, or there is only one art, so just add the card
             this.add(paperCard, amount);
         } else {
