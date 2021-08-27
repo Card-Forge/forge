@@ -315,7 +315,7 @@ public class ImportSourceAnalyzer {
 
             for (final PaperCard c : FModel.getMagicDb().getCommonCards().getAllCards()) {
                 addDefaultPicNames(c, false);
-                if (ImageUtil.hasBackFacePicture(c)) {
+                if (c.hasBackFace()) {
                     addDefaultPicNames(c, true);
                 }
             }
