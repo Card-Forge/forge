@@ -35,7 +35,6 @@ import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
 import forge.util.FileUtil;
-import forge.util.ImageUtil;
 
 public class ImportSourceAnalyzer {
 
