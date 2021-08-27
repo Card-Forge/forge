@@ -53,6 +53,7 @@ public enum SpellApiToAi {
             .put(ApiType.ClassLevelUp, AlwaysPlayAi.class)
             .put(ApiType.Cleanup, AlwaysPlayAi.class)
             .put(ApiType.Clone, CloneAi.class)
+            .put(ApiType.CompanionChoose, ChooseCompanionAi.class)
             .put(ApiType.CopyPermanent, CopyPermanentAi.class)
             .put(ApiType.CopySpellAbility, CopySpellAbilityAi.class)
             .put(ApiType.ControlPlayer, CannotPlayAi.class)
