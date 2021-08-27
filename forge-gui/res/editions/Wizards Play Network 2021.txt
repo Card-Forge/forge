@@ -6,5 +6,9 @@ Type=Promo
 ScryfallCode=PWP21
 
 [cards]
-1 R Fabled Passage @Howard Lyon
-2 R Mind Stone @Jason Felix
+1 R Arbor Elf @Rk Post
+2 R Collected Company @Lake Hurwitz
+3 M Wurmcoil Engine @Raymond Swanland
+4 R Fabled Passage @Howard Lyon
+5 R Mind Stone @Jason Felix
+6 R Conjurer's Closet @Johann Bodin
