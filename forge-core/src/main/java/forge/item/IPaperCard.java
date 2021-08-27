@@ -20,6 +20,7 @@ public interface IPaperCard extends InventoryItem, Serializable {
     String NO_COLLECTOR_NUMBER = "N.A.";  // Placeholder for No-Collection number available
     int DEFAULT_ART_INDEX = 1;
     int NO_ART_INDEX = -1;  // Placeholder when NO ArtIndex is Specified
+    String NO_ARTIST_NAME = "";
 
     /**
      * Number of filters based on CardPrinted values.

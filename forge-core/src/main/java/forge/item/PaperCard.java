@@ -25,6 +25,7 @@ import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.util.CardTranslation;
+import forge.util.ImageUtil;
 import forge.util.Localizer;
 import forge.util.TextUtil;
 
@@ -52,7 +53,7 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
        By default the attribute is marked as "unset" so that it could be retrieved and set.
        (see getCollectorNumber())
     */
-    private String collectorNumber = null;
+    private String collectorNumber;
     private final String artist;
     private final int artIndex;
     private final boolean foil;
@@ -75,18 +76,6 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
 
     @Override
     public String getCollectorNumber() {
-        /* The collectorNumber attribute is managed in a property-like fashion.
-        By default it is marked as "unset" (-1), which integrates with all constructors
-        invocations not including this as an extra parameter. In this way, the new
-        attribute could be added to the API with minimum disruption to code
-        throughout the other packages.
-        If "unset", the corresponding collectorNumber will be retrieved
-        from the corresponding CardEdition (see retrieveCollectorNumber)
-        * */
-        if (collectorNumber == null) {
-            collectorNumber = this.retrieveCollectorNumber();
-        }
-
         return collectorNumber;
     }
 
@@ -152,6 +141,13 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         return hasImage;
     }
 
+    private String imageKeyFromSet = null;
+    public String getImageKeyFromSet() {
+        if (this.imageKeyFromSet == null)
+            this.imageKeyFromSet = ImageUtil.getImageKey(this, false, true);
+        return imageKeyFromSet;
+    }
+
     /**
      * Lambda to get rules for selects from list of printed cards.
      */
@@ -169,15 +165,12 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
     };
 
     public PaperCard(final CardRules rules0, final String edition0, final CardRarity rarity0){
-        this(rules0, edition0, rarity0, IPaperCard.DEFAULT_ART_INDEX);
+        this(rules0, edition0, rarity0, IPaperCard.DEFAULT_ART_INDEX, false,
+                IPaperCard.NO_COLLECTOR_NUMBER, IPaperCard.NO_ARTIST_NAME);
     }
 
-    public PaperCard(final CardRules rules0, final String edition0, final CardRarity rarity0, final int artIndex0) {
-        this(rules0, edition0, rarity0, artIndex0, false, "");
-    }
-
-    public PaperCard(final CardRules rules0, final String edition0, final CardRarity rarity0, final int artIndex0,
-                     final boolean foil0, final String artist0) {
+    public PaperCard(final CardRules rules0, final String edition0, final CardRarity rarity0,
+                     final int artIndex0, final boolean foil0, final String collectorNumber0, final String artist0) {
         if (rules0 == null || edition0 == null || rarity0 == null) {
             throw new IllegalArgumentException("Cannot create card without rules, edition or rarity");
         }
@@ -187,16 +180,8 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         artIndex = Math.max(artIndex0, IPaperCard.DEFAULT_ART_INDEX);
         foil = foil0;
         rarity = rarity0;
-        artist = (artist0 != null ? artist0 : "");
-    }
-
-    public PaperCard(final CardRules rules0, final String edition0, final CardRarity rarity0,
-                     final int artIndex0, final boolean foil0, final String collectorNumber0, final String artist) {
-        this(rules0, edition0, rarity0, artIndex0, foil0, artist);
-        if ((collectorNumber0 == null) || (collectorNumber0.length() == 0))
-            collectorNumber = IPaperCard.NO_COLLECTOR_NUMBER;
-        else
-            collectorNumber = collectorNumber0;
+        artist = (artist0 != null ? artist0 : IPaperCard.NO_ARTIST_NAME);
+        collectorNumber = (collectorNumber0 != null) && (collectorNumber0.length() > 0) ? collectorNumber0 : IPaperCard.NO_COLLECTOR_NUMBER;
     }
 
     // Want this class to be a key for HashTable
@@ -268,10 +253,14 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         return CardEdition.CardInSet.getSortableCollectorNumber(collectorNumber);
     }
 
+    private String sortableCNKey = null;
     public String getCollectorNumberSortingKey(){
-        // Hardly the case, but just invoke getter rather than direct
-        // attribute to be sure that collectorNumber has been retrieved already!
-        return makeCollectorNumberSortingKey(getCollectorNumber());
+        if (sortableCNKey == null) {
+            // Hardly the case, but just invoke getter rather than direct
+            // attribute to be sure that collectorNumber has been retrieved already!
+            sortableCNKey = makeCollectorNumberSortingKey(getCollectorNumber());
+        }
+        return sortableCNKey;
     }
 
 
@@ -307,32 +296,6 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         }
         rules = pc.getRules();
         rarity = pc.getRarity();
-    }
-
-    // FIXME: @leriomaggio - remember to get rid of this method once and for all :)
-    private String retrieveCollectorNumber() {
-        StaticData data = StaticData.instance();
-        CardEdition edition = data.getEditions().get(this.edition);
-        if (edition == null) {
-            edition = data.getCustomEditions().get(this.edition);
-            if (edition == null)  // don't bother continuing - non-existing card!
-                return NO_COLLECTOR_NUMBER;
-        }
-        int artIndexCount = 0;
-        String collectorNumberInEdition = "";
-        for (CardEdition.CardInSet card : edition.getAllCardsInSet()) {
-            if (card.name.equalsIgnoreCase(this.name)) {
-                artIndexCount += 1;
-                if (artIndexCount == this.artIndex) {
-                    collectorNumberInEdition = card.collectorNumber;
-                    break;
-                }
-            }
-        }
-        // CardEdition stores collectorNumber as a String, which is null if there isn't any.
-        // In this case, the NO_COLLECTOR_NUMBER value (i.e. 0) is returned.
-        return ((collectorNumberInEdition != null) && (collectorNumberInEdition.length() > 0)) ?
-                collectorNumberInEdition : NO_COLLECTOR_NUMBER;
     }
 
     @Override

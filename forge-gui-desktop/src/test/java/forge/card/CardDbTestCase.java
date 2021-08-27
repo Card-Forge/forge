@@ -1,5 +1,6 @@
 package forge.card;
 
+import com.google.common.base.Predicate;
 import forge.StaticData;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
@@ -10,7 +11,10 @@ import org.testng.annotations.Test;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import static org.testng.Assert.*;
 
@@ -100,6 +104,44 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         this.cardDb = data.getCommonCards();
         this.legacyCardDb = new LegacyCardDb(data.getCommonCards().getAllCards(), data.getEditions());
     }
+
+    /*
+     * TEST FOR GET ALL CARDS
+     */
+
+    @Test
+    public void testGetAllCardsWithName(){
+        List<PaperCard> allCounterSpellPrints = this.cardDb.getAllCards(this.cardNameCounterspell);
+        assertNotNull(allCounterSpellPrints);
+        for (PaperCard card : allCounterSpellPrints)
+            assertEquals(card.getName(), this.cardNameCounterspell);
+    }
+
+    @Test
+    public void testGetAllCardsThatWerePrintedInSets(){
+        List<String> allowedSets = new ArrayList<>();
+        allowedSets.add(this.latestArtShivanDragonEdition);
+        Predicate<PaperCard> wasPrinted = (Predicate<PaperCard>) this.cardDb.wasPrintedInSets(allowedSets);
+        List<PaperCard> allCardsInSet = this.cardDb.getAllCards(wasPrinted);
+        assertNotNull(allCardsInSet);
+    }
+
+    @Test void testGetAllCardsOfaGivenNameAndLegalInSets(){
+        List<String> allowedSets = new ArrayList<>(Arrays.asList(this.editionsCounterspell));
+        Predicate<PaperCard> printedInSets = (Predicate<PaperCard>) this.cardDb.wasPrintedInSets(allowedSets);
+        List<PaperCard> allCounterSpellsInSets = this.cardDb.getAllCards(this.cardNameCounterspell, printedInSets);
+        assertNotNull(allCounterSpellsInSets);
+        assertTrue(allCounterSpellsInSets.size() > 0);
+        assertTrue(allCounterSpellsInSets.size() > 1);
+        for (PaperCard card : allCounterSpellsInSets) {
+            assertEquals(card.getName(), this.cardNameCounterspell);
+        }
+    }
+
+
+    /*
+     * TEST FOR CARD RETRIEVAL METHODS
+     */
 
     @Test
     public void testGetCardByName() {
@@ -2017,6 +2059,30 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         // Compare w/ LegacyDb
         PaperCard legacyAinokCard = this.legacyCardDb.getCard(requestInfo);
         assertEquals(legacyAinokCard, ainokCard);
+    }
+
+    @Test
+    public void testGetIslandsFromEditionsWithSpecificArtIndex(){
+        String cardName = "Island";
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
+        PaperCard islandLatest = this.cardDb.getCardFromEditions(cardName, CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS, 12);
+        assertNotNull(islandLatest);
+        assertEquals(islandLatest.getName(), "Island");
+        assertEquals(islandLatest.getEdition(), "SLD");
+        assertEquals(islandLatest.getArtIndex(), 12);
+
+        // PALP
+        PaperCard islandOriginal = this.cardDb.getCardFromEditions(cardName, CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY, 12);
+        assertNotNull(islandOriginal);
+        assertEquals(islandOriginal.getName(), "Island");
+        assertEquals(islandOriginal.getEdition(), "SLD");
+        assertEquals(islandOriginal.getArtIndex(), 12);
+    }
+
+    @Test
+    public void testMaxArtCountForBasicLand(){
+        int maxArtIndex = this.cardDb.getMaxArtIndex("Island");
+        assertEquals(maxArtIndex, 13);
     }
 
 

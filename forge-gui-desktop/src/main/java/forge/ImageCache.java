@@ -184,7 +184,7 @@ public class ImageCache {
         if (useArtCrop) {
             if (ipc != null && ipc.getRules().getSplitType() == CardSplitType.Flip) {
                 // Art crop will always use front face as image key for flip cards
-                imageKey = ImageUtil.getImageKey((PaperCard) ipc, false, true);
+                imageKey = ((PaperCard) ipc).getImageKeyFromSet(); // ImageUtil.getImageKey((PaperCard) ipc, false, true);
             }
             imageKey = TextUtil.fastReplace(imageKey, ".full", ".artcrop");
         }

@@ -373,6 +373,13 @@ public final class CardEdition implements Comparable<CardEdition> {
     }
 
     private ListMultimap<String, CardInSet> cardsInSetLookupMap = null;
+
+    /**
+     * Get all the CardInSet instances with the input card name.
+     * @param cardName Name of the Card to look for.
+     * @return A List of all the CardInSet instances for a given name.
+     * If not fount, an Empty sequence (view) will be returned instead!
+     */
     public List<CardInSet> getCardInSet(String cardName){
         if (cardsInSetLookupMap == null) {
             // initialise

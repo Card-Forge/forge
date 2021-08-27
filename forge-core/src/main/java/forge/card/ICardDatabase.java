@@ -79,6 +79,7 @@ public interface ICardDatabase extends Iterable<PaperCard> {
     Collection<PaperCard> getAllCards();
     Collection<PaperCard> getAllCards(String cardName);
     Collection<PaperCard> getAllCards(Predicate<PaperCard> predicate);
+    Collection<PaperCard> getAllCards(String cardName,Predicate<PaperCard> predicate);
     Collection<PaperCard> getAllCards(CardEdition edition);
     Collection<PaperCard> getUniqueCards();
 
