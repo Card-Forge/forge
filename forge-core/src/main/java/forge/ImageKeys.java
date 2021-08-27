@@ -7,7 +7,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.util.*;
-import java.util.regex.Pattern;
 
 public final class ImageKeys {
     public static final String CARD_PREFIX           = "c:";
@@ -237,7 +236,7 @@ public final class ImageKeys {
                 cachedContent.put(setFolder, setFolderContent);
             }
         }
-        String[] keyParts = StringUtils.split(pc.getImageKeyFromSet(), Pattern.quote("/"));
+        String[] keyParts = StringUtils.split(pc.getCardImageKey(), "//");
         if (keyParts.length != 2)
             return false;
         HashSet<String> content = cachedContent.getOrDefault(keyParts[0], null);
