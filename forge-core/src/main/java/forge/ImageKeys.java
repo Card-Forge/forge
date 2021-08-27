@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.util.*;
+import java.util.regex.Pattern;
 
 public final class ImageKeys {
     public static final String CARD_PREFIX           = "c:";
@@ -236,7 +237,9 @@ public final class ImageKeys {
                 cachedContent.put(setFolder, setFolderContent);
             }
         }
-        String[] keyParts = pc.getImageKeyFromSet().split(File.separator);
+        String[] keyParts = StringUtils.split(pc.getImageKeyFromSet(), Pattern.quote("/"));
+        if (keyParts.length != 2)
+            return false;
         HashSet<String> content = cachedContent.getOrDefault(keyParts[0], null);
         //avoid checking for file if edition doesn't have any images
         return editionHasImage && hitCache(content, keyParts[1]);
