@@ -1,0 +1,8 @@
+Name:Lydari Elephant
+ManaCost:4 G
+Types:Creature Elephant
+PT:*/*
+K:ETBReplacement:Other:RandomPower
+SVar:RandomPower:DB$ Animate | Defined$ Self | Power$ X | Toughness$ X | Duration$ Permanent | SpellDescription$ As CARDNAME enters the battlefield, choose two numbers from 3 to 7 at random. CARDNAME's power is equal to the first number chosen and its toughness equal to the second number chosen.
+SVar:X:Count$Random.3.7
+Oracle:As Lydari Elephant enters the battlefield, choose two numbers from 3 to 7 at random. Lydari Elephant's power is equal to the first number chosen and its toughness equal to the second number chosen.
