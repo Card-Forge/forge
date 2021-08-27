@@ -24,6 +24,8 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.google.common.collect.Table;
+import com.google.common.collect.TreeBasedTable;
 
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
@@ -41,6 +43,7 @@ import forge.game.card.CounterType;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
+import forge.game.keyword.KeywordsChange;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.replacement.ReplacementEffect;
@@ -682,4 +685,26 @@ public final class GameActionUtil {
         return completeList;
     }
 
-} // end class GameActionUtil
+    public static void checkStaticAfterPaying(Card c) {
+        Table<Long, Long, KeywordsChange> oldKW = TreeBasedTable.create((TreeBasedTable<Long, Long, KeywordsChange>) c.getChangedCardKeywords());
+        // this should be the last time checkStaticAbilities is called before SpellCast triggers to
+        // - setup Cascade dependent on high enough X (Imoti)
+        // - remove Replicate if Djinn Illuminatus gets sacrificed as payment
+        // because this will remove the payment SVars for Replicate we need to restore them
+        c.getGame().getAction().checkStaticAbilities(false);
+
+        Table<Long, Long, KeywordsChange> updatedKW = c.getChangedCardKeywords();
+        for (Table.Cell<Long, Long, KeywordsChange> entry : oldKW.cellSet()) {
+            for (KeywordInterface ki : entry.getValue().getKeywords()) {
+                // check if this keyword existed previously
+                if ((ki.getOriginal().startsWith("Replicate") || ki.getOriginal().startsWith("Conspire")) && updatedKW.get(entry.getRowKey(), entry.getColumnKey()) != null) {
+                    updatedKW.put(entry.getRowKey(), entry.getColumnKey(), oldKW.get(entry.getRowKey(), entry.getColumnKey()));
+                }
+            }
+        }
+        c.updateKeywords();
+
+        c.getGame().getTriggerHandler().resetActiveTriggers();
+    }
+
+}
