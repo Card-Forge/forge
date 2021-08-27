@@ -45,3 +45,4 @@ ScryfallCode=PMEI
 42 R Crop Rotation @DiTerlizzi
 43 R Tangled Florahedron @Randy Vargas
 44 R Counterspell @Hannibal King
+45 R Bone Shredder @Ron Spencer
