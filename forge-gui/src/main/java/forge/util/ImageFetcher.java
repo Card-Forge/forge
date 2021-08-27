@@ -79,7 +79,7 @@ public abstract class ImageFetcher {
                 return;
 
             final boolean backFace = imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX);
-            String filename = ImageUtil.getImageKey(paperCard, backFace, true);
+            String filename = backFace ? paperCard.getCardAltImageKey() : paperCard.getCardImageKey();
             if (useArtCrop) {
                 filename = TextUtil.fastReplace(filename, ".full", ".artcrop");
             }
