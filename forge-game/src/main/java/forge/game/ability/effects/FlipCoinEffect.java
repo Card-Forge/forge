@@ -81,7 +81,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
                 int countHeads = 0;
                 int countTails = 0;
 
-                for(int i = 0; i < amount; ++i) {
+                for (int i = 0; i < amount; ++i) {
                     final boolean resultIsHeads = flipCoinNoCall(sa, flipper, flipMultiplier, varName);
 
                     if (resultIsHeads) {
@@ -118,7 +118,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
                 int countWins = 0;
                 int countLosses = 0;
 
-                for(int i = 0; i < amount; ++i) {
+                for (int i = 0; i < amount; ++i) {
                     final boolean win = flipCoinCall(caller.get(0), sa, flipMultiplier, varName);
 
                     if (win) {
