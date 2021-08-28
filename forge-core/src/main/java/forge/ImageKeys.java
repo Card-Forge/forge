@@ -236,7 +236,7 @@ public final class ImageKeys {
                 cachedContent.put(setFolder, setFolderContent);
             }
         }
-        String[] keyParts = StringUtils.split(pc.getImageKeyFromSet(), "//");
+        String[] keyParts = StringUtils.split(pc.getCardImageKey(), "//");
         if (keyParts.length != 2)
             return false;
         HashSet<String> content = cachedContent.getOrDefault(keyParts[0], null);
