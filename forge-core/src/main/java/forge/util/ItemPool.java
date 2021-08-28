@@ -30,10 +30,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import forge.item.InventoryItem;
-import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 
 /**
  * <p>
