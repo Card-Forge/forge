@@ -236,11 +236,11 @@ public class ComputerUtilCost {
         if (cost == null) {
             return true;
         }
-        if (!ai.isAI()) {
-            return false;
-        }
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostSacrifice) {
+                if (!ai.isAI()) {
+                    return false;
+                }
                 CardCollection list = new CardCollection();
                 final CardCollection exclude = new CardCollection();
                 if (AiCardMemory.getMemorySet(ai, MemorySet.PAYS_SAC_COST) != null) {
