@@ -199,7 +199,7 @@ public final class CardEdition implements Comparable<CardEdition> {
          * @param collectorNumber: Input collectorNumber tro transform in a Sorting Key
          * @return A 5-digits zero-padded collector number + any non-numerical parts attached.
          */
-        private static Map<String, String> sortableCollNumberLookup = new HashMap<>();
+        private static final Map<String, String> sortableCollNumberLookup = new HashMap<>();
         public static String getSortableCollectorNumber(final String collectorNumber){
             String inputCollNumber = collectorNumber;
             if (collectorNumber == null || collectorNumber.length() == 0)
@@ -213,7 +213,7 @@ public final class CardEdition implements Comparable<CardEdition> {
             int collNr;
             String sortableCollNr = inputCollNumber;
             try {
-                collNr = Integer.parseInt(collectorNumber);
+                collNr = Integer.parseInt(inputCollNumber);
                 sortableCollNr = String.format("%05d", collNr);
             } catch (NumberFormatException ex) {
                 String nonNumeric = sortableCollNr.replaceAll("[0-9]", "");
