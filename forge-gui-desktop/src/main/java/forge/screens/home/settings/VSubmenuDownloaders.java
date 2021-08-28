@@ -306,7 +306,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
                 //
                 // check the back face
                 //
-                if (ImageUtil.hasBackFacePicture(cp)) {
+                if (cp.hasBackFace()) {
                     imagePath = ImageUtil.getImageRelativePath(cp, true, true, false);
                     if (imagePath != null) {
                         File file = ImageKeys.getImageFile(imagePath);

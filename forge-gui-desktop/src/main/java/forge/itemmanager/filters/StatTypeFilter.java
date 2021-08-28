@@ -1,6 +1,7 @@
 package forge.itemmanager.filters;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import javax.swing.JPanel;
@@ -76,10 +77,12 @@ public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButt
             btnPackOrDeck.setText(String.valueOf(count));
         }
 
-        for (Map.Entry<StatTypes, FLabel> btn : buttonMap.entrySet()) {
-            if (btn.getKey().predicate != null) {
-                int count = items.countAll(Predicates.compose(btn.getKey().predicate, PaperCard.FN_GET_RULES), PaperCard.class);
-                btn.getValue().setText(String.valueOf(count));
+        Iterator<StatTypes> buttonMapStatsIterator = buttonMap.keySet().iterator();
+        while (buttonMapStatsIterator.hasNext()){
+            StatTypes statTypes = buttonMapStatsIterator.next();
+            if (statTypes.predicate != null){
+                int count = items.countAll(Predicates.compose(statTypes.predicate, PaperCard.FN_GET_RULES), PaperCard.class);
+                buttonMap.get(statTypes).setText(String.valueOf(count));
             }
         }
         getWidget().revalidate();

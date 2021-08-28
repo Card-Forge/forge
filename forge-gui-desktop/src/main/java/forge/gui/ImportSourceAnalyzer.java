@@ -35,7 +35,6 @@ import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
 import forge.util.FileUtil;
-import forge.util.ImageUtil;
 
 public class ImportSourceAnalyzer {
 
@@ -315,7 +314,7 @@ public class ImportSourceAnalyzer {
 
             for (final PaperCard c : FModel.getMagicDb().getCommonCards().getAllCards()) {
                 addDefaultPicNames(c, false);
-                if (ImageUtil.hasBackFacePicture(c)) {
+                if (c.hasBackFace()) {
                     addDefaultPicNames(c, true);
                 }
             }
@@ -360,10 +359,10 @@ public class ImportSourceAnalyzer {
 
     private static void addSetCards(final Map<String, String> cardFileNames, final Iterable<PaperCard> library, final Predicate<PaperCard> filter) {
         for (final PaperCard c : Iterables.filter(library, filter)) {
-            String filename = ImageUtil.getImageKey(c, false, true) + ".jpg";
+            String filename = c.getCardImageKey() + ".jpg";
             cardFileNames.put(filename, filename);
-            if (ImageUtil.hasBackFacePicture(c)) {
-                filename = ImageUtil.getImageKey(c, true, true) + ".jpg";
+            if (c.hasBackFace()) {
+                filename = c.getCardAltImageKey() + ".jpg";
                 cardFileNames.put(filename, filename);
             }
         }
@@ -392,10 +391,10 @@ public class ImportSourceAnalyzer {
             };
 
             for (final PaperCard c : Iterables.filter(FModel.getMagicDb().getVariantCards().getAllCards(), predPlanes)) {
-                String baseName = ImageUtil.getImageKey(c,false, true);
+                String baseName = c.getCardImageKey();
                 nameUpdates.put(baseName + ".full.jpg", baseName + ".jpg");
-                if (ImageUtil.hasBackFacePicture(c)) {
-                    baseName = ImageUtil.getImageKey(c, true, true);
+                if (c.hasBackFace()) {
+                    baseName = c.getCardAltImageKey();
                     nameUpdates.put(baseName + ".full.jpg", baseName + ".jpg");
                 }
             }

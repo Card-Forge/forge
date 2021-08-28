@@ -164,7 +164,7 @@ public class ImageCache {
                 return false;
 
             final boolean backFace = imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX);
-            final String cardfilename = ImageUtil.getImageKey(paperCard, backFace, true);
+            final String cardfilename = backFace ? paperCard.getCardAltImageKey() : paperCard.getCardImageKey();
             if (!new File(ForgeConstants.CACHE_CARD_PICS_DIR + "/" + cardfilename + ".jpg").exists())
                 if (!new File(ForgeConstants.CACHE_CARD_PICS_DIR + "/" + cardfilename + ".png").exists())
                     if (!new File(ForgeConstants.CACHE_CARD_PICS_DIR + "/" + TextUtil.fastReplace(cardfilename,".full", ".fullborder") + ".jpg").exists())
@@ -200,7 +200,9 @@ public class ImageCache {
             imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.BACKFACE_POSTFIX.length());
         }
         if (imageKey.startsWith(ImageKeys.CARD_PREFIX)) {
-            imageKey = ImageUtil.getImageKey(ImageUtil.getPaperCardFromImageKey(imageKey), altState, true);
+            PaperCard card = ImageUtil.getPaperCardFromImageKey(imageKey);
+            if (card != null)
+                imageKey = altState ? card.getCardAltImageKey() : card.getCardImageKey();
             if (StringUtils.isBlank(imageKey)) {
                 return defaultImage;
             }

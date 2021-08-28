@@ -163,7 +163,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_CARD_ART_FORMAT("Full"),
     	UI_SELECT_FROM_CARD_DISPLAYS("true"),
         UI_FOR_TOUCHSCREN("false"),
-        UI_SWITCH_STATES_DECKVIEW("Always"),
+        UI_SWITCH_STATES_DECKVIEW("Switch back on hover"),
 
         UI_VIBRATE_ON_LIFE_LOSS("true"),
         UI_VIBRATE_ON_LONG_PRESS("true"),

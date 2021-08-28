@@ -151,8 +151,25 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
 
     @Override public String getItemType() { return "Token"; }
 
+    @Override
+    public boolean hasBackFace() {
+        return false;
+    }
+
     @Override public boolean isToken() { return true; }
 
+    // IPaperCard
+    @Override
+    public String getCardImageKey() {
+        return this.getImageKey(false);
+    }
+
+    @Override
+    public String getCardAltImageKey() {
+        return getImageKey(true);
+    }
+
+    // InventoryItem
     @Override
     public String getImageKey(boolean altState) {
         int idx = MyRandom.getRandom().nextInt(artIndex);

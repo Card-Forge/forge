@@ -20,10 +20,7 @@ package forge.item;
 import com.google.common.base.Function;
 import forge.ImageKeys;
 import forge.StaticData;
-import forge.card.CardDb;
-import forge.card.CardEdition;
-import forge.card.CardRarity;
-import forge.card.CardRules;
+import forge.card.*;
 import forge.util.CardTranslation;
 import forge.util.ImageUtil;
 import forge.util.Localizer;
@@ -139,13 +136,6 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
             hasImage = ImageKeys.hasImage(this);
         }
         return hasImage;
-    }
-
-    private String imageKeyFromSet = null;
-    public String getImageKeyFromSet() {
-        if (this.imageKeyFromSet == null)
-            this.imageKeyFromSet = ImageUtil.getImageKey(this, false, true);
-        return imageKeyFromSet;
     }
 
     /**
@@ -306,6 +296,32 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
             imageKey += ImageKeys.BACKFACE_POSTFIX;
         }
         return imageKey;
+    }
+
+    private String cardImageKey = null;
+    @Override
+    public String getCardImageKey() {
+        if (this.cardImageKey == null)
+            this.cardImageKey = ImageUtil.getImageKey(this, false, true);
+        return cardImageKey;
+    }
+
+    private String cardAltImageKey = null;
+    @Override
+    public String getCardAltImageKey() {
+        if (this.cardAltImageKey == null){
+            if (this.hasBackFace())
+                this.cardAltImageKey = ImageUtil.getImageKey(this, true, true);
+            else  // altImageKey will be the same as cardImageKey
+                this.cardAltImageKey = ImageUtil.getImageKey(this, false, true);
+        }
+        return cardAltImageKey;
+    }
+
+    @Override
+    public boolean hasBackFace(){
+        CardSplitType cst = this.rules.getSplitType();
+        return cst == CardSplitType.Transform || cst == CardSplitType.Flip || cst == CardSplitType.Meld || cst == CardSplitType.Modal;
     }
 
     // Return true if card is one of the five basic lands that can be added for free

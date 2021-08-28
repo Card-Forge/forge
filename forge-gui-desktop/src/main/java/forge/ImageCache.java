@@ -168,11 +168,11 @@ public class ImageCache {
         if (altState)
             imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.BACKFACE_POSTFIX.length());
         if (imageKey.startsWith(ImageKeys.CARD_PREFIX)) {
-            PaperCard pc = ImageUtil.getPaperCardFromImageKey(imageKey);
-            ipc = pc;
-            imageKey = ImageUtil.getImageKey(pc, altState, true);
-            if (StringUtils.isBlank(imageKey)) {
-                return Pair.of(_defaultImage, true);
+            ipc = ImageUtil.getPaperCardFromImageKey(imageKey);
+            if (ipc != null) {
+                imageKey = altState ? ipc.getCardAltImageKey() : ipc.getCardImageKey();
+                if (StringUtils.isBlank(imageKey))
+                    return Pair.of(_defaultImage, true);
             }
         }
 
@@ -184,7 +184,7 @@ public class ImageCache {
         if (useArtCrop) {
             if (ipc != null && ipc.getRules().getSplitType() == CardSplitType.Flip) {
                 // Art crop will always use front face as image key for flip cards
-                imageKey = ((PaperCard) ipc).getImageKeyFromSet(); // ImageUtil.getImageKey((PaperCard) ipc, false, true);
+                imageKey = ((PaperCard) ipc).getCardImageKey();
             }
             imageKey = TextUtil.fastReplace(imageKey, ".full", ".artcrop");
         }

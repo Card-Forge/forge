@@ -236,7 +236,9 @@ public interface IPaperCard extends InventoryItem, Serializable {
     CardRules getRules();
     CardRarity getRarity();
     String getArtist();
-
     String getItemType();
+    boolean hasBackFace();
+    String getCardImageKey();
+    String getCardAltImageKey();
 
 }

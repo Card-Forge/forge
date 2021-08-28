@@ -23,7 +23,6 @@ import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinFont;
 import forge.toolbox.FSkin.SkinImage;
 import forge.toolbox.special.CardZoomer;
-import forge.util.ImageUtil;
 import forge.util.Localizer;
 import forge.view.arcane.CardPanel;
 
@@ -61,8 +60,6 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private ItemInfo hoveredItem;
     private ItemInfo focalItem;
     private boolean panelOptionsCreated = false;
-    // cards with alternate states are added twice for displaying
-    private InventoryItem lastAltCard = null;
 
     private final List<ItemInfo> orderedItems = new ArrayList<>();
     private final List<Group> groups = new ArrayList<>();
@@ -1103,30 +1100,16 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         InventoryItem item = itemInfo.item;
                         itemInfo.alt = false;
                         if (!FModel.getPreferences().getPref(FPref.UI_SWITCH_STATES_DECKVIEW).equals(ForgeConstants.SWITCH_CARDSTATES_DECK_NEVER)) {
-                            if ((hoveredItem == null || !hoveredItem.item.equals(item)) || (FModel.getPreferences().getPref(FPref.UI_SWITCH_STATES_DECKVIEW).equals(ForgeConstants.SWITCH_CARDSTATES_DECK_ALWAYS))) {
-                                if (item instanceof PaperCard) {
-                                    if (ImageUtil.hasBackFacePicture(((PaperCard)item))) {
-                                        if (item.equals(lastAltCard)) {
-                                            itemInfo.alt = true;
-                                            lastAltCard = null;
-                                        }
-                                        else {
-                                            lastAltCard = item;
-                                        }
-                                    }
-                                    else {
-                                        lastAltCard = null;
-                                    }
-                                }
+                            if (hoveredItem != null && hoveredItem.item.equals(item)) {
+                                if (item instanceof PaperCard && ((PaperCard)item).hasBackFace())
+                                    itemInfo.alt = true;
                             }
                         }
 
-                        if (itemInfo != hoveredItem) { //save hovered item for last
+                        if (itemInfo != hoveredItem) //save hovered item for last
                             drawItemImage(g2d, itemInfo);
-                        }
-                        else {
+                        else
                             skippedItem = itemInfo;
-                        }
                     }
                 }
                 if (skippedItem != null) { //draw hovered item on top
