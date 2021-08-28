@@ -199,15 +199,21 @@ public final class CardEdition implements Comparable<CardEdition> {
          * @param collectorNumber: Input collectorNumber tro transform in a Sorting Key
          * @return A 5-digits zero-padded collector number + any non-numerical parts attached.
          */
+        private static Map<String, String> sortableCollNumberLookup = new HashMap<>();
         public static String getSortableCollectorNumber(final String collectorNumber){
-            String sortableCollNr = collectorNumber;
-            if (sortableCollNr == null || sortableCollNr.length() == 0)
-                sortableCollNr = "50000";  // very big number of 5 digits to have them in last positions
+            String inputCollNumber = collectorNumber;
+            if (collectorNumber == null || collectorNumber.length() == 0)
+                inputCollNumber = "50000";  // very big number of 5 digits to have them in last positions
+
+            String matchedCollNr = sortableCollNumberLookup.getOrDefault(inputCollNumber, null);
+            if (matchedCollNr != null)
+                return  matchedCollNr;
 
             // Now, for proper sorting, let's zero-pad the collector number (if integer)
             int collNr;
+            String sortableCollNr = inputCollNumber;
             try {
-                collNr = Integer.parseInt(sortableCollNr);
+                collNr = Integer.parseInt(collectorNumber);
                 sortableCollNr = String.format("%05d", collNr);
             } catch (NumberFormatException ex) {
                 String nonNumeric = sortableCollNr.replaceAll("[0-9]", "");
@@ -222,6 +228,7 @@ public final class CardEdition implements Comparable<CardEdition> {
                 else // e.g. WS6, S1
                     sortableCollNr = nonNumeric + String.format("%05d", collNr);
             }
+            sortableCollNumberLookup.put(inputCollNumber, sortableCollNr);
             return sortableCollNr;
         }
 
