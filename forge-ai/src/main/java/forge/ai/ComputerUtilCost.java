@@ -236,6 +236,9 @@ public class ComputerUtilCost {
         if (cost == null) {
             return true;
         }
+        if (!ai.isAI()) {
+            return false;
+        }
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostSacrifice) {
                 CardCollection list = new CardCollection();
