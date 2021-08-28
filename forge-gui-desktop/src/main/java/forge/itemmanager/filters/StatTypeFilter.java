@@ -75,14 +75,23 @@ public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButt
         if (btnPackOrDeck != null) { //support special pack/deck case
             int count = items.countAll(ItemPredicate.Presets.IS_PACK_OR_DECK, InventoryItem.class);
             btnPackOrDeck.setText(String.valueOf(count));
-        }
 
-        Iterator<StatTypes> buttonMapStatsIterator = buttonMap.keySet().iterator();
-        while (buttonMapStatsIterator.hasNext()){
-            StatTypes statTypes = buttonMapStatsIterator.next();
-            if (statTypes.predicate != null){
-                int count = items.countAll(Predicates.compose(statTypes.predicate, PaperCard.FN_GET_RULES), PaperCard.class);
-                buttonMap.get(statTypes).setText(String.valueOf(count));
+            Iterator<StatTypes> buttonMapStatsIterator = buttonMap.keySet().iterator();
+            while (buttonMapStatsIterator.hasNext()){
+                StatTypes statTypes = buttonMapStatsIterator.next();
+                if (statTypes.predicate != null){
+                    count = items.countAll(Predicates.compose(statTypes.predicate, PaperCard.FN_GET_RULES), PaperCard.class);
+                    buttonMap.get(statTypes).setText(String.valueOf(count));
+                }
+            }
+        } else {
+            Iterator<StatTypes> buttonMapStatsIterator = buttonMap.keySet().iterator();
+            while (buttonMapStatsIterator.hasNext()) {
+                StatTypes statTypes = buttonMapStatsIterator.next();
+                if (statTypes.predicate != null) {
+                    int count = items.countAll(Predicates.compose(statTypes.predicate, PaperCard.FN_GET_RULES));
+                    buttonMap.get(statTypes).setText(String.valueOf(count));
+                }
             }
         }
         getWidget().revalidate();

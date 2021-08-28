@@ -137,13 +137,16 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
         return count;
     }
 
-    public final int countAll(Predicate<T> condition) {
+    public final <U extends InventoryItem> int countAll(Predicate<U> condition){
         int count = 0;
-        for (Entry<T, Integer> e : this) {
-            if (condition.apply(e.getKey())) {
-                count += e.getValue();
+        Iterable<T> matchingKeys = Iterables.filter(this.items.keySet(), new Predicate<T>() {
+            @Override
+            public boolean apply(T item) {
+                return condition.apply((U)item);
             }
-        }
+        });
+        for (T key : matchingKeys)
+            count += this.items.get(key);
         return count;
     }
 
