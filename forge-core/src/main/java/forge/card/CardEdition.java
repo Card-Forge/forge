@@ -211,22 +211,22 @@ public final class CardEdition implements Comparable<CardEdition> {
 
             // Now, for proper sorting, let's zero-pad the collector number (if integer)
             int collNr;
-            String sortableCollNr = inputCollNumber;
+            String sortableCollNr;
             try {
                 collNr = Integer.parseInt(inputCollNumber);
                 sortableCollNr = String.format("%05d", collNr);
             } catch (NumberFormatException ex) {
-                String nonNumeric = sortableCollNr.replaceAll("[0-9]", "");
-                String onlyNumeric = sortableCollNr.replaceAll("[^0-9]", "");
+                String nonNumSub = inputCollNumber.replaceAll("[0-9]", "");
+                String onlyNumSub = inputCollNumber.replaceAll("[^0-9]", "");
                 try {
-                    collNr = Integer.parseInt(onlyNumeric);
+                    collNr = Integer.parseInt(onlyNumSub);
                 } catch (NumberFormatException exon) {
                     collNr = 0; // this is the case of ONLY-letters collector numbers
                 }
-                if ((collNr > 0) && (sortableCollNr.startsWith(onlyNumeric))) // e.g. 12a, 37+, 2018f,
-                    sortableCollNr = String.format("%05d", collNr) + nonNumeric;
+                if ((collNr > 0) && (inputCollNumber.startsWith(onlyNumSub))) // e.g. 12a, 37+, 2018f,
+                    sortableCollNr = String.format("%05d", collNr) + nonNumSub;
                 else // e.g. WS6, S1
-                    sortableCollNr = nonNumeric + String.format("%05d", collNr);
+                    sortableCollNr = nonNumSub + String.format("%05d", collNr);
             }
             sortableCollNumberLookup.put(inputCollNumber, sortableCollNr);
             return sortableCollNr;
