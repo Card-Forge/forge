@@ -1,6 +1,5 @@
 package forge.game.ability.effects;
 
-
 import java.util.List;
 
 import com.google.common.collect.Lists;
