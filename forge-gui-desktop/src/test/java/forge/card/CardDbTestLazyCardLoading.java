@@ -94,8 +94,8 @@ public class CardDbTestLazyCardLoading extends ForgeCardMockTestCase {
     public void tesLoadAndGetUnsupportedCardHavingWrongSetCode(){
         String cardName = "Dominating Licid";
         String wrongSetCode = "AA";
-        String expectedSetCode = CardEdition.UNKNOWN.getCode();
-        CardRarity expectedCardRarity = CardRarity.Unknown;
+        String expectedSetCode = "EXO";  // Exodus
+        CardRarity expectedCardRarity = CardRarity.Rare;
 
         PaperCard dominatingLycidCard = this.cardDb.getCard(cardName);
         assertNull(dominatingLycidCard);
@@ -104,11 +104,6 @@ public class CardDbTestLazyCardLoading extends ForgeCardMockTestCase {
         FModel.getMagicDb().attemptToLoadCard(cardName, wrongSetCode);
 
         dominatingLycidCard = this.cardDb.getCard(cardName);
-        assertNull(dominatingLycidCard);  // card still not found
-
-        // Resorting to Unsupported Card Request
-        String cardRequest = CardDb.CardRequest.compose(cardName, wrongSetCode);
-        dominatingLycidCard = this.cardDb.createUnsupportedCard(cardRequest);
         assertNotNull(dominatingLycidCard);
         assertEquals(dominatingLycidCard.getName(), cardName);
         assertEquals(dominatingLycidCard.getEdition(), expectedSetCode);
