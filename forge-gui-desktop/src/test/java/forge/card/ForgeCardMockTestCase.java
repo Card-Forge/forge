@@ -5,6 +5,7 @@ import forge.ImageKeys;
 import forge.Singletons;
 import forge.StaticData;
 import forge.gamesimulationtests.util.CardDatabaseHelper;
+import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
@@ -132,6 +133,9 @@ public class ForgeCardMockTestCase extends PowerMockTestCase {
         PowerMockito.mockStatic(ImageCache.class);
         PowerMockito.mockStatic(ImageKeys.class);
         initForgeConstants();
+
+        // Always Has Image (there is a separated test case to cover the opposite case)
+        PowerMockito.when(ImageKeys.hasImage(Mockito.any(PaperCard.class))).thenReturn(true);
 
         //Mocking some more static stuff
         PowerMockito.mockStatic(Singletons.class);

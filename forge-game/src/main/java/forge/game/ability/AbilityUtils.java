@@ -218,8 +218,7 @@ public class AbilityUtils {
                 if (o instanceof SpellAbility) {
                     c = ((SpellAbility) o).getHostCard();
                 }
-            }
-            else {
+            } else {
                 AbilityKey type = AbilityKey.fromString(defined.substring(9));
                 final Object crd = root.getTriggeringObject(type);
                 if (crd instanceof Card) {

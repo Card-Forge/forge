@@ -64,7 +64,7 @@ public class SetStateEffect extends SpellAbilityEffect {
             }
 
             // Cards which are not on the battlefield should not be able to transform.
-            // TurnFace should be allowed in other zones like Exil too
+            // TurnFace should be allowed in other zones like Exile too
             if (!"TurnFace".equals(mode) && !gameCard.isInZone(ZoneType.Battlefield)) {
                 continue;
             }

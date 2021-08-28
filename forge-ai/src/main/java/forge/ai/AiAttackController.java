@@ -716,7 +716,7 @@ public class AiAttackController {
         }
 
         if (attackMax == 0) {
-            //  can't attack anymore
+            // can't attack anymore
             return;
         }
 

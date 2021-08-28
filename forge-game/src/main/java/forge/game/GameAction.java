@@ -273,7 +273,7 @@ public class GameAction {
                     copied.setState(CardStateName.Original, false);
                     copied.setBackSide(false);
 
-                    // reset timestamp in changezone effects so they have same timestamp if ETB simutaneously
+                    // reset timestamp in changezone effects so they have same timestamp if ETB simultaneously
                     copied.setTimestamp(game.getNextTimestamp());
                 }
 
@@ -376,7 +376,7 @@ public class GameAction {
             }
             cards.set(cards.indexOf(copied), c);
             if (zoneTo.is(ZoneType.Library)) {
-                java.util.Collections.reverse(cards);
+                Collections.reverse(cards);
             }
             mergedCards = cards;
             if (cause != null) {
@@ -805,6 +805,12 @@ public class GameAction {
         Card result = moveTo(game.getStackZone(), c, cause, params);
         if (cause != null && cause.isSpell() && result.equals(cause.getHostCard())) {
             result.setSplitStateToPlayAbility(cause);
+
+            // CR 112.2 A spell’s controller is, by default, the player who put it on the stack.
+            result.setController(cause.getActivatingPlayer(), 0);
+            // for triggers like from Wild-Magic Sorcerer
+            game.getAction().checkStaticAbilities(false);
+            game.getTriggerHandler().resetActiveTriggers();
         }
         return result;
     }
@@ -1842,11 +1848,11 @@ public class GameAction {
     private float getLandRatio(List<Card> deck) {
         int landCount = 0;
         for (Card c:deck) {
-            if (c.isLand()){
+            if (c.isLand()) {
                 landCount++;
             }
         }
-        if(landCount == 0) {
+        if (landCount == 0) {
             return 0;
         }
         return Float.valueOf(landCount)/Float.valueOf(deck.size());
@@ -1854,7 +1860,7 @@ public class GameAction {
 
     private float getHandScore(List<Card> hand, float landRatio) {
         int landCount = 0;
-        for (Card c:hand) {
+        for (Card c : hand) {
             if (c.isLand()) {
                 landCount++;
             }

@@ -128,7 +128,7 @@ public class CardRequestTestCase {
         request = CardRequest.fromString(requestString);
         assertEquals(request.cardName, cardName);
         assertEquals(request.edition, edition);
-        assertEquals(request.artIndex, IPaperCard.DEFAULT_ART_INDEX);
+        assertEquals(request.artIndex, 20);
         assertEquals(request.collectorNumber, IPaperCard.NO_COLLECTOR_NUMBER);
 
 
@@ -213,6 +213,17 @@ public class CardRequestTestCase {
         assertEquals(request.cardName, newRequest.cardName);
         assertNotEquals(request.edition, newRequest.edition);
         assertNotEquals(request.artIndex, newRequest.artIndex);
+    }
+
+    @Test
+    public void testCreatingCardRequestWithArtIndexGreaterThanNine(){
+        String requestString = CardRequest.compose("Island", "SLD", 13);
+        CardRequest request = CardRequest.fromString(requestString);
+
+        assertEquals(request.cardName, "Island");
+        assertEquals(request.edition, "SLD");
+        assertEquals(request.artIndex, 13);
+        assertEquals(request.collectorNumber, IPaperCard.NO_COLLECTOR_NUMBER);
     }
 
 }

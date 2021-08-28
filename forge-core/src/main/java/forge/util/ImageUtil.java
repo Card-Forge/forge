@@ -56,7 +56,7 @@ public class ImageUtil {
         int artIdx = cp.getArtIndex() - 1;
         if (hasManyPictures) {
             if (cntPictures <= artIdx) // prevent overflow
-                artIdx = cntPictures == 0 ? 0 : artIdx % cntPictures;
+                artIdx = artIdx % cntPictures;
             s.append(artIdx + 1);
         }
 
@@ -83,15 +83,10 @@ public class ImageUtil {
         }
     }
 
-    public static boolean hasBackFacePicture(PaperCard cp) {
-        CardSplitType cst = cp.getRules().getSplitType();
-        return cst == CardSplitType.Transform || cst == CardSplitType.Flip || cst == CardSplitType.Meld || cst == CardSplitType.Modal;
-    }
-
     public static String getNameToUse(PaperCard cp, boolean backFace) {
         final CardRules card = cp.getRules();
         if (backFace) {
-            if (hasBackFacePicture(cp))
+            if (cp.hasBackFace())
                 if (card.getOtherPart() != null) {
                     return card.getOtherPart().getName();
                 } else if (!card.getMeldWith().isEmpty()) {

@@ -154,8 +154,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                         copies.add(copy);
                     }
                 }
-            }
-            else {
+            } else {
                 for (int i = 0; i < amount; i++) {
                     SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
                     if (sa.hasParam("MayChooseTarget")) {

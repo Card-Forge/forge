@@ -183,7 +183,7 @@ public class LegacyCardDb {
     }
 
     public PaperCard getFoiled(PaperCard card0) {
-        return new PaperCard(card0.getRules(), card0.getEdition(), card0.getRarity(), card0.getArtIndex(), true, card0.getArtist());
+        return card0.getFoiled();
     }
     
     public PaperCard getCardFromEdition(final String cardName, LegacySetPreference fromSet) {

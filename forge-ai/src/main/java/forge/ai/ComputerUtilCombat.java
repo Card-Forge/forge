@@ -89,7 +89,7 @@ public class ComputerUtilCombat {
                 return ComputerUtilCombat.canAttackNextTurn(attacker, input);
             }
         });
-    } // canAttackNextTurn(Card)
+    }
 
     /**
      * <p>
@@ -175,7 +175,6 @@ public class ComputerUtilCombat {
 
         return n;
     }
-
 
     // Returns the damage an unblocked attacker would deal
     /**
@@ -494,7 +493,6 @@ public class ComputerUtilCombat {
         final List<Card> attackers = combat.getAttackersOf(ai);
 
         for (final Card attacker : attackers) {
-
             final List<Card> blockers = combat.getBlockers(attacker);
 
             if (blockers.isEmpty()) {
@@ -502,7 +500,7 @@ public class ComputerUtilCombat {
                     return true;
                 }
             }
-            if(threateningCommanders.contains(attacker)) {
+            if (threateningCommanders.contains(attacker)) {
                 return true;
             }
         }
@@ -696,7 +694,6 @@ public class ComputerUtilCombat {
      * @return a boolean.
      */
     public static boolean combatantWouldBeDestroyed(Player ai, final Card combatant, Combat combat) {
-
         if (combat.isAttacking(combatant)) {
             return ComputerUtilCombat.attackerWouldBeDestroyed(ai, combatant, combat);
         }
@@ -2220,7 +2217,6 @@ public class ComputerUtilCombat {
 
         return killDamage;
     }
-
 
     /**
      * <p>

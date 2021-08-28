@@ -35,6 +35,7 @@ import com.google.common.collect.Sets;
 
 import forge.GameCommand;
 import forge.game.Game;
+import forge.game.GameActionUtil;
 import forge.game.GameLogEntryType;
 import forge.game.GameObject;
 import forge.game.ability.AbilityKey;
@@ -455,9 +456,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             game.getPhaseHandler().setPriority(sp.getActivatingPlayer());
         }
 
-        //FIXME: additional check cmc, etc..
-        game.getTriggerHandler().resetActiveTriggers();
-        game.getAction().checkStaticAbilities();
+        GameActionUtil.checkStaticAfterPaying(sp.getHostCard());
 
         if (sp.isSpell() && !sp.isCopied()) {
             thisTurnCast.add(CardUtil.getLKICopy(sp.getHostCard()));

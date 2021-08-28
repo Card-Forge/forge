@@ -22,7 +22,6 @@ public class UnattachAllAi extends SpellAbilityAi {
      */
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-
         // prevent run-away activations - first time will always return true
         boolean chance = MyRandom.getRandom().nextFloat() <= .9;
 

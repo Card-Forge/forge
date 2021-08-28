@@ -768,8 +768,7 @@ public class Combat {
             if (divideCombatDamageAsChoose) {
                 if (orderedBlockers == null || orderedBlockers.isEmpty()) {
                     orderedBlockers = getDefendersCreatures();
-                }
-                else {
+                } else {
                     for (Card c : getDefendersCreatures()) {
                         if (!orderedBlockers.contains(c)) {
                             orderedBlockers.add(c);
@@ -798,8 +797,7 @@ public class Combat {
                 } else if (trampler || !band.isBlocked()) { // this is called after declare blockers, no worries 'bout nulls in isBlocked
                     damageMap.put(attacker, defender, damageDealt);
                 } // No damage happens if blocked but no blockers left
-            }
-            else {
+            } else {
                 Player assigningPlayer = getAttackingPlayer();
                 // Defensive Formation is very similar to Banding with Blockers
                 // It allows the defending player to assign damage instead of the attacking player

@@ -106,7 +106,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
     }
 
     /*
-    * TEST FOR GET ALL CARDS
+     * TEST FOR GET ALL CARDS
      */
 
     @Test
@@ -118,33 +118,31 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
     }
 
     @Test
-    public void testGetAllCardsLegalInSets(){
+    public void testGetAllCardsThatWerePrintedInSets(){
         List<String> allowedSets = new ArrayList<>();
         allowedSets.add(this.latestArtShivanDragonEdition);
-        Predicate<PaperCard> legalInSets = (Predicate<PaperCard>) this.cardDb.isLegal(allowedSets);
-        List<PaperCard> allCardsInSet = this.cardDb.getAllCards(legalInSets);
+        Predicate<PaperCard> wasPrinted = (Predicate<PaperCard>) this.cardDb.wasPrintedInSets(allowedSets);
+        List<PaperCard> allCardsInSet = this.cardDb.getAllCards(wasPrinted);
         assertNotNull(allCardsInSet);
-        for (PaperCard card : allCardsInSet)
-            assertEquals(card.getEdition(), this.latestArtShivanDragonEdition);
     }
 
     @Test void testGetAllCardsOfaGivenNameAndLegalInSets(){
         List<String> allowedSets = new ArrayList<>(Arrays.asList(this.editionsCounterspell));
-        Predicate<PaperCard> legalInSets = (Predicate<PaperCard>) this.cardDb.isLegal(allowedSets);
-        List<PaperCard> allCounterSpellsInSets = this.cardDb.getAllCards(this.cardNameCounterspell, legalInSets);
+        Predicate<PaperCard> printedInSets = (Predicate<PaperCard>) this.cardDb.wasPrintedInSets(allowedSets);
+        List<PaperCard> allCounterSpellsInSets = this.cardDb.getAllCards(this.cardNameCounterspell, printedInSets);
         assertNotNull(allCounterSpellsInSets);
         assertTrue(allCounterSpellsInSets.size() > 0);
         assertTrue(allCounterSpellsInSets.size() > 1);
         for (PaperCard card : allCounterSpellsInSets) {
             assertEquals(card.getName(), this.cardNameCounterspell);
-            assertTrue(allowedSets.contains(card.getEdition()));
         }
     }
 
 
     /*
-    * TEST FOR CARD RETRIEVAL METHODS
-    */
+     * TEST FOR CARD RETRIEVAL METHODS
+     */
+
     @Test
     public void testGetCardByName() {
         PaperCard legacyCard = this.legacyCardDb.getCard(cardNameShivanDragon);
@@ -630,7 +628,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
 
         // Passing null preference
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
-        PaperCard httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, null, null);
+        PaperCard httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, null);
         assertNotNull(httCard);
         assertEquals(httCard.getName(), cardNameHymnToTourach);
         assertEquals(httCard.getEdition(), latestArtHymnToTourachEdition);
@@ -638,7 +636,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         // Changing default value for default card art preference
         this.cardDb.setCardArtPreference(false, false);
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS);
-        httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, null, null);
+        httCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, null);
         assertNotNull(httCard);
         assertEquals(httCard.getName(), cardNameHymnToTourach);
         assertEquals(httCard.getEdition(), originalArtHymnToTourachEdition);
@@ -2064,32 +2062,27 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
     }
 
     @Test
-    public void testGetCardFromEditionsWithFilteredPool(){
-        // test initial conditions
+    public void testGetIslandsFromEditionsWithSpecificArtIndex(){
+        String cardName = "Island";
         assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
+        PaperCard islandLatest = this.cardDb.getCardFromEditions(cardName, CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS, 12);
+        assertNotNull(islandLatest);
+        assertEquals(islandLatest.getName(), "Island");
+        assertEquals(islandLatest.getEdition(), "SLD");
+        assertEquals(islandLatest.getArtIndex(), 12);
 
-        // Set Allowed Editions
-        List<String> allowedSets = new ArrayList<>();
-        allowedSets.add(this.latestArtShivanDragonEdition);
-        allowedSets.add(this.originalArtShivanDragonEdition);
-        Predicate<PaperCard> printedInSetPredicate = (Predicate<PaperCard>) this.cardDb.wasPrintedInSets(allowedSets);
-        PaperCard shivanDragonCard = this.cardDb.getCardFromEditions(this.cardNameShivanDragon, printedInSetPredicate);
-        assertNotNull(shivanDragonCard);
-        assertEquals(shivanDragonCard.getName(), this.cardNameShivanDragon);
-        assertEquals(shivanDragonCard.getEdition(), this.latestArtShivanDragonEdition);
+        // PALP
+        PaperCard islandOriginal = this.cardDb.getCardFromEditions(cardName, CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY, 12);
+        assertNotNull(islandOriginal);
+        assertEquals(islandOriginal.getName(), "Island");
+        assertEquals(islandOriginal.getEdition(), "SLD");
+        assertEquals(islandOriginal.getArtIndex(), 12);
+    }
 
-        // Use Original Art Preference Now
-        shivanDragonCard = this.cardDb.getCardFromEditions(this.cardNameShivanDragon, CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS, printedInSetPredicate);
-        assertNotNull(shivanDragonCard);
-        assertEquals(shivanDragonCard.getName(), this.cardNameShivanDragon);
-        assertEquals(shivanDragonCard.getEdition(), this.originalArtShivanDragonEdition);
-
-        // Testing null cards
-        allowedSets.clear();
-        allowedSets.add(this.originalArtHymnToTourachEdition);  // FEM - it does not exist a shivan in FEM
-        printedInSetPredicate = (Predicate<PaperCard>) this.cardDb.wasPrintedInSets(allowedSets);
-        shivanDragonCard = this.cardDb.getCardFromEditions(this.cardNameShivanDragon, printedInSetPredicate);
-        assertNull(shivanDragonCard);
+    @Test
+    public void testMaxArtCountForBasicLand(){
+        int maxArtIndex = this.cardDb.getMaxArtIndex("Island");
+        assertEquals(maxArtIndex, 13);
     }
 
 

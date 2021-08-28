@@ -353,7 +353,6 @@ public final class ForgeConstants {
 
     // Constants for Land played notification policy
     public static final String SWITCH_CARDSTATES_DECK_NEVER = "Never";
-    public static final String SWITCH_CARDSTATES_DECK_ALWAYS = "Always";
     public static final String SWITCH_CARDSTATES_DECK_HOVER = "Switch back on hover";
 
     // Set boolean constant for landscape mode for gdx port

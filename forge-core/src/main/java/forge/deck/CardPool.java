@@ -64,8 +64,15 @@ public class CardPool extends ItemPool<PaperCard> {
         this.add(cardName, setCode, IPaperCard.DEFAULT_ART_INDEX, amount);
     }
 
+    public void add(final String cardName, final String setCode, final int amount, boolean addAny) {
+        this.add(cardName, setCode, IPaperCard.NO_ART_INDEX, amount, addAny);
+    }
+
     // NOTE: ART indices are "1" -based
     public void add(String cardName, String setCode, int artIndex, final int amount) {
+        this.add(cardName, setCode, artIndex, amount, false);
+    }
+    public void add(String cardName, String setCode, int artIndex, final int amount, boolean addAny) {
         Map<String, CardDb> dbs = StaticData.instance().getAvailableDatabases();
         PaperCard paperCard = null;
         String selectedDbName = "";
@@ -89,6 +96,10 @@ public class CardPool extends ItemPool<PaperCard> {
                 artIndex = IPaperCard.DEFAULT_ART_INDEX;  // Reset Any artIndex passed in, at this point
             }
         }
+        if (addAny && paperCard == null) {
+            paperCard = StaticData.instance().getCommonCards().getCard(cardName);
+            selectedDbName = "Common";
+        }
         if (paperCard == null){
             // after all still null
             System.err.println("An unsupported card was requested: \"" + cardName + "\" from \"" + setCode + "\". \n");
@@ -103,7 +114,7 @@ public class CardPool extends ItemPool<PaperCard> {
         boolean artIndexExplicitlySet = (artIndex > IPaperCard.DEFAULT_ART_INDEX) ||
                 (CardDb.CardRequest.fromString(cardName).artIndex > IPaperCard.NO_ART_INDEX);
 
-        if (artIndexExplicitlySet || artCount == 1) {
+        if ((artIndexExplicitlySet || artCount == 1) && !addAny) {
             // either a specific art index is specified, or there is only one art, so just add the card
             this.add(paperCard, amount);
         } else {
