@@ -249,6 +249,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             }
         } else {
             CardEdition e = editions.get(setCode);
+            if (e == null)
+                return;  // wrong set code - nothing we can do here!
             List<CardInSet> cardsInSet = e.getCardInSet(cardName);  // empty collection if not present
             for (CardInSet cis : cardsInSet) {
                 addSetCard(e, cis, cr);
