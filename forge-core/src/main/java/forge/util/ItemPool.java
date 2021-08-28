@@ -31,7 +31,9 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 import forge.item.InventoryItem;
+import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 
 /**
  * <p>
@@ -137,30 +139,26 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
         return count;
     }
 
-    public final <U extends InventoryItem> int countAll(Predicate<U> condition){
+    public int countAll(Predicate<T> condition){
         int count = 0;
-        Iterable<T> matchingKeys = Iterables.filter(this.items.keySet(), new Predicate<T>() {
-            @Override
-            public boolean apply(T item) {
-                return condition.apply((U)item);
-            }
-        });
-        for (T key : matchingKeys)
-            count += this.items.get(key);
+        for (Integer v : Maps.filterKeys(this.items, condition).values())
+            count += v;
         return count;
+
     }
 
     @SuppressWarnings("unchecked")
     public final <U extends InventoryItem> int countAll(Predicate<U> condition, Class<U> cls) {
         int count = 0;
-        Iterable<T> matchingKeys = Iterables.filter(this.items.keySet(), new Predicate<T>() {
+        Map<T, Integer> matchingKeys = Maps.filterKeys(this.items, new Predicate<T>() {
             @Override
             public boolean apply(T item) {
-                return cls.isInstance(item) && condition.apply((U)item);
+                return cls.isInstance(item) && (condition.apply((U)item));
             }
         });
-        for (T key : matchingKeys)
-            count += this.items.get(key);
+        for (Integer i : matchingKeys.values()) {
+            count += i;
+        }
         return count;
     }
 
