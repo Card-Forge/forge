@@ -2183,7 +2183,6 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         assertNotNull(shivanDragonCard);
         assertEquals(shivanDragonCard.getName(), cardNameShivanDragon);
         assertEquals(shivanDragonCard.getEdition(), originalArtShivanDragonEdition);
-
     }
 
 
