@@ -61,18 +61,18 @@ public interface ICardDatabase extends Iterable<PaperCard> {
     PaperCard getCardFromEditions(String cardName, CardArtPreference artPreference);
     PaperCard getCardFromEditions(String cardName, CardArtPreference artPreference, Predicate<PaperCard> filter);
     PaperCard getCardFromEditions(String cardName, CardArtPreference artPreference, int artIndex);
-    PaperCard getCardFromEditions(String cardName, CardArtPreference artPreference, int artiIndex, Predicate<PaperCard> filter);
+    PaperCard getCardFromEditions(String cardName, CardArtPreference artPreference, int artIndex, Predicate<PaperCard> filter);
 
     // 4. Specialised Card Lookup on CardArtPreference Selection and Release Date
-    PaperCard getCardFromEditionsReleasedBefore(String cardName, Date releaseDate);
-    PaperCard getCardFromEditionsReleasedBefore(String cardName, int artIndex, Date releaseDate);
     PaperCard getCardFromEditionsReleasedBefore(String cardName, CardArtPreference artPreference, Date releaseDate);
+    PaperCard getCardFromEditionsReleasedBefore(String cardName, CardArtPreference artPreference, Date releaseDate, Predicate<PaperCard> filter);
     PaperCard getCardFromEditionsReleasedBefore(String cardName, CardArtPreference artPreference, int artIndex, Date releaseDate);
+    PaperCard getCardFromEditionsReleasedBefore(String cardName, CardArtPreference artPreference, int artIndex, Date releaseDate, Predicate<PaperCard> filter);
 
-    PaperCard getCardFromEditionsReleasedAfter(String cardName, Date releaseDate);
-    PaperCard getCardFromEditionsReleasedAfter(String cardName, int artIndex, Date releaseDate);
     PaperCard getCardFromEditionsReleasedAfter(String cardName, CardArtPreference artPreference, Date releaseDate);
+    PaperCard getCardFromEditionsReleasedAfter(String cardName, CardArtPreference artPreference, Date releaseDate, Predicate<PaperCard> filter);
     PaperCard getCardFromEditionsReleasedAfter(String cardName, CardArtPreference artPreference, int artIndex, Date releaseDate);
+    PaperCard getCardFromEditionsReleasedAfter(String cardName, CardArtPreference artPreference, int artIndex, Date releaseDate, Predicate<PaperCard> filter);
 
 
 
