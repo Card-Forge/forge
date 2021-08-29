@@ -435,7 +435,7 @@ public class CardPool extends ItemPool<PaperCard> {
 
     public String toCardList(String separator) {
         List<Entry<PaperCard, Integer>> main2sort = Lists.newArrayList(this);
-        Collections.sort(main2sort, ItemPoolSorter.BY_NAME_THEN_SET);
+        main2sort.sort(ItemPoolSorter.BY_NAME_THEN_SET);
         final CardDb commonDb = StaticData.instance().getCommonCards();
         StringBuilder sb = new StringBuilder();
 
@@ -463,7 +463,7 @@ public class CardPool extends ItemPool<PaperCard> {
      */
     public CardPool getFilteredPool(Predicate<PaperCard> predicate) {
         CardPool filteredPool = new CardPool();
-        Iterator<PaperCard> cardsInPool = (Iterator<PaperCard>) this.items.keySet();
+        Iterator<PaperCard> cardsInPool = this.items.keySet().iterator();
         while (cardsInPool.hasNext()){
             PaperCard c = cardsInPool.next();
             if (predicate.apply(c))
