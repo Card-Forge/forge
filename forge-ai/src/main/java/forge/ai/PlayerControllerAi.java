@@ -1292,6 +1292,13 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
+    public Card chooseDungeon(Player player, List<PaperCard> dungeonCards, String message) {
+        //todo AI
+        int i = MyRandom.getRandom().nextInt(dungeonCards.size());
+        return Card.fromPaperCard(dungeonCards.get(i), player);
+    }
+
+    @Override
     public List<Card> chooseCardsForSplice(SpellAbility sa, List<Card> cards) {
         // sort from best to worst
         CardLists.sortByCmcDesc(cards);
