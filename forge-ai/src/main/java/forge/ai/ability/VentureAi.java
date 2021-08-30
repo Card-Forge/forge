@@ -2,10 +2,8 @@ package forge.ai.ability;
 
 import com.google.common.collect.Lists;
 import forge.ai.AiPlayDecision;
-import forge.ai.AiProps;
 import forge.ai.PlayerControllerAi;
 import forge.ai.SpellAbilityAi;
-import forge.card.ICardFace;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
@@ -52,24 +50,4 @@ public class VentureAi extends SpellAbilityAi {
         return Aggregates.random(spells); // If we're here, we should choose at least something, so choose a random thing then
     }
 
-    // AI that chooses which dungeon to venture into
-    @Override
-    public String chooseCardName(Player ai, SpellAbility sa, List<ICardFace> faces) {
-        // TODO: improve the conditions that define which dungeon is a viable option to choose
-        List<String> dungeonNames = Lists.newArrayList();
-        for (ICardFace face : faces) {
-            dungeonNames.add(face.getName());
-        }
-
-        // Don't choose Tomb of Annihilation when life in danger unless we can win right away or can't lose for 0 life
-        if (ai.getController().isAI()) { // FIXME: is this needed? Can simulation ever run this for a non-AI player?
-            int lifeInDanger = (((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.AI_IN_DANGER_THRESHOLD));
-            if ((ai.getLife() <= lifeInDanger && !ai.cantLoseForZeroOrLessLife())
-                    && !(ai.getLife() > 1 && ai.getWeakestOpponent().getLife() == 1)) {
-                dungeonNames.remove("Tomb of Annihilation");
-            }
-        }
-
-        return Aggregates.random(dungeonNames);
-    }
 }
