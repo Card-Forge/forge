@@ -238,7 +238,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         System.out.println("[LOG]: (Lazy) Loading Card: " + cardName);
         rulesByName.put(cardName, cr);
         boolean reIndexNecessary = false;
-        if ((setCode == null) || setCode.length() == 0 || setCode.equals(CardEdition.UNKNOWN.getCode())) {
+        CardEdition ed = editions.get(setCode);
+        if (ed == null || ed.equals(CardEdition.UNKNOWN)) {
             // look for all possible editions
             for (CardEdition e : editions) {
                 List<CardInSet> cardsInSet = e.getCardInSet(cardName);  // empty collection if not present
@@ -248,10 +249,9 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 }
             }
         } else {
-            CardEdition e = editions.get(setCode);
-            List<CardInSet> cardsInSet = e.getCardInSet(cardName);  // empty collection if not present
+            List<CardInSet> cardsInSet = ed.getCardInSet(cardName);  // empty collection if not present
             for (CardInSet cis : cardsInSet) {
-                addSetCard(e, cis, cr);
+                addSetCard(ed, cis, cr);
                 reIndexNecessary = true;
             }
         }

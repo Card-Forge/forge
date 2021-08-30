@@ -89,4 +89,24 @@ public class CardDbTestLazyCardLoading extends ForgeCardMockTestCase {
         assertNotNull(aetherVialCard);
         assertEquals(aetherVialCard.getName(), expectedCardName);
     }
+
+    @Test
+    public void tesLoadAndGetUnsupportedCardHavingWrongSetCode(){
+        String cardName = "Dominating Licid";
+        String wrongSetCode = "AA";
+        String expectedSetCode = "EXO";  // Exodus
+        CardRarity expectedCardRarity = CardRarity.Rare;
+
+        PaperCard dominatingLycidCard = this.cardDb.getCard(cardName);
+        assertNull(dominatingLycidCard);
+
+        // Load the Card (just card name
+        FModel.getMagicDb().attemptToLoadCard(cardName, wrongSetCode);
+
+        dominatingLycidCard = this.cardDb.getCard(cardName);
+        assertNotNull(dominatingLycidCard);
+        assertEquals(dominatingLycidCard.getName(), cardName);
+        assertEquals(dominatingLycidCard.getEdition(), expectedSetCode);
+        assertEquals(dominatingLycidCard.getRarity(), expectedCardRarity);
+    }
 }

@@ -85,6 +85,7 @@ public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButt
                 buttonMap.get(statTypes).setText(String.valueOf(count));
             }
         }
+
         getWidget().revalidate();
     }
 }

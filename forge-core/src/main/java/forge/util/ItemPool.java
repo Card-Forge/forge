@@ -30,7 +30,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
-import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 import forge.item.InventoryItem;
 
 /**
@@ -137,27 +137,26 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
         return count;
     }
 
-    public final int countAll(Predicate<T> condition) {
+    public int countAll(Predicate<T> condition){
         int count = 0;
-        for (Entry<T, Integer> e : this) {
-            if (condition.apply(e.getKey())) {
-                count += e.getValue();
-            }
-        }
+        for (Integer v : Maps.filterKeys(this.items, condition).values())
+            count += v;
         return count;
+
     }
 
     @SuppressWarnings("unchecked")
     public final <U extends InventoryItem> int countAll(Predicate<U> condition, Class<U> cls) {
         int count = 0;
-        Iterable<T> matchingKeys = Iterables.filter(this.items.keySet(), new Predicate<T>() {
+        Map<T, Integer> matchingKeys = Maps.filterKeys(this.items, new Predicate<T>() {
             @Override
             public boolean apply(T item) {
-                return cls.isInstance(item) && condition.apply((U)item);
+                return cls.isInstance(item) && (condition.apply((U)item));
             }
         });
-        for (T key : matchingKeys)
-            count += this.items.get(key);
+        for (Integer i : matchingKeys.values()) {
+            count += i;
+        }
         return count;
     }
 
