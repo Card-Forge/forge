@@ -4,10 +4,10 @@ Types:Creature Horse Illusion
 PT:4/3
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile another target creature you control until CARDNAME leaves the battlefield.
-SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control | RememberChanged$ True | Duration$ UntilHostLeavesPlay
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control | Duration$ UntilHostLeavesPlay
 SVar:PlayMain1:TRUE
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, create a tapped and attacking token that's a copy of the exiled card, except it's an Illusion in addition to its other types. Sacrifice that token at end of combat.
-SVar:TrigCopy:DB$ CopyPermanent | Defined$ UntilLeavesBattlefield | TokenTapped$ True | TokenAttacking$ True | AddTypes$ Illusion | AtEOT$ SacrificeCombat
+SVar:TrigCopy:DB$ CopyPermanent | Defined$ ValidExile Card.ExiledWithSource | TokenTapped$ True | TokenAttacking$ True | AddTypes$ Illusion | AtEOT$ SacrificeCombat
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Sacrifice
 Oracle:Flash\nWhen Phantom Steed enters the battlefield, exile another target creature you control until Phantom Steed leaves the battlefield.\nWhenever Phantom Steed attacks, create a tapped and attacking token that's a copy of the exiled card, except it's an Illusion in addition to its other types. Sacrifice that token at end of combat.
