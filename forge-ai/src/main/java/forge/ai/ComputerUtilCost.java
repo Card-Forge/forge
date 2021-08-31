@@ -233,14 +233,12 @@ public class ComputerUtilCost {
     }
 
     public static boolean checkForManaSacrificeCost(final Player ai, final Cost cost, final Card source, final SpellAbility sourceAbility) {
-        if (cost == null) {
+        // TODO cheating via autopay can still happen, need to get the real ai player from controlledBy
+        if (cost == null || !ai.isAI()) {
             return true;
         }
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostSacrifice) {
-                if (!ai.isAI()) {
-                    return false;
-                }
                 CardCollection list = new CardCollection();
                 final CardCollection exclude = new CardCollection();
                 if (AiCardMemory.getMemorySet(ai, MemorySet.PAYS_SAC_COST) != null) {

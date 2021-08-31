@@ -1,0 +1,7 @@
+Name:Hapato's Might
+ManaCost:2 B
+Types:Instant
+A:SP$ ChooseNumber | Defined$ You | Min$ 0 | Max$ 6 | Random$ True | SubAbility$ DBPump | StackDescription$ None | SpellDescription$ Target creature gets +X/+0 until end of turn, where X is a number from 0 to 6 chosen at random.
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ X | StackDescription$ {c:Targeted} gets +X/+0 until end of turn, where X is a number from 0 to 6 chosen at random.
+SVar:X:Count$ChosenNumber
+Oracle:Target creature gets +X/+0 until end of turn, where X is a number from 0 to 6 chosen at random.

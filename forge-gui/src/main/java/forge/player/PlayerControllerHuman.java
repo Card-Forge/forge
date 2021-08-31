@@ -3236,6 +3236,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
+    public Card chooseDungeon(Player player, List<PaperCard> dungeonCards, String message) {
+        PaperCard dungeon = getGui().one(message, dungeonCards);
+        return Card.fromPaperCard(dungeon, player);
+    }
+
+    @Override
     public List<Card> chooseCardsForSplice(SpellAbility sa, List<Card> cards) {
         GameEntityViewMap<Card, CardView> gameCacheSplice = GameEntityView.getMap(cards);
 

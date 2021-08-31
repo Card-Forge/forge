@@ -8,7 +8,6 @@ import com.google.common.base.Predicates;
 
 import forge.StaticData;
 import forge.card.CardRulesPredicates;
-import forge.card.ICardFace;
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
@@ -45,13 +44,9 @@ public class VentureEffect  extends SpellAbilityEffect {
         // Create a new dungeon card chosen by player in command zone.
         List<PaperCard> dungeonCards = StaticData.instance().getVariantCards().getAllCards(
             Predicates.compose(CardRulesPredicates.Presets.IS_DUNGEON, PaperCard.FN_GET_RULES));
-        List<ICardFace> faces = new ArrayList<>();
-        for (PaperCard pc : dungeonCards) {
-            faces.add(pc.getRules().getMainPart());
-        }
+
         String message = Localizer.getInstance().getMessage("lblChooseDungeon");
-        String chosen = player.getController().chooseCardName(sa, faces, message);
-        Card dungeon = Card.fromPaperCard(StaticData.instance().getVariantCards().getUniqueByName(chosen), player);
+        Card dungeon = player.getController().chooseDungeon(player, dungeonCards, message);
 
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         game.getAction().moveTo(ZoneType.Command, dungeon, sa);
