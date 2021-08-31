@@ -2,9 +2,23 @@
 		"startPointX": 0.31,
 		"startPointY": 0.78,
 		"name": "red",
-		"noiceWeight": 0.5,
+		"noiseWeight": 0.5,
 		"distWeight": 1.5,             
-    "tileset":"world/tilesets/red.atlas",
+    "tilesetName":"Red",
+    "tilesetAtlas":"world/tilesets/Terrain.atlas",      
+    "terrain":[
+    {
+    "spriteName":"Red_1",
+    "min": 0,           
+    "max": 0.2,           
+    "resolution": 10, 
+    },    {
+    "spriteName":"Red_2",
+    "min": 0.8,           
+    "max": 1.0,           
+    "resolution": 10, 
+    }
+    ],
 		"width": 0.5,
 		"height": 0.5,
 		"color": "e53b28",

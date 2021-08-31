@@ -2,9 +2,23 @@
 "startPointX": 0.5,
 		"startPointY": 0.22,
 		"name": "white",
-			"noiceWeight": 0.5,
+			"noiseWeight": 0.5,
 			"distWeight": 1.5,        
-    "tileset":"world/tilesets/white.atlas",
+    "tilesetName":"White",
+    "tilesetAtlas":"world/tilesets/Terrain.atlas",   
+    "terrain":[
+    {
+    "spriteName":"White_1",
+    "min": 0,           
+    "max": 0.2,           
+    "resolution": 10, 
+    },    {
+    "spriteName":"White_2",
+    "min": 0.8,           
+    "max": 1.0,           
+    "resolution": 10, 
+    }
+    ],
 			"width": 0.5,
 			"height": 0.5,
 		"color": "efe697" ,

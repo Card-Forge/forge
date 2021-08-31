@@ -11,7 +11,7 @@
     }   
     ,            
     {
-      "type" : "Window",      
+      "type" : "Scroll",      
       "style":"paper",       
       "x": 10, 
       "y": 10 

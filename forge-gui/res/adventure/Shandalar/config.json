@@ -1,0 +1,15 @@
+{		
+    "screenWidth": 480,
+		"screenHeight": 270, 
+		"font": "skin/MiKrollFantasy.ttf",      
+		"skin": "skin/uiskin.json", 
+		"fontColor": "ffffff"   ,
+    "starterDecks": 
+    [ 
+    "decks/starter/Angels.dck",
+    "decks/starter/BlackRush2.dck",
+    "decks/starter/BlueControl.dck",
+    "decks/starter/Goblins.dck",
+    "decks/starter/Stompy2.dck"
+    ] 
+}

@@ -3,11 +3,14 @@
 "height": 2000,
 "playerStartPosY": 0.5,
 "playerStartPosX": 0.5,    
-"noiceZoomBiom": 30,
-"noiceZoomObject":30,
+"noiseZoomBiom": 30, 
 "tileSize": 16,      
 "maxRoadDistance": 300,
-"roadTileset":"world/tilesets/road.atlas",
+"roadTileset":{ 
+    "tilesetName":"Road",
+    "tilesetAtlas":"world/tilesets/Terrain.atlas", 
+		"color": "ffffff" 
+},
 "biomSprites":"world/sprites/mapsprites.json"
 "biomNames": [ "world/base.json","world/waste.json","world/white.json","world/blue.json","world/black.json","world/red.json","world/green.json"]
 }

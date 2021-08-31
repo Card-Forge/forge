@@ -296,6 +296,12 @@
 	"big": {
 		"parent": "default",
 		"font": "blackbig"
+	},
+	"white": {
+		"font": "default"
+	},
+	"whiteBig": {
+		"font": "big"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle": {
@@ -322,7 +328,7 @@
 		"background": "windowMain10Patch"
 	},
 	"paper": {
-		"background": "map"
+		"background": "paper10Patch"
 	},
 	"gold": {
 		"background": "9patch4"

@@ -1,18 +1,120 @@
 [{                                    
+"name":"Gold",
+"sprite":"sprites/gold.atlas",  
+  "rewards": [
+       {
+      "type": "gold", 
+      "count":10,
+      "addMaxCount":90
+    }
+  ]
+},{                                    
+"name":"Treasure",
+"sprite":"sprites/Treasure.atlas",  
+  "rewards": [
+    {
+      "type": "randomCard", 
+      "count":2,    
+      "addMaxCount":8
+    } 
+  ]
+},{                                    
 "name":"Golem",
 "sprite":"sprites/golem.atlas",
 "deck":  "decks/waste/golem.dck",
 "spawnRate":0.1,      
 "life":1,                    
-"speed":2,
-"difficulty":0.1
+"speed":20,
+"difficulty":0.1,
+  "rewards": [
+    {
+      "type": "randomCard",
+      "probability": 1,
+      "count":1,
+      "colors": ["red"],
+      "rarity": ["rare"],
+      "editions": ["M22","M21"]
+    },{
+      "type": "life",
+      "probability": 1,
+      "count":1,
+      "addMaxCount":3
+    }, {
+      "type": "deckCard",
+      "probability": 1,
+      "count":3,
+      "addMaxCount":3
+    }, {
+      "type": "card",
+      "probability": 1,
+      "count":2,
+      "cardName": "Black Lotus"
+    },    {
+      "type": "gold",
+      "probability": 1,
+      "count":10,
+      "addMaxCount":90
+    }
+  ]
 },{                                    
 "name":"Goblin",
 "sprite":"sprites/goblin.atlas",
 "deck":  "decks/red/Goblins.dck",
 "spawnRate":0.1,      
 "life":1,                    
-"speed":2,
-"difficulty":0.1
-}
+"speed":20,
+"difficulty":0.1   ,  
+  "rewards": [
+    {
+      "type": "randomCard", 
+      "count":2,    
+      "addMaxCount":8
+    } 
+  ]
+ },{                                    
+"name":"Vampire",
+"sprite":"sprites/Vampire.atlas",
+"deck":  "decks/black/Vampire.dck",
+"spawnRate":0.1,      
+"life":1,                    
+"speed":20,
+"difficulty":0.1   ,  
+  "rewards": [
+    {
+      "type": "randomCard", 
+      "count":2,    
+      "addMaxCount":8
+    } 
+  ]
+  } ,{                                    
+"name":"Zombie",
+"sprite":"sprites/Zombie.atlas",
+"deck":  "decks/black/Zombie.dck",
+"spawnRate":0.1,      
+"life":1,                    
+"speed":20,
+"difficulty":0.1   ,  
+  "rewards": [
+    {
+      "type": "randomCard", 
+      "count":2,    
+      "addMaxCount":8
+    } 
+  ]
+  },{                                    
+"name":"Skeleton",
+"sprite":"sprites/Skeleton.atlas",
+"deck":  "decks/black/Skeleton.dck",
+"spawnRate":0.1,      
+"life":1,                    
+"speed":20,
+"difficulty":0.1   ,  
+  "rewards": [
+    {
+      "type": "randomCard", 
+      "count":2,    
+      "addMaxCount":8
+    } 
+  ]
+  }
 ]

@@ -2,13 +2,27 @@
     "startPointX": 0.22,
 		"startPointY": 0.43,
 		"name": "green",
-		"noiceWeight": 0.5,
+		"noiseWeight": 0.5,
 		"distWeight": 1.5,            
-    "tileset":"world/tilesets/green.atlas",
+    "tilesetName":"Green",
+    "tilesetAtlas":"world/tilesets/Terrain.atlas",  
+    "terrain":[
+    {
+    "spriteName":"Green_1",
+    "min": 0,           
+    "max": 0.2,           
+    "resolution": 10, 
+    },    {
+    "spriteName":"Green_2",
+    "min": 0.8,           
+    "max": 1.0,           
+    "resolution": 10, 
+    }
+    ],
 		"width": 0.5,
 		"height": 0.5,
 		"color": "59a650"  ,
     "spriteNames":[ "WoodTree","WoodTree2","Bush","Stump","Moss","Stone","Flower","Wood"]      ,
     "enemies":[ "Goblin"]  ,
-    "pointsOfIntrest":[ "WasteTown"] 
+    "pointsOfInterest":[ "WasteTown"]
 }

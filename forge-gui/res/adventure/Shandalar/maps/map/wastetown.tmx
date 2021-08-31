@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="27">
+<map version="1.5" tiledversion="1.7.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="48">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -16,26 +16,26 @@
   </data>
  </layer>
  <layer id="3" name="Foreground" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYCAeTOEgQTESmExAHyF5XIBc94DADhYGBmka4l0s2P0Xykq+m4kB2MwHhdNA2ItPHB/QFmJg0BEijg0z/ysee/n5GRgE+Anb6w40z0OIODay+aDwhcUxun8duTDtec+OYNcIIdRUIrGnIrGnI7GJDecHQPXsnNjxUijtjKQGF9sFj71f8bgHBOyBYe6AFO4gP1QLIeJuChK7ColdIYQZv4T8iwyigXbGQO3V40SEHanxi618IZSe2Tgxw44UQI18hC3NEWsvellMqr0ajOTZS6w4LntJBbjM/8JKfPkOspfUeuQbmr3o4U2oTgO5G2QvJeU5yE4ASdk11g==
+   eJxjYCAeTOEgQTESmExAHyF5XIBc94DADhYGBmka4l0s2P0Xykq+m4kB2MwHhdNA2ItPnNr2fsVjLz8/A4MAP2Gz3IUYGDyE8LOxmQ8KX1gco/vXkQvTnvfsuNXgYmOzF5/4A6Bedk7seCmUfoikBht7GSd+e7/icQ82gM0/hNSRk66igXEdA41vPU6EeYTiF91ebOULIf+yIYWzCxemf7CxKfUvOnDiIi5+H2GxF70sJjV+NRiJV4/PfFqkK2LM/8JKfPkOspfUeuQbmr3o4U2oTgO5G2QvJeUqyE4Au+wy+Q==
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2BwAW0hBgYdIfzsUTD4gT0/A4MDP6b4aPyOglEwsAAA60QDgA==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="10" template="../obj/entry.tx" x="215.027" y="249.563"/>
-  <object id="12" template="../obj/townCenter.tx" x="103.75" y="100.848">
-   <properties>
-    <property name="test2" value="2"/>
-   </properties>
-  </object>
-  <object id="13" template="../obj/shop.tx" x="296.25" y="102.75"/>
-  <object id="14" template="../obj/inn.tx" x="166.722" y="184.366"/>
-  <object id="15" template="../obj/shop.tx" x="247.75" y="102.5"/>
-  <object id="16" template="../obj/shop.tx" x="344.25" y="103.75"/>
-  <object id="17" template="../obj/shop.tx" x="248" y="174.75"/>
-  <object id="18" template="../obj/shop.tx" x="392.5" y="104.5"/>
-  <object id="19" template="../obj/shop.tx" x="296" y="174.75"/>
-  <object id="20" template="../obj/shop.tx" x="344" y="174.75"/>
-  <object id="21" template="../obj/shop.tx" x="390.75" y="175.25"/>
-  <object id="26" template="../obj/exit.tx" x="207.551" y="255.086"/>
+  <object id="38" template="../obj/entryUp.tx" x="208" y="272"/>
+  <object id="41" template="../obj/Shop.tx" x="241" y="113"/>
+  <object id="42" template="../obj/Shop.tx" x="289" y="113"/>
+  <object id="43" template="../obj/Shop.tx" x="337" y="113"/>
+  <object id="44" template="../obj/Shop.tx" x="241" y="177"/>
+  <object id="45" template="../obj/Shop.tx" x="288" y="177"/>
+  <object id="46" template="../obj/Shop.tx" x="337" y="177"/>
+  <object id="47" template="../obj/Inn.tx" x="150" y="177"/>
  </objectgroup>
 </map>
