@@ -67,7 +67,7 @@ public class SpellShopManager extends ItemManager<InventoryItem> {
                     CardRenderer.drawCardListItem(g, font, foreColor, (PaperCard)value.getKey(), value.getValue(), getItemSuffix(value), x, y, w, h, compactModeHandler.isCompactMode());
                 }
                 else {
-                    g.drawText(value.getValue().toString() + " " + value.getKey().toString(), font, foreColor, x + cardArtWidth, y, w - cardArtWidth, h, false, Align.left, true);
+                    g.drawText(value.getValue() + " " + value.getKey().toString(), font, foreColor, x + cardArtWidth, y, w - cardArtWidth, h, false, Align.left, true);
                     Texture image = ImageCache.getImage(value.getKey());
                     if (image != null) {
                         float imageRatio = (float)image.getWidth() / (float)image.getHeight();

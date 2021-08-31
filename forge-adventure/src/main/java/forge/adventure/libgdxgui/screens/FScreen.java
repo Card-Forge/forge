@@ -10,7 +10,6 @@ import forge.adventure.libgdxgui.assets.FSkinColor;
 import forge.adventure.libgdxgui.assets.FSkinFont;
 import forge.adventure.libgdxgui.assets.FSkinTexture;
 import forge.adventure.libgdxgui.menu.FPopupMenu;
-import forge.adventure.libgdxgui.screens.home.HomeScreen;
 import forge.adventure.libgdxgui.screens.settings.SettingsScreen;
 import forge.adventure.libgdxgui.toolbox.FContainer;
 import forge.adventure.libgdxgui.toolbox.FDisplayObject;
@@ -110,7 +109,7 @@ public abstract class FScreen extends forge.adventure.libgdxgui.toolbox.FContain
 
     //get screen to serve as the backdrop for this screen when in landscape mode
     public FScreen getLandscapeBackdropScreen() {
-        return HomeScreen.instance; //use home screen as backdrop when in landscape mode by default
+        return null; //use home screen as backdrop when in landscape mode by default
     }
 
     @Override
@@ -293,7 +292,7 @@ public abstract class FScreen extends forge.adventure.libgdxgui.toolbox.FContain
         @Override
         public float doLandscapeLayout(float screenWidth, float screenHeight) {
             if (displaySidebarForLandscapeMode()) {
-                float width = screenHeight * HomeScreen.MAIN_MENU_WIDTH_FACTOR * 0.8f;
+                float width = screenHeight  * 0.8f;
                 setBounds(screenWidth - width, 0, width, screenHeight);
                 return width;
             }
@@ -375,7 +374,7 @@ public abstract class FScreen extends forge.adventure.libgdxgui.toolbox.FContain
     }
 
     protected boolean allowBackInLandscapeMode() {
-        return getLandscapeBackdropScreen() != HomeScreen.instance; //don't allow going back if home screen is backdrop by default
+        return false; //don't allow going back if home screen is backdrop by default
     }
 
     @Override

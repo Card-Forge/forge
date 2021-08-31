@@ -1,65 +1,45 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
 import forge.adventure.AdventureApplicationAdapter;
-import forge.adventure.util.UIActor;
 import forge.adventure.world.WorldSave;
 
-public class StartScene extends Scene {
-    UIActor ui;
-    Stage stage;
+public class StartScene extends UIScene {
+
     Actor saveButton;
     Actor resumeButton;
 
-    public StartScene() {
+    public StartScene()
+    {
+        super("ui/startmenu.json");
 
-    }
-
-    @Override
-    public void dispose() {
-        if(stage!=null)
-            stage.dispose();
-    }
-
-    @Override
-    public void render() {
-
-        //Batch.getProjectionMatrix().setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        Gdx.gl.glClearColor(1, 0, 1, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        stage.act(Gdx.graphics.getDeltaTime());
-        stage.draw();
-        //Batch.end();
     }
 
     public boolean NewGame() {
-        AdventureApplicationAdapter.CurrentAdapter.SwitchScene(SceneType.NewGameScene.instance);
+        AdventureApplicationAdapter.instance.switchScene(SceneType.NewGameScene.instance);
         return true;
     }
 
     public boolean Save() {
-        ((SaveLoadScene) SceneType.SaveLoadScene.instance).SetSaveGame(true);
-        AdventureApplicationAdapter.CurrentAdapter.SwitchScene(SceneType.SaveLoadScene.instance);
+        ((SaveLoadScene) SceneType.SaveLoadScene.instance).setSaveGame(true);
+        AdventureApplicationAdapter.instance.switchScene(SceneType.SaveLoadScene.instance);
         return true;
     }
 
     public boolean Load() {
-        ((SaveLoadScene) SceneType.SaveLoadScene.instance).SetSaveGame(false);
-        AdventureApplicationAdapter.CurrentAdapter.SwitchScene(SceneType.SaveLoadScene.instance);
+        ((SaveLoadScene) SceneType.SaveLoadScene.instance).setSaveGame(false);
+        AdventureApplicationAdapter.instance.switchScene(SceneType.SaveLoadScene.instance);
         return true;
     }
 
     public boolean Resume() {
-        AdventureApplicationAdapter.CurrentAdapter.SwitchScene(SceneType.GameScene.instance);
+        AdventureApplicationAdapter.instance.switchToLast();
         return true;
     }
 
     public boolean settings() {
-        AdventureApplicationAdapter.CurrentAdapter.SwitchScene(forge.adventure.scene.SceneType.SettingsScene.instance);
+        AdventureApplicationAdapter.instance.switchScene(forge.adventure.scene.SceneType.SettingsScene.instance);
         return true;
     }
 
@@ -69,11 +49,11 @@ public class StartScene extends Scene {
     }
 
     @Override
-    public void Enter() {
+    public void enter() {
 
 
-        saveButton.setVisible(WorldSave.getCurrentSave() != null);
-        resumeButton.setVisible(WorldSave.getCurrentSave() != null);
+        saveButton.setVisible(WorldSave.getCurrentSave().getWorld().getData() != null);
+        resumeButton.setVisible(WorldSave.getCurrentSave().getWorld().getData() != null);
         Gdx.input.setInputProcessor(stage); //Start taking input from the ui
     }
 
@@ -84,9 +64,8 @@ public class StartScene extends Scene {
     }
 
     @Override
-    public void ResLoaded() {
-        stage = new Stage(new StretchViewport(GetIntendedWidth(), GetIntendedHeight()));
-        ui = new UIActor(AdventureApplicationAdapter.CurrentAdapter.GetRes().GetFile("ui/startmenu.json"));
+    public void resLoaded() {
+        super.resLoaded();
 
         ui.onButtonPress("Start", () -> NewGame());
         ui.onButtonPress("Load", () -> Load());
@@ -100,6 +79,5 @@ public class StartScene extends Scene {
         ui.onButtonPress("Exit", () -> Exit());
         saveButton.setVisible(false);
         resumeButton.setVisible(false);
-        stage.addActor(ui);
     }
 }

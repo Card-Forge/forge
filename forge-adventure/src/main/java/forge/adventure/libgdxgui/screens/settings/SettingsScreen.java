@@ -6,7 +6,6 @@ import forge.adventure.libgdxgui.assets.FSkinColor.Colors;
 import forge.adventure.libgdxgui.assets.FSkinFont;
 import forge.adventure.libgdxgui.screens.FScreen;
 import forge.adventure.libgdxgui.screens.TabPageScreen;
-import forge.adventure.libgdxgui.screens.home.HomeScreen;
 import forge.adventure.libgdxgui.util.Utils;
 
 public class SettingsScreen extends TabPageScreen<SettingsScreen> {
@@ -64,9 +63,6 @@ public class SettingsScreen extends TabPageScreen<SettingsScreen> {
     }
 
     public FScreen getLandscapeBackdropScreen() {
-        if (fromHomeScreen) {
-            return HomeScreen.instance;
-        }
         return null;
     }
 

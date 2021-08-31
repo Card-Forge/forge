@@ -3,6 +3,7 @@ package forge.adventure.stage;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -11,7 +12,10 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import forge.adventure.AdventureApplicationAdapter;
 import forge.adventure.scene.Scene;
 import forge.adventure.scene.SceneType;
+import forge.adventure.util.Current;
+import forge.adventure.util.Res;
 import forge.adventure.util.UIActor;
+import forge.adventure.world.AdventurePlayer;
 import forge.adventure.world.WorldSave;
 
 public class GameHUD extends Stage {
@@ -32,7 +36,7 @@ public class GameHUD extends Stage {
         gameStage = gstage;
         stageViewport = new FitViewport(Scene.GetIntendedWidth(), Scene.GetIntendedHeight());
 
-        ui = new UIActor(AdventureApplicationAdapter.CurrentAdapter.GetRes().GetFile("ui/hud.json"));
+        ui = new UIActor(Res.CurrentRes.GetFile("ui/hud.json"));
         miniMap = ui.findActor("map");
 
         Pixmap player = new Pixmap(3, 3, Pixmap.Format.RGB888);
@@ -46,9 +50,11 @@ public class GameHUD extends Stage {
         ui.onButtonPress("deck", () -> openDeck());
         lifePoints = ui.findActor("lifePoints");
         lifePoints.setText("20/20");
+        AdventurePlayer.current().onLifeChange(()->  lifePoints.setText(AdventurePlayer.current().getLife() +"/"+ AdventurePlayer.current().getMaxLife()));
         money = ui.findActor("money");
-        money.setText("3000");
+        WorldSave.getCurrentSave().getPlayer().onGoldChange(()->  money.setText(String.valueOf(AdventurePlayer.current().getGold()))) ;
         miniMap = ui.findActor("map");
+
         addActor(ui);
         addActor(miniMapPlayer);
     }
@@ -57,6 +63,21 @@ public class GameHUD extends Stage {
         return instance == null ? instance = new GameHUD(WorldStage.getInstance()) : instance;
     }
 
+    @Override
+    public boolean touchDown (int screenX, int screenY, int pointer, int button)
+    {
+        Vector2 c=new Vector2();
+        screenToStageCoordinates(c.set(screenX, screenY));
+
+        float coordx=(c.x-miniMap.getX())/miniMap.getWidth();
+        float coordy=(c.y-miniMap.getY())/miniMap.getHeight();
+        if(coordx>=0&&coordx<=1.0&&coordy>=0&&coordy<=1.0)
+        {
+            WorldStage.getInstance().GetPlayer().setPosition(coordx*WorldSave.getCurrentSave().getWorld().getWidthInPixels(),coordy*WorldSave.getCurrentSave().getWorld().getHeightInPixels());
+            return true;
+        }
+        return super.touchDown(screenX,screenY,  pointer,button);
+    }
 
     @Override
     public void draw() {
@@ -65,23 +86,28 @@ public class GameHUD extends Stage {
         int xPos = (int) gameStage.player.getX();
         act(Gdx.graphics.getDeltaTime()); //act the Hud
         super.draw(); //draw the Hud
-        int xposMini = (int) (((float) xPos / (float) WorldSave.getCurrentSave().world.GetTileSize() / (float) WorldSave.getCurrentSave().world.GetWidthInTiles()) * miniMap.getWidth());
-        int yposMini = (int) (((float) yPos / (float) WorldSave.getCurrentSave().world.GetTileSize() / (float) WorldSave.getCurrentSave().world.GetHeightInTiles()) * miniMap.getHeight());
+        int xposMini = (int) (((float) xPos / (float) WorldSave.getCurrentSave().getWorld().getTileSize() / (float) WorldSave.getCurrentSave().getWorld().getWidthInTiles()) * miniMap.getWidth());
+        int yposMini = (int) (((float) yPos / (float) WorldSave.getCurrentSave().getWorld().getTileSize() / (float) WorldSave.getCurrentSave().getWorld().getHeightInTiles()) * miniMap.getHeight());
         miniMapPlayer.setPosition(miniMap.getX() + xposMini - 1, miniMap.getY() + yposMini - 1);
     }
 
-    public void Enter() {//TODO leak
+    Texture miniMapTexture;
+    public void enter() {
 
+        if(miniMapTexture==null)
+        {
+            miniMapTexture=new Texture(WorldSave.getCurrentSave().getWorld().getBiomImage());
+        }
 
-        miniMap.setDrawable(new TextureRegionDrawable(new Texture(WorldSave.getCurrentSave().world.getBiomImage())));
-        avatar.setDrawable(new TextureRegionDrawable(WorldSave.getCurrentSave().player.avatar()));
+        miniMap.setDrawable(new TextureRegionDrawable(miniMapTexture));
+        avatar.setDrawable(new TextureRegionDrawable(Current.player().avatar()));
 
 
     }
 
     private Object openDeck() {
 
-        AdventureApplicationAdapter.CurrentAdapter.SwitchScene(SceneType.DeckEditScene.instance);
+        AdventureApplicationAdapter.instance.switchScene(SceneType.DeckEditScene.instance);
         return null;
     }
 

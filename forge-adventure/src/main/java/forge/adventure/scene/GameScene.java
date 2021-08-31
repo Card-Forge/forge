@@ -17,7 +17,15 @@ public class GameScene extends HudScene {
     }
 
     @Override
+    public void act(float delta) {
+
+        stage.act(delta);
+
+
+    }
+    @Override
     public void render() {
+
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.draw();
@@ -26,7 +34,7 @@ public class GameScene extends HudScene {
     }
 
     @Override
-    public void ResLoaded() {
+    public void resLoaded() {
 
 
     }

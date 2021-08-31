@@ -16,7 +16,6 @@ import forge.model.FModel;
 import forge.adventure.libgdxgui.screens.FScreen;
 import forge.adventure.libgdxgui.screens.TabPageScreen;
 import forge.adventure.libgdxgui.screens.TabPageScreen.TabPage;
-import forge.adventure.libgdxgui.screens.home.HomeScreen;
 import forge.adventure.libgdxgui.screens.match.MatchController;
 import forge.sound.SoundSystem;
 import forge.adventure.libgdxgui.toolbox.FCheckBox;
@@ -726,7 +725,6 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             @Override
             public FScreen getLandscapeBackdropScreen() {
                 if (SettingsScreen.launchedFromHomeScreen()) {
-                    return HomeScreen.instance;
                 }
                 return null;
             }

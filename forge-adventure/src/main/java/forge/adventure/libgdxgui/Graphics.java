@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
@@ -28,7 +29,7 @@ public class Graphics {
     private static final int GL_BLEND = GL20.GL_BLEND;
     private static final int GL_LINE_SMOOTH = 2848; //create constant here since not in GL20
 
-    private final SpriteBatch batch = new SpriteBatch();
+    private final Batch batch;
     private final ShapeRenderer shapeRenderer = new ShapeRenderer();
     private final Deque<Matrix4> Dtransforms = new ArrayDeque<>();
     private final Vector3 tmp = new Vector3();
@@ -38,7 +39,7 @@ public class Graphics {
     private int failedClipCount;
     private float alphaComposite = 1;
     private int transformCount = 0;
-    private String sVertex = "uniform mat4 u_projTrans;\n" +
+    private final String sVertex = "uniform mat4 u_projTrans;\n" +
             "\n" +
             "attribute vec4 a_position;\n" +
             "attribute vec2 a_texCoord0;\n" +
@@ -54,7 +55,7 @@ public class Graphics {
             "    v_texCoord = a_texCoord0;\n" +
             "    v_color = a_color;\n" +
             "}";
-    private String sFragment = "#ifdef GL_ES\n" +
+    private final String sFragment = "#ifdef GL_ES\n" +
             "precision mediump float;\n" +
             "precision mediump int;\n" +
             "#endif\n" +
@@ -106,7 +107,16 @@ public class Graphics {
     private final ShaderProgram shaderOutline = new ShaderProgram(sVertex, sFragment);
 
     public Graphics() {
+        batch = new SpriteBatch();
         ShaderProgram.pedantic = false;
+    }
+    public Graphics(Batch batch,float regionWidth0, float regionHeight0) {
+        this.batch=batch;bound(regionWidth0, regionHeight0);
+    }
+    public void bound(float regionWidth0, float regionHeight0) {
+        bounds = new Rectangle(0, 0, regionWidth0, regionHeight0);
+        regionHeight = regionHeight0;
+        visibleBounds = new Rectangle(bounds);
     }
 
     public void begin(float regionWidth0, float regionHeight0) {
@@ -132,7 +142,7 @@ public class Graphics {
     }
 
     public SpriteBatch getBatch() {
-        return batch;
+        return (SpriteBatch)batch;
     }
 
     public boolean startClip() {

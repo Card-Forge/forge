@@ -6,7 +6,9 @@ import forge.util.Localizer;
 
 
 public class FSpinner extends FTextField {
-    private int value, minValue, maxValue;
+    private int value;
+    private final int minValue;
+    private final int maxValue;
 
     public FSpinner(int minValue0, int maxValue0) {
         this(minValue0, maxValue0, minValue0);

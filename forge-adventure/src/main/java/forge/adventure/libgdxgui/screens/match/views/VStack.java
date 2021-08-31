@@ -238,7 +238,7 @@ public class VStack extends FDropDown {
         private final StackItemView stackInstance;
         private final Color foreColor, backColor;
         private String text;
-        private float preferredHeight;
+        private final float preferredHeight;
 
         private StackInstanceDisplay(StackItemView stackInstance0, float width) {
             stackInstance = stackInstance0;

@@ -6,7 +6,7 @@ import com.badlogic.gdx.audio.Music.OnCompletionListener;
 import forge.sound.IAudioMusic;
 
 public class AudioMusic implements IAudioMusic {
-    private Music music;
+    private final Music music;
 
     public AudioMusic(String filename) {
         music = Gdx.audio.newMusic(Gdx.files.absolute(filename));

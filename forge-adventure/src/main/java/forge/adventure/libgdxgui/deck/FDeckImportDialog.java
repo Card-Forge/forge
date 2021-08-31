@@ -81,7 +81,7 @@ public class FDeckImportDialog extends FDialog {
                             }
                         }
                         if (sb.length() > 0) {
-                            if (SOptionPane.showOptionDialog(Localizer.getInstance().getMessage("lblFollowingCardsCannotBeImported") + "\n\n" + sb.toString(), Localizer.getInstance().getMessage("lblImportRemainingCards"), SOptionPane.INFORMATION_ICON, importOrCancel) == 1) {
+                            if (SOptionPane.showOptionDialog(Localizer.getInstance().getMessage("lblFollowingCardsCannotBeImported") + "\n\n" + sb, Localizer.getInstance().getMessage("lblImportRemainingCards"), SOptionPane.INFORMATION_ICON, importOrCancel) == 1) {
                                 return;
                             }
                         }

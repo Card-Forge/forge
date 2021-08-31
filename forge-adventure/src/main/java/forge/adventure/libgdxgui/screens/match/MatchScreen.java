@@ -48,7 +48,7 @@ public class MatchScreen extends FScreen {
     public static FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
 
     private final Map<PlayerView, VPlayerPanel> playerPanels = Maps.newHashMap();
-    private List<VPlayerPanel> playerPanelsList;
+    private final List<VPlayerPanel> playerPanelsList;
     private final VGameMenu gameMenu;
     private final VPlayers players;
     private final VLog log;
@@ -56,7 +56,8 @@ public class MatchScreen extends FScreen {
     private final VDevMenu devMenu;
     private final FieldScroller scroller;
     private final VPrompt bottomPlayerPrompt, topPlayerPrompt;
-    private VPlayerPanel bottomPlayerPanel, topPlayerPanel;
+    private final VPlayerPanel bottomPlayerPanel;
+    private final VPlayerPanel topPlayerPanel;
     private AbilityEffect activeEffect;
 
     private ViewWinLose viewWinLose = null;
@@ -354,10 +355,7 @@ public class MatchScreen extends FScreen {
         }
         if(devMenu!=null) {
             if(devMenu.isVisible()){
-                if(viewWinLose == null)
-                    devMenu.setEnabled(true);
-                else
-                    devMenu.setEnabled(false);
+                devMenu.setEnabled(viewWinLose == null);
 
                 try {
                     //rollbackphase enable -- todo limit by gametype?

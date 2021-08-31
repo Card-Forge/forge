@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.Array;
 import forge.adventure.libgdxgui.Forge;
 import forge.adventure.libgdxgui.assets.FSkinImage.SourceFile;
 import forge.adventure.libgdxgui.card.CardFaceSymbols;
+import forge.adventure.util.Res;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
@@ -94,32 +95,7 @@ public class FSkin {
         //reset hd buttons/icons
         Forge.hdbuttons = false;
         Forge.hdstart = false;
-
-        //ensure skins directory exists
-        final FileHandle dir = Gdx.files.absolute(ForgeConstants.CACHE_SKINS_DIR);
-        if (!dir.exists() || !dir.isDirectory()) {
-            //if skins directory doesn't exist, point to internal assets/skin directory instead for the sake of the splash screen
-            preferredDir = Gdx.files.internal("fallback_skin");
-        }
-        else {
-            if (splashScreen != null) {
-                if (allSkins == null) { //initialize
-                    allSkins = new Array<>();
-                    allSkins.add("Default"); //init default
-                    final Array<String> skinDirectoryNames = getSkinDirectoryNames();
-                    for (final String skinDirectoryName : skinDirectoryNames) {
-                        allSkins.add(WordUtil.capitalize(skinDirectoryName.replace('_', ' ')));
-                    }
-                    allSkins.sort();
-                }
-            }
-
-            // Non-default (preferred) skin name and dir.
-            preferredDir = Gdx.files.absolute(preferredName.equals("default") ? ForgeConstants.BASE_SKINS_DIR + preferredName : ForgeConstants.CACHE_SKINS_DIR + preferredName);
-            if (!preferredDir.exists() || !preferredDir.isDirectory()) {
-                preferredDir.mkdirs();
-            }
-        }
+        preferredDir = Res.CurrentRes.GetFile("skin");
 
         FSkinTexture.BG_TEXTURE.load(); //load background texture early for splash screen
 

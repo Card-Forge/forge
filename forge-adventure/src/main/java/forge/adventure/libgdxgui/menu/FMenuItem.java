@@ -35,7 +35,7 @@ public class FMenuItem extends FDisplayObject implements IButton {
     private final FImage icon;
     private final FEventHandler handler;
     private boolean pressed, allowForIcon, selected, tabMode;
-    private float textWidth;
+    private final float textWidth;
     private TextRenderer textRenderer;
 
     public FMenuItem(String text0, FEventHandler handler0) {

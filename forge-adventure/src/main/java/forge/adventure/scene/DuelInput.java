@@ -2,14 +2,13 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.Input;
 import forge.adventure.libgdxgui.Forge;
-import forge.adventure.AdventureApplicationAdapter;
-import forge.gui.error.BugReporter;
 import forge.adventure.libgdxgui.screens.match.MatchController;
 import forge.adventure.libgdxgui.toolbox.FContainer;
 import forge.adventure.libgdxgui.toolbox.FDisplayObject;
 import forge.adventure.libgdxgui.toolbox.FGestureAdapter;
 import forge.adventure.libgdxgui.toolbox.FOverlay;
 import forge.adventure.libgdxgui.util.Utils;
+import forge.gui.error.BugReporter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,11 +18,13 @@ public class DuelInput extends FGestureAdapter {
     private static final List<FDisplayObject> potentialListeners = new ArrayList<>();
     private static char lastKeyTyped;
     private static boolean keyTyped, shiftKeyDown;
+    private final ForgeScene forgeScene;
     private final Forge.KeyInputAdapter keyInputAdapter = null;
     //mouseMoved and scrolled events for desktop version
     private int mouseMovedX, mouseMovedY;
 
-    public DuelInput() {
+    public DuelInput(ForgeScene forgeScene) {
+        this.forgeScene=forgeScene;
     }
 
     @Override
@@ -111,14 +112,14 @@ public class DuelInput extends FGestureAdapter {
 
         //base potential listeners on object containing touch down point
         for (FOverlay overlay : FOverlay.getOverlaysTopDown()) {
-            if (overlay.isVisibleOnScreen(AdventureApplicationAdapter.CurrentAdapter.getCurrentScene().forgeScreen())) {
+            if (overlay.isVisibleOnScreen(forgeScene.getScreen())) {
                 overlay.buildTouchListeners(x, y, potentialListeners);
                 if (overlay.preventInputBehindOverlay()) {
                     return;
                 }
             }
         }
-        AdventureApplicationAdapter.CurrentAdapter.getCurrentScene().buildTouchListeners(x, y, potentialListeners);
+        forgeScene.buildTouchListeners(x, y, potentialListeners);
     }
 
     @Override

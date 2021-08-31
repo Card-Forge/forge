@@ -1,18 +1,19 @@
 package forge.adventure.libgdxgui.screens;
 
 import com.badlogic.gdx.utils.Align;
+import forge.adventure.AdventureApplicationAdapter;
 import forge.adventure.libgdxgui.Forge;
 import forge.adventure.libgdxgui.Graphics;
 import forge.adventure.libgdxgui.assets.FImage;
 import forge.adventure.libgdxgui.assets.FSkinColor;
 import forge.adventure.libgdxgui.assets.FSkinColor.Colors;
 import forge.adventure.libgdxgui.assets.FSkinFont;
-import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.adventure.libgdxgui.menu.FPopupMenu;
-import forge.model.FModel;
 import forge.adventure.libgdxgui.toolbox.*;
 import forge.adventure.libgdxgui.toolbox.FEvent.FEventHandler;
 import forge.adventure.libgdxgui.util.Utils;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.model.FModel;
 
 public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
     public static boolean COMPACT_TABS = FModel.getPreferences().getPrefBoolean(FPref.UI_COMPACT_TABS);
@@ -181,7 +182,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
                 btnBack = add(new FLabel.Builder().icon(new BackIcon(BACK_BUTTON_WIDTH, BACK_BUTTON_WIDTH)).pressedColor(BTN_PRESSED_COLOR).align(Align.center).command(new FEventHandler() {
                     @Override
                     public void handleEvent(FEvent e) {
-                        Forge.back();
+                        AdventureApplicationAdapter.instance.switchToLast();
                     }
                 }).build());
             }

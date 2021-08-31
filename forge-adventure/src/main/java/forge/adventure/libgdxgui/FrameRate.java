@@ -18,8 +18,8 @@ public class FrameRate implements Disposable{
     long lastTimeCounted;
     private float sinceChange;
     private float frameRate;
-    private BitmapFont font;
-    private SpriteBatch batch;
+    private final BitmapFont font;
+    private final SpriteBatch batch;
     private OrthographicCamera cam;
 
     public FrameRate() {

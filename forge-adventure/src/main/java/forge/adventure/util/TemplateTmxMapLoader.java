@@ -5,6 +5,7 @@ import com.badlogic.gdx.maps.ImageResolver;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.XmlReader;
 
 public class TemplateTmxMapLoader extends TmxMapLoader {
@@ -28,9 +29,19 @@ public class TemplateTmxMapLoader extends TmxMapLoader {
             FileHandle template = getRelativeFileHandle(tmxFile, element.getAttribute("template"));
             XmlReader.Element el = xml.parse(template);
             for (XmlReader.Element obj : el.getChildrenByName("object")) {
-                obj.setAttribute("x", element.getAttribute("x"));
-                obj.setAttribute("y", element.getAttribute("y"));
-                obj.setAttribute("id", element.getAttribute("id"));
+                for(ObjectMap.Entry<String, String> attr: element.getAttributes())
+                {
+                    obj.setAttribute(attr.key, attr.value);
+                }
+                XmlReader.Element properties = element.getChildByName("properties");
+                XmlReader.Element templateProperties = obj.getChildByName("properties");
+                if (properties != null&&templateProperties!=null)
+                {
+                    for( XmlReader.Element propertyElements : properties.getChildrenByName("property"))
+                    {
+                        templateProperties.addChild(propertyElements);
+                    }
+                }
                 super.loadObject(map, objects, obj, heightInPixels);
                 return;
             }

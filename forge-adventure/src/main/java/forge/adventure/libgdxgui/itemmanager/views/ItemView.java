@@ -33,7 +33,7 @@ public abstract class ItemView<T extends InventoryItem> {
     private final OptionsPanel pnlOptions = new OptionsPanel();
 
     private float heightBackup;
-    private boolean isIncrementalSearchActive = false;
+    private final boolean isIncrementalSearchActive = false;
 
     protected ItemView(ItemManager<T> itemManager0, ItemManagerModel<T> model0) {
         itemManager = itemManager0;

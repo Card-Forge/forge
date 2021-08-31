@@ -15,16 +15,27 @@ public class WorldData implements Serializable {
     public int height;
     public float playerStartPosX;
     public float playerStartPosY;
-    public float noiceZoomBiom;
-    public float noiceZoomObject;
+    public float noiseZoomBiom;
     public int tileSize;
     public List<String> biomNames;
-    public String roadTileset;
+    public BiomData roadTileset;
     public String biomSprites;
     public float maxRoadDistance;
     private BiomSprites sprites;
     private List<BiomData> bioms;
+    private static Array<ShopData> shopList;
 
+
+    public static Array<ShopData> getShopList() {
+        if (shopList == null) {
+            shopList = new Array<ShopData>();
+            Json json = new Json();
+            FileHandle handle = forge.adventure.util.Res.CurrentRes.GetFile("world/shops.json");
+            if (handle.exists())
+                shopList = json.fromJson(Array.class, ShopData.class, handle);
+        }
+        return shopList;
+    }
     static public Array<EnemyData> getAllEnemies() {
         if (allEnemies == null) {
             Json json = new Json();
@@ -33,6 +44,15 @@ public class WorldData implements Serializable {
                 allEnemies = json.fromJson(Array.class, EnemyData.class, handle);
         }
         return allEnemies;
+    }
+
+    public static EnemyData getEnemy(String enemy) {
+        for(EnemyData data:getAllEnemies())
+        {
+            if(data.name.equals(enemy))
+                return data;
+        }
+        return null;
     }
 
     public BiomSprites GetBiomSprites() {

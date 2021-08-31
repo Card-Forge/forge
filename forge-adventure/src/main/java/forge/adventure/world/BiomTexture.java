@@ -5,46 +5,39 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntMap;
+import forge.adventure.data.BiomData;
+import forge.adventure.data.BiomTerrainData;
 import forge.adventure.util.Res;
 
 import java.io.IOException;
 import java.io.Serializable;
 
 public class BiomTexture implements Serializable {
-    public String name;
-    public String tileSetName;
-    public int tileSize;
+    private final BiomData data;
+    private final int tileSize;
     public Pixmap emptyPixmap = new Pixmap(1, 1, Pixmap.Format.RGB888);
     Array<Array<Pixmap>> images = new Array<>();
     Array<Array<Pixmap>> smallImages = new Array<>();
     Array<IntMap<Pixmap>> edgeImages = new Array<>();
 
-    public BiomTexture(String tileSet, int tsize, String n) {
-        tileSetName = tileSet;
-        tileSize = tsize;
-        name = n;
-        Generate();
+    public BiomTexture(BiomData data,int tileSize) {
+        this.data = data;
+        this.tileSize=tileSize;
+        generate();
 
 
     }
 
     private void writeObject(java.io.ObjectOutputStream out) throws IOException {
 
-        out.writeUTF(name);
-        out.writeUTF(tileSetName);
-        out.writeInt(tileSize);
     }
 
     private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
-        name = in.readUTF();
-        tileSetName = in.readUTF();
-        tileSize = in.readInt();
-        Generate();
+        generate();
 
     }
 
-    private void Generate() {
-        Array<TextureAtlas.AtlasRegion> regions = Res.CurrentRes.getAtlas(tileSetName).findRegions("TileSet");
+    private void generate() {
         Pixmap completePicture = null;
 
         if (images != null) {
@@ -78,6 +71,15 @@ public class BiomTexture implements Serializable {
         }
         edgeImages = new Array<>();
 
+        Array<TextureAtlas.AtlasRegion> regions =new Array<>();
+        regions.add(Res.CurrentRes.getAtlas(data.tilesetAtlas).findRegion(data.tilesetName));
+        if(data.terrain!=null)
+        {
+            for(BiomTerrainData terrain:data.terrain)
+            {
+                regions.add(Res.CurrentRes.getAtlas(data.tilesetAtlas).findRegion(terrain.spriteName));
+            }
+        }
         for (TextureAtlas.AtlasRegion region : regions) {
             Array<Pixmap> pics = new Array<Pixmap>();
             Array<Pixmap> spics = new Array<Pixmap>();
@@ -111,14 +113,14 @@ public class BiomTexture implements Serializable {
         }
     }
 
-    public Pixmap GetPixmapFor(int biomSubIndex) {
+    public Pixmap getPixmap(int biomSubIndex) {
         if (biomSubIndex >= edgeImages.size || biomSubIndex < 0) {
             return emptyPixmap;
         }
         return images.get(biomSubIndex).get(BigPictures.Center.value);
     }
 
-    public Pixmap GetPixmapFor(int biomSubIndex, int neighbors, Pixmap subPixmap) {
+    public Pixmap drawPixmapOn(int biomSubIndex, int neighbors, Pixmap subPixmap) {
 
         int id = (neighbors * 100);
         if (biomSubIndex >= edgeImages.size || biomSubIndex < 0) {

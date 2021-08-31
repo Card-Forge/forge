@@ -20,7 +20,7 @@ public abstract class FOverlay extends FContainer {
     private static boolean hidingAll = false;
     private static FOverlay tempOverlay;
 
-    private FSkinColor backColor;
+    private final FSkinColor backColor;
     private FScreen openedOnScreen;
 
     public FOverlay() {

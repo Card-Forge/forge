@@ -4,11 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Disposable;
-import forge.adventure.AdventureApplicationAdapter;
-import forge.adventure.libgdxgui.screens.FScreen;
-import forge.adventure.libgdxgui.toolbox.FDisplayObject;
-
-import java.util.List;
+import forge.adventure.util.Res;
 
 public abstract class Scene implements Disposable {
 
@@ -17,13 +13,14 @@ public abstract class Scene implements Disposable {
     }
 
     public static int GetIntendedWidth() {
-        return AdventureApplicationAdapter.CurrentAdapter.GetRes().GetConfigData().screenWidth;
+        return Res.CurrentRes.GetConfigData().screenWidth;
     }
 
     public static int GetIntendedHeight() {
-        return AdventureApplicationAdapter.CurrentAdapter.GetRes().GetConfigData().screenHeight;
+        return Res.CurrentRes.GetConfigData().screenHeight;
     }
 
+    public abstract void act(float delta);
     public abstract void render();
 
     public void create() {
@@ -31,25 +28,19 @@ public abstract class Scene implements Disposable {
     }
 
     public Drawable DrawableImage(String path) {
-        return new TextureRegionDrawable(new Texture(AdventureApplicationAdapter.CurrentAdapter.GetRes().GetFile(path)));
+        return new TextureRegionDrawable(new Texture(Res.CurrentRes.GetFile(path)));
     }
 
-    public void ResLoaded() {
+    public void resLoaded() {
     }
 
-    public boolean Leave() {
+    public boolean leave() {
         return true;
     }
 
-    public void Enter() {
+    public void enter() {
     }
 
-    public void buildTouchListeners(int x, int y, List<FDisplayObject> potentialListeners) {
 
-    }
-
-    public FScreen forgeScreen() {
-        return null;
-    }
 
 }

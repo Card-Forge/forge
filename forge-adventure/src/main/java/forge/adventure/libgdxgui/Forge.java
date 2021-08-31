@@ -13,8 +13,6 @@ import forge.adventure.libgdxgui.assets.FSkinFont;
 import forge.adventure.libgdxgui.assets.ImageCache;
 import forge.adventure.libgdxgui.screens.FScreen;
 import forge.adventure.libgdxgui.screens.SplashScreen;
-import forge.adventure.libgdxgui.screens.home.HomeScreen;
-import forge.adventure.libgdxgui.screens.home.NewGameMenu;
 import forge.adventure.libgdxgui.screens.match.MatchController;
 import forge.adventure.libgdxgui.toolbox.*;
 import forge.adventure.libgdxgui.util.Utils;
@@ -43,14 +41,14 @@ import java.util.List;
 public class Forge implements ApplicationListener {
     public static final String CURRENT_VERSION = "1.6.42.001";
 
-    private static final ApplicationListener app = new Forge();
+    public static final Forge app = new Forge();
     private static final Deque<FScreen> Dscreens = new ArrayDeque<>();
     public static String extrawide = "default";
     public static float heigtModifier = 0.0f;
     public static boolean showFPS = false;
     public static boolean altPlayerLayout = false;
     public static boolean altZoneTabs = false;
-    public static String enableUIMask = "Crop";
+    public static String enableUIMask = "Full";
     public static boolean enablePreloadExtendedArt = false;
     public static boolean isTabletDevice = false;
     public static String locale = "en-US";
@@ -79,6 +77,7 @@ public class Forge implements ApplicationListener {
     private static boolean textureFiltering = false;
     private static boolean destroyThis = false;
     private static boolean isloadingaMatch = false;
+    private MainInputProcessor input;
 
     private Forge() {
     }
@@ -100,8 +99,6 @@ public class Forge implements ApplicationListener {
     }
 
     public static void openHomeScreen(int index) {
-        openScreen(HomeScreen.instance);
-        HomeScreen.instance.openMenu(index);
     }
 
     public static Clipboard getClipboard() {
@@ -162,21 +159,7 @@ public class Forge implements ApplicationListener {
     }
 
     public static void back() {
-        if (destroyThis && isLandscapeMode())
-            return;
-        if (Dscreens.size() < 2 || (currentScreen == HomeScreen.instance && Forge.isPortraitMode)) {
-            exit(false); //prompt to exit if attempting to go back from home screen
-            return;
-        }
-        currentScreen.onClose(new Callback<Boolean>() {
-            @Override
-            public void run(Boolean result) {
-                if (result) {
-                    Dscreens.pollFirst();
-                    setCurrentScreen(Dscreens.peekFirst());
-                }
-            }
-        });
+
     }
 
     //set screen that will be gone to on pressing Back before going to current Back screen
@@ -381,7 +364,8 @@ public class Forge implements ApplicationListener {
         graphics = new Graphics();
         splashScreen = new SplashScreen();
         frameRate = new FrameRate();
-        Gdx.input.setInputProcessor(new MainInputProcessor());
+        input=new MainInputProcessor();
+        Gdx.input.setInputProcessor(input);
         /*
          Set CatchBackKey here and exit the app when you hit the
          back button while the textures,fonts,etc are still loading,
@@ -409,6 +393,7 @@ public class Forge implements ApplicationListener {
             enableUIMask = "Full";
         else if (prefs.getPref(FPref.UI_ENABLE_BORDER_MASKING).equals("false"))
             enableUIMask = "Off";
+        enableUIMask = "Full";
         enablePreloadExtendedArt = prefs.getPrefBoolean(FPref.UI_ENABLE_PRELOAD_EXTENDED_ART);
         locale = prefs.getPref(FPref.UI_LANGUAGE);
         autoCache = prefs.getPrefBoolean(FPref.UI_AUTO_CACHE_SIZE);
@@ -498,9 +483,7 @@ public class Forge implements ApplicationListener {
         splashScreen = null;
 
         boolean isLandscapeMode = isLandscapeMode();
-        if (isLandscapeMode) { //open preferred new game screen by default if landscape mode
-            NewGameMenu.getPreferredScreen().open();
-        }
+
 
         //adjust height modifier
         adjustHeightModifier(getScreenWidth(), getScreenHeight());

@@ -24,7 +24,7 @@ final class OtherImageLoader extends CacheLoader<String, Texture> {
                 }
             }
             catch (Exception ex) {
-                Forge.log("Could not read image file " + fh.path() + "\n\nException:\n" + ex.toString());
+                Forge.log("Could not read image file " + fh.path() + "\n\nException:\n" + ex);
                 return null;
             }
         }

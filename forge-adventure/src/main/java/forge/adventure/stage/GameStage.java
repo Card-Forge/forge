@@ -4,38 +4,44 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import forge.adventure.AdventureApplicationAdapter;
-import forge.adventure.character.CharacterSprite;
-import forge.adventure.character.MobSprite;
+import forge.adventure.character.MapActor;
 import forge.adventure.character.PlayerSprite;
-import forge.adventure.scene.DuelScene;
 import forge.adventure.scene.Scene;
 import forge.adventure.scene.SceneType;
 import forge.adventure.world.WorldSave;
 import forge.adventure.world.WorldSaveHeader;
 
-import java.util.ArrayList;
 
-
-public class GameStage extends Stage {
+public abstract class GameStage extends Stage {
 
 
     private final OrthographicCamera camera;
-    protected MobSprite currentMob;
-    protected ArrayList<MobSprite> enemies = new ArrayList<>();
     Group backgroundSprites;
     SpriteGroup foregroundSprites;
     PlayerSprite player;
-    CurrentAction action = CurrentAction.NoAction;
     private float touchX = -1;
     private float touchY = -1;
-    private float timer = 0;
+    private final float timer = 0;
     private float animationTimeout = 0;
 
+    public void startPause(int i) {
+        startPause(i,null);
+    }
+    public void startPause(int i,Runnable runnable) {
+        onEndAction=runnable;
+        animationTimeout=i;
+        player.setMovementDirection(Vector2.Zero);
+    }
+    public boolean isPaused() {
+        return animationTimeout>0;
+    }
 
     public GameStage() {
         super(new StretchViewport(Scene.GetIntendedWidth(), Scene.GetIntendedHeight(), new OrthographicCamera()));
@@ -51,21 +57,20 @@ public class GameStage extends Stage {
 
     }
 
+    public void setWinner(boolean b) {
+    }
     public void setBounds(float width, float height) {
         getViewport().setWorldSize(width, height);
     }
 
     public PlayerSprite GetPlayer() {
         if (player == null) {
-            player = new PlayerSprite();
+            player = new PlayerSprite(this);
             foregroundSprites.addActor(player);
         }
         return player;
     }
 
-    public float GetTimer() {
-        return timer;
-    }
 
     public SpriteGroup GetSpriteGroup() {
         return foregroundSprites;
@@ -75,39 +80,39 @@ public class GameStage extends Stage {
         return backgroundSprites;
     }
 
+
+
+
+    Runnable  onEndAction;
     @Override
-    public void draw() {
-        timer += Gdx.graphics.getDeltaTime();
-        act(Gdx.graphics.getDeltaTime());
-        //spriteGroup.setCullingArea(new Rectangle(player.getX()-getViewport().getWorldHeight()/2,player.getY()-getViewport().getWorldHeight()/2,getViewport().getWorldHeight(),getViewport().getWorldHeight()));
-        super.draw();
-    }
-
-    public void setWinner(boolean b) {
-
-        if (b) {
-            player.setAnimation(CharacterSprite.AnimationTypes.Attack);
-            currentMob.setAnimation(CharacterSprite.AnimationTypes.Death);
-        } else {
-            player.setAnimation(CharacterSprite.AnimationTypes.Hit);
-            currentMob.setAnimation(CharacterSprite.AnimationTypes.Attack);
-        }
-        animationTimeout = 1;
-        action = CurrentAction.FightEnd;
-    }
-
-    @Override
-    public void act(float delta) {
+    public final void act(float delta) {
         super.act(delta);
 
+        if (animationTimeout >= 0) {
+            animationTimeout -= delta;
+            return;
+        }
+        if(isPaused())
+        {
+            return;
+        }
+
+
+
+        if (onEndAction != null) {
+
+            onEndAction.run();
+            onEndAction=null;
+        }
 
         if (touchX >= 0) {
             Vector2 target = this.screenToStageCoordinates(new Vector2(touchX, touchY));
-            target.x -= player.getWidth() / 2;
+            target.x -= player.getWidth() / 2f;
             Vector2 diff = target.sub(player.pos());
 
             if (diff.len() < 2) {
                 diff.setZero();
+                player.stop();
             }
             player.setMovementDirection(diff);
         }
@@ -117,37 +122,17 @@ public class GameStage extends Stage {
         else
             player.setMoveModifier(1);
 
-        if (currentMob != null) {
-
-            if (animationTimeout >= 0) {
-                animationTimeout -= delta;
-                return;
-            }
-            switch (action) {
-                case FightEnd:
-                    removeEnemy(currentMob);
-                    currentMob = null;
-                    break;
-                case Attack:
-                    animationTimeout = 0;
-                    ((DuelScene) SceneType.DuelScene.instance).setEnemy(currentMob);
-                    ((DuelScene) SceneType.DuelScene.instance).setPlayer(player);
-                    AdventureApplicationAdapter.CurrentAdapter.SwitchScene(SceneType.DuelScene.instance);
-                    break;
-            }
-        }
-        if (player == null)
-            return;
         camera.position.x = Math.min(Math.max(Scene.GetIntendedWidth() / 2, player.pos().x), getViewport().getWorldWidth() - Scene.GetIntendedWidth() / 2);
         camera.position.y = Math.min(Math.max(Scene.GetIntendedHeight() / 2, player.pos().y), getViewport().getWorldHeight() - Scene.GetIntendedHeight() / 2);
 
+
+
+        onActing(delta);
     }
 
-    private void removeEnemy(MobSprite currentMob) {
+    abstract protected void onActing(float delta);
 
-        foregroundSprites.removeActor(currentMob);
-        enemies.remove(currentMob);
-    }
+
 
     @Override
     public boolean keyDown(int keycode) {
@@ -168,11 +153,44 @@ public class GameStage extends Stage {
         {
             player.getMovementDirection().y = -1;
         }
+        if (keycode == Input.Keys.F12)
+        {
+            debugCollision(true);
+            for (Actor actor : foregroundSprites.getChildren()) {
+                if (actor instanceof MapActor) {
+                    ((MapActor)actor).setBoundDebug(true);
+                }
+            }
+            player.setBoundDebug(true);
+        }
+        if (keycode == Input.Keys.F11)
+        {
+            debugCollision(false);
+            for (Actor actor : foregroundSprites.getChildren()) {
+                if (actor instanceof MapActor) {
+                    ((MapActor)actor).setBoundDebug(false);
+                }
+            }
+            player.setBoundDebug(false);
+        }
+        if (keycode == Input.Keys.F10)
+        {
+            setDebugAll(true);
+        }
+        if (keycode == Input.Keys.F9)
+        {
+            setDebugAll(false);
+        }
         return true;
+    }
+
+    protected void debugCollision(boolean b) {
     }
 
     @Override
     public boolean scrolled(float amountX, float amountY) {
+        if(isPaused())
+            return true;
         camera.zoom += (amountY * 0.03);
         if (camera.zoom < 0.2f)
             camera.zoom = 0.2f;
@@ -183,7 +201,8 @@ public class GameStage extends Stage {
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-
+        if(isPaused())
+            return true;
         touchX = screenX;
         touchY = screenY;
 
@@ -192,6 +211,8 @@ public class GameStage extends Stage {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        if(isPaused())
+            return true;
         touchX = screenX;
         touchY = screenY;
 
@@ -199,23 +220,32 @@ public class GameStage extends Stage {
         return true;
     }
 
-    @Override
-    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+    public void stop() {
         touchX = -1;
         touchY = -1;
-        player.setMovementDirection(Vector2.Zero);
+        player.stop();
+    }
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        stop();
         return true;
     }
 
     @Override
     public boolean keyUp(int keycode) {
+        if(isPaused())
+            return true;
         if (keycode == Input.Keys.LEFT || keycode == Input.Keys.A || keycode == Input.Keys.RIGHT || keycode == Input.Keys.D)//todo config
         {
             player.getMovementDirection().x = 0;
+            if(!player.isMoving())
+                stop();
         }
         if (keycode == Input.Keys.UP || keycode == Input.Keys.W || keycode == Input.Keys.DOWN || keycode == Input.Keys.S)//todo config
         {
             player.getMovementDirection().y = 0;
+            if(!player.isMoving())
+                stop();
         }
         if (keycode == Input.Keys.ESCAPE) {
             openMenu();
@@ -233,19 +263,20 @@ public class GameStage extends Stage {
         if (WorldSave.getCurrentSave().header.preview != null)
             WorldSave.getCurrentSave().header.preview.dispose();
         WorldSave.getCurrentSave().header.preview = scaled;
-        AdventureApplicationAdapter.CurrentAdapter.SwitchScene(SceneType.StartScene.instance);
+        AdventureApplicationAdapter.instance.switchScene(SceneType.StartScene.instance);
     }
 
-    public void Enter() {
+    public void enter() {
+        stop();
     }
 
-    public void Leave() {
+    public void leave() {
+        stop();
     }
 
-    enum CurrentAction {
-        NoAction,
-        Attack,
-        FightEnd
+    public  Vector2 adjustMovement(Vector2 pos, Vector2 direction, Rectangle boundingRect)
+    {
+        return direction;
     }
 
 }

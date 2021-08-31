@@ -7,6 +7,7 @@ public class BiomSpriteData implements Serializable {
     public double startArea;
     public double endArea;
     public double density;
+    public double resolution;
     public int layer;
 
     public String key() {

@@ -5,40 +5,56 @@ import forge.deck.Deck;
 import forge.localinstance.properties.ForgeProfileProperties;
 
 import java.io.*;
+import java.util.HashMap;
+import java.util.zip.DeflaterOutputStream;
+import java.util.zip.InflaterInputStream;
 
 public class WorldSave {
 
-    static WorldSave currentSave;
+    static WorldSave currentSave=new WorldSave();
     public WorldSaveHeader header = new WorldSaveHeader();
-    public AdventurePlayer player;
-    public World world;
+    private final AdventurePlayer player=new AdventurePlayer();
+    private final World world=new World();
+    private final HashMap<String,PointOfInterestChanges> pointOfInterestChanges=new HashMap<>();
     public Difficulty difficulty;
 
-    static public void Load(int currentSlot) {
-        if (currentSave != null)
-            currentSave.dispose();
-        currentSave = new WorldSave();
+    public final World getWorld()
+    {
+        return world;
+    }
+    public AdventurePlayer getPlayer()
+    {
+        return player;
+    }
+
+    public PointOfInterestChanges getPointOfInterestChanges(String id)
+    {
+        if(!pointOfInterestChanges.containsKey(id))
+            pointOfInterestChanges.put(id,new PointOfInterestChanges());
+        return pointOfInterestChanges.get(id);
+    }
+
+    static public boolean load(int currentSlot) {
+
         String fileName = WorldSave.GetSaveFile(currentSlot);
         new File(GetSaveDir()).mkdirs();
-        FileInputStream fos = null;
         try {
-            fos = new FileInputStream(fileName);
-            ObjectInputStream oos = new ObjectInputStream(fos);
-            currentSave.header = (WorldSaveHeader) oos.readObject();
-            currentSave.player = (AdventurePlayer) oos.readObject();
-            currentSave.world = (World) oos.readObject();
-            currentSave.difficulty = (Difficulty) oos.readObject();
+            try(FileInputStream fos  = new FileInputStream(fileName);
+                InflaterInputStream inf = new InflaterInputStream(fos);
+                ObjectInputStream oos = new ObjectInputStream(inf))
+            {
+                currentSave.header = (WorldSaveHeader) oos.readObject();
+                currentSave.player.readFromSaveFile(oos);
+                currentSave.world.readFromSaveFile(oos);
+                currentSave.difficulty = (Difficulty) oos.readObject();
+            }
         } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
+            return false;
         } finally {
-            if (fos != null) {
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+
         }
+        return true;
     }
 
     static public int FilenameToSlot(String name) {
@@ -71,42 +87,39 @@ public class WorldSave {
         return currentSave;
     }
 
-    public static WorldSave GenerateNewWorld(String name, boolean male, int race, int avatarIndex, Deck startingDeck, Difficulty diff) {
-        currentSave = new WorldSave();
-        currentSave.world = new World();
-        currentSave.world.GenerateNew();
-        currentSave.player = new AdventurePlayer(name, startingDeck, male, race, avatarIndex);
+    public static WorldSave generateNewWorld(String name, boolean male, int race, int avatarIndex, Deck startingDeck, Difficulty diff, long seed) {
+
+        currentSave.world.generateNew(seed);
+        currentSave.player.create(name, startingDeck, male, race, avatarIndex);
         currentSave.difficulty = diff;
-        currentSave.player.setWorldPosY((int) (currentSave.world.GetData().playerStartPosY * currentSave.world.GetData().height * currentSave.world.GetTileSize()));
-        currentSave.player.setWorldPosX((int) (currentSave.world.GetData().playerStartPosX * currentSave.world.GetData().width * currentSave.world.GetTileSize()));
+        currentSave.player.setWorldPosY((int) (currentSave.world.getData().playerStartPosY * currentSave.world.getData().height * currentSave.world.getTileSize()));
+        currentSave.player.setWorldPosX((int) (currentSave.world.getData().playerStartPosX * currentSave.world.getData().width * currentSave.world.getTileSize()));
         return currentSave;
         //return currentSave = ret;
     }
 
-    public void Save(String text, int currentSlot) {
+    public boolean save(String text, int currentSlot) {
         header.name = text;
 
         String fileName = WorldSave.GetSaveFile(currentSlot);
         new File(GetSaveDir()).mkdirs();
-        FileOutputStream fos = null;
+
         try {
-            fos = new FileOutputStream(fileName);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(header);
-            oos.writeObject(player);
-            oos.writeObject(world);
-            oos.writeObject(difficulty);
+            try(FileOutputStream fos =  new FileOutputStream(fileName);
+                DeflaterOutputStream def= new DeflaterOutputStream(fos);
+                ObjectOutputStream oos = new ObjectOutputStream(def))
+            {
+                oos.writeObject(header);
+                player.writeToSaveFile(oos);
+                world.writeToSaveFile(oos);
+                oos.writeObject(difficulty);
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (fos != null) {
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            return false;
         }
+        return true;
     }
 
     private void dispose() {

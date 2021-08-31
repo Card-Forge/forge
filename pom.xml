@@ -1,12 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <repositories>
-        <repository>
-            <id>gitlab-maven</id>
-            <url>${env.CI_SERVER_URL}/api/v4/projects/${env.CI_PROJECT_ID}/packages/maven</url>
-        </repository>
-    </repositories>
-
+    <modelVersion>4.0.0</modelVersion> 
     <groupId>forge</groupId>
     <artifactId>forge</artifactId>
     <packaging>pom</packaging>
@@ -85,16 +78,6 @@
             <id>cardforge-snapshot-repo</id>
             <name>Forge Snapshots</name>
             <url>ftp://ftp.cardforge.org/maven/snapshots/</url>
-        </snapshotRepository>
-
-
-        <repository>
-            <id>gitlab-maven</id>
-            <url>${env.CI_SERVER_URL}/api/v4/projects/${env.CI_PROJECT_ID}/packages/maven</url>
-        </repository>
-        <snapshotRepository>
-            <id>gitlab-maven</id>
-            <url>${env.CI_SERVER_URL}/api/v4/projects/${env.CI_PROJECT_ID}/packages/maven</url>
         </snapshotRepository>
     </distributionManagement>
 

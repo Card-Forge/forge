@@ -91,7 +91,7 @@ public class CardRenderer {
     public static final float PADDING_MULTIPLIER = 0.021f;
     public static final float CROP_MULTIPLIER = 0.96f;
 
-    private static Map<Integer, BitmapFont> counterFonts = new HashMap<>();
+    private static final Map<Integer, BitmapFont> counterFonts = new HashMap<>();
     private static final Color counterBackgroundColor = new Color(0f, 0f, 0f, 0.9f);
     private static final Map<CounterType, Color> counterColorCache = new HashMap<>();
     private static final GlyphLayout layout = new GlyphLayout();

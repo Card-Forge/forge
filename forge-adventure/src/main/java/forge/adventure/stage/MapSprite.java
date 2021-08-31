@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
 import forge.adventure.data.BiomSpriteData;
-import forge.adventure.world.PointOfIntrest;
+import forge.adventure.world.PointOfInterest;
 import forge.adventure.world.WorldSave;
 import javafx.util.Pair;
 
@@ -31,21 +31,21 @@ public class MapSprite extends Actor {
 
     public static Array<Actor> GetMapSprites(int chunkx, int chunky) {
         Array<Actor> actorGroup = new Array<>();
-        List<PointOfIntrest> pointsOfIntrest = WorldSave.getCurrentSave().world.getPointsOfIntrest(chunkx, chunky);
-        for (PointOfIntrest poi : pointsOfIntrest) {
+        List<PointOfInterest> pointsOfIntrest = WorldSave.getCurrentSave().getWorld().getPointsOfIntrest(chunkx, chunky);
+        for (PointOfInterest poi : pointsOfIntrest) {
 
             Actor sprite = new PointOfIntrestMapSprite(poi);
             actorGroup.add(sprite);
         }
 
 
-        List<Pair<Vector2, Integer>> objects = WorldSave.getCurrentSave().world.GetMapObjects(chunkx, chunky);
+        List<Pair<Vector2, Integer>> objects = WorldSave.getCurrentSave().getWorld().GetMapObjects(chunkx, chunky);
 
         for (Pair<Vector2, Integer> entry : objects) {
-            BiomSpriteData data = WorldSave.getCurrentSave().world.GetObject(entry.getValue());
+            BiomSpriteData data = WorldSave.getCurrentSave().getWorld().getObject(entry.getValue());
             if (data.layer != SpriteLayer)
                 continue;
-            Actor sprite = new MapSprite(entry.getKey(), WorldSave.getCurrentSave().world.GetData().GetBiomSprites().GetSprite(data.name, (int) entry.getKey().x + (int) entry.getKey().y * 11483));
+            Actor sprite = new MapSprite(entry.getKey(), WorldSave.getCurrentSave().getWorld().getData().GetBiomSprites().GetSprite(data.name, (int) entry.getKey().x + (int) entry.getKey().y * 11483));
             actorGroup.add(sprite);
         }
         return actorGroup;
@@ -53,13 +53,13 @@ public class MapSprite extends Actor {
 
     public static Array<Actor> GetMapSpritesBackground(int chunkx, int chunky) {
 
-        List<Pair<Vector2, Integer>> objects = WorldSave.getCurrentSave().world.GetMapObjects(chunkx, chunky);
+        List<Pair<Vector2, Integer>> objects = WorldSave.getCurrentSave().getWorld().GetMapObjects(chunkx, chunky);
         Array<Actor> actorGroup = new Array<>();
         for (Pair<Vector2, Integer> entry : objects) {
-            BiomSpriteData data = WorldSave.getCurrentSave().world.GetObject(entry.getValue());
+            BiomSpriteData data = WorldSave.getCurrentSave().getWorld().getObject(entry.getValue());
             if (data.layer != BackgroundLayer)
                 continue;
-            Actor sprite = new MapSprite(entry.getKey(), WorldSave.getCurrentSave().world.GetData().GetBiomSprites().GetSprite(data.name, (int) entry.getKey().x + (int) entry.getKey().y * 11483));
+            Actor sprite = new MapSprite(entry.getKey(), WorldSave.getCurrentSave().getWorld().getData().GetBiomSprites().GetSprite(data.name, (int) entry.getKey().x + (int) entry.getKey().y * 11483));
             actorGroup.add(sprite);
         }
         return actorGroup;

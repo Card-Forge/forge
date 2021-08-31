@@ -1297,7 +1297,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     }
 
     protected static class DeckSectionPage extends CardManagerPage {
-        private String captionPrefix;
+        private final String captionPrefix;
         private final DeckSection deckSection;
 
         protected DeckSectionPage(DeckSection deckSection0) {

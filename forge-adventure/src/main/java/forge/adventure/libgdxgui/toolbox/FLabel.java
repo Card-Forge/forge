@@ -100,16 +100,23 @@ public class FLabel extends FDisplayObject implements IButton {
     private static final FSkinColor l20 = clrMain.stepColor(20);
     public static final float BORDER_THICKNESS = Utils.scale(1);
 
-    private float iconScaleFactor;
+    private final float iconScaleFactor;
     private FSkinFont font;
-    private float alphaComposite;
+    private final float alphaComposite;
     private int alignment;
     private Vector2 insets;
-    private boolean selectable, selected, opaque, iconInBackground, iconScaleAuto, iconScaleWithFont, pressed;
+    private final boolean selectable;
+    private boolean selected;
+    private final boolean opaque;
+    private final boolean iconInBackground;
+    private boolean iconScaleAuto;
+    private final boolean iconScaleWithFont;
+    private boolean pressed;
 
     private String text;
     private FImage icon;
-    private FSkinColor textColor, pressedColor;
+    private FSkinColor textColor;
+    private final FSkinColor pressedColor;
     private FEventHandler command;
     private TextRenderer textRenderer;
 

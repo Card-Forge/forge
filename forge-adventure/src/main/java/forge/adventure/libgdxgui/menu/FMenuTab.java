@@ -23,7 +23,7 @@ public class FMenuTab extends FDisplayObject {
 
     private String text;
     private float minWidth;
-    private int index;
+    private final int index;
 
     public FMenuTab(String text0, FMenuBar menuBar0, FDropDown dropDown0, int index0) {
         menuBar = menuBar0;

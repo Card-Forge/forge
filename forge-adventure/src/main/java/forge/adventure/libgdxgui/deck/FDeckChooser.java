@@ -4,8 +4,16 @@ import com.badlogic.gdx.utils.Align;
 import com.google.common.collect.ImmutableList;
 import forge.adventure.libgdxgui.Forge;
 import forge.adventure.libgdxgui.assets.ImageCache;
-import forge.deck.*;
 import forge.adventure.libgdxgui.deck.FDeckEditor.EditorType;
+import forge.adventure.libgdxgui.itemmanager.DeckManager;
+import forge.adventure.libgdxgui.itemmanager.filters.ItemFilter;
+import forge.adventure.libgdxgui.screens.FScreen;
+import forge.adventure.libgdxgui.screens.LoadingOverlay;
+import forge.adventure.libgdxgui.screens.match.MatchController;
+import forge.adventure.libgdxgui.toolbox.*;
+import forge.adventure.libgdxgui.toolbox.FEvent.FEventHandler;
+import forge.adventure.libgdxgui.util.Utils;
+import forge.deck.*;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameType;
 import forge.game.player.RegisteredPlayer;
@@ -20,22 +28,13 @@ import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.error.BugReporter;
 import forge.gui.interfaces.IGuiGame;
-import forge.adventure.libgdxgui.itemmanager.DeckManager;
 import forge.itemmanager.ItemManagerConfig;
-import forge.adventure.libgdxgui.itemmanager.filters.ItemFilter;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
-import forge.adventure.libgdxgui.screens.FScreen;
-import forge.adventure.libgdxgui.screens.LoadingOverlay;
-import forge.adventure.libgdxgui.screens.home.NewGameMenu.NewGameScreen;
-import forge.adventure.libgdxgui.screens.match.MatchController;
-import forge.adventure.libgdxgui.toolbox.*;
-import forge.adventure.libgdxgui.toolbox.FEvent.FEventHandler;
 import forge.util.Callback;
 import forge.util.Localizer;
-import forge.adventure.libgdxgui.util.Utils;
 import forge.util.storage.IStorage;
 import org.apache.commons.lang3.StringUtils;
 
@@ -324,14 +323,7 @@ public class FDeckChooser extends FScreen {
     private void createNewDeck() {
         final FDeckEditor editor;
         final DeckProxy deck = lstDecks.getSelectedItem();
-        if (selectedDeckType == DeckType.DRAFT_DECK) {
-            NewGameScreen.BoosterDraft.open();
-            return;
-        }
-        if (selectedDeckType == DeckType.SEALED_DECK) {
-            NewGameScreen.SealedDeck.open();
-            return;
-        }
+
         if (isGeneratedDeck(selectedDeckType)) {
             if (deck == null) {
                 FOptionPane.showErrorDialog(localizer.getMessage("lblMustSelectGenerateNewDeck"));
@@ -617,7 +609,7 @@ public class FDeckChooser extends FScreen {
                             @Override
                             public void run() {
                                 GameType gameType = lstDecks.getGameType();
-                                final NetDeckArchiveStandard category = NetDeckArchiveStandard.selectAndLoad(gameType);
+                                final NetDeckArchiveStandard category = forge.deck.NetDeckArchiveStandard.selectAndLoad(gameType);
 
                                 FThreads.invokeInEdtLater(new Runnable() {
                                     @Override
@@ -643,7 +635,7 @@ public class FDeckChooser extends FScreen {
                             @Override
                             public void run() {
                                 GameType gameType = lstDecks.getGameType();
-                                final NetDeckArchivePioneer category = NetDeckArchivePioneer.selectAndLoad(gameType);
+                                final NetDeckArchivePioneer category = forge.deck.NetDeckArchivePioneer.selectAndLoad(gameType);
 
                                 FThreads.invokeInEdtLater(new Runnable() {
                                     @Override
@@ -669,7 +661,7 @@ public class FDeckChooser extends FScreen {
                             @Override
                             public void run() {
                                 GameType gameType = lstDecks.getGameType();
-                                final NetDeckArchiveModern category = NetDeckArchiveModern.selectAndLoad(gameType);
+                                final NetDeckArchiveModern category = forge.deck.NetDeckArchiveModern.selectAndLoad(gameType);
 
                                 FThreads.invokeInEdtLater(new Runnable() {
                                     @Override
@@ -695,7 +687,7 @@ public class FDeckChooser extends FScreen {
                             @Override
                             public void run() {
                                 GameType gameType = lstDecks.getGameType();
-                                final NetDeckArchiveLegacy category = NetDeckArchiveLegacy.selectAndLoad(gameType);
+                                final NetDeckArchiveLegacy category = forge.deck.NetDeckArchiveLegacy.selectAndLoad(gameType);
 
                                 FThreads.invokeInEdtLater(new Runnable() {
                                     @Override
@@ -721,7 +713,7 @@ public class FDeckChooser extends FScreen {
                             @Override
                             public void run() {
                                 GameType gameType = lstDecks.getGameType();
-                                final NetDeckArchiveVintage category = NetDeckArchiveVintage.selectAndLoad(gameType);
+                                final NetDeckArchiveVintage category = forge.deck.NetDeckArchiveVintage.selectAndLoad(gameType);
 
                                 FThreads.invokeInEdtLater(new Runnable() {
                                     @Override
@@ -750,7 +742,7 @@ public class FDeckChooser extends FScreen {
                             @Override
                             public void run() {
                                 GameType gameType = lstDecks.getGameType();
-                                final NetDeckArchiveBlock category = NetDeckArchiveBlock.selectAndLoad(gameType);
+                                final NetDeckArchiveBlock category = forge.deck.NetDeckArchiveBlock.selectAndLoad(gameType);
 
                                 FThreads.invokeInEdtLater(new Runnable() {
                                     @Override
@@ -1281,28 +1273,28 @@ public class FDeckChooser extends FScreen {
                     netDeckCategory = NetDeckCategory.selectAndLoad(lstDecks.getGameType(), deckType.substring(NetDeckCategory.PREFIX.length()));
                     return DeckType.NET_DECK;
                 }
-                if (deckType.startsWith(NetDeckArchiveStandard.PREFIX)) {
-                    NetDeckArchiveStandard = NetDeckArchiveStandard.selectAndLoad(lstDecks.getGameType(), deckType.substring(NetDeckArchiveStandard.PREFIX.length()));
+                if (deckType.startsWith(forge.deck.NetDeckArchiveStandard.PREFIX)) {
+                    NetDeckArchiveStandard = forge.deck.NetDeckArchiveStandard.selectAndLoad(lstDecks.getGameType(), deckType.substring(forge.deck.NetDeckArchiveStandard.PREFIX.length()));
                     return DeckType.NET_ARCHIVE_STANDARD_DECK;
                 }
-                if (deckType.startsWith(NetDeckArchivePioneer.PREFIX)) {
-                    NetDeckArchivePioneer = NetDeckArchivePioneer.selectAndLoad(lstDecks.getGameType(), deckType.substring(NetDeckArchivePioneer.PREFIX.length()));
+                if (deckType.startsWith(forge.deck.NetDeckArchivePioneer.PREFIX)) {
+                    NetDeckArchivePioneer = forge.deck.NetDeckArchivePioneer.selectAndLoad(lstDecks.getGameType(), deckType.substring(forge.deck.NetDeckArchivePioneer.PREFIX.length()));
                     return DeckType.NET_ARCHIVE_PIONEER_DECK;
                 }
-                if (deckType.startsWith(NetDeckArchiveModern.PREFIX)) {
-                    NetDeckArchiveModern = NetDeckArchiveModern.selectAndLoad(lstDecks.getGameType(), deckType.substring(NetDeckArchiveModern.PREFIX.length()));
+                if (deckType.startsWith(forge.deck.NetDeckArchiveModern.PREFIX)) {
+                    NetDeckArchiveModern = forge.deck.NetDeckArchiveModern.selectAndLoad(lstDecks.getGameType(), deckType.substring(forge.deck.NetDeckArchiveModern.PREFIX.length()));
                     return DeckType.NET_ARCHIVE_MODERN_DECK;
                 }
-                if (deckType.startsWith(NetDeckArchiveLegacy.PREFIX)) {
-                    NetDeckArchiveLegacy = NetDeckArchiveLegacy.selectAndLoad(lstDecks.getGameType(), deckType.substring(NetDeckArchiveLegacy.PREFIX.length()));
+                if (deckType.startsWith(forge.deck.NetDeckArchiveLegacy.PREFIX)) {
+                    NetDeckArchiveLegacy = forge.deck.NetDeckArchiveLegacy.selectAndLoad(lstDecks.getGameType(), deckType.substring(forge.deck.NetDeckArchiveLegacy.PREFIX.length()));
                     return DeckType.NET_ARCHIVE_LEGACY_DECK;
                 }
-                if (deckType.startsWith(NetDeckArchiveVintage.PREFIX)) {
-                    NetDeckArchiveVintage = NetDeckArchiveVintage.selectAndLoad(lstDecks.getGameType(), deckType.substring(NetDeckArchiveVintage.PREFIX.length()));
+                if (deckType.startsWith(forge.deck.NetDeckArchiveVintage.PREFIX)) {
+                    NetDeckArchiveVintage = forge.deck.NetDeckArchiveVintage.selectAndLoad(lstDecks.getGameType(), deckType.substring(forge.deck.NetDeckArchiveVintage.PREFIX.length()));
                     return DeckType.NET_ARCHIVE_VINTAGE_DECK;
                 }
-                if (deckType.startsWith(NetDeckArchiveBlock.PREFIX)) {
-                    NetDeckArchiveBlock = NetDeckArchiveBlock.selectAndLoad(lstDecks.getGameType(), deckType.substring(NetDeckArchiveBlock.PREFIX.length()));
+                if (deckType.startsWith(forge.deck.NetDeckArchiveBlock.PREFIX)) {
+                    NetDeckArchiveBlock = forge.deck.NetDeckArchiveBlock.selectAndLoad(lstDecks.getGameType(), deckType.substring(forge.deck.NetDeckArchiveBlock.PREFIX.length()));
                     return DeckType.NET_ARCHIVE_BLOCK_DECK;
                 }
                 return DeckType.valueOf(deckType);

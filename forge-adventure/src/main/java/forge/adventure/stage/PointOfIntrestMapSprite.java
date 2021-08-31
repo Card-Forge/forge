@@ -5,21 +5,21 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
-import forge.adventure.world.PointOfIntrest;
+import forge.adventure.world.PointOfInterest;
 
 public class PointOfIntrestMapSprite extends MapSprite {
-    PointOfIntrest pointOfIntrest;
+    PointOfInterest pointOfInterest;
     Texture debugTexture;
     Rectangle boundingRect;
 
-    public PointOfIntrestMapSprite(PointOfIntrest point) {
+    public PointOfIntrestMapSprite(PointOfInterest point) {
         super(point.getPosition(), point.getSprite());
-        pointOfIntrest = point;
+        pointOfInterest = point;
         boundingRect = new Rectangle(getX(), getY(), texture.getRegionWidth(), texture.getRegionHeight());
     }
 
-    public PointOfIntrest getPointOfIntrest() {
-        return pointOfIntrest;
+    public PointOfInterest getPointOfIntrest() {
+        return pointOfInterest;
     }
 
     private Texture getDebugTexture() {

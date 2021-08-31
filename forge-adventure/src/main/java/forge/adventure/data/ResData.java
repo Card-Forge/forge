@@ -10,4 +10,5 @@ public class ResData {
     public String font;
     public String fontColor;
     public Array<String> starterDecks;
+
 }

@@ -1,18 +1,14 @@
 package forge.adventure.scene;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.IntMap;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
 import forge.adventure.AdventureApplicationAdapter;
 import forge.adventure.util.Controls;
 import forge.adventure.world.WorldSave;
@@ -22,12 +18,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.zip.InflaterInputStream;
 
-public class SaveLoadScene extends Scene {
+public class SaveLoadScene extends UIScene {
     private final IntMap<TextButton> buttons = new IntMap<>();
-    Texture Background;
     IntMap<WorldSaveHeader> previews = new IntMap<>();
-    Stage stage;
     Color defColor;
     Table layout;
     boolean save = true;
@@ -39,30 +34,11 @@ public class SaveLoadScene extends Scene {
     TextButton saveLoadButton;
 
     public SaveLoadScene() {
-
+        super("ui/saveload.json");
     }
 
-    @Override
-    public void dispose() {
-        stage.dispose();
-        Background.dispose();
-    }
 
-    @Override
-    public void render() {
 
-        //Batch.getProjectionMatrix().setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        Gdx.gl.glClearColor(1, 0, 1, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        stage.getBatch().begin();
-        stage.getBatch().disableBlending();
-        stage.getBatch().draw(Background, 0, 0, GetIntendedWidth(), GetIntendedHeight());
-        stage.getBatch().enableBlending();
-        stage.getBatch().end();
-        stage.act(Gdx.graphics.getDeltaTime());
-        stage.draw();
-        //Batch.end();
-    }
 
     private void AddSaveSlot(String name, int i) {
         layout.add(Controls.newLabel(name));
@@ -83,9 +59,8 @@ public class SaveLoadScene extends Scene {
 
     }
 
-    public boolean Back() {
-        AdventureApplicationAdapter.CurrentAdapter.SwitchToLast();
-        return true;
+    public void Back() {
+        AdventureApplicationAdapter.instance.switchToLast();
     }
 
     public boolean Select(int slot) {
@@ -109,31 +84,35 @@ public class SaveLoadScene extends Scene {
         return true;
     }
 
-    public boolean LoadSave() {
+    public void loadSave() {
         if (save) {
             textInput.setText("savegame " + currentSlot);
             dialog.show(stage);
             stage.setKeyboardFocus(textInput);
         } else {
-            WorldSave.Load(currentSlot);
+            if(WorldSave.load(currentSlot))
+                AdventureApplicationAdapter.instance.switchScene(SceneType.GameScene.instance);
         }
-        return true;
     }
 
-    public boolean SaveAbort() {
+    public boolean saveAbort() {
 
         dialog.hide();
         return true;
     }
 
-    public boolean Save() {
+    public void save() {
         dialog.hide();
-        WorldSave.getCurrentSave().Save(textInput.getText(), currentSlot);
-        UpdateFiles();
-        return true;
+        if( WorldSave.getCurrentSave().save(textInput.getText(), currentSlot))
+        {
+            updateFiles();
+            AdventureApplicationAdapter.instance.switchScene(SceneType.GameScene.instance);
+        }
+
+
     }
 
-    private void UpdateFiles() {
+    private void updateFiles() {
 
         File f = new File(WorldSave.GetSaveDir());
         f.mkdirs();
@@ -142,45 +121,29 @@ public class SaveLoadScene extends Scene {
         for (File name : names) {
             int slot = WorldSave.FilenameToSlot(name.getName());
             if (slot >= -2) {
-                FileInputStream fos = null;
                 try {
 
-                    fos = new FileInputStream(name.getAbsolutePath());
-                    ObjectInputStream oos = new ObjectInputStream(fos);
-                    WorldSaveHeader header = (WorldSaveHeader) oos.readObject();
-                    buttons.get(slot).setText(header.name);
-                    previews.put(slot, header);
-                } catch (ClassNotFoundException | IOException | GdxRuntimeException e) {
-                } finally {
-                    if (fos != null) {
-                        try {
-                            fos.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
+                    try (FileInputStream fos = new FileInputStream(name.getAbsolutePath());
+                         InflaterInputStream inf = new InflaterInputStream(fos);
+                         ObjectInputStream oos = new ObjectInputStream(inf)) {
 
+
+                        WorldSaveHeader header = (WorldSaveHeader) oos.readObject();
+                        buttons.get(slot).setText(header.name);
+                        previews.put(slot, header);
+                    }
+
+                } catch (ClassNotFoundException | IOException | GdxRuntimeException e) {
+
+
+                }
             }
         }
 
     }
 
-    public boolean Resume() {
-        return true;
-    }
 
-    public boolean settings() {
-        AdventureApplicationAdapter.CurrentAdapter.SwitchScene(forge.adventure.scene.SceneType.SettingsScene.instance);
-        return true;
-    }
-
-    public boolean Exit() {
-        Gdx.app.exit();
-        return true;
-    }
-
-    public void SetSaveGame(boolean save) {
+    public void setSaveGame(boolean save) {
         if (save) {
             header.setText("Save game");
             saveLoadButton.setText("Save");
@@ -192,16 +155,15 @@ public class SaveLoadScene extends Scene {
     }
 
     @Override
-    public void Enter() {
+    public void enter() {
         Select(-3);
-        UpdateFiles();
-        Gdx.input.setInputProcessor(stage); //Start taking input from the ui
+        updateFiles();
+        super.enter();
     }
 
     @Override
-    public void ResLoaded() {
-        stage = new Stage(new StretchViewport(GetIntendedWidth(), GetIntendedHeight()));
-        Background = new Texture(AdventureApplicationAdapter.CurrentAdapter.GetRes().GetFile("ui/title_bg.png"));
+    public void resLoaded() {
+        super.resLoaded();
         layout = new Table();
         layout.setFillParent(true);
         stage.addActor(layout);
@@ -212,14 +174,10 @@ public class SaveLoadScene extends Scene {
         dialog.getButtonTable().add(Controls.newLabel("Name:")).align(Align.left);
         dialog.getButtonTable().add(textInput).fillX().expandX();
         dialog.getButtonTable().row();
-        dialog.getButtonTable().add(Controls.newTextButton("Save", () -> Save())).align(Align.left);
-        dialog.getButtonTable().add(Controls.newTextButton("Abort", () -> SaveAbort())).align(Align.left);
+        dialog.getButtonTable().add(Controls.newTextButton("Save", () -> save())).align(Align.left);
+        dialog.getButtonTable().add(Controls.newTextButton("Abort", () -> saveAbort())).align(Align.left);
 
-        previewImage = new Image();
-        previewImage.setSize(WorldSaveHeader.previewImageWidth, WorldSaveHeader.previewImageWidth / (GetIntendedWidth() / (float) GetIntendedHeight()));
-
-        previewImage.setPosition(GetIntendedWidth() - previewImage.getWidth(), GetIntendedHeight() - previewImage.getHeight());
-        stage.addActor(previewImage);
+        previewImage = ui.findActor("preview");
         header = Controls.newLabel("Save");
         header.setHeight(header.getHeight() * 2);
         layout.add(header).colspan(2).align(Align.center);
@@ -229,31 +187,13 @@ public class SaveLoadScene extends Scene {
         for (int i = 1; i < 11; i++)
             AddSaveSlot("Slot:" + i, i);
 
-
-        TextButton backButton = Controls.newTextButton("Back");
-        backButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                try {
-                    Back();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        layout.add(backButton);
-        saveLoadButton = Controls.newTextButton("SaveLoad");
-        saveLoadButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                try {
-                    LoadSave();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        layout.add(saveLoadButton);
+        saveLoadButton = ui.findActor("save");
+        ui.onButtonPress("save",()-> loadSave());
+        ui.onButtonPress("return",()->Back());
         defColor = saveLoadButton.getColor();
+
+
+        ScrollPane scrollPane = ui.findActor("saveSlots");
+        scrollPane.setActor(layout);
     }
 }

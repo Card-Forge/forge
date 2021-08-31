@@ -18,7 +18,6 @@ package forge.adventure.libgdxgui.screens.match.winlose;
 
 import forge.game.GameView;
 import forge.gamemodes.quest.QuestWinLoseController;
-import forge.adventure.libgdxgui.screens.home.HomeScreen;
 
 /**
  * <p>
@@ -46,9 +45,6 @@ public class QuestWinLose extends ControlWinLose {
     @Override
     public final void showRewards() {
         //set loading overlay again
-        if (HomeScreen.instance.getQuestWorld().contains("XandomX")) {
-            HomeScreen.instance.updateQuestWorld(HomeScreen.instance.getQuestWorld().replace("XandomX","Random"));
-        }
         controller.showRewards();
     }
 
@@ -68,10 +64,6 @@ public class QuestWinLose extends ControlWinLose {
 
     @Override
     public void actionOnContinue() {
-        //prevent loading overlay to show on continuing match... TODO: refactor this to a better implementation
-        if (HomeScreen.instance.getQuestWorld().contains("Random")) {
-            HomeScreen.instance.updateQuestWorld(HomeScreen.instance.getQuestWorld().replace("Random","XandomX"));
-        }
         super.actionOnContinue();
     }
 }

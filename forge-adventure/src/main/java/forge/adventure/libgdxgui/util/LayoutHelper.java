@@ -9,7 +9,11 @@ import forge.adventure.libgdxgui.toolbox.FDisplayObject;
  */
 public final class LayoutHelper {
     private final float parentWidth, parentHeight;
-    private float x, y, lineBottom, gapX, gapY;
+    private float x;
+    private float y;
+    private float lineBottom;
+    private final float gapX;
+    private final float gapY;
 
     public LayoutHelper(FContainer parent) {
         this(parent, 3, 3);

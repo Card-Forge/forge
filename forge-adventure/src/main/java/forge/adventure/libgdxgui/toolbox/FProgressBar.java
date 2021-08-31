@@ -15,7 +15,7 @@ import java.util.List;
 public class FProgressBar extends FDisplayObject implements IProgressBar {
     public static Color BACK_COLOR, FORE_COLOR, SEL_BACK_COLOR, SEL_FORE_COLOR;
     private static FSkinFont MSG_FONT;
-    private static float TRAIL_INTERVAL = 5000; //complete one trail round every 5 seconds
+    private static final float TRAIL_INTERVAL = 5000; //complete one trail round every 5 seconds
 
     private long startTime = 0;
     private int maximum = 0, value = 0;

@@ -98,7 +98,7 @@ public enum FSkinTexture implements FImage {
     private final boolean repeat;
     private Texture texture;
     private final boolean isPlane;
-    private static List<String> PlanesValue;
+    private static final List<String> PlanesValue;
 
     FSkinTexture(String filename0, boolean repeat0, boolean isPlane0) {
         filename = filename0;

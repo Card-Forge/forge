@@ -11,7 +11,7 @@ import forge.adventure.libgdxgui.toolbox.FEvent.FEventHandler;
 public abstract class ComboBoxFilter<T extends InventoryItem, V> extends ItemFilter<T> {
     protected V filterValue;
     private boolean preventHandling = false;
-    private FComboBox<Object> comboBox = new FComboBox<Object>() {
+    private final FComboBox<Object> comboBox = new FComboBox<Object>() {
         @SuppressWarnings("unchecked")
         @Override
         protected String getDisplayText(Object item) {

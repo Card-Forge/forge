@@ -1,6 +1,7 @@
 package forge.adventure.util;
 
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -8,16 +9,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
-import java.util.concurrent.Callable;
 import java.util.function.Function;
 
 public class Controls {
     private static Skin SelectedSkin = null;
 
     static public TextButton newTextButton(String text) {
-        TextButton ret = new TextButton(text, GetSkin());
 
-        return ret;
+        return new TextButton(text, GetSkin());
     }
 
     static public SelectBox newComboBox(Object[] text, Object item, Function<Object, Void> func) {
@@ -77,13 +76,13 @@ public class Controls {
         return ret;
     }
 
-    static public TextButton newTextButton(String text, Callable func) {
+    static public TextButton newTextButton(String text, Runnable func) {
         TextButton ret = newTextButton(text);
         ret.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 try {
-                    func.call();
+                    func.run();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -102,6 +101,15 @@ public class Controls {
         CheckBox ret = new CheckBox(text, GetSkin());
         return ret;
     }
+    static public BitmapFont bigFont()
+    {
+        return SelectedSkin.getFont("big");
+    }
+    static public BitmapFont font()
+    {
+        return SelectedSkin.getFont("default");
+    }
+
 
     static public Skin GetSkin() {
 
@@ -138,7 +146,6 @@ public class Controls {
 
     public static Dialog newDialog(String title) {
         Dialog ret = new Dialog(title, GetSkin());
-
         return ret;
     }
 }

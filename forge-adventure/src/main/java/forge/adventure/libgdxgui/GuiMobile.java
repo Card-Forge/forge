@@ -10,7 +10,6 @@ import forge.adventure.libgdxgui.deck.FDeckViewer;
 import forge.adventure.libgdxgui.error.BugReportDialog;
 import forge.adventure.libgdxgui.screens.LoadingOverlay;
 import forge.adventure.libgdxgui.screens.match.MatchController;
-import forge.adventure.libgdxgui.screens.quest.QuestMenu;
 import forge.adventure.libgdxgui.screens.settings.GuiDownloader;
 import forge.adventure.libgdxgui.sound.AudioClip;
 import forge.adventure.libgdxgui.sound.AudioMusic;
@@ -36,7 +35,7 @@ import java.util.List;
 
 public class GuiMobile implements IGuiBase {
     private final String assetsDir;
-    private ImageFetcher imageFetcher = new LibGDXImageFetcher();
+    private final ImageFetcher imageFetcher = new LibGDXImageFetcher();
 
     public GuiMobile(final String assetsDir0) {
         assetsDir = assetsDir0;
@@ -293,12 +292,12 @@ public class GuiMobile implements IGuiBase {
 
     @Override
     public void showSpellShop() {
-        QuestMenu.showSpellShop();
+
     }
 
     @Override
     public void showBazaar() {
-        QuestMenu.showBazaar();
+
     }
 
     @Override

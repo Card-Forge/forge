@@ -165,13 +165,11 @@ public class ImageCache {
             final String cardfilename = ImageUtil.getImageKey(paperCard, backFace, true);
             if (!new File(ForgeConstants.CACHE_CARD_PICS_DIR + "/" + cardfilename + ".jpg").exists())
                 if (!new File(ForgeConstants.CACHE_CARD_PICS_DIR + "/" + cardfilename + ".png").exists())
-                    if (!new File(ForgeConstants.CACHE_CARD_PICS_DIR + "/" + TextUtil.fastReplace(cardfilename,".full", ".fullborder") + ".jpg").exists())
-                        return false;
+                    return new File(ForgeConstants.CACHE_CARD_PICS_DIR + "/" + TextUtil.fastReplace(cardfilename, ".full", ".fullborder") + ".jpg").exists();
         } else if (prefix.equals(ImageKeys.TOKEN_PREFIX)) {
             final String tokenfilename = imageKey.substring(2) + ".jpg";
 
-            if (!new File(ForgeConstants.CACHE_TOKEN_PICS_DIR, tokenfilename).exists())
-                return false;
+            return new File(ForgeConstants.CACHE_TOKEN_PICS_DIR, tokenfilename).exists();
         }
 
         return true;
@@ -258,7 +256,7 @@ public class ImageCache {
         if (deck.getAllCardsInASinglePool().toFlatList().size() <= 100) {
             for (PaperCard p : deck.getAllCardsInASinglePool().toFlatList()) {
                 if (getImage(p.getImageKey(false),false) == null)
-                    System.err.println("could not load card image:"+p.toString());
+                    System.err.println("could not load card image:"+ p);
             }
         }
     }

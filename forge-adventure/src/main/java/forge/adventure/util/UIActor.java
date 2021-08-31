@@ -13,8 +13,6 @@ import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.OrderedMap;
 import forge.adventure.data.UIData;
 
-import java.util.concurrent.Callable;
-
 public class UIActor extends Group {
     UIData data;
 
@@ -27,37 +25,48 @@ public class UIActor extends Group {
         for (OrderedMap<String, String> element : data.elements) {
             String type = element.get("type");
             Actor newActor;
-            switch (type) {
-                case "Selector":
-                    newActor = new Selector();
-                    readSelectorProperties((Selector) newActor, element.entries());
-                    break;
-                case "Label":
-                    newActor = new Label("", Controls.GetSkin());
-                    readLabelProperties((Label) newActor, element.entries());
-                    break;
-                case "Image":
-                    newActor = new Image();
-                    readImageProperties((Image) newActor, element.entries());
-                    break;
-                case "ImageButton":
-                    newActor = new ImageButton(Controls.GetSkin());
-                    readImageButtonProperties((ImageButton) newActor, element.entries());
-                    break;
-                case "Window":
-                    newActor = new Window("", Controls.GetSkin());
-                    readWindowProperties((Window) newActor, element.entries());
-                    break;
-                case "TextButton":
-                    newActor = new TextButton("", Controls.GetSkin());
-                    readButtonProperties((TextButton) newActor, element.entries());
-                    break;
-                case "TextField":
-                    newActor = new TextField("", Controls.GetSkin());
-                    readTextFieldProperties((TextField) newActor, element.entries());
-                    break;
-                default:
-                    throw new IllegalStateException("Unexpected value: " + type);
+            if(type==null)
+            {
+                newActor=new Actor();
+            }
+            else
+            {
+                switch (type) {
+                    case "Selector":
+                        newActor = new Selector();
+                        readSelectorProperties((Selector) newActor, element.entries());
+                        break;
+                    case "Label":
+                        newActor = new Label("", Controls.GetSkin());
+                        readLabelProperties((Label) newActor, element.entries());
+                        break;
+                    case "Image":
+                        newActor = new Image();
+                        readImageProperties((Image) newActor, element.entries());
+                        break;
+                    case "ImageButton":
+                        newActor = new ImageButton(Controls.GetSkin());
+                        readImageButtonProperties((ImageButton) newActor, element.entries());
+                        break;
+                    case "Window":
+                        newActor = new Window("", Controls.GetSkin());
+                        readWindowProperties((Window) newActor, element.entries());
+                        break;
+                    case "TextButton":
+                        newActor = new TextButton("", Controls.GetSkin());
+                        readButtonProperties((TextButton) newActor, element.entries());
+                        break;
+                    case "TextField":
+                        newActor = new TextField("", Controls.GetSkin());
+                        readTextFieldProperties((TextField) newActor, element.entries());
+                        break;
+                    case "Scroll":
+                        newActor = new ScrollPane(null, Controls.GetSkin());
+                        readScrollPaneProperties((ScrollPane) newActor, element.entries());
+                        break;
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + type);
+                }
             }
             //load Actor Properties
             float yvalue = 0;
@@ -87,6 +96,16 @@ public class UIActor extends Group {
         }
     }
 
+    private void readScrollPaneProperties(ScrollPane newActor, ObjectMap.Entries<String, String> entries) {
+        newActor.setActor(new Label("",Controls.GetSkin()));
+        for (ObjectMap.Entry property : entries) {
+            switch (property.key.toString()) {
+                case "style":
+                    newActor.setStyle(Controls.GetSkin().get(property.value.toString(), ScrollPane.ScrollPaneStyle.class));
+                    break;
+            }
+        }
+    }
     private void readWindowProperties(Window newActor, ObjectMap.Entries<String, String> entries) {
         for (ObjectMap.Entry property : entries) {
             switch (property.key.toString()) {
@@ -155,18 +174,14 @@ public class UIActor extends Group {
         }
     }
 
-    public void onButtonPress(String name, Callable func) {
+    public void onButtonPress(String name, Runnable func) {
 
         Actor button = findActor(name);
         assert button != null;
         button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                try {
-                    func.call();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                func.run();
             }
         });
     }

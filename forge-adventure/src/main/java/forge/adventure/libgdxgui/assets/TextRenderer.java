@@ -76,9 +76,9 @@ public class TextRenderer {
     private float width, height, totalHeight;
     private FSkinFont baseFont, font;
     private boolean wrap, needClip;
-    private List<Piece> pieces = new ArrayList<>();
-    private List<Float> lineWidths = new ArrayList<>();
-    private BreakIterator boundary = BreakIterator.getLineInstance(new Locale(Forge.locale));
+    private final List<Piece> pieces = new ArrayList<>();
+    private final List<Float> lineWidths = new ArrayList<>();
+    private final BreakIterator boundary = BreakIterator.getLineInstance(new Locale(Forge.locale));
 
     public TextRenderer() {
         this(false);
@@ -607,7 +607,7 @@ public class TextRenderer {
 
     private class TextPiece extends Piece {
         private String text;
-        private Color colorOverride;
+        private final Color colorOverride;
 
         private TextPiece(String text0, Color colorOverride0, boolean inReminderText0) {
             super(inReminderText0);
@@ -628,7 +628,7 @@ public class TextRenderer {
     }
 
     private class SymbolPiece extends Piece {
-        private FSkinImage image;
+        private final FSkinImage image;
 
         private SymbolPiece(FSkinImage image0, boolean inReminderText0) {
             super(inReminderText0);

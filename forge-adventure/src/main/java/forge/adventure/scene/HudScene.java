@@ -17,16 +17,16 @@ public class HudScene extends Scene implements InputProcessor {
     }
 
     @Override
-    public boolean Leave() {
-        stage.Leave();
+    public boolean leave() {
+        stage.leave();
         return true;
     }
 
     @Override
-    public void Enter() {
+    public void enter() {
         Gdx.input.setInputProcessor(this);
-        stage.Enter();
-        hud.Enter();
+        stage.enter();
+        hud.enter();
     }
 
     @Override
@@ -35,23 +35,22 @@ public class HudScene extends Scene implements InputProcessor {
     }
 
     @Override
+    public void act(float delta)
+    {
+        stage.act(delta);
+        hud.act(delta);
+    }
+    @Override
     public void render() {
 
-        //Batch.getProjectionMatrix().setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
-
-        //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT | (Gdx.graphics.getBufferFormat().coverageSampling? GL20.GL_COVERAGE_BUFFER_BIT_NV:0));
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.draw();
-
-        //stage.getBatch().setProjectionMatrix(hud.getStage().getCamera().combined); //set the spriteBatch to draw what our stageViewport sees
         hud.draw();
 
-        //Batch.end();
     }
 
     @Override
-    public void ResLoaded() {
+    public void resLoaded() {
 
 
     }

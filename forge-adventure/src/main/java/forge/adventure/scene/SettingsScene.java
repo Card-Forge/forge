@@ -8,26 +8,24 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
 import forge.adventure.AdventureApplicationAdapter;
 import forge.adventure.util.Controls;
 import forge.localinstance.properties.ForgePreferences;
 import forge.util.Localizer;
 
 
-public class SettingsScene extends Scene {
+public class SettingsScene extends UIScene {
 
 
     static public ForgePreferences Preference;
     Stage stage;
     Texture Background;
     private Table settingGroup;
-    private ScrollPane scrollPane;
 
-    @Override
-    public void Enter() {
-        Gdx.input.setInputProcessor(stage); //Start taking input from the ui
+    public SettingsScene() {
+        super("ui/settings.json");
     }
+
 
     @Override
     public void dispose() {
@@ -35,8 +33,7 @@ public class SettingsScene extends Scene {
             stage.dispose();
     }
 
-    @Override
-    public void render() {
+    public void renderAct(float delta) {
 
 
         Gdx.gl.glClearColor(1, 0, 1, 1);
@@ -46,17 +43,17 @@ public class SettingsScene extends Scene {
         stage.getBatch().draw(Background, 0, 0, GetIntendedWidth(), GetIntendedHeight());
         stage.getBatch().enableBlending();
         stage.getBatch().end();
-        stage.act(Gdx.graphics.getDeltaTime());
+        stage.act(delta);
         stage.draw();
 
     }
 
-    public boolean Back() {
-        AdventureApplicationAdapter.CurrentAdapter.SwitchScene(AdventureApplicationAdapter.CurrentAdapter.GetLastScene());
+    public boolean back() {
+        AdventureApplicationAdapter.instance.switchToLast();
         return true;
     }
 
-    private void AddSettingButton(String name, Class type, ForgePreferences.FPref pref, Object[] para) {
+    private void addSettingButton(String name, Class type, ForgePreferences.FPref pref, Object[] para) {
 
 
         Actor control;
@@ -105,41 +102,38 @@ public class SettingsScene extends Scene {
             control = Controls.newLabel("");
 
         }
-        control.setHeight(40);
-        Label label = Controls.newLabel(name);
-        //nameGroup.addActor(label);
-        settingGroup.row();
-        settingGroup.add(label).align(Align.left);
-        settingGroup.add(control);
+        Label label = new Label(name, Controls.GetSkin().get("white",Label.LabelStyle.class));
+
+        settingGroup.row().space(5);
+        settingGroup.add(label).align(Align.left).fillX();
+
+        settingGroup.add(control).align(Align.right);
     }
 
     @Override
-    public void ResLoaded() {
-        stage = new Stage(new StretchViewport(GetIntendedWidth(), GetIntendedHeight()));
-        Background = new Texture(forge.adventure.AdventureApplicationAdapter.CurrentAdapter.GetRes().GetFile("ui/title_bg.png"));
+    public void resLoaded() {
+        super.resLoaded();
         settingGroup = new Table();
         if (Preference == null) {
             Preference = new ForgePreferences();
         }
         Localizer localizer = Localizer.getInstance();
 
-        AddSettingButton(localizer.getMessage("lblCardName"), boolean.class, ForgePreferences.FPref.UI_OVERLAY_CARD_NAME, new Object[]{});
-        AddSettingButton(localizer.getMessage("cbAdjustMusicVolume"), int.class, ForgePreferences.FPref.UI_VOL_MUSIC, new Object[]{0, 100});
-        AddSettingButton(localizer.getMessage("cbAdjustSoundsVolume"), int.class, ForgePreferences.FPref.UI_VOL_SOUNDS, new Object[]{0, 100});
-        AddSettingButton(localizer.getMessage("lblManaCost"), boolean.class, ForgePreferences.FPref.UI_OVERLAY_CARD_MANA_COST, new Object[]{});
-        AddSettingButton(localizer.getMessage("lblPowerOrToughness"), boolean.class, ForgePreferences.FPref.UI_OVERLAY_CARD_POWER, new Object[]{});
-        AddSettingButton(localizer.getMessage("lblCardID"), boolean.class, ForgePreferences.FPref.UI_OVERLAY_CARD_ID, new Object[]{});
-        AddSettingButton(localizer.getMessage("lblAbilityIcon"), boolean.class, ForgePreferences.FPref.UI_OVERLAY_ABILITY_ICONS, new Object[]{});
-        AddSettingButton(localizer.getMessage("nlImageFetcher"), boolean.class, ForgePreferences.FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER, new Object[]{});
+        addSettingButton(localizer.getMessage("lblCardName"), boolean.class, ForgePreferences.FPref.UI_OVERLAY_CARD_NAME, new Object[]{});
+        addSettingButton(localizer.getMessage("cbAdjustMusicVolume"), int.class, ForgePreferences.FPref.UI_VOL_MUSIC, new Object[]{0, 100});
+        addSettingButton(localizer.getMessage("cbAdjustSoundsVolume"), int.class, ForgePreferences.FPref.UI_VOL_SOUNDS, new Object[]{0, 100});
+        addSettingButton(localizer.getMessage("lblManaCost"), boolean.class, ForgePreferences.FPref.UI_OVERLAY_CARD_MANA_COST, new Object[]{});
+        addSettingButton(localizer.getMessage("lblPowerOrToughness"), boolean.class, ForgePreferences.FPref.UI_OVERLAY_CARD_POWER, new Object[]{});
+        addSettingButton(localizer.getMessage("lblCardID"), boolean.class, ForgePreferences.FPref.UI_OVERLAY_CARD_ID, new Object[]{});
+        addSettingButton(localizer.getMessage("lblAbilityIcon"), boolean.class, ForgePreferences.FPref.UI_OVERLAY_ABILITY_ICONS, new Object[]{});
+        addSettingButton(localizer.getMessage("cbImageFetcher"), boolean.class, ForgePreferences.FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER, new Object[]{});
 
 
         settingGroup.row();
-        settingGroup.add(Controls.newTextButton("Return", () -> Back()));
+        ui.onButtonPress("return", () -> back());
 
-        scrollPane = new ScrollPane(settingGroup, Controls.GetSkin());
-        scrollPane.setScrollingDisabled(true, false);
-        scrollPane.setFillParent(true);
-        stage.addActor(scrollPane);
+        ScrollPane scrollPane = ui.findActor("settings");
+        scrollPane.setActor(settingGroup);
     }
 
     @Override

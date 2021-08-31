@@ -11,7 +11,7 @@ public class FTextArea extends FScrollPane {
     private String text;
     private FSkinFont font;
     private int alignment;
-    private Vector2 insets;
+    private final Vector2 insets;
     private FSkinColor textColor;
     private final TextRenderer renderer;
     private boolean centerVertically;

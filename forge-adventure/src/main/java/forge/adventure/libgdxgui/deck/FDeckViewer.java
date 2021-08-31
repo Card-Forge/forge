@@ -22,7 +22,7 @@ import java.util.Map.Entry;
 
 public class FDeckViewer extends FScreen {
     private static FDeckViewer deckViewer;
-    private static FPopupMenu menu = new FPopupMenu() {
+    private static final FPopupMenu menu = new FPopupMenu() {
         @Override
         protected void buildMenu() {
             Deck deck = deckViewer.deck;

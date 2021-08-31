@@ -1,7 +1,5 @@
 package forge.adventure.character;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
@@ -14,19 +12,22 @@ import java.util.HashMap;
 
 public class CharacterSprite extends MapActor {
     private final HashMap<AnimationTypes, HashMap<AnimationDirections, Animation<TextureRegion>>> animations = new HashMap<>();
-    TextureAtlas atlas;
-    TextureRegion avatar;
-    Texture debugTexture;
     float timer;
     private Animation<TextureRegion> currentAnimation = null;
     private AnimationTypes currentAnimationType = AnimationTypes.Idle;
     private AnimationDirections currentAnimationDir = AnimationDirections.None;
+    private Sprite avatar;
 
     public CharacterSprite(String path) {
-        atlas = Res.CurrentRes.getAtlas(path);
+        collisionHeight=0.4f;
+        load(path);
+    }
+
+    protected void load(String path) {
+        TextureAtlas atlas = Res.CurrentRes.getAtlas(path);
         for (Texture texture : atlas.getTextures())
             texture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
-
+        animations.clear();
         for (AnimationTypes stand : AnimationTypes.values()) {
             if (stand == AnimationTypes.Avatar) {
                 avatar = atlas.createSprite(stand.toString());
@@ -137,9 +138,6 @@ public class CharacterSprite extends MapActor {
         }
     }
 
-    public TextureRegion getAvatar() {
-        return avatar;
-    }
 
     @Override
     protected void positionChanged() {
@@ -154,7 +152,6 @@ public class CharacterSprite extends MapActor {
     public void moveBy(float x, float y) {
         super.moveBy(x, y);
         if (x == 0 && y == 0) {
-            setAnimation(AnimationTypes.Idle);
             return;
         }
         Vector2 vec = new Vector2(x, y);
@@ -188,16 +185,7 @@ public class CharacterSprite extends MapActor {
         return new Vector2(getX(), getY());
     }
 
-    private Texture getDebugTexture() {
-        if (debugTexture == null) {
-            Pixmap pixmap = new Pixmap((int) getWidth(), (int) getHeight(), Pixmap.Format.RGBA8888);
-            pixmap.setColor(Color.RED);
-            pixmap.drawRectangle(0, 0, (int) getWidth(), (int) getHeight());
-            debugTexture = new Texture(pixmap);
-            pixmap.dispose();
-        }
-        return debugTexture;
-    }
+
 
     @Override
     public void act(float delta) {
@@ -214,8 +202,13 @@ public class CharacterSprite extends MapActor {
         setHeight(currentFrame.getRegionHeight());
         setWidth(currentFrame.getRegionWidth());
         batch.draw(currentFrame, getX(), getY());
+        super.draw(batch,parentAlpha);
         //batch.draw(getDebugTexture(),getX(),getY());
 
+    }
+
+    public Sprite getAvatar() {
+        return avatar;
     }
 
     public enum AnimationTypes {

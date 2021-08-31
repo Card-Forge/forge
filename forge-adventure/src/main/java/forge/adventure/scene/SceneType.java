@@ -9,9 +9,12 @@ public enum SceneType {
     DuelScene(new forge.adventure.scene.DuelScene()),
     SaveLoadScene(new forge.adventure.scene.SaveLoadScene()),
     DeckEditScene(new forge.adventure.scene.DeckEditScene()),
-    TileMapScene(new forge.adventure.scene.TileMapScene());
-    public final forge.adventure.scene.Scene instance;
+    TileMapScene(new forge.adventure.scene.TileMapScene()),
+    RewardScene(new forge.adventure.scene.RewardScene()),
+    InnScene(new forge.adventure.scene.InnScene());
 
+
+    public final forge.adventure.scene.Scene instance;
     SceneType(forge.adventure.scene.Scene scene) {
         this.instance = scene;
     }

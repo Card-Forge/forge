@@ -11,9 +11,9 @@ public class FEvent {
         CLOSE
     }
 
-    private FDisplayObject source;
-    private FEventType type;
-    private Object args;
+    private final FDisplayObject source;
+    private final FEventType type;
+    private final Object args;
 
     public FEvent(FDisplayObject source0, FEventType type0) {
         this(source0, type0, null);

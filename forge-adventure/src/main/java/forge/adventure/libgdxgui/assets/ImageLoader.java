@@ -23,7 +23,7 @@ import java.util.List;
 import static forge.adventure.libgdxgui.assets.ImageCache.croppedBorderImage;
 
 final class ImageLoader extends CacheLoader<String, Texture> {
-    private static List<String> borderlessCardlistKey = FileUtil.readFile(ForgeConstants.BORDERLESS_CARD_LIST_FILE);
+    private static final List<String> borderlessCardlistKey = FileUtil.readFile(ForgeConstants.BORDERLESS_CARD_LIST_FILE);
 
     Texture n;
     @Override
@@ -47,7 +47,7 @@ final class ImageLoader extends CacheLoader<String, Texture> {
                 return t;
             }
             catch (Exception ex) {
-                    Forge.log("Could not read image file " + fh.path() + "\nException:\n" + ex.toString());
+                    Forge.log("Could not read image file " + fh.path() + "\nException:\n" + ex);
                     return null;
             }
         }

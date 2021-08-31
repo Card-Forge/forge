@@ -21,8 +21,15 @@ public abstract class FGestureAdapter extends InputAdapter {
     public abstract boolean zoom(float x, float y, float amount);
     public abstract boolean scrolled(float amountX, float amountY);
 
-    private float tapSquareSize, longPressDelay, lastTapX, lastTapY, tapSquareCenterX, tapSquareCenterY;
-    private long tapCountInterval, flingDelay, lastTapTime;
+    private final float tapSquareSize;
+    private final float longPressDelay;
+    private float lastTapX;
+    private float lastTapY;
+    private float tapSquareCenterX;
+    private float tapSquareCenterY;
+    private final long tapCountInterval;
+    private final long flingDelay;
+    private long lastTapTime;
     private int tapCount, lastTapButton, lastTapPointer;
     private boolean inTapSquare, pressed, longPressed, longPressHandled, pinching, panning, disablePanning;
 

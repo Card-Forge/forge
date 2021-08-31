@@ -6,14 +6,17 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Clipboard;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.Clipboard;
-import forge.adventure.libgdxgui.Forge;;
+import forge.adventure.libgdxgui.Forge;
 import forge.adventure.libgdxgui.FrameRate;
 import forge.adventure.libgdxgui.GuiMobile;
-import forge.adventure.scene.SettingsScene;
 import forge.adventure.libgdxgui.assets.AssetsDownloader;
 import forge.adventure.libgdxgui.assets.FSkin;
 import forge.adventure.libgdxgui.assets.FSkinFont;
 import forge.adventure.libgdxgui.assets.ImageCache;
+import forge.adventure.libgdxgui.screens.FScreen;
+import forge.adventure.libgdxgui.screens.SplashScreen;
+import forge.adventure.scene.SettingsScene;
+import forge.adventure.util.Res;
 import forge.error.ExceptionHandler;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -21,13 +24,14 @@ import forge.interfaces.IDeviceAdapter;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
-import forge.adventure.libgdxgui.screens.FScreen;
-import forge.adventure.libgdxgui.screens.SplashScreen;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
+import forge.util.BuildInfo;
 import forge.util.CardTranslation;
 import forge.util.FileUtil;
 import forge.util.Localizer;
+import io.sentry.Sentry;
+import io.sentry.SentryClient;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -76,17 +80,16 @@ class StartAdventure extends AdventureApplicationAdapter {
     public StartAdventure(String plane) {
 
         super(plane);
-
         this.plane = plane;
         Forge.isTabletDevice = true;
         Forge.isPortraitMode = false;
         Forge.hdbuttons = true;
         Forge.hdstart = true;
 
-        String path= Files.exists(Paths.get("./res"))?".":"../forge-gui/";
+        String path= Files.exists(Paths.get("./res"))?"./":"../forge-gui/";
 
         app = (Forge) Forge.getApp(new Lwjgl3Clipboard(), new DesktopAdapter(""), path, true, false, 0, true, 0, "", "");
-
+        new Res(plane);
         clipboard = new Lwjgl3Clipboard();
         GuiBase.setUsingAppDirectory(false); //obb directory on android uses the package name as entrypoint
         GuiBase.setInterface(new GuiMobile(path));
@@ -236,7 +239,7 @@ class StartAdventure extends AdventureApplicationAdapter {
                             FModel.getPreferences().save();
                         }
 
-                        ResLoaded();
+                        resLoaded();
                         if (!enablePreloadExtendedArt)
                             return;
                         List<String> borderlessCardlistkeys = FileUtil.readFile(ForgeConstants.BORDERLESS_CARD_LIST_FILE);
@@ -265,8 +268,26 @@ class StartAdventure extends AdventureApplicationAdapter {
 public class Main {
 
     public static void main(String[] args) {
+
+        Sentry.init();
+        SentryClient sentryClient = Sentry.getStoredClient();
+        sentryClient.setRelease(BuildInfo.getVersionString());
+        sentryClient.setEnvironment(System.getProperty("os.name"));
+        sentryClient.addTag("Java Version", System.getProperty("java.version"));
+
+        // HACK - temporary solution to "Comparison method violates it's general contract!" crash
+        System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
+
+        //Turn off the Java 2D system's use of Direct3D to improve rendering speed (particularly when Full Screen)
+        System.setProperty("sun.java2d.d3d", "false");
+
+        String plane="Shandalar";
+
+        if(args.length>=1)
+            plane=args[0];
         AdventureApplicationConfiguration config = new AdventureApplicationConfiguration();
-        config.SetPlane("Shandalar");
+
+        config.SetPlane(plane);
         config.setFullScreen(false);
         new Lwjgl3Application(new StartAdventure(config.Plane), config);
 

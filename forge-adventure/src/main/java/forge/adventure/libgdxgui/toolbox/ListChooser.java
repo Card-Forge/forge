@@ -76,8 +76,8 @@ public class ListChooser<T> extends FContainer {
     // initialized before; listeners may be added to it
     private FTextField txtSearch;
     private FLabel btnSearch;
-    private ChoiceList lstChoices;
-    private FOptionPane optionPane;
+    private final ChoiceList lstChoices;
+    private final FOptionPane optionPane;
     private final Collection<T> list;
     private final Function<T, String> display;
     private final Callback<List<T>> callback;
@@ -228,8 +228,6 @@ public class ListChooser<T> extends FContainer {
     /**
      * Shows the dialog and returns after the dialog was closed.
      *
-     * @param index0 index to select when shown
-     * @return a boolean.
      */
     public void show(final T item, final boolean selectMax) {
         if (called) {

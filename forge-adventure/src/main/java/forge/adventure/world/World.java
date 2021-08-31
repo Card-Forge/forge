@@ -6,217 +6,233 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Json;
-import forge.adventure.data.BiomData;
-import forge.adventure.data.BiomSpriteData;
-import forge.adventure.data.PointOfIntrestData;
-import forge.adventure.data.WorldData;
+import forge.adventure.data.*;
 import forge.adventure.scene.Scene;
+import forge.adventure.util.SaveFileContent;
 import forge.adventure.util.Serializer;
 import javafx.util.Pair;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 
-public class World implements Serializable, Disposable {
+public class World implements  Disposable, SaveFileContent {
 
 
     private WorldData data;
-    private double[][] noiseData;
     private Pixmap biomImage;
-    private Pixmap noiseImage;
     private long[][] biomMap;
+    private int[][] terrainMap;
     private int width;
     private int height;
     private SpritesDataMap mapObjectIds;
     private PointOfIntrestMap mapPoiIds;
-    private int tileSize;
     private BiomTexture[] biomTexture;
+    private long seed;
+    private final Random random = new Random();
 
+    public Random getRandom()
+    {
+        return random;
+    }
     static public int highestBiom(long biom) {
         return (int) (Math.log(Long.highestOneBit(biom)) / Math.log(2));
     }
 
-    private void writeObject(java.io.ObjectOutputStream out) throws IOException {
+    @Override
+    public void writeToSaveFile(java.io.ObjectOutputStream out) throws IOException {
 
 
-        out.writeObject(data);
-        out.writeObject(noiseData);
         Serializer.WritePixmap(out, biomImage);
-        Serializer.WritePixmap(out, noiseImage);
         out.writeObject(biomMap);
+        out.writeObject(terrainMap);
         out.writeInt(width);
         out.writeInt(height);
         out.writeObject(mapObjectIds);
-        out.writeInt(tileSize);
-        out.writeObject(biomTexture);
+        mapPoiIds.writeToSaveFile(out);
+        out.writeLong(seed);
     }
 
-    private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
+    @Override
+    public void readFromSaveFile(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
 
-        data = (WorldData) in.readObject();
-        noiseData = (double[][]) in.readObject();
+        FileHandle handle = forge.adventure.util.Res.CurrentRes.GetFile("world/world.json");
+        String rawJson = handle.readString();
+        data = (new Json()).fromJson(WorldData.class, rawJson);
+
         if (biomImage != null) biomImage.dispose();
         biomImage = Serializer.ReadPixmap(in);
-        if (noiseImage != null) noiseImage.dispose();
-        noiseImage = Serializer.ReadPixmap(in);
         biomMap = (long[][]) in.readObject();
+        terrainMap = (int[][]) in.readObject();
         width = in.readInt();
         height = in.readInt();
         mapObjectIds = (SpritesDataMap) in.readObject();
-        tileSize = in.readInt();
-        biomTexture = (BiomTexture[]) in.readObject();
+        if(mapPoiIds==null)mapPoiIds=new PointOfIntrestMap(1,1,1,1);
+        mapPoiIds.readFromSaveFile(in);
+        seed = in.readLong();
+
+        biomTexture = new BiomTexture[data.GetBioms().size()+1];
+        for(int i=0;i<data.GetBioms().size();i++)
+        {
+            biomTexture[i] = new BiomTexture(data.GetBioms().get(i), data.tileSize);
+        }
+        biomTexture[data.GetBioms().size()] = new BiomTexture(data.roadTileset, data.tileSize);
+
 
 
     }
 
-    public BiomSpriteData GetObject(int id) {
+    public BiomSpriteData getObject(int id) {
         return mapObjectIds.get(id);
     }
+    private class DrawingInformation {
 
-    public Pixmap GetBiomSprite(int x, int y) {
+        private int neighbors;
+        private final BiomTexture regions;
+        private final int terrain;
+
+        public DrawingInformation(int neighbors, BiomTexture regions, int terrain) {
+
+            this.neighbors = neighbors;
+            this.regions = regions;
+            this.terrain = terrain;
+        }
+
+        public void draw(Pixmap drawingPixmap) {
+            regions.drawPixmapOn(terrain,neighbors,drawingPixmap);
+        }
+    }
+    public Pixmap getBiomSprite(int x, int y) {
         if (x < 0 || y <= 0 || x >= width || y > height)
-            return new Pixmap(tileSize, tileSize, Pixmap.Format.RGB888);
+            return new Pixmap(data.tileSize, data.tileSize, Pixmap.Format.RGB888);
 
-        long biomIndex = GetBiom(x, y);
-        double noise = GetNoise(x, y);
-        Pixmap drawingPixmap = new Pixmap(tileSize, tileSize, Pixmap.Format.RGBA8888);
-        boolean drawnFirst = false;
-        BiomTexture lastFullTile = null;
-        int lastFullTileSubIndex = 0;
+        long biomIndex = getBiom(x, y);
+        int terrain = getTerrainIndex(x, y);
+        Pixmap drawingPixmap = new Pixmap(data.tileSize, data.tileSize, Pixmap.Format.RGBA8888);
+        Array<DrawingInformation> information=new Array<>();
         for (int i = 0; i < biomTexture.length; i++) {
             if ((biomIndex & 1 << i) == 0) {
                 continue;
             }
             BiomTexture regions = biomTexture[i];
-            int biomSubIndex = (int) (noise * (double) regions.images.size);
-            if (x == 0 || y == 1 || x == width - 1 || y == height)//edge
+            if (x <= 0 || y <= 1 || x >= width - 1 || y >= height)//edge
             {
-                return regions.GetPixmapFor(biomSubIndex);
+                return regions.getPixmap(terrain);
             }
+            int biomTerrain=Math.min(regions.images.size-1,terrain);
 
 
             int neighbors = 0b000_000_000;
 
             int bitIndex = 8;
-            int smallestSubBiom = biomSubIndex;
-            int biggestSubBiom = biomSubIndex;
-            boolean only1Biom = true;
             for (int ny = 1; ny > -2; ny--) {
                 for (int nx = -1; nx < 2; nx++) {
-                    long otherBiom = GetBiom(x + nx, y + ny);
-                    double othernoise = GetNoise(x + nx, y + ny);
-                    int otherbiomSubIndex = (int) (othernoise * (double) regions.images.size);
+                    long otherBiom = getBiom(x + nx, y + ny);
+                    int otherTerrain = getTerrainIndex(x + nx, y + ny);
 
-                    if (smallestSubBiom > otherbiomSubIndex)
-                        smallestSubBiom = otherbiomSubIndex;
-                    if (biggestSubBiom < otherbiomSubIndex)
-                        biggestSubBiom = otherbiomSubIndex;
 
-                    if ((otherBiom & 1 << i) == 0) {
-                        only1Biom = false;
-                    }
-                    if ((otherBiom & 1 << i) != 0 && biomSubIndex <= otherbiomSubIndex) {
-                        int bit = 1;
-                        bit = bit << bitIndex;
-                        neighbors |= bit;
+                    if ((otherBiom & 1 << i) != 0 && biomTerrain <= otherTerrain)
+                        neighbors |= (1 << bitIndex);
 
-                    }
                     bitIndex--;
                 }
             }
-            if (neighbors == 0b111_111_111) {
-                lastFullTile = regions;
-                lastFullTileSubIndex = biomSubIndex;
-            } else {
-                if (!drawnFirst) {
-                    drawnFirst = true;
-                    if (lastFullTile == null) {
-                        drawingPixmap.drawPixmap(regions.images.get(Math.max(biomSubIndex, 0)).get(BiomTexture.BigPictures.Center.value), 0, 0);
-                    } else {
-                        drawingPixmap.drawPixmap(lastFullTile.images.get(lastFullTileSubIndex).get(BiomTexture.BigPictures.Center.value), 0, 0);
+            if(biomTerrain!=0&&neighbors!=0b111_111_111)
+            {
+                 bitIndex = 8;
+                int baseneighbors=0;
+                for (int ny = 1; ny > -2; ny--) {
+                    for (int nx = -1; nx < 2; nx++) {
+                        if ((getBiom(x + nx, y + ny) & (1 << i)) != 0 )
+                            baseneighbors |= (1 << bitIndex);
+                        bitIndex--;
                     }
                 }
-                if (only1Biom) {
-                    //drawingPixmap.drawPixmap(regions.images.get(Math.min(biomSubIndex,0)).get(BiomTexture.BigPictures.Center.value),0,0);
-                    drawingPixmap.drawPixmap(regions.images.get(Math.max(biomSubIndex - 1, 0)).get(BiomTexture.BigPictures.Center.value), 0, 0);
-                }
-                regions.GetPixmapFor(biomSubIndex, neighbors, drawingPixmap);
+                information.add(new DrawingInformation(baseneighbors,regions,0) );
             }
+            information.add(new DrawingInformation(neighbors,regions,biomTerrain) );
+
         }
-        if (!drawnFirst) {
-            drawingPixmap.drawPixmap(lastFullTile.images.get(lastFullTileSubIndex).get(BiomTexture.BigPictures.Center.value), 0, 0);
+        int lastFullNeighbour=-1;
+        int counter=0;
+        for(DrawingInformation info:information)
+        {
+            if(info.neighbors==0b111_111_111)
+                lastFullNeighbour= counter;
+            counter++;
+
+        }
+        counter=0;
+        if(lastFullNeighbour<0&&information.size!=0)
+            information.get(0).neighbors=0b111_111_111;
+        for(DrawingInformation info:information)
+        {
+            if(counter<lastFullNeighbour)
+            {
+                counter++;
+                continue;
+            }
+            info.draw(drawingPixmap);
         }
         return drawingPixmap;
 
     }
 
-    public double GetNoise(int x, int y) {
-        return noiseData[x][height - y];
+    public int getTerrainIndex(int x, int y) {
+        return terrainMap[x][height - y];
     }
 
-    public long GetBiom(int x, int y) {
+    public long getBiom(int x, int y) {
         return biomMap[x][height - y];
     }
 
-    public WorldData GetData() {
+    public WorldData getData() {
         return data;
     }
 
-    public World GenerateNew() {
+    public World generateNew(long seed) {
 
         FileHandle handle = forge.adventure.util.Res.CurrentRes.GetFile("world/world.json");
         String rawJson = handle.readString();
         data = (new Json()).fromJson(WorldData.class, rawJson);
-        Random rand = new Random();
-        int seed = rand.nextInt();
+        if(seed==0)
+        {
+            seed=random.nextLong();
+        }
+        this.seed=seed;
+        random.setSeed(seed);
         OpenSimplexNoise noise = new OpenSimplexNoise(seed);
 
-        double noiceZoom = data.noiceZoomBiom;
-        double noiceObjectZoom = data.noiceZoomObject;
+        double noiseZoom = data.noiseZoomBiom;
         width = data.width;
         height = data.height;
-        tileSize = data.tileSize;
         //save at all data
-        noiseData = new double[width][height];
         biomMap = new long[width][height];
+        terrainMap= new int[width][height];
         Pixmap pix = new Pixmap(width, height, Pixmap.Format.RGB888);
-        Pixmap noicePix = new Pixmap(width, height, Pixmap.Format.RGB888);
+        Pixmap noisePix = new Pixmap(width, height, Pixmap.Format.RGB888);
 
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                noiseData[x][y] = (noise.eval(x / (double) width * noiceZoom, y / (double) height * noiceZoom) + 1) / 2;
-                noicePix.setColor((float) noiseData[x][y], (float) noiseData[x][y], (float) noiseData[x][y], 1);
-                noicePix.drawPixel(x, y);
                 biomMap[x][y] = 0;
+                terrainMap[x][y] = 0;
             }
         }
 
         pix.setColor(1, 0, 0, 1);
         pix.fill();
 
-        /*for(long x=0;x<sizeX;x++)
-        {
-            for(long y=0;y<sizeY;y++)
-            {
-                //value 0-1 based on noise
-                ;
-                float value=(float)noise.eval((double) x/(double)sizeX*noiceZoom,(double)y/(double)sizeY*noiceZoom);
-
-
-            }
-        }*/
         int biomIndex = -1;
         biomTexture = new BiomTexture[data.GetBioms().size() + 1];
         for (BiomData biom : data.GetBioms()) {
 
             biomIndex++;
-            biomTexture[biomIndex] = new BiomTexture(biom.tileset, data.tileSize, biom.name);
+            biomTexture[biomIndex] = new BiomTexture(biom, data.tileSize);
             int biomXStart = (int) Math.round(biom.startPointX * (double) width);
             int biomYStart = (int) Math.round(biom.startPointY * (double) height);
             int biomWidth = (int) Math.round(biom.width * (double) width);
@@ -235,8 +251,8 @@ public class World implements Serializable, Disposable {
             for (int x = beginx; x < endx; x++) {
                 for (int y = beginy; y < endy; y++) {
                     //value 0-1 based on noise
-                    double noiseValue = noiseData[x][y];
-                    noiseValue *= biom.noiceWeight;
+                    double noiseValue = (noise.eval(x / (double) width * noiseZoom, y / (double) height * noiseZoom) + 1) / 2;
+                    noiseValue *= biom.noiseWeight;
                     //value 0-1 based on dist to origin
                     double distanceValue = (Math.sqrt((x - biomXStart) * (x - biomXStart) + (y - biomYStart) * (y - biomYStart))) / (Math.max(biomWidth, biomHeight) / 2);
                     distanceValue *= biom.distWeight;
@@ -250,33 +266,46 @@ public class World implements Serializable, Disposable {
                         pix.setColor(color.r, color.g, color.b, 1);
                         pix.drawPixel(x, y);
                         biomMap[x][y] |= (1 << biomIndex);
+                        int terrainCounter=1;
+                        if(biom.terrain==null)
+                            continue;
+                        for(BiomTerrainData terrain:biom.terrain)
+                        {
+                            double terrainNoise = (noise.eval(x / (double) width * (noiseZoom*terrain.resolution), y / (double) height * (noiseZoom*terrain.resolution)) + 1) / 2;
+                            if(terrainNoise>=terrain.min&&terrainNoise<=terrain.max)
+                            {
+                                terrainMap[x][y]=terrainCounter;
+                            }
+                            terrainCounter++;
+                        }
                     }
 
                 }
             }
         }
 
-        mapPoiIds = new PointOfIntrestMap(GetChunkSize(), tileSize, data.width / GetChunkSize());
-        List<PointOfIntrest> towns = new ArrayList<>();
-        List<Rectangle> rectangles = new ArrayList<>();
+        mapPoiIds = new PointOfIntrestMap(GetChunkSize(), data.tileSize, data.width / GetChunkSize(),data.height / GetChunkSize());
+        List<PointOfInterest> towns = new ArrayList<>();
+        List<Rectangle> otherPoints = new ArrayList<>();
+        otherPoints.add(new Rectangle(((float)data.width*data.playerStartPosX*(float)data.tileSize)-data.tileSize*10f,((float)data.height*data.playerStartPosY*data.tileSize)-data.tileSize*10f,data.tileSize*20,data.tileSize*20));
         for (BiomData biom : data.GetBioms()) {
-            for (PointOfIntrestData poi : biom.getPointsOfIntrest()) {
+            for (PointOfInterestData poi : biom.getPointsOfIntrest()) {
                 for (int i = 0; i < poi.count; i++) {
                     for (int counter = 0; counter < 100; counter++)//tries 100 times to find a free point
                     {
 
-                        float radius = (float) Math.sqrt((rand.nextDouble() * poi.radiusFactor) + poi.radiusOffset);
-                        float theta = (float) (rand.nextDouble() * 2 * Math.PI);
+                        float radius = (float) Math.sqrt((random.nextDouble() * poi.radiusFactor) + poi.radiusOffset);
+                        float theta = (float) (random.nextDouble() * 2 * Math.PI);
                         float x = (float) (radius * Math.cos(theta));
                         x *= (biom.width * width / 2);
                         x += (biom.startPointX * width);
                         float y = (float) (radius * Math.sin(theta));
                         y *= (biom.height * height / 2);
                         y += (height - (biom.startPointY * height));
-                        y = Math.round(y) * tileSize;
-                        x = Math.round(x) * tileSize;
+                        y = Math.round(y) * data.tileSize;
+                        x = Math.round(x) * data.tileSize;
                         boolean breakNextLoop = false;
-                        for (Rectangle rect : rectangles) {
+                        for (Rectangle rect : otherPoints) {
                             if (rect.contains(x, y)) {
                                 breakNextLoop = true;
                                 break;
@@ -284,15 +313,15 @@ public class World implements Serializable, Disposable {
                         }
                         if (breakNextLoop)
                             continue;
-                        rectangles.add(new Rectangle(x - tileSize * 10, y - tileSize * 10, tileSize * 20, tileSize * 20));
-                        PointOfIntrest newPoint = new PointOfIntrest(poi, new Vector2(x, y), rand);
+                        otherPoints.add(new Rectangle(x - data.tileSize * 10, y - data.tileSize * 10, data.tileSize * 20, data.tileSize * 20));
+                        PointOfInterest newPoint = new PointOfInterest(poi, new Vector2(x, y), random);
 
                         mapPoiIds.add(newPoint);
 
-                        if (poi.type.equals("town")) {
-                            Color color = biom.GetColor();
-                            pix.setColor(color.r, 0.1f, 0.1f, 1);
-                            pix.drawRectangle((int) x / tileSize - 5, height - (int) y / tileSize - 5, 10, 10);
+                        Color color = biom.GetColor();
+                        pix.setColor(color.r, 0.1f, 0.1f, 1);
+                        pix.drawRectangle((int) x / data.tileSize - 5, height - (int) y / data.tileSize - 5, 10, 10);
+                        if (poi.type!=null&&poi.type.equals("town")) {
                             towns.add(newPoint);
                         }
                         break;
@@ -304,10 +333,10 @@ public class World implements Serializable, Disposable {
         }
 
         //sort towns
-        List<Pair<PointOfIntrest, PointOfIntrest>> allSortedTowns = new ArrayList<>();
+        List<Pair<PointOfInterest, PointOfInterest>> allSortedTowns = new ArrayList<>();
 
         for (int i = 0; i < towns.size() - 1; i++) {
-            PointOfIntrest current = towns.get(i);
+            PointOfInterest current = towns.get(i);
             int smallestIndex = -1;
             float smallestDistance = Float.MAX_VALUE;
             for (int j = i + 1; j < towns.size(); j++) {
@@ -319,16 +348,18 @@ public class World implements Serializable, Disposable {
             }
             if (smallestIndex < 0)
                 continue;
+            if(smallestDistance>data.maxRoadDistance)
+                continue;
             allSortedTowns.add(new Pair<>(current, towns.get(smallestIndex)));
         }
 
         biomIndex++;
         pix.setColor(1, 1, 1, 1);
-        biomTexture[biomIndex] = new BiomTexture(data.roadTileset, data.tileSize, "Road");
-        for (Pair<PointOfIntrest, PointOfIntrest> townPair : allSortedTowns) {
+        biomTexture[biomIndex] = new BiomTexture(data.roadTileset, data.tileSize);
+        for (Pair<PointOfInterest, PointOfInterest> townPair : allSortedTowns) {
 
-            Vector2 currentPoint = townPair.getKey().getTilePosition(tileSize);
-            Vector2 endPoint = townPair.getValue().getTilePosition(tileSize);
+            Vector2 currentPoint = townPair.getKey().getTilePosition(data.tileSize);
+            Vector2 endPoint = townPair.getValue().getTilePosition(data.tileSize);
             for (int x = (int) currentPoint.x - 1; x < currentPoint.x + 2; x++) {
                 for (int y = (int) currentPoint.y - 1; y < currentPoint.y + 2; y++) {
                     biomMap[x][height - y] |= (1 << biomIndex);
@@ -369,19 +400,19 @@ public class World implements Serializable, Disposable {
 
         }
 
-        mapObjectIds = new SpritesDataMap(GetChunkSize(), tileSize, data.width / GetChunkSize());
+        mapObjectIds = new SpritesDataMap(GetChunkSize(), data.tileSize, data.width / GetChunkSize());
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 int invertedHeight = height - y - 1;
                 int currentBiom = highestBiom(biomMap[x][invertedHeight]);
-                double spriteNoise = (noise.eval(x / (double) width * noiceObjectZoom, y / (double) invertedHeight * noiceObjectZoom) + 1) / 2;
                 if (currentBiom >= data.GetBioms().size())
                     continue;
                 BiomData biom = data.GetBioms().get(currentBiom);
                 for (String name : biom.spriteNames) {
                     BiomSpriteData sprite = data.GetBiomSprites().GetSpriteData(name);
+                    double spriteNoise = (noise.eval(x / (double) width * noiseZoom*sprite.resolution, y / (double) invertedHeight * noiseZoom*sprite.resolution) + 1) / 2;
                     if (spriteNoise >= sprite.startArea && spriteNoise <= sprite.endArea) {
-                        if (rand.nextFloat() <= sprite.density) {
+                        if (random.nextFloat() <= sprite.density) {
                             String spriteKey = sprite.key();
                             int key = -1;
                             if (!mapObjectIds.containsKey(spriteKey)) {
@@ -390,74 +421,75 @@ public class World implements Serializable, Disposable {
                             } else {
                                 key = mapObjectIds.intKey(spriteKey);
                             }
-                            mapObjectIds.putPosition(key, new Vector2((float) x * tileSize + (rand.nextFloat() * tileSize), (float) y * tileSize + (rand.nextFloat() * tileSize)));
+                            mapObjectIds.putPosition(key, new Vector2((float) x * data.tileSize + (random.nextFloat() * data.tileSize), (float) y * data.tileSize + (random.nextFloat() * data.tileSize)));
+                            continue;
                         }
                     }
                 }
             }
         }
-        noiseImage = noicePix;
         biomImage = pix;
 
         return this;//new World();
     }
 
-    public int GetWidthInTiles() {
+    public int getWidthInTiles() {
         return width;
     }
 
-    public int GetHeightInTiles() {
+    public int getHeightInTiles() {
         return height;
     }
 
-    public int GetWidthInPixels() {
-        return width * tileSize;
+    public int getWidthInPixels() {
+        return width * data.tileSize;
     }
 
-    public int GetHeightInPixels() {
-        return height * tileSize;
+    public int getHeightInPixels() {
+        return height * data.tileSize;
     }
 
-    public int GetWidthInChunks() {
+    public int getWidthInChunks() {
         return width / GetChunkSize();
     }
 
-    public int GetHeightInChunks() {
+    public int getHeightInChunks() {
         return height / GetChunkSize();
     }
 
-    public int GetTileSize() {
-        return tileSize;
+    public int getTileSize() {
+        return data.tileSize;
     }
 
     public Pixmap getBiomImage() {
         return biomImage;
     }
 
-    public Pixmap getNoiseImage() {
-        return noiseImage;
-    }
 
     public List<Pair<Vector2, Integer>> GetMapObjects(int chunkx, int chunky) {
         return mapObjectIds.positions(chunkx, chunky);
     }
 
-    public List<PointOfIntrest> getPointsOfIntrest(Actor player) {
-        return mapPoiIds.pointsOfIntrest((int) player.getX() / tileSize / GetChunkSize(), (int) player.getY() / tileSize / GetChunkSize());
+    public List<PointOfInterest> getPointsOfIntrest(Actor player) {
+        return mapPoiIds.pointsOfIntrest((int) player.getX() / data.tileSize / GetChunkSize(), (int) player.getY() / data.tileSize / GetChunkSize());
     }
 
-    public List<PointOfIntrest> getPointsOfIntrest(int chunkx, int chunky) {
+    public List<PointOfInterest> getPointsOfIntrest(int chunkx, int chunky) {
         return mapPoiIds.pointsOfIntrest(chunkx, chunky);
     }
 
     public int GetChunkSize() {
-        return Scene.GetIntendedWidth() / tileSize;
+        return Scene.GetIntendedWidth() / data.tileSize;
     }
 
     public void dispose() {
 
         if (biomImage != null) biomImage.dispose();
-        if (noiseImage != null) noiseImage.dispose();
     }
+
+    public void setSeed(long seedOffset) {
+        random.setSeed(seedOffset+seed);
+    }
+
 
 }

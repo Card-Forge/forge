@@ -141,7 +141,7 @@ public class WorldBackground extends Actor {
                     Texture newChunk = new Texture(chunkSize * tileSize, chunkSize * tileSize, Pixmap.Format.RGB888);
                     for (int cx = 0; cx < chunkSize; cx++) {
                         for (int cy = 0; cy < chunkSize; cy++) {
-                            newChunk.draw(WorldSave.getCurrentSave().world.GetBiomSprite(cx + chunkSize * x, cy + chunkSize * y), cx * tileSize, (chunkSize * tileSize) - (cy + 1) * tileSize);
+                            newChunk.draw(WorldSave.getCurrentSave().getWorld().getBiomSprite(cx + chunkSize * x, cy + chunkSize * y), cx * tileSize, (chunkSize * tileSize) - (cy + 1) * tileSize);
                         }
                     }
                     chunks[x][y] = newChunk;
@@ -176,11 +176,11 @@ public class WorldBackground extends Actor {
     }
 
     public void initialize() {
-        tileSize = WorldSave.getCurrentSave().world.GetTileSize();
-        chunkSize = WorldSave.getCurrentSave().world.GetChunkSize();
-        chunks = new Texture[WorldSave.getCurrentSave().world.GetWidthInTiles()][WorldSave.getCurrentSave().world.GetHeightInTiles()];
-        chunksSprites = new Array[WorldSave.getCurrentSave().world.GetWidthInTiles()][WorldSave.getCurrentSave().world.GetHeightInTiles()];
-        chunksSpritesBackground = new Array[WorldSave.getCurrentSave().world.GetWidthInTiles()][WorldSave.getCurrentSave().world.GetHeightInTiles()];
+        tileSize = WorldSave.getCurrentSave().getWorld().getTileSize();
+        chunkSize = WorldSave.getCurrentSave().getWorld().GetChunkSize();
+        chunks = new Texture[WorldSave.getCurrentSave().getWorld().getWidthInTiles()][WorldSave.getCurrentSave().getWorld().getHeightInTiles()];
+        chunksSprites = new Array[WorldSave.getCurrentSave().getWorld().getWidthInTiles()][WorldSave.getCurrentSave().getWorld().getHeightInTiles()];
+        chunksSpritesBackground = new Array[WorldSave.getCurrentSave().getWorld().getWidthInTiles()][WorldSave.getCurrentSave().getWorld().getHeightInTiles()];
         Pixmap loadPix = new Pixmap(chunkSize * tileSize, chunkSize * tileSize, Pixmap.Format.RGB565);
         loadPix.setColor(0.5f, 0.5f, 0.5f, 1);
         loadPix.fill();

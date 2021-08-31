@@ -152,7 +152,7 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
     }
 
     private class EditScreen extends FScreen {
-        private FScrollPane scroller = add(new FScrollPane() {
+        private final FScrollPane scroller = add(new FScrollPane() {
             @Override
             protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
                 float x = 0;

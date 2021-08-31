@@ -49,7 +49,7 @@ public class VPlayerPanel extends FContainer {
     private final List<InfoTab> tabs = new ArrayList<>();
     private InfoTab selectedTab;
     private float avatarHeight = VAvatar.HEIGHT;
-    private float displayAreaHeightFactor = 1.0f;
+    private final float displayAreaHeightFactor = 1.0f;
     private boolean forMultiPlayer = false;
     public int adjustHeight = 1;
 
@@ -123,9 +123,7 @@ public class VPlayerPanel extends FContainer {
             return true;
         if (tab.getIcon() == FSkinImage.HDLIBRARY || tab.getIcon() == FSkinImage.LIBRARY)
             return true;
-        if (tab.getIcon() == FSkinImage.HDEXILE || tab.getIcon() == FSkinImage.EXILE)
-            return true;
-        return false;
+        return tab.getIcon() == FSkinImage.HDEXILE || tab.getIcon() == FSkinImage.EXILE;
     }
 
     public void setSelectedZone(ZoneType zoneType) {

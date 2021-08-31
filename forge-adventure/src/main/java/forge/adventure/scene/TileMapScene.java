@@ -3,23 +3,23 @@ package forge.adventure.scene;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.renderers.BatchTiledMapRenderer;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import forge.adventure.stage.MapStage;
+import forge.adventure.stage.PointOfInterestMapRenderer;
 import forge.adventure.util.Res;
 import forge.adventure.util.TemplateTmxMapLoader;
-import forge.adventure.world.PointOfIntrest;
+import forge.adventure.world.PointOfInterest;
+import forge.adventure.world.WorldSave;
 
 public class TileMapScene extends HudScene {
 
 
     TiledMap map;
-    BatchTiledMapRenderer tiledMapRenderer;
+    PointOfInterestMapRenderer tiledMapRenderer;
+    private String nextMap;
 
     public TileMapScene() {
         super(MapStage.getInstance());
-
-
+        tiledMapRenderer = new PointOfInterestMapRenderer((MapStage)stage);
     }
 
     @Override
@@ -29,38 +29,58 @@ public class TileMapScene extends HudScene {
     }
 
     @Override
-    public void render() {
-
-        //Batch.getProjectionMatrix().setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
-
-        //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT | (Gdx.graphics.getBufferFormat().coverageSampling? GL20.GL_COVERAGE_BUFFER_BIT_NV:0));
+    public void act(float delta)
+    {
+        if(map==null)
+            return;
+        if(nextMap!=null)
+        {
+            load(nextMap);
+            nextMap=null;
+        }
+        stage.act(Gdx.graphics.getDeltaTime());
+    }
+    @Override
+    public void render()
+    {
+        if(map==null)
+            return;
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-        stage.getCamera().update();
         tiledMapRenderer.setView(stage.getCamera().combined, 0, 0, Scene.GetIntendedWidth(), Scene.GetIntendedHeight());
+
         tiledMapRenderer.render();
-        stage.draw();
         hud.draw();
-        //Batch.end();
     }
 
-    @Override
-    public void ResLoaded() {
-        //map=new TmxMapLoader().load("F:\\Develop\\Forge\\forge\\forge-gui\\res\\adventure\\Shandalar\\world\\town\\town.tmx");
 
 
-    }
-
-    public void load(PointOfIntrest point) {
+    public void load(PointOfInterest point) {
+        rootPoint=point;
+        oldMap=point.getData().map;
         map = new TemplateTmxMapLoader().load(Res.CurrentRes.GetFilePath(point.getData().map));
-        tiledMapRenderer = new OrthogonalTiledMapRenderer(map);
-
+        ((MapStage)stage).setPointOfInterest(WorldSave.getCurrentSave().getPointOfInterestChanges(point.getID()+oldMap));
         stage.GetPlayer().setPosition(0, 0);
+        WorldSave.getCurrentSave().getWorld().setSeed(point.getSeedOffset());
+        tiledMapRenderer.loadMap(map,"");
 
-        ((MapStage) stage).loadMap(map);
+    }
+    PointOfInterest rootPoint;
+    String oldMap;
+ 
+    private void load(String targetMap) {
 
+        map = new TemplateTmxMapLoader().load(Res.CurrentRes.GetFilePath(targetMap));
+        ((MapStage)stage).setPointOfInterest(WorldSave.getCurrentSave().getPointOfInterestChanges(rootPoint.getID()+targetMap));
+        stage.GetPlayer().setPosition(0, 0);
+        WorldSave.getCurrentSave().getWorld().setSeed(rootPoint.getSeedOffset());
+        tiledMapRenderer.loadMap(map,oldMap);
+        oldMap=targetMap;
+    }
+
+    public void loadNext(String targetMap) {
+        nextMap=targetMap;
     }
 }
 

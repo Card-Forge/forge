@@ -71,7 +71,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private ItemManagerConfig config;
     private Function<Entry<? extends InventoryItem, Integer>, Object> fnNewGet;
     private boolean viewUpdating, needSecondUpdate;
-    private List<ItemColumn> sortCols = new ArrayList<>();
+    private final List<ItemColumn> sortCols = new ArrayList<>();
 
     private final TextSearchFilter<? extends T> searchFilter;
 
@@ -90,7 +90,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private final ItemListView<T> listView;
     private final ImageView<T> imageView;
     private ItemView<T> currentView;
-    private boolean initialized;
+    private final boolean initialized;
     protected boolean lockFiltering;
 
     /**

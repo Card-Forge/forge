@@ -26,7 +26,7 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
     protected GameFormat format;
     private String selectedFormat;
     private boolean preventHandling = false;
-    private FComboBox<Object> cbxFormats = new FComboBox<>();
+    private final FComboBox<Object> cbxFormats = new FComboBox<>();
 
     public FormatFilter(ItemManager<? super T> itemManager0) {
         super(itemManager0);
