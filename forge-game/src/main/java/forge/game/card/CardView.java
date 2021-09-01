@@ -1302,29 +1302,29 @@ public class CardView extends GameEntityView {
             return get(TrackableProperty.HasLandwalk);
         }
 
-        public boolean canProduceAnyMana() {
-            return get(TrackableProperty.CanProduceAnyMana);
+        public boolean origProduceAnyMana() {
+            return get(TrackableProperty.OrigProduceAnyMana);
         }
-        public boolean canProduceManaR() {
-            return get(TrackableProperty.CanProduceManaR);
+        public boolean origProduceManaR() {
+            return get(TrackableProperty.OrigProduceManaR);
         }
-        public boolean canProduceManaG() {
-            return get(TrackableProperty.CanProduceManaG);
+        public boolean origProduceManaG() {
+            return get(TrackableProperty.OrigProduceManaG);
         }
-        public boolean canProduceManaB() {
-            return get(TrackableProperty.CanProduceManaB);
+        public boolean origProduceManaB() {
+            return get(TrackableProperty.OrigProduceManaB);
         }
-        public boolean canProduceManaU() {
-            return get(TrackableProperty.CanProduceManaU);
+        public boolean origProduceManaU() {
+            return get(TrackableProperty.OrigProduceManaU);
         }
-        public boolean canProduceManaW() {
-            return get(TrackableProperty.CanProduceManaW);
+        public boolean origProduceManaW() {
+            return get(TrackableProperty.OrigProduceManaW);
         }
-        public boolean canProduceManaC() {
-            return get(TrackableProperty.CanProduceManaC);
+        public boolean origProduceManaC() {
+            return get(TrackableProperty.OrigProduceManaC);
         }
-        public int countCanProduceColoredMana() {
-            return get(TrackableProperty.CountCanProduceColoredMana);
+        public int origCanProduceColoredMana() {
+            return get(TrackableProperty.CountOrigProduceColoredMana);
         }
 
         public String getAbilityText() {
@@ -1422,14 +1422,14 @@ public class CardView extends GameEntityView {
                     }
                 }
             }
-            set(TrackableProperty.CanProduceManaR, rMana);
-            set(TrackableProperty.CanProduceManaG, gMana);
-            set(TrackableProperty.CanProduceManaB, bMana);
-            set(TrackableProperty.CanProduceManaU, uMana);
-            set(TrackableProperty.CanProduceManaW, wMana);
-            set(TrackableProperty.CanProduceManaC, cMana);
-            set(TrackableProperty.CountCanProduceColoredMana, count);
-            set(TrackableProperty.CanProduceAnyMana, anyMana);
+            set(TrackableProperty.OrigProduceManaR, rMana);
+            set(TrackableProperty.OrigProduceManaG, gMana);
+            set(TrackableProperty.OrigProduceManaB, bMana);
+            set(TrackableProperty.OrigProduceManaU, uMana);
+            set(TrackableProperty.OrigProduceManaW, wMana);
+            set(TrackableProperty.OrigProduceManaC, cMana);
+            set(TrackableProperty.CountOrigProduceColoredMana, count);
+            set(TrackableProperty.OrigProduceAnyMana, anyMana);
         }
 
         public boolean isBasicLand() {
