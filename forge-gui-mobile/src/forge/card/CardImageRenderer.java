@@ -8,7 +8,6 @@ import java.util.List;
 
 import forge.ImageKeys;
 import forge.assets.*;
-import forge.util.ImageUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.graphics.Color;
@@ -377,47 +376,48 @@ public class CardImageRenderer {
                     modColors = DetailColors.BLACK;
                 else if (state.isPlains())
                     modColors = DetailColors.LAND;
-            } if (state.countCanProduceColoredMana() == 2) {
+            } if (state.origCanProduceColoredMana() == 2) {
                 //dual colors
                 Color[] colorPairs = new Color[2];
                 //init Color
                 colorPairs[0] = fromDetailColor(DetailColors.WHITE);
                 colorPairs[1] = fromDetailColor(DetailColors.WHITE);
-                if (state.canProduceManaW() && state.canProduceManaU()) {
-                    colorPairs[0] = fromDetailColor(DetailColors.WHITE);
-                    colorPairs[1] = fromDetailColor(DetailColors.BLUE);
-                } else if (state.canProduceManaW() && state.canProduceManaB()) {
-                    colorPairs[0] = fromDetailColor(DetailColors.WHITE);
-                    colorPairs[1] = fromDetailColor(DetailColors.BLACK);
-                } else if (state.canProduceManaW() && state.canProduceManaR()) {
-                    colorPairs[0] = fromDetailColor(DetailColors.WHITE);
-                    colorPairs[1] = fromDetailColor(DetailColors.RED);
-                } else if (state.canProduceManaW() && state.canProduceManaG()) {
-                    colorPairs[0] = fromDetailColor(DetailColors.WHITE);
-                    colorPairs[1] = fromDetailColor(DetailColors.GREEN);
-                } else if (state.canProduceManaU() && state.canProduceManaB()) {
-                    colorPairs[0] = fromDetailColor(DetailColors.BLUE);
-                    colorPairs[1] = fromDetailColor(DetailColors.BLACK);
-                } else if (state.canProduceManaU() && state.canProduceManaR()) {
-                    colorPairs[0] = fromDetailColor(DetailColors.BLUE);
-                    colorPairs[1] = fromDetailColor(DetailColors.RED);
-                } else if (state.canProduceManaU() && state.canProduceManaG()) {
-                    colorPairs[0] = fromDetailColor(DetailColors.BLUE);
-                    colorPairs[1] = fromDetailColor(DetailColors.GREEN);
-                } else if (state.canProduceManaB() && state.canProduceManaR()) {
-                    colorPairs[0] = fromDetailColor(DetailColors.BLACK);
-                    colorPairs[1] = fromDetailColor(DetailColors.RED);
-                } else if (state.canProduceManaB() && state.canProduceManaG()) {
-                    colorPairs[0] = fromDetailColor(DetailColors.BLACK);
-                    colorPairs[1] = fromDetailColor(DetailColors.GREEN);
-                } else if (state.canProduceManaR() && state.canProduceManaG()) {
-                    colorPairs[0] = fromDetailColor(DetailColors.RED);
-                    colorPairs[1] = fromDetailColor(DetailColors.GREEN);
-                }
                 //override
-                if (state.canProduceAnyMana()) {
+                if (state.origProduceAnyMana()) {
                     colorPairs[0] = fromDetailColor(DetailColors.MULTICOLOR);
                     colorPairs[1] = fromDetailColor(DetailColors.MULTICOLOR);
+                } else {
+                    if (state.origProduceManaW() && state.origProduceManaU()) {
+                        colorPairs[0] = fromDetailColor(DetailColors.WHITE);
+                        colorPairs[1] = fromDetailColor(DetailColors.BLUE);
+                    } else if (state.origProduceManaW() && state.origProduceManaB()) {
+                        colorPairs[0] = fromDetailColor(DetailColors.WHITE);
+                        colorPairs[1] = fromDetailColor(DetailColors.BLACK);
+                    } else if (state.origProduceManaW() && state.origProduceManaR()) {
+                        colorPairs[0] = fromDetailColor(DetailColors.WHITE);
+                        colorPairs[1] = fromDetailColor(DetailColors.RED);
+                    } else if (state.origProduceManaW() && state.origProduceManaG()) {
+                        colorPairs[0] = fromDetailColor(DetailColors.WHITE);
+                        colorPairs[1] = fromDetailColor(DetailColors.GREEN);
+                    } else if (state.origProduceManaU() && state.origProduceManaB()) {
+                        colorPairs[0] = fromDetailColor(DetailColors.BLUE);
+                        colorPairs[1] = fromDetailColor(DetailColors.BLACK);
+                    } else if (state.origProduceManaU() && state.origProduceManaR()) {
+                        colorPairs[0] = fromDetailColor(DetailColors.BLUE);
+                        colorPairs[1] = fromDetailColor(DetailColors.RED);
+                    } else if (state.origProduceManaU() && state.origProduceManaG()) {
+                        colorPairs[0] = fromDetailColor(DetailColors.BLUE);
+                        colorPairs[1] = fromDetailColor(DetailColors.GREEN);
+                    } else if (state.origProduceManaB() && state.origProduceManaR()) {
+                        colorPairs[0] = fromDetailColor(DetailColors.BLACK);
+                        colorPairs[1] = fromDetailColor(DetailColors.RED);
+                    } else if (state.origProduceManaB() && state.origProduceManaG()) {
+                        colorPairs[0] = fromDetailColor(DetailColors.BLACK);
+                        colorPairs[1] = fromDetailColor(DetailColors.GREEN);
+                    } else if (state.origProduceManaR() && state.origProduceManaG()) {
+                        colorPairs[0] = fromDetailColor(DetailColors.RED);
+                        colorPairs[1] = fromDetailColor(DetailColors.GREEN);
+                    }
                 }
                 colorPairs = FSkinColor.tintColors(Color.WHITE, colorPairs, 0.3f);
                 float oldAlpha = g.getfloatAlphaComposite();
@@ -430,18 +430,18 @@ public class CardImageRenderer {
                 }
             } else {
                 //override bg color
-                if (state.countCanProduceColoredMana() > 2 || state.canProduceAnyMana()) {
+                if (state.origCanProduceColoredMana() > 2 || state.origProduceAnyMana()) {
                     modColors = DetailColors.MULTICOLOR;
-                } else if (state.countCanProduceColoredMana() == 1) {
-                    if (state.canProduceManaW())
+                } else if (state.origCanProduceColoredMana() == 1) {
+                    if (state.origProduceManaW())
                         modColors = DetailColors.LAND;
-                    else if (state.canProduceManaB())
+                    else if (state.origProduceManaB())
                         modColors = DetailColors.BLACK;
-                    else if (state.canProduceManaG())
+                    else if (state.origProduceManaG())
                         modColors = DetailColors.GREEN;
-                    else if (state.canProduceManaR())
+                    else if (state.origProduceManaR())
                         modColors = DetailColors.RED;
-                    else if (state.canProduceManaU())
+                    else if (state.origProduceManaU())
                         modColors = DetailColors.BLUE;
                 }
                 Color bgColor = fromDetailColor(modColors);
@@ -472,7 +472,7 @@ public class CardImageRenderer {
         if (state.isBasicLand()) {
             //draw watermark
             FSkinImage image = null;
-            if (state.countCanProduceColoredMana() == 1 && !state.canProduceManaC()) {
+            if (state.origCanProduceColoredMana() == 1 && !state.origProduceManaC()) {
                 if (state.isPlains())
                     image = FSkinImage.WATERMARK_W;
                 else if (state.isIsland())
@@ -483,7 +483,7 @@ public class CardImageRenderer {
                     image = FSkinImage.WATERMARK_R;
                 else if (state.isForest())
                     image = FSkinImage.WATERMARK_G;
-            } else if (state.canProduceManaC()) {
+            } else if (state.origProduceManaC()) {
                 image = FSkinImage.WATERMARK_C;
             }
             if (image != null) {
