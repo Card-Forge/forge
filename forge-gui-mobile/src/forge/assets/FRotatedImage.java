@@ -2,6 +2,7 @@ package forge.assets;
 
 import com.badlogic.gdx.graphics.Texture;
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import forge.Graphics;
 
 public class FRotatedImage extends FImageComplex {
@@ -31,6 +32,11 @@ public class FRotatedImage extends FImageComplex {
     @Override
     public Texture getTexture() {
         return texture;
+    }
+
+    @Override
+    public TextureRegion getTextureRegion() {
+        return new TextureRegion(texture);
     }
 
     @Override

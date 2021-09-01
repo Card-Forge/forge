@@ -521,7 +521,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_ENABLE_BORDER_MASKING,
                 localizer.getMessage("lblBorderMaskOption"),
                 localizer.getMessage("nlBorderMaskOption"),
-                new String[]{"Off", "Crop", "Full"}) {
+                new String[]{"Off", "Crop", "Full", "Art"}) {
             @Override
             public void valueChanged(String newValue) {
                 super.valueChanged(newValue);

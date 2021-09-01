@@ -207,15 +207,15 @@ public class CardRenderer {
 
     public static FImageComplex getCardArt(IPaperCard pc, boolean backFace) {
         CardType type = pc.getRules().getType();
-        return getCardArt(pc.getImageKey(backFace), pc.getRules().getSplitType() == CardSplitType.Split, type.isPlane() || type.isPhenomenon(),pc.getRules().getOracleText().contains("Aftermath"));
+        return getCardArt(pc.getImageKey(backFace), pc.getRules().getSplitType() == CardSplitType.Split, type.isPlane() || type.isPhenomenon(),pc.getRules().getOracleText().contains("Aftermath"), type.hasSubtype("Saga"), type.hasSubtype("Class"), type.isDungeon(), CardSplitType.Flip.equals(pc.getRules().getSplitType()));
     }
 
     public static FImageComplex getCardArt(CardView card) {
         CardTypeView type = card.getCurrentState().getType();
-        return getCardArt(card.getCurrentState().getImageKey(), card.isSplitCard(), type.isPlane() || type.isPhenomenon(),card.getText().contains("Aftermath"));
+        return getCardArt(card.getCurrentState().getImageKey(), card.isSplitCard(), type.isPlane() || type.isPhenomenon(),card.getText().contains("Aftermath"), type.hasSubtype("Saga"), type.hasSubtype("Class"), type.isDungeon(), card.isFlipCard());
     }
 
-    public static FImageComplex getCardArt(String imageKey, boolean isSplitCard, boolean isHorizontalCard, boolean isAftermathCard) {
+    public static FImageComplex getCardArt(String imageKey, boolean isSplitCard, boolean isHorizontalCard, boolean isAftermathCard, boolean isSaga, boolean isClass, boolean isDungeon, boolean isFlipCard) {
         FImageComplex cardArt = cardArtCache.get(imageKey);
         if (cardArt == null) {
             Texture image = new RendererCachedCardImage(imageKey, true).getImage();
@@ -227,12 +227,31 @@ public class CardRenderer {
                     float x, y;
                     float w = image.getWidth();
                     float h = image.getHeight();
-                    if (isSplitCard && !isAftermathCard) { //allow rotated image for split cards
+                    if (isFlipCard) {
+                        x = w * 0.09f;
+                        y = h * 0.32f;
+                        w -= 2f * x;
+                        h -= 2.1f * y;
+                    } else if (isDungeon) {
+                        x = w * 0.09f;
+                        y = h * 0.1f;
+                        w -= 2f * x;
+                        h -= 2.2f * y;
+                    } else if (isClass) {
+                        x = w * 0.09f;
+                        y = h * 0.11f;
+                        w -= 1.1f * x + w / 2;
+                        h -= 2.45f * y;
+                    } else if (isSaga) {
+                        x = (w * 0.1f) + (w * 0.8f / 2);
+                        y = h * 0.11f;
+                        w -= 1.16f * x;
+                        h -= 2.45f * y;
+                    } else if (isSplitCard && !isAftermathCard) { //allow rotated image for split cards
                         x = w * 33f / 250f;
                         y = 0; //delay adjusting y and h until drawn
                         w *= 106f / 250f;
-                    }
-                    else if (isHorizontalCard) { //allow rotated image for horizontal cards
+                    } else if (isHorizontalCard) { //allow rotated image for horizontal cards
                         float artX = 40f, artY = 40f;
                         float artW = 350f, artH = 156f;
                         float srcW = 430f, srcH = 300f;
@@ -241,8 +260,7 @@ public class CardRenderer {
                             y = h * 40f / srcH;
                             w *= artW / srcW;
                             h *= artH / srcH;
-                        }
-                        else { //rotate art clockwise if its not the correct orientation
+                        } else { //rotate art clockwise if its not the correct orientation
                             x = w * artY / srcH;
                             y = h * (srcW - artW - artX) / srcW;
                             w *= artH / srcH;
@@ -251,8 +269,7 @@ public class CardRenderer {
                             cardArtCache.put(imageKey, cardArt);
                             return cardArt;
                         }
-                    }
-                    else {
+                    } else {
                         x = w * 0.1f;
                         y = h * 0.11f;
                         w -= 2 * x;
@@ -262,8 +279,7 @@ public class CardRenderer {
                             float dw = w * (ratioRatio - 1);
                             w -= dw;
                             x += dw / 2;
-                        }
-                        else { //if too tall, shrink height
+                        } else { //if too tall, shrink height
                             float dh = h * (1 - ratioRatio);
                             h -= dh;
                             y += dh / 2;
@@ -296,15 +312,55 @@ public class CardRenderer {
                     float w = image.getWidth();
                     float h = image.getHeight();
                     //allow rotated image for split cards
-                        x = w * 138f / 250f;
-                        y = h * 210f / 370f; //delay adjusting y and h until drawn
-                        w *= 68f / 250f;
-                        h *= 128f / 370f;
+                    x = w * 138f / 250f;
+                    y = h * 210f / 370f; //delay adjusting y and h until drawn
+                    w *= 68f / 250f;
+                    h *= 128f / 370f;
 
                     cardArt = new FTextureRegionImage(new TextureRegion(image, Math.round(x), Math.round(y), Math.round(w), Math.round(h)));
 
                 }
                 cardArtCache.put("Aftermath_second_"+imageKey, cardArt);
+            }
+        }
+        return cardArt;
+    }
+
+    public static FImageComplex getAlternateCardArt(final String imageKey) {
+        FImageComplex cardArt = cardArtCache.get("Alternate_"+imageKey);
+        if (cardArt == null) {
+            Texture image = new CachedCardImage(imageKey) {
+                @Override
+                public void onImageFetched() {
+                    ImageCache.clear();
+                    cardArtCache.remove("Alternate_" + imageKey);
+                }
+            }.getImage();
+            if (image != null) {
+                if (image == ImageCache.defaultImage) {
+                    cardArt = CardImageRenderer.forgeArt;
+                }
+                else {
+                    float x, y;
+                    float w = image.getWidth();
+                    float h = image.getHeight();
+                    x = w * 0.1f;
+                    y = h * 0.11f;
+                    w -= 2 * x;
+                    h *= CARD_ART_HEIGHT_PERCENTAGE;
+                    float ratioRatio = w / h / CARD_ART_RATIO;
+                    if (ratioRatio > 1) { //if too wide, shrink width
+                        float dw = w * (ratioRatio - 1);
+                        w -= dw;
+                        x += dw / 2;
+                    } else { //if too tall, shrink height
+                        float dh = h * (1 - ratioRatio);
+                        h -= dh;
+                        y += dh / 2;
+                    }
+                    cardArt = new FTextureRegionImage(new TextureRegion(image, Math.round(x), Math.round(y), Math.round(w), Math.round(h)));
+                }
+                cardArtCache.put("Alternate_"+imageKey, cardArt);
             }
         }
         return cardArt;
@@ -457,8 +513,8 @@ public class CardRenderer {
             minusxy = 0.135f*radius;
         }
         if (image != null) {
-            if (image == ImageCache.defaultImage) {
-                CardImageRenderer.drawCardImage(g, CardView.getCardForUi(pc), false, x, y, w, h, pos);
+            if (image == ImageCache.defaultImage || Forge.enableUIMask.equals("Art")) {
+                CardImageRenderer.drawCardImage(g, CardView.getCardForUi(pc), false, x, y, w, h, pos, true);
             } else {
                 if (Forge.enableUIMask.equals("Full")) {
                     if (ImageCache.isBorderlessCardArt(image))
@@ -482,7 +538,7 @@ public class CardRenderer {
             }
         } else {
             //if card has invalid or no texture due to sudden changes in ImageCache, draw CardImageRenderer instead and wait for it to refresh automatically
-            CardImageRenderer.drawCardImage(g, CardView.getCardForUi(pc), false, x, y, w, h, pos);
+            CardImageRenderer.drawCardImage(g, CardView.getCardForUi(pc), false, x, y, w, h, pos, Forge.enableUIMask.equals("Art"));
         }
     }
     public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean rotate) {
@@ -501,8 +557,8 @@ public class CardRenderer {
             minusxy = 0.135f*radius;
         }
         if (image != null) {
-            if (image == ImageCache.defaultImage) {
-                CardImageRenderer.drawCardImage(g, card, false, x, y, w, h, pos);
+            if (image == ImageCache.defaultImage || Forge.enableUIMask.equals("Art")) {
+                CardImageRenderer.drawCardImage(g, card, false, x, y, w, h, pos, true);
             } else if (showsleeves) {
                 if (!card.isForeTold())
                     g.drawImage(sleeves, x, y, w, h);
@@ -544,7 +600,7 @@ public class CardRenderer {
             drawFoilEffect(g, card, x, y, w, h, false);
         } else {
             //if card has invalid or no texture due to sudden changes in ImageCache, draw CardImageRenderer instead and wait for it to refresh automatically
-            CardImageRenderer.drawCardImage(g, card, false, x, y, w, h, pos);
+            CardImageRenderer.drawCardImage(g, card, false, x, y, w, h, pos, Forge.enableUIMask.equals("Art"));
         }
     }
 
@@ -684,7 +740,7 @@ public class CardRenderer {
                         multiplier = 0.150f;
                         break;
                 }
-                g.drawOutlinedText(CardTranslation.getTranslatedName(details.getName()), FSkinFont.forHeight(h * multiplier), Color.WHITE, Color.BLACK, x + padding -1f, y + padding, w - 2 * padding, h * 0.4f, true, Align.left, false);
+                g.drawOutlinedText(CardTranslation.getTranslatedName(details.getName()), FSkinFont.forHeight(h * multiplier), Color.WHITE, Color.BLACK, x + padding -1f, y + padding, w - 2 * padding, h * 0.4f, true, Align.left, false, true);
             }
             if (showCardManaCostOverlay(card)) {
                 float manaSymbolSize = w / 4.5f;
