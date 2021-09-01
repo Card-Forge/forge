@@ -207,15 +207,15 @@ public class CardRenderer {
 
     public static FImageComplex getCardArt(IPaperCard pc, boolean backFace) {
         CardType type = pc.getRules().getType();
-        return getCardArt(pc.getImageKey(backFace), pc.getRules().getSplitType() == CardSplitType.Split, type.isPlane() || type.isPhenomenon(),pc.getRules().getOracleText().contains("Aftermath"), type.hasSubtype("Saga"), type.hasSubtype("Class"), type.isDungeon(), CardSplitType.Flip.equals(pc.getRules().getSplitType()));
+        return getCardArt(pc.getImageKey(backFace), pc.getRules().getSplitType() == CardSplitType.Split, type.isPlane() || type.isPhenomenon(),pc.getRules().getOracleText().contains("Aftermath"), type.hasSubtype("Saga"), type.hasSubtype("Class"), type.isDungeon(), CardSplitType.Flip.equals(pc.getRules().getSplitType()), type.isPlaneswalker());
     }
 
     public static FImageComplex getCardArt(CardView card) {
         CardTypeView type = card.getCurrentState().getType();
-        return getCardArt(card.getCurrentState().getImageKey(), card.isSplitCard(), type.isPlane() || type.isPhenomenon(),card.getText().contains("Aftermath"), type.hasSubtype("Saga"), type.hasSubtype("Class"), type.isDungeon(), card.isFlipCard());
+        return getCardArt(card.getCurrentState().getImageKey(), card.isSplitCard(), type.isPlane() || type.isPhenomenon(),card.getText().contains("Aftermath"), type.hasSubtype("Saga"), type.hasSubtype("Class"), type.isDungeon(), card.isFlipCard(), type.isPlaneswalker());
     }
 
-    public static FImageComplex getCardArt(String imageKey, boolean isSplitCard, boolean isHorizontalCard, boolean isAftermathCard, boolean isSaga, boolean isClass, boolean isDungeon, boolean isFlipCard) {
+    public static FImageComplex getCardArt(String imageKey, boolean isSplitCard, boolean isHorizontalCard, boolean isAftermathCard, boolean isSaga, boolean isClass, boolean isDungeon, boolean isFlipCard, boolean isPlanesWalker) {
         FImageComplex cardArt = cardArtCache.get(imageKey);
         if (cardArt == null) {
             Texture image = new RendererCachedCardImage(imageKey, true).getImage();
@@ -227,7 +227,12 @@ public class CardRenderer {
                     float x, y;
                     float w = image.getWidth();
                     float h = image.getHeight();
-                    if (isFlipCard) {
+                    if (isPlanesWalker) {
+                        x = w * 0.09f;
+                        y = h * 0.11f;
+                        w -= 2f * x;
+                        h -= 5.71f * y;
+                    } else if (isFlipCard) {
                         x = w * 0.09f;
                         y = h * 0.32f;
                         w -= 2f * x;
@@ -306,8 +311,7 @@ public class CardRenderer {
             if (image != null) {
                 if (image == ImageCache.defaultImage) {
                     cardArt = CardImageRenderer.forgeArt;
-                }
-                else {
+                } else {
                     float x, y;
                     float w = image.getWidth();
                     float h = image.getHeight();
@@ -326,7 +330,7 @@ public class CardRenderer {
         return cardArt;
     }
 
-    public static FImageComplex getAlternateCardArt(final String imageKey) {
+    public static FImageComplex getAlternateCardArt(final String imageKey, boolean isPlanesWalker) {
         FImageComplex cardArt = cardArtCache.get("Alternate_"+imageKey);
         if (cardArt == null) {
             Texture image = new CachedCardImage(imageKey) {
@@ -339,24 +343,30 @@ public class CardRenderer {
             if (image != null) {
                 if (image == ImageCache.defaultImage) {
                     cardArt = CardImageRenderer.forgeArt;
-                }
-                else {
+                } else {
                     float x, y;
                     float w = image.getWidth();
                     float h = image.getHeight();
-                    x = w * 0.1f;
-                    y = h * 0.11f;
-                    w -= 2 * x;
-                    h *= CARD_ART_HEIGHT_PERCENTAGE;
-                    float ratioRatio = w / h / CARD_ART_RATIO;
-                    if (ratioRatio > 1) { //if too wide, shrink width
-                        float dw = w * (ratioRatio - 1);
-                        w -= dw;
-                        x += dw / 2;
-                    } else { //if too tall, shrink height
-                        float dh = h * (1 - ratioRatio);
-                        h -= dh;
-                        y += dh / 2;
+                    if (isPlanesWalker) {
+                        x = w * 0.09f;
+                        y = h * 0.11f;
+                        w -= 2f * x;
+                        h -= 5.71f * y;
+                    } else {
+                        x = w * 0.1f;
+                        y = h * 0.11f;
+                        w -= 2 * x;
+                        h *= CARD_ART_HEIGHT_PERCENTAGE;
+                        float ratioRatio = w / h / CARD_ART_RATIO;
+                        if (ratioRatio > 1) { //if too wide, shrink width
+                            float dw = w * (ratioRatio - 1);
+                            w -= dw;
+                            x += dw / 2;
+                        } else { //if too tall, shrink height
+                            float dh = h * (1 - ratioRatio);
+                            h -= dh;
+                            y += dh / 2;
+                        }
                     }
                     cardArt = new FTextureRegionImage(new TextureRegion(image, Math.round(x), Math.round(y), Math.round(w), Math.round(h)));
                 }
