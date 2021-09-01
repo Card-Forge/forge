@@ -28,6 +28,11 @@ public class FTextureRegionImage extends FImageComplex {
     }
 
     @Override
+    public TextureRegion getTextureRegion() {
+        return textureRegion;
+    }
+
+    @Override
     public int getRegionX() {
         return textureRegion.getRegionX();
     }

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import forge.game.spellability.SpellAbility;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
@@ -1301,6 +1302,31 @@ public class CardView extends GameEntityView {
             return get(TrackableProperty.HasLandwalk);
         }
 
+        public boolean canProduceAnyMana() {
+            return get(TrackableProperty.CanProduceAnyMana);
+        }
+        public boolean canProduceManaR() {
+            return get(TrackableProperty.CanProduceManaR);
+        }
+        public boolean canProduceManaG() {
+            return get(TrackableProperty.CanProduceManaG);
+        }
+        public boolean canProduceManaB() {
+            return get(TrackableProperty.CanProduceManaB);
+        }
+        public boolean canProduceManaU() {
+            return get(TrackableProperty.CanProduceManaU);
+        }
+        public boolean canProduceManaW() {
+            return get(TrackableProperty.CanProduceManaW);
+        }
+        public boolean canProduceManaC() {
+            return get(TrackableProperty.CanProduceManaC);
+        }
+        public int countCanProduceColoredMana() {
+            return get(TrackableProperty.CountCanProduceColoredMana);
+        }
+
         public String getAbilityText() {
             return get(TrackableProperty.AbilityText);
         }
@@ -1340,6 +1366,70 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.HexproofKey, c.getHexproofKey());
             //keywordkey
             set(TrackableProperty.KeywordKey, c.getKeywordKey());
+            //update Trackable Mana Color for BG Colors
+            updateManaColorBG(state);
+        }
+        void updateManaColorBG(CardState state) {
+            boolean anyMana = false;
+            boolean rMana = false;
+            boolean gMana = false;
+            boolean bMana = false;
+            boolean uMana = false;
+            boolean wMana = false;
+            boolean cMana = false;
+            int count = 0;
+            if (!state.getManaAbilities().isEmpty()) {
+                for (SpellAbility sa : state.getManaAbilities()) {
+                    if (sa.getManaPart().isAnyMana()) {
+                        anyMana = true;
+                    }
+                    switch (sa.getManaPart().getOrigProduced()) {
+                        case "R":
+                            if (!rMana) {
+                                count += 1;
+                                rMana = true;
+                            }
+                            break;
+                        case "G":
+                            if (!gMana) {
+                                count += 1;
+                                gMana = true;
+                            }
+                            break;
+                        case "B":
+                            if (!bMana) {
+                                count += 1;
+                                bMana = true;
+                            }
+                            break;
+                        case "U":
+                            if (!uMana) {
+                                count += 1;
+                                uMana = true;
+                            }
+                            break;
+                        case "W":
+                            if (!wMana) {
+                                count += 1;
+                                wMana = true;
+                            }
+                            break;
+                        case "C":
+                            if (!cMana) {
+                                cMana = true;
+                            }
+                            break;
+                    }
+                }
+            }
+            set(TrackableProperty.CanProduceManaR, rMana);
+            set(TrackableProperty.CanProduceManaG, gMana);
+            set(TrackableProperty.CanProduceManaB, bMana);
+            set(TrackableProperty.CanProduceManaU, uMana);
+            set(TrackableProperty.CanProduceManaW, wMana);
+            set(TrackableProperty.CanProduceManaC, cMana);
+            set(TrackableProperty.CountCanProduceColoredMana, count);
+            set(TrackableProperty.CanProduceAnyMana, anyMana);
         }
 
         public boolean isBasicLand() {
@@ -1374,6 +1464,12 @@ public class CardView extends GameEntityView {
         }
         public boolean isIsland() {
             return getType().hasSubtype("Island");
+        }
+        public boolean isVehicle() {
+            return getType().hasSubtype("Vehicle");
+        }
+        public boolean isArtifact() {
+            return getType().isArtifact();
         }
     }
 

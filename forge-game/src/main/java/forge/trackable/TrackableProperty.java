@@ -111,6 +111,16 @@ public enum TrackableProperty {
     HasChangedColors(TrackableTypes.BooleanType),
     ChangedTypes(TrackableTypes.StringMapType),
 
+    //canproduce mana
+    CanProduceManaR(TrackableTypes.BooleanType),
+    CanProduceManaG(TrackableTypes.BooleanType),
+    CanProduceManaB(TrackableTypes.BooleanType),
+    CanProduceManaU(TrackableTypes.BooleanType),
+    CanProduceManaW(TrackableTypes.BooleanType),
+    CanProduceManaC(TrackableTypes.BooleanType),
+    CanProduceAnyMana(TrackableTypes.BooleanType),
+    CountCanProduceColoredMana(TrackableTypes.IntegerType),
+
     KeywordKey(TrackableTypes.StringType),
     HasDeathtouch(TrackableTypes.BooleanType),
     HasDevoid(TrackableTypes.BooleanType),
