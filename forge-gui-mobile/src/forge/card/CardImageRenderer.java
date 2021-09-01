@@ -311,7 +311,7 @@ public class CardImageRenderer {
                         g.drawImage(cardArt, x, y, w, h);
                 } else {
                     if (altState) {
-                        FImageComplex altArt = CardRenderer.getAlternateCardArt(cv.getAlternateState().getImageKey());
+                        FImageComplex altArt = CardRenderer.getAlternateCardArt(cv.getAlternateState().getImageKey(), cv.getAlternateState().isPlaneswalker());
                         g.drawImage(altArt, x, y, w, h);
                     } else {
                         g.drawImage(cardArt, x, y, w, h);
