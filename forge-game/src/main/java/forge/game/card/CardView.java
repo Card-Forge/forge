@@ -1380,6 +1380,8 @@ public class CardView extends GameEntityView {
             int count = 0;
             if (!state.getManaAbilities().isEmpty()) {
                 for (SpellAbility sa : state.getManaAbilities()) {
+                    if (sa == null || sa.getManaPart() == null)
+                        continue;
                     if (sa.getManaPart().isAnyMana()) {
                         anyMana = true;
                     }
