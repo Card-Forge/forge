@@ -552,9 +552,9 @@ public class CardRenderer {
         }
     }
     public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean rotate) {
-        drawCard(g, card, x, y, w, h, pos, rotate, false);
+        drawCard(g, card, x, y, w, h, pos, rotate, false, false);
     }
-    public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean rotate, boolean showAltState) {
+    public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean rotate, boolean showAltState, boolean isChoiceList) {
         boolean canshow = MatchController.instance.mayView(card);
         boolean showsleeves = card.isFaceDown() && card.isInZone(EnumSet.of(ZoneType.Exile)); //fix facedown card image ie gonti lord of luxury
         Texture image = new RendererCachedCardImage(card, false).getImage( showAltState ? card.getAlternateState().getImageKey() : card.getCurrentState().getImageKey());
@@ -568,7 +568,7 @@ public class CardRenderer {
         }
         if (image != null) {
             if (image == ImageCache.defaultImage || Forge.enableUIMask.equals("Art")) {
-                CardImageRenderer.drawCardImage(g, card, false, x, y, w, h, pos, true);
+                CardImageRenderer.drawCardImage(g, card, showAltState, x, y, w, h, pos, true, false, isChoiceList);
             } else if (showsleeves) {
                 if (!card.isForeTold())
                     g.drawImage(sleeves, x, y, w, h);
@@ -610,7 +610,7 @@ public class CardRenderer {
             drawFoilEffect(g, card, x, y, w, h, false);
         } else {
             //if card has invalid or no texture due to sudden changes in ImageCache, draw CardImageRenderer instead and wait for it to refresh automatically
-            CardImageRenderer.drawCardImage(g, card, false, x, y, w, h, pos, Forge.enableUIMask.equals("Art"));
+            CardImageRenderer.drawCardImage(g, card, showAltState, x, y, w, h, pos, Forge.enableUIMask.equals("Art"), false, isChoiceList);
         }
     }
 
@@ -623,7 +623,7 @@ public class CardRenderer {
         boolean unselectable = !MatchController.instance.isSelectable(card) && MatchController.instance.isSelecting();
         float cx, cy, cw, ch;
         cx = x; cy = y; cw = w; ch = h;
-        drawCard(g, card, x, y, w, h, pos, false, showAltState);
+        drawCard(g, card, x, y, w, h, pos, false, showAltState, isChoiceList);
 
         float padding = w * PADDING_MULTIPLIER; //adjust for card border
         x += padding;

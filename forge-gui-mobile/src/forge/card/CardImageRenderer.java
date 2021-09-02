@@ -83,9 +83,9 @@ public class CardImageRenderer {
     }
 
     public  static void drawCardImage(Graphics g, CardView card, boolean altState, float x, float y, float w, float h, CardStackPosition pos, boolean useCardBGTexture) {
-        drawCardImage(g, card, altState, x, y, w, h, pos, useCardBGTexture, false);
+        drawCardImage(g, card, altState, x, y, w, h, pos, useCardBGTexture, false, false);
     }
-    public static void drawCardImage(Graphics g, CardView card, boolean altState, float x, float y, float w, float h, CardStackPosition pos, boolean useCardBGTexture, boolean noText) {
+    public static void drawCardImage(Graphics g, CardView card, boolean altState, float x, float y, float w, float h, CardStackPosition pos, boolean useCardBGTexture, boolean noText, boolean isChoiceList) {
         updateStaticFields(w, h);
 
         float blackBorderThickness = w * BLACK_BORDER_THICKNESS_RATIO;
@@ -95,7 +95,7 @@ public class CardImageRenderer {
         w -= 2 * blackBorderThickness;
         h -= 2 * blackBorderThickness;
 
-        final CardStateView state = card.getState(altState);
+        final CardStateView state = altState ? card.getAlternateState() : isChoiceList && card.isSplitCard() ? card.getLeftSplitState() : card.getCurrentState();
         final boolean canShow = MatchController.instance.mayView(card);
         boolean isSaga = state.getType().hasSubtype("Saga");
         boolean isClass = state.getType().hasSubtype("Class");
