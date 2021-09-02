@@ -31,7 +31,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -49,14 +48,15 @@ public class DeckRecognizer {
      * The Enum TokenType.
      */
     public enum TokenType {
-        KnownCard,
-        UnknownCard,
-        IllegalCard,
-        DeckName,
-        DeckSectionName,
-        Comment,
-        UnknownText,
-        CardType
+        LEGAL_CARD_REQUEST,
+        ILLEGAL_CARD_REQUEST,
+        INVALID_CARD_REQUEST,
+        UNKNOWN_CARD_REQUEST,
+        DECK_NAME,
+        DECK_SECTION_NAME,
+        COMMENT,
+        UNKNOWN_TEXT,
+        CARD_TYPE
     }
 
     /**
@@ -68,35 +68,41 @@ public class DeckRecognizer {
         private final int number;
         private final String text;
 
-        public static Token knownCard(final PaperCard theCard, final int count) {
-            return new Token(theCard, TokenType.KnownCard, count, null);
+        public static Token KnownCard(final PaperCard theCard, final int count) {
+            return new Token(theCard, TokenType.LEGAL_CARD_REQUEST, count, null);
         }
 
-        public static Token illegalCard(final String cardName, final String setCode, final int count) {
+        public static Token IllegalCard(final String cardName, final String setCode, final int count) {
             String ttext = setCode == null || setCode.equals("") ? cardName :
                            String.format("%s [%s]", cardName, setCode);
-            return new Token(null, TokenType.IllegalCard, count, ttext);
+            return new Token(null, TokenType.ILLEGAL_CARD_REQUEST, count, ttext);
         }
 
-        public static Token unknownCard(final String cardName, final String setCode, final int count) {
+        public static Token InvalidCard(final String cardName, final String setCode, final int count) {
             String ttext = setCode == null || setCode.equals("") ? cardName :
                     String.format("%s [%s]", cardName, setCode);
-            return new Token(null, TokenType.UnknownCard, count, ttext);
+            return new Token(null, TokenType.INVALID_CARD_REQUEST, count, ttext);
         }
 
-        public static Token deckSection(final String sectionName){
-            if (sectionName.contains("avatar"))
-                return new Token(TokenType.DeckSectionName, 1, DeckSection.Avatar.name());
-            if (sectionName.contains("commander"))
-                return new Token(TokenType.DeckSectionName, 1, DeckSection.Commander.name());
-            if (sectionName.contains("schemes"))
-                return new Token(TokenType.DeckSectionName, 1, DeckSection.Schemes.name());
-            if (sectionName.contains("conspiracy"))
-                return new Token(TokenType.DeckSectionName, 1, DeckSection.Conspiracy.name());
-            if (sectionName.contains("side") || sectionName.contains("sideboard"))
-                return new Token(TokenType.DeckSectionName, 1, DeckSection.Sideboard.name());
-            if (sectionName.contains("main") || sectionName.contains("card"))
-                return new Token(TokenType.DeckSectionName, 1, DeckSection.Main.name());
+        public static Token UnknownCard(final String cardName, final String setCode, final int count) {
+            String ttext = setCode == null || setCode.equals("") ? cardName :
+                    String.format("%s [%s]", cardName, setCode);
+            return new Token(null, TokenType.UNKNOWN_CARD_REQUEST, count, ttext);
+        }
+
+        public static Token DeckSection(final String sectionName){
+            if (sectionName.equals("avatar"))
+                return new Token(TokenType.DECK_SECTION_NAME, DeckSection.Avatar.name());
+            if (sectionName.equals("commander"))
+                return new Token(TokenType.DECK_SECTION_NAME, DeckSection.Commander.name());
+            if (sectionName.equals("schemes"))
+                return new Token(TokenType.DECK_SECTION_NAME, DeckSection.Schemes.name());
+            if (sectionName.equals("conspiracy"))
+                return new Token(TokenType.DECK_SECTION_NAME, DeckSection.Conspiracy.name());
+            if (sectionName.equals("side") || sectionName.contains("sideboard"))
+                return new Token(TokenType.DECK_SECTION_NAME, DeckSection.Sideboard.name());
+            if (sectionName.equals("main") || sectionName.contains("card") || sectionName.equals("mainboard"))
+                return new Token(TokenType.DECK_SECTION_NAME, DeckSection.Main.name());
             return null;
         }
 
@@ -109,9 +115,13 @@ public class DeckRecognizer {
 
         public Token(final TokenType type1, final int count, final String message) {
             this(null, type1, count, message);
-            if ((type1 == TokenType.KnownCard) || (type1 == TokenType.UnknownCard)) {
+            if ((type1 == TokenType.LEGAL_CARD_REQUEST) || (type1 == TokenType.UNKNOWN_CARD_REQUEST)) {
                 throw new IllegalArgumentException("Use factory methods for recognized " + REGRP_CARD + " lines");
             }
+        }
+
+        public Token(final TokenType type1, final String message) {
+            this(type1, 0, message);
         }
 
         public final String getText() {
@@ -146,38 +156,66 @@ public class DeckRecognizer {
 //    private static final Pattern EDITION_AFTER_CARD_NAME = Pattern.compile("([\\d]{1,2})?\\s*([a-zA-Z',\\/\\-\\s]+)\\s*((\\(|\\[)([a-zA-Z0-9]{3})(\\)|\\])\\s*)?([\\d]{1,3})?");
 
     // Core Matching Patterns (initialised in Constructor)
-    private static final String REGRP_DECKNAME = "deckName";
-    private static final String DECK_NAME_REGEX =
-            String.format("(?<pre>(deck(\\s+name)?)|((deck\\s+)?name))(\\:)?\\s*(?<%s>[a-zA-Z',\\/\\-\\s]+)\\s*",
+    public static final String REGRP_DECKNAME = "deckName";
+    public static final String REX_DECK_NAME =
+            String.format("^(//\\s*)?(?<pre>(deck name|name|deck))(\\:|\\s)\\s*(?<%s>[a-zA-Z0-9',\\/\\-\\s]+)\\s*(.*)$",
                     REGRP_DECKNAME);
-    private static final Pattern DECK_NAME_PATTERN = Pattern.compile(DECK_NAME_REGEX, Pattern.CASE_INSENSITIVE);
+    public static final Pattern DECK_NAME_PATTERN = Pattern.compile(REX_DECK_NAME, Pattern.CASE_INSENSITIVE);
 
-    private static final String REGRP_CARDNO = "count";
-    private static final String REGRP_SET = "setCode";
-    private static final String REGRP_COLLNO = "collectorNumber";
-    private static final String REGRP_CARD = "card";
+    public static final String REGRP_NOCARD = "token";
+    public static final String REX_NOCARD = String.format("^(?<pre>[^a-zA-Z]*)\\s*(?<title>(\\w+[:]\\s*))?(?<%s>[a-zA-Z]+)(?<post>[^a-zA-Z]*)?$", REGRP_NOCARD);
+    public static final Pattern NONCARD_PATTERN = Pattern.compile(REX_NOCARD, Pattern.CASE_INSENSITIVE);
 
-    private static final String CARD_REGEX_SET_NAME = String.format(
-            "(?<%s>[\\d]{1,2})?\\s*((\\(|\\[)?(?<%s>[a-zA-Z0-9]{3})(\\)|\\]|\\|)?)?" +
-                    "(?<%s>[a-zA-Z0-9',\\/\\-\\s]+)\\s*((\\|)(?<%s>[0-9A-Z]+\\S?[A-Z]*))?",
-                    REGRP_CARDNO, REGRP_SET, REGRP_CARD, REGRP_COLLNO);
-    private static final String CARD_REGEX_NAME_SET =
-            String.format("(?<%s>[\\d]{1,2})?\\s*(?<%s>[a-zA-Z0-9',\\/\\-\\s]+)\\s*((\\(|\\[|\\|)" +
-                    "(?<%s>[a-zA-Z0-9]{3})(\\)|\\])?)?\\s*(?<%s>[0-9A-Z]+\\S?[A-Z]*)?",
-                    REGRP_CARDNO, REGRP_CARD, REGRP_SET, REGRP_COLLNO);
+    public static final String REGRP_SET = "setcode";
+    public static final String REGRP_COLLNR = "collnr";
+    public static final String REGRP_CARD = "cardname";
+    public static final String REGRP_CARDNO = "count";
 
-    private static final Pattern CARD_SET_NAME_PATTERN = Pattern.compile(CARD_REGEX_SET_NAME);
-    private static final Pattern CARD_NAME_SET_PATTERN = Pattern.compile(CARD_REGEX_NAME_SET);
+    public static final String REX_CARD_NAME = String.format("(?<%s>[a-zA-Z0-9',\\.:!\\+\\\"\\/\\-\\s]+)", REGRP_CARD);
+    public static final String REX_SET_CODE = String.format("(?<%s>[a-zA-Z0-9_]{2,7})", REGRP_SET);
+    public static final String REX_COLL_NUMBER = String.format("(?<%s>\\S?[0-9A-Z]+\\S?[A-Z]*)", REGRP_COLLNR);
+    public static final String REX_CARD_COUNT = String.format("(?<%s>[\\d]{1,2})(?<mult>x)?", REGRP_CARDNO);
+
+    // 1. Card-Set Request (Amount?, CardName, Set)
+    public static final String REX_CARD_SET_REQUEST = String.format(
+            "(%s\\s)?\\s*%s\\s*(\\s|\\||\\(|\\[|\\{)%s(\\s|\\)|\\]|\\})?",
+            REX_CARD_COUNT, REX_CARD_NAME, REX_SET_CODE);
+    public static final Pattern CARD_SET_PATTERN = Pattern.compile(REX_CARD_SET_REQUEST);
+
+    // 2. Set-Card Request (Amount?, Set, CardName)
+    public static final String REX_SET_CARD_REQUEST = String.format(
+            "(%s\\s)?\\s*(\\(|\\[|\\{)?%s(\\s+|\\)|\\]|\\}|\\|)\\s*%s\\s*",
+            REX_CARD_COUNT, REX_SET_CODE, REX_CARD_NAME);
+    public static final Pattern SET_CARD_PATTERN = Pattern.compile(REX_SET_CARD_REQUEST);
+
+    // 3. Full-Request (Amount?, CardName, Set, Collector Number|Art Index) - MTGArena Format
+    public static final String REX_FULL_REQUEST_CARD_SET = String.format(
+            "(%s\\s)?\\s*%s\\s*(\\||\\(|\\[|\\{|\\s)%s(\\s|\\)|\\]|\\})?\\s+%s",
+            REX_CARD_COUNT, REX_CARD_NAME, REX_SET_CODE, REX_COLL_NUMBER);
+    public static final Pattern CARD_SET_COLLNO_PATTERN = Pattern.compile(REX_FULL_REQUEST_CARD_SET);
+
+    // 4. Full-Request (Amount?, Set, CardName, Collector Number|Art Index) - Alternative for flexibility
+    public static final String REX_FULL_REQUEST_SET_CARD = String.format(
+            "^(%s\\s)?\\s*(\\(|\\[|\\{)?%s(\\s+|\\)|\\]|\\}|\\|)\\s*%s\\s+%s$",
+            REX_CARD_COUNT, REX_SET_CODE, REX_CARD_NAME, REX_COLL_NUMBER);
+    public static final Pattern SET_CARD_COLLNO_PATTERN = Pattern.compile(REX_FULL_REQUEST_SET_CARD);
+
+    // 5. Card-Only Request (Amount?)
+    public static final String REX_CARDONLY = String.format(
+            "(%s\\s)?\\s*%s", REX_CARD_COUNT, REX_CARD_NAME);
+    public static final Pattern CARD_ONLY_PATTERN = Pattern.compile(REX_CARDONLY);
+
+
     // CoreTypes (to recognise Tokens of type CardType
-    private static List<String> cardTypes = null;
-    // Note: Planes section is not included, as it is checked against "Plainswalker" (see `isDeckSectionName` method)
-    private static final CharSequence[] DECK_SECTION_NAMES = {"avatar", "commander", "schemes", "conspiracy",
-            "main", "card",
-            "side", "sideboard"};
+    private static CharSequence[] CARD_TYPES = allCardTypes();
 
-    private CardDb db;
-    private CardDb altDb;
-    private Date recognizeCardsPrintedBefore = null;
+    private static final CharSequence[] DECK_SECTION_NAMES = {"avatar", "commander",
+            "schemes", "conspiracy", "planes",
+            "main", "card", "mainboard", "side", "sideboard"};
+
+    private final CardDb db;
+    private final CardDb altDb;
+    private Date releaseDateConstraint = null;
     // This two parameters are controlled only via setter methods
     private List<String> allowedSetCodes = null;  // as imposed by current format
     private DeckFormat deckFormat = null;  //
@@ -185,34 +223,14 @@ public class DeckRecognizer {
     public DeckRecognizer(CardDb db, CardDb altDb) {
         this.db = db;
         this.altDb = altDb;
-
-        if (cardTypes == null) {
-            // CoreTypesNames
-            List<CardType.CoreType> coreTypes = Lists.newArrayList(CardType.CoreType.values());
-            cardTypes = new ArrayList<String>();
-            coreTypes.forEach(new Consumer<CardType.CoreType>() {
-                @Override
-                public void accept(CardType.CoreType ctype) {
-                    cardTypes.add(ctype.name().toLowerCase());
-                }
-            });
-            // Manual Additions:
-            // NOTE: "sorceries" is also included as it can be found in exported deck, even if it's incorrect.
-            // Example: https://deckstats.net/decks/70852/556925-artifacts/en - see Issue 1010
-            cardTypes.add("sorceries");  // Sorcery is the only name with different plural form
-            cardTypes.add("aura");  // in case.
-            cardTypes.add("mana");  // "Mana" (see Issue 1010)
-            cardTypes.add("spell");
-            cardTypes.add("other spell");
-        }
     }
 
     public Token recognizeLine(final String rawLine) {
         if (StringUtils.isBlank(rawLine.trim()))
             return null;
-        if (StringUtils.startsWith(rawLine.trim(), LINE_COMMENT_DELIMITER)) {
-            return new Token(TokenType.Comment, 0, rawLine);
-        }
+        if (StringUtils.startsWith(rawLine.trim(), LINE_COMMENT_DELIMITER))
+            return new Token(TokenType.COMMENT, 0, rawLine);
+
         final char smartQuote = (char) 8217;
         String line = rawLine.trim().replace(smartQuote, '\'');
 
@@ -230,46 +248,63 @@ public class DeckRecognizer {
 
         Token result = recogniseCardToken(line);
         if (result == null)
-            result = recogniseNonCardToken(line, 1);
-        return result != null ? result : new Token(TokenType.UnknownText, 0, line);
+            result = recogniseNonCardToken(line);
+        return result != null ? result : new Token(TokenType.UNKNOWN_TEXT, 0, line);
     }
 
-    private Token recogniseCardToken(final String text) {
+    public Token recogniseCardToken(final String text) {
         String line = text.trim();
+        Token uknonwnCardToken = null;
+
         // TODO: recognize format: http://topdeck.ru/forum/index.php?showtopic=12711
         // @leriomaggio: DONE!
-        List<Matcher> cardMatchers = getRegexMatchers(line);
-        for (Matcher cardMatcher : cardMatchers) {
-            String cardName = cardMatcher.group(REGRP_CARD);
-            String ccount = cardMatcher.group(REGRP_CARDNO);
-            String setCode = cardMatcher.group(REGRP_SET);
-            String collNo = cardMatcher.group(REGRP_COLLNO);
-            int cardCount = ccount != null ? Integer.parseInt(ccount) : 1;
-            // if any, it will be tried to convert specific collector number to art index (useful for lands).
-            String collectorNumber = collNo != null ? collNo : IPaperCard.NO_COLLECTOR_NUMBER;
-
+        List<Matcher> cardMatchers = getRegExMatchers(line);
+        for (Matcher matcher : cardMatchers) {
+            String cardName = getRexGroup(matcher, REGRP_CARD);
+            if (cardName == null)
+                continue;
+            cardName = cardName.trim();
             //Avoid hit the DB - check whether cardName is contained in the DB
             CardDb.CardRequest cr = CardDb.CardRequest.fromString(cardName.trim());  // to account for any FOIL request
             if (!foundInCardDb(cr.cardName))
                 continue;  // skip to the next matcher!
-            // Ok Now we're sure the cardName is correct. Now check for setCode
-            CardEdition edition = StaticData.instance().getEditions().get(setCode);
-            if (edition != null){
+            String ccount = getRexGroup(matcher, REGRP_CARDNO);
+            String setCode = getRexGroup(matcher, REGRP_SET);
+            String collNo = getRexGroup(matcher, REGRP_COLLNR);
+            int cardCount = ccount != null ? Integer.parseInt(ccount) : 1;
+            // if any, it will be tried to convert specific collector number to art index (useful for lands).
+            String collectorNumber = collNo != null ? collNo : IPaperCard.NO_COLLECTOR_NUMBER;
+            int artIndex;
+            try {
+                artIndex = Integer.parseInt(collectorNumber);
+            } catch (NumberFormatException ex){
+                artIndex = IPaperCard.NO_ART_INDEX;
+            }
+
+            if (setCode != null) {
+                // Ok Now we're sure the cardName is correct. Now check for setCode
+                CardEdition edition = StaticData.instance().getEditions().get(setCode);
+                if (edition == null) {
+                    // set the case for unknown card (in case) and continue to the next for any better matching
+                    uknonwnCardToken = Token.UnknownCard(cardName, setCode, cardCount);
+                    continue;
+                }
+                if (isNotCompliantWithReleaseDateRestrictions(edition))
+                    return Token.InvalidCard(cr.cardName, edition.getCode(), cardCount);
+
                 // we now name is ok, set is ok - we just need to be sure about collector number (if any)
                 // and if that card can be actually found in the requested set.
                 // IOW: we should account for wrong request, e.g. Counterspell|FEM - just doesn't exist!
-                PaperCard pc = getCardFromSet(cr.cardName, edition, collectorNumber, cr.isFoil);
+                PaperCard pc = this.getCardFromSet(cr.cardName, edition, collectorNumber, artIndex, cr.isFoil);
                 if (pc != null) {
                     // ok so the card has been found - let's see if there's any restriction on the set
-                    if (this.allowedSetCodes != null && !this.allowedSetCodes.contains(setCode))
+                    if (isIllegalSetInGameFormat(setCode) || isIllegalCardInDeckFormat(pc))
                         // Mark as illegal card
-                        return Token.illegalCard(pc.getName(), pc.getEdition(), cardCount);
-                    if (this.deckFormat != null && !deckFormat.isLegalCard(pc))
-                        return Token.illegalCard(pc.getName(), pc.getEdition(), cardCount);
-                    return Token.knownCard(pc, cardCount);
+                        return Token.IllegalCard(pc.getName(), pc.getEdition(), cardCount);
+                    return Token.KnownCard(pc, cardCount);
                 }
                 // UNKNOWN card as in the Counterspell|FEM case
-                return Token.unknownCard(cardName, setCode, cardCount);
+                return Token.UnknownCard(cardName, setCode, cardCount);
             }
             // ok so we can simply ignore everything but card name - as set code does not exist
             // At this stage, we know the card name exists in the DB so a Card MUST be found
@@ -277,43 +312,89 @@ public class DeckRecognizer {
             // In that case, an illegalCard token will be returned!
             PaperCard pc = this.getCardFromSupportedEditions(cr.cardName, cr.isFoil);
             if (pc != null){
-                if (this.deckFormat != null && !deckFormat.isLegalCard(pc))
-                    return Token.illegalCard(pc.getName(), pc.getEdition(), cardCount);
-                return Token.knownCard(pc, cardCount);
+                if (isIllegalCardInDeckFormat(pc))
+                    return Token.IllegalCard(pc.getName(), pc.getEdition(), cardCount);
+                return Token.KnownCard(pc, cardCount);
             }
-            return Token.illegalCard(cardName, "", cardCount);
+            return Token.IllegalCard(cardName, "", cardCount);
         }
-        return null;
+        return uknonwnCardToken;  // either null or unknown card
+    }
+
+    private String getRexGroup(Matcher matcher, String groupName){
+        String rexGroup;
+        try{
+            rexGroup = matcher.group(groupName);
+        } catch (IllegalArgumentException ex) {
+            rexGroup = null;
+        }
+        return rexGroup;
+    }
+
+    private boolean isIllegalCardInDeckFormat(PaperCard pc) {
+        return this.deckFormat != null && !deckFormat.isLegalCard(pc);
+    }
+
+    private boolean isIllegalSetInGameFormat(String setCode) {
+        return this.allowedSetCodes != null && !this.allowedSetCodes.contains(setCode);
+    }
+
+    private boolean isNotCompliantWithReleaseDateRestrictions(CardEdition edition){
+        return this.releaseDateConstraint != null && edition.getDate().compareTo(this.releaseDateConstraint) >= 0;
     }
 
     private boolean foundInCardDb(String cardName){
-        return (this.db.contains(cardName.trim()) || this.altDb.contains(cardName.trim()));
+        return this.db.contains(cardName) || this.altDb.contains(cardName);
     }
 
-    private List<Matcher> getRegexMatchers(String line){
-        final Matcher setBeforeNameMatcher = CARD_SET_NAME_PATTERN.matcher(line);
-        final Matcher setAfterNameMatcher = CARD_NAME_SET_PATTERN.matcher(line);
+    private List<Matcher> getRegExMatchers(String line) {
         List<Matcher> matchers = new ArrayList<>();
-        if (setBeforeNameMatcher.find())
-            matchers.add(setAfterNameMatcher);
-        if (setAfterNameMatcher.find())
-            matchers.add(setBeforeNameMatcher);
+        Pattern[] patternsWithCollNumber = new Pattern[] {
+                CARD_SET_COLLNO_PATTERN,
+                SET_CARD_COLLNO_PATTERN
+        };
+        for (Pattern pattern : patternsWithCollNumber) {
+            Matcher matcher = pattern.matcher(line);
+            if (matcher.matches() && getRexGroup(matcher, REGRP_SET) != null &&
+                    getRexGroup(matcher, REGRP_COLLNR) != null)
+                matchers.add(matcher);
+        }
+        Pattern[] OtherPatterns = new Pattern[] {  // Order counts
+                CARD_SET_PATTERN,
+                SET_CARD_PATTERN,
+                CARD_ONLY_PATTERN
+        };
+        for (Pattern pattern : OtherPatterns) {
+            Matcher matcher = pattern.matcher(line);
+            if (matcher.matches())
+                matchers.add(matcher);
+        }
         return matchers;
-
-//        if (fullMatchSetAfter.length() == 0 && fullMatchSetBefore.length() == 0)
-//            return null;
-//        if (fullMatchSetBefore.equals(line))
-//            return setBeforeNameMatcher;
-//        if (fullMatchSetAfter.equals(line))
-//            return setAfterNameMatcher;
-//        return fullMatchSetAfter.length() > fullMatchSetBefore.length() ? setAfterNameMatcher : setBeforeNameMatcher;
     }
 
     private PaperCard getCardFromSet(final String cardName, final CardEdition edition,
-                                     final String collectorNumber, final boolean isFoil) {
+                                     final String collectorNumber, final int artIndex,
+                                     final boolean isFoil) {
+        // Try with collector number first
         PaperCard result = this.db.getCardFromSet(cardName, edition, collectorNumber, isFoil);
         if (result == null)
             result = this.altDb.getCardFromSet(cardName, edition, collectorNumber, isFoil);
+        if (result == null && !collectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER) &&
+                artIndex != IPaperCard.NO_ART_INDEX){
+            // So here we know cardName exists (checked before invoking this method)
+            // and also a Collector Number was specified.
+            // The only case we would reach this point is either due to a wrong edition-card match
+            // (later resulting in Unknown card - e.g. "Counterspell|FEM") or due to the fact that
+            // art Index was specified instead of collector number! Let's give it a go with that
+            // but only if artIndex is not NO_ART_INDEX (e.g. collectorNumber = "*32")
+            int maxArtForCard = this.db.contains(cardName) ? this.db.getMaxArtIndex(cardName) :
+                    this.altDb.getMaxArtIndex(cardName);
+            if (artIndex <= maxArtForCard){
+                // if collNr was "78", it's hardly an artIndex. It was just the wrong collNr for the requested card
+                result = this.db.contains(cardName) ? this.db.getCardFromSet(cardName, edition, artIndex, isFoil) :
+                        this.altDb.getCardFromSet(cardName, edition, artIndex, isFoil);
+            }
+        }
         return result;
     }
 
@@ -322,139 +403,109 @@ public class DeckRecognizer {
         if (this.allowedSetCodes != null && this.allowedSetCodes.size() > 0)
             filter = (Predicate<PaperCard>) this.db.isLegal(this.allowedSetCodes);
         String reqInfo = CardDb.CardRequest.compose(cardName, isFoil);
-        PaperCard result = this.db.getCardFromEditions(reqInfo, filter);
-        if (result == null)
-            result = this.altDb.getCardFromEditions(reqInfo, filter);
+        PaperCard result;
+        if (this.releaseDateConstraint != null){
+            result = this.db.getCardFromEditionsReleasedBefore(reqInfo,
+                    this.releaseDateConstraint, filter);
+            if (result == null)
+                result = this.altDb.getCardFromEditionsReleasedBefore(reqInfo,
+                        this.releaseDateConstraint, filter);
+        }
+        else {
+            result = this.db.getCardFromEditions(reqInfo, filter);
+            if (result == null)
+                result = this.altDb.getCardFromEditions(reqInfo, filter);
+        }
         return result;
     }
 
-    private static Token recogniseNonCardToken(final String text, final int n) {
+    public Token recogniseNonCardToken(final String text) {
         if (isDeckSectionName(text)) {
-            return Token.deckSection(text.toLowerCase().trim());
+            String tokenText = getNonCardTokenText(text.toLowerCase().trim());
+            return Token.DeckSection(tokenText);
         }
         if (isCardType(text)) {
-            return new Token(TokenType.CardType, n, text);
+            String tokenText = getNonCardTokenText(text);
+            return new Token(TokenType.CARD_TYPE, tokenText);
         }
         if (isDeckName(text)) {
             String deckName = getDeckName(text);
-            return new Token(TokenType.DeckName, n, deckName);
+            return new Token(TokenType.DECK_NAME, deckName);
         }
         return null;
     }
 
+    private static String getNonCardTokenText(final String line){
+        Matcher noncardMatcher = NONCARD_PATTERN.matcher(line);
+        if (!noncardMatcher.matches())
+            return "";
+        return noncardMatcher.group(REGRP_NOCARD);
+    }
+
+    private static CharSequence[] allCardTypes(){
+        List<String> cardTypesList = new ArrayList<>();
+        // CoreTypesNames
+        List<CardType.CoreType> coreTypes = Lists.newArrayList(CardType.CoreType.values());
+        for (CardType.CoreType coreType : coreTypes)
+            cardTypesList.add(coreType.name().toLowerCase());
+        // Manual Additions:
+        // NOTE: "sorceries" is also included as it can be found in exported deck, even if it's incorrect.
+        // Example: https://deckstats.net/decks/70852/556925-artifacts/en - see Issue 1010
+        cardTypesList.add("sorceries");  // Sorcery is the only name with different plural form
+        cardTypesList.add("aura");  // in case.
+        cardTypesList.add("mana");  // "Mana" (see Issue 1010)
+        cardTypesList.add("spell");
+        cardTypesList.add("other spell");
+        cardTypesList.add("planeswalker");
+        return cardTypesList.toArray(new CharSequence[cardTypesList.size()]);
+    }
+
     // NOTE: Card types recognition is ONLY used for style formatting in the Import Editor
     // This won't affect the import process of cards in any way !-)
-    private static boolean isCardType(final String lineAsIs) {
-        final String line = lineAsIs.toLowerCase().trim();
-        for (final String cardType : cardTypes) {
-            if (line.startsWith(cardType))
-                return true;
-        }
-        return false;
+    public static boolean isCardType(final String lineAsIs) {
+        String line = lineAsIs.toLowerCase().trim();
+        Matcher noncardMatcher = NONCARD_PATTERN.matcher(line);
+        if (!noncardMatcher.matches())
+            return false;
+        String nonCardToken = noncardMatcher.group(REGRP_NOCARD);
+        return StringUtils.containsAny(nonCardToken, CARD_TYPES);
     }
 
-    private static boolean isDeckName(final String lineAsIs) {
+    public static boolean isDeckName(final String lineAsIs) {
         final String line = lineAsIs.trim();
         final Matcher deckNameMatcher = DECK_NAME_PATTERN.matcher(line);
-        return (deckNameMatcher.find());
+        boolean matches = deckNameMatcher.matches();
+        return matches;
     }
 
-    private static String getDeckName(final String text) {
+    public static String getDeckName(final String text) {
         String line = text.trim();
         final Matcher deckNamePattern = DECK_NAME_PATTERN.matcher(line);
-        if (deckNamePattern.find())
+        if (deckNamePattern.matches())
             return deckNamePattern.group(REGRP_DECKNAME);  // Deck name is at match 7
-        return line;
+        return "";
     }
 
-    private static boolean isDeckSectionName(final String text) {
+    public static boolean isDeckSectionName(final String text) {
         String line = text.toLowerCase().trim();
-        if (StringUtils.containsAny(line, DECK_SECTION_NAMES))
-            return true;
-        return line.contains("planes") && !line.contains("planeswalker");
+        Matcher noncardMatcher = NONCARD_PATTERN.matcher(line);
+        if (!noncardMatcher.matches())
+            return false;
+        String nonCardToken = noncardMatcher.group(REGRP_NOCARD);
+        return StringUtils.equalsAnyIgnoreCase(nonCardToken, DECK_SECTION_NAMES);
     }
 
-    public void setDateConstraint(int month, Integer year) {
+    public void setDateConstraint(int year, int month) {
         Calendar ca = Calendar.getInstance();
         ca.set(year, month, 1);
-        recognizeCardsPrintedBefore = ca.getTime();
+        releaseDateConstraint = ca.getTime();
     }
 
-    public void setCardEditionConstrain(List<String> allowedSetCodes){
+    public void setGameFormatConstraint(List<String> allowedSetCodes){
         this.allowedSetCodes = allowedSetCodes;
     }
 
     public void setDeckFormatConstraint(DeckFormat deckFormat0){
         this.deckFormat = deckFormat0;
     }
-    
-//    private Token recognizePossibleNameAndNumber(final String name, final int n) {
-//        PaperCard pc = tryGetCard(name);
-//        if (null != pc) {
-//            return Token.knownCard(pc, n);
-//        }
-//
-//        // TODO: recognize format: http://topdeck.ru/forum/index.php?showtopic=12711
-//        //final Matcher foundEditionName = READ_SEPARATED_EDITION.matcher(name);
-//
-//        final Token known = DeckRecognizer.recognizeNonCard(name, n);
-//        return null == known ? Token.unknownCard(name, n) : known;
-//    }
-//
-//    private static Token recognizeNonCard(final String text, final int n) {
-//        if (DeckRecognizer.isDecoration(text)) {
-//            return new Token(TokenType.Comment, n, text);
-//        }
-//        if (DeckRecognizer.isSectionName(text)) {
-//            return new Token(TokenType.SectionName, n, text);
-//        }
-//        return null;
-//    }
-
-//    private static final String[] KNOWN_COMMENTS = new String[] { "land", "lands", "creatures", "creature", "spells",
-//            "enchantments", "other spells", "artifacts" };
-//    private static final String[] KNOWN_COMMENT_PARTS = new String[] { "card" };
-//
-//    private static boolean isDecoration(final String lineAsIs) {
-//        final String line = lineAsIs.toLowerCase();
-//        for (final String s : DeckRecognizer.KNOWN_COMMENT_PARTS) {
-//            if (line.contains(s)) {
-//                return true;
-//            }
-//        }
-//        for (final String s : DeckRecognizer.KNOWN_COMMENTS) {
-//            if (line.equalsIgnoreCase(s)) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-//
-//    private static boolean isSectionName(final String line) {
-//        if (line.toLowerCase().contains("side")) {
-//            return true;
-//        }
-//        if (line.toLowerCase().contains("main")) {
-//            return true;
-//        }
-//        if (line.toLowerCase().contains("commander")) {
-//            return true;
-//        }
-//        if (line.toLowerCase().contains("planes")) {
-//            return true;
-//        }
-//        if (line.toLowerCase().contains("schemes")) {
-//            return true;
-//        }
-//        if (line.toLowerCase().contains("vanguard")) {
-//            return true;
-//        }
-//        return false;
-//    }
-//
-//    public void setDateConstraint(int month, Integer year) {
-//        Calendar ca = Calendar.getInstance();
-//        ca.set(year, month, 1);
-//        recognizeCardsPrintedBefore = ca.getTime();
-//    }
 }
