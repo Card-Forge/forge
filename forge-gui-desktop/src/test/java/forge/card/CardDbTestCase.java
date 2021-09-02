@@ -2185,6 +2185,13 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         assertEquals(shivanDragonCard.getEdition(), originalArtShivanDragonEdition);
     }
 
+    @Test void testCardRequestWithSetCodeAllInLowercase(){
+        assertEquals(this.cardDb.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
+
+        PaperCard counterSpellCard = this.cardDb.getCard(this.cardNameCounterspell, "tmp");
+        assertEquals(counterSpellCard.getEdition(), "TMP");
+        assertEquals(counterSpellCard.getName(), cardNameCounterspell);
+    }
 
 
 }
