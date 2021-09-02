@@ -1025,7 +1025,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         }
                         if (paperCard != null && Forge.enableUIMask.equals("Art")) {
                             CardImageRenderer.drawCardImage(g, CardView.getCardForUi(paperCard), false,
-                                    x + (w - w * scale) / 2, y + (h - h * scale) / 1.5f, w * scale, h * scale, CardStackPosition.Top, true, false);
+                                    x + (w - w * scale) / 2, y + (h - h * scale) / 1.5f, w * scale, h * scale, CardStackPosition.Top, true, false, false);
                         } else {
                             TextureRegion tr = ImageCache.croppedBorderImage(dpImg);
                             g.drawImage(tr, x + (w - w * scale) / 2, y + (h - h * scale) / 1.5f, w * scale, h * scale);
