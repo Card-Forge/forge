@@ -120,6 +120,8 @@ public enum TrackableProperty {
     OrigProduceManaC(TrackableTypes.BooleanType),
     OrigProduceAnyMana(TrackableTypes.BooleanType),
     CountOrigProduceColoredMana(TrackableTypes.IntegerType),
+    //number of basic landtypes
+    CountBasicLandTypes(TrackableTypes.IntegerType),
 
     KeywordKey(TrackableTypes.StringType),
     HasDeathtouch(TrackableTypes.BooleanType),
