@@ -53,6 +53,7 @@ public enum Keyword {
     DETHRONE("Dethrone", SimpleKeyword.class, false, "Whenever this creature attacks the player with the most life or tied for the most life, put a +1/+1 counter on it."),
     DEVOUR("Devour", KeywordWithAmount.class, false, "As this creature enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with {%d:+1/+1 counter} on it for each creature sacrificed this way."),
     DEVOID("Devoid", SimpleKeyword.class, true, "This card has no color."),
+    DISTURB("Disturb", KeywordWithCost.class, false, "You may cast this card from your graveyard transformed for its disturb cost."),
     DOUBLE_STRIKE("Double Strike", SimpleKeyword.class, true, "This creature deals both first-strike and regular combat damage."),
     DREDGE("Dredge", KeywordWithAmount.class, false, "If you would draw a card, instead you may put exactly {%d:card} from the top of your library into your graveyard. If you do, return this card from your graveyard to your hand. Otherwise, draw a card."),
     ECHO("Echo", KeywordWithCost.class, false, "At the beginning of your upkeep, if this permanent came under your control since the beginning of your last upkeep, sacrifice it unless you pay %s."),
