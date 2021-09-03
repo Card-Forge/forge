@@ -1301,6 +1301,9 @@ public class CardView extends GameEntityView {
         public boolean hasLandwalk() {
             return get(TrackableProperty.HasLandwalk);
         }
+        public boolean hasHasAftermath() {
+            return get(TrackableProperty.HasAftermath);
+        }
 
         public boolean origProduceAnyMana() {
             return get(TrackableProperty.OrigProduceAnyMana);
@@ -1359,6 +1362,7 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.HasInfect, c.hasKeyword(Keyword.INFECT, state));
             set(TrackableProperty.HasStorm, c.hasKeyword(Keyword.STORM, state));
             set(TrackableProperty.HasLandwalk, c.hasKeyword(Keyword.LANDWALK, state));
+            set(TrackableProperty.HasAftermath, c.hasKeyword(Keyword.AFTERMATH, state));
             updateAbilityText(c, state);
             //set protectionKey for Icons
             set(TrackableProperty.ProtectionKey, c.getProtectionKey());

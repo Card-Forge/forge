@@ -8,6 +8,7 @@ import java.util.List;
 
 import forge.ImageKeys;
 import forge.assets.*;
+import forge.util.ImageUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.graphics.Color;
@@ -307,12 +308,7 @@ public class CardImageRenderer {
                         }
                     }
                     if (cv.isSplitCard()) {
-                        if (!isFaceDown)
-                            drawSplitCard(cv, altArt, g, x, y, w, h);
-                        else {
-                            //todo when face down show correct orientation from altArt
-                            g.drawImage(forgeArt, x, y, w, h);
-                        }
+                        drawSplitCard(cv, altArt, g, x, y, w, h, altState, isFaceDown);
                     } else if (cv.isFlipCard()) {
                         drawFlipCard(altArt, g, x, y, w, h, altState);
                     } else {
@@ -327,8 +323,13 @@ public class CardImageRenderer {
         }
         g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
     }
-    private static void drawSplitCard(CardView cv, FImageComplex cardArt, Graphics g, float x, float y, float w, float h) {
-        if (cv.isSplitCard() && !cv.getText().contains("Aftermath")) {
+    private static void drawSplitCard(CardView card, FImageComplex cardArt, Graphics g, float x, float y, float w, float h, boolean altState, boolean isFaceDown) {
+        CardView alt = CardView.getCardForUi(ImageUtil.getPaperCardFromImageKey(card.getAlternateState().getImageKey()));
+        if (alt == null)
+            alt = card.getAlternateState().getCard();
+        CardView cv = altState && isFaceDown ? alt : card;
+        boolean isAftermath = altState ? cv.getAlternateState().hasHasAftermath(): cv.getCurrentState().hasHasAftermath();
+        if (!isAftermath) {
             CardEdition ed = FModel.getMagicDb().getEditions().get(cv.getCurrentState().getSetCode());
             boolean isOldFrame = ed != null && !ed.isModern();
             float modH = isOldFrame ? cardArt.getHeight()/12f : 0f;
@@ -342,7 +343,7 @@ public class CardImageRenderer {
             g.drawRotatedImage(cardArt.getTexture(), x, y, h+modH, w / 2, x + w / 2, y + w / 2, cardArt.getRegionX()+(int)modW, (int)srcY, (int)(cardArt.getWidth()-modW2), (int)srcHeight, -90);
             g.drawRotatedImage(cardArt.getTexture(), x, y + w / 2, h+modH, w / 2, x + w / 2, y + w / 2, cardArt.getRegionX()+(int)modW, (int)cardArt.getHeight() - (int)(srcY + srcHeight), (int)(cardArt.getWidth()-modW2), (int)srcHeight, -90);
             g.drawLine(BORDER_THICKNESS, Color.BLACK, x+w/2, y, x+w/2, y+h);
-        } else if (cv.getText().contains("Aftermath")) {
+        } else {
             FImageComplex secondArt = CardRenderer.getAftermathSecondCardArt(cv.getCurrentState().getImageKey());
             g.drawRotatedImage(cardArt.getTexture(), x, y, w, h / 2, x + w, y + h / 2, cardArt.getRegionX(), cardArt.getRegionY(), (int)cardArt.getWidth(), (int)cardArt.getHeight() /2, 0);
             g.drawRotatedImage(secondArt.getTexture(), x - h / 2 , y + h / 2, h /2, w, x, y + h / 2, secondArt.getRegionX(), secondArt.getRegionY(), (int)secondArt.getWidth(), (int)secondArt.getHeight(), 90);
