@@ -1329,6 +1329,9 @@ public class CardView extends GameEntityView {
         public int origCanProduceColoredMana() {
             return get(TrackableProperty.CountOrigProduceColoredMana);
         }
+        public int countBasicLandTypes() {
+            return get(TrackableProperty.CountBasicLandTypes);
+        }
 
         public String getAbilityText() {
             return get(TrackableProperty.AbilityText);
@@ -1382,6 +1385,7 @@ public class CardView extends GameEntityView {
             boolean wMana = false;
             boolean cMana = false;
             int count = 0;
+            int basicLandTypes = 0;
             if (!state.getManaAbilities().isEmpty()) {
                 for (SpellAbility sa : state.getManaAbilities()) {
                     if (sa == null || sa.getManaPart() == null)
@@ -1428,6 +1432,17 @@ public class CardView extends GameEntityView {
                     }
                 }
             }
+            if (isForest())
+                basicLandTypes += 1;
+            if (isMountain())
+                basicLandTypes += 1;
+            if (isSwamp())
+                basicLandTypes += 1;
+            if (isPlains())
+                basicLandTypes += 1;
+            if (isIsland())
+                basicLandTypes += 1;
+            set(TrackableProperty.CountBasicLandTypes, basicLandTypes);
             set(TrackableProperty.OrigProduceManaR, rMana);
             set(TrackableProperty.OrigProduceManaG, gMana);
             set(TrackableProperty.OrigProduceManaB, bMana);

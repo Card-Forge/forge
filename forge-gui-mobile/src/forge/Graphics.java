@@ -472,6 +472,12 @@ public class Graphics {
 
         batch.begin();
     }
+    public void drawRectLines(float thickness, Color color, float x, float y, float w, float h) {
+        drawLine(thickness, color, x, y, x+w, y);
+        drawLine(thickness, color, x+thickness/2f, y+thickness/2f, x+thickness/2f, y+h-thickness/2f);
+        drawLine(thickness, color, x, y+h, x+w, y+h);
+        drawLine(thickness, color, x+w-thickness/2f, y+thickness/2f, x+w-thickness/2f, y+h-thickness/2f);
+    }
 
     public void fillRect(FSkinColor skinColor, float x, float y, float w, float h) {
         fillRect(skinColor.getColor(), x, y, w, h);
