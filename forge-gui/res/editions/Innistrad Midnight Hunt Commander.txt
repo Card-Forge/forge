@@ -1,0 +1,18 @@
+[metadata]
+Code=MIC
+Date=2021-09-24
+Name=Innistrad: Midnight Hunt Commander
+Type=Commander
+ScryfallCode=MIC
+
+[cards]
+1 M Leinore, Autumn Sovereign @Fariba Khamseh
+2 R Wilhelt, the Rotcleaver @Chris Rallis
+31 M Avacyn's Memorial @Kasia 'Kafis' Zielińska
+32 R Visions of Glory @Alexander Mokhov
+33 R Visions of Duplicity @Alexander Mokhov
+34 R Visions of Dread @Andrew Mar
+35 R Curse of Obsession @Irvin Rodriguez
+36 R Visions of Ruin @Andrew Mar
+37 R Visions of Dominance @Andrew Mar
+40 R Wilhelt, the Rotcleaver @Chris Rallis
