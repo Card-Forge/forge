@@ -310,7 +310,7 @@ public class CardImageRenderer {
                     if (cv.isSplitCard()) {
                         drawSplitCard(cv, altArt, g, x, y, w, h, altState, isFaceDown);
                     } else if (cv.isFlipCard()) {
-                        drawFlipCard(altArt, g, x, y, w, h, altState);
+                        drawFlipCard(isFaceDown ? altArt : cardArt, g, x, y, w, h, altState);
                     } else {
                         g.drawImage(altArt, x, y, w, h);
                     }
