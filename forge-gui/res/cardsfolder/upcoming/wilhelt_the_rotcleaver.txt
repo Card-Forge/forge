@@ -1,0 +1,11 @@
+Name:Wilhelt, the Rotcleaver
+ManaCost:2 U B
+Types:Legendary Creature Zombie Warrior
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Zombie.Other+YouCtrl+withoutDecayed | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever another Zombie you control dies, if it didn't have decayed, create a 2/2 black Zombie creature token with decayed. (It can't block. When it attacks, sacrifice it at end of combat.)
+SVar:TrigToken:DB$ Token | TokenScript$ b_2_2_zombie_decayed
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, you may sacrifice a Zombie. If you do, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ Sac<1/Zombie> | NumCards$ 1
+DeckNeeds:Type$Zombie
+DeckHas:Ability$Token & Ability$Sacrifice
+Oracle:Whenever another Zombie you control dies, if it didn't have decayed, create a 2/2 black Zombie creature token with decayed. (It can't block. When it attacks, sacrifice it at end of combat.)\nAt the beginning of your end step, you may sacrifice a Zombie. If you do, draw a card.
