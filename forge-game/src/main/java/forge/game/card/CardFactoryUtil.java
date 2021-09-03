@@ -3400,6 +3400,27 @@ public class CardFactoryUtil {
             }
         } else if (keyword.startsWith("Dash")) {
             effect = "Mode$ Continuous | Affected$ Card.Self+dashed | AddKeyword$ Haste";
+        } else if (keyword.equals("Decayed")) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("Mode$ Continuous | Affected$ Card.Self | AddTrigger$ DecayedTrigger | AddHiddenKeyword$ ");
+            sb.append("CARDNAME can't block.");
+            effect = sb.toString();
+
+            sb = new StringBuilder();
+            sb.append("Mode$ Attacks | ValidCard$ Card.Self | Execute$ DelayedTrig | TriggerDescription$ ");
+            sb.append("When CARDNAME attacks, sacrifice it at end of combat.");
+            String trig = sb.toString();
+
+            sb = new StringBuilder();
+            sb.append("DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ ");
+            sb.append("TrigSacrifice | TriggerDescription$ At end of combat, sacrifice CARDNAME.");
+            String delTrig = sb.toString();
+
+            String trigSac = "DB$ SacrificeAll | Defined$ Self | Controller$ You";
+
+            svars.put("DecayedTrigger", trig);
+            svars.put("DelayedTrig", delTrig);
+            svars.put("TrigSacrifice", trigSac);
         } else if (keyword.equals("Defender")) {
             effect = "Mode$ CantAttack | ValidCard$ Card.Self | DefenderKeyword$ True | Secondary$ True";
         } else if (keyword.equals("Devoid")) {

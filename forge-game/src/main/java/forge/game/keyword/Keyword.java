@@ -46,6 +46,7 @@ public enum Keyword {
     CYCLING("Cycling", KeywordWithCost.class, false, "%s, Discard this card: Draw a card."), //Typecycling reminder text handled by Cycling class
     DASH("Dash", KeywordWithCost.class, false, "You may cast this spell for its dash cost. If you do, it gains haste, and it's returned from the battlefield to its owner's hand at the beginning of the next end step."),
     DEATHTOUCH("Deathtouch", SimpleKeyword.class, true, "Any amount of damage this deals to a creature is enough to destroy it."),
+    DECAYED("Decayed", SimpleKeyword.class, true, "This creature can't block. When it attacks, sacrifice it at end of combat."),
     DEFENDER("Defender", SimpleKeyword.class, true, "This creature can't attack."),
     DELVE("Delve", SimpleKeyword.class, true, "As an additional cost to cast this spell, you may exile any number of cards from your graveyard. Each card exiled this way reduces the cost to cast this spell by {1}."),
     DEMONSTRATE("Demonstrate", SimpleKeyword.class, false, "When you cast this spell, you may copy it. If you do, choose an opponent to also copy it. Players may choose new targets for their copies."),
