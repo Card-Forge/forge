@@ -175,7 +175,23 @@ public final class GameActionUtil {
                 for (final KeywordInterface inst : source.getKeywords()) {
                     final String keyword = inst.getOriginal();
 
-                    if (keyword.startsWith("Escape")) {
+                    if (keyword.startsWith("Disturb")) {
+                        final String[] k = keyword.split(":");
+                        final Cost disturbCost = new Cost(k[1], true);
+
+                        final SpellAbility newSA = sa.copyWithManaCostReplaced(activator, disturbCost);
+                        newSA.setActivatingPlayer(activator);
+
+                        newSA.setAlternativeCost(AlternativeCost.Disturb);
+                        newSA.getRestrictions().setZone(ZoneType.Graveyard);
+
+                        alternatives.add(newSA);
+
+                        String stateAb = "DB$ SetState | Defined$ Self | Mode$ Transform";
+                        AbilitySub setState = (AbilitySub) AbilityFactory.getAbility(stateAb, source);
+
+                        newSA.setSubAbility(setState);
+                    } else if (keyword.startsWith("Escape")) {
                         final String[] k = keyword.split(":");
                         final Cost escapeCost = new Cost(k[1], true);
 
