@@ -331,7 +331,7 @@ public class CardImageRenderer {
         if (alt == null)
             alt = card.getAlternateState().getCard();
         CardView cv = altState && isFaceDown ? alt : card;
-        boolean isAftermath = altState ? cv.getAlternateState().hasHasAftermath(): cv.getCurrentState().hasHasAftermath();
+        boolean isAftermath = altState ? cv.getAlternateState().hasHasAftermath(): cv.getRightSplitState().hasHasAftermath();
         if (!isAftermath) {
             CardEdition ed = FModel.getMagicDb().getEditions().get(cv.getCurrentState().getSetCode());
             boolean isOldFrame = ed != null && !ed.isModern();
