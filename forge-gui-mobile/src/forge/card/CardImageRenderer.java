@@ -96,8 +96,12 @@ public class CardImageRenderer {
         w -= 2 * blackBorderThickness;
         h -= 2 * blackBorderThickness;
 
-        final CardStateView state = altState ? card.getAlternateState() : isChoiceList && card.isSplitCard() ? card.getLeftSplitState() : card.getCurrentState();
+        CardStateView state = altState ? card.getAlternateState() : isChoiceList && card.isSplitCard() ? card.getLeftSplitState() : card.getCurrentState();
+        final boolean isFaceDown = card.isFaceDown();
         final boolean canShow = MatchController.instance.mayView(card);
+        //override
+        if (isFaceDown && altState && card.isSplitCard())
+            state = card.getLeftSplitState();
         boolean isSaga = state.getType().hasSubtype("Saga");
         boolean isClass = state.getType().hasSubtype("Class");
         boolean isDungeon = state.getType().isDungeon();
@@ -110,7 +114,6 @@ public class CardImageRenderer {
 
         //determine colors for borders
         final List<DetailColors> borderColors;
-        final boolean isFaceDown = card.isFaceDown();
         if (isFaceDown) {
             borderColors = !altState ? ImmutableList.of(DetailColors.FACE_DOWN) : !useCardBGTexture ? ImmutableList.of(DetailColors.FACE_DOWN) : CardDetailUtil.getBorderColors(state, canShow);
         } else {
@@ -234,7 +237,7 @@ public class CardImageRenderer {
             if (card.isSplitCard() && card.getAlternateState() != null) {
                 //handle rendering both parts of split card
                 mainManaCost = card.getLeftSplitState().getManaCost();
-                ManaCost otherManaCost = card.getAlternateState().getManaCost();
+                ManaCost otherManaCost = card.getRightSplitState().getManaCost();
                 manaCostWidth = CardFaceSymbols.getWidth(otherManaCost, MANA_SYMBOL_SIZE) + HEADER_PADDING;
                 CardFaceSymbols.drawManaCost(g, otherManaCost, x + w - manaCostWidth, y + (h - MANA_SYMBOL_SIZE) / 2, MANA_SYMBOL_SIZE);
                 //draw "//" between two parts of mana cost
