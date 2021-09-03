@@ -3401,9 +3401,12 @@ public class CardFactoryUtil {
         } else if (keyword.startsWith("Dash")) {
             effect = "Mode$ Continuous | Affected$ Card.Self+dashed | AddKeyword$ Haste";
         } else if (keyword.equals("Decayed")) {
-            effect = "Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't block.";
-
             StringBuilder sb = new StringBuilder();
+            sb.append("Mode$ Continuous | Affected$ Card.Self | AddTrigger$ DecayedTrigger | AddHiddenKeyword$ ");
+            sb.append("CARDNAME can't block.");
+            effect = sb.toString();
+
+            sb = new StringBuilder();
             sb.append("Mode$ Attacks | ValidCard$ Card.Self | Execute$ DelayedTrig | TriggerDescription$ ");
             sb.append("When CARDNAME attacks, sacrifice it at end of combat.");
             String trig = sb.toString();
