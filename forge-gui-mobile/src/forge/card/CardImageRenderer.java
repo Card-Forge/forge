@@ -740,6 +740,7 @@ public class CardImageRenderer {
         return colors;
     }
     public static Color[] drawCardBackgroundTexture(CardStateView state, Graphics g, List<DetailColors> backColors, float x, float y, float w, float h) {
+        boolean isHybrid = state.getManaCost().hasHybrid();
         Color[] colors = new Color[backColors.size()];
         for (int i = 0; i < colors.length; i++) {
             DetailColors dc = backColors.get(i);
@@ -773,7 +774,9 @@ public class CardImageRenderer {
                 }
                 break;
             case 2:
-                if (backColors.contains(DetailColors.WHITE) && backColors.contains(DetailColors.BLUE)) {
+                if (!isHybrid) {
+                    g.drawImage(FSkinImage.CARDBG_M, x, y, w, h);
+                } else if (backColors.contains(DetailColors.WHITE) && backColors.contains(DetailColors.BLUE)) {
                     g.drawImage(FSkinImage.CARDBG_WU, x, y, w, h);
                 } else if (backColors.contains(DetailColors.WHITE) && backColors.contains(DetailColors.BLACK)) {
                     g.drawImage(FSkinImage.CARDBG_WB, x, y, w, h);
