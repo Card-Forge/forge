@@ -822,7 +822,7 @@ public class CardView extends GameEntityView {
         updateZoneText(c);
         updateDamage(c);
 
-        if (getBackup() == null && !c.isFaceDown() && (c.hasBackSide()||c.isFlipCard())) {
+        if (getBackup() == null && !c.isFaceDown() && (c.hasBackSide()||c.isFlipCard()||c.isAdventureCard())) {
             set(TrackableProperty.PaperCardBackup, c.getPaperCard());
         }
 
