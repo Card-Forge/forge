@@ -1,5 +1,6 @@
 package forge.assets;
 
+import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,6 +39,7 @@ public class FSkin {
     private static String preferredName;
     private static boolean loaded = false;
     public static Texture hdLogo = null;
+    public static Texture overlay_alpha = null;
 
     public static void changeSkin(final String skinName) {
         final ForgePreferences prefs = FModel.getPreferences();
@@ -98,7 +100,7 @@ public class FSkin {
 
         //ensure skins directory exists
         final FileHandle dir = Gdx.files.absolute(ForgeConstants.CACHE_SKINS_DIR);
-        if (!dir.exists() || !dir.isDirectory()) {
+        if (!Files.exists(dir.file().toPath()) || !Files.isDirectory(dir.file().toPath())) {
             //if skins directory doesn't exist, point to internal assets/skin directory instead for the sake of the splash screen
             preferredDir = Gdx.files.internal("fallback_skin");
         }
@@ -117,19 +119,36 @@ public class FSkin {
 
             // Non-default (preferred) skin name and dir.
             preferredDir = Gdx.files.absolute(preferredName.equals("default") ? ForgeConstants.BASE_SKINS_DIR + preferredName : ForgeConstants.CACHE_SKINS_DIR + preferredName);
-            if (!preferredDir.exists() || !preferredDir.isDirectory()) {
+            if (!Files.exists(preferredDir.file().toPath()) || !Files.isDirectory(preferredDir.file().toPath())) {
                 preferredDir.mkdirs();
             }
         }
 
         FSkinTexture.BG_TEXTURE.load(); //load background texture early for splash screen
 
+        //load theme logo while changing skins
+        final FileHandle theme_logo = getSkinFile("hd_logo.png");
+        if (Files.exists(theme_logo.file().toPath())) {
+            Texture txOverlay = new Texture(theme_logo, true);
+            txOverlay.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
+            hdLogo = txOverlay;
+        } else {
+            hdLogo = null;
+        }
+        final FileHandle duals_overlay = getDefaultSkinFile("overlay_alpha.png");
+        if (Files.exists(duals_overlay.file().toPath())) {
+            Texture txAlphaLines = new Texture(duals_overlay, true);
+            txAlphaLines.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
+            overlay_alpha = txAlphaLines;
+        } else {
+            overlay_alpha = null;
+        }
+
         if (splashScreen != null) {
             final FileHandle f = getSkinFile("bg_splash.png");
             final FileHandle f2 = getSkinFile("bg_splash_hd.png"); //HD Splashscreen
-            final FileHandle f3 = getSkinFile("hd_logo.png");
 
-            if (!f.exists()) {
+            if (!Files.exists(f.file().toPath())) {
                 if (!skinName.equals("default")) {
                     FSkin.loadLight("default", splashScreen);
                 }
@@ -141,20 +160,12 @@ public class FSkin {
                 final int w = txSplash.getWidth();
                 final int h = txSplash.getHeight();
 
-                if (f2.exists()) {
+                if (Files.exists(f2.file().toPath())) {
                     Texture txSplashHD = new Texture(f2, true);
                     txSplashHD.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
                     splashScreen.setBackground(new TextureRegion(txSplashHD));
                 } else {
                     splashScreen.setBackground(new TextureRegion(txSplash, 0, 0, w, h - 100));
-                }
-
-                if (f3.exists()) {
-                    Texture txOverlay = new Texture(f3, true);
-                    txOverlay.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
-                    hdLogo = txOverlay;
-                } else {
-                    hdLogo = null;
                 }
 
                 Pixmap pxSplash = new Pixmap(f);
@@ -227,26 +238,26 @@ public class FSkin {
         try {
             textures.put(f1.path(), new Texture(f1));
             Pixmap preferredIcons = new Pixmap(f1);
-            if (f2.exists()) {
+            if (Files.exists(f2.file().toPath())) {
                 textures.put(f2.path(), new Texture(f2));
                 preferredIcons = new Pixmap(f2);
             }
 
             textures.put(f3.path(), new Texture(f3));
-            if (f6.exists()) {
+            if (Files.exists(f6.file().toPath())) {
                 textures.put(f6.path(), new Texture(f6));
             }
             else {
                 textures.put(f6.path(), textures.get(f3.path()));
             }
-            if (f7.exists()){
+            if (Files.exists(f7.file().toPath())){
                 Texture t = new Texture(f7, true);
                 //t.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
                 textures.put(f7.path(), t);
             }
 
             //hdbuttons
-            if (f11.exists()) {
+            if (Files.exists(f11.file().toPath())) {
                 if (GuiBase.isAndroid() && Forge.totalDeviceRAM <5000) {
                     Forge.hdbuttons = false;
                 } else {
@@ -256,7 +267,7 @@ public class FSkin {
                     Forge.hdbuttons = true;
                 }
             } else { Forge.hdbuttons = false; } //how to refresh buttons when a theme don't have hd buttons?
-            if (f12.exists()) {
+            if (Files.exists(f12.file().toPath())) {
                 if (GuiBase.isAndroid() && Forge.totalDeviceRAM <5000) {
                     Forge.hdstart = false;
                 } else {
@@ -306,7 +317,7 @@ public class FSkin {
             if (textureFilter)
                 txDefaultSleeves.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
 
-            if (f5.exists()) {
+            if (Files.exists(f5.file().toPath())) {
                 pxPreferredAvatars = new Pixmap(f5);
                 txPreferredAvatars = new Texture(f5, textureFilter);
                 if (textureFilter)
