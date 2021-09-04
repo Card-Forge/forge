@@ -1,0 +1,7 @@
+Name:Avacyn's Memorial
+ManaCost:5 W W W
+Types:Legendary Artifact
+K:Indestructible
+S:Mode$ Continuous | Affected$ Permanent.Other+YouCtrl+Legendary | AddKeyword$ Indestructible | Description$ Other legendary permanents you control have indestructible.
+DeckNeeds:Type$Legendary
+Oracle:Indestructible\nOther legendary permanents you control have indestructible.
