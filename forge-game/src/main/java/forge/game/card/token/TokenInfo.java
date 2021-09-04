@@ -152,7 +152,7 @@ public class TokenInfo {
     }
 
     static protected void protoTypeApplyTextChange(final Card result, final SpellAbility sa) {
-     // update Token with CardTextChanges
+        // update Token with CardTextChanges
         Map<String, String> colorMap = sa.getChangedTextColors();
         Map<String, String> typeMap = sa.getChangedTextTypes();
         if (!colorMap.isEmpty()) {

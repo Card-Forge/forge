@@ -67,7 +67,7 @@ public final class CardRules implements ICardCharacteristics {
     }
 
     void reinitializeFromRules(CardRules newRules) {
-        if(!newRules.getName().equals(this.getName()))
+        if (!newRules.getName().equals(this.getName()))
             throw new UnsupportedOperationException("You cannot rename the card using the same CardRules object");
 
         splitType = newRules.splitType;
@@ -91,7 +91,7 @@ public final class CardRules implements ICardCharacteristics {
             }
         }
         int len = oracleText.length();
-        for(int i = 0; i < len; i++) {
+        for (int i = 0; i < len; i++) {
             char c = oracleText.charAt(i); // This is to avoid needless allocations performed by toCharArray()
             switch(c) {
                 case('('): isReminder = i > 0; break; // if oracle has only reminder, consider it valid rules (basic and true lands need this)
@@ -99,7 +99,7 @@ public final class CardRules implements ICardCharacteristics {
                 case('{'): isSymbol = true; break;
                 case('}'): isSymbol = false; break;
                 default:
-                    if(isSymbol && !isReminder) {
+                    if (isSymbol && !isReminder) {
                         switch(c) {
                             case('W'): res |= MagicColor.WHITE; break;
                             case('U'): res |= MagicColor.BLUE; break;
@@ -317,7 +317,7 @@ public final class CardRules implements ICardCharacteristics {
     /** Instantiates class, reads a card. For batch operations better create you own reader instance. */
     public static CardRules fromScript(Iterable<String> script) {
         Reader crr = new Reader();
-        for(String line : script) {
+        for (String line : script) {
             crr.parseLine(line);
         }
         return crr.getCard();
