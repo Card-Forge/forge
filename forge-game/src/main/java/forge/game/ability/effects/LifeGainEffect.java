@@ -1,6 +1,5 @@
 package forge.game.ability.effects;
 
-
 import java.util.List;
 
 import forge.game.ability.AbilityUtils;
@@ -40,7 +39,7 @@ public class LifeGainEffect extends SpellAbilityEffect {
         final int lifeAmount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("LifeAmount"), sa);
 
         List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
-        if( tgtPlayers.isEmpty() ) {
+        if (tgtPlayers.isEmpty()) {
             tgtPlayers.add(sa.getActivatingPlayer());
         }
 

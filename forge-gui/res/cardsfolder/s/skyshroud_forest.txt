@@ -5,6 +5,6 @@ A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Mana | Cost$ T | Produced$ U | SubAbility$ DBPain | SpellDescription$ Add {U}. CARDNAME deals 1 damage to you.
 A:AB$ Mana | Cost$ T | Produced$ G | SubAbility$ DBPain | SpellDescription$ Add {G}. CARDNAME deals 1 damage to you.
 K:CARDNAME enters the battlefield tapped.
-SVar:DBPain:DB$DealDamage | NumDmg$ 1 | Defined$ You
+SVar:DBPain:DB$ DealDamage | NumDmg$ 1 | Defined$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshroud_forest.jpg
 Oracle:Skyshroud Forest enters the battlefield tapped.\n{T}: Add {C}.\n{T}: Add {G} or {U}. Skyshroud Forest deals 1 damage to you.
