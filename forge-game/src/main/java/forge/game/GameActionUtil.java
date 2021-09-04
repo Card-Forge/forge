@@ -175,7 +175,29 @@ public final class GameActionUtil {
                 for (final KeywordInterface inst : source.getKeywords()) {
                     final String keyword = inst.getOriginal();
 
-                    if (keyword.startsWith("Escape")) {
+                    if (keyword.startsWith("Disturb")) {
+                        final String[] k = keyword.split(":");
+                        final Cost disturbCost = new Cost(k[1], true);
+
+                        final SpellAbility newSA = sa.copyWithManaCostReplaced(activator, disturbCost);
+                        newSA.setActivatingPlayer(activator);
+
+                        newSA.putParam("PrecostDesc", "Disturb —");
+                        newSA.putParam("CostDesc", disturbCost.toString());
+
+                        // makes new SpellDescription
+                        final StringBuilder desc = new StringBuilder();
+                        desc.append(newSA.getCostDescription());
+                        desc.append("(").append(inst.getReminderText()).append(")");
+                        newSA.setDescription(desc.toString());
+                        newSA.putParam("AfterDescription", "(Disturbed)");
+
+                        newSA.setAlternativeCost(AlternativeCost.Disturb);
+                        newSA.getRestrictions().setZone(ZoneType.Graveyard);
+                        newSA.setCardState(source.getAlternateState());
+
+                        alternatives.add(newSA);
+                    } else if (keyword.startsWith("Escape")) {
                         final String[] k = keyword.split(":");
                         final Cost escapeCost = new Cost(k[1], true);
 
