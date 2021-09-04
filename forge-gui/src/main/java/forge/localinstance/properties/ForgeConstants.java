@@ -52,6 +52,7 @@ public final class ForgeConstants {
     public static final String NET_DECKS_OATHBREAKER_LIST_FILE       = LISTS_DIR + "net-decks-oathbreaker.txt";
     public static final String NET_DECKS_TINYLEADERS_LIST_FILE       = LISTS_DIR + "net-decks-tinyleaders.txt";
     public static final String BORDERLESS_CARD_LIST_FILE             = LISTS_DIR + "borderlessCardList.txt";
+    public static final String CLASSIC_MODULE_CARD_TO_CROP_FILE      = LISTS_DIR + "classicModuleCardtoCrop.txt";
     public static final String SKINS_LIST_FILE                       = LISTS_DIR + "skinsList.txt";
     public static final String CJK_FONTS_LIST_FILE                   = LISTS_DIR + "font-list.txt";
     public static final String NET_ARCHIVE_STANDARD_DECKS_LIST_FILE  = LISTS_DIR + "net-decks-archive-standard.txt";

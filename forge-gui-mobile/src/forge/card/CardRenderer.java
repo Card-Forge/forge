@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import forge.ImageKeys;
+import forge.localinstance.properties.ForgeConstants;
+import forge.util.FileUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.Gdx;
@@ -195,6 +198,7 @@ public class CardRenderer {
     private static final Map<String, FImageComplex> cardArtCache = new HashMap<>(1024);
     public static final float CARD_ART_RATIO = 1.302f;
     public static final float CARD_ART_HEIGHT_PERCENTAGE = 0.43f;
+    private static List<String> classicModuleCardtoCrop = FileUtil.readFile(ForgeConstants.CLASSIC_MODULE_CARD_TO_CROP_FILE);
 
     public static void clearcardArtCache(){
         cardArtCache.clear();
@@ -217,6 +221,7 @@ public class CardRenderer {
 
     public static FImageComplex getCardArt(String imageKey, boolean isSplitCard, boolean isHorizontalCard, boolean isAftermathCard, boolean isSaga, boolean isClass, boolean isDungeon, boolean isFlipCard, boolean isPlanesWalker) {
         FImageComplex cardArt = cardArtCache.get(imageKey);
+        boolean isClassicModule = classicModuleCardtoCrop.contains(imageKey.substring(ImageKeys.CARD_PREFIX.length()).replace(".jpg","").replace(".png", ""));
         if (cardArt == null) {
             Texture image = new RendererCachedCardImage(imageKey, true).getImage();
             if (image != null) {
@@ -227,7 +232,12 @@ public class CardRenderer {
                     float x, y;
                     float w = image.getWidth();
                     float h = image.getHeight();
-                    if (isPlanesWalker) {
+                     if (isClassicModule) {
+                        x = w * 0.09f;
+                        y = h * 0.2f;
+                        w -= 2f * x;
+                        h -= 3f * y;
+                    }else if (isPlanesWalker) {
                         x = w * 0.09f;
                         y = h * 0.11f;
                         w -= 2f * x;
