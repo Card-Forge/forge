@@ -40,7 +40,7 @@ public class TokenDb implements ITokenDatabase {
     }
 
     public void preloadTokens() {
-        for(CardEdition edition : this.editions) {
+        for (CardEdition edition : this.editions) {
             for (String name : edition.getTokens().keySet()) {
                 try {
                     getToken(name, edition.getCode());
