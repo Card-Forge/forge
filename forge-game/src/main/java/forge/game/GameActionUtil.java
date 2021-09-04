@@ -182,15 +182,21 @@ public final class GameActionUtil {
                         final SpellAbility newSA = sa.copyWithManaCostReplaced(activator, disturbCost);
                         newSA.setActivatingPlayer(activator);
 
+                        newSA.putParam("PrecostDesc", "Disturb —");
+                        newSA.putParam("CostDesc", disturbCost.toString());
+
+                        // makes new SpellDescription
+                        final StringBuilder desc = new StringBuilder();
+                        desc.append(newSA.getCostDescription());
+                        desc.append("(").append(inst.getReminderText()).append(")");
+                        newSA.setDescription(desc.toString());
+                        newSA.putParam("AfterDescription", "(Disturbed)");
+
                         newSA.setAlternativeCost(AlternativeCost.Disturb);
                         newSA.getRestrictions().setZone(ZoneType.Graveyard);
+                        newSA.setCardState(source.getAlternateState());
 
                         alternatives.add(newSA);
-
-                        String stateAb = "DB$ SetState | Defined$ Self | Mode$ Transform";
-                        AbilitySub setState = (AbilitySub) AbilityFactory.getAbility(stateAb, source);
-
-                        newSA.setSubAbility(setState);
                     } else if (keyword.startsWith("Escape")) {
                         final String[] k = keyword.split(":");
                         final Cost escapeCost = new Cost(k[1], true);
