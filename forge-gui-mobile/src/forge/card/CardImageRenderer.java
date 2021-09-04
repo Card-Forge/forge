@@ -8,6 +8,7 @@ import java.util.List;
 
 import forge.ImageKeys;
 import forge.assets.*;
+import forge.item.PaperCard;
 import forge.util.ImageUtil;
 import org.apache.commons.lang3.StringUtils;
 
@@ -83,10 +84,10 @@ public class CardImageRenderer {
             drawArt(null, g, x, y, w, h, false, true);
     }
 
-    public  static void drawCardImage(Graphics g, CardView card, boolean altState, float x, float y, float w, float h, CardStackPosition pos, boolean useCardBGTexture) {
-        drawCardImage(g, card, altState, x, y, w, h, pos, useCardBGTexture, false, false);
+    public  static void drawCardImage(Graphics g, CardView card, boolean altState, float x, float y, float w, float h, CardStackPosition pos, boolean useCardBGTexture, boolean showArtist) {
+        drawCardImage(g, card, altState, x, y, w, h, pos, useCardBGTexture, false, false, showArtist);
     }
-    public static void drawCardImage(Graphics g, CardView card, boolean altState, float x, float y, float w, float h, CardStackPosition pos, boolean useCardBGTexture, boolean noText, boolean isChoiceList) {
+    public static void drawCardImage(Graphics g, CardView card, boolean altState, float x, float y, float w, float h, CardStackPosition pos, boolean useCardBGTexture, boolean noText, boolean isChoiceList, boolean showArtist) {
         updateStaticFields(w, h);
 
         float blackBorderThickness = w * BLACK_BORDER_THICKNESS_RATIO;
@@ -142,14 +143,16 @@ public class CardImageRenderer {
         float typeBoxHeight = 2 * TYPE_FONT.getCapHeight();
         float ptBoxHeight = 0;
         float textBoxHeight = h - headerHeight - artHeight - typeBoxHeight - outerBorderThickness - artInset;
+
         if (state.isCreature() || state.isPlaneswalker() || state.getType().hasSubtype("Vehicle")) {
-            //if P/T box needed, make room for it
             ptBoxHeight = 2 * PT_FONT.getCapHeight();
-            textBoxHeight -= ptBoxHeight;
         }
-        else {
-            textBoxHeight -= 2 * artInset;
-        }
+        //space for artist
+        textBoxHeight -= 2 * PT_FONT.getCapHeight();
+        PaperCard paperCard = ImageUtil.getPaperCardFromImageKey(state.getImageKey());
+        String artist = "WOTC";
+        if (paperCard != null && !paperCard.getArtist().isEmpty())
+            artist = paperCard.getArtist();
         float minTextBoxHeight = 2 * headerHeight;
         if (textBoxHeight < minTextBoxHeight) {
             if (textBoxHeight < minTextBoxHeight) {
@@ -223,6 +226,9 @@ public class CardImageRenderer {
             Color[] ptColors = FSkinColor.tintColors(Color.WHITE, colors, CardRenderer.PT_BOX_TINT);
             drawPtBox(g, card, state, ptColors, x, y - 2 * artInset, w, ptBoxHeight, noText);
         }
+        //draw artist
+        if (showArtist)
+            g.drawOutlinedText(artist, TEXT_FONT, Color.WHITE, Color.DARK_GRAY, x+(TYPE_FONT.getCapHeight()/2), y+(TYPE_FONT.getCapHeight()/2), w, h, false, Align.left, false);
     }
 
     private static void drawHeader(Graphics g, CardView card, CardStateView state, Color[] colors, float x, float y, float w, float h, boolean noText) {
@@ -306,7 +312,7 @@ public class CardImageRenderer {
                                 altArt = CardRenderer.getAlternateCardArt(cv.getAlternateState().getImageKey(), cv.getAlternateState().isPlaneswalker());
                             else {
                                 altArt = CardRenderer.getCardArt(cv.getAlternateState().getImageKey(), cv.isSplitCard(), cv.getAlternateState().isPlane() || cv.getAlternateState().isPhenomenon(), cv.getText().contains("Aftermath"),
-                                        cv.getAlternateState().getType().hasSubtype("Saga"), cv.getAlternateState().getType().hasSubtype("Class"), cv.getAlternateState().getType().isDungeon(), cv.isFlipCard(), cv.getAlternateState().isPlaneswalker());
+                                        cv.getAlternateState().getType().hasSubtype("Saga"), cv.getAlternateState().getType().hasSubtype("Class"), cv.getAlternateState().getType().isDungeon(), cv.isFlipCard(), cv.getAlternateState().isPlaneswalker(), CardRenderer.isModernFrame(cv));
                             }
                         }
                     }
@@ -628,7 +634,7 @@ public class CardImageRenderer {
         }
 
         if (image == ImageCache.defaultImage || Forge.enableUIMask.equals("Art")) { //support drawing card image manually if card image not found
-            drawCardImage(g, card, altState, x, y, w, h, CardStackPosition.Top, true);
+            drawCardImage(g, card, altState, x, y, w, h, CardStackPosition.Top, true, true);
         } else {
             float radius = (h - w)/8;
             float wh_Adj = ForgeConstants.isGdxPortLandscape && isCurrentCard ? 1.38f:1.0f;
