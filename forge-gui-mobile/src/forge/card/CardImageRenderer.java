@@ -455,7 +455,6 @@ public class CardImageRenderer {
                         colorPairs[1] = fromDetailColor(DetailColors.GREEN);
                     }
                 }
-                colorPairsBackup = colorPairs;
                 colorPairs = FSkinColor.tintColors(Color.WHITE, colorPairs, 0.3f);
                 float oldAlpha = g.getfloatAlphaComposite();
                 if (!useCardBGTexture)
@@ -464,10 +463,8 @@ public class CardImageRenderer {
                     g.setAlphaComposite(0.95f);
                     fillColorBackground(g, colorPairs, x, y, w, h);
                     if (fakeDuals && state.countBasicLandTypes() == 2) {
-                        float thickness = h/16f;
-                        float mod = 2f*thickness/2f;
-                        g.setAlphaComposite(0.2f);
-                        drawAlphaLines(colorPairsBackup, g, x, y, w, h, thickness, mod);
+                        g.setAlphaComposite(0.1f);
+                        drawAlphaLines(g, x, y, w, h);
                     }
                     g.setAlphaComposite(oldAlpha);
                 }
@@ -554,22 +551,10 @@ public class CardImageRenderer {
             cardTextRenderer.drawText(g, text, TEXT_FONT, Color.BLACK, x, y, w, h, y, h, true, Align.left, true);
         }
     }
-    private static void drawAlphaLines(Color[] colors, Graphics g, float x, float y, float w, float h, float thickness, float mod) {
-        g.drawRectLines(thickness, colors[1], x+mod, y+mod, w-(mod*2f), h-(mod*2f));
-        mod = 4f*thickness/2f;
-        g.drawRectLines(thickness, colors[0], x+mod, y+mod, w-(mod*2f), h-(mod*2f));
-        mod = 6f*thickness/2f;
-        g.drawRectLines(thickness, colors[1], x+mod, y+mod, w-(mod*2f), h-(mod*2f));
-        mod = 8f*thickness/2f;
-        g.drawRectLines(thickness, colors[0], x+mod, y+mod, w-(mod*2f), h-(mod*2f));
-        mod = 10f*thickness/2f;
-        g.drawRectLines(thickness, colors[1], x+mod, y+mod, w-(mod*2f), h-(mod*2f));
-        mod = 12f*thickness/2f;
-        g.drawRectLines(thickness, colors[0], x+mod, y+mod, w-(mod*2f), h-(mod*2f));
-        mod = 14f*thickness/2f;
-        g.drawRectLines(thickness, colors[1], x+mod, y+mod, w-(mod*2f), h-(mod*2f));
-        mod = 16f*thickness/2f;
-        g.drawLine(thickness, colors[1], x+mod, y+mod, x+w-mod, y+mod);
+    private static void drawAlphaLines(Graphics g, float x, float y, float w, float h) {
+        if (FSkin.overlay_alpha != null) {
+            g.drawImage(FSkin.overlay_alpha, x, y, w, h);
+        }
     }
     private static void drawPtBox(Graphics g, CardView card, CardStateView state, Color[] colors, float x, float y, float w, float h, boolean noText) {
         List<String> pieces = new ArrayList<>();
