@@ -1,0 +1,8 @@
+Name:Festival Crasher
+ManaCost:1 R
+Types:Creature Devil
+PT:1/3
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast an instant or sorcery spell, CARDNAME gets +2/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 2
+DeckHints:Type$Instant|Sorcery
+Oracle:Whenever you cast an instant or sorcery spell, Festival Crasher gets +2/+0 until end of turn.
