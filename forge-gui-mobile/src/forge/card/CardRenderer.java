@@ -211,15 +211,20 @@ public class CardRenderer {
 
     public static FImageComplex getCardArt(IPaperCard pc, boolean backFace) {
         CardType type = pc.getRules().getType();
-        return getCardArt(pc.getImageKey(backFace), pc.getRules().getSplitType() == CardSplitType.Split, type.isPlane() || type.isPhenomenon(),pc.getRules().getOracleText().contains("Aftermath"), type.hasSubtype("Saga"), type.hasSubtype("Class"), type.isDungeon(), CardSplitType.Flip.equals(pc.getRules().getSplitType()), type.isPlaneswalker());
+        return getCardArt(pc.getImageKey(backFace), pc.getRules().getSplitType() == CardSplitType.Split,
+                type.isPlane() || type.isPhenomenon(),pc.getRules().getOracleText().contains("Aftermath"),
+                type.hasSubtype("Saga"), type.hasSubtype("Class"), type.isDungeon(), CardSplitType.Flip.equals(pc.getRules().getSplitType()),
+                type.isPlaneswalker(), isModernFrame(pc));
     }
 
     public static FImageComplex getCardArt(CardView card) {
         CardTypeView type = card.getCurrentState().getType();
-        return getCardArt(card.getCurrentState().getImageKey(), card.isSplitCard(), type.isPlane() || type.isPhenomenon(),card.getText().contains("Aftermath"), type.hasSubtype("Saga"), type.hasSubtype("Class"), type.isDungeon(), card.isFlipCard(), type.isPlaneswalker());
+        return getCardArt(card.getCurrentState().getImageKey(), card.isSplitCard(), type.isPlane() || type.isPhenomenon(),
+                card.getText().contains("Aftermath"), type.hasSubtype("Saga"), type.hasSubtype("Class"), type.isDungeon(),
+                card.isFlipCard(), type.isPlaneswalker(), isModernFrame(card));
     }
 
-    public static FImageComplex getCardArt(String imageKey, boolean isSplitCard, boolean isHorizontalCard, boolean isAftermathCard, boolean isSaga, boolean isClass, boolean isDungeon, boolean isFlipCard, boolean isPlanesWalker) {
+    public static FImageComplex getCardArt(String imageKey, boolean isSplitCard, boolean isHorizontalCard, boolean isAftermathCard, boolean isSaga, boolean isClass, boolean isDungeon, boolean isFlipCard, boolean isPlanesWalker, boolean isModernFrame) {
         FImageComplex cardArt = cardArtCache.get(imageKey);
         boolean isClassicModule = classicModuleCardtoCrop.contains(imageKey.substring(ImageKeys.CARD_PREFIX.length()).replace(".jpg","").replace(".png", ""));
         if (cardArt == null) {
@@ -285,9 +290,10 @@ public class CardRenderer {
                             return cardArt;
                         }
                     } else {
-                        x = w * 0.1f;
-                        y = h * 0.11f;
-                        w -= 2 * x;
+                         //adjust smaller crop
+                        x = isModernFrame ? w * 0.1f :w * 0.12f;
+                        y = isModernFrame ? h * 0.12f : h * 0.11f;
+                        w -= isModernFrame ? 2 * x : 2.1f * x;
                         h *= CARD_ART_HEIGHT_PERCENTAGE;
                         float ratioRatio = w / h / CARD_ART_RATIO;
                         if (ratioRatio > 1) { //if too wide, shrink width
@@ -534,7 +540,7 @@ public class CardRenderer {
         }
         if (image != null) {
             if (image == ImageCache.defaultImage || Forge.enableUIMask.equals("Art")) {
-                CardImageRenderer.drawCardImage(g, CardView.getCardForUi(pc), false, x, y, w, h, pos, true);
+                CardImageRenderer.drawCardImage(g, CardView.getCardForUi(pc), false, x, y, w, h, pos, true, true);
             } else {
                 if (Forge.enableUIMask.equals("Full")) {
                     if (ImageCache.isBorderlessCardArt(image))
@@ -558,7 +564,7 @@ public class CardRenderer {
             }
         } else {
             //if card has invalid or no texture due to sudden changes in ImageCache, draw CardImageRenderer instead and wait for it to refresh automatically
-            CardImageRenderer.drawCardImage(g, CardView.getCardForUi(pc), false, x, y, w, h, pos, Forge.enableUIMask.equals("Art"));
+            CardImageRenderer.drawCardImage(g, CardView.getCardForUi(pc), false, x, y, w, h, pos, Forge.enableUIMask.equals("Art"), true);
         }
     }
     public static void drawCard(Graphics g, CardView card, float x, float y, float w, float h, CardStackPosition pos, boolean rotate) {
@@ -578,7 +584,11 @@ public class CardRenderer {
         }
         if (image != null) {
             if (image == ImageCache.defaultImage || Forge.enableUIMask.equals("Art")) {
-                CardImageRenderer.drawCardImage(g, card, showAltState, x, y, w, h, pos, true, false, isChoiceList);
+                float oldAlpha = g.getfloatAlphaComposite();
+                if (card.isPhasedOut())
+                    g.setAlphaComposite(0.2f);
+                CardImageRenderer.drawCardImage(g, card, showAltState, x, y, w, h, pos, true, false, isChoiceList, !showCardIdOverlay(card));
+                g.setAlphaComposite(oldAlpha);
             } else if (showsleeves) {
                 if (!card.isForeTold())
                     g.drawImage(sleeves, x, y, w, h);
@@ -620,7 +630,11 @@ public class CardRenderer {
             drawFoilEffect(g, card, x, y, w, h, false);
         } else {
             //if card has invalid or no texture due to sudden changes in ImageCache, draw CardImageRenderer instead and wait for it to refresh automatically
-            CardImageRenderer.drawCardImage(g, card, showAltState, x, y, w, h, pos, Forge.enableUIMask.equals("Art"), false, isChoiceList);
+            float oldAlpha = g.getfloatAlphaComposite();
+            if (card.isPhasedOut())
+                g.setAlphaComposite(0.2f);
+            CardImageRenderer.drawCardImage(g, card, showAltState, x, y, w, h, pos, Forge.enableUIMask.equals("Art"), false, isChoiceList, !showCardIdOverlay(card));
+            g.setAlphaComposite(oldAlpha);
         }
     }
 
