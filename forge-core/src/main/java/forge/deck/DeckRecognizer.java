@@ -141,13 +141,6 @@ public class DeckRecognizer {
         }
     }
 
-//    // Let's think about it numbers in the back later
-//    // private static final Pattern searchNumbersInBack =
-//    // Pattern.compile("(.*)[^A-Za-wyz]*\\s+([\\d]{1,2})");
-//    private static final Pattern SEARCH_NUMBERS_IN_FRONT = Pattern.compile("([\\d]{1,2})[^A-Za-wyz]*\\s+(.*)");
-//    //private static final Pattern READ_SEPARATED_EDITION = Pattern.compile("[[\\(\\{]([a-zA-Z0-9]){1,3})[]*\\s+(.*)");
-//    private static final Pattern SEARCH_SINGLE_SLASH = Pattern.compile("(?<=[^/])\\s*/\\s*(?=[^/])");
-
     // Utility Constants
     private final Pattern SEARCH_SINGLE_SLASH = Pattern.compile("(?<=[^/])\\s*/\\s*(?=[^/])");
     private static final String LINE_COMMENT_DELIMITER = "#";
@@ -158,7 +151,7 @@ public class DeckRecognizer {
     // Core Matching Patterns (initialised in Constructor)
     public static final String REGRP_DECKNAME = "deckName";
     public static final String REX_DECK_NAME =
-            String.format("^(//\\s*)?(?<pre>(deck name|name|deck))(\\:|\\s)\\s*(?<%s>[a-zA-Z0-9',\\/\\-\\s]+)\\s*(.*)$",
+            String.format("^(//\\s*)?(?<pre>(deck|name))(\\:|\\s)\\s*(?<%s>[a-zA-Z0-9',\\/\\-\\s]+)\\s*(.*)$",
                     REGRP_DECKNAME);
     public static final Pattern DECK_NAME_PATTERN = Pattern.compile(REX_DECK_NAME, Pattern.CASE_INSENSITIVE);
 
@@ -173,36 +166,47 @@ public class DeckRecognizer {
 
     public static final String REX_CARD_NAME = String.format("(?<%s>[a-zA-Z0-9',\\.:!\\+\\\"\\/\\-\\s]+)", REGRP_CARD);
     public static final String REX_SET_CODE = String.format("(?<%s>[a-zA-Z0-9_]{2,7})", REGRP_SET);
-    public static final String REX_COLL_NUMBER = String.format("(?<%s>\\S?[0-9A-Z]+\\S?[A-Z]*)", REGRP_COLLNR);
+    public static final String REX_COLL_NUMBER = String.format("(?<%s>\\*?[0-9A-Z]+\\S?[A-Z]*)", REGRP_COLLNR);
     public static final String REX_CARD_COUNT = String.format("(?<%s>[\\d]{1,2})(?<mult>x)?", REGRP_CARDNO);
+
+    // EXTRA
+    public static final String REGRP_FOIL_GFISH = "foil";
+    private static final String REX_FOIL_MTGGOLDFISH = String.format(
+            "(?<%s>\\(F\\))?", REGRP_FOIL_GFISH);
 
     // 1. Card-Set Request (Amount?, CardName, Set)
     public static final String REX_CARD_SET_REQUEST = String.format(
-            "(%s\\s)?\\s*%s\\s*(\\s|\\||\\(|\\[|\\{)%s(\\s|\\)|\\]|\\})?",
-            REX_CARD_COUNT, REX_CARD_NAME, REX_SET_CODE);
+            "(%s\\s)?\\s*%s\\s*(\\s|\\||\\(|\\[|\\{)%s(\\s|\\)|\\]|\\})?\\s*%s",
+            REX_CARD_COUNT, REX_CARD_NAME, REX_SET_CODE, REX_FOIL_MTGGOLDFISH);
     public static final Pattern CARD_SET_PATTERN = Pattern.compile(REX_CARD_SET_REQUEST);
 
     // 2. Set-Card Request (Amount?, Set, CardName)
     public static final String REX_SET_CARD_REQUEST = String.format(
-            "(%s\\s)?\\s*(\\(|\\[|\\{)?%s(\\s+|\\)|\\]|\\}|\\|)\\s*%s\\s*",
-            REX_CARD_COUNT, REX_SET_CODE, REX_CARD_NAME);
+            "(%s\\s)?\\s*(\\(|\\[|\\{)?%s(\\s+|\\)|\\]|\\}|\\|)\\s*%s\\s*%s\\s*",
+            REX_CARD_COUNT, REX_SET_CODE, REX_CARD_NAME, REX_FOIL_MTGGOLDFISH);
     public static final Pattern SET_CARD_PATTERN = Pattern.compile(REX_SET_CARD_REQUEST);
 
     // 3. Full-Request (Amount?, CardName, Set, Collector Number|Art Index) - MTGArena Format
     public static final String REX_FULL_REQUEST_CARD_SET = String.format(
-            "(%s\\s)?\\s*%s\\s*(\\||\\(|\\[|\\{|\\s)%s(\\s|\\)|\\]|\\})?\\s+%s",
-            REX_CARD_COUNT, REX_CARD_NAME, REX_SET_CODE, REX_COLL_NUMBER);
+            "(%s\\s)?\\s*%s\\s*(\\||\\(|\\[|\\{|\\s)%s(\\s|\\)|\\]|\\})?\\s+%s\\s*%s\\s*",
+            REX_CARD_COUNT, REX_CARD_NAME, REX_SET_CODE, REX_COLL_NUMBER, REX_FOIL_MTGGOLDFISH);
     public static final Pattern CARD_SET_COLLNO_PATTERN = Pattern.compile(REX_FULL_REQUEST_CARD_SET);
 
     // 4. Full-Request (Amount?, Set, CardName, Collector Number|Art Index) - Alternative for flexibility
     public static final String REX_FULL_REQUEST_SET_CARD = String.format(
-            "^(%s\\s)?\\s*(\\(|\\[|\\{)?%s(\\s+|\\)|\\]|\\}|\\|)\\s*%s\\s+%s$",
-            REX_CARD_COUNT, REX_SET_CODE, REX_CARD_NAME, REX_COLL_NUMBER);
+            "^(%s\\s)?\\s*(\\(|\\[|\\{)?%s(\\s+|\\)|\\]|\\}|\\|)\\s*%s\\s+%s\\s*%s$",
+            REX_CARD_COUNT, REX_SET_CODE, REX_CARD_NAME, REX_COLL_NUMBER, REX_FOIL_MTGGOLDFISH);
     public static final Pattern SET_CARD_COLLNO_PATTERN = Pattern.compile(REX_FULL_REQUEST_SET_CARD);
 
-    // 5. Card-Only Request (Amount?)
+    // 5. (MTGGoldfish mostly) (Amount?, Card Name, <Collector Number>, Set)
+    public static final String REX_FULL_REQUEST_CARD_COLLNO_SET = String.format(
+            "^(%s\\s)?\\s*%s\\s+(\\<%s\\>)\\s*(\\(|\\[|\\{)?%s(\\s+|\\)|\\]|\\}|\\|)\\s*%s$",
+            REX_CARD_COUNT, REX_CARD_NAME, REX_COLL_NUMBER, REX_SET_CODE, REX_FOIL_MTGGOLDFISH);
+    public static final Pattern CARD_COLLNO_SET_PATTERN = Pattern.compile(REX_FULL_REQUEST_CARD_COLLNO_SET);
+
+    // 6. Card-Only Request (Amount?)
     public static final String REX_CARDONLY = String.format(
-            "(%s\\s)?\\s*%s", REX_CARD_COUNT, REX_CARD_NAME);
+            "(%s\\s)?\\s*%s\\s*%s", REX_CARD_COUNT, REX_CARD_NAME, REX_FOIL_MTGGOLDFISH);
     public static final Pattern CARD_ONLY_PATTERN = Pattern.compile(REX_CARDONLY);
 
 
@@ -271,6 +275,9 @@ public class DeckRecognizer {
             String ccount = getRexGroup(matcher, REGRP_CARDNO);
             String setCode = getRexGroup(matcher, REGRP_SET);
             String collNo = getRexGroup(matcher, REGRP_COLLNR);
+            String foilGr = getRexGroup(matcher, REGRP_FOIL_GFISH);
+            if (foilGr != null)
+                cr.isFoil = true;
             int cardCount = ccount != null ? Integer.parseInt(ccount) : 1;
             // if any, it will be tried to convert specific collector number to art index (useful for lands).
             String collectorNumber = collNo != null ? collNo : IPaperCard.NO_COLLECTOR_NUMBER;
@@ -298,7 +305,7 @@ public class DeckRecognizer {
                 PaperCard pc = this.getCardFromSet(cr.cardName, edition, collectorNumber, artIndex, cr.isFoil);
                 if (pc != null) {
                     // ok so the card has been found - let's see if there's any restriction on the set
-                    if (isIllegalSetInGameFormat(setCode) || isIllegalCardInDeckFormat(pc))
+                    if (isIllegalSetInGameFormat(edition.getCode()) || isIllegalCardInDeckFormat(pc))
                         // Mark as illegal card
                         return Token.IllegalCard(pc.getName(), pc.getEdition(), cardCount);
                     return Token.KnownCard(pc, cardCount);
@@ -351,7 +358,8 @@ public class DeckRecognizer {
         List<Matcher> matchers = new ArrayList<>();
         Pattern[] patternsWithCollNumber = new Pattern[] {
                 CARD_SET_COLLNO_PATTERN,
-                SET_CARD_COLLNO_PATTERN
+                SET_CARD_COLLNO_PATTERN,
+                CARD_COLLNO_SET_PATTERN
         };
         for (Pattern pattern : patternsWithCollNumber) {
             Matcher matcher = pattern.matcher(line);
@@ -375,24 +383,26 @@ public class DeckRecognizer {
     private PaperCard getCardFromSet(final String cardName, final CardEdition edition,
                                      final String collectorNumber, final int artIndex,
                                      final boolean isFoil) {
+        CardDb targetDb = this.db.contains(cardName) ? this.db : this.altDb;
         // Try with collector number first
-        PaperCard result = this.db.getCardFromSet(cardName, edition, collectorNumber, isFoil);
-        if (result == null)
-            result = this.altDb.getCardFromSet(cardName, edition, collectorNumber, isFoil);
-        if (result == null && !collectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER) &&
-                artIndex != IPaperCard.NO_ART_INDEX){
-            // So here we know cardName exists (checked before invoking this method)
-            // and also a Collector Number was specified.
-            // The only case we would reach this point is either due to a wrong edition-card match
-            // (later resulting in Unknown card - e.g. "Counterspell|FEM") or due to the fact that
-            // art Index was specified instead of collector number! Let's give it a go with that
-            // but only if artIndex is not NO_ART_INDEX (e.g. collectorNumber = "*32")
-            int maxArtForCard = this.db.contains(cardName) ? this.db.getMaxArtIndex(cardName) :
-                    this.altDb.getMaxArtIndex(cardName);
-            if (artIndex <= maxArtForCard){
-                // if collNr was "78", it's hardly an artIndex. It was just the wrong collNr for the requested card
-                result = this.db.contains(cardName) ? this.db.getCardFromSet(cardName, edition, artIndex, isFoil) :
-                        this.altDb.getCardFromSet(cardName, edition, artIndex, isFoil);
+        PaperCard result = targetDb.getCardFromSet(cardName, edition, collectorNumber, isFoil);
+        if (result == null && !collectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER)) {
+            if (artIndex != IPaperCard.NO_ART_INDEX) {
+                // So here we know cardName exists (checked before invoking this method)
+                // and also a Collector Number was specified.
+                // The only case we would reach this point is either due to a wrong edition-card match
+                // (later resulting in Unknown card - e.g. "Counterspell|FEM") or due to the fact that
+                // art Index was specified instead of collector number! Let's give it a go with that
+                // but only if artIndex is not NO_ART_INDEX (e.g. collectorNumber = "*32")
+                int maxArtForCard = targetDb.getMaxArtIndex(cardName);
+                if (artIndex <= maxArtForCard) {
+                    // if collNr was "78", it's hardly an artIndex. It was just the wrong collNr for the requested card
+                    result = targetDb.getCardFromSet(cardName, edition, artIndex, isFoil);
+                }
+            }
+            if (result == null){
+                // Last chance, try without collector number and see if any match is found
+                result = targetDb.getCardFromSet(cardName, edition, isFoil);
             }
         }
         return result;
@@ -463,6 +473,8 @@ public class DeckRecognizer {
     // NOTE: Card types recognition is ONLY used for style formatting in the Import Editor
     // This won't affect the import process of cards in any way !-)
     public static boolean isCardType(final String lineAsIs) {
+        if (lineAsIs == null)
+            return false;
         String line = lineAsIs.toLowerCase().trim();
         Matcher noncardMatcher = NONCARD_PATTERN.matcher(line);
         if (!noncardMatcher.matches())
@@ -472,6 +484,8 @@ public class DeckRecognizer {
     }
 
     public static boolean isDeckName(final String lineAsIs) {
+        if (lineAsIs == null)
+            return false;
         final String line = lineAsIs.trim();
         final Matcher deckNameMatcher = DECK_NAME_PATTERN.matcher(line);
         boolean matches = deckNameMatcher.matches();
@@ -479,6 +493,8 @@ public class DeckRecognizer {
     }
 
     public static String getDeckName(final String text) {
+        if (text == null)
+            return "";
         String line = text.trim();
         final Matcher deckNamePattern = DECK_NAME_PATTERN.matcher(line);
         if (deckNamePattern.matches())
@@ -487,6 +503,8 @@ public class DeckRecognizer {
     }
 
     public static boolean isDeckSectionName(final String text) {
+        if (text == null)
+            return false;
         String line = text.toLowerCase().trim();
         Matcher noncardMatcher = NONCARD_PATTERN.matcher(line);
         if (!noncardMatcher.matches())

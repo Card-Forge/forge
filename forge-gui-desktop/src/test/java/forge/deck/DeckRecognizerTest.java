@@ -125,7 +125,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
     @Test void testMatchDeckName(){
         Pattern deckNamePattern = DeckRecognizer.DECK_NAME_PATTERN;
 
-        String matchingDeckName = "Deck Name: Red Green Aggro";
+        String matchingDeckName = "Deck: Red Green Aggro";
         Matcher deckNameMatcher = deckNamePattern.matcher(matchingDeckName);
         assertTrue(deckNameMatcher.matches());
         assertTrue(DeckRecognizer.isDeckName(matchingDeckName));
@@ -161,7 +161,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(DeckRecognizer.getDeckName(matchingDeckName), "Red Green Aggro");
 
         // Case Insensitive
-        matchingDeckName = "deck name: Red Green Aggro";
+        matchingDeckName = "deck: Red Green Aggro";
         deckNameMatcher = deckNamePattern.matcher(matchingDeckName);
         assertTrue(deckNameMatcher.matches());
         assertTrue(DeckRecognizer.isDeckName(matchingDeckName));
@@ -812,6 +812,69 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(matcher.group(DeckRecognizer.REGRP_CARD), "Power Sink+");
     }
 
+    @Test void testMatchFoilCardRequestMTGGoldfishFormat(){
+        // card-set-collnr
+        String foilRequest = "4 Aspect of Hydra [BNG] (F)";
+        Pattern target = DeckRecognizer.CARD_SET_COLLNO_PATTERN;
+        Matcher matcher = target.matcher(foilRequest);
+        assertFalse(matcher.matches());
+
+        foilRequest = "4 Aspect of Hydra [BNG] 117 (F)";
+        target = DeckRecognizer.CARD_SET_COLLNO_PATTERN;
+        matcher = target.matcher(foilRequest);
+        assertTrue(matcher.matches());
+        assertEquals(matcher.group(DeckRecognizer.REGRP_CARDNO), "4");
+        assertEquals(matcher.group(DeckRecognizer.REGRP_CARD), "Aspect of Hydra ");  // TRIM
+        assertEquals(matcher.group(DeckRecognizer.REGRP_SET), "BNG");
+        assertEquals(matcher.group(DeckRecognizer.REGRP_COLLNR), "117");
+        assertNotNull(matcher.group(DeckRecognizer.REGRP_FOIL_GFISH));
+
+        // Set-card-collnr
+        foilRequest = "4 [BNG] Aspect of Hydra (F)";
+        target = DeckRecognizer.SET_CARD_COLLNO_PATTERN;
+        matcher = target.matcher(foilRequest);
+        assertFalse(matcher.matches());
+
+        foilRequest = "4 [BNG] Aspect of Hydra 117 (F)";
+        target = DeckRecognizer.SET_CARD_COLLNO_PATTERN;
+        matcher = target.matcher(foilRequest);
+        assertTrue(matcher.matches());
+        assertEquals(matcher.group(DeckRecognizer.REGRP_CARDNO), "4");
+        assertEquals(matcher.group(DeckRecognizer.REGRP_CARD), "Aspect of Hydra");
+        assertEquals(matcher.group(DeckRecognizer.REGRP_SET), "BNG");
+        assertEquals(matcher.group(DeckRecognizer.REGRP_COLLNR), "117");
+        assertNotNull(matcher.group(DeckRecognizer.REGRP_FOIL_GFISH));
+
+        // set-card
+        foilRequest = "4 [BNG] Aspect of Hydra (F)";
+        target = DeckRecognizer.SET_CARD_PATTERN;
+        matcher = target.matcher(foilRequest);
+        assertTrue(matcher.matches());
+        assertEquals(matcher.group(DeckRecognizer.REGRP_CARDNO), "4");
+        assertEquals(matcher.group(DeckRecognizer.REGRP_CARD), "Aspect of Hydra ");  // TRIM
+        assertEquals(matcher.group(DeckRecognizer.REGRP_SET), "BNG");
+        assertEquals(matcher.group(DeckRecognizer.REGRP_FOIL_GFISH), "(F)");
+
+        // card-set
+        foilRequest = "4 Aspect of Hydra [BNG] (F)";
+        target = DeckRecognizer.CARD_SET_PATTERN;
+        matcher = target.matcher(foilRequest);
+        assertTrue(matcher.matches());
+        assertEquals(matcher.group(DeckRecognizer.REGRP_CARDNO), "4");
+        assertEquals(matcher.group(DeckRecognizer.REGRP_CARD), "Aspect of Hydra ");  // TRIM
+        assertEquals(matcher.group(DeckRecognizer.REGRP_SET), "BNG");
+        assertEquals(matcher.group(DeckRecognizer.REGRP_FOIL_GFISH), "(F)");
+
+        // card-only
+        foilRequest = "4 Aspect of Hydra (F)";
+        target = DeckRecognizer.CARD_ONLY_PATTERN;
+        matcher = target.matcher(foilRequest);
+        assertTrue(matcher.matches());
+        assertEquals(matcher.group(DeckRecognizer.REGRP_CARDNO), "4");
+        assertEquals(matcher.group(DeckRecognizer.REGRP_CARD), "Aspect of Hydra ");  // TRIM
+        assertEquals(matcher.group(DeckRecognizer.REGRP_FOIL_GFISH), "(F)");
+    }
+
     @Test void testRecogniseCardToken(){
         StaticData magicDb = FModel.getMagicDb();
         CardDb db = magicDb.getCommonCards();
@@ -1015,17 +1078,30 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(tokenCard.getCollectorNumber(), "3");
     }
 
-    @Test void testRequestingCardWithWrongCollectorNumberReturnsUnknownCard(){
+    @Test void testCardRequestWithWrongCollectorNumberStillReturnsTheCardFromSetIfAny(){
         StaticData magicDb = FModel.getMagicDb();
         CardDb db = magicDb.getCommonCards();
         CardDb altDb = magicDb.getVariantCards();
         DeckRecognizer recognizer = new DeckRecognizer(db, altDb);
 
-        String lineRequest = "2x Power Sink MIR 3";
-        Token cardToken = recognizer.recogniseCardToken(lineRequest);
+        String requestLine = "3 Jayemdae Tome (LEB) 231";  // actually found in TappedOut Deck Export
+        // NOTE: Expected Coll Nr should be 255
+        Token cardToken = recognizer.recogniseCardToken(requestLine);
         assertNotNull(cardToken);
-        assertEquals(cardToken.getType(), TokenType.UNKNOWN_CARD_REQUEST);
+        assertNotNull(cardToken.getCard());
+        assertEquals(cardToken.getNumber(), 3);
+        PaperCard card = cardToken.getCard();
+        assertEquals(card.getName(), "Jayemdae Tome");
+        assertEquals(card.getEdition(), "LEB");
+        assertEquals(card.getCollectorNumber(), "255");
+
+        // No Match - Unknown card
+        requestLine = "3 Jayemdae Tome (TMP)";  // actually found in TappedOut Deck Export
+        // NOTE: Expected Coll Nr should be 255
+        cardToken = recognizer.recogniseCardToken(requestLine);
+        assertNotNull(cardToken);
         assertNull(cardToken.getCard());
+        assertEquals(cardToken.getType(), TokenType.UNKNOWN_CARD_REQUEST);
     }
 
     @Test void testRequestingCardFromTheWrongSetReturnsUnknownCard(){
@@ -1156,5 +1232,84 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertNotNull(cardToken);
         assertEquals(cardToken.getType(), TokenType.INVALID_CARD_REQUEST);
         assertNull(cardToken.getCard());
+    }
+
+    @Test void testFoilRequestInMTGGoldfishExportFormat(){
+        String mtgGoldfishRequest = "18 Forest <254> [THB]";
+        Pattern target = DeckRecognizer.CARD_COLLNO_SET_PATTERN;
+        Matcher matcher = target.matcher(mtgGoldfishRequest);
+        assertTrue(matcher.matches());
+        assertEquals(matcher.group(DeckRecognizer.REGRP_CARDNO), "18");
+        assertEquals(matcher.group(DeckRecognizer.REGRP_CARD), "Forest");  // TRIM
+        assertEquals(matcher.group(DeckRecognizer.REGRP_SET), "THB");
+        assertEquals(matcher.group(DeckRecognizer.REGRP_COLLNR), "254");
+        assertNull(matcher.group(DeckRecognizer.REGRP_FOIL_GFISH));
+
+        mtgGoldfishRequest = "18 Forest <254> [THB] (F)";
+        matcher = target.matcher(mtgGoldfishRequest);
+        assertTrue(matcher.matches());
+        assertEquals(matcher.group(DeckRecognizer.REGRP_CARDNO), "18");
+        assertEquals(matcher.group(DeckRecognizer.REGRP_CARD), "Forest");  // TRIM
+        assertEquals(matcher.group(DeckRecognizer.REGRP_SET), "THB");
+        assertEquals(matcher.group(DeckRecognizer.REGRP_COLLNR), "254");
+        assertNotNull(matcher.group(DeckRecognizer.REGRP_FOIL_GFISH));
+
+        mtgGoldfishRequest = "18 Forest [THB]";
+        matcher = target.matcher(mtgGoldfishRequest);
+        assertFalse(matcher.matches());
+
+        mtgGoldfishRequest = "18 [THB] Forest";
+        matcher = target.matcher(mtgGoldfishRequest);
+        assertFalse(matcher.matches());
+
+        mtgGoldfishRequest = "18 Forest [THB] (F)";
+        matcher = target.matcher(mtgGoldfishRequest);
+        assertFalse(matcher.matches());
+
+        mtgGoldfishRequest = "18 [THB] Forest (F)";
+        matcher = target.matcher(mtgGoldfishRequest);
+        assertFalse(matcher.matches());
+
+        mtgGoldfishRequest = "18 Forest 254 [THB] (F)";
+        matcher = target.matcher(mtgGoldfishRequest);
+        assertFalse(matcher.matches());
+
+        mtgGoldfishRequest = "18 Forest 254 [THB]";
+        matcher = target.matcher(mtgGoldfishRequest);
+        assertFalse(matcher.matches());
+
+        mtgGoldfishRequest = "18 [THB] Forest 254";
+        matcher = target.matcher(mtgGoldfishRequest);
+        assertFalse(matcher.matches());
+    }
+
+    @Test void testCardRecognisedMTGGoldfishFormat(){
+        StaticData magicDb = FModel.getMagicDb();
+        CardDb db = magicDb.getCommonCards();
+        CardDb altDb = magicDb.getVariantCards();
+        DeckRecognizer recognizer = new DeckRecognizer(db, altDb);
+        assertEquals(db.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
+
+        String lineRequest = "4 Aspect of Hydra [BNG] (F)";
+        Token cardToken = recognizer.recogniseCardToken(lineRequest);
+        assertNotNull(cardToken);
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD_REQUEST);
+        assertNotNull(cardToken.getCard());
+        PaperCard aspectOfHydraCard = cardToken.getCard();
+        assertEquals(cardToken.getNumber(), 4);
+        assertEquals(aspectOfHydraCard.getName(), "Aspect of Hydra");
+        assertEquals(aspectOfHydraCard.getEdition(), "BNG");
+        assertTrue(aspectOfHydraCard.isFoil());
+
+        lineRequest = "18 Forest <254> [THB] (F)";
+        cardToken = recognizer.recogniseCardToken(lineRequest);
+        assertNotNull(cardToken);
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD_REQUEST);
+        assertNotNull(cardToken.getCard());
+        PaperCard forestCard = cardToken.getCard();
+        assertEquals(cardToken.getNumber(), 18);
+        assertEquals(forestCard.getName(), "Forest");
+        assertEquals(forestCard.getEdition(), "THB");
+        assertTrue(forestCard.isFoil());
     }
 }
