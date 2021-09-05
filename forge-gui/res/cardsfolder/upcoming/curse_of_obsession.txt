@@ -1,0 +1,10 @@
+Name:Curse of Obsession
+ManaCost:4 R
+Types:Enchantment Aura Curse
+K:Enchant player
+A:SP$ Attach | ValidTgts$ Player | AILogic$ Curse
+T:Mode$ Phase | Phase$ Draw | ValidPlayer$ Player.EnchantedBy | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of enchanted player's draw step, that player draws two additional cards.
+SVar:TrigDraw:DB$ Draw | Defined$ TriggeredPlayer | NumCards$ 2
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player.EnchantedBy | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ At the beginning of enchanted player's end step, that player discards their hand.
+SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredPlayer | Mode$ Hand
+Oracle:Enchant player\nAt the beginning of enchanted player's draw step, that player draws two additional cards.\nAt the beginning of enchanted player's end step, that player discards their hand.
