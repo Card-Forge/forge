@@ -2170,15 +2170,19 @@ public class CardFactoryUtil {
             sb.append("Event$ Moved | ValidCard$ Card.Self | Origin$ Stack | ExcludeDestination$ Exile ");
             sb.append("| ValidStackSa$ Spell.Flashback | Description$ Flashback");
 
-            if (keyword.contains(":")) {
+            if (keyword.contains(":")) { // K:Flashback:Cost:ExtraParam(Key$Value):ExtraDescription
                 final String[] k = keyword.split(":");
                 final Cost cost = new Cost(k[1], false);
-                sb.append( cost.isOnlyManaCost() ? " " : "—");
+                sb.append(cost.isOnlyManaCost() ? " " : "—");
 
                 sb.append(cost.toSimpleString());
 
                 if (!cost.isOnlyManaCost()) {
                     sb.append(".");
+                }
+                String extraDesc =  k.length > 3 ? k[3] : "";
+                if (!extraDesc.isEmpty()) {
+                    sb.append(". ").append(extraDesc);
                 }
             }
 
