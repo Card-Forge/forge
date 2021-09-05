@@ -79,7 +79,7 @@ public enum Keyword {
     FIRST_STRIKE("First Strike", SimpleKeyword.class, true, "This creature deals combat damage before creatures without first strike."),
     FLANKING("Flanking", SimpleKeyword.class, false, "Whenever this creature becomes blocked by a creature without flanking, the blocking creature gets -1/-1 until end of turn."),
     FLASH("Flash", SimpleKeyword.class, true, "You may cast this spell any time you could cast an instant."),
-    FLASHBACK("Flashback", KeywordWithCost.class, false, "You may cast this card from your graveyard by paying %s rather than paying its mana cost. If you do, exile it as it resolves."),
+    FLASHBACK("Flashback", KeywordWithCost.class, false, "You may cast this card from your graveyard for its flashback cost. Then exile it."),
     FLYING("Flying", SimpleKeyword.class, true, "This creature can't be blocked except by creatures with flying or reach."),
     FORETELL("Foretell", KeywordWithCost.class, false, "During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost."),
     FORTIFY("Fortify", KeywordWithCost.class, false, "%s: Attach to target land you control. Fortify only as a sorcery."),
