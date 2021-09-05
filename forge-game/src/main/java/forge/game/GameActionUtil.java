@@ -233,6 +233,13 @@ public final class GameActionUtil {
                         if (keyword.contains(":")) {
                             final String[] k = keyword.split(":");
                             flashback.setPayCosts(new Cost(k[1], false));
+                            String extra =  k.length > 2 ? k[2] : "";
+                            if (!extra.isEmpty()) {
+                                String[] parts = extra.split("\\$");
+                                String key = parts[0];
+                                String value = parts[1];
+                                flashback.putParam(key, value);
+                            }
                         }
                         alternatives.add(flashback);
                     } else if (keyword.startsWith("Foretell")) {
