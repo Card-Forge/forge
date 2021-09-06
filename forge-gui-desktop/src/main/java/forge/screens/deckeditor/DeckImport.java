@@ -21,9 +21,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.event.DocumentEvent;
@@ -31,7 +30,9 @@ import javax.swing.event.DocumentListener;
 
 import forge.StaticData;
 import forge.card.CardEdition;
+import forge.card.CardRarity;
 import forge.card.CardType;
+import forge.card.ColorSet;
 import forge.deck.*;
 import forge.deck.DeckRecognizer.TokenType;
 import forge.game.GameFormat;
@@ -48,6 +49,7 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FTextArea;
 import forge.util.Localizer;
 import forge.view.FDialog;
+import org.apache.commons.math3.stat.inference.BinomialTest;
 
 /**
   *
@@ -363,16 +365,18 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
                 + "text-decoration: none; font-family: Arial; font-size: 10px; "
                 + "color: white; background-color: #ffffff; color: #000000;} "
                 + " h3 {font-size: 13px; margin: 2px 0; padding: 0px 5px; } "
-                + " h5 {font-size: 11px; padding: 2px 20px; margin: 3px 0;} "
-                + " span {display: block !important; } "
-                + " div {margin: 0 !important; text-align: justify; padding 2px 10px; } "
-                + " p {margin: 2px; text-align: justify; padding: 2px 5px;} "
+                + " h4 {font-size: 10px; padding: 1px 20px; margin: 3px 0 0 0;} "
+                + " div {margin: 0; ext-align: justify; padding 1px 10px;}"
+                + " p {margin: 2px; text-align: justify; padding: 1px 5px;} "
                 + ".unknowncard {color: #666666;} " + ".knowncard {color: #009900;} "
                 + ".illegalcard {color: #990000;} " + ".invalidcard {color: #000099;} "
                 + ".section {font-weight: 700; background-color: #DDDDDD; color: #000000 } "
+                + ".mana {font-weight: 700; background-color: #c7bcba; color: #ffffff } "
+                + ".rarity {font-weight: 700; background-color: #df8030; color: #ffffff } "
                 + ".edition {font-weight: 700; background-color: #5a8276; color: #ffffff } "
-                + ".editioncode {font-weight: 700; color: #5a8276;} "
+                + ".editioncode {font-weight: 700; color: #5a8276; font-style: normal !important;} "
                 + ".cardtype {font-weight: 700; background-color: #FFCC66; color: #000000} "
+                + ".decksection {padding-left: 20px; font-weight: 700;}"
                 + " ul li {padding: 5px 1px 1px 1px !important; margin: 0 1px !important} "
                 + "</style>";
 
@@ -386,22 +390,28 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
 
         if (hasOnlyComment(tokens)) {
             String statsSummaryList = String.format(
-                    "<ul><li>%s</li><li>%s</li><li>%s</li><li>%s</li></ul>",
+                    "<ul><li>%s</li><li>%s</li><li>%s</li><li>%s</li><li>%s</li><li>%s</li></ul>",
                     Localizer.getInstance().getMessage("lblStatsSummaryCount"),
                     Localizer.getInstance().getMessage("lblStatsSummarySection"),
                     Localizer.getInstance().getMessage("lblStatsSummaryCardType"),
-                    Localizer.getInstance().getMessage("lblStatsSummaryCardSet"));
+                    Localizer.getInstance().getMessage("lblStatsSummaryCardSet"),
+                    Localizer.getInstance().getMessage("lblStatsSummaryRarity"),
+                    Localizer.getInstance().getMessage("lblStatsSummaryCMC")
+            );
             this.decklistStats.setText(String.format(summaryMsgTemplate, head,
                     Localizer.getInstance().getMessage("lblSummaryHeadMsg", deckListName),
                     String.format("<p>%s</p>",
                             Localizer.getInstance().getMessage("lblImportedDeckSummary", statsSummaryList))));
         }
         else {
-            Map<String, Integer> deckSectionsStats = new HashMap<>();
+            Map<String, Integer> deckSectionsStats = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
             deckSectionsStats.put(DeckSection.Main.name(), 0);
             String currentKeySection = DeckSection.Main.name();
-            Map<String, Integer> cardTypeStats = new HashMap<>();
-            Map<String, Integer> editionsStats = new HashMap<>();
+
+            DeckStats cardTypeStats = new CardTypeDeckStats(Localizer.getInstance().getMessage("lblSummaryCardTypeStats"), "cardtype");
+            DeckStats editionsStats = new EditionDeckStats(Localizer.getInstance().getMessage("lblSummaryEditionStats"), "edition");
+            DeckStats manaStats = new DeckStats(Localizer.getInstance().getMessage("lblSummaryManaStats"), "mana");
+            DeckStats rarityStats = new RarityDeckStats(Localizer.getInstance().getMessage("lblSummaryRarityStats"), "rarity");
 
             for (final DeckRecognizer.Token t : tokens) {
                 if (t.getType() == TokenType.UNKNOWN_CARD_REQUEST)
@@ -410,8 +420,10 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
                     illegalCardsCount += t.getNumber();
                 else if (t.getType() == TokenType.INVALID_CARD_REQUEST)
                     invalidCardsCount += t.getNumber();
-                else if (t.getType() == TokenType.DECK_SECTION_NAME)
-                    currentKeySection = t.getText();
+                else if (t.getType() == TokenType.DECK_SECTION_NAME) {
+                    if (!t.getText().equalsIgnoreCase(currentKeySection))
+                        currentKeySection = t.getText();
+                }
                 else if (t.getType() == TokenType.DECK_NAME)
                     deckListName = String.format("\"%s\"", t.getText());
                 else if (t.getType() == TokenType.LEGAL_CARD_REQUEST) {
@@ -425,73 +437,36 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
 
                     // update card edition stats
                     String setCode = t.getCard().getEdition();
-                    int setCount = editionsStats.getOrDefault(setCode, 0);
-                    setCount += tokenNumber;
-                    editionsStats.put(setCode, setCount);
-
+                    editionsStats.add(currentKeySection, setCode, tokenNumber);
                     // update card type stats
                     for (CardType.CoreType coreType : t.getCard().getRules().getType().getCoreTypes()) {
                         String coreTypeName = coreType.name();
-                        int cTypeCount = cardTypeStats.getOrDefault(coreTypeName, 0);
-                        cTypeCount += tokenNumber;
-                        cardTypeStats.put(coreTypeName, cTypeCount);
+                        cardTypeStats.add(currentKeySection, coreTypeName, tokenNumber);
                     }
-
+                    // update rarity stats
+                    if (!t.getCard().isVeryBasicLand())
+                        rarityStats.add(currentKeySection, t.getCard().getRarity().name(), tokenNumber);
+                    // update colour stats
+                    if (!t.getCard().getRules().getType().isLand()) {
+                        String manaCost = String.format("CMC %d", t.getCard().getRules().getManaCost().getCMC());
+                        manaStats.add(currentKeySection, manaCost, tokenNumber);
+                    }
                 }
             }
 
-            String deckListSummaryHtml = createSummaryStats(unknownCardsCount, illegalCardsCount,
-                    legalCardsCount, invalidCardsCount, deckSectionsStats, editionsStats,
-                    cardTypeStats);
+            String cardStatsReport = createCardsStatsReport(unknownCardsCount, illegalCardsCount,
+                    invalidCardsCount,
+                    legalCardsCount, deckSectionsStats);
+
+            String deckListSummaryHtml = String.format("<h4 class=\"section\">%s</h4>%s %s %s %s %s",
+                    Localizer.getInstance().getMessage("lblSummaryDeckStats"), cardStatsReport,
+                    editionsStats.toHTML(), cardTypeStats.toHTML(), rarityStats.toHTML(), manaStats.toHTML());
+
             this.decklistStats.setText(String.format(summaryMsgTemplate, head,
                     Localizer.getInstance().getMessage("lblSummaryHeadMsg", deckListName),
                     deckListSummaryHtml));
         }
         cmdAccept.setEnabled(legalCardsCount > 0);
-    }
-
-    private String createSummaryStats(int unknownCardsCount, int illegalCardsCount,
-                                      int legalCardsCount, int invalidCardsCount,
-                                      Map<String, Integer> deckSectionsStats,
-                                      Map<String, Integer> editionsStats,
-                                      Map<String, Integer> cardTypeStats) {
-        String cardStatsReport = createCardsStatsReport(unknownCardsCount, illegalCardsCount,
-                                                        invalidCardsCount,
-                                                        legalCardsCount, deckSectionsStats);
-        String editionsReport = createEditionsStatsReport(editionsStats);
-        String cardTypesReport = createCardTypeStatsReport(cardTypeStats);
-
-        return String.format("<h5 class=\"section\">%s</h5>%s" +
-                "<h5 class=\"cardtype\">%s</h5>%s"+
-                "<h5 class=\"edition\">%s</h5>%s",
-                Localizer.getInstance().getMessage("lblSummaryDeckStats"), cardStatsReport,
-                Localizer.getInstance().getMessage("lblSummaryCardTypeStats"), cardTypesReport,
-                Localizer.getInstance().getMessage("lblSummaryEditionStats"), editionsReport);
-    }
-
-    private String createEditionsStatsReport(Map<String, Integer> editionsStats) {
-        StringBuilder editionsReport = new StringBuilder();
-        for (String setCode : editionsStats.keySet()){
-            CardEdition edition = StaticData.instance().getCardEdition(setCode);
-            if (edition == null)
-                edition = CardEdition.UNKNOWN;
-
-            String tag = String.format("<div><span class=\"editioncode\">[%s]</span> %s : %d", setCode, edition.getName(),
-                    editionsStats.get(setCode));
-            editionsReport.append(tag);
-        }
-        return editionsReport.toString();
-    }
-
-    private String createCardTypeStatsReport(Map<String, Integer> cardTypesStats) {
-        StringBuilder cardTypesReport = new StringBuilder("");
-        for (String typeLabel : cardTypesStats.keySet()){
-            String typeLocalLab = Localizer.getInstance().getMessage(String.format("lbl%s", typeLabel));
-            String tag = String.format("<div>%s : %d</div>", typeLocalLab,
-                    cardTypesStats.get(typeLabel));
-            cardTypesReport.append(tag);
-        }
-        return cardTypesReport.toString();
     }
 
     private String createCardsStatsReport(int unknownCardsCount, int illegalCardsCount, int invalidCardsCount,
@@ -523,8 +498,9 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         for (String sectionName : deckSectionsStats.keySet()){
             String sectionNameLabel = Localizer.getInstance().getMessage(String.format("lbl%s", sectionName));
             String tag = String.format("<div>%s : %d</div>",
-                    Localizer.getInstance().getMessage("lblDeckSectionStats", sectionNameLabel),
-                    deckSectionsStats.get(sectionName));
+                    Localizer.getInstance().getMessage("lblDeckSectionStats",
+                            String.format("<b>%s</b>", sectionNameLabel)),
+                            deckSectionsStats.get(sectionName));
             deckSectionsReport.append(tag);
         }
         return deckSectionsReport.toString();
@@ -571,4 +547,125 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
 //             return String.format("<div class=\"comment\">%s</div>", token.getText());
         }
     }
+}
+
+class DeckStats {
+
+    protected Map<String, Map<String, Integer>> deckSectionMap;
+    protected String label;
+    protected String cssClass;
+
+    public DeckStats(final String name, final String cssClass0){
+        this.deckSectionMap = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+        this.label = name;
+        this.cssClass = cssClass0;
+    }
+
+    public void add(String sectionName, String key, int amount){
+        Map<String, Integer> sectionMap = getOrInitStatMap(sectionName);
+        int currentCount = sectionMap.getOrDefault(key, 0);
+        currentCount += amount;
+        sectionMap.put(key, currentCount);
+        deckSectionMap.put(sectionName, sectionMap);
+    }
+
+    protected Map<String, Integer> getOrInitStatMap(String sectionName){
+        return this.deckSectionMap.getOrDefault(sectionName, new TreeMap<>(String.CASE_INSENSITIVE_ORDER));
+    }
+
+    public String toHTML(){
+        StringBuilder report = new StringBuilder("");
+        report.append(String.format("<h4 class=\"%s\">%s</h4>", this.cssClass, this.label));
+        for (String deckSection: this.deckSectionMap.keySet()) {
+            Map<String, Integer> sectionStat = this.deckSectionMap.get(deckSection);
+            report.append(String.format("<div class=\"decksection\">%s</div>", deckSection));
+            int itemCounter = 0;
+            for (String propertyLabel : sectionStat.keySet()) {
+                int count = sectionStat.getOrDefault(propertyLabel, 0);
+                if (count == 0)
+                    continue;
+                String tag = this.propertyTag(propertyLabel, count);
+                report.append(tag);
+                itemCounter += 1;
+                if (itemCounter == 3) {
+                    report.append("<br />");
+                    itemCounter = 0;  // reset
+                }
+            }
+        }
+        return report.toString();
+    }
+
+    protected String propertyTag(String propertyLabel, int count){
+        return String.format("<span>%s : %d<;&nbsp;&nbsp;</span>", propertyLabel, count);
+    }
+}
+
+class EditionDeckStats extends DeckStats {
+
+    public EditionDeckStats(final String name, final String cssClass0) {
+        super(name, cssClass0);
+    }
+
+    @Override
+    public String toHTML(){
+        StringBuilder report = new StringBuilder("");
+        report.append(String.format("<h4 class=\"%s\">%s</h4>", this.cssClass, this.label));
+        for (String deckSection: this.deckSectionMap.keySet()) {
+            Map<String, Integer> sectionStat = this.deckSectionMap.get(deckSection);
+            report.append(String.format("<div class=\"decksection\">%s</div>", deckSection));
+            for (String propertyLabel : sectionStat.keySet()) {
+                int count = sectionStat.getOrDefault(propertyLabel, 0);
+                if (count == 0)
+                    continue;
+                String tag = this.propertyTag(propertyLabel, count);
+                report.append(tag);
+            }
+        }
+        return report.toString();
+    }
+
+    @Override
+    protected String propertyTag(String setCode, int count){
+        CardEdition edition = StaticData.instance().getCardEdition(setCode);
+        if (edition == null)
+            edition = CardEdition.UNKNOWN;
+        return String.format("<div><em class=\"editioncode\">[%s]</em> %s : %d</div>",
+                setCode, edition.getName(), count);
+    }
+}
+
+class CardTypeDeckStats extends DeckStats {
+    public CardTypeDeckStats(final String name, final String cssClass0) {
+        super(name, cssClass0);
+    }
+
+    @Override
+    protected String propertyTag(String typeLabel, int count){
+        String typeLocalLab = Localizer.getInstance().getMessage(String.format("lbl%s", typeLabel));
+        return String.format("<span>%s : %d;&nbsp;&nbsp;</span>", typeLocalLab, count);
+    }
+}
+
+class RarityDeckStats extends DeckStats {
+
+    public RarityDeckStats(final String name, final String cssClass0) {
+        super(name, cssClass0);
+    }
+
+    @Override
+    protected Map<String, Integer> getOrInitStatMap(String sectionName){
+        Map<String, Integer> statMap = this.deckSectionMap.getOrDefault(sectionName, null);
+        if (statMap == null){
+            Map<String, Integer> defaultRarityMap = new LinkedHashMap<>();  // I want card rarity to be shown in this exact order!
+            defaultRarityMap.put(CardRarity.Common.name(), 0);
+            defaultRarityMap.put(CardRarity.Uncommon.name(), 0);
+            defaultRarityMap.put(CardRarity.Rare.name(), 0);
+            defaultRarityMap.put(CardRarity.MythicRare.name(), 0);
+            defaultRarityMap.put(CardRarity.Special.name(), 0);
+            return defaultRarityMap;
+        }
+        return statMap;
+    }
+
 }
