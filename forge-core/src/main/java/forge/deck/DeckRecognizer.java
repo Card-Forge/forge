@@ -153,7 +153,7 @@ public class DeckRecognizer {
     // Core Matching Patterns (initialised in Constructor)
     public static final String REGRP_DECKNAME = "deckName";
     public static final String REX_DECK_NAME =
-            String.format("^(//\\s*)?(?<pre>(deck|name))(\\:|\\s)\\s*(?<%s>[a-zA-Z0-9',\\/\\-\\s]+)\\s*(.*)$",
+            String.format("^(//\\s*)?(?<pre>(deck|name))(\\:|=|\\s)\\s*(?<%s>[a-zA-Z0-9',\\/\\-\\s\\(\\)]+)\\s*(.*)$",
                     REGRP_DECKNAME);
     public static final Pattern DECK_NAME_PATTERN = Pattern.compile(REX_DECK_NAME, Pattern.CASE_INSENSITIVE);
 

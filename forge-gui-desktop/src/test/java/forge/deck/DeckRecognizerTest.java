@@ -168,6 +168,14 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(deckNameMatcher.group(DeckRecognizer.REGRP_DECKNAME), "Red Green Aggro");
         assertEquals(DeckRecognizer.getDeckName(matchingDeckName), "Red Green Aggro");
 
+        // Forge deck format
+        matchingDeckName = "Name=Sliver Overlord (Commander)";
+        deckNameMatcher = deckNamePattern.matcher(matchingDeckName);
+        assertTrue(deckNameMatcher.matches());
+        assertTrue(DeckRecognizer.isDeckName(matchingDeckName));
+        assertEquals(deckNameMatcher.group(DeckRecognizer.REGRP_DECKNAME), "Sliver Overlord (Commander)");
+        assertEquals(DeckRecognizer.getDeckName(matchingDeckName), "Sliver Overlord (Commander)");
+
         // Failing Cases
         matchingDeckName = ":Red Green Aggro";
         deckNameMatcher = deckNamePattern.matcher(matchingDeckName);
