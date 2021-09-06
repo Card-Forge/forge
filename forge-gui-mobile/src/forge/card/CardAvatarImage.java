@@ -32,7 +32,7 @@ public class CardAvatarImage implements FImage {
     @Override
     public void draw(Graphics g, float x, float y, float w, float h) {
         //force to get the avatar since the the cardartcache & loadingcache is always cleared on screen change or the battle bar will display black
-        image = CardRenderer.getCardArt(imageKey, false, false, false);
+        image = CardRenderer.getCardArt(imageKey, false, false, false, false, false, false, false, false, true);
         if (image == null) {
             return; //can't draw anything if can't be loaded yet
         }

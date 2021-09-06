@@ -115,6 +115,28 @@ public enum FSkinImage implements FImage {
     WATERMARK_W    (FSkinProp.IMG_WATERMARK_W, SourceFile.WATERMARKS),
     WATERMARK_C    (FSkinProp.IMG_WATERMARK_C, SourceFile.WATERMARKS),
 
+    //CardBG
+    CARDBG_A       (FSkinProp.IMG_CARDBG_A, SourceFile.CARDBG),
+    CARDBG_B       (FSkinProp.IMG_CARDBG_B, SourceFile.CARDBG),
+    CARDBG_BG      (FSkinProp.IMG_CARDBG_BG, SourceFile.CARDBG),
+    CARDBG_BR      (FSkinProp.IMG_CARDBG_BR, SourceFile.CARDBG),
+    CARDBG_C       (FSkinProp.IMG_CARDBG_C, SourceFile.CARDBG),
+    CARDBG_G       (FSkinProp.IMG_CARDBG_G, SourceFile.CARDBG),
+    CARDBG_L       (FSkinProp.IMG_CARDBG_L, SourceFile.CARDBG),
+    CARDBG_M       (FSkinProp.IMG_CARDBG_M, SourceFile.CARDBG),
+    CARDBG_R       (FSkinProp.IMG_CARDBG_R, SourceFile.CARDBG),
+    CARDBG_RG      (FSkinProp.IMG_CARDBG_RG, SourceFile.CARDBG),
+    CARDBG_U       (FSkinProp.IMG_CARDBG_U, SourceFile.CARDBG),
+    CARDBG_UB      (FSkinProp.IMG_CARDBG_UB, SourceFile.CARDBG),
+    CARDBG_UG      (FSkinProp.IMG_CARDBG_UG, SourceFile.CARDBG),
+    CARDBG_UR      (FSkinProp.IMG_CARDBG_UR, SourceFile.CARDBG),
+    CARDBG_V       (FSkinProp.IMG_CARDBG_V, SourceFile.CARDBG),
+    CARDBG_W       (FSkinProp.IMG_CARDBG_W, SourceFile.CARDBG),
+    CARDBG_WB      (FSkinProp.IMG_CARDBG_WB, SourceFile.CARDBG),
+    CARDBG_WG      (FSkinProp.IMG_CARDBG_WG, SourceFile.CARDBG),
+    CARDBG_WR      (FSkinProp.IMG_CARDBG_WR, SourceFile.CARDBG),
+    CARDBG_WU      (FSkinProp.IMG_CARDBG_WU, SourceFile.CARDBG),
+
     //Gameplay
     TAP             (FSkinProp.IMG_TAP, SourceFile.MANAICONS),
     UNTAP           (FSkinProp.IMG_UNTAP, SourceFile.MANAICONS),
@@ -439,6 +461,7 @@ public enum FSkinImage implements FImage {
         MANAICONS(ForgeConstants.SPRITE_MANAICONS_FILE),
         SETLOGOS(ForgeConstants.SPRITE_SETLOGO_FILE),
         WATERMARKS(ForgeConstants.SPRITE_WATERMARK_FILE),
+        CARDBG(ForgeConstants.SPRITE_CARDBG_FILE),
         PLANAR_CONQUEST(ForgeConstants.SPRITE_PLANAR_CONQUEST_FILE);
 
         private final String filename;

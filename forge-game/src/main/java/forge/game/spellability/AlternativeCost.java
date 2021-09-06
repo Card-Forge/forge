@@ -5,6 +5,7 @@ public enum AlternativeCost {
     Bestow,
     Cycling, // ActivatedAbility
     Dash,
+    Disturb,
     Emerge,
     Escape,
     Evoke,

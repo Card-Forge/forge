@@ -161,6 +161,10 @@ public class HomeScreen extends FScreen {
         return QuestCommander;
     }
 
+    public int getActiveButtonIndex() {
+        return activeButtonIndex;
+    }
+
     public String getQuestWorld() {
         return QuestWorld;
     }

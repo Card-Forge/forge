@@ -1943,7 +1943,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     } else {
                         sbLong.append(parts[0]).append(" ").append(ManaCostParser.parse(parts[1])).append("\r\n");
                     }
-                } else if (keyword.startsWith("Morph") || keyword.startsWith("Megamorph") || keyword.startsWith("Escape") || keyword.startsWith("Foretell:")) {
+                } else if (keyword.startsWith("Morph") || keyword.startsWith("Megamorph")
+                        || keyword.startsWith("Escape") || keyword.startsWith("Foretell:")
+                        || keyword.startsWith("Disturb")) {
                     String[] k = keyword.split(":");
                     sbLong.append(k[0]);
                     if (k.length > 1) {
@@ -2033,7 +2035,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 } else if (keyword.equals("Provoke") || keyword.equals("Ingest") || keyword.equals("Unleash")
                         || keyword.equals("Soulbond") || keyword.equals("Partner") || keyword.equals("Retrace")
                         || keyword.equals("Living Weapon") || keyword.equals("Myriad") || keyword.equals("Exploit")
-                        || keyword.equals("Changeling") || keyword.equals("Delve")
+                        || keyword.equals("Changeling") || keyword.equals("Delve") || keyword.equals("Decayed")
                         || keyword.equals("Split second") || keyword.equals("Sunburst")
                         || keyword.equals("Suspend") // for the ones without amount
                         || keyword.equals("Foretell") // for the ones without cost
@@ -2544,7 +2546,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     sbBefore.append("\r\n");
                 } else if (keyword.startsWith("Entwine") || keyword.startsWith("Madness")
                         || keyword.startsWith("Miracle") || keyword.startsWith("Recover")
-                        || keyword.startsWith("Escape") || keyword.startsWith("Foretell:")) {
+                        || keyword.startsWith("Escape") || keyword.startsWith("Foretell:")
+                        || keyword.startsWith("Disturb")) {
                     final String[] k = keyword.split(":");
                     final Cost cost = new Cost(k[1], false);
 

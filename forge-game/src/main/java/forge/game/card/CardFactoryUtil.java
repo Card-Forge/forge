@@ -968,6 +968,26 @@ public class CardFactoryUtil {
             trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
 
             inst.addTrigger(trigger);
+        } else if (keyword.equals("Decayed")) {
+            final String attackTrig = "Mode$ Attacks | ValidCard$ Card.Self | Secondary$ True | TriggerDescription$ " +
+                    "When a creature with decayed attacks, sacrifice it at end of combat.";
+
+            final String delayTrigStg = "DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | " +
+                    "TriggerDescription$ At end of combat, sacrifice CARDNAME.";
+
+            final String trigSacStg = "DB$ SacrificeAll | Defined$ Self | Controller$ You";
+
+            SpellAbility delayTrigSA = AbilityFactory.getAbility(delayTrigStg, card);
+
+            AbilitySub sacSA = (AbilitySub) AbilityFactory.getAbility(trigSacStg, card);
+            delayTrigSA.setAdditionalAbility("Execute", sacSA);
+
+            final Trigger parsedTrigger = TriggerHandler.parseTrigger(attackTrig, card, intrinsic);
+
+            delayTrigSA.setIntrinsic(intrinsic);
+
+            parsedTrigger.setOverridingAbility(delayTrigSA);
+            inst.addTrigger(parsedTrigger);
         } else if (keyword.equals("Demonstrate")) {
             final String trigScript = "Mode$ SpellCast | ValidCard$ Card.Self | TriggerDescription$ Demonstrate (" + inst.getReminderText() + ")";
             final String youCopyStr = "DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True | Optional$ True | RememberCopies$ True";
@@ -2150,15 +2170,19 @@ public class CardFactoryUtil {
             sb.append("Event$ Moved | ValidCard$ Card.Self | Origin$ Stack | ExcludeDestination$ Exile ");
             sb.append("| ValidStackSa$ Spell.Flashback | Description$ Flashback");
 
-            if (keyword.contains(":")) {
+            if (keyword.contains(":")) { // K:Flashback:Cost:ExtraParam(Key$Value):ExtraDescription
                 final String[] k = keyword.split(":");
                 final Cost cost = new Cost(k[1], false);
-                sb.append( cost.isOnlyManaCost() ? " " : "—");
+                sb.append(cost.isOnlyManaCost() ? " " : "—");
 
                 sb.append(cost.toSimpleString());
 
                 if (!cost.isOnlyManaCost()) {
                     sb.append(".");
+                }
+                String extraDesc =  k.length > 3 ? k[3] : "";
+                if (!extraDesc.isEmpty()) {
+                    sb.append(". ").append(extraDesc);
                 }
             }
 
@@ -3400,6 +3424,10 @@ public class CardFactoryUtil {
             }
         } else if (keyword.startsWith("Dash")) {
             effect = "Mode$ Continuous | Affected$ Card.Self+dashed | AddKeyword$ Haste";
+        } else if (keyword.equals("Decayed")) {
+            effect = "Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't block. | " +
+                    "Secondary$ True";
+            svars.put("SacrificeEndCombat", "True");
         } else if (keyword.equals("Defender")) {
             effect = "Mode$ CantAttack | ValidCard$ Card.Self | DefenderKeyword$ True | Secondary$ True";
         } else if (keyword.equals("Devoid")) {
