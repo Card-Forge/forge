@@ -206,7 +206,13 @@ public class DeckRecognizer {
             REX_CARD_COUNT, REX_CARD_NAME, REX_COLL_NUMBER, REX_SET_CODE, REX_FOIL_MTGGOLDFISH);
     public static final Pattern CARD_COLLNO_SET_PATTERN = Pattern.compile(REX_FULL_REQUEST_CARD_COLLNO_SET);
 
-    // 6. Card-Only Request (Amount?)
+    // 6. XMage format (Amount?, [Set:Collector Number] Card Name)
+    public static final String REX_FULL_REQUEST_XMAGE = String.format(
+            "^(%s\\s)?\\s*(\\[)?%s:%s(\\])\\s+%s\\s*%s$",
+            REX_CARD_COUNT, REX_SET_CODE, REX_COLL_NUMBER, REX_CARD_NAME, REX_FOIL_MTGGOLDFISH);
+    public static final Pattern SET_COLLNO_CARD_XMAGE_PATTERN = Pattern.compile(REX_FULL_REQUEST_XMAGE);
+
+    // 7. Card-Only Request (Amount?)
     public static final String REX_CARDONLY = String.format(
             "(%s\\s)?\\s*%s\\s*%s", REX_CARD_COUNT, REX_CARD_NAME, REX_FOIL_MTGGOLDFISH);
     public static final Pattern CARD_ONLY_PATTERN = Pattern.compile(REX_CARDONLY);
@@ -382,7 +388,8 @@ public class DeckRecognizer {
         Pattern[] patternsWithCollNumber = new Pattern[] {
                 CARD_SET_COLLNO_PATTERN,
                 SET_CARD_COLLNO_PATTERN,
-                CARD_COLLNO_SET_PATTERN
+                CARD_COLLNO_SET_PATTERN,
+                SET_COLLNO_CARD_XMAGE_PATTERN
         };
         for (Pattern pattern : patternsWithCollNumber) {
             Matcher matcher = pattern.matcher(line);

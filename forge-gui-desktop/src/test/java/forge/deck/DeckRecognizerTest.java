@@ -1208,7 +1208,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(counterSpellCard.getEdition(), "MMQ");
     }
 
-    @Test void testInvalidCardRequestWhenReleaseDAteConstraintsAreUp(){
+    @Test void testInvalidCardRequestWhenReleaseDateConstraintsAreUp(){
         StaticData magicDb = FModel.getMagicDb();
         CardDb db = magicDb.getCommonCards();
         CardDb altDb = magicDb.getVariantCards();
@@ -1234,6 +1234,12 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertNull(cardToken.getCard());
     }
 
+    /*==================================
+     * TEST RECOGNISE CARD EXTRA FORMATS
+     * =================================
+     */
+
+    // === MTG Goldfish
     @Test void testFoilRequestInMTGGoldfishExportFormat(){
         String mtgGoldfishRequest = "18 Forest <254> [THB]";
         Pattern target = DeckRecognizer.CARD_COLLNO_SET_PATTERN;
@@ -1313,6 +1319,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertTrue(forestCard.isFoil());
     }
 
+    // === TappedOut Markdown Format
     @Test void testPurgeLinksInLineRequests(){
         String line = "* 1 [Ancestral Recall](http://tappedout.nethttp://tappedout.net/mtg-card/ancestral-recall/)";
         String expected = "* 1 [Ancestral Recall]";
@@ -1340,5 +1347,62 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         PaperCard ancestralRecallCard = token.getCard();
         assertEquals(ancestralRecallCard.getName(), "Ancestral Recall");
         assertEquals(ancestralRecallCard.getEdition(), "VMA");
+    }
+
+    // === XMage Format
+    @Test void testMatchCardRequestXMageFormat(){
+        String xmageFormatRequest = "1 [LRW:51] Amoeboid Changeling";
+        Pattern target = DeckRecognizer.SET_COLLNO_CARD_XMAGE_PATTERN;
+        Matcher matcher = target.matcher(xmageFormatRequest);
+        assertTrue(matcher.matches());
+        assertEquals(matcher.group(DeckRecognizer.REGRP_CARDNO), "1");
+        assertEquals(matcher.group(DeckRecognizer.REGRP_CARD), "Amoeboid Changeling");  // TRIM
+        assertEquals(matcher.group(DeckRecognizer.REGRP_SET), "LRW");
+        assertEquals(matcher.group(DeckRecognizer.REGRP_COLLNR), "51");
+        assertNull(matcher.group(DeckRecognizer.REGRP_FOIL_GFISH));
+
+        // Test that this line matches only with this pattern
+
+        target = DeckRecognizer.CARD_SET_PATTERN;
+        matcher = target.matcher(xmageFormatRequest);
+        assertFalse(matcher.matches());
+
+        target = DeckRecognizer.SET_CARD_PATTERN;
+        matcher = target.matcher(xmageFormatRequest);
+        assertFalse(matcher.matches());
+
+        target = DeckRecognizer.CARD_SET_COLLNO_PATTERN;
+        matcher = target.matcher(xmageFormatRequest);
+        assertFalse(matcher.matches());
+
+        target = DeckRecognizer.SET_CARD_COLLNO_PATTERN;
+        matcher = target.matcher(xmageFormatRequest);
+        assertFalse(matcher.matches());
+
+        target = DeckRecognizer.CARD_COLLNO_SET_PATTERN;
+        matcher = target.matcher(xmageFormatRequest);
+        assertFalse(matcher.matches());
+
+        target = DeckRecognizer.CARD_ONLY_PATTERN;
+        matcher = target.matcher(xmageFormatRequest);
+        assertFalse(matcher.matches());
+    }
+
+    @Test void testRecognizeCardTokenInXMageFormatRequest(){
+        StaticData magicDb = FModel.getMagicDb();
+        CardDb db = magicDb.getCommonCards();
+        CardDb altDb = magicDb.getVariantCards();
+        DeckRecognizer recognizer = new DeckRecognizer(db, altDb);
+
+        String xmageFormatRequest = "1 [LRW:51] Amoeboid Changeling";
+        Token xmageCardToken = recognizer.recogniseCardToken(xmageFormatRequest);
+        assertNotNull(xmageCardToken);
+        assertEquals(xmageCardToken.getType(), TokenType.LEGAL_CARD_REQUEST);
+        assertEquals(xmageCardToken.getNumber(), 1);
+        assertNotNull(xmageCardToken.getCard());
+        PaperCard acCard = xmageCardToken.getCard();
+        assertEquals(acCard.getName(), "Amoeboid Changeling");
+        assertEquals(acCard.getEdition(), "LRW");
+        assertEquals(acCard.getCollectorNumber(), "51");
     }
 }
