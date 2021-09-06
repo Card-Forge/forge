@@ -100,10 +100,10 @@ public class ChangeTextEffect extends SpellAbilityEffect {
         final List<Card> tgts = getCardsfromTargets(sa);
         for (final Card c : tgts) {
             if (changedColorWordOriginal != null && changedColorWordNew != null) {
-                c.addChangedTextColorWord(changedColorWordOriginal, changedColorWordNew, timestamp);
+                c.addChangedTextColorWord(changedColorWordOriginal, changedColorWordNew, timestamp, 0);
             }
             if (changedTypeWordOriginal != null && changedTypeWordNew != null ) {
-                c.addChangedTextTypeWord(changedTypeWordOriginal, changedTypeWordNew, timestamp);
+                c.addChangedTextTypeWord(changedTypeWordOriginal, changedTypeWordNew, timestamp, 0);
             }
 
             if (!permanent) {
@@ -112,10 +112,10 @@ public class ChangeTextEffect extends SpellAbilityEffect {
                     @Override
                     public void run() {
                         if (changedColorWordNew != null) {
-                            c.removeChangedTextColorWord(timestamp);
+                            c.removeChangedTextColorWord(timestamp, 0);
                         }
                         if (changedTypeWordNew != null) {
-                            c.removeChangedTextTypeWord(timestamp);
+                            c.removeChangedTextTypeWord(timestamp, 0);
                         }
                     }
                 };

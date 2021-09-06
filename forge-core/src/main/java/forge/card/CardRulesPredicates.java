@@ -270,7 +270,6 @@ public final class CardRulesPredicates {
         return new PredicateSuperType(type, isEqual);
     }
 
-
     /**
      * Checks for color.
      *

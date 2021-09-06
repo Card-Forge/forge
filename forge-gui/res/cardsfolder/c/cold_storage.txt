@@ -6,7 +6,7 @@ A:AB$ ChangeZoneAll | Cost$ Sac<1/CARDNAME> | ChangeType$ Card.Creature+IsRememb
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
 SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
-SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:NonStackingEffect:True
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cold_storage.jpg

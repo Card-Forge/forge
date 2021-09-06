@@ -38,14 +38,14 @@ public class CardImage implements FImage {
             image = ImageCache.getImage(card);
             if (image == null) {
                 if (!Forge.enableUIMask.equals("Off")) //render this if mask is still loading
-                    CardImageRenderer.drawCardImage(g, CardView.getCardForUi(card), false, x, y, w, h, CardStackPosition.Top);
+                    CardImageRenderer.drawCardImage(g, CardView.getCardForUi(card), false, x, y, w, h, CardStackPosition.Top, Forge.enableUIMask.equals("Art"), true);
 
                 return; //can't draw anything if can't be loaded yet
             }
         }
 
-        if (image == ImageCache.defaultImage) {
-            CardImageRenderer.drawCardImage(g, CardView.getCardForUi(card), false, x, y, w, h, CardStackPosition.Top);
+        if (image == ImageCache.defaultImage || Forge.enableUIMask.equals("Art")) {
+            CardImageRenderer.drawCardImage(g, CardView.getCardForUi(card), false, x, y, w, h, CardStackPosition.Top, true, true);
         }
         else {
             if (Forge.enableUIMask.equals("Full")) {

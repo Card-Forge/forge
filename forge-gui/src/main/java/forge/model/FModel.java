@@ -217,6 +217,10 @@ public final class FModel {
         magicDb.setMulliganRule(MulliganDefs.MulliganRule.valueOf(preferences.getPref(FPref.MULLIGAN_RULE)));
 
         blocks = new StorageBase<>("Block definitions", new CardBlock.Reader(ForgeConstants.BLOCK_DATA_DIR + "blocks.txt", magicDb.getEditions()));
+        //setblockLands
+        for (final CardBlock b : blocks) {
+            magicDb.getBlockLands().add(b.getLandSet().getCode());
+        }
         questPreferences = new QuestPreferences();
         conquestPreferences = new ConquestPreferences();
         fantasyBlocks = new StorageBase<>("Custom blocks", new CardBlock.Reader(ForgeConstants.BLOCK_DATA_DIR + "fantasyblocks.txt", magicDb.getEditions()));

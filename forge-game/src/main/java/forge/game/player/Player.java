@@ -31,7 +31,6 @@ import java.util.Map.Entry;
 import java.util.NavigableMap;
 import java.util.Set;
 import java.util.SortedSet;
-import java.util.concurrent.ConcurrentSkipListMap;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -43,6 +42,8 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.google.common.collect.Table;
+import com.google.common.collect.TreeBasedTable;
 
 import forge.ImageKeys;
 import forge.LobbyPlayer;
@@ -186,7 +187,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private Map<Card, DetachedCardEffect> staticAbilities = Maps.newHashMap();
 
-    private Map<Long, KeywordsChange> changedKeywords = new ConcurrentSkipListMap<>();
+    private Table<Long, Long, KeywordsChange> changedKeywords = TreeBasedTable.create();
     private ManaPool manaPool = new ManaPool(this);
     private GameEntity mustAttackEntity = null;
     private GameEntity mustAttackEntityThisTurn = null;
@@ -992,36 +993,24 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
     }
     // ================ POISON Merged =================================
-
-    public final void addChangedKeywords(final String[] addKeywords, final String[] removeKeywords, final Long timestamp) {
-        addChangedKeywords(ImmutableList.copyOf(addKeywords), ImmutableList.copyOf(removeKeywords), timestamp);
-    }
-    public final void addChangedKeywords(final List<String> addKeywords, final List<String> removeKeywords, final Long timestamp) {
+    public final void addChangedKeywords(final List<String> addKeywords, final List<String> removeKeywords, final Long timestamp, final long staticId) {
         // if the key already exists - merge entries
-        KeywordsChange cks = null;
-        if (changedKeywords.containsKey(timestamp)) {
-            if (keywordEffect != null) {
-                getKeywordCard().removeChangedCardTraits(timestamp);
-            }
-
-            cks = changedKeywords.get(timestamp).merge(addKeywords, removeKeywords, false, false);
-        } else {
-            cks = new KeywordsChange(addKeywords, removeKeywords, false, false);
-        }
+        KeywordsChange cks = new KeywordsChange(addKeywords, removeKeywords, false, false);
         cks.addKeywordsToPlayer(this);
         if (!cks.getAbilities().isEmpty() || !cks.getTriggers().isEmpty() || !cks.getReplacements().isEmpty() || !cks.getStaticAbilities().isEmpty()) {
-            getKeywordCard().addChangedCardTraits(cks.getAbilities(), null, cks.getTriggers(), cks.getReplacements(), cks.getStaticAbilities(), false, false, false, timestamp);
+            getKeywordCard().addChangedCardTraits(
+                cks.getAbilities(), null, cks.getTriggers(), cks.getReplacements(), cks.getStaticAbilities(), false, false, false, timestamp, staticId);
         }
-        changedKeywords.put(timestamp, cks);
+        changedKeywords.put(timestamp, staticId, cks);
         updateKeywords();
         game.fireEvent(new GameEventPlayerStatsChanged(this, true));
     }
 
-    public final KeywordsChange removeChangedKeywords(final Long timestamp) {
-        KeywordsChange change = changedKeywords.remove(timestamp);
+    public final KeywordsChange removeChangedKeywords(final Long timestamp, final long staticId) {
+        KeywordsChange change = changedKeywords.remove(timestamp, staticId);
         if (change != null) {
             if (keywordEffect != null) {
-                getKeywordCard().removeChangedCardTraits(timestamp);
+                getKeywordCard().removeChangedCardTraits(timestamp, staticId);
             }
             updateKeywords();
             game.fireEvent(new GameEventPlayerStatsChanged(this, true));
@@ -1034,7 +1023,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * @param keyword the keyword to add.
      */
     public final void addKeyword(final String keyword) {
-        addChangedKeywords(ImmutableList.of(keyword), ImmutableList.of(), getGame().getNextTimestamp());
+        addChangedKeywords(ImmutableList.of(keyword), ImmutableList.of(), getGame().getNextTimestamp(), 0);
     }
 
     /**
@@ -1058,10 +1047,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         // Remove the empty changes
-        for (final Entry<Long, KeywordsChange> ck : ImmutableList.copyOf(changedKeywords.entrySet())) {
-            if (ck.getValue().isEmpty() && changedKeywords.remove(ck.getKey()) != null) {
+        for (final Table.Cell<Long, Long, KeywordsChange> ck : ImmutableList.copyOf(changedKeywords.cellSet())) {
+            if (ck.getValue().isEmpty() && changedKeywords.remove(ck.getRowKey(), ck.getColumnKey()) != null) {
                 keywordRemoved = true;
-                getKeywordCard().removeChangedCardTraits(ck.getKey());
+                getKeywordCard().removeChangedCardTraits(ck.getRowKey(), ck.getColumnKey());
             }
         }
 
@@ -3061,7 +3050,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         CardCollectionView view = CardCollection.getView(legalCompanions);
 
-        SpellAbility fakeSa = new SpellAbility.EmptySa(ApiType.CompanionChoose,  legalCompanions.get(0), this);
+        SpellAbility fakeSa = new SpellAbility.EmptySa(ApiType.CompanionChoose, legalCompanions.get(0), this);
         return player.chooseSingleEntityForEffect(view, fakeSa, Localizer.getInstance().getMessage("lblChooseACompanion"), true, null);
     }
 

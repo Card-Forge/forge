@@ -66,7 +66,7 @@ public class PumpEffect extends SpellAbilityEffect {
             redrawPT = true;
         }
 
-        gameCard.addChangedCardKeywords(kws, Lists.newArrayList(), false, false, timestamp);
+        gameCard.addChangedCardKeywords(kws, Lists.newArrayList(), false, false, timestamp, 0);
         if (redrawPT) {
             gameCard.updatePowerToughnessForView();
         }
@@ -101,7 +101,7 @@ public class PumpEffect extends SpellAbilityEffect {
                                 gameCard.removeHiddenExtrinsicKeyword(kw);
                             }
                         }
-                        gameCard.removeChangedCardKeywords(timestamp);
+                        gameCard.removeChangedCardKeywords(timestamp, 0);
                     }
                     gameCard.updatePowerToughnessForView();
                     if (updateText) {
@@ -127,7 +127,7 @@ public class PumpEffect extends SpellAbilityEffect {
         }
 
         if (!keywords.isEmpty()) {
-            p.addChangedKeywords(keywords, ImmutableList.of(), timestamp);
+            p.addChangedKeywords(keywords, ImmutableList.of(), timestamp, 0);
         }
 
         if (!"Permanent".equals(sa.getParam("Duration"))) {
@@ -137,7 +137,7 @@ public class PumpEffect extends SpellAbilityEffect {
 
                 @Override
                 public void run() {
-                    p.removeChangedKeywords(timestamp);
+                    p.removeChangedKeywords(timestamp, 0);
                 }
             };
             addUntilCommand(sa, untilEOT);

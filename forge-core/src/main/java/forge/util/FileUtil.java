@@ -78,8 +78,10 @@ public final class FileUtil {
     }
 
     public static boolean isDirectoryWithFiles(final String path) {
+        if (path == null) return false;
         final File f = new File(path);
-        return f.exists() && f.isDirectory() && f.list().length > 0;
+        final String[] fileList = f.list();
+        return fileList!=null && fileList.length > 0;
     }
 
     public static boolean ensureDirectoryExists(final String path) {

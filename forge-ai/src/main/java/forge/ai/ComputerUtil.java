@@ -2704,7 +2704,6 @@ public class ComputerUtil {
         for (Trigger trigger : theTriggers) {
             final Card source = trigger.getHostCard();
 
-
             if (!trigger.zonesCheck(game.getZoneOf(source))) {
                 continue;
             }

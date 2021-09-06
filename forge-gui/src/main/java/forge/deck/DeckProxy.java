@@ -256,7 +256,8 @@ public class DeckProxy implements InventoryItem {
 
         for (final Entry <PaperCard, Integer> pc : getDeck().getAllCardsInASinglePool()) {
             if (pc.getKey().getRules().getManaCost() != null) {
-                if (pc.getKey().getRules().getSplitType() != CardSplitType.Split)
+                if (pc.getKey().getRules().getType().hasSubtype("Saga") || pc.getKey().getRules().getType().hasSubtype("Class") || CardSplitType.Split.equals(pc.getKey().getRules().getSplitType()))
+                    continue;
                     keyCMC.put(pc.getKey(),pc.getKey().getRules().getManaCost().getCMC());
             }
         }

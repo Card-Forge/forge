@@ -1,7 +1,7 @@
 Name:Devour Intellect
 ManaCost:B
 Types:Sorcery
-A:SP$ Pump | TgtPrompt$ Select target opponent | ValidTgt$ Opponent | SubAbility$ DBBranch
+A:SP$ Pump | TgtPrompt$ Select target opponent | ValidTgts$ Opponent | SubAbility$ DBBranch
 SVar:DBBranch:DB$ Branch | BranchConditionSVar$ TreasureCheck | BranchConditionSVarCompare$ GE1 | FalseSubAbility$ DBDiscard | TrueSubAbility$ DBTreasureDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ Targeted | NumCards$ 1 | Mode$ TgtChoose
 SVar:DBTreasureDiscard:DB$ Discard | Defined$ Targeted | NumCards$ 1 | Mode$ RevealYouChoose | DiscardValid$ Card.nonLand

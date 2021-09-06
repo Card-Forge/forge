@@ -410,6 +410,28 @@ public enum FSkinProp {
     IMG_WATERMARK_W (new int[] {2, 1006, 500, 500}, PropType.WATERMARKS),
     IMG_WATERMARK_C (new int[] {504, 1006, 500, 500}, PropType.WATERMARKS),
 
+    //FOR CARDBG
+    IMG_CARDBG_A (new int[] {2, 2, 339, 496}, PropType.CARDBG),
+    IMG_CARDBG_B (new int[] {343, 2, 339, 496}, PropType.CARDBG),
+    IMG_CARDBG_BG (new int[] {684, 2, 339, 496}, PropType.CARDBG),
+    IMG_CARDBG_BR (new int[] {1025, 2, 339, 496}, PropType.CARDBG),
+    IMG_CARDBG_C (new int[] {1366, 2, 339, 496}, PropType.CARDBG),
+    IMG_CARDBG_G (new int[] {2, 500, 339, 496}, PropType.CARDBG),
+    IMG_CARDBG_L (new int[] {343, 500, 339, 496}, PropType.CARDBG),
+    IMG_CARDBG_M (new int[] {684, 500, 339, 496}, PropType.CARDBG),
+    IMG_CARDBG_R (new int[] {1025, 500, 339, 496}, PropType.CARDBG),
+    IMG_CARDBG_RG (new int[] {1366, 500, 339, 496}, PropType.CARDBG),
+    IMG_CARDBG_U (new int[] {2, 998, 339, 496}, PropType.CARDBG),
+    IMG_CARDBG_UB (new int[] {343, 998, 339, 496}, PropType.CARDBG),
+    IMG_CARDBG_UG (new int[] {684, 998, 339, 496}, PropType.CARDBG),
+    IMG_CARDBG_UR (new int[] {1025, 998, 339, 496}, PropType.CARDBG),
+    IMG_CARDBG_V (new int[] {1366, 998, 339, 496}, PropType.CARDBG),
+    IMG_CARDBG_W (new int[] {2, 1496, 339, 496}, PropType.CARDBG),
+    IMG_CARDBG_WB (new int[] {343, 1496, 339, 496}, PropType.CARDBG),
+    IMG_CARDBG_WG (new int[] {684, 1496, 339, 496}, PropType.CARDBG),
+    IMG_CARDBG_WR (new int[] {1025, 1496, 339, 496}, PropType.CARDBG),
+    IMG_CARDBG_WU (new int[] {1366, 1496, 339, 496}, PropType.CARDBG),
+
     IMG_FAV1    (new int[] {0, 0, 100, 100}, PropType.FAVICON),
     IMG_FAV2    (new int[] {100, 0, 100, 100}, PropType.FAVICON),
     IMG_FAV3    (new int[] {200, 0, 100, 100}, PropType.FAVICON),
@@ -514,6 +536,7 @@ public enum FSkinProp {
         DECKBOX,
         SETLOGO,
         WATERMARKS,
+        CARDBG,
         FAVICON
     }
 }

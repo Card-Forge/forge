@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.Align;
 import forge.Forge;
 import forge.Forge.KeyInputAdapter;
 import forge.Graphics;
+import forge.ImageKeys;
 import forge.assets.FImage;
 import forge.assets.FImageComplex;
 import forge.assets.FSkin;
@@ -24,17 +25,15 @@ import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.ImageCache;
-import forge.card.CardFaceSymbols;
-import forge.card.CardRenderer;
+import forge.card.*;
 import forge.card.CardRenderer.CardStackPosition;
-import forge.card.CardZoom;
-import forge.card.ColorSet;
 import forge.deck.ArchetypeDeckGenerator;
 import forge.deck.CardThemedDeckGenerator;
 import forge.deck.CommanderDeckGenerator;
 import forge.deck.DeckProxy;
 import forge.deck.FDeckViewer;
 import forge.deck.io.DeckPreferences;
+import forge.game.card.CardView;
 import forge.gamemodes.planarconquest.ConquestCommander;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
@@ -54,6 +53,7 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextField;
+import forge.util.ImageUtil;
 import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.Utils;
@@ -1016,8 +1016,20 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     } else {
                         //commander bg
                         g.drawImage(FSkin.getDeckbox().get(0), FSkin.getDeckbox().get(0), x, y, w, h, Color.GREEN, selected);
-                        TextureRegion tr = ImageCache.croppedBorderImage(dpImg);
-                        g.drawImage(tr, x+(w-w*scale)/2, y+(h-h*scale)/1.5f, w*scale, h*scale);
+
+                        PaperCard paperCard = null;
+                        String imageKey = item.getImageKey(false);
+                        if (imageKey != null) {
+                            if (imageKey.startsWith(ImageKeys.CARD_PREFIX))
+                                paperCard = ImageUtil.getPaperCardFromImageKey(imageKey);
+                        }
+                        if (paperCard != null && Forge.enableUIMask.equals("Art")) {
+                            CardImageRenderer.drawCardImage(g, CardView.getCardForUi(paperCard), false,
+                                    x + (w - w * scale) / 2, y + (h - h * scale) / 1.5f, w * scale, h * scale, CardStackPosition.Top, true, false, false, true);
+                        } else {
+                            TextureRegion tr = ImageCache.croppedBorderImage(dpImg);
+                            g.drawImage(tr, x + (w - w * scale) / 2, y + (h - h * scale) / 1.5f, w * scale, h * scale);
+                        }
                     }
                     //fake labelname shadow
                     g.drawText(item.getName(), GROUP_HEADER_FONT, Color.BLACK, (x + PADDING)-1f, (y + PADDING*2)+1f, w - 2 * PADDING, h - 2 * PADDING, true, Align.center, false);
@@ -1026,8 +1038,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 } else {
                     if (!dp.isGeneratedDeck()){
                         //If deck has Commander, use it as cardArt reference
-                        String deckImageKey = dp.getDeck().getCommanders().isEmpty() ? dp.getHighestCMCCard().getImageKey(false) : dp.getDeck().getCommanders().get(0).getImageKey(false);
-                        FImageComplex cardArt = CardRenderer.getCardArt(deckImageKey, false, false, false);
+                        PaperCard paperCard = dp.getDeck().getCommanders().isEmpty() ? dp.getHighestCMCCard() : dp.getDeck().getCommanders().get(0);
+                        FImageComplex cardArt = CardRenderer.getCardArt(paperCard);
                         //draw the deckbox
                         if (cardArt == null){
                             //draw generic box if null or still loading

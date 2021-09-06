@@ -682,6 +682,12 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
+    public Card chooseDungeon(Player player, List<PaperCard> dungeonCards, String message) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
     public List<Card> chooseCardsForSplice(SpellAbility sa, List<Card> cards) {
         return Lists.newArrayList();
     }

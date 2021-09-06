@@ -38,6 +38,7 @@ public class FSkin {
     private static String preferredName;
     private static boolean loaded = false;
     public static Texture hdLogo = null;
+    public static Texture overlay_alpha = null;
 
     public static void changeSkin(final String skinName) {
         final ForgePreferences prefs = FModel.getPreferences();
@@ -124,10 +125,27 @@ public class FSkin {
 
         FSkinTexture.BG_TEXTURE.load(); //load background texture early for splash screen
 
+        //load theme logo while changing skins
+        final FileHandle theme_logo = getSkinFile("hd_logo.png");
+        if (theme_logo.exists()) {
+            Texture txOverlay = new Texture(theme_logo, true);
+            txOverlay.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
+            hdLogo = txOverlay;
+        } else {
+            hdLogo = null;
+        }
+        final FileHandle duals_overlay = getDefaultSkinFile("overlay_alpha.png");
+        if (duals_overlay.exists()) {
+            Texture txAlphaLines = new Texture(duals_overlay, true);
+            txAlphaLines.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
+            overlay_alpha = txAlphaLines;
+        } else {
+            overlay_alpha = null;
+        }
+
         if (splashScreen != null) {
             final FileHandle f = getSkinFile("bg_splash.png");
             final FileHandle f2 = getSkinFile("bg_splash_hd.png"); //HD Splashscreen
-            final FileHandle f3 = getSkinFile("hd_logo.png");
 
             if (!f.exists()) {
                 if (!skinName.equals("default")) {
@@ -147,14 +165,6 @@ public class FSkin {
                     splashScreen.setBackground(new TextureRegion(txSplashHD));
                 } else {
                     splashScreen.setBackground(new TextureRegion(txSplash, 0, 0, w, h - 100));
-                }
-
-                if (f3.exists()) {
-                    Texture txOverlay = new Texture(f3, true);
-                    txOverlay.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
-                    hdLogo = txOverlay;
-                } else {
-                    hdLogo = null;
                 }
 
                 Pixmap pxSplash = new Pixmap(f);
@@ -217,9 +227,12 @@ public class FSkin {
         final FileHandle f11 = getSkinFile(ForgeConstants.SPRITE_BUTTONS_FILE);
         final FileHandle f12 = getSkinFile(ForgeConstants.SPRITE_START_FILE);
         final FileHandle f13 = getDefaultSkinFile(ForgeConstants.SPRITE_DECKBOX_FILE);
+
+        /*TODO Themeable
         final FileHandle f14 = getDefaultSkinFile(ForgeConstants.SPRITE_SETLOGO_FILE);
         final FileHandle f15 = getSkinFile(ForgeConstants.SPRITE_SETLOGO_FILE);
         final FileHandle f16 = getDefaultSkinFile(ForgeConstants.SPRITE_WATERMARK_FILE);
+        */
 
         try {
             textures.put(f1.path(), new Texture(f1));

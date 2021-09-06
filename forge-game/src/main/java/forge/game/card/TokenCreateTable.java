@@ -33,20 +33,20 @@ public class TokenCreateTable extends ForwardingTable<Player, Card, Integer> {
         this.put(p, c, newValue);
         return newValue;
     }
-    
+
     public int getFilterAmount(String validOwner, String validToken, final CardTraitBase ctb) {
         final Card host = ctb.getHostCard();
         int result = 0;
         List<Card> filteredCards = null;
         List<Player> filteredPlayer = null;
-        
+
         if (validOwner == null && validToken == null) {
             for (Integer i : values()) {
                 result += i;
             }
             return result;
         }
-        
+
         if (validOwner != null) {
             filteredPlayer = Lists.newArrayList(Iterables.filter(rowKeySet(),
                     GameObjectPredicates.restriction(validOwner.split(","), host.getController(), host, ctb)));
@@ -78,7 +78,7 @@ public class TokenCreateTable extends ForwardingTable<Player, Card, Integer> {
             }
             return result;
         }
-        
+
         for (Table.Cell<Player, Card, Integer> c : this.cellSet()) {
             if (!filteredPlayer.contains(c.getRowKey())) {
                 continue;
@@ -89,7 +89,6 @@ public class TokenCreateTable extends ForwardingTable<Player, Card, Integer> {
             result += c.getValue();
         }
 
-        
         return result;
     }
 }

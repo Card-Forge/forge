@@ -3,6 +3,6 @@ ManaCost:4 U
 Types:Creature Shapeshifter
 PT:0/0
 K:ETBReplacement:Copy:DBCopy:Optional
-SVar:DBCopy:DB$ Clone | Choices$ Creature.Other | ChoiceZone$ Graveyard | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any artifact on the battlefield.
+SVar:DBCopy:DB$ Clone | Choices$ Creature.Other | ChoiceZone$ Graveyard | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any creature card in a graveyard.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/body_double.jpg
 Oracle:You may have Body Double enter the battlefield as a copy of any creature card in a graveyard.

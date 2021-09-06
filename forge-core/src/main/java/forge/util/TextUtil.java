@@ -1,11 +1,13 @@
 package forge.util;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import forge.item.IPaperCard;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -27,14 +29,19 @@ public class TextUtil {
     .put(10, "X").put(9, "IX")
     .put(5, "V").put(4, "IV").put(1, "I").build();
     
-    public final static String toRoman(int number) {
+    public static String toRoman(int number) {
         if (number <= 0) {
             return "";
         }
         int l = romanMap.floorKey(number);
         return romanMap.get(l) + toRoman(number-l);
     }
+    public static String normalizeText(String text) {
+        if (text == null)
+            return IPaperCard.NO_ARTIST_NAME;
+        return Normalizer.normalize(text, Normalizer.Form.NFD);
 
+    }
     /**
      * Safely converts an object to a String.
      * 

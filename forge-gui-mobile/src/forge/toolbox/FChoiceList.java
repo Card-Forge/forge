@@ -393,7 +393,7 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
         boolean showAlt = false;
         if(cardView.hasAlternateState()){
             if(cardView.hasBackSide())
-                showAlt = value.contains(cardView.getBackSideName());
+                showAlt = value.contains(cardView.getBackSideName()) || cardView.getAlternateState().getAbilityText().contains(value);
             else if (cardView.isAdventureCard())
                 showAlt = value.equals(cardView.getAlternateState().getAbilityText());
             else if (cardView.isSplitCard()) {
@@ -520,9 +520,12 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
         @Override
         public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
             //should fix NPE ie Thief of Sanity, Gonti... etc
-            CardView cv = ((IHasCardView)value).getCardView().isFaceDown() && ((IHasCardView)value).getCardView().isInZone(EnumSet.of(ZoneType.Exile)) ? ((IHasCardView)value).getCardView().getBackup() : ((IHasCardView)value).getCardView();
-            boolean showAlternate = showAlternate(cv, value.toString());
-            CardRenderer.drawCardWithOverlays(g, cv, x, y, VStack.CARD_WIDTH, VStack.CARD_HEIGHT, CardStackPosition.Top, false, showAlternate, true);
+            CardView cv = ((IHasCardView)value).getCardView();
+            if (cv != null) {
+                CardView render = cv.isFaceDown() && cv.isInZone(EnumSet.of(ZoneType.Exile)) ? cv.getBackup() : cv;
+                boolean showAlternate = showAlternate(render, value.toString());
+                CardRenderer.drawCardWithOverlays(g, render, x, y, VStack.CARD_WIDTH, VStack.CARD_HEIGHT, CardStackPosition.Top, false, showAlternate, true);
+            }
 
             float dx = VStack.CARD_WIDTH + FList.PADDING;
             x += dx;

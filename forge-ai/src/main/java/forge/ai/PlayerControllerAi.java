@@ -1292,6 +1292,27 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
+    public Card chooseDungeon(Player ai, List<PaperCard> dungeonCards, String message) {
+        // TODO: improve the conditions that define which dungeon is a viable option to choose
+        List<String> dungeonNames = Lists.newArrayList();
+        for (PaperCard pc : dungeonCards) {
+            dungeonNames.add(pc.getName());
+        }
+
+        // Don't choose Tomb of Annihilation when life in danger unless we can win right away or can't lose for 0 life
+        if (ai.getController().isAI()) { // FIXME: is this needed? Can simulation ever run this for a non-AI player?
+            int lifeInDanger = (((PlayerControllerAi) ai.getController()).getAi().getIntProperty(AiProps.AI_IN_DANGER_THRESHOLD));
+            if ((ai.getLife() <= lifeInDanger && !ai.cantLoseForZeroOrLessLife())
+                    && !(ai.getLife() > 1 && ai.getWeakestOpponent().getLife() == 1)) {
+                dungeonNames.remove("Tomb of Annihilation");
+            }
+        }
+
+        int i = MyRandom.getRandom().nextInt(dungeonNames.size());
+        return Card.fromPaperCard(dungeonCards.get(i), ai);
+    }
+
+    @Override
     public List<Card> chooseCardsForSplice(SpellAbility sa, List<Card> cards) {
         // sort from best to worst
         CardLists.sortByCmcDesc(cards);

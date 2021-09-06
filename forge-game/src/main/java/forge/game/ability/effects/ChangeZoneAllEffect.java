@@ -166,7 +166,6 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             Map<AbilityKey, Object> moveParams = Maps.newEnumMap(AbilityKey.class);
 
             if (destination == ZoneType.Battlefield) {
-
                 if (sa.hasAdditionalAbility("AnimateSubAbility")) {
                     // need LKI before Animate does apply
                     moveParams.put(AbilityKey.CardLKI, CardUtil.getLKICopy(c));

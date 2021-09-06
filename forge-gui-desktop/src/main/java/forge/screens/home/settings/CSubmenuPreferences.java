@@ -538,7 +538,7 @@ public enum CSubmenuPreferences implements ICDoc {
     }
 
     private void initializeSwitchStatesCombobox() {
-        final String[] elems = {ForgeConstants.SWITCH_CARDSTATES_DECK_NEVER, ForgeConstants.SWITCH_CARDSTATES_DECK_HOVER, ForgeConstants.SWITCH_CARDSTATES_DECK_ALWAYS};
+        final String[] elems = {ForgeConstants.SWITCH_CARDSTATES_DECK_NEVER, ForgeConstants.SWITCH_CARDSTATES_DECK_HOVER};
         final FPref userSetting = FPref.UI_SWITCH_STATES_DECKVIEW;
         final FComboBoxPanel<String> panel = this.view.getSwitchStates();
         final FComboBox<String> comboBox = createComboBox(elems, userSetting);

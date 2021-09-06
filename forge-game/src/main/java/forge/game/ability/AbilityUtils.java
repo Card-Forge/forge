@@ -218,8 +218,7 @@ public class AbilityUtils {
                 if (o instanceof SpellAbility) {
                     c = ((SpellAbility) o).getHostCard();
                 }
-            }
-            else {
+            } else {
                 AbilityKey type = AbilityKey.fromString(defined.substring(9));
                 final Object crd = root.getTriggeringObject(type);
                 if (crd instanceof Card) {
@@ -315,10 +314,6 @@ public class AbilityUtils {
         } else if (defined.equals("Imprinted")) {
             for (final Card imprint : hostCard.getImprintedCards()) {
                 cards.add(game.getCardState(imprint));
-            }
-        } else if (defined.equals("UntilLeavesBattlefield")) {
-            for (final Card ulb : hostCard.getUntilLeavesBattlefield()) {
-                cards.add(game.getCardState(ulb));
             }
         } else if (defined.startsWith("ThisTurnEntered")) {
             final String[] workingCopy = defined.split("_");
