@@ -296,7 +296,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
                 continue;  // pool empty, no card has been found!
 
             // Filter pool by applying DeckSection Validation schema for Card Types (to avoid inconsistencies)
-            CardPool filteredPool = pool.getFilteredPoolWithCardsCount(new Predicate<PaperCard>() {
+            CardPool filteredPool = pool.getFilteredPool(new Predicate<PaperCard>() {
                 @Override
                 public boolean apply(PaperCard input) {
                     return deckSection.validate(input);
@@ -304,7 +304,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             });
 
             if (filteredPool.countDistinct() != pool.countDistinct()) {  // Some cards have been filtered
-                CardPool blackListPool = pool.getFilteredPoolWithCardsCount(new Predicate<PaperCard>() {
+                CardPool blackListPool = pool.getFilteredPool(new Predicate<PaperCard>() {
                     @Override
                     public boolean apply(PaperCard input) {
                         return !(deckSection.validate(input));
