@@ -69,7 +69,7 @@ public class FDeckImportDialog extends FDialog {
                         //if there are any unknown cards, let user know this and give them the option to cancel
                         StringBuilder sb = new StringBuilder();
                         for (DeckRecognizer.Token token : tokens) {
-                            if (token.getType() == TokenType.UnknownCard) {
+                            if (token.getType() == TokenType.UNKNOWN_CARD_REQUEST) {
                                 if (sb.length() > 0) {
                                     sb.append("\n");
                                 }
@@ -107,7 +107,7 @@ public class FDeckImportDialog extends FDialog {
 
         //ensure at least one known card found on clipboard
         for (DeckRecognizer.Token token : tokens) {
-            if (token.getType() == TokenType.KnownCard) {
+            if (token.getType() == TokenType.LEGAL_CARD_REQUEST) {
                 showOptions = true;
 
                 dateTimeCheck.setCommand(new FEventHandler() {
