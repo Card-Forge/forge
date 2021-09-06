@@ -82,10 +82,10 @@ public class DeckImportController {
         DeckRecognizer recognizer = new DeckRecognizer(FModel.getMagicDb().getCommonCards(),
                                                        FModel.getMagicDb().getVariantCards());
         if (dateTimeCheck.isSelected()) {
-            recognizer.setDateConstraint(monthDropdown.getSelectedIndex(), yearDropdown.getSelectedItem());
+            recognizer.setDateConstraint(yearDropdown.getSelectedItem(), monthDropdown.getSelectedIndex());
         }
         if (this.allowedSetCodes != null && this.allowedSetCodes.size() > 0)
-            recognizer.setCardEditionConstrain(this.allowedSetCodes);
+            recognizer.setGameFormatConstraint(this.allowedSetCodes);
         if (this.currentDeckFormat != null)
             recognizer.setDeckFormatConstraint(this.currentDeckFormat);
 
@@ -128,14 +128,14 @@ public class DeckImportController {
         for (final DeckRecognizer.Token t : tokens) {
             final DeckRecognizer.TokenType type = t.getType();
 
-            if (type == DeckRecognizer.TokenType.DeckName) {
+            if (type == DeckRecognizer.TokenType.DECK_NAME) {
                 resultDeck.setName(t.getText());
             }
-            if (type == DeckRecognizer.TokenType.DeckSectionName) {
+            if (type == DeckRecognizer.TokenType.DECK_SECTION_NAME) {
                 deckSection = DeckSection.smartValueOf(t.getText());
             }
             // all other tokens will be discarded.
-            if (type != DeckRecognizer.TokenType.KnownCard) {
+            if (type != DeckRecognizer.TokenType.LEGAL_CARD_REQUEST) {
                 continue;
             }
             final PaperCard crd = t.getCard();
