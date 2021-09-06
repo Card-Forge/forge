@@ -1312,4 +1312,33 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(forestCard.getEdition(), "THB");
         assertTrue(forestCard.isFoil());
     }
+
+    @Test void testPurgeLinksInLineRequests(){
+        String line = "* 1 [Ancestral Recall](http://tappedout.nethttp://tappedout.net/mtg-card/ancestral-recall/)";
+        String expected = "* 1 [Ancestral Recall]";
+        assertEquals(DeckRecognizer.purgeAllLinks(line), expected);
+
+        line = "1 [Ancestral Recall](http://tappedout.nethttp://tappedout.net/mtg-card/ancestral-recall/)";
+        expected = "1 [Ancestral Recall]";
+        assertEquals(DeckRecognizer.purgeAllLinks(line), expected);
+    }
+
+    @Test void testCardNameEntryInMarkDownExportFromTappedOut(){
+        StaticData magicDb = FModel.getMagicDb();
+        CardDb db = magicDb.getCommonCards();
+        CardDb altDb = magicDb.getVariantCards();
+        DeckRecognizer recognizer = new DeckRecognizer(db, altDb);
+        assertEquals(db.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
+
+        String line = "* 1 [Ancestral Recall](http://tappedout.nethttp://tappedout.net/mtg-card/ancestral-recall/)";
+
+        Token token = recognizer.recognizeLine(line);
+        assertNotNull(token);
+        assertEquals(token.getType(), TokenType.LEGAL_CARD_REQUEST);
+        assertEquals(token.getNumber(), 1);
+        assertNotNull(token.getCard());
+        PaperCard ancestralRecallCard = token.getCard();
+        assertEquals(ancestralRecallCard.getName(), "Ancestral Recall");
+        assertEquals(ancestralRecallCard.getEdition(), "VMA");
+    }
 }

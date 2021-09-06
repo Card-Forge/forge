@@ -101,7 +101,8 @@ public class DeckRecognizer {
                 return new Token(TokenType.DECK_SECTION_NAME, DeckSection.Conspiracy.name());
             if (sectionName.equals("side") || sectionName.contains("sideboard"))
                 return new Token(TokenType.DECK_SECTION_NAME, DeckSection.Sideboard.name());
-            if (sectionName.equals("main") || sectionName.contains("card") || sectionName.equals("mainboard"))
+            if (sectionName.equals("main") || sectionName.contains("card")
+                    || sectionName.equals("mainboard") || sectionName.equals("deck"))
                 return new Token(TokenType.DECK_SECTION_NAME, DeckSection.Main.name());
             return null;
         }
@@ -142,9 +143,10 @@ public class DeckRecognizer {
     }
 
     // Utility Constants
-    private final Pattern SEARCH_SINGLE_SLASH = Pattern.compile("(?<=[^/])\\s*/\\s*(?=[^/])");
-    private static final String LINE_COMMENT_DELIMITER = "#";
+    private static final Pattern SEARCH_SINGLE_SLASH = Pattern.compile("(?<=[^/])\\s*/\\s*(?=[^/])");
     private static final String DOUBLE_SLASH = "//";
+    private static final String LINE_COMMENT_DELIMITER_OR_MD_HEADER = "#";
+    private static final String ASTERISK = "* ";  // Note the blank space after asterisk!
 
 //    private static final Pattern EDITION_AFTER_CARD_NAME = Pattern.compile("([\\d]{1,2})?\\s*([a-zA-Z',\\/\\-\\s]+)\\s*((\\(|\\[)([a-zA-Z0-9]{3})(\\)|\\])\\s*)?([\\d]{1,3})?");
 
@@ -164,7 +166,7 @@ public class DeckRecognizer {
     public static final String REGRP_CARD = "cardname";
     public static final String REGRP_CARDNO = "count";
 
-    public static final String REX_CARD_NAME = String.format("(?<%s>[a-zA-Z0-9',\\.:!\\+\\\"\\/\\-\\s]+)", REGRP_CARD);
+    public static final String REX_CARD_NAME = String.format("(\\[)?(?<%s>[a-zA-Z0-9',\\.:!\\+\\\"\\/\\-\\s]+)(\\])?", REGRP_CARD);
     public static final String REX_SET_CODE = String.format("(?<%s>[a-zA-Z0-9_]{2,7})", REGRP_SET);
     public static final String REX_COLL_NUMBER = String.format("(?<%s>\\*?[0-9A-Z]+\\S?[A-Z]*)", REGRP_COLLNR);
     public static final String REX_CARD_COUNT = String.format("(?<%s>[\\d]{1,2})(?<mult>x)?", REGRP_CARDNO);
@@ -214,7 +216,7 @@ public class DeckRecognizer {
     private static CharSequence[] CARD_TYPES = allCardTypes();
 
     private static final CharSequence[] DECK_SECTION_NAMES = {"avatar", "commander",
-            "schemes", "conspiracy", "planes",
+            "schemes", "conspiracy", "planes", "deck",
             "main", "card", "mainboard", "side", "sideboard"};
 
     private final CardDb db;
@@ -230,19 +232,27 @@ public class DeckRecognizer {
     }
 
     public Token recognizeLine(final String rawLine) {
+        if (rawLine == null)
+            return null;
         if (StringUtils.isBlank(rawLine.trim()))
             return null;
-        if (StringUtils.startsWith(rawLine.trim(), LINE_COMMENT_DELIMITER))
-            return new Token(TokenType.COMMENT, 0, rawLine);
 
         final char smartQuote = (char) 8217;
         String line = rawLine.trim().replace(smartQuote, '\'');
+        // Remove any link (e.g. Markdown Export format from TappedOut)
+        line = purgeAllLinks(line);
+
+        if (StringUtils.startsWith(line, LINE_COMMENT_DELIMITER_OR_MD_HEADER))
+            line = line.replaceAll(LINE_COMMENT_DELIMITER_OR_MD_HEADER, "");
 
         // Some websites export split card names with a single slash. Replace with double slash.
         line = SEARCH_SINGLE_SLASH.matcher(line).replaceFirst(" // ");
         line = line.trim();  // Remove any trailing formattings
         if (StringUtils.startsWith(line, DOUBLE_SLASH))
             line = line.substring(2);  // In this case, we are sure to support split cards
+
+        if (StringUtils.startsWith(line, ASTERISK))
+            line = line.substring(2);
 
         // In some format, cards in the Sideboard have an SB: prefix.
         // We won't support that as it is, due to how the recognition process works, so a section must be
@@ -254,6 +264,19 @@ public class DeckRecognizer {
         if (result == null)
             result = recogniseNonCardToken(line);
         return result != null ? result : new Token(TokenType.UNKNOWN_TEXT, 0, line);
+    }
+
+    public static String purgeAllLinks(String line){
+        String urlPattern = "(?<protocol>((https|ftp|file|http):))(?<sep>((//|\\\\)+))(?<url>([\\w\\d:#@%/;$~_?\\+-=\\\\\\.&]*))";
+        Pattern p = Pattern.compile(urlPattern, Pattern.CASE_INSENSITIVE);
+        Matcher m = p.matcher(line);
+
+        while (m.find()) {
+            line = line.replaceAll(m.group(), "").trim();
+        }
+        if (StringUtils.endsWith(line, "()"))
+            return line.substring(0, line.length()-2);
+        return line;
     }
 
     public Token recogniseCardToken(final String text) {
