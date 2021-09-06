@@ -103,6 +103,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 276 L Forest @Alayna Danner
 277 L Forest @Dan Mumford
 278 M Wrenn and Seven @Bram Sels
+279 M Arlinn, the Pack's Hope @Eric Deschamps
 281 R Deserted Beach @Piotr Dura
 282 R Haunted Ridge @Piotr Dura
 283 R Overgrown Farmland @Donato Giancola
