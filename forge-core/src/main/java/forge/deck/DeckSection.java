@@ -8,8 +8,8 @@ import java.util.function.Function;
 public enum DeckSection {
     Avatar(1, Validators.AVATAR_VALIDATOR),
     Commander(1, Validators.COMMANDER_VALIDATOR),
-    Main(60, Validators.DECK_VALIDATOR),
-    Sideboard(15, Validators.DECK_VALIDATOR),
+    Main(60, Validators.CONSTRUCTED_VALIDATOR),
+    Sideboard(15, Validators.CONSTRUCTED_VALIDATOR),
     Planes(10, Validators.PLANES_VALIDATOR),
     Schemes(20, Validators.SCHEME_VALIDATOR),
     Conspiracy(0, Validators.CONSPIRACY_VALIDATOR);
@@ -25,6 +25,7 @@ public enum DeckSection {
     public boolean isSingleCard() { return typicalSize == 1; }
 
     public boolean validate(PaperCard card){
+        if (fnValidator == null) return true;
         return fnValidator.apply(card);
     }
 
@@ -55,13 +56,13 @@ public enum DeckSection {
     }
 
     private static class Validators {
-        static final Function<PaperCard, Boolean> DECK_VALIDATOR = new Function<PaperCard, Boolean>() {
+        static final Function<PaperCard, Boolean> CONSTRUCTED_VALIDATOR = new Function<PaperCard, Boolean>() {
             @Override
             public Boolean apply(PaperCard card) {
                 CardType t = card.getRules().getType();
                 // NOTE: Same rules applies to both Deck and Side, despite "Conspiracy cards" are allowed
                 // in the SideBoard (see Rule 313.2)
-                // Those will be matched later, in case (see `Deck::loadDeferredSection`)
+                // Those will be matched later, in case (see `Deck::validateDeferredSections`)
                 return (!t.isConspiracy() && !t.isDungeon() && !t.isPhenomenon() && !t.isPlane()
                         && !t.isScheme() && !t.isVanguard());
             }
