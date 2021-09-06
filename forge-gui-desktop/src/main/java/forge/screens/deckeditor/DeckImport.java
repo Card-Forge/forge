@@ -206,7 +206,7 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         this.setPreferredSize(new Dimension(wWidth, wHeight));
         this.setSize(wWidth, wHeight);
 
-        String gameTypeName = String.format("For the Game %s", currentGameType.name());
+        String gameTypeName = String.format(" %s", currentGameType.name());
         this.setTitle(Localizer.getInstance().getMessage("lblDeckImporter") + gameTypeName);
 
         txtInput.setFocusable(true);
