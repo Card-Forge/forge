@@ -64,8 +64,8 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
             + "body, h1, h2, h3, h4, h5, h6, table, tr, td {font-weight: normal; line-height: 1.4; "
             + "text-decoration: none; font-family: Arial; font-size: 10px; color: #000000; background-color: white;} "
             + " h3 {font-size: 13px; margin: 2px 0; padding: 0px 5px; } "
-            + " h4 {font-size: 11px; margin: 2px 0; padding: 0px 5px; } "
-            + " h5 {font-size: 11px; margin: 2px 0; padding: 0px 5px; } "
+            + " h4 {font-size: 11px; margin: 2px 0; padding: 0px 5px; font-weight: 600;} "
+            + " h5 {font-size: 11px; margin: 2px 0; padding: 0px 5px; font-weight: 600;} "
             + " code {font-size: 10px; color: #000000; background-color: white; } "
             + " ul li {padding: 5px 1px 1px 1px !important; margin: 0 1px !important} "
             + " p {margin: 2px; text-align: justify; padding: 2px 5px;} "
@@ -84,20 +84,18 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
             "<li> <span class=\"knowncard\">%s</span></li>" +
             "<li> <span class=\"unknowncard\">%s</span></li>" +
             "<li> <span class=\"illegalcard\">%s</span></li>" +
-            "<li> <span class=\"invalidcard\">%s</span></li>" +
-            "<li> <span class=\"comment\">%s</span></li></ul>",
+            "<li> <span class=\"invalidcard\">%s</span></li></ul>",
             Localizer.getInstance().getMessage("lblGuideKnownCard"),
             Localizer.getInstance().getMessage("lblGuideUnknownCard"),
             Localizer.getInstance().getMessage("lblGuideIllegalCard"),
-            Localizer.getInstance().getMessage("lblGuideInvalidCard"),
-            Localizer.getInstance().getMessage("lblGuideComment")
+            Localizer.getInstance().getMessage("lblGuideInvalidCard")
             );
     private static final String TIPS_LIST = String.format(
             "<ul><li>%s</li><li>%s</li><li>%s</li><li>%s</li><li>%s</li><li>%s</li></ul>",
             Localizer.getInstance().getMessage("lblGuideTipsCount",
                     String.format("<b>%s</b>", Localizer.getInstance().getMessage("lblGuideTipsTitleCount")),
-                    String.format("<code>%s</code>", "4 Power Sink"),
-                    String.format("<code>%s</code>", "4x Power Sink")),
+                    String.format("<code>%s</code>", "\"4 Power Sink\""),
+                    String.format("<code>%s</code>", "\"4x Power Sink\"")),
             Localizer.getInstance().getMessage("lblGuideTipsSet",
                     String.format("<b>%s</b>", Localizer.getInstance().getMessage("lblGuideTipsTitleSet"))),
             Localizer.getInstance().getMessage("lblGuideTipsCardType",
@@ -111,8 +109,6 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
     );
 
     private static final String EXAMPLES_LIST = String.format(
-//            "<ul><li><code>%s</code></li></ul>" +
-//            "<p class=\"example\">%s</p>" +
             "<ul><li><code>%s</code></li></ul>" +
             "<p class=\"example\">%s</p>" +
             "<ul><li><code>%s</code></li></ul>" +
@@ -121,16 +117,14 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
             "<p class=\"example\">%s</p>" +
             "<ul><li><code>%s</code></li></ul>" +
             "<p class=\"example\">%s</p>",
-//            Localizer.getInstance().getMessage("lblExample1"),
-//            Localizer.getInstance().getMessage("nlExample1"),
+            Localizer.getInstance().getMessage("lblExample1"),
+            Localizer.getInstance().getMessage("nlExample1"),
             Localizer.getInstance().getMessage("lblExample2"),
             Localizer.getInstance().getMessage("nlExample2"),
             Localizer.getInstance().getMessage("lblExample3"),
             Localizer.getInstance().getMessage("nlExample3"),
             Localizer.getInstance().getMessage("lblExample4"),
-            Localizer.getInstance().getMessage("nlExample4"),
-            Localizer.getInstance().getMessage("lblExample5"),
-            Localizer.getInstance().getMessage("nlExample5")
+            Localizer.getInstance().getMessage("nlExample4")
     );
 
     private static final String HTML_WELCOME_TEXT = String.format("<html>"
@@ -225,8 +219,8 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
                 Localizer.getInstance().getMessage("lblSummaryStats"), foreColor));
         this.scrollStats.setViewportBorder(BorderFactory.createLoweredBevelBorder());
 
-        this.add(this.scrollInput, "cell 0 0, w 45%, growy, pushy");
-        this.add(this.scrollOutput, "cell 1 0, w 50%, growy, pushy");
+        this.add(this.scrollInput, "cell 0 0, w 40%, growy, pushy");
+        this.add(this.scrollOutput, "cell 1 0, w 55%, growx, growy, pushx, pushy");
         this.add(this.scrollStats, "cell 2 0, w 50%, wrap, growy, pushy, pushx");
 
         this.add(this.dateTimeCheck, "cell 0 1, w 50%, ax c");
