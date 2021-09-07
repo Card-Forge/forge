@@ -1493,14 +1493,9 @@ public class CardView extends GameEntityView {
             return getType().isArtifact();
         }
         public boolean isNyx() {
-            int count = 0;
-            if (!getType().isEnchantment())
+            if (!getType().isEnchantment() || getType().getCoreTypes() == null)
                 return false;
-            for (CardType.CoreType coreType : getType().getCoreTypes()) {
-                if (coreType.isPermanent)
-                    count += 1;
-            }
-            return count > 1;
+            return Iterables.size(getType().getCoreTypes()) > 1;
         }
     }
 
