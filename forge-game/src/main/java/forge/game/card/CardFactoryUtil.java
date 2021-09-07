@@ -2169,8 +2169,10 @@ public class CardFactoryUtil {
             StringBuilder sb = new StringBuilder();
             sb.append("Event$ Moved | ValidCard$ Card.Self | Origin$ Stack | ExcludeDestination$ Exile ");
             sb.append("| ValidStackSa$ Spell.Flashback | Description$ Flashback");
+            String reminderInsert = "";
 
-            if (keyword.contains(":")) { // K:Flashback:Cost:ExtraParam(Key$Value):ExtraDescription:Cost(for formatting)
+            // K:Flashback:Cost:ExtraParams:ExtraDescription:cost for display:reminder text insert
+            if (keyword.contains(":")) {
                 final String[] k = keyword.split(":");
                 final Cost cost = new Cost(k[1], false);
                 sb.append(cost.isOnlyManaCost() ? " " : "—");
@@ -2193,10 +2195,17 @@ public class CardFactoryUtil {
                         sb.append(". ").append(extraDesc);
                     }
                 }
+                reminderInsert = k.length > 5 ? k[5] : "";
             }
 
             sb.append(" (");
-            sb.append(inst.getReminderText());
+            if (!reminderInsert.isEmpty()) {
+                String reminder = inst.getReminderText();
+                sb.append(reminder, 0, 65).append(" ");
+                sb.append(reminderInsert).append(reminder, 65, 81);
+            } else {
+                sb.append(inst.getReminderText());
+            }
             sb.append(")");
 
             String repeffstr = sb.toString();

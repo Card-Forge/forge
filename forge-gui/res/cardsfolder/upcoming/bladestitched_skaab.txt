@@ -1,0 +1,8 @@
+Name:Bladestitched Skaab
+ManaCost:U B
+Types:Creature Zombie Soldier
+PT:2/3
+S:Mode$ Continuous | Affected$ Zombie.Other+YouCtrl | AddPower$ 1 | Description$ Other Zombies you control get +1/+0.
+SVar:PlayMain1:TRUE
+DeckHints:Type$Zombie
+Oracle:Other Zombies you control get +1/+0.

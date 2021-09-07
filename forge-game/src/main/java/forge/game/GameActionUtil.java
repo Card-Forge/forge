@@ -18,14 +18,10 @@
 package forge.game;
 
 import java.util.List;
+import java.util.Map;
 
+import com.google.common.collect.*;
 import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-import com.google.common.collect.Table;
-import com.google.common.collect.TreeBasedTable;
 
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
@@ -233,21 +229,23 @@ public final class GameActionUtil {
                         if (keyword.contains(":")) {
                             final String[] k = keyword.split(":");
                             flashback.setPayCosts(new Cost(k[1], false));
-                            String extra =  k.length > 2 ? k[2] : "";
-                            if (!extra.isEmpty()) {
-                                String[] parts = extra.split("\\$");
-                                String key = parts[0];
-                                String value = parts[1];
-                                flashback.putParam(key, value);
+                            String extraParams =  k.length > 2 ? k[2] : "";
+                            if (!extraParams.isEmpty()) {
+                                Map<String, String> extraParamMap =
+                                        Maps.newHashMap(AbilityFactory.getMapParams(extraParams));
+                                for (Map.Entry<String, String> param : extraParamMap.entrySet()) {
+                                    flashback.putParam(param.getKey(), param.getValue());
+                                }
                             }
                         }
                         alternatives.add(flashback);
                     } else if (keyword.startsWith("Foretell")) {
                         // Foretell cast only from Exile
-                        if (!source.isInZone(ZoneType.Exile) || !source.isForetold() || source.isForetoldThisTurn() || !activator.equals(source.getOwner())) {
+                        if (!source.isInZone(ZoneType.Exile) || !source.isForetold() || source.isForetoldThisTurn() ||
+                                !activator.equals(source.getOwner())) {
                             continue;
                         }
-                        // skip this part for fortell by external source
+                        // skip this part for foretell by external source
                         if (keyword.equals("Foretell")) {
                             continue;
                         }

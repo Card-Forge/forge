@@ -1492,6 +1492,11 @@ public class CardView extends GameEntityView {
         public boolean isArtifact() {
             return getType().isArtifact();
         }
+        public boolean isNyx() {
+            if (!getType().isEnchantment() || getType().getCoreTypes() == null)
+                return false;
+            return Iterables.size(getType().getCoreTypes()) > 1;
+        }
     }
 
     //special methods for updating card and player properties as needed and returning the new collection
