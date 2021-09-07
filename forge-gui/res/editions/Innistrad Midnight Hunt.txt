@@ -12,43 +12,81 @@ Prerelease=6 Boosters, 1 RareMythic+
 [cards]
 3 U Beloved Beggar @Francisco Miyara
 7 R Brutal Cathar @Karl Kopinski
+8 C Candlegrove Witch @Anna Christenson
 9 C Candletrap @Manuel Castañón
+12 C Celestus Sanctifier @Irina Nordsol
 17 M Enduring Angel @Irina Nordsol
+20 U Gavony Dawnguard @Micah Epstein
+23 C Hedgewitch's Mask @Ovidio Cartagena
+30 C Ritual Guardian @Denman Rooke
+36 C Sungold Barrage @Leanna Crossan
 40 C Unruly Mob @Ryan Pancoast
 42 C Baithook Angler @Uriah Voth
 44 C Consider @Zezhou Chen
+49 U Dissipate @David Palumbo
 65 U Ominous Roost @Josu Hernaiz
+71 M Poppet Stitcher @Simon Dominic
 73 C Secrets of the Key @Alix Branwyn
+76 R Sludge Monster @Svetlin Velinov
 79 C Stormrider Spirit @Lake Hurwitz
 81 R Triskaidekaphile @Slawomir Maniak
 84 C Arrogant Outlaw @Aurore Folny
 91 R Champion of the Perished @Kekai Kotaki
+94 R Curse of Leeches @Uriah Voth
 95 C Defenestrate @Darek Zabrocki
 101 U Foul Play @Campbell White
+103 R Gisa, Glorious Resurrector @Yongjae Choi
+104 R Graveyard Trespasser @Chris Rallis
+106 C Hobbling Zombie @Josh Hass
 107 U Infernal Grasp @Naomi Baker
 108 R Jadar, Ghoulcaller of Nephalia @Yongjae Choi
 130 C Brimstone Vandal @Andreas Zafiratos
-134 R Curse of Shaken Faith
+134 R Curse of Shaken Faith @Campbell White
 138 C Famished Foragers @Lorenzo Mastroianni
 140 C Festival Crasher @Milivoj Ćeran
-142 R Giestflame Reservoir @Anna Christenson
+141 U Flame Channeler @Véronique Meignaud
+142 R Geistflame Reservoir @Anna Christenson
+144 C Immolation @Olena Richards
 146 R Light Up the Night @Wei Wei
+147 U Lunar Frenzy @Alix Branwyn
 154 U Play with Fire @Svetlin Velinov
 163 C Tavern Ruffian @Zoltan Boros
-164 C Thermo-Alchemist @Raymond Swanland
+164 U Thermo-Alchemist @Raymond Swanland
 165 U Village Watch @Nestor Ossandon Leal
+166 U Voldaren Ambusher @Evyn Fong
+168 R Augur of Autumn @Billy Christian
 175 C Candlelit Cavalry @Viko Menezes
+176 U Clear Shot @Craig J Spearing
+178 U Contortionist Troupe @Jesper Ejsing
 180 C Dawnhart Rejuvenator @Darren Tan
+182 U Defend the Celestus @Andrey Kuzinskiy
 188 C Howl of the Hunt @Josu Hernaiz
 189 C Might of the Old Ways @Zezhou Chen
 192 C Pestilent Wolf @Oriana Menendez
+197 R Saryth, the Viper's Fang @Igor Kieryluk
 199 C Snarling Wolf @Ilse Gort
+205 U Turn the Earth @Alayna Danner
+206 R Unnatural Growth @Svetlin Velinov
 208 M Wrenn and Seven @Heonhwa Choe
 211 M Arlinn, the Pack's Hope @Anna Steinbauer
+212 U Bladestitched Skaab @Dave Kendall
+214 U Corpse Cobble @Ravenna Tran
+215 R Croaking Counterpart @Yeong-Hao Han
+218 U Devoted Grafkeeper @Raoul Vitale
+220 U Diregraf Rebirth @Irina Nordsol
+221 U Faithful Mending @Caroline Gariba
+222 U Fleshtaker @Kev Walker
 224 R Galvanic Iteration @Johann Bodin
+225 R Ghoulcaller's Harvest @Anna Steinbauer
 229 U Join the Dance @Raoul Vitale
+231 U Kessig Naturalist @Johan Grenier
+232 R Liesa, Forgotten Archangel @Dmitry Burmak
+236 R Rite of Harmony @Rovina Cai
 240 M Sigarda, Champion of Light @Howard Lyon
 246 R Tovolar, Dire Overlord @Chris Rahn
+249 U Vampire Socialite @Suzanne Helmigh
+252 R The Celestus @Jonas De Ro
+257 R Pithing Needle @Ovidio Cartagena
 260 R Deserted Beach @Jonas De Ro
 263 R Haunted Ridge @Jonas De Ro
 265 R Overgrown Farmland @Jonas De Ro
@@ -71,18 +109,34 @@ Prerelease=6 Boosters, 1 RareMythic+
 283 R Overgrown Farmland @Donato Giancola
 284 R Rockfall Vale @Piotr Dura
 285 R Shipwreck Marsh @Steven Belledin
+286 R Brutal Cathar @Steve Ellis
+287 C Candlegrove Witch @Brigitte Roka
+290 R Graveyard Trespasser @Tyler Crook
 296 C Tavern Ruffian @Michael Walsh
 297 U Village Watch @Andrea De Dominicis
-304 R Saryth, the Viper's Fang
+301 C Dawnhart Rejuvenator @Cabrol
+304 R Saryth, the Viper's Fang @Tyler Crook
 307 M Arlinn, the Pack's Hope @Emma Rios
+310 U Kessig Naturalist @Rafael Albuquerque
 311 R Tovolar, Dire Overlord @Michael Walsh
+314 R Gisa, Glorious Resurrector @Cabrol
 315 R Jadar, Ghoulcaller of Nephalia @DZO
+319 R Liesa, Forgotten Archangel @Evan Cagle
 323 M Sigarda, Champion of Light @N.C. Winters
-355 R Giestflame Reservoir @Anna Christenson
+326 R Curse of Silence @Irina Nordsol
+327 M Enduring Angel @Irina Nordsol
+344 R Champion of the Perished @Kekai Kotaki
+345 R Curse of Leeches @Uriah Voth
+355 R Geistflame Reservoir @Anna Christenson
 356 R Light Up the Night @Wei Wei
+365 R Unnatural Growth @Svetlin Velinov
 368 R Can't Stay Away @Milivoj Ćeran
+369 R Croaking Counterpart @Yeong-Hao Han
 371 R Galvanic Iteration @Johann Bodin
-374 R Rite of Harmony
+372 R Ghoulcaller's Harvest @Anna Steinbauer
+374 R Rite of Harmony @Rovina Cai
+377 R The Celestus @Jonas De Ro
+378 R Pithing Needle @Ovidio Cartagena
 380 L Plains @Andreas Rocha
 381 L Island @Andreas Rocha
 382 L Swamp @Kasia 'Kafis' Zielińska
@@ -90,6 +144,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 384 L Forest @Andreas Rocha
 385 R Champion of the Perished @Daarken
 386 R Triskaidekaphile @Mathias Kollros
+387 U Gavony Dawnguard @Micah Epstein
 388 C Consider @Zezhou Chen
 389 U Infernal Grasp @Naomi Baker
 390 U Play with Fire @Svetlin Velinov

@@ -15,4 +15,12 @@ ScryfallCode=MIC
 35 R Curse of Obsession @Irvin Rodriguez
 36 R Visions of Ruin @Andrew Mar
 37 R Visions of Dominance @Andrew Mar
+39 M Leinore, Autumn Sovereign @Fariba Khamseh
 40 R Wilhelt, the Rotcleaver @Chris Rallis
+69 M Avacyn's Memorial @Kasia 'Kafis' Zielińska
+70 R Visions of Glory @Alexander Mokhov
+71 R Visions of Duplicity @Alexander Mokhov
+72 R Visions of Dread @Andrew Mar
+73 R Curse of Obsession @Irvin Rodriguez
+74 R Visions of Ruin @Andrew Mar
+75 R Visions of Dominance @Andrew Mar

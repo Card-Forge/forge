@@ -1,0 +1,24 @@
+Name:Flame Channeler
+ManaCost:1 R
+Types:Creature Human Wizard
+PT:2/2
+T:Mode$ DamageDoneOnce | ValidSource$ Spell.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ When a spell you control deals damage, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+AlternateMode:DoubleFaced
+Oracle:When a spell you control deals damage, transform Flame Channeler.
+
+ALTERNATE
+
+Name:Embodiment of Flame
+ManaCost:no cost
+Colors:red
+Types:Creature Elemental Wizard
+PT:3/3
+T:Mode$ DamageDoneOnce | ValidSource$ Spell.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a spell you control deals damage, put a flame counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ FLAME | CounterNum$ 1
+A:AB$ Dig | Cost$ 1 SubCounter<1/FLAME> | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | Defined$ You | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top card of your library. You may play that card this turn.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ EffSModeContinuous | ExileOnMoved$ Exile | RememberObjects$ Remembered | SubAbility$ DBCleanup
+SVar:EffSModeContinuous:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | MayPlay$ True | AffectedZone$ Exile | Description$ You may play that card this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Counters
+Oracle:Whenever a spell you control deals damage, put a flame counter on Embodiment of Flame.\n{1}, Remove a flame counter from Embodiment of Flame: Exile the top card of your library. You may play that card this turn.
