@@ -444,8 +444,8 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
                         cardTypeStats.add(currentKeySection, coreTypeName, tokenNumber);
                     }
                     // update rarity stats
-                    if (!t.getCard().isVeryBasicLand())
-                        rarityStats.add(currentKeySection, t.getCard().getRarity().name(), tokenNumber);
+                    rarityStats.add(currentKeySection, t.getCard().getRarity().name(), tokenNumber);
+
                     // update colour stats
                     if (!t.getCard().getRules().getType().isLand()) {
                         String manaCost = String.format("CMC %d", t.getCard().getRules().getManaCost().getCMC());
