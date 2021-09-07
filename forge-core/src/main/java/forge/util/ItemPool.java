@@ -273,4 +273,10 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
     public void clear() {
         items.clear();
     }
+
+    @Override
+    public boolean equals(final Object obj) {
+        return (obj instanceof ItemPool) &&
+                (this.items.equals(((ItemPool)obj).items));
+    }
 }
