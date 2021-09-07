@@ -59,6 +59,7 @@ ScryfallCode=PRM
 62525 S Doom Blade @Raymond Swanland
 61058 S Doomsday @Joseph Meehan
 60482 S Dread Return @Svetlin Velinov
+88296 S Drown in Sorrow @Valera Lutfullina
 46873 S Dryad Militant @Ryan Pancoast
 47983 S Duplicant @Marco Nelor
 59647 S Elspeth, Sun's Champion @Tyler Jacobson
