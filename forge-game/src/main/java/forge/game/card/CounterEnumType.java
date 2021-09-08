@@ -263,6 +263,8 @@ public enum CounterEnumType {
 
     QUEST("QUEST", 251, 189, 0),
 
+    RITUAL("RITUAL", 155, 17, 30),
+
     RUST("RUST", 255, 181, 116),
 
     SCREAM("SCREM", 0, 220, 255),
