@@ -15,31 +15,40 @@ Prerelease=6 Boosters, 1 RareMythic+
 8 C Candlegrove Witch @Anna Christenson
 9 C Candletrap @Manuel Castañón
 12 C Celestus Sanctifier @Irina Nordsol
+13 U Chaplain of Alms @Anastasia Ovchinnikova
 17 M Enduring Angel @Irina Nordsol
 20 U Gavony Dawnguard @Micah Epstein
 23 C Hedgewitch's Mask @Ovidio Cartagena
+26 U Loyal Gryff @Ilse Gort
 30 C Ritual Guardian @Denman Rooke
 36 C Sungold Barrage @Leanna Crossan
 40 C Unruly Mob @Ryan Pancoast
 42 C Baithook Angler @Uriah Voth
 44 C Consider @Zezhou Chen
 49 U Dissipate @David Palumbo
+57 R Grafted Identity @Manuel Castañón
+64 U Neblegast Intruder @Volkan Baǵa
 65 U Ominous Roost @Josu Hernaiz
 71 M Poppet Stitcher @Simon Dominic
 73 C Secrets of the Key @Alix Branwyn
 76 R Sludge Monster @Svetlin Velinov
+77 M Spectral Adversary @Uriah Voth
+78 C Startle @Craig J Spearing
 79 C Stormrider Spirit @Lake Hurwitz
 81 R Triskaidekaphile @Slawomir Maniak
 84 C Arrogant Outlaw @Aurore Folny
+85 U Baneblade Scoundrel @Marta Nael
 91 R Champion of the Perished @Kekai Kotaki
 94 R Curse of Leeches @Uriah Voth
 95 C Defenestrate @Darek Zabrocki
 101 U Foul Play @Campbell White
 103 R Gisa, Glorious Resurrector @Yongjae Choi
 104 R Graveyard Trespasser @Chris Rallis
+105 U Heirloom Mirror @Josh Hass
 106 C Hobbling Zombie @Josh Hass
 107 U Infernal Grasp @Naomi Baker
 108 R Jadar, Ghoulcaller of Nephalia @Yongjae Choi
+124 M Tainted Adversary @Tuan Duong Chu
 130 C Brimstone Vandal @Andreas Zafiratos
 134 R Curse of Shaken Faith @Campbell White
 138 C Famished Foragers @Lorenzo Mastroianni
@@ -49,12 +58,15 @@ Prerelease=6 Boosters, 1 RareMythic+
 144 C Immolation @Olena Richards
 146 R Light Up the Night @Wei Wei
 147 U Lunar Frenzy @Alix Branwyn
+149 M Moonveil Regent @Joshua Raphael
 154 U Play with Fire @Svetlin Velinov
 163 C Tavern Ruffian @Zoltan Boros
 164 U Thermo-Alchemist @Raymond Swanland
 165 U Village Watch @Nestor Ossandon Leal
 166 U Voldaren Ambusher @Evyn Fong
 168 R Augur of Autumn @Billy Christian
+172 R Briarbridge Tracker @Mathias Kollros
+174 U Burly Breaker @Justine Cruz
 175 C Candlelit Cavalry @Viko Menezes
 176 U Clear Shot @Craig J Spearing
 178 U Contortionist Troupe @Jesper Ejsing
@@ -70,6 +82,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 208 M Wrenn and Seven @Heonhwa Choe
 211 M Arlinn, the Pack's Hope @Anna Steinbauer
 212 U Bladestitched Skaab @Dave Kendall
+213 R Can't Stay Away @Milivoj Ćeran
 214 U Corpse Cobble @Ravenna Tran
 215 R Croaking Counterpart @Yeong-Hao Han
 218 U Devoted Grafkeeper @Raoul Vitale
@@ -78,9 +91,11 @@ Prerelease=6 Boosters, 1 RareMythic+
 222 U Fleshtaker @Kev Walker
 224 R Galvanic Iteration @Johann Bodin
 225 R Ghoulcaller's Harvest @Anna Steinbauer
+226 U Hungry for More @Bastien L. Deharme
 229 U Join the Dance @Raoul Vitale
 231 U Kessig Naturalist @Johan Grenier
 232 R Liesa, Forgotten Archangel @Dmitry Burmak
+234 R Old Stickfingers @Jehan Choo
 236 R Rite of Harmony @Rovina Cai
 240 M Sigarda, Champion of Light @Howard Lyon
 246 R Tovolar, Dire Overlord @Chris Rahn
@@ -111,9 +126,11 @@ Prerelease=6 Boosters, 1 RareMythic+
 285 R Shipwreck Marsh @Steven Belledin
 286 R Brutal Cathar @Steve Ellis
 287 C Candlegrove Witch @Brigitte Roka
+289 U Baneblade Scoundrel @Andrea De Dominicis
 290 R Graveyard Trespasser @Tyler Crook
 296 C Tavern Ruffian @Michael Walsh
 297 U Village Watch @Andrea De Dominicis
+299 U Burly Breaker @Sami Makkonen
 301 C Dawnhart Rejuvenator @Cabrol
 304 R Saryth, the Viper's Fang @Tyler Crook
 307 M Arlinn, the Pack's Hope @Emma Rios
@@ -122,13 +139,19 @@ Prerelease=6 Boosters, 1 RareMythic+
 314 R Gisa, Glorious Resurrector @Cabrol
 315 R Jadar, Ghoulcaller of Nephalia @DZO
 319 R Liesa, Forgotten Archangel @Evan Cagle
+321 R Old Stickfingers @DZO
 323 M Sigarda, Champion of Light @N.C. Winters
 326 R Curse of Silence @Irina Nordsol
 327 M Enduring Angel @Irina Nordsol
+335 R Grafted Identity @Manuel Castañón
+339 M Poppet Stitcher @Simon Dominic
+341 M Spectral Adversary @Uriah Voth
 344 R Champion of the Perished @Kekai Kotaki
 345 R Curse of Leeches @Uriah Voth
+350 M Tainted Adversary @Tuan Duong Chu
 355 R Geistflame Reservoir @Anna Christenson
 356 R Light Up the Night @Wei Wei
+361 R Briarbridge Tracker @Mathias Kollros
 365 R Unnatural Growth @Svetlin Velinov
 368 R Can't Stay Away @Milivoj Ćeran
 369 R Croaking Counterpart @Yeong-Hao Han
