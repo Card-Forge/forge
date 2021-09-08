@@ -57,7 +57,7 @@ public class CostPayLife extends CostPart {
         if (desc != null) {
             sb.append(desc);
         } else {
-            sb.append(this.getAmount()).append(" Life");
+            sb.append(this.getAmount()).append(" life");
         }
         return sb.toString();
     }
