@@ -1,0 +1,14 @@
+Name:Geistflame Reservoir
+ManaCost:2 R
+Types:Artifact
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCharge | TriggerDescription$ Whenever you cast an instant or sorcery spell, put a charge counter on CARDNAME.
+SVar:TrigCharge:DB$ PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1
+A:AB$ DealDamage | Cost$ 1 R T SubCounter<X/CHARGE> | NumDmg$ X | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | SpellDescription$ It deals that much damage to any target.
+SVar:X:Count$xPaid
+A:AB$ Dig | Cost$ 1 R T | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | AILogic$ ExileAndPlayUntilEOT | StackDescription$ SpellDescription | SpellDescription$ Exile the top card of your library. You may play that card this turn.
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | SubAbility$ DBCleanup | ExileOnMoved$ Exile
+SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play this card this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Counters
+DeckHints:Type$Instant|Sorcery
+Oracle:Whenever you cast an instant or sorcery spell, put a charge counter on Geistflame Reservoir.\n{1}{R}, {T}, Remove any number of charge counters from Geistflame Reservoir: It deals that much damage to any target.\n{1}{R}, {T}: Exile the top card of your library. You may play that card this turn.
