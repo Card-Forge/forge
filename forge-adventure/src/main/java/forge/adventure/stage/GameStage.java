@@ -116,11 +116,11 @@ public abstract class GameStage extends Stage {
             }
             player.setMovementDirection(diff);
         }
-
+/*
         if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT))
             player.setMoveModifier(20);
         else
-            player.setMoveModifier(1);
+            player.setMoveModifier(1);*/
 
         camera.position.x = Math.min(Math.max(Scene.GetIntendedWidth() / 2, player.pos().x), getViewport().getWorldWidth() - Scene.GetIntendedWidth() / 2);
         camera.position.y = Math.min(Math.max(Scene.GetIntendedHeight() / 2, player.pos().y), getViewport().getWorldHeight() - Scene.GetIntendedHeight() / 2);
@@ -274,9 +274,57 @@ public abstract class GameStage extends Stage {
         stop();
     }
 
-    public  Vector2 adjustMovement(Vector2 pos, Vector2 direction, Rectangle boundingRect)
+    public  boolean isColliding(Rectangle boundingRect)
     {
-        return direction;
+        return false;
+    }
+    public  void prepareCollision(Vector2 pos, Vector2 direction, Rectangle boundingRect)
+    {
     }
 
+    public Vector2 adjustMovement( Vector2 direction, Rectangle boundingRect)
+    {
+        Vector2 adjDirX=direction.cpy();
+        Vector2 adjDirY=direction.cpy();
+        boolean foundX=false;
+        boolean foundY=false;
+        while(true)
+        {
+
+            if(!isColliding(new Rectangle(boundingRect.x+adjDirX.x,boundingRect.y+adjDirX.y, boundingRect.width, boundingRect.height)))
+            {
+                foundX=true;
+                break;
+            }
+            if(adjDirX.x==0)
+                break;
+
+            if(adjDirX.x>=0)
+                adjDirX.x=Math.round(Math.max(0,adjDirX.x-1));
+            else
+                adjDirX.x=Math.round(Math.max(0,adjDirX.x+1));
+        }
+        while(true)
+        {
+            if(!isColliding(new Rectangle(boundingRect.x+adjDirY.x,boundingRect.y+adjDirY.y, boundingRect.width, boundingRect.height)))
+            {
+                foundY=true;
+                break;
+            }
+            if(adjDirY.y==0)
+                break;
+
+            if(adjDirY.y>=0)
+                adjDirY.y=Math.round(Math.max(0,adjDirY.y-1));
+            else
+                adjDirY.y=Math.round(Math.max(0,adjDirY.y+1));
+        }
+        if(foundY&&foundX)
+            return adjDirX.len()>adjDirY.len()?adjDirX:adjDirY;
+        else if(foundY)
+            return adjDirY;
+        else if(foundX)
+            return adjDirX;
+        return Vector2.Zero.cpy();
+    }
 }

@@ -92,7 +92,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             case Gold:
             {
 
-                TextureAtlas atlas=Res.CurrentRes.getAtlas("sprites/items.atlas");
+                TextureAtlas atlas= Config.instance().getAtlas("sprites/items.atlas");
                 Sprite backSprite=atlas.createSprite("CardBack");
                 Pixmap drawingMap=new Pixmap((int)backSprite.getWidth(),(int)backSprite.getHeight(), Pixmap.Format.RGBA8888);
 
@@ -108,7 +108,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             }
             case Life:
             {
-                TextureAtlas atlas = Res.CurrentRes.getAtlas("sprites/items.atlas");
+                TextureAtlas atlas = Config.instance().getAtlas("sprites/items.atlas");
                 Sprite backSprite = atlas.createSprite("CardBack");
                 Pixmap drawingMap = new Pixmap((int) backSprite.getWidth(), (int) backSprite.getHeight(), Pixmap.Format.RGBA8888);
 

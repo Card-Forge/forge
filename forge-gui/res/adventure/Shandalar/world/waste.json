@@ -19,10 +19,10 @@
     "resolution": 5, 
     }
     ],
-		"width": 0.95,
-		"height": 0.95,
+		"width": 0.85,
+		"height": 0.85,
 		"color": "aeaeae",
     "spriteNames":[ "WasteTree","Stone","WasteRock"]  ,
-    "enemies":[ "Golem"]  ,
+    "enemies":[ "Golem","ClayGolem","Black Wiz1","White Wiz1","Blue Wiz1","Red Wiz1","Green Wiz1"]  ,
     "pointsOfInterest":[ "WasteTown"]
 }

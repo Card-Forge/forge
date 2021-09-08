@@ -168,7 +168,7 @@ public class UIActor extends Group {
         for (ObjectMap.Entry property : entries) {
             switch (property.key.toString()) {
                 case "image":
-                    newActor.setDrawable(new TextureRegionDrawable(new Texture(Res.CurrentRes.GetFile(property.value.toString()))));
+                    newActor.setDrawable(new TextureRegionDrawable(new Texture(Config.instance().getFile(property.value.toString()))));
                     break;
             }
         }

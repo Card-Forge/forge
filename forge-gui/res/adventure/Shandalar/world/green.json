@@ -19,10 +19,10 @@
     "resolution": 10, 
     }
     ],
-		"width": 0.5,
-		"height": 0.5,
+		"width": 0.7,
+		"height": 0.7,
 		"color": "59a650"  ,
     "spriteNames":[ "WoodTree","WoodTree2","Bush","Stump","Moss","Stone","Flower","Wood"]      ,
-    "enemies":[ "Goblin"]  ,
-    "pointsOfInterest":[ "WasteTown"]
+    "enemies":[ "Elf","Elf warrior","High Elf","Dino","Snake","Hydra","Bear","Spider","Green Wiz1"]  ,
+    "pointsOfInterest":[ "ForestTown"]
 }

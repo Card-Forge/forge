@@ -1,11 +1,11 @@
 {
-"width": 2000,
-"height": 2000,
+"width": 700,
+"height": 700,
 "playerStartPosY": 0.5,
 "playerStartPosX": 0.5,    
 "noiseZoomBiom": 30, 
 "tileSize": 16,      
-"maxRoadDistance": 300,
+"maxRoadDistance": 1000,
 "roadTileset":{ 
     "tilesetName":"Road",
     "tilesetAtlas":"world/tilesets/Terrain.atlas", 

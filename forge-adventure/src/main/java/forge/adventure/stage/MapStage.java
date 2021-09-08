@@ -19,7 +19,7 @@ import forge.adventure.data.WorldData;
 import forge.adventure.scene.DuelScene;
 import forge.adventure.scene.RewardScene;
 import forge.adventure.scene.SceneType;
-import forge.adventure.util.Res;
+import forge.adventure.util.Config;
 import forge.adventure.util.Reward;
 import forge.adventure.world.PointOfInterestChanges;
 import forge.adventure.world.WorldSave;
@@ -71,13 +71,23 @@ public class MapStage extends GameStage {
         foregroundSprites.addActor(newActor);
     }
     @Override
-    public Vector2 adjustMovement(Vector2 pos, Vector2 direction, Rectangle boundingRect)
+    public boolean isColliding( Rectangle adjustedboundingRect)
     {
-        Array<Rectangle> rectangles=new Array<>();
-        Vector2 adjDirX=direction.cpy();
-        Vector2 adjDirY=direction.cpy();
-        boolean foundX=false;
-        boolean foundY=false;
+        for(Rectangle collision:currentCollidingRectangles)
+        {
+            if(collision.overlaps(adjustedboundingRect))
+            {
+                return true;
+            }
+        }
+        return false;
+
+    }
+    final Array<Rectangle> currentCollidingRectangles=new Array<>();
+    @Override
+    public void prepareCollision(Vector2 pos, Vector2 direction, Rectangle boundingRect)
+    {
+        currentCollidingRectangles.clear();
         int x1= (int) (Math.min(boundingRect.x,boundingRect.x+direction.x)/tileWidth);
         int y1= (int) (Math.min(boundingRect.y,boundingRect.y+direction.y)/tileHeight);
         int x2= (int) (Math.min(boundingRect.x+boundingRect.width,boundingRect.x+boundingRect.width+direction.x)/tileWidth);
@@ -91,67 +101,9 @@ public class MapStage extends GameStage {
                 {
                     continue;
                 }
-                rectangles.addAll(collision[x][y]);
+                currentCollidingRectangles.addAll(collision[x][y]);
             }
         }
-
-        while(true)
-        {
-            boolean wasColliding=false;
-            Rectangle adjustedboundingRect=new Rectangle(boundingRect.x+adjDirX.x,boundingRect.y+adjDirX.y, boundingRect.width, boundingRect.height);
-            for(Rectangle collision:rectangles)
-            {
-                if(collision.overlaps(adjustedboundingRect))
-                {
-                    wasColliding=true;
-                    break;
-                }
-            }
-            if(!wasColliding)
-            {
-                foundX=true;
-                break;
-            }
-            if(adjDirX.x==0)
-                break;
-
-            if(adjDirX.x>=0)
-                adjDirX.x=Math.round(Math.max(0,adjDirX.x-1));
-            else
-                adjDirX.x=Math.round(Math.max(0,adjDirX.x+1));
-        }
-        while(true)
-        {
-            boolean wasColliding=false;
-            Rectangle adjRect=new Rectangle(boundingRect.x+adjDirY.x,boundingRect.y+adjDirY.y, boundingRect.width, boundingRect.height);
-            for(Rectangle collision:rectangles)
-            {
-                if(collision.overlaps(adjRect))
-                {
-                    wasColliding=true;
-                    break;
-                }
-            }
-            if(!wasColliding)
-            {
-                foundY=true;
-                break;
-            }
-            if(adjDirY.y==0)
-                break;
-
-            if(adjDirY.y>=0)
-                adjDirY.y=Math.round(Math.max(0,adjDirY.y-1));
-            else
-                adjDirY.y=Math.round(Math.max(0,adjDirY.y+1));
-        }
-        if(foundY&&foundX)
-            return adjDirX.len()>adjDirY.len()?adjDirX:adjDirY;
-        else if(foundY)
-            return adjDirY;
-        else if(foundX)
-            return adjDirX;
-        return Vector2.Zero.cpy();
     }
 
 
@@ -250,6 +202,7 @@ public class MapStage extends GameStage {
     }
 
     private void loadObjects(MapLayer layer,String sourceMap) {
+        player.setMoveModifier(2);
         for (MapObject obj : layer.getObjects()) {
 
             MapProperties prop=obj.getProperties();
@@ -302,14 +255,14 @@ public class MapStage extends GameStage {
                         Array<Reward> ret=new Array<Reward>();
                         for(RewardData rdata:data.rewards)
                         {
-                            ret.addAll(rdata.generate());
+                            ret.addAll(rdata.generate(false));
                         }
                         ShopActor actor=new ShopActor(this,id,ret);
                         addMapActor(obj,actor);
                         if(prop.containsKey("signYOffset")&&prop.containsKey("signXOffset"))
                         {
                             try {
-                                TextureSprite sprite=new TextureSprite(Res.CurrentRes.getAtlas(data.spriteAtlas).createSprite(data.sprite));
+                                TextureSprite sprite=new TextureSprite(Config.instance().getAtlas(data.spriteAtlas).createSprite(data.sprite));
                                 sprite.setX(actor.getX()+Float.parseFloat(prop.get("signXOffset").toString()));
                                 sprite.setY(actor.getY()+Float.parseFloat(prop.get("signYOffset").toString()));
                                 addMapActor(sprite);

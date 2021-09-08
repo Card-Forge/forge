@@ -1,11 +1,7 @@
 package forge.adventure.data;
 
-import com.badlogic.gdx.utils.Array;
-import forge.adventure.util.Res;
+import forge.adventure.util.CardUtil;
 import forge.deck.Deck;
-import forge.deck.io.DeckSerializer;
-
-import java.io.File;
 
 public class EnemyData {
     public String name;
@@ -15,12 +11,33 @@ public class EnemyData {
     public float difficulty;
     public float speed;
     public int life;
-    public Array<RewardData> rewards;
+    public RewardData[] rewards;
 
-    private Deck deckObj;
-    public Deck getDeck() {
-        if(deckObj==null)
-            deckObj= DeckSerializer.fromFile(new File(Res.CurrentRes.GetFilePath(deck)));
-        return deckObj;
+    public EnemyData()
+    {
+
+    }
+    public EnemyData(EnemyData enemyData) {
+        name        =enemyData.name;
+        sprite      =enemyData.sprite;
+        deck        =enemyData.deck;
+        spawnRate   =enemyData.spawnRate;
+        difficulty  =enemyData.difficulty ;
+        speed       =enemyData.speed;
+        life        =enemyData.life;
+        if(enemyData.rewards==null)
+        {
+            rewards=null;
+        }
+        else
+        {
+            rewards     =new RewardData[enemyData.rewards.length];
+            for(int i=0;i<rewards.length;i++)
+                rewards[i]=new RewardData(enemyData.rewards[i]);
+        }
+    }
+
+    public Deck generateDeck() {
+        return CardUtil.getDeck(deck);
     }
 }

@@ -79,7 +79,9 @@ public class SpritesDataMap implements Serializable {
         mapObjects[chunkX][chunkY].add(new Pair<>(vector2, key));
     }
 
-    public List<Pair<Vector2, Integer>> positions(int chunkX, int chunky) {
-        return mapObjects[chunkX][chunky];
+    public List<Pair<Vector2, Integer>> positions(int chunkX, int chunkY) {
+        if (chunkX >= numberOfChunks || chunkY >= numberOfChunks || chunkX < 0 || chunkY < 0)
+            return new ArrayList<>();
+        return mapObjects[chunkX][chunkY];
     }
 }

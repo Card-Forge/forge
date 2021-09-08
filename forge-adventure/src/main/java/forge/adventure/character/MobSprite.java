@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
 import forge.adventure.data.EnemyData;
 import forge.adventure.data.RewardData;
+import forge.adventure.util.Current;
 import forge.adventure.util.Reward;
 
 public class MobSprite extends CharacterSprite {
@@ -41,7 +42,7 @@ public class MobSprite extends CharacterSprite {
             return ret;
         for(RewardData rdata:data.rewards)
         {
-            ret.addAll(rdata.generate(data.getDeck()!=null?data.getDeck().getMain().toFlatList():null));
+            ret.addAll(rdata.generate(false,Current.latestDeck()!=null? Current.latestDeck().getMain().toFlatList():null));
         }
         return ret;
     }

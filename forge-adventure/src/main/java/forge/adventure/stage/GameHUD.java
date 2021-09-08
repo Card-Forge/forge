@@ -13,7 +13,7 @@ import forge.adventure.AdventureApplicationAdapter;
 import forge.adventure.scene.Scene;
 import forge.adventure.scene.SceneType;
 import forge.adventure.util.Current;
-import forge.adventure.util.Res;
+import forge.adventure.util.Config;
 import forge.adventure.util.UIActor;
 import forge.adventure.world.AdventurePlayer;
 import forge.adventure.world.WorldSave;
@@ -36,7 +36,7 @@ public class GameHUD extends Stage {
         gameStage = gstage;
         stageViewport = new FitViewport(Scene.GetIntendedWidth(), Scene.GetIntendedHeight());
 
-        ui = new UIActor(Res.CurrentRes.GetFile("ui/hud.json"));
+        ui = new UIActor(Config.instance().getFile("ui/hud.json"));
         miniMap = ui.findActor("map");
 
         Pixmap player = new Pixmap(3, 3, Pixmap.Format.RGB888);

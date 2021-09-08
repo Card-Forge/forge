@@ -11,12 +11,15 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Json;
 import forge.adventure.data.*;
 import forge.adventure.scene.Scene;
+import forge.adventure.util.Config;
+import forge.adventure.util.Paths;
 import forge.adventure.util.SaveFileContent;
 import forge.adventure.util.Serializer;
 import javafx.util.Pair;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
@@ -61,7 +64,7 @@ public class World implements  Disposable, SaveFileContent {
     @Override
     public void readFromSaveFile(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
 
-        FileHandle handle = forge.adventure.util.Res.CurrentRes.GetFile("world/world.json");
+        FileHandle handle = Config.instance().getFile(Paths.World);
         String rawJson = handle.readString();
         data = (new Json()).fromJson(WorldData.class, rawJson);
 
@@ -197,7 +200,7 @@ public class World implements  Disposable, SaveFileContent {
 
     public World generateNew(long seed) {
 
-        FileHandle handle = forge.adventure.util.Res.CurrentRes.GetFile("world/world.json");
+        FileHandle handle = Config.instance().getFile(Paths.World);
         String rawJson = handle.readString();
         data = (new Json()).fromJson(WorldData.class, rawJson);
         if(seed==0)
@@ -215,7 +218,6 @@ public class World implements  Disposable, SaveFileContent {
         biomMap = new long[width][height];
         terrainMap= new int[width][height];
         Pixmap pix = new Pixmap(width, height, Pixmap.Format.RGB888);
-        Pixmap noisePix = new Pixmap(width, height, Pixmap.Format.RGB888);
 
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
@@ -287,14 +289,19 @@ public class World implements  Disposable, SaveFileContent {
         mapPoiIds = new PointOfIntrestMap(GetChunkSize(), data.tileSize, data.width / GetChunkSize(),data.height / GetChunkSize());
         List<PointOfInterest> towns = new ArrayList<>();
         List<Rectangle> otherPoints = new ArrayList<>();
-        otherPoints.add(new Rectangle(((float)data.width*data.playerStartPosX*(float)data.tileSize)-data.tileSize*10f,((float)data.height*data.playerStartPosY*data.tileSize)-data.tileSize*10f,data.tileSize*20,data.tileSize*20));
+        otherPoints.add(new Rectangle(((float)data.width*data.playerStartPosX*(float)data.tileSize)-data.tileSize*5,((float)data.height*data.playerStartPosY*data.tileSize)-data.tileSize*5,data.tileSize*10,data.tileSize*10));
+        int biomIndex2=-1;
         for (BiomData biom : data.GetBioms()) {
+            biomIndex2++;
             for (PointOfInterestData poi : biom.getPointsOfIntrest()) {
                 for (int i = 0; i < poi.count; i++) {
-                    for (int counter = 0; counter < 100; counter++)//tries 100 times to find a free point
+                    for (int counter = 0; counter < 500; counter++)//tries 100 times to find a free point
                     {
-
-                        float radius = (float) Math.sqrt((random.nextDouble() * poi.radiusFactor) + poi.radiusOffset);
+                        if(counter==499)
+                        {
+                            System.err.print("## Can not place POI "+poi.name+" ##");
+                        }
+                        float radius = (float) Math.sqrt(((random.nextDouble())/2 * poi.radiusFactor));
                         float theta = (float) (random.nextDouble() * 2 * Math.PI);
                         float x = (float) (radius * Math.cos(theta));
                         x *= (biom.width * width / 2);
@@ -302,8 +309,21 @@ public class World implements  Disposable, SaveFileContent {
                         float y = (float) (radius * Math.sin(theta));
                         y *= (biom.height * height / 2);
                         y += (height - (biom.startPointY * height));
-                        y = Math.round(y) * data.tileSize;
-                        x = Math.round(x) * data.tileSize;
+
+                        /*
+                        float x = biom.startPointX+(float)(random.nextFloat() *(biom.width*poi.radiusFactor) )-((biom.width*poi.radiusFactor)/2f);
+                        float y = biom.startPointY+(float)(random.nextFloat() *(biom.height*poi.radiusFactor) )-((biom.height*poi.radiusFactor)/2f);
+                        x*=width;
+                        y*=height;
+                        y=height-y;*/
+                        if((int)x<0||(int)y<=0||(int)y>=height||(int)x>=width|| biomIndex2!=highestBiom(getBiom((int)x,(int)y)))
+                        {
+                            continue;
+                        }
+
+                        x*= data.tileSize;
+                        y*= data.tileSize;
+
                         boolean breakNextLoop = false;
                         for (Rectangle rect : otherPoints) {
                             if (rect.contains(x, y)) {
@@ -318,9 +338,12 @@ public class World implements  Disposable, SaveFileContent {
 
                         mapPoiIds.add(newPoint);
 
+                        /*
                         Color color = biom.GetColor();
                         pix.setColor(color.r, 0.1f, 0.1f, 1);
                         pix.drawRectangle((int) x / data.tileSize - 5, height - (int) y / data.tileSize - 5, 10, 10);
+                        */
+
                         if (poi.type!=null&&poi.type.equals("town")) {
                             towns.add(newPoint);
                         }
@@ -333,13 +356,18 @@ public class World implements  Disposable, SaveFileContent {
         }
 
         //sort towns
-        List<Pair<PointOfInterest, PointOfInterest>> allSortedTowns = new ArrayList<>();
+        List<Pair<PointOfInterest, PointOfInterest>> allSortedTowns = new ArrayList<>();//edge is first 32 bits id of first id and last 32 bits id of second
 
+        HashSet<Long> usedEdges=new HashSet<>();
         for (int i = 0; i < towns.size() - 1; i++) {
+
             PointOfInterest current = towns.get(i);
             int smallestIndex = -1;
             float smallestDistance = Float.MAX_VALUE;
-            for (int j = i + 1; j < towns.size(); j++) {
+            for (int j = 0; j < towns.size(); j++) {
+
+                if(i==j||usedEdges.contains((long)i|((long)j<<32)))
+                    continue;
                 float dist = current.position.dst(towns.get(j).position);
                 if (dist < smallestDistance) {
                     smallestDistance = dist;
@@ -350,6 +378,8 @@ public class World implements  Disposable, SaveFileContent {
                 continue;
             if(smallestDistance>data.maxRoadDistance)
                 continue;
+            usedEdges.add((long)i|((long)smallestIndex<<32));
+            usedEdges.add((long)i<<32|((long)smallestIndex));
             allSortedTowns.add(new Pair<>(current, towns.get(smallestIndex)));
         }
 
@@ -362,8 +392,9 @@ public class World implements  Disposable, SaveFileContent {
             Vector2 endPoint = townPair.getValue().getTilePosition(data.tileSize);
             for (int x = (int) currentPoint.x - 1; x < currentPoint.x + 2; x++) {
                 for (int y = (int) currentPoint.y - 1; y < currentPoint.y + 2; y++) {
+                    if(x<0||y<=0||x>=width||y>height)continue;
                     biomMap[x][height - y] |= (1 << biomIndex);
-                    pix.drawPixel(x, y);
+                    pix.drawPixel(x, height-y);
                 }
             }
 
@@ -394,6 +425,7 @@ public class World implements  Disposable, SaveFileContent {
                         currentPoint.y--;
                 }
 
+                if( (int)currentPoint.x<0|| (int)currentPoint.y<=0|| (int)currentPoint.x>=width|| (int)currentPoint.y>height)continue;
                 biomMap[(int) currentPoint.x][height - (int) currentPoint.y] |= (1 << biomIndex);
                 pix.drawPixel((int) currentPoint.x, height - (int) currentPoint.y);
             }

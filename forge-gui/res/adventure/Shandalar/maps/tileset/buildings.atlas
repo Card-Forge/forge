@@ -4,28 +4,43 @@ size: 448,800
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none               
-Town 
+IslandTown 
   xy: 144, 0
-  size: 48, 48      
-Town 
+  size: 48, 48       
+MountainTown 
+  xy: 48, 0
+  size: 48, 48       
+SwampTown 
+  xy: 0, 0
+  size: 48, 48   
+ForestTown 
+  xy: 352, 496
+  size: 32, 32        
+ForestTown 
+  xy: 384, 496
+  size: 32, 32         
+ForestTown 
+  xy: 416, 496
+  size: 32, 32   
+PlainsTown 
   xy: 96, 0
   size: 48, 48      
-Town 
+WasteTown 
   xy: 272, 128
   size: 48, 48      
-Town 
+WasteTown 
   xy: 320, 128
   size: 48, 48      
-Town 
+Gate 
   xy: 384, 128
   size: 64, 48              
-Town 
+Monestory 
   xy: 384, 592
   size: 64, 64      
-Town 
+Castle 
   xy: 0, 464
   size: 64, 64      
-Town 
+Castle 
   xy: 64, 464
   size: 64, 64     
 Graveyard           

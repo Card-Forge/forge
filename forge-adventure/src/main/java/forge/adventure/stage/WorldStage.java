@@ -1,5 +1,6 @@
 package forge.adventure.stage;
 
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
@@ -141,6 +142,24 @@ public class WorldStage extends GameStage {
 
         }
     }
+    @Override
+    public boolean isColliding(Rectangle boundingRect)
+    {
+
+        World world = WorldSave.getCurrentSave().getWorld();
+        int currentBiom = World.highestBiom(world.getBiom((int) boundingRect.getX() / world.getTileSize(), (int) boundingRect.getY() / world.getTileSize()));
+        if(currentBiom==0)
+            return true;
+         currentBiom = World.highestBiom(world.getBiom((int) (boundingRect.getX()+boundingRect.getWidth()) / world.getTileSize(), (int) boundingRect.getY() / world.getTileSize()));
+        if(currentBiom==0)
+            return true;
+         currentBiom = World.highestBiom(world.getBiom((int) (boundingRect.getX()+boundingRect.getWidth())/ world.getTileSize(), (int) (boundingRect.getY()+boundingRect.getHeight()) / world.getTileSize()));
+        if(currentBiom==0)
+            return true;
+         currentBiom = World.highestBiom(world.getBiom((int) boundingRect.getX() / world.getTileSize(), (int) (boundingRect.getY()+boundingRect.getHeight()) / world.getTileSize()));
+
+        return (currentBiom==0);
+    }
 
     private void HandleMonsterSpawn(float delta) {
 
@@ -149,7 +168,11 @@ public class WorldStage extends GameStage {
         int currentBiom = World.highestBiom(world.getBiom((int) player.getX() / world.getTileSize(), (int) player.getY() / world.getTileSize()));
         List<BiomData> biomdata = WorldSave.getCurrentSave().getWorld().getData().GetBioms();
         if (biomdata.size() <= currentBiom)
+        {
+            player.setMoveModifier(1.5f);
             return;
+        }
+        player.setMoveModifier(1.0f);
         BiomData data = biomdata.get(currentBiom);
 
         if (data == null)

@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Disposable;
-import forge.adventure.util.Res;
+import forge.adventure.util.Config;
 
 public abstract class Scene implements Disposable {
 
@@ -13,11 +13,11 @@ public abstract class Scene implements Disposable {
     }
 
     public static int GetIntendedWidth() {
-        return Res.CurrentRes.GetConfigData().screenWidth;
+        return Config.instance().getConfigData().screenWidth;
     }
 
     public static int GetIntendedHeight() {
-        return Res.CurrentRes.GetConfigData().screenHeight;
+        return Config.instance().getConfigData().screenHeight;
     }
 
     public abstract void act(float delta);
@@ -28,7 +28,7 @@ public abstract class Scene implements Disposable {
     }
 
     public Drawable DrawableImage(String path) {
-        return new TextureRegionDrawable(new Texture(Res.CurrentRes.GetFile(path)));
+        return new TextureRegionDrawable(new Texture(Config.instance().getFile(path)));
     }
 
     public void resLoaded() {

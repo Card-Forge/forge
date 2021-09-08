@@ -128,7 +128,7 @@ public class Controls {
             SelectedSkin.add("default",font);
 
    * */
-            FileHandle skinFile = Res.CurrentRes.GetFile("skin/uiskin.json");
+            FileHandle skinFile = Config.instance().getFile("skin/uiskin.json");
             FileHandle atlasFile = skinFile.sibling(skinFile.nameWithoutExtension() + ".atlas");
             TextureAtlas atlas = new TextureAtlas(atlasFile);
             SelectedSkin.addRegions(atlas);

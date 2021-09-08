@@ -14,11 +14,10 @@ import forge.adventure.libgdxgui.Graphics;
 import forge.adventure.scene.ForgeScene;
 import forge.adventure.scene.Scene;
 import forge.adventure.scene.SceneType;
-import forge.adventure.util.Res;
+import forge.adventure.util.Config;
 
 public class AdventureApplicationAdapter extends ApplicationAdapter {
     public static AdventureApplicationAdapter instance;
-    String strPlane;
     Scene currentScene = null;
     Array<Scene> lastScene = new Array<>();
     private int currentWidth;
@@ -41,9 +40,8 @@ public class AdventureApplicationAdapter extends ApplicationAdapter {
     public TextureRegion getLastScreenTexture() {
         return lastScreenTexture;
     }
-    public AdventureApplicationAdapter(String plane) {
+    public AdventureApplicationAdapter() {
         instance = this;
-        strPlane = plane;
     }
 
     public int getCurrentWidth() {
@@ -97,14 +95,14 @@ public class AdventureApplicationAdapter extends ApplicationAdapter {
 
         switchScene(SceneType.StartScene.instance);
         animationBatch=new SpriteBatch();
-        transitionTexture =new Texture(Res.CurrentRes.GetFile("ui/transition.png"));
+        transitionTexture =new Texture(Config.instance().getFile("ui/transition.png"));
     }
 
 
     @Override
     public void create() {
 
-        Pixmap pm = new Pixmap(Res.CurrentRes.GetFile("skin/cursor.png"));
+        Pixmap pm = new Pixmap(Config.instance().getFile("skin/cursor.png"));
         Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
         pm.dispose();
         for (forge.adventure.scene.SceneType entry : SceneType.values()) {
@@ -170,6 +168,7 @@ public class AdventureApplicationAdapter extends ApplicationAdapter {
         for (forge.adventure.scene.SceneType entry : SceneType.values()) {
             entry.instance.dispose();
         }
+        System.exit(0);
     }
 
     private Scene getLastScene() {

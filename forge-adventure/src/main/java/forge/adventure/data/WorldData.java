@@ -3,6 +3,8 @@ package forge.adventure.data;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
+import forge.adventure.util.Config;
+import forge.adventure.util.Paths;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -30,7 +32,7 @@ public class WorldData implements Serializable {
         if (shopList == null) {
             shopList = new Array<ShopData>();
             Json json = new Json();
-            FileHandle handle = forge.adventure.util.Res.CurrentRes.GetFile("world/shops.json");
+            FileHandle handle = Config.instance().getFile(Paths.Shops);
             if (handle.exists())
                 shopList = json.fromJson(Array.class, ShopData.class, handle);
         }
@@ -39,7 +41,7 @@ public class WorldData implements Serializable {
     static public Array<EnemyData> getAllEnemies() {
         if (allEnemies == null) {
             Json json = new Json();
-            FileHandle handle = forge.adventure.util.Res.CurrentRes.GetFile("world/enemies.json");
+            FileHandle handle = Config.instance().getFile(Paths.EnemyPath);
             if (handle.exists())
                 allEnemies = json.fromJson(Array.class, EnemyData.class, handle);
         }
@@ -58,7 +60,7 @@ public class WorldData implements Serializable {
     public BiomSprites GetBiomSprites() {
         if (sprites == null) {
             Json json = new Json();
-            sprites = (json.fromJson(BiomSprites.class, forge.adventure.util.Res.CurrentRes.GetFile(biomSprites)));
+            sprites = (json.fromJson(BiomSprites.class, Config.instance().getFile(biomSprites)));
         }
         return sprites;
     }
@@ -68,7 +70,7 @@ public class WorldData implements Serializable {
             bioms = new ArrayList<BiomData>();
             Json json = new Json();
             for (String name : biomNames) {
-                bioms.add(json.fromJson(BiomData.class, forge.adventure.util.Res.CurrentRes.GetFile(name)));
+                bioms.add(json.fromJson(BiomData.class, Config.instance().getFile(name)));
             }
         }
         return bioms;

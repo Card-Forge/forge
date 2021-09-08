@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="48">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="48">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -12,7 +12,7 @@
  </layer>
  <layer id="2" name="Ground" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFuMBjLgYGNyz4CRSD2E+5yDf7CRqGme0OxE3c+LErmXY3EjCXGOxKht9XclJuLww3cw+MvcT6+zGRcUhtf1MjbrHh5Zz47ZXnYWDgpmI4E2svrfxMTN6iZrqCYU6gmYo89LeXmPwEimMuoN0KRMY1yC9cUAxSzwnVy4UkTsivuNwAM5OQX0DqSbWDEMAV/qSUSeQAXHmMXHsBKHqPLA==
+   eJxjYMAEk7GIDXVAjp8eczEwuGHBT6AYxH7KRZ57HiOZg2weiHYH4iZu/NiVTLsbCZhLDHYlw+8rOSm3F4abuQfGXmL9/ZjIOKS2v6kRt9jwck789srzMDBwUzGcibWXVn4mJm9RM13BMCfQTEUe+ttLTH4CxTEX0G4FIuMa5BcuKAap54Tq5UISJ+RXXG6AmUnILyD1pNpBCOAKf1LKJHIArjxGrr0Avw6QUg==
   </data>
  </layer>
  <layer id="3" name="Foreground" width="30" height="17">

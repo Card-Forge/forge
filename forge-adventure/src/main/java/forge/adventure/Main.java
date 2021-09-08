@@ -3,6 +3,7 @@ package forge.adventure;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Clipboard;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.Clipboard;
@@ -16,7 +17,7 @@ import forge.adventure.libgdxgui.assets.ImageCache;
 import forge.adventure.libgdxgui.screens.FScreen;
 import forge.adventure.libgdxgui.screens.SplashScreen;
 import forge.adventure.scene.SettingsScene;
-import forge.adventure.util.Res;
+import forge.adventure.util.Config;
 import forge.error.ExceptionHandler;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -75,12 +76,10 @@ class StartAdventure extends AdventureApplicationAdapter {
     private static boolean exited;
     private static boolean textureFiltering = false;
     private static boolean destroyThis = false;
-    private final String plane;
 
-    public StartAdventure(String plane) {
+    public StartAdventure() {
 
-        super(plane);
-        this.plane = plane;
+        super();
         Forge.isTabletDevice = true;
         Forge.isPortraitMode = false;
         Forge.hdbuttons = true;
@@ -89,7 +88,7 @@ class StartAdventure extends AdventureApplicationAdapter {
         String path= Files.exists(Paths.get("./res"))?"./":"../forge-gui/";
 
         app = (Forge) Forge.getApp(new Lwjgl3Clipboard(), new DesktopAdapter(""), path, true, false, 0, true, 0, "", "");
-        new Res(plane);
+
         clipboard = new Lwjgl3Clipboard();
         GuiBase.setUsingAppDirectory(false); //obb directory on android uses the package name as entrypoint
         GuiBase.setInterface(new GuiMobile(path));
@@ -145,7 +144,6 @@ class StartAdventure extends AdventureApplicationAdapter {
         destroyThis = true; //Prevent back()
         ForgePreferences prefs = SettingsScene.Preference = new ForgePreferences();
 
-        prefs.setPref(ForgePreferences.FPref.UI_SKIN, plane);
 
         String skinName;
         if (FileUtil.doesFileExist(ForgeConstants.MAIN_PREFS_FILE)) {
@@ -153,7 +151,7 @@ class StartAdventure extends AdventureApplicationAdapter {
         } else {
             skinName = "default"; //use default skin if preferences file doesn't exist yet
         }
-        FSkin.loadLight(plane, splashScreen);
+        FSkin.loadLight(skinName, splashScreen);
 
         textureFiltering = prefs.getPrefBoolean(ForgePreferences.FPref.UI_LIBGDX_TEXTURE_FILTERING);
         showFPS = prefs.getPrefBoolean(ForgePreferences.FPref.UI_SHOW_FPS);
@@ -281,15 +279,19 @@ public class Main {
         //Turn off the Java 2D system's use of Direct3D to improve rendering speed (particularly when Full Screen)
         System.setProperty("sun.java2d.d3d", "false");
 
-        String plane="Shandalar";
 
-        if(args.length>=1)
-            plane=args[0];
-        AdventureApplicationConfiguration config = new AdventureApplicationConfiguration();
+        Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
+        StartAdventure start=new StartAdventure();
 
-        config.SetPlane(plane);
-        config.setFullScreen(false);
-        new Lwjgl3Application(new StartAdventure(config.Plane), config);
+        if (Config.instance().getSettingData().fullScreen)
+        {
+            config.setFullscreenMode(config.getDisplayMode());
+        } else {
+            config.setWindowedMode(Config.instance().getSettingData().width, Config.instance().getSettingData().height);
+        }
+
+        config.setWindowIcon(Config.instance().getFilePath("forge-adventure.png"));
+        new Lwjgl3Application(start, config);
 
     }
 }

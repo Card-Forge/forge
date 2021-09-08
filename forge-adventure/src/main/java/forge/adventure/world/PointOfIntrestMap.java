@@ -39,8 +39,10 @@ public class PointOfIntrestMap implements SaveFileContent {
         mapObjects[chunkX][chunkY].add(obj);
     }
 
-    public List<PointOfInterest> pointsOfIntrest(int chunkX, int chunky) {
-        return mapObjects[chunkX][chunky];
+    public List<PointOfInterest> pointsOfIntrest(int chunkX, int chunkY) {
+        if (chunkX >= numberOfChunksX || chunkY >= numberOfChunksY || chunkX < 0 || chunkY < 0)
+            return new ArrayList<PointOfInterest>();
+        return mapObjects[chunkX][chunkY];
     }
 
     @Override

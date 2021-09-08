@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import forge.adventure.stage.MapStage;
 import forge.adventure.stage.PointOfInterestMapRenderer;
-import forge.adventure.util.Res;
+import forge.adventure.util.Config;
 import forge.adventure.util.TemplateTmxMapLoader;
 import forge.adventure.world.PointOfInterest;
 import forge.adventure.world.WorldSave;
@@ -59,7 +59,7 @@ public class TileMapScene extends HudScene {
     public void load(PointOfInterest point) {
         rootPoint=point;
         oldMap=point.getData().map;
-        map = new TemplateTmxMapLoader().load(Res.CurrentRes.GetFilePath(point.getData().map));
+        map = new TemplateTmxMapLoader().load(Config.instance().getFilePath(point.getData().map));
         ((MapStage)stage).setPointOfInterest(WorldSave.getCurrentSave().getPointOfInterestChanges(point.getID()+oldMap));
         stage.GetPlayer().setPosition(0, 0);
         WorldSave.getCurrentSave().getWorld().setSeed(point.getSeedOffset());
@@ -71,7 +71,7 @@ public class TileMapScene extends HudScene {
  
     private void load(String targetMap) {
 
-        map = new TemplateTmxMapLoader().load(Res.CurrentRes.GetFilePath(targetMap));
+        map = new TemplateTmxMapLoader().load(Config.instance().getFilePath(targetMap));
         ((MapStage)stage).setPointOfInterest(WorldSave.getCurrentSave().getPointOfInterestChanges(rootPoint.getID()+targetMap));
         stage.GetPlayer().setPosition(0, 0);
         WorldSave.getCurrentSave().getWorld().setSeed(rootPoint.getSeedOffset());

@@ -43,6 +43,8 @@ public class GuiMobile implements IGuiBase {
 
     @Override
     public boolean isRunningOnDesktop() {
+        if(Gdx.app==null)
+            return true;
         return Gdx.app.getType() == ApplicationType.Desktop;
     }
 

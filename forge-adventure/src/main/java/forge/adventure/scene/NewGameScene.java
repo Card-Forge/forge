@@ -6,8 +6,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import forge.adventure.AdventureApplicationAdapter;
+import forge.adventure.data.DifficultyData;
 import forge.adventure.data.HeroListData;
-import forge.adventure.util.Res;
+import forge.adventure.util.Config;
 import forge.adventure.util.Selector;
 import forge.adventure.world.WorldSave;
 import forge.deck.Deck;
@@ -16,10 +17,11 @@ import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.util.NameGenerator;
 
+import java.util.Random;
+
 
 public class NewGameScene extends UIScene {
     TextField selectedName;
-    WorldSave.Difficulty selectedDiff = WorldSave.Difficulty.Medium;
     Deck[] starterDeck;
     private Image avatarImage;
     private int avatarIndex = 0;
@@ -38,8 +40,8 @@ public class NewGameScene extends UIScene {
                 gender.getCurrentIndex() == 0,
                 race.getCurrentIndex(),
                 avatarIndex,
-                starterDeck[deck.getCurrentIndex()],
-                WorldSave.Difficulty.values()[difficulty.getCurrentIndex()],0);
+                deck.getCurrentIndex(),
+                Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()],0);
         GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
         //image = new Texture(img);
 
@@ -47,7 +49,7 @@ public class NewGameScene extends UIScene {
         return true;
     }
 
-    public boolean Back() {
+    public boolean back() {
         AdventureApplicationAdapter.instance.switchScene(SceneType.StartScene.instance);
         return true;
     }
@@ -61,13 +63,14 @@ public class NewGameScene extends UIScene {
         gender = ui.findActor("gender");
         gender.setTextList(new String[]{"Male", "Female"});
         gender.addListener(event -> updateAvatar());
+        Random rand=new Random();
 
         deck = ui.findActor("deck");
 
-        starterDeck = Res.CurrentRes.starterDecks();
+        starterDeck = Config.instance().starterDecks();
         Array<String> stringList = new Array<>(starterDeck.length);
-        for (Deck deckit : starterDeck)
-            stringList.add(deckit.getName());
+        for (Deck deck : starterDeck)
+            stringList.add(deck.getName());
 
         deck.setTextList(stringList);
 
@@ -76,31 +79,39 @@ public class NewGameScene extends UIScene {
         race.setTextList(HeroListData.getRaces());
         difficulty = ui.findActor("difficulty");
 
-        stringList = new Array<>(WorldSave.Difficulty.values().length);
-        for (WorldSave.Difficulty diff : WorldSave.Difficulty.values())
-            stringList.add(diff.toString());
-        difficulty.setTextList(stringList);
-        difficulty.setCurrentIndex(1);
-
-        ui.onButtonPress("back", () -> Back());
-        ui.onButtonPress("start", () -> start());
-        ui.onButtonPress("leftAvatar", () -> leftAvatar());
-        ui.onButtonPress("rightAvatar", () -> rightAvatar());
+        Array<String> diffList = new Array<>(starterDeck.length);
+        int i=0;
+        int startingDifficulty=0;
+        for (DifficultyData diff : Config.instance().getConfigData().difficulties)
+        {
+            if(diff.startingDifficulty)
+                startingDifficulty=i;
+            diffList.add(diff.name);
+            i++;
+        }
+        difficulty.setTextList(diffList);
+        difficulty.setCurrentIndex(startingDifficulty);
+        avatarIndex=rand.nextInt();
+        gender.setCurrentIndex(rand.nextInt());
+        deck.setCurrentIndex(rand.nextInt());
+        race.setCurrentIndex(rand.nextInt());
+        ui.onButtonPress("back", this::back);
+        ui.onButtonPress("start", this::start);
+        ui.onButtonPress("leftAvatar", this::leftAvatar);
+        ui.onButtonPress("rightAvatar", this::rightAvatar);
 
         updateAvatar();
     }
 
-    private boolean rightAvatar() {
+    private void rightAvatar() {
 
         avatarIndex++;
         updateAvatar();
-        return false;
     }
 
-    private boolean leftAvatar() {
+    private void leftAvatar() {
         avatarIndex--;
         updateAvatar();
-        return false;
     }
 
     private boolean updateAvatar() {

@@ -102,4 +102,5 @@ public class Selector extends Group {
         this.textList = new Array<>(strings);
         setCurrentIndex(currentIndex);
     }
+
 }

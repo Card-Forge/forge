@@ -9,9 +9,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import forge.adventure.AdventureApplicationAdapter;
+import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
 import forge.localinstance.properties.ForgePreferences;
 import forge.util.Localizer;
+
+import java.util.function.Function;
 
 
 public class SettingsScene extends UIScene {
@@ -102,14 +105,45 @@ public class SettingsScene extends UIScene {
             control = Controls.newLabel("");
 
         }
+        addLabel(name);
+        settingGroup.add(control).align(Align.right);
+    }
+    private void addSettingButton(String name,Object value, ChangeListener change) {
+
+        Class type = value.getClass();
+        Actor control;
+        if (Boolean.class.equals(type)) {
+            CheckBox box = Controls.newCheckBox("");
+            control = box;
+            box.setChecked((Boolean) value);
+            control.addListener(change);
+
+        } else if (Integer.class.equals(type)) {
+            TextField text = Controls.newTextField((String) value.toString());
+            control = text;
+            text.setTextFieldFilter(new TextField.TextFieldFilter() {
+                @Override
+                public boolean acceptChar(TextField textField, char c) {
+                    return Character.isDigit(c);
+                }
+            });
+            text.addListener(change);
+
+        } else {
+            control = Controls.newLabel("");
+
+        }
+        addLabel(name);
+        settingGroup.add(control).align(Align.right);
+    }
+    void addLabel( String name)
+    {
+
         Label label = new Label(name, Controls.GetSkin().get("white",Label.LabelStyle.class));
 
         settingGroup.row().space(5);
         settingGroup.add(label).align(Align.left).fillX();
-
-        settingGroup.add(control).align(Align.right);
     }
-
     @Override
     public void resLoaded() {
         super.resLoaded();
@@ -119,6 +153,42 @@ public class SettingsScene extends UIScene {
         }
         Localizer localizer = Localizer.getInstance();
 
+        SelectBox plane = Controls.newComboBox(Config.instance().getAllAdventures(), Config.instance().getSettingData().plane, new Function<Object, Void>() {
+            @Override
+            public Void apply(Object o) {
+                Config.instance().getSettingData().plane= (String) o;
+                Config.instance().saveSettings();
+                return null;
+            }
+        });
+        addLabel("Plane");
+        settingGroup.add(plane).align(Align.right);
+
+
+
+        addSettingButton("Fullscreen", Config.instance().getSettingData().fullScreen, new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Config.instance().getSettingData().fullScreen=((CheckBox) actor).isChecked();
+                Config.instance().saveSettings();
+            }
+        });
+        addSettingButton("Screen width", Config.instance().getSettingData().width, new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                String text=((TextField) actor).getText();
+                Config.instance().getSettingData().width=text==null||text.isEmpty()?0:Integer.valueOf(text);
+                Config.instance().saveSettings();
+            }
+        });
+        addSettingButton("Screen height", Config.instance().getSettingData().height, new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                String text=((TextField) actor).getText();
+                Config.instance().getSettingData().height=text==null||text.isEmpty()?0:Integer.valueOf(text);
+                Config.instance().saveSettings();
+            }
+        });
         addSettingButton(localizer.getMessage("lblCardName"), boolean.class, ForgePreferences.FPref.UI_OVERLAY_CARD_NAME, new Object[]{});
         addSettingButton(localizer.getMessage("cbAdjustMusicVolume"), int.class, ForgePreferences.FPref.UI_VOL_MUSIC, new Object[]{0, 100});
         addSettingButton(localizer.getMessage("cbAdjustSoundsVolume"), int.class, ForgePreferences.FPref.UI_VOL_SOUNDS, new Object[]{0, 100});

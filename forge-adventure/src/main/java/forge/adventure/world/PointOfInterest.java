@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import forge.adventure.data.PointOfInterestData;
-import forge.adventure.util.Res;
+import forge.adventure.util.Config;
 import forge.adventure.util.SaveFileContent;
 import forge.adventure.util.Serializer;
 
@@ -33,7 +33,7 @@ public class PointOfInterest implements SaveFileContent {
         Serializer.readRectangle(saveFile,rectangle);
         spriteIndex=saveFile.readInt();
         oldMapId="";
-        Array<Sprite> textureAtlas = Res.CurrentRes.getAtlas(data.spriteAtlas).createSprites(data.sprite);
+        Array<Sprite> textureAtlas = Config.instance().getAtlas(data.spriteAtlas).createSprites(data.sprite);
         sprite = textureAtlas.get(spriteIndex);
     }
 
@@ -46,7 +46,7 @@ public class PointOfInterest implements SaveFileContent {
     public PointOfInterest() {
     }
     public PointOfInterest(PointOfInterestData d, Vector2 pos, Random rand) {
-        Array<Sprite> textureAtlas = Res.CurrentRes.getAtlas(d.spriteAtlas).createSprites(d.sprite);
+        Array<Sprite> textureAtlas = Config.instance().getAtlas(d.spriteAtlas).createSprites(d.sprite);
         if (textureAtlas.isEmpty()) {
             System.out.printf("sprite " + d.sprite + " not found");
         }

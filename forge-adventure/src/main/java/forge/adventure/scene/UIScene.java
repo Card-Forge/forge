@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
-import forge.adventure.util.Res;
+import forge.adventure.util.Config;
 import forge.adventure.util.UIActor;
 
 public class UIScene extends Scene{
@@ -49,7 +49,7 @@ public class UIScene extends Scene{
     @Override
     public void resLoaded() {
         stage = new Stage(new StretchViewport(GetIntendedWidth(), GetIntendedHeight()));
-        ui = new UIActor(Res.CurrentRes.GetFile(uiFile));
+        ui = new UIActor(Config.instance().getFile(uiFile));
         screenImage=ui.findActor("lastScreen");
         stage.addActor(ui);
 

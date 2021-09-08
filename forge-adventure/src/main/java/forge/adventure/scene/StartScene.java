@@ -45,6 +45,7 @@ public class StartScene extends UIScene {
 
     public boolean Exit() {
         Gdx.app.exit();
+        System.exit(0);
         return true;
     }
 

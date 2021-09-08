@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntMap;
 import forge.adventure.data.BiomData;
 import forge.adventure.data.BiomTerrainData;
-import forge.adventure.util.Res;
+import forge.adventure.util.Config;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -72,12 +72,12 @@ public class BiomTexture implements Serializable {
         edgeImages = new Array<>();
 
         Array<TextureAtlas.AtlasRegion> regions =new Array<>();
-        regions.add(Res.CurrentRes.getAtlas(data.tilesetAtlas).findRegion(data.tilesetName));
+        regions.add(Config.instance().getAtlas(data.tilesetAtlas).findRegion(data.tilesetName));
         if(data.terrain!=null)
         {
             for(BiomTerrainData terrain:data.terrain)
             {
-                regions.add(Res.CurrentRes.getAtlas(data.tilesetAtlas).findRegion(terrain.spriteName));
+                regions.add(Config.instance().getAtlas(data.tilesetAtlas).findRegion(terrain.spriteName));
             }
         }
         for (TextureAtlas.AtlasRegion region : regions) {

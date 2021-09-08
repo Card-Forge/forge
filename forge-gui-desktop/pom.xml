@@ -130,6 +130,11 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
+            <groupId>forge</groupId>
+            <artifactId>forge-adventure</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.miglayout</groupId>
             <artifactId>miglayout-swing</artifactId>
             <version>4.2</version>
@@ -437,6 +442,8 @@
                                             </fileset>
                                             <fileset dir="${project.build.directory}" includes="forge.exe" />
                                             <fileset dir="${project.build.directory}" includes="${project.build.finalName}-jar-with-dependencies.jar" />
+                                            <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure.exe" />
+                                            <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure-1.6.43-SNAPSHOT-jar-with-dependencies.jar" />
                                         </copy>
                                         <mkdir dir="${project.build.directory}/${project.build.finalName}/res/cardsfolder" />
                                         <zip destfile="${project.build.directory}/${project.build.finalName}/res/cardsfolder/cardsfolder.zip" basedir="${basedir}/../forge-gui/res/cardsfolder" level="1" />

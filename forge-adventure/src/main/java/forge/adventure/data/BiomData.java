@@ -9,19 +9,19 @@ import java.util.Random;
 
 public class BiomData implements Serializable {
     private final Random rand = new Random();
-    public double startPointX;
-    public double startPointY;
-    public double noiseWeight;
-    public double distWeight;
+    public float startPointX;
+    public float startPointY;
+    public float noiseWeight;
+    public float distWeight;
     public String name;
     public String tilesetAtlas;
     public String tilesetName;
-    public Array<BiomTerrainData> terrain;
-    public double width;
-    public double height;
+    public BiomTerrainData[] terrain;
+    public float width;
+    public float height;
     public String color;
     public boolean invertHeight;
-    public List<String> spriteNames;
+    public String[] spriteNames;
     public List<String> enemies;
     public List<String> pointsOfInterest;
 

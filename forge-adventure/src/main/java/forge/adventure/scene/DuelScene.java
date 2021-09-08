@@ -8,7 +8,9 @@ import forge.adventure.libgdxgui.assets.FSkin;
 import forge.adventure.libgdxgui.screens.FScreen;
 import forge.adventure.libgdxgui.screens.match.MatchController;
 import forge.adventure.util.Current;
+import forge.adventure.util.Config;
 import forge.adventure.world.AdventurePlayer;
+import forge.deck.Deck;
 import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.player.Player;
@@ -53,14 +55,18 @@ public class DuelScene extends ForgeScene {
         appliedVariants.add(GameType.Constructed);
 
         List<RegisteredPlayer> players = new ArrayList<>();
-        humanPlayer = RegisteredPlayer.forVariants(2, appliedVariants, AdventurePlayer.current().getDeck(), null, false, null, null);
+        Deck playerDeck=(Deck)AdventurePlayer.current().getDeck().copyTo("PlayerDeckCopy");
+        int missingCards= Config.instance().getConfigData().minDeckSize-playerDeck.getMain().countAll();
+        if(missingCards>0)
+            playerDeck.getMain().add("Wastes",missingCards);
+        humanPlayer = RegisteredPlayer.forVariants(2, appliedVariants,playerDeck, null, false, null, null);
         LobbyPlayer playerObject = GamePlayerUtil.getGuiPlayer();
         FSkin.getAvatars().put(90001, Current.player().avatar());
         playerObject.setAvatarIndex(90001);
         humanPlayer.setPlayer(playerObject);
         humanPlayer.setStartingLife(Current.player().getLife());
-
-        RegisteredPlayer aiPlayer = RegisteredPlayer.forVariants(2, appliedVariants, enemy.getData().getDeck(), null, false, null, null);
+        Current.setLatestDeck(enemy.getData().generateDeck());
+        RegisteredPlayer aiPlayer = RegisteredPlayer.forVariants(2, appliedVariants, Current.latestDeck(), null, false, null, null);
         LobbyPlayer enemyPlayer = GamePlayerUtil.createAiPlayer();
 
         FSkin.getAvatars().put(90000, this.enemy.getAvatar());
@@ -68,7 +74,7 @@ public class DuelScene extends ForgeScene {
 
         enemyPlayer.setName(this.enemy.getData().name);
         aiPlayer.setPlayer(enemyPlayer);
-        aiPlayer.setStartingLife(enemy.getData().life);
+        aiPlayer.setStartingLife(Math.round((float)enemy.getData().life*Current.player().getDifficulty().enemyLifeFactor));
 
         players.add(humanPlayer);
         players.add(aiPlayer);

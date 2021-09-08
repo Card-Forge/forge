@@ -4,20 +4,19 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Array;
-import forge.adventure.util.Res;
+import forge.adventure.util.Config;
 
 import java.util.HashMap;
-import java.util.List;
 
 public class BiomSprites {
     private final HashMap<String, Array<Sprite>> spriteBuffer = new HashMap<>();
     public String textureAltas;
-    public List<BiomSpriteData> sprites;
+    public BiomSpriteData[] sprites;
     private TextureAtlas textureAtlasBuffer;
 
     public Sprite GetSprite(String name, int seed) {
         if (textureAtlasBuffer == null) {
-            textureAtlasBuffer = Res.CurrentRes.getAtlas(textureAltas);
+            textureAtlasBuffer = Config.instance().getAtlas(textureAltas);
             for (Texture texture : textureAtlasBuffer.getTextures()) {
                 texture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
             }

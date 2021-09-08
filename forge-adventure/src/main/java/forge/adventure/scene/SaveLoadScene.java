@@ -114,7 +114,7 @@ public class SaveLoadScene extends UIScene {
 
     private void updateFiles() {
 
-        File f = new File(WorldSave.GetSaveDir());
+        File f = new File(WorldSave.getSaveDir());
         f.mkdirs();
         File[] names = f.listFiles();
         previews.clear();

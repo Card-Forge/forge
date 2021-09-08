@@ -1,0 +1,88 @@
+[
+{
+	"name": "Gold",
+	"sprite": "sprites/gold.atlas",
+	"rewards": [
+		{
+			"type": "gold",
+			"count": 10,
+			"addMaxCount": 90
+		}
+	]
+},
+{
+	"name": "Treasure",
+	"sprite": "sprites/Treasure.atlas",
+	"rewards": [
+		{
+			"type": "randomCard",
+			"count": 2,
+			"addMaxCount": 8
+		}
+	]
+},
+{
+	"name": "Goblin",
+	"sprite": "sprites/goblin.atlas",
+	"deck": "decks/red/Goblins.dck",
+	"spawnRate": 0.1,
+	"difficulty": 0.1,
+	"speed": 20,
+	"life": 1,
+	"rewards": [
+		{
+			"type": "randomCard",
+			"count": 2,
+			"addMaxCount": 8
+		}
+	]
+},
+{
+	"name": "Vampire",
+	"sprite": "sprites/Vampire.atlas",
+	"deck": "decks/black/Vampire.dck",
+	"spawnRate": 0.1,
+	"difficulty": 0.1,
+	"speed": 20,
+	"life": 1,
+	"rewards": [
+		{
+			"type": "randomCard",
+			"count": 2,
+			"addMaxCount": 8
+		}
+	]
+},
+{
+	"name": "Zombie",
+	"sprite": "sprites/Zombie.atlas",
+	"deck": "decks/black/Zombie.dck",
+	"spawnRate": 0.1,
+	"difficulty": 0.1,
+	"speed": 20,
+	"life": 1,
+	"rewards": [
+		{
+			"type": "randomCard",
+			"count": 2,
+			"addMaxCount": 8
+		}
+	]
+},
+{
+	"name": "Skeleton",
+	"sprite": "sprites/Skeleton.atlas",
+	"deck": "decks/black/Skeleton.dck",
+	"spawnRate": 0.1,
+	"difficulty": 0.1,
+	"speed": 20,
+	"life": 1,
+	"rewards": [
+		{
+			"type": "randomCard",
+			"count": 2,
+			"addMaxCount": 8
+		}
+	]
+}
+]

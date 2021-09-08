@@ -2,11 +2,12 @@ package forge.adventure.character;
 
 import com.badlogic.gdx.math.Vector2;
 import forge.adventure.stage.GameStage;
+import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.adventure.world.AdventurePlayer;
 
 public class PlayerSprite extends CharacterSprite {
-    private final float playerSpeed = 100f;
+    private final float playerSpeed;
     private final Vector2 direction = Vector2.Zero.cpy();
     private float playerSpeedModifier = 1f;
     GameStage gameStage;
@@ -15,6 +16,7 @@ public class PlayerSprite extends CharacterSprite {
         this.gameStage=gameStage;
         setOriginX(getWidth() / 2);
         Current.player().onPlayerChanged(()->updatePlayer());
+        playerSpeed=Config.instance().getConfigData().playerBaseSpeed;
     }
 
     private void updatePlayer() {
@@ -50,7 +52,8 @@ public class PlayerSprite extends CharacterSprite {
         if(!direction.isZero())
         {
 
-            direction.set(gameStage.adjustMovement(pos(),direction,boundingRect));
+            gameStage.prepareCollision(pos(),direction,boundingRect);
+            direction.set(gameStage.adjustMovement(direction,boundingRect));
             moveBy(direction.x, direction.y);
         }
 

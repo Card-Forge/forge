@@ -10,7 +10,7 @@ import com.badlogic.gdx.utils.Array;
 import forge.adventure.libgdxgui.Forge;
 import forge.adventure.libgdxgui.assets.FSkinImage.SourceFile;
 import forge.adventure.libgdxgui.card.CardFaceSymbols;
-import forge.adventure.util.Res;
+import forge.adventure.util.Config;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
@@ -95,7 +95,7 @@ public class FSkin {
         //reset hd buttons/icons
         Forge.hdbuttons = false;
         Forge.hdstart = false;
-        preferredDir = Res.CurrentRes.GetFile("skin");
+        preferredDir = Config.instance().getFile("skin");
 
         FSkinTexture.BG_TEXTURE.load(); //load background texture early for splash screen
 

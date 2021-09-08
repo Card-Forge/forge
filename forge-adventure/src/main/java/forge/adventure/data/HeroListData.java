@@ -7,22 +7,21 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
-import forge.adventure.util.Res;
-
-import java.util.List;
+import forge.adventure.util.Config;
+import forge.adventure.util.Paths;
 
 public class HeroListData {
     static private HeroListData instance;
-    public List<HeroData> heroes;
+    public HeroData[] heroes;
     public String avatar;
     private TextureAtlas avatarSprites;
 
     static private HeroListData read() {
         Json json = new Json();
-        FileHandle handle = forge.adventure.util.Res.CurrentRes.GetFile("world/heroes.json");
+        FileHandle handle = Config.instance().getFile(Paths.Heroes);
         if (handle.exists()) {
             instance = json.fromJson(HeroListData.class, handle);
-            instance.avatarSprites = Res.CurrentRes.getAtlas(instance.avatar);
+            instance.avatarSprites = Config.instance().getAtlas(instance.avatar);
 
             instance.avatarSprites.getTextures().first().setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
         }
@@ -32,7 +31,7 @@ public class HeroListData {
     static public String getHero(int raceIndex, boolean female) {
         if (instance == null)
             instance = read();
-        HeroData data = instance.heroes.get(raceIndex);
+        HeroData data = instance.heroes[raceIndex];
 
         if (female)
             return data.female;
@@ -44,7 +43,7 @@ public class HeroListData {
 
         if (instance == null)
             instance = read();
-        HeroData data = instance.heroes.get(heroRace);
+        HeroData data = instance.heroes[heroRace];
         Array<Sprite> sprites;
         if (isFemale)
             sprites = instance.avatarSprites.createSprites(data.femaleAvatar);

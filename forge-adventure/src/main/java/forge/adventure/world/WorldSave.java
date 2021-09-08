@@ -1,6 +1,7 @@
 package forge.adventure.world;
 
-import forge.adventure.util.Res;
+import forge.adventure.data.DifficultyData;
+import forge.adventure.util.Config;
 import forge.deck.Deck;
 import forge.localinstance.properties.ForgeProfileProperties;
 
@@ -16,7 +17,6 @@ public class WorldSave {
     private final AdventurePlayer player=new AdventurePlayer();
     private final World world=new World();
     private final HashMap<String,PointOfInterestChanges> pointOfInterestChanges=new HashMap<>();
-    public Difficulty difficulty;
 
     public final World getWorld()
     {
@@ -36,8 +36,8 @@ public class WorldSave {
 
     static public boolean load(int currentSlot) {
 
-        String fileName = WorldSave.GetSaveFile(currentSlot);
-        new File(GetSaveDir()).mkdirs();
+        String fileName = WorldSave.getSaveFile(currentSlot);
+        new File(getSaveDir()).mkdirs();
         try {
             try(FileInputStream fos  = new FileInputStream(fileName);
                 InflaterInputStream inf = new InflaterInputStream(fos);
@@ -46,7 +46,6 @@ public class WorldSave {
                 currentSave.header = (WorldSaveHeader) oos.readObject();
                 currentSave.player.readFromSaveFile(oos);
                 currentSave.world.readFromSaveFile(oos);
-                currentSave.difficulty = (Difficulty) oos.readObject();
             }
         } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
@@ -75,23 +74,24 @@ public class WorldSave {
         return slot + "_saveslot.sav";
     }
 
-    public static String GetSaveDir() {
-        return ForgeProfileProperties.getUserDir() + File.separator + "Adventure" + File.separator + Res.CurrentRes.GetPlane();
+    public static String getSaveDir() {
+        return ForgeProfileProperties.getUserDir() + File.separator + "Adventure" + File.separator + Config.instance().getPlane();
     }
 
-    public static String GetSaveFile(int slot) {
-        return ForgeProfileProperties.getUserDir() + File.separator + "Adventure" + File.separator + Res.CurrentRes.GetPlane() + File.separator + Filename(slot);
+    public static String getSaveFile(int slot) {
+        return ForgeProfileProperties.getUserDir() + File.separator + "Adventure" + File.separator + Config.instance().getPlane() + File.separator + Filename(slot);
     }
 
     public static WorldSave getCurrentSave() {
         return currentSave;
     }
 
-    public static WorldSave generateNewWorld(String name, boolean male, int race, int avatarIndex, Deck startingDeck, Difficulty diff, long seed) {
+    public static WorldSave generateNewWorld(String name, boolean male, int race, int avatarIndex, int startingDeckIndex, DifficultyData diff, long seed) {
 
         currentSave.world.generateNew(seed);
-        currentSave.player.create(name, startingDeck, male, race, avatarIndex);
-        currentSave.difficulty = diff;
+
+        Deck starterDeck = Config.instance().starterDecks()[startingDeckIndex];
+        currentSave.player.create(name, starterDeck, male, race, avatarIndex,diff);
         currentSave.player.setWorldPosY((int) (currentSave.world.getData().playerStartPosY * currentSave.world.getData().height * currentSave.world.getTileSize()));
         currentSave.player.setWorldPosX((int) (currentSave.world.getData().playerStartPosX * currentSave.world.getData().width * currentSave.world.getTileSize()));
         return currentSave;
@@ -101,8 +101,8 @@ public class WorldSave {
     public boolean save(String text, int currentSlot) {
         header.name = text;
 
-        String fileName = WorldSave.GetSaveFile(currentSlot);
-        new File(GetSaveDir()).mkdirs();
+        String fileName = WorldSave.getSaveFile(currentSlot);
+        new File(getSaveDir()).mkdirs();
 
         try {
             try(FileOutputStream fos =  new FileOutputStream(fileName);
@@ -112,7 +112,6 @@ public class WorldSave {
                 oos.writeObject(header);
                 player.writeToSaveFile(oos);
                 world.writeToSaveFile(oos);
-                oos.writeObject(difficulty);
             }
 
         } catch (IOException e) {
@@ -129,9 +128,4 @@ public class WorldSave {
         world.dispose();
     }
 
-    public enum Difficulty {
-        Easy,
-        Medium,
-        Hard
-    }
 }

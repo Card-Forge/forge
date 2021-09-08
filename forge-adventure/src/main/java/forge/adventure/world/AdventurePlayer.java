@@ -3,8 +3,9 @@ package forge.adventure.world;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Disposable;
+import forge.adventure.data.DifficultyData;
 import forge.adventure.data.HeroListData;
-import forge.adventure.util.Res;
+import forge.adventure.util.Config;
 import forge.adventure.util.Reward;
 import forge.adventure.util.SaveFileContent;
 import forge.adventure.util.SignalList;
@@ -27,19 +28,21 @@ public class AdventurePlayer implements Serializable, Disposable, SaveFileConten
     private int gold=0;
     private int maxLife=20;
     private int life=20;
+    private DifficultyData difficultyData;
     static public AdventurePlayer current()
     {
         return WorldSave.currentSave.getPlayer();
     }
     private List<PaperCard> cards=new ArrayList<>();
 
-    public void create(String n, Deck startingDeck, boolean male, int race, int avatar) {
+    public void create(String n, Deck startingDeck, boolean male, int race, int avatar,DifficultyData difficultyData) {
 
         deck = startingDeck;
-        gold =100;
+        gold =difficultyData.staringMoney;
         for (PaperCard card : deck.getAllCardsInASinglePool().toFlatList())
             cards.add(card);
-        maxLife=20;
+        maxLife=difficultyData.startingLife;
+        this.difficultyData=difficultyData;
         life=maxLife;
         avatarIndex = avatar;
         heroRace = race;
@@ -123,7 +126,7 @@ public class AdventurePlayer implements Serializable, Disposable, SaveFileConten
     }
 
     public FileHandle sprite() {
-        return Res.CurrentRes.GetFile(HeroListData.getHero(heroRace, isFemale));
+        return Config.instance().getFile(HeroListData.getHero(heroRace, isFemale));
     }
 
     public TextureRegion avatar() {
@@ -202,5 +205,9 @@ public class AdventurePlayer implements Serializable, Disposable, SaveFileConten
     public void takeGold(int price) {
         gold-=price;
         onGoldChangeList.emit();
+    }
+
+    public DifficultyData getDifficulty() {
+        return difficultyData;
     }
 }
