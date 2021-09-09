@@ -3,7 +3,6 @@ package forge.adventure.stage;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.utils.Array;
 import forge.adventure.AdventureApplicationAdapter;
 import forge.adventure.character.CharacterSprite;
 import forge.adventure.character.MobSprite;
@@ -13,7 +12,7 @@ import forge.adventure.scene.*;
 import forge.adventure.util.Current;
 import forge.adventure.world.World;
 import forge.adventure.world.WorldSave;
-import javafx.util.Pair;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -22,7 +21,7 @@ import java.util.Random;
 
 public class WorldStage extends GameStage {
 
-    private static WorldStage instance;
+    private static WorldStage instance=null;
     protected MobSprite currentMob;
     protected Random rand = new Random();
     WorldBackground background;
@@ -177,7 +176,7 @@ public class WorldStage extends GameStage {
 
         if (data == null)
             return;
-        Array<EnemyData> list = data.GetEnemyList();
+        ArrayList<EnemyData> list = data.getEnemyList();
         if (list == null)
             return;
         spawnDelay -= delta;
@@ -195,7 +194,7 @@ public class WorldStage extends GameStage {
         spawnPos.setAngleDeg(360 * rand.nextFloat());
         sprite.setX(player.getX() + spawnPos.x);
         sprite.setY(player.getY() + spawnPos.y);
-        enemies.add(new Pair<>(globalTimer,sprite));
+        enemies.add(Pair.of(globalTimer,sprite));
         foregroundSprites.addActor(sprite);
     }
 

@@ -1,7 +1,7 @@
 package forge.adventure.editor;
 
 import forge.adventure.util.Config;
-import javafx.util.Pair;
+import org.apache.commons.lang3.tuple.Pair;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -40,7 +40,7 @@ public class SwingAtlasPreview extends Box {
             JLabel image=new JLabel(element.getValue().get(0));
             add(new JLabel(element.getKey()));
             add(image);
-            labels.add(new Pair<>(image, element.getValue()));
+            labels.add(Pair.of(image, element.getValue()));
         }
         timer.restart();
         repaint();

@@ -8,7 +8,7 @@ import com.badlogic.gdx.utils.Array;
 import forge.adventure.data.BiomSpriteData;
 import forge.adventure.world.PointOfInterest;
 import forge.adventure.world.WorldSave;
-import javafx.util.Pair;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.List;
 

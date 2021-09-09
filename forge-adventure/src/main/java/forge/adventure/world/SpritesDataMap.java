@@ -3,7 +3,7 @@ package forge.adventure.world;
 import com.badlogic.gdx.math.Vector2;
 import forge.adventure.data.BiomSpriteData;
 import forge.adventure.data.BiomSprites;
-import javafx.util.Pair;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -27,7 +27,7 @@ public class SpritesDataMap implements Serializable {
         mapObjects = new List[numberOfChunks][numberOfChunks];
         for (int x = 0; x < numberOfChunks; x++) {
             for (int y = 0; y < numberOfChunks; y++) {
-                mapObjects[x][y] = new ArrayList();
+                mapObjects[x][y] = new ArrayList<Pair<Vector2, Integer>>();
             }
         }
     }
@@ -76,7 +76,7 @@ public class SpritesDataMap implements Serializable {
         int chunkY = (int) ((vector2.y / tileSize) / chunkSize);
         if (chunkX >= numberOfChunks || chunkY >= numberOfChunks || chunkX < 0 || chunkY < 0)
             return;
-        mapObjects[chunkX][chunkY].add(new Pair<>(vector2, key));
+        mapObjects[chunkX][chunkY].add(Pair.of(vector2, key));
     }
 
     public List<Pair<Vector2, Integer>> positions(int chunkX, int chunkY) {

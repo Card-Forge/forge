@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Json;
 import forge.adventure.data.*;
@@ -15,7 +14,7 @@ import forge.adventure.util.Config;
 import forge.adventure.util.Paths;
 import forge.adventure.util.SaveFileContent;
 import forge.adventure.util.Serializer;
-import javafx.util.Pair;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -117,9 +116,9 @@ public class World implements  Disposable, SaveFileContent {
         long biomIndex = getBiom(x, y);
         int terrain = getTerrainIndex(x, y);
         Pixmap drawingPixmap = new Pixmap(data.tileSize, data.tileSize, Pixmap.Format.RGBA8888);
-        Array<DrawingInformation> information=new Array<>();
+        ArrayList<DrawingInformation> information=new ArrayList<>();
         for (int i = 0; i < biomTexture.length; i++) {
-            if ((biomIndex & 1 << i) == 0) {
+            if ((biomIndex & 1L << i) == 0) {
                 continue;
             }
             BiomTexture regions = biomTexture[i];
@@ -139,7 +138,7 @@ public class World implements  Disposable, SaveFileContent {
                     int otherTerrain = getTerrainIndex(x + nx, y + ny);
 
 
-                    if ((otherBiom & 1 << i) != 0 && biomTerrain <= otherTerrain)
+                    if ((otherBiom & 1L << i) != 0 && biomTerrain <= otherTerrain)
                         neighbors |= (1 << bitIndex);
 
                     bitIndex--;
@@ -151,7 +150,7 @@ public class World implements  Disposable, SaveFileContent {
                 int baseneighbors=0;
                 for (int ny = 1; ny > -2; ny--) {
                     for (int nx = -1; nx < 2; nx++) {
-                        if ((getBiom(x + nx, y + ny) & (1 << i)) != 0 )
+                        if ((getBiom(x + nx, y + ny) & (1L << i)) != 0 )
                             baseneighbors |= (1 << bitIndex);
                         bitIndex--;
                     }
@@ -171,7 +170,7 @@ public class World implements  Disposable, SaveFileContent {
 
         }
         counter=0;
-        if(lastFullNeighbour<0&&information.size!=0)
+        if(lastFullNeighbour<0&&information.size()!=0)
             information.get(0).neighbors=0b111_111_111;
         for(DrawingInformation info:information)
         {
@@ -211,7 +210,7 @@ public class World implements  Disposable, SaveFileContent {
         random.setSeed(seed);
         OpenSimplexNoise noise = new OpenSimplexNoise(seed);
 
-        double noiseZoom = data.noiseZoomBiom;
+        float noiseZoom = data.noiseZoomBiom;
         width = data.width;
         height = data.height;
         //save at all data
@@ -253,10 +252,10 @@ public class World implements  Disposable, SaveFileContent {
             for (int x = beginx; x < endx; x++) {
                 for (int y = beginy; y < endy; y++) {
                     //value 0-1 based on noise
-                    double noiseValue = (noise.eval(x / (double) width * noiseZoom, y / (double) height * noiseZoom) + 1) / 2;
+                    float noiseValue = ((float)noise.eval(x / (float) width * noiseZoom, y / (float) height * noiseZoom) + 1) / 2f;
                     noiseValue *= biom.noiseWeight;
                     //value 0-1 based on dist to origin
-                    double distanceValue = (Math.sqrt((x - biomXStart) * (x - biomXStart) + (y - biomYStart) * (y - biomYStart))) / (Math.max(biomWidth, biomHeight) / 2);
+                    float distanceValue = ((float)Math.sqrt((x - biomXStart) * (x - biomXStart) + (y - biomYStart) * (y - biomYStart))) / (Math.max(biomWidth, biomHeight) / 2f);
                     distanceValue *= biom.distWeight;
                     if (noiseValue + distanceValue < 1.0 || biom.invertHeight && (1 - noiseValue) + distanceValue < 1.0) {
                         Color color = biom.GetColor();
@@ -267,13 +266,13 @@ public class World implements  Disposable, SaveFileContent {
                         color.fromHsv(hsv);
                         pix.setColor(color.r, color.g, color.b, 1);
                         pix.drawPixel(x, y);
-                        biomMap[x][y] |= (1 << biomIndex);
+                        biomMap[x][y] |= (1L << biomIndex);
                         int terrainCounter=1;
                         if(biom.terrain==null)
                             continue;
                         for(BiomTerrainData terrain:biom.terrain)
                         {
-                            double terrainNoise = (noise.eval(x / (double) width * (noiseZoom*terrain.resolution), y / (double) height * (noiseZoom*terrain.resolution)) + 1) / 2;
+                            float terrainNoise = ((float)noise.eval(x / (float) width * (noiseZoom*terrain.resolution), y / (float) height * (noiseZoom*terrain.resolution)) + 1) / 2;
                             if(terrainNoise>=terrain.min&&terrainNoise<=terrain.max)
                             {
                                 terrainMap[x][y]=terrainCounter;
@@ -380,7 +379,7 @@ public class World implements  Disposable, SaveFileContent {
                 continue;
             usedEdges.add((long)i|((long)smallestIndex<<32));
             usedEdges.add((long)i<<32|((long)smallestIndex));
-            allSortedTowns.add(new Pair<>(current, towns.get(smallestIndex)));
+            allSortedTowns.add(Pair.of(current, towns.get(smallestIndex)));
         }
 
         biomIndex++;
@@ -393,7 +392,7 @@ public class World implements  Disposable, SaveFileContent {
             for (int x = (int) currentPoint.x - 1; x < currentPoint.x + 2; x++) {
                 for (int y = (int) currentPoint.y - 1; y < currentPoint.y + 2; y++) {
                     if(x<0||y<=0||x>=width||y>height)continue;
-                    biomMap[x][height - y] |= (1 << biomIndex);
+                    biomMap[x][height - y] |= (1L << biomIndex);
                     pix.drawPixel(x, height-y);
                 }
             }
@@ -426,7 +425,7 @@ public class World implements  Disposable, SaveFileContent {
                 }
 
                 if( (int)currentPoint.x<0|| (int)currentPoint.y<=0|| (int)currentPoint.x>=width|| (int)currentPoint.y>height)continue;
-                biomMap[(int) currentPoint.x][height - (int) currentPoint.y] |= (1 << biomIndex);
+                biomMap[(int) currentPoint.x][height - (int) currentPoint.y] |= (1L << biomIndex);
                 pix.drawPixel((int) currentPoint.x, height - (int) currentPoint.y);
             }
 
@@ -446,7 +445,7 @@ public class World implements  Disposable, SaveFileContent {
                     if (spriteNoise >= sprite.startArea && spriteNoise <= sprite.endArea) {
                         if (random.nextFloat() <= sprite.density) {
                             String spriteKey = sprite.key();
-                            int key = -1;
+                            int key;
                             if (!mapObjectIds.containsKey(spriteKey)) {
 
                                 key = mapObjectIds.put(sprite.key(), sprite, data.GetBiomSprites());
@@ -454,7 +453,7 @@ public class World implements  Disposable, SaveFileContent {
                                 key = mapObjectIds.intKey(spriteKey);
                             }
                             mapObjectIds.putPosition(key, new Vector2((float) x * data.tileSize + (random.nextFloat() * data.tileSize), (float) y * data.tileSize + (random.nextFloat() * data.tileSize)));
-                            continue;
+
                         }
                     }
                 }
