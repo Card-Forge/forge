@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Array;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -25,16 +26,16 @@ public class BiomData implements Serializable {
     public List<String> enemies;
     public List<String> pointsOfInterest;
 
-    private Array<EnemyData> enemyList;
-    private Array<PointOfInterestData> pointOfIntrestList;
+    private ArrayList<EnemyData> enemyList;
+    private ArrayList<PointOfInterestData> pointOfIntrestList;
 
     public Color GetColor() {
         return Color.valueOf(color);
     }
 
-    public Array<EnemyData> GetEnemyList() {
+    public ArrayList<EnemyData> getEnemyList() {
         if (enemyList == null) {
-            enemyList = new Array<EnemyData>();
+            enemyList = new ArrayList<EnemyData>();
             if (enemies == null)
                 return enemyList;
             for (EnemyData data : WorldData.getAllEnemies()) {
@@ -46,9 +47,9 @@ public class BiomData implements Serializable {
         return enemyList;
     }
 
-    public Array<PointOfInterestData> getPointsOfIntrest() {
+    public ArrayList<PointOfInterestData> getPointsOfIntrest() {
         if (pointOfIntrestList == null) {
-            pointOfIntrestList = new Array<PointOfInterestData>();
+            pointOfIntrestList = new ArrayList<PointOfInterestData>();
             if(pointsOfInterest==null)
                 return pointOfIntrestList;
             Array<PointOfInterestData> alltowns = PointOfInterestData.getAllPointOfInterest();

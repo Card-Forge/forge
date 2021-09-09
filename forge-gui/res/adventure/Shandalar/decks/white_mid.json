@@ -1,0 +1,9 @@
+{                                    
+"name":"White mid",
+  "template":
+  {
+   "count":60,
+   "colors":["White"],  
+   "rares":0.5
+  }
+}

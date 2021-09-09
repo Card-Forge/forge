@@ -1,0 +1,9 @@
+{                                    
+"name":"White bad",
+  "template":
+  {
+   "count":80,
+   "colors":["White"], 
+   "rares":0.1
+  }
+}
