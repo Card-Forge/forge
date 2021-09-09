@@ -1,0 +1,20 @@
+[quest]
+id=ELD Challenge: Rankle, Master of Pranks
+OpponentName=Rankle
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=Castle Locthwain|Mace of the Valiant
+HumanExtras=
+[metadata]
+Title=Rankle, Master of Pranks
+Difficulty=medium
+Description=Rankle starts with a land and a Mace of the Valiant.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+Name=ELD Challenge: Rankle, Master of Pranks
+[Main]
+30 Rankle, Master of Pranks|ELD|2
+30 Swamp|ELD|4

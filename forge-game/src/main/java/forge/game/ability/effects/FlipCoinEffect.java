@@ -68,7 +68,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
         }
 
         if ((!noCall) && (amount == 1)) {
-            flipMultiplier = getFilpMultiplier(caller.get(0));
+            flipMultiplier = getFlipMultiplier(caller.get(0));
             victory = flipCoinCall(caller.get(0), sa, flipMultiplier, varName);
         }
 
@@ -76,12 +76,12 @@ public class FlipCoinEffect extends SpellAbilityEffect {
 
         for (final Player flipper : playersToFlip) {
             if (noCall) {
-                flipMultiplier = getFilpMultiplier(flipper);
+                flipMultiplier = getFlipMultiplier(flipper);
 
                 int countHeads = 0;
                 int countTails = 0;
 
-                for(int i = 0; i < amount; ++i) {
+                for (int i = 0; i < amount; ++i) {
                     final boolean resultIsHeads = flipCoinNoCall(sa, flipper, flipMultiplier, varName);
 
                     if (resultIsHeads) {
@@ -112,13 +112,13 @@ public class FlipCoinEffect extends SpellAbilityEffect {
                         AbilityUtils.resolve(sub);
                     }
                 }
-            } else if (amount > 1){
-                flipMultiplier = getFilpMultiplier(flipper);
+            } else if (amount > 1) {
+                flipMultiplier = getFlipMultiplier(flipper);
 
                 int countWins = 0;
                 int countLosses = 0;
 
-                for(int i = 0; i < amount; ++i) {
+                for (int i = 0; i < amount; ++i) {
                     final boolean win = flipCoinCall(caller.get(0), sa, flipMultiplier, varName);
 
                     if (win) {
@@ -258,7 +258,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
         return wonFlip;
     }
 
-    public static int getFilpMultiplier(final Player flipper) {
+    public static int getFlipMultiplier(final Player flipper) {
         String str = "If you would flip a coin, instead flip two coins and ignore one.";
         return 1 + flipper.getKeywords().getAmount(str);
     }

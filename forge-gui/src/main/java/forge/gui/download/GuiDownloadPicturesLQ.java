@@ -49,7 +49,7 @@ public class GuiDownloadPicturesLQ extends GuiDownloadService {
 
         for (final PaperCard c : FModel.getMagicDb().getCommonCards().getAllCards()) {
             addDLObject(c, false);
-            if (ImageUtil.hasBackFacePicture(c)) {
+            if (c.hasBackFace()) {
                 addDLObject(c, true);
             }
         }

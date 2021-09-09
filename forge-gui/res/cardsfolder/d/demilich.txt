@@ -1,0 +1,13 @@
+Name:Demilich
+ManaCost:U U U U
+Types:Creature Skeleton Wizard
+PT:4/3
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Color$ U | Amount$ X | EffectZone$ All | Description$ This spell costs {U} less to cast for each instant and sorcery spell you've cast this turn.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, exile up to one target instant or sorcery card from your graveyard. Copy it. You may cast the copy.
+SVar:TrigExile:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ 1 | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose up to one target instant or sorcery card in your graveyard | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | RememberChanged$ True | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Defined$ Remembered | ValidSA$ Spell | Optional$ True | CopyCard$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:AltCost:Cost$ U U U U ExileFromGrave<4/Instant;Sorcery/instant or sorcery cards> | ActivationZone$ Graveyard | Description$ You may cast CARDNAME from your graveyard by exiling four instant and/or sorcery cards from your graveyard in addition to paying its other costs.
+SVar:X:Count$ThisTurnCast_Instant.YouCtrl,Sorcery.YouCtrl
+DeckNeeds:Type$Instant|Sorcery
+Oracle:This spell costs {U} less to cast for each instant and sorcery spell you've cast this turn.\nWhenever Demilich attacks, exile up to one target instant or sorcery card from your graveyard. Copy it. You may cast the copy.\nYou may cast Demilich from your graveyard by exiling four instant and/or sorcery cards from your graveyard in addition to paying its other costs.

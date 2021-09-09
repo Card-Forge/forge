@@ -1,0 +1,7 @@
+Name:Might of the Old Ways
+ManaCost:1 G
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 2 | NumDef$ 2 | SubAbility$ DBDraw | SpellDescription$ Target creature gets +2/+2 until end of turn.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE3 | StackDescription$ SpellDescription | SpellDescription$ Coven — Then if you control three or more creatures with different powers, draw a card.
+SVar:X:Count$DifferentPower_Creature.YouCtrl
+Oracle:Target creature gets +2/+2 until end of turn.\nCoven — Then if you control three or more creatures with different powers, draw a card.

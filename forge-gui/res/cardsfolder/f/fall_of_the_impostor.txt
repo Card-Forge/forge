@@ -3,7 +3,7 @@ ManaCost:1 G W
 Types:Enchantment Saga
 K:Saga:3:DBPutCounter,DBPutCounter,DBExileGreatest
 SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | TargetMin$ 0 | TargetMax$ 1 | SpellDescription$ Put a +1/+1 counter on up to one target creature.
-SVar:DBExileGreatest:DB$ Pump | ValidTgts$ Player.Opponent | RememberTargets$ True | SubAbility$ DBChooseExiled | SpellDescription$ Exile a creature with the greatest power among creatures target opponent controls.
+SVar:DBExileGreatest:DB$ Pump | ValidTgts$ Player.Opponent | RememberTargets$ True | SubAbility$ DBChooseExiled | IsCurse$ True | SpellDescription$ Exile a creature with the greatest power among creatures target opponent controls.
 SVar:DBChooseExiled:DB$ ChooseCard | Choices$ Creature.greatestPowerControlledByRemembered | MinAmount$ 1 | Amount$ 1 | Mandatory$ True | ChoiceZone$ Battlefield | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ ChosenCard | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

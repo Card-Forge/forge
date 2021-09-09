@@ -24,7 +24,7 @@ public class GameEventManaPool extends GameEvent {
     public <T> T visit(IGameEventVisitor<T> visitor) {
         return visitor.visit(this);
     }
-    
+
     /* (non-Javadoc)
      * @see java.lang.Object#toString()
      */

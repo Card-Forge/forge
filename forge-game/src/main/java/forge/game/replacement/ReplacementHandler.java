@@ -28,7 +28,9 @@ import java.util.Set;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.google.common.collect.Table;
 
 import forge.game.CardTraitBase;
 import forge.game.Game;
@@ -116,9 +118,9 @@ public class ReplacementHandler {
             }
 
             // need to check non Intrinsic
-            for (Map.Entry<Long, CardTraitChanges> e : affectedLKI.getChangedCardTraits().entrySet()) {
+            for (Table.Cell<Long, Long, CardTraitChanges> e : affectedLKI.getChangedCardTraits().cellSet()) {
                 boolean hasRunRE = false;
-                String skey = String.valueOf(e.getKey());
+                String skey = String.valueOf(e.getRowKey()) + ":" + String.valueOf(e.getColumnKey());
 
                 for (ReplacementEffect re : this.hasRun) {
                     if (!re.isIntrinsic() && skey.equals(re.getSVar("_ReplacedTimestamp"))) {
@@ -134,9 +136,9 @@ public class ReplacementHandler {
                     }
                 }
             }
-            for (Map.Entry<Long, KeywordsChange> e : affectedLKI.getChangedCardKeywords().entrySet()) {
+            for (Table.Cell<Long, Long, KeywordsChange> e : affectedLKI.getChangedCardKeywords().cellSet()) {
                 boolean hasRunRE = false;
-                String skey = String.valueOf(e.getKey());
+                String skey = String.valueOf(e.getRowKey()) + ":" + String.valueOf(e.getColumnKey());
 
                 for (ReplacementEffect re : this.hasRun) {
                     if (!re.isIntrinsic() && skey.equals(re.getSVar("_ReplacedTimestamp"))) {
@@ -274,19 +276,44 @@ public class ReplacementHandler {
             chosenRE.setOtherChoices(null);
             return res;
         }
+
+        // Log there
+        String message = chosenRE.getDescription();
+        if (!StringUtils.isEmpty(message)) {
+            if (chosenRE.getHostCard() != null) {
+                message = TextUtil.fastReplace(message, "CARDNAME", chosenRE.getHostCard().getName());
+            }
+            game.getGameLog().add(GameLogEntryType.EFFECT_REPLACED, message);
+        }
+
+        // if its updated, try to call event again
+        if (res == ReplacementResult.Updated) {
+            Map<AbilityKey, Object> params = Maps.newHashMap(runParams);
+
+            if (params.containsKey(AbilityKey.EffectOnly)) {
+                params.put(AbilityKey.EffectOnly, true);
+            }
+            ReplacementResult result = run(event, params);
+            switch (result) {
+            case NotReplaced:
+            case Updated: {
+                for (Map.Entry<AbilityKey, Object> e : params.entrySet()) {
+                    runParams.put(e.getKey(), e.getValue());
+                }
+                // effect was updated
+                runParams.put(AbilityKey.ReplacementResult, ReplacementResult.Updated);
+                break;
+            }
+            default:
+                // effect was replaced with something else
+                runParams.put(AbilityKey.ReplacementResult, result);
+                break;
+            }
+        }
+
         chosenRE.setHasRun(false);
         hasRun.remove(chosenRE);
         chosenRE.setOtherChoices(null);
-
-        // Updated Replacements need to be logged elsewhere because its otherwise in the wrong order
-        if (res != ReplacementResult.Updated) {
-            String message = chosenRE.getDescription();
-            if (!StringUtils.isEmpty(message))
-                if (chosenRE.getHostCard() != null) {
-                    message = TextUtil.fastReplace(message, "CARDNAME", chosenRE.getHostCard().getName());
-                }
-                game.getGameLog().add(GameLogEntryType.EFFECT_REPLACED, message);
-        }
 
         return res;
     }
@@ -300,7 +327,6 @@ public class ReplacementHandler {
      */
     private ReplacementResult executeReplacement(final Map<AbilityKey, Object> runParams,
         final ReplacementEffect replacementEffect, final Player decider, final Game game) {
-        final Map<String, String> mapParams = replacementEffect.getMapParams();
 
         SpellAbility effectSA = null;
 
@@ -311,10 +337,9 @@ public class ReplacementHandler {
             host = game.getCardState(host);
         }
 
-        if (replacementEffect.getOverridingAbility() == null && mapParams.containsKey("ReplaceWith")) {
-            final String effectSVar = mapParams.get("ReplaceWith");
+        if (replacementEffect.getOverridingAbility() == null && replacementEffect.hasParam("ReplaceWith")) {
             // TODO: the source of replacement effect should be the source of the original effect
-            effectSA = AbilityFactory.getAbility(host, effectSVar, replacementEffect);
+            effectSA = AbilityFactory.getAbility(host, replacementEffect.getParam("ReplaceWith"), replacementEffect);
             //replacementEffect.setOverridingAbility(effectSA);
             //effectSA.setTrigger(true);
         } else if (replacementEffect.getOverridingAbility() != null) {
@@ -342,10 +367,10 @@ public class ReplacementHandler {
         // Decider gets to choose whether or not to apply the replacement.
         if (replacementEffect.hasParam("Optional")) {
             Player optDecider = decider;
-            if (mapParams.containsKey("OptionalDecider") && (effectSA != null)) {
+            if (replacementEffect.hasParam("OptionalDecider") && (effectSA != null)) {
                 effectSA.setActivatingPlayer(host.getController());
                 optDecider = AbilityUtils.getDefinedPlayers(host,
-                        mapParams.get("OptionalDecider"), effectSA).get(0);
+                        replacementEffect.getParam("OptionalDecider"), effectSA).get(0);
             }
 
             Card cardForUi = host.getCardForUi();
@@ -360,12 +385,12 @@ public class ReplacementHandler {
             }
         }
 
-        boolean isPrevent = mapParams.containsKey("Prevent") && mapParams.get("Prevent").equals("True");
-        if (isPrevent || mapParams.containsKey("PreventionEffect")) {
+        boolean isPrevent = "True".equals(replacementEffect.getParam("Prevent"));
+        if (isPrevent || replacementEffect.hasParam("PreventionEffect")) {
             if (Boolean.TRUE.equals(runParams.get(AbilityKey.NoPreventDamage))) {
                 // If can't prevent damage, result is not replaced
                 // But still put "prevented" amount for buffered SA
-                if (mapParams.containsKey("AlwaysReplace")) {
+                if (replacementEffect.hasParam("AlwaysReplace")) {
                     runParams.put(AbilityKey.PreventedAmount, runParams.get(AbilityKey.DamageAmount));
                 } else {
                     runParams.put(AbilityKey.PreventedAmount, 0);
@@ -377,10 +402,8 @@ public class ReplacementHandler {
             }
         }
 
-        if (mapParams.containsKey("Skip")) {
-            if (mapParams.get("Skip").equals("True")) {
-                return ReplacementResult.Skipped; // Event is skipped.
-            }
+        if ("True".equals(replacementEffect.getParam("Skip"))) {
+            return ReplacementResult.Skipped; // Event is skipped.
         }
 
         Player player = host.getController();
@@ -393,6 +416,11 @@ public class ReplacementHandler {
             } else {
                 // The SA if buffered, but replacement result should be set to Replaced
                 runParams.put(AbilityKey.ReplacementResult, ReplacementResult.Replaced);
+            }
+
+            // these ones are special for updating
+            if (apiType == ApiType.ReplaceToken || apiType == ApiType.ReplaceEffect || apiType == ApiType.ReplaceMana) {
+                runParams.put(AbilityKey.ReplacementResult, ReplacementResult.Updated);
             }
         }
 

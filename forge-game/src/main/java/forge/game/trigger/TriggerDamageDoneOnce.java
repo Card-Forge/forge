@@ -7,6 +7,7 @@ import com.google.common.collect.Sets;
 
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
+import forge.game.card.CardUtil;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
 
@@ -20,7 +21,6 @@ public class TriggerDamageDoneOnce extends Trigger {
     @SuppressWarnings("unchecked")
     @Override
     public boolean performTest(Map<AbilityKey, Object> runParams) {
-
         if (hasParam("CombatDamage")) {
             if (getParam("CombatDamage").equals("True")) {
                 if (!((Boolean) runParams.get(AbilityKey.IsCombatDamage))) {
@@ -53,7 +53,11 @@ public class TriggerDamageDoneOnce extends Trigger {
         @SuppressWarnings("unchecked")
         final Map<Card, Integer> damageMap = (Map<Card, Integer>) runParams.get(AbilityKey.DamageMap);
 
-        sa.setTriggeringObject(AbilityKey.Target, runParams.get(AbilityKey.DamageTarget));
+        Object target = runParams.get(AbilityKey.DamageTarget);
+        if (target instanceof Card) {
+            target = CardUtil.getLKICopy((Card)runParams.get(AbilityKey.DamageTarget));
+        }
+        sa.setTriggeringObject(AbilityKey.Target, target);
         sa.setTriggeringObject(AbilityKey.Sources, getDamageSources(damageMap));
         sa.setTriggeringObject(AbilityKey.DamageAmount, getDamageAmount(damageMap));
     }

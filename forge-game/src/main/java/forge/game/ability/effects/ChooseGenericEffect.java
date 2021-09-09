@@ -32,6 +32,12 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
 
         final List<SpellAbility> abilities = Lists.newArrayList(sa.getAdditionalAbilityList("Choices"));
+        if (sa.hasParam("NumRandomChoices")) {
+            int n = AbilityUtils.calculateAmount(host, sa.getParam("NumRandomChoices"), sa);
+            while (abilities.size() > n) {
+                Aggregates.removeRandom(abilities);
+            }
+        }
         final SpellAbility fallback = sa.getAdditionalAbility("FallbackAbility");
         final int amount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("ChoiceAmount", "1"), sa);
         
@@ -66,10 +72,11 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
             }
 
             List<SpellAbility> chosenSAs = Lists.newArrayList();
+            String prompt = sa.getParamOrDefault("ChoicePrompt","Choose");
             if (sa.hasParam("AtRandom")) {
                 Aggregates.random(abilities, amount, chosenSAs);
             } else {
-                chosenSAs = p.getController().chooseSpellAbilitiesForEffect(abilities, sa, "Choose", amount, ImmutableMap.of());
+                chosenSAs = p.getController().chooseSpellAbilitiesForEffect(abilities, sa, prompt, amount, ImmutableMap.of());
             }
 
             if (!chosenSAs.isEmpty()) {

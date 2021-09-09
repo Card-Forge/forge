@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -24,6 +24,7 @@ import java.awt.RenderingHints;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
@@ -32,16 +33,21 @@ import java.util.concurrent.TimeUnit;
 import javax.imageio.ImageIO;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader.InvalidCacheLoadException;
 import com.google.common.cache.LoadingCache;
 import com.mortennobel.imagescaling.ResampleOp;
 
+import forge.card.CardSplitType;
+import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.gui.FThreads;
+import forge.item.IPaperCard;
 import forge.item.InventoryItem;
+import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -49,7 +55,9 @@ import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinIcon;
+import forge.toolbox.imaging.FCardImageRenderer;
 import forge.util.ImageUtil;
+import forge.util.TextUtil;
 
 /**
  * This class stores ALL card images in a cache with soft values. this means
@@ -61,7 +69,7 @@ import forge.util.ImageUtil;
  * <li>Keys start with the file name, extension is skipped</li>
  * <li>The key without suffix belongs to the unmodified image from the file</li>
  * </ul>
- * 
+ *
  * @author Forge
  * @version $Id: ImageCache.java 25093 2014-03-08 05:36:37Z drdev $
  */
@@ -81,7 +89,7 @@ public class ImageCache {
         } catch (Exception ex) {
             System.err.println("could not load default card image");
         } finally {
-            _defaultImage = (null == defImage) ? new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB) : defImage; 
+            _defaultImage = (null == defImage) ? new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB) : defImage;
         }
     }
 
@@ -96,7 +104,7 @@ public class ImageCache {
      */
     public static BufferedImage getImage(final CardView card, final Iterable<PlayerView> viewers, final int width, final int height) {
         final String key = card.getCurrentState().getImageKey(viewers);
-        return scaleImage(key, width, height, true);
+        return scaleImage(key, width, height, true, card);
     }
 
     /**
@@ -106,7 +114,7 @@ public class ImageCache {
      */
     public static BufferedImage getImageNoDefault(final CardView card, final Iterable<PlayerView> viewers, final int width, final int height) {
         final String key = card.getCurrentState().getImageKey(viewers);
-        return scaleImage(key, width, height, false);
+        return scaleImage(key, width, height, false, card);
     }
 
     /**
@@ -117,7 +125,7 @@ public class ImageCache {
         return getImage(ii, width, height, false);
     }
     public static BufferedImage getImage(InventoryItem ii, int width, int height, boolean altState) {
-        return scaleImage(ii.getImageKey(altState), width, height, true);
+        return scaleImage(ii.getImageKey(altState), width, height, true, null);
     }
 
     /**
@@ -127,44 +135,81 @@ public class ImageCache {
     public static SkinIcon getIcon(String imageKey) {
         final BufferedImage i;
         if (_missingIconKeys.contains(imageKey) ||
-                null == (i = scaleImage(imageKey, -1, -1, false))) {
+                null == (i = scaleImage(imageKey, -1, -1, false, null))) {
             _missingIconKeys.add(imageKey);
             return FSkin.getIcon(FSkinProp.ICO_UNKNOWN);
         }
         return new FSkin.UnskinnedIcon(i);
     }
-    
+
     /**
      * This requests the original unscaled image from the cache for the given key.
      * If the image does not exist then it can return a default image if desired.
      * <p>
      * If the requested image is not present in the cache then it attempts to load
-     * the image from file (slower) and then add it to the cache for fast future access. 
+     * the image from file (slower) and then add it to the cache for fast future access.
      * </p>
+     *
+     * @param cardView This is for emblem, since there is no paper card for them
+     *
      */
-    public static BufferedImage getOriginalImage(String imageKey, boolean useDefaultIfNotFound) {
-        if (null == imageKey) { 
-            return null;
+    public static BufferedImage getOriginalImage(String imageKey, boolean useDefaultIfNotFound, CardView cardView) {
+        return getOriginalImageInternal(imageKey, useDefaultIfNotFound, cardView).getLeft();
+    }
+
+    // return the pair of image and a flag to indicate if it is a placeholder image.
+    private static Pair<BufferedImage, Boolean> getOriginalImageInternal(String imageKey, boolean useDefaultIfNotFound, CardView cardView) {
+        if (null == imageKey) {
+            return Pair.of(null, false);
         }
-        
+
+        IPaperCard ipc = null;
         boolean altState = imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX);
-        if(altState)
+        if (altState)
             imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.BACKFACE_POSTFIX.length());
         if (imageKey.startsWith(ImageKeys.CARD_PREFIX)) {
-            imageKey = ImageUtil.getImageKey(ImageUtil.getPaperCardFromImageKey(imageKey), altState, true);
-            if (StringUtils.isBlank(imageKey)) { 
-                return _defaultImage;
+            ipc = ImageUtil.getPaperCardFromImageKey(imageKey);
+            if (ipc != null) {
+                imageKey = altState ? ipc.getCardAltImageKey() : ipc.getCardImageKey();
+                if (StringUtils.isBlank(imageKey))
+                    return Pair.of(_defaultImage, true);
             }
         }
 
-        // Load from file and add to cache if not found in cache initially. 
+        // Replace .full to .artcrop if art crop is preferred
+        // Only allow use art if the artist info is available
+        boolean useArtCrop = "Crop".equals(FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_ART_FORMAT))
+            && ipc != null && !ipc.getArtist().isEmpty();
+        String originalKey = imageKey;
+        if (useArtCrop) {
+            if (ipc != null && ipc.getRules().getSplitType() == CardSplitType.Flip) {
+                // Art crop will always use front face as image key for flip cards
+                imageKey = ((PaperCard) ipc).getCardImageKey();
+            }
+            imageKey = TextUtil.fastReplace(imageKey, ".full", ".artcrop");
+        }
+
+        // Load from file and add to cache if not found in cache initially.
         BufferedImage original = getImage(imageKey);
+
+        if (original == null && !useDefaultIfNotFound) {
+            return Pair.of(null, false);
+        }
+
+        // if art crop is exist, check also if the full card image is also cached.
+        if (useArtCrop && original != null) {
+            BufferedImage cached = _CACHE.getIfPresent(originalKey);
+            if (cached != null)
+                return Pair.of(cached, false);
+        }
+
+        boolean noBorder = !useArtCrop && !isPreferenceEnabled(ForgePreferences.FPref.UI_RENDER_BLACK_BORDERS);
+        boolean fetcherEnabled = isPreferenceEnabled(ForgePreferences.FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER);
+        boolean isPlaceholder = (original == null) && fetcherEnabled;
 
         // If the user has indicated that they prefer Forge NOT render a black border, round the image corners
         // to account for JPEG images that don't have a transparency.
-        boolean noBorder = !isPreferenceEnabled(ForgePreferences.FPref.UI_RENDER_BLACK_BORDERS);
         if (original != null && noBorder) {
-
             // use a quadratic equation to calculate the needed radius from an image dimension
             int radius;
             float width = original.getWidth();
@@ -197,14 +242,34 @@ public class ImageCache {
         // No image file exists for the given key so optionally associate with
         // a default "not available" image, however do not add it to the cache,
         // as otherwise it's problematic to update if the real image gets fetched.
-        if (original == null && useDefaultIfNotFound) { 
-            original = _defaultImage;
+        if (original == null || useArtCrop) {
+            if ((ipc != null || cardView != null) && !originalKey.equals(ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD))) {
+                int width = 488, height = 680;
+                BufferedImage art = original;
+                CardView card = ipc != null ? Card.getCardForUi(ipc).getView() : cardView;
+                String legalString = null;
+                original = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+                if (art != null) {
+                    Calendar cal = Calendar.getInstance();
+                    cal.setTime(StaticData.instance().getCardEdition(ipc.getEdition()).getDate());
+                    int year = cal.get(Calendar.YEAR);
+                    legalString = "Illus. " + ipc.getArtist() + "   ©" + year + " WOTC";
+                }
+                FCardImageRenderer.drawCardImage(original.createGraphics(), card, altState, width, height, art, legalString);
+                // Skip store cache since the rendering speed seems to be fast enough
+                // Also the scaleImage below will already cache re-sized image for CardPanel anyway
+                // if (art != null || !fetcherEnabled)
+                //     _CACHE.put(originalKey, original);
+            } else {
+                original = _defaultImage;
+            }
         }
 
-        return original;
+        return Pair.of(original, isPlaceholder);
     }
 
-    public static BufferedImage scaleImage(String key, final int width, final int height, boolean useDefaultImage) {
+    // cardView is for Emblem, since there is no paper card for them
+    public static BufferedImage scaleImage(String key, final int width, final int height, boolean useDefaultImage, CardView cardView) {
         if (StringUtils.isEmpty(key) || (3 > width && -1 != width) || (3 > height && -1 != height)) {
             // picture too small or key not defined; return a blank
             return null;
@@ -214,11 +279,12 @@ public class ImageCache {
 
         final BufferedImage cached = _CACHE.getIfPresent(resizedKey);
         if (null != cached) {
-            //System.out.println("found cached image: " + resizedKey);
             return cached;
         }
-        
-        BufferedImage original = getOriginalImage(key, useDefaultImage);
+
+        Pair<BufferedImage, Boolean> orgImgs = getOriginalImageInternal(key, useDefaultImage, cardView);
+        BufferedImage original = orgImgs.getLeft();
+        boolean isPlaceholder = orgImgs.getRight();
         if (original == null) { return null; }
 
         if (original == _defaultImage) {
@@ -232,7 +298,7 @@ public class ImageCache {
                 return cachedDefault;
             }
         }
-        
+
         // Calculate the scale required to best fit the image into the requested
         // (width x height) dimensions whilst retaining aspect ratio.
         double scaleX = (-1 == width ? 1 : (double)width / original.getWidth());
@@ -243,19 +309,19 @@ public class ImageCache {
         }
 
         BufferedImage result;
-        if (1 == bestFitScale) { 
+        if (1 == bestFitScale) {
             result = original;
         } else {
-            
             int destWidth  = (int)(original.getWidth()  * bestFitScale);
             int destHeight = (int)(original.getHeight() * bestFitScale);
-                         
+
             ResampleOp resampler = new ResampleOp(destWidth, destHeight);
             result = resampler.filter(original, null);
         }
-        
-        //System.out.println("caching image: " + resizedKey);
-        _CACHE.put(resizedKey, result);
+
+        if (!isPlaceholder) {
+            _CACHE.put(resizedKey, result);
+        }
         return result;
     }
     /**

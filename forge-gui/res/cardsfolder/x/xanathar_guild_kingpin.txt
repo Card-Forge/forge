@@ -1,0 +1,10 @@
+Name:Xanathar, Guild Kingpin
+ManaCost:4 U B
+Types:Legendary Creature Beholder
+PT:5/6
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ XanEffect | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, choose target opponent. Until end of turn, that player can't cast spells, you may look at the top card of their library any time, you may play the top card of their library, and you may spend mana as though it were mana of any color to cast spells this way.
+SVar:XanEffect:DB$ Effect | ValidTgts$ Opponent | StaticAbilities$ STCantBeCast,STCanPeek,STCanPlay | RememberObjects$ Targeted | AILogic$ Always
+SVar:STCantBeCast:Mode$ CantBeCast | ValidCard$ Card | Caster$ Player.IsRemembered | EffectZone$ Command | Description$ Until end of turn, the targeted player can't cast spells.
+SVar:STCanPeek:Mode$ Continuous | Affected$ Card.TopLibrary+RememberedPlayerCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of that player's library any time.
+SVar:STCanPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.TopLibrary+RememberedPlayerCtrl | AffectedZone$ Library | MayPlay$ True | MayPlayIgnoreType$ True | Description$ You may play the top card of that player's library, and you may spend mana as though it were mana of any color to cast spells this way.
+Oracle:At the beginning of your upkeep, choose target opponent. Until end of turn, that player can't cast spells, you may look at the top card of their library any time, you may play the top card of their library, and you may spend mana as though it were mana of any color to cast spells this way.

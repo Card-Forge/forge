@@ -219,7 +219,6 @@ public class DestroyAi extends SpellAbilityAi {
                 return false;
             }
 
-
             // target loop
             // TODO use can add more Targets
             while (sa.getTargets().size() < maxTargets) {
@@ -411,7 +410,6 @@ public class DestroyAi extends SpellAbilityAi {
         } else {
             return mandatory;
         }
-
     }
 
     public boolean doLandForLandRemovalLogic(SpellAbility sa, Player ai, Card tgtLand, String logic) {

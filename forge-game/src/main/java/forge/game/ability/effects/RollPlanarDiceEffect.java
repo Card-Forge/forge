@@ -3,6 +3,7 @@ package forge.game.ability.effects;
 import forge.game.Game;
 import forge.game.PlanarDice;
 import forge.game.ability.SpellAbilityEffect;
+import forge.game.event.GameEventRollDie;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
@@ -26,6 +27,8 @@ public class RollPlanarDiceEffect extends SpellAbilityEffect {
             game.getPhaseHandler().incPlanarDiceRolledthisTurn();
         }
         PlanarDice result = PlanarDice.roll(activator, null);
+        // Play the die roll sound
+        activator.getGame().fireEvent(new GameEventRollDie());
         String message = Localizer.getInstance().getMessage("lblPlayerRolledResult", activator.getName(), result.toString());
         game.getAction().notifyOfValue(sa, activator, message, null);
 

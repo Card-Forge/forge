@@ -85,9 +85,6 @@ public class PumpAllAi extends PumpAiBase {
         CardCollection comp = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid, source.getController(), source, sa);
         CardCollection human = CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), valid, source.getController(), source, sa);
 
-        if (!game.getStack().isEmpty() && !sa.isCurse()) {
-            return pumpAgainstRemoval(ai, sa, comp);
-        }
         if (sa.isCurse()) {
             if (defense < 0) { // try to destroy creatures
                 comp = CardLists.filter(comp, new Predicate<Card>() {
@@ -143,6 +140,10 @@ public class PumpAllAi extends PumpAiBase {
             return (ComputerUtilCard.evaluateCreatureList(comp) + 200) < ComputerUtilCard.evaluateCreatureList(human);
         } // end Curse
 
+        if (!game.getStack().isEmpty()) {
+            return pumpAgainstRemoval(ai, sa, comp);
+        }
+
         return !CardLists.getValidCards(getPumpCreatures(ai, sa, defense, power, keywords, false), valid, source.getController(), source, sa).isEmpty();
     } // pumpAllCanPlayAI()
 
@@ -153,6 +154,11 @@ public class PumpAllAi extends PumpAiBase {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        // it might help so take it
+        if (!sa.usesTargeting() && !sa.isCurse() && sa.getParam("ValidCards") != null && sa.getParam("ValidCards").contains("YouCtrl")) {
+            return true;
+        }
+
         // important to call canPlay first so targets are added if needed
         return canPlayAI(ai, sa) || mandatory;
     }

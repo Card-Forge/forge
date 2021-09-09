@@ -9,236 +9,236 @@ Booster=10 Common, 3 Uncommon, 1 Rare, 1 BasicLand
 ScryfallCode=ME3
 
 [cards]
-85 U Active Volcano
-1 R Akron Legionnaire
-2 U Alabaster Potion
-57 R All Hallow's Eve
-3 C Amrou Kithkin
-86 C Anaba Ancestor
-87 C Anaba Spirit Crafter
-141 R Angus Mackenzie
-113 R Arboria
-142 R Arcades Sabboth
-188 R Arena of the Ancients
-58 U Ashes to Ashes
-189 C Astrolabe
-143 U Axelrod Gunnarson
-59 U Banshee
-144 C Barktooth Warbeard
-190 R Barl's Cage
-145 U Bartel Runeaxe
-204 R Bayou
-205 R Bazaar of Baghdad
-29 C Benthic Explorers
-191 R Black Vise
-88 C Blood Lust
-192 C Bone Flute
-30 C Boomerang
-146 U Boris Devilboon
-31 U Borrowing 100,000 Arrows
-32 C Brilliant Plan
-89 R Burning of Xinye
-4 U Call to Arms
-33 R Capture of Jingzhou
-60 U Carrion Ants
-90 C Chain Lightning
-147 R Chromium
-91 U Cinder Storm
-206 R City of Shadows
-5 R Cleanse
-193 C Coal Golem
-114 R Concordant Crossroads
-92 U Corrupt Eunuchs
-61 R Cosmic Horror
-93 C Crimson Kobolds
-94 U Crimson Manticore
-34 U Dance of Many
-6 C D'Avenant Archer
-62 C Demonic Torment
-115 U Desert Twister
-63 C Desperate Charge
-194 U Didgeridoo
-7 C Disenchant
-95 U Disharmony
-8 R Divine Intervention
-96 R Dong Zhou, the Tyrant
-9 U Eightfold Maze
-116 C Elves of Deep Shadow
-64 C Evil Presence
-10 U Exorcist
-117 U Faerie Noble
-11 U False Defeat
-65 U Famine
-195 C Fellwar Stone
-66 C Fevered Strength
-97 C Fire Ambush
-98 C Fire Drake
-118 C Fire Sprites
-99 R Firestorm Phoenix
-35 U Flash Flood
-36 C Force Spike
-37 C Forced Retreat
-228 L Forest
-229 L Forest
-230 L Forest
-100 U Forked Lightning
-119 R Freyalise's Winds
-101 U Frost Giant
-148 R Gabriel Angelfire
-120 U Gaea's Touch
-196 R Gauntlets of Chaos
-67 C Ghostly Visit
-68 C Ghosts of the Damned
-121 C Giant Growth
-69 R Grim Tutor
-12 U Guan Yu, Sainted Warrior
-13 R Guan Yu's 1,000-Li March
-149 R Gwendlyn Di Corci
-150 R Halfdane
-207 U Hammerheim
-151 R Hazezon Tamar
-14 C Heal
-122 C Heavy Fog
-70 R Hellfire
-123 R Hua Tuo, Honored Physician
-152 U Hunding Gjornersen
-124 C Hunting Cheetah
-102 C Hurloon Minotaur
-197 R Illusionary Mask
-103 C Immolation
-38 C Infuse
-219 L Island
-220 L Island
-221 L Island
-15 U Ivory Guardians
-153 C Jedit Ojanen
-154 C Jerrard of the Closed Fist
-125 C Jungle Lion
-208 R Karakas
-155 U Kei Takahashi
-126 U Killer Bees
-156 U Kjeldoran Frostbeast
-198 U Knowledge Vault
-104 U Kobold Drill Sergeant
-105 U Kobold Overlord
-106 C Kobold Taskmaster
-107 C Kobolds of Kher Keep
-16 R Kongming, "Sleeping Dragon"
-39 C Labyrinth Minotaur
-157 U Lady Caleria
-158 U Lady Evangela
-159 C Lady Orca
-40 R Land Equilibrium
-17 R Land Tax
-71 C Lesser Werewolf
-199 R Life Chisel
-18 C Lightning Blow
-19 R Liu Bei, Lord of Shu
-127 R Living Plane
-160 U Livonya Silone
-20 U Loyal Retainers
-108 R Lu Bu, Master-at-Arms
-41 U Lu Meng, Wu General
-42 U Lu Xun, Scholar General
-43 R Mana Drain
-44 R Mana Vortex
-161 U Marhault Elsdragon
-128 R Meng Huo, Barbarian King
-129 C Meng Huo's Horde
-72 R Mind Twist
-21 C Misfortune's Gain
-225 L Mountain
-226 L Mountain
-227 L Mountain
-162 U Nebuchadnezzar
-73 R Nether Void
-163 R Nicol Bolas
-200 R Nova Pentacle
-45 R Old Man of the Sea
-164 R Palladia-Mors
-165 U Pavel Maliki
-22 C Peach Garden Oath
-216 L Plains
-217 L Plains
-218 L Plains
-209 R Plateau
-166 U Princess Lucrezia
-109 C Raging Minotaur
-167 U Ragnar
-168 C Ramirez DePietro
-169 U Ramses Overdark
-170 R Rasputin Dreamweaver
-46 U Recall
-130 U Reincarnation
-47 C Remove Soul
-48 R Reset
-49 U Reveka, Wizard Savant
-131 U Riding the Dilu Horse
-171 U Riven Turnbull
-172 R Rohgahh of Kher Keep
-110 R Rolling Earthquake
-173 R Rubinia Soulsinger
-210 R Scrubland
-132 C Scryb Sprites
-23 C Shu Cavalry
-24 C Shu Elite Companions
-25 C Shu General
-26 C Shu Soldier-Farmers
-174 C Sir Shandlar of Eberyn
-175 C Sivitri Scarzam
-133 C Slashing Tiger
-201 C Sol Grail
-211 R Sorrow's Path
-176 U Spectral Shield
-50 U Spiny Starfish
-74 C Spirit Shackle
-134 C Spoils of Victory
-177 U Stangg
-75 U Stolen Grain
-111 R Storm World
-51 C Strategic Planning
-52 U Sun Ce, Young Conquerer
-53 R Sun Quan, Lord of Wu
-178 U Sunastian Falconer
-222 L Swamp
-223 L Swamp
-224 L Swamp
-202 R Sword of the Ages
-76 U Takklemaggot
-179 R Tetsuo Umezawa
-77 R The Abyss
-180 C The Lady of the Mountain
-212 R The Tabernacle at Pendrell Vale
-78 U The Wretched
-135 C Three Visits
-181 C Tobias Andrion
-182 U Tor Wauki
-183 C Torsten Von Ursus
-136 U Tracker
-137 C Trip Wire
-213 R Tropical Island
-184 U Tuknir Deathlock
-214 U Urborg
-185 R Vaevictis Asmadi
-215 R Volcanic Island
-203 R Voodoo Doll
-27 C Wall of Light
-186 R Wandering Mage
-79 C Wei Elite Companions
-80 C Wei Infantry
-81 U Wei Night Raiders
-82 C Wei Strike Force
-138 U Willow Priestess
-139 R Willow Satyr
-140 U Wormwood Treefolk
-54 C Wu Elite Cavalry
-55 C Wu Longbowman
-56 C Wu Warship
-83 U Xiahou Dun, the One-Eyed
-187 R Xira Arien
-84 C Young Wei Recruits
-28 U Zhang Fei, Fierce Warrior
-112 R Zodiac Dragon
+85 U Active Volcano @Justin Hampton
+1 R Akron Legionnaire @Mark Poole
+2 U Alabaster Potion @Harold McNeill
+57 R All Hallow's Eve @Christopher Rush
+3 C Amrou Kithkin @Quinton Hoover
+86 C Anaba Ancestor @Anson Maddocks
+87 C Anaba Spirit Crafter @Anson Maddocks
+141 R Angus Mackenzie @Bryon Wackwitz
+113 R Arboria @Daniel Gelon
+142 R Arcades Sabboth @Edward P. Beard, Jr.
+188 R Arena of the Ancients @Tom Wänerstrand
+58 U Ashes to Ashes @Drew Tucker
+189 C Astrolabe @Amy Weber
+143 U Axelrod Gunnarson @Scott Kirschner
+59 U Banshee @Jesper Myrfors
+144 C Barktooth Warbeard @Andi Rusu
+190 R Barl's Cage @Tom Wänerstrand
+145 U Bartel Runeaxe @Andi Rusu
+204 R Bayou @Jesper Myrfors
+205 R Bazaar of Baghdad @Jeff A. Menges
+29 C Benthic Explorers @Greg Simanson
+191 R Black Vise @Richard Thomas
+88 C Blood Lust @Anson Maddocks
+192 C Bone Flute @Christopher Rush
+30 C Boomerang @Brian Snõddy
+146 U Boris Devilboon @Jesper Myrfors
+31 U Borrowing 100,000 Arrows @Song Shikai
+32 C Brilliant Plan @Song Shikai
+89 R Burning of Xinye @Yang Hong
+4 U Call to Arms @Randy Gallegos
+33 R Capture of Jingzhou @Jack Wei
+60 U Carrion Ants @Richard Thomas
+90 C Chain Lightning @Sandra Everingham
+147 R Chromium @Edward P. Beard, Jr.
+91 U Cinder Storm @Mark Tedin
+206 R City of Shadows @Tom Wänerstrand
+5 R Cleanse @Phil Foglio
+193 C Coal Golem @Christopher Rush
+114 R Concordant Crossroads @Amy Weber
+92 U Corrupt Eunuchs @Li Yousong
+61 R Cosmic Horror @Jesper Myrfors
+93 C Crimson Kobolds @Anson Maddocks
+94 U Crimson Manticore @Daniel Gelon
+34 U Dance of Many @Sandra Everingham
+6 C D'Avenant Archer @Douglas Shuler
+62 C Demonic Torment @Anson Maddocks
+115 U Desert Twister @Susan Van Camp
+63 C Desperate Charge @Chen Weidong
+194 U Didgeridoo @Melissa A. Benson
+7 C Disenchant @Amy Weber
+95 U Disharmony @Bryon Wackwitz
+8 R Divine Intervention @Amy Weber
+96 R Dong Zhou, the Tyrant @Inoue Junichi
+9 U Eightfold Maze @Shang Huitong
+116 C Elves of Deep Shadow @Jesper Myrfors
+64 C Evil Presence @Sandra Everingham
+10 U Exorcist @Drew Tucker
+117 U Faerie Noble @Susan Van Camp
+11 U False Defeat @Li Wang
+65 U Famine @Sun Nan
+195 C Fellwar Stone @Quinton Hoover
+66 C Fevered Strength @Brian Snõddy
+97 C Fire Ambush @Tang Xiaogu
+98 C Fire Drake @Christopher Rush
+118 C Fire Sprites @Julie Baroh
+99 R Firestorm Phoenix @Jeff A. Menges
+35 U Flash Flood @Tom Wänerstrand
+36 C Force Spike @Bryon Wackwitz
+37 C Forced Retreat @Huang Qishi
+228 L Forest @Ji Yong
+229 L Forest @Ji Yong
+230 L Forest @Ji Yong
+100 U Forked Lightning @Ted Naifeh
+119 R Freyalise's Winds @Mark Tedin
+101 U Frost Giant @Daniel Gelon
+148 R Gabriel Angelfire @Daniel Gelon
+120 U Gaea's Touch @Mark Poole
+196 R Gauntlets of Chaos @Dan Frazier
+67 C Ghostly Visit @Kang Yu
+68 C Ghosts of the Damned @Edward P. Beard, Jr.
+121 C Giant Growth @DiTerlizzi
+69 R Grim Tutor @Mark Tedin
+12 U Guan Yu, Sainted Warrior @Qiao Dafu
+13 R Guan Yu's 1,000-Li March @Yang Guangmai
+149 R Gwendlyn Di Corci @Julie Baroh
+150 R Halfdane @Melissa A. Benson
+207 U Hammerheim @Bryon Wackwitz
+151 R Hazezon Tamar @Richard Kane Ferguson
+14 C Heal @Mark Tedin
+122 C Heavy Fog @Liu Shangying
+70 R Hellfire @Pete Venters
+123 R Hua Tuo, Honored Physician @Gao Jianzhang
+152 U Hunding Gjornersen @Richard Thomas
+124 C Hunting Cheetah @Fang Yue
+102 C Hurloon Minotaur @Anson Maddocks
+197 R Illusionary Mask @Amy Weber
+103 C Immolation @Scott Kirschner
+38 C Infuse @Randy Gallegos
+219 L Island @Ku Xueming
+220 L Island @Ku Xueming
+221 L Island @Ku Xueming
+15 U Ivory Guardians @Melissa A. Benson
+153 C Jedit Ojanen @Mark Poole
+154 C Jerrard of the Closed Fist @Andi Rusu
+125 C Jungle Lion @Janine Johnston
+208 R Karakas @Nicola Leonard
+155 U Kei Takahashi @Scott Kirschner
+126 U Killer Bees @Phil Foglio
+156 U Kjeldoran Frostbeast @Mark Poole
+198 U Knowledge Vault @Amy Weber
+104 U Kobold Drill Sergeant @Julie Baroh
+105 U Kobold Overlord @Julie Baroh
+106 C Kobold Taskmaster @Randy Asplund-Faith
+107 C Kobolds of Kher Keep @Julie Baroh
+16 R Kongming, "Sleeping Dragon" @Gao Yan
+39 C Labyrinth Minotaur @Anson Maddocks
+157 U Lady Caleria @Bryon Wackwitz
+158 U Lady Evangela @Mark Poole
+159 C Lady Orca @Sandra Everingham
+40 R Land Equilibrium @Jesper Myrfors
+17 R Land Tax @Brian Snõddy
+71 C Lesser Werewolf @Quinton Hoover
+199 R Life Chisel @Anthony S. Waters
+18 C Lightning Blow @Harold McNeill
+19 R Liu Bei, Lord of Shu @Qiao Dafu
+127 R Living Plane @Bryon Wackwitz
+160 U Livonya Silone @Richard Kane Ferguson
+20 U Loyal Retainers @Solomon Au Yeung
+108 R Lu Bu, Master-at-Arms @Gao Jianzhang
+41 U Lu Meng, Wu General @Gao Yan
+42 U Lu Xun, Scholar General @Xu Xiaoming
+43 R Mana Drain @Mark Tedin
+44 R Mana Vortex @Douglas Shuler
+161 U Marhault Elsdragon @Mark Poole
+128 R Meng Huo, Barbarian King @Yang Guangmai
+129 C Meng Huo's Horde @Li Tie
+72 R Mind Twist @Julie Baroh
+21 C Misfortune's Gain @Jiaming
+225 L Mountain @Qin Jun
+226 L Mountain @Qin Jun
+227 L Mountain @Qin Jun
+162 U Nebuchadnezzar @Richard Kane Ferguson
+73 R Nether Void @Harold McNeill
+163 R Nicol Bolas @Edward P. Beard, Jr.
+200 R Nova Pentacle @Richard Thomas
+45 R Old Man of the Sea @Susan Van Camp
+164 R Palladia-Mors @Edward P. Beard, Jr.
+165 U Pavel Maliki @Andi Rusu
+22 C Peach Garden Oath @Qiao Dafu
+216 L Plains @He Jiancheng
+217 L Plains @He Jiancheng
+218 L Plains @He Jiancheng
+209 R Plateau @Cornelius Brudi
+166 U Princess Lucrezia @Edward P. Beard, Jr.
+109 C Raging Minotaur @Scott M. Fischer
+167 U Ragnar @Melissa A. Benson
+168 C Ramirez DePietro @Phil Foglio
+169 U Ramses Overdark @Richard Kane Ferguson
+170 R Rasputin Dreamweaver @Andi Rusu
+46 U Recall @Brian Snõddy
+130 U Reincarnation @Edward P. Beard, Jr.
+47 C Remove Soul @Brian Snõddy
+48 R Reset @Nicola Leonard
+49 U Reveka, Wizard Savant @Susan Van Camp
+131 U Riding the Dilu Horse @Hong Yan
+171 U Riven Turnbull @Richard Kane Ferguson
+172 R Rohgahh of Kher Keep @Edward P. Beard, Jr.
+110 R Rolling Earthquake @Yang Hong
+173 R Rubinia Soulsinger @Rob Alexander
+210 R Scrubland @Jesper Myrfors
+132 C Scryb Sprites @Amy Weber
+23 C Shu Cavalry @Li Xiaohua
+24 C Shu Elite Companions @Qiao Dafu
+25 C Shu General @Li Xiaohua
+26 C Shu Soldier-Farmers @Li Xiaohua
+174 C Sir Shandlar of Eberyn @Andi Rusu
+175 C Sivitri Scarzam @NéNé Thomas
+133 C Slashing Tiger @Yang Jun Kwon
+201 C Sol Grail @Christopher Rush
+211 R Sorrow's Path @Randy Asplund-Faith
+176 U Spectral Shield @Margaret Organ-Kean
+50 U Spiny Starfish @Alan Rabinowitz
+74 C Spirit Shackle @Edward P. Beard, Jr.
+134 C Spoils of Victory @Sun Nan
+177 U Stangg @Mark Poole
+75 U Stolen Grain @LHQ
+111 R Storm World @Christopher Rush
+51 C Strategic Planning @Zhang Jiazhen
+52 U Sun Ce, Young Conquerer @Yang Guangmai
+53 R Sun Quan, Lord of Wu @Xu Xiaoming
+178 U Sunastian Falconer @Christopher Rush
+222 L Swamp @Wang Chuxiong
+223 L Swamp @Wang Chuxiong
+224 L Swamp @Wang Chuxiong
+202 R Sword of the Ages @Dan Frazier
+76 U Takklemaggot @Daniel Gelon
+179 R Tetsuo Umezawa @Julie Baroh
+77 R The Abyss @Pete Venters
+180 C The Lady of the Mountain @Richard Kane Ferguson
+212 R The Tabernacle at Pendrell Vale @Nicola Leonard
+78 U The Wretched @Christopher Rush
+135 C Three Visits @Qu Xin
+181 C Tobias Andrion @Andi Rusu
+182 U Tor Wauki @Randy Asplund-Faith
+183 C Torsten Von Ursus @Mark Poole
+136 U Tracker @Jeff A. Menges
+137 C Trip Wire @Hong Yan
+213 R Tropical Island @Jesper Myrfors
+184 U Tuknir Deathlock @Liz Danforth
+214 U Urborg @Bryon Wackwitz
+185 R Vaevictis Asmadi @Andi Rusu
+215 R Volcanic Island @Brian Snõddy
+203 R Voodoo Doll @Sandra Everingham
+27 C Wall of Light @Richard Thomas
+186 R Wandering Mage @Pete Venters
+79 C Wei Elite Companions @Li Youliang
+80 C Wei Infantry @LHQ
+81 U Wei Night Raiders @Wang Feng
+82 C Wei Strike Force @Tang Xiaogu
+138 U Willow Priestess @Susan Van Camp
+139 R Willow Satyr @Jeff A. Menges
+140 U Wormwood Treefolk @Jesper Myrfors
+54 C Wu Elite Cavalry @Li Wang
+55 C Wu Longbowman @Xu Tan
+56 C Wu Warship @Jiang Zhuqing
+83 U Xiahou Dun, the One-Eyed @Junko Taguchi
+187 R Xira Arien @Melissa A. Benson
+84 C Young Wei Recruits @Li Youliang
+28 U Zhang Fei, Fierce Warrior @Qiao Dafu
+112 R Zodiac Dragon @Qi Baocheng
 
 [tokens]
 minor_demon

@@ -407,6 +407,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 if (num.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
                     // Set PayX here to maximum value.
                     int xPay = ComputerUtilCost.getMaxXValue(sa, ai);
+                    if (xPay == 0) return false;
                     xPay = Math.min(xPay, list.size());
                     sa.setXManaCostPaid(xPay);
                 }
@@ -1129,7 +1130,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
         }
 
-        boolean doWithoutTarget = sa.hasParam("Planeswalker") && sa.usesTargeting()
+        boolean doWithoutTarget = sa.isPwAbility() && sa.usesTargeting()
                 && sa.getMinTargets() == 0
                 && sa.getPayCosts().hasSpecificCostType(CostPutCounter.class);
 

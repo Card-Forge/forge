@@ -1,22 +1,12 @@
 package forge.screens.settings;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import com.badlogic.gdx.utils.Align;
-
 import forge.Forge;
 import forge.Graphics;
 import forge.MulliganDefs;
 import forge.StaticData;
 import forge.ai.AiProfileUtil;
-import forge.assets.FLanguage;
-import forge.assets.FSkin;
-import forge.assets.FSkinColor;
-import forge.assets.FSkinFont;
-import forge.assets.FSkinImage;
-import forge.assets.ImageCache;
+import forge.assets.*;
 import forge.game.GameLogEntryType;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
@@ -36,6 +26,10 @@ import forge.toolbox.FOptionPane;
 import forge.util.Callback;
 import forge.util.Localizer;
 import forge.util.Utils;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class SettingsPage extends TabPage<SettingsScreen> {
     private final FGroupList<Setting> lstSettings = add(new FGroupList<>());
@@ -352,6 +346,28 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         }
                     },
                 3);
+        lstSettings.addItem(new BooleanSetting(FPref.ALLOW_CUSTOM_CARDS_IN_DECKS_CONFORMANCE,
+                                    localizer.getMessage("lblAllowCustomCardsInDecks"),
+                                    localizer.getMessage("nlAllowCustomCardsInDecks")) {
+                                @Override
+                                public void select() {
+                                    super.select();
+                                    FOptionPane.showConfirmDialog(
+                                            localizer.getMessage("lblRestartForgeDescription"),
+                                            localizer.getMessage("lblRestartForge"),
+                                            localizer.getMessage("lblRestart"),
+                                            localizer.getMessage("lblLater"), new Callback<Boolean>() {
+                                                @Override
+                                                public void run(Boolean result) {
+                                                    if (result) {
+                                                        Forge.restart(true);
+                                                    }
+                                                }
+                                            }
+                                    );
+                                }
+                            },
+                3);
         lstSettings.addItem(new BooleanSetting(FPref.UI_NETPLAY_COMPAT,
                 localizer.getMessage("lblExperimentalNetworkCompatibility"),
                 localizer.getMessage("nlExperimentalNetworkCompatibility")) {
@@ -414,7 +430,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_PREFERRED_ART,
                 localizer.getMessage("lblPreferredArt"),
                 localizer.getMessage("nlPreferredArt"),
-                new String[]{"Latest", "Earliest", "Default"}) {
+                FModel.getMagicDb().getCardArtAvailablePreferences()) {
                     @Override
                     public void valueChanged(String newValue) {
                         super.valueChanged(newValue);
@@ -433,6 +449,11 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         );
                     }
                 },
+                4);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_SMART_CARD_ART,
+                        localizer.getMessage("lblSmartCardArtOpt"),
+                        localizer.getMessage("nlSmartCardArtOpt") + "\n"
+                                + localizer.getMessage("nlSmartCardArtOptNote")),
                 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_FOIL_EFFECT,
                 localizer.getMessage("cbDisplayFoil"),
@@ -500,7 +521,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_ENABLE_BORDER_MASKING,
                 localizer.getMessage("lblBorderMaskOption"),
                 localizer.getMessage("nlBorderMaskOption"),
-                new String[]{"Off", "Crop", "Full"}) {
+                new String[]{"Off", "Crop", "Full", "Art"}) {
             @Override
             public void valueChanged(String newValue) {
                 super.valueChanged(newValue);

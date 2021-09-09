@@ -15,7 +15,6 @@ public class LifeLoseEffect extends SpellAbilityEffect {
      */
     @Override
     protected String getStackDescription(SpellAbility sa) {
-
         final StringBuilder sb = new StringBuilder();
         final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("LifeAmount"), sa);
 
@@ -33,7 +32,6 @@ public class LifeLoseEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-
         int lifeLost = 0;
 
         final int lifeAmount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("LifeAmount"), sa);

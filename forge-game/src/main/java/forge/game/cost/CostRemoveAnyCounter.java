@@ -79,8 +79,6 @@ public class CostRemoveAnyCounter extends CostPart {
         return allCounters;
     }
 
-
-
     /*
      * (non-Javadoc)
      *
@@ -111,7 +109,6 @@ public class CostRemoveAnyCounter extends CostPart {
 
         return sb.toString();
     }
-
 
     @Override
     public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability) {

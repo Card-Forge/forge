@@ -2,8 +2,8 @@
 Code=PCNS
 Date=2014-06-06
 Name=Conspiracy Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PCNS
 
 [cards]
-48★ R Magister of Worth
+48★ R Magister of Worth @rk post

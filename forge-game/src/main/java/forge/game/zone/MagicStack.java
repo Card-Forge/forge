@@ -35,11 +35,13 @@ import com.google.common.collect.Sets;
 
 import forge.GameCommand;
 import forge.game.Game;
+import forge.game.GameActionUtil;
 import forge.game.GameLogEntryType;
 import forge.game.GameObject;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
+import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardUtil;
@@ -133,7 +135,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         if (!ability.isCopied()) {
             // Copied abilities aren't activated, so they shouldn't change these values
             source.addAbilityActivated(ability);
-            ability.checkActivationResloveSubs();
+            ability.checkActivationResolveSubs();
         }
 
         // if the ability is a spell, but not a copied spell and its not already
@@ -224,8 +226,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 undoStackOwner = activator;
             }
             undoStack.push(sp);
-        }
-        else {
+        } else {
             clearUndoStack();
         }
 
@@ -324,6 +325,11 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             // Run Cycled triggers
             if (sp.isCycling()) {
                 activator.addCycled(sp);
+            }
+
+            // Log number of Equips
+            if (sp.hasParam("Equip")) {
+                activator.addEquipped();
             }
 
             if (sp.hasParam("Crew")) {
@@ -450,9 +456,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             game.getPhaseHandler().setPriority(sp.getActivatingPlayer());
         }
 
-        //FIXME: additional check cmc, etc..
-        game.getTriggerHandler().resetActiveTriggers();
-        game.getAction().checkStaticAbilities();
+        GameActionUtil.checkStaticAfterPaying(sp.getHostCard());
 
         if (sp.isSpell() && !sp.isCopied()) {
             thisTurnCast.add(CardUtil.getLKICopy(sp.getHostCard()));
@@ -623,8 +627,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         if (sa.usesTargeting()) {
             if (sa.isZeroTargets()) {
                 // Nothing targeted, and nothing needs to be targeted.
-            }
-            else {
+            } else {
                 // Some targets were chosen, fizzling for this subability is now possible
                 //fizzle = true;
                 // With multi-targets, as long as one target is still legal,
@@ -670,8 +673,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
         else if (sa.getTargetCard() != null) {
             fizzle = !sa.canTarget(sa.getTargetCard());
-        }
-        else {
+        } else {
             // Set fizzle to the same as the parent if there's no target info
             fizzle = parentFizzled;
         }
@@ -794,7 +796,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             result |= chooseOrderOfSimultaneousStackEntry(whoAddsToStack);
             // 2014-08-10 Fix infinite loop when a player dies during a multiplayer game during their turn
             whoAddsToStack = game.getNextPlayerAfter(whoAddsToStack);
-        } while( whoAddsToStack != null && whoAddsToStack != playerTurn);
+        } while (whoAddsToStack != null && whoAddsToStack != playerTurn);
         return result;
     }
 
@@ -804,9 +806,19 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         final List<SpellAbility> activePlayerSAs = Lists.newArrayList();
+        final List<SpellAbility> failedSAs = Lists.newArrayList();
         for (int i = 0; i < simultaneousStackEntryList.size(); i++) {
             SpellAbility sa = simultaneousStackEntryList.get(i);
             Player activator = sa.getActivatingPlayer();
+
+            if (sa.getApi() == ApiType.Charm) {
+                if (!CharmEffect.makeChoices(sa)) {
+                    // 603.3c If no mode is chosen, the ability is removed from the stack.
+                    failedSAs.add(sa);
+                    continue;
+                }
+            }
+
             if (activator == null) {
                 if (sa.getHostCard().getController().equals(activePlayer)) {
                     activePlayerSAs.add(sa);
@@ -818,6 +830,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             }
         }
         simultaneousStackEntryList.removeAll(activePlayerSAs);
+        simultaneousStackEntryList.removeAll(failedSAs);
 
         if (activePlayerSAs.isEmpty()) {
             return false;
@@ -870,8 +883,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     public final void addCastCommand(final String valid, final GameCommand c) {
         if (commandList.containsKey(valid)) {
             commandList.get(valid).add(0, c);
-        }
-        else {
+        } else {
             commandList.put(valid, Lists.newArrayList(c));
         }
     }

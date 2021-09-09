@@ -32,6 +32,7 @@ public final class ForgeConstants {
 
     public static final String RES_DIR = ASSETS_DIR + "res" + PATH_SEPARATOR;
     public static final String LISTS_DIR = RES_DIR + "lists" + PATH_SEPARATOR;
+    public static final String SETLOOKUP_DIR = RES_DIR + "setlookup" + PATH_SEPARATOR;
     public static final String KEYWORD_LIST_FILE                     = LISTS_DIR + "NonStackingKWList.txt";
     public static final String TYPE_LIST_FILE                        = LISTS_DIR + "TypeLists.txt";
     public static final String PLANESWALKER_ACHIEVEMENT_LIST_FILE    = LISTS_DIR + "planeswalker-achievements.txt";
@@ -51,11 +52,13 @@ public final class ForgeConstants {
     public static final String NET_DECKS_OATHBREAKER_LIST_FILE       = LISTS_DIR + "net-decks-oathbreaker.txt";
     public static final String NET_DECKS_TINYLEADERS_LIST_FILE       = LISTS_DIR + "net-decks-tinyleaders.txt";
     public static final String BORDERLESS_CARD_LIST_FILE             = LISTS_DIR + "borderlessCardList.txt";
+    public static final String CLASSIC_MODULE_CARD_TO_CROP_FILE      = LISTS_DIR + "classicModuleCardtoCrop.txt";
     public static final String SKINS_LIST_FILE                       = LISTS_DIR + "skinsList.txt";
     public static final String CJK_FONTS_LIST_FILE                   = LISTS_DIR + "font-list.txt";
     public static final String NET_ARCHIVE_STANDARD_DECKS_LIST_FILE  = LISTS_DIR + "net-decks-archive-standard.txt";
     public static final String NET_ARCHIVE_PIONEER_DECKS_LIST_FILE   = LISTS_DIR + "net-decks-archive-pioneer.txt";
     public static final String NET_ARCHIVE_MODERN_DECKS_LIST_FILE    = LISTS_DIR + "net-decks-archive-modern.txt";
+    public static final String NET_ARCHIVE_PAUPER_DECKS_LIST_FILE    = LISTS_DIR + "net-decks-archive-pauper.txt";
     public static final String NET_ARCHIVE_LEGACY_DECKS_LIST_FILE    = LISTS_DIR + "net-decks-archive-legacy.txt";
     public static final String NET_ARCHIVE_VINTAGE_DECKS_LIST_FILE   = LISTS_DIR + "net-decks-archive-vintage.txt";
     public static final String NET_ARCHIVE_BLOCK_DECKS_LIST_FILE     = LISTS_DIR + "net-decks-archive-block.txt";
@@ -118,6 +121,9 @@ public final class ForgeConstants {
     public static final String SPRITE_SLEEVES2_FILE   = "sprite_sleeves2.png";
     public static final String SPRITE_FAVICONS_FILE   = "sprite_favicons.png";
     public static final String SPRITE_PLANAR_CONQUEST_FILE = "sprite_planar_conquest.png";
+    public static final String SPRITE_SETLOGO_FILE    = "sprite_setlogo.png";
+    public static final String SPRITE_WATERMARK_FILE  = "sprite_watermark.png";
+    public static final String SPRITE_CARDBG_FILE     = "sprite_cardbg.png";
     public static final String FONT_FILE              = "font1.ttf";
     public static final String SPLASH_BG_FILE         = "bg_splash.png";
     public static final String MATCH_BG_FILE          = "bg_match.jpg";
@@ -349,7 +355,6 @@ public final class ForgeConstants {
 
     // Constants for Land played notification policy
     public static final String SWITCH_CARDSTATES_DECK_NEVER = "Never";
-    public static final String SWITCH_CARDSTATES_DECK_ALWAYS = "Always";
     public static final String SWITCH_CARDSTATES_DECK_HOVER = "Switch back on hover";
 
     // Set boolean constant for landscape mode for gdx port

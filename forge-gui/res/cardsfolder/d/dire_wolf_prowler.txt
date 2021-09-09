@@ -1,0 +1,6 @@
+Name:Dire Wolf Prowler
+ManaCost:2 G
+Types:Creature Wolf
+PT:2/2
+A:AB$ Pump | Cost$ 1 G | NumAtt$ +2 | NumDef$ +2 | KW$ Haste | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +2/+2 until end of turn. Activate only once each turn.
+Oracle:{1}{G}: Dire Wolf Prowler gets +2/+2 and gains haste until end of turn. Activate only once each turn.

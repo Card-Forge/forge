@@ -1,0 +1,13 @@
+Name:Freyalise, Skyshroud Partisan
+ManaCost:1 G G
+Types:Legendary Planeswalker Freyalise
+Loyalty:4
+A:AB$ Untap | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Elf | TgtPrompt$ Select up to one target creature | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBRandom | StackDescription$ SpellDescription | SpellDescription$ Choose up to one target Elf. Untap it. It and a random Elf creature card in your hand each perpetually gets +1/+1.
+SVar:DBRandom:DB$ ChooseCard | Defined$ You | Choices$ Elf.YouOwn | ChoiceZone$ Hand | AtRandom$ True | Amount$ 1 | SubAbility$ DBEffect | StackDescription$ None
+SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted,ChosenCard | StaticAbilities$ PerpetualP1P1 | Name$ Freyalise, Skyshroud Partisan's Perpetual Effect | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:PerpetualP1P1:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 1 | AddToughness$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ These cards perpetually get +1/+1.
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+A:AB$ ChangeZone | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Card.Elf | ChangeNum$ 1 | StackDescription$ SpellDescription | SpellDescription$ Seek an Elf card.
+A:AB$ MakeCard | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Regal Force | Zone$ Battlefield | SpellDescription$ Conjure a Regal Force card onto the battlefield.
+DeckNeeds:Type$Elf
+Oracle:[+1]: Choose up to one target Elf. Untap it. It and a random Elf creature card in your hand each perpetually gets +1/+1.\n[−1]: Seek an Elf card.\n[−6]: Conjure a Regal Force card onto the battlefield.

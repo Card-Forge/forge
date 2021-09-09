@@ -2,9 +2,9 @@
 Code=P15A
 Date=2008-04-01
 Name=15th Anniversary Cards
-Type=Promos
+Type=Promo
 ScryfallCode=P15A
 
 [cards]
-1 R Char
-2 R Kamahl, Pit Fighter
+1 R Char @Dave Dorman
+2 R Kamahl, Pit Fighter @Kev Walker

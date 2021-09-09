@@ -1,25 +1,14 @@
 package forge.game.card;
 
-import java.util.Collections;
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.StaticData;
 import forge.card.CardDb;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
-import forge.game.CardTraitBase;
-import forge.game.Direction;
-import forge.game.EvenOdd;
-import forge.game.Game;
-import forge.game.GameEntity;
-import forge.game.GameObject;
+import forge.game.*;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.CardPredicates.Presets;
@@ -37,6 +26,10 @@ import forge.item.PaperCard;
 import forge.util.Expressions;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Collections;
+import java.util.List;
 
 public class CardProperty {
 
@@ -357,7 +350,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("EffectSource")) {
-            if (!source.isEmblem() && !source.getType().hasSubtype("Effect")) {
+            if (!source.isImmutable()) {
                 return false;
             }
 
@@ -365,7 +358,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("CanBeSacrificedBy") && spellAbility instanceof SpellAbility) {
-            if (!card.canBeSacrificedBy((SpellAbility)spellAbility)) {
+            if (!card.canBeSacrificedBy((SpellAbility) spellAbility)) {
                 return false;
             }
         } else if (property.startsWith("AttachedBy")) {
@@ -453,6 +446,9 @@ public class CardProperty {
             }
         } else if (property.startsWith("CanEnchant")) {
             final String restriction = property.substring(10);
+            if (restriction.equals("EquippedBy")) {
+                if (!source.getEquipping().canBeAttached(card)) return false;
+            }
             if (restriction.equals("Remembered")) {
                 for (final Object rem : source.getRemembered()) {
                     if (!(rem instanceof Card) || !((Card) rem).canBeAttached(card))
@@ -717,6 +713,16 @@ public class CardProperty {
                     }
                 }
             }
+        } else if (property.startsWith("MostProminentCreatureTypeInLibrary")) {
+            final CardCollectionView list = sourceController.getCardsIn(ZoneType.Library);
+            String[] type = CardFactoryUtil.getMostProminentCreatureType(list);
+            if (type != null); {
+                for (String s : type) {
+                    if (!card.getType().hasCreatureType(s)) {
+                        return false;
+                    }
+                }
+            }
         } else if (property.startsWith("sharesCreatureTypeWith")) {
             if (property.equals("sharesCreatureTypeWith")) {
                 if (!card.sharesCreatureTypeWith(source)) {
@@ -826,7 +832,7 @@ public class CardProperty {
                     return Iterables.any(CardUtil.getThisTurnCast("Card", source, spellAbility), CardPredicates.sharesNameWith(card));
                 } else if (restriction.equals("MovedToGrave")) {
                     if (!(spellAbility instanceof SpellAbility)) {
-                        final SpellAbility root = ((SpellAbility)spellAbility).getRootAbility();
+                        final SpellAbility root = ((SpellAbility) spellAbility).getRootAbility();
                         if (root != null && (root.getPaidList("MovedToGrave") != null)
                                 && !root.getPaidList("MovedToGrave").isEmpty()) {
                             final CardCollectionView cards = root.getPaidList("MovedToGrave");
@@ -849,7 +855,7 @@ public class CardProperty {
                     if (!(spellAbility instanceof SpellAbility)) {
                         System.out.println("Looking at TriggeredCard but no SA?");
                     } else {
-                        Card triggeredCard = ((Card)((SpellAbility)spellAbility).getTriggeringObject(AbilityKey.Card));
+                        Card triggeredCard = ((Card) ((SpellAbility) spellAbility).getTriggeringObject(AbilityKey.Card));
                         if (triggeredCard != null && card.sharesNameWith(triggeredCard)) {
                             return true;
                         }
@@ -918,10 +924,9 @@ public class CardProperty {
             }
         } else if (property.startsWith("SecondSpellCastThisTurn")) {
             final List<Card> cards = CardUtil.getThisTurnCast("Card", source, spellAbility);
-            if (cards.size() < 2)  {
+            if (cards.size() < 2) {
                 return false;
-            }
-            else if (cards.get(1) != card) {
+            } else if (cards.get(1) != card) {
                 return false;
             }
         } else if (property.equals("ThisTurnCast")) {
@@ -1226,8 +1231,7 @@ public class CardProperty {
             if (!cards.contains(card)) {
                 return false;
             }
-        }
-        else if (property.startsWith("lowestCMC")) {
+        } else if (property.startsWith("lowestCMC")) {
             final CardCollectionView cards = game.getCardsIn(ZoneType.Battlefield);
             for (final Card crd : cards) {
                 if (!crd.isLand() && !crd.isImmutable()) {
@@ -1363,9 +1367,7 @@ public class CardProperty {
             if (!Expressions.compare(y, property, x)) {
                 return false;
             }
-        }
-
-        else if (property.startsWith("ManaCost")) {
+        } else if (property.startsWith("ManaCost")) {
             if (!card.getManaCost().getShortString().equals(property.substring(8))) {
                 return false;
             }
@@ -1406,8 +1408,7 @@ public class CardProperty {
         // These predicated refer to ongoing combat. If no combat happens, they'll return false (meaning not attacking/blocking ATM)
         else if (property.startsWith("attacking")) {
             if (null == combat) return false;
-            if (property.equals("attacking"))    return combat.isAttacking(card);
-            if (property.equals("attackingLKI")) return combat.isLKIAttacking(card);
+            if (property.equals("attacking")) return card.isAttacking();
             if (property.equals("attackingYou")) return combat.isAttacking(card, sourceController);
             if (property.equals("attackingSame")) {
                 final GameEntity attacked = combat.getDefenderByAttacker(source);
@@ -1416,7 +1417,14 @@ public class CardProperty {
                 }
             }
             if (property.equals("attackingYouOrYourPW")) {
-                Player defender = combat.getDefenderPlayerByAttacker(card);
+                GameEntity defender = combat.getDefenderByAttacker(card);
+                if (defender instanceof Card) {
+                    // attack on a planeswalker that was removed from combat
+                    if (!((Card) defender).isPlaneswalker()) {
+                        return false;
+                    }
+                    defender = ((Card) defender).getController();
+                }
                 if (!sourceController.equals(defender)) {
                     return false;
                 }
@@ -1459,12 +1467,17 @@ public class CardProperty {
                     if (combat.isBlocking(card, c)) {
                         return true;
                     }
-                };
+                }
+                ;
                 return false;
             }
         } else if (property.startsWith("sharesBlockingAssignmentWith")) {
-            if (null == combat) { return false; }
-            if (null == combat.getAttackersBlockedBy(source) || null == combat.getAttackersBlockedBy(card)) { return false; }
+            if (null == combat) {
+                return false;
+            }
+            if (null == combat.getAttackersBlockedBy(source) || null == combat.getAttackersBlockedBy(card)) {
+                return false;
+            }
 
             CardCollection sourceBlocking = new CardCollection(combat.getAttackersBlockedBy(source));
             CardCollection thisBlocking = new CardCollection(combat.getAttackersBlockedBy(card));
@@ -1491,16 +1504,17 @@ public class CardProperty {
                 return false;
             }
             String valid = property.split(" ")[1];
-            for(Card c : blocked) {
+            for (Card c : blocked) {
                 if (c.isValid(valid, card.getController(), source, spellAbility)) {
                     return true;
                 }
             }
-            for(Card c : AbilityUtils.getDefinedCards(source, valid, spellAbility)) {
+            for (Card c : AbilityUtils.getDefinedCards(source, valid, spellAbility)) {
                 if (blocked.contains(c)) {
                     return true;
                 }
-            };
+            }
+            ;
             return false;
         } else if (property.startsWith("blockedByValidThisTurn ")) {
             CardCollectionView blocked = card.getBlockedByThisTurn();
@@ -1508,16 +1522,15 @@ public class CardProperty {
                 return false;
             }
             String valid = property.split(" ")[1];
-            for(Card c : blocked) {
-                if (c.isValid(valid, card.getController(), source, spellAbility)) {
-                    return true;
-                }
+            if (Iterables.any(blocked, CardPredicates.restriction(valid, card.getController(), source, spellAbility))) {
+                return true;
             }
-            for(Card c : AbilityUtils.getDefinedCards(source, valid, spellAbility)) {
+            for (Card c : AbilityUtils.getDefinedCards(source, valid, spellAbility)) {
                 if (blocked.contains(c)) {
                     return true;
                 }
-            };
+            }
+            ;
             return false;
         } else if (property.startsWith("blockedBySourceThisTurn")) {
             return source.getBlockedByThisTurn().contains(card);
@@ -1665,6 +1678,10 @@ public class CardProperty {
             if (source.hasImprintedCard(card)) {
                 return false;
             }
+        } else if (property.equals("IsGoaded")) {
+            if (!card.isGoaded()) {
+                return false;
+            }
         } else if (property.equals("NoAbilities")) {
             if (!card.hasNoAbilities()) {
                 return false;
@@ -1687,16 +1704,15 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("wasCast")) {
-            if (null == card.getCastFrom()) {
+            if (!card.wasCast()) {
                 return false;
             }
         } else if (property.equals("wasNotCast")) {
-            if (null != card.getCastFrom()) {
+            if (card.wasCast()) {
                 return false;
             }
         } else if (property.startsWith("wasCastFrom")) {
-            // How are we getting in here with a comma?
-            final String strZone = property.split(",")[0].substring(11);
+            final String strZone = property.substring(11);
             final ZoneType realZone = ZoneType.smartValueOf(strZone);
             if (realZone != card.getCastFrom()) {
                 return false;
@@ -1709,11 +1725,9 @@ public class CardProperty {
             }
         } else if (property.startsWith("set")) {
             final String setCode = property.substring(3, 6);
-            if (card.getName().isEmpty()) {
-                return false;
-            }
-            final PaperCard setCard = StaticData.instance().getCommonCards().getCardFromEdition(card.getName(), CardDb.SetPreference.Earliest);
-            if (setCard != null && !setCard.getEdition().equals(setCode)) {
+            final PaperCard setCard = StaticData.instance().getCommonCards().getCardFromEditions(card.getName(),
+                                                                                     CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS);
+            if (!setCard.getEdition().equals(setCode)) {
                 return false;
             }
         } else if (property.startsWith("inZone")) {
@@ -1751,6 +1765,16 @@ public class CardProperty {
                 }
             }
             return false;
+        } else if (property.startsWith("Triggered")) {
+            if (spellAbility instanceof SpellAbility) {
+                final String key = property.substring(9);
+                CardCollection cc = (CardCollection) ((SpellAbility)spellAbility).getTriggeringObject(AbilityKey.fromString(key));
+                if (cc == null || !cc.contains(card)) {
+                    return false;
+                }
+            } else {
+                return false;
+            }
         } else if (property.startsWith("NotTriggered")) {
             final String key = property.substring("NotTriggered".length());
             if (spellAbility instanceof SpellAbility) {

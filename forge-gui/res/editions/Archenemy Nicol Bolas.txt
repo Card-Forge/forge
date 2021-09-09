@@ -1,10 +1,10 @@
 [metadata]
 Code=E01
-Date=2017-06-17
+Date=2017-06-16
 Name=Archenemy: Nicol Bolas
 Code2=E01
 MciCode=E01
-Type=Other
+Type=Multiplayer
 ScryfallCode=E01
 
 [cards]

@@ -137,7 +137,7 @@ public class CloneEffect extends SpellAbilityEffect {
         }
 
         if (!pumpKeywords.isEmpty()) {
-            tgtCard.addChangedCardKeywords(pumpKeywords, Lists.newArrayList(), false, false, ts);
+            tgtCard.addChangedCardKeywords(pumpKeywords, Lists.newArrayList(), false, false, ts, 0);
         }
 
         tgtCard.updateStateForView();

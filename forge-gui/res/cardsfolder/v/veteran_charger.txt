@@ -1,0 +1,10 @@
+Name:Veteran Charger
+ManaCost:2 G
+Types:Creature Centaur Soldier
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters the battlefield, choose a creature card in your hand. It perpetually gets +2/+2.
+SVar:TrigChoose:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Card.Creature+YouOwn | ChoiceTitle$ Choose a creature card in your hand | Amount$ 1 | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualP2P2 | Name$ Veteran Charger's Perpetual Effect | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:PerpetualP2P2:Mode$ Continuous | Affected$ Card.ChosenCard | AddPower$ 2 | AddToughness$ 2 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This card perpetually gets +2/+2.
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+Oracle:When Veteran Charger enters the battlefield, choose a creature card in your hand. It perpetually gets +2/+2.

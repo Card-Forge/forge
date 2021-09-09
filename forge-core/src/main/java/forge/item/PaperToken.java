@@ -95,7 +95,7 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
         build.add(subtypes);
 
         // Are these keywords sorted?
-        for(String keyword : rules.getMainPart().getKeywords()) {
+        for (String keyword : rules.getMainPart().getKeywords()) {
             build.add(keyword);
         }
 
@@ -122,7 +122,7 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
             String formatEdition = null == edition || CardEdition.UNKNOWN == edition ? "" : "_" + edition.getCode().toLowerCase();
 
             this.imageFileName.add(String.format("%s%s", imageFileName, formatEdition));
-            for(int idx = 2; idx <= this.artIndex; idx++) {
+            for (int idx = 2; idx <= this.artIndex; idx++) {
                 this.imageFileName.add(String.format("%s%d%s", imageFileName, idx, formatEdition));
             }
         }
@@ -143,6 +143,7 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
     @Override public CardRules getRules() { return card; }
 
     @Override public CardRarity getRarity() { return CardRarity.None; }
+    @Override public String getArtist() { /*TODO*/ return ""; }
 
     // Unfortunately this is a property of token, cannot move it outside of class
     public String getImageFilename() { return getImageFilename(1); }
@@ -150,8 +151,25 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
 
     @Override public String getItemType() { return "Token"; }
 
+    @Override
+    public boolean hasBackFace() {
+        return false;
+    }
+
     @Override public boolean isToken() { return true; }
 
+    // IPaperCard
+    @Override
+    public String getCardImageKey() {
+        return this.getImageKey(false);
+    }
+
+    @Override
+    public String getCardAltImageKey() {
+        return getImageKey(true);
+    }
+
+    // InventoryItem
     @Override
     public String getImageKey(boolean altState) {
         int idx = MyRandom.getRandom().nextInt(artIndex);

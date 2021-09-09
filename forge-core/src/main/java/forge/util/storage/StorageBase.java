@@ -17,16 +17,14 @@
  */
 package forge.util.storage;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-
 import forge.util.IItemReader;
+
+import java.io.File;
+import java.io.FileFilter;
+import java.io.FilenameFilter;
+import java.util.*;
 
 /**
  * <p>
@@ -126,5 +124,34 @@ public class StorageBase<T> implements IStorage<T> {
     @Override
     public IStorage<T> getFolderOrCreate(String path) {
         throw new UnsupportedOperationException("This storage does not support subfolders");
+    }
+
+    /**
+     * Return all the files in a given path tree (traversed recursively) that would match
+     * the input <code>FilenameFilter</code>.
+     *
+     * @param downloadDir  Target root path to traverse
+     * @param filenameFilter  <code>FilenameFilter</code> used to select files of interest
+     * @return The <code>List</code> of all <code>File</code> objects found in the root path
+     * that passed the provided <code>FilenameFilter</code>.
+     * An empty list will be returned if the target path is empty, or no file matching the filter
+     * will be (recursively) found.
+     */
+    public static List<File> getAllFilesList(File downloadDir, FilenameFilter filenameFilter){
+        File[] filesList = downloadDir.listFiles(filenameFilter);
+        ArrayList<File> allFilesList = new ArrayList<>();
+        if (filesList != null)
+            allFilesList.addAll(Arrays.asList(filesList));
+        File[] subFolders = downloadDir.listFiles(new FileFilter() {
+            @Override
+            public boolean accept(File pathname) {
+                return pathname.isDirectory();
+            }
+        });
+        if(subFolders != null) {
+            for (File subFolder : subFolders)
+                allFilesList.addAll(getAllFilesList(subFolder, filenameFilter));
+        }
+        return allFilesList;
     }
 }

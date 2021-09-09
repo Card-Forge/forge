@@ -1,0 +1,6 @@
+Name:Circle of the Moon Druid
+ManaCost:2 G
+Types:Creature Human Elf Druid
+PT:2/4
+S:Mode$ Continuous | Affected$ Card.Self | Condition$ PlayerTurn | EffectZone$ Battlefield | SetPower$ 4 | SetToughness$ 2 | AddType$ Creature & Bear | RemoveCreatureTypes$ True | Description$ Bear Form — As long as it's your turn, CARDNAME is a Bear with base power and toughness 4/2. (It loses all other creature types.)
+Oracle:Bear Form — As long as it's your turn, Circle of the Moon Druid is a Bear with base power and toughness 4/2. (It loses all other creature types.)

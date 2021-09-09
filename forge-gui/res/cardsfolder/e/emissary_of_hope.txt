@@ -5,6 +5,6 @@ PT:2/1
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you gain 1 life for each artifact that player controls.
 SVar:TrigLoseLife:DB$ GainLife | Defined$ You | LifeAmount$ X
-SVar:X:Count$Valid Artifact.DefenderCtrl
+SVar:X:Count$Valid Artifact.ControlledBy TriggeredDefendingPlayer
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emissary_of_hope.jpg
 Oracle:Flying\nWhenever Emissary of Hope deals combat damage to a player, you gain 1 life for each artifact that player controls.

@@ -1,0 +1,7 @@
+Name:You Happen On a Glade
+ManaCost:2 G
+Types:Instant
+A:SP$ Charm | Choices$ JourneyOn,MakeCamp
+SVar:JourneyOn:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 2 | Reveal$ True | StackDescription$ SpellDescription | SpellDescription$ Journey On — Search your library for up to two basic land cards, reveal them, put them into your hand, then shuffle.
+SVar:MakeCamp:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target permanent card in your graveyard | ValidTgts$ Permanent.YouOwn | SpellDescription$ Make Camp — Return target permanent card from your graveyard to your hand.
+Oracle:Choose one —\n• Journey On — Search your library for up to two basic land cards, reveal them, put them into your hand, then shuffle.\n• Make Camp — Return target permanent card from your graveyard to your hand.

@@ -6,7 +6,7 @@ K:Flying
 K:Haste
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | AddTrigger$ TrigAttacks | CheckSVar$ X | SVarCompare$ GE1 | Description$ Lieutenant — As long as you control your commander, CARDNAME gets +2/+2 and has "Whenever CARDNAME attacks, it deals 7 damage to target creature defending player controls."
 SVar:TrigAttacks:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ Whenever CARDNAME attacks, it deals 7 damage to target creature defending player controls.
-SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select target creature defending player controls | NumDmg$ 7
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature.ControlledBy TriggeredDefendingPlayer | TgtPrompt$ Select target creature defending player controls | NumDmg$ 7
 SVar:X:Count$Valid Card.IsCommander+YouOwn+YouCtrl
 SVar:BuffedBy:Card.IsCommander
 AI:RemoveDeck:Random

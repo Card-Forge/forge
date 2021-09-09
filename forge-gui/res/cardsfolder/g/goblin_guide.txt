@@ -4,6 +4,6 @@ Types:Creature Goblin Scout
 PT:2/2
 K:Haste
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ Whenever CARDNAME attacks, defending player reveals the top card of their library. If it's a land card, that player puts it into their hand.
-SVar:TrigDig:DB$ Dig | Defined$ DefendingPlayer | DigNum$ 1 | Reveal$ True | ChangeNum$ All | ChangeValid$ Land | LibraryPosition2$ 0
+SVar:TrigDig:DB$ Dig | Defined$ TriggeredDefendingPlayer | DigNum$ 1 | Reveal$ True | ChangeNum$ All | ChangeValid$ Land | LibraryPosition2$ 0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_guide.jpg
 Oracle:Haste\nWhenever Goblin Guide attacks, defending player reveals the top card of their library. If it's a land card, that player puts it into their hand.

@@ -32,6 +32,7 @@ Avatar:Avatars
 Azra:Azra
 Badger:Badgers
 Barbarian:Barbarians
+Bard:Bards
 Basilisk:Basilisks
 Bat:Bats
 Bear:Bears
@@ -101,6 +102,7 @@ Gamer:Gamers
 Gargoyle:Gargoyles
 Germ:Germs
 Giant:Giants
+Gnoll:Gnolls
 Gnome:Gnomes
 Goat:Goats
 Goblin:Goblins
@@ -112,6 +114,7 @@ Gremlin:Gremlins
 Griffin:Griffins
 Hag:Hags
 Halfling:Halflings
+Hamster:Hamsters
 Harpy:Harpies
 Hellion:Hellions
 Hippo:Hippos
@@ -257,6 +260,7 @@ Tetravite:Tetravites
 Thalakos:Thalakoses
 Thopter:Thopters
 Thrull:Thrulls
+Tiefling:Tieflings
 Treefolk:Treefolks
 Trilobite:Trilobites
 Triskelavite:Triskelavites
@@ -291,6 +295,7 @@ Trap
 [EnchantmentTypes]
 Aura
 Cartouche
+Class
 Curse
 Rune
 Saga
@@ -312,6 +317,7 @@ Angrath
 Arlinn
 Ashiok
 B.O.B.
+Bahamut
 Basri
 Bolas
 Calix
@@ -345,6 +351,7 @@ Koth
 Liliana
 Lolth
 Lukka
+Mordenkainen
 Nahiri
 Narset
 Niko
@@ -376,3 +383,4 @@ Wrenn
 Xenagos
 Yanggu
 Yanling
+Zariel

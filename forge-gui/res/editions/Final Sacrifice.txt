@@ -1,9 +1,9 @@
 [metadata]
 Code=FS
-Date=1995-03-23
+Date=1994-09-01
 Name=Final Sacrifice
-Type=Other
+Type=Promo
 ScryfallCode=PHPR
 
 [cards]
-5 C Mana Crypt
+5 C Mana Crypt @Mark Tedin

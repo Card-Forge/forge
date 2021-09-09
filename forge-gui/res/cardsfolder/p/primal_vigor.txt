@@ -1,11 +1,9 @@
 Name:Primal Vigor
 ManaCost:4 G
 Types:Enchantment
-R:Event$ CreateToken | ActiveZones$ Battlefield | ValidPlayer$ Player | ReplaceWith$ DoubleToken | Description$ If one or more tokens would be created, twice that many of those tokens are created instead.
-SVar:DoubleToken:DB$ ReplaceEffect | VarName$ TokenNum | VarValue$ X
+R:Event$ CreateToken | ActiveZones$ Battlefield | ReplaceWith$ DoubleToken | Description$ If one or more tokens would be created, twice that many of those tokens are created instead.
+SVar:DoubleToken:DB$ ReplaceToken | Type$ Amount
 R:Event$ AddCounter | ActiveZones$ Battlefield | ValidCard$ Creature | ValidCounterType$ P1P1 | ReplaceWith$ DoubleP1P1Counters | Description$ If one or more +1/+1 counters would be put on a creature, twice that many +1/+1 counters are put on that creature instead.
 SVar:DoubleP1P1Counters:DB$ ReplaceEffect | VarName$ CounterNum | VarValue$ Y
-SVar:X:ReplaceCount$TokenNum/Twice
 SVar:Y:ReplaceCount$CounterNum/Twice
-SVar:Picture:http://www.wizards.com/global/images/magic/general/primal_vigor.jpg
 Oracle:If one or more tokens would be created, twice that many of those tokens are created instead.\nIf one or more +1/+1 counters would be put on a creature, twice that many +1/+1 counters are put on that creature instead.

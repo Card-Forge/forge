@@ -90,12 +90,12 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
         filename = filename0;
         isLimitedFormat = isLimitedFormat0;
         path = path0;
-        addSharedAchivements();
+        addSharedAchievements();
         addAchievements();
         load();
     }
 
-    protected void addSharedAchivements() {
+    protected void addSharedAchievements() {
         add(new GameWinStreak(10, 25, 50, 100));
         add(new MatchWinStreak(10, 25, 50, 100));
         add(new TotalGameWins(250, 500, 1000, 2000));

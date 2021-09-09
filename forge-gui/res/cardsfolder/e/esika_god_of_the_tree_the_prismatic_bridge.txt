@@ -16,5 +16,5 @@ Name:The Prismatic Bridge
 ManaCost:W U B R G
 Types:Legendary Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ At the beginning of your upkeep, reveal cards from the top of your library until you reveal a creature or planeswalker card. Put that card onto the battlefield and the rest on the bottom of your library in a random order.
-SVar:TrigDig:DB$ DigUntil | Valid$ Creature,Planeswalker | ValidDescription$ creature or planeswalker | FoundDestination$ Battlefield | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RestRandomOrder$ True
+SVar:TrigDig:DB$ DigUntil | Valid$ Creature,Planeswalker | ValidDescription$ creature or planeswalker | FoundDestination$ Battlefield | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True
 Oracle:At the beginning of your upkeep, reveal cards from the top of your library until you reveal a creature or planeswalker card. Put that card onto the battlefield and the rest on the bottom of your library in a random order.

@@ -13,7 +13,7 @@ public class GameEventSpellAbilityCast extends GameEvent {
     public final SpellAbilityStackInstance si;
     public final boolean replicate;
     public final int stackIndex;
-    
+
     public GameEventSpellAbilityCast(SpellAbility sp, SpellAbilityStackInstance si, int stackIndex, boolean replicate) {
         sa = sp;
         this.si = si;

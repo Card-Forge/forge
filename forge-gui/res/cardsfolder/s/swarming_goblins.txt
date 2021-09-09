@@ -1,0 +1,11 @@
+Name:Swarming Goblins
+ManaCost:4 R
+Types:Creature Goblin
+PT:4/3
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigRollDice | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
+SVar:TrigRollDice:DB$ RollDice | Sides$ 20 | ResultSubAbilities$ 1-9:Token1,10-19:Token2,20:Token3 | SpellDescription$ roll a d20.
+SVar:Token1:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_goblin | TokenOwner$ You | SpellDescription$ 1—9 VERT Create a 1/1 red Goblin creature token.
+SVar:Token2:DB$ Token | TokenAmount$ 2 | TokenScript$ r_1_1_goblin | TokenOwner$ You | SpellDescription$ 10—19 VERT Create two of those tokens.
+SVar:Token3:DB$ Token | TokenAmount$ 3 | TokenScript$ r_1_1_goblin | TokenOwner$ You | SpellDescription$ 20 VERT Create three of those tokens.
+DeckHas:Ability$Token
+Oracle:When Swarming Goblins enters the battlefield, roll a d20.\n1—9 | Create a 1/1 red Goblin creature token.\n10—19 | Create two of those tokens.\n20 | Create three of those tokens.

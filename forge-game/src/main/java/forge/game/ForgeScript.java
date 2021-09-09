@@ -4,6 +4,7 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardState;
 import forge.game.cost.Cost;
@@ -18,7 +19,6 @@ public class ForgeScript {
 
     public static boolean cardStateHasProperty(CardState cardState, String property, Player sourceController,
             Card source, CardTraitBase spellAbility) {
-
         final boolean isColorlessSource = cardState.getCard().hasKeyword("Colorless Damage Source", cardState);
         final ColorSet colors = cardState.getCard().determineColor(cardState);
         if (property.contains("White") || property.contains("Blue") || property.contains("Black")
@@ -122,7 +122,6 @@ public class ForgeScript {
 
             return Expressions.compare(y, property, x);
         } else return cardState.getTypeWithChanges().hasStringType(property);
-
     }
 
     public static boolean spellAbilityHasProperty(SpellAbility sa, String property, Player sourceController,
@@ -166,6 +165,8 @@ public class ForgeScript {
             return sa.isForetelling();
         } else if (property.equals("Foretold")) {
             return sa.isForetold();
+        } else if (property.equals("ClassLevelUp")) {
+            return sa.getApi() == ApiType.ClassLevelUp;
         } else if (property.equals("MayPlaySource")) {
             StaticAbility m = sa.getMayPlay();
             if (m == null) {
@@ -191,8 +192,7 @@ public class ForgeScript {
             // spell was on the stack
             if (sa.getCardState().getCard().isInZone(ZoneType.Stack)) {
                 y = sa.getHostCard().getCMC();
-            }
-            else {
+            } else {
                 y = sa.getPayCosts().getTotalMana().getCMC();
             }
             int x = AbilityUtils.calculateAmount(spellAbility.getHostCard(), property.substring(5), spellAbility);

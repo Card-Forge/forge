@@ -1,0 +1,12 @@
+Name:Varis, Silverymoon Ranger
+ManaCost:1 G G
+Types:Legendary Creature Human Elf Ranger
+PT:3/3
+K:Reach
+K:Ward:1
+T:Mode$ SpellCast | ValidCard$ Creature,Planeswalker | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ TrigVenture | TriggerDescription$ Whenever you cast a creature or planeswalker spell, venture into the dungeon. This ability triggers only once each turn. (To venture into the dungeon, enter the first room or advance to the next room.)
+SVar:TrigVenture:DB$ Venture
+T:Mode$ DungeonCompleted | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you complete a dungeon, create a 2/2 green Wolf creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ g_2_2_wolf
+DeckHas:Ability$Token
+Oracle:Reach, ward {1}\nWhenever you cast a creature or planeswalker spell, venture into the dungeon. This ability triggers only once each turn. (To venture into the dungeon, enter the first room or advance to the next room.)\nWhenever you complete a dungeon, create a 2/2 green Wolf creature token.

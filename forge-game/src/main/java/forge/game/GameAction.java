@@ -221,6 +221,10 @@ public class GameAction {
                 lastKnownInfo = CardUtil.getLKICopy(c);
             }
 
+            if (!suppress) {
+                copied.setTimestamp(game.getNextTimestamp());
+            }
+
             if (!lastKnownInfo.hasKeyword("Counters remain on CARDNAME as it moves to any zone other than a player's hand or library.")) {
                 copied.clearCounters();
             }
@@ -244,13 +248,16 @@ public class GameAction {
 
                 if (zoneTo.is(ZoneType.Stack)) {
                     // when moving to stack, copy changed card information
-                    copied.setChangedCardColors(c.getChangedCardColors());
+                    copied.setChangedCardColors(c.getChangedCardColorsMap());
+                    copied.setChangedCardColorsCharacterDefining(c.getChangedCardColorsCharacterDefiningMap());
                     copied.setChangedCardKeywords(c.getChangedCardKeywords());
                     copied.setChangedCardTypes(c.getChangedCardTypesMap());
+                    copied.setChangedCardTypesCharacterDefining(c.getChangedCardTypesCharacterDefiningMap());
                     copied.setChangedCardNames(c.getChangedCardNames());
                     copied.setChangedCardTraits(c.getChangedCardTraits());
 
                     copied.copyChangedTextFrom(c);
+                    copied.setTimestamp(c.getTimestamp());
 
                     // copy exiled properties when adding to stack
                     // will be cleanup later in MagicStack
@@ -265,6 +272,9 @@ public class GameAction {
                     // on Transformed objects)
                     copied.setState(CardStateName.Original, false);
                     copied.setBackSide(false);
+
+                    // reset timestamp in changezone effects so they have same timestamp if ETB simultaneously
+                    copied.setTimestamp(game.getNextTimestamp());
                 }
 
                 copied.setUnearthed(c.isUnearthed());
@@ -277,6 +287,7 @@ public class GameAction {
                 }
             } else { //Token
                 copied = c;
+                copied.setTimestamp(game.getNextTimestamp());
             }
         }
 
@@ -365,7 +376,7 @@ public class GameAction {
             }
             cards.set(cards.indexOf(copied), c);
             if (zoneTo.is(ZoneType.Library)) {
-                java.util.Collections.reverse(cards);
+                Collections.reverse(cards);
             }
             mergedCards = cards;
             if (cause != null) {
@@ -538,7 +549,7 @@ public class GameAction {
         if (fromBattlefield && !zoneFrom.getPlayer().equals(zoneTo.getPlayer())) {
             final Map<AbilityKey, Object> runParams2 = AbilityKey.mapFromCard(lastKnownInfo);
             runParams2.put(AbilityKey.OriginalController, zoneFrom.getPlayer());
-            if(params != null) {
+            if (params != null) {
                 runParams2.putAll(params);
             }
             game.getTriggerHandler().runTrigger(TriggerType.ChangesController, runParams2, false);
@@ -602,8 +613,6 @@ public class GameAction {
             }
             unattachCardLeavingBattlefield(copied);
         } else if (toBattlefield) {
-            // reset timestamp in changezone effects so they have same timestamp if ETB simutaneously
-            copied.setTimestamp(game.getNextTimestamp());
             for (Player p : game.getPlayers()) {
                 copied.getDamageHistory().setNotAttackedSinceLastUpkeepOf(p);
                 copied.getDamageHistory().setNotBlockedSinceLastUpkeepOf(p);
@@ -618,7 +627,6 @@ public class GameAction {
                 || zoneTo.is(ZoneType.Hand)
                 || zoneTo.is(ZoneType.Library)
                 || zoneTo.is(ZoneType.Exile)) {
-            copied.setTimestamp(game.getNextTimestamp());
             copied.clearOptionalCostsPaid();
             if (copied.isFaceDown()) {
                 copied.setState(CardStateName.Original, true);
@@ -701,17 +709,20 @@ public class GameAction {
             }
         }
 
-        if (zoneFrom == null) {
-            c.setCastFrom(null);
-            c.setCastSA(null);
-        } else if (zoneTo.is(ZoneType.Stack)) {
-            c.setCastFrom(zoneFrom.getZoneType());
+        if (zoneTo.is(ZoneType.Stack)) {
+            // zoneFrom maybe null if the spell is cast from "Ouside the game", ex. ability of Garth One-Eye
+            if (zoneFrom == null) {
+                c.setCastFrom(null);
+            } else {
+                c.setCastFrom(zoneFrom.getZoneType());
+            }
             if (cause != null && cause.isSpell() && c.equals(cause.getHostCard()) && !c.isCopiedSpell()) {
                 c.setCastSA(cause);
             } else {
                 c.setCastSA(null);
             }
-        } else if (!(zoneTo.is(ZoneType.Battlefield) && zoneFrom.is(ZoneType.Stack))) {
+        } else if (zoneFrom == null || !(zoneFrom.is(ZoneType.Stack) &&
+                (zoneTo.is(ZoneType.Battlefield) || zoneTo.is(ZoneType.Merged)))) {
             c.setCastFrom(null);
             c.setCastSA(null);
         }
@@ -794,6 +805,12 @@ public class GameAction {
         Card result = moveTo(game.getStackZone(), c, cause, params);
         if (cause != null && cause.isSpell() && result.equals(cause.getHostCard())) {
             result.setSplitStateToPlayAbility(cause);
+
+            // CR 112.2 A spell’s controller is, by default, the player who put it on the stack.
+            result.setController(cause.getActivatingPlayer(), 0);
+            // for triggers like from Wild-Magic Sorcerer
+            game.getAction().checkStaticAbilities(false);
+            game.getTriggerHandler().resetActiveTriggers();
         }
         return result;
     }
@@ -1222,7 +1239,7 @@ public class GameAction {
                     }
                     // Rule 704.5g - Destroy due to lethal damage
                     // Rule 704.5h - Destroy due to deathtouch
-                    else if (c.getDamage() > 0 && (c.getLethal() <= c.getDamage() || c.hasBeenDealtDeathtouchDamage())) {
+                    else if (c.hasBeenDealtDeathtouchDamage() || (c.getDamage() > 0 && c.getLethal() <= c.getDamage())) {
                         if (desCreats == null) {
                             desCreats = new CardCollection();
                         }
@@ -1364,6 +1381,9 @@ public class GameAction {
         if (!refreeze) {
             game.getStack().unfreezeStack();
         }
+
+        // Run all commands that are queued to run after state based actions are checked
+        game.runSBACheckedCommands();
     }
 
     private boolean stateBasedAction_Saga(Card c, CardZoneTable table) {
@@ -1626,7 +1646,7 @@ public class GameAction {
 
             recheck = true;
 
-            Card toKeep = p.getController().chooseSingleEntityForEffect(new CardCollection(cc), new SpellAbility.EmptySa(ApiType.InternalLegendaryRule, null, p),
+            Card toKeep = p.getController().chooseSingleEntityForEffect(new CardCollection(cc), new SpellAbility.EmptySa(ApiType.InternalLegendaryRule, new Card(-1, game), p),
                     "You have multiple legendary permanents named \""+name+"\" in play.\n\nChoose the one to stay on battlefield (the rest will be moved to graveyard)", null);
             for (Card c: cc) {
                 if (c != toKeep) {
@@ -1828,11 +1848,11 @@ public class GameAction {
     private float getLandRatio(List<Card> deck) {
         int landCount = 0;
         for (Card c:deck) {
-            if (c.isLand()){
+            if (c.isLand()) {
                 landCount++;
             }
         }
-        if(landCount == 0) {
+        if (landCount == 0) {
             return 0;
         }
         return Float.valueOf(landCount)/Float.valueOf(deck.size());
@@ -1840,7 +1860,7 @@ public class GameAction {
 
     private float getHandScore(List<Card> hand, float landRatio) {
         int landCount = 0;
-        for (Card c:hand) {
+        for (Card c : hand) {
             if (c.isLand()) {
                 landCount++;
             }
@@ -1897,7 +1917,6 @@ public class GameAction {
             // Run Trigger beginning of the game
             game.getTriggerHandler().runTrigger(TriggerType.NewGame, AbilityKey.newMap(), true);
             //</THIS CODE WILL WORK WITH PHASE = NULL>
-
 
             game.getPhaseHandler().startFirstTurn(first, startGameHook);
             //after game ends, ensure Auto-Pass canceled for all players so it doesn't apply to next game
@@ -1973,7 +1992,6 @@ public class GameAction {
     private void runPreOpeningHandActions(final Player first) {
         Player takesAction = first;
         do {
-            //
             List<Card> ploys = CardLists.filter(takesAction.getCardsIn(ZoneType.Command), new Predicate<Card>() {
                 @Override
                 public boolean apply(Card input) {
@@ -2047,8 +2065,7 @@ public class GameAction {
     public void invoke(final Runnable proc) {
         if (ThreadUtil.isGameThread()) {
             proc.run();
-        }
-        else {
+        } else {
             ThreadUtil.invokeInGameThread(proc);
         }
     }
@@ -2180,12 +2197,28 @@ public class GameAction {
                 if (e.getValue() <= 0) {
                     continue;
                 }
+                e.setValue(Integer.valueOf(e.getKey().addDamageAfterPrevention(e.getValue(), sourceLKI, isCombat, counterTable)));
                 sum += e.getValue();
-                e.getKey().addDamageAfterPrevention(e.getValue(), sourceLKI, isCombat, counterTable);
             }
 
             if (sourceLKI.hasKeyword(Keyword.LIFELINK)) {
                 sourceLKI.getController().gainLife(sum, sourceLKI, cause);
+            }
+        }
+
+        if (cause != null) {
+            // Remember objects as needed
+            final Card sourceLKI = game.getChangeZoneLKIInfo(cause.getHostCard());
+            final boolean rememberCard = cause.hasParam("RememberDamaged") || cause.hasParam("RememberDamagedCreature");
+            final boolean rememberPlayer = cause.hasParam("RememberDamaged") || cause.hasParam("RememberDamagedPlayer");
+            if (rememberCard || rememberPlayer) {
+                for (GameEntity e : damageMap.row(sourceLKI).keySet()) {
+                    if (e instanceof Card && rememberCard) {
+                        cause.getHostCard().addRemembered(e);
+                    } else if (e instanceof Player && rememberPlayer) {
+                        cause.getHostCard().addRemembered(e);
+                    }
+                }
             }
         }
 

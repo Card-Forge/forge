@@ -1,0 +1,9 @@
+Name:Thieves' Tools
+ManaCost:1 B
+Types:Artifact Equipment
+K:Equip:2
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ DBToken | TriggerDescription$ When CARDNAME enters the battlefield, create a Treasure token.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+S:Mode$ Continuous | Affected$ Creature.EquippedBy+powerLE3 | AddHiddenKeyword$ Unblockable | Description$ Equipped creature can't be blocked as long as its power is 3 or less.
+DeckHas:Ability$Token
+Oracle:When Thieves' Tools enters the battlefield, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")\nEquipped creature can't be blocked as long as its power is 3 or less.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

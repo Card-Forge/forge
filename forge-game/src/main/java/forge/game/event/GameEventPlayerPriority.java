@@ -13,7 +13,7 @@ public class GameEventPlayerPriority extends GameEvent {
     public final Player turn;
     public final PhaseType phase;
     public final Player priority;
-    
+
     public GameEventPlayerPriority(Player playerTurn, PhaseType phase, Player priorityPlayer) {
         turn = playerTurn;
         this.phase = phase;
@@ -25,7 +25,6 @@ public class GameEventPlayerPriority extends GameEvent {
         return visitor.visit(this);
     }
 
-    
     /* (non-Javadoc)
      * @see java.lang.Object#toString()
      */

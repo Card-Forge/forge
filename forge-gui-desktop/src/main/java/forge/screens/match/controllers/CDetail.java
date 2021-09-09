@@ -78,7 +78,6 @@ public class CDetail implements ICDoc {
 
     @Override
     public void initialize() {
-
     }
 
     @Override

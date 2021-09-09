@@ -1,19 +1,13 @@
 package forge.token;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Maps;
-
 import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardRules;
 import forge.item.PaperToken;
+
+import java.util.*;
 
 public class TokenDb implements ITokenDatabase {
     // Expected naming convention of scripts
@@ -46,7 +40,7 @@ public class TokenDb implements ITokenDatabase {
     }
 
     public void preloadTokens() {
-        for(CardEdition edition : this.editions) {
+        for (CardEdition edition : this.editions) {
             for (String name : edition.getTokens().keySet()) {
                 try {
                     getToken(name, edition.getCode());
@@ -80,17 +74,17 @@ public class TokenDb implements ITokenDatabase {
     }
 
     @Override
-    public PaperToken getTokenFromEdition(String tokenName, CardDb.SetPreference fromSet) {
+    public PaperToken getTokenFromEditions(String tokenName, CardDb.CardArtPreference fromSet) {
         return null;
     }
 
     @Override
-    public PaperToken getTokenFromEdition(String tokenName, Date printedBefore, CardDb.SetPreference fromSet) {
+    public PaperToken getTokenFromEditions(String tokenName, Date printedBefore, CardDb.CardArtPreference fromSet) {
         return null;
     }
 
     @Override
-    public PaperToken getTokenFromEdition(String tokenName, Date printedBefore, CardDb.SetPreference fromSet, int artIndex) {
+    public PaperToken getTokenFromEditions(String tokenName, Date printedBefore, CardDb.CardArtPreference fromSet, int artIndex) {
         return null;
     }
 

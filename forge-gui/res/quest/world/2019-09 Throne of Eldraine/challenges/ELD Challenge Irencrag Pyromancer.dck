@@ -1,0 +1,21 @@
+[quest]
+id=ELD Challenge: Irencrag Pyromancer
+OpponentName=The Pyromancers
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Title=Irencrag Pyromancer
+Difficulty=medium
+Description="Fear of fire is a sensible instinct. If I were you, I'd be terrified."
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+Name=ELD Challenge: Irencrag Pyromancer
+[Main]
+20 Golden Egg|ELD
+20 Irencrag Pyromancer|ELD|2
+20 Mountain|ELD|4

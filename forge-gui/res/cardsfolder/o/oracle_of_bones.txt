@@ -4,7 +4,7 @@ Types:Creature Minotaur Shaman
 PT:3/1
 K:Haste
 K:Tribute:2
-SVar:TrigNotTribute:DB$ Play | ValidZone$ Hand | Valid$ Instant.YouOwn,Sorcery.YouOwn | Controller$ You | WithoutManaCost$ True | Optional$ True | Amount$ 1 | SpellDescription$ When CARDNAME enters the battlefield, if tribute wasn't paid, you may cast an instant or sorcery spell from your hand without paying its mana cost.
+SVar:TrigNotTribute:DB$ Play | ValidZone$ Hand | Valid$ Card.YouOwn | ValidSA$ Instant,Sorcery | Controller$ You | WithoutManaCost$ True | Optional$ True | Amount$ 1 | SpellDescription$ When CARDNAME enters the battlefield, if tribute wasn't paid, you may cast an instant or sorcery spell from your hand without paying its mana cost.
 SVar:TributeAILogic:OppHasCardsInHand
 DeckHas:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oracle_of_bones.jpg

@@ -5,7 +5,7 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:TrigSpellweaverExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TargetsFromSingleZone$ True | ValidTgts$ Card.Sorcery | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Select two target sorcery cards from a single graveyard | Imprint$ True | SpellDescription$ Exile two sorcery cards from a single graveyard.
 T:Mode$ SpellCast | ValidCard$ Card.sharesNameWith Imprinted+nonToken | Execute$ TrigSpellweaverCopy | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts a card, if it has the same name as one of the cards exiled with CARDNAME, you may copy the other. If you do, you may cast the copy without paying its mana cost.
 SVar:TrigSpellweaverCopy:DB$ Pump | RememberObjects$ TriggeredCard | SubAbility$ DBPlay
-SVar:DBPlay:DB$ Play | Defined$ ValidAll Card.IsImprinted+doesNotShareNameWith Remembered+inZoneExile | WithoutManaCost$ True | Optional$ True | CopyCard$ True | SubAbility$ DBCleanup
+SVar:DBPlay:DB$ Play | Defined$ ValidAll Card.IsImprinted+doesNotShareNameWith Remembered+inZoneExile | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | CopyCard$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self | Destination$ Any | Execute$ DBCleanImprinted | Static$ True
 SVar:DBCleanImprinted:DB$ Cleanup | ClearImprinted$ True

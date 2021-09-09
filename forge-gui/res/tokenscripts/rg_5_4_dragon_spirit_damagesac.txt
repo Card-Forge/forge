@@ -1,0 +1,8 @@
+Name:Dragon Spirit
+ManaCost:no cost
+Types:Creature Dragon Spirit
+Colors:red,green
+PT:5/4
+T:Mode$ DamageDealtOnce | ValidSource$ Card.Self | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ When this creature deals damage, sacrifice it.
+SVar:TrigSac:DB$ Sacrifice | Defined$ Self
+Oracle:When this creature deals damage, sacrifice it.

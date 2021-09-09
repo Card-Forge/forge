@@ -4,8 +4,7 @@ Types:Legendary Creature Sphinx
 PT:4/4
 K:Flying
 S:Mode$ ReduceCost | ValidCard$ Sphinx | Type$ Spell | Activator$ You | Amount$ 2 | Description$ Sphinx spells you cast cost {2} less to cast.
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigChangeZone | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME or another Sphinx enters the battlefield under your control, reveal the top four cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other into your graveyard.
-T:Mode$ ChangesZone | ValidCard$ Card.Sphinx+Other+YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigChangeZone | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another Sphinx enters the battlefield under your control, reveal the top four cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other into your graveyard.
+T:Mode$ ChangesZone | ValidCard$ Card.Self,Card.Sphinx+Other+YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigChangeZone | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME or another Sphinx enters the battlefield under your control, reveal the top four cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other into your graveyard.
 SVar:TrigChangeZone:DB$ Dig | DigNum$ 4 | Reveal$ True | RememberRevealed$ True | NoMove$ True | SubAbility$ DBTwoPiles | SpellDescription$ Reveal the top five cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other into your graveyard.
 SVar:DBTwoPiles:DB$ TwoPiles | Defined$ You | DefinedCards$ Remembered | Separator$ Opponent | ChosenPile$ DBHand | UnchosenPile$ DBGrave
 SVar:DBHand:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand

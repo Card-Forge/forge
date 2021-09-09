@@ -12,7 +12,7 @@ T:Mode$ AttackerBlocked | ValidCard$ Card.Self | ValidBlocker$ Creature | Trigge
 SVar:TrigBlockedPump:DB$ Pump | Defined$ Self | NumAtt$ 6 | NumDef$ 3
 T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | Execute$ TrigUnBlockedPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever Lim-Dûl's Paladin attacks and isn't blocked, it assigns no combat damage this turn and defending player loses 4 life.
 SVar:TrigUnBlockedPump:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME assigns no combat damage | SubAbility$ DBLoseLife
-SVar:DBLoseLife:DB$ LoseLife | Defined$ DefendingPlayer | LifeAmount$ 4
+SVar:DBLoseLife:DB$ LoseLife | Defined$ TriggeredDefendingPlayer | LifeAmount$ 4
 SVar:X:Remembered$Amount
 AI:RemoveDeck:All
 Oracle:Trample\nAt the beginning of your upkeep, you may discard a card. If you don't, sacrifice Lim-Dûl's Paladin and draw a card.\nWhenever Lim-Dûl's Paladin becomes blocked, it gets +6/+3 until end of turn.\nWhenever Lim-Dûl's Paladin attacks and isn't blocked, it assigns no combat damage this turn and defending player loses 4 life.

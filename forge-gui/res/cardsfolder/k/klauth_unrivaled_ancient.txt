@@ -1,0 +1,11 @@
+Name:Klauth, Unrivaled Ancient
+ManaCost:5 R G
+Types:Legendary Creature Dragon
+PT:4/4
+K:Flying
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigMana | TriggerDescription$ Whenever CARDNAME attacks, add X mana in any combination of colors, where X is the total power of attacking creatures. Spend this mana only to cast spells. Until end of turn, you don't lose this mana as steps and phases end.
+SVar:TrigMana:DB$ Mana | Produced$ Combo Any | Amount$ X | PersistentMana$ True | RestrictValid$ Card
+SVar:X:Count$SumPower_Creature.attacking
+SVar:HasAttackEffect:TRUE
+Oracle:Flying, haste\nWhenever Klauth, Unrivaled Ancient attacks, add X mana in any combination of colors, where X is the total power of attacking creatures. Spend this mana only to cast spells. Until end of turn, you don't lose this mana as steps and phases end.

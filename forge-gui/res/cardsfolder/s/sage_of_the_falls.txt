@@ -2,8 +2,6 @@ Name:Sage of the Falls
 ManaCost:4 U
 Types:Creature Merfolk Wizard
 PT:2/5
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoot | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME or another non-Human creature enters the battlefield under your control, you may draw a card. If you do, discard a card.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.nonHuman+Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigLoot | OptionalDecider$ You | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another non-Human creature enters the battlefield under your control, you may draw a card. If you do, discard a card.
-SVar:TrigLoot:DB$ Draw | NumCards$ 1 | SubAbility$ DBDiscard
-SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Creature.nonHuman+Other+YouCtrl | Execute$ TrigLoot | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME or another non-Human creature enters the battlefield under your control, you may draw a card. If you do, discard a card.
+SVar:TrigLoot:AB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1 | Cost$ Draw<1/You>
 Oracle:Whenever Sage of the Falls or another non-Human creature enters the battlefield under your control, you may draw a card. If you do, discard a card.

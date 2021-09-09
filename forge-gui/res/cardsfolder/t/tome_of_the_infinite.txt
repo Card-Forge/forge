@@ -1,0 +1,9 @@
+Name:Tome of the Infinite
+ManaCost:2 U
+Types:Legendary Artifact
+A:AB$ NameCard | Cost$ U T | Defined$ You | AtRandom$ True | ChooseFromList$ Light of Hope,Swords to Plowshares,Force Spike,Ponder,Dark Ritual,Duress,Assault Strobe,Lightning Bolt,Fog,Giant Growth | SubAbility$ DBConjure | StackDescription$ SpellDescription | SpellDescription$ Conjure a random card from CARDNAME's spellbook into your hand. It perpetually gains "You may spend mana as though it were mana of any color to cast this spell."
+SVar:DBConjure:DB$ MakeCard | Name$ ChosenName | Zone$ Hand | RememberMade$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ SpendAnyMana | Duration$ Permanent | Name$ Tome of the Infinite's Perpetual Effect | SubAbility$ DBCleanup
+SVar:SpendAnyMana:Mode$ Continuous | Affected$ Card.IsRemembered | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | AddHiddenKeyword$ May spend mana as though it were mana of any color to cast CARDNAME | Description$ You may spend mana as though it were mana of any color to cast this spell.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearNamedCard$ True
+Oracle:{U}, {T}: Conjure a random card from Tome of the Infinite's spellbook into your hand. It perpetually gains "You may spend mana as though it were mana of any color to cast this spell."

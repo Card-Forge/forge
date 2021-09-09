@@ -121,7 +121,7 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
         goalCard.setOwner(human);
         goalCard.setImageKey("t:puzzle");
         goalCard.setName("Puzzle Goal");
-        goalCard.addType("Effect");
+        goalCard.setImmutable(true);
         goalCard.setOracleText(getGoalDescription());
 
         int turnCorr = 0;

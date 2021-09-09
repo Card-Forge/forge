@@ -31,13 +31,14 @@ public class RegenerationEffect extends SpellAbilityEffect {
             c.addRegeneratedThisTurn();
 
             if (game.getCombat() != null) {
+                game.getCombat().saveLKI(c);
                 game.getCombat().removeFromCombat(c);
             }
 
             // Play the Regen sound
             game.fireEvent(new GameEventCardRegenerated());
             
-            if (host.getType().hasStringType("Effect")) {
+            if (host.isImmutable()) {
                 c.subtractShield(host);
                 host.removeRemembered(c);
             }

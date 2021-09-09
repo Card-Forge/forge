@@ -1,0 +1,7 @@
+Name:Pixie Guide
+ManaCost:1 U
+Types:Creature Faerie
+PT:1/3
+K:Flying
+S:Mode$ Continuous | Affected$ You | AddKeyword$ If you would roll one or more dice, instead roll that many dice plus one and ignore the lowest roll. | Description$ Grant an Advantage — If you would roll one or more dice, instead roll that many dice plus one and ignore the lowest roll.
+Oracle:Flying\nGrant an Advantage — If you would roll one or more dice, instead roll that many dice plus one and ignore the lowest roll.

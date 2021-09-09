@@ -120,7 +120,7 @@ public final class CardUtil {
         List<Card> res = Lists.newArrayList();
         final Game game = src.getGame();
         if (to != ZoneType.Stack) {
-            for (Player p : game.getPlayers()) {
+            for (Player p : game.getRegisteredPlayers()) {
                 res.addAll(p.getZone(to).getCardsAddedThisTurn(from));
             }
         }
@@ -242,6 +242,7 @@ public final class CardUtil {
         newCopy.setToken(in.isToken());
         newCopy.setCopiedSpell(in.isCopiedSpell());
         newCopy.setImmutable(in.isImmutable());
+        newCopy.setEmblem(in.isEmblem());
 
         // lock in the current P/T
         newCopy.setBasePower(in.getCurrentPower());
@@ -281,9 +282,11 @@ public final class CardUtil {
 
         newCopy.setUnearthed(in.isUnearthed());
 
-        newCopy.setChangedCardColors(in.getChangedCardColors());
+        newCopy.setChangedCardColors(in.getChangedCardColorsMap());
+        newCopy.setChangedCardColorsCharacterDefining(in.getChangedCardColorsCharacterDefiningMap());
         newCopy.setChangedCardKeywords(in.getChangedCardKeywords());
         newCopy.setChangedCardTypes(in.getChangedCardTypesMap());
+        newCopy.setChangedCardTypesCharacterDefining(in.getChangedCardTypesCharacterDefiningMap());
         newCopy.setChangedCardNames(in.getChangedCardNames());
         newCopy.setChangedCardTraits(in.getChangedCardTraits());
 
@@ -319,6 +322,10 @@ public final class CardUtil {
         newCopy.setCastFrom(in.getCastFrom());
 
         newCopy.setExiledWith(getLKICopy(in.getExiledWith(), cachedMap));
+
+        if (in.getGame().getCombat() != null) {
+            newCopy.setCombatLKI(in.getGame().getCombat().saveLKI(newCopy)); 
+        }
 
         return newCopy;
     }
@@ -528,6 +535,7 @@ public final class CardUtil {
     // however, due to the changes necessary for SA_Requirements this is much
     // different than the original
     public static List<Card> getValidCardsToTarget(TargetRestrictions tgt, SpellAbility ability) {
+        Card activatingCard = ability.getHostCard();
         final Game game = ability.getActivatingPlayer().getGame();
         final List<ZoneType> zone = tgt.getZone();
 
@@ -537,7 +545,6 @@ public final class CardUtil {
         if (canTgtStack) {
             // Since getTargetableCards doesn't have additional checks if one of the Zones is stack
             // Remove the activating card from targeting itself if its on the Stack
-            Card activatingCard = ability.getHostCard();
             if (activatingCard.isInZone(ZoneType.Stack)) {
                 choices.remove(ability.getHostCard());
             }
@@ -559,7 +566,7 @@ public final class CardUtil {
 
             final List<Card> choicesCopy = Lists.newArrayList(choices);
             for (final Card c : choicesCopy) {
-                if (c.getCMC() > tgt.getMaxTotalCMC(c, ability) - totalCMCTargeted) {
+                if (c.getCMC() > tgt.getMaxTotalCMC(activatingCard, ability) - totalCMCTargeted) {
                     choices.remove(c);
                 }
             }
@@ -574,7 +581,7 @@ public final class CardUtil {
 
             final List<Card> choicesCopy = Lists.newArrayList(choices);
             for (final Card c : choicesCopy) {
-                if (c.getNetPower() > tgt.getMaxTotalPower(c, ability) - totalPowerTargeted) {
+                if (c.getNetPower() > tgt.getMaxTotalPower(activatingCard, ability) - totalPowerTargeted) {
                     choices.remove(c);
                 }
             }

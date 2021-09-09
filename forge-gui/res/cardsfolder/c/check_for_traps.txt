@@ -1,0 +1,9 @@
+Name:Check for Traps
+ManaCost:1 B
+Types:Sorcery
+A:SP$ RevealHand | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Defined$ Targeted | SubAbility$ DBExile | StackDescription$ {p:Targeted} reveals their hand. | SpellDescription$ Target opponent reveals their hand. You choose a nonland card from it. Exile that card. If an instant card or a card with flash is exiled this way, they lose 1 life. Otherwise, you lose 1 life.
+SVar:DBExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Targeted | Chooser$ You | ChangeType$ Card.nonLand | ChangeNum$ 1 | Mandatory$ True | RememberChanged$ True | SubAbility$ TheyLose | StackDescription$ {p:You} chooses a nonland card from it. Exile that card.
+SVar:TheyLose:DB$ LoseLife | Defined$ Targeted | LifeAmount$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Instant,Card.withFlash | SubAbility$ YouLose | StackDescription$ If an instant card or a card with flash is exiled this way, {p:Targeted} loses 1 life.
+SVar:YouLose:DB$ LoseLife | LifeAmount$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Instant,Card.withFlash | ConditionCompare$ EQ0 | SubAbility$ DBCleanup | StackDescription$ Otherwise, {p:You} loses 1 life.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Target opponent reveals their hand. You choose a nonland card from it. Exile that card. If an instant card or a card with flash is exiled this way, they lose 1 life. Otherwise, you lose 1 life.

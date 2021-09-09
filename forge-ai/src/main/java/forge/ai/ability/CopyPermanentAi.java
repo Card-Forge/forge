@@ -12,6 +12,7 @@ import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilCost;
 import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
@@ -35,7 +36,6 @@ import forge.game.zone.ZoneType;
 public class CopyPermanentAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
-        // TODO - I'm sure someone can do this AI better
         Card source = sa.getHostCard();
         PhaseHandler ph = aiPlayer.getGame().getPhaseHandler();
         String aiLogic = sa.getParamOrDefault("AILogic", "");
@@ -45,7 +45,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
         }
 
         if ("MomirAvatar".equals(aiLogic)) {
-                return SpecialCardAi.MomirVigAvatar.consider(aiPlayer, sa);
+            return SpecialCardAi.MomirVigAvatar.consider(aiPlayer, sa);
         } else if ("MimicVat".equals(aiLogic)) {
             return SpecialCardAi.MimicVat.considerCopy(aiPlayer, sa);
         } else if ("AtEOT".equals(aiLogic)) {
@@ -59,7 +59,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
             }
         }
 
-        if (sa.hasParam("AtEOT") && !aiPlayer.getGame().getPhaseHandler().is(PhaseType.MAIN1)) {
+        if (sa.hasParam("AtEOT") && !ph.is(PhaseType.MAIN1)) {
             return false;
         }
 
@@ -75,6 +75,13 @@ public class CopyPermanentAi extends SpellAbilityAi {
             if (ComputerUtilCard.checkNeedsToPlayReqs(sa.getHostCard(), sa) != AiPlayDecision.WillPlay) {
                 return false;
             }
+        }
+
+        if (sa.costHasManaX() && sa.getSVar("X").equals("Count$xPaid")) {
+            // Set PayX here to maximum value. (Osgir)
+            final int xPay = ComputerUtilCost.getMaxXValue(sa, aiPlayer);
+
+            sa.setXManaCostPaid(xPay);
         }
 
         if (sa.usesTargeting() && sa.hasParam("TargetingPlayer")) {
@@ -106,7 +113,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
                     return false;
                 }
         } else {
-            return this.doTriggerAINoCost(aiPlayer, sa, false);
+            return doTriggerAINoCost(aiPlayer, sa, false);
         }
     }
 
@@ -118,7 +125,6 @@ public class CopyPermanentAi extends SpellAbilityAi {
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         final boolean canCopyLegendary = sa.hasParam("NonLegendary");
 
-        
         // ////
         // Targeting
         if (sa.usesTargeting()) {

@@ -1,0 +1,19 @@
+[metadata]
+Title=Mono-Black Aggro
+Difficulty=very hard
+Description=This deck tries to kill you quickly with small black creatures.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+Name=ELD 4 Mono-Black Aggro
+[Main]
+4 Belle of the Brawl|ELD
+4 Epic Downfall|ELD
+4 Eye Collector|ELD
+4 Foulmire Knight|ELD|1
+1 Giant's Skewer|ELD
+4 Heraldic Banner|ELD
+4 Murderous Rider|ELD|1
+4 Oathsworn Knight|ELD|1
+4 Order of Midnight|ELD|1
+4 Stonecoil Serpent|ELD|1
+23 Swamp|ELD|3

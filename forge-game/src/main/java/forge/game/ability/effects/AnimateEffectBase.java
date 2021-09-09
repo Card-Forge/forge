@@ -59,32 +59,6 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
 
         boolean removeAll = sa.hasParam("RemoveAllAbilities");
 
-        if (sa.hasParam("OverwriteTypes")) {
-            removeSuperTypes = true;
-            removeCardTypes = true;
-            removeSubTypes = true;
-            removeLandTypes = true;
-            removeCreatureTypes = true;
-            removeArtifactTypes = true;
-            removeEnchantmentTypes = true;
-        }
-
-        if (sa.hasParam("KeepSupertypes")) {
-            removeSuperTypes = false;
-        }
-
-        if (sa.hasParam("KeepCardTypes")) {
-            removeCardTypes = false;
-        }
-
-        if (sa.hasParam("KeepSubtypes")) {
-            removeSubTypes = false;
-            removeLandTypes = false;
-            removeCreatureTypes = false;
-            removeArtifactTypes = false;
-            removeEnchantmentTypes = false;
-        }
-
         if (sa.hasParam("RemoveSuperTypes")) {
             removeSuperTypes = true;
         }
@@ -120,10 +94,10 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
 
         if (!addType.isEmpty() || !removeType.isEmpty() || removeCreatureTypes) {
             c.addChangedCardTypes(addType, removeType, removeSuperTypes, removeCardTypes, removeSubTypes,
-                    removeLandTypes, removeCreatureTypes, removeArtifactTypes, removeEnchantmentTypes, timestamp);
+                    removeLandTypes, removeCreatureTypes, removeArtifactTypes, removeEnchantmentTypes, timestamp, true, false);
         }
 
-        c.addChangedCardKeywords(keywords, removeKeywords, removeAll, removeLandTypes, timestamp);
+        c.addChangedCardKeywords(keywords, removeKeywords, removeAll, removeLandTypes, timestamp, 0);
 
         if (sa.hasParam("CantHaveKeyword")) {
             c.addCantHaveKeyword(timestamp, Keyword.setValueOf(sa.getParam("CantHaveKeyword")));
@@ -133,7 +107,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             c.addHiddenExtrinsicKeyword(k);
         }
 
-        c.addColor(colors, !sa.hasParam("OverwriteColors"), timestamp);
+        c.addColor(colors, !sa.hasParam("OverwriteColors"), timestamp, false);
 
         if (sa.hasParam("LeaveBattlefield")) {
             addLeaveBattlefieldReplacement(c, sa, sa.getParam("LeaveBattlefield"));
@@ -214,7 +188,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
                 || !addedAbilities.isEmpty() || !removedAbilities.isEmpty() || !addedTriggers.isEmpty()
                 || !addedReplacements.isEmpty() || !addedStaticAbilities.isEmpty()) {
             c.addChangedCardTraits(addedAbilities, removedAbilities, addedTriggers, addedReplacements,
-                    addedStaticAbilities, removeAll, false, removeLandTypes, timestamp);
+                    addedStaticAbilities, removeAll, false, removeLandTypes, timestamp, 0);
         }
 
         if (!"Permanent".equals(sa.getParam("Duration"))) {
@@ -248,12 +222,12 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
 
         c.removeNewPT(timestamp);
 
-        c.removeChangedCardKeywords(timestamp);
+        c.removeChangedCardKeywords(timestamp, 0);
 
         c.removeChangedCardTypes(timestamp);
         c.removeColor(timestamp);
 
-        c.removeChangedCardTraits(timestamp);
+        c.removeChangedCardTraits(timestamp, 0);
 
         c.removeCantHaveKeyword(timestamp);
 

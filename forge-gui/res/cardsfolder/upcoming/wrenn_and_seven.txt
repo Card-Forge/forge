@@ -1,0 +1,13 @@
+Name:Wrenn and Seven
+ManaCost:3 G G
+Types:Legendary Planeswalker Wrenn
+Loyalty:5
+A:AB$ Dig | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | DigNum$ 4 | Reveal$ True | ChangeNum$ All | ChangeValid$ Land | DestinationZone2$ Graveyard | SpellDescription$ Reveal the top four cards of your library. Put all land cards revealed this way into your hand and the rest into your graveyard.
+A:AB$ ChangeZone | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ X | Tapped$ True | StackDescription$ {p:You} puts any number of land cards from their hand onto the battlefield tapped. | SpellDescription$ Put any number of land cards from your hand onto the battlefield tapped.
+A:AB$ Token | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ g_x_x_treefolk_reach_total_lands | SpellDescription$ Create a green Treefolk creature token with reach and "This creature's power and toughness are each equal to the number of lands you control."
+A:AB$ ChangeZoneAll | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | Origin$ Graveyard | Destination$ Hand | ChangeType$ Card.YouOwn+Permanent | SubAbility$ DBEmblem | SpellDescription$ Return all permanent cards from your graveyard to your hand. You get an emblem with "You have no maximum hand size."
+SVar:DBEmblem:DB$ Effect | Name$ Emblem - Wrenn and Seven | Image$ emblem_wrenn_and_seven | StaticAbilities$ UnlimitedHand | Stackable$ False | Duration$ Permanent | AILogic$ Always
+SVar:UnlimitedHand:Mode$ Continuous | EffectZone$ Command | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
+SVar:X:Count$ValidHand Land.YouCtrl
+DeckHas:Ability$Token & Ability$Graveyard
+Oracle:[+1]: Reveal the top four cards of your library. Put all land cards revealed this way into your hand and the rest into your graveyard.\n[0]: Put any number of land cards from your hand onto the battlefield.\n[-3]: Create a green Treefolk creature token with reach and "This creature's power and toughness are each equal to the number of lands you control."\n[-8]: Return all permanent cards from your graveyard to your hand. You get an emblem with "You have no maximum hand size."

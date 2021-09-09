@@ -1,0 +1,8 @@
+Name:Hoard Robber
+ManaCost:1 B
+Types:Creature Tiefling Rogue
+PT:1/3
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigTreasure | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+SVar:TrigTreasure:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+DeckHas:Ability$Token
+Oracle:Whenever Hoard Robber deals combat damage to a player, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

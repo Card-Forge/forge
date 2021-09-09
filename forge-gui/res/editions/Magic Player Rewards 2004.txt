@@ -2,11 +2,11 @@
 Code=P04
 Date=2004-01-01
 Name=Magic Player Rewards 2004
-Type=Promos
+Type=Promo
 ScryfallCode=P04
 
 [cards]
-1 R Powder Keg
+1 R Powder Keg @Dan Frazier
 
 [tokens]
 w_4_4_angel_flying

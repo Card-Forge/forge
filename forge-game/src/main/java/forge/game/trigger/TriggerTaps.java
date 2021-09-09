@@ -53,7 +53,6 @@ public class TriggerTaps extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-
         if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Card))) {
             return false;
         }
@@ -72,7 +71,6 @@ public class TriggerTaps extends Trigger {
 
         return true;
     }
-
 
     /** {@inheritDoc} */
     @Override

@@ -8,7 +8,7 @@ SVar:Pay2:DB$ Cleanup | ClearRemembered$ True | UnlessCost$ 2 | UnlessPayer$ Rem
 SVar:Pay1:DB$ Pump | Defined$ Remembered | KW$ Prevent all combat damage that would be dealt to and dealt by CARDNAME. | Duration$ UntilEndOfCombat | UnlessCost$ 1 | UnlessPayer$ RememberedController | UnlessSwitched$ True | UnlessResolveSubs$ WhenPaid | SubAbility$ DBCleanup | ShowCurrentCard$ Remembered | SpellDescription$ You may pay {1}, prevent all combat damage that would be dealt to and dealt by that creature this combat.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:DBDelayTrigger:DB$ DelayedTrigger | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ GE1 | RememberObjects$ Remembered | Mode$ Phase | Phase$ EndCombat | Execute$ TrigDestroy | TriggerDescription$ Destroy that creature at end of combat.
-SVar:TrigDestroy:DB$ Destroy | Defined$ DelayTriggerRemembered
+SVar:TrigDestroy:DB$ Destroy | Defined$ DelayTriggerRememberedLKI
 SVar:X:Count$xPaid
 SVar:Snow:Count$Valid Land.Snow+YouCtrl
 AI:RemoveDeck:All

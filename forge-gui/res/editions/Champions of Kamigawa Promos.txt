@@ -2,8 +2,8 @@
 Code=PCHK
 Date=2004-10-01
 Name=Champions of Kamigawa Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PCHK
 
 [cards]
-185★ R Ryusei, the Falling Star
+185★ R Ryusei, the Falling Star @Nottsuo

@@ -1,35 +1,5 @@
 package forge.itemmanager.views;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Insets;
-import java.awt.Point;
-import java.awt.Polygon;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
-import java.awt.Shape;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
-import java.awt.event.MouseWheelEvent;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.TreeMap;
-
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.JViewport;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingUtilities;
-
 import forge.ImageCache;
 import forge.card.ColorSet;
 import forge.deck.DeckProxy;
@@ -40,12 +10,7 @@ import forge.gui.framework.ILocalRepaint;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
-import forge.itemmanager.ColumnDef;
-import forge.itemmanager.GroupDef;
-import forge.itemmanager.ItemManager;
-import forge.itemmanager.ItemManagerConfig;
-import forge.itemmanager.ItemManagerModel;
-import forge.itemmanager.SItemManagerUtil;
+import forge.itemmanager.*;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -53,20 +18,23 @@ import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.match.controllers.CDetailPicture;
-import forge.toolbox.CardFaceSymbols;
-import forge.toolbox.FComboBoxWrapper;
-import forge.toolbox.FLabel;
-import forge.toolbox.FMouseAdapter;
-import forge.toolbox.FScrollPane;
-import forge.toolbox.FSkin;
+import forge.toolbox.*;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinFont;
 import forge.toolbox.FSkin.SkinImage;
-import forge.toolbox.FTextField;
 import forge.toolbox.special.CardZoomer;
-import forge.util.ImageUtil;
 import forge.util.Localizer;
 import forge.view.arcane.CardPanel;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.TreeMap;
 
 public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final int PADDING = 5;
@@ -92,8 +60,6 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private ItemInfo hoveredItem;
     private ItemInfo focalItem;
     private boolean panelOptionsCreated = false;
-    // cards with alternate states are added twice for displaying
-    private InventoryItem lastAltCard = null;
 
     private final List<ItemInfo> orderedItems = new ArrayList<>();
     private final List<Group> groups = new ArrayList<>();
@@ -511,7 +477,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         if (columnCount == columnCount0) { return; }
         columnCount = columnCount0;
         cbColumnCount.setSelectedIndex(columnCount - MIN_COLUMN_COUNT);
-        
+
         if (!forSetup) {
             if (itemManager.getConfig() != null) {
                 itemManager.getConfig().setImageColumnCount(columnCount);
@@ -523,7 +489,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 updateLayout(false);
                 return;
             }
-    
+
             int offsetTop = focalItem0.getTop() - getScrollValue();
             updateLayout(false);
             setScrollValue(focalItem0.getTop() - offsetTop);
@@ -1134,30 +1100,16 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         InventoryItem item = itemInfo.item;
                         itemInfo.alt = false;
                         if (!FModel.getPreferences().getPref(FPref.UI_SWITCH_STATES_DECKVIEW).equals(ForgeConstants.SWITCH_CARDSTATES_DECK_NEVER)) {
-                            if ((hoveredItem == null || !hoveredItem.item.equals(item)) || (FModel.getPreferences().getPref(FPref.UI_SWITCH_STATES_DECKVIEW).equals(ForgeConstants.SWITCH_CARDSTATES_DECK_ALWAYS))) {
-                                if (item instanceof PaperCard) {
-                                    if (ImageUtil.hasBackFacePicture(((PaperCard)item))) {
-                                        if (item.equals(lastAltCard)) {
-                                            itemInfo.alt = true;
-                                            lastAltCard = null;
-                                        }
-                                        else {
-                                            lastAltCard = item;
-                                        }
-                                    }
-                                    else {
-                                        lastAltCard = null;
-                                    }
-                                }
+                            if (hoveredItem != null && hoveredItem.item.equals(item)) {
+                                if (item instanceof PaperCard && ((PaperCard)item).hasBackFace())
+                                    itemInfo.alt = true;
                             }
                         }
 
-                        if (itemInfo != hoveredItem) { //save hovered item for last
+                        if (itemInfo != hoveredItem) //save hovered item for last
                             drawItemImage(g2d, itemInfo);
-                        }
-                        else {
+                        else
                             skippedItem = itemInfo;
-                        }
                     }
                 }
                 if (skippedItem != null) { //draw hovered item on top
@@ -1217,13 +1169,16 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         //draw generic box
                         FSkin.drawImage(g, FSkin.getImage(FSkinProp.IMG_DECK_GENERIC), bounds.x, bounds.y, bounds.width - 2 * cornerSize, bounds.height - 2 * cornerSize);
                     } else {
-                        String deckImageKey = dp.getDeck().getCommanders().isEmpty() ? dp.getHighestCMCCard().getImageKey(false) : dp.getDeck().getCommanders().get(0).getImageKey(false);
+                        String deckImageKey = "";
+                        PaperCard coverCard = dp.getDeck().getCommanders().isEmpty() ? dp.getHighestCMCCard() : dp.getDeck().getCommanders().get(0);
+                        if (coverCard != null)
+                            deckImageKey = coverCard.getImageKey(false);
 
                         ColorSet deckColor = dp.getColor();
                         int scale = CardFaceSymbols.getHeight() * cornerSize/8;
                         int scaleArt = CardFaceSymbols.getHeight() * cornerSize/7;
 
-                        BufferedImage cardImage = ImageCache.scaleImage(deckImageKey, bounds.width, bounds.height, false);
+                        BufferedImage cardImage = ImageCache.scaleImage(deckImageKey, bounds.width, bounds.height, false, null);
 
                         if (cardImage == null) {
                             //draw generic box

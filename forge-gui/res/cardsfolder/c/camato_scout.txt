@@ -1,0 +1,8 @@
+Name:Camato Scout
+ManaCost:1 U U
+Types:Creature Merfolk
+PT:2/3
+K:ETBReplacement:Other:ChooseLT
+SVar:ChooseLT:DB$ ChooseType | Defined$ You | AtRandom$ True | Type$ Basic Land | SpellDescription$ As CARDNAME enters the battlefield, choose a land type.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ ChosenTypewalk | Description$ CARDNAME has landwalk of the chosen type.
+Oracle:As Camato Scout enters the battlefield, choose a basic land type at random. Camato Scout has landwalk of the chosen type.

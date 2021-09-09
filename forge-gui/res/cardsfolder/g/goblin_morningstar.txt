@@ -1,0 +1,13 @@
+Name:Goblin Morningstar
+ManaCost:1 R
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddKeyword$ Trample | Description$ Equipped creature gets +1/+0 and has trample.
+K:Equip:1 R
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigRollDice | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
+SVar:TrigRollDice:DB$ RollDice | Sides$ 20 | ResultSubAbilities$ 1-9:DBToken,10-20:DBTokenAttach | SpellDescription$ roll a d20.
+SVar:DBToken:DB$ Token | TokenScript$ r_1_1_goblin | TokenOwner$ You | SpellDescription$ 1—9 VERT Create a 1/1 red Goblin creature token.
+SVar:DBTokenAttach:DB$ Token | TokenScript$ r_1_1_goblin | TokenOwner$ You | RememberTokens$ True | SubAbility$ DBAttach | SpellDescription$ 10—20 VERT Create a 1/1 red Goblin creature token, then attach CARDNAME to it.
+SVar:DBAttach:DB$ Attach | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Token
+Oracle:Equipped creature gets +1/+0 and has trample.\nEquip {1}{R}\nWhen Goblin Morningstar enters the battlefield, roll a d20.\n1—9 | Create a 1/1 red Goblin creature token.\n10—20 | Create a 1/1 red Goblin creature token, then attach Goblin Morningstar to it.

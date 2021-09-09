@@ -413,33 +413,29 @@ public final class StaticAbilityContinuous {
             });
         }
 
-        if (layer == StaticAbilityLayer.TYPE && params.containsKey("RemoveType")) {
-            removeTypes = Lists.newArrayList(Arrays.asList(params.get("RemoveType").split(" & ")));
-
-            Iterables.removeIf(removeTypes, new Predicate<String>() {
-                @Override
-                public boolean apply(String input) {
-                    if (input.equals("ChosenType") && !hostCard.hasChosenType()) {
-                        return true;
-                    }
-                    return false;
-                }
-            });
-        }
-
         if (layer == StaticAbilityLayer.TYPE) {
+            if (params.containsKey("RemoveType")) {
+                removeTypes = Lists.newArrayList(Arrays.asList(params.get("RemoveType").split(" & ")));
+
+                Iterables.removeIf(removeTypes, new Predicate<String>() {
+                    @Override
+                    public boolean apply(String input) {
+                        if (input.equals("ChosenType") && !hostCard.hasChosenType()) {
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+            }
             if (params.containsKey("RemoveSuperTypes")) {
                 removeSuperTypes = true;
             }
-
             if (params.containsKey("RemoveCardTypes")) {
                 removeCardTypes = true;
             }
-
             if (params.containsKey("RemoveSubTypes")) {
                 removeSubTypes = true;
             }
-
             if (params.containsKey("RemoveLandTypes")) {
                 removeLandTypes = true;
             }
@@ -535,7 +531,7 @@ public final class StaticAbilityContinuous {
 
             // add keywords
             if (addKeywords != null) {
-                p.addChangedKeywords(addKeywords, removeKeywords, se.getTimestamp());
+                p.addChangedKeywords(addKeywords, removeKeywords, se.getTimestamp(), stAb.getId());
             }
 
             // add static abilities
@@ -630,7 +626,7 @@ public final class StaticAbilityContinuous {
 
                 if (color != 0) {
                     final String colorName = MagicColor.toLongString(color);
-                    affectedCard.addChangedTextColorWord("Any", colorName, se.getTimestamp());
+                    affectedCard.addChangedTextColorWord("Any", colorName, se.getTimestamp(), stAb.getId());
                 }
             }
 
@@ -707,7 +703,7 @@ public final class StaticAbilityContinuous {
 
                 affectedCard.addChangedCardKeywords(newKeywords, removeKeywords,
                         removeAllAbilities, removeLandTypes,
-                        hostCard.getTimestamp());
+                        hostCard.getTimestamp(), stAb.getId());
             }
 
             // add HIDDEN keywords
@@ -809,6 +805,18 @@ public final class StaticAbilityContinuous {
                         // with that the TargetedCard does not need the Svars added to them anymore
                         // but only do it if the trigger doesn't already have a overriding ability
                         addedTrigger.add(actualTrigger);
+                        if (params.containsKey("TriggerRememberDefined")) {
+                            String triggerRemembered = (params.get("TriggerRememberDefined"));
+                            for (final String rem : triggerRemembered.split(",")) {
+                                for (final Object o : AbilityUtils.getDefinedObjects(hostCard, rem, stAb)) {
+                                    if (o instanceof SpellAbility) {
+                                        // "RememberObjects$ Remembered" don't remember spellability
+                                        continue;
+                                    }
+                                    actualTrigger.addRemembered(o);
+                                }
+                            }
+                        }
                     }
                 }
 
@@ -828,7 +836,10 @@ public final class StaticAbilityContinuous {
 
                 if (!addedAbilities.isEmpty() || addReplacements != null || addTriggers != null || addStatics != null
                     || removeAllAbilities) {
-                    affectedCard.addChangedCardTraits(addedAbilities, null, addedTrigger, addedReplacementEffects, addedStaticAbility, removeAllAbilities, removeNonMana, false, hostCard.getTimestamp());
+                    affectedCard.addChangedCardTraits(
+                        addedAbilities, null, addedTrigger, addedReplacementEffects, addedStaticAbility, removeAllAbilities, removeNonMana, false,
+                        hostCard.getTimestamp(), stAb.getId()
+                    );
                 }
 
                 if (cantHaveKeyword != null) {
@@ -837,19 +848,19 @@ public final class StaticAbilityContinuous {
             }
 
             if (layer == StaticAbilityLayer.TYPE && removeLandTypes) {
-                affectedCard.addChangedCardTraits(null, null, null, null, null, false, false, removeLandTypes, hostCard.getTimestamp());
+                affectedCard.addChangedCardTraits(null, null, null, null, null, false, false, true, hostCard.getTimestamp(), stAb.getId());
             }
 
             // add Types
             if ((addTypes != null) || (removeTypes != null)) {
                 affectedCard.addChangedCardTypes(addTypes, removeTypes, removeSuperTypes, removeCardTypes,
                         removeSubTypes, removeLandTypes, removeCreatureTypes, removeArtifactTypes,
-                        removeEnchantmentTypes, hostCard.getTimestamp());
+                        removeEnchantmentTypes, hostCard.getTimestamp(), true, stAb.hasParam("CharacteristicDefining"));
             }
 
             // add colors
             if (addColors != null) {
-                affectedCard.addColor(addColors, !overwriteColors, hostCard.getTimestamp());
+                affectedCard.addColor(addColors, !overwriteColors, hostCard.getTimestamp(), stAb.hasParam("CharacteristicDefining"));
             }
 
             if (layer == StaticAbilityLayer.RULES) {
@@ -865,7 +876,7 @@ public final class StaticAbilityContinuous {
                 }
             }
 
-            if (mayLookAt != null) {
+            if (mayLookAt != null && (!affectedCard.getOwner().getTopXCardsFromLibrary(1).contains(affectedCard) || game.getTopLibForPlayer(affectedCard.getOwner()) == null || game.getTopLibForPlayer(affectedCard.getOwner()) == affectedCard)) {
                 affectedCard.addMayLookAt(se.getTimestamp(), mayLookAt);
             }
 
@@ -877,7 +888,9 @@ public final class StaticAbilityContinuous {
                     mayPlayAltCost = mayPlayAltCost.replace("ConvertedManaCost", costcmc);
                 }
 
-                Player mayPlayController = params.containsKey("MayPlayCardOwner") ? affectedCard.getOwner() : controller;
+                Player mayPlayController = params.containsKey("MayPlayPlayer") ?
+                    AbilityUtils.getDefinedPlayers(affectedCard, params.get("MayPlayPlayer"), stAb).get(0) :
+                    controller;
                 affectedCard.setMayPlay(mayPlayController, mayPlayWithoutManaCost,
                         mayPlayAltCost != null ? new Cost(mayPlayAltCost, false) : null,
                         mayPlayWithFlash, mayPlayGrantZonePermissions, stAb);
@@ -924,7 +937,7 @@ public final class StaticAbilityContinuous {
         addIgnore.setIntrinsic(false);
         addIgnore.setApi(ApiType.InternalIgnoreEffect);
         addIgnore.setDescription(cost + " Ignore the effect until end of turn.");
-        sourceCard.addChangedCardTraits(ImmutableList.of(addIgnore), null, null, null, null, false, false, false, sourceCard.getTimestamp());
+        sourceCard.addChangedCardTraits(ImmutableList.of(addIgnore), null, null, null, null, false, false, false, sourceCard.getTimestamp(), stAb.getId());
 
         final GameCommand removeIgnore = new GameCommand() {
             private static final long serialVersionUID = -5415775215053216360L;
@@ -966,6 +979,13 @@ public final class StaticAbilityContinuous {
         final Player controller = hostCard.getController();
 
         if (stAb.hasParam("CharacteristicDefining")) {
+            if (stAb.hasParam("ExcludeZone")) {
+                for (ZoneType zt : ZoneType.listValueOf(stAb.getParam("ExcludeZone"))) {
+                    if (hostCard.isInZone(zt)) {
+                        return CardCollection.EMPTY;
+                    }
+                }
+            }
             return new CardCollection(hostCard); // will always be the card itself
         }
 

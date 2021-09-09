@@ -82,7 +82,6 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
         boolean isOptional = sa.hasParam("Optional");
 
         for (Player controller : controllers) {
-
             List<SpellAbility> copies = Lists.newArrayList();
 
             SpellAbility chosenSA = controller.getController().chooseSingleSpellForEffect(tgtSpells, sa,
@@ -155,8 +154,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                         copies.add(copy);
                     }
                 }
-            }
-            else {
+            } else {
                 for (int i = 0; i < amount; i++) {
                     SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
                     if (sa.hasParam("MayChooseTarget")) {

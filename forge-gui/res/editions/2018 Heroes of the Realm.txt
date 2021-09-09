@@ -8,7 +8,7 @@ Type=Funny
 ScryfallCode=HTR18
 
 [cards]
-1 M Kharis & The Beholder
-2 M Optimus Prime, Inspiring Leader
-3 M Sol, Advocate Eternal
-4 M The Legend of Arena
+1 M Kharis & The Beholder @Joe Slucher
+2 M Optimus Prime, Inspiring Leader @Steve Argyle
+3 M Sol, Advocate Eternal @Randy Vargas
+4 M The Legend of Arena @Olena Richards

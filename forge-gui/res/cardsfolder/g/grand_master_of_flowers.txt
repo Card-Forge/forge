@@ -1,0 +1,9 @@
+Name:Grand Master of Flowers
+ManaCost:2 W W
+Types:Legendary Planeswalker Bahamut
+Loyalty:3
+S:Mode$ Continuous | Affected$ Card.Self | CheckSVar$ X | SVarCompare$ GE7 | AddKeyword$ Flying & Indestructible | AddType$ Creature & Dragon & God | SetPower$ 7 | SetToughness$ 7 | RemoveCardTypes$ True | CharacteristicDefining$ True | Description$ As long as CARDNAME has seven or more loyalty counters on him, he's a 7/7 Dragon God creature with flying and indestructible.
+SVar:X:Count$CardCounters.LOYALTY
+A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature.withoutFirst Strike+withoutDouble Strike+withoutVigilance | KW$ HIDDEN CARDNAME can't attack or block. | IsCurse$ True | Duration$ UntilYourNextTurn | AILogic$ DetainNonLand | SpellDescription$ Target creature without first strike, double strike, or vigilance can't attack or block until your next turn.
+A:AB$ ChangeZone | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Origin$ Library | OriginChoice$ True | OriginAlternative$ Graveyard | AlternativeMessage$ Would you like to search your library with this ability? If you do, your library will be shuffled. | Destination$ Hand | ChangeType$ Card.namedMonk of the Open Hand | ChangeNum$ 1 | Optional$ True | SpellDescription$ Search your library and/or graveyard for a card named Monk of the Open Hand, reveal it, and put it into your hand. If you search your library this way, shuffle.
+Oracle:As long as Grand Master of Flowers has seven or more loyalty counters on him, he's a 7/7 Dragon God creature with flying and indestructible.\n[+1]: Target creature without first strike, double strike, or vigilance can't attack or block until your next turn.\n[+1]: Search your library and/or graveyard for a card named Monk of the Open Hand, reveal it, and put it into your hand. If you search your library this way, shuffle.

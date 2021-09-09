@@ -3,8 +3,7 @@ ManaCost:4 U U
 Types:Creature Fish
 PT:3/3
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ Whenever CARDNAME or another creature enters the battlefield under your control, tap target creature an opponent controls.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigTap | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another creature enters the battlefield under your control, tap target creature an opponent controls.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Creature.YouCtrl+Other | Execute$ TrigTap | TriggerDescription$ Whenever CARDNAME or another creature enters the battlefield under your control, tap target creature an opponent controls.
 SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls.
 SVar:BuffedBy:Creature
 SVar:PlayMain1:TRUE

@@ -1,0 +1,17 @@
+[metadata]
+Code=PSDG
+Date=2001-06-28
+Name=Sega Dreamcast Cards
+Type=Promo
+
+[cards]
+1 R Arden Angel @Greg Staples
+2 R Ashuza's Breath @Glen Angus
+3 R Camato Scout @Christopher Moeller
+4 R Hapato's Might @Jeff Easley
+5 R Lydari Druid @Kev Walker
+6 R Lydari Elephant @Heather Hudson
+7 R Murgish Cemetery @Daren Bader
+8 R Saji's Torrent @Matt Cavotta
+9 R Tornellan Protector @Eric Peterson
+10 R Velican Dragon @Daren Bader

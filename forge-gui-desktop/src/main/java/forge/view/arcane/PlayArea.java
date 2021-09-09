@@ -624,8 +624,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
         if (toDelete.size() == getCardPanels().size()) {
             clear(false);
-        }
-        else {
+        } else {
             for (final CardView card : toDelete) {
                 removeCardPanel(getCardPanel(card.getId()),false);
             }
@@ -649,9 +648,9 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 needLayoutRefresh = true;
             }
         }
-	if (needLayoutRefresh) {
-	    doLayout();
-	}
+        if (needLayoutRefresh) {
+            doLayout();
+        }
 
 	invalidate(); //pfps do the extra invalidate before any scrolling 
         if (!newPanels.isEmpty()) {
@@ -681,8 +680,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         if (card.isTapped()) {
             toPanel.setTapped(true);
             toPanel.setTappedAngle(forge.view.arcane.CardPanel.TAPPED_ANGLE);
-        }
-        else {
+        } else {
             toPanel.setTapped(false);
             toPanel.setTappedAngle(0);
         }
@@ -705,8 +703,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         CardPanel attachedToPanel;
         if (card.getAttachedTo() != null) {
             attachedToPanel = getCardPanel(card.getAttachedTo().getId());
-        }
-        else {
+        } else {
             attachedToPanel = null;
         }
         if (toPanel.getAttachedToPanel() != attachedToPanel) {

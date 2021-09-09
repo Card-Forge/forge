@@ -34,6 +34,8 @@ public enum FSkinImage implements FImage {
     GRAVEYARD   (FSkinProp.IMG_ZONE_GRAVEYARD, SourceFile.ICONS),
     HDGRAVEYARD (FSkinProp.IMG_HDZONE_GRAVEYARD, SourceFile.BUTTONS),
 
+    SIDEBOARD   (FSkinProp.IMG_ZONE_SIDEBOARD, SourceFile.ICONS),
+
     HDMANAPOOL   (FSkinProp.IMG_HDZONE_MANAPOOL, SourceFile.BUTTONS),
 
     POISON      (FSkinProp.IMG_ZONE_POISON, SourceFile.ICONS),
@@ -60,6 +62,7 @@ public enum FSkinImage implements FImage {
     MANA_HYBRID_UR (FSkinProp.IMG_MANA_HYBRID_UR, SourceFile.MANAICONS),
     MANA_HYBRID_WB (FSkinProp.IMG_MANA_HYBRID_WB, SourceFile.MANAICONS),
     MANA_HYBRID_WU (FSkinProp.IMG_MANA_HYBRID_WU, SourceFile.MANAICONS),
+    MANA_PHRYX     (FSkinProp.IMG_MANA_PHRYX, SourceFile.MANAICONS),
     MANA_PHRYX_U   (FSkinProp.IMG_MANA_PHRYX_U, SourceFile.MANAICONS),
     MANA_PHRYX_W   (FSkinProp.IMG_MANA_PHRYX_W, SourceFile.MANAICONS),
     MANA_PHRYX_R   (FSkinProp.IMG_MANA_PHRYX_R, SourceFile.MANAICONS),
@@ -92,10 +95,72 @@ public enum FSkinImage implements FImage {
     MANA_Z         (FSkinProp.IMG_MANA_Z, SourceFile.MANAICONS),
 
     //CMC ranges
-    CMC_LOW      (FSkinProp.IMG_CMC_LOW, SourceFile.MANAICONS),
-    CMC_LOW_MID  (FSkinProp.IMG_CMC_LOW_MID, SourceFile.MANAICONS),
-    CMC_MID_HIGH (FSkinProp.IMG_CMC_MID_HIGH, SourceFile.MANAICONS),
-    CMC_HIGH     (FSkinProp.IMG_CMC_HIGH, SourceFile.MANAICONS),
+    CMC_LOW        (FSkinProp.IMG_CMC_LOW, SourceFile.MANAICONS),
+    CMC_LOW_MID    (FSkinProp.IMG_CMC_LOW_MID, SourceFile.MANAICONS),
+    CMC_MID_HIGH   (FSkinProp.IMG_CMC_MID_HIGH, SourceFile.MANAICONS),
+    CMC_HIGH       (FSkinProp.IMG_CMC_HIGH, SourceFile.MANAICONS),
+
+    //Setlogo
+    SET_COMMON     (FSkinProp.IMG_SETLOGO_COMMON, SourceFile.SETLOGOS),
+    SET_UNCOMMON   (FSkinProp.IMG_SETLOGO_UNCOMMON, SourceFile.SETLOGOS),
+    SET_RARE       (FSkinProp.IMG_SETLOGO_RARE, SourceFile.SETLOGOS),
+    SET_MYTHIC     (FSkinProp.IMG_SETLOGO_MYTHIC, SourceFile.SETLOGOS),
+    SET_SPECIAL    (FSkinProp.IMG_SETLOGO_SPECIAL, SourceFile.SETLOGOS),
+
+    //Watermarks
+    WATERMARK_G    (FSkinProp.IMG_WATERMARK_G, SourceFile.WATERMARKS),
+    WATERMARK_R    (FSkinProp.IMG_WATERMARK_R, SourceFile.WATERMARKS),
+    WATERMARK_B    (FSkinProp.IMG_WATERMARK_B, SourceFile.WATERMARKS),
+    WATERMARK_U    (FSkinProp.IMG_WATERMARK_U, SourceFile.WATERMARKS),
+    WATERMARK_W    (FSkinProp.IMG_WATERMARK_W, SourceFile.WATERMARKS),
+    WATERMARK_C    (FSkinProp.IMG_WATERMARK_C, SourceFile.WATERMARKS),
+
+    //CardBG
+    CARDBG_A       (FSkinProp.IMG_CARDBG_A, SourceFile.CARDBG),
+    CARDBG_B       (FSkinProp.IMG_CARDBG_B, SourceFile.CARDBG),
+    CARDBG_BG      (FSkinProp.IMG_CARDBG_BG, SourceFile.CARDBG),
+    CARDBG_BR      (FSkinProp.IMG_CARDBG_BR, SourceFile.CARDBG),
+    CARDBG_C       (FSkinProp.IMG_CARDBG_C, SourceFile.CARDBG),
+    CARDBG_G       (FSkinProp.IMG_CARDBG_G, SourceFile.CARDBG),
+    CARDBG_L       (FSkinProp.IMG_CARDBG_L, SourceFile.CARDBG),
+    CARDBG_M       (FSkinProp.IMG_CARDBG_M, SourceFile.CARDBG),
+    CARDBG_R       (FSkinProp.IMG_CARDBG_R, SourceFile.CARDBG),
+    CARDBG_RG      (FSkinProp.IMG_CARDBG_RG, SourceFile.CARDBG),
+    CARDBG_U       (FSkinProp.IMG_CARDBG_U, SourceFile.CARDBG),
+    CARDBG_UB      (FSkinProp.IMG_CARDBG_UB, SourceFile.CARDBG),
+    CARDBG_UG      (FSkinProp.IMG_CARDBG_UG, SourceFile.CARDBG),
+    CARDBG_UR      (FSkinProp.IMG_CARDBG_UR, SourceFile.CARDBG),
+    CARDBG_V       (FSkinProp.IMG_CARDBG_V, SourceFile.CARDBG),
+    CARDBG_W       (FSkinProp.IMG_CARDBG_W, SourceFile.CARDBG),
+    CARDBG_WB      (FSkinProp.IMG_CARDBG_WB, SourceFile.CARDBG),
+    CARDBG_WG      (FSkinProp.IMG_CARDBG_WG, SourceFile.CARDBG),
+    CARDBG_WR      (FSkinProp.IMG_CARDBG_WR, SourceFile.CARDBG),
+    CARDBG_WU      (FSkinProp.IMG_CARDBG_WU, SourceFile.CARDBG),
+    //PWBG
+    PWBG_B         (FSkinProp.IMG_PWBG_B, SourceFile.CARDBG),
+    PWBG_BG        (FSkinProp.IMG_PWBG_BG, SourceFile.CARDBG),
+    PWBG_BR        (FSkinProp.IMG_PWBG_BR, SourceFile.CARDBG),
+    PWBG_C         (FSkinProp.IMG_PWBG_C, SourceFile.CARDBG),
+    PWBG_G         (FSkinProp.IMG_PWBG_G, SourceFile.CARDBG),
+    PWBG_M         (FSkinProp.IMG_PWBG_M, SourceFile.CARDBG),
+    PWBG_R         (FSkinProp.IMG_PWBG_R, SourceFile.CARDBG),
+    PWBG_RG        (FSkinProp.IMG_PWBG_RG, SourceFile.CARDBG),
+    PWBG_U         (FSkinProp.IMG_PWBG_U, SourceFile.CARDBG),
+    PWBG_UB        (FSkinProp.IMG_PWBG_UB, SourceFile.CARDBG),
+    PWBG_UG        (FSkinProp.IMG_PWBG_UG, SourceFile.CARDBG),
+    PWBG_UR        (FSkinProp.IMG_PWBG_UR, SourceFile.CARDBG),
+    PWBG_W         (FSkinProp.IMG_PWBG_W, SourceFile.CARDBG),
+    PWBG_WB        (FSkinProp.IMG_PWBG_WB, SourceFile.CARDBG),
+    PWBG_WG        (FSkinProp.IMG_PWBG_WG, SourceFile.CARDBG),
+    PWBG_WR        (FSkinProp.IMG_PWBG_WR, SourceFile.CARDBG),
+    PWBG_WU        (FSkinProp.IMG_PWBG_WU, SourceFile.CARDBG),
+    //NYX OVERLAY
+    NYX_B          (FSkinProp.IMG_NYX_B, SourceFile.CARDBG),
+    NYX_G          (FSkinProp.IMG_NYX_G, SourceFile.CARDBG),
+    NYX_M          (FSkinProp.IMG_NYX_M, SourceFile.CARDBG),
+    NYX_R          (FSkinProp.IMG_NYX_R, SourceFile.CARDBG),
+    NYX_U          (FSkinProp.IMG_NYX_U, SourceFile.CARDBG),
+    NYX_W          (FSkinProp.IMG_NYX_W, SourceFile.CARDBG),
 
     //Gameplay
     TAP             (FSkinProp.IMG_TAP, SourceFile.MANAICONS),
@@ -419,6 +484,9 @@ public enum FSkinImage implements FImage {
         BUTTONS(ForgeConstants.SPRITE_BUTTONS_FILE),
         BTNSTART(ForgeConstants.SPRITE_START_FILE),
         MANAICONS(ForgeConstants.SPRITE_MANAICONS_FILE),
+        SETLOGOS(ForgeConstants.SPRITE_SETLOGO_FILE),
+        WATERMARKS(ForgeConstants.SPRITE_WATERMARK_FILE),
+        CARDBG(ForgeConstants.SPRITE_CARDBG_FILE),
         PLANAR_CONQUEST(ForgeConstants.SPRITE_PLANAR_CONQUEST_FILE);
 
         private final String filename;
@@ -482,7 +550,7 @@ public enum FSkinImage implements FImage {
                 // If any return true, image exists.
                 int x0 = 0, y0 = 0;
                 Color c;
-    
+
                 // Center
                 x0 = (x + w / 2);
                 y0 = (y + h / 2);
@@ -491,7 +559,7 @@ public enum FSkinImage implements FImage {
                     textureRegion = new TextureRegion(texture, x, y, w, h);
                     return;
                 }
-    
+
                 x0 += 2;
                 y0 += 2;
                 c = new Color(preferredIcons.getPixel(x0, y0));
@@ -499,21 +567,21 @@ public enum FSkinImage implements FImage {
                     textureRegion = new TextureRegion(texture, x, y, w, h);
                     return;
                 }
-    
+
                 x0 -= 4;
                 c = new Color(preferredIcons.getPixel(x0, y0));
                 if (c.a != 0) {
                     textureRegion = new TextureRegion(texture, x, y, w, h);
                     return;
                 }
-    
+
                 y0 -= 4;
                 c = new Color(preferredIcons.getPixel(x0, y0));
                 if (c.a != 0) {
                     textureRegion = new TextureRegion(texture, x, y, w, h);
                     return;
                 }
-    
+
                 x0 += 4;
                 c = new Color(preferredIcons.getPixel(x0, y0));
                 if (c.a != 0) {

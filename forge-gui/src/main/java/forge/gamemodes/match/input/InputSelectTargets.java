@@ -98,15 +98,15 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             sb.append(sa.getHostCard()).append(" - ").append(tgt.getVTSelection());
         }
         if (!targetDepth.entrySet().isEmpty()) {
-                sb.append("\nTargeted: ");
+            sb.append("\nTargeted: ");
         }
         for (final Entry<GameEntity, Integer> o : targetDepth.entrySet()) {
             //if it's not in gdx port landscape mode, append the linebreak
-            if(!ForgeConstants.isGdxPortLandscape)
+            if (!ForgeConstants.isGdxPortLandscape)
                 sb.append("\n");
             sb.append(o.getKey());
             //if it's in gdx port landscape mode, instead append the comma with space...
-            if(ForgeConstants.isGdxPortLandscape)
+            if (ForgeConstants.isGdxPortLandscape)
                 sb.append(", ");
             if (o.getValue() > 1) {
                 sb.append(TextUtil.concatNoSpace(" (", String.valueOf(o.getValue()), " times)"));
@@ -128,7 +128,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
                 "(Targeting ERROR)", "");
         showMessage(message, sa.getView());
 
-        if ((divisionValues != null && !divisionValues.isEmpty()) && sa.getMinTargets() == 0 && sa.getTargets().size() == 0) {
+        if (divisionValues != null && !divisionValues.isEmpty() && sa.getMinTargets() == 0 && sa.getTargets().size() == 0) {
             // extra logic for Divided with min targets = 0, should only work if num targets are 0 too
             getController().getGui().updateButtons(getOwner(), true, true, false);
         } else if (!sa.isMinTargetChosen() || (divisionValues != null && !divisionValues.isEmpty())){
@@ -136,17 +136,14 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             if (mandatory && tgt.hasCandidates(sa, true)) {
                 // Player has to click on a target
                 getController().getGui().updateButtons(getOwner(), false, false, false);
-            }
-            else {
+            } else {
                 getController().getGui().updateButtons(getOwner(), false, true, false);
             }
-        }
-        else {
+        } else {
             if (mandatory && tgt.hasCandidates(sa, true)) {
                 // Player has to click on a target or ok
                 getController().getGui().updateButtons(getOwner(), true, false, true);
-            }
-            else {
+            } else {
                 getController().getGui().updateButtons(getOwner(), true, true, true);
             }
         }
@@ -279,7 +276,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             return false;
         }
 
-        if ((divisionValues != null && !divisionValues.isEmpty())) {
+        if (divisionValues != null && !divisionValues.isEmpty()) {
             Boolean val = onDividedAsYouChoose(card);
             if (val != null) {
                 return val;
@@ -321,7 +318,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             return;
         }
 
-        if ((divisionValues != null && !divisionValues.isEmpty())) {
+        if (divisionValues != null && !divisionValues.isEmpty()) {
             Boolean val = onDividedAsYouChoose(player);
             if (val != null) {
                 return;
@@ -387,13 +384,13 @@ public final class InputSelectTargets extends InputSyncronizedBase {
 
     private boolean hasAllTargets() {
         return sa.isMaxTargetChosen() || (divisionValues != null && sa.getStillToDivide() == 0)
-            || (sa.isDividedAsYouChoose() && sa.getTargets().size() == sa.getStillToDivide());
+            || (divisionValues == null && sa.isDividedAsYouChoose() && sa.getTargets().size() == sa.getStillToDivide());
     }
 
     @Override
     protected void onStop() {
-	getController().getGui().clearSelectables();
-	super.onStop();
+        getController().getGui().clearSelectables();
+        super.onStop();
     }
 
 }

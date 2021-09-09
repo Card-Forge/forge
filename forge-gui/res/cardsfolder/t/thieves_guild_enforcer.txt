@@ -3,8 +3,7 @@ ManaCost:B
 Types:Creature Human Rogue
 PT:1/1
 K:Flash
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME or another Rogue enters the battlefield under your control, each opponent mills two cards.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Rogue.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigMill | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another Rogue enters the battlefield under your control, each opponent mills two cards.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Rogue.Other+YouCtrl | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME or another Rogue enters the battlefield under your control, each opponent mills two cards.
 SVar:TrigMill:DB$ Mill | Defined$ Player.Opponent | NumCards$ 2
 SVar:BuffedBy:Rogue
 DeckHints:Type$Rogue

@@ -84,7 +84,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
 
         // remove Unplayables
         final Iterable<PaperCard> playables = Iterables.filter(availableList,
-                Predicates.compose(CardRulesPredicates.IS_KEPT_IN_AI_DECKS, PaperCard.FN_GET_RULES));
+                Predicates.compose(CardRulesPredicates.IS_KEPT_IN_AI_LIMITED_DECKS, PaperCard.FN_GET_RULES));
         this.aiPlayables = Lists.newArrayList(playables);
         this.availableList.removeAll(aiPlayables);
 
@@ -189,17 +189,13 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
         // to try and avoid adding purely random cards.
         addThirdColorCards(numSpellsNeeded - deckList.size());
 
-        // 8. Check for DeckNeeds cards.
-        checkRemRandomDeckCards();
-
-        // 9. If there are still less than 22 non-land cards add off-color
-        // cards. This should be avoided.
-        addRandomCards(numSpellsNeeded - deckList.size());
-
-        // 10. Add non-basic lands that were drafted.
+        // 8. Add non-basic lands that were drafted.
         addNonBasicLands();
 
-        // 11. Fill up with basic lands.
+        // 9. Check for DeckNeeds cards.
+        checkRemRandomDeckCards();
+
+        // 10. Fill up with basic lands.
         final int[] clrCnts = calculateLandNeeds();
         if (landsNeeded > 0) {
             addLands(clrCnts, landSetCode);
@@ -352,33 +348,40 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
 
         // total of all ClrCnts
         int totalColor = 0;
-        int numColors = 0;
         for (int i = 0; i < 5; i++) {
             totalColor += clrCnts[i];
-            if (clrCnts[i] > 0) {
-                numColors++;
-            }
         }
         if (totalColor == 0) {
+        	// TODO: Technically this can happen in a colorless deck.
             throw new RuntimeException("Add Lands to empty deck list!");
         }
-
-        // do not update landsNeeded until after the loop, because the
-        // calculation involves landsNeeded
+        
+        // First, add 2 land of each required color. This prevents the AI from including
+        // a splash card with no viable way to cast it.
         for (int i = 0; i < 5; i++) {
             if (clrCnts[i] > 0) {
-                // calculate number of lands for each color
-                float p = (float) clrCnts[i] / (float) totalColor;
-                if (numColors == 2) {
-                    // In the normal two-color case, constrain to within 40% and 60% so that the AI
-                    // doesn't put too few lands of the lesser color, risking getting screwed on that color.
-                    // Don't do this for the odd case where a third color had to be added to the deck.
-                    p = Math.min(Math.max(p, 0.4f), 0.6f);
+            	int nLand = 2;
+            	System.out.printf("Basics[%s]: %d cards%n", MagicColor.Constant.BASIC_LANDS.get(i), nLand);
+            	for (int j = 0; j < nLand; j++) {
+                    deckList.add(getBasicLand(i, landSetCode));
                 }
-                int nLand = Math.round(landsNeeded * p); // desired truncation to int
+            }
+        }
+        
+        for (int i = 0; i < 5; i++) {
+        	int slotsRemaining = 40-deckList.size(); // How many to still distribute
+            if (clrCnts[i] > 0) {
+                // calculate proportion of mana symbols for each remaining color
+                float p = (float) clrCnts[i] / (float) totalColor;
+
+                // Rounding prefers WUBRG order, as a side effect.
+                int nLand = Math.round(slotsRemaining * p); // Round up/down
+                
                 if (logToConsole) {
                     System.out.printf("Basics[%s]: %d/%d = %f%% = %d cards%n", MagicColor.Constant.BASIC_LANDS.get(i), clrCnts[i], totalColor, 100*p, nLand);
                 }
+                
+                totalColor -= clrCnts[i];
 
                 // if appropriate snow-covered lands are available, add them
                 for (final PaperCard cp : basicLands) {
@@ -392,14 +395,6 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
                     deckList.add(getBasicLand(i, landSetCode));
                 }
             }
-        }
-
-        // A common problem at this point is that p in the above loop was exactly 1/2,
-        // and nLand rounded up for both colors, so that one too many lands was added.
-        // So if the deck size is > 40, remove the last land added.
-        // Otherwise, the fixDeckSize() method would remove random cards.
-        while (deckList.size() > 40) {
-            deckList.remove(deckList.size() - 1);
         }
 
         deckList.addAll(snowLands);
@@ -505,7 +500,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
 
             hasColor = Predicates.or(new DeckGeneratorBase.MatchColorIdentity(colors),
                     DeckGeneratorBase.COLORLESS_CARDS);
-            final Iterable<PaperCard> threeColorList = Iterables.filter(aiPlayables,
+            final Iterable<PaperCard> threeColorList = Iterables.filter(rankedOthers,
                     Predicates.compose(hasColor, PaperCard.FN_GET_RULES));
             for (final PaperCard card : threeColorList) {
                 if (num > 0) {
@@ -611,6 +606,8 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
                     availableList.add(card);
                     if (card.getRules().getType().isCreature()) {
                         numCreatures++;
+                    } else if (card.getRules().getType().isLand()) {
+                    	// Do nothing, it will be replaced with basics later.
                     } else {
                         numOthers++;
                     }

@@ -107,7 +107,7 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
             uncastableCMCThreshold = aic.getIntProperty(AiProps.SCRY_IMMEDIATELY_UNCASTABLE_CMC_DIFF);
         }
 
-        Player p = pc.getFirst(); // FIXME: is this always a single target spell?
+        Player p = pc.getFirst(); // currently always a single target spell
         Card top = p.getCardsIn(ZoneType.Library).getFirst();
         int landsOTB = CardLists.filter(p.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS_PRODUCING_MANA).size();
         int cmc = top.isSplitCard() ? Math.min(top.getCMC(Card.SplitCMCMode.LeftSplitCMC), top.getCMC(Card.SplitCMCMode.RightSplitCMC))

@@ -38,7 +38,6 @@ public class FightEffect extends DamageBaseEffect {
         return sb.toString();
     }
 
-
     /* (non-Javadoc)
      * @see forge.game.ability.SpellAbilityEffect#resolve(forge.game.spellability.SpellAbility)
      */
@@ -52,14 +51,14 @@ public class FightEffect extends DamageBaseEffect {
         if (fighters.size() < 2) {
             return;
         }
-        
+
         if (sa.hasParam("RememberObjects")) {
             final String remembered = sa.getParam("RememberObjects");
             for (final Object o : AbilityUtils.getDefinedObjects(host, remembered, sa)) {
                 host.addRemembered(o);
             }
         }
-        
+
         Player controller = host.getController();
         boolean isOptional = sa.hasParam("Optional");
 
@@ -77,6 +76,7 @@ public class FightEffect extends DamageBaseEffect {
 
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.Fighters, fighters);
+        game.getTriggerHandler().runTrigger(TriggerType.FightOnce, runParams, false);
     }
 
     private static List<Card> getFighters(SpellAbility sa) {

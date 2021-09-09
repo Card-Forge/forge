@@ -1,0 +1,8 @@
+Name:Indomitable Might
+ManaCost:3 G
+Types:Enchantment Aura
+K:Flash
+K:Enchant creature
+A:SP$ Attach | Cost$ 3 G | ValidTgts$ Creature | TgtPrompt$ Select creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 3 | AddHiddenKeyword$ You may have CARDNAME assign its combat damage as though it weren't blocked. | Description$ Enchanted creature gets +3/+3. Enchanted creature's controller may have it assign its combat damage as though it weren't blocked.
+Oracle:Flash\nEnchant creature\nEnchanted creature gets +3/+3.\nEnchanted creature's controller may have it assign its combat damage as though it weren't blocked.

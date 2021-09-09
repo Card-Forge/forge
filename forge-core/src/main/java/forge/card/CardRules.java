@@ -67,7 +67,7 @@ public final class CardRules implements ICardCharacteristics {
     }
 
     void reinitializeFromRules(CardRules newRules) {
-        if(!newRules.getName().equals(this.getName()))
+        if (!newRules.getName().equals(this.getName()))
             throw new UnsupportedOperationException("You cannot rename the card using the same CardRules object");
 
         splitType = newRules.splitType;
@@ -91,7 +91,7 @@ public final class CardRules implements ICardCharacteristics {
             }
         }
         int len = oracleText.length();
-        for(int i = 0; i < len; i++) {
+        for (int i = 0; i < len; i++) {
             char c = oracleText.charAt(i); // This is to avoid needless allocations performed by toCharArray()
             switch(c) {
                 case('('): isReminder = i > 0; break; // if oracle has only reminder, consider it valid rules (basic and true lands need this)
@@ -99,7 +99,7 @@ public final class CardRules implements ICardCharacteristics {
                 case('{'): isSymbol = true; break;
                 case('}'): isSymbol = false; break;
                 default:
-                    if(isSymbol && !isReminder) {
+                    if (isSymbol && !isReminder) {
                         switch(c) {
                             case('W'): res |= MagicColor.WHITE; break;
                             case('U'): res |= MagicColor.BLUE; break;
@@ -182,7 +182,7 @@ public final class CardRules implements ICardCharacteristics {
             //if card face has no cost, assume castable only by mana of its defined color
             return face.getColor().hasNoColorsExcept(colorCode);
         }
-        return face.getManaCost().canBePaidWithAvaliable(colorCode);
+        return face.getManaCost().canBePaidWithAvailable(colorCode);
     }
 
     public boolean canCastWithAvailable(byte colorCode) {
@@ -211,11 +211,20 @@ public final class CardRules implements ICardCharacteristics {
     }
 
     public boolean canBeCommander() {
-        CardType type = mainPart.getType();
-        if (type.isLegendary() && type.isCreature()) {
+        if (mainPart.getOracleText().contains("can be your commander")) {
             return true;
         }
-        return mainPart.getOracleText().contains("can be your commander");
+        CardType type = mainPart.getType();
+        boolean creature = type.isCreature();
+        for (String staticAbility : mainPart.getStaticAbilities()) { // Check for Grist
+            if (staticAbility.contains("CharacteristicDefining$ True") && staticAbility.contains("AddType$ Creature")) {
+                creature = true;
+            }
+        }
+        if (type.isLegendary() && creature) {
+            return true;
+        }
+        return false;
     }
 
     public boolean canBePartnerCommander() {
@@ -234,12 +243,38 @@ public final class CardRules implements ICardCharacteristics {
 
     public boolean canBeBrawlCommander() {
         CardType type = mainPart.getType();
-        return type.isLegendary() && (type.isCreature() || type.isPlaneswalker());
+        if (!type.isLegendary()) {
+            return false;
+        }
+        if (type.isCreature() || type.isPlaneswalker()) {
+            return true;
+        }
+
+        // Grist is checked above, but new cards might work this way
+        for (String staticAbility : mainPart.getStaticAbilities()) {
+            if (staticAbility.contains("CharacteristicDefining$ True") && staticAbility.contains("AddType$ Creature")) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean canBeTinyLeadersCommander() {
         CardType type = mainPart.getType();
-        return type.isLegendary() && (type.isCreature() || type.isPlaneswalker());
+        if (!type.isLegendary()) {
+            return false;
+        }
+        if (type.isCreature() || type.isPlaneswalker()) {
+            return true;
+        }
+
+        // Grist is checked above, but new cards might work this way
+        for (String staticAbility : mainPart.getStaticAbilities()) {
+            if (staticAbility.contains("CharacteristicDefining$ True") && staticAbility.contains("AddType$ Creature")) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public String getMeldWith() {
@@ -282,7 +317,7 @@ public final class CardRules implements ICardCharacteristics {
     /** Instantiates class, reads a card. For batch operations better create you own reader instance. */
     public static CardRules fromScript(Iterable<String> script) {
         Reader crr = new Reader();
-        for(String line : script) {
+        for (String line : script) {
             crr.parseLine(line);
         }
         return crr.getCard();
@@ -379,7 +414,7 @@ public final class CardRules implements ICardCharacteristics {
             String key = colonPos > 0 ? line.substring(0, colonPos) : line;
             String value = colonPos > 0 ? line.substring(1+colonPos).trim() : null;
 
-            switch(key.charAt(0)) {
+            switch (key.charAt(0)) {
                 case 'A':
                     if ("A".equals(key)) {
                         this.faces[curFace].addAbility(value);
@@ -388,10 +423,10 @@ public final class CardRules implements ICardCharacteristics {
                         String variable = colonPos > 0 ? value.substring(0, colonPos) : value;
                         value = colonPos > 0 ? value.substring(1+colonPos) : null;
 
-                        if ( "RemoveDeck".equals(variable) ) {
-                            this.removedFromAIDecks = "All".equalsIgnoreCase(value);
-                            this.removedFromRandomDecks = "Random".equalsIgnoreCase(value);
-                            this.removedFromNonCommanderDecks = "NonCommander".equalsIgnoreCase(value);
+                        if ("RemoveDeck".equals(variable)) {
+                            this.removedFromAIDecks |= "All".equalsIgnoreCase(value);
+                            this.removedFromRandomDecks |= "Random".equalsIgnoreCase(value);
+                            this.removedFromNonCommanderDecks |= "NonCommander".equalsIgnoreCase(value);
                         }
                     } else if ("AlternateMode".equals(key)) {
                         this.altMode = CardSplitType.smartValueOf(value);
@@ -478,14 +513,14 @@ public final class CardRules implements ICardCharacteristics {
                 case 'S':
                     if ("S".equals(key)) {
                         this.faces[this.curFace].addStaticAbility(value);
-                    } else if ( "SVar".equals(key) ) {
-                        if ( null == value ) throw new IllegalArgumentException("SVar has no variable name");
+                    } else if ("SVar".equals(key)) {
+                        if (null == value) throw new IllegalArgumentException("SVar has no variable name");
 
                         colonPos = value.indexOf(':');
                         String variable = colonPos > 0 ? value.substring(0, colonPos) : value;
                         value = colonPos > 0 ? value.substring(1+colonPos) : null;
 
-                        if ( "Picture".equals(variable) ) {
+                        if ("Picture".equals(variable)) {
                             this.pictureUrl[this.curFace] = value;
                         } else
                             this.faces[curFace].addSVar(variable, value);

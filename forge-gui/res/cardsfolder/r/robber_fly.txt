@@ -4,8 +4,8 @@ Types:Creature Insect
 PT:1/1
 K:Flying
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ Whenever CARDNAME becomes blocked, defending player discards all the cards in their hand, then draws that many cards.
-SVar:TrigDiscard:DB$ Discard | Defined$ DefendingPlayer | Mode$ Hand | RememberDiscarded$ True | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | NumCards$ X | Defined$ DefendingPlayer | SubAbility$ DBCleanup
+SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredDefendingPlayer | Mode$ Hand | RememberDiscarded$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ X | Defined$ TriggeredDefendingPlayer | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/robber_fly.jpg

@@ -1,0 +1,12 @@
+Name:Sylvan Shepherd
+ManaCost:2 G
+Types:Creature Human Druid
+PT:2/3
+K:Vigilance
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigRollDice | TriggerDescription$ Whenever CARDNAME attacks, ABILITY
+SVar:TrigRollDice:DB$ RollDice | Sides$ 20 | ResultSubAbilities$ 1-9:Gain1,10-19:Gain2,20:Gain5 | SpellDescription$ roll a d20.
+SVar:Gain1:DB$ GainLife | Defined$ You | LifeAmount$ 1 | SpellDescription$ 1—9 VERT You gain 1 life.
+SVar:Gain2:DB$ GainLife | Defined$ You | LifeAmount$ 2 | SpellDescription$ 10—19 VERT You gain 2 life.
+SVar:Gain5:DB$ GainLife | Defined$ You | LifeAmount$ 5 | SpellDescription$ 20 VERT You gain 5 life.
+DeckHas:Ability$LifeGain
+Oracle:Vigilance\nWhenever Sylvan Shepherd attacks, roll a d20.\n1—9 | You gain 1 life.\n10—19 | You gain 2 life.\n20 | You gain 5 life.

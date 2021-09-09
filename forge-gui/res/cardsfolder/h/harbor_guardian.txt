@@ -4,6 +4,6 @@ Types:Creature Gargoyle
 PT:3/4
 K:Reach
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | OptionalDecider$ Opponent | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME attacks, defending player may draw a card.
-SVar:TrigDraw:DB$ Draw | Defined$ DefendingPlayer | NumCards$ 1
+SVar:TrigDraw:DB$ Draw | Defined$ TriggeredDefendingPlayer | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harbor_guardian.jpg
 Oracle:Reach (This creature can block creatures with flying.)\nWhenever Harbor Guardian attacks, defending player may draw a card.

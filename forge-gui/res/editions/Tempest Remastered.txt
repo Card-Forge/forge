@@ -10,275 +10,275 @@ FoilChanceInBooster=100
 ScryfallCode=TPR
 
 [cards]
-8 M Cataclysm
-220 M Cursed Scroll
-46 M Dream Halls
-223 M Grindstone
-16 M Humility
-109 M Living Death
-228 M Mox Diamond
-184 M Oath of Druids
-113 M Recurring Nightmare
-158 M Shard Phoenix
-211 M Sliver Queen
-162 M Starke of Rath
-199 M Survival of the Fittest
-74 M Time Warp
-248 M Volrath's Stronghold
-165 R Aluren
-237 R City of Traitors
-218 R Coat of Arms
-87 R Coffin Queen
-88 R Commander Greven il-Vec
-89 R Corpse Dance
-90 R Crovax the Cursed
-99 R Death Pits of Rath
-208 R Dracoplasm
-48 R Ephemeron
-222 R Erratic Portal
-12 R Exalted Dragon
-130 R Fanning the Flames
-13 R Field of Souls
-131 R Flame Wave
-50 R Forbid
-15 R Gerrard's Battle Cry
-174 R Heartwood Giant
-54 R Intuition
-224 R Jinxed Idol
-107 R Kezzerdrix
-177 R Krakilin
-56 R Legacy's Allure
-141 R Magmasaur
-179 R Manabond
-59 R Mawcor
-60 R Meditate
-227 R Mindless Automaton
-180 R Mirri, Cat Warrior
-146 R Mogg Infestation
-110 R Necrologia
-148 R Ogre Shaman
-21 R Orim, Samite Healer
-23 R Paladin en-Vec
-149 R Pandemonium
-150 R Rathi Dragon
-189 R Recycle
-210 R Selenia, Dark Angel
-27 R Shaman en-Kor
-68 R Silver Wyvern
-212 R Soltari Guerrillas
-197 R Spike Hatcher
-35 R Spirit Mirror
-161 R Spitting Hydra
-120 R Stronghold Assassin
-233 R Thopter Squadron
-75 R Tradewind Rider
-202 R Verdant Force
-214 R Vhati il-Dal
-234 R Volrath's Laboratory
-249 R Wasteland
-40 R Winds of Rath
-216 R Wood Sage
-206 U Acidic Sliver
-2 U Angelic Protector
-6 U Avenging Angel
-235 U Caldera Lake
-83 U Cannibalize
-42 U Capsize
-167 U Carnassid
-236 U Cinder Marsh
-43 U Counterspell
-168 U Crashing Boars
-207 U Crystalline Sliver
-44 U Curiosity
-96 U Dauthi Marauder
-97 U Dauthi Slayer
-98 U Dauthi Warlord
-129 U Deadshot
-45 U Dismiss
-47 U Dream Prowler
-221 U Emmessi Tome
-104 U Evincar's Justice
-49 U Fighting Drake
-133 U Flowstone Mauler
-134 U Flowstone Wyvern
-105 U Fugue
-14 U Gallantry
-136 U Goblin Bombardment
-175 U Hermit Druid
-209 U Hibernation Sliver
-55 U Killer Whale
-17 U Kor Chant
-57 U Legerdemain
-225 U Lotus Petal
-178 U Lowland Basilisk
-140 U Mage il-Vec
-238 U Maze of Shadows
-239 U Mogg Hollows
-147 U Mogg Maniac
-183 U Needle Storm
-185 U Overrun
-22 U Pacifism
-24 U Pegasus Stampede
-230 U Phyrexian Hulk
-240 U Pine Barrens
-112 U Reanimate
-151 U Renegade Warlord
-25 U Repentance
-114 U Revenant
-152 U Rolling Thunder
-190 U Rootbreaker Wurm
-241 U Rootwater Depths
-63 U Rootwater Hunter
-153 U Sabertooth Wyvern
-242 U Salt Flats
-115 U Sarcomancy
-243 U Scabland
-116 U Screeching Harpy
-155 U Searing Touch
-157 U Shadowstorm
-244 U Skyshroud Forest
-118 U Skyshroud Vampire
-29 U Soltari Champion
-31 U Soltari Monk
-32 U Soltari Priest
-160 U Spellshock
-194 U Spike Breeder
-196 U Spike Feeder
-213 U Spined Sliver
-245 U Stalking Stones
-70 U Thalakos Drifters
-246 U Thalakos Lowlands
-201 U Tranquility
-247 U Vec Townships
-203 U Verdant Touch
-215 U Victual Sliver
-77 U Volrath's Curse
-205 U Wall of Blossoms
-38 U Wall of Essence
-123 U Wall of Souls
-39 U Warrior en-Kor
-80 U Wind Dancer
-124 C Aftershock
-125 C Anarchist
-1 C Angelic Blessing
-3 C Anoint
-4 C Armor Sliver
-5 C Armored Pegasus
-7 C Bandage
-126 C Barbed Sliver
-217 C Bottle Gnomes
-166 C Canopy Spider
-127 C Canyon Wildcat
-84 C Carnophage
-9 C Charging Paladin
-85 C Clot Sliver
-86 C Coercion
-219 C Coiled Tinviper
-10 C Conviction
-128 C Craven Giant
-91 C Cursed Flesh
-92 C Dark Banishing
-93 C Dark Ritual
-94 C Dauthi Horror
-95 C Dauthi Jackal
-100 C Death Stroke
-101 C Death's Duet
-102 C Diabolic Edict
-11 C Disenchant
-103 C Dungeon Shade
-169 C Elven Rite
-170 C Elvish Fury
-171 C Endangered Armodon
-132 C Flowstone Blade
-135 C Furnace Brood
-51 C Gaseous Form
-106 C Gravedigger
-52 C Hammerhead Shark
-172 C Harrow
-173 C Heartwood Dryad
-176 C Horned Sliver
-53 C Horned Turtle
-137 C Kindle
-108 C Lab Rats
-138 C Lightning Blast
-139 C Lowland Giant
-58 C Mana Leak
-142 C Maniacal Rage
-18 C Master Decoy
-61 C Merfolk Looter
-226 C Metallic Sliver
-62 C Mnemonic Sliver
-143 C Mogg Conscripts
-144 C Mogg Fanatic
-145 C Mogg Flunkies
-19 C Mounted Archers
-181 C Mulch
-182 C Muscle Sliver
-20 C Nomads en-Kor
-229 C Patchwork Gnomes
-186 C Provoke
-187 C Rampant Growth
-111 C Rats of Rath
-188 C Reality Anchor
-191 C Rootwalla
-154 C Sandstone Warrior
-64 C Scrivener
-65 C Sea Monster
-156 C Seething Anger
-117 C Serpent Warrior
-26 C Shackles
-66 C Shadow Rift
-159 C Shatter
-67 C Sift
-231 C Skyshaper
-192 C Skyshroud Elf
-193 C Skyshroud Troll
-28 C Smite
-30 C Soltari Lancer
-33 C Soltari Trooper
-69 C Spell Blast
-195 C Spike Colony
-119 C Spinal Graft
-198 C Spined Wurm
-34 C Spirit en-Kor
-36 C Standing Troops
-37 C Staunch Defenders
-163 C Stun
-232 C Telethopter
-71 C Thalakos Scout
-72 C Thalakos Seer
-121 C Thrull Surgeon
-73 C Time Ebb
-200 C Trained Armodon
-76 C Twitch
-122 C Vampire Hounds
-204 C Verdigris
-164 C Wall of Diffusion
-78 C Wayward Soul
-79 C Whispers of the Muse
-81 C Wind Drake
-82 C Winged Sliver
-41 C Youthful Knight
-268 L Forest
-268 L Forest
-268 L Forest
-268 L Forest
-254 L Island
-254 L Island
-254 L Island
-254 L Island
-264 L Mountain
-264 L Mountain
-264 L Mountain
-264 L Mountain
-250 L Plains
-250 L Plains
-250 L Plains
-250 L Plains
-258 L Swamp
-258 L Swamp
-258 L Swamp
-258 L Swamp
+8 M Cataclysm @Jim Nelson
+220 M Cursed Scroll @D. Alexander Gregory
+46 M Dream Halls @Matthew D. Wilson
+223 M Grindstone @Greg Simanson
+16 M Humility @Phil Foglio
+109 M Living Death @Charles Gillespie
+228 M Mox Diamond @Dan Frazier
+184 M Oath of Druids @Daren Bader
+113 M Recurring Nightmare @Jeff Laubenstein
+158 M Shard Phoenix @Paolo Parente
+211 M Sliver Queen @Ron Spencer
+162 M Starke of Rath @Dan Frazier
+199 M Survival of the Fittest @Pete Venters
+74 M Time Warp @Pete Venters
+248 M Volrath's Stronghold @Kev Walker
+165 R Aluren @April Lee
+237 R City of Traitors @Kev Walker
+218 R Coat of Arms @Scott M. Fischer
+87 R Coffin Queen @Kaja Foglio
+88 R Commander Greven il-Vec @Kev Walker
+89 R Corpse Dance @Brian Snõddy
+90 R Crovax the Cursed @Pete Venters
+99 R Death Pits of Rath @Joel Biske
+208 R Dracoplasm @Andrew Robinson
+48 R Ephemeron @Keith Parkinson
+222 R Erratic Portal @John Matson
+12 R Exalted Dragon @Matthew D. Wilson
+130 R Fanning the Flames @Ron Spencer
+13 R Field of Souls @Richard Kane Ferguson
+131 R Flame Wave @Donato Giancola
+50 R Forbid @Scott Kirschner
+15 R Gerrard's Battle Cry @Val Mayerik
+174 R Heartwood Giant @Randy Elliott
+54 R Intuition @April Lee
+224 R Jinxed Idol @John Matson
+107 R Kezzerdrix @Matthew D. Wilson
+177 R Krakilin @Richard Kane Ferguson
+56 R Legacy's Allure @Daren Bader
+141 R Magmasaur @Daniel Gelon
+179 R Manabond @Stephen Daniele
+59 R Mawcor @John Matson
+60 R Meditate @Susan Van Camp
+227 R Mindless Automaton @Brian Snõddy
+180 R Mirri, Cat Warrior @Daren Bader
+146 R Mogg Infestation @Pete Venters
+110 R Necrologia @Brom
+148 R Ogre Shaman @Paolo Parente
+21 R Orim, Samite Healer @Kaja Foglio
+23 R Paladin en-Vec @Randy Elliott
+149 R Pandemonium @Pete Venters
+150 R Rathi Dragon @Christopher Rush
+189 R Recycle @Phil Foglio
+210 R Selenia, Dark Angel @Matthew D. Wilson
+27 R Shaman en-Kor @Jeff Miracola
+68 R Silver Wyvern @Colin MacNeil
+212 R Soltari Guerrillas @Val Mayerik
+197 R Spike Hatcher @Stephen Daniele
+35 R Spirit Mirror @D. Alexander Gregory
+161 R Spitting Hydra @Daren Bader
+120 R Stronghold Assassin @Matthew D. Wilson
+233 R Thopter Squadron @Doug Chaffee
+75 R Tradewind Rider @John Matson
+202 R Verdant Force @DiTerlizzi
+214 R Vhati il-Dal @Ron Spencer
+234 R Volrath's Laboratory @Brom
+249 R Wasteland @Una Fricker
+40 R Winds of Rath @Drew Tucker
+216 R Wood Sage @Paolo Parente
+206 U Acidic Sliver @Jeff Miracola
+2 U Angelic Protector @DiTerlizzi
+6 U Avenging Angel @Matthew D. Wilson
+235 U Caldera Lake @Allen Williams
+83 U Cannibalize @Robert Bliss
+42 U Capsize @Tom Wänerstrand
+167 U Carnassid @Brom
+236 U Cinder Marsh @John Matson
+43 U Counterspell @Stephen Daniele
+168 U Crashing Boars @Ron Spencer
+207 U Crystalline Sliver @Allen Williams
+44 U Curiosity @Val Mayerik
+96 U Dauthi Marauder @Andrew Robinson
+97 U Dauthi Slayer @Dermot Power
+98 U Dauthi Warlord @Kev Walker
+129 U Deadshot @Heather Hudson
+45 U Dismiss @Donato Giancola
+47 U Dream Prowler @Richard Kane Ferguson
+221 U Emmessi Tome @Tom Wänerstrand
+104 U Evincar's Justice @Hannibal King
+49 U Fighting Drake @DiTerlizzi
+133 U Flowstone Mauler @Paolo Parente
+134 U Flowstone Wyvern @Stephen Daniele
+105 U Fugue @Randy Gallegos
+14 U Gallantry @Douglas Shuler
+136 U Goblin Bombardment @Brian Snõddy
+175 U Hermit Druid @Heather Hudson
+209 U Hibernation Sliver @Scott Kirschner
+55 U Killer Whale @Stephen Daniele
+17 U Kor Chant @John Matson
+57 U Legerdemain @Daren Bader
+225 U Lotus Petal @April Lee
+178 U Lowland Basilisk @Randy Gallegos
+140 U Mage il-Vec @John Matson
+238 U Maze of Shadows @D. Alexander Gregory
+239 U Mogg Hollows @Jeff Laubenstein
+147 U Mogg Maniac @Brian Snõddy
+183 U Needle Storm @Val Mayerik
+185 U Overrun @Jeff Miracola
+22 U Pacifism @Adam Rex
+24 U Pegasus Stampede @Mark Zug
+230 U Phyrexian Hulk @Matthew D. Wilson
+240 U Pine Barrens @Rebecca Guay
+112 U Reanimate @Robert Bliss
+151 U Renegade Warlord @Ron Spencer
+25 U Repentance @Ron Spencer
+114 U Revenant @Terese Nielsen
+152 U Rolling Thunder @Richard Thomas
+190 U Rootbreaker Wurm @Richard Kane Ferguson
+241 U Rootwater Depths @Roger Raupp
+63 U Rootwater Hunter @Brom
+153 U Sabertooth Wyvern @Keith Parkinson
+242 U Salt Flats @Scott Kirschner
+115 U Sarcomancy @Daren Bader
+243 U Scabland @Andrew Robinson
+116 U Screeching Harpy @Una Fricker
+155 U Searing Touch @D. Alexander Gregory
+157 U Shadowstorm @Adam Rex
+244 U Skyshroud Forest @Roger Raupp
+118 U Skyshroud Vampire @Gary Leach
+29 U Soltari Champion @Adam Rex
+31 U Soltari Monk @Janet Aulisio
+32 U Soltari Priest @Janet Aulisio
+160 U Spellshock @Thomas M. Baxa
+194 U Spike Breeder @Adam Rex
+196 U Spike Feeder @Heather Hudson
+213 U Spined Sliver @Ron Spencer
+245 U Stalking Stones @Stephen Daniele
+70 U Thalakos Drifters @Andrew Robinson
+246 U Thalakos Lowlands @Jeff A. Menges
+201 U Tranquility @Margaret Organ-Kean
+247 U Vec Townships @Eric David Anderson
+203 U Verdant Touch @M. W. Kaluta & DiTerlizzi
+215 U Victual Sliver @Terese Nielsen
+77 U Volrath's Curse @Daren Bader
+205 U Wall of Blossoms @Heather Hudson
+38 U Wall of Essence @Adam Rex
+123 U Wall of Souls @John Matson
+39 U Warrior en-Kor @Stephen Daniele
+80 U Wind Dancer @Susan Van Camp
+124 C Aftershock @Hannibal King
+125 C Anarchist @Brom
+1 C Angelic Blessing @Mark Zug
+3 C Anoint @Eric David Anderson
+4 C Armor Sliver @Scott Kirschner
+5 C Armored Pegasus @Una Fricker
+7 C Bandage @Rebecca Guay
+126 C Barbed Sliver @Scott Kirschner
+217 C Bottle Gnomes @Kaja Foglio
+166 C Canopy Spider @Christopher Rush
+127 C Canyon Wildcat @Gary Leach
+84 C Carnophage @Pete Venters
+9 C Charging Paladin @Ciruelo
+85 C Clot Sliver @Jeff Laubenstein
+86 C Coercion @Pete Venters
+219 C Coiled Tinviper @John Matson
+10 C Conviction @Paolo Parente
+128 C Craven Giant @Brian Snõddy
+91 C Cursed Flesh @Ron Spencer
+92 C Dark Banishing @John Matson
+93 C Dark Ritual @Ken Meyer, Jr.
+94 C Dauthi Horror @Jeff Laubenstein
+95 C Dauthi Jackal @Adam Rex
+100 C Death Stroke @Colin MacNeil
+101 C Death's Duet @Keith Parkinson
+102 C Diabolic Edict @Ron Spencer
+11 C Disenchant @Allen Williams
+103 C Dungeon Shade @Jason Alexander Behnke
+169 C Elven Rite @Jeff Miracola
+170 C Elvish Fury @Quinton Hoover
+171 C Endangered Armodon @Kev Walker
+132 C Flowstone Blade @Allen Williams
+135 C Furnace Brood @Jeff Miracola
+51 C Gaseous Form @Roger Raupp
+106 C Gravedigger @Dermot Power
+52 C Hammerhead Shark @Stephen Daniele
+172 C Harrow @Eric David Anderson
+173 C Heartwood Dryad @Rebecca Guay
+176 C Horned Sliver @Allen Williams
+53 C Horned Turtle @DiTerlizzi
+137 C Kindle @Donato Giancola
+108 C Lab Rats @DiTerlizzi
+138 C Lightning Blast @Richard Thomas
+139 C Lowland Giant @Paolo Parente
+58 C Mana Leak @Christopher Rush
+142 C Maniacal Rage @Pete Venters
+18 C Master Decoy @Phil Foglio
+61 C Merfolk Looter @Ron Spencer
+226 C Metallic Sliver @Allen Williams
+62 C Mnemonic Sliver @Randy Gallegos
+143 C Mogg Conscripts @Pete Venters
+144 C Mogg Fanatic @Brom
+145 C Mogg Flunkies @Brom
+19 C Mounted Archers @Kev Walker
+181 C Mulch @Rebecca Guay
+182 C Muscle Sliver @Richard Kane Ferguson
+20 C Nomads en-Kor @Val Mayerik
+229 C Patchwork Gnomes @Mike Raabe
+186 C Provoke @Terese Nielsen
+187 C Rampant Growth @Tom Kyffin
+111 C Rats of Rath @John Matson
+188 C Reality Anchor @Randy Gallegos
+191 C Rootwalla @Roger Raupp
+154 C Sandstone Warrior @Stephen Daniele
+64 C Scrivener @Heather Hudson
+65 C Sea Monster @Daniel Gelon
+156 C Seething Anger @Val Mayerik
+117 C Serpent Warrior @Ron Spencer
+26 C Shackles @Heather Hudson
+66 C Shadow Rift @Adam Rex
+159 C Shatter @Jason Alexander Behnke
+67 C Sift @Pete Venters
+231 C Skyshaper @Donato Giancola
+192 C Skyshroud Elf @Jeff Miracola
+193 C Skyshroud Troll @Matthew D. Wilson
+28 C Smite @Daren Bader
+30 C Soltari Lancer @Matthew D. Wilson
+33 C Soltari Trooper @Kev Walker
+69 C Spell Blast @Steve Luke
+195 C Spike Colony @Douglas Shuler
+119 C Spinal Graft @Ron Spencer
+198 C Spined Wurm @Keith Parkinson
+34 C Spirit en-Kor @John Matson
+36 C Standing Troops @Daren Bader
+37 C Staunch Defenders @Mark Poole
+163 C Stun @Terese Nielsen
+232 C Telethopter @Thomas M. Baxa
+71 C Thalakos Scout @John Matson
+72 C Thalakos Seer @Ron Spencer
+121 C Thrull Surgeon @rk post
+73 C Time Ebb @Thomas M. Baxa
+200 C Trained Armodon @Gary Leach
+76 C Twitch @DiTerlizzi
+122 C Vampire Hounds @Kev Walker
+204 C Verdigris @Zina Saunders
+164 C Wall of Diffusion @DiTerlizzi
+78 C Wayward Soul @M. W. Kaluta & DiTerlizzi
+79 C Whispers of the Muse @Quinton Hoover
+81 C Wind Drake @Greg Simanson
+82 C Winged Sliver @Anthony S. Waters
+41 C Youthful Knight @Rebecca Guay
+266 L Forest @Douglas Shuler
+267 L Forest @Douglas Shuler
+268 L Forest @Douglas Shuler
+269 L Forest @Douglas Shuler
+254 L Island @Randy Gallegos
+255 L Island @Randy Gallegos
+256 L Island @Randy Gallegos
+257 L Island @Randy Gallegos
+262 L Mountain @Mark Poole
+263 L Mountain @Mark Poole
+264 L Mountain @Mark Poole
+265 L Mountain @Mark Poole
+250 L Plains @Terese Nielsen
+251 L Plains @Terese Nielsen
+252 L Plains @Terese Nielsen
+253 L Plains @Terese Nielsen
+258 L Swamp @Brom
+259 L Swamp @Brom
+260 L Swamp @Brom
+261 L Swamp @Brom
 
 [tokens]
 c_1_1_sliver

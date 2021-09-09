@@ -208,7 +208,6 @@ public class AiAttackController {
      * @return a boolean.
      */
     public final boolean isEffectiveAttacker(final Player ai, final Card attacker, final Combat combat) {
-
         // if the attacker will die when attacking don't attack
         if ((attacker.getNetToughness() + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, null, combat, true)) <= 0) {
             return false;
@@ -717,7 +716,7 @@ public class AiAttackController {
         }
 
         if (attackMax == 0) {
-            //  can't attack anymore
+            // can't attack anymore
             return;
         }
 

@@ -1,0 +1,20 @@
+[quest]
+id=ELD Challenge: Hypnotic Sprite
+OpponentName=The Sprites
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Title=Hypnotic Sprite
+Difficulty=easy
+Description=Faerie, Faerie, Faerie Dead\n-Secret Lair
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+Name=ELD Challenge: Hypnotic Sprite
+[Main]
+40 Hypnotic Sprite|ELD|2
+20 Island|ELD|2

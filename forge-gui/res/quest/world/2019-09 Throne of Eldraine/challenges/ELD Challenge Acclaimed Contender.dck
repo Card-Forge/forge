@@ -1,0 +1,20 @@
+[quest]
+id=ELD Challenge: Acclaimed Contender
+OpponentName=The Contenders
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Name=ELD Challenge: Acclaimed Contender
+Title=Acclaimed Contender
+Difficulty=medium
+Description="Every champion was once a contender that refused to give up."\n-Rocky Balboa, Rocky
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+[Main]
+30 Acclaimed Contender|ELD|2
+30 Tournament Grounds|ELD

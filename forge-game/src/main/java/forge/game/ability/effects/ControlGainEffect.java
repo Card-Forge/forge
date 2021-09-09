@@ -67,7 +67,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
             if (tapOnLose) {
                 c.tap();
             }
-        } // if
+        }
         host.removeGainControlTargets(c);
     }
 
@@ -91,7 +91,12 @@ public class ControlGainEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("ControlledByTarget")) {
         	tgtCards = CardLists.filterControlledBy(tgtCards, getTargetPlayers(sa));
-        } 
+        }
+
+        // in case source was LKI or still resolving
+        if (source.isLKI() || source.getZone().is(ZoneType.Stack)) {
+            source = game.getCardState(source);
+        }
 
         // check for lose control criteria right away
         if (lose != null && lose.contains("LeavesPlay") && !source.isInZone(ZoneType.Battlefield)) {
@@ -103,7 +108,6 @@ public class ControlGainEffect extends SpellAbilityEffect {
 
         boolean combatChanged = false;
         for (Card tgtC : tgtCards) {
-
             if (!tgtC.isInPlay() || !tgtC.canBeControlledBy(newController)) {
                 continue;
             }
@@ -135,7 +139,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
             }
 
             if (!kws.isEmpty()) {
-                tgtC.addChangedCardKeywords(kws, Lists.newArrayList(), false, false, tStamp);
+                tgtC.addChangedCardKeywords(kws, Lists.newArrayList(), false, false, tStamp, 0);
                 game.fireEvent(new GameEventCardStatsChanged(tgtC));
             }
 
@@ -193,7 +197,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
                                     tgtC.removeHiddenExtrinsicKeyword(kw);
                                 }
                             }
-                            tgtC.removeChangedCardKeywords(tStamp);
+                            tgtC.removeChangedCardKeywords(tStamp, 0);
                         }
                     }
                 };

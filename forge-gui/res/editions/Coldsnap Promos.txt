@@ -2,11 +2,11 @@
 Code=PCSP
 Date=2006-07-21
 Name=Coldsnap Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PCSP
 
 [cards]
-101★ R Allosaurus Rider
+101★ R Allosaurus Rider @Daren Bader
 
 [tokens]
 marit_lage

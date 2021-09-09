@@ -137,18 +137,15 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
                 if (convertToColorless) {
                     convertManaColor(b, (byte)ManaAtom.COLORLESS);
                     cm.addAll(pMana);
-                }
-                else {
+                } else {
                     cleared.addAll(cm);
                     cm.clear();
                     floatingMana.putAll(b, pMana);
                 }
-            }
-            else {
+            } else {
                 if (convertToColorless) {
                     convertManaColor(b, (byte)ManaAtom.COLORLESS);
-                }
-                else {
+                } else {
                     cleared.addAll(cm);
                     cm.clear();
                 }
@@ -261,8 +258,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
 
             if (poolLane != null && poolLane.contains(mana)) {
                 removeFloating.add(mana);
-            }
-            else {
+            } else {
                 manaNotAccountedFor = true;
                 break;
             }
@@ -319,7 +315,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         // TODO Debug this for Paying Gonti,
         byte line = getPossibleColorUses(color);
 
-        for(byte outColor : ManaAtom.MANATYPES) {
+        for (byte outColor : ManaAtom.MANATYPES) {
             if ((line & outColor) != 0 && shard.canBePaidWithManaOfColor(outColor)) {
                 return true;
             }

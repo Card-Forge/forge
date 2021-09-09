@@ -3,8 +3,8 @@ Code=DRC94
 Date=1994-07-15
 Name=DragonCon 1994
 Border=Black
-Type=Other
+Type=Promo
 ScryfallCode=PDRC
 
 [cards]
-1 S Nalathni Dragon
+1 S Nalathni Dragon @Michael Whelan

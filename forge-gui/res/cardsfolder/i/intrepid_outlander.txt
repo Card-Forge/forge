@@ -1,0 +1,9 @@
+Name:Intrepid Outlander
+ManaCost:1 G
+Types:Creature Orc Ranger
+PT:2/3
+K:Reach
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigVenture | TriggerZones$ Battlefield | CheckSVar$ PackTactics | SVarCompare$ GE6 | NoResolvingCheck$ True | TriggerDescription$ Pack tactics — Whenever CARDNAME attacks, if you attacked with creatures with total power 6 or greater this combat, venture into the dungeon. (Enter the first room or advance to the next room.)
+SVar:TrigVenture:DB$ Venture
+SVar:PackTactics:Count$SumPower_Creature.attacking
+Oracle:Reach\nPack tactics — Whenever Intrepid Outlander attacks, if you attacked with creatures with total power 6 or greater this combat, venture into the dungeon. (Enter the first room or advance to the next room.)

@@ -2,11 +2,11 @@
 Code=MPR
 Date=2001-01-01
 Name=Magic Player Rewards 2001
-Type=Promos
+Type=Promo
 ScryfallCode=MPR
 
 [cards]
-1 R Wasteland
+1 R Wasteland @Una Fricker
 
 [tokens]
 g_1_1_saproling

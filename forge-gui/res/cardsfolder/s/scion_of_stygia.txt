@@ -1,0 +1,12 @@
+Name:Scion of Stygia
+ManaCost:2 U
+Types:Creature Tiefling Shaman
+PT:2/1
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigPump | TriggerDescription$ Cone of Cold — When CARDNAME enters the battlefield, ABILITY
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an oppoenent controls | SubAbility$ DBRollDice| SpellDescription$ choose target creature an opponent controls,
+SVar:DBRollDice:DB$ RollDice | Sides$ 20 | ResultSubAbilities$ 1-9:DBTap,10-20:DBReallyTap | SpellDescription$ then roll a d20.
+SVar:DBTap:DB$ Tap | Defined$ Targeted | SpellDescription$ 1—9 VERT Tap that creature.
+SVar:DBReallyTap:DB$ Tap | Defined$ Targeted | SubAbility$ DBNoUntap | SpellDescription$ 10—20 VERT Tap that creature. It doesn't untap during its controller's next untap step.
+SVar:DBNoUntap:DB$ Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent | IsCurse$ True
+Oracle:Flash\nCone of Cold — When Scion of Stygia enters the battlefield, choose target creature an opponent controls, then roll a d20.\n1—9 | Tap that creature.\n10—20 | Tap that creature. It doesn't untap during its controller's next untap step.

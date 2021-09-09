@@ -1,0 +1,8 @@
+Name:Farideh's Fireball
+ManaCost:3 R R
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Creature,Planeswalker | NumDmg$ 5 | SubAbility$ DBRollDice | SpellDescription$ CARDNAME deals 5 damage to target creature or planeswalker. Roll a d20.
+SVar:DBRollDice:DB$ RollDice | Sides$ 20 | ResultSubAbilities$ 1-9:DamageAll,10-20:DamageOpp
+SVar:DamageAll:DB$ DealDamage | Defined$ Player | NumDmg$ 2 | SpellDescription$ 1—9 VERT CARDNAME deals 2 damage to each player.
+SVar:DamageOpp:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 2 | SpellDescription$ 10—20 VERT CARDNAME deals 2 damage to each opponent.
+Oracle:Farideh's Fireball deals 5 damage to target creature or planeswalker. Roll a d20.\n1—9 | Farideh's Fireball deals 2 damage to each player.\n10—20 | Farideh's Fireball deals 2 damage to each opponent.

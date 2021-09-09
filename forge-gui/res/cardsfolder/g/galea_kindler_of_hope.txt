@@ -1,0 +1,13 @@
+Name:Galea, Kindler of Hope
+ManaCost:1 G U W
+Types:Legendary Creature Elf Knight
+PT:4/4
+K:Vigilance
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
+S:Mode$ Continuous | Affected$ Aura.TopLibrary+YouCtrl+nonLand,Equipment.TopLibrary+YouCtrl+nonLand | AffectedZone$ Library | MayPlay$ True | Description$ You may cast Aura and Equipment spells from the top of your library. When you cast an Equipment spell this way, it gains "When this Equipment enters the battlefield, attach it to target creature you control."
+T:Mode$ SpellCast | ValidCard$ Equipment | ValidSA$ Spell.MayPlaySource | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAnimate | Secondary$ True | TriggerDescription$ When you cast an Equipment spell this way, it gains "When this Equipment enters the battlefield, attach it to target creature you control."
+SVar:TrigAnimate:DB$ Animate | Defined$ TriggeredCard | Triggers$ ETBAttach | Duration$ Permanent
+SVar:ETBAttach:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAttach | TriggerDescription$ When this Equipment enters the battlefield, attach it to target creature you control.
+SVar:TrigAttach:DB$ Attach | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control
+DeckHints:Type$Aura|Equipment
+Oracle:Vigilance\nYou may look at the top card of your library any time.\nYou may cast Aura and Equipment spells from the top of your library. When you cast an Equipment spell this way, it gains "When this Equipment enters the battlefield, attach it to target creature you control."

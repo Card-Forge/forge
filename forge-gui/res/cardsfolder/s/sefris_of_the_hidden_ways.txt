@@ -1,0 +1,11 @@
+Name:Sefris of the Hidden Ways
+ManaCost:W U B
+Types:Legendary Creature Human Wizard
+PT:2/3
+T:Mode$ ChangesZoneAll | ValidCards$ Creature.YouOwn+nonToken | Origin$ Any | Destination$ Graveyard | TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ TrigVenture | TriggerDescription$ Whenever one or more creature cards are put into your graveyard from anywhere, venture into the dungeon. This ability triggers only once each turn. (To venture into the dungeon, enter the first room or advance to the next room.)
+SVar:TrigVenture:DB$ Venture
+T:Mode$ DungeonCompleted | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ DBReturn | TriggerDescription$ Create Undead — Whenever you complete a dungeon, return target creature card from your graveyard to the battlefield.
+SVar:DBReturn:DB$ ChangeZone | ValidTgts$ Creature.YouOwn | Origin$ Graveyard | Destination$ Battlefield
+DeckHas:Ability$Graveyard
+AI:RemoveDeck:Random
+Oracle:Whenever one or more creature cards are put into your graveyard from anywhere, venture into the dungeon. This ability triggers only once each turn. (To venture into the dungeon, enter the first room or advance to the next room.)\nCreate Undead — Whenever you complete a dungeon, return target creature card from your graveyard to the battlefield.

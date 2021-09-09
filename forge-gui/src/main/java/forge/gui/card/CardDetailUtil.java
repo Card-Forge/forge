@@ -19,6 +19,7 @@ import forge.game.GameView;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
+import forge.game.zone.ZoneType;
 import forge.game.card.CounterType;
 import forge.item.InventoryItemFromSet;
 import forge.item.PaperCard;
@@ -199,8 +200,7 @@ public class CardDetailUtil {
             if (ptText.length() > 0) {
                 ptText.insert(0, "P/T: ");
                 ptText.append(" - ").append("Loy: ");
-            }
-            else {
+            } else {
                 ptText.append("Loyalty: ");
             }
 
@@ -220,7 +220,7 @@ public class CardDetailUtil {
         String curColors = "";
 
         // do not show current colors for temp effect cards, emblems and the like
-        if (state.getType().isEmblem() || state.getType().hasSubtype("Effect")) {
+        if (state.getCard().isImmutable()) {
             return "";
         }
 
@@ -274,16 +274,14 @@ public class CardDetailUtil {
 
         // Token
         if (card.isToken()) {
-            if(card.getCurrentState().getType().hasSubtype("Effect"))
-                area.append("Effect");
-            else if(card.getCurrentState().getType().isEmblem())
-                area.append("Emblem");
-            else
-                area.append("Token");
+            area.append("Token");
         } else if (card.isTokenCard()) {
             area.append("Token card");
+        } else if (card.isEmblem()) {
+            area.append("Emblem");
+        } else if (card.isImmutable()) {
+            area.append("Effect");
         }
-
         // card text
         if (area.length() != 0) {
             area.append("\n");
@@ -297,7 +295,6 @@ public class CardDetailUtil {
         String text = !card.isSplitCard() ?
             card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(state.getName(), "") : null) :
             card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(card.getLeftSplitState().getName(), card.getRightSplitState().getName()) : null );
-
 
         // LEVEL [0-9]+-[0-9]+
         // LEVEL [0-9]+\+
@@ -480,10 +477,18 @@ public class CardDetailUtil {
         // dungeon room
         if (card.getCurrentRoom() != null && !card.getCurrentRoom().isEmpty()) {
             if (area.length() != 0) {
-                area.append("\n");
+                area.append("\n\n");
             }
             area.append("(In room: ");
             area.append(card.getCurrentRoom()).append(")");
+        }
+
+        // class level
+        if (card.getId() >= 0 && card.getCurrentState().getType().hasStringType("Class") && card.getZone() == ZoneType.Battlefield) {
+            if (area.length() != 0) {
+                area.append("\n\n");
+            }
+            area.append("(Class Level:").append(card.getClassLevel()).append(")");
         }
 
         // a card has something attached to it
@@ -566,7 +571,7 @@ public class CardDetailUtil {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            area.append("Until leaves the Battlefield: ").append(card.getUntilLeavesBattlefield());
+            area.append("Exiled until this leaves the battlefield: ").append(card.getUntilLeavesBattlefield());
         }
 
         // must block

@@ -1,0 +1,12 @@
+Name:Inferno of the Star Mounts
+ManaCost:4 R R
+Types:Legendary Creature Dragon
+PT:6/6
+K:CARDNAME can't be countered.
+K:Flying
+K:Haste
+A:AB$ Pump | Cost$ R | Defined$ Self | NumAtt$ +1 | SubAbility$ DBImmediateTrigger | SpellDescription$ CARDNAME gets +1/+0 until end of turn. When its power becomes 20 this way, it deals 20 damage to any target.
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | Execute$ TrigDealDamage | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ20 | TriggerDescription$ When its power becomes 20 this way, it deals 20 damage to any target.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 20
+SVar:X:Count$CardPower
+Oracle:This spell can't be countered.\nFlying, haste\n{R}: Inferno of the Star Mounts gets +1/+0 until end of turn. When its power becomes 20 this way, it deals 20 damage to any target.

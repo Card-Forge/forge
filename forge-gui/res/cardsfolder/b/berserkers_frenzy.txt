@@ -1,0 +1,9 @@
+Name:Berserker's Frenzy
+ManaCost:2 R
+Types:Instant
+A:SP$ RollDice | ActivationPhases$ Upkeep->Declare Attackers | Amount$ 2 | Sides$ 20 | IgnoreLower$ 1 | ResultSubAbilities$ 1-14:MustBlock,15-20:ChooseBlock | SpellDescription$ Cast this spell only before combat or during combat before blockers are declared. Roll two d20 and ignore the lower roll.
+SVar:MustBlock:DB$ ChooseCard | Choices$ Creature | Amount$ X | MinAmount$ 0 | ChoiceTitle$ Choose any number of creatures | SubAbility$ DBPump | SpellDescription$ 1—14 VERT Choose any number of creatures. They block this turn if able.
+SVar:DBPump:DB$ Pump | Defined$ ChosenCard | KW$ HIDDEN CARDNAME blocks each combat if able.
+SVar:X:Count$Valid Creature
+SVar:ChooseBlock:DB$ DeclareCombatants | DeclareBlockers$ True | Until$ EndOfTurn | SpellDescription$ 15—20 VERT You choose which creatures block this turn and how those creatures block.
+Oracle:Cast this spell only before combat or during combat before blockers are declared.\nRoll two d20 and ignore the lower roll.\n1—14 | Choose any number of creatures. They block this turn if able.\n15—20 | You choose which creatures block this turn and how those creatures block.

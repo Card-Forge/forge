@@ -2,8 +2,8 @@
 Code=PUDS
 Date=1999-06-07
 Name=Urza's Destiny Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PUDS
 
 [cards]
-6 R False Prophet
+6 R False Prophet @Eric Peterson

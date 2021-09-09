@@ -1,0 +1,18 @@
+[metadata]
+Title=The Wilds: Delirium Swamp
+Difficulty=easy
+Description="Headed to the wilds? Beware the dead riders who serve the Shadow Queen."\n-Scalan, Edgewall innkeeper
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 1 The Wilds: Delirium Swamp
+[Main]
+4 Barrow Witches|ELD
+4 Cauldron Familiar|ELD
+4 Deathless Knight|ELD
+4 Foulmire Knight|ELD|1
+4 Murderous Rider|ELD|1
+4 Reaper of Night|ELD|1
+4 Specter's Shriek|ELD
+24 Swamp|ELD|4
+4 The Cauldron of Eternity|ELD|1
+4 Witch's Cottage|ELD

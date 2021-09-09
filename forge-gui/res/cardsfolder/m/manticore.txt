@@ -1,0 +1,9 @@
+Name:Manticore
+ManaCost:3 B
+Types:Creature Manticore
+PT:2/1
+K:Flash
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TailSpikes | TriggerDescription$ Tail Spikes — When CARDNAME enters the battlefield, destroy target creature an opponent controls that was dealt damage this turn.
+SVar:TailSpikes:DB$  Destroy | ValidTgts$ Creature.wasDealtDamageThisTurn+OppCtrl | TgtPrompt$ Select target creature an opponent controls that was dealt damage this turn
+Oracle:Flash\nFlying\nTail Spikes — When Manticore enters the battlefield, destroy target creature an opponent controls that was dealt damage this turn.

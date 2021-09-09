@@ -716,6 +716,7 @@ public class ComputerUtilCard {
     
         int bigCMC = -1;
         for (final Card card : all) {
+            // TODO when PlayAi can consider MDFC this should also look at the back face (if not on stack or battlefield)
             int curCMC = card.getCMC();
     
             // Add all cost of all auras with the same controller
@@ -1684,8 +1685,8 @@ public class ComputerUtilCard {
 
         pumped.addNewPT(c.getCurrentPower(), c.getCurrentToughness(), timestamp);
         pumped.setPTBoost(c.getPTBoostTable());
-        pumped.addPTBoost(power + berserkPower, toughness, timestamp, null);
-        pumped.addChangedCardKeywords(kws, null, false, false, timestamp);
+        pumped.addPTBoost(power + berserkPower, toughness, timestamp, 0);
+        pumped.addChangedCardKeywords(kws, null, false, false, timestamp, 0);
         Set<CounterType> types = c.getCounters().keySet();
         for(CounterType ct : types) {
             pumped.addCounterFireNoEvents(ct, c.getCounters(ct), ai, sa, true, null);
@@ -1709,7 +1710,7 @@ public class ComputerUtilCard {
             }
         }
         final long timestamp2 = c.getGame().getNextTimestamp(); //is this necessary or can the timestamp be re-used?
-        pumped.addChangedCardKeywordsInternal(toCopy, null, false, false, timestamp2, true);
+        pumped.addChangedCardKeywordsInternal(toCopy, null, false, false, timestamp2, 0, true);
         ComputerUtilCard.applyStaticContPT(ai.getGame(), pumped, new CardCollection(c));
         return pumped;
     }

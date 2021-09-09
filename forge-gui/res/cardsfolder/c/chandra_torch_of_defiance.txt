@@ -3,7 +3,7 @@ ManaCost:2 R R
 Types:Legendary Planeswalker Chandra
 Loyalty:4
 A:AB$ Dig | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | Imprint$ True | SubAbility$ DBPlay | AILogic$ ExileAndPlayOrDealDamage | SpellDescription$ Exile the top card of your library. You may cast that card. If you don't, Chandra, Torch of Defiance deals 2 damage to each opponent.
-SVar:DBPlay:DB$ Play | Valid$ Card.nonLand+IsImprinted | ValidZone$ Exile | Controller$ You | Optional$ True | Amount$ All | RememberPlayed$ True | ShowCardToActivator$ True | SubAbility$ DBDamage
+SVar:DBPlay:DB$ Play | Valid$ Card.IsImprinted | ValidSA$ Spell | ValidZone$ Exile | Controller$ You | Optional$ True | Amount$ All | RememberPlayed$ True | ShowCardToActivator$ True | SubAbility$ DBDamage
 SVar:DBDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 2 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 A:AB$ Mana | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Produced$ R | Amount$ 2 | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SpellDescription$ Add {R}{R}.

@@ -356,11 +356,9 @@ public abstract class InputPayMana extends InputSyncronizedBase {
                         player.getManaPool().payManaFromAbility(saPaidFor, InputPayMana.this.manaCost, chosen);
                     }
                     onManaAbilityPaid();
-                    onStateChanged();
-                } else {
-                    // Need to call this to unlock
-                    onStateChanged();
                 }
+                // Need to call this to unlock
+                onStateChanged();
             }
         });
 

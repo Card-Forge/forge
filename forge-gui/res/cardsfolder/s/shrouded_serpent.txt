@@ -3,6 +3,6 @@ ManaCost:4 U U U
 Types:Creature Serpent
 PT:4/4
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, defending player may pay {4}. If that player doesn't, CARDNAME can't be blocked this turn.
-SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ HIDDEN Unblockable | UnlessCost$ 4 | UnlessPayer$ DefendingPlayer
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ HIDDEN Unblockable | UnlessCost$ 4 | UnlessPayer$ TriggeredDefendingPlayer
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shrouded_serpent.jpg
 Oracle:Whenever Shrouded Serpent attacks, defending player may pay {4}. If that player doesn't, Shrouded Serpent can't be blocked this turn.

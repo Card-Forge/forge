@@ -1,0 +1,9 @@
+Name:Visions of Dread
+ManaCost:2 B
+Types:Sorcery
+A:SP$ ChooseCard | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Choices$ Creature.TargetedPlayerOwn | ChoiceZone$ Graveyard | AILogic$ WorstCard | Amount$ 1 | SubAbility$ DBChangeZone | Mandatory$ True | StackDescription$ SpellDescription | SpellDescription$ Target opponent puts a creature card of their choice from their graveyard onto the battlefield under your control.
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Graveyard | GainControl$ True | Destination$ Battlefield | StackDescription$ None
+K:Flashback:8 B B:ReduceCost$ X:This spell costs {X} less to cast this way, where X is the greatest mana value of a commander you own on the battlefield or in the command zone.
+SVar:X:Count$HighestCMC_Card.IsCommander+YouOwn+inZoneBattlefield,Card.IsCommander+YouOwn+inZoneCommand
+DeckHas:Ability$Graveyard
+Oracle:Target opponent puts a creature card of their choice from their graveyard onto the battlefield under your control.\nFlashback {8}{B}{B}. This spell costs {X} less to cast this way, where X is the greatest mana value of a commander you own on the battlefield or in the command zone. (You may cast this card from your graveyard for its flashback cost. Then exile it.)

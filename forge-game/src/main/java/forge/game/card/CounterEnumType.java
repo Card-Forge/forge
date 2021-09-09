@@ -65,6 +65,8 @@ public enum CounterEnumType {
 
     COIN("COIN",255,215,0),
 
+    COMPONENT("COMPN", 224, 160, 48),
+
     CORPSE("CRPSE", 230, 186, 209),
 
     CORRUPTION("CRPTN", 210, 121, 210),
@@ -138,6 +140,8 @@ public enum CounterEnumType {
     GOLD("GOLD", 248, 191, 0),
 
     GROWTH("GRWTH", 87, 226, 32),
+
+    HARMONY("HRMNY", 0, 230, 155),
 
     HATCHLING("HATCH", 201, 199, 186),
 

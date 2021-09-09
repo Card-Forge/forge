@@ -1,6 +1,6 @@
 [metadata]
 Code=S00
-Date=2000-07
+Date=2000-04-01
 Name=Starter 2000
 Border=White
 Code2=S2K

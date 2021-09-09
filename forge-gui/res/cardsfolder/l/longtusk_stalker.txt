@@ -1,0 +1,14 @@
+Name:Longtusk Stalker
+ManaCost:G
+Types:Creature Cat
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, you get {E}.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigEnergy | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, you get {E}.
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 1
+A:AB$ Effect | Cost$ PayEnergy<2> | StaticAbilities$ SelfPerpetualP1P0 | Name$ Longtusk Stalker's Perpetual Effect | Duration$ Permanent | SubAbility$ DBChooseCard | SpellDescription$ CARDNAME perpetually gets +1/+0. You may choose a creature card in your hand. If you do, that card perpetually gets +1/+0.
+SVar:SelfPerpetualP1P0:Mode$ Continuous | Affected$ Card.EffectSource | AddPower$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ EFFECTSOURCE perpetually gets +1/+0.
+SVar:DBChooseCard:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Card.Creature+YouOwn | ChoiceTitle$ Choose up to one creature card in your hand | MinAmount$ 0 | Amount$ 1 | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | ConditionDefined$ ChosenCard | ConditionPresent$ Card | StaticAbilities$ PerpetualP1P0 | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:PerpetualP1P0:Mode$ Continuous | Affected$ Card.ChosenCard | AddPower$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This card perpetually gets +1/+0.
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+Oracle:Whenever Longtusk Stalker enters the battlefield or attacks, you get {E}.\nPay {E}{E}: Longtusk Stalker perpetually gets +1/+0. You may choose a creature card in your hand. If you do, that card perpetually gets +1/+0.

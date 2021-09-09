@@ -1,0 +1,17 @@
+Name:Nihiloor
+ManaCost:2 W U B
+Types:Legendary Creature Horror
+PT:3/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBRepeat | TriggerDescription$ When CARDNAME enters the battlefield, for each opponent, tap up to one untapped creature you control. When you do, gain control of target creature that player controls with power less than or equal to the tapped creature's power for as long as you control CARDNAME.
+SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBChoose | SubAbility$ DBCleanup
+SVar:DBChoose:DB$ ChooseCard | Defined$ You | MinAmount$ 0 | Amount$ 1 | Choices$ Creature.untapped+YouCtrl | ChoiceTitle$ Choose up to one untapped creature you control to tap | ChoiceTitleAppendDefined$ Player.IsRemembered | ChoiceZone$ Battlefield | SubAbility$ DBTap
+SVar:DBTap:DB$ Tap | Defined$ ChosenCard | SubAbility$ DBImmediateTrigger
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | RememberObjects$ ChosenCard,Player.IsRemembered | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ GE1 | Execute$ TrigGainControl | TrigDescReminderDefined$ Player.IsRemembered | TriggerDescription$ When you do, gain control of target creature that player controls with power less than or equal to the tapped creature's power for as long as you control CARDNAME.
+SVar:TrigGainControl:DB$ GainControl | ValidTgts$ Creature.RememberedPlayerCtrl+powerLEX | LoseControl$ LeavesPlay,LoseControl | TgtPrompt$ Select target creature that opponent controls
+SVar:X:TriggerRemembered$CardPower
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl+OppOwn | TriggerZones$ Battlefield | Execute$ TrigGain | TriggerDescription$ Whenever you attack with a creature an opponent owns, you gain 2 life and that player loses 2 life.
+SVar:TrigGain:DB$ GainLife | LifeAmount$ 2 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2 | Defined$ TriggeredAttackerOwner
+DeckHas:Ability$LifeGain
+Oracle:When Nihiloor enters the battlefield, for each opponent, tap up to one untapped creature you control. When you do, gain control of target creature that player controls with power less than or equal to the tapped creature's power for as long as you control Nihiloor.\nWhenever you attack with a creature an opponent owns, you gain 2 life and that player loses 2 life.

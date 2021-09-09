@@ -3,8 +3,7 @@ ManaCost:2 G U
 Types:Legendary Creature Merfolk Wizard
 PT:2/2
 K:Ward:2
-R:Event$ CreateToken | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ DoubleToken | Description$ If one or more tokens would be created under your control, twice that many of those tokens are created instead.
-SVar:DoubleToken:DB$ ReplaceEffect | VarName$ TokenNum | VarValue$ X
-SVar:X:ReplaceCount$TokenNum/Twice
+R:Event$ CreateToken | ActiveZones$ Battlefield | ValidToken$ Card.YouCtrl | ReplaceWith$ DoubleToken | Description$ If one or more tokens would be created under your control, twice that many of those tokens are created instead.
+SVar:DoubleToken:DB$ ReplaceToken | Type$ Amount | ValidCard$ Card.YouCtrl
 DeckHints:Ability$Token
 Oracle:Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\nIf one or more tokens would be created under your control, twice that many of those tokens are created instead.

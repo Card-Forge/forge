@@ -38,6 +38,7 @@ public enum TriggerType {
     ChangesZone(TriggerChangesZone.class),
     ChangesZoneAll(TriggerChangesZoneAll.class),
     Clashed(TriggerClashed.class),
+    ClassLevelGained(TriggerClassLevelGained.class),
     CounterAdded(TriggerCounterAdded.class),
     CounterAddedOnce(TriggerCounterAddedOnce.class),
     CounterPlayerAddedAll(TriggerCounterPlayerAddedAll.class),
@@ -89,6 +90,7 @@ public enum TriggerType {
     Regenerated(TriggerRegenerated.class),
     Revealed(TriggerRevealed.class),
     RolledDie(TriggerRolledDie.class),
+    RolledDieOnce(TriggerRolledDieOnce.class),
     RoomEntered(TriggerEnteredRoom.class),
     Sacrificed(TriggerSacrificed.class),
     Scry(TriggerScry.class),
@@ -135,7 +137,6 @@ public enum TriggerType {
      * @return
      */
     public static TriggerType smartValueOf(String value) {
-
         final String valToCompate = value.trim();
         for (final TriggerType v : TriggerType.values()) {
             if (v.name().compareToIgnoreCase(valToCompate) == 0) {

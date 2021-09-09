@@ -1,0 +1,20 @@
+[quest]
+id=ELD Challenge: Bonecrusher Giant
+OpponentName=The Giants
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Title=Bonecrusher Giant
+Difficulty=medium
+Description=Not every tale ends in glory.
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+Name=ELD Challenge: Bonecrusher Giant
+[Main]
+30 Bonecrusher Giant|ELD|2
+30 Mountain|ELD|2

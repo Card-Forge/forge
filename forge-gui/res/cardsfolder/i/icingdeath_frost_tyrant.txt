@@ -1,0 +1,9 @@
+Name:Icingdeath, Frost Tyrant
+ManaCost:2 W W
+Types:Legendary Creature Dragon
+PT:4/3
+K:Flying
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create Icingdeath, Frost Tongue, a legendary white Equipment artifact token with "Equipped creature gets +2/+0," "Whenever equipped creature attacks, tap target creature defending player controls," and equip {2}.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ icingdeath_frost_tongue | TokenOwner$ You
+Oracle:Flying, vigilance\nWhen Icingdeath, Frost Tyrant dies, create Icingdeath, Frost Tongue, a legendary white Equipment artifact token with "Equipped creature gets +2/+0," "Whenever equipped creature attacks, tap target creature defending player controls," and equip {2}.

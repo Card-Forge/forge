@@ -17,16 +17,9 @@
  */
 package forge.screens.deckeditor.controllers;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map.Entry;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.base.Supplier;
-
 import com.google.common.collect.Iterables;
 import forge.card.CardDb;
 import forge.card.CardRules;
@@ -49,6 +42,12 @@ import forge.screens.deckeditor.views.VDeckgen;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FComboBox;
 import forge.util.ItemPool;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map.Entry;
 
 /**
  * Child controller for constructed deck editor UI.
@@ -106,7 +105,8 @@ public final class CEditorCommander extends CDeckEditor<Deck> {
         }
 
         CardManager catalogManager = new CardManager(getCDetailPicture(), true, false);
-        CardManager deckManager = new CardManager(getCDetailPicture(), true, false);
+        CardManager deckManager = new CardManager(getCDetailPicture(), false, false);
+        deckManager.setAlwaysNonUnique(true);
 
         catalogManager.setCaption("Catalog");
 

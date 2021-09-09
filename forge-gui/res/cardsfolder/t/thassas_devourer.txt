@@ -2,8 +2,7 @@ Name:Thassa's Devourer
 ManaCost:4 U
 Types:Enchantment Creature Elemental
 PT:2/6
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment enters the battlefield under your control, target player mills two cards.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.Other+YouCtrl | TriggerZones$ Battlefield | Secondary$ True | Execute$ TrigMill | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment enters the battlefield under your control, target player mills two cards.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Enchantment.Other+YouCtrl | Execute$ TrigMill | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment enters the battlefield under your control, target player mills two cards.
 SVar:TrigMill:DB$ Mill | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 2
 SVar:BuffedBy:Enchantment
 Oracle:Constellation — Whenever Thassa's Devourer or another enchantment enters the battlefield under your control, target player mills two cards.

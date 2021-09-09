@@ -2,8 +2,8 @@
 Code=PTMP
 Date=1997-10-14
 Name=Tempest Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PTMP
 
 [cards]
-221 R Dirtcowl Wurm
+221 R Dirtcowl Wurm @Dan Frazier

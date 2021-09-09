@@ -2,8 +2,8 @@
 Code=PDST
 Date=2004-06-04
 Name=Darksteel Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PDST
 
 [cards]
-139★ R Shield of Kaldra
+139★ R Shield of Kaldra @Donato Giancola

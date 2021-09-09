@@ -1,0 +1,9 @@
+Name:Visions of Glory
+ManaCost:4 W
+Types:Sorcery
+A:SP$ Token | TokenScript$ w_1_1_human | TokenAmount$ Y | SpellDescription$ Create a 1/1 white Human creature token for each creature you control.
+SVar:Y:Count$TypeYouCtrl.Creature
+K:Flashback:8 W W:ReduceCost$ X:This spell costs {X} less to cast this way, where X is the greatest mana value of a commander you own on the battlefield or in the command zone.
+SVar:X:Count$HighestCMC_Card.IsCommander+YouOwn+inZoneBattlefield,Card.IsCommander+YouOwn+inZoneCommand
+DeckHas:Ability$Token
+Oracle:Create a 1/1 white Human creature token for each creature you control.\nFlashback {8}{W}{W}. This spell costs {X} less to cast this way, where X is the greatest mana value of a commander you own on the battlefield or in the command zone. (You may cast this card from your graveyard for its flashback cost. Then exile it.)

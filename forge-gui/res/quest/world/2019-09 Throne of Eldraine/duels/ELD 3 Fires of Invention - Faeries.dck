@@ -1,0 +1,31 @@
+[metadata]
+Title=Fires of Invention
+Difficulty=hard
+Description="Just tell us how many you want and get out of the way."
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 3 Fires of Invention - Faeries
+[Main]
+4 Bonecrusher Giant|ELD|1
+4 Brazen Borrower|ELD|1
+2 Castle Embereth|ELD|1
+2 Embereth Shieldbreaker|ELD|1
+4 Fabled Passage|ELD|1
+4 Fae of Wishes|ELD|1
+4 Faerie Formation|ELD
+4 Fires of Invention|ELD|2
+4 Improbable Alliance|ELD|1
+10 Island|ELD|4
+8 Mountain|ELD|4
+4 Rowan's Stalwarts|ELD
+1 Rowan, Fearless Sparkmage|ELD
+1 Syr Elenora, the Discerning|ELD
+4 Witching Well|ELD
+[Sideboard]
+1 Embercleave|ELD|1
+1 Enchanted Carriage|ELD
+1 Rowan, Fearless Sparkmage|ELD
+4 Scorching Dragonfire|ELD
+1 Sundering Stroke|ELD|1
+1 The Royal Scions|ELD|1
+1 Unexplained Vision|ELD

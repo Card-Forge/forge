@@ -146,6 +146,14 @@ public class AnimateAi extends SpellAbilityAi {
         if (!ComputerUtilCost.checkTapTypeCost(aiPlayer, sa.getPayCosts(), source, sa)) {
             return false;   // prevent crewing with equal or better creatures
         }
+
+        if (sa.costHasManaX() && sa.getSVar("X").equals("Count$xPaid")) {
+            // Set PayX here to maximum value.
+            final int xPay = ComputerUtilCost.getMaxXValue(sa, aiPlayer);
+
+            sa.setXManaCostPaid(xPay);
+        }
+
         if (!sa.usesTargeting()) {
             final List<Card> defined = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
             boolean bFlag = false;
@@ -252,7 +260,7 @@ public class AnimateAi extends SpellAbilityAi {
     private boolean animateTgtAI(final SpellAbility sa) {
         final Player ai = sa.getActivatingPlayer();
         final PhaseHandler ph = ai.getGame().getPhaseHandler();
-        final boolean alwaysActivatePWAbility = sa.hasParam("Planeswalker")
+        final boolean alwaysActivatePWAbility = sa.isPwAbility()
                 && sa.getPayCosts().hasSpecificCostType(CostPutCounter.class)
                 && sa.getTargetRestrictions() != null
                 && sa.getTargetRestrictions().getMinTargets(sa.getHostCard(), sa) == 0;
@@ -480,7 +488,7 @@ public class AnimateAi extends SpellAbilityAi {
                 timestamp);
 
         // check if animate added static Abilities
-        CardTraitChanges traits = card.getChangedCardTraits().get(timestamp);
+        CardTraitChanges traits = card.getChangedCardTraits().get(timestamp, 0);
         if (traits != null) {
             for (StaticAbility stAb : traits.getStaticAbilities()) {
                 if ("Continuous".equals(stAb.getParam("Mode"))) {

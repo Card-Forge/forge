@@ -36,7 +36,7 @@ public class RegenerateAllEffect extends RegenerateBaseEffect {
         list = CardLists.getValidCards(list, valid.split(","), hostCard.getController(), hostCard, sa);
 
         // create Effect for Regeneration
-        createRengenerationEffect(sa, list);
+        createRegenerationEffect(sa, list);
     } // regenerateAllResolve
 
 }

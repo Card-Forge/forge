@@ -1,0 +1,51 @@
+Name:Davriel, Soul Broker
+ManaCost:2 B B
+Types:Legendary Planeswalker Davriel
+Loyalty:4
+A:AB$ Effect | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Triggers$ AttackTrigger | Duration$ UntilYourNextTurn | Name$ Davriel, Soul Broker's +1 Effect | AILogic$ Main2 | SpellDescription$ Until your next turn, whenever an opponent attacks you and/or planeswalkers you control, they discard a card. If they can't, they sacrifice an attacking creature.
+SVar:AttackTrigger:Mode$ AttackersDeclared | AttackingPlayer$ Player.Opponent | AttackedTarget$ You,Planeswalker.YouCtrl | NoResolvingCheck$ True | TriggerZones$ Command | Execute$ TrigDiscard | TriggerDescription$ Whenever an opponent attacks you and/or planeswalkers you control, they discard a card. If they can't, they sacrifice an attacking creature.
+SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredAttackingPlayer | NumCards$ 1 | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBSacrifice
+SVar:DBSacrifice:DB$ Sacrifice | SacValid$ Creature.attacking | Defined$ TriggeredAttackingPlayer | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0
+A:AB$ GenericChoice | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ChoicePrompt$ Choose an offer | NumRandomChoices$ 3 | Choices$ Draw3,Conjure,Return2,ReturnBig,EmblemBuff,EmblemReduceCost,EmblemDavrielPW,EmblemDrawGain | SubAbility$ DBCondition | StackDescription$ SpellDescription | SpellDescription$ Accept one of NICKNAME's offers, then accept one of NICKNAME's conditions.
+SVar:Draw3:DB$ Draw | NumCards$ 3 | SpellDescription$ Draw three cards.
+SVar:Conjure:DB$ MakeCard | Name$ Manor Guardian | Zone$ Hand | SpellDescription$ Conjure a Manor Guardian card into your hand.
+SVar:Return2:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeType$ Creature.YouOwn | ChangeNum$ 2 | RememberChanged$ True | Hidden$ True | Mandatory$ True | AtRandom$ True | SubAbility$ DBEffect | SpellDescription$ Return two random creature cards from your graveyard to your hand. They perpetually gain +1/+1.
+SVar:DBEffect:DB$ Effect | Name$ Davriel, Soul Broker's Perpetual -2 Effect (Offer 4) | StaticAbilities$ PerpetualBuff | RememberObjects$ Remembered | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:PerpetualBuff:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 1 | AddToughness$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ These cards perpetually gain +1/+1.
+SVar:ReturnBig:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.cmcEQV | ChangeNum$ 1 | Hidden$ True | Mandatory$ True | AtRandom$ True | SpellDescription$ Return a random creature card with the highest mana value from among cards in your graveyard to the battlefield.
+SVar:V:Count$HighestCMC_Creature.YouOwn+inZoneGraveyard
+SVar:EmblemBuff:DB$ Effect | Name$ Emblem - Davriel, Soul Broker (Offer 5) | StaticAbilities$ YoursP2Pow | Duration$ Permanent | SpellDescription$ You get an emblem with "Creatures you control get +2/+0."
+SVar:YoursP2Pow:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ Battlefield | AddPower$ 2 | EffectZone$ Command | AffectedZone$ Battlefield | Description$ Creatures you control get +2/+0.
+SVar:EmblemReduceCost:DB$ Effect | Name$ Emblem - Davriel, Soul Broker (Offer 6) | StaticAbilities$ CostBLess | Duration$ Permanent | SpellDescription$ You get an emblem with "Spells you cast cost {B} less to cast."
+SVar:CostBLess:Mode$ ReduceCost | ValidCard$ Card | Activator$ You | Type$ Spell | Amount$ 1 | Color$ B | Description$ Spells you cast cost {B} less to cast.
+SVar:EmblemDavrielPW:DB$ Effect | Name$ Emblem - Davriel, Soul Broker (Offer 7) | StaticAbilities$ AddP2Ab | Duration$ Permanent | SpellDescription$ You get an emblem with "Davriel planeswalkers you control have '[+2]: Draw a card.'"
+SVar:AddP2Ab:Mode$ Continuous | Affected$ Planeswalker.Davriel+YouCtrl | AddAbility$ ABDraw | Description$ Davriel planeswalkers you control have "[+2]: Draw a card."
+SVar:ABDraw:AB$ Draw | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:EmblemDrawGain:DB$ Effect | Name$ Emblem - Davriel, Soul Broker (Offer 8) | Triggers$ DrawGainTrig | Duration$ Permanent | SpellDescription$ You get an emblem with “Whenever you draw a card, you gain 2 life.”
+SVar:DrawGainTrig:Mode$ Drawn | ValidCard$ Card.YouOwn | TriggerZones$ Command | Execute$ TrigGainLife | TriggerDescription$ Whenever you draw a card, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+SVar:DBCondition:DB$ GenericChoice | ChoicePrompt$ Choose a condition | NumRandomChoices$ 3 | Choices$ Lose6,Exile2,Sac2,PerpetualBuffTheirs,EmblemDebuff,EmblemRaiseCost,EmblemDrawExile,EmblemUpkeepLose | StackDescription$ None
+SVar:Lose6:DB$ LoseLife | Defined$ You | LifeAmount$ 6 | SpellDescription$ You lose 6 life.
+SVar:Exile2:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ChangeType$ Card.YouOwn | ChangeNum$ 2 | RememberChanged$ True | Hidden$ True | Mandatory$ True | SubAbility$ DBDraw | SpellDescription$ Exile two cards from your hand. If fewer than two cards were exiled this way, each opponent draws cards equal to the difference.
+SVar:DBDraw:DB$ Draw | Defined$ Player.Opponent | ConditionCheckSVar$ X | ConditionSVarCompare$ LT2 | NumCards$ Y | SubAbility$ DBCleanup
+SVar:X:Remembered$Amount
+SVar:Y:Number$2/Minus.X
+SVar:Sac2:DB$ Sacrifice | Amount$ 2 | SacValid$ Permanent | Defined$ You | SpellDescription$ Sacrifice two permanents.
+SVar:PerpetualBuffTheirs:DB$ Effect | Name$ Davriel, Soul Broker's Perpetual -2 Effect (Condition 4) | StaticAbilities$ PerpetualBuffCreatYouDontCtrl | Duration$ Permanent | SpellDescription$ Each creature you don't control perpetually gains +1/+1.
+SVar:PerpetualBuffCreatYouDontCtrl:Mode$ Continuous | Affected$ Card.Creature+YouDontCtrl | AddPower$ 1 | AddToughness$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ Each creature you don't control perpetually gains +1/+1.
+SVar:EmblemDebuff:DB$ Effect | Name$ Emblem - Davriel, Soul Broker (Condition 5) | StaticAbilities$ YoursM1Pow | Duration$ Permanent | SpellDescription$ You get an emblem with "Creatures you control get -1/-0."
+SVar:YoursM1Pow:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ Battlefield | AddPower$ -1 | EffectZone$ Command | AffectedZone$ Battlefield | Description$ Creatures you control get -1/-0.
+SVar:EmblemRaiseCost:DB$ Effect | Name$ Emblem - Davriel, Soul Broker (Condition 6) | StaticAbilities$ CostBMore | Duration$ Permanent | SpellDescription$ You get an emblem with "Spells you cast cost {B} more to cast."
+SVar:CostBMore:Mode$ RaiseCost | ValidCard$ Card | Activator$ You | Type$ Spell | Cost$ B | Description$ Spells you cast cost {B} more to cast.
+SVar:EmblemDrawExile:DB$ Effect | Name$ Emblem - Davriel, Soul Broker (Condition 7) | Triggers$ DrawTrig | Duration$ Permanent | SpellDescription$ You get an emblem with "Whenever you draw a card, exile the top two cards of your library."
+SVar:DrawTrig:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Command | Execute$ TrigDig | TriggerDescription$ Whenever you draw a card, exile the top two cards of your library.
+SVar:TrigDig:DB$ Dig | Defined$ TriggeredPlayer | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile
+SVar:EmblemUpkeepLose:DB$ Effect | Name$ Emblem - Davriel, Soul Broker (Condition 8) | Triggers$ UpkeepLoseTrig | Duration$ Permanent | SpellDescription$ You get an emblem with "At the beginning of your upkeep, you lose 1 life for each creature you control."
+SVar:UpkeepLoseTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigLose | TriggerZones$ Command | TriggerDescription$ At the beginning of your upkeep, you lose 1 life for each creature you control.
+SVar:TrigLose:DB$ LoseLife | Defined$ You | LifeAmount$ Z
+SVar:Z:Count$TypeYouCtrl.Creature
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Effect | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | StaticAbilities$ PerpetualDebuff | RememberObjects$ Targeted | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | Name$ Davriel, Soul Broker's Perpetual -3 Effect | Duration$ Permanent | SpellDescription$ Target creature perpetually gets -3/-3.
+SVar:PerpetualDebuff:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ -3 | AddToughness$ -3 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This card perpetually gets -3/-3.
+DeckHas:Ability$LifeGain & Ability$Graveyard & Ability$Sacrifice & Ability$LifeGain
+Oracle:[+1]: Until your next turn, whenever an opponent attacks you and/or planeswalkers you control, they discard a card. If they can't, they sacrifice an attacking creature.\n[−2]: Accept one of Davriel's offers, then accept one of Davriel's conditions.\n[−3]: Target creature perpetually gets -3/-3.

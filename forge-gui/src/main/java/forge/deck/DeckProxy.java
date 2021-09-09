@@ -1,29 +1,11 @@
 package forge.deck;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
-
 import forge.StaticData;
-import forge.card.CardEdition;
-import forge.card.CardRarity;
-import forge.card.CardRules;
-import forge.card.CardSplitType;
-import forge.card.CardType;
-import forge.card.ColorSet;
-import forge.card.MagicColor;
+import forge.card.*;
 import forge.card.mana.ManaCostShard;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameFormat;
@@ -39,6 +21,10 @@ import forge.model.FModel;
 import forge.util.BinaryUtil;
 import forge.util.IHasName;
 import forge.util.storage.IStorage;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 // Adding a generic to this class creates compile problems in ItemManager (that I can not fix)
 public class DeckProxy implements InventoryItem {
@@ -112,7 +98,7 @@ public class DeckProxy implements InventoryItem {
                 edition = StaticData.instance().getEditions().get(((PreconDeck) deck).getEdition());
             }
             else if (!isGeneratedDeck()) {
-                edition = StaticData.instance().getEditions().getEarliestEditionWithAllCards(getDeck().getAllCardsInASinglePool());
+                edition = StaticData.instance().getEditions().getTheLatestOfAllTheOriginalEditionsOfCardsIn(getDeck().getAllCardsInASinglePool());
             }
         }
         return edition;
@@ -270,7 +256,8 @@ public class DeckProxy implements InventoryItem {
 
         for (final Entry <PaperCard, Integer> pc : getDeck().getAllCardsInASinglePool()) {
             if (pc.getKey().getRules().getManaCost() != null) {
-                if (pc.getKey().getRules().getSplitType() != CardSplitType.Split)
+                if (pc.getKey().getRules().getType().hasSubtype("Saga") || pc.getKey().getRules().getType().hasSubtype("Class") || CardSplitType.Split.equals(pc.getKey().getRules().getSplitType()))
+                    continue;
                     keyCMC.put(pc.getKey(),pc.getKey().getRules().getManaCost().getCMC());
             }
         }
@@ -302,7 +289,28 @@ public class DeckProxy implements InventoryItem {
     }
 
     public String getFormatsString() {
-        return StringUtils.join(Iterables.transform(getFormats(), GameFormat.FN_GET_NAME), ", ");
+        Set<GameFormat> formats = getFormats();
+        if (formats.size() > 1)
+            return StringUtils.join(Iterables.transform(formats, GameFormat.FN_GET_NAME), ", ");
+        Object[] formatArray = formats.toArray();
+        GameFormat format = (GameFormat)formatArray[0];
+        if (format != GameFormat.NoFormat)
+            return format.getName();
+        if (isCustomDeckFormat())
+            return "Custom Cards Deck";
+        return "No Format";
+    }
+
+    private boolean isCustomDeckFormat(){
+        Deck deck = this.getDeck();
+        CardPool cards = deck.getAllCardsInASinglePool();
+        CardEdition.Collection customEditions = StaticData.instance().getCustomEditions();
+        for (Entry<PaperCard, Integer> entry : cards){
+            String setCode = entry.getKey().getEdition();
+            if (customEditions.contains(setCode))
+                return true;
+        }
+        return false;
     }
 
     public int getMainSize() {
@@ -647,6 +655,14 @@ public class DeckProxy implements InventoryItem {
         return decks;
     }
 
+    public static List<DeckProxy> getNetArchivePauperDecks(final NetDeckArchivePauper category) {
+        final List<DeckProxy> decks = new ArrayList<>();
+        if (category != null) {
+            addDecksRecursivelly("Constructed", GameType.Constructed, decks, "", category, null);
+        }
+        return decks;
+    }
+
     public static List<DeckProxy> getNetArchiveLegacyDecks(final NetDeckArchiveLegacy category) {
         final List<DeckProxy> decks = new ArrayList<>();
         if (category != null) {
@@ -663,7 +679,7 @@ public class DeckProxy implements InventoryItem {
         return decks;
     }
 
-    public static List<DeckProxy> getNetArchiveBlockecks(final NetDeckArchiveBlock category) {
+    public static List<DeckProxy> getNetArchiveBlockDecks(final NetDeckArchiveBlock category) {
         final List<DeckProxy> decks = new ArrayList<>();
         if (category != null) {
             addDecksRecursivelly("Constructed", GameType.Constructed, decks, "", category, null);

@@ -3,7 +3,7 @@ ManaCost:2 W B G
 Types:Legendary Creature Nightmare Insect
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ PutKeywordCounter | TriggerDescription$ When CARDNAME enters the battlefield, put a flying counter on any creature you control if a creature card in your graveyard has flying. Repeat this process for first strike, double strike, deathtouch, hexproof, indestructible, lifelink, menace, reach, trample, and vigilance. Then put a +1/+1 counter on NICKNAME for each counter put on a creature this way.
-SVar:PutKeywordCounter:DB$ PutCounter | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose a creature | SharedKeywords$ Flying & First Strike & Double Strike & Deathtouch & Hexproof & Indestructible & Lifelink & Menace & Reach & Trample & Vigilance | SharedKeywordsZone$ Graveyard | SharedRestrictions$ Card.YouOwn | CounterNum$ 1 | RememberAmount$ True | SubAbility$ PutCounters
+SVar:PutKeywordCounter:DB$ PutCounter | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose a creature | SharedKeywords$ Flying & First Strike & Double Strike & Deathtouch & Hexproof & Indestructible & Lifelink & Menace & Reach & Trample & Vigilance | SharedKeywordsZone$ Graveyard | SharedRestrictions$ Creature.YouOwn | CounterNum$ 1 | RememberAmount$ True | SubAbility$ PutCounters
 SVar:PutCounters:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedNumber

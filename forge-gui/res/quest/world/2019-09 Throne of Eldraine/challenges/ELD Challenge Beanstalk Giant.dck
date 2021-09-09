@@ -1,0 +1,20 @@
+[quest]
+id=ELD Challenge: Beanstalk Giant
+OpponentName=The Giants
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Title=Beanstalk Giant
+Difficulty=easy
+Description=Fee-fi-fo-fum,\nI smell the blood of an Englishman,\nBe he alive, or be he dead\nI'll grind his bones to make my bread.
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+Name=ELD Challenge: Beanstalk Giant
+[Main]
+30 Beanstalk Giant|ELD|2
+30 Forest|ELD|3

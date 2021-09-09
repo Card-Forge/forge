@@ -5,7 +5,6 @@ PT:1/1
 K:Level up:4
 SVar:maxLevel:3
 S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 3 | SetToughness$ 3 | IsPresent$ Card.Self+counters_GE1_LEVEL+counters_LT3_LEVEL | Description$ LEVEL 1-2 3/3
-S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 5 | SetToughness$ 5 | IsPresent$ Card.Self+counters_GE3_LEVEL | Description$ LEVEL 3+ 5/5 CARDNAME can't be blocked except by black creatures
-S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.nonBlack | Secondary$ True | IsPresent$ Card.Self+counters_GE3_LEVEL | Description$ CARDNAME can't be blocked except by black creatures
-SVar:Picture:http://www.wizards.com/global/images/magic/general/zulaport_enforcer.jpg
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 5 | SetToughness$ 5 | IsPresent$ Card.Self+counters_GE3_LEVEL | AddStaticAbility$ SCantBlock | Description$ LEVEL 3+ 5/5 CARDNAME can't be blocked except by black creatures
+SVar:SCantBlock:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.nonBlack | Secondary$ True | Description$ CARDNAME can't be blocked except by black creatures
 Oracle:Level up {4} ({4}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 1-2\n3/3\nLEVEL 3+\n5/5\nZulaport Enforcer can't be blocked except by black creatures.

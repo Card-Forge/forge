@@ -4,5 +4,5 @@ Types:Creature Dragon
 PT:3/3
 K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ Whenever CARDNAME attacks, it deals 1 damage to target creature defending player controls.
-SVar:TrigDealDamage:DB$DealDamage | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select target creature defending player controls | NumDmg$ 1
+SVar:TrigDealDamage:DB$DealDamage | ValidTgts$ Creature.ControlledBy TriggeredDefendingPlayer | TgtPrompt$ Select target creature defending player controls | NumDmg$ 1
 Oracle:Flying\nWhenever Hellkite Whelp attacks, it deals 1 damage to target creature defending player controls.

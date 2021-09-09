@@ -15,7 +15,7 @@ public class GameEventCardCounters extends GameEvent {
         this.oldValue = old;
         this.newValue = newValue;
     }
-    
+
     @Override
     public <T> T visit(IGameEventVisitor<T> visitor) {
         return visitor.visit(this);

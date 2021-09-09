@@ -59,7 +59,6 @@ public class CostExile extends CostPartWithList {
         this.sameZone = sameZone;
     }
 
-
     @Override
     public Integer getMaxAmountX(SpellAbility ability, Player payer) {
         final Card source = ability.getHostCard();
@@ -68,8 +67,7 @@ public class CostExile extends CostPartWithList {
         CardCollectionView typeList;
         if (this.sameZone) {
             typeList = game.getCardsIn(this.from);
-        }
-        else {
+        } else {
             typeList = payer.getCardsIn(this.from);
         }
 
@@ -141,11 +139,17 @@ public class CostExile extends CostPartWithList {
             return list.contains(source);
         }
 
-        if (!type.contains("X")) {
+        if (!type.contains("X") || ability.getXManaCostPaid() != null) {
             list = CardLists.getValidCards(list, type.split(";"), payer, source, ability);
         }
 
-        final Integer amount = this.convertAmount();
+        Integer amount = this.convertAmount();
+
+        // for cards like Allosaurus Rider, do not count it
+        if (this.from == ZoneType.Hand && source.isInZone(ZoneType.Hand) && list.contains(source)) {
+            amount++;
+        }
+
         if ((amount != null) && (list.size() < amount)) {
             return false;
         }

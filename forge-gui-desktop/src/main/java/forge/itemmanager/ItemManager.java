@@ -17,58 +17,43 @@
  */
 package forge.itemmanager;
 
-import java.awt.Component;
-import java.awt.Toolkit;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import javax.swing.JMenu;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.KeyStroke;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.PopupMenuEvent;
-import javax.swing.event.PopupMenuListener;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.gui.GuiUtils;
 import forge.gui.UiCommand;
 import forge.item.InventoryItem;
+import forge.item.PaperCard;
 import forge.itemmanager.filters.ItemFilter;
 import forge.itemmanager.views.ImageView;
 import forge.itemmanager.views.ItemListView;
 import forge.itemmanager.views.ItemTableColumn;
 import forge.itemmanager.views.ItemView;
 import forge.localinstance.skin.FSkinProp;
+import forge.screens.deckeditor.views.VCardCatalog;
 import forge.screens.match.controllers.CDetailPicture;
-import forge.toolbox.ContextMenuBuilder;
-import forge.toolbox.FComboBox;
-import forge.toolbox.FLabel;
-import forge.toolbox.FSkin;
+import forge.toolbox.*;
 import forge.toolbox.FSkin.Colors;
 import forge.toolbox.FSkin.SkinIcon;
 import forge.toolbox.FSkin.SkinnedPanel;
-import forge.toolbox.FTextField;
-import forge.toolbox.LayoutHelper;
 import forge.util.Aggregates;
 import forge.util.ItemPool;
 import forge.util.Localizer;
 import forge.util.ReflectionUtil;
 import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
+import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.util.List;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * ItemManager.
@@ -138,11 +123,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     protected boolean lockFiltering;
 
     /**
-     * ItemManager Constructor.
-     *
-     * @param genericType0 the class of item that this table will contain
-     * @param statLabels0 stat labels for this item manager
-     * @param wantUnique0 whether this table should display only one item with the same name
+     * ItemManager Constructor
      */
     protected ItemManager(final Class<T> genericType0, final CDetailPicture cDetailPicture, final boolean wantUnique0) {
         this.cDetailPicture = cDetailPicture;
@@ -1043,9 +1024,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
 
     /**
      *
-     * updateView.
-     *
-     * @param bForceFilter
+     * updateView
      */
     public void updateView(final boolean forceFilter, final Iterable<T> itemsToSelect) {
         final boolean useFilter = (forceFilter && (this.filterPredicate != null)) || !isUnfiltered();
@@ -1126,7 +1105,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
      * @return true if the editor is in "unique item names only" mode.
      */
     public boolean getWantUnique() {
-        return this.wantUnique;
+        return this.wantUnique && !this.alwaysNonUnique;
     }
 
     /**
@@ -1284,5 +1263,24 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         }
 
         menu.show(e.getComponent(), e.getX(), e.getY());
+    }
+
+    protected List<String> filteredSetCodesInCatalog = null;
+    protected List<String> getFilteredSetCodesInCatalog(){
+        if (filteredSetCodesInCatalog == null) {
+            ItemManager<? extends InventoryItem> cardsManager = VCardCatalog.SINGLETON_INSTANCE.getItemManager();
+            if (cardsManager == null)
+                return null;
+            try {
+                ItemPool<PaperCard> cardsPool = (ItemPool<PaperCard>) cardsManager.getPool();
+                Set<String> uniqueSetCodes = new HashSet<>();  // init
+                for (Entry<PaperCard, Integer> entry : cardsPool)
+                    uniqueSetCodes.add(entry.getKey().getEdition());
+                filteredSetCodesInCatalog = new ArrayList<>(uniqueSetCodes);
+            } catch (ClassCastException ex) {
+                return null;
+            }
+        }
+        return filteredSetCodesInCatalog;
     }
 }

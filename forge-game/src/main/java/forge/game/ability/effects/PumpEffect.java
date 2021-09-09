@@ -66,7 +66,7 @@ public class PumpEffect extends SpellAbilityEffect {
             redrawPT = true;
         }
 
-        gameCard.addChangedCardKeywords(kws, Lists.newArrayList(), false, false, timestamp);
+        gameCard.addChangedCardKeywords(kws, Lists.newArrayList(), false, false, timestamp, 0);
         if (redrawPT) {
             gameCard.updatePowerToughnessForView();
         }
@@ -101,7 +101,7 @@ public class PumpEffect extends SpellAbilityEffect {
                                 gameCard.removeHiddenExtrinsicKeyword(kw);
                             }
                         }
-                        gameCard.removeChangedCardKeywords(timestamp);
+                        gameCard.removeChangedCardKeywords(timestamp, 0);
                     }
                     gameCard.updatePowerToughnessForView();
                     if (updateText) {
@@ -121,13 +121,13 @@ public class PumpEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         //if host is not on the battlefield don't apply
         // Suspend should does Affect the Stack
-        if ((sa.hasParam("UntilLoseControlOfHost") || sa.hasParam("UntilHostLeavesPlay"))
+        if (("UntilHostLeavesPlay".equals(sa.getParam("Duration")) || "UntilLoseControlOfHost".equals(sa.getParam("Duration")))
                 && !(host.isInPlay() || host.isInZone(ZoneType.Stack))) {
             return;
         }
 
         if (!keywords.isEmpty()) {
-            p.addChangedKeywords(keywords, ImmutableList.of(), timestamp);
+            p.addChangedKeywords(keywords, ImmutableList.of(), timestamp, 0);
         }
 
         if (!"Permanent".equals(sa.getParam("Duration"))) {
@@ -137,7 +137,7 @@ public class PumpEffect extends SpellAbilityEffect {
 
                 @Override
                 public void run() {
-                    p.removeChangedKeywords(timestamp);
+                    p.removeChangedKeywords(timestamp, 0);
                 }
             };
             addUntilCommand(sa, untilEOT);
@@ -158,7 +158,6 @@ public class PumpEffect extends SpellAbilityEffect {
         }
 
         if (tgts.size() > 0) {
-
             for (final GameEntity c : tgts) {
                 sb.append(c).append(" ");
             }
@@ -234,9 +233,6 @@ public class PumpEffect extends SpellAbilityEffect {
         final Game game = sa.getActivatingPlayer().getGame();
         final Card host = sa.getHostCard();
         final long timestamp = game.getNextTimestamp();
-
-        String pumpForget = null;
-        String pumpImprint = null;
 
         List<String> keywords = Lists.newArrayList();
         if (sa.hasParam("KW")) {
@@ -325,10 +321,6 @@ public class PumpEffect extends SpellAbilityEffect {
             }
         }
 
-        if (sa.hasParam("ForgetObjects")) {
-            pumpForget = sa.getParam("ForgetObjects");
-        }
-
         if (sa.hasParam("NoteCardsFor")) {
             for (final Card c : AbilityUtils.getDefinedCards(host, sa.getParam("NoteCards"), sa)) {
                 for (Player p : tgtPlayers) {
@@ -337,17 +329,14 @@ public class PumpEffect extends SpellAbilityEffect {
             }
         }
 
-        if (pumpForget != null) {
-            for (final Object o : AbilityUtils.getDefinedObjects(host, pumpForget, sa)) {
+        if (sa.hasParam("ForgetObjects")) {
+            for (final Object o : AbilityUtils.getDefinedObjects(host, sa.getParam("ForgetObjects"), sa)) {
                 host.removeRemembered(o);
             }
         }
-        if (sa.hasParam("ImprintCards")) {
-            pumpImprint = sa.getParam("ImprintCards");
-        }
 
-        if (pumpImprint != null) {
-            for (final Card c : AbilityUtils.getDefinedCards(host, pumpImprint, sa)) {
+        if (sa.hasParam("ImprintCards")) {
+            for (final Card c : AbilityUtils.getDefinedCards(host, sa.getParam("ImprintCards"), sa)) {
                 host.addImprintedCard(c);
             }
         }

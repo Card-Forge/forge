@@ -7,79 +7,79 @@ Type=Online
 ScryfallCode=PZ2
 
 [cards]
-1 C Throne Warden
-2 C Palace Sentinels
-3 U Orzhov Advokist
-4 U Palace Jailer
-5 R Recruiter of the Guard
-6 R Custodi Soulbinders
-7 R Selfless Squire
-8 R Protector of the Crown
-9 R Duelist's Heritage
-10 R Entrapment Maneuver
-11 M Sanctum Prelate
-12 U Grip of Phyresis
-13 R Stunt Double
-14 R Faerie Artisans
-15 R Keeper of Keys
-16 R Deepglow Skate
-17 C Garrulous Sycophant
-18 C Thorn of the Black Rose
-19 U Parting Thoughts
-20 U Marchesa's Decree
-21 R Magus of the Will
-22 R Custodi Lich
-23 R Curse of Vengeance
-24 U Frenzied Fugue
-25 R Goblin Spymaster
-26 R Charging Cinderhorn
-27 R Runehorn Hellkite
-28 R Skyline Despot
-29 R Grenzo, Havoc Raiser
-30 M Subterranean Tremors
-31 U Domesticated Hydra
-32 U Evolutionary Escalation
-33 R Primeval Protector
-34 R Splitting Slime
-35 R Stonehoof Chieftain
-36 R Benefactor's Draught
-37 M Selvala, Heart of the Wilds
-38 U Ancient Excavation
-39 U Sylvan Reclamation
-40 U Migratory Route
-41 U Grave Upheaval
-42 U Treacherous Terrain
-43 R Reyhan, Last of the Abzan
-44 R Tymna the Weaver
-45 R Adriana, Captain of the Guard
-46 R Kraum, Ludevic's Opus
-47 R Thrasios, Triton Hero
-48 R Akiri, Line-Slinger
-49 M Vial Smasher the Fierce
-50 M Queen Marchesa
-51 M Silas Renn, Seeker Adept
-52 M Ludevic, Necro-Alchemist
-53 M Kydele, Chosen of Kruphix
-54 M Sidar Kondo of Jamuraa
-55 M Tana, the Bloodsower
-56 M Bruse Tarl, Boorish Herder
-57 M Ishai, Ojutai Dragonspeaker
-58 M Ikra Shidiqi, the Usurper
-59 M Ravos, Soultender
-60 M Leovold, Emissary of Trest
-61 M Saskia the Unyielding
-62 M Atraxa, Praetors' Voice
-63 M Kynaios and Tiro of Meletis
-64 M Yidris, Maelstrom Wielder
-65 M Breya, Etherium Shaper
-66 M Daretti, Ingenious Iconoclast
-67 M Kaya, Ghost Assassin
-68 R Armory Automaton
-69 R Crystalline Crawler
-70 R Boompile
-71 R Prismatic Geoscope
-72 C Ash Barrens
-73 R Throne of the High City
+1 C Throne Warden @Chris Rallis
+2 C Palace Sentinels @Aaron Miller
+3 U Orzhov Advokist @Jason A. Engle
+4 U Palace Jailer @David Palumbo
+5 R Recruiter of the Guard @Jason Rainville
+6 R Custodi Soulbinders @Karla Ortiz
+7 R Selfless Squire @Tony Foti
+8 R Protector of the Crown @Johannes Voss
+9 R Duelist's Heritage @Lake Hurwitz
+10 R Entrapment Maneuver @Filip Burburan
+11 M Sanctum Prelate @Winona Nelson
+12 U Grip of Phyresis @Lake Hurwitz
+13 R Stunt Double @Joseph Meehan
+14 R Faerie Artisans @Tony Foti
+15 R Keeper of Keys @Bastien L. Deharme
+16 R Deepglow Skate @Jason Kang
+17 C Garrulous Sycophant @Lake Hurwitz
+18 C Thorn of the Black Rose @David Gaillet
+19 U Parting Thoughts @Seb McKinnon
+20 U Marchesa's Decree @Chris Rallis
+21 R Magus of the Will @Vincent Proce
+22 R Custodi Lich @Bastien L. Deharme
+23 R Curse of Vengeance @Bastien L. Deharme
+24 U Frenzied Fugue @Tony Foti
+25 R Goblin Spymaster @Wayne Reynolds
+26 R Charging Cinderhorn @Lius Lasahido
+27 R Runehorn Hellkite @Karl Kopinski
+28 R Skyline Despot @Lucas Graciano
+29 R Grenzo, Havoc Raiser @Svetlin Velinov
+30 M Subterranean Tremors @Filip Burburan
+31 U Domesticated Hydra @Mathias Kollros
+32 U Evolutionary Escalation @Kev Walker
+33 R Primeval Protector @Jaime Jones
+34 R Splitting Slime @James Paick
+35 R Stonehoof Chieftain @Tomasz Jedruszek
+36 R Benefactor's Draught @Scott Murphy
+37 M Selvala, Heart of the Wilds @Tyler Jacobson
+38 U Ancient Excavation @James Paick
+39 U Sylvan Reclamation @Seb McKinnon
+40 U Migratory Route @Winona Nelson
+41 U Grave Upheaval @Vincent Proce
+42 U Treacherous Terrain @Titus Lunter
+43 R Reyhan, Last of the Abzan @Chris Rallis
+44 R Tymna the Weaver @Winona Nelson
+45 R Adriana, Captain of the Guard @Chris Rallis
+46 R Kraum, Ludevic's Opus @Aaron Miller
+47 R Thrasios, Triton Hero @Josu Hernaiz
+48 R Akiri, Line-Slinger @David Gaillet
+49 M Vial Smasher the Fierce @Deruchenko Alexander
+50 M Queen Marchesa @Kieran Yanner
+51 M Silas Renn, Seeker Adept @Joseph Meehan
+52 M Ludevic, Necro-Alchemist @Aaron Miller
+53 M Kydele, Chosen of Kruphix @Bastien L. Deharme
+54 M Sidar Kondo of Jamuraa @Ryan Alexander Lee
+55 M Tana, the Bloodsower @Magali Villeneuve
+56 M Bruse Tarl, Boorish Herder @Anthony Palumbo
+57 M Ishai, Ojutai Dragonspeaker @Zack Stella
+58 M Ikra Shidiqi, the Usurper @Josu Hernaiz
+59 M Ravos, Soultender @Zezhou Chen
+60 M Leovold, Emissary of Trest @Magali Villeneuve
+61 M Saskia the Unyielding @Greg Opalinski
+62 M Atraxa, Praetors' Voice @Victor Adame Minguez
+63 M Kynaios and Tiro of Meletis @Willian Murai
+64 M Yidris, Maelstrom Wielder @Karl Kopinski
+65 M Breya, Etherium Shaper @Clint Cearley
+66 M Daretti, Ingenious Iconoclast @Victor Adame Minguez
+67 M Kaya, Ghost Assassin @Chris Rallis
+68 R Armory Automaton @James Paick
+69 R Crystalline Crawler @Jason Felix
+70 R Boompile @Filip Burburan
+71 R Prismatic Geoscope @Steven Belledin
+72 C Ash Barrens @Jonas De Ro
+73 R Throne of the High City @Titus Lunter
 
 [tokens]
 w_1_1_bird_flying

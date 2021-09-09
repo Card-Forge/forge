@@ -14,7 +14,7 @@ public class ImageUtil {
     }
 
     public static PaperCard getPaperCardFromImageKey(String key) {
-        if ( key == null ) {
+        if (key == null) {
             return null;
         }
 
@@ -44,20 +44,19 @@ public class ImageUtil {
         final boolean hasManyPictures;
         final CardDb db =  !card.isVariant() ? StaticData.instance().getCommonCards() : StaticData.instance().getVariantCards();
         if (includeSet) {
-            cntPictures = db.getPrintCount(card.getName(), edition);
+            cntPictures = db.getArtCount(card.getName(), edition);
             hasManyPictures = cntPictures > 1;
         } else {
             cntPictures = 1;
-
             // raise the art index limit to the maximum of the sets this card was printed in
-            int maxCntPictures = db.getMaxPrintCount(card.getName());
+            int maxCntPictures = db.getMaxArtIndex(card.getName());
             hasManyPictures = maxCntPictures > 1;
         }
 
         int artIdx = cp.getArtIndex() - 1;
         if (hasManyPictures) {
-            if ( cntPictures <= artIdx ) // prevent overflow
-                artIdx = cntPictures == 0 ? 0 : artIdx % cntPictures;
+            if (cntPictures <= artIdx) // prevent overflow
+                artIdx = artIdx % cntPictures;
             s.append(artIdx + 1);
         }
 
@@ -84,15 +83,10 @@ public class ImageUtil {
         }
     }
 
-    public static boolean hasBackFacePicture(PaperCard cp) {
-        CardSplitType cst = cp.getRules().getSplitType();
-        return cst == CardSplitType.Transform || cst == CardSplitType.Flip || cst == CardSplitType.Meld || cst == CardSplitType.Modal;
-    }
-
     public static String getNameToUse(PaperCard cp, boolean backFace) {
         final CardRules card = cp.getRules();
-        if (backFace ) {
-            if ( hasBackFacePicture(cp) )
+        if (backFace) {
+            if (cp.hasBackFace())
                 if (card.getOtherPart() != null) {
                     return card.getOtherPart().getName();
                 } else if (!card.getMeldWith().isEmpty()) {
@@ -118,7 +112,7 @@ public class ImageUtil {
         return getImageRelativePath(cp, backFace, true, true);
     }
 
-    public static String getScryfallDownloadUrl(PaperCard cp, boolean backFace, String setCode, String langCode){
+    public static String getScryfallDownloadUrl(PaperCard cp, boolean backFace, String setCode, String langCode, boolean useArtCrop){
         String editionCode;
         if ((setCode != null) && (setCode.length() > 0))
             editionCode = setCode;
@@ -127,12 +121,13 @@ public class ImageUtil {
         String cardCollectorNumber = cp.getCollectorNumber();
         // Hack to account for variations in Arabian Nights
         cardCollectorNumber = cardCollectorNumber.replace("+", "†");
+        String versionParam = useArtCrop ? "art_crop" : "normal";
         String faceParam = "";
         if (cp.getRules().getOtherPart() != null) {
             faceParam = (backFace ? "&face=back" : "&face=front");
         }
-        return String.format("%s/%s/%s?format=image&version=normal%s", editionCode, cardCollectorNumber,
-                langCode, faceParam);
+        return String.format("%s/%s/%s?format=image&version=%s%s", editionCode, cardCollectorNumber,
+                langCode, versionParam, faceParam);
     }
 
     public static String toMWSFilename(String in) {

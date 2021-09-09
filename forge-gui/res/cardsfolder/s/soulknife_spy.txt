@@ -1,0 +1,7 @@
+Name:Soulknife Spy
+ManaCost:2 U
+Types:Creature Elf Rogue
+PT:3/2
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:Whenever Soulknife Spy deals combat damage to a player, draw a card.

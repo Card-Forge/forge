@@ -2,12 +2,12 @@
 Code=PZEN
 Date=2009-10-02
 Name=Zendikar Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PZEN
 
 [cards]
-*9 R Day of Judgment
-34 R Nissa's Chosen
-35 R Emeria Angel
-178★ M Rampaging Baloths
-228★ R Valakut, the Molten Pinnacle
+*9 R Day of Judgment @Kev Walker
+34 R Nissa's Chosen @Sam Wood
+35 R Emeria Angel @Steve Argyle
+178★ M Rampaging Baloths @Eric Deschamps
+228★ R Valakut, the Molten Pinnacle @James Paick

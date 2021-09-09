@@ -24,6 +24,9 @@ public enum TrackableProperty {
     Controller(TrackableTypes.PlayerViewType),
     Zone(TrackableTypes.EnumType(ZoneType.class)),
 
+    IsImmutable(TrackableTypes.BooleanType),
+    IsEmblem(TrackableTypes.BooleanType),
+
     Flipped(TrackableTypes.BooleanType),
     Facedown(TrackableTypes.BooleanType),
     Foretold(TrackableTypes.BooleanType),
@@ -63,6 +66,7 @@ public enum TrackableProperty {
     ChosenDirection(TrackableTypes.EnumType(Direction.class)),
     ChosenEvenOdd(TrackableTypes.EnumType(EvenOdd.class)),
     ChosenMode(TrackableTypes.StringType),
+    ClassLevel(TrackableTypes.IntegerType),
     CurrentRoom(TrackableTypes.StringType),
     Remembered(TrackableTypes.StringType),
     NamedCard(TrackableTypes.StringType),
@@ -73,6 +77,7 @@ public enum TrackableProperty {
     UntilLeavesBattlefield(TrackableTypes.CardViewCollectionType),
     GainControlTargets(TrackableTypes.CardViewCollectionType),
     CloneOrigin(TrackableTypes.CardViewType),
+    ExiledWith(TrackableTypes.CardViewType),
 
     ImprintedCards(TrackableTypes.CardViewCollectionType),
     HauntedBy(TrackableTypes.CardViewCollectionType),
@@ -106,6 +111,18 @@ public enum TrackableProperty {
     HasChangedColors(TrackableTypes.BooleanType),
     ChangedTypes(TrackableTypes.StringMapType),
 
+    //check produce mana for BG
+    OrigProduceManaR(TrackableTypes.BooleanType),
+    OrigProduceManaG(TrackableTypes.BooleanType),
+    OrigProduceManaB(TrackableTypes.BooleanType),
+    OrigProduceManaU(TrackableTypes.BooleanType),
+    OrigProduceManaW(TrackableTypes.BooleanType),
+    OrigProduceManaC(TrackableTypes.BooleanType),
+    OrigProduceAnyMana(TrackableTypes.BooleanType),
+    CountOrigProduceColoredMana(TrackableTypes.IntegerType),
+    //number of basic landtypes
+    CountBasicLandTypes(TrackableTypes.IntegerType),
+
     KeywordKey(TrackableTypes.StringType),
     HasDeathtouch(TrackableTypes.BooleanType),
     HasDevoid(TrackableTypes.BooleanType),
@@ -127,6 +144,7 @@ public enum TrackableProperty {
     HasTrample(TrackableTypes.BooleanType),
     HasVigilance(TrackableTypes.BooleanType),
     HasLandwalk(TrackableTypes.BooleanType),
+    HasAftermath(TrackableTypes.BooleanType),
     //protectionkey
     ProtectionKey(TrackableTypes.StringType),
     //hexproofkey

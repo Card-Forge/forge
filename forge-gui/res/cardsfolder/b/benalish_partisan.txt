@@ -1,0 +1,13 @@
+Name:Benalish Partisan
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:1/2
+K:Lifelink
+T:Mode$ Cycled | ValidCard$ Card.Other | ValidPlayer$ You | TriggerZones$ Graveyard | Execute$ TrigReturn | TriggerDescription$ Whenever you cycle another card, you may pay {1}{W}. If you do, return CARDNAME from your graveyard to the battlefield tapped and it perpetually gets +1/+0.
+SVar:TrigReturn:AB$ ChangeZone | Cost$ 1 W | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualPump | RememberObjects$ Self | Name$ Benalish Partisan's Perpetual Effect | Duration$ Permanent
+SVar:PerpetualPump:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ EFFECTSOURCE perpetually gets +1/+0.
+K:Cycling:1 W
+DeckHas:Ability$LifeGain & Ability$Graveyard
+SVar:SacMe:2
+Oracle:Lifelink\nWhenever you cycle another card, you may pay {1}{W}. If you do, return Benalish Partisan from your graveyard to the battlefield tapped and it perpetually gets +1/+0.\nCycling {1}{W}

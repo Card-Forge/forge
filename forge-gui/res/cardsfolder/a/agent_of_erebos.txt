@@ -2,8 +2,7 @@ Name:Agent of Erebos
 ManaCost:3 B
 Types:Enchantment Creature Zombie
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment enters the battlefield under your control, exile all cards from target player's graveyard.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigExile | Secondary$ True | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment enters the battlefield under your control, exile all cards from target player's graveyard.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Enchantment.YouCtrl | Execute$ TrigExile | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment enters the battlefield under your control, exile all cards from target player's graveyard.
 SVar:TrigExile:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Card
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/agent_of_erebos.jpg

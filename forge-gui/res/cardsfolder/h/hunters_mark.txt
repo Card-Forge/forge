@@ -1,0 +1,11 @@
+Name:Hunter's Mark
+ManaCost:3 G
+Types:Instant
+K:CARDNAME can't be countered.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ CostReduction | Relative$ True | EffectZone$ All | Description$ This spell costs {3} less to cast if it targets a blue permanent you don't control.
+SVar:CostReduction:Count$Compare CheckTgt GE1.3.0
+SVar:CheckTgt:TargetedObjects$Valid Card.Blue+YouDontCtrl
+A:SP$ Pump | Cost$ 3 G | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | NumAtt$ +1 | NumDef$ +1 | TgtPrompt$ Select target creature you control | SubAbility$ SoulsDamage | StackDescription$ {c:ThisTargetedCard} gets +1/+1 until end of turn. | SpellDescription$ Target creature you control gets +1/+1 until end of turn. It deals damage equal to its power to target creature you don't control.
+SVar:SoulsDamage:DB$ DealDamage | ValidTgts$ Creature.YouDontCtrl,Planeswalker.YouDontCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature or planeswalker you don't control | NumDmg$ X | DamageSource$ ParentTarget | StackDescription$ Then {c:ParentTarget} deals damage equal to its power to {c:ThisTargetedCard}.
+SVar:X:ParentTargeted$CardPower
+Oracle:This spell costs {3} less to cast if it targets a blue permanent you don't control.\nThis spell can't be countered.\nTarget creature you control gets +1/+1 until end of turn. Then it deals damage equal to its power to target creature or planeswalker you don't control.

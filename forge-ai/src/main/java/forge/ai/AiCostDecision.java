@@ -60,7 +60,6 @@ public class AiCostDecision extends CostDecisionMakerBase {
         return PaymentDecision.number(c);
     }
 
-
     @Override
     public PaymentDecision visit(CostChooseCreatureType cost) {
         String choice = player.getController().chooseSomeType("Creature", ability, CardType.getAllCreatureTypes(),
@@ -78,15 +77,13 @@ public class AiCostDecision extends CostDecisionMakerBase {
                 return null;
             }
             return PaymentDecision.card(player.getLastDrawnCard());
-        }
-        else if (cost.payCostFromSource()) {
+        } else if (cost.payCostFromSource()) {
             if (!hand.contains(source)) {
                 return null;
             }
 
             return PaymentDecision.card(source);
-        }
-        else if (type.equals("Hand")) {
+        } else if (type.equals("Hand")) {
             if (hand.size() > 1 && ability.getActivatingPlayer() != null) {
                 hand = ability.getActivatingPlayer().getController().orderMoveToZoneList(hand, ZoneType.Graveyard, ability);
             }
@@ -107,8 +104,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
                 randomSubset = ability.getActivatingPlayer().getController().orderMoveToZoneList(randomSubset, ZoneType.Graveyard, ability);
             }
             return PaymentDecision.card(randomSubset);
-        }
-        else if (type.equals("DifferentNames")) {
+        } else if (type.equals("DifferentNames")) {
             CardCollection differentNames = new CardCollection();
             CardCollection discardMe = CardLists.filter(hand, CardPredicates.hasSVar("DiscardMe"));
             while (c > 0) {
@@ -125,8 +121,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
                 c--;
             }
             return PaymentDecision.card(differentNames);
-        }
-        else {
+        } else {
             final AiController aic = ((PlayerControllerAi)player.getController()).getAi();
 
             CardCollection result = aic.getCardsToDiscard(c, type.split(";"), ability, discarded);
@@ -183,8 +178,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
         else if (cost.sameZone) {
             // TODO Determine exile from same zone for AI
             return null;
-        }
-        else {
+        } else {
             CardCollectionView chosen = ComputerUtil.chooseExileFrom(player, cost.getFrom(), cost.getType(), source, ability.getTargetCard(), c, ability);
             return null == chosen ? null : PaymentDecision.card(chosen);
         }
@@ -192,7 +186,6 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(CostExileFromStack cost) {
-
         Integer c = cost.convertAmount();
         if (c == null) {
             c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
@@ -260,6 +253,15 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(CostFlipCoin cost) {
+        Integer c = cost.convertAmount();
+        if (c == null) {
+            c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
+        }
+        return PaymentDecision.number(c);
+    }
+
+    @Override
+    public PaymentDecision visit(CostRollDice cost) {
         Integer c = cost.convertAmount();
         if (c == null) {
             c = AbilityUtils.calculateAmount(source, cost.getAmount(), ability);
@@ -366,8 +368,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
         if (cost.isSameZone()) {
             list = new CardCollection(game.getCardsIn(cost.getFrom()));
-        }
-        else {
+        } else {
             list = new CardCollection(player.getCardsIn(cost.getFrom()));
         }
 
@@ -414,7 +415,6 @@ public class AiCostDecision extends CostDecisionMakerBase {
         }
         return PaymentDecision.card(card);
     }
-
 
     @Override
     public PaymentDecision visit(CostTap cost) {
@@ -474,14 +474,13 @@ public class AiCostDecision extends CostDecisionMakerBase {
         return PaymentDecision.card(totap);
     }
 
-
     @Override
     public PaymentDecision visit(CostSacrifice cost) {
         if (cost.payCostFromSource()) {
             return PaymentDecision.card(source);
         }
         if (cost.getType().equals("OriginalHost")) {
-            return PaymentDecision.card(ability.getHostCard());
+            return PaymentDecision.card(ability.getOriginalHost());
         }
         if (cost.getAmount().equals("All")) {
             // Does the AI want to use Sacrifice All?
@@ -495,7 +494,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             c = AbilityUtils.calculateAmount(source, amount, ability);
         }
         final AiController aic = ((PlayerControllerAi)player.getController()).getAi();
-        CardCollectionView list = aic.chooseSacrificeType(cost.getType(), ability, c);
+        CardCollectionView list = aic.chooseSacrificeType(cost.getType(), ability, c, null);
         return PaymentDecision.card(list);
     }
 
@@ -533,7 +532,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             return null;
         }
 
-        if (cost.getRevealFrom().equals(ZoneType.Exile)) {
+        if (cost.getRevealFrom().get(0).equals(ZoneType.Exile)) {
             hand = CardLists.getValidCards(hand, type.split(";"), player, source, ability);
             return PaymentDecision.card(getBestCreatureAI(hand));
         }
@@ -596,7 +595,6 @@ public class AiCostDecision extends CostDecisionMakerBase {
         // the amount might be different from 1, could be X
         // currently if amount is bigger than one,
         // it tries to remove all counters from one source and type at once
-
 
         int toRemove = 0;
         final GameEntityCounterTable table = new GameEntityCounterTable();
@@ -862,4 +860,3 @@ public class AiCostDecision extends CostDecisionMakerBase {
         return false;
     }
 }
-

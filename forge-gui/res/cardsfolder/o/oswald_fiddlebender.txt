@@ -1,0 +1,10 @@
+Name:Oswald Fiddlebender
+ManaCost:1 W
+Types:Legendary Creature Gnome Artificer
+PT:2/2
+A:AB$ ChangeZone | Cost$ W T Sac<1/Artifact> | Origin$ Library | Destination$ Battlefield | ChangeType$ Artifact.cmcEQX | ChangeNum$ 1 | SorcerySpeed$ True | AILogic$ SacAndUpgrade | PrecostDesc$ Magical Tinkering — | SpellDescription$ Search your library for an artifact card with mana value equal to 1 plus the sacrificed artifact's mana value, put it onto the battlefield, then shuffle. Activate only as a sorcery.
+SVar:X:Sacrificed$CardManaCost/Plus.1
+SVar:AIPreference:SacCost$Artifact
+DeckHas:Ability$Sacrifice
+DeckHints:Type$Artifact
+Oracle:Magical Tinkering — {W}, {T}, Sacrifice an artifact: Search your library for an artifact card with mana value equal to 1 plus the sacrificed artifact's mana value, put it onto the battlefield, then shuffle. Activate only as a sorcery.

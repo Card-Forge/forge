@@ -121,7 +121,6 @@ public class GameLogPanel extends JPanel {
     }
 
     public void addLogEntry(final String text) {
-
         final boolean useAlternateBackColor = (scrollablePanel.getComponents().length % 2 == 0);
         final JTextArea tar = createNewLogEntryJTextArea(text, useAlternateBackColor);
 
@@ -138,7 +137,6 @@ public class GameLogPanel extends JPanel {
         }
 
         forceVerticalScrollbarToMax();
-
     }
 
     public void setTextFont(final SkinFont newFont) {

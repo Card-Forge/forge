@@ -1,0 +1,11 @@
+Name:Precipitous Drop
+ManaCost:2 B
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 2 B | ValidTgts$ Creature | AILogic$ Curse
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigVenture | TriggerDescription$ When CARDNAME enters the battlefield, venture into the dungeon. (Enter the first room or advance to the next room.)
+SVar:TrigVenture:DB$ Venture
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -X | AddToughness$ -X | Description$ Enchanted creature gets -2/-2. It gets -5/-5 instead as long as you've completed a dungeon.
+SVar:X:Count$Compare Y GE1.5.2
+SVar:Y:PlayerCountPropertyYou$DungeonsCompleted
+Oracle:Enchant creature\nWhen Precipitous Drop enters the battlefield, venture into the dungeon. (Enter the first room or advance to the next room.)\nEnchanted creature gets -2/-2. It gets -5/-5 instead as long as you've completed a dungeon.

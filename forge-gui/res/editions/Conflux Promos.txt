@@ -2,9 +2,9 @@
 Code=PCON
 Date=2009-02-06
 Name=Conflux Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PCON
 
 [cards]
-117★ R Malfegor
-140★ R Obelisk of Alara
+117★ R Malfegor @Karl Kopinski
+140★ R Obelisk of Alara @John Avon

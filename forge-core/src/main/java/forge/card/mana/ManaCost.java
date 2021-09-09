@@ -353,7 +353,7 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
      * @param colorCode
      * @return
      */
-    public boolean canBePaidWithAvaliable(byte colorCode) {
+    public boolean canBePaidWithAvailable(byte colorCode) {
         for (ManaCostShard shard : shards) {
             if (!shard.isPhyrexian() && !shard.canBePaidWithManaOfColor(colorCode)) {
                 return false;

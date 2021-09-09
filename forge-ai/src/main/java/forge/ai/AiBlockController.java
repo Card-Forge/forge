@@ -917,7 +917,6 @@ public class AiBlockController {
     }
 
     private void clearBlockers(final Combat combat, final List<Card> possibleBlockers) {
-
         final List<Card> oldBlockers = combat.getAllBlockers();
         for (final Card blocker : oldBlockers) {
             if (blocker.getController() == ai) // don't touch other player's blockers
@@ -1270,7 +1269,7 @@ public class AiBlockController {
             return false;
         }
 
-        int numSteps = ai.getStartingLife() - 5; // e.g. 15 steps between 5 life and 20 life
+        int numSteps = Math.max(1, ai.getStartingLife() - 5); // e.g. 15 steps between 5 life and 20 life
         float chanceStep = (maxRandomTradeChance - minRandomTradeChance) / numSteps;
         int chance = (int)Math.max(minRandomTradeChance, (maxRandomTradeChance - (Math.max(5, ai.getLife() - 5)) * chanceStep));
         if (chance > maxRandomTradeChance) {

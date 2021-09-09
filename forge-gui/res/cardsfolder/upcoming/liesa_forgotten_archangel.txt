@@ -1,0 +1,13 @@
+Name:Liesa, Forgotten Archangel
+ManaCost:2 W W B
+Types:Legendary Creature Angel
+PT:4/5
+K:Flying
+K:Lifelink
+T:Mode$ ChangesZone | ValidCard$ Creature.Other+nonToken+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | Execute$ DelTrigReturn | TriggerZones$ Battlefield | TriggerDescription$ Whenever another nontoken creature you control dies, return that card to its owner's hand at the beginning of the next end step.
+SVar:DelTrigReturn:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ DBReturn | RememberObjects$ TriggeredNewCardLKICopy
+SVar:DBReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Graveyard | Destination$ Hand
+R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | Destination$ Graveyard | ValidLKI$ Creature.OppCtrl | ReplaceWith$ Exile | CheckSelfLKIZone$ True | Description$ If a creature an opponent controls would die, exile it instead.
+SVar:Exile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ ReplacedCard
+DeckHas:Ability$LifeGain
+Oracle:Flying, lifelink\nWhenever another nontoken creature you control dies, return that card to its owner's hand at the beginning of the next end step.\nIf a creature an opponent controls would die, exile it instead.

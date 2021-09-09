@@ -229,12 +229,12 @@ public class GameCopier {
     
     private static final boolean USE_FROM_PAPER_CARD = true;
     private Card createCardCopy(Game newGame, Player newOwner, Card c) {
-        if (c.isToken() && !c.isEmblem()) {
+        if (c.isToken() && !c.isImmutable()) {
             Card result = new TokenInfo(c).makeOneToken(newOwner);
             CardFactory.copyCopiableCharacteristics(c, result);
             return result;
         }
-        if (USE_FROM_PAPER_CARD && !c.isEmblem() && c.getPaperCard() != null) {
+        if (USE_FROM_PAPER_CARD && !c.isImmutable() && c.getPaperCard() != null) {
             Card newCard = Card.fromPaperCard(c.getPaperCard(), newOwner);
             newCard.setCommander(c.isCommander());
             return newCard;
@@ -285,8 +285,12 @@ public class GameCopier {
             }
             newCard.setPTBoost(c.getPTBoostTable());
             newCard.setDamage(c.getDamage());
-            
+
+            newCard.setChangedCardColors(c.getChangedCardColorsMap());
+            newCard.setChangedCardColorsCharacterDefining(c.getChangedCardColorsCharacterDefiningMap());
+
             newCard.setChangedCardTypes(c.getChangedCardTypesMap());
+            newCard.setChangedCardTypesCharacterDefining(c.getChangedCardTypesCharacterDefiningMap());
             newCard.setChangedCardKeywords(c.getChangedCardKeywords());
             newCard.setChangedCardNames(c.getChangedCardNames());
 

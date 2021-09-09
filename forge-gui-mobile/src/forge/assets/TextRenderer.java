@@ -43,6 +43,7 @@ public class TextRenderer {
         symbolLookup.put("2/B", FSkinImage.MANA_2B);
         symbolLookup.put("2/R", FSkinImage.MANA_2R);
         symbolLookup.put("2/G", FSkinImage.MANA_2G);
+        symbolLookup.put("P", FSkinImage.MANA_PHRYX);
         symbolLookup.put("P/W", FSkinImage.MANA_PHRYX_W);
         symbolLookup.put("P/U", FSkinImage.MANA_PHRYX_U);
         symbolLookup.put("P/B", FSkinImage.MANA_PHRYX_B);
@@ -290,6 +291,19 @@ public class TextRenderer {
                         switch (keyword) {
                         case "clr":
                             colorOverride = value != null ? new Color(Integer.parseInt(value)) : null;
+                            break;
+                        case "span":
+                            // <span style="color:gray;">
+                            if (value != null && value.contains("color:")) {
+                                int startIdx = value.indexOf(':') + 1;
+                                int endIdx = value.indexOf(';');
+                                String colorName = value.substring(startIdx, endIdx);
+                                if (colorName.equals("gray")) {
+                                    colorOverride = Color.GRAY;
+                                }
+                            } else {
+                                colorOverride = null;
+                            }
                             break;
                         default:
                             validKeyword = false;

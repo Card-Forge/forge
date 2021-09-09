@@ -17,49 +17,27 @@
  */
 package forge.card;
 
-import java.io.File;
-import java.io.FilenameFilter;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.ListMultimap;
-import com.google.common.collect.Lists;
-
+import com.google.common.collect.*;
 import forge.StaticData;
-import forge.card.CardDb.SetPreference;
+import forge.card.CardDb.CardArtPreference;
 import forge.deck.CardPool;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
-import forge.util.Aggregates;
-import forge.util.FileSection;
-import forge.util.FileUtil;
-import forge.util.IItemReader;
-import forge.util.MyRandom;
+import forge.util.*;
 import forge.util.storage.StorageBase;
 import forge.util.storage.StorageReaderBase;
 import forge.util.storage.StorageReaderFolder;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.File;
+import java.io.FilenameFilter;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 /**
@@ -78,19 +56,23 @@ public final class CardEdition implements Comparable<CardEdition> {
 
         CORE,
         EXPANSION,
-
-        REPRINT,
-        ONLINE,
         STARTER,
+        REPRINT,
+        BOXED_SET,
 
-        DUEL_DECKS,
-        PREMIUM_DECK_SERIES,
-        FROM_THE_VAULT,
+        COLLECTOR_EDITION,
+        DUEL_DECK,
+        PROMO,
+        ONLINE,
 
-        OTHER,
-        PROMOS,
+        DRAFT,
+
+        COMMANDER,
+        MULTIPLAYER,
         FUNNY,
-        THIRDPARTY; // custom sets
+
+        OTHER,  // FALLBACK CATEGORY
+        CUSTOM_SET; // custom sets
 
         public String getBoosterBoxDefault() {
             switch (this) {
@@ -100,6 +82,29 @@ public final class CardEdition implements Comparable<CardEdition> {
                 default:
                     return "0";
             }
+        }
+
+        public String getFatPackDefault() {
+            switch (this) {
+                case CORE:
+                case EXPANSION:
+                    return "10";
+                default:
+                    return "0";
+            }
+        }
+
+        public String toString(){
+            String[] names = TextUtil.splitWithParenthesis(this.name().toLowerCase(), '_');
+            for (int i = 0; i < names.length; i++)
+                names[i] = TextUtil.capitalize(names[i]);
+            return TextUtil.join(Arrays.asList(names), " ");
+        }
+
+        public static Type fromString(String label){
+            List<String> names = Arrays.asList(TextUtil.splitWithParenthesis(label.toUpperCase(), ' '));
+            String value = TextUtil.join(names, "_");
+            return Type.valueOf(value);
         }
     }
 
@@ -133,7 +138,8 @@ public final class CardEdition implements Comparable<CardEdition> {
         BUY_A_BOX("buy a box"),
         PROMO("promo"),
         BUNDLE("bundle"),
-        BOX_TOPPER("box topper");
+        BOX_TOPPER("box topper"),
+        DUNGEONS("dungeons");
 
         private final String name;
 
@@ -157,11 +163,13 @@ public final class CardEdition implements Comparable<CardEdition> {
         public final CardRarity rarity;
         public final String collectorNumber;
         public final String name;
+        public final String artistName;
 
-        public CardInSet(final String name, final String collectorNumber, final CardRarity rarity) {
+        public CardInSet(final String name, final String collectorNumber, final CardRarity rarity, final String artistName) {
             this.name = name;
             this.collectorNumber = collectorNumber;
             this.rarity = rarity;
+            this.artistName = artistName;
         }
  
         public String toString() {
@@ -175,6 +183,10 @@ public final class CardEdition implements Comparable<CardEdition> {
                 sb.append(' ');
             }
             sb.append(name);
+            if (artistName != null) {
+                sb.append(" @");
+                sb.append(artistName);
+            }
             return sb.toString();
         }
 
@@ -187,29 +199,36 @@ public final class CardEdition implements Comparable<CardEdition> {
          * @param collectorNumber: Input collectorNumber tro transform in a Sorting Key
          * @return A 5-digits zero-padded collector number + any non-numerical parts attached.
          */
+        private static final Map<String, String> sortableCollNumberLookup = new HashMap<>();
         public static String getSortableCollectorNumber(final String collectorNumber){
-            String sortableCollNr = collectorNumber;
-            if (sortableCollNr == null || sortableCollNr.length() == 0)
-                sortableCollNr = "50000";  // very big number of 5 digits to have them in last positions
+            String inputCollNumber = collectorNumber;
+            if (collectorNumber == null || collectorNumber.length() == 0)
+                inputCollNumber = "50000";  // very big number of 5 digits to have them in last positions
+
+            String matchedCollNr = sortableCollNumberLookup.getOrDefault(inputCollNumber, null);
+            if (matchedCollNr != null)
+                return  matchedCollNr;
 
             // Now, for proper sorting, let's zero-pad the collector number (if integer)
             int collNr;
+            String sortableCollNr;
             try {
-                collNr = Integer.parseInt(sortableCollNr);
+                collNr = Integer.parseInt(inputCollNumber);
                 sortableCollNr = String.format("%05d", collNr);
             } catch (NumberFormatException ex) {
-                String nonNumeric = sortableCollNr.replaceAll("[0-9]", "");
-                String onlyNumeric = sortableCollNr.replaceAll("[^0-9]", "");
+                String nonNumSub = inputCollNumber.replaceAll("[0-9]", "");
+                String onlyNumSub = inputCollNumber.replaceAll("[^0-9]", "");
                 try {
-                    collNr = Integer.parseInt(onlyNumeric);
+                    collNr = Integer.parseInt(onlyNumSub);
                 } catch (NumberFormatException exon) {
-                    collNr = 0;  // this is the case of ONLY-letters collector numbers
+                    collNr = 0; // this is the case of ONLY-letters collector numbers
                 }
-                if ((collNr > 0) && (sortableCollNr.startsWith(onlyNumeric))) // e.g. 12a, 37+, 2018f,
-                    sortableCollNr = String.format("%05d", collNr) + nonNumeric;
-                else  // e.g. WS6, S1
-                    sortableCollNr = nonNumeric + String.format("%05d", collNr);
+                if ((collNr > 0) && (inputCollNumber.startsWith(onlyNumSub))) // e.g. 12a, 37+, 2018f,
+                    sortableCollNr = String.format("%05d", collNr) + nonNumSub;
+                else // e.g. WS6, S1
+                    sortableCollNr = nonNumSub + String.format("%05d", collNr);
             }
+            sortableCollNumberLookup.put(inputCollNumber, sortableCollNr);
             return sortableCollNr;
         }
 
@@ -247,6 +266,8 @@ public final class CardEdition implements Comparable<CardEdition> {
     // SealedProduct
     private String prerelease = null;
     private int boosterBoxCount = 36;
+    private int fatPackCount = 10;
+    private String fatPackExtraSlots = "";
 
     // Booster/draft info
     private boolean smallSetOverride = false;
@@ -337,6 +358,8 @@ public final class CardEdition implements Comparable<CardEdition> {
 
     public String getPrerelease() { return prerelease; }
     public int getBoosterBoxCount() { return boosterBoxCount; }
+    public int getFatPackCount() { return fatPackCount; }
+    public String getFatPackExtraSlots() { return fatPackExtraSlots; }
 
     public FoilType getFoilType() { return foilType; }
     public double getFoilChanceInBooster() { return foilChanceInBooster; }
@@ -354,6 +377,27 @@ public final class CardEdition implements Comparable<CardEdition> {
     public List<CardInSet> getCards() { return cardMap.get("cards"); }
     public List<CardInSet> getAllCardsInSet() {
         return cardsInSet;
+    }
+
+    private ListMultimap<String, CardInSet> cardsInSetLookupMap = null;
+
+    /**
+     * Get all the CardInSet instances with the input card name.
+     * @param cardName Name of the Card to look for.
+     * @return A List of all the CardInSet instances for a given name.
+     * If not fount, an Empty sequence (view) will be returned instead!
+     */
+    public List<CardInSet> getCardInSet(String cardName){
+        if (cardsInSetLookupMap == null) {
+            // initialise
+            cardsInSetLookupMap = Multimaps.newListMultimap(new TreeMap<>(String.CASE_INSENSITIVE_ORDER), CollectionSuppliers.arrayLists());
+            List<CardInSet> cardsInSet = this.getAllCardsInSet();
+            for (CardInSet cis : cardsInSet){
+                String key = cis.name;
+                cardsInSetLookupMap.put(key, cis);
+            }
+        }
+        return this.cardsInSetLookupMap.get(cardName);
     }
 
     public boolean isModern() { return getDate().after(parseDate("2003-07-27")); } //8ED and above are modern except some promo cards and others
@@ -446,11 +490,11 @@ public final class CardEdition implements Comparable<CardEdition> {
         Map<String, Integer> cardToIndex = new HashMap<>();
 
         List<PrintSheet> sheets = Lists.newArrayList();
-        for(String sectionName : cardMap.keySet()) {
+        for (String sectionName : cardMap.keySet()) {
             PrintSheet sheet = new PrintSheet(String.format("%s %s", this.getCode(), sectionName));
 
             List<CardInSet> cards = cardMap.get(sectionName);
-            for(CardInSet card : cards) {
+            for (CardInSet card : cards) {
                 int index = 1;
                 if (cardToIndex.containsKey(card.name)) {
                     index = cardToIndex.get(card.name);
@@ -465,7 +509,7 @@ public final class CardEdition implements Comparable<CardEdition> {
             sheets.add(sheet);
         }
 
-        for(String sheetName : customPrintSheetsToParse.keySet()) {
+        for (String sheetName : customPrintSheetsToParse.keySet()) {
             List<String> sheetToParse = customPrintSheetsToParse.get(sheetName);
             CardPool sheetPool = CardPool.fromCardList(sheetToParse);
             PrintSheet sheet = new PrintSheet(String.format("%s %s", this.getCode(), sheetName), sheetPool);
@@ -476,8 +520,16 @@ public final class CardEdition implements Comparable<CardEdition> {
     }
 
     public static class Reader extends StorageReaderFolder<CardEdition> {
+        private boolean isCustomEditions;
+
         public Reader(File path) {
             super(path, CardEdition.FN_GET_CODE);
+            this.isCustomEditions = false;
+        }
+
+        public Reader(File path, boolean isCustomEditions) {
+            super(path, CardEdition.FN_GET_CODE);
+            this.isCustomEditions = isCustomEditions;
         }
 
         @Override
@@ -488,7 +540,7 @@ public final class CardEdition implements Comparable<CardEdition> {
             /*
             The following pattern will match the WAR Japanese art entries,
             it should also match the Un-set and older alternate art cards
-            like Merseine from FEM (should the editions files ever be updated)
+            like Merseine from FEM.
              */
             //"(^(?<cnum>[0-9]+.?) )?((?<rarity>[SCURML]) )?(?<name>.*)$"
             /*  Ideally we'd use the named group above, but Android 6 and
@@ -501,7 +553,7 @@ public final class CardEdition implements Comparable<CardEdition> {
                     * name - grouping #5
              */
 //                "(^(.?[0-9A-Z]+.?))?(([SCURML]) )?(.*)$"
-                "(^(.?[0-9A-Z]+\\S?[A-Z]*)\\s)?(([SCURML])\\s)?(.*)$"
+                "(^(.?[0-9A-Z]+\\S?[A-Z]*)\\s)?(([SCURML])\\s)?([^@]*)( @(.*))?$"
             );
 
             ListMultimap<String, CardInSet> cardMap = ArrayListMultimap.create();
@@ -526,7 +578,8 @@ public final class CardEdition implements Comparable<CardEdition> {
                         String collectorNumber = matcher.group(2);
                         CardRarity r = CardRarity.smartValueOf(matcher.group(4));
                         String cardName = matcher.group(5);
-                        CardInSet cis = new CardInSet(cardName, collectorNumber, r);
+                        String artistName = matcher.group(7);
+                        CardInSet cis = new CardInSet(cardName, collectorNumber, r, artistName);
 
                         cardMap.put(sectionName, cis);
                     }
@@ -540,7 +593,7 @@ public final class CardEdition implements Comparable<CardEdition> {
 
             // parse tokens section
             if (contents.containsKey("tokens")) {
-                for(String line : contents.get("tokens")) {
+                for (String line : contents.get("tokens")) {
                     if (StringUtils.isBlank(line))
                         continue;
 
@@ -568,11 +621,11 @@ public final class CardEdition implements Comparable<CardEdition> {
                 res.mciCode = res.code2.toLowerCase();
             }
             res.scryfallCode = section.get("ScryfallCode");
-            if (res.scryfallCode == null){
+            if (res.scryfallCode == null) {
                 res.scryfallCode = res.code;
             }
             res.cardsLanguage = section.get("CardLang");
-            if (res.cardsLanguage == null){
+            if (res.cardsLanguage == null) {
                 res.cardsLanguage = "en";
             }
 
@@ -596,21 +649,28 @@ public final class CardEdition implements Comparable<CardEdition> {
 
             res.alias = section.get("alias");
             res.borderColor = BorderColor.valueOf(section.get("border", "Black").toUpperCase(Locale.ENGLISH));
-            String type  = section.get("type");
             Type enumType = Type.UNKNOWN;
-            if (null != type && !type.isEmpty()) {
-                try {
-                    enumType = Type.valueOf(type.toUpperCase(Locale.ENGLISH));
-                } catch (IllegalArgumentException ignored) {
-                    // ignore; type will get UNKNOWN
-                    System.err.println("Ignoring unknown type in set definitions: name: " + res.name + "; type: " + type);
+            if (this.isCustomEditions){
+                enumType = Type.CUSTOM_SET; // Forcing ThirdParty Edition Type to avoid inconsistencies
+            } else {
+                String type  = section.get("type");
+                if (null != type && !type.isEmpty()) {
+                    try {
+                        enumType = Type.valueOf(type.toUpperCase(Locale.ENGLISH));
+                    } catch (IllegalArgumentException ignored) {
+                        // ignore; type will get UNKNOWN
+                        System.err.println("Ignoring unknown type in set definitions: name: " + res.name + "; type: " + type);
+                    }
                 }
+
             }
             res.type = enumType;
             res.prerelease = section.get("Prerelease", null);
             res.boosterBoxCount = Integer.parseInt(section.get("BoosterBox", enumType.getBoosterBoxDefault()));
+            res.fatPackCount = Integer.parseInt(section.get("FatPack", enumType.getFatPackDefault()));
+            res.fatPackExtraSlots = section.get("FatPackExtraSlots", "");
 
-            switch(section.get("foil", "newstyle").toLowerCase()) {
+            switch (section.get("foil", "newstyle").toLowerCase()) {
                 case "notsupported":
                     res.foilType = FoilType.NOT_SUPPORTED;
                     break;
@@ -743,7 +803,7 @@ public final class CardEdition implements Comparable<CardEdition> {
                 @Override
                 public Map<String, SealedProduct.Template> readAll() {
                     Map<String, SealedProduct.Template> map = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
-                    for(CardEdition ce : Collection.this) {
+                    for (CardEdition ce : Collection.this) {
                         List<String> boosterTypes = Lists.newArrayList(ce.getAvailableBoosterTypes());
                         for (String type : boosterTypes) {
                             String setAffix = type.equals("Draft") ? "" : type;
@@ -766,37 +826,34 @@ public final class CardEdition implements Comparable<CardEdition> {
             };
         }
 
-        public CardEdition getEarliestEditionWithAllCards(CardPool cards) {
+        /* @leriomaggio
+          The original name "getEarliestEditionWithAllCards" was completely misleading, as it did
+          not reflect at all what the method really does (and what's the original goal).
+
+          What the method does is to return the **latest** (as in the most recent)
+          Card Edition among all the different "Original" sets (as in "first print") were cards
+          in the Pool can be found.
+          Therefore, nothing to do with an Edition "including" all the cards.
+         */
+        public CardEdition getTheLatestOfAllTheOriginalEditionsOfCardsIn(CardPool cards) {
             Set<String> minEditions = new HashSet<>();
-
-            SetPreference strictness = SetPreference.EarliestCoreExp;
-
+            CardDb db = StaticData.instance().getCommonCards();
             for (Entry<PaperCard, Integer> k : cards) {
-                PaperCard cp = StaticData.instance().getCommonCards().getCardFromEdition(k.getKey().getName(), strictness);
-                if( cp == null && strictness == SetPreference.EarliestCoreExp) {
-                    strictness = SetPreference.Earliest; // card is not found in core and expansions only (probably something CMD or C13)
-                    cp = StaticData.instance().getCommonCards().getCardFromEdition(k.getKey().getName(), strictness);
-                }
-                if ( cp == null )
-                    cp = k.getKey(); // it's unlikely, this code will ever run
-
+                // NOTE: Even if we do force a very stringent Policy on Editions
+                // (which only considers core, expansions, and reprint editions), the fetch method
+                // is flexible enough to relax the constraint automatically, if no card can be found
+                // under those conditions (i.e. ORIGINAL_ART_ALL_EDITIONS will be automatically used instead).
+                PaperCard cp = db.getCardFromEditions(k.getKey().getName(),
+                                                      CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY);
+                if (cp == null)   // it's unlikely, this code will ever run. Only Happens if card does not exist.
+                    cp = k.getKey();
                 minEditions.add(cp.getEdition());
             }
-
-            for(CardEdition ed : getOrderedEditions()) {
-                if(minEditions.contains(ed.getCode()))
+            for (CardEdition ed : getOrderedEditions()) {
+                if (minEditions.contains(ed.getCode()))
                     return ed;
             }
             return UNKNOWN;
-        }
-
-        public Date getEarliestDateWithAllCards(CardPool cardPool) {
-            CardEdition earliestSet = StaticData.instance().getEditions().getEarliestEditionWithAllCards(cardPool);
-
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(earliestSet.getDate());
-            cal.add(Calendar.DATE, 1);
-            return cal.getTime();
         }
     }
 
@@ -826,7 +883,7 @@ public final class CardEdition implements Comparable<CardEdition> {
         private static class CanMakeFatPack implements Predicate<CardEdition> {
             @Override
             public boolean apply(final CardEdition subject) {
-                return StaticData.instance().getFatPacks().contains(subject.getCode());
+                return subject.getFatPackCount() > 0;
             }
         }
 

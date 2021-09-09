@@ -1,0 +1,10 @@
+Name:Lumbering Lightshield
+ManaCost:1 W
+Types:Creature Illusion
+PT:1/4
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReveal | TriggerDescription$ When CARDNAME enters the battlefield, target opponent reveals a nonland card at random from their hand. It perpetually gains "This spell costs {1} more to cast."
+SVar:TrigReveal:DB$ Reveal | Random$ True | RevealValid$ Card.nonLand | RememberRevealed$ True | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ PerpetualRaiseCost | Name$ Lumbering Lightshield's Perpetual Effect | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:PerpetualRaiseCost:Mode$ RaiseCost | ValidCard$ Card.IsRemembered | Type$ Spell | Amount$ 1 | EffectZone$ All | Description$ This spell costs {1} more to cast.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:When Lumbering Lightshield enters the battelfield, target opponent reveals a nonland card at random from their hand. It perpetually gains "This spell costs {1} more to cast."

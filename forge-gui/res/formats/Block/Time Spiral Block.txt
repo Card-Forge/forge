@@ -3,4 +3,4 @@ Name:Time Spiral Block
 Type:Historic
 Subtype:Block
 Order:124
-Sets:FUT, PLC, TSP, TSB
+Sets:FUT, PLC, TSP

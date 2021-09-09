@@ -278,7 +278,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         params.put("Target", obj);
                         params.put("CounterType", counterType);
                         divrem++;
-                        if ((divrem == tgtObjects.size()) || (counterRemain == 1)) { counterAmount = counterRemain; }
+                        if (divrem == tgtObjects.size() || counterRemain == 1) { counterAmount = counterRemain; }
                         else {
                             counterAmount = pc.chooseNumber(sa, Localizer.getInstance().getMessage
                                     ("lblHowManyCountersThis", CardTranslation.getTranslatedName(gameCard.getName())),

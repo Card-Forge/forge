@@ -4,9 +4,8 @@ Types:Enchantment
 K:UpkeepCost:G
 T:Mode$ ChangesZone | ValidCard$ Island,Card.Blue | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigSacrificeBlue | TriggerDescription$ Whenever a player puts an Island or blue permanent onto the battlefield, that player sacrifices an Island or blue permanent.
 SVar:TrigSacrificeBlue:DB$ Sacrifice | Defined$ TriggeredCardController | SacValid$ Island,Card.Blue | SacMessage$ Island or a blue permanent
-T:Mode$ ChangesZone | ValidCard$ Swamp,Card.Black | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigSacrificeBlack | TriggerDescription$ Whenever a player puts an Swamp or black permanent onto the battlefield, they sacrifice an Swamp or black permanent.
+T:Mode$ ChangesZone | ValidCard$ Swamp,Card.Black | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigSacrificeBlack | TriggerDescription$ Whenever a player puts an Swamp or black permanent onto the battlefield, that player sacrifices a Swamp or black permanent.
 SVar:TrigSacrificeBlack:DB$ Sacrifice | Defined$ TriggeredCardController | SacValid$ Swamp,Card.Black | SacMessage$ Swamp or a black permanent
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
-SVar:Picture:http://www.wizards.com/global/images/magic/general/natures_wrath.jpg
 Oracle:At the beginning of your upkeep, sacrifice Nature's Wrath unless you pay {G}.\nWhenever a player puts an Island or blue permanent onto the battlefield, that player sacrifices an Island or blue permanent.\nWhenever a player puts a Swamp or black permanent onto the battlefield, that player sacrifices a Swamp or black permanent.

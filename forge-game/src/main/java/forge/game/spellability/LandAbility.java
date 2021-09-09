@@ -71,7 +71,7 @@ public class LandAbility extends Ability {
     @Override
     public void resolve() {
         getHostCard().setSplitStateToPlayAbility(this);
-        final Card result = getActivatingPlayer().playLandNoCheck(getHostCard());
+        final Card result = getActivatingPlayer().playLandNoCheck(getHostCard(), this);
 
         // increase mayplay used
         if (getMayPlay() != null) {
@@ -95,8 +95,7 @@ public class LandAbility extends Ability {
             Card source = sta.getHostCard();
             if (!source.equals(getHostCard())) {
                 sb.append(" by ");
-                if ((source.isEmblem() || source.getType().hasSubtype("Effect"))
-                        && source.getEffectSource() != null) {
+                if (source.isImmutable() && source.getEffectSource() != null) {
                     sb.append(source.getEffectSource());
                 } else {
                     sb.append(source);

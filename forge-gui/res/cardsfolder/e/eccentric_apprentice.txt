@@ -1,0 +1,11 @@
+Name:Eccentric Apprentice
+ManaCost:2 U
+Types:Creature Tiefling Wizard
+PT:2/2
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigVenture | TriggerDescription$ When CARDNAME enters the battlefield, venture into the dungeon. (Enter the first room or advance to the next room.)
+SVar:TrigVenture:DB$ Venture
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | CheckSVar$ X | Execute$ TrigAnimate | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, if you've completed a dungeon, up to one target creature becomes a Bird with base power and toughness 1/1 and flying until end of turn.
+SVar:TrigAnimate:DB$ Animate | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature | Power$ 1 | Toughness$ 1 | Types$ Bird | Keywords$ Flying
+SVar:X:PlayerCountPropertyYou$DungeonsCompleted
+Oracle:Flying\nWhen Eccentric Apprentice enters the battlefield, venture into the dungeon. (Enter the first room or advance to the next room.)\nAt the beginning of combat on your turn, if you've completed a dungeon, up to one target creature becomes a Bird with base power and toughness 1/1 and flying until end of turn.

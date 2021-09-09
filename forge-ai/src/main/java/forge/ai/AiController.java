@@ -138,11 +138,11 @@ public class AiController {
     public void setUseSimulation(boolean value) {
         this.useSimulation = value;
     }
-    
+
     public SpellAbilityPicker getSimulationPicker() {
         return simPicker;
     }
-    
+
     public Game getGame() {
         return game;
     }
@@ -253,7 +253,10 @@ public class AiController {
         }
         boolean rightapi = false;
         Player activatingPlayer = sa.getActivatingPlayer();
-        
+
+        // for xPaid stuff
+        card.setCastSA(sa);
+
         // Trigger play improvements
         for (final Trigger tr : card.getTriggers()) {
             // These triggers all care for ETB effects
@@ -386,7 +389,7 @@ public class AiController {
         final List<SpellAbility> spellAbility = Lists.newArrayList();
         for (final Card c : l) {
             for (final SpellAbility sa : c.getNonManaAbilities()) {
-                // Check if this AF is a Counterpsell
+                // Check if this AF is a Counterspell
                 if (sa.getApi() == ApiType.Counter) {
                     spellAbility.add(sa);
                 }
@@ -510,7 +513,6 @@ public class AiController {
             landList = unreflectedLands;
         }
 
-
         //try to skip lands that enter the battlefield tapped
         if (!nonLandsInHand.isEmpty()) {
             CardCollection nonTappedLands = new CardCollection();
@@ -534,6 +536,7 @@ public class AiController {
                     }
                 }
 
+                // TODO if this is the only source for a color we need badly prioritize it instead
                 if (foundTapped) {
                     continue;
                 }
@@ -680,18 +683,16 @@ public class AiController {
         return null;
     }
 
-    public boolean reserveManaSources(SpellAbility sa) {
-        return reserveManaSources(sa, PhaseType.MAIN2, false, false, null);
-    }
-
     public boolean reserveManaSourcesForNextSpell(SpellAbility sa, SpellAbility exceptForSa) {
         return reserveManaSources(sa, null, false, true, exceptForSa);
     }
 
+    public boolean reserveManaSources(SpellAbility sa) {
+        return reserveManaSources(sa, PhaseType.MAIN2, false, false, null);
+    }
     public boolean reserveManaSources(SpellAbility sa, PhaseType phaseType, boolean enemy) {
         return reserveManaSources(sa, phaseType, enemy, true, null);
     }
-
     public boolean reserveManaSources(SpellAbility sa, PhaseType phaseType, boolean enemy, boolean forNextSpell, SpellAbility exceptForThisSa) {
         ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(sa, true, 0);
         CardCollection manaSources = ComputerUtilMana.getManaSourcesToPayCost(cost, sa, player);
@@ -743,14 +744,22 @@ public class AiController {
             return AiPlayDecision.CantPlaySa;
         }
 
-        boolean xCost = sa.getPayCosts().hasXInAnyCostPart();
+        boolean xCost = sa.getPayCosts().hasXInAnyCostPart() || sa.getHostCard().hasStartOfKeyword("Strive");
         if (!xCost && !ComputerUtilCost.canPayCost(sa, player)) {
             // for most costs, it's OK to check if they can be paid early in order to avoid running a heavy API check
             // when the AI won't even be able to play the spell in the first place (even if it could afford it)
             return AiPlayDecision.CantAfford;
         }
 
+        // state needs to be switched here so API checks evaluate the right face
+        if (sa.getCardState() != null && !sa.getHostCard().isInPlay() && sa.getCardState().getStateName() == CardStateName.Modal) {
+            sa.getHostCard().setState(CardStateName.Modal, false);
+        }
         AiPlayDecision canPlay = canPlaySa(sa); // this is the "heaviest" check, which also sets up targets, defines X, etc.
+        if (sa.getCardState() != null && !sa.getHostCard().isInPlay() && sa.getCardState().getStateName() == CardStateName.Modal) {
+            sa.getHostCard().setState(CardStateName.Original, false);
+        }
+
         if (canPlay != AiPlayDecision.WillPlay) {
             return canPlay;
         }
@@ -810,10 +819,9 @@ public class AiController {
             if (!canPlay) {
                 return AiPlayDecision.CantPlayAi;
             }
-        }
-        else {
+        } else {
             Cost payCosts = sa.getPayCosts();
-            if(payCosts != null) {
+            if (payCosts != null) {
                 ManaCost mana = payCosts.getTotalMana();
                 if (mana != null) {
                     if (mana.countX() > 0) {
@@ -879,7 +887,7 @@ public class AiController {
     public boolean isNonDisabledCardInPlay(final String cardName) {
         for (Card card : player.getCardsIn(ZoneType.Battlefield)) {
             if (card.getName().equals(cardName)) {
-                // TODO - Better logic to detemine if a permanent is disabled by local effects
+                // TODO - Better logic to determine if a permanent is disabled by local effects
                 // currently assuming any permanent enchanted by another player
                 // is disabled and a second copy is necessary
                 // will need actual logic that determines if the enchantment is able
@@ -1747,10 +1755,10 @@ public class AiController {
     }
     
     public boolean doTrigger(SpellAbility spell, boolean mandatory) {
-        if (spell.getApi() != null)
-            return SpellApiToAi.Converter.get(spell.getApi()).doTriggerAI(player, spell, mandatory);
         if (spell instanceof WrappedAbility)
             return doTrigger(((WrappedAbility)spell).getWrappedAbility(), mandatory);
+        if (spell.getApi() != null)
+            return SpellApiToAi.Converter.get(spell.getApi()).doTriggerAI(player, spell, mandatory);
         if (spell.getPayCosts() == Cost.Zero && spell.getTargetRestrictions() == null) {
             // For non-converted triggers (such as Cumulative Upkeep) that don't have costs or targets to worry about
             return true;
@@ -1916,7 +1924,7 @@ public class AiController {
         if (sa.hasParam("AIMaxAmount")) {
             max = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("AIMaxAmount"), sa);
         }
-        switch(sa.getApi()) {
+        switch (sa.getApi()) {
             case TwoPiles:
                 // TODO: improve AI
                 Card biggest = null;
@@ -2013,7 +2021,7 @@ public class AiController {
 
         final CardCollection library = new CardCollection(in);
         CardLists.shuffle(library);
-    
+
         // remove all land, keep non-basicland in there, shuffled
         CardCollection land = CardLists.filter(library, CardPredicates.Presets.LANDS);
         for (Card c : land) {
@@ -2021,7 +2029,7 @@ public class AiController {
                 library.remove(c);
             }
         }
-    
+
         try {
             // mana weave, total of 7 land
             // The Following have all been reduced by 1, to account for the
@@ -2038,19 +2046,14 @@ public class AiController {
             System.err.println("Error: cannot smooth mana curve, not enough land");
             return in;
         }
-    
+
         // add the rest of land to the end of the deck
         for (int i = 0; i < land.size(); i++) {
             if (!library.contains(land.get(i))) {
                 library.add(land.get(i));
             }
         }
-    
-        // check
-        for (int i = 0; i < library.size(); i++) {
-            System.out.println(library.get(i));
-        }
-    
+
         return library;
     } // smoothComputerManaCurve()
 
@@ -2218,13 +2221,13 @@ public class AiController {
         return null;
     }
 
-    public CardCollectionView chooseSacrificeType(String type, SpellAbility ability, int amount) {
+    public CardCollectionView chooseSacrificeType(String type, SpellAbility ability, int amount, final CardCollectionView exclude) {
         if (simPicker != null) {
-            return simPicker.chooseSacrificeType(type, ability, amount);
+            return simPicker.chooseSacrificeType(type, ability, amount, exclude);
         }
-        return ComputerUtil.chooseSacrificeType(player, type, ability, ability.getTargetCard(), amount);
+        return ComputerUtil.chooseSacrificeType(player, type, ability, ability.getTargetCard(), amount, exclude);
     }
-    
+
     private boolean checkAiSpecificRestrictions(final SpellAbility sa) {
         // AI-specific restrictions specified as activation parameters in spell abilities
 
@@ -2276,5 +2279,5 @@ public class AiController {
         // AI logic for choosing which replacement effect to apply happens here.
         return Iterables.getFirst(list, null);
     }
-    
+
 }

@@ -5,7 +5,7 @@ PT:7/6
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFight | TriggerDescription$ When CARDNAME enters the battlefield, it fights up to one target creature you don't control.
 SVar:TrigFight:DB$ Fight | Defined$ TriggeredCardLKICopy | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control | TargetMin$ 0 | TargetMax$ 1
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ Whenever CARDNAME attacks, destroy target artifact or enchantment defending player controls.
-SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact.DefenderCtrl,Enchantment.DefenderCtrl | TgtPrompt$ Select target artifact or enchantment defending player controls
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact.ControlledBy TriggeredDefendingPlayer,Enchantment.ControlledBy TriggeredDefendingPlayer | TgtPrompt$ Select target artifact or enchantment defending player controls
 A:AB$ ChangeZone | Cost$ 1 G | ValidTgts$ Human.YouCtrl | TgtPrompt$ Choose target Human you control | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBPump | SpellDescription$ Return target Human you control to its owner's hand. CARDNAME gains indestructible until end of turn.
 SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Indestructible
 Oracle:When Kogla, the Titan Ape enters the battlefield, it fights up to one target creature you don't control.\nWhenever Kogla attacks, destroy target artifact or enchantment defending player controls.\n{1}{G}: Return target Human you control to its owner's hand. Kogla gains indestructible until end of turn.

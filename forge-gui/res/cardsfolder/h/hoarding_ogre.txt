@@ -1,0 +1,11 @@
+Name:Hoarding Ogre
+ManaCost:3 R
+Types:Creature Ogre
+PT:3/3
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigRollDice | TriggerDescription$ Whenever CARDNAME attacks, ABILITY
+SVar:TrigRollDice:DB$ RollDice | Sides$ 20 | ResultSubAbilities$ 1-9:Token1,10-19:Token2,20:Token3 | SpellDescription$ roll a d20.
+SVar:Token1:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SpellDescription$ 1—9 VERT Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+SVar:Token2:DB$ Token | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SpellDescription$ 10—19 VERT Create two Treasure tokens.
+SVar:Token3:DB$ Token | TokenAmount$ 3 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SpellDescription$ 20 VERT Create three Treasure tokens.
+DeckHas:Ability$Token
+Oracle:Whenever Hoarding Ogre attacks, roll a d20.\n1—9 | Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")\n10—19 | Create two Treasure tokens.\n20 | Create three Treasure tokens.

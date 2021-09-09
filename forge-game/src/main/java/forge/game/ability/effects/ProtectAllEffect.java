@@ -92,7 +92,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
 
             for (final Card tgtC : list) {
                 if (tgtC.isInPlay()) {
-                    tgtC.addChangedCardKeywords(gainsKWList, null, false, false, timestamp, true);
+                    tgtC.addChangedCardKeywords(gainsKWList, null, false, false, timestamp, 0, true);
 
                     if (!"Permanent".equals(sa.getParam("Duration"))) {
                         // If not Permanent, remove protection at EOT
@@ -102,7 +102,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
                             @Override
                             public void run() {
                                 if (tgtC.isInPlay()) {
-                                    tgtC.removeChangedCardKeywords(timestamp, true);
+                                    tgtC.removeChangedCardKeywords(timestamp, 0, true);
                                 }
                             }
                         };
@@ -121,7 +121,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
             final List<Player> playerList = AbilityUtils.getDefinedPlayers(host, players, sa);
             for (final Player player : playerList) {
                 for (final String gain : gains) {
-                    player.addChangedKeywords(ImmutableList.of("Protection from " + gain), ImmutableList.of(), timestamp);
+                    player.addChangedKeywords(ImmutableList.of("Protection from " + gain), ImmutableList.of(), timestamp, 0);
                 }
 
                 if (!"Permanent".equals(sa.getParam("Duration"))) {
@@ -131,7 +131,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
 
                         @Override
                         public void run() {
-                            player.removeChangedKeywords(timestamp);
+                            player.removeChangedKeywords(timestamp, 0);
                         }
                     };
                     addUntilCommand(sa, revokeCommand);

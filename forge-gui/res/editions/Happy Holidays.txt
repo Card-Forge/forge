@@ -7,5 +7,5 @@ Border=Silver
 ScryfallCode=HHO
 
 [cards]
-6 R Fruitcake Elemental
-9 R Season's Beatings
+6 R Fruitcake Elemental @Darrell Riche
+9 R Season's Beatings @Kev Walker

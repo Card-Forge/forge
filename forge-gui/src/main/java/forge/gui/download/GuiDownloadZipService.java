@@ -1,12 +1,13 @@
 package forge.gui.download;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import com.esotericsoftware.minlog.Log;
+import com.google.common.io.Files;
+import forge.gui.FThreads;
+import forge.gui.GuiBase;
+import forge.gui.interfaces.IProgressBar;
+import forge.util.FileUtil;
+
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.Charset;
@@ -15,14 +16,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-
-import com.esotericsoftware.minlog.Log;
-import com.google.common.io.Files;
-
-import forge.gui.FThreads;
-import forge.gui.GuiBase;
-import forge.gui.interfaces.IProgressBar;
-import forge.util.FileUtil;
 
 public class GuiDownloadZipService extends GuiDownloadService {
     private final String name, desc, sourceUrl, destFolder, deleteFolder;
@@ -66,7 +59,8 @@ public class GuiDownloadZipService extends GuiDownloadService {
             FThreads.invokeInEdtNowOrLater(new Runnable() {
                 @Override
                 public void run() {
-                    progressBar.setDescription(filesExtracted + " " + desc + " extracted");
+                    if (progressBar != null)
+                        progressBar.setDescription(filesExtracted + " " + desc + " extracted");
                     finish();
                 }
             });
@@ -85,6 +79,8 @@ public class GuiDownloadZipService extends GuiDownloadService {
     public String download(final String filename) {
         GuiBase.getInterface().preventSystemSleep(true); //prevent system from going into sleep mode while downloading
 
+        if (progressBar == null)
+            return "";
         progressBar.reset();
         progressBar.setPercentMode(true);
         progressBar.setDescription("Downloading " + desc);
@@ -128,7 +124,8 @@ public class GuiDownloadZipService extends GuiDownloadService {
                 if (cancel) { break; }
 
                 total += count;
-                progressBar.setValue((int)(100 * total / contentLength));
+                if (progressBar != null)
+                    progressBar.setValue((int)(100 * total / contentLength));
                 output.write(data, 0, count);
             }
 
@@ -161,8 +158,10 @@ public class GuiDownloadZipService extends GuiDownloadService {
                 final File deleteDir = new File(deleteFolder);
                 if (deleteDir.exists()) {
                     //attempt to delete previous res directory if to be rebuilt
-                    progressBar.reset();
-                    progressBar.setDescription("Deleting old " + desc + "...");
+                    if (progressBar != null) {
+                        progressBar.reset();
+                        progressBar.setDescription("Deleting old " + desc + "...");
+                    }
                     if (deleteFolder.equals(destFolder)) { //move zip file to prevent deleting it
                         final String oldZipFilename = zipFilename;
                         zipFilename = deleteDir.getParentFile().getAbsolutePath() + File.separator + "temp.zip";
@@ -181,11 +180,12 @@ public class GuiDownloadZipService extends GuiDownloadService {
             }
             final Enumeration<? extends ZipEntry> entries = zipFile.entries();
 
-            progressBar.reset();
-            progressBar.setPercentMode(true);
-            progressBar.setDescription("Extracting " + desc);
-            progressBar.setMaximum(zipFile.size());
-
+            if (progressBar != null) {
+                progressBar.reset();
+                progressBar.setPercentMode(true);
+                progressBar.setDescription("Extracting " + desc);
+                progressBar.setMaximum(zipFile.size());
+            }
             FileUtil.ensureDirectoryExists(destFolder);
 
             int count = 0;
@@ -199,15 +199,18 @@ public class GuiDownloadZipService extends GuiDownloadService {
                     final String path = destFolder + File.separator + entry.getName();
                     if (entry.isDirectory()) {
                         new File(path).mkdir();
-                        progressBar.setValue(++count);
+                        if (progressBar != null)
+                            progressBar.setValue(++count);
                         continue;
                     }
                     copyInputStream(zipFile.getInputStream(entry), path);
-                    progressBar.setValue(++count);
+                    if (progressBar != null)
+                        progressBar.setValue(++count);
                     filesExtracted++;
                 }
                 catch (final Exception e) { //don't quit out completely if an entry is not UTF-8
-                    progressBar.setValue(++count);
+                    if (progressBar != null)
+                        progressBar.setValue(++count);
                     failedCount++;
                 }
             }

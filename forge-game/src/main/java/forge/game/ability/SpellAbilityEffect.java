@@ -13,7 +13,6 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
 
 import forge.GameCommand;
-import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -127,7 +126,7 @@ public abstract class SpellAbilityEffect {
             int amount = AbilityUtils.calculateAmount(sa.getHostCard(), svar, sa);
             sb.append(" ");
             sb.append(TextUtil.enclosedParen(TextUtil.concatNoSpace(svar,"=",String.valueOf(amount))));
-        } else{
+        } else {
             if (sa.costHasManaX()) {
                 int amount = sa.getXManaCostPaid() == null ? 0 : sa.getXManaCostPaid();
                 sb.append(" ");
@@ -457,25 +456,19 @@ public abstract class SpellAbilityEffect {
         final Card eff = new Card(game.nextCardId(), game);
         eff.setTimestamp(game.getNextTimestamp());
         eff.setName(name);
+        eff.setColor(hostCard.determineColor().getColor());
         // if name includes emblem then it should be one
-        eff.addType(name.startsWith("Emblem") ? "Emblem" : "Effect");
-        // add Planeswalker types into Emblem for fun
-        if (name.startsWith("Emblem") && hostCard.isPlaneswalker()) {
-            for (final String type : hostCard.getType().getSubtypes()) {
-                if (CardType.isAPlaneswalkerType(type)) {
-                    eff.addType(type);
-                }
-            }
+        if (name.startsWith("Emblem")) {
+            eff.setEmblem(true);
+            // Emblem needs to be colorless
+            eff.setColor(MagicColor.COLORLESS);
         }
+
         eff.setOwner(controller);
         eff.setSVars(sa.getSVars());
 
         eff.setImageKey(image);
-        if (eff.getType().hasType(CardType.CoreType.Emblem)) {
-            eff.setColor(MagicColor.COLORLESS);
-        } else {
-            eff.setColor(hostCard.determineColor().getColor());
-        }
+
         eff.setImmutable(true);
         eff.setEffectSource(sa);
 
@@ -725,7 +718,7 @@ public abstract class SpellAbilityEffect {
         final Game game = host.getGame();
         final String duration = sa.getParam("Duration");
         // in case host was LKI or still resolving
-        if (host.isLKI() || host.getZone().is(ZoneType.Stack)) {
+        if (host.isLKI() || host.getZone() == null || host.getZone().is(ZoneType.Stack)) {
             host = game.getCardState(host);
         }
 
@@ -760,10 +753,10 @@ public abstract class SpellAbilityEffect {
         } else if ("UntilUntaps".equals(duration)) {
             host.addUntapCommand(until);
         } else if ("UntilUnattached".equals(duration)) {
-            sa.getHostCard().addUnattachCommand(until);
+            host.addUnattachCommand(until);
         } else if ("UntilFacedown".equals(duration)) {
-            sa.getHostCard().addFacedownCommand(until);
-        }else {
+            host.addFacedownCommand(until);
+        } else {
             game.getEndOfTurn().addUntil(until);
         }
     }

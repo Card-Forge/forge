@@ -6,6 +6,7 @@ K:Deathtouch
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetToughness$ X | Description$ CARDNAME's toughness is equal to the number of Knights you control.
 SVar:X:Count$Valid Knight.YouCtrl
 SVar:BuffedBy:Knight
+SVar:NoZeroToughnessAI:True
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target Knight you control gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)
 SVar:TrigPump:DB$ Pump | ValidTgts$ Knight.YouCtrl+Other | TgtPrompt$ Select another target Knight you control | KW$ Indestructible
 DeckHints:Type$Knight

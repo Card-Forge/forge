@@ -1,0 +1,11 @@
+Name:Plaguecrafter's Familiar
+ManaCost:1 B
+Types:Creature Rat
+PT:1/1
+K:Deathtouch
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters the battlefield, choose a creature card in your hand. It perpetually gains deathtouch.
+SVar:TrigChoose:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Card.Creature+YouOwn | ChoiceTitle$ Choose a creature card in your hand | Amount$ 1 | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualDeathtouch | Name$ Plaguecrafter's Familiar's Perpetual Effect | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:PerpetualDeathtouch:Mode$ Continuous | Affected$ Card.ChosenCard | AddKeyword$ Deathtouch | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This card perpetually gains deathtouch.
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+Oracle:Deathtouch\nWhen Plaguecrafter's Familiar enters the battlefield, choose a creature card in your hand. It perpetually gains deathtouch.

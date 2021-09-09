@@ -209,7 +209,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
     public final String toString() {
         if (hasParam("Description") && !this.isSuppressed()) {
             String currentName;
-            if (this.isIntrinsic() && !this.getHostCard().isMutated() && cardState != null) {
+            if (this.isIntrinsic() && cardState != null && cardState.getCard() == getHostCard()) {
                 currentName = cardState.getName();
             }
             else {
@@ -456,7 +456,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
      */
     public final boolean checkConditions() {
         final Player controller = getHostCard().getController();
-        final Game game = controller.getGame();
+        final Game game = getHostCard().getGame();
         final PhaseHandler ph = game.getPhaseHandler();
 
         if (getHostCard().isPhasedOut()) {
@@ -585,6 +585,14 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             }
         }
 
+        if (hasParam("ClassLevel")) {
+            final int level = this.hostCard.getClassLevel();
+            final int levelMin = Integer.parseInt(getParam("ClassLevel"));
+            if (level < levelMin) {
+                return false;
+            }
+        }
+
         if (hasParam("CheckSVar")) {
             final int sVar = AbilityUtils.calculateAmount(this.hostCard, getParam("CheckSVar"), this);
             String comparator = "GE1";
@@ -689,7 +697,6 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
     public Set<StaticAbilityLayer> getLayers() {
         return layers;
     }
-
 
     public int getMayPlayTurn() {
         return mayPlayTurn;

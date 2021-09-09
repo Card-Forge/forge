@@ -3,7 +3,7 @@ ManaCost:3 U
 Types:Creature Human Pirate
 PT:2/2
 T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | Execute$ TrigGainControl | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, you may gain control of target artifact defending player controls. If you do, CARDNAME assigns no combat damage this turn.
-SVar:TrigGainControl:DB$ GainControl | ValidTgts$ Artifact.DefenderCtrl | TgtPrompt$ Select target artifact defending player controls | SubAbility$ DBNoCombatDamage
+SVar:TrigGainControl:DB$ GainControl | ValidTgts$ Artifact.ControlledBy TriggeredDefendingPlayer | TgtPrompt$ Select target artifact defending player controls | SubAbility$ DBNoCombatDamage
 SVar:DBNoCombatDamage:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME assigns no combat damage
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kukemssa_pirates.jpg
 Oracle:Whenever Kukemssa Pirates attacks and isn't blocked, you may gain control of target artifact defending player controls. If you do, Kukemssa Pirates assigns no combat damage this turn.

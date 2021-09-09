@@ -8,7 +8,7 @@ public class PuzzleAchievements extends AchievementCollection {
     }
 
     @Override
-    protected void addSharedAchivements() {
+    protected void addSharedAchievements() {
         //prevent including shared achievements
     }
 

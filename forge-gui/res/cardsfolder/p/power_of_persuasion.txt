@@ -1,0 +1,11 @@
+Name:Power of Persuasion
+ManaCost:2 U
+Types:Sorcery
+A:SP$ Pump | Cost$ 2 U | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an oppoenent controls | SubAbility$ DBRollDice| SpellDescription$ Choose target creature an opponent controls,
+SVar:DBRollDice:DB$ RollDice | Sides$ 20 | ResultSubAbilities$ 1-9:DBHand,10-19:DBLibrary,20:DBControl | SpellDescription$ then roll a d20.
+SVar:DBHand:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ ParentTarget | SpellDescription$ 1—9 VERT Return it to its owner's hand.
+SVar:DBLibrary:DB$ GenericChoice | Defined$ TargetedController | ShowCurrentCard$ Targeted | Choices$ DBTop,DBBottom | SpellDescription$ 10—19 VERT Its owner puts it on the top or bottom of their library.
+SVar:DBTop:DB$ ChangeZone | Defined$ Targeted | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0
+SVar:DBBottom:DB$ ChangeZone | Defined$ Targeted | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1
+SVar:DBControl:DB$ GainControl | Defined$ Targeted | LoseControl$ UntilTheEndOfYourNextTurn | SpellDescription$ 20 VERT Gain control of it until the end of your next turn.
+Oracle:Choose target creature an opponent controls, then roll a d20.\n1—9 | Return it to its owner's hand.\n10—19 | Its owner puts it on the top or bottom of their library.\n20 | Gain control of it until the end of your next turn.

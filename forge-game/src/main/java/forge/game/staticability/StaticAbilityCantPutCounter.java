@@ -7,7 +7,6 @@ import forge.game.player.Player;
 public class StaticAbilityCantPutCounter {
 
     public static boolean applyCantPutCounter(final StaticAbility stAb, final Card card, final CounterType type) {
-
         if (stAb.hasParam("CounterType")) {
             CounterType t = CounterType.getType(stAb.getParam("CounterType"));
             if (t != null && !type.equals(t)) {
@@ -26,7 +25,6 @@ public class StaticAbilityCantPutCounter {
     }
 
     public static boolean applyCantPutCounter(final StaticAbility stAb, final Player player, final CounterType type) {
-
         if (stAb.hasParam("CounterType")) {
             CounterType t = CounterType.getType(stAb.getParam("CounterType"));
             if (t != null && !type.equals(t)) {

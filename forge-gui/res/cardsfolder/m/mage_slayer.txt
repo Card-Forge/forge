@@ -3,7 +3,7 @@ ManaCost:1 R G
 Types:Artifact Equipment
 K:Equip:3
 T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigDamage | TriggerDescription$ Whenever equipped creature attacks, it deals damage equal to its power to defending player.
-SVar:TrigDamage:DB$ DealDamage | Defined$ DefendingPlayer | DamageSource$ TriggeredAttackerLKICopy | NumDmg$ X
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredDefendingPlayer | DamageSource$ TriggeredAttackerLKICopy | NumDmg$ X
 SVar:X:TriggeredAttacker$CardPower
 S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddSVar$ AE
 SVar:AE:SVar:HasAttackEffect:TRUE

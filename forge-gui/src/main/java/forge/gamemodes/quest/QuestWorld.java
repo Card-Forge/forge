@@ -231,15 +231,10 @@ public class QuestWorld implements Comparable<QuestWorld>{
      */
     @Override
     public int compareTo(QuestWorld other) {
-        if (null == other) {
+        if (null == other)
             return 1;
-        }
-        if (name == other.name) {
-            return 0;
-        }
-        if (null == name) {
-            return -1;
-        }
+        if (this.name == null)
+            return -1;  // dummy, no format!
         return name.compareTo(other.name);
     }
 

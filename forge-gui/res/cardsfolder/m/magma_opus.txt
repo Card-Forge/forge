@@ -5,6 +5,6 @@ A:SP$ DealDamage | Cost$ 6 U R | ValidTgts$ Creature,Player,Planeswalker | TgtPr
 SVar:DBTap:DB$ Tap | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Permanent | TgtPrompt$ Select target permanent to tap | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenScript$ ur_4_4_elemental | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 2
-A:AB$ Token | Cost$ UR UR Discard<1/CARDNAME> | ActivationZone$ Hand | TokenScript$ c_a_treasure_sac | SpellDescription$ Create a Treasure token.
+A:AB$ Token | Cost$ UR UR Discard<1/CARDNAME> | ActivationZone$ Hand | TokenScript$ c_a_treasure_sac | AILogic$ AlwaysOnDiscard | SpellDescription$ Create a Treasure token.
 DeckHas:Ability$Token
 Oracle:Magma Opus deals 4 damage divided as you choose among any number of targets. Tap two target permanents. Create a 4/4 blue and red Elemental creature token. Draw two cards.\n{U/R}{U/R}, Discard Magma Opus: Create a Treasure token.

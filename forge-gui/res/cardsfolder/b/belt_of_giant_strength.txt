@@ -1,0 +1,7 @@
+Name:Belt of Giant Strength
+ManaCost:1 G
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | SetPower$ 10 | SetToughness$ 10 | Description$ Equipped creature has base power and toughness 10/10.
+K:Equip:10:::ReduceCost$ X:This ability costs {X} less to activate, where X is the power of the creature it targets.
+SVar:X:Targeted$CardPower
+Oracle:Equipped creature has base power and toughness 10/10.\nEquip {10}. This ability costs {X} less to activate, where X is the power of the creature it targets.

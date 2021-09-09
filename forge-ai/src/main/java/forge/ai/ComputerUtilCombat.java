@@ -89,7 +89,7 @@ public class ComputerUtilCombat {
                 return ComputerUtilCombat.canAttackNextTurn(attacker, input);
             }
         });
-    } // canAttackNextTurn(Card)
+    }
 
     /**
      * <p>
@@ -175,7 +175,6 @@ public class ComputerUtilCombat {
 
         return n;
     }
-
 
     // Returns the damage an unblocked attacker would deal
     /**
@@ -291,14 +290,12 @@ public class ComputerUtilCombat {
      * @return a int.
      */
     public static int lifeThatWouldRemain(final Player ai, final Combat combat) {
-
         int damage = 0;
 
         final List<Card> attackers = combat.getAttackersOf(ai);
         final List<Card> unblocked = Lists.newArrayList();
 
         for (final Card attacker : attackers) {
-
             final List<Card> blockers = combat.getBlockers(attacker);
 
             if ((blockers.size() == 0)
@@ -333,7 +330,6 @@ public class ComputerUtilCombat {
      * @return a int.
      */
     public static int resultingPoison(final Player ai, final Combat combat) {
-
         // ai can't get poison counters, so the value can't change
         if (!ai.canReceiveCounters(CounterEnumType.POISON)) {
             return ai.getPoisonCounters();
@@ -345,7 +341,6 @@ public class ComputerUtilCombat {
         final List<Card> unblocked = Lists.newArrayList();
 
         for (final Card attacker : attackers) {
-
             final List<Card> blockers = combat.getBlockers(attacker);
 
             if ((blockers.size() == 0)
@@ -394,7 +389,6 @@ public class ComputerUtilCombat {
     public static boolean lifeInDanger(final Player ai, final Combat combat) {
         return lifeInDanger(ai, combat, 0);
     }
-
     public static boolean lifeInDanger(final Player ai, final Combat combat, final int payment) {
         // life in danger only cares about the player's life. Not Planeswalkers' life
         if (ai.cantLose() || combat == null || combat.getAttackingPlayer() == ai) {
@@ -418,7 +412,6 @@ public class ComputerUtilCombat {
         final List<Card> threateningCommanders = getLifeThreateningCommanders(ai,combat);
 
         for (final Card attacker : attackers) {
-
             final List<Card> blockers = combat.getBlockers(attacker);
 
             if (blockers.isEmpty()) {
@@ -472,7 +465,6 @@ public class ComputerUtilCombat {
      * @return a boolean.
      */
     public static boolean wouldLoseLife(final Player ai, final Combat combat) {
-
         return (ComputerUtilCombat.lifeThatWouldRemain(ai, combat) < ai.getLife());
     }
 
@@ -489,7 +481,6 @@ public class ComputerUtilCombat {
     public static boolean lifeInSeriousDanger(final Player ai, final Combat combat) {
         return lifeInSeriousDanger(ai, combat, 0);
     }
-
     public static boolean lifeInSeriousDanger(final Player ai, final Combat combat, final int payment) {
         // life in danger only cares about the player's life. Not about a Planeswalkers life
         if (ai.cantLose() || combat == null) {
@@ -502,7 +493,6 @@ public class ComputerUtilCombat {
         final List<Card> attackers = combat.getAttackersOf(ai);
 
         for (final Card attacker : attackers) {
-
             final List<Card> blockers = combat.getBlockers(attacker);
 
             if (blockers.isEmpty()) {
@@ -510,7 +500,7 @@ public class ComputerUtilCombat {
                     return true;
                 }
             }
-            if(threateningCommanders.contains(attacker)) {
+            if (threateningCommanders.contains(attacker)) {
                 return true;
             }
         }
@@ -704,7 +694,6 @@ public class ComputerUtilCombat {
      * @return a boolean.
      */
     public static boolean combatantWouldBeDestroyed(Player ai, final Card combatant, Combat combat) {
-
         if (combat.isAttacking(combatant)) {
             return ComputerUtilCombat.attackerWouldBeDestroyed(ai, combatant, combat);
         }
@@ -1268,8 +1257,9 @@ public class ComputerUtilCombat {
                 continue;
             }
 
+            sa.setActivatingPlayer(source.getController());
+
             if (sa.hasParam("Cost")) {
-                sa.setActivatingPlayer(source.getController());
                 if (!CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa)) {
                     continue;
                 }
@@ -1475,7 +1465,6 @@ public class ComputerUtilCombat {
                 toughness -= predictDamageTo(attacker, damage, 0, source, false);
                 continue;
             } else if (ApiType.Pump.equals(sa.getApi())) {
-
                 if (sa.hasParam("Cost")) {
                     if (!CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa)) {
                         continue;
@@ -1508,7 +1497,6 @@ public class ComputerUtilCombat {
                     toughness += AbilityUtils.calculateAmount(source, bonus, sa);
                 }
             } else if (ApiType.PumpAll.equals(sa.getApi())) {
-
                 if (sa.hasParam("Cost")) {
                     if (!CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa)) {
                         continue;
@@ -1843,7 +1831,6 @@ public class ComputerUtilCombat {
     }
 
     public static boolean canDestroyBlockerBeforeFirstStrike(final Card blocker, final Card attacker, final boolean withoutAbilities) {
-
     	if (attacker.isEquippedBy("Godsend")) {
             return true;
         }
@@ -1854,7 +1841,6 @@ public class ComputerUtilCombat {
 
         int flankingMagnitude = 0;
         if (attacker.hasKeyword(Keyword.FLANKING) && !blocker.hasKeyword(Keyword.FLANKING)) {
-
             flankingMagnitude = attacker.getAmountOfKeyword(Keyword.FLANKING);
 
             if (flankingMagnitude >= blocker.getNetToughness()) {
@@ -2232,7 +2218,6 @@ public class ComputerUtilCombat {
         return killDamage;
     }
 
-
     /**
      * <p>
      * predictDamage.
@@ -2267,7 +2252,7 @@ public class ComputerUtilCombat {
                 if (!re.matchesValidParam("ValidSource", source)) {
                     continue;
                 }
-                if (!re.matchesValidParam("ValidTarget", source)) {
+                if (!re.matchesValidParam("ValidTarget", target)) {
                     continue;
                 }
                 if (re.hasParam("IsCombat")) {
@@ -2305,8 +2290,6 @@ public class ComputerUtilCombat {
      *            a boolean.
      * @return a int.
      */
-    // This function helps the AI calculate the actual amount of damage an
-    // effect would deal
     public final static int predictDamageTo(final Card target, final int damage, final Card source, final boolean isCombat) {
         return predictDamageTo(target, damage, 0, source, isCombat);
     }

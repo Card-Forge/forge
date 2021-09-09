@@ -24,4 +24,3 @@ public class GameDrawEffect extends SpellAbilityEffect {
     }
 
 }
-

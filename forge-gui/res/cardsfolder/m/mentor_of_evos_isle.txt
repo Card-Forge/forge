@@ -1,0 +1,11 @@
+Name:Mentor of Evos Isle
+ManaCost:2 U
+Types:Creature Bird Wizard
+PT:2/1
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters the battlefield, choose a creature card in your hand. It perpetually gains flying.
+SVar:TrigChoose:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Card.Creature+YouOwn | ChoiceTitle$ Choose a creature card in your hand | Amount$ 1 | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualFlying | Name$ Mentor of Evos Isle's Perpetual Effect | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:PerpetualFlying:Mode$ Continuous | Affected$ Card.ChosenCard | AddKeyword$ Flying | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This card perpetually gains flying.
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+Oracle:Flying\nWhen Mentor of Evos Isle enters the battlefield, choose a creature card in your hand. It perpetually gains flying.

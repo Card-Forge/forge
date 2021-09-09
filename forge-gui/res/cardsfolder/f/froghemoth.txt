@@ -1,0 +1,16 @@
+Name:Froghemoth
+ManaCost:3 G G
+Types:Creature Frog Horror
+PT:4/4
+K:Trample
+K:Haste
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, exile up to that many target cards from their graveyard. Put a +1/+1 counter on CARDNAME for each creature card exiled this way. You gain 1 life for each noncreature card exiled this way.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card.DefenderCtrl | ChangeNum$ X | Hidden$ True | RememberChanged$ True | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ Y | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ Z | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:TriggerCount$DamageAmount
+SVar:Y:Remembered$Valid Creature
+SVar:Z:Remembered$Valid Card.nonCreature
+DeckHas:Ability$LifeGain & Ability$Counters
+Oracle:Trample, haste\nWhenever Froghemoth deals combat damage to a player, exile up to that many target cards from their graveyard. Put a +1/+1 counter on Froghemoth for each creature card exiled this way. You gain 1 life for each noncreature card exiled this way.

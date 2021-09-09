@@ -1,0 +1,25 @@
+[metadata]
+Title=Giant Control
+Difficulty=very hard
+Description=This deck tries to sweep the board and overpower you with giants.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 4 Giant Control
+[Main]
+4 Beanstalk Giant|ELD|1
+2 Castle Ardenvale|ELD|1
+4 Edgewall Innkeeper|ELD
+4 Fabled Passage|ELD|1
+12 Forest|ELD|1
+4 Giant Killer|ELD|1
+1 Kenrith, the Returned King|ELD
+4 Lovestruck Beast|ELD|1
+8 Plains|ELD|4
+2 Questing Beast|ELD|1
+4 Realm-Cloaked Giant|ELD|1
+4 Rosethorn Acolyte|ELD|1
+4 Spinning Wheel|ELD
+1 The Circle of Loyalty|ELD|1
+2 The Great Henge|ELD|1
+[Sideboard]
+

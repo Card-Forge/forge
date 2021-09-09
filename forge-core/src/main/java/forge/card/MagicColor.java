@@ -84,7 +84,7 @@ public final class MagicColor {
     }
 
     public static String toShortString(final byte color) {
-        switch (color){
+        switch (color) {
             case WHITE: return "W";
             case BLUE:  return "U";
             case BLACK: return "B";
@@ -95,7 +95,7 @@ public final class MagicColor {
     }
 
     public static String toLongString(final byte color) {
-        switch (color){
+        switch (color) {
             case WHITE: return Constant.WHITE;
             case BLUE:  return Constant.BLUE;
             case BLACK: return Constant.BLACK;

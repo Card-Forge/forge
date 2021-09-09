@@ -3,7 +3,7 @@ package forge.game.event;
 import forge.game.card.Card;
 
 public class GameEventCardDamaged extends GameEvent {
-    
+
     public enum DamageType {
         Normal, 
         M1M1Counters, 

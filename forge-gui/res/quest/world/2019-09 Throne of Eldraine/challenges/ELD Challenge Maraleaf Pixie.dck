@@ -1,0 +1,21 @@
+[quest]
+id=ELD Challenge: Maraleaf Pixie
+OpponentName=The Pixies
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:ELD
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Title=Maraleaf Pixie
+Difficulty=easy
+Description=Neither hostile nor friendly, pixies flit through the forest seeking the treasures of the wilds.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD Challenge: Maraleaf Pixie
+[Main]
+30 Maraleaf Pixie|ELD
+20 Thornwood Falls|ELD
+10 Oko, the Trickster|ELD

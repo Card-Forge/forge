@@ -555,9 +555,13 @@ public class ComputerUtil {
         return -1;
     }
 
-    public static CardCollection chooseSacrificeType(final Player ai, final String type, final SpellAbility ability, final Card target, final int amount) {
+    public static CardCollection chooseSacrificeType(final Player ai, final String type, final SpellAbility ability, final Card target, final int amount, final CardCollectionView exclude) {
         final Card source = ability.getHostCard();
         CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, ability);
+
+        if (exclude != null) {
+            typeList.removeAll(exclude);
+        }
 
         typeList = CardLists.filter(typeList, CardPredicates.canBeSacrificedBy(ability));
 
@@ -736,6 +740,7 @@ public class ComputerUtil {
         CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), activate.getController(), activate, sa);
 
         // don't bounce the card we're pumping
+        // TODO unless it can be used as a save
         typeList = ComputerUtilCost.paymentChoicesWithoutTargets(typeList, sa, ai);
 
         if (typeList.size() < amount) {
@@ -947,7 +952,7 @@ public class ComputerUtil {
                         canRegen = true;
                     }
 
-                }  catch (final Exception ex) {
+                } catch (final Exception ex) {
                     throw new RuntimeException(TextUtil.concatNoSpace("There is an error in the card code for ", c.getName(), ":", ex.getMessage()), ex);
                 }
             }
@@ -1307,7 +1312,7 @@ public class ComputerUtil {
         }
         if (abCost.hasTapCost() && source.hasSVar("AITapDown")) {
             return true;
-        } else if (sa.hasParam("Planeswalker") && ai.getGame().getPhaseHandler().is(PhaseType.MAIN2)) {
+        } else if (sa.isPwAbility() && ai.getGame().getPhaseHandler().is(PhaseType.MAIN2)) {
             for (final CostPart part : abCost.getCostParts()) {
                 if (part instanceof CostPutCounter) {
                     return true;
@@ -1554,7 +1559,7 @@ public class ComputerUtil {
                 Iterables.addAll(objects, ComputerUtil.predictThreatenedObjects(ai, sa, spell));
             }
             if (top) {
-                break;  // only evaluate top-stack
+                break; // only evaluate top-stack
             }
         }
 
@@ -2066,7 +2071,7 @@ public class ComputerUtil {
     // Computer mulligans if there are no cards with converted mana cost of 0 in its hand
     public static boolean wantMulligan(Player ai, int cardsToReturn) {
         final CardCollectionView handList = ai.getCardsIn(ZoneType.Hand);
-        return scoreHand(handList, ai, cardsToReturn) <= 0;
+        return !handList.isEmpty() && scoreHand(handList, ai, cardsToReturn) <= 0;
     }
 
     public static CardCollection getPartialParisCandidates(Player ai) {
@@ -2699,7 +2704,6 @@ public class ComputerUtil {
         for (Trigger trigger : theTriggers) {
             final Card source = trigger.getHostCard();
 
-
             if (!trigger.zonesCheck(game.getZoneOf(source))) {
                 continue;
             }
@@ -2832,7 +2836,6 @@ public class ComputerUtil {
     }
 
     public static boolean lifegainPositive(final Player player, final Card source) {
-
         if (!player.canGainLife()) {
             return false;
         }
@@ -2860,7 +2863,6 @@ public class ComputerUtil {
     public static boolean lifegainNegative(final Player player, final Card source) {
         return lifegainNegative(player, source, 1);
     }
-
     public static boolean lifegainNegative(final Player player, final Card source, final int n) {
         if (!player.canGainLife()) {
             return false;
@@ -2891,10 +2893,10 @@ public class ComputerUtil {
         return false;
     }
 
-    public static boolean targetPlayableSpellCard(final Player ai, CardCollection options, final SpellAbility sa, final boolean withoutPayingManaCost) {
+    public static boolean targetPlayableSpellCard(final Player ai, CardCollection options, final SpellAbility sa, final boolean withoutPayingManaCost, boolean mandatory) {
             // determine and target a card with a SA that the AI can afford and will play
         AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-        Card targetSpellCard = null;
+        CardCollection targets = new CardCollection();
         for (Card c : options) {
             if (withoutPayingManaCost && c.getManaCost() != null && c.getManaCost().countX() > 0) {
                 // The AI will otherwise cheat with the mana payment, announcing X > 0 for spells like Heat Ray when replaying them
@@ -2914,18 +2916,19 @@ public class ComputerUtil {
                 // at this point, we're assuming that card will be castable from whichever zone it's in by the AI player.
                 abTest.setActivatingPlayer(ai);
                 abTest.getRestrictions().setZone(c.getZone().getZoneType());
-                final boolean play = AiPlayDecision.WillPlay == aic.canPlaySa(abTest);
-                final boolean pay = ComputerUtilCost.canPayCost(abTest, ai);
-                if (play && pay) {
-                    targetSpellCard = c;
-                    break;
+                if (AiPlayDecision.WillPlay == aic.canPlaySa(abTest) && ComputerUtilCost.canPayCost(abTest, ai)) {
+                    targets.add(c);
                 }
             }
         }
-        if (targetSpellCard == null) {
-            return false;
+        if (targets.isEmpty()) {
+            if (mandatory && !options.isEmpty()) {
+                targets = options;
+            } else {
+                return false;
+            }
         }
-        sa.getTargets().add(targetSpellCard);
+        sa.getTargets().add(ComputerUtilCard.getBestAI(targets));
         return true;
     }
 

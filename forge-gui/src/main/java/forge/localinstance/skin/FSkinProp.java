@@ -20,7 +20,7 @@ package forge.localinstance.skin;
 /**
  * Assembles settings from selected or default theme as appropriate. Saves in a
  * hashtable, access using .get(settingName) method.
- * 
+ *
  */
 public enum FSkinProp {
     //backgrounds
@@ -62,6 +62,11 @@ public enum FSkinProp {
     IMG_ZONE_GRAVEYARD   (new int[] {320, 0, 40, 40}, PropType.IMAGE),
     IMG_HDZONE_GRAVEYARD (new int[] {132, 6, 128, 128}, PropType.BUTTONS),
 
+    IMG_ZONE_ANTE        (new int[] {360, 0, 40, 40}, PropType.IMAGE),
+
+    IMG_ZONE_SIDEBOARD   (new int[] {360, 40, 40, 40}, PropType.IMAGE),
+    IMG_HDZONE_SIDEBOARD (new int[] {132, 1792, 128, 128}, PropType.BUTTONS),
+
     IMG_HDZONE_MANAPOOL  (new int[] {2, 6, 128, 128}, PropType.BUTTONS),
 
     IMG_ZONE_POISON      (new int[] {320, 80, 40, 40}, PropType.IMAGE),
@@ -88,6 +93,7 @@ public enum FSkinProp {
     IMG_MANA_HYBRID_UR (new int[] {412, 330, 80, 80}, PropType.MANAICONS),
     IMG_MANA_HYBRID_WB (new int[] {330, 412, 80, 80}, PropType.MANAICONS),
     IMG_MANA_HYBRID_WU (new int[] {412, 412, 80, 80}, PropType.MANAICONS),
+    IMG_MANA_PHRYX     (new int[] {166, 822, 80, 80}, PropType.MANAICONS),
     IMG_MANA_PHRYX_U   (new int[] {330, 248, 80, 80}, PropType.MANAICONS),
     IMG_MANA_PHRYX_W   (new int[] {412, 248, 80, 80}, PropType.MANAICONS),
     IMG_MANA_PHRYX_R   (new int[] {412, 166, 80, 80}, PropType.MANAICONS),
@@ -143,7 +149,7 @@ public enum FSkinProp {
     IMG_COUNTERS_MULTI  (new int[] {80, 400, 80, 80}, PropType.IMAGE),
     IMG_ENERGY          (new int[] {320, 120, 40, 40}, PropType.IMAGE),
     IMG_EXPERIENCE      (new int[] {280, 120, 40, 30}, PropType.IMAGE),
-    
+
     //foils
     FOIL_01     (new int[] {0, 0, 400, 570}, PropType.FOIL),
     FOIL_02     (new int[] {400, 0, 400, 570}, PropType.FOIL),
@@ -389,13 +395,75 @@ public enum FSkinProp {
     IMG_DECK_CARD_ART         (new int[] {492, 2, 488, 680}, PropType.DECKBOX),
     IMG_DECK_GENERIC          (new int[] {982, 2, 488, 680}, PropType.DECKBOX),
 
+    //FOR SETLOGO
+    IMG_SETLOGO_COMMON        (new int[] {2, 2, 520, 451}, PropType.SETLOGO),
+    IMG_SETLOGO_UNCOMMON      (new int[] {2, 455, 520, 451}, PropType.SETLOGO),
+    IMG_SETLOGO_RARE          (new int[] {2, 908, 520, 451}, PropType.SETLOGO),
+    IMG_SETLOGO_MYTHIC        (new int[] {2, 1361, 520, 451}, PropType.SETLOGO),
+    IMG_SETLOGO_SPECIAL       (new int[] {2, 1814, 520, 451}, PropType.SETLOGO),
+
+    //FOR WATERMARK
+    IMG_WATERMARK_G (new int[] {2, 2, 500, 500}, PropType.WATERMARKS),
+    IMG_WATERMARK_R (new int[] {504, 2, 500, 500}, PropType.WATERMARKS),
+    IMG_WATERMARK_B (new int[] {2, 504, 500, 500}, PropType.WATERMARKS),
+    IMG_WATERMARK_U (new int[] {504, 504, 500, 500}, PropType.WATERMARKS),
+    IMG_WATERMARK_W (new int[] {2, 1006, 500, 500}, PropType.WATERMARKS),
+    IMG_WATERMARK_C (new int[] {504, 1006, 500, 500}, PropType.WATERMARKS),
+
+    //FOR CARDBG
+    IMG_CARDBG_A (new int[] {2, 2, 339, 496}, PropType.CARDBG),
+    IMG_CARDBG_B (new int[] {343, 2, 339, 496}, PropType.CARDBG),
+    IMG_CARDBG_BG (new int[] {684, 2, 339, 496}, PropType.CARDBG),
+    IMG_CARDBG_BR (new int[] {1025, 2, 339, 496}, PropType.CARDBG),
+    IMG_CARDBG_C (new int[] {1366, 2, 339, 496}, PropType.CARDBG),
+    IMG_CARDBG_G (new int[] {2, 500, 339, 496}, PropType.CARDBG),
+    IMG_CARDBG_L (new int[] {343, 500, 339, 496}, PropType.CARDBG),
+    IMG_CARDBG_M (new int[] {684, 500, 339, 496}, PropType.CARDBG),
+    IMG_CARDBG_R (new int[] {1025, 500, 339, 496}, PropType.CARDBG),
+    IMG_CARDBG_RG (new int[] {1366, 500, 339, 496}, PropType.CARDBG),
+    IMG_CARDBG_U (new int[] {2, 998, 339, 496}, PropType.CARDBG),
+    IMG_CARDBG_UB (new int[] {343, 998, 339, 496}, PropType.CARDBG),
+    IMG_CARDBG_UG (new int[] {684, 998, 339, 496}, PropType.CARDBG),
+    IMG_CARDBG_UR (new int[] {1025, 998, 339, 496}, PropType.CARDBG),
+    IMG_CARDBG_V (new int[] {1366, 998, 339, 496}, PropType.CARDBG),
+    IMG_CARDBG_W (new int[] {2, 1496, 339, 496}, PropType.CARDBG),
+    IMG_CARDBG_WB (new int[] {343, 1496, 339, 496}, PropType.CARDBG),
+    IMG_CARDBG_WG (new int[] {684, 1496, 339, 496}, PropType.CARDBG),
+    IMG_CARDBG_WR (new int[] {1025, 1496, 339, 496}, PropType.CARDBG),
+    IMG_CARDBG_WU (new int[] {1366, 1496, 339, 496}, PropType.CARDBG),
+    //FOR PW BG
+    IMG_PWBG_B (new int[] {2, 1994, 339, 496}, PropType.CARDBG),
+    IMG_PWBG_BG (new int[] {343, 1994, 339, 496}, PropType.CARDBG),
+    IMG_PWBG_BR (new int[] {684, 1994, 339, 496}, PropType.CARDBG),
+    IMG_PWBG_C (new int[] {1025, 1994, 339, 496}, PropType.CARDBG),
+    IMG_PWBG_G (new int[] {1366, 1994, 339, 496}, PropType.CARDBG),
+    IMG_PWBG_M (new int[] {2, 2492, 339, 496}, PropType.CARDBG),
+    IMG_PWBG_R (new int[] {343, 2492, 339, 496}, PropType.CARDBG),
+    IMG_PWBG_RG (new int[] {684, 2492, 339, 496}, PropType.CARDBG),
+    IMG_PWBG_U (new int[] {1025, 2492, 339, 496}, PropType.CARDBG),
+    IMG_PWBG_UB (new int[] {1366, 2492, 339, 496}, PropType.CARDBG),
+    IMG_PWBG_UG (new int[] {2, 2990, 339, 496}, PropType.CARDBG),
+    IMG_PWBG_UR (new int[] {343, 2990, 339, 496}, PropType.CARDBG),
+    IMG_PWBG_W (new int[] {684, 2990, 339, 496}, PropType.CARDBG),
+    IMG_PWBG_WB (new int[] {1025, 2990, 339, 496}, PropType.CARDBG),
+    IMG_PWBG_WG (new int[] {1366, 2990, 339, 496}, PropType.CARDBG),
+    IMG_PWBG_WR (new int[] {2, 3488, 339, 496}, PropType.CARDBG),
+    IMG_PWBG_WU (new int[] {343, 3488, 339, 496}, PropType.CARDBG),
+    //NYX OVERLAY
+    IMG_NYX_B (new int[] {684, 3488, 339, 248}, PropType.CARDBG),
+    IMG_NYX_G (new int[] {1025, 3488, 339, 248}, PropType.CARDBG),
+    IMG_NYX_M (new int[] {1366, 3488, 339, 248}, PropType.CARDBG),
+    IMG_NYX_R (new int[] {684, 3736, 339, 248}, PropType.CARDBG),
+    IMG_NYX_U (new int[] {1025, 3736, 339, 248}, PropType.CARDBG),
+    IMG_NYX_W (new int[] {1366, 3736, 339, 248}, PropType.CARDBG),
+
     IMG_FAV1    (new int[] {0, 0, 100, 100}, PropType.FAVICON),
     IMG_FAV2    (new int[] {100, 0, 100, 100}, PropType.FAVICON),
     IMG_FAV3    (new int[] {200, 0, 100, 100}, PropType.FAVICON),
     IMG_FAV4    (new int[] {300, 0, 100, 100}, PropType.FAVICON),
     IMG_FAV5    (new int[] {400, 0, 100, 100}, PropType.FAVICON),
     IMG_FAVNONE (new int[] {500, 0, 100, 100}, PropType.FAVICON),
- 
+
     IMG_QUEST_DRAFT_DECK (new int[] {0, 0, 680, 475}, PropType.IMAGE),
     //COMMANDER
     IMG_ABILITY_COMMANDER      (new int[] {330, 576, 80, 80}, PropType.ABILITY),
@@ -452,7 +520,7 @@ public enum FSkinProp {
     IMG_ABILITY_PROTECT_U             (new int[] {2, 330, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_PROTECT_UW            (new int[] {84, 330, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_PROTECT_W             (new int[] {166, 330, 80, 80}, PropType.ABILITY);
-    
+
     private int[] coords;
     private PropType type;
 
@@ -491,6 +559,9 @@ public enum FSkinProp {
         MANAICONS,
         PLANAR_CONQUEST,
         DECKBOX,
+        SETLOGO,
+        WATERMARKS,
+        CARDBG,
         FAVICON
     }
 }

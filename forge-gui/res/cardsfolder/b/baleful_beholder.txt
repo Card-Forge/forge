@@ -1,0 +1,9 @@
+Name:Baleful Beholder
+ManaCost:4 B B
+Types:Creature Beholder
+PT:6/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBSacrifice,DBPumpAll
+SVar:DBSacrifice:DB$ Sacrifice | Defined$ Opponent | SacValid$ Enchantment | SpellDescription$ Antimagic Cone — Each opponent sacrifices an enchantment.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Menace | SpellDescription$ Fear Ray — Creatures you control gain menace until end of turn. (A creature with menace can't be blocked except by two or more creatures.)
+Oracle:When Baleful Beholder enters the battlefield, choose one —\n• Antimagic Cone — Each opponent sacrifices an enchantment.\n• Fear Ray — Creatures you control gain menace until end of turn. (A creature with menace can't be blocked except by two or more creatures.)

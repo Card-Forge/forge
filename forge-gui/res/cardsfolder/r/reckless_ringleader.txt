@@ -1,0 +1,11 @@
+Name:Reckless Ringleader
+ManaCost:R
+Types:Creature Goblin Rogue
+PT:1/1
+K:Haste
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters the battlefield, choose a creature card in your hand. It perpetually gains haste.
+SVar:TrigChoose:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Card.Creature+YouOwn | ChoiceTitle$ Choose a creature card in your hand | Amount$ 1 | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualHaste | Name$ Reckless Ringleader's Perpetual Effect | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:PerpetualHaste:Mode$ Continuous | Affected$ Card.ChosenCard | AddKeyword$ Haste | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This card perpetually gains haste.
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+Oracle:Haste\nWhen Reckless Ringleader enters the battlefield, choose a creature card in your hand. It perpetually gains haste.

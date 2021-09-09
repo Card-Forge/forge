@@ -147,8 +147,7 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
         //store zones to open and players to open them for at the time the SpellAbility first goes on the stack based on the selected targets
         if (tc == null) {
             playersWithValidTargets = null;
-        }
-        else {
+        } else {
             playersWithValidTargets = Maps.newHashMap();
             for (Card card : tc.getTargetCards()) {
                 ZoneType zoneType = card.getZone() != null ? card.getZone().getZoneType() : null;

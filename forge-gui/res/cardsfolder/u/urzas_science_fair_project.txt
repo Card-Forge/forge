@@ -2,11 +2,11 @@ Name:Urza's Science Fair Project
 ManaCost:6
 Types:Artifact Creature Construct
 PT:4/4
-A:AB$ RollDice | Cost$ 2 | On1$ M2 | On2$ Fog | On3$ Vig | On4$ FS | On5$ Fly | On6$ P2 | AILogic$ CombatEarly | SpellDescription$ Roll a six-sided die. CARDNAME gets the indicated result: 1-It gets -2/-2 until end of turn. 2-Prevent all combat damage it would deal this turn. 3-It gains vigilance until end of turn. 4-It gains first strike until end of turn. 5-It gains flying until end of turn. 6-It gets +2/+2 until end of turn.
-SVar:M2:DB$ Pump | Defined$ Self | NumAtt$ -2 | NumDef$ -2
-SVar:Fog:DB$ Pump | Defined$ Self | KW$ Prevent all combat damage that would be dealt by CARDNAME.
-SVar:Vig:DB$ Pump | Defined$ Self | KW$ Vigilance
-SVar:FS:DB$ Pump | Defined$ Self | KW$ First Strike
-SVar:Fly:DB$ Pump | Defined$ Self | KW$ Flying
-SVar:P2:DB$ Pump | Defined$ Self | NumAtt$ 2 | NumDef$ 2
+A:AB$ RollDice | Cost$ 2 | ResultSubAbilities$ 1:M2,2:Fog,3:Vig,4:FS,5:Fly,6:P2 | AILogic$ CombatEarly | SpellDescription$ Roll a six-sided die. CARDNAME gets the indicated result.
+SVar:M2:DB$ Pump | Defined$ Self | NumAtt$ -2 | NumDef$ -2 | SpellDescription$ 1 — It gets -2/-2 until end of turn.
+SVar:Fog:DB$ Pump | Defined$ Self | KW$ Prevent all combat damage that would be dealt by CARDNAME. | SpellDescription$ 2 — Prevent all combat damage it would deal this turn.
+SVar:Vig:DB$ Pump | Defined$ Self | KW$ Vigilance | SpellDescription$ 3 — It gains vigilance until end of turn.
+SVar:FS:DB$ Pump | Defined$ Self | KW$ First Strike | SpellDescription$ 4 — It gains first strike until end of turn.
+SVar:Fly:DB$ Pump | Defined$ Self | KW$ Flying | SpellDescription$ 5 — It gains flying until end of turn.
+SVar:P2:DB$ Pump | Defined$ Self | NumAtt$ 2 | NumDef$ 2 | SpellDescription$ 6 — It gets +2/+2 until end of turn.
 Oracle:{2}: Roll a six-sided die. Urza's Science Fair Project gets the indicated result.\n1 — It gets -2/-2 until end of turn.\n2 — Prevent all combat damage it would deal this turn.\n3 — It gains vigilance until end of turn.\n4 — It gains first strike until end of turn.\n5 — It gains flying until end of turn.\n6 — It gets +2/+2 until end of turn.

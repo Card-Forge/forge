@@ -1,0 +1,24 @@
+[metadata]
+Title=Planeswalker Control
+Difficulty=very hard
+Description=This deck tries to ride planeswalkers to victory.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 4 Planeswalker Control
+[Main]
+4 Beanstalk Giant|ELD|1
+2 Epic Downfall|ELD
+4 Fabled Passage|ELD|1
+6 Forest|ELD|1
+4 Foulmire Knight|ELD|1
+4 Garruk, Cursed Huntsman|ELD|1
+3 Island|ELD|3
+4 Lovestruck Beast|ELD|1
+4 Murderous Rider|ELD|1
+4 Oko, Thief of Crowns|ELD|1
+9 Swamp|ELD|3
+4 Taste of Death|ELD
+4 Thornwood Falls|ELD
+4 Vantress Gargoyle|ELD|1
+[Sideboard]
+4 Bake into a Pie|ELD

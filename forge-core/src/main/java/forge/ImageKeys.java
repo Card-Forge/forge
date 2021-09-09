@@ -1,15 +1,12 @@
 package forge;
 
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
-
 import forge.item.PaperCard;
 import forge.util.FileUtil;
-import forge.util.ImageUtil;
 import forge.util.TextUtil;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.File;
+import java.util.*;
 
 public final class ImageKeys {
     public static final String CARD_PREFIX           = "c:";
@@ -69,9 +66,8 @@ public final class ImageKeys {
     }
 
     public static File getImageFile(String key) {
-        if (StringUtils.isEmpty(key)) {
+        if (StringUtils.isEmpty(key))
             return null;
-        }
 
         final String dir;
         final String filename;
@@ -130,18 +126,31 @@ public final class ImageKeys {
             // if there's a 1st art variant try with it for .full images
             file = findFile(dir, filename.replaceAll("[0-9]*.full", "1.full"));
             if (file != null) { return file; }
+            //setlookup
+            if (!StaticData.instance().getSetLookup().isEmpty()) {
+                for (String setKey : StaticData.instance().getSetLookup().keySet()) {
+                    if (filename.startsWith(setKey)) {
+                        for (String setLookup : StaticData.instance().getSetLookup().get(setKey)) {
+                            //.fullborder lookup
+                            file = findFile(dir, TextUtil.fastReplace(fullborderFile, setKey, getSetFolder(setLookup)));
+                            if (file != null) { return file; }
+                            file = findFile(dir, TextUtil.fastReplace(fullborderFile, setKey, getSetFolder(setLookup)).replaceAll("[0-9]*.fullborder", "1.fullborder"));
+                            if (file != null) { return file; }
+                            //.full lookup
+                            file = findFile(dir, TextUtil.fastReplace(filename, setKey, getSetFolder(setLookup)));
+                            if (file != null) { return file; }
+                            file = findFile(dir, TextUtil.fastReplace(filename, setKey, getSetFolder(setLookup)).replaceAll("[0-9]*.full", "1.full"));
+                            if (file != null) { return file; }
+                        }
+                    }
+                }
+            }
         }
         //if an image, like phenomenon or planes is missing .full in their filenames but you have an existing images that have .full/.fullborder
         if (!filename.contains(".full")) {
             file = findFile(dir, TextUtil.addSuffix(filename,".full"));
             if (file != null) { return file; }
             file = findFile(dir, TextUtil.addSuffix(filename,".fullborder"));
-            if (file != null) { return file; }
-        }
-        // some S00 cards are really part of 6ED
-        String s2kAlias = getSetFolder("S00");
-        if (filename.startsWith(s2kAlias)) {
-            file = findFile(dir, TextUtil.fastReplace(filename, s2kAlias, getSetFolder("6ED")));
             if (file != null) { return file; }
         }
 
@@ -208,14 +217,37 @@ public final class ImageKeys {
 
     //shortcut for determining if a card image exists for a given card
     //should only be called from PaperCard.hasImage()
+    static HashMap<String, HashSet<String>> cachedContent=new HashMap<>();
     public static boolean hasImage(PaperCard pc) {
         Boolean editionHasImage = editionImageLookup.get(pc.getEdition());
         if (editionHasImage == null) {
             String setFolder = getSetFolder(pc.getEdition());
             editionHasImage = FileUtil.isDirectoryWithFiles(CACHE_CARD_PICS_DIR + setFolder);
             editionImageLookup.put(pc.getEdition(), editionHasImage);
+            if (editionHasImage){
+                File f = new File(CACHE_CARD_PICS_DIR + setFolder);  // no need to check this, otherwise editionHasImage would be false!
+                HashSet<String> setFolderContent = new HashSet<>();
+                for (String filename : Arrays.asList(f.list())) {
+                    // TODO: should this use FILE_EXTENSIONS ?
+                    if (!filename.endsWith(".jpg") && !filename.endsWith(".png"))
+                        continue;  // not image - not interested
+                    setFolderContent.add(filename.split("\\.")[0]);  // get rid of any full or fullborder
+                }
+                cachedContent.put(setFolder, setFolderContent);
+            }
         }
+        String[] keyParts = StringUtils.split(pc.getCardImageKey(), "//");
+        if (keyParts.length != 2)
+            return false;
+        HashSet<String> content = cachedContent.getOrDefault(keyParts[0], null);
         //avoid checking for file if edition doesn't have any images
-        return editionHasImage && findFile(CACHE_CARD_PICS_DIR, ImageUtil.getImageKey(pc, false, true)) != null;
+        return editionHasImage && hitCache(content, keyParts[1]);
+    }
+
+    private static boolean hitCache(HashSet<String> cache, String filename){
+        if (cache == null || cache.isEmpty())
+            return false;
+        final String keyPrefix = filename.split("\\.")[0];
+        return cache.contains(keyPrefix);
     }
 }

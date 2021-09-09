@@ -1,46 +1,22 @@
 package forge.ai;
 
-import java.util.List;
-import java.util.Set;
-
-import forge.game.ability.ApiType;
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-
+import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.AnimateAi;
 import forge.card.ColorSet;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
+import forge.game.ability.ApiType;
+import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
-import forge.game.card.CardUtil;
-import forge.game.card.CounterEnumType;
-import forge.game.card.CounterType;
 import forge.game.combat.Combat;
-import forge.game.cost.Cost;
-import forge.game.cost.CostDamage;
-import forge.game.cost.CostDiscard;
-import forge.game.cost.CostPart;
-import forge.game.cost.CostPayLife;
-import forge.game.cost.CostPayment;
-import forge.game.cost.CostPutCounter;
-import forge.game.cost.CostRemoveAnyCounter;
-import forge.game.cost.CostRemoveCounter;
-import forge.game.cost.CostSacrifice;
-import forge.game.cost.CostTapType;
-import forge.game.cost.PaymentDecision;
+import forge.game.cost.*;
 import forge.game.keyword.Keyword;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
@@ -48,6 +24,11 @@ import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.List;
+import java.util.Set;
 
 
 public class ComputerUtilCost {
@@ -153,8 +134,14 @@ public class ComputerUtilCost {
                 final CostDiscard disc = (CostDiscard) part;
 
                 final String type = disc.getType();
-                if (type.equals("CARDNAME") && source.getAbilityText().contains("Bloodrush")) {
-                    continue;
+                if (type.equals("CARDNAME")) {
+                    if (source.getAbilityText().contains("Bloodrush")) {
+                        continue;
+                    } else if (ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN, ai)
+                            && ai.getCardsIn(ZoneType.Hand).size() > ai.getMaxHandSize()) {
+                        // Better do something than just discard stuff
+                        return true;
+                    }
                 }
                 final CardCollection typeList = CardLists.getValidCards(hand, type.split(","), source.getController(), source, sa);
                 if (typeList.size() > ai.getMaxHandSize()) {
@@ -240,6 +227,51 @@ public class ComputerUtilCost {
                 if (ai.getLife() - amount < remainingLife && !ai.cantLoseForZeroOrLessLife()) {
                     return false;
                 }
+            }
+        }
+        return true;
+    }
+
+    public static boolean checkForManaSacrificeCost(final Player ai, final Cost cost, final Card source, final SpellAbility sourceAbility) {
+        // TODO cheating via autopay can still happen, need to get the real ai player from controlledBy
+        if (cost == null || !ai.isAI()) {
+            return true;
+        }
+        for (final CostPart part : cost.getCostParts()) {
+            if (part instanceof CostSacrifice) {
+                CardCollection list = new CardCollection();
+                final CardCollection exclude = new CardCollection();
+                if (AiCardMemory.getMemorySet(ai, MemorySet.PAYS_SAC_COST) != null) {
+                    exclude.addAll(AiCardMemory.getMemorySet(ai, MemorySet.PAYS_SAC_COST));
+                }
+                if (part.payCostFromSource()) {
+                    list.add(source);
+                } else if (part.getType().equals("OriginalHost")) {
+                    list.add(sourceAbility.getOriginalHost());
+                } else if (part.getAmount().equals("All")) {
+                    // Does the AI want to use Sacrifice All?
+                    return false;
+                } else {
+                    final String amount = part.getAmount();
+                    Integer c = part.convertAmount();
+
+                    if (c == null) {
+                        c = AbilityUtils.calculateAmount(source, amount, sourceAbility);
+                    }
+                    final AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
+                    CardCollectionView choices = aic.chooseSacrificeType(part.getType(), sourceAbility, c, exclude);
+                    if (choices != null) {
+                        list.addAll(choices);
+                    }
+                }
+                list.removeAll(exclude);
+                if (list.isEmpty()) {
+                    return false;
+                }
+                for (Card choice : list) {
+                    AiCardMemory.rememberCard(ai, choice, MemorySet.PAYS_SAC_COST);
+                }
+                return true;
             }
         }
         return true;
@@ -346,6 +378,19 @@ public class ComputerUtilCost {
         return true;
     }
 
+    /**
+     * Check sacrifice cost.
+     *
+     * @param cost
+     *            the cost
+     * @param source
+     *            the source
+     * @return true, if successful
+     */
+    public static boolean checkSacrificeCost(final Player ai, final Cost cost, final Card source, final SpellAbility sourceAbility) {
+        return checkSacrificeCost(ai, cost, source, sourceAbility, true);
+    }
+
     public static boolean isSacrificeSelfCost(final Cost cost) {
         if (cost == null) {
             return false;
@@ -375,6 +420,8 @@ public class ComputerUtilCost {
         }
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostTapType) {
+                String type = part.getType();
+
                 /*
                  * Only crew with creatures weaker than vehicle
                  *
@@ -385,7 +432,6 @@ public class ComputerUtilCost {
                 if (sa.hasParam("Crew")) {
                     Card vehicle = AnimateAi.becomeAnimated(source, sa);
                     final int vehicleValue = ComputerUtilCard.evaluateCreature(vehicle);
-                    String type = part.getType();
                     String totalP = type.split("withTotalPowerGE")[1];
                     type = TextUtil.fastReplace(type, TextUtil.concatNoSpace("+withTotalPowerGE", totalP), "");
                     CardCollection exclude = CardLists.getValidCards(
@@ -400,23 +446,39 @@ public class ComputerUtilCost {
                     return ComputerUtil.chooseTapTypeAccumulatePower(ai, type, sa, true,
                             Integer.parseInt(totalP), exclude) != null;
                 }
+
+                // check if we have a valid card to tap (e.g. Jaspera Sentinel)
+                Integer c = part.convertAmount();
+                if (c == null) {
+                    c = AbilityUtils.calculateAmount(source, part.getAmount(), sa);
+                }
+                CardCollection exclude = new CardCollection();
+                if (AiCardMemory.getMemorySet(ai, MemorySet.PAYS_TAP_COST) != null) {
+                    exclude.addAll(AiCardMemory.getMemorySet(ai, MemorySet.PAYS_TAP_COST));
+                }
+                // trying to produce mana that includes tapping source that will already be tapped
+                if (exclude.contains(source) && cost.hasTapCost()) {
+                    return false;
+                }
+                // if we want to pay for an ability with tapping the source can't be chosen
+                if (sa.getPayCosts().hasTapCost()) {
+                    exclude.add(sa.getHostCard());
+                }
+                CardCollection tapChoices = ComputerUtil.chooseTapType(ai, type, source, cost.hasTapCost(), c, exclude, sa);
+                if (tapChoices != null) {
+                    for (Card choice : tapChoices) {
+                        AiCardMemory.rememberCard(ai, choice, MemorySet.PAYS_TAP_COST);
+                    }
+                    // if manasource gets tapped to produce it also can't help paying another
+                    if (cost.hasTapCost()) {
+                        AiCardMemory.rememberCard(ai, source, MemorySet.PAYS_TAP_COST);
+                    }
+                    return true;
+                }
                 return false;
             }
         }
         return true;
-    }
-
-    /**
-     * Check sacrifice cost.
-     *
-     * @param cost
-     *            the cost
-     * @param source
-     *            the source
-     * @return true, if successful
-     */
-    public static boolean checkSacrificeCost(final Player ai, final Cost cost, final Card source, final SpellAbility sourceAbility) {
-        return checkSacrificeCost(ai, cost, source, sourceAbility, true);
     }
 
     /**
@@ -633,7 +695,7 @@ public class ComputerUtilCost {
                             }
                             // Check if the AI intends to play the card and if it can pay for it with the mana it has
                             boolean willPlay = ComputerUtil.hasReasonToPlayCardThisTurn(payer, c);
-                            boolean canPay = c.getManaCost().canBePaidWithAvaliable(ColorSet.fromNames(getAvailableManaColors(payer, source)).getColor());
+                            boolean canPay = c.getManaCost().canBePaidWithAvailable(ColorSet.fromNames(getAvailableManaColors(payer, source)).getColor());
                             return canPay && willPlay;
                         }
                     }
@@ -662,7 +724,6 @@ public class ComputerUtilCost {
     public static Set<String> getAvailableManaColors(Player ai, Card additionalLand) {
         return getAvailableManaColors(ai, Lists.newArrayList(additionalLand));
     }
-
     public static Set<String> getAvailableManaColors(Player ai, List<Card> additionalLands) {
         CardCollection cardsToConsider = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Presets.UNTAPPED);
         Set<String> colorsAvailable = Sets.newHashSet();
@@ -695,8 +756,9 @@ public class ComputerUtilCost {
 
     public static int getMaxXValue(SpellAbility sa, Player ai) {
         final Card source = sa.getHostCard();
-        final SpellAbility root = sa.getRootAbility();
+        SpellAbility root = sa.getRootAbility();
         final Cost abCost = root.getPayCosts();
+
         if (abCost == null || !abCost.hasXInAnyCostPart()) {
             return 0;
         }

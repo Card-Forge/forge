@@ -1,0 +1,7 @@
+Name:Robe of Stars
+ManaCost:1 W
+Types:Artifact Equipment
+K:Equip:1
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddToughness$ 3 | Description$ Equipped creature gets +0/+3.
+A:AB$ Phases | Cost$ 1 W | Defined$ Equipped | PrecostDesc$ Astral Projection — | SpellDescription$ Equipped creature phases out.
+Oracle:Equipped creature gets +0/+3.\nAstral Projection — {1}{W}: Equipped creature phases out. (Treat it and anything attached to it as though they don't exist until its controller's next turn.)\nEquip {1}

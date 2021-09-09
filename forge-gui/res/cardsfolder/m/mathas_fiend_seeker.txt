@@ -5,9 +5,12 @@ PT:3/3
 K:Menace
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, put a bounty counter on target creature an opponent controls. For as long as that creature has a bounty counter on it, it has "When this creature dies, each opponent draws a card and gains 2 life."
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | CounterType$ BOUNTY | CounterNum$ 1 | IsCurse$ True | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | StaticAbilities$ MathasStatic | ForgetOnMoved$ Battlefield | ForgetCounter$ BOUNTY | Duration$ Permanent
+SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | StaticAbilities$ MathasStatic | Triggers$ TrigForget | ForgetCounter$ BOUNTY | Duration$ Permanent
 SVar:MathasStatic:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | AddTrigger$ MathasDeath | Description$ For as long as that creature has a bounty counter on it, it has "When this creature dies, each opponent draws a card and gains 2 life."
 SVar:MathasDeath:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ MathasPayoffDraw | TriggerDescription$ When this creature dies, each opponent draws a card and gains 2 life.
 SVar:MathasPayoffDraw:DB$ Draw | Defined$ Player.Opponent | NumCards$ 1 | SubAbility$ MathasPayoffLife
-SVar:MathasPayoffLife:DB$ GainLife | Defined$ Player.Opponent | LifeAmount$ 2
+SVar:MathasPayoffLife:DB$ GainLife | Defined$ Player.Opponent | LifeAmount$ 2 | SubAbility$ ExileEff
+SVar:TrigForget:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Battlefield | ExcludedDestinations$ Graveyard | Destination$ Any | TriggerZones$ Command | Static$ True | Execute$ ExileSelf
+SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
+SVar:ExileEff:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ OriginalHost
 Oracle:Menace\nAt the beginning of your end step, put a bounty counter on target creature an opponent controls. For as long as that creature has a bounty counter on it, it has "When this creature dies, each opponent draws a card and gains 2 life."

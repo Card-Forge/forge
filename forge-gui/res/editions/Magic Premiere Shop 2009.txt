@@ -2,13 +2,13 @@
 Code=PMPS09
 Date=2009-01-01
 Name=Magic Premiere Shop 2009
-Type=Promos
+Type=Promo
 CardLang=ja
 ScryfallCode=PMPS09
 
 [cards]
-1 R Plains
-2 R Island
-3 R Swamp
-4 R Mountain
-5 R Forest
+1 R Plains @Rob Alexander
+2 R Island @Rob Alexander
+3 R Swamp @Rob Alexander
+4 R Mountain @Rob Alexander
+5 R Forest @Rob Alexander

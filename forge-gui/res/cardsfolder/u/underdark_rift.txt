@@ -1,0 +1,8 @@
+Name:Underdark Rift
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Pump | Cost$ 5 T Exile<1/CARDNAME> | ValidTgts$ Artifact,Creature,Planeswalker | TgtPrompt$ Select target artifact, creature, or planeswalker | SorcerySpeed$ True | IsCurse$ True | SubAbility$ DBRollDice | StackDescription$ None | SpellDescription$ Roll a d10. Put target artifact, creature, or planeswalker into its owner's library just beneath the top X cards of that library, where X is the result. Activate only as a sorcery.
+SVar:DBRollDice:DB$ RollDice | Sides$ 10 | ResultSVar$ X | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Defined$ Targeted | Destination$ Library | LibraryPosition$ X | StackDescription$ Put {c:Targeted} into its owner's library just beneath the top X cards of that library, where X is the result.
+Oracle:{T}: Add {C}.\n{5}, {T}, Exile Underdark Rift: Roll a d10. Put target artifact, creature, or planeswalker into its owner's library just beneath the top X cards of that library, where X is the result. Activate only as a sorcery.

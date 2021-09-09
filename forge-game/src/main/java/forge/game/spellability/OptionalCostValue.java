@@ -51,8 +51,10 @@ public class OptionalCostValue implements Serializable {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(type.getName());
-        sb.append(" ");
+        if (type != OptionalCost.Generic) {
+            sb.append(type.getName());
+            sb.append(" ");
+        }
         sb.append(cost.toSimpleString());
         return sb.toString();
     }

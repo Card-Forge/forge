@@ -1,0 +1,8 @@
+Name:Ethereal Grasp
+ManaCost:2 U
+Types:Instant
+A:SP$ Tap | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | SubAbility$ DBEffect | SpellDescription$ Tap target creature. That creature perpetually gains "This creature doesn’t untap during your untap step" and "{8}: Untap this creature."
+SVar:DBEffect:DB$ Effect | StaticAbilities$ EtherealGrasp | RememberObjects$ Targeted | Name$ Ethereal Grasp's Perpetual Effect | Duration$ Permanent | StackDescription$ That creature perpetually gains "This creature doesn’t untap during your untap step" and "{8}: Untap this creature."
+SVar:EtherealGrasp:Mode$ Continuous | Affected$ Card.IsRemembered | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | AddAbility$ Untap | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gains "This creature doesn’t untap during your untap step" and "{8}: Untap this creature."
+SVar:Untap:AB$ Untap | Cost$ 8 | Defined$ Self | SpellDescription$ Untap this creature.
+Oracle:Tap target creature. That creature perpetually gains "This creature doesn’t untap during your untap step" and "{8}: Untap this creature."

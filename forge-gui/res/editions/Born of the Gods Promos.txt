@@ -2,16 +2,16 @@
 Code=PBNG
 Date=2014-02-01
 Name=Born of the Gods Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PBNG
 
 [cards]
-26★ R Silent Sentinel
-31★ R Arbiter of the Ideal
-55★ R Tromokratis
-66★ R Eater of Hope
-80 R Pain Seer
-*94 R Fated Conflagration
-98★ R Forgestoker Dragon
-129★ R Nessian Wilds Ravager
-150 U Kiora's Follower
+26★ R Silent Sentinel @Kev Walker
+31★ R Arbiter of the Ideal @Johann Bodin
+55★ R Tromokratis @Jaime Jones
+66★ R Eater of Hope @Mathias Kollros
+80 R Pain Seer @Mark Winters
+*94 R Fated Conflagration @Clint Cearley
+98★ R Forgestoker Dragon @Lucas Graciano
+129★ R Nessian Wilds Ravager @Kev Walker
+150 U Kiora's Follower @Steve Prescott

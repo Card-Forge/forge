@@ -1,0 +1,9 @@
+Name:Choose Your Weapon
+ManaCost:2 G
+Types:Instant
+A:SP$ Charm | Cost$ 2 G | Choices$ DBPump,DBDamage
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +Y | SpellDescription$ Two-Weapon Fighting — Double target creature's power and toughness until end of turn.
+SVar:X:Targeted$CardPower
+SVar:Y:Targeted$CardToughness
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | NumDmg$ 5 | SpellDescription$ Archery — This spell deals 5 damage to target creature with flying.
+Oracle:Choose one —\n• Two-Weapon Fighting — Double target creature's power and toughness until end of turn.\n• Archery — This spell deals 5 damage to target creature with flying.

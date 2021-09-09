@@ -1,0 +1,12 @@
+Name:Leonin Sanctifier
+ManaCost:1 W
+Types:Creature Cat Cleric
+PT:2/1
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters the battlefield, choose a creature card in your hand. It perpetually gains lifelink.
+SVar:TrigChoose:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Card.Creature+YouOwn | ChoiceTitle$ Choose a creature card in your hand | Amount$ 1 | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualLifelink | Name$ Leonin Sanctifier's Perpetual Effect | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:PerpetualLifelink:Mode$ Continuous | Affected$ Card.ChosenCard | AddKeyword$ Lifelink | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This card perpetually gains lifelink.
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+DeckHas:Ability$LifeGain
+Oracle:Lifelink\nWhen Leonin Sanctifier enters the battlefield, choose a creature card in your hand. It perpetually gains lifelink.

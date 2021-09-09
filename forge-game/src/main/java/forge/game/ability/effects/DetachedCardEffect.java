@@ -12,7 +12,6 @@ public class DetachedCardEffect extends Card {
         card = card0;
 
         setName(name0);
-        addType("Effect");
         setOwner(card0.getOwner());
         setImmutable(true);
 

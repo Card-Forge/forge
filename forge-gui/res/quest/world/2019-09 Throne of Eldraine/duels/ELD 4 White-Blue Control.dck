@@ -1,0 +1,27 @@
+[metadata]
+Title=White-Blue Control
+Difficulty=very hard
+Description=The traditional pairing of counterspells and sweepers.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=ELD 4 White-Blue Control
+[Main]
+2 Castle Ardenvale|ELD|1
+4 Didn't Say Please|ELD
+4 Fabled Passage|ELD|1
+4 Fae of Wishes|ELD|1
+1 Gadwick, the Wizened|ELD|1
+4 Giant Killer|ELD|1
+4 Glass Casket|ELD|1
+11 Island|ELD|4
+1 Kenrith, the Returned King|ELD
+4 Mystical Dispute|ELD
+9 Plains|ELD|2
+4 Realm-Cloaked Giant|ELD|1
+4 Vantress Gargoyle|ELD|1
+4 Witching Well|ELD
+[Sideboard]
+1 Enchanted Carriage|ELD
+1 The Circle of Loyalty|ELD|1
+1 Turn into a Pumpkin|ELD
+1 Unexplained Vision|ELD

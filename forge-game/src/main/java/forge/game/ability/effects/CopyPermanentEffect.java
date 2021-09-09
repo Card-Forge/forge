@@ -20,6 +20,7 @@ import forge.game.card.CardFactory;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardZoneTable;
+import forge.game.card.TokenCreateTable;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
@@ -40,7 +41,6 @@ public class CopyPermanentEffect extends TokenEffectBase {
             return "Populate. (Create a token that's a copy of a creature token you control.)";
         }
         final StringBuilder sb = new StringBuilder();
-
 
         final List<Card> tgtCards = getTargetCards(sa);
 
@@ -99,13 +99,15 @@ public class CopyPermanentEffect extends TokenEffectBase {
             if (sa.hasParam("RandomCopied")) {
                 List<PaperCard> copysource = Lists.newArrayList(cards);
                 List<Card> choice = Lists.newArrayList();
-                final String num = sa.getParamOrDefault("RandomNum","1");
+                final String num = sa.getParamOrDefault("RandomNum", "1");
                 int ncopied = AbilityUtils.calculateAmount(host, num, sa);
                 while (ncopied > 0 && !copysource.isEmpty()) {
                     final PaperCard cp = Aggregates.random(copysource);
                     Card possibleCard = Card.fromPaperCard(cp, activator); // Need to temporarily set the Owner so the Game is set
 
                     if (possibleCard.isValid(valid, host.getController(), host, sa)) {
+                        if (host.getController().isAI() && possibleCard.getRules() != null && possibleCard.getRules().getAiHints().getRemAIDecks())
+                            continue;
                         choice.add(possibleCard);
                         ncopied -= 1;
                     }
@@ -177,14 +179,17 @@ public class CopyPermanentEffect extends TokenEffectBase {
         }
 
         MutableBoolean combatChanged = new MutableBoolean(false);
+        TokenCreateTable tokenTable = new TokenCreateTable();
+
         for (final Card c : tgtCards) {
             // if it only targets player, it already got all needed cards from defined
             if (sa.usesTargeting() && !sa.getTargetRestrictions().canTgtPlayer() && !c.canBeTargetedBy(sa)) {
                 continue;
             }
-
-            makeTokens(getProtoType(sa, c), controller, sa, numCopies, true, true, triggerList, combatChanged);
+            tokenTable.put(controller, getProtoType(sa, c, controller), numCopies);
         } // end foreach Card
+
+        makeTokenTable(tokenTable, true, triggerList, combatChanged, sa);
 
         if (!useZoneTable) {
             triggerList.triggerChangesZoneAll(game, sa);
@@ -196,9 +201,8 @@ public class CopyPermanentEffect extends TokenEffectBase {
         }
     } // end resolve
 
-    private Card getProtoType(final SpellAbility sa, final Card original) {
+    private Card getProtoType(final SpellAbility sa, final Card original, final Player newOwner) {
         final Card host = sa.getHostCard();
-        final Player newOwner = sa.getActivatingPlayer();
         int id = newOwner == null ? 0 : newOwner.getGame().nextCardId();
         final Card copy = new Card(id, original.getPaperCard(), host.getGame());
         copy.setOwner(newOwner);
@@ -220,5 +224,3 @@ public class CopyPermanentEffect extends TokenEffectBase {
         return copy;
     }
 }
-
-

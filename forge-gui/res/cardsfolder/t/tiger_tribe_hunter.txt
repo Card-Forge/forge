@@ -1,0 +1,12 @@
+Name:Tiger-Tribe Hunter
+ManaCost:3 R R
+Types:Creature Human Barbarian
+PT:4/4
+K:Trample
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigImmediate | TriggerZones$ Battlefield | CheckSVar$ PackTactics | SVarCompare$ GE6 | NoResolvingCheck$ True | TriggerDescription$ Pack tactics — Whenever CARDNAME attacks, if you attacked with creatures with total power 6 or greater this combat, you may sacrifice another creature. When you do, CARDNAME deals damage equal to the sacrificed creature's power to target creature.
+SVar:TrigImmediate:AB$ ImmediateTrigger | Cost$ Sac<1/Creature.Other/another creature> | RememberObjects$ Sacrificed | Execute$ TrigDamage | TriggerDescription$ If you do, CARDNAME deals damage equal to the sacrificed creature's power to target creature.
+SVar:TrigDamage:DB$ DealDamage | ConditionDefined$ DelayTriggerRememberedLKI | ValidTgts$ Creature | TgtPrompt$ Select any target | NumDmg$ X
+SVar:X:TriggerRemembered$CardPower
+SVar:PackTactics:Count$SumPower_Creature.attacking
+DeckHas:Ability$Sacrifice
+Oracle:Trample\nPack tactics — Whenever Tiger-Tribe Hunter attacks, if you attacked with creatures with total power 6 or greater this combat, you may sacrifice another creature. When you do, Tiger-Tribe Hunter deals damage equal to the sacrificed creature's power to target creature.

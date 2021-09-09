@@ -30,6 +30,7 @@ import com.google.common.collect.Sets;
 
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.GameStage;
 import forge.game.IHasSVars;
 import forge.game.TriggerReplacementBase;
 import forge.game.ability.AbilityFactory;
@@ -132,10 +133,9 @@ public abstract class Trigger extends TriggerReplacementBase {
 
             StringBuilder sb = new StringBuilder();
             String currentName;
-            if (this.isIntrinsic() && !this.getHostCard().isMutated() && cardState != null) {
+            if (this.isIntrinsic() && cardState != null && cardState.getCard() == getHostCard()) {
                 currentName = cardState.getName();
-            }
-            else {
+            } else {
                 currentName = getHostCard().getName();
             }
             String desc = getParam("TriggerDescription");
@@ -145,7 +145,7 @@ public abstract class Trigger extends TriggerReplacementBase {
                 desc = TextUtil.fastReplace(desc,"NICKNAME", Lang.getInstance().getNickName(CardTranslation.getTranslatedName(currentName)));
             }
             if (getHostCard().getEffectSource() != null) {
-                if(active)
+                if (active)
                     desc = TextUtil.fastReplace(desc, "EFFECTSOURCE", getHostCard().getEffectSource().toString());
                 else
                     desc = TextUtil.fastReplace(desc, "EFFECTSOURCE", getHostCard().getEffectSource().getName());
@@ -168,7 +168,6 @@ public abstract class Trigger extends TriggerReplacementBase {
         SpellAbility sa = ensureAbility();
 
         return replaceAbilityText(desc, sa);
-
     }
 
     public final String replaceAbilityText(final String desc, SpellAbility sa) {
@@ -193,13 +192,13 @@ public abstract class Trigger extends TriggerReplacementBase {
                 if (ApiType.Charm.equals(sa.getApi())) {
                     saDesc = sa.getStackDescription();
                 } else {
-                    saDesc = sa.getDescription();
+                    saDesc = sa.toString();
                 }
             } else if (ApiType.Charm.equals(sa.getApi())) {
                 // use special formating, can be used in Card Description
                 saDesc = CharmEffect.makeFormatedDescription(sa);
             } else {
-                saDesc = sa.getDescription();
+                saDesc = sa.toString();
             }
             // string might have leading whitespace
             saDesc = saDesc.trim();
@@ -346,12 +345,13 @@ public abstract class Trigger extends TriggerReplacementBase {
             }
         }
 
-        if (!meetsCommonRequirements(this.mapParams))
+        // host controller will be null when adding card in a simulation game
+        if (this.getHostCard().getController() == null || game.getAge() != GameStage.Play || !meetsCommonRequirements(this.mapParams)) {
             return false;
+        }
 
         return true;
     }
-
 
     public boolean meetsRequirementsOnTriggeredObjects(Game game,  final Map<AbilityKey, Object> runParams) {
         if ("True".equals(getParam("EvolveCondition"))) {
@@ -535,14 +535,12 @@ public abstract class Trigger extends TriggerReplacementBase {
         return this.numberTurnActivations;
     }
 
-    public void triggerRun()
-    {
+    public void triggerRun() {
         this.numberTurnActivations++;
     }
 
     // Resets the state stored each turn for per-turn and per-instance restriction
-    public void resetTurnState()
-    {
+    public void resetTurnState() {
         this.numberTurnActivations = 0;
     }
 

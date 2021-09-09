@@ -472,6 +472,12 @@ public class Graphics {
 
         batch.begin();
     }
+    public void drawRectLines(float thickness, Color color, float x, float y, float w, float h) {
+        drawLine(thickness, color, x, y, x+w, y);
+        drawLine(thickness, color, x+thickness/2f, y+thickness/2f, x+thickness/2f, y+h-thickness/2f);
+        drawLine(thickness, color, x, y+h, x+w, y+h);
+        drawLine(thickness, color, x+w-thickness/2f, y+thickness/2f, x+w-thickness/2f, y+h-thickness/2f);
+    }
 
     public void fillRect(FSkinColor skinColor, float x, float y, float w, float h) {
         fillRect(skinColor.getColor(), x, y, w, h);
@@ -850,6 +856,18 @@ public class Graphics {
 
     //use nifty trick with multiple text renders to draw outlined text
     public void drawOutlinedText(String text, FSkinFont skinFont, Color textColor, Color outlineColor, float x, float y, float w, float h, boolean wrap, int horzAlignment, boolean centerVertically) {
+        drawOutlinedText(text, skinFont, textColor, outlineColor, x, y, w, h, wrap, horzAlignment, centerVertically, false);
+    }
+    public void drawOutlinedText(String text, FSkinFont skinFont, Color textColor, Color outlineColor, float x, float y, float w, float h, boolean wrap, int horzAlignment, boolean centerVertically, boolean shadow) {
+        if (shadow) {
+            float oldAlpha = alphaComposite;
+            alphaComposite = 0.4f;
+            drawText(text, skinFont, outlineColor, x - 1.5f, y + 1.5f, w, h, wrap, horzAlignment, centerVertically);
+            drawText(text, skinFont, outlineColor, x + 1.5f, y + 1.5f, w, h, wrap, horzAlignment, centerVertically);
+            drawText(text, skinFont, outlineColor, x + 1.5f, y - 1.5f, w, h, wrap, horzAlignment, centerVertically);
+            drawText(text, skinFont, outlineColor, x - 1.5f, y - 1.5f, w, h, wrap, horzAlignment, centerVertically);
+            alphaComposite = oldAlpha;
+        }
         drawText(text, skinFont, outlineColor, x - 1, y, w, h, wrap, horzAlignment, centerVertically);
         drawText(text, skinFont, outlineColor, x, y - 1, w, h, wrap, horzAlignment, centerVertically);
         drawText(text, skinFont, outlineColor, x - 1, y - 1, w, h, wrap, horzAlignment, centerVertically);

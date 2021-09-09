@@ -2,10 +2,8 @@ Name:Pillaging Horde
 ManaCost:2 R R
 Types:Creature Human Barbarian
 PT:5/5
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you discard a card at random.
-SVar:TrigDiscard:DB$ Discard | NumCards$ 1 | Mode$ Random | Optional$ True | RememberDiscarded$ True | SubAbility$ DBSacrifice
-SVar:DBSacrifice:DB$ Sacrifice | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you discard a card at random.
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Self | UnlessCost$ Discard<1/Random> | UnlessPayer$ You
 SVar:X:Remembered$Amount
 SVar:NeedsToPlayVar:Y GE2
 SVar:Y:Count$InYourHand

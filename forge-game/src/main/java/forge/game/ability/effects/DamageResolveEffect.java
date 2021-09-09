@@ -22,6 +22,8 @@ public class DamageResolveEffect extends SpellAbilityEffect {
         GameEntityCounterTable counterTable = sa.getCounterTable();
 
         sa.getHostCard().getGame().getAction().dealDamage(false, damageMap, preventMap, counterTable, sa);
+
+        replaceDying(sa);
     }
 
     /* (non-Javadoc)

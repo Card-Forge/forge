@@ -619,14 +619,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                         && host.getType().hasStringType(mana.getManaAbility().getAddsKeywordsType())) {
                     final long timestamp = host.getGame().getNextTimestamp();
                     final List<String> kws = Arrays.asList(mana.getAddedKeywords().split(" & "));
-                    host.addChangedCardKeywords(kws, null, false, false, timestamp);
+                    host.addChangedCardKeywords(kws, null, false, false, timestamp, 0);
                     if (mana.addsKeywordsUntil()) {
                         final GameCommand untilEOT = new GameCommand() {
                             private static final long serialVersionUID = -8285169579025607693L;
 
                             @Override
                             public void run() {
-                                host.removeChangedCardKeywords(timestamp);
+                                host.removeChangedCardKeywords(timestamp, 0);
                                 host.getGame().fireEvent(new GameEventCardStatsChanged(host));
                             }
                         };
@@ -807,7 +807,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return description;
     }
     public void setDescription(final String s) {
-        originalDescription = s;
+        originalDescription = TextUtil.fastReplace(s, "VERT", "|");
         description = originalDescription;
     }
 
@@ -854,7 +854,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             if (node.getHostCard() != null) {
                 String currentName;
                 // if alternate state is viewed while card uses original
-                if (node.isIntrinsic() && !node.getHostCard().isMutated() && node.cardState != null) {
+                if (node.isIntrinsic() && node.cardState != null && node.cardState.getCard() == node.getHostCard()) {
                     currentName = node.cardState.getName();
                 }
                 else {
@@ -1116,7 +1116,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public SpellAbility copyWithManaCostReplaced(Player active, Cost abCost) {
-
         final SpellAbility newSA = copy(active);
         if (newSA == null) {
             return null; // the ability was not copyable, e.g. a Suspend SA may get here
@@ -1369,6 +1368,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public final boolean isDash() {
         return isAlternativeCost(AlternativeCost.Dash);
+    }
+
+    public final boolean isDisturb() {
+        return isAlternativeCost(AlternativeCost.Disturb);
     }
 
     public final boolean isEscape() {
@@ -1995,6 +1998,16 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 return false;
             }
         }
+        else if (incR[0].equals("Instant")) {
+            if (!root.getCardState().getType().isInstant()) {
+                return false;
+            }
+        }
+        else if (incR[0].equals("Sorcery")) {
+            if (!root.getCardState().getType().isSorcery()) {
+                return false;
+            }
+        }
         else if (incR[0].equals("Triggered")) {
             if (!root.isTrigger()) {
                 return false;
@@ -2061,7 +2074,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return false;
     }
 
-    public void checkActivationResloveSubs() {
+    public void checkActivationResolveSubs() {
         if (hasParam("ActivationNumberSacrifice")) {
             String comp = getParam("ActivationNumberSacrifice");
             int right = Integer.parseInt(comp.substring(2));
@@ -2081,7 +2094,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public List<AbilitySub> getChosenList() {
         return chosenList;
     }
-
     public void setChosenList(List<AbilitySub> choices) {
         chosenList = choices;
     }

@@ -193,7 +193,7 @@ public class Cost implements Serializable {
     }
 
     private Cost() {
-    	
+
     }
 
     private Cost(int genericMana) {
@@ -240,11 +240,10 @@ public class Cost implements Serializable {
                 xCantBe0 = true;
             } else if ("Mandatory".equals(part)) {
                 this.isMandatory = true;
-            }
-            else {
+            } else {
                 CostPart cp = parseCostPart(part, tapCost, untapCost);
                 if (null != cp )
-                    if (cp instanceof CostPartMana ) {
+                    if (cp instanceof CostPartMana) {
                         parsedMana = (CostPartMana) cp;
                     } else {
                         this.costParts.add(cp);
@@ -268,7 +267,6 @@ public class Cost implements Serializable {
     }
 
     private static CostPart parseCostPart(String parse, boolean tapCost, boolean untapCost) {
-
         if (parse.startsWith("Mana<")) {
             final String[] splitStr = TextUtil.split(abCostParse(parse, 1)[0], '\\');
             final String restriction = splitStr.length > 1 ? splitStr[1] : null;
@@ -309,8 +307,9 @@ public class Cost implements Serializable {
         // Changes Cost by adding a Life Payment
         if (parse.startsWith("PayLife<")) {
             // PayLife<LifeCost>
-            final String[] splitStr = abCostParse(parse, 1);
-            return new CostPayLife(splitStr[0]);
+            final String[] splitStr = abCostParse(parse, 2);
+            final String description = splitStr.length > 1 ? splitStr[1] : null;
+            return new CostPayLife(splitStr[0], description);
         }
 
         if (parse.startsWith("PayEnergy<")) {
@@ -360,6 +359,13 @@ public class Cost implements Serializable {
             // FlipCoin<NumCoins>
             final String[] splitStr = abCostParse(parse, 1);
             return new CostFlipCoin(splitStr[0]);
+        }
+
+        if (parse.startsWith("RollDice<")) {
+            // RollDice<NumDice/Sides/ResultSVar>
+            final String[] splitStr = abCostParse(parse, 4);
+            final String description = splitStr.length > 3 ? splitStr[3] : null;
+            return new CostRollDice(splitStr[0], splitStr[1], splitStr[2], description);
         }
 
         if (parse.startsWith("Discard<")) {
@@ -439,7 +445,13 @@ public class Cost implements Serializable {
         if (parse.startsWith("RevealFromExile<")) {
             final String[] splitStr = abCostParse(parse, 3);
             final String description = splitStr.length > 2 ? splitStr[2] : null;
-            return new CostReveal(splitStr[0], splitStr[1], description, ZoneType.Exile);
+            return new CostReveal(splitStr[0], splitStr[1], description, "Exile");
+        }
+
+        if (parse.startsWith("RevealOrChoose<")) {
+            final String[] splitStr = abCostParse(parse, 3);
+            final String description = splitStr.length > 2 ? splitStr[2] : null;
+            return new CostReveal(splitStr[0], splitStr[1], description, "Hand,Battlefield");
         }
 
         if (parse.startsWith("ExiledMoveToGrave<")) {
@@ -863,8 +875,8 @@ public class Cost implements Serializable {
                 CostPartMana mPart = (CostPartMana) part;
                 ManaCostBeingPaid oldManaCost = new ManaCostBeingPaid(mPart.getMana());
                 oldManaCost.addManaCost(costPart2.getMana());
-                String r2 = costPart2.getRestiction();
-                String r1 = mPart.getRestiction();
+                String r2 = costPart2.getRestriction();
+                String r1 = mPart.getRestriction();
                 String r = r1 == null ? r2 : ( r2 == null ? r1 : r1 + "." + r2);
                 costParts.remove(costPart2);
                 boolean XCantBe0 = !mPart.canXbe0() || !costPart2.canXbe0();
@@ -908,7 +920,7 @@ public class Cost implements Serializable {
                         } else if (part instanceof CostAddMana) {
                             costParts.add(new CostAddMana(amount, part.getType(), part.getTypeDescription()));
                         } else if (part instanceof CostPayLife) {
-                            costParts.add(new CostPayLife(amount));
+                            costParts.add(new CostPayLife(amount, part.getTypeDescription()));
                         }
                         toRemove.add(other);
                         alreadyAdded = true;
@@ -936,7 +948,6 @@ public class Cost implements Serializable {
     public boolean canPay(SpellAbility sa) {
         return canPay(sa, sa.getActivatingPlayer());
     }
-
     public boolean canPay(SpellAbility sa, Player payer) {
         for (final CostPart part : this.getCostParts()) {
             if (!part.canPay(sa, payer)) {

@@ -1,0 +1,10 @@
+Name:Battle Cry Goblin
+ManaCost:1 R
+Types:Creature Goblin
+PT:2/2
+A:AB$ PumpAll | Cost$ 1 R | ValidCards$ Creature.Goblin+YouCtrl | NumAtt$ +1 | KW$ Haste | SpellDescription$ Goblins you control get +1/+0 and gain haste until end of turn.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerZones$ Battlefield | CheckSVar$ PackTactics | SVarCompare$ GE6 | NoResolvingCheck$ True | TriggerDescription$ Pack tactics — Whenever CARDNAME attacks, if you attacked with creatures with total power 6 or greater this combat, create a 1/1 red Goblin creature token that's tapped and attacking.
+SVar:TrigToken:DB$Token | TokenAmount$ 1 | TokenScript$ r_1_1_goblin | TokenOwner$ You | TokenTapped$ True | TokenAttacking$ True
+SVar:PackTactics:Count$SumPower_Creature.attacking
+DeckHas:Ability$Token
+Oracle:{1}{R}: Goblins you control get +1/+0 and gain haste until end of turn.\nPack tactics — Whenever Battle Cry Goblin attacks, if you attacked with creatures with total power 6 or greater this combat, create a 1/1 red Goblin creature token that's tapped and attacking.

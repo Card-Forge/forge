@@ -1,0 +1,17 @@
+Name:Managorger Phoenix
+ManaCost:R R
+Types:Creature Phoenix
+PT:2/2
+K:Flying
+K:CARDNAME can't block.
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | NoResolvingCheck$ True | TriggerZones$ Graveyard | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a spell, if CARDNAME is in your graveyard, put a flame counter on CARDNAME for each {R} in that spell's mana cost. If CARDNAME has five or more flame counters on it, return it to the battlefield and it perpetually gets +1/+1.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ FLAME | CounterNum$ X | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | ConditionDefined$ Self | ConditionPresent$ Card.counters_GE5_FLAME | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | ConditionDefined$ Remembered | ConditionPresent$ Card.Self | StaticAbilities$ PerpetualP1P1 | Name$ Managorger Phoenix's Perpetual Effect | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:PerpetualP1P1:Mode$ Continuous | Affected$ Card.EffectSource | AddPower$ 1 | AddToughness$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ EFFECTSOURCE perpetually gets +1/+1.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$TriggeredManaCostDevotion.Red
+SVar:SacMe:3
+DeckHas:Ability$Counters & Ability$Graveyard
+DeckHints:Ability$Discard
+Oracle:Flying\nManagorger Phoenix can't block.\nWhenever you cast a spell, if Managorger Phoenix is in your graveyard, put a flame counter on Managorger Phoenix for each {R} in that spell's mana cost. If Managorger Phoenix has five or more flame counters on it, return it to the battlefield and it perpetually gets +1/+1.

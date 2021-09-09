@@ -1,0 +1,8 @@
+Name:Hill Giant Herdgorger
+ManaCost:4 G G
+Types:Creature Giant
+PT:7/6
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 3 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3
+DeckHas:Ability$LifeGain
+Oracle:When Hill Giant Herdgorger enters the battlefield, you gain 3 life.

@@ -11,173 +11,173 @@ Foil=NotSupported
 ScryfallCode=VIS
 
 [cards]
-51 R Aku Djinn
-141 R Anvil of Bogardan
-1 R Archangel
-126 U Army Ants
-26 C Betrayal
-52 U Blanket of Night
-76 R Bogardan Phoenix
-142 U Brass-Talon Chimera
-127 R Breathstealer's Crypt
-27 C Breezekeeper
-53 U Brood of Cockroaches
-101 C Bull Elephant
-28 R Chronatog
-102 R City of Solitude
-29 C Cloud Elemental
-54 C Coercion
-160 U Coral Atoll
-128 R Corrosion
-103 U Creeping Mold
-55 C Crypt Rats
-2 U Daraja Griffin
-56 C Dark Privilege
-57 C Death Watch
-30 R Desertion
-58 U Desolation
-143 R Diamond Kaleidoscope
-161 U Dormant Volcano
-144 U Dragon Mask
-31 U Dream Tides
-77 C Dwarven Vigilantes
-104 U Elephant Grass
-78 R Elkin Lair
-105 C Elven Cache
-106 C Emerald Charm
-3 R Equipoise
-162 U Everglades
-4 R Eye of Singularity
-59 C Fallen Askari
-129 R Femeref Enchantress
-107 C Feral Instinct
-79 C Fireblast
-130 R Firestorm Hellkite
-32 R Flooded Shoreline
-60 R Forbidden Ritual
-33 U Foreshadow
-5 C Freewind Falcon
-61 C Funeral Charm
-108 C Giant Caterpillar
-80 U Goblin Recruiter
-81 C Goblin Swine-Rider
-6 C Gossamer Chains
-163 R Griffin Canyon
-131 R Guiding Spirit
-82 C Hearth Charm
-83 U Heat Wave
-145 U Helm of Awakening
-7 U Honorable Passage
-8 C Hope Charm
-84 U Hulking Cyclops
-34 C Impulse
-9 C Infantry Veteran
-62 C Infernal Harvest
-35 C Inspiration
-146 U Iron-Heart Chimera
-10 C Jamuraan Lion
-147 U Juju Bubble
-164 U Jungle Basin
-63 R Kaervek's Spite
-165 U Karoo
-109 R Katabatic Winds
-85 C Keeper of Kookus
-110 C King Cheetah
-36 C Knight of the Mists
-11 C Knight of Valor
-86 R Kookus
-111 U Kyscu Drake
-148 U Lead-Belly Chimera
-112 R Lichenthrope
-87 R Lightning Cloud
-12 U Longbow Archer
-149 U Magma Mine
-37 C Man-o'-War
-150 U Matopi Golem
-13 U Miraculous Recovery
-88 U Mob Mentality
-113 C Mortal Wound
-132 U Mundungu
-38 C Mystic Veil
-114 R Natural Order
-64 U Necromancy
-65 R Necrosavant
-66 U Nekrataal
-89 R Ogre Enforcer
-39 U Ovinomancer
-115 C Panther Warriors
-14 C Parapet
-15 U Peace Talks
-151 R Phyrexian Marauder
-152 C Phyrexian Walker
-67 R Pillar Tombs of Aku
-40 U Prosperity
-133 R Pygmy Hippo
-68 C Python
-166 U Quicksand
-116 R Quirion Druid
-117 C Quirion Ranger
-90 C Raging Gorilla
-41 R Rainbow Efreet
-91 R Relentless Assault
-16 U Relic Ward
-17 C Remedy
-18 C Resistance Fighter
-19 R Retribution of the Meek
-20 C Righteous Aura
-134 R Righteous War
-118 C River Boa
-92 C Rock Slide
-119 R Rowen
-153 R Sands of Time
-135 U Scalebane's Elite
-42 U Shimmering Efreet
-43 C Shrieking Drake
-136 U Simoon
-154 C Sisay's Ring
-155 R Snake Basket
-93 C Solfatara
-94 C Song of Blood
-120 C Spider Climb
-95 U Spitting Drake
-137 R Squandered Resources
-121 U Stampeding Wildebeests
-138 R Suleiman's Legacy
-122 U Summer Bloom
-21 C Sun Clasp
-69 U Suq'Ata Assassin
-96 C Suq'Ata Lancer
-97 C Talruum Champion
-98 U Talruum Piper
-70 C Tar Pit Warrior
-22 U Teferi's Honor Guard
-156 R Teferi's Puzzle Box
-44 R Teferi's Realm
-139 U Tempest Drake
-45 R Three Wishes
-46 U Time and Tide
-157 U Tin-Wing Chimera
-23 R Tithe
-99 C Tremor
-158 R Triangle of War
-123 U Uktabi Orangutan
-167 R Undiscovered Paradise
-47 C Undo
-71 C Urborg Mindsucker
-72 R Vampiric Tutor
-73 U Vampirism
-48 C Vanishing
-100 U Viashino Sandstalker
-140 R Viashivan Dragon
-49 C Vision Charm
-74 C Wake of Vultures
-159 R Wand of Denial
-24 C Warrior's Honor
-124 C Warthog
-50 U Waterspout Djinn
-75 C Wicked Reward
-125 U Wind Shear
-25 R Zhalfirin Crusader
+51 R Aku Djinn @Terese Nielsen
+141 R Anvil of Bogardan @Roger Raupp
+1 R Archangel @Christopher Rush
+126 U Army Ants @Geofrey Darrow & I. Rabarot
+26 C Betrayal @Gary Leach
+52 U Blanket of Night @Cliff Nielsen
+76 R Bogardan Phoenix @David O'Connor
+142 U Brass-Talon Chimera @Mike Dringenberg
+127 R Breathstealer's Crypt @Blackie del Rio
+27 C Breezekeeper @Adam Rex
+53 U Brood of Cockroaches @Geofrey Darrow & I. Rabarot
+101 C Bull Elephant @Steve White
+28 R Chronatog @Christopher Rush
+102 R City of Solitude @Romas Kukalis
+29 C Cloud Elemental @Adam Rex
+54 C Coercion @DiTerlizzi
+160 U Coral Atoll @John Avon
+128 R Corrosion @Michael Danza
+103 U Creeping Mold @David Seeley
+55 C Crypt Rats @Paul Lee
+2 U Daraja Griffin @Stuart Griffin
+56 C Dark Privilege @Tom Kyffin
+57 C Death Watch @Brian Horton
+30 R Desertion @Richard Kane Ferguson
+58 U Desolation @George Pratt
+143 R Diamond Kaleidoscope @Ron Spencer
+161 U Dormant Volcano @John Avon
+144 U Dragon Mask @Craig Hooper
+31 U Dream Tides @Jerry Tiritilli
+77 C Dwarven Vigilantes @Pete Venters
+104 U Elephant Grass @Tony Roberts
+78 R Elkin Lair @Jerry Tiritilli
+105 C Elven Cache @John Matson
+106 C Emerald Charm @Greg Spalenka
+3 R Equipoise @Adam Rex
+162 U Everglades @Bob Eggleton
+4 R Eye of Singularity @Eric Peterson
+59 C Fallen Askari @Adrian Smith
+129 R Femeref Enchantress @D. Alexander Gregory
+107 C Feral Instinct @Una Fricker
+79 C Fireblast @Michael Danza
+130 R Firestorm Hellkite @Pete Venters
+32 R Flooded Shoreline @Romas Kukalis
+60 R Forbidden Ritual @Christopher Rush
+33 U Foreshadow @George Pratt
+5 C Freewind Falcon @Una Fricker
+61 C Funeral Charm @Greg Spalenka
+108 C Giant Caterpillar @Zina Saunders
+80 U Goblin Recruiter @Scott Kirschner
+81 C Goblin Swine-Rider @Geofrey Darrow & I. Rabarot
+6 C Gossamer Chains @Steve Luke
+163 R Griffin Canyon @Stuart Griffin
+131 R Guiding Spirit @Terese Nielsen
+82 C Hearth Charm @Greg Spalenka
+83 U Heat Wave @Alan Rabinowitz
+145 U Helm of Awakening @Adam Rex
+7 U Honorable Passage @Jeff Miracola
+8 C Hope Charm @Greg Spalenka
+84 U Hulking Cyclops @DiTerlizzi
+34 C Impulse @Bryan Talbot
+9 C Infantry Veteran @Christopher Rush
+62 C Infernal Harvest @Nathalie Hertz
+35 C Inspiration @Zina Saunders
+146 U Iron-Heart Chimera @Mike Dringenberg
+10 C Jamuraan Lion @Stuart Griffin
+147 U Juju Bubble @Donato Giancola
+164 U Jungle Basin @John Avon
+63 R Kaervek's Spite @Bryan Talbot
+165 U Karoo @Zina Saunders
+109 R Katabatic Winds @Gary Gianni
+85 C Keeper of Kookus @Scott Hampton
+110 C King Cheetah @Terese Nielsen
+36 C Knight of the Mists @Harold McNeill
+11 C Knight of Valor @Jeff Miracola
+86 R Kookus @Scott Hampton
+111 U Kyscu Drake @Geofrey Darrow & I. Rabarot
+148 U Lead-Belly Chimera @Mike Dringenberg
+112 R Lichenthrope @Bob Eggleton
+87 R Lightning Cloud @John Matson
+12 U Longbow Archer @Eric Peterson
+149 U Magma Mine @Ron Spencer
+37 C Man-o'-War @Jon J Muth
+150 U Matopi Golem @Tom Kyffin
+13 U Miraculous Recovery @Brian Horton
+88 U Mob Mentality @Douglas Shuler
+113 C Mortal Wound @Kev Walker
+132 U Mundungu @Terese Nielsen
+38 C Mystic Veil @D. Alexander Gregory
+114 R Natural Order @Terese Nielsen
+64 U Necromancy @Pete Venters
+65 R Necrosavant @John Coulthart
+66 U Nekrataal @Adrian Smith
+89 R Ogre Enforcer @Pete Venters
+39 U Ovinomancer @Kev Walker
+115 C Panther Warriors @Cecil Fernando
+14 C Parapet @Mark Poole
+15 U Peace Talks @Roger Raupp
+151 R Phyrexian Marauder @David Seeley
+152 C Phyrexian Walker @Bryan Talbot
+67 R Pillar Tombs of Aku @Terese Nielsen
+40 U Prosperity @Dan Frazier
+133 R Pygmy Hippo @Steve White
+68 C Python @Steve White
+166 U Quicksand @Roger Raupp
+116 R Quirion Druid @John Matson
+117 C Quirion Ranger @Tom Kyffin
+90 C Raging Gorilla @Tom Kyffin
+41 R Rainbow Efreet @Nathalie Hertz
+91 R Relentless Assault @Geofrey Darrow & I. Rabarot
+16 U Relic Ward @John Coulthart
+17 C Remedy @Zina Saunders
+18 C Resistance Fighter @Cecil Fernando
+19 R Retribution of the Meek @Nathalie Hertz
+20 C Righteous Aura @Jeff Miracola
+134 R Righteous War @Ian Miller
+118 C River Boa @Steve White
+92 C Rock Slide @Mike Kerr
+119 R Rowen @Jon J Muth
+153 R Sands of Time @Paul Lee
+135 U Scalebane's Elite @Steve Luke
+42 U Shimmering Efreet @Thomas Gianni
+43 C Shrieking Drake @Ian Miller
+136 U Simoon @Randy Gallegos
+154 C Sisay's Ring @Donato Giancola
+155 R Snake Basket @Roger Raupp
+93 C Solfatara @Omaha Pérez
+94 C Song of Blood @Eric Peterson
+120 C Spider Climb @Ron Spencer
+95 U Spitting Drake @Geofrey Darrow & I. Rabarot
+137 R Squandered Resources @Romas Kukalis
+121 U Stampeding Wildebeests @Randy Gallegos
+138 R Suleiman's Legacy @Kaja Foglio
+122 U Summer Bloom @Nicola Leonard
+21 C Sun Clasp @John Coulthart
+69 U Suq'Ata Assassin @Gary Gianni
+96 C Suq'Ata Lancer @Jeff Miracola
+97 C Talruum Champion @Pete Venters
+98 U Talruum Piper @Pete Venters
+70 C Tar Pit Warrior @George Pratt
+22 U Teferi's Honor Guard @Cecil Fernando
+156 R Teferi's Puzzle Box @Kaja Foglio
+44 R Teferi's Realm @Alan Rabinowitz
+139 U Tempest Drake @Gerry Grace
+45 R Three Wishes @George Pratt
+46 U Time and Tide @George Pratt
+157 U Tin-Wing Chimera @Mike Dringenberg
+23 R Tithe @Jon J Muth
+99 C Tremor @Michael Danza
+158 R Triangle of War @Ian Miller
+123 U Uktabi Orangutan @Una Fricker
+167 R Undiscovered Paradise @David O'Connor
+47 C Undo @Terese Nielsen
+71 C Urborg Mindsucker @DiTerlizzi
+72 R Vampiric Tutor @Gary Leach
+73 U Vampirism @Gary Leach
+48 C Vanishing @John Matson
+100 U Viashino Sandstalker @Andrew Robinson
+140 R Viashivan Dragon @Ian Miller
+49 C Vision Charm @Greg Spalenka
+74 C Wake of Vultures @Jeff Miracola
+159 R Wand of Denial @Steve Luke
+24 C Warrior's Honor @D. Alexander Gregory
+124 C Warthog @Steve White
+50 U Waterspout Djinn @Thomas Gianni
+75 C Wicked Reward @D. Alexander Gregory
+125 U Wind Shear @John Matson
+25 R Zhalfirin Crusader @Alan Rabinowitz
 
 [tokens]
 butterfly

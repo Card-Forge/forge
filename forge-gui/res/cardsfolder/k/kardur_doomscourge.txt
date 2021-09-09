@@ -6,7 +6,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigEffect:DB$ Effect | StaticAbilities$ AttackEach,AttackOther | Duration$ UntilYourNextTurn
 SVar:AttackEach:Mode$ Continuous | Affected$ Creature.OppCtrl | AddHiddenKeyword$ CARDNAME attacks each combat if able. | Description$ Creatures your opponents control attack each combat if able and attack a player other than you if able.
 SVar:AttackOther:Mode$ Continuous | Affected$ You | AddKeyword$ Creatures your opponents control attack a player other than you if able. | Secondary$ True | Description$ Creatures your opponents control attack each combat if able and attack a player other than you if able.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.attackingLKI | Execute$ TrigDrain | TriggerZones$ Battlefield | TriggerDescription$ Whenever an attacking creature dies, each opponent loses 1 life and you gain 1 life.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.attacking | Execute$ TrigDrain | TriggerZones$ Battlefield | TriggerDescription$ Whenever an attacking creature dies, each opponent loses 1 life and you gain 1 life.
 SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainOneLife
 SVar:DBGainOneLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 DeckHas:Ability$LifeGain

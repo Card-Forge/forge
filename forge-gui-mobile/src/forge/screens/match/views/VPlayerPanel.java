@@ -76,6 +76,7 @@ public class VPlayerPanel extends FContainer {
         tabs.add(tabManaPool);
 
         addZoneDisplay(ZoneType.Exile, Forge.hdbuttons ? FSkinImage.HDEXILE : FSkinImage.EXILE);
+        addZoneDisplay(ZoneType.Sideboard, Forge.hdbuttons ? FSkinImage.HDSIDEBOARD :FSkinImage.SIDEBOARD);
 
         commandZone = add(new CommandZoneDisplay(player));
 
@@ -441,7 +442,7 @@ public class VPlayerPanel extends FContainer {
             if (vibrateDuration > 0 && MatchController.instance.isLocalPlayer(player) &&
                     FModel.getPreferences().getPrefBoolean(FPref.UI_VIBRATE_ON_LIFE_LOSS)) {
                 //never vibrate more than two seconds regardless of life lost or poison counters gained
-                Gdx.input.vibrate(Math.min(vibrateDuration, 2000)); 
+                Gdx.input.vibrate(Math.min(vibrateDuration, 2000));
             }
         }
 

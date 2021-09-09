@@ -1,0 +1,9 @@
+Name:Werewolf Pack Leader
+ManaCost:G G
+Types:Creature Human Werewolf
+PT:3/3
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerZones$ Battlefield | CheckSVar$ PackTactics | SVarCompare$ GE6 | NoResolvingCheck$ True | TriggerDescription$ Pack tactics — Whenever CARDNAME attacks, if you attacked with creatures with total power 6 or greater this combat, draw a card.
+A:AB$ Animate | Cost$ 3 G | ValidCard$ Card.Self | Power$ 5 | Toughness$ 3 | Keywords$ Trample | RemoveTypes$ Human | SpellDescription$ Until end of turn, CARDNAME has base power and toughness 5/3, gains trample, and isn't a Human.
+SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 1
+SVar:PackTactics:Count$SumPower_Creature.attacking
+Oracle:Pack tactics — Whenever Werewolf Pack Leader attacks, if you attacked with creatures with total power 6 or greater this combat, draw a card.\n{3}{G}: Until end of turn, Werewolf Pack Leader has base power and toughness 5/3, gains trample, and isn't a Human.

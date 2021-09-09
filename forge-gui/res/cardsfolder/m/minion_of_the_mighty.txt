@@ -1,0 +1,10 @@
+Name:Minion of the Mighty
+ManaCost:R
+Types:Creature Kobold
+PT:0/1
+K:Menace
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChange | TriggerZones$ Battlefield | CheckSVar$ PackTactics | SVarCompare$ GE6 | NoResolvingCheck$ True | TriggerDescription$ Pack tactics — Whenever CARDNAME attacks, if you attacked with creatures with total power 6 or greater this combat, you may put a Dragon creature card from your hand onto the battlefield tapped and attacking.
+SVar:TrigChange:DB$ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.Dragon+YouCtrl | Tapped$ True | Attacking$ True
+SVar:PackTactics:Count$SumPower_Creature.attacking
+DeckHints:Type$Dragon
+Oracle:Menace\nPack tactics — Whenever Minion of the Mighty attacks, if you attacked with creatures with total power 6 or greater this combat, you may put a Dragon creature card from your hand onto the battlefield tapped and attacking.

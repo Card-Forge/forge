@@ -8,6 +8,6 @@ Type=Funny
 ScryfallCode=HTR17
 
 [cards]
-1 M Diabolical Salvation
-2 M Inzerva, Master of Insights
-3 M M'Odo, the Gnarled Oracle
+1 M Diabolical Salvation @Zoltan Boros
+2 M Inzerva, Master of Insights @Filip Burburan
+3 M M'Odo, the Gnarled Oracle @Johann Bodin

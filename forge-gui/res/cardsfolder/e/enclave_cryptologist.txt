@@ -4,12 +4,9 @@ Types:Creature Merfolk Wizard
 PT:0/1
 K:Level up:1 U
 SVar:maxLevel:3
-S:Mode$ Continuous | Affected$ Card.Self | AddAbility$ Loot | CheckSVar$ X | SVarCompare$ EQ1 | Description$ LEVEL 1-2 CARDNAME has {T}: Draw a card, then discard a card.
-S:Mode$ Continuous | Affected$ Card.Self | AddAbility$ Draw | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 3+ CARDNAME has {T}: Draw a card.
-SVar:Loot:AB$Draw | Cost$ T | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
-SVar:Draw:AB$Draw | Cost$ T | NumCards$ 1 | SpellDescription$ Draw a card.
+S:Mode$ Continuous | Affected$ Card.Self | AddAbility$ Loot | IsPresent$ Card.Self+counters_GE1_LEVEL+counters_LE2_LEVEL | Description$ LEVEL 1-2 CARDNAME has {T}: Draw a card, then discard a card.
+S:Mode$ Continuous | Affected$ Card.Self | AddAbility$ Draw | IsPresent$ Card.Self+counters_GE3_LEVEL | Description$ LEVEL 3+ CARDNAME has {T}: Draw a card.
+SVar:Loot:AB$ Draw | Cost$ T | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
+SVar:Draw:AB$ Draw | Cost$ T | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
-SVar:X:Count$Valid Card.Self+counters_GE1_LEVEL+counters_LT3_LEVEL
-SVar:Y:Count$Valid Card.Self+counters_GE3_LEVEL
-SVar:Picture:http://www.wizards.com/global/images/magic/general/enclave_cryptologist.jpg
 Oracle:Level up {1}{U} ({1}{U}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 1-2\n0/1\n{T}: Draw a card, then discard a card.\nLEVEL 3+\n0/1\n{T}: Draw a card.

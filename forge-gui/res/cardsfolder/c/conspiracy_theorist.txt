@@ -4,10 +4,9 @@ Types:Creature Human Shaman
 PT:2/2
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME attacks, you may pay {1} and discard a card. If you do, draw a card.
 SVar:TrigDraw:AB$ Draw | Cost$ 1 Discard<1/Card>
-T:Mode$ DiscardedAll | ValidPlayer$ You | ValidCard$ Card.nonLand | TriggerZones$ Battlefield | Execute$ TrigEffect | RememberTriggeringCards$ True | TriggerDescription$ Whenever you discard one or more nonland cards, you may exile one of them from your graveyard. If you do, you may cast it this turn.
-SVar:TrigEffect:AB$ Effect | Cost$ ExileFromGrave<1/Card.IsRemembered> | RememberObjects$ ExiledCards | StaticAbilities$ MayCast | ExileOnMoved$ Stack | SubAbility$ DBCleanup
+T:Mode$ DiscardedAll | ValidPlayer$ You | ValidCard$ Card.nonLand | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ Whenever you discard one or more nonland cards, you may exile one of them from your graveyard. If you do, you may cast it this turn.
+SVar:TrigEffect:AB$ Effect | Cost$ ExileFromGrave<1/Card.TriggeredCards> | RememberObjects$ ExiledCards | StaticAbilities$ MayCast | ExileOnMoved$ Stack
 SVar:MayCast:Mode$ Continuous | Affected$ Card.IsRemembered | MayPlay$ True | EffectZone$ Command | AffectedZone$ Exile | Description$ You may cast this spell this turn.
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Discard
 Oracle:Whenever Conspiracy Theorist attacks, you may pay {1} and discard a card. If you do, draw a card.\nWhenever you discard one or more nonland cards, you may exile one of them from your graveyard. If you do, you may cast it this turn.

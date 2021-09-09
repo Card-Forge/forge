@@ -9,6 +9,7 @@ import com.google.common.collect.Lists;
 
 import forge.GameCommand;
 import forge.ImageKeys;
+import forge.card.CardRarity;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityFactory;
@@ -139,10 +140,10 @@ public class EffectEffect extends SpellAbilityEffect {
         for (Player controller : effectOwner) {
             final Card eff = createEffect(sa, controller, name, image);
             eff.setSetCode(sa.getHostCard().getSetCode());
-            eff.setRarity(sa.getHostCard().getRarity());
-            // For Raging River effect to add attacker "left" or "right" pile later
-            if (sa.hasParam("Mutable")) {
-                eff.setImmutable(false);
+            if (name.startsWith("Emblem")) {
+                eff.setRarity(CardRarity.Common);
+            } else {
+                eff.setRarity(sa.getHostCard().getRarity());
             }
 
             // Abilities and triggers work the same as they do for Token
@@ -282,31 +283,24 @@ public class EffectEffect extends SpellAbilityEffect {
 
                 if ((duration == null) || duration.equals("EndOfTurn")) {
                     game.getEndOfTurn().addUntil(endEffect);
-                }
-                else if (duration.equals("UntilHostLeavesPlay")) {
+                } else if (duration.equals("UntilHostLeavesPlay")) {
                     hostCard.addLeavesPlayCommand(endEffect);
-                }
-                else if (duration.equals("UntilHostLeavesPlayOrEOT")) {
+                } else if (duration.equals("UntilHostLeavesPlayOrEOT")) {
                     game.getEndOfTurn().addUntil(endEffect);
                     hostCard.addLeavesPlayCommand(endEffect);
-                }
-                else if (duration.equals("UntilYourNextTurn")) {
+                } else if (duration.equals("UntilYourNextTurn")) {
                     game.getCleanup().addUntil(controller, endEffect);
-                }
-                else if (duration.equals("UntilYourNextUpkeep")) {
+                } else if (duration.equals("UntilYourNextUpkeep")) {
                     game.getUpkeep().addUntil(controller, endEffect);
-                }
-                else if (duration.equals("UntilEndOfCombat")) {
+                } else if (duration.equals("UntilEndOfCombat")) {
                     game.getEndOfCombat().addUntil(endEffect);
-                }
-                else if (duration.equals("UntilTheEndOfYourNextTurn")) {
+                } else if (duration.equals("UntilTheEndOfYourNextTurn")) {
                     if (game.getPhaseHandler().isPlayerTurn(controller)) {
                         game.getEndOfTurn().registerUntilEnd(controller, endEffect);
                     } else {
                         game.getEndOfTurn().addUntilEnd(controller, endEffect);
                     }
-                }
-                else if (duration.equals("ThisTurnAndNextTurn")) {
+                } else if (duration.equals("ThisTurnAndNextTurn")) {
                     game.getUntap().addAt(new GameCommand() {
                         private static final long serialVersionUID = -5054153666503075717L;
 
@@ -315,6 +309,8 @@ public class EffectEffect extends SpellAbilityEffect {
                             game.getEndOfTurn().addUntil(endEffect);
                         }
                     });
+                } else if (duration.equals("UntilStateBasedActionChecked")) {
+                    game.addSBACheckedCommand(endEffect);
                 }
             }
 
@@ -322,11 +318,10 @@ public class EffectEffect extends SpellAbilityEffect {
                 hostCard.addImprintedCard(eff);
             }
 
-            eff.updateStateForView();
-
             // TODO: Add targeting to the effect so it knows who it's dealing with
             game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
             game.getAction().moveTo(ZoneType.Command, eff, sa);
+            eff.updateStateForView();
             game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
             //if (effectTriggers != null) {
             //    game.getTriggerHandler().registerActiveTrigger(cmdEffect, false);

@@ -31,8 +31,6 @@ import forge.game.IHasSVars;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
-import forge.game.ability.ApiType;
-import forge.game.ability.effects.CharmEffect;
 import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
@@ -337,7 +335,7 @@ public class TriggerHandler {
         waitingTriggers.clear();
     }
 
-    public void resetTurnTriggerState()    {
+    public void resetTurnTriggerState() {
         for(final Trigger t : activeTriggers) {
             t.resetTurnState();
         }
@@ -346,8 +344,7 @@ public class TriggerHandler {
         }
     }
 
-    private boolean runNonStaticTriggersForPlayer(final Player player, final TriggerWaiting wt, final List<Trigger> delayedTriggersWorkingCopy ) {
-
+    private boolean runNonStaticTriggersForPlayer(final Player player, final TriggerWaiting wt, final List<Trigger> delayedTriggersWorkingCopy) {
         final TriggerType mode = wt.getMode();
         final Map<AbilityKey, Object> runParams = wt.getParams();
         final List<Trigger> triggers = wt.getTriggers() != null ? wt.getTriggers() : activeTriggers;
@@ -503,7 +500,6 @@ public class TriggerHandler {
     // runs it if so.
     // Return true if the trigger went off, false otherwise.
     private void runSingleTriggerInternal(final Trigger regtrig, final Map<AbilityKey, Object> runParams) {
-
         // All tests passed, execute ability.
         if (regtrig instanceof TriggerTapsForMana) {
             final SpellAbility abMana = (SpellAbility) runParams.get(AbilityKey.AbilityMana);
@@ -519,8 +515,7 @@ public class TriggerHandler {
         if (sa == null) {
             if (!regtrig.hasParam("Execute")) {
                 sa = new SpellAbility.EmptySa(host);
-            }
-            else {
+            } else {
                 String name = regtrig.getParam("Execute");
                 if (!host.getCurrentState().hasSVar(name)) {
                     System.err.println("Warning: tried to run a trigger for card " + host + " referencing a SVar " + name + " not present on the current state " + host.getCurrentState() + ". Aborting trigger execution to prevent a crash.");
@@ -565,24 +560,11 @@ public class TriggerHandler {
             host.addRemembered(triggeredCard);
         }
 
-        if (regtrig.hasParam("RememberTriggeringCards")) {
-            CardCollection triggeringCards = ((CardCollection) sa.getTriggeringObject(AbilityKey.Cards));
-            for (Card c : triggeringCards) {
-                host.addRemembered(c);
-            }
-        }
-
         if (regtrig.hasParam("RememberKey")) {
             host.addRemembered(runParams.get(AbilityKey.fromString(regtrig.getParam("RememberKey"))));
         }
 
         sa.setStackDescription(sa.toString());
-        if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
-            if (!CharmEffect.makeChoices(sa)) {
-                // 603.3c If no mode is chosen, the ability is removed from the stack.
-                return;
-            }
-        }
 
         Player decider = null;
         boolean isMandatory = false;
@@ -590,10 +572,9 @@ public class TriggerHandler {
             sa.setOptionalTrigger(true);
             decider = AbilityUtils.getDefinedPlayers(host, regtrig.getParam("OptionalDecider"), sa).get(0);
         }
-        else if (sa instanceof AbilitySub || !sa.hasParam("Cost") || sa.getParam("Cost").equals("0")) {
+        else if (sa instanceof AbilitySub || !sa.hasParam("Cost") || (sa.getPayCosts() != null && sa.getPayCosts().isMandatory()) || sa.getParam("Cost").equals("0")) {
             isMandatory = true;
-        }
-        else { // triggers with a cost can't be mandatory
+        } else { // triggers with a cost can't be mandatory
             sa.setOptionalTrigger(true);
             decider = sa.getActivatingPlayer();
         }
@@ -605,8 +586,7 @@ public class TriggerHandler {
         wrapperAbility.setLastStateBattlefield(game.getLastStateBattlefield());
         if (regtrig.isStatic()) {
             wrapperAbility.getActivatingPlayer().getController().playTrigger(host, wrapperAbility, isMandatory);
-        }
-        else {
+        } else {
             game.getStack().addSimultaneousStackEntry(wrapperAbility);
         }
 

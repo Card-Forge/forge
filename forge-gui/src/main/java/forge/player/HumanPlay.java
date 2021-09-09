@@ -44,6 +44,7 @@ import forge.gamemodes.match.input.InputPayManaOfCostPayment;
 import forge.gamemodes.match.input.InputSelectCardsFromList;
 import forge.gui.FThreads;
 import forge.gui.util.SGuiChoose;
+import forge.util.Aggregates;
 import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
@@ -148,7 +149,6 @@ public class HumanPlay {
         }
 
         return GameActionUtil.addOptionalCosts(choosen, list);
-        //final List<SpellAbility> abilities = GameActionUtil.getOptionalCosts(original);
     }
 
     /**
@@ -189,7 +189,6 @@ public class HumanPlay {
     public final static void playSpellAbilityNoStack(final PlayerControllerHuman controller, final Player player, final SpellAbility sa) {
         playSpellAbilityNoStack(controller, player, sa, false);
     }
-
     public final static void playSpellAbilityNoStack(final PlayerControllerHuman controller, final Player player, final SpellAbility sa, boolean useOldTargets) {
         sa.setActivatingPlayer(player);
 
@@ -292,8 +291,7 @@ public class HumanPlay {
                 String message = null;
                 if (res.contains(p)) {
                     message = Localizer.getInstance().getMessage("lblDoYouWantLetThatPlayerDrawNCardOrDoAction", String.valueOf(amount), orString);
-                }
-                else {
+                } else {
                     message = Localizer.getInstance().getMessage("lblDoYouWantDrawNCardOrDoAction", String.valueOf(amount), orString);
                 }
 
@@ -308,10 +306,10 @@ public class HumanPlay {
             else if (part instanceof CostGainLife) {
                 PaymentDecision pd = part.accept(hcd);
 
-                if (pd == null)
+                if (pd == null) {
                     return false;
-                else
-                    part.payAsDecided(p, pd, sourceAbility);
+                }
+                part.payAsDecided(p, pd, sourceAbility);
             }
             else if (part instanceof CostAddMana) {
                 String desc = part.toString();
@@ -322,10 +320,10 @@ public class HumanPlay {
                 }
                 PaymentDecision pd = part.accept(hcd);
 
-                if (pd == null)
+                if (pd == null) {
                     return false;
-                else
-                    part.payAsDecided(p, pd, sourceAbility);
+                }
+                part.payAsDecided(p, pd, sourceAbility);
             }
             else if (part instanceof CostMill) {
                 final int amount = getAmountFromPart(part, source, sourceAbility);
@@ -344,10 +342,22 @@ public class HumanPlay {
 
                 PaymentDecision pd = part.accept(hcd);
 
-                if (pd == null)
+                if (pd == null) {
                     return false;
-                else
-                    part.payAsDecided(p, pd, sourceAbility);
+                }
+                part.payAsDecided(p, pd, sourceAbility);
+            }
+            else if (part instanceof CostRollDice) {
+                if (!part.canPay(sourceAbility, p)) {
+                    return false;
+                }
+
+                PaymentDecision pd = part.accept(hcd);
+
+                if (pd == null) {
+                    return false;
+                }
+                part.payAsDecided(p, pd, sourceAbility);
             }
             else if (part instanceof CostDamage) {
                 if (!part.canPay(sourceAbility, p)) {
@@ -357,10 +367,10 @@ public class HumanPlay {
                 // not a pay life but damage!
                 PaymentDecision pd = part.accept(hcd);
 
-                if (pd == null)
+                if (pd == null) {
                     return false;
-                else
-                    part.payAsDecided(p, pd, sourceAbility);
+                }
+                part.payAsDecided(p, pd, sourceAbility);
             }
             else if (part instanceof CostPutCounter) {
                 if (!part.canPay(sourceAbility, p)) {
@@ -369,26 +379,26 @@ public class HumanPlay {
 
                 PaymentDecision pd = part.accept(hcd);
 
-                if (pd == null)
+                if (pd == null) {
                     return false;
-                else
-                    part.payAsDecided(p, pd, sourceAbility);
+                }
+                part.payAsDecided(p, pd, sourceAbility);
             }
             else if (part instanceof CostRemoveCounter) {
                 PaymentDecision pd = part.accept(hcd);
 
-                if (pd == null)
+                if (pd == null) {
                     return false;
-                else
-                    part.payAsDecided(p, pd, sourceAbility);
+                }
+                part.payAsDecided(p, pd, sourceAbility);
             }
             else if (part instanceof CostRemoveAnyCounter) {
                 PaymentDecision pd = part.accept(hcd);
 
-                if (pd == null)
+                if (pd == null) {
                     return false;
-                else
-                    part.payAsDecided(p, pd, sourceAbility);
+                }
+                part.payAsDecided(p, pd, sourceAbility);
             }
             else if (part instanceof CostExile) {
                 CostExile costExile = (CostExile) part;
@@ -400,8 +410,7 @@ public class HumanPlay {
                     }
 
                     costExile.payAsDecided(p, PaymentDecision.card(p.getCardsIn(ZoneType.Graveyard)), sourceAbility);
-                }
-                else {
+                } else {
                     from = costExile.getFrom();
                     CardCollection list = CardLists.getValidCards(p.getCardsIn(from), part.getType().split(";"), p, source, sourceAbility);
                     final int nNeeded = getAmountFromPart(costPart, source, sourceAbility);
@@ -419,7 +428,12 @@ public class HumanPlay {
                         CardCollection newList = new CardCollection();
                         GameEntityViewMap<Card, CardView> gameCacheList = GameEntityView.getMap(list);
                         for (int i = 0; i < nNeeded; i++) {
-                            final CardView cv = SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblExileFromZone", from.getTranslatedName()), gameCacheList.getTrackableKeys());
+                            final CardView cv;
+                            if (mandatory) {
+                                cv = SGuiChoose.one(Localizer.getInstance().getMessage("lblExileFromZone", from.getTranslatedName()), gameCacheList.getTrackableKeys());
+                            } else {
+                                cv = SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblExileFromZone", from.getTranslatedName()), gameCacheList.getTrackableKeys());
+                            }
                             if (cv == null || !gameCacheList.containsKey(cv)) {
                                 return false;
                             }
@@ -484,8 +498,7 @@ public class HumanPlay {
                 CardCollectionView listView;
                 if (sameZone) {
                     listView = p.getGame().getCardsIn(from);
-                }
-                else {
+                } else {
                     listView = p.getCardsIn(from);
                 }
                 CardCollection list = CardLists.getValidCards(listView, part.getType().split(";"), p, source, sourceAbility);
@@ -535,10 +548,10 @@ public class HumanPlay {
             }
             else if (part instanceof CostSacrifice) {
                 PaymentDecision pd = part.accept(hcd);
-                if (pd == null)
+                if (pd == null) {
                     return false;
-                else
-                    part.payAsDecided(p, pd, sourceAbility);
+                }
+                part.payAsDecided(p, pd, sourceAbility);
             }
             else if (part instanceof CostGainControl) {
                 int amount = Integer.parseInt(part.getAmount());
@@ -553,15 +566,21 @@ public class HumanPlay {
                 if (!hasPaid) { return false; }
             }
             else if (part instanceof CostDiscard) {
+                int amount = getAmountFromPartX(part, source, sourceAbility);
                 if ("Hand".equals(part.getType())) {
                     if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantDiscardYourHand"), sourceAbility)) {
                         return false;
                     }
 
                     ((CostDiscard)part).payAsDecided(p, PaymentDecision.card(p.getCardsIn(ZoneType.Hand)), sourceAbility);
+                } else if ("Random".equals(part.getType())) {
+                    if (!part.canPay(sourceAbility, p) || !p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblWouldYouLikeRandomDiscardTargetCard", amount), sourceAbility)) {
+                        return false;
+                    }
+
+                    ((CostDiscard)part).payAsDecided(p, (PaymentDecision.card(Aggregates.random(p.getCardsIn(ZoneType.Hand), amount, new CardCollection()))), sourceAbility);
                 } else {
                     CardCollectionView list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), part.getType(), p, source, sourceAbility);
-                    int amount = getAmountFromPartX(part, source, sourceAbility);
                     boolean hasPaid = payCostPart(controller, p, sourceAbility, (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lbldiscard") + orString);
                     if (!hasPaid) { return false; }
                 }
@@ -702,7 +721,7 @@ public class HumanPlay {
 
     public static boolean payManaCost(final PlayerControllerHuman controller, final ManaCost realCost, final CostPartMana mc, final SpellAbility ability, final Player activator, String prompt, ManaConversionMatrix matrix, boolean isActivatedSa) {
         final Card source = ability.getHostCard();
-        ManaCostBeingPaid toPay = new ManaCostBeingPaid(realCost, mc.getRestiction());
+        ManaCostBeingPaid toPay = new ManaCostBeingPaid(realCost, mc.getRestriction());
 
         String xInCard = source.getSVar("X");
         String xColor = ability.getParam("XColor");

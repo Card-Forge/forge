@@ -2,8 +2,8 @@
 Code=PEXO
 Date=1998-06-15
 Name=Exodus Promos
-Type=Promos
+Type=Promo
 ScryfallCode=PEXO
 
 [cards]
-89 R Monstrous Hound
+89 R Monstrous Hound @Dermot Power

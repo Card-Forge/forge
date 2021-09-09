@@ -57,10 +57,10 @@ public abstract class FloatingCardArea extends CardArea {
     protected abstract Iterable<CardView> getCards();
 
     protected FloatingCardArea(final CMatchUI matchUI) {
-	this(matchUI, new FScrollPane(false, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER));
+        this(matchUI, new FScrollPane(false, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER));
     }
     protected FloatingCardArea(final CMatchUI matchUI, final FScrollPane scrollPane) {
-	super(matchUI, scrollPane);
+        super(matchUI, scrollPane);
     }
 
     protected void showWindow() {
@@ -127,7 +127,7 @@ public abstract class FloatingCardArea extends CardArea {
     }
 
     protected FDialog getWindow() {
-	return window;
+        return window;
     }
 
     protected void loadLocation() {

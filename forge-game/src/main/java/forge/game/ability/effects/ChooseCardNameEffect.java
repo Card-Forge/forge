@@ -1,21 +1,15 @@
 package forge.game.ability.effects;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 
 import forge.StaticData;
 import forge.card.CardFacePredicates;
 import forge.card.CardRules;
-import forge.card.CardRulesPredicates;
 import forge.card.CardSplitType;
 import forge.card.ICardFace;
 import forge.game.ability.AbilityUtils;
@@ -26,9 +20,7 @@ import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
-import forge.item.PaperCard;
 import forge.util.Aggregates;
-import forge.util.ComparableOp;
 import forge.util.Localizer;
 
 public class ChooseCardNameEffect extends SpellAbilityEffect {
@@ -63,6 +55,7 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
 
         boolean randomChoice = sa.hasParam("AtRandom");
         boolean chooseFromDefined = sa.hasParam("ChooseFromDefinedCards");
+        boolean chooseFromList = sa.hasParam("ChooseFromList");
         boolean chooseFromOneTimeList = sa.hasParam("ChooseFromOneTimeList");
 
         if (!randomChoice) {
@@ -78,28 +71,22 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 String chosen = "";
-
-                if (randomChoice) {
-                    // Currently only used for Momir Avatar, if something else gets added here, make it more generic
-
-                    String numericAmount = "X";
-                    final int validAmount = StringUtils.isNumeric(numericAmount) ? Integer.parseInt(numericAmount) :
-                        AbilityUtils.calculateAmount(host, numericAmount, sa);
-
+                //This section was used for Momir Avatar, which no longer uses it - commented out 7/28/2021
+                //if (randomChoice) {
+                    //String numericAmount = "X";
+                    //final int validAmount = StringUtils.isNumeric(numericAmount) ? Integer.parseInt(numericAmount) :
+                    //    AbilityUtils.calculateAmount(host, numericAmount, sa);
                     // Momir needs PaperCard
-                    Collection<PaperCard> cards = StaticData.instance().getCommonCards().getUniqueCards();
-                    Predicate<PaperCard> cpp = Predicates.and(
-                        Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, PaperCard.FN_GET_RULES),
-                        Predicates.compose(CardRulesPredicates.cmc(ComparableOp.EQUALS, validAmount), PaperCard.FN_GET_RULES)
-                    );
-
-                    cards = Lists.newArrayList(Iterables.filter(cards, cpp));
-                    if (!cards.isEmpty()) {
-                        chosen = Aggregates.random(cards).getName();
-                    } else {
-                        chosen = "";
-                    }
-                } else if (chooseFromDefined) {
+                    //Collection<PaperCard> cards = StaticData.instance().getCommonCards().getUniqueCards();
+                    //Predicate<PaperCard> cpp = Predicates.and(
+                    //    Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, PaperCard.FN_GET_RULES),
+                    //    Predicates.compose(CardRulesPredicates.cmc(ComparableOp.EQUALS, validAmount), PaperCard.FN_GET_RULES));
+                    //cards = Lists.newArrayList(Iterables.filter(cards, cpp));
+                    //if (!cards.isEmpty()) { chosen = Aggregates.random(cards).getName();
+                    //} else {
+                    //    chosen = "";
+                    //}
+                if (chooseFromDefined) {
                     CardCollection choices = AbilityUtils.getDefinedCards(host, sa.getParam("ChooseFromDefinedCards"), sa);
                     choices = CardLists.getValidCards(choices, valid, host.getController(), host, sa);
                     List<ICardFace> faces = new ArrayList<>();
@@ -116,6 +103,17 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                     }
                     Collections.sort(faces);
                     chosen = p.getController().chooseCardName(sa, faces, message);
+                } else if (chooseFromList) {
+                    String [] names = sa.getParam("ChooseFromList").split(",");
+                    List<ICardFace> faces = new ArrayList<>();
+                    for (String name : names) {
+                        faces.add(StaticData.instance().getCommonCards().getFaceByName(name));
+                    }
+                    if (randomChoice) {
+                        chosen = Aggregates.random(faces).getName();
+                    } else {
+                        chosen = p.getController().chooseCardName(sa, faces, message);
+                    }
                 } else if (chooseFromOneTimeList) {
                     String [] names = sa.getParam("ChooseFromOneTimeList").split(",");
                     List<ICardFace> faces = new ArrayList<>();

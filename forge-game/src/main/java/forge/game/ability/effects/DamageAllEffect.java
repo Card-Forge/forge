@@ -3,7 +3,6 @@ package forge.game.ability.effects;
 import java.util.List;
 
 import forge.game.Game;
-import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -61,9 +60,7 @@ public class DamageAllEffect extends DamageBaseEffect {
         final String damage = sa.getParam("NumDmg");
         final int dmg = AbilityUtils.calculateAmount(source, damage, sa);
 
-        final boolean rememberCard = sa.hasParam("RememberDamaged") || sa.hasParam("RememberDamagedCreature");
-        final boolean rememberPlayer = sa.hasParam("RememberDamaged") || sa.hasParam("RememberDamagedPlayer");
-
+        //Remember params from this effect have been moved to dealDamage in GameAction
         Player targetPlayer = sa.getTargets().getFirstTargetedPlayer();
 
         String players = "";
@@ -75,8 +72,7 @@ public class DamageAllEffect extends DamageBaseEffect {
         CardCollectionView list;
         if (sa.hasParam("ValidCards")) {
             list = game.getCardsIn(ZoneType.Battlefield);
-        }
-        else {
+        } else {
             list = CardCollection.EMPTY;
         }
 
@@ -112,17 +108,6 @@ public class DamageAllEffect extends DamageBaseEffect {
 
         if (!usedDamageMap) {
             game.getAction().dealDamage(false, damageMap, preventMap, counterTable, sa);
-        }
-
-        // do Remember there
-        if (rememberCard || rememberPlayer) {
-            for (GameEntity e : damageMap.row(sourceLKI).keySet()) {
-                if (e instanceof Card && rememberCard) {
-                    source.addRemembered(e);
-                } else if (e instanceof Player && rememberPlayer) {
-                    source.addRemembered(e);
-                }
-            }
         }
 
         replaceDying(sa);

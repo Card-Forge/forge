@@ -1,50 +1,48 @@
 package forge.gamesimulationtests;
 
-import javax.imageio.ImageIO;
-
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.testng.PowerMockTestCase;
-import org.testng.Assert;
-import org.testng.IObjectFactory;
-import org.testng.annotations.ObjectFactory;
-
 import forge.ImageCache;
+import forge.ImageKeys;
 import forge.Singletons;
-import forge.gamesimulationtests.util.CardDatabaseHelper;
+import forge.card.ForgeCardMockTestCase;
+import forge.game.GameLogFormatter;
 import forge.gamesimulationtests.util.GameWrapper;
 import forge.gamesimulationtests.util.player.PlayerSpecification;
 import forge.gamesimulationtests.util.player.PlayerSpecificationHandler;
 import forge.gamesimulationtests.util.playeractions.testactions.AssertAction;
-import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
+import forge.util.Lang;
+import forge.util.Localizer;
+import io.sentry.Sentry;
+import io.sentry.context.Context;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.core.classloader.annotations.SuppressStaticInitializationFor;
+import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 
-@PrepareForTest(value = { FModel.class, Singletons.class, ImageCache.class, ImageIO.class })
-public class BaseGameSimulationTest extends PowerMockTestCase {
-	//Can't run this with @BeforeTest or something like that, because of static voodoo
-	protected void initializeMocks() throws Exception {
-		//Loading a card also automatically loads the image, which we do not want (even if it wouldn't cause exceptions).
-		//The static initializer block in ImageCache can't fully be mocked (https://code.google.com/p/powermock/issues/detail?id=256), so we also need to mess with ImageIO...
-        //TODO: make sure that loading images only happens in a GUI environment, so we no longer need to mock this
-        PowerMockito.mockStatic(ImageIO.class);
-        PowerMockito.mockStatic(ImageCache.class);
-        
-        //Mocking some more static stuff
-		ForgePreferences forgePreferences = new ForgePreferences();
-		PowerMockito.when(FModel.getPreferences()).thenReturn(forgePreferences);
-		PowerMockito.mockStatic(Singletons.class);
-		PowerMockito.mockStatic(FModel.class);
-		PowerMockito.when(FModel.getMagicDb()).thenReturn(CardDatabaseHelper.getStaticDataToPopulateOtherMocks());
+import javax.imageio.ImageIO;
+import java.util.ResourceBundle;
+
+@PrepareForTest(value = {FModel.class, Singletons.class, ResourceBundle.class,
+		ImageCache.class, ImageIO.class, ImageKeys.class,
+		ForgeConstants.class, Localizer.class, Sentry.class, GameLogFormatter.class})
+@SuppressStaticInitializationFor({"forge.ImageCache", "forge.localinstance.properties.ForgeConstants"})
+public class BaseGameSimulationTest extends ForgeCardMockTestCase {
+
+	@BeforeMethod
+	@Override
+	protected void initMocks() throws Exception {
+		super.initMocks();
+		PowerMockito.mockStatic(Sentry.class);
+		PowerMockito.mockStatic(GameLogFormatter.class);
+		PowerMockito.when(Sentry.getContext()).thenReturn(new Context());
+		Lang.createInstance("en-US");
 	}
-	
-	@ObjectFactory
-	public IObjectFactory getObjectFactory() {
-		return new org.powermock.modules.testng.PowerMockObjectFactory();
-	}
-	
+
 	protected void runGame(GameWrapper game, PlayerSpecification expectedWinner, int finalTurn, AssertAction... postGameAssertActions) {
 		try {
-			initializeMocks();
+			initMocks();
 			game.runGame();
 			verifyThatTheGameHasFinishedAndThatPlayerHasWonOnTurn(game, expectedWinner, finalTurn);
 			if(postGameAssertActions != null && postGameAssertActions.length > 0) {
@@ -61,7 +59,8 @@ public class BaseGameSimulationTest extends PowerMockTestCase {
 	protected void verifyThatTheGameHasFinishedAndThatPlayerHasWonOnTurn(GameWrapper game, PlayerSpecification expectedWinner, int finalTurn) {
 		Assert.assertTrue(game.getGame().isGameOver());
 		Assert.assertEquals(game.getGame().getOutcome().getLastTurnNumber(), finalTurn);
-		Assert.assertEquals(game.getGame().getOutcome().getWinningPlayer(), PlayerSpecificationHandler.INSTANCE.find(game.getGame(), expectedWinner));
+		Assert.assertEquals(game.getGame().getOutcome().getWinningPlayer().getPlayer().getName(),
+						    PlayerSpecificationHandler.INSTANCE.find(game.getGame(), expectedWinner).getName());
 		Assert.assertTrue(game.getPlayerActions() == null || game.getPlayerActions().isEmpty());
 	}
 }

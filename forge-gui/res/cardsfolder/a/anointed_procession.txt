@@ -1,9 +1,7 @@
 Name:Anointed Procession
 ManaCost:3 W
 Types:Enchantment
-R:Event$ CreateToken | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ DoubleToken | EffectOnly$ True | Description$ If an effect would create one or more tokens under your control, it creates twice that many of those tokens instead.
-SVar:DoubleToken:DB$ ReplaceEffect | VarName$ TokenNum | VarValue$ X
-SVar:X:ReplaceCount$TokenNum/Twice
+R:Event$ CreateToken | ActiveZones$ Battlefield | ValidToken$ Card.YouCtrl | ReplaceWith$ DoubleToken | EffectOnly$ True | Description$ If an effect would create one or more tokens under your control, it creates twice that many of those tokens instead.
+SVar:DoubleToken:DB$ ReplaceToken | Type$ Amount | ValidCard$ Card.YouCtrl
 DeckNeeds:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/anointed_procession.jpg
 Oracle:If an effect would create one or more tokens under your control, it creates twice that many of those tokens instead.

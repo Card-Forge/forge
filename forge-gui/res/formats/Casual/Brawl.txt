@@ -3,5 +3,5 @@ Name:Brawl
 Order:101
 Type:Casual
 Subtype:Commander
-Sets:ELD, THB, IKO, M21, ZNR, KHM, STX
+Sets:ELD, THB, IKO, M21, ZNR, KHM, STX, AFR
 Banned:Drannith Magistrate; Lutri, the Spellchaser; Oko, Thief of Crowns; Omnath, Locus of Creation; Runed Halo; Sorcerous Spyglass; Winota, Joiner of Forces;
