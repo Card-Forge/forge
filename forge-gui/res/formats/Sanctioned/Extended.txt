@@ -5,4 +5,4 @@ Subtype:Extended
 Effective:2013-07-19
 Retired:2013-10-08
 Sets:ZEN, WWK, ROE, M11, SOM, MBS, NPH, M12, ISD, DKA, AVR, M13, RTR, GTC, DGM, M14
-Banned:Jace, the Mind Sculptor; Mental Misstep; Ponder; Preordain; Stoneforge Mystic
+Banned:Mental Misstep; Ponder
