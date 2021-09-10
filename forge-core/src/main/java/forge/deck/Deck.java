@@ -262,15 +262,6 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             }
 
             CardPool pool = CardPool.fromCardList(cardsInSection);
-            // TODO: @Leriomaggio
-            // this will need improvements with a validation schema for each section to avoid
-            // accidental additions and/or sanitise the content of each section.
-            // I used to store planes and schemes under sideboard header, so this will assign them to a correct section
-            IPaperCard sample = pool.get(0);
-            if (sample != null && (sample.getRules().getType().isPlane() || sample.getRules().getType().isPhenomenon()))
-                sec = DeckSection.Planes;
-            if (sample != null && sample.getRules().getType().isScheme())
-                sec = DeckSection.Schemes;
             putSection(sec, pool);
         }
         deferredSections = null;  // set to null, just in case!
