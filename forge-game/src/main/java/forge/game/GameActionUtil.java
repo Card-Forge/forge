@@ -221,23 +221,23 @@ public final class GameActionUtil {
                             continue;
                         }
 
-                        final SpellAbility flashback = sa.copy(activator);
-                        flashback.setAlternativeCost(AlternativeCost.Flashback);
-                        flashback.getRestrictions().setZone(ZoneType.Graveyard);
+                        SpellAbility flashback = null;
 
                         // there is a flashback cost (and not the cards cost)
-                        if (keyword.contains(":")) {
+                        if (keyword.contains(":")) { // K:Flashback:Cost:ExtraParams:ExtraDescription
                             final String[] k = keyword.split(":");
-                            flashback.setPayCosts(new Cost(k[1], false));
+                            flashback = sa.copyWithManaCostReplaced(activator, new Cost(k[1], false));
                             String extraParams =  k.length > 2 ? k[2] : "";
                             if (!extraParams.isEmpty()) {
-                                Map<String, String> extraParamMap =
-                                        Maps.newHashMap(AbilityFactory.getMapParams(extraParams));
-                                for (Map.Entry<String, String> param : extraParamMap.entrySet()) {
+                                for (Map.Entry<String, String> param : AbilityFactory.getMapParams(extraParams).entrySet()) {
                                     flashback.putParam(param.getKey(), param.getValue());
                                 }
                             }
+                        } else { // same cost as original (e.g. Otaria plane)
+                            flashback = sa.copy(activator);
                         }
+                        flashback.setAlternativeCost(AlternativeCost.Flashback);
+                        flashback.getRestrictions().setZone(ZoneType.Graveyard);
                         alternatives.add(flashback);
                     } else if (keyword.startsWith("Foretell")) {
                         // Foretell cast only from Exile
