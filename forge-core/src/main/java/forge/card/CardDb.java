@@ -192,23 +192,25 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 cardName = cardName.substring(0, cardName.length() - foilSuffix.length());
                 isFoil = true;
             }
-            String preferredArt = artPrefs.get(cardName);
-            if (preferredArt != null) { //account for preferred art if needed
-                CardRequest request = fromPreferredArtEntry(preferredArt, isFoil);
-                if (request != null)  // otherwise, simply discard it and go on.
-                    return request;
-                System.err.println(String.format("[LOG]: Faulty Entry in Preferred Art for Card %s - Please check!", cardName));
-            }
             int artIndex = artPos > 0 ? Integer.parseInt(info[artPos]) : IPaperCard.NO_ART_INDEX;  // default: no art index
             String collectorNumber = cNrPos > 0 ? info[cNrPos].substring(1, info[cNrPos].length() - 1) : IPaperCard.NO_COLLECTOR_NUMBER;
-            String setName = setPos > 0 ? info[setPos] : null;
-            if (setName != null && setName.equals(CardEdition.UNKNOWN.getCode())) {  // ???
-                setName = null;
+            String setCode = setPos > 0 ? info[setPos] : null;
+            if (setCode != null && setCode.equals(CardEdition.UNKNOWN.getCode())) {  // ???
+                setCode = null;
+            }
+            if (setCode == null) {
+                String preferredArt = artPrefs.get(cardName);
+                if (preferredArt != null) { //account for preferred art if needed
+                    CardRequest request = fromPreferredArtEntry(preferredArt, isFoil);
+                    if (request != null)  // otherwise, simply discard it and go on.
+                        return request;
+                    System.err.println(String.format("[LOG]: Faulty Entry in Preferred Art for Card %s - Please check!", cardName));
+                }
             }
             // finally, check whether any between artIndex and CollectorNumber has been set
             if (collectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER) && artIndex == IPaperCard.NO_ART_INDEX)
                 artIndex = IPaperCard.DEFAULT_ART_INDEX;
-            return new CardRequest(cardName, setName, artIndex, isFoil, collectorNumber);
+            return new CardRequest(cardName, setCode, artIndex, isFoil, collectorNumber);
         }
     }
 

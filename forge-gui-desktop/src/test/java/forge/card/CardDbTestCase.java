@@ -2102,7 +2102,7 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
     }
 
 
-    @Test void testCardPreferenceSetReturnsAlwaysTheSelectedArtNoMatterTheRequest(){
+    @Test void testThatWithCardPreferenceSetAndNoRequestForSpecificEditionAlwaysReturnsPreferredArt(){
         String cardRequest = CardDb.CardRequest.compose("Island", "MIR", 3);
         PaperCard islandCard = this.cardDb.getCard(cardRequest);
         assertNotNull(islandCard);
@@ -2118,8 +2118,24 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         assertNotNull(islandCard);
         // Now card should be from the preferred art no matter the request
         assertEquals(islandCard.getName(), "Island");
+        assertEquals(islandCard.getEdition(), "TMP");
+        assertEquals(islandCard.getArtIndex(), 1);
+
+        // Now just asking for an Island
+        islandCard = this.cardDb.getCard("Island");
+        assertNotNull(islandCard);
+        assertEquals(islandCard.getName(), "Island");
         assertEquals(islandCard.getEdition(), "MIR");
         assertEquals(islandCard.getArtIndex(), 3);
+
+        // Now asking for a foiled island - I will get the one from preferred art - but foiled
+        cardRequest = CardDb.CardRequest.compose("Island", true);
+        islandCard = this.cardDb.getCard(cardRequest);
+        assertNotNull(islandCard);
+        assertEquals(islandCard.getName(), "Island");
+        assertEquals(islandCard.getEdition(), "MIR");
+        assertEquals(islandCard.getArtIndex(), 3);
+        assertTrue(islandCard.isFoil());
     }
 
 }
