@@ -402,6 +402,10 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return false;
     }
 
+    public boolean hasPreferredArt(String cardName){
+        return artPrefs.getOrDefault(cardName, null) != null;
+    }
+
     public CardRules getRules(String cardName) {
         CardRules result = rulesByName.get(cardName);
         if (result != null) {

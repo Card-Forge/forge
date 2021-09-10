@@ -443,6 +443,12 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
 
         if (card.getRules().isVariant())
             return false;  // skip variant cards
+        if (StaticData.instance().getCommonCards().hasPreferredArt(card.getName())){
+            // if there is any preferred art, never update it!
+            CardDb.CardRequest request = CardDb.CardRequest.fromString(card.getName());
+            if (request.edition.equals(card.getEdition()) && request.artIndex == card.getArtIndex())
+                return false;
+        }
         boolean isLatestCardArtPreference = StaticData.instance().cardArtPreferenceIsLatest();
         CardEdition cardEdition = StaticData.instance().getCardEdition(card.getEdition());
         if (cardEdition == null)  return false;
