@@ -15,26 +15,20 @@ import forge.interfaces.IUpdateable;
 
 import java.util.List;
 
+/**
+ * base class to render base forge screens like the deck editor and matches
+ */
 public abstract  class ForgeScene extends Scene implements IUpdateable {
 
     //GameLobby lobby;
     Graphics localGraphics;
-    DuelInput input=new DuelInput(this);
+    ForgeInput input=new ForgeInput(this);
     @Override
     public void dispose() {
     }
     @Override
     public void render() {
 
-        //Batch.getProjectionMatrix().setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        /*
-        Gdx.gl.glClearColor(0,1,1,1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        Stage.getBatch().begin();
-        Stage.getBatch().end();
-        Stage.act(Gdx.graphics.getDeltaTime());
-        Stage.draw();
-        */
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Clear the screen.
         if (getScreen() == null) {
             return;
@@ -44,7 +38,7 @@ public abstract  class ForgeScene extends Scene implements IUpdateable {
         localGraphics.begin(AdventureApplicationAdapter.instance.getCurrentWidth(), AdventureApplicationAdapter.instance.getCurrentHeight());
         getScreen().screenPos.setSize(AdventureApplicationAdapter.instance.getCurrentWidth(), AdventureApplicationAdapter.instance.getCurrentHeight());
         if (getScreen().getRotate180()) {
-            localGraphics.startRotateTransform(AdventureApplicationAdapter.instance.getCurrentWidth() / 2, AdventureApplicationAdapter.instance.getCurrentHeight() / 2, 180);
+            localGraphics.startRotateTransform(AdventureApplicationAdapter.instance.getCurrentWidth() / 2f, AdventureApplicationAdapter.instance.getCurrentHeight() / 2f, 180);
         }
         getScreen().draw(localGraphics);
         if (getScreen().getRotate180()) {
@@ -55,7 +49,7 @@ public abstract  class ForgeScene extends Scene implements IUpdateable {
                 overlay.screenPos.setSize(AdventureApplicationAdapter.instance.getCurrentWidth(), AdventureApplicationAdapter.instance.getCurrentHeight());
                 overlay.setSize(AdventureApplicationAdapter.instance.getCurrentWidth(), AdventureApplicationAdapter.instance.getCurrentHeight()); //update overlay sizes as they're rendered
                 if (overlay.getRotate180()) {
-                    localGraphics.startRotateTransform(AdventureApplicationAdapter.instance.getCurrentHeight() / 2, AdventureApplicationAdapter.instance.getCurrentHeight() / 2, 180);
+                    localGraphics.startRotateTransform(AdventureApplicationAdapter.instance.getCurrentHeight() / 2f, AdventureApplicationAdapter.instance.getCurrentHeight() / 2f, 180);
                 }
                 overlay.draw(localGraphics);
                 if (overlay.getRotate180()) {

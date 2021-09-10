@@ -6,6 +6,9 @@ import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Editor class to edit configuration, maybe moved or removed
+ */
 public class TextListEdit extends Box {
     JTextField edit=new JTextField();
     JButton findButton=new JButton(UIManager.getIcon("add"));
@@ -62,18 +65,18 @@ public class TextListEdit extends Box {
             edit.setText("");
             return;
         }
-        String values="";
+        StringBuilder values= new StringBuilder();
         for(int i=0;i<intValues.length;i++)
         {
-            values+=intValues[i];
+            values.append(intValues[i]);
             if(intValues.length>i+2)
-                values+=";";
+                values.append(";");
         }
-        edit.setText(values);
+        edit.setText(values.toString());
     }
 
     public String[] getList() {
-        return edit.getText().isEmpty()?null:edit.getText().split("\\;");
+        return edit.getText().isEmpty()?null:edit.getText().split(";");
     }
 
     public int[] getListAsInt() {

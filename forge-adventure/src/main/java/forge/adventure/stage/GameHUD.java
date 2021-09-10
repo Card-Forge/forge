@@ -18,25 +18,25 @@ import forge.adventure.util.UIActor;
 import forge.adventure.world.AdventurePlayer;
 import forge.adventure.world.WorldSave;
 
+/**
+ * Stage to handle everything rendered in the HUD
+ */
 public class GameHUD extends Stage {
 
     static public GameHUD instance;
     private final GameStage gameStage;
-    private final FitViewport stageViewport;
     private final Image avatar;
     private final Image miniMapPlayer;
-    private final UIActor ui;
     private final Label lifePoints;
     private final Label money;
     private Image miniMap;
 
-    private GameHUD(GameStage gstage) {
-        super(new FitViewport(Scene.GetIntendedWidth(), Scene.GetIntendedHeight()), gstage.getBatch());
+    private GameHUD(GameStage gameStage) {
+        super(new FitViewport(Scene.GetIntendedWidth(), Scene.GetIntendedHeight()), gameStage.getBatch());
         instance = this;
-        gameStage = gstage;
-        stageViewport = new FitViewport(Scene.GetIntendedWidth(), Scene.GetIntendedHeight());
+        this.gameStage = gameStage;
 
-        ui = new UIActor(Config.instance().getFile("ui/hud.json"));
+        UIActor ui = new UIActor(Config.instance().getFile("ui/hud.json"));
         miniMap = ui.findActor("map");
 
         Pixmap player = new Pixmap(3, 3, Pixmap.Format.RGB888);
@@ -69,11 +69,11 @@ public class GameHUD extends Stage {
         Vector2 c=new Vector2();
         screenToStageCoordinates(c.set(screenX, screenY));
 
-        float coordx=(c.x-miniMap.getX())/miniMap.getWidth();
-        float coordy=(c.y-miniMap.getY())/miniMap.getHeight();
-        if(coordx>=0&&coordx<=1.0&&coordy>=0&&coordy<=1.0)
+        float x=(c.x-miniMap.getX())/miniMap.getWidth();
+        float y=(c.y-miniMap.getY())/miniMap.getHeight();
+        if(x>=0&&x<=1.0&&y>=0&&y<=1.0)
         {
-            WorldStage.getInstance().GetPlayer().setPosition(coordx*WorldSave.getCurrentSave().getWorld().getWidthInPixels(),coordy*WorldSave.getCurrentSave().getWorld().getHeightInPixels());
+            WorldStage.getInstance().GetPlayer().setPosition(x*WorldSave.getCurrentSave().getWorld().getWidthInPixels(),y*WorldSave.getCurrentSave().getWorld().getHeightInPixels());
             return true;
         }
         return super.touchDown(screenX,screenY,  pointer,button);
@@ -86,9 +86,9 @@ public class GameHUD extends Stage {
         int xPos = (int) gameStage.player.getX();
         act(Gdx.graphics.getDeltaTime()); //act the Hud
         super.draw(); //draw the Hud
-        int xposMini = (int) (((float) xPos / (float) WorldSave.getCurrentSave().getWorld().getTileSize() / (float) WorldSave.getCurrentSave().getWorld().getWidthInTiles()) * miniMap.getWidth());
-        int yposMini = (int) (((float) yPos / (float) WorldSave.getCurrentSave().getWorld().getTileSize() / (float) WorldSave.getCurrentSave().getWorld().getHeightInTiles()) * miniMap.getHeight());
-        miniMapPlayer.setPosition(miniMap.getX() + xposMini - 1, miniMap.getY() + yposMini - 1);
+        int xPosMini = (int) (((float) xPos / (float) WorldSave.getCurrentSave().getWorld().getTileSize() / (float) WorldSave.getCurrentSave().getWorld().getWidthInTiles()) * miniMap.getWidth());
+        int yPosMini = (int) (((float) yPos / (float) WorldSave.getCurrentSave().getWorld().getTileSize() / (float) WorldSave.getCurrentSave().getWorld().getHeightInTiles()) * miniMap.getHeight());
+        miniMapPlayer.setPosition(miniMap.getX() + xPosMini - 1, miniMap.getY() + yPosMini - 1);
     }
 
     Texture miniMapTexture;
@@ -96,7 +96,7 @@ public class GameHUD extends Stage {
 
         if(miniMapTexture==null)
         {
-            miniMapTexture=new Texture(WorldSave.getCurrentSave().getWorld().getBiomImage());
+            miniMapTexture=new Texture(WorldSave.getCurrentSave().getWorld().getBiomeImage());
         }
 
         miniMap.setDrawable(new TextureRegionDrawable(miniMapTexture));

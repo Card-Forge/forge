@@ -2,7 +2,7 @@ package forge.adventure.scene;
 
 import forge.LobbyPlayer;
 import forge.adventure.AdventureApplicationAdapter;
-import forge.adventure.character.MobSprite;
+import forge.adventure.character.EnemySprite;
 import forge.adventure.character.PlayerSprite;
 import forge.adventure.libgdxgui.assets.FSkin;
 import forge.adventure.libgdxgui.screens.FScreen;
@@ -23,11 +23,15 @@ import forge.trackable.TrackableCollection;
 
 import java.util.*;
 
+/**
+ * DuelScene
+ * Forge screen scene that contains the duel screen
+ */
 public class DuelScene extends ForgeScene {
 
     //GameLobby lobby;
     HostedMatch hostedMatch;
-    MobSprite enemy;
+    EnemySprite enemy;
     PlayerSprite player;
     RegisteredPlayer humanPlayer;
     public DuelScene() {
@@ -115,7 +119,7 @@ public class DuelScene extends ForgeScene {
 
 
 
-    public void setEnemy(MobSprite data) {
+    public void setEnemy(EnemySprite data) {
         this.enemy = data;
     }
 

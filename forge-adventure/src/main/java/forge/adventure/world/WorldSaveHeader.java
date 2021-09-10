@@ -7,6 +7,9 @@ import forge.adventure.util.Serializer;
 import java.io.IOException;
 import java.util.Date;
 
+/**
+ * Header information for the save file like a preview image, save name and saved date.
+ */
 public class WorldSaveHeader implements java.io.Serializable, Disposable {
     public static int previewImageWidth = 512;
     public Pixmap preview;

@@ -12,6 +12,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * Editor class to edit configuration, maybe moved or removed
+ */
 public class EnemyEditor extends JComponent {
     DefaultListModel<EnemyData> model = new DefaultListModel<>();
     JList<EnemyData> list = new JList<>(model);
@@ -90,7 +93,7 @@ public class EnemyEditor extends JComponent {
         for(int i=0;i<model.getSize();i++)
             allEnemies.add(model.get(i));
         Json json = new Json(JsonWriter.OutputType.json);
-        FileHandle handle = Config.instance().getFile(Paths.EnemyPath);
+        FileHandle handle = Config.instance().getFile(Paths.ENEMIES);
         handle.writeString(json.prettyPrint(json.toJson(allEnemies,Array.class, EnemyData.class)),false);
 
     }
@@ -99,9 +102,12 @@ public class EnemyEditor extends JComponent {
         model.clear();
         Array<EnemyData> allEnemies=new Array<>();
         Json json = new Json();
-        FileHandle handle = Config.instance().getFile(Paths.EnemyPath);
+        FileHandle handle = Config.instance().getFile(Paths.ENEMIES);
         if (handle.exists())
-            allEnemies = json.fromJson(Array.class, EnemyData.class, handle);
+        {
+            Array readEnemies=json.fromJson(Array.class, EnemyData.class, handle);
+            allEnemies = readEnemies;
+        }
         for (int i=0;i<allEnemies.size;i++) {
             model.add(i,allEnemies.get(i));
         }

@@ -2,6 +2,9 @@ package forge.adventure.util;
 
 import forge.item.PaperCard;
 
+/**
+ * Reward class that may contain gold,cards or items
+ */
 public class Reward {
 
 

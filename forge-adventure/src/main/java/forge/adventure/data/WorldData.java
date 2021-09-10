@@ -5,11 +5,16 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import forge.adventure.util.Config;
 import forge.adventure.util.Paths;
+import forge.adventure.world.BiomeSprites;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Data class that will be used to read Json configuration files
+ * UIData
+ * contains the definition of the world
+ */
 public class WorldData implements Serializable {
 
     static Array<EnemyData> allEnemies;
@@ -17,39 +22,47 @@ public class WorldData implements Serializable {
     public int height;
     public float playerStartPosX;
     public float playerStartPosY;
-    public float noiseZoomBiom;
+    public float noiseZoomBiome;
     public int tileSize;
-    public List<String> biomNames;
-    public BiomData roadTileset;
-    public String biomSprites;
+    public List<String> biomesNames;
+    public BiomeData roadTileset;
+    public String biomesSprites;
     public float maxRoadDistance;
-    private BiomSprites sprites;
-    private List<BiomData> bioms;
+    private BiomeSprites sprites;
+    private List<BiomeData> biomes;
     private static Array<ShopData> shopList;
 
 
     public static Array<ShopData> getShopList() {
         if (shopList == null) {
-            shopList = new Array<ShopData>();
+            shopList = new Array<>();
             Json json = new Json();
-            FileHandle handle = Config.instance().getFile(Paths.Shops);
+            FileHandle handle = Config.instance().getFile(Paths.SHOPS);
             if (handle.exists())
-                shopList = json.fromJson(Array.class, ShopData.class, handle);
+            {
+
+                Array readList = json.fromJson(Array.class, ShopData.class, handle);
+                shopList = readList;
+            }
         }
         return shopList;
     }
     static public Array<EnemyData> getAllEnemies() {
         if (allEnemies == null) {
             Json json = new Json();
-            FileHandle handle = Config.instance().getFile(Paths.EnemyPath);
+            FileHandle handle = Config.instance().getFile(Paths.ENEMIES);
             if (handle.exists())
-                allEnemies = json.fromJson(Array.class, EnemyData.class, handle);
+            {
+
+                Array readList =  json.fromJson(Array.class, EnemyData.class, handle);
+                allEnemies = readList;
+            }
         }
         return allEnemies;
     }
 
     public static EnemyData getEnemy(String enemy) {
-        for(EnemyData data:getAllEnemies())
+        for(EnemyData data: new Array.ArrayIterator<>(getAllEnemies()))
         {
             if(data.name.equals(enemy))
                 return data;
@@ -57,23 +70,23 @@ public class WorldData implements Serializable {
         return null;
     }
 
-    public BiomSprites GetBiomSprites() {
+    public BiomeSprites GetBiomeSprites() {
         if (sprites == null) {
             Json json = new Json();
-            sprites = (json.fromJson(BiomSprites.class, Config.instance().getFile(biomSprites)));
+            sprites = (json.fromJson(BiomeSprites.class, Config.instance().getFile(biomesSprites)));
         }
         return sprites;
     }
 
-    public List<BiomData> GetBioms() {
-        if (bioms == null) {
-            bioms = new ArrayList<BiomData>();
+    public List<BiomeData> GetBiomes() {
+        if (biomes == null) {
+            biomes = new ArrayList<BiomeData>();
             Json json = new Json();
-            for (String name : biomNames) {
-                bioms.add(json.fromJson(BiomData.class, Config.instance().getFile(name)));
+            for (String name : biomesNames) {
+                biomes.add(json.fromJson(BiomeData.class, Config.instance().getFile(name)));
             }
         }
-        return bioms;
+        return biomes;
     }
 
 

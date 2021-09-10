@@ -20,7 +20,7 @@ public class GauntletWinLose extends ControlWinLose {
      * Instantiates a new gauntlet win/lose handler.
      * 
      * @param view0 ViewWinLose object
-     * @param match
+     * @param lastGame
      */
     public GauntletWinLose(final ViewWinLose view0, GameView lastGame) {
         super(view0, lastGame);

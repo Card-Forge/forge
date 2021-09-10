@@ -1,4 +1,4 @@
-Big_Snake.png
+big_snake.png
 size: 64,96
 format: RGBA8888
 filter: Nearest,Nearest

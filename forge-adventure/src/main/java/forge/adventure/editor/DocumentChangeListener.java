@@ -3,12 +3,14 @@ package forge.adventure.editor;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+/**
+ * Editor class to edit configuration, maybe moved or removed
+ */
 public class DocumentChangeListener implements DocumentListener {
-    private Runnable run;
+    private final Runnable run;
 
     public DocumentChangeListener(Runnable run)
     {
-
         this.run = run;
     }
     @Override

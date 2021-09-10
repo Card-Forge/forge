@@ -1,9 +1,9 @@
-Griffin.png
+griffin.png
 size: 64,96
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none          
-Avatar 
+Avatar
   xy: 0, 0
   size: 16, 16      
 Idle 

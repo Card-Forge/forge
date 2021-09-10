@@ -5,10 +5,15 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ObjectSet;
 import forge.adventure.stage.SpriteGroup;
 import forge.adventure.util.Config;
 
 import java.util.HashMap;
+
+/**
+ * CharacterSprite base class for animated sprites on the map
+ */
 
 public class CharacterSprite extends MapActor {
     private final HashMap<AnimationTypes, HashMap<AnimationDirections, Animation<TextureRegion>>> animations = new HashMap<>();
@@ -25,7 +30,7 @@ public class CharacterSprite extends MapActor {
 
     protected void load(String path) {
         TextureAtlas atlas = Config.instance().getAtlas(path);
-        for (Texture texture : atlas.getTextures())
+        for (Texture texture : new ObjectSet.ObjectSetIterator<>( atlas.getTextures()))
             texture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
         animations.clear();
         for (AnimationTypes stand : AnimationTypes.values()) {
@@ -158,9 +163,7 @@ public class CharacterSprite extends MapActor {
         float degree = vec.angleDeg();
 
         setAnimation(AnimationTypes.Walk);
-        if (x == 0 && y == 0)
-            return;
-        else if (degree < 22.5)
+        if (degree < 22.5)
             setDirection(AnimationDirections.Right);
         else if (degree < 22.5 + 45)
             setDirection(AnimationDirections.RightUp);

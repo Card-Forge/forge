@@ -4,19 +4,28 @@ import forge.adventure.data.DifficultyData;
 import forge.adventure.util.Config;
 import forge.deck.Deck;
 import forge.localinstance.properties.ForgeProfileProperties;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
 import java.util.HashMap;
 import java.util.zip.DeflaterOutputStream;
 import java.util.zip.InflaterInputStream;
 
+/**
+ * Represents everything that will be saved, like the player and the world.
+ */
 public class WorldSave {
 
+    static final int AUTO_SAVE_SLOT =-1;
+    static final int QUICK_SAVE_SLOT =-2;
+    static final int INVALID_SAVE_SLOT =-3;
     static WorldSave currentSave=new WorldSave();
     public WorldSaveHeader header = new WorldSaveHeader();
     private final AdventurePlayer player=new AdventurePlayer();
     private final World world=new World();
     private final HashMap<String,PointOfInterestChanges> pointOfInterestChanges=new HashMap<>();
+
+
 
     public final World getWorld()
     {
@@ -55,23 +64,25 @@ public class WorldSave {
         }
         return true;
     }
-
-    static public int FilenameToSlot(String name) {
-        if (name == "autosave.sav")
-            return -2;
-        if (name == "quicksave.sav")
-            return -1;
+    public static boolean isSafeFile(@NotNull String name) {
+        return filenameToSlot(name)!= INVALID_SAVE_SLOT;
+    }
+    static public int filenameToSlot(String name) {
+        if (name.equals("auto_save.sav"))
+            return AUTO_SAVE_SLOT;
+        if (name.equals("quick_save.sav"))
+            return QUICK_SAVE_SLOT;
         if (!name.contains("_") || !name.endsWith(".sav"))
-            return -3;
+            return INVALID_SAVE_SLOT;
         return Integer.valueOf(name.split("_")[0]);
     }
 
-    static public String Filename(int slot) {
-        if (slot == -2)
-            return "autosave.sav";
-        if (slot == -1)
-            return "quicksave.sav";
-        return slot + "_saveslot.sav";
+    static public String filename(int slot) {
+        if (slot == AUTO_SAVE_SLOT)
+            return "auto_save.sav";
+        if (slot == QUICK_SAVE_SLOT)
+            return "quick_save.sav";
+        return slot + "_save_slot.sav";
     }
 
     public static String getSaveDir() {
@@ -79,7 +90,7 @@ public class WorldSave {
     }
 
     public static String getSaveFile(int slot) {
-        return ForgeProfileProperties.getUserDir() + File.separator + "Adventure" + File.separator + Config.instance().getPlane() + File.separator + Filename(slot);
+        return ForgeProfileProperties.getUserDir() + File.separator + "Adventure" + File.separator + Config.instance().getPlane() + File.separator + filename(slot);
     }
 
     public static WorldSave getCurrentSave() {

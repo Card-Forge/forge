@@ -4,6 +4,10 @@ import forge.adventure.scene.SceneType;
 import forge.adventure.scene.TileMapScene;
 import forge.adventure.stage.MapStage;
 
+/**
+ * EntryActor
+ * Used to teleport the player in and out of the map
+ */
 public class EntryActor extends MapActor{
     private final MapStage stage;
     private final int id;

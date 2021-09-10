@@ -20,6 +20,10 @@ import forge.model.FModel;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * DeckEditScene
+ * scene class that contains the Deck editor
+ */
 public class DeckEditScene extends ForgeScene {
     public class AdventureDeckEditor extends FDeckEditor {
         public AdventureDeckEditor(boolean commander) {

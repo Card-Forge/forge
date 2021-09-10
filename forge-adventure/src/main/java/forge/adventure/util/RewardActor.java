@@ -16,7 +16,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Tooltip;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Disposable;
-import forge.adventure.libgdxgui.assets.FImageComplex;
 import forge.adventure.libgdxgui.assets.FSkin;
 import forge.adventure.libgdxgui.assets.ImageCache;
 import forge.adventure.scene.RewardScene;
@@ -24,6 +23,10 @@ import forge.adventure.scene.Scene;
 import forge.gui.GuiBase;
 import forge.util.ImageFetcher;
 
+/**
+ * Render the rewards as a card on the reward scene.
+ *
+ */
 public class RewardActor extends Actor implements Disposable, ImageFetcher.Callback {
     Tooltip<Image> tooltip;
     Reward reward;
@@ -31,10 +34,9 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     static TextureRegion backTexture;
     Texture image;
     boolean needsToBeDisposed;
-    FImageComplex card;
     float flipProcess=0;
     boolean clicked=false;
-    boolean flipOnClick=false;
+    boolean flipOnClick;
     private boolean hover;
 
     static final ImageFetcher fetcher = GuiBase.getInterface().getImageFetcher();
@@ -64,10 +66,10 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         Loot
 
     }
-    public RewardActor(Reward reward,boolean flipable)
+    public RewardActor(Reward reward,boolean flippable)
     {
 
-        this.flipOnClick=flipable;
+        this.flipOnClick=flippable;
         this.reward=reward;
         if(backTexture==null)
         {
@@ -189,7 +191,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
         applyTransform(batch, computeTransform(batch.getTransformMatrix().cpy()));
 
-        oldpTransform.set(batch.getProjectionMatrix());
+        oldProjectionTransform.set(batch.getProjectionMatrix());
         applyProjectionMatrix(batch);
 
 
@@ -206,13 +208,13 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         }
         batch.setColor(1,1,1,1);
         resetTransform(batch);
-        batch.setProjectionMatrix(oldpTransform);
+        batch.setProjectionMatrix(oldProjectionTransform);
     }
 
     private void drawFrontSide(Batch batch) {
 
-        float width=0;
-        float x=0;
+        float width;
+        float x;
         if(flipOnClick)
         {
             width=-getWidth();
@@ -245,7 +247,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         final Vector3 direction = new Vector3(0, 0, -1);
         final Vector3 up = new Vector3(0, 1, 0);
         //final Vector3 position = new Vector3( getX()+getWidth()/2 , getY()+getHeight()/2, 0);
-        final Vector3 position = new Vector3( Scene.GetIntendedWidth() /2 , Scene.GetIntendedHeight()/2, 0);
+        final Vector3 position = new Vector3( Scene.GetIntendedWidth() /2f , Scene.GetIntendedHeight()/2f, 0);
 
         float fov=67;
         Matrix4 projection=new Matrix4();
@@ -269,7 +271,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
     private final Matrix4 computedTransform = new Matrix4();
     private final Matrix4 oldTransform = new Matrix4();
-    private final Matrix4 oldpTransform = new Matrix4();
+    private final Matrix4 oldProjectionTransform = new Matrix4();
 
     protected void applyTransform (Batch batch, Matrix4 transform)
     {
@@ -292,19 +294,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         worldTransform.translate(getX()+getWidth()/2 , getY()+getHeight()/2,0);
         if(clicked)
         {
-            float flipPercent=0;
-            if(flipProcess<0.5)
-            {
-                flipPercent=flipProcess*2;
-            }
-            else
-            {
-                flipPercent=1-((flipProcess-0.5f)*2);
-            }
-            flipPercent=flipProcess;
-            worldTransform.rotate(0,1,0,180*flipPercent);
-
-
+            worldTransform.rotate(0,1,0,180*flipProcess);
         }
         computedTransform.set(worldTransform);
         return computedTransform;

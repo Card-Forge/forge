@@ -6,6 +6,9 @@ import com.badlogic.gdx.graphics.GL20;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.GameStage;
 
+/**
+ * Hud base scene
+ */
 public class HudScene extends Scene implements InputProcessor {
 
     GameHUD hud;

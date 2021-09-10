@@ -17,6 +17,9 @@ import forge.adventure.world.AdventurePlayer;
 import forge.adventure.world.PointOfInterestChanges;
 import forge.adventure.world.WorldSave;
 
+/**
+ * Displays the rewards of a fight or a treasure
+ */
 public class RewardScene extends UIScene  {
 
     private TextButton doneButton;
@@ -48,7 +51,7 @@ public class RewardScene extends UIScene  {
         {
 
             boolean wait=false;
-            for(Actor actor: generated)
+            for(Actor actor: new Array.ArrayIterator<>(generated))
             {
                 if(!(actor instanceof RewardActor))
                 {
@@ -102,7 +105,7 @@ public class RewardScene extends UIScene  {
 
 
 
-    public void loadRewards(Array<Reward> newReqards, Type type, ShopActor shopActor)
+    public void loadRewards(Array<Reward> newRewards, Type type, ShopActor shopActor)
     {
         this.type=type;
         doneClicked=false;
@@ -110,7 +113,7 @@ public class RewardScene extends UIScene  {
 
 
 
-        for(Actor actor: generated)
+        for(Actor actor: new Array.ArrayIterator<>(generated))
         {
             actor.remove();
             if(actor instanceof RewardActor)
@@ -156,9 +159,9 @@ public class RewardScene extends UIScene  {
             }
             //cardHeight=targetHeight/i;
             cardWidth=h/ CARD_WIDTH_TO_HEIGHT;
-            newArea=newReqards.size*cardWidth*cardHeight;
+            newArea=newRewards.size*cardWidth*cardHeight;
             int rows=(int) (targetHeight/cardHeight);
-            int cols =(int)Math.ceil(newReqards.size/(double)rows);
+            int cols =(int)Math.ceil(newRewards.size/(double)rows);
             if(newArea>oldCardArea&&newArea<=targetArea&&rows*cardHeight<targetHeight&&cols*cardWidth<targetWidth)
             {
                 oldCardArea=newArea;
@@ -175,7 +178,7 @@ public class RewardScene extends UIScene  {
         xOff+=(targetWidth-(cardWidth*numberOfColumns))/2f;
         float spacing=2;
         int i=0;
-        for(Reward reward:newReqards)
+        for(Reward reward:new Array.ArrayIterator<>(newRewards))
         {
             boolean skipCard=false;
             if(type==Type.Shop)
@@ -189,15 +192,15 @@ public class RewardScene extends UIScene  {
 
 
             int currentRow=(i/numberOfColumns);
-            float lastRowxAdjust=0;
+            float lastRowXAdjust=0;
             if(currentRow==numberOfRows-1)
             {
-                int lastRowCount=newReqards.size%numberOfColumns;
+                int lastRowCount=newRewards.size%numberOfColumns;
                 if(lastRowCount!=0)
-                    lastRowxAdjust=((numberOfColumns*cardWidth)-(lastRowCount*cardWidth))/2;
+                    lastRowXAdjust=((numberOfColumns*cardWidth)-(lastRowCount*cardWidth))/2;
             }
             RewardActor actor=new RewardActor(reward,type==Type.Loot);
-            actor.setBounds(lastRowxAdjust+xOff+cardWidth*(i%numberOfColumns)+spacing,yOff+cardHeight*currentRow+spacing,cardWidth-spacing*2,cardHeight-spacing*2);
+            actor.setBounds(lastRowXAdjust+xOff+cardWidth*(i%numberOfColumns)+spacing,yOff+cardHeight*currentRow+spacing,cardWidth-spacing*2,cardHeight-spacing*2);
 
             if(type==Type.Shop)
             {
@@ -225,7 +228,7 @@ public class RewardScene extends UIScene  {
 
     private void updateBuyButtons() {
 
-        for(Actor actor: generated)
+        for(Actor actor: new Array.ArrayIterator<>(generated))
         {
             if(actor instanceof BuyButton)
             {

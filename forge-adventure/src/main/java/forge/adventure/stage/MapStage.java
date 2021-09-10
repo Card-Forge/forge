@@ -24,23 +24,27 @@ import forge.adventure.util.Reward;
 import forge.adventure.world.PointOfInterestChanges;
 import forge.adventure.world.WorldSave;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Stage to handle tiled maps for points of interests
+ */
 public class MapStage extends GameStage {
 
     public static MapStage instance;
     Array<MapActor> actors = new Array<>();
 
     TiledMap map;
-    Array<Rectangle>[][] collision;
+    ArrayList<Rectangle>[][] collision;
     private float tileHeight;
     private float tileWidth;
     private float width;
     private float height;
     MapLayer spriteLayer;
     private PointOfInterestChanges changes;
-    private MobSprite currentMob;
+    private EnemySprite currentMob;
     private final Vector2 oldPosition=new Vector2();//todo
     private final Vector2 oldPosition2=new Vector2();
     private final Vector2 oldPosition3=new Vector2();
@@ -71,11 +75,11 @@ public class MapStage extends GameStage {
         foregroundSprites.addActor(newActor);
     }
     @Override
-    public boolean isColliding( Rectangle adjustedboundingRect)
+    public boolean isColliding( Rectangle adjustedBoundingRect)
     {
         for(Rectangle collision:currentCollidingRectangles)
         {
-            if(collision.overlaps(adjustedboundingRect))
+            if(collision.overlaps(adjustedBoundingRect))
             {
                 return true;
             }
@@ -83,7 +87,7 @@ public class MapStage extends GameStage {
         return false;
 
     }
-    final Array<Rectangle> currentCollidingRectangles=new Array<>();
+    final ArrayList<Rectangle> currentCollidingRectangles=new ArrayList<>();
     @Override
     public void prepareCollision(Vector2 pos, Vector2 direction, Rectangle boundingRect)
     {
@@ -145,7 +149,7 @@ public class MapStage extends GameStage {
     }
     public void loadMap(TiledMap map,String sourceMap) {
         this.map=map;
-        for (MapActor actor : actors) {
+        for (MapActor actor : new Array.ArrayIterator<>(actors)) {
             actor.remove();
             foregroundSprites.removeActor(actor);
 
@@ -156,7 +160,7 @@ public class MapStage extends GameStage {
          tileHeight = Float.parseFloat(map.getProperties().get("tileheight").toString());
          tileWidth = Float.parseFloat(map.getProperties().get("tilewidth").toString());
         setBounds(width * tileWidth, height * tileHeight);
-        collision= new Array[(int) width][(int) height];
+        collision= new ArrayList[(int) width][(int) height];
 
         GetPlayer().stop();
 
@@ -184,8 +188,8 @@ public class MapStage extends GameStage {
             for(int y=0;y<layer.getHeight();y++)
             {
                 if(collision[x][y]==null)
-                    collision[x][y]=new Array<>();
-                Array<Rectangle> map=collision[x][y];
+                    collision[x][y]=new ArrayList<>();
+                ArrayList<Rectangle> map=collision[x][y];
                 TiledMapTileLayer.Cell cell=layer.getCell(x,y);
                 if(cell==null)
                     continue;
@@ -222,7 +226,7 @@ public class MapStage extends GameStage {
                         addMapActor(obj, entry);
                         break;
                     case "enemy":
-                        MobSprite mob=new MobSprite(id, WorldData.getEnemy(prop.get("enemy").toString()));
+                        EnemySprite mob=new EnemySprite(id, WorldData.getEnemy(prop.get("enemy").toString()));
                         addMapActor(obj, mob);
                         break;
                     case "inn":
@@ -240,7 +244,7 @@ public class MapStage extends GameStage {
                         else
                         {
                             shops=new Array<>();
-                            for(ShopData data:WorldData.getShopList())
+                            for(ShopData data:new Array.ArrayIterator<>(WorldData.getShopList()))
                             {
                                 if(possibleShops.contains(data.name))
                                 {
@@ -253,7 +257,7 @@ public class MapStage extends GameStage {
 
                         ShopData data=shops.get(WorldSave.getCurrentSave().getWorld().getRandom().nextInt(shops.size));
                         Array<Reward> ret=new Array<Reward>();
-                        for(RewardData rdata:data.rewards)
+                        for(RewardData rdata:new Array.ArrayIterator<>(data.rewards))
                         {
                             ret.addAll(rdata.generate(false));
                         }
@@ -326,11 +330,11 @@ public class MapStage extends GameStage {
         oldPosition3.set(oldPosition2);
         oldPosition2.set(oldPosition);
         oldPosition.set(player.pos());
-        for (MapActor actor : actors) {
+        for (MapActor actor : new Array.ArrayIterator<>(actors)) {
             if (actor.collideWithPlayer(player)) {
-                if(actor instanceof MobSprite)
+                if(actor instanceof EnemySprite)
                 {
-                    MobSprite mob=(MobSprite) actor;
+                    EnemySprite mob=(EnemySprite) actor;
                     currentMob=mob;
                     if(mob.getData().deck==null||mob.getData().deck.isEmpty())
                     {

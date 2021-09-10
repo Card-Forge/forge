@@ -8,7 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class BiomData implements Serializable {
+/**
+ * Data class that will be used to read Json configuration files
+ * BiomeData
+ * contains the information for the biomes
+ */
+public class BiomeData implements Serializable {
     private final Random rand = new Random();
     public float startPointX;
     public float startPointY;
@@ -17,7 +22,7 @@ public class BiomData implements Serializable {
     public String name;
     public String tilesetAtlas;
     public String tilesetName;
-    public BiomTerrainData[] terrain;
+    public BiomeTerrainData[] terrain;
     public float width;
     public float height;
     public String color;
@@ -27,7 +32,7 @@ public class BiomData implements Serializable {
     public List<String> pointsOfInterest;
 
     private ArrayList<EnemyData> enemyList;
-    private ArrayList<PointOfInterestData> pointOfIntrestList;
+    private ArrayList<PointOfInterestData> pointOfInterestList;
 
     public Color GetColor() {
         return Color.valueOf(color);
@@ -38,7 +43,7 @@ public class BiomData implements Serializable {
             enemyList = new ArrayList<EnemyData>();
             if (enemies == null)
                 return enemyList;
-            for (EnemyData data : WorldData.getAllEnemies()) {
+            for (EnemyData data : new Array.ArrayIterator<>(WorldData.getAllEnemies())) {
                 if (enemies.contains(data.name)) {
                     enemyList.add(data);
                 }
@@ -47,19 +52,19 @@ public class BiomData implements Serializable {
         return enemyList;
     }
 
-    public ArrayList<PointOfInterestData> getPointsOfIntrest() {
-        if (pointOfIntrestList == null) {
-            pointOfIntrestList = new ArrayList<PointOfInterestData>();
+    public ArrayList<PointOfInterestData> getPointsOfInterest() {
+        if (pointOfInterestList == null) {
+            pointOfInterestList = new ArrayList<PointOfInterestData>();
             if(pointsOfInterest==null)
-                return pointOfIntrestList;
-            Array<PointOfInterestData> alltowns = PointOfInterestData.getAllPointOfInterest();
-            for (PointOfInterestData data : alltowns) {
+                return pointOfInterestList;
+            Array<PointOfInterestData> allTowns = PointOfInterestData.getAllPointOfInterest();
+            for (PointOfInterestData data : new Array.ArrayIterator<>(allTowns)) {
                 if (pointsOfInterest.contains(data.name)) {
-                    pointOfIntrestList.add(data);
+                    pointOfInterestList.add(data);
                 }
             }
         }
-        return pointOfIntrestList;
+        return pointOfInterestList;
     }
 
     public EnemyData getEnemy(float difficultyFactor) {

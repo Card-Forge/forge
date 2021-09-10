@@ -2,6 +2,7 @@ package forge.adventure.editor;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.utils.Array;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -13,6 +14,9 @@ import java.util.HashMap;
 import static java.awt.Image.SCALE_FAST;
 
 
+/**
+ * Editor class to edit configuration, maybe moved or removed
+ */
 public class SwingAtlas {
 
     HashMap<String, ArrayList<ImageIcon>> images=new  HashMap<>();
@@ -25,7 +29,7 @@ public class SwingAtlas {
         if(!path.exists())
             return;
         TextureAtlas.TextureAtlasData data=new TextureAtlas.TextureAtlasData(path,path.parent(),false);
-        for(TextureAtlas.TextureAtlasData.Region region:data.getRegions())
+        for(TextureAtlas.TextureAtlasData.Region region: new Array.ArrayIterator<>(data.getRegions()))
         {
              String name=region.name;
              if(!images.containsKey(name))

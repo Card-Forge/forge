@@ -16,6 +16,9 @@ import forge.adventure.scene.Scene;
 import forge.adventure.scene.SceneType;
 import forge.adventure.util.Config;
 
+/**
+ * Application adapter the handle switching and fading between scenes
+ */
 public class AdventureApplicationAdapter extends ApplicationAdapter {
     public static AdventureApplicationAdapter instance;
     Scene currentScene = null;
@@ -23,11 +26,10 @@ public class AdventureApplicationAdapter extends ApplicationAdapter {
     private int currentWidth;
     private int currentHeight;
     private float animationTimeout;
-    private final float transitionTime=0.2f;
     Batch animationBatch;
     Texture transitionTexture;
     TextureRegion lastScreenTexture;
-    private boolean sceneWasSwaped=false;
+    private boolean sceneWasSwapped =false;
     private Graphics graphics;
 
     public Graphics getGraphics()
@@ -73,7 +75,7 @@ public class AdventureApplicationAdapter extends ApplicationAdapter {
             lastScene.add(currentScene);
         }
         storeScreen();
-        sceneWasSwaped=true;
+        sceneWasSwapped =true;
         currentScene = newScene;
         currentScene.enter();
         return true;
@@ -113,10 +115,11 @@ public class AdventureApplicationAdapter extends ApplicationAdapter {
     @Override
     public void render() {
         float delta=Gdx.graphics.getDeltaTime();
-        if(sceneWasSwaped)
+        float transitionTime = 0.2f;
+        if(sceneWasSwapped)
         {
-            sceneWasSwaped=false;
-            animationTimeout=transitionTime;
+            sceneWasSwapped =false;
+            animationTimeout= transitionTime;
             Gdx.gl.glClearColor(0, 0, 0, 1);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             return;
@@ -129,7 +132,7 @@ public class AdventureApplicationAdapter extends ApplicationAdapter {
             animationTimeout-=delta;
             animationBatch.setColor(1,1,1,1);
             animationBatch.draw(lastScreenTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-            animationBatch.setColor(1,1,1,1-(1/transitionTime)*animationTimeout);
+            animationBatch.setColor(1,1,1,1-(1/ transitionTime)*animationTimeout);
             animationBatch.draw(transitionTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
             animationBatch.draw(transitionTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
             animationBatch.end();
@@ -153,7 +156,7 @@ public class AdventureApplicationAdapter extends ApplicationAdapter {
             animationTimeout-=delta;
             animationBatch.setColor(1,1,1,1);
             animationBatch.draw(lastScreenTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-            animationBatch.setColor(1,1,1,(1/transitionTime)*(animationTimeout+transitionTime));
+            animationBatch.setColor(1,1,1,(1/ transitionTime)*(animationTimeout+ transitionTime));
             animationBatch.draw(transitionTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
             animationBatch.draw(transitionTexture,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
             animationBatch.end();
@@ -182,7 +185,7 @@ public class AdventureApplicationAdapter extends ApplicationAdapter {
             storeScreen();
             currentScene = lastScene.get(lastScene.size-1);
             currentScene.enter();
-            sceneWasSwaped=true;
+            sceneWasSwapped =true;
             lastScene.removeIndex(lastScene.size-1);
             return currentScene;
         }

@@ -5,18 +5,18 @@
 	"noiseWeight": 0.5,
 	"distWeight": 1.5,
   "tilesetName":"Black",
-  "tilesetAtlas":"world/tilesets/Terrain.atlas",  
+  "tilesetAtlas":"world/tilesets/terrain.atlas",  
     "terrain":[
     {
     "spriteName":"Black_1",
     "min": 0,           
     "max": 0.2,           
-    "resolution": 10, 
+    "resolution": 10
     },    {
     "spriteName":"Black_2",
     "min": 0.8,           
     "max": 1.0,           
-    "resolution": 10, 
+    "resolution": 10
     }
     ],
 	"width": 0.7,
@@ -24,6 +24,6 @@
 	"color": "110903",
 	"spriteNames":[ "SwampTree","SwampTree2","DarkGras","Skull","SwampRock","DarkWood","Reed","Waterlily","Shroom","Shroom2"]   ,
 	"enemies":[ "Zombie","Skeleton","Vampire","High Vampire","Zombie Lord","Big Zombie","Demon","Black Wiz1"] ,
-	"pointsOfInterest":[ "Graveyard","SwampTown"]                                                           
+	"pointsOfInterest":[ "Graveyard","Swamp Town"]                                                           
 
 }

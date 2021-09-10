@@ -4,9 +4,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import forge.adventure.AdventureApplicationAdapter;
 import forge.adventure.util.Current;
 
+/**
+ * Scene for the Inn in towns
+ *
+ */
 public class InnScene extends UIScene  {
-
-    private TextButton doneButton;
 
     public InnScene()
     {
@@ -32,7 +34,7 @@ public class InnScene extends UIScene  {
         super.resLoaded();
         ui.onButtonPress("done",()->done());
         ui.onButtonPress("heal",()->heal());
-        doneButton=ui.findActor("done");
+        TextButton doneButton = ui.findActor("done");
     }
 
 

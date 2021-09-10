@@ -1,4 +1,4 @@
-mapsprites.png
+map_sprites.png
 size: 128,320
 format: RGBA8888
 filter: Nearest,Nearest

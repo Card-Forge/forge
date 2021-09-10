@@ -29,22 +29,22 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../obj/entryUp.tx" x="208" y="272"/>
-  <object id="49" template="../obj/entryDown.tx" x="209" y="48">
+  <object id="38" template="../obj/entry_up.tx" x="208" y="272"/>
+  <object id="49" template="../obj/entry_down.tx" x="209" y="48">
    <properties>
     <property name="teleport" value="maps/map/crypt.tmx"/>
    </properties>
   </object>
-  <object id="52" template="../obj/Enemy.tx" x="215" y="80">
+  <object id="52" template="../obj/enemy.tx" x="215" y="80">
    <properties>
     <property name="enemy" value="Zombie"/>
    </properties>
   </object>
-  <object id="53" template="../obj/Enemy.tx" x="120" y="104">
+  <object id="53" template="../obj/enemy.tx" x="120" y="104">
    <properties>
     <property name="enemy" value="Skeleton"/>
    </properties>
   </object>
-  <object id="54" template="../obj/Gold.tx" x="120" y="101"/>
+  <object id="54" template="../obj/gold.tx" x="120" y="101"/>
  </objectgroup>
 </map>

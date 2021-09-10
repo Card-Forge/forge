@@ -7,10 +7,13 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Editor class to edit configuration, maybe moved or removed
+ */
 public class FilePicker extends Box {
     JTextField edit=new JTextField();
     JButton findButton=new JButton(UIManager.getIcon("FileView.directoryIcon"));
-    private String[] fileEndings;
+    private final String[] fileEndings;
 
     public FilePicker(String[] fileEndings) {
         super(BoxLayout.X_AXIS);

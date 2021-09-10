@@ -6,6 +6,11 @@ import com.badlogic.gdx.utils.Json;
 import forge.adventure.util.Config;
 import forge.adventure.util.Paths;
 
+/**
+ * Data class that will be used to read Json configuration files
+ * BiomeData
+ * contains the information for the point of interests like towns and dungeons
+ */
 public class PointOfInterestData {
     public String name;
     public String type;
@@ -21,9 +26,10 @@ public class PointOfInterestData {
     public static Array<PointOfInterestData> getAllPointOfInterest() {
         if (pointOfInterestList == null) {
             Json json = new Json();
-            FileHandle handle = Config.instance().getFile(Paths.PointsOfInterest);
+            FileHandle handle = Config.instance().getFile(Paths.POINTS_OF_INTEREST);
             if (handle.exists()) {
-                pointOfInterestList = json.fromJson(Array.class, PointOfInterestData.class, handle);
+                Array readJson = json.fromJson(Array.class, PointOfInterestData.class, handle);
+                pointOfInterestList = readJson;
 
             }
 
@@ -31,7 +37,7 @@ public class PointOfInterestData {
         return pointOfInterestList;
     }
     public static PointOfInterestData getPointOfInterest(String name) {
-        for(PointOfInterestData data:getAllPointOfInterest())
+        for(PointOfInterestData data: new Array.ArrayIterator<>(getAllPointOfInterest()))
         {
             if(data.name.equals(name))
                 return data;

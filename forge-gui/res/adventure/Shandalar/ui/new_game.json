@@ -14,7 +14,7 @@
       "type" : "Scroll",      
       "style":"paper",       
       "x": 10, 
-      "y": 10 
+      "y": 10,
       "width": 256,
       "height": 236
     }   

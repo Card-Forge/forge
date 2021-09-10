@@ -11,6 +11,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import java.util.function.Function;
 
+/**
+ * Class to create ui elements in the correct style
+ */
 public class Controls {
     private static Skin SelectedSkin = null;
 
@@ -19,9 +22,9 @@ public class Controls {
         return new TextButton(text, GetSkin());
     }
 
-    static public SelectBox newComboBox(Object[] text, Object item, Function<Object, Void> func) {
+    static public SelectBox newComboBox(String[] text, String item, Function<Object, Void> func) {
 
-        SelectBox ret = new SelectBox(GetSkin());
+        SelectBox ret = new SelectBox<String>(GetSkin());
         ret.setItems(text);
         ret.addListener(new ChangeListener() {
             @Override
@@ -39,22 +42,7 @@ public class Controls {
         return ret;
     }
 
-    static public SelectBox newComboBoxInt(Object[] text, Function<Integer, Void> func) {
-        SelectBox ret = new SelectBox(GetSkin());
-        ret.setItems(text);
-        ret.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                try {
-                    func.apply(((SelectBox) actor).getSelectedIndex());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
 
-        return ret;
-    }
 
     static public TextField newTextField(String text) {
         return new TextField(text, GetSkin());
@@ -117,18 +105,8 @@ public class Controls {
             SelectedSkin = new Skin();
 
 
-   /*
-            FreeTypeFontGenerator generator=new FreeTypeFontGenerator(Res.CurrentRes.GetFile(AdventureApplicationAdapter.CurrentAdapter.GetRes().GetConfigData().font));
-            FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-            parameter.size = 20; // font size
-            parameter.color=new Color(Integer.parseInt(AdventureApplicationAdapter.CurrentAdapter.GetRes().GetConfigData().fontColor,16));
-            BitmapFont font = generator.generateFont(parameter);
 
-            generator.dispose();
-            SelectedSkin.add("default",font);
-
-   * */
-            FileHandle skinFile = Config.instance().getFile("skin/uiskin.json");
+            FileHandle skinFile = Config.instance().getFile(Paths.SKIN);
             FileHandle atlasFile = skinFile.sibling(skinFile.nameWithoutExtension() + ".atlas");
             TextureAtlas atlas = new TextureAtlas(atlasFile);
             SelectedSkin.addRegions(atlas);

@@ -6,6 +6,9 @@ import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.adventure.world.AdventurePlayer;
 
+/**
+ * Class that will represent the player sprite on the map
+ */
 public class PlayerSprite extends CharacterSprite {
     private final float playerSpeed;
     private final Vector2 direction = Vector2.Zero.cpy();

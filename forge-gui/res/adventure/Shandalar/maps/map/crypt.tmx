@@ -29,15 +29,15 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../obj/entryUp.tx" x="208" y="260">
+  <object id="38" template="../obj/entry_up.tx" x="208" y="260">
    <properties>
     <property name="teleport" value="maps/map/graveyard.tmx"/>
    </properties>
   </object>
-  <object id="47" template="../obj/Gold.tx" x="323" y="219"/>
-  <object id="48" template="../obj/Treasure.tx" x="207" y="67"/>
-  <object id="49" template="../obj/Gold.tx" x="106" y="216"/>
-  <object id="50" template="../obj/Enemy.tx" x="208" y="98">
+  <object id="47" template="../obj/gold.tx" x="323" y="219"/>
+  <object id="48" template="../obj/treasure.tx" x="207" y="67"/>
+  <object id="49" template="../obj/gold.tx" x="106" y="216"/>
+  <object id="50" template="../obj/enemy.tx" x="208" y="98">
    <properties>
     <property name="enemy" value="Vampire"/>
    </properties>

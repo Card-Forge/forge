@@ -16,7 +16,7 @@
 },
 {
 	"name": "Treasure",
-	"sprite": "sprites/Treasure.atlas",
+	"sprite": "sprites/treasure.atlas",
 	"deck": "",
 	"rewards": [
 		{
@@ -78,7 +78,7 @@
 },
 {
 	"name": "Vampire",
-	"sprite": "sprites/Vampire.atlas",
+	"sprite": "sprites/vampire.atlas",
 	"deck": "decks/Vampire.dck",
 	"spawnRate": 0.1,
 	"difficulty": 0.1,
@@ -94,8 +94,8 @@
 },
 {
 	"name": "Skeleton",
-	"sprite": "sprites/Skeleton.atlas",
-	"deck": "decks/Skeleton.dck",
+	"sprite": "sprites/skeleton.atlas",
+	"deck": "decks/skeleton.dck",
 	"spawnRate": 0.1,
 	"difficulty": 0.1,
 	"speed": 25,
@@ -110,7 +110,7 @@
 },
 {
 	"name": "Elf",
-	"sprite": "sprites/Druid.atlas",
+	"sprite": "sprites/druid.atlas",
 	"deck": "decks/elf_bad.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
@@ -144,7 +144,7 @@
 },
 {
 	"name": "Elf warrior",
-	"sprite": "sprites/Hunter.atlas",
+	"sprite": "sprites/hunter.atlas",
 	"deck": "decks/elf_mid.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
@@ -178,7 +178,7 @@
 },
 {
 	"name": "High Elf",
-	"sprite": "sprites/Druid_2.atlas",
+	"sprite": "sprites/druid_2.atlas",
 	"deck": "decks/elf_good.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
@@ -246,7 +246,7 @@
 },
 {
 	"name": "Goblin Warrior",
-	"sprite": "sprites/Wolf_Rider.atlas",
+	"sprite": "sprites/wolf_Rider.atlas",
 	"deck": "decks/goblin_mid.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
@@ -280,7 +280,7 @@
 },
 {
 	"name": "Goblin Chief",
-	"sprite": "sprites/Wolf_Rider_2.atlas",
+	"sprite": "sprites/wolf_Rider_2.atlas",
 	"deck": "decks/goblin_good.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
@@ -314,8 +314,8 @@
 },
 {
 	"name": "Merfolk",
-	"sprite": "sprites/WaterElemental.atlas",
-	"deck": "decks/Merfolk_bad.json",
+	"sprite": "sprites/waterElemental.atlas",
+	"deck": "decks/merfolk_bad.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
 	"speed": 20,
@@ -348,8 +348,8 @@
 },
 {
 	"name": "Merfolk warrior",
-	"sprite": "sprites/AirElemental.atlas",
-	"deck": "decks/Merfolk_mid.json",
+	"sprite": "sprites/airElemental.atlas",
+	"deck": "decks/merfolk_mid.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
 	"speed": 25,
@@ -382,8 +382,8 @@
 },
 {
 	"name": "Merfolk Avatar",
-	"sprite": "sprites/IceElemental.atlas",
-	"deck": "decks/Merfolk_good.json",
+	"sprite": "sprites/iceElemental.atlas",
+	"deck": "decks/merfolk_good.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
 	"speed": 31,
@@ -416,8 +416,8 @@
 },
 {
 	"name": "Human",
-	"sprite": "sprites/Pikeman.atlas",
-	"deck": "decks/Human_bad.json",
+	"sprite": "sprites/pikeman.atlas",
+	"deck": "decks/human_bad.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
 	"speed": 20,
@@ -450,8 +450,8 @@
 },
 {
 	"name": "Human guard",
-	"sprite": "sprites/Swordsman.atlas",
-	"deck": "decks/Human_mid.json",
+	"sprite": "sprites/swordsman.atlas",
+	"deck": "decks/human_mid.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
 	"speed": 25,
@@ -484,8 +484,8 @@
 },
 {
 	"name": "Human elite",
-	"sprite": "sprites/Legionite.atlas",
-	"deck": "decks/Human_good.json",
+	"sprite": "sprites/legionite.atlas",
+	"deck": "decks/human_good.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
 	"speed": 31,
@@ -518,8 +518,8 @@
 },
 {
 	"name": "Zombie",
-	"sprite": "sprites/Zombie.atlas",
-	"deck": "decks/Zombie_bad.json",
+	"sprite": "sprites/zombie.atlas",
+	"deck": "decks/zombie_bad.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
 	"speed": 20,
@@ -552,8 +552,8 @@
 },
 {
 	"name": "Big Zombie",
-	"sprite": "sprites/Zombie_2.atlas",
-	"deck": "decks/Zombie_bad.json",
+	"sprite": "sprites/zombie_2.atlas",
+	"deck": "decks/zombie_bad.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
 	"speed": 25,
@@ -586,8 +586,8 @@
 },
 {
 	"name": "Zombie Lord",
-	"sprite": "sprites/Lich.atlas",
-	"deck": "decks/Zombie_good.json",
+	"sprite": "sprites/lich.atlas",
+	"deck": "decks/zombie_good.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
 	"speed": 31,
@@ -620,7 +620,7 @@
 },
 {
 	"name": "ClayGolem",
-	"sprite": "sprites/Golem_2.atlas",
+	"sprite": "sprites/golem_2.atlas",
 	"deck": "decks/golem_good.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
@@ -652,8 +652,8 @@
 },
 {
 	"name": "Dino",
-	"sprite": "sprites/Ancient.atlas",
-	"deck": "decks/Dinosaurs.json",
+	"sprite": "sprites/ancient.atlas",
+	"deck": "decks/dinosaurs.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
 	"speed": 15,
@@ -688,7 +688,7 @@
 },
 {
 	"name": "Snake",
-	"sprite": "sprites/Big_Snake.atlas",
+	"sprite": "sprites/big_Snake.atlas",
 	"deck": "decks/snake.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
@@ -711,8 +711,8 @@
 },
 {
 	"name": "Hydra",
-	"sprite": "sprites/Hydra.atlas",
-	"deck": "decks/Hydra.json",
+	"sprite": "sprites/hydra.atlas",
+	"deck": "decks/hydra.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
 	"speed": 25,
@@ -745,7 +745,7 @@
 },
 {
 	"name": "Cat",
-	"sprite": "sprites/Lion.atlas",
+	"sprite": "sprites/lion.atlas",
 	"deck": "decks/cat.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
@@ -768,8 +768,8 @@
 },
 {
 	"name": "Minotaur",
-	"sprite": "sprites/Minotaur.atlas",
-	"deck": "decks/Minotaur.json",
+	"sprite": "sprites/minotaur.atlas",
+	"deck": "decks/minotaur.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
 	"speed": 30,
@@ -825,7 +825,7 @@
 },
 {
 	"name": "Devil",
-	"sprite": "sprites/Imp.atlas",
+	"sprite": "sprites/imp.atlas",
 	"deck": "decks/devil.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
@@ -848,7 +848,7 @@
 },
 {
 	"name": "Bear",
-	"sprite": "sprites/Bear.atlas",
+	"sprite": "sprites/bear.atlas",
 	"deck": "decks/bear.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
@@ -871,7 +871,7 @@
 },
 {
 	"name": "Djinn",
-	"sprite": "sprites/Djinn.atlas",
+	"sprite": "sprites/djinn.atlas",
 	"deck": "decks/Djinni.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
@@ -894,7 +894,7 @@
 },
 {
 	"name": "Spider",
-	"sprite": "sprites/Spider.atlas",
+	"sprite": "sprites/spider.atlas",
 	"deck": "decks/spider.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
@@ -917,7 +917,7 @@
 },
 {
 	"name": "Black Wiz1",
-	"sprite": "sprites/Lich_2.atlas",
+	"sprite": "sprites/lich_2.atlas",
 	"deck": "decks/black_bad.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
@@ -940,7 +940,7 @@
 },
 {
 	"name": "Blue Wiz1",
-	"sprite": "sprites/Mage.atlas",
+	"sprite": "sprites/mage.atlas",
 	"deck": "decks/blue_bad.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
@@ -963,8 +963,8 @@
 },
 {
 	"name": "Green Wiz1",
-	"sprite": "sprites/Wizard_2.atlas",
-	"deck": "decks/Green_bad.json",
+	"sprite": "sprites/wizard_2.atlas",
+	"deck": "decks/green_bad.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
 	"speed": 25,
@@ -986,8 +986,8 @@
 },
 {
 	"name": "White Wiz1",
-	"sprite": "sprites/Priest.atlas",
-	"deck": "decks/White_bad.json",
+	"sprite": "sprites/priest.atlas",
+	"deck": "decks/white_bad.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
 	"speed": 25,
@@ -1009,7 +1009,7 @@
 },
 {
 	"name": "White Wiz1",
-	"sprite": "sprites/Enchanter.atlas",
+	"sprite": "sprites/enchanter.atlas",
 	"deck": "decks/red_bad.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
@@ -1032,7 +1032,7 @@
 },
 {
 	"name": "Demon",
-	"sprite": "sprites/Demon_3.atlas",
+	"sprite": "sprites/demon_3.atlas",
 	"deck": "decks/demon.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
@@ -1055,7 +1055,7 @@
 },
 {
 	"name": "High Vampire",
-	"sprite": "sprites/Vampire_2.atlas",
+	"sprite": "sprites/vampire_2.atlas",
 	"deck": "decks/vampire.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,

@@ -22,19 +22,21 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
-
+/**
+ * Class that will create the world from the configuration
+ */
 public class World implements  Disposable, SaveFileContent {
 
 
     private WorldData data;
-    private Pixmap biomImage;
-    private long[][] biomMap;
+    private Pixmap biomeImage;
+    private long[][] biomeMap;
     private int[][] terrainMap;
     private int width;
     private int height;
     private SpritesDataMap mapObjectIds;
-    private PointOfIntrestMap mapPoiIds;
-    private BiomTexture[] biomTexture;
+    private PointOfInterestMap mapPoiIds;
+    private BiomeTexture[] biomeTexture;
     private long seed;
     private final Random random = new Random();
 
@@ -42,16 +44,16 @@ public class World implements  Disposable, SaveFileContent {
     {
         return random;
     }
-    static public int highestBiom(long biom) {
-        return (int) (Math.log(Long.highestOneBit(biom)) / Math.log(2));
+    static public int highestBiome(long biome) {
+        return (int) (Math.log(Long.highestOneBit(biome)) / Math.log(2));
     }
 
     @Override
     public void writeToSaveFile(java.io.ObjectOutputStream out) throws IOException {
 
 
-        Serializer.WritePixmap(out, biomImage);
-        out.writeObject(biomMap);
+        Serializer.WritePixmap(out, biomeImage);
+        out.writeObject(biomeMap);
         out.writeObject(terrainMap);
         out.writeInt(width);
         out.writeInt(height);
@@ -63,42 +65,42 @@ public class World implements  Disposable, SaveFileContent {
     @Override
     public void readFromSaveFile(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
 
-        FileHandle handle = Config.instance().getFile(Paths.World);
+        FileHandle handle = Config.instance().getFile(Paths.WORLD);
         String rawJson = handle.readString();
         data = (new Json()).fromJson(WorldData.class, rawJson);
 
-        if (biomImage != null) biomImage.dispose();
-        biomImage = Serializer.ReadPixmap(in);
-        biomMap = (long[][]) in.readObject();
+        if (biomeImage != null) biomeImage.dispose();
+        biomeImage = Serializer.ReadPixmap(in);
+        biomeMap = (long[][]) in.readObject();
         terrainMap = (int[][]) in.readObject();
         width = in.readInt();
         height = in.readInt();
         mapObjectIds = (SpritesDataMap) in.readObject();
-        if(mapPoiIds==null)mapPoiIds=new PointOfIntrestMap(1,1,1,1);
+        if(mapPoiIds==null)mapPoiIds=new PointOfInterestMap(1,1,1,1);
         mapPoiIds.readFromSaveFile(in);
         seed = in.readLong();
 
-        biomTexture = new BiomTexture[data.GetBioms().size()+1];
-        for(int i=0;i<data.GetBioms().size();i++)
+        biomeTexture = new BiomeTexture[data.GetBiomes().size()+1];
+        for(int i = 0; i<data.GetBiomes().size(); i++)
         {
-            biomTexture[i] = new BiomTexture(data.GetBioms().get(i), data.tileSize);
+            biomeTexture[i] = new BiomeTexture(data.GetBiomes().get(i), data.tileSize);
         }
-        biomTexture[data.GetBioms().size()] = new BiomTexture(data.roadTileset, data.tileSize);
+        biomeTexture[data.GetBiomes().size()] = new BiomeTexture(data.roadTileset, data.tileSize);
 
 
 
     }
 
-    public BiomSpriteData getObject(int id) {
+    public BiomeSpriteData getObject(int id) {
         return mapObjectIds.get(id);
     }
     private class DrawingInformation {
 
         private int neighbors;
-        private final BiomTexture regions;
+        private final BiomeTexture regions;
         private final int terrain;
 
-        public DrawingInformation(int neighbors, BiomTexture regions, int terrain) {
+        public DrawingInformation(int neighbors, BiomeTexture regions, int terrain) {
 
             this.neighbors = neighbors;
             this.regions = regions;
@@ -109,24 +111,24 @@ public class World implements  Disposable, SaveFileContent {
             regions.drawPixmapOn(terrain,neighbors,drawingPixmap);
         }
     }
-    public Pixmap getBiomSprite(int x, int y) {
+    public Pixmap getBiomeSprite(int x, int y) {
         if (x < 0 || y <= 0 || x >= width || y > height)
             return new Pixmap(data.tileSize, data.tileSize, Pixmap.Format.RGB888);
 
-        long biomIndex = getBiom(x, y);
+        long biomeIndex = getBiome(x, y);
         int terrain = getTerrainIndex(x, y);
         Pixmap drawingPixmap = new Pixmap(data.tileSize, data.tileSize, Pixmap.Format.RGBA8888);
         ArrayList<DrawingInformation> information=new ArrayList<>();
-        for (int i = 0; i < biomTexture.length; i++) {
-            if ((biomIndex & 1L << i) == 0) {
+        for (int i = 0; i < biomeTexture.length; i++) {
+            if ((biomeIndex & 1L << i) == 0) {
                 continue;
             }
-            BiomTexture regions = biomTexture[i];
+            BiomeTexture regions = biomeTexture[i];
             if (x <= 0 || y <= 1 || x >= width - 1 || y >= height)//edge
             {
                 return regions.getPixmap(terrain);
             }
-            int biomTerrain=Math.min(regions.images.size-1,terrain);
+            int biomeTerrain=Math.min(regions.images.size()-1,terrain);
 
 
             int neighbors = 0b000_000_000;
@@ -134,30 +136,30 @@ public class World implements  Disposable, SaveFileContent {
             int bitIndex = 8;
             for (int ny = 1; ny > -2; ny--) {
                 for (int nx = -1; nx < 2; nx++) {
-                    long otherBiom = getBiom(x + nx, y + ny);
+                    long otherBiome = getBiome(x + nx, y + ny);
                     int otherTerrain = getTerrainIndex(x + nx, y + ny);
 
 
-                    if ((otherBiom & 1L << i) != 0 && biomTerrain <= otherTerrain)
+                    if ((otherBiome & 1L << i) != 0 && biomeTerrain <= otherTerrain)
                         neighbors |= (1 << bitIndex);
 
                     bitIndex--;
                 }
             }
-            if(biomTerrain!=0&&neighbors!=0b111_111_111)
+            if(biomeTerrain!=0&&neighbors!=0b111_111_111)
             {
                  bitIndex = 8;
-                int baseneighbors=0;
+                int baseNeighbors=0;
                 for (int ny = 1; ny > -2; ny--) {
                     for (int nx = -1; nx < 2; nx++) {
-                        if ((getBiom(x + nx, y + ny) & (1L << i)) != 0 )
-                            baseneighbors |= (1 << bitIndex);
+                        if ((getBiome(x + nx, y + ny) & (1L << i)) != 0 )
+                            baseNeighbors |= (1 << bitIndex);
                         bitIndex--;
                     }
                 }
-                information.add(new DrawingInformation(baseneighbors,regions,0) );
+                information.add(new DrawingInformation(baseNeighbors,regions,0) );
             }
-            information.add(new DrawingInformation(neighbors,regions,biomTerrain) );
+            information.add(new DrawingInformation(neighbors,regions,biomeTerrain) );
 
         }
         int lastFullNeighbour=-1;
@@ -189,8 +191,8 @@ public class World implements  Disposable, SaveFileContent {
         return terrainMap[x][height - y];
     }
 
-    public long getBiom(int x, int y) {
-        return biomMap[x][height - y];
+    public long getBiome(int x, int y) {
+        return biomeMap[x][height - y];
     }
 
     public WorldData getData() {
@@ -199,7 +201,7 @@ public class World implements  Disposable, SaveFileContent {
 
     public World generateNew(long seed) {
 
-        FileHandle handle = Config.instance().getFile(Paths.World);
+        FileHandle handle = Config.instance().getFile(Paths.WORLD);
         String rawJson = handle.readString();
         data = (new Json()).fromJson(WorldData.class, rawJson);
         if(seed==0)
@@ -210,17 +212,17 @@ public class World implements  Disposable, SaveFileContent {
         random.setSeed(seed);
         OpenSimplexNoise noise = new OpenSimplexNoise(seed);
 
-        float noiseZoom = data.noiseZoomBiom;
+        float noiseZoom = data.noiseZoomBiome;
         width = data.width;
         height = data.height;
         //save at all data
-        biomMap = new long[width][height];
+        biomeMap = new long[width][height];
         terrainMap= new int[width][height];
         Pixmap pix = new Pixmap(width, height, Pixmap.Format.RGB888);
 
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                biomMap[x][y] = 0;
+                biomeMap[x][y] = 0;
                 terrainMap[x][y] = 0;
             }
         }
@@ -228,37 +230,37 @@ public class World implements  Disposable, SaveFileContent {
         pix.setColor(1, 0, 0, 1);
         pix.fill();
 
-        int biomIndex = -1;
-        biomTexture = new BiomTexture[data.GetBioms().size() + 1];
-        for (BiomData biom : data.GetBioms()) {
+        int biomeIndex = -1;
+        biomeTexture = new BiomeTexture[data.GetBiomes().size() + 1];
+        for (BiomeData biome : data.GetBiomes()) {
 
-            biomIndex++;
-            biomTexture[biomIndex] = new BiomTexture(biom, data.tileSize);
-            int biomXStart = (int) Math.round(biom.startPointX * (double) width);
-            int biomYStart = (int) Math.round(biom.startPointY * (double) height);
-            int biomWidth = (int) Math.round(biom.width * (double) width);
-            int biomHeight = (int) Math.round(biom.height * (double) height);
+            biomeIndex++;
+            biomeTexture[biomeIndex] = new BiomeTexture(biome, data.tileSize);
+            int biomeXStart = (int) Math.round(biome.startPointX * (double) width);
+            int biomeYStart = (int) Math.round(biome.startPointY * (double) height);
+            int biomeWidth = (int) Math.round(biome.width * (double) width);
+            int biomeHeight = (int) Math.round(biome.height * (double) height);
 
-            int beginx = Math.max(biomXStart - biomWidth / 2, 0);
-            int beginy = Math.max(biomYStart - biomHeight / 2, 0);
-            int endx = Math.min(biomXStart + biomWidth, width);
-            int endy = Math.min(biomYStart + biomHeight, height);
-            if (biom.width == 1.0 && biom.height == 1.0) {
-                beginx = 0;
-                beginy = 0;
-                endx = width;
-                endy = height;
+            int beginX = Math.max(biomeXStart - biomeWidth / 2, 0);
+            int beginY = Math.max(biomeYStart - biomeHeight / 2, 0);
+            int endX = Math.min(biomeXStart + biomeWidth, width);
+            int endY = Math.min(biomeYStart + biomeHeight, height);
+            if (biome.width == 1.0 && biome.height == 1.0) {
+                beginX = 0;
+                beginY = 0;
+                endX = width;
+                endY = height;
             }
-            for (int x = beginx; x < endx; x++) {
-                for (int y = beginy; y < endy; y++) {
+            for (int x = beginX; x < endX; x++) {
+                for (int y = beginY; y < endY; y++) {
                     //value 0-1 based on noise
                     float noiseValue = ((float)noise.eval(x / (float) width * noiseZoom, y / (float) height * noiseZoom) + 1) / 2f;
-                    noiseValue *= biom.noiseWeight;
+                    noiseValue *= biome.noiseWeight;
                     //value 0-1 based on dist to origin
-                    float distanceValue = ((float)Math.sqrt((x - biomXStart) * (x - biomXStart) + (y - biomYStart) * (y - biomYStart))) / (Math.max(biomWidth, biomHeight) / 2f);
-                    distanceValue *= biom.distWeight;
-                    if (noiseValue + distanceValue < 1.0 || biom.invertHeight && (1 - noiseValue) + distanceValue < 1.0) {
-                        Color color = biom.GetColor();
+                    float distanceValue = ((float)Math.sqrt((x - biomeXStart) * (x - biomeXStart) + (y - biomeYStart) * (y - biomeYStart))) / (Math.max(biomeWidth, biomeHeight) / 2f);
+                    distanceValue *= biome.distWeight;
+                    if (noiseValue + distanceValue < 1.0 || biome.invertHeight && (1 - noiseValue) + distanceValue < 1.0) {
+                        Color color = biome.GetColor();
                         float[] hsv = new float[3];
                         color.toHsv(hsv);
                         int count = (int) ((noiseValue - 0.5) * 10 / 4);
@@ -266,11 +268,11 @@ public class World implements  Disposable, SaveFileContent {
                         color.fromHsv(hsv);
                         pix.setColor(color.r, color.g, color.b, 1);
                         pix.drawPixel(x, y);
-                        biomMap[x][y] |= (1L << biomIndex);
+                        biomeMap[x][y] |= (1L << biomeIndex);
                         int terrainCounter=1;
-                        if(biom.terrain==null)
+                        if(biome.terrain==null)
                             continue;
-                        for(BiomTerrainData terrain:biom.terrain)
+                        for(BiomeTerrainData terrain:biome.terrain)
                         {
                             float terrainNoise = ((float)noise.eval(x / (float) width * (noiseZoom*terrain.resolution), y / (float) height * (noiseZoom*terrain.resolution)) + 1) / 2;
                             if(terrainNoise>=terrain.min&&terrainNoise<=terrain.max)
@@ -285,14 +287,14 @@ public class World implements  Disposable, SaveFileContent {
             }
         }
 
-        mapPoiIds = new PointOfIntrestMap(GetChunkSize(), data.tileSize, data.width / GetChunkSize(),data.height / GetChunkSize());
+        mapPoiIds = new PointOfInterestMap(getChunkSize(), data.tileSize, data.width / getChunkSize(),data.height / getChunkSize());
         List<PointOfInterest> towns = new ArrayList<>();
         List<Rectangle> otherPoints = new ArrayList<>();
         otherPoints.add(new Rectangle(((float)data.width*data.playerStartPosX*(float)data.tileSize)-data.tileSize*5,((float)data.height*data.playerStartPosY*data.tileSize)-data.tileSize*5,data.tileSize*10,data.tileSize*10));
-        int biomIndex2=-1;
-        for (BiomData biom : data.GetBioms()) {
-            biomIndex2++;
-            for (PointOfInterestData poi : biom.getPointsOfIntrest()) {
+        int biomeIndex2=-1;
+        for (BiomeData biome : data.GetBiomes()) {
+            biomeIndex2++;
+            for (PointOfInterestData poi : biome.getPointsOfInterest()) {
                 for (int i = 0; i < poi.count; i++) {
                     for (int counter = 0; counter < 500; counter++)//tries 100 times to find a free point
                     {
@@ -303,19 +305,13 @@ public class World implements  Disposable, SaveFileContent {
                         float radius = (float) Math.sqrt(((random.nextDouble())/2 * poi.radiusFactor));
                         float theta = (float) (random.nextDouble() * 2 * Math.PI);
                         float x = (float) (radius * Math.cos(theta));
-                        x *= (biom.width * width / 2);
-                        x += (biom.startPointX * width);
+                        x *= (biome.width * width / 2);
+                        x += (biome.startPointX * width);
                         float y = (float) (radius * Math.sin(theta));
-                        y *= (biom.height * height / 2);
-                        y += (height - (biom.startPointY * height));
+                        y *= (biome.height * height / 2);
+                        y += (height - (biome.startPointY * height));
 
-                        /*
-                        float x = biom.startPointX+(float)(random.nextFloat() *(biom.width*poi.radiusFactor) )-((biom.width*poi.radiusFactor)/2f);
-                        float y = biom.startPointY+(float)(random.nextFloat() *(biom.height*poi.radiusFactor) )-((biom.height*poi.radiusFactor)/2f);
-                        x*=width;
-                        y*=height;
-                        y=height-y;*/
-                        if((int)x<0||(int)y<=0||(int)y>=height||(int)x>=width|| biomIndex2!=highestBiom(getBiom((int)x,(int)y)))
+                        if((int)x<0||(int)y<=0||(int)y>=height||(int)x>=width|| biomeIndex2!= highestBiome(getBiome((int)x,(int)y)))
                         {
                             continue;
                         }
@@ -337,11 +333,11 @@ public class World implements  Disposable, SaveFileContent {
 
                         mapPoiIds.add(newPoint);
 
-                        /*
-                        Color color = biom.GetColor();
+
+                        Color color = biome.GetColor();
                         pix.setColor(color.r, 0.1f, 0.1f, 1);
                         pix.drawRectangle((int) x / data.tileSize - 5, height - (int) y / data.tileSize - 5, 10, 10);
-                        */
+
 
                         if (poi.type!=null&&poi.type.equals("town")) {
                             towns.add(newPoint);
@@ -382,9 +378,9 @@ public class World implements  Disposable, SaveFileContent {
             allSortedTowns.add(Pair.of(current, towns.get(smallestIndex)));
         }
 
-        biomIndex++;
+        biomeIndex++;
         pix.setColor(1, 1, 1, 1);
-        biomTexture[biomIndex] = new BiomTexture(data.roadTileset, data.tileSize);
+        biomeTexture[biomeIndex] = new BiomeTexture(data.roadTileset, data.tileSize);
         for (Pair<PointOfInterest, PointOfInterest> townPair : allSortedTowns) {
 
             Vector2 currentPoint = townPair.getKey().getTilePosition(data.tileSize);
@@ -392,7 +388,7 @@ public class World implements  Disposable, SaveFileContent {
             for (int x = (int) currentPoint.x - 1; x < currentPoint.x + 2; x++) {
                 for (int y = (int) currentPoint.y - 1; y < currentPoint.y + 2; y++) {
                     if(x<0||y<=0||x>=width||y>height)continue;
-                    biomMap[x][height - y] |= (1L << biomIndex);
+                    biomeMap[x][height - y] |= (1L << biomeIndex);
                     pix.drawPixel(x, height-y);
                 }
             }
@@ -425,22 +421,22 @@ public class World implements  Disposable, SaveFileContent {
                 }
 
                 if( (int)currentPoint.x<0|| (int)currentPoint.y<=0|| (int)currentPoint.x>=width|| (int)currentPoint.y>height)continue;
-                biomMap[(int) currentPoint.x][height - (int) currentPoint.y] |= (1L << biomIndex);
+                biomeMap[(int) currentPoint.x][height - (int) currentPoint.y] |= (1L << biomeIndex);
                 pix.drawPixel((int) currentPoint.x, height - (int) currentPoint.y);
             }
 
         }
 
-        mapObjectIds = new SpritesDataMap(GetChunkSize(), data.tileSize, data.width / GetChunkSize());
+        mapObjectIds = new SpritesDataMap(getChunkSize(), data.tileSize, data.width / getChunkSize());
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 int invertedHeight = height - y - 1;
-                int currentBiom = highestBiom(biomMap[x][invertedHeight]);
-                if (currentBiom >= data.GetBioms().size())
+                int currentBiome = highestBiome(biomeMap[x][invertedHeight]);
+                if (currentBiome >= data.GetBiomes().size())
                     continue;
-                BiomData biom = data.GetBioms().get(currentBiom);
-                for (String name : biom.spriteNames) {
-                    BiomSpriteData sprite = data.GetBiomSprites().GetSpriteData(name);
+                BiomeData biome = data.GetBiomes().get(currentBiome);
+                for (String name : biome.spriteNames) {
+                    BiomeSpriteData sprite = data.GetBiomeSprites().getSpriteData(name);
                     double spriteNoise = (noise.eval(x / (double) width * noiseZoom*sprite.resolution, y / (double) invertedHeight * noiseZoom*sprite.resolution) + 1) / 2;
                     if (spriteNoise >= sprite.startArea && spriteNoise <= sprite.endArea) {
                         if (random.nextFloat() <= sprite.density) {
@@ -448,7 +444,7 @@ public class World implements  Disposable, SaveFileContent {
                             int key;
                             if (!mapObjectIds.containsKey(spriteKey)) {
 
-                                key = mapObjectIds.put(sprite.key(), sprite, data.GetBiomSprites());
+                                key = mapObjectIds.put(sprite.key(), sprite, data.GetBiomeSprites());
                             } else {
                                 key = mapObjectIds.intKey(spriteKey);
                             }
@@ -459,7 +455,7 @@ public class World implements  Disposable, SaveFileContent {
                 }
             }
         }
-        biomImage = pix;
+        biomeImage = pix;
 
         return this;//new World();
     }
@@ -481,41 +477,41 @@ public class World implements  Disposable, SaveFileContent {
     }
 
     public int getWidthInChunks() {
-        return width / GetChunkSize();
+        return width / getChunkSize();
     }
 
     public int getHeightInChunks() {
-        return height / GetChunkSize();
+        return height / getChunkSize();
     }
 
     public int getTileSize() {
         return data.tileSize;
     }
 
-    public Pixmap getBiomImage() {
-        return biomImage;
+    public Pixmap getBiomeImage() {
+        return biomeImage;
     }
 
 
-    public List<Pair<Vector2, Integer>> GetMapObjects(int chunkx, int chunky) {
-        return mapObjectIds.positions(chunkx, chunky);
+    public List<Pair<Vector2, Integer>> GetMapObjects(int chunkX, int chunkY) {
+        return mapObjectIds.positions(chunkX, chunkY);
     }
 
-    public List<PointOfInterest> getPointsOfIntrest(Actor player) {
-        return mapPoiIds.pointsOfIntrest((int) player.getX() / data.tileSize / GetChunkSize(), (int) player.getY() / data.tileSize / GetChunkSize());
+    public List<PointOfInterest> getPointsOfInterest(Actor player) {
+        return mapPoiIds.pointsOfInterest((int) player.getX() / data.tileSize / getChunkSize(), (int) player.getY() / data.tileSize / getChunkSize());
     }
 
-    public List<PointOfInterest> getPointsOfIntrest(int chunkx, int chunky) {
-        return mapPoiIds.pointsOfIntrest(chunkx, chunky);
+    public List<PointOfInterest> getPointsOfInterest(int chunkX, int chunkY) {
+        return mapPoiIds.pointsOfInterest(chunkX, chunkY);
     }
 
-    public int GetChunkSize() {
+    public int getChunkSize() {
         return Scene.GetIntendedWidth() / data.tileSize;
     }
 
     public void dispose() {
 
-        if (biomImage != null) biomImage.dispose();
+        if (biomeImage != null) biomeImage.dispose();
     }
 
     public void setSeed(long seedOffset) {

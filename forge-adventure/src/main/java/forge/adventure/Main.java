@@ -42,6 +42,10 @@ import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 
+/**
+ * Wrapper to start forge first (splash screen and resources loading)
+ *
+ */
 class StartAdventure extends AdventureApplicationAdapter {
     private static final int continuousRenderingCount = 1; //initialize to 1 since continuous rendering is the default
     private static final Deque<FScreen> Dscreens = new ArrayDeque<>();
@@ -108,7 +112,7 @@ class StartAdventure extends AdventureApplicationAdapter {
             splashScreen.setSize(getCurrentWidth(), getCurrentHeight());
             splashScreen.screenPos.setSize(getCurrentWidth(), getCurrentHeight());
             if (splashScreen.getRotate180()) {
-                getGraphics().startRotateTransform(getCurrentWidth() / 2, getCurrentHeight() / 2, 180);
+                getGraphics().startRotateTransform(getCurrentWidth() / 2f, getCurrentHeight() / 2f, 180);
             }
             splashScreen.draw(getGraphics());
             if (splashScreen.getRotate180()) {
@@ -222,17 +226,12 @@ class StartAdventure extends AdventureApplicationAdapter {
                         Gdx.input.setCatchKey(Input.Keys.MENU, true);
                         //openHomeScreen(-1); //default for startup
                         splashScreen = null;
-                                                /*
-                                                boolean isLandscapeMode = isLandscapeMode();
-                                                if (isLandscapeMode) { //open preferred new game screen by default if landscape mode
-                                                        NewGameMenu.getPreferredScreen().open();
-                                                }
-                                                */
+
 
                         //adjust height modifier
 
                         //update landscape mode preference if it doesn't match what the app loaded as
-                        if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_LANDSCAPE_MODE) != true) {
+                        if (!FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_LANDSCAPE_MODE)) {
                             FModel.getPreferences().setPref(ForgePreferences.FPref.UI_LANDSCAPE_MODE, true);
                             FModel.getPreferences().save();
                         }
@@ -262,7 +261,9 @@ class StartAdventure extends AdventureApplicationAdapter {
     }
 
 }
-
+/**
+ * Main entry point
+ */
 public class Main {
 
     public static void main(String[] args) {
@@ -281,11 +282,12 @@ public class Main {
 
 
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
+        config.setResizable(false);
         StartAdventure start=new StartAdventure();
 
         if (Config.instance().getSettingData().fullScreen)
         {
-            config.setFullscreenMode(config.getDisplayMode());
+            config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
         } else {
             config.setWindowedMode(Config.instance().getSettingData().width, Config.instance().getSettingData().height);
         }

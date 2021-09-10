@@ -1,8 +1,7 @@
 package forge.adventure.world;
 
 import com.badlogic.gdx.math.Vector2;
-import forge.adventure.data.BiomSpriteData;
-import forge.adventure.data.BiomSprites;
+import forge.adventure.data.BiomeSpriteData;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.IOException;
@@ -11,10 +10,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Class that hold all sprites as a list for each chunk
+ */
 public class SpritesDataMap implements Serializable {
 
     private final int numberOfChunks;
-    HashMap<Integer, BiomSpriteData> objectData = new HashMap<>();
+    HashMap<Integer, BiomeSpriteData> objectData = new HashMap<>();
     HashMap<String, Integer> objectKeys = new HashMap<>();
     int tileSize;
     int chunkSize;
@@ -44,7 +46,7 @@ public class SpritesDataMap implements Serializable {
     private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
 
         mapObjects = (List<Pair<Vector2, Integer>>[][]) in.readObject();
-        objectData = (HashMap<Integer, BiomSpriteData>) in.readObject();
+        objectData = (HashMap<Integer, BiomeSpriteData>) in.readObject();
         objectKeys = (HashMap<String, Integer>) in.readObject();
         tileSize = in.readInt();
         chunkSize = in.readInt();
@@ -52,7 +54,7 @@ public class SpritesDataMap implements Serializable {
 
     }
 
-    public BiomSpriteData get(int id) {
+    public BiomeSpriteData get(int id) {
         return objectData.get(id);
     }
 
@@ -60,7 +62,7 @@ public class SpritesDataMap implements Serializable {
         return objectKeys.containsKey(spriteKey);
     }
 
-    public int put(String key, BiomSpriteData mapObject, BiomSprites sprites) {
+    public int put(String key, BiomeSpriteData mapObject, BiomeSprites sprites) {
         int retInt = objectData.size();
         objectData.put(retInt, mapObject);
         objectKeys.put(key, retInt);

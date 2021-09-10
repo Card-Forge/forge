@@ -29,13 +29,13 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../obj/entryUp.tx" x="224" y="271"/>
-  <object id="41" template="../obj/Shop.tx" x="97" y="193"/>
-  <object id="42" template="../obj/Shop.tx" x="304" y="193"/>
-  <object id="43" template="../obj/Shop.tx" x="352" y="194"/>
-  <object id="44" template="../obj/Shop.tx" x="144" y="194"/>
-  <object id="45" template="../obj/Shop.tx" x="255" y="194"/>
-  <object id="46" template="../obj/Shop.tx" x="192" y="193"/>
-  <object id="47" template="../obj/Inn.tx" x="225" y="99"/>
+  <object id="38" template="../obj/entry_up.tx" x="224" y="271"/>
+  <object id="41" template="../obj/shop.tx" x="97" y="193"/>
+  <object id="42" template="../obj/shop.tx" x="304" y="193"/>
+  <object id="43" template="../obj/shop.tx" x="352" y="194"/>
+  <object id="44" template="../obj/shop.tx" x="144" y="194"/>
+  <object id="45" template="../obj/shop.tx" x="255" y="194"/>
+  <object id="46" template="../obj/shop.tx" x="192" y="193"/>
+  <object id="47" template="../obj/inn.tx" x="225" y="99"/>
  </objectgroup>
 </map>

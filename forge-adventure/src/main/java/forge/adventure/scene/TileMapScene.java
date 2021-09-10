@@ -10,6 +10,11 @@ import forge.adventure.util.TemplateTmxMapLoader;
 import forge.adventure.world.PointOfInterest;
 import forge.adventure.world.WorldSave;
 
+/**
+ * Scene that will render tiled maps.
+ * Used for towns dungeons etc
+ *
+ */
 public class TileMapScene extends HudScene {
 
 

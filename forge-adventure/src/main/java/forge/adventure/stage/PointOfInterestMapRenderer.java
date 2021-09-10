@@ -4,6 +4,9 @@ import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
+/**
+ * Custom renderer to render the game stage between the map layers of a tiled map
+ */
 public class PointOfInterestMapRenderer extends OrthogonalTiledMapRenderer {
     private final MapStage stage;
 
@@ -19,6 +22,7 @@ public class PointOfInterestMapRenderer extends OrthogonalTiledMapRenderer {
             renderMapLayer(layer);
             if(layer==stage.getSpriteLayer())
             {
+                //end render to draw character sprites
                 batch.end();
                 stage.draw();
                 batch.begin();

@@ -18,7 +18,10 @@ import forge.adventure.scene.SceneType;
 import forge.adventure.world.WorldSave;
 import forge.adventure.world.WorldSaveHeader;
 
-
+/**
+ * Base class to render a player sprite on a map
+ * used for the over world and dungeons
+ */
 public abstract class GameStage extends Stage {
 
 
@@ -116,14 +119,15 @@ public abstract class GameStage extends Stage {
             }
             player.setMovementDirection(diff);
         }
-/*
+        //debug speed up
+        /*
         if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT))
             player.setMoveModifier(20);
         else
             player.setMoveModifier(1);*/
 
-        camera.position.x = Math.min(Math.max(Scene.GetIntendedWidth() / 2, player.pos().x), getViewport().getWorldWidth() - Scene.GetIntendedWidth() / 2);
-        camera.position.y = Math.min(Math.max(Scene.GetIntendedHeight() / 2, player.pos().y), getViewport().getWorldHeight() - Scene.GetIntendedHeight() / 2);
+        camera.position.x = Math.min(Math.max(Scene.GetIntendedWidth() / 2f, player.pos().x), getViewport().getWorldWidth() - Scene.GetIntendedWidth() / 2f);
+        camera.position.y = Math.min(Math.max(Scene.GetIntendedHeight() / 2f, player.pos().y), getViewport().getWorldHeight() - Scene.GetIntendedHeight() / 2f);
 
 
 

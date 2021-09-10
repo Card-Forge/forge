@@ -4,6 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import forge.adventure.stage.WorldStage;
 
+/**
+ * Game scene main over world scene
+ * does render the WorldStage and HUD
+ */
 public class GameScene extends HudScene {
 
     public GameScene() {

@@ -9,6 +9,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pools;
 
+/**
+ * UI element to click through options, can be configured in an UiActor
+ */
 public class Selector extends Group {
     private final ImageButton leftArrow;
     private final ImageButton rightArrow;
@@ -18,11 +21,11 @@ public class Selector extends Group {
 
 
     public Selector() {
-        ImageButton.ImageButtonStyle lstyle = Controls.GetSkin().get("leftarrow", ImageButton.ImageButtonStyle.class);
-        leftArrow = new ImageButton(lstyle);
+        ImageButton.ImageButtonStyle leftArrowStyle = Controls.GetSkin().get("leftarrow", ImageButton.ImageButtonStyle.class);
+        leftArrow = new ImageButton(leftArrowStyle);
 
-        ImageButton.ImageButtonStyle rstyle = Controls.GetSkin().get("rightarrow", ImageButton.ImageButtonStyle.class);
-        rightArrow = new ImageButton(rstyle);
+        ImageButton.ImageButtonStyle rightArrowStyle = Controls.GetSkin().get("rightarrow", ImageButton.ImageButtonStyle.class);
+        rightArrow = new ImageButton(rightArrowStyle);
 
         label = new TextButton("", Controls.GetSkin());
         addActor(leftArrow);

@@ -10,6 +10,9 @@ import com.badlogic.gdx.utils.SnapshotArray;
 import java.util.Arrays;
 import java.util.Comparator;
 
+/**
+ * Sprite group to order actors based on the Y position on the map, the render sprites further up first.
+ */
 public class SpriteGroup extends Group {
 
     /**

@@ -3,24 +3,27 @@ package forge.adventure.world;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.IntMap;
-import forge.adventure.data.BiomData;
-import forge.adventure.data.BiomTerrainData;
+import forge.adventure.data.BiomeData;
+import forge.adventure.data.BiomeTerrainData;
 import forge.adventure.util.Config;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 
-public class BiomTexture implements Serializable {
-    private final BiomData data;
+/**
+ * class that will create auto tiles and render the biomes in chunks
+ */
+public class BiomeTexture implements Serializable {
+    private final BiomeData data;
     private final int tileSize;
     public Pixmap emptyPixmap = new Pixmap(1, 1, Pixmap.Format.RGB888);
-    Array<Array<Pixmap>> images = new Array<>();
-    Array<Array<Pixmap>> smallImages = new Array<>();
-    Array<IntMap<Pixmap>> edgeImages = new Array<>();
+    ArrayList<ArrayList<Pixmap>> images = new ArrayList<>();
+    ArrayList<ArrayList<Pixmap>> smallImages = new ArrayList<>();
+    ArrayList<IntMap<Pixmap>> edgeImages = new ArrayList<>();
 
-    public BiomTexture(BiomData data,int tileSize) {
+    public BiomeTexture(BiomeData data, int tileSize) {
         this.data = data;
         this.tileSize=tileSize;
         generate();
@@ -41,7 +44,7 @@ public class BiomTexture implements Serializable {
         Pixmap completePicture = null;
 
         if (images != null) {
-            for (Array<Pixmap> val : images) {
+            for (ArrayList<Pixmap> val : images) {
 
                 for (Pixmap img : val) {
                     img.dispose();
@@ -49,9 +52,9 @@ public class BiomTexture implements Serializable {
             }
             images.clear();
         }
-        images = new Array<>();
+        images = new ArrayList<>();
         if (smallImages != null) {
-            for (Array<Pixmap> val : smallImages) {
+            for (ArrayList<Pixmap> val : smallImages) {
 
                 for (Pixmap img : val) {
                     img.dispose();
@@ -59,30 +62,30 @@ public class BiomTexture implements Serializable {
             }
             smallImages.clear();
         }
-        smallImages = new Array<>();
+        smallImages = new ArrayList<>();
         if (edgeImages != null) {
             for (IntMap<Pixmap> val : edgeImages) {
 
-                for (IntMap.Entry<Pixmap> img : val) {
+                for (IntMap.Entry<Pixmap> img : new IntMap.Entries<Pixmap>(val)) {
                     img.value.dispose();
                 }
             }
             edgeImages.clear();
         }
-        edgeImages = new Array<>();
+        edgeImages = new ArrayList<>();
 
-        Array<TextureAtlas.AtlasRegion> regions =new Array<>();
+        ArrayList<TextureAtlas.AtlasRegion> regions =new ArrayList<>();
         regions.add(Config.instance().getAtlas(data.tilesetAtlas).findRegion(data.tilesetName));
         if(data.terrain!=null)
         {
-            for(BiomTerrainData terrain:data.terrain)
+            for(BiomeTerrainData terrain:data.terrain)
             {
                 regions.add(Config.instance().getAtlas(data.tilesetAtlas).findRegion(terrain.spriteName));
             }
         }
         for (TextureAtlas.AtlasRegion region : regions) {
-            Array<Pixmap> pics = new Array<Pixmap>();
-            Array<Pixmap> spics = new Array<Pixmap>();
+            ArrayList<Pixmap> pics = new ArrayList<>();
+            ArrayList<Pixmap> spics = new ArrayList<>();
             if (completePicture == null) {
                 region.getTexture().getTextureData().prepare();
                 completePicture = region.getTexture().getTextureData().consumePixmap();
@@ -113,73 +116,73 @@ public class BiomTexture implements Serializable {
         }
     }
 
-    public Pixmap getPixmap(int biomSubIndex) {
-        if (biomSubIndex >= edgeImages.size || biomSubIndex < 0) {
+    public Pixmap getPixmap(int biomeSubIndex) {
+        if (biomeSubIndex >= edgeImages.size() || biomeSubIndex < 0) {
             return emptyPixmap;
         }
-        return images.get(biomSubIndex).get(BigPictures.Center.value);
+        return images.get(biomeSubIndex).get(BigPictures.Center.value);
     }
 
-    public Pixmap drawPixmapOn(int biomSubIndex, int neighbors, Pixmap subPixmap) {
+    public void drawPixmapOn(int biomeSubIndex, int neighbors, Pixmap subPixmap) {
 
         int id = (neighbors * 100);
-        if (biomSubIndex >= edgeImages.size || biomSubIndex < 0) {
-            return emptyPixmap;
+        if (biomeSubIndex >= edgeImages.size() || biomeSubIndex < 0) {
+            return;
         }
-        if (edgeImages.get(biomSubIndex).containsKey(id))
-            return edgeImages.get(biomSubIndex).get(id);
+        if (edgeImages.get(biomeSubIndex).containsKey(id))
+            return;
         int tileSize = subPixmap.getHeight();
         switch (neighbors) {
             case 0b111_111_111:
-                subPixmap.drawPixmap(images.get(biomSubIndex).get(BigPictures.Center.value), 0, 0);
+                subPixmap.drawPixmap(images.get(biomeSubIndex).get(BigPictures.Center.value), 0, 0);
                 break;
             case 0b111_111_000://bot is missing
-                subPixmap.drawPixmap(images.get(biomSubIndex).get(BigPictures.BottomEdge.value), 0, 0);
+                subPixmap.drawPixmap(images.get(biomeSubIndex).get(BigPictures.BottomEdge.value), 0, 0);
                 break;
             case 0b000_111_111://top is missing
-                subPixmap.drawPixmap(images.get(biomSubIndex).get(BigPictures.TopEdge.value), 0, 0);
+                subPixmap.drawPixmap(images.get(biomeSubIndex).get(BigPictures.TopEdge.value), 0, 0);
                 break;
             case 0b011_011_011://left is missing
-                subPixmap.drawPixmap(images.get(biomSubIndex).get(BigPictures.LeftEdge.value), 0, 0);
+                subPixmap.drawPixmap(images.get(biomeSubIndex).get(BigPictures.LeftEdge.value), 0, 0);
                 break;
             case 0b110_110_110://right is missing
-                subPixmap.drawPixmap(images.get(biomSubIndex).get(BigPictures.RightEdge.value), 0, 0);
+                subPixmap.drawPixmap(images.get(biomeSubIndex).get(BigPictures.RightEdge.value), 0, 0);
                 break;
             case 0b010_111_010://cross
-                subPixmap.drawPixmap(images.get(biomSubIndex).get(BigPictures.InnerEdges.value), 0, 0);
+                subPixmap.drawPixmap(images.get(biomeSubIndex).get(BigPictures.InnerEdges.value), 0, 0);
                 break;
             case 0b001_011_111://top Left
-                subPixmap.drawPixmap(images.get(biomSubIndex).get(BigPictures.LeftTopEdge.value), 0, 0);
+                subPixmap.drawPixmap(images.get(biomeSubIndex).get(BigPictures.LeftTopEdge.value), 0, 0);
                 break;
             case 0b100_110_111://top Right
-                subPixmap.drawPixmap(images.get(biomSubIndex).get(BigPictures.RightTopEdge.value), 0, 0);
+                subPixmap.drawPixmap(images.get(biomeSubIndex).get(BigPictures.RightTopEdge.value), 0, 0);
                 break;
             case 0b111_011_001://bottom Left
-                subPixmap.drawPixmap(images.get(biomSubIndex).get(BigPictures.LeftBottomEdge.value), 0, 0);
+                subPixmap.drawPixmap(images.get(biomeSubIndex).get(BigPictures.LeftBottomEdge.value), 0, 0);
                 break;
             case 0b111_110_100://bottom Right
-                subPixmap.drawPixmap(images.get(biomSubIndex).get(BigPictures.RigtBottomEdge.value), 0, 0);
+                subPixmap.drawPixmap(images.get(biomeSubIndex).get(BigPictures.RightBottomEdge.value), 0, 0);
                 break;
             default: {
                 switch (neighbors & 0b110_100_000)//topLeftNeighbors
                 {
                     case 0b000_000_000:
                     case 0b100_000_000:
-                        subPixmap.drawPixmap(smallImages.get(biomSubIndex).get(SmallPictures.LeftTopEdge00.value), 0, 0);
+                        subPixmap.drawPixmap(smallImages.get(biomeSubIndex).get(SmallPictures.LeftTopEdge00.value), 0, 0);
                         break;
                     case 0b010_000_000:
                     case 0b110_000_000:
-                        subPixmap.drawPixmap(smallImages.get(biomSubIndex).get(SmallPictures.LeftEdge00.value), 0, 0);
+                        subPixmap.drawPixmap(smallImages.get(biomeSubIndex).get(SmallPictures.LeftEdge00.value), 0, 0);
                         break;
                     case 0b000_100_000:
                     case 0b100_100_000:
-                        subPixmap.drawPixmap(smallImages.get(biomSubIndex).get(SmallPictures.TopEdge00.value), 0, 0);
+                        subPixmap.drawPixmap(smallImages.get(biomeSubIndex).get(SmallPictures.TopEdge00.value), 0, 0);
                         break;
                     case 0b010_100_000:
-                        subPixmap.drawPixmap(smallImages.get(biomSubIndex).get(SmallPictures.InnerTopLeftEdge.value), 0, 0);
+                        subPixmap.drawPixmap(smallImages.get(biomeSubIndex).get(SmallPictures.InnerTopLeftEdge.value), 0, 0);
                         break;
                     case 0b110_100_000:
-                        subPixmap.drawPixmap(smallImages.get(biomSubIndex).get(SmallPictures.Center00.value), 0, 0);
+                        subPixmap.drawPixmap(smallImages.get(biomeSubIndex).get(SmallPictures.Center00.value), 0, 0);
                         break;
                 }
 
@@ -187,61 +190,61 @@ public class BiomTexture implements Serializable {
                 {
                     case 0b000_000_000:
                     case 0b001_000_000:
-                        subPixmap.drawPixmap(smallImages.get(biomSubIndex).get(SmallPictures.RightTopEdge10.value), tileSize / 2, 0);
+                        subPixmap.drawPixmap(smallImages.get(biomeSubIndex).get(SmallPictures.RightTopEdge10.value), tileSize / 2, 0);
                         break;
                     case 0b011_000_000:
                     case 0b010_000_000:
-                        subPixmap.drawPixmap(smallImages.get(biomSubIndex).get(SmallPictures.RightEdge10.value), tileSize / 2, 0);
+                        subPixmap.drawPixmap(smallImages.get(biomeSubIndex).get(SmallPictures.RightEdge10.value), tileSize / 2, 0);
                         break;
                     case 0b001_001_000:
                     case 0b000_001_000:
-                        subPixmap.drawPixmap(smallImages.get(biomSubIndex).get(SmallPictures.TopEdge10.value), tileSize / 2, 0);
+                        subPixmap.drawPixmap(smallImages.get(biomeSubIndex).get(SmallPictures.TopEdge10.value), tileSize / 2, 0);
                         break;
                     case 0b010_001_000:
-                        subPixmap.drawPixmap(smallImages.get(biomSubIndex).get(SmallPictures.InnerTopRightEdge.value), tileSize / 2, 0);
+                        subPixmap.drawPixmap(smallImages.get(biomeSubIndex).get(SmallPictures.InnerTopRightEdge.value), tileSize / 2, 0);
                         break;
                     case 0b011_001_000:
-                        subPixmap.drawPixmap(smallImages.get(biomSubIndex).get(SmallPictures.Center10.value), tileSize / 2, 0);
+                        subPixmap.drawPixmap(smallImages.get(biomeSubIndex).get(SmallPictures.Center10.value), tileSize / 2, 0);
                         break;
                 }
                 switch (neighbors & 0b000_100_110) {//bottomLeftNeighbors
                     case 0b000_000_000:
                     case 0b000_000_100:
-                        subPixmap.drawPixmap(smallImages.get(biomSubIndex).get(SmallPictures.LeftBottomEdge01.value), 0, tileSize / 2);
+                        subPixmap.drawPixmap(smallImages.get(biomeSubIndex).get(SmallPictures.LeftBottomEdge01.value), 0, tileSize / 2);
                         break;
                     case 0b000_100_100:
                     case 0b000_100_000:
-                        subPixmap.drawPixmap(smallImages.get(biomSubIndex).get(SmallPictures.BottomEdge01.value), 0, tileSize / 2);
+                        subPixmap.drawPixmap(smallImages.get(biomeSubIndex).get(SmallPictures.BottomEdge01.value), 0, tileSize / 2);
                         break;
                     case 0b000_000_110:
                     case 0b000_000_010:
-                        subPixmap.drawPixmap(smallImages.get(biomSubIndex).get(SmallPictures.LeftEdge01.value), 0, tileSize / 2);
+                        subPixmap.drawPixmap(smallImages.get(biomeSubIndex).get(SmallPictures.LeftEdge01.value), 0, tileSize / 2);
                         break;
                     case 0b000_100_010:
-                        subPixmap.drawPixmap(smallImages.get(biomSubIndex).get(SmallPictures.InnerBottomLeftEdge.value), 0, tileSize / 2);
+                        subPixmap.drawPixmap(smallImages.get(biomeSubIndex).get(SmallPictures.InnerBottomLeftEdge.value), 0, tileSize / 2);
                         break;
                     case 0b000_100_110:
-                        subPixmap.drawPixmap(smallImages.get(biomSubIndex).get(SmallPictures.Center01.value), 0, tileSize / 2);
+                        subPixmap.drawPixmap(smallImages.get(biomeSubIndex).get(SmallPictures.Center01.value), 0, tileSize / 2);
                         break;
                 }
                 switch (neighbors & 0b000_001_011) {//bottomRightNeighbors
                     case 0b000_000_000:
                     case 0b000_000_001:
-                        subPixmap.drawPixmap(smallImages.get(biomSubIndex).get(SmallPictures.RightBottomEdge11.value), tileSize / 2, tileSize / 2);
+                        subPixmap.drawPixmap(smallImages.get(biomeSubIndex).get(SmallPictures.RightBottomEdge11.value), tileSize / 2, tileSize / 2);
                         break;
                     case 0b000_001_001:
                     case 0b000_001_000:
-                        subPixmap.drawPixmap(smallImages.get(biomSubIndex).get(SmallPictures.BottomEdge11.value), tileSize / 2, tileSize / 2);
+                        subPixmap.drawPixmap(smallImages.get(biomeSubIndex).get(SmallPictures.BottomEdge11.value), tileSize / 2, tileSize / 2);
                         break;
                     case 0b000_000_011:
                     case 0b000_000_010:
-                        subPixmap.drawPixmap(smallImages.get(biomSubIndex).get(SmallPictures.RightEdge11.value), tileSize / 2, tileSize / 2);
+                        subPixmap.drawPixmap(smallImages.get(biomeSubIndex).get(SmallPictures.RightEdge11.value), tileSize / 2, tileSize / 2);
                         break;
                     case 0b000_001_010:
-                        subPixmap.drawPixmap(smallImages.get(biomSubIndex).get(SmallPictures.InnerBottomRightEdge.value), tileSize / 2, tileSize / 2);
+                        subPixmap.drawPixmap(smallImages.get(biomeSubIndex).get(SmallPictures.InnerBottomRightEdge.value), tileSize / 2, tileSize / 2);
                         break;
                     case 0b000_001_011:
-                        subPixmap.drawPixmap(smallImages.get(biomSubIndex).get(SmallPictures.Center11.value), tileSize / 2, tileSize / 2);
+                        subPixmap.drawPixmap(smallImages.get(biomeSubIndex).get(SmallPictures.Center11.value), tileSize / 2, tileSize / 2);
                         break;
                 }
             }
@@ -283,8 +286,7 @@ public class BiomTexture implements Serializable {
             }
 
         }
-        edgeImages.get(biomSubIndex).put(biomSubIndex, subPixmap);
-        return subPixmap;
+        edgeImages.get(biomeSubIndex).put(biomeSubIndex, subPixmap);
 
     }
 
@@ -300,7 +302,7 @@ public class BiomTexture implements Serializable {
         RightEdge(8),
         LeftBottomEdge(9),
         BottomEdge(10),
-        RigtBottomEdge(11);
+        RightBottomEdge(11);
 
         public int value;
 

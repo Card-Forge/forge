@@ -25,6 +25,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.regex.Pattern;
 
+/**
+ * Utility class to deck generation and card filtering
+ */
 public class CardUtil {
     public static final class CardPredicate implements Predicate<PaperCard> {
         enum ColorType
@@ -280,9 +283,9 @@ public class CardUtil {
         float count=data.template.count;
         float lands=count*0.4f;
         float spells=count-lands;
-        List<RewardData> dataArray=generateReards(data.template,spells*0.5f,new int[]{1,2});
-        dataArray.addAll(generateReards(data.template,spells*0.3f,new int[]{3,4,5}));
-        dataArray.addAll(generateReards(data.template,spells*0.2f,new int[]{6,7,8}));
+        List<RewardData> dataArray= generateRewards(data.template,spells*0.5f,new int[]{1,2});
+        dataArray.addAll(generateRewards(data.template,spells*0.3f,new int[]{3,4,5}));
+        dataArray.addAll(generateRewards(data.template,spells*0.2f,new int[]{6,7,8}));
         List<PaperCard>  nonLand=RewardData.generateAllCards(dataArray, true);
 
         nonLand.addAll(fillWithLands(nonLand,data.template));
@@ -346,7 +349,6 @@ public class CardUtil {
     }
 
     private static Collection<PaperCard> generateDualLands(List<String> landName, int count) {
-        Collection<PaperCard> ret=new ArrayList<>();
         ArrayList<RewardData> rewards=new ArrayList<>();
         RewardData base= new RewardData();
         rewards.add(base);
@@ -373,7 +375,7 @@ public class CardUtil {
             base.subTypes=new String[]{landName.get(0),landName.get(1)};
             sub1.subTypes=new String[]{landName.get(1),landName.get(2)};
             sub2.subTypes=new String[]{landName.get(0),landName.get(2)};
-            rewards.addAll(Arrays.asList(new RewardData[]{sub1,sub2}));
+            rewards.addAll(Arrays.asList(sub1,sub2));
         }
         else if(landName.size()==4)
         {
@@ -395,7 +397,7 @@ public class CardUtil {
             sub2.subTypes = new String[]{landName.get(0),landName.get(3)};
             sub3.subTypes = new String[]{landName.get(1),landName.get(2)};
             sub4.subTypes = new String[]{landName.get(1),landName.get(3)};
-            rewards.addAll(Arrays.asList(new RewardData[]{sub1,sub2,sub3,sub4}));
+            rewards.addAll(Arrays.asList(sub1,sub2,sub3,sub4));
         }
         else if(landName.size()==5)
         {
@@ -437,10 +439,10 @@ public class CardUtil {
             sub7.subTypes=new String[]{landName.get(2),landName.get(3)};
             sub8.subTypes=new String[]{landName.get(2),landName.get(4)};
             sub9.subTypes=new String[]{landName.get(3),landName.get(4)};
-            rewards.addAll(Arrays.asList(new RewardData[]{sub1,sub2,sub3,sub4,sub5,sub6,sub7,sub8,sub9}));
+            rewards.addAll(Arrays.asList(sub1,sub2,sub3,sub4,sub5,sub6,sub7,sub8,sub9));
         }
 
-        ret.addAll(RewardData.generateAllCards(rewards, true));
+        Collection<PaperCard> ret = new ArrayList<>(RewardData.generateAllCards(rewards, true));
         return ret;
     }
 
@@ -452,17 +454,17 @@ public class CardUtil {
         return ret;
     }
 
-    private static List<RewardData> generateReards(GeneratedDeckTemplateData template, float count, int[] manaconsts) {
+    private static List<RewardData> generateRewards(GeneratedDeckTemplateData template, float count, int[] manaCosts) {
         ArrayList<RewardData> ret=new ArrayList<>();
-        ret.addAll(templateGenerate(template,count-(count*template.rares),manaconsts,new String[]{"Uncommon","Common"}));
-        ret.addAll(templateGenerate(template,count*template.rares,manaconsts,new String[]{"Rare","Mythic Rare"}));
+        ret.addAll(templateGenerate(template,count-(count*template.rares),manaCosts,new String[]{"Uncommon","Common"}));
+        ret.addAll(templateGenerate(template,count*template.rares,manaCosts,new String[]{"Rare","Mythic Rare"}));
         return ret;
     }
 
-    private static ArrayList<RewardData> templateGenerate(GeneratedDeckTemplateData template, float count, int[] manaconsts, String[] strings) {
+    private static ArrayList<RewardData> templateGenerate(GeneratedDeckTemplateData template, float count, int[] manaCosts, String[] strings) {
         ArrayList<RewardData> ret=new ArrayList<>();
         RewardData base= new RewardData();
-        base.manaCosts=manaconsts;
+        base.manaCosts=manaCosts;
         base.rarity=strings;
         base.colors=template.colors;
         if(template.tribe!=null&&!template.tribe.isEmpty())

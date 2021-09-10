@@ -5,6 +5,9 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import forge.adventure.AdventureApplicationAdapter;
 import forge.adventure.world.WorldSave;
 
+/**
+ * First scene after the splash screen
+ */
 public class StartScene extends UIScene {
 
     Actor saveButton;
@@ -12,7 +15,7 @@ public class StartScene extends UIScene {
 
     public StartScene()
     {
-        super("ui/startmenu.json");
+        super("ui/start_menu.json");
 
     }
 

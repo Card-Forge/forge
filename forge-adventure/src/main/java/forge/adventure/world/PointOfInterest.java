@@ -14,6 +14,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Random;
 
+/**
+ * Point of interest stored in the world
+ */
 public class PointOfInterest implements SaveFileContent {
 
 
@@ -48,14 +51,14 @@ public class PointOfInterest implements SaveFileContent {
     public PointOfInterest(PointOfInterestData d, Vector2 pos, Random rand) {
         Array<Sprite> textureAtlas = Config.instance().getAtlas(d.spriteAtlas).createSprites(d.sprite);
         if (textureAtlas.isEmpty()) {
-            System.out.printf("sprite " + d.sprite + " not found");
+            System.out.print("sprite " + d.sprite + " not found");
         }
         spriteIndex = rand.nextInt(Integer.SIZE - 1) % textureAtlas.size;
         sprite = textureAtlas.get(spriteIndex);
         data = d;
         position.set(pos);
 
-        rectangle.set(position.y, position.y, sprite.getWidth(), sprite.getHeight());
+        rectangle.set(position.x, position.y, sprite.getWidth(), sprite.getHeight());
     }
     public PointOfInterest(PointOfInterestData d, PointOfInterest parent) {
         spriteIndex = parent.spriteIndex;
@@ -63,7 +66,7 @@ public class PointOfInterest implements SaveFileContent {
         data = d;
         position.set(parent.position);
         oldMapId=parent.getID();
-        rectangle.set(position.y, position.y, sprite.getWidth(), sprite.getHeight());
+        rectangle.set(position.x, position.y, sprite.getWidth(), sprite.getHeight());
     }
     public Sprite getSprite() {
         return sprite;
@@ -74,7 +77,7 @@ public class PointOfInterest implements SaveFileContent {
     }
 
     public Vector2 getTilePosition(int tileSize) {
-        return new Vector2((int) (position.x + (sprite.getWidth() / 2)) / tileSize, (int) position.y / tileSize);
+        return new Vector2((int) ((position.x + (sprite.getWidth() / 2)) / tileSize), (int) position.y / tileSize);
     }
 
     public Rectangle getBoundingRectangle() {

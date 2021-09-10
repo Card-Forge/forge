@@ -17,6 +17,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
 
+/**
+ * Main resource class to access files from the selected adventure
+ */
 public class Config {
     private static Config currentConfig;
     private final String prefix;

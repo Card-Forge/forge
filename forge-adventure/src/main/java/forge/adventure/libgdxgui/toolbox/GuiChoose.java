@@ -23,7 +23,7 @@ public class GuiChoose {
      * @return null if choices is missing, empty, or if the users' choices are
      *         empty; otherwise, returns the first item in the List returned by
      *         getChoices.
-     * @see #getChoices(String, int, int, Object...)
+     * @see #getChoices
      */
     public static <T> void oneOrNone(final String message, final T[] choices, final Callback<T> callback) {
         if ((choices == null) || (choices.length == 0)) {

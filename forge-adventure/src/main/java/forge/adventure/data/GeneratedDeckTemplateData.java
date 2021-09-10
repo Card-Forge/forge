@@ -1,5 +1,10 @@
 package forge.adventure.data;
 
+/**
+ * Data class that will be used to read Json configuration files
+ * BiomeData
+ * contains the information for the generated deck
+ */
 public class GeneratedDeckTemplateData {
     public String[] colors;
     public int    count;

@@ -212,7 +212,7 @@ public class FSkinColor {
     }
 
     /**
-     * @see http://www.nbdtech.com/Blog/archive/2008/04/27/Calculating-the-Perceived-Brightness-of-a-Color.aspx
+     * see http://www.nbdtech.com/Blog/archive/2008/04/27/Calculating-the-Perceived-Brightness-of-a-Color.aspx
      */
     public static boolean isColorBright(Color c) {
         double v = Math.sqrt(

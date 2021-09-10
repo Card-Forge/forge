@@ -8,17 +8,21 @@ import forge.adventure.data.RewardData;
 import forge.adventure.util.Current;
 import forge.adventure.util.Reward;
 
-public class MobSprite extends CharacterSprite {
+/**
+ * EnemySprite
+ * Character sprite that represents an Enemy
+ */
+public class EnemySprite extends CharacterSprite {
     EnemyData data;
     private int id;
 
-    public MobSprite(EnemyData enemyData) {
+    public EnemySprite(EnemyData enemyData) {
         super(enemyData.sprite);
 
         data = enemyData;
     }
 
-    public MobSprite(int id, EnemyData enemyData) {
+    public EnemySprite(int id, EnemyData enemyData) {
         this(enemyData);
 
         this.id = id;

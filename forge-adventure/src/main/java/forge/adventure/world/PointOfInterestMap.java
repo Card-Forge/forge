@@ -8,7 +8,10 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PointOfIntrestMap implements SaveFileContent {
+/**
+ * Class that hold all point of interest as a list for each chunk
+ */
+public class PointOfInterestMap implements SaveFileContent {
 
     private int numberOfChunksX;
     private int numberOfChunksY;
@@ -16,7 +19,7 @@ public class PointOfIntrestMap implements SaveFileContent {
     int chunkSize;
     private List<PointOfInterest>[][] mapObjects;
 
-    PointOfIntrestMap(int chunkSize, int tiles, int numberOfChunksX, int numberOfChunksY) {
+    PointOfInterestMap(int chunkSize, int tiles, int numberOfChunksX, int numberOfChunksY) {
         this.tileSize = tiles;
         this.chunkSize = chunkSize;
         this.numberOfChunksX = numberOfChunksX;
@@ -39,7 +42,7 @@ public class PointOfIntrestMap implements SaveFileContent {
         mapObjects[chunkX][chunkY].add(obj);
     }
 
-    public List<PointOfInterest> pointsOfIntrest(int chunkX, int chunkY) {
+    public List<PointOfInterest> pointsOfInterest(int chunkX, int chunkY) {
         if (chunkX >= numberOfChunksX || chunkY >= numberOfChunksY || chunkX < 0 || chunkY < 0)
             return new ArrayList<PointOfInterest>();
         return mapObjects[chunkX][chunkY];
@@ -76,9 +79,9 @@ public class PointOfIntrestMap implements SaveFileContent {
                 int arraySize=saveFile.readInt();
                 for(int i=0;i<arraySize;i++)
                 {
-                    PointOfInterest pointsOfIntrest=new PointOfInterest();
-                    pointsOfIntrest.readFromSaveFile(saveFile);
-                    mapObjects[x][y].add(pointsOfIntrest);
+                    PointOfInterest pointsOfInterest=new PointOfInterest();
+                    pointsOfInterest.readFromSaveFile(saveFile);
+                    mapObjects[x][y].add(pointsOfInterest);
                 }
             }
         }

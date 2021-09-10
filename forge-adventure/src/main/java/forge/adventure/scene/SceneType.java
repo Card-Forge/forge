@@ -1,6 +1,8 @@
 package forge.adventure.scene;
 
-
+/**
+ * Enum of all scenes
+ */
 public enum SceneType {
     StartScene(new forge.adventure.scene.StartScene()),
     NewGameScene(new forge.adventure.scene.NewGameScene()),

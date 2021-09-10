@@ -14,6 +14,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+/**
+ * Adapter for desktop usage
+ */
 public class DesktopAdapter implements IDeviceAdapter {
     private final String switchOrientationFile;
 

@@ -3,57 +3,57 @@
   "heroes":[
   {
     "name":"Devil",
-    "female":"sprites/heroes/Devil_f.atlas",      
-    "male":"sprites/heroes/Devil_m.atlas",      
+    "female":"sprites/heroes/devil_f.atlas",      
+    "male":"sprites/heroes/devil_m.atlas",      
     "femaleAvatar":"Devil_f",      
     "maleAvatar":"Devil_m" 
   },
   {
     "name":"Kor",
-    "female":"sprites/heroes/Kor_f.atlas",      
-    "male":"sprites/heroes/Kor_m.atlas",      
+    "female":"sprites/heroes/kor_f.atlas",      
+    "male":"sprites/heroes/kor_m.atlas",      
     "femaleAvatar":"Kor_f",      
     "maleAvatar":"Kor_m" 
   } ,
   {
     "name":"Human",
-    "female":"sprites/heroes/Human_f.atlas",      
-    "male":"sprites/heroes/Human_m.atlas",      
+    "female":"sprites/heroes/human_f.atlas",      
+    "male":"sprites/heroes/human_m.atlas",      
     "femaleAvatar":"Human_f",      
     "maleAvatar":"Human_m" 
   },
   {
     "name":"Elf",
-    "female":"sprites/heroes/Elf_f.atlas",      
-    "male":"sprites/heroes/Elf_m.atlas",      
+    "female":"sprites/heroes/elf_f.atlas",      
+    "male":"sprites/heroes/elf_m.atlas",      
     "femaleAvatar":"Elf_f",      
     "maleAvatar":"Elf_m" 
   },
   {
     "name":"Metathran",
-    "female":"sprites/heroes/Metathran_f.atlas",      
-    "male":"sprites/heroes/Metathran_m.atlas",      
+    "female":"sprites/heroes/metathran_f.atlas",      
+    "male":"sprites/heroes/metathran_m.atlas",      
     "femaleAvatar":"Metathran_f",      
     "maleAvatar":"Metathran_m" 
   },
   {
     "name":"Undead",
-    "female":"sprites/heroes/Undead_f.atlas",      
-    "male":"sprites/heroes/Undead_m.atlas",      
+    "female":"sprites/heroes/undead_f.atlas",      
+    "male":"sprites/heroes/undead_m.atlas",      
     "femaleAvatar":"Undead_f",      
     "maleAvatar":"Undead_m" 
   } ,
   {
     "name":"Viashino",
-    "female":"sprites/heroes/Viashino_f.atlas",      
-    "male":"sprites/heroes/Viashino_m.atlas",      
+    "female":"sprites/heroes/viashino_f.atlas",      
+    "male":"sprites/heroes/viashino_m.atlas",      
     "femaleAvatar":"Viashino_f",      
     "maleAvatar":"Viashino_m" 
   }   ,
   {
     "name":"Drawf",
-    "female":"sprites/heroes/Dwarf_f.atlas",      
-    "male":"sprites/heroes/Dwarf_m.atlas",      
+    "female":"sprites/heroes/dwarf_f.atlas",      
+    "male":"sprites/heroes/dwarf_m.atlas",      
     "femaleAvatar":"Dwarf_f",      
     "maleAvatar":"Dwarf_m" 
   }

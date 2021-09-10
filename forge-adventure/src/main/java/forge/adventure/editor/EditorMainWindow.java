@@ -3,6 +3,9 @@ package forge.adventure.editor;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Editor class to edit configuration, maybe moved or removed
+ */
 public class EditorMainWindow extends JFrame {
     JTabbedPane tabs =new JTabbedPane();
 

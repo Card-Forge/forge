@@ -3,6 +3,11 @@ package forge.adventure.data;
 import forge.adventure.util.CardUtil;
 import forge.deck.Deck;
 
+/**
+ * Data class that will be used to read Json configuration files
+ * BiomeData
+ * contains the information of enemies
+ */
 public class EnemyData {
     public String name;
     public String sprite;

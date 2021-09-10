@@ -59,7 +59,7 @@ public class VAssignGenericAmount extends FDialog {
 
     /** Constructor.
      *
-     * @param attacker0 {@link forge.game.card.Card}
+     * @param effectSource {@link forge.game.card.Card}
      * @param targets Map<GameEntity, Integer>, map of GameEntity and its maximum assignable amount
      * @param amount Total amount to be assigned
      * @param atLeastOne Must assign at least one amount to each target

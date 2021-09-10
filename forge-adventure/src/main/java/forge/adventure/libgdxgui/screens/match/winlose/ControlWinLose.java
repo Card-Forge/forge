@@ -19,7 +19,7 @@ public class ControlWinLose {
     private int humancount;
 
     /** @param v &emsp; ViewWinLose
-     * @param match */
+     * @param game */
     public ControlWinLose(final ViewWinLose v, GameView game) {
         view = v;
         lastGame = game;

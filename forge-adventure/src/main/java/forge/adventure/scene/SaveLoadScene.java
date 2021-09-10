@@ -20,6 +20,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.zip.InflaterInputStream;
 
+/**
+ * Scene to load and save the game.
+ *
+ */
 public class SaveLoadScene extends UIScene {
     private final IntMap<TextButton> buttons = new IntMap<>();
     IntMap<WorldSaveHeader> previews = new IntMap<>();
@@ -34,20 +38,20 @@ public class SaveLoadScene extends UIScene {
     TextButton saveLoadButton;
 
     public SaveLoadScene() {
-        super("ui/saveload.json");
+        super("ui/save_load.json");
     }
 
 
 
 
-    private void AddSaveSlot(String name, int i) {
+    private void addSaveSlot(String name, int i) {
         layout.add(Controls.newLabel(name));
         TextButton button = Controls.newTextButton("...");
         button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 try {
-                    Select(i);
+                    select(i);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -59,11 +63,11 @@ public class SaveLoadScene extends UIScene {
 
     }
 
-    public void Back() {
+    public void back() {
         AdventureApplicationAdapter.instance.switchToLast();
     }
 
-    public boolean Select(int slot) {
+    public boolean select(int slot) {
         currentSlot = slot;
 
         if (previews.containsKey(slot)) {
@@ -73,7 +77,7 @@ public class SaveLoadScene extends UIScene {
                 previewImage.layout();
             }
         }
-        for (IntMap.Entry<TextButton> butt : buttons.entries()) {
+        for (IntMap.Entry<TextButton> butt : new IntMap.Entries<TextButton> (buttons)) {
             butt.value.setColor(defColor);
         }
         if (buttons.containsKey(slot)) {
@@ -86,7 +90,7 @@ public class SaveLoadScene extends UIScene {
 
     public void loadSave() {
         if (save) {
-            textInput.setText("savegame " + currentSlot);
+            textInput.setText("Save Game " + currentSlot);
             dialog.show(stage);
             stage.setKeyboardFocus(textInput);
         } else {
@@ -117,10 +121,11 @@ public class SaveLoadScene extends UIScene {
         File f = new File(WorldSave.getSaveDir());
         f.mkdirs();
         File[] names = f.listFiles();
+        if(names==null)
+            throw new RuntimeException("Can not find save directory");
         previews.clear();
         for (File name : names) {
-            int slot = WorldSave.FilenameToSlot(name.getName());
-            if (slot >= -2) {
+            if (WorldSave.isSafeFile(name.getName())) {
                 try {
 
                     try (FileInputStream fos = new FileInputStream(name.getAbsolutePath());
@@ -128,6 +133,7 @@ public class SaveLoadScene extends UIScene {
                          ObjectInputStream oos = new ObjectInputStream(inf)) {
 
 
+                        int slot=WorldSave.filenameToSlot(name.getName());
                         WorldSaveHeader header = (WorldSaveHeader) oos.readObject();
                         buttons.get(slot).setText(header.name);
                         previews.put(slot, header);
@@ -156,7 +162,7 @@ public class SaveLoadScene extends UIScene {
 
     @Override
     public void enter() {
-        Select(-3);
+        select(-3);
         updateFiles();
         super.enter();
     }
@@ -169,7 +175,7 @@ public class SaveLoadScene extends UIScene {
         stage.addActor(layout);
         dialog = Controls.newDialog("Save");
         textInput = Controls.newTextField("");
-        dialog.getButtonTable().add(Controls.newLabel("Name your new savegame.")).colspan(2);
+        dialog.getButtonTable().add(Controls.newLabel("Name your new save file.")).colspan(2);
         dialog.getButtonTable().row();
         dialog.getButtonTable().add(Controls.newLabel("Name:")).align(Align.left);
         dialog.getButtonTable().add(textInput).fillX().expandX();
@@ -182,14 +188,14 @@ public class SaveLoadScene extends UIScene {
         header.setHeight(header.getHeight() * 2);
         layout.add(header).colspan(2).align(Align.center);
         layout.row();
-        AddSaveSlot("Auto save", -2);
-        AddSaveSlot("Quick save", -1);
+        addSaveSlot("Auto save", -2);
+        addSaveSlot("Quick save", -1);
         for (int i = 1; i < 11; i++)
-            AddSaveSlot("Slot:" + i, i);
+            addSaveSlot("Slot:" + i, i);
 
         saveLoadButton = ui.findActor("save");
         ui.onButtonPress("save",()-> loadSave());
-        ui.onButtonPress("return",()->Back());
+        ui.onButtonPress("return",()-> back());
         defColor = saveLoadButton.getColor();
 
 

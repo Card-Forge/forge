@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Editor class to edit configuration, maybe moved or removed
+ */
 public class SwingAtlasPreview extends Box {
     private String sprite="";
     Timer timer;
@@ -34,6 +37,7 @@ public class SwingAtlasPreview extends Box {
         labels.clear();
         if(this.sprite.equals(sprite))
             return;
+        this.sprite=sprite;
         SwingAtlas atlas=new SwingAtlas(Config.instance().getFile(sprite));
         for(Map.Entry<String, ArrayList<ImageIcon>> element:atlas.getImages().entrySet())
         {

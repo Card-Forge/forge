@@ -10,6 +10,11 @@ import com.badlogic.gdx.utils.Json;
 import forge.adventure.util.Config;
 import forge.adventure.util.Paths;
 
+/**
+ * Data class that will be used to read Json configuration files
+ * BiomeData
+ * contains the a list of all heroes
+ */
 public class HeroListData {
     static private HeroListData instance;
     public HeroData[] heroes;
@@ -18,7 +23,7 @@ public class HeroListData {
 
     static private HeroListData read() {
         Json json = new Json();
-        FileHandle handle = Config.instance().getFile(Paths.Heroes);
+        FileHandle handle = Config.instance().getFile(Paths.HEROES);
         if (handle.exists()) {
             instance = json.fromJson(HeroListData.class, handle);
             instance.avatarSprites = Config.instance().getAtlas(instance.avatar);

@@ -7,18 +7,21 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
 import forge.adventure.world.PointOfInterest;
 
-public class PointOfIntrestMapSprite extends MapSprite {
+/**
+ * MapSprite for points of interest to add a bounding rect for collision detection
+ */
+public class PointOfInterestMapSprite extends MapSprite {
     PointOfInterest pointOfInterest;
     Texture debugTexture;
     Rectangle boundingRect;
 
-    public PointOfIntrestMapSprite(PointOfInterest point) {
+    public PointOfInterestMapSprite(PointOfInterest point) {
         super(point.getPosition(), point.getSprite());
         pointOfInterest = point;
         boundingRect = new Rectangle(getX(), getY(), texture.getRegionWidth(), texture.getRegionHeight());
     }
 
-    public PointOfInterest getPointOfIntrest() {
+    public PointOfInterest getPointOfInterest() {
         return pointOfInterest;
     }
 

@@ -5,9 +5,14 @@ import com.badlogic.gdx.maps.ImageResolver;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.XmlReader;
 
+/**
+ * Rewritten the loadObject method of TmxMapLoader to support templates in tiled map.
+ *
+ */
 public class TemplateTmxMapLoader extends TmxMapLoader {
 
     FileHandle tmxFile;
@@ -28,8 +33,8 @@ public class TemplateTmxMapLoader extends TmxMapLoader {
             }
             FileHandle template = getRelativeFileHandle(tmxFile, element.getAttribute("template"));
             XmlReader.Element el = xml.parse(template);
-            for (XmlReader.Element obj : el.getChildrenByName("object")) {
-                for(ObjectMap.Entry<String, String> attr: element.getAttributes())
+            for (XmlReader.Element obj : new Array.ArrayIterator<>(el.getChildrenByName("object"))) {
+                for(ObjectMap.Entry<String, String> attr: new ObjectMap.Entries<>(element.getAttributes()))
                 {
                     obj.setAttribute(attr.key, attr.value);
                 }
@@ -37,7 +42,7 @@ public class TemplateTmxMapLoader extends TmxMapLoader {
                 XmlReader.Element templateProperties = obj.getChildByName("properties");
                 if (properties != null&&templateProperties!=null)
                 {
-                    for( XmlReader.Element propertyElements : properties.getChildrenByName("property"))
+                    for( XmlReader.Element propertyElements : new Array.ArrayIterator<>(properties.getChildrenByName("property")))
                     {
                         templateProperties.addChild(propertyElements);
                     }

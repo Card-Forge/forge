@@ -6,6 +6,9 @@ import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+/*
+Class to draw directly on a pixmap
+ */
 public abstract class DrawOnPixmap {
     public static void draw(Pixmap on, TextureRegion from)
     {
@@ -30,14 +33,14 @@ public abstract class DrawOnPixmap {
         Pixmap source=new Pixmap(Gdx.files.internal(data.imagePaths[0]));
 
         float totalLength=data.getGlyph('0').width*text.length();
-        float xoff=(width-totalLength)/2;
-        xoff+=x;
+        float xOffset=(width-totalLength)/2;
+        xOffset+=x;
         for(char c:text.toCharArray())
         {
 
-            drawingMap.drawPixmap(source, (int)xoff, y,
+            drawingMap.drawPixmap(source, (int)xOffset, y,
                     data.getGlyph(c).srcX, data.getGlyph(c).srcY, data.getGlyph(c).width, data.getGlyph(c).height);
-            xoff+=data.getGlyph(c).width+1;
+            xOffset+=data.getGlyph(c).width+1;
         }
         source.dispose();
 

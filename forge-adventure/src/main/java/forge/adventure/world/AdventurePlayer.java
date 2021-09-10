@@ -17,6 +17,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class that represents the player (not the player sprite)
+ */
 public class AdventurePlayer implements Serializable, Disposable, SaveFileContent {
     private  Deck deck;
     private  int avatarIndex;
@@ -39,8 +42,7 @@ public class AdventurePlayer implements Serializable, Disposable, SaveFileConten
 
         deck = startingDeck;
         gold =difficultyData.staringMoney;
-        for (PaperCard card : deck.getAllCardsInASinglePool().toFlatList())
-            cards.add(card);
+        cards.addAll(deck.getAllCardsInASinglePool().toFlatList());
         maxLife=difficultyData.startingLife;
         this.difficultyData=difficultyData;
         life=maxLife;
@@ -110,7 +112,7 @@ public class AdventurePlayer implements Serializable, Disposable, SaveFileConten
         life = in.readInt();
         maxLife = in.readInt();
         deck = (Deck) in.readObject();
-        cards = (List<PaperCard>) in.readObject();
+        cards = (List) in.readObject();
 
 
         onLifeTotalChangeList.emit();

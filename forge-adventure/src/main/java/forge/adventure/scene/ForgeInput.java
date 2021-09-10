@@ -14,7 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class DuelInput extends FGestureAdapter {
+/**
+ * ForgeInput
+ * Handles input for forge screens
+ */
+public class ForgeInput extends FGestureAdapter {
     private static final List<FDisplayObject> potentialListeners = new ArrayList<>();
     private static char lastKeyTyped;
     private static boolean keyTyped, shiftKeyDown;
@@ -23,7 +27,7 @@ public class DuelInput extends FGestureAdapter {
     //mouseMoved and scrolled events for desktop version
     private int mouseMovedX, mouseMovedY;
 
-    public DuelInput(ForgeScene forgeScene) {
+    public ForgeInput(ForgeScene forgeScene) {
         this.forgeScene=forgeScene;
     }
 

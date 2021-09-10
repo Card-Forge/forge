@@ -3,6 +3,9 @@ package forge.adventure.character;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+/**
+ * Class to add sprites to a map
+ */
 public class TextureSprite extends MapActor{
 
     private final TextureRegion region;

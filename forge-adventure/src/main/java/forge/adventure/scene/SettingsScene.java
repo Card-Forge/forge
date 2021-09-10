@@ -16,7 +16,9 @@ import forge.util.Localizer;
 
 import java.util.function.Function;
 
-
+/**
+ * Scene to handle settings of the base forge and adventure mode
+ */
 public class SettingsScene extends UIScene {
 
 
@@ -55,86 +57,59 @@ public class SettingsScene extends UIScene {
         AdventureApplicationAdapter.instance.switchToLast();
         return true;
     }
+    private void addCheckBox(String name, ForgePreferences.FPref pref) {
 
-    private void addSettingButton(String name, Class type, ForgePreferences.FPref pref, Object[] para) {
 
+        CheckBox box = Controls.newCheckBox("");
+        box.setChecked(Preference.getPrefBoolean(pref));
+        box.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Preference.setPref(pref, ((CheckBox) actor).isChecked());
+                Preference.save();
+            }
+        });
 
-        Actor control;
-        if (boolean.class.equals(type)) {
-            CheckBox box = Controls.newCheckBox("");
-            control = box;
-            box.setChecked(Preference.getPrefBoolean(pref));
-            control.addListener(new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
-                    Preference.setPref(pref, ((CheckBox) actor).isChecked());
-                    Preference.save();
-                }
-            });
-
-        } else if (int.class.equals(type)) {
-            Slider slide = Controls.newSlider((int) para[0], (int) para[1], 1, false);
-            control = slide;
-            slide.setValue(Preference.getPrefInt(pref));
-            slide.addListener(new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
-                    Preference.setPref(pref, String.valueOf((int) ((Slider) actor).getValue()));
-                    Preference.save();
-                }
-            });
-
-        } else if (int.class.equals(type)) {
-            TextField text = Controls.newTextField(Preference.getPref(pref));
-            control = text;
-            text.setTextFieldFilter(new TextField.TextFieldFilter() {
-                @Override
-                public boolean acceptChar(TextField textField, char c) {
-                    return Character.isDigit(c);
-                }
-            });
-            text.addListener(new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
-                    Preference.setPref(pref, String.valueOf((int) ((Slider) actor).getValue()));
-                    Preference.save();
-                }
-            });
-
-        } else {
-            control = Controls.newLabel("");
-
-        }
         addLabel(name);
-        settingGroup.add(control).align(Align.right);
+        settingGroup.add(box).align(Align.right);
     }
-    private void addSettingButton(String name,Object value, ChangeListener change) {
+    private void addSettingSlider(String name,  ForgePreferences.FPref pref, int min,int max) {
 
-        Class type = value.getClass();
-        Actor control;
-        if (Boolean.class.equals(type)) {
-            CheckBox box = Controls.newCheckBox("");
-            control = box;
-            box.setChecked((Boolean) value);
-            control.addListener(change);
-
-        } else if (Integer.class.equals(type)) {
-            TextField text = Controls.newTextField((String) value.toString());
-            control = text;
-            text.setTextFieldFilter(new TextField.TextFieldFilter() {
-                @Override
-                public boolean acceptChar(TextField textField, char c) {
-                    return Character.isDigit(c);
-                }
-            });
-            text.addListener(change);
-
-        } else {
-            control = Controls.newLabel("");
-
-        }
+        Slider slide = Controls.newSlider(min,max, 1, false);
+        slide.setValue(Preference.getPrefInt(pref));
+        slide.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Preference.setPref(pref, String.valueOf((int) ((Slider) actor).getValue()));
+                Preference.save();
+            }
+        });
         addLabel(name);
-        settingGroup.add(control).align(Align.right);
+        settingGroup.add(slide).align(Align.right);
+    }
+    private void addSettingField(String name, boolean value, ChangeListener change) {
+
+        CheckBox box = Controls.newCheckBox("");
+        box.setChecked(value);
+        box.addListener(change);
+        addLabel(name);
+        settingGroup.add(box).align(Align.right);
+    }
+    private void addSettingField(String name, int value, ChangeListener change) {
+
+
+        TextField text = Controls.newTextField(String.valueOf(value));
+        text.setTextFieldFilter(new TextField.TextFieldFilter() {
+            @Override
+            public boolean acceptChar(TextField textField, char c) {
+                return Character.isDigit(c);
+            }
+        });
+        text.addListener(change);
+
+
+        addLabel(name);
+        settingGroup.add(text).align(Align.right);
     }
     void addLabel( String name)
     {
@@ -166,14 +141,14 @@ public class SettingsScene extends UIScene {
 
 
 
-        addSettingButton("Fullscreen", Config.instance().getSettingData().fullScreen, new ChangeListener() {
+        addSettingField("Fullscreen", Config.instance().getSettingData().fullScreen, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Config.instance().getSettingData().fullScreen=((CheckBox) actor).isChecked();
                 Config.instance().saveSettings();
             }
         });
-        addSettingButton("Screen width", Config.instance().getSettingData().width, new ChangeListener() {
+        addSettingField("Screen width", Config.instance().getSettingData().width, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 String text=((TextField) actor).getText();
@@ -181,7 +156,7 @@ public class SettingsScene extends UIScene {
                 Config.instance().saveSettings();
             }
         });
-        addSettingButton("Screen height", Config.instance().getSettingData().height, new ChangeListener() {
+        addSettingField("Screen height", Config.instance().getSettingData().height, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 String text=((TextField) actor).getText();
@@ -189,14 +164,14 @@ public class SettingsScene extends UIScene {
                 Config.instance().saveSettings();
             }
         });
-        addSettingButton(localizer.getMessage("lblCardName"), boolean.class, ForgePreferences.FPref.UI_OVERLAY_CARD_NAME, new Object[]{});
-        addSettingButton(localizer.getMessage("cbAdjustMusicVolume"), int.class, ForgePreferences.FPref.UI_VOL_MUSIC, new Object[]{0, 100});
-        addSettingButton(localizer.getMessage("cbAdjustSoundsVolume"), int.class, ForgePreferences.FPref.UI_VOL_SOUNDS, new Object[]{0, 100});
-        addSettingButton(localizer.getMessage("lblManaCost"), boolean.class, ForgePreferences.FPref.UI_OVERLAY_CARD_MANA_COST, new Object[]{});
-        addSettingButton(localizer.getMessage("lblPowerOrToughness"), boolean.class, ForgePreferences.FPref.UI_OVERLAY_CARD_POWER, new Object[]{});
-        addSettingButton(localizer.getMessage("lblCardID"), boolean.class, ForgePreferences.FPref.UI_OVERLAY_CARD_ID, new Object[]{});
-        addSettingButton(localizer.getMessage("lblAbilityIcon"), boolean.class, ForgePreferences.FPref.UI_OVERLAY_ABILITY_ICONS, new Object[]{});
-        addSettingButton(localizer.getMessage("cbImageFetcher"), boolean.class, ForgePreferences.FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER, new Object[]{});
+        addCheckBox(localizer.getMessage("lblCardName"), ForgePreferences.FPref.UI_OVERLAY_CARD_NAME);
+        addSettingSlider(localizer.getMessage("cbAdjustMusicVolume"),  ForgePreferences.FPref.UI_VOL_MUSIC,0,100);
+        addSettingSlider(localizer.getMessage("cbAdjustSoundsVolume"),  ForgePreferences.FPref.UI_VOL_SOUNDS, 0,100);
+        addCheckBox(localizer.getMessage("lblManaCost"), ForgePreferences.FPref.UI_OVERLAY_CARD_MANA_COST);
+        addCheckBox(localizer.getMessage("lblPowerOrToughness"),  ForgePreferences.FPref.UI_OVERLAY_CARD_POWER);
+        addCheckBox(localizer.getMessage("lblCardID"), ForgePreferences.FPref.UI_OVERLAY_CARD_ID);
+        addCheckBox(localizer.getMessage("lblAbilityIcon"), ForgePreferences.FPref.UI_OVERLAY_ABILITY_ICONS);
+        addCheckBox(localizer.getMessage("cbImageFetcher"), ForgePreferences.FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER);
 
 
         settingGroup.row();

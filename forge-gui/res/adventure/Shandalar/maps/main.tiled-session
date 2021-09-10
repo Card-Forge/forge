@@ -1,5 +1,5 @@
 {
-    "activeFile": "map/swampTown.tmx",
+    "activeFile": "map/swamp_town.tmx",
     "expandedProjectPaths": [
         "map",
         "tileset",
@@ -11,64 +11,64 @@
             "scale": 3.8134072580645157,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 232.20703692933995,
-                "y": 162.97760977028207
+                "x": 231.8136879113908,
+                "y": 136.0987602104206
             }
         },
-        "map/forestTown.tmx": {
+        "map/forest_town.tmx": {
             "scale": 2,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 251.75,
-                "y": 121.25
+                "x": 240,
+                "y": 136
             }
         },
         "map/graveyard.tmx": {
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 269.75,
-                "y": 141.75
+                "x": 232,
+                "y": 136
             }
         },
-        "map/islandTown.tmx": {
+        "map/island_town.tmx": {
             "scale": 3,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 319.5,
-                "y": 153.16666666666666
+                "x": 240,
+                "y": 136
             }
         },
-        "map/mountainTown.tmx": {
+        "map/mountain_town.tmx": {
             "scale": 1.7753124999999998,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 235.7331455729625,
-                "y": 136.0323886639676
+                "x": 239.957753916564,
+                "y": 136.31402922020771
             }
         },
-        "map/plainsTown.tmx": {
+        "map/plains_town.tmx": {
             "scale": 1.7753124999999998,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 240.2393944728041,
-                "y": 135.46910755148744
+                "x": 239.957753916564,
+                "y": 136.31402922020771
             }
         },
-        "map/swampTown.tmx": {
+        "map/swamp_town.tmx": {
             "scale": 1.7753124999999998,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 240.2393944728041,
-                "y": 135.46910755148744
+                "x": 240.52103502904419,
+                "y": 135.75074810772753
             }
         },
-        "map/wastetown.tmx": {
+        "map/waste_town.tmx": {
             "scale": 1.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 250.99999999999997,
-                "y": 125.66666666666666
+                "x": 240,
+                "y": 135.99999999999994
             }
         },
         "tileset/buildings.tsx": {
@@ -82,27 +82,27 @@
     },
     "openFiles": [
         "map/crypt.tmx",
-        "map/wastetown.tmx",
+        "map/waste_town.tmx",
         "map/graveyard.tmx",
         "tileset/buildings.tsx",
         "tileset/main.tsx",
-        "map/forestTown.tmx",
-        "map/islandTown.tmx",
-        "map/mountainTown.tmx",
-        "map/plainsTown.tmx",
-        "map/swampTown.tmx"
+        "map/forest_town.tmx",
+        "map/island_town.tmx",
+        "map/mountain_town.tmx",
+        "map/plains_town.tmx",
+        "map/swamp_town.tmx"
     ],
     "project": "main.tiled-project",
     "recentFiles": [
         "map/crypt.tmx",
-        "map/wastetown.tmx",
+        "map/waste_town.tmx",
         "map/graveyard.tmx",
         "tileset/buildings.tsx",
         "tileset/main.tsx",
-        "map/forestTown.tmx",
-        "map/islandTown.tmx",
-        "map/mountainTown.tmx",
-        "map/plainsTown.tmx",
-        "map/swampTown.tmx"
+        "map/forest_town.tmx",
+        "map/island_town.tmx",
+        "map/mountain_town.tmx",
+        "map/plains_town.tmx",
+        "map/swamp_town.tmx"
     ]
 }

@@ -5,8 +5,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import forge.adventure.AdventureApplicationAdapter;
 import forge.adventure.character.CharacterSprite;
-import forge.adventure.character.MobSprite;
-import forge.adventure.data.BiomData;
+import forge.adventure.character.EnemySprite;
+import forge.adventure.data.BiomeData;
 import forge.adventure.data.EnemyData;
 import forge.adventure.scene.*;
 import forge.adventure.util.Current;
@@ -19,17 +19,20 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Stage for the over world. Will handle monster spawns
+ */
 public class WorldStage extends GameStage {
 
     private static WorldStage instance=null;
-    protected MobSprite currentMob;
+    protected EnemySprite currentMob;
     protected Random rand = new Random();
     WorldBackground background;
     private float spawnDelay = 0;
-    private final float spawnInterval = 4;
-    private PointOfIntrestMapSprite collidingPoint;
-    protected ArrayList<Pair<Float,MobSprite>> enemies = new ArrayList<>();
-    private final Float dieTimer=20f;
+    private final float spawnInterval = 4;//todo config
+    private PointOfInterestMapSprite collidingPoint;
+    protected ArrayList<Pair<Float, EnemySprite>> enemies = new ArrayList<>();
+    private final Float dieTimer=20f;//todo config
     private Float globalTimer=0f;
 
     public WorldStage() {
@@ -48,11 +51,11 @@ public class WorldStage extends GameStage {
     protected void onActing(float delta) {
         if (player.isMoving()) {
             HandleMonsterSpawn(delta);
-            HandlePointsOfIntrestCollision();
+            handlePointsOfInterestCollision();
             globalTimer+=delta;
-            Iterator<Pair<Float,MobSprite>> it = enemies.iterator();
+            Iterator<Pair<Float, EnemySprite>> it = enemies.iterator();
             while (it.hasNext()) {
-                Pair<Float,MobSprite> pair= it.next();
+                Pair<Float, EnemySprite> pair= it.next();
                 if(globalTimer>=pair.getKey()+dieTimer)
                 {
 
@@ -60,7 +63,7 @@ public class WorldStage extends GameStage {
                     it.remove();
                     continue;
                 }
-                MobSprite mob=pair.getValue();
+                EnemySprite mob=pair.getValue();
                 mob.moveTo(player,delta);
                 if (player.collideWith(mob)) {
                     player.setAnimation(CharacterSprite.AnimationTypes.Attack);
@@ -78,17 +81,17 @@ public class WorldStage extends GameStage {
 
 
         } else {
-            for (Pair<Float,MobSprite> pair : enemies) {
+            for (Pair<Float, EnemySprite> pair : enemies) {
                 pair.getValue().setAnimation(CharacterSprite.AnimationTypes.Idle);
             }
         }
     }
-    private void removeEnemy(MobSprite currentMob) {
+    private void removeEnemy(EnemySprite currentMob) {
 
         foregroundSprites.removeActor(currentMob);
-        Iterator<Pair<Float,MobSprite>> it = enemies.iterator();
+        Iterator<Pair<Float, EnemySprite>> it = enemies.iterator();
         while (it.hasNext()) {
-            Pair<Float, MobSprite> pair = it.next();
+            Pair<Float, EnemySprite> pair = it.next();
             if (pair.getValue()==currentMob) {
                 it.remove();
                 return;
@@ -121,16 +124,16 @@ public class WorldStage extends GameStage {
         }
 
     }
-    private void HandlePointsOfIntrestCollision() {
+    private void handlePointsOfInterestCollision() {
 
         for (Actor actor : foregroundSprites.getChildren()) {
-            if (actor.getClass() == PointOfIntrestMapSprite.class) {
-                PointOfIntrestMapSprite point = (PointOfIntrestMapSprite) actor;
+            if (actor.getClass() == PointOfInterestMapSprite.class) {
+                PointOfInterestMapSprite point = (PointOfInterestMapSprite) actor;
                 if (player.collideWith(point.getBoundingRect())) {
                     if (point == collidingPoint) {
                         continue;
                     }
-                    ((TileMapScene) SceneType.TileMapScene.instance).load(point.getPointOfIntrest());
+                    ((TileMapScene) SceneType.TileMapScene.instance).load(point.getPointOfInterest());
                     AdventureApplicationAdapter.instance.switchScene(SceneType.TileMapScene.instance);
                 } else {
                     if (point == collidingPoint) {
@@ -146,33 +149,33 @@ public class WorldStage extends GameStage {
     {
 
         World world = WorldSave.getCurrentSave().getWorld();
-        int currentBiom = World.highestBiom(world.getBiom((int) boundingRect.getX() / world.getTileSize(), (int) boundingRect.getY() / world.getTileSize()));
-        if(currentBiom==0)
+        int currentBiome = World.highestBiome(world.getBiome((int) boundingRect.getX() / world.getTileSize(), (int) boundingRect.getY() / world.getTileSize()));
+        if(currentBiome==0)
             return true;
-         currentBiom = World.highestBiom(world.getBiom((int) (boundingRect.getX()+boundingRect.getWidth()) / world.getTileSize(), (int) boundingRect.getY() / world.getTileSize()));
-        if(currentBiom==0)
+         currentBiome = World.highestBiome(world.getBiome((int) (boundingRect.getX()+boundingRect.getWidth()) / world.getTileSize(), (int) boundingRect.getY() / world.getTileSize()));
+        if(currentBiome==0)
             return true;
-         currentBiom = World.highestBiom(world.getBiom((int) (boundingRect.getX()+boundingRect.getWidth())/ world.getTileSize(), (int) (boundingRect.getY()+boundingRect.getHeight()) / world.getTileSize()));
-        if(currentBiom==0)
+         currentBiome = World.highestBiome(world.getBiome((int) (boundingRect.getX()+boundingRect.getWidth())/ world.getTileSize(), (int) (boundingRect.getY()+boundingRect.getHeight()) / world.getTileSize()));
+        if(currentBiome==0)
             return true;
-         currentBiom = World.highestBiom(world.getBiom((int) boundingRect.getX() / world.getTileSize(), (int) (boundingRect.getY()+boundingRect.getHeight()) / world.getTileSize()));
+         currentBiome = World.highestBiome(world.getBiome((int) boundingRect.getX() / world.getTileSize(), (int) (boundingRect.getY()+boundingRect.getHeight()) / world.getTileSize()));
 
-        return (currentBiom==0);
+        return (currentBiome==0);
     }
 
     private void HandleMonsterSpawn(float delta) {
 
 
         World world = WorldSave.getCurrentSave().getWorld();
-        int currentBiom = World.highestBiom(world.getBiom((int) player.getX() / world.getTileSize(), (int) player.getY() / world.getTileSize()));
-        List<BiomData> biomdata = WorldSave.getCurrentSave().getWorld().getData().GetBioms();
-        if (biomdata.size() <= currentBiom)
+        int currentBiome = World.highestBiome(world.getBiome((int) player.getX() / world.getTileSize(), (int) player.getY() / world.getTileSize()));
+        List<BiomeData> biomeData = WorldSave.getCurrentSave().getWorld().getData().GetBiomes();
+        if (biomeData.size() <= currentBiome)
         {
             player.setMoveModifier(1.5f);
             return;
         }
         player.setMoveModifier(1.0f);
-        BiomData data = biomdata.get(currentBiom);
+        BiomeData data = biomeData.get(currentBiome);
 
         if (data == null)
             return;
@@ -187,7 +190,7 @@ public class WorldStage extends GameStage {
         if (enemyData == null) {
             return;
         }
-        MobSprite sprite = new MobSprite(enemyData);
+        EnemySprite sprite = new EnemySprite(enemyData);
         float unit = Scene.GetIntendedHeight() / 6f;
         Vector2 spawnPos = new Vector2(1, 1);
         spawnPos.setLength(unit + (unit * 3) * rand.nextFloat());
@@ -213,8 +216,8 @@ public class WorldStage extends GameStage {
         GetPlayer().LoadPos();
         GetPlayer().setMovementDirection(Vector2.Zero);
         for (Actor actor : foregroundSprites.getChildren()) {
-            if (actor.getClass() == PointOfIntrestMapSprite.class) {
-                PointOfIntrestMapSprite point = (PointOfIntrestMapSprite) actor;
+            if (actor.getClass() == PointOfInterestMapSprite.class) {
+                PointOfInterestMapSprite point = (PointOfInterestMapSprite) actor;
                 if (player.collideWith(point.getBoundingRect())) {
                     collidingPoint = point;
                 }

@@ -1,23 +1,28 @@
-package forge.adventure.data;
+package forge.adventure.world;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ObjectSet;
+import forge.adventure.data.BiomeSpriteData;
 import forge.adventure.util.Config;
 
 import java.util.HashMap;
 
-public class BiomSprites {
+/**
+ * class to load and buffer map sprites
+ */
+public class BiomeSprites {
     private final HashMap<String, Array<Sprite>> spriteBuffer = new HashMap<>();
-    public String textureAltas;
-    public BiomSpriteData[] sprites;
+    public String textureAtlas;
+    public BiomeSpriteData[] sprites;
     private TextureAtlas textureAtlasBuffer;
 
-    public Sprite GetSprite(String name, int seed) {
+    public Sprite getSprite(String name, int seed) {
         if (textureAtlasBuffer == null) {
-            textureAtlasBuffer = Config.instance().getAtlas(textureAltas);
-            for (Texture texture : textureAtlasBuffer.getTextures()) {
+            textureAtlasBuffer = Config.instance().getAtlas(textureAtlas);
+            for (Texture texture : new  ObjectSet.ObjectSetIterator<>(textureAtlasBuffer.getTextures())) {
                 texture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
             }
         }
@@ -31,8 +36,8 @@ public class BiomSprites {
         return sprites.get(seed % sprites.size);
     }
 
-    public BiomSpriteData GetSpriteData(String name) {
-        for (BiomSpriteData data : sprites) {
+    public BiomeSpriteData getSpriteData(String name) {
+        for (BiomeSpriteData data : sprites) {
             if (data.name.equals(name))
                 return data;
         }

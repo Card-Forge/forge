@@ -19,7 +19,9 @@ import forge.util.NameGenerator;
 
 import java.util.Random;
 
-
+/**
+ * NewGame scene that contains the character creation
+ */
 public class NewGameScene extends UIScene {
     TextField selectedName;
     Deck[] starterDeck;
@@ -31,7 +33,7 @@ public class NewGameScene extends UIScene {
     private Selector difficulty;
 
     public NewGameScene() {
-        super("ui/newgame.json");
+        super("ui/new_game.json");
     }
 
     public boolean start() {

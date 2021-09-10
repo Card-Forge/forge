@@ -7,6 +7,9 @@ import forge.adventure.scene.SceneType;
 import forge.adventure.stage.MapStage;
 import forge.adventure.util.Reward;
 
+/**
+ * Map actor that will open the Shop on collision
+ */
 public class ShopActor extends MapActor{
     private final MapStage stage;
     private final int id;

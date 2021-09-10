@@ -8,6 +8,9 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * Editor class to edit configuration, maybe moved or removed
+ */
 public class RewardsEditor extends JComponent{
     DefaultListModel<RewardData> model = new DefaultListModel<>();
     JList<RewardData> list = new JList<>(model);

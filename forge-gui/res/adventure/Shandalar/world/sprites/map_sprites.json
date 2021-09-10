@@ -1,5 +1,5 @@
 {
-"textureAltas":"world/sprites/mapsprites.atlas",    
+"textureAtlas":"world/sprites/map_sprites.atlas",
 "sprites":[
  {      
 "name":"DarkWood",                 

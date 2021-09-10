@@ -10,6 +10,9 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.util.Arrays;
 
+/**
+ * Editor class to edit configuration, maybe moved or removed
+ */
 public class RewardEdit extends JComponent {
     RewardData currentData;
 

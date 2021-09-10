@@ -12,6 +12,9 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import forge.adventure.util.Config;
 import forge.adventure.util.UIActor;
 
+/**
+ * Base class for an GUI scene where the elements are loaded from a json file
+ */
 public class UIScene extends Scene{
     protected UIActor ui;
     Stage stage;
@@ -35,11 +38,9 @@ public class UIScene extends Scene{
     @Override
     public void render() {
 
-        //Batch.getProjectionMatrix().setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         Gdx.gl.glClearColor(0, 0, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.draw();
-        //Batch.end();
     }
 
     public UIActor getUI()

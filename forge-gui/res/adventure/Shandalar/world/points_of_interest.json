@@ -1,58 +1,58 @@
 [{                                    
-"name":"WasteTown",                  
+"name":"Waste Town",                  
 "type":"town",
 "count":100, 
-"radiusFactor":.8,
+"radiusFactor":0.8,
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"WasteTown",
-"map":  "maps/map/WasteTown.tmx"
+"map":  "maps/map/waste_town.tmx"
 },  {                                    
-"name":"ForestTown",                  
+"name":"Forest Town",                  
 "type":"town",
 "count":100, 
-"radiusFactor":.8,
+"radiusFactor":0.8,
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"ForestTown",
-"map":  "maps/map/ForestTown.tmx"
+"map":  "maps/map/forest_town.tmx"
 },{                                    
-"name":"PlainsTown",                  
+"name":"Plains Town",                  
 "type":"town",
 "count":100, 
-"radiusFactor":.8,
+"radiusFactor":0.8,
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"PlainsTown",
-"map":  "maps/map/PlainsTown.tmx"
+"map":  "maps/map/plains_town.tmx"
 },{                                    
-"name":"IslandTown",                  
+"name":"Island Town",                  
 "type":"town",
 "count":100, 
-"radiusFactor":.8,
+"radiusFactor":0.8,
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"IslandTown",
-"map":  "maps/map/IslandTown.tmx"
+"map":  "maps/map/island_town.tmx"
 },{                                    
-"name":"MountainTown",                  
+"name":"Mountain Town",                  
 "type":"town",
 "count":100, 
-"radiusFactor":.8,
+"radiusFactor":0.8,
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"MountainTown",
-"map":  "maps/map/MountainTown.tmx"
+"map":  "maps/map/mountain_town.tmx"
 },{                                    
-"name":"SwampTown",                  
+"name":"Swamp Town",                  
 "type":"town",
 "count":100, 
-"radiusFactor":.8,
+"radiusFactor":0.8,
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"SwampTown",
-"map":  "maps/map/SwampTown.tmx"
+"map":  "maps/map/swamp_town.tmx"
 },
-  {
-    "name":"Graveyard",
-    "count":20, 
-    "radiusFactor":0.8,
-    "spriteAtlas":"maps/tileset/buildings.atlas",
-    "sprite":"Graveyard",
-    "map":  "maps/map/graveyard.tmx"
-  }
+{
+  "name":"Graveyard",
+  "count":20, 
+  "radiusFactor":0.8,
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"Graveyard",
+  "map":  "maps/map/graveyard.tmx"
+}
 ]

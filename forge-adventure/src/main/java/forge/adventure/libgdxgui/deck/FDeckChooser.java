@@ -1007,7 +1007,7 @@ public class FDeckChooser extends FScreen {
                 if (NetDeckArchiveBlock!= null) {
                     cmbDeckTypes.setText(NetDeckArchiveBlock.getDeckType());
                 }
-                pool = DeckProxy.getNetArchiveBlockecks(NetDeckArchiveBlock);
+                pool = DeckProxy.getNetArchiveBlockDecks(NetDeckArchiveBlock);
                 config = ItemManagerConfig.NET_ARCHIVE_BLOCK_DECKS;
                 break;
         case NET_DECK:

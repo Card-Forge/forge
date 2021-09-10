@@ -10,7 +10,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-public class Serializer {
+/**
+ * Abstract class to serialize other objects.
+ */
+public abstract class Serializer {
 
 
     static public void WritePixmap(java.io.ObjectOutputStream out, Pixmap pixmap) throws IOException {
