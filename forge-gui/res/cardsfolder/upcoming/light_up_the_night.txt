@@ -5,6 +5,6 @@ A:SP$ DealDamage | Cost$ X R | ValidTgts$ Creature,Player,Planeswalker | TgtProm
 SVar:X:Count$xPaid
 SVar:Y:Targeted$Valid Creature,Planeswalker
 SVar:Z:SVar$X/Plus.Y
-K:Flashback:XCantBe0 3 R RemoveAnyCounter<X/LOYALTY/Planeswalker.YouCtrl/among planeswalkers you control>::If you cast this spell this way, X can't be 0.:{3}{R}, Remove X loyalty counters from among planeswalkers you control
+K:Flashback:XCantBe0 3 R RemoveAnyCounter<X/LOYALTY/Planeswalker.YouCtrl/among planeswalkers you control>::If you cast this spell this way, X can't be 0.
 DeckHints:Type$Planeswalker
 Oracle:Light Up the Night deals X damage to any target. It deals X plus 1 damage instead if that target is a creature or planeswalker.\nFlashback—{3}{R}, Remove X loyalty counters from among planeswalkers you control. If you cast this spell this way, X can't be 0. (You may cast this card from your graveyard for its flashback cost. Then exile it.)

@@ -8,6 +8,8 @@ import java.util.Map;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import forge.card.CardDb;
+import forge.util.TextUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -113,8 +115,31 @@ public class CardPreferences {
         }
         if (preferredArt0.equals(preferredArt)) { return; }
 
-        if (FModel.getMagicDb().getCommonCards().setPreferredArt(cardName, preferredArt0)) {
-            preferredArt = preferredArt0;
+        try {
+            String infoCardName;
+            String infoSetCode;
+            int infoArtIndex;
+            String[] prefArtInfos =TextUtil.split(preferredArt0, CardDb.NameSetSeparator);
+            if (prefArtInfos.length == 2){
+                // legacy format
+                infoCardName = this.cardName;
+                infoSetCode = prefArtInfos[0];
+                infoArtIndex = Integer.parseInt(prefArtInfos[1]);
+            } else {
+                infoCardName = prefArtInfos[0];
+                infoSetCode = prefArtInfos[1];
+                infoArtIndex = Integer.parseInt(prefArtInfos[2]);
+            }
+            if (!this.cardName.equals(infoCardName))  // extra sanity check
+                return;
+            if (FModel.getMagicDb().getCommonCards().setPreferredArt(cardName, infoSetCode, infoArtIndex))
+                preferredArt = preferredArt0;
+        } catch (NumberFormatException ex){
+            System.err.println("ERROR with Existing Preferred Card Entry: " + preferredArt0);
         }
+    }
+
+    public void setPreferredArt(String setCode, int artIndex) {
+        this.setPreferredArt(setCode + CardDb.NameSetSeparator + artIndex);
     }
 }

@@ -149,6 +149,19 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             return !StringUtils.isNumeric(s);
         }
 
+        private static CardRequest fromPreferredArtEntry(String preferredArt, boolean isFoil){
+            // Preferred Art Entry are supposed to be cardName|setCode|artIndex only
+            String[] info = TextUtil.split(preferredArt, NameSetSeparator);
+            if (info.length != 3)
+                return null;
+            try {
+                String cardName = info[0];
+                String setCode = info[1];
+                int artIndex = Integer.parseInt(info[2]);
+                return new CardRequest(cardName, setCode, artIndex, isFoil, IPaperCard.NO_COLLECTOR_NUMBER);
+            } catch (NumberFormatException ex){ return null; }
+        }
+
         public static CardRequest fromString(String reqInfo) {
             if (reqInfo == null)
                 return null;
@@ -180,21 +193,25 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 cardName = cardName.substring(0, cardName.length() - foilSuffix.length());
                 isFoil = true;
             }
-
-            String preferredArt = artPrefs.get(cardName);
             int artIndex = artPos > 0 ? Integer.parseInt(info[artPos]) : IPaperCard.NO_ART_INDEX;  // default: no art index
-            if (preferredArt != null) { //account for preferred art if needed
-                System.err.println("I AM HERE - DECIDE WHAT TO DO");
-            }
             String collectorNumber = cNrPos > 0 ? info[cNrPos].substring(1, info[cNrPos].length() - 1) : IPaperCard.NO_COLLECTOR_NUMBER;
-            String setName = setPos > 0 ? info[setPos] : null;
-            if (setName != null && setName.equals(CardEdition.UNKNOWN.getCode())) {  // ???
-                setName = null;
+            String setCode = setPos > 0 ? info[setPos] : null;
+            if (setCode != null && setCode.equals(CardEdition.UNKNOWN.getCode())) {  // ???
+                setCode = null;
+            }
+            if (setCode == null) {
+                String preferredArt = artPrefs.get(cardName);
+                if (preferredArt != null) { //account for preferred art if needed
+                    CardRequest request = fromPreferredArtEntry(preferredArt, isFoil);
+                    if (request != null)  // otherwise, simply discard it and go on.
+                        return request;
+                    System.err.println(String.format("[LOG]: Faulty Entry in Preferred Art for Card %s - Please check!", cardName));
+                }
             }
             // finally, check whether any between artIndex and CollectorNumber has been set
             if (collectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER) && artIndex == IPaperCard.NO_ART_INDEX)
                 artIndex = IPaperCard.DEFAULT_ART_INDEX;
-            return new CardRequest(cardName, setName, artIndex, isFoil, collectorNumber);
+            return new CardRequest(cardName, setCode, artIndex, isFoil, collectorNumber);
         }
     }
 
@@ -374,11 +391,11 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return pc;
     }
 
-    public boolean setPreferredArt(String cardName, String preferredArt) {
-        CardRequest request = CardRequest.fromString(cardName + NameSetSeparator + preferredArt);
-        PaperCard pc = tryGetCard(request);
+    public boolean setPreferredArt(String cardName, String setCode, int artIndex) {
+        String cardRequestForPreferredArt = CardRequest.compose(cardName, setCode, artIndex);
+        PaperCard pc = this.getCard(cardRequestForPreferredArt);
         if (pc != null) {
-            artPrefs.put(cardName, preferredArt);
+            artPrefs.put(cardName, cardRequestForPreferredArt);
             uniqueCardsByName.put(cardName, pc);
             return true;
         }

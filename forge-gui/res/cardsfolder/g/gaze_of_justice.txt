@@ -1,6 +1,6 @@
 Name:Gaze of Justice
 ManaCost:W
 Types:Sorcery
-K:Flashback:5 W tapXType<3/Creature.White/white creature>
-A:SP$ ChangeZone | Cost$ W tapXType<3/Creature.White> | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | CostDesc$ As an additional cost to cast this spell, tap three untapped white creatures you control. | SpellDescription$ Exile target creature.
+K:Flashback:5 W
+A:SP$ ChangeZone | Cost$ W tapXType<3/Creature.White/white creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | CostDesc$ As an additional cost to cast this spell, tap three untapped white creatures you control. | SpellDescription$ Exile target creature.
 Oracle:As an additional cost to cast this spell, tap three untapped white creatures you control.\nExile target creature.\nFlashback {5}{W} (You may cast this card from your graveyard for its flashback cost and any additional costs. Then exile it.)

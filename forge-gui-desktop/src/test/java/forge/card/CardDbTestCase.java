@@ -2193,6 +2193,58 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         assertEquals(counterSpellCard.getName(), cardNameCounterspell);
     }
 
+    @Test void prepareTestCaseForSetPreferredArtTest(){
+        String setCode = this.editionsCounterspell[0];
+        int artIndex = 4;  // non-existing
+        String cardRequest = CardDb.CardRequest.compose(this.cardNameCounterspell, setCode, artIndex);
+        PaperCard nonExistingCounterSpell = this.cardDb.getCard(cardRequest);
+        assertNull(nonExistingCounterSpell);
+    }
+
+    @Test void setPreferredArtForCard(){
+        String cardName = "Mountain";
+        String setCode = "3ED";
+        int artIndex = 5;
+        assertFalse(this.cardDb.setPreferredArt(cardName, setCode, artIndex));
+        assertTrue(this.cardDb.setPreferredArt(cardName, setCode, 1));
+    }
+
+
+    @Test void testThatWithCardPreferenceSetAndNoRequestForSpecificEditionAlwaysReturnsPreferredArt(){
+        String cardRequest = CardDb.CardRequest.compose("Island", "MIR", 3);
+        PaperCard islandCard = this.cardDb.getCard(cardRequest);
+        assertNotNull(islandCard);
+        assertEquals(islandCard.getName(), "Island");
+        assertEquals(islandCard.getEdition(), "MIR");
+        assertEquals(islandCard.getArtIndex(), 3);
+
+        // now set preferred art
+        assertTrue(this.cardDb.setPreferredArt("Island", "MIR", 3));
+        // Now requesting for a different Island
+        cardRequest = CardDb.CardRequest.compose("Island", "TMP", 1);
+        islandCard = this.cardDb.getCard(cardRequest);
+        assertNotNull(islandCard);
+        // Now card should be from the preferred art no matter the request
+        assertEquals(islandCard.getName(), "Island");
+        assertEquals(islandCard.getEdition(), "TMP");
+        assertEquals(islandCard.getArtIndex(), 1);
+
+        // Now just asking for an Island
+        islandCard = this.cardDb.getCard("Island");
+        assertNotNull(islandCard);
+        assertEquals(islandCard.getName(), "Island");
+        assertEquals(islandCard.getEdition(), "MIR");
+        assertEquals(islandCard.getArtIndex(), 3);
+
+        // Now asking for a foiled island - I will get the one from preferred art - but foiled
+        cardRequest = CardDb.CardRequest.compose("Island", true);
+        islandCard = this.cardDb.getCard(cardRequest);
+        assertNotNull(islandCard);
+        assertEquals(islandCard.getName(), "Island");
+        assertEquals(islandCard.getEdition(), "MIR");
+        assertEquals(islandCard.getArtIndex(), 3);
+        assertTrue(islandCard.isFoil());
+    }
 
 }
 
