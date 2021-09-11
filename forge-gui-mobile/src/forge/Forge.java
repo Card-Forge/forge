@@ -112,7 +112,7 @@ public class Forge implements ApplicationListener {
 
         GuiBase.setIsAndroid(Gdx.app.getType() == Application.ApplicationType.Android);
 
-        if (!GuiBase.isAndroid() || androidVersion > 28) {
+        if (!GuiBase.isAndroid() || (androidVersion > 28 && totalDeviceRAM > 7000)) {
             allowCardBG = true;
         } else {
             // don't allow to read and process
