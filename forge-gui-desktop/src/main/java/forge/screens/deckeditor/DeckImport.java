@@ -21,7 +21,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
-import java.awt.print.Paper;
 import java.util.*;
 import java.util.List;
 
@@ -30,16 +29,12 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import forge.Singletons;
-import forge.StaticData;
-import forge.card.*;
-import forge.card.mana.ManaCostShard;
 import forge.deck.*;
 import forge.deck.DeckRecognizer.TokenType;
 import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
-import forge.itemmanager.SItemManagerUtil;
 import forge.model.FModel;
 import forge.screens.deckeditor.controllers.ACEditorBase;
 import forge.screens.deckeditor.controllers.CStatisticsImporter;
