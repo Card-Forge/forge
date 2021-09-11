@@ -339,8 +339,7 @@ public class AbilityManaPart implements java.io.Serializable {
             if (sa.isAbility()) {
                 if (restriction.startsWith("Activated")) {
                     restriction = TextUtil.fastReplace(restriction, "Activated", "Card");
-                }
-                else {
+                } else {
                     continue;
                 }
             }
@@ -633,8 +632,7 @@ public class AbilityManaPart implements java.io.Serializable {
                     return true;
                 }
             }
-        }
-        else {
+        } else {
             // treat special mana if it always can be paid
             if (isSpecialMana()) {
                 return true;
@@ -649,5 +647,4 @@ public class AbilityManaPart implements java.io.Serializable {
         return false;
     }
 
-} // end class AbilityMana
-
+}

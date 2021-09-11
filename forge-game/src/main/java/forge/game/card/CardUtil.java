@@ -123,8 +123,7 @@ public final class CardUtil {
             for (Player p : game.getRegisteredPlayers()) {
                 res.addAll(p.getZone(to).getCardsAddedThisTurn(from));
             }
-        }
-        else {
+        } else {
             res.addAll(game.getStackZone().getCardsAddedThisTurn(from));
         }
         return CardLists.getValidCardsAsList(res, valid, src.getController(), src, ctb);
@@ -376,7 +375,6 @@ public final class CardUtil {
     public static CardState getFaceDownCharacteristic(Card c) {
         return getFaceDownCharacteristic(c, CardStateName.FaceDown);
     }
-
     public static CardState getFaceDownCharacteristic(Card c, CardStateName state) {
         final CardType type = new CardType(false);
         type.add("Creature");
@@ -401,7 +399,6 @@ public final class CardUtil {
     public static Set<String> getReflectableManaColors(final SpellAbility sa) {
         return getReflectableManaColors(sa, sa, Sets.newHashSet(), new CardCollection());
     }
-
     private static Set<String> getReflectableManaColors(final SpellAbility abMana, final SpellAbility sa,
             Set<String> colors, final CardCollection parents) {
         // Here's the problem with reflectable Mana. If more than one is out,

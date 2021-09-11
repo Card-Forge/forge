@@ -267,7 +267,6 @@ public class QuestDataIO {
             // Migrate DraftTournaments to use new Tournament class
         }
 
-
         final QuestAssets qS = newData.getAssets();
         final QuestAchievements qA = newData.getAchievements();
 
@@ -647,7 +646,6 @@ public class QuestDataIO {
             QuestEventDraftContainer output = new QuestEventDraftContainer();
 
             while (reader.hasMoreChildren()) {
-
                 reader.moveDown();
                 // TODO Add Tournament
                 String draftName = null;
@@ -735,7 +733,6 @@ public class QuestDataIO {
                 output.add(draft);
 
                 reader.moveUp();
-
             }
 
             return output;

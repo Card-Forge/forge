@@ -165,8 +165,7 @@ public class PhaseHandler implements java.io.Serializable {
 
         if (bRepeatCleanup) { // for when Cleanup needs to repeat itself
             bRepeatCleanup = false;
-        }
-        else {
+        } else {
             // If the phase that's ending has a stack of additional phases
             // Take the LIFO one and move to that instead of the normal one
             ExtraPhase extraPhase = null;
@@ -179,8 +178,7 @@ public class PhaseHandler implements java.io.Serializable {
                     extraPhases.remove(phase);
                 }
                 setPhase(nextPhase);
-            }
-            else {
+            } else {
                 turnEnded = PhaseType.isLast(phase, isTopsy);
                 setPhase(PhaseType.getNext(phase, isTopsy));
             }
@@ -263,8 +261,7 @@ public class PhaseHandler implements java.io.Serializable {
         if (isSkippingPhase(phase)) {
             skipped = true;
             givePriorityToPlayer = false;
-        }
-        else  {
+        } else  {
             // Perform turn-based actions
             switch (phase) {
                 case UNTAP:
@@ -999,7 +996,6 @@ public class PhaseHandler implements java.io.Serializable {
     public void startFirstTurn(Player goesFirst) {
         startFirstTurn(goesFirst, null);
     }
-
     public void startFirstTurn(Player goesFirst, Runnable startGameHook) {
         StopWatch sw = new StopWatch();
 
@@ -1104,8 +1100,7 @@ public class PhaseHandler implements java.io.Serializable {
                 if (game.getStack().isEmpty()) {
                     if (playerTurn.hasLost()) {
                         setPriority(game.getNextPlayerAfter(playerTurn));
-                    }
-                    else {
+                    } else {
                         setPriority(playerTurn);
                     }
 

@@ -226,8 +226,6 @@ public class DeckgenUtil {
         return deck;
     }
 
-
-
     public static Deck buildLDACArchetypeDeck(GameFormat format, boolean isForAI){
         List<Archetype> keys = new ArrayList<>(CardArchetypeLDAGenerator.ldaArchetypes.get(format.getName()));
         Archetype randomKey = keys.get( MyRandom.getRandom().nextInt(keys.size()) );
