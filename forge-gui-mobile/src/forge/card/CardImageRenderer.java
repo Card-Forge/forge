@@ -120,7 +120,7 @@ public class CardImageRenderer {
         } else {
             borderColors = CardDetailUtil.getBorderColors(state, canShow);
         }
-        Color[] colors = useCardBGTexture ? drawCardBackgroundTexture(state, g, borderColors, x, y, w, h) : fillColorBackground(g, borderColors, x, y, w, h);
+        Color[] colors = useCardBGTexture && Forge.allowCardBG ? drawCardBackgroundTexture(state, g, borderColors, x, y, w, h) : fillColorBackground(g, borderColors, x, y, w, h);
 
         float artInset = blackBorderThickness * 0.5f;
         float outerBorderThickness = 2 * blackBorderThickness - artInset;
