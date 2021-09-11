@@ -2477,3 +2477,16 @@
 2021-08-15 Standard Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-08-15-standard-challenge.zip
 2021-08-16 Standard Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-08-16-standard-challenge.zip
 2021-08-16 Standard League (11 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-08-16-standard-league.zip
+2021-08-19 Standard League (10 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-08-19-standard-league.zip
+2021-08-22 Standard Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-08-22-standard-challenge.zip
+2021-08-23 Standard Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-08-23-standard-challenge.zip
+2021-08-23 Standard League (12 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-08-23-standard-league.zip
+2021-08-26 Standard League (7 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-08-26-standard-league.zip
+2021-08-29 Standard Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-08-29-standard-challenge.zip
+2021-08-30 Standard Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-08-30-standard-challenge.zip
+2021-08-30 Standard League (11 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-08-30-standard-league.zip
+2021-09-02 Standard League (10 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-09-02-standard-league.zip
+2021-09-05 Standard Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-09-05-standard-challenge.zip
+2021-09-06 Standard Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-09-06-standard-challenge.zip
+2021-09-06 Standard League (8 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-09-06-standard-league.zip
+2021-09-09 Standard League (11 decks) | https://downloads.cardforge.org/decks/archive/standard/2021-09-09-standard-league.zip
