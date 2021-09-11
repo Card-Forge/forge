@@ -141,7 +141,6 @@ public class ManaEffect extends SpellAbilityEffect {
                 abMana.setExpressChoice(choice);
             }
             else if (abMana.isSpecialMana()) {
-
                 String type = abMana.getOrigProduced().split("Special ")[1];
 
                 if (type.equals("EnchantedManaCost")) {
@@ -151,12 +150,12 @@ public class ManaEffect extends SpellAbilityEffect {
 
                     StringBuilder sb = new StringBuilder();
                     int generic = enchanted.getManaCost().getGenericCost();
-                    if( generic > 0 )
+                    if (generic > 0)
                         sb.append(generic);
 
                     for (ManaCostShard s : enchanted.getManaCost()) {
                         ColorSet cs = ColorSet.fromMask(s.getColorMask());
-                        if(cs.isColorless())
+                        if (cs.isColorless())
                             continue;
                         sb.append(' ');
                         if (cs.isMonoColor())
@@ -200,7 +199,7 @@ public class ManaEffect extends SpellAbilityEffect {
                     for (Card c : AbilityUtils.getDefinedCards(card, res, sa)) {
                         for (ManaCostShard s : c.getManaCost()) {
                             ColorSet cs = ColorSet.fromMask(s.getColorMask());
-                            if(cs.isColorless())
+                            if (cs.isColorless())
                                 continue;
                             sb.append(' ');
                             if (cs.isMonoColor())

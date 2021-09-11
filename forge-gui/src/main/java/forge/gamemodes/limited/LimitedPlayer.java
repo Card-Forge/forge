@@ -68,8 +68,6 @@ public class LimitedPlayer {
 
         chooseFrom.remove(bestPick);
 
-
-
         CardPool pool = deck.getOrCreate(section);
         pool.add(bestPick);
         draftedThisRound++;
@@ -147,4 +145,3 @@ public class LimitedPlayer {
     }
     */
 }
-

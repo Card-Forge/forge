@@ -40,7 +40,7 @@ public class QuestEventCommanderDuelManager implements QuestEventDuelManagerInte
     /**
      * Assembles the list of all possible Commander duels via CommanderDeckGenerator. Should be done within constructor.
      */
-    private void assembleDuels(){
+    private void assembleDuels() {
         //isCardGen = true seemed to make slightly more difficult decks based purely on experience with a very small sample size.
         //Gotta work on this more, its making pretty average decks after further testing.
         expertCommanderDecks = CommanderDeckGenerator.getCommanderDecks(DeckFormat.Commander, true, true);
@@ -86,11 +86,11 @@ public class QuestEventCommanderDuelManager implements QuestEventDuelManagerInte
      * title replaced as Random.
      * @return ArrayList of QuestEventDuels containing 4 duels.
      */
-    public List<QuestEventDuel> generateDuels(){
+    public List<QuestEventDuel> generateDuels() {
         final List<QuestEventDuel> duelOpponents = new ArrayList<>();
 
         //While there are less than 4 duels chosen
-        while(duelOpponents.size() < 4){
+        while (duelOpponents.size() < 4) {
             //Get a random duel from the possible duels list
             QuestEventCommanderDuel duel = (QuestEventCommanderDuel)commanderDuels.get(((int) (commanderDuels.size() * MyRandom.getRandom().nextDouble())));
 
@@ -105,8 +105,6 @@ public class QuestEventCommanderDuelManager implements QuestEventDuelManagerInte
 
             //Modify deck for difficulty
             modifyDuelForDifficulty(duel);
-
-
         }
 
         //Modify the stats of the final duel to hide the opponent, creating a "random" duel.
@@ -135,7 +133,7 @@ public class QuestEventCommanderDuelManager implements QuestEventDuelManagerInte
      * @param dp The easy generation commander deck
      * @return The same commander's expert generation DeckProxy
      */
-    private Deck getExpertGenDeck(DeckProxy dp){
+    private Deck getExpertGenDeck(DeckProxy dp) {
         for(QuestEventDuel qed : commanderDuels){
             QuestEventCommanderDuel cmdQED = (QuestEventCommanderDuel)qed;
             if(cmdQED.getDeckProxy().getName().equals(dp.getName())){
@@ -150,7 +148,7 @@ public class QuestEventCommanderDuelManager implements QuestEventDuelManagerInte
      * of the same commander's deck. Medium replaces 30%, Hard replaces 60%, Expert replaces 100%.
      * @param duel The QuestEventCommanderDuel to modify
      */
-    private void modifyDuelForDifficulty(QuestEventCommanderDuel duel){
+    private void modifyDuelForDifficulty(QuestEventCommanderDuel duel) {
         final QuestPreferences questPreferences = FModel.getQuestPreferences();
         final int index = FModel.getQuest().getAchievements().getDifficulty();
         final int numberOfWins = FModel.getQuest().getAchievements().getWin();
@@ -184,15 +182,14 @@ public class QuestEventCommanderDuelManager implements QuestEventDuelManagerInte
         List<PaperCard> expertList = expertMain.toFlatList();
 
         //Replace cards in the easy deck with cards from the expert deck up to the difficulty replacement percent
-        for(int i = 0; i < difficultyReplacementPercent; i++){
-            if(!easyMain.contains(expertList.get(i))) { //ensure that the card being copied over isn't already in the deck
+        for (int i = 0; i < difficultyReplacementPercent; i++) {
+            if (!easyMain.contains(expertList.get(i))) { //ensure that the card being copied over isn't already in the deck
                 easyMain.remove(easyList.get(i));
                 easyMain.add(expertList.get(i));
-            }
-            else{
+            } else {
                 expertList.remove(expertList.get(i));
                 i--;
-                if(expertList.size() == 0) break; //break if there are no more cards to copy over
+                if (expertList.size() == 0) break; //break if there are no more cards to copy over
             }
         }
     }

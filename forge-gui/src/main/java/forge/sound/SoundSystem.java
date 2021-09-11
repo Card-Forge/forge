@@ -124,8 +124,7 @@ public class SoundSystem {
     public void play(final SoundEffectType type, final boolean isSynchronized) {
         if (isUsingAltSystem()) {
             GuiBase.getInterface().startAltSoundSystem(ForgeConstants.SOUND_DIR + type.getResourceFileName(), isSynchronized);
-        }
-        else {
+        } else {
             final IAudioClip snd = fetchResource(type);
             if (!isSynchronized || snd.isDone()) {
                 snd.play(FModel.getPreferences().getPrefInt(FPref.UI_VOL_SOUNDS)/100f);

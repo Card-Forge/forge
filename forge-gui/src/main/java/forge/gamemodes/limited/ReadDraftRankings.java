@@ -89,7 +89,7 @@ public class ReadDraftRankings {
      *            the card's edition
      * @return ranking
      */
-    public Double   getRanking(String cardName, String edition) {
+    public Double getRanking(String cardName, String edition) {
         Double rank = null;
 
         if (draftRankings.containsKey(edition)) {

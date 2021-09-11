@@ -265,7 +265,6 @@ public class QuestEventDraft implements IQuestEvent {
                 }
             }
         } else {
-
             String aiIndex = "";
 
             for (int i = aiNames.length - 1; i >= 0; i--) {
@@ -298,7 +297,6 @@ public class QuestEventDraft implements IQuestEvent {
         int boosterPrices = 0;
 
         for (final String boosterSet : boosterConfiguration.split("/")) {
-
             int value;
             final String boosterName = FModel.getMagicDb().getEditions().get(boosterSet).getName() + " Booster Pack";
 
@@ -309,7 +307,6 @@ public class QuestEventDraft implements IQuestEvent {
             }
 
             boosterPrices += value;
-
         }
 
         prizePool -= boosterPrices * 8;
