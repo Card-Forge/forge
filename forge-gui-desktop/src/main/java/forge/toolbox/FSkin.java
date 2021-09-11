@@ -1498,7 +1498,7 @@ public class FSkin {
      * @param pixel
      * @return
      */
-    private static Color getColorFromPixel(final int pixel) {
+    public static Color getColorFromPixel(final int pixel) {
         int r, g, b, a;
         a = (pixel >> 24) & 0x000000ff;
         r = (pixel >> 16) & 0x000000ff;
