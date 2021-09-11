@@ -15,7 +15,7 @@ import forge.model.FModel;
 import forge.util.Localizer;
 
 public class DeckImportController {
-    private boolean replacingDeck;
+    private boolean createNewDeck;
     private final ICheckBox dateTimeCheck;
     private final IComboBox<String> monthDropdown;
     private final IComboBox<Integer> yearDropdown;
@@ -43,8 +43,8 @@ public class DeckImportController {
            really intended by the user!
          */
         this.currentDeckNotEmpty = currentDeckNotEmpty;
-        // this option will control the "replace" action controlled by UI widget.
-        replacingDeck = false; // by default is false, as we DO NOT want to replace by default.
+        // this option will control the "new deck" action controlled by UI widget
+        createNewDeck = false;
 
         if (setCodes != null && setCodes.size() == 0)
             this.allowedSetCodes = null;
@@ -54,13 +54,11 @@ public class DeckImportController {
         fillDateDropdowns();
     }
 
-    public void setReplacingDeck(boolean replaceDeck){
-        this.replacingDeck = replaceDeck;
+    public void setCreateNewDeck(boolean createNewDeck){
+        this.createNewDeck = createNewDeck;
     }
 
-    public boolean getReplacingDeck(){
-        return this.replacingDeck;
-    }
+    public boolean getCreateNewDeck() { return this.createNewDeck; }
 
     private void fillDateDropdowns() {
         DateFormatSymbols dfs = new DateFormatSymbols();
@@ -110,16 +108,18 @@ public class DeckImportController {
         if (currentDeckName != null && currentDeckName.length() > 0)
             deckName = String.format("\"%s\"", currentDeckName);
 
-        if (replacingDeck) {
-            final String warning = localizer.getMessage("lblConfirmReplaceDeck", deckName);
-            if (!SOptionPane.showConfirmDialog(warning, localizer.getMessage("lblReplaceCurrentDeck"),
+        if (createNewDeck){
+            String extraWarning = this.currentDeckNotEmpty ? localizer.getMessage("lblNewDeckWarning") : "";
+            final String warning = localizer.getMessage("lblConfirmCreateNewDeck", deckName, extraWarning);
+            if (!SOptionPane.showConfirmDialog(warning, localizer.getMessage("lblNewDeckDialogTitle"),
                     localizer.getMessage("lblYes"), localizer.getMessage("lblNo"))) {
                 return null;
             }
-        }  else if (this.currentDeckNotEmpty){
+        }
+        else if (this.currentDeckNotEmpty){
             final String warning = localizer.getMessage("lblConfirmCardImport", deckName);
             if (!SOptionPane.showConfirmDialog(warning,
-                    localizer.getMessage("lblBulkImport"),
+                    localizer.getMessage("lblImportCardsDialogTitle"),
                     localizer.getMessage("lblYes"), localizer.getMessage("lblNo")))
                 return null;
         }
