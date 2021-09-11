@@ -21,6 +21,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.awt.print.Paper;
 import java.util.*;
 import java.util.List;
 
@@ -28,28 +29,24 @@ import javax.swing.BorderFactory;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import forge.Singletons;
 import forge.StaticData;
-import forge.card.CardEdition;
-import forge.card.CardRarity;
-import forge.card.CardType;
-import forge.card.ColorSet;
+import forge.card.*;
+import forge.card.mana.ManaCostShard;
 import forge.deck.*;
 import forge.deck.DeckRecognizer.TokenType;
 import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.item.InventoryItem;
+import forge.item.PaperCard;
+import forge.itemmanager.SItemManagerUtil;
 import forge.model.FModel;
 import forge.screens.deckeditor.controllers.ACEditorBase;
-import forge.toolbox.FButton;
-import forge.toolbox.FCheckBox;
-import forge.toolbox.FComboBox;
-import forge.toolbox.FHtmlViewer;
-import forge.toolbox.FScrollPane;
-import forge.toolbox.FSkin;
-import forge.toolbox.FTextArea;
+import forge.screens.deckeditor.controllers.CStatisticsImporter;
+import forge.screens.deckeditor.views.VStatisticsImporter;
+import forge.toolbox.*;
 import forge.util.Localizer;
 import forge.view.FDialog;
-import org.apache.commons.math3.stat.inference.BinomialTest;
 
 /**
   *
@@ -63,24 +60,42 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
 
     private final FTextArea txtInput = new FTextArea();
     private static final String STYLESHEET = "<style>"
-            + "body, h1, h2, h3, h4, h5, h6, table, tr, td {font-weight: normal; line-height: 1.4; "
-            + "text-decoration: none; font-family: Arial; font-size: 10px; color: #000000; background-color: white;} "
-            + " h3 {font-size: 13px; margin: 2px 0; padding: 0px 5px; } "
-            + " h4 {font-size: 11px; margin: 2px 0; padding: 0px 5px; font-weight: 600;} "
-            + " h5 {font-size: 11px; margin: 2px 0; padding: 0px 5px; font-weight: 600;} "
-            + " code {font-size: 10px; color: #000000; background-color: white; } "
-            + " ul li {padding: 5px 1px 1px 1px !important; margin: 0 1px !important} "
-            + " p {margin: 2px; text-align: justify; padding: 2px 5px;} "
-            + " p.example {margin: 0 2px !important; padding: 0 5px !important;} "
-            + ".unknowncard {color: #666666;} " + ".knowncard {color: #009900;} "
-            + ".illegalcard {color: #990000;} " + ".invalidcard {color: #000099;} "
-            + ".comment {font-style: italic} "
-            + ".section {padding: 2px 5px; margin: 2px 0; font-weight: 700; background-color: #DDDDDD; color: #000000 } "
-            + ".editioncode {font-weight: 700; color: #5a8276 !important;} "
-            + ".cardtype {padding: 2px 20px; margin: 3px 0; font-weight: 400; background-color: #FFCC66; color: #000000 } "
-            + ".deckname {padding: 2px 20px; margin: 3px 0; font-weight: 400; background-color: #332200; color: #FFFFFF }"
+            + "body, h1, h2, h3, h4, h5, h6, table, tr, td {font-weight: normal; line-height: 1.6; "
+            + " font-family: Arial; font-size: 10px;}"
+            + " h3 {font-size: 13px; margin: 2px 0; padding: 0px 5px;}"
+            + " h4 {font-size: 11px; margin: 2px 0; padding: 0px 5px; font-weight: bold;}"
+            + " h5 {font-size: 11px; margin: 0; text-align: justify; padding: 1px 0 1px 8px;}"
+            + " ul li {padding: 5px 1px 1px 1px !important; margin: 0 1px !important}"
+            + " code {font-size: 10px;}"
+            + " p {margin: 2px; text-align: justify; padding: 2px 5px;}"
+            + " div {margin: 0; text-align: justify; padding: 1px 0 1px 8px;}"
+            + " table {margin: 5px 0;}"
+            // Card Matching Colours #4F6070
+            + " .knowncard   {color: #89DC9F;}"
+            + " .unknowncard {color: #E1E35F;}"
+            + " .illegalcard {color: #FF977A;}"
+            + " .invalidcard {color: #A9E5DD;}"
+            + " .comment     {font-style: italic}"
+            // Deck Name
+            + " .deckname    {background-color: #332200; color: #ffffff; }"
+            + " .sectionname {padding-left: 8px; font-weight: bold; }"
+            // Placeholders
+            + " .section     {font-weight: bold; background-color: #DDDDDD; color: #000000;}"
+            + " .cardtype    {font-weight: bold; background-color: #FFCC66; color: #000000;}"
+            + " .cmc         {font-weight: bold; background-color: #C6C7BA; color: #000000;}"
+            + " .rarity      {font-weight: bold; background-color: #df8030; color: #000000;}"
+            + " .mana        {font-weight: bold; background-color: #38221A; color: #ffffff;}"
+            // Colours
+            + " .colorless   {font-weight: bold; background-color: #C7BCBA; color: #000000;}"
+            + " .blue        {font-weight: bold; background-color: #0D78BF; color: #ffffff;}"
+            + " .red         {font-weight: bold; background-color: #ED0713; color: #ffffff;}"
+            + " .white       {font-weight: bold; background-color: #FCFCB6; color: #000000;}"
+            + " .black       {font-weight: bold; background-color: #787878; color: #000000;}"
+            + " .green       {font-weight: bold; background-color: #26AB57; color: #000000;}"
+            // Card Edition
+            + " .edition     {font-weight: bold; background-color: #78A197; color: #000000;}"
+            + " .editioncode {font-weight: bold; color: #ffffff;}"
             + "</style>";
-    //    TODO: Add localisation support
     private static final String COLOUR_CODED_TAGS = String.format(
             "<ul>" +
             "<li> <span class=\"knowncard\">%s</span></li>" +
@@ -134,33 +149,27 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
             + DeckImport.STYLESHEET
             + "</head>"
             + "<body>"
-            + "<h3 id='how-to-use-the-deck-importer'>%s</h3>"
-            + "<p>%s</p> "
-            + "<h4>%s</h4> "
-            + "<p>%s</p> "
-            + "<h4>%s</h4> "
-            + "<p>%s</p> "
-            + "</body>"
-            + "</html>",
+            + "<h3 id='how-to-use-the-deck-importer'>%s</h3><div>%s</div> "
+            + "<h4>%s</h4><div>%s</div> "
+            + "<h4>%s</h4><div>%s</div> "
+            + "</body></html>",
             Localizer.getInstance().getMessage("nlGuideTitle"),
             Localizer.getInstance().getMessage("nlGuideQuickInstructions", COLOUR_CODED_TAGS),
             Localizer.getInstance().getMessage("nlGuideTipsTitle"),
             Localizer.getInstance().getMessage("nlGuideTipsText", TIPS_LIST),
             Localizer.getInstance().getMessage("nlGuideExamplesTitle"),
             Localizer.getInstance().getMessage("nlGuideExamplesText", EXAMPLES_LIST)
-            );
+    );
 
     private final FHtmlViewer htmlOutput = new FHtmlViewer(DeckImport.HTML_WELCOME_TEXT);
-    private final FHtmlViewer decklistStats = new FHtmlViewer();
     private final FScrollPane scrollInput = new FScrollPane(this.txtInput, false);
     private final FScrollPane scrollOutput = new FScrollPane(this.htmlOutput, false);
-    private final FScrollPane scrollStats = new FScrollPane(this.decklistStats, false);
 
     private final FButton cmdCancel = new FButton(Localizer.getInstance().getMessage("lblCancel"));
 
     private FButton cmdAccept;  // Not initialised as label will be adaptive.
     private final FCheckBox dateTimeCheck = new FCheckBox(Localizer.getInstance().getMessage("lblUseOnlySetsReleasedBefore"), false);
-    private final FCheckBox replaceDeckCheckbox = new FCheckBox(Localizer.getInstance().getMessage("lblReplaceDeck"), false);
+    private final FCheckBox createNewDeckCheckbox = new FCheckBox(Localizer.getInstance().getMessage("lblNewDeckCheckbox"), false);
     private final DeckFormat deckFormat;
 
     //don't need wrappers since skin can't change while this dialog is open
@@ -171,8 +180,7 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
     private final ACEditorBase<TItem, TModel> host;
 
     private final String IMPORT_CARDS_CMD_LABEL = Localizer.getInstance().getMessage("lblImportCardsCmd");
-    private final String REPLACE_CARDS_CMD_LABEL = Localizer.getInstance().getMessage("lblReplaceCardsCmd");
-
+    private final String CREATE_NEW_DECK_CMD_LABEL = Localizer.getInstance().getMessage("lblCreateNewCmd");
 
     public DeckImport(final ACEditorBase<TItem, TModel> g) {
         boolean currentDeckIsNotEmpty = !(g.getDeckController().isEmpty());
@@ -186,53 +194,48 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         List<String> allowedSetCodes = currentGameFormat.getAllowedSetCodes();
         this.controller = new DeckImportController(dateTimeCheck, monthDropdown, yearDropdown,
                 currentDeckIsNotEmpty, allowedSetCodes, currentDeckFormat);
-        String import_deck_cmd_label = Localizer.getInstance().getMessage("lblImportDeckCmd");
-        String cmdAcceptLabel = currentDeckIsNotEmpty ? IMPORT_CARDS_CMD_LABEL : import_deck_cmd_label;
-        this.cmdAccept = new FButton(cmdAcceptLabel);
-
+        this.cmdAccept = new FButton(IMPORT_CARDS_CMD_LABEL);
         this.host = g;
-
         initMainPanel(g, currentDeckIsNotEmpty, currentGameType);
     }
 
     private void initMainPanel(ACEditorBase<TItem, TModel> g, boolean currentDeckIsNotEmpty, GameType currentGameType) {
-        GraphicsDevice gd = this.getGraphicsConfiguration().getDevice();
-        final int wWidth = (int)(gd.getDisplayMode().getWidth() * 0.7);
-        final int wHeight = (int)(gd.getDisplayMode().getHeight() * 0.8);
+//        GraphicsDevice gd = this.getGraphicsConfiguration().getDevice();
+//        final int wWidth = (int)(gd.getDisplayMode().getWidth() * 0.85);
+//        final int wHeight = (int)(gd.getDisplayMode().getHeight() * 0.8);
+        final int wWidth = (int)(Singletons.getView().getFrame().getSize().width * 0.95);
+        final int wHeight = (int)(Singletons.getView().getFrame().getSize().height * 0.9);
         this.setPreferredSize(new Dimension(wWidth, wHeight));
         this.setSize(wWidth, wHeight);
 
         String gameTypeName = String.format(" %s", currentGameType.name());
-        this.setTitle(Localizer.getInstance().getMessage("lblDeckImporter") + gameTypeName);
+        this.setTitle(Localizer.getInstance().getMessage("lblDeckImporterPanelTitle") + gameTypeName);
 
         txtInput.setFocusable(true);
         txtInput.setEditable(true);
 
         final FSkin.SkinColor foreColor = FSkin.getColor(FSkin.Colors.CLR_TEXT);
         this.scrollInput.setBorder(new FSkin.TitledSkinBorder(BorderFactory.createEtchedBorder(),
-                Localizer.getInstance().getMessage("lblPasteTypeDecklist"), foreColor));
+                Localizer.getInstance().getMessage("lblCardListTitle"), foreColor));
         this.scrollInput.setViewportBorder(BorderFactory.createLoweredBevelBorder());
 
         this.scrollOutput.setBorder(new FSkin.TitledSkinBorder(BorderFactory.createEtchedBorder(),
-                Localizer.getInstance().getMessage("lblExpectRecognizedLines"), foreColor));
+                Localizer.getInstance().getMessage("lblDecklistTitle"), foreColor));
         this.scrollOutput.setViewportBorder(BorderFactory.createLoweredBevelBorder());
 
-        this.scrollStats.setBorder(new FSkin.TitledSkinBorder(BorderFactory.createEtchedBorder(),
-                Localizer.getInstance().getMessage("lblSummaryStats"), foreColor));
-        this.scrollStats.setViewportBorder(BorderFactory.createLoweredBevelBorder());
-
         this.add(this.scrollInput, "cell 0 0, w 40%, growy, pushy");
-        this.add(this.scrollOutput, "cell 1 0, w 55%, growx, growy, pushx, pushy");
-        this.add(this.scrollStats, "cell 2 0, w 50%, wrap, growy, pushy, pushx");
+        this.add(this.scrollOutput, "cell 1 0, w 60%, growx, growy, pushx, pushy");
+        this.add(VStatisticsImporter.instance().getMainPanel(),
+                "cell 2 0, w 40%, growx, growy, pushx, pushy");
 
         this.add(this.dateTimeCheck, "cell 0 1, w 50%, ax c");
         this.add(monthDropdown, "cell 0 2, w 20%, ax left, split 2, pad 0 4 0 0");
         this.add(yearDropdown, "cell 0 2, w 20%, ax left, split 2, pad 0 4 0 0");
 
         if (currentDeckIsNotEmpty)
-            this.add(this.replaceDeckCheckbox, "cell 2 1, w 50%, ax c");
-        this.add(this.cmdAccept, "cell 2 2, w 150, align r, h 26");
-        this.add(this.cmdCancel, "cell 2 2, w 150, align r, h 26");
+            this.add(this.createNewDeckCheckbox,"cell 2 1, ax left");
+        this.add(this.cmdAccept, "cell 2 2, w 175, align r, h 26");
+        this.add(this.cmdCancel, "cell 2 2, w 175, align r, h 26");
 
         this.cmdCancel.addActionListener(new ActionListener() {
             @Override
@@ -253,12 +256,12 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
                 // In this way, if this deck will replace the current one, the name will be kept the same!
                 if (!deck.hasName()){
                     if (currentDeckName.equals(""))
-                        deck.setName(Localizer.getInstance().getMessage("lblNewDeckName"));  // TODO: try to generate a deck name?
+                        deck.setName(Localizer.getInstance().getMessage("lblNewDeckName"));
                     else
                         deck.setName(currentDeckName);
                 }
 
-                DeckImport.this.host.getDeckController().loadDeck(deck, controller.getReplacingDeck());
+                DeckImport.this.host.getDeckController().loadDeck(deck, controller.getCreateNewDeck());
                 DeckImport.this.processWindowEvent(new WindowEvent(DeckImport.this, WindowEvent.WINDOW_CLOSING));
             }
         });
@@ -280,9 +283,9 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
             }
         };
 
-        final ActionListener toggleDeckReplace = new ActionListener() {
+        final ActionListener toggleNewDeck = new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) { toggleDeckReplaceOption(); }
+            public void actionPerformed(ActionEvent e) { toggleNewDeck(); }
         };
 
         this.yearDropdown.addActionListener(reparse);
@@ -292,10 +295,9 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         this.txtInput.getDocument().addDocumentListener(new OnChangeTextUpdate());
         this.cmdAccept.setEnabled(false);
 
-
         if (currentDeckIsNotEmpty){
-            this.replaceDeckCheckbox.setSelected(false);
-            this.replaceDeckCheckbox.addActionListener(toggleDeckReplace);
+            this.createNewDeckCheckbox.setSelected(false);
+            this.createNewDeckCheckbox.addActionListener(toggleNewDeck);
         }
     }
 
@@ -328,10 +330,10 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         updateSummaries(tokens);
     }
 
-    private void toggleDeckReplaceOption(){
-        boolean replaceDeckStatus = this.replaceDeckCheckbox.isSelected();
-        this.controller.setReplacingDeck(replaceDeckStatus);
-        String cmdAcceptLabel = replaceDeckStatus ? this.REPLACE_CARDS_CMD_LABEL : this.IMPORT_CARDS_CMD_LABEL;
+    private void toggleNewDeck(){
+        boolean createNewDeck = this.createNewDeckCheckbox.isSelected();
+        this.controller.setCreateNewDeck(createNewDeck);
+        String cmdAcceptLabel = createNewDeck ? this.CREATE_NEW_DECK_CMD_LABEL : this.IMPORT_CARDS_CMD_LABEL;
         this.cmdAccept.setText(cmdAcceptLabel);
     }
 
@@ -340,12 +342,11 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
             htmlOutput.setText(HTML_WELCOME_TEXT);
         } else {
             final StringBuilder sbOut = new StringBuilder("<html>");
-            sbOut.append(DeckImport.STYLESHEET);
-            sbOut.append(String.format("<h3>%s</h3>", Localizer.getInstance().getMessage("lblCurrentDecklist")));
-            for (final DeckRecognizer.Token t : tokens) {
-                sbOut.append(makeHtmlViewOfToken(t));
-            }
-            sbOut.append("</html>");
+            sbOut.append(String.format("<head>%s</head>", DeckImport.STYLESHEET));
+            sbOut.append(String.format("<body><h3>%s</h3>", Localizer.getInstance().getMessage("lblCurrentDecklist")));
+            for (final DeckRecognizer.Token t : tokens)
+                sbOut.append(toHTML(t));
+            sbOut.append("</body></html>");
             htmlOutput.setText(sbOut.toString());
         }
     }
@@ -359,160 +360,26 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
     }
 
     private void updateSummaries(final List<DeckRecognizer.Token> tokens) {
-
-        String head = "<style>"
-                + "body, h1, h2, h3, h4, h5, h6, table, tr, td, p {padding: 0; font-weight: normal; "
-                + "text-decoration: none; font-family: Arial; font-size: 10px; "
-                + "color: white; background-color: #ffffff; color: #000000;} "
-                + " h3 {font-size: 13px; margin: 2px 0; padding: 0px 5px; } "
-                + " h4 {font-size: 10px; padding: 1px 20px; margin: 3px 0 0 0;} "
-                + " div {margin: 0; ext-align: justify; padding 1px 10px;}"
-                + " p {margin: 2px; text-align: justify; padding: 1px 5px;} "
-                + ".unknowncard {color: #666666;} " + ".knowncard {color: #009900;} "
-                + ".illegalcard {color: #990000;} " + ".invalidcard {color: #000099;} "
-                + ".section {font-weight: 700; background-color: #DDDDDD; color: #000000 } "
-                + ".mana {font-weight: 700; background-color: #c7bcba; color: #ffffff } "
-                + ".rarity {font-weight: 700; background-color: #df8030; color: #ffffff } "
-                + ".edition {font-weight: 700; background-color: #5a8276; color: #ffffff } "
-                + ".editioncode {font-weight: 700; color: #5a8276; font-style: normal !important;} "
-                + ".cardtype {font-weight: 700; background-color: #FFCC66; color: #000000} "
-                + ".decksection {padding-left: 20px; font-weight: 700;}"
-                + " ul li {padding: 5px 1px 1px 1px !important; margin: 0 1px !important} "
-                + "</style>";
-
-        int unknownCardsCount = 0;
-        int illegalCardsCount = 0;
         int legalCardsCount = 0;
-        int invalidCardsCount = 0;
-
-        String summaryMsgTemplate = "<html><head>%s</head><body><h3>%s</h3>%s</body></html>";
-        String deckListName = Localizer.getInstance().getMessage("lblDeckListDefaultName");
-
-        if (hasOnlyComment(tokens)) {
-            String statsSummaryList = String.format(
-                    "<ul><li>%s</li><li>%s</li><li>%s</li><li>%s</li><li>%s</li><li>%s</li></ul>",
-                    Localizer.getInstance().getMessage("lblStatsSummaryCount"),
-                    Localizer.getInstance().getMessage("lblStatsSummarySection"),
-                    Localizer.getInstance().getMessage("lblStatsSummaryCardType"),
-                    Localizer.getInstance().getMessage("lblStatsSummaryCardSet"),
-                    Localizer.getInstance().getMessage("lblStatsSummaryRarity"),
-                    Localizer.getInstance().getMessage("lblStatsSummaryCMC")
-            );
-            this.decklistStats.setText(String.format(summaryMsgTemplate, head,
-                    Localizer.getInstance().getMessage("lblSummaryHeadMsg", deckListName),
-                    String.format("<p>%s</p>",
-                            Localizer.getInstance().getMessage("lblImportedDeckSummary", statsSummaryList))));
-        }
-        else {
-            Map<String, Integer> deckSectionsStats = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
-            deckSectionsStats.put(DeckSection.Main.name(), 0);
-            String currentKeySection = DeckSection.Main.name();
-
-            DeckStats cardTypeStats = new CardTypeDeckStats(Localizer.getInstance().getMessage("lblSummaryCardTypeStats"), "cardtype");
-            DeckStats editionsStats = new EditionDeckStats(Localizer.getInstance().getMessage("lblSummaryEditionStats"), "edition");
-            DeckStats manaStats = new DeckStats(Localizer.getInstance().getMessage("lblSummaryManaStats"), "mana");
-            DeckStats rarityStats = new RarityDeckStats(Localizer.getInstance().getMessage("lblSummaryRarityStats"), "rarity");
-
-            for (final DeckRecognizer.Token t : tokens) {
-                if (t.getType() == TokenType.UNKNOWN_CARD_REQUEST)
-                    unknownCardsCount += t.getNumber();
-                else if (t.getType() == TokenType.ILLEGAL_CARD_REQUEST)
-                    illegalCardsCount += t.getNumber();
-                else if (t.getType() == TokenType.INVALID_CARD_REQUEST)
-                    invalidCardsCount += t.getNumber();
-                else if (t.getType() == TokenType.DECK_SECTION_NAME) {
-                    if (!t.getText().equalsIgnoreCase(currentKeySection))
-                        currentKeySection = t.getText();
-                }
-                else if (t.getType() == TokenType.DECK_NAME)
-                    deckListName = String.format("\"%s\"", t.getText());
-                else if (t.getType() == TokenType.LEGAL_CARD_REQUEST) {
-                    int tokenNumber = t.getNumber();
-                    legalCardsCount += tokenNumber;
-
-                    // update deck section stats
-                    int sectionCount = deckSectionsStats.getOrDefault(currentKeySection, 0);
-                    sectionCount += tokenNumber;
-                    deckSectionsStats.put(currentKeySection, sectionCount);
-
-                    // update card edition stats
-                    String setCode = t.getCard().getEdition();
-                    editionsStats.add(currentKeySection, setCode, tokenNumber);
-                    // update card type stats
-                    for (CardType.CoreType coreType : t.getCard().getRules().getType().getCoreTypes()) {
-                        String coreTypeName = coreType.name();
-                        cardTypeStats.add(currentKeySection, coreTypeName, tokenNumber);
-                    }
-                    // update rarity stats
-                    rarityStats.add(currentKeySection, t.getCard().getRarity().name(), tokenNumber);
-
-                    // update colour stats
-                    if (!t.getCard().getRules().getType().isLand()) {
-                        String manaCost = String.format("CMC %d", t.getCard().getRules().getManaCost().getCMC());
-                        manaStats.add(currentKeySection, manaCost, tokenNumber);
-                    }
-                }
+        List<Map.Entry<PaperCard, Integer>> tokenCards = new ArrayList<>();
+        for (final DeckRecognizer.Token t : tokens) {
+            if (t.getType() == TokenType.LEGAL_CARD_REQUEST) {
+                int tokenNumber = t.getNumber();
+                legalCardsCount += tokenNumber;
+                PaperCard tokenCard = t.getCard();
+                tokenCards.add(new AbstractMap.SimpleEntry<>(tokenCard, tokenNumber));
             }
-
-            String cardStatsReport = createCardsStatsReport(unknownCardsCount, illegalCardsCount,
-                    invalidCardsCount,
-                    legalCardsCount, deckSectionsStats);
-
-            String deckListSummaryHtml = String.format("<h4 class=\"section\">%s</h4>%s %s %s %s %s",
-                    Localizer.getInstance().getMessage("lblSummaryDeckStats"), cardStatsReport,
-                    editionsStats.toHTML(), cardTypeStats.toHTML(), rarityStats.toHTML(), manaStats.toHTML());
-
-            this.decklistStats.setText(String.format(summaryMsgTemplate, head,
-                    Localizer.getInstance().getMessage("lblSummaryHeadMsg", deckListName),
-                    deckListSummaryHtml));
         }
+        CStatisticsImporter.instance().updateStats(tokenCards);
         cmdAccept.setEnabled(legalCardsCount > 0);
     }
 
-    private String createCardsStatsReport(int unknownCardsCount, int illegalCardsCount, int invalidCardsCount,
-                                          int legalCardsCount, Map<String, Integer> deckSectionsStats) {
-        StringBuilder sb = new StringBuilder();
-        if (legalCardsCount > 0){
-            sb.append(String.format("<div class=\"knowncard\">%s: %d</div>",
-                    Localizer.getInstance().getMessage("lblLegalCardsCount"), legalCardsCount));
-        }
-        if (illegalCardsCount > 0){
-            sb.append(String.format("<div class=\"illegalcard\">%s: %d</div>",
-                    Localizer.getInstance().getMessage("lblIllegalCardsCount"), illegalCardsCount));
-        }
-        if (invalidCardsCount > 0){
-            sb.append(String.format("<div class=\"invalidcard\">%s: %d</div>",
-                    Localizer.getInstance().getMessage("lblInvalidCardsCount"), invalidCardsCount));
-        }
-        if (unknownCardsCount > 0){
-            sb.append(String.format("<div class=\"unknowncard\">%s: %d</div>",
-                    Localizer.getInstance().getMessage("lblUnknownCardsCount"), unknownCardsCount));
-        }
-        String cardStatsReport = sb.toString();
-        cardStatsReport += createDeckStatsReport(deckSectionsStats);
-        return cardStatsReport;
-    }
-
-    private String createDeckStatsReport(Map<String, Integer> deckSectionsStats) {
-        StringBuilder deckSectionsReport = new StringBuilder("<br />");
-        for (String sectionName : deckSectionsStats.keySet()){
-            String sectionNameLabel = Localizer.getInstance().getMessage(String.format("lbl%s", sectionName));
-            String tag = String.format("<div>%s : %d</div>",
-                    Localizer.getInstance().getMessage("lblDeckSectionStats",
-                            String.format("<b>%s</b>", sectionNameLabel)),
-                            deckSectionsStats.get(sectionName));
-            deckSectionsReport.append(tag);
-        }
-        return deckSectionsReport.toString();
-    }
-
-    private String makeHtmlViewOfToken(final DeckRecognizer.Token token) {
+    private String toHTML(final DeckRecognizer.Token token) {
         if (token == null)
             return "";
 
         switch (token.getType()) {
             case LEGAL_CARD_REQUEST:
-                // TODO: String Padding for alignment
                 return String.format("<div class=\"knowncard\">%s x %s " +
                                 "<span class=\"editioncode\">(%s)</span> %s %s</div>",
                         token.getNumber(), token.getCard().getName(),
@@ -536,136 +403,22 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
                 return String.format("<div class=\"section\">%s</div>", token.getText());
             case CARD_TYPE:
                 return String.format("<div class=\"cardtype\">%s</div>", token.getText());
+            case CARD_RARITY:
+                return String.format("<div class=\"rarity\">%s</div>", token.getText());
+            case CARD_CMC:
+                return String.format("<div class=\"cmc\">%s</div>", token.getText());
+            case MANA_COLOUR:
+                String cssColorClass = token.getText().toLowerCase().trim();
+                return String.format("<div class=\"%s\">%s</div>", cssColorClass, token.getText());
             case DECK_NAME:
                 return String.format("<div class=\"deckname\">%s: %s</div>",
                         Localizer.getInstance().getMessage("lblDeckName"),
                         token.getText());
-            case UNKNOWN_TEXT:
             case COMMENT:
+                return String.format("<div class=\"comment\">%s</div>", token.getText());
+            case UNKNOWN_TEXT:
             default:
                 return "";
-//             return String.format("<div class=\"comment\">%s</div>", token.getText());
         }
     }
-}
-
-class DeckStats {
-
-    protected Map<String, Map<String, Integer>> deckSectionMap;
-    protected String label;
-    protected String cssClass;
-
-    public DeckStats(final String name, final String cssClass0){
-        this.deckSectionMap = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
-        this.label = name;
-        this.cssClass = cssClass0;
-    }
-
-    public void add(String sectionName, String key, int amount){
-        Map<String, Integer> sectionMap = getOrInitStatMap(sectionName);
-        int currentCount = sectionMap.getOrDefault(key, 0);
-        currentCount += amount;
-        sectionMap.put(key, currentCount);
-        deckSectionMap.put(sectionName, sectionMap);
-    }
-
-    protected Map<String, Integer> getOrInitStatMap(String sectionName){
-        return this.deckSectionMap.getOrDefault(sectionName, new TreeMap<>(String.CASE_INSENSITIVE_ORDER));
-    }
-
-    public String toHTML(){
-        StringBuilder report = new StringBuilder("");
-        report.append(String.format("<h4 class=\"%s\">%s</h4>", this.cssClass, this.label));
-        for (String deckSection: this.deckSectionMap.keySet()) {
-            Map<String, Integer> sectionStat = this.deckSectionMap.get(deckSection);
-            report.append(String.format("<div class=\"decksection\">%s</div>", deckSection));
-            int itemCounter = 0;
-            for (String propertyLabel : sectionStat.keySet()) {
-                int count = sectionStat.getOrDefault(propertyLabel, 0);
-                if (count == 0)
-                    continue;
-                String tag = this.propertyTag(propertyLabel, count);
-                report.append(tag);
-                itemCounter += 1;
-                if (itemCounter == 3) {
-                    report.append("<br />");
-                    itemCounter = 0;  // reset
-                }
-            }
-        }
-        return report.toString();
-    }
-
-    protected String propertyTag(String propertyLabel, int count){
-        return String.format("<span>%s : %d<;&nbsp;&nbsp;</span>", propertyLabel, count);
-    }
-}
-
-class EditionDeckStats extends DeckStats {
-
-    public EditionDeckStats(final String name, final String cssClass0) {
-        super(name, cssClass0);
-    }
-
-    @Override
-    public String toHTML(){
-        StringBuilder report = new StringBuilder("");
-        report.append(String.format("<h4 class=\"%s\">%s</h4>", this.cssClass, this.label));
-        for (String deckSection: this.deckSectionMap.keySet()) {
-            Map<String, Integer> sectionStat = this.deckSectionMap.get(deckSection);
-            report.append(String.format("<div class=\"decksection\">%s</div>", deckSection));
-            for (String propertyLabel : sectionStat.keySet()) {
-                int count = sectionStat.getOrDefault(propertyLabel, 0);
-                if (count == 0)
-                    continue;
-                String tag = this.propertyTag(propertyLabel, count);
-                report.append(tag);
-            }
-        }
-        return report.toString();
-    }
-
-    @Override
-    protected String propertyTag(String setCode, int count){
-        CardEdition edition = StaticData.instance().getCardEdition(setCode);
-        if (edition == null)
-            edition = CardEdition.UNKNOWN;
-        return String.format("<div><em class=\"editioncode\">[%s]</em> %s : %d</div>",
-                setCode, edition.getName(), count);
-    }
-}
-
-class CardTypeDeckStats extends DeckStats {
-    public CardTypeDeckStats(final String name, final String cssClass0) {
-        super(name, cssClass0);
-    }
-
-    @Override
-    protected String propertyTag(String typeLabel, int count){
-        String typeLocalLab = Localizer.getInstance().getMessage(String.format("lbl%s", typeLabel));
-        return String.format("<span>%s : %d;&nbsp;&nbsp;</span>", typeLocalLab, count);
-    }
-}
-
-class RarityDeckStats extends DeckStats {
-
-    public RarityDeckStats(final String name, final String cssClass0) {
-        super(name, cssClass0);
-    }
-
-    @Override
-    protected Map<String, Integer> getOrInitStatMap(String sectionName){
-        Map<String, Integer> statMap = this.deckSectionMap.getOrDefault(sectionName, null);
-        if (statMap == null){
-            Map<String, Integer> defaultRarityMap = new LinkedHashMap<>();  // I want card rarity to be shown in this exact order!
-            defaultRarityMap.put(CardRarity.Common.name(), 0);
-            defaultRarityMap.put(CardRarity.Uncommon.name(), 0);
-            defaultRarityMap.put(CardRarity.Rare.name(), 0);
-            defaultRarityMap.put(CardRarity.MythicRare.name(), 0);
-            defaultRarityMap.put(CardRarity.Special.name(), 0);
-            return defaultRarityMap;
-        }
-        return statMap;
-    }
-
 }
