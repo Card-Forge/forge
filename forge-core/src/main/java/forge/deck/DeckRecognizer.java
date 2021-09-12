@@ -61,28 +61,29 @@ public class DeckRecognizer {
      */
     public static class Token {
         private final TokenType type;
-        private final PaperCard card;
         private final int number;
         private final String text;
+        // only used for card tokens
+        private PaperCard card = null;
+        private DeckSection tokenSection = null;
 
-        public static Token KnownCard(final PaperCard theCard, final int count) {
-            return new Token(theCard, TokenType.LEGAL_CARD_REQUEST, count, null);
+        public static Token KnownCard(final PaperCard theCard, final int count,
+                                      DeckSection section) {
+            return new Token(theCard, TokenType.LEGAL_CARD_REQUEST, count, section);
         }
 
         public static Token IllegalCard(final PaperCard theCard, final int count) {
-            String ttext = String.format("%s (%s)", theCard.getName(), theCard.getEdition());
-            return new Token(theCard, TokenType.ILLEGAL_CARD_REQUEST, count, ttext);
+            return new Token(theCard, TokenType.ILLEGAL_CARD_REQUEST, count, null);
         }
 
         public static Token InvalidCard(final PaperCard theCard, final int count) {
-            String ttext = String.format("%s (%s)", theCard.getName(), theCard.getEdition());
-            return new Token(theCard, TokenType.INVALID_CARD_REQUEST, count, ttext);
+            return new Token(theCard, TokenType.INVALID_CARD_REQUEST, count, null);
         }
 
         public static Token UnknownCard(final String cardName, final String setCode, final int count) {
             String ttext = setCode == null || setCode.equals("") ? cardName :
                     String.format("%s (%s)", cardName, setCode);
-            return new Token(null, TokenType.UNKNOWN_CARD_REQUEST, count, ttext);
+            return new Token(TokenType.UNKNOWN_CARD_REQUEST, count, ttext);
         }
 
         public static Token DeckSection(final String sectionName0){
@@ -105,18 +106,19 @@ public class DeckRecognizer {
             return null;
         }
 
-        private Token(final PaperCard tokenCard, final TokenType type1, final int count, final String message) {
-            this.card = tokenCard;
+        private Token(final PaperCard tokenCard, final TokenType type1,
+                      final int count, final DeckSection section) {
             this.number = count;
             this.type = type1;
-            this.text = message;
+            this.text = String.format("%s (%s)", tokenCard.getName(), tokenCard.getEdition());
+            this.card = tokenCard;
+            this.tokenSection = section;
         }
 
         public Token(final TokenType type1, final int count, final String message) {
-            this(null, type1, count, message);
-            if ((type1 == TokenType.LEGAL_CARD_REQUEST) || (type1 == TokenType.UNKNOWN_CARD_REQUEST)) {
-                throw new IllegalArgumentException("Use factory methods for recognized " + REGRP_CARD + " lines");
-            }
+            this.number = count;
+            this.type = type1;
+            this.text = message;
         }
 
         public Token(final TokenType type1, final String message) {
@@ -138,6 +140,8 @@ public class DeckRecognizer {
         public final int getNumber() {
             return this.number;
         }
+
+        public final DeckSection getTokenSection() { return this.tokenSection; }
 
         public boolean isCardToken() {
             return (this.type == TokenType.LEGAL_CARD_REQUEST ||
@@ -182,39 +186,44 @@ public class DeckRecognizer {
     public static final String REGRP_FOIL_GFISH = "foil";
     private static final String REX_FOIL_MTGGOLDFISH = String.format(
             "(?<%s>\\(F\\))?", REGRP_FOIL_GFISH);
+    // XMage Sideboard indicator - pushed a bit further with deck section indication
+    public static final String REGRP_DECK_SEC_XMAGE_STYLE = "decsec";
+    private static final String REX_DECKSEC_XMAGE = String.format(
+            "(?<%s>(MB|SB|CM))", REGRP_DECK_SEC_XMAGE_STYLE);
+
     // 1. Card-Set Request (Amount?, CardName, Set)
     public static final String REX_CARD_SET_REQUEST = String.format(
-            "(%s\\s)?\\s*%s\\s*(\\s|\\||\\(|\\[|\\{)%s(\\s|\\)|\\]|\\})?\\s*%s",
-            REX_CARD_COUNT, REX_CARD_NAME, REX_SET_CODE, REX_FOIL_MTGGOLDFISH);
+            "(%s\\s*:\\s*)?(%s\\s)?\\s*%s\\s*(\\s|\\||\\(|\\[|\\{)%s(\\s|\\)|\\]|\\})?\\s*%s",
+            REX_DECKSEC_XMAGE, REX_CARD_COUNT, REX_CARD_NAME, REX_SET_CODE, REX_FOIL_MTGGOLDFISH);
     public static final Pattern CARD_SET_PATTERN = Pattern.compile(REX_CARD_SET_REQUEST);
     // 2. Set-Card Request (Amount?, Set, CardName)
     public static final String REX_SET_CARD_REQUEST = String.format(
-            "(%s\\s)?\\s*(\\(|\\[|\\{)?%s(\\s+|\\)|\\]|\\}|\\|)\\s*%s\\s*%s\\s*",
-            REX_CARD_COUNT, REX_SET_CODE, REX_CARD_NAME, REX_FOIL_MTGGOLDFISH);
+            "(%s\\s*:\\s*)?(%s\\s)?\\s*(\\(|\\[|\\{)?%s(\\s+|\\)|\\]|\\}|\\|)\\s*%s\\s*%s\\s*",
+            REX_DECKSEC_XMAGE, REX_CARD_COUNT, REX_SET_CODE, REX_CARD_NAME, REX_FOIL_MTGGOLDFISH);
     public static final Pattern SET_CARD_PATTERN = Pattern.compile(REX_SET_CARD_REQUEST);
     // 3. Full-Request (Amount?, CardName, Set, Collector Number|Art Index) - MTGArena Format
     public static final String REX_FULL_REQUEST_CARD_SET = String.format(
-            "(%s\\s)?\\s*%s\\s*(\\||\\(|\\[|\\{|\\s)%s(\\s|\\)|\\]|\\})?\\s+%s\\s*%s\\s*",
-            REX_CARD_COUNT, REX_CARD_NAME, REX_SET_CODE, REX_COLL_NUMBER, REX_FOIL_MTGGOLDFISH);
+            "(%s\\s*:\\s*)?(%s\\s)?\\s*%s\\s*(\\||\\(|\\[|\\{|\\s)%s(\\s|\\)|\\]|\\})?\\s+%s\\s*%s\\s*",
+            REX_DECKSEC_XMAGE, REX_CARD_COUNT, REX_CARD_NAME, REX_SET_CODE, REX_COLL_NUMBER, REX_FOIL_MTGGOLDFISH);
     public static final Pattern CARD_SET_COLLNO_PATTERN = Pattern.compile(REX_FULL_REQUEST_CARD_SET);
     // 4. Full-Request (Amount?, Set, CardName, Collector Number|Art Index) - Alternative for flexibility
     public static final String REX_FULL_REQUEST_SET_CARD = String.format(
-            "^(%s\\s)?\\s*(\\(|\\[|\\{)?%s(\\s+|\\)|\\]|\\}|\\|)\\s*%s\\s+%s\\s*%s$",
-            REX_CARD_COUNT, REX_SET_CODE, REX_CARD_NAME, REX_COLL_NUMBER, REX_FOIL_MTGGOLDFISH);
+            "^(%s\\s*:\\s*)?(%s\\s)?\\s*(\\(|\\[|\\{)?%s(\\s+|\\)|\\]|\\}|\\|)\\s*%s\\s+%s\\s*%s$",
+            REX_DECKSEC_XMAGE, REX_CARD_COUNT, REX_SET_CODE, REX_CARD_NAME, REX_COLL_NUMBER, REX_FOIL_MTGGOLDFISH);
     public static final Pattern SET_CARD_COLLNO_PATTERN = Pattern.compile(REX_FULL_REQUEST_SET_CARD);
     // 5. (MTGGoldfish mostly) (Amount?, Card Name, <Collector Number>, Set)
     public static final String REX_FULL_REQUEST_CARD_COLLNO_SET = String.format(
-            "^(%s\\s)?\\s*%s\\s+(\\<%s\\>)\\s*(\\(|\\[|\\{)?%s(\\s+|\\)|\\]|\\}|\\|)\\s*%s$",
-            REX_CARD_COUNT, REX_CARD_NAME, REX_COLL_NUMBER, REX_SET_CODE, REX_FOIL_MTGGOLDFISH);
+            "^(%s\\s*:\\s*)?(%s\\s)?\\s*%s\\s+(\\<%s\\>)\\s*(\\(|\\[|\\{)?%s(\\s+|\\)|\\]|\\}|\\|)\\s*%s$",
+            REX_DECKSEC_XMAGE, REX_CARD_COUNT, REX_CARD_NAME, REX_COLL_NUMBER, REX_SET_CODE, REX_FOIL_MTGGOLDFISH);
     public static final Pattern CARD_COLLNO_SET_PATTERN = Pattern.compile(REX_FULL_REQUEST_CARD_COLLNO_SET);
     // 6. XMage format (Amount?, [Set:Collector Number] Card Name)
     public static final String REX_FULL_REQUEST_XMAGE = String.format(
-            "^(%s\\s)?\\s*(\\[)?%s:%s(\\])\\s+%s\\s*%s$",
-            REX_CARD_COUNT, REX_SET_CODE, REX_COLL_NUMBER, REX_CARD_NAME, REX_FOIL_MTGGOLDFISH);
+            "^(%s\\s*:\\s*)?(%s\\s)?\\s*(\\[)?%s:%s(\\])\\s+%s\\s*%s$",
+            REX_DECKSEC_XMAGE, REX_CARD_COUNT, REX_SET_CODE, REX_COLL_NUMBER, REX_CARD_NAME, REX_FOIL_MTGGOLDFISH);
     public static final Pattern SET_COLLNO_CARD_XMAGE_PATTERN = Pattern.compile(REX_FULL_REQUEST_XMAGE);
     // 7. Card-Only Request (Amount?)
     public static final String REX_CARDONLY = String.format(
-            "(%s\\s)?\\s*%s\\s*%s", REX_CARD_COUNT, REX_CARD_NAME, REX_FOIL_MTGGOLDFISH);
+            "(%s\\s*:\\s*)?(%s\\s)?\\s*%s\\s*%s", REX_DECKSEC_XMAGE, REX_CARD_COUNT, REX_CARD_NAME, REX_FOIL_MTGGOLDFISH);
     public static final Pattern CARD_ONLY_PATTERN = Pattern.compile(REX_CARDONLY);
 
     // CoreTypes (to recognise Tokens of type CardType
@@ -238,7 +247,7 @@ public class DeckRecognizer {
         cardTypesList.add("spell");
         cardTypesList.add("other spell");
         cardTypesList.add("planeswalker");
-        return cardTypesList.toArray(new CharSequence[cardTypesList.size()]);
+        return cardTypesList.toArray(new CharSequence[0]);
     }
 
     private final CardDb db;
@@ -253,7 +262,7 @@ public class DeckRecognizer {
         this.altDb = altDb;
     }
 
-    public Token recognizeLine(final String rawLine) {
+    public Token recognizeLine(final String rawLine, DeckSection referenceSection) {
         if (rawLine == null)
             return null;
         if (StringUtils.isBlank(rawLine.trim()))
@@ -275,14 +284,7 @@ public class DeckRecognizer {
         if (StringUtils.startsWith(line, ASTERISK))  // markdown lists (tappedout md export)
             line = line.substring(2);
 
-        // In some format, cards in the Sideboard have an SB: prefix.
-        // We won't support that as it is, due to how the recognition process works, so a section must be
-        // specified (e.g. Sideboard or Side) to allow that those cards will be imported in sideboard.
-        if (StringUtils.startsWith(line.trim(), "SB:"))
-            //refLine = StringUtils.replace(refLine, "SB:", "").trim();
-            return new Token(TokenType.COMMENT, 0, line);
-
-        Token result = recogniseCardToken(line);
+        Token result = recogniseCardToken(line, referenceSection);
         if (result == null)
             result = recogniseNonCardToken(line);
         return result != null ? result : StringUtils.startsWith(refLine, DOUBLE_SLASH) || StringUtils.startsWith(refLine, LINE_COMMENT_DELIMITER_OR_MD_HEADER) ?
@@ -290,7 +292,7 @@ public class DeckRecognizer {
     }
 
     public static String purgeAllLinks(String line){
-        String urlPattern = "(?<protocol>((https|ftp|file|http):))(?<sep>((//|\\\\)+))(?<url>([\\w\\d:#@%/;$~_?\\+-=\\\\\\.&]*))";
+        String urlPattern = "(?<protocol>((https|ftp|file|http):))(?<sep>((//|\\\\)+))(?<url>([\\w\\d:#@%/;$~_?+-=\\\\.&]*))";
         Pattern p = Pattern.compile(urlPattern, Pattern.CASE_INSENSITIVE);
         Matcher m = p.matcher(line);
 
@@ -302,7 +304,7 @@ public class DeckRecognizer {
         return line;
     }
 
-    public Token recogniseCardToken(final String text) {
+    public Token recogniseCardToken(final String text, final DeckSection referenceSection) {
         String line = text.trim();
         Token uknonwnCardToken = null;
         List<Matcher> cardMatchers = getRegExMatchers(line);
@@ -319,6 +321,7 @@ public class DeckRecognizer {
             String setCode = getRexGroup(matcher, REGRP_SET);
             String collNo = getRexGroup(matcher, REGRP_COLLNR);
             String foilGr = getRexGroup(matcher, REGRP_FOIL_GFISH);
+            String deckSec = getRexGroup(matcher, REGRP_DECK_SEC_XMAGE_STYLE);
             if (foilGr != null)
                 cr.isFoil = true;
             int cardCount = ccount != null ? Integer.parseInt(ccount) : 1;
@@ -330,7 +333,7 @@ public class DeckRecognizer {
             } catch (NumberFormatException ex) {
                 artIndex = IPaperCard.NO_ART_INDEX;
             }
-
+            DeckSection tokenSection = getTokenSection(deckSec, referenceSection);
             if (setCode != null) {
                 // Ok Now we're sure the cardName is correct. Now check for setCode
                 CardEdition edition = StaticData.instance().getEditions().get(setCode);
@@ -353,7 +356,7 @@ public class DeckRecognizer {
                     if (isNotCompliantWithReleaseDateRestrictions(edition))
                         return Token.InvalidCard(pc, cardCount);
 
-                    return Token.KnownCard(pc, cardCount);
+                    return Token.KnownCard(pc, cardCount, tokenSection);
                 }
                 // UNKNOWN card as in the Counterspell|FEM case
                 return Token.UnknownCard(cardName, setCode, cardCount);
@@ -375,10 +378,25 @@ public class DeckRecognizer {
                 CardEdition edition = StaticData.instance().getCardEdition(pc.getEdition());
                 if (isNotCompliantWithReleaseDateRestrictions(edition))
                     return Token.InvalidCard(pc, cardCount);
-                return Token.KnownCard(pc, cardCount);
+                return Token.KnownCard(pc, cardCount, tokenSection);
             }
         }
         return uknonwnCardToken;  // either null or unknown card
+    }
+
+    private DeckSection getTokenSection(String deckSec, DeckSection currentDeckSection){
+        if (deckSec == null)
+            return currentDeckSection == null ? DeckSection.Main : currentDeckSection;
+        switch (deckSec.toUpperCase().trim()){
+            case "MB":
+                return DeckSection.Main;
+            case "SB":
+                return DeckSection.Sideboard;
+            case "CM":
+                return DeckSection.Commander;
+            default:
+                return DeckSection.Main;
+        }
     }
 
     private boolean hasGameFormatConstraints() {
@@ -487,13 +505,15 @@ public class DeckRecognizer {
             String tokenText = nonCardTokenMatch(text);
             return Token.DeckSection(tokenText);
         }
-        if (isCardRarity(text)){
-            String tokenText = cardRarityTokenMatch(text);
-            return new Token(TokenType.CARD_RARITY, tokenText);
-        }
         if (isCardCMC(text)){
             String tokenText = cardCMCTokenMatch(text);
             return new Token(TokenType.CARD_CMC, tokenText);
+        }
+        if (isCardRarity(text)){
+            String tokenText = cardRarityTokenMatch(text);
+            if (tokenText != null && !tokenText.trim().equals(""))
+                return new Token(TokenType.CARD_RARITY, tokenText);
+            return null;
         }
         if (isCardType(text)){
             String tokenText = nonCardTokenMatch(text);
