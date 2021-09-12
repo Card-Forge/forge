@@ -123,7 +123,7 @@ public class VStatisticsImporter {
         pnlStats.setLayout(new MigLayout("insets 0, gap 0, ax center, wrap 3"));
 
         // Add labels to container
-        final String constraints = "w 35%!, h 35px!";
+        final String constraints = "w 35%!, h 30px!";
         pnlStats.add(lblCardCountHeader, "w 96%!, h 40px!, span 3 1, gap 2% 0 0 0");
 
         pnlStats.add(lblMulti, constraints);
