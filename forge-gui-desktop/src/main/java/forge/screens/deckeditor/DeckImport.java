@@ -24,15 +24,21 @@ import java.awt.event.WindowEvent;
 import java.util.*;
 import java.util.List;
 
-import javax.swing.BorderFactory;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.event.HyperlinkEvent;
+import javax.swing.event.HyperlinkListener;
 
+import forge.ImageCache;
 import forge.Singletons;
+import forge.StaticData;
 import forge.deck.*;
 import forge.deck.DeckRecognizer.TokenType;
 import forge.game.GameFormat;
 import forge.game.GameType;
+import forge.gui.CardPicturePanel;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.model.FModel;
@@ -41,7 +47,9 @@ import forge.screens.deckeditor.controllers.CStatisticsImporter;
 import forge.screens.deckeditor.views.VStatisticsImporter;
 import forge.toolbox.*;
 import forge.util.Localizer;
+import forge.util.TextUtil;
 import forge.view.FDialog;
+import net.miginfocom.swing.MigLayout;
 
 /**
   *
@@ -55,7 +63,7 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
 
     private final FTextArea txtInput = new FTextArea();
     private static final String STYLESHEET = "<style>"
-            + "body, h1, h2, h3, h4, h5, h6, table, tr, td {font-weight: normal; line-height: 1.6; "
+            + "body, h1, h2, h3, h4, h5, h6, table, tr, td, a {font-weight: normal; line-height: 1.6; "
             + " font-family: Arial; font-size: 10px;}"
             + " h3 {font-size: 13px; margin: 2px 0; padding: 0px 5px;}"
             + " h4 {font-size: 11px; margin: 2px 0; padding: 0px 5px; font-weight: bold;}"
@@ -64,9 +72,13 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
             + " code {font-size: 10px;}"
             + " p {margin: 2px; text-align: justify; padding: 2px 5px;}"
             + " div {margin: 0; text-align: justify; padding: 1px 0 1px 8px;}"
+            + " a:hover { color: #89DC9F; text-decoration: none !important;}"
+            + " a:link { color: #89DC9F; text-decoration: none !important;}"
+            + " a { color: #89DC9F; text-decoration: none !important;}"
+            + " a:active { color: #89DC9F; text-decoration: none !important;}"
             + " table {margin: 5px 0;}"
             // Card Matching Colours #4F6070
-            + " .knowncard   {color: #89DC9F;}"
+            + " .knowncard   {color: #89DC9F; !important}"
             + " .unknowncard {color: #E1E35F;}"
             + " .illegalcard {color: #FF977A;}"
             + " .invalidcard {color: #A9E5DD;}"
@@ -159,6 +171,12 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
     private final FHtmlViewer htmlOutput = new FHtmlViewer(DeckImport.HTML_WELCOME_TEXT);
     private final FScrollPane scrollInput = new FScrollPane(this.txtInput, false);
     private final FScrollPane scrollOutput = new FScrollPane(this.htmlOutput, false);
+    private final CardPicturePanel picturePreview = new CardPicturePanel();
+    private final FLabel cardPreviewTitleLabel = new FLabel.Builder()
+            .text(Localizer.getInstance().getMessage("lblCardPreview")).fontStyle(Font.BOLD).fontSize(11)
+            .tooltip(Localizer.getInstance().getMessage("lblCardPreview")).fontStyle(Font.BOLD).build();
+    private final FLabel cardPreviewLabel = new FLabel.Builder().text("").fontStyle(Font.BOLD).fontSize(11)
+            .tooltip("").fontStyle(Font.BOLD).build();
 
     private final FButton cmdCancel = new FButton(Localizer.getInstance().getMessage("lblCancel"));
 
@@ -210,6 +228,12 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         txtInput.setEditable(true);
 
         final FSkin.SkinColor foreColor = FSkin.getColor(FSkin.Colors.CLR_TEXT);
+
+        this.picturePreview.setOpaque(false);
+        this.picturePreview.setBorder(new EmptyBorder(2, 5, 2, 5));
+        this.picturePreview.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT).getColor());
+        this.picturePreview.setItem(ImageCache.getDefaultImage());
+
         this.scrollInput.setBorder(new FSkin.TitledSkinBorder(BorderFactory.createEtchedBorder(),
                 Localizer.getInstance().getMessage("lblCardListTitle"), foreColor));
         this.scrollInput.setViewportBorder(BorderFactory.createLoweredBevelBorder());
@@ -218,19 +242,28 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
                 Localizer.getInstance().getMessage("lblDecklistTitle"), foreColor));
         this.scrollOutput.setViewportBorder(BorderFactory.createLoweredBevelBorder());
 
-        this.add(this.scrollInput, "cell 0 0, w 40%, growy, pushy");
-        this.add(this.scrollOutput, "cell 1 0, w 60%, growx, growy, pushx, pushy");
-        this.add(VStatisticsImporter.instance().getMainPanel(),
-                "cell 2 0, w 40%, growx, growy, pushx, pushy");
+        FPanel statsPanel = new FPanel(new MigLayout("fill"));
+        statsPanel.add(VStatisticsImporter.instance().getMainPanel(), "cell 0 0, w 100%, growy, pushy");
+        statsPanel.setOpaque(false);
 
-        this.add(this.dateTimeCheck, "cell 0 1, w 50%, ax c");
-        this.add(monthDropdown, "cell 0 2, w 20%, ax left, split 2, pad 0 4 0 0");
-        this.add(yearDropdown, "cell 0 2, w 20%, ax left, split 2, pad 0 4 0 0");
+        FPanel cardPreview = new FPanel(new MigLayout("fill"));
+        cardPreview.add(this.cardPreviewTitleLabel, "cell 0 0, align left");
+        cardPreview.add(this.cardPreviewLabel, "cell 1 0, align left");
+        cardPreview.add(this.picturePreview, "cell 0 1, w 50%, h 70%, growy, pushy, ax c, span 2");
+
+        this.add(this.scrollInput, "cell 0 0, w 40%, growy, pushy, spany 2");
+        this.add(this.scrollOutput, "cell 1 0, w 60%, growy, pushy, spany 2");
+        this.add(statsPanel, "cell 2 0, w 50%, ax c, growy, pushy");
+        this.add(cardPreview, "cell 2 1, w 50%, h 65%, growy, pushy, ax c, spanx 2");
+
+        this.add(this.dateTimeCheck, "cell 0 2, w 50%, ax c");
+        this.add(monthDropdown, "cell 0 3, w 10%, ax left, split 2, pad 0 2 0 0");
+        this.add(yearDropdown, "cell 0 3, w 8%, ax left, split 2, pad 0 2 0 0");
 
         if (currentDeckIsNotEmpty)
-            this.add(this.createNewDeckCheckbox,"cell 2 1, ax left");
-        this.add(this.cmdAccept, "cell 2 2, w 175, align r, h 26");
-        this.add(this.cmdCancel, "cell 2 2, w 175, align r, h 26");
+            this.add(this.createNewDeckCheckbox,"cell 2 2, ax left");
+        this.add(this.cmdAccept, "cell 2 3, w 175, align l, h 26");
+        this.add(this.cmdCancel, "cell 2 3, w 175, align l, h 26");
 
         this.cmdCancel.addActionListener(new ActionListener() {
             @Override
@@ -294,6 +327,26 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
             this.createNewDeckCheckbox.setSelected(false);
             this.createNewDeckCheckbox.addActionListener(toggleNewDeck);
         }
+
+        this.htmlOutput.addHyperlinkListener(new HyperlinkListener() {
+            @Override
+            public void hyperlinkUpdate(HyperlinkEvent e) {
+                if(e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+                    String cardRef = e.getDescription();
+                    String[] parts = TextUtil.split(cardRef, '-');
+                    String cardName = parts[0];
+                    String setCode = parts[1];
+                    String collectorNumber = parts[2];
+                    PaperCard card = StaticData.instance().getCommonCards().getCard(cardName, setCode, collectorNumber);
+                    if (card != null){
+                        String label = String.format("%s (%s) %s", cardName, setCode, collectorNumber);
+                        picturePreview.setItem(card);
+                        picturePreview.setToolTipText(label);
+                        cardPreviewLabel.setText(label);
+                    }
+                }
+            }
+        });
     }
 
     /**
@@ -375,12 +428,13 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
 
         switch (token.getType()) {
             case LEGAL_CARD_REQUEST:
-                return String.format("<div class=\"knowncard\">%s x %s " +
-                                "<span class=\"editioncode\">(%s)</span> %s %s</div>",
-                        token.getNumber(), token.getCard().getName(),
-                        token.getCard().getEdition(),
-                        token.getCard().getCollectorNumber(),
-                        token.getCard().isFoil() ? "<i>(FOIL)</i>" : "");
+                PaperCard tokenCard = token.getCard();
+                return String.format("<div class=\"knowncard\"><a href=\"%s\">%s x %s " +
+                                "<span class=\"editioncode\">(%s)</span> %s</a>%s</div>",
+                        String.format("%s-%s-%s", tokenCard.getName(), tokenCard.getEdition(),
+                                tokenCard.getCollectorNumber()),
+                        token.getNumber(), tokenCard.getName(), tokenCard.getEdition(),
+                        tokenCard.getCollectorNumber(), tokenCard.isFoil() ? "<i>(FOIL)</i>" : "");
             case UNKNOWN_CARD_REQUEST:
                 return String.format("<div class=\"unknowncard\">%s x %s (%s)</div>",
                         token.getNumber(), token.getText(),
