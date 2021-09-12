@@ -1043,7 +1043,12 @@ public abstract class GameState {
             return;
         }
 
-        sa = c.getFirstSpellAbility();
+        if (!c.getName().equals(spellDef) && c.hasAlternateState() && spellDef.equals(c.getAlternateState().getName())) {
+            sa = c.getAlternateState().getFirstSpellAbility();
+        } else {
+            sa = c.getFirstSpellAbility();
+        }
+
         sa.setActivatingPlayer(activator);
 
         handleScriptedTargetingForSA(game, sa, tgtID);
