@@ -21,6 +21,7 @@ import java.util.Comparator;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 import forge.card.CardStateName;
 import forge.game.CardTraitBase;
@@ -31,6 +32,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.util.PredicateString;
 import forge.util.collect.FCollectionView;
 
 
@@ -109,6 +111,10 @@ public final class CardPredicates {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
+                if (Iterables.any(c.getHiddenExtrinsicKeywords(), PredicateString.contains(keyword))) {
+                    return true;
+                }
+
                 for (KeywordInterface k : c.getKeywords()) {
                     if (k.getOriginal().contains(keyword)) {
                         return true;

@@ -8,7 +8,6 @@ import forge.game.card.Card;
 import forge.game.card.CounterEnumType;
 import forge.game.cost.CostPayEnergy;
 import forge.game.keyword.Keyword;
-import forge.game.keyword.KeywordInterface;
 import forge.game.spellability.SpellAbility;
 
 public class CreatureEvaluator implements Function<Card, Integer> {
@@ -35,16 +34,15 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         }
         int power = getEffectivePower(c);
         final int toughness = getEffectiveToughness(c);
-        for (KeywordInterface kw : c.getKeywords()) {
-            String keyword = kw.getOriginal();
-            if (keyword.equals("Prevent all combat damage that would be dealt by CARDNAME.")
-                    || keyword.equals("Prevent all damage that would be dealt by CARDNAME.")
-                    || keyword.equals("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")
-                    || keyword.equals("Prevent all damage that would be dealt to and dealt by CARDNAME.")) {
-                power = 0;
-                break;
-            }
+        
+        // TODO replace with ReplacementEffect checks
+        if (c.hasKeyword("Prevent all combat damage that would be dealt by CARDNAME.")
+                || c.hasKeyword("Prevent all damage that would be dealt by CARDNAME.")
+                || c.hasKeyword("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")
+                || c.hasKeyword("Prevent all damage that would be dealt to and dealt by CARDNAME.")) {
+            power = 0;
         }
+
         if (considerPT) {
             value += addValue(power * 15, "power");
             value += addValue(toughness * 10, "toughness: " + toughness);
@@ -157,8 +155,7 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         }
         if (c.hasKeyword("CARDNAME can't block.")) {
             value -= subValue(10, "cant-block");
-        } else if (c.hasKeyword("CARDNAME attacks each turn if able.")
-                || c.hasKeyword("CARDNAME attacks each combat if able.")) {
+        } else if (c.hasKeyword("CARDNAME attacks each combat if able.")) {
             value -= subValue(10, "must-attack");
         } else if (c.hasStartOfKeyword("CARDNAME attacks specific player each combat if able")) {
             value -= subValue(10, "must-attack-player");

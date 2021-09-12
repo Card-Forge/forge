@@ -110,7 +110,17 @@ public class ComputerUtilCombat {
             return false;
         }
 
-        for (final KeywordInterface inst : attacker.getKeywords()) {
+        // TODO replace with Static Ability
+        for (final String keyword : attacker.getHiddenExtrinsicKeywords()) {
+            if (keyword.startsWith("CARDNAME attacks specific player each combat if able")) {
+                final String defined = keyword.split(":")[1];
+                final Player player = AbilityUtils.getDefinedPlayers(attacker, defined, null).get(0);
+                if (!defender.equals(player)) {
+                    return false;
+                }
+            }
+        }
+        for (final KeywordInterface inst : attacker.getKeywords(Keyword.UNDEFINED)) {
             final String keyword = inst.getOriginal();
             if (keyword.startsWith("CARDNAME attacks specific player each combat if able")) {
                 final String defined = keyword.split(":")[1];

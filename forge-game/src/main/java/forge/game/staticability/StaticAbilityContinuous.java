@@ -326,7 +326,7 @@ public final class StaticAbilityContinuous {
             if (params.containsKey("SharedKeywordsZone")) {
                 List<ZoneType> zones = ZoneType.listValueOf(params.get("SharedKeywordsZone"));
                 String[] restrictions = params.containsKey("SharedRestrictions") ? params.get("SharedRestrictions").split(",") : new String[] {"Card"};
-                addKeywords = CardFactoryUtil.sharedKeywords(addKeywords, restrictions, zones, hostCard);
+                addKeywords = CardFactoryUtil.sharedKeywords(addKeywords, restrictions, zones, hostCard, stAb);
             }
         }
 
@@ -708,9 +708,7 @@ public final class StaticAbilityContinuous {
 
             // add HIDDEN keywords
             if (!addHiddenKeywords.isEmpty()) {
-                for (final String k : addHiddenKeywords) {
-                    affectedCard.addHiddenExtrinsicKeyword(k);
-                }
+                affectedCard.addHiddenExtrinsicKeywords(hostCard.getTimestamp(), stAb.getId(), addHiddenKeywords);
             }
 
             // add SVars

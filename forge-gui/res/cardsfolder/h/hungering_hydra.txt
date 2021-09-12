@@ -2,7 +2,7 @@ Name:Hungering Hydra
 ManaCost:X G
 Types:Creature Hydra
 PT:0/0
-K:CantBeBlockedByAmount GT1
+S:Mode$ MinMaxBlocker | ValidCard$ Card.Self | Max$ 1 | Description$ CARDNAME can't be blocked by more than one creature.
 K:etbCounter:P1P1:X
 SVar:X:Count$xPaid
 T:Mode$ DamageDoneOnce | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME is dealt damage, put that many +1/+1 counters on CARDNAME.

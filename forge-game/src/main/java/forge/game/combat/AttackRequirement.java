@@ -52,18 +52,27 @@ public class AttackRequirement {
             nAttackAnything += attacker.getGoaded().size();
         }
 
+        // remove it when all of them are HIDDEN or static
         for (final KeywordInterface inst : attacker.getKeywords()) {
             final String keyword = inst.getOriginal();
             if (keyword.startsWith("CARDNAME attacks specific player each combat if able")) {
                 final String defined = keyword.split(":")[1];
                 final GameEntity mustAttack2 = AbilityUtils.getDefinedPlayers(attacker, defined, null).get(0);
                 defenderSpecific.add(mustAttack2);
-            } else if (keyword.equals("CARDNAME attacks each combat if able.") || 
-                    (keyword.equals("CARDNAME attacks each turn if able.")
-                            && !attacker.getDamageHistory().getCreatureAttackedThisTurn())) {
+            } else if (keyword.equals("CARDNAME attacks each combat if able.")) {
                 nAttackAnything++;
             }
         }
+        for (final String keyword : attacker.getHiddenExtrinsicKeywords()) {
+            if (keyword.startsWith("CARDNAME attacks specific player each combat if able")) {
+                final String defined = keyword.split(":")[1];
+                final GameEntity mustAttack2 = AbilityUtils.getDefinedPlayers(attacker, defined, null).get(0);
+                defenderSpecific.add(mustAttack2);
+            } else if (keyword.equals("CARDNAME attacks each combat if able.")) {
+                nAttackAnything++;
+            }
+        }
+        
         final GameEntity mustAttack3 = attacker.getMustAttackEntity();
         if (mustAttack3 != null) {
             defenderSpecific.add(mustAttack3);
@@ -149,7 +158,7 @@ public class AttackRequirement {
         int violations = 0;
 
         // first. check to see if "must attack X or Y with at least one creature" requirements are satisfied
-        List<GameEntity> toRemoveFromDefSpecific = Lists.newArrayList();
+        //List<GameEntity> toRemoveFromDefSpecific = Lists.newArrayList();
         if (!defenderOrPWSpecific.isEmpty()) {
             for (GameEntity def : defenderOrPWSpecific.keySet()) {
                 if (defenderSpecificAlternatives.containsKey(def)) {

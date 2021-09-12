@@ -23,8 +23,6 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
     private Keyword keyword;
     private String original;
 
-    private boolean hidden;
-
     private List<Trigger> triggers = Lists.newArrayList();
     private List<ReplacementEffect> replacements = Lists.newArrayList();
     private List<SpellAbility> abilities = Lists.newArrayList();
@@ -203,21 +201,6 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
      */
     public final void addStaticAbility(final StaticAbility st) {
         staticAbilities.add(st);
-    }
-
-    /* (non-Javadoc)
-     * @see forge.game.keyword.KeywordInterface#getHidden()
-     */
-    @Override
-    public boolean getHidden() {
-        return hidden;
-    }
-    /* (non-Javadoc)
-     * @see forge.game.keyword.KeywordInterface#setHidden(boolean)
-     */
-    @Override
-    public void setHidden(boolean val) {
-        hidden = val;        
     }
 
     /*

@@ -154,7 +154,7 @@ public class AnimateAllEffect extends AnimateEffectBase {
 
                 @Override
                 public void run() {
-                    doUnanimate(c, sa, hiddenKeywords, timestamp);
+                    doUnanimate(c, timestamp);
 
                     game.fireEvent(new GameEventCardStatsChanged(c));
                 }

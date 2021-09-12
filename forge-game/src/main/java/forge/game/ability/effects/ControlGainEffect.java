@@ -128,10 +128,11 @@ public class ControlGainEffect extends SpellAbilityEffect {
             }
 
             final List<String> kws = Lists.newArrayList();
+            final List<String> hiddenKws = Lists.newArrayList();
             if (null != keywords) {
                 for (final String kw : keywords) {
                     if (kw.startsWith("HIDDEN")) {
-                        tgtC.addHiddenExtrinsicKeyword(kw);
+                        hiddenKws.add(kw.substring(7));
                     } else {
                         kws.add(kw);
                     }
@@ -141,6 +142,9 @@ public class ControlGainEffect extends SpellAbilityEffect {
             if (!kws.isEmpty()) {
                 tgtC.addChangedCardKeywords(kws, Lists.newArrayList(), false, false, tStamp, 0);
                 game.fireEvent(new GameEventCardStatsChanged(tgtC));
+            }
+            if (hiddenKws.isEmpty()) {
+                tgtC.addHiddenExtrinsicKeywords(tStamp, 0, hiddenKws);
             }
 
             if (remember && !source.isRemembered(tgtC)) {
@@ -191,14 +195,8 @@ public class ControlGainEffect extends SpellAbilityEffect {
 
                     @Override
                     public void run() {
-                        if (keywords.size() > 0) {
-                            for (String kw : keywords) {
-                                if (kw.startsWith("HIDDEN")) {
-                                    tgtC.removeHiddenExtrinsicKeyword(kw);
-                                }
-                            }
-                            tgtC.removeChangedCardKeywords(tStamp, 0);
-                        }
+                        tgtC.removeHiddenExtrinsicKeywords(tStamp, 0);
+                        tgtC.removeChangedCardKeywords(tStamp, 0);
                     }
                 };
                 game.getEndOfTurn().addUntil(untilKeywordEOT);

@@ -3,6 +3,6 @@ ManaCost:1 B/R B/R
 Types:Creature Human Warrior
 PT:2/2
 K:Menace
-S:Mode$ Continuous | Affected$ Creature.YouCtrl+withMenace | AddHiddenKeyword$ CantBeBlockedByAmount LT3 | Description$ Each creature you control with menace can't be blocked except by three or more creatures.
+S:Mode$ MinMaxBlocker | ValidCard$ Creature.YouCtrl+withMenace | Min$ 3 | Description$ Each creature you control with menace can't be blocked except by three or more creatures.
 SVar:PlayMain1:TRUE
 Oracle:Menace\nEach creature you control with menace can't be blocked except by three or more creatures.

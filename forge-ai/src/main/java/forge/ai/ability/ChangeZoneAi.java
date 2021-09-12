@@ -16,7 +16,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import forge.ai.AiAttackController;
-import forge.ai.AiBlockController;
 import forge.ai.AiCardMemory;
 import forge.ai.AiController;
 import forge.ai.AiProps;

@@ -2,7 +2,7 @@ Name:Tahngarth, First Mate
 ManaCost:2 R G
 Types:Legendary Creature Minotaur Warrior
 PT:5/5
-K:CantBeBlockedByAmount GT1
+S:Mode$ MinMaxBlocker | ValidCard$ Card.Self | Max$ 1 | Description$ CARDNAME can't be blocked by more than one creature.
 T:Mode$ AttackersDeclared | AttackingPlayer$ Player.Opponent | Execute$ TrigGainControl | TriggerZones$ Battlefield | OptionalDecider$ You | IsPresent$ Card.Self+tapped | TriggerDescription$ Whenever an opponent attacks with one or more creatures, if CARDNAME is tapped, you may have that opponent gain control of CARDNAME until end of combat. If you do, choose a player or planeswalker that opponent is attacking. CARDNAME is attacking that player or planeswalker.
 SVar:TrigGainControl:DB$ GainControl | Defined$ Self | NewController$ TriggeredAttackingPlayer | LoseControl$ EndOfCombat | Attacking$ Player.Defending | Chooser$ You | ChoosePlayerOrPlaneswalker$ True
 AI:RemoveDeck:All

@@ -31,7 +31,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
         
         for (String kw : keywords) {
             if (kw.startsWith("HIDDEN")) {
-                hiddenkws.add(kw);
+                hiddenkws.add(kw.substring(7));
             } else {
                 kws.add(kw);
             }
@@ -57,13 +57,15 @@ public class PumpAllEffect extends SpellAbilityEffect {
                 redrawPT = true;
             }
 
-            tgtC.addChangedCardKeywords(kws, null, false, false, timestamp, 0);
+            if (!kws.isEmpty()) {
+                tgtC.addChangedCardKeywords(kws, null, false, false, timestamp, 0);
+            }
             if (redrawPT) {
                 tgtC.updatePowerToughnessForView();
             }
 
-            for (String kw : hiddenkws) {
-                tgtC.addHiddenExtrinsicKeyword(kw);
+            if (!hiddenkws.isEmpty()) {
+                tgtC.addHiddenExtrinsicKeywords(timestamp, 0, hiddenkws);
             }
 
             if (sa.hasParam("RememberAllPumped")) {
@@ -79,10 +81,8 @@ public class PumpAllEffect extends SpellAbilityEffect {
                     public void run() {
                         tgtC.removePTBoost(timestamp, 0);
                         tgtC.removeChangedCardKeywords(timestamp, 0);
+                        tgtC.removeHiddenExtrinsicKeywords(timestamp, 0);
 
-                        for (String kw : hiddenkws) {
-                            tgtC.removeHiddenExtrinsicKeyword(kw);
-                        }
                         tgtC.updatePowerToughnessForView();
 
                         game.fireEvent(new GameEventCardStatsChanged(tgtC));
@@ -156,7 +156,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
             String[] restrictions = new String[] {"Card"};
             if (sa.hasParam("SharedRestrictions"))
                 restrictions = sa.getParam("SharedRestrictions").split(",");
-            keywords = CardFactoryUtil.sharedKeywords(keywords, restrictions, zones, sa.getHostCard());
+            keywords = CardFactoryUtil.sharedKeywords(keywords, restrictions, zones, sa.getHostCard(), sa);
         }
         applyPumpAll(sa, list, a, d, keywords, affectedZones);
 
