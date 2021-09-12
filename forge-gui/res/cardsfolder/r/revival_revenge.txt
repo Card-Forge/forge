@@ -1,8 +1,9 @@
 Name:Revival
 ManaCost:WB WB
-AlternateMode: Split
+AlternateMode:Split
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ WB WB | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature in your graveyard | ValidTgts$ Creature.YouOwn+cmcLE3 | SpellDescription$ Return target creature card with mana value 3 or less from your graveyard to the battlefield.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Select target creature card in your graveyard with mana value 3 or less | ValidTgts$ Creature.YouOwn+cmcLE3 | SpellDescription$ Return target creature card with mana value 3 or less from your graveyard to the battlefield.
+DeckHas:Ability$Graveyard
 Oracle:Return target creature card with mana value 3 or less from your graveyard to the battlefield.
 
 ALTERNATE
@@ -10,8 +11,8 @@ ALTERNATE
 Name:Revenge
 ManaCost:4 W B
 Types:Sorcery
-A:SP$ GainLife | Cost$ 4 W B | LifeAmount$ X | SubAbility$ DBLoseHalf | SpellDescription$ Double your life total. Target opponent loses half their life, rounded up.
+A:SP$ SetLife | LifeAmount$ X | SubAbility$ DBLoseHalf | SpellDescription$ Double your life total. Target opponent loses half their life, rounded up.
 SVar:DBLoseHalf:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ Y
-SVar:X:Count$YourLifeTotal
+SVar:X:Count$YourLifeTotal/Twice
 SVar:Y:Count$TargetedLifeTotal/HalfUp
 Oracle:Double your life total. Target opponent loses half their life, rounded up.
