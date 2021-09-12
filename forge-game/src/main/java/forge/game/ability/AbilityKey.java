@@ -155,7 +155,6 @@ public enum AbilityKey {
             }
         }
         return null;
-
     }
 
     public static <V> EnumMap<AbilityKey, V> newMap() {

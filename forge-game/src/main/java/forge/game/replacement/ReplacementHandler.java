@@ -81,7 +81,6 @@ public class ReplacementHandler {
     //private final List<ReplacementEffect> tmpEffects = new ArrayList<ReplacementEffect>();
 
     public List<ReplacementEffect> getReplacementList(final ReplacementType event, final Map<AbilityKey, Object> runParams, final ReplacementLayer layer) {
-
         final CardCollection preList = new CardCollection();
         boolean checkAgain = false;
         Card affectedLKI = null;

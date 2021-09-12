@@ -720,8 +720,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                 final CardView view = CardView.get(card);
                 return player.getController().confirmPayment(cost, Localizer.getInstance().getMessage("lblReturnCardToHandConfirm", CardTranslation.getTranslatedName(view.getName())), ability) ? PaymentDecision.card(card) : null;
             }
-        }
-        else {
+        } else {
             final CardCollectionView validCards = CardLists.getValidCards(ability.getActivatingPlayer().getCardsIn(ZoneType.Battlefield),
                     cost.getType().split(";"), player, source, ability);
 

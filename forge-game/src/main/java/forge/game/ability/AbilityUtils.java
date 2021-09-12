@@ -451,7 +451,6 @@ public class AbilityUtils {
     public static int calculateAmount(final Card card, String amount, final CardTraitBase ability) {
         return calculateAmount(card, amount, ability, false);
     }
-
     public static int calculateAmount(final Card card, String amount, final CardTraitBase ability, boolean maxto) {
         // return empty strings and constants
         if (StringUtils.isBlank(amount)) { return 0; }

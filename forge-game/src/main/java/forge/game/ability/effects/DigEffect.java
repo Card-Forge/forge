@@ -45,8 +45,7 @@ public class DigEffect extends SpellAbilityEffect {
 
         if (tgtPlayers.contains(host.getController())) {
             sb.append("their ");
-        }
-        else {
+        } else {
             for (final Player p : tgtPlayers) {
                 sb.append(Lang.getInstance().getPossesive(p.getName())).append(" ");
             }
@@ -323,8 +322,7 @@ public class DigEffect extends SpellAbilityEffect {
                                 libraryPosition = zone.size();
                             }
                             c = game.getAction().moveTo(zone, c, libraryPosition, sa);
-                        }
-                        else {
+                        } else {
                             c = game.getAction().moveTo(zone, c, sa);
                             if (destZone1.equals(ZoneType.Battlefield)) {
                                 if (sa.hasParam("Tapped")) {
@@ -383,8 +381,7 @@ public class DigEffect extends SpellAbilityEffect {
                             Card m;
                             if (destZone2 == ZoneType.Library) {
                                 m = game.getAction().moveToLibrary(c, libraryPosition2, sa);
-                            }
-                            else {
+                            } else {
                                 m = game.getAction().moveToVariantDeck(c, destZone2, libraryPosition2, sa);
                             }
                             if (m != null && !origin.equals(m.getZone().getZoneType())) {
@@ -394,8 +391,7 @@ public class DigEffect extends SpellAbilityEffect {
                                 host.addRemembered(m);
                             }
                         }
-                    }
-                    else {
+                    } else {
                         // just move them randomly
                         for (int i = 0; i < rest.size(); i++) {
                             Card c = rest.get(i);
