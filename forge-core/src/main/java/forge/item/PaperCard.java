@@ -136,8 +136,11 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
     }
 
     public boolean hasImage() {
-        if (hasImage == null) { //cache value since it's not free to calculate
-            hasImage = ImageKeys.hasImage(this);
+        return hasImage(false);
+    }
+    public boolean hasImage(boolean update) {
+        if (hasImage == null || update) { //cache value since it's not free to calculate
+            hasImage = ImageKeys.hasImage(this, update);
         }
         return hasImage;
     }

@@ -113,8 +113,6 @@ public class ImageCache {
     }
 
     public static void clear() {
-        cache.invalidateAll();
-        cache.cleanUp();
         missingIconKeys.clear();
     }
 
@@ -158,17 +156,26 @@ public class ImageCache {
 
         final String prefix = imageKey.substring(0, 2);
 
+        PaperCard paperCard = null;
         if (prefix.equals(ImageKeys.CARD_PREFIX)) {
-            PaperCard paperCard = ImageUtil.getPaperCardFromImageKey(imageKey);
+            try {
+                paperCard = ImageUtil.getPaperCardFromImageKey(imageKey);
+            } catch (Exception e) {
+                return false;
+            }
             if (paperCard == null)
                 return false;
 
-            final boolean backFace = imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX);
-            final String cardfilename = backFace ? paperCard.getCardAltImageKey() : paperCard.getCardImageKey();
-            if (!new File(ForgeConstants.CACHE_CARD_PICS_DIR + "/" + cardfilename + ".jpg").exists())
-                if (!new File(ForgeConstants.CACHE_CARD_PICS_DIR + "/" + cardfilename + ".png").exists())
-                    if (!new File(ForgeConstants.CACHE_CARD_PICS_DIR + "/" + TextUtil.fastReplace(cardfilename,".full", ".fullborder") + ".jpg").exists())
-                        return false;
+            if (!FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER)) {
+                return paperCard.hasImage();
+            } else {
+                final boolean backFace = imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX);
+                final String cardfilename = backFace ? paperCard.getCardAltImageKey() : paperCard.getCardImageKey();
+                if (!new File(ForgeConstants.CACHE_CARD_PICS_DIR + "/" + cardfilename + ".jpg").exists())
+                    if (!new File(ForgeConstants.CACHE_CARD_PICS_DIR + "/" + cardfilename + ".png").exists())
+                        if (!new File(ForgeConstants.CACHE_CARD_PICS_DIR + "/" + TextUtil.fastReplace(cardfilename,".full", ".fullborder") + ".jpg").exists())
+                            return false;
+            }
         } else if (prefix.equals(ImageKeys.TOKEN_PREFIX)) {
             final String tokenfilename = imageKey.substring(2) + ".jpg";
 
@@ -235,12 +242,11 @@ public class ImageCache {
         // a default "not available" image and add to cache for given key.
         if (image == null) {
             if (useDefaultIfNotFound) {
-                image = defaultImage;
+                image = useOtherCache ? defaultImage : null;
                 if (useOtherCache)
                     otherCache.put(imageKey, defaultImage);
-                else
-                    cache.put(imageKey, defaultImage);
-                if (imageBorder.get(image.toString()) == null)
+
+                if (image != null && imageBorder.get(image.toString()) == null)
                     imageBorder.put(image.toString(), Pair.of(Color.valueOf("#171717").toString(), false)); //black border
             }
         }

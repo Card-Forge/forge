@@ -51,7 +51,6 @@ import forge.gui.card.CardDetailUtil;
 import forge.gui.card.CardDetailUtil.DetailColors;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
-import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgeConstants.CounterDisplayType;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
