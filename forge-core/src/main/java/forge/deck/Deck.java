@@ -366,8 +366,8 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         String setCode = alternativeCardPrint.getEdition();
         boolean isFoil = alternativeCardPrint.isFoil();
         int cardsPerArtIndex = totalNrToAdd / nrOfAvailableArts;
+        int restOfCardsToAdd = cardsPerArtIndex > 0 ? totalNrToAdd % nrOfAvailableArts : 0;
         cardsPerArtIndex = Math.max(1, cardsPerArtIndex);  // make sure is never zero
-        int restOfCardsToAdd = totalNrToAdd % nrOfAvailableArts;
         int cardsAdded = 0;
         PaperCard alternativeCardArt = null;
         for (int artIndex = 1; artIndex <= nrOfAvailableArts; artIndex++){
