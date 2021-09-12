@@ -210,7 +210,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
 
     @Test void testMatchDeckSectionNames(){
         String[] dckSections = new String[] {"Main", "main", "Mainboard",
-                "Sideboard", "Side", "Schemes", "Avatar", "avatar", "Commander", "Conspiracy", "card"};
+                "Sideboard", "Side", "Schemes", "Avatar", "avatar", "Commander", "Conspiracy", "card", "Planes"};
         for (String section : dckSections)
             assertTrue(DeckRecognizer.isDeckSectionName(section), "Unrecognised Deck Section: " + section);
 
@@ -380,6 +380,12 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertNotNull(t);
         assertEquals(t.getType(), TokenType.MANA_COLOUR);
         assertEquals(t.getText(), "Colorless");
+        assertEquals(t.getNumber(), 0);
+
+        t = recognizer.recogniseNonCardToken("//Planes");
+        assertNotNull(t);
+        assertEquals(t.getType(), TokenType.DECK_SECTION_NAME);
+        assertEquals(t.getText(), "Planes");
         assertEquals(t.getNumber(), 0);
     }
 

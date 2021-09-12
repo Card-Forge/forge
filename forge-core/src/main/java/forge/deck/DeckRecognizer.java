@@ -100,6 +100,8 @@ public class DeckRecognizer {
                 return new Token(TokenType.DECK_SECTION_NAME, DeckSection.Schemes.name());
             if (sectionName.equals("conspiracy"))
                 return new Token(TokenType.DECK_SECTION_NAME, DeckSection.Conspiracy.name());
+            if (sectionName.equals("planes"))
+                return new Token(TokenType.DECK_SECTION_NAME, DeckSection.Planes.name());
             return null;
         }
 
@@ -135,6 +137,12 @@ public class DeckRecognizer {
 
         public final int getNumber() {
             return this.number;
+        }
+
+        public boolean isCardToken() {
+            return (this.type == TokenType.LEGAL_CARD_REQUEST ||
+                    this.type == TokenType.ILLEGAL_CARD_REQUEST ||
+                    this.type == TokenType.INVALID_CARD_REQUEST );
         }
     }
 
