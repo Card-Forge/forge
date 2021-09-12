@@ -849,7 +849,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             this.validChoices = validCards;
             counterType = cType;
 
-            setMessage(Localizer.getInstance().getMessage("lblRemoveNTargetCounterFromCardPayCostConfirm", "%d", counterType == null ? "any" : counterType.getName(), costPart.getDescriptiveType()));
+            setMessage(Localizer.getInstance().getMessage("lblRemoveNTargetCounterFromCardPayCostConfirm", "%d", counterType == null ? "any" : counterType.getName().toLowerCase(), costPart.getDescriptiveType()));
         }
 
         @Override
@@ -967,7 +967,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                 if (maxCounters < cntRemoved) {
                     return null;
                 }
-                if (!player.getController().confirmPayment(cost, Localizer.getInstance().getMessage("lblRemoveNTargetCounterFromCardPayCostConfirm", String.valueOf(amount), cost.counter.getName(), CardTranslation.getTranslatedName(source.getName())), ability)) {
+                if (!player.getController().confirmPayment(cost, Localizer.getInstance().getMessage("lblRemoveNTargetCounterFromCardPayCostConfirm", amount, cost.counter.getName().toLowerCase(), CardTranslation.getTranslatedName(source.getName())), ability)) {
                     return null;
                 }
             }
