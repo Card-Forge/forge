@@ -67,6 +67,13 @@ public final class CardPicturePanel extends JPanel implements ImageFetcher.Callb
         setImage(item, true);
     }
 
+    public void setItem(final BufferedImage image) {
+        this.currentImage = image;
+        this.panel.setImage(image, getAutoSizeImageMode());
+        this.displayed = null;
+        this.mayView = false;
+    }
+
     public void setCard(final CardStateView c) {
         setCard(c, true);
     }
@@ -138,5 +145,9 @@ public final class CardPicturePanel extends JPanel implements ImageFetcher.Callb
 
     private static boolean isUIScaleLarger() {
         return FModel.getPreferences().getPrefBoolean(FPref.UI_SCALE_LARGER);
+    }
+
+    public void showAsDisabled(){
+        this.panel.setAlpha(0.5f);
     }
 }
