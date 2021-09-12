@@ -126,6 +126,11 @@ public abstract class ImageFetcher {
         if (destFile.exists()) {
             // TODO: Figure out why this codepath gets reached.
             //  Ideally, fetchImage() wouldn't be called if we already have the image.
+            if (prefix.equals(ImageKeys.CARD_PREFIX)) {
+                PaperCard paperCard = ImageUtil.getPaperCardFromImageKey(imageKey);
+                if (paperCard != null)
+                    paperCard.hasImage(true);
+            }
             return;
         }
 

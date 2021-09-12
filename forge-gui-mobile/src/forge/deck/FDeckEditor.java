@@ -27,7 +27,6 @@ import forge.assets.FSkin;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FTextureRegionImage;
-import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.deck.io.DeckPreferences;
 import forge.gamemodes.limited.BoosterDraft;
