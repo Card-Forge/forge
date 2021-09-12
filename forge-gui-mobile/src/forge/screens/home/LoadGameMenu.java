@@ -105,11 +105,8 @@ public class LoadGameMenu extends FPopupMenu {
     protected void buildMenu() {
         FScreen currentScreen = Forge.getCurrentScreen();
         for (LoadGameScreen lgs : LoadGameScreen.values()) {
-            //fixes the overlapping menu items when the user suddenly switch from load game screen index to another screen
-            if (HomeScreen.instance.getActiveButtonIndex() == 1) {
-                addItem(lgs.item);
-                lgs.item.setSelected(currentScreen == lgs.screen);
-            }
+            addItem(lgs.item);
+            lgs.item.setSelected(currentScreen == lgs.screen);
         }
     }
 }

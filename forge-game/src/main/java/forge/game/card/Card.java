@@ -2531,7 +2531,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         sbx.append(" (").append(inst.getReminderText()).append(")");
                         sbBefore.append(sbx).append("\r\n");
                     }
-                }else if (keyword.startsWith("AlternateAdditionalCost")) {
+                } else if (keyword.startsWith("AlternateAdditionalCost")) {
                     final String[] k = keyword.split(":");
                     final Cost cost1 = new Cost(k[1], false);
                     final Cost cost2 = new Cost(k[2], false);

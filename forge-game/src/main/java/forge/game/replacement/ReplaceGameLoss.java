@@ -12,7 +12,7 @@ import forge.game.card.Card;
 public class ReplaceGameLoss extends ReplacementEffect {
 
     /**
-     * Instantiates a new replace gain life.
+     * Instantiates a new replace game loss.
      *
      * @param map the map
      * @param host the host

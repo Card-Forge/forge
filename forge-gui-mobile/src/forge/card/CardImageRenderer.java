@@ -120,7 +120,7 @@ public class CardImageRenderer {
         } else {
             borderColors = CardDetailUtil.getBorderColors(state, canShow);
         }
-        Color[] colors = useCardBGTexture ? drawCardBackgroundTexture(state, g, borderColors, x, y, w, h) : fillColorBackground(g, borderColors, x, y, w, h);
+        Color[] colors = useCardBGTexture && Forge.allowCardBG ? drawCardBackgroundTexture(state, g, borderColors, x, y, w, h) : fillColorBackground(g, borderColors, x, y, w, h);
 
         float artInset = blackBorderThickness * 0.5f;
         float outerBorderThickness = 2 * blackBorderThickness - artInset;
@@ -815,6 +815,8 @@ public class CardImageRenderer {
     }
     public static Color[] drawCardBackgroundTexture(CardStateView state, Graphics g, List<DetailColors> backColors, float x, float y, float w, float h) {
         boolean isHybrid = state.getManaCost().hasHybrid();
+        boolean isPW = state.isPlaneswalker();
+        boolean isNyx = state.isNyx();
         Color[] colors = new Color[backColors.size()];
         for (int i = 0; i < colors.length; i++) {
             DetailColors dc = backColors.get(i);
@@ -825,58 +827,77 @@ public class CardImageRenderer {
                 if (backColors.get(0) == DetailColors.FACE_DOWN) {
                     g.drawImage(FSkinImage.CARDBG_C, x, y, w,h);
                 } else if (backColors.get(0) == DetailColors.LAND) {
-                    g.drawImage(FSkinImage.CARDBG_L, x, y, w,h);
+                    g.drawImage(isPW ? FSkinImage.PWBG_C : FSkinImage.CARDBG_L, x, y, w,h);
                 }else if (backColors.get(0) == DetailColors.MULTICOLOR) {
-                    g.drawImage(FSkinImage.CARDBG_M, x, y, w,h);
+                    g.drawImage(isPW ? FSkinImage.PWBG_M : FSkinImage.CARDBG_M, x, y, w,h);
+                    if (isNyx)
+                        g.drawImage(FSkinImage.NYX_M, x, y, w, (h/2)+(h/5));
                 } else if (backColors.get(0) == DetailColors.COLORLESS) {
-                    if (state.isVehicle())
+                    if (isPW)
+                        g.drawImage(FSkinImage.PWBG_C, x, y, w,h);
+                    else if (state.isVehicle())
                         g.drawImage(FSkinImage.CARDBG_V, x, y, w,h);
                     else if (state.isArtifact())
                         g.drawImage(FSkinImage.CARDBG_A, x, y, w,h);
                     else
                         g.drawImage(FSkinImage.CARDBG_C, x, y, w,h);
+                    //todo add NYX for colorless?
                 } else if (backColors.get(0) == DetailColors.GREEN) {
-                    g.drawImage(FSkinImage.CARDBG_G, x, y, w,h);
+                    g.drawImage(isPW ? FSkinImage.PWBG_G : FSkinImage.CARDBG_G, x, y, w,h);
+                    if (isNyx)
+                        g.drawImage(FSkinImage.NYX_G, x, y, w, (h/2)+(h/5));
                 } else if (backColors.get(0) == DetailColors.RED) {
-                    g.drawImage(FSkinImage.CARDBG_R, x, y, w,h);
+                    g.drawImage(isPW ? FSkinImage.PWBG_R : FSkinImage.CARDBG_R, x, y, w,h);
+                    if (isNyx)
+                        g.drawImage(FSkinImage.NYX_R, x, y, w, (h/2)+(h/5));
                 } else if (backColors.get(0) == DetailColors.BLACK) {
-                    g.drawImage(FSkinImage.CARDBG_B, x, y, w,h);
+                    g.drawImage(isPW ? FSkinImage.PWBG_B : FSkinImage.CARDBG_B, x, y, w,h);
+                    if (isNyx)
+                        g.drawImage(FSkinImage.NYX_B, x, y, w, (h/2)+(h/5));
                 } else if (backColors.get(0) == DetailColors.BLUE) {
-                    g.drawImage(FSkinImage.CARDBG_U, x, y, w,h);
+                    g.drawImage(isPW ? FSkinImage.PWBG_U : FSkinImage.CARDBG_U, x, y, w,h);
+                    if (isNyx)
+                        g.drawImage(FSkinImage.NYX_U, x, y, w, (h/2)+(h/5));
                 } else if (backColors.get(0) == DetailColors.WHITE) {
-                    g.drawImage(FSkinImage.CARDBG_W, x, y, w,h);
+                    g.drawImage(isPW ? FSkinImage.PWBG_W : FSkinImage.CARDBG_W, x, y, w,h);
+                    if (isNyx)
+                        g.drawImage(FSkinImage.NYX_W, x, y, w, (h/2)+(h/5));
                 }
                 break;
             case 2:
                 if (!isHybrid) {
-                    g.drawImage(FSkinImage.CARDBG_M, x, y, w, h);
+                    g.drawImage(isPW ? FSkinImage.PWBG_M : FSkinImage.CARDBG_M, x, y, w, h);
                 } else if (backColors.contains(DetailColors.WHITE) && backColors.contains(DetailColors.BLUE)) {
-                    g.drawImage(FSkinImage.CARDBG_WU, x, y, w, h);
+                    g.drawImage(isPW ? FSkinImage.PWBG_WU : FSkinImage.CARDBG_WU, x, y, w, h);
                 } else if (backColors.contains(DetailColors.WHITE) && backColors.contains(DetailColors.BLACK)) {
-                    g.drawImage(FSkinImage.CARDBG_WB, x, y, w, h);
+                    g.drawImage(isPW ? FSkinImage.PWBG_WB : FSkinImage.CARDBG_WB, x, y, w, h);
                 } else if (backColors.contains(DetailColors.WHITE) && backColors.contains(DetailColors.RED)) {
-                    g.drawImage(FSkinImage.CARDBG_WR, x, y, w, h);
+                    g.drawImage(isPW ? FSkinImage.PWBG_WR : FSkinImage.CARDBG_WR, x, y, w, h);
                 } else if (backColors.contains(DetailColors.WHITE) && backColors.contains(DetailColors.GREEN)) {
-                    g.drawImage(FSkinImage.CARDBG_WG, x, y, w, h);
+                    g.drawImage(isPW ? FSkinImage.PWBG_WG : FSkinImage.CARDBG_WG, x, y, w, h);
                 } else if (backColors.contains(DetailColors.BLUE) && backColors.contains(DetailColors.BLACK)) {
-                    g.drawImage(FSkinImage.CARDBG_UB, x, y, w, h);
+                    g.drawImage(isPW ? FSkinImage.PWBG_UB : FSkinImage.CARDBG_UB, x, y, w, h);
                 } else if (backColors.contains(DetailColors.BLUE) && backColors.contains(DetailColors.RED)) {
-                    g.drawImage(FSkinImage.CARDBG_UR, x, y, w, h);
+                    g.drawImage(isPW ? FSkinImage.PWBG_UR : FSkinImage.CARDBG_UR, x, y, w, h);
                 } else if (backColors.contains(DetailColors.BLUE) && backColors.contains(DetailColors.GREEN)) {
-                    g.drawImage(FSkinImage.CARDBG_UG, x, y, w, h);
+                    g.drawImage(isPW ? FSkinImage.PWBG_UG : FSkinImage.CARDBG_UG, x, y, w, h);
                 } else if (backColors.contains(DetailColors.BLACK) && backColors.contains(DetailColors.RED)) {
-                    g.drawImage(FSkinImage.CARDBG_BR, x, y, w, h);
+                    g.drawImage(isPW ? FSkinImage.PWBG_BR : FSkinImage.CARDBG_BR, x, y, w, h);
                 } else if (backColors.contains(DetailColors.BLACK) && backColors.contains(DetailColors.GREEN)) {
-                    g.drawImage(FSkinImage.CARDBG_BG, x, y, w, h);
+                    g.drawImage(isPW ? FSkinImage.PWBG_BG : FSkinImage.CARDBG_BG, x, y, w, h);
                 } else if (backColors.contains(DetailColors.RED) && backColors.contains(DetailColors.GREEN)) {
-                    g.drawImage(FSkinImage.CARDBG_RG, x, y, w, h);
+                    g.drawImage(isPW ? FSkinImage.PWBG_RG : FSkinImage.CARDBG_RG, x, y, w, h);
                 }
+                if (isNyx)
+                    g.drawImage(FSkinImage.NYX_M, x, y, w, (h/2)+(h/5));
                 break;
             case 3:
-                g.drawImage(FSkinImage.CARDBG_M, x, y, w, h);
+                g.drawImage(isPW ? FSkinImage.PWBG_M : FSkinImage.CARDBG_M, x, y, w, h);
+                if (isNyx)
+                    g.drawImage(FSkinImage.NYX_M, x, y, w, (h/2)+(h/5));
                 break;
             default:
-                g.drawImage(FSkinImage.CARDBG_C, x, y, w,h);
+                g.drawImage(isPW ? FSkinImage.PWBG_C : FSkinImage.CARDBG_C, x, y, w,h);
                 break;
         }
         return colors;

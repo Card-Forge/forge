@@ -2170,33 +2170,27 @@ public class CardFactoryUtil {
             sb.append("Event$ Moved | ValidCard$ Card.Self | Origin$ Stack | ExcludeDestination$ Exile ");
             sb.append("| ValidStackSa$ Spell.Flashback | Description$ Flashback");
 
-            if (keyword.contains(":")) { // K:Flashback:Cost:ExtraParam(Key$Value):ExtraDescription:Cost(for formatting)
+            if (keyword.contains(":")) { // K:Flashback:Cost:ExtraParams:ExtraDescription
                 final String[] k = keyword.split(":");
                 final Cost cost = new Cost(k[1], false);
-                sb.append(cost.isOnlyManaCost() ? " " : "—");
+                sb.append(cost.isOnlyManaCost() ? " " : "—").append(cost.toSimpleString());
+                sb.append(cost.isOnlyManaCost() ? "" : ".");
 
-                String prettyCost = k.length > 4 ? k[4] : "";
-                if (!prettyCost.isEmpty()) {
-                    sb.append(prettyCost);
-                } else {
-                    sb.append(cost.toSimpleString());
-                }
-
-                if (!cost.isOnlyManaCost()) {
-                    sb.append(".");
-                }
                 String extraDesc =  k.length > 3 ? k[3] : "";
-                if (!extraDesc.isEmpty()) {
-                    if (!cost.isOnlyManaCost()) {
-                        sb.append(" ").append(extraDesc);
-                    } else {
-                        sb.append(". ").append(extraDesc);
-                    }
+                if (!extraDesc.isEmpty()) { // extra params added in GameActionUtil, desc added here
+                    sb.append(cost.isOnlyManaCost() ? ". " : " ").append(extraDesc);
                 }
             }
 
             sb.append(" (");
-            sb.append(inst.getReminderText());
+            if (host.hasStartOfKeyword("AlternateAdditionalCost")
+                    || !host.getFirstSpellAbility().getPayCosts().isOnlyManaCost()) {
+                String reminder = inst.getReminderText();
+                sb.append(reminder, 0, 65).append(" and any additional costs");
+                sb.append(reminder, 65, 81);
+            } else {
+                sb.append(inst.getReminderText());
+            }
             sb.append(")");
 
             String repeffstr = sb.toString();

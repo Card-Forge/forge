@@ -25,7 +25,7 @@ public class QuestChallengeGenerator {
 
     QuestChallengeGenerator(GameFormat baseFormat){
         this.baseFormat=baseFormat;
-        if(baseFormat.getName().equals((FModel.getFormats().getModern().getName()))){
+        if (baseFormat.getName().equals((FModel.getFormats().getModern().getName()))) {
             formatMedium=FModel.getFormats().get("Legacy");
             formatHard=FModel.getFormats().get("Vintage");
         }

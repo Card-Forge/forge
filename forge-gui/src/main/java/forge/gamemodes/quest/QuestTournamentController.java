@@ -364,8 +364,7 @@ public class QuestTournamentController {
 
         if (draft.playerHasMatchesLeft()) {
             view.getBtnLeaveTournament().setText(localizer.getMessage("btnLeaveTournament"));
-        }
-        else {
+        } else {
             view.getBtnLeaveTournament().setText(localizer.getMessage("lblCollectPrizes"));
         }
     }

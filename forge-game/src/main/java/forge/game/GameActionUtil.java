@@ -18,14 +18,10 @@
 package forge.game;
 
 import java.util.List;
+import java.util.Map;
 
+import com.google.common.collect.*;
 import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-import com.google.common.collect.Table;
-import com.google.common.collect.TreeBasedTable;
 
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
@@ -225,29 +221,31 @@ public final class GameActionUtil {
                             continue;
                         }
 
-                        final SpellAbility flashback = sa.copy(activator);
-                        flashback.setAlternativeCost(AlternativeCost.Flashback);
-                        flashback.getRestrictions().setZone(ZoneType.Graveyard);
+                        SpellAbility flashback = null;
 
                         // there is a flashback cost (and not the cards cost)
-                        if (keyword.contains(":")) {
+                        if (keyword.contains(":")) { // K:Flashback:Cost:ExtraParams:ExtraDescription
                             final String[] k = keyword.split(":");
-                            flashback.setPayCosts(new Cost(k[1], false));
-                            String extra =  k.length > 2 ? k[2] : "";
-                            if (!extra.isEmpty()) {
-                                String[] parts = extra.split("\\$");
-                                String key = parts[0];
-                                String value = parts[1];
-                                flashback.putParam(key, value);
+                            flashback = sa.copyWithManaCostReplaced(activator, new Cost(k[1], false));
+                            String extraParams =  k.length > 2 ? k[2] : "";
+                            if (!extraParams.isEmpty()) {
+                                for (Map.Entry<String, String> param : AbilityFactory.getMapParams(extraParams).entrySet()) {
+                                    flashback.putParam(param.getKey(), param.getValue());
+                                }
                             }
+                        } else { // same cost as original (e.g. Otaria plane)
+                            flashback = sa.copy(activator);
                         }
+                        flashback.setAlternativeCost(AlternativeCost.Flashback);
+                        flashback.getRestrictions().setZone(ZoneType.Graveyard);
                         alternatives.add(flashback);
                     } else if (keyword.startsWith("Foretell")) {
                         // Foretell cast only from Exile
-                        if (!source.isInZone(ZoneType.Exile) || !source.isForetold() || source.isForetoldThisTurn() || !activator.equals(source.getOwner())) {
+                        if (!source.isInZone(ZoneType.Exile) || !source.isForetold() || source.isForetoldThisTurn() ||
+                                !activator.equals(source.getOwner())) {
                             continue;
                         }
-                        // skip this part for fortell by external source
+                        // skip this part for foretell by external source
                         if (keyword.equals("Foretell")) {
                             continue;
                         }

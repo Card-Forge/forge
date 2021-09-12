@@ -27,7 +27,6 @@ import forge.assets.FSkin;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FTextureRegionImage;
-import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.deck.io.DeckPreferences;
 import forge.gamemodes.limited.BoosterDraft;
@@ -1281,7 +1280,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                         if (result != card) {
                                             cardManager.replaceAll(card, result);
                                         }
-                                        prefs.setPreferredArt(result.getEdition() + CardDb.NameSetSeparator + result.getArtIndex());
+                                        prefs.setPreferredArt(result.getEdition(), result.getArtIndex());
                                         CardPreferences.save();
                                     }
                                 }

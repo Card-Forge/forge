@@ -21,21 +21,21 @@ public class TournamentPairing {
         winner = null;
     }
 
-    public int getRound() {     return round; }
+    public int getRound() { return round; }
 
-    public void setRound(int round) {   this.round = round; }
+    public void setRound(int round) { this.round = round; }
 
-    public boolean isBye() {    return bye; }
+    public boolean isBye() { return bye; }
 
-    public void setBye(boolean bye) {   this.bye = bye; }
+    public void setBye(boolean bye) { this.bye = bye; }
 
-    public List<TournamentPlayer> getPairedPlayers() {    return pairedPlayers; }
+    public List<TournamentPlayer> getPairedPlayers() { return pairedPlayers; }
 
-    public List<GameOutcome> getOutcomes() {    return outcomes; }
+    public List<GameOutcome> getOutcomes() { return outcomes; }
 
-    public TournamentPlayer getWinner() {   return winner;  }
+    public TournamentPlayer getWinner() { return winner; }
 
-    public void setWinner(TournamentPlayer winner) {    this.winner = winner; }
+    public void setWinner(TournamentPlayer winner) { this.winner = winner; }
 
     public void setWinnerByIndex(int index) {
         for(TournamentPlayer pl : pairedPlayers) {

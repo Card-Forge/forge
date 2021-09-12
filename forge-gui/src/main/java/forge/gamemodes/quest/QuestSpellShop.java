@@ -56,8 +56,7 @@ public class QuestSpellShop {
             nsArt = card.getName() + " (" + artIndex + ")|" + pc.getEdition();
 
             foil = ((PaperCard) card).isFoil();
-        }
-        else {
+        } else {
             ns = card.getName();
             nsArt = ns;
         }
@@ -265,8 +264,7 @@ public class QuestSpellShop {
                             GuiBase.getInterface().showCardList(booster.getName(), "You have found the following cards inside:", remainingCards);
                         }
 
-                    }
-                    else {
+                    } else {
                         GuiBase.getInterface().showCardList(booster.getName(), "You have found the following cards inside:", newCards);
                     }
                 }

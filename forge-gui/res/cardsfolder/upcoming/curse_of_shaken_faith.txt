@@ -1,0 +1,9 @@
+Name:Curse of Shaken Faith
+ManaCost:1 R
+Types:Enchantment Aura Curse
+K:Enchant player
+A:SP$ Attach | Cost$ 1 R | ValidTgts$ Player | AILogic$ Curse
+T:Mode$ SpellCast | ValidActivatingPlayer$ Player.EnchantedBy | ActivatorThisTurnCast$ GT1 | NoResolvingCheck$ True | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever enchanted player casts a spell other than the first spell they cast each turn or copies a spell, CARDNAME deals 2 damage to them.
+T:Mode$ SpellCopy | ValidActivatingPlayer$ Player.EnchantedBy | NoResolvingCheck$ True | TriggerZones$ Battlefield | Execute$ TrigDamage | Secondary$ True | TriggerDescription$ Whenever enchanted player casts a spell other than the first spell they cast each turn or copies a spell, CARDNAME deals 2 damage to them.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 2
+Oracle:Enchant player\nWhenever enchanted player casts a spell other than the first spell they cast each turn or copies a spell, Curse of Shaken Faith deals 2 damage to them.

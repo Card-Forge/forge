@@ -3025,7 +3025,7 @@ public class ComputerUtil {
                 }
             }
             if (!containsAttacker) {
-                return false;
+                continue;
             }
             AiBlockController block = new AiBlockController(ai);
             block.assignBlockersForCombat(combat);

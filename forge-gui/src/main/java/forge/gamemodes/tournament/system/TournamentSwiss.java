@@ -45,7 +45,7 @@ public class TournamentSwiss extends AbstractTournament {
 
         if (allPlayers.size() % 2 == 1) {
             int i = allPlayers.size() - 1;
-            while(byePlayer == null) {
+            while (byePlayer == null) {
                 TournamentPlayer pl = allPlayers.get(i);
                 if (pl.getByes() == 0) {
                     byePlayer = pl;
@@ -72,8 +72,8 @@ public class TournamentSwiss extends AbstractTournament {
         }
 
         int score = groupPlayers.get(frontOfGroup).getScore();
-        while(pairing) {
-            for(backOfGroup = frontOfGroup+1; backOfGroup < groupPlayers.size(); backOfGroup++) {
+        while (pairing) {
+            for (backOfGroup = frontOfGroup+1; backOfGroup < groupPlayers.size(); backOfGroup++) {
                 if (allPlayers.get(backOfGroup).getScore() < score) {
                     break;
                 }
@@ -115,10 +115,10 @@ public class TournamentSwiss extends AbstractTournament {
         int oppClashes = 0;
         List<TournamentPlayer> unpairedPlayers = Lists.newArrayList();
 
-        for(TournamentPlayer tp : players) {
+        for (TournamentPlayer tp : players) {
             HashSet<TournamentPlayer> opponents = new HashSet<>();
             List<Integer> prevOpps = tp.getPreviousOpponents();
-            for(TournamentPlayer opp : players) {
+            for (TournamentPlayer opp : players) {
                 if (!prevOpps.contains(opp.getIndex()) && !opp.equals(tp)) {
                     opponents.add(opp);
                 } else if (!opp.equals(tp)) {
@@ -141,20 +141,20 @@ public class TournamentSwiss extends AbstractTournament {
             }
         });
 
-        while(players.size() > 1) {
+        while (players.size() > 1) {
             TournamentPlayer initialPlayer = players.get(0);
             players.remove(0);
             ArrayList<TournamentPlayer> pair = new ArrayList<>();
 
             HashSet<TournamentPlayer> opposing = availableOpponents.get(initialPlayer);
-            for(TournamentPlayer opp : players) {
+            for (TournamentPlayer opp : players) {
                 if (opposing.contains(opp)) {
                     pair.add(opp);
                     break;
                 }
             }
 
-            for(TournamentPlayer opp : pair) {
+            for (TournamentPlayer opp : pair) {
                 players.remove(opp);
             }
 
@@ -192,8 +192,6 @@ public class TournamentSwiss extends AbstractTournament {
         return unpairable;
     }
 
-
-
     @Override
     public boolean reportMatchCompletion(TournamentPairing pairing) {
         // Returns whether there are more matches left in this round
@@ -215,7 +213,7 @@ public class TournamentSwiss extends AbstractTournament {
         }
 
         for (TournamentPlayer tp : pairing.getPairedPlayers()) {
-            for(Integer i : oppIndexes) {
+            for (Integer i : oppIndexes) {
                 if (i != null && !i.equals(tp.getIndex())) {
                     tp.addOpponentIndex(i);
                 }
@@ -228,7 +226,6 @@ public class TournamentSwiss extends AbstractTournament {
         }
         return true;
     }
-
 
     @Override
     public void endTournament() {

@@ -4,4 +4,4 @@ Order:108
 Subtype:Custom
 Type:Casual
 Rarities:L, C
-Banned:Arcum's Astrolabe; Cloud of Faeries; Cloudpost; Cranial Plating; Daze; Empty the Warrens; Expedition Map; Fall from Favor; Frantic Search; Gitaxian Probe; Grapeshot; Gush; Invigorate; Mystic Sanctuary; Peregrine Drake; Temporal Fissure; Treasure Cruise
+Banned:Arcum's Astrolabe; Chatterstorm; Cloud of Faeries; Cloudpost; Cranial Plating; Daze; Expedition Map; Empty the Warrens; Fall from Favor; Frantic Search; Gitaxian Probe; Grapeshot; Gush; High Tide; Hymn to Tourach; Invigorate; Mystic Sanctuary; Peregrine Drake; Sinkhole; Sojourner's Companion; Temporal Fissure; Treasure Cruise

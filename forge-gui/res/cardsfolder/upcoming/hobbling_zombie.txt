@@ -1,0 +1,9 @@
+Name:Hobbling Zombie
+ManaCost:2 B
+Types:Creature Zombie
+PT:2/2
+K:Deathtouch
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a 2/2 black Zombie creature with decayed. (It can't block. When it attacks, sacrifice it at end of combat.)
+SVar:TrigToken:DB$ Token | TokenScript$ b_2_2_zombie_decayed
+DeckHas:Ability$Token
+Oracle:Deathtouch\nWhen Hobbling Zombie dies, create a 2/2 black Zombie creature with decayed. (It can't block. When it attacks, sacrifice it at end of combat.)

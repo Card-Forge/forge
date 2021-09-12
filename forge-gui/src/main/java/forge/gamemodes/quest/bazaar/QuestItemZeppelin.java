@@ -44,5 +44,4 @@ public class QuestItemZeppelin extends QuestItemBasic {
         return super.isAvailableForPurchase(qA, qCtrl) && qA.hasItem(QuestItemType.MAP);
     }
 
-
 }
