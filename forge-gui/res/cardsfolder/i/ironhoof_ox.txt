@@ -2,6 +2,5 @@ Name:Ironhoof Ox
 ManaCost:3 G G
 Types:Creature Ox
 PT:4/4
-K:CantBeBlockedByAmount GT1
-SVar:Picture:http://resources.wizards.com/magic/cards/p2/en-us/card6628.jpg
+S:Mode$ MinMaxBlocker | ValidCard$ Card.Self | Max$ 1 | Description$ CARDNAME can't be blocked by more than one creature.
 Oracle:Ironhoof Ox can't be blocked by more than one creature.

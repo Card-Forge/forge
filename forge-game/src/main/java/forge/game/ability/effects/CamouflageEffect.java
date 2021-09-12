@@ -13,6 +13,7 @@ import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbilityCantAttackBlock;
 import forge.util.Localizer;
 
 public class CamouflageEffect extends SpellAbilityEffect {
@@ -36,7 +37,7 @@ public class CamouflageEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            if (attacker.hasKeyword("CantBeBlockedByAmount GT1") && blockers.size() > 1) {
+            if (StaticAbilityCantAttackBlock.getMinMaxBlocker(attacker, defender).getRight() < blockers.size()) {
                 // If no more than one creature can block, order the player to choose one to block
                 Card chosen = declarer.getController().chooseCardsForEffect(blockers, sa,
                     Localizer.getInstance().getMessage("lblChooseBlockerForAttacker", attacker.toString()), 1, 1, false, null).get(0);

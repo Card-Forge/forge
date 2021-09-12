@@ -2,6 +2,6 @@ Name:Vorrac Battlehorns
 ManaCost:2
 Types:Artifact Equipment
 K:Equip:1
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Trample | AddHiddenKeyword$ CantBeBlockedByAmount GT1 | Description$ Equipped creature has trample and can't be blocked by more than one creature.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/vorrac_battlehorns.jpg
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Trample | Description$ Equipped creature has trample and can't be blocked by more than one creature.
+S:Mode$ MinMaxBlocker | ValidCard$ Creature.EquippedBy | Max$ 1 | Secondary$ True | Description$ Equipped creature can't be blocked by more than one creature.
 Oracle:Equipped creature has trample and can't be blocked by more than one creature.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery. This card enters the battlefield unattached and stays on the battlefield if the creature leaves.)

@@ -42,6 +42,7 @@ import forge.card.ICardFace;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
+import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.GameEntityCounterTable;
 import forge.game.GameLogEntryType;
@@ -264,8 +265,7 @@ public class CardFactoryUtil {
             return false;
         }
 
-        for (KeywordInterface k : c.getKeywords()) {
-            final String o = k.getOriginal();
+        for (String o : c.getHiddenExtrinsicKeywords()) {
             if (o.startsWith("CantBeCounteredBy")) {
                 final String[] m = o.split(":");
                 if (sa.isValid(m[1].split(","), c.getController(), c, null)) {
@@ -510,7 +510,7 @@ public class CardFactoryUtil {
      * @return a List<String>.
      */
     public static List<String> sharedKeywords(final Iterable<String> kw, final String[] restrictions,
-            final Iterable<ZoneType> zones, final Card host) {
+            final Iterable<ZoneType> zones, final Card host, CardTraitBase ctb) {
         final List<String> filteredkw = Lists.newArrayList();
         final Player p = host.getController();
         CardCollectionView cardlist = p.getGame().getCardsIn(zones);
@@ -521,7 +521,7 @@ public class CardFactoryUtil {
         final Set<String> tramplekw = Sets.newHashSet();
         final Set<String> allkw = Sets.newHashSet();
 
-        for (Card c : CardLists.getValidCards(cardlist, restrictions, p, host, null)) {
+        for (Card c : CardLists.getValidCards(cardlist, restrictions, p, host, ctb)) {
             for (KeywordInterface inst : c.getKeywords()) {
                 final String k = inst.getOriginal();
                 if (k.endsWith("walk")) {

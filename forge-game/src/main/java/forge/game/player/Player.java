@@ -3014,7 +3014,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         game.getAction().checkStaticAbilities(false);
 
         for (final Card c : getCardsIn(ZoneType.Sideboard)) {
-            for (KeywordInterface inst : c.getKeywords()) {
+            for (KeywordInterface inst : c.getKeywords(Keyword.COMPANION)) {
                 if (!(inst instanceof Companion)) {
                     continue;
                 }

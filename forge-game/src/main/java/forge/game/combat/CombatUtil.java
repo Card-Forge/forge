@@ -47,9 +47,9 @@ import forge.game.player.Player;
 import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityCantAttackBlock;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
-import forge.util.Expressions;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
@@ -251,12 +251,9 @@ public class CombatUtil {
         }
 
         // Keywords
-        for (final KeywordInterface keyword : attacker.getKeywords()) {
-            switch (keyword.getOriginal()) {
-            case "CARDNAME can't attack.":
-            case "CARDNAME can't attack or block.":
-                return false;
-            }
+        // replace with Static Ability if able
+        if (attacker.hasKeyword("CARDNAME can't attack.") || attacker.hasKeyword("CARDNAME can't attack or block.")) {
+            return false;
         }
 
         // CantAttack static abilities
@@ -505,7 +502,7 @@ public class CombatUtil {
         }
 
         if ( combat != null ) {
-            if (attacker.hasStartOfKeyword("CantBeBlockedByAmount GT") && !combat.getBlockers(attacker).isEmpty()) {
+            if (StaticAbilityCantAttackBlock.getMinMaxBlocker(attacker, defendingPlayer).getRight() == combat.getBlockers(attacker).size()) {
                 return false;
             }
 
@@ -587,7 +584,7 @@ public class CombatUtil {
             }
         }
 
-        for (final KeywordInterface inst : attacker.getKeywords()) {
+        for (final KeywordInterface inst : attacker.getKeywords(Keyword.LANDWALK)) {
             String keyword = inst.getOriginal();
             if (keyword.equals("Legendary landwalk")) {
                 walkTypes.add("Land.Legendary");
@@ -762,11 +759,11 @@ public class CombatUtil {
             }
 
             // "CARDNAME blocks each turn/combat if able."
-            if (!blockers.contains(blocker) && (blocker.hasKeyword("CARDNAME blocks each turn if able.") || blocker.hasKeyword("CARDNAME blocks each combat if able."))) {
+            if (!blockers.contains(blocker) && (blocker.hasKeyword("CARDNAME blocks each combat if able."))) {
                 for (final Card attacker : attackers) {
                     if (canBlock(attacker, blocker, combat)) {
                         boolean must = true;
-                        if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT") || attacker.hasKeyword(Keyword.MENACE)) {
+                        if (StaticAbilityCantAttackBlock.getMinMaxBlocker(attacker, defending).getLeft() > 1) {
                             final List<Card> possibleBlockers = Lists.newArrayList(defendersArmy);
                             possibleBlockers.remove(blocker);
                             if (!canBeBlocked(attacker, possibleBlockers, combat)) {
@@ -774,8 +771,7 @@ public class CombatUtil {
                             }
                         }
                         if (must) {
-                            String unit = blocker.hasKeyword("CARDNAME blocks each combat if able.") ? "combat," : "turn,";
-                            return TextUtil.concatWithSpace(blocker.toString(),"must block each", unit, "but was not assigned to block any attacker now.");
+                            return TextUtil.concatWithSpace(blocker.toString(),"must block each combat but was not assigned to block any attacker now.");
                         }
                     }
                 }
@@ -848,6 +844,7 @@ public class CombatUtil {
                             && combat.getBlockers(attacker).size() < 2)) {
                 attackersWithLure.add(attacker);
             } else {
+                // TODO replace with Hidden Keyword or Static Ability
                 for (KeywordInterface inst : attacker.getKeywords()) {
                     String keyword = inst.getOriginal();
                     // MustBeBlockedBy <valid>
@@ -875,8 +872,11 @@ public class CombatUtil {
         for (final Card attacker : attackersWithLure) {
             if (canBeBlocked(attacker, combat, defender) && canBlock(attacker, blocker)) {
                 boolean canBe = true;
-                if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT") || attacker.hasKeyword(Keyword.MENACE)) {
-                    final List<Card> blockers = combat.getDefenderPlayerByAttacker(attacker).getCreaturesInPlay();
+
+                Player defendingPlayer = combat.getDefenderPlayerByAttacker(attacker);
+
+                if (StaticAbilityCantAttackBlock.getMinMaxBlocker(attacker, defendingPlayer).getLeft() > 1) {
+                    final List<Card> blockers = defendingPlayer.getCreaturesInPlay();
                     blockers.remove(blocker);
                     if (!canBeBlocked(attacker, blockers, combat)) {
                         canBe = false;
@@ -893,8 +893,9 @@ public class CombatUtil {
                 if (canBeBlocked(attacker, combat, defender) && canBlock(attacker, blocker)
                         && combat.isAttacking(attacker)) {
                     boolean canBe = true;
-                    if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT") || attacker.hasKeyword(Keyword.MENACE)) {
-                        final List<Card> blockers = freeBlockers != null ? new CardCollection(freeBlockers) : combat.getDefenderPlayerByAttacker(attacker).getCreaturesInPlay();
+                    Player defendingPlayer = combat.getDefenderPlayerByAttacker(attacker);
+                    if (StaticAbilityCantAttackBlock.getMinMaxBlocker(attacker, defendingPlayer).getLeft() > 1) {
+                        final List<Card> blockers = freeBlockers != null ? new CardCollection(freeBlockers) : defendingPlayer.getCreaturesInPlay();
                         blockers.remove(blocker);
                         if (!canBeBlocked(attacker, blockers, combat)) {
                             canBe = false;
@@ -968,6 +969,7 @@ public class CombatUtil {
             return false;
         }
 
+        // TODO remove with HiddenKeyword or Static Ability
         boolean mustBeBlockedBy = false;
         for (KeywordInterface inst : attacker.getKeywords()) {
             String keyword = inst.getOriginal();
@@ -1085,60 +1087,16 @@ public class CombatUtil {
         if (amount == 0)
             return false; // no block
 
-        List<String> restrictions = Lists.newArrayList();
-        for (KeywordInterface inst : attacker.getKeywords()) {
-            String kw = inst.getOriginal();
-            if (kw.startsWith("CantBeBlockedByAmount")) {
-                restrictions.add(TextUtil.split(kw, ' ', 2)[1]);
-            }
-            if (kw.equals("Menace")) {
-            	restrictions.add("LT2");
-            }
-        }
-        for (String res : restrictions) {
-            int operand = Integer.parseInt(res.substring(2));
-            String operator = res.substring(0,2);
-            if (Expressions.compare(amount, operator, operand) )
-                return false;
-        }
-        if (defender != null && attacker.hasKeyword("CARDNAME can't be blocked unless all creatures defending player controls block it.")) {
-            return amount >= defender.getCreaturesInPlay().size();
+        Pair<Integer, Integer> minMaxBlock = StaticAbilityCantAttackBlock.getMinMaxBlocker(attacker, defender);
+
+        if (minMaxBlock.getLeft() > amount || minMaxBlock.getRight() < amount) {
+            return false;
         }
 
         return true;
     }
 
     public static int getMinNumBlockersForAttacker(Card attacker, Player defender) {
-        List<String> restrictions = Lists.newArrayList();
-        for (KeywordInterface inst : attacker.getKeywords()) {
-            String kw = inst.getOriginal();
-            if (kw.startsWith("CantBeBlockedByAmount")) {
-                restrictions.add(TextUtil.split(kw, ' ', 2)[1]);
-            }
-            if (kw.equals("Menace")) {
-                restrictions.add("LT2");
-            }
-        }
-        int minBlockers = 1;
-        for (String res : restrictions) {
-            int operand = Integer.parseInt(res.substring(2));
-            String operator = res.substring(0, 2);
-            if (operator.equals("LT") || operator.equals("GE")) {
-                if (minBlockers < operand) {
-                    minBlockers = operand;
-                }
-            } else if (operator.equals("LE") || operator.equals("GT") || operator.equals("EQ")) {
-                if (minBlockers < operand + 1) {
-                    minBlockers = operand + 1;
-                }
-            }
-        }
-        if (attacker.hasKeyword("CARDNAME can't be blocked unless all creatures defending player controls block it.")) {
-            if (defender != null) {
-                minBlockers = defender.getCreaturesInPlay().size();
-            }
-        }
-
-        return minBlockers;
+        return StaticAbilityCantAttackBlock.getMinMaxBlocker(attacker, defender).getLeft();
     }
 } // end class CombatUtil

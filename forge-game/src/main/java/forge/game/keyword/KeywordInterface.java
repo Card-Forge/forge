@@ -18,10 +18,7 @@ public interface KeywordInterface extends Cloneable {
     String getReminderText();
 
     int getAmount();
-    
-    boolean getHidden();
-    void setHidden(boolean val);
-    
+
     void createTraits(final Card host, final boolean intrinsic);
     void createTraits(final Card host, final boolean intrinsic, final boolean clear);
     

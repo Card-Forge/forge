@@ -12,7 +12,6 @@ import forge.game.card.Card;
 
 public class KeywordCollection implements Iterable<KeywordInterface> {
 
-    private boolean hidden = false;
 
     private transient KeywordCollectionView view;
     // don't use enumKeys it causes a slow down
@@ -21,11 +20,6 @@ public class KeywordCollection implements Iterable<KeywordInterface> {
 
     public KeywordCollection() {
         super();
-        this.hidden = false;
-    }
-    public KeywordCollection(boolean hidden) {
-        super();
-        this.hidden = hidden;
     }
 
     public boolean contains(Keyword keyword) {
@@ -50,7 +44,6 @@ public class KeywordCollection implements Iterable<KeywordInterface> {
 
     public KeywordInterface add(String k) {
         KeywordInterface inst = Keyword.getInstance(k);
-        inst.setHidden(hidden);
         if (insert(inst)) {
             return inst;
         }

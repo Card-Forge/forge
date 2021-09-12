@@ -55,6 +55,7 @@ import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityCantAttackBlock;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
@@ -99,7 +100,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private CardDamageHistory damageHistory = new CardDamageHistory();
     // Hidden keywords won't be displayed on the card
-    private final KeywordCollection hiddenExtrinsicKeyword = new KeywordCollection();
+    // x=timestamp y=StaticAbility id
+    private final Table<Long, Long, List<String>> hiddenExtrinsicKeywords = TreeBasedTable.create();
 
     // cards attached or otherwise linked to this card
     private CardCollection hauntedBy, devouredCards, exploitedCards, delvedCards, convokedCards, imprintedCards, encodedCards;
@@ -1867,7 +1869,37 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     // get the text that does not belong to a cards abilities (and is not really
     // there rules-wise)
     public final String getNonAbilityText() {
-        return keywordsToText(getHiddenExtrinsicKeywords());
+        final StringBuilder sb = new StringBuilder();
+        final StringBuilder sbLong = new StringBuilder();
+
+        for (String keyword : getHiddenExtrinsicKeywords()) {
+            if (keyword.startsWith("CantBeCounteredBy")) {
+                final String[] p = keyword.split(":");
+                sbLong.append(p[2]).append("\r\n");
+            } else if (keyword.equals("Unblockable")) {
+                sbLong.append(getName()).append(" can't be blocked.\r\n");
+            } else if (keyword.equals("AllNonLegendaryCreatureNames")) {
+                sbLong.append(getName()).append(" has all names of nonlegendary creature cards.\r\n");
+            } else if (keyword.startsWith("IfReach")) {
+                String[] k = keyword.split(":");
+                sbLong.append(getName()).append(" can block ")
+                .append(CardType.getPluralType(k[1]))
+                .append(" as though it had reach.\r\n");
+            } else {
+                sbLong.append(keyword).append("\r\n");
+            }
+        }
+        if (sb.length() > 0) {
+            sb.append("\r\n");
+            if (sbLong.length() > 0) {
+                sb.append("\r\n");
+            }
+        }
+        if (sbLong.length() > 0) {
+            sbLong.append("\r\n");
+        }
+        sb.append(sbLong);
+        return CardTranslation.translateMultipleDescriptionText(sb.toString(), getName());
     }
 
     // convert a keyword list to the String that should be displayed in game
@@ -2120,9 +2152,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.startsWith("Encore") || keyword.startsWith("Mutate") || keyword.startsWith("Dungeon")
                         || keyword.startsWith("Class") || keyword.startsWith("Saga")) {
                     // keyword parsing takes care of adding a proper description
-                } else if (keyword.startsWith("CantBeBlockedByAmount")) {
-                    sbLong.append(getName()).append(" can't be blocked ");
-                    sbLong.append(getTextForKwCantBeBlockedByAmount(keyword));
                 } else if (keyword.equals("Unblockable")) {
                     sbLong.append(getName()).append(" can't be blocked.\r\n");
                 } else if (keyword.equals("AllNonLegendaryCreatureNames")) {
@@ -2171,14 +2200,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
         sb.append(sbLong);
         return CardTranslation.translateMultipleDescriptionText(sb.toString(), getName());
-    }
-
-    private static String getTextForKwCantBeBlockedByAmount(final String keyword) {
-        final String restriction = keyword.split(" ", 2)[1];
-        final boolean isLT = "LT".equals(restriction.substring(0,2));
-        final String byClause = isLT ? "except by " : "by more than ";
-        final int cnt = Integer.parseInt(restriction.substring(2));
-        return byClause + Lang.nounWithNumeral(cnt, isLT ? "or more creature" : "creature");
     }
 
     // get the text of the abilities of a card
@@ -2367,15 +2388,27 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     continue;
                 }
                 for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                    if (stAb.isSecondary() ||
-                            !stAb.getParam("Mode").equals("CantBlockBy") ||
-                            stAb.isSuppressed() || !stAb.checkConditions() ||
-                            !stAb.hasParam("ValidAttacker") ||
-                    (stAb.hasParam("ValidBlocker") && stAb.getParam("ValidBlocker").equals("Creature.Self"))) {
+                    if (stAb.isSuppressed() || !stAb.checkConditions()) {
                         continue;
                     }
-                    final Card host = stAb.getHostCard();
-                    if (isValid(stAb.getParam("ValidAttacker").split(","), host.getController(), host, stAb)) {
+
+                    boolean found = false;
+                    if (stAb.getParam("Mode").equals("CantBlockBy")) {
+                        if (!stAb.hasParam("ValidAttacker") || (stAb.hasParam("ValidBlocker") && stAb.getParam("ValidBlocker").equals("Creature.Self"))) {
+                            continue;
+                        }
+                        if (stAb.matchesValidParam("ValidAttacker", this)) {
+                            found = true;
+                        }
+                    } else if (stAb.getParam("Mode").equals(StaticAbilityCantAttackBlock.MinMaxBlockerMode)) {
+                        if (stAb.matchesValidParam("ValidCard", this)) {
+                            found = true;
+                        }
+                    }
+
+                    if (found) {
+                        final Card host = stAb.getHostCard();
+
                         String currentName = host.getName();
                         String desc1 = TextUtil.fastReplace(stAb.toString(), "CARDNAME", currentName);
                         String desc = TextUtil.fastReplace(desc1,"NICKNAME", currentName.split(",")[0]);
@@ -4119,7 +4152,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     // of lists. Optimizes common operations such as hasKeyword().
     public final void visitKeywords(CardState state, Visitor<KeywordInterface> visitor) {
         visitUnhiddenKeywords(state, visitor);
-        visitHiddenExtrinsicKeywords(visitor);
     }
 
     @Override
@@ -4140,8 +4172,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
 
         // shortcut for hidden keywords
-        if (this.hiddenExtrinsicKeyword.contains(keyword)) {
-            return true;
+        for (List<String> kw : this.hiddenExtrinsicKeywords.values()) {
+            if (kw.contains(keyword)) {
+                return true;
+            }
         }
 
         HasKeywordVisitor visitor = new HasKeywordVisitor(keyword, false);
@@ -4418,41 +4452,33 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     // Hidden Keywords will be returned without the indicator HIDDEN
-    public final List<KeywordInterface> getHiddenExtrinsicKeywords() {
-        ListKeywordVisitor visitor = new ListKeywordVisitor();
-        visitHiddenExtrinsicKeywords(visitor);
-        return visitor.getKeywords();
-    }
-    private void visitHiddenExtrinsicKeywords(Visitor<KeywordInterface> visitor) {
-        for (KeywordInterface inst : hiddenExtrinsicKeyword.getValues()) {
-            if (!visitor.visit(inst)) {
-                return;
-            }
-        }
+    public final Iterable<String> getHiddenExtrinsicKeywords() {
+        return Iterables.concat(this.hiddenExtrinsicKeywords.values());
     }
 
-    public final void addHiddenExtrinsicKeyword(String s) {
-        if (s.startsWith("HIDDEN")) {
-            s = s.substring(7);
-        }
-        if (hiddenExtrinsicKeyword.add(s) != null) {
-            view.updateNonAbilityText(this);
-            updateKeywords();
-        }
+    public final void addHiddenExtrinsicKeywords(long timestamp, long staticId, Iterable<String> keywords) {
+        // TODO if some keywords aren't removed anymore, then no need for extra Array List
+        hiddenExtrinsicKeywords.put(timestamp, staticId, Lists.newArrayList(keywords));
+
+        view.updateNonAbilityText(this);
+        updateKeywords();
     }
 
-    public final void addHiddenExtrinsicKeyword(KeywordInterface k) {
-        if (hiddenExtrinsicKeyword.insert(k)) {
+    public final void removeHiddenExtrinsicKeywords(long timestamp, long staticId) {
+        if (hiddenExtrinsicKeywords.remove(timestamp, staticId) != null) {
             view.updateNonAbilityText(this);
             updateKeywords();
         }
     }
 
     public final void removeHiddenExtrinsicKeyword(String s) {
-        if (s.startsWith("HIDDEN")) {
-            s = s.substring(7);
+        boolean updated = false;
+        for (List<String> list : hiddenExtrinsicKeywords.values()) {
+            if (list.remove(s)) {
+                updated = true;
+            }
         }
-        if (hiddenExtrinsicKeyword.remove(s)) {
+        if (updated) {
             view.updateNonAbilityText(this);
             updateKeywords();
         }
@@ -4710,6 +4736,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return hasStartOfKeyword(keyword, currentState);
     }
     public final boolean hasStartOfKeyword(String keyword, CardState state) {
+        for (String s : this.getHiddenExtrinsicKeywords()) {
+            if (s.startsWith(keyword)) {
+                return true;
+            }
+        }
+
         HasKeywordVisitor visitor = new HasKeywordVisitor(keyword, true);
         visitKeywords(state, visitor);
         return visitor.getResult();
@@ -4741,9 +4773,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return getAmountOfKeyword(k, currentState);
     }
     public final int getAmountOfKeyword(final String k, CardState state) {
+        int count = Iterables.frequency(this.getHiddenExtrinsicKeywords(), k);
         CountKeywordVisitor visitor = new CountKeywordVisitor(k);
         visitKeywords(state, visitor);
-        return visitor.getCount();
+        return count + visitor.getCount();
     }
 
     public final int getAmountOfKeyword(final Keyword k) {
@@ -5619,11 +5652,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
         final boolean colorlessDamage = damageSource && source.hasKeyword("Colorless Damage Source");
 
-        for (final KeywordInterface inst : getKeywords()) {
+        for (final KeywordInterface inst : getKeywords(Keyword.PROTECTION)) {
             String kw = inst.getOriginal();
-            if (!kw.startsWith("Protection")) {
-                continue;
-            }
             if (kw.equals("Protection from white")) {
                 if (source.isWhite() && !colorlessDamage) {
                     return true;
@@ -5698,11 +5728,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public String getProtectionKey() {
         String protectKey = "";
         boolean pR = false; boolean pG = false; boolean pB = false; boolean pU = false; boolean pW = false;
-        for (final KeywordInterface inst : getKeywords()) {
+        for (final KeywordInterface inst : getKeywords(Keyword.PROTECTION)) {
             String kw = inst.getOriginal();
-            if (!kw.startsWith("Protection")) {
-                continue;
-            }
             if (kw.contains("Protection from red")) {
                 if (!pR) {
                     pR = true;
@@ -5755,11 +5782,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public String getHexproofKey() {
         String hexproofKey = "";
         boolean hR = false; boolean hG = false; boolean hB = false; boolean hU = false; boolean hW = false;
-        for (final KeywordInterface inst : getKeywords()) {
+        for (final KeywordInterface inst : getKeywords(Keyword.HEXPROOF)) {
             String kw = inst.getOriginal();
-            if (!kw.startsWith("Hexproof")) {
-                continue;
-            }
             if (kw.equals("Hexproof")) {
                 hexproofKey += "generic:";
             }
@@ -5859,6 +5883,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         final Card source = sa.getHostCard();
 
         if (sa.isSpell()) {
+            // TODO replace with Static Ability
             for(KeywordInterface inst : source.getKeywords()) {
                 String kw = inst.getOriginal();
                 if(!kw.startsWith("SpellCantTarget")) {
@@ -6506,23 +6531,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private static final class CountKeywordVisitor extends Visitor<KeywordInterface> {
         private String keyword;
         private int count;
-        private boolean startOf;
 
         private CountKeywordVisitor(String keyword) {
             this.keyword = keyword;
             this.count = 0;
-            this.startOf = false;
-        }
-
-        private CountKeywordVisitor(String keyword, boolean startOf) {
-            this(keyword);
-            this.startOf = startOf;
         }
 
         @Override
         public boolean visit(KeywordInterface inst) {
             final String kw = inst.getOriginal();
-            if ((startOf && kw.startsWith(keyword)) || kw.equals(keyword)) {
+            if (kw.equals(keyword)) {
                 count++;
             }
             return true;
@@ -6551,7 +6569,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             }
             return result.isFalse();
         }
-
         public boolean getResult() {
             return result.isTrue();
         }

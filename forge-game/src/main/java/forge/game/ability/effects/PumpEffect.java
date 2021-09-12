@@ -20,7 +20,6 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardUtil;
 import forge.game.event.GameEventCardStatsChanged;
-import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
@@ -50,11 +49,12 @@ public class PumpEffect extends SpellAbilityEffect {
             return;
         }
         final List<String> kws = Lists.newArrayList();
+        final List<String> hiddenKws = Lists.newArrayList();
 
         boolean redrawPT = false;
         for (String kw : keywords) {
             if (kw.startsWith("HIDDEN")) {
-                gameCard.addHiddenExtrinsicKeyword(kw);
+                hiddenKws.add(kw.substring(7));
                 redrawPT |= kw.contains("CARDNAME's power and toughness are switched");
             } else {
                 kws.add(kw);
@@ -66,7 +66,12 @@ public class PumpEffect extends SpellAbilityEffect {
             redrawPT = true;
         }
 
-        gameCard.addChangedCardKeywords(kws, Lists.newArrayList(), false, false, timestamp, 0);
+        if (!kws.isEmpty()) {
+            gameCard.addChangedCardKeywords(kws, Lists.newArrayList(), false, false, timestamp, 0);
+        }
+        if (!hiddenKws.isEmpty()) {
+            gameCard.addHiddenExtrinsicKeywords(timestamp, 0, hiddenKws);
+        }
         if (redrawPT) {
             gameCard.updatePowerToughnessForView();
         }
@@ -95,12 +100,7 @@ public class PumpEffect extends SpellAbilityEffect {
                     updateText |= gameCard.removeCanBlockAdditional(timestamp);
 
                     if (keywords.size() > 0) {
-
-                        for (String kw : keywords) {
-                            if (kw.startsWith("HIDDEN")) {
-                                gameCard.removeHiddenExtrinsicKeyword(kw);
-                            }
-                        }
+                        gameCard.removeHiddenExtrinsicKeywords(timestamp, 0);
                         gameCard.removeChangedCardKeywords(timestamp, 0);
                     }
                     gameCard.updatePowerToughnessForView();
@@ -244,7 +244,7 @@ public class PumpEffect extends SpellAbilityEffect {
         if (sa.hasParam("SharedKeywordsZone")) {
             List<ZoneType> zones = ZoneType.listValueOf(sa.getParam("SharedKeywordsZone"));
             String[] restrictions = sa.hasParam("SharedRestrictions") ? sa.getParam("SharedRestrictions").split(",") : new String[]{"Card"};
-            keywords = CardFactoryUtil.sharedKeywords(keywords, restrictions, zones, sa.getHostCard());
+            keywords = CardFactoryUtil.sharedKeywords(keywords, restrictions, zones, sa.getHostCard(), sa);
         }
 
         List<GameEntity> tgts = Lists.newArrayList();
@@ -290,9 +290,10 @@ public class PumpEffect extends SpellAbilityEffect {
             List<String> choice = Lists.newArrayList();
             List<String> total = Lists.newArrayList(keywords);
             if (sa.hasParam("NoRepetition")) {
-                for (KeywordInterface inst : tgtCards.get(0).getKeywords()) {
-                    final String kws = inst.getOriginal();
-                    total.remove(kws);
+                for (String kw : keywords) {
+                    if (tgtCards.get(0).hasKeyword(kw)) {
+                        total.remove(kw);
+                    }
                 }
             }
             final int min = Math.min(total.size(), numkw);

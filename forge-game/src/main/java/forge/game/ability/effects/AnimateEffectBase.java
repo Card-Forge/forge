@@ -103,8 +103,8 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             c.addCantHaveKeyword(timestamp, Keyword.setValueOf(sa.getParam("CantHaveKeyword")));
         }
 
-        for (final String k : hiddenKeywords) {
-            c.addHiddenExtrinsicKeyword(k);
+        if (!hiddenKeywords.isEmpty()) {
+            c.addHiddenExtrinsicKeywords(timestamp, 0, hiddenKeywords);
         }
 
         c.addColor(colors, !sa.hasParam("OverwriteColors"), timestamp, false);
@@ -157,7 +157,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
 
             @Override
             public void run() {
-                doUnanimate(c, sa, hiddenKeywords, timestamp);
+                doUnanimate(c, timestamp);
 
                 c.removeChangedName(timestamp);
                 c.updateStateForView();
@@ -217,8 +217,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
      * @param timestamp
      *            a long.
      */
-    static void doUnanimate(final Card c, SpellAbility sa,
-            final List<String> hiddenKeywords, final long timestamp) {
+    static void doUnanimate(final Card c, final long timestamp) {
 
         c.removeNewPT(timestamp);
 
@@ -231,9 +230,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
 
         c.removeCantHaveKeyword(timestamp);
 
-        for (final String k : hiddenKeywords) {
-            c.removeHiddenExtrinsicKeyword(k);
-        }
+        c.removeHiddenExtrinsicKeywords(timestamp, 0);
 
         // any other unanimate cleanup
         if (!c.isCreature()) {

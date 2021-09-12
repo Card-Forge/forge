@@ -1654,10 +1654,11 @@ public class ComputerUtilCard {
         Card pumped = CardFactory.copyCard(c, false);
         pumped.setSickness(c.hasSickness());
         final long timestamp = c.getGame().getNextTimestamp();
-        final List<String> kws = new ArrayList<>();
+        final List<String> kws = Lists.newArrayList();
+        final List<String> hiddenKws = Lists.newArrayList();
         for (String kw : keywords) {
             if (kw.startsWith("HIDDEN")) {
-                pumped.addHiddenExtrinsicKeyword(kw);
+                hiddenKws.add(kw.substring(7));
             } else {
                 kws.add(kw);
             }
@@ -1686,7 +1687,13 @@ public class ComputerUtilCard {
         pumped.addNewPT(c.getCurrentPower(), c.getCurrentToughness(), timestamp);
         pumped.setPTBoost(c.getPTBoostTable());
         pumped.addPTBoost(power + berserkPower, toughness, timestamp, 0);
-        pumped.addChangedCardKeywords(kws, null, false, false, timestamp, 0);
+
+        if (!kws.isEmpty()) {
+            pumped.addChangedCardKeywords(kws, null, false, false, timestamp, 0);
+        }
+        if (!hiddenKws.isEmpty()) {
+            pumped.addHiddenExtrinsicKeywords(timestamp, 0, hiddenKws);
+        }
         Set<CounterType> types = c.getCounters().keySet();
         for(CounterType ct : types) {
             pumped.addCounterFireNoEvents(ct, c.getCounters(ct), ai, sa, true, null);
@@ -1699,14 +1706,10 @@ public class ComputerUtilCard {
         KeywordCollection copiedKeywords = new KeywordCollection();
         copiedKeywords.insertAll(pumped.getKeywords());
         List<KeywordInterface> toCopy = Lists.newArrayList();
-        for (KeywordInterface k : c.getKeywords()) {
+        for (KeywordInterface k : c.getUnhiddenKeywords()) {
             KeywordInterface copiedKI = k.copy(c, true);
             if (!copiedKeywords.contains(copiedKI.getOriginal())) {
-                if (copiedKI.getHidden()) {
-                    pumped.addHiddenExtrinsicKeyword(copiedKI);
-                } else {
-                    toCopy.add(copiedKI);
-                }
+                toCopy.add(copiedKI);
             }
         }
         final long timestamp2 = c.getGame().getNextTimestamp(); //is this necessary or can the timestamp be re-used?
@@ -1744,7 +1747,7 @@ public class ComputerUtilCard {
                 if (!stAb.hasParam("AddPower") && !stAb.hasParam("AddToughness")) {
                     continue;
                 }
-                if (!vCard.isValid(stAb.getParam("Affected").split(","), c.getController(), c, stAb)) {
+                if (!stAb.matchesValidParam("Affected", vCard)) {
                     continue;
                 }
                 int att = 0;

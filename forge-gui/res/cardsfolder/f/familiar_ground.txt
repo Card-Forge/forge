@@ -1,8 +1,7 @@
 Name:Familiar Ground
 ManaCost:2 G
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ CantBeBlockedByAmount GT1 | Description$ Each creature you control can't be blocked by more than one creature.
+S:Mode$ MinMaxBlocker | ValidCard$ Creature.YouCtrl | Max$ 1 | Description$ Each creature you control can't be blocked by more than one creature.
 SVar:NonStackingEffect:True
 SVar:PlayMain1:TRUE
-SVar:Picture:http://www.wizards.com/global/images/magic/general/familiar_ground.jpg
 Oracle:Each creature you control can't be blocked by more than one creature.

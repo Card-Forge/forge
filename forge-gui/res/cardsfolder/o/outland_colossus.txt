@@ -3,7 +3,6 @@ ManaCost:3 G G
 Types:Creature Giant
 PT:6/6
 K:Renown:6
-K:CantBeBlockedByAmount GT1
+S:Mode$ MinMaxBlocker | ValidCard$ Card.Self | Max$ 1 | Description$ CARDNAME can't be blocked by more than one creature.
 DeckHas:Ability$Counters
-SVar:Picture:http://www.wizards.com/global/images/magic/general/outland_colossus.jpg
 Oracle:Renown 6 (When this creature deals combat damage to a player, if it isn't renowned, put six +1/+1 counters on it and it becomes renowned.)\nOutland Colossus can't be blocked by more than one creature.
