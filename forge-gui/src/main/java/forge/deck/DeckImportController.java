@@ -21,8 +21,8 @@ public class DeckImportController {
     private final IComboBox<Integer> yearDropdown;
     private final List<DeckRecognizer.Token> tokens = new ArrayList<>();
     private final boolean currentDeckNotEmpty;
-    private List<String> allowedSetCodes;
-    private DeckFormat currentDeckFormat;
+    private final List<String> allowedSetCodes;
+    private final DeckFormat currentDeckFormat;
 
     public DeckImportController(ICheckBox dateTimeCheck0,
                                 IComboBox<String> monthDropdown0, IComboBox<Integer> yearDropdown0,
@@ -71,7 +71,7 @@ public class DeckImportController {
         }
         int yearNow = Calendar.getInstance().get(Calendar.YEAR);
         for (int i = yearNow; i >= 1993; i--) {
-            yearDropdown.addItem(Integer.valueOf(i));
+            yearDropdown.addItem(i);
         }
     }
 
@@ -88,10 +88,26 @@ public class DeckImportController {
             recognizer.setDeckFormatConstraint(this.currentDeckFormat);
 
         String[] lines = input.split("\n");
+        DeckSection referenceDeckSectionInParsing = null;  // default
         for (String line : lines) {
-            DeckRecognizer.Token token = recognizer.recognizeLine(line);
-            if (token != null)
-                tokens.add(token);
+            DeckRecognizer.Token token = recognizer.recognizeLine(line, referenceDeckSectionInParsing);
+            if (token != null) {
+                if (token.getType() == DeckRecognizer.TokenType.DECK_SECTION_NAME)
+                    referenceDeckSectionInParsing = DeckSection.valueOf(token.getText());
+                else if (token.isCardToken()) {
+                    DeckSection tokenSection = token.getTokenSection();
+                    if (!tokenSection.equals(referenceDeckSectionInParsing)) {
+                        DeckRecognizer.Token sectionToken = DeckRecognizer.Token.DeckSection(token.getTokenSection().name());
+                        if (referenceDeckSectionInParsing == null)
+                            tokens.add(0, sectionToken);  // first ever - put on top!
+                        else
+                            tokens.add(sectionToken);  // add just before card token
+                        referenceDeckSectionInParsing = tokenSection;
+                    }
+                }
+                tokens.add(token);  // add found token
+            }
+
         }
         return tokens;
     }
