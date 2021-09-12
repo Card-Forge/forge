@@ -208,6 +208,16 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(DeckRecognizer.deckNameMatch(matchingDeckName), "");
     }
 
+    @Test void testDeckNameAsInNetDecksWithSymbols(){
+        String deckName = "Name = [Standard] #02 - Dimir Rogues";
+        Pattern deckNamePattern = DeckRecognizer.DECK_NAME_PATTERN;
+        Matcher deckNameMatcher = deckNamePattern.matcher(deckName);
+        assertTrue(deckNameMatcher.matches());
+        assertTrue(DeckRecognizer.isDeckName(deckName));
+        assertEquals(deckNameMatcher.group(DeckRecognizer.REGRP_DECKNAME), "[Standard] #02 - Dimir Rogues");
+        assertEquals(DeckRecognizer.deckNameMatch(deckName), "[Standard] #02 - Dimir Rogues");
+    }
+
     @Test void testMatchDeckSectionNames(){
         String[] dckSections = new String[] {"Main", "main", "Mainboard",
                 "Sideboard", "Side", "Schemes", "Avatar", "avatar", "Commander", "Conspiracy", "card", "Planes"};
