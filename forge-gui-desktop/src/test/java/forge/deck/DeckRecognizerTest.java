@@ -1230,13 +1230,13 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         Token cardToken = recognizer.recogniseCardToken(lineRequest);
         assertNotNull(cardToken);
         assertEquals(cardToken.getType(), TokenType.ILLEGAL_CARD_REQUEST);
-        assertNull(cardToken.getCard());
+        assertNotNull(cardToken.getCard());
 
         lineRequest = "2x Counterspell";  // It does not exist any Counterspell in Urza's block
         cardToken = recognizer.recogniseCardToken(lineRequest);
         assertNotNull(cardToken);
         assertEquals(cardToken.getType(), TokenType.ILLEGAL_CARD_REQUEST);
-        assertNull(cardToken.getCard());
+        assertNotNull(cardToken.getCard());
     }
 
     @Test void testRequestingCardWithRestrictionsOnDeckFormat(){
@@ -1260,7 +1260,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         cardToken = recognizer.recogniseCardToken(lineRequest);
         assertNotNull(cardToken);
         assertEquals(cardToken.getType(), TokenType.ILLEGAL_CARD_REQUEST);
-        assertNull(cardToken.getCard());
+        assertNotNull(cardToken.getCard());
     }
 
     @Test void testRequestingCardWithReleaseDateConstraints(){
@@ -1318,7 +1318,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         cardToken = recognizer.recogniseCardToken(lineRequest);
         assertNotNull(cardToken);
         assertEquals(cardToken.getType(), TokenType.INVALID_CARD_REQUEST);
-        assertNull(cardToken.getCard());
+        assertNotNull(cardToken.getCard());
     }
 
     @Test void testCardMatchWithDateANDGameFormatConstraints(){
@@ -1372,14 +1372,14 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertNotNull(cardToken);
         assertEquals(cardToken.getType(), TokenType.INVALID_CARD_REQUEST);
         assertEquals(cardToken.getNumber(), 2);
-        assertNull(cardToken.getCard());
+        assertNotNull(cardToken.getCard());
 
         lineRequest = "2x Lightning Dragon";
         cardToken = recognizer.recogniseCardToken(lineRequest);
         assertNotNull(cardToken);
         assertEquals(cardToken.getType(), TokenType.INVALID_CARD_REQUEST);
         assertEquals(cardToken.getNumber(), 2);
-        assertNull(cardToken.getCard());
+        assertNotNull(cardToken.getCard());
         assertEquals(cardToken.getText(), "Lightning Dragon (USG)");
 
         // Now relaxing date constraint but removing USG from allowed sets
@@ -1392,14 +1392,14 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertNotNull(cardToken);
         assertEquals(cardToken.getType(), TokenType.ILLEGAL_CARD_REQUEST);
         assertEquals(cardToken.getNumber(), 2);
-        assertNull(cardToken.getCard());
+        assertNotNull(cardToken.getCard());
 
         lineRequest = "2x Lightning Dragon";
         cardToken = recognizer.recogniseCardToken(lineRequest);
         assertNotNull(cardToken);
         assertEquals(cardToken.getType(), TokenType.ILLEGAL_CARD_REQUEST);
         assertEquals(cardToken.getNumber(), 2);
-        assertNull(cardToken.getCard());
+        assertNotNull(cardToken.getCard());
 
         // Now relaxing date constraint but removing USG from allowed sets
         // VMA release date: 2014-06-16
@@ -1442,7 +1442,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         cardToken = recognizer.recogniseCardToken(lineRequest);
         assertNotNull(cardToken);
         assertEquals(cardToken.getType(), TokenType.ILLEGAL_CARD_REQUEST);
-        assertNull(cardToken.getCard());
+        assertNotNull(cardToken.getCard());
         assertEquals(cardToken.getText(), "Flash (6ED)");
 
         lineRequest = "2x Cancel";
@@ -1460,7 +1460,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertNotNull(cardToken);
         assertEquals(cardToken.getType(), TokenType.INVALID_CARD_REQUEST);
         assertEquals(cardToken.getNumber(), 2);
-        assertNull(cardToken.getCard());
+        assertNotNull(cardToken.getCard());
         assertEquals(cardToken.getText(), "Cancel (M21)");
     }
 
@@ -1489,7 +1489,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         cardToken = recognizer.recogniseCardToken(lineRequest);
         assertNotNull(cardToken);
         assertEquals(cardToken.getType(), TokenType.ILLEGAL_CARD_REQUEST);
-        assertNull(cardToken.getCard());
+        assertNotNull(cardToken.getCard());
         assertEquals(cardToken.getText(), "Flash (MIR)");
 
         lineRequest = "2x Femeref Knight";
@@ -1517,7 +1517,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertNotNull(cardToken);
         assertEquals(cardToken.getType(), TokenType.ILLEGAL_CARD_REQUEST);  // violating Deck format
         assertEquals(cardToken.getNumber(), 1);
-        assertNull(cardToken.getCard());
+        assertNotNull(cardToken.getCard());
         assertEquals(cardToken.getText(), "Noble Elephant (MIR)");
 
         lineRequest = "Incinerate|ICE";
@@ -1525,7 +1525,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertNotNull(cardToken);
         assertEquals(cardToken.getType(), TokenType.ILLEGAL_CARD_REQUEST);  // violating Game format
         assertEquals(cardToken.getNumber(), 1);
-        assertNull(cardToken.getCard());
+        assertNotNull(cardToken.getCard());
         assertEquals(cardToken.getText(), "Incinerate (ICE)");
     }
 
@@ -1555,21 +1555,21 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         cardToken = recognizer.recogniseCardToken(lineRequest);
         assertNotNull(cardToken);
         assertEquals(cardToken.getType(), TokenType.ILLEGAL_CARD_REQUEST);
-        assertNull(cardToken.getCard());
+        assertNotNull(cardToken.getCard());
         assertEquals(cardToken.getText(), "Flash (MIR)");
 
         lineRequest = "Ardent Militia";
         cardToken = recognizer.recogniseCardToken(lineRequest);
         assertNotNull(cardToken);
         assertEquals(cardToken.getType(), TokenType.ILLEGAL_CARD_REQUEST);  // illegal in deck format
-        assertNull(cardToken.getCard());
+        assertNotNull(cardToken.getCard());
         assertEquals(cardToken.getText(), "Ardent Militia (WTH)");  // within set constraints
 
         lineRequest = "Buried Alive|UMA";
         cardToken = recognizer.recogniseCardToken(lineRequest);
         assertNotNull(cardToken);
-        assertEquals(cardToken.getType(), TokenType.INVALID_CARD_REQUEST);  // illegal in game format
-        assertNull(cardToken.getCard());
+        assertEquals(cardToken.getType(), TokenType.ILLEGAL_CARD_REQUEST);  // illegal in game format
+        assertNotNull(cardToken.getCard());
         assertEquals(cardToken.getText(), "Buried Alive (UMA)");  // within set constraints
 
         lineRequest = "Buried Alive";
@@ -1585,7 +1585,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         cardToken = recognizer.recogniseCardToken(lineRequest);
         assertNotNull(cardToken);
         assertEquals(cardToken.getType(), TokenType.INVALID_CARD_REQUEST);
-        assertNull(cardToken.getCard());
+        assertNotNull(cardToken.getCard());
         assertEquals(cardToken.getText(), "Buried Alive (WTH)");
     }
 

@@ -69,16 +69,14 @@ public class DeckRecognizer {
             return new Token(theCard, TokenType.LEGAL_CARD_REQUEST, count, null);
         }
 
-        public static Token IllegalCard(final String cardName, final String setCode, final int count) {
-            String ttext = setCode == null || setCode.equals("") ? cardName :
-                           String.format("%s (%s)", cardName, setCode);
-            return new Token(null, TokenType.ILLEGAL_CARD_REQUEST, count, ttext);
+        public static Token IllegalCard(final PaperCard theCard, final int count) {
+            String ttext = String.format("%s (%s)", theCard.getName(), theCard.getEdition());
+            return new Token(theCard, TokenType.ILLEGAL_CARD_REQUEST, count, ttext);
         }
 
-        public static Token InvalidCard(final String cardName, final String setCode, final int count) {
-            String ttext = setCode == null || setCode.equals("") ? cardName :
-                    String.format("%s (%s)", cardName, setCode);
-            return new Token(null, TokenType.INVALID_CARD_REQUEST, count, ttext);
+        public static Token InvalidCard(final PaperCard theCard, final int count) {
+            String ttext = String.format("%s (%s)", theCard.getName(), theCard.getEdition());
+            return new Token(theCard, TokenType.INVALID_CARD_REQUEST, count, ttext);
         }
 
         public static Token UnknownCard(final String cardName, final String setCode, final int count) {
@@ -105,8 +103,8 @@ public class DeckRecognizer {
             return null;
         }
 
-        private Token(final PaperCard knownCard, final TokenType type1, final int count, final String message) {
-            this.card = knownCard;
+        private Token(final PaperCard tokenCard, final TokenType type1, final int count, final String message) {
+            this.card = tokenCard;
             this.number = count;
             this.type = type1;
             this.text = message;
@@ -333,8 +331,6 @@ public class DeckRecognizer {
                     uknonwnCardToken = Token.UnknownCard(cardName, setCode, cardCount);
                     continue;
                 }
-                if (isNotCompliantWithReleaseDateRestrictions(edition))
-                    return Token.InvalidCard(cr.cardName, edition.getCode(), cardCount);
 
                 // we now name is ok, set is ok - we just need to be sure about collector number (if any)
                 // and if that card can be actually found in the requested set.
@@ -344,7 +340,11 @@ public class DeckRecognizer {
                     // ok so the card has been found - let's see if there's any restriction on the set
                     if (isIllegalSetInGameFormat(edition.getCode()) || isIllegalCardInDeckFormat(pc))
                         // Mark as illegal card
-                        return Token.IllegalCard(pc.getName(), pc.getEdition(), cardCount);
+                        return Token.IllegalCard(pc, cardCount);
+
+                    if (isNotCompliantWithReleaseDateRestrictions(edition))
+                        return Token.InvalidCard(pc, cardCount);
+
                     return Token.KnownCard(pc, cardCount);
                 }
                 // UNKNOWN card as in the Counterspell|FEM case
@@ -363,10 +363,10 @@ public class DeckRecognizer {
 
             if (pc != null) {
                 if (isIllegalSetInGameFormat(pc.getEdition()) || isIllegalCardInDeckFormat(pc))
-                    return Token.IllegalCard(pc.getName(), pc.getEdition(), cardCount);
+                    return Token.IllegalCard(pc, cardCount);
                 CardEdition edition = StaticData.instance().getCardEdition(pc.getEdition());
                 if (isNotCompliantWithReleaseDateRestrictions(edition))
-                    return Token.InvalidCard(pc.getName(), pc.getEdition(), cardCount);
+                    return Token.InvalidCard(pc, cardCount);
                 return Token.KnownCard(pc, cardCount);
             }
         }
