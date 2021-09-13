@@ -1,0 +1,8 @@
+Name:Sigardian Savior
+ManaCost:3 W W
+Types:Creature Angel
+PT:3/3
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self+wasCast | Destination$ Battlefield | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it, return up to two target creature cards with mana value 2 or less from your graveyard to the battlefield.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn+cmcLE2 | SelectPrompt$ Select up to two target creature cards with mana value 2 or less to return to the battlefield | TargetMin$ 0 | TargetMax$ 2
+Oracle:Flying\nWhen Sigardian Savior enters the battlefield, if you cast it, return up to two target creature cards with mana value 2 or less from your graveyard to the battlefield.
