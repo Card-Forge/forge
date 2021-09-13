@@ -1729,7 +1729,6 @@ public class GameAction {
             return false;
         }
 
-
         if (sa != null) {
             activator = sa.getActivatingPlayer();
         }
