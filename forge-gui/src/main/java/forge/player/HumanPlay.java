@@ -753,14 +753,6 @@ public class HumanPlay {
             }
         }
 
-        Integer replicate = ability.getSVarInt("Replicate");
-        if (replicate != null) {
-            ManaCost rCost = source.getManaCost();
-            for (int i = 0; i < replicate; i++) {
-                toPay.addManaCost(rCost);
-            }
-        }
-
         CardCollection cardsToDelve = new CardCollection();
         if (isActivatedSa) {
             CostAdjustment.adjust(toPay, ability, cardsToDelve, false);
