@@ -9,5 +9,4 @@ T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigToken | TriggerZ
 SVar:TrigToken:DB$ Token | TokenAmount$ Y | TokenScript$ w_1_1_human | TokenTapped$ True | TokenAttacking$ True | ChoosePlayerOrPlaneswalker$ True | TokenOwner$ You
 SVar:Y:PlayerCountOpponents$Amount
 DeckHas:Ability$Token
-DeckHints:Type$Knight
 Oracle:Vigilance\nAdeline, Resplendent Cathar's power is equal to the number of creatures you control.\nWhenever you attack, for each opponent, create a 1/1 white Human creature token that's tapped and attacking that player or a planeswalker they control.
