@@ -1,0 +1,13 @@
+Name:Tainted Adversary
+ManaCost:1 B
+Types:Creature Zombie
+PT:2/3
+K:Deathtouch
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPay | TriggerDescription$ When CARDNAME enters the battlefield, you may pay {2}{B} any number of times. When you pay this cost one or more times, put that many +1/+1 counters on CARDNAME, then create twice that many black 2/2 Zombie creature tokens with decayed. (A creature with decayed can't block. When it attacks, sacrifice it at end of combat.)
+SVar:TrigPay:AB$ ImmediateTrigger | Cost$ Mana<2 B\NumTimes> | Announce$ NumTimes | ConditionCheckSVar$ NumTimes | ConditionSVarCompare$ GE1 | Execute$ TrigPutCounter | TriggerDescription$ When you pay this cost one or more times, put that many +1/+1 counters on CARDNAME, then create twice that many black 2/2 Zombie creature tokens with decayed. (A creature with decayed can't block. When it attacks, sacrifice it at end of combat.)
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ NumTimes | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ b_2_2_zombie_decayed | TokenAmount$ TwiceNumTimes
+SVar:NumTimes:Number$0
+SVar:TwiceNumTimes:SVar$NumTimes/Twice
+DeckHas:Ability$Token & Ability$Counters
+Oracle:Deathtouch\nWhen Tainted Adversary enters the battlefield, you may pay {2}{B} any number of times. When you pay this cost one or more times, put that many +1/+1 counters on Tainted Adversary, then create twice that many black 2/2 Zombie creature tokens with decayed. (A creature with decayed can't block. When it attacks, sacrifice it at end of combat.)
