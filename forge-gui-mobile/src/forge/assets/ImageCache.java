@@ -50,7 +50,6 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.util.ImageUtil;
-import forge.util.TextUtil;
 
 /**
  * This class stores ALL card images in a cache with soft values. this means
@@ -171,10 +170,7 @@ public class ImageCache {
             } else {
                 final boolean backFace = imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX);
                 final String cardfilename = backFace ? paperCard.getCardAltImageKey() : paperCard.getCardImageKey();
-                if (!new File(ForgeConstants.CACHE_CARD_PICS_DIR + "/" + cardfilename + ".jpg").exists())
-                    if (!new File(ForgeConstants.CACHE_CARD_PICS_DIR + "/" + cardfilename + ".png").exists())
-                        if (!new File(ForgeConstants.CACHE_CARD_PICS_DIR + "/" + TextUtil.fastReplace(cardfilename,".full", ".fullborder") + ".jpg").exists())
-                            return false;
+                return ImageKeys.getCachedCardsFile(cardfilename) != null;
             }
         } else if (prefix.equals(ImageKeys.TOKEN_PREFIX)) {
             final String tokenfilename = imageKey.substring(2) + ".jpg";
@@ -242,10 +238,10 @@ public class ImageCache {
         // a default "not available" image and add to cache for given key.
         if (image == null) {
             if (useDefaultIfNotFound) {
-                image = useOtherCache ? defaultImage : null;
-                if (useOtherCache)
-                    otherCache.put(imageKey, defaultImage);
-
+                image = defaultImage;
+                /*fix not loading image file since we intentionally not to update the cache in order for the
+                  image fetcher to update automatically after the card image/s are downloaded*/
+                imageLoaded = false;
                 if (image != null && imageBorder.get(image.toString()) == null)
                     imageBorder.put(image.toString(), Pair.of(Color.valueOf("#171717").toString(), false)); //black border
             }
