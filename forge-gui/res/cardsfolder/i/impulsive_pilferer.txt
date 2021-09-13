@@ -5,7 +5,7 @@ PT:1/1
 K:Encore:3 R
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
 SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenAmount$ 1
-DeckHas:Ablity$Token
+DeckHas:Ability$Token
 DeckHints:Ability$Sacrifice
 SVar:SacMe:1
 Oracle:When Impulsive Pilferer dies, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")\nEncore {3}{R} ({3}{R}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)
