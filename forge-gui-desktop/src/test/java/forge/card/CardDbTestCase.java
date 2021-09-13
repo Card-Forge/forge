@@ -7,14 +7,10 @@ import forge.item.PaperCard;
 import forge.model.FModel;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import static org.testng.Assert.*;
 
@@ -2139,4 +2135,3 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
     }
 
 }
-
