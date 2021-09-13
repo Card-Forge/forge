@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -42,7 +42,6 @@ import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.combat.GlobalAttackRestrictions;
 import forge.game.keyword.Keyword;
-import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
@@ -60,7 +59,7 @@ import forge.util.collect.FCollectionView;
  * <p>
  * ComputerUtil_Attack2 class.
  * </p>
- * 
+ *
  * @author Forge
  * @version $Id$
  */
@@ -72,10 +71,10 @@ public class AiAttackController {
 
     private List<Card> oppList; // holds human player creatures
     private List<Card> myList; // holds computer creatures
-    
+
     private final Player ai;
     private Player defendingOpponent;
-    
+
     private int aiAggression = 0; // added by Masher, how aggressive the ai is attack will be depending on circumstances
     private final boolean nextTurn;
 
@@ -108,7 +107,7 @@ public class AiAttackController {
 
     public AiAttackController(final Player ai, Card attacker) {
         this.ai = ai;
-        this.defendingOpponent = choosePreferredDefenderPlayer(ai);       
+        this.defendingOpponent = choosePreferredDefenderPlayer(ai);
         this.oppList = getOpponentCreatures(this.defendingOpponent);
         this.myList = ai.getCreaturesInPlay();
         this.attackers = new ArrayList<>();
@@ -118,7 +117,7 @@ public class AiAttackController {
         this.blockers = getPossibleBlockers(oppList, this.attackers);
         this.nextTurn = false;
     } // overloaded constructor to evaluate single specified attacker
-    
+
     public static List<Card> getOpponentCreatures(final Player defender) {
         List<Card> defenders = new ArrayList<>(defender.getCreaturesInPlay());
         Predicate<Card> canAnimate = new Predicate<Card>() {
@@ -133,7 +132,7 @@ public class AiAttackController {
             }
             for (SpellAbility sa : c.getSpellAbilities()) {
                 if (sa.getApi() == ApiType.Animate) {
-                    if (ComputerUtilCost.canPayCost(sa, defender) 
+                    if (ComputerUtilCost.canPayCost(sa, defender)
                             && sa.getRestrictions().checkOtherRestrictions(c, sa, defender)) {
                         Card animatedCopy = AnimateAi.becomeAnimated(c, sa);
                         defenders.add(animatedCopy);
@@ -143,7 +142,7 @@ public class AiAttackController {
         }
         return defenders;
     }
-    
+
     public void removeBlocker(Card blocker) {
     	this.oppList.remove(blocker);
     }
@@ -200,7 +199,7 @@ public class AiAttackController {
      * <p>
      * isEffectiveAttacker.
      * </p>
-     * 
+     *
      * @param attacker
      *            a {@link forge.game.card.Card} object.
      * @param combat
@@ -501,7 +500,7 @@ public class AiAttackController {
         // Conservative prediction for vehicles: the AI tries to acknowledge the fact that
         // at least one creature will tap to crew a blocking vehicle when predicting if an
         // alpha strike for lethal is viable
-        int maxBlockersAfterCrew = remainingBlockers.size(); 
+        int maxBlockersAfterCrew = remainingBlockers.size();
         for (Card c : this.blockers) {
             CardTypeView cardType = c.getCurrentState().getType();
             CardCollectionView oppBattlefield = c.getController().getCardsIn(ZoneType.Battlefield);
@@ -514,7 +513,7 @@ public class AiAttackController {
             } else if (c.getName().equals("Peacewalker Colossus")) {
                 // can activate other vehicles for {1}{W}
                 // TODO: the AI should ideally predict how many times it can activate
-                // for now, unless the opponent is tapped out, break at this point 
+                // for now, unless the opponent is tapped out, break at this point
                 // and do not predict the blocker limit (which is safer)
                 if (!CardLists.filter(oppBattlefield, Predicates.and(CardPredicates.Presets.UNTAPPED, CardPredicates.Presets.LANDS)).isEmpty()) {
                     maxBlockersAfterCrew = Integer.MAX_VALUE;
@@ -600,7 +599,7 @@ public class AiAttackController {
             maxBlockersAfterCrew--;
         }
         unblockedAttackers.addAll(remainingAttackers);
-        
+
         int trampleDamage = 0;
         for (Card attacker : blockedAttackers) {
             if (attacker.hasKeyword(Keyword.TRAMPLE)) {
@@ -674,7 +673,7 @@ public class AiAttackController {
      * <p>
      * Getter for the field <code>attackers</code>.
      * </p>
-     * 
+     *
      * @return a {@link forge.game.combat.Combat} object.
      */
     public final void declareAttackers(final Combat combat) {
@@ -742,14 +741,9 @@ public class AiAttackController {
                     // TODO: if there are other ways to tap this creature (like mana creature), then don't need to attack
                     mustAttack = true;
                 } else {
-                    for (KeywordInterface inst : attacker.getKeywords()) {
-                        String s = inst.getOriginal();
-                        if (s.equals("CARDNAME attacks each turn if able.")
-                                || s.startsWith("CARDNAME attacks specific player each combat if able")
-                                || s.equals("CARDNAME attacks each combat if able.")) {
-                            mustAttack = true;
-                            break;
-                        }
+                    // TODO move to static Ability
+                    if (attacker.hasKeyword("CARDNAME attacks each combat if able.") || attacker.hasStartOfKeyword("CARDNAME attacks specific player each combat if able")) {
+                        mustAttack = true;
                     }
                 }
                 if (mustAttack || attacker.getController().getMustAttackEntity() != null || attacker.getController().getMustAttackEntityThisTurn() != null) {
@@ -799,7 +793,7 @@ public class AiAttackController {
                 }
             }
         }
-        
+
         // Exalted
         if (combat.getAttackers().isEmpty()) {
             boolean exalted = ai.countExaltedBonus() > 2;
@@ -857,7 +851,7 @@ public class AiAttackController {
         // examine the potential forces
         final List<Card> nextTurnAttackers = new ArrayList<>();
         int candidateCounterAttackDamage = 0;
-        
+
         final Player opp = this.defendingOpponent;
         // get the potential damage and strength of the AI forces
         final List<Card> candidateAttackers = new ArrayList<>();
@@ -1115,7 +1109,7 @@ public class AiAttackController {
      * <p>
      * getAttack.
      * </p>
-     * 
+     *
      * @param c
      *            a {@link forge.game.card.Card} object.
      * @return a int.
@@ -1134,7 +1128,7 @@ public class AiAttackController {
      * <p>
      * shouldAttack.
      * </p>
-     * 
+     *
      * @param attacker
      *            a {@link forge.game.card.Card} object.
      * @param defenders
@@ -1179,7 +1173,7 @@ public class AiAttackController {
         }
         boolean hasAttackEffect = attacker.getSVar("HasAttackEffect").equals("TRUE") || attacker.hasStartOfKeyword("Annihilator");
         // is there a gain in attacking even when the blocker is not killed (Lifelink, Wither,...)
-        boolean hasCombatEffect = attacker.getSVar("HasCombatEffect").equals("TRUE") 
+        boolean hasCombatEffect = attacker.getSVar("HasCombatEffect").equals("TRUE")
         		|| "Blocked".equals(attacker.getSVar("HasAttackEffect"));
 
         // contains only the defender's blockers that can actually block the attacker
@@ -1201,13 +1195,9 @@ public class AiAttackController {
         int defPower = CardLists.getTotalPower(validBlockers, true, false);
 
         if (!hasCombatEffect) {
-            for (KeywordInterface inst : attacker.getKeywords()) {
-                String keyword = inst.getOriginal();
-                if (keyword.equals("Wither") || keyword.equals("Infect")
-                        || keyword.equals("Lifelink") || keyword.startsWith("Afflict")) {
-                    hasCombatEffect = true;
-                    break;
-                }
+            if (attacker.hasKeyword(Keyword.WITHER) || attacker.hasKeyword(Keyword.INFECT)
+                    || attacker.hasKeyword(Keyword.LIFELINK) || attacker.hasKeyword(Keyword.AFFLICT)) {
+                hasCombatEffect = true;
             }
         }
 
@@ -1262,7 +1252,7 @@ public class AiAttackController {
                 }
             }
         }
-        
+
         if (!attacker.hasKeyword(Keyword.VIGILANCE) && ComputerUtilCard.canBeKilledByRoyalAssassin(ai, attacker)) {
             canKillAllDangerous = false;
             canBeKilled = true;
@@ -1272,7 +1262,7 @@ public class AiAttackController {
         } else if ((canKillAllDangerous || !canBeKilled) && ComputerUtilCard.canBeBlockedProfitably(defendingOpponent, attacker)) {
             canKillAllDangerous = false;
             canBeKilled = true;
-        } 
+        }
 
         // if the creature cannot block and can kill all opponents they might as
         // well attack, they do nothing staying back
@@ -1286,7 +1276,7 @@ public class AiAttackController {
             return true;
         }
 
-        if (numberOfPossibleBlockers > 2 
+        if (numberOfPossibleBlockers > 2
                 || (numberOfPossibleBlockers >= 1 && CombatUtil.canAttackerBeBlockedWithAmount(attacker, 1, this.defendingOpponent))
                 || (numberOfPossibleBlockers == 2 && CombatUtil.canAttackerBeBlockedWithAmount(attacker, 2, this.defendingOpponent))) {
             canBeBlocked = true;
@@ -1416,7 +1406,7 @@ public class AiAttackController {
 
         return exerters;
     }
-    
+
     /**
      * Find a protection type that will make an attacker unblockable.
      * @param sa ability belonging to ApiType.Protection
@@ -1485,10 +1475,10 @@ public class AiAttackController {
         CardCollection attSorted = new CardCollection(attackersLeft);
         CardCollection attUnsafe = new CardCollection();
         CardLists.sortByToughnessDesc(attSorted);
-        
+
         int i = numForcedAttackers;
         int refPowerValue = 0; // Aggro profiles do not account for the possible blockers' power, conservative profiles do.
-        
+
         if (!playAggro && this.blockers.size() > 0) {
             // Conservative play: check to ensure that the card can't be killed off while damaged
             // TODO: currently sorting a copy of this.blockers, but it looks safe to operate on this.blockers directly?
@@ -1498,7 +1488,7 @@ public class AiAttackController {
             CardLists.sortByPowerDesc(blkSorted);
             refPowerValue += blkSorted.get(0).getCurrentPower();
         }
-        
+
         for (Card cre : attSorted) {
             i++;
             if (i + refPowerValue >= cre.getCurrentToughness()) {
@@ -1507,7 +1497,7 @@ public class AiAttackController {
                 continue;
             }
         }
-        
+
         attackersLeft.removeAll(attUnsafe);
     }
 

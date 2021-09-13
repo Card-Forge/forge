@@ -31,5 +31,4 @@ public class QuestItemCharmOfVim extends QuestItemBasic {
         return super.isAvailableForPurchase(qA, qCtrl);
     }
 
-
 }

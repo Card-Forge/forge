@@ -3,6 +3,6 @@ ManaCost:4 R R
 Types:Creature Giant Warrior
 PT:4/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 1 damage to any target.
-SVar:TrigDealDamage:DB$DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akoum_boulderfoot.jpg
 Oracle:When Akoum Boulderfoot enters the battlefield, it deals 1 damage to any target.

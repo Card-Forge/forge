@@ -1,0 +1,24 @@
+Name:Covetous Castaway
+ManaCost:1 U
+Types:Creature Human
+PT:1/3
+K:Disturb:3 U U
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME dies, mill three cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ You
+AlternateMode:DoubleFaced
+DeckHas:Ability$Mill & Ability$Graveyard
+Oracle:When Covetous Castaway dies, mill three cards.\nDisturb {3}{U}{U} (You may cast this card from your graveyard transformed for its disturb cost.)
+
+ALTERNATE
+
+Name:Ghostly Castigator
+ManaCost:no cost
+Types:Creature Spirit
+Colors:blue
+PT:3/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, shuffle up to three target cards from your graveyard into your library.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | ValidTgts$ Card.YouOwn | TgtPrompt$ Select up to three target cards from your graveyard | TargetMin$ 0 | TargetMax$ 3 | Shuffle$ True
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Graveyard | ReplaceWith$ Exile | Description$ If CARDNAME would be put into a graveyard from anywhere, exile it instead.
+SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
+Oracle:Flying\nWhen Ghostly Castigator enters the battlefield, shuffle up to three target cards from your graveyard into your library.\nIf Ghostly Castigator would be put into a graveyard from anywhere, exile it instead.

@@ -174,17 +174,7 @@ public class StaticEffect {
         final CardCollectionView affectedCards = getAffectedCards();
         final List<Player> affectedPlayers = getAffectedPlayers();
 
-        boolean setPT = false;
-        String[] addHiddenKeywords = null;
         boolean removeMayPlay = false;
-
-        if (hasParam("SetPower") || hasParam("SetToughness")) {
-            setPT = true;
-        }
-
-        if (hasParam("AddHiddenKeyword")) {
-            addHiddenKeywords = getParam("AddHiddenKeyword").split(" & ");
-        }
 
         if (hasParam("MayPlay")) {
             removeMayPlay = true;
@@ -220,7 +210,7 @@ public class StaticEffect {
             affectedCard.removeChangedTextColorWord(getTimestamp(), ability.getId());
 
             // remove set P/T
-            if (setPT) {
+            if (hasParam("SetPower") || hasParam("SetToughness")) {
                 affectedCard.removeNewPT(getTimestamp());
             }
 
@@ -240,10 +230,8 @@ public class StaticEffect {
                 affectedCard.removeCantHaveKeyword(getTimestamp());
             }
 
-            if (addHiddenKeywords != null) {
-                for (final String k : addHiddenKeywords) {
-                    affectedCard.removeHiddenExtrinsicKeyword(k);
-                }
+            if (hasParam("AddHiddenKeyword")) {
+                affectedCard.removeHiddenExtrinsicKeywords(timestamp, ability.getId());
             }
 
             // remove abilities

@@ -13,6 +13,7 @@ import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.spellability.SpellAbility;
 
@@ -72,17 +73,16 @@ public class DebuffEffect extends SpellAbilityEffect {
             final List<String> removedKW = Lists.newArrayList();
             if (tgtC.isInPlay() && (!sa.usesTargeting() || tgtC.canBeTargetedBy(sa))) {
                 if (sa.hasParam("AllSuffixKeywords")) {
-                    String suffix = sa.getParam("AllSuffixKeywords");
-                    for (final KeywordInterface kw : tgtC.getKeywords()) {
-                        String keyword = kw.getOriginal();
-                        if (keyword.endsWith(suffix)) {
-                            kws.add(keyword);
+                    // this only for walk abilities, may to try better
+                    if (sa.getParam("AllSuffixKeywords").equals("walk")) {
+                        for (final KeywordInterface kw : tgtC.getKeywords(Keyword.LANDWALK)) {
+                            removedKW.add(kw.getOriginal());
                         }
                     }
                 }
 
                 // special for Protection:Card.<color>:Protection from <color>:*             
-                for (final KeywordInterface inst : tgtC.getKeywords()) {
+                for (final KeywordInterface inst : tgtC.getUnhiddenKeywords()) {
                     String keyword = inst.getOriginal();
                     if (keyword.startsWith("Protection:")) {
                         for (final String kw : kws) {

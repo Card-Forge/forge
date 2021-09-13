@@ -561,9 +561,11 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         // Before returning make sure that actual candidate has Image.
         // If not, try to replace current candidate with one having image,
         // so to align this implementation with old one.
-        while (!candidate.hasImage() && candidatesIterator.hasNext()) {
+        // If none will have image, the original candidate will be retained!
+        PaperCard firstCandidate = candidate;
+        while (!candidate.hasImage() && candidatesIterator.hasNext())
             candidate = candidatesIterator.next();
-        }
+        candidate = candidate.hasImage() ? candidate : firstCandidate;
         return isFoil ? candidate.getFoiled() : candidate;
     }
 
@@ -767,10 +769,12 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         final Iterator<CardEdition> editionIterator = acceptedEditions.iterator();
         CardEdition ed = editionIterator.next();
         PaperCard candidate = candidatesCard.get(ed.getCode());
+        PaperCard firstCandidate = candidate;
         while (!candidate.hasImage() && editionIterator.hasNext()) {
             ed = editionIterator.next();
             candidate = candidatesCard.get(ed.getCode());
         }
+        candidate = candidate.hasImage() ? candidate : firstCandidate;
         //If any, we're sure that at least one candidate is always returned despite it having any image
         return cr.isFoil ? candidate.getFoiled() : candidate;
     }

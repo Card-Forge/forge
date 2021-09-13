@@ -57,6 +57,4 @@ public class ArchetypeDeckBuilder extends CardThemedDeckBuilder{
         return super.getBasicLand(basicLand);
     }
 
-
-
 }

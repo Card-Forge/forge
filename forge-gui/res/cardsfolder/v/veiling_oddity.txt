@@ -3,7 +3,7 @@ ManaCost:3 U
 Types:Creature Illusion
 PT:2/3
 K:Suspend:4:1 U
-T:Mode$ CounterRemoved | ValidCard$ Card.Self | TriggerZones$ Exile | CounterType$ TIME | Execute$ TrigEffect | IsPresent$ Card.Self+counters_GE1_TIME | PresentZone$ Exile | PresentCompare$ EQ0 | TriggerDescription$ When the last time counter is removed from CARDNAME while it's exiled, creatures can't be blocked this turn.
+T:Mode$ CounterRemoved | ValidCard$ Card.Self | TriggerZones$ Exile | CounterType$ TIME | Execute$ TrigEffect | NewCounterAmount$ 0 | TriggerDescription$ When the last time counter is removed from CARDNAME while it's exiled, creatures can't be blocked this turn.
 SVar:TrigEffect:DB$ Effect | Name$ Veiling Oddity Effect | StaticAbilities$ KWPump
 SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature | AddHiddenKeyword$ Unblockable | Description$ creatures can't be blocked this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veiling_oddity.jpg

@@ -74,6 +74,7 @@ import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityCantAttackBlock;
 import forge.game.staticability.StaticAbilityLayer;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZone;
@@ -682,17 +683,25 @@ public class GameAction {
 
         // need to refresh ability text for affected cards
         for (final StaticAbility stAb : c.getStaticAbilities()) {
-            if (stAb.isSecondary() ||
-                    !stAb.getParam("Mode").equals("CantBlockBy") ||
-                    stAb.isSuppressed() || !stAb.checkConditions() ||
-                    !stAb.hasParam("ValidAttacker") ||
-                    (stAb.hasParam("ValidBlocker") && stAb.getParam("ValidBlocker").equals("Creature.Self"))) {
+            if (stAb.isSuppressed() || !stAb.checkConditions()) {
                 continue;
             }
-            final Card host = stAb.getHostCard();
-            for (Card creature : Iterables.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES)) {
-                if (creature.isValid(stAb.getParam("ValidAttacker").split(","), host.getController(), host, stAb)) {
-                    creature.updateAbilityTextForView();
+
+            if (stAb.getParam("Mode").equals("CantBlockBy")) {
+                if (!stAb.hasParam("ValidAttacker") || (stAb.hasParam("ValidBlocker") && stAb.getParam("ValidBlocker").equals("Creature.Self"))) {
+                    continue;
+                }
+                for (Card creature : Iterables.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES)) {
+                    if (stAb.matchesValidParam("ValidAttacker", creature)) {
+                        creature.updateAbilityTextForView();
+                    }
+                }
+            }
+            if (stAb.getParam("Mode").equals(StaticAbilityCantAttackBlock.MinMaxBlockerMode)) {
+                for (Card creature : Iterables.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES)) {
+                    if (stAb.matchesValidParam("ValidCard", creature)) {
+                        creature.updateAbilityTextForView();
+                    }
                 }
             }
         }
@@ -1719,7 +1728,6 @@ public class GameAction {
         if (game.getReplacementHandler().run(ReplacementType.Destroy, repRunParams) != ReplacementResult.NotReplaced) {
             return false;
         }
-
 
         if (sa != null) {
             activator = sa.getActivatingPlayer();

@@ -24,7 +24,6 @@ import forge.game.card.CardFactory;
 import forge.game.card.CounterType;
 import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
-import forge.game.keyword.KeywordInterface;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -295,8 +294,8 @@ public class GameCopier {
             newCard.setChangedCardNames(c.getChangedCardNames());
 
             // TODO: Is this correct? Does it not duplicate keywords from enchantments and such?
-            for (KeywordInterface kw : c.getHiddenExtrinsicKeywords())
-                newCard.addHiddenExtrinsicKeyword(kw);
+            //for (KeywordInterface kw : c.getHiddenExtrinsicKeywords())
+            //    newCard.addHiddenExtrinsicKeyword(kw);
             if (c.isTapped()) {
                 newCard.setTapped(true);
             }

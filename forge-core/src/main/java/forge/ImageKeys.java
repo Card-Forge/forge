@@ -65,6 +65,10 @@ public final class ImageKeys {
         return tokenKey.substring(ImageKeys.TOKEN_PREFIX.length());
     }
 
+    private static final Map<String, File> cachedCards = new HashMap<>(50000);
+    public static File getCachedCardsFile(String key) {
+        return cachedCards.get(key);
+    }
     public static File getImageFile(String key) {
         if (StringUtils.isEmpty(key))
             return null;
@@ -97,101 +101,142 @@ public final class ImageKeys {
             dir = CACHE_CARD_PICS_DIR;
         }
 
-        File file = findFile(dir, filename);
-        if (file != null) { return file; }
+        File cachedFile = cachedCards.get(filename);
+        if (cachedFile != null) {
+            return cachedFile;
+        } else {
+            File file = findFile(dir, filename);
+            if (file != null) {
+                cachedCards.put(filename, file);
+                return file;
+            }
 
-        // AE -> Ae and Ae -> AE for older cards with different file names 
-        // on case-sensitive file systems
-        if (filename.contains("Ae")) {
-            file = findFile(dir, TextUtil.fastReplace(filename, "Ae", "AE"));
-            if (file != null) { return file; }
-        } else if (filename.contains("AE")) {
-            file = findFile(dir, TextUtil.fastReplace(filename, "AE", "Ae"));
-            if (file != null) { return file; }
-        }
-        //try fullborder...
-        if (filename.contains(".full")) {
-            String fullborderFile = TextUtil.fastReplace(filename, ".full", ".fullborder");
-            file = findFile(dir, fullborderFile);
-            if (file != null) { return file; }
-            // if there's a 1st art variant try without it for .fullborder images
-            file = findFile(dir, TextUtil.fastReplace(fullborderFile, "1.fullborder", ".fullborder"));
-            if (file != null) { return file; }
-            // if there's a 1st art variant try with it for .fullborder images
-            file = findFile(dir, fullborderFile.replaceAll("[0-9]*.fullborder", "1.fullborder"));
-            if (file != null) { return file; }
-            // if there's an art variant try without it for .full images
-            file = findFile(dir, filename.replaceAll("[0-9].full",".full"));
-            if (file != null) { return file; }
-            // if there's a 1st art variant try with it for .full images
-            file = findFile(dir, filename.replaceAll("[0-9]*.full", "1.full"));
-            if (file != null) { return file; }
-            //setlookup
-            if (!StaticData.instance().getSetLookup().isEmpty()) {
-                for (String setKey : StaticData.instance().getSetLookup().keySet()) {
-                    if (filename.startsWith(setKey)) {
-                        for (String setLookup : StaticData.instance().getSetLookup().get(setKey)) {
-                            //.fullborder lookup
-                            file = findFile(dir, TextUtil.fastReplace(fullborderFile, setKey, getSetFolder(setLookup)));
-                            if (file != null) { return file; }
-                            file = findFile(dir, TextUtil.fastReplace(fullborderFile, setKey, getSetFolder(setLookup)).replaceAll("[0-9]*.fullborder", "1.fullborder"));
-                            if (file != null) { return file; }
-                            //.full lookup
-                            file = findFile(dir, TextUtil.fastReplace(filename, setKey, getSetFolder(setLookup)));
-                            if (file != null) { return file; }
-                            file = findFile(dir, TextUtil.fastReplace(filename, setKey, getSetFolder(setLookup)).replaceAll("[0-9]*.full", "1.full"));
-                            if (file != null) { return file; }
+            // AE -> Ae and Ae -> AE for older cards with different file names
+            // on case-sensitive file systems
+            if (filename.contains("Ae")) {
+                file = findFile(dir, TextUtil.fastReplace(filename, "Ae", "AE"));
+                if (file != null) {
+                    cachedCards.put(filename, file);
+                    return file;
+                }
+            } else if (filename.contains("AE")) {
+                file = findFile(dir, TextUtil.fastReplace(filename, "AE", "Ae"));
+                if (file != null) {
+                    cachedCards.put(filename, file);
+                    return file;
+                }
+            }
+            //try fullborder...
+            if (filename.contains(".full")) {
+                String fullborderFile = TextUtil.fastReplace(filename, ".full", ".fullborder");
+                file = findFile(dir, fullborderFile);
+                if (file != null) {
+                    cachedCards.put(filename, file);
+                    return file;
+                }
+                // if there's a 1st art variant try without it for .fullborder images
+                file = findFile(dir, TextUtil.fastReplace(fullborderFile, "1.fullborder", ".fullborder"));
+                if (file != null) {
+                    cachedCards.put(filename, file);
+                    return file;
+                }
+                // if there's a 1st art variant try with it for .fullborder images
+                file = findFile(dir, fullborderFile.replaceAll("[0-9]*.fullborder", "1.fullborder"));
+                if (file != null) {
+                    cachedCards.put(filename, file);
+                    return file;
+                }
+                // if there's an art variant try without it for .full images
+                file = findFile(dir, filename.replaceAll("[0-9].full",".full"));
+                if (file != null) {
+                    cachedCards.put(filename, file);
+                    return file;
+                }
+                // if there's a 1st art variant try with it for .full images
+                file = findFile(dir, filename.replaceAll("[0-9]*.full", "1.full"));
+                if (file != null) {
+                    cachedCards.put(filename, file);
+                    return file;
+                }
+                //setlookup
+                file = setLookUpFile(filename, fullborderFile);
+                if (file != null) {
+                    cachedCards.put(filename, file);
+                    return file;
+                }
+            }
+            //if an image, like phenomenon or planes is missing .full in their filenames but you have an existing images that have .full/.fullborder
+            if (!filename.contains(".full")) {
+                file = findFile(dir, TextUtil.addSuffix(filename,".full"));
+                if (file != null) {
+                    cachedCards.put(filename, file);
+                    return file;
+                }
+                file = findFile(dir, TextUtil.addSuffix(filename,".fullborder"));
+                if (file != null) {
+                    cachedCards.put(filename, file);
+                    return file;
+                }
+            }
+            if (dir.equals(CACHE_TOKEN_PICS_DIR)) {
+                int index = filename.lastIndexOf('_');
+                if (index != -1) {
+                    String setlessFilename = filename.substring(0, index);
+                    String setCode = filename.substring(index + 1);
+                    // try with upper case set
+                    file = findFile(dir, setlessFilename + "_" + setCode.toUpperCase());
+                    if (file != null) {
+                        cachedCards.put(filename, file);
+                        return file;
+                    }
+                    // try with lower case set
+                    file = findFile(dir, setlessFilename + "_" + setCode.toLowerCase());
+                    if (file != null) {
+                        cachedCards.put(filename, file);
+                        return file;
+                    }
+                    // try without set name
+                    file = findFile(dir, setlessFilename);
+                    if (file != null) {
+                        cachedCards.put(filename, file);
+                        return file;
+                    }
+                    // if there's an art variant try without it
+                    if (setlessFilename.matches(".*[0-9]*$")) {
+                        file = findFile(dir, setlessFilename.replaceAll("[0-9]*$", ""));
+                        if (file != null) {
+                            cachedCards.put(filename, file);
+                            return file;
                         }
+                    }
+                }
+            } else if (filename.contains("/")) {
+                String setlessFilename = filename.substring(filename.indexOf('/') + 1);
+                file = findFile(dir, setlessFilename);
+                if (file != null) {
+                    cachedCards.put(filename, file);
+                    return file;
+                }
+
+                if (setlessFilename.contains(".full")) {
+                    //try fullborder
+                    String fullborderFile = TextUtil.fastReplace(setlessFilename, ".full", ".fullborder");
+                    file = findFile(dir, fullborderFile);
+                    if (file != null) {
+                        cachedCards.put(filename, file);
+                        return file;
+                    }
+                    // try lowering the art index to the minimum for regular cards
+                    file = findFile(dir, setlessFilename.replaceAll("[0-9]*[.]full", "1.full"));
+                    if (file != null) {
+                        cachedCards.put(filename, file);
+                        return file;
                     }
                 }
             }
         }
-        //if an image, like phenomenon or planes is missing .full in their filenames but you have an existing images that have .full/.fullborder
-        if (!filename.contains(".full")) {
-            file = findFile(dir, TextUtil.addSuffix(filename,".full"));
-            if (file != null) { return file; }
-            file = findFile(dir, TextUtil.addSuffix(filename,".fullborder"));
-            if (file != null) { return file; }
-        }
-
-        if (dir.equals(CACHE_TOKEN_PICS_DIR)) {
-            int index = filename.lastIndexOf('_');
-            if (index != -1) {
-                String setlessFilename = filename.substring(0, index);
-                String setCode = filename.substring(index + 1);
-                // try with upper case set
-                file = findFile(dir, setlessFilename + "_" + setCode.toUpperCase());
-                if (file != null) { return file; }
-                // try with lower case set
-                file = findFile(dir, setlessFilename + "_" + setCode.toLowerCase());
-                if (file != null) { return file; }
-                // try without set name
-                file = findFile(dir, setlessFilename);
-                if (file != null) { return file; }
-                // if there's an art variant try without it
-                if (setlessFilename.matches(".*[0-9]*$")) {
-                    file = findFile(dir, setlessFilename.replaceAll("[0-9]*$", ""));
-                    if (file != null) { return file; }
-                }
-            }
-        } else if (filename.contains("/")) {
-            String setlessFilename = filename.substring(filename.indexOf('/') + 1);
-            file = findFile(dir, setlessFilename);
-            if (file != null) { return file; }
-
-            if (setlessFilename.contains(".full")) {
-            	//try fullborder
-                String fullborderFile = TextUtil.fastReplace(setlessFilename, ".full", ".fullborder");
-                file = findFile(dir, fullborderFile);
-                if (file != null) { return file; }
-                // try lowering the art index to the minimum for regular cards
-                file = findFile(dir, setlessFilename.replaceAll("[0-9]*[.]full", "1.full"));
-                if (file != null) { return file; }
-            }
-        }
 
         // System.out.println("File not found, no image created: " + key);
-
         return null;
     }
 
@@ -200,16 +245,72 @@ public final class ImageKeys {
                 ? StaticData.instance().getEditions().getCode2ByCode(edition) // by default 2-letter codes from MWS are used
                 : CACHE_CARD_PICS_SUBDIR.get(edition); // may use custom paths though
     }
-
-    private static File findFile(String dir, String filename) {
-        for (String ext : FILE_EXTENSIONS) {
-            File file = new File(dir, filename + ext);
-            if (file.exists()) {
-                if (file.isDirectory()) {
-                    file.delete();
-                    continue;
+    private static File setLookUpFile(String filename, String fullborderFile) {
+        if (!StaticData.instance().getSetLookup().isEmpty()) {
+            for (String setKey : StaticData.instance().getSetLookup().keySet()) {
+                if (filename.startsWith(setKey)) {
+                    for (String setLookup : StaticData.instance().getSetLookup().get(setKey)) {
+                        String lookupDirectory = CACHE_CARD_PICS_DIR + setLookup;
+                        File f = new File(lookupDirectory);
+                        String[] cardNames = f.list();
+                        if (cardNames != null) {
+                            Set<String> cardList = new HashSet<>(Arrays.asList(cardNames));
+                            for (String ext : FILE_EXTENSIONS) {
+                                if (ext.equals(""))
+                                    continue;
+                                String fb1 = fullborderFile.replace(setKey+"/","")+ext;
+                                if (cardList.contains(fb1)) {
+                                    return new File(lookupDirectory+"/"+fb1);
+                                }
+                                String fb2 = fullborderFile.replace(setKey+"/","").replaceAll("[0-9]*.fullborder", "1.fullborder")+ext;
+                                if (cardList.contains(fb2)) {
+                                    return new File(lookupDirectory+"/"+fb2);
+                                }
+                                String f1 = filename.replace(setKey+"/","")+ext;
+                                if (cardList.contains(f1)) {
+                                    return new File(lookupDirectory+"/"+f1);
+                                }
+                                String f2 = filename.replace(setKey+"/","").replaceAll("[0-9]*.full", "1.full")+ext;
+                                if (cardList.contains(f2)) {
+                                    return new File(lookupDirectory+"/"+f2);
+                                }
+                            }
+                        }
+                    }
                 }
-                return file;
+            }
+        }
+        return null;
+    }
+    private static File findFile(String dir, String filename) {
+        if (dir.equals(CACHE_CARD_PICS_DIR)) {
+            File f = new File(dir+"/"+filename);
+            String initialDirectory = f.getParent();
+            String cardName = f.getName();
+            File parentDir = new File(initialDirectory);
+            String[] cardNames = parentDir.list();
+            if (cardNames != null) {
+                Set<String> cardList = new HashSet<>(Arrays.asList(cardNames));
+                for (String ext : FILE_EXTENSIONS) {
+                    if (ext.equals(""))
+                        continue;
+                    String cardLookup = cardName+ext;
+                    if (cardList.contains(cardLookup)) {
+                        return new File(parentDir+"/"+cardLookup);
+                    }
+                }
+            }
+        } else {
+            //old method for tokens and others
+            for (String ext : FILE_EXTENSIONS) {
+                File file = new File(dir, filename + ext);
+                if (file.exists()) {
+                    if (file.isDirectory()) {
+                        file.delete();
+                        continue;
+                    }
+                    return file;
+                }
             }
         }
         return null;
@@ -217,8 +318,11 @@ public final class ImageKeys {
 
     //shortcut for determining if a card image exists for a given card
     //should only be called from PaperCard.hasImage()
-    static HashMap<String, HashSet<String>> cachedContent=new HashMap<>();
+    static HashMap<String, HashSet<String>> cachedContent=new HashMap<>(50000);
     public static boolean hasImage(PaperCard pc) {
+        return hasImage(pc, false);
+    }
+    public static boolean hasImage(PaperCard pc, boolean update) {
         Boolean editionHasImage = editionImageLookup.get(pc.getEdition());
         if (editionHasImage == null) {
             String setFolder = getSetFolder(pc.getEdition());
@@ -232,6 +336,10 @@ public final class ImageKeys {
                     if (!filename.endsWith(".jpg") && !filename.endsWith(".png"))
                         continue;  // not image - not interested
                     setFolderContent.add(filename.split("\\.")[0]);  // get rid of any full or fullborder
+                    //preload cachedCards at startUp
+                    String key = setFolder + "/" + filename.replace(".fullborder", ".full").replace(".jpg", "").replace(".png", "");
+                    File value = new File(CACHE_CARD_PICS_DIR + setFolder + "/" + filename);
+                    cachedCards.put(key, value);
                 }
                 cachedContent.put(setFolder, setFolderContent);
             }
@@ -239,6 +347,13 @@ public final class ImageKeys {
         String[] keyParts = StringUtils.split(pc.getCardImageKey(), "//");
         if (keyParts.length != 2)
             return false;
+        if (update && editionHasImage) {
+            try {
+                cachedContent.get(getSetFolder(pc.getEdition())).add(pc.getName());
+            } catch (Exception e) {
+                System.err.println(e);
+            }
+        }
         HashSet<String> content = cachedContent.getOrDefault(keyParts[0], null);
         //avoid checking for file if edition doesn't have any images
         return editionHasImage && hitCache(content, keyParts[1]);

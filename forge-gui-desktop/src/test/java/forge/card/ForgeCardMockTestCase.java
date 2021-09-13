@@ -114,7 +114,7 @@ public class ForgeCardMockTestCase extends PowerMockTestCase {
         fLangDir.set(ForgeConstants.class, langDir);
     }
 
-    private void setMock(Localizer mock) {
+    protected void setMock(Localizer mock) {
         try {
             Field instance = Localizer.class.getDeclaredField("instance");
             instance.setAccessible(true);
@@ -128,16 +128,14 @@ public class ForgeCardMockTestCase extends PowerMockTestCase {
     protected void initMocks() throws Exception {
         //Loading a card also automatically loads the image, which we do not want (even if it wouldn't cause exceptions).
         //The static initializer block in ImageCache can't fully be mocked (https://code.google.com/p/powermock/issues/detail?id=256), so we also need to mess with ImageIO...
-        //TODO: make sure that loading images only happens in a GUI environment, so we no longer need to mock this
-        PowerMockito.mockStatic(ImageIO.class);
-        PowerMockito.mockStatic(ImageCache.class);
-        PowerMockito.mockStatic(ImageKeys.class);
+        initCardImageMocks();
         initForgeConstants();
-
-        // Always Has Image (there is a separated test case to cover the opposite case)
-        PowerMockito.when(ImageKeys.hasImage(Mockito.any(PaperCard.class))).thenReturn(true);
-
         //Mocking some more static stuff
+        initForgePreferences();
+        initializeStaticData();
+    }
+
+    protected void initForgePreferences() throws IllegalAccessException {
         PowerMockito.mockStatic(Singletons.class);
         PowerMockito.mockStatic(FModel.class);
         ForgePreferences forgePreferences = new ForgePreferences();
@@ -161,7 +159,14 @@ public class ForgeCardMockTestCase extends PowerMockTestCase {
         PowerMockito.field(Localizer.class, "resourceBundle").set(localizerMock, dummyResourceBundle);
         PowerMockito.when(localizerMock.getMessage(Mockito.anyString())).thenReturn("any string");
         PowerMockito.when(FModel.getPreferences()).thenReturn(forgePreferences);
-        initializeStaticData();
+    }
+
+    protected void initCardImageMocks() {
+        //make sure that loading images only happens in a GUI environment, so we no longer need to mock this
+        PowerMockito.mockStatic(ImageIO.class);
+        PowerMockito.mockStatic(ImageCache.class);
+        PowerMockito.mockStatic(ImageKeys.class);
+        PowerMockito.when(ImageKeys.hasImage(Mockito.any(PaperCard.class), Mockito.anyBoolean())).thenReturn(true);
     }
 
     protected void initializeStaticData() {

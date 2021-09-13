@@ -32,6 +32,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerController;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbilityAdapt;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
@@ -288,8 +289,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
 
                     // Adapt need extra logic
                     if (sa.hasParam("Adapt")) {
-                        if (!(gameCard.getCounters(CounterEnumType.P1P1) == 0
-                                || gameCard.hasKeyword("CARDNAME adapts as though it had no +1/+1 counters"))) {
+                        if (!(gameCard.getCounters(CounterEnumType.P1P1) == 0 || StaticAbilityAdapt.anyWithAdapt(sa, gameCard))) {
                             continue;
                         }
                     }
@@ -362,8 +362,6 @@ public class CountersPutEffect extends SpellAbilityEffect {
                             game.getTriggerHandler().runTrigger(TriggerType.BecomeRenowned, AbilityKey.mapFromCard(gameCard), false);
                         }
                         if (sa.hasParam("Adapt")) {
-                            // need to remove special keyword
-                            gameCard.removeHiddenExtrinsicKeyword("CARDNAME adapts as though it had no +1/+1 counters");
                             game.getTriggerHandler().runTrigger(TriggerType.Adapt, AbilityKey.mapFromCard(gameCard), false);
                         }
                     } else {
@@ -422,7 +420,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
             List<String> keywords = Arrays.asList(sa.getParam("SharedKeywords").split(" & "));
             List<ZoneType> zones =  ZoneType.listValueOf(sa.getParam("SharedKeywordsZone"));
             String[] restrictions = sa.hasParam("SharedRestrictions") ? sa.getParam("SharedRestrictions").split(",") : new String[]{"Card"};
-            keywords = CardFactoryUtil.sharedKeywords(keywords, restrictions, zones, card);
+            keywords = CardFactoryUtil.sharedKeywords(keywords, restrictions, zones, card, sa);
             for (String k : keywords) {
                 resolvePerType(sa, placer, CounterType.getType(k), counterAmount, table);
             }

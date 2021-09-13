@@ -15,6 +15,7 @@ ScryfallCode=MIC
 35 R Curse of Obsession @Irvin Rodriguez
 36 R Visions of Ruin @Andrew Mar
 37 R Visions of Dominance @Andrew Mar
+38 M Lynde, Cheerful Tormenter @Anna Steinbauer
 39 M Leinore, Autumn Sovereign @Fariba Khamseh
 40 R Wilhelt, the Rotcleaver @Chris Rallis
 69 M Avacyn's Memorial @Kasia 'Kafis' Zielińska
@@ -24,3 +25,4 @@ ScryfallCode=MIC
 73 R Curse of Obsession @Irvin Rodriguez
 74 R Visions of Ruin @Andrew Mar
 75 R Visions of Dominance @Andrew Mar
+76 M Lynde, Cheerful Tormenter @Anna Steinbauer

@@ -38,6 +38,7 @@ import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
+import forge.game.staticability.StaticAbilityCantAttackBlock;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -183,9 +184,7 @@ public class AiBlockController {
         List<Card> currentAttackers = new ArrayList<>(attackersLeft);
 
         for (final Card attacker : attackersLeft) {
-            if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT")
-                    || attacker.hasKeyword("CARDNAME can't be blocked unless all creatures defending player controls block it.")
-                    || attacker.hasKeyword(Keyword.MENACE)) {
+            if (StaticAbilityCantAttackBlock.getMinMaxBlocker(attacker, combat.getDefenderPlayerByAttacker(attacker)).getLeft() > 1) {
                 continue;
             }
 
@@ -296,8 +295,7 @@ public class AiBlockController {
 
         // 6. Blockers that don't survive until the next turn anyway
         for (final Card attacker : attackersLeft) {
-            if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT") || attacker.hasKeyword(Keyword.MENACE)
-                    || attacker.hasKeyword("CARDNAME can't be blocked unless all creatures defending player controls block it.")) {
+            if (StaticAbilityCantAttackBlock.getMinMaxBlocker(attacker, combat.getDefenderPlayerByAttacker(attacker)).getLeft() > 1) {
                 continue;
             }
 
@@ -323,7 +321,17 @@ public class AiBlockController {
         attackersLeft = (new ArrayList<>(currentAttackers));
     }
 
-    static final Predicate<Card> rampagesOrNeedsManyToBlock = Predicates.or(CardPredicates.containsKeyword("Rampage"), CardPredicates.containsKeyword("CantBeBlockedByAmount GT"));
+    private Predicate<Card> rampagesOrNeedsManyToBlock(final Combat combat) {
+        return Predicates.or(CardPredicates.hasKeyword(Keyword.RAMPAGE), new Predicate<Card>() {
+
+            @Override
+            public boolean apply(Card input) {
+                // select creature that has a max blocker
+                return StaticAbilityCantAttackBlock.getMinMaxBlocker(input, combat.getDefenderPlayerByAttacker(input)).getRight() < Integer.MAX_VALUE;
+            }
+
+        });
+    }
 
     // Good Gang Blocks means a good trade or no trade
     /**
@@ -334,7 +342,7 @@ public class AiBlockController {
      * @param combat a {@link forge.game.combat.Combat} object.
      */
     private void makeGangBlocks(final Combat combat) {
-        List<Card> currentAttackers = CardLists.filter(attackersLeft, Predicates.not(rampagesOrNeedsManyToBlock));
+        List<Card> currentAttackers = CardLists.filter(attackersLeft, Predicates.not(rampagesOrNeedsManyToBlock(combat)));
         List<Card> blockers;
 
         // Try to block an attacker without first strike with a gang of first strikers
@@ -528,7 +536,7 @@ public class AiBlockController {
 
         // Try to block a Menace attacker with two blockers, neither of which will die
         for (final Card attacker : attackersLeft) {
-            if (!attacker.hasKeyword(Keyword.MENACE) && !attacker.hasStartOfKeyword("CantBeBlockedByAmount LT2")) {
+            if (StaticAbilityCantAttackBlock.getMinMaxBlocker(attacker, combat.getDefenderPlayerByAttacker(attacker)).getLeft() <= 1) {
                 continue;
             }
 
@@ -584,9 +592,7 @@ public class AiBlockController {
         List<Card> killingBlockers;
 
         for (final Card attacker : attackersLeft) {
-            if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT")
-                    || attacker.hasKeyword(Keyword.MENACE)
-                    || attacker.hasKeyword("CARDNAME can't be blocked unless all creatures defending player controls block it.")) {
+            if (StaticAbilityCantAttackBlock.getMinMaxBlocker(attacker, combat.getDefenderPlayerByAttacker(attacker)).getLeft() > 1) {
                 continue;
             }
             if (ComputerUtilCombat.attackerHasThreateningAfflict(attacker, ai)) {
@@ -635,10 +641,8 @@ public class AiBlockController {
 
         Card attacker = attackers.get(0);
 
-        if (attacker.hasStartOfKeyword("CantBeBlockedByAmount LT") 
+        if (StaticAbilityCantAttackBlock.getMinMaxBlocker(attacker, combat.getDefenderPlayerByAttacker(attacker)).getLeft() > 1
             || attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
-            || attacker.hasKeyword("CARDNAME can't be blocked unless all creatures defending player controls block it.")
-            || attacker.hasKeyword(Keyword.MENACE)
             || ComputerUtilCombat.attackerHasThreateningAfflict(attacker, ai)) {
             attackers.remove(0);
             makeChumpBlocks(combat, attackers);
@@ -686,9 +690,7 @@ public class AiBlockController {
         List<Card> currentAttackers = new ArrayList<>(attackersLeft);
 
         for (final Card attacker : currentAttackers) {
-            if (!attacker.hasStartOfKeyword("CantBeBlockedByAmount LT")
-                    && !attacker.hasKeyword(Keyword.MENACE)
-                    && !attacker.hasKeyword("CARDNAME can't be blocked unless all creatures defending player controls block it.")) {
+            if (StaticAbilityCantAttackBlock.getMinMaxBlocker(attacker, combat.getDefenderPlayerByAttacker(attacker)).getLeft() <= 1) {
                 continue;
             }
             List<Card> possibleBlockers = getPossibleBlockers(combat, attacker, blockersLeft, true);
@@ -720,14 +722,14 @@ public class AiBlockController {
         List<Card> chumpBlockers;
 
         List<Card> tramplingAttackers = CardLists.getKeyword(attackers, Keyword.TRAMPLE);
-        tramplingAttackers = CardLists.filter(tramplingAttackers, Predicates.not(rampagesOrNeedsManyToBlock));
+        tramplingAttackers = CardLists.filter(tramplingAttackers, Predicates.not(rampagesOrNeedsManyToBlock(combat)));
 
         // TODO - should check here for a "rampage-like" trigger that replaced the keyword:
         // "Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it."
 
         for (final Card attacker : tramplingAttackers) {
 
-            if (((attacker.hasStartOfKeyword("CantBeBlockedByAmount LT") || attacker.hasKeyword(Keyword.MENACE)) && !combat.isBlocked(attacker))
+            if (((StaticAbilityCantAttackBlock.getMinMaxBlocker(attacker, combat.getDefenderPlayerByAttacker(attacker)).getLeft() > 1) && !combat.isBlocked(attacker))
                     || attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
                     || attacker.hasKeyword("CARDNAME can't be blocked unless all creatures defending player controls block it.")) {
                 continue;
@@ -751,7 +753,7 @@ public class AiBlockController {
     private void reinforceBlockersToKill(final Combat combat) {
         List<Card> safeBlockers;
         List<Card> blockers;
-        List<Card> targetAttackers = CardLists.filter(blockedButUnkilled, Predicates.not(rampagesOrNeedsManyToBlock));
+        List<Card> targetAttackers = CardLists.filter(blockedButUnkilled, Predicates.not(rampagesOrNeedsManyToBlock(combat)));
 
         // TODO - should check here for a "rampage-like" trigger that replaced
         // the keyword: "Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it."
@@ -1076,8 +1078,7 @@ public class AiBlockController {
         }
 
         // assign blockers that have to block
-        chumpBlockers = CardLists.getKeyword(blockersLeft, "CARDNAME blocks each turn if able.");
-        chumpBlockers.addAll(CardLists.getKeyword(blockersLeft, "CARDNAME blocks each combat if able."));
+        chumpBlockers = CardLists.getKeyword(blockersLeft, "CARDNAME blocks each combat if able.");
         // if an attacker with lure attacks - all that can block
         for (final Card blocker : blockersLeft) {
             if (CombatUtil.mustBlockAnAttacker(blocker, combat, null)) {
@@ -1091,7 +1092,6 @@ public class AiBlockController {
                 for (final Card blocker : blockers) {
                     if (CombatUtil.canBlock(attacker, blocker, combat) && blockersLeft.contains(blocker)
                             && (CombatUtil.mustBlockAnAttacker(blocker, combat, null)
-                                    || blocker.hasKeyword("CARDNAME blocks each turn if able.")
                                     || blocker.hasKeyword("CARDNAME blocks each combat if able."))) {
                         combat.addBlocker(attacker, blocker);
                         if (blocker.getMustBlockCards() != null) {

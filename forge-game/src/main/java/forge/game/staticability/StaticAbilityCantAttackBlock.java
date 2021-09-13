@@ -17,14 +17,19 @@
  */
 package forge.game.staticability;
 
+import org.apache.commons.lang3.tuple.MutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.collect.Iterables;
 
+import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardPredicates;
 import forge.game.cost.Cost;
+import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -33,6 +38,8 @@ import forge.game.zone.ZoneType;
  * The Class StaticAbility_CantBeCast.
  */
 public class StaticAbilityCantAttackBlock {
+
+    public static String MinMaxBlockerMode = "MinMaxBlocker";
 
     /**
      * TODO Write javadoc for this method.
@@ -220,5 +227,44 @@ public class StaticAbilityCantAttackBlock {
             return false;
         }
         return true;
+    }
+
+    public static Pair<Integer, Integer> getMinMaxBlocker(final Card attacker, final Player defender) {
+        MutablePair<Integer, Integer> result = MutablePair.of(1, Integer.MAX_VALUE);
+
+        // Menace keyword
+        if (attacker.hasKeyword(Keyword.MENACE)) {
+            result.setLeft(2);
+        }
+
+        final Game game = attacker.getGame();
+        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (!stAb.getParam("Mode").equals(MinMaxBlockerMode) || stAb.isSuppressed() || !stAb.checkConditions()) {
+                    continue;
+                }
+                applyMinMaxBlockerAbility(stAb, attacker, defender, result);
+            }
+        }
+        if (attacker.hasKeyword("CARDNAME can't be blocked unless all creatures defending player controls block it.")) {
+            if (defender != null) {
+                result.setLeft(defender.getCreaturesInPlay().size());
+            }
+        }
+        return result;
+    }
+
+    public static void applyMinMaxBlockerAbility(final StaticAbility stAb, final Card attacker, final Player defender, MutablePair<Integer, Integer> result) {
+        if (!stAb.matchesValidParam("ValidCard", attacker)) {
+            return;
+        }
+
+        if (stAb.hasParam("Min")) {
+            result.setLeft(AbilityUtils.calculateAmount(stAb.getHostCard(), stAb.getParam("Min"), stAb));
+        }
+
+        if (stAb.hasParam("Max")) {
+            result.setRight(AbilityUtils.calculateAmount(stAb.getHostCard(), stAb.getParam("Max"), stAb));
+        }
     }
 }

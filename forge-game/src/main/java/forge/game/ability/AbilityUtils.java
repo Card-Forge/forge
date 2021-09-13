@@ -451,7 +451,6 @@ public class AbilityUtils {
     public static int calculateAmount(final Card card, String amount, final CardTraitBase ability) {
         return calculateAmount(card, amount, ability, false);
     }
-
     public static int calculateAmount(final Card card, String amount, final CardTraitBase ability, boolean maxto) {
         // return empty strings and constants
         if (StringUtils.isBlank(amount)) { return 0; }
@@ -2120,7 +2119,7 @@ public class AbilityUtils {
 
         // Count$IfCastInOwnMainPhase.<numMain>.<numNotMain> // 7/10
         if (sq[0].contains("IfCastInOwnMainPhase")) {
-            final PhaseHandler cPhase = player.getGame().getPhaseHandler();
+            final PhaseHandler cPhase = game.getPhaseHandler();
             final boolean isMyMain = cPhase.getPhase().isMain() && cPhase.isPlayerTurn(player) && c.getCastFrom() != null;
             return doXMath(Integer.parseInt(sq[isMyMain ? 1 : 2]), expr, c, ctb);
         }
@@ -3584,7 +3583,6 @@ public class AbilityUtils {
 
         return tot;
     }
-
 
     private static CardCollectionView getCardListForXCount(final Card c, final Player cc, final String[] sq, CardTraitBase ctb) {
         final List<Player> opps = cc.getOpponents();

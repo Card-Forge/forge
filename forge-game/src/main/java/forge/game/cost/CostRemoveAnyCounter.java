@@ -100,10 +100,11 @@ public class CostRemoveAnyCounter extends CostPart {
     public final String toString() {
         final StringBuilder sb = new StringBuilder();
 
-        String counters =  this.counter == null ? "counter" : this.counter.getName() + " counter";
+        String counters =  this.counter == null ? "counter" : this.counter.getName().toLowerCase() + " counter";
 
         sb.append("Remove ");
         sb.append(Cost.convertAmountTypeToWords(this.convertAmount(), this.getAmount(), counters));
+        sb.append(this.getAmount().equals("1") ? "" : "s");
         final String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
         sb.append(" from ").append(desc);
 

@@ -6,6 +6,5 @@ A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt
 SVar:DBDealDamage:DB$DealDamage | Defined$ You | NumDmg$ 3 | SubAbility$ DBDamageResolve
 SVar:DBDamageResolve:DB$ DamageResolve
 SVar:SelfDamageAmount:3
-AI:RemoveDeck:Random
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card83193.jpg
 Oracle:{T}: Orcish Artillery deals 2 damage to any target and 3 damage to you.

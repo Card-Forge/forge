@@ -16,7 +16,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import forge.ai.AiAttackController;
-import forge.ai.AiBlockController;
 import forge.ai.AiCardMemory;
 import forge.ai.AiController;
 import forge.ai.AiProps;
@@ -642,16 +641,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      * @return Card
      */
     private static Card chooseCreature(final Player ai, CardCollection list) {
-        // Creating a new combat for testing purposes.
-        final Player opponent = ai.getWeakestOpponent();
-        Combat combat = new Combat(opponent);
-        for (Card att : opponent.getCreaturesInPlay()) {
-            combat.addAttacker(att, ai);
-        }
-        AiBlockController block = new AiBlockController(ai);
-        block.assignBlockersForCombat(combat);
-
-        if (ComputerUtilCombat.lifeInDanger(ai, combat)) {
+        if (ComputerUtil.aiLifeInDanger(ai, false, 0)) {
             // need something AI can cast now
             ComputerUtilCard.sortByEvaluateCreature(list);
             for (Card c : list) {
@@ -1098,7 +1088,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     && ai.getCreaturesInPlay().isEmpty()) {
                 return false;
             }
-
 
             if (!sa.hasParam("AITgtOwnCards")) {
                 list = CardLists.filterControlledBy(list, ai.getOpponents());
@@ -1819,7 +1808,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 source, sa);
         list = CardLists.filterControlledBy(list, aiPlayer.getOpponents());
         if (list.isEmpty()) {
-            return false;   // no valid targets
+            return false; // no valid targets
         }
 
         Map<Player, Map.Entry<String, Integer>> data = Maps.newHashMap();

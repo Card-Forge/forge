@@ -2,7 +2,7 @@ Name:Vigorspore Wurm
 ManaCost:5 G
 Types:Creature Wurm
 PT:6/4
-K:CantBeBlockedByAmount GT1
+S:Mode$ MinMaxBlocker | ValidCard$ Card.Self | Max$ 1 | Description$ CARDNAME can't be blocked by more than one creature.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Undergrowth - When CARDNAME enters the battlefield, target creature gains vigilance and gets +X/+X until end of turn, where X is the number of creature cards in your graveyard.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ X | NumDef$ X | KW$ Vigilance
 SVar:X:Count$TypeInYourYard.Creature

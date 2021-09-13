@@ -137,7 +137,6 @@ public class EffectAi extends SpellAbilityAi {
                 }
                 randomReturn = true;
             } else if (logic.equals("Evasion")) {
-
             	if (!phase.isPlayerTurn(ai)) {
             		return false;
             	}

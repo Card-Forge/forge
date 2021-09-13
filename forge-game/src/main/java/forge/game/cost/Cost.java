@@ -684,7 +684,7 @@ public class Cost implements Serializable {
         boolean first = true;
         for (final CostPart part : this.costParts) {
             if (!first) {
-                cost.append(" and ");
+                cost.append(", ");
             }
             cost.append(part.toString());
             first = false;

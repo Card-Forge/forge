@@ -206,6 +206,7 @@ public class ImageCache {
         boolean noBorder = !useArtCrop && !isPreferenceEnabled(ForgePreferences.FPref.UI_RENDER_BLACK_BORDERS);
         boolean fetcherEnabled = isPreferenceEnabled(ForgePreferences.FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER);
         boolean isPlaceholder = (original == null) && fetcherEnabled;
+        String setCode = imageKey.split("/")[0].trim().toUpperCase();
 
         // If the user has indicated that they prefer Forge NOT render a black border, round the image corners
         // to account for JPEG images that don't have a transparency.
@@ -213,7 +214,6 @@ public class ImageCache {
             // use a quadratic equation to calculate the needed radius from an image dimension
             int radius;
             float width = original.getWidth();
-            String setCode = imageKey.split("/")[0].trim().toUpperCase();
             if (setCode.equals("A")) {  // Alpha
                 // radius = 100; // 745 x 1040
                 // radius = 68; // 488 x 680
@@ -237,6 +237,15 @@ public class ImageCache {
             }
             //System.out.println(setCode + " - " + original.getWidth() + " - " + radius);
             original = makeRoundedCorner(original, radius);
+        }
+
+        // if image has white corners, get try to crop it out
+        if (original != null && isWhite(FSkin.getColorFromPixel(original.getRGB(0, 0)))) {
+            if (!isWhiteBorderSet(setCode)) {
+                int xSpacing = original.getWidth() / 40;
+                int ySpacing = original.getHeight() / 57;
+                original = original.getSubimage(xSpacing, ySpacing, original.getWidth() - (2* xSpacing), original.getHeight() - (2* ySpacing));
+            }
         }
 
         // No image file exists for the given key so optionally associate with
@@ -266,6 +275,15 @@ public class ImageCache {
         }
 
         return Pair.of(original, isPlaceholder);
+    }
+
+    private static boolean isWhite(Color color) {
+        return color.getRed() > 200 && color.getBlue() > 200 && color.getGreen() > 200;
+    }
+
+    private static boolean isWhiteBorderSet(String setCode) {
+        return setCode.equals("U") || setCode.equals("R") || setCode.equals("4E") || setCode.equals("5E") ||
+            setCode.equals("6E") || setCode.equals("7E") || setCode.equals("8E") || setCode.equals("9E");
     }
 
     // cardView is for Emblem, since there is no paper card for them

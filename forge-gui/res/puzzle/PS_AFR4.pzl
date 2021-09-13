@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Adventures in the Forgotten Realms #04
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2021/08/182.-AFR4-scaled.jpg
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Your opponent has no cards in hand and no mana available.
+[state]
+humanlife=20
+ailife=7
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Goblin Javelineer;Hulking Bugbear;You See a Pair of Goblins
+humanbattlefield=Hobgoblin Bandit Lord;Battle Cry Goblin;Mountain;Mountain;Mountain;Mountain;Mountain
+aibattlefield=Vadrok, Apex of Thunder;Yorion, Sky Nomad

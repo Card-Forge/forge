@@ -1,0 +1,31 @@
+Name:Enduring Angel
+ManaCost:2 W W W
+Types:Creature Angel
+PT:3/3
+K:Flying
+K:Double Strike
+S:Mode$ Continuous | Affected$ You | AddKeyword$ Hexproof | Description$ You have hexproof.
+R:Event$ LifeReduced | ValidPlayer$ You | Result$ LE0 | ReplaceWith$ Transform | Description$ If your life total would be reduced to 0 or less, instead transform CARDNAME and your life total becomes 3. Then if CARDNAME didn't transform this way, you lose the game.
+SVar:Transform:DB$ SetState | Defined$ Self | Mode$ Transform | RememberChanged$ True | SubAbility$ DBSetLife
+SVar:DBSetLife:DB$ SetLife | Defined$ You | LifeAmount$ 3 | SubAbility$ DBLoseGame
+SVar:DBLoseGame:DB$ LosesGame | Defined$ You | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ NE1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AlternateMode:DoubleFaced
+Oracle:Flying, double strike\nYou have hexproof.\nIf your life total would be reduced to 0 or less, instead transform Enduring Angel and your life total becomes 3. Then if Enduring Angel didn't transform this way, you lose the game.
+
+ALTERNATE
+
+Name:Angelic Enforcer
+ManaCost:no cost
+Colors:white
+Types:Creature Angel
+PT:*/*
+K:Flying
+S:Mode$ Continuous | Affected$ You | AddKeyword$ Hexproof | Description$ You have hexproof.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to your life total.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDoubleLife | TriggerDescription$ Whenever CARDNAME attacks, double your life total.
+SVar:TrigDoubleLife:DB$ SetLife | LifeAmount$ Y
+SVar:X:Count$YourLifeTotal
+SVar:Y:Count$YourLifeTotal/Twice
+SVar:HasAttackEffect:TRUE
+Oracle:Flying\nYou have hexproof.\nAngelic Enforcer's power and toughness are each equal to your life total.\nWhenever Angelic Enforcer attacks, double your life total.

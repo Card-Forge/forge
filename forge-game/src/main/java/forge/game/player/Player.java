@@ -551,6 +551,13 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         if (toLose > 0) {
             int oldLife = life;
+            // Run applicable replacement effects
+            final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
+            repParams.put(AbilityKey.Result, oldLife-toLose);
+            if (game.getReplacementHandler().run(ReplacementType.LifeReduced, repParams)
+                    != ReplacementResult.NotReplaced) {
+                return 0;
+            }
             life -= toLose;
             view.updateLife(this);
             lifeLost = toLose;
@@ -3007,7 +3014,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         game.getAction().checkStaticAbilities(false);
 
         for (final Card c : getCardsIn(ZoneType.Sideboard)) {
-            for (KeywordInterface inst : c.getKeywords()) {
+            for (KeywordInterface inst : c.getKeywords(Keyword.COMPANION)) {
                 if (!(inst instanceof Companion)) {
                     continue;
                 }
