@@ -1,0 +1,13 @@
+Name:Spectral Adversary
+ManaCost:1 U
+Types:Creature Spirit
+PT:2/1
+K:Flash
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPay | TriggerDescription$ When CARDNAME enters the battlefield, you may pay {1}{U} any number of times. When you pay this cost one or more times, put that many +1/+1 counters on CARDNAME, then up to that many other target artifacts, creatures, and/or enchantments phase out.
+SVar:TrigPay:AB$ ImmediateTrigger | Cost$ Mana<1 U\NumTimes> | Announce$ NumTimes | ConditionCheckSVar$ NumTimes | ConditionSVarCompare$ GE1 | Execute$ TrigPutCounter | TriggerDescription$ When you pay this cost one or more times, put that many +1/+1 counters on CARDNAME, then up to that many other target artifacts, creatures, and/or enchantments phase out.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ NumTimes | SubAbility$ DBPhases
+SVar:DBPhases:DB$ Phases | ValidTgts$ Creature.Other,Artifact.Other,Enchantment.Other | TgtPrompt$ Select up to that many other target artifacts, creatures, and/or enchantments | TargetMin$ 0 | TargetMax$ NumTimes
+SVar:NumTimes:Number$0
+DeckHas:Ability$Counters
+Oracle:Flash\nFlying\nWhen Spectral Adversary enters the battlefield, you may pay {1}{U} any number of times. When you pay this cost one or more times, put that many +1/+1 counters on Spectral Adversary, then up to that many other target artifacts, creatures, and/or enchantments phase out.
