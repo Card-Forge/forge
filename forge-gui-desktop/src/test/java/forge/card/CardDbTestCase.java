@@ -1,21 +1,12 @@
 package forge.card;
 
 import com.google.common.base.Predicate;
-import forge.ImageCache;
-import forge.ImageKeys;
-import forge.Singletons;
 import forge.StaticData;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
-import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
-import forge.util.Localizer;
-import org.mockito.Mockito;
-import org.powermock.api.mockito.PowerMockito;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import javax.imageio.ImageIO;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
