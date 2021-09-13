@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
-A:AB$ GainLife | Cost$ 2 W U U T Sac<1/CARDNAME> | Defined$ You | LifeAmount$ 2 | SubAbility$ DBDraw | SpellDescription$ You gain 2 life and draw 2 cards.
+A:AB$ GainLife | Cost$ 2 W U U T Sac<1/CARDNAME> | Defined$ You | LifeAmount$ 2 | SubAbility$ DBDraw | SpellDescription$ You gain 2 life and draw two cards.
 SVar:DBDraw:DB$ Draw | NumCards$ 2
 DeckHas:Ability$GainLife & Ability$Sacrifice
 Oracle:Gates of Istfell enters the battlefield tapped.\n{T}: Add {W}.\n{2}{W}{U}{U}, {T}, Sacrifice Gates of Istfell: You gain 2 life and draw two cards.
