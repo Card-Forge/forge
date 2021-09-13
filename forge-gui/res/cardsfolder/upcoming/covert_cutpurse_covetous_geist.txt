@@ -1,0 +1,23 @@
+Name:Covert Cutpurse
+ManaCost:2 B
+Types:Creature Human Rogue
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target creature you don't control that was dealt damage this turn.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.YouDontCtrl+wasDealtDamageThisTurn | TgtPrompt$ Select target creature you don't control that was dealt damage this turn
+K:Disturb:4 B
+AlternateMode:DoubleFaced
+DeckHas:Ability$Graveyard
+Oracle:When Covert Cutpurse enters the battlefield, destroy target creature you don't control that was dealt damage this turn.\nDisturb {4}{B} (You may cast this card from your graveyard transformed for its disturb cost.)
+
+ALTERNATE
+
+Name:Covetous Geist
+ManaCost:no cost
+Types:Creature Spirit Rogue
+Colors:black
+PT:2/2
+K:Flying
+K:Deathtouch
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Graveyard | ReplaceWith$ Exile | Description$ If CARDNAME would be put into a graveyard from anywhere, exile it instead.
+SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
+Oracle:Flying, deathtouch\nIf Covetous Geist would be put into a graveyard from anywhere, exile it instead.

@@ -1,0 +1,10 @@
+Name:Voldaren Ambusher
+ManaCost:2 R
+Types:Creature Vampire Archer
+PT:2/2
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | CheckSVar$ Y | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, if an opponent lost life this turn, it deals X damage to up to one target creature or planeswalker, where X is the number of Vampires you control.
+SVar:TrigDealDamage:DB$ DealDamage | NumDmg$ X | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker
+SVar:X:Count$Valid Vampire.YouCtrl
+SVar:Y:Count$LifeOppsLostThisTurn
+DeckNeeds:Type$Vampire
+Oracle:When Voldaren Ambusher enters the battlefield, if an opponent lost life this turn, it deals X damage to up to one target creature or planeswalker, where X is the number of Vampires you control.

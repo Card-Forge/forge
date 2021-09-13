@@ -1,0 +1,9 @@
+Name:Diregraf Rebirth
+ManaCost:3 B G
+Types:Sorcery
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature that died this turn.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SpellDescription$ Return target creature card from your graveyard to the battlefield.
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+K:Flashback:5 B G
+DeckHas:Ability$Graveyard
+Oracle:This spell costs {1} less to cast for each creature that died this turn.\nReturn target creature card from your graveyard to the battlefield.\nFlashback {5}{B}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

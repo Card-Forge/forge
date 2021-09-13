@@ -1,0 +1,9 @@
+Name:Augur of Autumn
+ManaCost:1 G G
+Types:Creature Human Druid
+PT:2/3
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
+S:Mode$ Continuous | Affected$ Land.TopLibrary+YouCtrl | AffectedZone$ Library | MayPlay$ True | Description$ You may play lands from the top of your library.
+S:Mode$ Continuous | CheckSVar$ X | SVarCompare$ GE3 | Affected$ Creature.TopLibrary+YouCtrl | AffectedZone$ Library | MayPlay$ True | Description$ Coven — As long as you control three or more creatures with different powers, you may cast creature spells from the top of your library.
+SVar:X:Count$DifferentPower_Creature.YouCtrl
+Oracle:You may look at the top card of your library any time.\nYou may play lands from the top of your library.\nCoven — As long as you control three or more creatures with different powers, you may cast creature spells from the top of your library.
