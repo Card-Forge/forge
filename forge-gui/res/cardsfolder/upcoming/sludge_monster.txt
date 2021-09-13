@@ -4,7 +4,7 @@ Types:Creature Horror
 PT:5/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, put a slime counter on up to one other target creature.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, put a slime counter on up to one other target creature.
-SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.Other | TgtPrompt$ Select up to one other target creature | TargetMin$ 0 | TargetMax$ 1 | CounterType$ SLIME | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.Other | TgtPrompt$ Select up to one other target creature | TargetMin$ 0 | TargetMax$ 1 | AITgts$ Creature.nonHorror+OppCtrl+counters_LT1_SLIME | CounterType$ SLIME | CounterNum$ 1
 S:Mode$ Continuous | Affected$ Creature.nonHorror+counters_GE1_SLIME | RemoveAllAbilities$ True | SetPower$ 2 | SetToughness$ 2 | Description$ Non-Horror creatures with slime counters on them lose all abilities and have base power and toughness 2/2.
 DeckHas:Ability$Counters
 SVar:HasAttackEffect:TRUE
