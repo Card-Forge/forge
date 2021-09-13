@@ -1,0 +1,19 @@
+Name:Covetous Castaway
+ManaCost:1 U
+Types:Creature Human
+PT:1/3
+K:Disturb:3 U U
+AlternateMode:DoubleFaced
+Oracle:Disturb {3}{U}{U} (You may cast this card from your graveyard transformed for its disturb cost.)
+
+ALTERNATE
+
+Name:Ghostly Castigator
+ManaCost:no cost
+Types:Creature Spirit
+Colors:blue
+PT:3/4
+K:Flying
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Graveyard | ReplaceWith$ Exile | Description$ If CARDNAME would be put into a graveyard from anywhere, exile it instead.
+SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
+Oracle:Flying\nIf Ghostly Castigator would be put into a graveyard from anywhere, exile it instead.
