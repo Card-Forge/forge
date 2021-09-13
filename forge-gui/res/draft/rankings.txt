@@ -33654,3 +33654,271 @@
 #258|Gate to Phyrexia|U|ME4
 #259|Tablet of Epityr|C|ME4
 #260|Leeches|R|ME4
+//Rank|Name|Rarity|Set
+#1|Liesa, Forgotten Archangel|R|MID
+#2|Sigarda, Champion of Light|M|MID
+#3|Wrenn and Seven|M|MID
+#4|Arlinn, the Pack's Hope|M|MID
+#5|Tainted Adversary|M|MID
+#6|Tovolar's Huntmaster|R|MID
+#7|Consuming Blob|M|MID
+#8|Intrepid Adversary|M|MID
+#9|Florian, Voldaren Scion|R|MID
+#10|Spectral Adversary|M|MID
+#11|Tovolar, Dire Overlord|R|MID
+#12|Enduring Angel|M|MID
+#13|Primal Adversary|M|MID
+#14|Lord of the Forsaken|M|MID
+#15|Teferi, Who Slows the Sunset|M|MID
+#16|Moonveil Regent|M|MID
+#17|Gisa, Glorious Resurrector|R|MID
+#18|Jerren, Corrupted Bishop|M|MID
+#19|Dennick, Pious Apprentice|R|MID
+#20|Slogurk, the Overslime|R|MID
+#21|Suspicious Stowaway|R|MID
+#22|Brutal Cathar|R|MID
+#23|Katilda, Dawnhart Prime|R|MID
+#24|Augur of Autumn|R|MID
+#25|Bloodline Culling|R|MID
+#26|Sungold Sentinel|R|MID
+#27|Jadar, Ghoulcaller of Nephalia|R|MID
+#28|Ludevic, Necrogenius|R|MID
+#29|Reckless Stormseeker|R|MID
+#30|Bloodthirsty Adversary|M|MID
+#31|Sunstreak Phoenix|M|MID
+#32|Mask of Griselbrand|R|MID
+#33|Lier, Disciple of the Drowned|M|MID
+#34|Briarbridge Tracker|R|MID
+#35|Poppet Stitcher|M|MID
+#36|The Meathook Massacre|M|MID
+#37|Vadrik, Astral Archmage|R|MID
+#38|Grafted Identity|R|MID
+#39|Triskaidekaphile|R|MID
+#40|Smoldering Egg|R|MID
+#41|Borrowed Time|U|MID
+#42|Saryth, the Viper's Fang|R|MID
+#43|Infernal Grasp|U|MID
+#44|Adeline, Resplendent Cathar|R|MID
+#45|Light Up the Night|R|MID
+#46|Hostile Hostel|M|MID
+#47|Graveyard Trespasser|R|MID
+#48|Cathartic Pyre|U|MID
+#49|Fateful Absence|R|MID
+#50|Willow Geist|R|MID
+#51|Clear Shot|U|MID
+#52|Burn Down the House|R|MID
+#53|Rem Karolus, Stalwart Slayer|R|MID
+#54|Wake to Slaughter|R|MID
+#55|Old Stickfingers|R|MID
+#56|Hound Tamer|U|MID
+#57|Rootcoil Creeper|U|MID
+#58|Moonrager's Slash|C|MID
+#59|Sunrise Cavalier|U|MID
+#60|Vanquish the Horde|R|MID
+#61|Gavony Dawnguard|U|MID
+#62|Sludge Monster|R|MID
+#63|Foul Play|U|MID
+#64|Overwhelmed Archivist|U|MID
+#65|Kessig Naturalist|U|MID
+#66|Devoted Grafkeeper|U|MID
+#67|Heirloom Mirror|U|MID
+#68|Morbid Opportunist|U|MID
+#69|Seize the Storm|U|MID
+#70|Dawnhart Mentor|U|MID
+#71|Vampire Socialite|U|MID
+#72|Unnatural Growth|R|MID
+#73|Diregraf Rebirth|U|MID
+#74|Defenestrate|C|MID
+#75|Join the Dance|U|MID
+#76|Play with Fire|U|MID
+#77|Patrician Geist|R|MID
+#78|Cathar's Call|U|MID
+#79|Memory Deluge|R|MID
+#80|Eaten Alive|C|MID
+#81|Rite of Oblivion|U|MID
+#82|Unnatural Moonrise|U|MID
+#83|Duel for Dominance|C|MID
+#84|Hungry for More|U|MID
+#85|Falkenrath Pit Fighter|R|MID
+#86|Fleshtaker|U|MID
+#87|Ghoulcaller's Harvest|R|MID
+#88|Dawnhart Wardens|U|MID
+#89|Geistflame Reservoir|R|MID
+#90|Bereaved Survivor|U|MID
+#91|Burly Breaker|U|MID
+#92|Covert Cutpurse|U|MID
+#93|Curse of Leeches|R|MID
+#94|Phantom Carriage|U|MID
+#95|Winterthorn Blessing|U|MID
+#96|Sacred Fire|U|MID
+#97|Bladestitched Skaab|U|MID
+#98|Ghoulish Procession|U|MID
+#99|Voldaren Ambusher|U|MID
+#100|Galvanic Iteration|R|MID
+#101|Ambitious Farmhand|U|MID
+#102|Spellrune Painter|U|MID
+#103|Chaplain of Alms|U|MID
+#104|Flame Channeler|U|MID
+#105|Burn the Accursed|C|MID
+#106|Shadowbeast Sighting|C|MID
+#107|Dreadhound|U|MID
+#108|Angelfire Ignition|R|MID
+#109|Hallowed Respite|R|MID
+#110|Obsessive Astronomer|U|MID
+#111|Organ Hoarder|C|MID
+#112|Slaughter Specialist|R|MID
+#113|Dryad's Revival|U|MID
+#114|Arcane Infusion|U|MID
+#115|Immolation|C|MID
+#116|Defend the Celestus|U|MID
+#117|Candletrap|C|MID
+#118|Ominous Roost|U|MID
+#119|Thermo-Alchemist|U|MID
+#120|Contortionist Troupe|U|MID
+#121|Outland Liberator|U|MID
+#122|Deathbonnet Sprout|U|MID
+#123|Malevolent Hermit|R|MID
+#124|Mysterious Tome|U|MID
+#125|Can't Stay Away|R|MID
+#126|Rise of the Ants|U|MID
+#127|Nebelgast Intruder|U|MID
+#128|Storm Skreelix|U|MID
+#129|Stromkirk Bloodthief|U|MID
+#130|Skaab Wrangler|U|MID
+#131|Odric's Outrider|U|MID
+#132|Brood Weaver|U|MID
+#133|Loyal Gryff|U|MID
+#134|The Celestus|R|MID
+#135|Faithful Mending|U|MID
+#136|Locked in the Cemetery|C|MID
+#137|Champion of the Perished|R|MID
+#138|Festival Crasher|C|MID
+#139|Baneblade Scoundrel|U|MID
+#140|Fangblade Brigand|U|MID
+#141|Grizzly Ghoul|U|MID
+#142|Sigarda's Splendor|R|MID
+#143|Duelcraft Trainer|U|MID
+#144|Search Party Captain|C|MID
+#145|Unblinking Observer|C|MID
+#146|Olivia's Midnight Ambush|C|MID
+#147|Ardent Elementalist|C|MID
+#148|Firmament Sage|U|MID
+#149|Bloodtithe Collector|U|MID
+#150|Siphon Insight|R|MID
+#151|Curse of Surveillance|R|MID
+#152|Falkenrath Perforator|C|MID
+#153|Lunar Frenzy|U|MID
+#154|Croaking Counterpart|R|MID
+#155|Corpse Cobble|U|MID
+#156|Galedrifter|C|MID
+#157|Vengeful Strangler|U|MID
+#158|Covetous Castaway|U|MID
+#159|Cathar Commando|C|MID
+#160|Clarion Cathars|C|MID
+#161|Gavony Silversmith|C|MID
+#162|Homestead Courage|C|MID
+#163|Geistwave|C|MID
+#164|Vampire Interloper|C|MID
+#165|Timberland Guide|C|MID
+#166|Evolving Wilds|C|MID
+#167|Fading Hope|U|MID
+#168|Storm the Festival|R|MID
+#169|Sunset Revelry|U|MID
+#170|Purifying Dragon|U|MID
+#171|Candlegrove Witch|C|MID
+#172|Dawnhart Rejuvenator|C|MID
+#173|Rite of Harmony|R|MID
+#174|Delver of Secrets|U|MID
+#175|Mourning Patrol|C|MID
+#176|Shady Traveler|C|MID
+#177|Harvesttide Infiltrator|C|MID
+#178|Tireless Hauler|C|MID
+#179|Mystic Skull|U|MID
+#180|Bird Admirer|C|MID
+#181|Beloved Beggar|U|MID
+#182|Village Watch|U|MID
+#183|Ritual of Hope|U|MID
+#184|Gavony Trapper|C|MID
+#185|Falcon Abomination|C|MID
+#186|Revenge of the Drowned|C|MID
+#187|Bat Whisperer|C|MID
+#188|Morkrut Behemoth|C|MID
+#189|Lambholt Harrier|C|MID
+#190|Harvesttide Sentry|C|MID
+#191|Silver Bolt|C|MID
+#192|Vivisection|U|MID
+#193|Startle|C|MID
+#194|Hobbling Zombie|C|MID
+#195|Dissipate|U|MID
+#196|Celestus Sanctifier|C|MID
+#197|Sungold Barrage|C|MID
+#198|Haunted Ridge|R|MID
+#199|Shipwreck Marsh|R|MID
+#200|Rockfall Vale|R|MID
+#201|Overgrown Farmland|R|MID
+#202|Deserted Beach|R|MID
+#203|Arrogant Outlaw|C|MID
+#204|Brimstone Vandal|C|MID
+#205|Famished Foragers|C|MID
+#206|Siege Zombie|C|MID
+#207|Unruly Mob|C|MID
+#208|Pestilent Wolf|C|MID
+#209|Snarling Wolf|C|MID
+#210|Lunarch Veteran|C|MID
+#211|Tavern Ruffian|C|MID
+#212|Baithook Angler|C|MID
+#213|Soul-Guide Gryff|C|MID
+#214|Component Collector|C|MID
+#215|Drownyard Amalgam|C|MID
+#216|Flip the Switch|C|MID
+#217|Shipwreck Sifters|C|MID
+#218|Blood Pact|C|MID
+#219|Crawl from the Cellar|C|MID
+#220|Novice Occultist|C|MID
+#221|Electric Revelation|C|MID
+#222|Mounted Dreadknight|C|MID
+#223|Raze the Effigy|C|MID
+#224|Bounding Wolf|C|MID
+#225|Bramble Armor|C|MID
+#226|Eccentric Farmer|C|MID
+#227|Path to the Festival|C|MID
+#228|Tapping at the Window|C|MID
+#229|Crossroads Candleguide|C|MID
+#230|Jack-o'-Lantern|C|MID
+#231|Diregraf Horde|C|MID
+#232|Stuffed Bear|C|MID
+#233|Turn the Earth|U|MID
+#234|Ritual Guardian|C|MID
+#235|Candlelit Cavalry|C|MID
+#236|Secrets of the Key|C|MID
+#237|Stormrider Spirit|C|MID
+#238|Howl of the Hunt|C|MID
+#239|Ecstatic Awakener|C|MID
+#240|Blessed Defiance|C|MID
+#241|No Way Out|C|MID
+#242|Abandon the Post|C|MID
+#243|Stolen Vitality|C|MID
+#244|Voldaren Stinger|C|MID
+#245|Return to Nature|C|MID
+#246|Bladebrand|C|MID
+#247|Moonsilver Key|U|MID
+#248|Larder Zombie|C|MID
+#249|Hedgewitch's Mask|C|MID
+#250|Might of the Old Ways|C|MID
+#251|Consider|C|MID
+#252|Dire-Strain Rampage|R|MID
+#253|Necrosynthesis|U|MID
+#254|Flare of Faith|C|MID
+#255|Devious Cover-Up|C|MID
+#256|Rotten Reunion|C|MID
+#257|Neonate's Rush|C|MID
+#258|Pack's Betrayal|C|MID
+#259|Sigardian Savior|M|MID
+#260|Thraben Exorcism|C|MID
+#261|Otherworldly Gaze|C|MID
+#262|Duress|C|MID
+#263|Plummet|C|MID
+#264|Curse of Shaken Faith|R|MID
+#265|Field of Ruin|U|MID
+#266|Curse of Silence|R|MID
+#267|Pithing Needle|R|MID
