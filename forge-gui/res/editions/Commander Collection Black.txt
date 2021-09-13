@@ -7,13 +7,14 @@ ScryfallCode=CC2
 
 [cards]
 1 M Liliana, Heretical Healer @Bastien L. Deharme
-2 M Ghoulcaller Gisa @Aaron J. Riley
-3 R Ophiomancer @Caroline Gariba
-4 R Phyrexian Arena @Vincent Proce
-5 R Reanimate @Nils Hamm
-6 R Toxic Deluge @Yeong-Hao Han
-7 R Sol Ring @Yeong-Hao Han
-8 R Command Tower @Julian Kok Joon Wen
+2 M Liliana, Defiant Necromancer @Bastien L. Deharme
+3 M Ghoulcaller Gisa @Aaron J. Riley
+4 R Ophiomancer @Caroline Gariba
+5 R Phyrexian Arena @Vincent Proce
+6 R Reanimate @Nils Hamm
+7 R Toxic Deluge @Yeong-Hao Han
+8 R Sol Ring @Yeong-Hao Han
+9 R Command Tower @Julian Kok Joon Wen
 
 [tokens]
 b_1_1_snake_deathtouch
