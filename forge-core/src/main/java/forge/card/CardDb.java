@@ -694,6 +694,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
         List<PaperCard> cards;
         Predicate<PaperCard> cardQueryFilter;
+        filter = (filter != null) ? filter : Predicates.alwaysTrue();
         if (releaseDate != null) {
             cardQueryFilter = new Predicate<PaperCard>() {
                 @Override
@@ -715,8 +716,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                     return card.getArtIndex() == cr.artIndex;
                 }
             };
-        if (filter != null)
-            cardQueryFilter = Predicates.and(cardQueryFilter, filter);
+        cardQueryFilter = Predicates.and(cardQueryFilter, filter);
         cards = getAllCards(cr.cardName, cardQueryFilter);
         // Note: No need to check whether "cards" is empty; the next for loop will validate condition at L699
         if (cards.size() == 1)  // if only one candidate, there much else we should do
