@@ -1,0 +1,13 @@
+Name:Moonveil Regent
+ManaCost:3 R
+Types:Creature Dragon
+PT:4/4
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you cast a spell, you may discard your hand. If you do, draw a card for each of that spell's colors.
+SVar:TrigDraw:AB$ Draw | Cost$ Discard<0/Hand> | NumCards$ X
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME dies, it deals X damage to any target, where X is the number of colors among permanents you control.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ Y
+SVar:X:TriggeredCard$CardNumColors
+SVar:Y:Count$ColorsCtrl Permanent
+DeckHas:Ability$Discard
+Oracle:Flying\nWhenever you cast a spell, you may discard your hand. If you do, draw a card for each of that spell's colors.\nWhen Moonveil Regent dies, it deals X damage to any target, where X is the number of colors among permanents you control.
