@@ -1,0 +1,8 @@
+Name:Soul-Guide Gryff
+ManaCost:4 W
+Types:Creature Hippogriff Spirit
+PT:3/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, exile up to one target card from a graveyard.
+SVar:TrigChangeZone:DB$ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target card in a graveyard to exile
+Oracle:Flying\nWhen Soul-Guide Gryff enters the battlefield, exile up to one target card from a graveyard.
