@@ -66,6 +66,9 @@ public final class ImageKeys {
     }
 
     private static final Map<String, File> cachedCards = new HashMap<>(50000);
+    public static File getCachedCardsFile(String key) {
+        return cachedCards.get(key);
+    }
     public static File getImageFile(String key) {
         if (StringUtils.isEmpty(key))
             return null;
