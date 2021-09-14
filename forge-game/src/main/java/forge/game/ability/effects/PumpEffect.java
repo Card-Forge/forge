@@ -179,46 +179,50 @@ public class PumpEffect extends SpellAbilityEffect {
             final int atk = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumAtt"), sa, true);
             final int def = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumDef"), sa, true);
 
-            boolean gains = sa.hasParam("NumAtt") || sa.hasParam("NumDef") || !keywords.isEmpty();
+            boolean gets = (sa.hasParam("NumAtt") || sa.hasParam("NumDef"));
+            boolean gains = !keywords.isEmpty();
 
-            if (gains) {
+            if (gets) {
+                sb.append("gets ");
+                if (atk != 0) {
+                    sb.append(atk > 0 ? "+" : "").append(atk).append("/");
+                } else {
+                    sb.append(def < 0 ? "-" : "+").append(atk).append("/");
+                }
+                if (def != 0) {
+                    sb.append(def > 0 ? "+" : "").append(def).append(" ");
+                } else {
+                    sb.append(atk < 0 ? "-" : "+").append(def).append(" ");
+                }
+                sb.append(gains ? "and gains " : "");
+            } else if (gains) {
                 sb.append("gains ");
             }
 
-            if (sa.hasParam("NumAtt") || sa.hasParam("NumDef")) {
-                if (atk >= 0) {
-                    sb.append("+");
-                }
-                sb.append(atk);
-                sb.append("/");
-                if (def >= 0) {
-                    sb.append("+");
-                }
-                sb.append(def);
-                sb.append(" ");
-            }
-
             for (int i = 0; i < keywords.size(); i++) {
-                sb.append(keywords.get(i)).append(" ");
+                sb.append(keywords.get(i).toLowerCase());
+                sb.append(keywords.size() > 2 && i+1 != keywords.size() ? ", " : "");
+                sb.append(i+2 == keywords.size() ? "and " : "");
+                sb.append(keywords.size() == 1 ? " " : "");
             }
 
             if (sa.hasParam("CanBlockAny")) {
-                if (gains) {
+                if (gets || gains) {
                     sb.append(" and ");
                 }
-                sb.append("can block any number of creatures ");
+                sb.append("can block any number of creatures");
             } else if (sa.hasParam("CanBlockAmount")) {
-                if (gains) {
+                if (gets || gains) {
                     sb.append(" and ");
                 }
                 String n = sa.getParam("CanBlockAmount");
                 sb.append("can block an additional ");
                 sb.append("1".equals(n) ? "creature" : Lang.nounWithNumeral(n, "creature"));
-                sb.append(" each combat ");
+                sb.append(" each combat");
             }
 
             if (!"Permanent".equals(sa.getParam("Duration"))) {
-                sb.append("until end of turn.");
+                sb.append(" until end of turn.");
             } else {
                 sb.append(".");
             }
