@@ -1,0 +1,9 @@
+Name:Vampire
+ManaCost:no cost
+Types:Creature Vampire
+Colors:black,red
+PT:3/1
+K:Trample
+K:Lifelink
+K:Haste
+Oracle:Trample, lifelink, haste

@@ -1,0 +1,11 @@
+Name:Old Stickfingers
+ManaCost:X B G
+Types:Legendary Creature Horror
+PT:*/*
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDigUntil | TriggerDescription$ When you cast CARDNAME, reveal cards from the top of your library until you reveal X creature cards. Put all the creature cards revealed this way into your graveyard and the rest on the bottom of your library in a random order.
+SVar:TrigDigUntil:DB$ DigUntil | Amount$ X | Valid$ Creature | FoundDestination$ Graveyard | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True
+SVar:X:Count$xPaid
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ Y | SetToughness$ Y | Description$ CARDNAME's power and toughness are each equal to the number of creature cards in your graveyard.
+SVar:Y:Count$TypeInYourYard.Creature
+DeckHas:Ability$Graveyard
+Oracle:When you cast this spell, reveal cards from the top of your library until you reveal X creature cards. Put all the creature cards revealed this way into your graveyard and the rest on the bottom of your library in a random order.\nOld Stickfingers's power and toughness are each equal to the number of creature cards in your graveyard.

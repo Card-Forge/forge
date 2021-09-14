@@ -1,0 +1,10 @@
+Name:Briarbridge Tracker
+ManaCost:2 G
+Types:Creature Human Scout
+PT:2/3
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigInvestigate | TriggerDescription$ When CARDNAME enters the battlefield, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigInvestigate:DB$ Investigate
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | IsPresent$ Card.token+YouCtrl | Description$ As long as you control a token, CARDNAME gets +2/+0.
+DeckHas:Ability$Token & Ability$Sacrifice
+Oracle:Vigilance/nWhen Briarbridge Tracker enters the battlefield, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")\nAs long as you control a token, Briarbridge Tracker gets +2/+0.
