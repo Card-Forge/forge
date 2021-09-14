@@ -91,10 +91,15 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             this.collectorNumber = collectorNumber;
         }
 
+        public static boolean isFoilCardName(final String cardName){
+            return cardName.trim().endsWith(foilSuffix);
+        }
+
         public static String compose(String cardName, boolean isFoil){
-            if (isFoil)
-                return cardName+foilSuffix;
-            return cardName;
+            if (isFoil){
+                return isFoilCardName(cardName) ? cardName : cardName+foilSuffix;
+            }
+            return isFoilCardName(cardName) ? cardName.substring(0, cardName.length() - foilSuffix.length()) : cardName;
         }
 
         public static String compose(String cardName, String setCode) {
@@ -189,7 +194,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             }
             String cardName = info[0];
             boolean isFoil = false;
-            if (cardName.endsWith(foilSuffix)) {
+            if (isFoilCardName(cardName)) {
                 cardName = cardName.substring(0, cardName.length() - foilSuffix.length());
                 isFoil = true;
             }
