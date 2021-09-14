@@ -1,7 +1,7 @@
 Name:Maskwood Nexus
 ManaCost:4
 Types:Artifact
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library | AddType$ AllCreatureTypes & Creature | Description$ Creatures you control are every creature type. The same is true for creature spells you control and creature cards you own that aren't on the battlefield.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | AddType$ AllCreatureTypes & Creature | Description$ Creatures you control are every creature type. The same is true for creature spells you control and creature cards you own that aren't on the battlefield.
 A:AB$ Token | Cost$ 3 T | LegacyImage$ u 2 2 shapeshifter changeling khm | TokenAmount$ 1 | TokenScript$ u_2_2_shapeshifter_changeling | TokenOwner$ You | SpellDescription$ Create a 2/2 blue Shapeshifter creature token with changeling. (It is every creature type.)
 DeckHas:Ability$Token
 Oracle:Creatures you control are every creature type. The same is true for creature spells you control and creature cards you own that aren't on the battlefield.\n{3}, {T}: Create a 2/2 blue Shapeshifter creature token with changeling. (It is every creature type.)
