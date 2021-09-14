@@ -130,6 +130,10 @@ public class CardProperty {
             if (!card.isAdventureCard()) {
                 return false;
             }
+        } else if (property.equals("isTriggerRemembered")) {
+            if (!spellAbility.getTriggerRemembered().contains(card)) {
+                return false;
+            }
         } else if (property.startsWith("YouCtrl")) {
             if (!controller.equals(sourceController)) {
                 return false;

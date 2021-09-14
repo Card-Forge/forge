@@ -470,6 +470,7 @@ public abstract class Trigger extends TriggerReplacementBase {
         this.triggerRemembered.add(o);
     }
 
+    @Override
     public List<Object> getTriggerRemembered() {
         return this.triggerRemembered;
     }

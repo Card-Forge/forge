@@ -45,13 +45,6 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
             mapParams.remove("SpellDescription");
         }
 
-        String triggerRemembered = null;
-
-        // Set Remembered
-        if (sa.hasParam("RememberObjects")) {
-            triggerRemembered = sa.getParam("RememberObjects");
-        }
-
         // in case the card moved before the delayed trigger can be created, need to check the latest card state for right timestamp
         Card gameCard = game.getCardState(host);
         Card lki = CardUtil.getLKICopy(gameCard);
@@ -60,8 +53,8 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
         final Trigger delTrig = TriggerHandler.parseTrigger(mapParams, lki, sa.isIntrinsic(), null);
         delTrig.setSpawningAbility(sa.copy(lki, sa.getActivatingPlayer(), true));
 
-        if (triggerRemembered != null) {
-            for (final String rem : triggerRemembered.split(",")) {
+        if (sa.hasParam("RememberObjects")) {
+            for (final String rem : sa.getParam("RememberObjects").split(",")) {
                 for (final Object o : AbilityUtils.getDefinedObjects(sa.getHostCard(), rem, sa)) {
                     if (o instanceof SpellAbility) {
                         // "RememberObjects$ Remembered" don't remember spellability 

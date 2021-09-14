@@ -21,6 +21,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import com.google.common.collect.*;
+
 import org.apache.commons.lang3.StringUtils;
 
 import forge.game.Game;
@@ -313,5 +315,10 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
             setOverridingAbility(sa);
         }
         return sa;
+    }
+
+    @Override
+    public List<Object> getTriggerRemembered() {
+        return ImmutableList.of();
     }
 }
