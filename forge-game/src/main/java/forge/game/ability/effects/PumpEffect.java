@@ -202,8 +202,8 @@ public class PumpEffect extends SpellAbilityEffect {
             for (int i = 0; i < keywords.size(); i++) {
                 sb.append(keywords.get(i).toLowerCase());
                 sb.append(keywords.size() > 2 && i+1 != keywords.size() ? ", " : "");
+                sb.append(keywords.size() == 2 && i == 0 ? " " : "");
                 sb.append(i+2 == keywords.size() ? "and " : "");
-                sb.append(keywords.size() == 1 ? " " : "");
             }
 
             if (sa.hasParam("CanBlockAny")) {
