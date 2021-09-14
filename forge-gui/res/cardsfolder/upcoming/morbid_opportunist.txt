@@ -1,0 +1,7 @@
+Name:Morbid Opportunist
+ManaCost:2 B
+Types:Creature Human Rogue
+PT:1/3
+T:Mode$ ChangesZoneAll | TriggerZones$ Battlefield | ValidCards$ Creature.Other | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDraw | ActivationLimit$ 1 | TriggerDescription$ Whenever one or more other creatures die, draw a card. This ability triggers only once each turn.
+SVar:TrigDraw:DB$ Draw
+Oracle:Whenever one or more other creatures die, draw a card. This ability triggers only once each turn.

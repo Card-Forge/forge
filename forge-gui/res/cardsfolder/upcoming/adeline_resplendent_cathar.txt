@@ -1,0 +1,12 @@
+Name:Adeline, Resplendent Cathar
+ManaCost:1 W W
+Types:Legendary Creature Human Knight
+PT:*/4
+K:Vigilance
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of creatures you control.
+SVar:X:Count$Valid Creature.YouCtrl
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, for each opponent, create a 1/1 white Human creature token that's tapped and attacking that player or a planeswalker they control.
+SVar:TrigToken:DB$ Token | TokenAmount$ Y | TokenScript$ w_1_1_human | TokenTapped$ True | TokenAttacking$ True | ChoosePlayerOrPlaneswalker$ True | TokenOwner$ You
+SVar:Y:PlayerCountOpponents$Amount
+DeckHas:Ability$Token
+Oracle:Vigilance\nAdeline, Resplendent Cathar's power is equal to the number of creatures you control.\nWhenever you attack, for each opponent, create a 1/1 white Human creature token that's tapped and attacking that player or a planeswalker they control.

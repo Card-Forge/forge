@@ -1,0 +1,19 @@
+Name:Bereaved Survivor
+ManaCost:2 W
+Types:Creature Human Peasant
+PT:2/1
+T:Mode$ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ When another creature you control dies, transform CARDNAME.
+SVar:TrigTransform:DB$SetState | Defined$ Self | Mode$ Transform
+AlternateMode:DoubleFaced
+Oracle:When another creature you control dies, transform Bereaved Survivor.
+
+ALTERNATE
+
+Name:Dauntless Avenger
+ManaCost:no cost
+Types:Creature Human Soldier
+Colors:white
+PT:3/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, return target creature card with mana value 2 or less from your graveyard to the battlefield tapped and attacking.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl+cmcLE2 | Tapped$ True | Attacking$ True
+Oracle:Whenever Dauntless Avenger attacks, return target creature card with mana value 2 or less from your graveyard to the battlefield tapped and attacking.
