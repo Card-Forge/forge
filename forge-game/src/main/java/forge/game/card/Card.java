@@ -2172,13 +2172,18 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     if ((i != 0) && (sb.length() != 0)) {
                         sb.append(", ");
                     }
-                    sb.append(keyword);
+                    sb.append(i > 0 ? keyword.toLowerCase() : keyword);
                 }
                 if (sbLong.length() > 0) {
                     sbLong.append("\r\n");
                 }
 
-                i++;
+                if (keyword.equals("Flash")) {
+                    sb.append("\r\n\r\n");
+                    i = 0;
+                } else {
+                    i++;
+                }
             } catch (Exception e) {
                 String msg = "Card:keywordToText: crash in Keyword parsing";
                 Sentry.getContext().recordBreadcrumb(
