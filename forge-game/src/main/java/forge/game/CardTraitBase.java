@@ -659,4 +659,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         // dont use setHostCard to not trigger the not copied parts yet
         copy.hostCard = host;
     }
+
+    abstract public List<Object> getTriggerRemembered();
+
 }
