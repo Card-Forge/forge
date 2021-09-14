@@ -17,14 +17,13 @@
  */
 package forge.deck;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import forge.StaticData;
-import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardType;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
+import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
@@ -148,6 +147,34 @@ public class DeckRecognizer {
                     this.type == TokenType.ILLEGAL_CARD_REQUEST ||
                     this.type == TokenType.INVALID_CARD_REQUEST );
         }
+
+        public String getKey(){
+            if (this.isCardToken())
+                return String.format("%s-%s-%s-%s-%s",
+                        this.card.getName(), this.card.getEdition(),
+                        this.card.getCollectorNumber(),
+                        this.tokenSection.name(), this.getType().name().toLowerCase());
+            return "";
+        }
+
+        public static class TokenKey {
+            public String cardName;
+            public String setCode;
+            public String collectorNumber;
+            public String deckSection;
+            public String typeName;
+        }
+
+        public static TokenKey parseTokenKey(String key){
+            String[] keyInfo = TextUtil.split(key, '-');
+            TokenKey tokenKey = new TokenKey();
+            tokenKey.cardName = keyInfo[0];
+            tokenKey.setCode = keyInfo[1];
+            tokenKey.collectorNumber = keyInfo[2];
+            tokenKey.deckSection = keyInfo[3];
+            tokenKey.typeName = keyInfo[4];
+            return  tokenKey;
+        }
     }
 
     // Utility Constants
@@ -250,17 +277,10 @@ public class DeckRecognizer {
         return cardTypesList.toArray(new CharSequence[0]);
     }
 
-    private final CardDb db;
-    private final CardDb altDb;
     private Date releaseDateConstraint = null;
     // This two parameters are controlled only via setter methods
     private List<String> allowedSetCodes = null;  // as imposed by current format
     private DeckFormat deckFormat = null;  //
-    
-    public DeckRecognizer(CardDb db, CardDb altDb) {
-        this.db = db;
-        this.altDb = altDb;
-    }
 
     public Token recognizeLine(final String rawLine, DeckSection referenceSection) {
         if (rawLine == null)
@@ -307,6 +327,7 @@ public class DeckRecognizer {
     public Token recogniseCardToken(final String text, final DeckSection referenceSection) {
         String line = text.trim();
         Token uknonwnCardToken = null;
+        StaticData data = StaticData.instance();
         List<Matcher> cardMatchers = getRegExMatchers(line);
         for (Matcher matcher : cardMatchers) {
             String cardName = getRexGroup(matcher, REGRP_CARD);
@@ -314,16 +335,16 @@ public class DeckRecognizer {
                 continue;
             cardName = cardName.trim();
             //Avoid hit the DB - check whether cardName is contained in the DB
-            CardDb.CardRequest cr = CardDb.CardRequest.fromString(cardName.trim());  // to account for any FOIL request
-            if (!foundInCardDb(cr.cardName))
+            if (!data.isMTGCard(cardName))
                 continue;  // skip to the next matcher!
             String ccount = getRexGroup(matcher, REGRP_CARDNO);
             String setCode = getRexGroup(matcher, REGRP_SET);
             String collNo = getRexGroup(matcher, REGRP_COLLNR);
             String foilGr = getRexGroup(matcher, REGRP_FOIL_GFISH);
             String deckSec = getRexGroup(matcher, REGRP_DECK_SEC_XMAGE_STYLE);
+            boolean isFoil = false;
             if (foilGr != null)
-                cr.isFoil = true;
+                isFoil = true;
             int cardCount = ccount != null ? Integer.parseInt(ccount) : 1;
             // if any, it will be tried to convert specific collector number to art index (useful for lands).
             String collectorNumber = collNo != null ? collNo : IPaperCard.NO_COLLECTOR_NUMBER;
@@ -346,7 +367,7 @@ public class DeckRecognizer {
                 // we now name is ok, set is ok - we just need to be sure about collector number (if any)
                 // and if that card can be actually found in the requested set.
                 // IOW: we should account for wrong request, e.g. Counterspell|FEM - just doesn't exist!
-                PaperCard pc = this.getCardFromSet(cr.cardName, edition, collectorNumber, artIndex, cr.isFoil);
+                PaperCard pc = data.getCardFromSet(cardName, edition, collectorNumber, artIndex, isFoil);
                 if (pc != null) {
                     // ok so the card has been found - let's see if there's any restriction on the set
                     if (isIllegalSetInGameFormat(edition.getCode()) || isIllegalCardInDeckFormat(pc))
@@ -366,11 +387,12 @@ public class DeckRecognizer {
             // unless it is illegal for current format or invalid with selected date.
             PaperCard pc = null;
             if (hasGameFormatConstraints()) {
-                Predicate<PaperCard> filter = (Predicate<PaperCard>) this.db.isLegal(this.allowedSetCodes);
-                pc = this.getCardFromSupportedEditions(cr.cardName, cr.isFoil, filter);
+                pc = data.getCardFromSupportedEditions(cardName, isFoil, this.allowedSetCodes,
+                                                        this.releaseDateConstraint);
             }
             if (pc == null)
-                pc = this.getCardFromSupportedEditions(cr.cardName, cr.isFoil, null);
+                pc = data.getCardFromSupportedEditions(cardName, isFoil, null,
+                                                        this.releaseDateConstraint);
 
             if (pc != null) {
                 if (isIllegalSetInGameFormat(pc.getEdition()) || isIllegalCardInDeckFormat(pc))
@@ -425,10 +447,6 @@ public class DeckRecognizer {
         return this.releaseDateConstraint != null && edition.getDate().compareTo(this.releaseDateConstraint) >= 0;
     }
 
-    private boolean foundInCardDb(String cardName){
-        return this.db.contains(cardName) || this.altDb.contains(cardName);
-    }
-
     private List<Matcher> getRegExMatchers(String line) {
         List<Matcher> matchers = new ArrayList<>();
         Pattern[] patternsWithCollNumber = new Pattern[] {
@@ -454,50 +472,6 @@ public class DeckRecognizer {
                 matchers.add(matcher);
         }
         return matchers;
-    }
-
-    private PaperCard getCardFromSet(final String cardName, final CardEdition edition,
-                                     final String collectorNumber, final int artIndex,
-                                     final boolean isFoil) {
-        CardDb targetDb = this.db.contains(cardName) ? this.db : this.altDb;
-        // Try with collector number first
-        PaperCard result = targetDb.getCardFromSet(cardName, edition, collectorNumber, isFoil);
-        if (result == null && !collectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER)) {
-            if (artIndex != IPaperCard.NO_ART_INDEX) {
-                // So here we know cardName exists (checked before invoking this method)
-                // and also a Collector Number was specified.
-                // The only case we would reach this point is either due to a wrong edition-card match
-                // (later resulting in Unknown card - e.g. "Counterspell|FEM") or due to the fact that
-                // art Index was specified instead of collector number! Let's give it a go with that
-                // but only if artIndex is not NO_ART_INDEX (e.g. collectorNumber = "*32")
-                int maxArtForCard = targetDb.getMaxArtIndex(cardName);
-                if (artIndex <= maxArtForCard) {
-                    // if collNr was "78", it's hardly an artIndex. It was just the wrong collNr for the requested card
-                    result = targetDb.getCardFromSet(cardName, edition, artIndex, isFoil);
-                }
-            }
-            if (result == null){
-                // Last chance, try without collector number and see if any match is found
-                result = targetDb.getCardFromSet(cardName, edition, isFoil);
-            }
-        }
-        return result;
-    }
-
-    private PaperCard getCardFromSupportedEditions(final String cardName, boolean isFoil,
-                                                   Predicate<PaperCard> filter){
-        String reqInfo = CardDb.CardRequest.compose(cardName, isFoil);
-        CardDb targetDb = this.db.contains(cardName) ? this.db : this.altDb;
-        PaperCard result;
-        if (this.releaseDateConstraint != null) {
-            result = targetDb.getCardFromEditionsReleasedBefore(reqInfo,
-                    this.releaseDateConstraint, filter);
-            if (result == null)
-                result = targetDb.getCardFromEditions(reqInfo, filter);
-        }
-        else
-            result = targetDb.getCardFromEditions(reqInfo, filter);
-        return result;
     }
 
     public Token recogniseNonCardToken(final String text) {

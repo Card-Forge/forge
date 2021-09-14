@@ -11,7 +11,6 @@ import forge.gui.interfaces.ICheckBox;
 import forge.gui.interfaces.IComboBox;
 import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
-import forge.model.FModel;
 import forge.util.Localizer;
 
 public class DeckImportController {
@@ -77,8 +76,7 @@ public class DeckImportController {
 
     public List<DeckRecognizer.Token> parseInput(String input) {
         tokens.clear();
-        DeckRecognizer recognizer = new DeckRecognizer(FModel.getMagicDb().getCommonCards(),
-                                                       FModel.getMagicDb().getVariantCards());
+        DeckRecognizer recognizer = new DeckRecognizer();
         if (dateTimeCheck.isSelected()) {
             recognizer.setDateConstraint(yearDropdown.getSelectedItem(), monthDropdown.getSelectedIndex());
         }
@@ -94,7 +92,7 @@ public class DeckImportController {
             if (token != null) {
                 if (token.getType() == DeckRecognizer.TokenType.DECK_SECTION_NAME)
                     referenceDeckSectionInParsing = DeckSection.valueOf(token.getText());
-                else if (token.isCardToken()) {
+                else if (token.getType() == DeckRecognizer.TokenType.LEGAL_CARD_REQUEST) {
                     DeckSection tokenSection = token.getTokenSection();
                     if (!tokenSection.equals(referenceDeckSectionInParsing)) {
                         DeckRecognizer.Token sectionToken = DeckRecognizer.Token.DeckSection(token.getTokenSection().name());
@@ -105,7 +103,10 @@ public class DeckImportController {
                         referenceDeckSectionInParsing = tokenSection;
                     }
                 }
-                tokens.add(token);  // add found token
+                if (token.getType() == DeckRecognizer.TokenType.DECK_NAME)
+                    tokens.add(0, token);  // always add deck name top of the decklist
+                else
+                    tokens.add(token);
             }
 
         }

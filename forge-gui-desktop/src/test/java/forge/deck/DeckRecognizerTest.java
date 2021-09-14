@@ -301,10 +301,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
     * =============================
     */
     @Test void testMatchNonCardLine(){
-        StaticData magicDb = FModel.getMagicDb();
-        CardDb db = magicDb.getCommonCards();
-        CardDb altDb = magicDb.getVariantCards();
-        DeckRecognizer recognizer = new DeckRecognizer(db, altDb);
+        DeckRecognizer recognizer = new DeckRecognizer();
 
         // Test Token Types
         Token t = recognizer.recogniseNonCardToken("//Lands");
@@ -923,7 +920,6 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertFalse(matcher.matches());
 
         foilRequest = "4 Aspect of Hydra [BNG] 117 (F)";
-        target = DeckRecognizer.CARD_SET_COLLNO_PATTERN;
         matcher = target.matcher(foilRequest);
         assertTrue(matcher.matches());
         assertEquals(matcher.group(DeckRecognizer.REGRP_CARDNO), "4");
@@ -939,7 +935,6 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertFalse(matcher.matches());
 
         foilRequest = "4 [BNG] Aspect of Hydra 117 (F)";
-        target = DeckRecognizer.SET_CARD_COLLNO_PATTERN;
         matcher = target.matcher(foilRequest);
         assertTrue(matcher.matches());
         assertEquals(matcher.group(DeckRecognizer.REGRP_CARDNO), "4");
@@ -979,10 +974,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
     }
 
     @Test void testRecogniseCardToken(){
-        StaticData magicDb = FModel.getMagicDb();
-        CardDb db = magicDb.getCommonCards();
-        CardDb altDb = magicDb.getVariantCards();
-        DeckRecognizer recognizer = new DeckRecognizer(db, altDb);
+        DeckRecognizer recognizer = new DeckRecognizer();
 
         String lineRequest = "4x Power Sink+ (TMP) 78";
         Token cardToken = recognizer.recogniseCardToken(lineRequest, null);
@@ -1071,7 +1063,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(tokenCard.getCollectorNumber(), "78");
 
         // Relax Set Preference
-        assertEquals(db.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
+        assertEquals(StaticData.instance().getCommonCards().getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
 
         lineRequest = "4x Power Sink";
         cardToken = recognizer.recogniseCardToken(lineRequest, null);
@@ -1097,10 +1089,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
     }
 
     @Test void testRecognisingCardFromSetUsingAlternateCode(){
-        StaticData magicDb = FModel.getMagicDb();
-        CardDb db = magicDb.getCommonCards();
-        CardDb altDb = magicDb.getVariantCards();
-        DeckRecognizer recognizer = new DeckRecognizer(db, altDb);
+        DeckRecognizer recognizer = new DeckRecognizer();
 
         String lineRequest = "4x Power Sink+ TE 78";
         Token cardToken = recognizer.recogniseCardToken(lineRequest, null);
@@ -1119,10 +1108,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
     }
 
     @Test void testSingleWordCardNameMatchesCorrectly(){
-        StaticData magicDb = FModel.getMagicDb();
-        CardDb db = magicDb.getCommonCards();
-        CardDb altDb = magicDb.getVariantCards();
-        DeckRecognizer recognizer = new DeckRecognizer(db, altDb);
+        DeckRecognizer recognizer = new DeckRecognizer();
 
         String lineRequest = "2x Counterspell ICE";
         Token cardToken = recognizer.recogniseCardToken(lineRequest, null);
@@ -1135,7 +1121,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(tokenCard.getEdition(), "ICE");
 
         // Remove Set code
-        assertEquals(db.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
+        assertEquals(StaticData.instance().getCommonCards().getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
         lineRequest = "2x Counterspell";
         cardToken = recognizer.recogniseCardToken(lineRequest, null);
         assertNotNull(cardToken);
@@ -1149,10 +1135,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
     }
 
     @Test void testPassingInArtIndexRatherThanCollectorNumber(){
-        StaticData magicDb = FModel.getMagicDb();
-        CardDb db = magicDb.getCommonCards();
-        CardDb altDb = magicDb.getVariantCards();
-        DeckRecognizer recognizer = new DeckRecognizer(db, altDb);
+        DeckRecognizer recognizer = new DeckRecognizer();
 
         String lineRequest = "20x Mountain MIR 3";
         Token cardToken = recognizer.recogniseCardToken(lineRequest, null);
@@ -1168,10 +1151,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
     }
 
     @Test void testCollectorNumberIsNotConfusedAsArtIndexInstead(){
-        StaticData magicDb = FModel.getMagicDb();
-        CardDb db = magicDb.getCommonCards();
-        CardDb altDb = magicDb.getVariantCards();
-        DeckRecognizer recognizer = new DeckRecognizer(db, altDb);
+        DeckRecognizer recognizer = new DeckRecognizer();
 
         String lineRequest = "2x Auspicious Ancestor MIR 3";
         Token cardToken = recognizer.recogniseCardToken(lineRequest, null);
@@ -1187,10 +1167,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
     }
 
     @Test void testCardRequestWithWrongCollectorNumberStillReturnsTheCardFromSetIfAny(){
-        StaticData magicDb = FModel.getMagicDb();
-        CardDb db = magicDb.getCommonCards();
-        CardDb altDb = magicDb.getVariantCards();
-        DeckRecognizer recognizer = new DeckRecognizer(db, altDb);
+        DeckRecognizer recognizer = new DeckRecognizer();
 
         String requestLine = "3 Jayemdae Tome (LEB) 231";  // actually found in TappedOut Deck Export
         // NOTE: Expected Coll Nr should be 255
@@ -1214,10 +1191,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
     }
 
     @Test void testRequestingCardFromTheWrongSetReturnsUnknownCard(){
-        StaticData magicDb = FModel.getMagicDb();
-        CardDb db = magicDb.getCommonCards();
-        CardDb altDb = magicDb.getVariantCards();
-        DeckRecognizer recognizer = new DeckRecognizer(db, altDb);
+        DeckRecognizer recognizer = new DeckRecognizer();
 
         String lineRequest = "2x Counterspell FEM";
         Token cardToken = recognizer.recogniseCardToken(lineRequest, null);
@@ -1227,10 +1201,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
     }
 
     @Test void testRequestingCardFromNonExistingSetReturnsUnknownCard(){
-        StaticData magicDb = FModel.getMagicDb();
-        CardDb db = magicDb.getCommonCards();
-        CardDb altDb = magicDb.getVariantCards();
-        DeckRecognizer recognizer = new DeckRecognizer(db, altDb);
+        DeckRecognizer recognizer = new DeckRecognizer();
 
         String lineRequest = "2x Counterspell BOU";
         Token cardToken = recognizer.recogniseCardToken(lineRequest, null);
@@ -1241,10 +1212,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
     }
 
     @Test void testRequestingCardWithRestrictionsOnSetsFromGameFormat(){
-        StaticData magicDb = FModel.getMagicDb();
-        CardDb db = magicDb.getCommonCards();
-        CardDb altDb = magicDb.getVariantCards();
-        DeckRecognizer recognizer = new DeckRecognizer(db, altDb);
+        DeckRecognizer recognizer = new DeckRecognizer();
         // Setting Fantasy Constructed Game Format: Urza's Block Format
         List<String> allowedSets = Arrays.asList("USG", "ULG", "UDS", "PUDS", "PULG", "PUSG");
         recognizer.setGameFormatConstraint(allowedSets);
@@ -1265,10 +1233,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
     }
 
     @Test void testRequestingCardWithRestrictionsOnDeckFormat(){
-        StaticData magicDb = FModel.getMagicDb();
-        CardDb db = magicDb.getCommonCards();
-        CardDb altDb = magicDb.getVariantCards();
-        DeckRecognizer recognizer = new DeckRecognizer(db, altDb);
+        DeckRecognizer recognizer = new DeckRecognizer();
 
         String lineRequest = "Ancestral Recall";
         Token cardToken = recognizer.recogniseCardToken(lineRequest, null);
@@ -1278,7 +1243,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         PaperCard ancestralCard = cardToken.getCard();
         assertEquals(cardToken.getNumber(), 1);
         assertEquals(ancestralCard.getName(), "Ancestral Recall");
-        assertEquals(db.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
+        assertEquals(StaticData.instance().getCommonCards().getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
         assertEquals(ancestralCard.getEdition(), "VMA");
 
         recognizer.setDeckFormatConstraint(DeckFormat.TinyLeaders);
@@ -1289,12 +1254,9 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
     }
 
     @Test void testRequestingCardWithReleaseDateConstraints(){
-        StaticData magicDb = FModel.getMagicDb();
-        CardDb db = magicDb.getCommonCards();
-        CardDb altDb = magicDb.getVariantCards();
-        DeckRecognizer recognizer = new DeckRecognizer(db, altDb);
+        DeckRecognizer recognizer = new DeckRecognizer();
         recognizer.setDateConstraint(2002, 1);
-        assertEquals(db.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
+        assertEquals(StaticData.instance().getCommonCards().getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
 
         String lineRequest = "Ancestral Recall";
         Token cardToken = recognizer.recogniseCardToken(lineRequest, null);
@@ -1304,7 +1266,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         PaperCard ancestralCard = cardToken.getCard();
         assertEquals(cardToken.getNumber(), 1);
         assertEquals(ancestralCard.getName(), "Ancestral Recall");
-        assertEquals(db.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
+        assertEquals(StaticData.instance().getCommonCards().getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
         assertEquals(ancestralCard.getEdition(), "2ED");
 
         // Counterspell editions
@@ -1321,12 +1283,9 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
     }
 
     @Test void testInvalidCardRequestWhenReleaseDateConstraintsAreUp(){
-        StaticData magicDb = FModel.getMagicDb();
-        CardDb db = magicDb.getCommonCards();
-        CardDb altDb = magicDb.getVariantCards();
-        DeckRecognizer recognizer = new DeckRecognizer(db, altDb);
+        DeckRecognizer recognizer = new DeckRecognizer();
 
-        assertEquals(db.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
+        assertEquals(StaticData.instance().getCommonCards().getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
 
         // First run without constraint to check that it's a valid request
         String lineRequest = "Counterspell|MH2";
@@ -1347,13 +1306,10 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
     }
 
     @Test void testCardMatchWithDateANDGameFormatConstraints(){
-        StaticData magicDb = FModel.getMagicDb();
-        CardDb db = magicDb.getCommonCards();
-        CardDb altDb = magicDb.getVariantCards();
-        DeckRecognizer recognizer = new DeckRecognizer(db, altDb);
+        DeckRecognizer recognizer = new DeckRecognizer();
 
         // Baseline - no constraints
-        assertEquals(db.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
+        assertEquals(StaticData.instance().getCommonCards().getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
         String lineRequest = "2x Lightning Dragon";
         Token cardToken = recognizer.recogniseCardToken(lineRequest, null);
         assertNotNull(cardToken);
@@ -1442,13 +1398,10 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
     }
 
     @Test void testCardMatchWithDateANDdeckFormatConstraints(){
-        StaticData magicDb = FModel.getMagicDb();
-        CardDb db = magicDb.getCommonCards();
-        CardDb altDb = magicDb.getVariantCards();
-        DeckRecognizer recognizer = new DeckRecognizer(db, altDb);
+        DeckRecognizer recognizer = new DeckRecognizer();
 
         // Baseline - no constraints
-        assertEquals(db.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
+        assertEquals(StaticData.instance().getCommonCards().getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
 
         String lineRequest = "Flash";
         Token cardToken = recognizer.recogniseCardToken(lineRequest, null);
@@ -1490,13 +1443,10 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
     }
 
     @Test void testCardMatchWithGameANDdeckFormatConstraints(){
-        StaticData magicDb = FModel.getMagicDb();
-        CardDb db = magicDb.getCommonCards();
-        CardDb altDb = magicDb.getVariantCards();
-        DeckRecognizer recognizer = new DeckRecognizer(db, altDb);
+        DeckRecognizer recognizer = new DeckRecognizer();
 
         // Baseline - no constraints
-        assertEquals(db.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
+        assertEquals(StaticData.instance().getCommonCards().getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
 
         String lineRequest = "Flash";
         Token cardToken = recognizer.recogniseCardToken(lineRequest, null);
@@ -1555,13 +1505,10 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
     }
 
     @Test void testCardMatchWitDateANDgameANDdeckFormatConstraints(){
-        StaticData magicDb = FModel.getMagicDb();
-        CardDb db = magicDb.getCommonCards();
-        CardDb altDb = magicDb.getVariantCards();
-        DeckRecognizer recognizer = new DeckRecognizer(db, altDb);
+        DeckRecognizer recognizer = new DeckRecognizer();
 
         // Baseline - no constraints
-        assertEquals(db.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
+        assertEquals(StaticData.instance().getCommonCards().getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
 
         String lineRequest = "Flash";
         Token cardToken = recognizer.recogniseCardToken(lineRequest, null);
@@ -1670,11 +1617,8 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
     }
 
     @Test void testCardRecognisedMTGGoldfishFormat(){
-        StaticData magicDb = FModel.getMagicDb();
-        CardDb db = magicDb.getCommonCards();
-        CardDb altDb = magicDb.getVariantCards();
-        DeckRecognizer recognizer = new DeckRecognizer(db, altDb);
-        assertEquals(db.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
+        DeckRecognizer recognizer = new DeckRecognizer();
+        assertEquals(StaticData.instance().getCommonCards().getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
 
         String lineRequest = "4 Aspect of Hydra [BNG] (F)";
         Token cardToken = recognizer.recogniseCardToken(lineRequest, null);
@@ -1711,11 +1655,8 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
     }
 
     @Test void testCardNameEntryInMarkDownExportFromTappedOut(){
-        StaticData magicDb = FModel.getMagicDb();
-        CardDb db = magicDb.getCommonCards();
-        CardDb altDb = magicDb.getVariantCards();
-        DeckRecognizer recognizer = new DeckRecognizer(db, altDb);
-        assertEquals(db.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
+        DeckRecognizer recognizer = new DeckRecognizer();
+        assertEquals(StaticData.instance().getCommonCards().getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
 
         String line = "* 1 [Ancestral Recall](http://tappedout.nethttp://tappedout.net/mtg-card/ancestral-recall/)";
 
@@ -1769,10 +1710,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
     }
 
     @Test void testRecognizeCardTokenInXMageFormatRequest(){
-        StaticData magicDb = FModel.getMagicDb();
-        CardDb db = magicDb.getCommonCards();
-        CardDb altDb = magicDb.getVariantCards();
-        DeckRecognizer recognizer = new DeckRecognizer(db, altDb);
+        DeckRecognizer recognizer = new DeckRecognizer();
 
         String xmageFormatRequest = "1 [LRW:51] Amoeboid Changeling";
         Token xmageCardToken = recognizer.recogniseCardToken(xmageFormatRequest, null);
@@ -1791,12 +1729,9 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
      * ===================================
      */
     @Test void testRecognizeLines(){
-        StaticData magicDb = FModel.getMagicDb();
-        CardDb db = magicDb.getCommonCards();
-        CardDb altDb = magicDb.getVariantCards();
-        DeckRecognizer recognizer = new DeckRecognizer(db, altDb);
+        DeckRecognizer recognizer = new DeckRecognizer();
 
-        assertEquals(db.getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
+        assertEquals(StaticData.instance().getCommonCards().getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
 
         String lineRequest = "// MainBoard";
         Token token = recognizer.recognizeLine(lineRequest, null);
