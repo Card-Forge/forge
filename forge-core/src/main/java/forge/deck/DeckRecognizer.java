@@ -149,12 +149,19 @@ public class DeckRecognizer {
         }
 
         public String getKey(){
-            if (this.isCardToken())
-                return String.format("%s-%s-%s-%s-%s",
+            if (this.isCardToken()) {
+                if (this.tokenSection != null)
+                    return String.format("%s-%s-%s-%s-%s",
+                                this.card.getName(), this.card.getEdition(),
+                                this.card.getCollectorNumber(),
+                                this.getType().name().toLowerCase(),
+                                this.tokenSection.name());
+                return String.format("%s-%s-%s-%s",
                         this.card.getName(), this.card.getEdition(),
                         this.card.getCollectorNumber(),
-                        this.tokenSection.name(), this.getType().name().toLowerCase());
-            return "";
+                        this.getType().name().toLowerCase());
+            }
+            return null;
         }
 
         public static class TokenKey {
@@ -171,8 +178,11 @@ public class DeckRecognizer {
             tokenKey.cardName = keyInfo[0];
             tokenKey.setCode = keyInfo[1];
             tokenKey.collectorNumber = keyInfo[2];
-            tokenKey.deckSection = keyInfo[3];
-            tokenKey.typeName = keyInfo[4];
+            tokenKey.typeName = keyInfo[3];
+            if (keyInfo.length > 4)
+                tokenKey.deckSection = keyInfo[3];
+            else
+                tokenKey.deckSection = null;
             return  tokenKey;
         }
     }
