@@ -6,4 +6,5 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDraw:AB$ Draw | Cost$ PayLife<X> | NumCards$ X
 SVar:X:TriggeredCard$CardPower
 K:Equip:3
+DeckHas:Ability$LifeGain
 Oracle:Equipped creature has flying and lifelink.\nWhenever equipped creature dies, you may pay X life, where X is its power. If you do, draw X cards.\nEquip {3}
