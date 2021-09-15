@@ -84,7 +84,7 @@ public final class CardPicturePanel extends JPanel implements ImageFetcher.Callb
             if (displayed instanceof PaperCard) {
                 ColorModel cm = image.getColorModel();
                 boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
-                WritableRaster raster = image.copyData(null);
+                WritableRaster raster = image.copyData(image.getRaster().createCompatibleWritableRaster());
                 final BufferedImage displayedimage = new BufferedImage(cm, raster, isAlphaPremultiplied, null)
                         .getSubimage(0, 0, image.getWidth(), image.getHeight());
                 this.currentImage = displayedimage;
