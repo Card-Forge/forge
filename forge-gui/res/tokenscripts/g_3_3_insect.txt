@@ -1,0 +1,6 @@
+Name:Insect
+ManaCost:no cost
+Types:Creature Insect
+Colors:green
+PT:3/3
+Oracle:
