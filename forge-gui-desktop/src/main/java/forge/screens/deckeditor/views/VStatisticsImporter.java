@@ -1,10 +1,8 @@
 package forge.screens.deckeditor.views;
 
 
-import forge.StaticData;
 import forge.itemmanager.SItemManagerUtil;
 import forge.toolbox.FLabel;
-import forge.toolbox.FPanel;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.util.Localizer;
@@ -18,11 +16,22 @@ public class VStatisticsImporter {
     private static VStatisticsImporter lastInstance = null;
 
     // Global stats
-    private FLabel lblCardCountHeader = new FLabel.Builder()
-            .text(Localizer.getInstance().getMessage("lblCardByColorTypeCMC")).tooltip(Localizer.getInstance().getMessage("lblBreakdownOfColorTypeCMC"))
-            .fontStyle(Font.BOLD).fontSize(11).fontStyle(Font.BOLD).build();
-    private FLabel lblShardCountHeader = new FLabel.Builder()
-            .text(Localizer.getInstance().getMessage("lblColoredManaSymbolsINManaCost")).tooltip(Localizer.getInstance().getMessage("lblAmountOfManaSymbolsInManaCostOfCards"))
+
+    private FLabel lblTotal = new FLabel.Builder()
+            .text(String.format("%s: %d", Localizer.getInstance().getMessage("lblTotalCards").toUpperCase(), 0))
+            .tooltip(Localizer.getInstance().getMessage("lblTotalCards"))
+            .fontStyle(Font.BOLD).fontSize(10).fontStyle(Font.BOLD).build();
+    private FLabel lblTotalMain = new FLabel.Builder()
+            .text(String.format("%s: %d", Localizer.getInstance().getMessage("lblTotalMain").toUpperCase(), 0))
+            .tooltip(Localizer.getInstance().getMessage("lblTotalMain"))
+            .fontStyle(Font.BOLD).fontSize(10).fontStyle(Font.BOLD).build();
+    private FLabel lblTotalSide = new FLabel.Builder()
+            .text(String.format("%s: %d", Localizer.getInstance().getMessage("lblTotalSide").toUpperCase(), 0))
+            .tooltip(Localizer.getInstance().getMessage("lblTotalSide"))
+            .fontStyle(Font.BOLD).fontSize(10).fontStyle(Font.BOLD).build();
+    private FLabel lblTitle = new FLabel.Builder()
+            .text(Localizer.getInstance().getMessage("lblSummaryStats"))
+            .tooltip(Localizer.getInstance().getMessage("lblSummaryStats"))
             .fontStyle(Font.BOLD).fontSize(11).fontStyle(Font.BOLD).build();
 
     // Total and color count labels
@@ -34,14 +43,6 @@ public class VStatisticsImporter {
     private final FLabel lblRed = buildLabel(SItemManagerUtil.StatTypes.RED, true);
     private final FLabel lblWhite = buildLabel(SItemManagerUtil.StatTypes.WHITE, false);
     private final FLabel lblColorless = buildLabel(SItemManagerUtil.StatTypes.COLORLESS, true);
-
-    // Colored mana symbol count labels
-    private final FLabel lblWhiteShard = buildLabel(SItemManagerUtil.StatTypes.WHITE, true);
-    private final FLabel lblBlueShard = buildLabel(SItemManagerUtil.StatTypes.BLUE, true);
-    private final FLabel lblBlackShard = buildLabel(SItemManagerUtil.StatTypes.BLACK, true);
-    private final FLabel lblRedShard = buildLabel(SItemManagerUtil.StatTypes.RED, false);
-    private final FLabel lblGreenShard = buildLabel(SItemManagerUtil.StatTypes.GREEN, false);
-    private final FLabel lblColorlessShard = buildLabel(SItemManagerUtil.StatTypes.COLORLESS, false);
 
     // Card type labels
     private final FLabel lblArtifact = buildLabel(SItemManagerUtil.StatTypes.ARTIFACT, true);
@@ -93,13 +94,6 @@ public class VStatisticsImporter {
         lblWhite.setToolTipText(Localizer.getInstance().getMessage("lblWhiteCardCount"));
         lblColorless.setToolTipText(Localizer.getInstance().getMessage("lblColorlessCardCount"));
 
-        // Colored mana symbol count stats
-        lblBlackShard.setToolTipText(Localizer.getInstance().getMessage("lblBlackManaSymbolCount"));
-        lblBlueShard.setToolTipText(Localizer.getInstance().getMessage("lblBlueManaSymbolCount"));
-        lblGreenShard.setToolTipText(Localizer.getInstance().getMessage("lblGreenManaSymbolCount"));
-        lblRedShard.setToolTipText(Localizer.getInstance().getMessage("lblRedManaSymbolCount"));
-        lblWhiteShard.setToolTipText(Localizer.getInstance().getMessage("lblWhiteManaSymbolCount"));
-
         // Type stats
         lblArtifact.setToolTipText(Localizer.getInstance().getMessage("lblArtifactCardCount"));
         lblCreature.setToolTipText(Localizer.getInstance().getMessage("lblCreatureCardCount"));
@@ -122,9 +116,10 @@ public class VStatisticsImporter {
         pnlStats.setOpaque(false);
         pnlStats.setLayout(new MigLayout("insets 0, gap 0, ax center, wrap 3"));
 
+        pnlStats.add(lblTitle, "w 96%!, h 20px!, span 3 1, gap 2% 0 0 0");
+
         // Add labels to container
         final String constraints = "w 35%!, h 30px!";
-        pnlStats.add(lblCardCountHeader, "w 96%!, h 40px!, span 3 1, gap 2% 0 0 0");
 
         pnlStats.add(lblMulti, constraints);
         pnlStats.add(lblArtifact, constraints);
@@ -154,14 +149,10 @@ public class VStatisticsImporter {
         pnlStats.add(lblSorcery, constraints);
         pnlStats.add(lblCMC6, constraints);
 
-        // Shard count stats container
-        pnlStats.add(lblShardCountHeader, "w 96%!, h 40px!, span 3 1, gap 2% 0 0 0");
-        pnlStats.add(lblWhiteShard, constraints);
-        pnlStats.add(lblBlueShard, constraints);
-        pnlStats.add(lblBlackShard, constraints);
-        pnlStats.add(lblRedShard, constraints);
-        pnlStats.add(lblGreenShard, constraints);
-        pnlStats.add(lblColorlessShard, constraints);
+        pnlStats.add(lblTotal, constraints);
+        pnlStats.add(lblTotalMain, constraints);
+        pnlStats.add(lblTotalSide, constraints);
+
     }
 
     public static VStatisticsImporter instance() {
@@ -187,18 +178,6 @@ public class VStatisticsImporter {
     public FLabel getLblWhite() { return lblWhite; }
     /** @return {@link forge.toolbox.FLabel} */
     public FLabel getLblColorless() { return lblColorless; }
-
-    /** @return {@link forge.toolbox.FLabel} */
-    public FLabel getLblBlackShard() { return lblBlackShard; }
-    /** @return {@link forge.toolbox.FLabel} */
-    public FLabel getLblBlueShard() { return lblBlueShard; }
-    /** @return {@link forge.toolbox.FLabel} */
-    public FLabel getLblGreenShard() { return lblGreenShard; }
-    /** @return {@link forge.toolbox.FLabel} */
-    public FLabel getLblRedShard() { return lblRedShard; }
-    /** @return {@link forge.toolbox.FLabel} */
-    public FLabel getLblWhiteShard() { return lblWhiteShard; }
-    public FLabel getLblColorlessShard() { return lblColorlessShard; }
 
     /** @return {@link forge.toolbox.FLabel} */
     public FLabel getLblArtifact() { return lblArtifact; }
@@ -229,6 +208,13 @@ public class VStatisticsImporter {
     public FLabel getLblCMC5() { return lblCMC5; }
     /** @return {@link forge.toolbox.FLabel} */
     public FLabel getLblCMC6() { return lblCMC6; }
+
+    /** @return {@link forge.toolbox.FLabel} */
+    public FLabel getLblTotal() { return lblTotal; }
+    /** @return {@link forge.toolbox.FLabel} */
+    public FLabel getLblTotalMain() { return lblTotalMain; }
+    /** @return {@link forge.toolbox.FLabel} */
+    public FLabel getLblTotalSide() { return lblTotalSide; }
 
     /** @return {@link javax.swing.JPanel} */
     public JPanel getMainPanel() { return this.pnlStats; }

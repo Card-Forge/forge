@@ -6,17 +6,24 @@ import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.card.MagicColor;
 import forge.deck.CardPool;
+import forge.deck.DeckRecognizer;
+import forge.deck.DeckSection;
 import forge.item.PaperCard;
 import forge.itemmanager.SItemManagerUtil;
 import forge.screens.deckeditor.views.VStatisticsImporter;
 import forge.util.ItemPool;
+import forge.util.Localizer;
 
 import javax.swing.*;
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class CStatisticsImporter {
 
     private static CStatisticsImporter instance = null;
+    private int totalCardsInDecklist = 0;
 
     private CStatisticsImporter(){}
 
@@ -26,13 +33,25 @@ public class CStatisticsImporter {
         return instance;
     }
 
-    public void updateStats(Iterable<Map.Entry<PaperCard, Integer>> tokenCards) {
+    public void updateStats(Iterable<DeckRecognizer.Token> cardTokens) {
+
+        List<Map.Entry<PaperCard, Integer>> tokenCards = new ArrayList();
+        int totalInMain = 0;
+        int totalInSide = 0;
+        for (DeckRecognizer.Token token : cardTokens){
+            if (token.getType() == DeckRecognizer.TokenType.LEGAL_CARD_REQUEST) {
+                tokenCards.add(new AbstractMap.SimpleEntry<>(token.getCard(), token.getNumber()));
+                if (token.getTokenSection().equals(DeckSection.Main))
+                    totalInMain += token.getNumber();
+                else if (token.getTokenSection().equals(DeckSection.Sideboard))
+                    totalInSide += token.getNumber();
+            }
+        }
         final CardPool deck = new CardPool();
         deck.addAll(tokenCards);
 
         int total = deck.countAll();
-        final int[] shardCount = calculateShards(deck);
-
+        totalCardsInDecklist = total;
         // Hack-ish: avoid /0 cases, but still populate labels :)
         if (total == 0) { total = 1; }
 
@@ -60,13 +79,15 @@ public class CStatisticsImporter {
         setLabelValue(VStatisticsImporter.instance().getLblCMC5(), deck, SItemManagerUtil.StatTypes.CMC_5.predicate, total);
         setLabelValue(VStatisticsImporter.instance().getLblCMC6(), deck, SItemManagerUtil.StatTypes.CMC_6.predicate, total);
 
-        int totShards = calculateTotalShards(shardCount);
-        setLabelValue(VStatisticsImporter.instance().getLblWhiteShard(), "Shards:", shardCount[0], totShards);
-        setLabelValue(VStatisticsImporter.instance().getLblBlueShard(), "Shards:", shardCount[1], totShards);
-        setLabelValue(VStatisticsImporter.instance().getLblBlackShard(), "Shards:", shardCount[2], totShards);
-        setLabelValue(VStatisticsImporter.instance().getLblRedShard(), "Shards:", shardCount[3], totShards);
-        setLabelValue(VStatisticsImporter.instance().getLblGreenShard(), "Shards:", shardCount[4], totShards);
-        setLabelValue(VStatisticsImporter.instance().getLblColorlessShard(), "Shards:", shardCount[5], totShards);
+        VStatisticsImporter.instance().getLblTotal().setText(
+                String.format("%s: %d", Localizer.getInstance().getMessage("lblTotalCards").toUpperCase(),
+                        deck.countAll()));
+        VStatisticsImporter.instance().getLblTotalMain().setText(
+                String.format("%s: %d", Localizer.getInstance().getMessage("lblTotalMain").toUpperCase(),
+                        totalInMain));
+        VStatisticsImporter.instance().getLblTotalSide().setText(
+                String.format("%s: %d", Localizer.getInstance().getMessage("lblTotalSide").toUpperCase(),
+                        totalInSide));
     }
 
     private void setLabelValue(final JLabel label, final ItemPool<PaperCard> deck, final Predicate<CardRules> predicate, final int total) {
@@ -74,31 +95,9 @@ public class CStatisticsImporter {
         label.setText(tmp + " (" + calculatePercentage(tmp, total) + "%)");
     }
 
-    private void setLabelValue(final JLabel label, final String str, final int value, final int total) {
-        String labelText = String.format("%s%d (%d%%)", str, value, calculatePercentage(value, total));
-        label.setText(labelText);
-    }
-
     public static int calculatePercentage(final int x0, final int y0) {
         return (int) Math.round((double) (x0 * 100) / (double) y0);
     }
 
-    public static int[] calculateShards(final ItemPool<PaperCard> deck) {
-        final int[] counts = new int[6]; // in WUBRGC order
-        for (final PaperCard c : deck.toFlatList()) {
-            final int[] cShards = c.getRules().getManaCost().getColorShardCounts();
-            for (int i = 0; i < 6; i++) {
-                counts[i] += cShards[i];
-            }
-        }
-        return counts;
-    }
-
-    public static int calculateTotalShards(int[] counts) {
-        int total = 0;
-        for (int count : counts) {
-            total += count;
-        }
-        return total;
-    }
+    public int getTotalCardsInDecklist(){ return this.totalCardsInDecklist; }
 }
