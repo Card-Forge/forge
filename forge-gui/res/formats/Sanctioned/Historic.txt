@@ -4,5 +4,5 @@ Type:Digital
 Subtype:Arena
 Effective:2019-11-21
 Order:142
-Sets:XLN, RIX, DOM, M19, GRN, G18, RNA, WAR, M20, ELD, HA1, THB, HA2, IKO, HA3, M21, JMP, AKR, ZNR, KLR, KHM, HA4, STX, STA, HA5, AFR, J21
+Sets:XLN, RIX, DOM, M19, GRN, G18, RNA, WAR, M20, ELD, HA1, THB, HA2, IKO, HA3, M21, JMP, AKR, ZNR, KLR, KHM, HA4, STX, STA, HA5, AFR, J21, MID
 Banned:Agent of Treachery; Channel; Counterspell; Dark Ritual; Demonic Tutor; Field of the Dead; Fires of Invention; Lightning Bolt; Oko, Thief of Crowns; Omnath, Locus of Creation; Natural Order; Nexus of Fate; Once Upon a Time; Swords to Plowshares; Teferi, Time Raveler; Thassa's Oracle; Time Warp; Veil of Summer; Uro, Titan of Nature's Wrath; Wilderness Reclamation; Winota, Joiner of Forces
