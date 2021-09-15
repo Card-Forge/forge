@@ -1,0 +1,10 @@
+Name:Dire-Strain Rampage
+ManaCost:1 R G
+Types:Sorcery
+A:SP$ Destroy | ValidTgts$ Artifact,Enchantment,Land | TgtPrompt$ Select target artifact, enchantment, or land | RememberDestroyed$ True | SubAbility$ DBChangeZone | SpellDescription$ Destroy target artifact, enchantment, or land. If a land was destroyed this way, its controller may search their library for up to two basic land cards, put them onto the battlefield tapped, then shuffle. Otherwise, its controller may search their library for a basic land card, put it onto the battlefield tapped, then shuffle.
+SVar:DBChangeZone:DB$ ChangeZone | DefinedPlayer$ TargetedController | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeNum$ X | ChangeType$ Land.Basic | Optional$ True | ShuffleNonMandatory$ True | SubAbility$ DBCleanup | StackDescription$ If a land was destroyed this way, its controller may search their library for up to two basic land cards, put them onto the battlefield tapped, then shuffle. Otherwise, its controller may search their library for a basic land card, put it onto the battlefield tapped, then shuffle.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Valid Land/Plus.1
+K:Flashback:3 R G
+DeckHas:Ability$Graveyard
+Oracle:Destroy target artifact, enchantment, or land. If a land was destroyed this way, its controller may search their library for up to two basic land cards, put them onto the battlefield tapped, then shuffle. Otherwise, its controller may search their library for a basic land card, put it onto the battlefield tapped, then shuffle.\nFlashback {3}{R}{G}
