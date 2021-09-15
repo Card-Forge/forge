@@ -23,9 +23,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-import com.google.common.collect.ComparisonChain;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
+import com.google.common.collect.*;
 
 import forge.card.MagicColor;
 import forge.game.CardTraitBase;
@@ -731,5 +729,10 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             System.err.println(e);
         }
         return clone;
+    }
+
+    @Override
+    public List<Object> getTriggerRemembered() {
+        return ImmutableList.of();
     }
 } // end class StaticAbility

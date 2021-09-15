@@ -1,0 +1,10 @@
+Name:Ghouls' Night Out
+ManaCost:3 B B
+Types:Sorcery
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChoose | SubAbility$ DBChangeZone | StackDescription$ SpellDescription | SpellDescription$ For each player, choose a creature card in that player's graveyard. Put those cards onto the battlefield under your control. They're black Zombies in addition to their other colors and types and they gain decayed. (A creature with decayed can't block. When it attacks, sacrifice it at end of combat.)
+SVar:DBChoose:DB$ ChooseCard | Defined$ You | Choices$ Creature.RememberedPlayerCtrl | ChoiceZone$ Graveyard | Mandatory$ True | Amount$ 1 | ChoiceTitle$ Choose a creature card in this player's graveyard | AILogic$ BestCard | ImprintChosen$ True
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ Imprinted | GainControl$ True | Origin$ Graveyard | Destination$ Battlefield | AnimateSubAbility$ DBAnimate | StackDescription$ None
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Types$ Zombie | Colors$ Black | Keywords$ Decayed | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | ClearImprinted$ True
+DeckHas:Ability$Graveyard & Type$Zombie
+Oracle:For each player, choose a creature card in that player's graveyard. Put those cards onto the battlefield under your control. They're black Zombies in addition to their other colors and types and they gain decayed. (A creature with decayed can't block. When it attacks, sacrifice it at end of combat.)

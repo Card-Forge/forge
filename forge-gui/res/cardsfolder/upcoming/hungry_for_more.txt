@@ -1,0 +1,8 @@
+Name:Hungry for More
+ManaCost:B R
+Types:Sorcery
+A:SP$ Token | TokenScript$ br_3_1_vampire_trample_lifelink_haste | AtEOT$ Sacrifice | SpellDescription$ Create a 3/1 black and red Vampire creature token with trample, lifelink, and haste. Sacrifice it at the beginning of the next end step.
+K:Flashback:1 B R
+DeckHas:Ability$Token & Ability$LifeGain & Ability$Sacrifice
+DeckHints:Type$Vampire
+Oracle:Create a 3/1 black and red Vampire creature token with trample, lifelink, and haste. Sacrifice it at the beginning of the next end step.\nFlashback {1}{B}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

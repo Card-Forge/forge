@@ -12,16 +12,6 @@ import forge.game.zone.ZoneType;
 
 public class LifeExchangeVariantEffect extends SpellAbilityEffect {
 
-    // *************************************************************************
-    // ************************ EXCHANGE LIFE **********************************
-    // *************************************************************************
-
-
-
-    // *************************************************************************
-    // ************************* LOSE LIFE *************************************
-    // *************************************************************************
-
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.AbilityFactoryAlterLife.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
@@ -88,7 +78,7 @@ public class LifeExchangeVariantEffect extends SpellAbilityEffect {
             source.addNewPT(power, toughness, timestamp);
             game.fireEvent(new GameEventCardStatsChanged(source));
         } else {
-            //  do nothing if they are equal
+            // do nothing if they are equal
         }
     }
 

@@ -1,0 +1,5 @@
+Name:Stuffed Bear
+ManaCost:2
+Types:Artifact
+A:AB$ Animate | Cost$ 2 | Defined$ Self | Power$ 4 | Toughness$ 4 | Types$ Creature,Artifact,Bear | Colors$ Green | SpellDescription$ CARDNAME becomes a 4/4 green Bear artifact creature until end of turn.
+Oracle: {2}: Stuffed Bear becomes a 4/4 green Bear artifact creature until end of turn.
