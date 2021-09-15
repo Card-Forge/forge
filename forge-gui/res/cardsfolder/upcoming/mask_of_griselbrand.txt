@@ -1,0 +1,10 @@
+Name:Mask of Griselbrand
+ManaCost:1 B B
+Types:Legendary Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Flying & Lifelink | Description$ Equipped creature has flying and lifelink.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigDraw | TriggerDescription$ Whenever equipped creature dies, you may pay X life, where X is its power. If you do, draw X cards.
+SVar:TrigDraw:AB$ Draw | Cost$ PayLife<X> | NumCards$ X
+SVar:X:TriggeredCard$CardPower
+K:Equip:3
+DeckHas:Ability$LifeGain
+Oracle:Equipped creature has flying and lifelink.\nWhenever equipped creature dies, you may pay X life, where X is its power. If you do, draw X cards.\nEquip {3}
