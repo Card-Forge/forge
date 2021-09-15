@@ -77,23 +77,8 @@ public class CountersPutEffect extends SpellAbilityEffect {
             stringBuilder.append(Lang.getNumeral(amount)).append(" ");
         }
 
-        if (type.equals("ExistingCounter")) {
-            stringBuilder.append("of an existing counter");
-        } else if (type.equals("EachFromSource")) {
-            stringBuilder.append("each counter");
-        } else {
-            stringBuilder.append(CounterType.getType(type).getName().toLowerCase()).append(" counter");
-        }
-
-        if (amount != 1) {
-            stringBuilder.append("s");
-        }
-
-        if (spellAbility.isDividedAsYouChoose()) {
-            stringBuilder.append(" among ");
-        } else {
-            stringBuilder.append(" on ");
-        }
+        stringBuilder.append(CounterType.getType(type).getName().toLowerCase()).append(" counter");
+        stringBuilder.append(amount != 1 ? "s" : "").append(spellAbility.isDividedAsYouChoose() ? " among " : " on ");
 
         // if use targeting we show all targets and corresponding counters
         if(spellAbility.usesTargeting()) {
