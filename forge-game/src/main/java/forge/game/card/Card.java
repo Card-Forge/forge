@@ -2169,10 +2169,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 } else if (keyword.endsWith(".") && !keyword.startsWith("Haunt")) {
                     sbLong.append(keyword).append("\r\n");
                 } else {
-                    if ((i != 0) && (sb.length() != 0)) {
-                        sb.append(", ");
-                    }
-                    sb.append(i > 0 ? keyword.toLowerCase() : keyword);
+                    sb.append(i !=0 && sb.length() !=0 ? ", " : "");
+                    sb.append(i > 0 && sb.length() !=0 ? keyword.toLowerCase() : keyword);
                 }
                 if (sbLong.length() > 0) {
                     sbLong.append("\r\n");
