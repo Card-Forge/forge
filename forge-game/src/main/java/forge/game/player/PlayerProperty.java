@@ -215,6 +215,10 @@ public class PlayerProperty {
             if (!player.isEnchantedBy(source)) {
                 return false;
             }
+        } else if (property.equals("NotEnchantedBy")) {
+            if (player.isEnchantedBy(source)) {
+                return false;
+            }
         } else if (property.equals("EnchantedController")) {
             Card enchanting = source.getEnchantingCard();
             if (enchanting != null && !player.equals(enchanting.getController())) {

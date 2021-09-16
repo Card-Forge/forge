@@ -1,0 +1,7 @@
+Name:Dryad's Revival
+ManaCost:2 G
+Types:Sorcery
+A:SP$ ChangeZone | ValidTgts$ Card.YouOwn | TgtPrompt$ Select target card from your graveyard | Origin$ Graveyard | Destination$ Hand | StackDescription$ Return {c:Targeted} from your graveyard to your hand. | SpellDescription$ Return target card from your graveyard to your hand.
+K:Flashback:4 G
+DeckHas:Ability$Graveyard
+Oracle:Return target card from your graveyard to your hand.\nFlashback {4}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
