@@ -316,9 +316,9 @@ public class DeckRecognizer {
         if (StringUtils.startsWith(line, ASTERISK))  // markdown lists (tappedout md export)
             line = line.substring(2);
 
-        Token result = recogniseNonCardToken(line);
+        Token result = recogniseCardToken(line, referenceSection);
         if (result == null)
-            result = recogniseCardToken(line, referenceSection);
+            result = recogniseNonCardToken(line);
         return result != null ? result : StringUtils.startsWith(refLine, DOUBLE_SLASH) || StringUtils.startsWith(refLine, LINE_COMMENT_DELIMITER_OR_MD_HEADER) ?
                 new Token(TokenType.COMMENT, 0, refLine) : new Token(TokenType.UNKNOWN_TEXT, 0, refLine);
     }
