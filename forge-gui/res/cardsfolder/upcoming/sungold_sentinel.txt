@@ -1,0 +1,14 @@
+Name:Sungold Sentinel
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, exile up to one target card from a graveyard.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, exile up to one target card from a graveyard.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Card | TgtPrompt$ Select up to one target card in a graveyard
+A:AB$ ChooseColor | PrecostDesc$ Coven — | Cost$ 1 W | Defined$ You | AILogic$ MostProminentInHumanDeck | CheckSVar$ X | SVarCompare$ GE3 | SubAbility$ DBPump | StackDescription$ SpellDescription | SpellDescription$ Choose a color. CARDNAME gains hexproof from that color until end of turn and can't be blocked by creatures of that color this turn. Activate only if you control three or more creatures with different powers.
+SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Hexproof:Card.ChosenColor:chosen | DefinedKW$ ChosenColor | SubAbility$ DBEffect | StackDescription$ None
+SVar:DBEffect:DB$ Effect | RememberObjects$ Self | StaticAbilities$ CantBlockBy | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenColor$ True
+SVar:CantBlockBy:Mode$ CantBlockBy | ValidAttacker$ Creature.IsRemembered | ValidBlocker$ Creature.ChosenColor | Description$ EFFECTSOURCE can't be blocked by creatures of the chosen color this turn.
+SVar:X:Count$DifferentPower_Creature.YouCtrl
+Oracle:Whenever Sungold Sentinel enters the battlefield or attacks, exile up to one target card from a graveyard.\nCoven — {1}{W}: Choose a color. Sungold Sentinel gains hexproof from that color until end of turn and can't be blocked by creatures of that color this turn. Activate only if you control three or more creatures with different powers.
