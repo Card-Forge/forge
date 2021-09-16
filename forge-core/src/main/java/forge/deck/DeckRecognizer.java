@@ -180,7 +180,7 @@ public class DeckRecognizer {
             tokenKey.collectorNumber = keyInfo[2];
             tokenKey.typeName = keyInfo[3];
             if (keyInfo.length > 4)
-                tokenKey.deckSection = keyInfo[3];
+                tokenKey.deckSection = keyInfo[4];
             else
                 tokenKey.deckSection = null;
             return  tokenKey;
