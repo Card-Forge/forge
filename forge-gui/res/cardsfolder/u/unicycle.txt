@@ -2,9 +2,9 @@ Name:Unicycle
 ManaCost:2
 Types:Artifact Equipment Vehicle
 PT:3/1
+K:First strike
 K:Haste
-K:First Strike
-K:Crew:1
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ First strike & Haste | Description$ Equipped creature has first strike and haste.
 K:Equip:1
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Haste & First Strike | Description$ Equipped creature has first strike and haste..
+K:Crew:1
 Oracle:First strike, haste\nEquipped creature has first strike and haste.\nEquip {1}\nCrew 1

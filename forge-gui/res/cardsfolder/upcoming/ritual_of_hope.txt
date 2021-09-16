@@ -1,7 +1,7 @@
 Name:Ritual of Hope
 ManaCost:1 W
 Types:Instant
-A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ X | NumDef$ 1 | SubAbility$ DBPump | StackDescription$ SpellDescription | SpellDescription$ Creatures you control get +1/+1 until end of turn. Coven — If you control three or more creatures with different powers, creatures you control get +2/+1 until end of turn instead.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ X | NumDef$ 1 | StackDescription$ SpellDescription | SpellDescription$ Creatures you control get +1/+1 until end of turn. Coven — If you control three or more creatures with different powers, creatures you control get +2/+1 until end of turn instead.
 SVar:X:Count$Compare Y GE3.2.1
 SVar:Y:Count$DifferentPower_Creature.YouCtrl
 Oracle:Creatures you control get +1/+1 until end of turn.\nCoven — If you control three or more creatures with different powers, creatures you control get +2/+1 until end of turn instead.
