@@ -1,9 +1,6 @@
 Name:Geistwave
 ManaCost:1 U
 Types:Instant
-A:SP$ Pump | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | SubAbility$ DBCheck | StackDescription$ None | SpellDescription$ Return target nonland permanent to its owner's hand. If you controlled that permanent, draw a card.
-SVar:DBCheck:DB$ StoreSVar | ConditionDefined$ Targeted | ConditionPresent$ Card.YouCtrl | SVar$ DrawNum | Type$ Number | Expression$ 1 | SubAbility$ DBChangeZone
-SVar:DBChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ Targeted | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | NumCards$ DrawNum | StackDescription$ If you controlled that permanent, draw a card.
-SVar:DrawNum:Number$0
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ Targeted | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | RememberLKI$ True | SubAbility$ DBDraw | SpellDescription$ Return target nonland permanent to its owner's hand. If you controlled that permanent, draw a card.
+SVar:DBDraw:DB$ Draw | ConditionDefined$ RememberedLKI | ConditionPresent$ Card.YouCtrl | NumCards$ 1 | StackDescription$ If you controlled that permanent, draw a card.
 Oracle:Return target nonland permanent to its owner's hand. If you controlled that permanent, draw a card.
