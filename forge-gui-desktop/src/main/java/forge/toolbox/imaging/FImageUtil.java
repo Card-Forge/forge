@@ -126,7 +126,7 @@ public final class FImageUtil {
         }
 
         ColorModel cm = plainImage.getColorModel();
-        BufferedImage foilImage = new BufferedImage(cm, plainImage.copyData(null), cm.isAlphaPremultiplied(), null);
+        BufferedImage foilImage = new BufferedImage(cm, plainImage.copyData(plainImage.getRaster().createCompatibleWritableRaster()), cm.isAlphaPremultiplied(), null);
         final String fl = String.format("foil%02d", foilIndex);
         CardFaceSymbols.drawOther(foilImage.getGraphics(), fl, 0, 0, foilImage.getWidth(), foilImage.getHeight());
         return foilImage;
