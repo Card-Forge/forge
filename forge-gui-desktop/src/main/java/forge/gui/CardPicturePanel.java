@@ -148,7 +148,7 @@ public final class CardPicturePanel extends JPanel implements ImageFetcher.Callb
     }
 
     public void showAsDisabled(){
-        this.panel.setAlpha(0.5f);
+        this.panel.setAlpha(0.8f);
     }
 
     public void showAsEnabled(){
