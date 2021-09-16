@@ -2049,8 +2049,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     sbLong.append("Trample over planeswalkers").append(" (").append(inst.getReminderText()).append(")").append("\r\n");
                 } else if (keyword.startsWith("Hexproof:")) {
                     final String[] k = keyword.split(":");
-                    sbLong.append("Hexproof from ").append(k[2])
-                        .append(" (").append(inst.getReminderText()).append(")").append("\r\n");
+                    sbLong.append("Hexproof from ");
+                    if (k[2].equals("chosen")) {
+                        k[2] = k[1].substring(5).toLowerCase();
+                    }
+                    sbLong.append(k[2]).append(" (").append(inst.getReminderText().replace("chosen", k[2]))
+                            .append(")").append("\r\n");
                 } else if (inst.getKeyword().equals(Keyword.COMPANION)) {
                     sbLong.append("Companion — ");
                     sbLong.append(((Companion)inst).getDescription());
