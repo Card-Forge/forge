@@ -239,6 +239,11 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
             assertTrue(DeckRecognizer.isDeckSectionName(entry), "Fail on "+entry);
     }
 
+    @Test void testSBshortAsPlaceholderForSideboard(){
+        String dckSec = "SB:";
+        assertTrue(DeckRecognizer.isDeckSectionName(dckSec));
+    }
+
     @Test void testMatchCardTypes(){
         String[] cardTypes = new String[] {"Spell", "instants", "Sorceries", "Sorcery",
                 "Artifact", "creatures", "land"};
@@ -287,7 +292,8 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
     }
 
     @Test void testManaTokenMatch(){
-        String[] cmcTokens = new String[] {"Blue", "red", "White", "// Black", "       //Colorless----", "(green)"};
+        String[] cmcTokens = new String[] {"Blue", "red", "White", "// Black", "       //Colorless----", "(green)",
+                "// Multicolor", "// MultiColour"};
         for (String line : cmcTokens)
             assertTrue(DeckRecognizer.isManaToken(line), "Fail on " + line);
 

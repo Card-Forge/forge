@@ -204,7 +204,7 @@ public class DeckRecognizer {
     public static final String REX_NOCARD = String.format("^(?<pre>[^a-zA-Z]*)\\s*(?<title>(\\w+[:]\\s*))?(?<%s>[a-zA-Z]+)(?<post>[^a-zA-Z]*)?$", REGRP_TOKEN);
     public static final String REX_CMC = String.format("^(?<pre>[^a-zA-Z]*)\\s*(?<%s>(C(M)?C(\\s)?\\d{1,2}))(?<post>[^\\d]*)?$", REGRP_TOKEN);
     public static final String REX_RARITY = String.format("^(?<pre>[^a-zA-Z]*)\\s*(?<%s>((un)?common|(mythic)?\\s*(rare)?|land))(?<post>[^a-zA-Z]*)?$", REGRP_TOKEN);
-    public static final String REX_COLOUR = String.format("^(?<pre>[^a-zA-Z]*)\\s*(?<%s>(white|blue|black|red|green|colorless))(?<post>[^a-zA-Z]*)?$", REGRP_TOKEN);
+    public static final String REX_COLOUR = String.format("^(?<pre>[^a-zA-Z]*)\\s*(?<%s>(white|blue|black|red|green|colo(u)?rless|multicolo(u)?r))(?<post>[^a-zA-Z]*)?$", REGRP_TOKEN);
     public static final Pattern NONCARD_PATTERN = Pattern.compile(REX_NOCARD, Pattern.CASE_INSENSITIVE);
     public static final Pattern CMC_PATTERN = Pattern.compile(REX_CMC, Pattern.CASE_INSENSITIVE);
     public static final Pattern CARD_RARITY_PATTERN = Pattern.compile(REX_RARITY, Pattern.CASE_INSENSITIVE);
@@ -265,9 +265,11 @@ public class DeckRecognizer {
 
     // CoreTypes (to recognise Tokens of type CardType
     private static final CharSequence[] CARD_TYPES = allCardTypes();
-    private static final CharSequence[] DECK_SECTION_NAMES = {"avatar", "commander",
-            "schemes", "conspiracy", "planes", "deck",
-            "main", "card", "mainboard", "side", "sideboard"};
+    private static final CharSequence[] DECK_SECTION_NAMES = {
+            "side", "sideboard", "sb",
+            "main", "card", "mainboard",
+            "avatar", "commander", "schemes",
+            "conspiracy", "planes", "deck", };
 
     private static CharSequence[] allCardTypes(){
         List<String> cardTypesList = new ArrayList<>();
@@ -314,9 +316,9 @@ public class DeckRecognizer {
         if (StringUtils.startsWith(line, ASTERISK))  // markdown lists (tappedout md export)
             line = line.substring(2);
 
-        Token result = recogniseCardToken(line, referenceSection);
+        Token result = recogniseNonCardToken(line);
         if (result == null)
-            result = recogniseNonCardToken(line);
+            result = recogniseCardToken(line, referenceSection);
         return result != null ? result : StringUtils.startsWith(refLine, DOUBLE_SLASH) || StringUtils.startsWith(refLine, LINE_COMMENT_DELIMITER_OR_MD_HEADER) ?
                 new Token(TokenType.COMMENT, 0, refLine) : new Token(TokenType.UNKNOWN_TEXT, 0, refLine);
     }
@@ -352,9 +354,7 @@ public class DeckRecognizer {
             String collNo = getRexGroup(matcher, REGRP_COLLNR);
             String foilGr = getRexGroup(matcher, REGRP_FOIL_GFISH);
             String deckSec = getRexGroup(matcher, REGRP_DECK_SEC_XMAGE_STYLE);
-            boolean isFoil = false;
-            if (foilGr != null)
-                isFoil = true;
+            boolean isFoil = foilGr != null;
             int cardCount = ccount != null ? Integer.parseInt(ccount) : 1;
             // if any, it will be tried to convert specific collector number to art index (useful for lands).
             String collectorNumber = collNo != null ? collNo : IPaperCard.NO_COLLECTOR_NUMBER;
