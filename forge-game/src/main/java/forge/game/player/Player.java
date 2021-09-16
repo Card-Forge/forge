@@ -176,7 +176,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private boolean revolt = false;
 
-    private CardCollection sacrificedThisTurn = new CardCollection();
+    private List<Card> sacrificedThisTurn = new ArrayList<>();
 
     /** A list of tokens not in play, but on their way.
      * This list is kept in order to not break ETB-replacement
@@ -2283,7 +2283,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         investigatedThisTurn = 0;
     }
 
-    public final CardCollectionView getSacrificedThisTurn() {
+    public final List<Card> getSacrificedThisTurn() {
         return sacrificedThisTurn;
     }
 
