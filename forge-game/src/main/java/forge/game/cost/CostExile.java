@@ -83,14 +83,15 @@ public class CostExile extends CostPartWithList {
     public final String toString() {
         final Integer i = this.convertAmount();
         String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
+        String origin = this.from.name().toLowerCase();
 
         if (this.payCostFromSource()) {
             if (!this.from.equals(ZoneType.Battlefield)) {
-                return String.format("Exile %s from your %s", this.getType(), this.from.name());
+                return String.format("Exile %s from your %s", this.getType(), origin);
             }
             return String.format("Exile %s", this.getType());
         } else if (this.getType().equals("All")) {
-            return String.format("Exile all cards from your %s", this.from.name());
+            return String.format("Exile all cards from your %s", origin);
         }
 
         if (this.from.equals(ZoneType.Battlefield)) {
@@ -102,16 +103,16 @@ public class CostExile extends CostPartWithList {
 
         if (!desc.equals("Card") && !desc.endsWith("card")) {
             if (this.sameZone) {
-                return String.format("Exile card %s from the same %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), this.from.name());
+                return String.format("Exile card %s from the same %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), origin);
             }
-            return String.format("Exile card %s from your %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), this.from.name());
+            return String.format("Exile card %s from your %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), origin);
         }
 
         if (this.sameZone) {
-            return String.format("Exile %s from the same %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), this.from.name());
+            return String.format("Exile %s from the same %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), origin);
         }
 
-        return String.format("Exile %s from your %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), this.from.name());
+        return String.format("Exile %s from your %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), origin);
     }
 
     @Override
@@ -171,7 +172,10 @@ public class CostExile extends CostPartWithList {
     @Override
     protected Card doPayment(SpellAbility ability, Card targetCard) {
         final Game game = targetCard.getGame();
-        return game.getAction().exile(targetCard, null);
+        Card newCard = game.getAction().exile(targetCard, null);
+        newCard.setExiledWith(ability.getHostCard());
+        newCard.setExiledBy(ability.getActivatingPlayer());
+        return newCard;
     }
 
     public static final String HashLKIListKey = "Exiled";
