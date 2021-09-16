@@ -1,0 +1,10 @@
+Name:Dawnhart Mentor
+ManaCost:2 G
+Types:Creature Human Warlock
+PT:0/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 white Human creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_human | TokenOwner$ You
+A:AB$ Pump | PrecostDesc$ Coven — | Cost$ 5 G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ 3 | NumDef$ 3 | KW$ Trample | CheckSVar$ X | SVarCompare$ GE3 | SpellDescription$ Target creature you control gets +3/+3 and gains trample until end of turn. Activate only if you control three or more creatures with different powers.
+SVar:X:Count$DifferentPower_Creature.YouCtrl
+DeckHas:Ability$Token
+Oracle:When Dawnhart Mentor enters the battlefield, create a 1/1 white Human creature token.\nCoven — {5}{G}: Target creature you control gets +3/+3 and gains trample until end of turn. Activate only if you control three or more creatures with different powers.
