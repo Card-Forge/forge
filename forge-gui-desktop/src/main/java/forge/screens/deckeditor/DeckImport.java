@@ -21,7 +21,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
-import java.util.*;
 import java.util.List;
 
 import javax.swing.*;
@@ -34,8 +33,10 @@ import javax.swing.event.HyperlinkListener;
 import forge.ImageCache;
 import forge.Singletons;
 import forge.StaticData;
+import forge.card.CardEdition;
 import forge.deck.*;
 import forge.deck.DeckRecognizer.TokenType;
+import forge.deck.DeckRecognizer.Token.TokenKey;
 import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.gui.CardPicturePanel;
@@ -47,7 +48,6 @@ import forge.screens.deckeditor.controllers.CStatisticsImporter;
 import forge.screens.deckeditor.views.VStatisticsImporter;
 import forge.toolbox.*;
 import forge.util.Localizer;
-import forge.util.TextUtil;
 import forge.view.FDialog;
 import net.miginfocom.swing.MigLayout;
 
@@ -62,7 +62,11 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
     private static final long serialVersionUID = -5837776824284093004L;
 
     private final FTextArea txtInput = new FTextArea();
-    private static final String STYLESHEET = "<style>"
+    public static final String KNOWNCARD_COLOR = "#89DC9F;";
+    public static final String UNKNOWN_CARD_COLOR = "#E1E35F;";
+    public static final String ILLEGAL_CARD_COLOR = "#FF977A;";
+    public static final String INVALID_CARD_COLOR = "#A9E5DD;";
+    private static final String STYLESHEET = String.format("<style>"
             + "body, h1, h2, h3, h4, h5, h6, table, tr, td, a {font-weight: normal; line-height: 1.6; "
             + " font-family: Arial; font-size: 10px;}"
             + " h3 {font-size: 13px; margin: 2px 0; padding: 0px 5px;}"
@@ -72,16 +76,16 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
             + " code {font-size: 10px;}"
             + " p {margin: 2px; text-align: justify; padding: 2px 5px;}"
             + " div {margin: 0; text-align: justify; padding: 1px 0 1px 8px;}"
-            + " a:hover { color: #89DC9F; text-decoration: none !important;}"
-            + " a:link { color: #89DC9F; text-decoration: none !important;}"
-            + " a { color: #89DC9F; text-decoration: none !important;}"
-            + " a:active { color: #89DC9F; text-decoration: none !important;}"
+            + " a:hover { text-decoration: none !important;}"
+            + " a:link { text-decoration: none !important;}"
+            + " a { text-decoration: none !important;}"
+            + " a:active { text-decoration: none !important;}"
             + " table {margin: 5px 0;}"
             // Card Matching Colours #4F6070
-            + " .knowncard   {color: #89DC9F; !important}"
-            + " .unknowncard {color: #E1E35F;}"
-            + " .illegalcard {color: #FF977A;}"
-            + " .invalidcard {color: #A9E5DD;}"
+            + " .knowncard   {color: %s !important; font-weight: bold;}"
+            + " .unknowncard {color: %s !important; font-weight: bold;}"
+            + " .illegalcard {color: %s !important; font-weight: bold;}"
+            + " .invalidcard {color: %s !important; font-weight: bold;}"
             + " .comment     {font-style: italic}"
             // Deck Name
             + " .deckname    {background-color: #332200; color: #ffffff; }"
@@ -90,19 +94,19 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
             + " .section     {font-weight: bold; background-color: #DDDDDD; color: #000000;}"
             + " .cardtype    {font-weight: bold; background-color: #FFCC66; color: #000000;}"
             + " .cmc         {font-weight: bold; background-color: #C6C7BA; color: #000000;}"
-            + " .rarity      {font-weight: bold; background-color: #df8030; color: #000000;}"
+            + " .rarity      {font-weight: bold; background-color: #df8030; color: #ffffff;}"
             + " .mana        {font-weight: bold; background-color: #38221A; color: #ffffff;}"
             // Colours
-            + " .colorless   {font-weight: bold; background-color: #C7BCBA; color: #000000;}"
+            + " .colorless   {font-weight: bold; background-color: #544132; color: #ffffff;}"
             + " .blue        {font-weight: bold; background-color: #0D78BF; color: #ffffff;}"
             + " .red         {font-weight: bold; background-color: #ED0713; color: #ffffff;}"
             + " .white       {font-weight: bold; background-color: #FCFCB6; color: #000000;}"
             + " .black       {font-weight: bold; background-color: #787878; color: #000000;}"
             + " .green       {font-weight: bold; background-color: #26AB57; color: #000000;}"
+            + " .multicolor  {font-weight: bold; background-color: #c4c26c; color: #000000;}"
             // Card Edition
-            + " .edition     {font-weight: bold; background-color: #78A197; color: #000000;}"
             + " .editioncode {font-weight: bold; color: #ffffff;}"
-            + "</style>";
+            + "</style>",KNOWNCARD_COLOR, UNKNOWN_CARD_COLOR, ILLEGAL_CARD_COLOR, INVALID_CARD_COLOR) ;
     private static final String COLOUR_CODED_TAGS = String.format(
             "<ul>" +
             "<li> <span class=\"knowncard\">%s</span></li>" +
@@ -172,20 +176,18 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
     private final FScrollPane scrollInput = new FScrollPane(this.txtInput, false);
     private final FScrollPane scrollOutput = new FScrollPane(this.htmlOutput, false);
     private final CardPicturePanel picturePreview = new CardPicturePanel();
-    private final FLabel cardPreviewTitleLabel = new FLabel.Builder()
-            .text(Localizer.getInstance().getMessage("lblCardPreview")).fontStyle(Font.BOLD).fontSize(11)
-            .tooltip(Localizer.getInstance().getMessage("lblCardPreview")).fontStyle(Font.BOLD).build();
-    private final FLabel cardPreviewLabel = new FLabel.Builder().text("").fontStyle(Font.BOLD).fontSize(11)
-            .tooltip("").fontStyle(Font.BOLD).build();
-
+    private final FLabel cardPreviewLabel = new FLabel.Builder()
+            .text(String.format("<html><span style=\"font-size: 9px;\">%s</span></html>",
+                    Localizer.getInstance().getMessage("lblCardPreview")))
+            .fontStyle(Font.BOLD).tooltip("").build();
     private final FButton cmdCancel = new FButton(Localizer.getInstance().getMessage("lblCancel"));
 
-    private FButton cmdAccept;  // Not initialised as label will be adaptive.
-    private final FCheckBox dateTimeCheck = new FCheckBox(Localizer.getInstance().getMessage("lblUseOnlySetsReleasedBefore"), false);
+    private final FButton cmdAccept;  // Not initialised as label will be adaptive.
     private final FCheckBox createNewDeckCheckbox = new FCheckBox(Localizer.getInstance().getMessage("lblNewDeckCheckbox"), false);
     private final DeckFormat deckFormat;
 
     //don't need wrappers since skin can't change while this dialog is open
+    private final FCheckBox dateTimeCheck = new FCheckBox(Localizer.getInstance().getMessage("lblUseOnlySetsReleasedBefore"), false);
     private final FComboBox<String> monthDropdown = new FComboBox<>();
     private final FComboBox<Integer> yearDropdown = new FComboBox<>();
 
@@ -232,7 +234,7 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         this.picturePreview.setOpaque(false);
         this.picturePreview.setBorder(new EmptyBorder(2, 5, 2, 5));
         this.picturePreview.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT).getColor());
-        this.picturePreview.setItem(ImageCache.getDefaultImage());
+        resetCardPreviewPanel();
 
         this.scrollInput.setBorder(new FSkin.TitledSkinBorder(BorderFactory.createEtchedBorder(),
                 Localizer.getInstance().getMessage("lblCardListTitle"), foreColor));
@@ -242,19 +244,18 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
                 Localizer.getInstance().getMessage("lblDecklistTitle"), foreColor));
         this.scrollOutput.setViewportBorder(BorderFactory.createLoweredBevelBorder());
 
-        FPanel statsPanel = new FPanel(new MigLayout("fill"));
-        statsPanel.add(VStatisticsImporter.instance().getMainPanel(), "cell 0 0, w 100%, growy, pushy");
+        FPanel statsPanel = new FPanel(new BorderLayout());
+        statsPanel.add(VStatisticsImporter.instance().getMainPanel(), BorderLayout.CENTER);
         statsPanel.setOpaque(false);
 
         FPanel cardPreview = new FPanel(new MigLayout("fill"));
-        cardPreview.add(this.cardPreviewTitleLabel, "cell 0 0, align left");
-        cardPreview.add(this.cardPreviewLabel, "cell 1 0, align left");
-        cardPreview.add(this.picturePreview, "cell 0 1, w 50%, h 70%, growy, pushy, ax c, span 2");
+        cardPreview.add(this.cardPreviewLabel, "cell 0 0, align left, w 100%, span 2");
+        cardPreview.add(this.picturePreview, "cell 0 1, w 80%, h 70%, growy, pushy, ax c, span 2");
 
         this.add(this.scrollInput, "cell 0 0, w 40%, growy, pushy, spany 2");
         this.add(this.scrollOutput, "cell 1 0, w 60%, growy, pushy, spany 2");
-        this.add(statsPanel, "cell 2 0, w 50%, ax c, growy, pushy");
-        this.add(cardPreview, "cell 2 1, w 50%, h 65%, growy, pushy, ax c, spanx 2");
+        this.add(statsPanel, "cell 2 0, w 480:510:550, growy, pushy, ax c, spanx 2");
+        this.add(cardPreview, "cell 2 1, w 480:510:550, h 65%, growy, pushy, ax c, spanx 2");
 
         this.add(this.dateTimeCheck, "cell 0 2, w 50%, ax c");
         this.add(monthDropdown, "cell 0 3, w 10%, ax left, split 2, pad 0 2 0 0");
@@ -262,8 +263,8 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
 
         if (currentDeckIsNotEmpty)
             this.add(this.createNewDeckCheckbox,"cell 2 2, ax left");
-        this.add(this.cmdAccept, "cell 2 3, w 175, align l, h 26");
-        this.add(this.cmdCancel, "cell 2 3, w 175, align l, h 26");
+        this.add(this.cmdAccept, "cell 2 3, w 175, align r, h 26");
+        this.add(this.cmdCancel, "cell 2 3, w 175, align r, h 26");
 
         this.cmdCancel.addActionListener(new ActionListener() {
             @Override
@@ -331,22 +332,68 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         this.htmlOutput.addHyperlinkListener(new HyperlinkListener() {
             @Override
             public void hyperlinkUpdate(HyperlinkEvent e) {
-                if(e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+                // TODO: FOIL and Card Status
+                if(e.getEventType() == HyperlinkEvent.EventType.ENTERED ||
+                   e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
                     String cardRef = e.getDescription();
-                    String[] parts = TextUtil.split(cardRef, '-');
-                    String cardName = parts[0];
-                    String setCode = parts[1];
-                    String collectorNumber = parts[2];
-                    PaperCard card = StaticData.instance().getCommonCards().getCard(cardName, setCode, collectorNumber);
+                    TokenKey tokenKey = DeckRecognizer.Token.parseTokenKey(cardRef);
+                    StaticData data = StaticData.instance();
+                    PaperCard card = data.fetchCard(tokenKey.cardName, tokenKey.setCode, tokenKey.collectorNumber);
                     if (card != null){
-                        String label = String.format("%s (%s) %s", cardName, setCode, collectorNumber);
+                        // no need to check for card that has Image because CardPicturePanel
+                        // has automatic integration with cardFetch
+                        String header;
+                        if (tokenKey.deckSection != null)
+                                header = String.format("%s: %s",
+                                        Localizer.getInstance().getMessage("lblDeckSection"),
+                                        tokenKey.deckSection);
+                        else {
+                            if (tokenKey.typeName.equals("illegal_card_request"))
+                                header = String.format("%s %s",
+                                        Localizer.getInstance().getMessage("lblIllegalCardMsg"),
+                                        deckFormat.name());
+                            else
+                                header = String.format("%s",
+                                        Localizer.getInstance().getMessage("lblInvalidCardMsg"));
+                        }
+                        CardEdition edition = data.getCardEdition(card.getEdition());
+                        String editionName = edition != null ? String.format("%s ", edition.getName()) : "";
+                        String cardLbl = String.format("%s, %s(%s), No. %s", tokenKey.cardName,
+                                editionName, tokenKey.setCode, tokenKey.collectorNumber);
                         picturePreview.setItem(card);
-                        picturePreview.setToolTipText(label);
-                        cardPreviewLabel.setText(label);
+                        if (!tokenKey.typeName.equals("legal_card_request"))
+                            picturePreview.showAsDisabled();
+                        else
+                            picturePreview.showAsEnabled();
+                        cardPreviewLabel.setText(String.format(
+                                "<html><span style=\"font-size: 9px; color: %s;\">%s</span><br />" +
+                                        "<span style=\"font-size: 9px;\">%s</span></html>",
+                                getTokenTypeColour(tokenKey.typeName), header, cardLbl));
+                        // set tooltip
+                        picturePreview.setToolTipText(cardLbl);
+
                     }
                 }
             }
         });
+    }
+
+    private String getTokenTypeColour(String typeName){
+        switch (typeName.trim().toUpperCase()){
+            case "LEGAL_CARD_REQUEST":
+                return KNOWNCARD_COLOR;
+            case "ILLEGAL_CARD_REQUEST":
+                return ILLEGAL_CARD_COLOR;
+            case "INVALID_CARD_REQUEST":
+                return INVALID_CARD_COLOR;
+            default:
+                return "";
+        }
+    }
+
+    private void resetCardPreviewPanel() {
+        this.cardPreviewLabel.setText(Localizer.getInstance().getMessage("lblCardPreview"));
+        this.picturePreview.setItem(ImageCache.getDefaultImage());
     }
 
     /**
@@ -388,6 +435,7 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
     private void displayTokens(final List<DeckRecognizer.Token> tokens) {
         if (tokens.isEmpty() || hasOnlyComment(tokens)) {
             htmlOutput.setText(HTML_WELCOME_TEXT);
+            resetCardPreviewPanel();
         } else {
             final StringBuilder sbOut = new StringBuilder("<html>");
             sbOut.append(String.format("<head>%s</head>", DeckImport.STYLESHEET));
@@ -408,18 +456,9 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
     }
 
     private void updateSummaries(final List<DeckRecognizer.Token> tokens) {
-        int legalCardsCount = 0;
-        List<Map.Entry<PaperCard, Integer>> tokenCards = new ArrayList<>();
-        for (final DeckRecognizer.Token t : tokens) {
-            if (t.getType() == TokenType.LEGAL_CARD_REQUEST) {
-                int tokenNumber = t.getNumber();
-                legalCardsCount += tokenNumber;
-                PaperCard tokenCard = t.getCard();
-                tokenCards.add(new AbstractMap.SimpleEntry<>(tokenCard, tokenNumber));
-            }
-        }
-        CStatisticsImporter.instance().updateStats(tokenCards);
-        cmdAccept.setEnabled(legalCardsCount > 0);
+        CStatisticsImporter.instance().updateStats(tokens);
+        cmdAccept.setEnabled(CStatisticsImporter.instance().getTotalCardsInDecklist() > 0);
+        this.resetCardPreviewPanel();
     }
 
     private String toHTML(final DeckRecognizer.Token token) {
@@ -429,24 +468,25 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         switch (token.getType()) {
             case LEGAL_CARD_REQUEST:
                 PaperCard tokenCard = token.getCard();
-                return String.format("<div class=\"knowncard\"><a href=\"%s\">%s x %s " +
+                return String.format("<div class=\"knowncard\"><a class=\"knowncard\" href=\"%s\">%s x %s " +
                                 "<span class=\"editioncode\">(%s)</span> %s</a>%s</div>",
-                        String.format("%s-%s-%s", tokenCard.getName(), tokenCard.getEdition(),
-                                tokenCard.getCollectorNumber()),
-                        token.getNumber(), tokenCard.getName(), tokenCard.getEdition(),
-                        tokenCard.getCollectorNumber(), tokenCard.isFoil() ? "<i>(FOIL)</i>" : "");
+                                token.getKey(), token.getNumber(), tokenCard.getName(),
+                                tokenCard.getEdition(),
+                                tokenCard.getCollectorNumber(), tokenCard.isFoil() ? "<i>(FOIL)</i>" : "");
             case UNKNOWN_CARD_REQUEST:
                 return String.format("<div class=\"unknowncard\">%s x %s (%s)</div>",
                         token.getNumber(), token.getText(),
                         Localizer.getInstance().getMessage("lblUnknownCardMsg"));
             case ILLEGAL_CARD_REQUEST:
-                return String.format("<div class=\"illegalcard\">%s x %s (%s %s)</div>",
-                        token.getNumber(), token.getText(),
+                return String.format("<div class=\"illegalcard\"><a class=\"illegalcard\" href=\"%s\">" +
+                                "%s x %s (%s %s)</a></div>",
+                        token.getKey(), token.getNumber(), token.getText(),
                         Localizer.getInstance().getMessage("lblIllegalCardMsg"),
                         this.deckFormat.name());
             case INVALID_CARD_REQUEST:
-                return String.format("<div class=\"invalidcard\">%s x %s (%s)</div>",
-                        token.getNumber(), token.getText(),
+                return String.format("<div class=\"invalidcard\">" +
+                                "<a class=\"invalidcard\" href=\"%s\">%s x %s (%s)</a></div>",
+                        token.getKey(), token.getNumber(), token.getText(),
                         Localizer.getInstance().getMessage("lblInvalidCardMsg"));
             case DECK_SECTION_NAME:
                 return String.format("<div class=\"section\">%s</div>", token.getText());
