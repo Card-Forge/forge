@@ -1,0 +1,6 @@
+Name:Siege Zombie
+ManaCost:1 B
+Types:Creature Zombie
+PT:2/2
+A:AB$ LoseLife | Cost$ tapXType<3/Creature> | Defined$ Player.Opponent | LifeAmount$ 1 | SpellDescription$ Each opponent loses 1 life.
+Oracle:Tap three untapped creatures you control: Each opponent loses 1 life.
