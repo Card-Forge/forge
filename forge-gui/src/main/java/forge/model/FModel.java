@@ -64,9 +64,7 @@ import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
 
 import java.io.File;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * The default Model implementation for Forge.
@@ -463,6 +461,19 @@ public final class FModel {
 
     public static IStorage<CardBlock> getBlocks() {
         return blocks;
+    }
+
+    public static List<GameFormat> getBlockFormats(){
+        List<GameFormat> blockFormats = new ArrayList<>();
+        for (GameFormat format : FModel.getFormats().getHistoricList()){
+            if (format.getFormatSubType() != GameFormat.FormatSubType.BLOCK)
+                continue;
+            if (!format.getName().endsWith("Block"))
+                continue;
+            blockFormats.add(format);
+        }
+        Collections.sort(blockFormats);  // GameFormat will be sorted by Index!
+        return blockFormats;
     }
 
     public static QuestPreferences getQuestPreferences() {
