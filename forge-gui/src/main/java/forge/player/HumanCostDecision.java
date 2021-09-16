@@ -378,14 +378,16 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     private PaymentDecision exileFromMiscZone(final CostExile cost, final SpellAbility sa, final int nNeeded, final CardCollection typeList) {
         if (typeList.size() < nNeeded) { return null; }
 
-        GameEntityViewMap<Card, CardView> gameCacheCard = GameEntityView.getMap(typeList);
-
+        final List<ZoneType> origin = Lists.newArrayList();
+        origin.add(cost.from);
         final CardCollection exiled = new CardCollection();
-        for (int i = 0; i < nNeeded; i++) {
-            final CardView cv = controller.getGui().oneOrNone(Localizer.getInstance().getMessage("lblExileProgressFromZone", String.valueOf(i + 1), String.valueOf(nNeeded), cost.getFrom().getTranslatedName()), gameCacheCard.getTrackableKeys());
-            if (cv == null || !gameCacheCard.containsKey(cv)) { return null; }
 
-            exiled.add(gameCacheCard.remove(cv));
+        final List<Card> chosen = controller.chooseCardsForZoneChange(ZoneType.Exile, origin, sa, typeList, 0,
+                nNeeded, null, cost.toString(), null);
+
+        exiled.addAll(chosen);
+        if (exiled.isEmpty()) {
+            return null;
         }
         return PaymentDecision.card(exiled);
     }
