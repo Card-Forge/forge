@@ -317,12 +317,14 @@ public class StaticData {
      * and any possible constraint imposed on Game format (allowed sets) or edition release date.
      * @param cardName Name of the card to match
      * @param isFoil Whether the requested card should be foil.
+     * @param artPreference The Card Art Preference to use
      * @param allowedSetCodes List of allowed set codes (if any)
      * @param releasedBefore Any constraint on release date for matched editions. If passed,
      *                       only sets released before the given date (if any) will be considered.
      * @return PaperCard matched in any available dataset, <code>null</code> if no card is found.
      */
     public PaperCard getCardFromSupportedEditions(final String cardName, boolean isFoil,
+                                                  CardDb.CardArtPreference artPreference,
                                                   List<String> allowedSetCodes, Date releasedBefore) {
         CardDb.CardRequest cr = CardDb.CardRequest.fromString(cardName);  // accounts for any foil request ending with+
         CardDb targetDb = this.matchTargetCardDb(cr.cardName);
@@ -334,11 +336,11 @@ public class StaticData {
         PaperCard result;
         String cardRequest = CardDb.CardRequest.compose(cardName, isFoil);
         if (releasedBefore != null) {
-            result = targetDb.getCardFromEditionsReleasedBefore(cardRequest, releasedBefore, filter);
+            result = targetDb.getCardFromEditionsReleasedBefore(cardRequest, artPreference, releasedBefore, filter);
             if (result == null)
-                result = targetDb.getCardFromEditions(cardRequest, filter);
+                result = targetDb.getCardFromEditions(cardRequest, artPreference, filter);
         } else
-            result = targetDb.getCardFromEditions(cardRequest, filter);
+            result = targetDb.getCardFromEditions(cardRequest, artPreference, filter);
         return result;
     }
 
@@ -708,6 +710,13 @@ public class StaticData {
         return this.commonCards.getCardArtPreference();
     }
 
+    public CardDb.CardArtPreference getCardArtPreference(boolean latestArt, boolean coreExpansionOnly){
+        if (latestArt){
+            return coreExpansionOnly ? CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY : CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS;
+        }
+        return coreExpansionOnly ? CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY : CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS;
+    }
+
 
     public boolean isCoreExpansionOnlyFilterSet(){ return this.commonCards.getCardArtPreference().filterSets; }
 
@@ -720,15 +729,19 @@ public class StaticData {
     public String[] getCardArtAvailablePreferences(){
         CardDb.CardArtPreference[] preferences = CardDb.CardArtPreference.values();
         String[] preferences_avails = new String[preferences.length];
-        for (int i = 0; i < preferences.length; i++) {
-            StringBuilder label = new StringBuilder();
-            String[] fullNames = preferences[i].toString().split("_");
-            for (String name : fullNames)
-                label.append(TextUtil.capitalize(name.toLowerCase())).append(" ");
-            preferences_avails[i] = label.toString().trim();
-        }
+        for (int i = 0; i < preferences.length; i++)
+            preferences_avails[i] = prettifyCardArtPreferenceName(preferences[i]);
         return preferences_avails;
     }
+
+    private String prettifyCardArtPreferenceName(CardDb.CardArtPreference preference) {
+        StringBuilder label = new StringBuilder();
+        String[] fullNames = preference.toString().split("_");
+        for (String name : fullNames)
+            label.append(TextUtil.capitalize(name.toLowerCase())).append(" ");
+        return label.toString().trim();
+    }
+
     public void setCardArtPreference(String artPreference){
         this.commonCards.setCardArtPreference(artPreference);
         this.variantCards.setCardArtPreference(artPreference);
