@@ -1,0 +1,14 @@
+Name:Wake to Slaughter
+ManaCost:3 B R
+Types:Sorcery
+A:SP$ Pump | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature.YouOwn | TgtPrompt$ Choose up to two target creature cards in your graveyard | TgtZone$ Graveyard | RememberObjects$ Targeted | SubAbility$ DBChoosePlayer | StackDescription$ SpellDescription | SpellDescription$ Choose up to two target creature cards in your graveyard. An opponent chooses one of them. Return that card to your hand. Return the other to the battlefield under your control. It gains haste. Exile it at the beginning of the next end step.
+SVar:DBChoosePlayer:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent | SubAbility$ DBOppChoose | StackDescription$ None
+SVar:DBOppChoose:DB$ ChooseCard | Choices$ Card.IsRemembered | ChoiceZone$ Graveyard | Defined$ ChosenPlayer | ChoiceTitle$ Select a card for the hand | Mandatory$ True | ForgetChosen$ True | SubAbility$ DBChangeZone1 | StackDescription$ None
+SVar:DBChangeZone1:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Graveyard | Destination$ Hand | SubAbility$ DBChangeZone2 | StackDescription$ None
+SVar:DBChangeZone2:DB$ ChangeZone | Defined$ Remembered | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | StackDescription$ None | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Keywords$ Haste | Defined$ Remembered | Duration$ Permanent | AtEOT$ Sacrifice | StackDescription$ None | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True | ClearChosenPlayer$ True
+K:Flashback:4 B R
+DeckHas:Ability$Graveyard & Ability$Sacrifice
+AI:RemoveDeck:All
+Oracle:Choose up to two target creature cards in your graveyard. An opponent chooses one of them. Return that card to your hand. Return the other to the battlefield under your control. It gains haste. Exile it at the beginning of the next end step.\nFlashback {4}{B}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

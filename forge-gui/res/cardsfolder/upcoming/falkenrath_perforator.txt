@@ -1,0 +1,8 @@
+Name:Falkenrath Perforator
+ManaCost:1 R
+Types:Creature Vampire
+PT:2/1
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ Whenever CARDNAME attacks, it deals 1 damage to defending player.
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ TriggeredDefendingPlayer | NumDmg$ 1
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Falkenrath Perforator attacks, it deals 1 damage to defending player.
