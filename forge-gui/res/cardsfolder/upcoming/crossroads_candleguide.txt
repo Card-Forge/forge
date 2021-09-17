@@ -1,0 +1,8 @@
+Name:Crossroads Candleguide
+ManaCost:4
+Types:Artifact Creature Scarecrow
+PT:3/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, exile up to one target card from a graveyard.
+SVar:TrigChangeZone:DB$ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target card in a graveyard to exile
+A:AB$ Mana | Cost$ 2 | Produced$ Any | SpellDescription$ Add one mana of any color.
+Oracle:When Crossroads Candleguide enters the battlefield, exile up to one target card from a graveyard.\n{2}: Add one mana of any color.
