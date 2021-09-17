@@ -19,6 +19,7 @@ package forge.deck;
 
 import com.google.common.collect.Lists;
 import forge.StaticData;
+import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardType;
 import forge.item.IPaperCard;
@@ -291,8 +292,9 @@ public class DeckRecognizer {
 
     private Date releaseDateConstraint = null;
     // This two parameters are controlled only via setter methods
-    private List<String> allowedSetCodes = null;  // as imposed by current format
-    private DeckFormat deckFormat = null;  //
+    private List<String> allowedSetCodes = null;
+    private DeckFormat deckFormat = null;
+    private CardDb.CardArtPreference artPreference = StaticData.instance().getCardArtPreference();  // init as default
 
     public Token recognizeLine(final String rawLine, DeckSection referenceSection) {
         if (rawLine == null)
@@ -397,11 +399,12 @@ public class DeckRecognizer {
             // unless it is illegal for current format or invalid with selected date.
             PaperCard pc = null;
             if (hasGameFormatConstraints()) {
-                pc = data.getCardFromSupportedEditions(cardName, isFoil, this.allowedSetCodes,
+                pc = data.getCardFromSupportedEditions(cardName, isFoil, this.artPreference,
+                                                        this.allowedSetCodes,
                                                         this.releaseDateConstraint);
             }
             if (pc == null)
-                pc = data.getCardFromSupportedEditions(cardName, isFoil, null,
+                pc = data.getCardFromSupportedEditions(cardName, isFoil, this.artPreference, null,
                                                         this.releaseDateConstraint);
 
             if (pc != null) {
@@ -616,4 +619,6 @@ public class DeckRecognizer {
     public void setDeckFormatConstraint(DeckFormat deckFormat0){
         this.deckFormat = deckFormat0;
     }
+
+    public void setArtPreference(CardDb.CardArtPreference artPref){ this.artPreference = artPref; }
 }
