@@ -9,6 +9,7 @@ Chance for Glory|The Big-Time|Sorry, you used it up.
 Coalition Victory|The Teamwork|Let's all be friends!
 Darksteel Reactor|The Machine|What are you going to do with all this power? Whatever you want!
 Door to Nothingness|The Door|And behind door #2 is...
+Enduring Angel|Unknown Error|What? How did you even...?
 Epic Struggle|The Army|Let's just trample them into the ground already!
 Etrata, the Silencer|The Silent Hit|Hey, where did everybody go?
 Felidar Sovereign|The Cat's Life|Just wait for his other eight lives!
@@ -33,6 +34,7 @@ Test of Endurance|The Test|So... did I pass?
 Thassa's Oracle|The Prophecy of Victory|I see... nothing. We must've won.
 The Cheese Stands Alone|The Cheese|It's cheesy, but hey, it works!
 The Deck of Many Things's Effect|Down on the Deck|Lucky draw!
+Triskaidekaphile|The Luckiest Number|13, 169, 2197, 28561...
 Triskaidekaphobia|The Fear of 13|It's just a silly ancient superstition... right?
 Vorpal Sword|Snicker-Snack!|He left it dead, and with its head / He went galumphing back.
 Emblem - Vraska, Golgari Queen|The Flurry of Assassins|How good is your dodging?
