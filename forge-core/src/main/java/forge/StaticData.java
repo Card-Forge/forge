@@ -327,6 +327,7 @@ public class StaticData {
                                                   CardDb.CardArtPreference artPreference,
                                                   List<String> allowedSetCodes, Date releasedBefore) {
         CardDb.CardRequest cr = CardDb.CardRequest.fromString(cardName);  // accounts for any foil request ending with+
+        isFoil = cr.isFoil || isFoil;
         CardDb targetDb = this.matchTargetCardDb(cr.cardName);
         if (targetDb == null)
             return null;

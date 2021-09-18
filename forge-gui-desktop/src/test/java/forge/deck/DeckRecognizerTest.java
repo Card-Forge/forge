@@ -1082,7 +1082,18 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertFalse(tokenCard.isFoil());
         assertEquals(tokenCard.getEdition(), "VMA");
 
-        lineRequest = "Power Sink";
+        lineRequest = "4x Power Sink+";
+        cardToken = recognizer.recogniseCardToken(lineRequest, null);
+        assertNotNull(cardToken);
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD_REQUEST);
+        assertNotNull(cardToken.getCard());
+        tokenCard = cardToken.getCard();
+        assertEquals(cardToken.getNumber(), 4);
+        assertEquals(tokenCard.getName(), "Power Sink");
+        assertTrue(tokenCard.isFoil());
+        assertEquals(tokenCard.getEdition(), "VMA");
+
+        lineRequest = "Power Sink+";
         cardToken = recognizer.recogniseCardToken(lineRequest, null);
         assertNotNull(cardToken);
         assertEquals(cardToken.getType(), TokenType.LEGAL_CARD_REQUEST);
@@ -1090,7 +1101,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         tokenCard = cardToken.getCard();
         assertEquals(cardToken.getNumber(), 1);
         assertEquals(tokenCard.getName(), "Power Sink");
-        assertFalse(tokenCard.isFoil());
+        assertTrue(tokenCard.isFoil());
         assertEquals(tokenCard.getEdition(), "VMA");
     }
 
@@ -1565,6 +1576,45 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getType(), TokenType.INVALID_CARD_REQUEST);
         assertNotNull(cardToken.getCard());
         assertEquals(cardToken.getText(), "Buried Alive (WTH)");
+    }
+
+    @Test void testCardRequestVariesUponChangesInArtPreference(){
+        assertEquals(StaticData.instance().getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
+        DeckRecognizer recognizer = new DeckRecognizer();
+
+        String lineRequest = "4x Power Sink+";
+        Token cardToken = recognizer.recogniseCardToken(lineRequest, null);
+        assertNotNull(cardToken);
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD_REQUEST);
+        assertNotNull(cardToken.getCard());
+        PaperCard tokenCard = cardToken.getCard();
+        assertEquals(cardToken.getNumber(), 4);
+        assertEquals(tokenCard.getName(), "Power Sink");
+        assertTrue(tokenCard.isFoil());
+        assertEquals(tokenCard.getEdition(), "VMA");
+
+        recognizer.setArtPreference(CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY);
+        cardToken = recognizer.recogniseCardToken(lineRequest, null);
+        assertNotNull(cardToken);
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD_REQUEST);
+        assertNotNull(cardToken.getCard());
+        tokenCard = cardToken.getCard();
+        assertEquals(cardToken.getNumber(), 4);
+        assertEquals(tokenCard.getName(), "Power Sink");
+        assertTrue(tokenCard.isFoil());
+        assertEquals(tokenCard.getEdition(), "LEA");
+
+        // Check that result is persistent - and consistent with change
+        lineRequest = "Power Sink";
+        cardToken = recognizer.recogniseCardToken(lineRequest, null);
+        assertNotNull(cardToken);
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD_REQUEST);
+        assertNotNull(cardToken.getCard());
+        tokenCard = cardToken.getCard();
+        assertEquals(cardToken.getNumber(), 1);
+        assertEquals(tokenCard.getName(), "Power Sink");
+        assertFalse(tokenCard.isFoil());
+        assertEquals(tokenCard.getEdition(), "LEA");
     }
 
     /*==================================
