@@ -242,6 +242,12 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
     @Test void testSBshortAsPlaceholderForSideboard(){
         String dckSec = "SB:";
         assertTrue(DeckRecognizer.isDeckSectionName(dckSec));
+
+        DeckRecognizer recognizer = new DeckRecognizer();
+        Token token = recognizer.recogniseNonCardToken(dckSec);
+        assertNotNull(token);
+        assertEquals(token.getType(), TokenType.DECK_SECTION_NAME);
+        assertEquals(token.getText(), "Sideboard");
     }
 
     @Test void testMatchCardTypes(){

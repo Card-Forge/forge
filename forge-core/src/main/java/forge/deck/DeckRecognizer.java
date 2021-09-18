@@ -87,8 +87,8 @@ public class DeckRecognizer {
         }
 
         public static Token DeckSection(final String sectionName0){
-            String sectionName = sectionName0.toLowerCase();
-            if (sectionName.equals("side") || sectionName.contains("sideboard"))
+            String sectionName = sectionName0.toLowerCase().trim();
+            if (sectionName.equals("side") || sectionName.contains("sideboard") || sectionName.equals("sb"))
                 return new Token(TokenType.DECK_SECTION_NAME, DeckSection.Sideboard.name());
             if (sectionName.equals("main") || sectionName.contains("card")
                     || sectionName.equals("mainboard") || sectionName.equals("deck"))
