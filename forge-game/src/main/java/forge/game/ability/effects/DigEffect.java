@@ -285,14 +285,14 @@ public class DigEffect extends SpellAbilityEffect {
                         if (valid.isEmpty()) {
                             chooser.getController().notifyOfValue(sa, null, Localizer.getInstance().getMessage("lblNoValidCards"));
                         } else {
-                            if ( p == chooser ) { // the digger can still see all the dug cards when choosing
+                            if (p == chooser) { // the digger can still see all the dug cards when choosing
                                 chooser.getController().tempShowCards(top);
                             }
                             List<Card> chosen = new ArrayList<>();
 
                             int max = anyNumber ? valid.size() : Math.min(valid.size(),destZone1ChangeNum);
                             int min = (anyNumber || optional) ? 0 : max;
-                            if ( max > 0 ) { // if max is 0 don't make a choice
+                            if (max > 0) { // if max is 0 don't make a choice
                                 chosen = chooser.getController().chooseEntitiesForEffect(valid, min, max, delayedReveal, sa, prompt, p, null);
                             }
 

@@ -52,7 +52,7 @@ public class ManifestEffect extends SpellAbilityEffect {
                     CardLists.shuffle(tgtCards);
                 }
 
-                for(Card c : tgtCards) {
+                for (Card c : tgtCards) {
                     Card rem = c.manifest(p, sa);
                     if (sa.hasParam("RememberManifested") && rem != null && rem.isManifested()) {
                         source.addRemembered(rem);

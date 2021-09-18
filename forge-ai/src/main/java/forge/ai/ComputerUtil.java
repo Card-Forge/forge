@@ -1986,7 +1986,6 @@ public class ComputerUtil {
         return false;
     }
 
-
     public static int scoreHand(CardCollectionView handList, Player ai, int cardsToReturn) {
         // TODO Improve hand scoring in relation to cards to return.
         // If final hand size is 5, score a hand based on what that 5 would be.
@@ -2094,8 +2093,7 @@ public class ComputerUtil {
             for (int i=0;i<tgtCandidates;i++) {
                 candidates.add(nonLands.get(i));
             }
-        }
-        else {
+        } else {
             //Too many lands!
             //Init
             int cntColors = MagicColor.WUBRG.length;
@@ -2513,7 +2511,6 @@ public class ComputerUtil {
             return (scoreNumbers >= scoreStrength) != opponent ? "Numbers" : "Strength";
 
         case "SproutOrHarvest":
-
             // lifegain would hurt or has no effect
             if (opponent) {
                 if (lifegainNegative(controller, source)) {
@@ -2630,7 +2627,6 @@ public class ComputerUtil {
     }
 
     public static int getDamageForPlaying(final Player player, final SpellAbility sa) {
-
         // check for bad spell cast triggers
         int damage = 0;
         final Game game = player.getGame();
@@ -2642,7 +2638,6 @@ public class ComputerUtil {
         }
         for (Trigger trigger : theTriggers) {
             final Card source = trigger.getHostCard();
-
 
             if (!trigger.zonesCheck(game.getZoneOf(source))) {
                 continue;
@@ -2772,7 +2767,6 @@ public class ComputerUtil {
 
     // this countertypes has no effect
     public static boolean isUselessCounter(CounterType type, Card c) {
-
         // Quest counter on a card without MaxQuestEffect are useless
         if (type.is(CounterEnumType.QUEST)) {
             int e = 0;
