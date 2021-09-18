@@ -1,0 +1,9 @@
+Name:Lier, Disciple of the Drowned
+ManaCost:3 U U
+Types:Legendary Creature Human Wizard
+PT:3/4
+S:Mode$ Continuous | Affected$ Card | AddHiddenKeyword$ This spell can't be countered. | AffectedZone$ Stack | Description$ Spells can't be countered.
+S:Mode$ Continuous | Affected$ Instant.YouOwn,Sorcery.YouOwn | AffectedZone$ Graveyard | AddKeyword$ Flashback | Description$ Each instant and sorcery card in your graveyard has flashback. The flashback cost is equal to that card's mana cost.
+DeckHints:Type$Instant|Sorcery
+DeckHas:Ability$Graveyard
+Oracle:Spells can't be countered.\nEach instant and sorcery card in your graveyard has flashback. The flashback cost is equal to that card's mana cost.
