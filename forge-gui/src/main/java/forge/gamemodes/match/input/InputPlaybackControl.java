@@ -77,6 +77,7 @@ public class InputPlaybackControl extends InputSyncronizedBase {
         else {
             isFast = !isFast;
             control.setSpeed(isFast);
+            getController().getGui().setGameSpeed(isFast);
             setPause(isPaused); // update message
         }
     }

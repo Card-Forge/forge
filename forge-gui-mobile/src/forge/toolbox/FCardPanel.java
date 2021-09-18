@@ -1,9 +1,13 @@
 package forge.toolbox;
 
+import forge.Forge;
 import forge.Graphics;
+import forge.animation.ForgeAnimation;
 import forge.card.CardRenderer;
 import forge.card.CardRenderer.CardStackPosition;
 import forge.game.card.CardView;
+import forge.game.zone.ZoneType;
+import forge.screens.match.MatchController;
 import forge.util.Utils;
 
 public class FCardPanel extends FDisplayObject {
@@ -15,12 +19,17 @@ public class FCardPanel extends FDisplayObject {
     private CardView card;
     private boolean tapped;
     private boolean highlighted;
+    private boolean wasTapped;
+    CardTapAnimation tapAnimation;
+    CardUnTapAnimation untapAnimation;
 
     public FCardPanel() {
         this(null);
     }
     public FCardPanel(CardView card0) {
         card = card0;
+        tapAnimation = new CardTapAnimation();
+        untapAnimation = new CardUnTapAnimation();
     }
 
     public CardView getCard() {
@@ -76,9 +85,74 @@ public class FCardPanel extends FDisplayObject {
         return CardStackPosition.Top;
     }
 
+    private class CardUnTapAnimation extends ForgeAnimation {
+        private static final float DURATION = 0.14f;
+        private float progress = 0;
+        private boolean finished;
+
+        private void drawCard(Graphics g, CardView card, float x, float y, float w, float h, float edgeOffset) {
+            float percentage = progress / DURATION;
+            if (percentage < 0) {
+                percentage = 0;
+            } else if (percentage > 1) {
+                percentage = 1;
+            }
+            float angle = -90 + (percentage*90);
+            if (wasTapped) {
+                g.startRotateTransform(x + edgeOffset, y + h - edgeOffset, angle);
+                CardRenderer.drawCardWithOverlays(g, card, x, y, w, h, getStackPosition());
+                g.endTransform();
+            } else {
+                CardRenderer.drawCardWithOverlays(g, card, x, y, w, h, getStackPosition());
+            }
+        }
+
+        @Override
+        protected boolean advance(float dt) {
+            progress += dt;
+            return progress < DURATION;
+        }
+
+        @Override
+        protected void onEnd(boolean endingAll) {
+            finished = true;
+        }
+    }
+
+    private class CardTapAnimation extends ForgeAnimation {
+        private static final float DURATION = 0.18f;
+        private float progress = 0;
+        private boolean finished;
+
+        private void drawCard(Graphics g, CardView card, float x, float y, float w, float h, float edgeOffset, float angle) {
+            float percentage = progress / DURATION;
+            if (percentage > 1) {
+                percentage = 1;
+                wasTapped = true;
+            }
+            g.startRotateTransform(x + edgeOffset, y + h - edgeOffset, percentage*angle);
+            CardRenderer.drawCardWithOverlays(g, card, x, y, w, h, getStackPosition());
+            g.endTransform();
+        }
+
+        @Override
+        protected boolean advance(float dt) {
+            progress += dt;
+            return progress < DURATION;
+        }
+
+        @Override
+        protected void onEnd(boolean endingAll) {
+            finished = true;
+        }
+    }
+
     @Override
     public void draw(Graphics g) {
         if (card == null) { return; }
+
+        boolean isGameFast = MatchController.instance.isGameFast();
+        boolean animate = ZoneType.Battlefield.equals(card.getZone()) && Forge.animatedCardTapUntap;
 
         float padding = getPadding();
         float x = padding;
@@ -88,16 +162,50 @@ public class FCardPanel extends FDisplayObject {
         if (w == h) { //adjust width if needed to make room for tapping
             w = h / ASPECT_RATIO;
         }
+        float edgeOffset = w / 2f;
+        if (isGameFast) {
+            //don't animate if fast
+            if (tapped) {
+                g.startRotateTransform(x + edgeOffset, y + h - edgeOffset, getTappedAngle());
+            }
 
-        if (tapped) {
-            float edgeOffset = w / 2f;
-            g.startRotateTransform(x + edgeOffset, y + h - edgeOffset, getTappedAngle());
-        }
+            CardRenderer.drawCardWithOverlays(g, card, x, y, w, h, getStackPosition());
 
-        CardRenderer.drawCardWithOverlays(g, card, x, y, w, h, getStackPosition());
+            if (tapped) {
+                g.endTransform();
+            }
 
-        if (tapped) {
-            g.endTransform();
+        } else {
+            if (tapped) {
+                //reset untapAnimation
+                if (untapAnimation != null) {
+                    untapAnimation.progress = 0;
+                }
+                //draw tapped
+                if (tapAnimation != null) {
+                    if (tapAnimation.progress < 1 && animate) {
+                        tapAnimation.start();
+                        tapAnimation.drawCard(g, card, x, y, w, h, w / 2f, getTappedAngle());
+                    } else {
+                        g.startRotateTransform(x + edgeOffset, y + h - edgeOffset, getTappedAngle());
+                        CardRenderer.drawCardWithOverlays(g, card, x, y, w, h, getStackPosition());
+                        g.endTransform();
+                    }
+                }
+            } else {
+                //reset tapAnimation
+                if (tapAnimation != null) {
+                    tapAnimation.progress = 0;
+                }
+                //draw untapped
+                if (untapAnimation.progress < 1 && animate) {
+                    untapAnimation.start();
+                    untapAnimation.drawCard(g, card, x, y, w, h, edgeOffset);
+                } else {
+                    wasTapped = false;
+                    CardRenderer.drawCardWithOverlays(g, card, x, y, w, h, getStackPosition());
+                }
+            }
         }
     }
 

@@ -70,6 +70,7 @@ public class Forge implements ApplicationListener {
     public static boolean allowCardBG = false;
     public static boolean altPlayerLayout = false;
     public static boolean altZoneTabs = false;
+    public static boolean animatedCardTapUntap = false;
     public static String enableUIMask = "Crop";
     public static boolean enablePreloadExtendedArt = false;
     public static boolean isTabletDevice = false;
@@ -146,6 +147,7 @@ public class Forge implements ApplicationListener {
         showFPS = prefs.getPrefBoolean(FPref.UI_SHOW_FPS);
         altPlayerLayout = prefs.getPrefBoolean(FPref.UI_ALT_PLAYERINFOLAYOUT);
         altZoneTabs = prefs.getPrefBoolean(FPref.UI_ALT_PLAYERZONETABS);
+        animatedCardTapUntap = prefs.getPrefBoolean(FPref.UI_ANIMATED_CARD_TAPUNTAP);
         enableUIMask = prefs.getPref(FPref.UI_ENABLE_BORDER_MASKING);
         if (prefs.getPref(FPref.UI_ENABLE_BORDER_MASKING).equals("true")) //override old settings if not updated
             enableUIMask = "Full";
