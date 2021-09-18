@@ -259,6 +259,16 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     MatchController.instance.resetPlayerPanels();
             }
         },1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_ANIMATED_CARD_TAPUNTAP,
+                localizer.getMessage("lblAnimatedCardTapUntap"),
+                localizer.getMessage("nlAnimatedCardTapUntap")){
+            @Override
+            public void select() {
+                super.select();
+                //update
+                Forge.animatedCardTapUntap = FModel.getPreferences().getPrefBoolean(FPref.UI_ANIMATED_CARD_TAPUNTAP);
+            }
+        },1);
 
         //Random Deck Generation
         lstSettings.addItem(new BooleanSetting(FPref.DECKGEN_NOSMALL,

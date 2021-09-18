@@ -174,6 +174,7 @@ public interface IGuiGame {
     boolean isSelecting();
     boolean isGamePaused();
     public void setgamePause(boolean pause);
+    public void setGameSpeed(boolean gameSpeed);
 
     void awaitNextInput();
     void cancelAwaitNextInput();
