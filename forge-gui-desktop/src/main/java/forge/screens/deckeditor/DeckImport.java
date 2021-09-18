@@ -18,13 +18,12 @@
 package forge.screens.deckeditor;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.util.List;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.HyperlinkEvent;
@@ -46,6 +45,7 @@ import forge.model.FModel;
 import forge.screens.deckeditor.controllers.ACEditorBase;
 import forge.screens.deckeditor.controllers.CStatisticsImporter;
 import forge.screens.deckeditor.views.VStatisticsImporter;
+import forge.toolbox.FComboBox;
 import forge.toolbox.*;
 import forge.util.Localizer;
 import forge.view.FDialog;
@@ -175,21 +175,31 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
     private final FHtmlViewer htmlOutput = new FHtmlViewer(DeckImport.HTML_WELCOME_TEXT);
     private final FScrollPane scrollInput = new FScrollPane(this.txtInput, false);
     private final FScrollPane scrollOutput = new FScrollPane(this.htmlOutput, false);
-    private final CardPicturePanel picturePreview = new CardPicturePanel();
+    private final CardPicturePanel cardImagePreview = new CardPicturePanel();
     private final FLabel cardPreviewLabel = new FLabel.Builder()
-            .text(String.format("<html><span style=\"font-size: 9px;\">%s</span></html>",
-                    Localizer.getInstance().getMessage("lblCardPreview")))
-            .fontStyle(Font.BOLD).tooltip("").build();
-    private final FButton cmdCancel = new FButton(Localizer.getInstance().getMessage("lblCancel"));
+            .text(Localizer.getInstance().getMessage("lblCardPreview"))
+            .fontSize(14).tooltip("").build();
+    private final FButton cmdCancelButton = new FButton(Localizer.getInstance().getMessage("lblCancel"));
 
-    private final FButton cmdAccept;  // Not initialised as label will be adaptive.
+    private final FButton cmdAcceptButton;  // Not initialised as label will be adaptive.
     private final FCheckBox createNewDeckCheckbox = new FCheckBox(Localizer.getInstance().getMessage("lblNewDeckCheckbox"), false);
     private final DeckFormat deckFormat;
 
-    //don't need wrappers since skin can't change while this dialog is open
+    // Release Date
     private final FCheckBox dateTimeCheck = new FCheckBox(Localizer.getInstance().getMessage("lblUseOnlySetsReleasedBefore"), false);
     private final FComboBox<String> monthDropdown = new FComboBox<>();
     private final FComboBox<Integer> yearDropdown = new FComboBox<>();
+
+    // Card Art Preferences
+    private final FLabel cardArtPrefsLabel = new FLabel.Builder()
+            .text(Localizer.getInstance().getMessage("lblPreferredArt"))
+            .fontSize(14).build();
+    private FComboBox<String> cardArtPrefsComboBox;
+    private final FCheckBox cardArtPrefFilter = new FCheckBox(Localizer.getInstance().getMessage("lblPrefArtExpansionOnly"), false);
+
+    // Block Format Filter
+    private final FCheckBox blockCheck = new FCheckBox(Localizer.getInstance().getMessage("lblUseBlockFilters"), false);
+    private final FComboBox<GameFormat> blocksDropdown = new FComboBox<>();
 
     private final DeckImportController controller;
     private final ACEditorBase<TItem, TModel> host;
@@ -204,12 +214,15 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         GameType currentGameType = g.getGameType();
         // get the game format with the same name of current game type (if any)
         GameFormat currentGameFormat = FModel.getFormats().get(currentGameType.name());
+        GameFormat vintageGameFormat = FModel.getFormats().get("Vintage");  // default for constructed
         if (currentGameFormat == null)
-            currentGameFormat = FModel.getFormats().get("Vintage");  // default for constructed
+            currentGameFormat = vintageGameFormat;
         List<String> allowedSetCodes = currentGameFormat.getAllowedSetCodes();
+        if (allowedSetCodes == null || allowedSetCodes.isEmpty())
+            allowedSetCodes = vintageGameFormat.getAllowedSetCodes();
         this.controller = new DeckImportController(dateTimeCheck, monthDropdown, yearDropdown,
-                currentDeckIsNotEmpty, allowedSetCodes, currentDeckFormat);
-        this.cmdAccept = new FButton(IMPORT_CARDS_CMD_LABEL);
+                currentDeckIsNotEmpty, allowedSetCodes, currentDeckFormat, blockCheck, blocksDropdown);
+        this.cmdAcceptButton = new FButton(IMPORT_CARDS_CMD_LABEL);
         this.host = g;
         initMainPanel(g, currentDeckIsNotEmpty, currentGameType);
     }
@@ -223,6 +236,7 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         this.setPreferredSize(new Dimension(wWidth, wHeight));
         this.setSize(wWidth, wHeight);
 
+        // Set Title
         String gameTypeName = String.format(" %s", currentGameType.name());
         this.setTitle(Localizer.getInstance().getMessage("lblDeckImporterPanelTitle") + gameTypeName);
 
@@ -231,49 +245,126 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
 
         final FSkin.SkinColor foreColor = FSkin.getColor(FSkin.Colors.CLR_TEXT);
 
-        this.picturePreview.setOpaque(false);
-        this.picturePreview.setBorder(new EmptyBorder(2, 5, 2, 5));
-        this.picturePreview.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT).getColor());
-        resetCardPreviewPanel();
+        // === INIT COMPONENTS
 
+        // == Scroll Input (Card List)
         this.scrollInput.setBorder(new FSkin.TitledSkinBorder(BorderFactory.createEtchedBorder(),
                 Localizer.getInstance().getMessage("lblCardListTitle"), foreColor));
         this.scrollInput.setViewportBorder(BorderFactory.createLoweredBevelBorder());
-
+        // == Scroll Output (Decklist)
         this.scrollOutput.setBorder(new FSkin.TitledSkinBorder(BorderFactory.createEtchedBorder(),
                 Localizer.getInstance().getMessage("lblDecklistTitle"), foreColor));
         this.scrollOutput.setViewportBorder(BorderFactory.createLoweredBevelBorder());
-
+        // == Stats Panel
         FPanel statsPanel = new FPanel(new BorderLayout());
         statsPanel.add(VStatisticsImporter.instance().getMainPanel(), BorderLayout.CENTER);
         statsPanel.setOpaque(false);
-
+        // == Card Preview
+        this.cardImagePreview.setOpaque(false);
+        this.cardImagePreview.setBorder(new EmptyBorder(2, 5, 2, 5));
+        this.cardImagePreview.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT).getColor());
+        resetCardImagePreviewPanel();
         FPanel cardPreview = new FPanel(new MigLayout("fill"));
-        cardPreview.add(this.cardPreviewLabel, "cell 0 0, align left, w 100%, span 2");
-        cardPreview.add(this.picturePreview, "cell 0 1, w 80%, h 70%, growy, pushy, ax c, span 2");
+        cardPreview.add(this.cardPreviewLabel, "cell 0 0, align left, w 100%");
+        cardPreview.add(this.cardImagePreview, "cell 0 1, w 70%, h 60%, growy, pushy, ax c");
+        // == Options Panel
+        JPanel optionsPanel = new JPanel(new MigLayout("insets 10, gap 5, center, h 120!"));
+        final TitledBorder border = new TitledBorder(BorderFactory.createEtchedBorder(), "Options");
+        border.setTitleColor(foreColor.getColor());
+        optionsPanel.setBorder(border);
+        optionsPanel.setVisible(false);
+        optionsPanel.setOpaque(false);
 
+        FButton showOptionsButton = new FButton(Localizer.getInstance().getMessage("lblShowOptions"));
+        showOptionsButton.setFont(FSkin.getBoldFont(12));
+        FButton hideOptionsButton = new FButton(Localizer.getInstance().getMessage("lblHideOptions"));
+        hideOptionsButton.setFont(FSkin.getBoldFont(12));
+
+        String optPanelConstrains = "w 130!, h 80!, left, insets 0";
+
+        // = (opt) Date filter
+        JPanel dateFilterPanel = new JPanel(new MigLayout(optPanelConstrains));
+        dateFilterPanel.setOpaque(false);
+        dateFilterPanel.add(this.dateTimeCheck, "cell 0 0, w 40%, ax left");
+        dateFilterPanel.add(this.monthDropdown, "cell 0 1, w 10%, ax left, split 2, pad 0 2 0 0");
+        dateFilterPanel.add(this.yearDropdown,  "cell 0 1, w 8%, ax left, split 2");
+
+        // (opt) Card Art Preference Filter
+
+        final String latestOpt = Localizer.getInstance().getMessage("latestArtOpt");
+        final String originalOpt = Localizer.getInstance().getMessage("originalArtOpt");
+        final String [] choices = {latestOpt, originalOpt};
+        this.cardArtPrefsComboBox = new FComboBox<>(choices);
+        final String selectedItem = StaticData.instance().cardArtPreferenceIsLatest() ? latestOpt : originalOpt;
+        this.cardArtPrefsComboBox.setSelectedItem(selectedItem);
+        this.cardArtPrefFilter.setSelected(StaticData.instance().isCoreExpansionOnlyFilterSet());
+
+        JPanel cardArtPanel = new JPanel(new MigLayout(optPanelConstrains));
+        cardArtPanel.setOpaque(false);
+        cardArtPanel.add(this.cardArtPrefsLabel,    "cell 0 0, w 25%, left, split 2");
+        cardArtPanel.add(this.cardArtPrefsComboBox, "cell 0 0, w 10%, left, split 2");
+        cardArtPanel.add(this.cardArtPrefFilter,    "cell 0 1, w 15%, left");
+
+        // (opt) Block Filter
+        this.blocksDropdown.setEnabled(false);  // not enabled by default
+        JPanel blockFilterPanel = new JPanel(new MigLayout(optPanelConstrains));
+        blockFilterPanel.setOpaque(false);
+        blockFilterPanel.add(this.blockCheck,     "cell 0 0, w 40%, ax left");
+        blockFilterPanel.add(this.blocksDropdown, "cell 0 1, w 15%, ax right");
+
+        optionsPanel.add(hideOptionsButton, "w 150!, h 26!, cell 0 0, span 4, growx, left");
+        optionsPanel.add(dateFilterPanel,      "cell 0 2, w 100%, left");
+
+        if (this.controller.isBlockFormatsSupported()) {
+            optionsPanel.add(cardArtPanel,     "cell 1 2, w 100%, left");
+            optionsPanel.add(blockFilterPanel, "cell 2 2, w 100%, left");
+        } else {
+            optionsPanel.add(cardArtPanel, "cell 1 2, w 100%, left");
+            JPanel placeHolderPanel = new JPanel(new MigLayout(optPanelConstrains));
+            placeHolderPanel.setOpaque(false);
+            optionsPanel.add(placeHolderPanel, "cell 2 2, w 100%, left");
+        }
+
+        // == Command buttons
+        JPanel cmdPanel = new JPanel(new MigLayout("insets 10, gap 5, right, h 40!"));
+        cmdPanel.setOpaque(false);
+        if (currentDeckIsNotEmpty) {
+            cmdPanel.add(this.createNewDeckCheckbox, "align l, split 3");
+            cmdPanel.add(this.cmdAcceptButton, "w 150!, align r, h 26!, split 3");
+            cmdPanel.add(this.cmdCancelButton, "w 150!, align r, h 26!, split 3");
+        } else {
+            cmdPanel.add(this.cmdAcceptButton, "w 150!, align r, h 26!, split 2");
+            cmdPanel.add(this.cmdCancelButton, "w 150!, align r, h 26!, split 2");
+        }
+
+        // === Assembling main UI component
         this.add(this.scrollInput, "cell 0 0, w 40%, growy, pushy, spany 2");
         this.add(this.scrollOutput, "cell 1 0, w 60%, growy, pushy, spany 2");
-        this.add(statsPanel, "cell 2 0, w 480:510:550, growy, pushy, ax c, spanx 2");
-        this.add(cardPreview, "cell 2 1, w 480:510:550, h 65%, growy, pushy, ax c, spanx 2");
+        this.add(statsPanel, "cell 2 0, w 480:510:550, growy, pushy, ax c");
+        this.add(cardPreview, "cell 2 1, w 480:510:550, h 65%, growy, pushy, ax c");
+        this.add(showOptionsButton, "cell 0 2, w 150!, h 26!, left, spanx 3, hidemode 3");
+        this.add(optionsPanel, "cell 0 2, center, w 100%, spanx 3, hidemode 3");
+        this.add(cmdPanel, "cell 0 3, w 100%, spanx 3");
 
-        this.add(this.dateTimeCheck, "cell 0 2, w 50%, ax c");
-        this.add(monthDropdown, "cell 0 3, w 10%, ax left, split 2, pad 0 2 0 0");
-        this.add(yearDropdown, "cell 0 3, w 8%, ax left, split 2, pad 0 2 0 0");
 
-        if (currentDeckIsNotEmpty)
-            this.add(this.createNewDeckCheckbox,"cell 2 2, ax left");
-        this.add(this.cmdAccept, "cell 2 3, w 175, align r, h 26");
-        this.add(this.cmdCancel, "cell 2 3, w 175, align r, h 26");
+        // === ACTION LISTENERS
+        showOptionsButton.addActionListener(actionEvent -> {
+            optionsPanel.setVisible(true);
+            showOptionsButton.setVisible(false);
+        });
+        hideOptionsButton.addActionListener(actionEvent -> {
+            optionsPanel.setVisible(false);
+            showOptionsButton.setVisible(true);
+        });
 
-        this.cmdCancel.addActionListener(new ActionListener() {
+        this.cmdCancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 DeckImport.this.processWindowEvent(new WindowEvent(DeckImport.this, WindowEvent.WINDOW_CLOSING));
             }
         });
 
-        this.cmdAccept.addActionListener(new ActionListener() {
+        this.cmdAcceptButton.addActionListener(new ActionListener() {
             @SuppressWarnings("unchecked")
             @Override
             public void actionPerformed(final ActionEvent e) {
@@ -306,6 +397,41 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         };
         this.dateTimeCheck.addActionListener(updateDateCheck);
 
+        this.cardArtPrefsComboBox.addItemListener(new ItemListener() {
+            @Override public void itemStateChanged(final ItemEvent e) {
+                String artPreference = cardArtPrefsComboBox.getSelectedItem();
+                if (artPreference == null)
+                    artPreference = latestOpt;  // default, just in case
+                final boolean latestArt = artPreference.equalsIgnoreCase(latestOpt);
+                final boolean coreExpFilter = StaticData.instance().isCoreExpansionOnlyFilterSet();
+                controller.setCardArtPreference(latestArt, coreExpFilter);
+                parseAndDisplay();
+            }
+        });
+
+        cardArtPrefFilter.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String artPreference = cardArtPrefsComboBox.getSelectedItem();
+                if (artPreference == null)
+                    artPreference = latestOpt;  // default, just in case
+                final boolean latestArt = artPreference.equalsIgnoreCase(latestOpt);
+                final boolean coreExpFilter = cardArtPrefFilter.isSelected();
+                controller.setCardArtPreference(latestArt, coreExpFilter);
+                parseAndDisplay();
+            }
+        });
+
+        final ActionListener updateCardBlockCheck = new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                final boolean isSel = blockCheck.isSelected();
+                blocksDropdown.setEnabled(isSel);
+                parseAndDisplay();
+            }
+        };
+        this.blockCheck.addActionListener(updateCardBlockCheck);
+
         final ActionListener reparse = new ActionListener() {
             @Override public void actionPerformed(final ActionEvent e) {
                 parseAndDisplay();
@@ -319,10 +445,11 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
 
         this.yearDropdown.addActionListener(reparse);
         this.monthDropdown.addActionListener(reparse);
+        this.blocksDropdown.addActionListener(reparse);
         updateDateCheck.actionPerformed(null); // update actual state
 
         this.txtInput.getDocument().addDocumentListener(new OnChangeTextUpdate());
-        this.cmdAccept.setEnabled(false);
+        this.cmdAcceptButton.setEnabled(false);
 
         if (currentDeckIsNotEmpty){
             this.createNewDeckCheckbox.setSelected(false);
@@ -332,50 +459,52 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         this.htmlOutput.addHyperlinkListener(new HyperlinkListener() {
             @Override
             public void hyperlinkUpdate(HyperlinkEvent e) {
-                // TODO: FOIL and Card Status
-                if(e.getEventType() == HyperlinkEvent.EventType.ENTERED ||
-                   e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
-                    String cardRef = e.getDescription();
-                    TokenKey tokenKey = DeckRecognizer.Token.parseTokenKey(cardRef);
-                    StaticData data = StaticData.instance();
-                    PaperCard card = data.fetchCard(tokenKey.cardName, tokenKey.setCode, tokenKey.collectorNumber);
-                    if (card != null){
-                        // no need to check for card that has Image because CardPicturePanel
-                        // has automatic integration with cardFetch
-                        String header;
-                        if (tokenKey.deckSection != null)
-                                header = String.format("%s: %s",
-                                        Localizer.getInstance().getMessage("lblDeckSection"),
-                                        tokenKey.deckSection);
-                        else {
-                            if (tokenKey.typeName.equals("illegal_card_request"))
-                                header = String.format("%s %s",
-                                        Localizer.getInstance().getMessage("lblIllegalCardMsg"),
-                                        deckFormat.name());
-                            else
-                                header = String.format("%s",
-                                        Localizer.getInstance().getMessage("lblInvalidCardMsg"));
-                        }
-                        CardEdition edition = data.getCardEdition(card.getEdition());
-                        String editionName = edition != null ? String.format("%s ", edition.getName()) : "";
-                        String cardLbl = String.format("%s, %s(%s), No. %s", tokenKey.cardName,
-                                editionName, tokenKey.setCode, tokenKey.collectorNumber);
-                        picturePreview.setItem(card);
-                        if (!tokenKey.typeName.equals("legal_card_request"))
-                            picturePreview.showAsDisabled();
-                        else
-                            picturePreview.showAsEnabled();
-                        cardPreviewLabel.setText(String.format(
-                                "<html><span style=\"font-size: 9px; color: %s;\">%s</span><br />" +
-                                        "<span style=\"font-size: 9px;\">%s</span></html>",
-                                getTokenTypeColour(tokenKey.typeName), header, cardLbl));
-                        // set tooltip
-                        picturePreview.setToolTipText(cardLbl);
-
-                    }
-                }
+                activateCardPreview(e);
             }
         });
+    }
+
+    private void activateCardPreview(HyperlinkEvent e) {
+        // TODO: FOIL and Card Status
+        if(e.getEventType() == HyperlinkEvent.EventType.ENTERED ||
+           e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
+            String cardRef = e.getDescription();
+            TokenKey tokenKey = DeckRecognizer.Token.parseTokenKey(cardRef);
+            StaticData data = StaticData.instance();
+            PaperCard card = data.fetchCard(tokenKey.cardName, tokenKey.setCode, tokenKey.collectorNumber);
+            if (card != null){
+                // no need to check for card that has Image because CardPicturePanel
+                // has automatic integration with cardFetch
+                String header;
+                if (tokenKey.deckSection != null)
+                        header = String.format("%s: %s",
+                                Localizer.getInstance().getMessage("lblDeckSection"),
+                                tokenKey.deckSection);
+                else {
+                    if (tokenKey.typeName.equals("illegal_card_request"))
+                        header = String.format("%s",
+                                Localizer.getInstance().getMessage("lblIllegalCardMsg", getGameFormatLabel()));
+                    else
+                        header = String.format("%s",
+                                Localizer.getInstance().getMessage("lblInvalidCardMsg"));
+                }
+                CardEdition edition = data.getCardEdition(card.getEdition());
+                String editionName = edition != null ? String.format("%s ", edition.getName()) : "";
+                String cardLbl = String.format("%s, %s(%s), No. %s", tokenKey.cardName,
+                        editionName, tokenKey.setCode, tokenKey.collectorNumber);
+                cardImagePreview.setItem(card);
+                if (!tokenKey.typeName.equals("legal_card_request"))
+                    cardImagePreview.showAsDisabled();
+                else
+                    cardImagePreview.showAsEnabled();
+                cardPreviewLabel.setText(String.format(
+                        "<html><span style=\"font-size: 9px; color: %s;\">%s</span><br />" +
+                                "<span style=\"font-size: 9px;\">%s</span></html>",
+                        getTokenTypeColour(tokenKey.typeName), header, cardLbl));
+                // set tooltip
+                cardImagePreview.setToolTipText(cardLbl);
+            }
+        }
     }
 
     private String getTokenTypeColour(String typeName){
@@ -391,9 +520,9 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         }
     }
 
-    private void resetCardPreviewPanel() {
+    private void resetCardImagePreviewPanel() {
         this.cardPreviewLabel.setText(Localizer.getInstance().getMessage("lblCardPreview"));
-        this.picturePreview.setItem(ImageCache.getDefaultImage());
+        this.cardImagePreview.setItem(ImageCache.getDefaultImage());
     }
 
     /**
@@ -429,13 +558,13 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         boolean createNewDeck = this.createNewDeckCheckbox.isSelected();
         this.controller.setCreateNewDeck(createNewDeck);
         String cmdAcceptLabel = createNewDeck ? this.CREATE_NEW_DECK_CMD_LABEL : this.IMPORT_CARDS_CMD_LABEL;
-        this.cmdAccept.setText(cmdAcceptLabel);
+        this.cmdAcceptButton.setText(cmdAcceptLabel);
     }
 
     private void displayTokens(final List<DeckRecognizer.Token> tokens) {
         if (tokens.isEmpty() || hasOnlyComment(tokens)) {
             htmlOutput.setText(HTML_WELCOME_TEXT);
-            resetCardPreviewPanel();
+            resetCardImagePreviewPanel();
         } else {
             final StringBuilder sbOut = new StringBuilder("<html>");
             sbOut.append(String.format("<head>%s</head>", DeckImport.STYLESHEET));
@@ -457,8 +586,8 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
 
     private void updateSummaries(final List<DeckRecognizer.Token> tokens) {
         CStatisticsImporter.instance().updateStats(tokens);
-        cmdAccept.setEnabled(CStatisticsImporter.instance().getTotalCardsInDecklist() > 0);
-        this.resetCardPreviewPanel();
+        cmdAcceptButton.setEnabled(CStatisticsImporter.instance().getTotalCardsInDecklist() > 0);
+        this.resetCardImagePreviewPanel();
     }
 
     private String toHTML(final DeckRecognizer.Token token) {
@@ -469,24 +598,25 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
             case LEGAL_CARD_REQUEST:
                 PaperCard tokenCard = token.getCard();
                 return String.format("<div class=\"knowncard\"><a class=\"knowncard\" href=\"%s\">%s x %s " +
-                                "<span class=\"editioncode\">(%s)</span> %s</a>%s</div>",
+                                "<span class=\"editioncode\">(%s)</span> %s %s</a></div>",
                                 token.getKey(), token.getNumber(), tokenCard.getName(),
                                 tokenCard.getEdition(),
-                                tokenCard.getCollectorNumber(), tokenCard.isFoil() ? "<i>(FOIL)</i>" : "");
+                                tokenCard.getCollectorNumber(), tokenCard.isFoil() ? " - <i>FOIL</i> -" : "");
             case UNKNOWN_CARD_REQUEST:
                 return String.format("<div class=\"unknowncard\">%s x %s (%s)</div>",
                         token.getNumber(), token.getText(),
                         Localizer.getInstance().getMessage("lblUnknownCardMsg"));
             case ILLEGAL_CARD_REQUEST:
                 return String.format("<div class=\"illegalcard\"><a class=\"illegalcard\" href=\"%s\">" +
-                                "%s x %s (%s %s)</a></div>",
+                                "%s x %s %s (%s)</a></div>",
                         token.getKey(), token.getNumber(), token.getText(),
-                        Localizer.getInstance().getMessage("lblIllegalCardMsg"),
-                        this.deckFormat.name());
+                        token.getCard().isFoil() ? " - <i>FOIL</i> -" : "",
+                        Localizer.getInstance().getMessage("lblIllegalCardMsg", getGameFormatLabel()));
             case INVALID_CARD_REQUEST:
                 return String.format("<div class=\"invalidcard\">" +
-                                "<a class=\"invalidcard\" href=\"%s\">%s x %s (%s)</a></div>",
+                                "<a class=\"invalidcard\" href=\"%s\">%s x %s %s (%s)</a></div>",
                         token.getKey(), token.getNumber(), token.getText(),
+                        token.getCard().isFoil() ? " - <i>FOIL</i> -" : "",
                         Localizer.getInstance().getMessage("lblInvalidCardMsg"));
             case DECK_SECTION_NAME:
                 return String.format("<div class=\"section\">%s</div>", token.getText());
@@ -509,5 +639,13 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
             default:
                 return "";
         }
+    }
+
+    private String getGameFormatLabel() {
+        if (this.blockCheck.isSelected() && this.blocksDropdown.getSelectedItem() != null)
+           return this.blocksDropdown.getSelectedItem().getName();
+        else
+            return String.format("%s %s",
+                    Localizer.getInstance().getMessage("lblFormat"), this.deckFormat.name());
     }
 }
