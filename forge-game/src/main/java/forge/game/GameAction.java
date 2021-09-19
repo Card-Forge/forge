@@ -1306,6 +1306,7 @@ public class GameAction {
                     orderedNoRegCreats = true;
                 }
                 for (Card c : noRegCreats) {
+                    c.updateWasDestroyed(true);
                     sacrificeDestroy(c, null, table, null);
                 }
             }
@@ -1444,6 +1445,7 @@ public class GameAction {
 
         // cleanup aura
         if (c.isAura() && c.isInPlay() && !c.isEnchanting()) {
+            c.updateWasDestroyed(true);
             sacrificeDestroy(c, null, table, null);
             checkAgain = true;
         }
@@ -1596,6 +1598,8 @@ public class GameAction {
 
         for (Card c : list) {
             if (c.getCounters(CounterEnumType.LOYALTY) <= 0) {
+                //for animation
+                c.updateWasDestroyed(true);
                 sacrificeDestroy(c, null, table, null);
                 // Play the Destroy sound
                 game.fireEvent(new GameEventCardDestroyed());
@@ -1659,6 +1663,8 @@ public class GameAction {
                     "You have multiple legendary permanents named \""+name+"\" in play.\n\nChoose the one to stay on battlefield (the rest will be moved to graveyard)", null);
             for (Card c: cc) {
                 if (c != toKeep) {
+                    //for animation
+                    c.updateWasDestroyed(true);
                     sacrificeDestroy(c, null, table, null);
                 }
             }
@@ -1693,6 +1699,8 @@ public class GameAction {
         }
 
         for (Card c : worlds) {
+            //for animation
+            c.updateWasDestroyed(true);
             sacrificeDestroy(c, null, table, null);
             game.fireEvent(new GameEventCardDestroyed());
         }
@@ -1707,6 +1715,7 @@ public class GameAction {
 
         c.getController().addSacrificedThisTurn(c, source);
 
+        c.updateWasDestroyed(true);
         return sacrificeDestroy(c, source, table, params);
     }
 
@@ -1733,6 +1742,8 @@ public class GameAction {
             activator = sa.getActivatingPlayer();
         }
 
+        //for animation
+        c.updateWasDestroyed(true);
         // Play the Destroy sound
         game.fireEvent(new GameEventCardDestroyed());
 

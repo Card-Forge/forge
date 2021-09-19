@@ -719,6 +719,59 @@ public class Graphics {
             batch.begin();
         }
     }
+    public void drawCardImage(FImage image, float x, float y, float w, float h, boolean drawGrayscale) {
+        if (!drawGrayscale) {
+            image.draw(this, x, y, w, h);
+        } else {
+            batch.end();
+            shaderGrayscale.bind();
+            shaderGrayscale.setUniformf("u_grayness", 1f);
+            batch.setShader(shaderGrayscale);
+            batch.begin();
+            //draw gray
+            image.draw(this, x, y, w, h);
+            //reset
+            batch.end();
+            batch.setShader(null);
+            batch.begin();
+        }
+    }
+    public void drawCardImage(Texture image, float x, float y, float w, float h, boolean drawGrayscale) {
+        if (!drawGrayscale) {
+            batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+        } else {
+            batch.end();
+            shaderGrayscale.bind();
+            shaderGrayscale.setUniformf("u_grayness", 1f);
+            batch.setShader(shaderGrayscale);
+            batch.begin();
+            //draw gray
+            batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+            //reset
+            batch.end();
+            batch.setShader(null);
+            batch.begin();
+        }
+    }
+    public void drawCardImage(TextureRegion image, float x, float y, float w, float h, boolean drawGrayscale) {
+        if (image != null) {
+            if (!drawGrayscale) {
+                batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+            } else {
+                batch.end();
+                shaderGrayscale.bind();
+                shaderGrayscale.setUniformf("u_grayness", 1f);
+                batch.setShader(shaderGrayscale);
+                batch.begin();
+                //draw gray
+                batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+                //reset
+                batch.end();
+                batch.setShader(null);
+                batch.begin();
+            }
+        }
+    }
     public void drawImage(FImage image, float x, float y, float w, float h) {
         drawImage(image, x, y, w, h, false);
     }

@@ -1,8 +1,10 @@
 package forge.toolbox;
 
+import com.badlogic.gdx.graphics.Texture;
 import forge.Forge;
 import forge.Graphics;
 import forge.animation.ForgeAnimation;
+import forge.assets.FSkin;
 import forge.card.CardRenderer;
 import forge.card.CardRenderer.CardStackPosition;
 import forge.game.card.CardView;
@@ -22,6 +24,7 @@ public class FCardPanel extends FDisplayObject {
     private boolean wasTapped;
     CardTapAnimation tapAnimation;
     CardUnTapAnimation untapAnimation;
+    CardDestroyedAnimation cardDestroyedAnimation;
 
     public FCardPanel() {
         this(null);
@@ -30,6 +33,7 @@ public class FCardPanel extends FDisplayObject {
         card = card0;
         tapAnimation = new CardTapAnimation();
         untapAnimation = new CardUnTapAnimation();
+        cardDestroyedAnimation = new CardDestroyedAnimation();
     }
 
     public CardView getCard() {
@@ -84,7 +88,46 @@ public class FCardPanel extends FDisplayObject {
     protected CardStackPosition getStackPosition() {
         return CardStackPosition.Top;
     }
+    private class CardDestroyedAnimation extends ForgeAnimation {
+        private static final float DURATION = 0.6f;
+        private float progress = 0;
+        private boolean finished;
+        private Texture scratch = FSkin.scratch;
 
+        private void drawCard(Graphics g, CardView card, float x, float y, float w, float h, float edgeOffset) {
+            float percentage = progress / DURATION;
+            if (percentage < 0) {
+                percentage = 0;
+            } else if (percentage > 1) {
+                percentage = 1;
+            }
+            float mod = (w/3f)*percentage;
+            float oldAlpha = g.getfloatAlphaComposite();
+            if (tapped) {
+                g.startRotateTransform(x + edgeOffset, y + h - edgeOffset, getTappedAngle());
+            }
+            CardRenderer.drawCardWithOverlays(g, card, x-mod/2, y-mod/2, w+mod, h+mod, getStackPosition());
+            if (scratch != null) {
+                g.setAlphaComposite(0.6f);
+                g.drawCardImage(scratch, x-mod/2, y-mod/2, w+mod, h+mod, true);
+                g.setAlphaComposite(oldAlpha);
+            }
+            if (tapped) {
+                g.endTransform();
+            }
+        }
+
+        @Override
+        protected boolean advance(float dt) {
+            progress += dt;
+            return progress < DURATION;
+        }
+
+        @Override
+        protected void onEnd(boolean endingAll) {
+            finished = true;
+        }
+    }
     private class CardUnTapAnimation extends ForgeAnimation {
         private static final float DURATION = 0.14f;
         private float progress = 0;
@@ -163,6 +206,19 @@ public class FCardPanel extends FDisplayObject {
             w = h / ASPECT_RATIO;
         }
         float edgeOffset = w / 2f;
+
+        if (card.wasDestroyed()) {
+            if (cardDestroyedAnimation != null) {
+                if (cardDestroyedAnimation.progress < 1) {
+                    cardDestroyedAnimation.start();
+                    cardDestroyedAnimation.drawCard(g, card, x, y, w, h, edgeOffset);
+                } else {
+                    cardDestroyedAnimation.progress = 0;
+                }
+            }
+            return;
+        }
+
         if (isGameFast || MatchController.instance.getGameView().isMatchOver()) {
             //don't animate if game is fast or match is over
             if (tapped) {

@@ -411,6 +411,15 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.CurrentRoom, c.getCurrentRoom());
     }
 
+    public boolean wasDestroyed() {
+        if (get(TrackableProperty.WasDestroyed) == null)
+            return false;
+        return get(TrackableProperty.WasDestroyed);
+    }
+    void updateWasDestroyed(boolean value) {
+        set(TrackableProperty.WasDestroyed, value);
+    }
+
     public int getClassLevel() {
         return get(TrackableProperty.ClassLevel);
     }

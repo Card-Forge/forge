@@ -114,13 +114,18 @@ public class VAvatar extends FDisplayObject {
         float w = getWidth();
         float h = getHeight();
 
-        if (player.getAvatarWasDamaged() && avatarAnimation.progress < 1) {
-            avatarAnimation.start();
-            avatarAnimation.drawAvatar(g, image, 0, 0, w, h);
+        if (avatarAnimation != null && !MatchController.instance.getGameView().isMatchOver()) {
+            if (player.getAvatarWasDamaged() && avatarAnimation.progress < 1) {
+                avatarAnimation.start();
+                avatarAnimation.drawAvatar(g, image, 0, 0, w, h);
+            } else {
+                avatarAnimation.progress = 0;
+                g.drawAvatarImage(image, 0, 0, w, h, player.getHasLost());
+            }
         } else {
-            avatarAnimation.progress = 0;
             g.drawAvatarImage(image, 0, 0, w, h, player.getHasLost());
         }
+
 
         if (Forge.altPlayerLayout && !Forge.altZoneTabs && Forge.isLandscapeMode())
             return;
