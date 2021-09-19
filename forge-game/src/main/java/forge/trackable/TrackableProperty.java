@@ -199,6 +199,8 @@ public enum TrackableProperty {
     ExtraTurnCount(TrackableTypes.IntegerType),
     HasPriority(TrackableTypes.BooleanType),
     HasDelirium(TrackableTypes.BooleanType),
+    WasAvatarDamaged(TrackableTypes.BooleanType),
+    HasLost(TrackableTypes.BooleanType),
 
     //SpellAbility
     HostCard(TrackableTypes.CardViewType),

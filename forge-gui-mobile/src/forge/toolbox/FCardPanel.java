@@ -163,8 +163,8 @@ public class FCardPanel extends FDisplayObject {
             w = h / ASPECT_RATIO;
         }
         float edgeOffset = w / 2f;
-        if (isGameFast) {
-            //don't animate if fast
+        if (isGameFast || MatchController.instance.getGameView().isMatchOver()) {
+            //don't animate if game is fast or match is over
             if (tapped) {
                 g.startRotateTransform(x + edgeOffset, y + h - edgeOffset, getTappedAngle());
             }
@@ -198,12 +198,14 @@ public class FCardPanel extends FDisplayObject {
                     tapAnimation.progress = 0;
                 }
                 //draw untapped
-                if (untapAnimation.progress < 1 && animate) {
-                    untapAnimation.start();
-                    untapAnimation.drawCard(g, card, x, y, w, h, edgeOffset);
-                } else {
-                    wasTapped = false;
-                    CardRenderer.drawCardWithOverlays(g, card, x, y, w, h, getStackPosition());
+                if (untapAnimation != null) {
+                    if (untapAnimation.progress < 1 && animate) {
+                        untapAnimation.start();
+                        untapAnimation.drawCard(g, card, x, y, w, h, edgeOffset);
+                    } else {
+                        wasTapped = false;
+                        CardRenderer.drawCardWithOverlays(g, card, x, y, w, h, getStackPosition());
+                    }
                 }
             }
         }

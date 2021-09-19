@@ -2636,6 +2636,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     public void updateAvatar() {
         view.updateAvatarIndex(this);
         view.updateAvatarCardImageKey(this);
+        view.setAvatarWasDamaged(false);
+        view.setHasLost(false);
     }
 
     public void updateSleeve() {
@@ -2846,6 +2848,14 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public void setExtraTurn(boolean b) {
         view.setIsExtraTurn(b);
+    }
+
+    public void setHasLost(boolean b) {
+        view.setHasLost(b);
+    }
+
+    public void setAvatarWasDamaged(boolean val) {
+        view.setAvatarWasDamaged(val);
     }
 
     public int getExtraTurnCount() {

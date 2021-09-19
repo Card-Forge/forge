@@ -781,6 +781,8 @@ public class Game {
     }
 
     public void onPlayerLost(Player p) {
+        //set for Avatar
+        p.setHasLost(true);
         // Rule 800.4 Losing a Multiplayer game
         CardCollectionView cards = this.getCardsInGame();
         boolean planarControllerLost = false;
