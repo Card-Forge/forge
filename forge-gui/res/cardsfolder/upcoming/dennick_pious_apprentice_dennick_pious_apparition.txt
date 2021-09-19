@@ -1,0 +1,25 @@
+Name:Dennick, Pious Apprentice
+ManaCost:W U
+Types:Legendary Creature Human Soldier
+PT:2/3
+K:Lifelink
+S:Mode$ CantTarget | AffectedZone$ Graveyard | Description$ Cards in graveyards can't be the targets of spells or abilities.
+K:Disturb:2 W U
+DeckHas:Ability$LifeGain & Ability$Graveyard
+AlternateMode:DoubleFaced
+Oracle:Lifelink\nCards in graveyards can't be the targets of spells or abilities.\nDisturb {2}{W}{U} (You may cast this card from your graveyard transformed for its disturb cost.)
+
+ALTERNATE
+
+Name:Dennick, Pious Apparition
+ManaCost:no cost
+Colors:white,blue
+Types:Legendary Creature Spirit Soldier
+PT:3/2
+K:Flying
+T:Mode$ ChangesZoneAll | ValidCards$ Creature | Origin$ Any | Destination$ Graveyard | TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ TrigInvestigate | TriggerDescription$ Whenever one or more creature cards are put into graveyards from anywhere, investigate. This ability triggers only once each turn. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigInvestigate:DB$ Investigate
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Graveyard | ReplaceWith$ Exile | Description$ If CARDNAME would be put into a graveyard from anywhere, exile it instead.
+SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
+DeckHas:Ability$Token & Ability$Sacrifice
+Oracle:Flying\nWhenever one or more creature cards are put into graveyards from anywhere, investigate. This ability triggers only once each turn. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")\nIf Dennick, Pious Apparition would be put into a graveyard from anywhere, exile it instead.
