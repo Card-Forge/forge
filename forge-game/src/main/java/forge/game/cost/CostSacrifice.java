@@ -126,7 +126,6 @@ public class CostSacrifice extends CostPartWithList {
             // choice, it can be Paid even if it's 0
         }
         else return source.canBeSacrificedBy(ability);
-
     }
 
     @Override
