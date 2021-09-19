@@ -1824,6 +1824,12 @@ public class AbilityUtils {
                     }
                     return count;
                 }
+                // Count$TriggeredManaSpent
+                if (sq[0].equals("TriggeredManaSpent")) {
+                    final SpellAbility root = (SpellAbility) sa.getRootAbility().getTriggeringObject(AbilityKey.SpellAbility);
+                    return root.getTotalManaSpent();
+                }
+
                 // Count$Adamant.<Color>.<True>.<False>
                 if (sq[0].startsWith("Adamant")) {
                     final String payingMana = StringUtils.join(sa.getRootAbility().getPayingMana());
