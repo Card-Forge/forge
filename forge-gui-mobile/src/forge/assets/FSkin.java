@@ -39,6 +39,7 @@ public class FSkin {
     private static boolean loaded = false;
     public static Texture hdLogo = null;
     public static Texture overlay_alpha = null;
+    public static Texture scratch = null;
 
     public static void changeSkin(final String skinName) {
         final ForgePreferences prefs = FModel.getPreferences();
@@ -141,6 +142,14 @@ public class FSkin {
             overlay_alpha = txAlphaLines;
         } else {
             overlay_alpha = null;
+        }
+        final FileHandle scratch_overlay = getDefaultSkinFile("scratch.png");
+        if (scratch_overlay.exists()) {
+            Texture txScratch = new Texture(scratch_overlay, true);
+            txScratch.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
+            scratch = txScratch;
+        } else {
+            scratch = null;
         }
 
         if (splashScreen != null) {

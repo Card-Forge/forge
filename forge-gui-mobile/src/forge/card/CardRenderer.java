@@ -590,9 +590,9 @@ public class CardRenderer {
                 g.setAlphaComposite(oldAlpha);
             } else if (showsleeves) {
                 if (!card.isForeTold())
-                    g.drawImage(sleeves, x, y, w, h);
+                    g.drawCardImage(sleeves, x, y, w, h, card.wasDestroyed());
                 else
-                    g.drawImage(image, x, y, w, h);
+                    g.drawCardImage(image, x, y, w, h, card.wasDestroyed());
             } else {
                 if(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON)
                         && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane()) && rotate){
@@ -610,19 +610,19 @@ public class CardRenderer {
                 } else {
                     if (Forge.enableUIMask.equals("Full") && canshow) {
                         if (ImageCache.isBorderlessCardArt(image))
-                            g.drawImage(image, x, y, w, h);
+                            g.drawCardImage(image, x, y, w, h, card.wasDestroyed());
                         else {
                             boolean t = (card.getCurrentState().getOriginalColors() != card.getCurrentState().getColors()) || card.getCurrentState().hasChangeColors();
                             g.drawBorderImage(ImageCache.getBorderImage(image.toString(), canshow), ImageCache.borderColor(image), ImageCache.getTint(card, image), x, y, w, h, t); //tint check for changed colors
-                            g.drawImage(ImageCache.croppedBorderImage(image), x + radius / 2.4f-minusxy, y + radius / 2-minusxy, w * croppedArea, h * croppedArea);
+                            g.drawCardImage(ImageCache.croppedBorderImage(image), x + radius / 2.4f-minusxy, y + radius / 2-minusxy, w * croppedArea, h * croppedArea, card.wasDestroyed());
                         }
                     } else if (Forge.enableUIMask.equals("Crop") && canshow) {
-                        g.drawImage(ImageCache.croppedBorderImage(image), x, y, w, h);
+                        g.drawCardImage(ImageCache.croppedBorderImage(image), x, y, w, h, card.wasDestroyed());
                     } else {
                         if (canshow)
-                            g.drawImage(image, x, y, w, h);
+                            g.drawCardImage(image, x, y, w, h, card.wasDestroyed());
                         else // draw card back sleeves
-                            g.drawImage(sleeves, x, y, w, h);
+                            g.drawCardImage(sleeves, x, y, w, h, card.wasDestroyed());
                     }
                 }
             }

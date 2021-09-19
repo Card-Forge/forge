@@ -78,6 +78,7 @@ public enum TrackableProperty {
     GainControlTargets(TrackableTypes.CardViewCollectionType),
     CloneOrigin(TrackableTypes.CardViewType),
     ExiledWith(TrackableTypes.CardViewType),
+    WasDestroyed(TrackableTypes.BooleanType),
 
     ImprintedCards(TrackableTypes.CardViewCollectionType),
     HauntedBy(TrackableTypes.CardViewCollectionType),
@@ -199,6 +200,8 @@ public enum TrackableProperty {
     ExtraTurnCount(TrackableTypes.IntegerType),
     HasPriority(TrackableTypes.BooleanType),
     HasDelirium(TrackableTypes.BooleanType),
+    WasAvatarDamaged(TrackableTypes.BooleanType),
+    HasLost(TrackableTypes.BooleanType),
 
     //SpellAbility
     HostCard(TrackableTypes.CardViewType),

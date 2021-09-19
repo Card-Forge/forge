@@ -3029,6 +3029,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         view.updateTokenCard(this);
     }
 
+    public void updateWasDestroyed(boolean value) {
+        view.updateWasDestroyed(value);
+    }
+
     public final Card getCopiedPermanent() {
         return copiedPermanent;
     }
