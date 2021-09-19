@@ -612,10 +612,8 @@ public class HumanPlay {
                     return false;
                 }
 
-                if (!mandatory) {
-                    if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantSpendNTargetTypeCounter", String.valueOf(amount), counterType.getName()), sourceAbility)) {
-                        return false;
-                    }
+                if (!mandatory && !p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantSpendNTargetTypeCounter", String.valueOf(amount), counterType.getName()), sourceAbility)) {
+                    return false;
                 }
 
                 p.payEnergy(amount, source);

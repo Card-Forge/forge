@@ -779,7 +779,6 @@ public class PlayerControllerAi extends PlayerController {
         return allTargets.get(0);
     }
 
-
     @Override
     public void notifyOfValue(SpellAbility saSource, GameObject realtedTarget, String value) {
         // AI should take into consideration creature types, numbers and other information (mostly choices) arriving through this channel

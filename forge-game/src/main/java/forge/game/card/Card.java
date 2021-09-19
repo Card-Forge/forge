@@ -1230,8 +1230,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         SpellAbility castSA;
         if (getCopiedPermanent() != null) {
             castSA = getCopiedPermanent().getCastSA();
-        }
-        else {
+        } else {
             castSA = getCastSA();
         }
         if (castSA != null) {
