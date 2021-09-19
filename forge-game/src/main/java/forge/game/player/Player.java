@@ -559,6 +559,8 @@ public class Player extends GameEntity implements Comparable<Player> {
                 return 0;
             }
             life -= toLose;
+            //for Avatar animation
+            view.setAvatarWasDamaged(true);
             view.updateLife(this);
             lifeLost = toLose;
             if (manaBurn) {
