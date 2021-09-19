@@ -4,5 +4,5 @@ Types:Creature Pegasus
 PT:2/2
 K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, target attacking creature without flying gains flying until end of turn.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking+withoutFlying (This creature can't be blocked except by creatures with flying or reach.) | TgtPrompt$ Select target attacking creature without flying | KW$ Flying (This creature can't be blocked except by creatures with flying or reach.)
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking+withoutFlying | TgtPrompt$ Select target attacking creature without flying | KW$ Flying
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhenever Trusted Pegasus attacks, target attacking creature without flying gains flying until end of turn.
