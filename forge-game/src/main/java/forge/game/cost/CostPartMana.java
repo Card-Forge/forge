@@ -18,7 +18,9 @@
 package forge.game.cost;
 
 import forge.card.mana.ManaCost;
+import forge.game.ability.AbilityUtils;
 import forge.game.mana.ManaConversionMatrix;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
@@ -35,6 +37,7 @@ public class CostPartMana extends CostPart {
     private boolean xCantBe0 = false;
     private boolean isExiledCreatureCost = false;
     private boolean isEnchantedCreatureCost = false;
+    private boolean isCostPayAnyNumberOfTimes = false;
     private final String restriction;
 
     private ManaConversionMatrix cardMatrix = null;
@@ -53,7 +56,8 @@ public class CostPartMana extends CostPart {
         this.xCantBe0 = "XCantBe0".equals(restriction);
         this.isExiledCreatureCost = "Exiled".equalsIgnoreCase(restriction);
         this.isEnchantedCreatureCost = "EnchantedCost".equalsIgnoreCase(restriction);
-        this.restriction = xCantBe0 || isExiledCreatureCost || isEnchantedCreatureCost? null : restriction;
+        this.isCostPayAnyNumberOfTimes = "NumTimes".equalsIgnoreCase(restriction);
+        this.restriction = xCantBe0 || isExiledCreatureCost || isEnchantedCreatureCost || isCostPayAnyNumberOfTimes ? null : restriction;
     }
 
     // This version of the constructor allows to explicitly set exiledCreatureCost/enchantedCreatureCost, used only when copying costs
@@ -62,7 +66,7 @@ public class CostPartMana extends CostPart {
         this.xCantBe0 = XCantBe0;
         this.isExiledCreatureCost = exiledCreatureCost;
         this.isEnchantedCreatureCost = enchantedCreatureCost;
-        this.restriction = xCantBe0 || isExiledCreatureCost || isEnchantedCreatureCost? null : restriction;
+        this.restriction = xCantBe0 || isExiledCreatureCost || isEnchantedCreatureCost || isCostPayAnyNumberOfTimes ? null : restriction;
     }
 
     /**
@@ -139,6 +143,18 @@ public class CostPartMana extends CostPart {
         }
         if (isEnchantedCreatureCost() && sa.getHostCard().getEnchantingCard() != null) {
             return sa.getHostCard().getEnchantingCard().getManaCost();
+        }
+        if (isCostPayAnyNumberOfTimes) {
+            int timesToPay = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getSVar("NumTimes"), sa);
+            if (timesToPay == 0) {
+                return null;
+            } else {
+                ManaCostBeingPaid totalMana = new ManaCostBeingPaid(getManaToPay());
+                for (int i = 1; i < timesToPay; i++) {
+                    totalMana.addManaCost(getManaToPay());
+                }
+                return totalMana.toManaCost();
+            }
         }
         return getManaToPay();
     }
