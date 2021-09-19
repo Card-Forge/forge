@@ -1,0 +1,9 @@
+Name:Seize the Storm
+ManaCost:4 R
+Types:Sorcery
+A:SP$ Token | TokenScript$ r_x_x_elemental_trample_grave_exile | SpellDescription$ Create a red Elemental creature token with trample and "This creature's power and toughness are each equal to the number of instant and sorcery cards in your graveyard, plus the number of cards with flashback you own in exile."
+K:Flashback:6 R
+DeckHas:Ability$Token & Ability$Graveyard
+DeckNeeds:Type$Instant|Sorcery
+DeckHints:Keyword$Flashback
+Oracle:Create a red Elemental creature token with trample and "This creature's power and toughness are each equal to the number of instant and sorcery cards in your graveyard, plus the number of cards with flashback you own in exile."\nFlashback {6}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
