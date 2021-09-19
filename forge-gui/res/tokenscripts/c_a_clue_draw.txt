@@ -1,5 +1,5 @@
 Name:Clue
 ManaCost:no cost
 Types:Artifact Clue
-A:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+A:AB$ Draw | Cost$ 2 Sac<1/CARDNAME/this artifact> | NumCards$ 1 | SpellDescription$ Draw a card.
 Oracle:{2}, Sacrifice this artifact: Draw a card.
