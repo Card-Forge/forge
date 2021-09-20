@@ -1,0 +1,25 @@
+Name:Deathbonnet Sprout
+ManaCost:G
+Types:Creature Fungus
+PT:1/1
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of your upkeep, mill a card. Then if there are three or more creature cards in your graveyard, transform CARDNAME. (To mill a card, put the top card of your library into your graveyard.)
+SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 1 | SubAbility$ DBTransform
+SVar:DBTransform:DB$ SetState | Defined$ Self | ConditionPresent$ Creature.YouOwn | ConditionZone$ Graveyard | ConditionCompare$ GE3 | Mode$ Transform
+AlternateMode:DoubleFaced
+DeckHas:Ability$Mill
+DeckHints:Ability$Discard & Ability$Sacrifice
+Oracle:At the beginning of your upkeep, mill a card. Then if there are three or more creature cards in your graveyard, transform Deathbonnet Sprout. (To mill a card, put the top card of your library into your graveyard.)
+
+ALTERNATE
+
+Name:Deathbonnet Hulk
+ManaCost:no cost
+Colors:green
+Types:Creature Fungus Horror
+PT:3/3
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may exile a card from a graveyard. If a creature card was exiled this way, put a +1/+1 counter on Deathbonnet Hulk.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | Hidden$ True | RememberChanged$ True | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | ConditionDefined$ Remembered | ConditionPresent$ Card.Creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Counters
+Oracle:At the beginning of your upkeep, you may exile a card from a graveyard. If a creature card was exiled this way, put a +1/+1 counter on Deathbonnet Hulk.
