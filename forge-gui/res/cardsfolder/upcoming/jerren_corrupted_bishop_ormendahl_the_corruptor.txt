@@ -1,0 +1,30 @@
+Name:Jerren, Corrupted Bishop
+ManaCost:2 B
+Types:Legendary Creature Human Cleric
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME enters the or another nontoken Human you control dies, you lose 1 life and create a 1/1 white Human creature token.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Human.Other+nonToken+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the or another nontoken Human you control dies, you lose 1 life and create a 1/1 white Human creature token.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1 | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ w_1_1_human
+A:AB$ Pump | Cost$ 2 | ValidTgts$ Human.YouCtrl | TgtPrompt$ Select target Human you control | KW$ Lifelink | SpellDescription$ Target Human you control gains lifelink until end of turn.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ EQ13 | Execute$ TrigTransform | TriggerDescription$ At the beginning of your end step, if you have exactly 13 life, you may pay {4}{B}{B}. If you do, transform NICKNAME.
+SVar:TrigTransform:AB$ SetState | Cost$ 4 B B | Defined$ Self | Mode$ Transform
+SVar:X:Count$YourLifeTotal
+AlternateMode:DoubleFaced
+DeckHints:Type$Human
+DeckHas:Ability$Token & Ability$LifeGain
+Oracle:Whenever Jerren, Corrupted Bishop enters the battlefield or another nontoken Human you control dies, you lose 1 life and create a 1/1 white Human creature token.\n{2}: Target Human you control gains lifelink until end of turn.\nAt the beginning of your end step, if you have exactly 13 life, you may pay {4}{B}{B}. If you do, transform Jerren.
+
+ALTERNATE
+
+Name:Ormendahl, the Corrupter
+ManaCost:no cost
+Colors:black
+Types:Legendary Creature Demon
+PT:6/6
+K:Flying
+K:Trample
+K:Lifelink
+A:AB$ Draw | Cost$ Sac<1/Creature.Other/another creature> | NumCards$ 1 | SpellDescription$ Draw a card.
+DeckHas:Ability$Sacrifice & Ability$LifeGain
+Oracle:Flying, trample, lifelink\nSacrifice another creature: Draw a card.
