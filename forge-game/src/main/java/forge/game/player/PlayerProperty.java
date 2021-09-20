@@ -242,8 +242,8 @@ public class PlayerProperty {
         } else if (property.startsWith("controls")) {
             final String[] type = property.substring(8).split("_");
             final CardCollectionView list = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type[0], sourceController, source, spellAbility);
-            String comparator = type[1];
-            int y = AbilityUtils.calculateAmount(source, comparator.substring(2), spellAbility);
+            String comparator = type.length > 1 ? type[1] : "GE";
+            int y = type.length > 1 ? AbilityUtils.calculateAmount(source, comparator.substring(2), spellAbility) : 1;
             if (!Expressions.compare(list.size(), comparator, y)) {
                 return false;
             }
