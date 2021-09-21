@@ -594,7 +594,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 rebuildMutatedStates(cause);
             }
 
-            // do the Transform trigger there, it can also happen if the resulting state doesn't change
+            // run valid Replacement here
+            getGame().getReplacementHandler().run(ReplacementType.Transform, AbilityKey.mapFromAffected(this));
+
+            // do the Transform trigger here, it can also happen if the resulting state doesn't change
             // Clear old dfc trigger from the trigger handler
             getGame().getTriggerHandler().clearActiveTriggers(this, null);
             getGame().getTriggerHandler().registerActiveTrigger(this, false);

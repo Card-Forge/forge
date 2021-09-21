@@ -37,6 +37,7 @@ public enum ReplacementType {
     SetInMotion(ReplaceSetInMotion.class),
     Surveil(ReplaceSurveil.class),
     Tap(ReplaceTap.class),
+    Transform(ReplaceTransform.class),
     TurnFaceUp(ReplaceTurnFaceUp.class),
     Untap(ReplaceUntap.class);
 
