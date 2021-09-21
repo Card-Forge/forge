@@ -17,16 +17,9 @@
  */
 package forge.game.card;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.*;
@@ -37,12 +30,7 @@ import forge.game.ability.AbilityFactory;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementHandler;
-import forge.game.spellability.AbilitySub;
-import forge.game.spellability.OptionalCost;
-import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityCondition;
-import forge.game.spellability.SpellAbilityRestriction;
-import forge.game.spellability.SpellPermanent;
+import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
@@ -51,6 +39,11 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.CardTranslation;
 import forge.util.TextUtil;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * <p>
