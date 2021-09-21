@@ -79,6 +79,7 @@ public enum TrackableProperty {
     CloneOrigin(TrackableTypes.CardViewType),
     ExiledWith(TrackableTypes.CardViewType),
     WasDestroyed(TrackableTypes.BooleanType),
+    CrackOverlay(TrackableTypes.IntegerType),
 
     ImprintedCards(TrackableTypes.CardViewCollectionType),
     HauntedBy(TrackableTypes.CardViewCollectionType),

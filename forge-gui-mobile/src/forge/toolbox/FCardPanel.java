@@ -92,7 +92,7 @@ public class FCardPanel extends FDisplayObject {
         private static final float DURATION = 0.6f;
         private float progress = 0;
         private boolean finished;
-        private Texture scratch = FSkin.scratch;
+        private Texture splatter = FSkin.splatter;
 
         private void drawCard(Graphics g, CardView card, float x, float y, float w, float h, float edgeOffset) {
             float percentage = progress / DURATION;
@@ -107,9 +107,9 @@ public class FCardPanel extends FDisplayObject {
                 g.startRotateTransform(x + edgeOffset, y + h - edgeOffset, getTappedAngle());
             }
             CardRenderer.drawCardWithOverlays(g, card, x-mod/2, y-mod/2, w+mod, h+mod, getStackPosition());
-            if (scratch != null) {
+            if (splatter != null) {
                 g.setAlphaComposite(0.6f);
-                g.drawCardImage(scratch, x-mod/2, y-mod/2, w+mod, h+mod, true);
+                g.drawCardImage(splatter, null,x-mod/2, y-mod/2, w+mod, h+mod, true, false);
                 g.setAlphaComposite(oldAlpha);
             }
             if (tapped) {
@@ -230,7 +230,6 @@ public class FCardPanel extends FDisplayObject {
             if (tapped) {
                 g.endTransform();
             }
-
         } else {
             if (tapped) {
                 //reset untapAnimation

@@ -43,7 +43,7 @@ public class VAvatar extends FDisplayObject {
         private static final float DURATION = 0.6f;
         private float progress = 0;
         private boolean finished;
-        Texture scratch = FSkin.scratch;
+        Texture splatter = FSkin.splatter;
 
         private void drawAvatar(Graphics g, FImage image, float x, float y, float w, float h) {
             float percentage = progress / DURATION;
@@ -55,14 +55,14 @@ public class VAvatar extends FDisplayObject {
                 player.setAvatarWasDamaged(false);
             }
             float mod = w/2f;
-            if (scratch == null) {
+            if (splatter == null) {
                 g.setColorRGBA(1, percentage, percentage, g.getfloatAlphaComposite());
                 g.drawAvatarImage(image, x, y, w, h, player.getHasLost());
                 g.resetColorRGBA(g.getfloatAlphaComposite());
             } else {
                 g.drawAvatarImage(image, x, y, w, h, player.getHasLost());
                 g.setAlphaComposite(1-(percentage*1));
-                g.drawImage(scratch, x-mod/2, y-mod/2, w+mod, h+mod);
+                g.drawImage(splatter, x-mod/2, y-mod/2, w+mod, h+mod);
                 g.resetAlphaComposite();
             }
 

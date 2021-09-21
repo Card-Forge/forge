@@ -719,9 +719,11 @@ public class Graphics {
             batch.begin();
         }
     }
-    public void drawCardImage(FImage image, float x, float y, float w, float h, boolean drawGrayscale) {
+    public void drawCardImage(FImage image, TextureRegion damage_overlay, float x, float y, float w, float h, boolean drawGrayscale, boolean damaged) {
         if (!drawGrayscale) {
             image.draw(this, x, y, w, h);
+            if (damage_overlay != null && damaged)
+                batch.draw(damage_overlay, adjustX(x), adjustY(y, h), w, h);
         } else {
             batch.end();
             shaderGrayscale.bind();
@@ -736,9 +738,11 @@ public class Graphics {
             batch.begin();
         }
     }
-    public void drawCardImage(Texture image, float x, float y, float w, float h, boolean drawGrayscale) {
+    public void drawCardImage(Texture image, TextureRegion damage_overlay, float x, float y, float w, float h, boolean drawGrayscale, boolean damaged) {
         if (!drawGrayscale) {
             batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+            if (damage_overlay != null && damaged)
+                batch.draw(damage_overlay, adjustX(x), adjustY(y, h), w, h);
         } else {
             batch.end();
             shaderGrayscale.bind();
@@ -753,10 +757,12 @@ public class Graphics {
             batch.begin();
         }
     }
-    public void drawCardImage(TextureRegion image, float x, float y, float w, float h, boolean drawGrayscale) {
+    public void drawCardImage(TextureRegion image, TextureRegion damage_overlay, float x, float y, float w, float h, boolean drawGrayscale, boolean damaged) {
         if (image != null) {
             if (!drawGrayscale) {
                 batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+                if (damage_overlay != null && damaged)
+                    batch.draw(damage_overlay, adjustX(x), adjustY(y, h), w, h);
             } else {
                 batch.end();
                 shaderGrayscale.bind();
@@ -770,6 +776,25 @@ public class Graphics {
                 batch.setShader(null);
                 batch.begin();
             }
+        }
+    }
+    public void drawGrayTransitionImage(FImage image, float x, float y, float w, float h, boolean withDarkOverlay, float percentage) {
+        batch.end();
+        shaderGrayscale.bind();
+        shaderGrayscale.setUniformf("u_grayness", percentage);
+        batch.setShader(shaderGrayscale);
+        batch.begin();
+        //draw gray
+        image.draw(this, x, y, w, h);
+        //reset
+        batch.end();
+        batch.setShader(null);
+        batch.begin();
+        if(withDarkOverlay){
+            float oldalpha = alphaComposite;
+            setAlphaComposite(0.4f);
+            fillRect(Color.BLACK, x, y, w, h);
+            setAlphaComposite(oldalpha);
         }
     }
     public void drawImage(FImage image, float x, float y, float w, float h) {
