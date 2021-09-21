@@ -255,7 +255,9 @@ public class FCardPanel extends FDisplayObject {
 
         private void drawCard(Graphics g, CardView card, float x, float y, float w, float h, float edgeOffset, float angle) {
             float percentage = progress / DURATION;
-            if (percentage > 1) {
+            if (percentage < 0) {
+                percentage = 0;
+            } else if (percentage > 1) {
                 percentage = 1;
                 wasTapped = true;
             }
