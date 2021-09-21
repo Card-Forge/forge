@@ -162,6 +162,13 @@ public class DigAi extends SpellAbilityAi {
 
             // still nothing, so return the worst card since it'll be unplayable from exile (e.g. Vivien, Champion of the Wilds)
             return bestChoice != null ? bestChoice : ComputerUtilCard.getWorstAI(valid);
+        } else if ("EmulateScry".equals(sa.getParam("AILogic"))) {
+            for (Card choice : valid) {
+                if (ComputerUtil.scryWillMoveCardToBottomOfLibrary(ai, choice)) {
+                    return choice;
+                }
+            }
+            return null;
         }
 
         if (sa.getActivatingPlayer().isOpponentOf(ai) && relatedPlayer.isOpponentOf(ai)) {

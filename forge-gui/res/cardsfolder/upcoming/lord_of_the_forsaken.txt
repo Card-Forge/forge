@@ -1,0 +1,11 @@
+Name:Lord of the Forsaken
+ManaCost:4 B B
+Types:Creature Demon
+PT:6/6
+K:Flying
+K:Trample
+A:AB$ Mill | Cost$ B Sac<1/Creature.Other/another creature> | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 3 | SpellDescription$ Target player mills three cards.
+A:AB$ Mana | Cost$ PayLife<1> | Produced$ C | RestrictValid$ Card.wasCastFromGraveyard | SpellDescription$ Add {C}. Spend this mana only to cast a spell from your graveyard.
+DeckHas:Ability$Sacrifice & Ability$Mill
+DeckHints:Ability$Graveyard
+Oracle:Flying, trample\n{B}, Sacrifice another creature: Target player mills three cards.\nPay 1 life: Add {C}. Spend this mana only to cast a spell from your graveyard.

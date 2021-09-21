@@ -1,0 +1,8 @@
+Name:Bloodtithe Collector
+ManaCost:4 B
+Types:Creature Vampire Noble
+PT:3/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ X | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, if an opponent lost life this turn, each opponent discards a card.
+SVar:TrigDiscard:DB$ Discard | Mode$ TgtChoose | Defined$ Player.Opponent | NumCards$ 1
+SVar:X:Count$LifeOppsLostThisTurn
+Oracle:Flying\nWhen Bloodtithe Collector enters the battlefield, if an opponent lost life this turn, each opponent discards a card.

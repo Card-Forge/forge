@@ -1,0 +1,8 @@
+Name:Ardent Elementalist
+ManaCost:3 R
+Types:Creature Human Shaman
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target instant or sorcery card from your graveyard to your hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Instant.YouOwn,Sorcery.YouOwn | TgtPrompt$ Select target instant or sorcery card in your graveyard
+DeckNeeds:Type$Instant|Sorcery
+Oracle:When Ardent Elementalist enters the battlefield, return target instant or sorcery card from your graveyard to your hand.
