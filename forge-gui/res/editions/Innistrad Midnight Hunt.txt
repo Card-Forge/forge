@@ -411,3 +411,21 @@ Prerelease=6 Boosters, 1 RareMythic+
 389 U Infernal Grasp @Naomi Baker
 390 U Play with Fire @Svetlin Velinov
 391 U Join the Dance @Raoul Vitale
+
+[tokens]
+b_1_1_bat_flying
+b_2_2_zombie_decayed
+br_3_1_vampire_trample_lifelink_haste
+c_a_clue_draw
+g_1_2_spider_reach
+g_2_2_wolf
+g_3_3_insect
+g_4_4_beast
+g_x_x_treefolk_reach_total_lands
+g_x_y_ooze_types_graveyard
+r_1_1_devil_burn
+r_x_x_elemental_trample_grave_exile
+u_1_1_bird_flying_blockflying
+ub_x_x_zombie_menace
+w_1_1_human
+w_1_1_spirit_flying

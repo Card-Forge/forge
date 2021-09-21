@@ -193,3 +193,22 @@ ScryfallCode=MIC
 185 R Temple of Plenty @Chris Ostrowski
 186 U Temple of the False God @James Zapata
 187 U Unclaimed Territory @Dimitar Marinski
+
+[tokens]
+b_0_0_zombie_army
+b_2_2_zombie
+b_2_2_zombie_decayed
+c_0_1_eldrazi_spawn_sac
+c_a_clue_draw
+g_1_1_snake
+g_1_2_spider_reach
+g_2_2_wolf
+g_3_3_beast
+g_3_3_centaur
+g_3_3_elephant
+g_4_4_beast
+g_4_4_rhino_trample
+u_x_x_zombie
+w_1_1_human_soldier
+w_1_1_spirit_flying
+w_2_2_knight_vigilance
