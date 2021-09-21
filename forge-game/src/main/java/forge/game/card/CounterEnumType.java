@@ -321,6 +321,8 @@ public enum CounterEnumType {
 
     UNITY("UNITY", 242, 156, 255),
 
+    VALOR("VALOR", 252, 250, 222),
+
     VELOCITY("VELO", 255, 95, 138),
 
     VERSE("VERSE", 0, 237, 155),

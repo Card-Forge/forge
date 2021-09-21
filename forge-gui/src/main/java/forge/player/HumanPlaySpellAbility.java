@@ -237,7 +237,7 @@ public class HumanPlaySpellAbility {
     }
 
     private boolean announceValuesLikeX() {
-        if (ability.isCopied()) { return true; } //don't re-announce for spell copies
+        if (ability.isCopied() || ability.isWrapper()) { return true; } //don't re-announce for spell copies
 
         boolean needX = true;
         final Cost cost = ability.getPayCosts();

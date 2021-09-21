@@ -1,11 +1,8 @@
 package forge.ai.ability;
 
-import forge.ai.AiController;
-import forge.ai.AiPlayDecision;
-import forge.ai.ComputerUtilCost;
-import forge.ai.PlayerControllerAi;
-import forge.ai.SpellAbilityAi;
-import forge.ai.SpellApiToAi;
+import forge.ai.*;
+import forge.card.mana.ManaCost;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
@@ -45,6 +42,19 @@ public class ImmediateTriggerAi extends SpellAbilityAi {
 
         if (logic.equals("MaxX")) {
             sa.setXManaCostPaid(ComputerUtilCost.getMaxXValue(sa, ai));
+        }
+
+        if ("NumTimes".equals(sa.getParam("Announce"))) { // e.g. the Adversary cycle
+            ManaCost mkCost = sa.getPayCosts().getTotalMana();
+            ManaCost mCost = ManaCost.ZERO;
+            for (int i = 0; i < 10; i++) {
+                mCost = ManaCost.combine(mCost, mkCost);
+                ManaCostBeingPaid mcbp = new ManaCostBeingPaid(mCost);
+                if (!ComputerUtilMana.canPayManaCost(mcbp, sa, ai)) {
+                    sa.getHostCard().setSVar("NumTimes", "Number$" + i);
+                    break;
+                }
+            }
         }
 
         AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
