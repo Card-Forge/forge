@@ -9,7 +9,7 @@ import java.util.Map;
 
 import forge.ImageKeys;
 import forge.localinstance.properties.ForgeConstants;
-import forge.util.FileUtil;
+import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.Gdx;
@@ -57,9 +57,6 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.match.MatchController;
 import forge.toolbox.FList;
-import forge.util.CardTranslation;
-import forge.util.TextBounds;
-import forge.util.Utils;
 
 public class CardRenderer {
     public enum CardStackPosition {
@@ -573,6 +570,7 @@ public class CardRenderer {
         boolean canshow = MatchController.instance.mayView(card);
         boolean showsleeves = card.isFaceDown() && card.isInZone(EnumSet.of(ZoneType.Exile)); //fix facedown card image ie gonti lord of luxury
         Texture image = new RendererCachedCardImage(card, false).getImage( showAltState ? card.getAlternateState().getImageKey() : card.getCurrentState().getImageKey());
+        TextureRegion crack_overlay = FSkin.getCracks().get(card.getCrackOverlayInt());
         FImage sleeves = MatchController.getPlayerSleeve(card.getOwner());
         float radius = (h - w)/8;
         float croppedArea = isModernFrame(card) ? CROP_MULTIPLIER : 0.97f;
@@ -590,9 +588,9 @@ public class CardRenderer {
                 g.setAlphaComposite(oldAlpha);
             } else if (showsleeves) {
                 if (!card.isForeTold())
-                    g.drawCardImage(sleeves, x, y, w, h, card.wasDestroyed());
+                    g.drawCardImage(sleeves, crack_overlay, x, y, w, h, card.wasDestroyed(), card.getDamage() > 0);
                 else
-                    g.drawCardImage(image, x, y, w, h, card.wasDestroyed());
+                    g.drawCardImage(image, crack_overlay, x, y, w, h, card.wasDestroyed(), card.getDamage() > 0);
             } else {
                 if(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON)
                         && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane()) && rotate){
@@ -610,19 +608,19 @@ public class CardRenderer {
                 } else {
                     if (Forge.enableUIMask.equals("Full") && canshow) {
                         if (ImageCache.isBorderlessCardArt(image))
-                            g.drawCardImage(image, x, y, w, h, card.wasDestroyed());
+                            g.drawCardImage(image, crack_overlay, x, y, w, h, card.wasDestroyed(), card.getDamage() > 0);
                         else {
                             boolean t = (card.getCurrentState().getOriginalColors() != card.getCurrentState().getColors()) || card.getCurrentState().hasChangeColors();
                             g.drawBorderImage(ImageCache.getBorderImage(image.toString(), canshow), ImageCache.borderColor(image), ImageCache.getTint(card, image), x, y, w, h, t); //tint check for changed colors
-                            g.drawCardImage(ImageCache.croppedBorderImage(image), x + radius / 2.4f-minusxy, y + radius / 2-minusxy, w * croppedArea, h * croppedArea, card.wasDestroyed());
+                            g.drawCardImage(ImageCache.croppedBorderImage(image), crack_overlay, x + radius / 2.4f-minusxy, y + radius / 2-minusxy, w * croppedArea, h * croppedArea, card.wasDestroyed(), card.getDamage() > 0);
                         }
                     } else if (Forge.enableUIMask.equals("Crop") && canshow) {
-                        g.drawCardImage(ImageCache.croppedBorderImage(image), x, y, w, h, card.wasDestroyed());
+                        g.drawCardImage(ImageCache.croppedBorderImage(image), crack_overlay, x, y, w, h, card.wasDestroyed(), card.getDamage() > 0);
                     } else {
                         if (canshow)
-                            g.drawCardImage(image, x, y, w, h, card.wasDestroyed());
+                            g.drawCardImage(image, crack_overlay, x, y, w, h, card.wasDestroyed(), card.getDamage() > 0);
                         else // draw card back sleeves
-                            g.drawCardImage(sleeves, x, y, w, h, card.wasDestroyed());
+                            g.drawCardImage(sleeves, crack_overlay, x, y, w, h, card.wasDestroyed(), card.getDamage() > 0);
                     }
                 }
             }

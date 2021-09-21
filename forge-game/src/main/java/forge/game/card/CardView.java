@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 import forge.game.spellability.SpellAbility;
+import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
@@ -36,10 +37,6 @@ import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 import forge.trackable.Tracker;
-import forge.util.CardTranslation;
-import forge.util.Lang;
-import forge.util.Localizer;
-import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 
 public class CardView extends GameEntityView {
@@ -311,12 +308,19 @@ public class CardView extends GameEntityView {
         state.updateLoyalty(c);
     }
 
+    public int getCrackOverlayInt() {
+        if (get(TrackableProperty.CrackOverlay) == null)
+            return 0;
+        return get(TrackableProperty.CrackOverlay);
+    }
     public int getDamage() {
         return get(TrackableProperty.Damage);
     }
     void updateDamage(Card c) {
         set(TrackableProperty.Damage, c.getDamage());
         updateLethalDamage(c);
+        //update CrackOverlay (currently 16 overlays)
+        set(TrackableProperty.CrackOverlay, c.getDamage() > 0 ? MyRandom.getRandom().nextInt(16) : 0);
     }
 
     public int getAssignedDamage() {

@@ -580,7 +580,7 @@ public class MatchScreen extends FScreen {
     }
 
     private class BGAnimation extends ForgeAnimation {
-        private static final float DURATION = 0.2f;
+        private static final float DURATION = 1.5f;
         private float progress = 0;
         private boolean finished;
 
@@ -593,7 +593,7 @@ public class MatchScreen extends FScreen {
                 percentage = 1;
             }
             g.setAlphaComposite(percentage);
-            g.drawImage(image, x, y, w, h, darkoverlay);
+            g.drawGrayTransitionImage(image, x, y, w, h, darkoverlay, 1-(percentage*1));
             g.setAlphaComposite(oldAlpha);
         }
 
@@ -643,7 +643,7 @@ public class MatchScreen extends FScreen {
                             bgFullWidth = w;
                             bgHeight = scaledbgHeight;
                         }
-                        if (bgAnimation != null && !isGameFast) {
+                        if (bgAnimation != null && !isGameFast && !MatchController.instance.getGameView().isMatchOver()) {
                             bgAnimation.drawBackground(g, FSkinTexture.valueOf(imageName), x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight, true);
                         } else {
                             g.drawImage(FSkinTexture.valueOf(imageName), x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight, true);
