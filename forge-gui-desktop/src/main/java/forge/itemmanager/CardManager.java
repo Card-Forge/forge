@@ -233,7 +233,7 @@ public class CardManager extends ItemManager<PaperCard> {
 
         if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.LOAD_HISTORIC_FORMATS)) {
             JMenu blocks = GuiUtils.createMenu(localizer.getMessage("lblBlock"));
-            final List<GameFormat> blockFormats = FModel.getBlockFormats();
+            final Iterable<GameFormat> blockFormats = FModel.getFormats().getBlockList();
             for (final GameFormat f : blockFormats) {
                 GuiUtils.addMenuItem(blocks, f.getName(), null, new Runnable() {
                     @Override
