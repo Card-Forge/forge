@@ -3,7 +3,6 @@ package forge.ai;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.*;
-
 import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.AnimateAi;
 import forge.card.ColorSet;
@@ -1533,6 +1532,19 @@ public class ComputerUtilMana {
                 cost.addManaCost(mkCost);
             }
             sa.setSVar("Multikicker", String.valueOf(timesMultikicked));
+        }
+
+        if ("NumTimes".equals(sa.getParam("Announce"))) { // e.g. the Adversary cycle
+            ManaCost mkCost = sa.getPayCosts().getTotalMana();
+            ManaCost mCost = ManaCost.ZERO;
+            for (int i = 0; i < 10; i++) {
+                mCost = ManaCost.combine(mCost, mkCost);
+                ManaCostBeingPaid mcbp = new ManaCostBeingPaid(mCost);
+                if (!ComputerUtilMana.canPayManaCost(mcbp, sa, sa.getActivatingPlayer())) {
+                    sa.getHostCard().setSVar("NumTimes", "Number$" + i);
+                    break;
+                }
+            }
         }
 
         if (test && sa.isSpell()) {
