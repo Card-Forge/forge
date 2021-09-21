@@ -1,0 +1,27 @@
+Name:Ludevic, Necrogenius
+ManaCost:U B
+Types:Legendary Creature Human Wizard
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, mill a card.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, mill a card.
+SVar:TrigMill:DB$ Mill | NumCards$ 1 | Defined$ You
+A:AB$ SetState | Cost$ XCantBe0 X U U B B ExileFromGrave<X/Creature/creature cards> | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | SpellDescription$ Transform CARDNAME. X can't be zero. Activate only as a sorcery.
+AlternateMode:DoubleFaced
+SVar:X:Count$xPaid
+DeckHas:Ability$Mill
+DeckHints:Ability$Graveyard
+Oracle:Whenever Ludevic, Necrogenius enters the battlefield or attacks, mill a card.\n{X}{U}{U}{B}{B}, Exile X creature cards from your graveyard: Transform Ludevic, Necrogenius. X can't be zero. Activate only as a sorcery.
+
+ALTERNATE
+
+Name:Olag, Ludevic's Hubris
+ManaCost:no cost
+Colors:blue,black
+Types:Legendary Creature Zombie
+PT:4/4
+R:Event$ Transform | ValidCard$ Card.Self | ReplaceWith$ Copy | Description$ As this creature transforms into CARDNAME, it becomes a copy of a creature card exiled with it, except its name is Olag, Ludevic’s Hubris, it's 4/4, and it's a legendary blue and black Zombie in addition to its other colors and types. Put a number of +1/+1 counters on NICKNAME equal to the number of creature cards exiled with it.
+SVar:Copy:DB$ Clone | Choices$ Creature.ExiledWithSource | ChoiceZone$ Exile | NewName$ Olag, Ludevic's Hubris | SetPower$ 4 | SetToughness$ 4 | AddTypes$ Legendary & Zombie | AddColors$ Blue & Black | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | CounterNum$ Y | CounterType$ P1P1
+SVar:Y:Count$ValidExile Creature.ExiledWithSource
+DeckHas:Ability$Counters
+Oracle:As this creature transforms into Olag, Ludevic's Hubris, it becomes a copy of a creature card exiled with it, except its name is Olag, Ludevic's Hubris, it's 4/4, and it's a legendary blue and black Zombie in addition to its other colors and types. Put a number of +1/+1 counters on Olag equal to the number of creature cards exiled with it.

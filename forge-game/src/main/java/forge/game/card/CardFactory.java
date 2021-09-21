@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
@@ -28,12 +29,7 @@ import com.google.common.collect.Lists;
 
 import forge.ImageKeys;
 import forge.StaticData;
-import forge.card.CardRules;
-import forge.card.CardSplitType;
-import forge.card.CardStateName;
-import forge.card.CardType;
-import forge.card.ICardFace;
-import forge.card.MagicColor;
+import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.game.CardTraitBase;
 import forge.game.Game;
@@ -601,6 +597,11 @@ public class CardFactory {
             keywords.addAll(Arrays.asList(sa.getParam("AddKeywords").split(" & ")));
         }
 
+        if (sa.hasParam("AddColors")) {
+            shortColors = CardUtil.getShortColorsString(Arrays.asList(sa.getParam("AddColors")
+                    .split(" & ")));
+        }
+
         if (sa.hasParam("RemoveKeywords")) {
             removeKeywords.addAll(Arrays.asList(sa.getParam("RemoveKeywords").split(" & ")));
         }
@@ -655,6 +656,10 @@ public class CardFactory {
                 state.setName(originalState.getName());
             } else if (newName != null) {
                 state.setName(newName);
+            }
+
+            if (sa.hasParam("AddColors")) {
+                state.addColor(shortColors);
             }
 
             if (sa.hasParam("SetColor")) {

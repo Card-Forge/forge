@@ -101,7 +101,7 @@ public class CostExile extends CostPartWithList {
             return String.format("Exile %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc));
         }
 
-        if (!desc.equals("Card") && !desc.endsWith("card")) {
+        if (!desc.equals("Card") && !desc.contains("card")) {
             if (this.sameZone) {
                 return String.format("Exile card %s from the same %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), origin);
             }

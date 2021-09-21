@@ -166,6 +166,15 @@ public class CardState extends GameObject implements IHasSVars {
     public final byte getColor() {
         return color;
     }
+    public final void addColor(final String color) {
+        final ManaCostParser parser = new ManaCostParser(color);
+        final ManaCost cost = new ManaCost(parser);
+        addColor(cost.getColorProfile());
+    }
+    public final void addColor(final byte color) {
+        this.color |= color;
+        view.updateColors(card);
+    }
     public final void setColor(final String color) {
         final ManaCostParser parser = new ManaCostParser(color);
         final ManaCost cost = new ManaCost(parser);
