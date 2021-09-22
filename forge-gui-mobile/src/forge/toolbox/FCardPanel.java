@@ -113,6 +113,9 @@ public class FCardPanel extends FDisplayObject {
         if (!animate || MatchController.instance.isGameFast() || MatchController.instance.getGameView().isMatchOver()) {
             //don't animate if game is fast or match is over
             rotateTransform(g, x, y, w, h, edgeOffset, false);
+            card.updateNeedsTapAnimation(false);
+            card.updateNeedsUntapAnimation(false);
+            card.updateNeedsTransformAnimation(false);
         } else {
             //card destroy animation
             if (card.wasDestroyed()) {
@@ -197,7 +200,7 @@ public class FCardPanel extends FDisplayObject {
         }
     }
     private class CardTransformAnimation extends ForgeAnimation {
-        private static final float DURATION = 0.14f;
+        private static final float DURATION = 0.18f;
         private float progress = 0;
 
         private void drawCard(Graphics g, CardView card, float x, float y, float w, float h) {
@@ -236,7 +239,7 @@ public class FCardPanel extends FDisplayObject {
         }
     }
     private class CardUnTapAnimation extends ForgeAnimation {
-        private static final float DURATION = 0.14f;
+        private static final float DURATION = 0.18f;
         private float progress = 0;
         private void drawCard(Graphics g, CardView card, float x, float y, float w, float h, float edgeOffset) {
             float percentage = progress / DURATION;
@@ -262,7 +265,7 @@ public class FCardPanel extends FDisplayObject {
         }
     }
     private class CardTapAnimation extends ForgeAnimation {
-        private static final float DURATION = 0.14f;
+        private static final float DURATION = 0.18f;
         private float progress = 0;
         private void drawCard(Graphics g, CardView card, float x, float y, float w, float h, float edgeOffset, float angle) {
             float percentage = progress / DURATION;
