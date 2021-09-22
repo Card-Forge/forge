@@ -447,6 +447,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return setState(state, updateView, false);
     }
     public boolean setState(final CardStateName state, boolean updateView, boolean forceUpdate) {
+        boolean rollback = state == CardStateName.Original
+                && (currentStateName == CardStateName.Flipped || currentStateName == CardStateName.Transformed);
+        boolean transform = state == CardStateName.Flipped || state == CardStateName.Transformed || state == CardStateName.Meld;
+        boolean needsTransformAnimation = transform || rollback;
         // faceDown has higher priority over clone states
         // while text change states doesn't apply while the card is faceDown
         if (state != CardStateName.FaceDown) {
@@ -487,6 +491,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
         if (updateView) {
             view.updateState(this);
+            view.updateNeedsTransformAnimation(needsTransformAnimation);
 
             final Game game = getGame();
             if (game != null) {
@@ -4085,10 +4090,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         view.updateTapped(this);
     }
 
-    public final void tap() {
-        tap(false);
+    public final void tap(boolean tapAnimation) {
+        tap(false, tapAnimation);
     }
-    public final void tap(boolean attacker) {
+    public final void tap(boolean attacker, boolean tapAnimation) {
         if (tapped) { return; }
 
         // Run replacement effects
@@ -4100,10 +4105,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         getGame().getTriggerHandler().runTrigger(TriggerType.Taps, runParams, false);
 
         setTapped(true);
+        view.updateNeedsTapAnimation(tapAnimation);
         getGame().fireEvent(new GameEventCardTapped(this, true));
     }
 
-    public final void untap() {
+    public final void untap(boolean untapAnimation) {
         if (!tapped) { return; }
 
         // Run Replacement effects
@@ -4116,6 +4122,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
         runUntapCommands();
         setTapped(false);
+        view.updateNeedsUntapAnimation(untapAnimation);
         getGame().fireEvent(new GameEventCardTapped(this, false));
     }
 

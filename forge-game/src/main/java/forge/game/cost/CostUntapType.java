@@ -94,7 +94,7 @@ public class CostUntapType extends CostPartWithList {
 
     @Override
     protected Card doPayment(SpellAbility ability, Card targetCard) {
-        targetCard.untap();
+        targetCard.untap(true);
         return targetCard;
     }
 

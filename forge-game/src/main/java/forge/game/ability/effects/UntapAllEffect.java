@@ -47,7 +47,7 @@ public class UntapAllEffect extends SpellAbilityEffect {
 
         boolean remember = sa.hasParam("RememberUntapped");
         for (Card c : list) {
-            c.untap();
+            c.untap(true);
             if (remember) {
                 card.addRemembered(c);
             }

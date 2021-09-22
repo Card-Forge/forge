@@ -45,9 +45,9 @@ public class TapOrUntapEffect extends SpellAbilityEffect {
                         !tgtC.getController().equals(sa.getActivatingPlayer()) );
 
                 if (tap) {
-                    tgtC.tap();
+                    tgtC.tap(true);
                 } else {
-                    tgtC.untap();
+                    tgtC.untap(true);
                 }
             }
         }

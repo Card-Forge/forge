@@ -830,6 +830,30 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.HasBackSide, hasBackSide);
         set(TrackableProperty.BackSideName, stateName);
     }
+    public boolean needsUntapAnimation() {
+        if (get(TrackableProperty.NeedsUntapAnimation) == null)
+            return false;
+        return get(TrackableProperty.NeedsUntapAnimation);
+    }
+    public void updateNeedsUntapAnimation(boolean value) {
+        set(TrackableProperty.NeedsUntapAnimation, value);
+    }
+    public boolean needsTapAnimation() {
+        if (get(TrackableProperty.NeedsTapAnimation) == null)
+            return false;
+        return get(TrackableProperty.NeedsTapAnimation);
+    }
+    public void updateNeedsTapAnimation(boolean value) {
+        set(TrackableProperty.NeedsTapAnimation, value);
+    }
+    public boolean needsTransformAnimation() {
+        if (get(TrackableProperty.NeedsTransformAnimation) == null)
+            return false;
+        return get(TrackableProperty.NeedsTransformAnimation);
+    }
+    public void updateNeedsTransformAnimation(boolean value) {
+        set(TrackableProperty.NeedsTransformAnimation, value);
+    }
     void updateState(Card c) {
         updateName(c);
         updateZoneText(c);

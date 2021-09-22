@@ -85,7 +85,7 @@ public class CostUntap extends CostPart {
 
     @Override
     public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability) {
-        ability.getHostCard().untap();
+        ability.getHostCard().untap(true);
         return true;
     }
     

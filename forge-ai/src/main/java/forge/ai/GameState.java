@@ -1314,7 +1314,7 @@ public abstract class GameState {
 
             for (final String info : cardinfo) {
                 if (info.startsWith("Tapped")) {
-                    c.tap();
+                    c.tap(false);
                 } else if (info.startsWith("Renowned")) {
                     c.setRenowned(true);
                 } else if (info.startsWith("Monstrous")) {

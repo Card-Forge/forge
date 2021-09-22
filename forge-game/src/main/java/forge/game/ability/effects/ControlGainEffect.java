@@ -65,7 +65,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
             game.getAction().controllerChangeZoneCorrection(c);
 
             if (tapOnLose) {
-                c.tap();
+                c.tap(false);
             }
         }
         host.removeGainControlTargets(c);
@@ -124,7 +124,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
             }
 
             if (bUntap) {
-                tgtC.untap();
+                tgtC.untap(true);
             }
 
             final List<String> kws = Lists.newArrayList();
@@ -219,7 +219,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
      * <p>
      * getLoseControlCommand.
      * </p>
-     * 
+     *
      * @param i
      *            a int.
      * @param originalController
