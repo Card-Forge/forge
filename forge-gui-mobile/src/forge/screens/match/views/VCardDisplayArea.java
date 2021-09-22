@@ -283,6 +283,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
         public void updateCard(final CardView card) {
             setTapped(card.isTapped());
+            setNeedsTransform(card.needsTransformAnimation());
 
             attachedPanels.clear();
 

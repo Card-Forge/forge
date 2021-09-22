@@ -572,6 +572,7 @@ public class MatchScreen extends FScreen {
         }
         else { //ensure card not on battlefield is reset such that it no longer thinks it's on the battlefield
             pnl.setTapped(false);
+            pnl.setNeedsTransform(false);
             pnl.getAttachedPanels().clear();
             pnl.setAttachedToPanel(null);
             pnl.setPrevPanelInStack(null);
