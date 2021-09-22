@@ -448,7 +448,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         boolean change = false;
         // rule 118.5
         if (life > newLife) {
-            change = (loseLife(life - newLife) > 0);
+            change = loseLife(life - newLife, false, false) > 0;
         }
         else if (newLife > life) {
             change = gainLife(newLife - life, source);
@@ -493,9 +493,8 @@ public class Player extends GameEntity implements Comparable<Player> {
             // check if this is still the affected player
             if (this.equals(repParams.get(AbilityKey.Affected))) {
                 lifeGain = (int) repParams.get(AbilityKey.LifeGained);
-                // negative update means life loss
-                if (lifeGain < 0) {
-                    this.loseLife(-lifeGain);
+                // there is nothing that changes lifegain into lifeloss this way
+                if (lifeGain <= 0) {
                     return false;
                 }
             } else {
@@ -541,10 +540,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         return !hasLost() && !hasKeyword("You can't gain life.") && !hasKeyword("Your life total can't change.");
     }
 
-    public final int loseLife(final int toLose) {
-        return loseLife(toLose, false);
-    }
-    public final int loseLife(final int toLose, final boolean manaBurn) {
+    public final int loseLife(int toLose, final boolean damage, final boolean manaBurn) {
         int lifeLost = 0;
         if (!canLoseLife()) {
             return 0;
@@ -554,10 +550,28 @@ public class Player extends GameEntity implements Comparable<Player> {
             // Run applicable replacement effects
             final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
             repParams.put(AbilityKey.Result, oldLife-toLose);
-            if (game.getReplacementHandler().run(ReplacementType.LifeReduced, repParams)
-                    != ReplacementResult.NotReplaced) {
+            repParams.put(AbilityKey.IsDamage, damage);
+
+            switch (getGame().getReplacementHandler().run(ReplacementType.LifeReduced, repParams)) {
+            case NotReplaced:
+                break;
+            case Updated:
+                // check if this is still the affected player
+                if (this.equals(repParams.get(AbilityKey.Affected))) {
+                    int result = (int) repParams.get(AbilityKey.Result);
+                    toLose = oldLife - result;
+                    // there is nothing that changes lifegain into lifeloss this way
+                    if (toLose <= 0) {
+                        return 0;
+                    }
+                } else {
+                    return 0;
+                }
+                break;
+            default:
                 return 0;
             }
+
             life -= toLose;
             //for Avatar animation
             view.setAvatarWasDamaged(true);
@@ -608,7 +622,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             return false;
         }
 
-        loseLife(lifePayment);
+        loseLife(lifePayment, false, false);
 
         // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
@@ -656,17 +670,8 @@ public class Player extends GameEntity implements Comparable<Player> {
             addPoisonCounters(amount, source, counterTable);
         }
         else if (!hasKeyword("Damage doesn't cause you to lose life.")) {
-            // Worship does not reduce the damage dealt but changes the effect
-            // of the damage
-            if (hasKeyword("DamageLifeThreshold:7") && life - 7 <= amount) {
-                // only active if life is over 7, so no bad thing
-                loseLife(Math.min(amount, life - 7));
-            } else if (hasKeyword("DamageLifeThreshold:1") && life <= amount) {
-                loseLife(Math.min(amount, life - 1));
-            } else {
-                // rule 118.2. Damage dealt to a player normally causes that player to lose that much life.
-                loseLife(amount);
-            }
+            // rule 118.2. Damage dealt to a player normally causes that player to lose that much life.
+            loseLife(amount, true, false);
         }
 
         //Oathbreaker, Tiny Leaders, and Brawl ignore commander damage rule
@@ -720,11 +725,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final int staticReplaceDamage(final int damage, final Card source, final boolean isCombat) {
         int restDamage = damage;
 
-        if (hasKeyword("DamageLifeThreshold:7")) {
-            restDamage = Math.min(restDamage, life - 7);
-        } else if (hasKeyword("DamageLifeThreshold:1")) {
-            restDamage = Math.min(restDamage, life - 1);
-        }
+        // TODO handle life loss replacement
 
         for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
             if (c.getName().equals("Sulfuric Vapors")) {

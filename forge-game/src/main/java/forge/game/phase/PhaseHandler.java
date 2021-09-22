@@ -478,7 +478,7 @@ public class PhaseHandler implements java.io.Serializable {
             boolean manaBurns = game.getRules().hasManaBurn() ||
                     (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.manaBurn));
             if (manaBurns) {
-                p.loseLife(burn, true);
+                p.loseLife(burn, false, true);
             }
         }
 

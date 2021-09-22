@@ -30,6 +30,12 @@ public class ReplaceLifeReduced extends ReplacementEffect {
         if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Affected))) {
             return false;
         }
+
+        if (hasParam("IsDamage")) {
+            if (getParam("IsDamage").equals("True") != ((Boolean) runParams.get(AbilityKey.IsDamage))) {
+                return false;
+            }
+        }
         if (hasParam("Result")) {
             final int n = (Integer)runParams.get(AbilityKey.Result);
             String comparator = getParam("Result");
