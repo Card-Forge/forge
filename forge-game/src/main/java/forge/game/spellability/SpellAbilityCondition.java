@@ -312,8 +312,13 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             return false;
         }
 
-        if (this.isPlayerTurn() && !phase.isPlayerTurn(activator)) {
-            return false;
+        if (this.isPlayerTurn()) {
+            boolean b = !sa.getParam("ConditionPlayerTurn").equals("False");
+            if (!b && phase.isPlayerTurn(activator)) {
+                return false;
+            } else if (b && !phase.isPlayerTurn((activator))) {
+                return false;
+            }
         }
 
         if (this.isOpponentTurn() && !phase.getPlayerTurn().isOpponentOf(activator)) {
