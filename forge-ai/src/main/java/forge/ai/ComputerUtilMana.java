@@ -63,7 +63,7 @@ public class ComputerUtilMana {
         return payManaCost(sa, ai, false, 0, true);
     }
     private static boolean payManaCost(final SpellAbility sa, final Player ai, final boolean test, final int extraMana, boolean checkPlayable) {
-        ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(sa, test, extraMana);
+        ManaCostBeingPaid cost = calculateManaCost(sa, test, extraMana);
         return payManaCost(cost, sa, ai, test, checkPlayable);
     }
 
@@ -81,7 +81,7 @@ public class ComputerUtilMana {
      * Return the number of colors used for payment for Converge
      */
     public static int getConvergeCount(final SpellAbility sa, final Player ai) {
-        ManaCostBeingPaid cost = ComputerUtilMana.calculateManaCost(sa, true, 0);
+        ManaCostBeingPaid cost = calculateManaCost(sa, true, 0);
         if (payManaCost(cost, sa, ai, true, true)) {
             return cost.getSunburst();
         }
@@ -608,7 +608,7 @@ public class ComputerUtilMana {
         }
 
         // arrange all mana abilities by color produced.
-        final ListMultimap<Integer, SpellAbility> manaAbilityMap = ComputerUtilMana.groupSourcesByManaColor(ai, true);
+        final ListMultimap<Integer, SpellAbility> manaAbilityMap = groupSourcesByManaColor(ai, true);
         if (manaAbilityMap.isEmpty()) {
             refundMana(manaSpentToPay, ai, sa);
 
@@ -617,7 +617,7 @@ public class ComputerUtilMana {
         }
 
         // select which abilities may be used for each shard
-        Multimap<ManaCostShard, SpellAbility> sourcesForShards = ComputerUtilMana.groupAndOrderToPayShards(ai, manaAbilityMap, cost);
+        Multimap<ManaCostShard, SpellAbility> sourcesForShards = groupAndOrderToPayShards(ai, manaAbilityMap, cost);
 
         sortManaAbilities(sourcesForShards, sa);
 
@@ -919,7 +919,7 @@ public class ComputerUtilMana {
             final SpellAbility sa, final Player ai, final boolean test, final boolean checkPlayable,
             List<Mana> manaSpentToPay, final boolean hasConverge, final boolean ignoreColor, final boolean ignoreType) {
         // arrange all mana abilities by color produced.
-        final ListMultimap<Integer, SpellAbility> manaAbilityMap = ComputerUtilMana.groupSourcesByManaColor(ai, checkPlayable);
+        final ListMultimap<Integer, SpellAbility> manaAbilityMap = groupSourcesByManaColor(ai, checkPlayable);
         if (manaAbilityMap.isEmpty()) {
             // no mana abilities, bailing out
             refundMana(manaSpentToPay, ai, sa);
@@ -931,7 +931,7 @@ public class ComputerUtilMana {
         }
 
         // select which abilities may be used for each shard
-        ListMultimap<ManaCostShard, SpellAbility> sourcesForShards = ComputerUtilMana.groupAndOrderToPayShards(ai, manaAbilityMap, cost);
+        ListMultimap<ManaCostShard, SpellAbility> sourcesForShards = groupAndOrderToPayShards(ai, manaAbilityMap, cost);
         if (hasConverge) {
             // add extra colors for paying converge
             final int unpaidColors = cost.getUnpaidColors() + cost.getColorsPaid() ^ ManaCostShard.COLORS_SUPERPOSITION;
@@ -1540,7 +1540,7 @@ public class ComputerUtilMana {
             for (int i = 0; i < 10; i++) {
                 mCost = ManaCost.combine(mCost, mkCost);
                 ManaCostBeingPaid mcbp = new ManaCostBeingPaid(mCost);
-                if (!ComputerUtilMana.canPayManaCost(mcbp, sa, sa.getActivatingPlayer())) {
+                if (!canPayManaCost(mcbp, sa, sa.getActivatingPlayer())) {
                     sa.getHostCard().setSVar("NumTimes", "Number$" + i);
                     break;
                 }

@@ -78,7 +78,6 @@ public class AiProfileUtil {
 
         List<String> lines = FileUtil.readFile(buildFileName(profileName));
         for (String line : lines) {
-
             if (line.startsWith("#") || (line.length() == 0)) {
                 continue;
             }

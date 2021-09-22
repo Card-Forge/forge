@@ -26,7 +26,6 @@ public class CreatureEvaluator implements Function<Card, Integer> {
     public int evaluateCreature(final Card c) {
         return evaluateCreature(c, true, true);
     }
-
     public int evaluateCreature(final Card c, final boolean considerPT, final boolean considerCMC) {
         int value = 80;
         if (!c.isToken()) {

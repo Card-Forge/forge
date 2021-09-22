@@ -576,7 +576,7 @@ public class ComputerUtil {
         int count = 0;
 
         while (count < amount) {
-            Card prefCard = ComputerUtil.getCardPreference(ai, source, "SacCost", typeList);
+            Card prefCard = getCardPreference(ai, source, "SacCost", typeList);
             if (prefCard == null) {
                 prefCard = ComputerUtilCard.getWorstAI(typeList);
             }
@@ -1051,7 +1051,7 @@ public class ComputerUtil {
         }
 
         if (card.isCreature() && !cardState.hasKeyword(Keyword.DEFENDER)
-                && (cardState.hasKeyword(Keyword.HASTE) || ComputerUtil.hasACardGivingHaste(ai, true) || sa.isDash())) {
+                && (cardState.hasKeyword(Keyword.HASTE) || hasACardGivingHaste(ai, true) || sa.isDash())) {
             return true;
         }
 
@@ -1556,7 +1556,7 @@ public class ComputerUtil {
                 sub = sub.getSubAbility();
             }
             if (sa == null || (sa != spell && sa != sub)) {
-                Iterables.addAll(objects, ComputerUtil.predictThreatenedObjects(ai, sa, spell));
+                Iterables.addAll(objects, predictThreatenedObjects(ai, sa, spell));
             }
             if (top) {
                 break; // only evaluate top-stack
@@ -1892,7 +1892,7 @@ public class ComputerUtil {
             }
         }
 
-        Iterables.addAll(threatened, ComputerUtil.predictThreatenedObjects(aiPlayer, saviour, topStack.getSubAbility()));
+        Iterables.addAll(threatened, predictThreatenedObjects(aiPlayer, saviour, topStack.getSubAbility()));
         return threatened;
     }
 
@@ -1927,7 +1927,7 @@ public class ComputerUtil {
                 }
             }
         }
-        willDieFromSpell = !noStackCheck && ComputerUtil.predictThreatenedObjects(creature.getController(), excludeSa).contains(creature);
+        willDieFromSpell = !noStackCheck && predictThreatenedObjects(creature.getController(), excludeSa).contains(creature);
 
         return willDieInCombat || willDieFromSpell;
     }
@@ -1950,7 +1950,7 @@ public class ComputerUtil {
             List<Card> willBeKilled = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(Card card) {
-                    return card.isCreature() && ComputerUtil.predictCreatureWillDieThisTurn(ai, card, excludeSa);
+                    return card.isCreature() && predictCreatureWillDieThisTurn(ai, card, excludeSa);
                 }
             });
             list.removeAll(willBeKilled);

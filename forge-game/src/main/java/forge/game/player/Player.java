@@ -742,10 +742,10 @@ public class Player extends GameEntity implements Comparable<Player> {
                     restDamage += 2;
                 }
             } else if (c.getName().equals("Furnace of Rath") || c.getName().equals("Dictate of the Twin Gods")) {
-                restDamage += restDamage;
+                restDamage *= 2;
             } else if (c.getName().equals("Gratuitous Violence")) {
                 if (c.getController().equals(source.getController()) && source.isCreature()) {
-                    restDamage += restDamage;
+                    restDamage *= 2;
                 }
             } else if (c.getName().equals("Fire Servant")) {
                 if (c.getController().equals(source.getController()) && source.isRed()
