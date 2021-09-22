@@ -450,7 +450,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         boolean rollback = state == CardStateName.Original
                 && (currentStateName == CardStateName.Flipped || currentStateName == CardStateName.Transformed);
         boolean transform = state == CardStateName.Flipped || state == CardStateName.Transformed || state == CardStateName.Meld;
-        boolean updateNeedsTransform = transform || rollback;
+        boolean needsTransformAnimation = transform || rollback;
         // faceDown has higher priority over clone states
         // while text change states doesn't apply while the card is faceDown
         if (state != CardStateName.FaceDown) {
@@ -491,7 +491,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
         if (updateView) {
             view.updateState(this);
-            view.updateNeedsTransformAnimation(transform);
+            view.updateNeedsTransformAnimation(needsTransformAnimation);
 
             final Game game = getGame();
             if (game != null) {
