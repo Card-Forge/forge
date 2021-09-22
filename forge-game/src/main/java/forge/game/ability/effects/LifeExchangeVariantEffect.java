@@ -69,7 +69,7 @@ public class LifeExchangeVariantEffect extends SpellAbilityEffect {
 
         if ((pLife > num) && p.canLoseLife()) {
             final int diff = pLife - num;
-            p.loseLife(diff);
+            p.loseLife(diff, false, false);
             source.addNewPT(power, toughness, timestamp);
             game.fireEvent(new GameEventCardStatsChanged(source));
         } else if ((num > pLife) && p.canGainLife()) {
