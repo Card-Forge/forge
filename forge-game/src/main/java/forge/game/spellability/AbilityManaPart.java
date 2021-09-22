@@ -308,9 +308,8 @@ public class AbilityManaPart implements java.io.Serializable {
             if (restriction.equals("CumulativeUpkeep")) {
                 if (sa.isCumulativeupkeep()) {
                     return true;
-                } else {
-                    continue;
                 }
+                continue;
             }
 
             if (restriction.startsWith("CostContainsX")) {
@@ -319,13 +318,20 @@ public class AbilityManaPart implements java.io.Serializable {
                 }
                 continue;
             }
+
+            if (restriction.equals("Disturb")) {
+                if (sa.isDisturb()) {
+                    return true;
+                }
+                continue;
+            }
+
             if (restriction.equals("MorphOrManifest")) {
                 if ((sa.isSpell() && sa.getHostCard().isCreature() && sa.isCastFaceDown())
                         || sa.isManifestUp() || sa.isMorphUp()) {
                     return true;
-                } else {
-                    continue;
                 }
+                continue;
             }
 
             if (sa.isValid(restriction, this.getSourceCard().getController(), this.getSourceCard(), null)) {

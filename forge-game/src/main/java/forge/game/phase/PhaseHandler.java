@@ -794,7 +794,6 @@ public class PhaseHandler implements java.io.Serializable {
 
             // Run this trigger once for each blocker
             for (final Card b : blockers) {
-
                 b.addBlockedThisTurn(a);
                 a.addBlockedByThisTurn(b);
 

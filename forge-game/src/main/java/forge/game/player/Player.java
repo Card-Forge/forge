@@ -3147,15 +3147,13 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         if (lostOwnership.contains(card)) {
             lostOwnership.remove(card);
-        }
-        else {
+        } else {
             gainedOwnership.add(card);
         }
 
         if (oldOwner.gainedOwnership.contains(card)) {
             oldOwner.gainedOwnership.remove(card);
-        }
-        else {
+        } else {
             oldOwner.lostOwnership.add(card);
         }
     }

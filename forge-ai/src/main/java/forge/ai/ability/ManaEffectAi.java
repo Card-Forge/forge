@@ -161,9 +161,10 @@ public class ManaEffectAi extends SpellAbilityAi {
             return false;
         }
 
-        String restrictValid = sa.hasParam("RestrictValid") ? sa.getParam("RestrictValid") : "Card";
+        String restrictValid = sa.getParamOrDefault("RestrictValid", "Card");
 
         CardCollection cardList = new CardCollection();
+        // TODO check other zones
         List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(ai.getCardsIn(ZoneType.Hand), ai);
         for (final SpellAbility testSa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, ai)) {
             ManaCost cost = testSa.getPayCosts().getTotalMana();
