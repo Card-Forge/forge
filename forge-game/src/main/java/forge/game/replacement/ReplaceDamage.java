@@ -139,7 +139,6 @@ public class ReplaceDamage extends ReplacementEffect {
         return true;
     }
 
-
     /* (non-Javadoc)
      * @see forge.card.replacement.ReplacementEffect#setReplacingObjects(java.util.HashMap, forge.card.spellability.SpellAbility)
      */

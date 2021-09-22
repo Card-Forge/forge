@@ -70,7 +70,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
 
     // This should be also usable by the AI to forecast an effect (so it must
     // not change the game state)
-    public int staticDamagePrevention(final int damage, final int possiblePrevention, final Card source, final boolean isCombat) {
+    public int staticDamagePrevention(int damage, final int possiblePrevention, final Card source, final boolean isCombat) {
         if (damage <= 0) {
             return 0;
         }
@@ -86,6 +86,10 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
             for (final ReplacementEffect re : ca.getReplacementEffects()) {
                 if (!re.getMode().equals(ReplacementType.DamageDone) ||
                         (!re.hasParam("PreventionEffect") && !re.hasParam("Prevent"))) {
+                    continue;
+                }
+                // Immortal Coil prevents the damage but has a similar negative effect
+                if ("Immortal Coil".equals(ca.getName())) {
                     continue;
                 }
                 if (!re.matchesValidParam("ValidSource", source)) {
@@ -104,10 +108,11 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
                 } else if (re.getOverridingAbility() != null) {
                     SpellAbility repSA = re.getOverridingAbility();
                     if (repSA.getApi() == ApiType.ReplaceDamage) {
-                        return Math.max(0, damage - AbilityUtils.calculateAmount(ca, repSA.getParam("Amount"), repSA));
+                        damage = Math.max(0, damage - AbilityUtils.calculateAmount(ca, repSA.getParam("Amount"), repSA));
                     }
+                } else {
+                    return 0;
                 }
-                return 0;
             }
         }
 

@@ -5239,13 +5239,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 }
             } else if (c.getName().equals("Furnace of Rath")) {
                 if (isCreature()) {
-                    restDamage += restDamage;
+                    restDamage *= 2;
                 }
             } else if (c.getName().equals("Dictate of the Twin Gods")) {
                 restDamage += restDamage;
             } else if (c.getName().equals("Gratuitous Violence")) {
                 if (c.getController().equals(source.getController()) && source.isCreature() && isCreature()) {
-                    restDamage += restDamage;
+                    restDamage *= 2;
                 }
             } else if (c.getName().equals("Fire Servant")) {
                 if (c.getController().equals(source.getController()) && source.isRed()
@@ -5418,7 +5418,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         CardState c = getCardForUi().states.get(state);
         return (c != null ? c.getImageKey() : "");
     }
-
 
     public final boolean isTributed() { return tributed; }
 

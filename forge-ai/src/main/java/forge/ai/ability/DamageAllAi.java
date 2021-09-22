@@ -157,7 +157,7 @@ public class  DamageAllAi extends SpellAbilityAi {
                         // || (ai.sa.getPayCosts(). ??? )
                         {
                             // would take zero damage, and hurt opponent, do it!
-                            if (ComputerUtilCombat.predictDamageTo(ai, dmg, source, false)<1) {
+                            if (ComputerUtilCombat.predictDamageTo(ai, dmg, source, false) < 1) {
                                 return 1;
                             }
                             // enemy is expected to die faster than AI from damage if repeated
