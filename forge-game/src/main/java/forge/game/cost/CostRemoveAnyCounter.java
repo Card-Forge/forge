@@ -62,7 +62,6 @@ public class CostRemoveAnyCounter extends CostPart {
 
     @Override
     public Integer getMaxAmountX(final SpellAbility ability, final Player payer) {
-
         final Card source = ability.getHostCard();
 
         CardCollectionView validCards = CardLists.getValidCards(payer.getCardsIn(ZoneType.Battlefield), this.getType().split(";"), payer, source, ability);

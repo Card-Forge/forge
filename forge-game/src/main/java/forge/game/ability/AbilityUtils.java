@@ -2055,8 +2055,7 @@ public class AbilityUtils {
                         count += i;
                     }
                 }
-            }
-            else {
+            } else {
                 count = c.getCounters(CounterType.getType(sq[1]));
             }
             return doXMath(count, expr, c, ctb);
