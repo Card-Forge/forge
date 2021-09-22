@@ -71,9 +71,9 @@ public class TapOrUntapAllEffect extends SpellAbilityEffect {
         for (final Card cad : validCards) {
             if (cad.isInPlay()) {
                 if (toTap) {
-                    cad.tap();
+                    cad.tap(true);
                 } else {
-                    cad.untap();
+                    cad.untap(true);
                 }
             }
         }

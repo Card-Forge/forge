@@ -81,6 +81,8 @@ public enum TrackableProperty {
     WasDestroyed(TrackableTypes.BooleanType),
     CrackOverlay(TrackableTypes.IntegerType),
     NeedsTransformAnimation(TrackableTypes.BooleanType),
+    NeedsUntapAnimation(TrackableTypes.BooleanType),
+    NeedsTapAnimation(TrackableTypes.BooleanType),
 
     ImprintedCards(TrackableTypes.CardViewCollectionType),
     HauntedBy(TrackableTypes.CardViewCollectionType),

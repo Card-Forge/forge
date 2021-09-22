@@ -274,7 +274,7 @@ public class CostAdjustment {
             sa.addTappedForConvoke(conv.getKey());
             cost.decreaseShard(conv.getValue(), 1);
             if (!test) {
-                conv.getKey().tap();
+                conv.getKey().tap(true);
                 if (!improvise) {
                     sa.getHostCard().addConvoked(conv.getKey());
                 }

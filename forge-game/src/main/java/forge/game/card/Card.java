@@ -4090,10 +4090,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         view.updateTapped(this);
     }
 
-    public final void tap() {
-        tap(false);
+    public final void tap(boolean tapAnimation) {
+        tap(false, tapAnimation);
     }
-    public final void tap(boolean attacker) {
+    public final void tap(boolean attacker, boolean tapAnimation) {
         if (tapped) { return; }
 
         // Run replacement effects
@@ -4105,10 +4105,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         getGame().getTriggerHandler().runTrigger(TriggerType.Taps, runParams, false);
 
         setTapped(true);
+        view.updateNeedsTapAnimation(tapAnimation);
         getGame().fireEvent(new GameEventCardTapped(this, true));
     }
 
-    public final void untap() {
+    public final void untap(boolean untapAnimation) {
         if (!tapped) { return; }
 
         // Run Replacement effects
@@ -4121,6 +4122,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
         runUntapCommands();
         setTapped(false);
+        view.updateNeedsUntapAnimation(untapAnimation);
         getGame().fireEvent(new GameEventCardTapped(this, false));
     }
 

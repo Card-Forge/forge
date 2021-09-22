@@ -2519,7 +2519,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     inp.showAndWait();
                     if (!inp.hasCancelled()) {
                         for (final Card c : inp.getSelected()) {
-                            c.tap();
+                            c.tap(true);
                         }
                     }
                 }
@@ -2545,7 +2545,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     inp.showAndWait();
                     if (!inp.hasCancelled()) {
                         for (final Card c : inp.getSelected()) {
-                            c.untap();
+                            c.untap(true);
                         }
                     }
                 }
