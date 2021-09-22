@@ -1,0 +1,7 @@
+Name:Stolen Vitality
+ManaCost:1 R
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 3 | NumDef$ 1 | SubAbility$ DBPump1 | SpellDescription$ Target creature gets +3/+1 until end of turn. If it's your turn, that creature gains trample until end of turn. Otherwise, it gains first strike until end of turn.
+SVar:DBPump1:DB$ Pump | Defined$ Targeted | KW$ Trample | SubAbility$ DBPump2 | ConditionPlayerTurn$ True | StackDescription$ If it's your turn, that creature gains trample until end of turn.
+SVar:DBPump2:DB$ Pump | Defined$ Targeted | KW$ First Strike | ConditionPlayerTurn$ False | StackDescription$ Otherwise, it gains first strike until end of turn.
+Oracle:Target creature gets +3/+1 until end of turn. If it's your turn, that creature gains trample until end of turn. Otherwise, it gains first strike until end of turn.
