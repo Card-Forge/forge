@@ -1,0 +1,9 @@
+Name:Bat Whisperer
+ManaCost:3 B
+Types:Creature Vampire
+PT:4/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, if an opponent lost life this turn, create a 1/1 black Bat creature token with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_bat_flying | TokenOwner$ You
+SVar:X:Count$LifeOppsLostThisTurn
+DeckHas:Ability$Token
+Oracle:When Bat Whisperer enters the battlefield, if an opponent lost life this turn, create a 1/1 black Bat creature token with flying.

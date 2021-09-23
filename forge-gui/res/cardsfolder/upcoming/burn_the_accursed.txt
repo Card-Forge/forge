@@ -1,0 +1,6 @@
+Name:Burn the Accursed
+ManaCost:4 R
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 5 | ReplaceDyingDefined$ Targeted | SubAbility$ DBDealDamage | StackDescription$ CARDNAME deals 5 damage to {c:Targeted} and 2 damage to {p:TargetedController}. If that creature would die this turn, exile it instead. | SpellDescription$ CARDNAME deals 5 damage to target creature and 2 damage to that creature's controller. If that creature would die this turn, exile it instead.
+SVar:DBDealDamage:DB$ DealDamage | NumDmg$ 2 | Defined$ TargetedController | StackDescription$ None
+Oracle:Burn the Accused deals 5 damage to target creature and 2 damage to that creature's controller. If that creature would die this turn, exile it instead.
