@@ -1,5 +1,7 @@
 package forge.game.ability.effects;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -134,6 +136,26 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                     choices = CardLists.getValidCards(choices, restrict, activator, host, sa);
                 }
                 if (choice != null) {
+                    chosenPool.add(choice);
+                }
+                chosen.addAll(chosenPool);
+            } else if (sa.hasParam("EachDifferentPower")) {
+                List<Integer> powers = new ArrayList<>();
+                CardCollection chosenPool = new CardCollection();
+                for (Card c : choices) {
+                    int pow = c.getNetPower();
+                    if (!powers.contains(pow)) {
+                        powers.add(c.getNetPower());
+                    }
+                }
+                Collections.sort(powers);
+                String re = sa.getParam("Choices");
+                re = re + (re.contains(".") ? "+powerEQ" : ".powerEQ");
+                for (int i : powers) {
+                    String restrict = re + i;
+                    CardCollection valids = CardLists.getValidCards(choices, restrict, activator, host, sa);
+                    Card choice = p.getController().chooseSingleEntityForEffect(valids, sa,
+                            Localizer.getInstance().getMessage("lblChooseCreatureWithXPower", i), false, null);
                     chosenPool.add(choice);
                 }
                 chosen.addAll(chosenPool);
