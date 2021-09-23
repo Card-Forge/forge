@@ -29,7 +29,7 @@ public class DrawEffect extends SpellAbilityEffect {
                 sb.append(" each");
             }
             sb.append(Lang.joinVerb(tgtPlayers, " draw")).append(" ");
-            sb.append(Lang.nounWithAmount(numCards, "card"));
+            sb.append(numCards == 1 ? "a card" : (Lang.getNumeral(numCards) + " cards"));
             sb.append(".");
         }
 

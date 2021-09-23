@@ -44,7 +44,7 @@ public class DiscardEffect extends SpellAbilityEffect {
             } else if (mode.equals("RevealDiscardAll")) {
                 sb.append("reveals their hand. Discard (");
             } else {
-                sb.append("discards (");
+                sb.append("discards ");
             }
 
             int numCards = 1;
@@ -62,10 +62,8 @@ public class DiscardEffect extends SpellAbilityEffect {
                     && sa.getSVar("X").equals("Remembered$Amount")) {
                 sb.append("that many");
             } else {
-                sb.append(numCards);
+                sb.append(numCards == 1 ? "a card" : (Lang.getNumeral(numCards) + " cards"));
             }
-
-            sb.append(")");
 
             if (mode.equals("RevealYouChoose")) {
                 sb.append(" to discard");
