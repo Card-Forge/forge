@@ -29,7 +29,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
             newController.add(sa.getActivatingPlayer());
         }
 
-        sb.append(newController).append(" gains control of");
+        sb.append(newController.get(0)).append(" gains control of");
 
         final CardCollectionView tgts = getDefinedCards(sa);
         if (tgts.isEmpty()) {
@@ -44,11 +44,39 @@ public class ControlGainEffect extends SpellAbilityEffect {
                 }
             }
         }
+        if (sa.hasParam("LoseControl")) {
+            String loseCont = sa.getParam("LoseControl");
+            if (loseCont.contains("EOT")) {
+                sb.append(" until end of turn");
+            } else if (loseCont.contains("Untap")) {
+                sb.append(" for as long as ").append(sa.getHostCard()).append(" remains tapped");
+            } else if (loseCont.contains("LoseControl")) {
+                sb.append(" for as long as you control ").append(sa.getHostCard());
+            } else if (loseCont.contains("LeavesPlay")) {
+                sb.append(" for as long as ").append(sa.getHostCard()).append( "remains on the battlefield");
+            } else if (loseCont.equals("StaticCommandCheck")) {
+                sb.append(" for as long as that creature remains enchanted");
+            } else if (loseCont.equals("UntilTheEndOfYourNextTurn")) {
+                sb.append(" until the end of your next turn");
+            }
+        }
         sb.append(".");
 
         if (sa.hasParam("Untap")) {
             sb.append(" Untap it.");
         }
+        final List<String> keywords = sa.hasParam("AddKWs") ? Arrays.asList(sa.getParam("AddKWs").split(" & ")) : null;
+        if (sa.hasParam("AddKWs")) {
+            sb.append(" It gains ");
+            for (int i = 0; i < keywords.size(); i++) {
+                sb.append(keywords.get(i).toLowerCase());
+                sb.append(keywords.size() > 2 && i+1 != keywords.size() ? ", " : "");
+                sb.append(keywords.size() == 2 && i == 0 ? " " : "");
+                sb.append(i+2 == keywords.size() ? "and " : "");
+            }
+            sb.append(" until end of turn.");
+        }
+
 
         return sb.toString();
     }
