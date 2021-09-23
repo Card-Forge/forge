@@ -179,7 +179,7 @@ public abstract class ItemView<T extends InventoryItem> {
      */
     protected void setUniqueCardsOnlyFilter() {
         this.uniqueCardsOnlyChkBox.setFont(ROW_FONT);
-        this.uniqueCardsOnlyChkBox.setToolTipText("Toggle whether to show unique cards only");
+        this.uniqueCardsOnlyChkBox.setToolTipText(localizer.getMessage("ttUniqueCardsOnly"));
         this.uniqueCardsOnlyChkBox.addChangeListener(new ChangeListener() {
             @Override public void stateChanged(final ChangeEvent arg0) {
                 final boolean wantUnique = uniqueCardsOnlyChkBox.isSelected();
