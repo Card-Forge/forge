@@ -89,7 +89,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                         }
                     }
                 }
-            } else if (sa.hasParam("WithTotalPower")){
+            } else if (sa.hasParam("WithTotalPower")) {
                 final int totP = AbilityUtils.calculateAmount(host, sa.getParam("WithTotalPower"), sa);
                 CardCollection negativeCreats = CardLists.filterLEPower(p.getCreaturesInPlay(), -1);
                 int negativeNum = Aggregates.sum(negativeCreats, CardPredicates.Accessors.fnGetNetPower);
@@ -97,9 +97,9 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                 CardCollection chosenPool = new CardCollection();
                 int chosenP = 0;
                 while (!creature.isEmpty()) {
-                    Card c = p.getController().chooseSingleEntityForEffect(creature, sa, 
+                    Card c = p.getController().chooseSingleEntityForEffect(creature, sa,
                             Localizer.getInstance().getMessage("lblSelectCreatureWithTotalPowerLessOrEqualTo", (totP - chosenP - negativeNum))
-                            + "\r\n(" + Localizer.getInstance().getMessage("lblSelected") + ":" + chosenPool + ")\r\n(" + Localizer.getInstance().getMessage("lblTotalPowerNum", chosenP) + ")", chosenP <= totP, null);
+                                    + "\r\n(" + Localizer.getInstance().getMessage("lblSelected") + ":" + chosenPool + ")\r\n(" + Localizer.getInstance().getMessage("lblTotalPowerNum", chosenP) + ")", chosenP <= totP, null);
                     if (c == null) {
                         if (p.getController().confirmAction(sa, PlayerActionConfirmMode.OptionalChoose, Localizer.getInstance().getMessage("lblCancelChooseConfirm"))) {
                             break;
@@ -112,6 +112,29 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                         creature = CardLists.filterLEPower(p.getCreaturesInPlay(), totP - chosenP - negativeNum);
                         creature.removeAll(chosenPool);
                     }
+                }
+                chosen.addAll(chosenPool);
+            } else if (sa.hasParam("WithDifferentPowers")) {
+                String restrict = sa.getParam("Choices");
+                CardCollection chosenPool = new CardCollection();
+                String title = Localizer.getInstance().getMessage("lblChooseCreature");
+                Card choice = null;
+                while (!choices.isEmpty() && chosenPool.size() < validAmount) {
+                    boolean optional = chosenPool.size() >= minAmount;
+                    CardCollection creature = (CardCollection) choices;
+                    if (!chosenPool.isEmpty()) {
+                        title = Localizer.getInstance().getMessage("lblChooseCreatureWithDiffPower");
+                    }
+                    choice = p.getController().chooseSingleEntityForEffect(creature, sa, title, optional, null);
+                    if (choice == null) {
+                        break;
+                    }
+                    chosenPool.add(choice);
+                    restrict = restrict + (restrict.contains(".") ? "+powerNE" : ".powerNE") + choice.getNetPower();
+                    choices = CardLists.getValidCards(choices, restrict, activator, host, sa);
+                }
+                if (choice != null) {
+                    chosenPool.add(choice);
                 }
                 chosen.addAll(chosenPool);
             } else if ((tgt == null) || p.canBeTargetedBy(sa)) {
