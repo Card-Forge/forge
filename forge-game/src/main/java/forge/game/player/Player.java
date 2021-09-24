@@ -1005,11 +1005,11 @@ public class Player extends GameEntity implements Comparable<Player> {
     // ================ POISON Merged =================================
     public final void addChangedKeywords(final List<String> addKeywords, final List<String> removeKeywords, final Long timestamp, final long staticId) {
         // if the key already exists - merge entries
-        KeywordsChange cks = new KeywordsChange(addKeywords, removeKeywords, false, false);
+        KeywordsChange cks = new KeywordsChange(addKeywords, removeKeywords, false);
         cks.addKeywordsToPlayer(this);
         if (!cks.getAbilities().isEmpty() || !cks.getTriggers().isEmpty() || !cks.getReplacements().isEmpty() || !cks.getStaticAbilities().isEmpty()) {
             getKeywordCard().addChangedCardTraits(
-                cks.getAbilities(), null, cks.getTriggers(), cks.getReplacements(), cks.getStaticAbilities(), false, false, false, timestamp, staticId);
+                cks.getAbilities(), null, cks.getTriggers(), cks.getReplacements(), cks.getStaticAbilities(), false, false, timestamp, staticId);
         }
         changedKeywords.put(timestamp, staticId, cks);
         updateKeywords();

@@ -1474,7 +1474,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             SpellAbility sa = AbilityFactory.getAbility(abStr, this);
             sa.setIntrinsic(false);
 
-            addChangedCardTraits(ImmutableList.of(sa), null, null, null, null, true, false, false, timestamp, 0);
+            addChangedCardTraits(ImmutableList.of(sa), null, null, null, null, true, false, timestamp, 0);
             return true;
         }
         if (!counterType.isKeywordCounter()) {
@@ -1484,7 +1484,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
         long timestamp = game.getNextTimestamp();
         counterTypeTimestamps.put(counterType, timestamp);
-        addChangedCardKeywords(ImmutableList.of(counterType.toString()), null, false, false, timestamp, 0, updateView);
+        addChangedCardKeywords(ImmutableList.of(counterType.toString()), null, false, timestamp, 0, updateView);
         return true;
     }
 
@@ -2814,8 +2814,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public boolean hasRemoveIntrinsic() {
-        for (final CardTraitChanges ck : changedCardTraits.values()) {
-            if (ck.isRemoveIntrinsic()) {
+        for (final CardChangedType ct : this.changedCardTypes.values()) {
+            if (ct.isRemoveLandTypes()) {
                 return true;
             }
         }
@@ -4128,9 +4128,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public final void addChangedCardTraits(Collection<SpellAbility> spells, Collection<SpellAbility> removedAbilities,
             Collection<Trigger> trigger, Collection<ReplacementEffect> replacements, Collection<StaticAbility> statics,
-            boolean removeAll, boolean removeNonMana, boolean removeIntrinsic, long timestamp, long staticId) {
+            boolean removeAll, boolean removeNonMana, long timestamp, long staticId) {
         changedCardTraits.put(timestamp, staticId, new CardTraitChanges(
-            spells, removedAbilities, trigger, replacements, statics, removeAll, removeNonMana, removeIntrinsic
+            spells, removedAbilities, trigger, replacements, statics, removeAll, removeNonMana
         ));
         // update view
         updateAbilityTextForView();
@@ -4209,12 +4209,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final void addChangedCardKeywords(final List<String> keywords, final List<String> removeKeywords,
-            final boolean removeAllKeywords, final boolean removeIntrinsicKeywords, final long timestamp, final long staticId) {
-        addChangedCardKeywords(keywords, removeKeywords, removeAllKeywords, removeIntrinsicKeywords, timestamp, staticId, true);
+            final boolean removeAllKeywords, final long timestamp, final long staticId) {
+        addChangedCardKeywords(keywords, removeKeywords, removeAllKeywords, timestamp, staticId, true);
     }
     public final void addChangedCardKeywords(final List<String> keywords, final List<String> removeKeywords,
-            final boolean removeAllKeywords, final boolean removeIntrinsicKeywords, final long timestamp, final long staticId, final boolean updateView) {
-        final KeywordsChange newCks = new KeywordsChange(keywords, removeKeywords, removeAllKeywords, removeIntrinsicKeywords);
+            final boolean removeAllKeywords, final long timestamp, final long staticId, final boolean updateView) {
+        final KeywordsChange newCks = new KeywordsChange(keywords, removeKeywords, removeAllKeywords);
         newCks.addKeywordsToCard(this);
         changedCardKeywords.put(timestamp, staticId, newCks);
 
@@ -4227,10 +4227,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public final void addChangedCardKeywordsInternal(
         final List<KeywordInterface> keywords, final List<KeywordInterface> removeKeywords,
-        final boolean removeAllKeywords, final boolean removeIntrinsicKeywords,
+        final boolean removeAllKeywords,
         final long timestamp, final long staticId, final boolean updateView) {
 
-        final KeywordsChange newCks = new KeywordsChange(keywords, removeKeywords, removeAllKeywords, removeIntrinsicKeywords);
+        final KeywordsChange newCks = new KeywordsChange(keywords, removeKeywords, removeAllKeywords);
         newCks.addKeywordsToCard(this);
         changedCardKeywords.put(timestamp, staticId, newCks);
 
@@ -4275,15 +4275,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         KeywordCollection keywords = new KeywordCollection();
 
         //final List<KeywordInterface> keywords = Lists.newArrayList();
-        boolean removeIntrinsic = false;
-        for (final KeywordsChange ck : changedCardKeywords.values()) {
-            if (ck.isRemoveIntrinsicKeywords()) {
-                removeIntrinsic = true;
-                break;
-            }
-        }
-
-        if (!removeIntrinsic) {
+        if (!this.hasRemoveIntrinsic()) {
             keywords.insertAll(state.getIntrinsicKeywords());
         }
 
@@ -4383,7 +4375,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             }
         }
         if (!addKeywords.isEmpty() || !removeKeywords.isEmpty()) {
-            addChangedCardKeywordsInternal(addKeywords, removeKeywords, false, false, timestamp, staticId, true);
+            addChangedCardKeywordsInternal(addKeywords, removeKeywords, false, timestamp, staticId, true);
         }
     }
 
@@ -5557,7 +5549,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 new CardType(Collections.singletonList("Creature"), true),
                 false, false, false, false, false, false, true, bestowTimestamp, updateView, false);
         addChangedCardKeywords(Collections.singletonList("Enchant creature"), Lists.newArrayList(),
-                false, false, bestowTimestamp, 0, updateView);
+                false, bestowTimestamp, 0, updateView);
     }
 
     public final void unanimateBestow() {
