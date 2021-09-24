@@ -3,6 +3,7 @@ package forge.ai.ability;
 import com.google.common.base.Predicate;
 
 import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
 import forge.card.CardStateName;
 import forge.game.Game;
@@ -30,7 +31,7 @@ public class SetStateAi extends SpellAbilityAi {
         final String mode = sa.getParam("Mode");
 
         // turning face is most likely okay
-        if("TurnFace".equals(mode)) {
+        if ("TurnFace".equals(mode)) {
             return true;
         }
 
@@ -39,7 +40,12 @@ public class SetStateAi extends SpellAbilityAi {
             return false;
         }
 
-        if("Transform".equals(mode) || "Flip".equals(mode)) {
+        if (sa.getSVar("X").equals("Count$xPaid")) {
+            final int xPay = ComputerUtilCost.getMaxXValue(sa, aiPlayer);
+            sa.setXManaCostPaid(xPay);
+        }
+
+        if ("Transform".equals(mode) || "Flip".equals(mode)) {
             return true;
         }
         return false;
@@ -146,7 +152,6 @@ public class SetStateAi extends SpellAbilityAi {
         // TODO: compareCards assumes that a creature will transform into a creature. Need to improve this
         // for other things potentially transforming.
         return compareCards(card, transformed, ai, ph);
-
     }
 
     private boolean shouldTurnFace(Card card, Player ai, PhaseHandler ph) {

@@ -3,8 +3,9 @@ ManaCost:X G
 Types:Creature Human
 PT:0/0
 K:etbCounter:P1P1:X
-T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | CheckSVar$ X | SVarCompare$ GE3 | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Coven — At the beginning of your end step, if you control three or more creatures with different powers, put a +1/+1 counter on target creature you control.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | CheckSVar$ Y | SVarCompare$ GE3 | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Coven — At the beginning of your end step, if you control three or more creatures with different powers, put a +1/+1 counter on target creature you control.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1
-SVar:X:Count$DifferentPower_Creature.YouCtrl
+SVar:X:Count$xPaid
+SVar:Y:Count$DifferentPower_Creature.YouCtrl
 DeckHas:Ability$Counters
 Oracle:Contortionist Troupe enters the battlefield with X +1/+1 counters on it.\nCoven — At the beginning of your end step, if you control three or more creatures with different powers, put a +1/+1 counter on target creature you control.
