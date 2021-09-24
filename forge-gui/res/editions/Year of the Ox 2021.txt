@@ -1,7 +1,7 @@
 [metadata]
 Code=PL21
 Date=2021-01-25
-Name=2021 Lunar New Year
+Name=Year of the Ox 2021
 Type=Promo
 ScryfallCode=PL21
 
