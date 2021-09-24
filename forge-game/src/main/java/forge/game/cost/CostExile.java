@@ -112,6 +112,10 @@ public class CostExile extends CostPartWithList {
             return String.format("Exile %s from the same %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), origin);
         }
 
+        if (this.getAmount().equals("X")) {
+            return String.format ("Exile any number of %s from your %s", desc, origin);
+        }
+
         return String.format("Exile %s from your %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), origin);
     }
 
