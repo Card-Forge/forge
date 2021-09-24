@@ -41,7 +41,6 @@ public class KeywordsChange  implements Cloneable {
     private List<KeywordInterface> removeKeywordInterfaces = Lists.newArrayList();
     private List<String> removeKeywords = Lists.newArrayList();
     private boolean removeAllKeywords;
-    private boolean removeIntrinsicKeywords;
 
     /**
      * 
@@ -54,8 +53,7 @@ public class KeywordsChange  implements Cloneable {
     public KeywordsChange(
             final Iterable<String> keywordList,
             final Collection<String> removeKeywordList,
-            final boolean removeAll,
-            final boolean removeIntrinsic) {
+            final boolean removeAll) {
         if (keywordList != null) {
             this.keywords.addAll(keywordList);
         }
@@ -65,14 +63,12 @@ public class KeywordsChange  implements Cloneable {
         }
 
         this.removeAllKeywords = removeAll;
-        this.removeIntrinsicKeywords = removeIntrinsic;
     }
 
     public KeywordsChange(
             final Collection<KeywordInterface> keywordList,
             final Collection<KeywordInterface> removeKeywordInterfaces,
-            final boolean removeAll,
-            final boolean removeIntrinsic) {
+            final boolean removeAll) {
         if (keywordList != null) {
             this.keywords.insertAll(keywordList);
         }
@@ -82,7 +78,6 @@ public class KeywordsChange  implements Cloneable {
         }
 
         this.removeAllKeywords = removeAll;
-        this.removeIntrinsicKeywords = removeIntrinsic;
     }
 
     /**
@@ -116,10 +111,6 @@ public class KeywordsChange  implements Cloneable {
      */
     public final boolean isRemoveAllKeywords() {
         return this.removeAllKeywords;
-    }
-
-    public final boolean isRemoveIntrinsicKeywords() {
-        return this.removeIntrinsicKeywords;
     }
 
     /**
