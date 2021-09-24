@@ -1,17 +1,11 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicate;
-
-import forge.ai.AiController;
-import forge.ai.AiPlayDecision;
-import forge.ai.ComputerUtilAbility;
-import forge.ai.ComputerUtilMana;
-import forge.ai.PlayerControllerAi;
-import forge.ai.SpellAbilityAi;
-import forge.ai.SpellApiToAi;
+import forge.ai.*;
 import forge.card.mana.ManaCost;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
@@ -143,6 +137,26 @@ public class DelayedTriggerAi extends SpellAbilityAi {
             }
 
             return true;
+        } else if (logic.equals("SaveCreature")) {
+            CardCollection ownCreatures = ai.getCreaturesInPlay();
+
+            ownCreatures = CardLists.filter(ownCreatures, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card card) {
+                    if (ComputerUtilCard.isUselessCreature(ai, card)) {
+                        return false;
+                    }
+
+                    return ComputerUtil.predictCreatureWillDieThisTurn(ai, card, sa);
+                }
+            });
+
+            if (!ownCreatures.isEmpty()) {
+                sa.getTargets().add(ComputerUtilCard.getBestAI(ownCreatures));
+                return true;
+            }
+
+            return false;
         }
 
         // Generic logic

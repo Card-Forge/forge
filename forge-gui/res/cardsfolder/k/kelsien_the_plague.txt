@@ -6,9 +6,8 @@ K:Vigilance
 K:Haste
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each experience counter you have.
 SVar:X:Count$YourCountersExperience
-A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | NumDmg$ 1 | SubAbility$ DBAnimate | StackDescription$ SpellDescription | SpellDescription$ CARDNAME deals 1 damage to target creature you don't control. When that creature dies this turn, you get an experience counter.
-SVar:DBAnimate:DB$ Effect | Triggers$ TrigDies | RememberObjects$ ParentTarget | StackDescription$ When {c:Remembered} dies this turn, you get an experience counter.
-SVar:TrigDies:Mode$ ChangesZone | ValidCard$ Creature.IsRemembered | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigPutCounter | TriggerDescription$ When {c:Remembered} dies this turn, you get an experience counter.
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | NumDmg$ 1 | SubAbility$ DBDelayedTrigger | StackDescription$ CARDNAME deals 1 damage to {c:Targeted}. | SpellDescription$ CARDNAME deals 1 damage to target creature you don't control. When that creature dies this turn, you get an experience counter.
+SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ ChangesZone | RememberObjects$ Targeted | ValidCard$ Card.IsTriggerRemembered | Origin$ Battlefield | Destination$ Graveyard | ThisTurn$ True | Execute$ TrigPutCounter | TriggerDescription$ When that creature dies this turn, you get an experience counter.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ You | CounterType$ Experience | CounterNum$ 1
 DeckHas:Ability$Counters
 Oracle:Vigilance, haste\nKelsien, the Plague gets +1/+1 for each experience counter you have.\n{T}: Kelsien deals 1 damage to target creature you don't control. When that creature dies this turn, you get an experience counter.

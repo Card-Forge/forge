@@ -52,6 +52,7 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
         lki.setOwner(sa.getActivatingPlayer());
         final Trigger delTrig = TriggerHandler.parseTrigger(mapParams, lki, sa.isIntrinsic(), null);
         delTrig.setSpawningAbility(sa.copy(lki, sa.getActivatingPlayer(), true));
+        delTrig.setActiveZone(null);
 
         if (sa.hasParam("RememberObjects")) {
             for (final String rem : sa.getParam("RememberObjects").split(",")) {

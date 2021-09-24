@@ -130,8 +130,18 @@ public class CardProperty {
             if (!card.isAdventureCard()) {
                 return false;
             }
-        } else if (property.equals("isTriggerRemembered")) {
-            if (!spellAbility.getTriggerRemembered().contains(card)) {
+        } else if (property.equals("IsTriggerRemembered")) {
+            boolean found = false;
+            for (Object o : spellAbility.getTriggerRemembered()) {
+                if (o instanceof Card) {
+                    Card trigRem = (Card) o;
+                    if (trigRem.equalsWithTimestamp(card)) {
+                        found = true;
+                        break;
+                    }
+                }
+            }
+            if (!found) {
                 return false;
             }
         } else if (property.startsWith("YouCtrl")) {
@@ -915,13 +925,12 @@ public class CardProperty {
                 }
             } else {
                 final String restriction = property.split("sharesOwnerWith ")[1];
-                if (restriction.equals("Remembered")) {
-                    for (final Object rem : source.getRemembered()) {
-                        if (rem instanceof Card) {
-                            final Card c = (Card) rem;
-                            if (!card.getOwner().equals(c.getOwner())) {
-                                return false;
-                            }
+                CardCollection def = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
+                for (final Object rem : def) {
+                    if (rem instanceof Card) {
+                        final Card c = (Card) rem;
+                        if (!card.getOwner().equals(c.getOwner())) {
+                            return false;
                         }
                     }
                 }
