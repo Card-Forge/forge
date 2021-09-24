@@ -102,6 +102,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_COMPACT_LIST_ITEMS ("false"),
         UI_SMALL_DECK_VIEWER ("false"),
         UI_DETAILED_SPELLDESC_IN_PROMPT ("true"),
+        UI_GRAY_INACTIVE_TEXT ("true"),
         UI_CARD_SIZE ("small"),
         UI_SINGLE_CARD_ZOOM("false"),
         UI_LIBGDX_TEXTURE_FILTERING("true"),
