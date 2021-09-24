@@ -481,7 +481,7 @@ ScryfallCode=PLIST
 473 C Dungeon Shade @Jason Alexander Behnke
 474 R Nightmare @Vance Kovacs
 475 U Noxious Ghoul @Luca Zontini
-476 U Tymaret, Chosen from Death @Jason A. Engle
+476 U Tymaret, Chosen from Death @Chase Stone
 477 U Will-o'-the-Wisp @Rob Alexander
 478 M Balefire Dragon @Eric Deschamps
 479 U Fireball @Dave Dorman
