@@ -886,8 +886,8 @@ public class ComputerUtilCard {
      */
     public static String getMostProminentColor(final Iterable<Card> list) {
         byte colors = CardFactoryUtil.getMostProminentColors(list);
-        for(byte c : MagicColor.WUBRG) {
-            if ( (colors & c) != 0 )
+        for (byte c : MagicColor.WUBRG) {
+            if ((colors & c) != 0)
                 return MagicColor.toLongString(c);
         }
         return MagicColor.Constant.WHITE; // no difference, there was no prominent color
@@ -906,7 +906,7 @@ public class ComputerUtilCard {
     public static List<String> getColorByProminence(final List<Card> list) {
         int cntColors = MagicColor.WUBRG.length;
         final List<Pair<Byte,Integer>> map = new ArrayList<>();
-        for(int i = 0; i < cntColors; i++) {
+        for (int i = 0; i < cntColors; i++) {
             map.add(MutablePair.of(MagicColor.WUBRG[i], 0));
         }
 
@@ -917,7 +917,7 @@ public class ComputerUtilCard {
             if (color.hasBlack()) map.get(2).setValue(Integer.valueOf(map.get(2).getValue()+1));
             if (color.hasRed()) map.get(3).setValue(Integer.valueOf(map.get(3).getValue()+1));
             if (color.hasGreen()) map.get(4).setValue(Integer.valueOf(map.get(4).getValue()+1));
-        } // for
+        }
 
         Collections.sort(map, new Comparator<Pair<Byte,Integer>>() {
             @Override public int compare(Pair<Byte, Integer> o1, Pair<Byte, Integer> o2) {
@@ -927,7 +927,7 @@ public class ComputerUtilCard {
     
         // will this part be once dropped?
         List<String> result = new ArrayList<>(cntColors);
-        for(Pair<Byte, Integer> idx : map) { // fetch color names in the same order
+        for (Pair<Byte, Integer> idx : map) { // fetch color names in the same order
             result.add(MagicColor.toLongString(idx.getKey()));
         }
         // reverse to get indices for most prominent colors first.
@@ -937,7 +937,7 @@ public class ComputerUtilCard {
     public static final Predicate<Deck> AI_KNOWS_HOW_TO_PLAY_ALL_CARDS = new Predicate<Deck>() {
         @Override
         public boolean apply(Deck d) {
-            for (Entry<DeckSection, CardPool> cp: d) {
+            for (Entry<DeckSection, CardPool> cp : d) {
                 for (Entry<PaperCard, Integer> e : cp.getValue()) {
                     if (e.getKey().getRules().getAiHints().getRemAIDecks())
                         return false;
@@ -1035,7 +1035,7 @@ public class ComputerUtilCard {
                 int curDevotion = 0;
                 String chosenColor = MagicColor.Constant.WHITE;
                 CardCollectionView hand = ai.getCardsIn(ZoneType.Hand);
-                for(byte c : MagicColor.WUBRG) {
+                for (byte c : MagicColor.WUBRG) {
                     String devotionCode = "Count$Devotion." + MagicColor.toLongString(c);
 
                     int devotion = AbilityUtils.calculateAmount(sa.getHostCard(), devotionCode, sa);
@@ -1289,7 +1289,6 @@ public class ComputerUtilCard {
                                          final int power, final List<String> keywords) {
         return shouldPumpCard(ai, sa, c, toughness, power, keywords, false);
     }
-
     public static boolean shouldPumpCard(final Player ai, final SpellAbility sa, final Card c, final int toughness,
             final int power, final List<String> keywords, boolean immediately) {
         final Game game = ai.getGame();

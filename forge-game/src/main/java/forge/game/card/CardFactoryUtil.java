@@ -182,7 +182,6 @@ public class CardFactoryUtil {
     }
 
     public static SpellAbility abilityManifestFaceUp(final Card sourceCard, final ManaCost manaCost) {
-
         String costDesc = manaCost.toString();
 
         // Cost need to be set later
@@ -333,7 +332,7 @@ public class CardFactoryUtil {
                 if (color.hasAnyColor(MagicColor.WUBRG[i]))
                     map[i]++;
             }
-        } // for
+        }
 
         byte mask = 0;
         int nMax = -1;
@@ -371,7 +370,7 @@ public class CardFactoryUtil {
                 if (color.hasAnyColor(MagicColor.WUBRG[i]))
                     map[i]++;
             }
-        } // for
+        }
         Arrays.sort(map);
         return map;
     }
