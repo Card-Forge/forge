@@ -1,0 +1,8 @@
+Name:Curse of Unbinding
+ManaCost:6 U
+Types:Enchantment Aura Curse
+K:Enchant player
+A:SP$ Attach | ValidTgts$ Player | TgtPrompt$ Select player to curse | AILogic$ Curse
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedBy | TriggerZone$ Battlefield | Execute$ TrigDig | TriggerDescription$ At the beginning of enchanted player's upkeep, that player reveals cards from the top of their library until they reveal a creature card. Put that card on the battlefield under your control. That player puts the rest of the revealed cards into their graveyard.
+SVar:TrigDig:DB$ DigUntil | Defined$ Player.EnchantedBy | Valid$ Creature | FoundDestination$ Battlefield | RevealedDestination$ Graveyard | GainControl$ True
+Oracle:Enchant player\nAt the beginning of enchanted player's upkeep, that player reveals cards from the top of their library until they reveal a creature card. Put that card on the battlefield under your control. That player puts the rest of the revealed cards into their graveyard.
