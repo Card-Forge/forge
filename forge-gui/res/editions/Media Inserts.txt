@@ -1,7 +1,7 @@
 [metadata]
 Code=PMEI
 Date=1995-01-01
-Name=Magazine Inserts
+Name=Media Inserts
 Type=Promo
 ScryfallCode=PMEI
 

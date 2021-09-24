@@ -1,0 +1,12 @@
+[metadata]
+Code=HTR20
+Date=2021-08-01
+Name=2020 Heroes of the Realm
+Code2=HTR20
+MciCode=htr20
+Type=Funny
+ScryfallCode=HTR20
+
+[cards]
+2 M Mountain Mover @Alexander Forssberg
+3 M The Secret Lair @ Wizard of Barge

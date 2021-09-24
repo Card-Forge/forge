@@ -1,7 +1,7 @@
 Name:Primal Adversary
 ManaCost:2 G
 Types:Creature Wolf
-PT:4/5
+PT:4/3
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPay | TriggerDescription$ When CARDNAME enters the battlefield, you may pay {1}{G} any number of times. When you pay this cost one or more times, put that many +1/+1 counters on CARDNAME, then up to that many target lands you control become 3/3 Wolf creatures with haste that are still lands.
 SVar:TrigPay:AB$ ImmediateTrigger | Cost$ Mana<1 G\NumTimes> | Announce$ NumTimes | ConditionCheckSVar$ NumTimes | ConditionSVarCompare$ GE1 | Execute$ TrigPutCounter | TriggerDescription$ When you pay this cost one or more times, put that many +1/+1 counters on CARDNAME, then up to that many target lands you control become 3/3 Wolf creatures with haste that are still lands.

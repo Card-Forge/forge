@@ -105,7 +105,7 @@ ScryfallCode=PLIST
 97 C Gempalm Polluter @Dany Orizio
 98 U Golgari Thug @Kev Walker
 99 R Grim Haruspex @Seb McKinnon
-100 C Grim Harvest @Zoltan Boros
+100 C Grim Harvest @Zoltan Boros & Gabor Szikszai
 101 R Kalastria Highborn @D. Alexander Gregory
 102 R Korlash, Heir to Blackblade @Daarken
 103 R Living Death @Mark Winters
@@ -219,7 +219,7 @@ ScryfallCode=PLIST
 211 R Fathom Mage @Ryan Pancoast
 212 R Fiery Justice @Mathias Kollros
 213 M Godsire @Jim Murray
-214 R Ith, High Arcanist @Zoltan Boros
+214 R Ith, High Arcanist @Zoltan Boros & Gabor Szikszai
 215 C Kingpin's Pet @Mark Zug
 216 M Lazav, the Multifarious @Yongjae Choi
 217 R Lightning Angel @rk post
@@ -358,7 +358,7 @@ ScryfallCode=PLIST
 350 U Great Teacher's Decree @Zoltan Boros
 351 U Jubilant Mascot @Filip Burburan
 352 R Pursuit of Knowledge @DiTerlizzi
-353 C Stonybrook Schoolmaster @Quinton Hoover
+353 C Stonybrook Schoolmaster @Quinton Hoover & Val Mayerik
 354 R Academy Elite @Volkan Baǵa
 355 R Archive Trap @Jason Felix
 356 U Kasmina, Enigmatic Mentor @Magali Villeneuve
@@ -427,7 +427,7 @@ ScryfallCode=PLIST
 419 U Time of Ice @Franz Vohwinkel
 420 U Animate Dead @Bastien L. Deharme
 421 R Bone Miser @Antonio José Manzanedo
-422 R Bridge from Below @Greg Hildebrandt
+422 R Bridge from Below @Greg Hildebrandt & Tim Hildebrandt
 423 R Entreat the Dead @Deruchenko Alexander
 424 R Mindslicer @Kev Walker
 425 U Goblin Assassin @Dave Dorman
@@ -445,7 +445,7 @@ ScryfallCode=PLIST
 437 U Aura Shards @Ron Spencer
 438 M Dragonlord Atarka @Karl Kopinski
 439 R Filigree Angel @Richard Whitters
-440 R Grand Arbiter Augustin IV @Zoltan Boros
+440 R Grand Arbiter Augustin IV @Zoltan Boros & Gabor Szikszai
 441 U Juniper Order Ranger @Greg Hildebrandt
 442 M Master of Cruelties @Chase Stone
 443 U Obsessive Stitcher @Joe Slucher
@@ -508,3 +508,78 @@ ScryfallCode=PLIST
 500 R Transmogrifying Wand @Aaron Miller
 501 R Eiganjo Castle @Wayne England
 502 R Gemstone Caverns @Martina Pilcerova
+503 R Champion of the Parish @Svetlin Velinov
+504 U Cloister Gargoyle @Russ Nicholson
+505 U Emissary of Sunrise @Deruchenko Alexander
+506 C Expose to Daylight @Daniel Ljunggren
+507 R Fiendslayer Paladin @Wesley Burt
+508 R Hokori, Dust Drinker @Darrell Riche
+509 R Selfless Spirit @Seb McKinnon
+510 R Speaker of the Heavens @Randy Vargas
+511 R Student of Warfare @Volkan Baǵa
+512 R Windborn Muse @Adam Rex
+513 C Hard Evidence @Yeong-Hao Han
+514 R Llawan, Cephalid Empress @Mark Zug
+515 R Midnight Clock @Alexander Forssberg
+516 R Moonlace @Mike Dringenberg
+517 R Patron of the Moon @Scott M. Fischer
+518 R Rishadan Brigand @Scott Hampton
+519 R Snapcaster Mage @Volkan Baǵa
+520 C Toils of Night and Day @Matt Cavotta
+521 C Bleak Coven Vampires @Randis Albion
+522 R Divining Witch @Donato Giancola
+523 R Graveborn Muse @Kev Walker
+524 R Gravespawn Sovereign @Adam Rex
+525 R Helldozer @Zoltan Boros
+526 M Mikaeus, the Unhallowed @Chris Rahn
+527 C Rend Flesh @Stephen Tappin
+528 R Sidisi, Undead Vizier @Min Yum
+529 U Stitcher's Supplier @Chris Seaman
+530 C Treacherous Werewolf @Mark Tedin
+531 R Witch of the Moors @Caio Monteiro
+532 U Archetype of Aggression @Mathias Kollros
+533 C Faithless Looting @Gabor Szikszai
+534 U Honden of Infinite Rage @John Avon
+535 R Ib Halfheart, Goblin Tactician @Wayne Reynolds
+536 U Loyal Apprentice @Joe Slucher
+537 R Magus of the Moon @Franz Vohwinkel
+538 M Malignus @Jung Park
+539 R Mindmoil @Alex Horley-Orlandelli
+540 U Shivan Harvest @Daren Bader
+541 R Stigma Lasher @Aleksi Briclot
+542 R Thieves' Auction @Kevin Murphy
+543 R Witch Hunt @Karl Kopinski
+544 R All Suns' Dawn @Glen Angus
+545 U Arlinn, Voice of the Pack @Ryan Pancoast
+546 C Dire Wolf Prowler @Diesel
+547 R Early Harvest @Janine Johnston
+548 C Fierce Witchstalker @Nicholas Gregory
+549 R Gaea's Will @Lucas Graciano
+550 M Master of the Wild Hunt @Kev Walker
+551 U Serene Sunset @David Martin
+552 C Strength of Night @John Avon
+553 R Wolfir Silverheart @Raymond Swanland
+554 R Abrupt Decay @Svetlin Velinov
+555 U Call of the Nightwing @Adam Paquette
+556 M General Kudro of Drannith @Ryan Pancoast
+557 M Karametra, God of Harvests @Eric Deschamps
+558 R Kaya, Ghost Haunter @Sydney Adams
+559 R Lich Lord of Unx @Dave Allsop
+560 R Lonis, Cryptozoologist @Andrew Mar
+561 S Mortify @Glen Angus
+562 M Sedris, the Traitor King @Paul Bonner
+563 M Teferi, Hero of Dominaria @Chris Rallis
+564 U Night // Day @Christopher Moeller
+565 U Gate to the Afterlife @Christine Choi
+566 M Helvault @Jaime Jones
+567 R Puresteel Angel @Lukas Litzsinger
+568 R Sapphire Medallion @Sue Ellen Brown
+569 U Selesnya Keyrune @Daniel Ljunggren
+570 C Signpost Scarecrow @Jung Park
+571 U Umbral Mantle @Richard Sardinha
+572 R Vedalken Orrery @John Avon
+573 U Witch's Oven @Alexander Forssberg
+574 U Ancient Tomb @Colin MacNeil
+575 U Karoo @Zina Saunders
+576 U Orzhova, the Church of Deals @Martina Pilcerova
+577 R Unholy Grotto @John Avon
