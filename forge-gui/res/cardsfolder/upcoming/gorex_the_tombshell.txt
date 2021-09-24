@@ -1,0 +1,15 @@
+Name:Gorex, the Tombshell
+ManaCost:6 B B
+Types:Legendary Creature Zombie Turtle
+PT:4/4
+A:SP$ PermanentCreature | Cost$ 6 B B ExileFromGrave<X/Creature/creature cards> | AdditionalDesc$ This spell costs {2} less to cast for each card exiled this way.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Y | EffectZone$ All | Relative$ True | Secondary$ True | Description$ This spell costs {2} less to cast for each card exiled this way.
+SVar:X:Count$xPaid
+SVar:Y:SVar$X/Times.2
+K:Deathtouch
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ Whenever CARDNAME attacks or dies, choose a card at random exiled with NICKNAME and put that card into its owner's hand.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChoose | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or dies, choose a card at random exiled with NICKNAME and put that card into its owner's hand.
+SVar:TrigChoose:DB$ ChooseCard | Amount$ 1 | AtRandom$ True | Choices$ Card.ExiledWithSource | ChoiceZone$ Exile | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Exile | Destination$ Hand | Hidden$ True
+DeckHas:Ability$Graveyard
+Oracle:As an additional cost to cast this spell, you may exile any number of creature cards from your graveyard. This spell costs {2} less to cast for each card exiled this way.\nDeathtouch\nWhenever Gorex, the Tombshell attacks or dies, choose a card at random exiled with Gorex and put that card into its owner's hand.
