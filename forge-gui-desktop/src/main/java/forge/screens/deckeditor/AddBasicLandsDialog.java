@@ -58,6 +58,7 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.toolbox.FTextField;
 import forge.util.Localizer;
+import forge.util.MyRandom;
 import forge.view.arcane.CardPanel;
 
 
@@ -365,7 +366,7 @@ public class AddBasicLandsDialog {
             }
             else {
                 for (int i = 0; i < count; i++) {
-                    pool.add(generateCard(artIndex));
+                    pool.add(generateCard(MyRandom.getRandom().nextInt(cbLandArt.getItemCount())));
                 }
             }
         }
