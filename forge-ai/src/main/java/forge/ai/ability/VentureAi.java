@@ -36,6 +36,7 @@ public class VentureAi extends SpellAbilityAi {
 
         for (SpellAbility room : spells) {
             if (player.getController().isAI()) { // FIXME: is this needed? Can simulation ever run this for a non-AI player?
+                room.setActivatingPlayer(player);
                 if (((PlayerControllerAi)player.getController()).getAi().canPlaySa(room) == AiPlayDecision.WillPlay) {
                     viableRooms.add(room);
                 }
