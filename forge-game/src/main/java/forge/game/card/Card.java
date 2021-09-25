@@ -2257,6 +2257,23 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             sb.append("(As this Saga enters and after your draw step, add a lore counter. Sacrifice after ");
             sb.append(TextUtil.toRoman(getFinalChapterNr())).append(".)").append(linebreak);
         }
+
+        // add As an additional cost to Permanent spells
+        if (state.getFirstAbility() != null && type.isPermanent()) {
+            SpellAbility first = state.getFirstAbility();
+            if (first.isSpell()) {
+                Cost cost = first.getPayCosts();
+                if (cost != null && !cost.isOnlyManaCost()) {
+                    String additionalDesc = "";
+                    if (state.getFirstAbility().hasParam("AdditionalDesc")) {
+                        additionalDesc = state.getFirstAbility().getParam("AdditionalDesc");
+                    }
+                    sb.append(cost.toString().replace("\n", "")).append(" ").append(additionalDesc);
+                    sb.append(linebreak);
+                }
+            }
+        }
+
         if (monstrous) {
             sb.append("Monstrous\r\n");
         }
@@ -2267,6 +2284,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             sb.append("Manifested\r\n");
         }
         sb.append(keywordsToText(getUnhiddenKeywords(state)));
+        if ((keywordsToText(getUnhiddenKeywords(state))).length() > 0) {
+            sb.append(linebreak);
+        }
 
         // Process replacement effects first so that "enters the battlefield tapped"
         // and "as ~ enters the battlefield, choose...", etc can be printed
@@ -2281,18 +2301,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     sb.append(text).append(linebreak);
                 } else {
                     replacementEffects.append(text).append(linebreak);
-                }
-            }
-        }
-
-        // add As an additional cost to Permanent spells
-        if (state.getFirstAbility() != null && type.isPermanent()) {
-            SpellAbility first = state.getFirstAbility();
-            if (first.isSpell()) {
-                Cost cost = first.getPayCosts();
-                if (cost != null && !cost.isOnlyManaCost()) {
-                    sb.append(cost.toString());
-                    sb.append(linebreak);
                 }
             }
         }
