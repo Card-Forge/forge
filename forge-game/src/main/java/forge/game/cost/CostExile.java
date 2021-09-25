@@ -18,6 +18,7 @@
 package forge.game.cost;
 
 import forge.game.Game;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
@@ -131,8 +132,7 @@ public class CostExile extends CostPartWithList {
         CardCollectionView list;
         if (this.sameZone) {
             list = game.getCardsIn(this.from);
-        }
-        else {
+        } else {
             list = payer.getCardsIn(this.from);
         }
 
@@ -145,6 +145,10 @@ public class CostExile extends CostPartWithList {
         }
 
         Integer amount = this.convertAmount();
+
+        if (amount == null) { // try to calculate when it's defined.
+            amount = AbilityUtils.calculateAmount(ability.getHostCard(), getAmount(), ability);
+        }
 
         // for cards like Allosaurus Rider, do not count it
         if (this.from == ZoneType.Hand && source.isInZone(ZoneType.Hand) && list.contains(source)) {
