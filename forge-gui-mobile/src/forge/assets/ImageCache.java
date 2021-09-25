@@ -235,7 +235,7 @@ public class ImageCache {
         }
 
         // No image file exists for the given key so optionally associate with
-        // a default "not available" image and add to cache for given key.
+        // a default "not available" image.
         if (image == null) {
             if (useDefaultIfNotFound) {
                 image = defaultImage;

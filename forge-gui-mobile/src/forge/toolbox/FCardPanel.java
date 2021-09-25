@@ -5,6 +5,7 @@ import forge.Forge;
 import forge.Graphics;
 import forge.animation.ForgeAnimation;
 import forge.assets.FSkin;
+import forge.card.CardImageRenderer;
 import forge.card.CardRenderer;
 import forge.card.CardRenderer.CardStackPosition;
 import forge.card.CardStateName;
@@ -200,7 +201,7 @@ public class FCardPanel extends FDisplayObject {
         }
     }
     private class CardTransformAnimation extends ForgeAnimation {
-        private static final float DURATION = 0.18f;
+        private float DURATION = 0.18f;
         private float progress = 0;
 
         private void drawCard(Graphics g, CardView card, float x, float y, float w, float h) {
@@ -216,16 +217,29 @@ public class FCardPanel extends FDisplayObject {
             float x2 = x + (w - (w*mod))/2;
             float w2 = w*mod;
             float h2 = h*mod;
+            float gap = (h/2) - (percentage*(h/2));
             if (card.getCurrentState().getState() == CardStateName.Original) {
+                DURATION = 0.16f;
                 //rollback
                 CardRenderer.drawCardWithOverlays(g, card, x2, y, w2, h, getStackPosition());
-            } else if (card.hasAlternateState() && (card.getCurrentState().getState() == CardStateName.Flipped
-                    || card.getCurrentState().getState() == CardStateName.Transformed || card.getCurrentState().getState() == CardStateName.Meld)) {
+            } else {
                 //transform
-                if (card.getCurrentState().getState() == CardStateName.Transformed || card.getCurrentState().getState() == CardStateName.Flipped)
+                if (card.getCurrentState().getState() == CardStateName.Transformed || card.getCurrentState().getState() == CardStateName.Flipped) {
+                    DURATION = 0.16f;
                     CardRenderer.drawCardWithOverlays(g, card, x2, y, w2, h, getStackPosition());
-                else if (card.getCurrentState().getState() == CardStateName.Meld)
-                    CardRenderer.drawCardWithOverlays(g, card, x2, y2, w2, h2, getStackPosition());
+                } else if (card.getCurrentState().getState() == CardStateName.Meld) {
+                    if (CardRenderer.getMeldCardParts(card.getCurrentState().getImageKey(), false) == CardImageRenderer.forgeArt) {
+                        DURATION = 0.18f;
+                        CardRenderer.drawCardWithOverlays(g, card, x2, y2, w2, h2, getStackPosition());
+                    } else {
+                        //Meld Animation merging
+                        DURATION = 0.25f;
+                        //top card
+                        g.drawImage(CardRenderer.getMeldCardParts(card.getCurrentState().getImageKey(), false), x, y-gap, w, h/2);
+                        //bottom card
+                        g.drawImage(CardRenderer.getMeldCardParts(card.getCurrentState().getImageKey(), true), x, y+h/2+gap, w, h/2);
+                    }
+                }
             }
         }
         @Override

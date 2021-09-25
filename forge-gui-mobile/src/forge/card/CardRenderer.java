@@ -388,6 +388,43 @@ public class CardRenderer {
         return cardArt;
     }
 
+    public static FImageComplex getMeldCardParts(final String imageKey, boolean bottom) {
+        FImageComplex cardArt;
+        if (!bottom) {
+            cardArt = cardArtCache.get("Meld_primary_"+imageKey);
+        } else {
+            cardArt = cardArtCache.get("Meld_secondary_"+imageKey);
+        }
+
+        if (cardArt == null) {
+            Texture image = new CachedCardImage(imageKey) {
+                @Override
+                public void onImageFetched() {
+                    ImageCache.clear();
+                    cardArtCache.remove("Meld_primary_" + imageKey);
+                    cardArtCache.remove("Meld_secondary_" + imageKey);
+                }
+            }.getImage();
+            if (image != null) {
+                if (image == ImageCache.defaultImage) {
+                    cardArt = CardImageRenderer.forgeArt;
+                } else {
+                    float x = 0;
+                    float w = image.getWidth();
+                    float h = image.getHeight()/2f;
+                    float y = bottom ? h : 0;
+                    cardArt = new FTextureRegionImage(new TextureRegion(image, Math.round(x), Math.round(y), Math.round(w), Math.round(h)));
+
+                }
+                if (!bottom)
+                    cardArtCache.put("Meld_primary_"+imageKey, cardArt);
+                else
+                    cardArtCache.put("Meld_secondary_"+imageKey, cardArt);
+            }
+        }
+        return cardArt;
+    }
+
     public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, CardView card, int count, String suffix, float x, float y, float w, float h, boolean compactMode) {
         final CardStateView state = card.getCurrentState();
         if (card.getId() > 0) {
