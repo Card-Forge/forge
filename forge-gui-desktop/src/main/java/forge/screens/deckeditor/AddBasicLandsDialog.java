@@ -25,7 +25,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.text.NumberFormat;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -65,11 +64,12 @@ import forge.view.arcane.CardPanel;
 @SuppressWarnings("serial")
 public class AddBasicLandsDialog {
     private static final int WIDTH = 800;
-    private static final int HEIGHT = 370;
-    private static final int ADD_BTN_SIZE = 30;
+    private static final int HEIGHT = 400;
+    private static final int ADD_BTN_SIZE = 22;
     private static final int LAND_PANEL_PADDING = 3;
 
-    private final FComboBoxPanel<CardEdition> cbLandSet = new FComboBoxPanel<>(Localizer.getInstance().getMessage("lblLandSet") + ":", FlowLayout.CENTER, Iterables.filter(StaticData.instance().getEditions(), CardEdition.Predicates.hasBasicLands));
+    private final FComboBoxPanel<CardEdition> cbLandSet = new FComboBoxPanel<>(Localizer.getInstance().getMessage("lblLandSet") + ":", FlowLayout.CENTER,
+            Iterables.filter(StaticData.instance().getSortedEditions(), CardEdition.Predicates.hasBasicLands));;
 
     private final MainPanel panel = new MainPanel();
     private final LandPanel pnlPlains = new LandPanel("Plains");
@@ -92,9 +92,8 @@ public class AddBasicLandsDialog {
     public AddBasicLandsDialog(Deck deck0, CardEdition defaultLandSet) {
         deck = deck0;
 
-        if (defaultLandSet == null) {
+        if (defaultLandSet == null)
             defaultLandSet = DeckProxy.getDefaultLandSet(deck);
-        }
 
         panel.setMinimumSize(new Dimension(WIDTH, HEIGHT));
         panel.add(cbLandSet);
@@ -239,25 +238,31 @@ public class AddBasicLandsDialog {
     }
 
     private void updateDeckInfoLabel() {
-        NumberFormat integer = NumberFormat.getIntegerInstance();
-        NumberFormat percent = NumberFormat.getPercentInstance();
         int newLandCount = pnlPlains.count + pnlIsland.count + pnlSwamp.count + pnlMountain.count + pnlForest.count;
-        double totalSymbolCount = pnlPlains.symbolCount + pnlIsland.symbolCount + pnlSwamp.symbolCount + pnlMountain.symbolCount + pnlForest.symbolCount;
+        int totalSymbolCount = pnlPlains.symbolCount + pnlIsland.symbolCount + pnlSwamp.symbolCount
+                + pnlMountain.symbolCount + pnlForest.symbolCount;
+        int newTotalCount = nonLandCount + oldLandCount + newLandCount;
         if (totalSymbolCount == 0) {
             totalSymbolCount = 1; //prevent divide by 0 error
         }
-        int newTotalCount = nonLandCount + oldLandCount + newLandCount;
-        lblDeckInfo.setText(FSkin.encodeSymbols("<div 'text-align: center;'>" +
-                nonLandCount + " non-lands + " +
-                oldLandCount + " lands + " +
-                newLandCount + " added lands = " +
-                newTotalCount + " cards</div><div style='text-align: center;'>" +
-                "{W} " + integer.format(pnlPlains.symbolCount) + " (" + percent.format(pnlPlains.symbolCount / totalSymbolCount) + ") | " +
-                "{U} " + integer.format(pnlIsland.symbolCount) + " (" + percent.format(pnlIsland.symbolCount / totalSymbolCount) + ") | " +
-                "{B} " + integer.format(pnlSwamp.symbolCount) + " (" + percent.format(pnlSwamp.symbolCount / totalSymbolCount) + ") | " +
-                "{R} " + integer.format(pnlMountain.symbolCount) + " (" + percent.format(pnlMountain.symbolCount / totalSymbolCount) + ") | " +
-                "{G} " + integer.format(pnlForest.symbolCount) + " (" + percent.format(pnlForest.symbolCount / totalSymbolCount) + ")" + 
-                "</div>", false));
+        Localizer localizer = Localizer.getInstance();
+        String infoLabel = String.format("" +
+                        "<div 'text-align: center;'>%s</div>" +
+                        "<div 'text-align: center;'> %s + %s + %s = %s</div>" +
+                        "<div style='text-align: center;'>" +
+                        "{W} %d (%d%%) | {U} %d (%d%%) ) | {B} %d (%d%%) | {R} %d (%d%%) | {G} %d (%d%%) </div>",
+                            localizer.getMessage("lblMainDeck"),
+                            String.format(localizer.getMessage("lblNonLandCount"), nonLandCount),
+                            String.format(localizer.getMessage("lblOldLandCount"), oldLandCount),
+                            String.format(localizer.getMessage("lblNewLandCount"), newLandCount),
+                            String.format(localizer.getMessage("lblNewTotalCount"), newTotalCount),
+                            pnlPlains.symbolCount, (pnlPlains.symbolCount * 100 / totalSymbolCount),
+                            pnlIsland.symbolCount, (pnlIsland.symbolCount * 100 / totalSymbolCount),
+                            pnlSwamp.symbolCount, (pnlSwamp.symbolCount * 100 / totalSymbolCount),
+                            pnlMountain.symbolCount, (pnlMountain.symbolCount * 100 / totalSymbolCount),
+                            pnlForest.symbolCount, (pnlForest.symbolCount * 100 / totalSymbolCount)
+                );
+        lblDeckInfo.setText(FSkin.encodeSymbols(infoLabel, false));
     }
 
     private class MainPanel extends SkinnedPanel {
@@ -307,7 +312,7 @@ public class AddBasicLandsDialog {
         private final String cardName;
         private PaperCard card;
         private int count, maxCount;
-        private double symbolCount;
+        private int symbolCount;
 
         private LandPanel(String cardName0) {
             super(null);
@@ -316,7 +321,7 @@ public class AddBasicLandsDialog {
             cardName = cardName0;
             cardPanel = new LandCardPanel();
             cbLandArt = new FComboBox<>();
-            cbLandArt.setFont(cbLandSet.getFont());
+            cbLandArt.setFont(FSkin.getFont());
             cbLandArt.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(final ActionEvent arg0) {
@@ -365,8 +370,11 @@ public class AddBasicLandsDialog {
                 pool.add(card, count); //simplify things if art index specified
             }
             else {
+                int artChoiceCount = FModel.getMagicDb().getCommonCards().getArtCount(cardName, landSet.getCode());
                 for (int i = 0; i < count; i++) {
-                    pool.add(generateCard(MyRandom.getRandom().nextInt(cbLandArt.getItemCount())));
+                    int rndArtIndex = MyRandom.getRandom().nextInt(artChoiceCount) + 1;
+                    pool.add(generateCard(rndArtIndex));
+
                 }
             }
         }
@@ -403,9 +411,9 @@ public class AddBasicLandsDialog {
                 labelWidth = minLabelWidth;
                 buttonWidth = (width - labelWidth) / 2;
             }
-            btnSubtract.setBounds(0, y, buttonWidth, ADD_BTN_SIZE);
+            btnAdd.setBounds(0, y, buttonWidth, ADD_BTN_SIZE);
             lblCount.setBounds(buttonWidth, y, labelWidth, ADD_BTN_SIZE);
-            btnAdd.setBounds(width - buttonWidth, y, buttonWidth, ADD_BTN_SIZE);
+            btnSubtract.setBounds(width - buttonWidth, y, buttonWidth, ADD_BTN_SIZE);
 
             y -= FTextField.HEIGHT + LAND_PANEL_PADDING;
             cbLandArt.setBounds(0, y, width, FTextField.HEIGHT);
