@@ -134,7 +134,14 @@ public abstract class FScrollPane extends FContainer {
 
         //shift position of all children based on change in scroll positions
         for (FDisplayObject obj : getChildren()) {
-            obj.setPosition(obj.getLeft() + dx, obj.getTop() + dy);
+            if (obj != null) {
+                if (obj instanceof FCardPanel) { // don't animate while moving the field
+                    ((FCardPanel) obj).getCard().updateNeedsTransformAnimation(false);
+                    ((FCardPanel) obj).getCard().updateNeedsUntapAnimation(false);
+                    ((FCardPanel) obj).getCard().updateNeedsTapAnimation(false);
+                }
+                obj.setPosition(obj.getLeft() + dx, obj.getTop() + dy);
+            }
         }
         return true;
     }
