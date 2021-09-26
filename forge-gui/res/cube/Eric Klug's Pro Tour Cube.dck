@@ -20,7 +20,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Arcbound Ravager|MPS_KLD
 1 Arcbound Worker|MMA
 1 Archangel Avacyn|SOI
-1 Arid Mesa|MM3
+1 Arid Mesa|MH2
 1 Armageddon|A25
 1 Arrogant Wurm|VMA
 1 Atarka's Command|DTK
@@ -48,7 +48,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Boros Reckoner|MM3
 1 Boros Signet|MM3
 1 Bosh, Iron Golem|2XM
-1 Brainstorm|2XM
+1 Brainstorm|STX
 1 Brave the Elements|M14
 1 Breeding Pool|RNA
 1 Brimaz, King of Oreskos|BNG
@@ -81,13 +81,13 @@ Name=Eric Klug's Pro Tour Cube
 1 Cognivore|ODY
 1 Comet Storm|MM2
 1 Compulsion|TOR
-1 Compulsive Research|MM3
+1 Compulsive Research|STX
 1 Confiscate|9ED
 1 Consume the Meek|ROE
 1 Contagion|ALL
 1 Control Magic|EMA
 1 Convolute|IKO
-1 Counterspell|A25
+1 Counterspell|MH2
 1 Courser of Kruphix|A25
 1 Court Hussar|A25
 1 Covetous Dragon|UDS
@@ -101,10 +101,10 @@ Name=Eric Klug's Pro Tour Cube
 1 Cyclonic Rift|2XM
 1 Damnation|MPS_AKH
 1 Dark Confidant|2XM
-1 Dark Ritual|A25
+1 Dark Ritual|STX
 1 Darksteel Citadel|2XM
 1 Daru Sanctifier|LGN
-1 Day of Judgment|M12
+1 Day of Judgment|STX
 1 Daze|MPS_AKH
 1 Debtors' Knell|GPT
 1 Deceiver Exarch|CN2
@@ -123,7 +123,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Dissipate|M15
 1 Dissolve|IMA
 1 Donate|UDS
-1 Doom Blade|IMA
+1 Doom Blade|STX
 1 Doomed Traveler|IMA
 1 Dragon Fodder|MM3
 1 Dragonstorm|MMA
@@ -132,12 +132,12 @@ Name=Eric Klug's Pro Tour Cube
 1 Drowner of Hope|BFZ
 1 Dryad Militant|RTR
 1 Dryad Sophisticate|GPT
-1 Duress|M21
+1 Duress|STX
 1 Earthquake|M10
 1 Eldrazi Mimic|OGW
 1 Eldrazi Obligator|OGW
 1 Eldrazi Skyspawner|BFZ
-1 Electrolyze|IMA
+1 Electrolyze|STX
 1 Elixir of Immortality|M14
 1 Elspeth, Knight-Errant|MMA
 1 Elspeth, Sun's Champion|THS
@@ -150,7 +150,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Eternal Witness|UMA
 1 Ethersworn Canonist|2XM
 1 Evolutionary Leap|ORI
-1 Evolving Wilds|AKR
+1 Evolving Wilds|AFR
 1 Exalted Angel|ONS
 1 Experiment One|GTC
 1 Explore|MM3
@@ -162,7 +162,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Farseek|M13
 1 Feeling of Dread|ISD
 1 Figure of Destiny|MMA
-1 Fire // Ice|UMA
+1 Fire // Ice|MH2
 1 Fire Diamond|7ED
 1 Fireball|IMA
 1 Fireslinger|TMP
@@ -226,7 +226,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Inferno Titan|M12
 1 Infest|CN2
 1 Ink-Eyes, Servant of Oni|PCA
-1 Inquisition of Kozilek|MM3
+1 Inquisition of Kozilek|STX
 1 Jace Beleren|M11
 1 Jace, Architect of Thought|RTR
 1 Jace, the Mind Sculptor|VMA
@@ -254,9 +254,9 @@ Name=Eric Klug's Pro Tour Cube
 1 Lavaclaw Reaches|UMA
 1 Leonin Relic-Warder|C17
 1 Lightning Berserker|DTK
-1 Lightning Bolt|A25
+1 Lightning Bolt|STX
 1 Lightning Greaves|2XM
-1 Lightning Helix|IMA
+1 Lightning Helix|STX
 1 Lightning Strike|M19
 1 Liliana Vess|M15
 1 Liliana, the Last Hope|EMN
@@ -271,9 +271,9 @@ Name=Eric Klug's Pro Tour Cube
 1 Maelstrom Pulse|2XM
 1 Man-o'-War|MH1
 1 Mana Leak|IMA
-1 Mana Tithe|PLC
+1 Mana Tithe|STX
 1 Mana Vault|UMA
-1 Marsh Flats|MM3
+1 Marsh Flats|MH2
 1 Master of Waves|THS
 1 Masticore|VMA
 1 Meloku the Clouded Mirror|MMA
@@ -283,9 +283,9 @@ Name=Eric Klug's Pro Tour Cube
 1 Millstone|M19
 1 Mindslaver|SOM
 1 Mirari|TSB
-1 Mirari's Wake|CNS
-1 Mishra's Factory|2XM
-1 Misty Rainforest|MM3
+1 Mirari's Wake|MH2
+1 Mishra's Factory|MH2
+1 Misty Rainforest|MH2
 1 Mogg Conscripts|TPR
 1 Mogg Fanatic|EMA
 1 Mogg Raider|TMP
@@ -307,7 +307,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Necropotence|IMA
 1 Nekrataal|EMA
 1 Nettle Sentinel|A25
-1 Nevinyrral's Disk|EMA
+1 Nevinyrral's Disk|MH2
 1 Nightscape Familiar|VMA
 1 Nightveil Specter|GTC
 1 Nissa, Voice of Zendikar|OGW
@@ -352,7 +352,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Pulse of the Forge|DST
 1 Punishing Fire|ZEN
 1 Puresteel Paladin|2XM
-1 Putrefy|MM3
+1 Putrefy|STX
 1 Putrid Leech|ARB
 1 Pyrite Spellbomb|2XM
 1 Pyroclasm|A25
@@ -381,7 +381,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Savannah|VMA
 1 Savannah Lions|A25
 1 Scab-Clan Mauler|GPT
-1 Scalding Tarn|MM3
+1 Scalding Tarn|MH2
 1 Scorched Rusalka|MM3
 1 Scroll Rack|MPS_KLD
 1 Scrubland|VMA
@@ -399,7 +399,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Shambling Vent|BFZ
 1 Shard Phoenix|TPR
 1 Shivan Reef|ORI
-1 Shock|M21
+1 Shock|STX
 1 Shrapnel Blast|M15
 1 Shriekmaw|UMA
 1 Sickening Shoal|BOK
@@ -450,7 +450,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Survival of the Fittest|TPR
 1 Sword of Feast and Famine|2XM
 1 Sword of War and Peace|2XM
-1 Swords to Plowshares|A25
+1 Swords to Plowshares|STX
 1 Sylvan Advocate|OGW
 1 Sylvan Caryatid|THS
 1 Sylvan Library|EMA
@@ -492,9 +492,9 @@ Name=Eric Klug's Pro Tour Cube
 1 Ultimate Price|DTK
 1 Umezawa's Jitte|BOK
 1 Underground River|10E
-1 Upheaval|VMA
+1 Upheaval|MH2
 1 Urborg, Tomb of Yawgmoth|M15
-1 Urza's Rage|MH1
+1 Urza's Rage|STX
 1 Utter End|KTK
 1 Vampiric Tutor|EMA
 1 Vault Skirge|NPH
@@ -502,7 +502,7 @@ Name=Eric Klug's Pro Tour Cube
 1 Vendilion Clique|A25
 1 Vengeful Dreams|TOR
 1 Venser, Shaper Savant|MM3
-1 Verdant Catacombs|MM3
+1 Verdant Catacombs|MH2
 1 Verdant Force|DOM
 1 Vile Aggregate|BFZ
 1 Viridian Shaman|10E
@@ -539,5 +539,5 @@ Name=Eric Klug's Pro Tour Cube
 1 Yavimaya Coast|ORI
 1 Yosei, the Morning Star|MMA
 1 Zealous Conscripts|MM3
-1 Zuran Orb|ICE
+1 Zuran Orb|MH2
 1 Zurgo Bellstriker|DTK

@@ -52,7 +52,7 @@ Name=Legendary Cube April 2016
 1 Boros Garrison|IMA
 1 Brago, King Eternal|VMA
 1 Braid of Fire|CSP
-1 Brainstorm|2XM
+1 Brainstorm|STX
 1 Breeding Pool|RNA
 1 Brimaz, King of Oreskos|BNG
 1 Brion Stoutarm|A25
@@ -71,7 +71,7 @@ Name=Legendary Cube April 2016
 1 Chain Reaction|WWK
 1 Champion's Helm|MPS_KLD
 1 Chandra, the Firebrand|M13
-1 Chaos Warp|VMA
+1 Chaos Warp|STX
 1 Charcoal Diamond|7ED
 1 Charmbreaker Devils|IMA
 1 Cho-Manno, Revolutionary|MMQ
@@ -79,7 +79,7 @@ Name=Legendary Cube April 2016
 1 Clifftop Retreat|DOM
 1 Coldsteel Heart|CSP
 1 Commune with the Gods|EMA
-1 Compulsive Research|MM3
+1 Compulsive Research|STX
 1 Conjurer's Closet|2XM
 1 Corpse Churn|IKO
 1 Corpsehatch|ROE
@@ -90,7 +90,7 @@ Name=Legendary Cube April 2016
 1 Cruel Ultimatum|MM3
 1 Crumbling Necropolis|MM3
 1 Crush of Tentacles|OGW
-1 Crux of Fate|FRF
+1 Crux of Fate|STX
 1 Crypt of Agadeem|ZEN
 1 Crystal Ball|M11
 1 Cyclonic Rift|2XM
@@ -108,6 +108,7 @@ Name=Legendary Cube April 2016
 1 Devour in Shadow|5DN
 1 Dimir Aqueduct|IMA
 1 Disciple of the Ring|ORI
+1 Divine Deflection|AVR
 1 Doomwake Giant|JOU
 1 Doubling Season|2XM
 1 Dragon Tempest|IMA
@@ -126,7 +127,7 @@ Name=Legendary Cube April 2016
 1 Dromoka, the Eternal|FRF
 1 Drowned Catacomb|XLN
 1 Druidic Satchel|M12
-1 Duress|M21
+1 Duress|STX
 1 Dwynen, Gilt-Leaf Daen|ORI
 1 Edric, Spymaster of Trest|VMA
 1 Eidolon of Blossoms|JOU
@@ -138,7 +139,7 @@ Name=Legendary Cube April 2016
 1 Elvish Harbinger|LRW
 1 Empty the Catacombs|RAV
 1 Emrakul, the Aeons Torn|UMA
-1 Enchantress's Presence|ONS
+1 Enchantress's Presence|MH2
 1 Endrek Sahr, Master Breeder|MM2
 1 Enduring Ideal|SOK
 1 Engineered Explosives|2XM
@@ -146,7 +147,7 @@ Name=Legendary Cube April 2016
 1 Eternal Dragon|VMA
 1 Everflowing Chalice|2XM
 1 Evil Twin|MM3
-1 Evolving Wilds|AKR
+1 Evolving Wilds|AFR
 1 Exile into Darkness|SOK
 1 Expedition Map|2XM
 1 Explore|MM3
@@ -158,7 +159,7 @@ Name=Legendary Cube April 2016
 1 Fact or Fiction|MH1
 1 Faerie Mechanist|2XM
 1 Faith's Fetters|M21
-1 Faithless Looting|UMA
+1 Faithless Looting|STX
 1 Farhaven Elf|SHM
 1 Fated Retribution|BNG
 1 Fellwar Stone|9ED
@@ -224,7 +225,7 @@ Name=Legendary Cube April 2016
 1 Immaculate Magistrate|LRW
 1 Imperious Perfect|EMA
 1 Impulse|VIS
-1 Increasing Vengeance|DKA
+1 Increasing Vengeance|STX
 1 Interpret the Signs|JOU
 1 Into the Roil|ZNR
 1 Isamaru, Hound of Konda|CHK
@@ -298,14 +299,14 @@ Name=Legendary Cube April 2016
 1 Mikaeus, the Lunarch|ISD
 1 Mikaeus, the Unhallowed|UMA
 1 Mikokoro, Center of the Sea|A25
-1 Millikin|EMA
+1 Millikin|MH2
 1 Mimic Vat|SOM
 1 Mina and Denn, Wildborn|OGW
 1 Minamo, School at Water's Edge|CHK
 1 Mind Stone|IMA
 1 Mind's Eye|MPS_KLD
 1 Mirari|TSB
-1 Mirari's Wake|CNS
+1 Mirari's Wake|MH2
 1 Miren, the Moaning Well|SOK
 1 Mirri the Cursed|PLC
 1 Misdirection|CNS
@@ -385,7 +386,7 @@ Name=Legendary Cube April 2016
 1 Reclamation Sage|2XM
 1 Recumbent Bliss|EVE
 1 Reflecting Pool|CNS
-1 Regrowth|MH1
+1 Regrowth|STX
 1 Reiterate|TSP
 1 Reki, the History of Kamigawa|SOK
 1 Repeal|IMA
@@ -415,7 +416,7 @@ Name=Legendary Cube April 2016
 1 Scrap|USG
 1 Scrubland|VMA
 1 Sculpting Steel|2XM
-1 Seal of Cleansing|EMA
+1 Seal of Cleansing|MH2
 1 Seaside Citadel|MM3
 1 Secluded Steppe|MH1
 1 Seer's Lantern|OGW
@@ -433,7 +434,7 @@ Name=Legendary Cube April 2016
 1 Sidisi, Brood Tyrant|KTK
 1 Sidisi, Undead Vizier|DTK
 1 Sigil of the Empty Throne|ORI
-1 Sign in Blood|MM2
+1 Sign in Blood|STX
 1 Silent Sentinel|BNG
 1 Silkwrap|DTK
 1 Silumgar, the Drifting Death|FRF
@@ -458,7 +459,7 @@ Name=Legendary Cube April 2016
 1 Steam Vents|GRN
 1 Stitcher Geralf|C14
 1 Stomping Ground|RNA
-1 Strategic Planning|KHM
+1 Strategic Planning|STX
 1 Stubborn Denial|KTK
 1 Sudden Reclamation|FRF
 1 Sulfur Falls|DOM
@@ -473,7 +474,7 @@ Name=Legendary Cube April 2016
 1 Sylvan Ranger|MM3
 1 Tahngarth, Talruum Hero|PLS
 1 Taiga|VMA
-1 Tainted Pact|ODY
+1 Tainted Pact|STX
 1 Tajic, Blade of the Legion|DGM
 1 Talrand, Sky Summoner|M13
 1 Tasigur, the Golden Fang|FRF
@@ -504,7 +505,7 @@ Name=Legendary Cube April 2016
 1 Thunderbreak Regent|DTK
 1 Time of Need|CHK
 1 Time Stop|10E
-1 Titania, Protector of Argoth|CMA
+1 Titania, Protector of Argoth|MH2
 1 Tithe|VIS
 1 Tombstone Stairwell|MIR
 1 Tormenting Voice|ZNR
@@ -527,7 +528,7 @@ Name=Legendary Cube April 2016
 1 Unstable Obelisk|C17
 1 Urabrask the Hidden|IMA
 1 Urban Evolution|UMA
-1 Urza's Rage|MH1
+1 Urza's Rage|STX
 1 Utter End|KTK
 1 Utvara Hellkite|RTR
 1 Uyo, Silent Prophet|CHK

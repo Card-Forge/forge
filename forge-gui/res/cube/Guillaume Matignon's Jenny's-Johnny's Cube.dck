@@ -22,7 +22,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Arbor Elf|A25
 1 Arcanis the Omnipotent|EMA
 1 Archangel of Thune|2XM
-1 Arid Mesa|MM3
+1 Arid Mesa|MH2
 1 Armadillo Cloak|EMA
 1 Ashiok, Nightmare Weaver|THS
 1 Assemble the Legion|GTC
@@ -54,7 +54,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Bosh, Iron Golem|2XM
 1 Brain Maggot|JOU
 1 Braingeyser|3ED
-1 Brainstorm|2XM
+1 Brainstorm|STX
 1 Breeding Pool|RNA
 1 Brion Stoutarm|A25
 1 Brushland|10E
@@ -86,7 +86,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Commune with the Gods|EMA
 1 Complicate|ONS
 1 Compulsion|TOR
-1 Compulsive Research|MM3
+1 Compulsive Research|STX
 1 Condescend|IMA
 1 Courser of Kruphix|A25
 1 Cradle of Vitality|ALA
@@ -117,7 +117,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Distended Mindbender|EMN
 1 Docent of Perfection|EMN
 1 Domri Rade|MM3
-1 Doom Blade|IMA
+1 Doom Blade|STX
 1 Doomed Necromancer|2XM
 1 Doomwake Giant|JOU
 1 Door of Destinies|M14
@@ -126,21 +126,21 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Drogskol Reaver|DKA
 1 Dromoka's Command|DTK
 1 Duplicant|2XM
-1 Duress|M21
+1 Duress|STX
 1 Dwynen, Gilt-Leaf Daen|ORI
 1 Edge of Autumn|FUT
 1 Edric, Spymaster of Trest|VMA
 1 Eidolon of Blossoms|JOU
 1 Eidolon of Countless Battles|BNG
 1 Elder Deep-Fiend|EMN
-1 Electrolyze|IMA
+1 Electrolyze|STX
 1 Elixir of Immortality|M14
 1 Elspeth Tirel|SOM
 1 Elvish Vanguard|EMA
 1 Elvish Visionary|ORI
 1 Ember Hauler|M20
 1 Emrakul, the Promised End|EMN
-1 Enchantress's Presence|ONS
+1 Enchantress's Presence|MH2
 1 Enclave Cryptologist|ROE
 1 Engineered Explosives|2XM
 1 Enlightened Tutor|EMA
@@ -154,7 +154,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Extinguish All Hope|JOU
 1 Ezuri, Renegade Leader|SOM
 1 Faith's Fetters|M21
-1 Faithless Looting|UMA
+1 Faithless Looting|STX
 1 Falkenrath Aristocrat|2XM
 1 Fatestitcher|ALA
 1 Fauna Shaman|UMA
@@ -163,7 +163,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Fertile Ground|LRW
 1 Fiend Hunter|UMA
 1 Fiery Confluence|C15
-1 Fire // Ice|UMA
+1 Fire // Ice|MH2
 1 Firebolt|MH1
 1 Flame Jab|EMA
 1 Flash of Insight|JUD
@@ -192,7 +192,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Gnarlwood Dryad|EMN
 1 Gnaw to the Bone|ISD
 1 Gnawing Zombie|MM3
-1 Goblin Bombardment|TPR
+1 Goblin Bombardment|MH2
 1 Goblin Bushwhacker|ZEN
 1 Goblin Chieftain|M12
 1 Goblin Dark-Dwellers|OGW
@@ -226,6 +226,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Hammer of Purphoros|THS
 1 Hangarback Walker|MPS_KLD
 1 Harbinger of the Tides|ORI
+1 Harm's Way|M10
 1 Haunted Dead|EMN
 1 Havengul Lich|DKA
 1 Healer of the Pride|M13
@@ -243,7 +244,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Imperious Perfect|EMA
 1 Imprisoned in the Moon|EMN
 1 Inexorable Blob|SOI
-1 Inquisition of Kozilek|MM3
+1 Inquisition of Kozilek|STX
 1 Intuition|TPR
 1 Ishkanah, Grafwidow|EMN
 1 Isolated Chapel|DOM
@@ -269,9 +270,9 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Legacy's Allure|TMP
 1 Leonin Relic-Warder|C17
 1 Life from the Loam|UMA
-1 Lightning Bolt|A25
+1 Lightning Bolt|STX
 1 Lightning Greaves|2XM
-1 Lightning Helix|IMA
+1 Lightning Helix|STX
 1 Lightning Surge|JUD
 1 Lignify|LRW
 1 Liliana, Heretical Healer|ORI
@@ -286,12 +287,12 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Magmatic Insight|ORI
 1 Manic Vandal|M12
 1 Mardu Woe-Reaper|FRF
-1 Marsh Flats|MM3
+1 Marsh Flats|MH2
 1 Martyr of Sands|UMA
 1 Master Apothecary|ODY
 1 Master of Waves|THS
 1 Maze of Ith|2XM
-1 Memory Lapse|EMA
+1 Memory Lapse|STX
 1 Mesa Enchantress|EMA
 1 Mikaeus, the Lunarch|ISD
 1 Mind Stone|IMA
@@ -299,7 +300,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Mindwrack Demon|SOI
 1 Mirror Entity|MM2
 1 Miscalculation|ULG
-1 Misty Rainforest|MM3
+1 Misty Rainforest|MH2
 1 Mizzium Mortars|MM3
 1 Mogg Fanatic|EMA
 1 Mogg War Marshal|EMA
@@ -319,7 +320,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Nearheath Pilgrim|AVR
 1 Necromancer's Stockpile|M15
 1 Necromancy|VIS
-1 Negate|ZNR
+1 Negate|STX
 1 Nephalia Drownyard|ISD
 1 Nighthowler|THS
 1 Nissa, Vastwood Seer|ORI
@@ -335,7 +336,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Oona's Grace|EMA
 1 Opalescence|UDS
 1 Open the Vaults|2XM
-1 Opt|M21
+1 Opt|STX
 1 Oracle of Mul Daya|ZEN
 1 Oracle of Nectars|SHM
 1 Outpost Siege|FRF
@@ -344,7 +345,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Parallax Wave|VMA
 1 Path of Bravery|IMA
 1 Path to Exile|2XM
-1 Patriarch's Bidding|ONS
+1 Patriarch's Bidding|MH2
 1 Patron Wizard|ODY
 1 Pentavus|M12
 1 Phyrexian Metamorph|2XM
@@ -379,7 +380,7 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Repeal|IMA
 1 Replenish|UDS
 1 Reveillark|UMA
-1 Riptide Laboratory|ONS
+1 Riptide Laboratory|MH2
 1 Rise from the Tides|UMA
 1 River Kelpie|SHM
 1 Rocky Tar Pit|VMA
@@ -392,12 +393,12 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Sarcomancy|TPR
 1 Satyr Wayfinder|UMA
 1 Savannah|VMA
-1 Scalding Tarn|MM3
+1 Scalding Tarn|MH2
 1 Scavenging Ooze|M21
 1 Scrap Mastery|C14
 1 Scrubland|VMA
 1 Sea Gate Oracle|MM3
-1 Seal of Cleansing|EMA
+1 Seal of Cleansing|MH2
 1 Seal of Fire|DIS
 1 Seal of Primordium|MM3
 1 Searing Meditation|RAV
@@ -474,9 +475,9 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Thopter Spy Network|ORI
 1 Thought Courier|9ED
 1 Thought Scour|IMA
-1 Time Warp|TPR
+1 Time Warp|STX
 1 Tireless Tracker|SOI
-1 Titania, Protector of Argoth|CMA
+1 Titania, Protector of Argoth|MH2
 1 To the Slaughter|SOI
 1 Tormenting Voice|ZNR
 1 Tracker's Instincts|DKA
@@ -500,9 +501,9 @@ Name=Guillaume Matignon's Jenny's-Johnny's Cube
 1 Vendilion Clique|A25
 1 Vengevine|2XM
 1 Venser, Shaper Savant|MM3
-1 Verdant Catacombs|MM3
+1 Verdant Catacombs|MH2
 1 Vessel of Nascency|A25
-1 Vindicate|A25
+1 Vindicate|MH2
 1 Violent Eruption|TOR
 1 Viridian Zealot|DST
 1 Voidmage Prodigy|TSB
