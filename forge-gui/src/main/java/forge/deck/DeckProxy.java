@@ -691,11 +691,18 @@ public class DeckProxy implements InventoryItem {
         List<CardEdition> availableEditions = new ArrayList<>();
 
         for (PaperCard c : deck.getAllCardsInASinglePool().toFlatList()) {
-            availableEditions.add(FModel.getMagicDb().getEditions().get(c.getEdition()));
+            CardEdition edition = FModel.getMagicDb().getEditions().get(c.getEdition());
+            if (edition == null)
+                continue;
+            availableEditions.add(edition);
         }
 
         CardEdition randomLandSet = CardEdition.Predicates.getRandomSetWithAllBasicLands(availableEditions);
-        return randomLandSet == null ? FModel.getMagicDb().getEditions().get("ZEN") : randomLandSet;
+        if (randomLandSet == null) {
+            CardEdition preferredArtEdition = CardEdition.Predicates.getPreferredArtEditionWithAllBasicLands();
+            return preferredArtEdition != null ? preferredArtEdition : FModel.getMagicDb().getEditions().get("ZEN");
+        }
+        return randomLandSet;
     }
 
     public static final Predicate<DeckProxy> IS_WHITE = new Predicate<DeckProxy>() {

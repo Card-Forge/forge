@@ -190,6 +190,7 @@ public final class CardEdition implements Comparable<CardEdition> {
             return sb.toString();
         }
 
+        private static final Map<String, String> sortableCollNumberLookup = new HashMap<>();
         /**
          * This method implements the main strategy to allow for natural ordering of collectorNumber
          * (i.e. "1" < "10"), overloading the default lexicographic order (i.e. "10" < "1").
@@ -199,7 +200,6 @@ public final class CardEdition implements Comparable<CardEdition> {
          * @param collectorNumber: Input collectorNumber tro transform in a Sorting Key
          * @return A 5-digits zero-padded collector number + any non-numerical parts attached.
          */
-        private static final Map<String, String> sortableCollNumberLookup = new HashMap<>();
         public static String getSortableCollectorNumber(final String collectorNumber){
             String inputCollNumber = collectorNumber;
             if (collectorNumber == null || collectorNumber.length() == 0)
@@ -520,7 +520,7 @@ public final class CardEdition implements Comparable<CardEdition> {
     }
 
     public static class Reader extends StorageReaderFolder<CardEdition> {
-        private boolean isCustomEditions;
+        private final boolean isCustomEditions;
 
         public Reader(File path) {
             super(path, CardEdition.FN_GET_CODE);
@@ -870,6 +870,27 @@ public final class CardEdition implements Comparable<CardEdition> {
         public static CardEdition getRandomSetWithAllBasicLands(Iterable<CardEdition> allEditions) {
             return Aggregates.random(Iterables.filter(allEditions, hasBasicLands));
         }
+
+        public static CardEdition getPreferredArtEditionWithAllBasicLands() {
+            CardDb.CardArtPreference artPreference = StaticData.instance().getCardArtPreference();
+            Iterable<CardEdition> editionsWithBasicLands = Iterables.filter(
+                    StaticData.instance().getEditions().getOrderedEditions(),
+                    com.google.common.base.Predicates.and(hasBasicLands, new Predicate<CardEdition>() {
+                        @Override
+                        public boolean apply(CardEdition edition) {
+                            return artPreference.accept(edition);
+                        }
+                    }));
+            Iterator<CardEdition> editionsIterator = editionsWithBasicLands.iterator();
+            List<CardEdition> selectedEditions = new ArrayList();
+            while (editionsIterator.hasNext())
+                selectedEditions.add(editionsIterator.next());
+            if (selectedEditions.isEmpty())
+                return null;
+            int editionIndex = artPreference.latestFirst ? 0 : selectedEditions.size() - 1;
+            return selectedEditions.get(editionIndex);
+        }
+
 
         public static final Predicate<CardEdition> HAS_TOURNAMENT_PACK = new CanMakeStarter();
         private static class CanMakeStarter implements Predicate<CardEdition> {
