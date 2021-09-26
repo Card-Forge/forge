@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import java.util.Collections;
 import java.util.List;
 
 import forge.ai.AiAttackController;
@@ -18,6 +19,7 @@ import forge.game.cost.Cost;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
+import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
@@ -147,7 +149,9 @@ public class DiscardAi extends SpellAbilityAi {
 
     private boolean discardTargetAI(final Player ai, final SpellAbility sa) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        for (Player opp : ai.getOpponents()) {
+        final PlayerCollection opps = ai.getOpponents();
+        Collections.shuffle(opps);
+        for (Player opp : opps) {
             if (opp.getCardsIn(ZoneType.Hand).isEmpty() && !ComputerUtil.activateForCost(sa, ai)) {
                 continue;
             } else if (!opp.canDiscardBy(sa)) { // e.g. Tamiyo, Collector of Tales
@@ -155,6 +159,7 @@ public class DiscardAi extends SpellAbilityAi {
             }
             if (tgt != null) {
                 if (sa.canTarget(opp)) {
+                    sa.resetTargets();
                     sa.getTargets().add(opp);
                     return true;
                 }
