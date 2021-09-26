@@ -147,7 +147,7 @@ public class CharmEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
-        // TODO Build StackDescription based on Chosen SubAbilities
+        // StackDescription based on Chosen SubAbilities allowed in chainAbilities
         return "";
     }
 
@@ -228,8 +228,10 @@ public class CharmEffect extends SpellAbilityEffect {
             // update ActivatingPlayer
             clone.setActivatingPlayer(sa.getActivatingPlayer());
 
-            // make StackDescription be the SpellDescription
-            clone.putParam("StackDescription", "SpellDescription");
+            // make StackDescription be the SpellDescription if it doesn't already have one
+            if (!clone.hasParam("StackDescription")) {
+                clone.putParam("StackDescription", "SpellDescription");
+            }
 
             // do not forget what was targeted by the subability
             SpellAbility ssa = sub;
