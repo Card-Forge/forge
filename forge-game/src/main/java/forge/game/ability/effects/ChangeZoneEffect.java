@@ -496,6 +496,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             chooser = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("Chooser"), sa).get(0);
         }
 
+        CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
+        CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
+
         for (final Card tgtC : tgtCards) {
             final Card gameCard = game.getCardState(tgtC, null);
             // gameCard is LKI in that case, the card is not in game anymore
@@ -582,13 +585,22 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (sa.hasParam("AttachedTo")) {
                         CardCollection list = AbilityUtils.getDefinedCards(hostCard, sa.getParam("AttachedTo"), sa);
                         if (list.isEmpty()) {
-                            list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), sa.getParam("AttachedTo"), gameCard.getController(), gameCard, sa);
+                            list = CardLists.getValidCards(lastStateBattlefield, sa.getParam("AttachedTo"), hostCard.getController(), hostCard, sa);
+                        }
+
+                        // only valid choices are when they could be attached
+                        // TODO for multiple Auras entering attached this way, need to use LKI info
+                        if (!list.isEmpty()) {
+                            list = CardLists.filter(list, CardPredicates.canBeAttached(gameCard));
                         }
                         if (!list.isEmpty()) {
                             Map<String, Object> params = Maps.newHashMap();
                             params.put("Attach", gameCard);
                             Card attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", gameCard.toString()), params);
-                            gameCard.attachToEntity(attachedTo);
+
+                            // TODO can't attach later or moveToPlay would attach indirectly
+                            // bypass canBeAttached to skip Protection checks when trying to attach multiple auras that would grant protection
+                            gameCard.attachToEntity(game.getCardState(attachedTo), true);
                         } else { // When it should enter the battlefield attached to an illegal permanent it fails
                             continue;
                         }
@@ -608,6 +620,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
 
                     Map<AbilityKey, Object> moveParams = Maps.newEnumMap(AbilityKey.class);
+                    moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
+                    moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
                     if (sa.isReplacementAbility()) {
                         ReplacementEffect re = sa.getReplacementEffect();
                         moveParams.put(AbilityKey.ReplacementEffect, re);
@@ -627,20 +641,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         hostCard.removeRemembered(gameCard);
                     }
 
-                    // Auras without Candidates stay in their current location
-                    if (gameCard.isAura()) {
-                        final SpellAbility saAura = gameCard.getFirstAttachSpell();
-                        if (saAura != null) {
-                            saAura.setActivatingPlayer(sa.getActivatingPlayer());
-                            if (!saAura.getTargetRestrictions().hasCandidates(saAura, false)) {
-                                if (sa.hasAdditionalAbility("AnimateSubAbility")) {
-                                    gameCard.removeChangedState();
-                                }
-                                continue;
-                            }
-                        }
-                    }
-
                     // need to be facedown before it hits the battlefield in case of Replacement Effects or Trigger
                     if (sa.hasParam("FaceDown")) {
                         gameCard.turnFaceDown(true);
@@ -648,7 +648,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
 
                     movedCard = game.getAction().moveTo(gameCard.getController().getZone(destination), gameCard, sa, moveParams);
-                    if (sa.hasParam("Unearth")) {
+                    // below stuff only if it changed zones
+                    if (!movedCard.getZone().equals(originZone)) {
+                        continue;
+                    }
+                    if (sa.hasParam("Unearth") && movedCard.isInPlay()) {
                         movedCard.setUnearthed(true);
                         movedCard.addChangedCardKeywords(Lists.newArrayList("Haste"), null, false,
                                 game.getNextTimestamp(), 0, true);
@@ -670,6 +674,19 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         combatChanged = true;
                     }
                     movedCard.setTimestamp(ts);
+                    if (sa.hasParam("AttachAfter") && movedCard.isAttachment()) {
+                        CardCollection list = AbilityUtils.getDefinedCards(hostCard, sa.getParam("AttachAfter"), sa);
+                        if (list.isEmpty()) {
+                            list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), sa.getParam("AttachAfter"), hostCard.getController(), hostCard, sa);
+                        }
+                        if (!list.isEmpty()) {
+                            String title = Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", CardTranslation.getTranslatedName(gameCard.getName()));
+                            Map<String, Object> params = Maps.newHashMap();
+                            params.put("Attach", gameCard);
+                            Card attachedTo = chooser.getController().chooseSingleEntityForEffect(list, sa, title, params);
+                            movedCard.attachToEntity(attachedTo);
+                        }
+                    }
                 } else {
                     // might set before card is moved only for nontoken
                     Card host = null;
@@ -1166,6 +1183,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         boolean combatChanged = false;
         final CardZoneTable triggerList = new CardZoneTable();
 
+        CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
+        CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
+
         for (Player player : HiddenOriginChoicesMap.keySet()) {
             boolean searchedLibrary = HiddenOriginChoicesMap.get(player).searchedLibrary;
             boolean shuffleMandatory = HiddenOriginChoicesMap.get(player).shuffleMandatory;
@@ -1182,6 +1202,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 final Zone originZone = game.getZoneOf(c);
                 Map<AbilityKey, Object> moveParams = Maps.newEnumMap(AbilityKey.class);
                 moveParams.put(AbilityKey.FoundSearchingLibrary,  searchedLibrary);
+                moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
+                moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
                 if (destination.equals(ZoneType.Library)) {
                     movedCard = game.getAction().moveToLibrary(c, libraryPos, sa, moveParams);
                 }
@@ -1225,26 +1247,25 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         }
                     }
 
-                    if (sa.hasParam("AttachedTo")) {
+                    if (sa.hasParam("AttachedTo") && c.isAttachment()) {
                         CardCollection list = AbilityUtils.getDefinedCards(source, sa.getParam("AttachedTo"), sa);
                         if (list.isEmpty()) {
-                            list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), sa.getParam("AttachedTo"), c.getController(), c, sa);
+                            list = CardLists.getValidCards(lastStateBattlefield, sa.getParam("AttachedTo"), source.getController(), source, sa);
+                        }
+                        // only valid choices are when they could be attached
+                        // TODO for multiple Auras entering attached this way, need to use LKI info
+                        if (!list.isEmpty()) {
+                            list = CardLists.filter(list, CardPredicates.canBeAttached(c));
                         }
                         if (!list.isEmpty()) {
-                            Card attachedTo = null;
-                            if (list.size() > 1) {
-                                String title = Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", CardTranslation.getTranslatedName(c.getName()));
-                                Map<String, Object> params = Maps.newHashMap();
-                                params.put("Attach", c);
-                                attachedTo = decider.getController().chooseSingleEntityForEffect(list, sa, title, params);
-                            }
-                            else {
-                                attachedTo = list.get(0);
-                            }
+                            String title = Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", CardTranslation.getTranslatedName(c.getName()));
+                            Map<String, Object> params = Maps.newHashMap();
+                            params.put("Attach", c);
+                            Card attachedTo = decider.getController().chooseSingleEntityForEffect(list, sa, title, params);
 
-                            if (c.isAttachment()) {
-                                c.attachToEntity(attachedTo);
-                            }
+                            // TODO can't attach later or moveToPlay would attach indirectly
+                            // bypass canBeAttached to skip Protection checks when trying to attach multiple auras that would grant protection
+                            c.attachToEntity(game.getCardState(attachedTo), true);
                         }
                         else { // When it should enter the battlefield attached to an illegal permanent it fails
                             continue;
@@ -1277,6 +1298,20 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     movedCard = game.getAction().moveToPlay(c, c.getController(), sa, moveParams);
 
                     movedCard.setTimestamp(ts);
+
+                    if (sa.hasParam("AttachAfter") && movedCard.isAttachment()) {
+                        CardCollection list = AbilityUtils.getDefinedCards(source, sa.getParam("AttachAfter"), sa);
+                        if (list.isEmpty()) {
+                            list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), sa.getParam("AttachAfter"), c.getController(), c, sa);
+                        }
+                        if (!list.isEmpty()) {
+                            String title = Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", CardTranslation.getTranslatedName(c.getName()));
+                            Map<String, Object> params = Maps.newHashMap();
+                            params.put("Attach", movedCard);
+                            Card attachedTo = decider.getController().chooseSingleEntityForEffect(list, sa, title, params);
+                            movedCard.attachToEntity(attachedTo);
+                        }
+                    }
                 }
                 else if (destination.equals(ZoneType.Exile)) {
                     movedCard = game.getAction().exile(c, sa, moveParams);

@@ -7,7 +7,6 @@ SVar:TrigFlip:DB$ SetState | Defined$ Self | Mode$ Flip
 AI:RemoveDeck:Random
 DeckNeeds:Type$Aura
 SVar:EnchantMe:Multiple
-SVar:Picture:http://www.wizards.com/global/images/magic/general/kitsune_mystic.jpg
 AlternateMode:Flip
 Oracle:At the beginning of the end step, if Kitsune Mystic is enchanted by two or more Auras, flip it.
 
@@ -17,10 +16,6 @@ Name:Autumn-Tail, Kitsune Sage
 ManaCost:3 W
 Types:Legendary Creature Fox Wizard
 PT:4/5
-A:AB$ Pump | Cost$ 1 | Amount$ 1 | ValidTgts$ Aura.AttachedTo Creature | TgtPrompt$ Select target Aura attached to a creature | SubAbility$ ChooseNewHost | StackDescription$ None | SpellDescription$ Attach target Aura attached to a creature to another creature.
-SVar:ChooseNewHost:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Creature.NotEnchantedByTargeted | ChoiceZone$ Battlefield | SubAbility$ KitsuneAttach | RememberChosen$ True | AILogic$ AtLeast1
-SVar:KitsuneAttach:DB$ Attach | Object$ ParentTarget | Defined$ Remembered | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Attach | Cost$ 1 | ValidTgts$ Aura.AttachedTo Creature | TgtPrompt$ Select target Aura attached to a creature | Object$ Targeted | Choices$ Creature | Move$ True | StackDescription$ SpellDescription | SpellDescription$ Attach target Aura attached to a creature to another creature.
 AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/autumn_tail_kitsune_sage.jpg
 Oracle:{1}: Attach target Aura attached to a creature to another creature.

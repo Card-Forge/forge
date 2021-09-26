@@ -1,11 +1,6 @@
 package forge.ai.ability;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -59,6 +54,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.zone.ZoneType;
+import forge.util.Aggregates;
 import forge.util.MyRandom;
 
 public class ChangeZoneAi extends SpellAbilityAi {
@@ -909,6 +905,19 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
             });
         }
+        if (sa.hasParam("AttachAfter")) {
+            list = CardLists.filter(list, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card c) {
+                    for (Card card : game.getCardsIn(ZoneType.Battlefield)) {
+                        if (card.isValid(sa.getParam("AttachAfter"), ai, c, sa)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            });
+        }
 
         if (list.size() < sa.getMinTargets()) {
             return false;
@@ -1702,7 +1711,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
     @Override
     public Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         // Called when looking for creature to attach aura or equipment
-        return ComputerUtilCard.getBestAI(options);
+        return AttachAi.attachGeneralAI(ai, sa, (List<Card>)options, !isOptional, sa.getHostCard(), sa.getParam("AILogic"));
     }
 
     /* (non-Javadoc)
@@ -1710,9 +1719,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
      */
     @Override
     public Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options, Map<String, Object> params) {
-        // Currently only used by Curse of Misfortunes, so this branch should never get hit
-        // But just in case it does, just select the first option
-        return Iterables.getFirst(options, null);
+        // Called when attaching Aura to player
+        return Aggregates.random(options);
     }
 
     private boolean doSacAndReturnFromGraveLogic(final Player ai, final SpellAbility sa) {

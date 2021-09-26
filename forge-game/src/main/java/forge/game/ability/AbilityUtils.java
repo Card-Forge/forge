@@ -405,8 +405,12 @@ public class AbilityUtils {
         }
 
         if (incR.length > 1 && !cards.isEmpty()) {
-            final String excR = "Card." + incR[1];
-            cards = CardLists.getValidCards(cards, excR.split(","), hostCard.getController(), hostCard, sa);
+            String[] valids = incR[1].split(",");
+            // need to add valids onto all of them
+            for (int i = 0; i < valids.length; i++) {
+                valids[i] = "Card." + valids[i];
+            }
+            cards = CardLists.getValidCards(cards, valids, hostCard.getController(), hostCard, sa);
         }
 
         return cards;

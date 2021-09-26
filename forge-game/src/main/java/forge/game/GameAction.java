@@ -43,7 +43,6 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.ability.effects.AttachEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
@@ -68,11 +67,13 @@ import forge.game.mulligan.MulliganService;
 import forge.game.player.GameLossReason;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
+import forge.game.player.PlayerPredicates;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityPredicates;
+import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCantAttackBlock;
 import forge.game.staticability.StaticAbilityLayer;
@@ -83,7 +84,9 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
+import forge.util.CardTranslation;
 import forge.util.Expressions;
+import forge.util.Localizer;
 import forge.util.MyRandom;
 import forge.util.ThreadUtil;
 import forge.util.Visitor;
@@ -156,6 +159,28 @@ public class GameAction {
         // in their previous zone
         if (toBattlefield && !c.isPermanent()) {
             return c;
+        }
+
+        // Aura entering indirectly
+        // need to check before it enters
+        if (c.isAura() && !c.isAttachedToEntity() && toBattlefield && (zoneFrom == null || !zoneFrom.is(ZoneType.Stack))) {
+            boolean found = false;
+            if (Iterables.any(game.getPlayers(),PlayerPredicates.canBeAttached(c))) {
+                found = true;
+            }
+            if (Iterables.any((CardCollectionView) params.get(AbilityKey.LastStateBattlefield), CardPredicates.canBeAttached(c))) {
+                found = true;
+            }
+            if (Iterables.any((CardCollectionView) params.get(AbilityKey.LastStateGraveyard), CardPredicates.canBeAttached(c))) {
+                found = true;
+            }
+            if (!found) {
+                c.clearControllers();
+                if (c.removeChangedState()) {
+                    c.updateStateForView();
+                }
+                return c;
+            }
         }
 
         // LKI is only needed when something is moved from the battlefield.
@@ -362,6 +387,27 @@ public class GameAction {
         }
 
         copied.getOwner().removeInboundToken(copied);
+
+        // Aura entering as Copy from stack
+        // without targets it is sent to graveyard
+        if (copied.isAura() && !copied.isAttachedToEntity() && toBattlefield) {
+            if (zoneFrom != null && zoneFrom.is(ZoneType.Stack) && game.getStack().isResolving(c)) {
+                boolean found = false;
+                if (Iterables.any(game.getPlayers(),PlayerPredicates.canBeAttached(copied))) {
+                    found = true;
+                }
+                if (Iterables.any((CardCollectionView) params.get(AbilityKey.LastStateBattlefield), CardPredicates.canBeAttached(copied))) {
+                    found = true;
+                }
+                if (Iterables.any((CardCollectionView) params.get(AbilityKey.LastStateGraveyard), CardPredicates.canBeAttached(copied))) {
+                    found = true;
+                }
+                if (!found) {
+                    return moveToGraveyard(copied, cause, params);
+                }
+            }
+            attachAuraOnIndirectEnterBattlefield(copied, params);
+        }
 
         // Handle merged permanent here so all replacement effects are already applied.
         CardCollection mergedCards = null;
@@ -736,13 +782,6 @@ public class GameAction {
             c.setCastSA(null);
         }
 
-        if (c.isAura() && zoneTo.is(ZoneType.Battlefield) && ((zoneFrom == null) || !zoneFrom.is(ZoneType.Stack))
-                && !c.isEnchanting()) {
-            // TODO Need a way to override this for Abilities that put Auras
-            // into play attached to things
-            AttachEffect.attachAuraOnIndirectEnterBattlefield(c);
-        }
-
         if (c.isRealCommander()) {
             c.setMoveToCommandZone(true);
         }
@@ -842,13 +881,8 @@ public class GameAction {
         return moveTo(hand, c, cause, params);
     }
 
-    public final Card moveToPlay(final Card c, SpellAbility cause) {
-        final PlayerZone play = c.getController().getZone(ZoneType.Battlefield);
-        return moveTo(play, c, cause, null);
-    }
-
-    public final Card moveToPlay(final Card c, final Player p, SpellAbility cause) {
-        return moveToPlay(c, p, cause, null);
+    public final Card moveToPlay(final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
+        return moveToPlay(c, c.getController(), cause, params);
     }
 
     public final Card moveToPlay(final Card c, final Player p, SpellAbility cause, Map<AbilityKey, Object> params) {
@@ -1225,6 +1259,7 @@ public class GameAction {
             }
             CardCollection noRegCreats = null;
             CardCollection desCreats = null;
+            CardCollection unAttachList = new CardCollection();
             for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
                 if (c.isCreature()) {
                     // Rule 704.5f - Put into grave (no regeneration) for toughness <= 0
@@ -1259,12 +1294,7 @@ public class GameAction {
                 }
 
                 checkAgain |= stateBasedAction_Saga(c, table);
-                checkAgain |= stateBasedAction704_attach(c, table); // Attachment
-
-                if (c.isCreature() && c.isAttachedToEntity()) { // Rule 704.5q - Creature attached to an object or player, becomes unattached
-                    c.unattachFromEntity(c.getEntityAttachedTo());
-                    checkAgain = true;
-                }
+                checkAgain |= stateBasedAction704_attach(c, unAttachList); // Attachment
 
                 checkAgain |= stateBasedAction704_5r(c); // annihilate +1/+1 counters with -1/-1 ones
 
@@ -1291,8 +1321,28 @@ public class GameAction {
                     }
                 }
 
+                // cleanup aura
+                if (c.isAura() && c.isInPlay() && !c.isEnchanting()) {
+                    if (noRegCreats == null) {
+                        noRegCreats = new CardCollection();
+                    }
+                    noRegCreats.add(c);
+                    checkAgain = true;
+                }
                 if (checkAgain) {
                     cardsToUpdateLKI.add(c);
+                }
+            }
+            for (Card u : unAttachList) {
+                u.unattachFromEntity(u.getEntityAttachedTo());
+
+                // cleanup aura
+                if (u.isAura() && u.isInPlay() && !u.isEnchanting()) {
+                    if (noRegCreats == null) {
+                        noRegCreats = new CardCollection();
+                    }
+                    noRegCreats.add(u);
+                    checkAgain = true;
                 }
             }
 
@@ -1423,13 +1473,13 @@ public class GameAction {
         }
     }
 
-    private boolean stateBasedAction704_attach(Card c, CardZoneTable table) {
+    private boolean stateBasedAction704_attach(Card c, CardCollection unAttachList) {
         boolean checkAgain = false;
 
         if (c.isAttachedToEntity()) {
             final GameEntity ge = c.getEntityAttachedTo();
             if (!ge.canBeAttached(c, true)) {
-                c.unattachFromEntity(ge);
+                unAttachList.add(c);
                 checkAgain = true;
             }
         }
@@ -1437,16 +1487,13 @@ public class GameAction {
         if (c.hasCardAttachments()) {
             for (final Card attach : Lists.newArrayList(c.getAttachedCards())) {
                 if (!attach.isInPlay()) {
-                    attach.unattachFromEntity(c);
+                    unAttachList.add(attach);
                     checkAgain = true;
                 }
             }
         }
-
-        // cleanup aura
-        if (c.isAura() && c.isInPlay() && !c.isEnchanting()) {
-            c.updateWasDestroyed(true);
-            sacrificeDestroy(c, null, table, null);
+        if (c.isCreature() && c.isAttachedToEntity()) { // Rule 704.5q - Creature attached to an object or player, becomes unattached
+            unAttachList.add(c);
             checkAgain = true;
         }
         return checkAgain;
@@ -2259,5 +2306,71 @@ public class GameAction {
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(dungeon);
         runParams.put(AbilityKey.Player, player);
         game.getTriggerHandler().runTrigger(TriggerType.DungeonCompleted, runParams, false);
+    }
+
+    /**
+     * Attach aura on indirect enter battlefield.
+     *
+     * @param source
+     *            the source
+     * @return true, if successful
+     */
+    public static boolean attachAuraOnIndirectEnterBattlefield(final Card source, Map<AbilityKey, Object> params) {
+        // When an Aura ETB without being cast you can choose a valid card to
+        // attach it to
+        final SpellAbility aura = source.getFirstAttachSpell();
+
+        if (aura == null) {
+            return false;
+        }
+        aura.setActivatingPlayer(source.getController());
+        final Game game = source.getGame();
+        final TargetRestrictions tgt = aura.getTargetRestrictions();
+
+        Player p = source.getController();
+        if (tgt.canTgtPlayer()) {
+            final FCollection<Player> players = new FCollection<>();
+
+            for (Player player : game.getPlayers()) {
+                if (player.isValid(tgt.getValidTgts(), aura.getActivatingPlayer(), source, aura)) {
+                    players.add(player);
+                }
+            }
+            final Player pa = p.getController().chooseSingleEntityForEffect(players, aura,
+                    Localizer.getInstance().getMessage("lblSelectAPlayerAttachSourceTo", CardTranslation.getTranslatedName(source.getName())), null);
+            if (pa != null) {
+                source.attachToEntity(pa);
+                return true;
+            }
+        }
+        else {
+            List<ZoneType> zones = Lists.newArrayList(tgt.getZone());
+            CardCollection list = new CardCollection();
+
+            if (params != null) {
+                if (zones.contains(ZoneType.Battlefield)) {
+                    list.addAll((CardCollectionView) params.get(AbilityKey.LastStateBattlefield));
+                    zones.remove(ZoneType.Battlefield);
+                }
+                if (zones.contains(ZoneType.Graveyard)) {
+                    list.addAll((CardCollectionView) params.get(AbilityKey.LastStateGraveyard));
+                    zones.remove(ZoneType.Graveyard);
+                }
+            }
+            list.addAll(game.getCardsIn(zones));
+
+            list = CardLists.getValidCards(list, tgt.getValidTgts(), aura.getActivatingPlayer(), source, aura);
+            if (list.isEmpty()) {
+                return false;
+            }
+
+            final Card o = p.getController().chooseSingleEntityForEffect(list, aura,
+                    Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", CardTranslation.getTranslatedName(source.getName())), null);
+            if (o != null) {
+                source.attachToEntity(game.getCardState(o), true);
+                return true;
+            }
+        }
+        return false;
     }
 }

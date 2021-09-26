@@ -4,10 +4,8 @@ Types:Enchantment Aura
 K:Enchant creature or land
 A:SP$ Attach | Cost$ 4 B B | ValidTgts$ Creature,Land | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Card.AttachedBy | AddTrigger$ NettlevineTrig | Description$ Enchanted permanent has "At the beginning of your end step, sacrifice this permanent and attach CARDNAME to a creature or land you control."
-SVar:NettlevineTrig:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ NettlevineSac | TriggerDescription$ At the beginning of your end step, sacrifice CARDNAME and attach ORIGINALHOST to a creature or land you control.
-SVar:NettlevineSac:DB$ Sacrifice | Defined$ Self | SubAbility$ NettlevineChoose
-SVar:NettlevineChoose:DB$ ChooseCard | Defined$ You | Choices$ Creature.YouCtrl,Land.YouCtrl | AILogic$ WorstCard | Mandatory$ True | SubAbility$ NettlevineAttach
-SVar:NettlevineAttach:DB$ Attach | Defined$ ChosenCard | Object$ OriginalHost | SubAbility$ NettlevineCleanup
-SVar:NettlevineCleanup:DB$ Pump | ClearChosenCard$ True
+SVar:NettlevineTrig:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ NettlevineSac | TriggerDescription$ At the beginning of your end step, sacrifice CARDNAME and ORIGINALHOST to a creature or land you control.
+SVar:NettlevineSac:DB$ Sacrifice | Defined$ Self | SubAbility$ NettlevineAttach
+SVar:NettlevineAttach:DB$ Attach | Object$ OriginalHost | Choices$ Creature.YouCtrl,Land.YouCtrl 
 SVar:NonStackingAttachEffect:True
 Oracle:Enchant creature or land\nEnchanted permanent has "At the beginning of your end step, sacrifice this permanent and attach Nettlevine Blight to a creature or land you control."

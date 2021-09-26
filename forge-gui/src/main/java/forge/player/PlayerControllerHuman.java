@@ -2766,7 +2766,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                             if (finalC.getRules().getType().isLand()) {
                                 // this is needed to ensure land abilities fire
                                 getGame().getAction().moveToHand(forgeCard, null);
-                                getGame().getAction().moveToPlay(forgeCard, null);
+                                getGame().getAction().moveToPlay(forgeCard, null, null);
                                 // ensure triggered abilities fire
                                 getGame().getTriggerHandler().runWaitingTriggers();
                             } else {

@@ -102,7 +102,7 @@ public class TargetSelection {
             return true;
         }
 
-        final boolean hasCandidates = tgt.hasCandidates(this.ability, true);
+        final boolean hasCandidates = tgt.hasCandidates(this.ability);
         if (!hasCandidates && !hasEnoughTargets) {
             // Cancel ability if there aren't any valid Candidates
             return false;

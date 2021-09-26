@@ -5,9 +5,7 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 4 B | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Deathtouch & Indestructible | Description$ Enchanted creature has deathtouch and indestructible.
 K:Morph:Sac<1/Creature.Other/another creature>
-R:Event$ TurnFaceUp | ValidCard$ Card.Self | ReplaceWith$ DBChoose | ActiveZones$ Battlefield | Description$ As CARDNAME is turned face up, you may attach it to a creature.
-SVar:DBChoose:DB$ ChooseCard | Choices$ Creature | ChoiceTitle$ Choose a creature | SubAbility$ DBAttach
-SVar:DBAttach:DB$ Attach | Defined$ ChosenCard | Object$ Self | Optional$ True | AILogic$ Pump | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+R:Event$ TurnFaceUp | ValidCard$ Card.Self | ReplaceWith$ DBAttach | ActiveZones$ Battlefield | Description$ As CARDNAME is turned face up, you may attach it to a creature.
+SVar:DBAttach:DB$ Attach | Choices$ Creature | ChoiceTitle$ Choose a creature  | Object$ Self | Optional$ True | AILogic$ Pump
 AI:RemoveDeck:All
 Oracle:Enchant creature\nEnchanted creature has deathtouch and indestructible.\nMorph—Sacrifice another creature. (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nAs Gift of Doom is turned face up, you may attach it to a creature.

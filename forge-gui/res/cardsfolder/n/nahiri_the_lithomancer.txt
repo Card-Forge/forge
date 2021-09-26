@@ -3,10 +3,9 @@ ManaCost:3 W W
 Types:Legendary Planeswalker Nahiri
 Loyalty:3
 Text:CARDNAME can be your commander.
-A:AB$ Token | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ w_1_1_kor_soldier | TokenOwner$ You | LegacyImage$ w 1 1 kor soldier c14 | RememberTokens$ True | SubAbility$ DBChooseToken | SpellDescription$ Create a 1/1 white Kor Soldier creature token. You may attach an Equipment you control to it.
-SVar:DBChooseToken:DB$ ChooseCard | DefinedCards$ Remembered | Mandatory$ True | ChoiceTitle$ Choose a token | SubAbility$ DBAttach | StackDescription$ None
-SVar:DBAttach:DB$ Attach | Optional$ True | Choices$ Equipment.YouCtrl | ChoiceTitle$ Choose an Equipment you control | Defined$ ChosenCard | SubAbility$ DBCleanup | StackDescription$ None
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
+A:AB$ Token | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ w_1_1_kor_soldier | TokenOwner$ You | LegacyImage$ w 1 1 kor soldier c14 | RememberTokens$ True | SubAbility$ DBAttach | SpellDescription$ Create a 1/1 white Kor Soldier creature token. You may attach an Equipment you control to it.
+SVar:DBAttach:DB$ Attach | Optional$ True | Choices$ Equipment.YouCtrl | ChoiceTitle$ Choose an Equipment you control | Defined$ Remembered | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ ChangeZone | Cost$ SubCounter<2/LOYALTY> | Origin$ Hand,Graveyard | Destination$ Battlefield | Hidden$ True | Planeswalker$ True | ChangeType$ Equipment.YouCtrl | Optional$ True | SpellDescription$ You may put an Equipment card from your hand or graveyard onto the battlefield.
 A:AB$ Token | Cost$ SubCounter<10/LOYALTY> | Planeswalker$ True | Ultimate$ True | TokenAmount$ 1 | TokenScript$ stoneforged_blade | LegacyImage$ stoneforged blade c14 | TokenOwner$ You | SpellDescription$ Create a colorless Equipment artifact token named Stoneforged Blade. It has indestructible, "Equipped creature gets +5/+5 and has double strike," and equip {0}.
 DeckHas:Ability$Token

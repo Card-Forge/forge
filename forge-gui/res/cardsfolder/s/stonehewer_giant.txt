@@ -3,10 +3,6 @@ ManaCost:3 W W
 Types:Creature Giant Warrior
 PT:4/4
 K:Vigilance
-A:AB$ ChangeZone | Cost$ 1 W T | Origin$ Library | Destination$ Battlefield | ChangeType$ Equipment | ChangeNum$ 1 | Imprint$ True | SubAbility$ DBChoose | SpellDescription$ Search your library for an Equipment card, put it onto the battlefield, attach it to a creature you control, then shuffle.
-SVar:DBChoose:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose a creature | SubAbility$ DBAttach | RememberChosen$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
-SVar:DBAttach:DB$ Attach | Object$ Imprinted | Defined$ Remembered | SubAbility$ DBCleanup | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
-SVar:X:Imprinted$Amount
-SVar:Picture:http://www.wizards.com/global/images/magic/general/stonehewer_giant.jpg
+A:AB$ ChangeZone | Cost$ 1 W T | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.Equipment+YouOwn | ChangeNum$ 1 | AttachAfter$ Creature.YouCtrl | SpellDescription$ Search your library for an Equipment card, put it onto the battlefield, attach it to a creature you control, then shuffle.
+DeckNeeds:Type$Equipment
 Oracle:Vigilance\n{1}{W}, {T}: Search your library for an Equipment card, put it onto the battlefield, attach it to a creature you control, then shuffle.

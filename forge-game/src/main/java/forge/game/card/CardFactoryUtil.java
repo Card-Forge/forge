@@ -47,6 +47,7 @@ import forge.game.Game;
 import forge.game.GameEntityCounterTable;
 import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.cost.Cost;
@@ -110,7 +111,16 @@ public class CardFactoryUtil {
                 if (!hostCard.isFaceDown()) {
                     hostCard.setOriginalStateAsFaceDown();
                 }
-                hostCard.getGame().getAction().moveToPlay(hostCard, this);
+                final Game game = hostCard.getGame();
+
+                CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
+                CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
+
+                Map<AbilityKey, Object> moveParams = Maps.newEnumMap(AbilityKey.class);
+                moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
+                moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
+
+                hostCard.getGame().getAction().moveToPlay(hostCard, this, moveParams);
             }
 
             @Override

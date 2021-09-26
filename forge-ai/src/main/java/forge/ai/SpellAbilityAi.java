@@ -175,7 +175,7 @@ public abstract class SpellAbilityAi {
         // a mandatory SpellAbility with targeting but without candidates,
         // does not need to go any deeper
         if (sa.usesTargeting() && mandatory && !sa.isTargetNumberValid()
-                && !sa.getTargetRestrictions().hasCandidates(sa, true)) {
+                && !sa.getTargetRestrictions().hasCandidates(sa)) {
             return false;
         }
 
@@ -233,7 +233,7 @@ public abstract class SpellAbilityAi {
         // sub-SpellAbility might use targets too
         if (sa.usesTargeting()) {
             // no Candidates, no adding to Stack
-            if (!sa.getTargetRestrictions().hasCandidates(sa, true)) {
+            if (!sa.getTargetRestrictions().hasCandidates(sa)) {
                 return false;
             }
             // but if it does, it should override this function

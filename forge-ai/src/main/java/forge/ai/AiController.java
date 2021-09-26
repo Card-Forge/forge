@@ -860,7 +860,7 @@ public class AiController {
             return canPlayFromEffectAI((SpellPermanent)sa, false, true);
         }
         if (sa.usesTargeting()) {
-            if (!sa.isTargetNumberValid() && !sa.getTargetRestrictions().hasCandidates(sa, true)) {
+            if (!sa.isTargetNumberValid() && !sa.getTargetRestrictions().hasCandidates(sa)) {
                 return AiPlayDecision.TargetingFailed;
             }
             if (!StaticAbilityMustTarget.meetsMustTargetRestriction(sa)) {
