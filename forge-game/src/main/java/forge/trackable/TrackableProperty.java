@@ -204,7 +204,7 @@ public enum TrackableProperty {
     ExtraTurnCount(TrackableTypes.IntegerType),
     HasPriority(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
     HasDelirium(TrackableTypes.BooleanType),
-    WasAvatarDamaged(TrackableTypes.BooleanType),
+    AvatarLifeDifference(TrackableTypes.IntegerType, FreezeMode.IgnoresFreeze),
     HasLost(TrackableTypes.BooleanType),
 
     //SpellAbility

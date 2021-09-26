@@ -474,8 +474,6 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventPlayerDamaged event) {
-        //for avatar animation
-        event.target.setAvatarWasDamaged(event.amount > 0);
         return processEvent();
     }
 

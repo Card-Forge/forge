@@ -224,14 +224,16 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.HasLost, val);
     }
 
-    public boolean getAvatarWasDamaged() {
-        if (get(TrackableProperty.WasAvatarDamaged) == null)
-            return false;
-        return get(TrackableProperty.WasAvatarDamaged);
+    public int getAvatarLifeDifference() {
+        return (int)get(TrackableProperty.AvatarLifeDifference);
     }
-
-    public void setAvatarWasDamaged(final boolean val) {
-        set(TrackableProperty.WasAvatarDamaged, val);
+    public boolean wasAvatarLifeChanged() {
+        if ((int)get(TrackableProperty.AvatarLifeDifference) == 0)
+            return false;
+        return (int)get(TrackableProperty.AvatarLifeDifference) != 0;
+    }
+    public void setAvatarLifeDifference(final int val) {
+        set(TrackableProperty.AvatarLifeDifference, val);
     }
 
     public int getExtraTurnCount() {

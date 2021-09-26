@@ -417,9 +417,9 @@ public class VPlayerPanel extends FContainer {
         private void update() {
             int vibrateDuration = 0;
             int delta = player.getLife() - life;
+            player.setAvatarLifeDifference(player.getAvatarLifeDifference()+delta);
             if (delta != 0) {
                 if (delta < 0) {
-                    //TODO: Show animation on avatar for life loss
                     vibrateDuration += delta * -100;
                 }
                 life = player.getLife();
