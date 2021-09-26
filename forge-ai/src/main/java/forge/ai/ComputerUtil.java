@@ -373,7 +373,12 @@ public class ComputerUtil {
                         }
 
                         if (!prefList.isEmpty() || (overrideList != null && !overrideList.isEmpty())) {
-                            return ComputerUtilCard.getWorstAI(overrideList == null ? prefList : overrideList);
+                            boolean isBestAI = "true".equalsIgnoreCase(activate.getSVar("AIPreferBestCard"));
+                            if (isBestAI) {
+                                return ComputerUtilCard.getBestAI(overrideList == null ? prefList : overrideList);
+                            } else {
+                                return ComputerUtilCard.getWorstAI(overrideList == null ? prefList : overrideList);
+                            }
                         }
                     }
                 }
