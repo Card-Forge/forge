@@ -2,9 +2,10 @@ Name:Dichotomancy
 ManaCost:7 U U
 Types:Sorcery
 K:Suspend:3:1 U U
-A:SP$ RepeatEach | Cost$ 7 U U | ValidTgts$ Opponent | UseImprinted$ True | RepeatCards$ Permanent.nonLand+TargetedPlayerCtrl+tapped | Zone$ Battlefield | ChooseOrder$ True | RepeatSubAbility$ DBSearch | SubAbility$ DBShuffle | StackDescription$ SpellDescription | SpellDescription$ For each tapped nonland permanent target opponent controls, search that player's library for a card with the same name as that permanent. Put those cards onto the battlefield under your control, then that player shuffles.
-SVar:DBSearch:DB$ ChangeZone | DefinedPlayer$ ImprintedController | Chooser$ You | Origin$ Library | Destination$ Battlefield | GainControl$ True | ChangeType$ Card.sharesNameWith Imprinted | ChangeNum$ 1 | NoShuffle$ True
+A:SP$ RepeatEach | ValidTgts$ Opponent | RepeatCards$ Permanent.nonLand+TargetedPlayerCtrl+tapped | Zone$ Battlefield | RepeatSubAbility$ DBSearch | SubAbility$ DBChangeZone | StackDescription$ SpellDescription | SpellDescription$ For each tapped nonland permanent target opponent controls, search that player's library for a card with the same name as that permanent. Put those cards onto the battlefield under your control, then that player shuffles.
+SVar:DBSearch:DB$ ChooseCard | ChoiceZone$ Library | QuasiLibrarySearch$ TargetedPlayer | Choices$ Card.TargetedPlayerOwn+IsNotImprinted+sharesNameWith Remembered | ImprintChosen$ True | ChoiceTitle$ You may select a card with the same name from your opponent's library
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ Imprinted | Origin$ Library | Destination$ Battlefield | GainControl$ True | Searched$ True | StackDescription$ None | SubAbility$ DBShuffle
 SVar:DBShuffle:DB$ Shuffle | Defined$ ParentTarget | StackDescription$ None
-AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/dichotomancy.jpg
+SVar:NeedsToPlayVar:Z GE3
+SVar:Z:PlayerCountOpponents$HighestValid Permanent.nonLand+YouCtrl+tapped
 Oracle:For each tapped nonland permanent target opponent controls, search that player's library for a card with the same name as that permanent. Put those cards onto the battlefield under your control, then that player shuffles.\nSuspend 3—{1}{U}{U} (Rather than cast this card from your hand, you may pay {1}{U}{U} and exile it with three time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)
