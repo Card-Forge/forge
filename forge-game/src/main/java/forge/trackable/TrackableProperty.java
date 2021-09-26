@@ -202,7 +202,7 @@ public enum TrackableProperty {
     Mana(TrackableTypes.ManaMapType, FreezeMode.IgnoresFreeze),
     IsExtraTurn(TrackableTypes.BooleanType),
     ExtraTurnCount(TrackableTypes.IntegerType),
-    HasPriority(TrackableTypes.BooleanType),
+    HasPriority(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
     HasDelirium(TrackableTypes.BooleanType),
     WasAvatarDamaged(TrackableTypes.BooleanType),
     HasLost(TrackableTypes.BooleanType),

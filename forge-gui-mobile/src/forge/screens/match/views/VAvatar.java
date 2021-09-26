@@ -65,7 +65,7 @@ public class VAvatar extends FDisplayObject {
                 g.drawImage(splatter, x-mod/2, y-mod/2, w+mod, h+mod);
                 g.resetAlphaComposite();
             }
-
+            drawPlayerIndicator(g, w, h, percentage);
         }
 
         @Override
@@ -121,11 +121,11 @@ public class VAvatar extends FDisplayObject {
             } else {
                 avatarAnimation.progress = 0;
                 g.drawAvatarImage(image, 0, 0, w, h, player.getHasLost());
+                drawPlayerIndicator(g, w, h, 1);
             }
         } else {
             g.drawAvatarImage(image, 0, 0, w, h, player.getHasLost());
         }
-
 
         if (Forge.altPlayerLayout && !Forge.altZoneTabs && Forge.isLandscapeMode())
             return;
@@ -137,6 +137,32 @@ public class VAvatar extends FDisplayObject {
             FSkinFont font = VPhaseIndicator.BASE_FONT;
             float xpHeight = font.getCapHeight();
             g.drawOutlinedText(xp + " XP", font, Color.WHITE, Color.BLACK, 0, h - xpHeight - VPhaseIndicator.PADDING_Y, w - VPhaseIndicator.PADDING_X, h, false, Align.right, false);
+        }
+    }
+    private void drawPlayerIndicator(Graphics g, float w, float h, float alphaModifier) {
+        float oldAlpha = g.getfloatAlphaComposite();
+        boolean displayPriority = true;
+        for (PlayerView playerView : MatchController.instance.getGameView().getPlayers()) {
+            if (playerView.isAI()) {
+                //only display priority indicator if there's no AI player
+                displayPriority = false;
+                break;
+            }
+        }
+        //turn indicator
+        if (player == MatchController.instance.getGameView().getPlayerTurn()) {
+            float alpha = displayPriority ? 1f : 0.8f;
+            if (alphaModifier < 1)
+                alpha = alphaModifier;
+            g.setAlphaComposite(alpha);
+            g.drawRect(w / 16f, Color.CYAN, 0, 0, w, h);
+            g.setAlphaComposite(oldAlpha);
+        }
+        //priority indicator
+        if (displayPriority && player.getHasPriority() && alphaModifier == 1) {
+            g.setAlphaComposite(0.6f);
+            g.drawRect(w / 16f, Color.LIME, 0, 0, w, h);
+            g.setAlphaComposite(oldAlpha);
         }
     }
 }
