@@ -691,8 +691,7 @@ public class DamageDealAi extends DamageAiBase {
                 // on the stack or from taking combat damage
 
                 final Cost abCost = sa.getPayCosts();
-                boolean freePing = immediately || abCost == null
-                        || sa.getTargets().size() > 0;
+                boolean freePing = immediately || abCost == null || sa.getTargets().size() > 0;
 
                 if (!source.isSpell()) {
                     if (phase.is(PhaseType.END_OF_TURN) && sa.isAbility() && abCost.isReusuableResource()) {
@@ -757,22 +756,18 @@ public class DamageDealAi extends DamageAiBase {
                         sa.addDividedAllocation(enemy, dmg);
                         break;
                     }
-                    continue;
                 }
             }
-            // fell through all the choices, no targets left?
-            if (tcs.size() < tgt.getMinTargets(source, sa) || tcs.size() == 0) {
-                if (!mandatory) {
-                    sa.resetTargets();
-                    return false;
-                } else {
-                    // If the trigger is mandatory, gotta choose my own stuff now
-                    return this.damageChooseRequiredTargets(ai, sa, tgt, dmg);
-                }
-            } else {
-                // TODO is this good enough? for up to amounts?
-                break;
+        }
+
+        // fell through all the choices, no targets left?
+        if (tcs.size() < tgt.getMinTargets(source, sa) || tcs.size() == 0) {
+            if (mandatory) {
+                // If the trigger is mandatory, gotta choose my own stuff now
+                return this.damageChooseRequiredTargets(ai, sa, tgt, dmg);
             }
+            sa.resetTargets();
+            return false;
         }
         return true;
     }
