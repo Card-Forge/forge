@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import forge.game.player.DelayedReveal;
+import forge.game.player.PlayerView;
+import forge.util.CardTranslation;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.card.CardType;
@@ -165,12 +168,28 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                 } else {
                     String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseaCard") + " ";
                     if (sa.hasParam ("ChoiceTitleAppendDefined")) {
-                        String defined = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("ChoiceTitleAppendDefined"), sa).toString();
-                        final StringBuilder sb = new StringBuilder();
-                        sb.append(title).append(" ").append(defined);
-                        title = sb.toString();
+                        String defined = AbilityUtils.getDefinedPlayers(host, sa.getParam("ChoiceTitleAppendDefined"), sa).toString();
+                        title = title + " " + defined;
                     }
-                    chosen.addAll(p.getController().chooseCardsForEffect(choices, sa, title, minAmount, validAmount, !sa.hasParam("Mandatory"), null));
+                    if (sa.hasParam("QuasiLibrarySearch")) {
+                        final Player searched = AbilityUtils.getDefinedPlayers(host,
+                                sa.getParam("QuasiLibrarySearch"), sa).get(0);
+                        final int fetchNum = Math.min(searched.getCardsIn(ZoneType.Library).size(), 4);
+                        CardCollectionView shown = !p.hasKeyword("LimitSearchLibrary")
+                                ? searched.getCardsIn(ZoneType.Library) : searched.getCardsIn(ZoneType.Library, fetchNum);
+                        DelayedReveal delayedReveal = new DelayedReveal(shown, ZoneType.Library, PlayerView.get(searched),
+                                CardTranslation.getTranslatedName(host.getName()) + " - " +
+                                        Localizer.getInstance().getMessage("lblLookingCardIn") + " ");
+                        Card choice = p.getController().chooseSingleEntityForEffect(choices, delayedReveal, sa, title,
+                                !sa.hasParam("Mandatory"), p, null);
+                        if (choice == null) {
+                            return;
+                        }
+                        chosen.add(choice);
+                    } else {
+                        chosen.addAll(p.getController().chooseCardsForEffect(choices, sa, title, minAmount, validAmount,
+                                !sa.hasParam("Mandatory"), null));
+                    }
                 }
             }
             if (sa.hasParam("Reveal")) {
