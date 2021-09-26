@@ -5,7 +5,7 @@ Name=MTGO Vintage Cube 2013
 1 Path to Exile|2XM
 1 Land Tax|2XM
 1 Exalted Angel|ONS
-1 Mana Tithe|PLC
+1 Mana Tithe|STX
 1 Spectral Procession|MM2
 1 Wall of Omens|EMA
 1 Sun Titan|M12
@@ -18,11 +18,11 @@ Name=MTGO Vintage Cube 2013
 1 Weathered Wayfarer|9ED
 1 Ravages of War|PTK
 1 Student of Warfare|ROE
-1 Swords to Plowshares|A25
+1 Swords to Plowshares|STX
 1 Elspeth Tirel|SOM
 1 Mirran Crusader|MM2
 1 Elite Vanguard|EMA
-1 Day of Judgment|M12
+1 Day of Judgment|STX
 1 Nearheath Pilgrim|AVR
 1 Silverblade Paladin|AVR
 1 Soldier of the Pantheon|THS
@@ -73,7 +73,7 @@ Name=MTGO Vintage Cube 2013
 1 Mana Drain|IMA
 1 Frantic Search|UMA
 1 Treachery|UDS
-1 Brainstorm|2XM
+1 Brainstorm|STX
 1 Brain Freeze|VMA
 1 Vesuvan Shapeshifter|A25
 1 Venser, Shaper Savant|MM3
@@ -85,11 +85,11 @@ Name=MTGO Vintage Cube 2013
 1 Intuition|TPR
 1 Forbid|MPS_AKH
 1 Force Spike|7ED
-1 Upheaval|VMA
+1 Upheaval|MH2
 1 Voidmage Prodigy|TSB
 1 Willbender|A25
 1 Gifts Ungiven|MM3
-1 Compulsive Research|MM3
+1 Compulsive Research|STX
 1 Riftwing Cloudskate|MMA
 1 Glen Elendra Archmage|UMA
 1 Inkwell Leviathan|2XM
@@ -122,12 +122,12 @@ Name=MTGO Vintage Cube 2013
 1 Timetwister|VMA
 1 Show and Tell|CN2
 1 Aetherling|DGM
-1 Memory Lapse|EMA
+1 Memory Lapse|STX
 1 Dream Halls|TPR
 1 Opposition|MPS_AKH
-1 Mind's Desire|SCG
+1 Mind's Desire|STX
 1 Vendilion Clique|A25
-1 Counterspell|A25
+1 Counterspell|MH2
 1 Force of Will|2XM
 1 Control Magic|EMA
 1 Jace, Architect of Thought|RTR
@@ -141,7 +141,7 @@ Name=MTGO Vintage Cube 2013
 1 Trinket Mage|SOM
 1 Recurring Nightmare|TPR
 1 Buried Alive|UMA
-1 Tendrils of Agony|VMA
+1 Tendrils of Agony|STX
 1 Unburial Rites|UMA
 1 Mesmeric Fiend|A25
 1 Slaughter Pact|MPS_AKH
@@ -168,8 +168,8 @@ Name=MTGO Vintage Cube 2013
 1 Vampiric Tutor|EMA
 1 Living Death|A25
 1 Reanimate|UMA
-1 Bone Shredder|ULG
-1 Braids, Cabal Minion|EMA
+1 Bone Shredder|MH2
+1 Braids, Cabal Minion|MH2
 1 Entomb|UMA
 1 Putrid Imp|VMA
 1 Nezumi Graverobber|CHK
@@ -180,13 +180,13 @@ Name=MTGO Vintage Cube 2013
 1 Nekrataal|EMA
 1 Shriekmaw|UMA
 1 Bitterblossom|UMA
-1 Demonic Tutor|UMA
+1 Demonic Tutor|STX
 1 Necropotence|IMA
 1 Disfigure|M20
 1 Vampire Nighthawk|MM3
 1 Guul Draz Assassin|ROE
 1 Consuming Vapors|ROE
-1 Duress|M21
+1 Duress|STX
 1 Skinrender|SOM
 1 Dismember|MM2
 1 Diregraf Ghoul|M19
@@ -201,10 +201,10 @@ Name=MTGO Vintage Cube 2013
 1 Diabolic Edict|MH1
 1 Sarcomancy|TPR
 1 Oona's Prowler|LRW
-1 Dark Ritual|A25
+1 Dark Ritual|STX
 1 Hypnotic Specter|M10
 1 Bloodghast|IMA
-1 Inquisition of Kozilek|MM3
+1 Inquisition of Kozilek|STX
 1 Phyrexian Rager|IMA
 1 Bloodgift Demon|ISD
 1 Mind Twist|MPS_AKH
@@ -265,15 +265,15 @@ Name=MTGO Vintage Cube 2013
 1 Kird Ape|EMA
 1 Brimstone Volley|2XM
 1 Devil's Play|ISD
-1 Faithless Looting|UMA
+1 Faithless Looting|STX
 1 Orcish Lumberjack|VMA
 1 Zealous Conscripts|MM3
 1 Mizzium Mortars|MM3
 1 Goblin Vandal|WTH
 1 Plated Geopede|ZEN
-1 Lightning Bolt|A25
+1 Lightning Bolt|STX
 1 Chain Lightning|MPS_AKH
-1 Chaos Warp|VMA
+1 Chaos Warp|STX
 1 Fireblast|VMA
 1 Chandra, Pyromaster|M15
 1 Hero of Oxid Ridge|MBS
@@ -290,11 +290,11 @@ Name=MTGO Vintage Cube 2013
 1 Restock|M15
 1 Tooth and Nail|MMA
 1 Eternal Witness|UMA
-1 Primal Command|MM3
+1 Primal Command|STX
 1 Stunted Growth|ICE
 1 Wickerbough Elder|UMA
 1 Master of the Wild Hunt|A25
-1 Harmonize|MM3
+1 Harmonize|STX
 1 Terastodon|2XM
 1 Garruk Wildspeaker|M11
 1 Birthing Pod|NPH
@@ -304,7 +304,7 @@ Name=MTGO Vintage Cube 2013
 1 Wolfir Silverheart|AVR
 1 Eureka|VMA
 1 Garruk, Caller of Beasts|M14
-1 Natural Order|EMA
+1 Natural Order|STX
 1 Deranged Hermit|VMA
 1 Nostalgic Dreams|VMA
 1 Genesis|MH1
@@ -312,7 +312,7 @@ Name=MTGO Vintage Cube 2013
 1 Heartbeat of Spring|2XM
 1 Woodfall Primus|UMA
 1 Noble Hierarch|2XM
-1 Channel|IMA
+1 Channel|STX
 1 Oracle of Mul Daya|ZEN
 1 Arbor Elf|A25
 1 Joraga Treespeaker|ROE
@@ -338,7 +338,7 @@ Name=MTGO Vintage Cube 2013
 1 Acidic Slime|M13
 1 Garruk, Primal Hunter|M13
 1 Llanowar Elves|DOM
-1 Regrowth|MH1
+1 Regrowth|STX
 1 Fyndhorn Elves|VMA
 1 Thragtusk|2XM
 1 Elvish Mystic|M15
@@ -360,7 +360,7 @@ Name=MTGO Vintage Cube 2013
 1 Library of Alexandria|VMA
 1 Lake of the Dead|VMA
 1 Llanowar Wastes|ORI
-1 Marsh Flats|MM3
+1 Marsh Flats|MH2
 1 Boros Garrison|IMA
 1 Izzet Boilerworks|IMA
 1 Orzhov Basilica|IMA
@@ -369,7 +369,7 @@ Name=MTGO Vintage Cube 2013
 1 Adarkar Wastes|10E
 1 Plateau|VMA
 1 Rishadan Port|A25
-1 Scalding Tarn|MM3
+1 Scalding Tarn|MH2
 1 Shivan Reef|ORI
 1 Steam Vents|GRN
 1 Strip Mine|EXP
@@ -384,8 +384,8 @@ Name=MTGO Vintage Cube 2013
 1 Ancient Tomb|UMA
 1 Azorius Chancery|IMA
 1 Badlands|VMA
-1 Arid Mesa|MM3
-1 Misty Rainforest|MM3
+1 Arid Mesa|MH2
+1 Misty Rainforest|MH2
 1 Maze of Ith|2XM
 1 Dimir Aqueduct|IMA
 1 Teetering Peaks|ZEN
@@ -399,9 +399,9 @@ Name=MTGO Vintage Cube 2013
 1 Sulfurous Springs|10E
 1 Yavimaya Coast|ORI
 1 Karplusan Forest|10E
-1 Verdant Catacombs|MM3
+1 Verdant Catacombs|MH2
 1 Wasteland|EMA
-1 Mishra's Factory|2XM
+1 Mishra's Factory|MH2
 1 Selesnya Sanctuary|IMA
 1 Rakdos Carnarium|IMA
 1 Simic Growth Chamber|IMA
@@ -419,8 +419,8 @@ Name=MTGO Vintage Cube 2013
 1 Ral Zarek|DGM
 1 Void|EMA
 1 Pernicious Deed|A25
-1 Lightning Helix|IMA
-1 Electrolyze|IMA
+1 Lightning Helix|STX
+1 Electrolyze|STX
 1 Grand Arbiter Augustin IV|MMA
 1 Kitchen Finks|UMA
 1 Stillmoon Cavalier|EVE
@@ -428,9 +428,9 @@ Name=MTGO Vintage Cube 2013
 1 Nicol Bolas, Planeswalker|M13
 1 Sphinx of the Steel Wind|EMA
 1 Huntmaster of the Fells|DKA
-1 Mirari's Wake|CNS
+1 Mirari's Wake|MH2
 1 Venser, the Sojourner|SOM
-1 Shardless Agent|EMA
+1 Shardless Agent|MH2
 1 Izzet Charm|2XM
 1 Abrupt Decay|MM3
 1 Domri Rade|MM3
@@ -458,7 +458,7 @@ Name=MTGO Vintage Cube 2013
 1 Prophetic Bolt|VMA
 1 Shadowmage Infiltrator|A25
 1 Ajani Vengeant|ALA
-1 Vindicate|A25
+1 Vindicate|MH2
 1 Maelstrom Pulse|2XM
 1 Tezzeret, Agent of Bolas|MBS
 1 Sorin, Lord of Innistrad|DKA
@@ -478,7 +478,7 @@ Name=MTGO Vintage Cube 2013
 1 Grim Monolith|ULG
 1 Memory Jar|VMA
 1 Mox Diamond|TPR
-1 Nevinyrral's Disk|EMA
+1 Nevinyrral's Disk|MH2
 1 Orzhov Signet|MM3
 1 Pristine Talisman|IMA
 1 Rakdos Signet|MM3

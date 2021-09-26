@@ -18,11 +18,11 @@ Name=MTGO Legacy Cube July 2019
 1 Angrath, the Flame-Chained|RIX
 1 Anguished Unmaking|SOI
 1 Animate Dead|EMA
-1 Approach of the Second Sun|AKR
+1 Approach of the Second Sun|STX
 1 Arbor Elf|A25
 1 Arcane Artisan
 1 Archangel Avacyn|SOI
-1 Arid Mesa|MM3
+1 Arid Mesa|MH2
 1 Armageddon|A25
 1 Ashiok, Nightmare Weaver|THS
 1 Assassin's Trophy|GRN
@@ -61,11 +61,11 @@ Name=MTGO Legacy Cube July 2019
 1 Blooming Marsh|KLD
 1 Bogardan Hellkite|IMA
 1 Bomat Courier|KLD
-1 Bone Shredder|ULG
+1 Bone Shredder|MH2
 1 Bonfire of the Damned|MM3
 1 Botanical Sanctum|KLD
 1 Brain Maggot|JOU
-1 Brainstorm|2XM
+1 Brainstorm|STX
 1 Breeding Pool|RNA
 1 Brightling
 1 Brimaz, King of Oreskos|BNG
@@ -95,7 +95,7 @@ Name=MTGO Legacy Cube July 2019
 1 Coldsteel Heart|CSP
 1 Collective Brutality|EMN
 1 Collective Defiance|EMN
-1 Compulsive Research|MM3
+1 Compulsive Research|STX
 1 Concealed Courtyard|KLD
 1 Conclave Tribunal|GRN
 1 Condemn|M11
@@ -104,21 +104,21 @@ Name=MTGO Legacy Cube July 2019
 1 Control Magic|EMA
 1 Copperline Gorge|SOM
 1 Council's Judgment|2XM
-1 Counterspell|A25
+1 Counterspell|MH2
 1 Courser of Kruphix|A25
 1 Craterhoof Behemoth|MM3
 1 Creeping Tar Pit|UMA
 1 Crucible of Worlds|M19
 1 Cryptbreaker|EMN
 1 Cryptic Command|IMA
-1 Cultivate|M21
+1 Cultivate|STX
 1 Cyclonic Rift|2XM
 1 Dack Fayden|EMA
 1 Damnation|MPS_AKH
 1 Dark Confidant|2XM
-1 Dark Ritual|A25
+1 Dark Ritual|STX
 1 Darkslick Shores|SOM
-1 Day of Judgment|M12
+1 Day of Judgment|STX
 1 Daze|MPS_AKH
 1 Deafening Clarion|GRN
 1 Deceiver Exarch|CN2
@@ -132,7 +132,7 @@ Name=MTGO Legacy Cube July 2019
 1 Devoted Druid|UMA
 1 Dismember|MM2
 1 Dismissive Pyromancer|M19
-1 Doom Blade|IMA
+1 Doom Blade|STX
 1 Dragonlord Atarka|DTK
 1 Dragonlord Silumgar|DTK
 1 Dragonskull Summit|XLN
@@ -143,9 +143,9 @@ Name=MTGO Legacy Cube July 2019
 1 Drowned Catacomb|XLN
 1 Dualcaster Mage|2XM
 1 Duplicant|2XM
-1 Duress|M21
+1 Duress|STX
 1 Edric, Spymaster of Trest|VMA
-1 Electrolyze|IMA
+1 Electrolyze|STX
 1 Elesh Norn, Grand Cenobite|IMA
 1 Elspeth, Knight-Errant|MMA
 1 Elspeth, Sun's Champion|THS
@@ -159,7 +159,7 @@ Name=MTGO Legacy Cube July 2019
 1 Entreat the Angels|MM3
 1 Eternal Witness|UMA
 1 Everflowing Chalice|2XM
-1 Evolving Wilds|AKR
+1 Evolving Wilds|AFR
 1 Exhume|USG
 1 Expansion // Explosion|GRN
 1 Experimental Frenzy|GRN
@@ -168,7 +168,7 @@ Name=MTGO Legacy Cube July 2019
 1 Fact or Fiction|MH1
 1 Fairgrounds Warden|KLD
 1 Faith's Fetters|M21
-1 Faithless Looting|UMA
+1 Faithless Looting|STX
 1 Falkenrath Aristocrat|2XM
 1 Falkenrath Gorger|SOI
 1 Farseek|M13
@@ -180,7 +180,7 @@ Name=MTGO Legacy Cube July 2019
 1 Fiery Confluence|C15
 1 Fight with Fire|DOM
 1 Figure of Destiny|MMA
-1 Fire // Ice|UMA
+1 Fire // Ice|MH2
 1 Firebolt|MH1
 1 Firedrinker Satyr|THS
 1 Flame Slash|CN2
@@ -234,7 +234,7 @@ Name=MTGO Legacy Cube July 2019
 1 Hallowed Fountain|RNA
 1 Hallowed Spiritkeeper|C14
 1 Hangarback Walker|MPS_KLD
-1 Harmonize|MM3
+1 Harmonize|STX
 1 Hazoret the Fervent|AKR
 1 Hedron Archive|BFZ
 1 Hellrider|MM3
@@ -255,12 +255,12 @@ Name=MTGO Legacy Cube July 2019
 1 Hymn to Tourach|EMA
 1 Hypnotic Specter|M10
 1 Ilharg, the Raze-Boar|WAR
-1 Imperial Recruiter|2XM
+1 Imperial Recruiter|MH2
 1 Impulse|VIS
 1 Incinerate|M12
 1 Incubation Druid|RNA
 1 Inferno Titan|M12
-1 Inquisition of Kozilek|MM3
+1 Inquisition of Kozilek|STX
 1 Inspiring Vantage|KLD
 1 Into the Roil|ZNR
 1 Iona, Shield of Emeria|MM2
@@ -293,9 +293,9 @@ Name=MTGO Legacy Cube July 2019
 1 Lavaclaw Reaches|UMA
 1 Legion Warboss|GRN
 1 Legion's Landing|XLN
-1 Lightning Bolt|A25
+1 Lightning Bolt|STX
 1 Lightning Greaves|2XM
-1 Lightning Helix|IMA
+1 Lightning Helix|STX
 1 Lightning Strike|M19
 1 Liliana of the Veil|UMA
 1 Liliana's Triumph|WAR
@@ -315,9 +315,9 @@ Name=MTGO Legacy Cube July 2019
 1 Man-o'-War|MH1
 1 Mana Confluence|EXP
 1 Mana Leak|IMA
-1 Mana Tithe|PLC
+1 Mana Tithe|STX
 1 Manic Vandal|M12
-1 Marsh Flats|MM3
+1 Marsh Flats|MH2
 1 Martial Coup|CFX
 1 Mass Manipulation|RNA
 1 Massacre Wurm|M21
@@ -332,10 +332,10 @@ Name=MTGO Legacy Cube July 2019
 1 Mind Shatter|MM3
 1 Mind Stone|IMA
 1 Mindslaver|SOM
-1 Mirari's Wake|CNS
+1 Mirari's Wake|MH2
 1 Miscalculation|ULG
-1 Mishra's Factory|2XM
-1 Misty Rainforest|MM3
+1 Mishra's Factory|MH2
+1 Misty Rainforest|MH2
 1 Mizzium Mortars|MM3
 1 Monastery Mentor|FRF
 1 Monastery Swiftspear|IMA
@@ -350,10 +350,10 @@ Name=MTGO Legacy Cube July 2019
 1 Mystic Snake|A25
 1 Nahiri, the Harbinger|SOI
 1 Narset, Parter of Veils|WAR
-1 Natural Order|EMA
+1 Natural Order|STX
 1 Necromancy|VIS
 1 Needle Spires|OGW
-1 Negate|ZNR
+1 Negate|STX
 1 Nekrataal|EMA
 1 Never // Return|AKR
 1 Nicol Bolas, Dragon-God|WAR
@@ -372,7 +372,7 @@ Name=MTGO Legacy Cube July 2019
 1 Oona's Prowler|LRW
 1 Ophiomancer|C13
 1 Opposition|MPS_AKH
-1 Opt|M21
+1 Opt|STX
 1 Oracle of Mul Daya|ZEN
 1 Oust|ROE
 1 Outpost Siege|FRF
@@ -397,7 +397,7 @@ Name=MTGO Legacy Cube July 2019
 1 Ponder|M12
 1 Porcelain Legionnaire|NPH
 1 Preordain|M11
-1 Primal Command|MM3
+1 Primal Command|STX
 1 Prime Speaker Vannifar|RNA
 1 Primeval Titan|IMA
 1 Prismatic Lens|UMA
@@ -441,7 +441,7 @@ Name=MTGO Legacy Cube July 2019
 1 Sakura-Tribe Elder|CNS
 1 Satyr Wayfinder|UMA
 1 Savannah|VMA
-1 Scalding Tarn|MM3
+1 Scalding Tarn|MH2
 1 Scavenging Ooze|M21
 1 Scrubland|VMA
 1 Seachrome Coast|SOM
@@ -455,7 +455,7 @@ Name=MTGO Legacy Cube July 2019
 1 Serra the Benevolent|MH1
 1 Serum Visions|MM3
 1 Shambling Vent|BFZ
-1 Shardless Agent|EMA
+1 Shardless Agent|MH2
 1 Shelldock Isle|LRW
 1 Sheoldred, Whispering One|IMA
 1 Shivan Fire|DOM
@@ -504,7 +504,7 @@ Name=MTGO Legacy Cube July 2019
 1 Sword of Light and Shadow|2XM
 1 Sword of Sinew and Steel|MH1
 1 Sword of War and Peace|2XM
-1 Swords to Plowshares|A25
+1 Swords to Plowshares|STX
 1 Sylvan Caryatid|THS
 1 Sylvan Library|EMA
 1 Taiga|VMA
@@ -536,7 +536,7 @@ Name=MTGO Legacy Cube July 2019
 1 Thrun, the Last Troll|MBS
 1 Thunderbreak Regent|DTK
 1 Thundermaw Hellkite|IMA
-1 Time Warp|TPR
+1 Time Warp|STX
 1 Tireless Tracker|SOI
 1 Tithe Taker|RNA
 1 Tooth and Nail|MMA
@@ -557,7 +557,7 @@ Name=MTGO Legacy Cube July 2019
 1 Unburial Rites|UMA
 1 Underground Sea|VMA
 1 Unexpectedly Absent|EMA
-1 Upheaval|VMA
+1 Upheaval|MH2
 1 Urza, Lord High Artificer|MH1
 1 Utopia Sprawl|A25
 1 Vampire Hexmage|2XM
@@ -565,8 +565,8 @@ Name=MTGO Legacy Cube July 2019
 1 Vendilion Clique|A25
 1 Venerated Loxodon|GRN
 1 Venser, Shaper Savant|MM3
-1 Verdant Catacombs|MM3
-1 Vindicate|A25
+1 Verdant Catacombs|MH2
+1 Vindicate|MH2
 1 Vivien Reid|M19
 1 Voice of Resurgence|2XM
 1 Volcanic Island|VMA
@@ -596,7 +596,7 @@ Name=MTGO Legacy Cube July 2019
 1 Wretched Confluence|CMA
 1 Wurmcoil Engine|2XM
 1 Xenagos, the Reveler|THS
-1 Yavimaya Elder|VMA
+1 Yavimaya Elder|MH2
 1 Yawgmoth, Thran Physician|MH1
 1 Young Pyromancer|UMA
 1 Zealous Conscripts|MM3
