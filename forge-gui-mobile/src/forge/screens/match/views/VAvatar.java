@@ -24,7 +24,9 @@ public class VAvatar extends FDisplayObject {
 
     private final PlayerView player;
     private final FImage image;
-    private AvatarAnimation avatarAnimation;
+    private final AvatarAnimation avatarAnimation;
+    private static final FSkinFont LIFE_FONT = FSkinFont.get(18);
+    private static final FSkinFont LIFE_FONT_ALT = FSkinFont.get(22);
 
     public VAvatar(PlayerView player0) {
         player = player0;
@@ -42,7 +44,6 @@ public class VAvatar extends FDisplayObject {
     private class AvatarAnimation extends ForgeAnimation {
         private static final float DURATION = 0.6f;
         private float progress = 0;
-        private boolean finished;
         Texture splatter = FSkin.splatter;
 
         private void drawAvatar(Graphics g, FImage image, float x, float y, float w, float h) {
@@ -51,21 +52,34 @@ public class VAvatar extends FDisplayObject {
                 percentage = 0;
             } else if (percentage > 1) {
                 percentage = 1;
-                //animation finished clear avatar red overlay
-                player.setAvatarWasDamaged(false);
             }
             float mod = w/2f;
-            if (splatter == null) {
-                g.setColorRGBA(1, percentage, percentage, g.getfloatAlphaComposite());
+            int amount = player.getAvatarLifeDifference();
+            float oldAlpha = g.getfloatAlphaComposite();
+            float fade = 1-(percentage*1);
+            if (amount > 0) {
                 g.drawAvatarImage(image, x, y, w, h, player.getHasLost());
-                g.resetColorRGBA(g.getfloatAlphaComposite());
-            } else {
-                g.drawAvatarImage(image, x, y, w, h, player.getHasLost());
-                g.setAlphaComposite(1-(percentage*1));
-                g.drawImage(splatter, x-mod/2, y-mod/2, w+mod, h+mod);
-                g.resetAlphaComposite();
+                drawPlayerIndicator(g, w, h, percentage);
+                g.setAlphaComposite(fade);
+                g.drawRect(w / 12f, Color.WHITE, 0, 0, w, h);
+                g.drawText("+"+amount, Forge.altZoneTabs ? LIFE_FONT_ALT : LIFE_FONT, Color.WHITE, 0, (getHeight()/2)*fade, getWidth(), getHeight(), false, Align.center, true);
+                g.setAlphaComposite(oldAlpha);
+            } else if (amount < 0) {
+                if (splatter == null) {
+                    g.setColorRGBA(1, percentage, percentage, oldAlpha);
+                    g.drawAvatarImage(image, x, y, w, h, player.getHasLost());
+                    g.resetColorRGBA(oldAlpha);
+                } else {
+                    g.drawAvatarImage(image, x, y, w, h, player.getHasLost());
+                    g.setAlphaComposite(fade);
+                    g.drawImage(splatter, x-mod/2, y-mod/2, w+mod, h+mod);
+                    g.setAlphaComposite(oldAlpha);
+                }
+                drawPlayerIndicator(g, w, h, percentage);
+                g.setAlphaComposite(fade);
+                g.drawText(String.valueOf(amount), Forge.altZoneTabs ? LIFE_FONT_ALT : LIFE_FONT, Color.RED, 0, (getHeight()/2)*fade, getWidth(), getHeight(), false, Align.center, true);
+                g.setAlphaComposite(oldAlpha);
             }
-            drawPlayerIndicator(g, w, h, percentage);
         }
 
         @Override
@@ -76,7 +90,8 @@ public class VAvatar extends FDisplayObject {
 
         @Override
         protected void onEnd(boolean endingAll) {
-            finished = true;
+            progress = 0;
+            player.setAvatarLifeDifference(0);
         }
     }
     @Override
@@ -115,11 +130,10 @@ public class VAvatar extends FDisplayObject {
         float h = getHeight();
 
         if (avatarAnimation != null && !MatchController.instance.getGameView().isMatchOver()) {
-            if (player.getAvatarWasDamaged() && avatarAnimation.progress < 1) {
+            if (player.wasAvatarLifeChanged()) {
                 avatarAnimation.start();
                 avatarAnimation.drawAvatar(g, image, 0, 0, w, h);
             } else {
-                avatarAnimation.progress = 0;
                 g.drawAvatarImage(image, 0, 0, w, h, player.getHasLost());
                 drawPlayerIndicator(g, w, h, 1);
             }

@@ -573,8 +573,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
 
             life -= toLose;
-            //for Avatar animation
-            view.setAvatarWasDamaged(true);
             view.updateLife(this);
             lifeLost = toLose;
             if (manaBurn) {
@@ -2639,7 +2637,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public void updateAvatar() {
         view.updateAvatarIndex(this);
         view.updateAvatarCardImageKey(this);
-        view.setAvatarWasDamaged(false);
+        view.setAvatarLifeDifference(0);
         view.setHasLost(false);
     }
 
@@ -2857,8 +2855,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         view.setHasLost(b);
     }
 
-    public void setAvatarWasDamaged(boolean val) {
-        view.setAvatarWasDamaged(val);
+    public void setAvatarLifeDifference(int val) {
+        view.setAvatarLifeDifference(val);
     }
 
     public int getExtraTurnCount() {
