@@ -546,7 +546,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
 
                 movedCard = game.getAction().moveToLibrary(gameCard, libraryPosition, sa);
-
             } else {
                 if (destination.equals(ZoneType.Battlefield)) {
                     if (sa.hasParam("Tapped") || sa.hasParam("Ninjutsu")) {
@@ -649,7 +648,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
                     movedCard = game.getAction().moveTo(gameCard.getController().getZone(destination), gameCard, sa, moveParams);
                     // below stuff only if it changed zones
-                    if (!movedCard.getZone().equals(originZone)) {
+                    if (movedCard.getZone().equals(originZone)) {
                         continue;
                     }
                     if (sa.hasParam("Unearth") && movedCard.isInPlay()) {
