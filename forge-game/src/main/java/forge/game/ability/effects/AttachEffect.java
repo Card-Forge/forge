@@ -39,7 +39,7 @@ public class AttachEffect extends SpellAbilityEffect {
         Player chooser = p;
         if (sa.hasParam("Chooser")) {
             chooser = Iterables.getFirst(AbilityUtils.getDefinedPlayers(source, sa.getParam("Chooser"), sa), null);
-        };
+        }
 
         if (sa.hasParam("Object")) {
             attachments = AbilityUtils.getDefinedCards(source, sa.getParam("Object"), sa);
