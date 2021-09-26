@@ -754,6 +754,15 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public void setReplacingObject(final AbilityKey type, final Object o) {
         replacingObjects.put(type, o);
     }
+    public void setReplacingObjectsFrom(final Map<AbilityKey, Object> repParams, final AbilityKey... types) {
+        int typesLength = types.length;
+        for (int i = 0; i < typesLength; i += 1) {
+            AbilityKey type = types[i];
+            if (repParams.containsKey(type)) {
+                setReplacingObject(type, repParams.get(type));
+            }
+        }
+    }
 
     public void resetOnceResolved() {
         //resetPaidHash(); // FIXME: if uncommented, breaks Dragon Presence, e.g. Orator of Ojutai + revealing a Dragon from hand.

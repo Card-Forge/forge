@@ -121,6 +121,15 @@ public final class PlayerPredicates {
         };
     }
 
+    public static final Predicate<Player> canBeAttached(final Card aura) {
+        return new Predicate<Player>() {
+            @Override
+            public boolean apply(final Player p) {
+                return p.canBeAttached(aura);
+            }
+        };
+    }
+
     public static final Comparator<Player> compareByZoneSize(final ZoneType zone) {
         return new Comparator<Player>() {
             @Override

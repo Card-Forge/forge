@@ -148,11 +148,6 @@ public class CloneEffect extends SpellAbilityEffect {
             tgtCard.clearRemembered();
         }
 
-        // check if clone is now an Aura that needs to be attached
-        if (tgtCard.isAura() && !tgtCard.isInZone(ZoneType.Battlefield)) {
-            AttachEffect.attachAuraOnIndirectEnterBattlefield(tgtCard);
-        }
-
         if (sa.hasParam("Duration")) {
             final Card cloneCard = tgtCard;
             // if clone is temporary, target needs old values back after (keep Death-Mask Duplicant working)

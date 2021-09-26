@@ -133,14 +133,14 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             getController().getGui().updateButtons(getOwner(), true, true, false);
         } else if (!sa.isMinTargetChosen() || (divisionValues != null && !divisionValues.isEmpty())){
             // If reached Minimum targets, enable OK button
-            if (mandatory && tgt.hasCandidates(sa, true)) {
+            if (mandatory && tgt.hasCandidates(sa)) {
                 // Player has to click on a target
                 getController().getGui().updateButtons(getOwner(), false, false, false);
             } else {
                 getController().getGui().updateButtons(getOwner(), false, true, false);
             }
         } else {
-            if (mandatory && tgt.hasCandidates(sa, true)) {
+            if (mandatory && tgt.hasCandidates(sa)) {
                 // Player has to click on a target or ok
                 getController().getGui().updateButtons(getOwner(), true, false, true);
             } else {

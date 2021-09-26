@@ -1,10 +1,6 @@
 package forge.ai.ability;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 import com.google.common.base.Predicate;
@@ -12,6 +8,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
+import forge.ai.AiAttackController;
 import forge.ai.AiCardMemory;
 import forge.ai.AiController;
 import forge.ai.AiProps;
@@ -52,6 +49,7 @@ import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import forge.util.Aggregates;
 import forge.util.MyRandom;
 
 public class AttachAi extends SpellAbilityAi {
@@ -1330,6 +1328,29 @@ public class AttachAi extends SpellAbilityAi {
             return null;
         }
 
+        // Is a SA that moves target attachment
+        if ("MoveTgtAura".equals(sa.getParam("AILogic"))) {
+            CardCollection list = CardLists.getValidCards(aiPlayer.getGame().getCardsIn(tgt.getZone()), tgt.getValidTgts(), sa.getActivatingPlayer(), attachSource, sa);
+            list = CardLists.filter(list, Predicates.not(CardPredicates.isProtectedFrom(attachSource)));
+            list = CardLists.filter(list, Predicates.or(CardPredicates.isControlledByAnyOf(aiPlayer.getOpponents()), new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card card) {
+                    return ComputerUtilCard.isUselessCreature(aiPlayer, card.getAttachedTo());
+                }
+            }));
+
+            return !list.isEmpty() ? ComputerUtilCard.getBestAI(list) : null;
+        } else if ("Unenchanted".equals(sa.getParam("AILogic"))) {
+            CardCollection list = CardLists.getValidCards(aiPlayer.getGame().getCardsIn(tgt.getZone()), tgt.getValidTgts(), sa.getActivatingPlayer(), attachSource, sa);
+            CardCollection preferred = CardLists.filter(list, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card card) {
+                    return card.getAttachedCards().isEmpty();
+                }
+            });
+            return preferred.isEmpty() ? Aggregates.random(list) : Aggregates.random(preferred);
+        }
+
         // is no attachment so no using attach
         if (!attachSource.isAttachment()) {
             return null;
@@ -1442,10 +1463,11 @@ public class AttachAi extends SpellAbilityAi {
      *            the logic
      * @return the card
      */
-    private static Card attachGeneralAI(final Player ai, final SpellAbility sa, final List<Card> list, final boolean mandatory,
+    public static Card attachGeneralAI(final Player ai, final SpellAbility sa, final List<Card> list, final boolean mandatory,
             final Card attachSource, final String logic) {
-        Player prefPlayer = ai.getWeakestOpponent();
-        if ("Pump".equals(logic) || "Animate".equals(logic) || "Curiosity".equals(logic)) {
+        Player prefPlayer = AiAttackController.choosePreferredDefenderPlayer(ai);
+        if ("Pump".equals(logic) || "Animate".equals(logic) || "Curiosity".equals(logic) || "MoveTgtAura".equals(logic)
+                || "MoveAllAuras".equals(logic)) {
             prefPlayer = ai;
         }
         // Some ChangeType cards are beneficial, and PrefPlayer should be
@@ -1470,14 +1492,13 @@ public class AttachAi extends SpellAbilityAi {
             return chooseUnpreferred(mandatory, list);
         }
 
-        // Preferred list has at least one card in it to make to the actual
-        // Logic
+        // Preferred list has at least one card in it to make to the actual Logic
         Card c = null;
         if ("GainControl".equals(logic)) {
             c = attachAIControlPreference(sa, prefList, mandatory, attachSource);
         } else if ("Curse".equals(logic)) {
             c = attachAICursePreference(sa, prefList, mandatory, attachSource, ai);
-        } else if ("Pump".equals(logic)) {
+        } else if ("Pump".equals(logic) || (logic != null && logic.startsWith("Move"))) {
             c = attachAIPumpPreference(ai, sa, prefList, mandatory, attachSource);
         } else if ("Curiosity".equals(logic)) {
             c = attachAICuriosityPreference(sa, prefList, mandatory, attachSource);
@@ -1725,7 +1746,7 @@ public class AttachAi extends SpellAbilityAi {
 
     @Override
     protected Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
-        return attachToCardAIPreferences(ai, sa, true);
+        return attachGeneralAI(ai, sa, (List<Card>)options, !isOptional, sa.getHostCard(), sa.getParam("AILogic"));
     }
 
     @Override

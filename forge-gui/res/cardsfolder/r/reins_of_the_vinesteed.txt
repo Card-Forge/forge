@@ -4,10 +4,9 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 3 G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Enchanted creature gets +2/+2.
-T:Mode$ ChangesZone | ValidCard$ Creature.EnchantedBy | Origin$ Battlefield | Destination$ Graveyard | OptionalDecider$ You | Execute$ DBReturnChoose | TriggerDescription$ When enchanted creature dies, you may return CARDNAME from your graveyard to the battlefield attached to a creature that shares a creature type with that creature.
-SVar:DBReturnChoose:DB$ ChooseCard | Choices$ Creature.CanBeEnchantedBy+sharesCreatureTypeWith TriggeredCardLKICopy | ChoiceTitle$ Choose a creature shares a creature type with the former enchanted creature | SubAbility$ DBReturn
-SVar:DBReturn:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield | AttachedTo$ ChosenCard | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+T:Mode$ ChangesZone | ValidCard$ Creature.EnchantedBy | Origin$ Battlefield | Destination$ Graveyard | OptionalDecider$ You | Execute$ DBReturn | TriggerDescription$ When enchanted creature dies, you may return CARDNAME from your graveyard to the battlefield attached to a creature that shares a creature type with that creature.
+#TODO CorrectedSelf might not be 100% correct, but there seems no other way
+SVar:DBReturn:DB$ ChangeZone | Defined$ CorrectedSelf | Origin$ Graveyard | Destination$ Battlefield | AttachedTo$ Creature.sharesCreatureTypeWith TriggeredCardLKICopy | AILogic$ Pump
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 Oracle:Enchant creature\nEnchanted creature gets +2/+2.\nWhen enchanted creature dies, you may return Reins of the Vinesteed from your graveyard to the battlefield attached to a creature that shares a creature type with that creature.
