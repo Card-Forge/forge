@@ -176,7 +176,7 @@ public class FCardPanel extends FDisplayObject {
                 percentage = 1;
                 progress = 0;
             }
-            float mod = (w/3f)*percentage;
+            float mod = w*percentage;
             float oldAlpha = g.getfloatAlphaComposite();
             if (tapped) {
                 g.startRotateTransform(x + edgeOffset, y + h - edgeOffset, getTappedAngle());

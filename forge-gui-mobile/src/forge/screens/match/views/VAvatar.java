@@ -62,7 +62,7 @@ public class VAvatar extends FDisplayObject {
                 drawPlayerIndicator(g, w, h, percentage);
                 g.setAlphaComposite(fade);
                 g.drawRect(w / 12f, Color.WHITE, 0, 0, w, h);
-                g.drawText("+"+amount, Forge.altZoneTabs ? LIFE_FONT_ALT : LIFE_FONT, Color.WHITE, 0, (getHeight()/2)*fade, getWidth(), getHeight(), false, Align.center, true);
+                g.drawOutlinedText("+"+amount, Forge.altZoneTabs ? LIFE_FONT_ALT : LIFE_FONT, Color.WHITE, Color.SKY, 0, (getHeight()/2)*fade, getWidth(), getHeight(), false, Align.center, true);
                 g.setAlphaComposite(oldAlpha);
             } else if (amount < 0) {
                 if (splatter == null) {
@@ -77,7 +77,7 @@ public class VAvatar extends FDisplayObject {
                 }
                 drawPlayerIndicator(g, w, h, percentage);
                 g.setAlphaComposite(fade);
-                g.drawText(String.valueOf(amount), Forge.altZoneTabs ? LIFE_FONT_ALT : LIFE_FONT, Color.RED, 0, (getHeight()/2)*fade, getWidth(), getHeight(), false, Align.center, true);
+                g.drawOutlinedText(String.valueOf(amount), Forge.altZoneTabs ? LIFE_FONT_ALT : LIFE_FONT, Color.RED, Color.ORANGE, 0, (getHeight()/2)*fade, getWidth(), getHeight(), false, Align.center, true);
                 g.setAlphaComposite(oldAlpha);
             }
         }
