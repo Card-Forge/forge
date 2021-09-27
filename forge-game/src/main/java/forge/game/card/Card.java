@@ -2283,10 +2283,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (manifested) {
             sb.append("Manifested\r\n");
         }
-        sb.append(keywordsToText(getUnhiddenKeywords(state)));
-        if ((keywordsToText(getUnhiddenKeywords(state))).length() > 0) {
-            sb.append(linebreak);
-        }
+        String keywordText = keywordsToText(getUnhiddenKeywords(state));
+        sb.append(keywordText).append(keywordText.length() > 0 ? linebreak : "");
 
         // Process replacement effects first so that "enters the battlefield tapped"
         // and "as ~ enters the battlefield, choose...", etc can be printed
