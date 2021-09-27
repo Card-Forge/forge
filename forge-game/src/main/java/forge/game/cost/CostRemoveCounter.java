@@ -110,6 +110,8 @@ public class CostRemoveCounter extends CostPart {
             final Integer i = this.convertAmount();
             if (this.getAmount().equals("X")) {
                 sb.append("any number of counters");
+            } else if (this.getAmount().equals("All")) {
+                sb.append("all ").append(this.counter.getName().toLowerCase()).append(" counters");
             } else {
                 sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(),
                         this.counter.getName().toLowerCase() + " counter"));
