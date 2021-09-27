@@ -29,7 +29,7 @@ public class LangGerman extends Lang {
 
     @Override
     public String getNickName(final String name) {
-        return name.split(", ")[0];
+        return name.split(" ")[0].replace(",", "");
     }
 
 }

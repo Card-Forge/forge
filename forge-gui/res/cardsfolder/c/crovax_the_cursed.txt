@@ -3,8 +3,8 @@ ManaCost:2 B B
 Types:Legendary Creature Vampire Noble
 PT:0/0
 K:etbCounter:P1P1:4
-A:AB$ Pump | Cost$ B | Defined$ Self | KW$ Flying | SpellDescription$ Crovax gains flying until end of turn.
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigSacrifice | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may sacrifice a creature. If you do, put a +1/+1 counter on Crovax. If you don't, remove a +1/+1 counter from Crovax.
+A:AB$ Pump | Cost$ B | Defined$ Self | KW$ Flying | StackDescription$ SpellDescription | SpellDescription$ NICKNAME gains flying until end of turn.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigSacrifice | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may sacrifice a creature. If you do, put a +1/+1 counter on NICKNAME. If you don't, remove a +1/+1 counter from NICKNAME.
 SVar:TrigSacrifice:DB$ Sacrifice | Optional$ True | SacValid$ Creature | Amount$ 1 | RememberSacrificed$ True | SubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ EQ1 | SubAbility$ DBSubCounter
 SVar:DBSubCounter:DB$ RemoveCounter | CounterType$ P1P1 | CounterNum$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
