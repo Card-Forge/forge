@@ -90,7 +90,7 @@ public class ComputerUtilCard {
      */
     public static void sortByEvaluateCreature(final CardCollection list) {
         Collections.sort(list, ComputerUtilCard.EvaluateCreatureComparator);
-    } // sortByEvaluateCreature()
+    }
     
     // The AI doesn't really pick the best artifact, just the most expensive.
     /**

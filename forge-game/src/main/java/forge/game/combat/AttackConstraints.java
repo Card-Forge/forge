@@ -21,7 +21,6 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.common.primitives.Ints;
 
-import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.card.Card;
@@ -144,12 +143,11 @@ public class AttackConstraints {
         for (final Card attacker : myPossibleAttackers) {
             final Set<AttackRestrictionType> types = restrictions.get(attacker).getTypes();
             if (types.contains(AttackRestrictionType.NEED_BLACK_OR_GREEN)) {
-                // It's insufficient if this attacker is B/G itself, so filter itself out!
-                if (CardLists.filter(myPossibleAttackers, CardPredicates.isColor((byte) (MagicColor.BLACK | MagicColor.GREEN)), Predicates.not(Predicates.equalTo(attacker))).isEmpty()) {
+                if (CardLists.filter(myPossibleAttackers, AttackRestrictionType.NEED_BLACK_OR_GREEN.getPredicate(attacker)).isEmpty()) {
                     attackersToRemove.add(attacker);
                 }
             } else if (types.contains(AttackRestrictionType.NEED_GREATER_POWER)) {
-                if (CardLists.filter(myPossibleAttackers, CardPredicates.hasGreaterPowerThan(attacker.getNetPower())).isEmpty()) {
+                if (CardLists.filter(myPossibleAttackers, AttackRestrictionType.NEED_GREATER_POWER.getPredicate(attacker)).isEmpty()) {
                     attackersToRemove.add(attacker);
                 }
             }

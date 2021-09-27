@@ -67,7 +67,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
             amount = AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa);
         }
 
-        if ((!noCall) && (amount == 1)) {
+        if (!noCall && amount == 1) {
             flipMultiplier = getFlipMultiplier(caller.get(0));
             victory = flipCoinCall(caller.get(0), sa, flipMultiplier, varName);
         }

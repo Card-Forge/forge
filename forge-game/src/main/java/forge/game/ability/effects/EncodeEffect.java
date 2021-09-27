@@ -35,7 +35,7 @@ public class EncodeEffect extends SpellAbilityEffect {
         if (host.isToken()) {
             return;
         }
-        
+
         // make list of creatures that controller has on Battlefield
         CardCollectionView choices = host.getController().getCreaturesInPlay();
 
@@ -44,8 +44,7 @@ public class EncodeEffect extends SpellAbilityEffect {
             return;
         }
         // Handle choice of whether or not to encoded
-        
-        
+
         if (!player.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantExileCardAndEncodeOntoYouCreature", CardTranslation.getTranslatedName(host.getName())))) {
             return;
         }
@@ -69,7 +68,6 @@ public class EncodeEffect extends SpellAbilityEffect {
         movedCard.setEncodingCard(choice);
 
         return;
-
     }
 
 }

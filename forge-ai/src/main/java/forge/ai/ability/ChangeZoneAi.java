@@ -1320,8 +1320,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         // Don't blink cards that will die.
         aiPermanents = ComputerUtil.getSafeTargets(ai, sa, aiPermanents);
         if (!game.getStack().isEmpty()) {
-            final List<GameObject> objects = ComputerUtil
-                    .predictThreatenedObjects(ai, sa);
+            final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(ai, sa);
 
             final List<Card> threatenedTargets = new ArrayList<>();
 

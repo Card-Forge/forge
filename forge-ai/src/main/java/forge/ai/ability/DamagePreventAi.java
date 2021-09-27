@@ -42,8 +42,7 @@ public class DamagePreventAi extends SpellAbilityAi {
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt == null) {
-            // As far as I can tell these Defined Cards will only have one of
-            // them
+            // As far as I can tell these Defined Cards will only have one of them
             final List<GameObject> objects = AbilityUtils.getDefinedObjects(sa.getHostCard(), sa.getParam("Defined"), sa);
 
             // react to threats on the stack

@@ -96,7 +96,6 @@ public class BlockEffect extends SpellAbilityEffect {
 
         game.updateCombatForView();
         game.fireEvent(new GameEventCombatChanged());
-
     }
 
     @Override

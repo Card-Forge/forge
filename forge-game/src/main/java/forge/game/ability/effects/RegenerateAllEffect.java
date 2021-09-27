@@ -37,6 +37,6 @@ public class RegenerateAllEffect extends RegenerateBaseEffect {
 
         // create Effect for Regeneration
         createRegenerationEffect(sa, list);
-    } // regenerateAllResolve
+    }
 
 }

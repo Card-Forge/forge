@@ -45,7 +45,7 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
         List<Player> libraryPlayers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa);
         Player peekingPlayer = sa.getActivatingPlayer();
         
-        for(Player libraryToPeek : libraryPlayers) {
+        for (Player libraryToPeek : libraryPlayers) {
             final PlayerZone library = libraryToPeek.getZone(ZoneType.Library);
             numPeek = Math.min(numPeek, library.size());
 
@@ -60,16 +60,15 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
                 peekingPlayer.getController().reveal(peekCards, ZoneType.Library, peekingPlayer, CardTranslation.getTranslatedName(source.getName()) + " - " + Localizer.getInstance().getMessage("lblRevealingCardFrom") + " ");
             }
             
-            if( doReveal && sa.hasParam("RevealOptional") )
+            if (doReveal && sa.hasParam("RevealOptional"))
                 doReveal = peekingPlayer.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblRevealCardToOtherPlayers"));
             
             if (doReveal) {
                 peekingPlayer.getGame().getAction().reveal(revealableCards, peekingPlayer);
 
-                // Singletons.getModel().getGameAction().revealCardsToOtherPlayers(peekingPlayer, revealableCards);
                 if (rememberRevealed) {
                     Map<Integer, Card> cachedMap = Maps.newHashMap();
-                    for(Card c : revealableCards) {
+                    for (Card c : revealableCards) {
                         source.addRemembered(CardUtil.getLKICopy(c, cachedMap));
                     }
                 }
@@ -81,7 +80,7 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
                 }
             } else if (sa.hasParam("RememberPeeked")) {
                 Map<Integer, Card> cachedMap = Maps.newHashMap();
-                for(Card c : revealableCards) {
+                for (Card c : revealableCards) {
                     source.addRemembered(CardUtil.getLKICopy(c, cachedMap));
                 }
             }
