@@ -1003,6 +1003,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
 
             Long controlTimestamp = null;
+            if (!searchedLibrary && sa.hasParam("Searched")) {
+                searchedLibrary = true;
+            }
             if (searchedLibrary) {
                 if (decider.equals(player)) {
                     Map.Entry<Long, Player> searchControlPlayer = player.getControlledWhileSearching();
@@ -1037,6 +1040,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 runParams.put(AbilityKey.Player, decider);
                 runParams.put(AbilityKey.Target, Lists.newArrayList(player));
                 decider.getGame().getTriggerHandler().runTrigger(TriggerType.SearchedLibrary, runParams, false);
+            }
+            if (searchedLibrary && sa.hasParam("Searched")) {
+                searchedLibrary = false;
             }
 
             if (!defined && changeType != null) {
