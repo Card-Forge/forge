@@ -465,15 +465,16 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             return null;
         }
 
+        String announceTitle = ability.hasParam("AnnounceTitle") ? ability.getParam("AnnounceTitle") : announce;
         if (cost.isMandatory()) {
-            return chooseNumber(ability, localizer.getMessage("lblChooseAnnounceForCard", announce,
+            return chooseNumber(ability, localizer.getMessage("lblChooseAnnounceForCard", announceTitle,
                     CardTranslation.getTranslatedName(ability.getHostCard().getName())) , min, max);
         } else {
             if ("NumTimes".equals(announce)) {
                 return getGui().getInteger(localizer.getMessage("lblHowManyTimesToPay", ability.getPayCosts().getTotalMana(),
                         CardTranslation.getTranslatedName(ability.getHostCard().getName())), min, max, min + 9);
             } else {
-                return getGui().getInteger(localizer.getMessage("lblChooseAnnounceForCard", announce,
+                return getGui().getInteger(localizer.getMessage("lblChooseAnnounceForCard", announceTitle,
                         CardTranslation.getTranslatedName(ability.getHostCard().getName())), min, max, min + 9);
             }
         }
