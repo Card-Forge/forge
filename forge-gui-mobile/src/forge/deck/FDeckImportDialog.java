@@ -107,7 +107,7 @@ public class FDeckImportDialog extends FDialog {
 
         //ensure at least one known card found on clipboard
         for (DeckRecognizer.Token token : tokens) {
-            if (token.getType() == TokenType.LEGAL_CARD_REQUEST) {
+            if (token.getType() == TokenType.LEGAL_CARD) {
                 showOptions = true;
 
                 dateTimeCheck.setCommand(new FEventHandler() {
