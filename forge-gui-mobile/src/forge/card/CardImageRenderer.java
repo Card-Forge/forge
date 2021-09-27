@@ -745,7 +745,7 @@ public class CardImageRenderer {
                 } else if (Forge.enableUIMask.equals("Crop") && canshow) {
                     g.drawImage(ImageCache.croppedBorderImage(image), x, y, w, h);
                 } else {
-                    if (canshow)
+                    if (canshow||card.isForeTold())
                         g.drawImage(image, x, y, w, h);
                     else // sleeve
                         g.drawImage(sleeves, x, y, w, h);
