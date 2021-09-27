@@ -122,6 +122,9 @@ public class AttachEffect extends SpellAbilityEffect {
                 continue;
 
             attachment.attachToEntity(attachTo);
+            if (sa.hasParam("RememberAttached") && attachment.isAttachedToEntity(attachTo)) {
+                source.addRemembered(attachment);
+            }
         }
 
         if (source.isAura() && sa.isSpell()) {
