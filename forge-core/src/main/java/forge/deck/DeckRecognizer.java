@@ -42,9 +42,10 @@ public class DeckRecognizer {
      * The Enum TokenType.
      */
     public enum TokenType {
-        LEGAL_CARD_REQUEST,
-        ILLEGAL_CARD_REQUEST,
-        INVALID_CARD_REQUEST,
+        LEGAL_CARD,
+        LIMITED_CARD,
+        CARD_FROM_NOT_ALLOWED_SET,
+        CARD_FROM_INVALID_SET,
         UNKNOWN_CARD_REQUEST,
         UNKNOWN_TEXT,
         DECK_NAME,
@@ -56,6 +57,11 @@ public class DeckRecognizer {
         MANA_COLOUR
     }
 
+    public enum LimitedCardType{
+        BANNED,
+        RESTRICTED,
+    }
+
     /**
      * The Class Token.
      */
@@ -63,21 +69,28 @@ public class DeckRecognizer {
         private final TokenType type;
         private final int number;
         private final String text;
+        // only used for illegal card tokens
+        private LimitedCardType limitedCardType = null;
         // only used for card tokens
         private PaperCard card = null;
         private DeckSection tokenSection = null;
 
-        public static Token KnownCard(final PaperCard theCard, final int count,
-                                      DeckSection section) {
-            return new Token(theCard, TokenType.LEGAL_CARD_REQUEST, count, section);
+        public static Token LegalCard(final PaperCard card, final int count,
+                                      final DeckSection section) {
+            return new Token(card, TokenType.LEGAL_CARD, count, section);
         }
 
-        public static Token IllegalCard(final PaperCard theCard, final int count) {
-            return new Token(theCard, TokenType.ILLEGAL_CARD_REQUEST, count, null);
+        public static Token LimitedCard(final PaperCard card, final int count,
+                                        final DeckSection section, final LimitedCardType limitedType){
+            return new Token(card, TokenType.LIMITED_CARD, count, section, limitedType);
+        }
+
+        public static Token NotAllowedCard(final PaperCard card, final int count) {
+            return new Token(card, TokenType.CARD_FROM_NOT_ALLOWED_SET, count);
         }
 
         public static Token InvalidCard(final PaperCard theCard, final int count) {
-            return new Token(theCard, TokenType.INVALID_CARD_REQUEST, count, null);
+            return new Token(theCard, TokenType.CARD_FROM_INVALID_SET, count);
         }
 
         public static Token UnknownCard(final String cardName, final String setCode, final int count) {
@@ -106,13 +119,27 @@ public class DeckRecognizer {
             return null;
         }
 
-        private Token(final PaperCard tokenCard, final TokenType type1,
-                      final int count, final DeckSection section) {
-            this.number = count;
-            this.type = type1;
-            this.text = String.format("%s (%s)", tokenCard.getName(), tokenCard.getEdition());
+        private Token(final PaperCard tokenCard, final TokenType type1, final int count) {
+            this(type1, count, String.format("%s (%s)", tokenCard.getName(), tokenCard.getEdition()));
+            this.card = tokenCard;
+            this.tokenSection = null;
+            this.limitedCardType = null;
+        }
+
+        private Token(final PaperCard tokenCard, final TokenType type1, final int count,
+                      final DeckSection section) {
+            this(type1, count, String.format("%s (%s)", tokenCard.getName(), tokenCard.getEdition()));
             this.card = tokenCard;
             this.tokenSection = section;
+            this.limitedCardType = null;
+        }
+
+        private Token(final PaperCard tokenCard, final TokenType type1, final int count,
+                      final DeckSection section, final LimitedCardType limitedCardType1) {
+            this(type1, count, String.format("%s (%s)", tokenCard.getName(), tokenCard.getEdition()));
+            this.card = tokenCard;
+            this.tokenSection = section;
+            this.limitedCardType = limitedCardType1;
         }
 
         public Token(final TokenType type1, final int count, final String message) {
@@ -143,48 +170,124 @@ public class DeckRecognizer {
 
         public final DeckSection getTokenSection() { return this.tokenSection; }
 
+        public final LimitedCardType getLimitedCardType() { return this.limitedCardType; }
+
+        /**
+         * Filters all tokens having a PaperCard (not null)
+         * @return true for tokens of tyoe:
+         * LEGAL_CARD, LIMITED_CARD, CARD_FROM_NOT_ALLOWED_SET and CARD_FROM_INVALID_SET.
+         * False otherwise.
+         */
         public boolean isCardToken() {
-            return (this.type == TokenType.LEGAL_CARD_REQUEST ||
-                    this.type == TokenType.ILLEGAL_CARD_REQUEST ||
-                    this.type == TokenType.INVALID_CARD_REQUEST );
+            return (this.type == TokenType.LEGAL_CARD ||
+                    this.type == TokenType.LIMITED_CARD ||
+                    this.type == TokenType.CARD_FROM_NOT_ALLOWED_SET ||
+                    this.type == TokenType.CARD_FROM_INVALID_SET);
         }
 
-        public String getKey(){
-            if (this.isCardToken()) {
-                if (this.tokenSection != null)
-                    return String.format("%s-%s-%s-%s-%s",
-                                this.card.getName(), this.card.getEdition(),
-                                this.card.getCollectorNumber(),
-                                this.getType().name().toLowerCase(),
-                                this.tokenSection.name());
-                return String.format("%s-%s-%s-%s",
-                        this.card.getName(), this.card.getEdition(),
-                        this.card.getCollectorNumber(),
-                        this.getType().name().toLowerCase());
-            }
-            return null;
+        /**
+         * Filters all tokens that will be actually used by the Deck Importer.
+         * @return true if the type of the token is one of:
+         * LEGAL_CARD, LIMITED, LIMITED_CARD, DECK_NAME; false otherwise.
+         */
+        public boolean isTokenForDeck() {
+            return (this.type == TokenType.LEGAL_CARD ||
+                    this.type == TokenType.LIMITED_CARD ||
+                    this.type == TokenType.DECK_NAME);
         }
 
+        /**
+         * Generates the key for the current token, which is a hyphenated string including
+         * "Card Name", "Card Edition", "Card's Collector Number", "token-type", and
+         * the "token section" (if any).
+         * @return null if the current token, is a non-card token, else an instance of TokeKey
+         * data object will be returned.
+         * @see Token#isCardToken()
+         * @see Token.TokenKey#fromToken(Token)
+         */
+        public TokenKey getKey(){
+            return TokenKey.fromToken(this);
+        }
+
+        /**
+         * Encapsulate the logic for a Token Key (Data Object)
+         */
         public static class TokenKey {
+            private static final String KEYSEP = "|";
+
             public String cardName;
             public String setCode;
             public String collectorNumber;
-            public String deckSection;
-            public String typeName;
-        }
+            public DeckSection deckSection;
+            public TokenType tokenType;
+            public LimitedCardType limitedType;
 
-        public static TokenKey parseTokenKey(String key){
-            String[] keyInfo = TextUtil.split(key, '-');
-            TokenKey tokenKey = new TokenKey();
-            tokenKey.cardName = keyInfo[0];
-            tokenKey.setCode = keyInfo[1];
-            tokenKey.collectorNumber = keyInfo[2];
-            tokenKey.typeName = keyInfo[3];
-            if (keyInfo.length > 4)
-                tokenKey.deckSection = keyInfo[4];
-            else
-                tokenKey.deckSection = null;
-            return  tokenKey;
+            /**
+             * Instantiate a new TokeKey for the given card token token.
+             * @param token Input token to generate the key for.
+             * @return null if input token is not a CardToken
+             * @see Token#isCardToken()
+             */
+            public static TokenKey fromToken(final Token token){
+                if (!token.isCardToken())
+                    return null;
+                TokenKey key = new TokenKey();
+                key.cardName = token.card.getName();
+                key.setCode = token.card.getEdition();
+                key.collectorNumber = token.card.getCollectorNumber();
+                key.tokenType = token.getType();
+                if (token.tokenSection != null)
+                    key.deckSection = token.tokenSection;
+                if (token.limitedCardType != null)
+                    key.limitedType = token.limitedCardType;
+                return key;
+            }
+
+            /**
+             * String representation of a Token Key (to be used as reference to target token)
+             * @return A String (separated by KEYSEP) containing all the token-key attributes.
+             * Non-card parts of the keys are identified by an initial capital letter, that is
+             * either "D", "T", or "L" to refer to Deck Section (if any), Token Type, and
+             * Limited type (if any), respectively.
+             */
+            public String toString(){
+                StringBuilder keyString = new StringBuilder();
+                keyString.append(String.format("%s%s%s%s%s", this.cardName, KEYSEP,
+                        this.setCode, KEYSEP, this.collectorNumber));
+                if (this.deckSection != null)
+                    keyString.append(String.format("%sD%s",KEYSEP, this.deckSection.name()));
+                keyString.append(String.format("%sT%s", KEYSEP, this.tokenType.name()));
+                if (this.limitedType != null)
+                    keyString.append(String.format("%sL%s", KEYSEP, this.limitedType.name()));
+                return keyString.toString();
+            }
+
+            /**
+             * Generates a new TokenKey instance starting from a given Key-String
+             * @param keyString String representation of a TokenKey
+             * @return a new TokenKey object instantiated from the given Key. Null if key string does not
+             * non-optional infos, that is "all card info" and "token type".
+             */
+            public static TokenKey fromString(String keyString){
+                String[] keyInfo = StringUtils.split(keyString, KEYSEP);
+                if (keyInfo.length < 4)
+                    return null;
+
+                TokenKey tokenKey = new TokenKey();
+                tokenKey.cardName = keyInfo[0];
+                tokenKey.setCode = keyInfo[1];
+                tokenKey.collectorNumber = keyInfo[2];
+                int nxtInfoIdx = 3;
+                if (keyInfo[nxtInfoIdx].startsWith("D")){
+                    tokenKey.deckSection = DeckSection.valueOf(keyInfo[nxtInfoIdx].substring(1));
+                    nxtInfoIdx += 1;
+                }
+                TokenType tokenType = TokenType.valueOf(keyInfo[nxtInfoIdx].substring(1));
+                tokenKey.tokenType = tokenType;
+                if (tokenType == TokenType.LIMITED_CARD)
+                    tokenKey.limitedType = LimitedCardType.valueOf(keyInfo[nxtInfoIdx+1].substring(1));
+                return tokenKey;
+            }
         }
     }
 
@@ -291,8 +394,10 @@ public class DeckRecognizer {
     }
 
     private Date releaseDateConstraint = null;
-    // This two parameters are controlled only via setter methods
+    // These parameters are controlled only via setter methods
     private List<String> allowedSetCodes = null;
+    private List<String> gameFormatBannedCards = null;
+    private List<String> gameFormatRestrictedCards = null;
     private DeckFormat deckFormat = null;
     private CardDb.CardArtPreference artPreference = StaticData.instance().getCardArtPreference();  // init as default
 
@@ -380,17 +485,9 @@ public class DeckRecognizer {
                 // and if that card can be actually found in the requested set.
                 // IOW: we should account for wrong request, e.g. Counterspell|FEM - just doesn't exist!
                 PaperCard pc = data.getCardFromSet(cardName, edition, collectorNumber, artIndex, isFoil);
-                if (pc != null) {
+                if (pc != null)
                     // ok so the card has been found - let's see if there's any restriction on the set
-                    if (isIllegalSetInGameFormat(edition.getCode()) || isIllegalCardInDeckFormat(pc))
-                        // Mark as illegal card
-                        return Token.IllegalCard(pc, cardCount);
-
-                    if (isNotCompliantWithReleaseDateRestrictions(edition))
-                        return Token.InvalidCard(pc, cardCount);
-
-                    return Token.KnownCard(pc, cardCount, tokenSection);
-                }
+                    return checkAndSetCardToken(pc, edition, cardCount, tokenSection);
                 // UNKNOWN card as in the Counterspell|FEM case
                 return Token.UnknownCard(cardName, setCode, cardCount);
             }
@@ -408,15 +505,30 @@ public class DeckRecognizer {
                                                         this.releaseDateConstraint);
 
             if (pc != null) {
-                if (isIllegalSetInGameFormat(pc.getEdition()) || isIllegalCardInDeckFormat(pc))
-                    return Token.IllegalCard(pc, cardCount);
                 CardEdition edition = StaticData.instance().getCardEdition(pc.getEdition());
-                if (isNotCompliantWithReleaseDateRestrictions(edition))
-                    return Token.InvalidCard(pc, cardCount);
-                return Token.KnownCard(pc, cardCount, tokenSection);
+                return checkAndSetCardToken(pc, edition, cardCount, tokenSection);
             }
         }
         return uknonwnCardToken;  // either null or unknown card
+    }
+
+    private Token checkAndSetCardToken(PaperCard pc, CardEdition edition, int cardCount, DeckSection tokenSection) {
+        // Note: Always Check Allowed Set First to avoid accidentally importing invalid cards
+        // e.g. Banned Cards from not-allowed sets!
+        if (IsIllegalInFormat(edition.getCode()))
+            // Mark as illegal card
+            return Token.NotAllowedCard(pc, cardCount);
+
+        if (isBannedInFormat(pc))
+            return Token.LimitedCard(pc, cardCount, tokenSection, LimitedCardType.BANNED);
+
+        if (isRestrictedInFormat(pc, cardCount))
+            return Token.LimitedCard(pc, cardCount, tokenSection, LimitedCardType.RESTRICTED);
+
+        if (isNotCompliantWithReleaseDateRestrictions(edition))
+            return Token.InvalidCard(pc, cardCount);
+
+        return Token.LegalCard(pc, cardCount, tokenSection);
     }
 
     private DeckSection getTokenSection(String deckSec, DeckSection currentDeckSection){
@@ -435,7 +547,9 @@ public class DeckRecognizer {
     }
 
     private boolean hasGameFormatConstraints() {
-        return this.allowedSetCodes != null && this.allowedSetCodes.size() > 0;
+        return (this.allowedSetCodes != null && !this.allowedSetCodes.isEmpty()) ||
+                (this.gameFormatBannedCards != null && !this.gameFormatBannedCards.isEmpty()) ||
+                (this.gameFormatRestrictedCards != null && !this.gameFormatRestrictedCards.isEmpty());
     }
 
     private String getRexGroup(Matcher matcher, String groupName){
@@ -448,11 +562,17 @@ public class DeckRecognizer {
         return rexGroup;
     }
 
-    private boolean isIllegalCardInDeckFormat(PaperCard pc) {
-        return this.deckFormat != null && !this.deckFormat.isLegalCard(pc);
+    private boolean isBannedInFormat(PaperCard pc) {
+        return (this.gameFormatBannedCards != null && this.gameFormatBannedCards.contains(pc.getName())) ||
+                (this.deckFormat != null && !this.deckFormat.isLegalCard(pc));
     }
 
-    private boolean isIllegalSetInGameFormat(String setCode) {
+    private boolean isRestrictedInFormat(PaperCard pc, int cardCount) {
+        return (this.gameFormatRestrictedCards != null &&
+                (this.gameFormatRestrictedCards.contains(pc.getName()) && cardCount > 1));
+    }
+
+    private boolean IsIllegalInFormat(String setCode) {
         return this.allowedSetCodes != null && !this.allowedSetCodes.contains(setCode);
     }
 
@@ -612,8 +732,23 @@ public class DeckRecognizer {
         releaseDateConstraint = ca.getTime();
     }
 
-    public void setGameFormatConstraint(List<String> allowedSetCodes){
-        this.allowedSetCodes = allowedSetCodes;
+    public void setGameFormatConstraint(List<String> allowedSetCodes,
+                                        List<String> bannedCards, List<String> restrictedCards){
+        if (allowedSetCodes != null && !allowedSetCodes.isEmpty())
+            this.allowedSetCodes = allowedSetCodes;
+        else
+            this.allowedSetCodes = null;
+
+        if (bannedCards != null && !bannedCards.isEmpty())
+            this.gameFormatBannedCards = bannedCards;
+        else
+            this.gameFormatBannedCards = null;
+
+        if (restrictedCards != null && !restrictedCards.isEmpty())
+            this.gameFormatRestrictedCards = restrictedCards;
+        else
+            this.gameFormatRestrictedCards = null;
+
     }
 
     public void setDeckFormatConstraint(DeckFormat deckFormat0){
