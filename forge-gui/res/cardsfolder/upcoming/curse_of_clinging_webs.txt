@@ -1,0 +1,11 @@
+Name:Curse of Clinging Webs
+ManaCost:2 G
+Types:Enchantment Aura Curse
+K:Enchant player
+A:SP$ Attach | ValidTgts$ Player | TgtPrompt$ Select player to curse | AILogic$ Curse
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.EnchantedPlayerCtr+nonToken | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Whenever a nontoken creature enchanted player controls dies, exile it and you create a 1/2 green Spider creature token with reach.
+SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Exile | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ g_1_2_spider_reach
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Token
+Oracle:Enchant player\nWhenever a nontoken creature enchanted player controls dies, exile it and you create a 1/2 green Spider creature token with reach.

@@ -1,0 +1,14 @@
+Name:Hordewing Skaab
+ManaCost:4 U
+Types:Creature Zombie Horror
+PT:3/3
+K:Flying
+S:Mode$ Continuous | Affected$ Zombie.YouCtrl+Other | AddKeyword$ Flying | Description$ Other zombies you control have flying.
+T:Mode$ DamageAll | ValidSource$ Creature.Zombie+YouCtrl | ValidTarget$ Player.Opponent | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ Whenever one or more zombies you control deal combat damage to one or more of your opponents, you may draw cards equal to the number of opponents dealt damage this way. If you do, discard that many cards.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X | RememberDrawn$ True | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GEX | Defined$ You | Mode$ TgtChoose | NumCards$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:TriggeredPlayersTargets$Amount
+DeckHints:Type$Zombie
+DeckHas:Ability$Discard
+Oracle:Flying\nOther zombies you control have flying.\nWhenever one or more zombies you control deal combat damage to one or more of your opponents, you may draw cards equal to the number of opponents dealt damage this way. If you do, discard that many cards.
