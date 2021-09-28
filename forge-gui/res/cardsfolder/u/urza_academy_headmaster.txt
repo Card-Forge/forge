@@ -68,7 +68,7 @@ A:AB$ GenericChoice | Cost$ SubCounter<6/LOYALTY> | ChangeToAtRandom$ Urza | Cho
 SVar:DealDamage1U:DB$ DealDamage | ValidTgts$ Player,Planeswalker | SubAbility$ DBDiscard1U | SpellDescription$ NICKNAME deals 7 damage to target player or planeswalker. That player or that planeswalker's controller discards seven cards, then sacrifices seven permanents.
 SVar:DBDiscard1U:DB$ Discard | Defined$ TargetedOrController | NumCards$ 7 | Mode$ TgtChoose | SubAbility$ DBSac1U
 SVar:DBSac1U:DB$Sacrifice | Defined$ TargetedOrController | SacValid$ Permanent | Amount$ 7
-SVar:Effect2U:DB$ Effect | Name$ Emblem - Ajani Steadfast | ReplacementEffects$ RPreventDamage | Stackable$ False | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "If a source would deal damage to you or a planeswalker you control, prevent all but 1 of that damage."
+SVar:Effect2U:DB$ Effect | Name$ Emblem - Urza, Academy Headmaster (2U) | ReplacementEffects$ RPreventDamage | Stackable$ False | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "If a source would deal damage to you or a planeswalker you control, prevent all but 1 of that damage."
 SVar:RPreventDamage:Event$ DamageDone | ValidTarget$ You,Planeswalker.YouCtrl | ReplaceWith$ PreventDmg | PreventionEffect$ True | Description$ If a source would deal damage to you or a planeswalker you control, prevent all but 1 of that damage.
 SVar:PreventDmg:DB$ ReplaceDamage | Amount$ ShieldAmount
 SVar:ShieldAmount:ReplaceCount$DamageAmount/Minus.1
