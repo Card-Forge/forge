@@ -431,8 +431,7 @@ public class AttachAi extends SpellAbilityAi {
                     SpellAbility auraSA = aura.getSpells().get(0);
                     if (auraSA.getApi() == ApiType.Attach) {
                         if ("KeepTapped".equals(auraSA.getParam("AILogic"))) {
-                            // Don't attach multiple KeepTapped Auras to one
-                            // card
+                            // Don't attach multiple KeepTapped Auras to one card
                             return false;
                         }
                     }

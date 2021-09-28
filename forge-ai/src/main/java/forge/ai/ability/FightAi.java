@@ -108,8 +108,7 @@ public class FightAi extends SpellAbilityAi {
                 }
                 if (ComputerUtilCombat.getDamageToKill(creature1) <= creature2.getNetPower()
                         && creature1.getNetPower() >= ComputerUtilCombat.getDamageToKill(creature2)) {
-                    // todo: check min/max targets; see if we picked the best
-                    // matchup
+                    // todo: check min/max targets; see if we picked the best matchup
                     sa.getTargets().add(creature1);
                     sa.getTargets().add(creature2);
                     return true;
@@ -203,7 +202,7 @@ public class FightAi extends SpellAbilityAi {
         // Evaluate creature pairs
         for (Card humanCreature : humCreatures) {
             for (Card aiCreature : aiCreatures) {
-                if (source.isSpell()) {   // heroic triggers adding counters and prowess
+                if (source.isSpell()) { // heroic triggers adding counters and prowess
                     final int bonus = getSpellBonus(aiCreature);
                     power += bonus;
                     toughness += bonus;
@@ -242,7 +241,7 @@ public class FightAi extends SpellAbilityAi {
                     }
                 } else {
                     if (FightAi.shouldFight(aiCreature, humanCreature, power, toughness)) {
-                    	if ("Time to Feed".equals(sourceName)) {	// flip targets
+                    	if ("Time to Feed".equals(sourceName)) { // flip targets
                     		final Card tmp = aiCreature;
                     		aiCreature = humanCreature;
                     		humanCreature = tmp;
@@ -287,10 +286,10 @@ public class FightAi extends SpellAbilityAi {
 
     private static boolean shouldFight(Card fighter, Card opponent, int pumpAttack, int pumpDefense) {
     	if (canKill(fighter, opponent, pumpAttack)) {
-    		if (!canKill(opponent, fighter, -pumpDefense)) {	// can survive
+    		if (!canKill(opponent, fighter, -pumpDefense)) { // can survive
     			return true;
     		} else {
-                if (MyRandom.getRandom().nextInt(20)<(opponent.getCMC() - fighter.getCMC())) {	// trade
+                if (MyRandom.getRandom().nextInt(20)<(opponent.getCMC() - fighter.getCMC())) { // trade
                     return true;
                 }
             }
