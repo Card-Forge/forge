@@ -1,5 +1,6 @@
 package forge.sound;
 
+import java.io.File;
 import java.util.Collection;
 
 import forge.LobbyPlayer;
@@ -37,6 +38,7 @@ import forge.gui.events.IUiEventVisitor;
 import forge.gui.events.UiEventAttackerDeclared;
 import forge.gui.events.UiEventBlockerAssigned;
 import forge.gui.events.UiEventNextGameDecision;
+import forge.localinstance.properties.ForgeConstants;
 import forge.util.TextUtil;
 import forge.util.maps.MapOfLists;
 
@@ -315,7 +317,12 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
         if (null != c) {
             effect = c.getSVar("SoundEffect");
         }
-        return !effect.isEmpty();
+        if (!effect.isEmpty()) {
+            // Only proceed if the file actually exists
+            return new File(ForgeConstants.SOUND_DIR, effect).exists();
+        }
+
+        return false;
     }
 
 
