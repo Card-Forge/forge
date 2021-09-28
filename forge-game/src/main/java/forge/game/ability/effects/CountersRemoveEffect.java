@@ -71,7 +71,6 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-
         final Card card = sa.getHostCard();
         final Game game = card.getGame();
         final Player player = sa.getActivatingPlayer();

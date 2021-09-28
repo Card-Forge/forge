@@ -48,7 +48,7 @@ public class MeldEffect extends SpellAbilityEffect {
             return;
         }
 
-        for(Card c : Lists.newArrayList(primary, secondary)) {
+        for (Card c : Lists.newArrayList(primary, secondary)) {
             if (c.isToken() || c.getCloneOrigin() != null) {
                 // Neither of these things
                 return;

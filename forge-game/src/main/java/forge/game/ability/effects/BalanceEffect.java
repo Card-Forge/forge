@@ -42,7 +42,7 @@ public class BalanceEffect extends SpellAbilityEffect {
         final List<CardCollection> validCards = new ArrayList<>(players.size());
         Map<Player, CardCollectionView> discardedMap = Maps.newHashMap();
         
-        for(int i = 0; i < players.size(); i++) {
+        for (int i = 0; i < players.size(); i++) {
             // Find the minimum of each Valid per player
             validCards.add(CardLists.getValidCards(players.get(i).getCardsIn(zone), valid, activator, source, sa));
             min = Math.min(min, validCards.get(i).size());

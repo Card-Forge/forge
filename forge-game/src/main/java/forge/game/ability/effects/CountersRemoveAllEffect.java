@@ -62,7 +62,7 @@ public class CountersRemoveAllEffect extends SpellAbilityEffect {
         int numberRemoved = 0;
         for (final Card tgtCard : cards) {
             if (sa.hasParam("AllCounterTypes")) {
-                for(Map.Entry<CounterType, Integer> e : Lists.newArrayList(tgtCard.getCounters().entrySet())) {
+                for (Map.Entry<CounterType, Integer> e : Lists.newArrayList(tgtCard.getCounters().entrySet())) {
                     numberRemoved += e.getValue();
                     tgtCard.subtractCounter(e.getKey(), e.getValue());
                 }

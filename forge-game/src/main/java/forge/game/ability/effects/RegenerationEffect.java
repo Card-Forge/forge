@@ -48,7 +48,6 @@ public class RegenerationEffect extends SpellAbilityEffect {
             runParams.put(AbilityKey.Cause, host);
             game.getTriggerHandler().runTrigger(TriggerType.Regenerated, runParams, false);
         }
-
     }
 
 }

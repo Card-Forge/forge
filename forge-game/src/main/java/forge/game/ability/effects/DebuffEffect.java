@@ -151,7 +151,6 @@ public class DebuffEffect extends SpellAbilityEffect {
                 addUntilCommand(sa, until);
             }
         }
-
     } // debuffResolve
 
 }

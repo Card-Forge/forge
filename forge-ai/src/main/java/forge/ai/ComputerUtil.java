@@ -43,6 +43,7 @@ import forge.card.MagicColor;
 import forge.game.CardTraitPredicates;
 import forge.game.Game;
 import forge.game.GameActionUtil;
+import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.GameType;
 import forge.game.ability.AbilityKey;
@@ -1605,10 +1606,10 @@ public class ComputerUtil {
             objects = topStack.getTargets();
             final List<GameObject> canBeTargeted = new ArrayList<>();
             for (Object o : objects) {
-                if (o instanceof Card) {
-                    final Card c = (Card) o;
-                    if (c.canBeTargetedBy(topStack)) {
-                        canBeTargeted.add(c);
+                if (o instanceof GameEntity) {
+                    final GameEntity ge = (GameEntity) o;
+                    if (ge.canBeTargetedBy(topStack)) {
+                        canBeTargeted.add(ge);
                     }
                 }
             }
@@ -1637,7 +1638,6 @@ public class ComputerUtil {
             }
             // Consider pump in subabilities, e.g. Bristling Hydra hexproof subability
             saviorWithSubs = saviorWithSubs.getSubAbility();
-
         }
 
         if (saviourApi == ApiType.PutCounter || saviourApi == ApiType.PutCounterAll) {
@@ -2441,7 +2441,6 @@ public class ComputerUtil {
                 return Iterables.getFirst(votes.keySet(), null);
             }
         case "FeatherOrQuill":
-
             // try to mill opponent with Quill vote
             if (opponent && !controller.cantLose()) {
                 int numQuill = votes.get("Quill").size();
@@ -2514,7 +2513,6 @@ public class ComputerUtil {
             int scoreNumbers = ComputerUtilCard.evaluateCreature(sourceNumbers) + tokenScore * (numNumbers + 1);
 
             return (scoreNumbers >= scoreStrength) != opponent ? "Numbers" : "Strength";
-
         case "SproutOrHarvest":
             // lifegain would hurt or has no effect
             if (opponent) {
@@ -2893,7 +2891,7 @@ public class ComputerUtil {
     }
 
     public static boolean targetPlayableSpellCard(final Player ai, CardCollection options, final SpellAbility sa, final boolean withoutPayingManaCost, boolean mandatory) {
-            // determine and target a card with a SA that the AI can afford and will play
+        // determine and target a card with a SA that the AI can afford and will play
         AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
         CardCollection targets = new CardCollection();
         for (Card c : options) {

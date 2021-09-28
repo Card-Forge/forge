@@ -18,7 +18,6 @@ public class PowerExchangeEffect extends SpellAbilityEffect {
         final StringBuilder sb = new StringBuilder();
         final List<Card> tgtCards = getTargetCards(sa);
 
-
         if (tgtCards.size() == 1) {
             sb.append(sa.getHostCard()).append(" exchanges power with ");
             sb.append(tgtCards.get(0));
