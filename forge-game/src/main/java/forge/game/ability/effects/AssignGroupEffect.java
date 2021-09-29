@@ -53,7 +53,7 @@ public class AssignGroupEffect extends SpellAbilityEffect {
             final String title = Localizer.getInstance().getMessage("lblChooseAbilityForObject", g.toString());
             Map<String, Object> params = Maps.newHashMap();
             params.put("Affected", g);
-            
+
             result.put(chooser.getController().chooseSingleSpellForEffect(abilities, sa, title, params), g);
         }
 
@@ -61,14 +61,17 @@ public class AssignGroupEffect extends SpellAbilityEffect {
         for (SpellAbility s : abilities) {
             // is that in Player order?
             Collection<GameObject> l = result.get(s);
-            
+
+            // no player assigned for this choice
+            if (l.isEmpty()) continue;
+
             host.addRemembered(l);
             AbilityUtils.resolve(s);
             host.removeRemembered(l);
-            
+
             // this will refresh continuous abilities for players and permanents.
             game.getAction().checkStaticAbilities();
-            game.getTriggerHandler().resetActiveTriggers(false);
+            game.getTriggerHandler().resetActiveTriggers();
         }
     }
 
