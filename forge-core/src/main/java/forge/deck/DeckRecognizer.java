@@ -640,13 +640,13 @@ public class DeckRecognizer {
     /* -----------------------------------------------------------------------------
     Note: Card types, CMC, and Rarity Tokens are **only** used for style formatting
     in the Import Editor. This won't affect the import process in any way.
-    The use of this token has been borrowed by Deckstats.net format export.
+    The use of these tokens has been borrowed by Deckstats.net format export.
     ----------------------------------------------------------------------------- */
     public static boolean isCardType(final String lineAsIs) {
         String nonCardToken = nonCardTokenMatch(lineAsIs);
         if (nonCardToken == null)
             return false;
-        return StringUtils.containsAny(nonCardToken.toLowerCase(), CARD_TYPES);
+        return StringUtils.startsWithAny(nonCardToken.toLowerCase(), CARD_TYPES);
     }
 
     public static boolean isCardRarity(final String lineAsIs){
