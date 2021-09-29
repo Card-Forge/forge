@@ -24,7 +24,6 @@ import forge.card.CardEdition;
 import forge.card.CardType;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
-import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
@@ -66,9 +65,9 @@ public class DeckRecognizer {
      * The Class Token.
      */
     public static class Token {
-        private final TokenType type;
-        private final int number;
-        private final String text;
+        private TokenType type;
+        private int number;
+        private String text;
         // only used for illegal card tokens
         private LimitedCardType limitedCardType = null;
         // only used for card tokens
@@ -77,20 +76,20 @@ public class DeckRecognizer {
 
         public static Token LegalCard(final PaperCard card, final int count,
                                       final DeckSection section) {
-            return new Token(card, TokenType.LEGAL_CARD, count, section);
+            return new Token(TokenType.LEGAL_CARD, count, card, section);
         }
 
         public static Token LimitedCard(final PaperCard card, final int count,
                                         final DeckSection section, final LimitedCardType limitedType){
-            return new Token(card, TokenType.LIMITED_CARD, count, section, limitedType);
+            return new Token(TokenType.LIMITED_CARD, count, card, section, limitedType);
         }
 
         public static Token NotAllowedCard(final PaperCard card, final int count) {
-            return new Token(card, TokenType.CARD_FROM_NOT_ALLOWED_SET, count);
+            return new Token(TokenType.CARD_FROM_NOT_ALLOWED_SET, count, card);
         }
 
-        public static Token InvalidCard(final PaperCard theCard, final int count) {
-            return new Token(theCard, TokenType.CARD_FROM_INVALID_SET, count);
+        public static Token InvalidCard(final PaperCard card, final int count) {
+            return new Token(TokenType.CARD_FROM_INVALID_SET, count, card);
         }
 
         public static Token UnknownCard(final String cardName, final String setCode, final int count) {
@@ -119,25 +118,26 @@ public class DeckRecognizer {
             return null;
         }
 
-        private Token(final PaperCard tokenCard, final TokenType type1, final int count) {
-            this(type1, count, String.format("%s (%s)", tokenCard.getName(), tokenCard.getEdition()));
+        private Token(final TokenType type1, final int count, final PaperCard tokenCard) {
+            this.number = count;
+            this.type = type1;
+            this.text = String.format("%s [%s] #%s",
+                    tokenCard.getName(), tokenCard.getEdition(), tokenCard.getCollectorNumber());
             this.card = tokenCard;
             this.tokenSection = null;
             this.limitedCardType = null;
         }
 
-        private Token(final PaperCard tokenCard, final TokenType type1, final int count,
+        private Token(final TokenType type1, final int count, final PaperCard tokenCard,
                       final DeckSection section) {
-            this(type1, count, String.format("%s (%s)", tokenCard.getName(), tokenCard.getEdition()));
-            this.card = tokenCard;
+            this(type1, count, tokenCard);
             this.tokenSection = section;
             this.limitedCardType = null;
         }
 
-        private Token(final PaperCard tokenCard, final TokenType type1, final int count,
+        private Token(final TokenType type1, final int count, final PaperCard tokenCard,
                       final DeckSection section, final LimitedCardType limitedCardType1) {
-            this(type1, count, String.format("%s (%s)", tokenCard.getName(), tokenCard.getEdition()));
-            this.card = tokenCard;
+            this(type1, count, tokenCard);
             this.tokenSection = section;
             this.limitedCardType = limitedCardType1;
         }
