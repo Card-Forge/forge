@@ -610,7 +610,8 @@ public class VPlayerPanel extends FContainer {
                 if (lblLife.getRotate180()) {
                     g.startRotateTransform(x + w / 2, y + h / 2, 180);
                 }
-                g.drawImage(icon, x, y, w, h);
+                float mod = isHovered() ? w/8f:0;
+                g.drawImage(icon, x-mod/2, y-mod/2, w+mod, h+mod);
                 if (lblLife.getRotate180()) {
                     g.endTransform();
                 }
@@ -637,7 +638,8 @@ public class VPlayerPanel extends FContainer {
                 h = icon.getHeight() * w / icon.getWidth();
                 x = (getWidth() - w) / 2;
                 y = INFO_TAB_PADDING_Y;
-                g.drawImage(icon, x, y, w, h);
+                float mod = isHovered() ? w/8f:0;
+                g.drawImage(icon, x-mod/2, y-mod/2, w+mod, h+mod);
 
                 y += h + INFO_TAB_PADDING_Y;
                 g.drawText(value, INFO_FONT, INFO_FORE_COLOR, 0, y, getWidth(), getHeight() - y + 1, false, Align.center, false);

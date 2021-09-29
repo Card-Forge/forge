@@ -373,7 +373,7 @@ public class VStack extends FDropDown {
 
             g.startClip(0, 0, w, getHeight()); //clip based on actual height
 
-            g.fillRect(Color.BLACK, x, y, w, h); //draw rectangle for border
+            g.fillRect(isHovered() ? Color.GRAY : Color.BLACK, x, y, w, h); //draw rectangle for border
 
             x += BORDER_THICKNESS;
             y += BORDER_THICKNESS;

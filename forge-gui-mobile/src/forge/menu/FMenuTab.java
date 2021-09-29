@@ -99,6 +99,8 @@ public class FMenuTab extends FDisplayObject {
         y = PADDING;
         w = getWidth() - 2 * PADDING;
         h = getHeight() - 2 * PADDING;
+        if (isHovered())
+            g.fillRect(SEL_BACK_COLOR.brighter(), x, y, w, h);
         g.drawText(text, FONT, foreColor, x, y, w, h, false, Align.center, true);
     }
 }

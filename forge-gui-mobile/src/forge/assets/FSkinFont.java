@@ -331,8 +331,16 @@ public class FSkinFont {
         return fontSize > MIN_FONT_SIZE;
     }
 
+    public boolean canIncrease() {
+        return MAX_FONT_SIZE - fontSize > 2;
+    }
+
     public FSkinFont shrink() {
         return _get(fontSize - 1);
+    }
+
+    public FSkinFont increase() {
+        return _get(fontSize + 3);
     }
 
     public String getCharacterSet(String langCode) {
