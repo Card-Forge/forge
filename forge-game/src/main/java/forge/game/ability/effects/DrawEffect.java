@@ -60,7 +60,11 @@ public class DrawEffect extends SpellAbilityEffect {
 
                 final CardCollectionView drawn = p.drawCards(actualNum, sa);
                 if (sa.hasParam("Reveal")) {
-                    p.getGame().getAction().reveal(drawn, p);
+                    if (sa.getParam("Reveal").equals("All")) {
+                        p.getGame().getAction().reveal(drawn, p, false);
+                    } else {
+                        p.getGame().getAction().reveal(drawn, p);
+                    }
                 }
                 if (sa.hasParam("RememberDrawn")) {
                     for (final Card c : drawn) {
