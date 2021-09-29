@@ -33,13 +33,14 @@ public class CStatisticsImporter {
         return instance;
     }
 
-    public void updateStats(Iterable<DeckRecognizer.Token> cardTokens) {
+    public void updateStats(Iterable<DeckRecognizer.Token> cardTokens, boolean includeBannedAndRestricted) {
 
-        List<Map.Entry<PaperCard, Integer>> tokenCards = new ArrayList();
+        List<Map.Entry<PaperCard, Integer>> tokenCards = new ArrayList<>();
         int totalInMain = 0;
         int totalInSide = 0;
         for (DeckRecognizer.Token token : cardTokens){
-            if (token.getType() == DeckRecognizer.TokenType.LEGAL_CARD_REQUEST) {
+            if ((token.getType() == DeckRecognizer.TokenType.LEGAL_CARD) ||
+                    (includeBannedAndRestricted && token.getType() == DeckRecognizer.TokenType.LIMITED_CARD)){
                 tokenCards.add(new AbstractMap.SimpleEntry<>(token.getCard(), token.getNumber()));
                 if (token.getTokenSection().equals(DeckSection.Main))
                     totalInMain += token.getNumber();
