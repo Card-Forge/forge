@@ -3427,6 +3427,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final boolean isAttachedToEntity() {
         return entityAttachedTo != null;
     }
+    public final boolean isAttachedToEntity(final GameEntity e) {
+        return (entityAttachedTo == e);
+    }
 
     public final Card getAttachedTo() {
         if (entityAttachedTo instanceof Card) {
