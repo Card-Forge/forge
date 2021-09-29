@@ -925,6 +925,15 @@ public class Forge implements ApplicationListener {
         public boolean mouseMoved(int screenX, int screenY) {
             mouseMovedX = screenX;
             mouseMovedY = screenY;
+            //reset
+            try {
+                for (FDisplayObject listener : potentialListeners) {
+                    listener.setHovered(false);
+                }
+            }
+            catch (Exception ex) {
+                BugReporter.reportException(ex);
+            }
             updatePotentialListeners(screenX, screenY);
             return true;
         }
