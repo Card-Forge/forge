@@ -339,8 +339,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (tgt != null && tgt.canTgtPlayer()) {
             boolean isCurse = sa.isCurse();
             if (isCurse && sa.canTarget(opponent)) {
+                sa.resetTargets();
                 sa.getTargets().add(opponent);
             } else if (!isCurse && sa.canTarget(ai)) {
+                sa.resetTargets();
                 sa.getTargets().add(ai);
             }
             pDefined = sa.getTargets().getTargetPlayers();
