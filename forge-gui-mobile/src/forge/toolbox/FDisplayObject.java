@@ -13,6 +13,7 @@ public abstract class FDisplayObject {
     private boolean enabled = true;
     private boolean rotate90 = false;
     private boolean rotate180 = false;
+    private boolean hovered = false;
     private final Rectangle bounds = new Rectangle();
     public final Rectangle screenPos = new Rectangle();
 
@@ -86,6 +87,13 @@ public abstract class FDisplayObject {
         visible = b0;
     }
 
+    public boolean isHovered() {
+        return hovered;
+    }
+    public void setHovered(boolean b0) {
+        hovered = b0;
+    }
+
     public boolean getRotate90() {
         return rotate90;
     }
@@ -117,10 +125,15 @@ public abstract class FDisplayObject {
     }
 
     public abstract void draw(Graphics g);
+    public float scrX, scrY;
     public void buildTouchListeners(float screenX, float screenY, List<FDisplayObject> listeners) {
         if (enabled && visible && screenPos.contains(screenX, screenY)) {
             listeners.add(this);
         }
+        //TODO: needs better logic, it must be the only current selectable
+        setHovered(this.enabled && this.visible && this.screenPos.contains(screenX, screenY));
+        scrX = screenX;
+        scrY = screenY;
     }
 
     public boolean press(float x, float y) {

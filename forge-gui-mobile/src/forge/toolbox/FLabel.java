@@ -1,5 +1,6 @@
 package forge.toolbox;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
 
@@ -378,8 +379,8 @@ public class FLabel extends FDisplayObject implements IButton {
                 }
                 y += (h - iconHeight) / 2;
             }
-
-            g.drawImage(icon, x, y, iconWidth, iconHeight);
+            float mod = isHovered() && selectable ? iconWidth < iconHeight ? iconWidth/8f : iconHeight/8f : 0;
+            g.drawImage(icon, x-mod/2, y-mod/2, iconWidth+mod, iconHeight+mod);
 
             if (!text.isEmpty()) {
                 x += iconOffset;
@@ -388,6 +389,12 @@ public class FLabel extends FDisplayObject implements IButton {
             }
         }
         else if (!text.isEmpty()) {
+            float oldAlpha = g.getfloatAlphaComposite();
+            if (isHovered() && selectable) {
+                g.setAlphaComposite(0.4f);
+                g.fillRect(Color.GRAY, x, y, w, h);
+                g.setAlphaComposite(oldAlpha);
+            }
             drawText(g, x, y, w, h, alignment);
         }
     }

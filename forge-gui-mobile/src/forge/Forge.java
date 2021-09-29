@@ -922,9 +922,10 @@ public class Forge implements ApplicationListener {
         private int mouseMovedX, mouseMovedY;
 
         @Override
-        public boolean mouseMoved(int x, int y) {
-            mouseMovedX = x;
-            mouseMovedY = y;
+        public boolean mouseMoved(int screenX, int screenY) {
+            mouseMovedX = screenX;
+            mouseMovedY = screenY;
+            updatePotentialListeners(screenX, screenY);
             return true;
         }
 

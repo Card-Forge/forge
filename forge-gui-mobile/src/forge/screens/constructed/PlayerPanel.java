@@ -60,8 +60,8 @@ public class PlayerPanel extends FContainer {
     private LobbySlotType type = LobbySlotType.LOCAL;
 
     private final FLabel nameRandomiser;
-    private final FLabel avatarLabel = new FLabel.Builder().opaque(true).iconScaleFactor(0.99f).alphaComposite(1).iconInBackground(true).build();
-    private final FLabel sleeveLabel = new FLabel.Builder().opaque(true).iconScaleFactor(0.99f).alphaComposite(1).iconInBackground(true).build();
+    private final FLabel avatarLabel = new FLabel.Builder().opaque(true).iconScaleFactor(0.99f).selectable().alphaComposite(1).iconInBackground(true).build();
+    private final FLabel sleeveLabel = new FLabel.Builder().opaque(true).iconScaleFactor(0.99f).selectable().alphaComposite(1).iconInBackground(true).build();
     private int avatarIndex, sleeveIndex;
 
     final Localizer localizer = Localizer.getInstance();

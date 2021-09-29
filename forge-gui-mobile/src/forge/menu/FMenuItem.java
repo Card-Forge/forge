@@ -120,6 +120,9 @@ public class FMenuItem extends FDisplayObject implements IButton {
         float w = getWidth();
         float h = HEIGHT;
 
+        if (isHovered() && !pressed)
+            g.fillRect(PRESSED_COLOR.brighter().alphaColor(0.4f), 0, 0, w, h);
+
         if (showPressedColor()) {
             g.fillRect(PRESSED_COLOR, 0, 0, w, h);
         }
