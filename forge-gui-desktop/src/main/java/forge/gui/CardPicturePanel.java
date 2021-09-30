@@ -36,6 +36,7 @@ import forge.toolbox.imaging.FImagePanel;
 import forge.toolbox.imaging.FImagePanel.AutoSizeImageMode;
 import forge.toolbox.imaging.FImageUtil;
 import forge.util.ImageFetcher;
+import org.apache.commons.lang3.tuple.Pair;
 
 /**
  * Displays image associated with a card or inventory item.
@@ -117,10 +118,12 @@ public final class CardPicturePanel extends JPanel implements ImageFetcher.Callb
 
         if (displayed instanceof InventoryItem) {
             final InventoryItem item = (InventoryItem) displayed;
-            BufferedImage image = ImageCache.getOriginalImage(item.getImageKey(false), true, null);
-            if (ImageCache.isDefaultImage(image) && item instanceof PaperCard) {
+            Pair<BufferedImage, Boolean> originalImageInfo = ImageCache.getCardOriginalImageInfo(
+                    item.getImageKey(false), true);
+            BufferedImage image = originalImageInfo.getLeft();
+            boolean isPlaceHolderImage = originalImageInfo.getRight();
+            if ((ImageCache.isDefaultImage(image) || isPlaceHolderImage) && item instanceof PaperCard)
                 GuiBase.getInterface().getImageFetcher().fetchImage(item.getImageKey(false), this);
-            }
             return image;
         } else if (displayed instanceof CardStateView) {
             CardStateView card = (CardStateView) displayed;
@@ -148,7 +151,7 @@ public final class CardPicturePanel extends JPanel implements ImageFetcher.Callb
     }
 
     public void showAsDisabled(){
-        this.panel.setAlpha(0.8f);
+        this.panel.setAlpha(0.5f);
     }
 
     public void showAsEnabled(){
