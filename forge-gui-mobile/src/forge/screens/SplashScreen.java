@@ -102,7 +102,7 @@ public class SplashScreen extends FContainer {
         progressBar.setBounds(x + padding, y, w - 2 * padding, pbHeight);
         g.draw(progressBar);
 
-        String version = "v. " + Forge.CURRENT_VERSION + " (Alpha)";
+        String version = "v. " + Forge.CURRENT_VERSION;
         g.drawText(version, disclaimerFont, FProgressBar.SEL_FORE_COLOR, x, getHeight() - disclaimerHeight, w, disclaimerHeight, false, Align.center, true);
     }
 }
