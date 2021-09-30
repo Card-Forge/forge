@@ -9,6 +9,9 @@ import java.util.Set;
 
 import forge.animation.ForgeAnimation;
 import forge.assets.FImage;
+import forge.game.spellability.StackItemView;
+import forge.gui.interfaces.IGuiGame;
+import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.badlogic.gdx.Input.Keys;
@@ -440,46 +443,109 @@ public class MatchScreen extends FScreen {
 
     @Override
     public boolean keyDown(int keyCode) {
+        // TODO: make the keyboard shortcuts configurable on Mobile
         switch (keyCode) {
-        case Keys.ENTER:
-        case Keys.SPACE:
-            if (getActivePrompt().getBtnOk().trigger()) { //trigger OK on Enter or Space
-                return true;
-            }
-            return getActivePrompt().getBtnCancel().trigger(); //trigger Cancel if can't trigger OK
-        case Keys.ESCAPE:
-            if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ALLOW_ESC_TO_END_TURN)) {
-                if (getActivePrompt().getBtnCancel().getText().equals(Localizer.getInstance().getMessage("lblEndTurn"))) {
-                    return false;
+            case Keys.ENTER:
+            case Keys.SPACE:
+                if (getActivePrompt().getBtnOk().trigger()) { //trigger OK on Enter or Space
+                    return true;
                 }
-            }
-            return getActivePrompt().getBtnCancel().trigger(); //otherwise trigger Cancel
-        case Keys.BACK:
-            return true; //suppress Back button so it's not bumped when trying to press OK or Cancel buttons
-        case Keys.A: //alpha strike on Ctrl+A on Android, A when running on desktop
-            if (KeyInputAdapter.isCtrlKeyDown() || GuiBase.getInterface().isRunningOnDesktop()) {
-                getGameController().alphaStrike();
-                return true;
-            }
-            break;
-        case Keys.E: //end turn on Ctrl+E on Android, E when running on desktop
-            if (KeyInputAdapter.isCtrlKeyDown() || GuiBase.getInterface().isRunningOnDesktop()) {
-                getGameController().passPriorityUntilEndOfTurn();
-                return true;
-            }
-            break;
-        case Keys.Q: //concede game on Ctrl+Q
-            if (KeyInputAdapter.isCtrlKeyDown()) {
-                MatchController.instance.concede();
-                return true;
-            }
-            break;
-        case Keys.Z: //undo on Ctrl+Z
-            if (KeyInputAdapter.isCtrlKeyDown()) {
-                getGameController().undoLastAction();
-                return true;
-            }
-            break;
+                return getActivePrompt().getBtnCancel().trigger(); //trigger Cancel if can't trigger OK
+            case Keys.ESCAPE:
+                if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ALLOW_ESC_TO_END_TURN)) {
+                    if (getActivePrompt().getBtnCancel().getText().equals(Localizer.getInstance().getMessage("lblEndTurn"))) {
+                        return false;
+                    }
+                }
+                return getActivePrompt().getBtnCancel().trigger(); //otherwise trigger Cancel
+            case Keys.BACK:
+                return true; //suppress Back button so it's not bumped when trying to press OK or Cancel buttons
+            case Keys.A: //alpha strike on Ctrl+A on Android, A when running on desktop
+                if (KeyInputAdapter.isCtrlKeyDown() || GuiBase.getInterface().isRunningOnDesktop()) {
+                    getGameController().alphaStrike();
+                    return true;
+                }
+                break;
+            case Keys.E: //end turn on Ctrl+E on Android, E when running on desktop
+                if (KeyInputAdapter.isCtrlKeyDown() || GuiBase.getInterface().isRunningOnDesktop()) {
+                    getGameController().passPriorityUntilEndOfTurn();
+                    return true;
+                }
+                break;
+            case Keys.Q: //concede game on Ctrl+Q
+                if (KeyInputAdapter.isCtrlKeyDown()) {
+                    MatchController.instance.concede();
+                    return true;
+                }
+                break;
+            case Keys.Z: //undo on Ctrl+Z
+                if (KeyInputAdapter.isCtrlKeyDown()) {
+                    getGameController().undoLastAction();
+                    return true;
+                }
+                break;
+            case Keys.Y: //auto-yield, always yes, Ctrl+Y on Android, Y when running on desktop
+                if (KeyInputAdapter.isCtrlKeyDown() || GuiBase.getInterface().isRunningOnDesktop()) {
+                    final IGuiGame gui = MatchController.instance;
+                    final IGameController controller = MatchController.instance.getGameController();
+                    final GameView gameView = MatchController.instance.getGameView();
+                    final FCollectionView<StackItemView> stack = MatchController.instance.getGameView().getStack();
+                    if (stack.isEmpty()) {
+                        return false;
+                    }
+                    StackItemView stackInstance = stack.getLast();
+                    final int triggerID = stackInstance.getSourceTrigger();
+
+                    if (gui.shouldAlwaysAcceptTrigger(triggerID)) {
+                        gui.setShouldAlwaysAskTrigger(triggerID);
+                    }
+                    else {
+                        gui.setShouldAlwaysAcceptTrigger(triggerID);
+                        if (stackInstance.equals(gameView.peekStack())) {
+                            //auto-yes if ability is on top of stack
+                            controller.selectButtonOk();
+                        }
+                    }
+
+                    final String key = stackInstance.getKey();
+                    gui.setShouldAutoYield(key, true);
+                    if (stackInstance.equals(gameView.peekStack())) {
+                        //auto-pass priority if ability is on top of stack
+                        controller.passPriority();
+                    }
+                }
+                break;
+            case Keys.N: //auto-yield, always no, Ctrl+N on Android, N when running on desktop
+                if (KeyInputAdapter.isCtrlKeyDown() || GuiBase.getInterface().isRunningOnDesktop()) {
+                    final IGuiGame gui = MatchController.instance;
+                    final IGameController controller = MatchController.instance.getGameController();
+                    final GameView gameView = MatchController.instance.getGameView();
+                    final FCollectionView<StackItemView> stack = MatchController.instance.getGameView().getStack();
+                    if (stack.isEmpty()) {
+                        return false;
+                    }
+                    StackItemView stackInstance = stack.getLast();
+                    final int triggerID = stackInstance.getSourceTrigger();
+
+                    if (gui.shouldAlwaysDeclineTrigger(triggerID)) {
+                        gui.setShouldAlwaysAskTrigger(triggerID);
+                    }
+                    else {
+                        gui.setShouldAlwaysDeclineTrigger(triggerID);
+                        if (stackInstance.equals(gameView.peekStack())) {
+                            //auto-no if ability is on top of stack
+                            controller.selectButtonCancel();
+                        }
+                    }
+
+                    final String key = stackInstance.getKey();
+                    gui.setShouldAutoYield(key, true);
+                    if (stackInstance.equals(gameView.peekStack())) {
+                        //auto-pass priority if ability is on top of stack
+                        controller.passPriority();
+                    }
+                }
+                break;
         }
         return super.keyDown(keyCode);
     }
