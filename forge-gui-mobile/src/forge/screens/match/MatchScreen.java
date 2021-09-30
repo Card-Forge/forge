@@ -484,7 +484,7 @@ public class MatchScreen extends FScreen {
                     return true;
                 }
                 break;
-            case Keys.Y: //auto-yield, always yes
+            case Keys.Y: //auto-yield, always yes, Ctrl+Y on Android, Y when running on desktop
                 if (KeyInputAdapter.isCtrlKeyDown() || GuiBase.getInterface().isRunningOnDesktop()) {
                     final IGuiGame gui = MatchController.instance;
                     final IGameController controller = MatchController.instance.getGameController();
@@ -515,7 +515,7 @@ public class MatchScreen extends FScreen {
                     }
                 }
                 break;
-            case Keys.N: //auto-yield, always no
+            case Keys.N: //auto-yield, always no, Ctrl+N on Android, N when running on desktop
                 if (KeyInputAdapter.isCtrlKeyDown() || GuiBase.getInterface().isRunningOnDesktop()) {
                     final IGuiGame gui = MatchController.instance;
                     final IGameController controller = MatchController.instance.getGameController();
