@@ -252,8 +252,10 @@ public class FImagePanel extends JPanel {
     private void doPerformancePaint(Graphics g) {
         Graphics2D g2d = (Graphics2D)g;
         setRenderingHints(g2d);
-        if (alpha > 0)
+        if (alpha > 0) {
+            g2d.setColor(new Color(92, 92, 92));
             g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
+        }
         g2d.drawImage(sourceImage, getAffineTransform(sourceImage, true), null);
     }
 
