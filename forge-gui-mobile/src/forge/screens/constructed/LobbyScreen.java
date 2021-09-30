@@ -252,14 +252,23 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         float x = PADDING;
         float y = startY + PADDING;
         float fieldHeight = cbPlayerCount.getHeight();
-        lblPlayers.setBounds(x, y, lblPlayers.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
-        x += lblPlayers.getWidth();
-        cbPlayerCount.setBounds(x, y, Utils.AVG_FINGER_WIDTH, fieldHeight);
-        x += cbPlayerCount.getWidth() + PADDING;
-        lblVariants.setBounds(x, y, lblVariants.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
-        x += lblVariants.getWidth();
-        cbVariants.setBounds(x, y, width - x - PADDING, fieldHeight);
-
+        if (Forge.isLandscapeMode()) {
+            lblVariants.setBounds(x, y, lblVariants.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
+            x += lblVariants.getWidth();
+            cbVariants.setBounds(x, y, width - (x + lblPlayers.getAutoSizeBounds().width + PADDING/2 + Utils.AVG_FINGER_WIDTH + PADDING), fieldHeight);
+            x += cbVariants.getWidth();
+            lblPlayers.setBounds(x, y, lblPlayers.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
+            x += lblPlayers.getWidth();
+            cbPlayerCount.setBounds(x, y, Utils.AVG_FINGER_WIDTH, fieldHeight);
+        } else {
+            lblPlayers.setBounds(x, y, lblPlayers.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
+            x += lblPlayers.getWidth();
+            cbPlayerCount.setBounds(x, y, Utils.AVG_FINGER_WIDTH, fieldHeight);
+            x += cbPlayerCount.getWidth() + PADDING;
+            lblVariants.setBounds(x, y, lblVariants.getAutoSizeBounds().width + PADDING / 2, fieldHeight);
+            x += lblVariants.getWidth();
+            cbVariants.setBounds(x, y, width - x - PADDING, fieldHeight);
+        }
         y += cbPlayerCount.getHeight() + PADDING;
         playersScroll.setBounds(0, y, width, height - y);
     }
