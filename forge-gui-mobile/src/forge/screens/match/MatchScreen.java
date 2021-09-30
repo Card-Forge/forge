@@ -494,6 +494,9 @@ public class MatchScreen extends FScreen {
                         return false;
                     }
                     StackItemView stackInstance = stack.getLast();
+                    if (!stackInstance.isAbility()) {
+                        return false;
+                    }
                     final int triggerID = stackInstance.getSourceTrigger();
 
                     if (gui.shouldAlwaysAcceptTrigger(triggerID)) {
@@ -525,6 +528,9 @@ public class MatchScreen extends FScreen {
                         return false;
                     }
                     StackItemView stackInstance = stack.getLast();
+                    if (!stackInstance.isAbility()) {
+                        return false;
+                    }
                     final int triggerID = stackInstance.getSourceTrigger();
 
                     if (gui.shouldAlwaysDeclineTrigger(triggerID)) {
