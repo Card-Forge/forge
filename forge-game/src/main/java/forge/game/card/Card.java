@@ -2223,6 +2223,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public String getAbilityText(final CardState state) {
         final String linebreak = "\r\n\r\n";
+        //TODO magic needs to happen here
         final String grayTag = "<span style=\"color:gray;\">";
         final String endTag = "</span>";
         final CardTypeView type = state.getType();

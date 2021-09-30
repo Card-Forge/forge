@@ -96,6 +96,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbTimedTargOverlay = new OptionsCheckBox(localizer.getMessage("cbTimedTargOverlay"));
     private final JCheckBox cbCompactMainMenu = new OptionsCheckBox(localizer.getMessage("cbCompactMainMenu"));
     private final JCheckBox cbDetailedPaymentDesc = new OptionsCheckBox(localizer.getMessage("cbDetailedPaymentDesc"));
+    private final JCheckBox cbGrayText = new OptionsCheckBox(localizer.getMessage("cbGrayText"));
     private final JCheckBox cbPromptFreeBlocks = new OptionsCheckBox(localizer.getMessage("cbPromptFreeBlocks"));
     private final JCheckBox cbPauseWhileMinimized = new OptionsCheckBox(localizer.getMessage("cbPauseWhileMinimized"));
     private final JCheckBox cbCompactPrompt = new OptionsCheckBox(localizer.getMessage("cbCompactPrompt"));
@@ -246,6 +247,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbDetailedPaymentDesc, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlDetailedPaymentDesc")), descriptionConstraints);
+
+        pnlPrefs.add(cbGrayText, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlGrayText")), descriptionConstraints);
 
         pnlPrefs.add(cbShowStormCount, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlShowStormCount")), descriptionConstraints);
@@ -900,6 +904,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     public final JCheckBox getCbDetailedPaymentDesc() {
         return cbDetailedPaymentDesc;
     }
+
+    public final JCheckBox getCbGrayText() {
+        return cbGrayText;
+    }
+
 
     public final JCheckBox getCbShowStormCount() {
         return cbShowStormCount;
