@@ -1,7 +1,6 @@
 package forge.game.event;
 
 import forge.game.player.Player;
-import forge.util.TextUtil;
 
 public class GameEventCardForetold extends GameEvent {
     public final Player activatingPlayer;
