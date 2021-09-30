@@ -1,12 +1,10 @@
 package forge.gui.control;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.eventbus.Subscribe;
 
 import forge.game.Game;
@@ -36,11 +34,12 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     private final Set<PlayerView> livesUpdate = new HashSet<>();
     private final Set<PlayerView> manaPoolUpdate = new HashSet<>();
     private final PlayerZoneUpdates zonesUpdate = new PlayerZoneUpdates();
+    private final Map<PlayerView, Object> playersWithValidTargets = Maps.newHashMap();
 
-    private boolean processEventsQueued, needPhaseUpdate, needCombatUpdate, needStackUpdate, needPlayerControlUpdate, refreshFieldUpdate;
+    private boolean processEventsQueued, needPhaseUpdate, needCombatUpdate, needStackUpdate, needPlayerControlUpdate, refreshFieldUpdate, showExileUpdate;
     private boolean gameOver, gameFinished;
     private boolean needSaveState = false;
-    private PlayerView turnUpdate;
+    private PlayerView turnUpdate, activatingPlayer;
 
     public FControlGameEventHandler(final PlayerControllerHuman humanController0) {
         humanController = humanController0;
@@ -111,6 +110,12 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             if (refreshFieldUpdate) {
                 refreshFieldUpdate = false;
                 matchController.refreshField();
+            }
+            if (showExileUpdate) {
+                showExileUpdate = false;
+                matchController.openZones(activatingPlayer, Collections.singleton(ZoneType.Exile), playersWithValidTargets);
+                activatingPlayer = null;
+                playersWithValidTargets.clear();
             }
             if (gameOver) {
                 gameOver = false;
@@ -415,6 +420,14 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         refreshFieldUpdate = true;
         processCards(event.cards, cardsRefreshDetails);
         return processCards(event.cards, cardsUpdate);
+    }
+
+    @Override
+    public Void visit(final GameEventCardForetold event) {
+        showExileUpdate = true;
+        activatingPlayer = event.activatingPlayer.getView();
+        playersWithValidTargets.put(activatingPlayer, null);
+        return processEvent();
     }
 
     @Override

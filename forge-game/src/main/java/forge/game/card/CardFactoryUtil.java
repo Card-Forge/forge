@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import forge.game.event.GameEventCardForetold;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
@@ -2853,6 +2854,7 @@ public class CardFactoryUtil {
                     }
                     String sb = TextUtil.concatWithSpace(getActivatingPlayer().toString(),"has foretold.");
                     game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
+                    game.fireEvent(new GameEventCardForetold(getActivatingPlayer()));
                 }
             };
             final StringBuilder sbDesc = new StringBuilder();
