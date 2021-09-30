@@ -353,8 +353,7 @@ public class MatchController extends AbstractGuiGame {
                         final VPlayerPanel playerPanel = view.getPlayerPanel(player);
                         playersWithTargetables.put(player, playerPanel.getSelectedTab()); //backup selected tab before changing it
                         final InfoTab zoneTab = playerPanel.getZoneTab(zoneType);
-                        ZoneType previousZone = playerPanel.getZoneByInfoTab(playerPanel.getSelectedTab());
-                        updates.add(new PlayerZoneUpdate(player, previousZone));
+                        updates.add(new PlayerZoneUpdate(player, zoneType));
                         if (zoneTab != null) {
                             playerPanel.setSelectedTab(zoneTab);
                         }
