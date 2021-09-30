@@ -96,7 +96,6 @@ public class FCardPanel extends FDisplayObject {
     public void draw(Graphics g) {
         if (card == null) { return; }
         boolean animate = Forge.animatedCardTapUntap;
-        //TODO: FCardPanel ishovered and CardStackPosition is BehindHorz or BehindVert...
         float mod = isHighlighted()||isHovered() ? getWidth()/16f : 0f;
         float padding = getPadding();
         float x = padding-mod/2;
