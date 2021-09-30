@@ -293,6 +293,7 @@ public class TextRenderer {
                             colorOverride = value != null ? new Color(Integer.parseInt(value)) : null;
                             break;
                         case "span":
+                            //TODO handle mobile pref here, I suppose
                             // <span style="color:gray;">
                             if (value != null && value.contains("color:")) {
                                 int startIdx = value.indexOf(':') + 1;
