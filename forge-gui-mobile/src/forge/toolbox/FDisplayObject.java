@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.badlogic.gdx.math.Rectangle;
 
+import forge.Forge;
 import forge.Graphics;
 
 public abstract class FDisplayObject {
@@ -130,8 +131,10 @@ public abstract class FDisplayObject {
         if (enabled && visible && screenPos.contains(screenX, screenY)) {
             listeners.add(this);
         }
-        //TODO: needs better logic, it must be the only current selectable
-        setHovered(this.enabled && this.visible && this.screenPos.contains(screenX, screenY));
+        Forge.hoveredCount = listeners.size();
+        if (!Forge.getCurrentScreen().toString().contains("Match"))
+            Forge.hoveredCount = 1;
+        setHovered(this.enabled && this.visible && this.screenPos.contains(screenX, screenY) && Forge.hoveredCount < 2);
         scrX = screenX;
         scrY = screenY;
     }

@@ -83,6 +83,7 @@ public class Forge implements ApplicationListener {
     public static boolean autoCache = false;
     public static int lastButtonIndex = 0;
     public static String CJK_Font = "";
+    public static int hoveredCount = 0;
 
     public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName) {
         if (GuiBase.getInterface() == null) {
@@ -920,11 +921,11 @@ public class Forge implements ApplicationListener {
 
         //mouseMoved and scrolled events for desktop version
         private int mouseMovedX, mouseMovedY;
-
         @Override
         public boolean mouseMoved(int screenX, int screenY) {
             mouseMovedX = screenX;
             mouseMovedY = screenY;
+            hoveredCount = 0;
             //reset
             try {
                 for (FDisplayObject listener : potentialListeners) {
