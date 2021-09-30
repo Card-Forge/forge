@@ -746,6 +746,18 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         }
                     }
                 }
+                // predict Legendary cards already present
+                if (!ai.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)) {
+                    boolean nothingWillReturn = true;
+                    for (final Card c : retrieval) {
+                        if (!(c.getType().isLegendary() && ai.isCardInPlay(c.getName()))) {
+                            nothingWillReturn = false;
+                        }
+                    }
+                    if (nothingWillReturn) {
+                        return false;
+                    }
+                }
             }
         }
 
