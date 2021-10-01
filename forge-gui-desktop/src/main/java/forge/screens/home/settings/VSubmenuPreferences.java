@@ -909,7 +909,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         return cbGrayText;
     }
 
-
     public final JCheckBox getCbShowStormCount() {
         return cbShowStormCount;
     }
