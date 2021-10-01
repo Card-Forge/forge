@@ -88,6 +88,7 @@ public class HostedMatch {
         gameRules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
         gameRules.setSideboardForAI(FModel.getPreferences().getPrefBoolean(FPref.MATCH_SIDEBOARD_FOR_AI));
         gameRules.setCanCloneUseTargetsImage(FModel.getPreferences().getPrefBoolean(FPref.UI_CLONE_MODE_SOURCE));
+        gameRules.setUseGrayText(FModel.getPreferences().getPrefBoolean(FPref.UI_GRAY_INACTIVE_TEXT));
         return gameRules;
     }
 

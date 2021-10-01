@@ -211,6 +211,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 localizer.getMessage("cbDetailedPaymentDesc"),
                 localizer.getMessage("nlDetailedPaymentDesc")),
                 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_GRAY_INACTIVE_TEXT,
+                localizer.getMessage("cbGrayText"),
+                localizer.getMessage("nlGrayText")),
+                1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_STORM_COUNT_IN_PROMPT,
                 localizer.getMessage("cbShowStormCount"),
                 localizer.getMessage("nlShowStormCount")),
