@@ -2,8 +2,10 @@ package forge.game.ability.effects;
 
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.Map;
 
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -177,7 +179,10 @@ public class DigUntilEffect extends SpellAbilityEffect {
                         Card m = null;
                         if (sa.hasParam("GainControl") && foundDest.equals(ZoneType.Battlefield)) {
                             c.setController(sa.getActivatingPlayer(), game.getNextTimestamp());
-                            m = game.getAction().moveTo(c.getController().getZone(foundDest), c, sa);
+                            Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+                            moveParams.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
+                            moveParams.put(AbilityKey.LastStateGraveyard, game.copyLastStateGraveyard());
+                            m = game.getAction().moveTo(c.getController().getZone(foundDest), c, sa, moveParams);
                             if (sa.hasParam("Tapped")) {
                                 c.setTapped(true);
                             }
