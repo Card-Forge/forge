@@ -1105,7 +1105,7 @@ public class AdvancedSearch {
                     return evaluator.apply(getItemValue(input), values);
                 }
             };
-            ;
+
             final FilterOperator[][] manyValueOperators = { FilterOperator.MULTI_LIST_OPS,
                     FilterOperator.COMBINATION_OPS, FilterOperator.COLLECTION_OPS, FilterOperator.STRINGS_OPS };
             for (FilterOperator[] oper : manyValueOperators) {

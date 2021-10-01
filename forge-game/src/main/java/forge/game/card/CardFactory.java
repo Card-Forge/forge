@@ -130,7 +130,7 @@ public class CardFactory {
         }
 
         // change the color of the copy (eg: Fork)
-        if (null != sourceSA && sourceSA.hasParam("CopyIsColor")) {
+        if (sourceSA.hasParam("CopyIsColor")) {
             String tmp = "";
             final String newColor = sourceSA.getParam("CopyIsColor");
             if (newColor.equals("ChosenColor")) {

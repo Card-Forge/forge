@@ -522,7 +522,6 @@ public class ComputerUtilCombat {
         return resultingPoison(ai, combat) > 9;
     }
 
-
     // This calculates the amount of damage a blockgang can deal to the attacker
     // (first strike not supported)
     /**

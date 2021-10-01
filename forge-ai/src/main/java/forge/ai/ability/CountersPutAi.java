@@ -430,7 +430,7 @@ public class CountersPutAi extends SpellAbilityAi {
                     if (!canSurvive){
                         return false;
                     }
-                };
+                }
                 found = true;
                 break;
             }

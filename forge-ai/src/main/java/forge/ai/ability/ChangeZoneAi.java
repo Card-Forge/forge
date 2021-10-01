@@ -937,7 +937,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             return false;
         }
 
-        immediately |= ComputerUtil.playImmediately(ai, sa);
+        immediately = immediately || ComputerUtil.playImmediately(ai, sa);
 
         // Narrow down the list:
         if (origin.contains(ZoneType.Battlefield)) {
@@ -1624,7 +1624,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             if (CardLists.filter(hand, Presets.LANDS).isEmpty() && CardLists.filter(decider.getCardsIn(ZoneType.Battlefield), Presets.LANDS).size() < 4) {
                 boolean canCastSomething = false;
                 for (Card cardInHand : hand) {
-                    canCastSomething |= ComputerUtilMana.hasEnoughManaSourcesToCast(cardInHand.getFirstSpellAbility(), decider);
+                    canCastSomething = canCastSomething || ComputerUtilMana.hasEnoughManaSourcesToCast(cardInHand.getFirstSpellAbility(), decider);
                 }
                 if (!canCastSomething) {
                     System.out.println("Pulling a land as there are none in hand, less than 4 on the board, and nothing in hand is castable.");

@@ -730,7 +730,7 @@ public class CardProperty {
         } else if (property.startsWith("MostProminentCreatureTypeInLibrary")) {
             final CardCollectionView list = sourceController.getCardsIn(ZoneType.Library);
             String[] type = CardFactoryUtil.getMostProminentCreatureType(list);
-            if (type != null); {
+            if (type != null) {
                 for (String s : type) {
                     if (!card.getType().hasCreatureType(s)) {
                         return false;
@@ -1481,7 +1481,6 @@ public class CardProperty {
                         return true;
                     }
                 }
-                ;
                 return false;
             }
         } else if (property.startsWith("sharesBlockingAssignmentWith")) {
@@ -1527,7 +1526,6 @@ public class CardProperty {
                     return true;
                 }
             }
-            ;
             return false;
         } else if (property.startsWith("blockedByValidThisTurn ")) {
             CardCollectionView blocked = card.getBlockedByThisTurn();
@@ -1543,7 +1541,6 @@ public class CardProperty {
                     return true;
                 }
             }
-            ;
             return false;
         } else if (property.startsWith("blockedBySourceThisTurn")) {
             return source.getBlockedByThisTurn().contains(card);

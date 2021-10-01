@@ -317,8 +317,7 @@ public class DeckProxy implements InventoryItem {
         if (mainSize == null) {
             if (deck == null) {
                 mainSize = -1;
-            }
-            else {
+            } else {
                 final Deck d = getDeck();
                 mainSize = d.getMain().countAll();
 
@@ -424,8 +423,7 @@ public class DeckProxy implements InventoryItem {
         final List<DeckProxy> result = new ArrayList<>();
         if (filter == null) {
             filter = DeckFormat.TinyLeaders.hasLegalCardsPredicate();
-        }
-        else {
+        } else {
             filter = Predicates.and(DeckFormat.TinyLeaders.hasLegalCardsPredicate(), filter);
         }
         addDecksRecursivelly("Tiny Leaders", GameType.TinyLeaders, result, "", FModel.getDecks().getTinyLeaders(), filter);
@@ -439,8 +437,7 @@ public class DeckProxy implements InventoryItem {
         final List<DeckProxy> result = new ArrayList<>();
         if (filter == null) {
             filter = DeckFormat.Brawl.hasLegalCardsPredicate();
-        }
-        else {
+        } else {
             filter = Predicates.and(DeckFormat.Brawl.hasLegalCardsPredicate(), filter);
         }
         addDecksRecursivelly("Brawl", GameType.Brawl, result, "", FModel.getDecks().getBrawl(), filter);
