@@ -547,7 +547,7 @@ public class DamageDealAi extends DamageAiBase {
             return false;
         }
 
-        immediately |= ComputerUtil.playImmediately(ai, sa);
+        immediately = immediately || ComputerUtil.playImmediately(ai, sa);
 
         if (!(sa.getParent() != null && sa.getParent().isTargetNumberValid())) {
             sa.resetTargets();

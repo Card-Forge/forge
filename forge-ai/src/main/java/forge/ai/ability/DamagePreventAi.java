@@ -59,12 +59,12 @@ public class DamagePreventAi extends SpellAbilityAi {
                     boolean flag = false;
                     for (final Object o : objects) {
                         if (o instanceof Card) {
-                            flag |= ComputerUtilCombat.combatantWouldBeDestroyed(ai, (Card) o, combat);
+                            flag = flag || ComputerUtilCombat.combatantWouldBeDestroyed(ai, (Card) o, combat);
                         } else if (o instanceof Player) {
                             // Don't need to worry about Combat Damage during AI's turn
                             final Player p = (Player) o;
                             if (!handler.isPlayerTurn(p)) {
-                                flag |= (p == ai && ((ComputerUtilCombat.wouldLoseLife(ai, combat) && sa
+                                flag = flag || (p == ai && ((ComputerUtilCombat.wouldLoseLife(ai, combat) && sa
                                         .isAbility()) || ComputerUtilCombat.lifeInDanger(ai, combat)));
                             }
                         }

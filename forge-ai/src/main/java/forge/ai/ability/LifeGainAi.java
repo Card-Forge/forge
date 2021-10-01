@@ -37,8 +37,7 @@ public class LifeGainAi extends SpellAbilityAi {
         final PhaseHandler ph = game.getPhaseHandler();
         final int life = ai.getLife();
 
-        boolean lifeCritical = life <= 5;
-        lifeCritical |= ph.getPhase().isBefore(PhaseType.COMBAT_DAMAGE)
+        boolean lifeCritical = life <= 5 || ph.getPhase().isBefore(PhaseType.COMBAT_DAMAGE)
                 && ComputerUtilCombat.lifeInDanger(ai, game.getCombat());
 
         if (!lifeCritical) {

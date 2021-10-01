@@ -20,7 +20,6 @@ public class DrawEffect extends SpellAbilityEffect {
         final List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
 
         if (!tgtPlayers.isEmpty()) {
-
             int numCards = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa) : 1;
             
             sb.append(Lang.joinHomogenous(tgtPlayers));
@@ -40,38 +39,35 @@ public class DrawEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card source = sa.getHostCard();
         final int numCards = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa) : 1;
-        
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         final boolean optional = sa.hasParam("OptionalDecider");
         final boolean upto = sa.hasParam("Upto");
 
-
         for (final Player p : getDefinedPlayersOrTargeted(sa)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) 
                 if (optional && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantDrawCards", Lang.nounWithAmount(numCards, " card"))))
                     continue;
 
-                int actualNum = numCards; 
-                if (upto) {
-                    actualNum = p.getController().chooseNumber(sa, Localizer.getInstance().getMessage("lblHowManyCardDoYouWantDraw"),0, numCards);
-                }
+            int actualNum = numCards; 
+            if (upto) {
+                actualNum = p.getController().chooseNumber(sa, Localizer.getInstance().getMessage("lblHowManyCardDoYouWantDraw"),0, numCards);
+            }
 
-                final CardCollectionView drawn = p.drawCards(actualNum, sa);
-                if (sa.hasParam("Reveal")) {
-                    if (sa.getParam("Reveal").equals("All")) {
-                        p.getGame().getAction().reveal(drawn, p, false);
-                    } else {
-                        p.getGame().getAction().reveal(drawn, p);
-                    }
+            final CardCollectionView drawn = p.drawCards(actualNum, sa);
+            if (sa.hasParam("Reveal")) {
+                if (sa.getParam("Reveal").equals("All")) {
+                    p.getGame().getAction().reveal(drawn, p, false);
+                } else {
+                    p.getGame().getAction().reveal(drawn, p);
                 }
-                if (sa.hasParam("RememberDrawn")) {
-                    for (final Card c : drawn) {
-                        source.addRemembered(c);
-                    }
+            }
+            if (sa.hasParam("RememberDrawn")) {
+                for (final Card c : drawn) {
+                    source.addRemembered(c);
                 }
             }
         }
-    } // drawResolve()
-
+    }
+}
