@@ -358,6 +358,21 @@ public class MatchScreen extends FScreen {
         final GameView game = MatchController.instance.getGameView();
         if (game == null) { return; }
 
+        //updatePhase to make it work with local MultiPlayer
+        if (game.getPhaseLabelUpdate()) {
+            PlayerView currentPlayer = game.getPlayerTurn();
+            PhaseType phaseType = game.getPhase();
+            //reset
+            game.clearPhaseLabelUpdate();
+            resetAllPhaseButtons();
+            //set phaselabel
+            try {
+                getPlayerPanel(currentPlayer).getPhaseIndicator().getLabel(phaseType).setActive(true);
+            } catch (Exception e) {
+                //FIXME: it seems getting the phase or label causes NPE particularly after End of Turn, don't know why...
+            }
+        }
+
         if(gameMenu!=null) {
              if(gameMenu.getChildCount()>3){
                  if(viewWinLose == null) {
