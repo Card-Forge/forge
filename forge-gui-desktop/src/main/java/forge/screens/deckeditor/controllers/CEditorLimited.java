@@ -183,7 +183,7 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
     }
 
     @Override
-    protected Boolean isSectionImportable(DeckSection section) {
+    public Boolean isSectionImportable(DeckSection section) {
         return section != DeckSection.Sideboard && allSections.contains(section);
     }
 

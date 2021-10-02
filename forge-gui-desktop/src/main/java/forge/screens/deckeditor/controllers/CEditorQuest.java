@@ -372,7 +372,7 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
     }
 
     @Override
-    protected Boolean isSectionImportable(DeckSection section) {
+    public Boolean isSectionImportable(DeckSection section) {
         return allSections.contains(section);
     }
 
