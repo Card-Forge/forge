@@ -10,6 +10,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardZoneTable;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.player.Player;
@@ -115,6 +116,8 @@ public class DigUntilEffect extends SpellAbilityEffect {
 
         CardZoneTable table = new CardZoneTable();
         boolean combatChanged = false;
+        CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
+        CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
 
         for (final Player p : getTargetPlayers(sa)) {
             if (p == null) {
@@ -180,8 +183,8 @@ public class DigUntilEffect extends SpellAbilityEffect {
                         if (sa.hasParam("GainControl") && foundDest.equals(ZoneType.Battlefield)) {
                             c.setController(sa.getActivatingPlayer(), game.getNextTimestamp());
                             Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-                            moveParams.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
-                            moveParams.put(AbilityKey.LastStateGraveyard, game.copyLastStateGraveyard());
+                            moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
+                            moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
                             m = game.getAction().moveTo(c.getController().getZone(foundDest), c, sa, moveParams);
                             if (sa.hasParam("Tapped")) {
                                 c.setTapped(true);
