@@ -31,15 +31,16 @@ public enum DeckSection {
 
     // Returns the matching section for "special"/supplementary core types.
     public static DeckSection matchingSection(PaperCard card){
-        CardType t = card.getRules().getType();
-        if (t.isConspiracy())
+       if (DeckSection.Conspiracy.validate(card))
             return Conspiracy;
-        if (t.isScheme())
+        if (DeckSection.Schemes.validate(card))
             return Schemes;
-        if (t.isVanguard())
+        if (DeckSection.Avatar.validate(card))
             return Avatar;
-        if (t.isPlane() || t.isPhenomenon() | t.isDungeon())
+        if (DeckSection.Planes.validate(card))
             return Planes;
+        if (DeckSection.Commander.validate(card))
+            return Commander;
         return Main;  // default
     }
 
