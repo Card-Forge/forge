@@ -3,11 +3,13 @@ package forge.game.ability.effects;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.GameEntityCounterTable;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -121,6 +123,9 @@ public class DigEffect extends SpellAbilityEffect {
         CardZoneTable table = new CardZoneTable();
         GameEntityCounterTable counterTable = new GameEntityCounterTable();
         boolean combatChanged = false;
+        CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
+        CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
+
         for (final Player p : tgtPlayers) {
             if (tgt != null && !p.canBeTargetedBy(sa)) {
                 continue;
@@ -323,7 +328,10 @@ public class DigEffect extends SpellAbilityEffect {
                             }
                             c = game.getAction().moveTo(zone, c, libraryPosition, sa);
                         } else {
-                            c = game.getAction().moveTo(zone, c, sa);
+                            Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+                            moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
+                            moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
+                            c = game.getAction().moveTo(zone, c, sa, moveParams);
                             if (destZone1.equals(ZoneType.Battlefield)) {
                                 if (sa.hasParam("Tapped")) {
                                     c.setTapped(true);
