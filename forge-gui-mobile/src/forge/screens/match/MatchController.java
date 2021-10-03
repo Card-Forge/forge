@@ -51,7 +51,6 @@ import forge.player.PlayerZoneUpdates;
 import forge.screens.match.views.VAssignCombatDamage;
 import forge.screens.match.views.VAssignGenericAmount;
 import forge.screens.match.views.VPhaseIndicator;
-import forge.screens.match.views.VPhaseIndicator.PhaseLabel;
 import forge.screens.match.views.VPlayerPanel;
 import forge.screens.match.views.VPlayerPanel.InfoTab;
 import forge.screens.match.views.VPrompt;
@@ -213,21 +212,8 @@ public class MatchController extends AbstractGuiGame {
 
     @Override
     public void updatePhase(boolean saveState) {
-        final PlayerView p = getGameView().getPlayerTurn();
         final PhaseType ph = getGameView().getPhase();
 
-        PhaseLabel lbl = null;
-
-        if(ph!=null) {
-            lbl = p == null ? null : view.getPlayerPanel(p).getPhaseIndicator().getLabel(ph);
-        } else {
-            System.err.println("getGameView().getPhase() returned 'null'");
-        }
-
-        view.resetAllPhaseButtons();
-        if (lbl != null) {
-            lbl.setActive(true);
-        }
         if(GuiBase.isNetworkplay())
             checkStack();
 
