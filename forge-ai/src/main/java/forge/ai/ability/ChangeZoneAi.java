@@ -137,13 +137,13 @@ public class ChangeZoneAi extends SpellAbilityAi {
             if (aiLogic.equals("Always")) {
                 return true;
             } else if (aiLogic.startsWith("SacAndUpgrade")) { // Birthing Pod, Natural Order, etc.
-                return this.doSacAndUpgradeLogic(aiPlayer, sa);
+                return doSacAndUpgradeLogic(aiPlayer, sa);
             } else if (aiLogic.startsWith("SacAndRetFromGrave")) { // Recurring Nightmare, etc.
-                return this.doSacAndReturnFromGraveLogic(aiPlayer, sa);
+                return doSacAndReturnFromGraveLogic(aiPlayer, sa);
             } else if (aiLogic.equals("Necropotence")) {
                 return SpecialCardAi.Necropotence.consider(aiPlayer, sa);
             } else if (aiLogic.equals("SameName")) { // Declaration in Stone
-                return this.doSameNameLogic(aiPlayer, sa);
+                return doSameNameLogic(aiPlayer, sa);
             } else if (aiLogic.equals("ReanimateAll")) {
                 return SpecialCardAi.LivingDeath.consider(aiPlayer, sa);
             } else if (aiLogic.equals("TheScarabGod")) {

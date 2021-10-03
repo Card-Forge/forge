@@ -134,7 +134,6 @@ public class LifeExchangeVariantAi extends SpellAbilityAi {
 
         }
         return false;
-
     }
 
     /**

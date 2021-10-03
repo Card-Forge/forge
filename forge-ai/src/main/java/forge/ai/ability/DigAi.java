@@ -21,6 +21,8 @@ import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
+import forge.game.player.PlayerCollection;
+import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
@@ -120,7 +122,8 @@ public class DigAi extends SpellAbilityAi {
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final SpellAbility root = sa.getRootAbility();
-        final Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
+        PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
+        Player opp = targetableOpps.min(PlayerPredicates.compareByLife());
         if (sa.usesTargeting()) {
             sa.resetTargets();
             if (mandatory && sa.canTarget(opp)) {

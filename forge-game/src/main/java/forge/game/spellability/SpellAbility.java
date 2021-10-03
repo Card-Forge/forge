@@ -1089,7 +1089,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public SpellAbility copyWithNoManaCost() {
         return copyWithNoManaCost(getActivatingPlayer());
     }
-
     public SpellAbility copyWithNoManaCost(Player active) {
         final SpellAbility newSA = copy(active);
         if (newSA == null) {

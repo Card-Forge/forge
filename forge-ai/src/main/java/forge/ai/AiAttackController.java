@@ -775,7 +775,7 @@ public class AiAttackController {
                 if (attackMax != -1 && combat.getAttackers().size() >= attackMax)
                     return;
 
-                if (canAttackWrapper(attacker, defender) && this.isEffectiveAttacker(ai, attacker, combat)) {
+                if (canAttackWrapper(attacker, defender) && isEffectiveAttacker(ai, attacker, combat)) {
                     combat.addAttacker(attacker, defender);
                 }
             }
@@ -1168,7 +1168,7 @@ public class AiAttackController {
             }
         }
 
-        if (!this.isEffectiveAttacker(ai, attacker, combat)) {
+        if (!isEffectiveAttacker(ai, attacker, combat)) {
             return false;
         }
         boolean hasAttackEffect = attacker.getSVar("HasAttackEffect").equals("TRUE") || attacker.hasStartOfKeyword("Annihilator");

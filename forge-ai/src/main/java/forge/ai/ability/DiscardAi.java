@@ -3,7 +3,6 @@ package forge.ai.ability;
 import java.util.Collections;
 import java.util.List;
 
-import forge.ai.AiAttackController;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCost;
@@ -20,6 +19,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerCollection;
+import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
@@ -172,7 +172,8 @@ public class DiscardAi extends SpellAbilityAi {
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
-            Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
+            PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
+            Player opp = targetableOpps.min(PlayerPredicates.compareByLife());
             if (!discardTargetAI(ai, sa)) {
                 if (mandatory && sa.canTarget(opp)) {
                     sa.getTargets().add(opp);

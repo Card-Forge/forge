@@ -2342,8 +2342,7 @@ public class GameAction {
                 source.attachToEntity(pa);
                 return true;
             }
-        }
-        else {
+        } else {
             List<ZoneType> zones = Lists.newArrayList(tgt.getZone());
             CardCollection list = new CardCollection();
 

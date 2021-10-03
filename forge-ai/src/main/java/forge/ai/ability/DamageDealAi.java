@@ -40,6 +40,7 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
+import forge.game.player.PlayerPredicates;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetChoices;
@@ -70,7 +71,7 @@ public class DamageDealAi extends DamageAiBase {
                 }
             }
             for (; energy > 0; energy--) {
-                if (this.damageTargetAI(ai, sa, energy, false)) {
+                if (damageTargetAI(ai, sa, energy, false)) {
                     dmg = ComputerUtilCombat.getEnoughDamageToKill(sa.getTargetCard(), energy, source, false, false);
                     if (dmg > energy || dmg < 1) {
                         continue; // in case the calculation gets messed up somewhere
@@ -95,7 +96,7 @@ public class DamageDealAi extends DamageAiBase {
                 dmg--; // the card will be spent casting the spell, so actual damage is 1 less
             }
         }
-        return this.damageTargetAI(ai, sa, dmg, true);
+        return damageTargetAI(ai, sa, dmg, true);
     }
 
     @Override
@@ -219,7 +220,7 @@ public class DamageDealAi extends DamageAiBase {
         if (sourceName.equals("Sorin, Grim Nemesis")) {
             int loyalty = source.getCounters(CounterEnumType.LOYALTY);
             for (; loyalty > 0; loyalty--) {
-                if (this.damageTargetAI(ai, sa, loyalty, false)) {
+                if (damageTargetAI(ai, sa, loyalty, false)) {
                     dmg = ComputerUtilCombat.getEnoughDamageToKill(sa.getTargetCard(), loyalty, source, false, false);
                     if (dmg > loyalty || dmg < 1) {
                         continue;   // in case the calculation gets messed up somewhere
@@ -262,14 +263,14 @@ public class DamageDealAi extends DamageAiBase {
         // test what happens if we chain this to another damaging spell
         if (chainDmg != null) {
             int extraDmg = chainDmg.getValue();
-            boolean willTargetIfChained = this.damageTargetAI(ai, sa, dmg + extraDmg, false);
+            boolean willTargetIfChained = damageTargetAI(ai, sa, dmg + extraDmg, false);
             if (!willTargetIfChained) {
                 return false; // won't play it even in chain
             } else if (willTargetIfChained && chainDmg.getKey().getApi() == ApiType.Pump && sa.getTargets().isTargetingAnyPlayer()) {
                 // we're trying to chain a pump spell to a damage spell targeting a player, that won't work
                 // so run an additional check to ensure that we want to cast the current spell separately
                 sa.resetTargets();
-                if (!this.damageTargetAI(ai, sa, dmg, false)) {
+                if (!damageTargetAI(ai, sa, dmg, false)) {
                     return false;
                 }
             } else {
@@ -280,7 +281,7 @@ public class DamageDealAi extends DamageAiBase {
             }
         } else {
             // simple targeting when there is no spell chaining plan
-            if (!this.damageTargetAI(ai, sa, dmg, false)) {
+            if (!damageTargetAI(ai, sa, dmg, false)) {
                 return false;
             }
         }
@@ -485,17 +486,17 @@ public class DamageDealAi extends DamageAiBase {
         final TargetRestrictions tgt = saMe.getTargetRestrictions();
         if ("Atarka's Command".equals(ComputerUtilAbility.getAbilitySourceName(saMe))) {
             // playReusable in damageChooseNontargeted wrongly assumes that CharmEffect options are re-usable
-            return this.shouldTgtP(ai, saMe, dmg, false);
+            return shouldTgtP(ai, saMe, dmg, false);
         }
         if (tgt == null) {
-            return this.damageChooseNontargeted(ai, saMe, dmg);
+            return damageChooseNontargeted(ai, saMe, dmg);
         }
 
         if (tgt.isRandomTarget()) {
             return false;
         }
 
-        return this.damageChoosingTargets(ai, saMe, tgt, dmg, false, immediately);
+        return damageChoosingTargets(ai, saMe, tgt, dmg, false, immediately);
     }
 
     /**
@@ -523,11 +524,12 @@ public class DamageDealAi extends DamageAiBase {
         final boolean oppTargetsChoice = sa.hasParam("TargetingPlayer");
         final String logic = sa.getParamOrDefault("AILogic", "");
 
-        Player enemy = ai.getWeakestOpponent();
+        PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
+        Player enemy = targetableOpps.min(PlayerPredicates.compareByLife());
 
         if ("PowerDmg".equals(logic)) {
             // check if it is better to target the player instead, the original target is already set in PumpAi.pumpTgtAI()
-            if (tgt.canTgtCreatureAndPlayer() && this.shouldTgtP(ai, sa, dmg, noPrevention)){
+            if (tgt.canTgtCreatureAndPlayer() && shouldTgtP(ai, sa, dmg, noPrevention)){
                 sa.resetTargets();
                 sa.getTargets().add(enemy);
             }
@@ -563,7 +565,7 @@ public class DamageDealAi extends DamageAiBase {
 
         if ("ChoiceBurn".equals(logic)) {
             // do not waste burns on player if other choices are present
-            if (this.shouldTgtP(ai, sa, dmg, noPrevention)) {
+            if (shouldTgtP(ai, sa, dmg, noPrevention)) {
                 tcs.add(enemy);
                 return true;
             } else {
@@ -630,8 +632,8 @@ public class DamageDealAi extends DamageAiBase {
 
             if (tgt.canTgtPlaneswalker()) {
                 // We can damage planeswalkers with this, consider targeting.
-                Card c = this.dealDamageChooseTgtPW(ai, sa, dmg, noPrevention, enemy, false);
-                if (c != null && !this.shouldTgtP(ai, sa, dmg, noPrevention, true)) {
+                Card c = dealDamageChooseTgtPW(ai, sa, dmg, noPrevention, enemy, false);
+                if (c != null && !shouldTgtP(ai, sa, dmg, noPrevention, true)) {
                     tcs.add(c);
                     if (divided) {
                         int assignedDamage = ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
@@ -649,7 +651,7 @@ public class DamageDealAi extends DamageAiBase {
             if (tgt.canTgtCreatureAndPlayer()) {
                 Card c = null;
 
-                if (this.shouldTgtP(ai, sa, dmg, noPrevention)) {
+                if (shouldTgtP(ai, sa, dmg, noPrevention)) {
                     tcs.add(enemy);
                     if (divided) {
                         sa.addDividedAllocation(enemy, dmg);
@@ -662,7 +664,7 @@ public class DamageDealAi extends DamageAiBase {
                 }
 
                 // look for creature targets; currently also catches planeswalkers that can be killed immediately
-                c = this.dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, false);
+                c = dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, false);
                 if (c != null) {
                     //option to hold removal instead only applies for single targeted removal
                     if (sa.isSpell() && !divided && !immediately && tgt.getMaxTargets(sa.getHostCard(), sa) == 1) {
@@ -714,7 +716,7 @@ public class DamageDealAi extends DamageAiBase {
                 }
 
             } else if (tgt.canTgtCreature() || tgt.canTgtPlaneswalker()) {
-                final Card c = this.dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, mandatory);
+                final Card c = dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, mandatory);
                 if (c != null) {
                     //option to hold removal instead only applies for single targeted removal
                     if (!immediately && tgt.getMaxTargets(sa.getHostCard(), sa) == 1 && !divided) {
@@ -764,7 +766,7 @@ public class DamageDealAi extends DamageAiBase {
         if (tcs.size() < tgt.getMinTargets(source, sa) || tcs.size() == 0) {
             if (mandatory) {
                 // If the trigger is mandatory, gotta choose my own stuff now
-                return this.damageChooseRequiredTargets(ai, sa, tgt, dmg);
+                return damageChooseRequiredTargets(ai, sa, tgt, dmg);
             }
             sa.resetTargets();
             return false;
@@ -851,7 +853,7 @@ public class DamageDealAi extends DamageAiBase {
 
         while (sa.canAddMoreTarget()) {
             if (tgt.canTgtPlaneswalker()) {
-                final Card c = this.dealDamageChooseTgtPW(ai, sa, dmg, noPrevention, ai, true);
+                final Card c = dealDamageChooseTgtPW(ai, sa, dmg, noPrevention, ai, true);
                 if (c != null) {
                     sa.getTargets().add(c);
                     if (divided) {
@@ -864,7 +866,7 @@ public class DamageDealAi extends DamageAiBase {
 
             // TODO: This currently also catches planeswalkers that can be killed (still necessary? Or can be removed?)
             if (tgt.canTgtCreature()) {
-                final Card c = this.dealDamageChooseTgtC(ai, sa, dmg, noPrevention, ai, true);
+                final Card c = dealDamageChooseTgtC(ai, sa, dmg, noPrevention, ai, true);
                 if (c != null) {
                     sa.getTargets().add(c);
                     if (divided) {
@@ -884,9 +886,9 @@ public class DamageDealAi extends DamageAiBase {
                             sa.addDividedAllocation(opp, dmg);
                             break;
                         }
-                        continue;
                     }
                 }
+                continue;
             }
 
             // See if there's an indestructible target that can be used
@@ -951,9 +953,9 @@ public class DamageDealAi extends DamageAiBase {
 
         if (!sa.usesTargeting()) {
             // If it's not mandatory check a few things
-            return mandatory || this.damageChooseNontargeted(ai, sa, dmg);
+            return mandatory || damageChooseNontargeted(ai, sa, dmg);
         } else {
-            if (!this.damageChoosingTargets(ai, sa, sa.getTargetRestrictions(), dmg, mandatory, true) && !mandatory) {
+            if (!damageChoosingTargets(ai, sa, sa.getTargetRestrictions(), dmg, mandatory, true) && !mandatory) {
                 return false;
             }
 
