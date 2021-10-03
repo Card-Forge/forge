@@ -97,11 +97,12 @@ public class VStack extends FDropDown {
 
     public void checkEmptyStack() { //sort the bug in client when desynch happens
         final FCollectionView<StackItemView> stack = MatchController.instance.getGameView().getStack();
-        if(stack!=null)
-            if(isVisible() && stack.isEmpty()) { //visible stack but empty already
-                hide();
+        if(stack!=null) {
+            if (isVisible() && stack.isEmpty()) { //visible stack but empty already
                 getMenuTab().setText(Localizer.getInstance().getMessage("lblStack") + " (" + 0 + ")");
+                MatchController.getView().getStack().hide();
             }
+        }
     }
 
     @Override

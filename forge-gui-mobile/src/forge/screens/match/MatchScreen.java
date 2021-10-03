@@ -1,11 +1,7 @@
 package forge.screens.match;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import forge.animation.ForgeAnimation;
 import forge.assets.FImage;
@@ -358,19 +354,13 @@ public class MatchScreen extends FScreen {
         final GameView game = MatchController.instance.getGameView();
         if (game == null) { return; }
 
-        //updatePhase to make it work with local MultiPlayer
-        if (game.getPhaseLabelUpdate()) {
-            PlayerView currentPlayer = game.getPlayerTurn();
-            PhaseType phaseType = game.getPhase();
-            //reset
-            game.clearPhaseLabelUpdate();
+        if (game.getPlayerTurn() != null && game.getPhase() != null) {
+            //reset phase labels
             resetAllPhaseButtons();
             //set phaselabel
-            try {
-                getPlayerPanel(currentPlayer).getPhaseIndicator().getLabel(phaseType).setActive(true);
-            } catch (Exception e) {
-                //FIXME: it seems getting the phase or label causes NPE particularly after End of Turn, don't know why...
-            }
+            final PhaseLabel phaseLabel = getPlayerPanel(game.getPlayerTurn()).getPhaseIndicator().getLabel(game.getPhase());
+            if (phaseLabel != null)
+                phaseLabel.setActive(true);
         }
 
         if(gameMenu!=null) {
@@ -410,9 +400,10 @@ public class MatchScreen extends FScreen {
             for (CardView card : playerPanel.getField().getRow1().getOrderedCards()) {
                 if (pairedCards.contains(card)) { continue; } //prevent arrows going both ways
 
-                CardView paired = card.getPairedWith();
-                if (paired != null) {
-                    TargetingOverlay.drawArrow(g, card, paired);
+                if (card != null) {
+                    if (card.getPairedWith() != null) {
+                        TargetingOverlay.drawArrow(g, card, card.getPairedWith());
+                    }
                 }
             }
         }
