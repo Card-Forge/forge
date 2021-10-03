@@ -254,8 +254,8 @@ public enum TrackableProperty {
     GameOver(TrackableTypes.BooleanType),
     PoisonCountersToLose(TrackableTypes.IntegerType),
     GameLog(TrackableTypes.StringType),
-    PlayerTurn(TrackableTypes.PlayerViewType),
-    Phase(TrackableTypes.EnumType(PhaseType.class));
+    PlayerTurn(TrackableTypes.PlayerViewType, FreezeMode.IgnoresFreeze),
+    Phase(TrackableTypes.EnumType(PhaseType.class), FreezeMode.IgnoresFreeze);
 
     public enum FreezeMode {
         IgnoresFreeze,
