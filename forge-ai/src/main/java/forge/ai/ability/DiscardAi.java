@@ -175,7 +175,7 @@ public class DiscardAi extends SpellAbilityAi {
             PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
             Player opp = targetableOpps.min(PlayerPredicates.compareByLife());
             if (!discardTargetAI(ai, sa)) {
-                if (mandatory && sa.canTarget(opp)) {
+                if (mandatory && opp != null) {
                     sa.getTargets().add(opp);
                 } else if (mandatory && sa.canTarget(ai)) {
                     sa.getTargets().add(ai);

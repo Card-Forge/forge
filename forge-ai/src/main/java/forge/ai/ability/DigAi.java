@@ -126,7 +126,7 @@ public class DigAi extends SpellAbilityAi {
         Player opp = targetableOpps.min(PlayerPredicates.compareByLife());
         if (sa.usesTargeting()) {
             sa.resetTargets();
-            if (mandatory && sa.canTarget(opp)) {
+            if (mandatory && opp != null) {
                 sa.getTargets().add(opp);
             } else if (mandatory && sa.canTarget(ai)) {
                 sa.getTargets().add(ai);

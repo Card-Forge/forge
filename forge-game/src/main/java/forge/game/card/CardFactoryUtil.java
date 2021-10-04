@@ -3197,7 +3197,7 @@ public class CardFactoryUtil {
                         return true;
                     }
 
-                    return this.getHostCard().getOwner().canCastSorcery();
+                    return this.getHostCard().getOwner().canCastSorcery() || this.getHostCard().getFirstSpellAbility(). withFlash(this.getHostCard(), this.getActivatingPlayer());
                 }
 
                 @Override

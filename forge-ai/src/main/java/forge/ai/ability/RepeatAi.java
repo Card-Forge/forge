@@ -50,7 +50,7 @@ public class RepeatAi extends SpellAbilityAi {
         if (sa.usesTargeting()) {
             PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
             Player opp = targetableOpps.min(PlayerPredicates.compareByLife());
-            if (sa.canTarget(opp)) {
+            if (opp != null) {
                 sa.resetTargets();
                 sa.getTargets().add(opp);
             } else if (!mandatory) {
