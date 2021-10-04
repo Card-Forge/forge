@@ -29,4 +29,4 @@ public class AnimateAllAi extends SpellAbilityAi {
         return mandatory || canPlayAI(aiPlayer, sa);
     }
 
-} // end class AbilityFactoryAnimate
+}

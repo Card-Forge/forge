@@ -33,7 +33,7 @@ public class DamageEachAi extends DamageAiBase {
         
         final String damage = sa.getParam("NumDmg");
         final int iDmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
-        return this.shouldTgtP(ai, sa, iDmg, false);
+        return shouldTgtP(ai, sa, iDmg, false);
     }
 
     @Override
