@@ -61,7 +61,11 @@ public class FightAi extends SpellAbilityAi {
         if (sa.hasParam("Defined")) {
             CardCollection fighter1List = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
             if (fighter1List.isEmpty()) {
-                return true;
+                if ("ChosenAsTgt".equals(sa.getParam("AILogic"))) {
+                    fighter1List.add(sa.getRootAbility().getTargetCard());
+                } else {
+                    return true; // FIXME: shouldn't this return "false" if nothing found?
+                }
             }
             Card fighter1 = fighter1List.get(0);
             for (Card humanCreature : humCreatures) {
