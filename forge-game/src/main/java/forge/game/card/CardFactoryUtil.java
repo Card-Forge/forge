@@ -3189,6 +3189,10 @@ public class CardFactoryUtil {
                         return false;
                     }
 
+                    if (this.getHostCard().getGame().getStack().isSplitSecondOnStack()) {
+                        return false;
+                    }
+
                     if (StaticAbilityCantBeCast.cantBeCastAbility(this, this.getHostCard(), this.getActivatingPlayer())) {
                         return false;
                     }
@@ -3197,7 +3201,7 @@ public class CardFactoryUtil {
                         return true;
                     }
 
-                    return this.getHostCard().getOwner().canCastSorcery() || this.getHostCard().getFirstSpellAbility(). withFlash(this.getHostCard(), this.getActivatingPlayer());
+                    return this.getHostCard().getOwner().canCastSorcery() || this.getHostCard().getFirstSpellAbility().withFlash(this.getHostCard(), this.getActivatingPlayer());
                 }
 
                 @Override
