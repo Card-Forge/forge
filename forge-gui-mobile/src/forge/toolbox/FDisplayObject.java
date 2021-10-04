@@ -128,6 +128,7 @@ public abstract class FDisplayObject {
 
     public abstract void draw(Graphics g);
     public void buildTouchListeners(float screenX, float screenY, List<FDisplayObject> listeners) {
+        boolean exact = !GuiBase.isAndroid() && (this instanceof FCardPanel);
         if (enabled && visible && screenPos.contains(screenX, screenY)) {
             listeners.add(this);
         }
@@ -136,7 +137,11 @@ public abstract class FDisplayObject {
             Forge.hoveredCount = listeners.size();
             if (!Forge.getCurrentScreen().toString().contains("Match"))
                 Forge.hoveredCount = 1;
-            setHovered(this.enabled && this.visible && this.screenPos.contains(screenX, screenY) && Forge.hoveredCount < 2);
+            if (exact) {
+                setHovered(this.enabled && this.visible && ((FCardPanel) this).renderedCardContains(screenToLocalX(screenX), screenToLocalY(screenY)) && Forge.hoveredCount < 2);
+            } else {
+                setHovered(this.enabled && this.visible && this.screenPos.contains(screenX, screenY) && Forge.hoveredCount < 2);
+            }
         }
     }
 
