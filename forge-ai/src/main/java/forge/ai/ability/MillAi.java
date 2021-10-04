@@ -86,7 +86,7 @@ public class MillAi extends SpellAbilityAi {
             return false;   // prevent self and each player mill when library is small
         }
         
-        if (sa.getTargetRestrictions() != null && !targetAI(ai, sa, false)) {
+        if (sa.usesTargeting() && !targetAI(ai, sa, false)) {
             return false;
         }
 
@@ -101,10 +101,9 @@ public class MillAi extends SpellAbilityAi {
     }
 
     private boolean targetAI(final Player ai, final SpellAbility sa, final boolean mandatory) {
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getHostCard();
 
-        if (tgt != null) {
+        if (sa.usesTargeting()) {
             sa.resetTargets();
             final Map<Player, Integer> list = Maps.newHashMap();
             for (final Player o : ai.getOpponents()) {

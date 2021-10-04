@@ -2,7 +2,6 @@ package forge.ai.ability;
 
 import java.util.Map;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 import forge.ai.AiAttackController;
@@ -126,7 +125,7 @@ public class DigAi extends SpellAbilityAi {
         Player opp = targetableOpps.min(PlayerPredicates.compareByLife());
         if (sa.usesTargeting()) {
             sa.resetTargets();
-            if (mandatory && sa.canTarget(opp)) {
+            if (mandatory && opp != null) {
                 sa.getTargets().add(opp);
             } else if (mandatory && sa.canTarget(ai)) {
                 sa.getTargets().add(ai);
@@ -152,12 +151,7 @@ public class DigAi extends SpellAbilityAi {
             Card bestChoice = ComputerUtilCard.getBestCreatureAI(valid);
             if (bestChoice == null) {
                 // no creatures, but maybe there's a morphable card that can be played as a creature?
-                CardCollection morphs = CardLists.filter(valid, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(Card card) {
-                        return card.hasKeyword(Keyword.MORPH);
-                    }
-                });
+                CardCollection morphs = CardLists.getKeyword(valid, Keyword.MORPH);
                 if (!morphs.isEmpty()) {
                     bestChoice = ComputerUtilCard.getBestAI(morphs);
                 }

@@ -1487,8 +1487,8 @@ public class ComputerUtilMana {
         final ManaCost mana = payCosts != null ? ( manapart == null ? ManaCost.ZERO : manapart.getManaCostFor(sa) ) : ManaCost.NO_COST;
 
         String restriction = null;
-        if (payCosts != null && payCosts.getCostMana() != null) {
-            restriction = payCosts.getCostMana().getRestriction();
+        if (manapart != null) {
+            restriction = manapart.getRestriction();
         }
         ManaCostBeingPaid cost = new ManaCostBeingPaid(mana, restriction);
 
@@ -1669,12 +1669,11 @@ public class ComputerUtilMana {
                 }
 
                 final Cost cost = m.getPayCosts();
+
                 if (cost != null) {
                     needsLimitedResources |= !cost.isReusuableResource();
-                }
 
-                // if the AI can't pay the additional costs skip the mana ability
-                if (cost != null) {
+                    // if the AI can't pay the additional costs skip the mana ability
                     m.setActivatingPlayer(ai);
                     if (!CostPayment.canPayAdditionalCosts(m.getPayCosts(), m)) {
                         continue;
@@ -1915,7 +1914,7 @@ public class ComputerUtilMana {
                 continue;
             }
 
-            if (a.getRestrictions() != null &&  a.getRestrictions().isInstantSpeed()) {
+            if (a.getRestrictions() != null && a.getRestrictions().isInstantSpeed()) {
                 continue;
             }
 

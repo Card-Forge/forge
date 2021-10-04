@@ -45,9 +45,7 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
             return false;
         }
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-
-        if (tgt != null) {
+        if (sa.usesTargeting()) {
             // ability is targeted
             sa.resetTargets();
 

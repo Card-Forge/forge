@@ -16,12 +16,11 @@ public class DrainManaAi extends SpellAbilityAi {
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         // AI cannot use this properly until he can use SAs during Humans turn
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getHostCard();
         final Player opp = ai.getWeakestOpponent();
         boolean randomReturn = MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
-        if (tgt == null) {
+        if (!sa.usesTargeting()) {
             // assume we are looking to tap human's stuff
             // TODO - check for things with untap abilities, and don't tap those.
             final List<Player> defined = AbilityUtils.getDefinedPlayers(source, sa.getParam("Defined"), sa);
@@ -41,10 +40,9 @@ public class DrainManaAi extends SpellAbilityAi {
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Player opp = ai.getWeakestOpponent();
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getHostCard();
 
-        if (null == tgt) {
+        if (!sa.usesTargeting()) {
             if (mandatory) {
                 return true;
             } else {
@@ -52,7 +50,6 @@ public class DrainManaAi extends SpellAbilityAi {
 
                 return defined.contains(opp);
             }
-
         } else {
             sa.resetTargets();
             sa.getTargets().add(opp);
@@ -64,12 +61,11 @@ public class DrainManaAi extends SpellAbilityAi {
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         // AI cannot use this properly until he can use SAs during Humans turn
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getHostCard();
 
         boolean randomReturn = true;
 
-        if (tgt == null) {
+        if (!sa.usesTargeting()) {
             final List<Player> defined = AbilityUtils.getDefinedPlayers(source, sa.getParam("Defined"), sa);
 
             if (defined.contains(ai)) {

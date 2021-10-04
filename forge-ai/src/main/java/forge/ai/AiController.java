@@ -425,7 +425,7 @@ public class AiController {
                 }
             }
         }
-    
+
         landList = CardLists.filter(landList, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -796,6 +796,7 @@ public class AiController {
         // which might potentially cause a stack overflow.
         AiCardMemory.clearMemorySet(this, AiCardMemory.MemorySet.MARKED_TO_AVOID_REENTRY);
 
+        // TODO before suspending some spells try to predict if relevant targets can be expected
         if (sa.getApi() != null) {
 
             String msg = "AiController:canPlaySa: AI checks for if can PlaySa";
@@ -1714,13 +1715,13 @@ public class AiController {
             sa.setLastStateGraveyard(CardCollection.EMPTY);
             // PhaseHandler ph = game.getPhaseHandler();
             // System.out.printf("Ai thinks '%s' of %s -> %s @ %s %s >>> \n", opinion, sa.getHostCard(), sa, Lang.getPossesive(ph.getPlayerTurn().getName()), ph.getPhase());
-            
+
             if (opinion != AiPlayDecision.WillPlay)
                 continue;
-    
+
             return sa;
         }
-        
+
         return null;
     }
 
@@ -1758,7 +1759,7 @@ public class AiController {
             return doTrigger(((WrappedAbility)spell).getWrappedAbility(), mandatory);
         if (spell.getApi() != null)
             return SpellApiToAi.Converter.get(spell.getApi()).doTriggerAI(player, spell, mandatory);
-        if (spell.getPayCosts() == Cost.Zero && spell.getTargetRestrictions() == null) {
+        if (spell.getPayCosts() == Cost.Zero && !spell.usesTargeting()) {
             // For non-converted triggers (such as Cumulative Upkeep) that don't have costs or targets to worry about
             return true;
         }

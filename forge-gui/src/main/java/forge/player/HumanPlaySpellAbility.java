@@ -320,7 +320,7 @@ public class HumanPlaySpellAbility {
         // For older abilities that don't setStackDescription set it here
         final StringBuilder sb = new StringBuilder();
         sb.append(ability.getHostCard().getName());
-        if (ability.getTargetRestrictions() != null) {
+        if (ability.usesTargeting()) {
             final Iterable<GameObject> targets = ability.getTargets();
             if (!Iterables.isEmpty(targets)) {
                 sb.append(" - Targeting ");

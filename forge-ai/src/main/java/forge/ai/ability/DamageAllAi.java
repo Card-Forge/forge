@@ -120,8 +120,7 @@ public class  DamageAllAi extends SpellAbilityAi {
         final CardCollection humanList = getKillableCreatures(sa, opp, dmg);
         CardCollection computerList = getKillableCreatures(sa, ai, dmg);
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-        if (tgt != null && sa.canTarget(opp)) {
+        if (sa.usesTargeting() && sa.canTarget(opp)) {
             sa.resetTargets();
             sa.getTargets().add(opp);
             computerList.clear();
@@ -213,9 +212,8 @@ public class  DamageAllAi extends SpellAbilityAi {
         Player enemy = ai.getWeakestOpponent();
         final CardCollection humanList = getKillableCreatures(sa, enemy, dmg);
         CardCollection computerList = getKillableCreatures(sa, ai, dmg);
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
-        if (tgt != null && sa.canTarget(enemy)) {
+        if (sa.usesTargeting() && sa.canTarget(enemy)) {
             sa.resetTargets();
             sa.getTargets().add(enemy);
             computerList.clear();
@@ -297,9 +295,8 @@ public class  DamageAllAi extends SpellAbilityAi {
         Player enemy = ai.getWeakestOpponent();
         final CardCollection humanList = getKillableCreatures(sa, enemy, dmg);
         CardCollection computerList = getKillableCreatures(sa, ai, dmg);
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
-        if (tgt != null && sa.canTarget(enemy)) {
+        if (sa.usesTargeting() && sa.canTarget(enemy)) {
             sa.resetTargets();
             sa.getTargets().add(enemy);
             computerList.clear();

@@ -1499,7 +1499,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             return doExileCombatThreatLogic(ai, sa);
         }
 
-        if (sa.getTargetRestrictions() == null) {
+        if (!sa.usesTargeting()) {
             // Just in case of Defined cases
             if (!mandatory && sa.hasParam("AttachedTo")) {
                 final List<Card> list = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("AttachedTo"), sa);

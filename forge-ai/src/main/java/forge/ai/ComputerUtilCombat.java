@@ -2319,7 +2319,7 @@ public class ComputerUtilCombat {
 	                continue;
 	            }
 	            if (c != combatant) {
-	            	if (ability.getTargetRestrictions() == null || !ability.canTarget(combatant)) {
+	            	if (!ability.usesTargeting() || !ability.canTarget(combatant)) {
 	            		continue;
 	            	}
 	            	//the AI will will fail to predict tapping of attackers

@@ -16,13 +16,12 @@ public class DamageEachAi extends DamageAiBase {
      */
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final String logic = sa.getParam("AILogic");
 
         PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
         Player weakestOpp = targetableOpps.min(PlayerPredicates.compareByLife());
 
-        if (tgt != null && weakestOpp != null) {
+        if (sa.usesTargeting() && weakestOpp != null) {
             sa.resetTargets();
             sa.getTargets().add(weakestOpp);
         }
