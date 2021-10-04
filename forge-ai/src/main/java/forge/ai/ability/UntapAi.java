@@ -98,11 +98,9 @@ public class UntapAi extends SpellAbilityAi {
 
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-
         boolean randomReturn = true;
 
-        if (tgt == null) {
+        if (!sa.usesTargeting()) {
             // who cares if its already untapped, it's only a subability?
         } else {
             if (!untapPrefTargeting(ai, sa, false)) {

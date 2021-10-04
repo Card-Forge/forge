@@ -35,8 +35,7 @@ public class LifeExchangeAi extends SpellAbilityAi {
          * and one card that has a conditional (Psychic Transfer) that are
          * not currently handled
          */
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-        if (tgt != null) {
+        if (sa.usesTargeting()) {
             sa.resetTargets();
             if (opponent.canBeTargetedBy(sa)) {
                 // never target self, that would be silly for exchange
@@ -74,9 +73,8 @@ public class LifeExchangeAi extends SpellAbilityAi {
     @Override
     protected boolean doTriggerAINoCost(final Player ai, final SpellAbility sa,
     final boolean mandatory) {
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
-        if (tgt != null) {
+        if (sa.usesTargeting()) {
             sa.resetTargets();
             if (sa.canTarget(opp) && (mandatory || ai.getLife() < opp.getLife())) {
                 sa.getTargets().add(opp);

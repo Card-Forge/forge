@@ -107,11 +107,9 @@ public class TapAllAi extends SpellAbilityAi {
 
         CardCollectionView validTappables = getTapAllTargets(valid, source, sa);
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-
-        if (tgt != null) {
+        if (sa.usesTargeting()) {
             sa.resetTargets();
-            Player opp = ai.getWeakestOpponent();
+            Player opp = ai.getStrongestOpponent();
             sa.getTargets().add(opp);
             validTappables = opp.getCardsIn(ZoneType.Battlefield);
         }

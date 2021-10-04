@@ -54,20 +54,18 @@ public class SacrificeAi extends SpellAbilityAi {
 
     private boolean sacrificeTgtAI(final Player ai, final SpellAbility sa) {
         final Card source = sa.getHostCard();
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final boolean destroy = sa.hasParam("Destroy");
 
         Player opp = ai.getStrongestOpponent();
 
-        if (tgt != null) {
+        if (sa.usesTargeting()) {
             sa.resetTargets();
             if (!opp.canBeTargetedBy(sa)) {
                 return false;
             }
             sa.getTargets().add(opp);
             final String valid = sa.getParam("SacValid");
-            String num = sa.getParam("Amount");
-            num = (num == null) ? "1" : num;
+            String num = sa.getParamOrDefault("Amount" , "1");
             final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), num, sa);
 
             List<Card> list = null;

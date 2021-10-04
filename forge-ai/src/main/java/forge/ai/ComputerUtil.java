@@ -1489,8 +1489,7 @@ public class ComputerUtil {
                 if (dmg <= damage) {
                     continue;
                 }
-                final TargetRestrictions tgt = sa.getTargetRestrictions();
-                if (tgt == null) {
+                if (!sa.usesTargeting()) {
                     continue;
                 }
                 if (!sa.canTarget(enemy)) {

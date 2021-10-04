@@ -12,7 +12,7 @@ public class ProtectAllAi extends SpellAbilityAi {
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Card hostCard = sa.getHostCard();
         // if there is no target and host card isn't in play, don't activate
-        if ((sa.getTargetRestrictions() == null) && !hostCard.isInPlay()) {
+        if (!sa.usesTargeting() && !hostCard.isInPlay()) {
             return false;
         }
 

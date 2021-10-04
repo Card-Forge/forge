@@ -288,9 +288,9 @@ public class PlayerControllerAi extends PlayerController {
         // Store/replace target choices more properly to get this SA cleared.
         TargetChoices tc = null;
         TargetChoices subtc = null;
-        boolean storeChoices = sa.getTargetRestrictions() != null;
+        boolean storeChoices = sa.usesTargeting();
         final SpellAbility sub = sa.getSubAbility();
-        boolean storeSubChoices = sub != null && sub.getTargetRestrictions() != null;
+        boolean storeSubChoices = sub != null && sub.usesTargeting();
         boolean ret = true;
 
         if (storeChoices) {

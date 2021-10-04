@@ -685,7 +685,7 @@ public class AbilityUtils {
                 // Make list of all targeted objects starting with the root SpellAbility
                 SpellAbility loopSA = sa.getRootAbility();
                 while (loopSA != null) {
-                    if (loopSA.getTargetRestrictions() != null) {
+                    if (loopSA.usesTargeting()) {
                         Iterables.addAll(objects, loopSA.getTargets());
                     }
                     loopSA = loopSA.getSubAbility();
@@ -1603,7 +1603,7 @@ public class AbilityUtils {
     public static void handleRemembering(final SpellAbility sa) {
         Card host = sa.getHostCard();
 
-        if (sa.hasParam("RememberTargets") && sa.getTargetRestrictions() != null) {
+        if (sa.hasParam("RememberTargets") && sa.usesTargeting()) {
             if (sa.hasParam("ForgetOtherTargets")) {
                 host.clearRemembered();
             }
@@ -1612,7 +1612,7 @@ public class AbilityUtils {
             }
         }
 
-        if (sa.hasParam("ImprintTargets") && sa.getTargetRestrictions() != null) {
+        if (sa.hasParam("ImprintTargets") && sa.usesTargeting()) {
             for (final Card c : sa.getTargets().getTargetCards()) {
                 host.addImprintedCard(c);
             }
