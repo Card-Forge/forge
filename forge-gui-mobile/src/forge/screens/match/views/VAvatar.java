@@ -106,21 +106,9 @@ public class VAvatar extends FDisplayObject {
     }
 
     public Vector2 getTargetingArrowOrigin() {
-        return getTargetingArrowOrigin(2);
-    }
-    public Vector2 getTargetingArrowOrigin(int numplayers) {
-        Vector2 origin = new Vector2(screenPos.x, screenPos.y);
-
-        float modx = numplayers > 2 ? 0.25f : 0.75f;
-
-        origin.x += WIDTH * modx;
-        if (origin.y < MatchController.getView().getHeight() / numplayers) {
-            origin.y += HEIGHT * 0.75f; //target bottom right corner if on top half of screen
-        }
-        else {
-            origin.y += HEIGHT * 0.25f; //target top right corner if on bottom half of screen
-        }
-
+        Vector2 origin = new Vector2(this.screenPos.x, this.screenPos.y);
+        origin.x += getWidth()/2f;
+        origin.y += getWidth()/2f;
         return origin;
     }
 
