@@ -34,6 +34,8 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
+import forge.game.player.PlayerCollection;
+import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
@@ -510,6 +512,15 @@ public class PumpAi extends PumpAiBase {
                 }
 
                 return false;
+            } else if ("ManaRitual".equals(sa.getParam("AILogic"))) {
+                PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
+                if (targetableOpps.isEmpty()) {
+                    return false;
+                }
+                Player mostCards = targetableOpps.max(PlayerPredicates.compareByZoneSize(ZoneType.Hand));
+                sa.resetTargets();
+                sa.getTargets().add(mostCards);
+                return mandatory || ManaEffectAi.doManaRitualLogic(ai, sa.getSubAbility());
             }
 
             if (isFight) {
