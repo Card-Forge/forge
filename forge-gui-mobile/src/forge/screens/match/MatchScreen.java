@@ -406,7 +406,6 @@ public class MatchScreen extends FScreen {
         }
 
         //draw arrows for paired cards
-        Set<CardView> pairedCards = new HashSet<>();
         for (VPlayerPanel playerPanel : playerPanels.values()) {
             for (CardView card : playerPanel.getField().getRow1().getOrderedCards()) {
                 if (card != null) {
