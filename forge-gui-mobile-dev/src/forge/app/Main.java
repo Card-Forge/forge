@@ -55,12 +55,12 @@ public class Main {
         }
 
         // Set this to "true" to make the mobile game port run as a full-screen desktop application
-        boolean desktopMode = cmd.hasOption("fullscreen");
+        boolean desktopMode = true;//cmd.hasOption("fullscreen");
         // Set this to the location where you want the mobile game port to look for assets when working as a full-screen desktop application
         // (uncomment the bottom version and comment the top one to load the res folder from the current folder the .jar is in if you would
         // like to make the game load from a desktop game folder configuration).
-        String desktopModeAssetsDir = "../forge-gui/";
-        //String desktopModeAssetsDir = "./";
+        //String desktopModeAssetsDir = "../forge-gui/";
+        String desktopModeAssetsDir = "./";
 
         // Assets directory used when the game fully emulates smartphone/tablet mode (desktopMode = false), useful when debugging from IDE
         String assetsDir = AssetsDownloader.SHARE_DESKTOP_ASSETS ? "../forge-gui/" : "testAssets/";
@@ -154,12 +154,14 @@ public class Main {
         public void restart() {
             if (RestartUtil.prepareForRestart()) {
                 Gdx.app.exit();
+                System.exit(0);
             }
         }
 
         @Override
         public void exit() {
             Gdx.app.exit(); //can just use Gdx.app.exit for desktop
+            System.exit(0);
         }
 
         @Override

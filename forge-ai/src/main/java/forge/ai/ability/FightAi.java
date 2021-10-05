@@ -60,12 +60,13 @@ public class FightAi extends SpellAbilityAi {
         // assumes the triggered card belongs to the ai
         if (sa.hasParam("Defined")) {
             CardCollection fighter1List = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
-            if (fighter1List.isEmpty()) {
-                if ("ChosenAsTgt".equals(sa.getParam("AILogic")) && sa.getRootAbility().getTargetCard() != null) {
+            if ("ChosenAsTgt".equals(sa.getParam("AILogic")) && sa.getRootAbility().getTargetCard() != null) {
+                if (fighter1List.isEmpty()) {
                     fighter1List.add(sa.getRootAbility().getTargetCard());
-                } else {
-                    return true; // FIXME: shouldn't this return "false" if nothing found?
                 }
+            }
+            if (fighter1List.isEmpty()) {
+                return true; // FIXME: shouldn't this return "false" if nothing found?
             }
             Card fighter1 = fighter1List.get(0);
             for (Card humanCreature : humCreatures) {
