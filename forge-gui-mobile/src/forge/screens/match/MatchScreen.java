@@ -373,6 +373,43 @@ public class MatchScreen extends FScreen {
                     phaseLabel.setActive(true);
             }
         }
+    }
+
+    @Override
+    protected void drawOverlay(Graphics g) {
+        final GameView game = MatchController.instance.getGameView();
+        if (game == null) { return; }
+
+        if(gameMenu!=null) {
+             if(gameMenu.getChildCount()>3){
+                 if(viewWinLose == null) {
+                     gameMenu.getChildAt(0).setEnabled(!game.isMulligan());
+                     gameMenu.getChildAt(1).setEnabled(!game.isMulligan());
+                     gameMenu.getChildAt(2).setEnabled(!game.isMulligan());
+                     gameMenu.getChildAt(3).setEnabled(!game.isMulligan());
+                     gameMenu.getChildAt(4).setEnabled(false);
+                 } else {
+                     gameMenu.getChildAt(0).setEnabled(false);
+                     gameMenu.getChildAt(1).setEnabled(false);
+                     gameMenu.getChildAt(2).setEnabled(false);
+                     gameMenu.getChildAt(3).setEnabled(false);
+                     gameMenu.getChildAt(4).setEnabled(true);
+                 }
+             }
+        }
+        if(devMenu!=null) {
+            if(devMenu.isVisible()){
+                if(viewWinLose == null)
+                    devMenu.setEnabled(true);
+                else
+                    devMenu.setEnabled(false);
+
+                try {
+                    //rollbackphase enable -- todo limit by gametype?
+                    devMenu.getChildAt(2).setEnabled(game.getPlayers().size() == 2 && game.getStack().size() == 0 && !GuiBase.isNetworkplay() && game.getPhase().isMain() && !game.getPlayerTurn().isAI());
+                } catch (Exception e) {/*NPE when the game hasn't started yet and you click dev mode*/}
+            }
+        }
 
         //draw arrows for combat
         final CombatView combat = game.getCombat();
@@ -415,44 +452,6 @@ public class MatchScreen extends FScreen {
                 }
             }
         }
-    }
-
-    @Override
-    protected void drawOverlay(Graphics g) {
-        final GameView game = MatchController.instance.getGameView();
-        if (game == null) { return; }
-
-        if(gameMenu!=null) {
-             if(gameMenu.getChildCount()>3){
-                 if(viewWinLose == null) {
-                     gameMenu.getChildAt(0).setEnabled(!game.isMulligan());
-                     gameMenu.getChildAt(1).setEnabled(!game.isMulligan());
-                     gameMenu.getChildAt(2).setEnabled(!game.isMulligan());
-                     gameMenu.getChildAt(3).setEnabled(!game.isMulligan());
-                     gameMenu.getChildAt(4).setEnabled(false);
-                 } else {
-                     gameMenu.getChildAt(0).setEnabled(false);
-                     gameMenu.getChildAt(1).setEnabled(false);
-                     gameMenu.getChildAt(2).setEnabled(false);
-                     gameMenu.getChildAt(3).setEnabled(false);
-                     gameMenu.getChildAt(4).setEnabled(true);
-                 }
-             }
-        }
-        if(devMenu!=null) {
-            if(devMenu.isVisible()){
-                if(viewWinLose == null)
-                    devMenu.setEnabled(true);
-                else
-                    devMenu.setEnabled(false);
-
-                try {
-                    //rollbackphase enable -- todo limit by gametype?
-                    devMenu.getChildAt(2).setEnabled(game.getPlayers().size() == 2 && game.getStack().size() == 0 && !GuiBase.isNetworkplay() && game.getPhase().isMain() && !game.getPlayerTurn().isAI());
-                } catch (Exception e) {/*NPE when the game hasn't started yet and you click dev mode*/}
-            }
-        }
-
         //draw arrows for paired cards
         for (VPlayerPanel playerPanel : playerPanels.values()) {
             for (CardView card : playerPanel.getField().getRow1().getOrderedCards()) {
