@@ -154,12 +154,14 @@ public class Main {
         public void restart() {
             if (RestartUtil.prepareForRestart()) {
                 Gdx.app.exit();
+                System.exit(0);
             }
         }
 
         @Override
         public void exit() {
             Gdx.app.exit(); //can just use Gdx.app.exit for desktop
+            System.exit(0);
         }
 
         @Override
