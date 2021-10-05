@@ -114,7 +114,7 @@ public class ManaEffectAi extends SpellAbilityAi {
     }
     
     // Dark Ritual and other similar instants/sorceries that add mana to mana pool
-    private boolean doManaRitualLogic(Player ai, SpellAbility sa) {
+    public static boolean doManaRitualLogic(Player ai, SpellAbility sa) {
         final Card host = sa.getHostCard();
         final String logic = sa.getParamOrDefault("AILogic", "");
           
@@ -123,7 +123,7 @@ public class ManaEffectAi extends SpellAbilityAi {
         int manaReceived = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa) : 1;
         manaReceived *= sa.getParam("Produced").split(" ").length;
 
-        int selfCost = sa.getPayCosts().getCostMana() != null ? sa.getPayCosts().getCostMana().getMana().getCMC() : 0;
+        int selfCost = sa.getRootAbility().getPayCosts().getCostMana() != null ? sa.getRootAbility().getPayCosts().getCostMana().getMana().getCMC() : 0;
 
         String produced = sa.getParam("Produced");
         byte producedColor = produced.equals("Any") ? MagicColor.ALL_COLORS : MagicColor.fromName(produced);

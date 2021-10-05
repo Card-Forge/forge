@@ -2341,7 +2341,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public boolean canCastTiming(Player activator) {
         return canCastTiming(getHostCard(), activator);
     }
-
     public boolean canCastTiming(Card host, Player activator) {
         // for companion
         if (this instanceof AbilityStatic && getRestrictions().isSorcerySpeed() && !activator.canCastSorcery()) {
@@ -2360,7 +2359,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         // spells per default are sorcerySpeed
         if (isSpell()) {
             return false;
-        } else if (isActivatedAbility()) {
+        }
+
+        if (isActivatedAbility()) {
             // Activated Abillties are instant speed per default
             return !getRestrictions().isSorcerySpeed();
         }

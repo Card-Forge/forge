@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +26,7 @@ public class CharmAi extends SpellAbilityAi {
     protected boolean checkApiLogic(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
         List<AbilitySub> choices = CharmEffect.makePossibleOptions(sa);
+        Collections.shuffle(choices);
 
         final int num;
         final int min;
