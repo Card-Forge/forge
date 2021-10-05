@@ -417,7 +417,6 @@ public class DamageDealAi extends DamageAiBase {
      */
     private Card dealDamageChooseTgtPW(final Player ai, final SpellAbility sa, final int d, final boolean noPrevention,
                                        final Player pl, final boolean mandatory) {
-
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Player activator = sa.getActivatingPlayer();
         final Card source = sa.getHostCard();
@@ -526,6 +525,9 @@ public class DamageDealAi extends DamageAiBase {
 
         PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
         Player enemy = targetableOpps.min(PlayerPredicates.compareByLife());
+        if (enemy == null) {
+            enemy = ai.getWeakestOpponent();
+        }
 
         if ("PowerDmg".equals(logic)) {
             // check if it is better to target the player instead, the original target is already set in PumpAi.pumpTgtAI()
@@ -568,9 +570,8 @@ public class DamageDealAi extends DamageAiBase {
             if (shouldTgtP(ai, sa, dmg, noPrevention)) {
                 tcs.add(enemy);
                 return true;
-            } else {
-                return false;
             }
+            return false;
         }
         if ("Polukranos".equals(logic)) {
             int dmgTaken = 0;

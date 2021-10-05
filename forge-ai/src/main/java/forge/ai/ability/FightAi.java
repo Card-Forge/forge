@@ -218,14 +218,15 @@ public class FightAi extends SpellAbilityAi {
                         CardCollection aiCreaturesByPower = new CardCollection(aiCreatures);
                         CardLists.sortByPowerDesc(aiCreaturesByPower);
                         Card maxPower = aiCreaturesByPower.getFirst();
-                        if (maxPower != null && maxPower != aiCreature) {
+                        if (maxPower != aiCreature) {
                             power += maxPower.getNetPower(); // potential bonus from adding a second target
                         }
-                        if (FightAi.canKill(aiCreature, humanCreature, power)) {
+                        else if ("2".equals(sa.getParam("TargetMin"))) {
+                            continue;
+                        }
+                        if (canKill(aiCreature, humanCreature, power)) {
                             sa.getTargets().add(aiCreature);
-                            if (maxPower != null) {
-                                sa.getTargets().add(maxPower);
-                            }
+                            sa.getTargets().add(maxPower);
                             if (!isChandrasIgnition) {
                                 tgtFight.resetTargets();
                                 tgtFight.getTargets().add(humanCreature);
@@ -234,7 +235,7 @@ public class FightAi extends SpellAbilityAi {
                         }
                     } else {
                         // Other cards that use AILogic PowerDmg and a single target
-                        if (FightAi.canKill(aiCreature, humanCreature, power)) {
+                        if (canKill(aiCreature, humanCreature, power)) {
                             sa.getTargets().add(aiCreature);
                             if (!isChandrasIgnition) {
                                 tgtFight.resetTargets();
@@ -244,7 +245,7 @@ public class FightAi extends SpellAbilityAi {
                         }
                     }
                 } else {
-                    if (FightAi.shouldFight(aiCreature, humanCreature, power, toughness)) {
+                    if (shouldFight(aiCreature, humanCreature, power, toughness)) {
                     	if ("Time to Feed".equals(sourceName)) { // flip targets
                     		final Card tmp = aiCreature;
                     		aiCreature = humanCreature;
@@ -293,7 +294,7 @@ public class FightAi extends SpellAbilityAi {
     		if (!canKill(opponent, fighter, -pumpDefense)) { // can survive
     			return true;
     		} else {
-                if (MyRandom.getRandom().nextInt(20)<(opponent.getCMC() - fighter.getCMC())) { // trade
+                if (MyRandom.getRandom().nextInt(20) < (opponent.getCMC() - fighter.getCMC())) { // trade
                     return true;
                 }
             }
