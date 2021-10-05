@@ -229,11 +229,11 @@ public class VStack extends FDropDown {
             while (instance != null) {
                 for (CardView c : instance.getTargetCards()) {
                     TargetingOverlay.ArcConnection conn = activator.isOpponentOf(c.getController()) ? TargetingOverlay.ArcConnection.FoesStackTargeting : TargetingOverlay.ArcConnection.FriendsStackTargeting;
-                    TargetingOverlay.drawArrow(g, arrowOrigin, c, conn);
+                    TargetingOverlay.drawArrow(g, arrowOrigin, new Vector2(c.getTargetingOriginVectorX(), c.getTargetingOriginVectorY()), conn);
                 }
                 for (PlayerView p : instance.getTargetPlayers()) {
                     TargetingOverlay.ArcConnection conn = activator.isOpponentOf(p) ? TargetingOverlay.ArcConnection.FoesStackTargeting : TargetingOverlay.ArcConnection.FriendsStackTargeting;
-                    TargetingOverlay.drawArrow(g, arrowOrigin, p, conn);
+                    TargetingOverlay.drawArrow(g, arrowOrigin, MatchController.getView().getPlayerPanel(p).getAvatar().getTargetingArrowOrigin(), conn);
                 }
                 instance = instance.getSubInstance();
             }

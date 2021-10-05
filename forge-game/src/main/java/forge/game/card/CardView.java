@@ -854,6 +854,16 @@ public class CardView extends GameEntityView {
     public void updateNeedsTransformAnimation(boolean value) {
         set(TrackableProperty.NeedsTransformAnimation, value);
     }
+    public Float getTargetingOriginVectorX() {
+        return get(TrackableProperty.TargetingOriginVectorX);
+    }
+    public Float getTargetingOriginVectorY() {
+        return get(TrackableProperty.TargetingOriginVectorY);
+    }
+    public void setTargetingOriginVector(float x, float y) {
+        set(TrackableProperty.TargetingOriginVectorX, x);
+        set(TrackableProperty.TargetingOriginVectorY, y);
+    }
     void updateState(Card c) {
         updateName(c);
         updateZoneText(c);

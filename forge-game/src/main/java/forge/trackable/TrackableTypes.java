@@ -162,6 +162,22 @@ public class TrackableTypes {
             ts.write(value);
         }
     };
+    public static final TrackableType<Float> FloatType = new TrackableType<Float>() {
+        @Override
+        public Float getDefaultValue() {
+            return 0f;
+        }
+
+        @Override
+        public Float deserialize(TrackableDeserializer td, Float oldValue) {
+            return td.readFloat();
+        }
+
+        @Override
+        public void serialize(TrackableSerializer ts, Float value) {
+            ts.write(value);
+        }
+    };
     public static final TrackableType<String> StringType = new TrackableType<String>() {
         @Override
         public String getDefaultValue() {
