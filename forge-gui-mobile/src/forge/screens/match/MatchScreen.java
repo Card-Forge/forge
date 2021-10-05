@@ -12,7 +12,6 @@ import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
 import com.google.common.collect.Maps;
 
