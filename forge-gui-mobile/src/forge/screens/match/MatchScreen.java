@@ -348,19 +348,29 @@ public class MatchScreen extends FScreen {
         }
         return new Rectangle(0, VPrompt.HEIGHT, scroller.getWidth(), getHeight() - 2 * VPrompt.HEIGHT);
     }
-
+    private PlayerView lastPlayer;
     @Override
     protected void drawOverlay(Graphics g) {
         final GameView game = MatchController.instance.getGameView();
         if (game == null) { return; }
 
-        if (game.getPlayerTurn() != null && game.getPhase() != null) {
+        if (game.getPhase() != null) {
+            final PhaseType ph = game.getPhase();
+            if (ph.isBefore(PhaseType.END_OF_TURN))
+                lastPlayer = game.getPlayerTurn();
             //reset phase labels
             resetAllPhaseButtons();
-            //set phaselabel
-            final PhaseLabel phaseLabel = getPlayerPanel(game.getPlayerTurn()).getPhaseIndicator().getLabel(game.getPhase());
-            if (phaseLabel != null)
-                phaseLabel.setActive(true);
+            if (lastPlayer != null && PhaseType.CLEANUP.equals(ph)) {
+                //set phaselabel
+                final PhaseLabel phaseLabel = getPlayerPanel(lastPlayer).getPhaseIndicator().getLabel(ph);
+                if (phaseLabel != null)
+                    phaseLabel.setActive(true);
+            } else if (game.getPlayerTurn() != null) {
+                //set phaselabel
+                final PhaseLabel phaseLabel = getPlayerPanel(game.getPlayerTurn()).getPhaseIndicator().getLabel(ph);
+                if (phaseLabel != null)
+                    phaseLabel.setActive(true);
+            }
         }
 
         if(gameMenu!=null) {
