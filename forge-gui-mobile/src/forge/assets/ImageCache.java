@@ -194,6 +194,9 @@ public class ImageCache {
         return getImage(imageKey, useDefaultIfNotFound, false);
     }
     public static Texture getImage(String imageKey, boolean useDefaultIfNotFound, boolean useOtherCache) {
+        if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DISABLE_CARD_IMAGES))
+            return null;
+
         if (StringUtils.isEmpty(imageKey)) {
             return null;
         }
