@@ -209,10 +209,27 @@ public class MatchController extends AbstractGuiGame {
     public void alertUser() {
         //TODO
     }
-
+    private PlayerView lastPlayer;
     @Override
     public void updatePhase(boolean saveState) {
         final PhaseType ph = getGameView().getPhase();
+        if (ph != null) {
+            if (ph.isBefore(PhaseType.END_OF_TURN))
+                lastPlayer = getGameView().getPlayerTurn();
+            //reset phase labels
+            view.resetAllPhaseButtons();
+            if (lastPlayer != null && PhaseType.CLEANUP.equals(ph)) {
+                //set phaselabel
+                final VPhaseIndicator.PhaseLabel phaseLabel = view.getPlayerPanel(lastPlayer).getPhaseIndicator().getLabel(ph);
+                if (phaseLabel != null)
+                    phaseLabel.setActive(true);
+            } else if (getGameView().getPlayerTurn() != null) {
+                //set phaselabel
+                final VPhaseIndicator.PhaseLabel phaseLabel = view.getPlayerPanel(getGameView().getPlayerTurn()).getPhaseIndicator().getLabel(ph);
+                if (phaseLabel != null)
+                    phaseLabel.setActive(true);
+            }
+        }
 
         if(GuiBase.isNetworkplay())
             checkStack();
