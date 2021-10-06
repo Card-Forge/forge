@@ -342,8 +342,7 @@ public class PhaseHandler implements java.io.Serializable {
                     // no first strikers, skip this step
                     if (!combat.assignCombatDamage(true)) {
                         givePriorityToPlayer = false;
-                    }
-                    else {
+                    } else {
                         combat.dealAssignedDamage();
                     }
                     break;
@@ -355,8 +354,7 @@ public class PhaseHandler implements java.io.Serializable {
 
                     if (!combat.assignCombatDamage(false)) {
                         givePriorityToPlayer = false;
-                    }
-                    else {
+                    } else {
                         combat.dealAssignedDamage();
                     }
                     break;

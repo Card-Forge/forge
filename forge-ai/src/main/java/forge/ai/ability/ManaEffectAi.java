@@ -28,6 +28,8 @@ import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
+import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
@@ -43,7 +45,7 @@ public class ManaEffectAi extends SpellAbilityAi {
     @Override
     protected boolean checkAiLogic(Player ai, SpellAbility sa, String aiLogic) {
         if (aiLogic.startsWith("ManaRitual")) {
-            return doManaRitualLogic(ai, sa);
+            return doManaRitualLogic(ai, sa, false);
         } else if ("Always".equals(aiLogic)) {
             return true;
         }
@@ -110,14 +112,32 @@ public class ManaEffectAi extends SpellAbilityAi {
      */
     @Override
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+        final String logic = sa.getParamOrDefault("AILogic", "");
+        if (logic.startsWith("ManaRitual")) {
+            return doManaRitualLogic(aiPlayer, sa, true);
+        }
+
         return true;
     }
     
     // Dark Ritual and other similar instants/sorceries that add mana to mana pool
-    public static boolean doManaRitualLogic(Player ai, SpellAbility sa) {
+    public static boolean doManaRitualLogic(Player ai, SpellAbility sa, boolean fromTrigger) {
         final Card host = sa.getHostCard();
         final String logic = sa.getParamOrDefault("AILogic", "");
-          
+
+        if (sa.usesTargeting()) { // Rousing Refrain
+            PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
+            if (targetableOpps.isEmpty()) {
+                return false;
+            }
+            Player mostCards = targetableOpps.max(PlayerPredicates.compareByZoneSize(ZoneType.Hand));
+            sa.resetTargets();
+            sa.getTargets().add(mostCards);
+            if (fromTrigger) {
+                return true;
+            }
+        }
+        
         CardCollection manaSources = ComputerUtilMana.getAvailableManaSources(ai, true);
         int numManaSrcs = manaSources.size();
         int manaReceived = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa) : 1;

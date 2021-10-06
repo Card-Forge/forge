@@ -3197,10 +3197,6 @@ public class CardFactoryUtil {
                         return false;
                     }
 
-                    if (this.getHostCard().isInstant() || this.getHostCard().hasKeyword(Keyword.FLASH)) {
-                        return true;
-                    }
-
                     return this.getHostCard().getFirstSpellAbility().canCastTiming(this.getHostCard(), this.getActivatingPlayer());
                 }
 
