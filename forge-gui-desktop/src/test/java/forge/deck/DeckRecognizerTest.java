@@ -2208,6 +2208,10 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getTokenSection(), DeckSection.Sideboard);
     }
 
+    /*=================================
+     * TEST BANNED
+     * ================================ */
+
     /*===============
      * TEST TOKEN-KEY
      * ============== */
@@ -2542,4 +2546,210 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(token.getType(), TokenType.COMMENT);
         assertEquals(token.getText(), "### General line as comment");
     }
+
+    // === Parsing Card List ===
+    @Test void testParsingCardListNoConstraint(){
+        String[] cardList = new String[]{
+                "//Sideboard",  // decksection
+                "2x Counterspell FEM", // unknonw card
+                "4x Incinerate|ICE",  // known card to side
+                "Gibberish to ignore",  // ignored
+                "#Comment to report"   // comment token
+        };
+        DeckRecognizer recognizer = new DeckRecognizer();
+        List<Token> tokens = recognizer.parseCardList(cardList);
+        assertNotNull(tokens);
+        assertEquals(tokens.size(), 5);
+
+        Token deckSectionToken = tokens.get(0);
+        assertEquals(deckSectionToken.getType(), TokenType.DECK_SECTION_NAME);
+        assertNull(deckSectionToken.getTokenSection());
+        assertEquals(deckSectionToken.getText(), DeckSection.Sideboard.name());
+
+        Token unknownCardToken = tokens.get(1);
+        assertEquals(unknownCardToken.getType(), TokenType.UNKNOWN_CARD);
+        Token unknownText = tokens.get(3);
+        assertEquals(unknownText.getType(), TokenType.UNKNOWN_TEXT);
+
+        Token cardToken = tokens.get(2);
+        assertTrue(cardToken.isCardToken());
+        assertNotNull(cardToken.getCard());
+        assertEquals(cardToken.getQuantity(), 4);
+        assertEquals(cardToken.getCard().getName(), "Incinerate");
+        assertEquals(cardToken.getCard().getEdition(), "ICE");
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
+        // This is because of the previous DeckSection token
+        assertEquals(cardToken.getTokenSection(), DeckSection.Sideboard);
+
+        Token commentToken = tokens.get(4);
+        assertEquals(commentToken.getType(), TokenType.COMMENT);
+    }
+
+    @Test void testParseCardListWithAllowedSectionsRaisesUnsupportedCardsAndSection(){
+        String[] cardList = new String[]{
+                "//Sideboard",  // decksection - unsupported section
+                "All in Good Time", // Schemes - unsupported card
+                "4x Incinerate|ICE",  // known card to main
+        };
+        DeckRecognizer recognizer = new DeckRecognizer();
+        recognizer.setAllowedDeckSections(Arrays.asList(DeckSection.Main, DeckSection.Commander));
+        List<Token> tokens = recognizer.parseCardList(cardList);
+        assertNotNull(tokens);
+        assertEquals(tokens.size(), 4);
+
+        Token deckSectionToken = tokens.get(0);
+        assertFalse(deckSectionToken.isDeckSection());
+        assertEquals(deckSectionToken.getType(), TokenType.UNSUPPORTED_DECK_SECTION);
+        assertNull(deckSectionToken.getTokenSection());
+
+        Token unsupportedCard = tokens.get(1);
+        assertEquals(unsupportedCard.getType(), TokenType.UNSUPPORTED_CARD);
+
+        deckSectionToken = tokens.get(2);
+        assertTrue(deckSectionToken.isDeckSection());
+        assertEquals(deckSectionToken.getText(), DeckSection.Main.name());
+
+        Token cardToken = tokens.get(3);
+        assertTrue(cardToken.isCardToken());
+        assertNotNull(cardToken.getCard());
+        assertEquals(cardToken.getQuantity(), 4);
+        assertEquals(cardToken.getCard().getName(), "Incinerate");
+        assertEquals(cardToken.getCard().getEdition(), "ICE");
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
+        assertEquals(cardToken.getTokenSection(), DeckSection.Main);
+    }
+
+    @Test void testCardListWithDeckNameHasDeckNameOnTop(){
+        String[] cardList = new String[]{
+                "//Sideboard",  // decksection
+                "Name: Test deck", // goes on top
+                "4x Incinerate|ICE",  // known card to side
+        };
+        DeckRecognizer recognizer = new DeckRecognizer();
+        List<Token> tokens = recognizer.parseCardList(cardList);
+        assertNotNull(tokens);
+        assertEquals(tokens.size(), 3);
+
+        Token deckNameToken = tokens.get(0);
+        assertEquals(deckNameToken.getType(), TokenType.DECK_NAME);
+        assertEquals(deckNameToken.getText(), "Test deck");
+
+        Token deckSectionToken = tokens.get(1);
+        assertTrue(deckSectionToken.isDeckSection());
+        assertEquals(deckSectionToken.getType(), TokenType.DECK_SECTION_NAME);
+        assertEquals(deckSectionToken.getText(), DeckSection.Sideboard.name());
+
+        Token cardToken = tokens.get(2);
+        assertTrue(cardToken.isCardToken());
+        assertNotNull(cardToken.getCard());
+        assertEquals(cardToken.getQuantity(), 4);
+        assertEquals(cardToken.getCard().getName(), "Incinerate");
+        assertEquals(cardToken.getCard().getEdition(), "ICE");
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
+        assertEquals(cardToken.getTokenSection(), DeckSection.Sideboard);
+    }
+
+    @Test void testCardsInDifferentSectionsWillAddAlsoDeckSectionPlaceholders(){
+        String[] cardList = new String[]{
+                "2x Counterspell | TMP",  // card legal in Main (+placeholder)
+                "SB:4x Incinerate|ICE",  // card legal in Side (+ placeholder)
+                "2x Fireball 5ED"  // card legal in Side
+        };
+        DeckRecognizer recognizer = new DeckRecognizer();
+        List<Token> tokens = recognizer.parseCardList(cardList);
+        assertNotNull(tokens);
+        assertEquals(tokens.size(), 5);
+
+        Token deckSectionToken = tokens.get(0);
+        assertEquals(deckSectionToken.getType(), TokenType.DECK_SECTION_NAME);
+        assertTrue(deckSectionToken.isDeckSection());
+        assertEquals(deckSectionToken.getText(), DeckSection.Main.name());
+
+        Token cardToken = tokens.get(1);
+        assertTrue(cardToken.isCardToken());
+        assertNotNull(cardToken.getCard());
+        assertEquals(cardToken.getQuantity(), 2);
+        assertEquals(cardToken.getCard().getName(), "Counterspell");
+        assertEquals(cardToken.getCard().getEdition(), "TMP");
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
+        assertEquals(cardToken.getTokenSection(), DeckSection.Main);
+
+        deckSectionToken = tokens.get(2);
+        assertEquals(deckSectionToken.getType(), TokenType.DECK_SECTION_NAME);
+        assertTrue(deckSectionToken.isDeckSection());
+        assertEquals(deckSectionToken.getText(), DeckSection.Sideboard.name());
+
+        cardToken = tokens.get(3);
+        assertTrue(cardToken.isCardToken());
+        assertNotNull(cardToken.getCard());
+        assertEquals(cardToken.getQuantity(), 4);
+        assertEquals(cardToken.getCard().getName(), "Incinerate");
+        assertEquals(cardToken.getCard().getEdition(), "ICE");
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
+        assertEquals(cardToken.getTokenSection(), DeckSection.Sideboard);
+
+        cardToken = tokens.get(4);
+        assertTrue(cardToken.isCardToken());
+        assertNotNull(cardToken.getCard());
+        assertEquals(cardToken.getQuantity(), 2);
+        assertEquals(cardToken.getCard().getName(), "Fireball");
+        assertEquals(cardToken.getCard().getEdition(), "5ED");
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
+        assertEquals(cardToken.getTokenSection(), DeckSection.Sideboard);
+    }
+
+    @Test void testDeckSectionValidationForTokensAddPlaceholderAndRestoresMainSection(){
+        String[] cardList = new String[]{
+                "2x Counterspell | TMP",  // card legal in Main (+placeholder)
+                "All in Good Time",  // card legal in Schemes (+ placeholder)
+                "2x Fireball 5ED"  // card legal in Main (+ placeholder as section changes again)
+        };
+        DeckRecognizer recognizer = new DeckRecognizer();
+        List<Token> tokens = recognizer.parseCardList(cardList);
+        assertNotNull(tokens);
+        assertEquals(tokens.size(), 6);
+
+        Token deckSectionToken = tokens.get(0);
+        assertEquals(deckSectionToken.getType(), TokenType.DECK_SECTION_NAME);
+        assertTrue(deckSectionToken.isDeckSection());
+        assertEquals(deckSectionToken.getText(), DeckSection.Main.name());
+
+        Token cardToken = tokens.get(1);
+        assertTrue(cardToken.isCardToken());
+        assertNotNull(cardToken.getCard());
+        assertEquals(cardToken.getQuantity(), 2);
+        assertEquals(cardToken.getCard().getName(), "Counterspell");
+        assertEquals(cardToken.getCard().getEdition(), "TMP");
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
+        assertEquals(cardToken.getTokenSection(), DeckSection.Main);
+
+        deckSectionToken = tokens.get(2);
+        assertEquals(deckSectionToken.getType(), TokenType.DECK_SECTION_NAME);
+        assertTrue(deckSectionToken.isDeckSection());
+        assertEquals(deckSectionToken.getText(), DeckSection.Schemes.name());
+
+        cardToken = tokens.get(3);
+        assertTrue(cardToken.isCardToken());
+        assertNotNull(cardToken.getCard());
+        assertEquals(cardToken.getQuantity(), 1);
+        assertEquals(cardToken.getCard().getName(), "All in Good Time");
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
+        assertEquals(cardToken.getTokenSection(), DeckSection.Schemes);
+
+        deckSectionToken = tokens.get(4);
+        assertEquals(deckSectionToken.getType(), TokenType.DECK_SECTION_NAME);
+        assertTrue(deckSectionToken.isDeckSection());
+        assertEquals(deckSectionToken.getText(), DeckSection.Main.name());
+
+        cardToken = tokens.get(5);
+        assertTrue(cardToken.isCardToken());
+        assertNotNull(cardToken.getCard());
+        assertEquals(cardToken.getQuantity(), 2);
+        assertEquals(cardToken.getCard().getName(), "Fireball");
+        assertEquals(cardToken.getCard().getEdition(), "5ED");
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
+        assertEquals(cardToken.getTokenSection(), DeckSection.Main);
+    }
+
+
 }
