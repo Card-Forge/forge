@@ -442,6 +442,17 @@ public class MatchScreen extends FScreen {
         if (activeEffect != null) {
             activeEffect.draw(g, 10, 10, 100, 100);
         }
+
+        if (game.getNeedsPhaseRedrawn()) {
+            resetAllPhaseButtons();
+            if (game.getPlayerTurn() != null && game.getPhase() != null) {
+                final PhaseLabel phaseLabel = getPlayerPanel(game.getPlayerTurn()).getPhaseIndicator().getLabel(game.getPhase());
+                if (phaseLabel != null) {
+                    phaseLabel.setActive(true);
+                    game.clearNeedsPhaseRedrawn();
+                }
+            }
+        }
     }
 
     @Override

@@ -223,11 +223,15 @@ public class MatchController extends AbstractGuiGame {
                 final VPhaseIndicator.PhaseLabel phaseLabel = view.getPlayerPanel(lastPlayer).getPhaseIndicator().getLabel(ph);
                 if (phaseLabel != null)
                     phaseLabel.setActive(true);
+                if (GuiBase.isNetworkplay())
+                    getGameView().updateNeedsPhaseRedrawn(lastPlayer, PhaseType.CLEANUP);
             } else if (getGameView().getPlayerTurn() != null) {
                 //set phaselabel
                 final VPhaseIndicator.PhaseLabel phaseLabel = view.getPlayerPanel(getGameView().getPlayerTurn()).getPhaseIndicator().getLabel(ph);
                 if (phaseLabel != null)
                     phaseLabel.setActive(true);
+                if (GuiBase.isNetworkplay())
+                    getGameView().updateNeedsPhaseRedrawn(getGameView().getPlayerTurn(), ph);
             }
         }
 
