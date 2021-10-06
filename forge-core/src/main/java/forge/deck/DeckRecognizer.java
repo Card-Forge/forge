@@ -674,9 +674,22 @@ public class DeckRecognizer {
             if (cardSection.validate(card))
                 return cardSection;
         }
-        if (currentDeckSection != null && currentDeckSection.validate(card))
-            return currentDeckSection;
-        return DeckSection.matchingSection(card);
+        if (currentDeckSection != null){
+            if (currentDeckSection.validate(card))
+                return currentDeckSection;
+            return DeckSection.matchingSection(card);
+        }
+        // When there is no reference section yet, there maybe cases in which the matched section
+        // is not supported, but other possibilities exist (e.g. Commander card in Constructed
+        // could potentially go in Main)
+        DeckSection matchedSection = DeckSection.matchingSection(card);
+        if (this.isAllowed(matchedSection))
+            return matchedSection;
+        // if matched section is not allowed, try to match the card to main.
+        // if that won't work, return matched section as this will potentially be an unsupported card!
+        return DeckSection.Main.validate(card) ? DeckSection.Main : matchedSection;
+
+
     }
 
     private boolean hasGameFormatConstraints() {

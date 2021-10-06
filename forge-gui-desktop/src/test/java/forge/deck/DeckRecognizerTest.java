@@ -2208,6 +2208,68 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getTokenSection(), DeckSection.Sideboard);
     }
 
+    @Test void testCornerCaseWhenThereIsNoCurrentSectionAndMatchedSectionIsNotAllowedButCouldMatchMain(){
+        DeckRecognizer recognizer = new DeckRecognizer();
+
+        String cardRequest = "All in Good Time"; // Scheme Section
+        Token cardToken = recognizer.recogniseCardToken(cardRequest, null);
+        assertNotNull(cardToken);
+        assertNotNull(cardToken.getCard());
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
+        assertNotNull(cardToken.getTokenSection());
+        assertEquals(cardToken.getTokenSection(), DeckSection.Schemes);
+
+        // Matches Scheme regardless current is Main
+        cardRequest = "All in Good Time"; // Scheme Section
+        cardToken = recognizer.recogniseCardToken(cardRequest, DeckSection.Main);
+        assertNotNull(cardToken);
+        assertNotNull(cardToken.getCard());
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
+        assertNotNull(cardToken.getTokenSection());
+        assertEquals(cardToken.getTokenSection(), DeckSection.Schemes);
+
+        // This Commander Card can go to Main, current is Main, so it will go there!
+        cardRequest = "1 Anowon, the Ruin Thief"; // Commander Section
+        cardToken = recognizer.recogniseCardToken(cardRequest, DeckSection.Main);
+        assertNotNull(cardToken);
+        assertNotNull(cardToken.getCard());
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
+        assertNotNull(cardToken.getTokenSection());
+        assertEquals(cardToken.getTokenSection(), DeckSection.Main);
+
+        // Now with no current section, commander will match
+        cardRequest = "1 Anowon, the Ruin Thief"; // Commander Section
+        cardToken = recognizer.recogniseCardToken(cardRequest, null);
+        assertNotNull(cardToken);
+        assertNotNull(cardToken.getCard());
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
+        assertNotNull(cardToken.getTokenSection());
+        assertEquals(cardToken.getTokenSection(), DeckSection.Commander);
+
+        // Now add constraint
+        recognizer.setAllowedDeckSections(Arrays.asList(DeckSection.Main, DeckSection.Sideboard));
+
+        // Now with no current section, commander will match
+        // but it's not allowed, so Main will be tried and returned
+        cardRequest = "1 Anowon, the Ruin Thief"; // Commander Section
+        cardToken = recognizer.recogniseCardToken(cardRequest, null);
+        assertNotNull(cardToken);
+        assertNotNull(cardToken.getCard());
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
+        assertNotNull(cardToken.getTokenSection());
+        assertEquals(cardToken.getTokenSection(), DeckSection.Main);
+
+        // Scheme is not allowed, but the card won't match Main so Scheme will be
+        // returned anyway, so that it can become "UNsupported card" later.
+        cardRequest = "All in Good Time"; // Scheme Section
+        cardToken = recognizer.recogniseCardToken(cardRequest, null);
+        assertNotNull(cardToken);
+        assertNotNull(cardToken.getCard());
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
+        assertNotNull(cardToken.getTokenSection());
+        assertEquals(cardToken.getTokenSection(), DeckSection.Schemes);
+    }
+
     /*=================================
      * TEST BANNED
      * ================================ */
@@ -2751,5 +2813,31 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getTokenSection(), DeckSection.Main);
     }
 
+    @Test void testUnsupportedCardIsReturnedOnlyWhenNoOtherOptionExistForSectionMatching(){
+        DeckRecognizer recognizer = new DeckRecognizer();
+        // Now add constraint
+        recognizer.setAllowedDeckSections(Arrays.asList(DeckSection.Main, DeckSection.Sideboard));
+
+        String[] cardList = new String[]{
+                "1 Anowon, the Ruin Thief", // Commander Section but will go in MAIN + placeholder
+                "All in Good Time",  // card legal in Schemes but Section not allowed - UNSUPPORTED
+        };
+
+        List<Token> parsedTokens = recognizer.parseCardList(cardList);
+        assertEquals(parsedTokens.size(), 3);
+
+        Token deckSection = parsedTokens.get(0);
+        assertTrue(deckSection.isDeckSection());
+        assertEquals(deckSection.getType(), TokenType.DECK_SECTION_NAME);
+        assertEquals(deckSection.getText(), DeckSection.Main.name());
+
+        Token cardToken = parsedTokens.get(1);
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
+        assertNotNull(cardToken.getCard());
+        assertEquals(cardToken.getTokenSection(), DeckSection.Main);
+
+        Token unsupportedCard = parsedTokens.get(2);
+        assertEquals(unsupportedCard.getType(), TokenType.UNSUPPORTED_CARD);
+    }
 
 }
