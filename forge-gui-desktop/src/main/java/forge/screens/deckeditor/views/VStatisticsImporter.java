@@ -29,6 +29,10 @@ public class VStatisticsImporter {
             .text(String.format("%s: %d", Localizer.getInstance().getMessage("lblTotalSide").toUpperCase(), 0))
             .tooltip(Localizer.getInstance().getMessage("lblTotalSide"))
             .fontStyle(Font.BOLD).fontSize(10).fontStyle(Font.BOLD).build();
+    private FLabel lblTotalCommander = new FLabel.Builder()
+            .text(String.format("%s: %d", Localizer.getInstance().getMessage("lblTotalCommander").toUpperCase(), 0))
+            .tooltip(Localizer.getInstance().getMessage("lblTotalCommander"))
+            .fontStyle(Font.BOLD).fontSize(10).fontStyle(Font.BOLD).build();
     private FLabel lblTitle = new FLabel.Builder()
             .text(Localizer.getInstance().getMessage("lblSummaryStats"))
             .tooltip(Localizer.getInstance().getMessage("lblSummaryStats"))
@@ -82,7 +86,7 @@ public class VStatisticsImporter {
         return buildLabel(FSkin.getImage(statType.skinProp, 18, 18), zebra);
     }
 
-    private VStatisticsImporter() {
+    private VStatisticsImporter(boolean isCommanderEditor) {
         scroller.getViewport().setBorder(null);
 
         // Color stats
@@ -149,16 +153,22 @@ public class VStatisticsImporter {
         pnlStats.add(lblSorcery, constraints);
         pnlStats.add(lblCMC6, constraints);
 
-        pnlStats.add(lblTotal, constraints);
-        pnlStats.add(lblTotalMain, constraints);
-        pnlStats.add(lblTotalSide, constraints);
+        if(isCommanderEditor){
+            pnlStats.add(lblTotalMain, constraints);
+            pnlStats.add(lblTotalSide, constraints);
+            pnlStats.add(lblTotalCommander, constraints);
+        } else {
+            pnlStats.add(lblTotalMain, constraints);
+            pnlStats.add(lblTotalSide, constraints);
+            pnlStats.add(lblTotal, constraints);
+        }
 
     }
 
-    public static VStatisticsImporter instance() {
+    public static VStatisticsImporter instance(boolean isCommanderEditor) {
         if (lastInstance == null)
             // singleton
-            lastInstance = new VStatisticsImporter();
+            lastInstance = new VStatisticsImporter(isCommanderEditor);
         return lastInstance;
     }
 
@@ -215,7 +225,8 @@ public class VStatisticsImporter {
     public FLabel getLblTotalMain() { return lblTotalMain; }
     /** @return {@link forge.toolbox.FLabel} */
     public FLabel getLblTotalSide() { return lblTotalSide; }
-
+    /** @return {@link forge.toolbox.FLabel} */
+    public FLabel getLblTotalCommander() { return lblTotalCommander; }
     /** @return {@link javax.swing.JPanel} */
     public JPanel getMainPanel() { return this.pnlStats; }
 }
