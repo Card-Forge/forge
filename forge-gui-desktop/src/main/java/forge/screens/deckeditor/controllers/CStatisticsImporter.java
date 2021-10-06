@@ -22,18 +22,13 @@ import java.util.Map;
 
 public class CStatisticsImporter {
 
-    private static CStatisticsImporter instance = null;
     private int totalCardsInDecklist = 0;
     private final boolean isCommanderEditor;
+    private final VStatisticsImporter view;
 
-    private CStatisticsImporter(boolean isCommanderEditor){
-        this.isCommanderEditor = isCommanderEditor;
-    }
-
-    public static CStatisticsImporter instance(boolean isCommanderEditor) {
-        if (instance == null)
-            instance = new CStatisticsImporter(isCommanderEditor);
-        return instance;
+    public CStatisticsImporter(VStatisticsImporter vStatisticsImporter){
+        this.view = vStatisticsImporter;
+        this.isCommanderEditor = this.view.isViewForCommanderEditor();
     }
 
     public void updateStats(Iterable<DeckRecognizer.Token> cardTokens, boolean includeBannedAndRestricted) {
@@ -62,44 +57,43 @@ public class CStatisticsImporter {
         // Hack-ish: avoid /0 cases, but still populate labels :)
         if (total == 0) { total = 1; }
 
-        VStatisticsImporter vStatsImporter = VStatisticsImporter.instance(this.isCommanderEditor);
-        setLabelValue(vStatsImporter.getLblCreature(), deck, CardRulesPredicates.Presets.IS_CREATURE, total);
-        setLabelValue(vStatsImporter.getLblLand(), deck, CardRulesPredicates.Presets.IS_LAND, total);
-        setLabelValue(vStatsImporter.getLblEnchantment(), deck, CardRulesPredicates.Presets.IS_ENCHANTMENT, total);
-        setLabelValue(vStatsImporter.getLblArtifact(), deck, CardRulesPredicates.Presets.IS_ARTIFACT, total);
-        setLabelValue(vStatsImporter.getLblInstant(), deck, CardRulesPredicates.Presets.IS_INSTANT, total);
-        setLabelValue(vStatsImporter.getLblSorcery(), deck, CardRulesPredicates.Presets.IS_SORCERY, total);
-        setLabelValue(vStatsImporter.getLblPlaneswalker(), deck, CardRulesPredicates.Presets.IS_PLANESWALKER, total);
+        setLabelValue(this.view.getLblCreature(), deck, CardRulesPredicates.Presets.IS_CREATURE, total);
+        setLabelValue(this.view.getLblLand(), deck, CardRulesPredicates.Presets.IS_LAND, total);
+        setLabelValue(this.view.getLblEnchantment(), deck, CardRulesPredicates.Presets.IS_ENCHANTMENT, total);
+        setLabelValue(this.view.getLblArtifact(), deck, CardRulesPredicates.Presets.IS_ARTIFACT, total);
+        setLabelValue(this.view.getLblInstant(), deck, CardRulesPredicates.Presets.IS_INSTANT, total);
+        setLabelValue(this.view.getLblSorcery(), deck, CardRulesPredicates.Presets.IS_SORCERY, total);
+        setLabelValue(this.view.getLblPlaneswalker(), deck, CardRulesPredicates.Presets.IS_PLANESWALKER, total);
 
-        setLabelValue(vStatsImporter.getLblMulti(), deck, CardRulesPredicates.Presets.IS_MULTICOLOR, total);
-        setLabelValue(vStatsImporter.getLblColorless(), deck, CardRulesPredicates.Presets.IS_COLORLESS, total);
-        setLabelValue(vStatsImporter.getLblBlack(), deck, CardRulesPredicates.isMonoColor(MagicColor.BLACK), total);
-        setLabelValue(vStatsImporter.getLblBlue(), deck, CardRulesPredicates.isMonoColor(MagicColor.BLUE), total);
-        setLabelValue(vStatsImporter.getLblGreen(), deck, CardRulesPredicates.isMonoColor(MagicColor.GREEN), total);
-        setLabelValue(vStatsImporter.getLblRed(), deck, CardRulesPredicates.isMonoColor(MagicColor.RED), total);
-        setLabelValue(vStatsImporter.getLblWhite(), deck, CardRulesPredicates.isMonoColor(MagicColor.WHITE), total);
+        setLabelValue(this.view.getLblMulti(), deck, CardRulesPredicates.Presets.IS_MULTICOLOR, total);
+        setLabelValue(this.view.getLblColorless(), deck, CardRulesPredicates.Presets.IS_COLORLESS, total);
+        setLabelValue(this.view.getLblBlack(), deck, CardRulesPredicates.isMonoColor(MagicColor.BLACK), total);
+        setLabelValue(this.view.getLblBlue(), deck, CardRulesPredicates.isMonoColor(MagicColor.BLUE), total);
+        setLabelValue(this.view.getLblGreen(), deck, CardRulesPredicates.isMonoColor(MagicColor.GREEN), total);
+        setLabelValue(this.view.getLblRed(), deck, CardRulesPredicates.isMonoColor(MagicColor.RED), total);
+        setLabelValue(this.view.getLblWhite(), deck, CardRulesPredicates.isMonoColor(MagicColor.WHITE), total);
 
-        setLabelValue(vStatsImporter.getLblCMC0(), deck, SItemManagerUtil.StatTypes.CMC_0.predicate, total);
-        setLabelValue(vStatsImporter.getLblCMC1(), deck, SItemManagerUtil.StatTypes.CMC_1.predicate, total);
-        setLabelValue(vStatsImporter.getLblCMC2(), deck, SItemManagerUtil.StatTypes.CMC_2.predicate, total);
-        setLabelValue(vStatsImporter.getLblCMC3(), deck, SItemManagerUtil.StatTypes.CMC_3.predicate, total);
-        setLabelValue(vStatsImporter.getLblCMC4(), deck, SItemManagerUtil.StatTypes.CMC_4.predicate, total);
-        setLabelValue(vStatsImporter.getLblCMC5(), deck, SItemManagerUtil.StatTypes.CMC_5.predicate, total);
-        setLabelValue(vStatsImporter.getLblCMC6(), deck, SItemManagerUtil.StatTypes.CMC_6.predicate, total);
+        setLabelValue(this.view.getLblCMC0(), deck, SItemManagerUtil.StatTypes.CMC_0.predicate, total);
+        setLabelValue(this.view.getLblCMC1(), deck, SItemManagerUtil.StatTypes.CMC_1.predicate, total);
+        setLabelValue(this.view.getLblCMC2(), deck, SItemManagerUtil.StatTypes.CMC_2.predicate, total);
+        setLabelValue(this.view.getLblCMC3(), deck, SItemManagerUtil.StatTypes.CMC_3.predicate, total);
+        setLabelValue(this.view.getLblCMC4(), deck, SItemManagerUtil.StatTypes.CMC_4.predicate, total);
+        setLabelValue(this.view.getLblCMC5(), deck, SItemManagerUtil.StatTypes.CMC_5.predicate, total);
+        setLabelValue(this.view.getLblCMC6(), deck, SItemManagerUtil.StatTypes.CMC_6.predicate, total);
 
-        vStatsImporter.getLblTotalMain().setText(
+        this.view.getLblTotalMain().setText(
                 String.format("%s: %d", Localizer.getInstance().getMessage("lblTotalMain").toUpperCase(),
                         totalInMain));
-        vStatsImporter.getLblTotalSide().setText(
+        this.view.getLblTotalSide().setText(
                 String.format("%s: %d", Localizer.getInstance().getMessage("lblTotalSide").toUpperCase(),
                         totalInSide));
 
         if (this.isCommanderEditor)
-            vStatsImporter.getLblTotalCommander().setText(
+            this.view.getLblTotalCommander().setText(
                     String.format("%s: %d", Localizer.getInstance().getMessage("lblTotalCommander").toUpperCase(),
                             totalInCommander));
         else
-            vStatsImporter.getLblTotal().setText(
+            this.view.getLblTotal().setText(
                     String.format("%s: %d", Localizer.getInstance().getMessage("lblTotalCards").toUpperCase(),
                             deck.countAll()));
 

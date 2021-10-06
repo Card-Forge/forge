@@ -13,8 +13,6 @@ import java.awt.*;
 
 public class VStatisticsImporter {
 
-    private static VStatisticsImporter lastInstance = null;
-
     // Global stats
 
     private FLabel lblTotal = new FLabel.Builder()
@@ -86,7 +84,9 @@ public class VStatisticsImporter {
         return buildLabel(FSkin.getImage(statType.skinProp, 18, 18), zebra);
     }
 
-    private VStatisticsImporter(boolean isCommanderEditor) {
+    private final boolean isViewForCommanderEditor;
+
+    public VStatisticsImporter(boolean isCommanderEditor) {
         scroller.getViewport().setBorder(null);
 
         // Color stats
@@ -163,16 +163,13 @@ public class VStatisticsImporter {
             pnlStats.add(lblTotal, constraints);
         }
 
-    }
-
-    public static VStatisticsImporter instance(boolean isCommanderEditor) {
-        if (lastInstance == null)
-            // singleton
-            lastInstance = new VStatisticsImporter(isCommanderEditor);
-        return lastInstance;
+        this.isViewForCommanderEditor = isCommanderEditor;
     }
 
     //========== Retrieval methods
+
+    /** @return {@link boolean}*/
+    public boolean isViewForCommanderEditor() { return this.isViewForCommanderEditor; }
 
     /** @return {@link forge.toolbox.FLabel} */
     public FLabel getLblMulti() { return lblMulti; }
