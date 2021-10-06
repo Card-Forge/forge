@@ -4,6 +4,7 @@ import forge.StaticData;
 import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.ForgeCardMockTestCase;
+import forge.card.MagicColor;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.deck.DeckRecognizer.Token;
@@ -52,6 +53,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
      * - Deck Name
      * - Card Type
      * - Deck Section
+     * - Mana Colour
      * ======================================
      */
 
@@ -301,11 +303,59 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
             assertFalse(DeckRecognizer.isCardCMC(line), "Fail on "+line);
     }
 
+    @Test void testManaSymbolsMatches(){
+        Pattern manaSymbolPattern = DeckRecognizer.MANA_SYMBOL_PATTERN;
+
+        List<MagicColor.Color> colours = Arrays.asList(MagicColor.Color.COLORLESS, MagicColor.Color.BLACK,
+                MagicColor.Color.BLUE, MagicColor.Color.GREEN, MagicColor.Color.RED, MagicColor.Color.GREEN);
+
+        for (MagicColor.Color color : colours){
+            String matchingManaSymbol = color.getSymbol();
+            Matcher manaSymbolMatcher = manaSymbolPattern.matcher(matchingManaSymbol);
+            assertTrue(manaSymbolMatcher.matches(), "Failed on : " + matchingManaSymbol);
+        }
+        // Lowercase
+        for (MagicColor.Color color : colours){
+            String matchingManaSymbol = color.getSymbol().toLowerCase();
+            Matcher manaSymbolMatcher = manaSymbolPattern.matcher(matchingManaSymbol);
+            assertTrue(manaSymbolMatcher.matches(), "Failed on : " + matchingManaSymbol);
+        }
+
+        // No Brackets - SO expected to fail matching
+        for (MagicColor.Color color : colours){
+            String matchingManaSymbol = color.getSymbol().toLowerCase().substring(1, color.getSymbol().length());
+            Matcher manaSymbolMatcher = manaSymbolPattern.matcher(matchingManaSymbol);
+            assertFalse(manaSymbolMatcher.matches(), "Failed on : " + matchingManaSymbol);
+        }
+
+        // Test Multi-Colour
+        Matcher manaSymbolMatcher = manaSymbolPattern.matcher("{m}");
+        assertTrue(manaSymbolMatcher.matches());
+
+        manaSymbolMatcher = manaSymbolPattern.matcher("{M}");
+        assertTrue(manaSymbolMatcher.matches());
+
+        manaSymbolMatcher = manaSymbolPattern.matcher("m");
+        assertFalse(manaSymbolMatcher.matches());
+
+        manaSymbolMatcher = manaSymbolPattern.matcher("ubwm");
+        assertFalse(manaSymbolMatcher.matches());
+    }
+
     @Test void testManaTokenMatch(){
+        DeckRecognizer recognizer = new DeckRecognizer();
         String[] cmcTokens = new String[] {"Blue", "red", "White", "// Black", "       //Colorless----", "(green)",
                 "// Multicolor", "// MultiColour"};
-        for (String line : cmcTokens)
+
+        String[] expectedTokenText = new String[] {"{U}", "{R}", "{W}", "{B}",
+        "{C}", "{G}", "{M}", "{M}"};
+        for (int i = 0; i < cmcTokens.length; i++) {
+            String line = cmcTokens[i];
             assertTrue(DeckRecognizer.isManaToken(line), "Fail on " + line);
+            Token manaToken = recognizer.recogniseNonCardToken(line);
+            assertNotNull(manaToken);
+            assertTrue(manaToken.getText().endsWith(expectedTokenText[i]));
+        }
 
         String[] nonCMCtokens = new String[] {"blues", "red more words", "mainboard"};
         for (String line : nonCMCtokens)
@@ -314,8 +364,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
 
     /*=============================
     * TEST RECOGNISE NON-CARD LINES
-    * =============================
-    */
+    * ============================= */
     @Test void testMatchNonCardLine(){
         DeckRecognizer recognizer = new DeckRecognizer();
 
@@ -324,98 +373,97 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertNotNull(t);
         assertEquals(t.getType(), TokenType.CARD_TYPE);
         assertEquals(t.getText(), "Lands");
-        assertEquals(t.getNumber(), 0);
+        assertEquals(t.getQuantity(), 0);
 
         // Test Token Types
         t = recognizer.recogniseNonCardToken("//Land");
         assertNotNull(t);
         assertEquals(t.getType(), TokenType.CARD_RARITY);
         assertEquals(t.getText(), "Land");
-        assertEquals(t.getNumber(), 0);
+        assertEquals(t.getQuantity(), 0);
 
         t = recognizer.recogniseNonCardToken("[Main]");
         assertNotNull(t);
         assertEquals(t.getType(), TokenType.DECK_SECTION_NAME);
         assertEquals(t.getText(), "Main");
-        assertEquals(t.getNumber(), 0);
+        assertEquals(t.getQuantity(), 0);
 
         t = recognizer.recogniseNonCardToken("## Mainboard (75)");
         assertNotNull(t);
         assertEquals(t.getType(), TokenType.DECK_SECTION_NAME);
         assertEquals(t.getText(), "Main");
-        assertEquals(t.getNumber(), 0);
+        assertEquals(t.getQuantity(), 0);
 
         t = recognizer.recogniseNonCardToken("### Artifact (3)");
         assertNotNull(t);
         assertEquals(t.getType(), TokenType.CARD_TYPE);
         assertEquals(t.getText(), "Artifact");
-        assertEquals(t.getNumber(), 0);
+        assertEquals(t.getQuantity(), 0);
 
         t = recognizer.recogniseNonCardToken("Enchantments");
         assertNotNull(t);
         assertEquals(t.getType(), TokenType.CARD_TYPE);
         assertEquals(t.getText(), "Enchantments");
-        assertEquals(t.getNumber(), 0);
+        assertEquals(t.getQuantity(), 0);
 
         t = recognizer.recogniseNonCardToken("//Name: Artifacts from DeckStats.net");
         assertNotNull(t);
         assertEquals(t.getType(), TokenType.DECK_NAME);
         assertEquals(t.getText(), "Artifacts from DeckStats");
-        assertEquals(t.getNumber(), 0);
+        assertEquals(t.getQuantity(), 0);
 
         t = recognizer.recogniseNonCardToken("Name: OLDSCHOOL 93-94 Red Green Aggro by Zombies with JetPack");
         assertNotNull(t);
         assertEquals(t.getType(), TokenType.DECK_NAME);
         assertEquals(t.getText(), "OLDSCHOOL 93-94 Red Green Aggro by Zombies with JetPack");
-        assertEquals(t.getNumber(), 0);
+        assertEquals(t.getQuantity(), 0);
 
         t = recognizer.recogniseNonCardToken("CMC0");
         assertNotNull(t);
         assertEquals(t.getType(), TokenType.CARD_CMC);
         assertEquals(t.getText(), "CMC0");
-        assertEquals(t.getNumber(), 0);
+        assertEquals(t.getQuantity(), 0);
 
         t = recognizer.recogniseNonCardToken("CC1");
         assertNotNull(t);
         assertEquals(t.getType(), TokenType.CARD_CMC);
         assertEquals(t.getText(), "CC1");
-        assertEquals(t.getNumber(), 0);
+        assertEquals(t.getQuantity(), 0);
 
         t = recognizer.recogniseNonCardToken("//Common");
         assertNotNull(t);
         assertEquals(t.getType(), TokenType.CARD_RARITY);
         assertEquals(t.getText(), "Common");
-        assertEquals(t.getNumber(), 0);
+        assertEquals(t.getQuantity(), 0);
 
         t = recognizer.recogniseNonCardToken("(mythic rare)");
         assertNotNull(t);
         assertEquals(t.getType(), TokenType.CARD_RARITY);
         assertEquals(t.getText(), "mythic rare");
-        assertEquals(t.getNumber(), 0);
+        assertEquals(t.getQuantity(), 0);
 
         t = recognizer.recogniseNonCardToken("//Blue");
         assertNotNull(t);
         assertEquals(t.getType(), TokenType.MANA_COLOUR);
-        assertEquals(t.getText(), "Blue");
-        assertEquals(t.getNumber(), 0);
+        assertEquals(t.getText(), String.format("%s {U}", ForgeCardMockTestCase.MOCKED_LOCALISED_STRING));
+        assertEquals(t.getQuantity(), 0);
 
         t = recognizer.recogniseNonCardToken("(Colorless)");
         assertNotNull(t);
         assertEquals(t.getType(), TokenType.MANA_COLOUR);
-        assertEquals(t.getText(), "Colorless");
-        assertEquals(t.getNumber(), 0);
+        assertEquals(t.getText(), String.format("%s {C}", ForgeCardMockTestCase.MOCKED_LOCALISED_STRING));
+        assertEquals(t.getQuantity(), 0);
 
         t = recognizer.recogniseNonCardToken("//Planes");
         assertNotNull(t);
         assertEquals(t.getType(), TokenType.DECK_SECTION_NAME);
         assertEquals(t.getText(), "Planes");
-        assertEquals(t.getNumber(), 0);
+        assertEquals(t.getQuantity(), 0);
     }
 
     /*=============================
      * TEST RECOGNISE CARD LINES
-     * =============================
-     */
+     * =============================*/
 
     // === Card-Set Pattern Request
     @Test void testValidMatchCardSetLine(){
@@ -890,7 +938,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getTokenSection(), DeckSection.Main);
         assertNotNull(cardToken.getCard());
         PaperCard tokenCard = cardToken.getCard();
-        assertEquals(cardToken.getNumber(), 4);
+        assertEquals(cardToken.getQuantity(), 4);
         assertEquals(tokenCard.getName(), "Power Sink");
         assertTrue(tokenCard.isFoil());
         assertEquals(tokenCard.getEdition(), "TMP");
@@ -902,7 +950,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
         assertNotNull(cardToken.getCard());
         tokenCard = cardToken.getCard();
-        assertEquals(cardToken.getNumber(), 4);
+        assertEquals(cardToken.getQuantity(), 4);
         assertEquals(tokenCard.getName(), "Power Sink");
         assertFalse(tokenCard.isFoil());
         assertEquals(tokenCard.getEdition(), "TMP");
@@ -914,7 +962,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
         assertNotNull(cardToken.getCard());
         tokenCard = cardToken.getCard();
-        assertEquals(cardToken.getNumber(), 4);
+        assertEquals(cardToken.getQuantity(), 4);
         assertEquals(tokenCard.getName(), "Power Sink");
         assertFalse(tokenCard.isFoil());
         assertEquals(tokenCard.getEdition(), "TMP");
@@ -926,7 +974,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
         assertNotNull(cardToken.getCard());
         tokenCard = cardToken.getCard();
-        assertEquals(cardToken.getNumber(), 4);
+        assertEquals(cardToken.getQuantity(), 4);
         assertEquals(tokenCard.getName(), "Power Sink");
         assertFalse(tokenCard.isFoil());
         assertEquals(tokenCard.getEdition(), "TMP");
@@ -938,7 +986,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
         assertNotNull(cardToken.getCard());
         tokenCard = cardToken.getCard();
-        assertEquals(cardToken.getNumber(), 4);
+        assertEquals(cardToken.getQuantity(), 4);
         assertEquals(tokenCard.getName(), "Power Sink");
         assertFalse(tokenCard.isFoil());
         assertEquals(tokenCard.getEdition(), "TMP");
@@ -950,7 +998,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
         assertNotNull(cardToken.getCard());
         tokenCard = cardToken.getCard();
-        assertEquals(cardToken.getNumber(), 1);
+        assertEquals(cardToken.getQuantity(), 1);
         assertEquals(tokenCard.getName(), "Power Sink");
         assertFalse(tokenCard.isFoil());
         assertEquals(tokenCard.getEdition(), "TMP");
@@ -962,7 +1010,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
         assertNotNull(cardToken.getCard());
         tokenCard = cardToken.getCard();
-        assertEquals(cardToken.getNumber(), 1);
+        assertEquals(cardToken.getQuantity(), 1);
         assertEquals(tokenCard.getName(), "Power Sink");
         assertFalse(tokenCard.isFoil());
         assertEquals(tokenCard.getEdition(), "TMP");
@@ -977,7 +1025,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
         assertNotNull(cardToken.getCard());
         tokenCard = cardToken.getCard();
-        assertEquals(cardToken.getNumber(), 4);
+        assertEquals(cardToken.getQuantity(), 4);
         assertEquals(tokenCard.getName(), "Power Sink");
         assertFalse(tokenCard.isFoil());
         assertEquals(tokenCard.getEdition(), "VMA");
@@ -988,7 +1036,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
         assertNotNull(cardToken.getCard());
         tokenCard = cardToken.getCard();
-        assertEquals(cardToken.getNumber(), 4);
+        assertEquals(cardToken.getQuantity(), 4);
         assertEquals(tokenCard.getName(), "Power Sink");
         assertTrue(tokenCard.isFoil());
         assertEquals(tokenCard.getEdition(), "VMA");
@@ -999,7 +1047,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
         assertNotNull(cardToken.getCard());
         tokenCard = cardToken.getCard();
-        assertEquals(cardToken.getNumber(), 1);
+        assertEquals(cardToken.getQuantity(), 1);
         assertEquals(tokenCard.getName(), "Power Sink");
         assertTrue(tokenCard.isFoil());
         assertEquals(tokenCard.getEdition(), "VMA");
@@ -1014,7 +1062,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
         assertNotNull(cardToken.getCard());
         PaperCard tokenCard = cardToken.getCard();
-        assertEquals(cardToken.getNumber(), 2);
+        assertEquals(cardToken.getQuantity(), 2);
         assertEquals(tokenCard.getName(), "Counterspell");
         assertEquals(tokenCard.getEdition(), "ICE");
 
@@ -1026,7 +1074,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
         assertNotNull(cardToken.getCard());
         tokenCard = cardToken.getCard();
-        assertEquals(cardToken.getNumber(), 2);
+        assertEquals(cardToken.getQuantity(), 2);
         assertEquals(tokenCard.getName(), "Counterspell");
         assertEquals(tokenCard.getEdition(), "MH2");
 
@@ -1047,7 +1095,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getTokenSection(), DeckSection.Main);
         assertTrue(cardToken.isCardToken());
         PaperCard tokenCard = cardToken.getCard();
-        assertEquals(cardToken.getNumber(), 4);
+        assertEquals(cardToken.getQuantity(), 4);
         assertEquals(tokenCard.getName(), "Power Sink");
         assertTrue(tokenCard.isFoil());
         assertEquals(tokenCard.getEdition(), "TMP");
@@ -1178,7 +1226,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
         assertNotNull(cardToken.getCard());
         PaperCard tokenCard = cardToken.getCard();
-        assertEquals(cardToken.getNumber(), 20);
+        assertEquals(cardToken.getQuantity(), 20);
         assertEquals(tokenCard.getName(), "Mountain");
         assertEquals(tokenCard.getEdition(), "MIR");
         assertEquals(tokenCard.getArtIndex(), 3);
@@ -1194,7 +1242,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
         assertNotNull(cardToken.getCard());
         PaperCard tokenCard = cardToken.getCard();
-        assertEquals(cardToken.getNumber(), 2);
+        assertEquals(cardToken.getQuantity(), 2);
         assertEquals(tokenCard.getName(), "Auspicious Ancestor");
         assertEquals(tokenCard.getEdition(), "MIR");
         assertEquals(tokenCard.getArtIndex(), 1);
@@ -1209,7 +1257,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         Token cardToken = recognizer.recogniseCardToken(requestLine, null);
         assertNotNull(cardToken);
         assertNotNull(cardToken.getCard());
-        assertEquals(cardToken.getNumber(), 3);
+        assertEquals(cardToken.getQuantity(), 3);
         PaperCard card = cardToken.getCard();
         assertEquals(card.getName(), "Jayemdae Tome");
         assertEquals(card.getEdition(), "LEB");
@@ -1222,7 +1270,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertNotNull(cardToken);
         assertNull(cardToken.getCard());
         assertNull(cardToken.getTokenSection());
-        assertEquals(cardToken.getType(), TokenType.UNKNOWN_CARD_REQUEST);
+        assertEquals(cardToken.getType(), TokenType.UNKNOWN_CARD);
     }
 
     /*=================================
@@ -1234,7 +1282,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         String lineRequest = "2x Counterspell FEM";
         Token cardToken = recognizer.recogniseCardToken(lineRequest, null);
         assertNotNull(cardToken);
-        assertEquals(cardToken.getType(), TokenType.UNKNOWN_CARD_REQUEST);
+        assertEquals(cardToken.getType(), TokenType.UNKNOWN_CARD);
         assertNull(cardToken.getCard());
     }
 
@@ -1244,7 +1292,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         String lineRequest = "2x Counterspell BOU";
         Token cardToken = recognizer.recogniseCardToken(lineRequest, null);
         assertNotNull(cardToken);
-        assertEquals(cardToken.getType(), TokenType.UNKNOWN_CARD_REQUEST);
+        assertEquals(cardToken.getType(), TokenType.UNKNOWN_CARD);
         assertNull(cardToken.getCard());
         assertNull(cardToken.getTokenSection());
     }
@@ -1263,7 +1311,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
         assertNotNull(cardToken.getCard());
         PaperCard ancestralCard = cardToken.getCard();
-        assertEquals(cardToken.getNumber(), 1);
+        assertEquals(cardToken.getQuantity(), 1);
         assertEquals(ancestralCard.getName(), "Ancestral Recall");
         assertEquals(StaticData.instance().getCommonCards().getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
         assertEquals(ancestralCard.getEdition(), "2ED");
@@ -1276,7 +1324,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
         assertNotNull(cardToken.getCard());
         PaperCard counterSpellCard = cardToken.getCard();
-        assertEquals(cardToken.getNumber(), 1);
+        assertEquals(cardToken.getQuantity(), 1);
         assertEquals(counterSpellCard.getName(), "Counterspell");
         assertEquals(counterSpellCard.getEdition(), "MMQ");
     }
@@ -1293,7 +1341,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
         assertNotNull(cardToken.getCard());
         PaperCard counterSpellCard = cardToken.getCard();
-        assertEquals(cardToken.getNumber(), 1);
+        assertEquals(cardToken.getQuantity(), 1);
         assertEquals(counterSpellCard.getName(), "Counterspell");
         assertEquals(counterSpellCard.getEdition(), "MH2");
 
@@ -1317,7 +1365,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertNotNull(cardToken);
         assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
         assertNotNull(cardToken.getCard());
-        assertEquals(cardToken.getNumber(), 1);
+        assertEquals(cardToken.getQuantity(), 1);
         assertNotNull(cardToken.getTokenSection());
         assertEquals(cardToken.getTokenSection(), DeckSection.Main);
         PaperCard tc = cardToken.getCard();
@@ -1330,7 +1378,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertNotNull(cardToken);
         assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
         assertNotNull(cardToken.getCard());
-        assertEquals(cardToken.getNumber(), 1);
+        assertEquals(cardToken.getQuantity(), 1);
         assertNotNull(cardToken.getTokenSection());
         assertEquals(cardToken.getTokenSection(), DeckSection.Main);
         tc = cardToken.getCard();
@@ -1348,7 +1396,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
         assertNotNull(cardToken.getCard());
         PaperCard tokenCard = cardToken.getCard();
-        assertEquals(cardToken.getNumber(), 4);
+        assertEquals(cardToken.getQuantity(), 4);
         assertEquals(tokenCard.getName(), "Power Sink");
         assertTrue(tokenCard.isFoil());
         assertEquals(tokenCard.getEdition(), "VMA");
@@ -1359,7 +1407,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
         assertNotNull(cardToken.getCard());
         tokenCard = cardToken.getCard();
-        assertEquals(cardToken.getNumber(), 4);
+        assertEquals(cardToken.getQuantity(), 4);
         assertEquals(tokenCard.getName(), "Power Sink");
         assertTrue(tokenCard.isFoil());
         assertEquals(tokenCard.getEdition(), "LEA");
@@ -1371,7 +1419,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
         assertNotNull(cardToken.getCard());
         tokenCard = cardToken.getCard();
-        assertEquals(cardToken.getNumber(), 1);
+        assertEquals(cardToken.getQuantity(), 1);
         assertEquals(tokenCard.getName(), "Power Sink");
         assertFalse(tokenCard.isFoil());
         assertEquals(tokenCard.getEdition(), "LEA");
@@ -1411,7 +1459,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
         assertNotNull(cardToken.getCard());
         PaperCard ancestralCard = cardToken.getCard();
-        assertEquals(cardToken.getNumber(), 1);
+        assertEquals(cardToken.getQuantity(), 1);
         assertEquals(ancestralCard.getName(), "Ancestral Recall");
         assertEquals(StaticData.instance().getCommonCards().getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
         assertEquals(ancestralCard.getEdition(), "VMA");
@@ -1444,7 +1492,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertNotNull(cardToken);
         assertEquals(cardToken.getType(), TokenType.CARD_FROM_NOT_ALLOWED_SET);
         assertNotNull(cardToken.getCard());
-        assertEquals(cardToken.getNumber(), 4);
+        assertEquals(cardToken.getQuantity(), 4);
         assertNull(cardToken.getTokenSection());
         assertEquals(cardToken.getCard().getName(), "Bloodstained Mire");
         assertEquals(cardToken.getCard().getEdition(), "ONS");
@@ -1456,7 +1504,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getType(), TokenType.LIMITED_CARD);
         assertEquals(cardToken.getLimitedCardType(), DeckRecognizer.LimitedCardType.BANNED);
         assertNotNull(cardToken.getCard());
-        assertEquals(cardToken.getNumber(), 4);
+        assertEquals(cardToken.getQuantity(), 4);
         assertNotNull(cardToken.getTokenSection());
         assertEquals(cardToken.getTokenSection(), DeckSection.Main);
         assertEquals(cardToken.getCard().getName(), "Bloodstained Mire");
@@ -1491,7 +1539,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getTokenSection(), DeckSection.Main);
         assertNotNull(cardToken.getCard());
         assertEquals(cardToken.getCard().getName(), "Ancestral Recall");
-        assertEquals(cardToken.getNumber(), 1);
+        assertEquals(cardToken.getQuantity(), 1);
         assertEquals(cardToken.getCard().getEdition(), "VMA");
 
         cardRequest = "4x Ancestral Recall";
@@ -1502,7 +1550,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getTokenSection(), DeckSection.Main);
         assertNotNull(cardToken.getCard());
         assertEquals(cardToken.getCard().getName(), "Ancestral Recall");
-        assertEquals(cardToken.getNumber(), 4);
+        assertEquals(cardToken.getQuantity(), 4);
         assertEquals(cardToken.getCard().getEdition(), "VMA");
     }
 
@@ -1525,7 +1573,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getTokenSection(), DeckSection.Main);
         assertNotNull(cardToken.getCard());
         assertEquals(cardToken.getCard().getName(), "Viashino Sandstalker");
-        assertEquals(cardToken.getNumber(), 1);
+        assertEquals(cardToken.getQuantity(), 1);
         assertEquals(cardToken.getCard().getEdition(), "MB1");
 
         cardRequest = "4x Viashino Sandstalker";
@@ -1536,7 +1584,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getTokenSection(), DeckSection.Main);
         assertNotNull(cardToken.getCard());
         assertEquals(cardToken.getCard().getName(), "Viashino Sandstalker");
-        assertEquals(cardToken.getNumber(), 4);
+        assertEquals(cardToken.getQuantity(), 4);
         assertEquals(cardToken.getCard().getEdition(), "MB1");
 
         // Requesting now what will be a Banned card later in this test
@@ -1547,7 +1595,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getTokenSection(), DeckSection.Main);
         assertNotNull(cardToken.getCard());
         assertEquals(cardToken.getCard().getName(), "Squandered Resources");
-        assertEquals(cardToken.getNumber(), 1);
+        assertEquals(cardToken.getQuantity(), 1);
         assertEquals(cardToken.getCard().getEdition(), "VIS");
 
         // == ALLOWED SETS ONLY
@@ -1560,7 +1608,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getTokenSection(), DeckSection.Main);
         assertNotNull(cardToken.getCard());
         assertEquals(cardToken.getCard().getName(), "Viashino Sandstalker");
-        assertEquals(cardToken.getNumber(), 4);
+        assertEquals(cardToken.getQuantity(), 4);
         assertEquals(cardToken.getCard().getEdition(), "VIS");
 
         // == BANNED CARDS ONLY
@@ -1573,7 +1621,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getTokenSection(), DeckSection.Main);
         assertNotNull(cardToken.getCard());
         assertEquals(cardToken.getCard().getName(), "Viashino Sandstalker");
-        assertEquals(cardToken.getNumber(), 4);
+        assertEquals(cardToken.getQuantity(), 4);
         assertEquals(cardToken.getCard().getEdition(), "MB1");
 
         cardRequest = "Squandered Resources";
@@ -1585,7 +1633,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getTokenSection(), DeckSection.Main);
         assertNotNull(cardToken.getCard());
         assertEquals(cardToken.getCard().getName(), "Squandered Resources");
-        assertEquals(cardToken.getNumber(), 1);
+        assertEquals(cardToken.getQuantity(), 1);
         assertEquals(cardToken.getCard().getEdition(), "VIS");
 
         // ALLOWED SET CODES AND RESTRICTED
@@ -1599,7 +1647,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getTokenSection(), DeckSection.Main);
         assertNotNull(cardToken.getCard());
         assertEquals(cardToken.getCard().getName(), "Viashino Sandstalker");
-        assertEquals(cardToken.getNumber(), 4);
+        assertEquals(cardToken.getQuantity(), 4);
         assertEquals(cardToken.getCard().getEdition(), "VIS");
     }
 
@@ -1617,7 +1665,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertNotNull(cardToken);
         assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
         assertNotNull(cardToken.getCard());
-        assertEquals(cardToken.getNumber(), 2);
+        assertEquals(cardToken.getQuantity(), 2);
         PaperCard tc = cardToken.getCard();
         assertEquals(tc.getName(), "Lightning Dragon");
         assertEquals(tc.getEdition(), "VMA");
@@ -1632,7 +1680,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertNotNull(cardToken);
         assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
         assertNotNull(cardToken.getCard());
-        assertEquals(cardToken.getNumber(), 2);
+        assertEquals(cardToken.getQuantity(), 2);
         tc = cardToken.getCard();
         assertEquals(tc.getName(), "Lightning Dragon");
         assertEquals(tc.getEdition(), "USG");
@@ -1642,7 +1690,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         cardToken = recognizer.recogniseCardToken(lineRequest, null);
         assertNotNull(cardToken);
         assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
-        assertEquals(cardToken.getNumber(), 2);
+        assertEquals(cardToken.getQuantity(), 2);
         assertNotNull(cardToken.getCard());
         tc = cardToken.getCard();
         assertEquals(tc.getName(), "Lightning Dragon");
@@ -1654,14 +1702,14 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         cardToken = recognizer.recogniseCardToken(lineRequest, null);
         assertNotNull(cardToken);
         assertEquals(cardToken.getType(), TokenType.CARD_FROM_INVALID_SET);
-        assertEquals(cardToken.getNumber(), 2);
+        assertEquals(cardToken.getQuantity(), 2);
         assertNotNull(cardToken.getCard());
 
         lineRequest = "2x Lightning Dragon";
         cardToken = recognizer.recogniseCardToken(lineRequest, null);
         assertNotNull(cardToken);
         assertEquals(cardToken.getType(), TokenType.CARD_FROM_INVALID_SET);
-        assertEquals(cardToken.getNumber(), 2);
+        assertEquals(cardToken.getQuantity(), 2);
         assertNotNull(cardToken.getCard());
         assertEquals(cardToken.getText(), "Lightning Dragon [USG] #202");
 
@@ -1674,14 +1722,14 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         cardToken = recognizer.recogniseCardToken(lineRequest, null);
         assertNotNull(cardToken);
         assertEquals(cardToken.getType(), TokenType.CARD_FROM_NOT_ALLOWED_SET);
-        assertEquals(cardToken.getNumber(), 2);
+        assertEquals(cardToken.getQuantity(), 2);
         assertNotNull(cardToken.getCard());
 
         lineRequest = "2x Lightning Dragon";
         cardToken = recognizer.recogniseCardToken(lineRequest, null);
         assertNotNull(cardToken);
         assertEquals(cardToken.getType(), TokenType.CARD_FROM_NOT_ALLOWED_SET);
-        assertEquals(cardToken.getNumber(), 2);
+        assertEquals(cardToken.getQuantity(), 2);
         assertNotNull(cardToken.getCard());
 
         // Now relaxing date constraint but removing USG from allowed sets
@@ -1692,7 +1740,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         cardToken = recognizer.recogniseCardToken(lineRequest, null);
         assertNotNull(cardToken);
         assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
-        assertEquals(cardToken.getNumber(), 2);
+        assertEquals(cardToken.getQuantity(), 2);
         assertNotNull(cardToken.getCard());
         tc = cardToken.getCard();
         assertEquals(tc.getName(), "Lightning Dragon");
@@ -1710,7 +1758,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertNotNull(cardToken);
         assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
         assertNotNull(cardToken.getCard());
-        assertEquals(cardToken.getNumber(), 1);
+        assertEquals(cardToken.getQuantity(), 1);
         PaperCard tc = cardToken.getCard();
         assertEquals(tc.getName(), "Flash");
         assertEquals(tc.getEdition(), "A25");
@@ -1732,7 +1780,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         cardToken = recognizer.recogniseCardToken(lineRequest, null);
         assertNotNull(cardToken);
         assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
-        assertEquals(cardToken.getNumber(), 2);
+        assertEquals(cardToken.getQuantity(), 2);
         assertNotNull(cardToken.getCard());
         tc = cardToken.getCard();
         assertEquals(tc.getName(), "Cancel");
@@ -1742,7 +1790,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         cardToken = recognizer.recogniseCardToken(lineRequest, null);
         assertNotNull(cardToken);
         assertEquals(cardToken.getType(), TokenType.CARD_FROM_INVALID_SET);
-        assertEquals(cardToken.getNumber(), 2);
+        assertEquals(cardToken.getQuantity(), 2);
         assertNotNull(cardToken.getCard());
         assertEquals(cardToken.getText(), "Cancel [M21] #46");
     }
@@ -1758,7 +1806,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertNotNull(cardToken);
         assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
         assertNotNull(cardToken.getCard());
-        assertEquals(cardToken.getNumber(), 1);
+        assertEquals(cardToken.getQuantity(), 1);
         PaperCard tc = cardToken.getCard();
         assertEquals(tc.getName(), "Flash");
         assertEquals(tc.getEdition(), "A25");
@@ -1779,7 +1827,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         cardToken = recognizer.recogniseCardToken(lineRequest, null);
         assertNotNull(cardToken);
         assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
-        assertEquals(cardToken.getNumber(), 2);
+        assertEquals(cardToken.getQuantity(), 2);
         assertNotNull(cardToken.getCard());
         tc = cardToken.getCard();
         assertEquals(tc.getName(), "Femeref Knight");
@@ -1789,7 +1837,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         cardToken = recognizer.recogniseCardToken(lineRequest, null);
         assertNotNull(cardToken);
         assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
-        assertEquals(cardToken.getNumber(), 2);
+        assertEquals(cardToken.getQuantity(), 2);
         assertNotNull(cardToken.getCard());
         tc = cardToken.getCard();
         assertEquals(tc.getName(), "Incinerate");
@@ -1799,7 +1847,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         cardToken = recognizer.recogniseCardToken(lineRequest, null);
         assertNotNull(cardToken);
         assertEquals(cardToken.getType(), TokenType.LIMITED_CARD);  // violating Deck format
-        assertEquals(cardToken.getNumber(), 1);
+        assertEquals(cardToken.getQuantity(), 1);
         assertNotNull(cardToken.getCard());
         assertEquals(cardToken.getText(), "Noble Elephant [MIR] #30");
         assertEquals(cardToken.getTokenSection(), DeckSection.Main);
@@ -1810,7 +1858,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         cardToken = recognizer.recogniseCardToken(lineRequest, null);
         assertNotNull(cardToken);
         assertEquals(cardToken.getType(), TokenType.CARD_FROM_NOT_ALLOWED_SET);  // violating Game format
-        assertEquals(cardToken.getNumber(), 1);
+        assertEquals(cardToken.getQuantity(), 1);
         assertNotNull(cardToken.getCard());
         assertEquals(cardToken.getText(), "Incinerate [ICE] #194");
     }
@@ -1826,7 +1874,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertNotNull(cardToken);
         assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
         assertNotNull(cardToken.getCard());
-        assertEquals(cardToken.getNumber(), 1);
+        assertEquals(cardToken.getQuantity(), 1);
         PaperCard tc = cardToken.getCard();
         assertEquals(tc.getName(), "Flash");
         assertEquals(tc.getEdition(), "A25");
@@ -1879,6 +1927,286 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getText(), "Buried Alive [WTH] #63");
     }
 
+    /*==================================
+     * TEST RECOGNISE CARD EXTRA FORMATS
+     * =================================*/
+
+    // === MTG Goldfish
+    @Test void testFoilRequestInMTGGoldfishExportFormat(){
+        String mtgGoldfishRequest = "18 Forest <254> [THB]";
+        Pattern target = DeckRecognizer.CARD_COLLNO_SET_PATTERN;
+        Matcher matcher = target.matcher(mtgGoldfishRequest);
+        assertTrue(matcher.matches());
+        assertEquals(matcher.group(DeckRecognizer.REGRP_CARDNO), "18");
+        assertEquals(matcher.group(DeckRecognizer.REGRP_CARD), "Forest");  // TRIM
+        assertEquals(matcher.group(DeckRecognizer.REGRP_SET), "THB");
+        assertEquals(matcher.group(DeckRecognizer.REGRP_COLLNR), "254");
+        assertNull(matcher.group(DeckRecognizer.REGRP_FOIL_GFISH));
+
+        mtgGoldfishRequest = "18 Forest <254> [THB] (F)";
+        matcher = target.matcher(mtgGoldfishRequest);
+        assertTrue(matcher.matches());
+        assertEquals(matcher.group(DeckRecognizer.REGRP_CARDNO), "18");
+        assertEquals(matcher.group(DeckRecognizer.REGRP_CARD), "Forest"); // TRIM
+        assertEquals(matcher.group(DeckRecognizer.REGRP_SET), "THB");
+        assertEquals(matcher.group(DeckRecognizer.REGRP_COLLNR), "254");
+        assertNotNull(matcher.group(DeckRecognizer.REGRP_FOIL_GFISH));
+
+        mtgGoldfishRequest = "18 Forest [THB]";
+        matcher = target.matcher(mtgGoldfishRequest);
+        assertFalse(matcher.matches());
+
+        mtgGoldfishRequest = "18 [THB] Forest";
+        matcher = target.matcher(mtgGoldfishRequest);
+        assertFalse(matcher.matches());
+
+        mtgGoldfishRequest = "18 Forest [THB] (F)";
+        matcher = target.matcher(mtgGoldfishRequest);
+        assertFalse(matcher.matches());
+
+        mtgGoldfishRequest = "18 [THB] Forest (F)";
+        matcher = target.matcher(mtgGoldfishRequest);
+        assertFalse(matcher.matches());
+
+        mtgGoldfishRequest = "18 Forest 254 [THB] (F)";
+        matcher = target.matcher(mtgGoldfishRequest);
+        assertFalse(matcher.matches());
+
+        mtgGoldfishRequest = "18 Forest 254 [THB]";
+        matcher = target.matcher(mtgGoldfishRequest);
+        assertFalse(matcher.matches());
+
+        mtgGoldfishRequest = "18 [THB] Forest 254";
+        matcher = target.matcher(mtgGoldfishRequest);
+        assertFalse(matcher.matches());
+    }
+
+    @Test void testCardRecognisedMTGGoldfishFormat(){
+        DeckRecognizer recognizer = new DeckRecognizer();
+        assertEquals(StaticData.instance().getCommonCards().getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
+
+        String lineRequest = "4 Aspect of Hydra [BNG] (F)";
+        Token cardToken = recognizer.recogniseCardToken(lineRequest, null);
+        assertNotNull(cardToken);
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
+        assertNotNull(cardToken.getCard());
+        PaperCard aspectOfHydraCard = cardToken.getCard();
+        assertEquals(cardToken.getQuantity(), 4);
+        assertEquals(aspectOfHydraCard.getName(), "Aspect of Hydra");
+        assertEquals(aspectOfHydraCard.getEdition(), "BNG");
+        assertTrue(aspectOfHydraCard.isFoil());
+
+        lineRequest = "18 Forest <254> [THB] (F)";
+        cardToken = recognizer.recogniseCardToken(lineRequest, null);
+        assertNotNull(cardToken);
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
+        assertNotNull(cardToken.getCard());
+        PaperCard forestCard = cardToken.getCard();
+        assertEquals(cardToken.getQuantity(), 18);
+        assertEquals(forestCard.getName(), "Forest");
+        assertEquals(forestCard.getEdition(), "THB");
+        assertTrue(forestCard.isFoil());
+    }
+
+    // === TappedOut Markdown Format
+    @Test void testPurgeLinksInLineRequests(){
+        String line = "* 1 [Ancestral Recall](http://tappedout.nethttp://tappedout.net/mtg-card/ancestral-recall/)";
+        String expected = "* 1 [Ancestral Recall]";
+        assertEquals(DeckRecognizer.purgeAllLinks(line), expected);
+
+        line = "1 [Ancestral Recall](http://tappedout.nethttp://tappedout.net/mtg-card/ancestral-recall/)";
+        expected = "1 [Ancestral Recall]";
+        assertEquals(DeckRecognizer.purgeAllLinks(line), expected);
+    }
+
+    @Test void testCardNameEntryInMarkDownExportFromTappedOut(){
+        DeckRecognizer recognizer = new DeckRecognizer();
+        assertEquals(StaticData.instance().getCommonCards().getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
+
+        String line = "* 1 [Ancestral Recall](http://tappedout.nethttp://tappedout.net/mtg-card/ancestral-recall/)";
+
+        Token token = recognizer.recognizeLine(line, null);
+        assertNotNull(token);
+        assertEquals(token.getType(), TokenType.LEGAL_CARD);
+        assertEquals(token.getQuantity(), 1);
+        assertNotNull(token.getCard());
+        PaperCard ancestralRecallCard = token.getCard();
+        assertEquals(ancestralRecallCard.getName(), "Ancestral Recall");
+        assertEquals(ancestralRecallCard.getEdition(), "VMA");
+    }
+
+    // === XMage Format
+    @Test void testMatchCardRequestXMageFormat(){
+        String xmageFormatRequest = "1 [LRW:51] Amoeboid Changeling";
+        Pattern target = DeckRecognizer.SET_COLLNO_CARD_XMAGE_PATTERN;
+        Matcher matcher = target.matcher(xmageFormatRequest);
+        assertTrue(matcher.matches());
+        assertEquals(matcher.group(DeckRecognizer.REGRP_CARDNO), "1");
+        assertEquals(matcher.group(DeckRecognizer.REGRP_CARD), "Amoeboid Changeling");  // TRIM
+        assertEquals(matcher.group(DeckRecognizer.REGRP_SET), "LRW");
+        assertEquals(matcher.group(DeckRecognizer.REGRP_COLLNR), "51");
+        assertNull(matcher.group(DeckRecognizer.REGRP_FOIL_GFISH));
+
+        // Test that this line matches only with this pattern
+
+        target = DeckRecognizer.CARD_SET_PATTERN;
+        matcher = target.matcher(xmageFormatRequest);
+        assertFalse(matcher.matches());
+
+        target = DeckRecognizer.SET_CARD_PATTERN;
+        matcher = target.matcher(xmageFormatRequest);
+        assertFalse(matcher.matches());
+
+        target = DeckRecognizer.CARD_SET_COLLNO_PATTERN;
+        matcher = target.matcher(xmageFormatRequest);
+        assertFalse(matcher.matches());
+
+        target = DeckRecognizer.SET_CARD_COLLNO_PATTERN;
+        matcher = target.matcher(xmageFormatRequest);
+        assertFalse(matcher.matches());
+
+        target = DeckRecognizer.CARD_COLLNO_SET_PATTERN;
+        matcher = target.matcher(xmageFormatRequest);
+        assertFalse(matcher.matches());
+
+        target = DeckRecognizer.CARD_ONLY_PATTERN;
+        matcher = target.matcher(xmageFormatRequest);
+        assertFalse(matcher.matches());
+    }
+
+    @Test void testRecognizeCardTokenInXMageFormatRequest(){
+        DeckRecognizer recognizer = new DeckRecognizer();
+
+        String xmageFormatRequest = "1 [LRW:51] Amoeboid Changeling";
+        Token xmageCardToken = recognizer.recogniseCardToken(xmageFormatRequest, null);
+        assertNotNull(xmageCardToken);
+        assertEquals(xmageCardToken.getType(), TokenType.LEGAL_CARD);
+        assertEquals(xmageCardToken.getQuantity(), 1);
+        assertNotNull(xmageCardToken.getCard());
+        PaperCard acCard = xmageCardToken.getCard();
+        assertEquals(acCard.getName(), "Amoeboid Changeling");
+        assertEquals(acCard.getEdition(), "LRW");
+        assertEquals(acCard.getCollectorNumber(), "51");
+    }
+
+    /*=================================
+     * TEST CARD TOKEN SECTION MATCHING
+     * ================================ */
+    @Test void testCardTokenIsAssignedToCorrectDeckSection(){
+        DeckRecognizer recognizer = new DeckRecognizer();
+
+        String cardRequest = "2x Counterspell |TMP";
+        Token cardToken = recognizer.recogniseCardToken(cardRequest, null);
+        assertNotNull(cardToken);
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
+        assertNotNull(cardToken.getCard());
+        assertEquals(cardToken.getCard().getName(), "Counterspell");
+        assertEquals(cardToken.getCard().getEdition(), "TMP");
+        assertEquals(cardToken.getQuantity(), 2);
+        assertEquals(cardToken.getTokenSection(), DeckSection.Main);
+
+        cardToken = recognizer.recogniseCardToken(cardRequest, DeckSection.Main);
+        assertNotNull(cardToken);
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
+        assertNotNull(cardToken.getCard());
+        assertEquals(cardToken.getQuantity(), 2);
+        assertEquals(cardToken.getTokenSection(), DeckSection.Main);
+
+        cardToken = recognizer.recogniseCardToken(cardRequest, DeckSection.Sideboard);
+        assertNotNull(cardToken);
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
+        assertNotNull(cardToken.getCard());
+        assertEquals(cardToken.getQuantity(), 2);
+        assertEquals(cardToken.getTokenSection(), DeckSection.Sideboard);
+
+        // Setting Deck Section in Card Request now
+        cardRequest = "SB: 2x Counterspell|TMP";
+        cardToken = recognizer.recogniseCardToken(cardRequest, null);
+        assertNotNull(cardToken);
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
+        assertNotNull(cardToken.getCard());
+        assertEquals(cardToken.getCard().getName(), "Counterspell");
+        assertEquals(cardToken.getCard().getEdition(), "TMP");
+        assertEquals(cardToken.getQuantity(), 2);
+        assertEquals(cardToken.getTokenSection(), DeckSection.Sideboard);
+
+        cardToken = recognizer.recogniseCardToken(cardRequest, DeckSection.Main);
+        assertNotNull(cardToken);
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
+        assertNotNull(cardToken.getCard());
+        assertEquals(cardToken.getQuantity(), 2);
+        assertEquals(cardToken.getTokenSection(), DeckSection.Sideboard);
+    }
+
+    @Test void testCardSectionIsAdaptedToCardRegardlessOfCurrentSection(){
+        DeckRecognizer recognizer = new DeckRecognizer();
+
+        String cardRequest = "2x All in good time";  // Scheme Card
+        Token cardToken = recognizer.recogniseCardToken(cardRequest, null);
+        assertNotNull(cardToken);
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
+        assertNotNull(cardToken.getCard());
+        assertEquals(cardToken.getCard().getName(), "All in Good Time");
+        assertEquals(cardToken.getQuantity(), 2);
+        assertEquals(cardToken.getTokenSection(), DeckSection.Schemes);
+
+        cardToken = recognizer.recogniseCardToken(cardRequest, DeckSection.Main);
+        assertNotNull(cardToken);
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
+        assertNotNull(cardToken.getCard());
+        assertEquals(cardToken.getCard().getName(), "All in Good Time");
+        assertEquals(cardToken.getQuantity(), 2);
+        assertEquals(cardToken.getTokenSection(), DeckSection.Schemes);
+    }
+
+    @Test void testCardSectionIsAdpatedToCardRegardlessOfSectionInCardRequest(){
+        DeckRecognizer recognizer = new DeckRecognizer();
+
+        String cardRequest = "CM: 4x Incinerate";  // Incinerate in Commander Section
+        Token cardToken = recognizer.recogniseCardToken(cardRequest, null);
+        assertNotNull(cardToken);
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
+        assertNotNull(cardToken.getCard());
+        assertEquals(cardToken.getCard().getName(), "Incinerate");
+        assertEquals(cardToken.getQuantity(), 4);
+        assertEquals(cardToken.getTokenSection(), DeckSection.Main);
+
+        // Current Deck Section is Sideboard, so Side should be used as replacing Deck Section
+        cardToken = recognizer.recogniseCardToken(cardRequest, DeckSection.Sideboard);
+        assertNotNull(cardToken);
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
+        assertNotNull(cardToken.getCard());
+        assertEquals(cardToken.getCard().getName(), "Incinerate");
+        assertEquals(cardToken.getQuantity(), 4);
+        assertEquals(cardToken.getTokenSection(), DeckSection.Sideboard);
+    }
+
+    @Test void testDeckSectionTokenValidationAlsoAppliesToNonLegalCards(){
+        DeckRecognizer recognizer = new DeckRecognizer();
+        recognizer.setGameFormatConstraint(null, Collections.singletonList("Incinerate"), null);
+
+        String cardRequest = "CM: 4x Incinerate";  // Incinerate in Commander Section
+        Token cardToken = recognizer.recogniseCardToken(cardRequest, null);
+        assertNotNull(cardToken);
+        assertEquals(cardToken.getType(), TokenType.LIMITED_CARD);
+        assertNotNull(cardToken.getLimitedCardType());
+        assertEquals(cardToken.getLimitedCardType(), DeckRecognizer.LimitedCardType.BANNED);
+        assertNotNull(cardToken.getCard());
+        assertEquals(cardToken.getCard().getName(), "Incinerate");
+        assertEquals(cardToken.getQuantity(), 4);
+        assertEquals(cardToken.getTokenSection(), DeckSection.Main);
+
+        // Current Deck Section is Sideboard, so Side should be used as replacing Deck Section
+        cardToken = recognizer.recogniseCardToken(cardRequest, DeckSection.Sideboard);
+        assertNotNull(cardToken);
+        assertEquals(cardToken.getType(), TokenType.LIMITED_CARD);
+        assertNotNull(cardToken.getLimitedCardType());
+        assertEquals(cardToken.getLimitedCardType(), DeckRecognizer.LimitedCardType.BANNED);
+        assertNotNull(cardToken.getCard());
+        assertEquals(cardToken.getCard().getName(), "Incinerate");
+        assertEquals(cardToken.getQuantity(), 4);
+        assertEquals(cardToken.getTokenSection(), DeckSection.Sideboard);
+    }
 
     /*===============
      * TEST TOKEN-KEY
@@ -1892,7 +2220,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getTokenSection(), DeckSection.Main);
         assertNotNull(cardToken.getCard());
         assertEquals(cardToken.getCard().getName(), "Viashino Sandstalker");
-        assertEquals(cardToken.getNumber(), 1);
+        assertEquals(cardToken.getQuantity(), 1);
         assertEquals(cardToken.getCard().getEdition(), "MB1");
 
         // Token Key
@@ -1927,7 +2255,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getLimitedCardType(), DeckRecognizer.LimitedCardType.RESTRICTED);
         assertNotNull(cardToken.getCard());
         assertEquals(cardToken.getCard().getName(), "Viashino Sandstalker");
-        assertEquals(cardToken.getNumber(), 2);
+        assertEquals(cardToken.getQuantity(), 2);
         assertEquals(cardToken.getCard().getEdition(), "VIS");
 
         // Token Key
@@ -1952,7 +2280,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getLimitedCardType(), DeckRecognizer.LimitedCardType.BANNED);
         assertNotNull(cardToken.getCard());
         assertEquals(cardToken.getCard().getName(), "Squandered Resources");
-        assertEquals(cardToken.getNumber(), 1);
+        assertEquals(cardToken.getQuantity(), 1);
         assertEquals(cardToken.getCard().getEdition(), "VIS");
 
         // Token Key
@@ -2034,7 +2362,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         line = "2x Counterspell FEM";
         lineToken = recognizer.recognizeLine(line, null);
         assertNotNull(lineToken);
-        assertEquals(lineToken.getType(), TokenType.UNKNOWN_CARD_REQUEST);
+        assertEquals(lineToken.getType(), TokenType.UNKNOWN_CARD);
         assertFalse(lineToken.isCardToken());
         assertFalse(lineToken.isTokenForDeck());
         assertNull(lineToken.getCard());
@@ -2091,7 +2419,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(cardToken.getTokenSection(), DeckSection.Main);
         assertNotNull(cardToken.getCard());
         assertEquals(cardToken.getCard().getName(), "Viashino Sandstalker");
-        assertEquals(cardToken.getNumber(), 1);
+        assertEquals(cardToken.getQuantity(), 1);
         assertEquals(cardToken.getCard().getEdition(), "MB1");
 
         // Token Key
@@ -2117,173 +2445,11 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(newTokenKey.limitedType, tokenKey.limitedType);
     }
 
-    /*==================================
-     * TEST RECOGNISE CARD EXTRA FORMATS
-     * =================================
-     */
-
-    // === MTG Goldfish
-    @Test void testFoilRequestInMTGGoldfishExportFormat(){
-        String mtgGoldfishRequest = "18 Forest <254> [THB]";
-        Pattern target = DeckRecognizer.CARD_COLLNO_SET_PATTERN;
-        Matcher matcher = target.matcher(mtgGoldfishRequest);
-        assertTrue(matcher.matches());
-        assertEquals(matcher.group(DeckRecognizer.REGRP_CARDNO), "18");
-        assertEquals(matcher.group(DeckRecognizer.REGRP_CARD), "Forest");  // TRIM
-        assertEquals(matcher.group(DeckRecognizer.REGRP_SET), "THB");
-        assertEquals(matcher.group(DeckRecognizer.REGRP_COLLNR), "254");
-        assertNull(matcher.group(DeckRecognizer.REGRP_FOIL_GFISH));
-
-        mtgGoldfishRequest = "18 Forest <254> [THB] (F)";
-        matcher = target.matcher(mtgGoldfishRequest);
-        assertTrue(matcher.matches());
-        assertEquals(matcher.group(DeckRecognizer.REGRP_CARDNO), "18");
-        assertEquals(matcher.group(DeckRecognizer.REGRP_CARD), "Forest"); // TRIM
-        assertEquals(matcher.group(DeckRecognizer.REGRP_SET), "THB");
-        assertEquals(matcher.group(DeckRecognizer.REGRP_COLLNR), "254");
-        assertNotNull(matcher.group(DeckRecognizer.REGRP_FOIL_GFISH));
-
-        mtgGoldfishRequest = "18 Forest [THB]";
-        matcher = target.matcher(mtgGoldfishRequest);
-        assertFalse(matcher.matches());
-
-        mtgGoldfishRequest = "18 [THB] Forest";
-        matcher = target.matcher(mtgGoldfishRequest);
-        assertFalse(matcher.matches());
-
-        mtgGoldfishRequest = "18 Forest [THB] (F)";
-        matcher = target.matcher(mtgGoldfishRequest);
-        assertFalse(matcher.matches());
-
-        mtgGoldfishRequest = "18 [THB] Forest (F)";
-        matcher = target.matcher(mtgGoldfishRequest);
-        assertFalse(matcher.matches());
-
-        mtgGoldfishRequest = "18 Forest 254 [THB] (F)";
-        matcher = target.matcher(mtgGoldfishRequest);
-        assertFalse(matcher.matches());
-
-        mtgGoldfishRequest = "18 Forest 254 [THB]";
-        matcher = target.matcher(mtgGoldfishRequest);
-        assertFalse(matcher.matches());
-
-        mtgGoldfishRequest = "18 [THB] Forest 254";
-        matcher = target.matcher(mtgGoldfishRequest);
-        assertFalse(matcher.matches());
-    }
-
-    @Test void testCardRecognisedMTGGoldfishFormat(){
-        DeckRecognizer recognizer = new DeckRecognizer();
-        assertEquals(StaticData.instance().getCommonCards().getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
-
-        String lineRequest = "4 Aspect of Hydra [BNG] (F)";
-        Token cardToken = recognizer.recogniseCardToken(lineRequest, null);
-        assertNotNull(cardToken);
-        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
-        assertNotNull(cardToken.getCard());
-        PaperCard aspectOfHydraCard = cardToken.getCard();
-        assertEquals(cardToken.getNumber(), 4);
-        assertEquals(aspectOfHydraCard.getName(), "Aspect of Hydra");
-        assertEquals(aspectOfHydraCard.getEdition(), "BNG");
-        assertTrue(aspectOfHydraCard.isFoil());
-
-        lineRequest = "18 Forest <254> [THB] (F)";
-        cardToken = recognizer.recogniseCardToken(lineRequest, null);
-        assertNotNull(cardToken);
-        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
-        assertNotNull(cardToken.getCard());
-        PaperCard forestCard = cardToken.getCard();
-        assertEquals(cardToken.getNumber(), 18);
-        assertEquals(forestCard.getName(), "Forest");
-        assertEquals(forestCard.getEdition(), "THB");
-        assertTrue(forestCard.isFoil());
-    }
-
-    // === TappedOut Markdown Format
-    @Test void testPurgeLinksInLineRequests(){
-        String line = "* 1 [Ancestral Recall](http://tappedout.nethttp://tappedout.net/mtg-card/ancestral-recall/)";
-        String expected = "* 1 [Ancestral Recall]";
-        assertEquals(DeckRecognizer.purgeAllLinks(line), expected);
-
-        line = "1 [Ancestral Recall](http://tappedout.nethttp://tappedout.net/mtg-card/ancestral-recall/)";
-        expected = "1 [Ancestral Recall]";
-        assertEquals(DeckRecognizer.purgeAllLinks(line), expected);
-    }
-
-    @Test void testCardNameEntryInMarkDownExportFromTappedOut(){
-        DeckRecognizer recognizer = new DeckRecognizer();
-        assertEquals(StaticData.instance().getCommonCards().getCardArtPreference(), CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
-
-        String line = "* 1 [Ancestral Recall](http://tappedout.nethttp://tappedout.net/mtg-card/ancestral-recall/)";
-
-        Token token = recognizer.recognizeLine(line, null);
-        assertNotNull(token);
-        assertEquals(token.getType(), TokenType.LEGAL_CARD);
-        assertEquals(token.getNumber(), 1);
-        assertNotNull(token.getCard());
-        PaperCard ancestralRecallCard = token.getCard();
-        assertEquals(ancestralRecallCard.getName(), "Ancestral Recall");
-        assertEquals(ancestralRecallCard.getEdition(), "VMA");
-    }
-
-    // === XMage Format
-    @Test void testMatchCardRequestXMageFormat(){
-        String xmageFormatRequest = "1 [LRW:51] Amoeboid Changeling";
-        Pattern target = DeckRecognizer.SET_COLLNO_CARD_XMAGE_PATTERN;
-        Matcher matcher = target.matcher(xmageFormatRequest);
-        assertTrue(matcher.matches());
-        assertEquals(matcher.group(DeckRecognizer.REGRP_CARDNO), "1");
-        assertEquals(matcher.group(DeckRecognizer.REGRP_CARD), "Amoeboid Changeling");  // TRIM
-        assertEquals(matcher.group(DeckRecognizer.REGRP_SET), "LRW");
-        assertEquals(matcher.group(DeckRecognizer.REGRP_COLLNR), "51");
-        assertNull(matcher.group(DeckRecognizer.REGRP_FOIL_GFISH));
-
-        // Test that this line matches only with this pattern
-
-        target = DeckRecognizer.CARD_SET_PATTERN;
-        matcher = target.matcher(xmageFormatRequest);
-        assertFalse(matcher.matches());
-
-        target = DeckRecognizer.SET_CARD_PATTERN;
-        matcher = target.matcher(xmageFormatRequest);
-        assertFalse(matcher.matches());
-
-        target = DeckRecognizer.CARD_SET_COLLNO_PATTERN;
-        matcher = target.matcher(xmageFormatRequest);
-        assertFalse(matcher.matches());
-
-        target = DeckRecognizer.SET_CARD_COLLNO_PATTERN;
-        matcher = target.matcher(xmageFormatRequest);
-        assertFalse(matcher.matches());
-
-        target = DeckRecognizer.CARD_COLLNO_SET_PATTERN;
-        matcher = target.matcher(xmageFormatRequest);
-        assertFalse(matcher.matches());
-
-        target = DeckRecognizer.CARD_ONLY_PATTERN;
-        matcher = target.matcher(xmageFormatRequest);
-        assertFalse(matcher.matches());
-    }
-
-    @Test void testRecognizeCardTokenInXMageFormatRequest(){
-        DeckRecognizer recognizer = new DeckRecognizer();
-
-        String xmageFormatRequest = "1 [LRW:51] Amoeboid Changeling";
-        Token xmageCardToken = recognizer.recogniseCardToken(xmageFormatRequest, null);
-        assertNotNull(xmageCardToken);
-        assertEquals(xmageCardToken.getType(), TokenType.LEGAL_CARD);
-        assertEquals(xmageCardToken.getNumber(), 1);
-        assertNotNull(xmageCardToken.getCard());
-        PaperCard acCard = xmageCardToken.getCard();
-        assertEquals(acCard.getName(), "Amoeboid Changeling");
-        assertEquals(acCard.getEdition(), "LRW");
-        assertEquals(acCard.getCollectorNumber(), "51");
-    }
-
     /*====================================
-     * TEST RECOGNISE LINES (MIXED inputs)
-     * ===================================
-     */
+     * TEST PARSE INPUT
+     * ==================================*/
+
+    // === MIXED inputs ===
     @Test void testRecognizeLines(){
         DeckRecognizer recognizer = new DeckRecognizer();
 
@@ -2362,7 +2528,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(token.getType(), TokenType.LEGAL_CARD);
         assertNotNull(token.getText());
         assertNotNull(token.getCard());
-        assertEquals(token.getNumber(), 4);
+        assertEquals(token.getQuantity(), 4);
 
         lineRequest = "### Instant (14)";
         token = recognizer.recognizeLine(lineRequest, null);

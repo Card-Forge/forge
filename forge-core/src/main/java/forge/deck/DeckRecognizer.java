@@ -22,8 +22,10 @@ import forge.StaticData;
 import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardType;
+import forge.card.MagicColor;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
+import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
@@ -41,14 +43,21 @@ public class DeckRecognizer {
      * The Enum TokenType.
      */
     public enum TokenType {
+        // Card Token Types
         LEGAL_CARD,
         LIMITED_CARD,
         CARD_FROM_NOT_ALLOWED_SET,
         CARD_FROM_INVALID_SET,
-        UNKNOWN_CARD_REQUEST,
+        // Warning messages
+        WARNING_MESSAGE,
+        UNKNOWN_CARD,
+        UNSUPPORTED_CARD,
+        UNSUPPORTED_DECK_SECTION,
+        // No Token
         UNKNOWN_TEXT,
-        DECK_NAME,
         COMMENT,
+        // Placeholders
+        DECK_NAME,
         DECK_SECTION_NAME,
         CARD_TYPE,
         CARD_RARITY,
@@ -65,9 +74,9 @@ public class DeckRecognizer {
      * The Class Token.
      */
     public static class Token {
-        private TokenType type;
-        private int number;
-        private String text;
+        private final TokenType type;
+        private final int number;
+        private final String text;
         // only used for illegal card tokens
         private LimitedCardType limitedCardType = null;
         // only used for card tokens
@@ -88,34 +97,60 @@ public class DeckRecognizer {
             return new Token(TokenType.CARD_FROM_NOT_ALLOWED_SET, count, card);
         }
 
-        public static Token InvalidCard(final PaperCard card, final int count) {
+        public static Token CardInInvalidSet(final PaperCard card, final int count) {
             return new Token(TokenType.CARD_FROM_INVALID_SET, count, card);
         }
 
+        // WARNING MESSAGES
+        // ================
         public static Token UnknownCard(final String cardName, final String setCode, final int count) {
             String ttext = setCode == null || setCode.equals("") ? cardName :
-                    String.format("%s (%s)", cardName, setCode);
-            return new Token(TokenType.UNKNOWN_CARD_REQUEST, count, ttext);
+                    String.format("%s [%s]", cardName, setCode);
+            return new Token(TokenType.UNKNOWN_CARD, count, ttext);
         }
 
-        public static Token DeckSection(final String sectionName0){
+        public static Token UnsupportedCard(final String cardName, final String setCode, final int count) {
+            String ttext = setCode == null || setCode.equals("") ? cardName :
+                    String.format("%s [%s]", cardName, setCode);
+            return new Token(TokenType.UNSUPPORTED_CARD, count, ttext);
+        }
+
+        public static Token WarningMessage(String msg) {
+           return new Token(TokenType.WARNING_MESSAGE, msg);
+        }
+
+        /* =================================
+         * DECK SECTIONS
+         * ================================= */
+        private static Token UnsupportedDeckSection(final String sectionName){
+            return new Token(TokenType.UNSUPPORTED_DECK_SECTION, sectionName);
+        }
+
+        public static Token DeckSection(final String sectionName0, List<DeckSection> allowedDeckSections){
             String sectionName = sectionName0.toLowerCase().trim();
+            DeckSection matchedSection = null;
             if (sectionName.equals("side") || sectionName.contains("sideboard") || sectionName.equals("sb"))
-                return new Token(TokenType.DECK_SECTION_NAME, DeckSection.Sideboard.name());
-            if (sectionName.equals("main") || sectionName.contains("card")
+                matchedSection = DeckSection.Sideboard;
+            else if (sectionName.equals("main") || sectionName.contains("card")
                     || sectionName.equals("mainboard") || sectionName.equals("deck"))
-                return new Token(TokenType.DECK_SECTION_NAME, DeckSection.Main.name());
-            if (sectionName.equals("avatar"))
-                return new Token(TokenType.DECK_SECTION_NAME, DeckSection.Avatar.name());
-            if (sectionName.equals("commander"))
-                return new Token(TokenType.DECK_SECTION_NAME, DeckSection.Commander.name());
-            if (sectionName.equals("schemes"))
-                return new Token(TokenType.DECK_SECTION_NAME, DeckSection.Schemes.name());
-            if (sectionName.equals("conspiracy"))
-                return new Token(TokenType.DECK_SECTION_NAME, DeckSection.Conspiracy.name());
-            if (sectionName.equals("planes"))
-                return new Token(TokenType.DECK_SECTION_NAME, DeckSection.Planes.name());
-            return null;
+                matchedSection = DeckSection.Main;
+            else if (sectionName.equals("avatar"))
+                matchedSection = DeckSection.Avatar;
+            else if (sectionName.equals("commander"))
+                matchedSection = DeckSection.Commander;
+            else if (sectionName.equals("schemes"))
+                matchedSection = DeckSection.Schemes;
+            else if (sectionName.equals("conspiracy"))
+                matchedSection = DeckSection.Conspiracy;
+            else if (sectionName.equals("planes"))
+                matchedSection = DeckSection.Planes;
+
+            if (matchedSection == null)  // no match found
+                return null;
+
+            if (allowedDeckSections != null && !allowedDeckSections.contains(matchedSection))
+                return Token.UnsupportedDeckSection(sectionName0);
+            return new Token(TokenType.DECK_SECTION_NAME, matchedSection.name());
         }
 
         private Token(final TokenType type1, final int count, final PaperCard tokenCard) {
@@ -164,17 +199,21 @@ public class DeckRecognizer {
             return this.type;
         }
 
-        public final int getNumber() {
+        public final int getQuantity() {
             return this.number;
         }
 
         public final DeckSection getTokenSection() { return this.tokenSection; }
 
+        public void resetTokenSection(DeckSection referenceDeckSection) {
+            this.tokenSection = referenceDeckSection != null ? referenceDeckSection : DeckSection.Main;
+        }
+
         public final LimitedCardType getLimitedCardType() { return this.limitedCardType; }
 
         /**
-         * Filters all tokens having a PaperCard (not null)
-         * @return true for tokens of tyoe:
+         * Filters all tokens types that have a PaperCard instance set (not null)
+         * @return true for tokens of type:
          * LEGAL_CARD, LIMITED_CARD, CARD_FROM_NOT_ALLOWED_SET and CARD_FROM_INVALID_SET.
          * False otherwise.
          */
@@ -186,15 +225,33 @@ public class DeckRecognizer {
         }
 
         /**
-         * Filters all tokens that will be actually used by the Deck Importer.
+         * Filters all tokens that will be potentially considered during Deck Import.
          * @return true if the type of the token is one of:
-         * LEGAL_CARD, LIMITED, LIMITED_CARD, DECK_NAME; false otherwise.
+         * LEGAL_CARD, LIMITED_CARD, DECK_NAME; false otherwise.
          */
         public boolean isTokenForDeck() {
             return (this.type == TokenType.LEGAL_CARD ||
                     this.type == TokenType.LIMITED_CARD ||
                     this.type == TokenType.DECK_NAME);
         }
+
+        /**
+         * Determines whether current token is a placeholder token for card categories,
+         * only used for Decklist formatting.
+         * @return true if the type of the token is one of:
+         * CARD_RARITY, CARD_CMC, CARD_TYPE, MANA_COLOUR
+         */
+        public boolean isCardPlaceholder(){
+            return (this.type == TokenType.CARD_RARITY ||
+                    this.type == TokenType.CARD_CMC ||
+                    this.type == TokenType.MANA_COLOUR ||
+                    this.type == TokenType.CARD_TYPE);
+        }
+
+        /** Determins if current token is a Deck Section token
+         * @return true if the type of token is DECK_SECTION_NAMES
+         */
+        public boolean isDeckSection(){ return this.type == TokenType.DECK_SECTION_NAME; }
 
         /**
          * Generates the key for the current token, which is a hyphenated string including
@@ -308,11 +365,13 @@ public class DeckRecognizer {
     public static final String REX_NOCARD = String.format("^(?<pre>[^a-zA-Z]*)\\s*(?<title>(\\w+[:]\\s*))?(?<%s>[a-zA-Z]+)(?<post>[^a-zA-Z]*)?$", REGRP_TOKEN);
     public static final String REX_CMC = String.format("^(?<pre>[^a-zA-Z]*)\\s*(?<%s>(C(M)?C(\\s)?\\d{1,2}))(?<post>[^\\d]*)?$", REGRP_TOKEN);
     public static final String REX_RARITY = String.format("^(?<pre>[^a-zA-Z]*)\\s*(?<%s>((un)?common|(mythic)?\\s*(rare)?|land))(?<post>[^a-zA-Z]*)?$", REGRP_TOKEN);
-    public static final String REX_COLOUR = String.format("^(?<pre>[^a-zA-Z]*)\\s*(?<%s>(white|blue|black|red|green|colo(u)?rless|multicolo(u)?r))(?<post>[^a-zA-Z]*)?$", REGRP_TOKEN);
+    public static final String REX_MANA = String.format("^(?<pre>[^a-zA-Z]*)\\s*(?<%s>(white|blue|black|red|green|colo(u)?rless|multicolo(u)?r))(?<post>[^a-zA-Z]*)?$", REGRP_TOKEN);
+    public static final String REX_MANA_SYMBOLS = String.format("^(?<pre>[^a-zA-Z]*)\\s*\\{(?<%s>(w|u|b|r|g|c|m))\\}(?<post>[^a-zA-Z]*)?$", REGRP_TOKEN);
     public static final Pattern NONCARD_PATTERN = Pattern.compile(REX_NOCARD, Pattern.CASE_INSENSITIVE);
     public static final Pattern CMC_PATTERN = Pattern.compile(REX_CMC, Pattern.CASE_INSENSITIVE);
     public static final Pattern CARD_RARITY_PATTERN = Pattern.compile(REX_RARITY, Pattern.CASE_INSENSITIVE);
-    public static final Pattern MANA_PATTERN = Pattern.compile(REX_COLOUR, Pattern.CASE_INSENSITIVE);
+    public static final Pattern MANA_PATTERN = Pattern.compile(REX_MANA, Pattern.CASE_INSENSITIVE);
+    public static final Pattern MANA_SYMBOL_PATTERN = Pattern.compile(REX_MANA_SYMBOLS, Pattern.CASE_INSENSITIVE);
 
     public static final String REGRP_SET = "setcode";
     public static final String REGRP_COLLNR = "collnr";
@@ -334,7 +393,7 @@ public class DeckRecognizer {
 
     // 1. Card-Set Request (Amount?, CardName, Set)
     public static final String REX_CARD_SET_REQUEST = String.format(
-            "(%s\\s*:\\s*)?(%s\\s)?\\s*%s\\s*(\\s|\\||\\(|\\[|\\{)%s(\\s|\\)|\\]|\\})?\\s*%s",
+            "(%s\\s*:\\s*)?(%s\\s)?\\s*%s\\s*(\\s|\\||\\(|\\[|\\{)\\s?%s(\\s|\\)|\\]|\\})?\\s*%s",
             REX_DECKSEC_XMAGE, REX_CARD_COUNT, REX_CARD_NAME, REX_SET_CODE, REX_FOIL_MTGGOLDFISH);
     public static final Pattern CARD_SET_PATTERN = Pattern.compile(REX_CARD_SET_REQUEST);
     // 2. Set-Card Request (Amount?, Set, CardName)
@@ -393,13 +452,75 @@ public class DeckRecognizer {
         return cardTypesList.toArray(new CharSequence[0]);
     }
 
-    private Date releaseDateConstraint = null;
     // These parameters are controlled only via setter methods
+    private Date releaseDateConstraint = null;
     private List<String> allowedSetCodes = null;
     private List<String> gameFormatBannedCards = null;
     private List<String> gameFormatRestrictedCards = null;
+    private List<DeckSection> allowedDeckSections = null;
+    private boolean includeBannedAndRestricted = false;
     private DeckFormat deckFormat = null;
     private CardDb.CardArtPreference artPreference = StaticData.instance().getCardArtPreference();  // init as default
+
+    public List<Token> parseCardList(String[] cardList) {
+        List<Token> tokens = new ArrayList<>();
+        DeckSection referenceDeckSectionInParsing = null;  // default
+        
+        for (String line : cardList) {
+            Token token = this.recognizeLine(line, referenceDeckSectionInParsing);
+            if (token == null)
+                continue;
+
+            TokenType tokenType = token.getType();
+            if (!token.isTokenForDeck() && (tokenType != TokenType.DECK_SECTION_NAME) ||
+                    (tokenType == TokenType.LIMITED_CARD && !this.includeBannedAndRestricted)) {
+                // Just bluntly add the token to the list and proceed.
+                tokens.add(token);
+                continue;
+            }
+
+            if (token.getType() == TokenType.DECK_NAME) {
+                tokens.add(0, token);  // always add deck name top of the decklist
+                continue;
+            }
+
+            if (token.getType() == TokenType.DECK_SECTION_NAME) {
+                referenceDeckSectionInParsing = DeckSection.valueOf(token.getText());
+                tokens.add(token);
+                continue;
+            }
+
+            // OK so now the token is either a Legal card or a limited card that has been marked for inclusion
+            DeckSection tokenSection = token.getTokenSection();
+            PaperCard tokenCard = token.getCard();
+
+            if (isAllowed(tokenSection)) {
+                if (!tokenSection.equals(referenceDeckSectionInParsing)) {
+                    Token sectionToken = Token.DeckSection(tokenSection.name(), this.allowedDeckSections);
+                    // just check that last token is stack is a card placeholder.
+                    // In that case, add the new section token before the placeholder
+                    if (!tokens.isEmpty() && tokens.get(tokens.size() - 1).isCardPlaceholder())
+                        tokens.add(tokens.size() - 1, sectionToken);
+                    else
+                        tokens.add(sectionToken);
+                    referenceDeckSectionInParsing = tokenSection;
+                }
+                tokens.add(token);
+                continue;
+            }
+            // So Section and Token have now been already validated in recogniseLine
+            // Therefore, if the Token Section is not allowed in current Editor/Game Format,
+            // the card would not be supported either.
+            Token unsupportedCard = Token.UnsupportedCard(tokenCard.getName(), tokenCard.getEdition(),
+                    token.getQuantity());
+            tokens.add(unsupportedCard);
+        }
+        return tokens;
+    }
+
+    private boolean isAllowed(DeckSection tokenSection) {
+        return this.allowedDeckSections == null || this.allowedDeckSections.contains(tokenSection);
+    }
 
     public Token recognizeLine(final String rawLine, DeckSection referenceSection) {
         if (rawLine == null)
@@ -443,7 +564,7 @@ public class DeckRecognizer {
         return line;
     }
 
-    public Token recogniseCardToken(final String text, final DeckSection referenceSection) {
+    public Token recogniseCardToken(final String text, final DeckSection currentDeckSection) {
         String line = text.trim();
         Token uknonwnCardToken = null;
         StaticData data = StaticData.instance();
@@ -460,7 +581,7 @@ public class DeckRecognizer {
             String setCode = getRexGroup(matcher, REGRP_SET);
             String collNo = getRexGroup(matcher, REGRP_COLLNR);
             String foilGr = getRexGroup(matcher, REGRP_FOIL_GFISH);
-            String deckSec = getRexGroup(matcher, REGRP_DECK_SEC_XMAGE_STYLE);
+            String deckSecFromCardLine = getRexGroup(matcher, REGRP_DECK_SEC_XMAGE_STYLE);
             boolean isFoil = foilGr != null;
             int cardCount = ccount != null ? Integer.parseInt(ccount) : 1;
             // if any, it will be tried to convert specific collector number to art index (useful for lands).
@@ -471,7 +592,6 @@ public class DeckRecognizer {
             } catch (NumberFormatException ex) {
                 artIndex = IPaperCard.NO_ART_INDEX;
             }
-            DeckSection tokenSection = getTokenSection(deckSec, referenceSection);
             if (setCode != null) {
                 // Ok Now we're sure the cardName is correct. Now check for setCode
                 CardEdition edition = StaticData.instance().getEditions().get(setCode);
@@ -487,7 +607,7 @@ public class DeckRecognizer {
                 PaperCard pc = data.getCardFromSet(cardName, edition, collectorNumber, artIndex, isFoil);
                 if (pc != null)
                     // ok so the card has been found - let's see if there's any restriction on the set
-                    return checkAndSetCardToken(pc, edition, cardCount, tokenSection);
+                    return checkAndSetCardToken(pc, edition, cardCount, deckSecFromCardLine, currentDeckSection);
                 // UNKNOWN card as in the Counterspell|FEM case
                 return Token.UnknownCard(cardName, setCode, cardCount);
             }
@@ -506,44 +626,57 @@ public class DeckRecognizer {
 
             if (pc != null) {
                 CardEdition edition = StaticData.instance().getCardEdition(pc.getEdition());
-                return checkAndSetCardToken(pc, edition, cardCount, tokenSection);
+                return checkAndSetCardToken(pc, edition, cardCount, deckSecFromCardLine, currentDeckSection);
             }
         }
         return uknonwnCardToken;  // either null or unknown card
     }
 
-    private Token checkAndSetCardToken(PaperCard pc, CardEdition edition, int cardCount, DeckSection tokenSection) {
+    private Token checkAndSetCardToken(PaperCard pc, CardEdition edition, int cardCount,
+                                       String deckSecFromCardLine, DeckSection referenceSection) {
         // Note: Always Check Allowed Set First to avoid accidentally importing invalid cards
         // e.g. Banned Cards from not-allowed sets!
         if (IsIllegalInFormat(edition.getCode()))
             // Mark as illegal card
             return Token.NotAllowedCard(pc, cardCount);
 
+        if (isNotCompliantWithReleaseDateRestrictions(edition))
+            return Token.CardInInvalidSet(pc, cardCount);
+
+        DeckSection tokenSection = getTokenSection(deckSecFromCardLine, referenceSection, pc);
         if (isBannedInFormat(pc))
             return Token.LimitedCard(pc, cardCount, tokenSection, LimitedCardType.BANNED);
 
         if (isRestrictedInFormat(pc, cardCount))
             return Token.LimitedCard(pc, cardCount, tokenSection, LimitedCardType.RESTRICTED);
 
-        if (isNotCompliantWithReleaseDateRestrictions(edition))
-            return Token.InvalidCard(pc, cardCount);
-
         return Token.LegalCard(pc, cardCount, tokenSection);
     }
 
-    private DeckSection getTokenSection(String deckSec, DeckSection currentDeckSection){
-        if (deckSec == null)
-            return currentDeckSection == null ? DeckSection.Main : currentDeckSection;
-        switch (deckSec.toUpperCase().trim()){
-            case "MB":
-                return DeckSection.Main;
-            case "SB":
-                return DeckSection.Sideboard;
-            case "CM":
-                return DeckSection.Commander;
-            default:
-                return DeckSection.Main;
+    // This would save tons of time in parsing Input + would also allow to return UnsupportedCardTokens beforehand
+    private DeckSection getTokenSection(String deckSec, DeckSection currentDeckSection, PaperCard card){
+        if (deckSec != null) {
+            DeckSection cardSection;
+            switch (deckSec.toUpperCase().trim()) {
+                case "MB":
+                    cardSection = DeckSection.Main;
+                    break;
+                case "SB":
+                    cardSection = DeckSection.Sideboard;
+                    break;
+                case "CM":
+                    cardSection = DeckSection.Commander;
+                    break;
+                default:
+                    cardSection = DeckSection.matchingSection(card);
+                    break;
+            }
+            if (cardSection.validate(card))
+                return cardSection;
         }
+        if (currentDeckSection != null && currentDeckSection.validate(card))
+            return currentDeckSection;
+        return DeckSection.matchingSection(card);
     }
 
     private boolean hasGameFormatConstraints() {
@@ -610,7 +743,7 @@ public class DeckRecognizer {
     public Token recogniseNonCardToken(final String text) {
         if (isDeckSectionName(text)) {
             String tokenText = nonCardTokenMatch(text);
-            return Token.DeckSection(tokenText);
+            return Token.DeckSection(tokenText, this.allowedDeckSections);
         }
         if (isCardCMC(text)){
             String tokenText = cardCMCTokenMatch(text);
@@ -627,7 +760,7 @@ public class DeckRecognizer {
             return new Token(TokenType.CARD_TYPE, tokenText);
         }
         if(isManaToken(text)){
-            String tokenText = manaTokenMatch(text);
+            String tokenText = getManaTokenMatch(text);
             return new Token(TokenType.MANA_COLOUR, tokenText);
         }
         if (isDeckName(text)) {
@@ -703,9 +836,53 @@ public class DeckRecognizer {
             return null;
         String line = lineAsIs.trim();
         Matcher manaMatcher = MANA_PATTERN.matcher(line);
-        if (!manaMatcher.matches())
+        Matcher manaSymbolMatcher = MANA_SYMBOL_PATTERN.matcher(line);
+        if (!manaMatcher.matches() && !manaSymbolMatcher.matches())
             return null;
-        return manaMatcher.group(REGRP_TOKEN);
+        if (manaMatcher.matches())
+            return manaMatcher.group(REGRP_TOKEN);
+        return manaSymbolMatcher.group(REGRP_TOKEN);
+    }
+
+    private static String getManaTokenMatch(final String lineAsIs){
+        String matchedText = manaTokenMatch(lineAsIs);
+        String tokenText = "%s %s";
+        switch (matchedText.toLowerCase()) {
+            case MagicColor.Constant.WHITE:
+            case "w":
+                return String.format(tokenText, Localizer.getInstance().getMessage("lblWhite"),
+                                     MagicColor.Color.WHITE.getSymbol());
+
+            case MagicColor.Constant.BLUE:
+            case "u":
+                return String.format(tokenText, Localizer.getInstance().getMessage("lblBlue"),
+                        MagicColor.Color.BLUE.getSymbol());
+
+            case MagicColor.Constant.BLACK:
+            case "b":
+                return String.format(tokenText, Localizer.getInstance().getMessage("lblBlack"),
+                        MagicColor.Color.BLACK.getSymbol());
+
+            case MagicColor.Constant.RED:
+            case "r":
+                return String.format(tokenText, Localizer.getInstance().getMessage("lblRed"),
+                        MagicColor.Color.RED.getSymbol());
+
+            case MagicColor.Constant.GREEN:
+            case "g":
+                return String.format(tokenText, Localizer.getInstance().getMessage("lblGreen"),
+                        MagicColor.Color.GREEN.getSymbol());
+
+            case MagicColor.Constant.COLORLESS:
+            case "c":
+                return String.format(tokenText, Localizer.getInstance().getMessage("lblColorless"),
+                        MagicColor.Color.COLORLESS.getSymbol());
+
+            default: // Multicolour
+                return String.format(tokenText, Localizer.getInstance().getMessage("lblMulticolor"),
+                        "{M}");
+        }
+
     }
 
     public static boolean isDeckName(final String lineAsIs) {
@@ -756,4 +933,8 @@ public class DeckRecognizer {
     }
 
     public void setArtPreference(CardDb.CardArtPreference artPref){ this.artPreference = artPref; }
+
+    public void setAllowedDeckSections(List<DeckSection> deckSections){ this.allowedDeckSections = deckSections; }
+
+    public void forceImportBannedAndRestrictedCards() { this.includeBannedAndRestricted = true; }
 }
