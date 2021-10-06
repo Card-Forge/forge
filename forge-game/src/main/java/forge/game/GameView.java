@@ -96,6 +96,19 @@ public class GameView extends TrackableObject {
     void updatePlayerTurn(PhaseHandler phaseHandler) {
         set(TrackableProperty.PlayerTurn, PlayerView.get(phaseHandler.getPlayerTurn()));
     }
+    public void updateNeedsPhaseRedrawn(PlayerView p, PhaseType ph) {
+        set(TrackableProperty.PlayerTurn, p);
+        set(TrackableProperty.Phase, ph);
+        set(TrackableProperty.NeedsPhaseRedrawn, true);
+    }
+    public boolean getNeedsPhaseRedrawn() {
+        if (get(TrackableProperty.NeedsPhaseRedrawn) == null)
+            return false;
+        return get(TrackableProperty.NeedsPhaseRedrawn);
+    }
+    public void clearNeedsPhaseRedrawn() {
+        set(TrackableProperty.NeedsPhaseRedrawn, false);
+    }
 
     public void updatePlanarPlayer(PlayerView p) {
         set(TrackableProperty.PlanarPlayer, p);
