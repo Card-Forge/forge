@@ -35,6 +35,8 @@ import java.util.ResourceBundle;
 @SuppressStaticInitializationFor({"forge.ImageCache", "forge.localinstance.properties.ForgeConstants"})
 public class ForgeCardMockTestCase extends PowerMockTestCase {
 
+    public static final String MOCKED_LOCALISED_STRING = "any localised string";
+
     protected static String getUserDir() {
         // Adapted - reduced version from ForgeProfileProperties (which is private)
         final String osName = System.getProperty("os.name");
@@ -157,7 +159,7 @@ public class ForgeCardMockTestCase extends PowerMockTestCase {
         Localizer localizerMock = PowerMockito.mock(Localizer.class);
         setMock(localizerMock);
         PowerMockito.field(Localizer.class, "resourceBundle").set(localizerMock, dummyResourceBundle);
-        PowerMockito.when(localizerMock.getMessage(Mockito.anyString())).thenReturn("any string");
+        PowerMockito.when(localizerMock.getMessage(Mockito.anyString())).thenReturn(MOCKED_LOCALISED_STRING);
         PowerMockito.when(FModel.getPreferences()).thenReturn(forgePreferences);
     }
 
