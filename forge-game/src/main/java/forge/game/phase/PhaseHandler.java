@@ -342,8 +342,7 @@ public class PhaseHandler implements java.io.Serializable {
                     // no first strikers, skip this step
                     if (!combat.assignCombatDamage(true)) {
                         givePriorityToPlayer = false;
-                    }
-                    else {
+                    } else {
                         combat.dealAssignedDamage();
                     }
                     break;
@@ -355,8 +354,7 @@ public class PhaseHandler implements java.io.Serializable {
 
                     if (!combat.assignCombatDamage(false)) {
                         givePriorityToPlayer = false;
-                    }
-                    else {
+                    } else {
                         combat.dealAssignedDamage();
                     }
                     break;
@@ -394,7 +392,7 @@ public class PhaseHandler implements java.io.Serializable {
                         final CardZoneTable table = new CardZoneTable();
                         final CardCollection discarded = new CardCollection();
                         boolean firstDiscarded = playerTurn.getNumDiscardedThisTurn() == 0;
-                        for (Card c : playerTurn.getController().chooseCardsToDiscardToMaximumHandSize(numDiscard)){
+                        for (Card c : playerTurn.getController().chooseCardsToDiscardToMaximumHandSize(numDiscard)) {
                             if (playerTurn.discard(c, null, table) != null) {
                                 discarded.add(c);
                             }
@@ -590,7 +588,7 @@ public class PhaseHandler implements java.io.Serializable {
                     "You may exert CARDNAME as it attacks.");
 
             if (!possibleExerters.isEmpty()) {
-                for(Card exerter : whoDeclares.getController().exertAttackers(possibleExerters)) {
+                for (Card exerter : whoDeclares.getController().exertAttackers(possibleExerters)) {
                     exerter.exert();
                 }
             }
@@ -1087,7 +1085,7 @@ public class PhaseHandler implements java.io.Serializable {
                     sw.reset();
                 }
             }
-            else if (DEBUG_PHASES){
+            else if (DEBUG_PHASES) {
                 System.out.print(" >> (no priority given to " + getPriorityPlayer() + ")\n");
             }
 

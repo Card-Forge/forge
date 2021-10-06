@@ -770,7 +770,7 @@ public class ComputerUtil {
         final int considerSacThreshold = getAIPreferenceParameter(host, "CreatureEvalThreshold", source);
 
         if ("OpponentOnly".equals(source.getParam("AILogic"))) {
-            if(!source.getActivatingPlayer().isOpponentOf(ai)) {
+            if (!source.getActivatingPlayer().isOpponentOf(ai)) {
                 return sacrificed; // sacrifice none
             }
         } else if ("DesecrationDemon".equals(source.getParam("AILogic"))) {
@@ -1719,7 +1719,7 @@ public class ComputerUtil {
                     final Player p = (Player) o;
 
                     if (source.hasKeyword(Keyword.INFECT)) {
-                        if (ComputerUtilCombat.predictDamageTo(p, dmg, source, false) >= p.getPoisonCounters()) {
+                        if (p.canReceiveCounters(CounterEnumType.POISON) && ComputerUtilCombat.predictDamageTo(p, dmg, source, false) >= 10 - p.getPoisonCounters()) {
                             threatened.add(p);
                         }
                     } else if (ComputerUtilCombat.predictDamageTo(p, dmg, source, false) >= p.getLife()) {

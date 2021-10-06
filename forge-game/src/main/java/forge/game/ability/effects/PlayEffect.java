@@ -103,7 +103,7 @@ public class PlayEffect extends SpellAbilityEffect {
         } else if (sa.hasParam("AnySupportedCard")) {
             final String valid = sa.getParam("AnySupportedCard");
             List<PaperCard> cards = null;
-            if (valid.startsWith("Names:")){
+            if (valid.startsWith("Names:")) {
                 cards = new ArrayList<>();
                 for (String name : valid.substring(6).split(",")) {
                     name = name.replace(";", ",");

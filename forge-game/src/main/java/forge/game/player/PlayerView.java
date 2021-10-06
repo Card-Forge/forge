@@ -483,7 +483,7 @@ public class PlayerView extends GameEntityView {
         if (cards == null)
             return 0;
 
-        for(CardView c : cards) {
+        for (CardView c : cards) {
             types.addAll((Collection<? extends CardType.CoreType>) c.getCurrentState().getType().getCoreTypes());
         }
 

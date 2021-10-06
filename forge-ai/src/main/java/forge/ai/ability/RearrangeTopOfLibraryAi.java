@@ -114,7 +114,7 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
         if (!top.isLand() && cmc - maxCastable >= uncastableCMCThreshold) {
             // Can't cast in the foreseeable future. Shuffle if doing it to ourselves or an ally, otherwise keep it
             return !p.isOpponentOf(player);
-        } else if (top.isLand() && landsOTB <= minLandsToScryLandsAway){
+        } else if (top.isLand() && landsOTB <= minLandsToScryLandsAway) {
             // We don't want to give the opponent a free land if his land count is low
             return p.isOpponentOf(player);
         }

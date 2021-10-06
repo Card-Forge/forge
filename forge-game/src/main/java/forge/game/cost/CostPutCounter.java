@@ -175,7 +175,7 @@ public class CostPutCounter extends CostPartWithList {
      * @see forge.card.cost.CostPartWithList#executePayment(forge.card.spellability.SpellAbility, forge.Card)
      */
     @Override
-    protected Card doPayment(SpellAbility ability, Card targetCard){
+    protected Card doPayment(SpellAbility ability, Card targetCard) {
         final Integer i = this.convertAmount();
         targetCard.addCounter(this.getCounter(), i, ability.getActivatingPlayer(), null, ability.getRootAbility().isTrigger(), counterTable);
         return targetCard;

@@ -91,7 +91,7 @@ public class ComputerUtilCard {
     public static void sortByEvaluateCreature(final CardCollection list) {
         Collections.sort(list, ComputerUtilCard.EvaluateCreatureComparator);
     }
-    
+
     // The AI doesn't really pick the best artifact, just the most expensive.
     /**
      * <p>
@@ -436,7 +436,7 @@ public class ComputerUtilCard {
     // For ability of Oracle en-Vec, return the first card that are going to attack next turn
     public static Card getBestCreatureToAttackNextTurnAI(final Player aiPlayer, final Iterable<Card> list) {
         AiController aic = ((PlayerControllerAi)aiPlayer.getController()).getAi();
-        for(final Card card : list) {
+        for (final Card card : list) {
             if (aic.getPredictedCombatNextTurn().isAttacking(card)) {
                 return card;
             }
@@ -583,7 +583,7 @@ public class ComputerUtilCard {
     public static int evaluateCreatureList(final CardCollectionView list) {
         return Aggregates.sum(list, creatureEvaluator);
     }
-    
+
     public static Map<String, Integer> evaluateCreatureListByName(final CardCollectionView list) {
         // Compute value for each possible target
         Map<String, Integer> values = Maps.newHashMap();
@@ -832,7 +832,7 @@ public class ComputerUtilCard {
                 }
             }
             // same for Trigger that does make Tokens
-            for(Trigger t:c.getTriggers()){
+            for (Trigger t :c .getTriggers()) {
                 SpellAbility sa = t.ensureAbility();
                 if (sa != null) {
                     if (sa.getApi() != ApiType.Token || !sa.hasParam("TokenTypes")) {
@@ -851,7 +851,7 @@ public class ComputerUtilCard {
                 }
             }
             // special rule for Fabricate and Servo
-            if(c.hasStartOfKeyword(Keyword.FABRICATE.toString())){
+            if (c.hasStartOfKeyword(Keyword.FABRICATE.toString())) {
                 Integer count = typesInDeck.get("Servo");
                 if (count == null) {
                     count = 0;
@@ -1694,7 +1694,7 @@ public class ComputerUtilCard {
             pumped.addHiddenExtrinsicKeywords(timestamp, 0, hiddenKws);
         }
         Set<CounterType> types = c.getCounters().keySet();
-        for(CounterType ct : types) {
+        for (CounterType ct : types) {
             pumped.addCounterFireNoEvents(ct, c.getCounters(ct), ai, sa, true, null);
         }
         //Copies tap-state and extra keywords (auras, equipment, etc.) 

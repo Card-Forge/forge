@@ -419,15 +419,15 @@ public class CountersPutAi extends SpellAbilityAi {
                 oa.setActivatingPlayer(ai);
                 CardCollection targets = CardLists.getTargetableCards(ai.getOpponents().getCreaturesInPlay(), oa);
 
-                if (!targets.isEmpty()){
+                if (!targets.isEmpty()) {
                     boolean canSurvive = false;
                     for (Card humanCreature : targets) {
-                        if (!FightAi.canKill(humanCreature, source, 0)){
+                        if (!FightAi.canKill(humanCreature, source, 0)) {
                             canSurvive = true;
                             break;
                         }
                     }
-                    if (!canSurvive){
+                    if (!canSurvive) {
                         return false;
                     }
                 }

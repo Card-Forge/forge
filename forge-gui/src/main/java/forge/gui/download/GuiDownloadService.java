@@ -119,8 +119,7 @@ public abstract class GuiDownloadService implements Runnable {
                     });
                 }
             });
-        }
-        else {
+        } else {
             //handle special case of zip service
             if (onReadyToStart != null) {
                 onReadyToStart.run();
@@ -147,8 +146,7 @@ public abstract class GuiDownloadService implements Runnable {
             progressBar.setDescription("All items have been downloaded.");
             btnStart.setText("OK");
             btnStart.setCommand(cmdClose);
-        }
-        else {
+        } else {
             progressBar.setMaximum(files.size());
             progressBar.setDescription(files.size() == 1 ? "1 item found." : files.size() + " items found.");
             //for(Entry<String, String> kv : cards.entrySet()) System.out.printf("Will get %s from %s%n", kv.getKey(), kv.getValue());
@@ -223,8 +221,7 @@ public abstract class GuiDownloadService implements Runnable {
                     }
 
                     sb.append(String.format("%02d remaining.", t2Go / 1000));
-                }
-                else {
+                } else {
                     sb.append(String.format("%d of %d items finished! Skipped " + skipped + " items. Please close!",
                             count, files.size()));
                     finish();
@@ -303,8 +300,7 @@ public abstract class GuiDownloadService implements Runnable {
                     }
 
                     // if file is not found and this is a JPG, give PNG a shot...
-                    if ((conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND) && (url.endsWith(".jpg")))
-                    {
+                    if ((conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND) && (url.endsWith(".jpg"))) {
                         fullborder = false;
                         isJPG = false;
                         conn.disconnect();
@@ -342,8 +338,7 @@ public abstract class GuiDownloadService implements Runnable {
                         System.out.println("  Connection failed for url: " + url);
                         break;
                     }
-                }
-                else {
+                } else {
                     System.out.println("  Can't create folder: " + base.getAbsolutePath());
                 }
             }
@@ -425,7 +420,7 @@ public abstract class GuiDownloadService implements Runnable {
 
         String response = HttpUtil.getURL(manifestUrl);
 
-        if (response == null)  return null;
+        if (response == null) return null;
 
         String[] strings = response.split("<a href=\"");
         

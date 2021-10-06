@@ -13,7 +13,7 @@ public class PlaneswalkEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         Game game = sa.getActivatingPlayer().getGame();
 
-        for(Player p : game.getPlayers()) {
+        for (Player p : game.getPlayers()) {
             p.leaveCurrentPlane();
         }
         if (sa.hasParam("Defined")) {

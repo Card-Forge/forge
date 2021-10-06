@@ -165,7 +165,7 @@ public class DamageDealAi extends DamageAiBase {
             dmg = 2;
         } else if ("OpponentHasCreatures".equals(logic)) {
             for (Player opp : ai.getOpponents()) {
-                if (!opp.getCreaturesInPlay().isEmpty()){
+                if (!opp.getCreaturesInPlay().isEmpty()) {
                     return true;
                 }
             }
@@ -287,7 +287,7 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         if ((damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) ||
-                sourceName.equals("Crater's Claws")){
+                sourceName.equals("Crater's Claws")) {
             // If I can kill my target by paying less mana, do it
             if (sa.usesTargeting() && !sa.getTargets().isTargetingAnyPlayer() && !sa.isDividedAsYouChoose()) {
                 int actualPay = dmg;
@@ -330,7 +330,6 @@ public class DamageDealAi extends DamageAiBase {
      */
     private Card dealDamageChooseTgtC(final Player ai, final SpellAbility sa, final int d, final boolean noPrevention,
             final Player pl, final boolean mandatory) {
-
         // wait until stack is empty (prevents duplicate kills)
         if (!sa.isTrigger() && !ai.getGame().getStack().isEmpty()) {
             //TODO:all removal APIs require a check to prevent duplicate kill/bounce/exile/etc.
@@ -345,7 +344,7 @@ public class DamageDealAi extends DamageAiBase {
         final Player activator = sa.getActivatingPlayer();
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
-        List<Card> hPlay = getTargetableCards(ai, sa, pl, tgt, activator, source, game);
+        List<Card> hPlay = getTargetableCards(mandatory ? pl : ai, sa, pl, tgt, activator, source, game);
 
         // Filter MustTarget requirements
         StaticAbilityMustTarget.filterMustTargetCards(ai, hPlay, sa);
@@ -531,7 +530,7 @@ public class DamageDealAi extends DamageAiBase {
 
         if ("PowerDmg".equals(logic)) {
             // check if it is better to target the player instead, the original target is already set in PumpAi.pumpTgtAI()
-            if (tgt.canTgtCreatureAndPlayer() && shouldTgtP(ai, sa, dmg, noPrevention)){
+            if (tgt.canTgtCreatureAndPlayer() && shouldTgtP(ai, sa, dmg, noPrevention)) {
                 sa.resetTargets();
                 sa.getTargets().add(enemy);
             }

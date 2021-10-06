@@ -69,7 +69,7 @@ public class SetStateAi extends SpellAbilityAi {
         final String logic = sa.getParamOrDefault("AILogic", "");
         final Game game = source.getGame();
 
-        if("Transform".equals(mode)) {
+        if ("Transform".equals(mode)) {
             if (!sa.usesTargeting()) {
                 // no Transform with Defined which is not Self
                 if (!source.canTransform()) {

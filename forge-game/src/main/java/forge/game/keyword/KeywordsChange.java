@@ -36,7 +36,7 @@ import forge.game.trigger.Trigger;
  * 
  * @author Forge
  */
-public class KeywordsChange  implements Cloneable {
+public class KeywordsChange implements Cloneable {
     private KeywordCollection keywords = new KeywordCollection();
     private List<KeywordInterface> removeKeywordInterfaces = Lists.newArrayList();
     private List<String> removeKeywords = Lists.newArrayList();

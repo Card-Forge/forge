@@ -28,7 +28,7 @@ public class ControlSpellEffect extends SpellAbilityEffect {
 
         sb.append(newController).append(" gains control of ");
 
-        for(SpellAbility spell : getTargetSpells(sa)) {
+        for (SpellAbility spell : getTargetSpells(sa)) {
             Card c = spell.getHostCard();
             sb.append(" ");
             if (c.isFaceDown()) {

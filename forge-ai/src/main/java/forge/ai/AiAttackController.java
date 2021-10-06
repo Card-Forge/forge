@@ -473,7 +473,7 @@ public class AiAttackController {
         if (totalAttack > 0 && ai.getLife() <= totalAttack && !ai.cantLoseForZeroOrLessLife()) {
             return true;
         }
-        return ai.getPoisonCounters() + totalPoison > 9;
+        return ai.canReceiveCounters(CounterEnumType.POISON) && ai.getPoisonCounters() + totalPoison > 9;
     }
 
     private boolean doAssault(final Player ai) {
@@ -1468,7 +1468,7 @@ public class AiAttackController {
         if (artifact != null) {
             return artifact;
         }
-        return null;//should never get here
+        return null; //should never get here
     }
 
     private void doLightmineFieldAttackLogic(List<Card> attackersLeft, int numForcedAttackers, boolean playAggro) {

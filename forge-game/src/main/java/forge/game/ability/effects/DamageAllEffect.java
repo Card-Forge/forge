@@ -35,7 +35,7 @@ public class DamageAllEffect extends DamageBaseEffect {
 
         if (!definedSources.isEmpty() && definedSources.get(0) != sa.getHostCard()) {
             sb.append(definedSources.get(0).toString()).append(" deals");
-        } else if ("ParentTarget".equals(definedStr)){
+        } else if ("ParentTarget".equals(definedStr)) {
             sb.append("Target creature deals");
         } else {
             sb.append("Deals");

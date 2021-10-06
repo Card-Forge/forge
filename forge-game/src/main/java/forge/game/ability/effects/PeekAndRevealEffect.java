@@ -50,7 +50,7 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
             numPeek = Math.min(numPeek, library.size());
 
             CardCollection peekCards = new CardCollection();
-            for(int i = 0; i < numPeek; i++) {
+            for (int i = 0; i < numPeek; i++) {
                 peekCards.add(library.get(i));
             }
 
@@ -74,7 +74,7 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
                 }
                 if (imprintRevealed) {
                     Map<Integer, Card> cachedMap = Maps.newHashMap();
-                    for(Card c : revealableCards) {
+                    for (Card c : revealableCards) {
                         source.addImprintedCard(CardUtil.getLKICopy(c, cachedMap));
                     }
                 }
