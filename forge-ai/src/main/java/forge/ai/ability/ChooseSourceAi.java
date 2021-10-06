@@ -67,7 +67,7 @@ public class ChooseSourceAi extends SpellAbilityAi {
             if (sa.getParam("AILogic").equals("NeedsPrevention")) {
                 if (!game.getStack().isEmpty()) {
                     final SpellAbility topStack = game.getStack().peekAbility();
-                    if (sa.hasParam("Choices") && !topStack.getHostCard().isValid(sa.getParam("Choices"), ai, source, sa)) {
+                    if (sa.hasParam("Choices") && !topStack.matchesValid(topStack.getHostCard(), sa.getParam("Choices").split(","))) {
                         return false;
                     }
                     final ApiType threatApi = topStack.getApi();
@@ -110,8 +110,6 @@ public class ChooseSourceAi extends SpellAbilityAi {
 
         return true;
     }
-
-
 
     @Override
     public Card chooseSingleCard(final Player aiChoser, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
@@ -178,7 +176,7 @@ public class ChooseSourceAi extends SpellAbilityAi {
             final Card source = si.getSourceCard();
             final SpellAbility abilityOnStack = si.getSpellAbility(true);
 
-            if (sa.hasParam("Choices") && !abilityOnStack.getHostCard().isValid(sa.getParam("Choices"), ai, sa.getHostCard(), sa)) {
+            if (sa.hasParam("Choices") && !abilityOnStack.matchesValid(source, sa.getParam("Choices").split(","))) {
                 continue;
             }
             final ApiType threatApi = abilityOnStack.getApi();
