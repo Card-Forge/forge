@@ -222,7 +222,7 @@ public class CharmEffect extends SpellAbilityEffect {
         });
 
         for (AbilitySub sub : chosen) {
-            // Clone the chosen, just in case the some subAb gets chosen multiple times
+            // Clone the chosen, just in case the same subAb gets chosen multiple times
             AbilitySub clone = (AbilitySub)sub.copy();
 
             // update ActivatingPlayer
@@ -250,7 +250,6 @@ public class CharmEffect extends SpellAbilityEffect {
             // add Clone to Tail of sa
             sa.appendSubAbility(clone);
         }
-
     }
 
 }

@@ -94,7 +94,7 @@ public class DelayedTriggerAi extends SpellAbilityAi {
                 }
             });
 
-            if(count == 0) {
+            if (count == 0) {
                 return false;
             }
             return true;

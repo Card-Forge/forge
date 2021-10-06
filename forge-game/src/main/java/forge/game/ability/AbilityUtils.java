@@ -2550,7 +2550,7 @@ public class AbilityUtils {
             int colorOcurrencices = 0;
             byte colorCode = ManaAtom.fromName(sq[1]);
             for (Card c0 : cards) {
-                for (ManaCostShard sh : c0.getManaCost()){
+                for (ManaCostShard sh : c0.getManaCost()) {
                     if (sh.isColor(colorCode))
                         colorOcurrencices++;
                 }

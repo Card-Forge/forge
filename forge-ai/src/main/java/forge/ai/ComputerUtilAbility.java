@@ -72,7 +72,7 @@ public class ComputerUtilAbility {
         if (!player.getCardsIn(ZoneType.Library).isEmpty()) {
             all.add(player.getCardsIn(ZoneType.Library).get(0));
         }
-        for(Player p : game.getPlayers()) {
+        for (Player p : game.getPlayers()) {
             all.addAll(p.getCardsIn(ZoneType.Exile));
             all.addAll(p.getCardsIn(ZoneType.Battlefield));
         }

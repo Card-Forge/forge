@@ -52,14 +52,14 @@ public class RepeatEachAi extends SpellAbilityAi {
             }
         } else if ("OpponentHasCreatures".equals(logic)) { //TODO convert this to NeedsToPlayVar
             for (Player opp : aiPlayer.getOpponents()) {
-                if (!opp.getCreaturesInPlay().isEmpty()){
+                if (!opp.getCreaturesInPlay().isEmpty()) {
                     return true;
                 }
             }
             return false;
         } else if ("OpponentHasMultipleCreatures".equals(logic)) {
             for (Player opp : aiPlayer.getOpponents()) {
-                if (opp.getCreaturesInPlay().size() > 1){
+                if (opp.getCreaturesInPlay().size() > 1) {
                     return true;
                 }
             }

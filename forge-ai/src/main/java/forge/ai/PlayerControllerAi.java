@@ -220,16 +220,16 @@ public class PlayerControllerAi extends PlayerController {
         if (delayedReveal != null) {
             reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
         }
-	FCollection<T> remaining = new FCollection<>(optionList);
-	List<T> selecteds = new ArrayList<>();
-	T selected;
-	do {
-	    selected = chooseSingleEntityForEffect(remaining, null, sa, title, selecteds.size()>=min, targetedPlayer, params);
-	    if ( selected != null ) {
-		remaining.remove(selected);
-		selecteds.add(selected);
-	    }
-	} while ( (selected != null ) && (selecteds.size() < max) );
+        FCollection<T> remaining = new FCollection<>(optionList);
+        List<T> selecteds = new ArrayList<>();
+        T selected;
+        do {
+            selected = chooseSingleEntityForEffect(remaining, null, sa, title, selecteds.size()>=min, targetedPlayer, params);
+            if ( selected != null ) {
+                remaining.remove(selected);
+                selecteds.add(selected);
+            }
+        } while ( (selected != null ) && (selecteds.size() < max) );
         return selecteds;
     }
 
@@ -361,8 +361,7 @@ public class PlayerControllerAi extends PlayerController {
         for (Card c: topN) {
             if (ComputerUtil.scryWillMoveCardToBottomOfLibrary(player, c)) {
                 toBottom.add(c);
-            }
-            else {
+            } else {
                 toTop.add(c);
             }
         }
@@ -525,8 +524,7 @@ public class PlayerControllerAi extends PlayerController {
             if (copySA instanceof Spell) {
                 Spell spell = (Spell) copySA;
                 ((PlayerControllerAi) player.getController()).getAi().canPlayFromEffectAI(spell, true, true);
-            }
-            else {
+            } else {
                 getAi().canPlaySa(copySA);
             }
         }
@@ -884,9 +882,8 @@ public class PlayerControllerAi extends PlayerController {
         byte chosenColorMask = MagicColor.fromName(c);
         if ((colors.getColor() & chosenColorMask) != 0) {
             return chosenColorMask;
-        } else {
-            return Iterables.getFirst(colors, (byte)0);
         }
+        return Iterables.getFirst(colors, (byte)0);
     }
 
     @Override
@@ -905,9 +902,7 @@ public class PlayerControllerAi extends PlayerController {
         if ((colors.getColor() & chosenColorMask) != 0) {
             return chosenColorMask;
         }
-        else {
-            return Iterables.getFirst(colors, MagicColor.WHITE);
-        }
+        return Iterables.getFirst(colors, MagicColor.WHITE);
     }
 
     @Override
@@ -1370,8 +1365,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public int chooseNumberForKeywordCost(SpellAbility sa, Cost cost, KeywordInterface keyword, String prompt,
-            int max) {
+    public int chooseNumberForKeywordCost(SpellAbility sa, Cost cost, KeywordInterface keyword, String prompt, int max) {
         // TODO: improve the logic depending on the keyword and the playability of the cost-modified SA (enough targets present etc.)
         int chosenAmount = 0;
 

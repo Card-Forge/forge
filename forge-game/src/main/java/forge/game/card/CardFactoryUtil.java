@@ -538,7 +538,7 @@ public class CardFactoryUtil {
                     landkw.add(k);
                 } else if (k.startsWith("Protection")) {
                     protectionkw.add(k);
-                    for(byte col : MagicColor.WUBRG) {
+                    for (byte col : MagicColor.WUBRG) {
                         final String colString = "Protection from " + MagicColor.toLongString(col).toLowerCase();
                         if (k.contains(colString)) {
                             protectionColorkw.add(colString);
@@ -896,7 +896,7 @@ public class CardFactoryUtil {
             cascadeTrigger.setOverridingAbility(dig);
 
             inst.addTrigger(cascadeTrigger);
-        } else if (keyword.startsWith("Champion")){
+        } else if (keyword.startsWith("Champion")) {
             final String[] k = keyword.split(":");
             final String[] valid = k[1].split(",");
             String desc = Lang.joinHomogenous(Lists.newArrayList(valid), null, "or");
@@ -1688,7 +1688,7 @@ public class CardFactoryUtil {
 
             int idx = 0;
             int skipId = 0;
-            for(String ab : abs) {
+            for (String ab : abs) {
                 idx += 1;
                 if (idx <= skipId) {
                     continue;
@@ -1898,7 +1898,7 @@ public class CardFactoryUtil {
             final List<String> abs = Arrays.asList(keyword.substring("Dungeon:".length()).split(","));
             final Map<String, SpellAbility> saMap = new LinkedHashMap<>();
 
-            for(String ab : abs) {
+            for (String ab : abs) {
                 saMap.put(ab, AbilityFactory.getAbility(card, ab));
             }
             for (SpellAbility sa : saMap.values()) {
@@ -2956,7 +2956,7 @@ public class CardFactoryUtil {
 
             inst.addSpellAbility(abilityMorphDown(card));
             inst.addSpellAbility(abilityMorphUp(card, k[1], false));
-        } else if (keyword.startsWith("Megamorph")){
+        } else if (keyword.startsWith("Megamorph")) {
             final String[] k = keyword.split(":");
 
             inst.addSpellAbility(abilityMorphDown(card));

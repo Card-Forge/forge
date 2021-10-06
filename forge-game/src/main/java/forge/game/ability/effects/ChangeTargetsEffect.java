@@ -96,7 +96,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                     SpellAbility changingTgtSA = changingTgtSI.getSpellAbility(true);
                     if (changingTgtSA.usesTargeting()) {
                         // random target and DefinedMagnet works on single targets
-                        if (sa.hasParam("RandomTarget")){
+                        if (sa.hasParam("RandomTarget")) {
                             int div = changingTgtSA.getTotalDividedValue();
                             changingTgtSA.resetTargets();
                             List<GameEntity> candidates = changingTgtSA.getTargetRestrictions().getAllCandidates(changingTgtSA, true);
@@ -116,7 +116,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
 
                             changingTgtSI.updateTarget(changingTgtSA.getTargets(), sa.getHostCard());
                         }
-                        else if (sa.hasParam("DefinedMagnet")){
+                        else if (sa.hasParam("DefinedMagnet")) {
                             GameObject newTarget = Iterables.getFirst(getDefinedCardsOrTargeted(sa, "DefinedMagnet"), null);
                             if (newTarget != null && changingTgtSA.canTarget(newTarget)) {
                                 int div = changingTgtSA.getTotalDividedValue();

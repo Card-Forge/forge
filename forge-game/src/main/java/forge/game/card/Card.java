@@ -2084,7 +2084,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.equals("Foretell") // for the ones without cost
                         || keyword.equals("Hideaway") || keyword.equals("Ascend")
                         || keyword.equals("Totem armor") || keyword.equals("Battle cry")
-                        || keyword.equals("Devoid") || keyword.equals("Riot")){
+                        || keyword.equals("Devoid") || keyword.equals("Riot")) {
                     sbLong.append(keyword).append(" (").append(inst.getReminderText()).append(")");
                 } else if (keyword.startsWith("Partner:")) {
                     final String[] k = keyword.split(":");
@@ -3580,10 +3580,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return changed;
     }
 
-    public boolean clearChangedCardKeywords() {
-        return clearChangedCardKeywords(false);
-    }
-
     public boolean clearChangedCardColors() {
         boolean changed = false;
 
@@ -3981,7 +3977,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             this.tempBoost = 0;
             this.bonusFromCounters = 0;
         }
-        public StatBreakdown(int currentValue, int tempBoost, int bonusFromCounters){
+        public StatBreakdown(int currentValue, int tempBoost, int bonusFromCounters) {
             this.currentValue = currentValue;
             this.tempBoost = tempBoost;
             this.bonusFromCounters = bonusFromCounters;
@@ -4268,6 +4264,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return change;
     }
 
+    public boolean clearChangedCardKeywords() {
+        return clearChangedCardKeywords(false);
+    }
     public final boolean clearChangedCardKeywords(final boolean updateView) {
         if (changedCardKeywords.isEmpty()) {
             return false;

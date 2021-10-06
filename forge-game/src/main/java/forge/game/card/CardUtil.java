@@ -354,7 +354,7 @@ public final class CardUtil {
             if ((combinedColor & color) == 0) {
                 continue;
             }
-            for(final Card c : game.getColoredCardsInPlay(MagicColor.toLongString(color))) {
+            for (final Card c : game.getColoredCardsInPlay(MagicColor.toLongString(color))) {
                 if (!res.contains(c) && !tgts.contains(c) && c.isValid(valid, source.getController(), source, targetSA)) {
                     res.add(c);
                 }

@@ -192,7 +192,7 @@ public enum ApiType {
     private static final Map<String, ApiType> allValues = new HashMap<>();
 
     static {
-    	for(ApiType t : ApiType.values()) {
+    	for (ApiType t : ApiType.values()) {
     		allValues.put(t.name().toLowerCase(), t);
     	}
     }

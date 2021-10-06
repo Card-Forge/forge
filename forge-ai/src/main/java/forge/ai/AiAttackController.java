@@ -1468,7 +1468,7 @@ public class AiAttackController {
         if (artifact != null) {
             return artifact;
         }
-        return null;//should never get here
+        return null; //should never get here
     }
 
     private void doLightmineFieldAttackLogic(List<Card> attackersLeft, int numForcedAttackers, boolean playAggro) {

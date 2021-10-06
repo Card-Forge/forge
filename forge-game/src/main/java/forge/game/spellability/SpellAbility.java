@@ -2190,7 +2190,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     @Override
     public int compareTo(SpellAbility ab) {
-        if (this.isManaAbility() && ab.isManaAbility()){
+        if (this.isManaAbility() && ab.isManaAbility()) {
             return this.calculateScoreForManaAbility() - ab.calculateScoreForManaAbility();
         }
         return 0;

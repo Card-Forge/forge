@@ -770,7 +770,7 @@ public class ComputerUtil {
         final int considerSacThreshold = getAIPreferenceParameter(host, "CreatureEvalThreshold", source);
 
         if ("OpponentOnly".equals(source.getParam("AILogic"))) {
-            if(!source.getActivatingPlayer().isOpponentOf(ai)) {
+            if (!source.getActivatingPlayer().isOpponentOf(ai)) {
                 return sacrificed; // sacrifice none
             }
         } else if ("DesecrationDemon".equals(source.getParam("AILogic"))) {

@@ -671,7 +671,6 @@ public class ComputerUtilCombat {
 
         int flankingMagnitude = 0;
         if (attacker.hasKeyword(Keyword.FLANKING) && !blocker.hasKeyword(Keyword.FLANKING)) {
-
             flankingMagnitude = attacker.getAmountOfKeyword(Keyword.FLANKING);
 
             if (flankingMagnitude >= blocker.getNetToughness()) {
