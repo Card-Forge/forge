@@ -302,28 +302,26 @@ public class ComputerUtilCombat {
     public static int lifeThatWouldRemain(final Player ai, final Combat combat) {
         int damage = 0;
 
-        final List<Card> attackers = combat.getAttackersOf(ai);
-        final List<Card> unblocked = Lists.newArrayList();
+        if (ai.canLoseLife()) {
+            final List<Card> attackers = combat.getAttackersOf(ai);
+            final List<Card> unblocked = Lists.newArrayList();
 
-        for (final Card attacker : attackers) {
-            final List<Card> blockers = combat.getBlockers(attacker);
+            for (final Card attacker : attackers) {
+                final List<Card> blockers = combat.getBlockers(attacker);
 
-            if ((blockers.size() == 0)
-                    || attacker.hasKeyword("You may have CARDNAME assign its combat damage "
-                            + "as though it weren't blocked.")) {
-                unblocked.add(attacker);
-            } else if (attacker.hasKeyword(Keyword.TRAMPLE)
-                    && (getAttack(attacker) > totalShieldDamage(attacker, blockers))) {
-                if (!attacker.hasKeyword(Keyword.INFECT)) {
-                    damage += getAttack(attacker) - totalShieldDamage(attacker, blockers);
+                if ((blockers.size() == 0)
+                        || attacker.hasKeyword("You may have CARDNAME assign its combat damage "
+                                + "as though it weren't blocked.")) {
+                    unblocked.add(attacker);
+                } else if (attacker.hasKeyword(Keyword.TRAMPLE)
+                        && (getAttack(attacker) > totalShieldDamage(attacker, blockers))) {
+                    if (!attacker.hasKeyword(Keyword.INFECT)) {
+                        damage += getAttack(attacker) - totalShieldDamage(attacker, blockers);
+                    }
                 }
             }
-        }
 
-        damage += sumDamageIfUnblocked(unblocked, ai);
-
-        if (!ai.canLoseLife()) {
-            damage = 0;
+            damage += sumDamageIfUnblocked(unblocked, ai);
         }
 
         return ai.getLife() - damage;

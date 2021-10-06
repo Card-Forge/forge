@@ -91,7 +91,7 @@ public class ComputerUtilCard {
     public static void sortByEvaluateCreature(final CardCollection list) {
         Collections.sort(list, ComputerUtilCard.EvaluateCreatureComparator);
     }
-    
+
     // The AI doesn't really pick the best artifact, just the most expensive.
     /**
      * <p>
@@ -583,7 +583,7 @@ public class ComputerUtilCard {
     public static int evaluateCreatureList(final CardCollectionView list) {
         return Aggregates.sum(list, creatureEvaluator);
     }
-    
+
     public static Map<String, Integer> evaluateCreatureListByName(final CardCollectionView list) {
         // Compute value for each possible target
         Map<String, Integer> values = Maps.newHashMap();

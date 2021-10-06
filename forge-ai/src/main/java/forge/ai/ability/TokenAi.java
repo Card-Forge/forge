@@ -230,8 +230,7 @@ public class TokenAi extends SpellAbilityAi {
         }
         final int nTokens = AbilityUtils.calculateAmount(sa.getHostCard(), tokenAmount, sa);
         final String valid = topStack.getParamOrDefault("SacValid", "Card.Self");
-        String num = sa.getParam("Amount");
-        num = (num == null) ? "1" : num;
+        String num = sa.getParamOrDefault("Amount", "1");
         final int nToSac = AbilityUtils.calculateAmount(topStack.getHostCard(), num, topStack);
         CardCollection list = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","),
         		ai.getWeakestOpponent(), topStack.getHostCard(), sa);

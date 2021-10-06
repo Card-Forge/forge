@@ -12,7 +12,6 @@ import forge.game.card.Card;
 
 public class KeywordCollection implements Iterable<KeywordInterface> {
 
-
     private transient KeywordCollectionView view;
     // don't use enumKeys it causes a slow down
     private final Multimap<Keyword, KeywordInterface> map = MultimapBuilder.hashKeys()

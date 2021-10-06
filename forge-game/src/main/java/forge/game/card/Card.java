@@ -3541,7 +3541,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final CardTypeView getType() {
         return getType(currentState);
     }
-
     public final CardTypeView getType(CardState state) {
         if (changedCardTypes.isEmpty() && changedCardTypesCharacterDefining.isEmpty()) {
             return state.getType();
@@ -3644,7 +3643,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void removeChangedCardTypes(final long timestamp) {
         removeChangedCardTypes(timestamp, true);
     }
-
     public final void removeChangedCardTypes(final long timestamp, final boolean updateView) {
         boolean removed = false;
         removed |= changedCardTypes.remove(timestamp) != null;
