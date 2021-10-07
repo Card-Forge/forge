@@ -107,8 +107,8 @@ public class VAvatar extends FDisplayObject {
 
     public Vector2 getTargetingArrowOrigin() {
         Vector2 origin = new Vector2(this.screenPos.x, this.screenPos.y);
-        origin.x += getWidth()-getWidth()/3.5f; //move a little bit so the avatar face is still shown...
-        origin.y += getWidth()/2f;
+        origin.x += getWidth()-getWidth()/8f;
+        origin.y += getWidth()-getWidth()/8f;
         return origin;
     }
 
