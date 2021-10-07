@@ -23,6 +23,8 @@ import com.badlogic.gdx.math.Vector2;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
+import forge.localinstance.properties.ForgePreferences;
+import forge.model.FModel;
 import forge.util.Utils;
 
 public class TargetingOverlay {
@@ -77,6 +79,9 @@ public class TargetingOverlay {
                 color = foeDefColor;
         }
 
-        g.drawArrow(BORDER_THICKNESS, ARROW_THICKNESS, ARROW_SIZE, color, start.x, start.y, end.x, end.y);
+        if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_USE_LASER_ARROWS))
+            g.drawLineArrow(Utils.scale(3), color, start.x, start.y, end.x, end.y);
+        else
+            g.drawArrow(BORDER_THICKNESS, ARROW_THICKNESS, ARROW_SIZE, color, start.x, start.y, end.x, end.y);
     }
 }

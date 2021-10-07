@@ -328,6 +328,51 @@ public class Graphics {
         batch.begin();
     }
 
+    public void drawLineArrow(float arrowThickness, FSkinColor skinColor, float x1, float y1, float x2, float y2) {
+        fillCircle(skinColor.getColor(), x2, y2, arrowThickness);
+        drawLineArrow(arrowThickness, skinColor.getColor(), x1, y1, x2, y2);
+        fillCircle(Color.WHITE, x2, y2, arrowThickness/2);
+        drawLine(arrowThickness/3, Color.WHITE, x1, y1, x2, y2);
+    }
+    public void drawLineArrow(float thickness, Color color, float x1, float y1, float x2, float y2) {
+        batch.end(); //must pause batch while rendering shapes
+
+        float angle = new Vector2(x1 - x2, y1 - y2).angleRad();
+        float arrowHeadRotation = (float)(Math.PI * 0.8f);
+        Vector2 arrowCorner3 = new Vector2(x2 + (thickness/3) * (float)Math.cos(angle + arrowHeadRotation), y2 + (thickness/3) * (float)Math.sin(angle + arrowHeadRotation));
+        Vector2 arrowCorner4 = new Vector2(x2 + (thickness/3) * (float)Math.cos(angle - arrowHeadRotation), y2 + (thickness/3) * (float)Math.sin(angle - arrowHeadRotation));
+
+        if (thickness > 1) {
+            Gdx.gl.glLineWidth(thickness);
+        }
+        if (alphaComposite < 1) {
+            color = FSkinColor.alphaColor(color, color.a * alphaComposite);
+        }
+        boolean needSmoothing = (x1 != x2 && y1 != y2);
+        if (color.a < 1 || needSmoothing) { //enable blending so alpha colored shapes work properly
+            Gdx.gl.glEnable(GL_BLEND);
+        }
+        if (needSmoothing) {
+            Gdx.gl.glEnable(GL_LINE_SMOOTH);
+        }
+
+        startShape(ShapeType.Line);
+        shapeRenderer.setColor(color);
+        shapeRenderer.line(adjustX(x1), adjustY(y1, 0), adjustX(x2), adjustY(y2, 0));
+        endShape();
+
+        if (needSmoothing) {
+            Gdx.gl.glDisable(GL_LINE_SMOOTH);
+        }
+        if (color.a < 1 || needSmoothing) {
+            Gdx.gl.glDisable(GL_BLEND);
+        }
+        if (thickness > 1) {
+            Gdx.gl.glLineWidth(1);
+        }
+
+        batch.begin();
+    }
     public void drawArrow(float borderThickness, float arrowThickness, float arrowSize, FSkinColor skinColor, float x1, float y1, float x2, float y2) {
         drawArrow(borderThickness, arrowThickness, arrowSize, skinColor.getColor(), x1, y1, x2, y2);
     }

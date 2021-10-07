@@ -83,8 +83,6 @@ public enum TrackableProperty {
     NeedsTransformAnimation(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
     NeedsUntapAnimation(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
     NeedsTapAnimation(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
-    TargetingOriginVectorX(TrackableTypes.FloatType, FreezeMode.IgnoresFreeze),
-    TargetingOriginVectorY(TrackableTypes.FloatType, FreezeMode.IgnoresFreeze),
 
     ImprintedCards(TrackableTypes.CardViewCollectionType),
     HauntedBy(TrackableTypes.CardViewCollectionType),

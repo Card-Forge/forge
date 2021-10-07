@@ -160,6 +160,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_LOAD_NONLEGAL_CARDS("true"),
         ALLOW_CUSTOM_CARDS_IN_DECKS_CONFORMANCE("false"),
         UI_AUTO_CACHE_SIZE("false"),
+        UI_USE_LASER_ARROWS("true"),
         UI_ALLOW_ORDER_GRAVEYARD_WHEN_NEEDED ("Never"),
         UI_DEFAULT_FONT_SIZE("12"),
         UI_CARD_ART_FORMAT("Full"),
