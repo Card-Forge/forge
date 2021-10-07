@@ -95,20 +95,11 @@ public class SacrificeEffect extends SpellAbilityEffect {
         final boolean exploit = sa.hasParam("Exploit");
         final boolean sacEachValid = sa.hasParam("SacEachValid");
 
-        String valid = sa.getParam("SacValid");
-        if (valid == null) {
-            valid = "Self";
-        }
-
-        String msg = sa.getParam("SacMessage");
-        if (msg == null) {
-            msg = valid;
-        }
+        String valid = sa.getParamOrDefault("SacValid", "Self");
+        String msg = sa.getParamOrDefault("SacMessage", valid);
 
         final boolean destroy = sa.hasParam("Destroy");
         final boolean remSacrificed = sa.hasParam("RememberSacrificed");
-        final String remSVar = sa.getParam("RememberSacrificedSVar");
-        int countSacrificed = 0;
         CardZoneTable table = new CardZoneTable();
         Map<AbilityKey, Object> params = AbilityKey.newMap();
         params.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
@@ -116,7 +107,6 @@ public class SacrificeEffect extends SpellAbilityEffect {
         if (valid.equals("Self") && game.getZoneOf(card) != null) {
             if (game.getZoneOf(card).is(ZoneType.Battlefield)) {
                 if (game.getAction().sacrifice(card, sa, table, params) != null) {
-                    countSacrificed++;
                     if (remSacrificed) {
                         card.addRemembered(card);
                     }
@@ -198,21 +188,11 @@ public class SacrificeEffect extends SpellAbilityEffect {
                         game.getTriggerHandler().runTrigger(TriggerType.Exploited, runParams, false);
                     }
                     if (wasDestroyed || wasSacrificed) {
-                        countSacrificed++;
                         if (remSacrificed) {
                             card.addRemembered(lKICopy);
                         }
                     }
                 }
-            }
-
-            if (remSVar != null) {
-                card.setSVar(remSVar, String.valueOf(countSacrificed));
-                SpellAbility root = sa;
-                do {
-                    root.setSVar(remSVar, String.valueOf(countSacrificed));
-                    root = root.getSubAbility();
-                } while (root != null);
             }
         }
 
@@ -225,13 +205,9 @@ public class SacrificeEffect extends SpellAbilityEffect {
 
         final List<Player> tgts = getTargetPlayers(sa);
 
-        String valid = sa.getParam("SacValid");
-        if (valid == null) {
-            valid = "Self";
-        }
+        String valid = sa.getParamOrDefault("SacValid", "Self");
+        String num = sa.getParamOrDefault("Amount", "1");
 
-        String num = sa.getParam("Amount");
-        num = (num == null) ? "1" : num;
         final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), num, sa);
 
         if (valid.equals("Self")) {
@@ -244,10 +220,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
                 sb.append(p.getName()).append(" ");
             }
 
-            String msg = sa.getParam("SacMessage");
-            if (msg == null) {
-                msg = valid;
-            }
+            String msg = sa.getParamOrDefault("SacMessage", valid);
 
             if (sa.hasParam("Destroy")) {
                 sb.append("Destroys ");
