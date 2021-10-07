@@ -405,7 +405,6 @@ public class Game {
         sbaCheckedCommandList.clear();
     }
 
-
     public final PhaseHandler getPhaseHandler() {
         return phaseHandler;
     }
@@ -766,8 +765,7 @@ public class Game {
                 iAlive = ingamePlayers.indexOf(allPlayers.get(iPlayer));
             } while (iAlive < 0);
             iPlayer = iAlive;
-        }
-        else { // for the case playerTurn hasn't died
+        } else { // for the case playerTurn hasn't died
         	final int numPlayersInGame = ingamePlayers.size();
         	iPlayer = (iPlayer + shift) % numPlayersInGame;
         	if (iPlayer < 0) {

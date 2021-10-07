@@ -1,5 +1,6 @@
 package forge.game.ability;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -198,13 +199,19 @@ public abstract class SpellAbilityEffect {
     // Players
     protected final static PlayerCollection getTargetPlayers(final SpellAbility sa) {                                       return getPlayers(false, "Defined",    sa); }
     protected final static PlayerCollection getTargetPlayers(final SpellAbility sa, final String definedParam) {            return getPlayers(false, definedParam, sa); }
-    protected final static PlayerCollection getDefinedPlayersOrTargeted(final SpellAbility sa) {                           return getPlayers(true,  "Defined",    sa); }
+    protected final static PlayerCollection getDefinedPlayersOrTargeted(final SpellAbility sa) {                            return getPlayers(true,  "Defined",    sa); }
     protected final static PlayerCollection getDefinedPlayersOrTargeted(final SpellAbility sa, final String definedParam) { return getPlayers(true,  definedParam, sa); }
 
     private static PlayerCollection getPlayers(final boolean definedFirst, final String definedParam, final SpellAbility sa) {
         final boolean useTargets = sa.usesTargeting() && (!definedFirst || !sa.hasParam(definedParam));
-        return useTargets ? new PlayerCollection(sa.getTargets().getTargetPlayers())
+        PlayerCollection players = useTargets ? new PlayerCollection(sa.getTargets().getTargetPlayers())
                 : AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam(definedParam), sa);
+        // try sort in APNAP order
+        int indexAP = players.indexOf(sa.getHostCard().getGame().getPhaseHandler().getPlayerTurn());
+        if (indexAP != -1) {
+            Collections.rotate(players, - indexAP);
+        }
+        return players;
     }
 
     // Spells
@@ -219,8 +226,8 @@ public abstract class SpellAbilityEffect {
     }
 
     // Targets of card or player type
-    protected final static List<GameEntity> getTargetEntities(final SpellAbility sa) {                                return getEntities(false, "Defined",    sa); }
-    protected final static List<GameEntity> getTargetEntities(final SpellAbility sa, final String definedParam) {     return getEntities(false, definedParam, sa); }
+    protected final static List<GameEntity> getTargetEntities(final SpellAbility sa) {                                 return getEntities(false, "Defined",    sa); }
+    protected final static List<GameEntity> getTargetEntities(final SpellAbility sa, final String definedParam) {      return getEntities(false, definedParam, sa); }
     protected final static List<GameEntity> getDefinedEntitiesOrTargeted(SpellAbility sa, final String definedParam) { return getEntities(true,  definedParam, sa); }
 
     private static List<GameEntity> getEntities(final boolean definedFirst, final String definedParam, final SpellAbility sa) {
