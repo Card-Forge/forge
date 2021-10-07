@@ -2082,10 +2082,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.equals("Split second") || keyword.equals("Sunburst")
                         || keyword.equals("Suspend") // for the ones without amount
                         || keyword.equals("Foretell") // for the ones without cost
-                        || keyword.equals("Hideaway") || keyword.equals("Ascend")
-                        || keyword.equals("Totem armor") || keyword.equals("Battle cry")
-                        || keyword.equals("Devoid") || keyword.equals("Riot")) {
+                        || keyword.equals("Hideaway") || keyword.equals("Ascend") || keyword.equals("Totem armor")
+                        || keyword.equals("Battle cry") || keyword.equals("Devoid") || keyword.equals("Riot")) {
                     sbLong.append(keyword).append(" (").append(inst.getReminderText()).append(")");
+                } else if (keyword.startsWith("Hideaway:")) {
+                        String[] p = keyword.split(":");
+                        String reminder = inst.getReminderText();
+                        sbLong.append(p[0]).append(" (").append(reminder, 0, 5).append(p[1].toLowerCase());
+                        sbLong.append(reminder, 9, 168).append(")");
                 } else if (keyword.startsWith("Partner:")) {
                     final String[] k = keyword.split(":");
                     sbLong.append("Partner with ").append(k[1]).append(" (").append(inst.getReminderText()).append(")");
