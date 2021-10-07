@@ -1202,7 +1202,7 @@ public class AiAttackController {
         }
 
         // look at the attacker in relation to the blockers to establish a
-        // number of factors about the attacking  context that will be relevant
+        // number of factors about the attacking context that will be relevant
         // to the attackers decision according to the selected strategy
         for (final Card defender : validBlockers) {
             // if both isWorthLessThanAllKillers and canKillAllDangerous are false there's nothing more to check
