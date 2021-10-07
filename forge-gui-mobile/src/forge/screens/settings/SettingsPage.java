@@ -598,6 +598,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 localizer.getMessage("lblShowAbilityIconsOverlays"),
                 localizer.getMessage("nlShowAbilityIconsOverlays")),
                 5);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_USE_LASER_ARROWS,
+                        localizer.getMessage("lblUseLaserArrows"),
+                        localizer.getMessage("nlUseLaserArrows")),
+                5);
         //Vibration Options
         lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_LIFE_LOSS,
                 localizer.getMessage("lblVibrateWhenLosingLife"),
