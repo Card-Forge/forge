@@ -2890,7 +2890,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         // Vanguard
         if (registeredPlayer.getVanguardAvatars() != null) {
-            for(PaperCard avatar:registeredPlayer.getVanguardAvatars()) {
+            for (PaperCard avatar:registeredPlayer.getVanguardAvatars()) {
                 com.add(Card.fromPaperCard(avatar, this));
             }
         }

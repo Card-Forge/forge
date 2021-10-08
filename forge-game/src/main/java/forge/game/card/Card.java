@@ -2539,7 +2539,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.equals("Split second")) {
                     sbBefore.append(keyword).append(" (").append(inst.getReminderText()).append(")");
                     sbBefore.append("\r\n");
-                } else if(keyword.equals("Conspire") || keyword.equals("Epic")
+                } else if (keyword.equals("Conspire") || keyword.equals("Epic")
                         || keyword.equals("Suspend") || keyword.equals("Jump-start")
                         || keyword.equals("Fuse")) {
                     sbAfter.append(keyword).append(" (").append(inst.getReminderText()).append(")");
@@ -5906,9 +5906,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
         if (sa.isSpell()) {
             // TODO replace with Static Ability
-            for(KeywordInterface inst : source.getKeywords()) {
+            for (KeywordInterface inst : source.getKeywords()) {
                 String kw = inst.getOriginal();
-                if(!kw.startsWith("SpellCantTarget")) {
+                if (!kw.startsWith("SpellCantTarget")) {
                     continue;
                 }
                 final String[] k = kw.split(":");
