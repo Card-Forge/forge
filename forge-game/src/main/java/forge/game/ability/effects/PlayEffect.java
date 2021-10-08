@@ -427,11 +427,10 @@ public class PlayEffect extends SpellAbilityEffect {
 
         game.getEndOfTurn().addUntil(endEffect);
 
-        eff.updateStateForView();
-
         // TODO: Add targeting to the effect so it knows who it's dealing with
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         game.getAction().moveTo(ZoneType.Command, eff, sa);
+        eff.updateStateForView();
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
     }
 
@@ -465,10 +464,9 @@ public class PlayEffect extends SpellAbilityEffect {
         addExileOnMovedTrigger(eff, "Battlefield");
         addExileOnCounteredTrigger(eff);
 
-        eff.updateStateForView();
-
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         game.getAction().moveTo(ZoneType.Command, eff, sa);
+        eff.updateStateForView();
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
     }
 }
