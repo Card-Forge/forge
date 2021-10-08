@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import forge.game.Game;
+import forge.game.GameActionUtil;
 import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.ability.AbilityKey;
@@ -113,6 +114,8 @@ public class AttachEffect extends SpellAbilityEffect {
         } else {
             attachToName = attachTo.toString();
         }
+
+        attachments = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, attachments, ZoneType.Battlefield, sa);
 
         // If Cast Targets will be checked on the Stack
         for (final Card attachment : attachments) {
