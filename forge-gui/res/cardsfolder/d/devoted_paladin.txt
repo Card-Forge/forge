@@ -4,4 +4,5 @@ Types:Creature Orc Knight
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ Beacon of Hope — When CARDNAME enters the battlefield, creatures you control get +1/+1 and gain vigilance until end of turn.
 SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Vigilance
+SVar:PlayMain1:TRUE
 Oracle:Beacon of Hope — When Devoted Paladin enters the battlefield, creatures you control get +1/+1 and gain vigilance until end of turn.
