@@ -19,6 +19,8 @@ package forge.screens.deckeditor;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 
 import javax.swing.*;
@@ -34,15 +36,12 @@ import forge.Singletons;
 import forge.StaticData;
 import forge.card.CardEdition;
 import forge.deck.*;
-import forge.deck.DeckRecognizer.TokenType;
 import forge.deck.DeckRecognizer.Token.TokenKey;
 import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.gui.CardPicturePanel;
-import forge.item.InventoryItem;
 import forge.item.PaperCard;
-import forge.model.FModel;
-import forge.screens.deckeditor.controllers.ACEditorBase;
+import forge.screens.deckeditor.controllers.CDeckEditor;
 import forge.screens.deckeditor.controllers.CStatisticsImporter;
 import forge.screens.deckeditor.views.VStatisticsImporter;
 import forge.toolbox.FComboBox;
@@ -50,22 +49,39 @@ import forge.toolbox.*;
 import forge.util.Localizer;
 import forge.view.FDialog;
 import net.miginfocom.swing.MigLayout;
+import org.apache.commons.lang3.StringUtils;
+
+import static forge.deck.DeckRecognizer.TokenType.*;
 
 /**
   *
  * Dialog for quick import of decks.
  *
- * @param <TItem>
  * @param <TModel>
  */
-public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> extends FDialog {
+public class DeckImport<TModel extends DeckBase> extends FDialog {
     private static final long serialVersionUID = -5837776824284093004L;
 
     private final FTextArea txtInput = new FTextArea();
-    public static final String KNOWNCARD_COLOR = "#89DC9F;";
-    public static final String UNKNOWN_CARD_COLOR = "#E1E35F;";
-    public static final String ILLEGAL_CARD_COLOR = "#FF977A;";
-    public static final String INVALID_CARD_COLOR = "#A9E5DD;";
+    // FIXME: review colours!
+    // FIXME: Background colour: #3e4f63
+
+    // UN-USED COLOUR TO USE "#E1E35F;";
+
+    public static final String OK_CARD_IMPORT_COLOUR = "#89DC9F;";
+    public static final String WARN_MSG_COLOUR = "#FEC700;";
+    public static final String KO_CARD_NO_IMPORT_COLOUR = "#FF977A;";
+
+    public static final String OK_IMPORT_CLASS = "ok_import";
+    public static final String WARN_MSG_CLASS = "warn_msg";
+    public static final String KO_NOIMPORT_CLASS = "ko_noimport";
+    public static final String COMMENT_CLASS = "comment";
+    public static final String DECKNAME_CLASS = "deckname";
+    public static final String SECTION_CLASS = "section";
+    public static final String CARDTYPE_CLASS = "cardtype";
+    public static final String CMC_CLASS = "cmc";
+    public static final String RARITY_CLASS = "rarity";
+
     private static final String STYLESHEET = String.format("<style>"
             + "body, h1, h2, h3, h4, h5, h6, table, tr, td, a {font-weight: normal; line-height: 1.6; "
             + " font-family: Arial; font-size: 10px;}"
@@ -82,41 +98,36 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
             + " a:active { text-decoration: none !important;}"
             + " table {margin: 5px 0;}"
             // Card Matching Colours #4F6070
-            + " .knowncard   {color: %s !important; font-weight: bold;}"
-            + " .unknowncard {color: %s !important; font-weight: bold;}"
-            + " .illegalcard {color: %s !important; font-weight: bold;}"
-            + " .invalidcard {color: %s !important; font-weight: bold;}"
-            + " .comment     {font-style: italic}"
-            // Deck Name
-            + " .deckname    {background-color: #332200; color: #ffffff; }"
-            + " .sectionname {padding-left: 8px; font-weight: bold; }"
-            // Placeholders
-            + " .section     {font-weight: bold; background-color: #DDDDDD; color: #000000;}"
-            + " .cardtype    {font-weight: bold; background-color: #FFCC66; color: #000000;}"
-            + " .cmc         {font-weight: bold; background-color: #C6C7BA; color: #000000;}"
-            + " .rarity      {font-weight: bold; background-color: #df8030; color: #ffffff;}"
-            + " .mana        {font-weight: bold; background-color: #38221A; color: #ffffff;}"
-            // Colours
-            + " .colorless   {font-weight: bold; background-color: #544132; color: #ffffff;}"
-            + " .blue        {font-weight: bold; background-color: #0D78BF; color: #ffffff;}"
-            + " .red         {font-weight: bold; background-color: #ED0713; color: #ffffff;}"
-            + " .white       {font-weight: bold; background-color: #FCFCB6; color: #000000;}"
-            + " .black       {font-weight: bold; background-color: #787878; color: #000000;}"
-            + " .green       {font-weight: bold; background-color: #26AB57; color: #000000;}"
-            + " .multicolor  {font-weight: bold; background-color: #c4c26c; color: #000000;}"
-            // Card Edition
-            + " .editioncode {font-weight: bold; color: #ffffff;}"
-            + "</style>",KNOWNCARD_COLOR, UNKNOWN_CARD_COLOR, ILLEGAL_CARD_COLOR, INVALID_CARD_COLOR) ;
+            + " .%s {color: %s !important; font-weight: bold;}"  // ok import
+            + " .%s {color: %s !important; font-weight: bold;}"  // warn msg
+            + " .%s {color: %s !important; font-weight: bold;}"  // ko no import
+            + " .%s {font-style: italic}"  // comment
+            + " .%s {background-color: #332200; color: #ffffff; }"  // Deck Name
+            // Placeholders CardType colour to reuse: #0e0f21
+            + " .%s {font-weight: bold; background-color: #DDDDDD; color: #000000;}"  // section
+            + " .%s {font-weight: bold; background-color: #FFCC66; color: #000000;}"  // card type
+            + " .%s {font-weight: bold; background-color: #CCCCCC; color: #000000;}"  // cmc
+            + " .%s {font-weight: bold; background-color: #df8030; color: #ffffff;}"  // rarity
+//            // Colours
+//            + " .colorless   {font-weight: bold; background-color: #544132; color: #ffffff;}"
+//            + " .blue        {font-weight: bold; background-color: #0D78BF; color: #ffffff;}"
+//            + " .red         {font-weight: bold; background-color: #ED0713; color: #ffffff;}"
+//            + " .white       {font-weight: bold; background-color: #FCFCB6; color: #000000;}"
+//            + " .black       {font-weight: bold; background-color: #787878; color: #000000;}"
+//            + " .green       {font-weight: bold; background-color: #26AB57; color: #000000;}"
+//            + " .multicolor  {font-weight: bold; background-color: #c4c26c; color: #000000;}"
+            + "</style>", OK_IMPORT_CLASS, OK_CARD_IMPORT_COLOUR,
+            WARN_MSG_CLASS, WARN_MSG_COLOUR, KO_NOIMPORT_CLASS, KO_CARD_NO_IMPORT_COLOUR,
+            COMMENT_CLASS, DECKNAME_CLASS, SECTION_CLASS, CARDTYPE_CLASS, CMC_CLASS, RARITY_CLASS) ;
+
     private static final String COLOUR_CODED_TAGS = String.format(
             "<ul>" +
-            "<li> <span class=\"knowncard\">%s</span></li>" +
-            "<li> <span class=\"unknowncard\">%s</span></li>" +
-            "<li> <span class=\"illegalcard\">%s</span></li>" +
-            "<li> <span class=\"invalidcard\">%s</span></li></ul>",
-            Localizer.getInstance().getMessage("lblGuideKnownCard"),
-            Localizer.getInstance().getMessage("lblGuideUnknownCard"),
-            Localizer.getInstance().getMessage("lblGuideIllegalCard"),
-            Localizer.getInstance().getMessage("lblGuideInvalidCard")
+            "<li> <span class=\"%s\">%s</span></li>" +
+            "<li> <span class=\"%s\">%s</span></li>" +
+            "<li> <span class=\"%s\">%s</span></li></ul>",
+            OK_IMPORT_CLASS, Localizer.getInstance().getMessage("lblGuideImportCard"),
+            WARN_MSG_COLOUR, Localizer.getInstance().getMessage("lblGuideWarnMessage"),
+            KO_NOIMPORT_CLASS, Localizer.getInstance().getMessage("lblGuideNoImportCard")
             );
     private static final String TIPS_LIST = String.format(
             "<ul><li>%s</li><li>%s</li><li>%s</li><li>%s</li><li>%s</li><li>%s</li></ul>",
@@ -155,15 +166,14 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
             Localizer.getInstance().getMessage("nlExample4")
     );
 
-    private static final String HTML_WELCOME_TEXT = String.format("<html>"
-            + "<head>"
+    private static final String HTML_WELCOME_TEXT = String.format("<head>"
             + DeckImport.STYLESHEET
             + "</head>"
             + "<body>"
             + "<h3 id='how-to-use-the-deck-importer'>%s</h3><div>%s</div> "
             + "<h4>%s</h4><div>%s</div> "
             + "<h4>%s</h4><div>%s</div> "
-            + "</body></html>",
+            + "</body>",
             Localizer.getInstance().getMessage("nlGuideTitle"),
             Localizer.getInstance().getMessage("nlGuideQuickInstructions", COLOUR_CODED_TAGS),
             Localizer.getInstance().getMessage("nlGuideTipsTitle"),
@@ -182,52 +192,62 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
     private final FButton cmdCancelButton = new FButton(Localizer.getInstance().getMessage("lblCancel"));
 
     private final FButton cmdAcceptButton;  // Not initialised as label will be adaptive.
-    private final FCheckBox createNewDeckCheckbox = new FCheckBox(Localizer.getInstance().getMessage("lblNewDeckCheckbox"), false);
-    private final DeckFormat deckFormat;
+    private final FCheckBox createNewDeckCheckbox = new FCheckBox(Localizer.getInstance()
+            .getMessage("lblNewDeckCheckbox"), false);
 
     // Release Date
-    private final FCheckBox dateTimeCheck = new FCheckBox(Localizer.getInstance().getMessage("lblUseOnlySetsReleasedBefore"), false);
+    private final FCheckBox dateTimeCheck = new FCheckBox(Localizer.getInstance()
+            .getMessage("lblUseOnlySetsReleasedBefore"), false);
     private final FComboBox<String> monthDropdown = new FComboBox<>();
     private final FComboBox<Integer> yearDropdown = new FComboBox<>();
 
     // Card Art Preferences
     private final FLabel cardArtPrefsLabel = new FLabel.Builder()
             .text(Localizer.getInstance().getMessage("lblPreferredArt"))
-            .fontSize(14).build();
+            .fontSize(14).tooltip(Localizer.getInstance().getMessage("nlPreferredArt")).build();
     private FComboBox<String> cardArtPrefsComboBox;
-    private final FCheckBox cardArtPrefFilter = new FCheckBox(Localizer.getInstance().getMessage("lblPrefArtExpansionOnly"), false);
+    private final FCheckBox cardArtPrefHasFilterCheckBox = new FCheckBox(Localizer.getInstance()
+            .getMessage("lblPrefArtExpansionOnly"), false);
 
-    // Block Format Filter
-    private final FCheckBox blockCheck = new FCheckBox(Localizer.getInstance().getMessage("lblUseBlockFilters"), false);
-    private final FComboBox<GameFormat> blocksDropdown = new FComboBox<>();
+    // Format Filter
+    private final FCheckBox includeBnRCheck = new FCheckBox(Localizer.getInstance().getMessage("lblIgnoreBnR"), false);
+
+    // These two components will only be used only when there is no pre-defined Game Format (e.g. Constructed)
+    private final FCheckBox formatSelectionCheck = new FCheckBox(Localizer.getInstance()
+            .getMessage("lblUseFormatFilter"), false);
+    private final FComboBox<GameFormat> formatDropdown = new FComboBox<>();
 
     private final DeckImportController controller;
-    private final ACEditorBase<TItem, TModel> host;
+    private final CDeckEditor<TModel> host;
 
     private final String IMPORT_CARDS_CMD_LABEL = Localizer.getInstance().getMessage("lblImportCardsCmd");
     private final String CREATE_NEW_DECK_CMD_LABEL = Localizer.getInstance().getMessage("lblCreateNewCmd");
+    private final String currentGameType;
+    private final VStatisticsImporter statsView;
+    private final CStatisticsImporter cStatsView;
 
-    public DeckImport(final ACEditorBase<TItem, TModel> g) {
-        boolean currentDeckIsNotEmpty = !(g.getDeckController().isEmpty());
-        DeckFormat currentDeckFormat = g.getGameType().getDeckFormat();
-        this.deckFormat = currentDeckFormat;
-        GameType currentGameType = g.getGameType();
-        // get the game format with the same name of current game type (if any)
-        GameFormat currentGameFormat = FModel.getFormats().get(currentGameType.name());
-        GameFormat vintageGameFormat = FModel.getFormats().get("Vintage");  // default for constructed
-        if (currentGameFormat == null)
-            currentGameFormat = vintageGameFormat;
-        List<String> allowedSetCodes = currentGameFormat.getAllowedSetCodes();
-        if (allowedSetCodes == null || allowedSetCodes.isEmpty())
-            allowedSetCodes = vintageGameFormat.getAllowedSetCodes();
-        this.controller = new DeckImportController(dateTimeCheck, monthDropdown, yearDropdown,
-                currentDeckIsNotEmpty, allowedSetCodes, currentDeckFormat, blockCheck, blocksDropdown);
-        this.cmdAcceptButton = new FButton(IMPORT_CARDS_CMD_LABEL);
+    public DeckImport(final CDeckEditor<TModel> g) {
         this.host = g;
-        initMainPanel(g, currentDeckIsNotEmpty, currentGameType);
+        boolean currentDeckIsNotEmpty = !(g.getDeckController().isEmpty());
+        GameType currentGameType = g.getGameType();
+        this.controller = new DeckImportController(dateTimeCheck, monthDropdown, yearDropdown, currentDeckIsNotEmpty);
+        this.controller.setGameFormat(currentGameType);
+        // Get the list of allowed Sections
+        List<DeckSection> supportedSections = new ArrayList<>();
+        for (DeckSection section : EnumSet.allOf(DeckSection.class)) {
+            if (this.host.isSectionImportable(section))
+                supportedSections.add(section);
+        }
+        this.currentGameType = currentGameType.name();
+        this.controller.setAllowedSections(supportedSections);
+
+        this.cmdAcceptButton = new FButton(IMPORT_CARDS_CMD_LABEL);
+        this.statsView = new VStatisticsImporter(this.controller.currentGameFormatAllowsCommander());
+        this.cStatsView = new CStatisticsImporter(this.statsView);
+        initUIComponents(g, currentDeckIsNotEmpty);
     }
 
-    private void initMainPanel(ACEditorBase<TItem, TModel> g, boolean currentDeckIsNotEmpty, GameType currentGameType) {
+    private void initUIComponents(CDeckEditor<TModel> g, boolean currentDeckIsNotEmpty) {
 //        GraphicsDevice gd = this.getGraphicsConfiguration().getDevice();
 //        final int wWidth = (int)(gd.getDisplayMode().getWidth() * 0.85);
 //        final int wHeight = (int)(gd.getDisplayMode().getHeight() * 0.8);
@@ -237,29 +257,44 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         this.setSize(wWidth, wHeight);
 
         // Set Title
-        String gameTypeName = String.format(" %s", currentGameType.name());
-        this.setTitle(Localizer.getInstance().getMessage("lblDeckImporterPanelTitle") + gameTypeName);
-
+        this.setTitle(Localizer.getInstance().getMessage("lblDeckImporterPanelTitle", this.currentGameType));
         txtInput.setFocusable(true);
         txtInput.setEditable(true);
 
         final FSkin.SkinColor foreColor = FSkin.getColor(FSkin.Colors.CLR_TEXT);
 
-        // === INIT COMPONENTS
+        // === INIT UI COMPONENTS ===
+        // --------------------------
 
-        // == Scroll Input (Card List)
+        // === TOP COMPONENTS ===
+
+        // == A. Scroll Input (Card List)
         this.scrollInput.setBorder(new FSkin.TitledSkinBorder(BorderFactory.createEtchedBorder(),
                 Localizer.getInstance().getMessage("lblCardListTitle"), foreColor));
         this.scrollInput.setViewportBorder(BorderFactory.createLoweredBevelBorder());
-        // == Scroll Output (Decklist)
+        // Action Listeners
+        // ----------------
+        this.txtInput.getDocument().addDocumentListener(new OnChangeTextUpdate());
+
+        // == B. Scroll Output (Decklist)
         this.scrollOutput.setBorder(new FSkin.TitledSkinBorder(BorderFactory.createEtchedBorder(),
                 Localizer.getInstance().getMessage("lblDecklistTitle"), foreColor));
         this.scrollOutput.setViewportBorder(BorderFactory.createLoweredBevelBorder());
-        // == Stats Panel
+        // Action Listeners
+        // ----------------
+        this.htmlOutput.addHyperlinkListener(new HyperlinkListener() {
+            @Override
+            public void hyperlinkUpdate(HyperlinkEvent e) {
+                activateCardPreview(e);
+            }
+        });
+
+        // == C.1 Stats Panel
         FPanel statsPanel = new FPanel(new BorderLayout());
-        statsPanel.add(VStatisticsImporter.instance().getMainPanel(), BorderLayout.CENTER);
+        statsPanel.add(this.statsView.getMainPanel(), BorderLayout.CENTER);
         statsPanel.setOpaque(false);
-        // == Card Preview
+
+        // == C.2 Card Preview Panel
         this.cardImagePreview.setOpaque(false);
         this.cardImagePreview.setBorder(new EmptyBorder(2, 5, 2, 5));
         this.cardImagePreview.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT).getColor());
@@ -267,67 +302,194 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         FPanel cardPreview = new FPanel(new MigLayout("fill"));
         cardPreview.add(this.cardPreviewLabel, "cell 0 0, align left, w 100%");
         cardPreview.add(this.cardImagePreview, "cell 0 1, w 70%, h 60%, growy, pushy, ax c");
-        // == Options Panel
-        JPanel optionsPanel = new JPanel(new MigLayout("insets 10, gap 5, center, h 120!"));
-        final TitledBorder border = new TitledBorder(BorderFactory.createEtchedBorder(), "Options");
+
+        // === BOTTOM COMPONENTS ===
+
+        // == A. (Closed) Option Panel
+        // This component will be used as a Placeholder panel to simulate Show/Hide animation
+        JPanel closedOptsPanel = new JPanel(new MigLayout("insets 10, gap 5, left, w 100%"));
+        closedOptsPanel.setVisible(true);
+        closedOptsPanel.setOpaque(false);
+        final TitledBorder showOptsBorder = new TitledBorder(BorderFactory.createEtchedBorder(),
+                String.format("\u25B6 %s", Localizer.getInstance().getMessage("lblExtraOptions")));
+        showOptsBorder.setTitleColor(foreColor.getColor());
+        closedOptsPanel.setBorder(showOptsBorder);
+        closedOptsPanel.add(new JSeparator(JSeparator.HORIZONTAL), "w 100%, hidemode 2");
+
+        // == B. (Actual) Options Panel
+        JPanel optionsPanel = new JPanel(new MigLayout("insets 10, gap 5, left, h 130!"));
+        final TitledBorder border = new TitledBorder(BorderFactory.createEtchedBorder(),
+                String.format("\u25BC %s", Localizer.getInstance().getMessage("lblHideOptions")));
         border.setTitleColor(foreColor.getColor());
         optionsPanel.setBorder(border);
         optionsPanel.setVisible(false);
         optionsPanel.setOpaque(false);
 
-        FButton showOptionsButton = new FButton(Localizer.getInstance().getMessage("lblShowOptions"));
-        showOptionsButton.setFont(FSkin.getBoldFont(12));
-        FButton hideOptionsButton = new FButton(Localizer.getInstance().getMessage("lblHideOptions"));
-        hideOptionsButton.setFont(FSkin.getBoldFont(12));
+        // Action Listeners
+        // ----------------
+        closedOptsPanel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                optionsPanel.setVisible(true);
+                closedOptsPanel.setVisible(false);
+            }
+        });
+        optionsPanel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                optionsPanel.setVisible(false);
+                closedOptsPanel.setVisible(true);
+            }
+        });
 
-        String optPanelConstrains = "w 130!, h 80!, left, insets 0";
+        // OPTIONS PANEL COMPONENTS
+        // ------------------------
 
-        // = (opt) Date filter
-        JPanel dateFilterPanel = new JPanel(new MigLayout(optPanelConstrains));
+        String optPanelsConstrains = "w 130!, h 120!, left, insets 0";
+
+        // B1. Date filter
+        this.monthDropdown.setEnabled(false);
+        this.yearDropdown.setEnabled(false);
+        this.dateTimeCheck.setToolTipText(Localizer.getInstance().getMessage("ttUseOnlySetsReleasedBefore"));
+        // Info Label
+        FSkin.SkinnedLabel dateFilterInfoLabel = new FSkin.SkinnedLabel(
+                Localizer.getInstance().getMessage("nlUseOnlySetsReleasedBefore"));
+        dateFilterInfoLabel.setFont(FSkin.getItalicFont());
+        dateFilterInfoLabel.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+
+        JPanel dateFilterPanel = new JPanel(new MigLayout(optPanelsConstrains));
         dateFilterPanel.setOpaque(false);
-        dateFilterPanel.add(this.dateTimeCheck, "cell 0 0, w 40%, ax left");
+        dateFilterPanel.add(this.dateTimeCheck, "cell 0 0, w 90%!, ax left");
         dateFilterPanel.add(this.monthDropdown, "cell 0 1, w 10%, ax left, split 2, pad 0 2 0 0");
         dateFilterPanel.add(this.yearDropdown,  "cell 0 1, w 8%, ax left, split 2");
+        dateFilterPanel.add(dateFilterInfoLabel, "cell 0 2, w 80%!, h 22px!, ax left, wrap");
 
-        // (opt) Card Art Preference Filter
+        // Action Listeners
+        // ----------------
+        this.dateTimeCheck.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                final boolean isSel = dateTimeCheck.isSelected();
+                monthDropdown.setEnabled(isSel);
+                yearDropdown.setEnabled(isSel);
+                parseAndDisplay();
+            }
+        });
+        final ActionListener reparseAction = new ActionListener() {
+            @Override public void actionPerformed(final ActionEvent e) {
+                parseAndDisplay();
+            }
+        };
+        this.yearDropdown.addActionListener(reparseAction);
+        this.monthDropdown.addActionListener(reparseAction);
 
+        optionsPanel.add(dateFilterPanel, "cell 0 0, w 90%, left");
+
+        // B2. Card Art Preference Filter
         final String latestOpt = Localizer.getInstance().getMessage("latestArtOpt");
         final String originalOpt = Localizer.getInstance().getMessage("originalArtOpt");
         final String [] choices = {latestOpt, originalOpt};
         this.cardArtPrefsComboBox = new FComboBox<>(choices);
         final String selectedItem = StaticData.instance().cardArtPreferenceIsLatest() ? latestOpt : originalOpt;
         this.cardArtPrefsComboBox.setSelectedItem(selectedItem);
-        this.cardArtPrefFilter.setSelected(StaticData.instance().isCoreExpansionOnlyFilterSet());
+        this.cardArtPrefsComboBox.setToolTipText(Localizer.getInstance().getMessage("nlPreferredArt"));
+        // Info Label
+        FSkin.SkinnedLabel artPrefInfoLabel = new FSkin.SkinnedLabel(
+                Localizer.getInstance().getMessage("nlPreferredArt"));
+        artPrefInfoLabel.setFont(FSkin.getItalicFont());
+        artPrefInfoLabel.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
 
-        JPanel cardArtPanel = new JPanel(new MigLayout(optPanelConstrains));
+        this.cardArtPrefHasFilterCheckBox.setSelected(StaticData.instance().isCoreExpansionOnlyFilterSet());
+        this.cardArtPrefHasFilterCheckBox.setToolTipText(Localizer.getInstance().getMessage("nlPrefArtExpansionOnly"));
+
+        JPanel cardArtPanel = new JPanel(new MigLayout(optPanelsConstrains));
         cardArtPanel.setOpaque(false);
         cardArtPanel.add(this.cardArtPrefsLabel,    "cell 0 0, w 25%, left, split 2");
         cardArtPanel.add(this.cardArtPrefsComboBox, "cell 0 0, w 10%, left, split 2");
-        cardArtPanel.add(this.cardArtPrefFilter,    "cell 0 1, w 15%, left");
+        cardArtPanel.add(this.cardArtPrefHasFilterCheckBox,    "cell 0 1, w 15%, left, gaptop 5");
+        cardArtPanel.add(artPrefInfoLabel, "cell 0 2, w 90%, left");
 
-        // (opt) Block Filter
-        this.blocksDropdown.setEnabled(false);  // not enabled by default
-        JPanel blockFilterPanel = new JPanel(new MigLayout(optPanelConstrains));
+        // Action Listeners
+        // ----------------
+        ItemListener updateCardArtPreference = new ItemListener() {
+            @Override
+            public void itemStateChanged(final ItemEvent e) {
+                String artPreference = cardArtPrefsComboBox.getSelectedItem();
+                if (artPreference == null)
+                    artPreference = latestOpt;  // default, just in case
+                final boolean latestArt = artPreference.equalsIgnoreCase(latestOpt);
+                final boolean coreExpFilter = cardArtPrefHasFilterCheckBox.isSelected();
+                controller.setCardArtPreference(latestArt, coreExpFilter);
+                parseAndDisplay();
+            }
+        };
+        this.cardArtPrefsComboBox.addItemListener(updateCardArtPreference);
+        this.cardArtPrefHasFilterCheckBox.addItemListener(updateCardArtPreference);
+
+        optionsPanel.add(cardArtPanel,     "cell 1 0, w 100%, left");
+
+        // B3. Block Filter
+        this.formatDropdown.setEnabled(false);  // not enabled by default
+        this.includeBnRCheck.setToolTipText(Localizer.getInstance().getMessage("ttIgnoreBnR"));
+        // Info Label
+        FSkin.SkinnedLabel bnrInfoLabel = new FSkin.SkinnedLabel(
+                Localizer.getInstance().getMessage("nlIgnoreBnR"));
+        bnrInfoLabel.setFont(FSkin.getItalicFont());
+        bnrInfoLabel.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+
+        JPanel blockFilterPanel = new JPanel(new MigLayout(optPanelsConstrains));
         blockFilterPanel.setOpaque(false);
-        blockFilterPanel.add(this.blockCheck,     "cell 0 0, w 40%, ax left");
-        blockFilterPanel.add(this.blocksDropdown, "cell 0 1, w 15%, ax right");
+        // This panel will customise depending on current Deck Editor / Game Format
+        if (this.controller.hasNoDefaultGameFormat()) {
+            this.controller.fillFormatDropdown(this.formatDropdown);
+            this.formatDropdown.setRenderer(new GameFormatDropdownRenderer());
+            this.formatDropdown.setSelectedIndex(0);
+            this.formatDropdown.addActionListener(new GameFormatComboListener(this.formatDropdown));
 
-        optionsPanel.add(hideOptionsButton, "w 150!, h 26!, cell 0 0, span 4, growx, left");
-        optionsPanel.add(dateFilterPanel,      "cell 0 2, w 100%, left");
-
-        if (this.controller.isBlockFormatsSupported()) {
-            optionsPanel.add(cardArtPanel,     "cell 1 2, w 100%, left");
-            optionsPanel.add(blockFilterPanel, "cell 2 2, w 100%, left");
+            blockFilterPanel.add(this.formatSelectionCheck, "cell 0 0, w 55%, ax left");
+            blockFilterPanel.add(this.formatDropdown, "cell 0 1, w 15%, ax left");
+            blockFilterPanel.add(this.includeBnRCheck, "cell 0 2, w 45%, ax left, gaptop 5");
+            blockFilterPanel.add(bnrInfoLabel, "cell 0 3, left, w 90%");
         } else {
-            optionsPanel.add(cardArtPanel, "cell 1 2, w 100%, left");
-            JPanel placeHolderPanel = new JPanel(new MigLayout(optPanelConstrains));
-            placeHolderPanel.setOpaque(false);
-            optionsPanel.add(placeHolderPanel, "cell 2 2, w 100%, left");
+            blockFilterPanel.add(this.includeBnRCheck, "cell 0 0, w 45%, ax left");
+            blockFilterPanel.add(bnrInfoLabel, "cell 0 1, left, w 90%");
+        }
+        optionsPanel.add(blockFilterPanel, "cell 2 0, w 100%, left");
+
+        // Action Listeners
+        // ----------------
+        if (controller.hasNoDefaultGameFormat()) {
+            final ActionListener updateFormatSelectionCheck = new ActionListener() {
+                @Override
+                public void actionPerformed(final ActionEvent e) {
+                    final boolean isSel = formatSelectionCheck.isSelected();
+                    formatDropdown.setEnabled(isSel);
+                    if (!isSel)
+                        controller.setCurrentGameFormat(null);  // reset any game format
+                    else {
+                        GameFormat gameFormat = formatDropdown.getSelectedItem();
+                        controller.setCurrentGameFormat(gameFormat);
+                    }
+                    parseAndDisplay();
+                }
+            };
+            this.formatSelectionCheck.addActionListener(updateFormatSelectionCheck);
+            this.formatDropdown.addActionListener(updateFormatSelectionCheck);
         }
 
-        // == Command buttons
+        this.includeBnRCheck.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                final boolean includeBnR = includeBnRCheck.isSelected();
+                controller.importBannedAndRestrictedCards(includeBnR);
+                parseAndDisplay();
+            }
+        });
+
+        // == C Command buttons
         JPanel cmdPanel = new JPanel(new MigLayout("insets 10, gap 5, right, h 40!"));
         cmdPanel.setOpaque(false);
+        this.cmdAcceptButton.setEnabled(false);
         if (currentDeckIsNotEmpty) {
             cmdPanel.add(this.createNewDeckCheckbox, "align l, split 3");
             cmdPanel.add(this.cmdAcceptButton, "w 150!, align r, h 26!, split 3");
@@ -337,26 +499,8 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
             cmdPanel.add(this.cmdCancelButton, "w 150!, align r, h 26!, split 2");
         }
 
-        // === Assembling main UI component
-        this.add(this.scrollInput, "cell 0 0, w 40%, growy, pushy, spany 2");
-        this.add(this.scrollOutput, "cell 1 0, w 60%, growy, pushy, spany 2");
-        this.add(statsPanel, "cell 2 0, w 480:510:550, growy, pushy, ax c");
-        this.add(cardPreview, "cell 2 1, w 480:510:550, h 65%, growy, pushy, ax c");
-        this.add(showOptionsButton, "cell 0 2, w 150!, h 26!, left, spanx 3, hidemode 3");
-        this.add(optionsPanel, "cell 0 2, center, w 100%, spanx 3, hidemode 3");
-        this.add(cmdPanel, "cell 0 3, w 100%, spanx 3");
-
-
-        // === ACTION LISTENERS
-        showOptionsButton.addActionListener(actionEvent -> {
-            optionsPanel.setVisible(true);
-            showOptionsButton.setVisible(false);
-        });
-        hideOptionsButton.addActionListener(actionEvent -> {
-            optionsPanel.setVisible(false);
-            showOptionsButton.setVisible(true);
-        });
-
+        // ActionListeners
+        // ---------------
         this.cmdCancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
@@ -365,7 +509,6 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         });
 
         this.cmdAcceptButton.addActionListener(new ActionListener() {
-            @SuppressWarnings("unchecked")
             @Override
             public void actionPerformed(final ActionEvent e) {
                 String currentDeckName = g.getDeckController().getModelName();
@@ -380,149 +523,101 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
                     else
                         deck.setName(currentDeckName);
                 }
-
-                DeckImport.this.host.getDeckController().loadDeck(deck, controller.getCreateNewDeck());
-                DeckImport.this.processWindowEvent(new WindowEvent(DeckImport.this, WindowEvent.WINDOW_CLOSING));
+                host.getDeckController().loadDeck(deck, controller.getCreateNewDeck());
+                processWindowEvent(new WindowEvent(DeckImport.this, WindowEvent.WINDOW_CLOSING));
             }
         });
-
-        final ActionListener updateDateCheck = new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                final boolean isSel = dateTimeCheck.isSelected();
-                monthDropdown.setEnabled(isSel);
-                yearDropdown.setEnabled(isSel);
-                parseAndDisplay();
-            }
-        };
-        this.dateTimeCheck.addActionListener(updateDateCheck);
-
-        this.cardArtPrefsComboBox.addItemListener(new ItemListener() {
-            @Override public void itemStateChanged(final ItemEvent e) {
-                String artPreference = cardArtPrefsComboBox.getSelectedItem();
-                if (artPreference == null)
-                    artPreference = latestOpt;  // default, just in case
-                final boolean latestArt = artPreference.equalsIgnoreCase(latestOpt);
-                final boolean coreExpFilter = StaticData.instance().isCoreExpansionOnlyFilterSet();
-                controller.setCardArtPreference(latestArt, coreExpFilter);
-                parseAndDisplay();
-            }
-        });
-
-        cardArtPrefFilter.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String artPreference = cardArtPrefsComboBox.getSelectedItem();
-                if (artPreference == null)
-                    artPreference = latestOpt;  // default, just in case
-                final boolean latestArt = artPreference.equalsIgnoreCase(latestOpt);
-                final boolean coreExpFilter = cardArtPrefFilter.isSelected();
-                controller.setCardArtPreference(latestArt, coreExpFilter);
-                parseAndDisplay();
-            }
-        });
-
-        final ActionListener updateCardBlockCheck = new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                final boolean isSel = blockCheck.isSelected();
-                blocksDropdown.setEnabled(isSel);
-                parseAndDisplay();
-            }
-        };
-        this.blockCheck.addActionListener(updateCardBlockCheck);
-
-        final ActionListener reparse = new ActionListener() {
-            @Override public void actionPerformed(final ActionEvent e) {
-                parseAndDisplay();
-            }
-        };
-
-        final ActionListener toggleNewDeck = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) { toggleNewDeck(); }
-        };
-
-        this.yearDropdown.addActionListener(reparse);
-        this.monthDropdown.addActionListener(reparse);
-        this.blocksDropdown.addActionListener(reparse);
-        updateDateCheck.actionPerformed(null); // update actual state
-
-        this.txtInput.getDocument().addDocumentListener(new OnChangeTextUpdate());
-        this.cmdAcceptButton.setEnabled(false);
 
         if (currentDeckIsNotEmpty){
             this.createNewDeckCheckbox.setSelected(false);
-            this.createNewDeckCheckbox.addActionListener(toggleNewDeck);
+            this.createNewDeckCheckbox.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    boolean createNewDeck = createNewDeckCheckbox.isSelected();
+                    controller.setCreateNewDeck(createNewDeck);
+                    String cmdAcceptLabel = createNewDeck ? CREATE_NEW_DECK_CMD_LABEL : IMPORT_CARDS_CMD_LABEL;
+                    cmdAcceptButton.setText(cmdAcceptLabel);
+                }
+            });
         }
 
-        this.htmlOutput.addHyperlinkListener(new HyperlinkListener() {
-            @Override
-            public void hyperlinkUpdate(HyperlinkEvent e) {
-                activateCardPreview(e);
-            }
-        });
+
+        // === ASSEMBLING ALL PANELS TOGETHER
+        // ==================================
+        this.add(this.scrollInput, "cell 0 0, w 40%, growy, pushy, spany 2");
+        this.add(this.scrollOutput, "cell 1 0, w 60%, growy, pushy, spany 2");
+        this.add(statsPanel, "cell 2 0, w 480:510:550, growy, pushy, ax c");
+        this.add(cardPreview, "cell 2 1, w 480:510:550, h 65%, growy, pushy, ax c");
+        this.add(closedOptsPanel, "cell 0 2, left, w 100%, h 25!, spanx 3, hidemode 3");
+        this.add(optionsPanel, "cell 0 2, left, w 100%, spanx 3, hidemode 3");
+        this.add(cmdPanel, "cell 0 3, w 100%, spanx 3");
     }
 
     private void activateCardPreview(HyperlinkEvent e) {
         // TODO: FOIL and Card Status
         if(e.getEventType() == HyperlinkEvent.EventType.ENTERED ||
            e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
-            String cardRef = e.getDescription();
-            TokenKey tokenKey = DeckRecognizer.Token.parseTokenKey(cardRef);
+            String keyString = e.getDescription();
+            TokenKey tokenKey = TokenKey.fromString(keyString);
+            if (tokenKey == null)
+                return;
             StaticData data = StaticData.instance();
             PaperCard card = data.fetchCard(tokenKey.cardName, tokenKey.setCode, tokenKey.collectorNumber);
-            if (card != null){
+            if (card != null) {
                 // no need to check for card that has Image because CardPicturePanel
                 // has automatic integration with cardFetch
-                String header;
-                if (tokenKey.deckSection != null)
-                        header = String.format("%s: %s",
+                StringBuilder header = new StringBuilder();
+
+                if (tokenKey.tokenType == CARD_FROM_INVALID_SET)
+                    header.append(String.format("%s",
+                            Localizer.getInstance().getMessage("lblErrCardEditionDate")));
+                else if (tokenKey.tokenType == CARD_FROM_NOT_ALLOWED_SET)
+                    header.append(String.format("%s",
+                            Localizer.getInstance().getMessage("lblErrNotAllowedCard", getGameFormatLabel())));
+                else if (tokenKey.tokenType == LEGAL_CARD)
+                    header.append(String.format("%s: %s",
+                            Localizer.getInstance().getMessage("lblDeckSection"),
+                            tokenKey.deckSection));
+                else if (tokenKey.tokenType == LIMITED_CARD){
+                    if (this.controller.importBannedAndRestrictedCards()) {
+                        header.append(String.format("%s: %s - ",
                                 Localizer.getInstance().getMessage("lblDeckSection"),
-                                tokenKey.deckSection);
-                else {
-                    if (tokenKey.typeName.equals("illegal_card_request"))
-                        header = String.format("%s",
-                                Localizer.getInstance().getMessage("lblIllegalCardMsg", getGameFormatLabel()));
-                    else
-                        header = String.format("%s",
-                                Localizer.getInstance().getMessage("lblInvalidCardMsg"));
+                                tokenKey.deckSection));
+                    }
+                    header.append(String.format("%s",
+                            Localizer.getInstance().getMessage("lblErrLimitedCard",
+                                    StringUtils.capitalize(tokenKey.limitedType.name()),
+                                    getGameFormatLabel())));
                 }
                 CardEdition edition = data.getCardEdition(card.getEdition());
                 String editionName = edition != null ? String.format("%s ", edition.getName()) : "";
-                String cardLbl = String.format("%s, %s(%s), No. %s", tokenKey.cardName,
-                        editionName, tokenKey.setCode, tokenKey.collectorNumber);
+                String editionLbl = String.format("%s: %s (%s)",
+                        Localizer.getInstance().getMessage("lblSet"), editionName, tokenKey.setCode);
                 cardImagePreview.setItem(card);
-                if (!tokenKey.typeName.equals("legal_card_request"))
-                    cardImagePreview.showAsDisabled();
-                else
-                    cardImagePreview.showAsEnabled();
-                cardPreviewLabel.setText(String.format(
-                        "<html><span style=\"font-size: 9px; color: %s;\">%s</span><br />" +
-                                "<span style=\"font-size: 9px;\">%s</span></html>",
-                        getTokenTypeColour(tokenKey.typeName), header, cardLbl));
-                // set tooltip
-                cardImagePreview.setToolTipText(cardLbl);
-            }
-        }
-    }
 
-    private String getTokenTypeColour(String typeName){
-        switch (typeName.trim().toUpperCase()){
-            case "LEGAL_CARD_REQUEST":
-                return KNOWNCARD_COLOR;
-            case "ILLEGAL_CARD_REQUEST":
-                return ILLEGAL_CARD_COLOR;
-            case "INVALID_CARD_REQUEST":
-                return INVALID_CARD_COLOR;
-            default:
-                return "";
+                if (tokenKey.tokenType == LEGAL_CARD ||
+                        (tokenKey.tokenType == LIMITED_CARD && this.controller.importBannedAndRestrictedCards()))  // not in the deck
+                    cardImagePreview.showAsEnabled();
+                else
+                    cardImagePreview.showAsDisabled();
+
+                cardPreviewLabel.setText(String.format(
+                        "<html><span class=\"%s\" style=\"font-size: 9px;\">%s</span><br />" +
+                                "<span style=\"font-size: 9px;\">%s</span></html>",
+                        getTokenCSSClass(tokenKey.tokenType), header, editionLbl));
+
+                // set tooltip
+                String tooltip = String.format("%s [%s] #%s", card.getName(), card.getEdition(),
+                        card.getCollectorNumber());
+                cardImagePreview.setToolTipText(tooltip);
+            }
         }
     }
 
     private void resetCardImagePreviewPanel() {
         this.cardPreviewLabel.setText(Localizer.getInstance().getMessage("lblCardPreview"));
         this.cardImagePreview.setItem(ImageCache.getDefaultImage());
+        this.cardImagePreview.showAsEnabled();  // reset alpha value
     }
 
     /**
@@ -554,39 +649,32 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         updateSummaries(tokens);
     }
 
-    private void toggleNewDeck(){
-        boolean createNewDeck = this.createNewDeckCheckbox.isSelected();
-        this.controller.setCreateNewDeck(createNewDeck);
-        String cmdAcceptLabel = createNewDeck ? this.CREATE_NEW_DECK_CMD_LABEL : this.IMPORT_CARDS_CMD_LABEL;
-        this.cmdAcceptButton.setText(cmdAcceptLabel);
-    }
-
     private void displayTokens(final List<DeckRecognizer.Token> tokens) {
         if (tokens.isEmpty() || hasOnlyComment(tokens)) {
-            htmlOutput.setText(HTML_WELCOME_TEXT);
+            htmlOutput.setText(FSkin.encodeSymbols(HTML_WELCOME_TEXT, false));
             resetCardImagePreviewPanel();
         } else {
-            final StringBuilder sbOut = new StringBuilder("<html>");
+            final StringBuilder sbOut = new StringBuilder();
             sbOut.append(String.format("<head>%s</head>", DeckImport.STYLESHEET));
-            sbOut.append(String.format("<body><h3>%s</h3>", Localizer.getInstance().getMessage("lblCurrentDecklist")));
+            sbOut.append(String.format("<body><h3>%s</h3>",
+                    Localizer.getInstance().getMessage("lblCurrentDecklist")));
             for (final DeckRecognizer.Token t : tokens)
                 sbOut.append(toHTML(t));
-            sbOut.append("</body></html>");
-            htmlOutput.setText(sbOut.toString());
+            htmlOutput.setText(FSkin.encodeSymbols(sbOut.toString(), false));
         }
     }
 
     private boolean hasOnlyComment(final List<DeckRecognizer.Token> tokens) {
         for (DeckRecognizer.Token token : tokens) {
-            if (token.getType() != TokenType.COMMENT && token.getType() != TokenType.UNKNOWN_TEXT)
+            if (token.getType() != COMMENT && token.getType() != UNKNOWN_TEXT)
                 return false;
         }
         return true;
     }
 
     private void updateSummaries(final List<DeckRecognizer.Token> tokens) {
-        CStatisticsImporter.instance().updateStats(tokens);
-        cmdAcceptButton.setEnabled(CStatisticsImporter.instance().getTotalCardsInDecklist() > 0);
+        this.cStatsView.updateStats(tokens, this.controller.importBannedAndRestrictedCards());
+        cmdAcceptButton.setEnabled(this.cStatsView.getTotalCardsInDecklist() > 0);
         this.resetCardImagePreviewPanel();
     }
 
@@ -594,58 +682,174 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
         if (token == null)
             return "";
 
-        switch (token.getType()) {
-            case LEGAL_CARD_REQUEST:
-                PaperCard tokenCard = token.getCard();
-                return String.format("<div class=\"knowncard\"><a class=\"knowncard\" href=\"%s\">%s x %s " +
-                                "<span class=\"editioncode\">(%s)</span> %s %s</a></div>",
-                                token.getKey(), token.getNumber(), tokenCard.getName(),
-                                tokenCard.getEdition(),
-                                tokenCard.getCollectorNumber(), tokenCard.isFoil() ? " - <i>FOIL</i> -" : "");
-            case UNKNOWN_CARD_REQUEST:
-                return String.format("<div class=\"unknowncard\">%s x %s (%s)</div>",
-                        token.getNumber(), token.getText(),
-                        Localizer.getInstance().getMessage("lblUnknownCardMsg"));
-            case ILLEGAL_CARD_REQUEST:
-                return String.format("<div class=\"illegalcard\"><a class=\"illegalcard\" href=\"%s\">" +
-                                "%s x %s %s (%s)</a></div>",
-                        token.getKey(), token.getNumber(), token.getText(),
-                        token.getCard().isFoil() ? " - <i>FOIL</i> -" : "",
-                        Localizer.getInstance().getMessage("lblIllegalCardMsg", getGameFormatLabel()));
-            case INVALID_CARD_REQUEST:
-                return String.format("<div class=\"invalidcard\">" +
-                                "<a class=\"invalidcard\" href=\"%s\">%s x %s %s (%s)</a></div>",
-                        token.getKey(), token.getNumber(), token.getText(),
-                        token.getCard().isFoil() ? " - <i>FOIL</i> -" : "",
-                        Localizer.getInstance().getMessage("lblInvalidCardMsg"));
-            case DECK_SECTION_NAME:
-                return String.format("<div class=\"section\">%s</div>", token.getText());
-            case CARD_TYPE:
-                return String.format("<div class=\"cardtype\">%s</div>", token.getText());
-            case CARD_RARITY:
-                return String.format("<div class=\"rarity\">%s</div>", token.getText());
-            case CARD_CMC:
-                return String.format("<div class=\"cmc\">%s</div>", token.getText());
-            case MANA_COLOUR:
-                String cssColorClass = token.getText().toLowerCase().trim();
-                return String.format("<div class=\"%s\">%s</div>", cssColorClass, token.getText());
-            case DECK_NAME:
-                return String.format("<div class=\"deckname\">%s: %s</div>",
-                        Localizer.getInstance().getMessage("lblDeckName"),
-                        token.getText());
+        String tokenTag = "<div class=\"%s\">%s</div>";
+         switch (token.getType()) {
+            case LEGAL_CARD:
+            case LIMITED_CARD:
+            case CARD_FROM_NOT_ALLOWED_SET:
+            case CARD_FROM_INVALID_SET:
+                String cardLink = String.format("<a class=\"%s\" href=\"%s\">%s x %s %s %s</a>",
+                        getTokenCSSClass(token.getType()), token.getKey().toString(), token.getQuantity(),
+                        token.getText(), getTokenFoilLabel(token), getTokenMessage(token));
+                return String.format(tokenTag, getTokenCSSClass(token.getType()), cardLink);
+            // Card Warning Msgs
+            case UNKNOWN_CARD:
+            case UNSUPPORTED_CARD:
+                String tokenMsg = String.format("%s x %s %s", token.getQuantity(), token.getText(),
+                        getTokenMessage(token));
+                return String.format(tokenTag, getTokenCSSClass(token.getType()), tokenMsg);
+            // Non-Card Warning Msgs
             case COMMENT:
-                return String.format("<div class=\"comment\">%s</div>", token.getText());
+            case UNSUPPORTED_DECK_SECTION:
+            // Special Case of Card moved into another section (e.g. Commander from Sideboard)
+            case WARNING_MESSAGE:
+            // Placeholders
+            case DECK_SECTION_NAME:
+            case CARD_TYPE:
+            case CARD_RARITY:
+            case CARD_CMC:
+            case MANA_COLOUR:
+            case DECK_NAME:
+                return String.format(tokenTag, getTokenCSSClass(token.getType()), getTokenMessage(token));
             case UNKNOWN_TEXT:
+                return token.getText();
             default:
                 return "";
         }
     }
 
+    private String getTokenMessage(DeckRecognizer.Token token){
+        switch (token.getType()){
+            case LIMITED_CARD:
+                return String.format("- %s", Localizer.getInstance().getMessage("lblErrLimitedCard",
+                        StringUtils.capitalize(token.getLimitedCardType().name()), getGameFormatLabel()));
+            case CARD_FROM_NOT_ALLOWED_SET:
+                return String.format("- %s", Localizer.getInstance().getMessage("lblErrNotAllowedCard",
+                        getGameFormatLabel()));
+            case CARD_FROM_INVALID_SET:
+                return String.format("- %s", Localizer.getInstance().getMessage("lblErrCardEditionDate"));
+            case UNSUPPORTED_CARD:
+                return String.format("- %s", Localizer.getInstance().getMessage("lblErrUnsupportedCard",
+                        this.currentGameType));
+            case UNKNOWN_CARD:
+                return String.format("- %s: %s", Localizer.getInstance().getMessage("lblWarningMsgPrefix"),
+                        Localizer.getInstance().getMessage("lblWarnUnknownCardMsg"));
+            case UNSUPPORTED_DECK_SECTION:
+                return String.format("%s: %s", Localizer.getInstance().getMessage("lblWarningMsgPrefix"),
+                        Localizer.getInstance().getMessage("lblWarnDeckSectionNotAllowedInEditor",
+                                token.getText(), this.currentGameType));
+            case WARNING_MESSAGE:
+                return String.format("%s: %s", Localizer.getInstance().getMessage("lblWarningMsgPrefix"),
+                        token.getText());
+            case COMMENT:
+            case CARD_CMC:
+            case MANA_COLOUR:
+            case CARD_TYPE:
+                return token.getText();
+            case DECK_SECTION_NAME:
+                return String.format("%s: %s", Localizer.getInstance().getMessage("lblDeckSection"),
+                        token.getText());
+            case CARD_RARITY:
+                return String.format("%s: %s", Localizer.getInstance().getMessage("lblRarity"),
+                        token.getText());
+
+            case DECK_NAME:
+                return String.format("%s: %s", Localizer.getInstance().getMessage("lblDeckName"),
+                        token.getText());
+            case LEGAL_CARD:
+            default:
+                return "";
+        }
+    }
+
+    private String getTokenCSSClass(DeckRecognizer.TokenType tokenType){
+        switch (tokenType){
+            case LEGAL_CARD:
+                return OK_IMPORT_CLASS;
+            case LIMITED_CARD:
+                return this.controller.importBannedAndRestrictedCards() ? OK_IMPORT_CLASS : WARN_MSG_CLASS;
+            case CARD_FROM_NOT_ALLOWED_SET:
+            case CARD_FROM_INVALID_SET:
+                return KO_NOIMPORT_CLASS;
+            case UNKNOWN_CARD:
+            case UNSUPPORTED_CARD:
+            case UNSUPPORTED_DECK_SECTION:
+            case WARNING_MESSAGE:
+                return WARN_MSG_CLASS;
+            case UNKNOWN_TEXT:
+            case COMMENT:
+                return COMMENT_CLASS;
+            case DECK_NAME:
+                return DECKNAME_CLASS;
+            case DECK_SECTION_NAME:
+                return SECTION_CLASS;
+            case CARD_TYPE:
+                return CARDTYPE_CLASS;
+            case CARD_RARITY:
+                return RARITY_CLASS;
+            case CARD_CMC:
+            case MANA_COLOUR:
+                return CMC_CLASS;
+            default:
+                return "";
+        }
+    }
+
+    private String getTokenFoilLabel(DeckRecognizer.Token token) {
+        if (!token.isCardToken())
+            return "";
+        final String foilMarker = "- (Foil)";
+        return token.getCard().isFoil() ? foilMarker : "";
+    }
+
     private String getGameFormatLabel() {
-        if (this.blockCheck.isSelected() && this.blocksDropdown.getSelectedItem() != null)
-           return this.blocksDropdown.getSelectedItem().getName();
+         return String.format("\"%s\"", this.controller.getCurrentGameFormatName());
+    }
+}
+
+class GameFormatDropdownRenderer extends JLabel implements ListCellRenderer<GameFormat> {
+    JSeparator separator;
+
+    public GameFormatDropdownRenderer() {
+        setOpaque(true);
+        setBorder(new EmptyBorder(1, 1, 1, 1));
+        separator = new JSeparator(JSeparator.HORIZONTAL);
+    }
+
+    @Override
+    public Component getListCellRendererComponent(JList<? extends GameFormat> list, GameFormat value,
+                                                  int index, boolean isSelected, boolean cellHasFocus) {
+        if (value == null || value.equals(GameFormat.NoFormat))
+            return separator;
+
+        if (isSelected) {
+            setBackground(list.getSelectionBackground());
+            setForeground(list.getSelectionForeground());
+        } else {
+            setBackground(list.getBackground());
+            setForeground(list.getForeground());
+        }
+        setFont(list.getFont());
+        setText(value.getName());
+        return this;
+    }
+}
+
+class GameFormatComboListener implements ActionListener {
+    FComboBox<GameFormat> combo;
+    GameFormat separator = GameFormat.NoFormat;
+    GameFormat currentItem;
+
+    GameFormatComboListener(FComboBox<GameFormat> combo) {
+        this.combo = combo;
+        currentItem = combo.getSelectedItem();
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        GameFormat tempItem = combo.getSelectedItem();
+        if (separator.equals(tempItem))
+            combo.setSelectedItem(currentItem);
         else
-            return String.format("%s %s",
-                    Localizer.getInstance().getMessage("lblFormat"), this.deckFormat.name());
+            currentItem = tempItem;
     }
 }
