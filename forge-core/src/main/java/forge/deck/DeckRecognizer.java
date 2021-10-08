@@ -249,7 +249,7 @@ public class DeckRecognizer {
                     this.type == TokenType.CARD_TYPE);
         }
 
-        /** Determins if current token is a Deck Section token
+        /** Determines if current token is a Deck Section token
          * @return true if the type of token is DECK_SECTION_NAMES
          */
         public boolean isDeckSection(){ return this.type == TokenType.DECK_SECTION_NAME; }
