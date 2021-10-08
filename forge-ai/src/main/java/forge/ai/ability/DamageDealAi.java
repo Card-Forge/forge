@@ -344,7 +344,7 @@ public class DamageDealAi extends DamageAiBase {
         final Player activator = sa.getActivatingPlayer();
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
-        List<Card> hPlay = getTargetableCards(mandatory ? pl : ai, sa, pl, tgt, activator, source, game);
+        List<Card> hPlay = getTargetableCards(ai, sa, pl, tgt, activator, source, game);
 
         // Filter MustTarget requirements
         StaticAbilityMustTarget.filterMustTargetCards(ai, hPlay, sa);
@@ -381,15 +381,20 @@ public class DamageDealAi extends DamageAiBase {
             return null;
         }
 
+        // try unfiltered now
+        hPlay = getTargetableCards(pl, sa, pl, tgt, activator, source, game);
+        List<Card> controlledByOpps = CardLists.filterControlledBy(hPlay, ai.getOpponents());
+
         if (!hPlay.isEmpty()) {
             if (pl.isOpponentOf(ai) && activator.equals(ai)) {
                 if (sa.getTargetRestrictions().canTgtPlaneswalker()) {
-                    targetCard = ComputerUtilCard.getBestPlaneswalkerAI(hPlay);
+                    targetCard = ComputerUtilCard.getBestPlaneswalkerAI(controlledByOpps);
                 }
                 if (targetCard == null) {
-                    targetCard = ComputerUtilCard.getBestCreatureAI(hPlay);
+                    targetCard = ComputerUtilCard.getBestCreatureAI(controlledByOpps);
                 }
-            } else {
+            }
+            if (targetCard == null) {
                 targetCard = ComputerUtilCard.getWorstCreatureAI(hPlay);
             }
 
@@ -714,7 +719,6 @@ public class DamageDealAi extends DamageAiBase {
                         break;
                     }
                 }
-
             } else if (tgt.canTgtCreature() || tgt.canTgtPlaneswalker()) {
                 final Card c = dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, mandatory);
                 if (c != null) {
@@ -726,7 +730,13 @@ public class DamageDealAi extends DamageAiBase {
                     }
                     tcs.add(c);
                     if (divided) {
-                        final int assignedDamage = ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
+                        // if only other legal targets hurt own stuff just dump all dmg into this
+                        final Card nextTarget = dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, mandatory);
+                        boolean dump = false;
+                        if (nextTarget != null && nextTarget.getController().equals(ai)) {
+                            dump = true;
+                        }
+                        final int assignedDamage = dump ? dmg : ComputerUtilCombat.getEnoughDamageToKill(c, dmg, source, false, noPrevention);
                         if (assignedDamage <= dmg) {
                             sa.addDividedAllocation(c, assignedDamage);
                         } else {
