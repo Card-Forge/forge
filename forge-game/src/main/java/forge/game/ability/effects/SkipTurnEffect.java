@@ -59,10 +59,10 @@ public class SkipTurnEffect extends SpellAbilityEffect {
             re.setLayer(ReplacementLayer.Control);
             re.setOverridingAbility(calcTurn);
             eff.addReplacementEffect(re);
-            eff.updateStateForView();
 
             game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
             game.getAction().moveTo(ZoneType.Command, eff, sa);
+            eff.updateStateForView();
             game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
         }
     }

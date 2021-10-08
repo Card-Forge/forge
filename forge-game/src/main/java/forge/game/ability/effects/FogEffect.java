@@ -31,10 +31,10 @@ public class FogEffect extends SpellAbilityEffect {
         final Card eff = createEffect(sa, hostCard.getController(), name, image);
         ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, eff, true);
         eff.addReplacementEffect(re);
-        eff.updateStateForView();
 
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         game.getAction().moveTo(ZoneType.Command, eff, sa);
+        eff.updateStateForView();
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
 
         game.getEndOfTurn().addUntil(new GameCommand() {

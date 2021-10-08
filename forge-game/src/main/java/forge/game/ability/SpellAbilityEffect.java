@@ -433,11 +433,10 @@ public abstract class SpellAbilityEffect {
             eff.copyChangedTextFrom(card);
         }
 
-        eff.updateStateForView();
-
         // TODO: Add targeting to the effect so it knows who it's dealing with
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         game.getAction().moveTo(ZoneType.Command, eff, sa);
+        eff.updateStateForView();
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
     }
 
@@ -552,11 +551,10 @@ public abstract class SpellAbilityEffect {
 
             game.getEndOfTurn().addUntil(endEffect);
 
-            eff.updateStateForView();
-
             // TODO: Add targeting to the effect so it knows who it's dealing with
             game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
             game.getAction().moveTo(ZoneType.Command, eff, sa);
+            eff.updateStateForView();
             game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
         }
     }
