@@ -112,6 +112,8 @@ public class DamagePreventAi extends SpellAbilityAi {
         	final TargetChoices tcs = sa.getTargets();
             if (sa.canTarget(ai) && ComputerUtilCombat.wouldLoseLife(ai, combat)
                     && (ComputerUtilCombat.lifeInDanger(ai, combat) || sa.isAbility() || sa.isTrigger())
+                    // check if any of the incoming dmg is even preventable:
+                    && (ComputerUtilCombat.sumDamageIfUnblocked(combat.getAttackers(), ai, true) > ai.getPreventNextDamageTotalShields())
                     && game.getPhaseHandler().getPlayerTurn().isOpponentOf(ai)) {
             	tcs.add(ai);
                 chance = true;
