@@ -7,7 +7,10 @@ import java.util.List;
 
 import forge.StaticData;
 import forge.card.CardDb;
+import forge.deck.DeckRecognizer.TokenType;
 import forge.game.GameFormat;
+import forge.game.GameType;
+import forge.deck.DeckRecognizer.Token;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import org.apache.commons.lang3.StringUtils;
@@ -17,6 +20,7 @@ import forge.gui.interfaces.IComboBox;
 import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
 import forge.util.Localizer;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class DeckImportController {
     private boolean createNewDeck;
@@ -27,35 +31,21 @@ public class DeckImportController {
     // CardArt Preference Filter
     private CardDb.CardArtPreference artPreference;
     // Block Preference Filter
-    private ICheckBox blockCheck = null;
-    private IComboBox<GameFormat> blocksDropdown = null;
-    private boolean isAnyBlockFormatSupported = false;
+    private boolean inlcludeBnRInDeck = false;
 
-    private final List<DeckRecognizer.Token> tokens = new ArrayList<>();
+    private final List<Token> tokens = new ArrayList<>();
     private final boolean currentDeckNotEmpty;
-    private final List<String> allowedSetCodes;
-    private final DeckFormat currentDeckFormat;
+    private DeckFormat currentDeckFormat;
+    private GameFormat currentGameFormat;
+    private final List<DeckSection> allowedSections = new ArrayList<>();
 
     public DeckImportController(ICheckBox dateTimeCheck0,
                                 IComboBox<String> monthDropdown0, IComboBox<Integer> yearDropdown0,
                                 boolean currentDeckNotEmpty) {
-        this(dateTimeCheck0, monthDropdown0, yearDropdown0, currentDeckNotEmpty, null, null,
-                null, null);
-    }
 
-    public DeckImportController(ICheckBox dateTimeCheck0,
-                                IComboBox<String> monthDropdown0, IComboBox<Integer> yearDropdown0,
-                                boolean currentDeckNotEmpty, List<String> setCodes, DeckFormat deckFormat,
-                                ICheckBox blockCheck0, IComboBox<GameFormat> blocksDropdown) {
         this.dateTimeCheck = dateTimeCheck0;
         this.monthDropdown = monthDropdown0;
         this.yearDropdown = yearDropdown0;
-        this.artPreference = StaticData.instance().getCardArtPreference();  // default
-        if (blockCheck0 != null && blocksDropdown != null){
-            this.blockCheck = blockCheck0;
-            this.blocksDropdown = blocksDropdown;
-        }
-
         /* This keeps track whether the current deck in editor is **not empty**.
            If that is the case, and the "Replace" option won't be checked, this will
            allow to ask for confirmation whether the *Merge* action is what
@@ -64,13 +54,37 @@ public class DeckImportController {
         this.currentDeckNotEmpty = currentDeckNotEmpty;
         // this option will control the "new deck" action controlled by UI widget
         createNewDeck = false;
-        if (setCodes != null && setCodes.size() == 0)
-            this.allowedSetCodes = null;
-        else
-            this.allowedSetCodes = setCodes;
-        this.currentDeckFormat = deckFormat;
 
+        // Init default parameters
+        this.artPreference = StaticData.instance().getCardArtPreference();  // default
+        this.currentDeckFormat = null;
+        this.currentGameFormat = null;
         fillDateDropdowns();
+    }
+
+    public void setGameFormat(GameType gameType){
+        if (gameType == null){
+            this.currentGameFormat = null;
+            this.currentDeckFormat = null;
+        } else {
+            // get the game format with the same name of current game type (if any)
+            this.currentDeckFormat = gameType.getDeckFormat();
+            this.currentGameFormat = FModel.getFormats().get(gameType.name());
+        }
+    }
+
+    public void setAllowedSections(List<DeckSection> allSections){
+        this.allowedSections.addAll(allSections);
+    }
+
+    public boolean hasNoDefaultGameFormat(){
+        return this.currentGameFormat == null;
+    }
+
+    public String getCurrentGameFormatName(){
+        if (this.currentGameFormat == null)
+            return "";
+        return this.currentGameFormat.getName();
     }
 
     public void setCardArtPreference(boolean isLatest, boolean coreFilterEnabled){
@@ -96,84 +110,171 @@ public class DeckImportController {
         for (int i = yearNow; i >= 1993; i--) {
             yearDropdown.addItem(i);
         }
+    }
 
-        if (this.blocksDropdown != null &&
-                FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.LOAD_HISTORIC_FORMATS)){
-            this.blocksDropdown.removeAllItems();
-            final List<GameFormat> blockFormats = FModel.getBlockFormats();
-            for (final GameFormat f : blockFormats) {
-                if (isBlockFormatCompliantWithCurrentGameType(f)) {
-                    this.blocksDropdown.addItem(f);
-                    this.isAnyBlockFormatSupported = true;
-                }
+    public void fillFormatDropdown(IComboBox<GameFormat> formatsDropdown){
+        if (formatsDropdown == null)
+            return;
+        formatsDropdown.removeAllItems();
+        // If the current Game format is already set, no format selection is allowed
+        if (this.currentGameFormat == null) {
+            final GameFormat SEPARATOR = GameFormat.NoFormat;
+            final Iterable<GameFormat> sanctionedFormats = FModel.getFormats().getSanctionedList();
+            for (final GameFormat f : sanctionedFormats)
+                formatsDropdown.addItem(f);
+
+            if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.LOAD_HISTORIC_FORMATS)) {
+                // Add Block Formats
+                formatsDropdown.addItem(SEPARATOR);
+                final Iterable<GameFormat> blockFormats = FModel.getFormats().getBlockList();
+                for (final GameFormat f : blockFormats)
+                    formatsDropdown.addItem(f);
             }
         }
     }
 
-    private boolean isBlockFormatCompliantWithCurrentGameType(GameFormat f) {
-        if (this.allowedSetCodes == null)
-            return true;
-        List<String> formatSetCodes = f.getAllowedSetCodes();
-        boolean blockFormatCompliant = true;
-        for (String setCode : formatSetCodes){
-            if (!allowedSetCodes.contains(setCode)){
-                blockFormatCompliant = false;
-                break;
-            }
-        }
-        return blockFormatCompliant;
+    public void setCurrentGameFormat(GameFormat gameFormat){
+        this.currentGameFormat = gameFormat;
     }
 
-    public boolean isBlockFormatsSupported() {
-        return this.isAnyBlockFormatSupported;
+    public void importBannedAndRestrictedCards(boolean includeBannedAndRestricted){
+        this.inlcludeBnRInDeck = includeBannedAndRestricted;
     }
 
-    public List<DeckRecognizer.Token> parseInput(String input) {
+    public boolean importBannedAndRestrictedCards(){ return this.inlcludeBnRInDeck; }
+
+    public List<Token> parseInput(String input) {
         tokens.clear();
         DeckRecognizer recognizer = new DeckRecognizer();
         // Set Art Preference first thing
         recognizer.setArtPreference(this.artPreference);
-
+        // Edition Release Date Constraint
         if (dateTimeCheck.isSelected())
             recognizer.setDateConstraint(yearDropdown.getSelectedItem(), monthDropdown.getSelectedIndex());
-
-        if (this.allowedSetCodes != null && this.allowedSetCodes.size() > 0){
-            if (this.blockCheck.isSelected() && this.isAnyBlockFormatSupported) {
-                GameFormat gameFormat = this.blocksDropdown.getSelectedItem();
-                recognizer.setGameFormatConstraint(gameFormat.getAllowedSetCodes());
-            } else
-                recognizer.setGameFormatConstraint(this.allowedSetCodes);
+        // Game Format Constraint
+        if (this.currentGameFormat != null){
+            recognizer.setGameFormatConstraint(this.currentGameFormat.getAllowedSetCodes(),
+                                               this.currentGameFormat.getBannedCardNames(),
+                                               this.currentGameFormat.getRestrictedCards());
         }
-
+        // Deck Format Constraint
         if (this.currentDeckFormat != null)
             recognizer.setDeckFormatConstraint(this.currentDeckFormat);
+        // (Current Editor) Deck Sections Constraint
+        if (!this.allowedSections.isEmpty())
+            recognizer.setAllowedDeckSections(this.allowedSections);
+        // Banned and Restricted Card Policy
+        if (this.inlcludeBnRInDeck)
+            recognizer.forceImportBannedAndRestrictedCards();
 
         String[] lines = input.split("\n");
-        DeckSection referenceDeckSectionInParsing = null;  // default
-        for (String line : lines) {
-            DeckRecognizer.Token token = recognizer.recognizeLine(line, referenceDeckSectionInParsing);
-            if (token != null) {
-                if (token.getType() == DeckRecognizer.TokenType.DECK_SECTION_NAME)
-                    referenceDeckSectionInParsing = DeckSection.valueOf(token.getText());
-                else if (token.getType() == DeckRecognizer.TokenType.LEGAL_CARD_REQUEST) {
-                    DeckSection tokenSection = token.getTokenSection();
-                    if (!tokenSection.equals(referenceDeckSectionInParsing)) {
-                        DeckRecognizer.Token sectionToken = DeckRecognizer.Token.DeckSection(token.getTokenSection().name());
-                        if (referenceDeckSectionInParsing == null)
-                            tokens.add(0, sectionToken);  // first ever - put on top!
-                        else
-                            tokens.add(sectionToken);  // add just before card token
-                        referenceDeckSectionInParsing = tokenSection;
-                    }
-                }
-                if (token.getType() == DeckRecognizer.TokenType.DECK_NAME)
-                    tokens.add(0, token);  // always add deck name top of the decklist
-                else
-                    tokens.add(token);
-            }
+        List<Token> parsedTokens = recognizer.parseCardList(lines);
+        if (parsedTokens != null)
+            tokens.addAll(parsedTokens);
 
+        if (this.currentGameFormatAllowsCommander()) {
+            checkAndFixCommanderIn(DeckSection.Sideboard);
+            checkAndFixCommanderIn(DeckSection.Commander);
         }
+
         return tokens;
+    }
+
+    public boolean currentGameFormatAllowsCommander(){
+        return this.allowedSections.contains(DeckSection.Commander);
+    }
+
+    private void checkAndFixCommanderIn(DeckSection targetDeckSection){
+        // first get all tokens in sideboard, along with corresponding index
+        List<Pair<Integer, Token>> sectionTokens = getTokensInSection(targetDeckSection);
+        List<Pair<Integer, Token>> candidateCommanderTokens = getAllCommanderTokens(sectionTokens);
+
+        if (candidateCommanderTokens.isEmpty())
+            return;
+        int commandersCandidateCount = 0;
+        for (Pair<Integer, Token> ccTokenPair : candidateCommanderTokens)
+            commandersCandidateCount += ccTokenPair.getRight().getQuantity();
+
+        if (commandersCandidateCount > 1){
+            String msg = getListOfCandidateCommandersIn(targetDeckSection, candidateCommanderTokens,
+                    commandersCandidateCount);
+            Token warningMsg = Token.WarningMessage(msg);
+
+            // Try to add the warning message right after the deck section placeholder
+            int targetSecTokenIndex = candidateCommanderTokens.get(0).getLeft() - 1;
+            Token tokenInList = tokens.get(targetSecTokenIndex);
+            while (!tokenInList.isDeckSection()){
+                targetSecTokenIndex -= 1;
+                if (targetSecTokenIndex < 0)
+                    break;
+                tokenInList = tokens.get(targetSecTokenIndex);
+            }
+            if (targetSecTokenIndex >= 0 && targetSecTokenIndex + 1 < tokens.size())
+                tokens.add(targetSecTokenIndex+1, warningMsg);
+            else
+                tokens.add(warningMsg);
+            return;
+        }
+
+        if (commandersCandidateCount == 1 && targetDeckSection == DeckSection.Commander)
+            return;  // all clear, nothing to do here
+
+        // Last case is that there's only one single candidate
+        Pair<Integer, Token> commanderTokenPair = candidateCommanderTokens.get(0);
+        int tokenIndex = commanderTokenPair.getLeft();
+        Token commanderToken = commanderTokenPair.getRight();
+        String msg = Localizer.getInstance().getMessage("lblWarnCardInInvalidSection",
+                commanderToken.getText(), targetDeckSection.name(), DeckSection.Commander.name());
+        Token cardInInvalidSectionToken = Token.WarningMessage(msg);
+        // Reset section in token, for correct card import
+        commanderToken.resetTokenSection(DeckSection.Commander);
+
+        // Check that there is a (old) Section token in Decklist, just before the target token
+        if (tokenIndex-1 >= 0 && tokens.get(tokenIndex - 1).isDeckSection() &&
+                tokens.get(tokenIndex - 1).getText().equals(targetDeckSection.name())){
+            // if the card to be moved is preceded by a DeckSection token
+            tokens.remove(tokenIndex -1);
+            tokens.add(tokenIndex-1,
+                    Token.DeckSection(DeckSection.Commander.name(), this.allowedSections));
+        }
+        tokens.add(tokenIndex, cardInInvalidSectionToken);
+    }
+
+    private String getListOfCandidateCommandersIn(DeckSection targetSection, List<Pair<Integer, Token>> candidateCommandersInSide,
+                                                  int cardsNumber) {
+        StringBuilder commandersCardNames = new StringBuilder();
+        for (Pair<Integer, Token> ccTokenPair : candidateCommandersInSide){
+            Token ccToken = ccTokenPair.getRight();
+            commandersCardNames.append(String.format("\n- %d x %s", ccToken.getQuantity(), ccToken.getText()));
+        }
+        String msg = Localizer.getInstance().getMessage("lblWarnTooManyCommanders", targetSection.name(),
+                cardsNumber, commandersCardNames.toString());
+        if (targetSection != DeckSection.Commander)
+            return String.format("%s\n%s", msg, Localizer.getInstance().getMessage("lblWarnCommandersInSideExtra"));
+        return msg;
+    }
+
+    private List<Pair<Integer, Token>> getAllCommanderTokens(List<Pair<Integer, Token>> sectionTokenPairs) {
+        List<Pair<Integer, Token>> candidateCommandersInSide = new ArrayList<>();
+        for (Pair<Integer, Token> secTokenPair : sectionTokenPairs){
+            Token secToken = secTokenPair.getRight();
+            PaperCard card = secToken.getCard();
+            if (card != null && DeckSection.Commander.validate(card))
+                candidateCommandersInSide.add(secTokenPair);
+        }
+        return candidateCommandersInSide;
+    }
+
+    private List<Pair<Integer, Token>> getTokensInSection(DeckSection section) {
+        List<Pair<Integer, Token>> tokensInSection = new ArrayList<>();
+        for (int idx = 0; idx < tokens.size(); idx++) {
+            Token token = tokens.get(idx);
+            DeckSection tokenSection = token.getTokenSection();
+            if (tokenSection != section)
+                continue;
+            tokensInSection.add(Pair.of(idx, token));
+        }
+        return tokensInSection;
     }
 
     public Deck accept(){
@@ -187,7 +288,6 @@ public class DeckImportController {
         String deckName = "";
         if (currentDeckName != null && currentDeckName.length() > 0)
             deckName = String.format("\"%s\"", currentDeckName);
-
         if (createNewDeck){
             String extraWarning = this.currentDeckNotEmpty ? localizer.getMessage("lblNewDeckWarning") : "";
             final String warning = localizer.getMessage("lblConfirmCreateNewDeck", deckName, extraWarning);
@@ -204,28 +304,25 @@ public class DeckImportController {
                 return null;
         }
         final Deck resultDeck = new Deck();
-        DeckSection deckSection = DeckSection.Main;
-        for (final DeckRecognizer.Token t : tokens) {
-            final DeckRecognizer.TokenType type = t.getType();
+        for (final Token t : tokens) {
+            final TokenType type = t.getType();
+            // only Deck Name, legal card and limited card tokens will be analysed!
+            if (!t.isTokenForDeck() ||
+                    (type == TokenType.LIMITED_CARD && !this.inlcludeBnRInDeck))
+                continue;  // SKIP token
 
-            if (type == DeckRecognizer.TokenType.DECK_NAME) {
+            if (type == TokenType.DECK_NAME) {
                 resultDeck.setName(t.getText());
-            }
-            if (type == DeckRecognizer.TokenType.DECK_SECTION_NAME) {
-                deckSection = DeckSection.smartValueOf(t.getText());
-            }
-            // all other tokens will be discarded.
-            if (type != DeckRecognizer.TokenType.LEGAL_CARD_REQUEST) {
                 continue;
             }
+
+            final DeckSection deckSection = t.getTokenSection();
             final PaperCard crd = t.getCard();
-            // Leverage on the DeckSection validation mechanism to match cards to the corresponding deck section!
-            if (deckSection.validate(crd))
-                resultDeck.getOrCreate(deckSection).add(crd, t.getNumber());
-            else {
-                DeckSection matchingSec = DeckSection.matchingSection(crd);
-                resultDeck.getOrCreate(matchingSec).add(crd, t.getNumber());
-            }
+            /* Deck Sections have been already validated for tokens by DeckRecogniser,
+             * plus any other adjustment (like accounting for Commander in Sideboard) has been
+             * already taken care of in previous parseInput.
+             * Therefore we can safely proceed here by just adding the cards. */
+            resultDeck.getOrCreate(deckSection).add(crd, t.getQuantity());
         }
         return resultDeck;
     }
