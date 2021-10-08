@@ -546,6 +546,7 @@ public final class StaticAbilityContinuous {
                     if (mhs.equals("Unlimited")) {
                         p.setUnlimitedHandSize(true);
                     } else {
+                        p.setUnlimitedHandSize(false);
                         int max = AbilityUtils.calculateAmount(hostCard, mhs, stAb);
                         p.setMaxHandSize(max);
                     }
