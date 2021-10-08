@@ -1069,7 +1069,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final Card getEncodingCard() {
         return encoding;
     }
-
     public final void setEncodingCard(final Card e) {
         encoding = e;
     }

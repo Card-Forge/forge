@@ -486,7 +486,7 @@ public class CardView extends GameEntityView {
         });
     }
 
-    private boolean canBeShownTo(final PlayerView viewer) {
+    public boolean canBeShownTo(final PlayerView viewer) {
         if (viewer == null) { return false; }
 
         ZoneType zone = getZone();

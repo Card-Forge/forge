@@ -526,15 +526,15 @@ public class PumpAi extends PumpAiBase {
             }
             list = getCurseCreatures(ai, sa, defense, attack, keywords);
         } else {
-            if (!tgt.canTgtCreature()) {
-                ZoneType zone = tgt.getZone().get(0);
-                list = new CardCollection(game.getCardsIn(zone));
-            } else {
-                list = getPumpCreatures(ai, sa, defense, attack, keywords, immediately);
-            }
             if (sa.canTarget(ai)) {
                 sa.getTargets().add(ai);
                 return true;
+            }
+            if (tgt.canTgtCreature()) {
+                list = getPumpCreatures(ai, sa, defense, attack, keywords, immediately);
+            } else {
+                ZoneType zone = tgt.getZone().get(0);
+                list = new CardCollection(game.getCardsIn(zone));
             }
         }
 
