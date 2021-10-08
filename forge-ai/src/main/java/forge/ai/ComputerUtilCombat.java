@@ -263,8 +263,15 @@ public class ComputerUtilCombat {
      * @return a int.
      */
     public static int sumDamageIfUnblocked(final Iterable<Card> attackers, final Player attacked) {
+        return sumDamageIfUnblocked(attackers, attacked, false);
+    }
+    public static int sumDamageIfUnblocked(final Iterable<Card> attackers, final Player attacked, boolean onlyPreventable) {
         int sum = 0;
         for (final Card attacker : attackers) {
+            if (onlyPreventable && !attacker.canDamagePrevented(true)) {
+                continue;
+            }
+            // TODO always applies full prevention shields for each, so this might wrongly lower the result
             sum += damageIfUnblocked(attacker, attacked, null, false);
         }
         return sum;
