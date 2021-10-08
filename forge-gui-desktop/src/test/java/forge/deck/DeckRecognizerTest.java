@@ -304,7 +304,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
     }
 
     @Test void testManaSymbolsMatches(){
-        Pattern manaSymbolPattern = DeckRecognizer.MANA_SYMBOL_PATTERN;
+        Pattern manaSymbolPattern = DeckRecognizer.MANA_PATTERN;
 
         List<MagicColor.Color> colours = Arrays.asList(MagicColor.Color.COLORLESS, MagicColor.Color.BLACK,
                 MagicColor.Color.BLUE, MagicColor.Color.GREEN, MagicColor.Color.RED, MagicColor.Color.GREEN);
@@ -344,11 +344,102 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
 
     @Test void testManaTokenMatch(){
         DeckRecognizer recognizer = new DeckRecognizer();
-        String[] cmcTokens = new String[] {"Blue", "red", "White", "// Black", "       //Colorless----", "(green)",
+        String[] cmcTokens = new String[] {"Blue", "red", "White", "// Black",
+                "       //Colorless----", "(green)",
                 "// Multicolor", "// MultiColour"};
 
-        String[] expectedTokenText = new String[] {"{U}", "{R}", "{W}", "{B}",
-        "{C}", "{G}", "{M}", "{M}"};
+        String cname = ForgeCardMockTestCase.MOCKED_LOCALISED_STRING;
+        String[] expectedTokenText = new String[] {
+                String.format("%s {U}", cname), String.format("%s {R}", cname),
+                String.format("%s {W}", cname), String.format("%s {B}", cname),
+                String.format("%s {C}", cname), String.format("%s {G}", cname),
+                String.format("%s {W}{U}{B}{R}{G}", cname), String.format("%s {W}{U}{B}{R}{G}", cname)
+        };
+        for (int i = 0; i < cmcTokens.length; i++) {
+            String line = cmcTokens[i];
+            assertTrue(DeckRecognizer.isManaToken(line), "Fail on " + line);
+            Token manaToken = recognizer.recogniseNonCardToken(line);
+            assertNotNull(manaToken);
+            assertEquals(manaToken.getText(), expectedTokenText[i]);
+        }
+
+        String[] nonCMCtokens = new String[] {"blues", "red more words", "mainboard"};
+        for (String line : nonCMCtokens)
+            assertFalse(DeckRecognizer.isManaToken(line), "Fail on "+line);
+    }
+
+    @Test void testManaTokensBiColors(){
+        DeckRecognizer recognizer = new DeckRecognizer();
+        String[] cmcTokens = new String[] {
+                "Blue White", "red-black", "White green", "// Black Blue", "(green|red)"};
+        String[] manaTokens = new String[] {
+                "{U} {W}", "{r}-{b}", "{W} {g}", "// {B} {U}", "({g}|{r})"};
+        String[] mixedSymbols = new String[] {
+                "{u} White", "{R}-black", "White {g}", "// {b} Blue", "(green|{r})"
+        };
+        String cname = ForgeCardMockTestCase.MOCKED_LOCALISED_STRING;
+        String[] expectedTokenText = new String[] {
+                String.format("%s/%s %s", cname, cname, "{WU}"),
+                String.format("%s/%s %s", cname, cname, "{BR}"),
+                String.format("%s/%s %s", cname, cname, "{GW}"),
+                String.format("%s/%s %s", cname, cname, "{UB}"),
+                String.format("%s/%s %s", cname, cname, "{RG}")
+        };
+
+        for (int i = 0; i < cmcTokens.length; i++) {
+            String line = cmcTokens[i];
+            assertTrue(DeckRecognizer.isManaToken(line), "Fail on " + line);
+            Token manaToken = recognizer.recogniseNonCardToken(line);
+            assertNotNull(manaToken);
+            assertEquals(manaToken.getText(), expectedTokenText[i]);
+            //Symbol
+            String symbol = manaTokens[i];
+            assertTrue(DeckRecognizer.isManaToken(symbol), "Fail on " + symbol);
+            Token manaSymbolToken = recognizer.recogniseNonCardToken(symbol);
+            assertNotNull(manaSymbolToken);
+            assertEquals(manaSymbolToken.getText(), expectedTokenText[i]);
+            // Mixed
+            String mixedSymbol = mixedSymbols[i];
+            assertTrue(DeckRecognizer.isManaToken(mixedSymbol), "Fail on " + mixedSymbol);
+            Token mixedManaSymbolToken = recognizer.recogniseNonCardToken(mixedSymbol);
+            assertNotNull(mixedManaSymbolToken);
+            assertEquals(mixedManaSymbolToken.getText(), expectedTokenText[i]);
+        }
+    }
+
+    @Test void testTokenBiColorSymbols(){
+        DeckRecognizer recognizer = new DeckRecognizer();
+        String[] manaSymbols = new String[] {"{WU}", "{UB}", "{BR}", "{GW}", "{RG}",
+                "{WB}", "{UR}", "{BG}", "{RW}", "{GU}"};
+
+        String cname = ForgeCardMockTestCase.MOCKED_LOCALISED_STRING;
+        String[] expectedTokenText = new String[] {
+                String.format("%s/%s %s", cname, cname, "{WU}"),
+                String.format("%s/%s %s", cname, cname, "{UB}"),
+                String.format("%s/%s %s", cname, cname, "{BR}"),
+                String.format("%s/%s %s", cname, cname, "{GW}"),
+                String.format("%s/%s %s", cname, cname, "{RG}"),
+                String.format("%s/%s %s", cname, cname, "{WB}"),
+                String.format("%s/%s %s", cname, cname, "{UR}"),
+                String.format("%s/%s %s", cname, cname, "{BG}"),
+                String.format("%s/%s %s", cname, cname, "{RW}"),
+                String.format("%s/%s %s", cname, cname, "{GU}")
+        };
+
+        for (int i = 0; i < manaSymbols.length; i++) {
+            String manaSymbol = manaSymbols[i];
+            assertTrue(DeckRecognizer.isManaToken(manaSymbol), "Fail on " + manaSymbol);
+            Token manaToken = recognizer.recogniseNonCardToken(manaSymbol);
+            assertNotNull(manaToken);
+            assertEquals(manaToken.getText(), expectedTokenText[i]);
+        }
+    }
+
+    @Test void testManaTokensRepeatedAreIgnored(){
+        DeckRecognizer recognizer = new DeckRecognizer();
+        String[] cmcTokens = new String[] {"Blue Blue", "red-red", "White white",
+                "// black BLACK", "(Green|grEEn)", };
+        String[] expectedTokenText = new String[] {"{U}", "{R}", "{W}", "{B}", "{G}"};
         for (int i = 0; i < cmcTokens.length; i++) {
             String line = cmcTokens[i];
             assertTrue(DeckRecognizer.isManaToken(line), "Fail on " + line);
@@ -357,9 +448,65 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
             assertTrue(manaToken.getText().endsWith(expectedTokenText[i]));
         }
 
-        String[] nonCMCtokens = new String[] {"blues", "red more words", "mainboard"};
-        for (String line : nonCMCtokens)
-            assertFalse(DeckRecognizer.isManaToken(line), "Fail on "+line);
+        String[] manaTokens = new String[] {"{u} {u}", "{R}-{R}", "{w} {W}",
+                "// {b} {B}", "({G}|{g})", };
+        String[] expectedManaSymbols = new String[] {"{U}", "{R}", "{W}", "{B}", "{G}"};
+        for (int i = 0; i < manaTokens.length; i++) {
+            String line = manaTokens[i];
+            assertTrue(DeckRecognizer.isManaToken(line), "Fail on " + line);
+            Token manaToken = recognizer.recogniseNonCardToken(line);
+            assertNotNull(manaToken);
+            assertTrue(manaToken.getText().endsWith(expectedManaSymbols[i]));
+            assertFalse(manaToken.getText().endsWith(
+                    String.format("%s %s", expectedManaSymbols[i], expectedManaSymbols[i])));
+            assertFalse(manaToken.getText().endsWith(
+                    String.format("%s%s", expectedManaSymbols[i], expectedManaSymbols[i])));
+            assertFalse(manaToken.getText().endsWith(
+                    String.format("%s/%s", expectedManaSymbols[i], expectedManaSymbols[i])));
+        }
+    }
+
+    @Test void testMultiColourOrColourlessManaTokensWillBeHandledSeparately(){
+        DeckRecognizer recognizer = new DeckRecognizer();
+        String[] cmcTokens = new String[] {"Blue Colourless", "Red Multicolour", "Colorless White",
+                "// Multicolour ", "(green|Colourless)"};
+        String cname = ForgeCardMockTestCase.MOCKED_LOCALISED_STRING;
+        String[] expectedTokenText = new String[] {
+                String.format("%s {U} // %s {C}", cname, cname),
+                String.format("%s {R} // %s {W}{U}{B}{R}{G}", cname, cname),
+                String.format("%s {C} // %s {W}", cname, cname),
+                String.format("%s {W}{U}{B}{R}{G}", cname),
+                String.format("%s {G} // %s {C}", cname, cname)};
+        for (int i = 0; i < cmcTokens.length; i++) {
+            String line = cmcTokens[i];
+            assertTrue(DeckRecognizer.isManaToken(line), "Fail on " + line);
+            Token manaToken = recognizer.recogniseNonCardToken(line);
+            assertNotNull(manaToken);
+            assertEquals(manaToken.getText(), expectedTokenText[i]);
+        }
+    }
+
+    @Test void testCornerCasesWithSpecialMulticolourAndColorlessTokens(){
+        DeckRecognizer recognizer = new DeckRecognizer();
+        // Test repeated
+        String[] cmcTokens = new String[] {"Colorless Colourless", "Multicolor Multicolour",
+                "Colorless colourless"};
+
+        String cname = ForgeCardMockTestCase.MOCKED_LOCALISED_STRING;
+        String[] expectedTokenText = new String[] {
+                String.format("%s {C}", cname),
+                String.format("%s {W}{U}{B}{R}{G}", cname),
+                String.format("%s {C}", cname)};
+
+        for (int i = 0; i < cmcTokens.length; i++) {
+            String line = cmcTokens[i];
+            assertTrue(DeckRecognizer.isManaToken(line), "Fail on " + line);
+            Token manaToken = recognizer.recogniseNonCardToken(line);
+            assertNotNull(manaToken);
+            assertEquals(manaToken.getText(), expectedTokenText[i]);
+        }
+
+        // Test symbols
     }
 
     /*=============================
@@ -421,13 +568,13 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         t = recognizer.recogniseNonCardToken("CMC0");
         assertNotNull(t);
         assertEquals(t.getType(), TokenType.CARD_CMC);
-        assertEquals(t.getText(), "CMC0");
+        assertEquals(t.getText(), "CMC: {0}");
         assertEquals(t.getQuantity(), 0);
 
         t = recognizer.recogniseNonCardToken("CC1");
         assertNotNull(t);
         assertEquals(t.getType(), TokenType.CARD_CMC);
-        assertEquals(t.getText(), "CC1");
+        assertEquals(t.getText(), "CMC: {1}");
         assertEquals(t.getQuantity(), 0);
 
         t = recognizer.recogniseNonCardToken("//Common");

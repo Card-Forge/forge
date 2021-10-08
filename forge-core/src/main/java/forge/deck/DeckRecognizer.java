@@ -27,6 +27,7 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -362,11 +363,17 @@ public class DeckRecognizer {
     public static final Pattern DECK_NAME_PATTERN = Pattern.compile(REX_DECK_NAME, Pattern.CASE_INSENSITIVE);
 
     public static final String REGRP_TOKEN = "token";
+    public static final String REGRP_COLR1 = "colr1";
+    public static final String REGRP_COLR2 = "colr2";
+    public static final String REGRP_MANA = "mana";
     public static final String REX_NOCARD = String.format("^(?<pre>[^a-zA-Z]*)\\s*(?<title>(\\w+[:]\\s*))?(?<%s>[a-zA-Z]+)(?<post>[^a-zA-Z]*)?$", REGRP_TOKEN);
     public static final String REX_CMC = String.format("^(?<pre>[^a-zA-Z]*)\\s*(?<%s>(C(M)?C(\\s)?\\d{1,2}))(?<post>[^\\d]*)?$", REGRP_TOKEN);
     public static final String REX_RARITY = String.format("^(?<pre>[^a-zA-Z]*)\\s*(?<%s>((un)?common|(mythic)?\\s*(rare)?|land))(?<post>[^a-zA-Z]*)?$", REGRP_TOKEN);
-    public static final String REX_MANA = String.format("^(?<pre>[^a-zA-Z]*)\\s*(?<%s>(white|blue|black|red|green|colo(u)?rless|multicolo(u)?r))(?<post>[^a-zA-Z]*)?$", REGRP_TOKEN);
-    public static final String REX_MANA_SYMBOLS = String.format("^(?<pre>[^a-zA-Z]*)\\s*\\{(?<%s>(w|u|b|r|g|c|m))\\}(?<post>[^a-zA-Z]*)?$", REGRP_TOKEN);
+    public static final String MANA_SYMBOLS = "w|u|b|r|g|c|m|wu|ub|br|rg|gw|wb|ur|bg|rw|gu";
+    public static final String REX_MANA_SYMBOLS = String.format("\\{(?<%s>(%s))\\}", REGRP_MANA, MANA_SYMBOLS);
+    public static final String REX_MANA_COLOURS = String.format("(\\{(%s)\\})|(white|blue|black|red|green|colo(u)?rless|multicolo(u)?r)", MANA_SYMBOLS);
+    public static final String REX_MANA = String.format("^(?<pre>[^a-zA-Z]*)\\s*(?<%s>(%s))((\\s|-|\\|)(?<%s>(%s)))?(?<post>[^a-zA-Z]*)?$",
+            REGRP_COLR1, REX_MANA_COLOURS, REGRP_COLR2, REX_MANA_COLOURS);
     public static final Pattern NONCARD_PATTERN = Pattern.compile(REX_NOCARD, Pattern.CASE_INSENSITIVE);
     public static final Pattern CMC_PATTERN = Pattern.compile(REX_CMC, Pattern.CASE_INSENSITIVE);
     public static final Pattern CARD_RARITY_PATTERN = Pattern.compile(REX_RARITY, Pattern.CASE_INSENSITIVE);
@@ -759,7 +766,7 @@ public class DeckRecognizer {
             return Token.DeckSection(tokenText, this.allowedDeckSections);
         }
         if (isCardCMC(text)){
-            String tokenText = cardCMCTokenMatch(text);
+            String tokenText = getCardCMCMatch(text);
             return new Token(TokenType.CARD_CMC, tokenText);
         }
         if (isCardRarity(text)){
@@ -844,58 +851,165 @@ public class DeckRecognizer {
         return cardCMCmatcher.group(REGRP_TOKEN);
     }
 
-    private static String manaTokenMatch(final String lineAsIs){
+    private String getCardCMCMatch(String lineAsIs) {
+        String tokenMatch = cardCMCTokenMatch(lineAsIs);
+        if (tokenMatch.contains("CC"))
+            tokenMatch = tokenMatch.replaceAll("CC", "").trim();
+        else
+            tokenMatch = tokenMatch.replaceAll("CMC", "").trim();
+        return String.format("CMC: {%s}", tokenMatch);
+    }
+
+    private static Pair<String, String> manaTokenMatch(final String lineAsIs){
         if (lineAsIs == null)
             return null;
         String line = lineAsIs.trim();
         Matcher manaMatcher = MANA_PATTERN.matcher(line);
-        Matcher manaSymbolMatcher = MANA_SYMBOL_PATTERN.matcher(line);
-        if (!manaMatcher.matches() && !manaSymbolMatcher.matches())
+        if (!manaMatcher.matches())
             return null;
-        if (manaMatcher.matches())
-            return manaMatcher.group(REGRP_TOKEN);
-        return manaSymbolMatcher.group(REGRP_TOKEN);
+        String firstMana = manaMatcher.group(REGRP_COLR1);
+        String secondMana = manaMatcher.group(REGRP_COLR2);
+        firstMana = matchAnyManaSymbolIn(firstMana);
+        secondMana = matchAnyManaSymbolIn(secondMana);
+        return Pair.of(firstMana, secondMana);
+    }
+
+    private static String matchAnyManaSymbolIn(String manaToken){
+        if (manaToken == null)
+            return null;
+        Matcher matchManaSymbol = MANA_SYMBOL_PATTERN.matcher(manaToken);
+        if (matchManaSymbol.matches())
+            return matchManaSymbol.group(REGRP_MANA);
+        return manaToken;
     }
 
     private static String getManaTokenMatch(final String lineAsIs){
-        String matchedText = manaTokenMatch(lineAsIs);
-        String tokenText = "%s %s";
-        switch (matchedText.toLowerCase()) {
+        Pair<String, String> matchedMana = manaTokenMatch(lineAsIs);
+        String color1name = matchedMana.getLeft();
+        String color2name = matchedMana.getRight();
+
+        MagicColor.Color magicColor;
+        MagicColor.Color magicColor2;
+        if (color1name.length() == 2) { // the only case possible for this to happen is two colour codes
+            magicColor  = getMagicColor(color1name.substring(0, 1));
+            magicColor2 = getMagicColor(color1name.substring(1));
+            return getMagicColourLabel(magicColor, magicColor2);
+        }
+        magicColor = getMagicColor(color1name);
+        if (color2name == null)
+            return getMagicColourLabel(magicColor);
+        magicColor2 = getMagicColor(color2name);
+        if (magicColor2 == magicColor)
+            return getMagicColourLabel(magicColor);
+        return getMagicColourLabel(magicColor, magicColor2);
+    }
+
+    private static String getMagicColourLabel(MagicColor.Color magicColor) {
+        if (magicColor == null) // Multicolour
+            return String.format("%s {W}{U}{B}{R}{G}", getLocalisedMagicColorName("Multicolour"));
+        return String.format("%s %s", getLocalisedMagicColorName(magicColor.getName()), magicColor.getSymbol());
+    }
+
+    private static final HashMap<Integer, String> manaSymbolsMap = new HashMap<Integer, String>() {{
+        put(MagicColor.WHITE | MagicColor.BLUE, "WU");
+        put(MagicColor.BLUE | MagicColor.BLACK, "UB");
+        put(MagicColor.BLACK | MagicColor.RED, "BR");
+        put(MagicColor.RED | MagicColor.GREEN, "RG");
+        put(MagicColor.GREEN | MagicColor.WHITE, "GW");
+        put(MagicColor.WHITE | MagicColor.BLACK, "WB");
+        put(MagicColor.BLUE | MagicColor.RED, "UR");
+        put(MagicColor.BLACK | MagicColor.GREEN, "BG");
+        put(MagicColor.RED | MagicColor.WHITE, "RW");
+        put(MagicColor.GREEN | MagicColor.BLUE, "GU");
+    }};
+    private static String getMagicColourLabel(MagicColor.Color magicColor1, MagicColor.Color magicColor2){
+        if (magicColor2 == null || magicColor2 == MagicColor.Color.COLORLESS
+                || magicColor1 == MagicColor.Color.COLORLESS)
+            return String.format("%s // %s", getMagicColourLabel(magicColor1), getMagicColourLabel(magicColor2));
+        String localisedName1 = getLocalisedMagicColorName(magicColor1.getName());
+        String localisedName2 = getLocalisedMagicColorName(magicColor2.getName());
+        String comboManaSymbol = manaSymbolsMap.get(magicColor1.getColormask() | magicColor2.getColormask());
+        return String.format("%s/%s {%s}", localisedName1, localisedName2, comboManaSymbol);
+    }
+
+    private static MagicColor.Color getMagicColor(String colorName){
+        if (colorName.toLowerCase().startsWith("multi") || colorName.equalsIgnoreCase("m"))
+            return null;  // will be handled separately
+
+        byte color = MagicColor.fromName(colorName.toLowerCase());
+        switch (color) {
+            case MagicColor.WHITE:
+                return MagicColor.Color.WHITE;
+            case MagicColor.BLUE:
+                return MagicColor.Color.BLUE;
+            case MagicColor.BLACK:
+                return MagicColor.Color.BLACK;
+            case MagicColor.RED:
+                return MagicColor.Color.RED;
+            case MagicColor.GREEN:
+                return MagicColor.Color.GREEN;
+            default:
+                return MagicColor.Color.COLORLESS;
+
+        }
+    }
+
+    private static String getLocalisedMagicColorName(String colorName){
+        Localizer localizer = Localizer.getInstance();
+        switch(colorName.toLowerCase()){
             case MagicColor.Constant.WHITE:
-            case "w":
-                return String.format(tokenText, Localizer.getInstance().getMessage("lblWhite"),
-                                     MagicColor.Color.WHITE.getSymbol());
+                return localizer.getMessage("lblWhite");
 
             case MagicColor.Constant.BLUE:
-            case "u":
-                return String.format(tokenText, Localizer.getInstance().getMessage("lblBlue"),
-                        MagicColor.Color.BLUE.getSymbol());
+                return localizer.getMessage("lblBlue");
 
             case MagicColor.Constant.BLACK:
-            case "b":
-                return String.format(tokenText, Localizer.getInstance().getMessage("lblBlack"),
-                        MagicColor.Color.BLACK.getSymbol());
+                return localizer.getMessage("lblBlack");
 
             case MagicColor.Constant.RED:
-            case "r":
-                return String.format(tokenText, Localizer.getInstance().getMessage("lblRed"),
-                        MagicColor.Color.RED.getSymbol());
+                return localizer.getMessage("lblRed");
 
             case MagicColor.Constant.GREEN:
-            case "g":
-                return String.format(tokenText, Localizer.getInstance().getMessage("lblGreen"),
-                        MagicColor.Color.GREEN.getSymbol());
+                return localizer.getMessage("lblGreen");
 
             case MagicColor.Constant.COLORLESS:
-            case "c":
-                return String.format(tokenText, Localizer.getInstance().getMessage("lblColorless"),
-                        MagicColor.Color.COLORLESS.getSymbol());
-
-            default: // Multicolour
-                return String.format(tokenText, Localizer.getInstance().getMessage("lblMulticolor"),
-                        "{M}");
+                return localizer.getMessage("lblColorless");
+            case "multicolour":
+            case "multicolor":
+                return localizer.getMessage("lblMulticolor");
+            default:
+                return "";
         }
+    }
 
+
+    private static Pair<String, String> getManaNameAndSymbol(String matchedMana) {
+        if (matchedMana == null)
+            return null;
+
+        Localizer localizer = Localizer.getInstance();
+        switch (matchedMana.toLowerCase()) {
+            case MagicColor.Constant.WHITE:
+            case "w":
+                return Pair.of(localizer.getMessage("lblWhite"), MagicColor.Color.WHITE.getSymbol());
+            case MagicColor.Constant.BLUE:
+            case "u":
+                return Pair.of(localizer.getMessage("lblBlue"), MagicColor.Color.BLUE.getSymbol());
+            case MagicColor.Constant.BLACK:
+            case "b":
+                return Pair.of(localizer.getMessage("lblBlack"), MagicColor.Color.BLACK.getSymbol());
+            case MagicColor.Constant.RED:
+            case "r":
+                return Pair.of(localizer.getMessage("lblRed"), MagicColor.Color.RED.getSymbol());
+            case MagicColor.Constant.GREEN:
+            case "g":
+                return Pair.of(localizer.getMessage("lblGreen"), MagicColor.Color.GREEN.getSymbol());
+            case MagicColor.Constant.COLORLESS:
+            case "c":
+                return Pair.of(localizer.getMessage("lblColorless"), MagicColor.Color.COLORLESS.getSymbol());
+            default: // Multicolour
+                return Pair.of(localizer.getMessage("lblMulticolor"), "");
+        }
     }
 
     public static boolean isDeckName(final String lineAsIs) {
