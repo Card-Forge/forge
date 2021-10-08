@@ -274,11 +274,11 @@ public class GameAction {
 
                 if (zoneTo.is(ZoneType.Stack)) {
                     // when moving to stack, copy changed card information
-                    copied.setChangedCardColors(c.getChangedCardColorsMap());
-                    copied.setChangedCardColorsCharacterDefining(c.getChangedCardColorsCharacterDefiningMap());
+                    copied.setChangedCardColors(c.getChangedCardColorsTable());
+                    copied.setChangedCardColorsCharacterDefining(c.getChangedCardColorsCharacterDefiningTable());
                     copied.setChangedCardKeywords(c.getChangedCardKeywords());
-                    copied.setChangedCardTypes(c.getChangedCardTypesMap());
-                    copied.setChangedCardTypesCharacterDefining(c.getChangedCardTypesCharacterDefiningMap());
+                    copied.setChangedCardTypes(c.getChangedCardTypesTable());
+                    copied.setChangedCardTypesCharacterDefining(c.getChangedCardTypesCharacterDefiningTable());
                     copied.setChangedCardNames(c.getChangedCardNames());
                     copied.setChangedCardTraits(c.getChangedCardTraits());
 

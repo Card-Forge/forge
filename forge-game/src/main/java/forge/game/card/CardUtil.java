@@ -281,11 +281,11 @@ public final class CardUtil {
 
         newCopy.setUnearthed(in.isUnearthed());
 
-        newCopy.setChangedCardColors(in.getChangedCardColorsMap());
-        newCopy.setChangedCardColorsCharacterDefining(in.getChangedCardColorsCharacterDefiningMap());
+        newCopy.setChangedCardColors(in.getChangedCardColorsTable());
+        newCopy.setChangedCardColorsCharacterDefining(in.getChangedCardColorsCharacterDefiningTable());
         newCopy.setChangedCardKeywords(in.getChangedCardKeywords());
-        newCopy.setChangedCardTypes(in.getChangedCardTypesMap());
-        newCopy.setChangedCardTypesCharacterDefining(in.getChangedCardTypesCharacterDefiningMap());
+        newCopy.setChangedCardTypes(in.getChangedCardTypesTable());
+        newCopy.setChangedCardTypesCharacterDefining(in.getChangedCardTypesCharacterDefiningTable());
         newCopy.setChangedCardNames(in.getChangedCardNames());
         newCopy.setChangedCardTraits(in.getChangedCardTraits());
 
