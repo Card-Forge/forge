@@ -426,6 +426,7 @@ public class TargetRestrictions {
      */
     public final boolean canTgtCreature() {
         for (final String s : this.validTgts) {
+            // TODO check IsCommander when in that variant
             if ((s.contains("Creature") || s.startsWith("Permanent"))
                     && !s.contains("nonCreature")) {
                 return true;
