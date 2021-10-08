@@ -4,6 +4,8 @@ import com.google.common.collect.Lists;
 import forge.ai.AiPlayDecision;
 import forge.ai.PlayerControllerAi;
 import forge.ai.SpellAbilityAi;
+import forge.game.phase.PhaseHandler;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
@@ -15,7 +17,16 @@ import java.util.Map;
 public class VentureAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
-        // TODO: is it ever a bad idea to venture into a dungeon?
+        // If this has a mana cost, do it at opponent's EOT if able to prevent spending mana early; if sorcery, do it in Main2
+        PhaseHandler ph = aiPlayer.getGame().getPhaseHandler();
+        if (sa.getPayCosts().hasManaCost() || sa.getPayCosts().hasTapCost()) {
+            if (SpellAbilityAi.isSorcerySpeed(sa)) {
+                return ph.is(PhaseType.MAIN2, aiPlayer);
+            } else {
+                return ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == aiPlayer;
+            }
+        }
+
         return true;
     }
 
