@@ -64,6 +64,8 @@ public final class CardPicturePanel extends JPanel implements ImageFetcher.Callb
         this.add(this.panel);
     }
 
+    public Object getDisplayed() { return displayed; }
+
     public void setItem(final InventoryItem item) {
         setImage(item, true);
     }
@@ -154,7 +156,5 @@ public final class CardPicturePanel extends JPanel implements ImageFetcher.Callb
         this.panel.setAlpha(0.5f);
     }
 
-    public void showAsEnabled(){
-        this.panel.setAlpha(0.0f);
-    }
+    public void showAsEnabled(){ this.panel.setAlpha(0.0f); }
 }
