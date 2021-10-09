@@ -285,6 +285,9 @@ public class GameAction {
                     copied.copyChangedTextFrom(c);
                     copied.setTimestamp(c.getTimestamp());
 
+                    // clean up changes that come from its own static abilities
+                    copied.cleanupCopiedChangesFrom(c);
+
                     // copy exiled properties when adding to stack
                     // will be cleanup later in MagicStack
                     copied.setExiledWith(c.getExiledWith());
