@@ -1504,7 +1504,6 @@ public class GameAction {
 
     private boolean stateBasedAction903_9a(Card c) {
         if (c.isRealCommander() && c.canMoveToCommandZone()) {
-            boolean refreeze = c.getGame().getTracker().isFrozen();
             if (c.getGame().getTracker().isFrozen()) {
                 // FIXME: need to flush the tracker to make sure the Commander is properly updated
                 c.getGame().getTracker().unfreeze();
