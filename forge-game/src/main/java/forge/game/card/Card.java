@@ -555,8 +555,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     // The following methods are used to selectively update certain view components (text,
     // P/T, card types) in order to avoid card flickering due to aggressive full update
     public void updateAbilityTextForView() {
-        updateKeywords();
-        view.getCurrentState().updateAbilityText(this, getCurrentState());
+        updateKeywords(); // does call update Ability text
+        //view.getCurrentState().updateAbilityText(this, getCurrentState());
     }
 
     public final void updatePowerToughnessForView() {
@@ -4347,10 +4347,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final void removeChangedTextColorWord(final Long timestamp, final long staticId) {
-        changedTextColors.remove(timestamp);
-        updateKeywordsOnRemoveChangedText(
-                removeChangedCardKeywords(timestamp, staticId));
-        updateChangedText();
+        if (changedTextColors.remove(timestamp)) {
+            updateKeywordsOnRemoveChangedText(removeChangedCardKeywords(timestamp, staticId));
+            updateChangedText();
+        }
     }
 
     /**
@@ -4370,11 +4370,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final void removeChangedTextTypeWord(final Long timestamp, final long staticId) {
-        changedTextTypes.remove(timestamp);
-        removeChangedCardTypes(timestamp, staticId);
-        updateKeywordsOnRemoveChangedText(
-                removeChangedCardKeywords(timestamp, staticId));
-        updateChangedText();
+        if (changedTextTypes.remove(timestamp)) {
+            removeChangedCardTypes(timestamp, staticId);
+            updateKeywordsOnRemoveChangedText(removeChangedCardKeywords(timestamp, staticId));
+            updateChangedText();
+        }
     }
 
     private void updateKeywordsChangedText(final Long timestamp, final long staticId) {
@@ -6651,6 +6651,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         this.changedCardColorsCharacterDefining.clear();
         for (Table.Cell<Long, Long, CardColor> entry : changedCardColors.cellSet()) {
             this.changedCardColorsCharacterDefining.put(entry.getRowKey(), entry.getColumnKey(), entry.getValue());
+        }
+    }
+
+    public void cleanupCopiedChangesFrom(Card c) {
+        for (StaticAbility stAb : c.getStaticAbilities()) {
+            this.removeChangedCardTypes(c.getTimestamp(), stAb.getId(), false);
+            this.removeColor(c.getTimestamp(), stAb.getId());
+            this.removeChangedCardKeywords(c.getTimestamp(), stAb.getId(), false);
+            this.removeChangedCardTraits(c.getTimestamp(), stAb.getId());
         }
     }
 

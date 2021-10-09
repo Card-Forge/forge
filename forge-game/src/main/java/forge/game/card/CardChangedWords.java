@@ -24,9 +24,9 @@ public final class CardChangedWords {
         return stamp;
     }
 
-    public void remove(final Long timestamp) {
-        map.remove(timestamp);
+    public boolean remove(final Long timestamp) {
         isDirty = true;
+        return map.remove(timestamp) != null;
     }
 
     public void removeAll() {
