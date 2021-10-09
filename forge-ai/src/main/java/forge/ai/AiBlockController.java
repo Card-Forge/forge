@@ -347,7 +347,7 @@ public class AiBlockController {
 
         // Try to block an attacker without first strike with a gang of first strikers
         for (final Card attacker : attackersLeft) {
-            if (ComputerUtilCombat.attackerCantBeDestroyedInCombat(ai, attacker)) {
+            if (ComputerUtilCombat.combatantCantBeDestroyed(ai, attacker)) {
                 // don't bother with gang blocking if the attacker will regenerate or is indestructible
                 continue;
             }
@@ -395,7 +395,7 @@ public class AiBlockController {
 
         // Try to block an attacker with two blockers of which only one will die
         for (final Card attacker : attackersLeft) {
-            if (ComputerUtilCombat.attackerCantBeDestroyedInCombat(ai, attacker)) {
+            if (ComputerUtilCombat.combatantCantBeDestroyed(ai, attacker)) {
                 // don't bother with gang blocking if the attacker will regenerate or is indestructible
                 continue;
             }

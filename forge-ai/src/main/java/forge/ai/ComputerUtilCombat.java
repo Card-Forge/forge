@@ -605,7 +605,6 @@ public class ComputerUtilCombat {
 
         int flankingMagnitude = 0;
         if (attacker.hasKeyword(Keyword.FLANKING) && !defender.hasKeyword(Keyword.FLANKING)) {
-
             flankingMagnitude = attacker.getAmountOfKeyword(Keyword.FLANKING);
 
             if (flankingMagnitude >= defender.getNetToughness()) {
@@ -1641,30 +1640,25 @@ public class ComputerUtilCombat {
         return false;
     }
 
-    // can the attacker be potentially destroyed in combat or is it potentially indestructible?
+    // can the combatant be potentially destroyed or is it potentially indestructible?
     /**
      * <p>
      * attackerCantBeDestroyedNow.
      * </p>
      * @param ai
      *
-     * @param attacker
+     * @param combatant
      *            a {@link forge.game.card.Card} object.
      * @return a boolean.
      */
-    public static boolean attackerCantBeDestroyedInCombat(Player ai, final Card attacker) {
-        // attacker is either indestructible or may regenerate
-        if (attacker.hasKeyword(Keyword.INDESTRUCTIBLE) || (ComputerUtil.canRegenerate(ai, attacker))) {
+    public static boolean combatantCantBeDestroyed(Player ai, final Card combatant) {
+        // either indestructible or may regenerate
+        if (combatant.hasKeyword(Keyword.INDESTRUCTIBLE) || (ComputerUtil.canRegenerate(ai, combatant))) {
             return true;
         }
 
-        // attacker will regenerate
-        if (attacker.getShieldCount() > 0 && attacker.canBeShielded()) {
-            return true;
-        }
-
-        // all damage will be prevented
-        if (attacker.hasKeyword("PreventAllDamageBy Creature.blockingSource")) {
+        // will regenerate
+        if (combatant.getShieldCount() > 0 && combatant.canBeShielded()) {
             return true;
         }
 
@@ -1709,7 +1703,6 @@ public class ComputerUtilCombat {
 
         int flankingMagnitude = 0;
         if (attacker.hasKeyword(Keyword.FLANKING) && !blocker.hasKeyword(Keyword.FLANKING)) {
-
             flankingMagnitude = attacker.getAmountOfKeyword(Keyword.FLANKING);
 
             if (flankingMagnitude >= blocker.getNetToughness()) {
@@ -1727,10 +1720,6 @@ public class ComputerUtilCombat {
                         .getCounters(CounterEnumType.M1M1) == 0))
                 || (attacker.hasKeyword(Keyword.UNDYING) && !attacker.canReceiveCounters(CounterEnumType.P1P1) && (attacker
                         .getCounters(CounterEnumType.P1P1) == 0))) {
-            return false;
-        }
-
-        if (attacker.hasKeyword("PreventAllDamageBy Creature.blockingSource")) {
             return false;
         }
 

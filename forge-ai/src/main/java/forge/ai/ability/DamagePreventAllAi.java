@@ -25,8 +25,7 @@ public class DamagePreventAllAi extends SpellAbilityAi {
         }
 
         if (!ai.getGame().getStack().isEmpty()) {
-            // TODO check stack for something on the stack will kill anything i
-            // control
+            // TODO check stack for something on the stack will kill anything i control
 
         } // Protect combatants
         else if (ai.getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {

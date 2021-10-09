@@ -228,9 +228,9 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 // Use defensively to destroy the opposing Flying creature when possible, or to block with an indestructible
                 // creature buffed with Flying
                 for (Card c : attackingFlyer) {
-                    if (!ComputerUtilCombat.attackerCantBeDestroyedInCombat(c.getController(), c)
+                    if (!ComputerUtilCombat.combatantCantBeDestroyed(c.getController(), c)
                             && (card.getNetPower() >= c.getNetToughness() && card.getNetToughness() > c.getNetPower()
-                            || ComputerUtilCombat.attackerCantBeDestroyedInCombat(ai, card))) {
+                            || ComputerUtilCombat.combatantCantBeDestroyed(ai, card))) {
                         return true;
                     }
                 }
