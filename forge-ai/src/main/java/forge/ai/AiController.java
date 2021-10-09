@@ -743,11 +743,15 @@ public class AiController {
             return AiPlayDecision.CantPlaySa;
         }
 
+        int oldCMC = 0;
         boolean xCost = sa.getPayCosts().hasXInAnyCostPart() || sa.getHostCard().hasStartOfKeyword("Strive");
-        if (!xCost && !ComputerUtilCost.canPayCost(sa, player)) {
-            // for most costs, it's OK to check if they can be paid early in order to avoid running a heavy API check
-            // when the AI won't even be able to play the spell in the first place (even if it could afford it)
-            return AiPlayDecision.CantAfford;
+        if (!xCost) {
+            if (!ComputerUtilCost.canPayCost(sa, player)) {
+                // for most costs, it's OK to check if they can be paid early in order to avoid running a heavy API check
+                // when the AI won't even be able to play the spell in the first place (even if it could afford it)
+                return AiPlayDecision.CantAfford;
+            }
+            oldCMC = CostAdjustment.adjust(sa.getPayCosts(), sa).getTotalMana().getCMC();
         }
 
         // state needs to be switched here so API checks evaluate the right face
@@ -761,6 +765,14 @@ public class AiController {
 
         if (canPlay != AiPlayDecision.WillPlay) {
             return canPlay;
+        }
+
+        // check if some target raised cost
+        if (!xCost) {
+            int finalCMC = CostAdjustment.adjust(sa.getPayCosts(), sa).getTotalMana().getCMC();
+            if (finalCMC > oldCMC) {
+                xCost = true;
+            }
         }
 
         if (xCost && !ComputerUtilCost.canPayCost(sa, player)) {
