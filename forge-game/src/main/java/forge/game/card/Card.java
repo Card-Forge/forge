@@ -408,9 +408,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         CardCloneStates clStates = getLastClonedState();
         if (clStates == null) {
             return getOriginalState(state);
-        } else {
-            return clStates.get(state);
         }
+        return clStates.get(state);
     }
 
     public boolean hasState(final CardStateName state) {
@@ -420,9 +419,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         CardCloneStates clStates = getLastClonedState();
         if (clStates == null) {
             return states.containsKey(state);
-        } else {
-            return clStates.containsKey(state);
         }
+        return clStates.containsKey(state);
     }
 
     public CardState getOriginalState(final CardStateName state) {

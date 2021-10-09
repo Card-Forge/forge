@@ -210,7 +210,6 @@ public class SetStateAi extends SpellAbilityAi {
 
             // if an opponent can't block it, no need to transform (back)
             for (Player opp : ai.getOpponents()) {
-                
                 boolean attackCard = !ComputerUtilCard.canBeBlockedProfitably(opp, original);
                 boolean attackTransformed = !ComputerUtilCard.canBeBlockedProfitably(opp, copy);
 
