@@ -144,17 +144,14 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             //the last card in this list will be the closest to the top, but we want the first card to be closest.
             //so reverse it here before moving them to the library.
             java.util.Collections.reverse(cards);
-        }
-
-        if (destination == ZoneType.Graveyard) {
-            cards = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, cards, ZoneType.Graveyard, sa);
+        } else {
+            cards = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, cards, destination, sa);
         }
 
         if (destination.equals(ZoneType.Library) && random) {
             CardLists.shuffle(cards);
         }
-        // movedCards should have same timestamp
-        long ts = game.getNextTimestamp();
+
         final CardZoneTable triggerList = new CardZoneTable();
         for (final Card c : cards) {
             final Zone originZone = game.getZoneOf(c);
@@ -240,9 +237,6 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 }
                 if (imprint != null) {
                     game.getCardState(source).addImprintedCard(movedCard);
-                }
-                if (destination == ZoneType.Battlefield) {
-                    movedCard.setTimestamp(ts);
                 }
 
                 triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), movedCard);

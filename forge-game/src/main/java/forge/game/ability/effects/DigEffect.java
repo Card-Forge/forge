@@ -164,8 +164,6 @@ public class DigEffect extends SpellAbilityEffect {
                             }
                         }
                     }
-                    // Singletons.getModel().getGameAction().revealToCopmuter(top.toArray());
-                    // - for when it exists
                 }
                 else if (!sa.hasParam("NoLooking")) {
                     // show the user the revealed cards
@@ -313,6 +311,10 @@ public class DigEffect extends SpellAbilityEffect {
                         host.clearRemembered();
                     }
                     Collections.reverse(movedCards);
+
+                    if (destZone1.equals(ZoneType.Battlefield)) {
+                        movedCards = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, movedCards, destZone1, sa);
+                    }
 
                     Card effectHost = sa.getOriginalHost();
                     if (effectHost == null) {
