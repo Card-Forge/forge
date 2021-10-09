@@ -743,7 +743,7 @@ public class AiController {
             return AiPlayDecision.CantPlaySa;
         }
 
-        int oldCMC = 0;
+        int oldCMC = -1;
         boolean xCost = sa.getPayCosts().hasXInAnyCostPart() || sa.getHostCard().hasStartOfKeyword("Strive");
         if (!xCost) {
             if (!ComputerUtilCost.canPayCost(sa, player)) {
@@ -751,7 +751,10 @@ public class AiController {
                 // when the AI won't even be able to play the spell in the first place (even if it could afford it)
                 return AiPlayDecision.CantAfford;
             }
-            oldCMC = CostAdjustment.adjust(sa.getPayCosts(), sa).getTotalMana().getCMC();
+            // TODO check for Reduce too, e.g. Battlefield Thaumaturge could make it castable
+            if (sa.usesTargeting()) {
+                oldCMC = CostAdjustment.adjust(sa.getPayCosts(), sa).getTotalMana().getCMC();
+            }
         }
 
         // state needs to be switched here so API checks evaluate the right face
@@ -768,7 +771,7 @@ public class AiController {
         }
 
         // check if some target raised cost
-        if (!xCost) {
+        if (oldCMC > -1) {
             int finalCMC = CostAdjustment.adjust(sa.getPayCosts(), sa).getTotalMana().getCMC();
             if (finalCMC > oldCMC) {
                 xCost = true;
