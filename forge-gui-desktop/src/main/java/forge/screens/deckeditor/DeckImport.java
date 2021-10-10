@@ -554,7 +554,7 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
     }
 
     private void activateCardPreview(HyperlinkEvent e) {
-        // TODO: FOIL and Card Status
+        // FIXME: Card Status
         if(e.getEventType() == HyperlinkEvent.EventType.ENTERED ||
            e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
             String keyString = e.getDescription();
@@ -675,7 +675,32 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
     private void updateSummaries(final List<DeckRecognizer.Token> tokens) {
         this.cStatsView.updateStats(tokens, this.controller.importBannedAndRestrictedCards());
         cmdAcceptButton.setEnabled(this.cStatsView.getTotalCardsInDecklist() > 0);
-        this.resetCardImagePreviewPanel();
+        Object displayedCardInPanel = this.cardImagePreview.getDisplayed();
+        if (!(displayedCardInPanel instanceof PaperCard))  // also accounts for any null
+            this.resetCardImagePreviewPanel();
+        else {
+            PaperCard cardDisplayed = (PaperCard) displayedCardInPanel;
+            // this will return either the same card instance or its [un]foiled version
+            // null will be returned if not found in card list anymore
+            cardDisplayed = this.controller.getCardFromDecklist(cardDisplayed);
+            if (cardDisplayed == null)
+                this.resetCardImagePreviewPanel(); // current displayed card is not in decklist
+            else {
+                if (this.controller.isTokenInListLegal(cardDisplayed)) {
+                    this.cardImagePreview.setItem(cardDisplayed);
+                    this.cardImagePreview.showAsEnabled();
+                } else if (this.controller.isTokenInListLimited(cardDisplayed)) {
+                    this.cardImagePreview.setItem(cardDisplayed);
+                    if (this.includeBnRCheck.isSelected())
+                        this.cardImagePreview.showAsEnabled();
+                    else
+                        this.cardImagePreview.showAsDisabled();
+                } else { // any other card token NOT legal nor limited
+                    this.cardImagePreview.setItem(cardDisplayed);
+                    this.cardImagePreview.showAsDisabled();
+                }
+            }
+        }
     }
 
     private String toHTML(final DeckRecognizer.Token token) {
@@ -721,7 +746,8 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
     private String getTokenMessage(DeckRecognizer.Token token){
         switch (token.getType()){
             case LIMITED_CARD:
-                return String.format("- %s", Localizer.getInstance().getMessage("lblErrLimitedCard",
+                return String.format("- <span class=\"%s\">%s</span>", WARN_MSG_CLASS,
+                        Localizer.getInstance().getMessage("lblErrLimitedCard",
                         StringUtils.capitalize(token.getLimitedCardType().name()), getGameFormatLabel()));
             case CARD_FROM_NOT_ALLOWED_SET:
                 return String.format("- %s", Localizer.getInstance().getMessage("lblErrNotAllowedCard",

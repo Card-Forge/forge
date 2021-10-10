@@ -1,9 +1,7 @@
 package forge.deck;
 
 import java.text.DateFormatSymbols;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
 import forge.StaticData;
 import forge.card.CardDb;
@@ -34,6 +32,7 @@ public class DeckImportController {
     private boolean inlcludeBnRInDeck = false;
 
     private final List<Token> tokens = new ArrayList<>();
+    private final Map<PaperCard, Token> cardsInTokens = new HashMap<>();
     private final boolean currentDeckNotEmpty;
     private DeckFormat currentDeckFormat;
     private GameFormat currentGameFormat;
@@ -145,6 +144,7 @@ public class DeckImportController {
 
     public List<Token> parseInput(String input) {
         tokens.clear();
+        cardsInTokens.clear();
         DeckRecognizer recognizer = new DeckRecognizer();
         // Set Art Preference first thing
         recognizer.setArtPreference(this.artPreference);
@@ -177,11 +177,18 @@ public class DeckImportController {
             checkAndFixCommanderIn(DeckSection.Commander);
         }
 
+        collectAllCardsInTokens();
         return tokens;
     }
 
-    public boolean currentGameFormatAllowsCommander(){
-        return this.allowedSections.contains(DeckSection.Commander);
+    private void collectAllCardsInTokens(){
+        cardsInTokens.clear();
+        for (Token token : tokens){
+            if (!token.isCardToken())
+                continue;
+            PaperCard tokenCard = token.getCard();
+            cardsInTokens.put(tokenCard, token);
+        }
     }
 
     private void checkAndFixCommanderIn(DeckSection targetDeckSection){
@@ -277,6 +284,34 @@ public class DeckImportController {
         return tokensInSection;
     }
 
+    public boolean currentGameFormatAllowsCommander(){
+        return this.allowedSections.contains(DeckSection.Commander);
+    }
+
+    public PaperCard getCardFromDecklist(final PaperCard card){
+        if (cardsInTokens.containsKey(card))
+            return card; // found - same instance returned
+
+        // Account for any [un]foiled version
+        PaperCard cardKey;
+        if (card.isFoil())
+            cardKey = new PaperCard(card.getRules(), card.getEdition(), card.getRarity(), card.getArtIndex(),
+                               false, card.getCollectorNumber(), card.getArtist());
+        else
+            cardKey = card.getFoiled();
+        return cardsInTokens.containsKey(cardKey) ? cardsInTokens.get(cardKey).getCard() : null;
+    }
+
+    public boolean isTokenInListLimited(PaperCard cardKey) {
+        Token cardToken = this.cardsInTokens.getOrDefault(cardKey, null);
+        return (cardToken != null) && (cardToken.getType() == TokenType.LIMITED_CARD);
+    }
+
+    public boolean isTokenInListLegal(PaperCard cardKey) {
+        Token cardToken = this.cardsInTokens.getOrDefault(cardKey, null);
+        return (cardToken != null) && (cardToken.getType() == TokenType.LEGAL_CARD);
+    }
+
     public Deck accept(){
         return this.accept("");
     }
@@ -321,7 +356,7 @@ public class DeckImportController {
             /* Deck Sections have been already validated for tokens by DeckRecogniser,
              * plus any other adjustment (like accounting for Commander in Sideboard) has been
              * already taken care of in previous parseInput.
-             * Therefore we can safely proceed here by just adding the cards. */
+             * Therefore, we can safely proceed here by just adding the cards. */
             resultDeck.getOrCreate(deckSection).add(crd, t.getQuantity());
         }
         return resultDeck;
