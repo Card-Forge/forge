@@ -63,7 +63,7 @@ public class CountersProliferateAi extends SpellAbilityAi {
         boolean opponentPoison = false;
 
         for (final Player o : ai.getOpponents()) {
-            opponentPoison |= o.getPoisonCounters() >= 1;
+            opponentPoison |= o.getPoisonCounters() > 0 && o.canReceiveCounters(CounterEnumType.POISON);
             hperms.addAll(CardLists.filter(o.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card crd) {

@@ -20,6 +20,7 @@ package forge.ai.ability;
 import java.util.List;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
@@ -64,7 +65,8 @@ public abstract class CountersAi extends SpellAbilityAi {
     public static Card chooseCursedTarget(final CardCollectionView list, final String type, final int amount, final Player ai) {
         Card choice;
 
-        if (amount == 1 && !CardLists.filter(ai.getOpponents().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Vorinclex, Monstrous Raider")).isEmpty()) {
+        // opponent can always order it so that he gets 0
+        if (amount == 1 && Iterables.any(ai.getOpponents().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Vorinclex, Monstrous Raider"))) {
             return null;
         }
 
