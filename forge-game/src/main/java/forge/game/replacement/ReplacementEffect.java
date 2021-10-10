@@ -145,7 +145,6 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
     }
 
     public boolean requirementsCheck(Game game, Map<String,String> params) {
-
         if (this.isSuppressed()) {
             return false; // Effect removed by effect
         }
