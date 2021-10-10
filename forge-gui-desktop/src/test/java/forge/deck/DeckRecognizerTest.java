@@ -2658,6 +2658,69 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(newTokenKey.limitedType, tokenKey.limitedType);
     }
 
+    @Test void testTokenKeyWithFoiledCard(){
+        DeckRecognizer recognizer = new DeckRecognizer();
+        String cardRequest = "Mountain|M21 (F)";
+        Token cardToken = recognizer.recogniseCardToken(cardRequest, null);
+        assertNotNull(cardToken);
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
+        assertNotNull(cardToken.getCard());
+        assertEquals(cardToken.getCard().getName(), "Mountain");
+        assertEquals(cardToken.getQuantity(), 1);
+        assertEquals(cardToken.getCard().getEdition(), "M21");
+        assertTrue(cardToken.getCard().isFoil());
+
+        // Token Key
+        Token.TokenKey tokenKey = cardToken.getKey();
+        assertNotNull(tokenKey);
+        String expectedKeyCardName = CardDb.CardRequest.compose(cardToken.getCard().getName(),
+                cardToken.getCard().isFoil());
+        assertEquals(tokenKey.cardName, expectedKeyCardName);
+        assertTrue(tokenKey.cardName.endsWith(CardDb.foilSuffix));
+        assertEquals(tokenKey.collectorNumber, cardToken.getCard().getCollectorNumber());
+        assertEquals(tokenKey.setCode, cardToken.getCard().getEdition());
+        assertEquals(tokenKey.tokenType, cardToken.getType());
+        assertNotNull(tokenKey.deckSection);
+        assertEquals(tokenKey.deckSection, cardToken.getTokenSection());
+    }
+
+    @Test void testTokenKeyFoilCardFromString() {
+        DeckRecognizer recognizer = new DeckRecognizer();
+        String cardRequest = "Mountain|M21 (F)";
+        Token cardToken = recognizer.recogniseCardToken(cardRequest, null);
+        assertNotNull(cardToken);
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
+        assertNotNull(cardToken.getCard());
+        assertEquals(cardToken.getCard().getName(), "Mountain");
+        assertEquals(cardToken.getQuantity(), 1);
+        assertEquals(cardToken.getCard().getEdition(), "M21");
+        assertTrue(cardToken.getCard().isFoil());
+
+        // Token Key
+        Token.TokenKey tokenKey = cardToken.getKey();
+        assertNotNull(tokenKey);
+        String expectedKeyCardName = CardDb.CardRequest.compose(cardToken.getCard().getName(),
+                cardToken.getCard().isFoil());
+        assertEquals(tokenKey.cardName, expectedKeyCardName);
+        assertTrue(tokenKey.cardName.endsWith(CardDb.foilSuffix));
+        assertEquals(tokenKey.collectorNumber, cardToken.getCard().getCollectorNumber());
+        assertEquals(tokenKey.setCode, cardToken.getCard().getEdition());
+        assertEquals(tokenKey.tokenType, cardToken.getType());
+        assertNotNull(tokenKey.deckSection);
+        assertEquals(tokenKey.deckSection, cardToken.getTokenSection());
+
+        // Create Token String representation
+        String tokenString = tokenKey.toString();
+        Token.TokenKey newTokenKey = Token.TokenKey.fromString(tokenString);
+        assertNotNull(newTokenKey);
+        assertEquals(newTokenKey.cardName, tokenKey.cardName);
+        assertEquals(newTokenKey.collectorNumber, tokenKey.collectorNumber);
+        assertEquals(newTokenKey.setCode, tokenKey.setCode);
+        assertEquals(newTokenKey.tokenType, tokenKey.tokenType);
+        assertEquals(newTokenKey.deckSection, tokenKey.deckSection);
+        assertEquals(newTokenKey.limitedType, tokenKey.limitedType);
+    }
+
     /*====================================
      * TEST PARSE INPUT
      * ==================================*/

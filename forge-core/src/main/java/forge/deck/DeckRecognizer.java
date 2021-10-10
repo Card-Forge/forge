@@ -290,7 +290,7 @@ public class DeckRecognizer {
                 if (!token.isCardToken())
                     return null;
                 TokenKey key = new TokenKey();
-                key.cardName = token.card.getName();
+                key.cardName = CardDb.CardRequest.compose(token.card.getName(), token.getCard().isFoil());
                 key.setCode = token.card.getEdition();
                 key.collectorNumber = token.card.getCollectorNumber();
                 key.tokenType = token.getType();
