@@ -344,7 +344,7 @@ public class SpecialAiLogic {
                     return false;
                 }
 
-                final boolean sourceCantDie = ComputerUtilCombat.attackerCantBeDestroyedInCombat(ai, source);
+                final boolean sourceCantDie = ComputerUtilCombat.combatantCantBeDestroyed(ai, source);
                 final int minDefT = Aggregates.min(combat.getBlockers(source), CardPredicates.Accessors.fnGetNetToughness);
                 final int DefP = sourceCantDie ? 0 : Aggregates.sum(combat.getBlockers(source), CardPredicates.Accessors.fnGetNetPower);
 

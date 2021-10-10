@@ -143,7 +143,6 @@ public class SacrificeAi extends SpellAbilityAi {
             // (or X for X) trades for special decks
             return humanList.size() >= amount;
         } else if (defined.equals("You")) {
-
             List<Card> computerList = null;
             try {
                 computerList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa);

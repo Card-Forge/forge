@@ -126,8 +126,7 @@ public class PermanentAi extends SpellAbilityAi {
                 sa.setXManaCostPaid(xPay);
             }
         } else if (mana.isZero()) {
-            // if mana is zero, but card mana cost does have X, then something
-            // is wrong
+            // if mana is zero, but card mana cost does have X, then something is wrong
             ManaCost cardCost = card.getManaCost();
             if (cardCost != null && cardCost.countX() > 0) {
                 // AiPlayDecision.CantPlayAi
@@ -266,7 +265,7 @@ public class PermanentAi extends SpellAbilityAi {
                 } else if (param.equals("OnlyFromZone")) {
                     if (!card.getZone().getZoneType().toString().equals(value)) {
                         dontCast = true;
-                        break;  // limit casting to a specific zone only
+                        break; // limit casting to a specific zone only
                     }
                 }
             }

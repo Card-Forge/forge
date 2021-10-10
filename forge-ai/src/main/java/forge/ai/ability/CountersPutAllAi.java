@@ -25,8 +25,7 @@ public class CountersPutAllAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
-        // based on what
-        // the expected targets could be
+        // based on what the expected targets could be
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
         List<Card> hList;

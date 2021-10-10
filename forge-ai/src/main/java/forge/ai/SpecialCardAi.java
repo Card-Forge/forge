@@ -399,7 +399,7 @@ public class SpecialCardAi {
             }
 
             boolean isBlocking = combat.isBlocking(source);
-            boolean cantDie = ComputerUtilCombat.attackerCantBeDestroyedInCombat(ai, source);
+            boolean cantDie = ComputerUtilCombat.combatantCantBeDestroyed(ai, source);
 
             CardCollection opposition = isBlocking ? combat.getAttackersBlockedBy(source) : combat.getBlockers(source);
             int oppP = Aggregates.sum(opposition, CardPredicates.Accessors.fnGetAttack);
@@ -433,7 +433,7 @@ public class SpecialCardAi {
                 if (c.hasKeyword(Keyword.FIRST_STRIKE) || c.hasKeyword(Keyword.DOUBLE_STRIKE)) {
                     oppHasFirstStrike = true;
                 }
-                if (!ComputerUtilCombat.attackerCantBeDestroyedInCombat(c.getController(), c)) {
+                if (!ComputerUtilCombat.combatantCantBeDestroyed(c.getController(), c)) {
                     oppCantDie = false;
                 }
             }
