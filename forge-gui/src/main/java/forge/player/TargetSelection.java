@@ -330,8 +330,7 @@ public class TargetSelection {
             }
             if (madeChoice instanceof StackItemView) {
                 ability.getTargets().add(stackItemViewCache.get(madeChoice).getSpellAbility(true));
-            }
-            else {// 'FINISH TARGETING' chosen
+            } else {// 'FINISH TARGETING' chosen
                 bTargetingDone = true;
             }
         }

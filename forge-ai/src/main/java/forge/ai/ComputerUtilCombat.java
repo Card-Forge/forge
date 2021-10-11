@@ -110,6 +110,8 @@ public class ComputerUtilCombat {
             return false;
         }
 
+        // TODO check if combat phase would be skipped
+
         // TODO replace with Static Ability
         for (final String keyword : attacker.getHiddenExtrinsicKeywords()) {
             if (keyword.startsWith("CARDNAME attacks specific player each combat if able")) {

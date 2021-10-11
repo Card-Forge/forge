@@ -88,6 +88,12 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
                         (!re.hasParam("PreventionEffect") && !re.hasParam("Prevent"))) {
                     continue;
                 }
+                if (!re.zonesCheck(getGame().getZoneOf(ca))) {
+                    continue;
+                }
+                if (!re.requirementsCheck(getGame())) {
+                    continue;
+                }
                 // Immortal Coil prevents the damage but has a similar negative effect
                 if ("Immortal Coil".equals(ca.getName())) {
                     continue;

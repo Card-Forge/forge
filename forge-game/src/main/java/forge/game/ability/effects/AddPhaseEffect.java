@@ -34,8 +34,7 @@ public class AddPhaseEffect extends SpellAbilityEffect {
         PhaseType afterPhase;
         if (sa.hasParam("AfterPhase")) {
             afterPhase = PhaseType.smartValueOf(sa.getParam("AfterPhase"));
-        }
-        else {
+        } else {
             // If "AfterPhase" param is missing it means the added Phase comes afterPhase this Phase
             afterPhase = currentPhase;
         }
