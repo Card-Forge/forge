@@ -104,7 +104,7 @@ public class PoisonAi extends SpellAbilityAi {
             if (!betterTgts.isEmpty()) {
                 tgts = betterTgts;
             } else if (mandatory) {
-                // no better choice but better than hiting himself
+                // no better choice but better than hitting himself
                 sa.getTargets().add(tgts.getFirst());
                 return true;
             }
@@ -121,7 +121,7 @@ public class PoisonAi extends SpellAbilityAi {
                 // need to target something, try to target allies
                 PlayerCollection allies = ai.getAllies().filter(PlayerPredicates.isTargetableBy(sa));
                 if (!allies.isEmpty()) {
-                    // some ally would be uneffected
+                    // some ally would be unaffected
                     PlayerCollection betterAllies = allies.filter(new Predicate<Player>() {
                         @Override
                         public boolean apply(Player input) {

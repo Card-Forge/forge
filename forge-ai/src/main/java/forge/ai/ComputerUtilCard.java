@@ -1488,8 +1488,8 @@ public class ComputerUtilCard {
             if (combat.isAttacking(c) && opp.getLife() > 0) {
                 int dmg = ComputerUtilCombat.damageIfUnblocked(c, opp, combat, true);
                 int pumpedDmg = ComputerUtilCombat.damageIfUnblocked(pumped, opp, pumpedCombat, true);
-                int poisonOrig = opp.canReceiveCounters(CounterEnumType.POISON) ? ComputerUtilCombat.poisonIfUnblocked(c, ai) : 0;
-                int poisonPumped = opp.canReceiveCounters(CounterEnumType.POISON) ? ComputerUtilCombat.poisonIfUnblocked(pumped, ai) : 0;
+                int poisonOrig = ComputerUtilCombat.poisonIfUnblocked(c, ai);
+                int poisonPumped = ComputerUtilCombat.poisonIfUnblocked(pumped, ai);
 
                 // predict Infect
                 if (pumpedDmg == 0 && c.hasKeyword(Keyword.INFECT)) {

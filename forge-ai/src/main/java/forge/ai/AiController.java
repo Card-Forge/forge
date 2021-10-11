@@ -2253,6 +2253,7 @@ public class AiController {
         return true;
     }
 
+    // AI logic for choosing which replacement effect to apply happens here.
     public ReplacementEffect chooseSingleReplacementEffect(List<ReplacementEffect> list) {
         // no need to choose anything
         if (list.size() <= 1) {
@@ -2291,7 +2292,8 @@ public class AiController {
             }
         }
 
-        // AI logic for choosing which replacement effect to apply happens here.
+        // TODO always lower counters with Vorinclex first, might turn it from 1 to 0 as final
+
         return Iterables.getFirst(list, null);
     }
 

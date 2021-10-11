@@ -235,17 +235,25 @@ public class ComputerUtilCombat {
      * @return a int.
      */
     public static int poisonIfUnblocked(final Card attacker, final Player attacked) {
+        if (!attacked.canReceiveCounters(CounterEnumType.POISON)) {
+            return 0;
+        }
         int damage = attacker.getNetCombatDamage();
         int poison = 0;
         damage += predictPowerBonusOfAttacker(attacker, null, null, false);
         if (attacker.hasKeyword(Keyword.INFECT)) {
             int pd = predictDamageTo(attacked, damage, attacker, true);
+            // opponent can always order it so that he gets 0
+            if (pd == 1 && Iterables.any(attacker.getController().getOpponents().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Vorinclex, Monstrous Raider"))) {
+                pd = 0;
+            }
             poison += pd;
             if (attacker.hasKeyword(Keyword.DOUBLE_STRIKE)) {
                 poison += pd;
             }
         }
-        if (attacker.hasKeyword(Keyword.POISONOUS) && (damage > 0)) {
+        if (attacker.hasKeyword(Keyword.POISONOUS) && damage > 0) {
+            // TODO need to check for magnitude 1, each of their triggers could be replaced to 0
             poison += attacker.getKeywordMagnitude(Keyword.POISONOUS);
         }
         return poison;

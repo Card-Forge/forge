@@ -20,15 +20,20 @@ package forge.ai.ability;
 import java.util.List;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 import forge.ai.ComputerUtilCard;
+import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
 import forge.game.keyword.Keyword;
+import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 
 
@@ -40,7 +45,7 @@ import forge.util.Aggregates;
  * @author Forge
  * @version $Id$
  */
-public abstract class CountersAi {
+public abstract class CountersAi extends SpellAbilityAi {
     // An AbilityFactory subclass for Putting or Removing Counters on Cards.
 
     /**
@@ -54,10 +59,17 @@ public abstract class CountersAi {
      *            a {@link java.lang.String} object.
      * @param amount
      *            a int.
+     * @param newParam TODO
      * @return a {@link forge.game.card.Card} object.
      */
-    public static Card chooseCursedTarget(final CardCollectionView list, final String type, final int amount) {
+    public static Card chooseCursedTarget(final CardCollectionView list, final String type, final int amount, final Player ai) {
         Card choice;
+
+        // opponent can always order it so that he gets 0
+        if (amount == 1 && Iterables.any(ai.getOpponents().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Vorinclex, Monstrous Raider"))) {
+            return null;
+        }
+
         if (type.equals("M1M1")) {
             // try to kill the best killable creature, or reduce the best one
             // but try not to target a Undying Creature
@@ -87,6 +99,7 @@ public abstract class CountersAi {
      */
     public static Card chooseBoonTarget(final CardCollectionView list, final String type) {
         Card choice = null;
+
         if (type.equals("P1P1")) {
             choice = ComputerUtilCard.getBestCreatureAI(list);
 
