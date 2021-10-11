@@ -2879,7 +2879,7 @@ public class ComputerUtil {
             // no life gain is not negative
             return false;
         } else if (Iterables.any(list, CardTraitPredicates.hasParam("AiLogic", "LoseLife"))) {
-            // lose life is only negagive is the player can lose life
+            // lose life is only negative is the player can lose life
             return player.canLoseLife();
         } else if (Iterables.any(list, CardTraitPredicates.hasParam("AiLogic", "LichDraw"))) {
             // if it would draw more cards than player has, then its negative

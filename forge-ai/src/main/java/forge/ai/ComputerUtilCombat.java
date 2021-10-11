@@ -2375,7 +2375,6 @@ public class ComputerUtilCombat {
         repParams.put(AbilityKey.DamageSource, attacker);
         repParams.put(AbilityKey.DamageAmount, damage);
         repParams.put(AbilityKey.IsCombat, true);
-        repParams.put(AbilityKey.Prevention, true);
 
         List<ReplacementEffect> list = game.getReplacementHandler().getReplacementList(
                 ReplacementType.DamageDone, repParams, ReplacementLayer.Other);
