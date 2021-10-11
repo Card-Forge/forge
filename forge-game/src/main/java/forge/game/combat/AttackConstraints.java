@@ -143,11 +143,11 @@ public class AttackConstraints {
         for (final Card attacker : myPossibleAttackers) {
             final Set<AttackRestrictionType> types = restrictions.get(attacker).getTypes();
             if (types.contains(AttackRestrictionType.NEED_BLACK_OR_GREEN)) {
-                if (CardLists.filter(myPossibleAttackers, AttackRestrictionType.NEED_BLACK_OR_GREEN.getPredicate(attacker)).isEmpty()) {
+                if (!Iterables.any(myPossibleAttackers, AttackRestrictionType.NEED_BLACK_OR_GREEN.getPredicate(attacker))) {
                     attackersToRemove.add(attacker);
                 }
             } else if (types.contains(AttackRestrictionType.NEED_GREATER_POWER)) {
-                if (CardLists.filter(myPossibleAttackers, AttackRestrictionType.NEED_GREATER_POWER.getPredicate(attacker)).isEmpty()) {
+                if (!Iterables.any(myPossibleAttackers, AttackRestrictionType.NEED_GREATER_POWER.getPredicate(attacker))) {
                     attackersToRemove.add(attacker);
                 }
             }

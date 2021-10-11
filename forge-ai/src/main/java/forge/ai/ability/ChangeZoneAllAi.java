@@ -366,7 +366,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
             // TODO: this is a stub to prevent the AI from crashing the game when, for instance, playing the opponent's
             // Profaner from exile without paying its mana cost. Otherwise the card is marked AI:RemoveDeck:All and
             // there is no specific AI to support playing it in a smarter way. Feel free to expand.
-            return !CardLists.filter(ai.getOpponents().getCardsIn(origin), CardPredicates.Presets.CREATURES).isEmpty();
+            return Iterables.any(ai.getOpponents().getCardsIn(origin), CardPredicates.Presets.CREATURES);
         }
 
         CardCollectionView humanType = CardLists.filterControlledBy(ai.getGame().getCardsIn(origin), ai.getOpponents());

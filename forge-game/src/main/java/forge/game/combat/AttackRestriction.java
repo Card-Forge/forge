@@ -5,9 +5,10 @@ import java.util.EnumSet;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.common.collect.Iterables;
+
 import forge.game.GameEntity;
 import forge.game.card.Card;
-import forge.game.card.CardLists;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 
@@ -54,11 +55,11 @@ public class AttackRestriction {
             violations.add(AttackRestrictionType.ONLY_ALONE);
         }
         if (restrictions.contains(AttackRestrictionType.NEED_GREATER_POWER)
-                && CardLists.filter(attackers.keySet(), AttackRestrictionType.NEED_GREATER_POWER.getPredicate(attacker)).isEmpty()) {
+                && !Iterables.any(attackers.keySet(), AttackRestrictionType.NEED_GREATER_POWER.getPredicate(attacker))) {
             violations.add(AttackRestrictionType.NEED_GREATER_POWER);
         }
         if (restrictions.contains(AttackRestrictionType.NEED_BLACK_OR_GREEN)
-                && CardLists.filter(attackers.keySet(), AttackRestrictionType.NEED_BLACK_OR_GREEN.getPredicate(attacker)).isEmpty()) {
+                && !Iterables.any(attackers.keySet(), AttackRestrictionType.NEED_BLACK_OR_GREEN.getPredicate(attacker))) {
             violations.add(AttackRestrictionType.NEED_BLACK_OR_GREEN);
         }
         if (restrictions.contains(AttackRestrictionType.NOT_ALONE) && nAttackers <= 1) {

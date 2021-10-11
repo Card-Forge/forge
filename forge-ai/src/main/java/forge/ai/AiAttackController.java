@@ -23,6 +23,7 @@ import java.util.List;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.ai.ability.AnimateAi;
@@ -506,7 +507,7 @@ public class AiAttackController {
             CardCollectionView oppBattlefield = c.getController().getCardsIn(ZoneType.Battlefield);
 
             if (c.getName().equals("Heart of Kiran")) {
-                if (!CardLists.filter(oppBattlefield, CardPredicates.Presets.PLANESWALKERS).isEmpty()) {
+                if (Iterables.any(oppBattlefield, CardPredicates.Presets.PLANESWALKERS)) {
                     // can be activated by removing a loyalty counter instead of tapping a creature
                     continue;
                 }
@@ -515,7 +516,7 @@ public class AiAttackController {
                 // TODO: the AI should ideally predict how many times it can activate
                 // for now, unless the opponent is tapped out, break at this point
                 // and do not predict the blocker limit (which is safer)
-                if (!CardLists.filter(oppBattlefield, Predicates.and(CardPredicates.Presets.UNTAPPED, CardPredicates.Presets.LANDS)).isEmpty()) {
+                if (Iterables.any(oppBattlefield, Predicates.and(CardPredicates.Presets.UNTAPPED, CardPredicates.Presets.LANDS))) {
                     maxBlockersAfterCrew = Integer.MAX_VALUE;
                     break;
                 } else {

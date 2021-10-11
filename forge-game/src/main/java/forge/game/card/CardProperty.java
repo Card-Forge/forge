@@ -634,7 +634,7 @@ public class CardProperty {
             } else {
                 final String restriction = property.split("SharesCMCWith ")[1];
                 CardCollection list = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
-                return !CardLists.filter(list, CardPredicates.sharesCMCWith(card)).isEmpty();
+                return Iterables.any(list, CardPredicates.sharesCMCWith(card));
             }
         } else if (property.startsWith("SharesColorWith")) {
             // if card is colorless, it can't share colors
