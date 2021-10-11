@@ -1621,7 +1621,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
             // Does AI need a land?
             CardCollectionView hand = decider.getCardsIn(ZoneType.Hand);
-            if (CardLists.filter(hand, Presets.LANDS).isEmpty() && CardLists.filter(decider.getCardsIn(ZoneType.Battlefield), Presets.LANDS).size() < 4) {
+            if (!Iterables.any(hand, Presets.LANDS) && CardLists.count(decider.getCardsIn(ZoneType.Battlefield), Presets.LANDS) < 4) {
                 boolean canCastSomething = false;
                 for (Card cardInHand : hand) {
                     canCastSomething = canCastSomething || ComputerUtilMana.hasEnoughManaSourcesToCast(cardInHand.getFirstSpellAbility(), decider);
@@ -1855,7 +1855,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
             List<String> toRemove = Lists.newArrayList();
             for (final String name : values.keySet()) {
-                if (CardLists.filter(oppList, CardPredicates.nameEquals(name)).isEmpty()) {
+                if (!Iterables.any(oppList, CardPredicates.nameEquals(name))) {
                     toRemove.add(name);
                 }
             }

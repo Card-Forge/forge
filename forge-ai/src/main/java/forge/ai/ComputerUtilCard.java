@@ -1039,7 +1039,7 @@ public class ComputerUtilCard {
                     String devotionCode = "Count$Devotion." + MagicColor.toLongString(c);
 
                     int devotion = AbilityUtils.calculateAmount(sa.getHostCard(), devotionCode, sa);
-                    if (devotion > curDevotion && !CardLists.filter(hand, CardPredicates.isColor(c)).isEmpty()) {
+                    if (devotion > curDevotion && Iterables.any(hand, CardPredicates.isColor(c))) {
                         curDevotion = devotion;
                         chosenColor = MagicColor.toLongString(c);
                     }
@@ -1361,7 +1361,7 @@ public class ComputerUtilCard {
             //1. become attacker for whatever reason
             if (!doesCreatureAttackAI(ai, c) && doesSpecifiedCreatureAttackAI(ai, pumped)) {
                 float threat = 1.0f * ComputerUtilCombat.damageIfUnblocked(pumped, opp, combat, true) / opp.getLife();
-                if (CardLists.filter(oppCreatures, CardPredicates.possibleBlockers(pumped)).isEmpty()) {
+                if (!Iterables.any(oppCreatures, CardPredicates.possibleBlockers(pumped))) {
                     threat *= 2;
                 }
                 if (c.getNetPower() == 0 && c == sa.getHostCard() && power > 0 ) {
@@ -1413,8 +1413,8 @@ public class ComputerUtilCard {
             }
             
             //3. grant evasive
-            if (!CardLists.filter(oppCreatures, CardPredicates.possibleBlockers(c)).isEmpty()) {
-                if (CardLists.filter(oppCreatures, CardPredicates.possibleBlockers(pumped)).isEmpty() 
+            if (Iterables.any(oppCreatures, CardPredicates.possibleBlockers(c))) {
+                if (!Iterables.any(oppCreatures, CardPredicates.possibleBlockers(pumped))
                         && doesSpecifiedCreatureAttackAI(ai, pumped)) {
                     chance += 0.5f * ComputerUtilCombat.damageIfUnblocked(pumped, opp, combat, true) / opp.getLife();
                 }
@@ -1835,7 +1835,7 @@ public class ComputerUtilCard {
     }
 
     public static boolean isPresentOnBattlefield(final Game game, final String cardName) {
-        return !CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals(cardName)).isEmpty();
+        return Iterables.any(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals(cardName));
     }
 
     public static int getMaxSAEnergyCostOnBattlefield(final Player ai) {

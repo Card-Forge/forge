@@ -9,6 +9,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
@@ -307,7 +308,7 @@ public class DamageDealAi extends DamageAiBase {
 
         if ("DiscardCMCX".equals(sa.getParam("AILogic"))) {
             final int cmc = sa.getXManaCostPaid();
-            return !CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.hasCMC(cmc)).isEmpty();
+            return Iterables.any(ai.getCardsIn(ZoneType.Hand), CardPredicates.hasCMC(cmc));
         }
 
         return true;

@@ -25,6 +25,7 @@ import java.util.Map;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 
 import forge.card.CardStateName;
 import forge.game.GameEntity;
@@ -1296,7 +1297,7 @@ public class AiBlockController {
         boolean creatureParityOrAllowedDiff = aiCreatureCount
                 + (randomTradeIfBehindOnBoard ? maxCreatDiff : 0) >= oppCreatureCount;
         boolean wantToTradeWithCreatInHand = randomTradeIfCreatInHand
-                && !CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.CREATURES).isEmpty()
+                && Iterables.any(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.CREATURES)
                 && aiCreatureCount + maxCreatDiffWithRepl >= oppCreatureCount;
         boolean wantToSavePlaneswalker = MyRandom.percentTrue(chanceToSavePW)
                 && combat.getDefenderByAttacker(attacker) instanceof Card

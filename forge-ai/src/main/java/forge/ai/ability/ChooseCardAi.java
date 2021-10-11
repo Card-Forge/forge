@@ -167,7 +167,7 @@ public class ChooseCardAi extends SpellAbilityAi {
             }
             choice = ComputerUtilCard.getBestAI(ownChoices);
         } else if (logic.equals("BestBlocker")) {
-            if (!CardLists.filter(options, Presets.UNTAPPED).isEmpty()) {
+            if (Iterables.any(options, Presets.UNTAPPED)) {
                 options = CardLists.filter(options, Presets.UNTAPPED);
             }
             choice = ComputerUtilCard.getBestCreatureAI(options);

@@ -423,11 +423,11 @@ public class ComputerUtilCombat {
         CardCollectionView otb = ai.getCardsIn(ZoneType.Battlefield);
         // Special cases:
         // AI can't lose in combat in presence of Worship (with creatures)
-        if (!CardLists.filter(otb, CardPredicates.nameEquals("Worship")).isEmpty() && !ai.getCreaturesInPlay().isEmpty()) {
+        if (Iterables.any(otb, CardPredicates.nameEquals("Worship")) && !ai.getCreaturesInPlay().isEmpty()) {
             return false;
         }
         // AI can't lose in combat in presence of Elderscale Wurm (at 7 life or more)
-        if (!CardLists.filter(otb, CardPredicates.nameEquals("Elderscale Wurm")).isEmpty() && ai.getLife() >= 7) {
+        if (Iterables.any(otb, CardPredicates.nameEquals("Elderscale Wurm")) && ai.getLife() >= 7) {
             return false;
         }
 

@@ -167,7 +167,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
                     }
                 });
                 Card choice;
-                if (!CardLists.filter(list, Presets.CREATURES).isEmpty()) {
+                if (Iterables.any(list, Presets.CREATURES)) {
                     if (sa.hasParam("TargetingPlayer")) {
                         choice = ComputerUtilCard.getWorstCreatureAI(list);
                     } else {

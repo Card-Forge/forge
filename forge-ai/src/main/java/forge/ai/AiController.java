@@ -553,7 +553,7 @@ public class AiController {
             CardCollection oneDrops = CardLists.filter(nonLandsInHand, CardPredicates.hasCMC(1));
             for (int i = 0; i < MagicColor.WUBRG.length; i++) {
                 byte color = MagicColor.WUBRG[i];
-                if (!CardLists.filter(oneDrops, CardPredicates.isColor(color)).isEmpty()) {
+                if (Iterables.any(oneDrops, CardPredicates.isColor(color))) {
                     for (Card land : landList) {
                         if (land.getType().hasSubtype(MagicColor.Constant.BASIC_LANDS.get(i))) {
                             return land;
@@ -1246,7 +1246,7 @@ public class AiController {
             if (validCards.isEmpty()) {
                 continue;
             }
-            final int numLandsInPlay = Iterables.size(Iterables.filter(player.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS));
+            final int numLandsInPlay = CardLists.count(player.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS);
             final CardCollection landsInHand = CardLists.filter(validCards, CardPredicates.Presets.LANDS);
             final int numLandsInHand = landsInHand.size();
     
@@ -1544,7 +1544,7 @@ public class AiController {
         CardCollectionView otb = player.getCardsIn(ZoneType.Battlefield);
 
         if (getBooleanProperty(AiProps.HOLD_LAND_DROP_ONLY_IF_HAVE_OTHER_PERMS)) {
-            if (CardLists.filter(otb, Predicates.not(CardPredicates.Presets.LANDS)).isEmpty()) {
+            if (!Iterables.any(otb, Predicates.not(CardPredicates.Presets.LANDS))) {
                 return false;
             }
         }
