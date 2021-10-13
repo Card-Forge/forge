@@ -4,4 +4,4 @@ Order:101
 Type:Casual
 Subtype:Commander
 Sets:ZNR, KHM, STX, AFR, MID
-Banned:Omnath, Locus of Creation
+Banned:Omnath, Locus of Creation; Pithing Needle
