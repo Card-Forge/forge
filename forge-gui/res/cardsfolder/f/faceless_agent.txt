@@ -1,7 +1,7 @@
 Name:Faceless Agent
 ManaCost:3
 Types:Creature Shapeshifter
-PT:2/1
+PT:2/2
 K:Changeling
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSeek | TriggerDescription$ When CARDNAME enters the battlefield, seek a creature card of the most prevalent creature type in your library.
 SVar:TrigSeek:DB$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Card.Creature+MostProminentCreatureTypeInLibrary | ChangeNum$ 1
