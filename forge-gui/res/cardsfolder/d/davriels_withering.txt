@@ -1,6 +1,6 @@
 Name:Davriel's Withering
 ManaCost:B
 Types:Instant
-A:SP$ Effect | StaticAbilities$ PerpetualDebuff | RememberObjects$ Targeted | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | Name$ Davriel's Withering's Perpetual Effect | Duration$ Permanent | SpellDescription$ Target creature perpetually gets -1/-2.
+A:SP$ Effect | StaticAbilities$ PerpetualDebuff | RememberObjects$ Targeted | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | IsCurse$ True | Name$ Davriel's Withering's Perpetual Effect | Duration$ Permanent | SpellDescription$ Target creature an opponent controls perpetually gets -1/-2.
 SVar:PerpetualDebuff:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ -1 | AddToughness$ -2 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gets -1/-2.
-Oracle:Target creature perpetually gets -1/-2.
+Oracle:Target creature an opponent controls perpetually gets -1/-2.
