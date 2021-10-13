@@ -7,7 +7,7 @@ SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ Dragon
 SVar:DragonReduceCost:Mode$ ReduceCost | ValidCard$ Card.IsRemembered | Type$ Spell | Amount$ 1 | EffectZone$ All | Description$ This spell costs {1} less to cast.
 SVar:DragonAltCost:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$ Alternative Cost:ConvertedManaCost | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ You may pay {X} rather than pay this spell's mana cost, where X is its mana value.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-A:AB$ MakeCard | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | Name$ Shivan Dragon | Zone$ Hand | SpellDescription$ Conjure a Shivan Dragon card into your hand.
+A:AB$ MakeCard | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Name$ Shivan Dragon | Zone$ Hand | SpellDescription$ Conjure a Shivan Dragon card into your hand.
 A:AB$ DealDamage | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target creature.
 DeckHints:Type$Dragon
-Oracle:[+1]: Dragon cards in your hand perpetually gain "This spell costs {1} less to cast," and "You may pay {X} rather than pay this spell's mana cost, where X is its mana value."\n[0]: Conjure a Shivan Dragon card into your hand.\n[−2]: Sarkhan, Wanderer to Shiv deals 3 damage to target creature.
+Oracle:[+1]: Dragon cards in your hand perpetually gain "This spell costs {1} less to cast," and "You may pay {X} rather than pay this spell's mana cost, where X is its mana value."\n[+1]: Conjure a Shivan Dragon card into your hand.\n[−2]: Sarkhan, Wanderer to Shiv deals 3 damage to target creature.
