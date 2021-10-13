@@ -45,7 +45,7 @@ SVar:UpkeepLoseTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ Tr
 SVar:TrigLose:DB$ LoseLife | Defined$ You | LifeAmount$ Z
 SVar:Z:Count$TypeYouCtrl.Creature
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-A:AB$ Effect | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | StaticAbilities$ PerpetualDebuff | RememberObjects$ Targeted | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | Name$ Davriel, Soul Broker's Perpetual -3 Effect | Duration$ Permanent | SpellDescription$ Target creature perpetually gets -3/-3.
+A:AB$ Effect | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | StaticAbilities$ PerpetualDebuff | RememberObjects$ Targeted | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | IsCurse$ True | Name$ Davriel, Soul Broker's Perpetual -3 Effect | Duration$ Permanent | SpellDescription$ Target creature an opponent controls perpetually gets -3/-3.
 SVar:PerpetualDebuff:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ -3 | AddToughness$ -3 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This card perpetually gets -3/-3.
 DeckHas:Ability$LifeGain & Ability$Graveyard & Ability$Sacrifice & Ability$LifeGain
-Oracle:[+1]: Until your next turn, whenever an opponent attacks you and/or planeswalkers you control, they discard a card. If they can't, they sacrifice an attacking creature.\n[−2]: Accept one of Davriel's offers, then accept one of Davriel's conditions.\n[−3]: Target creature perpetually gets -3/-3.
+Oracle:[+1]: Until your next turn, whenever an opponent attacks you and/or planeswalkers you control, they discard a card. If they can't, they sacrifice an attacking creature.\n[−2]: Accept one of Davriel's offers, then accept one of Davriel's conditions.\n[−3]: Target creature an opponent controls perpetually gets -3/-3.
