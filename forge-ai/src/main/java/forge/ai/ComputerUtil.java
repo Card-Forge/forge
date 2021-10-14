@@ -2239,7 +2239,7 @@ public class ComputerUtil {
             if (validString.contains("Creature") && !validString.contains("nonCreature")) {
                 final Card c = ComputerUtilCard.getBestCreatureAI(goodChoices);
                 if (c != null) {
-                    dChoices.add(ComputerUtilCard.getBestCreatureAI(goodChoices));
+                    dChoices.add(c);
                 }
             }
         }
@@ -2764,7 +2764,8 @@ public class ComputerUtil {
                 || (type.is(CounterEnumType.TIME) && (!c.isInPlay() || "Chronozoa".equals(c.getName())))
                 || type.is(CounterEnumType.GOLD) || type.is(CounterEnumType.MUSIC) || type.is(CounterEnumType.PUPA)
                 || type.is(CounterEnumType.PARALYZATION) || type.is(CounterEnumType.SHELL) || type.is(CounterEnumType.SLEEP)
-                || type.is(CounterEnumType.SLUMBER) || type.is(CounterEnumType.SLEIGHT) || type.is(CounterEnumType.WAGE);
+                || type.is(CounterEnumType.SLUMBER) || type.is(CounterEnumType.SLEIGHT) || type.is(CounterEnumType.WAGE)
+                || type.is(CounterEnumType.INCARNATION) || type.is(CounterEnumType.RUST);
     }
 
     // this countertypes has no effect
@@ -2892,6 +2893,8 @@ public class ComputerUtil {
     public static boolean targetPlayableSpellCard(final Player ai, CardCollection options, final SpellAbility sa, final boolean withoutPayingManaCost, boolean mandatory) {
         // determine and target a card with a SA that the AI can afford and will play
         AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
+        sa.resetTargets();
+
         CardCollection targets = new CardCollection();
         for (Card c : options) {
             if (withoutPayingManaCost && c.getManaCost() != null && c.getManaCost().countX() > 0) {
@@ -2917,6 +2920,7 @@ public class ComputerUtil {
                 }
             }
         }
+
         if (targets.isEmpty()) {
             if (mandatory && !options.isEmpty()) {
                 targets = options;
@@ -2924,6 +2928,7 @@ public class ComputerUtil {
                 return false;
             }
         }
+
         sa.getTargets().add(ComputerUtilCard.getBestAI(targets));
         return true;
     }

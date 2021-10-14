@@ -401,8 +401,7 @@ public final class CMatchUI
                     selectedDocBeforeCombat = combatDoc.getParentCell().getSelected();
                     if (selectedDocBeforeCombat != combatDoc) {
                         SDisplayUtil.showTab(combatDoc);
-                    }
-                    else {
+                    } else {
                         selectedDocBeforeCombat = null; //don't need to cache combat doc this way
                     }
                 }
@@ -744,8 +743,6 @@ public final class CMatchUI
         //else if (toFocus == btn1)
         //btn2.setFocusable(false);
 
-
-
         final Runnable focusRoutine = new Runnable() {
             @Override
             public final void run() {
@@ -754,11 +751,11 @@ public final class CMatchUI
                 // and then using the keyboard to try to select it
                 btn1.setEnabled(enable1);
                 btn2.setEnabled(enable2);
-                btn1.setFocusable(enable1 && focus1 );
+                btn1.setFocusable(enable1 && focus1);
                 btn2.setFocusable(enable2 && !focus1);
                 // ensure we don't steal focus from an overlay
                 if (toFocus != null && !FNetOverlay.SINGLETON_INSTANCE.getTxtInput().hasFocus() ) {
-                    toFocus.requestFocus();  // focus here even if another window has focus - shouldn't have to do it this way but some popups grab window focus
+                    toFocus.requestFocus(); // focus here even if another window has focus - shouldn't have to do it this way but some popups grab window focus
                 }
             }
             };
@@ -1364,7 +1361,6 @@ public final class CMatchUI
             }
             // In any case, I have to increase the counter
             nextNotifiableStackIndex++;
-
         } else {
             // Not yet time to show the modal - schedule the method again, and try again later
             Runnable tryAgainThread = new Runnable() {

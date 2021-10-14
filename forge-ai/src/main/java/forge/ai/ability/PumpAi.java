@@ -437,7 +437,7 @@ public class PumpAi extends PumpAiBase {
                 && !(sa.isCurse() && defense < 0)
                 && !containsNonCombatKeyword(keywords)
                 && !"UntilYourNextTurn".equals(sa.getParam("Duration"))
-                && !"Snapcaster".equals(sa.getParam("AILogic"))
+                && !"ReplaySpell".equals(sa.getParam("AILogic"))
                 && !isFight) {
             return false;
         }
@@ -595,8 +595,8 @@ public class PumpAi extends PumpAiBase {
             });
         }
 
-        if ("Snapcaster".equals(sa.getParam("AILogic"))) {
-            if (!ComputerUtil.targetPlayableSpellCard(ai, list, sa, false, false)) {
+        if ("ReplaySpell".equals(sa.getParam("AILogic"))) {
+            if (!ComputerUtil.targetPlayableSpellCard(ai, list, sa, false, mandatory)) {
                 return false;
             }
         }
@@ -662,7 +662,7 @@ public class PumpAi extends PumpAiBase {
             forced = CardLists.filterControlledBy(list, ai.getOpponents());
         }
 
-        while (sa.getTargets().size() < tgt.getMaxTargets(source, sa)) {
+        while (sa.canAddMoreTarget()) {
             if (pref.isEmpty()) {
                 break;
             }

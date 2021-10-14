@@ -34,7 +34,7 @@ public class TwoPilesAi extends SpellAbilityAi {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         if (tgt != null) {
             sa.resetTargets();
-            if (tgt.canTgtPlayer()) {
+            if (sa.canTarget(opp)) {
                 sa.getTargets().add(opp);
             }
         }

@@ -136,7 +136,7 @@ public class DebuffAi extends SpellAbilityAi {
             return mandatory && debuffMandatoryTarget(ai, sa, mandatory);
         }
 
-        while (sa.getTargets().size() < tgt.getMaxTargets(sa.getHostCard(), sa)) {
+        while (sa.canAddMoreTarget()) {
             Card t = null;
 
             if (list.isEmpty()) {
@@ -216,7 +216,7 @@ public class DebuffAi extends SpellAbilityAi {
         final CardCollection forced = CardLists.filterControlledBy(list, ai);
         final Card source = sa.getHostCard();
 
-        while (sa.getTargets().size() < tgt.getMaxTargets(source, sa)) {
+        while (sa.canAddMoreTarget()) {
             if (pref.isEmpty()) {
                 break;
             }
