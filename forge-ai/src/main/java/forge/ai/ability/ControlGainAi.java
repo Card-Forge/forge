@@ -196,7 +196,7 @@ public class ControlGainAi extends SpellAbilityAi {
             }
         }
 
-        while (sa.getTargets().size() < tgt.getMaxTargets(sa.getHostCard(), sa)) {
+        while (sa.canAddMoreTarget()) {
             Card t = null;
 
             if (list.isEmpty()) {

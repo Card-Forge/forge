@@ -2040,7 +2040,7 @@ public class AbilityUtils {
             } else {
                 ce = c;
             }
-            return doXMath(getNumberOfTypes(ce), expr, c, ctb);
+            return doXMath(ce == null ? 0 : getNumberOfTypes(ce), expr, c, ctb);
         }
 
         if (sq[0].contains("CardNumColors")) {

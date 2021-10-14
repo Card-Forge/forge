@@ -239,8 +239,7 @@ public class UntapAi extends SpellAbilityAi {
                 tgt.getValidTgts(), source.getController(), source, sa);
         list = CardLists.getTargetableCards(list, sa);
 
-        // filter by enchantments and planeswalkers, their tapped state doesn't
-        // matter.
+        // filter by enchantments and planeswalkers, their tapped state doesn't matter.
         final String[] tappablePermanents = { "Enchantment", "Planeswalker" };
         CardCollection tapList = CardLists.getValidCards(list, tappablePermanents, source.getController(), source, sa);
 
@@ -271,7 +270,7 @@ public class UntapAi extends SpellAbilityAi {
             return false;
         }
 
-        while (sa.getTargets().size() < tgt.getMaxTargets(source, sa)) {
+        while (sa.canAddMoreTarget()) {
             Card choice = null;
 
             if (tapList.isEmpty()) {
