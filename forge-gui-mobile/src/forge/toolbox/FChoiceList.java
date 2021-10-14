@@ -522,9 +522,8 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
             //should fix NPE ie Thief of Sanity, Gonti... etc
             CardView cv = ((IHasCardView)value).getCardView();
             if (cv != null) {
-                CardView render = cv.isFaceDown() && cv.isInZone(EnumSet.of(ZoneType.Exile)) ? cv.getBackup() : cv;
-                boolean showAlternate = showAlternate(render, value.toString());
-                CardRenderer.drawCardWithOverlays(g, render, x, y, VStack.CARD_WIDTH, VStack.CARD_HEIGHT, CardStackPosition.Top, false, showAlternate, true);
+                boolean showAlternate = showAlternate(cv, value.toString());
+                CardRenderer.drawCardWithOverlays(g, cv, x, y, VStack.CARD_WIDTH, VStack.CARD_HEIGHT, CardStackPosition.Top, false, showAlternate, true);
             }
 
             float dx = VStack.CARD_WIDTH + FList.PADDING;
