@@ -4,7 +4,6 @@ import static forge.card.CardRenderer.MANA_SYMBOL_SIZE;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.EnumSet;
 import java.util.List;
 
 import com.badlogic.gdx.utils.Align;
@@ -25,7 +24,6 @@ import forge.card.mana.ManaCostParser;
 import forge.game.card.CardView;
 import forge.game.card.IHasCardView;
 import forge.game.player.PlayerView;
-import forge.game.zone.ZoneType;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.itemmanager.AdvancedSearch.FilterOperator;
