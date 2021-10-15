@@ -785,7 +785,7 @@ public class DeckRecognizer {
         }
         if (isDeckName(text)) {
             String deckName = deckNameMatch(text);
-            return new Token(TokenType.DECK_NAME, deckName);
+            return new Token(TokenType.DECK_NAME, deckName.trim());
         }
         return null;
     }
@@ -853,11 +853,12 @@ public class DeckRecognizer {
 
     private String getCardCMCMatch(String lineAsIs) {
         String tokenMatch = cardCMCTokenMatch(lineAsIs);
+        tokenMatch = tokenMatch.toUpperCase();
         if (tokenMatch.contains("CC"))
             tokenMatch = tokenMatch.replaceAll("CC", "").trim();
         else
             tokenMatch = tokenMatch.replaceAll("CMC", "").trim();
-        return String.format("CMC: {%s}", tokenMatch);
+        return String.format("CMC: %s", tokenMatch);
     }
 
     private static Pair<String, String> manaTokenMatch(final String lineAsIs){
