@@ -2242,4 +2242,25 @@ public class CardDbTestCase extends ForgeCardMockTestCase {
         assertTrue(islandCard.isFoil());
     }
 
+    @Test void testGetDualAndDoubleCards(){
+        String fireAndIce = "Fire // Ice";
+        PaperCard fireAndIceCard = this.cardDb.getCard(fireAndIce);
+        assertNotNull(fireAndIceCard);
+        assertEquals(fireAndIceCard.getName(), fireAndIce);
+
+        String deserterRansacker = "Afflicted Deserter // Werewolf Ransacker";
+        PaperCard adCard = this.cardDb.getCard(deserterRansacker);
+        assertNull(adCard);
+
+        String deserterSide = "Afflicted Deserter";
+        adCard = this.cardDb.getCard(deserterSide);
+        assertNotNull(adCard);
+        assertEquals(adCard.getName(), deserterSide);
+
+        String werewolfSide = "Werewolf Ransacker";
+        adCard = this.cardDb.getCard(werewolfSide);
+        assertNotNull(adCard);
+        assertEquals(adCard.getName(), deserterSide);
+    }
+
 }
