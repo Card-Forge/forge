@@ -236,7 +236,8 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
         this.currentGameType = currentGameType.name();
         this.controller.setAllowedSections(supportedSections);
 
-        this.cmdAcceptButton = new FButton(IMPORT_CARDS_CMD_LABEL);
+        String cmdBtnLabel = currentDeckIsNotEmpty ? IMPORT_CARDS_CMD_LABEL : CREATE_NEW_DECK_CMD_LABEL;
+        this.cmdAcceptButton = new FButton(cmdBtnLabel);
         this.statsView = new VStatisticsImporter(this.controller.currentGameFormatAllowsCommander());
         this.cStatsView = new CStatisticsImporter(this.statsView);
         initUIComponents(g, currentDeckIsNotEmpty);
