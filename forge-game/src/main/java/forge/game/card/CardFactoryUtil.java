@@ -958,6 +958,7 @@ public class CardFactoryUtil {
             final Trigger conspireTrigger = TriggerHandler.parseTrigger(trigScript, card, intrinsic);
             conspireTrigger.setOverridingAbility(AbilityFactory.getAbility(abString, card));
             conspireTrigger.setSVar("Conspire", "0");
+
             inst.addTrigger(conspireTrigger);
         } else if (keyword.startsWith("Cumulative upkeep")) {
             final String[] k = keyword.split(":");
@@ -995,7 +996,6 @@ public class CardFactoryUtil {
             trigger.setOverridingAbility(AbilityFactory.getAbility(transformEff, card));
 
             inst.addTrigger(trigger);
-
         } else if (keyword.equals("Decayed")) {
             final String attackTrig = "Mode$ Attacks | ValidCard$ Card.Self | Secondary$ True | TriggerDescription$ " +
                     "When a creature with decayed attacks, sacrifice it at end of combat.";
@@ -1542,7 +1542,6 @@ public class CardFactoryUtil {
             trigger.setOverridingAbility(AbilityFactory.getAbility(transformEff, card));
 
             inst.addTrigger(trigger);
-
         } else if (keyword.startsWith("Partner:")) {
             // Partner With
             final String[] k = keyword.split(":");
@@ -1580,6 +1579,7 @@ public class CardFactoryUtil {
 
             final String effect = "DB$ Poison | Defined$ TriggeredTarget | Num$ " + n;
             parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
+
             inst.addTrigger(parsedTrigger);
         } else if (keyword.startsWith("Presence")) {
             final String[] k = keyword.split(":");
@@ -2530,7 +2530,6 @@ public class CardFactoryUtil {
             ReplacementEffect re = ReplacementHandler.parseReplacement(rep, host, intrinsic, card);
             inst.addReplacement(re);
         }
-
         else if (keyword.startsWith("If CARDNAME would be put into a graveyard "
                 + "from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.")) {
 
@@ -2606,7 +2605,6 @@ public class CardFactoryUtil {
                 newSA.setIntrinsic(intrinsic);
 
                 inst.addSpellAbility(newSA);
-
             }
         } else if (keyword.startsWith("Adapt")) {
             final String[] k = keyword.split(":");
@@ -2914,7 +2912,6 @@ public class CardFactoryUtil {
             foretell.getRestrictions().setZone(ZoneType.Hand);
             foretell.setIntrinsic(intrinsic);
             inst.addSpellAbility(foretell);
-
         } else if (keyword.startsWith("Fortify")) {
             String[] k = keyword.split(":");
             // Get cost string
@@ -3091,7 +3088,6 @@ public class CardFactoryUtil {
             sa.setIntrinsic(intrinsic);
             sa.setAlternativeCost(AlternativeCost.Outlast);
             inst.addSpellAbility(sa);
-
         } else if (keyword.startsWith("Prowl")) {
             final String[] k = keyword.split(":");
             final Cost prowlCost = new Cost(k[1], false);
@@ -3148,7 +3144,6 @@ public class CardFactoryUtil {
             sa.setSVar("ScavengeX", "Exiled$CardPower");
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
-
         } else if (keyword.startsWith("Encore")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
@@ -3194,7 +3189,6 @@ public class CardFactoryUtil {
 
             AbilitySub cleanupSA = (AbilitySub) AbilityFactory.getAbility(cleanupStr, card);
             delTrigSA.setSubAbility(cleanupSA);
-
         } else if (keyword.startsWith("Spectacle")) {
             final String[] k = keyword.split(":");
             final Cost cost = new Cost(k[1], false);
@@ -3208,7 +3202,6 @@ public class CardFactoryUtil {
 
             newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
-
         } else if (keyword.startsWith("Surge")) {
             final String[] k = keyword.split(":");
             final Cost surgeCost = new Cost(k[1], false);
@@ -3222,7 +3215,6 @@ public class CardFactoryUtil {
 
             newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
-
         } else if (keyword.startsWith("Suspend") && !keyword.equals("Suspend")) {
             // only add it if suspend has counter and cost
             final String[] k = keyword.split(":");
@@ -3320,7 +3312,6 @@ public class CardFactoryUtil {
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
-
         } else if (keyword.endsWith(" offering")) {
             final String offeringType = keyword.split(" ")[0];
             final SpellAbility sa = card.getFirstSpellAbility();
@@ -3337,7 +3328,6 @@ public class CardFactoryUtil {
             newSA.setDescription(sa.getDescription() + " (" + offeringType + " offering)");
             newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
-
         } else if (keyword.startsWith("Crew")) {
             final String[] k = keyword.split(":");
             final String power = k[1];
@@ -3352,7 +3342,6 @@ public class CardFactoryUtil {
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
-
         } else if (keyword.startsWith("Cycling")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
@@ -3370,7 +3359,6 @@ public class CardFactoryUtil {
             sa.setAlternativeCost(AlternativeCost.Cycling);
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
-
         } else if (keyword.startsWith("TypeCycling")) {
             final String[] k = keyword.split(":");
             final String type = k[1];
@@ -3396,7 +3384,6 @@ public class CardFactoryUtil {
             sa.setAlternativeCost(AlternativeCost.Cycling);
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
-
         }
     }
 
