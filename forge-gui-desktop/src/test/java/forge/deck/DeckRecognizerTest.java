@@ -2236,6 +2236,74 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         assertEquals(acCard.getCollectorNumber(), "51");
     }
 
+    // === Deckstats Commander
+    @Test void testRecognizeCommanderCardInDeckstatsExportFormat(){
+        DeckRecognizer recognizer = new DeckRecognizer();
+
+        String deckstatsCommanderRequest = "1 Sliver Overlord #!Commander";
+        Token deckStatsToken = recognizer.recognizeLine(deckstatsCommanderRequest, null);
+        assertNotNull(deckStatsToken);
+        assertEquals(deckStatsToken.getType(), TokenType.LEGAL_CARD);
+        assertNotNull(deckStatsToken.getTokenSection());
+        assertEquals(deckStatsToken.getTokenSection(), DeckSection.Commander);
+        assertEquals(deckStatsToken.getQuantity(), 1);
+        assertNotNull(deckStatsToken.getCard());
+        PaperCard soCard = deckStatsToken.getCard();
+        assertEquals(soCard.getName(), "Sliver Overlord");
+        assertEquals(soCard.getEdition(), "SLD");
+        assertEquals(soCard.getCollectorNumber(), "10");
+
+        // Check that deck section is made effective even if we're currently in Main
+        deckStatsToken = recognizer.recognizeLine(deckstatsCommanderRequest, DeckSection.Main);
+        assertNotNull(deckStatsToken);
+        assertEquals(deckStatsToken.getType(), TokenType.LEGAL_CARD);
+        assertNotNull(deckStatsToken.getTokenSection());
+        assertEquals(deckStatsToken.getTokenSection(), DeckSection.Commander);
+        assertEquals(deckStatsToken.getQuantity(), 1);
+        assertNotNull(deckStatsToken.getCard());
+        soCard = deckStatsToken.getCard();
+        assertEquals(soCard.getName(), "Sliver Overlord");
+    }
+
+    // === Double-Sided Cards
+    @Test void testRecognizeDoubleSidedCards(){
+        String leftSideRequest = "Afflicted Deserter";
+        String rightSideRequest = "Werewolf Ransacker";
+        String doubleSideRequest = "Afflicted Deserter // Werewolf Ransacker";
+
+        DeckRecognizer recognizer = new DeckRecognizer();
+
+        // Check Left side first
+        Token cardToken = recognizer.recogniseCardToken(leftSideRequest, null);
+        assertNotNull(cardToken);
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
+        assertEquals(cardToken.getTokenSection(), DeckSection.Main);
+        assertNotNull(cardToken.getCard());
+        PaperCard leftSideCard = cardToken.getCard();
+        assertEquals(leftSideCard.getName(), leftSideRequest);
+        assertEquals(cardToken.getQuantity(), 1);
+
+        // Check Right side first
+        cardToken = recognizer.recogniseCardToken(rightSideRequest, null);
+        assertNotNull(cardToken);
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
+        assertEquals(cardToken.getTokenSection(), DeckSection.Main);
+        assertNotNull(cardToken.getCard());
+        PaperCard rightSideCard = cardToken.getCard();
+        assertEquals(rightSideCard.getName(), leftSideRequest);  // NOTE: this is not a blunder! Back side will result in front side name
+        assertEquals(cardToken.getQuantity(), 1);
+
+        // Check double side
+        cardToken = recognizer.recogniseCardToken(doubleSideRequest, null);
+        assertNotNull(cardToken);
+        assertEquals(cardToken.getType(), TokenType.LEGAL_CARD);
+        assertEquals(cardToken.getTokenSection(), DeckSection.Main);
+        assertNotNull(cardToken.getCard());
+        PaperCard doubleSideCard = cardToken.getCard();
+        assertEquals(doubleSideCard.getName(), leftSideRequest);
+        assertEquals(cardToken.getQuantity(), 1);
+    }
+
     /*=================================
      * TEST CARD TOKEN SECTION MATCHING
      * ================================ */

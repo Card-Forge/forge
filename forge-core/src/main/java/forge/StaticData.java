@@ -361,6 +361,8 @@ public class StaticData {
      * @return True if a card with the given input string can be found. False otherwise.
      */
     public boolean isMTGCard(final String cardName){
+        if (cardName == null || cardName.trim().length() == 0)
+            return false;
         CardDb.CardRequest cr = CardDb.CardRequest.fromString(cardName);  // accounts for any foil request ending with +
         return this.commonCards.contains(cr.cardName) ||
                 this.variantCards.contains(cr.cardName) ||

@@ -551,10 +551,17 @@ public class DeckRecognizer {
         if (StringUtils.startsWith(line, ASTERISK))  // markdown lists (tappedout md export)
             line = line.substring(2);
 
+        // FIX Commander in Deckstats export
+        if (line.endsWith("#!Commander")) {
+            line = line.replaceAll("#!Commander", "");
+            line = String.format("CM:%s", line.trim());
+        }
+
         Token result = recogniseCardToken(line, referenceSection);
         if (result == null)
             result = recogniseNonCardToken(line);
-        return result != null ? result : StringUtils.startsWith(refLine, DOUBLE_SLASH) || StringUtils.startsWith(refLine, LINE_COMMENT_DELIMITER_OR_MD_HEADER) ?
+        return result != null ? result : StringUtils.startsWith(refLine, DOUBLE_SLASH) ||
+                StringUtils.startsWith(refLine, LINE_COMMENT_DELIMITER_OR_MD_HEADER) ?
                 new Token(TokenType.COMMENT, 0, refLine) : new Token(TokenType.UNKNOWN_TEXT, 0, refLine);
     }
 
@@ -582,8 +589,13 @@ public class DeckRecognizer {
                 continue;
             cardName = cardName.trim();
             //Avoid hit the DB - check whether cardName is contained in the DB
-            if (!data.isMTGCard(cardName))
-                continue;  // skip to the next matcher!
+            if (!data.isMTGCard(cardName)){
+                // check the case for double-sided cards
+                cardName = checkDoubleSidedCard(cardName);
+                if (cardName == null)
+                    continue;
+            }
+
             String ccount = getRexGroup(matcher, REGRP_CARDNO);
             String setCode = getRexGroup(matcher, REGRP_SET);
             String collNo = getRexGroup(matcher, REGRP_COLLNR);
@@ -637,6 +649,23 @@ public class DeckRecognizer {
             }
         }
         return uknonwnCardToken;  // either null or unknown card
+    }
+
+    private String checkDoubleSidedCard(final String cardName){
+        if (!cardName.contains("//"))
+            return null;
+        String cardRequest = cardName.trim();
+        String[] sides = cardRequest.split("//");
+        if (sides.length != 2)
+            return null;
+        String leftSide = sides[0].trim();
+        String rightSide = sides[1].trim();
+        StaticData data = StaticData.instance();
+        if (data.isMTGCard(leftSide))
+            return leftSide;
+        if (data.isMTGCard(rightSide))
+            return rightSide;
+        return null;
     }
 
     private Token checkAndSetCardToken(PaperCard pc, CardEdition edition, int cardCount,
