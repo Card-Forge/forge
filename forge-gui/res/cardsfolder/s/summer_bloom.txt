@@ -4,7 +4,7 @@ Types:Sorcery
 A:SP$ Effect | Cost$ 1 G | Name$ Bloom Effect | StaticAbilities$ BloomingLand | AILogic$ Always | SpellDescription$ You may play up to three additional lands this turn.
 SVar:BloomingLand:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 3 | EffectZone$ Command | Description$ You may play up to three additional lands this turn.
 SVar:NeedsToPlayVar:LandInHand GE1
-SVar:HandInLand:Count$InYourHand.Land
+SVar:LandInHand:Count$InYourHand.Land
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/summer_bloom.jpg
 Oracle:You may play up to three additional lands this turn.

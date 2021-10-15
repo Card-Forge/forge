@@ -476,7 +476,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
         return getGui().getInteger(localizer.getMessage("lblChooseAnnounceForCard", announceTitle,
                 CardTranslation.getTranslatedName(ability.getHostCard().getName())), min, max, min + 9);
-
     }
 
     @Override

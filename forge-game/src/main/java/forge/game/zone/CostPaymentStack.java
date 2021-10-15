@@ -10,7 +10,7 @@ import forge.game.cost.IndividualCostPaymentInstance;
 /*
  * simple stack wrapper class for tracking cost payments (mainly for triggers to use)
  */
-public class CostPaymentStack implements Iterable<IndividualCostPaymentInstance>{
+public class CostPaymentStack implements Iterable<IndividualCostPaymentInstance> {
 
     private Stack<IndividualCostPaymentInstance> stack;
 
@@ -26,7 +26,7 @@ public class CostPaymentStack implements Iterable<IndividualCostPaymentInstance>
         return stack.push(costPaymentInstance);
     }
 
-    public IndividualCostPaymentInstance pop(){
+    public IndividualCostPaymentInstance pop() {
         return stack.pop();
     }
 

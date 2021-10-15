@@ -118,7 +118,6 @@ public class AttachEffect extends SpellAbilityEffect {
             Map<String, Object> params = Maps.newHashMap();
             params.put("Attachments", attachments);
             attachTo = chooser.getController().chooseSingleEntityForEffect(targets, sa, title, params);
-
         }
 
         String attachToName = null;
