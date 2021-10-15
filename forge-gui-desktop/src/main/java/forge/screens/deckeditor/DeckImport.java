@@ -133,7 +133,7 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
                     String.format("<code>%s</code>", "Forest+"), "<code>(F)</code>"),
             Localizer.getInstance().getMessage("lblGuideTipsPlaceholder",
                     String.format("<span class=\"bullet\">(D) %s</span>", Localizer.getInstance().getMessage("lblGuideTipsTitlePlaceholder")),
-                    "<code>Lands, Creatures, Artifacts</code>", "<code>Common, Uncommon, Rare, Mythic</code>",
+                    "<code>Lands, Creatures, Artifacts</code>", "<code>Common, Uncommon, Rare, Mythic, Special</code>",
                     "<code>CMC0, CC1</code>", "<code>Black, White|Green, Red Blue, Multicolor, Colorless</code>"),
             Localizer.getInstance().getMessage("lblGuideTipsDeckSection",
                     String.format("<span class=\"bullet\">(E) %s</span>", Localizer.getInstance().getMessage("lblGuideTipsTitleDeckSections")),
