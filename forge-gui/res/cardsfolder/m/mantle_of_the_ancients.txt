@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant creature you control
 A:SP$ Attach | Cost$ 3 W W | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select creature you control | AILogic$ Pump
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMove | TriggerDescription$ When CARDNAME enters the battlefield, return any number of target Aura and/or Equipment cards that could be attached to enchanted creature from your graveyard to the battlefield attached to enchanted creature.
-SVar:TrigMove:DB$ ChangeZone | ValidTgts$ Aura.CanEnchantEquippedBy,Equipment.CanEnchantEquippedBy | TargetMin$ 0 | TargetMax$ X | TgtZone$ Graveyard | TargetUnique$ True| TgtPrompt$ Select any number of Aura and/or Equipment cards in your graveyard. | Origin$ Graveyard | Destination$ Battlefield | AttachedTo$ Valid Creature.EnchantedBy
+SVar:TrigMove:DB$ ChangeZone | ValidTgts$ Aura.CanEnchantEquippedBy+YouOwn,Equipment.CanEnchantEquippedBy+YouOwn | TargetMin$ 0 | TargetMax$ X | TgtZone$ Graveyard | TargetUnique$ True| TgtPrompt$ Select any number of Aura and/or Equipment cards in your graveyard. | Origin$ Graveyard | Destination$ Battlefield | AttachedTo$ Valid Creature.EnchantedBy
 SVar:X:Count$ValidGraveyard Aura.CanEnchantEquippedBy,Equipment.CanEnchantEquippedBy
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ Y | AddToughness$ Y | AddSVar$ EnchantMe | Description$ Enchanted creature gets +1/+1 for each Aura and Equipment attached to it.
 SVar:Y:Count$Valid Aura.AttachedTo Creature.EnchantedBy,Equipment.AttachedTo Creature.EnchantedBy
