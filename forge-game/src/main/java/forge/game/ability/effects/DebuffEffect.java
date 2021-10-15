@@ -96,7 +96,7 @@ public class DebuffEffect extends SpellAbilityEffect {
                 for (final String kw : kws) {
                     // Check if some of the Keywords are Protection from <color>
                     if (!ProtectionFromColor && kw.startsWith("Protection from ")) {
-                        for(byte col : MagicColor.WUBRG) {
+                        for (byte col : MagicColor.WUBRG) {
                             final String colString = MagicColor.toLongString(col);
                             if (kw.endsWith(colString.toLowerCase())) {
                                 ProtectionFromColor = true;
@@ -110,7 +110,7 @@ public class DebuffEffect extends SpellAbilityEffect {
                 if (ProtectionFromColor && tgtC.hasKeyword(allColors)) {
                     final List<String> allColorsProtect = Lists.newArrayList();
 
-                    for(byte col : MagicColor.WUBRG) {
+                    for (byte col : MagicColor.WUBRG) {
                         allColorsProtect.add("Protection from " + MagicColor.toLongString(col).toLowerCase());
                     }
                     allColorsProtect.removeAll(kws);
@@ -123,7 +123,7 @@ public class DebuffEffect extends SpellAbilityEffect {
                 if (ProtectionFromColor && tgtC.hasKeyword(allColors)) {
                     final List<String> allColorsProtect = Lists.newArrayList();
 
-                    for(byte col : MagicColor.WUBRG) {
+                    for (byte col : MagicColor.WUBRG) {
                         final String colString = MagicColor.toLongString(col);
                         if (!kws.contains("Protection from " + colString)) {
                             allColorsProtect.add(
@@ -137,7 +137,7 @@ public class DebuffEffect extends SpellAbilityEffect {
                 }
 
                 removedKW.addAll(kws);
-                tgtC.addChangedCardKeywords(addedKW, removedKW, false, false, timestamp, 0);
+                tgtC.addChangedCardKeywords(addedKW, removedKW, false, timestamp, 0);
             }
             if (!"Permanent".equals(sa.getParam("Duration"))) {
                 final GameCommand until = new GameCommand() {
@@ -151,7 +151,6 @@ public class DebuffEffect extends SpellAbilityEffect {
                 addUntilCommand(sa, until);
             }
         }
-
     } // debuffResolve
 
 }

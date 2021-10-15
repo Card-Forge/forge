@@ -330,7 +330,7 @@ public class EffectEffect extends SpellAbilityEffect {
     }
 
     private void noteCounters(Card notee, Card source) {
-        for(Map.Entry<CounterType, Integer> counter : notee.getCounters().entrySet()) {
+        for (Map.Entry<CounterType, Integer> counter : notee.getCounters().entrySet()) {
             StringBuilder sb = new StringBuilder();
             sb.append("NoteCounters").append(counter.getKey().getName());
             source.setSVar(sb.toString(), counter.getValue().toString());

@@ -90,8 +90,8 @@ public class ComputerUtilCard {
      */
     public static void sortByEvaluateCreature(final CardCollection list) {
         Collections.sort(list, ComputerUtilCard.EvaluateCreatureComparator);
-    } // sortByEvaluateCreature()
-    
+    }
+
     // The AI doesn't really pick the best artifact, just the most expensive.
     /**
      * <p>
@@ -375,13 +375,13 @@ public class ComputerUtilCard {
     public static Card getBestAI(final Iterable<Card> list) {
         // Get Best will filter by appropriate getBest list if ALL of the list is of that type
         if (Iterables.all(list, CardPredicates.Presets.CREATURES)) {
-            return ComputerUtilCard.getBestCreatureAI(list);
+            return getBestCreatureAI(list);
         }
         if (Iterables.all(list, CardPredicates.Presets.LANDS)) {
             return getBestLandAI(list);
         }
         // TODO - Once we get an EvaluatePermanent this should call getBestPermanent()
-        return ComputerUtilCard.getMostExpensivePermanentAI(list);
+        return getMostExpensivePermanentAI(list);
     }
 
     /**
@@ -422,7 +422,7 @@ public class ComputerUtilCard {
         int biggestvalue = -1;
 
         for (Card card : CardLists.filter(list, CardPredicates.Presets.CREATURES)) {
-            int newvalue = ComputerUtilCard.evaluateCreature(card);
+            int newvalue = evaluateCreature(card);
             newvalue += card.isToken() ? tokenBonus : 0; // raise the value of tokens
 
             if (biggestvalue < newvalue) {
@@ -436,7 +436,7 @@ public class ComputerUtilCard {
     // For ability of Oracle en-Vec, return the first card that are going to attack next turn
     public static Card getBestCreatureToAttackNextTurnAI(final Player aiPlayer, final Iterable<Card> list) {
         AiController aic = ((PlayerControllerAi)aiPlayer.getController()).getAi();
-        for(final Card card : list) {
+        for (final Card card : list) {
             if (aic.getPredictedCombatNextTurn().isAttacking(card)) {
                 return card;
             }
@@ -453,7 +453,7 @@ public class ComputerUtilCard {
      * @return a {@link forge.game.card.Card} object.
      */
     public static Card getWorstAI(final Iterable<Card> list) {
-        return ComputerUtilCard.getWorstPermanentAI(list, false, false, false, false);
+        return getWorstPermanentAI(list, false, false, false, false);
     }
 
     /**
@@ -583,7 +583,7 @@ public class ComputerUtilCard {
     public static int evaluateCreatureList(final CardCollectionView list) {
         return Aggregates.sum(list, creatureEvaluator);
     }
-    
+
     public static Map<String, Integer> evaluateCreatureListByName(final CardCollectionView list) {
         // Compute value for each possible target
         Map<String, Integer> values = Maps.newHashMap();
@@ -832,7 +832,7 @@ public class ComputerUtilCard {
                 }
             }
             // same for Trigger that does make Tokens
-            for(Trigger t:c.getTriggers()){
+            for (Trigger t :c .getTriggers()) {
                 SpellAbility sa = t.ensureAbility();
                 if (sa != null) {
                     if (sa.getApi() != ApiType.Token || !sa.hasParam("TokenTypes")) {
@@ -851,7 +851,7 @@ public class ComputerUtilCard {
                 }
             }
             // special rule for Fabricate and Servo
-            if(c.hasStartOfKeyword(Keyword.FABRICATE.toString())){
+            if (c.hasStartOfKeyword(Keyword.FABRICATE.toString())) {
                 Integer count = typesInDeck.get("Servo");
                 if (count == null) {
                     count = 0;
@@ -886,8 +886,8 @@ public class ComputerUtilCard {
      */
     public static String getMostProminentColor(final Iterable<Card> list) {
         byte colors = CardFactoryUtil.getMostProminentColors(list);
-        for(byte c : MagicColor.WUBRG) {
-            if ( (colors & c) != 0 )
+        for (byte c : MagicColor.WUBRG) {
+            if ((colors & c) != 0)
                 return MagicColor.toLongString(c);
         }
         return MagicColor.Constant.WHITE; // no difference, there was no prominent color
@@ -906,7 +906,7 @@ public class ComputerUtilCard {
     public static List<String> getColorByProminence(final List<Card> list) {
         int cntColors = MagicColor.WUBRG.length;
         final List<Pair<Byte,Integer>> map = new ArrayList<>();
-        for(int i = 0; i < cntColors; i++) {
+        for (int i = 0; i < cntColors; i++) {
             map.add(MutablePair.of(MagicColor.WUBRG[i], 0));
         }
 
@@ -917,7 +917,7 @@ public class ComputerUtilCard {
             if (color.hasBlack()) map.get(2).setValue(Integer.valueOf(map.get(2).getValue()+1));
             if (color.hasRed()) map.get(3).setValue(Integer.valueOf(map.get(3).getValue()+1));
             if (color.hasGreen()) map.get(4).setValue(Integer.valueOf(map.get(4).getValue()+1));
-        } // for
+        }
 
         Collections.sort(map, new Comparator<Pair<Byte,Integer>>() {
             @Override public int compare(Pair<Byte, Integer> o1, Pair<Byte, Integer> o2) {
@@ -927,7 +927,7 @@ public class ComputerUtilCard {
     
         // will this part be once dropped?
         List<String> result = new ArrayList<>(cntColors);
-        for(Pair<Byte, Integer> idx : map) { // fetch color names in the same order
+        for (Pair<Byte, Integer> idx : map) { // fetch color names in the same order
             result.add(MagicColor.toLongString(idx.getKey()));
         }
         // reverse to get indices for most prominent colors first.
@@ -937,7 +937,7 @@ public class ComputerUtilCard {
     public static final Predicate<Deck> AI_KNOWS_HOW_TO_PLAY_ALL_CARDS = new Predicate<Deck>() {
         @Override
         public boolean apply(Deck d) {
-            for (Entry<DeckSection, CardPool> cp: d) {
+            for (Entry<DeckSection, CardPool> cp : d) {
                 for (Entry<PaperCard, Integer> e : cp.getValue()) {
                     if (e.getKey().getRules().getAiHints().getRemAIDecks())
                         return false;
@@ -956,43 +956,43 @@ public class ComputerUtilCard {
             final String logic = sa.getParam("AILogic");
              
             if (logic.equals("MostProminentInHumanDeck")) {
-                chosen.add(ComputerUtilCard.getMostProminentColor(CardLists.filterControlledBy(game.getCardsInGame(), opp), colorChoices));
+                chosen.add(getMostProminentColor(CardLists.filterControlledBy(game.getCardsInGame(), opp), colorChoices));
             }
             else if (logic.equals("MostProminentInComputerDeck")) {
-                chosen.add(ComputerUtilCard.getMostProminentColor(CardLists.filterControlledBy(game.getCardsInGame(), ai), colorChoices));
+                chosen.add(getMostProminentColor(CardLists.filterControlledBy(game.getCardsInGame(), ai), colorChoices));
             }
             else if (logic.equals("MostProminentDualInComputerDeck")) {
-                List<String> prominence = ComputerUtilCard.getColorByProminence(CardLists.filterControlledBy(game.getCardsInGame(), ai));
+                List<String> prominence = getColorByProminence(CardLists.filterControlledBy(game.getCardsInGame(), ai));
                 chosen.add(prominence.get(0));
                 chosen.add(prominence.get(1));
             }
             else if (logic.equals("MostProminentInGame")) {
-                chosen.add(ComputerUtilCard.getMostProminentColor(game.getCardsInGame(), colorChoices));
+                chosen.add(getMostProminentColor(game.getCardsInGame(), colorChoices));
             }
             else if (logic.equals("MostProminentHumanCreatures")) {
                 CardCollectionView list = opp.getCreaturesInPlay();
                 if (list.isEmpty()) {
                     list = CardLists.filter(CardLists.filterControlledBy(game.getCardsInGame(), opp), CardPredicates.Presets.CREATURES);
                 }
-                chosen.add(ComputerUtilCard.getMostProminentColor(list, colorChoices));
+                chosen.add(getMostProminentColor(list, colorChoices));
             }
             else if (logic.equals("MostProminentComputerControls")) {
-                chosen.add(ComputerUtilCard.getMostProminentColor(ai.getCardsIn(ZoneType.Battlefield), colorChoices));
+                chosen.add(getMostProminentColor(ai.getCardsIn(ZoneType.Battlefield), colorChoices));
             }
             else if (logic.equals("MostProminentHumanControls")) {
-                chosen.add(ComputerUtilCard.getMostProminentColor(opp.getCardsIn(ZoneType.Battlefield), colorChoices));
+                chosen.add(getMostProminentColor(opp.getCardsIn(ZoneType.Battlefield), colorChoices));
             }
             else if (logic.equals("MostProminentPermanent")) {
-                chosen.add(ComputerUtilCard.getMostProminentColor(game.getCardsIn(ZoneType.Battlefield), colorChoices));
+                chosen.add(getMostProminentColor(game.getCardsIn(ZoneType.Battlefield), colorChoices));
             }
             else if (logic.equals("MostProminentAttackers") && game.getPhaseHandler().inCombat()) {
-                chosen.add(ComputerUtilCard.getMostProminentColor(game.getCombat().getAttackers(), colorChoices));
+                chosen.add(getMostProminentColor(game.getCombat().getAttackers(), colorChoices));
             }
             else if (logic.equals("MostProminentInActivePlayerHand")) {
-                chosen.add(ComputerUtilCard.getMostProminentColor(game.getPhaseHandler().getPlayerTurn().getCardsIn(ZoneType.Hand), colorChoices));
+                chosen.add(getMostProminentColor(game.getPhaseHandler().getPlayerTurn().getCardsIn(ZoneType.Hand), colorChoices));
             }
             else if (logic.equals("MostProminentInComputerDeckButGreen")) {
-            	List<String> prominence = ComputerUtilCard.getColorByProminence(CardLists.filterControlledBy(game.getCardsInGame(), ai));
+            	List<String> prominence = getColorByProminence(CardLists.filterControlledBy(game.getCardsInGame(), ai));
             	if (prominence.get(0).equals(MagicColor.Constant.GREEN)) {
                     chosen.add(prominence.get(1));
             	} else {
@@ -1035,11 +1035,11 @@ public class ComputerUtilCard {
                 int curDevotion = 0;
                 String chosenColor = MagicColor.Constant.WHITE;
                 CardCollectionView hand = ai.getCardsIn(ZoneType.Hand);
-                for(byte c : MagicColor.WUBRG) {
+                for (byte c : MagicColor.WUBRG) {
                     String devotionCode = "Count$Devotion." + MagicColor.toLongString(c);
 
                     int devotion = AbilityUtils.calculateAmount(sa.getHostCard(), devotionCode, sa);
-                    if (devotion > curDevotion && !CardLists.filter(hand, CardPredicates.isColor(c)).isEmpty()) {
+                    if (devotion > curDevotion && Iterables.any(hand, CardPredicates.isColor(c))) {
                         curDevotion = devotion;
                         chosenColor = MagicColor.toLongString(c);
                     }
@@ -1097,7 +1097,7 @@ public class ComputerUtilCard {
                 for (Card attacker : currCombat.getAttackersBlockedBy(c)) {
                     if (attacker.getShieldCount() == 0 && ComputerUtilCombat.attackerWouldBeDestroyed(ai, attacker, currCombat)) {
                         CardCollection blockers = currCombat.getBlockers(attacker);
-                        ComputerUtilCard.sortByEvaluateCreature(blockers);
+                        sortByEvaluateCreature(blockers);
                         Combat combat = new Combat(ai);
                         combat.addAttacker(attacker, opp);
                         for (Card blocker : blockers) {
@@ -1188,7 +1188,7 @@ public class ComputerUtilCard {
         float threat = 0;
         if (c.isCreature()) {
         	// the base value for evaluate creature is 100
-        	threat += (-1 + 1.0f * ComputerUtilCard.evaluateCreature(c) / 100) / costRemoval;
+        	threat += (-1 + 1.0f * evaluateCreature(c) / 100) / costRemoval;
         	if (ai.getLife() > 0 && ComputerUtilCombat.canAttackNextTurn(c)) {
         		Combat combat = game.getCombat();
         		threat += 1.0f * ComputerUtilCombat.damageIfUnblocked(c, opp, combat, true) / ai.getLife();
@@ -1289,7 +1289,6 @@ public class ComputerUtilCard {
                                          final int power, final List<String> keywords) {
         return shouldPumpCard(ai, sa, c, toughness, power, keywords, false);
     }
-
     public static boolean shouldPumpCard(final Player ai, final SpellAbility sa, final Card c, final int toughness,
             final int power, final List<String> keywords, boolean immediately) {
         final Game game = ai.getGame();
@@ -1335,7 +1334,7 @@ public class ComputerUtilCard {
                 && phase.isPlayerTurn(ai)
                 && SpellAbilityAi.isSorcerySpeed(sa) || main1Preferred
                 && power > 0
-                && ComputerUtilCard.doesCreatureAttackAI(ai, c)) {
+                && doesCreatureAttackAI(ai, c)) {
             return true;
         }
 
@@ -1360,9 +1359,9 @@ public class ComputerUtilCard {
         //create and buff attackers
         if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && phase.isPlayerTurn(ai) && opp.getLife() > 0) {
             //1. become attacker for whatever reason
-            if (!ComputerUtilCard.doesCreatureAttackAI(ai, c) && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, pumped)) {
+            if (!doesCreatureAttackAI(ai, c) && doesSpecifiedCreatureAttackAI(ai, pumped)) {
                 float threat = 1.0f * ComputerUtilCombat.damageIfUnblocked(pumped, opp, combat, true) / opp.getLife();
-                if (CardLists.filter(oppCreatures, CardPredicates.possibleBlockers(pumped)).isEmpty()) {
+                if (!Iterables.any(oppCreatures, CardPredicates.possibleBlockers(pumped))) {
                     threat *= 2;
                 }
                 if (c.getNetPower() == 0 && c == sa.getHostCard() && power > 0 ) {
@@ -1407,16 +1406,16 @@ public class ComputerUtilCard {
                     }
                 }
                 // combat Haste: only grant it if the creature will attack
-                if (ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, pumped)) {
+                if (doesSpecifiedCreatureAttackAI(ai, pumped)) {
                     combatChance += 0.5f + (0.5f * ComputerUtilCombat.damageIfUnblocked(pumped, opp, combat, true) / opp.getLife());
                 }
                 chance += nonCombatChance + combatChance;
             }
             
             //3. grant evasive
-            if (!CardLists.filter(oppCreatures, CardPredicates.possibleBlockers(c)).isEmpty()) {
-                if (CardLists.filter(oppCreatures, CardPredicates.possibleBlockers(pumped)).isEmpty() 
-                        && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, pumped)) {
+            if (Iterables.any(oppCreatures, CardPredicates.possibleBlockers(c))) {
+                if (!Iterables.any(oppCreatures, CardPredicates.possibleBlockers(pumped))
+                        && doesSpecifiedCreatureAttackAI(ai, pumped)) {
                     chance += 0.5f * ComputerUtilCombat.damageIfUnblocked(pumped, opp, combat, true) / opp.getLife();
                 }
             }
@@ -1489,8 +1488,8 @@ public class ComputerUtilCard {
             if (combat.isAttacking(c) && opp.getLife() > 0) {
                 int dmg = ComputerUtilCombat.damageIfUnblocked(c, opp, combat, true);
                 int pumpedDmg = ComputerUtilCombat.damageIfUnblocked(pumped, opp, pumpedCombat, true);
-                int poisonOrig = opp.canReceiveCounters(CounterEnumType.POISON) ? ComputerUtilCombat.poisonIfUnblocked(c, ai) : 0;
-                int poisonPumped = opp.canReceiveCounters(CounterEnumType.POISON) ? ComputerUtilCombat.poisonIfUnblocked(pumped, ai) : 0;
+                int poisonOrig = ComputerUtilCombat.poisonIfUnblocked(c, ai);
+                int poisonPumped = ComputerUtilCombat.poisonIfUnblocked(pumped, ai);
 
                 // predict Infect
                 if (pumpedDmg == 0 && c.hasKeyword(Keyword.INFECT)) {
@@ -1689,13 +1688,13 @@ public class ComputerUtilCard {
         pumped.addPTBoost(power + berserkPower, toughness, timestamp, 0);
 
         if (!kws.isEmpty()) {
-            pumped.addChangedCardKeywords(kws, null, false, false, timestamp, 0);
+            pumped.addChangedCardKeywords(kws, null, false, timestamp, 0);
         }
         if (!hiddenKws.isEmpty()) {
             pumped.addHiddenExtrinsicKeywords(timestamp, 0, hiddenKws);
         }
         Set<CounterType> types = c.getCounters().keySet();
-        for(CounterType ct : types) {
+        for (CounterType ct : types) {
             pumped.addCounterFireNoEvents(ct, c.getCounters(ct), ai, sa, true, null);
         }
         //Copies tap-state and extra keywords (auras, equipment, etc.) 
@@ -1713,8 +1712,8 @@ public class ComputerUtilCard {
             }
         }
         final long timestamp2 = c.getGame().getNextTimestamp(); //is this necessary or can the timestamp be re-used?
-        pumped.addChangedCardKeywordsInternal(toCopy, null, false, false, timestamp2, 0, true);
-        ComputerUtilCard.applyStaticContPT(ai.getGame(), pumped, new CardCollection(c));
+        pumped.addChangedCardKeywordsInternal(toCopy, null, false, timestamp2, 0, true);
+        applyStaticContPT(ai.getGame(), pumped, new CardCollection(c));
         return pumped;
     }
     
@@ -1794,7 +1793,7 @@ public class ComputerUtilCard {
             }
         }
         if (!threatenedTargets.isEmpty()) {
-            ComputerUtilCard.sortByEvaluateCreature(threatenedTargets);
+            sortByEvaluateCreature(threatenedTargets);
             for (Card c : threatenedTargets) {
                 if (sa.canAddMoreTarget()) {
                     sa.getTargets().add(c);
@@ -1836,7 +1835,7 @@ public class ComputerUtilCard {
     }
 
     public static boolean isPresentOnBattlefield(final Game game, final String cardName) {
-        return !CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals(cardName)).isEmpty();
+        return Iterables.any(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals(cardName));
     }
 
     public static int getMaxSAEnergyCostOnBattlefield(final Player ai) {
@@ -1953,7 +1952,7 @@ public class ComputerUtilCard {
             // A special case which checks that this creature will attack if it's the AI's turn
             if (needsToPlay.equalsIgnoreCase("WillAttack")) {
                 if (sa != null && game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) {
-                    return ComputerUtilCard.doesSpecifiedCreatureAttackAI(sa.getActivatingPlayer(), card) ?
+                    return doesSpecifiedCreatureAttackAI(sa.getActivatingPlayer(), card) ?
                         AiPlayDecision.WillPlay : AiPlayDecision.BadEtbEffects;
                 } else {
                     return AiPlayDecision.WillPlay; // not our turn, skip this check for the possible Flash use etc.

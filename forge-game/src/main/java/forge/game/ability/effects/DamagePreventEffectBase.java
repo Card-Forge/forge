@@ -63,10 +63,10 @@ public abstract class DamagePreventEffectBase extends SpellAbilityEffect {
         if (o instanceof Card) {
             addForgetOnMovedTrigger(eff, "Battlefield");
         }
-        eff.updateStateForView();
 
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         game.getAction().moveTo(ZoneType.Command, eff, sa);
+        eff.updateStateForView();
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
 
         game.getEndOfTurn().addUntil(new GameCommand() {

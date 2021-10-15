@@ -285,11 +285,11 @@ public class GameCopier {
             newCard.setPTBoost(c.getPTBoostTable());
             newCard.setDamage(c.getDamage());
 
-            newCard.setChangedCardColors(c.getChangedCardColorsMap());
-            newCard.setChangedCardColorsCharacterDefining(c.getChangedCardColorsCharacterDefiningMap());
+            newCard.setChangedCardColors(c.getChangedCardColorsTable());
+            newCard.setChangedCardColorsCharacterDefining(c.getChangedCardColorsCharacterDefiningTable());
 
-            newCard.setChangedCardTypes(c.getChangedCardTypesMap());
-            newCard.setChangedCardTypesCharacterDefining(c.getChangedCardTypesCharacterDefiningMap());
+            newCard.setChangedCardTypes(c.getChangedCardTypesTable());
+            newCard.setChangedCardTypesCharacterDefining(c.getChangedCardTypesCharacterDefiningTable());
             newCard.setChangedCardKeywords(c.getChangedCardKeywords());
             newCard.setChangedCardNames(c.getChangedCardNames());
 

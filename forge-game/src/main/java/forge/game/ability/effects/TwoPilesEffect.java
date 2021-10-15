@@ -87,7 +87,7 @@ public class TwoPilesEffect extends SpellAbilityEffect {
                 }
 
                 String title;
-                if("One".equals(sa.getParamOrDefault("FaceDown", "False"))) {
+                if ("One".equals(sa.getParamOrDefault("FaceDown", "False"))) {
                     title = Localizer.getInstance().getMessage("lblSelectCardForFaceDownPile");
                 } else if (isLeftRightPile) {
                     title = Localizer.getInstance().getMessage("lblSelectCardForLeftPile");

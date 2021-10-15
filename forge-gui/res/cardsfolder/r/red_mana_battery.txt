@@ -2,8 +2,8 @@ Name:Red Mana Battery
 ManaCost:4
 Types:Artifact
 A:AB$ PutCounter | Cost$ 2 T | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on CARDNAME.
-A:AB$ Mana | Cost$ T SubCounter<X/CHARGE> | Produced$ R | Amount$ Y | CostDesc$ {T}, Remove any number of charge counters from CARDNAME: | AILogic$ ManaRitualBattery.1 | AINoRecursiveCheck$ True | SpellDescription$ Add {R}, then add an additional {R} for each charge counter removed this way.
-SVar:Y:SVar$X/Plus.1
+A:AB$ Mana | Cost$ T SubCounter<X/CHARGE> | Produced$ R | CostDesc$ {T}, Remove any number of charge counters from CARDNAME: | AILogic$ ManaRitualBattery.1 | AINoRecursiveCheck$ True | SubAbility$ DBMana | SpellDescription$ Add {R}, then add an additional {R} for each charge counter removed this way.
+SVar:DBMana: DB$ Mana | Produced$ R | Amount$ X
 SVar:X:Count$xPaid
 AI:RemoveDeck:Random
 Oracle:{2}, {T}: Put a charge counter on Red Mana Battery.\n{T}, Remove any number of charge counters from Red Mana Battery: Add {R}, then add an additional {R} for each charge counter removed this way.

@@ -13,7 +13,6 @@ import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.MagicStack;
 import forge.util.MyRandom;
 
@@ -134,7 +133,6 @@ public class LifeExchangeVariantAi extends SpellAbilityAi {
 
         }
         return false;
-
     }
 
     /**
@@ -153,10 +151,8 @@ public class LifeExchangeVariantAi extends SpellAbilityAi {
     @Override
     protected boolean doTriggerAINoCost(final Player ai, final SpellAbility sa,
     final boolean mandatory) {
-
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
-        if (tgt != null) {
+        if (sa.usesTargeting()) {
             sa.resetTargets();
             if (sa.canTarget(opp) && (mandatory || ai.getLife() < opp.getLife())) {
                 sa.getTargets().add(opp);

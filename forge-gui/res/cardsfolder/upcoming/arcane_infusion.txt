@@ -1,0 +1,8 @@
+Name:Arcane Infusion
+ManaCost:U R
+Types:Instant
+A:SP$ Dig | DigNum$ 4 | ChangeNum$ 1 | Optional$ True | ForceRevealToController$ True | ChangeValid$ Card.Instant,Card.Sorcery | RestRandomOrder$ True | StackDescription$ SpellDescription | SpellDescription$ Look at the top four cards of your library. You may reveal an instant or sorcery card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+K:Flashback:3 U R
+DeckNeeds:Type$Instant|Sorcery
+DeckHas:Ability$Graveyard
+Oracle:Look at the top four cards of your library. You may reveal an instant or sorcery card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.\nFlashback {3}{U}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

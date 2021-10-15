@@ -33,7 +33,7 @@ public class ManaEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card card = sa.getHostCard();
         AbilityManaPart abMana = sa.getManaPart();
-        final List<Player> tgtPlayers = getTargetPlayers(sa);
+        final List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
 
         // Spells are not undoable
         sa.setUndoable(sa.isAbility() && sa.isUndoable() && tgtPlayers.size() < 2);

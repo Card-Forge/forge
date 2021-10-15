@@ -281,11 +281,11 @@ public final class CardUtil {
 
         newCopy.setUnearthed(in.isUnearthed());
 
-        newCopy.setChangedCardColors(in.getChangedCardColorsMap());
-        newCopy.setChangedCardColorsCharacterDefining(in.getChangedCardColorsCharacterDefiningMap());
+        newCopy.setChangedCardColors(in.getChangedCardColorsTable());
+        newCopy.setChangedCardColorsCharacterDefining(in.getChangedCardColorsCharacterDefiningTable());
         newCopy.setChangedCardKeywords(in.getChangedCardKeywords());
-        newCopy.setChangedCardTypes(in.getChangedCardTypesMap());
-        newCopy.setChangedCardTypesCharacterDefining(in.getChangedCardTypesCharacterDefiningMap());
+        newCopy.setChangedCardTypes(in.getChangedCardTypesTable());
+        newCopy.setChangedCardTypesCharacterDefining(in.getChangedCardTypesCharacterDefiningTable());
         newCopy.setChangedCardNames(in.getChangedCardNames());
         newCopy.setChangedCardTraits(in.getChangedCardTraits());
 
@@ -354,7 +354,7 @@ public final class CardUtil {
             if ((combinedColor & color) == 0) {
                 continue;
             }
-            for(final Card c : game.getColoredCardsInPlay(MagicColor.toLongString(color))) {
+            for (final Card c : game.getColoredCardsInPlay(MagicColor.toLongString(color))) {
                 if (!res.contains(c) && !tgts.contains(c) && c.isValid(valid, source.getController(), source, targetSA)) {
                     res.add(c);
                 }

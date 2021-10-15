@@ -76,8 +76,7 @@ public class DigMultipleEffect extends SpellAbilityEffect {
 
             if (validMap.isEmpty()) {
                 chooser.getController().notifyOfValue(sa, null, Localizer.getInstance().getMessage("lblNoValidCards"));
-            }
-            else {
+            } else {
                 CardCollection chosen = chooser.getController().chooseCardsForEffectMultiple(validMap, sa, Localizer.getInstance().getMessage("lblChooseCards"), chooseOptional);
 
                 if (!chosen.isEmpty()) {
@@ -114,8 +113,7 @@ public class DigMultipleEffect extends SpellAbilityEffect {
                             libraryPosition = zone.size();
                         }
                         c = game.getAction().moveTo(zone, c, libraryPosition, sa);
-                    }
-                    else {
+                    } else {
                         c = game.getAction().moveTo(zone, c, sa);
                         if (destZone1.equals(ZoneType.Battlefield)) {
                             if (sa.hasParam("Tapped")) {
@@ -159,16 +157,14 @@ public class DigMultipleEffect extends SpellAbilityEffect {
                     Card m;
                     if (destZone2 == ZoneType.Library) {
                         m = game.getAction().moveToLibrary(c, libraryPosition2, sa);
-                    }
-                    else {
+                    } else {
                         m = game.getAction().moveToVariantDeck(c, destZone2, libraryPosition2, sa);
                     }
                     if (m != null && !origin.equals(m.getZone().getZoneType())) {
                         table.put(origin, m.getZone().getZoneType(), m);
                     }
                 }
-            }
-            else {
+            } else {
                 // just move them randomly
                 for (int i = 0; i < rest.size(); i++) {
                     Card c = rest.get(i);

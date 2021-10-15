@@ -1,0 +1,24 @@
+Name:Vengeful Strangler
+ManaCost:1 B
+Types:Creature Human Rogue
+PT:2/1
+K:CARDNAME can't block.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME dies, return it to the battlefield transformed under your control attached to target creature or planeswalker an opponent controls.
+SVar:TrigChoose:DB$ Pump | ValidTgts$ Creature.OppCtrl,Planeswalker.OppCtrl | TgtPrompt$ Select target creature or planeswalker an opponent controls | IsCurse$ True | SubAbility$ DBChange
+SVar:DBChange:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Battlefield | AttachedTo$ ParentTarget | Transformed$ True | GainControl$ True
+SVar:SacMe:1
+AlternateMode:DoubleFaced
+Oracle:Vengeful Strangler can't block.\nWhen Vengeful Strangler dies, return it to the battlefield transformed under your control attached to target creature or planeswalker an opponent controls.
+
+ALTERNATE
+
+Name:Strangling Grasp
+ManaCost:no cost
+Colors:black
+Types:Enchantment Aura
+K:Enchant creature or planeswalker an opponent controls
+A:SP$ Attach | Cost$ 0 | ValidTgts$ Creature.OppCtrl,Planeswalker.OppCtrl | TgtPrompt$ Select target creature or planeswalker an opponent controls | AILogic$ Curse
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, enchanted permanent's controller sacrifices a nonland permanent and loses 1 life.
+SVar:TrigSac:DB$ Sacrifice | Defined$ Player.controlsPermanent.EnchantedBy | SacValid$ Permanent.nonLand | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1 | Defined$ Player.controlsPermanent.EnchantedBy
+Oracle:Enchant creature or planeswalker an opponent controls\nAt the beginning of your upkeep, enchanted permanent's controller sacrifices a nonland permanent and loses 1 life.

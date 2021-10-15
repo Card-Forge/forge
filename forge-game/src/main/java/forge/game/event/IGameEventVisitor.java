@@ -53,6 +53,7 @@ public interface IGameEventVisitor<T> {
     T visit(GameEventTurnEnded event);
     T visit(GameEventTurnPhase event);
     T visit(GameEventZone event);
+    T visit(GameEventCardForetold gameEventCardForetold);
 
 
     // This is base class for all visitors.
@@ -105,5 +106,8 @@ public interface IGameEventVisitor<T> {
         public T visit(GameEventTurnPhase event) { return null; }
         public T visit(GameEventPlayerDamaged event) { return null; }
         public T visit(GameEventZone event) { return null; }
+        public T visit(GameEventCardForetold gameEventCardForetold) {
+            return null;
+        }
     }
 }

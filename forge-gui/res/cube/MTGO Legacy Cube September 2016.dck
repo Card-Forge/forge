@@ -21,7 +21,7 @@ Name=MTGO Legacy Cube September 2016
 1 Arbor Elf|A25
 1 Arc Trail|SOM
 1 Archangel Avacyn|SOI
-1 Arid Mesa|MM3
+1 Arid Mesa|MH2
 1 Armageddon|A25
 1 Ashenmoor Gouger|MM2
 1 Ashiok, Nightmare Weaver|THS
@@ -54,12 +54,12 @@ Name=MTGO Legacy Cube September 2016
 1 Bloodstained Mire|EXP
 1 Bloom Tender|EVE
 1 Bogardan Hellkite|IMA
-1 Bone Shredder|ULG
+1 Bone Shredder|MH2
 1 Bonesplitter|MMA
 1 Bonfire of the Damned|MM3
 1 Boros Charm|A25
 1 Boros Reckoner|MM3
-1 Brainstorm|2XM
+1 Brainstorm|STX
 1 Breeding Pool|RNA
 1 Brimaz, King of Oreskos|BNG
 1 Brimstone Volley|2XM
@@ -78,7 +78,7 @@ Name=MTGO Legacy Cube September 2016
 1 Chandra, Flamecaller|OGW
 1 Chandra, Pyromaster|M15
 1 Chandra's Phoenix|M14
-1 Chaos Warp|VMA
+1 Chaos Warp|STX
 1 Char|RAV
 1 Chord of Calling|2XM
 1 Chromatic Lantern|GRN
@@ -88,28 +88,28 @@ Name=MTGO Legacy Cube September 2016
 1 Collective Brutality|EMN
 1 Collective Defiance|EMN
 1 Collective Effort|EMN
-1 Compulsive Research|MM3
+1 Compulsive Research|STX
 1 Condemn|M11
 1 Consecrated Sphinx|IMA
 1 Control Magic|EMA
 1 Coralhelm Commander|ROE
 1 Council's Judgment|2XM
-1 Counterspell|A25
+1 Counterspell|MH2
 1 Courser of Kruphix|A25
 1 Crater's Claws|KTK
 1 Craterhoof Behemoth|MM3
 1 Creeping Tar Pit|UMA
-1 Crux of Fate|FRF
+1 Crux of Fate|STX
 1 Cryptic Command|IMA
-1 Cultivate|M21
+1 Cultivate|STX
 1 Cunning Sparkmage|WWK
 1 Cursed Scroll|TPR
 1 Cyclonic Rift|2XM
 1 Damnation|MPS_AKH
 1 Dark Confidant|2XM
 1 Dark Petition|ORI
-1 Dark Ritual|A25
-1 Day of Judgment|M12
+1 Dark Ritual|STX
+1 Day of Judgment|STX
 1 Daze|MPS_AKH
 1 Deathrite Shaman|EMA
 1 Deceiver Exarch|CN2
@@ -130,7 +130,7 @@ Name=MTGO Legacy Cube September 2016
 1 Dissolve|IMA
 1 Distended Mindbender|EMN
 1 Domri Rade|MM3
-1 Doom Blade|IMA
+1 Doom Blade|STX
 1 Dragon Fodder|MM3
 1 Dragonlord Atarka|DTK
 1 Dragonlord Dromoka|DTK
@@ -145,13 +145,13 @@ Name=MTGO Legacy Cube September 2016
 1 Dualcaster Mage|2XM
 1 Dungeon Geists|M20
 1 Duplicant|2XM
-1 Duress|M21
+1 Duress|STX
 1 Duskwatch Recruiter|SOI
 1 Edric, Spymaster of Trest|VMA
 1 Elder Deep-Fiend|EMN
 1 Eldrazi Monument|ZEN
 1 Eldritch Evolution|EMN
-1 Electrolyze|IMA
+1 Electrolyze|STX
 1 Elesh Norn, Grand Cenobite|IMA
 1 Elixir of Immortality|M14
 1 Elspeth Tirel|SOM
@@ -181,7 +181,7 @@ Name=MTGO Legacy Cube September 2016
 1 Fertile Ground|LRW
 1 Fiend Hunter|UMA
 1 Fiery Confluence|C15
-1 Fire // Ice|UMA
+1 Fire // Ice|MH2
 1 Firebolt|MH1
 1 Firefist Striker|GTC
 1 Flame Slash|CN2
@@ -219,7 +219,7 @@ Name=MTGO Legacy Cube September 2016
 1 Glen Elendra Archmage|UMA
 1 Glorious Anthem|M21
 1 Go for the Throat|MBS
-1 Goblin Bombardment|TPR
+1 Goblin Bombardment|MH2
 1 Goblin Bushwhacker|ZEN
 1 Goblin Dark-Dwellers|OGW
 1 Goblin Guide|2XM
@@ -241,7 +241,7 @@ Name=MTGO Legacy Cube September 2016
 1 Hanweir Battlements|EMN
 1 Hanweir Garrison|EMN
 1 Harbinger of the Tides|ORI
-1 Harmonize|MM3
+1 Harmonize|STX
 1 Hellrider|MM3
 1 Hero of Bladehold|MBS
 1 Hero's Downfall|THS
@@ -255,13 +255,13 @@ Name=MTGO Legacy Cube September 2016
 1 Hymn to Tourach|EMA
 1 Hypnotic Specter|M10
 1 Icefall Regent|DTK
-1 Imperial Recruiter|2XM
+1 Imperial Recruiter|MH2
 1 Impulse|VIS
 1 Incendiary Flow|EMN
 1 Incinerate|M12
 1 Indrik Stomphowler|DIS
 1 Inferno Titan|M12
-1 Inquisition of Kozilek|MM3
+1 Inquisition of Kozilek|STX
 1 Into the Roil|ZNR
 1 Ire Shaman|A25
 1 Isamaru, Hound of Konda|CHK
@@ -277,7 +277,7 @@ Name=MTGO Legacy Cube September 2016
 1 Journey to Nowhere|ZEN
 1 Kalitas, Traitor of Ghet|OGW
 1 Kami of Ancient Law|MM2
-1 Karmic Guide|EMA
+1 Karmic Guide|MH2
 1 Karn Liberated|2XM
 1 Keiga, the Tide Star|MMA
 1 Keranos, God of Storms|JOU
@@ -298,9 +298,9 @@ Name=MTGO Legacy Cube September 2016
 1 Lavaclaw Reaches|UMA
 1 Legacy's Allure|TMP
 1 Leonin Relic-Warder|C17
-1 Lightning Bolt|A25
+1 Lightning Bolt|STX
 1 Lightning Greaves|2XM
-1 Lightning Helix|IMA
+1 Lightning Helix|STX
 1 Lightning Mauler|AVR
 1 Lightning Strike|M19
 1 Liliana of the Veil|UMA
@@ -322,10 +322,10 @@ Name=MTGO Legacy Cube September 2016
 1 Malicious Affliction|EMA
 1 Man-o'-War|MH1
 1 Mana Confluence|EXP
-1 Mana Tithe|PLC
+1 Mana Tithe|STX
 1 Managorger Hydra|ORI
 1 Manic Vandal|M12
-1 Marsh Flats|MM3
+1 Marsh Flats|MH2
 1 Martial Coup|CFX
 1 Massacre Wurm|M21
 1 Master of the Wild Hunt|A25
@@ -335,12 +335,12 @@ Name=MTGO Legacy Cube September 2016
 1 Merfolk Looter|A25
 1 Mimic Vat|SOM
 1 Mindslaver|SOM
-1 Mirari's Wake|CNS
+1 Mirari's Wake|MH2
 1 Mirran Crusader|MM2
 1 Mirror Entity|MM2
 1 Miscalculation|ULG
-1 Mishra's Factory|2XM
-1 Misty Rainforest|MM3
+1 Mishra's Factory|MH2
+1 Misty Rainforest|MH2
 1 Mizzium Mortars|MM3
 1 Mogg War Marshal|EMA
 1 Monastery Mentor|FRF
@@ -356,9 +356,9 @@ Name=MTGO Legacy Cube September 2016
 1 Nature's Lore|5ED
 1 Necromancy|VIS
 1 Needle Spires|OGW
-1 Negate|ZNR
+1 Negate|STX
 1 Nekrataal|EMA
-1 Nevinyrral's Disk|EMA
+1 Nevinyrral's Disk|MH2
 1 Nicol Bolas, Planeswalker|M13
 1 Nightveil Specter|GTC
 1 Nissa, Vastwood Seer|ORI
@@ -405,7 +405,7 @@ Name=MTGO Legacy Cube September 2016
 1 Precinct Captain|RTR
 1 Precursor Golem|MM2
 1 Preordain|M11
-1 Primal Command|MM3
+1 Primal Command|STX
 1 Primeval Titan|IMA
 1 Profane Command|MM2
 1 Purphoros, God of the Forge|THS
@@ -428,7 +428,7 @@ Name=MTGO Legacy Cube September 2016
 1 Recurring Nightmare|TPR
 1 Reflecting Pool|CNS
 1 Reflector Mage|OGW
-1 Regrowth|MH1
+1 Regrowth|STX
 1 Relentless Dead|SOI
 1 Relic of Progenitus|EMA
 1 Remand|MM2
@@ -447,7 +447,7 @@ Name=MTGO Legacy Cube September 2016
 1 Sakura-Tribe Elder|CNS
 1 Sarkhan, the Dragonspeaker|KTK
 1 Savannah|VMA
-1 Scalding Tarn|MM3
+1 Scalding Tarn|MH2
 1 Scavenging Ooze|M21
 1 Scroll Rack|MPS_KLD
 1 Scrubland|VMA
@@ -465,7 +465,7 @@ Name=MTGO Legacy Cube September 2016
 1 Shadowmage Infiltrator|A25
 1 Shaman of Forgotten Ways|DTK
 1 Shambling Vent|BFZ
-1 Shardless Agent|EMA
+1 Shardless Agent|MH2
 1 Shelldock Isle|LRW
 1 Sheoldred, Whispering One|IMA
 1 Shriekmaw|UMA
@@ -509,7 +509,7 @@ Name=MTGO Legacy Cube September 2016
 1 Sunpetal Grove|XLN
 1 Supreme Verdict|IMA
 1 Surrak, the Hunt Caller|DTK
-1 Swords to Plowshares|A25
+1 Swords to Plowshares|STX
 1 Sylvan Advocate|OGW
 1 Sylvan Caryatid|THS
 1 Sylvan Library|EMA
@@ -546,7 +546,7 @@ Name=MTGO Legacy Cube September 2016
 1 Thunderbreak Regent|DTK
 1 Thundermaw Hellkite|IMA
 1 Tidehollow Sculler|MMA
-1 Time Warp|TPR
+1 Time Warp|STX
 1 Tireless Tracker|SOI
 1 Tooth and Nail|MMA
 1 Toxic Deluge|2XM
@@ -561,15 +561,15 @@ Name=MTGO Legacy Cube September 2016
 1 Underground Sea|VMA
 1 Underworld Connections|RTR
 1 Unexpectedly Absent|EMA
-1 Upheaval|VMA
+1 Upheaval|MH2
 1 Utopia Sprawl|A25
 1 Vampire Hexmage|2XM
 1 Vampire Nighthawk|MM3
 1 Vendilion Clique|A25
 1 Venser, Shaper Savant|MM3
-1 Verdant Catacombs|MM3
+1 Verdant Catacombs|MH2
 1 Victimize|EMA
-1 Vindicate|A25
+1 Vindicate|MH2
 1 Volcanic Island|VMA
 1 Volrath's Stronghold|STH
 1 Vorinclex, Voice of Hunger|IMA
@@ -597,7 +597,7 @@ Name=MTGO Legacy Cube September 2016
 1 Wurmcoil Engine|2XM
 1 Xenagos, the Reveler|THS
 1 Xiahou Dun, the One-Eyed|ME3
-1 Yavimaya Elder|VMA
+1 Yavimaya Elder|MH2
 1 Yosei, the Morning Star|MMA
 1 Young Pyromancer|UMA
 1 Zealous Conscripts|MM3

@@ -16,7 +16,6 @@ import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
@@ -120,8 +119,7 @@ public class  DamageAllAi extends SpellAbilityAi {
         final CardCollection humanList = getKillableCreatures(sa, opp, dmg);
         CardCollection computerList = getKillableCreatures(sa, ai, dmg);
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-        if (tgt != null && sa.canTarget(opp)) {
+        if (sa.usesTargeting() && sa.canTarget(opp)) {
             sa.resetTargets();
             sa.getTargets().add(opp);
             computerList.clear();
@@ -157,7 +155,7 @@ public class  DamageAllAi extends SpellAbilityAi {
                         // || (ai.sa.getPayCosts(). ??? )
                         {
                             // would take zero damage, and hurt opponent, do it!
-                            if (ComputerUtilCombat.predictDamageTo(ai, dmg, source, false)<1) {
+                            if (ComputerUtilCombat.predictDamageTo(ai, dmg, source, false) < 1) {
                                 return 1;
                             }
                             // enemy is expected to die faster than AI from damage if repeated
@@ -213,9 +211,8 @@ public class  DamageAllAi extends SpellAbilityAi {
         Player enemy = ai.getWeakestOpponent();
         final CardCollection humanList = getKillableCreatures(sa, enemy, dmg);
         CardCollection computerList = getKillableCreatures(sa, ai, dmg);
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
-        if (tgt != null && sa.canTarget(enemy)) {
+        if (sa.usesTargeting() && sa.canTarget(enemy)) {
             sa.resetTargets();
             sa.getTargets().add(enemy);
             computerList.clear();
@@ -297,9 +294,8 @@ public class  DamageAllAi extends SpellAbilityAi {
         Player enemy = ai.getWeakestOpponent();
         final CardCollection humanList = getKillableCreatures(sa, enemy, dmg);
         CardCollection computerList = getKillableCreatures(sa, ai, dmg);
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
-        if (tgt != null && sa.canTarget(enemy)) {
+        if (sa.usesTargeting() && sa.canTarget(enemy)) {
             sa.resetTargets();
             sa.getTargets().add(enemy);
             computerList.clear();

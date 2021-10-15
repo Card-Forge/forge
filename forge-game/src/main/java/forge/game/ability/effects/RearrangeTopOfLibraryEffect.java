@@ -84,7 +84,6 @@ public class RearrangeTopOfLibraryEffect extends SpellAbilityEffect {
                 rearrangeTopOfLibrary(host, p, numCards, shuffle, sa);
             }
         }
-    
     }
 
     /**

@@ -60,7 +60,6 @@ public class RepeatEffect extends SpellAbilityEffect {
             }
         } while (checkRepeatConditions(sa));
     }
-// end class AbilityFactory_Repeat
 
     /**
      * <p>
@@ -86,8 +85,7 @@ public class RepeatEffect extends SpellAbilityEffect {
             CardCollectionView list;
             if (sa.hasParam("RepeatDefined")) {
                 list = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("RepeatDefined"), sa);
-            }
-            else {
+            } else {
                 list = game.getCardsIn(ZoneType.Battlefield);
             }
             list = CardLists.getValidCards(list, repeatPresent.split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa);

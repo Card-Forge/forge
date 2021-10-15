@@ -1,0 +1,7 @@
+Name:Revenge of the Drowned
+ManaCost:3 U
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | AlternativeDecider$ TargetedOwner | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | DestinationAlternative$ Library | LibraryPositionAlternative$ -1 | AlternativeDestinationMessage$ Would you like to put the card on the top of your library (and not on the bottom)? | SubAbility$ DBToken | StackDescription$ {p:TargetedOwner} puts {c:Targeted} on the top or bottom of their library. | SpellDescription$ Target creature's owner puts it on the top or bottom of their library.
+SVar:DBToken:DB$ Token | TokenScript$ b_2_2_zombie_decayed | SpellDescription$ You create a 2/2 black Zombie creature token with decayed. (It can't block. When it attacks, sacrifice it at end of combat.)
+DeckHas:Ability$Token & Ability$Sacrifice & Type$Zombie
+Oracle:Target creature's owner puts it on the top or bottom of their library. You create a 2/2 black Zombie creature token with decayed. (It can't block. When it attacks, sacrifice it at end of combat.)

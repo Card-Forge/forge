@@ -1,10 +1,10 @@
 Name:Distant Memories
 ManaCost:2 U U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 U U | Origin$ Library | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBReturn | SpellDescription$ Search your library for a card, exile it, then shuffle. Any opponent may have you put that card into your hand. If no player does, you draw three cards.
-SVar:DBReturn:DB$ChangeZone | Origin$ Exile | Destination$ Hand | ChangeType$ Card.IsRemembered | Hidden$ True | Chooser$ Opponent | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBDraw
-SVar:DBDraw:DB$Draw | NumCards$ 3 | ConditionCheckSVar$ X | ConditionSVarCompare$ LE0
-SVar:X:Remembered$Amount
-AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/distant_memories.jpg
+A:SP$ ChangeZone | Origin$ Library | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | RememberChanged$ True | AILogic$ BestCard | SubAbility$ DBReturn | StackDescription$ SpellDescription | SpellDescription$ Search your library for a card, exile it, then shuffle. Any opponent may have you put that card into your hand. If no player does, you draw three cards.
+SVar:DBReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Hand | ChangeType$ Card.IsRemembered | Hidden$ True | Chooser$ Opponent | SelectPrompt$ Select a card to put in the opponent's hand, or they will draw three cards. | SkipCancelPrompt$ True | ForgetChanged$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ 3 | ConditionDefined$ Remembered | ConditionZone$ Exile | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:NeedsToPlayVar:X LE4
+SVar:X:Count$InYourHand
 Oracle:Search your library for a card, exile it, then shuffle. Any opponent may have you put that card into your hand. If no player does, you draw three cards.

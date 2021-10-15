@@ -182,6 +182,8 @@ public class CardPool extends ItemPool<PaperCard> {
                 continue;
             int count = cp.getValue();
             CardEdition edition = StaticData.instance().getCardEdition(card.getEdition());
+            if (edition == null)
+                continue;
             int currentCount = editionStatistics.getOrDefault(edition, 0);
             currentCount += count;
             editionStatistics.put(edition, currentCount);

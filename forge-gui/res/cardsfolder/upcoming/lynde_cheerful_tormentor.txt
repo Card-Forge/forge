@@ -1,0 +1,16 @@
+Name:Lynde, Cheerful Tormentor
+ManaCost:1 U B R
+Types:Legendary Creature Human Warlock
+PT:2/4
+K:Deathtouch
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Curse.YouOwn | Execute$ TrigDelayedTrig | TriggerDescription$ Whenever a curse is put into your graveyard from the battlefield, return it to the battlefield attached to you at the beginning of the next end step.
+SVar:TrigDelayedTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigReturn | RememberObjects$ TriggeredNewCardLKICopy | TriggerDescription$ Whenever a curse is put into your graveyard from the battlefield, return it to the battlefield attached to you at the beginning of the next end step.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Graveyard | Destination$ Battlefield | AttachedToPlayer$ You
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigChooseCurse | TriggerZones$ Battlefield | OptionalDecider$ You | IsPresent$ Curse.AttachedTo You | TriggerDescription$ At the beginning of your upkeep, you may attach a Curse attached to you to one of your opponents. If you do, draw two cards.
+SVar:TrigChooseCurse:DB$ ChooseCard | Choices$ Curse.AttachedTo You | ChoiceTitle$ Select a curse attached to you | SubAbility$ DBChooseOpponent
+SVar:DBChooseOpponent:DB$ ChoosePlayer | ConditionDefined$ ChosenCard | ConditionPresent$ Card | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Select an opponent to attach the curse to | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | Object$ ChosenCard | Defined$ ChosenPlayer | RememberAttached$ True | SubAbility$ DBDraw |
+SVar:DBDraw:DB$ Draw | ConditionDefined$ Remembered | ConditionPresent$ Curse.AttachedTo ChosenPlayer | Defined$ You | NumCards$ 2 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | ClearChosenPlayer$ True | ClearRemembered$ True
+DeckNeeds:Type$Curse
+Oracle:Deathtouch\nWhenever a Curse is put into your graveyard from the battlefield, return it to the battlefield attached to you at the beginning of the next end step.\nAt the beginning of your upkeep, you may attach a Curse attached to you to one of your opponents. If you do, draw two cards.

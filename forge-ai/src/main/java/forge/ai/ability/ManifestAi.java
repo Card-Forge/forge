@@ -106,7 +106,7 @@ public class ManifestAi extends SpellAbilityAi {
             return false;
         }
 
-        if (card.mayPlayerLook(ai)) {
+        if (card.getView().canBeShownTo(ai.getView())) {
             // try to avoid manifest a non Permanent
             if (!card.isPermanent())
                 return false;
@@ -115,7 +115,7 @@ public class ManifestAi extends SpellAbilityAi {
             if (card.getManaCost().countX() > 0)
                 return false;
 
-            // try to avoid manifesting a creature with zero or less thoughness
+            // try to avoid manifesting a creature with zero or less toughness
             if (card.isCreature() && card.getNetToughness() <= 0)
                 return false;
 
@@ -177,21 +177,21 @@ public class ManifestAi extends SpellAbilityAi {
         return MyRandom.getRandom().nextFloat() < .8;
     }
 
-    protected Card chooseSingleCard(final Player ai, final SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer) {
-        if (Iterables.size(options) <= 1) {
-            return Iterables.getFirst(options, null);
-        }
-        CardCollection filtered = CardLists.filter(options, new Predicate<Card>() {
-            @Override
-            public boolean apply(Card input) {
-                return !shouldManyfest(input, ai, sa);
+    @Override
+    protected Card chooseSingleCard(final Player ai, final SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
+        if (Iterables.size(options) > 1 || isOptional) {
+            CardCollection filtered = CardLists.filter(options, new Predicate<Card>() {
+                @Override
+                public boolean apply(Card input) {
+                    return shouldManyfest(input, ai, sa);
+                }
+            });
+            if (!filtered.isEmpty()) {
+                return ComputerUtilCard.getBestAI(filtered);
             }
-        });
-        if (!filtered.isEmpty()) {
-            return ComputerUtilCard.getBestAI(filtered);
-        }
-        if (isOptional) {
-            return null;
+            if (isOptional) {
+                return null;
+            }
         }
         return Iterables.getFirst(options, null);
     }

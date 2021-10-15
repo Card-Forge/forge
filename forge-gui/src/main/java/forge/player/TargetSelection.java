@@ -102,7 +102,7 @@ public class TargetSelection {
             return true;
         }
 
-        final boolean hasCandidates = tgt.hasCandidates(this.ability, true);
+        final boolean hasCandidates = tgt.hasCandidates(this.ability);
         if (!hasCandidates && !hasEnoughTargets) {
             // Cancel ability if there aren't any valid Candidates
             return false;
@@ -330,8 +330,7 @@ public class TargetSelection {
             }
             if (madeChoice instanceof StackItemView) {
                 ability.getTargets().add(stackItemViewCache.get(madeChoice).getSpellAbility(true));
-            }
-            else {// 'FINISH TARGETING' chosen
+            } else {// 'FINISH TARGETING' chosen
                 bTargetingDone = true;
             }
         }

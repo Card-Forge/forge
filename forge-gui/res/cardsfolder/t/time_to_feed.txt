@@ -1,9 +1,9 @@
 Name:Time to Feed
 ManaCost:2 G
 Types:Sorcery
-A:SP$ Effect | Cost$ 2 G | ValidTgts$ Creature.OppCtrl | AILogic$ Fight | TgtPrompt$ Select target creature an oppoenent controls | RememberObjects$ Targeted | Triggers$ TrigDies | SubAbility$ DBFight | SpellDescription$ Choose target creature an opponent controls. When that creature dies this turn, you gain 3 life. Target creature you control fights that creature.
-SVar:TrigDies:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.IsRemembered | OneOff$ True | Execute$ TrigGainLife | TriggerDescription$ When that creature dies this turn, you gain 3 life.
+A:SP$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls | AILogic$ Fight | SubAbility$ DBDelayedTrigger | StackDescription$ When {c:ThisTargetedCard} dies this turn, {p:You} gains 3 life. | SpellDescription$ Choose target creature an opponent controls. When that creature dies this turn, you gain 3 life. Target creature you control fights that creature.
+SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ ChangesZone | RememberObjects$ ParentTarget | ValidCard$ Card.IsTriggerRemembered | Origin$ Battlefield | Destination$ Graveyard | ThisTurn$ True | Execute$ TrigGainLife | SubAbility$ DBFight | StackDescription$ None | TriggerDescription$ When that creature dies this turn, you gain 3 life.
+SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | StackDescription$ {c:ThisTargetedCard} fights that creature.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3
-SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control to fight the first target
-SVar:Picture:http://www.wizards.com/global/images/magic/general/time_to_feed.jpg
+DeckHas:Ability$LifeGain
 Oracle:Choose target creature an opponent controls. When that creature dies this turn, you gain 3 life. Target creature you control fights that creature. (Each deals damage equal to its power to the other.)

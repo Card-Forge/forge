@@ -39,7 +39,7 @@ public class Graphics {
     private int failedClipCount;
     private float alphaComposite = 1;
     private int transformCount = 0;
-    private String sVertex = "uniform mat4 u_projTrans;\n" +
+    private final String sVertex = "uniform mat4 u_projTrans;\n" +
             "\n" +
             "attribute vec4 a_position;\n" +
             "attribute vec2 a_texCoord0;\n" +
@@ -55,7 +55,7 @@ public class Graphics {
             "    v_texCoord = a_texCoord0;\n" +
             "    v_color = a_color;\n" +
             "}";
-    private String sFragment = "#ifdef GL_ES\n" +
+    private final String sFragment = "#ifdef GL_ES\n" +
             "precision mediump float;\n" +
             "precision mediump int;\n" +
             "#endif\n" +
@@ -103,8 +103,38 @@ public class Graphics {
             "\n" +
             "   gl_FragColor = vec4(u_color,alpha);\n" +
             "}";
+    private final String vertexShaderGray = "attribute vec4 a_position;\n" +
+            "attribute vec4 a_color;\n" +
+            "attribute vec2 a_texCoord0;\n" +
+            "\n" +
+            "uniform mat4 u_projTrans;\n" +
+            "\n" +
+            "varying vec4 v_color;\n" +
+            "varying vec2 v_texCoords;\n" +
+            "\n" +
+            "void main() {\n" +
+            "    v_color = a_color;\n" +
+            "    v_texCoords = a_texCoord0;\n" +
+            "    gl_Position = u_projTrans * a_position;\n" +
+            "}";
+    private final String fragmentShaderGray = "#ifdef GL_ES\n" +
+            "    precision mediump float;\n" +
+            "#endif\n" +
+            "\n" +
+            "varying vec4 v_color;\n" +
+            "varying vec2 v_texCoords;\n" +
+            "uniform sampler2D u_texture;\n" +
+            "uniform float u_grayness;\n" +
+            "\n" +
+            "void main() {\n" +
+            "  vec4 c = v_color * texture2D(u_texture, v_texCoords);\n" +
+            "  float grey = dot( c.rgb, vec3(0.22, 0.707, 0.071) );\n" +
+            "  vec3 blendedColor = mix(c.rgb, vec3(grey), u_grayness);\n" +
+            "  gl_FragColor = vec4(blendedColor.rgb, c.a);\n" +
+            "}";
 
     private final ShaderProgram shaderOutline = new ShaderProgram(sVertex, sFragment);
+    private final ShaderProgram shaderGrayscale = new ShaderProgram(vertexShaderGray, fragmentShaderGray);
 
     public Graphics() {
         ShaderProgram.pedantic = false;
@@ -298,6 +328,51 @@ public class Graphics {
         batch.begin();
     }
 
+    public void drawLineArrow(float arrowThickness, FSkinColor skinColor, float x1, float y1, float x2, float y2) {
+        fillCircle(skinColor.getColor(), x2, y2, arrowThickness);
+        drawLineArrow(arrowThickness, skinColor.getColor(), x1, y1, x2, y2);
+        fillCircle(Color.WHITE, x2, y2, arrowThickness/2);
+        drawLine(arrowThickness/3, Color.WHITE, x1, y1, x2, y2);
+    }
+    public void drawLineArrow(float thickness, Color color, float x1, float y1, float x2, float y2) {
+        batch.end(); //must pause batch while rendering shapes
+
+        float angle = new Vector2(x1 - x2, y1 - y2).angleRad();
+        float arrowHeadRotation = (float)(Math.PI * 0.8f);
+        Vector2 arrowCorner3 = new Vector2(x2 + (thickness/3) * (float)Math.cos(angle + arrowHeadRotation), y2 + (thickness/3) * (float)Math.sin(angle + arrowHeadRotation));
+        Vector2 arrowCorner4 = new Vector2(x2 + (thickness/3) * (float)Math.cos(angle - arrowHeadRotation), y2 + (thickness/3) * (float)Math.sin(angle - arrowHeadRotation));
+
+        if (thickness > 1) {
+            Gdx.gl.glLineWidth(thickness);
+        }
+        if (alphaComposite < 1) {
+            color = FSkinColor.alphaColor(color, color.a * alphaComposite);
+        }
+        boolean needSmoothing = (x1 != x2 && y1 != y2);
+        if (color.a < 1 || needSmoothing) { //enable blending so alpha colored shapes work properly
+            Gdx.gl.glEnable(GL_BLEND);
+        }
+        if (needSmoothing) {
+            Gdx.gl.glEnable(GL_LINE_SMOOTH);
+        }
+
+        startShape(ShapeType.Line);
+        shapeRenderer.setColor(color);
+        shapeRenderer.line(adjustX(x1), adjustY(y1, 0), adjustX(x2), adjustY(y2, 0));
+        endShape();
+
+        if (needSmoothing) {
+            Gdx.gl.glDisable(GL_LINE_SMOOTH);
+        }
+        if (color.a < 1 || needSmoothing) {
+            Gdx.gl.glDisable(GL_BLEND);
+        }
+        if (thickness > 1) {
+            Gdx.gl.glLineWidth(1);
+        }
+
+        batch.begin();
+    }
     public void drawArrow(float borderThickness, float arrowThickness, float arrowSize, FSkinColor skinColor, float x1, float y1, float x2, float y2) {
         drawArrow(borderThickness, arrowThickness, arrowSize, skinColor.getColor(), x1, y1, x2, y2);
     }
@@ -632,6 +707,16 @@ public class Graphics {
         shapeRenderer.end();
     }
 
+    public void setColorRGBA(float r, float g, float b, float alphaComposite0) {
+        alphaComposite = alphaComposite0;
+        batch.setColor(new Color(r, g, b, alphaComposite));
+    }
+
+    public void resetColorRGBA(float alphaComposite0) {
+        alphaComposite = alphaComposite0;
+        batch.setColor(Color.WHITE);
+    }
+
     public void setAlphaComposite(float alphaComposite0) {
         alphaComposite = alphaComposite0;
         batch.setColor(new Color(1, 1, 1, alphaComposite));
@@ -661,6 +746,101 @@ public class Graphics {
     public void drawImage(FImage image, Color borderColor, float x, float y, float w, float h) {
         image.draw(this, x, y, w, h);
         fillRoundRect(borderColor, x+1, y+1, w-1.5f, h-1.5f, (h-w)/10);//used by zoom let some edges show...
+    }
+    public void drawAvatarImage(FImage image, float x, float y, float w, float h, boolean drawGrayscale) {
+        if (!drawGrayscale) {
+            image.draw(this, x, y, w, h);
+        } else {
+            batch.end();
+            shaderGrayscale.bind();
+            shaderGrayscale.setUniformf("u_grayness", 1f);
+            batch.setShader(shaderGrayscale);
+            batch.begin();
+            //draw gray
+            image.draw(this, x, y, w, h);
+            //reset
+            batch.end();
+            batch.setShader(null);
+            batch.begin();
+        }
+    }
+    public void drawCardImage(FImage image, TextureRegion damage_overlay, float x, float y, float w, float h, boolean drawGrayscale, boolean damaged) {
+        if (!drawGrayscale) {
+            image.draw(this, x, y, w, h);
+            if (damage_overlay != null && damaged)
+                batch.draw(damage_overlay, adjustX(x), adjustY(y, h), w, h);
+        } else {
+            batch.end();
+            shaderGrayscale.bind();
+            shaderGrayscale.setUniformf("u_grayness", 1f);
+            batch.setShader(shaderGrayscale);
+            batch.begin();
+            //draw gray
+            image.draw(this, x, y, w, h);
+            //reset
+            batch.end();
+            batch.setShader(null);
+            batch.begin();
+        }
+    }
+    public void drawCardImage(Texture image, TextureRegion damage_overlay, float x, float y, float w, float h, boolean drawGrayscale, boolean damaged) {
+        if (!drawGrayscale) {
+            batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+            if (damage_overlay != null && damaged)
+                batch.draw(damage_overlay, adjustX(x), adjustY(y, h), w, h);
+        } else {
+            batch.end();
+            shaderGrayscale.bind();
+            shaderGrayscale.setUniformf("u_grayness", 1f);
+            batch.setShader(shaderGrayscale);
+            batch.begin();
+            //draw gray
+            batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+            //reset
+            batch.end();
+            batch.setShader(null);
+            batch.begin();
+        }
+    }
+    public void drawCardImage(TextureRegion image, TextureRegion damage_overlay, float x, float y, float w, float h, boolean drawGrayscale, boolean damaged) {
+        if (image != null) {
+            if (!drawGrayscale) {
+                batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+                if (damage_overlay != null && damaged)
+                    batch.draw(damage_overlay, adjustX(x), adjustY(y, h), w, h);
+            } else {
+                batch.end();
+                shaderGrayscale.bind();
+                shaderGrayscale.setUniformf("u_grayness", 1f);
+                batch.setShader(shaderGrayscale);
+                batch.begin();
+                //draw gray
+                batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+                //reset
+                batch.end();
+                batch.setShader(null);
+                batch.begin();
+            }
+        }
+    }
+    public void drawGrayTransitionImage(FImage image, float x, float y, float w, float h, boolean withDarkOverlay, float percentage) {
+        batch.end();
+        shaderGrayscale.bind();
+        shaderGrayscale.setUniformf("u_grayness", percentage);
+        batch.setShader(shaderGrayscale);
+        batch.begin();
+        //draw gray
+        image.draw(this, x, y, w, h);
+        //reset
+        batch.end();
+        batch.setShader(null);
+        batch.begin();
+        if(withDarkOverlay){
+            float oldalpha = alphaComposite;
+            setAlphaComposite(0.4f);
+            fillRect(Color.BLACK, x, y, w, h);
+            setAlphaComposite(oldalpha);
+        }
     }
     public void drawImage(FImage image, float x, float y, float w, float h) {
         drawImage(image, x, y, w, h, false);

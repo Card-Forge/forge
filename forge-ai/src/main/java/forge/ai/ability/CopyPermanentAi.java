@@ -89,7 +89,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(source, sa.getParam("TargetingPlayer"), sa).get(0);
             sa.setTargetingPlayer(targetingPlayer);
             return targetingPlayer.getController().chooseTargetsFor(sa);
-        } else if (sa.getTargetRestrictions() != null && sa.getTargetRestrictions().canTgtPlayer()) {
+        } else if (sa.usesTargeting() && sa.getTargetRestrictions().canTgtPlayer()) {
                 if (!sa.isCurse()) {
                     if (sa.canTarget(aiPlayer)) {
                         sa.getTargets().add(aiPlayer);
@@ -167,7 +167,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
                     }
                 });
                 Card choice;
-                if (!CardLists.filter(list, Presets.CREATURES).isEmpty()) {
+                if (Iterables.any(list, Presets.CREATURES)) {
                     if (sa.hasParam("TargetingPlayer")) {
                         choice = ComputerUtilCard.getWorstCreatureAI(list);
                     } else {

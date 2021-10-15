@@ -167,7 +167,7 @@ public class ChooseCardAi extends SpellAbilityAi {
             }
             choice = ComputerUtilCard.getBestAI(ownChoices);
         } else if (logic.equals("BestBlocker")) {
-            if (!CardLists.filter(options, Presets.UNTAPPED).isEmpty()) {
+            if (Iterables.any(options, Presets.UNTAPPED)) {
                 options = CardLists.filter(options, Presets.UNTAPPED);
             }
             choice = ComputerUtilCard.getBestCreatureAI(options);
@@ -191,7 +191,7 @@ public class ChooseCardAi extends SpellAbilityAi {
         } else if (logic.equals("NeedsPrevention")) {
             final Game game = ai.getGame();
             final Combat combat = game.getCombat();
-            CardCollectionView better =  CardLists.filter(options, new Predicate<Card>() {
+            CardCollectionView better = CardLists.filter(options, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     if (combat == null || !combat.isAttacking(c, ai) || !combat.isUnblocked(c)) {

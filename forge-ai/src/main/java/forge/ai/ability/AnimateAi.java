@@ -78,8 +78,7 @@ public class AnimateAi extends SpellAbilityAi {
             SpellAbility topStack = game.getStack().peekAbility();
             if (topStack.getApi() == ApiType.Sacrifice) {
                 final String valid = topStack.getParamOrDefault("SacValid", "Card.Self");
-                String num = topStack.getParam("Amount");
-                num = (num == null) ? "1" : num;
+                String num = topStack.getParamOrDefault("Amount", "1");
                 final int nToSac = AbilityUtils.calculateAmount(topStack.getHostCard(), num, topStack);
                 CardCollection list = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","),
                 		ai.getWeakestOpponent(), topStack.getHostCard(), topStack);
@@ -135,16 +134,16 @@ public class AnimateAi extends SpellAbilityAi {
         final Game game = aiPlayer.getGame();
         final PhaseHandler ph = game.getPhaseHandler();
         if (!sa.metConditions() && sa.getSubAbility() == null) {
-            return false;  // what is this for?
+            return false; // what is this for?
         }
         if (!game.getStack().isEmpty() && game.getStack().peekAbility().getApi() == ApiType.Sacrifice) {
-            if (!AnimateAi.isAnimatedThisTurn(aiPlayer, source)) {
-                this.rememberAnimatedThisTurn(aiPlayer, source);
-                return true;    // interrupt sacrifice
+            if (!isAnimatedThisTurn(aiPlayer, source)) {
+                rememberAnimatedThisTurn(aiPlayer, source);
+                return true;  // interrupt sacrifice
             }
         }
         if (!ComputerUtilCost.checkTapTypeCost(aiPlayer, sa.getPayCosts(), source, sa)) {
-            return false;   // prevent crewing with equal or better creatures
+            return false; // prevent crewing with equal or better creatures
         }
 
         if (sa.costHasManaX() && sa.getSVar("X").equals("Count$xPaid")) {
@@ -214,7 +213,7 @@ public class AnimateAi extends SpellAbilityAi {
                 }
             }
             if (bFlag) {
-                this.rememberAnimatedThisTurn(aiPlayer, sa.getHostCard());
+                rememberAnimatedThisTurn(aiPlayer, sa.getHostCard());
             }
             return bFlag; // All of the defined stuff is animated, not very useful
         } else {
@@ -246,7 +245,7 @@ public class AnimateAi extends SpellAbilityAi {
                 return false;
             }
             Card toAnimate = ComputerUtilCard.getWorstAI(list);
-            this.rememberAnimatedThisTurn(aiPlayer, toAnimate);
+            rememberAnimatedThisTurn(aiPlayer, toAnimate);
             sa.getTargets().add(toAnimate);
         }
         return true;
@@ -262,7 +261,7 @@ public class AnimateAi extends SpellAbilityAi {
         final PhaseHandler ph = ai.getGame().getPhaseHandler();
         final boolean alwaysActivatePWAbility = sa.isPwAbility()
                 && sa.getPayCosts().hasSpecificCostType(CostPutCounter.class)
-                && sa.getTargetRestrictions() != null
+                && sa.usesTargeting()
                 && sa.getTargetRestrictions().getMinTargets(sa.getHostCard(), sa) == 0;
         
         final CardType types = new CardType(true);
@@ -353,13 +352,13 @@ public class AnimateAi extends SpellAbilityAi {
             if (worst != null) {
                 if (worst.isLand()) {
                     // e.g. Clan Guildmage, make sure we're not using the same land we want to animate to activate the ability
-                    this.holdAnimatedTillMain2(ai, worst);
+                    holdAnimatedTillMain2(ai, worst);
                     if (!ComputerUtilMana.canPayManaCost(sa, ai, 0)) {
-                        this.releaseHeldTillMain2(ai, worst);
+                        releaseHeldTillMain2(ai, worst);
                         return false;
                     }
                 }
-                this.rememberAnimatedThisTurn(ai, worst);
+                rememberAnimatedThisTurn(ai, worst);
                 sa.getTargets().add(worst);
             }
             return true;

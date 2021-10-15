@@ -1,53 +1,17 @@
 package forge.gui.control;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.eventbus.Subscribe;
 
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardView;
-import forge.game.event.GameEvent;
-import forge.game.event.GameEventAnteCardsSelected;
-import forge.game.event.GameEventAttackersDeclared;
-import forge.game.event.GameEventBlockersDeclared;
-import forge.game.event.GameEventCardAttachment;
-import forge.game.event.GameEventCardChangeZone;
-import forge.game.event.GameEventCardCounters;
-import forge.game.event.GameEventCardDamaged;
-import forge.game.event.GameEventCardPhased;
-import forge.game.event.GameEventCardStatsChanged;
-import forge.game.event.GameEventCardTapped;
-import forge.game.event.GameEventCombatChanged;
-import forge.game.event.GameEventCombatEnded;
-import forge.game.event.GameEventCombatUpdate;
-import forge.game.event.GameEventGameFinished;
-import forge.game.event.GameEventGameOutcome;
-import forge.game.event.GameEventLandPlayed;
-import forge.game.event.GameEventManaBurn;
-import forge.game.event.GameEventManaPool;
-import forge.game.event.GameEventPlayerControl;
-import forge.game.event.GameEventPlayerCounters;
-import forge.game.event.GameEventPlayerLivesChanged;
-import forge.game.event.GameEventPlayerPoisoned;
-import forge.game.event.GameEventPlayerPriority;
-import forge.game.event.GameEventPlayerStatsChanged;
-import forge.game.event.GameEventShuffle;
-import forge.game.event.GameEventSpellAbilityCast;
-import forge.game.event.GameEventSpellRemovedFromStack;
-import forge.game.event.GameEventSpellResolved;
-import forge.game.event.GameEventSubgameEnd;
-import forge.game.event.GameEventTokenStateUpdate;
-import forge.game.event.GameEventTurnBegan;
-import forge.game.event.GameEventTurnPhase;
-import forge.game.event.GameEventZone;
-import forge.game.event.IGameEventVisitor;
+import forge.game.event.*;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.zone.Zone;
@@ -70,11 +34,12 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     private final Set<PlayerView> livesUpdate = new HashSet<>();
     private final Set<PlayerView> manaPoolUpdate = new HashSet<>();
     private final PlayerZoneUpdates zonesUpdate = new PlayerZoneUpdates();
+    private final Map<PlayerView, Object> playersWithValidTargets = Maps.newHashMap();
 
-    private boolean processEventsQueued, needPhaseUpdate, needCombatUpdate, needStackUpdate, needPlayerControlUpdate, refreshFieldUpdate;
+    private boolean processEventsQueued, needPhaseUpdate, needCombatUpdate, needStackUpdate, needPlayerControlUpdate, refreshFieldUpdate, showExileUpdate;
     private boolean gameOver, gameFinished;
     private boolean needSaveState = false;
-    private PlayerView turnUpdate;
+    private PlayerView turnUpdate, activatingPlayer;
 
     public FControlGameEventHandler(final PlayerControllerHuman humanController0) {
         humanController = humanController0;
@@ -145,6 +110,12 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             if (refreshFieldUpdate) {
                 refreshFieldUpdate = false;
                 matchController.refreshField();
+            }
+            if (showExileUpdate) {
+                showExileUpdate = false;
+                matchController.openZones(activatingPlayer, Collections.singleton(ZoneType.Exile), playersWithValidTargets);
+                activatingPlayer = null;
+                playersWithValidTargets.clear();
             }
             if (gameOver) {
                 gameOver = false;
@@ -452,6 +423,14 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     }
 
     @Override
+    public Void visit(final GameEventCardForetold event) {
+        showExileUpdate = true;
+        activatingPlayer = event.activatingPlayer.getView();
+        playersWithValidTargets.put(activatingPlayer, null);
+        return processEvent();
+    }
+
+    @Override
     public Void visit(final GameEventPlayerStatsChanged event) {
         final CardCollection cards = new CardCollection();
         for (final Player p : event.players) {
@@ -504,6 +483,11 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(final GameEventPlayerPoisoned event) {
         return processPlayer(event.receiver, livesUpdate);
+    }
+
+    @Override
+    public Void visit(final GameEventPlayerDamaged event) {
+        return processEvent();
     }
 
     @Override

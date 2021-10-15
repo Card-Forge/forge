@@ -1,0 +1,12 @@
+Name:Empty the Laboratory
+ManaCost:X U U
+Types:Sorcery
+A:SP$ Sacrifice | Defined$ You | Amount$ X | Mandatory$ True | SacValid$ Zombie | RememberSacrificed$ True | SubAbility$ DBDigUntil | StackDescription$ SpellDescription | SpellDescription$ Sacrifice X Zombies, then reveal cards from the top of your library until you reveal a number of Zombie creature cards equal to the number of Zombies sacrificed this way. Put those cards onto the battlefield and the rest on the bottom of your library in a random order.
+SVar:DBDigUntil:DB$ DigUntil | Amount$ Y | Valid$ Creature.Zombie | FoundDestination$ Library | NoMoveFound$ True | ImprintFound$ True | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ Imprinted | Origin$ Library | Destination$ Battlefield | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+SVar:X:Count$xPaid
+SVar:Y:Remembered$Amount
+DeckHas:Ability$Sacrifice
+DeckNeeds:Type$Zombie
+Oracle:Sacrifice X Zombies, then reveal cards from the top of your library until you reveal a number of Zombie creature cards equal to the number of Zombies sacrificed this way. Put those cards onto the battlefield and the rest on the bottom of your library in a random order.

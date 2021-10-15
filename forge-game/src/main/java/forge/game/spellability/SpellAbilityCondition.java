@@ -131,10 +131,6 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             }
         }
 
-        if (params.containsKey("ConditionZone")) {
-            this.setZone(ZoneType.smartValueOf(params.get("ConditionZone")));
-        }
-
         if (params.containsKey("ConditionSorcerySpeed")) {
             this.setSorcerySpeed(true);
         }
@@ -173,6 +169,10 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
 
         if (params.containsKey("ConditionDefined")) {
             this.setPresentDefined(params.get("ConditionDefined"));
+        }
+
+        if (params.containsKey("ConditionZone")) {
+            this.setPresentZone(ZoneType.smartValueOf(params.get("ConditionZone")));
         }
 
         if (params.containsKey("ConditionPlayerDefined")) {
@@ -312,8 +312,13 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             return false;
         }
 
-        if (this.isPlayerTurn() && !phase.isPlayerTurn(activator)) {
-            return false;
+        if (this.isPlayerTurn()) {
+            boolean b = !sa.getParam("ConditionPlayerTurn").equals("False");
+            if (!b && phase.isPlayerTurn(activator)) {
+                return false;
+            } else if (b && !phase.isPlayerTurn((activator))) {
+                return false;
+            }
         }
 
         if (this.isOpponentTurn() && !phase.getPlayerTurn().isOpponentOf(activator)) {

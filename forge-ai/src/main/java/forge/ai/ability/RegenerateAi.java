@@ -74,7 +74,7 @@ public class RegenerateAi extends SpellAbilityAi {
 
                     for (final Card c : list) {
                         if (c.getShieldCount() == 0) {
-                            flag |= ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat);
+                            flag = flag || ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat);
                         }
                     }
 

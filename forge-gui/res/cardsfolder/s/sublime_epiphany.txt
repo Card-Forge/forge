@@ -1,11 +1,11 @@
 Name:Sublime Epiphany
 ManaCost:4 U U
 Types:Instant
-A:SP$ Charm | Cost$ 4 U U | MinCharmNum$ 1 | CharmNum$ 5 | Choices$ DBCounterSpell,DBCounterAbility,DBReturn,DBCopy,DBDraw
-SVar:DBCounterSpell:DB$ Counter | TargetType$ Spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
-SVar:DBCounterAbility:DB$ Counter | TargetType$ Activated,Triggered | ValidTgts$ Card | TgtPrompt$ Select target Activated or Triggered Ability | SpellDescription$ Counter target activated or triggered ability.
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 5 | Choices$ DBCounterSpell,DBCounterAbility,DBReturn,DBCopy,DBDraw
+SVar:DBCounterSpell:DB$ Counter | TargetType$ Spell | ValidTgts$ Card | TgtPrompt$ Select target spell | SpellDescription$ Counter target spell.
+SVar:DBCounterAbility:DB$ Counter | TargetType$ Activated,Triggered | ValidTgts$ Card | TgtPrompt$ Select target activated or triggered ability | SpellDescription$ Counter target activated or triggered ability.
 SVar:DBReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | AILogic$ Good | SpellDescription$ Return target nonland permanent to its owner's hand.
 SVar:DBCopy:DB$ CopyPermanent | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SpellDescription$ Create a token that's a copy of target creature you control.
-SVar:DBDraw:DB$ Draw | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player draws a card.
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ Target player draws a card.
 DeckHas:Ability$Token
 Oracle:Choose one or more —\n• Counter target spell.\n• Counter target activated or triggered ability.\n• Return target nonland permanent to its owner's hand.\n• Create a token that's a copy of target creature you control.\n• Target player draws a card.

@@ -16,7 +16,6 @@ import forge.game.zone.ZoneType;
 public abstract class RevealAiBase extends SpellAbilityAi {
 
     protected  boolean revealHandTargetAI(final Player ai, final SpellAbility sa) {
-
         if (sa.usesTargeting()) {
             // ability is targeted
             sa.resetTargets();

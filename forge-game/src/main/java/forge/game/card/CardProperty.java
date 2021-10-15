@@ -130,8 +130,18 @@ public class CardProperty {
             if (!card.isAdventureCard()) {
                 return false;
             }
-        } else if (property.equals("isTriggerRemembered")) {
-            if (!spellAbility.getTriggerRemembered().contains(card)) {
+        } else if (property.equals("IsTriggerRemembered")) {
+            boolean found = false;
+            for (Object o : spellAbility.getTriggerRemembered()) {
+                if (o instanceof Card) {
+                    Card trigRem = (Card) o;
+                    if (trigRem.equalsWithTimestamp(card)) {
+                        found = true;
+                        break;
+                    }
+                }
+            }
+            if (!found) {
                 return false;
             }
         } else if (property.startsWith("YouCtrl")) {
@@ -624,7 +634,7 @@ public class CardProperty {
             } else {
                 final String restriction = property.split("SharesCMCWith ")[1];
                 CardCollection list = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
-                return !CardLists.filter(list, CardPredicates.sharesCMCWith(card)).isEmpty();
+                return Iterables.any(list, CardPredicates.sharesCMCWith(card));
             }
         } else if (property.startsWith("SharesColorWith")) {
             // if card is colorless, it can't share colors
@@ -720,7 +730,7 @@ public class CardProperty {
         } else if (property.startsWith("MostProminentCreatureTypeInLibrary")) {
             final CardCollectionView list = sourceController.getCardsIn(ZoneType.Library);
             String[] type = CardFactoryUtil.getMostProminentCreatureType(list);
-            if (type != null); {
+            if (type != null) {
                 for (String s : type) {
                     if (!card.getType().hasCreatureType(s)) {
                         return false;
@@ -903,9 +913,9 @@ public class CardProperty {
                 }
             } else {
                 final String restriction = property.split("sharesControllerWith ")[1];
-                if (restriction.startsWith("Remembered") || restriction.startsWith("Imprinted")) {
-                    CardCollection list = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
-                    return !CardLists.filter(list, CardPredicates.sharesControllerWith(card)).isEmpty();
+                CardCollection list = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
+                if (!Iterables.any(list, CardPredicates.sharesControllerWith(card))) {
+                    return false;
                 }
             }
         } else if (property.startsWith("sharesOwnerWith")) {
@@ -915,13 +925,12 @@ public class CardProperty {
                 }
             } else {
                 final String restriction = property.split("sharesOwnerWith ")[1];
-                if (restriction.equals("Remembered")) {
-                    for (final Object rem : source.getRemembered()) {
-                        if (rem instanceof Card) {
-                            final Card c = (Card) rem;
-                            if (!card.getOwner().equals(c.getOwner())) {
-                                return false;
-                            }
+                CardCollection def = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
+                for (final Object rem : def) {
+                    if (rem instanceof Card) {
+                        final Card c = (Card) rem;
+                        if (!card.getOwner().equals(c.getOwner())) {
+                            return false;
                         }
                     }
                 }
@@ -1472,7 +1481,6 @@ public class CardProperty {
                         return true;
                     }
                 }
-                ;
                 return false;
             }
         } else if (property.startsWith("sharesBlockingAssignmentWith")) {
@@ -1518,7 +1526,6 @@ public class CardProperty {
                     return true;
                 }
             }
-            ;
             return false;
         } else if (property.startsWith("blockedByValidThisTurn ")) {
             CardCollectionView blocked = card.getBlockedByThisTurn();
@@ -1534,7 +1541,6 @@ public class CardProperty {
                     return true;
                 }
             }
-            ;
             return false;
         } else if (property.startsWith("blockedBySourceThisTurn")) {
             return source.getBlockedByThisTurn().contains(card);

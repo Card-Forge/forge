@@ -63,7 +63,7 @@ public class CountersProliferateAi extends SpellAbilityAi {
         boolean opponentPoison = false;
 
         for (final Player o : ai.getOpponents()) {
-            opponentPoison |= o.getPoisonCounters() >= 1;
+            opponentPoison |= o.getPoisonCounters() > 0 && o.canReceiveCounters(CounterEnumType.POISON);
             hperms.addAll(CardLists.filter(o.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card crd) {
@@ -122,7 +122,7 @@ public class CountersProliferateAi extends SpellAbilityAi {
         final CounterType poison = CounterType.get(CounterEnumType.POISON);
 
         boolean aggroAI = (((PlayerControllerAi) ai.getController()).getAi()).getBooleanProperty(AiProps.PLAY_AGGRO);
-        // because countertype can't be chosen anymore, only look for posion counters
+        // because countertype can't be chosen anymore, only look for poison counters
         for (final Player p : Iterables.filter(options, Player.class)) {
             if (p.isOpponentOf(ai)) {
                 if (p.getCounters(poison) > 0 && p.canReceiveCounters(poison)) {
@@ -130,7 +130,7 @@ public class CountersProliferateAi extends SpellAbilityAi {
                 }
             } else {
                 // poison is risky, should not proliferate them in most cases
-                if ((p.getCounters(poison) <= 5 && aggroAI && p.getCounters(CounterEnumType.EXPERIENCE) + p.getCounters(CounterEnumType.ENERGY) >= 1) || !p.canReceiveCounters(poison)) {
+                if ((((p.getCounters(poison) <= 5 && aggroAI) || (p.getCounters(poison) == 0)) && p.getCounters(CounterEnumType.EXPERIENCE) + p.getCounters(CounterEnumType.ENERGY) >= 1) || !p.canReceiveCounters(poison)) {
                     return (T)p;
                 }
             }

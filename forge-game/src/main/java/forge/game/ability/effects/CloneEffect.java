@@ -137,7 +137,7 @@ public class CloneEffect extends SpellAbilityEffect {
         }
 
         if (!pumpKeywords.isEmpty()) {
-            tgtCard.addChangedCardKeywords(pumpKeywords, Lists.newArrayList(), false, false, ts, 0);
+            tgtCard.addChangedCardKeywords(pumpKeywords, Lists.newArrayList(), false, ts, 0);
         }
 
         tgtCard.updateStateForView();
@@ -146,11 +146,6 @@ public class CloneEffect extends SpellAbilityEffect {
         if (host.equals(tgtCard) && !sa.hasParam("ImprintRememberedNoCleanup")) {
             tgtCard.clearImprintedCards();
             tgtCard.clearRemembered();
-        }
-
-        // check if clone is now an Aura that needs to be attached
-        if (tgtCard.isAura() && !tgtCard.isInZone(ZoneType.Battlefield)) {
-            AttachEffect.attachAuraOnIndirectEnterBattlefield(tgtCard);
         }
 
         if (sa.hasParam("Duration")) {

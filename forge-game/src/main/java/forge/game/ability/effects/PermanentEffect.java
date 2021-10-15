@@ -1,10 +1,15 @@
 package forge.game.ability.effects;
 
+import java.util.Map;
+
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardZoneTable;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -27,7 +32,14 @@ public class PermanentEffect extends SpellAbilityEffect {
 
         host.setController(sa.getActivatingPlayer(), 0);
 
-        final Card c = game.getAction().moveToPlay(host, sa);
+        CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
+        CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
+
+        Map<AbilityKey, Object> moveParams = Maps.newEnumMap(AbilityKey.class);
+        moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
+        moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
+
+        final Card c = game.getAction().moveToPlay(host, host.getController(), sa, moveParams);
         sa.setHostCard(c);
 
         // some extra for Dashing

@@ -230,7 +230,7 @@ public class ProtectAi extends SpellAbilityAi {
             return mandatory && protectMandatoryTarget(ai, sa, mandatory);
         }
 
-        while (sa.getTargets().size() < tgt.getMaxTargets(source, sa)) {
+        while (sa.canAddMoreTarget()) {
             Card t = null;
             // boolean goodt = false;
 
@@ -289,7 +289,7 @@ public class ProtectAi extends SpellAbilityAi {
         final List<Card> forced = CardLists.filterControlledBy(list, ai);
         final Card source = sa.getHostCard();
 
-        while (sa.getTargets().size() < tgt.getMaxTargets(source, sa)) {
+        while (sa.canAddMoreTarget()) {
             if (pref.isEmpty()) {
                 break;
             }
@@ -306,7 +306,7 @@ public class ProtectAi extends SpellAbilityAi {
             sa.getTargets().add(c);
         }
 
-        while (sa.getTargets().size() < tgt.getMaxTargets(source, sa)) {
+        while (sa.canAddMoreTarget()) {
             if (pref2.isEmpty()) {
                 break;
             }
@@ -350,7 +350,7 @@ public class ProtectAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        if (sa.getTargetRestrictions() == null) {
+        if (!sa.usesTargeting()) {
             if (mandatory) {
                 return true;
             }

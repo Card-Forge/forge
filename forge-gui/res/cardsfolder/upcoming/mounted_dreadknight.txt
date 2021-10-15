@@ -1,0 +1,9 @@
+Name:Mounted Dreadknight
+ManaCost:4 R
+Types:Creature Vampire Knight
+PT:5/4
+K:Trample
+K:etbCounter:P1P1:1:CheckSVar$ X:CARDNAME enters the battlefield with a +1/+1 counter on it if an opponent lost life this turn.
+SVar:X:Count$LifeOppsLostThisTurn
+DeckHas:Ability$Counters
+Oracle:Trample\nMounted Dreadknight enters the battlefield with a +1/+1 counter on it if an opponent lost life this turn.

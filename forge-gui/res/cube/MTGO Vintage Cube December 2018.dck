@@ -45,9 +45,9 @@ Name=MTGO Vintage Cube December 2018
 1 Porcelain Legionnaire|NPH
 1 Condemn|M11
 1 Enlightened Tutor|EMA
-1 Mana Tithe|PLC
+1 Mana Tithe|STX
 1 Path to Exile|2XM
-1 Swords to Plowshares|A25
+1 Swords to Plowshares|STX
 1 Disenchant|ZNR
 1 Unexpectedly Absent|EMA
 1 Balance|EMA
@@ -56,7 +56,7 @@ Name=MTGO Vintage Cube December 2018
 1 Spectral Procession|MM2
 1 Timely Reinforcements|M12
 1 Armageddon|A25
-1 Day of Judgment|M12
+1 Day of Judgment|STX
 1 Ravages of War|PTK
 1 Wrath of God|AKR
 1 Terminus|MM3
@@ -100,13 +100,13 @@ Name=MTGO Vintage Cube December 2018
 1 Torrential Gearhulk|MPS_KLD
 1 Inkwell Leviathan|2XM
 1 Ancestral Recall|VMA
-1 Brainstorm|2XM
+1 Brainstorm|STX
 1 High Tide|VMA
 1 Mystical Tutor|EMA
 1 Spell Pierce|XLN
 1 Blink of an Eye|DOM
 1 Brain Freeze|VMA
-1 Counterspell|A25
+1 Counterspell|MH2
 1 Daze|MPS_AKH
 1 Impulse|VIS
 1 Mana Drain|IMA
@@ -131,14 +131,14 @@ Name=MTGO Vintage Cube December 2018
 1 Preordain|M11
 1 Chart a Course|XLN
 1 Time Walk|VMA
-1 Compulsive Research|MM3
+1 Compulsive Research|STX
 1 Show and Tell|CN2
 1 Timetwister|VMA
 1 Tinker|ULG
 1 Bribery|8ED
-1 Mind's Desire|SCG
+1 Mind's Desire|STX
 1 Time Spiral|USG
-1 Upheaval|VMA
+1 Upheaval|MH2
 1 Treasure Cruise|UMA
 1 Search for Azcanta|XLN
 1 Control Magic|EMA
@@ -155,7 +155,7 @@ Name=MTGO Vintage Cube December 2018
 1 Pack Rat|RTR
 1 Scrapheap Scrounger|KLD
 1 Vampire Hexmage|2XM
-1 Bone Shredder|ULG
+1 Bone Shredder|MH2
 1 Hypnotic Specter|M10
 1 Ophiomancer|C13
 1 Vampire Nighthawk|MM3
@@ -173,7 +173,7 @@ Name=MTGO Vintage Cube December 2018
 1 Griselbrand|MM3
 1 Liliana of the Veil|UMA
 1 Liliana, Death's Majesty|AKR
-1 Dark Ritual|A25
+1 Dark Ritual|STX
 1 Entomb|UMA
 1 Fatal Push|2XM
 1 Vampiric Tutor|EMA
@@ -187,13 +187,13 @@ Name=MTGO Vintage Cube December 2018
 1 Hero's Downfall|THS
 1 Makeshift Mannequin|LRW
 1 Vraska's Contempt|XLN
-1 Duress|M21
+1 Duress|STX
 1 Imperial Seal|PTK
-1 Inquisition of Kozilek|MM3
+1 Inquisition of Kozilek|STX
 1 Reanimate|UMA
 1 Thoughtseize|AKR
 1 Collective Brutality|EMN
-1 Demonic Tutor|UMA
+1 Demonic Tutor|STX
 1 Exhume|USG
 1 Hymn to Tourach|EMA
 1 Night's Whisper|EMA
@@ -203,7 +203,7 @@ Name=MTGO Vintage Cube December 2018
 1 Yawgmoth's Will|USG
 1 Damnation|MPS_AKH
 1 Languish|ORI
-1 Tendrils of Agony|VMA
+1 Tendrils of Agony|STX
 1 Dark Petition|ORI
 1 Living Death|A25
 1 Unburial Rites|UMA
@@ -229,7 +229,7 @@ Name=MTGO Vintage Cube December 2018
 1 Runaway Steam-Kin|GRN
 1 Young Pyromancer|UMA
 1 Goblin Rabblemaster|M15
-1 Imperial Recruiter|2XM
+1 Imperial Recruiter|MH2
 1 Magus of the Moon|IMA
 1 Manic Vandal|M12
 1 Pia Nalaar|KLD
@@ -251,7 +251,7 @@ Name=MTGO Vintage Cube December 2018
 1 Koth of the Hammer|SOM
 1 Chandra, Flamecaller|OGW
 1 Burst Lightning|MM2
-1 Lightning Bolt|A25
+1 Lightning Bolt|STX
 1 Abrade|AKR
 1 Ancient Grudge|MM3
 1 Desperate Ritual|UMA
@@ -264,7 +264,7 @@ Name=MTGO Vintage Cube December 2018
 1 Through the Breach|UMA
 1 Fireblast|VMA
 1 Chain Lightning|MPS_AKH
-1 Faithless Looting|UMA
+1 Faithless Looting|STX
 1 Firebolt|MH1
 1 Flame Slash|CN2
 1 Mizzium Mortars|MM3
@@ -307,7 +307,7 @@ Name=MTGO Vintage Cube December 2018
 1 Ramunap Excavator|AKR
 1 Reclamation Sage|2XM
 1 Tireless Tracker|SOI
-1 Yavimaya Elder|VMA
+1 Yavimaya Elder|MH2
 1 Master of the Wild Hunt|A25
 1 Obstinate Baloth|IMA
 1 Oracle of Mul Daya|ZEN
@@ -332,15 +332,15 @@ Name=MTGO Vintage Cube December 2018
 1 Verdurous Gearhulk|MPS_KLD
 1 Nature's Claim|IMA
 1 Beast Within|CN2
-1 Channel|IMA
-1 Regrowth|MH1
+1 Channel|STX
+1 Regrowth|STX
 1 Kodama's Reach|UMA
 1 Search for Tomorrow|IMA
 1 Eureka|VMA
-1 Harmonize|MM3
-1 Natural Order|EMA
+1 Harmonize|STX
+1 Natural Order|STX
 1 Plow Under|8ED
-1 Primal Command|MM3
+1 Primal Command|STX
 1 Green Sun's Zenith|EMA
 1 Tooth and Nail|MMA
 1 Genesis Wave|IMA
@@ -394,7 +394,7 @@ Name=MTGO Vintage Cube December 2018
 1 Knight of Autumn|GRN
 1 Knight of the Reliquary|IMA
 1 Trostani Discordant|GRN
-1 Mirari's Wake|CNS
+1 Mirari's Wake|MH2
 1 Razorverge Thicket|SOM
 1 Savannah|VMA
 1 Stirring Wildwood|UMA
@@ -402,10 +402,10 @@ Name=MTGO Vintage Cube December 2018
 1 Windswept Heath|EXP
 1 Tidehollow Sculler|MMA
 1 Anguished Unmaking|SOI
-1 Vindicate|A25
+1 Vindicate|MH2
 1 Concealed Courtyard|KLD
 1 Godless Shrine|RNA
-1 Marsh Flats|MM3
+1 Marsh Flats|MH2
 1 Scrubland|VMA
 1 Shambling Vent|BFZ
 1 Vraska, Relic Seeker|XLN
@@ -417,23 +417,23 @@ Name=MTGO Vintage Cube December 2018
 1 Blooming Marsh|KLD
 1 Hissing Quagmire|OGW
 1 Overgrown Tomb|GRN
-1 Verdant Catacombs|MM3
+1 Verdant Catacombs|MH2
 1 Edric, Spymaster of Trest|VMA
 1 Trygon Predator|EMA
 1 Mystic Snake|A25
 1 Kiora, the Crashing Wave|BNG
-1 Shardless Agent|EMA
+1 Shardless Agent|MH2
 1 Botanical Sanctum|KLD
 1 Breeding Pool|RNA
 1 Lumbering Falls|BFZ
-1 Misty Rainforest|MM3
+1 Misty Rainforest|MH2
 1 Tropical Island|VMA
 1 Goblin Electromancer|GRN
 1 Dack Fayden|EMA
 1 Expansion // Explosion|GRN
 1 Izzet Charm|2XM
 1 Thousand-Year Storm|GRN
-1 Scalding Tarn|MM3
+1 Scalding Tarn|MH2
 1 Spirebluff Canal|KLD
 1 Steam Vents|GRN
 1 Volcanic Island|VMA
@@ -442,8 +442,8 @@ Name=MTGO Vintage Cube December 2018
 1 Aurelia, Exemplar of Justice|GRN
 1 Ajani Vengeant|ALA
 1 Nahiri, the Harbinger|SOI
-1 Lightning Helix|IMA
-1 Arid Mesa|MM3
+1 Lightning Helix|STX
+1 Arid Mesa|MH2
 1 Inspiring Vantage|KLD
 1 Needle Spires|OGW
 1 Plateau|VMA
@@ -534,7 +534,7 @@ Name=MTGO Vintage Cube December 2018
 1 Library of Alexandria|VMA
 1 Mana Confluence|EXP
 1 Maze of Ith|2XM
-1 Mishra's Factory|2XM
+1 Mishra's Factory|MH2
 1 Mishra's Workshop|ATQ
 1 Mutavault|M14
 1 Nykthos, Shrine to Nyx|THS

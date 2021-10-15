@@ -211,6 +211,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 localizer.getMessage("cbDetailedPaymentDesc"),
                 localizer.getMessage("nlDetailedPaymentDesc")),
                 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_GRAY_INACTIVE_TEXT,
+                localizer.getMessage("cbGrayText"),
+                localizer.getMessage("nlGrayText")),
+                1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_STORM_COUNT_IN_PROMPT,
                 localizer.getMessage("cbShowStormCount"),
                 localizer.getMessage("nlShowStormCount")),
@@ -257,6 +261,16 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 Forge.altZoneTabs = FModel.getPreferences().getPrefBoolean(FPref.UI_ALT_PLAYERZONETABS);
                 if (MatchController.instance != null)
                     MatchController.instance.resetPlayerPanels();
+            }
+        },1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_ANIMATED_CARD_TAPUNTAP,
+                localizer.getMessage("lblAnimatedCardTapUntap"),
+                localizer.getMessage("nlAnimatedCardTapUntap")){
+            @Override
+            public void select() {
+                super.select();
+                //update
+                Forge.animatedCardTapUntap = FModel.getPreferences().getPrefBoolean(FPref.UI_ANIMATED_CARD_TAPUNTAP);
             }
         },1);
 
@@ -583,6 +597,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.UI_OVERLAY_ABILITY_ICONS,
                 localizer.getMessage("lblShowAbilityIconsOverlays"),
                 localizer.getMessage("nlShowAbilityIconsOverlays")),
+                5);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_USE_LASER_ARROWS,
+                        localizer.getMessage("lblUseLaserArrows"),
+                        localizer.getMessage("nlUseLaserArrows")),
                 5);
         //Vibration Options
         lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_LIFE_LOSS,

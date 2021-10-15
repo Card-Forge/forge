@@ -351,16 +351,14 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
             }
 
             int totalCMC = 0;
-            for(Card c : revealedCards) {
+            for (Card c : revealedCards) {
                 totalCMC += c.getCMC();
             }
 
             int bestGuessDamage = totalCMC * 3 / revealedCards.size();
             return life <= bestGuessDamage ? spells.get(0) : spells.get(1);
         }  else if ("SoulEcho".equals(logic)) {
-            Player target = sa.getTargetingPlayer();
-            int life = target.getLife();
-            return life < 10 ? spells.get(0) : Aggregates.random(spells);
+            return sa.getHostCard().getController().getLife() < 10 ? spells.get(0) : Aggregates.random(spells);
         } else if ("Pump".equals(logic) || "BestOption".equals(logic)) {
             List<SpellAbility> filtered = Lists.newArrayList();
             // filter first for the spells which can be done

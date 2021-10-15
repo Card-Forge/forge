@@ -1,7 +1,12 @@
 package forge.game.ability.effects;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import forge.game.player.DelayedReveal;
+import forge.game.player.PlayerView;
+import forge.util.CardTranslation;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.card.CardType;
@@ -89,7 +94,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                         }
                     }
                 }
-            } else if (sa.hasParam("WithTotalPower")){
+            } else if (sa.hasParam("WithTotalPower")) {
                 final int totP = AbilityUtils.calculateAmount(host, sa.getParam("WithTotalPower"), sa);
                 CardCollection negativeCreats = CardLists.filterLEPower(p.getCreaturesInPlay(), -1);
                 int negativeNum = Aggregates.sum(negativeCreats, CardPredicates.Accessors.fnGetNetPower);
@@ -97,9 +102,9 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                 CardCollection chosenPool = new CardCollection();
                 int chosenP = 0;
                 while (!creature.isEmpty()) {
-                    Card c = p.getController().chooseSingleEntityForEffect(creature, sa, 
+                    Card c = p.getController().chooseSingleEntityForEffect(creature, sa,
                             Localizer.getInstance().getMessage("lblSelectCreatureWithTotalPowerLessOrEqualTo", (totP - chosenP - negativeNum))
-                            + "\r\n(" + Localizer.getInstance().getMessage("lblSelected") + ":" + chosenPool + ")\r\n(" + Localizer.getInstance().getMessage("lblTotalPowerNum", chosenP) + ")", chosenP <= totP, null);
+                                    + "\r\n(" + Localizer.getInstance().getMessage("lblSelected") + ":" + chosenPool + ")\r\n(" + Localizer.getInstance().getMessage("lblTotalPowerNum", chosenP) + ")", chosenP <= totP, null);
                     if (c == null) {
                         if (p.getController().confirmAction(sa, PlayerActionConfirmMode.OptionalChoose, Localizer.getInstance().getMessage("lblCancelChooseConfirm"))) {
                             break;
@@ -114,18 +119,77 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                     }
                 }
                 chosen.addAll(chosenPool);
+            } else if (sa.hasParam("WithDifferentPowers")) {
+                String restrict = sa.getParam("Choices");
+                CardCollection chosenPool = new CardCollection();
+                String title = Localizer.getInstance().getMessage("lblChooseCreature");
+                Card choice = null;
+                while (!choices.isEmpty() && chosenPool.size() < validAmount) {
+                    boolean optional = chosenPool.size() >= minAmount;
+                    CardCollection creature = (CardCollection) choices;
+                    if (!chosenPool.isEmpty()) {
+                        title = Localizer.getInstance().getMessage("lblChooseCreatureWithDiffPower");
+                    }
+                    choice = p.getController().chooseSingleEntityForEffect(creature, sa, title, optional, null);
+                    if (choice == null) {
+                        break;
+                    }
+                    chosenPool.add(choice);
+                    restrict = restrict + (restrict.contains(".") ? "+powerNE" : ".powerNE") + choice.getNetPower();
+                    choices = CardLists.getValidCards(choices, restrict, activator, host, sa);
+                }
+                if (choice != null) {
+                    chosenPool.add(choice);
+                }
+                chosen.addAll(chosenPool);
+            } else if (sa.hasParam("EachDifferentPower")) {
+                List<Integer> powers = new ArrayList<>();
+                CardCollection chosenPool = new CardCollection();
+                for (Card c : choices) {
+                    int pow = c.getNetPower();
+                    if (!powers.contains(pow)) {
+                        powers.add(c.getNetPower());
+                    }
+                }
+                Collections.sort(powers);
+                String re = sa.getParam("Choices");
+                re = re + (re.contains(".") ? "+powerEQ" : ".powerEQ");
+                for (int i : powers) {
+                    String restrict = re + i;
+                    CardCollection valids = CardLists.getValidCards(choices, restrict, activator, host, sa);
+                    Card choice = p.getController().chooseSingleEntityForEffect(valids, sa,
+                            Localizer.getInstance().getMessage("lblChooseCreatureWithXPower", i), false, null);
+                    chosenPool.add(choice);
+                }
+                chosen.addAll(chosenPool);
             } else if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (sa.hasParam("AtRandom") && !choices.isEmpty()) {
                     Aggregates.random(choices, validAmount, chosen);
                 } else {
                     String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseaCard") + " ";
                     if (sa.hasParam ("ChoiceTitleAppendDefined")) {
-                        String defined = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("ChoiceTitleAppendDefined"), sa).toString();
-                        final StringBuilder sb = new StringBuilder();
-                        sb.append(title).append(" ").append(defined);
-                        title = sb.toString();
+                        String defined = AbilityUtils.getDefinedPlayers(host, sa.getParam("ChoiceTitleAppendDefined"), sa).toString();
+                        title = title + " " + defined;
                     }
-                    chosen.addAll(p.getController().chooseCardsForEffect(choices, sa, title, minAmount, validAmount, !sa.hasParam("Mandatory"), null));
+                    if (sa.hasParam("QuasiLibrarySearch")) {
+                        final Player searched = AbilityUtils.getDefinedPlayers(host,
+                                sa.getParam("QuasiLibrarySearch"), sa).get(0);
+                        final int fetchNum = Math.min(searched.getCardsIn(ZoneType.Library).size(), 4);
+                        CardCollectionView shown = !p.hasKeyword("LimitSearchLibrary")
+                                ? searched.getCardsIn(ZoneType.Library) : searched.getCardsIn(ZoneType.Library, fetchNum);
+                        DelayedReveal delayedReveal = new DelayedReveal(shown, ZoneType.Library, PlayerView.get(searched),
+                                CardTranslation.getTranslatedName(host.getName()) + " - " +
+                                        Localizer.getInstance().getMessage("lblLookingCardIn") + " ");
+                        Card choice = p.getController().chooseSingleEntityForEffect(choices, delayedReveal, sa, title,
+                                !sa.hasParam("Mandatory"), p, null);
+                        if (choice == null) {
+                            return;
+                        }
+                        chosen.add(choice);
+                    } else {
+                        chosen.addAll(p.getController().chooseCardsForEffect(choices, sa, title, minAmount, validAmount,
+                                !sa.hasParam("Mandatory"), null));
+                    }
                 }
             }
             if (sa.hasParam("Reveal")) {

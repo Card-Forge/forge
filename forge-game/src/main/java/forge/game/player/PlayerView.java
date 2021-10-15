@@ -214,6 +214,28 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.IsExtraTurn, val);
     }
 
+    public boolean getHasLost() {
+        if (get(TrackableProperty.HasLost) == null)
+            return false;
+        return get(TrackableProperty.HasLost);
+    }
+
+    public void setHasLost(final boolean val) {
+        set(TrackableProperty.HasLost, val);
+    }
+
+    public int getAvatarLifeDifference() {
+        return (int)get(TrackableProperty.AvatarLifeDifference);
+    }
+    public boolean wasAvatarLifeChanged() {
+        if ((int)get(TrackableProperty.AvatarLifeDifference) == 0)
+            return false;
+        return (int)get(TrackableProperty.AvatarLifeDifference) != 0;
+    }
+    public void setAvatarLifeDifference(final int val) {
+        set(TrackableProperty.AvatarLifeDifference, val);
+    }
+
     public int getExtraTurnCount() {
         return get(TrackableProperty.ExtraTurnCount);
     }
@@ -461,7 +483,7 @@ public class PlayerView extends GameEntityView {
         if (cards == null)
             return 0;
 
-        for(CardView c : cards) {
+        for (CardView c : cards) {
             types.addAll((Collection<? extends CardType.CoreType>) c.getCurrentState().getType().getCoreTypes());
         }
 

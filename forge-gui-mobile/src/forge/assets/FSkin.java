@@ -30,6 +30,7 @@ public class FSkin {
     private static final Map<FSkinProp, FSkinImage> images = new HashMap<>(512);
     private static final Map<Integer, TextureRegion> avatars = new HashMap<>(150);
     private static final Map<Integer, TextureRegion> sleeves = new HashMap<>(64);
+    private static final Map<Integer, TextureRegion> cracks = new HashMap<>(16);
     private static final Map<Integer, TextureRegion> borders = new HashMap<>();
     private static final Map<Integer, TextureRegion> deckbox = new HashMap<>();
 
@@ -39,6 +40,7 @@ public class FSkin {
     private static boolean loaded = false;
     public static Texture hdLogo = null;
     public static Texture overlay_alpha = null;
+    public static Texture splatter = null;
 
     public static void changeSkin(final String skinName) {
         final ForgePreferences prefs = FModel.getPreferences();
@@ -142,6 +144,14 @@ public class FSkin {
         } else {
             overlay_alpha = null;
         }
+        final FileHandle splatter_overlay = getDefaultSkinFile("splatter.png");
+        if (splatter_overlay.exists()) {
+            Texture txSplatter = new Texture(splatter_overlay, true);
+            txSplatter.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
+            splatter = txSplatter;
+        } else {
+            splatter = null;
+        }
 
         if (splashScreen != null) {
             final FileHandle f = getSkinFile("bg_splash.png");
@@ -227,6 +237,7 @@ public class FSkin {
         final FileHandle f11 = getSkinFile(ForgeConstants.SPRITE_BUTTONS_FILE);
         final FileHandle f12 = getSkinFile(ForgeConstants.SPRITE_START_FILE);
         final FileHandle f13 = getDefaultSkinFile(ForgeConstants.SPRITE_DECKBOX_FILE);
+        final FileHandle f17 = getDefaultSkinFile(ForgeConstants.SPRITE_CRACKS_FILE);
 
         /*TODO Themeable
         final FileHandle f14 = getDefaultSkinFile(ForgeConstants.SPRITE_SETLOGO_FILE);
@@ -304,8 +315,8 @@ public class FSkin {
             int counter = 0;
             int scount = 0;
             Color pxTest;
-            Pixmap pxDefaultAvatars, pxPreferredAvatars, pxDefaultSleeves;
-            Texture txDefaultAvatars, txPreferredAvatars, txDefaultSleeves;
+            Pixmap pxDefaultAvatars, pxPreferredAvatars, pxDefaultSleeves, pxCracks;
+            Texture txDefaultAvatars, txPreferredAvatars, txDefaultSleeves, txCracks;
 
             pxDefaultAvatars = new Pixmap(f4);
             pxDefaultSleeves = new Pixmap(f8);
@@ -390,6 +401,21 @@ public class FSkin {
                     FSkin.sleeves.put(scount++, new TextureRegion(txDefaultSleeves, i, j, 360, 500));
                 }
             }
+            //cracks
+            pxCracks = new Pixmap(f17);
+            txCracks = new Texture(f17, textureFilter);
+            int crackCount = 0;
+            if (textureFilter)
+                txCracks.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
+
+            for (int j = 0; j < 4; j++) {
+                int x = j * 200;
+                for(int i = 0; i < 4; i++) {
+                    int y = i * 279;
+                    FSkin.cracks.put(crackCount++, new TextureRegion(txCracks, x, y, 200, 279));
+                }
+            }
+
             //borders
             Texture bordersBW = new Texture(f10);
             FSkin.borders.put(0, new TextureRegion(bordersBW, 2, 2, 672, 936));
@@ -408,6 +434,7 @@ public class FSkin {
             preferredIcons.dispose();
             pxDefaultAvatars.dispose();
             pxDefaultSleeves.dispose();
+            pxCracks.dispose();
         }
         catch (final Exception e) {
             System.err.println("FSkin$loadFull: Missing a sprite (default icons, "
@@ -502,6 +529,10 @@ public class FSkin {
 
     public static Map<Integer, TextureRegion> getSleeves() {
         return sleeves;
+    }
+
+    public static Map<Integer, TextureRegion> getCracks() {
+        return cracks;
     }
 
     public static Map<Integer, TextureRegion> getBorders() {

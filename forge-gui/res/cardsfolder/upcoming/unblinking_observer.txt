@@ -1,0 +1,8 @@
+Name:Unblinking Observer
+ManaCost:1 U
+Types:Creature Homunculus
+PT:2/1
+A:AB$ Mana | Cost$ T | Produced$ U | RestrictValid$ Disturb,Instant,Sorcery | SpellDescription$ Add {U}. Spend this mana only to pay a disturb cost or cast an instant or sorcery spell.
+DeckNeeds:Type$Instant|Sorcery
+DeckHints:Keyword$Disturb
+Oracle:{T}: Add {U}. Spend this mana only to pay a disturb cost or cast an instant or sorcery spell.

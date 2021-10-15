@@ -17,23 +17,12 @@
  */
 package forge.game.card;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-
 import forge.ImageKeys;
 import forge.StaticData;
-import forge.card.CardRules;
-import forge.card.CardSplitType;
-import forge.card.CardStateName;
-import forge.card.CardType;
-import forge.card.ICardFace;
-import forge.card.MagicColor;
+import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.game.CardTraitBase;
 import forge.game.Game;
@@ -41,12 +30,7 @@ import forge.game.ability.AbilityFactory;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementHandler;
-import forge.game.spellability.AbilitySub;
-import forge.game.spellability.OptionalCost;
-import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityCondition;
-import forge.game.spellability.SpellAbilityRestriction;
-import forge.game.spellability.SpellPermanent;
+import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
@@ -55,6 +39,11 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.CardTranslation;
 import forge.util.TextUtil;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * <p>
@@ -141,7 +130,7 @@ public class CardFactory {
         }
 
         // change the color of the copy (eg: Fork)
-        if (null != sourceSA && sourceSA.hasParam("CopyIsColor")) {
+        if (sourceSA.hasParam("CopyIsColor")) {
             String tmp = "";
             final String newColor = sourceSA.getParam("CopyIsColor");
             if (newColor.equals("ChosenColor")) {
@@ -151,7 +140,7 @@ public class CardFactory {
             }
             final String finalColors = tmp;
 
-            c.addColor(finalColors, !sourceSA.hasParam("OverwriteColors"), c.getTimestamp(), false);
+            c.addColor(finalColors, !sourceSA.hasParam("OverwriteColors"), c.getTimestamp(), 0, false);
         }
 
         c.clearControllers();
@@ -281,7 +270,7 @@ public class CardFactory {
                 original.addNonManaAbilities(card.getCurrentState().getNonManaAbilities());
                 original.addIntrinsicKeywords(card.getCurrentState().getIntrinsicKeywords()); // Copy 'Fuse' to original side
                 original.getSVars().putAll(card.getCurrentState().getSVars()); // Unfortunately need to copy these to (Effect looks for sVars on execute)
-            } else if (state != CardStateName.Original){
+            } else if (state != CardStateName.Original) {
             	CardFactoryUtil.setupKeywordedAbilities(card);
             }
             if (state == CardStateName.Adventure) {
@@ -601,6 +590,11 @@ public class CardFactory {
             keywords.addAll(Arrays.asList(sa.getParam("AddKeywords").split(" & ")));
         }
 
+        if (sa.hasParam("AddColors")) {
+            shortColors = CardUtil.getShortColorsString(Arrays.asList(sa.getParam("AddColors")
+                    .split(" & ")));
+        }
+
         if (sa.hasParam("RemoveKeywords")) {
             removeKeywords.addAll(Arrays.asList(sa.getParam("RemoveKeywords").split(" & ")));
         }
@@ -655,6 +649,10 @@ public class CardFactory {
                 state.setName(originalState.getName());
             } else if (newName != null) {
                 state.setName(newName);
+            }
+
+            if (sa.hasParam("AddColors")) {
+                state.addColor(shortColors);
             }
 
             if (sa.hasParam("SetColor")) {

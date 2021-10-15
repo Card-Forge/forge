@@ -56,7 +56,8 @@ public class CardManager extends ItemManager<PaperCard> {
 
     @Override
     protected Iterable<Entry<PaperCard, Integer>> getUnique(Iterable<Entry<PaperCard, Integer>> items) {
-        ListMultimap<String, Entry<PaperCard, Integer>> entriesByName = Multimaps.newListMultimap(new TreeMap<>(String.CASE_INSENSITIVE_ORDER), CollectionSuppliers.arrayLists());
+        ListMultimap<String, Entry<PaperCard, Integer>> entriesByName = Multimaps.newListMultimap(
+                new TreeMap<>(String.CASE_INSENSITIVE_ORDER), CollectionSuppliers.arrayLists());
         for (Entry<PaperCard, Integer> item : items) {
             final String cardName = item.getKey().getName();
             entriesByName.put(cardName, item);
@@ -75,6 +76,7 @@ public class CardManager extends ItemManager<PaperCard> {
             }
             if (entriesByEdition.size() == 0)
                 continue;  // skip card
+
             // Try to retain only those editions accepted by the current Card Art Preference Policy
             List<CardEdition> acceptedEditions = Lists.newArrayList(Iterables.filter(entriesByEdition.keySet(), new Predicate<CardEdition>() {
                 @Override
@@ -82,65 +84,48 @@ public class CardManager extends ItemManager<PaperCard> {
                     return StaticData.instance().getCardArtPreference().accept(ed);
                 }
             }));
+
             // If policy too strict, fall back to getting all editions.
             if (acceptedEditions.size() == 0)
                 // Policy is too strict for current PaperCard in Entry. Remove any filter
                 acceptedEditions.addAll(entriesByEdition.keySet());
-            List<Entry<PaperCard, Integer>> entriesToAdd = getEntriesToAdd(entriesByEdition, acceptedEditions);
-            for (Entry<PaperCard, Integer> entry : entriesToAdd)
-                cardsMap.put(entry.getKey(), entry.getValue());
+
+            Entry<PaperCard, Integer> cardEntry = getCardEntryToAdd(entriesByEdition, acceptedEditions);
+            if (cardEntry != null)
+                cardsMap.put(cardEntry.getKey(), cardEntry.getValue());
         }
         return cardsMap.entrySet();
     }
 
-    /*
-    Get all the Entries to Add, also accounting for missing images.
-    If in the end, not all entries found have image, the original ones are used to fill in the total number
-    of entries to return.
-     */
-    private List<Entry<PaperCard, Integer>> getEntriesToAdd(ListMultimap<CardEdition, Entry<PaperCard, Integer>> entriesByEdition,
+    // Select the Card Art Entry to add, based on current Card Art Preference Order.
+    // This method will prefer the entry currently having an image. If that's not the case,
+    private Entry<PaperCard, Integer> getCardEntryToAdd(ListMultimap<CardEdition, Entry<PaperCard, Integer>> entriesByEdition,
                                                             List<CardEdition> acceptedEditions) {
         // Use standard sort + index, for better performance!
         Collections.sort(acceptedEditions);
         if (StaticData.instance().cardArtPreferenceIsLatest())
             Collections.reverse(acceptedEditions);
-        CardEdition uniqueEdition = acceptedEditions.get(0);
-
-        // These are now the entries to add to Cards Map
-        List<Entry<PaperCard, Integer>> uniqueEntries = entriesByEdition.get(uniqueEdition);
-
-        // The last bit to check is whether all of them have a corresponding image. Otherwise, try to escalate
-        // others.
-        int entriesToReturn = uniqueEntries.size();
-        List<Entry<PaperCard, Integer>> entriesToAdd = new ArrayList<>();
-        for (Entry<PaperCard, Integer> entry : uniqueEntries) {
-            if (!entry.getKey().hasImage())
-                continue;  // Skip entries with no image
-            entriesToAdd.add(entry);
-        }
-
-        if (entriesToAdd.size() < entriesToReturn) {
-            // some are missing, keep exploring other editions
-            for (int editionIndex = 1; editionIndex < acceptedEditions.size(); editionIndex++) {
-                CardEdition edition = acceptedEditions.get(editionIndex);
-                for (Entry<PaperCard, Integer> entry : entriesByEdition.get(edition)) {
-                    if (!entry.getKey().hasImage())
-                        continue;  // Skip entries with no image
-                    entriesToAdd.add(entry);
-                    if (entriesToAdd.size() == entriesToReturn)
-                        break;
-                }
-                if (entriesToAdd.size() == entriesToReturn)
-                    break;
+        Iterator<CardEdition> editionIterator = acceptedEditions.iterator();
+        Entry<PaperCard, Integer> candidateEntry = null;
+        Entry<PaperCard, Integer> firstCandidateEntryFound = null;
+        while (editionIterator.hasNext() && candidateEntry == null){
+            CardEdition cardEdition = editionIterator.next();
+            // These are now the entries to add to Cards Map
+            List<Entry<PaperCard, Integer>> cardEntries = entriesByEdition.get(cardEdition);
+            Iterator<Entry<PaperCard, Integer>> entriesIterator = cardEntries.iterator();
+            candidateEntry = entriesIterator.hasNext() ? entriesIterator.next() : null;
+            if (candidateEntry != null && firstCandidateEntryFound == null)
+                firstCandidateEntryFound = candidateEntry;  // save reference to the first candidate entry found!
+            while ((candidateEntry == null || !candidateEntry.getKey().hasImage()) && entriesIterator.hasNext()) {
+                candidateEntry = entriesIterator.next();
+                if (firstCandidateEntryFound == null)
+                    firstCandidateEntryFound = candidateEntry;
             }
-            // if at this stage, there are still entries to add, fill missing ones from the original list
-            for (Entry<PaperCard, Integer> entry : uniqueEntries) {
-                entriesToAdd.add(entry);
-                if (entriesToAdd.size() == entriesToReturn)
-                    break;
-            }
+
+            if (candidateEntry != null && !candidateEntry.getKey().hasImage())
+                candidateEntry = null;  // resetting for next edition
         }
-        return entriesToAdd;
+        return candidateEntry != null ? candidateEntry : firstCandidateEntryFound;
     }
 
     /* Static overrides shared with SpellShopManager*/

@@ -67,7 +67,7 @@ public class PumpEffect extends SpellAbilityEffect {
         }
 
         if (!kws.isEmpty()) {
-            gameCard.addChangedCardKeywords(kws, Lists.newArrayList(), false, false, timestamp, 0);
+            gameCard.addChangedCardKeywords(kws, Lists.newArrayList(), false, timestamp, 0);
         }
         if (!hiddenKws.isEmpty()) {
             gameCard.addHiddenExtrinsicKeywords(timestamp, 0, hiddenKws);
@@ -273,6 +273,9 @@ public class PumpEffect extends SpellAbilityEffect {
                 PlayerCollection players = AbilityUtils.getDefinedPlayers(host, defined, sa);
                 if (players.isEmpty()) return;
                 replaced = "PlayerUID_" + players.get(0).getId();
+            } else if (defined.equals("ChosenColor")) {
+                String color = host.getChosenColor();
+                replaced = color.substring(0, 1).toUpperCase() + color.substring(1);
             }
             for (int i = 0; i < keywords.size(); i++) {
                 keywords.set(i, TextUtil.fastReplace(keywords.get(i), defined, replaced));

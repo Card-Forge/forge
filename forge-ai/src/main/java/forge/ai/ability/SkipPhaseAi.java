@@ -27,6 +27,9 @@ public class SkipPhaseAi extends SpellAbilityAi {
             final Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
             sa.resetTargets();
             if (sa.canTarget(opp)) {
+                if (!mandatory) {
+                    // TODO check wouldLoseLife + some Effect with Duration isn't already active
+                }
                 sa.getTargets().add(opp);
             }
             else if (mandatory && sa.canTarget(ai)) {

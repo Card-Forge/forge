@@ -1,12 +1,8 @@
 Name:Sandals of Abdallah
 ManaCost:4
 Types:Artifact
-A:AB$ Pump | Cost$ 2 T | KW$ Islandwalk | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ AbdallahsSandalsEffect | SpellDescription$ Target creature gains islandwalk until end of turn. When that creature dies this turn, destroy CARDNAME. (A creature with islandwalk can't be blocked as long as defending player controls an Island.)
-SVar:AbdallahsSandalsEffect:DB$ Effect | Name$ Sandals of Abdallah Effect | Triggers$ SandalWearerDied | RememberObjects$ Targeted | ImprintCards$ Self
-SVar:SandalWearerDied:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Battlefield | Destination$ Graveyard | Execute$ SandalsDestroyed | TriggerDescription$ When the targeted creature dies this turn, destroy Sandals of Abdallah.
-SVar:SandalsDestroyed:DB$ Destroy | Defined$ Imprinted | SubAbility$ ExileEffect
-SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+A:AB$ Pump | Cost$ 2 T | KW$ Islandwalk | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBDelayedTrigger | SpellDescription$ Target creature gains islandwalk until end of turn. When that creature dies this turn, destroy CARDNAME. (A creature with islandwalk can't be blocked as long as defending player controls an Island.)
+SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ ChangesZone | RememberObjects$ Targeted | ValidCard$ Card.IsTriggerRemembered | Origin$ Battlefield | Destination$ Graveyard | ThisTurn$ True | Execute$ TrigDestroy | TriggerDescription$ When that creature dies this turn, destroy CARDNAME.
+SVar:TrigDestroy:DB$ Destroy | Defined$ Self
 AI:RemoveDeck:Random
-AI:RemoveDeck:All
-SVar:Picture:http://www.wizards.com/global/images/magic/general/sandals_of_abdallah.jpg
 Oracle:{2}, {T}: Target creature gains islandwalk until end of turn. When that creature dies this turn, destroy Sandals of Abdallah. (A creature with islandwalk can't be blocked as long as defending player controls an Island.)

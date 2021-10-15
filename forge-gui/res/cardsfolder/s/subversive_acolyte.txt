@@ -1,14 +1,14 @@
 Name:Subversive Acolyte
-ManaCost:B B
+ManaCost:1 B
 Types:Creature Human
-PT:2/2
+PT:2/3
 A:AB$ Charm | Cost$ 2 PayLife<2> | Choices$ Cleric,Phyrexian | GameActivationLimit$ 1
-SVar:Cleric:DB$ Animate | Defined$ Self | Types$ Cleric | Duration$ Permanent | SubAbility$ DBPumpCleric | StackDescription$ SpellDescription | SpellDescription$ CARDNAME becomes a Human Cleric. It gets +1/+2 and gains lifelink.
-SVar:DBPumpCleric:DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ +2 | KW$ Lifelink | Duration$ Permanent | StackDescription$ None
-SVar:Phyrexian:DB$ Animate | Defined$ Self | Types$ Phyrexian | Triggers$ DamageSac | RemoveTypes$ Human | Duration$ Permanent | SubAbility$ DBPumpPhyrexian | SpellDescription$ CARDNAME becomes a Phyrexian. It gets +3/+3 and gains trample and "Whenever this creature is dealt damage, sacrifice that many permanents."
-SVar:DBPumpPhyrexian:DB$ Pump | Defined$ Self | NumAtt$ +3 | NumDef$ +3 | KW$ Trample | Duration$ Permanent | StackDescription$ None
+SVar:Cleric:DB$ Animate | Defined$ Self | Types$ Cleric | Duration$ Permanent | SubAbility$ DBPumpCleric | StackDescription$ SpellDescription | SpellDescription$ CARDNAME becomes a Human Cleric. It gets +1/+1 and gains lifelink.
+SVar:DBPumpCleric:DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | KW$ Lifelink | Duration$ Permanent | StackDescription$ None
+SVar:Phyrexian:DB$ Animate | Defined$ Self | Types$ Phyrexian | Triggers$ DamageSac | RemoveTypes$ Human | Duration$ Permanent | SubAbility$ DBPumpPhyrexian | SpellDescription$ CARDNAME becomes a Phyrexian. It gets +3/+2 and gains trample and "Whenever this creature is dealt damage, sacrifice that many permanents."
+SVar:DBPumpPhyrexian:DB$ Pump | Defined$ Self | NumAtt$ +3 | NumDef$ +2 | KW$ Trample | Duration$ Permanent | StackDescription$ None
 SVar:DamageSac:Mode$ DamageDoneOnce | ValidTarget$ Card.Self | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature is dealt damage, sacrifice that many permanents.
 SVar:TrigSac:DB$ Sacrifice | Amount$ X | SacValid$ Permanent
 SVar:X:TriggerCount$DamageAmount
 DeckHas:Ability$LifeGain & Ability$Sacrifice & Type$Cleric & Type$Phyrexian
-Oracle:{2}, Pay 2 life: Choose one. Activate only once.\n• Subversive Acolyte becomes a Human Cleric. It gets +1/+2 and gains lifelink.\n•Subversive Acolyte becomes a Phyrexian. It gets +3/+3 and gains trample and "Whenever this creature is dealt damage, sacrifice that many permanents."
+Oracle:{2}, Pay 2 life: Choose one. Activate only once.\n• Subversive Acolyte becomes a Human Cleric. It gets +1/+1 and gains lifelink.\n•Subversive Acolyte becomes a Phyrexian. It gets +3/+2 and gains trample and "Whenever this creature is dealt damage, sacrifice that many permanents."

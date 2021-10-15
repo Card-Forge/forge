@@ -38,7 +38,7 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
     private static final float GAP_Y_FACTOR = 0.02f;
 
     private final FButton btnContinue, btnRestart, btnQuit;
-    private final FLabel lblTitle, lblLog, lblStats, btnCopyLog, btnMinimize;
+    private final FLabel lblTitle, lblLog, lblStats, btnCopyLog, btnShowBattlefield;
     private final FTextArea txtLog;
     private final OutcomesPanel pnlOutcomes;
     private final GameView game;
@@ -109,14 +109,14 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
         });
         txtLog.setFont(FSkinFont.get(12));
 
-        btnCopyLog = add(new FLabel.ButtonBuilder().text(localizer.getMessage("btnCopyToClipboard")).command(new FEventHandler() {
+        btnCopyLog = add(new FLabel.ButtonBuilder().text(localizer.getMessage("btnCopyToClipboard")).selectable().command(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 Forge.getClipboard().setContents(txtLog.getText());
             }
         }).build());
 
-        btnMinimize = add(new FLabel.ButtonBuilder().text(localizer.getMessage("lblMinimize")).font(FSkinFont.get(12)).command(new FEventHandler() {
+        btnShowBattlefield = add(new FLabel.ButtonBuilder().text(localizer.getMessage("lblShowBattlefield")).font(FSkinFont.get(12)).selectable().command(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 hide();
@@ -208,7 +208,7 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
         float y2 = height - dy - h;
         btnCopyLog.setBounds(width / 4, y2, width / 2, h);
         txtLog.setBounds(x, y, w, y2 - y - dy);
-        btnMinimize.setBounds(width / 4,0,width / 2, h);
+        btnShowBattlefield.setBounds(width / 4,0,width / 2, h);
     }
 
     private static class OutcomesPanel extends FContainer {

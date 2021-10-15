@@ -1,0 +1,9 @@
+Name:Harvesttide Sentry
+ManaCost:1 G
+Types:Creature Human Warrior
+PT:3/1
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE3 | Execute$ TrigEffect | TriggerDescription$ Coven — At the beginning of combat on your turn, if you control three or more creatures with different powers, CARDNAME can't be blocked by creatures with power 2 or less this turn.
+SVar:TrigEffect:DB$ Effect | Name$ Harvesttide Sentry Effect | StaticAbilities$ KWPump
+SVar:KWPump:Mode$ CantBlockBy | ValidAttacker$ Creature.EffectSource | ValidBlocker$ Creature.powerLE2 | EffectZone$ Command
+SVar:X:Count$DifferentPower_Creature.YouCtrl
+Oracle:Coven — At the beginning of combat on your turn, if you control three or more creatures with different powers, Harvesttide Sentry can't be blocked by creatures with power 2 or less this turn.

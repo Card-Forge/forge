@@ -24,12 +24,16 @@ public class StaticAbilityPanharmonicon {
         int n = 0;
 
         CardCollectionView cardList = null;
-        // currently only used for leave the battlefield trigger
-        if (runParams.containsKey(AbilityKey.LastStateBattlefield)) {
-            cardList = (CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield);
-        }
-        if (cardList == null) {
-            cardList = t.getMode() == TriggerType.ChangesZone && "Battlefield".equals(t.getParam("Origin")) ? game.getLastStateBattlefield() : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
+        // if LTB look back
+        if (t.getMode() == TriggerType.ChangesZone && "Battlefield".equals(t.getParam("Origin"))) {
+            if (runParams.containsKey(AbilityKey.LastStateBattlefield)) {
+                cardList = (CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield);
+            }
+            if (cardList == null) {
+                cardList = game.getLastStateBattlefield();
+            }
+        } else {
+            cardList = game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
         }
 
         // Checks only the battlefield, as those effects only work from there

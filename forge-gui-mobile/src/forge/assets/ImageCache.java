@@ -194,6 +194,9 @@ public class ImageCache {
         return getImage(imageKey, useDefaultIfNotFound, false);
     }
     public static Texture getImage(String imageKey, boolean useDefaultIfNotFound, boolean useOtherCache) {
+        if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DISABLE_CARD_IMAGES))
+            return null;
+
         if (StringUtils.isEmpty(imageKey)) {
             return null;
         }
@@ -235,7 +238,7 @@ public class ImageCache {
         }
 
         // No image file exists for the given key so optionally associate with
-        // a default "not available" image and add to cache for given key.
+        // a default "not available" image.
         if (image == null) {
             if (useDefaultIfNotFound) {
                 image = defaultImage;

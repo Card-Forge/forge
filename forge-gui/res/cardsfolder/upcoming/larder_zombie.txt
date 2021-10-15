@@ -1,0 +1,8 @@
+Name:Larder Zombie
+ManaCost:U
+Types:Creature Zombie
+PT:1/3
+K:Defender
+A:AB$ Dig  | Cost$ tapXType<3/Creature> | DigNum$ 1 | DestinationZone$ Graveyard | Optional$ True | SpellDescription$ Look at the top card of your library. You may put it into your graveyard.
+DeckHas:Ability$Graveyard
+Oracle:Defender\nTap three untapped creatures you control: Look at the top card of your library. You may put it into your graveyard.

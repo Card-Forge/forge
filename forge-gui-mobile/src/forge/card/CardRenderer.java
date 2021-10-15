@@ -9,7 +9,7 @@ import java.util.Map;
 
 import forge.ImageKeys;
 import forge.localinstance.properties.ForgeConstants;
-import forge.util.FileUtil;
+import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.Gdx;
@@ -57,9 +57,6 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.match.MatchController;
 import forge.toolbox.FList;
-import forge.util.CardTranslation;
-import forge.util.TextBounds;
-import forge.util.Utils;
 
 public class CardRenderer {
     public enum CardStackPosition {
@@ -391,6 +388,43 @@ public class CardRenderer {
         return cardArt;
     }
 
+    public static FImageComplex getMeldCardParts(final String imageKey, boolean bottom) {
+        FImageComplex cardArt;
+        if (!bottom) {
+            cardArt = cardArtCache.get("Meld_primary_"+imageKey);
+        } else {
+            cardArt = cardArtCache.get("Meld_secondary_"+imageKey);
+        }
+
+        if (cardArt == null) {
+            Texture image = new CachedCardImage(imageKey) {
+                @Override
+                public void onImageFetched() {
+                    ImageCache.clear();
+                    cardArtCache.remove("Meld_primary_" + imageKey);
+                    cardArtCache.remove("Meld_secondary_" + imageKey);
+                }
+            }.getImage();
+            if (image != null) {
+                if (image == ImageCache.defaultImage) {
+                    cardArt = CardImageRenderer.forgeArt;
+                } else {
+                    float x = 0;
+                    float w = image.getWidth();
+                    float h = image.getHeight()/2f;
+                    float y = bottom ? h : 0;
+                    cardArt = new FTextureRegionImage(new TextureRegion(image, Math.round(x), Math.round(y), Math.round(w), Math.round(h)));
+
+                }
+                if (!bottom)
+                    cardArtCache.put("Meld_primary_"+imageKey, cardArt);
+                else
+                    cardArtCache.put("Meld_secondary_"+imageKey, cardArt);
+            }
+        }
+        return cardArt;
+    }
+
     public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, CardView card, int count, String suffix, float x, float y, float w, float h, boolean compactMode) {
         final CardStateView state = card.getCurrentState();
         if (card.getId() > 0) {
@@ -573,6 +607,7 @@ public class CardRenderer {
         boolean canshow = MatchController.instance.mayView(card);
         boolean showsleeves = card.isFaceDown() && card.isInZone(EnumSet.of(ZoneType.Exile)); //fix facedown card image ie gonti lord of luxury
         Texture image = new RendererCachedCardImage(card, false).getImage( showAltState ? card.getAlternateState().getImageKey() : card.getCurrentState().getImageKey());
+        TextureRegion crack_overlay = FSkin.getCracks().get(card.getCrackOverlayInt());
         FImage sleeves = MatchController.getPlayerSleeve(card.getOwner());
         float radius = (h - w)/8;
         float croppedArea = isModernFrame(card) ? CROP_MULTIPLIER : 0.97f;
@@ -590,9 +625,9 @@ public class CardRenderer {
                 g.setAlphaComposite(oldAlpha);
             } else if (showsleeves) {
                 if (!card.isForeTold())
-                    g.drawImage(sleeves, x, y, w, h);
+                    g.drawCardImage(sleeves, crack_overlay, x, y, w, h, card.wasDestroyed(), card.getDamage() > 0);
                 else
-                    g.drawImage(image, x, y, w, h);
+                    g.drawCardImage(image, crack_overlay, x, y, w, h, card.wasDestroyed(), card.getDamage() > 0);
             } else {
                 if(FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_PLANE_OR_PHENOMENON)
                         && (card.getCurrentState().isPhenomenon() || card.getCurrentState().isPlane()) && rotate){
@@ -610,19 +645,19 @@ public class CardRenderer {
                 } else {
                     if (Forge.enableUIMask.equals("Full") && canshow) {
                         if (ImageCache.isBorderlessCardArt(image))
-                            g.drawImage(image, x, y, w, h);
+                            g.drawCardImage(image, crack_overlay, x, y, w, h, card.wasDestroyed(), card.getDamage() > 0);
                         else {
                             boolean t = (card.getCurrentState().getOriginalColors() != card.getCurrentState().getColors()) || card.getCurrentState().hasChangeColors();
                             g.drawBorderImage(ImageCache.getBorderImage(image.toString(), canshow), ImageCache.borderColor(image), ImageCache.getTint(card, image), x, y, w, h, t); //tint check for changed colors
-                            g.drawImage(ImageCache.croppedBorderImage(image), x + radius / 2.4f-minusxy, y + radius / 2-minusxy, w * croppedArea, h * croppedArea);
+                            g.drawCardImage(ImageCache.croppedBorderImage(image), crack_overlay, x + radius / 2.4f-minusxy, y + radius / 2-minusxy, w * croppedArea, h * croppedArea, card.wasDestroyed(), card.getDamage() > 0);
                         }
                     } else if (Forge.enableUIMask.equals("Crop") && canshow) {
-                        g.drawImage(ImageCache.croppedBorderImage(image), x, y, w, h);
+                        g.drawCardImage(ImageCache.croppedBorderImage(image), crack_overlay, x, y, w, h, card.wasDestroyed(), card.getDamage() > 0);
                     } else {
                         if (canshow)
-                            g.drawImage(image, x, y, w, h);
+                            g.drawCardImage(image, crack_overlay, x, y, w, h, card.wasDestroyed(), card.getDamage() > 0);
                         else // draw card back sleeves
-                            g.drawImage(sleeves, x, y, w, h);
+                            g.drawCardImage(sleeves, crack_overlay, x, y, w, h, card.wasDestroyed(), card.getDamage() > 0);
                     }
                 }
             }

@@ -1,0 +1,8 @@
+Name:Blessed Defiance
+ManaCost:W
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ 2 | KW$ Lifelink | SubAbility$ DBDelayedTrigger | SpellDescription$ Target creature you control gets +2/+0 and gains lifelink until end of turn. When that creature dies this turn, create a 1/1 white Spirit creature token with flying.
+SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ ChangesZone | RememberObjects$ Targeted | ValidCard$ Card.IsTriggerRemembered | Origin$ Battlefield | Destination$ Graveyard | ThisTurn$ True | Execute$ DBToken | TriggerDescription$ When that creature dies this turn, create a 1/1 white Spirit creature token with flying.
+SVar:DBToken:DB$ Token | TokenScript$ w_1_1_spirit_flying
+DeckHas:Ability$Token
+Oracle:Target creature you control gets +2/+0 and gains lifelink until end of turn. When that creature dies this turn, create a 1/1 white Spirit creature token with flying.

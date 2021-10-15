@@ -807,7 +807,7 @@ public class Combat {
                 if (defender instanceof Player && defender.hasKeyword("You assign combat damage of each creature attacking you.")) {
                     assigningPlayer = (Player)defender;
                 }
-                else if (AttackingBand.isValidBand(orderedBlockers, true)){
+                else if (AttackingBand.isValidBand(orderedBlockers, true)) {
                     assigningPlayer = orderedBlockers.get(0).getController();
                 }
 

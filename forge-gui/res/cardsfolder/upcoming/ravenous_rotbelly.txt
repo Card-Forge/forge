@@ -1,0 +1,13 @@
+Name:Ravenous Rotbelly
+ManaCost:4 B
+Types:Creature Zombie Horror
+PT:4/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacZom | TriggerDescription$ When CARDNAME enters the battlefield, you may sacrifice up to three Zombies. When you sacrifice one or more Zombies this way, each opponent sacrifices that many creatures.
+SVar:TrigSacZom:DB$ Sacrifice | Defined$ You | Optional$ True | Amount$ 3 | SacValid$ Zombie | SacMessage$ Zombies | RememberSacrificed$ True | SubAbility$ DBImmediateTrigger
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | Execute$ TrigSac | ConditionDefined$ RememberedLKI | ConditionPresent$ Zombie | TriggerDescription$ When you sacrifice one or more Zombies this way, each opponent sacrifices that many creatures.
+SVar:TrigSac:DB$ Sacrifice | Defined$ Opponent | SacValid$ Creature | Amount$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+DeckHas:Ability$Sacrifice
+DeckNeeds:Type$Zombie
+Oracle:When Ravenous Rotbelly enters the battlefield, you may sacrifice up to three Zombies. When you sacrifice one or more Zombies this way, each opponent sacrifices that many creatures.

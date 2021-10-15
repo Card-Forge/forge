@@ -616,7 +616,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                         && host.getType().hasStringType(mana.getManaAbility().getAddsKeywordsType())) {
                     final long timestamp = host.getGame().getNextTimestamp();
                     final List<String> kws = Arrays.asList(mana.getAddedKeywords().split(" & "));
-                    host.addChangedCardKeywords(kws, null, false, false, timestamp, 0);
+                    host.addChangedCardKeywords(kws, null, false, timestamp, 0);
                     if (mana.addsKeywordsUntil()) {
                         final GameCommand untilEOT = new GameCommand() {
                             private static final long serialVersionUID = -8285169579025607693L;
@@ -753,6 +753,15 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public void setReplacingObject(final AbilityKey type, final Object o) {
         replacingObjects.put(type, o);
+    }
+    public void setReplacingObjectsFrom(final Map<AbilityKey, Object> repParams, final AbilityKey... types) {
+        int typesLength = types.length;
+        for (int i = 0; i < typesLength; i += 1) {
+            AbilityKey type = types[i];
+            if (repParams.containsKey(type)) {
+                setReplacingObject(type, repParams.get(type));
+            }
+        }
     }
 
     public void resetOnceResolved() {
@@ -1080,7 +1089,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public SpellAbility copyWithNoManaCost() {
         return copyWithNoManaCost(getActivatingPlayer());
     }
-
     public SpellAbility copyWithNoManaCost(Player active) {
         final SpellAbility newSA = copy(active);
         if (newSA == null) {
@@ -2182,7 +2190,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     @Override
     public int compareTo(SpellAbility ab) {
-        if (this.isManaAbility() && ab.isManaAbility()){
+        if (this.isManaAbility() && ab.isManaAbility()) {
             return this.calculateScoreForManaAbility() - ab.calculateScoreForManaAbility();
         }
         return 0;
@@ -2333,7 +2341,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public boolean canCastTiming(Player activator) {
         return canCastTiming(getHostCard(), activator);
     }
-
     public boolean canCastTiming(Card host, Player activator) {
         // for companion
         if (this instanceof AbilityStatic && getRestrictions().isSorcerySpeed() && !activator.canCastSorcery()) {
@@ -2352,7 +2359,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         // spells per default are sorcerySpeed
         if (isSpell()) {
             return false;
-        } else if (isActivatedAbility()) {
+        }
+
+        if (isActivatedAbility()) {
             // Activated Abillties are instant speed per default
             return !getRestrictions().isSorcerySpeed();
         }

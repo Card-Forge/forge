@@ -5,13 +5,10 @@ import java.util.EnumSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 
-import forge.card.MagicColor;
 import forge.game.GameEntity;
 import forge.game.card.Card;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 
@@ -58,11 +55,11 @@ public class AttackRestriction {
             violations.add(AttackRestrictionType.ONLY_ALONE);
         }
         if (restrictions.contains(AttackRestrictionType.NEED_GREATER_POWER)
-                && CardLists.filter(attackers.keySet(), CardPredicates.hasGreaterPowerThan(attacker.getNetPower())).isEmpty()) {
+                && !Iterables.any(attackers.keySet(), AttackRestrictionType.NEED_GREATER_POWER.getPredicate(attacker))) {
             violations.add(AttackRestrictionType.NEED_GREATER_POWER);
         }
         if (restrictions.contains(AttackRestrictionType.NEED_BLACK_OR_GREEN)
-                && CardLists.filter(attackers.keySet(), CardPredicates.isColor((byte) (MagicColor.BLACK | MagicColor.GREEN)), Predicates.not(Predicates.equalTo(attacker))).isEmpty()) {
+                && !Iterables.any(attackers.keySet(), AttackRestrictionType.NEED_BLACK_OR_GREEN.getPredicate(attacker))) {
             violations.add(AttackRestrictionType.NEED_BLACK_OR_GREEN);
         }
         if (restrictions.contains(AttackRestrictionType.NOT_ALONE) && nAttackers <= 1) {

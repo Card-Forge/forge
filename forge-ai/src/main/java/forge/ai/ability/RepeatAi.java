@@ -9,6 +9,8 @@ import forge.ai.SpellAbilityAi;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
+import forge.game.player.PlayerCollection;
+import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 
 public class RepeatAi extends SpellAbilityAi {
@@ -45,16 +47,17 @@ public class RepeatAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-    	 if (sa.usesTargeting()) {
-         	final Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
-             if (sa.canTarget(opp)) {
-                 sa.resetTargets();
-                 sa.getTargets().add(opp);
-             } else if (!mandatory) {
-            	 return false;
-             }
+        if (sa.usesTargeting()) {
+            PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
+            Player opp = targetableOpps.min(PlayerPredicates.compareByLife());
+            if (opp != null) {
+                sa.resetTargets();
+                sa.getTargets().add(opp);
+            } else if (!mandatory) {
+                return false;
+            }
 
-         }
+        }
 
     	// setup subability to repeat
         final SpellAbility repeat = sa.getAdditionalAbility("RepeatSubAbility");

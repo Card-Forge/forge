@@ -2,8 +2,8 @@ Name:Syr Konrad, the Grim
 ManaCost:3 B B
 Types:Legendary Creature Human Knight
 PT:5/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ Whenever another creature dies, or a creature card is put into a graveyard from anywhere than the battlefield, or a creature card leaves your graveyard, CARDNAME deals 1 damage to each opponent.
-T:Mode$ ChangesZone | Origin$ Graveyard | Destination$ Any | ValidCard$ Card.Creature+Other+YouOwn | TriggerZones$ Battlefield | Execute$ TrigDmg | Secondary$ True | TriggerDescription$ Whenever another creature dies, or a creature card is put into a graveyard from anywhere than the battlefield, or a creature card leaves your graveyard, CARDNAME deals 1 damage to each opponent.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ Whenever another creature dies, or a creature card is put into a graveyard from anywhere other than the battlefield, or a creature card leaves your graveyard, CARDNAME deals 1 damage to each opponent.
+T:Mode$ ChangesZone | Origin$ Graveyard | Destination$ Any | ValidCard$ Card.Creature+Other+YouOwn | TriggerZones$ Battlefield | Execute$ TrigDmg | Secondary$ True | TriggerDescription$ Whenever another creature dies, or a creature card is put into a graveyard from anywhere other than the battlefield, or a creature card leaves your graveyard, CARDNAME deals 1 damage to each opponent.
 SVar:TrigDmg:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 1
 A:AB$ Mill | Cost$ 1 B | NumCards$ 1 | Defined$ Player | AILogic$ EndOfOppTurn | SpellDescription$ Each player mills a card.
 Oracle:Whenever another creature dies, or a creature card is put into a graveyard from anywhere other than the battlefield, or a creature card leaves your graveyard, Syr Konrad, the Grim deals 1 damage to each opponent.\n{1}{B}: Each player mills a card.

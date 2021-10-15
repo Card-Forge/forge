@@ -67,13 +67,12 @@ public class TapOrUntapAllEffect extends SpellAbilityEffect {
 
         toTap = sa.getActivatingPlayer().getController().chooseBinary(sa, sb.toString(), PlayerController.BinaryChoiceType.TapOrUntap);
 
-
         for (final Card cad : validCards) {
             if (cad.isInPlay()) {
                 if (toTap) {
-                    cad.tap();
+                    cad.tap(true);
                 } else {
-                    cad.untap();
+                    cad.untap(true);
                 }
             }
         }

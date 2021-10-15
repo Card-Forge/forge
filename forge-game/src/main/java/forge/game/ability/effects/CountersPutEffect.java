@@ -40,6 +40,7 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.CardTranslation;
+import forge.util.Lang;
 import forge.util.Localizer;
 
 public class CountersPutEffect extends SpellAbilityEffect {
@@ -69,26 +70,15 @@ public class CountersPutEffect extends SpellAbilityEffect {
             stringBuilder.append("up to ");
         }
 
-        stringBuilder.append(amount).append(" ");
-
         String type = spellAbility.getParam("CounterType");
-        if (type.equals("ExistingCounter")) {
-            stringBuilder.append("of an existing counter");
-        } else if (type.equals("EachFromSource")) {
-            stringBuilder.append("each counter");
+        if (amount == 1) {
+            stringBuilder.append(Lang.startsWithVowel(type) ? "an " : "a ");
         } else {
-            stringBuilder.append(CounterType.getType(type).getName()).append(" counter");
+            stringBuilder.append(Lang.getNumeral(amount)).append(" ");
         }
 
-        if (amount != 1) {
-            stringBuilder.append("s");
-        }
-
-        if (spellAbility.isDividedAsYouChoose()) {
-            stringBuilder.append(" among ");
-        } else {
-            stringBuilder.append(" on ");
-        }
+        stringBuilder.append(CounterType.getType(type).getName().toLowerCase()).append(" counter");
+        stringBuilder.append(amount != 1 ? "s" : "").append(spellAbility.isDividedAsYouChoose() ? " among " : " on ");
 
         // if use targeting we show all targets and corresponding counters
         if(spellAbility.usesTargeting()) {

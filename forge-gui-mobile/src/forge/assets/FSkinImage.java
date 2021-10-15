@@ -486,6 +486,7 @@ public enum FSkinImage implements FImage {
         MANAICONS(ForgeConstants.SPRITE_MANAICONS_FILE),
         SETLOGOS(ForgeConstants.SPRITE_SETLOGO_FILE),
         WATERMARKS(ForgeConstants.SPRITE_WATERMARK_FILE),
+        CRACKS(ForgeConstants.SPRITE_CRACKS_FILE),
         CARDBG(ForgeConstants.SPRITE_CARDBG_FILE),
         PLANAR_CONQUEST(ForgeConstants.SPRITE_PLANAR_CONQUEST_FILE);
 

@@ -425,7 +425,7 @@ public class AiController {
                 }
             }
         }
-    
+
         landList = CardLists.filter(landList, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -553,7 +553,7 @@ public class AiController {
             CardCollection oneDrops = CardLists.filter(nonLandsInHand, CardPredicates.hasCMC(1));
             for (int i = 0; i < MagicColor.WUBRG.length; i++) {
                 byte color = MagicColor.WUBRG[i];
-                if (!CardLists.filter(oneDrops, CardPredicates.isColor(color)).isEmpty()) {
+                if (Iterables.any(oneDrops, CardPredicates.isColor(color))) {
                     for (Card land : landList) {
                         if (land.getType().hasSubtype(MagicColor.Constant.BASIC_LANDS.get(i))) {
                             return land;
@@ -643,7 +643,6 @@ public class AiController {
     public SpellAbility predictSpellToCastInMain2(ApiType exceptSA) {
         return predictSpellToCastInMain2(exceptSA, true);
     }
-
     private SpellAbility predictSpellToCastInMain2(ApiType exceptSA, boolean handOnly) {
         if (!getBooleanProperty(AiProps.PREDICT_SPELLS_FOR_MAIN2)) {
             return null;
@@ -744,11 +743,18 @@ public class AiController {
             return AiPlayDecision.CantPlaySa;
         }
 
+        int oldCMC = -1;
         boolean xCost = sa.getPayCosts().hasXInAnyCostPart() || sa.getHostCard().hasStartOfKeyword("Strive");
-        if (!xCost && !ComputerUtilCost.canPayCost(sa, player)) {
-            // for most costs, it's OK to check if they can be paid early in order to avoid running a heavy API check
-            // when the AI won't even be able to play the spell in the first place (even if it could afford it)
-            return AiPlayDecision.CantAfford;
+        if (!xCost) {
+            if (!ComputerUtilCost.canPayCost(sa, player)) {
+                // for most costs, it's OK to check if they can be paid early in order to avoid running a heavy API check
+                // when the AI won't even be able to play the spell in the first place (even if it could afford it)
+                return AiPlayDecision.CantAfford;
+            }
+            // TODO check for Reduce too, e.g. Battlefield Thaumaturge could make it castable
+            if (sa.usesTargeting()) {
+                oldCMC = CostAdjustment.adjust(sa.getPayCosts(), sa).getTotalMana().getCMC();
+            }
         }
 
         // state needs to be switched here so API checks evaluate the right face
@@ -762,6 +768,14 @@ public class AiController {
 
         if (canPlay != AiPlayDecision.WillPlay) {
             return canPlay;
+        }
+
+        // check if some target raised cost
+        if (oldCMC > -1) {
+            int finalCMC = CostAdjustment.adjust(sa.getPayCosts(), sa).getTotalMana().getCMC();
+            if (finalCMC > oldCMC) {
+                xCost = true;
+            }
         }
 
         if (xCost && !ComputerUtilCost.canPayCost(sa, player)) {
@@ -797,6 +811,7 @@ public class AiController {
         // which might potentially cause a stack overflow.
         AiCardMemory.clearMemorySet(this, AiCardMemory.MemorySet.MARKED_TO_AVOID_REENTRY);
 
+        // TODO before suspending some spells try to predict if relevant targets can be expected
         if (sa.getApi() != null) {
 
             String msg = "AiController:canPlaySa: AI checks for if can PlaySa";
@@ -861,7 +876,7 @@ public class AiController {
             return canPlayFromEffectAI((SpellPermanent)sa, false, true);
         }
         if (sa.usesTargeting()) {
-            if (!sa.isTargetNumberValid() && !sa.getTargetRestrictions().hasCandidates(sa, true)) {
+            if (!sa.isTargetNumberValid() && !sa.getTargetRestrictions().hasCandidates(sa)) {
                 return AiPlayDecision.TargetingFailed;
             }
             if (!StaticAbilityMustTarget.meetsMustTargetRestriction(sa)) {
@@ -1231,7 +1246,7 @@ public class AiController {
             if (validCards.isEmpty()) {
                 continue;
             }
-            final int numLandsInPlay = Iterables.size(Iterables.filter(player.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS));
+            final int numLandsInPlay = CardLists.count(player.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS);
             final CardCollection landsInHand = CardLists.filter(validCards, CardPredicates.Presets.LANDS);
             final int numLandsInHand = landsInHand.size();
     
@@ -1529,7 +1544,7 @@ public class AiController {
         CardCollectionView otb = player.getCardsIn(ZoneType.Battlefield);
 
         if (getBooleanProperty(AiProps.HOLD_LAND_DROP_ONLY_IF_HAVE_OTHER_PERMS)) {
-            if (CardLists.filter(otb, Predicates.not(CardPredicates.Presets.LANDS)).isEmpty()) {
+            if (!Iterables.any(otb, Predicates.not(CardPredicates.Presets.LANDS))) {
                 return false;
             }
         }
@@ -1715,13 +1730,13 @@ public class AiController {
             sa.setLastStateGraveyard(CardCollection.EMPTY);
             // PhaseHandler ph = game.getPhaseHandler();
             // System.out.printf("Ai thinks '%s' of %s -> %s @ %s %s >>> \n", opinion, sa.getHostCard(), sa, Lang.getPossesive(ph.getPlayerTurn().getName()), ph.getPhase());
-            
+
             if (opinion != AiPlayDecision.WillPlay)
                 continue;
-    
+
             return sa;
         }
-        
+
         return null;
     }
 
@@ -1759,7 +1774,7 @@ public class AiController {
             return doTrigger(((WrappedAbility)spell).getWrappedAbility(), mandatory);
         if (spell.getApi() != null)
             return SpellApiToAi.Converter.get(spell.getApi()).doTriggerAI(player, spell, mandatory);
-        if (spell.getPayCosts() == Cost.Zero && spell.getTargetRestrictions() == null) {
+        if (spell.getPayCosts() == Cost.Zero && !spell.usesTargeting()) {
             // For non-converted triggers (such as Cumulative Upkeep) that don't have costs or targets to worry about
             return true;
         }
@@ -2238,6 +2253,7 @@ public class AiController {
         return true;
     }
 
+    // AI logic for choosing which replacement effect to apply happens here.
     public ReplacementEffect chooseSingleReplacementEffect(List<ReplacementEffect> list) {
         // no need to choose anything
         if (list.size() <= 1) {
@@ -2276,7 +2292,8 @@ public class AiController {
             }
         }
 
-        // AI logic for choosing which replacement effect to apply happens here.
+        // TODO always lower counters with Vorinclex first, might turn it from 1 to 0 as final
+
         return Iterables.getFirst(list, null);
     }
 

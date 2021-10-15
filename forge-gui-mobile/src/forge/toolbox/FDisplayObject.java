@@ -4,7 +4,9 @@ import java.util.List;
 
 import com.badlogic.gdx.math.Rectangle;
 
+import forge.Forge;
 import forge.Graphics;
+import forge.gui.GuiBase;
 
 public abstract class FDisplayObject {
     protected static final float DISABLED_COMPOSITE = 0.25f;
@@ -13,6 +15,7 @@ public abstract class FDisplayObject {
     private boolean enabled = true;
     private boolean rotate90 = false;
     private boolean rotate180 = false;
+    private boolean hovered = false;
     private final Rectangle bounds = new Rectangle();
     public final Rectangle screenPos = new Rectangle();
 
@@ -86,6 +89,13 @@ public abstract class FDisplayObject {
         visible = b0;
     }
 
+    public boolean isHovered() {
+        return hovered;
+    }
+    public void setHovered(boolean b0) {
+        hovered = b0;
+    }
+
     public boolean getRotate90() {
         return rotate90;
     }
@@ -118,8 +128,20 @@ public abstract class FDisplayObject {
 
     public abstract void draw(Graphics g);
     public void buildTouchListeners(float screenX, float screenY, List<FDisplayObject> listeners) {
+        boolean exact = !GuiBase.isAndroid() && (this instanceof FCardPanel);
         if (enabled && visible && screenPos.contains(screenX, screenY)) {
             listeners.add(this);
+        }
+        //TODO: mouse detection on android?
+        if (Forge.afterDBloaded && !GuiBase.isAndroid()) {
+            Forge.hoveredCount = listeners.size();
+            if (!Forge.getCurrentScreen().toString().contains("Match"))
+                Forge.hoveredCount = 1;
+            if (exact) {
+                setHovered(this.enabled && this.visible && ((FCardPanel) this).renderedCardContains(screenToLocalX(screenX), screenToLocalY(screenY)) && Forge.hoveredCount < 2);
+            } else {
+                setHovered(this.enabled && this.visible && this.screenPos.contains(screenX, screenY) && Forge.hoveredCount < 2);
+            }
         }
     }
 

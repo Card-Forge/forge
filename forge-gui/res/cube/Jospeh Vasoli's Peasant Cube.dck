@@ -49,7 +49,7 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Bloodfray Giant|RTR
 1 Bloodthrone Vampire|MM2
 1 Boggart Ram-Gang|SHM
-1 Bone Shredder|ULG
+1 Bone Shredder|MH2
 1 Bonesplitter|MMA
 1 Borderland Marauder|IMA
 1 Borderland Ranger|AVR
@@ -82,21 +82,22 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Cloistered Youth|ISD
 1 Clone|M14
 1 Cloudgoat Ranger|MMA
+1 Coalition Honor Guard|EMA
 1 Coiling Oracle|MM3
 1 Coldsteel Heart|CSP
 1 Complicate|ONS
-1 Compulsive Research|MM3
+1 Compulsive Research|STX
 1 Conclave Naturalists|2XM
 1 Condescend|IMA
 1 Consul's Lieutenant|ORI
 1 Control Magic|EMA
 1 Corpse Augur|C17
-1 Counterspell|A25
+1 Counterspell|MH2
 1 Crossway Vampire|ISD
 1 Crumbling Necropolis|MM3
 1 Crystal Shard|MRD
 1 Cudgel Troll|M12
-1 Cultivate|M21
+1 Cultivate|STX
 1 Curse of Chains|SHM
 1 Curse of Predation|IMA
 1 Curse of Shallow Graves|C13
@@ -114,7 +115,7 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Disfigure|M20
 1 Dismember|MM2
 1 Dismiss|CN2
-1 Doom Blade|IMA
+1 Doom Blade|STX
 1 Doomed Traveler|IMA
 1 Dragon Hunter|DTK
 1 Drana's Emissary|BFZ
@@ -123,10 +124,10 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Dromoka Warrior|DTK
 1 Drown in Sorrow|2XM
 1 Dryad Militant|RTR
-1 Duress|M21
+1 Duress|STX
 1 Duskwatch Recruiter|SOI
 1 Eldrazi Skyspawner|BFZ
-1 Electrolyze|IMA
+1 Electrolyze|STX
 1 Elite Vanguard|EMA
 1 Elixir of Immortality|M14
 1 Elusive Spellfist|IMA
@@ -146,7 +147,7 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Essence Scatter|AKR
 1 Eternal Witness|UMA
 1 Everflowing Chalice|2XM
-1 Evolving Wilds|AKR
+1 Evolving Wilds|AFR
 1 Exclude|MH1
 1 Expedition Envoy|BFZ
 1 Explore|MM3
@@ -206,7 +207,8 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Gurmag Angler|UMA
 1 Guttersnipe|M19
 1 Halimar Wavewatch|ROE
-1 Harmonize|MM3
+1 Harm's Way|M10
+1 Harmonize|STX
 1 Harrow|TPR
 1 Havoc Demon|EMA
 1 Hedron Archive|BFZ
@@ -220,7 +222,7 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Incendiary Flow|EMN
 1 Incinerate|M12
 1 Incremental Blight|SHM
-1 Inquisition of Kozilek|MM3
+1 Inquisition of Kozilek|STX
 1 Intimidator Initiate|SHM
 1 Into the Roil|ZNR
 1 Izzet Boilerworks|IMA
@@ -252,9 +254,9 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Krosan Verge|JUD
 1 Lashknife Barrier|PLS
 1 Leafcrown Dryad|THS
-1 Lightning Bolt|A25
+1 Lightning Bolt|STX
 1 Lightning Greaves|2XM
-1 Lightning Helix|IMA
+1 Lightning Helix|STX
 1 Lightning Strike|M19
 1 Liliana's Specter|CNS
 1 Lingering Souls|MM3
@@ -267,7 +269,7 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Makindi Sliderunner|BFZ
 1 Man-o'-War|MH1
 1 Mana Leak|IMA
-1 Mana Tithe|PLC
+1 Mana Tithe|STX
 1 Mardu Roughrider|KTK
 1 Mardu Scout|FRF
 1 Mardu Skullhunter|KTK
@@ -276,7 +278,7 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Master of Diversion|M14
 1 Maze of Ith|2XM
 1 Meadowboon|MMA
-1 Memory Lapse|EMA
+1 Memory Lapse|STX
 1 Merciless Executioner|FRF
 1 Mercurial Geists|EMN
 1 Merfolk Looter|A25
@@ -286,7 +288,7 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Mirrodin's Core|CNS
 1 Mirror Match|C15
 1 Miscalculation|ULG
-1 Mishra's Factory|2XM
+1 Mishra's Factory|MH2
 1 Mist Raven|MM3
 1 Mistral Charger|EMA
 1 Moan of the Unhallowed|UMA
@@ -369,7 +371,7 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Reckless Waif|ISD
 1 Reclamation Sage|2XM
 1 Reflector Mage|OGW
-1 Regrowth|MH1
+1 Regrowth|STX
 1 Relief Captain|OGW
 1 Remand|MM2
 1 Remove Soul|10E
@@ -415,7 +417,7 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Serra Angel|DOM
 1 Serrated Arrows|TSB
 1 Serum Visions|MM3
-1 Shardless Agent|EMA
+1 Shardless Agent|MH2
 1 Shimmering Glasskite|BOK
 1 Shower of Coals|ODY
 1 Shriekmaw|UMA
@@ -455,7 +457,7 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Sunhome Guildmage|MM3
 1 Swift Warkite|DTK
 1 Swiftwater Cliffs|M21
-1 Swords to Plowshares|A25
+1 Swords to Plowshares|STX
 1 Sylvan Library|EMA
 1 Symbiotic Wurm|VMA
 1 Tainted Field|TOR
@@ -535,7 +537,7 @@ Name=Jospeh Vasoli's Peasant Cube
 1 Wolfir Avenger|AVR
 1 Wrench Mind|IMA
 1 Xiahou Dun, the One-Eyed|ME3
-1 Yavimaya Elder|VMA
+1 Yavimaya Elder|MH2
 1 Young Pyromancer|UMA
 1 Zealous Persecution|EMA
 1 Zulaport Cutthroat|A25

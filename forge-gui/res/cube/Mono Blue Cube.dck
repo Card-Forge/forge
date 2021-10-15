@@ -26,13 +26,13 @@ Name=Mono Blue Cube
 1 Black Vise|MPS_KLD
 1 Blightsteel Colossus|2XM
 1 Blinkmoth Nexus|2XM
-1 Blue Sun's Zenith|A25
+1 Blue Sun's Zenith|STX
 1 Bonesplitter|MMA
 1 Boomerang|10E
 1 Braids, Conjurer Adept|2XM
 1 Brain Freeze|VMA
 1 Braingeyser|3ED
-1 Brainstorm|2XM
+1 Brainstorm|STX
 1 Briarberry Cohort|SHM
 1 Brittle Effigy|M11
 1 Broken Ambitions|LRW
@@ -55,14 +55,14 @@ Name=Mono Blue Cube
 1 Cold-Eyed Selkie|MMA
 1 Commandeer|CSP
 1 Complicate|ONS
-1 Compulsive Research|MM3
+1 Compulsive Research|STX
 1 Condescend|IMA
 1 Contested War Zone|MBS
 1 Control Magic|EMA
 1 Conundrum Sphinx|M11
 1 Copper Gnomes|USG
 1 Coralhelm Commander|ROE
-1 Counterspell|A25
+1 Counterspell|MH2
 1 Crippling Chill|MM3
 1 Cryptic Command|IMA
 1 Cursecatcher|A25
@@ -188,12 +188,12 @@ Name=Mono Blue Cube
 1 Mind Over Matter|EXO
 1 Mind Sculpt|M15
 1 Mind Stone|IMA
-1 Mind's Desire|SCG
+1 Mind's Desire|STX
 1 Mindslaver|SOM
 1 Minister of Impediments|DIS
 1 Miscalculation|ULG
 1 Misdirection|CNS
-1 Mishra's Factory|2XM
+1 Mishra's Factory|MH2
 1 Mishra's Helix|USG
 1 Mishra's Workshop|ATQ
 1 Mortarpod|MM2
@@ -205,8 +205,8 @@ Name=Mono Blue Cube
 1 Mutavault|M14
 1 Myr Battlesphere|2XM
 1 Mystical Tutor|EMA
-1 Negate|ZNR
-1 Nevinyrral's Disk|EMA
+1 Negate|STX
+1 Nevinyrral's Disk|MH2
 1 Nightveil Specter|GTC
 1 Nimbus Naiad|THS
 1 Ninja of the Deep Hours|BOK
@@ -257,14 +257,14 @@ Name=Mono Blue Cube
 1 Rewind|M21
 1 Riftwing Cloudskate|MMA
 1 Riptide Director|LGN
-1 Riptide Laboratory|ONS
+1 Riptide Laboratory|MH2
 1 Rishadan Port|A25
 1 Runechanter's Pike|ISD
 1 Sage of Fables|MOR
 1 Sand Squid|MMQ
 1 Sands of Delirium|M13
 1 Sapphire Medallion|TMP
-1 Sea Drake|VMA
+1 Sea Drake|MH2
 1 Sea Gate Oracle|MM3
 1 Sea Scryer|MIR
 1 Seasinger|5ED
@@ -335,7 +335,7 @@ Name=Mono Blue Cube
 1 Ulamog, the Infinite Gyre|UMA
 1 Umezawa's Jitte|BOK
 1 Undo|VIS
-1 Upheaval|VMA
+1 Upheaval|MH2
 1 Vapor Snag|MM2
 1 Vaporkin|CN2
 1 Vedalken Aethermage|FUT

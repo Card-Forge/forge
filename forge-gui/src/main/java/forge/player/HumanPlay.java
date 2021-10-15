@@ -612,10 +612,8 @@ public class HumanPlay {
                     return false;
                 }
 
-                if (!mandatory) {
-                    if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantSpendNTargetTypeCounter", String.valueOf(amount), counterType.getName()), sourceAbility)) {
-                        return false;
-                    }
+                if (!mandatory && !p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantSpendNTargetTypeCounter", String.valueOf(amount), counterType.getName()), sourceAbility)) {
+                    return false;
                 }
 
                 p.payEnergy(amount, source);
@@ -708,7 +706,7 @@ public class HumanPlay {
             for (final Card c : ability.getTappedForConvoke()) {
                 c.setTapped(false);
                 if (!manaInputCancelled) {
-                    c.tap();
+                    c.tap(true);
                 }
             }
             ability.clearTappedForConvoke();
@@ -815,7 +813,7 @@ public class HumanPlay {
             activator.getGame().getTriggerHandler().suppressMode(TriggerType.Taps);
             for (final Card c : ability.getTappedForConvoke()) {
                 c.setTapped(false);
-                c.tap();
+                c.tap(true);
             }
             activator.getGame().getTriggerHandler().clearSuppression(TriggerType.Taps);
             ability.clearTappedForConvoke();

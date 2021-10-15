@@ -1,9 +1,7 @@
 Name:Searing Blood
 ManaCost:R R
 Types:Instant
-A:SP$ DealDamage | Cost$ R R | ValidTgts$ Creature | TgtPrompt$ Select target creature to deal damage to | NumDmg$ 2 | SubAbility$ SBEffect | SpellDescription$ CARDNAME deals 2 damage to target creature. When that creature dies this turn, CARDNAME deals 3 damage to the creature's controller.
-SVar:SBEffect:DB$ Effect | Name$ Searing Blood Effect | Triggers$ SearingDeath | RememberObjects$ ParentTarget | StackDescription$ When {c:Targeted} dies this turn, CARDNAME deals 3 damage to {p:TargetedController}.
-SVar:SearingDeath:Mode$ ChangesZone | ValidCard$ Creature.IsRemembered | Origin$ Battlefield | Destination$ Graveyard | Execute$ SBDeathDmg | TriggerDescription$ When a creature dealt damage by Searing Blood dies this turn, Searing Blood deals 3 damage to the creature's controller.
-SVar:SBDeathDmg:DB$ DealDamage | Defined$ TriggeredCardController | NumDmg$ 3 | DamageSource$ EffectSource
-SVar:Picture:http://www.wizards.com/global/images/magic/general/searing_blood.jpg
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 2 | SubAbility$ DBDelayedTrigger | SpellDescription$ CARDNAME deals 2 damage to target creature. When that creature dies this turn, CARDNAME deals 3 damage to the creature's controller.
+SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ ChangesZone | RememberObjects$ Targeted | ValidCard$ Card.IsTriggerRemembered | Origin$ Battlefield | Destination$ Graveyard | ThisTurn$ True | Execute$ TrigDealDamage | StackDescription$ When that creature dies this turn, CARDNAME deals 3 damage to {p:TargetedController}. | TriggerDescription$ When that creature dies this turn, CARDNAME deals 3 damage to the creature's controller.
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ TriggeredCardController | NumDmg$ 3
 Oracle:Searing Blood deals 2 damage to target creature. When that creature dies this turn, Searing Blood deals 3 damage to the creature's controller.

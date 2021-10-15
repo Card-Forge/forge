@@ -37,7 +37,7 @@ public class CountersNoteEffect extends SpellAbilityEffect {
     }
 
     private void noteCounters(Card notee, Card source) {
-        for(Entry<CounterType, Integer> counter : notee.getCounters().entrySet()) {
+        for (Entry<CounterType, Integer> counter : notee.getCounters().entrySet()) {
             StringBuilder sb = new StringBuilder();
             sb.append(NOTE_COUNTERS).append(counter.getKey().getName());
             source.setSVar(sb.toString(), counter.getValue().toString());
@@ -45,7 +45,7 @@ public class CountersNoteEffect extends SpellAbilityEffect {
     }
 
     private void loadCounters(Card notee, Card source, final Player p, final SpellAbility sa, GameEntityCounterTable table) {
-        for(Entry<String, String> svar : source.getSVars().entrySet()) {
+        for (Entry<String, String> svar : source.getSVars().entrySet()) {
             String key = svar.getKey();
             if (key.startsWith(NOTE_COUNTERS)) {
                 notee.addCounter(

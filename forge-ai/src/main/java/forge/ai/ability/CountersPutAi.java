@@ -53,7 +53,7 @@ import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 
-public class CountersPutAi extends SpellAbilityAi {
+public class CountersPutAi extends CountersAi {
 
     /*
      * (non-Javadoc)
@@ -179,7 +179,7 @@ public class CountersPutAi extends SpellAbilityAi {
 
                 if (abTgt.canTgtCreature()) {
                     // try to kill creature with -1/-1 counters if it can
-                    // receive counters, execpt it has undying
+                    // receive counters, except it has undying
                     CardCollection oppCreat = CardLists.getTargetableCards(ai.getOpponents().getCreaturesInPlay(), sa);
                     CardCollection oppCreatM1 = CardLists.filter(oppCreat, CardPredicates.hasCounter(CounterEnumType.M1M1));
                     oppCreatM1 = CardLists.getNotKeyword(oppCreatM1, Keyword.UNDYING);
@@ -419,18 +419,18 @@ public class CountersPutAi extends SpellAbilityAi {
                 oa.setActivatingPlayer(ai);
                 CardCollection targets = CardLists.getTargetableCards(ai.getOpponents().getCreaturesInPlay(), oa);
 
-                if (!targets.isEmpty()){
+                if (!targets.isEmpty()) {
                     boolean canSurvive = false;
                     for (Card humanCreature : targets) {
-                        if (!FightAi.canKill(humanCreature, source, 0)){
+                        if (!FightAi.canKill(humanCreature, source, 0)) {
                             canSurvive = true;
                             break;
                         }
                     }
-                    if (!canSurvive){
+                    if (!canSurvive) {
                         return false;
                     }
-                };
+                }
                 found = true;
                 break;
             }
@@ -549,7 +549,7 @@ public class CountersPutAi extends SpellAbilityAi {
                 }
 
                 if (sa.isCurse()) {
-                    choice = CountersAi.chooseCursedTarget(list, type, amount);
+                    choice = chooseCursedTarget(list, type, amount, ai);
                 } else {
                     if (type.equals("P1P1") && !SpellAbilityAi.isSorcerySpeed(sa)) {
                         for (Card c : list) {
@@ -564,15 +564,15 @@ public class CountersPutAi extends SpellAbilityAi {
                                 if (abCost == null
                                         || (ph.is(PhaseType.END_OF_TURN) && ph.getPlayerTurn().isOpponentOf(ai))) {
                                     // only use at opponent EOT unless it is free
-                                    choice = CountersAi.chooseBoonTarget(list, type);
+                                    choice = chooseBoonTarget(list, type);
                                 }
                             }
                         }
                         if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Dromoka's Command")) {
-                            choice = CountersAi.chooseBoonTarget(list, type);
+                            choice = chooseBoonTarget(list, type);
                         }
                     } else {
-                        choice = CountersAi.chooseBoonTarget(list, type);
+                        choice = chooseBoonTarget(list, type);
                     }
                 }
 
@@ -681,7 +681,6 @@ public class CountersPutAi extends SpellAbilityAi {
             sa.resetTargets();
             // target loop
             while (sa.canAddMoreTarget()) {
-
                 if (list.isEmpty()) {
                     if (!sa.isTargetNumberValid()
                             || sa.getTargets().size() == 0) {
@@ -693,7 +692,7 @@ public class CountersPutAi extends SpellAbilityAi {
                 }
 
                 if (sa.isCurse()) {
-                    choice = CountersAi.chooseCursedTarget(list, type, amount);
+                    choice = chooseCursedTarget(list, type, amount, ai);
                 } else {
                     CardCollection lands = CardLists.filter(list, CardPredicates.Presets.LANDS);
                     SpellAbility animate = sa.findSubAbilityByType(ApiType.Animate);
@@ -702,7 +701,7 @@ public class CountersPutAi extends SpellAbilityAi {
                     } else if ("BoonCounterOnOppCreature".equals(logic)) {
                         choice = ComputerUtilCard.getWorstCreatureAI(list);
                     } else {
-                        choice = CountersAi.chooseBoonTarget(list, type);
+                        choice = chooseBoonTarget(list, type);
                     }
                 }
 
@@ -838,7 +837,7 @@ public class CountersPutAi extends SpellAbilityAi {
                 // Choose targets here:
                 if (sa.isCurse()) {
                     if (preferred) {
-                        choice = CountersAi.chooseCursedTarget(list, type, amount);
+                        choice = chooseCursedTarget(list, type, amount, ai);
                         if (choice == null && mandatory) {
                             choice = Aggregates.random(list);
                         }
@@ -852,7 +851,7 @@ public class CountersPutAi extends SpellAbilityAi {
                 } else {
                     if (preferred) {
                         list = ComputerUtil.getSafeTargets(ai, sa, list);
-                        choice = CountersAi.chooseBoonTarget(list, type);
+                        choice = chooseBoonTarget(list, type);
                         if (choice == null && mandatory) {
                             choice = Aggregates.random(list);
                         }

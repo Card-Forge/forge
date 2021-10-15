@@ -49,7 +49,7 @@ public class AttackingBand {
         String[] validString = { "Legendary.Creature", "Creature.namedWolves of the Hunt", "Dinosaur" }; 
         
         Card source = band.get(0);
-        for(int i = 0; i < bandsWithString.length; i++) {
+        for (int i = 0; i < bandsWithString.length; i++) {
             String keyword = bandsWithString[i];
             String valid = validString[i];
             

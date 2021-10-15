@@ -1,9 +1,8 @@
 Name:Rushed Rebirth
 ManaCost:B G
 Types:Instant
-A:SP$ Effect | Cost$ B G | ValidTgts$ Creature | TgtPrompt$ Choose target creature | Triggers$ TargetDies | RememberObjects$ Targeted | SpellDescription$ Choose target creature. When that creature dies this turn, search your library for a creature card with lesser mana value, put it onto the battlefield tapped, then shuffle.
-SVar:TargetDies:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.IsRemembered | Execute$ DBSearch | TriggerZones$ Command | TriggerController$ You | TriggerDescription$ When that creature dies this turn, search your library for a creature card with lesser mana value, put it onto the battlefield tapped, then shuffle.
-SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature.cmcLTX | ChangeNum$ 1 | Tapped$ True | SubAbility$ ExileEffect
-SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-SVar:X:Remembered$CardManaCost
+A:SP$ ChooseCard | ValidTgts$ Creature | TgtPrompt$ Choose target creature | SubAbility$ DBDelayedTrigger | StackDescription$ When {c:Targeted} dies this turn, search your library for a creature card with lesser mana value, put it onto the battlefield tapped, then shuffle. | SpellDescription$ Choose target creature. When that creature dies this turn, search your library for a creature card with lesser mana value, put it onto the battlefield tapped, then shuffle.
+SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ ChangesZone | RememberObjects$ Targeted | ValidCard$ Card.IsTriggerRemembered | Origin$ Battlefield | Destination$ Graveyard | ThisTurn$ True | Execute$ TrigChangeZone | StackDescription$ None | TriggerDescription$ When that creature dies this turn, search your library for a creature card with lesser mana value, put it onto the battlefield tapped, then shuffle.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature.cmcLTX | ChangeNum$ 1 | Mandatory$ True | Tapped$ True
+SVar:X:TriggerRemembered$CardManaCost
 Oracle:Choose target creature. When that creature dies this turn, search your library for a creature card with lesser mana value, put it onto the battlefield tapped, then shuffle.

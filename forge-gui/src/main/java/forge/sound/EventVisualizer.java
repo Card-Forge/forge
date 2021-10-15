@@ -1,5 +1,6 @@
 package forge.sound;
 
+import java.io.File;
 import java.util.Collection;
 
 import forge.LobbyPlayer;
@@ -37,6 +38,7 @@ import forge.gui.events.IUiEventVisitor;
 import forge.gui.events.UiEventAttackerDeclared;
 import forge.gui.events.UiEventBlockerAssigned;
 import forge.gui.events.UiEventNextGameDecision;
+import forge.localinstance.properties.ForgeConstants;
 import forge.util.TextUtil;
 import forge.util.maps.MapOfLists;
 
@@ -313,9 +315,18 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
         // Implement sound effects for specific cards here, if necessary.
         String effect = "";
         if (null != c) {
-            effect = c.getSVar("SoundEffect");
+            if (c.hasSVar("SoundEffect")) {
+                effect = c.getSVar("SoundEffect");
+            } else {
+                effect = TextUtil.fastReplace(TextUtil.fastReplace(
+                        TextUtil.fastReplace(c.getName(), ",", ""),
+                        " ", "_"), "'", "").toLowerCase() + ".mp3";
+
+            }
         }
-        return !effect.isEmpty();
+
+        // Only proceed if the file actually exists
+        return new File(ForgeConstants.SOUND_DIR, effect).exists();
     }
 
 
@@ -332,11 +343,24 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
 
         if (evt instanceof GameEventSpellResolved) {
             c = ((GameEventSpellResolved) evt).spell.getHostCard();
-        } else if (evt instanceof GameEventLandPlayed) {
-            c = ((GameEventLandPlayed) evt).land;
+        } else if (evt instanceof GameEventZone) {
+            GameEventZone evZone = (GameEventZone)evt;
+            if (evZone.zoneType == ZoneType.Battlefield && evZone.mode == EventValueChangeType.Added && evZone.card.isLand()) {
+                c = evZone.card; // assuming a land is played or otherwise put on the battlefield
+            }
         }
 
-        return c != null ? c.getSVar("SoundEffect") : "";
+        if (c == null) {
+            return "";
+        } else {
+            if (c.hasSVar("SoundEffect")) {
+                return c.getSVar("SoundEffect");
+            } else {
+                return TextUtil.fastReplace(TextUtil.fastReplace(
+                        TextUtil.fastReplace(c.getName(), ",", ""),
+                        " ", "_"), "'", "").toLowerCase() + ".mp3";
+            }
+        }
     }
 
 

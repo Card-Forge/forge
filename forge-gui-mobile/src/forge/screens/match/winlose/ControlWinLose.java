@@ -19,7 +19,7 @@ public class ControlWinLose {
     private int humancount;
 
     /** @param v &emsp; ViewWinLose
-     * @param match */
+     * @param game */
     public ControlWinLose(final ViewWinLose v, GameView game) {
         view = v;
         lastGame = game;
@@ -89,7 +89,7 @@ public class ControlWinLose {
         } catch (NullPointerException e) {}
         view.hide();
         if (openHomeScreen || humancount == 0)
-            Forge.openHomeScreen(Forge.lastButtonIndex);
+            Forge.openHomeScreen(Forge.lastButtonIndex, Forge.getCurrentScreen());
     }
 
     /**

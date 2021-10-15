@@ -35,7 +35,7 @@ public class TapAi extends TapAiBase {
                 // Don't tap down after blockers
                 return false;
             }
-        } else if (!SpellAbilityAi.playReusable(ai, sa)){
+        } else if (!SpellAbilityAi.playReusable(ai, sa)) {
             // Generally don't want to tap things with an Instant during Players turn outside of combat
             return false;
         }

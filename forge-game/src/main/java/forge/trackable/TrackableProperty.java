@@ -78,6 +78,11 @@ public enum TrackableProperty {
     GainControlTargets(TrackableTypes.CardViewCollectionType),
     CloneOrigin(TrackableTypes.CardViewType),
     ExiledWith(TrackableTypes.CardViewType),
+    WasDestroyed(TrackableTypes.BooleanType),
+    CrackOverlay(TrackableTypes.IntegerType),
+    NeedsTransformAnimation(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
+    NeedsUntapAnimation(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
+    NeedsTapAnimation(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
 
     ImprintedCards(TrackableTypes.CardViewCollectionType),
     HauntedBy(TrackableTypes.CardViewCollectionType),
@@ -197,8 +202,10 @@ public enum TrackableProperty {
     Mana(TrackableTypes.ManaMapType, FreezeMode.IgnoresFreeze),
     IsExtraTurn(TrackableTypes.BooleanType),
     ExtraTurnCount(TrackableTypes.IntegerType),
-    HasPriority(TrackableTypes.BooleanType),
+    HasPriority(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
     HasDelirium(TrackableTypes.BooleanType),
+    AvatarLifeDifference(TrackableTypes.IntegerType, FreezeMode.IgnoresFreeze),
+    HasLost(TrackableTypes.BooleanType),
 
     //SpellAbility
     HostCard(TrackableTypes.CardViewType),
@@ -247,8 +254,9 @@ public enum TrackableProperty {
     GameOver(TrackableTypes.BooleanType),
     PoisonCountersToLose(TrackableTypes.IntegerType),
     GameLog(TrackableTypes.StringType),
-    PlayerTurn(TrackableTypes.PlayerViewType),
-    Phase(TrackableTypes.EnumType(PhaseType.class));
+    NeedsPhaseRedrawn(TrackableTypes.BooleanType),
+    PlayerTurn(TrackableTypes.PlayerViewType, FreezeMode.IgnoresFreeze),
+    Phase(TrackableTypes.EnumType(PhaseType.class), FreezeMode.IgnoresFreeze);
 
     public enum FreezeMode {
         IgnoresFreeze,

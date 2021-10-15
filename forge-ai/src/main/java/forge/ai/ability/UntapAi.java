@@ -98,11 +98,9 @@ public class UntapAi extends SpellAbilityAi {
 
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-
         boolean randomReturn = true;
 
-        if (tgt == null) {
+        if (!sa.usesTargeting()) {
             // who cares if its already untapped, it's only a subability?
         } else {
             if (!untapPrefTargeting(ai, sa, false)) {
@@ -241,8 +239,7 @@ public class UntapAi extends SpellAbilityAi {
                 tgt.getValidTgts(), source.getController(), source, sa);
         list = CardLists.getTargetableCards(list, sa);
 
-        // filter by enchantments and planeswalkers, their tapped state doesn't
-        // matter.
+        // filter by enchantments and planeswalkers, their tapped state doesn't matter.
         final String[] tappablePermanents = { "Enchantment", "Planeswalker" };
         CardCollection tapList = CardLists.getValidCards(list, tappablePermanents, source.getController(), source, sa);
 
@@ -273,7 +270,7 @@ public class UntapAi extends SpellAbilityAi {
             return false;
         }
 
-        while (sa.getTargets().size() < tgt.getMaxTargets(source, sa)) {
+        while (sa.canAddMoreTarget()) {
             Card choice = null;
 
             if (tapList.isEmpty()) {

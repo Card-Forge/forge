@@ -37,7 +37,7 @@ public class BidLifeEffect extends SpellAbilityEffect {
         if (sa.hasParam("OtherBidder")) {
             bidPlayers.add(activator);
             bidPlayers.addAll(AbilityUtils.getDefinedPlayers(host, sa.getParam("OtherBidder"), sa));
-        } else{
+        } else {
             bidPlayers.addAll(activator.getGame().getPlayersInTurnOrder());
             int pSize = bidPlayers.size();
             // start with the activator

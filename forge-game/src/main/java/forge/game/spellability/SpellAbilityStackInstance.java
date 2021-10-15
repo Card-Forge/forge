@@ -318,7 +318,7 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
         SpellAbility compare = sa;
         SpellAbilityStackInstance sub = this;
 
-        if (!compare.equals(sub.ability)){
+        if (!compare.equals(sub.ability)) {
             return false;
         }
 

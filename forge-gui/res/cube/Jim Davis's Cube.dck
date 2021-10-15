@@ -14,7 +14,7 @@ Name=Jim Davis's Cube
 1 Animate Dead|EMA
 1 Ankh of Mishra|VMA
 1 Arcbound Ravager|MPS_KLD
-1 Arid Mesa|MM3
+1 Arid Mesa|MH2
 1 Armageddon|A25
 1 Ashen Rider|THS
 1 Avacyn's Pilgrim|MM3
@@ -46,9 +46,9 @@ Name=Jim Davis's Cube
 1 Boros Charm|A25
 1 Boros Reckoner|MM3
 1 Bounding Krasis|ORI
-1 Braids, Cabal Minion|EMA
+1 Braids, Cabal Minion|MH2
 1 Brain Freeze|VMA
-1 Brainstorm|2XM
+1 Brainstorm|STX
 1 Breeding Pool|RNA
 1 Brimaz, King of Oreskos|BNG
 1 Bring to Light|BFZ
@@ -75,7 +75,7 @@ Name=Jim Davis's Cube
 1 Condescend|IMA
 1 Copperline Gorge|SOM
 1 Council's Judgment|2XM
-1 Counterspell|A25
+1 Counterspell|MH2
 1 Cranial Plating|2XM
 1 Creeping Tar Pit|UMA
 1 Crop Rotation|2XM
@@ -86,14 +86,14 @@ Name=Jim Davis's Cube
 1 Cursed Scroll|TPR
 1 Damnation|MPS_AKH
 1 Dark Confidant|2XM
-1 Dark Ritual|A25
+1 Dark Ritual|STX
 1 Darkslick Shores|SOM
 1 Darksteel Citadel|2XM
 1 Daze|MPS_AKH
 1 Deathrite Shaman|EMA
 1 Declaration in Stone|SOI
 1 Delver of Secrets|ISD
-1 Demonic Tutor|UMA
+1 Demonic Tutor|STX
 1 Detention Sphere|RTR
 1 Dig Through Time|UMA
 1 Dimir Signet|MM3
@@ -108,7 +108,7 @@ Name=Jim Davis's Cube
 1 Dwarven Blastminer|ONS
 1 Edric, Spymaster of Trest|VMA
 1 Eidolon of the Great Revel|A25
-1 Electrolyze|IMA
+1 Electrolyze|STX
 1 Emrakul, the Aeons Torn|UMA
 1 Engineered Explosives|2XM
 1 Enlightened Tutor|EMA
@@ -123,14 +123,14 @@ Name=Jim Davis's Cube
 1 Experiment One|GTC
 1 Explore|MM3
 1 Fact or Fiction|MH1
-1 Faithless Looting|UMA
+1 Faithless Looting|STX
 1 Falkenrath Aristocrat|2XM
 1 Falkenrath Gorger|SOI
 1 Far // Away|DGM
 1 Fastbond|VMA
 1 Fauna Shaman|UMA
 1 Figure of Destiny|MMA
-1 Fire // Ice|UMA
+1 Fire // Ice|MH2
 1 Fireblast|VMA
 1 Firebolt|MH1
 1 Firestorm|WTH
@@ -177,7 +177,7 @@ Name=Jim Davis's Cube
 1 Hallowed Fountain|RNA
 1 Hallowed Spiritkeeper|C14
 1 Hangarback Walker|MPS_KLD
-1 Harmonize|MM3
+1 Harmonize|STX
 1 Heartbeat of Spring|2XM
 1 Hellrider|MM3
 1 Hellspark Elemental|CFX
@@ -189,10 +189,10 @@ Name=Jim Davis's Cube
 1 Hooting Mandrills|UMA
 1 Horizon Canopy|IMA
 1 Hymn to Tourach|EMA
-1 Imperial Recruiter|2XM
+1 Imperial Recruiter|MH2
 1 Imperial Seal|PTK
 1 Inferno Titan|M12
-1 Inquisition of Kozilek|MM3
+1 Inquisition of Kozilek|STX
 1 Isamaru, Hound of Konda|CHK
 1 Isochron Scepter|2XM
 1 Isolated Chapel|DOM
@@ -215,8 +215,8 @@ Name=Jim Davis's Cube
 1 Kytheon, Hero of Akros|ORI
 1 Land Tax|2XM
 1 Life from the Loam|UMA
-1 Lightning Bolt|A25
-1 Lightning Helix|IMA
+1 Lightning Bolt|STX
+1 Lightning Helix|STX
 1 Lightning Mauler|AVR
 1 Liliana of the Veil|UMA
 1 Lim-Dul's Vault|ALL
@@ -233,21 +233,21 @@ Name=Jim Davis's Cube
 1 Mana Confluence|EXP
 1 Mana Leak|IMA
 1 Mardu Woe-Reaper|FRF
-1 Marsh Flats|MM3
+1 Marsh Flats|MH2
 1 Martial Coup|CFX
 1 Master of Etherium|2XM
 1 Maze of Ith|2XM
 1 Meloku the Clouded Mirror|MMA
 1 Memnite|SOM
 1 Memory Jar|VMA
-1 Memory Lapse|EMA
+1 Memory Lapse|STX
 1 Mentor of the Meek|M19
 1 Metalworker|UDS
 1 Mind Stone|IMA
 1 Mindslaver|SOM
-1 Mirari's Wake|CNS
-1 Mishra's Factory|2XM
-1 Misty Rainforest|MM3
+1 Mirari's Wake|MH2
+1 Mishra's Factory|MH2
+1 Misty Rainforest|MH2
 1 Molten Rain|MM3
 1 Moment's Peace|ODY
 1 Monastery Mentor|FRF
@@ -308,7 +308,7 @@ Name=Jim Davis's Cube
 1 Reclamation Sage|2XM
 1 Recurring Nightmare|TPR
 1 Reflector Mage|OGW
-1 Regrowth|MH1
+1 Regrowth|STX
 1 Relic Seeker|ORI
 1 Remand|MM2
 1 Restoration Angel|IMA
@@ -319,7 +319,7 @@ Name=Jim Davis's Cube
 1 Sacred Foundry|GRN
 1 Sakura-Tribe Elder|CNS
 1 Savannah|VMA
-1 Scalding Tarn|MM3
+1 Scalding Tarn|MH2
 1 Scavenging Ooze|M21
 1 Scroll Rack|MPS_KLD
 1 Scrubland|VMA
@@ -331,7 +331,7 @@ Name=Jim Davis's Cube
 1 Sensei's Divining Top|EMA
 1 Shadowmage Infiltrator|A25
 1 Shambling Vent|BFZ
-1 Shardless Agent|EMA
+1 Shardless Agent|MH2
 1 Shelldock Isle|LRW
 1 Show and Tell|CN2
 1 Shrapnel Blast|M15
@@ -375,7 +375,7 @@ Name=Jim Davis's Cube
 1 Survival of the Fittest|TPR
 1 Sword of Feast and Famine|2XM
 1 Sword of Fire and Ice|2XM
-1 Swords to Plowshares|A25
+1 Swords to Plowshares|STX
 1 Sylvan Library|EMA
 1 Taiga|VMA
 1 Tangle Wire|NMS
@@ -385,7 +385,7 @@ Name=Jim Davis's Cube
 1 Temple Garden|GRN
 1 Temple of Epiphany|M21
 1 Temple of Malice|THB
-1 Tendrils of Agony|VMA
+1 Tendrils of Agony|STX
 1 Terastodon|2XM
 1 Terminate|MM3
 1 Tezzeret, Agent of Bolas|MBS
@@ -426,7 +426,7 @@ Name=Jim Davis's Cube
 1 Umezawa's Jitte|BOK
 1 Underground Sea|VMA
 1 Unexpectedly Absent|EMA
-1 Upheaval|VMA
+1 Upheaval|MH2
 1 Urborg, Tomb of Yawgmoth|M15
 1 Vampire Lacerator|A25
 1 Vampiric Tutor|EMA
@@ -436,9 +436,9 @@ Name=Jim Davis's Cube
 1 Vendilion Clique|A25
 1 Vengevine|2XM
 1 Venser, Shaper Savant|MM3
-1 Verdant Catacombs|MM3
+1 Verdant Catacombs|MH2
 1 Village Messenger|SOI
-1 Vindicate|A25
+1 Vindicate|MH2
 1 Volcanic Island|VMA
 1 Volrath's Stronghold|STH
 1 Voltaic Key|M11

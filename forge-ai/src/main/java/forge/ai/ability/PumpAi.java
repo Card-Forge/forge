@@ -429,7 +429,7 @@ public class PumpAi extends PumpAiBase {
         final Card source = sa.getHostCard();
         final boolean isFight = "Fight".equals(sa.getParam("AILogic")) || "PowerDmg".equals(sa.getParam("AILogic"));
 
-        immediately |= ComputerUtil.playImmediately(ai, sa);
+        immediately = immediately || ComputerUtil.playImmediately(ai, sa);
 
         if (!mandatory
                 && !immediately
@@ -437,7 +437,7 @@ public class PumpAi extends PumpAiBase {
                 && !(sa.isCurse() && defense < 0)
                 && !containsNonCombatKeyword(keywords)
                 && !"UntilYourNextTurn".equals(sa.getParam("Duration"))
-                && !"Snapcaster".equals(sa.getParam("AILogic"))
+                && !"ReplaySpell".equals(sa.getParam("AILogic"))
                 && !isFight) {
             return false;
         }
@@ -526,15 +526,15 @@ public class PumpAi extends PumpAiBase {
             }
             list = getCurseCreatures(ai, sa, defense, attack, keywords);
         } else {
-            if (!tgt.canTgtCreature()) {
-                ZoneType zone = tgt.getZone().get(0);
-                list = new CardCollection(game.getCardsIn(zone));
-            } else {
-                list = getPumpCreatures(ai, sa, defense, attack, keywords, immediately);
-            }
             if (sa.canTarget(ai)) {
                 sa.getTargets().add(ai);
                 return true;
+            }
+            if (tgt.canTgtCreature()) {
+                list = getPumpCreatures(ai, sa, defense, attack, keywords, immediately);
+            } else {
+                ZoneType zone = tgt.getZone().get(0);
+                list = new CardCollection(game.getCardsIn(zone));
             }
         }
 
@@ -559,7 +559,7 @@ public class PumpAi extends PumpAiBase {
             list = CardLists.filter(list, Predicates.or(CardPredicates.Presets.CREATURES, new Predicate<Card>() {
                 @Override
                 public boolean apply(Card card) {
-                    for (SpellAbility sa: card.getSpellAbilities()) {
+                    for (SpellAbility sa : card.getSpellAbilities()) {
                         if (sa.isAbility()) {
                             return true;
                         }
@@ -595,8 +595,8 @@ public class PumpAi extends PumpAiBase {
             });
         }
 
-        if ("Snapcaster".equals(sa.getParam("AILogic"))) {
-            if (!ComputerUtil.targetPlayableSpellCard(ai, list, sa, false, false)) {
+        if ("ReplaySpell".equals(sa.getParam("AILogic"))) {
+            if (!ComputerUtil.targetPlayableSpellCard(ai, list, sa, false, mandatory)) {
                 return false;
             }
         }
@@ -662,7 +662,7 @@ public class PumpAi extends PumpAiBase {
             forced = CardLists.filterControlledBy(list, ai.getOpponents());
         }
 
-        while (sa.getTargets().size() < tgt.getMaxTargets(source, sa)) {
+        while (sa.canAddMoreTarget()) {
             if (pref.isEmpty()) {
                 break;
             }

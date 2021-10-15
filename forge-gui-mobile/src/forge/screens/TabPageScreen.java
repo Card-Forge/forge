@@ -396,8 +396,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
                         g.drawText(caption, font, TAB_FORE_COLOR, x, y, w, h, false, Align.left, true);
                         g.endClip();
                     }
-                }
-                else {
+                } else {
                     float y = h - padding - TAB_FONT.getCapHeight();
                     g.drawText(caption, TAB_FONT, TAB_FORE_COLOR, padding, y - padding, w, h - y + padding, false, Align.center, true);
 
@@ -408,7 +407,8 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
                             iconHeight *= w / iconWidth;
                             iconWidth = w;
                         }
-                        g.drawImage(icon, padding + (w - iconWidth) / 2, (y - iconHeight) / 2, iconWidth, iconHeight);
+                        float mod = isHovered() ? iconWidth/8f : 0;
+                        g.drawImage(icon, (padding + (w - iconWidth) / 2)-mod/2, ((y - iconHeight) / 2)-mod/2, iconWidth+mod, iconHeight+mod);
                     }
                 }
 

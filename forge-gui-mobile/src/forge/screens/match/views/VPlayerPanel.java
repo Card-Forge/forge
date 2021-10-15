@@ -371,7 +371,7 @@ public class VPlayerPanel extends FContainer {
         if (!Forge.altZoneTabs)
             field.setFieldModifier(0);
         else
-            field.setFieldModifier(avatarWidth);
+            field.setFieldModifier(avatarWidth/16);
     }
 
     @Override
@@ -417,9 +417,9 @@ public class VPlayerPanel extends FContainer {
         private void update() {
             int vibrateDuration = 0;
             int delta = player.getLife() - life;
+            player.setAvatarLifeDifference(player.getAvatarLifeDifference()+delta);
             if (delta != 0) {
                 if (delta < 0) {
-                    //TODO: Show animation on avatar for life loss
                     vibrateDuration += delta * -100;
                 }
                 life = player.getLife();
@@ -546,6 +546,12 @@ public class VPlayerPanel extends FContainer {
         public void draw(Graphics g) {
             float x, y, w, h;
 
+            if (Forge.altZoneTabs) {
+                //draw extra
+                if (isAltZoneDisplay(this) && selectedTab == this) {
+                    g.fillRect(DISPLAY_AREA_BACK_COLOR, 0, isFlipped() ? INFO_TAB_PADDING_Y : 0, getWidth(), getHeight() - INFO_TAB_PADDING_Y);
+                }
+            }
             if (selectedTab == this) {
                 y = 0;
                 w = getWidth();
@@ -604,7 +610,8 @@ public class VPlayerPanel extends FContainer {
                 if (lblLife.getRotate180()) {
                     g.startRotateTransform(x + w / 2, y + h / 2, 180);
                 }
-                g.drawImage(icon, x, y, w, h);
+                float mod = isHovered() ? w/8f:0;
+                g.drawImage(icon, x-mod/2, y-mod/2, w+mod, h+mod);
                 if (lblLife.getRotate180()) {
                     g.endTransform();
                 }
@@ -631,7 +638,8 @@ public class VPlayerPanel extends FContainer {
                 h = icon.getHeight() * w / icon.getWidth();
                 x = (getWidth() - w) / 2;
                 y = INFO_TAB_PADDING_Y;
-                g.drawImage(icon, x, y, w, h);
+                float mod = isHovered() ? w/8f:0;
+                g.drawImage(icon, x-mod/2, y-mod/2, w+mod, h+mod);
 
                 y += h + INFO_TAB_PADDING_Y;
                 g.drawText(value, INFO_FONT, INFO_FORE_COLOR, 0, y, getWidth(), getHeight() - y + 1, false, Align.center, false);

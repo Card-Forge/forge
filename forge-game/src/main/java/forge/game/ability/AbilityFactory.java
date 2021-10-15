@@ -225,7 +225,6 @@ public final class AbilityFactory {
 
         SpellAbility spellAbility = type.buildSpellAbility(api, hostCard, abCost, abTgt, mapParams);
 
-
         if (spellAbility == null) {
             final StringBuilder msg = new StringBuilder();
             msg.append("AbilityFactory : SpellAbility was not created for ");
@@ -343,10 +342,8 @@ public final class AbilityFactory {
 
         TargetRestrictions abTgt = new TargetRestrictions(prompt, mapParams.get("ValidTgts").split(","), min, max);
 
-        if (mapParams.containsKey("TgtZone")) { // if Targeting
-                                                     // something
-            // not in play, this Key
-            // should be set
+        if (mapParams.containsKey("TgtZone")) {
+            // if Targeting something not in play, this Key should be set
             abTgt.setZone(ZoneType.listValueOf(mapParams.get("TgtZone")));
         }
 

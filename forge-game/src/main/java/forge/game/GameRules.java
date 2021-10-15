@@ -16,6 +16,8 @@ public class GameRules {
 
     // it's a preference, not rule... but I could hardly find a better place for it
     private boolean canCloneUseTargetsImage;
+    // same for me
+    private boolean useGrayText;
 
     public GameRules(final GameType type) {
         this.gameType = type;
@@ -98,5 +100,12 @@ public class GameRules {
     }
     public void setCanCloneUseTargetsImage(final boolean canCloneUseTargetsImage) {
         this.canCloneUseTargetsImage = canCloneUseTargetsImage;
+    }
+
+    public boolean useGrayText() {
+        return useGrayText;
+    }
+    public void setUseGrayText(final boolean useGrayText) {
+        this.useGrayText = useGrayText;
     }
 }

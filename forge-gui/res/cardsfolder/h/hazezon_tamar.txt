@@ -5,8 +5,7 @@ PT:2/4
 T:Mode$ ChangesZone | ValidCard$ Creature.Self | Origin$ Any | Destination$ Battlefield | Execute$ DelTrig | TriggerDescription$ When CARDNAME enters the battlefield, create X 1/1 Sand Warrior creature tokens that are red, green, and white at the beginning of your next upkeep, where X is the number of lands you control at that time.
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigTokens | TriggerDescription$ Create X 1/1 Sand Warrior creature tokens that are red, green, and white, where X is the number of lands you control.
 SVar:TrigTokens:DB$ Token | TokenAmount$ X | TokenScript$ rgw_1_1_sand_warrior | TokenOwner$ You
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigExile | TriggerDescription$ When CARDNAME leaves the battlefield, exile all Sand Warriors.
-#NICKNAME upgrade
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigExile | TriggerDescription$ When NICKNAME leaves the battlefield, exile all Sand Warriors.
 SVar:TrigExile:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | ChangeType$ Sand.Warrior
 SVar:X:Count$Valid Land.YouCtrl
 DeckHas:Ability$Token

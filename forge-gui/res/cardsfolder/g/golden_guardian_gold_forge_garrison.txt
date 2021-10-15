@@ -3,17 +3,10 @@ ManaCost:4
 Types:Artifact Creature Golem
 PT:4/4
 K:Defender
-A:AB$ Fight | Cost$ 2 | Defined$ Self | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control | SubAbility$ DBDiesEffect | SpellDescription$ CARDNAME fights another target creature you control. When CARDNAME dies this turn, return it to the battlefield transformed under your control.
-
-#TODO: This should be a Delayed Trigger, but AF DelayedTrigger doesn't work at the moment due to timestamp check issues.
-SVar:DBDiesEffect:DB$ Effect | Name$ Golden Guardian Effect | Triggers$ TrigChangesZone | RememberObjects$ Self | ExileOnMoved$ Exile
-SVar:TrigChangesZone:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.IsRemembered | Execute$ TrigChangeZone | TriggerDescription$ When EFFECTSOURCE dies this turn, return it to the battlefield transformed under your control.
-SVar:TrigChangeZone:DB$ ChangeZone | Defined$ Remembered | Origin$ Graveyard | Destination$ Battlefield | Transformed$ True | GainControl$ True | SubAbility$ EndEffect
-SVar:EndEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-
+A:AB$ Fight | Cost$ 2 | Defined$ Self | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control | SubAbility$ DBDelayedTrigger | StackDescription$ CARDNAME fights {c:Targeted}. | SpellDescription$ CARDNAME fights another target creature you control. When CARDNAME dies this turn, return it to the battlefield transformed under your control.
+SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ ChangesZone | RememberObjects$ Self | ValidCard$ Card.IsTriggerRemembered | Origin$ Battlefield | Destination$ Graveyard | ThisTurn$ True | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME dies this turn, return it to the battlefield transformed under your control.
+SVar:TrigChangeZone:DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ Graveyard | Destination$ Battlefield | Transformed$ True | GainControl$ True
 AlternateMode:DoubleFaced
-DeckHas:Ability$Token
-SVar:Picture:http://www.wizards.com/global/images/magic/general/golden_guardian.jpg
 Oracle:Defender\n{2}: Golden Guardian fights another target creature you control. When Golden Guardian dies this turn, return it to the battlefield transformed under your control.
 
 ALTERNATE
@@ -22,6 +15,6 @@ Name:Gold-Forge Garrison
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 2 | SpellDescription$ Add two mana of any one color.
-A:AB$ Token | Cost$ 4 T | TokenAmount$ 1 | TokenScript$ c_4_4_a_golem | TokenOwner$ You | LegacyImage$ c 4 4 a golem rix | SpellDescription$ Create a 4/4 colorless Golem artifact creature token.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/gold-forge_garrison.jpg
+A:AB$ Token | Cost$ 4 T | TokenScript$ c_4_4_a_golem | SpellDescription$ Create a 4/4 colorless Golem artifact creature token.
+DeckHas:Ability$Token
 Oracle:(Transforms from Golden Guardian.)\n{T}: Add two mana of any one color.\n{4}, {T}: Create a 4/4 colorless Golem artifact creature token.

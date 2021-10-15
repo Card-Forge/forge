@@ -103,6 +103,8 @@ public enum CounterEnumType {
 
     EON("EON", 23, 194, 255),
 
+    EMBER("EMBER", 247, 52, 43),
+
     EYEBALL("EYE", 184, 202, 201),
 
     EYESTALK("EYES", 184, 202, 201),
@@ -318,6 +320,8 @@ public enum CounterEnumType {
     TREASURE("TRSUR", 255, 184, 0),
 
     UNITY("UNITY", 242, 156, 255),
+
+    VALOR("VALOR", 252, 250, 222),
 
     VELOCITY("VELO", 255, 95, 138),
 

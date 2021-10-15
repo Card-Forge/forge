@@ -33,7 +33,7 @@ public class DebuffAi extends SpellAbilityAi {
         // if there is no target and host card isn't in play, don't activate
         final Card source = sa.getHostCard();
         final Game game = ai.getGame(); 
-        if ((sa.getTargetRestrictions() == null) && !source.isInPlay()) {
+        if (!sa.usesTargeting() && !source.isInPlay()) {
             return false;
         }
 
@@ -136,7 +136,7 @@ public class DebuffAi extends SpellAbilityAi {
             return mandatory && debuffMandatoryTarget(ai, sa, mandatory);
         }
 
-        while (sa.getTargets().size() < tgt.getMaxTargets(sa.getHostCard(), sa)) {
+        while (sa.canAddMoreTarget()) {
             Card t = null;
 
             if (list.isEmpty()) {
@@ -216,7 +216,7 @@ public class DebuffAi extends SpellAbilityAi {
         final CardCollection forced = CardLists.filterControlledBy(list, ai);
         final Card source = sa.getHostCard();
 
-        while (sa.getTargets().size() < tgt.getMaxTargets(source, sa)) {
+        while (sa.canAddMoreTarget()) {
             if (pref.isEmpty()) {
                 break;
             }
@@ -263,7 +263,7 @@ public class DebuffAi extends SpellAbilityAi {
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final List<String> kws = sa.hasParam("Keywords") ? Arrays.asList(sa.getParam("Keywords").split(" & ")) : new ArrayList<>();
 
-        if (sa.getTargetRestrictions() == null) {
+        if (!sa.usesTargeting()) {
             if (mandatory) {
                 return true;
             }

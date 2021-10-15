@@ -1,0 +1,8 @@
+Name:Angelfire Ignition
+ManaCost:1 R W
+Types:Sorcery
+A:SP$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBPump | SpellDescription$ Put two +1/+1 counters on target creature.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Vigilance & Trample & Lifelink & Indestructible & Haste | StackDescription$ SpellDescription | SpellDescription$ It gains vigilance, trample, lifelink, indestructible, and haste until end of turn.
+K:Flashback:2 R W
+DeckHas:Ability$Graveyard & Ability$Counters & Ability$LifeGain
+Oracle:Put two +1/+1 counters on target creature. It gains vigilance, trample, lifelink, indestructible, and haste until end of turn.\nFlashback {2}{R}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

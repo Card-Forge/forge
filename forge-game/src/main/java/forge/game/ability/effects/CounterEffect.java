@@ -56,7 +56,7 @@ public class CounterEffect extends SpellAbilityEffect {
             sas = getTargetSpells(sa);
         }
 
-        sb.append("countering");
+        sb.append("Counter");
 
         boolean isAbility = false;
         for (final SpellAbility tgtSA : sas) {
@@ -70,6 +70,10 @@ public class CounterEffect extends SpellAbilityEffect {
 
         if (isAbility && sa.hasParam("DestroyPermanent")) {
             sb.append(" and destroy it");
+        }
+
+        if (sa.hasParam("UnlessCost")) {
+            sb.append(" unless its controller pays {" + sa.getParam("UnlessCost") + "}");
         }
 
         sb.append(".");

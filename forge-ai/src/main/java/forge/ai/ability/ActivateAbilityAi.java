@@ -19,7 +19,6 @@ public class ActivateAbilityAi extends SpellAbilityAi {
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         // AI cannot use this properly until he can use SAs during Humans turn
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getHostCard();
         final Player opp = ai.getStrongestOpponent();
 
@@ -28,7 +27,7 @@ public class ActivateAbilityAi extends SpellAbilityAi {
             return false;
         }
 
-        if (tgt == null) {
+        if (!sa.usesTargeting()) {
             final List<Player> defined = AbilityUtils.getDefinedPlayers(source, sa.getParam("Defined"), sa);
 
             if (!defined.contains(opp)) {
@@ -70,12 +69,11 @@ public class ActivateAbilityAi extends SpellAbilityAi {
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         // AI cannot use this properly until he can use SAs during Humans turn
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getHostCard();
 
         boolean randomReturn = true;
 
-        if (tgt == null) {
+        if (!sa.usesTargeting()) {
             final List<Player> defined = AbilityUtils.getDefinedPlayers(source, sa.getParam("Defined"), sa);
 
             if (defined.contains(ai)) {

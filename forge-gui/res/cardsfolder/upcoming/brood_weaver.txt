@@ -1,0 +1,9 @@
+Name:Brood Weaver
+ManaCost:3 G
+Types:Creature Spider
+PT:2/4
+K:Reach
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a 1/2 green Spider creature token with reach.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_2_spider_reach | TokenOwner$ You
+DeckHas:Ability$Token
+Oracle:Reach\nWhen Brood Weaver dies, create a 1/2 green Spider creature token with reach.

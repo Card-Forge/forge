@@ -66,7 +66,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
             } else if (sa.getParam("Gains").equals("TargetedCardColor")) {
                 for (final Card c : sa.getSATargetingCard().getTargets().getTargetCards()) {
                     ColorSet cs = CardUtil.getColors(c);
-                    for(byte col : MagicColor.WUBRG) {
+                    for (byte col : MagicColor.WUBRG) {
                         if (cs.hasAnyColor(col))
                             gains.add(MagicColor.toLongString(col).toLowerCase());
                     }
@@ -92,7 +92,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
 
             for (final Card tgtC : list) {
                 if (tgtC.isInPlay()) {
-                    tgtC.addChangedCardKeywords(gainsKWList, null, false, false, timestamp, 0, true);
+                    tgtC.addChangedCardKeywords(gainsKWList, null, false, timestamp, 0, true);
 
                     if (!"Permanent".equals(sa.getParam("Duration"))) {
                         // If not Permanent, remove protection at EOT

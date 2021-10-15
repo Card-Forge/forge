@@ -1,0 +1,13 @@
+Name:Slogurk, the Overslime
+ManaCost:1 G U
+Types:Legendary Creature Ooze
+PT:3/3
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Land.nonToken+YouOwn | TriggerZones$ Battlefield | Execute$ DBPutCounter | TriggerDescription$ Whenever a land card is put into your graveyard from anywhere, put a +1/+1 counter on CARDNAME.
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ ChangeZone | Cost$ SubCounter<3/P1P1> | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return it to its owner's hand.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DBChangeZone | TriggerDescription$ When NICKNAME leaves the battlefield, return up to three target land cards from your graveyard to your hand.
+SVar:DBChangeZone:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ 3 | ValidTgts$ Card.Land+YouOwn | TgtPrompt$ Select up to three target land cards | Origin$ Graveyard | Destination$ Hand
+DeckHas:Ability$Counters & Ability$Graveyard
+DeckHints:Ability$Discard
+Oracle:Trample\nWhenever a land card is put into your graveyard from anywhere, put a +1/+1 counter on Slogurk, the Overslime.\nRemove three +1/+1 counters from Slogurk: Return it to its owner's hand.\nWhen Slogurk leaves the battlefield, return up to three target land cards from your graveyard to your hand.

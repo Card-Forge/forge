@@ -43,7 +43,7 @@ public class AddTurnEffect extends SpellAbilityEffect {
         List<Player> tgtPlayers = getTargetPlayers(sa);
 
         for (final Player p : tgtPlayers) {
-            if ((sa.getTargetRestrictions() == null) || p.canBeTargetedBy(sa)) {
+            if (!sa.usesTargeting() || p.canBeTargetedBy(sa)) {
                 for (int i = 0; i < numTurns; i++) {
                     ExtraTurn extra = p.getGame().getPhaseHandler().addExtraTurn(p);
                     if (sa.hasParam("ExtraTurnDelayedTrigger")) {

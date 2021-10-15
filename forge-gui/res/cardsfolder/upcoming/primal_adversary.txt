@@ -1,0 +1,12 @@
+Name:Primal Adversary
+ManaCost:2 G
+Types:Creature Wolf
+PT:4/3
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPay | TriggerDescription$ When CARDNAME enters the battlefield, you may pay {1}{G} any number of times. When you pay this cost one or more times, put that many +1/+1 counters on CARDNAME, then up to that many target lands you control become 3/3 Wolf creatures with haste that are still lands.
+SVar:TrigPay:AB$ ImmediateTrigger | Cost$ Mana<1 G\NumTimes> | Announce$ NumTimes | ConditionCheckSVar$ NumTimes | ConditionSVarCompare$ GE1 | Execute$ TrigPutCounter | TriggerDescription$ When you pay this cost one or more times, put that many +1/+1 counters on CARDNAME, then up to that many target lands you control become 3/3 Wolf creatures with haste that are still lands.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ NumTimes | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | TargetMin$ 0 | TargetMax$ NumTimes | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select up to that many target lands you control | Power$ 3 | Toughness$ 3 | Types$ Wolf,Creature | Keywords$ Haste | Duration$ Permanent
+SVar:NumTimes:Number$0
+DeckHas:Ability$Counters
+Oracle:Trample\nWhen Primal Adversary enters the battlefield, you may pay {1}{G} any number of times. When you pay this cost one or more times, put that many +1/+1 counters on Primal Adversary, then up to that many target lands you control become 3/3 Wolf creatures with haste that are still lands.

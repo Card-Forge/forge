@@ -113,10 +113,10 @@ public class SkipPhaseEffect extends SpellAbilityEffect {
             addUntilCommand(sa, endEffect);
         }
         eff.addReplacementEffect(re);
-        eff.updateStateForView();
 
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         game.getAction().moveTo(ZoneType.Command, eff, sa);
+        eff.updateStateForView();
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
     }
 }

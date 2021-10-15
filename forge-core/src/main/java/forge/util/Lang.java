@@ -134,8 +134,7 @@ public abstract class Lang {
         final String strCount;
         if (cnt == 1) {
             strCount = startsWithVowel(noun) ? "an " : "a ";
-        }
-        else {
+        } else {
             strCount = cnt + " ";
         }
         return strCount + countedForm;

@@ -103,7 +103,6 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
             CardCollection countersList = CardLists.filter(list, CardPredicates.hasCounters());
 
             if (!countersList.isEmpty()) {
-
                 if (!ai.isCardInPlay("Marit Lage") || noLegendary) {
                     CardCollectionView depthsList = CardLists.filter(countersList,
                             CardPredicates.nameEquals("Dark Depths"), CardPredicates.hasCounter(CounterEnumType.ICE));

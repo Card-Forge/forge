@@ -9,6 +9,7 @@ import org.apache.commons.lang3.mutable.MutableBoolean;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.common.collect.Table;
 
@@ -21,6 +22,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactory;
 import forge.game.card.CardUtil;
 import forge.game.card.CardZoneTable;
@@ -104,6 +106,14 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
             pumpKeywords.addAll(Arrays.asList(sa.getParam("PumpKeywords").split(" & ")));
         }
         List<Card> allTokens = Lists.newArrayList();
+
+        CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
+        CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
+
+        Map<AbilityKey, Object> moveParams = Maps.newEnumMap(AbilityKey.class);
+        moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
+        moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
+
         for (final Table.Cell<Player, Card, Integer> c : tokenTable.cellSet()) {
             Card prototype = c.getColumnKey();
             Player creator = c.getRowKey();
@@ -153,7 +163,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                 }
 
                 // Should this be catching the Card that's returned?
-                Card moved = game.getAction().moveToPlay(tok, sa);
+                Card moved = game.getAction().moveToPlay(tok, sa, moveParams);
                 if (moved == null || moved.getZone() == null) {
                     // in case token can't enter the battlefield, it isn't created
                     triggerList.put(ZoneType.None, ZoneType.None, moved);
@@ -167,7 +177,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                     moved.setCloneOrigin(host);
                 }
                 if (!pumpKeywords.isEmpty()) {
-                    moved.addChangedCardKeywords(pumpKeywords, Lists.newArrayList(), false, false, timestamp, 0);
+                    moved.addChangedCardKeywords(pumpKeywords, Lists.newArrayList(), false, timestamp, 0);
                     addPumpUntil(sa, moved, timestamp);
                 }
 

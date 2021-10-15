@@ -166,13 +166,19 @@ public class Untap extends Phase {
         List<Card> cardsWithKW = CardLists.getKeyword(game.getCardsIn(ZoneType.Battlefield),
                 "CARDNAME untaps during each other player's untap step.");
         cardsWithKW = CardLists.getNotKeyword(cardsWithKW, "This card doesn't untap.");
-        
         cardsWithKW = CardLists.filterControlledBy(cardsWithKW, player.getAllOtherPlayers());
+
+        List<Card> cardsWithKW2 = CardLists.getKeyword(game.getCardsIn(ZoneType.Battlefield),
+                "CARDNAME untaps during each opponent's untap step.");
+        cardsWithKW2 = CardLists.getNotKeyword(cardsWithKW2, "This card doesn't untap.");
+        cardsWithKW2 = CardLists.filterControlledBy(cardsWithKW2, player.getOpponents());
+
+        cardsWithKW.addAll(cardsWithKW2);
         for (final Card cardWithKW : cardsWithKW) {
             if (cardWithKW.isExertedBy(player)) {
                 continue;
             }
-            cardWithKW.untap();
+            cardWithKW.untap(true);
         }
         // end other players untapping during your untap phase
 
@@ -239,11 +245,11 @@ public class Untap extends Phase {
                 }
                 boolean untap = c.getController().getController().chooseBinary(new SpellAbility.EmptySa(c, c.getController()), prompt.toString(), BinaryChoiceType.UntapOrLeaveTapped, defaultChoice);
                 if (untap) {
-                    c.untap();
+                    c.untap(true);
                 }
             }
         } else {
-            c.untap();
+            c.untap(true);
         }
     }
 

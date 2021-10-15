@@ -81,7 +81,8 @@ public class CostSacrifice extends CostPartWithList {
         }
 
         if (payCostFromSource()) {
-            sb.append(getType());
+            sb.append(getTypeDescription() == null || !getTypeDescription().startsWith("this")
+                    ? getType() : getTypeDescription());
         } else if (getAmount().equals("X")) {
             String typeDesc = getType().toLowerCase().replace(";","s and/or ");
             sb.append("any number of ").append(typeDesc).append("s");
@@ -126,7 +127,6 @@ public class CostSacrifice extends CostPartWithList {
             // choice, it can be Paid even if it's 0
         }
         else return source.canBeSacrificedBy(ability);
-
     }
 
     @Override

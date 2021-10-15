@@ -244,12 +244,12 @@ public class StaticEffect {
             // remove Types
             if (hasParam("AddType") || hasParam("RemoveType")) {
                 // the view is updated in GameAction#checkStaticAbilities to avoid flickering
-                affectedCard.removeChangedCardTypes(getTimestamp(), false);
+                affectedCard.removeChangedCardTypes(getTimestamp(), ability.getId(), false);
             }
 
             // remove colors
             if (hasParam("AddColor") || hasParam("SetColor")) {
-                affectedCard.removeColor(getTimestamp());
+                affectedCard.removeColor(getTimestamp(), ability.getId());
             }
 
             // remove may look at

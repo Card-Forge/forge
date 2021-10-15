@@ -18,6 +18,7 @@
 package forge.game.cost;
 
 import forge.game.Game;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
@@ -83,14 +84,15 @@ public class CostExile extends CostPartWithList {
     public final String toString() {
         final Integer i = this.convertAmount();
         String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
+        String origin = this.from.name().toLowerCase();
 
         if (this.payCostFromSource()) {
             if (!this.from.equals(ZoneType.Battlefield)) {
-                return String.format("Exile %s from your %s", this.getType(), this.from.name());
+                return String.format("Exile %s from your %s", this.getType(), origin);
             }
             return String.format("Exile %s", this.getType());
         } else if (this.getType().equals("All")) {
-            return String.format("Exile all cards from your %s", this.from.name());
+            return String.format("Exile all cards from your %s", origin);
         }
 
         if (this.from.equals(ZoneType.Battlefield)) {
@@ -100,18 +102,22 @@ public class CostExile extends CostPartWithList {
             return String.format("Exile %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc));
         }
 
-        if (!desc.equals("Card") && !desc.endsWith("card")) {
+        if (!desc.equals("Card") && !desc.contains("card")) {
             if (this.sameZone) {
-                return String.format("Exile card %s from the same %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), this.from.name());
+                return String.format("Exile card %s from the same %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), origin);
             }
-            return String.format("Exile card %s from your %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), this.from.name());
+            return String.format("Exile card %s from your %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), origin);
         }
 
         if (this.sameZone) {
-            return String.format("Exile %s from the same %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), this.from.name());
+            return String.format("Exile %s from the same %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), origin);
         }
 
-        return String.format("Exile %s from your %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), this.from.name());
+        if (this.getAmount().equals("X")) {
+            return String.format ("Exile any number of %s from your %s", desc, origin);
+        }
+
+        return String.format("Exile %s from your %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), origin);
     }
 
     @Override
@@ -130,8 +136,7 @@ public class CostExile extends CostPartWithList {
         CardCollectionView list;
         if (this.sameZone) {
             list = game.getCardsIn(this.from);
-        }
-        else {
+        } else {
             list = payer.getCardsIn(this.from);
         }
 
@@ -144,6 +149,10 @@ public class CostExile extends CostPartWithList {
         }
 
         Integer amount = this.convertAmount();
+
+        if (amount == null) { // try to calculate when it's defined.
+            amount = AbilityUtils.calculateAmount(ability.getHostCard(), getAmount(), ability);
+        }
 
         // for cards like Allosaurus Rider, do not count it
         if (this.from == ZoneType.Hand && source.isInZone(ZoneType.Hand) && list.contains(source)) {
@@ -171,7 +180,10 @@ public class CostExile extends CostPartWithList {
     @Override
     protected Card doPayment(SpellAbility ability, Card targetCard) {
         final Game game = targetCard.getGame();
-        return game.getAction().exile(targetCard, null);
+        Card newCard = game.getAction().exile(targetCard, null);
+        newCard.setExiledWith(ability.getHostCard());
+        newCard.setExiledBy(ability.getActivatingPlayer());
+        return newCard;
     }
 
     public static final String HashLKIListKey = "Exiled";

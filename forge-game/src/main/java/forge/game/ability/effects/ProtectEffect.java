@@ -142,7 +142,7 @@ public class ProtectEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            tgtC.addChangedCardKeywords(gainsKWList, null, false, false, timestamp, 0, true);
+            tgtC.addChangedCardKeywords(gainsKWList, null, false, timestamp, 0, true);
 
             if (!"Permanent".equals(sa.getParam("Duration"))) {
                 // If not Permanent, remove protection at EOT
@@ -166,7 +166,7 @@ public class ProtectEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            unTgtC.addChangedCardKeywords(gainsKWList, null, false, false, timestamp, 0, true);
+            unTgtC.addChangedCardKeywords(gainsKWList, null, false, timestamp, 0, true);
 
             if (!"Permanent".equals(sa.getParam("Duration"))) {
                 // If not Permanent, remove protection at EOT

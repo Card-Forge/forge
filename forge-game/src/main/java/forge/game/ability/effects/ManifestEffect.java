@@ -1,10 +1,16 @@
 package forge.game.ability.effects;
 
+import java.util.Map;
+
+import com.google.common.collect.Maps;
+
 import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -22,6 +28,13 @@ public class ManifestEffect extends SpellAbilityEffect {
                 sa.getParam("Amount"), sa) : 1;
         // Most commonly "defined" is Top of Library
         final String defined = sa.hasParam("Defined") ? sa.getParam("Defined") : "TopOfLibrary";
+
+        CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
+        CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
+
+        Map<AbilityKey, Object> moveParams = Maps.newEnumMap(AbilityKey.class);
+        moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
+        moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
 
         for (final Player p : getTargetPlayers(sa, "DefinedPlayer")) {
             if (sa.usesTargeting() || p.canBeTargetedBy(sa)) {
@@ -52,8 +65,8 @@ public class ManifestEffect extends SpellAbilityEffect {
                     CardLists.shuffle(tgtCards);
                 }
 
-                for(Card c : tgtCards) {
-                    Card rem = c.manifest(p, sa);
+                for (Card c : tgtCards) {
+                    Card rem = c.manifest(p, sa, moveParams);
                     if (sa.hasParam("RememberManifested") && rem != null && rem.isManifested()) {
                         source.addRemembered(rem);
                     }

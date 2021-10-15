@@ -279,6 +279,12 @@ public class PhaseHandler implements java.io.Serializable {
 
                 case DRAW:
                     playerTurn.drawCard();
+                    for (Player p : game.getPlayers()) {
+                        if (p.isOpponentOf(playerTurn) &&
+                                p.hasKeyword("You draw a card during each opponent's draw step.")) {
+                            p.drawCard();
+                        }
+                    }
                     break;
 
                 case MAIN1:
@@ -336,8 +342,7 @@ public class PhaseHandler implements java.io.Serializable {
                     // no first strikers, skip this step
                     if (!combat.assignCombatDamage(true)) {
                         givePriorityToPlayer = false;
-                    }
-                    else {
+                    } else {
                         combat.dealAssignedDamage();
                     }
                     break;
@@ -349,8 +354,7 @@ public class PhaseHandler implements java.io.Serializable {
 
                     if (!combat.assignCombatDamage(false)) {
                         givePriorityToPlayer = false;
-                    }
-                    else {
+                    } else {
                         combat.dealAssignedDamage();
                     }
                     break;
@@ -388,7 +392,7 @@ public class PhaseHandler implements java.io.Serializable {
                         final CardZoneTable table = new CardZoneTable();
                         final CardCollection discarded = new CardCollection();
                         boolean firstDiscarded = playerTurn.getNumDiscardedThisTurn() == 0;
-                        for (Card c : playerTurn.getController().chooseCardsToDiscardToMaximumHandSize(numDiscard)){
+                        for (Card c : playerTurn.getController().chooseCardsToDiscardToMaximumHandSize(numDiscard)) {
                             if (playerTurn.discard(c, null, table) != null) {
                                 discarded.add(c);
                             }
@@ -472,7 +476,7 @@ public class PhaseHandler implements java.io.Serializable {
             boolean manaBurns = game.getRules().hasManaBurn() ||
                     (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.manaBurn));
             if (manaBurns) {
-                p.loseLife(burn, true);
+                p.loseLife(burn, false, true);
             }
         }
 
@@ -566,7 +570,7 @@ public class PhaseHandler implements java.io.Serializable {
 
                     if (canAttack) {
                         if (shouldTapForAttack) {
-                            attacker.tap(true);
+                            attacker.tap(true, true);
                         }
                     } else {
                         combat.removeFromCombat(attacker);
@@ -584,7 +588,7 @@ public class PhaseHandler implements java.io.Serializable {
                     "You may exert CARDNAME as it attacks.");
 
             if (!possibleExerters.isEmpty()) {
-                for(Card exerter : whoDeclares.getController().exertAttackers(possibleExerters)) {
+                for (Card exerter : whoDeclares.getController().exertAttackers(possibleExerters)) {
                     exerter.exert();
                 }
             }
@@ -788,7 +792,6 @@ public class PhaseHandler implements java.io.Serializable {
 
             // Run this trigger once for each blocker
             for (final Card b : blockers) {
-
                 b.addBlockedThisTurn(a);
                 a.addBlockedByThisTurn(b);
 
@@ -1082,7 +1085,7 @@ public class PhaseHandler implements java.io.Serializable {
                     sw.reset();
                 }
             }
-            else if (DEBUG_PHASES){
+            else if (DEBUG_PHASES) {
                 System.out.print(" >> (no priority given to " + getPriorityPlayer() + ")\n");
             }
 

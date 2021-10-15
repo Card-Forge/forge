@@ -414,7 +414,7 @@ public class CardDetailUtil {
         }
 
         // chosen color
-        if (card.getChosenColors() != null) {
+        if (card.getChosenColors() != null && !card.getChosenColors().isEmpty()) {
             if (area.length() != 0) {
                 area.append("\n");
             }

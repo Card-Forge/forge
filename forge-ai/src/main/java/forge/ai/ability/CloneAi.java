@@ -92,7 +92,6 @@ public class CloneAi extends SpellAbilityAi {
             chance = cloneTgtAI(sa);
         }
 
-
         return chance;
     }
 

@@ -1,0 +1,9 @@
+Name:Path to the Festival
+ManaCost:2 G
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ DBScry | StackDescription$ SpellDescription | StackDescription$ SpellDescription | SpellDescription$ Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. Then if there are three or more basic land types among lands you control, scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)
+SVar:DBScry:DB$ Scry | ConditionCheckSVar$ X | ConditionSVarCompare$ GE3 | ScryNum$ 1
+SVar:X:PlayerCountPropertyYou$DomainPlayer
+K:Flashback:4 G
+DeckHas:Ability$Graveyard
+Oracle:Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle. Then if there are three or more basic land types among lands you control, scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)\nFlashback {4}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

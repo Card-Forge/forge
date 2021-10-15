@@ -735,7 +735,25 @@ public class CardImageRenderer {
                 } else
                     g.drawRotatedImage(image, new_x, new_y, new_w, new_h, new_x + new_w / 2, new_y + new_h / 2, isAftermath ? 90 : -90);
             } else {
-                if (Forge.enableUIMask.equals("Full") && canshow) {
+                if (card.isFaceDown() && ZoneType.Exile.equals(card.getZone())) {
+                    if (card.isForeTold() || altState) {
+                        if (Forge.enableUIMask.equals("Full")) {
+                            if (ImageCache.isBorderlessCardArt(image))
+                                g.drawImage(image, x, y, w, h);
+                            else {
+                                g.drawImage(ImageCache.getBorderImage(image.toString()), ImageCache.borderColor(image), x, y, w, h);
+                                g.drawImage(ImageCache.croppedBorderImage(image), x + radius / 2.4f-minusxy, y + radius / 2-minusxy, w * croppedArea, h * croppedArea);
+                            }
+                        } else if (Forge.enableUIMask.equals("Crop")) {
+                            g.drawImage(ImageCache.croppedBorderImage(image), x, y, w, h);
+                        } else {
+                            g.drawImage(image, x, y, w, h);
+                        }
+                    } else {
+                     //show sleeves instead
+                        g.drawImage(sleeves, x, y, w, h);
+                    }
+                } else if (Forge.enableUIMask.equals("Full") && canshow) {
                     if (ImageCache.isBorderlessCardArt(image))
                         g.drawImage(image, x, y, w, h);
                     else {

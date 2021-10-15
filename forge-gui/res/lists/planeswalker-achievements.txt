@@ -164,6 +164,7 @@ Teferi, Master of Time|Teferi's Prolonged Afternoon|Defeating me will be quite a
 Teferi, Temporal Archmage|Teferi's Time Slip|Let's speed this up a bit!
 Teferi, Timebender|Teferi's Time Warp|Let's do that again!
 Teferi, Timeless Voyager|Teferi's Zhalfir Trick|I'll need a few volunteers from the audience.
+Teferi, Who Slows the Sunset|Teferi's Intrusion|Your turn is my turn.
 Tezzeret the Schemer|Tezzeret's Assembly Line|Smashing, isn't it?
 Tezzeret the Seeker|Tezzeret's Robots|You can't stop the progress!
 Tezzeret, Agent of Bolas|Tezzeret's Drain|Technological superiority for the win!
@@ -188,6 +189,7 @@ Vraska, Regal Gorgon|Vraska's Scavenger Hunt|Death is not the opposite of life -
 Vraska, Relic Seeker|Vraska's Mark|Never play hide and seek with a Gorgon.
 Vraska, Scheming Gorgon|Vraska's Stone Gaze|I think we could use a new figurehead!
 Will, Scholar of Frost|Will's Elementics|I think it's better this way.
+Wrenn and Seven|Wrenn's Wild Regrowth|The past is no burden for me.
 Wrenn and Six|Wrenn's Bountiful Land|Let's retrace our steps.
 Xenagos, the Reveler|Xenagos's Reveal|Mwahahaha! Now I'm a god!
 Jiang Yanggu|Yanggu's Giant Growth|Now, Mowu! Fetch that tree!

@@ -405,8 +405,12 @@ public class AbilityUtils {
         }
 
         if (incR.length > 1 && !cards.isEmpty()) {
-            final String excR = "Card." + incR[1];
-            cards = CardLists.getValidCards(cards, excR.split(","), hostCard.getController(), hostCard, sa);
+            String[] valids = incR[1].split(",");
+            // need to add valids onto all of them
+            for (int i = 0; i < valids.length; i++) {
+                valids[i] = "Card." + valids[i];
+            }
+            cards = CardLists.getValidCards(cards, valids, hostCard.getController(), hostCard, sa);
         }
 
         return cards;
@@ -681,7 +685,7 @@ public class AbilityUtils {
                 // Make list of all targeted objects starting with the root SpellAbility
                 SpellAbility loopSA = sa.getRootAbility();
                 while (loopSA != null) {
-                    if (loopSA.getTargetRestrictions() != null) {
+                    if (loopSA.usesTargeting()) {
                         Iterables.addAll(objects, loopSA.getTargets());
                     }
                     loopSA = loopSA.getSubAbility();
@@ -1599,7 +1603,7 @@ public class AbilityUtils {
     public static void handleRemembering(final SpellAbility sa) {
         Card host = sa.getHostCard();
 
-        if (sa.hasParam("RememberTargets") && sa.getTargetRestrictions() != null) {
+        if (sa.hasParam("RememberTargets") && sa.usesTargeting()) {
             if (sa.hasParam("ForgetOtherTargets")) {
                 host.clearRemembered();
             }
@@ -1608,7 +1612,7 @@ public class AbilityUtils {
             }
         }
 
-        if (sa.hasParam("ImprintTargets") && sa.getTargetRestrictions() != null) {
+        if (sa.hasParam("ImprintTargets") && sa.usesTargeting()) {
             for (final Card c : sa.getTargets().getTargetCards()) {
                 host.addImprintedCard(c);
             }
@@ -1824,6 +1828,12 @@ public class AbilityUtils {
                     }
                     return count;
                 }
+                // Count$TriggeredManaSpent
+                if (sq[0].equals("TriggeredManaSpent")) {
+                    final SpellAbility root = (SpellAbility) sa.getRootAbility().getTriggeringObject(AbilityKey.SpellAbility);
+                    return root.getTotalManaSpent();
+                }
+
                 // Count$Adamant.<Color>.<True>.<False>
                 if (sq[0].startsWith("Adamant")) {
                     final String payingMana = StringUtils.join(sa.getRootAbility().getPayingMana());
@@ -2030,7 +2040,7 @@ public class AbilityUtils {
             } else {
                 ce = c;
             }
-            return doXMath(getNumberOfTypes(ce), expr, c, ctb);
+            return doXMath(ce == null ? 0 : getNumberOfTypes(ce), expr, c, ctb);
         }
 
         if (sq[0].contains("CardNumColors")) {
@@ -2049,8 +2059,7 @@ public class AbilityUtils {
                         count += i;
                     }
                 }
-            }
-            else {
+            } else {
                 count = c.getCounters(CounterType.getType(sq[1]));
             }
             return doXMath(count, expr, c, ctb);
@@ -2398,12 +2407,11 @@ public class AbilityUtils {
 
         //SacrificedThisTurn <type>
         if (sq[0].startsWith("SacrificedThisTurn")) {
-            CardCollectionView list = player.getSacrificedThisTurn();
+            List<Card> list = player.getSacrificedThisTurn();
             if (l[0].contains(" ")) {
                 String[] lparts = l[0].split(" ", 2);
                 String restrictions = TextUtil.fastReplace(l[0], TextUtil.addSuffix(lparts[0]," "), "");
-                final String[] rest = restrictions.split(",");
-                list = CardLists.getValidCards(list, rest, player, c, ctb);
+                list = CardLists.getValidCardsAsList(list, restrictions, player, c, ctb);
             }
             return doXMath(list.size(), expr, c, ctb);
         }
@@ -2542,7 +2550,7 @@ public class AbilityUtils {
             int colorOcurrencices = 0;
             byte colorCode = ManaAtom.fromName(sq[1]);
             for (Card c0 : cards) {
-                for (ManaCostShard sh : c0.getManaCost()){
+                for (ManaCostShard sh : c0.getManaCost()) {
                     if (sh.isColor(colorCode))
                         colorOcurrencices++;
                 }

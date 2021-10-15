@@ -674,6 +674,19 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
     }
 
+    private boolean isAllowedReplacement() {
+        switch (editorType) {
+            case Constructed:
+            case Commander:
+            case Oathbreaker:
+            case TinyLeaders:
+            case Brawl:
+                return true;
+            default:
+                return false;
+        }
+    }
+
     protected Map<ColumnDef, ItemColumn> getColOverrides(ItemManagerConfig config) {
         return null;
     }
@@ -1453,6 +1466,35 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         }
                     });
                 }
+                if (parentScreen.isAllowedReplacement()) {
+                    final List<PaperCard> cardOptions = FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(card.getName());
+                    if (cardOptions != null && cardOptions.size() > 1) {
+                        menu.addItem(new FMenuItem(localizer.getMessage("lblReplaceCard"), Forge.hdbuttons ? FSkinImage.HDCHOICE : FSkinImage.DECKLIST, new FEventHandler() {
+                            @Override
+                            public void handleEvent(FEvent e) {
+                                //sort options so current option is on top and selected by default
+                                List<PaperCard> sortedOptions = new ArrayList<>();
+                                sortedOptions.add(card);
+                                for (PaperCard option : cardOptions) {
+                                    if (option != card) {
+                                        sortedOptions.add(option);
+                                    }
+                                }
+                                GuiChoose.oneOrNone(localizer.getMessage("lblSelectReplacementCard") + " " + card.getName(), sortedOptions, new Callback<PaperCard>() {
+                                    @Override
+                                    public void run(PaperCard result) {
+                                        if (result != null) {
+                                            if (result != card) {
+                                                addCard(result);
+                                                removeCard(card);
+                                            }
+                                        }
+                                    }
+                                });
+                            }
+                        }));
+                    }
+                }
                 addCommanderItems(menu, card, false, false);
                 break;
             case Sideboard:
@@ -1492,6 +1534,35 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         parentScreen.getMainDeckPage().addCard(card, result);
                     }
                 });
+                if (parentScreen.isAllowedReplacement()) {
+                    final List<PaperCard> cardOptions = FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(card.getName());
+                    if (cardOptions != null && cardOptions.size() > 1) {
+                        menu.addItem(new FMenuItem(localizer.getMessage("lblReplaceCard"), Forge.hdbuttons ? FSkinImage.HDCHOICE : FSkinImage.DECKLIST, new FEventHandler() {
+                            @Override
+                            public void handleEvent(FEvent e) {
+                                //sort options so current option is on top and selected by default
+                                List<PaperCard> sortedOptions = new ArrayList<>();
+                                sortedOptions.add(card);
+                                for (PaperCard option : cardOptions) {
+                                    if (option != card) {
+                                        sortedOptions.add(option);
+                                    }
+                                }
+                                GuiChoose.oneOrNone(localizer.getMessage("lblSelectReplacementCard") + " " + card.getName(), sortedOptions, new Callback<PaperCard>() {
+                                    @Override
+                                    public void run(PaperCard result) {
+                                        if (result != null) {
+                                            if (result != card) {
+                                                addCard(result);
+                                                removeCard(card);
+                                            }
+                                        }
+                                    }
+                                });
+                            }
+                        }));
+                    }
+                }
                 addCommanderItems(menu, card, false, false);
                 break;
             case Commander:
@@ -1508,6 +1579,35 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                             parentScreen.setSelectedPage(parentScreen.getCatalogPage());
                         }
                     });
+                }
+                if (parentScreen.isAllowedReplacement()) {
+                    final List<PaperCard> cardOptions = FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(card.getName());
+                    if (cardOptions != null && cardOptions.size() > 1) {
+                        menu.addItem(new FMenuItem(localizer.getMessage("lblReplaceCard"), Forge.hdbuttons ? FSkinImage.HDCHOICE : FSkinImage.DECKLIST, new FEventHandler() {
+                            @Override
+                            public void handleEvent(FEvent e) {
+                                //sort options so current option is on top and selected by default
+                                List<PaperCard> sortedOptions = new ArrayList<>();
+                                sortedOptions.add(card);
+                                for (PaperCard option : cardOptions) {
+                                    if (option != card) {
+                                        sortedOptions.add(option);
+                                    }
+                                }
+                                GuiChoose.oneOrNone(localizer.getMessage("lblSelectReplacementCard") + " " + card.getName(), sortedOptions, new Callback<PaperCard>() {
+                                    @Override
+                                    public void run(PaperCard result) {
+                                        if (result != null) {
+                                            if (result != card) {
+                                                addCard(result);
+                                                removeCard(card);
+                                            }
+                                        }
+                                    }
+                                });
+                            }
+                        }));
+                    }
                 }
                 break;
             case Avatar:

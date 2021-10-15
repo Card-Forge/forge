@@ -22,7 +22,6 @@ public class TapOrUntapEffect extends SpellAbilityEffect {
         // when getStackDesc is called, just build exactly what is happening
         final StringBuilder sb = new StringBuilder();
 
-
         sb.append("Tap or untap ");
 
         final List<Card> tgtCards = getTargetCards(sa);
@@ -45,9 +44,9 @@ public class TapOrUntapEffect extends SpellAbilityEffect {
                         !tgtC.getController().equals(sa.getActivatingPlayer()) );
 
                 if (tap) {
-                    tgtC.tap();
+                    tgtC.tap(true);
                 } else {
-                    tgtC.untap();
+                    tgtC.untap(true);
                 }
             }
         }

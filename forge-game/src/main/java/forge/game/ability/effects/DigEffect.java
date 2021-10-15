@@ -3,11 +3,13 @@ package forge.game.ability.effects;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.GameEntityCounterTable;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -121,6 +123,9 @@ public class DigEffect extends SpellAbilityEffect {
         CardZoneTable table = new CardZoneTable();
         GameEntityCounterTable counterTable = new GameEntityCounterTable();
         boolean combatChanged = false;
+        CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
+        CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
+
         for (final Player p : tgtPlayers) {
             if (tgt != null && !p.canBeTargetedBy(sa)) {
                 continue;
@@ -159,8 +164,6 @@ public class DigEffect extends SpellAbilityEffect {
                             }
                         }
                     }
-                    // Singletons.getModel().getGameAction().revealToCopmuter(top.toArray());
-                    // - for when it exists
                 }
                 else if (!sa.hasParam("NoLooking")) {
                     // show the user the revealed cards
@@ -285,14 +288,14 @@ public class DigEffect extends SpellAbilityEffect {
                         if (valid.isEmpty()) {
                             chooser.getController().notifyOfValue(sa, null, Localizer.getInstance().getMessage("lblNoValidCards"));
                         } else {
-                            if ( p == chooser ) { // the digger can still see all the dug cards when choosing
+                            if (p == chooser) { // the digger can still see all the dug cards when choosing
                                 chooser.getController().tempShowCards(top);
                             }
                             List<Card> chosen = new ArrayList<>();
 
                             int max = anyNumber ? valid.size() : Math.min(valid.size(),destZone1ChangeNum);
                             int min = (anyNumber || optional) ? 0 : max;
-                            if ( max > 0 ) { // if max is 0 don't make a choice
+                            if (max > 0) { // if max is 0 don't make a choice
                                 chosen = chooser.getController().chooseEntitiesForEffect(valid, min, max, delayedReveal, sa, prompt, p, null);
                             }
 
@@ -309,6 +312,10 @@ public class DigEffect extends SpellAbilityEffect {
                     }
                     Collections.reverse(movedCards);
 
+                    if (destZone1.equals(ZoneType.Battlefield)) {
+                        movedCards = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, movedCards, destZone1, sa);
+                    }
+
                     Card effectHost = sa.getOriginalHost();
                     if (effectHost == null) {
                         effectHost = sa.getHostCard();
@@ -323,7 +330,10 @@ public class DigEffect extends SpellAbilityEffect {
                             }
                             c = game.getAction().moveTo(zone, c, libraryPosition, sa);
                         } else {
-                            c = game.getAction().moveTo(zone, c, sa);
+                            Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+                            moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
+                            moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
+                            c = game.getAction().moveTo(zone, c, sa, moveParams);
                             if (destZone1.equals(ZoneType.Battlefield)) {
                                 if (sa.hasParam("Tapped")) {
                                     c.setTapped(true);

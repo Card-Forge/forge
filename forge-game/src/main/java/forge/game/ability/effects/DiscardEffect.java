@@ -44,7 +44,7 @@ public class DiscardEffect extends SpellAbilityEffect {
             } else if (mode.equals("RevealDiscardAll")) {
                 sb.append("reveals their hand. Discard (");
             } else {
-                sb.append("discards (");
+                sb.append("discards ");
             }
 
             int numCards = 1;
@@ -62,10 +62,8 @@ public class DiscardEffect extends SpellAbilityEffect {
                     && sa.getSVar("X").equals("Remembered$Amount")) {
                 sb.append("that many");
             } else {
-                sb.append(numCards);
+                sb.append(numCards == 1 ? "a card" : (Lang.getNumeral(numCards) + " cards"));
             }
-
-            sb.append(")");
 
             if (mode.equals("RevealYouChoose")) {
                 sb.append(" to discard");
@@ -109,7 +107,6 @@ public class DiscardEffect extends SpellAbilityEffect {
         final Card source = sa.getHostCard();
         final String mode = sa.getParam("Mode");
         final Game game = source.getGame();
-        //final boolean anyNumber = sa.hasParam("AnyNumber");
 
         final List<Player> targets = getTargetPlayers(sa),
                 discarders;
@@ -173,7 +170,7 @@ public class DiscardEffect extends SpellAbilityEffect {
 
                 int numCards = 1;
                 if (sa.hasParam("NumCards")) {
-                    numCards = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa);
+                    numCards = AbilityUtils.calculateAmount(source, sa.getParam("NumCards"), sa);
                     numCards = Math.min(numCards, numCardsInHand);
                 }
 
@@ -230,7 +227,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                         continue;
                     }
 
-                    String valid = sa.hasParam("DiscardValid") ? sa.getParam("DiscardValid") : "Card";
+                    String valid = sa.getParamOrDefault("DiscardValid", "Card");
 
                     if (valid.contains("X")) {
                         valid = TextUtil.fastReplace(valid,

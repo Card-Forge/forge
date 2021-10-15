@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import forge.game.event.GameEventCardForetold;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
@@ -47,6 +48,7 @@ import forge.game.Game;
 import forge.game.GameEntityCounterTable;
 import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.cost.Cost;
@@ -110,7 +112,16 @@ public class CardFactoryUtil {
                 if (!hostCard.isFaceDown()) {
                     hostCard.setOriginalStateAsFaceDown();
                 }
-                hostCard.getGame().getAction().moveToPlay(hostCard, this);
+                final Game game = hostCard.getGame();
+
+                CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
+                CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
+
+                Map<AbilityKey, Object> moveParams = Maps.newEnumMap(AbilityKey.class);
+                moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
+                moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
+
+                hostCard.getGame().getAction().moveToPlay(hostCard, this, moveParams);
             }
 
             @Override
@@ -182,7 +193,6 @@ public class CardFactoryUtil {
     }
 
     public static SpellAbility abilityManifestFaceUp(final Card sourceCard, final ManaCost manaCost) {
-
         String costDesc = manaCost.toString();
 
         // Cost need to be set later
@@ -333,7 +343,7 @@ public class CardFactoryUtil {
                 if (color.hasAnyColor(MagicColor.WUBRG[i]))
                     map[i]++;
             }
-        } // for
+        }
 
         byte mask = 0;
         int nMax = -1;
@@ -371,7 +381,7 @@ public class CardFactoryUtil {
                 if (color.hasAnyColor(MagicColor.WUBRG[i]))
                     map[i]++;
             }
-        } // for
+        }
         Arrays.sort(map);
         return map;
     }
@@ -528,7 +538,7 @@ public class CardFactoryUtil {
                     landkw.add(k);
                 } else if (k.startsWith("Protection")) {
                     protectionkw.add(k);
-                    for(byte col : MagicColor.WUBRG) {
+                    for (byte col : MagicColor.WUBRG) {
                         final String colString = "Protection from " + MagicColor.toLongString(col).toLowerCase();
                         if (k.contains(colString)) {
                             protectionColorkw.add(colString);
@@ -886,7 +896,7 @@ public class CardFactoryUtil {
             cascadeTrigger.setOverridingAbility(dig);
 
             inst.addTrigger(cascadeTrigger);
-        } else if (keyword.startsWith("Champion")){
+        } else if (keyword.startsWith("Champion")) {
             final String[] k = keyword.split(":");
             final String[] valid = k[1].split(",");
             String desc = Lang.joinHomogenous(Lists.newArrayList(valid), null, "or");
@@ -1678,7 +1688,7 @@ public class CardFactoryUtil {
 
             int idx = 0;
             int skipId = 0;
-            for(String ab : abs) {
+            for (String ab : abs) {
                 idx += 1;
                 if (idx <= skipId) {
                     continue;
@@ -1888,7 +1898,7 @@ public class CardFactoryUtil {
             final List<String> abs = Arrays.asList(keyword.substring("Dungeon:".length()).split(","));
             final Map<String, SpellAbility> saMap = new LinkedHashMap<>();
 
-            for(String ab : abs) {
+            for (String ab : abs) {
                 saMap.put(ab, AbilityFactory.getAbility(card, ab));
             }
             for (SpellAbility sa : saMap.values()) {
@@ -2844,6 +2854,7 @@ public class CardFactoryUtil {
                     }
                     String sb = TextUtil.concatWithSpace(getActivatingPlayer().toString(),"has foretold.");
                     game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
+                    game.fireEvent(new GameEventCardForetold(getActivatingPlayer()));
                 }
             };
             final StringBuilder sbDesc = new StringBuilder();
@@ -2945,7 +2956,7 @@ public class CardFactoryUtil {
 
             inst.addSpellAbility(abilityMorphDown(card));
             inst.addSpellAbility(abilityMorphUp(card, k[1], false));
-        } else if (keyword.startsWith("Megamorph")){
+        } else if (keyword.startsWith("Megamorph")) {
             final String[] k = keyword.split(":");
 
             inst.addSpellAbility(abilityMorphDown(card));
@@ -3178,15 +3189,15 @@ public class CardFactoryUtil {
                         return false;
                     }
 
+                    if (this.getHostCard().getGame().getStack().isSplitSecondOnStack()) {
+                        return false;
+                    }
+
                     if (StaticAbilityCantBeCast.cantBeCastAbility(this, this.getHostCard(), this.getActivatingPlayer())) {
                         return false;
                     }
 
-                    if (this.getHostCard().isInstant() || this.getHostCard().hasKeyword(Keyword.FLASH)) {
-                        return true;
-                    }
-
-                    return this.getHostCard().getOwner().canCastSorcery();
+                    return this.getHostCard().getFirstSpellAbility().canCastTiming(this.getHostCard(), this.getActivatingPlayer());
                 }
 
                 @Override

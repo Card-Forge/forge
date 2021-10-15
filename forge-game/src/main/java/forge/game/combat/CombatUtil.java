@@ -81,11 +81,11 @@ public class CombatUtil {
 
     public static boolean validateAttackers(final Combat combat) {
         final AttackConstraints constraints = combat.getAttackConstraints();
-        final Pair<Map<Card, GameEntity>, Integer> bestAttack = constraints.getLegalAttackers();
         final int myViolations = constraints.countViolations(combat.getAttackersAndDefenders());
         if (myViolations == -1) {
             return false;
         }
+        final Pair<Map<Card, GameEntity>, Integer> bestAttack = constraints.getLegalAttackers();
         return myViolations <= bestAttack.getRight().intValue();
     }
 

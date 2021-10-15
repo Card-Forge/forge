@@ -25,6 +25,7 @@ import java.util.Map;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 
 import forge.card.CardStateName;
 import forge.game.GameEntity;
@@ -347,7 +348,7 @@ public class AiBlockController {
 
         // Try to block an attacker without first strike with a gang of first strikers
         for (final Card attacker : attackersLeft) {
-            if (ComputerUtilCombat.attackerCantBeDestroyedInCombat(ai, attacker)) {
+            if (ComputerUtilCombat.combatantCantBeDestroyed(ai, attacker)) {
                 // don't bother with gang blocking if the attacker will regenerate or is indestructible
                 continue;
             }
@@ -395,7 +396,7 @@ public class AiBlockController {
 
         // Try to block an attacker with two blockers of which only one will die
         for (final Card attacker : attackersLeft) {
-            if (ComputerUtilCombat.attackerCantBeDestroyedInCombat(ai, attacker)) {
+            if (ComputerUtilCombat.combatantCantBeDestroyed(ai, attacker)) {
                 // don't bother with gang blocking if the attacker will regenerate or is indestructible
                 continue;
             }
@@ -1296,7 +1297,7 @@ public class AiBlockController {
         boolean creatureParityOrAllowedDiff = aiCreatureCount
                 + (randomTradeIfBehindOnBoard ? maxCreatDiff : 0) >= oppCreatureCount;
         boolean wantToTradeWithCreatInHand = randomTradeIfCreatInHand
-                && !CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.CREATURES).isEmpty()
+                && Iterables.any(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.CREATURES)
                 && aiCreatureCount + maxCreatDiffWithRepl >= oppCreatureCount;
         boolean wantToSavePlaneswalker = MyRandom.percentTrue(chanceToSavePW)
                 && combat.getDefenderByAttacker(attacker) instanceof Card

@@ -78,7 +78,7 @@ public class AmassEffect extends TokenEffectBase {
         tgtCards = pc.chooseCardsForEffect(tgtCards, sa, Localizer.getInstance().getMessage("lblChooseAnArmy"), 1, 1, false, params);
 
         GameEntityCounterTable table = new GameEntityCounterTable();
-        for(final Card tgtCard : tgtCards) {
+        for (final Card tgtCard : tgtCards) {
             tgtCard.addCounter(CounterEnumType.P1P1, amount, activator, sa, true, table);
             game.updateLastStateForCard(tgtCard);
 

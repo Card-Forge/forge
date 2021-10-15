@@ -4,8 +4,8 @@ Types:Enchantment Saga
 K:Saga:3:DBToken,DBAnimate,DBGangUp
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_2_2_shapeshifter_changeling | TokenOwner$ You | SpellDescription$ Create a 2/2 blue Shapeshifter creature token with changeling.
 SVar:DBAnimate:DB$ Animate | ValidTgts$ Creature.Shapeshifter+YouCtrl | TargetMin$ 0 | TargetMax$ MaxTargets | TgtPrompt$ Select any number of Shapeshifter creatures you control | Power$ 4 | Toughness$ 4 | Duration$ Permanent | SpellDescription$ Any number of target Shapeshifter creatures you control have base power and toughness 4/4.
-SVar:DBGangUp:DB$ Pump | ValidTgts$ Creature,Planeswalker | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose up to one target creature or planeswalker | ImprintCards$ Targeted | SubAbility$ DBRepeatEach
-SVar:DBRepeatEach:DB$ RepeatEach | RepeatCards$ Creature.YouCtrl+powerGE4 | RepeatSubAbility$ DBDamage | DamageMap$ True | SubAbility$ DBCleanup | SpellDescription$ Choose up to one target creature or planeswalker. Each creature with power 4 or greater you control deals damage equal to its power to that permanent.
+SVar:DBGangUp:DB$ Pump | ValidTgts$ Creature,Planeswalker | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose up to one target creature or planeswalker | ImprintCards$ Targeted | SubAbility$ DBRepeatEach | SpellDescription$ Choose up to one target creature or planeswalker. Each creature with power 4 or greater you control deals damage equal to its power to that permanent.
+SVar:DBRepeatEach:DB$ RepeatEach | RepeatCards$ Creature.YouCtrl+powerGE4 | RepeatSubAbility$ DBDamage | DamageMap$ True | SubAbility$ DBCleanup 
 SVar:DBDamage:DB$ DealDamage | Defined$ Imprinted | DamageSource$ Remembered | NumDmg$ Z
 SVar:MaxTargets:Count$Valid Creature.Shapeshifter+YouCtrl
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

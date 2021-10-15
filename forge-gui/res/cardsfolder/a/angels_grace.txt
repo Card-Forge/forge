@@ -2,7 +2,10 @@ Name:Angel's Grace
 ManaCost:W
 Types:Instant
 K:Split second
-A:SP$ Effect | Cost$ W | Name$ Angel's Grace Effect | StaticAbilities$ STCantLose | AILogic$ Fog | SpellDescription$ You can't lose the game this turn and your opponents can't win the game this turn. Until end of turn, damage that would reduce your life total to less than 1 reduces it to 1 instead.
-SVar:STCantLose:Mode$ Continuous | EffectZone$ Command | Affected$ You | AddKeyword$ You can't lose the game. & Your opponents can't win the game. & DamageLifeThreshold:1 | Description$ You can't lose the game. Your opponents can't win the game. Damage that would reduce your life total to less than 1 reduces it to 1 instead.
-SVar:Picture:http://www.wizards.com/global/images/magic/general/angels_grace.jpg
+A:SP$ Effect | Cost$ W | Name$ Angel's Grace Effect | StaticAbilities$ STCantLose | ReplacementEffects$ SelflessDamage | AILogic$ Fog | SpellDescription$ You can't lose the game this turn and your opponents can't win the game this turn. Until end of turn, damage that would reduce your life total to less than 1 reduces it to 1 instead.
+SVar:STCantLose:Mode$ Continuous | Affected$ You | AddKeyword$ You can't lose the game. & Your opponents can't win the game. | Description$ You can't lose the game. Your opponents can't win the game.
+SVar:SelflessDamage:Event$ LifeReduced | ValidPlayer$ You | Result$ LT1 | IsDamage$ True | CheckSVar$ YourLife | SVarCompare$ GE1 | ReplaceWith$ ReduceLoss | Description$ Until end of turn, damage that would reduce your life total to less than 1 reduces it to 1 instead.
+SVar:ReduceLoss:DB$ ReplaceEffect | VarName$ Result | VarValue$ X
+SVar:X:ReplaceCount$Result/NMinus.1
+SVar:YourLife:Count$YourLifeTotal
 Oracle:Split second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nYou can't lose the game this turn and your opponents can't win the game this turn. Until end of turn, damage that would reduce your life total to less than 1 reduces it to 1 instead.
