@@ -60,6 +60,7 @@ public enum SpellApiToAi {
             .put(ApiType.ControlSpell, CannotPlayAi.class)
             .put(ApiType.Counter, CounterAi.class)
             .put(ApiType.DamageAll, DamageAllAi.class)
+            .put(ApiType.DayTime, DayTimeAi.class)
             .put(ApiType.DealDamage, DamageDealAi.class)
             .put(ApiType.Debuff, DebuffAi.class)
             .put(ApiType.DeclareCombatants, CannotPlayAi.class)
