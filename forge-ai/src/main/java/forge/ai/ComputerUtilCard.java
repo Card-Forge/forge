@@ -1834,10 +1834,6 @@ public class ComputerUtilCard {
         return false;
     }
 
-    public static boolean isPresentOnBattlefield(final Game game, final String cardName) {
-        return Iterables.any(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals(cardName));
-    }
-
     public static int getMaxSAEnergyCostOnBattlefield(final Player ai) {
         // returns the maximum energy cost of an ability that permanents on the battlefield under AI's control have
         CardCollectionView otb = ai.getCardsIn(ZoneType.Battlefield);

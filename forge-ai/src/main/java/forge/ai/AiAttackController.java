@@ -699,9 +699,9 @@ public class AiAttackController {
 
         final boolean bAssault = doAssault(ai);
         // TODO: detect Lightmine Field by presence of a card with a specific trigger
-        final boolean lightmineField = ComputerUtilCard.isPresentOnBattlefield(ai.getGame(), "Lightmine Field");
+        final boolean lightmineField = ai.getGame().isCardInPlay("Lightmine Field");
         // TODO: detect Season of the Witch by presence of a card with a specific trigger
-        final boolean seasonOfTheWitch = ComputerUtilCard.isPresentOnBattlefield(ai.getGame(), "Season of the Witch");
+        final boolean seasonOfTheWitch = ai.getGame().isCardInPlay("Season of the Witch");
 
         // Determine who will be attacked
         GameEntity defender = chooseDefender(combat, bAssault);

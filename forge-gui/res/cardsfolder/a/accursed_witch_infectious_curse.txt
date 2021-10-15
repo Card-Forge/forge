@@ -5,7 +5,7 @@ PT:4/2
 S:Mode$ ReduceCost | ValidTarget$ Card.Self | Activator$ Player.Opponent | Type$ Spell | Amount$ 1 | Description$ Spells your opponents cast that target CARDNAME cost {1} less to cast.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, return it to the battlefield transformed under your control attached to target opponent.
 SVar:TrigChoose:DB$ Pump | ValidTgts$ Opponent | TgtPrompt$ Choose a opponent | IsCurse$ True | SubAbility$ DBChange
-SVar:DBChange:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Battlefield | AttachedToPlayer$ ParentTarget | Transformed$ True | GainControl$ True
+SVar:DBChange:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Battlefield | AttachedToPlayer$ ParentTarget | Transformed$ True | GainControl$ True | AILogic$ Curse
 SVar:SacMe:4
 SVar:MustAttack:True
 AlternateMode:DoubleFaced
@@ -18,7 +18,7 @@ ManaCost:no cost
 Colors:black
 Types:Enchantment Aura Curse
 K:Enchant player
-A:SP$ Attach | Cost$ 0 | ValidTgts$ Player | AILogic$ Curse
+A:SP$ Attach | Cost$ 0 | ValidTgts$ Player
 S:Mode$ ReduceCost | ValidTarget$ Player.EnchantedBy | Activator$ You | Type$ Spell | Amount$ 1 | Description$ Spells you cast that target enchanted player cost {1} less to cast.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedBy | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ At the beginning of enchanted player's upkeep, that player loses 1 life and you gain 1 life.
 SVar:TrigDrain:DB$ LoseLife | Defined$ TriggeredPlayer | LifeAmount$ 1 | SubAbility$ DBGainLife

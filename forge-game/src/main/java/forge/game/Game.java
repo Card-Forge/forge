@@ -583,21 +583,11 @@ public class Game {
     }
 
     public boolean isCardInPlay(final String cardName) {
-        for (final Player p : getPlayers()) {
-            if (p.isCardInPlay(cardName)) {
-                return true;
-            }
-        }
-        return false;
+        return Iterables.any(getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals(cardName));
     }
 
     public boolean isCardInCommand(final String cardName) {
-        for (final Player p : getPlayers()) {
-            if (p.isCardInCommand(cardName)) {
-                return true;
-            }
-        }
-        return false;
+        return Iterables.any(getCardsIn(ZoneType.Command), CardPredicates.nameEquals(cardName));
     }
 
     public CardCollectionView getColoredCardsInPlay(final String color) {

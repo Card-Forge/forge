@@ -90,12 +90,12 @@ public class CharmAi extends SpellAbilityAi {
             if (AiPlayDecision.WillPlay == aic.canPlaySa(sub)) {
                 chosenList.add(sub);
                 if (chosenList.size() == num) {
-                    return chosenList;  // maximum choices reached
+                    return chosenList; // maximum choices reached
                 }
             }
         }
         if (isTrigger && chosenList.size() < min) {
-            // Second pass using doTrigger(false) to fulfil minimum choice
+            // Second pass using doTrigger(false) to fulfill minimum choice
             choices.removeAll(chosenList);
             for (AbilitySub sub : choices) {
                 sub.setActivatingPlayer(ai);
