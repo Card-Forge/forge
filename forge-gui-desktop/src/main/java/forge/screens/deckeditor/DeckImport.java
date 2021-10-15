@@ -19,8 +19,7 @@ package forge.screens.deckeditor;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.EnumSet;
+import java.util.*;
 import java.util.List;
 
 import javax.swing.*;
@@ -83,20 +82,20 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
     public static final String RARITY_CLASS = "rarity";
 
     private static final String STYLESHEET = String.format("<style>"
-            + "body, h1, h2, h3, h4, h5, h6, table, tr, td, a {font-weight: normal; line-height: 1.6; "
+            + "body, h1, h2, h3, a {font-weight: normal; line-height: 1.8px; "
             + " font-family: Arial; font-size: 10px;}"
-            + " h3 {font-size: 13px; margin: 2px 0; padding: 0px 5px;}"
-            + " h4 {font-size: 11px; margin: 2px 0; padding: 0px 5px; font-weight: bold;}"
-            + " h5 {font-size: 11px; margin: 0; text-align: justify; padding: 1px 0 1px 8px;}"
-            + " ul li {padding: 5px 1px 1px 1px !important; margin: 0 1px !important}"
-            + " code {font-size: 10px;}"
-            + " p {margin: 2px; text-align: justify; padding: 2px 5px;}"
-            + " div {margin: 0; text-align: justify; padding: 1px 0 1px 8px;}"
+            + " tr, td { padding: 0px 1px; margin: 0px !important; }"
+            + " h3 {font-size: 13px; margin: 2px 0; padding: 0px 5px; font-weight: bold;}"
+            + " ul {margin: 5px; padding: 2px; font-size: 8px; }"
+            + " ul li {font-size: 10px;}"
+            + " code {font-size: 9px;}"
+            + " div {margin: 0; text-align: justify; padding: 1px 0 1px 8px; line-height: 1.8px;}"
             + " a:hover { text-decoration: none !important;}"
             + " a:link { text-decoration: none !important;}"
             + " a { text-decoration: none !important;}"
             + " a:active { text-decoration: none !important;}"
             + " table {margin: 5px 0;}"
+            + " .bullet {color: #FEC700;}"
             // Card Matching Colours #4F6070
             + " .%s {color: %s !important; font-weight: bold;}"  // ok import
             + " .%s {color: %s !important; font-weight: bold;}"  // warn msg
@@ -107,15 +106,7 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
             + " .%s {font-weight: bold; background-color: #DDDDDD; color: #000000;}"  // section
             + " .%s {font-weight: bold; background-color: #FFCC66; color: #000000;}"  // card type
             + " .%s {font-weight: bold; background-color: #CCCCCC; color: #000000;}"  // cmc
-            + " .%s {font-weight: bold; background-color: #df8030; color: #ffffff;}"  // rarity
-//            // Colours
-//            + " .colorless   {font-weight: bold; background-color: #544132; color: #ffffff;}"
-//            + " .blue        {font-weight: bold; background-color: #0D78BF; color: #ffffff;}"
-//            + " .red         {font-weight: bold; background-color: #ED0713; color: #ffffff;}"
-//            + " .white       {font-weight: bold; background-color: #FCFCB6; color: #000000;}"
-//            + " .black       {font-weight: bold; background-color: #787878; color: #000000;}"
-//            + " .green       {font-weight: bold; background-color: #26AB57; color: #000000;}"
-//            + " .multicolor  {font-weight: bold; background-color: #c4c26c; color: #000000;}"
+            + " .%s {font-weight: bold; background-color: #F1B27E; color: #000000;}"  // rarity
             + "</style>", OK_IMPORT_CLASS, OK_CARD_IMPORT_COLOUR,
             WARN_MSG_CLASS, WARN_MSG_COLOUR, KO_NOIMPORT_CLASS, KO_CARD_NO_IMPORT_COLOUR,
             COMMENT_CLASS, DECKNAME_CLASS, SECTION_CLASS, CARDTYPE_CLASS, CMC_CLASS, RARITY_CLASS) ;
@@ -126,36 +117,39 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
             "<li> <span class=\"%s\">%s</span></li>" +
             "<li> <span class=\"%s\">%s</span></li></ul>",
             OK_IMPORT_CLASS, Localizer.getInstance().getMessage("lblGuideImportCard"),
-            WARN_MSG_COLOUR, Localizer.getInstance().getMessage("lblGuideWarnMessage"),
+            WARN_MSG_CLASS, Localizer.getInstance().getMessage("lblGuideWarnMessage"),
             KO_NOIMPORT_CLASS, Localizer.getInstance().getMessage("lblGuideNoImportCard")
             );
     private static final String TIPS_LIST = String.format(
-            "<ul><li>%s</li><li>%s</li><li>%s</li><li>%s</li><li>%s</li><li>%s</li></ul>",
+            "<p>%s</p> <p>%s</p> <p>%s</p> <p>%s</p> <p>%s</p> <p>%s</p> <p>%s</p>",
             Localizer.getInstance().getMessage("lblGuideTipsCount",
-                    String.format("<b>%s</b>", Localizer.getInstance().getMessage("lblGuideTipsTitleCount")),
-                    String.format("<code>%s</code>", "\"4 Power Sink\""),
-                    String.format("<code>%s</code>", "\"4x Power Sink\"")),
+                    String.format("<span class=\"bullet\">(A) %s</span>", Localizer.getInstance().getMessage("lblGuideTipsTitleCount")),
+                    String.format("<code>%s</code>", "\"4 Giant Growth\""),
+                    String.format("<code>%s</code>", "\"4x Giant Growth\"")),
             Localizer.getInstance().getMessage("lblGuideTipsSet",
-                    String.format("<b>%s</b>", Localizer.getInstance().getMessage("lblGuideTipsTitleSet"))),
-            Localizer.getInstance().getMessage("lblGuideTipsCardType",
-                    String.format("<b>%s</b>", Localizer.getInstance().getMessage("lblGuideTipsTitleCardType"))),
+                    String.format("<span class=\"bullet\">(B) %s</span>", Localizer.getInstance().getMessage("lblGuideTipsTitleSet"))),
+            Localizer.getInstance().getMessage("lblGuideTipsFoil",
+                    String.format("<span class=\"bullet\">(C) %s</span>", Localizer.getInstance().getMessage("lblGuideTipsTitleFoil")),
+                    String.format("<code>%s</code>", "Forest+"), "<code>(F)</code>"),
+            Localizer.getInstance().getMessage("lblGuideTipsPlaceholder",
+                    String.format("<span class=\"bullet\">(D) %s</span>", Localizer.getInstance().getMessage("lblGuideTipsTitlePlaceholder")),
+                    "<code>Lands, Creatures, Artifacts</code>", "<code>Common, Uncommon, Rare, Mythic</code>",
+                    "<code>CMC0, CC1</code>", "<code>Black, White|Green, Red Blue, Multicolor, Colorless</code>"),
             Localizer.getInstance().getMessage("lblGuideTipsDeckSection",
-                    String.format("<b>%s</b>", Localizer.getInstance().getMessage("lblGuideTipsTitleDeckSections"))),
+                    String.format("<span class=\"bullet\">(E) %s</span>", Localizer.getInstance().getMessage("lblGuideTipsTitleDeckSections")),
+                    "<code>Main, Sideboard, Commander</code>", "<code>Main</code>"),
             Localizer.getInstance().getMessage("lblGuideTipsDeckName",
-                    String.format("<b>%s</b>", Localizer.getInstance().getMessage("lblGuideTipsTitleDeckName"))),
+                    String.format("<span class=\"bullet\">(F) %s</span>", Localizer.getInstance().getMessage("lblGuideTipsTitleDeckName"))),
             Localizer.getInstance().getMessage("lblGuideTipsDeckFormats",
-                    String.format("<b>%s</b>", Localizer.getInstance().getMessage("lblGuideTipsTitleDeckFormat")))
+                    String.format("<span class=\"bullet\">(G) %s</span>", Localizer.getInstance().getMessage("lblGuideTipsTitleDeckFormat")))
     );
 
     private static final String EXAMPLES_LIST = String.format(
-            "<ul><li><code>%s</code></li></ul>" +
-            "<p class=\"example\">%s</p>" +
-            "<ul><li><code>%s</code></li></ul>" +
-            "<p class=\"example\">%s</p>" +
-            "<ul><li><code>%s</code></li></ul>" +
-            "<p class=\"example\">%s</p>" +
-            "<ul><li><code>%s</code></li></ul>" +
-            "<p class=\"example\">%s</p>",
+            "<p><code class=\"bullet\">%s</code>: %s</p>" +
+            "<p><code class=\"bullet\">%s</code>: %s</p>" +
+            "<p><code class=\"bullet\">%s</code>: %s</p>" +
+            "<p><code class=\"bullet\">%s</code>: %s</p>" +
+            "<p><code class=\"bullet\">%s</code>: %s</p>",
             Localizer.getInstance().getMessage("lblExample1"),
             Localizer.getInstance().getMessage("nlExample1"),
             Localizer.getInstance().getMessage("lblExample2"),
@@ -163,26 +157,27 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
             Localizer.getInstance().getMessage("lblExample3"),
             Localizer.getInstance().getMessage("nlExample3"),
             Localizer.getInstance().getMessage("lblExample4"),
-            Localizer.getInstance().getMessage("nlExample4")
+            Localizer.getInstance().getMessage("nlExample4"),
+            Localizer.getInstance().getMessage("lblExample5"),
+            Localizer.getInstance().getMessage("nlExample5")
     );
 
-    private static final String HTML_WELCOME_TEXT = String.format("<head>"
-            + DeckImport.STYLESHEET
-            + "</head>"
-            + "<body>"
-            + "<h3 id='how-to-use-the-deck-importer'>%s</h3><div>%s</div> "
-            + "<h4>%s</h4><div>%s</div> "
-            + "<h4>%s</h4><div>%s</div> "
-            + "</body>",
-            Localizer.getInstance().getMessage("nlGuideTitle"),
-            Localizer.getInstance().getMessage("nlGuideQuickInstructions", COLOUR_CODED_TAGS),
-            Localizer.getInstance().getMessage("nlGuideTipsTitle"),
-            Localizer.getInstance().getMessage("nlGuideTipsText", TIPS_LIST),
-            Localizer.getInstance().getMessage("nlGuideExamplesTitle"),
-            Localizer.getInstance().getMessage("nlGuideExamplesText", EXAMPLES_LIST)
+    private static final String HTML_WELCOME_TEXT = String.format(
+            "<head>" + DeckImport.STYLESHEET + "</head><body>"
+                    + "<h3>%s</h3><div>%s</div> "
+                    + "<h3>%s</h3><div>%s</div> "
+                    + "<br> "
+                    + "<h3>%s</h3><div>%s</div> "
+                    + "<br></body>",
+                Localizer.getInstance().getMessage("nlGuideTitle"),
+                Localizer.getInstance().getMessage("nlGuideQuickInstructions", COLOUR_CODED_TAGS),
+                Localizer.getInstance().getMessage("nlGuideTipsTitle"),
+                Localizer.getInstance().getMessage("nlGuideTipsText", TIPS_LIST),
+                Localizer.getInstance().getMessage("nlGuideExamplesTitle"), EXAMPLES_LIST
     );
+    private static final int PADDING_TOKEN_MSG_LENGTH = 45;
 
-    private final FHtmlViewer htmlOutput = new FHtmlViewer(DeckImport.HTML_WELCOME_TEXT);
+    private final FHtmlViewer htmlOutput = new FHtmlViewer();
     private final FScrollPane scrollInput = new FScrollPane(this.txtInput, false);
     private final FScrollPane scrollOutput = new FScrollPane(this.htmlOutput, false);
     private final CardPicturePanel cardImagePreview = new CardPicturePanel();
@@ -260,6 +255,7 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
         this.setTitle(Localizer.getInstance().getMessage("lblDeckImporterPanelTitle", this.currentGameType));
         txtInput.setFocusable(true);
         txtInput.setEditable(true);
+        showInstructions();
 
         final FSkin.SkinColor foreColor = FSkin.getColor(FSkin.Colors.CLR_TEXT);
 
@@ -566,45 +562,49 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
             if (card != null) {
                 // no need to check for card that has Image because CardPicturePanel
                 // has automatic integration with cardFetch
-                StringBuilder header = new StringBuilder();
-
-                if (tokenKey.tokenType == CARD_FROM_INVALID_SET)
-                    header.append(String.format("%s",
-                            Localizer.getInstance().getMessage("lblErrCardEditionDate")));
-                else if (tokenKey.tokenType == CARD_FROM_NOT_ALLOWED_SET)
-                    header.append(String.format("%s",
-                            Localizer.getInstance().getMessage("lblErrNotAllowedCard", getGameFormatLabel())));
-                else if (tokenKey.tokenType == LEGAL_CARD)
-                    header.append(String.format("%s: %s",
-                            Localizer.getInstance().getMessage("lblDeckSection"),
-                            tokenKey.deckSection));
-                else if (tokenKey.tokenType == LIMITED_CARD){
-                    if (this.controller.importBannedAndRestrictedCards()) {
-                        header.append(String.format("%s: %s - ",
-                                Localizer.getInstance().getMessage("lblDeckSection"),
-                                tokenKey.deckSection));
+                StringBuilder statusLbl = new StringBuilder();
+                if ((tokenKey.tokenType == CARD_FROM_INVALID_SET) || (tokenKey.tokenType == CARD_FROM_NOT_ALLOWED_SET)
+                        || (tokenKey.tokenType == LIMITED_CARD)) {
+                    DeckRecognizer.Token dummy = null;
+                    switch (tokenKey.tokenType) {
+                        case CARD_FROM_INVALID_SET:
+                            dummy = DeckRecognizer.Token.CardInInvalidSet(card, 0);
+                            break;
+                        case CARD_FROM_NOT_ALLOWED_SET:
+                            dummy = DeckRecognizer.Token.NotAllowedCard(card, 0);
+                            break;
+                        case LIMITED_CARD:
+                            dummy = DeckRecognizer.Token.LimitedCard(card, 0, tokenKey.deckSection, tokenKey.limitedType);
+                            break;
                     }
-                    header.append(String.format("%s",
-                            Localizer.getInstance().getMessage("lblErrLimitedCard",
-                                    StringUtils.capitalize(tokenKey.limitedType.name()),
-                                    getGameFormatLabel())));
+                    String cssClass = getTokenCSSClass(tokenKey.tokenType);
+                    if (tokenKey.tokenType == LIMITED_CARD)
+                        cssClass = WARN_MSG_CLASS;
+                    String statusMsg = String.format("<span class=\"%s\" style=\"font-size: 9px;\">%s</span>", cssClass,
+                            getTokenStatusMessage(dummy));
+                    statusLbl.append(statusMsg);
                 }
+
                 CardEdition edition = data.getCardEdition(card.getEdition());
                 String editionName = edition != null ? String.format("%s ", edition.getName()) : "";
-                String editionLbl = String.format("%s: %s (%s)",
-                        Localizer.getInstance().getMessage("lblSet"), editionName, tokenKey.setCode);
+                StringBuilder editionLbl = new StringBuilder("<span style=\"font-size: 9px;\">");
+                editionLbl.append(String.format("<b>%s</b>: \"%s\" (<code>%s</code>) - Collector Nr. %s",
+                        Localizer.getInstance().getMessage("lblSet"), editionName,
+                        tokenKey.setCode, card.getCollectorNumber()));
+                if ((tokenKey.tokenType == LEGAL_CARD) ||
+                        ((tokenKey.tokenType == LIMITED_CARD) && this.controller.importBannedAndRestrictedCards())){
+                    editionLbl.append(String.format(" - <b class=\"%s\">%s: %s</b>", OK_IMPORT_CLASS,
+                            Localizer.getInstance().getMessage("lblDeckSection"), tokenKey.deckSection));
+                }
+                editionLbl.append("</span>");
                 cardImagePreview.setItem(card);
 
                 if (tokenKey.tokenType == LEGAL_CARD ||
-                        (tokenKey.tokenType == LIMITED_CARD && this.controller.importBannedAndRestrictedCards()))  // not in the deck
+                        (tokenKey.tokenType == LIMITED_CARD && this.controller.importBannedAndRestrictedCards()))
                     cardImagePreview.showAsEnabled();
                 else
                     cardImagePreview.showAsDisabled();
-
-                cardPreviewLabel.setText(String.format(
-                        "<html><span class=\"%s\" style=\"font-size: 9px;\">%s</span><br />" +
-                                "<span style=\"font-size: 9px;\">%s</span></html>",
-                        getTokenCSSClass(tokenKey.tokenType), header, editionLbl));
+                cardPreviewLabel.setText(String.format("<html>%s %s<br>%s</html>", STYLESHEET, editionLbl, statusLbl));
 
                 // set tooltip
                 String tooltip = String.format("%s [%s] #%s", card.getName(), card.getEdition(),
@@ -640,7 +640,7 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
 
         @Override
         public void changedUpdate(final DocumentEvent e) {
-        } // Happend only on ENTER pressed
+        }
     }
 
     private void parseAndDisplay() {
@@ -651,17 +651,23 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
 
     private void displayTokens(final List<DeckRecognizer.Token> tokens) {
         if (tokens.isEmpty() || hasOnlyComment(tokens)) {
-            htmlOutput.setText(FSkin.encodeSymbols(HTML_WELCOME_TEXT, false));
+            showInstructions();
             resetCardImagePreviewPanel();
         } else {
             final StringBuilder sbOut = new StringBuilder();
             sbOut.append(String.format("<head>%s</head>", DeckImport.STYLESHEET));
             sbOut.append(String.format("<body><h3>%s</h3>",
                     Localizer.getInstance().getMessage("lblCurrentDecklist")));
+            sbOut.append("<table>");
             for (final DeckRecognizer.Token t : tokens)
                 sbOut.append(toHTML(t));
+            sbOut.append("</table>");
             htmlOutput.setText(FSkin.encodeSymbols(sbOut.toString(), false));
         }
+    }
+
+    private void showInstructions() {
+        htmlOutput.setText(FSkin.encodeSymbols(HTML_WELCOME_TEXT, false));
     }
 
     private boolean hasOnlyComment(final List<DeckRecognizer.Token> tokens) {
@@ -706,86 +712,129 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
     private String toHTML(final DeckRecognizer.Token token) {
         if (token == null)
             return "";
+        String tokenMsg = getTokenMessage(token);
+        if (tokenMsg == null)
+            return "";
+        String tokenStatus = getTokenStatusMessage(token);
+        String cssClass = getTokenCSSClass(token.getType());
+        if (tokenStatus == null)
+            tokenMsg = padEndWithHTMLSpaces(tokenMsg, 2*PADDING_TOKEN_MSG_LENGTH+10);
+        else {
+            tokenMsg = padEndWithHTMLSpaces(tokenMsg, PADDING_TOKEN_MSG_LENGTH);
+            tokenStatus = padEndWithHTMLSpaces(tokenStatus, PADDING_TOKEN_MSG_LENGTH);
+        }
+        if (token.isCardToken())
+            tokenMsg = String.format("<a class=\"%s\" href=\"%s\">%s</a>", cssClass,
+                    token.getKey().toString(), tokenMsg);
 
-        String tokenTag = "<div class=\"%s\">%s</div>";
-         switch (token.getType()) {
+        if (tokenStatus == null) {
+            String tokenTag = String.format("<td colspan=\"2\" class=\"%s\">%s</td>", cssClass, tokenMsg);
+            return String.format("<tr>%s</tr>", tokenTag);
+        }
+
+        String tokenTag = "<td class=\"%s\">%s</td>";
+        String tokenMsgTag = String.format(tokenTag, cssClass, tokenMsg);
+        String tokenStatusTag;
+        if (token.getType() == LIMITED_CARD)
+            cssClass = WARN_MSG_CLASS;
+        tokenStatusTag = String.format(tokenTag, cssClass, tokenStatus);
+        return String.format("<tr>%s %s</tr>", tokenMsgTag, tokenStatusTag);
+    }
+
+    private static String padEndWithHTMLSpaces(String targetMsg, int limit) {
+        StringBuilder spacer = new StringBuilder();
+        for (int i = targetMsg.length(); i < limit; i++)
+            spacer.append("&nbsp;");
+        return String.format("%s%s", targetMsg, spacer);
+    }
+
+    private String getTokenMessage(DeckRecognizer.Token token) {
+        switch (token.getType()) {
             case LEGAL_CARD:
             case LIMITED_CARD:
             case CARD_FROM_NOT_ALLOWED_SET:
             case CARD_FROM_INVALID_SET:
-                String cardLink = String.format("<a class=\"%s\" href=\"%s\">%s x %s %s %s</a>",
-                        getTokenCSSClass(token.getType()), token.getKey().toString(), token.getQuantity(),
-                        token.getText(), getTokenFoilLabel(token), getTokenMessage(token));
-                return String.format(tokenTag, getTokenCSSClass(token.getType()), cardLink);
+                return String.format("%s x %s %s", token.getQuantity(), token.getText(), getTokenFoilLabel(token));
             // Card Warning Msgs
             case UNKNOWN_CARD:
             case UNSUPPORTED_CARD:
-                String tokenMsg = String.format("%s x %s %s", token.getQuantity(), token.getText(),
-                        getTokenMessage(token));
-                return String.format(tokenTag, getTokenCSSClass(token.getType()), tokenMsg);
-            // Non-Card Warning Msgs
-            case COMMENT:
+                return String.format("%s x %s", token.getQuantity(), token.getText());
+
             case UNSUPPORTED_DECK_SECTION:
+                return String.format("%s: %s", Localizer.getInstance().getMessage("lblWarningMsgPrefix"),
+                                        Localizer.getInstance()
+                                                .getMessage("lblWarnDeckSectionNotAllowedInEditor", token.getText(),
+                                                        this.currentGameType));
+
             // Special Case of Card moved into another section (e.g. Commander from Sideboard)
             case WARNING_MESSAGE:
+                return String.format("%s: %s", Localizer.getInstance()
+                                .getMessage("lblWarningMsgPrefix"), token.getText());
+
             // Placeholders
             case DECK_SECTION_NAME:
-            case CARD_TYPE:
-            case CARD_RARITY:
-            case CARD_CMC:
-            case MANA_COLOUR:
-            case DECK_NAME:
-                return String.format(tokenTag, getTokenCSSClass(token.getType()), getTokenMessage(token));
-            case UNKNOWN_TEXT:
-                return token.getText();
-            default:
-                return "";
-        }
-    }
-
-    private String getTokenMessage(DeckRecognizer.Token token){
-        switch (token.getType()){
-            case LIMITED_CARD:
-                return String.format("- <span class=\"%s\">%s</span>", WARN_MSG_CLASS,
-                        Localizer.getInstance().getMessage("lblErrLimitedCard",
-                        StringUtils.capitalize(token.getLimitedCardType().name()), getGameFormatLabel()));
-            case CARD_FROM_NOT_ALLOWED_SET:
-                return String.format("- %s", Localizer.getInstance().getMessage("lblErrNotAllowedCard",
-                        getGameFormatLabel()));
-            case CARD_FROM_INVALID_SET:
-                return String.format("- %s", Localizer.getInstance().getMessage("lblErrCardEditionDate"));
-            case UNSUPPORTED_CARD:
-                return String.format("- %s", Localizer.getInstance().getMessage("lblErrUnsupportedCard",
-                        this.currentGameType));
-            case UNKNOWN_CARD:
-                return String.format("- %s: %s", Localizer.getInstance().getMessage("lblWarningMsgPrefix"),
-                        Localizer.getInstance().getMessage("lblWarnUnknownCardMsg"));
-            case UNSUPPORTED_DECK_SECTION:
-                return String.format("%s: %s", Localizer.getInstance().getMessage("lblWarningMsgPrefix"),
-                        Localizer.getInstance().getMessage("lblWarnDeckSectionNotAllowedInEditor",
-                                token.getText(), this.currentGameType));
-            case WARNING_MESSAGE:
-                return String.format("%s: %s", Localizer.getInstance().getMessage("lblWarningMsgPrefix"),
-                        token.getText());
-            case COMMENT:
-            case CARD_CMC:
-            case MANA_COLOUR:
-            case CARD_TYPE:
-                return token.getText();
-            case DECK_SECTION_NAME:
                 return String.format("%s: %s", Localizer.getInstance().getMessage("lblDeckSection"),
-                        token.getText());
+                                        token.getText());
+
             case CARD_RARITY:
                 return String.format("%s: %s", Localizer.getInstance().getMessage("lblRarity"),
-                        token.getText());
+                                        token.getText());
+
+            case CARD_TYPE:
+            case CARD_CMC:
+            case MANA_COLOUR:
+            case COMMENT:
+                return token.getText();
 
             case DECK_NAME:
                 return String.format("%s: %s", Localizer.getInstance().getMessage("lblDeckName"),
                         token.getText());
+
+            case UNKNOWN_TEXT:
+            default:
+                return null;
+
+        }
+    }
+
+    private String getTokenStatusMessage(DeckRecognizer.Token token){
+        if (token == null)
+            return "";
+
+        switch (token.getType()) {
+            case LIMITED_CARD:
+                return String.format("%s: %s", Localizer.getInstance().getMessage("lblWarningMsgPrefix"),
+                        Localizer.getInstance().getMessage("lblWarnLimitedCard",
+                        StringUtils.capitalize(token.getLimitedCardType().name()), getGameFormatLabel()));
+
+            case CARD_FROM_NOT_ALLOWED_SET:
+                return Localizer.getInstance().getMessage("lblErrNotAllowedCard", getGameFormatLabel());
+
+            case CARD_FROM_INVALID_SET:
+                return Localizer.getInstance().getMessage("lblErrCardEditionDate");
+
+            case UNSUPPORTED_CARD:
+                return Localizer.getInstance().getMessage("lblErrUnsupportedCard", this.currentGameType);
+
+            case UNKNOWN_CARD:
+                return String.format("%s: %s", Localizer.getInstance().getMessage("lblWarningMsgPrefix"),
+                        Localizer.getInstance().getMessage("lblWarnUnknownCardMsg"));
+
+            case UNSUPPORTED_DECK_SECTION:
+            case WARNING_MESSAGE:
+            case COMMENT:
+            case CARD_CMC:
+            case MANA_COLOUR:
+            case CARD_TYPE:
+            case DECK_SECTION_NAME:
+            case CARD_RARITY:
+            case DECK_NAME:
             case LEGAL_CARD:
             default:
-                return "";
+                return null;
+
         }
+
     }
 
     private String getTokenCSSClass(DeckRecognizer.TokenType tokenType){
@@ -796,9 +845,9 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
                 return this.controller.importBannedAndRestrictedCards() ? OK_IMPORT_CLASS : WARN_MSG_CLASS;
             case CARD_FROM_NOT_ALLOWED_SET:
             case CARD_FROM_INVALID_SET:
+            case UNSUPPORTED_CARD:
                 return KO_NOIMPORT_CLASS;
             case UNKNOWN_CARD:
-            case UNSUPPORTED_CARD:
             case UNSUPPORTED_DECK_SECTION:
             case WARNING_MESSAGE:
                 return WARN_MSG_CLASS;
