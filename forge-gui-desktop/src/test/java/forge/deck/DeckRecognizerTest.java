@@ -284,7 +284,7 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
     }
 
     @Test void testRarityTypeTokenMatch(){
-        String[] rarityTokens = new String[] {"Common", "uncommon", "rare", "mythic", "mythic rare", "land"};
+        String[] rarityTokens = new String[] {"Common", "uncommon", "rare", "mythic", "mythic rare", "land", "special"};
         for (String line : rarityTokens)
             assertTrue(DeckRecognizer.isCardRarity(line), "Fail on "+line);
 

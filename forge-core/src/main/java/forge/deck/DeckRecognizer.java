@@ -368,7 +368,7 @@ public class DeckRecognizer {
     public static final String REGRP_MANA = "mana";
     public static final String REX_NOCARD = String.format("^(?<pre>[^a-zA-Z]*)\\s*(?<title>(\\w+[:]\\s*))?(?<%s>[a-zA-Z]+)(?<post>[^a-zA-Z]*)?$", REGRP_TOKEN);
     public static final String REX_CMC = String.format("^(?<pre>[^a-zA-Z]*)\\s*(?<%s>(C(M)?C(\\s)?\\d{1,2}))(?<post>[^\\d]*)?$", REGRP_TOKEN);
-    public static final String REX_RARITY = String.format("^(?<pre>[^a-zA-Z]*)\\s*(?<%s>((un)?common|(mythic)?\\s*(rare)?|land))(?<post>[^a-zA-Z]*)?$", REGRP_TOKEN);
+    public static final String REX_RARITY = String.format("^(?<pre>[^a-zA-Z]*)\\s*(?<%s>((un)?common|(mythic)?\\s*(rare)?|land|special))(?<post>[^a-zA-Z]*)?$", REGRP_TOKEN);
     public static final String MANA_SYMBOLS = "w|u|b|r|g|c|m|wu|ub|br|rg|gw|wb|ur|bg|rw|gu";
     public static final String REX_MANA_SYMBOLS = String.format("\\{(?<%s>(%s))\\}", REGRP_MANA, MANA_SYMBOLS);
     public static final String REX_MANA_COLOURS = String.format("(\\{(%s)\\})|(white|blue|black|red|green|colo(u)?rless|multicolo(u)?r)", MANA_SYMBOLS);
