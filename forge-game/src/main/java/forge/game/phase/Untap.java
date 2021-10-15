@@ -24,6 +24,7 @@ import java.util.Map.Entry;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
@@ -33,6 +34,7 @@ import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
@@ -69,9 +71,9 @@ public class Untap extends Phase {
     public void executeAt() {
         this.execute(this.at);
 
-        final Player turn = game.getPhaseHandler().getPlayerTurn();
-        Untap.doPhasing(turn);
- 
+        doPhasing(game.getPhaseHandler().getPlayerTurn());
+        doDayTime(game.getPhaseHandler().getPreviousPlayerTurn());
+
         game.getAction().checkStaticAbilities();
 
         doUntap();
@@ -273,13 +275,9 @@ public class Untap extends Phase {
             } else if (c.hasKeyword(Keyword.PHASING)) {
                 // 702.23g If an object would simultaneously phase out directly
                 // and indirectly, it just phases out indirectly.
-                if (c.isAura() || c.isFortification()) {
+                if (c.isAttachment()) {
                     final Card ent = c.getAttachedTo();
                     if (ent != null && list.contains(ent)) {
-                        continue;
-                    }
-                } else if (c.isEquipment() && c.isEquipping()) {
-                    if (list.contains(c.getEquipping())) {
                         continue;
                     }
                 }
@@ -288,4 +286,17 @@ public class Untap extends Phase {
         }
     }
 
+    private static void doDayTime(final Player previous) {
+        if (previous == null) {
+            return;
+        }
+        final Game game = previous.getGame();
+        List<Card> casted = game.getStack().getSpellsCastLastTurn();
+
+        if (game.isDay() && !Iterables.any(casted, CardPredicates.isController(previous))) {
+            game.setDayTime(true);
+        } else if (game.isNight() && Iterables.size(Iterables.filter(casted, CardPredicates.isController(previous))) > 1) {
+            game.setDayTime(false);
+        }
+    }
 } //end class Untap

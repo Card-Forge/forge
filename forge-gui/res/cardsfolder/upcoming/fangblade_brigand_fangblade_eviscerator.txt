@@ -1,0 +1,20 @@
+Name:Fangblade Brigand
+ManaCost:3 R
+Types:Creature Human Werewolf
+PT:3/4
+A:AB$ Pump | Cost$ 1 R | Defined$ Self | NumAtt$ +1 | KW$ First Strike | SpellDescription$ CARDNAME gets +1/+0 and gains first strike until end of turn.
+K:Daybound
+AlternateMode:DoubleFaced
+Oracle:{1}{R}: Fangblade Brigand gets +1/+0 and gains first strike until end of turn.\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)
+
+ALTERNATE
+
+Name:Fangblade Eviscerator
+ManaCost:no cost
+Colors:red
+Types:Creature Werewolf
+PT:4/5
+A:AB$ Pump | Cost$ 1 R | Defined$ Self | NumAtt$ +1 | KW$ First Strike | SpellDescription$ CARDNAME gets +1/+0 and gains first strike until end of turn.
+A:AB$ PumpAll | Cost$ 4 R | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | SpellDescription$ Creatures you control get +2/+0 until end of turn.
+K:Nightbound
+Oracle:{1}{R}: Fangblade Eviscerator gets +1/+0 and gains first strike until end of turn.\n{4}{R}: Creatures you control get +2/+0 until end of turn.\nNightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)

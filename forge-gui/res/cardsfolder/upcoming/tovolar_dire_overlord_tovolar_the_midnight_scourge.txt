@@ -1,0 +1,32 @@
+Name:Tovolar, Dire Overlord
+ManaCost:1 R G
+Types:Legendary Creature Human Werewolf
+PT:3/3
+T:Mode$ DamageDone | ValidSource$ Wolf.YouCtrl,Werewolf.YouCtrl | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigDrawD | TriggerDescription$ Whenever a Wolf or Werewolf you control deals combat damage to a player, draw a card.
+SVar:TrigDrawD:DB$ Draw | Defined$ You | NumCards$ 1
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE3 | Execute$ TrigNight | TriggerDescription$ At the beginning of your upkeep, if you control three or more Wolves and/or Werewolves, it becomes night. Then transform any number of Human Werewolves you control.
+SVar:TrigNight:DB$ DayTime | Value$ Night | SubAbility$ DBTransform
+SVar:DBTransform:DB$ SetState | MinAmount$ 0 | Amount$ NumHumanWerewolves | Choices$ Human.Werewolf+YouCtrl+DoubleFaced | ChoiceTitle$ Choose any number of Human Werewolves you control | Mode$ Transform
+K:Daybound
+SVar:NumHumanWerewolves:Count$Valid Human.Werewolf+YouCtrl+DoubleFaced
+SVar:Y:Count$Valid Wolf.YouCtrl
+SVar:Z:Count$Valid Werewolf.YouCtrl
+SVar:X:SVar$Y/Plus.Z
+AlternateMode:DoubleFaced
+DeckHints:Type$Wolf|Werewolf
+Oracle:Whenever a Wolf or Werewolf you control deals combat damage to a player, draw a card.\nAt the beginning of your upkeep, if you control three or more Wolves and/or Werewolves, it becomes night. Then transform any number of Human Werewolves you control.\nDaybound
+
+ALTERNATE
+
+Name:Tovolar, the Midnight Scourge
+ManaCost:no cost
+Colors:red,green
+Types:Legendary Creature Werewolf
+PT:4/4
+T:Mode$ DamageDone | ValidSource$ Wolf.YouCtrl,Werewolf.YouCtrl | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigDrawN | TriggerDescription$ Whenever a Wolf or Werewolf you control deals combat damage to a player, draw a card.
+SVar:TrigDrawN:DB$ Draw | Defined$ You | NumCards$ 1
+A:AB$ Pump | Cost$ X R G | ValidTgts$ Wolf.YouCtrl,Werewolf.YouCtrl | TgtPrompt$ Select target Wolf or Werewolf you control | NumAtt$ X | KW$ Trample | SpellDescription$ Target Wolf or Werewolf you control gets +X/+0 and gains trample until end of turn.
+K:Nightbound
+SVar:X:Count$xPaid
+DeckHints:Type$Wolf|Werewolf
+Oracle:Whenever a Wolf or Werewolf you control deals combat damage to a player, draw a card.\n{X}{R}{G}: Target Wolf or Werewolf you control gets +X/+0 and gains trample until end of turn.\nNightbound

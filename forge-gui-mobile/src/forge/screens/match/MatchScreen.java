@@ -667,7 +667,7 @@ public class MatchScreen extends FScreen {
         private float progress = 0;
         private boolean finished;
 
-        private void drawBackground(Graphics g, FImage image, float x, float y, float w, float h, boolean darkoverlay) {
+        private void drawBackground(Graphics g, FImage image, float x, float y, float w, float h, boolean darkoverlay, boolean daynightTransition) {
             float percentage = progress / DURATION;
             float oldAlpha = g.getfloatAlphaComposite();
             if (percentage < 0) {
@@ -676,7 +676,10 @@ public class MatchScreen extends FScreen {
                 percentage = 1;
             }
             g.setAlphaComposite(percentage);
-            g.drawGrayTransitionImage(image, x, y, w, h, darkoverlay, 1-(percentage*1));
+            if (!daynightTransition)
+                g.drawGrayTransitionImage(image, x, y, w, h, darkoverlay, 1-(percentage*1));
+            else
+                g.drawUnderWaterImage(image, x, y, w, h, 1-(percentage*1), darkoverlay);
             g.setAlphaComposite(oldAlpha);
         }
 
@@ -694,20 +697,42 @@ public class MatchScreen extends FScreen {
     private class FieldScroller extends FScrollPane {
         private float extraHeight = 0;
         private String plane = "";
+        private String daytime = "";
 
         @Override
         public void drawBackground(Graphics g) {
             super.drawBackground(g);
 
-            if (FModel.getPreferences().getPrefBoolean(FPref.UI_MATCH_IMAGE_VISIBLE)) {
-                boolean isGameFast = MatchController.instance.isGameFast();
-                float midField = topPlayerPanel.getBottom();
-                float x = topPlayerPanel.getField().getLeft();
-                float y = midField - topPlayerPanel.getField().getHeight();
-                float w = getWidth() - x;
-                float bgFullWidth, scaledbgHeight;
-                int multiplier = playerPanels.keySet().size() - 1; //fix scaling of background when zoomed in multiplayer
-                float bgHeight = (midField + bottomPlayerPanel.getField().getHeight() * multiplier) - y;
+            boolean isGameFast = MatchController.instance.isGameFast();
+            float midField = topPlayerPanel.getBottom();
+            float x = topPlayerPanel.getField().getLeft();
+            float y = midField - topPlayerPanel.getField().getHeight();
+            float w = getWidth() - x;
+            float bgFullWidth, scaledbgHeight;
+            int multiplier = playerPanels.keySet().size() - 1; //fix scaling of background when zoomed in multiplayer
+            float bgHeight = (midField + bottomPlayerPanel.getField().getHeight() * multiplier) - y;
+
+            if (MatchController.instance.getDayTime() != null) {
+                //override BG
+                String dayTime = MatchController.instance.getDayTime();
+                if (!daytime.equals(dayTime)) {
+                    bgAnimation = new BGAnimation();
+                    bgAnimation.start();
+                    daytime = dayTime;
+                }
+                FSkinTexture matchBG = MatchController.instance.getGameView().getGame().isDay() ? FSkinTexture.BG_MATCH_DAY : FSkinTexture.BG_MATCH_NIGHT;
+                bgFullWidth = bgHeight * matchBG.getWidth() / matchBG.getHeight();
+                if (bgFullWidth < w) {
+                    scaledbgHeight = w * (bgHeight / bgFullWidth);
+                    bgFullWidth = w;
+                    bgHeight = scaledbgHeight;
+                }
+                if (bgAnimation != null && !isGameFast && !MatchController.instance.getGameView().isMatchOver()) {
+                    bgAnimation.drawBackground(g, matchBG, x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight, true, true);
+                } else {
+                    g.drawImage(matchBG, x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight, true);
+                }
+            } else if (FModel.getPreferences().getPrefBoolean(FPref.UI_MATCH_IMAGE_VISIBLE)) {
                 if(FModel.getPreferences().getPrefBoolean(FPref.UI_DYNAMIC_PLANECHASE_BG)
                         && hasActivePlane()) {
                     String imageName = getPlaneName()
@@ -727,7 +752,7 @@ public class MatchScreen extends FScreen {
                             bgHeight = scaledbgHeight;
                         }
                         if (bgAnimation != null && !isGameFast && !MatchController.instance.getGameView().isMatchOver()) {
-                            bgAnimation.drawBackground(g, FSkinTexture.valueOf(imageName), x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight, true);
+                            bgAnimation.drawBackground(g, FSkinTexture.valueOf(imageName), x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight, true, false);
                         } else {
                             g.drawImage(FSkinTexture.valueOf(imageName), x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight, true);
                         }

@@ -14,6 +14,8 @@ import forge.localinstance.properties.ForgeConstants;
 public enum FSkinTexture implements FImage {
     BG_TEXTURE(ForgeConstants.TEXTURE_BG_FILE, true, false),
     BG_MATCH(ForgeConstants.MATCH_BG_FILE, false, false),
+    BG_MATCH_DAY(ForgeConstants.MATCH_BG_DAY_FILE, false, false),
+    BG_MATCH_NIGHT(ForgeConstants.MATCH_BG_NIGHT_FILE, false, false),
     BG_SPACE(ForgeConstants.SPACE_BG_FILE, false, false),
     BG_CHAOS_WHEEL(ForgeConstants.CHAOS_WHEEL_IMG_FILE, false, false),
     Academy_at_Tolaria_West(ForgeConstants.BG_1, false, true),

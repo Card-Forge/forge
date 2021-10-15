@@ -484,6 +484,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             if (condition.equals("Desert") && !controller.hasDesert()) return false;
             if (condition.equals("Blessing") && !controller.hasBlessing()) return false;
             if (condition.equals("Monarch") & !controller.isMonarch()) return false;
+            if (condition.equals("Night") & !game.isNight()) return false;
 
             if (condition.equals("PlayerTurn")) {
                 if (!ph.isPlayerTurn(controller)) {

@@ -188,6 +188,7 @@ public class FScreen {
     private final boolean allowTabClose;
     private final FileLocation layoutFile;
     private final boolean isMatch;
+    private String daytime = null;
 
     private FScreen(final IVTopLevelUI view0, final ICDoc controller0,
             final String tabCaption0, final SkinImage tabIcon0,
@@ -229,6 +230,12 @@ public class FScreen {
     public void setTabCaption(final String caption) {
         this.tabCaption = caption;
         FView.SINGLETON_INSTANCE.getNavigationBar().updateTitle(this);
+    }
+    public String getDaytime() {
+        return daytime;
+    }
+    public void setDaytime(final String daytime) {
+        this.daytime = daytime;
     }
 
     public SkinImage getTabIcon() {

@@ -1,0 +1,20 @@
+Name:Village Watch
+ManaCost:4 R
+Types:Creature Human Werewolf
+PT:4/3
+K:Haste
+K:Daybound
+AlternateMode:DoubleFaced
+Oracle:Haste\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)
+
+ALTERNATE
+
+Name:Village Reavers
+ManaCost:no cost
+Colors:red
+Types:Creature Werewolf
+PT:5/4
+S:Mode$ Continuous | Affected$ Wolf.YouCtrl,Werewolf.YouCtrl | AddKeyword$ Haste | Description$ Wolves and Werewolves you control have haste.
+K:Nightbound
+DeckHints:Type$Wolf|Werewolf
+Oracle:Wolves and Werewolves you control have haste.\nNightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)

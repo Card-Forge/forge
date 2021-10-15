@@ -1,0 +1,24 @@
+Name:Brutal Cathar
+ManaCost:2 W
+Types:Creature Human Soldier Werewolf
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When this creature enters the battlefield or transforms into CARDNAME, exile target creature an opponent controls until this creature leaves the battlefield.
+T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigExile | Secondary$ True | TriggerDescription$ When this creature enters the battlefield or transforms into CARDNAME, exile target creature an opponent controls until this creature leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Duration$ UntilHostLeavesPlay
+K:Daybound
+AlternateMode:DoubleFaced
+SVar:PlayMain1:TRUE
+SVar:OblivionRing:TRUE
+Oracle:When this creature enters the battlefield or transforms into Brutal Cathar, exile target creature an opponent controls until this creature leaves the battlefield.\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)
+
+ALTERNATE
+
+Name:Moonrage Brute
+ManaCost:no cost
+Colors:red
+Types:Creature Werewolf
+PT:3/3
+K:First strike
+K:Ward:PayLife<3>
+K:Nightbound
+Oracle:First strike\nWard—Pay 3 life.\nNightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)

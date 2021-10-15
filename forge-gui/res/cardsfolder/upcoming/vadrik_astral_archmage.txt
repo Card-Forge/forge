@@ -1,0 +1,14 @@
+Name:Vadrik, Astral Archmage
+ManaCost:1 U R
+Types:Legendary Creature Human Wizard
+PT:1/2
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | DayTime$ Neither | ReplaceWith$ DoDay | Description$ If it's neither day nor night, it becomes day as CARDNAME enters the battlefield.
+SVar:DoDay:DB$ DayTime | Value$ Day | SubAbility$ ETB
+SVar:ETB:DB$ InternalEtbReplacement
+S:Mode$ ReduceCost | ValidCard$ Instant,Sorcery | Type$ Spell | Activator$ You | Amount$ X | Description$ Instant and sorcery spells you cast cost {X} less to cast, where X is NICKNAME's power.
+SVar:X:Count$CardPower
+T:Mode$ DayTimeChanges | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever day becomes night or night becomes day, put a +1/+1 counter on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHints:Type$Instant|Sorcery
+DeckHas:Ability$Counters
+Oracle:If it's neither day nor night, it becomes day as Vadrik, Astral Archmage enters the battlefield.\nInstant and sorcery spells you cast cost {X} less to cast, where X is Vadrik’s power.\nWhenever day becomes night or night becomes day, put a +1/+1 counter on Vadrik.

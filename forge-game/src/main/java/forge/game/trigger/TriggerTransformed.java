@@ -46,7 +46,7 @@ public class TriggerTransformed extends Trigger {
      */
     @Override
     public boolean performTest(Map<AbilityKey, Object> runParams) {
-        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Transformer))) {
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Card))) {
             return false;
         }
 
@@ -55,13 +55,13 @@ public class TriggerTransformed extends Trigger {
 
     @Override
     public void setTriggeringObjects(SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Transformer);
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append(Localizer.getInstance().getMessage("lblTransformed")).append(": ").append(sa.getTriggeringObject(AbilityKey.Transformer));
+        sb.append(Localizer.getInstance().getMessage("lblTransformed")).append(": ").append(sa.getTriggeringObject(AbilityKey.Card));
         return sb.toString();
     }
 

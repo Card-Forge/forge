@@ -114,6 +114,14 @@ public class CardProperty {
             if (!card.isDoubleFaced()) {
                 return false;
             }
+        } else if (property.equals("FrontSide")) {
+            if (card.isBackSide()) {
+                return false;
+            }
+        } else if (property.equals("BackSide")) {
+            if (!card.isBackSide()) {
+                return false;
+            }
         } else if (property.equals("Flip")) {
             if (!card.isFlipCard()) {
                 return false;

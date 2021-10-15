@@ -149,7 +149,7 @@ public class FPanel extends FPanelBase implements ILocalRepaint {
 
     /** @param img0 &emsp; {@link java.awt.Image} */
     @Override
-    protected void onSetForegroundImage(final Image img0) {
+    protected void onSetForegroundImage(final Image img0, boolean stretch) {
         if (img0 == null) {
             this.foregroundImage = null;
             return;
@@ -159,6 +159,7 @@ public class FPanel extends FPanelBase implements ILocalRepaint {
         this.imgW = img0.getWidth(null);
         this.imgH = img0.getHeight(null);
         this.iar = (double) imgW / (double) imgH;
+        this.foregroundStretch = stretch;
     }
 
     /** Aligns NON-STRETCHED foreground image.

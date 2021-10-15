@@ -44,6 +44,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     private final Map<PlayerView, IGameController> originalGameControllers = Maps.newHashMap();
     private boolean gamePause = false;
     private boolean gameSpeed = false;
+    private String daytime = null;
     private boolean ignoreConcedeChain = false;
 
     public final boolean hasLocalPlayers() {
@@ -62,6 +63,17 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public final PlayerView getCurrentPlayer() {
         return currentPlayer;
     }
+
+    @Override
+    public String getDayTime() {
+        return daytime;
+    }
+
+    @Override
+    public void updateDayTime(String daytime) {
+        this.daytime = daytime;
+    }
+
     @Override
     public final void setCurrentPlayer(PlayerView player) {
         player = TrackableTypes.PlayerViewType.lookup(player); //ensure we use the correct player
@@ -772,6 +784,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             awaitNextInputTimer.cancel();
             awaitNextInputTimer = null;
         }
+        daytime = null;
     }
     // End of Choice code
 }

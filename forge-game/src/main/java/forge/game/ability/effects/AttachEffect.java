@@ -71,23 +71,38 @@ public class AttachEffect extends SpellAbilityEffect {
 
         GameEntity attachTo;
 
-        if (sa.hasParam("Object") && sa.hasParam("Choices")) {
+        if (sa.hasParam("Object") && (sa.hasParam("Choices") || sa.hasParam("PlayerChoices"))) {
             ZoneType choiceZone = ZoneType.Battlefield;
             if (sa.hasParam("ChoiceZone")) {
                 choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
             }
-            String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChoose") + " ";
+            String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") :
+                    Localizer.getInstance().getMessage("lblChoose") + " ";
 
-            CardCollection choices = CardLists.getValidCards(game.getCardsIn(choiceZone), sa.getParam("Choices"), p, source, sa);
-            // Object + Choices means Attach Aura/Equipment onto new another card it can attach
-            // if multiple attachments, all of them need to be able to attach to new card
-            for (final Card attachment : attachments) {
-                if (sa.hasParam("Move")) {
-                    Card e = attachment.getAttachedTo();
-                    if (e != null)
-                        choices.remove(e);
+            FCollection<GameEntity> choices = new FCollection<>();
+            if (sa.hasParam("PlayerChoices")) {
+                choices = AbilityUtils.getDefinedEntities(source, sa.getParam("PlayerChoices"), sa);
+                for (final Card attachment : attachments) {
+                    for (GameEntity g : choices) {
+                        if (!g.canBeAttached(attachment)) {
+                            choices.remove(g);
+                        }
+                    }
                 }
-                choices = CardLists.filter(choices, CardPredicates.canBeAttached(attachment));
+            } else {
+                CardCollection cardChoices = CardLists.getValidCards(game.getCardsIn(choiceZone),
+                        sa.getParam("Choices"), p, source, sa);
+                // Object + Choices means Attach Aura/Equipment onto new another card it can attach
+                // if multiple attachments, all of them need to be able to attach to new card
+                for (final Card attachment : attachments) {
+                    if (sa.hasParam("Move")) {
+                        Card e = attachment.getAttachedTo();
+                        if (e != null)
+                            cardChoices.remove(e);
+                    }
+                    cardChoices = CardLists.filter(cardChoices, CardPredicates.canBeAttached(attachment));
+                }
+                choices.addAll(cardChoices);
             }
 
             Map<String, Object> params = Maps.newHashMap();
@@ -103,7 +118,6 @@ public class AttachEffect extends SpellAbilityEffect {
             Map<String, Object> params = Maps.newHashMap();
             params.put("Attachments", attachments);
             attachTo = chooser.getController().chooseSingleEntityForEffect(targets, sa, title, params);
-
         }
 
         String attachToName = null;

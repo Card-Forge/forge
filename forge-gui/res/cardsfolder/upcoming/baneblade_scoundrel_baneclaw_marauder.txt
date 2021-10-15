@@ -1,0 +1,23 @@
+Name:Baneblade Scoundrel
+ManaCost:3 B
+Types:Creature Human Rogue Werewolf
+PT:4/3
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME becomes blocked, each creature blocking it gets -1/-1 until end of turn.
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.blockingSource+DefenderCtrl | NumAtt$ -1 | NumDef$ -1
+K:Daybound
+AlternateMode:DoubleFaced
+Oracle:Whenever Baneblade Scoundrel becomes blocked, each creature blocking it gets -1/-1 until end of turn.\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)
+
+ALTERNATE
+
+Name:Baneclaw Marauder
+ManaCost:no cost
+Colors:black
+Types:Creature Werewolf
+PT:5/4
+T:Mode$ AttackerBlocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME becomes blocked, each creature blocking it gets -1/-1 until end of turn.
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.blockingSource+DefenderCtrl | NumAtt$ -1 | NumDef$ -1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.blockingSource+DefenderCtrl | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature blocking CARDNAME dies, that creature's controller loses 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredCardController | LifeAmount$ 1
+K:Nightbound
+Oracle:Whenever Baneclaw Marauder becomes blocked, each creature blocking it gets -1/-1 until end of turn.\nWhenever a creature blocking Baneclaw Marauder dies, that creature's controller loses 1 life.\nNightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)

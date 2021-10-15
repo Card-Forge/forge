@@ -306,7 +306,7 @@ public class CountersPutAi extends CountersAi {
             }
         } else if (logic.equals("CheckDFC")) {
             // for cards like Ludevic's Test Subject
-            if (!source.canTransform()) {
+            if (!source.canTransform(null)) {
                 return false;
             }
         } else if (logic.startsWith("MoveCounter")) {
