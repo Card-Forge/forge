@@ -1,0 +1,10 @@
+Name:Component Collector
+ManaCost:2 U
+Types:Creature Homunculus
+PT:1/4
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | DayTime$ Neither | ReplaceWith$ DoDay | Description$ If it's neither day nor night, it becomes day as CARDNAME enters the battlefield.
+SVar:DoDay:DB$ DayTime | Value$ Day | SubAbility$ ETB
+SVar:ETB:DB$ InternalEtbReplacement
+T:Mode$ DayTimeChanges | Execute$ TrigTapOrUntap | TriggerZones$ Battlefield | TriggerDescription$ Whenever day becomes night or night becomes day, you may tap or untap target nonland permanent.
+SVar:TrigTapOrUntap:DB$ TapOrUntap | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent
+Oracle:If it's neither day nor night, it becomes day as Component Collector enters the battlefield.\nWhenever day becomes night or night becomes day, you may tap or untap target nonland permanent.

@@ -56,6 +56,7 @@ import forge.game.replacement.ReplacementType;
 import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCantAttackBlock;
+import forge.game.staticability.StaticAbilityCantTransform;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
@@ -576,7 +577,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         // Proof: Morph cards never have ability that makes them flip, Ixidron does not suppose cards to be turned face up again,
         // Illusionary Mask affects cards in hand.
         if (mode.equals("Transform") && (isDoubleFaced() || hasMergedCard())) {
-            if (!canTransform()) {
+            if (!canTransform(cause)) {
                 return false;
             }
 
@@ -606,9 +607,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             // Clear old dfc trigger from the trigger handler
             getGame().getTriggerHandler().clearActiveTriggers(this, null);
             getGame().getTriggerHandler().registerActiveTrigger(this, false);
-            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-            runParams.put(AbilityKey.Transformer, this);
-            getGame().getTriggerHandler().runTrigger(TriggerType.Transformed, runParams, false);
+
+            if (cause == null || !cause.hasParam("ETB")) {
+                final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(this);
+                getGame().getTriggerHandler().runTrigger(TriggerType.Transformed, runParams, false);
+            }
             incrementTransformedTimestamp();
 
             return retResult;
@@ -761,7 +764,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return false;
     }
 
-    public boolean canTransform() {
+    public boolean canTransform(SpellAbility cause) {
         if (isFaceDown()) {
             return false;
         }
@@ -794,7 +797,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return false;
         }
 
-        return !hasKeyword("CARDNAME can't transform");
+        return !StaticAbilityCantTransform.cantTransform(this, cause);
     }
 
     public int getHiddenId() {
@@ -2082,7 +2085,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.equals("Suspend") // for the ones without amount
                         || keyword.equals("Foretell") // for the ones without cost
                         || keyword.equals("Hideaway") || keyword.equals("Ascend") || keyword.equals("Totem armor")
-                        || keyword.equals("Battle cry") || keyword.equals("Devoid") || keyword.equals("Riot")) {
+                        || keyword.equals("Battle cry") || keyword.equals("Devoid") || keyword.equals("Riot")
+                        || keyword.equals("Daybound") || keyword.equals("Nightbound")) {
                     sbLong.append(keyword).append(" (").append(inst.getReminderText()).append(")");
                 } else if (keyword.startsWith("Partner:")) {
                     final String[] k = keyword.split(":");

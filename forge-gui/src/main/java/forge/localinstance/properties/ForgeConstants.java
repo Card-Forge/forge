@@ -128,6 +128,8 @@ public final class ForgeConstants {
     public static final String FONT_FILE              = "font1.ttf";
     public static final String SPLASH_BG_FILE         = "bg_splash.png";
     public static final String MATCH_BG_FILE          = "bg_match.jpg";
+    public static final String MATCH_BG_DAY_FILE      = "bg_day.jpg";
+    public static final String MATCH_BG_NIGHT_FILE    = "bg_night.jpg";
     public static final String TEXTURE_BG_FILE        = "bg_texture.jpg";
     public static final String SPACE_BG_FILE          = "bg_space.png";
     public static final String CHAOS_WHEEL_IMG_FILE   = "bg_chaos_wheel.png";

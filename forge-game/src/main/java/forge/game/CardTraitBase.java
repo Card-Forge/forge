@@ -7,6 +7,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 
 import forge.card.CardStateName;
@@ -16,8 +17,8 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.card.CardState;
-import forge.game.card.CardUtil;
 import forge.game.card.CardView;
 import forge.game.card.IHasCardView;
 import forge.game.player.Player;
@@ -264,6 +265,22 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
             if ("True".equalsIgnoreCase(params.get("Blessing")) != hostController.hasBlessing()) return false;
         }
 
+        if (params.containsKey("DayTime")) {
+            if ("Day".equalsIgnoreCase(params.get("DayTime"))) {
+                if (!game.isDay()) {
+                    return false;
+                }
+            } else if ("Night".equalsIgnoreCase(params.get("DayTime"))) {
+                if (!game.isNight()) {
+                    return false;
+                }
+            } else if ("Neither".equalsIgnoreCase(params.get("DayTime"))) {
+                if (!game.isNeitherDayNorNight()) {
+                    return false;
+                }
+            }
+        }
+
         if (params.containsKey("Adamant")) {
             if (hostCard.getCastSA() == null) {
                 return false;
@@ -450,7 +467,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         }
 
         if (params.containsKey("WerewolfTransformCondition")) {
-            if (!CardUtil.getLastTurnCast("Card", this.getHostCard(), this).isEmpty()) {
+            if (!game.getStack().getSpellsCastLastTurn().isEmpty()) {
                 return false;
             }
         }
@@ -459,7 +476,10 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
             List<Card> casted = game.getStack().getSpellsCastLastTurn();
             boolean conditionMet = false;
             for (Player p : game.getPlayers()) {
-                conditionMet |= CardLists.filterControlledBy(casted, p).size() > 1;
+                if (Iterables.size(Iterables.filter(casted, CardPredicates.isController(p))) > 1) {
+                    conditionMet = true;
+                    break;
+                }
             }
             if (!conditionMet) {
                 return false;

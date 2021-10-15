@@ -1,0 +1,15 @@
+Name:The Celestus
+ManaCost:3
+Types:Legendary Artifact
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | DayTime$ Neither | ReplaceWith$ DoDay | Description$ If it's neither day nor night, it becomes day as CARDNAME enters the battlefield.
+SVar:DoDay:DB$ DayTime | Value$ Day | SubAbility$ ETB
+SVar:ETB:DB$ InternalEtbReplacement
+
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ DayTime | Cost$ 3 T | Value$ Switch | SorcerySpeed$ True | SpellDescription$ If it's night, it becomes day. Otherwise, it becomes night. Activate only as a sorcery.
+
+T:Mode$ DayTimeChanges | Execute$ DBGainLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever day becomes night or night becomes day, you gain 1 life. You may draw a card. If you do, discard a card.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 1 | SubAbility$ DBDiscard | StackDescription$ {p:You} gain 1 life.
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1 | UnlessCost$ Draw<1/You> | UnlessPayer$ You | UnlessSwitched$ True
+DeckHas:Ability$LifeGain
+Oracle:If it's neither day nor night, it becomes day as The Celestus enters the battlefield.\n{T}: Add one mana of any color.\n{3}, {T}: If it's night, it becomes day. Otherwise, it becomes night. Activate only as a sorcery.\nWhenever day becomes night or night becomes day, you gain 1 life. You may draw a card. If you do, discard a card.

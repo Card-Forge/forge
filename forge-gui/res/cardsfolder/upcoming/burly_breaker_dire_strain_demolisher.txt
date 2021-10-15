@@ -1,0 +1,19 @@
+Name:Burly Breaker
+ManaCost:3 G G
+Types:Creature Human Werewolf
+PT:6/5
+K:Ward:1
+K:Daybound
+AlternateMode:DoubleFaced
+Oracle:Ward {1} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {1}.)\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)
+
+ALTERNATE
+
+Name:Dire-Strain Demolisher
+ManaCost:no cost
+Colors:green
+Types:Creature Werewolf
+PT:8/7
+K:Ward:3
+K:Nightbound
+Oracle:Ward {3} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {3}.)\nNightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)

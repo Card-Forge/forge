@@ -1,0 +1,13 @@
+Name:Sunrise Cavalier
+ManaCost:1 R W
+Types:Creature Human Knight
+PT:3/3
+K:Trample
+K:Haste
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | DayTime$ Neither | ReplaceWith$ DoDay | Description$ If it's neither day nor night, it becomes day as CARDNAME enters the battlefield.
+SVar:DoDay:DB$ DayTime | Value$ Day | SubAbility$ ETB
+SVar:ETB:DB$ InternalEtbReplacement
+T:Mode$ DayTimeChanges | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever day becomes night or night becomes day, put a +1/+1 counter on target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Trample, haste\nIf it's neither day nor night, it becomes day as Sunrise Cavalier enters the battlefield.\nWhenever day becomes night or night becomes day, put a +1/+1 counter on target creature you control.

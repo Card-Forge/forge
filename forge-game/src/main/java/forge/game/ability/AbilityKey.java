@@ -126,7 +126,6 @@ public enum AbilityKey {
     TgtSA("TgtSA"),
     Token("Token"),
     TokenNum("TokenNum"),
-    Transformer("Transformer"),
     TriggeredParams("TriggeredParams"),
     Vehicle("Vehicle"),
     Won("Won");

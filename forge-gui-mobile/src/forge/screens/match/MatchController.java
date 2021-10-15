@@ -177,7 +177,8 @@ public class MatchController extends AbstractGuiGame {
         }
 
         actuateMatchPreferences();
-
+        //reset daytime every match
+        updateDayTime(null);
         Forge.openScreen(view);
     }
 

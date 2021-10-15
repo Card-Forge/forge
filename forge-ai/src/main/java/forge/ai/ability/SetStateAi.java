@@ -1,18 +1,20 @@
 package forge.ai.ability;
 
+import java.util.List;
+
 import com.google.common.base.Predicate;
 
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
 import forge.card.CardStateName;
-import forge.game.Game;
+
 import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
-import forge.game.card.CardPredicates.Presets;
+import forge.game.card.CardPredicates;
 import forge.game.card.CardState;
 import forge.game.card.CardUtil;
 import forge.game.card.CounterEnumType;
@@ -67,12 +69,11 @@ public class SetStateAi extends SpellAbilityAi {
         final String mode = sa.getParam("Mode");
         final Card source = sa.getHostCard();
         final String logic = sa.getParamOrDefault("AILogic", "");
-        final Game game = source.getGame();
 
         if ("Transform".equals(mode)) {
             if (!sa.usesTargeting()) {
                 // no Transform with Defined which is not Self
-                if (!source.canTransform()) {
+                if (!source.canTransform(sa)) {
                     return false;
                 }
                 return shouldTransformCard(source, ai, ph) || "Always".equals(logic);
@@ -80,15 +81,13 @@ public class SetStateAi extends SpellAbilityAi {
                 final TargetRestrictions tgt = sa.getTargetRestrictions();
                 sa.resetTargets();
 
-                CardCollection list = CardLists.getValidCards(CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES), tgt.getValidTgts(), ai, source, sa);
                 // select only the ones that can transform
-                list = CardLists.filter(list, new Predicate<Card>() {
+                CardCollection list = CardLists.filter(CardUtil.getValidCardsToTarget(tgt, sa), CardPredicates.Presets.CREATURES, new Predicate<Card>() {
                     @Override
                     public boolean apply(Card c) {
-                        return c.canTransform();
+                        return c.canTransform(sa);
                     }
                 });
-                list = CardLists.getTargetableCards(list, sa);
 
                 if (list.isEmpty()) {
                     return false;
@@ -116,8 +115,7 @@ public class SetStateAi extends SpellAbilityAi {
                 final TargetRestrictions tgt = sa.getTargetRestrictions();
                 sa.resetTargets();
 
-                CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, source, sa);
-                list = CardLists.getTargetableCards(list, sa);
+                List<Card> list = CardUtil.getValidCardsToTarget(tgt, sa);
 
                 if (list.isEmpty()) {
                     return false;
@@ -126,13 +124,13 @@ public class SetStateAi extends SpellAbilityAi {
                 for (final Card c : list) {
                     if (shouldTurnFace(c, ai, ph) || "Always".equals(logic)) {
                         sa.getTargets().add(c);
-                        if (sa.getTargets().size() == tgt.getMaxTargets(source, sa)) {
+                        if (!sa.canAddMoreTarget()) {
                             break;
                         }
                     }
                 }
 
-                return sa.getTargets().size() >= tgt.getMinTargets(source, sa);
+                return sa.isTargetNumberValid();
             }
         }
         return true;

@@ -173,8 +173,10 @@ public interface IGuiGame {
     void clearSelectables();
     boolean isSelecting();
     boolean isGamePaused();
-    public void setgamePause(boolean pause);
-    public void setGameSpeed(boolean gameSpeed);
+    void setgamePause(boolean pause);
+    void setGameSpeed(boolean gameSpeed);
+    String getDayTime();
+    void updateDayTime(String daytime);
 
     void awaitNextInput();
     void cancelAwaitNextInput();
