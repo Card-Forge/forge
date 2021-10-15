@@ -54,7 +54,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.zone.ZoneType;
-import forge.util.Aggregates;
 import forge.util.MyRandom;
 
 public class ChangeZoneAi extends SpellAbilityAi {
@@ -1733,7 +1732,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
     @Override
     public Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options, Map<String, Object> params) {
         // Called when attaching Aura to player
-        return Aggregates.random(options);
+        return AttachAi.attachToPlayerAIPreferences(ai, sa, true);
     }
 
     private boolean doSacAndReturnFromGraveLogic(final Player ai, final SpellAbility sa) {

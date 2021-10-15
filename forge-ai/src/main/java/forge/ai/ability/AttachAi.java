@@ -459,8 +459,7 @@ public class AttachAi extends SpellAbilityAi {
      *            the mandatory
      * @return the player
      */
-    private static Player attachToPlayerAIPreferences(final Player aiPlayer, final SpellAbility sa,
-            final boolean mandatory) {
+    public static Player attachToPlayerAIPreferences(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
         List<Player> targetable = new ArrayList<>();
         for (final Player player : aiPlayer.getGame().getPlayers()) {
             if (sa.canTarget(player)) {
