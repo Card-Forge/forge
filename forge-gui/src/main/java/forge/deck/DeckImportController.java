@@ -173,7 +173,9 @@ public class DeckImportController {
             tokens.addAll(parsedTokens);
 
         if (this.currentGameFormatAllowsCommander()) {
-            checkAndFixCommanderIn(DeckSection.Sideboard);
+            List<Pair<Integer, Token>> commanderTokens = getTokensInSection(DeckSection.Commander);
+            if (commanderTokens.isEmpty())  // Check commanders in Sideboard only if the commander section is empty
+                checkAndFixCommanderIn(DeckSection.Sideboard);
             checkAndFixCommanderIn(DeckSection.Commander);
         }
 
@@ -321,18 +323,25 @@ public class DeckImportController {
         if (tokens.isEmpty()) { return null; }
 
         String deckName = "";
-        if (currentDeckName != null && currentDeckName.length() > 0)
-            deckName = String.format("\"%s\"", currentDeckName);
+        if (currentDeckName != null && currentDeckName.trim().length() > 0)
+            deckName = String.format("\"%s\"", currentDeckName.trim());
+
+        String tokenDeckName = getTokenDeckNameIfAny();
+        if (tokenDeckName.length() > 0)
+            tokenDeckName = String.format("\"%s\"", tokenDeckName);
+
         if (createNewDeck){
-            String extraWarning = this.currentDeckNotEmpty ? localizer.getMessage("lblNewDeckWarning") : "";
-            final String warning = localizer.getMessage("lblConfirmCreateNewDeck", deckName, extraWarning);
+            String extraWarning = currentDeckNotEmpty ? localizer.getMessage("lblNewDeckWarning", deckName) : "";
+            final String warning = localizer.getMessage("lblConfirmCreateNewDeck", tokenDeckName, extraWarning);
             if (!SOptionPane.showConfirmDialog(warning, localizer.getMessage("lblNewDeckDialogTitle"),
                     localizer.getMessage("lblYes"), localizer.getMessage("lblNo"))) {
                 return null;
             }
         }
         else if (this.currentDeckNotEmpty){
-            final String warning = localizer.getMessage("lblConfirmCardImport", deckName);
+            String extraWarning = (tokenDeckName.length() > 0 && !tokenDeckName.equals(deckName)) ?
+                    localizer.getMessage("lblCardImportWarning", deckName, tokenDeckName) : "";
+            final String warning = localizer.getMessage("lblConfirmCardImport", deckName, extraWarning);
             if (!SOptionPane.showConfirmDialog(warning,
                     localizer.getMessage("lblImportCardsDialogTitle"),
                     localizer.getMessage("lblYes"), localizer.getMessage("lblNo")))
@@ -360,5 +369,18 @@ public class DeckImportController {
             resultDeck.getOrCreate(deckSection).add(crd, t.getQuantity());
         }
         return resultDeck;
+    }
+
+    private String getTokenDeckNameIfAny(){
+        for (final Token t : this.tokens){
+            // only Deck Name, legal card and limited card tokens will be analysed!
+            if (!t.isTokenForDeck())
+                continue;  // SKIP token
+            final TokenType tType = t.getType();
+            if (tType == TokenType.DECK_NAME) {
+                return t.getText();
+            }
+        }
+        return "";  // no deck name
     }
 }
