@@ -1,0 +1,11 @@
+Name:Gavony Dawnguard
+ManaCost:1 W W
+Types:Creature Human Soldier
+PT:3/3
+K:Ward:1
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | DayTime$ Neither | ReplaceWith$ DoDay | Description$ If it's neither day nor night, it becomes day as CARDNAME enters the battlefield.
+SVar:DoDay:DB$ DayTime | Value$ Day | SubAbility$ ETB
+SVar:ETB:DB$ InternalEtbReplacement
+T:Mode$ DayTimeChanges | Execute$ TrigDig | TriggerZones$ Battlefield | TriggerDescription$ Whenever day becomes night or night becomes day, look at the top four cards of your library. You may reveal a creature card with mana value 3 or less from among them and put it into your hand. Put the rest on the bottom of your library in any order.
+SVar:TrigDig:DB$ Dig | ForceRevealToController$ True | DigNum$ 4 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Creature.cmcLE3
+Oracle:Ward {1}\nIf it's neither day nor night, it becomes day as Gavony Dawnguard enters the battlefield.\nWhenever day becomes night or night becomes day, look at the top four cards of your library. You may reveal a creature card with mana value 3 or less from among them and put it into your hand. Put the rest on the bottom of your library in any order.

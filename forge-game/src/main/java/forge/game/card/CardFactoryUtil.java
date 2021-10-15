@@ -978,6 +978,24 @@ public class CardFactoryUtil {
             trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
 
             inst.addTrigger(trigger);
+        } else if (keyword.equals("Daybound")) {
+            // Set Day when it's Neither
+            final String setDayTrig = "Mode$ Always | TriggerZones$ Battlefield | Static$ True | DayTime$ Neither | Secondary$ True | TriggerDescription$ Any time a player controls a permanent with daybound, if it’s neither day nor night, it becomes day.";
+            String setDayEff = "DB$ DayTime | Value$ Day";
+
+            Trigger trigger = TriggerHandler.parseTrigger(setDayTrig, card, intrinsic);
+            trigger.setOverridingAbility(AbilityFactory.getAbility(setDayEff, card));
+
+            inst.addTrigger(trigger);
+
+            final String transformTrig = "Mode$ Always | TriggerZones$ Battlefield | Static$ True | DayTime$ Night | IsPresent$ Card.Self+FrontSide | Secondary$ True | TriggerDescription$ As it becomes night, if this permanent is front face up, transform it.";
+            String transformEff = "DB$ SetState | Mode$ Transform | Daybound$ True";
+
+            trigger = TriggerHandler.parseTrigger(transformTrig, card, intrinsic);
+            trigger.setOverridingAbility(AbilityFactory.getAbility(transformEff, card));
+
+            inst.addTrigger(trigger);
+
         } else if (keyword.equals("Decayed")) {
             final String attackTrig = "Mode$ Attacks | ValidCard$ Card.Self | Secondary$ True | TriggerDescription$ " +
                     "When a creature with decayed attacks, sacrifice it at end of combat.";
@@ -1507,6 +1525,24 @@ public class CardFactoryUtil {
 
             parsedTrigger.setOverridingAbility(repeatSA);
             inst.addTrigger(parsedTrigger);
+        } else if (keyword.equals("Nightbound")) {
+            // Set Night when it's Neither
+            final String setDayTrig = "Mode$ Always | TriggerZones$ Battlefield | Static$ True | DayTime$ Neither | IsPresent$ Card.Daybound | PresentCompare$ EQ0 | Secondary$ True | TriggerDescription$ Any time a player controls a permanent with nightbound, if it’s neither day nor night and there are no permanents with daybound on the battlefield, it becomes night.";
+            String setDayEff = "DB$ DayTime | Value$ Night";
+
+            Trigger trigger = TriggerHandler.parseTrigger(setDayTrig, card, intrinsic);
+            trigger.setOverridingAbility(AbilityFactory.getAbility(setDayEff, card));
+
+            inst.addTrigger(trigger);
+
+            final String transformTrig = "Mode$ Always | TriggerZones$ Battlefield | Static$ True | DayTime$ Day | IsPresent$ Card.Self+BackSide | Secondary$ True | TriggerDescription$ As it becomes day, if this permanent is back face up, transform it";
+            String transformEff = "DB$ SetState | Mode$ Transform | Nightbound$ True";
+
+            trigger = TriggerHandler.parseTrigger(transformTrig, card, intrinsic);
+            trigger.setOverridingAbility(AbilityFactory.getAbility(transformEff, card));
+
+            inst.addTrigger(trigger);
+
         } else if (keyword.startsWith("Partner:")) {
             // Partner With
             final String[] k = keyword.split(":");
@@ -2123,6 +2159,17 @@ public class CardFactoryUtil {
             re.setOverridingAbility(saMill);
 
             re.setSVar("DredgeCheckLib", "Count$ValidLibrary Card.YouOwn");
+
+            inst.addReplacement(re);
+        } else if (keyword.equals("Daybound")) {
+            final String actualRep = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | DayTime$ Night | Secondary$ True | Description$ If it is night, this permanent enters the battlefield transformed.";
+            final String abTransform = "DB$ SetState | Defined$ ReplacedCard | Mode$ Transform | ETB$ True | Daybound$ True";
+
+            ReplacementEffect re = ReplacementHandler.parseReplacement(actualRep, host, intrinsic, card);
+
+            SpellAbility saTransform = AbilityFactory.getAbility(abTransform, card);
+            setupETBReplacementAbility(saTransform);
+            re.setOverridingAbility(saTransform);
 
             inst.addReplacement(re);
         } else if (keyword.startsWith("Devour")) {
@@ -3438,6 +3485,8 @@ public class CardFactoryUtil {
             }
         } else if (keyword.startsWith("Dash")) {
             effect = "Mode$ Continuous | Affected$ Card.Self+dashed | AddKeyword$ Haste";
+        } else if (keyword.equals("Daybound")) {
+            effect = "Mode$ CantTransform | ValidCard$ Creature.Self | ExceptCause$ SpellAbility.Daybound | Secondary$ True | Description$ This permanent can’t be transformed except by its daybound ability.";
         } else if (keyword.equals("Decayed")) {
             effect = "Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't block. | " +
                     "Secondary$ True";
@@ -3490,6 +3539,8 @@ public class CardFactoryUtil {
         } else if (keyword.equals("Intimidate")) {
             effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.nonArtifact+notSharesColorWith | Secondary$ True " +
                     " | Description$ Intimidate ( " + inst.getReminderText() + ")";
+        } else if (keyword.equals("Nightbound")) {
+            effect = "Mode$ CantTransform | ValidCard$ Creature.Self | ExceptCause$ SpellAbility.Nightbound | Secondary$ True | Description$ This permanent can’t be transformed except by its nightbound ability.";
         } else if (keyword.startsWith("Protection")) {
             String valid = getProtectionValid(keyword, false);
             effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self ";

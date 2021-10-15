@@ -167,6 +167,10 @@ public class ForgeScript {
             return sa.isForetold();
         } else if (property.equals("ClassLevelUp")) {
             return sa.getApi() == ApiType.ClassLevelUp;
+        } else if (property.equals("Daybound")) {
+            return sa.hasParam("Daybound");
+        } else if (property.equals("Nightbound")) {
+            return sa.hasParam("Nightbound");
         } else if (property.equals("MayPlaySource")) {
             StaticAbility m = sa.getMayPlay();
             if (m == null) {

@@ -1,0 +1,19 @@
+Name:Harvesttide Infiltrator
+ManaCost:2 R
+Types:Creature Human Werewolf
+PT:3/2
+K:Trample
+K:Daybound
+AlternateMode:DoubleFaced
+Oracle:Trample\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)
+
+ALTERNATE
+
+Name:Harvesttide Assailant
+ManaCost:no cost
+Colors:red
+Types:Creature Werewolf
+PT:4/4
+K:Trample
+K:Nightbound
+Oracle:Trample\nNightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)

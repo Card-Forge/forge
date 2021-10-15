@@ -1,0 +1,23 @@
+Name:Spellrune Painter
+ManaCost:2 R
+Types:Creature Human Shaman Werewolf
+PT:2/3
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast an instant or sorcery spell, CARDNAME gets +1/+1 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | ValidCard$ Card.Self | NumAtt$ 1 | NumDef$ 1
+DeckHints:Type$Instant|Sorcery
+K:Daybound
+AlternateMode:DoubleFaced
+Oracle:Whenever you cast an instant or sorcery spell, Spellrune Painter gets +1/+1 until end of turn.\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)
+
+ALTERNATE
+
+Name:Spellrune Howler
+ManaCost:no cost
+Colors:red
+Types:Creature Werewolf
+PT:3/4
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast an instant or sorcery spell, CARDNAME gets +2/+2 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | ValidCard$ Card.Self | NumAtt$ 2 | NumDef$ 2
+DeckHints:Type$Instant|Sorcery
+K:Nightbound
+Oracle:Whenever you cast an instant or sorcery spell, Spellrune Howler gets +2/+2 until end of turn.\nNightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)

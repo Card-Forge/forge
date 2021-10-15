@@ -317,6 +317,7 @@ public class HostedMatch {
                 humanController.getGui().afterGameEnd();
             else if (!GuiBase.getInterface().isLibgdxPort()||!isMatchOver)
                 humanController.getGui().afterGameEnd();
+            humanController.getGui().updateDayTime(null);
         }
         humanControllers.clear();
     }

@@ -39,102 +39,10 @@ public class Graphics {
     private int failedClipCount;
     private float alphaComposite = 1;
     private int transformCount = 0;
-    private final String sVertex = "uniform mat4 u_projTrans;\n" +
-            "\n" +
-            "attribute vec4 a_position;\n" +
-            "attribute vec2 a_texCoord0;\n" +
-            "attribute vec4 a_color;\n" +
-            "\n" +
-            "varying vec4 v_color;\n" +
-            "varying vec2 v_texCoord;\n" +
-            "\n" +
-            "uniform vec2 u_viewportInverse;\n" +
-            "\n" +
-            "void main() {\n" +
-            "    gl_Position = u_projTrans * a_position;\n" +
-            "    v_texCoord = a_texCoord0;\n" +
-            "    v_color = a_color;\n" +
-            "}";
-    private final String sFragment = "#ifdef GL_ES\n" +
-            "precision mediump float;\n" +
-            "precision mediump int;\n" +
-            "#endif\n" +
-            "\n" +
-            "uniform sampler2D u_texture;\n" +
-            "\n" +
-            "// The inverse of the viewport dimensions along X and Y\n" +
-            "uniform vec2 u_viewportInverse;\n" +
-            "\n" +
-            "// Color of the outline\n" +
-            "uniform vec3 u_color;\n" +
-            "\n" +
-            "// Thickness of the outline\n" +
-            "uniform float u_offset;\n" +
-            "\n" +
-            "// Step to check for neighbors\n" +
-            "uniform float u_step;\n" +
-            "\n" +
-            "varying vec4 v_color;\n" +
-            "varying vec2 v_texCoord;\n" +
-            "\n" +
-            "#define ALPHA_VALUE_BORDER 0.5\n" +
-            "\n" +
-            "void main() {\n" +
-            "   vec2 T = v_texCoord.xy;\n" +
-            "\n" +
-            "   float alpha = 0.0;\n" +
-            "   bool allin = true;\n" +
-            "   for( float ix = -u_offset; ix < u_offset; ix += u_step )\n" +
-            "   {\n" +
-            "      for( float iy = -u_offset; iy < u_offset; iy += u_step )\n" +
-            "       {\n" +
-            "          float newAlpha = texture2D(u_texture, T + vec2(ix, iy) * u_viewportInverse).a;\n" +
-            "          allin = allin && newAlpha > ALPHA_VALUE_BORDER;\n" +
-            "          if (newAlpha > ALPHA_VALUE_BORDER && newAlpha >= alpha)\n" +
-            "          {\n" +
-            "             alpha = newAlpha;\n" +
-            "          }\n" +
-            "      }\n" +
-            "   }\n" +
-            "   if (allin)\n" +
-            "   {\n" +
-            "      alpha = 0.0;\n" +
-            "   }\n" +
-            "\n" +
-            "   gl_FragColor = vec4(u_color,alpha);\n" +
-            "}";
-    private final String vertexShaderGray = "attribute vec4 a_position;\n" +
-            "attribute vec4 a_color;\n" +
-            "attribute vec2 a_texCoord0;\n" +
-            "\n" +
-            "uniform mat4 u_projTrans;\n" +
-            "\n" +
-            "varying vec4 v_color;\n" +
-            "varying vec2 v_texCoords;\n" +
-            "\n" +
-            "void main() {\n" +
-            "    v_color = a_color;\n" +
-            "    v_texCoords = a_texCoord0;\n" +
-            "    gl_Position = u_projTrans * a_position;\n" +
-            "}";
-    private final String fragmentShaderGray = "#ifdef GL_ES\n" +
-            "    precision mediump float;\n" +
-            "#endif\n" +
-            "\n" +
-            "varying vec4 v_color;\n" +
-            "varying vec2 v_texCoords;\n" +
-            "uniform sampler2D u_texture;\n" +
-            "uniform float u_grayness;\n" +
-            "\n" +
-            "void main() {\n" +
-            "  vec4 c = v_color * texture2D(u_texture, v_texCoords);\n" +
-            "  float grey = dot( c.rgb, vec3(0.22, 0.707, 0.071) );\n" +
-            "  vec3 blendedColor = mix(c.rgb, vec3(grey), u_grayness);\n" +
-            "  gl_FragColor = vec4(blendedColor.rgb, c.a);\n" +
-            "}";
-
-    private final ShaderProgram shaderOutline = new ShaderProgram(sVertex, sFragment);
-    private final ShaderProgram shaderGrayscale = new ShaderProgram(vertexShaderGray, fragmentShaderGray);
+    private final ShaderProgram shaderOutline = new ShaderProgram(Gdx.files.internal("shaders").child("outline.vert"), Gdx.files.internal("shaders").child("outline.frag"));
+    private final ShaderProgram shaderGrayscale = new ShaderProgram(Gdx.files.internal("shaders").child("grayscale.vert"), Gdx.files.internal("shaders").child("grayscale.frag"));
+    private final ShaderProgram shaderWarp = new ShaderProgram(Gdx.files.internal("shaders").child("grayscale.vert"), Gdx.files.internal("shaders").child("warp.frag"));
+    private final ShaderProgram shaderUnderwater = new ShaderProgram(Gdx.files.internal("shaders").child("grayscale.vert"), Gdx.files.internal("shaders").child("underwater.frag"));
 
     public Graphics() {
         ShaderProgram.pedantic = false;
@@ -160,6 +68,9 @@ public class Graphics {
         batch.dispose();
         shapeRenderer.dispose();
         shaderOutline.dispose();
+        shaderGrayscale.dispose();
+        shaderUnderwater.dispose();
+        shaderWarp.dispose();
     }
 
     public SpriteBatch getBatch() {
@@ -841,6 +752,87 @@ public class Graphics {
             fillRect(Color.BLACK, x, y, w, h);
             setAlphaComposite(oldalpha);
         }
+    }
+    public void drawWarpImage(Texture image, float x, float y, float w, float h, float time) {
+        batch.end();
+        shaderWarp.bind();
+        shaderWarp.setUniformf("u_amount", 0.2f);
+        shaderWarp.setUniformf("u_speed", 0.6f);
+        shaderWarp.setUniformf("u_time", time);
+        batch.setShader(shaderWarp);
+        batch.begin();
+        //draw
+        batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+        //reset
+        batch.end();
+        batch.setShader(null);
+        batch.begin();
+    }
+    public void drawWarpImage(TextureRegion image, float x, float y, float w, float h, float time) {
+        batch.end();
+        shaderWarp.bind();
+        shaderWarp.setUniformf("u_amount", 0.2f);
+        shaderWarp.setUniformf("u_speed", 0.6f);
+        shaderWarp.setUniformf("u_time", time);
+        batch.setShader(shaderWarp);
+        batch.begin();
+        //draw
+        batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+        //reset
+        batch.end();
+        batch.setShader(null);
+        batch.begin();
+    }
+    public void drawWarpImage(FImage image, float x, float y, float w, float h, float time) {
+        batch.end();
+        shaderWarp.bind();
+        shaderWarp.setUniformf("u_amount", 0.2f);
+        shaderWarp.setUniformf("u_speed", 0.6f);
+        shaderWarp.setUniformf("u_time", time);
+        batch.setShader(shaderWarp);
+        batch.begin();
+        //draw
+        image.draw(this, x, y, w, h);
+        //reset
+        batch.end();
+        batch.setShader(null);
+        batch.begin();
+    }
+    public void drawUnderWaterImage(FImage image, float x, float y, float w, float h, float time, boolean withDarkOverlay) {
+        batch.end();
+        shaderUnderwater.bind();
+        shaderUnderwater.setUniformf("u_amount", 10f*time);
+        shaderUnderwater.setUniformf("u_speed", 0.5f*time);
+        shaderUnderwater.setUniformf("u_time", time);
+        batch.setShader(shaderUnderwater);
+        batch.begin();
+        //draw
+        image.draw(this, x, y, w, h);
+        //reset
+        batch.end();
+        batch.setShader(null);
+        batch.begin();
+        if(withDarkOverlay){
+            float oldalpha = alphaComposite;
+            setAlphaComposite(0.4f);
+            fillRect(Color.BLACK, x, y, w, h);
+            setAlphaComposite(oldalpha);
+        }
+    }
+    public void drawUnderWaterImage(TextureRegion image, float x, float y, float w, float h, float time) {
+        batch.end();
+        shaderUnderwater.bind();
+        shaderUnderwater.setUniformf("u_amount", 10f);
+        shaderUnderwater.setUniformf("u_speed", 0.5f);
+        shaderUnderwater.setUniformf("u_time", time);
+        batch.setShader(shaderUnderwater);
+        batch.begin();
+        //draw
+        batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+        //reset
+        batch.end();
+        batch.setShader(null);
+        batch.begin();
     }
     public void drawImage(FImage image, float x, float y, float w, float h) {
         drawImage(image, x, y, w, h, false);

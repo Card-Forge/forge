@@ -2275,6 +2275,10 @@ public class AbilityUtils {
             return doXMath(player.getSpellsCastThisGame(), expr, c, ctb);
         }
 
+        if (sq[0].equals("Night")) {
+            return doXMath(calculateAmount(c, sq[game.isNight() ? 1 : 2], ctb), expr, c, ctb);
+        }
+
         if (sq[0].contains("CardControllerTypes")) {
             return doXMath(getCardTypesFromList(player.getCardsIn(ZoneType.listValueOf(sq[1]))), expr, c, ctb);
         }

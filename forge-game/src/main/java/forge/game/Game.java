@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import forge.game.event.GameEventDayTimeChanged;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
@@ -128,6 +129,8 @@ public class Game {
     private Player monarchBeginTurn = null;
 
     private Direction turnOrder = Direction.getDefaultDirection();
+
+    private Boolean daytime = null;
 
     private long timestamp = 0;
     public final GameAction action;
@@ -1163,5 +1166,30 @@ public class Game {
     }
     public void addFacedownWhileCasting(Card c, int numDrawn) {
         facedownWhileCasting.put(c, Integer.valueOf(numDrawn));
+    }
+
+    public boolean isDay() {
+        return this.daytime != null && this.daytime == false;
+    }
+    public boolean isNight() {
+        return this.daytime != null && this.daytime == true;
+    }
+    public boolean isNeitherDayNorNight() {
+        return this.daytime == null;
+    }
+
+    public Boolean getDayTime() {
+        return this.daytime;
+    }
+    public void setDayTime(Boolean value) {
+        Boolean previous = this.daytime;
+        this.daytime = value;
+
+        if (previous != null && value != null && previous != value) {
+            Map<AbilityKey, Object> params = AbilityKey.newMap();
+            this.getTriggerHandler().runTrigger(TriggerType.DayTimeChanges, params, false);
+        }
+        if (!isNeitherDayNorNight())
+            fireEvent(new GameEventDayTimeChanged(isDay()));
     }
 }

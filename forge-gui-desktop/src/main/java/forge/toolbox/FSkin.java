@@ -1305,6 +1305,9 @@ public class FSkin {
         // Exceptions handled inside method.
         SkinIcon.setIcon(FSkinProp.BG_TEXTURE, preferredDir + ForgeConstants.TEXTURE_BG_FILE);
         SkinIcon.setIcon(FSkinProp.BG_MATCH, preferredDir + ForgeConstants.MATCH_BG_FILE);
+        //daynight bg
+        SkinIcon.setIcon(FSkinProp.BG_DAY, defaultDir + ForgeConstants.MATCH_BG_DAY_FILE);
+        SkinIcon.setIcon(FSkinProp.BG_NIGHT, defaultDir + ForgeConstants.MATCH_BG_NIGHT_FILE);
 
         // Run through enums and load their coords.
         Colors.updateAll();
@@ -2258,10 +2261,11 @@ public class FSkin {
         protected FPanelBase() { super(); }
         public FPanelBase(final LayoutManager layoutManager) { super(layoutManager); }
 
-        protected abstract void onSetForegroundImage(final Image image);
-        public final void setForegroundImage(final SkinImage skinImage) { onSetForegroundImage(skinImage.image); this.foregroundImage = skinImage; }
-        public final void setForegroundImage(final Image image) { onSetForegroundImage(image); this.foregroundImage = null; }
-        public final void setForegroundImage(final ImageIcon imageIcon) { onSetForegroundImage(imageIcon.getImage()); this.foregroundImage = null; }
+        protected abstract void onSetForegroundImage(final Image image, boolean stretch);
+        public final void setForegroundImage(final SkinImage skinImage, final boolean stretch) { onSetForegroundImage(skinImage.image, stretch); this.foregroundImage = skinImage; }
+        public final void setForegroundImage(final SkinImage skinImage) { onSetForegroundImage(skinImage.image, false); this.foregroundImage = skinImage; }
+        public final void setForegroundImage(final Image image) { onSetForegroundImage(image, false); this.foregroundImage = null; }
+        public final void setForegroundImage(final ImageIcon imageIcon) { onSetForegroundImage(imageIcon.getImage(), false); this.foregroundImage = null; }
 
         protected abstract void onSetBackgroundTexture(final Image image);
         public final void setBackgroundTexture(final SkinImage skinImage) { onSetBackgroundTexture(skinImage.image); this.backgroundTexture = skinImage; }

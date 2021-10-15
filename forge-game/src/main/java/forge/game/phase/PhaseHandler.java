@@ -95,6 +95,7 @@ public class PhaseHandler implements java.io.Serializable {
     private int planarDiceRolledthisTurn = 0;
 
     private transient Player playerTurn = null;
+    private transient Player playerPreviousTurn = null;
 
     // priority player
 
@@ -140,6 +141,10 @@ public class PhaseHandler implements java.io.Serializable {
         playerTurn = playerTurn0;
         game.updatePlayerTurnForView();
         setPriority(playerTurn);
+    }
+
+    public final Player getPreviousPlayerTurn() {
+        return playerPreviousTurn;
     }
 
     public final Player getPriorityPlayer() {
@@ -523,6 +528,8 @@ public class PhaseHandler implements java.io.Serializable {
                 if (!bRepeatCleanup) {
                     // only call onCleanupPhase when Cleanup is not repeated
                     game.onCleanupPhase();
+                    // set previous player
+                    playerPreviousTurn = this.getPlayerTurn();
                     setPlayerTurn(handleNextTurn());
                     // "Trigger" for begin turn to get around a phase skipping
                     final Map<AbilityKey, Object> runParams = AbilityKey.newMap();

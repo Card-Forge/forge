@@ -466,6 +466,12 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     }
 
     @Override
+    public Void visit(final GameEventDayTimeChanged event) {
+        matchController.updateDayTime(event.daytime ? "Day" : "Night");
+        return processEvent();
+    }
+
+    @Override
     public Void visit(final GameEventManaPool event) {
         return processPlayer(event.player, manaPoolUpdate);
     }

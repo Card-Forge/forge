@@ -17,6 +17,7 @@ import forge.game.event.GameEventCardPhased;
 import forge.game.event.GameEventCardRegenerated;
 import forge.game.event.GameEventCardSacrificed;
 import forge.game.event.GameEventCardTapped;
+import forge.game.event.GameEventDayTimeChanged;
 import forge.game.event.GameEventFlipCoin;
 import forge.game.event.GameEventGameOutcome;
 import forge.game.event.GameEventGameStarted;
@@ -99,6 +100,10 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
     public SoundEffectType visit(final GameEventShuffle event) { return SoundEffectType.Shuffle; }
     @Override
     public SoundEffectType visit(final GameEventTokenCreated event) { return SoundEffectType.Token; }
+    @Override
+    public SoundEffectType visit(final GameEventDayTimeChanged event) {
+        return event.daytime ? SoundEffectType.Daytime : SoundEffectType.Nighttime;
+    }
     @Override
     public SoundEffectType visit(final GameEventBlockersDeclared event) {
         final boolean isLocalHuman = event.defendingPlayer.getLobbyPlayer() == player;

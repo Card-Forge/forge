@@ -1,0 +1,11 @@
+Name:Celestus Sanctifier
+ManaCost:2 W
+Types:Creature Human Cleric
+PT:3/2
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | DayTime$ Neither | ReplaceWith$ DoDay | Description$ If it's neither day nor night, it becomes day as CARDNAME enters the battlefield.
+SVar:DoDay:DB$ DayTime | Value$ Day | SubAbility$ ETB
+SVar:ETB:DB$ InternalEtbReplacement
+T:Mode$ DayTimeChanges | Execute$ DBDig | TriggerZones$ Battlefield | TriggerDescription$ Whenever day becomes night or night becomes day, look at the top two cards of your library. Put one of them into your graveyard.
+SVar:DBDig:DB$ Dig | DigNum$ 2 | DestinationZone$ Graveyard | LibraryPosition2$ 0
+DeckHas:Ability$Graveyard
+Oracle:If it's neither day nor night, it becomes day as Celestus Sanctifier enters the battlefield.\nWhenever day becomes night or night becomes day, look at the top two cards of your library. Put one of them into your graveyard.

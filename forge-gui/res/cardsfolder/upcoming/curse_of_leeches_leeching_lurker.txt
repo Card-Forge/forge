@@ -1,0 +1,26 @@
+Name:Curse of Leeches
+ManaCost:2 B
+Types:Enchantment Aura Curse
+K:Enchant player
+A:SP$ Attach | ValidTgts$ Player | TgtPrompt$ Select target player to curse | AILogic$ Curse
+R:Event$ Transform | ValidCard$ Card.Self | ReplaceWith$ Attach | Description$ As this permanent transforms into CARDNAME, attach it to a player.
+SVar:Attach:DB$ Attach | Object$ Self | Chooser$ You | PlayerChoices$ Player | ChoiceTitle$ Select player to curse | AILogic$ Curse
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedBy | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ At the beginning of enchanted player's upkeep, they lose 1 life and you gain 1 life.
+SVar:TrigDrain:DB$ LoseLife | Defined$ TriggeredPlayer | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+K:Daybound
+AlternateMode:DoubleFaced
+DeckHas:Ability$LifeGain
+Oracle:Enchant player\nAs this permanent transforms into Curse of Leeches, attach it to a player.\nAt the beginning of enchanted player's upkeep, they lose 1 life and you gain 1 life.\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)
+
+ALTERNATE
+
+Name:Leeching Lurker
+ManaCost:no cost
+Colors:black
+Types:Creature Leech Horror
+PT:4/4
+K:Lifelink
+K:Nightbound
+DeckHas:Ability$LifeGain
+Oracle:Lifelink\nNightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)

@@ -17,8 +17,7 @@
  */
 package forge.screens.match;
 
-import java.awt.Component;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -414,6 +413,19 @@ public final class CMatchUI
         cCombat.setModel(combat);
         cCombat.update();
     } // showCombat(CombatView)
+
+    @Override
+    public void updateDayTime(String daytime) {
+        super.updateDayTime(daytime);
+        if ("Day".equals(daytime)) {
+            FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkinProp.BG_DAY), true);
+            getScreen().setDaytime("Day");
+        } else {
+            FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkinProp.BG_NIGHT), true);
+            getScreen().setDaytime("Night");
+        }
+        FView.SINGLETON_INSTANCE.getPnlInsets().repaint();
+    }
 
     @Override
     public void updateZones(final Iterable<PlayerZoneUpdate> zonesToUpdate) {
@@ -1064,6 +1076,12 @@ public final class CMatchUI
         SDisplayUtil.showTab(EDocID.REPORT_LOG.getDoc());
 
         SOverlayUtils.hideOverlay();
+        //reset every match
+        getScreen().setDaytime(null);
+        if (FModel.getPreferences().getPrefBoolean(FPref.UI_MATCH_IMAGE_VISIBLE))
+            FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkinProp.BG_MATCH), true);
+        else
+            FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage((Image)null);
     }
 
     @Override
