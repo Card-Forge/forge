@@ -568,13 +568,13 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
         t = recognizer.recogniseNonCardToken("CMC0");
         assertNotNull(t);
         assertEquals(t.getType(), TokenType.CARD_CMC);
-        assertEquals(t.getText(), "CMC: {0}");
+        assertEquals(t.getText(), "CMC: 0");
         assertEquals(t.getQuantity(), 0);
 
         t = recognizer.recogniseNonCardToken("CC1");
         assertNotNull(t);
         assertEquals(t.getType(), TokenType.CARD_CMC);
-        assertEquals(t.getText(), "CMC: {1}");
+        assertEquals(t.getText(), "CMC: 1");
         assertEquals(t.getQuantity(), 0);
 
         t = recognizer.recogniseNonCardToken("//Common");

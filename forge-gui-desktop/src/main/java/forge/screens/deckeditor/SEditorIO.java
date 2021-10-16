@@ -1,7 +1,5 @@
 package forge.screens.deckeditor;
 
-import forge.gui.framework.ICDoc;
-import forge.gui.framework.IVDoc;
 import forge.screens.deckeditor.controllers.*;
 import forge.screens.deckeditor.views.*;
 import org.apache.commons.lang3.StringUtils;
