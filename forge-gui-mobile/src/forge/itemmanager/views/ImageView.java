@@ -1036,16 +1036,20 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     //labelname
                     g.drawText(item.getName(), GROUP_HEADER_FONT, Color.WHITE, x + PADDING, y + PADDING*2, w - 2 * PADDING, h - 2 * PADDING, true, Align.center, false);
                 } else {
-                    if (!dp.isGeneratedDeck()){
-                        //If deck has Commander, use it as cardArt reference
-                        PaperCard paperCard = dp.getDeck().getCommanders().isEmpty() ? dp.getHighestCMCCard() : dp.getDeck().getCommanders().get(0);
-                        FImageComplex cardArt = CardRenderer.getCardArt(paperCard);
-                        //draw the deckbox
-                        if (cardArt == null){
-                            //draw generic box if null or still loading
-                            g.drawImage(FSkin.getDeckbox().get(2), FSkin.getDeckbox().get(2), x, y-(h*0.25f), w, h, Color.GREEN, selected);
+                    if (!dp.isGeneratedDeck()) {
+                        if (dp.getDeck().isEmpty()) {
+                            g.drawImage(FSkin.getDeckbox().get(2), FSkin.getDeckbox().get(2), x, y-(h*0.25f), w, h, Color.RED, selected);
                         } else {
-                            g.drawDeckBox(cardArt, scale, FSkin.getDeckbox().get(1), FSkin.getDeckbox().get(2), x, y, w, h, Color.GREEN, selected);
+                            //If deck has Commander, use it as cardArt reference
+                            PaperCard paperCard = dp.getDeck().getCommanders().isEmpty() ? dp.getHighestCMCCard() : dp.getDeck().getCommanders().get(0);
+                            FImageComplex cardArt = CardRenderer.getCardArt(paperCard);
+                            //draw the deckbox
+                            if (cardArt == null){
+                                //draw generic box if null or still loading
+                                g.drawImage(FSkin.getDeckbox().get(2), FSkin.getDeckbox().get(2), x, y-(h*0.25f), w, h, Color.GREEN, selected);
+                            } else {
+                                g.drawDeckBox(cardArt, scale, FSkin.getDeckbox().get(1), FSkin.getDeckbox().get(2), x, y, w, h, Color.GREEN, selected);
+                            }
                         }
                     } else {
                         //generic box
@@ -1070,10 +1074,14 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         //vertical mana icons
                         CardFaceSymbols.drawColorSet(g, deckColor, x +(w-symbolSize), y+(h/8), symbolSize, true);
                         if(!dp.isGeneratedDeck()) {
-                            if (Forge.hdbuttons)
-                                g.drawImage(DeckPreferences.getPrefs(dp).getStarCount() > 0 ? FSkinImage.HDSTAR_FILLED : FSkinImage.HDSTAR_OUTLINE, x, y, symbolSize, symbolSize);
-                            else
-                                g.drawImage(DeckPreferences.getPrefs(dp).getStarCount() > 0 ? FSkinImage.STAR_FILLED : FSkinImage.STAR_OUTLINE, x, y, symbolSize, symbolSize);
+                            if (dp.getDeck().isEmpty()) {
+                                g.drawImage(Forge.hdbuttons ? FSkinImage.HDYIELD : FSkinImage.WARNING, x, y, symbolSize, symbolSize);
+                            } else {
+                                if (Forge.hdbuttons)
+                                    g.drawImage(DeckPreferences.getPrefs(dp).getStarCount() > 0 ? FSkinImage.HDSTAR_FILLED : FSkinImage.HDSTAR_OUTLINE, x, y, symbolSize, symbolSize);
+                                else
+                                    g.drawImage(DeckPreferences.getPrefs(dp).getStarCount() > 0 ? FSkinImage.STAR_FILLED : FSkinImage.STAR_OUTLINE, x, y, symbolSize, symbolSize);
+                            }
                         }
                     }
                     String deckname = TextUtil.fastReplace(item.getName(),"] #", "]\n#");
