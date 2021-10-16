@@ -17,13 +17,18 @@
  */
 package forge.deck;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.google.common.collect.ImmutableList;
 
 import forge.Forge;
 import forge.Graphics;
+import forge.StaticData;
 import forge.deck.DeckRecognizer.TokenType;
+import forge.game.GameFormat;
+import forge.game.GameType;
 import forge.gui.FThreads;
 import forge.gui.util.SOptionPane;
 import forge.toolbox.FCheckBox;
@@ -41,7 +46,14 @@ public class FDeckImportDialog extends FDialog {
     private final Callback<Deck> callback;
 
     private final FTextArea txtInput = add(new FTextArea(true));
+    private final FCheckBox newEditionCheck = add(new FCheckBox(Localizer.getInstance().getMessage("lblImportLatestVersionCard"), false));
     private final FCheckBox dateTimeCheck = add(new FCheckBox(Localizer.getInstance().getMessage("lblUseOnlySetsReleasedBefore"), false));
+    /*setting onlyCoreExpCheck to false allow the copied cards to pass the check of deck contents
+      forge-core\src\main\java\forge\deck\Deck.javaDeck.java starting @ Line 320 which is called by
+      forge-gui-mobile\src\forge\deck\FDeckEditor.java starting @ Line 373
+      (as of latest commit: 8e6655e3ee67688cff66b422d4722c58392eaa7e)
+    */
+    private final FCheckBox onlyCoreExpCheck = add(new FCheckBox(Localizer.getInstance().getMessage("lblUseOnlyCoreAndExpansionSets"), false));
 
     private final FComboBox<String> monthDropdown = add(new FComboBox<>()); //don't need wrappers since skin can't change while this dialog is open
     private final FComboBox<Integer> yearDropdown = add(new FComboBox<>());
@@ -51,12 +63,26 @@ public class FDeckImportDialog extends FDialog {
 
     private final static ImmutableList<String> importOrCancel = ImmutableList.of(Localizer.getInstance().getMessage("lblImport"), Localizer.getInstance().getMessage("lblCancel"));
 
-    public FDeckImportDialog(final boolean replacingDeck, final Callback<Deck> callback0) {
+    public FDeckImportDialog(final boolean replacingDeck, final FDeckEditor.EditorType editorType, final Callback<Deck> callback0) {
         super(Localizer.getInstance().getMessage("lblImportFromClipboard"), 2);
 
         callback = callback0;
         controller = new DeckImportController(dateTimeCheck, monthDropdown, yearDropdown, replacingDeck);
         txtInput.setText(Forge.getClipboard().getContents()); //just pull import directly off the clipboard
+
+        if (FDeckEditor.editorTypesAllowsReplacement(editorType)) {
+            GameType gameType = GameType.valueOf(editorType.name());
+            controller.setGameFormat(gameType);
+            List<DeckSection> supportedSections = new ArrayList<>();
+            supportedSections.add(DeckSection.Main);
+            supportedSections.add(DeckSection.Sideboard);
+            if (editorType != FDeckEditor.EditorType.Constructed)
+                supportedSections.add(DeckSection.Commander);
+            controller.setAllowedSections(supportedSections);
+        }
+
+        onlyCoreExpCheck.setSelected(StaticData.instance().isCoreExpansionOnlyFilterSet());
+        newEditionCheck.setSelected(StaticData.instance().cardArtPreferenceIsLatest());
 
         initButton(0, Localizer.getInstance().getMessage("lblImport"), new FEventHandler() {
             @Override
@@ -105,7 +131,7 @@ public class FDeckImportDialog extends FDialog {
         });
 
         List<DeckRecognizer.Token> tokens = controller.parseInput(txtInput.getText());
-
+        StaticData data = StaticData.instance();
         //ensure at least one known card found on clipboard
         for (DeckRecognizer.Token token : tokens) {
             if (token.getType() == TokenType.LEGAL_CARD) {
@@ -117,7 +143,16 @@ public class FDeckImportDialog extends FDialog {
                         updateDropDownEnabled();
                     }
                 });
+                newEditionCheck.setCommand(new FEventHandler() {
+                    @Override
+                    public void handleEvent(FEvent e) {setArtPreferenceInController();}
+                });
+                onlyCoreExpCheck.setCommand(new FEventHandler() {
+                    @Override
+                    public void handleEvent(FEvent e) {setArtPreferenceInController();}
+                });
                 updateDropDownEnabled();
+                setArtPreferenceInController();
                 return;
             }
         }
@@ -125,6 +160,12 @@ public class FDeckImportDialog extends FDialog {
         showOptions = false;
         setButtonEnabled(0, false);
         txtInput.setText(Localizer.getInstance().getMessage("lblNoKnownCardsOnClipboard"));
+    }
+
+    private void setArtPreferenceInController() {
+        boolean isLatest = newEditionCheck.isSelected();
+        boolean coreFilter = onlyCoreExpCheck.isSelected();
+        controller.setCardArtPreference(isLatest, coreFilter);
     }
 
     private void updateDropDownEnabled() {
@@ -153,6 +194,7 @@ public class FDeckImportDialog extends FDialog {
             h = monthDropdown.getHeight();
             float fieldPadding = padding / 2;
 
+            newEditionCheck.setBounds(x, y, w, h);
             y += h + fieldPadding;
             dateTimeCheck.setBounds(x, y, w, h);
             y += h + fieldPadding;
@@ -161,6 +203,8 @@ public class FDeckImportDialog extends FDialog {
             monthDropdown.setBounds(x, y, dropDownWidth, h);
             yearDropdown.setBounds(x + dropDownWidth + fieldPadding, y, dropDownWidth, h);
             y += h + fieldPadding;
+
+            onlyCoreExpCheck.setBounds(x, y, w, h);
             y += h + 2 * padding;
         }
         h = txtInput.getPreferredHeight(w);
@@ -170,6 +214,9 @@ public class FDeckImportDialog extends FDialog {
         }
         txtInput.setBounds(x, y, w, h);
         y += h + padding;
+        if (showOptions) {
+            h = newEditionCheck.getHeight();
+        }
         return y;
     }
 }
