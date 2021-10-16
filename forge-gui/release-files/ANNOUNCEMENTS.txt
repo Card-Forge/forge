@@ -1,5 +1,6 @@
 #Add one announcement per line
 Get in the discord if you aren't yet. https://discord.gg/3v9JCVr
+The Throne of Eldraine quest world is the largest and most meticulously developed quest world to date, combining fascinating fairytales and interesting interactions. If you've never baked a pie into a pie, have you really played Magic?
 Innistrad: Midnight Hunt (MID) and Innistrad: Midnight Hunt Commander (MIC) are 100% supported
 Various improvements have been made to the desktop and mobile user interface to enhance the experience
 *** Android 7 & 8 support is now deprecated. Support will be dropped in an upcoming release. ***
