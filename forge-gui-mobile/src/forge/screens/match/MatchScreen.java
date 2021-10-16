@@ -768,9 +768,32 @@ public class MatchScreen extends FScreen {
                 }
             }
         }
-
+        //auto adjust zoom for local multiplayer landscape mode
+        List<VPlayerPanel> losers = new ArrayList<>();
         @Override
         public void drawOverlay(Graphics g) {
+            if (Forge.isLandscapeMode()) {
+                if (playerPanelsList.size() > 2) {
+                    for (VPlayerPanel playerPanel : playerPanelsList) {
+                        if (playerPanel.getPlayer().getHasLost()) {
+                            losers.add(playerPanel);
+                            playerPanelsList.remove(playerPanel);
+                        }
+                    }
+                }
+                if (!losers.isEmpty()) {
+                    float height = 0;
+                    for (VPlayerPanel p : losers) {
+                        p.clear();
+                        p.noBG = true;
+                        height = p.getAvatar().getHeight();
+                        System.out.println("Removed panels: "+p.getPlayer().toString());
+                    }
+                    losers.clear();
+                    zoom(0,0, height);
+                }
+            }
+
             float midField;
             float x = 0;
             float y;
