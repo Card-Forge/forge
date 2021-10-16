@@ -17,13 +17,16 @@
  */
 package forge.deck;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.collect.ImmutableList;
 
 import forge.Forge;
 import forge.Graphics;
+import forge.StaticData;
 import forge.deck.DeckRecognizer.TokenType;
+import forge.game.GameType;
 import forge.gui.FThreads;
 import forge.gui.util.SOptionPane;
 import forge.toolbox.FCheckBox;
@@ -41,7 +44,7 @@ public class FDeckImportDialog extends FDialog {
     private final Callback<Deck> callback;
 
     private final FTextArea txtInput = add(new FTextArea(true));
-    private final FCheckBox newEditionCheck = add(new FCheckBox(Localizer.getInstance().getMessage("lblImportLatestVersionCard"), true));
+    private final FCheckBox newEditionCheck = add(new FCheckBox(Localizer.getInstance().getMessage("lblImportLatestVersionCard"), false));
     private final FCheckBox dateTimeCheck = add(new FCheckBox(Localizer.getInstance().getMessage("lblUseOnlySetsReleasedBefore"), false));
     /*setting onlyCoreExpCheck to false allow the copied cards to pass the check of deck contents
       forge-core\src\main\java\forge\deck\Deck.javaDeck.java starting @ Line 320 which is called by
@@ -58,15 +61,29 @@ public class FDeckImportDialog extends FDialog {
 
     private final static ImmutableList<String> importOrCancel = ImmutableList.of(Localizer.getInstance().getMessage("lblImport"), Localizer.getInstance().getMessage("lblCancel"));
 
-    public FDeckImportDialog(final boolean replacingDeck, final Callback<Deck> callback0) {
+    public FDeckImportDialog(final boolean replacingDeck, final FDeckEditor.EditorType editorType, final Callback<Deck> callback0) {
         super(Localizer.getInstance().getMessage("lblImportFromClipboard"), 2);
 
         callback = callback0;
-        controller = new DeckImportController(replacingDeck, newEditionCheck, dateTimeCheck, onlyCoreExpCheck, monthDropdown, yearDropdown);
+        controller = new DeckImportController(dateTimeCheck, monthDropdown, yearDropdown, replacingDeck);
         String contents = Forge.getClipboard().getContents();
         if (contents == null)
             contents = ""; //prevent NPE
         txtInput.setText(contents);
+
+        if (FDeckEditor.allowsReplacement(editorType)) {
+            GameType gameType = GameType.valueOf(editorType.name());
+            controller.setGameFormat(gameType);
+            List<DeckSection> supportedSections = new ArrayList<>();
+            supportedSections.add(DeckSection.Main);
+            supportedSections.add(DeckSection.Sideboard);
+            if (editorType != FDeckEditor.EditorType.Constructed)
+                supportedSections.add(DeckSection.Commander);
+            controller.setAllowedSections(supportedSections);
+        }
+
+        onlyCoreExpCheck.setSelected(StaticData.instance().isCoreExpansionOnlyFilterSet());
+        newEditionCheck.setSelected(StaticData.instance().cardArtPreferenceIsLatest());
 
         initButton(0, Localizer.getInstance().getMessage("lblImport"), new FEventHandler() {
             @Override
@@ -79,11 +96,12 @@ public class FDeckImportDialog extends FDialog {
                         //if there are any unknown cards, let user know this and give them the option to cancel
                         StringBuilder sb = new StringBuilder();
                         for (DeckRecognizer.Token token : tokens) {
-                            if (token.getType() == TokenType.UnknownCard) {
+                            if ((token.getType() == TokenType.UNKNOWN_CARD) ||
+                                    (token.getType() == TokenType.UNSUPPORTED_CARD)) {
                                 if (sb.length() > 0) {
                                     sb.append("\n");
                                 }
-                                sb.append(token.getNumber()).append(" ").append(token.getText());
+                                sb.append(token.getQuantity()).append(" ").append(token.getText());
                             }
                         }
                         if (sb.length() > 0) {
@@ -114,10 +132,10 @@ public class FDeckImportDialog extends FDialog {
         });
 
         List<DeckRecognizer.Token> tokens = controller.parseInput(txtInput.getText());
-
+        StaticData data = StaticData.instance();
         //ensure at least one known card found on clipboard
         for (DeckRecognizer.Token token : tokens) {
-            if (token.getType() == TokenType.KnownCard) {
+            if (token.getType() == TokenType.LEGAL_CARD) {
                 showOptions = true;
 
                 dateTimeCheck.setCommand(new FEventHandler() {
@@ -126,7 +144,16 @@ public class FDeckImportDialog extends FDialog {
                         updateDropDownEnabled();
                     }
                 });
+                newEditionCheck.setCommand(new FEventHandler() {
+                    @Override
+                    public void handleEvent(FEvent e) {setArtPreferenceInController();}
+                });
+                onlyCoreExpCheck.setCommand(new FEventHandler() {
+                    @Override
+                    public void handleEvent(FEvent e) {setArtPreferenceInController();}
+                });
                 updateDropDownEnabled();
+                setArtPreferenceInController();
                 return;
             }
         }
@@ -134,6 +161,12 @@ public class FDeckImportDialog extends FDialog {
         showOptions = false;
         setButtonEnabled(0, false);
         txtInput.setText(Localizer.getInstance().getMessage("lblNoKnownCardsOnClipboard"));
+    }
+
+    private void setArtPreferenceInController() {
+        boolean isLatest = newEditionCheck.isSelected();
+        boolean coreFilter = onlyCoreExpCheck.isSelected();
+        controller.setCardArtPreference(isLatest, coreFilter);
     }
 
     private void updateDropDownEnabled() {

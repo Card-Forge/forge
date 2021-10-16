@@ -18,6 +18,7 @@ import forge.itemmanager.SItemManagerUtil.StatTypes;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.views.VStatistics;
 import forge.util.ItemPool;
+import forge.util.Localizer;
 
 /**
  * Controls the "analysis" panel in the deck editor UI.
@@ -114,9 +115,12 @@ public enum CStatistics implements ICDoc {
         }
         final double amc = Math.round((double) tmc / (double) total * 100) / 100.0d;
 
-        VStatistics.SINGLETON_INSTANCE.getLblTotal().setText("TOTAL CARDS: " + deck.countAll());
-        VStatistics.SINGLETON_INSTANCE.getLblTMC().setText("TOTAL MANA COST: " + tmc);
-        VStatistics.SINGLETON_INSTANCE.getLblAMC().setText("AVERAGE MANA COST: " + amc);
+        VStatistics.SINGLETON_INSTANCE.getLblTotal().setText(
+                String.format("%s: %d", Localizer.getInstance().getMessage("lblTotalCards").toUpperCase(), deck.countAll()));
+        VStatistics.SINGLETON_INSTANCE.getLblTMC().setText(
+                String.format("%s: %d", Localizer.getInstance().getMessage("lblTotalManaCost").toUpperCase(), tmc));
+        VStatistics.SINGLETON_INSTANCE.getLblAMC().setText(String.format("%s: %.2f",
+                Localizer.getInstance().getMessage("lblAverageManaCost").toUpperCase(), amc));
     }
 
     /**

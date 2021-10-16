@@ -27,7 +27,7 @@ public abstract class DeckBase implements Serializable, Comparable<DeckBase>, In
     private static final long serialVersionUID = -7538150536939660052L;
     // gameType is from Constant.GameType, like GameType.Regular
 
-    private final String name;
+    private String name;
     private transient String directory;
     private String comment = null;
 
@@ -70,6 +70,12 @@ public abstract class DeckBase implements Serializable, Comparable<DeckBase>, In
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String deckName) { this.name = deckName; }
+
+    public boolean hasName() {
+        return !(this.name.equals(""));
     }
 
     public String getDirectory() {

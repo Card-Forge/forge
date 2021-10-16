@@ -59,18 +59,20 @@ public interface ICardDatabase extends Iterable<PaperCard> {
 
     // 3. Card lookup based on CardArtPreference Selection Policy
     PaperCard getCardFromEditions(String cardName, CardArtPreference artPreference);
+    PaperCard getCardFromEditions(String cardName, CardArtPreference artPreference, Predicate<PaperCard> filter);
     PaperCard getCardFromEditions(String cardName, CardArtPreference artPreference, int artIndex);
+    PaperCard getCardFromEditions(String cardName, CardArtPreference artPreference, int artIndex, Predicate<PaperCard> filter);
 
     // 4. Specialised Card Lookup on CardArtPreference Selection and Release Date
-    PaperCard getCardFromEditionsReleasedBefore(String cardName, Date releaseDate);
-    PaperCard getCardFromEditionsReleasedBefore(String cardName, int artIndex, Date releaseDate);
     PaperCard getCardFromEditionsReleasedBefore(String cardName, CardArtPreference artPreference, Date releaseDate);
+    PaperCard getCardFromEditionsReleasedBefore(String cardName, CardArtPreference artPreference, Date releaseDate, Predicate<PaperCard> filter);
     PaperCard getCardFromEditionsReleasedBefore(String cardName, CardArtPreference artPreference, int artIndex, Date releaseDate);
+    PaperCard getCardFromEditionsReleasedBefore(String cardName, CardArtPreference artPreference, int artIndex, Date releaseDate, Predicate<PaperCard> filter);
 
-    PaperCard getCardFromEditionsReleasedAfter(String cardName, Date releaseDate);
-    PaperCard getCardFromEditionsReleasedAfter(String cardName, int artIndex, Date releaseDate);
     PaperCard getCardFromEditionsReleasedAfter(String cardName, CardArtPreference artPreference, Date releaseDate);
+    PaperCard getCardFromEditionsReleasedAfter(String cardName, CardArtPreference artPreference, Date releaseDate, Predicate<PaperCard> filter);
     PaperCard getCardFromEditionsReleasedAfter(String cardName, CardArtPreference artPreference, int artIndex, Date releaseDate);
+    PaperCard getCardFromEditionsReleasedAfter(String cardName, CardArtPreference artPreference, int artIndex, Date releaseDate, Predicate<PaperCard> filter);
 
 
 
@@ -89,5 +91,6 @@ public interface ICardDatabase extends Iterable<PaperCard> {
     int getArtCount(String cardName, String edition);
     // Utility Predicates
     Predicate<? super PaperCard> wasPrintedInSets(List<String> allowedSetCodes);
+    Predicate<? super PaperCard> isLegal(List<String> allowedSetCodes);
     Predicate<? super PaperCard> wasPrintedAtRarity(CardRarity rarity);
 }

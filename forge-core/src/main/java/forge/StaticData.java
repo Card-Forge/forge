@@ -5,10 +5,7 @@ import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardRules;
 import forge.card.PrintSheet;
-import forge.item.BoosterBox;
-import forge.item.FatPack;
-import forge.item.PaperCard;
-import forge.item.SealedProduct;
+import forge.item.*;
 import forge.token.TokenDb;
 import forge.util.FileUtil;
 import forge.util.TextUtil;
@@ -253,6 +250,125 @@ public class StaticData {
         }
     }
 
+    /**
+     * Retrieve a PaperCard by looking at all available card databases;
+     * @param cardName The name of the card
+     * @param setCode The card Edition code
+     * @param collectorNumber Card's collector Number
+     * @return PaperCard instance found in one of the available CardDb databases, or <code>null</code> if not found.
+     */
+    public PaperCard fetchCard(final String cardName, final String setCode, final String collectorNumber){
+        PaperCard card = null;
+        for (CardDb db : this.getAvailableDatabases().values()) {
+            card = db.getCard(cardName, setCode, collectorNumber);
+            if (card != null)
+                break;
+        }
+        return card;
+    }
+
+    /**
+     * Attempt to retrieve a Card from a target Card Edition if found in any available card database.
+     * Note: Collector Number and Art Index will be used in a mutual exclusive fashion, that is:
+     * collector number will be tried first, and then artIndex will be used in alternative.
+     * If neither of those would correspond to any card in the database (due to incorrect value), the method will
+     * always attempt a last try by just using card name and set.
+     * @param cardName Card Name
+     * @param edition CardEdition instance to fetch the card from.
+     * @param collectorNumber Card Collector Number.
+     * @param artIndex Card Art Index. This value will not be considered if it exceeds the Maximum Art Index value
+     *                 supported for the given card in the target Card Edition.
+     * @param isFoil Flag determining whether requested card should be foil or not.
+     * @return <code>null</code> if no card can be found with the given search parameters.
+     */
+    public PaperCard getCardFromSet(final String cardName, final CardEdition edition,
+                                    final String collectorNumber, final int artIndex, boolean isFoil) {
+        CardDb.CardRequest cr = CardDb.CardRequest.fromString(cardName);  // accounts for any foil request ending with+
+        cr.isFoil = cr.isFoil || isFoil;
+        CardDb targetDb = this.matchTargetCardDb(cr.cardName);
+        if (targetDb == null)
+            return null;
+        // Try with collector number first
+        PaperCard result = targetDb.getCardFromSet(cardName, edition, collectorNumber, cr.isFoil);
+        if (result == null && !collectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER)) {
+            if (artIndex != IPaperCard.NO_ART_INDEX) {
+                // So here we know cardName exists (checked before invoking this method)
+                // and also a Collector Number was specified.
+                // The only case we would reach this point is either due to a wrong edition-card match
+                // (later resulting in Unknown card - e.g. "Counterspell|FEM") or due to the fact that
+                // art Index was specified instead of collector number! Let's give it a go with that
+                // but only if artIndex is not NO_ART_INDEX (e.g. collectorNumber = "*32")
+                int maxArtForCard = targetDb.getMaxArtIndex(cardName);
+                if (artIndex <= maxArtForCard) {
+                    // if collNr was "78", it's hardly an artIndex. It was just the wrong collNr for the requested card
+                    result = targetDb.getCardFromSet(cardName, edition, artIndex, cr.isFoil);
+                }
+            }
+            if (result == null) {
+                // Last chance, try without collector number and see if any match is found
+                result = targetDb.getCardFromSet(cardName, edition, cr.isFoil);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Retrieves a card from supportedEditions considering current default Card Art Preference,
+     * and any possible constraint imposed on Game format (allowed sets) or edition release date.
+     * @param cardName Name of the card to match
+     * @param isFoil Whether the requested card should be foil.
+     * @param artPreference The Card Art Preference to use
+     * @param allowedSetCodes List of allowed set codes (if any)
+     * @param releasedBefore Any constraint on release date for matched editions. If passed,
+     *                       only sets released before the given date (if any) will be considered.
+     * @return PaperCard matched in any available dataset, <code>null</code> if no card is found.
+     */
+    public PaperCard getCardFromSupportedEditions(final String cardName, boolean isFoil,
+                                                  CardDb.CardArtPreference artPreference,
+                                                  List<String> allowedSetCodes, Date releasedBefore) {
+        CardDb.CardRequest cr = CardDb.CardRequest.fromString(cardName);  // accounts for any foil request ending with+
+        isFoil = cr.isFoil || isFoil;
+        CardDb targetDb = this.matchTargetCardDb(cr.cardName);
+        if (targetDb == null)
+            return null;
+        Predicate<PaperCard> filter = null;
+        if (allowedSetCodes != null)
+            filter = (Predicate<PaperCard>) targetDb.isLegal(allowedSetCodes);
+        PaperCard result;
+        String cardRequest = CardDb.CardRequest.compose(cardName, isFoil);
+        if (releasedBefore != null) {
+            result = targetDb.getCardFromEditionsReleasedBefore(cardRequest, artPreference, releasedBefore, filter);
+            if (result == null)
+                result = targetDb.getCardFromEditions(cardRequest, artPreference, filter);
+        } else
+            result = targetDb.getCardFromEditions(cardRequest, artPreference, filter);
+        return result;
+    }
+
+    private CardDb matchTargetCardDb(final String cardName){
+        // NOTE: any foil request in cardName is NOT taken into account here.
+        // It's a private method, so it's a fair assumption.
+        for (CardDb targetDb : this.getAvailableDatabases().values()){
+            if (targetDb.contains(cardName))
+                return targetDb;
+        }
+        return null;
+    }
+
+    /**
+     * Determins whether the input String corresponds to an MTG Card Name (in any available card database)
+     * @param cardName Name of the Card to verify (CASE SENSITIVE)
+     * @return True if a card with the given input string can be found. False otherwise.
+     */
+    public boolean isMTGCard(final String cardName){
+        if (cardName == null || cardName.trim().length() == 0)
+            return false;
+        CardDb.CardRequest cr = CardDb.CardRequest.fromString(cardName);  // accounts for any foil request ending with +
+        return this.commonCards.contains(cr.cardName) ||
+                this.variantCards.contains(cr.cardName) ||
+                this.customCards.contains(cr.cardName);
+    }
+
     /** @return {@link forge.util.storage.IStorage}<{@link forge.item.SealedProduct.Template}> */
     public final IStorage<SealedProduct.Template> getTournamentPacks() {
         if (tournaments == null)
@@ -292,7 +408,7 @@ public class StaticData {
     }
 
     public Map<String, CardDb> getAvailableDatabases(){
-        Map<String, CardDb> databases = new HashMap<>();
+        Map<String, CardDb> databases = new LinkedHashMap<>();  // to process dbs in this exact order
         databases.put("Common", commonCards);
         databases.put("Custom", customCards);
         databases.put("Variant", variantCards);
@@ -597,6 +713,13 @@ public class StaticData {
         return this.commonCards.getCardArtPreference();
     }
 
+    public CardDb.CardArtPreference getCardArtPreference(boolean latestArt, boolean coreExpansionOnly){
+        if (latestArt){
+            return coreExpansionOnly ? CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY : CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS;
+        }
+        return coreExpansionOnly ? CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY : CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS;
+    }
+
 
     public boolean isCoreExpansionOnlyFilterSet(){ return this.commonCards.getCardArtPreference().filterSets; }
 
@@ -609,15 +732,19 @@ public class StaticData {
     public String[] getCardArtAvailablePreferences(){
         CardDb.CardArtPreference[] preferences = CardDb.CardArtPreference.values();
         String[] preferences_avails = new String[preferences.length];
-        for (int i = 0; i < preferences.length; i++) {
-            StringBuilder label = new StringBuilder();
-            String[] fullNames = preferences[i].toString().split("_");
-            for (String name : fullNames)
-                label.append(TextUtil.capitalize(name.toLowerCase())).append(" ");
-            preferences_avails[i] = label.toString().trim();
-        }
+        for (int i = 0; i < preferences.length; i++)
+            preferences_avails[i] = prettifyCardArtPreferenceName(preferences[i]);
         return preferences_avails;
     }
+
+    private String prettifyCardArtPreferenceName(CardDb.CardArtPreference preference) {
+        StringBuilder label = new StringBuilder();
+        String[] fullNames = preference.toString().split("_");
+        for (String name : fullNames)
+            label.append(TextUtil.capitalize(name.toLowerCase())).append(" ");
+        return label.toString().trim();
+    }
+
     public void setCardArtPreference(String artPreference){
         this.commonCards.setCardArtPreference(artPreference);
         this.variantCards.setCardArtPreference(artPreference);

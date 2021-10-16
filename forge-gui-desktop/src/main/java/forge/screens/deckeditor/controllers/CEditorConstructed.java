@@ -396,12 +396,14 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
     public void resetTables() {
         // Constructed mode can use all cards, no limitations.
         this.sectionMode = DeckSection.Main;
-        this.getCatalogManager().setPool(normalPool, true);
+        ItemPool currentPool = this.getCatalogManager().getPool();
+        if (currentPool == null || !currentPool.equals(normalPool))
+            this.getCatalogManager().setPool(normalPool, true);
         this.getDeckManager().setPool(this.controller.getModel().getMain());
     }
 
     @Override
-    protected Boolean isSectionImportable(DeckSection section) {
+    public Boolean isSectionImportable(DeckSection section) {
         return allSections.contains(section);
     }
 

@@ -119,11 +119,10 @@ public enum CCurrentDeck implements ICDoc {
      * Opens dialog for importing a deck from a different MTG software.
      */
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    private <TItem extends InventoryItem, TModel extends DeckBase> void importDeck() {
-        final ACEditorBase<TItem, TModel> ed = (ACEditorBase<TItem, TModel>)
+    private <TModel extends DeckBase> void importDeck() {
+        final CDeckEditor<TModel> ed = (CDeckEditor<TModel>)
                 CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
-
-        final DeckImport dImport = new DeckImport(ed, ed instanceof CEditorCommander);
+        final DeckImport dImport = new DeckImport(ed);
         dImport.setModalityType(ModalityType.APPLICATION_MODAL);
         dImport.setVisible(true);
     }

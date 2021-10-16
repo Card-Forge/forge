@@ -421,7 +421,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                             addItem(new FMenuItem(localizer.getMessage("lblImportFromClipboard"), Forge.hdbuttons ? FSkinImage.HDIMPORT : FSkinImage.OPEN, new FEventHandler() {
                                 @Override
                                 public void handleEvent(FEvent e) {
-                                    FDeckImportDialog dialog = new FDeckImportDialog(!deck.isEmpty(), new Callback<Deck>() {
+                                    FDeckImportDialog dialog = new FDeckImportDialog(!deck.isEmpty(), editorType, new Callback<Deck>() {
                                         @Override
                                         public void run(Deck importedDeck) {
                                             getMainDeckPage().setCards(importedDeck.getMain());
@@ -674,7 +674,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
     }
 
-    private boolean isAllowedReplacement() {
+    public static boolean allowsReplacement(final EditorType editorType){
         switch (editorType) {
             case Constructed:
             case Commander:
@@ -685,6 +685,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             default:
                 return false;
         }
+    }
+
+    private boolean isAllowedReplacement() {
+        return allowsReplacement(editorType);
     }
 
     protected Map<ColumnDef, ItemColumn> getColOverrides(ItemManagerConfig config) {

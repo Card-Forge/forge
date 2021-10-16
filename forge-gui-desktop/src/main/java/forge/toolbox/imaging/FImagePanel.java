@@ -18,10 +18,7 @@
 
 package forge.toolbox.imaging;
 
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
@@ -63,6 +60,7 @@ public class FImagePanel extends JPanel {
 
     private double imageScale = 1;
     private int degreesOfRotation = 0;
+    private float alpha = 0f;
 
     // Ensures that when resizing only {@code doPerformancePaint} is used.
     private boolean isResizing = false;
@@ -213,6 +211,8 @@ public class FImagePanel extends JPanel {
         BufferedImage resampledImage = getResampledImage();
         if (resampledImage != null) {
             Graphics2D g2d = (Graphics2D)g;
+            if (alpha > 0)
+                g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
             g2d.drawImage(resampledImage, getAffineTransform(resampledImage, false), null);
         }
     }
@@ -252,6 +252,10 @@ public class FImagePanel extends JPanel {
     private void doPerformancePaint(Graphics g) {
         Graphics2D g2d = (Graphics2D)g;
         setRenderingHints(g2d);
+        if (alpha > 0) {
+            g2d.setColor(new Color(92, 92, 92));
+            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
+        }
         g2d.drawImage(sourceImage, getAffineTransform(sourceImage, true), null);
     }
 
@@ -340,6 +344,10 @@ public class FImagePanel extends JPanel {
                 }
             }
         }
+    }
+
+    public void setAlpha(float alphaValue){
+        this.alpha = alphaValue;
     }
 
 }

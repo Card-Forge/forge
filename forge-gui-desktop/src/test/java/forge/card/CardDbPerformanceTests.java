@@ -23,7 +23,7 @@ public class CardDbPerformanceTests  extends CardDbTestCase {
             this.fullDbCardNames.add(card.getName());
     }
 
-    @Test
+    @Test(enabled = false)  // disabled to not run in battery
     public void testBenchmarkFullDbGetCardLegacyImplementation() {
         int nRuns = 100;
         long averageTime = 0;
@@ -48,7 +48,7 @@ public class CardDbPerformanceTests  extends CardDbTestCase {
         System.out.println("[LEGACY] Worst Time (in sec): " + ((double) maxTime)/ 1000);
     }
 
-    @Test
+    @Test(enabled = false)  // disabled to not run in battery
     public void testBenchmarkFullDbGetCardNewDbImplementation() {
         int nRuns = 100;
         long averageTime = 0;

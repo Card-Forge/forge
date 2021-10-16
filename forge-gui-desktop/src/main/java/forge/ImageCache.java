@@ -157,8 +157,13 @@ public class ImageCache {
         return getOriginalImageInternal(imageKey, useDefaultIfNotFound, cardView).getLeft();
     }
 
+    public static Pair<BufferedImage, Boolean> getCardOriginalImageInfo(String imageKey, boolean useDefaultIfNotFound) {
+        return getOriginalImageInternal(imageKey, useDefaultIfNotFound, null);
+    }
+
     // return the pair of image and a flag to indicate if it is a placeholder image.
-    private static Pair<BufferedImage, Boolean> getOriginalImageInternal(String imageKey, boolean useDefaultIfNotFound, CardView cardView) {
+    private static Pair<BufferedImage, Boolean> getOriginalImageInternal(String imageKey, boolean useDefaultIfNotFound,
+                                                                         CardView cardView) {
         if (null == imageKey) {
             return Pair.of(null, false);
         }
@@ -415,4 +420,6 @@ public class ImageCache {
     public static boolean isDefaultImage(BufferedImage image) {
         return _defaultImage.equals(image);
     }
+
+    public static BufferedImage getDefaultImage() { return _defaultImage; }
 }

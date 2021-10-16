@@ -1,5 +1,9 @@
 package forge.screens.deckeditor;
 
+import forge.gui.framework.ICDoc;
+import forge.gui.framework.IVDoc;
+import forge.screens.deckeditor.controllers.*;
+import forge.screens.deckeditor.views.*;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.ImmutableList;
@@ -9,10 +13,6 @@ import forge.deck.DeckProxy;
 import forge.deck.io.DeckPreferences;
 import forge.gui.framework.FScreen;
 import forge.model.FModel;
-import forge.screens.deckeditor.controllers.CAllDecks;
-import forge.screens.deckeditor.controllers.DeckController;
-import forge.screens.deckeditor.views.VAllDecks;
-import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.toolbox.FOptionPane;
 import forge.util.Localizer;
 
@@ -58,8 +58,28 @@ public class SEditorIO {
 
         if (performSave) {
             controller.saveAs(name);
-            CAllDecks.SINGLETON_INSTANCE.refresh(); //pull new deck into deck list and select it
-            VAllDecks.SINGLETON_INSTANCE.getLstDecks().setSelectedString(deckStr);
+            switch (CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getGameType()){
+                case Brawl:
+                    CBrawlDecks.SINGLETON_INSTANCE.refresh();
+                    VBrawlDecks.SINGLETON_INSTANCE.getLstDecks().setSelectedString(deckStr);
+                    break;
+                case Commander:
+                    CCommanderDecks.SINGLETON_INSTANCE.refresh();
+                    VCommanderDecks.SINGLETON_INSTANCE.getLstDecks().setSelectedString(deckStr);
+                    break;
+                case TinyLeaders:
+                    CTinyLeadersDecks.SINGLETON_INSTANCE.refresh();
+                    VTinyLeadersDecks.SINGLETON_INSTANCE.getLstDecks().setSelectedString(deckStr);
+                    break;
+                case Oathbreaker:
+                    COathbreakerDecks.SINGLETON_INSTANCE.refresh();
+                    VOathbreakerDecks.SINGLETON_INSTANCE.getLstDecks().setSelectedString(deckStr);
+                    break;
+                default:
+                    CAllDecks.SINGLETON_INSTANCE.refresh(); //pull new deck into deck list and select it
+                    VAllDecks.SINGLETON_INSTANCE.getLstDecks().setSelectedString(deckStr);
+                    break;
+            }
             // Set current quest deck to selected
             if (Singletons.getControl().getCurrentScreen() == FScreen.DECK_EDITOR_QUEST) {
                 FModel.getQuest().setCurrentDeck(name);

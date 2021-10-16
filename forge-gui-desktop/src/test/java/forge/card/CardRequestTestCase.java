@@ -226,4 +226,28 @@ public class CardRequestTestCase {
         assertEquals(request.collectorNumber, IPaperCard.NO_COLLECTOR_NUMBER);
     }
 
+    @Test void isFoilCardNameMethod(){
+        assertTrue(CardRequest.isFoilCardName("Counterspell+"));
+        assertFalse(CardRequest.isFoilCardName("Counterspell"));
+        assertTrue(CardRequest.isFoilCardName("   Counterspell+    "));
+        assertFalse(CardRequest.isFoilCardName("   Counterspell    "));
+    }
+
+    @Test void testComposeCardRequestWithCardNameAndFoil(){
+        String cardName = "Counterspell";
+        String foilCardName = "Counterspell+";
+
+        String cr = CardRequest.compose(cardName, true);
+        assertEquals(cr, foilCardName);
+
+        cr = CardRequest.compose(cardName, false);
+        assertEquals(cr, cardName);
+
+        cr = CardRequest.compose(foilCardName, false);
+        assertEquals(cr, cardName);
+
+        cr = CardRequest.compose(foilCardName, true);
+        assertEquals(cr, foilCardName);
+    }
+
 }

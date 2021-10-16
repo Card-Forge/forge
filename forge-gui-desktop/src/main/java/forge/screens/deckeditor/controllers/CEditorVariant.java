@@ -159,7 +159,7 @@ public final class CEditorVariant extends CDeckEditor<Deck> {
     }
 
     @Override
-    protected Boolean isSectionImportable(DeckSection section) {
+    public Boolean isSectionImportable(DeckSection section) {
         return true;
     }
 

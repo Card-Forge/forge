@@ -473,4 +473,20 @@ public class CardPool extends ItemPool<PaperCard> {
         }
         return filteredPool;
     }
+
+    /**
+     * Applies a predicate to this CardPool's cards.
+     * @param predicate the Predicate to apply to this CardPool
+     * @return a new CardPool made from this CardPool with only the cards that agree with the provided Predicate
+     */
+    public CardPool getFilteredPoolWithCardsCount(Predicate<PaperCard> predicate){
+        CardPool filteredPool = new CardPool();
+        for(Entry<PaperCard, Integer> entry : this.items.entrySet()){
+            PaperCard pc = entry.getKey();
+            int count = entry.getValue();
+            if(predicate.apply(pc))
+                filteredPool.add(pc, count);
+        }
+        return filteredPool;
+    }
 }
