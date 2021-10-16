@@ -70,8 +70,4 @@ public abstract class AbstractGeneticAlgorithm<T> {
 
     protected abstract boolean shouldContinue();
 
-
-
-
-
 }

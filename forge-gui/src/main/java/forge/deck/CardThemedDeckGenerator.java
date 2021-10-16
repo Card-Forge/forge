@@ -59,7 +59,6 @@ public class CardThemedDeckGenerator extends DeckProxy implements Comparable<Car
 
     @Override
     public Deck getDeck() {
-
         return DeckgenUtil.buildCardGenDeck(name,format,isForAi);
     }
 

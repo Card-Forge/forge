@@ -515,8 +515,7 @@ public class SealedCardPoolGenerator {
                     return null; //return null if user canceled
                 }
                 pool.addAllFlat(cards);
-            }
-            else {
+            } else {
                 pool.addAllFlat(prod.get());
             }
         }
