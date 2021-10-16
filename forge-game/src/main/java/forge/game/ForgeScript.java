@@ -16,7 +16,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
-import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 
@@ -111,8 +110,7 @@ public class ForgeScript {
                 return true;
             }
             for (final Trigger trig : cardState.getTriggers()) {
-                WrappedAbility wrap = new WrappedAbility(trig, trig.getOverridingAbility(), sourceController);
-                if (wrap.isManaAbility()) {
+                if (trig.getOverridingAbility() != null && trig.getOverridingAbility().isManaAbility()) {
                     return true;
                 }
             }
