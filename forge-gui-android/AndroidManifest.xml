@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="forge.app"
     android:versionCode="1"
-    android:versionName="1.6.40" > <!-- versionName should be updated and it's used for Sentry releases tag -->
+    android:versionName="1.6.45" > <!-- versionName should be updated and it's used for Sentry releases tag -->
 
     <uses-sdk
         android:minSdkVersion="19"
