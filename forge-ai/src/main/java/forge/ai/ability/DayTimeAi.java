@@ -16,10 +16,11 @@ public class DayTimeAi extends SpellAbilityAi {
             // If it involves a cost that may put us at a disadvantage, better activate before own turn if possible
             if (!SpellAbilityAi.isSorcerySpeed(sa)) {
                 return ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == aiPlayer;
+            } else {
+                return ph.is(PhaseType.MAIN2, aiPlayer); // Give other things a chance to be cast (e.g. Celestus)
             }
         }
 
-        // TODO: more logic for when it may not be desirable to do this. Special logic for Celestus?
         return true;
     }
 
