@@ -18,7 +18,6 @@
 package forge.deck;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.google.common.collect.ImmutableList;
@@ -27,7 +26,6 @@ import forge.Forge;
 import forge.Graphics;
 import forge.StaticData;
 import forge.deck.DeckRecognizer.TokenType;
-import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.gui.FThreads;
 import forge.gui.util.SOptionPane;
@@ -73,7 +71,7 @@ public class FDeckImportDialog extends FDialog {
             contents = ""; //prevent NPE
         txtInput.setText(contents);
 
-        if (FDeckEditor.editorTypesAllowsReplacement(editorType)) {
+        if (FDeckEditor.allowsReplacement(editorType)) {
             GameType gameType = GameType.valueOf(editorType.name());
             controller.setGameFormat(gameType);
             List<DeckSection> supportedSections = new ArrayList<>();

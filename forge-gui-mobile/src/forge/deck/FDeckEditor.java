@@ -674,7 +674,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
     }
 
-    public static boolean editorTypesAllowsReplacement(final EditorType editorType){
+    public static boolean allowsReplacement(final EditorType editorType){
         switch (editorType) {
             case Constructed:
             case Commander:
@@ -688,7 +688,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     }
 
     private boolean isAllowedReplacement() {
-        return editorTypesAllowsReplacement(editorType);
+        return allowsReplacement(editorType);
     }
 
     protected Map<ColumnDef, ItemColumn> getColOverrides(ItemManagerConfig config) {
