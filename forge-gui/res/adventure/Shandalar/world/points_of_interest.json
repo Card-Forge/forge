@@ -1,0 +1,58 @@
+[{                                    
+"name":"Waste Town",                  
+"type":"town",
+"count":100, 
+"radiusFactor":0.8,
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"WasteTown",
+"map":  "maps/map/waste_town.tmx"
+},  {                                    
+"name":"Forest Town",                  
+"type":"town",
+"count":100, 
+"radiusFactor":0.8,
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"ForestTown",
+"map":  "maps/map/forest_town.tmx"
+},{                                    
+"name":"Plains Town",                  
+"type":"town",
+"count":100, 
+"radiusFactor":0.8,
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"PlainsTown",
+"map":  "maps/map/plains_town.tmx"
+},{                                    
+"name":"Island Town",                  
+"type":"town",
+"count":100, 
+"radiusFactor":0.8,
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"IslandTown",
+"map":  "maps/map/island_town.tmx"
+},{                                    
+"name":"Mountain Town",                  
+"type":"town",
+"count":100, 
+"radiusFactor":0.8,
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"MountainTown",
+"map":  "maps/map/mountain_town.tmx"
+},{                                    
+"name":"Swamp Town",                  
+"type":"town",
+"count":100, 
+"radiusFactor":0.8,
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"SwampTown",
+"map":  "maps/map/swamp_town.tmx"
+},
+{
+  "name":"Graveyard",
+  "count":20, 
+  "radiusFactor":0.8,
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"Graveyard",
+  "map":  "maps/map/graveyard.tmx"
+}
+]

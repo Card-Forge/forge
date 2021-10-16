@@ -1,0 +1,33 @@
+{
+    "width": 480,
+    "height": 270, 
+    "yDown": true, 
+    "elements":[   
+    {
+      "type" : "Image",      
+      "name":"lastScreen",
+      "width": 480,
+      "height": 270
+    }   
+    ,   
+            
+    { 
+      "name": "cards",
+      "x": 5, 
+      "y": 5 ,
+      "width": 405,
+      "height": 265
+    } ,
+    {
+         "type" : "TextButton",     
+         "name" : "done" ,             
+         "text" : "Take all" ,       
+         "width": 48,
+          "height": 16,     
+          "x": 420, 
+          "y": 10 
+    }   
+    ]
+
+
+}

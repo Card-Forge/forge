@@ -1,0 +1,9 @@
+{                                    
+"name":"Green mid",
+  "template":
+  {
+   "count":60,
+   "colors":["Green"], 
+   "rares":0.5
+  }
+}

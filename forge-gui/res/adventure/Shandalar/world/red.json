@@ -1,0 +1,28 @@
+{
+		"startPointX": 0.31,
+		"startPointY": 0.78,
+		"name": "red",
+		"noiseWeight": 0.5,
+		"distWeight": 1.5,             
+    "tilesetName":"Red",
+    "tilesetAtlas":"world/tilesets/terrain.atlas",      
+    "terrain":[
+    {
+    "spriteName":"Red_1",
+    "min": 0,           
+    "max": 0.2,           
+    "resolution": 10
+    },    {
+    "spriteName":"Red_2",
+    "min": 0.8,           
+    "max": 1.0,           
+    "resolution": 10
+    }
+    ],
+		"width": 0.7,
+		"height": 0.7,
+		"color": "e53b28",
+    "spriteNames":[ "MountainTree","MountainTree2","MountainRock","LargeMountainRock","Gravel"]    ,
+    "enemies":[ "Goblin","Goblin Warrior","Goblin Chief","Minotaur","Devil","Red Wiz1"]    ,
+    "pointsOfInterest":[ "Mountain Town"]
+}
