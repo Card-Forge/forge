@@ -24,14 +24,18 @@ A12 R Xathrid Necromancer @Maciej Kuciara
 49 R Curator of Mysteries @Christine Choi
 100 R Etali, Primal Storm @Raymond Swanland
 123 R Beast Whisperer @Matt Stewart
+127 R Vito, Thorn of the Dusk Rose @Lie Setiawan
 133 R Opportunistic Dragon @Chris Rahn
 140 R Neheb, Dreadhorde Champion @Igor Kieryluk
 141★ R Goblin Chieftain @Sam Wood
 147 R Bristling Hydra @Chris Rahn
 149 R Atarka, World Render @Karl Kopinski
 149* R Lathliss, Dragon Queen @Alex Konstad
+162 R Kogla, the Titan Ape @Chris Rahn
 172 R Gargos, Vicious Watcher @Mathias Kollros
 176 R Genesis Hydra @Peter Mohrbacher
 193 R Outland Colossus @Ryan Pancoast
+203 R Scute Swarm @Alex Konstad
 221★ R Oran-Rief, the Vastwood @Mike Bierek
 235 R Stonecoil Serpent @Mark Poole
+235★ R Nyx Lotus @Raoul Vitale
