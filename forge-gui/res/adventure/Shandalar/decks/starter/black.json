@@ -1,0 +1,54 @@
+{                                    
+"name":"Black",
+  "mainDeck": [
+    {  
+      "count":10, 
+      "cardName": "Swamp" 
+    },        
+    {  
+      "count":4, 
+      "cardName": "Mountain" 
+    },   
+    {  
+      "count":4, 
+      "cardName": "Island" 
+    },
+    {  
+      "count":6,
+      "colors": ["black"],
+      "rarity": ["Uncommon","Common"],   
+      "manaCosts": [1,2], 
+    },
+    {  
+      "count":4,
+      "colors": ["red","blue"],
+      "rarity": ["Uncommon","Common"],   
+      "manaCosts": [1,2], 
+    },
+    {  
+      "count":4,
+      "colors": ["black"],
+      "rarity": ["Uncommon","Common"],   
+      "manaCosts": [3,4], 
+    },
+    {  
+      "count":2,
+      "colors": ["red","blue"],
+      "rarity": ["Uncommon","Common"],   
+      "manaCosts": [3,4], 
+    },
+    {  
+      "count":5,
+      "colors": ["black"],
+      "rarity": ["Uncommon","Common"],   
+      "manaCosts": [5,6]
+    },
+    {  
+      "count":1,
+      "colors": ["black"],
+      "rarity": ["rare"],   
+      "manaCosts": [7,8,9] 
+    }
+    ]
+}
+

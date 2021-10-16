@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="51">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJybxsnAMG0Uj+JRPIpH8SgexSMCAwDOljzS
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJyT4WFgkBnFKDial4FhFw9uHMVLG3tlgRgfkKaRf/cCcR03BNdzQ+yq5UaI7aFDmMP8Tis/jto7fO1Fz6/I+RObvfjUk+MnbPkTm7341FNi704kv+zmwS1GbXuRywhs5QZMjNr20iuckctF9HIQZIcKI6rZ+NRTC8PsoNRsAKhhZIo=
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="208" y="260">
+   <properties>
+    <property name="teleport" value="maps/map/graveyard.tmx"/>
+   </properties>
+  </object>
+  <object id="47" template="../obj/gold.tx" x="323" y="219"/>
+  <object id="48" template="../obj/treasure.tx" x="207" y="67"/>
+  <object id="49" template="../obj/gold.tx" x="106" y="216"/>
+  <object id="50" template="../obj/enemy.tx" x="208" y="98">
+   <properties>
+    <property name="enemy" value="Vampire"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

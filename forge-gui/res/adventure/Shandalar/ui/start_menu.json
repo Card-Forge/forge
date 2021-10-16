@@ -1,0 +1,70 @@
+{
+    "width": 480,
+    "height": 270, 
+    "yDown": true, 
+    "elements":[
+    {
+      "type" : "Image",      
+      "image":"ui/title_bg.png",
+      "width": 480,
+      "height": 270
+    }   
+    ,
+    {
+         "type" : "TextButton",     
+         "name" : "Start" ,
+         "text" : "New Game",
+          "width": 120,
+          "height": 30,      
+          "x": 20, 
+          "y": 20 
+    }  ,
+    {
+         "type" : "TextButton",     
+         "name" : "Load" ,             
+         "text" : "Load",
+          "width": 120,
+          "height": 30,      
+          "x": 20, 
+          "y": 60 
+    } ,          
+    {
+         "type" : "TextButton",     
+         "name" : "Save" ,             
+         "text" : "Save",
+          "width": 120,
+          "height": 30,      
+          "x": 20, 
+          "y": 100 
+    },                  
+    {
+         "type" : "TextButton",     
+         "name" : "Resume" ,             
+         "text" : "Resume",
+          "width": 120,
+          "height": 30,      
+          "x": 20, 
+          "y": 140 
+    }  , 
+    {
+         "type" : "TextButton",     
+         "name" : "Settings" ,             
+         "text" : "Settings",
+          "width": 120,
+          "height": 30,      
+          "x": 20, 
+          "y": 180 
+    }  , 
+    {
+         "type" : "TextButton",     
+         "name" : "Exit" ,             
+         "text" : "Exit",
+          "width": 120,
+          "height": 30,      
+          "x": 20, 
+          "y": 220 
+    }   
+    ]
+
+
+}

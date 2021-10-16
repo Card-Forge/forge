@@ -1,0 +1,166 @@
+{
+    "width": 480,
+    "height": 270, 
+    "yDown": true, 
+    "elements":[
+    {
+      "type" : "Image",      
+      "image":"ui/title_bg.png",
+      "width": 480,
+      "height": 270
+    }   
+    ,            
+    {
+      "type" : "Scroll",      
+      "style":"paper",       
+      "x": 10, 
+      "y": 10,
+      "width": 256,
+      "height": 236
+    }   
+    ,
+    {
+         "type" : "Label",      
+         "text" : "Create a Character",
+          "width": 128,
+          "height": 32,      
+          "font":"blackbig",
+          "x": 16, 
+          "y": 16 
+    }  ,
+    {
+         "type" : "Label",     
+         "text" : "Avatar:" ,              
+          "width": 128,
+          "height": 32,      
+          "x": 16, 
+          "y": 64 
+    } ,
+    {
+         "type" : "Label",     
+         "text" : "Name:" ,              
+          "width": 128,
+          "height": 32,      
+          "x": 16, 
+          "y": 96 
+    } ,
+    {
+         "type" : "Label",     
+         "text" : "Race:" ,              
+          "width": 128,
+          "height": 32,      
+          "x": 16, 
+          "y": 128 
+    } ,
+    {
+         "type" : "Label",     
+         "text" : "Gender:" ,              
+          "width": 128,
+          "height": 32,      
+          "x": 16, 
+          "y": 160 
+    } ,
+    {
+         "type" : "Label",     
+         "text" : "Difficulty:" ,              
+          "width": 128,
+          "height": 32,      
+          "x": 16, 
+          "y": 192 
+    } ,  
+    {
+         "type" : "Label",     
+         "text" : "Deck:" ,              
+          "width": 128,
+          "height": 32,      
+          "x": 16, 
+          "y": 224 
+    } ,
+    {
+         "type" : "ImageButton",    
+         "name" : "leftAvatar" ,      
+         "style" : "leftarrow" ,              
+         "width": 16,
+          "height": 16,      
+          "x": 96, 
+          "y": 64 
+    }  ,   
+    {
+         "type" : "Image",     
+         "name" : "avatarPreview" ,
+         "width": 48,
+          "height": 48,      
+          "x": 128, 
+          "y": 48 
+    } ,   
+    {
+         "type" : "ImageButton",     
+         "name" : "rightAvatar" ,      
+         "style" : "rightarrow" ,
+         "width": 16,
+          "height": 16,      
+          "x": 192, 
+          "y": 64 
+    } ,    
+    {
+         "type" : "TextField",     
+         "name" : "nameField" ,       
+         "width": 112,
+          "height": 16,      
+          "x": 96, 
+          "y": 96 
+    }  ,
+    {
+         "type" : "Selector",     
+         "name" : "race" ,       
+         "width": 112,
+          "height": 16,      
+          "x": 96, 
+          "y": 128 
+    } , 
+    {
+         "type" : "Selector",     
+         "name" : "gender" ,       
+         "width": 112,
+          "height": 16,      
+          "x": 96, 
+          "y": 160 
+    } , 
+    {
+         "type" : "Selector",     
+         "name" : "difficulty" ,       
+         "width": 112,
+          "height": 16,      
+          "x": 96, 
+          "y": 192 
+    }   ,
+    {
+         "type" : "Selector",     
+         "name" : "deck" ,       
+         "width": 112,
+          "height": 16,     
+          "x": 96, 
+          "y": 224 
+    }      ,
+    {
+         "type" : "TextButton",     
+         "name" : "back" ,             
+         "text" : "Back" ,       
+         "width": 38,
+          "height": 16,     
+          "x": 352, 
+          "y": 240 
+    }          ,
+    {
+         "type" : "TextButton",     
+         "name" : "start" ,             
+         "text" : "Start" ,       
+         "width": 38,
+          "height": 16,     
+          "x": 416, 
+          "y": 240 
+    }  
+    ]
+
+
+}
