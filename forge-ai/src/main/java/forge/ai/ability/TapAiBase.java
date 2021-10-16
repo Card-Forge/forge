@@ -67,12 +67,7 @@ public abstract class TapAiBase extends SpellAbilityAi {
                 }
             }
 
-            if (CardLists.getNotType(tapList, "Creature").isEmpty()) {
-                // if only creatures take the best
-                choice = ComputerUtilCard.getBestCreatureAI(tapList);
-            } else {
-                choice = ComputerUtilCard.getMostExpensivePermanentAI(tapList, sa, false);
-            }
+            choice = ComputerUtilCard.getBestAI(tapList);
 
             if (choice == null) { // can't find anything left
                 if (!sa.isMinTargetChosen() || sa.isZeroTargets()) {
@@ -206,7 +201,7 @@ public abstract class TapAiBase extends SpellAbilityAi {
                 if (!attackers.isEmpty() && !creatureList.isEmpty()) {
                     choice = ComputerUtilCard.getBestCreatureAI(creatureList);
                 } else if (sa.getRootAbility().isTrigger() || ComputerUtil.castSpellInMain1(ai, sa)) {
-                    choice = ComputerUtilCard.getMostExpensivePermanentAI(tapList, sa, false);
+                    choice = ComputerUtilCard.getMostExpensivePermanentAI(tapList);
                 }
 
             } else if (phase.isPlayerTurn(opp)
@@ -221,10 +216,10 @@ public abstract class TapAiBase extends SpellAbilityAi {
                     });
                     choice = ComputerUtilCard.getBestCreatureAI(creatureList);
                 } else { // no creatures available
-                    choice = ComputerUtilCard.getMostExpensivePermanentAI(tapList, sa, false);
+                    choice = ComputerUtilCard.getMostExpensivePermanentAI(tapList);
                 }
             } else {
-                choice = ComputerUtilCard.getMostExpensivePermanentAI(tapList, sa, false);
+                choice = ComputerUtilCard.getMostExpensivePermanentAI(tapList);
             }
 
             if (choice == null) { // can't find anything left

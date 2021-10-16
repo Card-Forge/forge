@@ -174,7 +174,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
                         choice = ComputerUtilCard.getBestCreatureAI(list);
                     }
                 } else {
-                    choice = ComputerUtilCard.getMostExpensivePermanentAI(list, sa, true);
+                    choice = ComputerUtilCard.getMostExpensivePermanentAI(list);
                 }
 
                 if (choice == null) { // can't find anything left

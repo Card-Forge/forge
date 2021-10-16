@@ -118,7 +118,7 @@ public class AnimateAi extends SpellAbilityAi {
         // Activating as a potential blocker is only viable if it's an ability activated from a permanent, otherwise
         // the AI will waste resources
         boolean activateAsPotentialBlocker = "UntilYourNextTurn".equals(sa.getParam("Duration"))
-                && ai.getGame().getPhaseHandler().getNextTurn() != ai
+                && game.getPhaseHandler().getNextTurn() != ai
                 && source.isPermanent();
         if (ph.isPlayerTurn(ai) && ai.getLife() < 6 && opponent.getLife() > 6
                 && Iterables.any(opponent.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES)

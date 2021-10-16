@@ -214,7 +214,7 @@ public abstract class SpellAbilityAi {
 
             // try to target opponent, then ally, then itself
             for (final Player p : players) {
-                if (p.canBeTargetedBy(sa) && sa.canTarget(p)) {
+                if (sa.canTarget(p)) {
                     sa.resetTargets();
                     sa.getTargets().add(p);
                     return true;

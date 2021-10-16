@@ -805,7 +805,6 @@ public class AttachAi extends SpellAbilityAi {
             // grab Planeswalker first, then Creature
             // if Life < 5 grab Creature first, then Planeswalker. Lands,
             // Enchantments and Artifacts are probably "not good enough"
-
         }
 
         final Card c = ComputerUtilCard.getBestAI(list);
@@ -962,7 +961,6 @@ public class AttachAi extends SpellAbilityAi {
         return acceptableChoice(c, mandatory);
     }
 
-
     /**
      * Attach do trigger ai.
      * @param sa
@@ -1112,7 +1110,6 @@ public class AttachAi extends SpellAbilityAi {
         list.removeAll(toRemove);
 
         if (magnetList != null) {
-
             // Look for Heroic triggers
             if (magnetList.isEmpty() && sa.isSpell()) {
                 for (Card target : list) {

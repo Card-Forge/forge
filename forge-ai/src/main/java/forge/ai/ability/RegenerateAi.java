@@ -206,7 +206,7 @@ public class RegenerateAi extends SpellAbilityAi {
             }
         }
 
-        sa.getTargets().add(ComputerUtilCard.getCheapestPermanentAI(targetables, sa, true));
+        sa.getTargets().add(ComputerUtilCard.getCheapestPermanentAI(targetables, sa, false));
         return true;
     }
 

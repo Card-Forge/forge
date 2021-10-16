@@ -252,7 +252,6 @@ public class CardFactory {
     }
 
     private static void buildAbilities(final Card card) {
-
         for (final CardStateName state : card.getStates()) {
             if (card.hasBackSide() && state == CardStateName.FaceDown) {
                 continue; // Ignore FaceDown for DFC since they have none.
@@ -505,7 +504,6 @@ public class CardFactory {
             final CardStateName toState) {
         copyState(from, fromState, to, toState, true);
     }
-
     public static void copyState(final Card from, final CardStateName fromState, final Card to,
             final CardStateName toState, boolean updateView) {
         // copy characteristics not associated with a state

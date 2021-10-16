@@ -218,7 +218,6 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
      *            a long.
      */
     static void doUnanimate(final Card c, final long timestamp) {
-
         c.removeNewPT(timestamp);
 
         c.removeChangedCardKeywords(timestamp, 0);

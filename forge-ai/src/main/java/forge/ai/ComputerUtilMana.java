@@ -892,7 +892,7 @@ public class ComputerUtilMana {
     } // payManaCost()
 
     private static void resetPayment(List<SpellAbility> payments) {
-        for(SpellAbility sa : payments) {
+        for (SpellAbility sa : payments) {
             sa.getManaPart().clearExpressChoice();
         }
     }

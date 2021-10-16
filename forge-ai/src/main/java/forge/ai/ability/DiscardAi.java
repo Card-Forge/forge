@@ -55,7 +55,7 @@ public class DiscardAi extends SpellAbilityAi {
             }
         } else {
             // TODO: Add appropriate restrictions
-            final List<Player> players = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa);
+            final List<Player> players = AbilityUtils.getDefinedPlayers(source, sa.getParam("Defined"), sa);
 
             if (players.size() == 1) {
                 if (players.get(0) == ai) {
@@ -83,7 +83,7 @@ public class DiscardAi extends SpellAbilityAi {
                 }
                 sa.setXManaCostPaid(cardsToDiscard);
             } else {
-                if (AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa) < 1) {
+                if (AbilityUtils.calculateAmount(source, sa.getParam("NumCards"), sa) < 1) {
                     return false;
                 }
             }
@@ -102,7 +102,7 @@ public class DiscardAi extends SpellAbilityAi {
                     }
                 }
                 for (Card c : inHand) {
-                    if (c.equals(sa.getHostCard())) { continue; }
+                    if (c.equals(source)) { continue; }
                     if (c.hasSVar("DoNotDiscardIfAble") || c.hasSVar("IsReanimatorCard")) { continue; }
                     if (c.isCreature() && !ComputerUtilMana.hasEnoughManaSourcesToCast(c.getSpellPermanent(), ai)) {
                         numDiscard++;

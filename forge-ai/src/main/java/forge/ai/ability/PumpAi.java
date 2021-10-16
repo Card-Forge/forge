@@ -637,8 +637,7 @@ public class PumpAi extends PumpAiBase {
     private boolean pumpMandatoryTarget(final Player ai, final SpellAbility sa) {
         final Game game = ai.getGame();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard(), sa);
-        list = CardLists.getTargetableCards(list, sa);
+        CardCollection list = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
 
         if (list.size() < tgt.getMinTargets(sa.getHostCard(), sa)) {
             sa.resetTargets();
@@ -667,15 +666,8 @@ public class PumpAi extends PumpAiBase {
                 break;
             }
 
-            Card c;
-            if (CardLists.getNotType(pref, "Creature").isEmpty()) {
-                c = ComputerUtilCard.getBestCreatureAI(pref);
-            } else {
-                c = ComputerUtilCard.getMostExpensivePermanentAI(pref, sa, true);
-            }
-
+            Card c = ComputerUtilCard.getBestAI(list);
             pref.remove(c);
-
             sa.getTargets().add(c);
         }
 
@@ -688,7 +680,7 @@ public class PumpAi extends PumpAiBase {
             if (CardLists.getNotType(forced, "Creature").isEmpty()) {
                 c = ComputerUtilCard.getWorstCreatureAI(forced);
             } else {
-                c = ComputerUtilCard.getCheapestPermanentAI(forced, sa, true);
+                c = ComputerUtilCard.getCheapestPermanentAI(forced, sa, false);
             }
 
             forced.remove(c);
@@ -811,16 +803,15 @@ public class PumpAi extends PumpAiBase {
             defense = AbilityUtils.calculateAmount(sa.getHostCard(), numDefense, sa);
         }
 
-        if (!sa.usesTargeting()) {
-            if (source.isCreature()) {
-                if (!source.hasKeyword(Keyword.INDESTRUCTIBLE) && source.getNetToughness() + defense <= source.getDamage()) {
-                    return false;
-                }
-                return source.getNetToughness() + defense > 0;
-            }
-        } else {
-            //Targeted
+        if (sa.usesTargeting()) {
             return pumpTgtAI(ai, sa, defense, attack, false, true);
+        }
+
+        if (source.isCreature()) {
+            if (!source.hasKeyword(Keyword.INDESTRUCTIBLE) && source.getNetToughness() + defense <= source.getDamage()) {
+                return false;
+            }
+            return source.getNetToughness() + defense > 0;
         }
 
         return true;

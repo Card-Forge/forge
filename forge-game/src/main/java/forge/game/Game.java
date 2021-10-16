@@ -553,13 +553,12 @@ public class Game {
         if (zone == ZoneType.Stack) {
             return getStackZone().getCards();
         }
-        else {
-            CardCollection cards = new CardCollection();
-            for (final Player p : getPlayers()) {
-                cards.addAll(p.getCardsIncludePhasingIn(zone));
-            }
-            return cards;
+
+        CardCollection cards = new CardCollection();
+        for (final Player p : getPlayers()) {
+            cards.addAll(p.getCardsIncludePhasingIn(zone));
         }
+        return cards;
     }
 
     public CardCollectionView getCardsIn(final Iterable<ZoneType> zones) {
@@ -622,7 +621,6 @@ public class Game {
     public Card getCardState(final Card card) {
         return getCardState(card, card);
     }
-
     public Card getCardState(final Card card, final Card notFound) {
         CardStateVisitor visit = new CardStateVisitor(card);
         this.forEachCardInGame(visit);
