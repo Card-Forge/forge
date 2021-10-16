@@ -53,6 +53,7 @@ public class VPlayerPanel extends FContainer {
     private float displayAreaHeightFactor = 1.0f;
     private boolean forMultiPlayer = false;
     public int adjustHeight = 1;
+    public boolean noBG = false;
 
     public VPlayerPanel(PlayerView player0, boolean showHand, int playerCount) {
         player = player0;
@@ -376,6 +377,8 @@ public class VPlayerPanel extends FContainer {
 
     @Override
     public void drawBackground(Graphics g) {
+        if (noBG)
+            return;
         float y;
         if (selectedTab != null) { //draw background and border for selected zone if needed
             VDisplayArea selectedDisplayArea = selectedTab.displayArea;
