@@ -187,7 +187,8 @@ public class SetStateEffect extends SpellAbilityEffect {
                 if (remChanged) {
                     host.addRemembered(gameCard);
                 }
-                transformedCards.add(gameCard);
+                if (!gameCard.isDoubleFaced())
+                    transformedCards.add(gameCard);
             }
         }
         table.triggerCountersPutAll(game);
