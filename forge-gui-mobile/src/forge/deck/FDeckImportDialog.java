@@ -63,7 +63,10 @@ public class FDeckImportDialog extends FDialog {
 
         callback = callback0;
         controller = new DeckImportController(replacingDeck, newEditionCheck, dateTimeCheck, onlyCoreExpCheck, monthDropdown, yearDropdown);
-        txtInput.setText(Forge.getClipboard().getContents()); //just pull import directly off the clipboard
+        String contents = Forge.getClipboard().getContents();
+        if (contents == null)
+            contents = ""; //prevent NPE
+        txtInput.setText(contents);
 
         initButton(0, Localizer.getInstance().getMessage("lblImport"), new FEventHandler() {
             @Override
