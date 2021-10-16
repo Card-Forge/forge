@@ -158,7 +158,7 @@ public class CPrompt implements ICDoc {
     }
 
     public void setMessage(final String s0) {
-        String header = FControl.instance.getCurrentScreen().getDaytime() != null ? "[" + Localizer.getInstance().getMessage("lbl"+FControl.instance.getCurrentScreen().getDaytime()) + "]\n\n" : "[---]\n\n";
+        String header = FControl.instance.getCurrentScreen().getDaytime() != null ? "[" + Localizer.getInstance().getMessage("lbl"+FControl.instance.getCurrentScreen().getDaytime()) + "]\n\n" : "";
         header += s0;
         view.getTarMessage().setText(FSkin.encodeSymbols(header, false));
         view.setCardView(null);
