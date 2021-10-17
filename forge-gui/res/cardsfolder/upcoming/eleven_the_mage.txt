@@ -1,0 +1,14 @@
+Name:Eleven, the Mage
+ManaCost:1 U B R
+Types:Legendary Creature Human Wizard
+PT:3/5
+S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ 11 | Description$ Your maximum hand size is eleven.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, you draw a card and you lose 1 life. Then if you have eleven or more cards in your hand, you may cast an instant or sorcery spell from your hand without paying its mana cost.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1 | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | ConditionCheckSVar$ HandSize | ConditionSVarCompare$ GE11 | Valid$ Card.YouOwn | ValidSA$ Instant,Sorcery | ValidZone$ Hand | WithoutManaCost$ True | Amount$ 1 | Controller$ You | Optional$ True
+SVar:HandSize:Count$InYourHand
+K:Friends forever
+SVar:HasAttackEffect:TRUE
+DeckHints:Type$Instant|Sorcery
+Oracle:Your maximum hand size is eleven.\nWhenever Eleven, the Mage attacks, you draw a card and you lose 1 life. Then if you have eleven or more cards in your hand, you may cast an instant or sorcery spell from your hand without paying its mana cost.\nFriends forever (You can have two commanders if both have friends forever.)
