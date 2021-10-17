@@ -976,3 +976,5 @@
 2021-08-15 Sealed Mh2 Block Super Qualifier (8 decks) | https://downloads.cardforge.org/decks/archive/block/2021-08-15-sealed-mh2-block-super-qualifier.zip
 2021-08-29 Sealed Mh2 Block Mocs (8 decks) | https://downloads.cardforge.org/decks/archive/block/2021-08-29-sealed-mh2-block-mocs.zip
 2021-08-30 Sealed Mh2 Block Mocs (8 decks) | https://downloads.cardforge.org/decks/archive/block/2021-08-30-sealed-mh2-block-mocs.zip
+2021-09-26 Sealed Mid Block Super Qualifier (8 decks) | https://downloads.cardforge.org/decks/archive/block/2021-09-26-sealed-mid-block-super-qualifier.zip
+2021-10-17 Sealed Mid Block Super Qualifier (8 decks) | https://downloads.cardforge.org/decks/archive/block/2021-10-17-sealed-mid-block-super-qualifier.zip
