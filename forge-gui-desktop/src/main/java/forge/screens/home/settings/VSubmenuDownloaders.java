@@ -96,8 +96,10 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
 
         if (javaRecentEnough()) {
 
-            pnlContent.add(btnCheckForUpdates, constraintsBTN);
-            pnlContent.add(_makeLabel(localizer.getMessage("lblCheckForUpdates")), constraintsLBL);
+            // With Blacksmith we would upload the releases and the /latest would redirect to the right URL
+            // That currently doesn't happen so lets comment out this button for now
+//            pnlContent.add(btnCheckForUpdates, constraintsBTN);
+//            pnlContent.add(_makeLabel(localizer.getMessage("lblCheckForUpdates")), constraintsLBL);
 
             pnlContent.add(btnDownloadPics, constraintsBTN);
             pnlContent.add(_makeLabel(localizer.getMessage("lblDownloadPics")), constraintsLBL);
