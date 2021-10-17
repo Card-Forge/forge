@@ -210,7 +210,7 @@
         <dependency>
             <groupId>com.beust</groupId>
             <artifactId>jcommander</artifactId>
-            <version>1.27</version>
+            <version>1.78</version>
             <type>jar</type>
         </dependency>
         <dependency>
