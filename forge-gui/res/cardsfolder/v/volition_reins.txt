@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant permanent
 A:SP$ Attach | Cost$ 3 U U U | ValidTgts$ Permanent | AILogic$ GainControl
 S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | GainControl$ You | Description$ You control enchanted permanent.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters the battlefield, if enchanted permanent is tapped, untap it.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Permanent.EnchantedBy+tapped | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters the battlefield, if enchanted permanent is tapped, untap it.
 SVar:TrigUntap:DB$ Untap | Defined$ Enchanted
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/volition_reins.jpg
