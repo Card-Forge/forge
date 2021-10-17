@@ -274,7 +274,7 @@ public class ComputerUtil {
             sa.setHostCard(game.getAction().moveToStack(source, sa));
         }
 
-        ai.getGame().getStack().add(sa);
+        game.getStack().add(sa);
     }
 
     public static final boolean playSpellAbilityWithoutPayingManaCost(final Player ai, final SpellAbility sa, final Game game) {
@@ -845,7 +845,7 @@ public class ComputerUtil {
         final int max = Math.min(remaining.size(), amount);
 
         if (exceptSelf && max < remaining.size()) {
-            removedSelf = remaining.remove(source.getHostCard());
+            removedSelf = remaining.remove(host);
         }
 
         for (int i = 0; i < max; i++) {
@@ -857,7 +857,7 @@ public class ComputerUtil {
         }
 
         if (sacrificed.isEmpty() && removedSelf) {
-            sacrificed.add(source.getHostCard());
+            sacrificed.add(host);
         }
 
         return sacrificed;
@@ -1254,7 +1254,7 @@ public class ComputerUtil {
             }
         }
         final CardCollectionView buffed = ai.getCardsIn(ZoneType.Battlefield);
-        boolean checkThreshold = sa.isSpell() && !ai.hasThreshold() && !sa.getHostCard().isInZone(ZoneType.Graveyard);
+        boolean checkThreshold = sa.isSpell() && !ai.hasThreshold() && !source.isInZone(ZoneType.Graveyard);
         for (Card buffedCard : buffed) {
             if (buffedCard.hasSVar("BuffedBy")) {
                 final String buffedby = buffedCard.getSVar("BuffedBy");
@@ -2405,12 +2405,12 @@ public class ComputerUtil {
             List<ZoneType> graceZones = new ArrayList<ZoneType>();
             graceZones.add(ZoneType.Battlefield);
             graceZones.add(ZoneType.Graveyard);
-            CardCollection graceCreatures = CardLists.getType(sa.getHostCard().getGame().getCardsIn(graceZones), "Creature");
+            CardCollection graceCreatures = CardLists.getType(game.getCardsIn(graceZones), "Creature");
             int humanGrace = CardLists.filterControlledBy(graceCreatures, ai.getOpponents()).size();
             int aiGrace = CardLists.filterControlledBy(graceCreatures, ai).size();
             return aiGrace > humanGrace ? "Grace" : "Condemnation";
         case "CarnageOrHomage":
-            CardCollection cardsInPlay = CardLists.getNotType(sa.getHostCard().getGame().getCardsIn(ZoneType.Battlefield), "Land");
+            CardCollection cardsInPlay = CardLists.getNotType(game.getCardsIn(ZoneType.Battlefield), "Land");
             CardCollection humanlist = CardLists.filterControlledBy(cardsInPlay, ai.getOpponents());
             CardCollection computerlist = ai.getCreaturesInPlay();
             return (ComputerUtilCard.evaluatePermanentList(computerlist) + 3) < ComputerUtilCard.evaluatePermanentList(humanlist) ? "Carnage" : "Homage";
@@ -2434,7 +2434,7 @@ public class ComputerUtil {
                         restrictedToColors.add((String) o);
                         }
                     }
-                CardCollection lists = CardLists.filterControlledBy(ai.getGame().getCardsInGame(), ai.getOpponents());
+                CardCollection lists = CardLists.filterControlledBy(game.getCardsInGame(), ai.getOpponents());
                 return StringUtils.capitalize(ComputerUtilCard.getMostProminentColor(lists, restrictedToColors));
             } else {
                 return Iterables.getFirst(votes.keySet(), null);
@@ -2773,7 +2773,7 @@ public class ComputerUtil {
         // Quest counter on a card without MaxQuestEffect are useless
         if (type.is(CounterEnumType.QUEST)) {
             int e = 0;
-            if ( c.hasSVar("MaxQuestEffect")) {
+            if (c.hasSVar("MaxQuestEffect")) {
                 e = Integer.parseInt(c.getSVar("MaxQuestEffect"));
             }
             return c.getCounters(type) > e;

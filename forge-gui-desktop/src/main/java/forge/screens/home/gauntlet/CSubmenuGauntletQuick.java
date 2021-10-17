@@ -58,6 +58,11 @@ public enum CSubmenuGauntletQuick implements ICDoc {
     }
 
     private void startGame() {
+        final RegisteredPlayer player = view.getLstDecks().getPlayer();
+        if (player == null) { // no deck selected
+            return;
+        }
+
         // Start game overlay
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -83,10 +88,10 @@ public enum CSubmenuGauntletQuick implements ICDoc {
         if (view.getBoxQuestDecks().isSelected()) { allowedDeckTypes.add(DeckType.QUEST_OPPONENT_DECK); }
         if (view.getBoxPreconDecks().isSelected()) { allowedDeckTypes.add(DeckType.PRECONSTRUCTED_DECK); }
 
-        final GauntletData gd = GauntletUtil.createQuickGauntlet(view.getLstDecks().getPlayer().getDeck(), view.getSliOpponents().getValue(), allowedDeckTypes, null);
+        final GauntletData gd = GauntletUtil.createQuickGauntlet(player.getDeck(), view.getSliOpponents().getValue(), allowedDeckTypes, null);
 
         final List<RegisteredPlayer> starter = new ArrayList<>();
-        final RegisteredPlayer human = new RegisteredPlayer(gd.getUserDeck()).setPlayer(GamePlayerUtil.getGuiPlayer());
+        final RegisteredPlayer human = player.setPlayer(GamePlayerUtil.getGuiPlayer());
         starter.add(human);
         starter.add(new RegisteredPlayer(gd.getDecks().get(gd.getCompleted())).setPlayer(GamePlayerUtil.createAiPlayer()));
 

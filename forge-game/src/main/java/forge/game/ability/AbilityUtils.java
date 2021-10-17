@@ -3690,14 +3690,14 @@ public class AbilityUtils {
             }
         }
 
-        //  Count$InTargetedHand (targeted player's cards in hand)
+        //  Count$InTargetedLibrary (targeted player's cards in hand)
         if (sq[0].contains("InTargetedLibrary")) {
             for (Player tgtP : getDefinedPlayers(c, "TargetedPlayer", ctb)) {
                 someCards.addAll(tgtP.getCardsIn(ZoneType.Library));
             }
         }
 
-        //  Count$InTargetedHand (targeted player's cards in hand)
+        //  Count$InEnchantedHand (targeted player's cards in hand)
         if (sq[0].contains("InEnchantedHand")) {
             GameEntity o = c.getEntityAttachedTo();
             Player controller = null;

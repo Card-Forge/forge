@@ -180,7 +180,6 @@ public class QuestData {
      *            the new name to set
      */
     public void rename(final String newName) {
-
         File newpath = new File(ForgeConstants.QUEST_SAVE_DIR, newName + ".dat");
         File oldpath = new File(ForgeConstants.QUEST_SAVE_DIR, this.name + ".dat");
         oldpath.renameTo(newpath);
@@ -191,7 +190,6 @@ public class QuestData {
 
         this.name = newName;
         QuestDataIO.saveData(this);
-
     }
 
     public QuestAssets getAssets() {

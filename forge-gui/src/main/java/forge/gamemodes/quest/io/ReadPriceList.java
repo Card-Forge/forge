@@ -70,7 +70,6 @@ public class ReadPriceList {
      * @return a {@link java.util.HashMap} object.
      */
     private Map<String, Integer> readFile(final String file) {
-
         final Map<String, Integer> map = new HashMap<>();
 
         final List<String> lines = FileUtil.readFile(file);
@@ -96,8 +95,7 @@ public class ReadPriceList {
                     float ff;
                     if (MyRandom.getRandom().nextInt(100) < 90) {
                         ff = MyRandom.getRandom().nextInt(10) * (float) .01;
-                    }
-                    else {
+                    } else {
                         // +/- 50%
                         ff = MyRandom.getRandom().nextInt(50) * (float) .01;
                     }

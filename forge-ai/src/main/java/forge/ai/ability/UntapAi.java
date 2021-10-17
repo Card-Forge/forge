@@ -198,7 +198,7 @@ public class UntapAi extends SpellAbilityAi {
                         choice = ComputerUtilCard.getBestCreatureAI(untapList); // if only creatures take the best
                     } else if (!sa.getPayCosts().hasManaCost() || sa.getRootAbility().isTrigger()
                             || "Always".equals(sa.getParam("AILogic"))) {
-                        choice = ComputerUtilCard.getMostExpensivePermanentAI(untapList, sa, false);
+                        choice = ComputerUtilCard.getMostExpensivePermanentAI(untapList);
                     }
                 }
             }
@@ -285,11 +285,7 @@ public class UntapAi extends SpellAbilityAi {
                 }
             }
 
-            if (CardLists.getNotType(tapList, "Creature").isEmpty()) {
-                choice = ComputerUtilCard.getBestCreatureAI(tapList); // if only creatures take the best
-            } else {
-                choice = ComputerUtilCard.getMostExpensivePermanentAI(tapList, sa, false);
-            }
+            choice = ComputerUtilCard.getBestAI(tapList);
 
             if (choice == null) { // can't find anything left
                 if (sa.getTargets().size() < tgt.getMinTargets(sa.getHostCard(), sa) || sa.getTargets().size() == 0) {
@@ -340,7 +336,7 @@ public class UntapAi extends SpellAbilityAi {
         final PhaseHandler ph = source.getGame().getPhaseHandler();
         final Game game = ai.getGame();
 
-        if (sa.getHostCard().isTapped()) {
+        if (source.isTapped()) {
             return true;
         }
 

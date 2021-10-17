@@ -205,7 +205,6 @@ public class ComputerUtilCard {
         List<Card> all = CardLists.filter(list, CardPredicates.Presets.ENCHANTMENTS);
         if (targeted) {
             all = CardLists.filter(all, new Predicate<Card>() {
-    
                 @Override
                 public boolean apply(final Card c) {
                     return c.canBeTargetedBy(spell);
@@ -360,7 +359,6 @@ public class ComputerUtilCard {
         }
     
         return cheapest;
-    
     }
 
     // returns null if list.size() == 0
@@ -777,7 +775,6 @@ public class ComputerUtilCard {
     public static String getMostProminentCreatureType(final CardCollectionView list) {
         return getMostProminentType(list, CardType.getAllCreatureTypes());
     }
-
     public static String getMostProminentType(final CardCollectionView list, final Collection<String> valid) {
         if (list.size() == 0) {
             return "";
@@ -865,7 +862,6 @@ public class ComputerUtilCard {
     
         for (final Entry<String, Integer> entry : typesInDeck.entrySet()) {
             final String type = entry.getKey();
-            // Log.debug(type + " - " + entry.getValue());
 
             if (max < entry.getValue()) {
                 max = entry.getValue();

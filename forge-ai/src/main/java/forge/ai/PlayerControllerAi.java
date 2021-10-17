@@ -95,7 +95,7 @@ public class PlayerControllerAi extends PlayerController {
         brains = new AiController(p, game);
     }
 
-    public void allowCheatShuffle(boolean value){
+    public void allowCheatShuffle(boolean value) {
         brains.allowCheatShuffle(value);
     }
 
@@ -565,7 +565,6 @@ public class PlayerControllerAi extends PlayerController {
         }
         return getAi().getCardsToDiscard(num, null, sa);
     }
-
 
     @Override
     public Mana chooseManaFromPool(List<Mana> manaChoices) {

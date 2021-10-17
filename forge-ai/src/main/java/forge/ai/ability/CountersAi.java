@@ -114,7 +114,7 @@ public abstract class CountersAi extends SpellAbilityAi {
                     return c.getCounters(CounterEnumType.DIVINITY) == 0;
                 }
             });
-            choice = ComputerUtilCard.getMostExpensivePermanentAI(boon, null, false);
+            choice = ComputerUtilCard.getMostExpensivePermanentAI(boon);
         } else if (CounterType.get(type).isKeywordCounter()) {
             choice = ComputerUtilCard.getBestCreatureAI(CardLists.getNotKeyword(list, type));
         } else {

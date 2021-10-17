@@ -329,7 +329,7 @@ public class AiAttackController {
             // Don't send the card that'll do the fog effect to attack, it's unsafe!
 
             List<Card> toRemove = Lists.newArrayList();
-            for(Card c : attackers) {
+            for (Card c : attackers) {
                 if (AiCardMemory.isRememberedCard(ai, c, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT)) {
                     toRemove.add(c);
                 }
@@ -1335,7 +1335,7 @@ public class AiAttackController {
 
     public static List<Card> exertAttackers(List<Card> attackers) {
         List<Card> exerters = Lists.newArrayList();
-        for(Card c : attackers) {
+        for (Card c : attackers) {
             boolean shouldExert = false;
 
             if (c.hasSVar("EndOfTurnLeavePlay")) {

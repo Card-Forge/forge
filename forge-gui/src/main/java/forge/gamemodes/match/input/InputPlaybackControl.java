@@ -62,8 +62,7 @@ public class InputPlaybackControl extends InputSyncronizedBase {
         if (isPaused) {
             control.resume();
             setPause(false);
-        }
-        else {
+        } else {
             control.pause();
             setPause(true);
         }

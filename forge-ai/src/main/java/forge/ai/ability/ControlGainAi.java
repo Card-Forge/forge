@@ -137,7 +137,7 @@ public class ControlGainAi extends SpellAbilityAi {
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                if (!c.canBeTargetedBy(sa)) {
+                if (!sa.canTarget(c)) {
                     return false;
                 }
                 if (sa.isTrigger()) {
@@ -224,9 +224,9 @@ public class ControlGainAi extends SpellAbilityAi {
                 } else if (lands > 0) {
                     t = ComputerUtilCard.getBestLandAI(list);
                 } else if (enchantments > 0) {
-                    t = ComputerUtilCard.getBestEnchantmentAI(list, sa, true);
+                    t = ComputerUtilCard.getBestEnchantmentAI(list, sa, false);
                 } else {
-                    t = ComputerUtilCard.getMostExpensivePermanentAI(list, sa, true);
+                    t = ComputerUtilCard.getMostExpensivePermanentAI(list);
                 }
 
                 if (t != null) {

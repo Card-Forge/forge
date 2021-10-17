@@ -119,7 +119,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
 
         final int maxTargets = sa.getMaxTargets();
         final int targeted = sa.getTargets().size();
-        if(maxTargets > 1) {
+        if (maxTargets > 1) {
             sb.append(TextUtil.concatNoSpace("\n(", String.valueOf(maxTargets - targeted), " more can be targeted)"));
         }
 
@@ -131,7 +131,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         if (divisionValues != null && !divisionValues.isEmpty() && sa.getMinTargets() == 0 && sa.getTargets().size() == 0) {
             // extra logic for Divided with min targets = 0, should only work if num targets are 0 too
             getController().getGui().updateButtons(getOwner(), true, true, false);
-        } else if (!sa.isMinTargetChosen() || (divisionValues != null && !divisionValues.isEmpty())){
+        } else if (!sa.isMinTargetChosen() || (divisionValues != null && !divisionValues.isEmpty())) {
             // If reached Minimum targets, enable OK button
             if (mandatory && tgt.hasCandidates(sa)) {
                 // Player has to click on a target

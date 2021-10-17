@@ -86,7 +86,7 @@ public class CountersPutAllAi extends SpellAbilityAi {
             amount = ComputerUtilCost.getMaxXValue(sa, ai);
             sa.setXManaCostPaid(amount);
         } else {
-            amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
+            amount = AbilityUtils.calculateAmount(source, amountStr, sa);
         }
 
         // prevent run-away activations - first time will always return true
@@ -169,7 +169,7 @@ public class CountersPutAllAi extends SpellAbilityAi {
             }
 
             for (final Player p : players) {
-                if (p.canBeTargetedBy(sa) && sa.canTarget(p)) {
+                if (sa.canTarget(p)) {
                     boolean preferred = false;
                     preferred = (sa.isCurse() && p.isOpponentOf(aiPlayer)) || (!sa.isCurse() && p == aiPlayer);
                     sa.resetTargets();

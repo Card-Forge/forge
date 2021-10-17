@@ -2051,7 +2051,6 @@ public class ComputerUtilCombat {
         return false;// should never arrive here
     } // canDestroyBlocker
 
-
     /**
      * <p>
      * distributeAIDamage.

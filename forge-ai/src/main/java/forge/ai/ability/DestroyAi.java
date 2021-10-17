@@ -256,7 +256,7 @@ public class DestroyAi extends SpellAbilityAi {
                         }
                     }
                 } else {
-                    choice = ComputerUtilCard.getMostExpensivePermanentAI(list, sa, true);
+                    choice = ComputerUtilCard.getMostExpensivePermanentAI(list);
                 }
                 //option to hold removal instead only applies for single targeted removal
                 if (!sa.isTrigger() && sa.getMaxTargets() == 1) {
@@ -297,7 +297,7 @@ public class DestroyAi extends SpellAbilityAi {
             }
         } else if (sa.hasParam("Defined")) {
             list = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
-            if ("WillSkipTurn".equals(logic) && (sa.getHostCard().getController().equals(ai)
+            if ("WillSkipTurn".equals(logic) && (source.getController().equals(ai)
                 || ai.getCreaturesInPlay().size() < ai.getWeakestOpponent().getCreaturesInPlay().size()
                 || !source.getGame().getPhaseHandler().isPlayerTurn(ai)
                 || ai.getLife() <= 5)) {
@@ -372,14 +372,7 @@ public class DestroyAi extends SpellAbilityAi {
                         break;
                     }
                 } else {
-                    Card c;
-                    if (CardLists.getNotType(preferred, "Creature").isEmpty()) {
-                        c = ComputerUtilCard.getBestCreatureAI(preferred);
-                    } else if (CardLists.getNotType(preferred, "Land").isEmpty()) {
-                        c = ComputerUtilCard.getBestLandAI(preferred);
-                    } else {
-                        c = ComputerUtilCard.getMostExpensivePermanentAI(preferred, sa, false);
-                    }
+                    Card c = ComputerUtilCard.getBestAI(preferred);
                     sa.getTargets().add(c);
                     preferred.remove(c);
                 }

@@ -328,7 +328,7 @@ public final class ImageKeys {
             String setFolder = getSetFolder(pc.getEdition());
             editionHasImage = FileUtil.isDirectoryWithFiles(CACHE_CARD_PICS_DIR + setFolder);
             editionImageLookup.put(pc.getEdition(), editionHasImage);
-            if (editionHasImage){
+            if (editionHasImage) {
                 File f = new File(CACHE_CARD_PICS_DIR + setFolder);  // no need to check this, otherwise editionHasImage would be false!
                 HashSet<String> setFolderContent = new HashSet<>();
                 for (String filename : Arrays.asList(f.list())) {
@@ -359,7 +359,7 @@ public final class ImageKeys {
         return editionHasImage && hitCache(content, keyParts[1]);
     }
 
-    private static boolean hitCache(HashSet<String> cache, String filename){
+    private static boolean hitCache(HashSet<String> cache, String filename) {
         if (cache == null || cache.isEmpty())
             return false;
         final String keyPrefix = filename.split("\\.")[0];

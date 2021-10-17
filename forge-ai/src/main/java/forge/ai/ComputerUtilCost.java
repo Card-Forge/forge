@@ -640,7 +640,7 @@ public class ComputerUtilCost {
                 return false;
             }
         } else if ("OnlyDontControl".equals(aiLogic)) {
-            if (sa.getHostCard() == null || payer.equals(sa.getHostCard().getController())) {
+            if (source == null || payer.equals(source.getController())) {
                 return false;
             }
         } else if ("Paralyze".equals(aiLogic)) {
@@ -778,7 +778,7 @@ public class ComputerUtilCost {
             if (sa.hasParam("AIMaxTgtsCount")) {
                 // Cards that have confusing costs for the AI (e.g. Eliminate the Competition) can have forced max target constraints specified
                 // TODO: is there a better way to predict things like "sac X" costs without needing a special AI variable?
-                val = ObjectUtils.min(val, AbilityUtils.calculateAmount(sa.getHostCard(), "Count$" + sa.getParam("AIMaxTgtsCount"), sa));
+                val = ObjectUtils.min(val, AbilityUtils.calculateAmount(source, "Count$" + sa.getParam("AIMaxTgtsCount"), sa));
             }
         }
 
