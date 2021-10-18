@@ -348,6 +348,10 @@ public class CountersPutAi extends CountersAi {
         // TODO handle proper calculation of X values based on Cost
         int amount = AbilityUtils.calculateAmount(source, amountStr, sa);
 
+        if (amount == 0 && logic.equals("FromDiceRoll")) {
+            amount = 1; // TODO: improve this to possibly account for some variability depending on the roll outcome (e.g. 4 for 1d8, perhaps)
+        }
+
         if (sa.hasParam("Adapt")) {
             Game game = ai.getGame();
             Combat combat = game.getCombat();
