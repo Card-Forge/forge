@@ -2013,6 +2013,9 @@ public class AbilityUtils {
         if (sq[0].startsWith("AltCost")) {
             return doXMath(calculateAmount(c, sq[c.isOptionalCostPaid(OptionalCost.AltCost) ? 1 : 2], ctb), expr, c, ctb);
         }
+        if (sq[0].startsWith("OptionalGenericCostPaid")) {
+            return doXMath(calculateAmount(c, sq[c.isOptionalCostPaid(OptionalCost.Generic) ? 1 : 2], ctb), expr, c, ctb);
+        }
         if (sq[0].equals("ColorsColorIdentity")) {
             return doXMath(c.getController().getCommanderColorID().countColors(), expr, c, ctb);
         }
