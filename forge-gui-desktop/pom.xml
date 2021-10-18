@@ -130,11 +130,6 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>forge</groupId>
-            <artifactId>forge-adventure</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
             <groupId>com.miglayout</groupId>
             <artifactId>miglayout-swing</artifactId>
             <version>4.2</version>

@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import forge.adventure.AdventureApplicationAdapter;
 import forge.adventure.character.ShopActor;
-import forge.adventure.libgdxgui.assets.ImageCache;
+import forge.assets.ImageCache;
 import forge.adventure.util.CardUtil;
 import forge.adventure.util.Current;
 import forge.adventure.util.Reward;

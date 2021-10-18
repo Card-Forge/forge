@@ -7,17 +7,15 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Clipboard;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.Clipboard;
-import forge.adventure.libgdxgui.Forge;
-import forge.adventure.libgdxgui.FrameRate;
-import forge.adventure.libgdxgui.GuiMobile;
-import forge.adventure.libgdxgui.assets.AssetsDownloader;
-import forge.adventure.libgdxgui.assets.FSkin;
-import forge.adventure.libgdxgui.assets.FSkinFont;
-import forge.adventure.libgdxgui.assets.ImageCache;
-import forge.adventure.libgdxgui.screens.FScreen;
-import forge.adventure.libgdxgui.screens.SplashScreen;
+import forge.Forge;
+import forge.FrameRate;
+import forge.GuiMobile;
 import forge.adventure.scene.SettingsScene;
 import forge.adventure.util.Config;
+import forge.assets.AssetsDownloader;
+import forge.assets.FSkin;
+import forge.assets.FSkinFont;
+import forge.assets.ImageCache;
 import forge.error.ExceptionHandler;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -25,6 +23,8 @@ import forge.interfaces.IDeviceAdapter;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
+import forge.screens.FScreen;
+import forge.screens.SplashScreen;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.util.BuildInfo;
@@ -155,7 +155,7 @@ class StartAdventure extends AdventureApplicationAdapter {
         } else {
             skinName = "default"; //use default skin if preferences file doesn't exist yet
         }
-        FSkin.loadLight(skinName, splashScreen);
+        FSkin.loadLight(skinName, splashScreen,Config.instance().getFile("skin"));
 
         textureFiltering = prefs.getPrefBoolean(ForgePreferences.FPref.UI_LIBGDX_TEXTURE_FILTERING);
         showFPS = prefs.getPrefBoolean(ForgePreferences.FPref.UI_SHOW_FPS);
@@ -293,6 +293,7 @@ public class Main {
         }
 
         config.setWindowIcon(Config.instance().getFilePath("forge-adventure.png"));
+
         new Lwjgl3Application(start, config);
 
     }

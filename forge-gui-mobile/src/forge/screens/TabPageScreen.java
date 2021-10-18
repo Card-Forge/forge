@@ -30,11 +30,16 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
     public TabPageScreen(TabPage<T>... tabPages0) {
         this(tabPages0, true);
     }
+    public TabPageScreen(FEventHandler backButton,TabPage<T>... tabPages0) {
+        this(tabPages0, backButton);
+    }
 
     public TabPageScreen(TabPage<T>[] tabPages0, boolean showBackButton) {
         this(new TabHeader<>(tabPages0, showBackButton));
     }
-
+    public TabPageScreen(TabPage<T>[] tabPages0, FEventHandler backButton) {
+        this(new TabHeader<>(tabPages0, backButton));
+    }
     public TabPageScreen(TabHeader<T> tabHeader0) {
         super(tabHeader0);
         tabHeader = tabHeader0;
@@ -198,7 +203,25 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
                 scroller.add(tabPage.tab);
             }
         }
+        public TabHeader(TabPage<T>[] tabPages0, FEventHandler backButton) {
+            tabPages = tabPages0;
+            if(backButton==null) {
+                btnBack = add(new FLabel.Builder().icon(new BackIcon(BACK_BUTTON_WIDTH, BACK_BUTTON_WIDTH)).pressedColor(BTN_PRESSED_COLOR).align(Align.center).command(new FEventHandler() {
+                    @Override
+                    public void handleEvent(FEvent e) {
+                        Forge.back();
+                    }
+                }).build());
+            }
+            else
+            {
+                btnBack = add(new FLabel.Builder().icon(new BackIcon(BACK_BUTTON_WIDTH, BACK_BUTTON_WIDTH)).pressedColor(BTN_PRESSED_COLOR).align(Align.center).command(backButton).build());
+            }
 
+            for (TabPage<T> tabPage : tabPages) {
+                scroller.add(tabPage.tab);
+            }
+        }
         protected boolean showBackButtonInLandscapeMode() {
             return btnBack != null;
         }

@@ -1,13 +1,13 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.Input;
-import forge.adventure.libgdxgui.Forge;
-import forge.adventure.libgdxgui.screens.match.MatchController;
-import forge.adventure.libgdxgui.toolbox.FContainer;
-import forge.adventure.libgdxgui.toolbox.FDisplayObject;
-import forge.adventure.libgdxgui.toolbox.FGestureAdapter;
-import forge.adventure.libgdxgui.toolbox.FOverlay;
-import forge.adventure.libgdxgui.util.Utils;
+import forge.Forge;
+import forge.screens.match.MatchController;
+import forge.toolbox.FContainer;
+import forge.toolbox.FDisplayObject;
+import forge.toolbox.FGestureAdapter;
+import forge.toolbox.FOverlay;
+import forge.util.Utils;
 import forge.gui.error.BugReporter;
 
 import java.util.ArrayList;

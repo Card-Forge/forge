@@ -1,12 +1,10 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import forge.adventure.libgdxgui.Graphics;
-import forge.adventure.libgdxgui.deck.FDeckEditor;
-import forge.adventure.libgdxgui.screens.FScreen;
+import forge.adventure.AdventureApplicationAdapter;
 import forge.adventure.world.AdventurePlayer;
 import forge.deck.Deck;
-import forge.deck.DeckProxy;
+import forge.deck.FDeckEditor;
 import forge.gamemodes.quest.QuestMode;
 import forge.gamemodes.quest.QuestSpellShop;
 import forge.gamemodes.quest.data.DeckConstructionRules;
@@ -16,6 +14,8 @@ import forge.itemmanager.ColumnDef;
 import forge.itemmanager.ItemColumn;
 import forge.itemmanager.ItemManagerConfig;
 import forge.model.FModel;
+import forge.screens.FScreen;
+import forge.toolbox.FEvent;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,10 +27,12 @@ import java.util.Map;
 public class DeckEditScene extends ForgeScene {
     public class AdventureDeckEditor extends FDeckEditor {
         public AdventureDeckEditor(boolean commander) {
-            super(commander ? EditorType.QuestCommander: EditorType.Quest, "", false);
-        }
-        public AdventureDeckEditor(DeckProxy editDeck, boolean commander) {
-            super(commander ? EditorType.QuestCommander: EditorType.Quest, editDeck, true);
+            super(commander ? EditorType.QuestCommander : EditorType.Quest, "", false, new FEvent.FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                    AdventureApplicationAdapter.instance.switchToLast();
+                }
+            });
         }
         @Override
         public void onActivate() {
@@ -66,7 +68,6 @@ public class DeckEditScene extends ForgeScene {
     }
 
     AdventureDeckEditor screen;
-    Graphics localGraphics;
     Stage stage;
 
     public DeckEditScene() {

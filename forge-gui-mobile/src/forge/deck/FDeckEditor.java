@@ -1,16 +1,5 @@
 package forge.deck;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import forge.gui.FThreads;
-import forge.screens.LoadingOverlay;
-import org.apache.commons.lang3.StringUtils;
-
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
@@ -18,19 +7,15 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableList;
-
 import forge.Forge;
 import forge.Forge.KeyInputAdapter;
 import forge.Graphics;
-import forge.assets.FImage;
-import forge.assets.FSkin;
-import forge.assets.FSkinFont;
-import forge.assets.FSkinImage;
-import forge.assets.FTextureRegionImage;
+import forge.assets.*;
 import forge.card.CardEdition;
 import forge.deck.io.DeckPreferences;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gamemodes.planarconquest.ConquestUtil;
+import forge.gui.FThreads;
 import forge.gui.card.CardPreferences;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
@@ -46,20 +31,17 @@ import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.model.FModel;
 import forge.screens.FScreen;
+import forge.screens.LoadingOverlay;
 import forge.screens.TabPageScreen;
-import forge.toolbox.FContainer;
-import forge.toolbox.FEvent;
+import forge.toolbox.*;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
-import forge.toolbox.FLabel;
-import forge.toolbox.FOptionPane;
-import forge.toolbox.GuiChoose;
-import forge.util.Callback;
-import forge.util.ItemPool;
-import forge.util.Lang;
-import forge.util.Localizer;
-import forge.util.Utils;
+import forge.util.*;
 import forge.util.storage.IStorage;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     public static FSkinImage MAIN_DECK_ICON = Forge.hdbuttons ? FSkinImage.HDLIBRARY :FSkinImage.DECKLIST;
@@ -288,16 +270,19 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     private final FLabel btnMoreOptions = deckHeader.add(new FLabel.Builder().text("...").font(FSkinFont.get(20)).align(Align.center).pressedColor(Header.BTN_PRESSED_COLOR).build());
 
     public FDeckEditor(EditorType editorType0, DeckProxy editDeck, boolean showMainDeck) {
-        this(editorType0, editDeck.getName(), editDeck.getPath(), null, showMainDeck);
+        this(editorType0, editDeck.getName(), editDeck.getPath(), null, showMainDeck,null);
+    }
+    public FDeckEditor(EditorType editorType0, String editDeckName, boolean showMainDeck,FEventHandler backButton) {
+        this(editorType0, editDeckName, "", null, showMainDeck,backButton);
     }
     public FDeckEditor(EditorType editorType0, String editDeckName, boolean showMainDeck) {
-        this(editorType0, editDeckName, "", null, showMainDeck);
+        this(editorType0, editDeckName, "", null, showMainDeck,null);
     }
     public FDeckEditor(EditorType editorType0, Deck newDeck, boolean showMainDeck) {
-        this(editorType0, "", "", newDeck, showMainDeck);
+        this(editorType0, "", "", newDeck, showMainDeck,null);
     }
-    private FDeckEditor(EditorType editorType0, String editDeckName, String editDeckPath, Deck newDeck, boolean showMainDeck) {
-        super(getPages(editorType0));
+    private FDeckEditor(EditorType editorType0, String editDeckName, String editDeckPath, Deck newDeck, boolean showMainDeck,FEventHandler backButton) {
+        super(backButton,getPages(editorType0));
 
         if (editorType0 == EditorType.QuestCommander) //fix saving quest commander
             editorType = EditorType.Quest;

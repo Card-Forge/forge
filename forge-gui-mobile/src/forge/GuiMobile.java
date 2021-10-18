@@ -1,20 +1,10 @@
 package forge;
 
-import java.io.File;
-import java.util.Collection;
-import java.util.List;
-
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.google.common.base.Function;
-
-import forge.assets.FBufferedImage;
-import forge.assets.FDelayLoadImage;
-import forge.assets.FImage;
-import forge.assets.FSkin;
-import forge.assets.FTextureImage;
-import forge.assets.ImageCache;
+import forge.assets.*;
 import forge.card.CardRenderer;
 import forge.deck.Deck;
 import forge.deck.FDeckViewer;
@@ -37,13 +27,11 @@ import forge.sound.IAudioClip;
 import forge.sound.IAudioMusic;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.GuiChoose;
-import forge.util.Callback;
-import forge.util.FileUtil;
-import forge.util.ImageFetcher;
-import forge.util.LibGDXImageFetcher;
-import forge.util.ThreadUtil;
-import forge.util.WaitCallback;
-import forge.util.WaitRunnable;
+import forge.util.*;
+
+import java.io.File;
+import java.util.Collection;
+import java.util.List;
 
 public class GuiMobile implements IGuiBase {
     private final String assetsDir;
@@ -55,7 +43,7 @@ public class GuiMobile implements IGuiBase {
 
     @Override
     public boolean isRunningOnDesktop() {
-        return Gdx.app.getType() == ApplicationType.Desktop;
+        return Gdx.app==null ? true : Gdx.app.getType() == ApplicationType.Desktop;
     }
 
     @Override

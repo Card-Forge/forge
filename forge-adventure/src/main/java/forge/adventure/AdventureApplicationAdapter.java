@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
-import forge.adventure.libgdxgui.Graphics;
+import forge.Graphics;
 import forge.adventure.scene.ForgeScene;
 import forge.adventure.scene.Scene;
 import forge.adventure.scene.SceneType;

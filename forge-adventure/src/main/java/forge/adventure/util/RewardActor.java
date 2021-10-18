@@ -16,10 +16,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Tooltip;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Disposable;
-import forge.adventure.libgdxgui.assets.FSkin;
-import forge.adventure.libgdxgui.assets.ImageCache;
 import forge.adventure.scene.RewardScene;
 import forge.adventure.scene.Scene;
+import forge.assets.FSkin;
+import forge.assets.ImageCache;
 import forge.gui.GuiBase;
 import forge.util.ImageFetcher;
 
