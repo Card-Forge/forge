@@ -197,13 +197,7 @@ public class DamageDealEffect extends DamageBaseEffect {
                     return;
                 }
 
-                CardCollection assigneeCards = new CardCollection();
-                // Do we have a way of doing this in a better fashion?
-                for (GameObject obj : tgts) {
-                    if (obj instanceof Card) {
-                        assigneeCards.add((Card) obj);
-                    }
-                }
+                CardCollection assigneeCards = new CardCollection(Iterables.filter(tgts, Card.class));
 
                 Player assigningPlayer = players.get(0);
                 Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(sourceLKI, assigneeCards, dmg, null, true);
