@@ -243,7 +243,6 @@ public class Combat {
     public final void addAttacker(final Card c, GameEntity defender) {
         addAttacker(c, defender, null);
     }
-
     public final void addAttacker(final Card c, GameEntity defender, AttackingBand band) {
         Collection<AttackingBand> attackersOfDefender = attackedByBands.get(defender);
         if (attackersOfDefender == null) {
@@ -260,8 +259,7 @@ public class Combat {
         if (band == null || !attackersOfDefender.contains(band)) {
             band = new AttackingBand(c);
             attackersOfDefender.add(band);
-        }
-        else {
+        } else {
             band.addAttacker(c);
         }
         c.updateAttackingForView();
