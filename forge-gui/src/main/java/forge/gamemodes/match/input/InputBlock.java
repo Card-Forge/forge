@@ -20,8 +20,6 @@ package forge.gamemodes.match.input;
 import java.util.List;
 
 import forge.game.card.Card;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CardView;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;

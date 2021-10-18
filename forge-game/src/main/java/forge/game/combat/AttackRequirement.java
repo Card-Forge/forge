@@ -13,8 +13,6 @@ import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;

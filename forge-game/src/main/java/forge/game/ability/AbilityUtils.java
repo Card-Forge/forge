@@ -45,7 +45,6 @@ import forge.game.card.CardPredicates;
 import forge.game.card.CardState;
 import forge.game.card.CardUtil;
 import forge.game.card.CounterType;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;

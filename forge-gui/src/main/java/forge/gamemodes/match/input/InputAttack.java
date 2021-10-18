@@ -27,8 +27,6 @@ import forge.game.GameEntity;
 import forge.game.GameEntityView;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CardView;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;

@@ -18,7 +18,6 @@
 package forge.ai;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import com.google.common.base.Predicate;
@@ -44,8 +43,6 @@ import forge.game.combat.CombatUtil;
 import forge.game.combat.GlobalAttackRestrictions;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
-import forge.game.player.PlayerCollection;
-import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
@@ -315,7 +312,6 @@ public class AiAttackController {
     }
 
     // this checks to make sure that the computer player doesn't lose when the human player attacks
-    // this method is used by getAttackers()
     public final List<Card> notNeededAsBlockers(final Player ai, final List<Card> attackers) {
         final List<Card> notNeededAsBlockers = new ArrayList<>(attackers);
         int fixedBlockers = 0;
@@ -649,9 +645,8 @@ public class AiAttackController {
             if (-1 == n) {
                 System.out.println("getMustAttackEntity() or getMustAttackEntityThisTurn() returned something not in defenders.");
                 return prefDefender;
-            } else {
-                return entity;
             }
+            return entity;
         } else {
             // 1. assault the opponent if you can kill him
             if (bAssault) {
@@ -688,6 +683,7 @@ public class AiAttackController {
         boolean tradeIfTappedOut = false;
         int extraChanceIfOppHasMana = 0;
         boolean tradeIfLowerLifePressure = false;
+        boolean predictEvasion = false;
         if (ai.getController().isAI()) {
             AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
             playAggro = aic.getBooleanProperty(AiProps.PLAY_AGGRO);
@@ -695,6 +691,7 @@ public class AiAttackController {
             tradeIfTappedOut = aic.getBooleanProperty(AiProps.ATTACK_INTO_TRADE_WHEN_TAPPED_OUT);
             extraChanceIfOppHasMana = aic.getIntProperty(AiProps.CHANCE_TO_ATKTRADE_WHEN_OPP_HAS_MANA);
             tradeIfLowerLifePressure = aic.getBooleanProperty(AiProps.RANDOMLY_ATKTRADE_ONLY_ON_LOWER_LIFE_PRESSURE);
+            predictEvasion = aic.getBooleanProperty(AiProps.COMBAT_ATTRITION_ATTACK_EVASION_PREDICTION);
         }
 
         final boolean bAssault = doAssault(ai);
@@ -767,7 +764,7 @@ public class AiAttackController {
             return;
         }
 
-        if (bAssault) {
+        if (bAssault && defender == this.defendingOpponent) { // in case we are forced to attack someone else
             if (LOG_AI_ATTACKS)
                 System.out.println("Assault");
             CardLists.sortByPowerDesc(attackersLeft);
@@ -853,7 +850,8 @@ public class AiAttackController {
         final List<Card> nextTurnAttackers = new ArrayList<>();
         int candidateCounterAttackDamage = 0;
 
-        final Player opp = this.defendingOpponent;
+        final Player opp = defender instanceof Player ? (Player) defender : ((Card)defender).getController();
+        this.oppList = getOpponentCreatures(opp);
         // get the potential damage and strength of the AI forces
         final List<Card> candidateAttackers = new ArrayList<>();
         int candidateUnblockedDamage = 0;
@@ -866,9 +864,6 @@ public class AiAttackController {
                 computerForces += 1;
             }
         }
-
-        boolean predictEvasion = (ai.getController().isAI()
-                && ((PlayerControllerAi)ai.getController()).getAi().getBooleanProperty(AiProps.COMBAT_ATTRITION_ATTACK_EVASION_PREDICTION));
 
         CardCollection categorizedOppList = new CardCollection();
         if (predictEvasion) {
@@ -1059,9 +1054,10 @@ public class AiAttackController {
         if ( LOG_AI_ATTACKS )
             System.out.println("attackersLeft = " + attackersLeft);
 
-        FCollection<GameEntity> possibleDefenders = new FCollection<>(combat.getDefenders());
+        FCollection<GameEntity> possibleDefenders = new FCollection<>(opp);
+        possibleDefenders.addAll(opp.getPlaneswalkersInPlay());
 
-        while (true) {
+        while (!attackersLeft.isEmpty()) {
             CardCollection attackersAssigned = new CardCollection();
             for (int i = 0; i < attackersLeft.size(); i++) {
                 final Card attacker = attackersLeft.get(i);
@@ -1089,7 +1085,7 @@ public class AiAttackController {
                                 attackNum++;
                             }
                         }
-                        // if enough damage: switch to next planeswalker or player
+                        // if enough damage: switch to next planeswalker
                         if (damage >= ComputerUtilCombat.getDamageToKill((Card) defender)) {
                             break;
                         }
@@ -1104,13 +1100,15 @@ public class AiAttackController {
             }
             CardCollection pwDefending = new CardCollection(Iterables.filter(possibleDefenders, Card.class));
             if (pwDefending.isEmpty()) {
-                defender = Collections.min(new PlayerCollection(Iterables.filter(possibleDefenders, Player.class)), PlayerPredicates.compareByLife());
+                // TODO for now only looks at same player as we'd have to check the others from start too
+                //defender = Collections.min(new PlayerCollection(Iterables.filter(possibleDefenders, Player.class)), PlayerPredicates.compareByLife());
+                defender = opp;
             } else {
                 final Card pwNearUlti = ComputerUtilCard.getBestPlaneswalkerToDamage(pwDefending);
                 defender = pwNearUlti != null ? pwNearUlti : ComputerUtilCard.getBestPlaneswalkerAI(pwDefending);
             }
         }
-    } // getAttackers()
+    }
 
     /**
      * <p>
