@@ -2400,7 +2400,7 @@ public class AbilityUtils {
         if (sq[0].startsWith("Domain")) {
             int n = 0;
             Player neededPlayer = sq[0].equals("DomainActivePlayer") ? game.getPhaseHandler().getPlayerTurn() : player;
-            CardCollection someCards = CardLists.filter(neededPlayer.getCardsIn(ZoneType.Battlefield), Presets.LANDS);
+            CardCollection someCards = neededPlayer.getLandsInPlay();
             for (String basic : MagicColor.Constant.BASIC_LANDS) {
                 if (!CardLists.getType(someCards, basic).isEmpty()) {
                     n++;

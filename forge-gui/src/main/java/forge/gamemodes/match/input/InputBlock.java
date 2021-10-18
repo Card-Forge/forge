@@ -60,7 +60,7 @@ public class InputBlock extends InputSyncronizedBase {
 
         //auto-select first attacker to declare blockers for
         for (final Card attacker : combat.getAttackers()) {
-            for (final Card c : CardLists.filter(defender.getCardsIn(ZoneType.Battlefield), Presets.CREATURES)) {
+            for (final Card c : defender.getCreaturesInPlay()) {
                 if (CombatUtil.canBlock(attacker, c, combat)) {
                     FThreads.invokeInEdtNowOrLater(new Runnable() { //must set current attacker on EDT
                         @Override

@@ -128,7 +128,7 @@ public class InputAttack extends InputSyncronizedBase {
         final List<Player> defenders = playerAttacks.getOpponents();
         final Set<CardView> refreshCards = Sets.newHashSet();
 
-        for (final Card c : CardLists.filter(playerAttacks.getCardsIn(ZoneType.Battlefield), Presets.CREATURES)) {
+        for (final Card c : playerAttacks.getCreaturesInPlay()) {
             if (combat.isAttacking(c)) {
                 continue;
             }

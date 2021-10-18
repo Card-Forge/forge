@@ -1479,7 +1479,7 @@ public class CardProperty {
             if (StringUtils.isEmpty(what)) return combat.isBlocking(card);
             if (what.startsWith("Source")) return combat.isBlocking(card, source);
             if (what.startsWith("CreatureYouCtrl")) {
-                for (final Card c : CardLists.filter(sourceController.getCardsIn(ZoneType.Battlefield), Presets.CREATURES))
+                for (final Card c : sourceController.getCreaturesInPlay())
                     if (combat.isBlocking(card, c))
                         return true;
                 return false;
