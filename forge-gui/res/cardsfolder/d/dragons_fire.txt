@@ -2,7 +2,7 @@ Name:Dragon's Fire
 ManaCost:1 R
 Types:Instant
 K:Kicker:RevealOrChoose<1/Dragon>:Generic
-A:SP$ DealDamage | ValidTgts$ Creature,Planeswalker | NumDmg$ 3 | Condition$ OptionalCost | ConditionOptionalPaid$ False | SubAbility$ DBDragonDamage | CostDesc$ As an additional cost to cast this spell, you may reveal a Dragon card from your hand or choose a Dragon you control. | StackDescription$ SpellDescription | SpellDescription$ CARDNAME deals 3 damage to target creature or planeswalker. If you revealed a Dragon card or chose a Dragon as you cast this spell, CARDNAME deals damage equal to the power of that card or creature instead.
-SVar:DBDragonDamage:DB$ DealDamage | Defined$ Targeted | NumDmg$ X | Condition$ OptionalCost | ConditionOptionalPaid$ True | StackDescription$
+A:SP$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ Y | CostDesc$ As an additional cost to cast this spell, you may reveal a Dragon card from your hand or choose a Dragon you control. | SpellDescription$ CARDNAME deals 3 damage to target creature or planeswalker. If you revealed a Dragon card or chose a Dragon as you cast this spell, CARDNAME deals damage equal to the power of that card or creature instead.
+SVar:Y:Count$OptionalGenericCostPaid.X.3
 SVar:X:Revealed$CardPower
 Oracle:As an additional cost to cast this spell, you may reveal a Dragon card from your hand or choose a Dragon you control.\nDragon's Fire deals 3 damage to target creature or planeswalker. If you revealed a Dragon card or chose a Dragon as you cast this spell, Dragon's Fire deals damage equal to the power of that card or creature instead.
