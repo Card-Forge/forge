@@ -160,7 +160,6 @@ public class MustBlockAi extends SpellAbilityAi {
 
     private List<Card> determineGoodBlockers(final Card attacker, final Player ai, Player defender, SpellAbility sa,
             final boolean onlyLethal, final boolean testTapped) {
-
         List<Card> list = Lists.newArrayList();
         list = CardLists.filter(defender.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
 

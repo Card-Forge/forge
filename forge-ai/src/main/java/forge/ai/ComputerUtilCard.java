@@ -750,7 +750,6 @@ public class ComputerUtilCard {
     
         for (final Entry<String, Integer> entry : map.entrySet()) {
             final String type = entry.getKey();
-            // Log.debug(type + " - " + entry.getValue());
     
             if (max < entry.getValue()) {
                 max = entry.getValue();
@@ -784,7 +783,6 @@ public class ComputerUtilCard {
 
         // TODO JAVA 8 use getOrDefault
         for (final Card c : list) {
-
             // Changeling are all creature types, they are not interesting for
             // counting creature types
             if (c.hasStartOfKeyword(Keyword.CHANGELING.toString())) {

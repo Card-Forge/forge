@@ -1910,11 +1910,7 @@ public class ComputerUtil {
      * @return true if the creature dies according to current board position.
      */
     public static boolean predictCreatureWillDieThisTurn(final Player ai, final Card creature, final SpellAbility excludeSa) {
-        final Game game = creature.getGame();
-
-        // a creature will die as a result of combat
-        boolean willDieInCombat = game.getPhaseHandler().inCombat()
-                && ComputerUtilCombat.combatantWouldBeDestroyed(creature.getController(), creature, game.getCombat());
+        final Game game = ai.getGame();
 
         // a creature will [hopefully] die from a spell on stack
         boolean willDieFromSpell = false;
@@ -1932,6 +1928,10 @@ public class ComputerUtil {
             }
         }
         willDieFromSpell = !noStackCheck && predictThreatenedObjects(creature.getController(), excludeSa).contains(creature);
+
+        // a creature will die as a result of combat
+        boolean willDieInCombat = !willDieFromSpell && game.getPhaseHandler().inCombat()
+                && ComputerUtilCombat.combatantWouldBeDestroyed(creature.getController(), creature, game.getCombat());
 
         return willDieInCombat || willDieFromSpell;
     }

@@ -1,6 +1,6 @@
 Name:Bounding Wolf
 ManaCost:2 G
-Types:Creature wolf
+Types:Creature Wolf
 PT:3/2
 K:Flash
 K:Reach
