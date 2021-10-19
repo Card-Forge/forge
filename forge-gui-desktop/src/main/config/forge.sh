@@ -38,14 +38,15 @@ jdk_version() {
 }
 v="$(jdk_version)"
 
+SHAREDPARAMS='-Xmx4096m -Dfile.encoding=UTF-8 -jar $project.build.finalName$'
 cd $(dirname "${0}")
 
 if [[ $v -ge 17 ]]
 then
-    java --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.text=ALL-UNNAMED --add-opens java.desktop/java.awt.font=ALL-UNNAMED -Xmx4096m -Dfile.encoding=UTF-8 -jar $project.build.finalName$
+    java --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.text=ALL-UNNAMED --add-opens java.desktop/java.awt.font=ALL-UNNAMED $SHAREDPARAMS
 elif [[ $v -ge 11 ]]
 then
-    java --illegal-access=permit -Xmx4096m -Dfile.encoding=UTF-8 -jar $project.build.finalName$
+    java --illegal-access=permit -Xmx4096m -Dfile.encoding=UTF-8 -jar $SHAREDPARAMS
 else
-    java -Xmx4096m -Dfile.encoding=UTF-8 -jar $project.build.finalName$
+    java -Xmx4096m -Dfile.encoding=UTF-8 -jar $SHAREDPARAMS
 fi
