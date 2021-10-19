@@ -478,13 +478,18 @@
                                             <fileset dir="${project.build.directory}" includes="forge.exe" />
                                             <fileset dir="${project.build.directory}" includes="${project.build.finalName}-jar-with-dependencies.jar" />
                                             <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure.exe" />
+                                            <fileset dir="${project.build.directory}/../../forge-adventure/target"  includes="forge-adventure.sh" />
+                                            <fileset dir="${project.build.directory}/../../forge-adventure/target"  includes="forge-adventure.command" />
                                             <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure-${project.version}-jar-with-dependencies.jar" />
                                         </copy>
                                         <mkdir dir="${project.build.directory}/${project.build.finalName}/res/cardsfolder" />
                                         <zip destfile="${project.build.directory}/${project.build.finalName}/res/cardsfolder/cardsfolder.zip" basedir="${basedir}/../forge-gui/res/cardsfolder" level="1" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge.sh" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge.command" perm="a+rx" />
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge-adventure.sh" perm="a+rx" />
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge-adventure.command" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge.exe" perm="a+rx" />
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge-adventure.exe" perm="a+rx" />
                                         <tar destfile="${project.build.directory}/${project.build.finalName}.tar.bz2" compression="bzip2">
                                             <tarfileset filemode="755" dir="${project.build.directory}/${project.build.finalName}">
                                                 <include name="forge.sh" />

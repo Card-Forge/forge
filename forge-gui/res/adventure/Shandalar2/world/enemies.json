@@ -314,7 +314,7 @@
 },
 {
 	"name": "Merfolk",
-	"sprite": "sprites/waterElemental.atlas",
+	"sprite": "sprites/waterelemental.atlas",
 	"deck": "decks/merfolk_bad.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
@@ -348,7 +348,7 @@
 },
 {
 	"name": "Merfolk warrior",
-	"sprite": "sprites/airElemental.atlas",
+	"sprite": "sprites/airelemental.atlas",
 	"deck": "decks/merfolk_mid.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
@@ -382,7 +382,7 @@
 },
 {
 	"name": "Merfolk Avatar",
-	"sprite": "sprites/iceElemental.atlas",
+	"sprite": "sprites/iceelemental.atlas",
 	"deck": "decks/merfolk_good.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
@@ -688,7 +688,7 @@
 },
 {
 	"name": "Snake",
-	"sprite": "sprites/big_Snake.atlas",
+	"sprite": "sprites/big_snake.atlas",
 	"deck": "decks/snake.json",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
