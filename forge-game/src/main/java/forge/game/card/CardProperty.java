@@ -604,6 +604,12 @@ public class CardProperty {
             if (cards.isEmpty() || !card.equals(cards.get(0))) {
                 return false;
             }
+        } else if (property.startsWith("BottomLibrary")) {
+            final CardCollection cards = new CardCollection(card.getOwner().getCardsIn(ZoneType.Library));
+            Collections.reverse(cards);
+            if (cards.isEmpty() || !card.equals(cards.get(0))) {
+                return false;
+            }
         } else if (property.startsWith("Cloned")) {
             if ((card.getCloneOrigin() == null) || !card.getCloneOrigin().equals(source)) {
                 return false;
