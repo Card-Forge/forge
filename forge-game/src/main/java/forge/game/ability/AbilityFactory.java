@@ -216,7 +216,7 @@ public final class AbilityFactory {
 
         else if (api == ApiType.PermanentCreature || api == ApiType.PermanentNoncreature) {
             // If API is a permanent type, and creating AF Spell
-            // Clear out the auto created SpellPemanent spell
+            // Clear out the auto created SpellPermanent spell
             if (type == AbilityRecordType.Spell
                     && !mapParams.containsKey("SubAbility") && !mapParams.containsKey("NonBasicSpell")) {
                 hostCard.clearFirstSpell();
