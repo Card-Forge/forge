@@ -222,11 +222,11 @@ public class TokenAi extends SpellAbilityAi {
     private boolean canInterruptSacrifice(final Player ai, final SpellAbility sa, final Card token, final String tokenAmount) {
         final Game game = ai.getGame();
         if (game.getStack().isEmpty()) {
-            return false;   // nothing to interrupt
+            return false; // nothing to interrupt
         }
         final SpellAbility topStack = game.getStack().peekAbility();
         if (topStack.getApi() != ApiType.Sacrifice) {
-            return false;   // not sacrifice effect
+            return false; // not sacrifice effect
         }
         final int nTokens = AbilityUtils.calculateAmount(sa.getHostCard(), tokenAmount, sa);
         final String valid = topStack.getParamOrDefault("SacValid", "Card.Self");
