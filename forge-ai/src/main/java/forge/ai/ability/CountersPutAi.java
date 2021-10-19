@@ -107,8 +107,7 @@ public class CountersPutAi extends CountersAi {
         final Card source = sa.getHostCard();
 
         if (sa.isOutlast()) {
-            if (ph.is(PhaseType.MAIN2, ai)) { // applicable to non-attackers
-                                              // only
+            if (ph.is(PhaseType.MAIN2, ai)) { // applicable to non-attackers only
                 float chance = 0.8f;
                 if (ComputerUtilCard.doesSpecifiedCreatureBlock(ai, source)) {
                     return false;

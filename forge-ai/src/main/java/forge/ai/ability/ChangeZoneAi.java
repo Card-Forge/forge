@@ -344,6 +344,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 sa.resetTargets();
                 sa.getTargets().add(ai);
             }
+            if (!sa.isTargetNumberValid()) {
+                return false;
+            }
             pDefined = sa.getTargets().getTargetPlayers();
         } else {
             if (sa.hasParam("DefinedPlayer")) {
