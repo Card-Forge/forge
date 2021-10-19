@@ -24,7 +24,6 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CardUtil;
 import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
@@ -132,7 +131,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
         List<GameObject> tgtObjects = Lists.newArrayList();
         int divrem = 0;
         if (sa.hasParam("Bolster")) {
-            CardCollection creatsYouCtrl = CardLists.filter(activator.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+            CardCollection creatsYouCtrl = activator.getCreaturesInPlay();
             CardCollection leastToughness = new CardCollection(Aggregates.listWithMin(creatsYouCtrl, CardPredicates.Accessors.fnGetDefense));
 
             Map<String, Object> params = Maps.newHashMap();

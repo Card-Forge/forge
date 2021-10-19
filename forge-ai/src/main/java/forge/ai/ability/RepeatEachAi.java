@@ -36,17 +36,17 @@ public class RepeatEachAi extends SpellAbilityAi {
             return false;
         } else if ("CloneAllTokens".equals(logic)) {
             List<Card> humTokenCreats = CardLists.filter(aiPlayer.getOpponents().getCreaturesInPlay(), Presets.TOKEN);
-            List<Card> compTokenCreats = CardLists.filter(aiPlayer.getCreaturesInPlay(), Presets.TOKEN);
+            List<Card> compTokenCreats = aiPlayer.getTokensInPlay();
 
             return compTokenCreats.size() > humTokenCreats.size();
         } else if ("BalanceLands".equals(logic)) {
-            if (CardLists.filter(aiPlayer.getCardsIn(ZoneType.Battlefield), Presets.LANDS).size() >= 5) {
+            if (aiPlayer.getLandsInPlay().size() >= 5) {
                 return false;
             }
 
             List<Player> opponents = aiPlayer.getOpponents();
             for(Player opp : opponents) {
-                if (CardLists.filter(opp.getCardsIn(ZoneType.Battlefield), Presets.LANDS).size() < 4) {
+                if (opp.getLandsInPlay().size() < 4) {
                     return false;
                 }
             }

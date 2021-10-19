@@ -152,8 +152,8 @@ public class PumpAi extends PumpAiBase {
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & "))
                 : Lists.newArrayList();
-        final String numDefense = sa.hasParam("NumDef") ? sa.getParam("NumDef") : "";
-        final String numAttack = sa.hasParam("NumAtt") ? sa.getParam("NumAtt") : "";
+        final String numDefense = sa.getParamOrDefault("NumDef", "");
+        final String numAttack = sa.getParamOrDefault("NumAtt", "");
 
         final String aiLogic = sa.getParamOrDefault("AILogic", "");
 
@@ -699,8 +699,8 @@ public class PumpAi extends PumpAiBase {
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final SpellAbility root = sa.getRootAbility();
-        final String numDefense = sa.hasParam("NumDef") ? sa.getParam("NumDef") : "";
-        final String numAttack = sa.hasParam("NumAtt") ? sa.getParam("NumAtt") : "";
+        final String numDefense = sa.getParamOrDefault("NumDef", "");
+        final String numAttack = sa.getParamOrDefault("NumAtt", "");
 
         if (sa.getSVar("X").equals("Count$xPaid")) {
             sa.setXManaCostPaid(null);
@@ -750,8 +750,8 @@ public class PumpAi extends PumpAiBase {
         final SpellAbility root = sa.getRootAbility();
         final Card source = sa.getHostCard();
 
-        final String numDefense = sa.hasParam("NumDef") ? sa.getParam("NumDef") : "";
-        final String numAttack = sa.hasParam("NumAtt") ? sa.getParam("NumAtt") : "";
+        final String numDefense = sa.getParamOrDefault("NumDef", "");
+        final String numAttack = sa.getParamOrDefault("NumAtt", "");
 
         if (numDefense.equals("-X") && sa.getSVar("X").equals("Count$ChosenNumber")) {
             int energy = ai.getCounters(CounterEnumType.ENERGY);

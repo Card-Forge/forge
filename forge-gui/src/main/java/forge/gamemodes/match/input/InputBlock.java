@@ -20,8 +20,6 @@ package forge.gamemodes.match.input;
 import java.util.List;
 
 import forge.game.card.Card;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CardView;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
@@ -60,7 +58,7 @@ public class InputBlock extends InputSyncronizedBase {
 
         //auto-select first attacker to declare blockers for
         for (final Card attacker : combat.getAttackers()) {
-            for (final Card c : CardLists.filter(defender.getCardsIn(ZoneType.Battlefield), Presets.CREATURES)) {
+            for (final Card c : defender.getCreaturesInPlay()) {
                 if (CombatUtil.canBlock(attacker, c, combat)) {
                     FThreads.invokeInEdtNowOrLater(new Runnable() { //must set current attacker on EDT
                         @Override

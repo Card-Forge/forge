@@ -1644,7 +1644,7 @@ public class GameAction {
 
     private boolean handlePlaneswalkerRule(Player p, CardZoneTable table) {
         // get all Planeswalkers
-        final List<Card> list = CardLists.filter(p.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANESWALKERS);
+        final List<Card> list = p.getPlaneswalkersInPlay();
         boolean recheck = false;
 
         //final Multimap<String, Card> uniqueWalkers = ArrayListMultimap.create(); // Not used as of Ixalan

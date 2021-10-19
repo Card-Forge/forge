@@ -167,7 +167,6 @@ public class ComputerUtilCombat {
         return totalDamageOfBlockers(attacker, list);
     }
 
-
     // This function takes Doran and Double Strike into account
     /**
      * <p>
@@ -202,10 +201,10 @@ public class ComputerUtilCombat {
      *            a {@link forge.game.combat.Combat} object.
      * @return a int.
      */
-    public static int damageIfUnblocked(final Card attacker, final Player attacked, final Combat combat, boolean withoutAbilities) {
+    public static int damageIfUnblocked(final Card attacker, final GameEntity attacked, final Combat combat, boolean withoutAbilities) {
         int damage = attacker.getNetCombatDamage();
         int sum = 0;
-        if (!attacked.canLoseLife()) {
+        if (attacked instanceof Player && !((Player) attacked).canLoseLife()) {
             return 0;
         }
 
@@ -2139,7 +2138,6 @@ public class ComputerUtilCombat {
         return damageMap;
     } // setAssignedDamage()
 
-
     // how much damage is enough to kill the creature (for AI)
     /**
      * <p>
@@ -2175,13 +2173,13 @@ public class ComputerUtilCombat {
      */
     public static final int getEnoughDamageToKill(final Card c, final int maxDamage, final Card source, final boolean isCombat,
             final boolean noPrevention) {
-        final int killDamage = c.isPlaneswalker() ? c.getCurrentLoyalty() : getDamageToKill(c);
+        final int killDamage = getDamageToKill(c);
 
         if (c.hasKeyword(Keyword.INDESTRUCTIBLE) || c.getShieldCount() > 0) {
             if (!(source.hasKeyword(Keyword.WITHER) || source.hasKeyword(Keyword.INFECT))) {
                 return maxDamage + 1;
             }
-        } else if (source.hasKeyword(Keyword.DEATHTOUCH)) {
+        } else if (source.hasKeyword(Keyword.DEATHTOUCH) && !c.isPlaneswalker()) {
             for (int i = 1; i <= maxDamage; i++) {
                 if (noPrevention) {
                     if (c.staticReplaceDamage(i, source, isCombat) > 0) {
@@ -2218,9 +2216,9 @@ public class ComputerUtilCombat {
      */
     public final static int getDamageToKill(final Card c) {
         int damageShield = c.getPreventNextDamageTotalShields();
-        int killDamage = c.getLethalDamage() + damageShield;
+        int killDamage = (c.isPlaneswalker() ? c.getCurrentLoyalty() : c.getLethalDamage()) + damageShield;
 
-        if ((killDamage > damageShield)
+        if (killDamage > damageShield
                 && c.hasSVar("DestroyWhenDamaged")) {
             killDamage = 1 + damageShield;
         }
