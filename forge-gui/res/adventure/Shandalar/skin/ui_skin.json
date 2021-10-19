@@ -1,0 +1,424 @@
+{
+"com.badlogic.gdx.graphics.g2d.BitmapFont": {
+	"big": {
+		"file": "MiKrollFantasy(1).fnt"
+	},
+	"black": {
+		"file": "MiKrollFantasy(2).fnt"
+	},
+	"blackbig": {
+		"file": "MiKrollFantasy(3).fnt"
+	},
+	"default": {
+		"file": "MiKrollFantasy.fnt"
+	}
+},
+"com.badlogic.gdx.graphics.Color": {
+	"RGBA_0_0_0_255": {
+		"r": 0,
+		"g": 0,
+		"b": 0,
+		"a": 1
+	},
+	"RGBA_0_216_255_255": {
+		"r": 0,
+		"g": 0.848778,
+		"b": 1,
+		"a": 1
+	},
+	"RGBA_255_255_255_255": {
+		"r": 1,
+		"g": 1,
+		"b": 1,
+		"a": 1
+	}
+},
+"com.ray3k.tenpatch.TenPatchDrawable": {
+	"paper10Patch": {
+		"region": "map",
+		"horizontalStretchAreas": [ 16, 31 ],
+		"verticalStretchAreas": [ 16, 28 ],
+		"tiling": true,
+		"minWidth": 48,
+		"minHeight": 48,
+		"rightWidth": 5,
+		"leftWidth": 5,
+		"bottomHeight": 5,
+		"topHeight": 12,
+		"offsetX": 0,
+		"offsetY": 0,
+		"offsetXspeed": 0,
+		"offsetYspeed": 0,
+		"frameDuration": 0.03,
+		"regions": [],
+		"playMode": 2
+	},
+	"TenPatchGold": {
+		"region": "9patch4",
+		"horizontalStretchAreas": [ 7, 40 ],
+		"verticalStretchAreas": [ 7, 40 ],
+		"tiling": true,
+		"minWidth": 48,
+		"minHeight": 48,
+		"rightWidth": 5,
+		"leftWidth": 5,
+		"bottomHeight": 7,
+		"topHeight": 7,
+		"offsetX": 0,
+		"offsetY": 0,
+		"offsetXspeed": 0,
+		"offsetYspeed": 0,
+		"frameDuration": 0.03,
+		"regions": [],
+		"playMode": 2
+	},
+	"windowMain10Patch": {
+		"region": "windowMain",
+		"horizontalStretchAreas": [ 6, 41 ],
+		"verticalStretchAreas": [ 6, 41 ],
+		"tiling": true,
+		"minWidth": 48,
+		"minHeight": 48,
+		"rightWidth": 7,
+		"leftWidth": 7,
+		"bottomHeight": 7,
+		"topHeight": 7,
+		"offsetX": 0,
+		"offsetY": 0,
+		"offsetXspeed": 0,
+		"offsetYspeed": 0,
+		"frameDuration": 0.03,
+		"regions": [],
+		"playMode": 2
+	},
+	"unpressed-hover10patch": {
+		"region": "unpressed-hover",
+		"horizontalStretchAreas": [ 3, 10 ],
+		"verticalStretchAreas": [ 6, 12 ],
+		"tiling": true,
+		"minWidth": 14,
+		"minHeight": 16,
+		"rightWidth": 4,
+		"leftWidth": 4,
+		"bottomHeight": 7,
+		"topHeight": 4,
+		"offsetX": 0,
+		"offsetY": 0,
+		"offsetXspeed": 0,
+		"offsetYspeed": 0,
+		"frameDuration": 0.03,
+		"regions": [],
+		"playMode": 2
+	},
+	"unpressed-disable10Patch": {
+		"region": "unpressed-disable",
+		"horizontalStretchAreas": [ 3, 10 ],
+		"verticalStretchAreas": [ 6, 12 ],
+		"tiling": true,
+		"minWidth": 14,
+		"minHeight": 16,
+		"rightWidth": 4,
+		"leftWidth": 4,
+		"bottomHeight": 7,
+		"topHeight": 4,
+		"offsetX": 0,
+		"offsetY": 0,
+		"offsetXspeed": 0,
+		"offsetYspeed": 0,
+		"frameDuration": 0.03,
+		"regions": [],
+		"playMode": 2
+	},
+	"thinwindow10Patch": {
+		"region": "thinwindow",
+		"horizontalStretchAreas": [ 2, 13 ],
+		"verticalStretchAreas": [ 2, 13 ],
+		"tiling": true,
+		"minWidth": 16,
+		"minHeight": 16,
+		"rightWidth": 4,
+		"leftWidth": 4,
+		"bottomHeight": 4,
+		"topHeight": 4,
+		"offsetX": 0,
+		"offsetY": 0,
+		"offsetXspeed": 0,
+		"offsetYspeed": 0,
+		"frameDuration": 0.03,
+		"regions": [],
+		"playMode": 2
+	},
+	"pressed10Patch": {
+		"region": "pressed",
+		"horizontalStretchAreas": [ 3, 10 ],
+		"verticalStretchAreas": [ 4, 10 ],
+		"tiling": true,
+		"minWidth": 14,
+		"minHeight": 16,
+		"rightWidth": 4,
+		"leftWidth": 4,
+		"bottomHeight": 5,
+		"topHeight": 6,
+		"offsetX": 0,
+		"offsetY": 0,
+		"offsetXspeed": 0,
+		"offsetYspeed": 0,
+		"frameDuration": 0.03,
+		"regions": [],
+		"playMode": 2
+	},
+	"pressedMap10Patch": {
+		"region": "pressedMap",
+		"horizontalStretchAreas": [ 5, 10 ],
+		"verticalStretchAreas": [ 2, 12 ],
+		"tiling": true,
+		"minWidth": 16,
+		"minHeight": 16,
+		"rightWidth": 4,
+		"leftWidth": 4,
+		"bottomHeight": 3,
+		"topHeight": 4,
+		"offsetX": 0,
+		"offsetY": 0,
+		"offsetXspeed": 0,
+		"offsetYspeed": 0,
+		"frameDuration": 0.03,
+		"regions": [],
+		"playMode": 2
+	},
+	"goldpressed10Patch": {
+		"region": "BKey_3_14",
+		"horizontalStretchAreas": [ 6, 25 ],
+		"verticalStretchAreas": [ 5, 7 ],
+		"tiling": true,
+		"minWidth": 32,
+		"minHeight": 16,
+		"rightWidth": 5,
+		"leftWidth": 5,
+		"bottomHeight": 4,
+		"topHeight": 7,
+		"offsetX": 0,
+		"offsetY": 0,
+		"offsetXspeed": 0,
+		"offsetYspeed": 0,
+		"frameDuration": 0.03,
+		"regions": [],
+		"playMode": 2
+	},
+	"unpressedgold10patch": {
+		"region": "BKey_3_9",
+		"horizontalStretchAreas": [ 5, 26 ],
+		"verticalStretchAreas": [ 7, 9 ],
+		"tiling": true,
+		"minWidth": 32,
+		"minHeight": 16,
+		"rightWidth": 5,
+		"leftWidth": 5,
+		"bottomHeight": 5,
+		"topHeight": 4,
+		"offsetX": 0,
+		"offsetY": 0,
+		"offsetXspeed": 0,
+		"offsetYspeed": 0,
+		"frameDuration": 0.03,
+		"regions": [],
+		"playMode": 2
+	},
+	"unpressed10patch": {
+		"region": "unpressed",
+		"horizontalStretchAreas": [ 3, 10 ],
+		"verticalStretchAreas": [ 6, 12 ],
+		"tiling": true,
+		"minWidth": 14,
+		"minHeight": 16,
+		"rightWidth": 4,
+		"leftWidth": 4,
+		"bottomHeight": 7,
+		"topHeight": 4,
+		"offsetX": 0,
+		"offsetY": 0,
+		"offsetXspeed": 0,
+		"offsetYspeed": 0,
+		"frameDuration": 0.03,
+		"regions": [],
+		"playMode": 2
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle": {
+	"default": {
+		"up": "unpressed10patch",
+		"down": "pressed10Patch",
+		"over": "unpressed-hover10patch",
+		"disabled": "unpressed-disable10Patch"
+	},
+	"paper": {
+		"parent": "default",
+		"up": "unpressedMap",
+		"down": "pressedMap"
+	},
+	"gold": {
+		"parent": "default",
+		"up": "BKey_3_9",
+		"down": "BKey_3_14",
+		"over": "BKey_3_9"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle": {
+	"default": {
+		"checkboxOn": "check",
+		"checkboxOff": "uncheck",
+		"font": "black"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle": {
+	"default": {
+		"imageUp": "unpressed10patch",
+		"imageDown": "pressed10Patch"
+	},
+	"leftarrow": {
+		"imageUp": "left",
+		"imageDown": "left_down"
+	},
+	"rightarrow": {
+		"imageUp": "right",
+		"imageDown": "right_down"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton$ImageTextButtonStyle": {
+	"default": {
+		"font": "blackbig"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle": {
+	"default": {
+		"font": "black"
+	},
+	"big": {
+		"parent": "default",
+		"font": "blackbig"
+	},
+	"white": {
+		"font": "default"
+	},
+	"whiteBig": {
+		"font": "big"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle": {
+	"default": {
+		"font": "default",
+		"fontColorSelected": "RGBA_0_216_255_255",
+		"fontColorUnselected": "RGBA_255_255_255_255",
+		"selection": "select",
+		"background": "thinwindow10Patch"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.ProgressBar$ProgressBarStyle": {
+	"default-horizontal": {
+		"background": "bar",
+		"knob": "scroll"
+	},
+	"default-vertical": {
+		"background": "bar",
+		"knob": "scroll2"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle": {
+	"default": {
+		"background": "windowMain10Patch"
+	},
+	"paper": {
+		"background": "paper10Patch"
+	},
+	"gold": {
+		"background": "9patch4"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle": {
+	"default": {
+		"font": "default",
+		"fontColor": "RGBA_0_0_0_255",
+		"scrollStyle": "default",
+		"listStyle": "default"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.Slider$SliderStyle": {
+	"default-horizontal": {
+		"background": "thinwindow10Patch",
+		"knob": "scroll"
+	},
+	"default-vertical": {
+		"background": "thinwindow",
+		"knob": "scroll2"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.SplitPane$SplitPaneStyle": {
+	"default-horizontal": {
+		"handle": "scroll2"
+	},
+	"default-vertical": {
+		"handle": "scroll"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle": {
+	"default": {
+		"parent": "default",
+		"font": "default",
+		"fontColor": "RGBA_255_255_255_255",
+		"pressedOffsetY": -2
+	},
+	"gold": {
+		"parent": "default",
+		"font": "default",
+		"up": "BKey_3_9",
+		"down": "BKey_3_14",
+		"over": "BKey_3_9",
+		"pressedOffsetX": 6,
+		"pressedOffsetY": -3,
+		"unpressedOffsetX": 6,
+		"checkedOffsetX": 6
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle": {
+	"default": {
+		"font": "default",
+		"fontColor": "RGBA_255_255_255_255",
+		"focusedFontColor": "RGBA_0_216_255_255",
+		"background": "thinwindow10Patch",
+		"cursor": "cursor",
+		"selection": "select"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.TextTooltip$TextTooltipStyle": {
+	"default": {
+		"label": "default"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.Touchpad$TouchpadStyle": {
+	"default": {
+		"background": "thinwindow",
+		"knob": "unpressed-hover"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.Tree$TreeStyle": {
+	"default": {
+		"plus": "unpressed",
+		"minus": "pressed"
+	}
+},
+"com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle": {
+	"default": {
+		"background": "windowMain10Patch",
+		"titleFont": "black"
+	},
+	"paper": {
+		"parent": "default",
+		"background": "paper10Patch",
+		"titleFont": "blackbig"
+	},
+	"gold": {
+		"background": "TenPatchGold",
+		"titleFont": "big"
+	}
+}
+}

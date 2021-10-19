@@ -1,0 +1,15 @@
+
+items.png
+size: 128,64
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+CardBack 
+  xy: 0, 0
+  size: 48, 64
+Gold 
+  xy: 48, 0
+  size: 16, 16              
+Life 
+  xy: 48, 16
+  size: 16, 16       

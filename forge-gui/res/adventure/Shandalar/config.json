@@ -1,0 +1,36 @@
+{		
+    "screenWidth": 480,
+	"screenHeight": 270, 
+	"font": "skin/MiKrollFantasy.ttf",      
+	"skin": "skin/uiskin.json", 
+	"fontColor": "ffffff"   ,     
+	"playerBaseSpeed": 30 ,
+    "minDeckSize":40,
+    "starterDecks": 
+    [                          
+    "decks/starter/white.json",
+    "decks/starter/black.json",
+    "decks/starter/blue.json",
+    "decks/starter/red.json",
+    "decks/starter/green.json"
+    ] ,
+    "difficulties":[
+    {
+     "name":"Easy",     
+     "startingLife":16,
+     "staringMoney":200,      
+     "enemyLifeFactor":0.8 
+    },{
+     "name":"Normal",     
+     "startingLife":12,
+     "staringMoney":100,          
+     "startingDifficulty":true,      
+     "enemyLifeFactor":1.0 
+    },{
+     "name":"Hard",     
+     "startingLife":8,
+     "staringMoney":10,      
+     "enemyLifeFactor":1.5 
+    }
+    ]
+}

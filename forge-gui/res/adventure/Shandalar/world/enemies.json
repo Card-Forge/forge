@@ -1,0 +1,1079 @@
+[
+{
+	"name": "Gold",
+	"sprite": "sprites/gold.atlas",
+	"rewards": [
+		{
+			"type": "gold",
+			"count": 10,
+			"addMaxCount": 100,
+			"cardName": "",
+			"itemName": "",
+			"manaCosts": [],
+			"cardText": ""
+		}
+	]
+},
+{
+	"name": "Treasure",
+	"sprite": "sprites/treasure.atlas",
+	"deck": "",
+	"rewards": [
+		{
+			"type": "randomCard",
+			"count": 2,
+			"addMaxCount": 8
+		}
+	]
+},
+{
+	"name": "Golem",
+	"sprite": "sprites/golem.atlas",
+	"deck": "decks/golem.json",
+	"spawnRate": 0.1,
+	"difficulty": 0.1,
+	"speed": 20,
+	"life": 12,
+	"rewards": [
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"editions": [
+				"M22",
+				"M21"
+			],
+			"colors": [
+				"red"
+			],
+			"rarity": [
+				"rare"
+			]
+		},
+		{
+			"type": "life",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 3
+		},
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 3,
+			"addMaxCount": 3
+		},
+		{
+			"type": "card",
+			"probability": 1,
+			"count": 2,
+			"cardName": "Black Lotus"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	]
+},
+{
+	"name": "Vampire",
+	"sprite": "sprites/vampire.atlas",
+	"deck": "decks/Vampire.dck",
+	"spawnRate": 0.1,
+	"difficulty": 0.1,
+	"speed": 30,
+	"life": 1,
+	"rewards": [
+		{
+			"type": "randomCard",
+			"count": 2,
+			"addMaxCount": 8
+		}
+	]
+},
+{
+	"name": "Skeleton",
+	"sprite": "sprites/skeleton.atlas",
+	"deck": "decks/skeleton.dck",
+	"spawnRate": 0.1,
+	"difficulty": 0.1,
+	"speed": 25,
+	"life": 1,
+	"rewards": [
+		{
+			"type": "randomCard",
+			"count": 2,
+			"addMaxCount": 8
+		}
+	]
+},
+{
+	"name": "Elf",
+	"sprite": "sprites/druid.atlas",
+	"deck": "decks/elf_bad.json",
+	"spawnRate": 0.2,
+	"difficulty": 0.1,
+	"speed": 20,
+	"life": 8,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"colors": [
+				"Green"
+			],
+			"rarity": [
+				"Rare"
+			]
+		}
+	]
+},
+{
+	"name": "Elf warrior",
+	"sprite": "sprites/hunter.atlas",
+	"deck": "decks/elf_mid.json",
+	"spawnRate": 0.2,
+	"difficulty": 0.1,
+	"speed": 26,
+	"life": 14,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 3,
+			"colors": [
+				"Green"
+			],
+			"rarity": [
+				"Rare"
+			]
+		}
+	]
+},
+{
+	"name": "High Elf",
+	"sprite": "sprites/druid_2.atlas",
+	"deck": "decks/elf_good.json",
+	"spawnRate": 0.2,
+	"difficulty": 0.1,
+	"speed": 31,
+	"life": 19,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 3,
+			"colors": [
+				"Green"
+			],
+			"rarity": [
+				"Mythic Rare"
+			]
+		}
+	]
+},
+{
+	"name": "Goblin",
+	"sprite": "sprites/goblin.atlas",
+	"deck": "decks/goblin_bad.json",
+	"spawnRate": 0.2,
+	"difficulty": 0.1,
+	"speed": 20,
+	"life": 8,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 3,
+			"colors": [
+				"Red"
+			],
+			"rarity": [
+				"Rare"
+			]
+		}
+	]
+},
+{
+	"name": "Goblin Warrior",
+	"sprite": "sprites/wolf_Rider.atlas",
+	"deck": "decks/goblin_mid.json",
+	"spawnRate": 0.2,
+	"difficulty": 0.1,
+	"speed": 26,
+	"life": 14,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 2,
+			"colors": [
+				"Red"
+			],
+			"rarity": [
+				"Rare"
+			]
+		}
+	]
+},
+{
+	"name": "Goblin Chief",
+	"sprite": "sprites/wolf_Rider_2.atlas",
+	"deck": "decks/goblin_good.json",
+	"spawnRate": 0.2,
+	"difficulty": 0.1,
+	"speed": 31,
+	"life": 19,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 2,
+			"colors": [
+				"Red"
+			],
+			"rarity": [
+				"Mythic Rare"
+			]
+		}
+	]
+},
+{
+	"name": "Merfolk",
+	"sprite": "sprites/waterelemental.atlas",
+	"deck": "decks/merfolk_bad.json",
+	"spawnRate": 0.2,
+	"difficulty": 0.1,
+	"speed": 20,
+	"life": 8,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 3,
+			"colors": [
+				"Blue"
+			],
+			"rarity": [
+				"Rare"
+			]
+		}
+	]
+},
+{
+	"name": "Merfolk warrior",
+	"sprite": "sprites/airelemental.atlas",
+	"deck": "decks/merfolk_mid.json",
+	"spawnRate": 0.2,
+	"difficulty": 0.1,
+	"speed": 25,
+	"life": 14,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 2,
+			"colors": [
+				"Blue"
+			],
+			"rarity": [
+				"Rare"
+			]
+		}
+	]
+},
+{
+	"name": "Merfolk Avatar",
+	"sprite": "sprites/iceelemental.atlas",
+	"deck": "decks/merfolk_good.json",
+	"spawnRate": 0.2,
+	"difficulty": 0.1,
+	"speed": 31,
+	"life": 19,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 2,
+			"colors": [
+				"Blue"
+			],
+			"rarity": [
+				"Mythic Rare"
+			]
+		}
+	]
+},
+{
+	"name": "Human",
+	"sprite": "sprites/pikeman.atlas",
+	"deck": "decks/human_bad.json",
+	"spawnRate": 0.2,
+	"difficulty": 0.1,
+	"speed": 20,
+	"life": 8,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 3,
+			"colors": [
+				"White"
+			],
+			"rarity": [
+				"Rare"
+			]
+		}
+	]
+},
+{
+	"name": "Human guard",
+	"sprite": "sprites/swordsman.atlas",
+	"deck": "decks/human_mid.json",
+	"spawnRate": 0.2,
+	"difficulty": 0.1,
+	"speed": 25,
+	"life": 14,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 2,
+			"colors": [
+				"White"
+			],
+			"rarity": [
+				"Rare"
+			]
+		}
+	]
+},
+{
+	"name": "Human elite",
+	"sprite": "sprites/legionite.atlas",
+	"deck": "decks/human_good.json",
+	"spawnRate": 0.2,
+	"difficulty": 0.1,
+	"speed": 31,
+	"life": 19,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 2,
+			"colors": [
+				"White"
+			],
+			"rarity": [
+				"Mythic Rare"
+			]
+		}
+	]
+},
+{
+	"name": "Zombie",
+	"sprite": "sprites/zombie.atlas",
+	"deck": "decks/zombie_bad.json",
+	"spawnRate": 0.2,
+	"difficulty": 0.1,
+	"speed": 20,
+	"life": 8,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 3,
+			"colors": [
+				"Mythic Black"
+			],
+			"rarity": [
+				"Rare"
+			]
+		}
+	]
+},
+{
+	"name": "Big Zombie",
+	"sprite": "sprites/zombie_2.atlas",
+	"deck": "decks/zombie_bad.json",
+	"spawnRate": 0.2,
+	"difficulty": 0.1,
+	"speed": 25,
+	"life": 14,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 3,
+			"colors": [
+				"Black"
+			],
+			"rarity": [
+				"Rare"
+			]
+		}
+	]
+},
+{
+	"name": "Zombie Lord",
+	"sprite": "sprites/lich.atlas",
+	"deck": "decks/zombie_good.json",
+	"spawnRate": 0.2,
+	"difficulty": 0.1,
+	"speed": 31,
+	"life": 19,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 3,
+			"colors": [
+				"Black"
+			],
+			"rarity": [
+				"Rare"
+			]
+		}
+	]
+},
+{
+	"name": "ClayGolem",
+	"sprite": "sprites/golem_2.atlas",
+	"deck": "decks/golem_good.json",
+	"spawnRate": 0.2,
+	"difficulty": 0.1,
+	"speed": 26,
+	"life": 8,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 3,
+			"rarity": [
+				"Rare"
+			],
+			"colorType": "Colorless"
+		}
+	]
+},
+{
+	"name": "Dino",
+	"sprite": "sprites/ancient.atlas",
+	"deck": "decks/dinosaurs.json",
+	"spawnRate": 0.2,
+	"difficulty": 0.1,
+	"speed": 15,
+	"life": 18,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 3,
+			"colors": [
+				"White",
+				"Red",
+				"Green"
+			],
+			"rarity": [
+				"Mythic Rare"
+			]
+		}
+	]
+},
+{
+	"name": "Snake",
+	"sprite": "sprites/big_snake.atlas",
+	"deck": "decks/snake.json",
+	"spawnRate": 0.2,
+	"difficulty": 0.1,
+	"speed": 23,
+	"life": 8,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 4,
+			"addMaxCount": 6
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	]
+},
+{
+	"name": "Hydra",
+	"sprite": "sprites/hydra.atlas",
+	"deck": "decks/hydra.json",
+	"spawnRate": 0.2,
+	"difficulty": 0.1,
+	"speed": 25,
+	"life": 12,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 3,
+			"colors": [
+				"Green"
+			],
+			"rarity": [
+				"Mythic Rare"
+			]
+		}
+	]
+},
+{
+	"name": "Cat",
+	"sprite": "sprites/lion.atlas",
+	"deck": "decks/cat.json",
+	"spawnRate": 0.2,
+	"difficulty": 0.1,
+	"speed": 32,
+	"life": 8,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 4,
+			"addMaxCount": 6
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	]
+},
+{
+	"name": "Minotaur",
+	"sprite": "sprites/minotaur.atlas",
+	"deck": "decks/minotaur.json",
+	"spawnRate": 0.2,
+	"difficulty": 0.1,
+	"speed": 30,
+	"life": 15,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 4,
+			"addMaxCount": 6
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	]
+},
+{
+	"name": "Knight",
+	"sprite": "sprites/paladin.atlas",
+	"deck": "decks/knight.json",
+	"spawnRate": 0.2,
+	"difficulty": 0.1,
+	"speed": 30,
+	"life": 16,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 2,
+			"colors": [
+				"White"
+			],
+			"rarity": [
+				"Mythic Rare"
+			]
+		}
+	]
+},
+{
+	"name": "Devil",
+	"sprite": "sprites/imp.atlas",
+	"deck": "decks/devil.json",
+	"spawnRate": 0.2,
+	"difficulty": 0.1,
+	"speed": 27,
+	"life": 14,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 4,
+			"addMaxCount": 6
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	]
+},
+{
+	"name": "Bear",
+	"sprite": "sprites/bear.atlas",
+	"deck": "decks/bear.json",
+	"spawnRate": 0.2,
+	"difficulty": 0.1,
+	"speed": 27,
+	"life": 12,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 4,
+			"addMaxCount": 6
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	]
+},
+{
+	"name": "Djinn",
+	"sprite": "sprites/djinn.atlas",
+	"deck": "decks/Djinni.json",
+	"spawnRate": 0.2,
+	"difficulty": 0.1,
+	"speed": 30,
+	"life": 14,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 4,
+			"addMaxCount": 6
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	]
+},
+{
+	"name": "Spider",
+	"sprite": "sprites/spider.atlas",
+	"deck": "decks/spider.json",
+	"spawnRate": 0.2,
+	"difficulty": 0.1,
+	"speed": 30,
+	"life": 14,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 4,
+			"addMaxCount": 6
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	]
+},
+{
+	"name": "Black Wiz1",
+	"sprite": "sprites/lich_2.atlas",
+	"deck": "decks/black_bad.json",
+	"spawnRate": 0.2,
+	"difficulty": 0.1,
+	"speed": 25,
+	"life": 10,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 4,
+			"addMaxCount": 6
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	]
+},
+{
+	"name": "Blue Wiz1",
+	"sprite": "sprites/mage.atlas",
+	"deck": "decks/blue_bad.json",
+	"spawnRate": 0.2,
+	"difficulty": 0.1,
+	"speed": 25,
+	"life": 10,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 4,
+			"addMaxCount": 6
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	]
+},
+{
+	"name": "Green Wiz1",
+	"sprite": "sprites/wizard_2.atlas",
+	"deck": "decks/green_bad.json",
+	"spawnRate": 0.2,
+	"difficulty": 0.1,
+	"speed": 25,
+	"life": 10,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 4,
+			"addMaxCount": 6
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	]
+},
+{
+	"name": "White Wiz1",
+	"sprite": "sprites/priest.atlas",
+	"deck": "decks/white_bad.json",
+	"spawnRate": 0.2,
+	"difficulty": 0.1,
+	"speed": 25,
+	"life": 10,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 4,
+			"addMaxCount": 6
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	]
+},
+{
+	"name": "White Wiz1",
+	"sprite": "sprites/enchanter.atlas",
+	"deck": "decks/red_bad.json",
+	"spawnRate": 0.2,
+	"difficulty": 0.1,
+	"speed": 25,
+	"life": 10,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 4,
+			"addMaxCount": 6
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	]
+},
+{
+	"name": "Demon",
+	"sprite": "sprites/demon_3.atlas",
+	"deck": "decks/demon.json",
+	"spawnRate": 0.2,
+	"difficulty": 0.1,
+	"speed": 23,
+	"life": 18,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 4,
+			"addMaxCount": 6
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	]
+},
+{
+	"name": "High Vampire",
+	"sprite": "sprites/vampire_2.atlas",
+	"deck": "decks/vampire.json",
+	"spawnRate": 0.2,
+	"difficulty": 0.1,
+	"speed": 30,
+	"life": 18,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 4,
+			"addMaxCount": 6
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	]
+}
+]
