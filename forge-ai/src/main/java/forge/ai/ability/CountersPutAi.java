@@ -787,7 +787,7 @@ public class CountersPutAi extends CountersAi {
             List<Player> playerList = Lists.newArrayList(Iterables.filter(
                     sa.getTargetRestrictions().getAllCandidates(sa, true, true), Player.class));
 
-            if (playerList.isEmpty() && mandatory) {
+            if (playerList.isEmpty()) {
                 return false;
             }
 
