@@ -3,7 +3,7 @@ ManaCost:2 B B
 Types:Creature Elemental Incarnation
 PT:3/2
 K:Menace
-K:Evoke:ExileFromHand<1/Card.Black+Other>
+K:Evoke:ExileFromHand<1/Card.Black+Other/black card>
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRemove | TriggerDescription$ When CARDNAME enters the battlefield, target opponent reveals their hand. You choose a nonland card from it. That player discards that card.
 SVar:TrigRemove:DB$ Discard | ValidTgts$ Opponent | NumCards$ 1 | Mode$ RevealYouChoose | DiscardValid$ Card.nonLand | SpellDescription$ Target opponent reveals their hand. You choose a nonland card from it. That player discards that card.
 Oracle:Menace\nWhen Grief enters the battlefield, target opponent reveals their hand. You choose a nonland card from it. That player discards that card.\nEvoke—Exile a black card from your hand.

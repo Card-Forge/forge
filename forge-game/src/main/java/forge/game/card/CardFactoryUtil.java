@@ -2844,9 +2844,9 @@ public class CardFactoryUtil {
             final SpellAbility newSA = sa.copyWithDefinedCost(evokedCost);
 
             final StringBuilder desc = new StringBuilder();
-            desc.append("Evoke ").append(evokedCost.toSimpleString()).append(" (");
-            desc.append(inst.getReminderText());
-            desc.append(")");
+            boolean onlyMana = evokedCost.isOnlyManaCost();
+            desc.append("Evoke").append(onlyMana ? " " : "—").append(evokedCost.toSimpleString());
+            desc.append(onlyMana ? "" : ".").append(" (").append(inst.getReminderText()).append(")");
 
             newSA.setDescription(desc.toString());
 
