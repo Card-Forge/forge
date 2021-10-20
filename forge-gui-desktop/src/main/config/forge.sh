@@ -46,7 +46,7 @@ then
     java --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.text=ALL-UNNAMED --add-opens java.desktop/java.awt.font=ALL-UNNAMED $SHAREDPARAMS
 elif [[ $v -ge 11 ]]
 then
-    java --illegal-access=permit -Xmx4096m -Dfile.encoding=UTF-8 -jar $SHAREDPARAMS
+    java --illegal-access=permit $SHAREDPARAMS
 else
-    java -Xmx4096m -Dfile.encoding=UTF-8 -jar $SHAREDPARAMS
+    java $SHAREDPARAMS
 fi
