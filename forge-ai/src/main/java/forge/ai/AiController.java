@@ -321,7 +321,7 @@ public class AiController {
             if (cons != null) {
                 String pres = cons.getIsPresent();
                 if (pres != null && pres.matches("Card\\.(Strictly)?Self")) {
-                        cons.setIsPresent(null);
+                    cons.setIsPresent(null);
                 }
             }
 
@@ -329,6 +329,10 @@ public class AiController {
             // These checks only work if the Executing SpellAbility is an Ability_Sub.
             if (exSA instanceof AbilitySub && !doTrigger(exSA, false)) {
                 // AI would not run this trigger if given the chance
+                if (api == null && card.isCreature() && exSA.usesTargeting() && !exSA.getTargetRestrictions().hasCandidates(exSA) && ComputerUtil.aiLifeInDanger(activatingPlayer, true, 0)) {
+                    // trigger will not run due to lack of targets and we desperately need a creature
+                    continue;
+                }
                 return false;
             }
         }

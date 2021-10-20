@@ -3015,6 +3015,7 @@ public class ComputerUtil {
     // call this to determine if it's safe to use a life payment spell
     // or trigger "emergency" strategies such as holding mana for Spike Weaver of Counterspell.
     public static boolean aiLifeInDanger(Player ai, boolean serious, int payment) {
+        // TODO should also consider them as teams
         for (Player opponent: ai.getOpponents()) {
             // test whether the human can kill the ai next turn
             Combat combat = new Combat(opponent);
@@ -3035,10 +3036,10 @@ public class ComputerUtil {
             // examples : Black Vise, The Rack, known direct damage spells in enemy hand, etc
             // If added, might need a parameter to define whether we want to check all threats or combat threats.
 
-            if ((serious) && (ComputerUtilCombat.lifeInSeriousDanger(ai, combat, payment))) {
+            if (serious && ComputerUtilCombat.lifeInSeriousDanger(ai, combat, payment)) {
                 return true;
             }
-            if ((!serious) && (ComputerUtilCombat.lifeInDanger(ai, combat, payment))) {
+            if (!serious && ComputerUtilCombat.lifeInDanger(ai, combat, payment)) {
                 return true;
             }
         }
