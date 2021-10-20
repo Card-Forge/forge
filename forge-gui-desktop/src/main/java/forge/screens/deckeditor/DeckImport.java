@@ -758,7 +758,8 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
             // Card Warning Msgs
             case UNKNOWN_CARD:
             case UNSUPPORTED_CARD:
-                return String.format("%s x %s", token.getQuantity(), token.getText());
+                return token.getQuantity() > 0 ? String.format("%s x %s", token.getQuantity(), token.getText())
+                        : token.getText();
 
             case UNSUPPORTED_DECK_SECTION:
                 return String.format("%s: %s", Localizer.getInstance().getMessage("lblWarningMsgPrefix"),
@@ -784,12 +785,13 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
             case CARD_CMC:
             case MANA_COLOUR:
             case COMMENT:
-            case UNKNOWN_TEXT:
                 return token.getText();
 
             case DECK_NAME:
                 return String.format("%s: %s", Localizer.getInstance().getMessage("lblDeckName"),
                         token.getText());
+
+            case UNKNOWN_TEXT:
             default:
                 return null;
 
@@ -815,8 +817,6 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
             case UNSUPPORTED_CARD:
                 return Localizer.getInstance().getMessage("lblErrUnsupportedCard", this.currentGameType);
 
-            case UNKNOWN_TEXT:
-                return Localizer.getInstance().getMessage("lblWarnUnknownTxtMsg");
             case UNKNOWN_CARD:
                 return String.format("%s: %s", Localizer.getInstance().getMessage("lblWarningMsgPrefix"),
                         Localizer.getInstance().getMessage("lblWarnUnknownCardMsg"));
@@ -831,6 +831,7 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
             case CARD_RARITY:
             case DECK_NAME:
             case LEGAL_CARD:
+            case UNKNOWN_TEXT:
             default:
                 return null;
 
@@ -848,10 +849,10 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
             case CARD_FROM_INVALID_SET:
             case UNSUPPORTED_CARD:
                 return KO_NOIMPORT_CLASS;
-            case UNKNOWN_CARD:
             case UNSUPPORTED_DECK_SECTION:
             case WARNING_MESSAGE:
-            case UNKNOWN_TEXT:
+            case UNKNOWN_CARD:
+                return WARN_MSG_CLASS;
             case COMMENT:
                 return COMMENT_CLASS;
             case DECK_NAME:
@@ -865,6 +866,7 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
             case CARD_CMC:
             case MANA_COLOUR:
                 return CMC_CLASS;
+            case UNKNOWN_TEXT:
             default:
                 return "";
         }

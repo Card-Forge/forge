@@ -584,7 +584,7 @@ public class DeckRecognizer {
 
     public Token recogniseCardToken(final String text, final DeckSection currentDeckSection) {
         String line = text.trim();
-        Token uknonwnCardToken = null;
+        Token unknownCardToken = null;
         StaticData data = StaticData.instance();
         List<Matcher> cardMatchers = getRegExMatchers(line);
         for (Matcher matcher : cardMatchers) {
@@ -596,10 +596,7 @@ public class DeckRecognizer {
             if (!data.isMTGCard(cardName)){
                 // check the case for double-sided cards
                 cardName = checkDoubleSidedCard(cardName);
-                if (cardName == null)
-                    continue;
             }
-
             String ccount = getRexGroup(matcher, REGRP_CARDNO);
             String setCode = getRexGroup(matcher, REGRP_SET);
             String collNo = getRexGroup(matcher, REGRP_COLLNR);
@@ -607,6 +604,14 @@ public class DeckRecognizer {
             String deckSecFromCardLine = getRexGroup(matcher, REGRP_DECK_SEC_XMAGE_STYLE);
             boolean isFoil = foilGr != null;
             int cardCount = ccount != null ? Integer.parseInt(ccount) : 1;
+
+            if (cardName == null){
+                if (ccount != null)
+                    // setting cardCount to zero as the text is the whole line
+                    unknownCardToken = Token.UnknownCard(text, null, 0);
+                continue;
+            }
+
             // if any, it will be tried to convert specific collector number to art index (useful for lands).
             String collectorNumber = collNo != null ? collNo : IPaperCard.NO_COLLECTOR_NUMBER;
             int artIndex;
@@ -620,7 +625,7 @@ public class DeckRecognizer {
                 CardEdition edition = StaticData.instance().getEditions().get(setCode);
                 if (edition == null) {
                     // set the case for unknown card (in case) and continue to the next for any better matching
-                    uknonwnCardToken = Token.UnknownCard(cardName, setCode, cardCount);
+                    unknownCardToken = Token.UnknownCard(cardName, setCode, cardCount);
                     continue;
                 }
 
@@ -652,7 +657,7 @@ public class DeckRecognizer {
                 return checkAndSetCardToken(pc, edition, cardCount, deckSecFromCardLine, currentDeckSection);
             }
         }
-        return uknonwnCardToken;  // either null or unknown card
+        return unknownCardToken;  // either null or unknown card
     }
 
     private String checkDoubleSidedCard(final String cardName){
