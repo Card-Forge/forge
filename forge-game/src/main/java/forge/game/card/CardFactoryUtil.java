@@ -2239,16 +2239,7 @@ public class CardFactoryUtil {
                 }
             }
 
-            sb.append(" (");
-            if (host.hasStartOfKeyword("AlternateAdditionalCost")
-                    || !host.getFirstSpellAbility().getPayCosts().isOnlyManaCost()) {
-                String reminder = inst.getReminderText();
-                sb.append(reminder, 0, 65).append(" and any additional costs");
-                sb.append(reminder, 65, 81);
-            } else {
-                sb.append(inst.getReminderText());
-            }
-            sb.append(")");
+            sb.append(" (").append(inst.getReminderText()).append(")");
 
             String repeffstr = sb.toString();
 
