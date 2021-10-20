@@ -2486,8 +2486,63 @@ public class DeckRecognizerTest extends ForgeCardMockTestCase {
     }
 
     /*=================================
-     * TEST BANNED
+     * TEST UNKNOWN CARDS
      * ================================ */
+
+    @Test void testUknonwCardIsReturnedForAnExistingCardFromTheWrongSet(){
+        String cardRequest = "Counterspell FEM";
+        DeckRecognizer recognizer = new DeckRecognizer();
+        Token unknonwCardToken = recognizer.recogniseCardToken(cardRequest, null);
+        assertNotNull(unknonwCardToken);
+        assertEquals(unknonwCardToken.getType(), TokenType.UNKNOWN_CARD);
+        assertNull(unknonwCardToken.getCard());
+        assertNull(unknonwCardToken.getTokenSection());
+    }
+
+    @Test void testUknownCardIsReturnedForLineRequestsThatLooksLikeACardButAreNotSupported(){
+        String cardRequest = "2x Counterspelling TMP";
+        DeckRecognizer recognizer = new DeckRecognizer();
+        Token unknonwCardToken = recognizer.recogniseCardToken(cardRequest, null);
+        assertNotNull(unknonwCardToken);
+        assertEquals(unknonwCardToken.getType(), TokenType.UNKNOWN_CARD);
+        assertNull(unknonwCardToken.getCard());
+        assertNull(unknonwCardToken.getTokenSection());
+
+        cardRequest = "2x Counterspelling";
+        unknonwCardToken = recognizer.recogniseCardToken(cardRequest, null);
+        assertNotNull(unknonwCardToken);
+        assertEquals(unknonwCardToken.getType(), TokenType.UNKNOWN_CARD);
+        assertNull(unknonwCardToken.getCard());
+        assertNull(unknonwCardToken.getTokenSection());
+
+        cardRequest = "2x Counterspell FEM ";
+        unknonwCardToken = recognizer.recogniseCardToken(cardRequest, null);
+        assertNotNull(unknonwCardToken);
+        assertEquals(unknonwCardToken.getType(), TokenType.UNKNOWN_CARD);
+        assertNull(unknonwCardToken.getCard());
+        assertNull(unknonwCardToken.getTokenSection());
+
+        cardRequest = "SB: 2x Counterspelling TMP";  // adding deck section reference
+        unknonwCardToken = recognizer.recogniseCardToken(cardRequest, null);
+        assertNotNull(unknonwCardToken);
+        assertEquals(unknonwCardToken.getType(), TokenType.UNKNOWN_CARD);
+        assertNull(unknonwCardToken.getCard());
+        assertNull(unknonwCardToken.getTokenSection());
+
+        cardRequest = "SB: 2x Counterspelling TMP (F)";  // adding deck section reference
+        unknonwCardToken = recognizer.recogniseCardToken(cardRequest, null);
+        assertNotNull(unknonwCardToken);
+        assertEquals(unknonwCardToken.getType(), TokenType.UNKNOWN_CARD);
+        assertNull(unknonwCardToken.getCard());
+        assertNull(unknonwCardToken.getTokenSection());
+
+        cardRequest = "SB: 2x Counterspelling+ TMP";  // adding deck section reference
+        unknonwCardToken = recognizer.recogniseCardToken(cardRequest, null);
+        assertNotNull(unknonwCardToken);
+        assertEquals(unknonwCardToken.getType(), TokenType.UNKNOWN_CARD);
+        assertNull(unknonwCardToken.getCard());
+        assertNull(unknonwCardToken.getTokenSection());
+    }
 
     /*===============
      * TEST TOKEN-KEY
