@@ -134,6 +134,8 @@ public class ChooseTypeAi extends SpellAbilityAi {
                 } else {
                     if (!alliesList.isEmpty()) {
                         sa.getTargets().add(Iterables.getFirst(alliesList, null));
+                    } else if (!oppList.isEmpty() && mandatory) {
+                        sa.getTargets().add(Iterables.getFirst(oppList, null));
                     }
                 }
             }
