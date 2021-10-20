@@ -1,8 +1,5 @@
 package forge.assets;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
@@ -10,7 +7,6 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
-
 import forge.Forge;
 import forge.assets.FSkinImage.SourceFile;
 import forge.card.CardFaceSymbols;
@@ -25,6 +21,9 @@ import forge.screens.LoadingOverlay;
 import forge.screens.SplashScreen;
 import forge.toolbox.FProgressBar;
 import forge.util.WordUtil;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class FSkin {
     private static final Map<FSkinProp, FSkinImage> images = new HashMap<>(512);
@@ -83,7 +82,10 @@ public class FSkin {
             }
         });
     }
-
+    public static void loadLight(String skinName, final SplashScreen splashScreen,FileHandle prefDir) {
+        preferredDir = prefDir;
+        loadLight(skinName,splashScreen);
+    }
     /*
      * Loads a "light" version of FSkin, just enough for the splash screen:
      * skin name. Generates custom skin settings, fonts, and backgrounds.
@@ -101,29 +103,33 @@ public class FSkin {
 
         //ensure skins directory exists
         final FileHandle dir = Gdx.files.absolute(ForgeConstants.CACHE_SKINS_DIR);
-        if (!dir.exists() || !dir.isDirectory()) {
-            //if skins directory doesn't exist, point to internal assets/skin directory instead for the sake of the splash screen
-            preferredDir = Gdx.files.internal("fallback_skin");
-        }
-        else {
-            if (splashScreen != null) {
-                if (allSkins == null) { //initialize
-                    allSkins = new Array<>();
-                    allSkins.add("Default"); //init default
-                    final Array<String> skinDirectoryNames = getSkinDirectoryNames();
-                    for (final String skinDirectoryName : skinDirectoryNames) {
-                        allSkins.add(WordUtil.capitalize(skinDirectoryName.replace('_', ' ')));
+        if(preferredDir==null)
+        {
+            if (!dir.exists() || !dir.isDirectory()) {
+                //if skins directory doesn't exist, point to internal assets/skin directory instead for the sake of the splash screen
+                preferredDir = Gdx.files.internal("fallback_skin");
+            }
+            else {
+                if (splashScreen != null) {
+                    if (allSkins == null) { //initialize
+                        allSkins = new Array<>();
+                        allSkins.add("Default"); //init default
+                        final Array<String> skinDirectoryNames = getSkinDirectoryNames();
+                        for (final String skinDirectoryName : skinDirectoryNames) {
+                            allSkins.add(WordUtil.capitalize(skinDirectoryName.replace('_', ' ')));
+                        }
+                        allSkins.sort();
                     }
-                    allSkins.sort();
+                }
+
+                // Non-default (preferred) skin name and dir.
+                preferredDir = Gdx.files.absolute(preferredName.equals("default") ? ForgeConstants.BASE_SKINS_DIR + preferredName : ForgeConstants.CACHE_SKINS_DIR + preferredName);
+                if (!preferredDir.exists() || !preferredDir.isDirectory()) {
+                    preferredDir.mkdirs();
                 }
             }
-
-            // Non-default (preferred) skin name and dir.
-            preferredDir = Gdx.files.absolute(preferredName.equals("default") ? ForgeConstants.BASE_SKINS_DIR + preferredName : ForgeConstants.CACHE_SKINS_DIR + preferredName);
-            if (!preferredDir.exists() || !preferredDir.isDirectory()) {
-                preferredDir.mkdirs();
-            }
         }
+
 
         FSkinTexture.BG_TEXTURE.load(); //load background texture early for splash screen
 

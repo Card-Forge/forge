@@ -1,0 +1,85 @@
+{
+    "width": 480,
+    "height": 270, 
+    "yDown": true, 
+    "elements":[     
+    {
+         "type" : "Image",      
+          "width": 64,
+          "height": 206,      
+          "image":"ui/hud.png",
+          "x": 416,
+          "y": 64 
+    }  ,    
+    {
+         "type" : "Image",     
+         "name" : "map" , 
+          "width": 64,
+          "height": 64,      
+          "x": 416, 
+          "y": 0 
+    }  ,                    
+    {
+         "type" : "Image",     
+         "image" : "ui/minimap.png" , 
+          "width": 64,
+          "height": 64,      
+          "x": 416, 
+          "y": 0 
+    }  ,
+    {
+         "type" : "Image",     
+         "name" : "avatar" ,              
+          "width": 32,
+          "height": 32,      
+          "x": 432, 
+          "y": 80 
+    } ,
+    {
+         "type" : "Image",     
+         "image" : "ui/avatarhud.png" ,              
+          "width": 32,
+          "height": 32,      
+          "x": 432, 
+          "y": 80 
+    } ,
+    {
+         "type" : "Label",     
+         "name" : "lifePoints" ,        
+         "font" : "default" ,     
+          "width": 64,
+          "height": 16,      
+          "x": 448, 
+          "y": 128 
+    } ,
+    {
+         "type" : "Label",     
+         "name" : "money" ,          
+         "font" : "default" ,     
+          "width": 64,
+          "height": 16,      
+          "x": 448, 
+          "y": 144 
+    } ,
+    {
+         "type" : "TextButton",     
+         "name" : "deck" ,             
+         "text" : "Deck",
+          "width": 32,
+          "height": 32,      
+          "x": 432, 
+          "y": 176 
+    } ,
+    {
+         "type" : "TextButton",     
+         "name" : "menu" ,             
+         "text" : "Menu",
+          "width": 32,
+          "height": 32,      
+          "x": 432, 
+          "y": 224 
+    }  
+    ]
+
+
+}

@@ -1,0 +1,123 @@
+
+buildings.png
+size: 448,800
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none               
+IslandTown 
+  xy: 144, 0
+  size: 48, 48       
+MountainTown 
+  xy: 48, 0
+  size: 48, 48       
+SwampTown 
+  xy: 0, 0
+  size: 48, 48   
+ForestTown 
+  xy: 352, 496
+  size: 32, 32        
+ForestTown 
+  xy: 384, 496
+  size: 32, 32         
+ForestTown 
+  xy: 416, 496
+  size: 32, 32   
+PlainsTown 
+  xy: 96, 0
+  size: 48, 48      
+WasteTown 
+  xy: 272, 128
+  size: 48, 48      
+WasteTown 
+  xy: 320, 128
+  size: 48, 48      
+Gate 
+  xy: 384, 128
+  size: 64, 48              
+Monestory 
+  xy: 384, 592
+  size: 64, 64      
+Castle 
+  xy: 0, 464
+  size: 64, 64      
+Castle 
+  xy: 64, 464
+  size: 64, 64     
+Graveyard           
+  xy: 368, 96
+  size: 48, 32     
+InstantShop
+  xy: 304, 704
+  size: 16, 16       
+CreatureShop
+  xy: 320, 704
+  size: 16, 16        
+GreenShop
+  xy: 336, 704
+  size: 16, 16
+RedShop
+  xy: 352, 704
+  size: 16, 16    
+WhiteShop
+  xy: 369, 704
+  size: 16, 16 
+LandShop
+  xy: 304, 720
+  size: 16, 16       
+ColorlessShop
+  xy: 320, 720
+  size: 16, 16        
+BlackShop
+  xy: 336, 720
+  size: 16, 16
+BlueShop
+  xy: 352, 720
+  size: 16, 16    
+MultiColorShop
+  xy: 369, 720
+  size: 16, 16
+SelesnyaShop
+  xy: 304, 736
+  size: 16, 16       
+AzoriusShop
+  xy: 320, 736
+  size: 16, 16        
+DimirShop
+  xy: 336, 736
+  size: 16, 16
+RakdosShop
+  xy: 352, 736
+  size: 16, 16    
+GruulShop
+  xy: 369, 736
+  size: 16, 16 
+SimicShop
+  xy: 304, 752
+  size: 16, 16       
+OrzhovShop
+  xy: 320, 752
+  size: 16, 16        
+IzzetShop
+  xy: 336, 752
+  size: 16, 16
+GolgariShop
+  xy: 352, 752
+  size: 16, 16    
+BorosShop
+  xy: 369, 752
+  size: 16, 16
+GoblinShop
+  xy: 304, 768
+  size: 16, 16       
+ZombieShop
+  xy: 320, 768
+  size: 16, 16        
+HumanShop
+  xy: 336, 768
+  size: 16, 16
+ElfShop
+  xy: 352, 768
+  size: 16, 16    
+MerfolkShop
+  xy: 369, 768
+  size: 16, 16     

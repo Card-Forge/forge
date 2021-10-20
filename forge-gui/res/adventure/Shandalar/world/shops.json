@@ -1,0 +1,292 @@
+[{                                      
+"name":"Instant",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"InstantShop",
+  "rewards": [
+    {
+      "count":8,
+      "cardTypes": ["Instant","Sorcery"]
+    }]
+
+},{                                    
+"name":"Creature",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"CreatureShop",
+  "rewards": [
+    {
+      "count":8,
+      "cardTypes": ["Creature"]
+    }]
+},{                                    
+"name":"Land",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"LandShop",
+  "rewards": [
+    {
+      "count":8,
+      "cardTypes": ["Land"]
+    }]
+},{                                    
+"name":"Colorless",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"ColorlessShop",
+  "rewards": [
+    {
+      "count":8,
+      "colorType": "Colorless"
+    }]
+},{                                    
+"name":"Multicolor",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"MultiColorShop",
+  "rewards": [
+    {
+      "count":8,
+      "colorType": "MultiColor"
+    }]
+},{                                    
+"name":"Green",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"GreenShop",
+  "rewards": [
+    {
+      "count":8,
+      "colors": ["green"]
+    }]
+},{                                    
+"name":"Red",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RedShop",
+  "rewards": [
+    {
+      "count":8,
+      "colors": ["red"]
+    }]
+},{                                    
+"name":"Black",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"BlackShop",
+  "rewards": [
+    {
+      "count":8,
+      "colors": ["black"]
+    }]
+},{                                    
+"name":"White",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"WhiteShop",
+  "rewards": [
+    {
+      "count":8,
+      "colors": ["white"]
+    }]
+},{                                    
+"name":"Blue",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"BlueShop",
+  "rewards": [
+    {
+      "count":8,
+      "colors": ["blue"]
+    }]
+} ,{                                    
+"name":"Azorius",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"AzoriusShop",
+  "rewards": [
+    {
+      "count":8,
+      "colors": ["white","blue"]
+    },
+    {
+      "count":4,
+      "colors": ["white","blue"],
+      "colorType": "MultiColor"
+    }]
+}   ,{                                    
+"name":"Azorius",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"AzoriusShop",
+  "rewards": [
+    {
+      "count":8,
+      "colors": ["white","blue"]
+    },
+    {
+      "count":4,
+      "colors": ["white","blue"],
+      "colorType": "MultiColor"
+    }]
+},{                                    
+"name":"Dimir",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"DimirShop",
+  "rewards": [
+    {
+      "count":4,
+      "colors": ["black","blue"]
+    },
+    {
+      "count":4,
+      "colors": ["black","blue"],
+      "colorType": "MultiColor"
+    }]
+},{                                    
+"name":"Rakdos",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RakdosShop",
+  "rewards": [
+    {
+      "count":4,
+      "colors": ["black","red"]
+    },
+    {
+      "count":4,
+      "colors": ["black","red"],
+      "colorType": "MultiColor"
+    }]
+},{                                    
+"name":"Gruul",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"GruulShop",
+  "rewards": [
+    {
+      "count":4,
+      "colors": ["red","green"]
+    },
+    {
+      "count":4,
+      "colors": ["red","green"],
+      "colorType": "MultiColor"
+    }]
+},{                                    
+"name":"Selesnya",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"SelesnyaShop",
+  "rewards": [
+    {
+      "count":4,
+      "colors": ["green","white"]
+    },
+    {
+      "count":4,
+      "colors": ["green","white"],
+      "colorType": "MultiColor"
+    }]
+},{                                    
+"name":"Orzhov",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"OrzhovShop",
+  "rewards": [
+    {
+      "count":4,
+      "colors": ["black","white"]
+    },
+    {
+      "count":4,
+      "colors": ["black","white"],
+      "colorType": "MultiColor"
+    }]
+},{                                    
+"name":"Izzet",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"IzzetShop",
+  "rewards": [
+    {
+      "count":4,
+      "colors": ["red","blue"]
+    },
+    {
+      "count":4,
+      "colors": ["red","blue"],
+      "colorType": "MultiColor"
+    }]
+}  ,{                                    
+"name":"Golgari",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"GolgariShop",
+  "rewards": [
+    {
+      "count":4,
+      "colors": ["black","green"]
+    },
+    {
+      "count":4,
+      "colors": ["black","green"],
+      "colorType": "MultiColor"
+    }]
+},{                                    
+"name":"Boros",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"BorosShop",
+  "rewards": [
+    {
+      "count":4,
+      "colors": ["red","white"]
+    },
+    {
+      "count":4,
+      "colors": ["red","white"],
+      "colorType": "MultiColor"
+    }]
+},{                                    
+"name":"Simic",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"SimicShop",
+  "rewards": [
+    {
+      "count":4,
+      "colors": ["black","white"]
+    },
+    {
+      "count":4,
+      "colors": ["black","white"],
+      "colorType": "MultiColor"
+    }]
+},{                                    
+"name":"Goblin",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"GoblinShop",
+  "rewards": [
+    {
+      "count":8,
+      "subTypes": ["Goblin"]
+    }]
+} ,{                                    
+"name":"Elf",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"ElfShop",
+  "rewards": [
+    {
+      "count":8,
+      "subTypes": ["Elf"]
+    }]
+},{                                    
+"name":"Merfolk",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"MerfolkShop",
+  "rewards": [
+    {
+      "count":8,
+      "subTypes": ["Merfolk"]
+    }]
+},{                                    
+"name":"Zombie",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"ZombieShop",
+  "rewards": [
+    {
+      "count":8,
+      "subTypes": ["Zombie"]
+    }]
+},{                                    
+"name":"Human",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"HumanShop",
+  "rewards": [
+    {
+      "count":8,
+      "subTypes": ["Human"]
+    }]
+}
+]   
