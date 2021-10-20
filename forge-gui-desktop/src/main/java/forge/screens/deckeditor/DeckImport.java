@@ -551,7 +551,6 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
     }
 
     private void activateCardPreview(HyperlinkEvent e) {
-        // FIXME: Card Status
         if(e.getEventType() == HyperlinkEvent.EventType.ENTERED ||
            e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
             String keyString = e.getDescription();
@@ -785,13 +784,12 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
             case CARD_CMC:
             case MANA_COLOUR:
             case COMMENT:
+            case UNKNOWN_TEXT:
                 return token.getText();
 
             case DECK_NAME:
                 return String.format("%s: %s", Localizer.getInstance().getMessage("lblDeckName"),
                         token.getText());
-
-            case UNKNOWN_TEXT:
             default:
                 return null;
 
@@ -817,6 +815,8 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
             case UNSUPPORTED_CARD:
                 return Localizer.getInstance().getMessage("lblErrUnsupportedCard", this.currentGameType);
 
+            case UNKNOWN_TEXT:
+                return Localizer.getInstance().getMessage("lblWarnUnknownTxtMsg");
             case UNKNOWN_CARD:
                 return String.format("%s: %s", Localizer.getInstance().getMessage("lblWarningMsgPrefix"),
                         Localizer.getInstance().getMessage("lblWarnUnknownCardMsg"));
@@ -851,7 +851,6 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
             case UNKNOWN_CARD:
             case UNSUPPORTED_DECK_SECTION:
             case WARNING_MESSAGE:
-                return WARN_MSG_CLASS;
             case UNKNOWN_TEXT:
             case COMMENT:
                 return COMMENT_CLASS;

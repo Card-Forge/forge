@@ -551,11 +551,15 @@ public class DeckRecognizer {
         if (StringUtils.startsWith(line, ASTERISK))  // markdown lists (tappedout md export)
             line = line.substring(2);
 
+        // == Patches to Corner Cases
         // FIX Commander in Deckstats export
         if (line.endsWith("#!Commander")) {
             line = line.replaceAll("#!Commander", "");
             line = String.format("CM:%s", line.trim());
         }
+        // Conspiracy section in .dec files - force to make it recognise as a placeholder
+        else if (line.trim().equals("[Conspiracy]"))
+            line = String.format("/ %s", line);
 
         Token result = recogniseCardToken(line, referenceSection);
         if (result == null)
