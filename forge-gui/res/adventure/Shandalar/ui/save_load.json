@@ -1,0 +1,51 @@
+{
+    "width": 480,
+    "height": 270, 
+    "yDown": true, 
+    "elements":[     
+    {
+      "type" : "Image",      
+      "image":"ui/title_bg.png",
+      "width": 480,
+      "height": 270
+    }    ,
+            
+    {
+      "type" : "Image",                
+      "name": "preview",
+      "x": 364, 
+      "y": 10 ,
+      "width": 96,
+      "height": 54
+    } ,
+            
+    {
+      "type" : "Scroll",                
+      "name": "saveSlots",
+      "x": 10, 
+      "y": 10 ,
+      "width": 344,
+      "height": 235
+    } ,
+    {
+         "type" : "TextButton",     
+         "name" : "return" ,             
+         "text" : "Back" ,       
+         "width": 48,
+          "height": 16,     
+          "x": 15, 
+          "y": 250 
+    }         ,
+    {
+         "type" : "TextButton",     
+         "name" : "save" ,             
+         "text" : "saveLoad" ,       
+         "width": 48,
+          "height": 16,     
+          "x": 115, 
+          "y": 250 
+    }   
+    ]
+
+
+}

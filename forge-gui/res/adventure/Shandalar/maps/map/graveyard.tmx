@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="55">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzFlMENgzAQBO8Dwf4SqACJwpIWMKIYKAYJWiChGGAt64SF+GbzmPdo97x2RsSBFnQ/5JWKzMmJI3nVvaV8r2e65C2tyDfjeXfklgcvs3p7OAewImth+T0zstbwjZGXldW/5yryst6yut/gaTlZlQXdfgi7udKY0DHbm9vQMdv7D/S2jH/x7rZ+P0y/3tbvh71f5QAgzAZ0
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzNlcsNAiEQhucAHLQDtQfXYqyCpS/twNgD2ozxLCRMMhkG5OFBkj/ZhIVvHj8A8B/jpgD2BR2CFqJd5V+qu/rOPevynA/rH0RbA3Ca3HOEG/Vk3KPKY+nhSuttmFuDLkbOOa7ZmDyWHq6v1FGq95KY1yDHYu/h2pQXzwf35/WOvFgLRxg+9aG3v5wt9bfU5xkuZ0t5/ppLfSX5qcXX6LFZX9kKm3KRiR4b9RXeT6Ue4/7cdxjLiK9WUuNSj+k54rGMcOmgPcYzQ7+56HmavSeR73T+PbNnHC/d9rbU3i2udwO3NfaWHGrjA/ohbZA=
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxT42FgUAdiQkAaqEYGC5YlQi82cASo7ygJ9kbzMjDsAtJRvJTZSyyQRvJflCAqn5rAkBO7vXuBuJ4bt70h7Ai2EZoZTbzE2a3BiGDv5IGELwjv5kHwd9M4nGGgDYmuFGBgqBKA0NhArAAEDxdQKYDwMzqoIzIuiQVtaPRAAHz+pTaoQQs/9PxGK0BKeiYGEJunBxsglH4p9RdyONcO0TAaCAAAOvwetg==
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../obj/entry_up.tx" x="208" y="272"/>
+  <object id="49" template="../obj/entry_down.tx" x="209" y="48">
+   <properties>
+    <property name="teleport" value="maps/map/crypt.tmx"/>
+   </properties>
+  </object>
+  <object id="52" template="../obj/enemy.tx" x="215" y="80">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="53" template="../obj/enemy.tx" x="120" y="104">
+   <properties>
+    <property name="enemy" value="Skeleton"/>
+   </properties>
+  </object>
+  <object id="54" template="../obj/gold.tx" x="120" y="101"/>
+ </objectgroup>
+</map>
