@@ -37,8 +37,8 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
         Card source = sa.getHostCard();
         final boolean rememberRevealed = sa.hasParam("RememberRevealed");
         final boolean imprintRevealed = sa.hasParam("ImprintRevealed");
-        String revealValid = sa.hasParam("RevealValid") ? sa.getParam("RevealValid") : "Card";
-        String peekAmount = sa.hasParam("PeekAmount") ? sa.getParam("PeekAmount") : "1";
+        String revealValid = sa.getParamOrDefault("RevealValid", "Card");
+        String peekAmount = sa.getParamOrDefault("PeekAmount", "1");
         int numPeek = AbilityUtils.calculateAmount(sa.getHostCard(), peekAmount, sa);
         
         // Right now, this is only used on your own library.

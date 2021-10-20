@@ -31,12 +31,8 @@ public class MultiplePilesEffect extends SpellAbilityEffect {
         final StringBuilder sb = new StringBuilder();
 
         final List<Player> tgtPlayers = getTargetPlayers(sa);
-
-        String valid = "";
         String piles = sa.getParam("Piles");
-        if (sa.hasParam("ValidCards")) {
-            valid = sa.getParam("ValidCards");
-        }
+        final String valid = sa.getParamOrDefault("ValidCards", "");
 
         sb.append("Separate all ").append(valid).append(" cards ");
 
@@ -58,10 +54,7 @@ public class MultiplePilesEffect extends SpellAbilityEffect {
         final int piles = Integer.parseInt(sa.getParam("Piles"));
         final Map<Player, List<CardCollectionView>> record = Maps.newHashMap();
 
-        String valid = "";
-        if (sa.hasParam("ValidCards")) {
-            valid = sa.getParam("ValidCards");
-        }
+        final String valid = sa.getParamOrDefault("ValidCards", "");
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final List<Player> tgtPlayers = getTargetPlayers(sa);

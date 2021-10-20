@@ -37,7 +37,7 @@ public class CountersPutAllAi extends SpellAbilityAi {
         final boolean curse = sa.isCurse();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
-        if ("OwnCreatsAndOtherPWs".equals(sa.getParam("AILogic"))) {
+        if ("OwnCreatsAndOtherPWs".equals(logic)) {
             hList = CardLists.getValidCards(ai.getWeakestOpponent().getCardsIn(ZoneType.Battlefield), "Creature.YouCtrl,Planeswalker.YouCtrl+Other", source.getController(), source, sa);
             cList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), "Creature.YouCtrl,Planeswalker.YouCtrl+Other", source.getController(), source, sa);
         } else {

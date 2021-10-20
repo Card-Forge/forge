@@ -27,7 +27,7 @@ public class ManifestEffect extends SpellAbilityEffect {
         final int amount = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(source,
                 sa.getParam("Amount"), sa) : 1;
         // Most commonly "defined" is Top of Library
-        final String defined = sa.hasParam("Defined") ? sa.getParam("Defined") : "TopOfLibrary";
+        final String defined = sa.getParamOrDefault("Defined", "TopOfLibrary");
 
         CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
         CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();

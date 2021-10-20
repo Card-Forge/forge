@@ -82,10 +82,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
         }
 
         // Deal with permanents
-        String valid = "";
-        if (sa.hasParam("ValidCards")) {
-            valid = sa.getParam("ValidCards");
-        }
+        final String valid = sa.getParamOrDefault("ValidCards", "");
         if (!valid.equals("")) {
             CardCollectionView list = game.getCardsIn(ZoneType.Battlefield);
             list = CardLists.getValidCards(list, valid, sa.getActivatingPlayer(), host, sa);
@@ -113,10 +110,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
         }
 
         // Deal with Players
-        String players = "";
-        if (sa.hasParam("ValidPlayers")) {
-            players = sa.getParam("ValidPlayers");
-        }
+        final String players = sa.getParamOrDefault("ValidPlayers", "");
         if (!players.equals("")) {
             final List<Player> playerList = AbilityUtils.getDefinedPlayers(host, players, sa);
             for (final Player player : playerList) {

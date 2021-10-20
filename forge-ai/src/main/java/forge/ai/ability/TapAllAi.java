@@ -34,10 +34,7 @@ public class TapAllAi extends SpellAbilityAi {
             return false;
         }
 
-        String valid = "";
-        if (sa.hasParam("ValidCards")) {
-            valid = sa.getParam("ValidCards");
-        }
+        final String valid = sa.getParamOrDefault("ValidCards", "");
 
         CardCollectionView validTappables = game.getCardsIn(ZoneType.Battlefield);
 
@@ -99,10 +96,7 @@ public class TapAllAi extends SpellAbilityAi {
     protected boolean doTriggerAINoCost(final Player ai, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getHostCard();
 
-        String valid = "";
-        if (sa.hasParam("ValidCards")) {
-            valid = sa.getParam("ValidCards");
-        }
+        final String valid = sa.getParamOrDefault("ValidCards", "");
 
         CardCollectionView validTappables = getTapAllTargets(valid, source, sa);
 
