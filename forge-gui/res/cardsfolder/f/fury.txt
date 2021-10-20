@@ -3,7 +3,7 @@ ManaCost:3 R R
 Types:Creature Elemental Incarnation
 PT:3/3
 K:Double Strike
-K:Evoke:ExileFromHand<1/Card.Red+Other>
+K:Evoke:ExileFromHand<1/Card.Red+Other/red card>
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 4 damage divided as you choose among any number of target creatures and/or planeswalkers.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker to distribute damage to | NumDmg$ 4 | TargetMin$ 1 | TargetMax$ 4 | DividedAsYouChoose$ 4
 Oracle:Double strike\nWhen Fury enters the battlefield, it deals 4 damage divided as you choose among any number of target creatures and/or planeswalkers.\nEvoke—Exile a red card from your hand.
