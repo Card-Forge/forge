@@ -2226,12 +2226,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public String getAbilityText(final CardState state) {
         final String linebreak = "\r\n\r\n";
-        final String grayTag = "<span style=\"color:gray;\">";
-        final String endTag = "</span>";
         boolean useGrayTag = true;
-        if (getGame() != null && getController() != null && game.getAge() != GameStage.Play) {
+        if (getGame() != null) {
             useGrayTag = game.getRules().useGrayText();
         }
+        final String grayTag = useGrayTag ? "<span style=\"color:gray;\">" : "";
+        final String endTag = useGrayTag ? "</span>" : "";
         final CardTypeView type = state.getType();
 
         final StringBuilder sb = new StringBuilder();
@@ -2331,7 +2331,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         // Triggered abilities
         for (final Trigger trig : state.getTriggers()) {
             if (!trig.isSecondary() && !trig.isClassAbility()) {
-                boolean disabled = false;
+                boolean disabled;
                 // Disable text of other rooms
                 if (type.isDungeon()) {
                     disabled = !trig.getOverridingAbility().getParam("RoomName").equals(getCurrentRoom());
@@ -2339,9 +2339,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     disabled = getGame() != null && !trig.requirementsCheck(getGame());
                 }
                 String trigStr = trig.replaceAbilityText(trig.toString(), state);
-                if (disabled && useGrayTag) sb.append(grayTag);
+                if (disabled) sb.append(grayTag);
                 sb.append(trigStr.replaceAll("\\\\r\\\\n", "\r\n"));
-                if (disabled && useGrayTag) sb.append(endTag);
+                if (disabled) sb.append(endTag);
                 sb.append(linebreak);
             }
         }
@@ -2355,9 +2355,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 final String stAbD = stAb.toString();
                 if (!stAbD.equals("")) {
                     boolean disabled = getGame() != null && getController() != null && game.getAge() != GameStage.Play && !stAb.checkConditions();
-                    if (disabled && useGrayTag) sb.append(grayTag);
+                    if (disabled) sb.append(grayTag);
                     sb.append(stAbD);
-                    if (disabled && useGrayTag) sb.append(endTag);
+                    if (disabled) sb.append(endTag);
                     sb.append(linebreak);
                 }
             }
@@ -2458,9 +2458,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 // Class second part is a static ability that grants the other abilities
                 for (final StaticAbility st : state.getStaticAbilities()) {
                     if (st.isClassLevelNAbility(level) && !st.isSecondary()) {
-                        if (disabled && useGrayTag) sb.append(grayTag);
+                        if (disabled) sb.append(grayTag);
                         sb.append(st.toString());
-                        if (disabled && useGrayTag) sb.append(endTag);
+                        if (disabled) sb.append(endTag);
                         sb.append(linebreak);
                     }
                 }
