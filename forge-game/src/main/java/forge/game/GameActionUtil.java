@@ -17,6 +17,7 @@
  */
 package forge.game;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -41,6 +42,7 @@ import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.keyword.KeywordsChange;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerController;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
@@ -696,10 +698,17 @@ public final class GameActionUtil {
             return list;
         }
         CardCollection completeList = new CardCollection();
-        for (Player p : game.getPlayers()) {
+        PlayerCollection players = game.getPlayers();
+        // CR 613.7k use APNAP
+        int indexAP = players.indexOf(game.getPhaseHandler().getPlayerTurn());
+        if (indexAP != -1) {
+            Collections.rotate(players, - indexAP);
+        }
+        for (Player p : players) {
             CardCollection subList = new CardCollection();
             for (Card c : list) {
-                if (c.getOwner().equals(p)) {
+                Player decider = dest == ZoneType.Battlefield ? c.getController() : c.getOwner();
+                if (decider.equals(p)) {
                     subList.add(c);
                 }
             }
