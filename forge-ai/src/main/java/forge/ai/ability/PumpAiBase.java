@@ -467,7 +467,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                     if (c.getSVar("Targeting").equals("Dies") || c.getNetToughness() <= -defense) {
                         return true; // can kill indestructible creatures
                     }
-                    return (ComputerUtilCombat.getDamageToKill(c) <= -defense && !c.hasKeyword(Keyword.INDESTRUCTIBLE));
+                    return ComputerUtilCombat.getDamageToKill(c, false) <= -defense && !c.hasKeyword(Keyword.INDESTRUCTIBLE);
                 }
             }); // leaves all creatures that will be destroyed
         } // -X/-X end

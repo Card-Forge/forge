@@ -1687,7 +1687,7 @@ public class ComputerUtil {
                     }
 
                     if (saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll) {
-                        boolean canSave = ComputerUtilCombat.predictDamageTo(c, dmg - toughness, source, false) < ComputerUtilCombat.getDamageToKill(c);
+                        boolean canSave = ComputerUtilCombat.predictDamageTo(c, dmg - toughness, source, false) < ComputerUtilCombat.getDamageToKill(c, false);
                         if ((!topStack.usesTargeting() && !grantIndestructible && !canSave)
                                 || (!grantIndestructible && !grantShroud && !canSave)) {
                             continue;
@@ -1695,14 +1695,14 @@ public class ComputerUtil {
                     }
 
                     if (saviourApi == ApiType.PutCounter || saviourApi == ApiType.PutCounterAll) {
-                        boolean canSave = ComputerUtilCombat.predictDamageTo(c, dmg - toughness, source, false) < ComputerUtilCombat.getDamageToKill(c);
+                        boolean canSave = ComputerUtilCombat.predictDamageTo(c, dmg - toughness, source, false) < ComputerUtilCombat.getDamageToKill(c, false);
                         if (!canSave) {
                             continue;
                         }
                     }
 
                     // cannot protect against source
-                    if (saviourApi == ApiType.Protection && (ProtectAi.toProtectFrom(source, saviour) == null)) {
+                    if (saviourApi == ApiType.Protection && ProtectAi.toProtectFrom(source, saviour) == null) {
                         continue;
                     }
 
@@ -1712,7 +1712,7 @@ public class ComputerUtil {
                         continue;
                     }
 
-                    if (ComputerUtilCombat.predictDamageTo(c, dmg, source, false) >= ComputerUtilCombat.getDamageToKill(c)) {
+                    if (ComputerUtilCombat.predictDamageTo(c, dmg, source, false) >= ComputerUtilCombat.getDamageToKill(c, false)) {
                         threatened.add(c);
                     }
                 } else if (o instanceof Player) {
@@ -1739,7 +1739,7 @@ public class ComputerUtil {
                 if (o instanceof Card) {
                     final Card c = (Card) o;
                     final boolean canRemove = (c.getNetToughness() <= dmg)
-                            || (!c.hasKeyword(Keyword.INDESTRUCTIBLE) && c.getShieldCount() == 0 && (dmg >= ComputerUtilCombat.getDamageToKill(c)));
+                            || (!c.hasKeyword(Keyword.INDESTRUCTIBLE) && c.getShieldCount() == 0 && (dmg >= ComputerUtilCombat.getDamageToKill(c, false)));
                     if (!canRemove) {
                         continue;
                     }
@@ -1747,7 +1747,7 @@ public class ComputerUtil {
                     if (saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll) {
                         final boolean cantSave = c.getNetToughness() + toughness <= dmg
                                 || (!c.hasKeyword(Keyword.INDESTRUCTIBLE) && c.getShieldCount() == 0 && !grantIndestructible
-                                        && (dmg >= toughness + ComputerUtilCombat.getDamageToKill(c)));
+                                        && (dmg >= toughness + ComputerUtilCombat.getDamageToKill(c, false)));
                         if (cantSave && (!topStack.usesTargeting() || !grantShroud)) {
                             continue;
                         }

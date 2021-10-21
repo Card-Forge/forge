@@ -136,7 +136,7 @@ public class LifeSetAi extends SpellAbilityAi {
             if (tgt.canOnlyTgtOpponent()) {
                 sa.getTargets().add(opponent);
             } else {
-                if ((amount > myLife) && (myLife <= 10)) {
+                if (amount > myLife && myLife <= 10) {
                     sa.getTargets().add(ai);
                 } else if (hlife > amount) {
                     sa.getTargets().add(opponent);

@@ -1063,7 +1063,7 @@ public class AiAttackController {
                 final Card attacker = attackersLeft.get(i);
                 if (this.aiAggression < 5 && !attacker.hasFirstStrike() && !attacker.hasDoubleStrike()
                         && ComputerUtilCombat.getTotalFirstStrikeBlockPower(attacker, this.defendingOpponent)
-                        >= ComputerUtilCombat.getDamageToKill(attacker)) {
+                        >= ComputerUtilCombat.getDamageToKill(attacker, false)) {
                     continue;
                 }
 
@@ -1086,7 +1086,7 @@ public class AiAttackController {
                             }
                         }
                         // if enough damage: switch to next planeswalker
-                        if (damage >= ComputerUtilCombat.getDamageToKill((Card) defender)) {
+                        if (damage >= ComputerUtilCombat.getDamageToKill((Card) defender, true)) {
                             break;
                         }
                     }

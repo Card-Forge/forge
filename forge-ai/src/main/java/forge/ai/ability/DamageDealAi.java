@@ -807,7 +807,7 @@ public class DamageDealAi extends DamageAiBase {
             if (o instanceof Card) {
                 Card c = (Card) o;
                 final int restDamage = ComputerUtilCombat.predictDamageTo(c, dmg, saMe.getHostCard(), false);
-                if (!c.hasKeyword(Keyword.INDESTRUCTIBLE) && ComputerUtilCombat.getDamageToKill(c) <= restDamage) {
+                if (!c.hasKeyword(Keyword.INDESTRUCTIBLE) && ComputerUtilCombat.getDamageToKill(c, false) <= restDamage) {
                     if (c.getController().equals(ai)) {
                         return false;
                     } else {
