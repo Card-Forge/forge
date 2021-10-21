@@ -3,6 +3,6 @@ ManaCost:2
 Types:Artifact Creature Construct
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, each player draws a card.
-SVar:TrigDraw:DB$Draw | Defined$ Player | NumCards$ 1 | SpellDescription$ Each player draws a card.
+SVar:TrigDraw:DB$ Draw | Defined$ Player | NumCards$ 1 | SpellDescription$ Each player draws a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/runed_servitor.jpg
 Oracle:When Runed Servitor dies, each player draws a card.

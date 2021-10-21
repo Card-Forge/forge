@@ -4,7 +4,7 @@ Types:Creature Human Rogue Werewolf
 PT:3/2
 K:Haste
 T:Mode$Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
-SVar:TrigTransform:DB$SetState | Defined$ Self | Mode$ Transform
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
 SVar:Picture:http://www.wizards.com/global/images/magic/general/geier_reach_bandit.jpg
 Oracle:Haste\nAt the beginning of each upkeep, if no spells were cast last turn, transform Geier Reach Bandit.
@@ -17,9 +17,9 @@ Colors:red
 Types:Creature Werewolf
 PT:4/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Werewolf.YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigTransform1 | TriggerDescription$ Whenever a Werewolf enters the battlefield under your control, you may transform it.
-SVar:TrigTransform1:DB$SetState | Defined$ TriggeredCard | Mode$ Transform
+SVar:TrigTransform1:DB$ SetState | Defined$ TriggeredCard | Mode$ Transform
 T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform2 | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
-SVar:TrigTransform2:DB$SetState | Defined$ Self | Mode$ Transform
+SVar:TrigTransform2:DB$ SetState | Defined$ Self | Mode$ Transform
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vildin_pack_alpha.jpg
 Oracle:Whenever a Werewolf enters the battlefield under your control, you may transform it.\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Vildin-Pack Alpha.
 

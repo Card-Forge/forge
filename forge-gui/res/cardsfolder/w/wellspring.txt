@@ -4,9 +4,9 @@ Types:Enchantment Aura
 K:Enchant land
 A:SP$ Attach | Cost$ 1 G W | ValidTgts$ Land | AILogic$ Curse
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Execute$ TrigGainControl | Origin$ Any | Destination$ Battlefield | TriggerDescription$ When CARDNAME enters the battlefield, gain control of enchanted land until end of turn. At the beginning of your upkeep, untap enchanted land. You gain control of that land until end of turn.
-SVar:TrigGainControl:DB$GainControl | Defined$ Enchanted | LoseControl$ EOT
+SVar:TrigGainControl:DB$ GainControl | Defined$ Enchanted | LoseControl$ EOT
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainControl2 | Secondary$ True | TriggerDescription$ At the beginning of your upkeep, untap enchanted land. You gain control of that land until end of turn.
-SVar:TrigGainControl2:DB$GainControl | Defined$ Enchanted | LoseControl$ EOT | SubAbility$ DBUntap
-SVar:DBUntap:DB$Untap | Defined$ Enchanted
+SVar:TrigGainControl2:DB$ GainControl | Defined$ Enchanted | LoseControl$ EOT | SubAbility$ DBUntap
+SVar:DBUntap:DB$ Untap | Defined$ Enchanted
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wellspring.jpg
 Oracle:Enchant land\nWhen Wellspring enters the battlefield, gain control of enchanted land until end of turn.\nAt the beginning of your upkeep, untap enchanted land. You gain control of that land until end of turn.

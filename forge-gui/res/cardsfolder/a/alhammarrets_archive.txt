@@ -5,6 +5,6 @@ R:Event$ GainLife | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ G
 SVar:GainDouble:DB$ ReplaceEffect | VarName$ LifeGained | VarValue$ X
 SVar:X:ReplaceCount$LifeGained/Twice
 R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ You | NotFirstCardInDrawStep$ True | ReplaceWith$ DrawTwo | Description$ If you would draw a card except the first one you draw in each of your draw steps, draw two cards instead.
-SVar:DrawTwo:DB$Draw | Defined$ You | NumCards$ 2
+SVar:DrawTwo:DB$ Draw | Defined$ You | NumCards$ 2
 DeckHints:Ability$LifeGain
 Oracle:If you would gain life, you gain twice that much life instead.\nIf you would draw a card except the first one you draw in each of your draw steps, draw two cards instead.

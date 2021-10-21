@@ -4,7 +4,7 @@ Types:Creature Sliver
 PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddTrigger$ DamageDone | AddSVar$ TemperedSliverPutCounter | Description$ Sliver creatures you control have "Whenever this creature deals combat damage to a player, put a +1/+1 counter on it."
 SVar:DamageDone:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TemperedSliverPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature deals combat damage to a player, put a +1/+1 counter on it.
-SVar:TemperedSliverPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:TemperedSliverPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Sliver
 DeckHas:Ability$Counters

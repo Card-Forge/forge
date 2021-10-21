@@ -4,7 +4,7 @@ Types:Legendary Planeswalker Tamiyo
 Loyalty:5
 S:Mode$ Continuous | Affected$ You | AddKeyword$ Spells and abilities your opponents control can't cause you to discard cards. & Spells and abilities your opponents control can't cause you to sacrifice permanents. | Description$ Spells and abilities your opponents control can't cause you to discard cards or sacrifice permanents.
 A:AB$ NameCard | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Defined$ You | ValidCards$ Card.nonLand | SubAbility$ DBDig | StackDescription$ SpellDescription | SpellDescription$ Choose a nonland card name, then reveal the top four cards of your library. Put all cards with the chosen name from among them into your hand and the rest into your graveyard.
-SVar:DBDig:DB$Dig | DigNum$ 4 | Reveal$ True | ChangeNum$ All | ChangeValid$ Card.NamedCard | DestinationZone2$ Graveyard
+SVar:DBDig:DB$ Dig | DigNum$ 4 | Reveal$ True | ChangeNum$ All | ChangeValid$ Card.NamedCard | DestinationZone2$ Graveyard
 A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | TgtPrompt$ Choose target card in your graveyard | ValidTgts$ Card.YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target card from your graveyard to your hand.
 AI:RemoveDeck:All
 DeckHas:Ability$Graveyard

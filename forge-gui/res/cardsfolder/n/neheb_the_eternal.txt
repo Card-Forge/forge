@@ -4,7 +4,7 @@ Types:Legendary Creature Zombie Minotaur Warrior
 PT:4/6
 K:Afflict:3
 T:Mode$ Phase | Phase$ Main2 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMana | TriggerDescription$ At the beginning of your postcombat main phase, add {R} for each 1 life your opponents have lost this turn.
-SVar:TrigMana:DB$Mana | Produced$ R | Amount$ X
+SVar:TrigMana:DB$ Mana | Produced$ R | Amount$ X
 SVar:X:Count$LifeOppsLostThisTurn
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/neheb_the_eternal.jpg

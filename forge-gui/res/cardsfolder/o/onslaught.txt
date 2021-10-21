@@ -2,7 +2,7 @@ Name:Onslaught
 ManaCost:R
 Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ Whenever you cast a creature spell, tap target creature.
-SVar:TrigTap:DB$Tap | ValidTgts$ Creature | TgtPrompt$ Select target creature
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:BuffedBy:Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/onslaught.jpg
 Oracle:Whenever you cast a creature spell, tap target creature.

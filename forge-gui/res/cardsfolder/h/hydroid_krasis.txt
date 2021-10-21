@@ -3,8 +3,8 @@ ManaCost:X G U
 Types:Creature Jellyfish Hydra Beast
 PT:0/0
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When you cast CARDNAME, you gain half X life and draw half X cards. Round down each time.
-SVar:TrigGainLife:DB$GainLife | Defined$ You | LifeAmount$ HalfXDown | SubAbility$ DBDraw
-SVar:DBDraw:DB$Draw | NumCards$ HalfXDown
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ HalfXDown | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ HalfXDown
 K:Flying
 K:Trample
 K:etbCounter:P1P1:X

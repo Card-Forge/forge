@@ -3,7 +3,7 @@ ManaCost:B
 Types:Creature Horror
 PT:1/1
 T:Mode$ Drawn | ValidCard$ Card.OppOwn | TriggerZones$ Battlefield | OptionalDecider$ You | IsPresent$ Permanent.Red+YouCtrl | Execute$ TrigDamage | TriggerDescription$ Whenever an opponent draws a card, if you control a red permanent, you may have CARDNAME deal 1 damage to that player.
-SVar:TrigDamage:DB$DealDamage | Defined$ TriggeredPlayer | NumDmg$ 1
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 1
 DeckHints:Color$Red
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kederekt_parasite.jpg
 Oracle:Whenever an opponent draws a card, if you control a red permanent, you may have Kederekt Parasite deal 1 damage to that player.

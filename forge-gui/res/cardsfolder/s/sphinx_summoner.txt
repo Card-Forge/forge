@@ -4,6 +4,6 @@ Types:Artifact Creature Sphinx
 PT:3/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for an artifact creature card, reveal it, put it into your hand, then shuffle.
-SVar:TrigChange:DB$ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Artifact.Creature| ChangeNum$ 1 | ShuffleNonMandatory$ True
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Artifact.Creature| ChangeNum$ 1 | ShuffleNonMandatory$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sphinx_summoner.jpg
 Oracle:Flying\nWhen Sphinx Summoner enters the battlefield, you may search your library for an artifact creature card, reveal it, put it into your hand, then shuffle.

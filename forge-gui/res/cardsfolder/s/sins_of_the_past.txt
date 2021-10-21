@@ -6,7 +6,7 @@ SVar:Play:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | Effe
 SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | ExileOnMoved$ Stack | ReplacementEffects$ ReplaceGraveyard | SubAbility$ DBChange
 SVar:ReplaceGraveyard:Event$ Moved | ValidCard$ Card.IsRemembered | Origin$ Stack | Destination$ Graveyard | ReplaceWith$ MoveExile | Description$ If that card would be put into your graveyard this turn, exile it instead.
 SVar:MoveExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ Exile
-SVar:DBChange:DB$ChangeZone | Origin$ Stack | Destination$ Exile
+SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sins_of_the_past.jpg
 Oracle:Until end of turn, you may cast target instant or sorcery card from your graveyard without paying its mana cost. If that spell would be put into your graveyard this turn, exile it instead. Exile Sins of the Past.

@@ -5,6 +5,6 @@ K:ETBReplacement:Other:ChooseCT
 SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | AILogic$ MostProminentInComputerDeck | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.ChosenType+YouCtrl | Execute$ TrigDraw | TriggerDescription$ Whenever a creature you control of the chosen type enters the battlefield or attacks, draw a card.
 T:Mode$ Attacks | ValidCard$ Creature.ChosenType+YouCtrl | Execute$ TrigDraw | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever a creature you control of the chosen type enters the battlefield or attacks, draw a card.
-SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 1
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kindred_discovery.jpg
 Oracle:As Kindred Discovery enters the battlefield, choose a creature type.\nWhenever a creature you control of the chosen type enters the battlefield or attacks, draw a card.

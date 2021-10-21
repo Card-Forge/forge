@@ -4,7 +4,7 @@ Types:Creature Human Shaman
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, discard two cards, then draw two cards. For each nonland card discarded this way, create a 1/1 red Elemental creature token.
 SVar:TrigDiscard:DB$ Discard | NumCards$ 2 | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw
-SVar:DBDraw:DB$Draw | NumCards$ 2 | SubAbility$ DBToken
+SVar:DBDraw:DB$ Draw | NumCards$ 2 | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ r_1_1_elemental | TokenOwner$ You | LegacyImage$ r 1 1 elemental mh1 | SubAbility$ DBCleanup
 SVar:X:Remembered$Valid Card.nonLand
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

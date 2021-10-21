@@ -4,7 +4,7 @@ Types:Creature Goblin
 PT:1/1
 K:Morph:X X R
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, create X 1/1 red Goblin creature tokens.
-SVar:TrigToken:DB$Token | TokenAmount$ X | TokenScript$ r_1_1_goblin | TokenOwner$ You | LegacyImage$ r 1 1 goblin lgn
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ r_1_1_goblin | TokenOwner$ You | LegacyImage$ r 1 1 goblin lgn
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warbreak_trumpeter.jpg

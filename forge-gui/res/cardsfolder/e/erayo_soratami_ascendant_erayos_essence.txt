@@ -4,7 +4,7 @@ Types:Legendary Creature Moonfolk Monk
 PT:1/1
 K:Flying
 T:Mode$ SpellCast | CheckSVar$ NumCast | SVarCompare$ EQ4 | NoResolvingCheck$ True | Execute$ TrigFlip | TriggerZones$ Battlefield | TriggerDescription$ Whenever the fourth spell of a turn is cast, flip CARDNAME.
-SVar:TrigFlip:DB$SetState | Defined$ Self | Mode$ Flip
+SVar:TrigFlip:DB$ SetState | Defined$ Self | Mode$ Flip
 SVar:NumCast:Count$ThisTurnCast_Card
 SVar:Picture:http://www.wizards.com/global/images/magic/general/erayo_soratami_ascendant.jpg
 AlternateMode:Flip
@@ -16,7 +16,7 @@ Name:Erayo's Essence
 ManaCost:1 U
 Types:Legendary Enchantment
 T:Mode$ SpellCast | ValidActivatingPlayer$ Player.Opponent | ActivatorThisTurnCast$ EQ1 | NoResolvingCheck$ True | Execute$ TrigCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent casts their first spell each turn, counter that spell.
-SVar:TrigCounter:DB$Counter | Defined$ TriggeredSpellAbility | Destination$ Graveyard
+SVar:TrigCounter:DB$ Counter | Defined$ TriggeredSpellAbility | Destination$ Graveyard
 SVar:Picture:http://www.marc-fowler-design.com/cardforge/flippedcards/SOK/erayos_essence.jpg
 # This link may be a temporary solution and could change in the near future.
 Oracle:Whenever an opponent casts their first spell each turn, counter that spell.

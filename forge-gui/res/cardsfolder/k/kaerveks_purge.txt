@@ -2,7 +2,7 @@ Name:Kaervek's Purge
 ManaCost:X B R
 Types:Sorcery
 A:SP$ Destroy | Cost$ X B R | ValidTgts$ Creature.cmcEQX | TgtPrompt$ Select target creature | RememberLKI$ True | SubAbility$ DBDamage | SpellDescription$ Destroy target creature with mana value X. If that creature dies this way, CARDNAME deals damage equal to the creature's power to the creature's controller.
-SVar:DBDamage:DB$DealDamage | Defined$ TargetedController | NumDmg$ Z | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBDamage:DB$ DealDamage | Defined$ TargetedController | NumDmg$ Z | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid
 SVar:Y:Remembered$Amount

@@ -9,5 +9,5 @@ A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | Origin$ Gr
 A:AB$ DestroyAll | Cost$ SubCounter<11/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | ValidCards$ Creature | ValidDescription$ all creatures targeted opponent controls | RememberAllObjects$ True | SubAbility$ DBDealDamage | SpellDescription$ Destroy all creatures target opponent controls. CARDNAME deals damage to that player equal to their total power.
 SVar:DBDealDamage:DB$ DealDamage | Defined$ Targeted | NumDmg$ X
 SVar:X:RememberedLKI$ CardPower
-SVar:Animate:DB$Animate | Defined$ Targeted | Types$ Zombie | Colors$ Black | Duration$ Permanent
+SVar:Animate:DB$ Animate | Defined$ Targeted | Types$ Zombie | Colors$ Black | Duration$ Permanent
 Oracle:[+2]: Angrath, Minotaur Pirate deals 1 damage to target opponent or planeswalker and each creature that player or that planeswalker's controller controls.\n[−3]: Return target Pirate card from your graveyard to the battlefield.\n[−11]: Destroy all creatures target opponent controls. Angrath, Minotaur Pirate deals damage to that player equal to their total power.

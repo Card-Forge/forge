@@ -4,7 +4,7 @@ Types:Artifact
 K:ETBReplacement:Other:ChooseCT
 SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type. | AILogic$ MostProminentInComputerDeck
 T:Mode$ SpellCast | ValidCard$ Card.ChosenType | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a spell of the chosen type, put a charge counter on CARDNAME.
-SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1
 S:Mode$ Continuous | Affected$ Creature.ChosenType+YouCtrl | AddPower$ X | AddToughness$ X | Description$ Creatures you control of the chosen type get +1/+1 for each charge counter on CARDNAME.
 SVar:X:Count$CardCounters.CHARGE
 SVar:BuffedBy:Creature

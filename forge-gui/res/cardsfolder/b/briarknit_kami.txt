@@ -3,7 +3,7 @@ ManaCost:3 G G
 Types:Creature Spirit
 PT:3/3
 T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, put a +1/+1 counter on target creature.
-SVar:TrigPutCounter:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1
 SVar:BuffedBy:Arcane,Spirit
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/briarknit_kami.jpg

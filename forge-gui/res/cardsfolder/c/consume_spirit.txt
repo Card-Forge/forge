@@ -2,7 +2,7 @@ Name:Consume Spirit
 ManaCost:X 1 B
 Types:Sorcery
 A:SP$DealDamage | Cost$ X 1 B | XColor$ B | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | SubAbility$ DBGainLife | SpellDescription$ Spend only black mana on X. Consume Spirit deals X damage to any target and you gain X life.
-SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/consume_spirit.jpg
 Oracle:Spend only black mana on X.\nConsume Spirit deals X damage to any target and you gain X life.

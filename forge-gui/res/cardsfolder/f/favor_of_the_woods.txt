@@ -4,6 +4,6 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 G | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ Blocks | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever enchanted creature blocks, you gain 3 life.
-SVar:TrigGainLife:DB$GainLife | LifeAmount$ 3 | Defined$ You
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3 | Defined$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/favor_of_the_woods.jpg
 Oracle:Enchant creature\nWhenever enchanted creature blocks, you gain 3 life.

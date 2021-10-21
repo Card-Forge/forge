@@ -2,6 +2,6 @@ Name:Dismal Failure
 ManaCost:2 U U
 Types:Instant
 A:SP$ Counter | Cost$ 2 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | Destination$ Graveyard | SubAbility$ DBDiscard | SpellDescription$ Counter target spell. Its controller discards a card.
-SVar:DBDiscard:DB$Discard | Defined$ TargetedController | NumCards$ 1 | Mode$ TgtChoose
+SVar:DBDiscard:DB$ Discard | Defined$ TargetedController | NumCards$ 1 | Mode$ TgtChoose
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dismal_failure.jpg
 Oracle:Counter target spell. Its controller discards a card.

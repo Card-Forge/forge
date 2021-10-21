@@ -4,6 +4,6 @@ Types:Creature Dragon
 PT:4/4
 K:Flying
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of each upkeep, create a 1/1 red and green Dragon creature token with flying and devour 2. (As the token enters the battlefield, you may sacrifice any number of creatures. It enters the battlefield with twice that many +1/+1 counters on it.)
-SVar:TrigToken:DB$Token | TokenAmount$ 1 | TokenScript$ rg_1_1_dragon_flying_devour | TokenOwner$ You | LegacyImage$ rg 1 1 dragon flying devour arb
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ rg_1_1_dragon_flying_devour | TokenOwner$ You | LegacyImage$ rg 1 1 dragon flying devour arb
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragon_broodmother.jpg
 Oracle:Flying\nAt the beginning of each upkeep, create a 1/1 red and green Dragon creature token with flying and devour 2. (As the token enters the battlefield, you may sacrifice any number of creatures. It enters the battlefield with twice that many +1/+1 counters on it.)

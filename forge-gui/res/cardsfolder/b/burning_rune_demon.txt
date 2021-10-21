@@ -4,7 +4,7 @@ Types:Creature Demon Berserker
 PT:6/6
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for exactly two cards not named CARDNAME that have different names. If you do, reveal those cards. Put the chosen card into your hand and the other into your graveyard, then shuffle.
-SVar:TrigChange:DB$ChangeZone | Origin$ Library | Destination$ Library | ChangeType$ Card.notnamedBurning-Rune Demon | ChangeNum$ 2 | DifferentNames$ True | RememberChanged$ True | Reveal$ True | Shuffle$ False | AILogic$ Intuition | SubAbility$ DBChoosePlayer
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Library | ChangeType$ Card.notnamedBurning-Rune Demon | ChangeNum$ 2 | DifferentNames$ True | RememberChanged$ True | Reveal$ True | Shuffle$ False | AILogic$ Intuition | SubAbility$ DBChoosePlayer
 SVar:DBChoosePlayer:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent | SubAbility$ DBChangeZone1
 SVar:DBChangeZone1:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.IsRemembered | Chooser$ ChosenPlayer | ChangeNum$ 1 | Mandatory$ True | NoLooking$ True | SelectPrompt$ Select a card for the hand | Shuffle$ False | SubAbility$ DBChangeZone2 | StackDescription$ None
 SVar:DBChangeZone2:DB$ ChangeZoneAll | Origin$ Library | Destination$ Graveyard | ChangeType$ Card.IsRemembered | Shuffle$ True | StackDescription$ None | SubAbility$ DBCleanup

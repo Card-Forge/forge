@@ -3,7 +3,7 @@ ManaCost:2 B B
 Types:Creature Human Mercenary
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDrain | TriggerDescription$ When CARDNAME enters the battlefield, target opponent loses 2 life and you gain 2 life.
-SVar:TrigDrain:DB$LoseLife | ValidTgts$ Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife
-SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 2
+SVar:TrigDrain:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84505.jpg
 Oracle:When Highway Robber enters the battlefield, target opponent loses 2 life and you gain 2 life.

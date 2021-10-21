@@ -4,6 +4,6 @@ Types:Creature Drone
 PT:3/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, put target artifact on top of its owner's library.
-SVar:TrigChangeZone:DB$ChangeZone | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/looming_hoverguard.jpg
 Oracle:Flying\nWhen Looming Hoverguard enters the battlefield, put target artifact on top of its owner's library.

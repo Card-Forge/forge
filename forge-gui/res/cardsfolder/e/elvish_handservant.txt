@@ -3,7 +3,7 @@ ManaCost:G
 Types:Creature Elf Warrior
 PT:1/1
 T:Mode$ SpellCast | ValidCard$ Giant | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever a player casts a Giant spell, you may put a +1/+1 counter on Elvish Handservant.
-SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:BuffedBy:Giant
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_handservant.jpg
 Oracle:Whenever a player casts a Giant spell, you may put a +1/+1 counter on Elvish Handservant.

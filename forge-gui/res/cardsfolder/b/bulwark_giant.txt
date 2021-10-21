@@ -3,6 +3,6 @@ ManaCost:5 W
 Types:Creature Giant Soldier
 PT:3/6
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 5 life.
-SVar:TrigGainLife:DB$GainLife | LifeAmount$ 5
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 5
 DeckHas:Ability$LifeGain
 Oracle:When Bulwark Giant enters the battlefield, you gain 5 life.

@@ -2,7 +2,7 @@ Name:Rage Extractor
 ManaCost:4 PR
 Types:Artifact
 T:Mode$ SpellCast | ValidCard$ Card.CostsPhyrexianMana | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you cast a spell with {P} in its mana cost, CARDNAME deals damage equal to that spell's mana value to any target.
-SVar:TrigDealDamage:DB$DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X
 SVar:X:TriggerCount$CastSACMC
 SVar:BuffedBy:Card.CostsPhyrexianMana
 AI:RemoveDeck:Random

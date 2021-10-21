@@ -3,7 +3,7 @@ ManaCost:2 B B
 Types:Creature Zombie
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDrain | TriggerDescription$ When CARDNAME enters the battlefield, target opponent loses 2 life and you gain 2 life.
-SVar:TrigDrain:DB$LoseLife | ValidTgts$ Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife
-SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 2
+SVar:TrigDrain:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
 SVar:Picture:http://serv3.tcgimages.eu/img/cards/Starter_1999/dakmor_ghoul.jpg
 Oracle:When Dakmor Ghoul enters the battlefield, target opponent loses 2 life and you gain 2 life.

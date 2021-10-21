@@ -3,6 +3,6 @@ ManaCost:2 G
 Types:Creature Merfolk Shaman
 PT:1/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPut | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on each of up to two target Merfolk you control.
-SVar:TrigPut:DB$PutCounter | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Merfolk.YouCtrl | TgtPrompt$ Select target Merfolk you control | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigPut:DB$ PutCounter | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Merfolk.YouCtrl | TgtPrompt$ Select target Merfolk you control | CounterType$ P1P1 | CounterNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vineshaper_mystic.jpg
 Oracle:When Vineshaper Mystic enters the battlefield, put a +1/+1 counter on each of up to two target Merfolk you control.

@@ -2,6 +2,6 @@ Name:Font of Mythos
 ManaCost:4
 Types:Artifact
 T:Mode$ Phase | Phase$ Draw | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of each player's draw step, that player draws two additional cards.
-SVar:TrigDraw:DB$Draw | NumCards$ 2 | Defined$ TriggeredPlayer
+SVar:TrigDraw:DB$ Draw | NumCards$ 2 | Defined$ TriggeredPlayer
 SVar:Picture:http://www.wizards.com/global/images/magic/general/font_of_mythos.jpg
 Oracle:At the beginning of each player's draw step, that player draws two additional cards.

@@ -6,7 +6,7 @@ A:AB$ Animate | Cost$ B T | Defined$ Self | RemoveThisAbility$ True | Duration$ 
 SVar:DBAttach:DB$ Attach | ValidTgts$ Creature | AILogic$ Curse
 SVar:SPAttach:SP$ Attach | Cost$ 0 | ValidTgts$ Creature
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ EnchantedController | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of the upkeep of enchanted creature's controller, CARDNAME deals 1 damage to that player.
-SVar:TrigDamage:DB$DealDamage | Defined$ TriggeredPlayer | NumDmg$ 1
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 1
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leeching_licid.jpg
 Oracle:{B}, {T}: Leeching Licid loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {B} to end this effect.\nAt the beginning of the upkeep of enchanted creature's controller, Leeching Licid deals 1 damage to that player.

@@ -4,7 +4,7 @@ Types:Creature Spirit
 PT:2/3
 T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, untap CARDNAME.
 A:AB$ Tap | Cost$ W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
-SVar:TrigUntap:DB$Untap | Defined$ Self
+SVar:TrigUntap:DB$ Untap | Defined$ Self
 AI:RemoveDeck:Random
 DeckHints:Type$Spirit|Arcane
 SVar:Picture:http://www.wizards.com/global/images/magic/general/innocence_kami.jpg

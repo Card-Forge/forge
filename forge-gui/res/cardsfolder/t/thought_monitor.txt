@@ -5,6 +5,6 @@ PT:2/2
 K:Flying
 K:Affinity:Artifact
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw two cards.
-SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 2
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 2
 DeckHints:Type$Artifact
 Oracle:Affinity for artifacts\nFlying\nWhen Thought Monitor enters the battlefield, draw two cards.

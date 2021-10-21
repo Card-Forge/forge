@@ -4,6 +4,6 @@ Types:Creature Elf
 PT:2/2
 K:Trample
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, reveal the top four cards of your library. Put all Elf cards revealed this way into your hand and the rest on the bottom of your library in any order.
-SVar:TrigDig:DB$Dig | DigNum$ 4 | Reveal$ True | ChangeNum$ All | ChangeValid$ Elf
+SVar:TrigDig:DB$ Dig | DigNum$ 4 | Reveal$ True | ChangeNum$ All | ChangeValid$ Elf
 SVar:Picture:http://resources.wizards.com/magic/cards/ap/en-us/card27666.jpg
 Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)\nWhen Sylvan Messenger enters the battlefield, reveal the top four cards of your library. Put all Elf cards revealed this way into your hand and the rest on the bottom of your library in any order.

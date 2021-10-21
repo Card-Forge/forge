@@ -2,6 +2,6 @@ Name:Scorch the Fields
 ManaCost:4 R
 Types:Sorcery
 A:SP$ Destroy | Cost$ 4 R | ValidTgts$ Land | TgtPrompt$ Choose target land. | SubAbility$ DBDamageAll | SpellDescription$ Destroy target land. CARDNAME deals 1 damage to each Human creature.
-SVar:DBDamageAll:DB$DamageAll | NumDmg$ 1 | ValidCards$Creature.Human | ValidDescription$ each human creature
+SVar:DBDamageAll:DB$ DamageAll | NumDmg$ 1 | ValidCards$Creature.Human | ValidDescription$ each human creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scorch_the_fields.jpg
 Oracle:Destroy target land. Scorch the Fields deals 1 damage to each Human creature.

@@ -4,9 +4,9 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ U | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPrivateResearchPutCounter | TriggerDescription$ At the beginning of your upkeep, you may put a page counter on CARDNAME.
-SVar:TrigPrivateResearchPutCounter:DB$PutCounter | Defined$ Self | CounterType$ PAGE | CounterNum$ 1
+SVar:TrigPrivateResearchPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ PAGE | CounterNum$ 1
 T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigPrivateResearchDraw | TriggerDescription$ When enchanted creature dies, draw a card for each page counter on CARDNAME.
-SVar:TrigPrivateResearchDraw:DB$Draw | NumCards$ PrivateResearchX
+SVar:TrigPrivateResearchDraw:DB$ Draw | NumCards$ PrivateResearchX
 SVar:PrivateResearchX:Count$CardCounters.PAGE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/private_research.jpg
 Oracle:Enchant creature\nAt the beginning of your upkeep, you may put a page counter on Private Research.\nWhen enchanted creature dies, draw a card for each page counter on Private Research.

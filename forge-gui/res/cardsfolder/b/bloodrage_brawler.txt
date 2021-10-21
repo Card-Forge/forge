@@ -3,6 +3,6 @@ ManaCost:1 R
 Types:Creature Minotaur Warrior
 PT:4/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, discard a card.
-SVar:TrigDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+SVar:TrigDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodrage_brawler.jpg
 Oracle:When Bloodrage Brawler enters the battlefield, discard a card.

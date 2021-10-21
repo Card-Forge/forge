@@ -5,7 +5,7 @@ K:Entwine:3
 A:SP$ Charm | Cost$ 1 W B | Choices$ DBSac,DBExile,DBSpirit,DBGain | CharmNum$ 2
 SVar:DBSac:DB$ Sacrifice | Defined$ Player.Opponent | SacValid$ Creature | SacMessage$ creature | SpellDescription$ Each opponent sacrifices a creature.
 SVar:DBExile:DB$ ChangeZoneAll | ChangeType$ Card.OppOwn | Origin$ Graveyard | Destination$ Exile | SpellDescription$ Exile all cards from each opponent's graveyard.
-SVar:DBSpirit:DB$Token | TokenAmount$ 1 | TokenScript$ wb_1_1_spirit_flying | TokenOwner$ You | LegacyImage$ wb 1 1 spirit mh1 | SpellDescription$ Create a 1/1 white and black Spirit creature token with flying.
+SVar:DBSpirit:DB$ Token | TokenAmount$ 1 | TokenScript$ wb_1_1_spirit_flying | TokenOwner$ You | LegacyImage$ wb 1 1 spirit mh1 | SpellDescription$ Create a 1/1 white and black Spirit creature token with flying.
 SVar:DBGain:DB$ GainLife | LifeAmount$ 4 | SpellDescription$ You gain 4 life.
 DeckHas:Ability$Token & Ability$LifeGain
 Oracle:Choose two —\n• Each opponent sacrifices a creature.\n• Exile all cards from each opponent's graveyard.\n• Create a 1/1 white and black Spirit creature token with flying.\n• You gain 4 life.\nEntwine {3} (Choose all if you pay the entwine cost.)

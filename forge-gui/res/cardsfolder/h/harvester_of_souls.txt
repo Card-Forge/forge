@@ -4,6 +4,6 @@ Types:Creature Demon
 PT:5/5
 K:Deathtouch
 T:Mode$ ChangesZone | ValidCard$ Creature.nonToken+Other | Origin$ Battlefield | Destination$ Graveyard | OptionalDecider$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever another nontoken creature dies, you may draw a card.
-SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 1
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/harvester_of_souls.jpg
 Oracle:Deathtouch\nWhenever another nontoken creature dies, you may draw a card.

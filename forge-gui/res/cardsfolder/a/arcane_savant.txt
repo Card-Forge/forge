@@ -6,7 +6,7 @@ K:MayEffectFromOpeningDeck:DBReveal
 SVar:DBReveal:DB$ Reveal | RevealDefined$ Self | SubAbility$ DBExile | SpellDescription$ Before you shuffle your deck to start the game, you may reveal this card from your deck and exile an instant or sorcery card you drafted that isn't in your deck.
 SVar:DBExile:DB$ ChangeZone | Origin$ Sideboard | Destination$ Exile | ChangeType$ Instant.YouOwn,Sorcery.YouOwn | ChangeNum$ 1 | Optional$ True | RememberChanged$ True | SubAbility$ DBPump | ConditionGameTypes$ Draft,QuestDraft | SelectPrompt$ Exile with Arcane Savant
 SVar:DBPump:DB$ Pump | NoteCards$ Remembered | NoteCardsFor$ ArcaneSavant | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPlay | TriggerDescription$ When CARDNAME enters the battlefield, copy a card you exiled with cards named Arcane Savant. You may cast the copy without paying its mana cost.
 SVar:TrigPlay:DB$ Play | Valid$ Card.YouOwn+NotedForArcaneSavant | ValidSA$ Spell | ValidZone$ Exile | Amount$ 1 | WithoutManaCost$ True | Optional$ True | CopyCard$ True | SpellDescription$ You may copy the exiled card. If you do, you may cast the copy without paying its mana cost. | SubAbility$ DBCleanup
 SVar:Picture:https://img.scryfall.com/cards/large/en/cn2/27.jpg?1517813031

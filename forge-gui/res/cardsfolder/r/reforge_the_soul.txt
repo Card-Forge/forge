@@ -3,7 +3,7 @@ ManaCost:3 R R
 Types:Sorcery
 K:Miracle:1 R
 A:SP$ Discard | Cost$ 3 R R | Mode$ Hand | Defined$ Player | SubAbility$ DBEachDraw | SpellDescription$ Each player discards their hand, then draws seven cards.
-SVar:DBEachDraw:DB$Draw | Defined$ Player | NumCards$ 7
+SVar:DBEachDraw:DB$ Draw | Defined$ Player | NumCards$ 7
 SVar:NeedsToPlayVar:X LE2
 SVar:X:Count$InYourHand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reforge_the_soul.jpg

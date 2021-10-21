@@ -4,6 +4,6 @@ Types:Creature Treefolk
 PT:4/4
 A:AB$ Pump | Cost$ G G | KW$ Forestwalk | Defined$ Self | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME gains forestwalk until end of turn and deals 2 damage to you. (It can't be blocked as long as defending player controls a Forest.)
 A:AB$ Pump | Cost$ B B | KW$ Swampwalk | Defined$ Self | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME gains swampwalk until end of turn and deals 2 damage to you. (It can't be blocked as long as defending player controls a Swamp.)
-SVar:DBDealDamage:DB$DealDamage | Defined$ You | NumDmg$ 2
+SVar:DBDealDamage:DB$ DealDamage | Defined$ You | NumDmg$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wormwood_treefolk.jpg
 Oracle:{G}{G}: Wormwood Treefolk gains forestwalk until end of turn and deals 2 damage to you. (It can't be blocked as long as defending player controls a Forest.)\n{B}{B}: Wormwood Treefolk gains swampwalk until end of turn and deals 2 damage to you. (It can't be blocked as long as defending player controls a Swamp.)

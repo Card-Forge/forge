@@ -2,7 +2,7 @@ Name:Barren Glory
 ManaCost:4 W W
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.Other | PresentZone$ Battlefield | PresentPlayer$ You | PresentCompare$ EQ0 | IsPresent2$ Card | PresentZone2$ Hand | PresentPlayer2$ You | PresentCompare2$ EQ0 | Execute$ TrigWin | TriggerDescription$ At the beginning of your upkeep, if you control no permanents other than Barren Glory and have no cards in hand, you win the game.
-SVar:TrigWin:DB$WinsGame | Defined$ You
+SVar:TrigWin:DB$ WinsGame | Defined$ You
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barren_glory.jpg
 Oracle:At the beginning of your upkeep, if you control no permanents other than Barren Glory and have no cards in hand, you win the game.

@@ -3,8 +3,8 @@ ManaCost:2 R
 Types:Creature Elemental Shaman
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounters | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter each other Shaman creature you control.
-SVar:TrigPutCounters:DB$PutCounterAll | ValidCards$ Creature.Shaman+Other+YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigPutCounters:DB$ PutCounterAll | ValidCards$ Creature.Shaman+Other+YouCtrl | CounterType$ P1P1 | CounterNum$ 1
 T:Mode$ Attacks | ValidCard$ Creature.YouCtrl+counters_GE1_P1P1 | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a creature you control with a +1/+1 counter on it attacks, you may have that creature deal 1 damage to target player or planeswalker.
-SVar:TrigDamage:DB$DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1 | DamageSource$ TriggeredAttacker
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1 | DamageSource$ TriggeredAttacker
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rage_forger.jpg
 Oracle:When Rage Forger enters the battlefield, put a +1/+1 counter on each other Shaman creature you control.\nWhenever a creature you control with a +1/+1 counter on it attacks, you may have that creature deal 1 damage to target player or planeswalker.

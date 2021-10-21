@@ -4,6 +4,6 @@ Types:Creature Human Warlock
 PT:2/2
 K:Flying
 T:Mode$ ChangesZone | ValidCard$ Creature.withFlying+Other+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever another creature you control with flying dies, put a +1/+1 counter on target creature you control.
-SVar:TrigPutCounter:DB$PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1
 DeckHas:Ability$Counters
 Oracle:Flying\nWhenever another creature you control with flying dies, put a +1/+1 counter on target creature you control.

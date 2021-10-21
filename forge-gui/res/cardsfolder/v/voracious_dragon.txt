@@ -5,7 +5,7 @@ PT:4/4
 K:Flying
 K:Devour:1
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals damage to any target equal to twice the number of Goblins it devoured.
-SVar:TrigDamage:DB$DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X
 SVar:X:Count$Devoured Card.Goblin/Twice
 SVar:Picture:http://www.wizards.com/global/images/magic/general/voracious_dragon.jpg
 Oracle:Flying\nDevour 1 (As this enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with that many +1/+1 counters on it.)\nWhen Voracious Dragon enters the battlefield, it deals damage to any target equal to twice the number of Goblins it devoured.

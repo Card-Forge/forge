@@ -4,6 +4,6 @@ Types:Creature Angel
 PT:3/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 3 life.
-SVar:TrigGainLife:DB$GainLife | LifeAmount$ 3
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card82992.jpg
 Oracle:Flying\nWhen Angel of Mercy enters the battlefield, you gain 3 life.

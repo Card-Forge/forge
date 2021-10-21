@@ -3,7 +3,7 @@ ManaCost:B
 Types:Enchantment
 A:AB$ Token | Cost$ SubCounter<3/QUEST> Sac<1/CARDNAME> | TokenAmount$ 1 | LegacyImage$ b 5 5 zombie giant zen | TokenScript$ b_5_5_zombie_giant | TokenOwner$ You | TokenAmount$ 1 | SpellDescription$ Create a 5/5 black Zombie Giant creature token.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature dies, you may put a quest counter on CARDNAME.
-SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ QUEST | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ QUEST | CounterNum$ 1
 SVar:MaxQuestEffect:3
 DeckHas:Ability$Counters & Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Quest_for_the_Gravelord.jpg

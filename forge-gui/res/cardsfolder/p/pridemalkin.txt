@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Creature Cat
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPut | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on target creature you control.
-SVar:TrigPut:DB$PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigPut:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1
 S:Mode$ Continuous | Affected$ Creature.counters_GE1_P1P1+YouCtrl | AddKeyword$ Trample | Description$ Each creature you control with a +1/+1 counter on it has trample.
 DeckHas:Ability$Counters
 Oracle:When Pridemalkin enters the battlefield, put a +1/+1 counter on target creature you control.\nEach creature you control with a +1/+1 counter on it has trample. (They can deal excess combat damage to the player or planeswalker they're attacking.)

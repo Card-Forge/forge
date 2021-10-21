@@ -3,6 +3,6 @@ ManaCost:2 R
 Types:Creature Dinosaur
 PT:3/2
 T:Mode$ DamageDoneOnce | Execute$ TrigDealDamage | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Enrage — Whenever CARDNAME is dealt damage, it deals 2 damage to target opponent or planeswalker.
-SVar:TrigDealDamage:DB$DealDamage | ValidTgts$ Opponent,Planeswalker | TgtPrompt$ Select target opponent or planeswalker | NumDmg$ 2
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Opponent,Planeswalker | TgtPrompt$ Select target opponent or planeswalker | NumDmg$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frilled_deathspitter.jpg
 Oracle:Enrage — Whenever Frilled Deathspitter is dealt damage, it deals 2 damage to target opponent or planeswalker.

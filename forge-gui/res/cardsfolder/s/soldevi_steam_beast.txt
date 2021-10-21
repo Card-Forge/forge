@@ -4,6 +4,6 @@ Types:Artifact Creature Beast
 PT:4/2
 T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ Whenever CARDNAME becomes tapped, target opponent gains 2 life.
 A:AB$ Regenerate | Cost$ 2 | SpellDescription$ Regenerate CARDNAME.
-SVar:TrigGainLife:DB$GainLife | ValidTgts$ Opponent | TgtPrompt$ Choose target opponent | LifeAmount$ 2
+SVar:TrigGainLife:DB$ GainLife | ValidTgts$ Opponent | TgtPrompt$ Choose target opponent | LifeAmount$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soldevi_steam_beast.jpg
 Oracle:Whenever Soldevi Steam Beast becomes tapped, target opponent gains 2 life.\n{2}: Regenerate Soldevi Steam Beast.

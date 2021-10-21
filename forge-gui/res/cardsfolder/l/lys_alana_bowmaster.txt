@@ -4,7 +4,7 @@ Types:Creature Elf Archer
 PT:2/2
 K:Reach
 T:Mode$ SpellCast | ValidCard$ Elf | ValidActivatingPlayer$ You | Execute$ TrigDamage | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an Elf spell, you may have CARDNAME deal 2 damage to target creature with flying.
-SVar:TrigDamage:DB$DealDamage | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | NumDmg$ 2
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | NumDmg$ 2
 SVar:BuffedBy:Elf
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lys_alana_bowmaster.jpg
 Oracle:Reach\nWhenever you cast an Elf spell, you may have Lys Alana Bowmaster deal 2 damage to target creature with flying.

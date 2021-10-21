@@ -3,6 +3,6 @@ ManaCost:1 G
 Types:Creature Cat
 PT:3/1
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigUntap | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, untap target creature or land.
-SVar:TrigUntap:DB$Untap | ValidTgts$ Creature,Land | TgtPrompt$ Select target creature or land
+SVar:TrigUntap:DB$ Untap | ValidTgts$ Creature,Land | TgtPrompt$ Select target creature or land
 SVar:Picture:http://www.wizards.com/global/images/magic/general/initiates_companion.jpg
 Oracle:Whenever Initiate's Companion deals combat damage to a player, untap target creature or land.

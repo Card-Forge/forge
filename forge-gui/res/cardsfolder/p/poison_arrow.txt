@@ -2,6 +2,6 @@ Name:Poison Arrow
 ManaCost:4 B B
 Types:Sorcery
 A:SP$ Destroy | Cost$ 4 B B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | SubAbility$ DBGainLife | SpellDescription$ Destroy target nonblack creature. You gain 3 life.
-SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 3
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/poison_arrow.jpg
 Oracle:Destroy target nonblack creature. You gain 3 life.

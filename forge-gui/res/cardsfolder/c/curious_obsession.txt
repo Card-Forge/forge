@@ -5,7 +5,7 @@ K:Enchant creature
 A:SP$ Attach | Cost$ U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddPower$ 1 | AddToughness$ 1 | AddTrigger$ TriggerDamageDone | AddSVar$ CuriousObsessionDraw | Description$ Enchanted creature gets +1/+1 and has "Whenever this creature deals damage to an opponent, you may draw a card."
 SVar:TriggerDamageDone:Mode$ DamageDone | ValidSource$ Card.Self | CombatDamage$ True | ValidTarget$ Player | OptionalDecider$ You | Execute$ CuriousObsessionDraw | TriggerDescription$ Whenever this creature deals combat damage to a player, you may draw a card.
-SVar:CuriousObsessionDraw:DB$Draw | Defined$ You | NumCards$ 1
+SVar:CuriousObsessionDraw:DB$ Draw | Defined$ You | NumCards$ 1
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ At the beginning of your end step, if you didn't attack with a creature this turn, sacrifice CARDNAME.
 SVar:TrigSac:DB$ Sacrifice | SacValid$ Self
 SVar:X:Count$AttackersDeclared

@@ -5,7 +5,7 @@ K:Vanishing:3
 PT:1/1
 S:Mode$ Continuous | Affected$ Creature.Squirrel+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Squirrel creatures you control get +1/+1.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create four 1/1 green Squirrel creature tokens.
-SVar:TrigToken:DB$Token | TokenAmount$ 4 | TokenScript$ g_1_1_squirrel | TokenOwner$ You | LegacyImage$ g 1 1 squirrel mh1
+SVar:TrigToken:DB$ Token | TokenAmount$ 4 | TokenScript$ g_1_1_squirrel | TokenOwner$ You | LegacyImage$ g 1 1 squirrel mh1
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Token
 SVar:Picture:http://mythicspoiler.com/mh1/cards/deepforesthermit.jpg

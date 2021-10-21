@@ -4,6 +4,6 @@ Types:Creature Cat Soldier
 PT:2/5
 K:Vigilance
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 4 life.
-SVar:TrigGainLife:DB$GainLife | LifeAmount$ 4
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jedits_dragoons.jpg
 Oracle:Vigilance\nWhen Jedit's Dragoons enters the battlefield, you gain 4 life.

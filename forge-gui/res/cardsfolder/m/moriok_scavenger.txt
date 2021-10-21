@@ -3,6 +3,6 @@ ManaCost:3 B
 Types:Creature Human Rogue
 PT:2/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target artifact creature card from your graveyard to your hand.
-SVar:TrigChangeZone:DB$ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Artifact.Creature+YouCtrl
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Artifact.Creature+YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moriok_scavenger.jpg
 Oracle:When Moriok Scavenger enters the battlefield, you may return target artifact creature card from your graveyard to your hand.

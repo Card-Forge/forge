@@ -3,6 +3,6 @@ ManaCost:W
 Types:Creature Human Cleric
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever another creature enters the battlefield, you gain 1 life.
-SVar:TrigGainLife:DB$GainLife | Defined$ You | LifeAmount$ 1
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84112.jpg
 Oracle:Whenever another creature enters the battlefield, you gain 1 life.

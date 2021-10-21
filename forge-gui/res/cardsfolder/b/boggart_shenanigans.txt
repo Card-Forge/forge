@@ -2,7 +2,7 @@ Name:Boggart Shenanigans
 ManaCost:2 R
 Types:Tribal Enchantment Goblin
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Goblin.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | OptionalDecider$ You | TriggerDescription$ Whenever another Goblin you control is put into a graveyard from the battlefield, you may have CARDNAME deal 1 damage to target player or planeswalker.
-SVar:TrigDamage:DB$DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker| NumDmg$ 1
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker| NumDmg$ 1
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boggart_shenanigans.jpg
 Oracle:Whenever another Goblin you control is put into a graveyard from the battlefield, you may have Boggart Shenanigans deal 1 damage to target player or planeswalker.

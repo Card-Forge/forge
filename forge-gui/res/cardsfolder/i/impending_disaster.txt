@@ -2,7 +2,7 @@ Name:Impending Disaster
 ManaCost:1 R
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | IsPresent$ Land | PresentCompare$ GE7 | TriggerDescription$ At the beginning of your upkeep, if there are seven or more lands on the battlefield, sacrifice CARDNAME and destroy all lands.
-SVar:TrigSac:DB$Sacrifice | Defined$ Self | SubAbility$ DBDestroyAll
+SVar:TrigSac:DB$ Sacrifice | Defined$ Self | SubAbility$ DBDestroyAll
 SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Land | SpellDescription$ Destroy all lands.
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/impending_disaster.jpg

@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Creature Goblin Artificer
 PT:1/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for an artifact card, put it into your graveyard, then shuffle.
-SVar:TrigChange:DB$ChangeZone | Origin$ Library | Destination$ Graveyard | ChangeType$ Artifact | ChangeNum$ 1 | ShuffleNonMandatory$ True
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Graveyard | ChangeType$ Artifact | ChangeNum$ 1 | ShuffleNonMandatory$ True
 A:AB$ ChangeZone | Cost$ R T Sac<1/Artifact> | TgtPrompt$ Choose target artifact card with mana value 3 or less from your graveyard | ValidTgts$ Artifact.cmcLE3+YouCtrl | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return target artifact card with mana value 3 or less from your graveyard to the battlefield.
 SVar:AIPreference:SacCost$Artifact.token
 Oracle:When Goblin Engineer enters the battlefield, you may search your library for an artifact card, put it into your graveyard, then shuffle.\n{R}, {T}, Sacrifice an artifact: Return target artifact card with mana value 3 or less from your graveyard to the battlefield.

@@ -5,7 +5,7 @@ PT:5/5
 K:Forestwalk
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks or blocks, create a 2/2 green Cat Warrior creature token with forestwalk.
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, create a 2/2 green Cat Warrior creature token with forestwalk.
-SVar:TrigToken:DB$Token | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ g_2_2_cat_warrior_forestwalk | LegacyImage$ g 2 2 cat warrior forestwalk plc
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ g_2_2_cat_warrior_forestwalk | LegacyImage$ g 2 2 cat warrior forestwalk plc
 SVar:HasAttackEffect:TRUE
 SVar:HasBlockEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jedit_ojanen_of_efrava.jpg

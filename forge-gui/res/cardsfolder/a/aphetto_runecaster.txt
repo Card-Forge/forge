@@ -3,6 +3,6 @@ ManaCost:3 U
 Types:Creature Human Wizard
 PT:2/3
 T:Mode$ TurnFaceUp | ValidCard$ Permanent | Execute$ TrigDraw | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever a permanent is turned face up, you may draw a card.
-SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 1
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aphetto_runecaster.jpg
 Oracle:Whenever a permanent is turned face up, you may draw a card.

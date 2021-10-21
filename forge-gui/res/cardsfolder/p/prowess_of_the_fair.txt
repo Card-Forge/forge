@@ -2,7 +2,7 @@ Name:Prowess of the Fair
 ManaCost:1 B
 Types:Tribal Enchantment Elf
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Elf.nonToken+Other+YouOwn | TriggerZones$ Battlefield | Execute$ TrigToken | OptionalDecider$ You | TriggerDescription$ Whenever another nontoken Elf is put into your graveyard from the battlefield, you may create a 1/1 green Elf Warrior creature token.
-SVar:TrigToken:DB$Token | TokenAmount$ 1 | TokenScript$ g_1_1_elf_warrior | TokenOwner$ You | LegacyImage$ g 1 1 elf warrior lrw
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_elf_warrior | TokenOwner$ You | LegacyImage$ g 1 1 elf warrior lrw
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prowess_of_the_fair.jpg
 Oracle:Whenever another nontoken Elf is put into your graveyard from the battlefield, you may create a 1/1 green Elf Warrior creature token.

@@ -3,7 +3,7 @@ ManaCost:5
 Types:Artifact
 S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your upkeep, you gain 1 life for each card in your hand.
-SVar:TrigGainLife:DB$GainLife | LifeAmount$ X
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ X
 SVar:X:Count$InYourHand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vensers_journal.jpg
 Oracle:You have no maximum hand size.\nAt the beginning of your upkeep, you gain 1 life for each card in your hand.

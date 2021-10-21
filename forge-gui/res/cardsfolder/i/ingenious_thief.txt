@@ -4,6 +4,6 @@ Types:Creature Human Rogue
 PT:1/1
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPeek | TriggerDescription$ When CARDNAME enters the battlefield, look at target player's hand.
-SVar:TrigPeek:DB$RevealHand | ValidTgts$ Player | TgtPrompt$ Select target player
+SVar:TrigPeek:DB$ RevealHand | ValidTgts$ Player | TgtPrompt$ Select target player
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ingenious_thief.jpg
 Oracle:Flying\nWhen Ingenious Thief enters the battlefield, look at target player's hand.

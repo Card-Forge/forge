@@ -4,6 +4,6 @@ Types:Creature Beast
 PT:5/4
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 5 life.
-SVar:TrigGainLife:DB$GainLife | LifeAmount$ 5
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 5
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arborback_stomper.jpg
 Oracle:Trample\nWhen Arborback Stomper enters the battlefield, you gain 5 life.

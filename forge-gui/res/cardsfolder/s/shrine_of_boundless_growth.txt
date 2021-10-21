@@ -3,7 +3,7 @@ ManaCost:3
 Types:Artifact
 T:Mode$ SpellCast | ValidCard$ Card.Green | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAddCounter | TriggerDescription$ At the beginning of your upkeep or whenever you cast a green spell, put a charge counter on CARDNAME.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAddCounter | Secondary$ True | TriggerDescription$ At the beginning of your upkeep or whenever you cast a green spell, put a charge counter on CARDNAME.
-SVar:TrigAddCounter:DB$PutCounter | CounterType$ CHARGE | CounterNum$ 1
+SVar:TrigAddCounter:DB$ PutCounter | CounterType$ CHARGE | CounterNum$ 1
 A:AB$Mana | Cost$ T Sac<1/CARDNAME> | Produced$ C | Amount$ X | SpellDescription$ Add {C} for each charge counter on CARDNAME.
 SVar:X:Count$CardCounters.CHARGE
 AI:RemoveDeck:All

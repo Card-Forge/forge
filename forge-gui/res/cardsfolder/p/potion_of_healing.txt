@@ -2,7 +2,7 @@ Name:Potion of Healing
 ManaCost:1 W
 Types:Artifact
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
-SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 1
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 A:AB$ GainLife | Cost$ W T Sac<1/CARDNAME> | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
 DeckHas:Ability$LifeGain
 Oracle:When Potion of Healing enters the battlefield, draw a card.\n{W}, {T}, Sacrifice Potion of Healing: You gain 3 life.

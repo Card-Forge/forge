@@ -2,7 +2,7 @@ Name:Soul Foundry
 ManaCost:4
 Types:Artifact
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | OptionalDecider$ You | Execute$ TrigExile | TriggerDescription$ Imprint — When CARDNAME enters the battlefield, you may exile a creature card from your hand.
-SVar:TrigExile:DB$ChangeZone | Imprint$ True | Origin$ Hand | Destination$ Exile | ChangeType$ Creature | ChangeNum$ 1
+SVar:TrigExile:DB$ ChangeZone | Imprint$ True | Origin$ Hand | Destination$ Exile | ChangeType$ Creature | ChangeNum$ 1
 A:AB$CopyPermanent | Cost$ X T | Defined$ Imprinted.ExiledWithSource | AILogic$ AtEOT | SpellDescription$ Create a token that's a copy of the exiled card. X is the mana value of that card.
 SVar:X:Imprinted$CardManaCost
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsImprinted+ExiledWithSource | Execute$ DBForget

@@ -3,6 +3,6 @@ ManaCost:2 UR UR
 Types:Creature Noggle Rogue
 PT:4/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME enters the battlefield, return a land you control to its owner's hand.
-SVar:TrigReturn:DB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Land.YouCtrl | SpellDescription$ Return a land you control to its owner's hand.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Land.YouCtrl | SpellDescription$ Return a land you control to its owner's hand.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/noggle_bridgebreaker.jpg
 Oracle:When Noggle Bridgebreaker enters the battlefield, return a land you control to its owner's hand.

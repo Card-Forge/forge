@@ -3,6 +3,6 @@ ManaCost:W
 Types:Artifact Creature Human Soldier
 PT:1/1
 T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ Player.Opponent | ActivatorThisTurnCast$ EQ1 | NoResolvingCheck$ True | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent casts their first noncreature spell each turn, draw a card unless that player pays {X}, where X is CARDNAME's power.
-SVar:TrigDraw:DB$Draw | Defined$ You | UnlessCost$ X | UnlessPayer$ TriggeredPlayer | NumCards$ 1
+SVar:TrigDraw:DB$ Draw | Defined$ You | UnlessCost$ X | UnlessPayer$ TriggeredPlayer | NumCards$ 1
 SVar:X:Count$CardPower
 Oracle:Whenever an opponent casts their first noncreature spell each turn, draw a card unless that player pays {X}, where X is Esper Sentinel's power.

@@ -4,6 +4,6 @@ Types:Land
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ HavenLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 1 life.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Angel.YouCtrl | TriggerZones$ Battlefield | Execute$ HavenLife | TriggerDescription$ Whenever an Angel enters the battlefield under your control, you gain 1 life.
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-SVar:HavenLife:DB$GainLife | Defined$ You | LifeAmount$ 1
+SVar:HavenLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seraph_sanctuary.jpg
 Oracle:When Seraph Sanctuary enters the battlefield, you gain 1 life.\nWhenever an Angel enters the battlefield under your control, you gain 1 life.\n{T}: Add {C}.

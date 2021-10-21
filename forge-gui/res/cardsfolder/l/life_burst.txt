@@ -2,7 +2,7 @@ Name:Life Burst
 ManaCost:1 W
 Types:Instant
 A:SP$ GainLife | Cost$ 1 W | LifeAmount$ 4 | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBGainLife | SpellDescription$ Target player gains 4 life, then gains 4 life for each card named CARDNAME in each graveyard.
-SVar:DBGainLife:DB$GainLife | Defined$ Targeted | LifeAmount$ X
+SVar:DBGainLife:DB$ GainLife | Defined$ Targeted | LifeAmount$ X
 SVar:X:Count$NamedInAllYards.Life Burst/Times.4
 DeckHints:Name$Life Burst
 SVar:Picture:http://resources.wizards.com/magic/cards/od/en-us/card29704.jpg

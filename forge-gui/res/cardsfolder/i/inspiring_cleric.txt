@@ -3,6 +3,6 @@ ManaCost:2 W
 Types:Creature Vampire Cleric
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 4 life.
-SVar:TrigGainLife:DB$GainLife | LifeAmount$ 4
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inspiring_cleric.jpg
 Oracle:When Inspiring Cleric enters the battlefield, you gain 4 life.

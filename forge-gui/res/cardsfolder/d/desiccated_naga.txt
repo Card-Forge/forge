@@ -3,6 +3,6 @@ ManaCost:2 B
 Types:Creature Zombie Naga
 PT:3/2
 A:AB$ LoseLife | Cost$ 3 B | ValidTgts$ Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife | IsPresent$ Planeswalker.Liliana+YouCtrl | SpellDescription$ Target opponent loses 2 life and you gain 2 life. Activate only if you control a Liliana planeswalker.
-SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 2
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
 DeckNeeds:Type$Liliana
 Oracle:{3}{B}: Target opponent loses 2 life and you gain 2 life. Activate only if you control a Liliana planeswalker.

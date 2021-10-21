@@ -3,6 +3,6 @@ ManaCost:1 U
 Types:Instant
 A:SP$ ChangeZone | Cost$ 1 U | Origin$ Hand | Destination$ Library | Shuffle$ True | ChangeType$ Card | RememberChanged$ True | SubAbility$ DelTrigSlowtrip | SpellDescription$ Shuffle a card from your hand into your library. If you do, draw two cards at the beginning of the next turn's upkeep.
 SVar:DelTrigSlowtrip:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ DrawSlowtrip | TriggerDescription$ Draw two cards.
-SVar:DrawSlowtrip:DB$Draw | NumCards$ 2 | Defined$ You
+SVar:DrawSlowtrip:DB$ Draw | NumCards$ 2 | Defined$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lat_nams_legacy.jpg
 Oracle:Shuffle a card from your hand into your library. If you do, draw two cards at the beginning of the next turn's upkeep.

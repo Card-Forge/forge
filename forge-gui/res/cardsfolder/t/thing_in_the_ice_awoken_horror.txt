@@ -5,8 +5,8 @@ PT:0/4
 K:Defender
 K:etbCounter:ICE:4
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRemoveCounter | TriggerDescription$ Whenever you cast an instant or sorcery spell, remove an ice counter from CARDNAME. Then if it has no ice counters on it, transform it.
-SVar:TrigRemoveCounter:DB$RemoveCounter | Defined$ Self | CounterType$ ICE | CounterNum$ 1 | SubAbility$ DBTransform
-SVar:DBTransform:DB$SetState | Defined$ Self | ConditionPresent$ Card.Self+counters_EQ0_ICE | Mode$ Transform
+SVar:TrigRemoveCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ ICE | CounterNum$ 1 | SubAbility$ DBTransform
+SVar:DBTransform:DB$ SetState | Defined$ Self | ConditionPresent$ Card.Self+counters_EQ0_ICE | Mode$ Transform
 DeckHints:Type$Horror
 DeckNeeds:Type$Instant|Sorcery
 DeckHas:Ability$Counters
@@ -22,6 +22,6 @@ Colors:blue
 Types:Creature Kraken Horror
 PT:7/8
 T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ Whenever this creature transforms into CARDNAME, return all non-Horror creatures to their owner's hands.
-SVar:TrigChange:DB$ChangeZoneAll | ChangeType$ Creature.nonHorror | Origin$ Battlefield | Destination$ Hand
+SVar:TrigChange:DB$ ChangeZoneAll | ChangeType$ Creature.nonHorror | Origin$ Battlefield | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/awoken_horror.jpg
 Oracle:When this creature transforms into Awoken Horror, return all non-Horror creatures to their owners' hands.

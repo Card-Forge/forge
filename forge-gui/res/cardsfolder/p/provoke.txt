@@ -2,8 +2,8 @@ Name:Provoke
 ManaCost:1 G
 Types:Instant
 A:SP$ Pump | Cost$ 1 G | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | KW$ HIDDEN CARDNAME blocks each combat if able. | IsCurse$ True | SubAbility$ DBUntap | SpellDescription$ Untap target creature you don't control. That creature blocks this turn if able. Draw a card.
-SVar:DBUntap:DB$Untap | Defined$ Targeted | SubAbility$ DBDraw
-SVar:DBDraw:DB$Draw | NumCards$ 1
+SVar:DBUntap:DB$ Untap | Defined$ Targeted | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ 1
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/provoke.jpg
 Oracle:Untap target creature you don't control. That creature blocks this turn if able.\nDraw a card.

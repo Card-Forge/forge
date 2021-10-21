@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 K:CARDNAME enters the battlefield tapped.
 T:Mode$ ChangesZone | ValidCard$ Mountain.YouCtrl | Origin$ Any | Destination$ Battlefield | OptionalDecider$ You | Execute$ TrigDamage | IsPresent$ Mountain.YouCtrl | PresentCompare$ GE6 | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Mountain enters the battlefield under your control, if you control at least five other Mountains, you may have CARDNAME deal 3 damage to any target.
-SVar:TrigDamage:DB$DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 3
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 3
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/valakut_the_molten_pinnacle.jpg
 Oracle:Valakut, the Molten Pinnacle enters the battlefield tapped.\nWhenever a Mountain enters the battlefield under your control, if you control at least five other Mountains, you may have Valakut, the Molten Pinnacle deal 3 damage to any target.\n{T}: Add {R}.

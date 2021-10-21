@@ -5,7 +5,7 @@ PT:6/6
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Creature.nonToken+OppOwn | TriggerZones$ Battlefield | Execute$ TrigReanimate | TriggerDescription$ Whenever a creature card is put into an opponent's graveyard from anywhere, you may pay life equal to its mana value. If you do, put it onto the battlefield under your control. It's a Warlock in addition to its other types.
 SVar:TrigReanimate:AB$ ChangeZone | Cost$ PayLife<X> | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | ChangeNum$ 1 | AnimateSubAbility$ Animate
-SVar:Animate:DB$Animate | Defined$ TriggeredCard | Types$ Warlock | Duration$ Permanent
+SVar:Animate:DB$ Animate | Defined$ TriggeredCard | Types$ Warlock | Duration$ Permanent
 SVar:X:TriggeredCard$CardManaCost
 R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | Destination$ Graveyard | ValidLKI$ Creature.Warlock+YouCtrl | ReplaceWith$ Exile | CheckSelfLKIZone$ True | Description$ If a Warlock you control would die, exile it instead.
 SVar:Exile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ ReplacedCard

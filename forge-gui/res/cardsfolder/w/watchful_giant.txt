@@ -3,7 +3,7 @@ ManaCost:5 W
 Types:Creature Giant Soldier
 PT:3/6
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 white Human creature token.
-SVar:TrigToken:DB$Token | TokenAmount$ 1 | TokenScript$ w_1_1_human | LegacyImage$ w 1 1 human rna | TokenOwner$ You | SpellDescription$ Create a 1/1 white Human creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_human | LegacyImage$ w 1 1 human rna | TokenOwner$ You | SpellDescription$ Create a 1/1 white Human creature token.
 DeckHints:Type$Human
 DeckHas:Ability$Token
 Oracle:When Watchful Giant enters the battlefield, create a 1/1 white Human creature token.

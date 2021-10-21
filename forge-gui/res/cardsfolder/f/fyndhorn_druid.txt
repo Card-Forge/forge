@@ -3,6 +3,6 @@ ManaCost:2 G
 Types:Creature Elf Druid
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+gotBlockedThisTurn | Execute$ TrigGainLife | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, if it was blocked this turn, you gain 4 life.
-SVar:TrigGainLife:DB$GainLife | Defined$ TriggeredCardController | LifeAmount$ 4
+SVar:TrigGainLife:DB$ GainLife | Defined$ TriggeredCardController | LifeAmount$ 4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fyndhorn_druid.jpg
 Oracle:When Fyndhorn Druid dies, if it was blocked this turn, you gain 4 life.

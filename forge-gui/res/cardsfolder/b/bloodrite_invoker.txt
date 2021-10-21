@@ -3,6 +3,6 @@ ManaCost:2 B
 Types:Creature Vampire Shaman
 PT:3/1
 A:AB$ LoseLife | Cost$ 8 | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 3 | SubAbility$ DBGainLife | SpellDescription$ Target player loses 3 life and you gain 3 life.
-SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 3
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodrite_invoker.jpg
 Oracle:{8}: Target player loses 3 life and you gain 3 life.

@@ -5,6 +5,6 @@ PT:2/2
 K:Flying
 K:Morph:1 G U
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigBounce | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ When CARDNAME is turned face up, you may return another target creature to its owner's hand.
-SVar:TrigBounce:DB$ChangeZone | ValidTgts$ Creature.Other | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand
+SVar:TrigBounce:DB$ ChangeZone | ValidTgts$ Creature.Other | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/icefeather_aven.jpg
 Oracle:Flying\nMorph {1}{G}{U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Icefeather Aven is turned face up, you may return another target creature to its owner's hand.

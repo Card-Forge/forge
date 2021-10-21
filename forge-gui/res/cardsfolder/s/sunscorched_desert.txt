@@ -2,7 +2,7 @@ Name:Sunscorched Desert
 ManaCost:no cost
 Types:Land Desert
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 1 damage to target player or planeswalker.
-SVar:TrigDealDamage:DB$DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1 
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sunscorched_desert.jpg
 Oracle:When Sunscorched Desert enters the battlefield, it deals 1 damage to target player or planeswalker.\n{T}: Add {C}.

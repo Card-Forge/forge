@@ -11,7 +11,7 @@ SVar:Draw:DB$ Draw | Defined$ You | NumCards$ X
 SVar:X:ReplaceCount$LifeGained
 T:Mode$ DamageDoneOnce | ValidTarget$ You | TriggerZones$ Battlefield | Execute$ TrigLoseOrSac | TriggerDescription$ Whenever you're dealt damage, sacrifice that many nontoken permanents. If you can't, you lose the game.
 SVar:TrigLoseOrSac:DB$ LosesGame | Defined$ You | ConditionCheckSVar$ PermanentsToSac | ConditionSVarCompare$ GTY | SubAbility$ DBSacrificePerm
-SVar:DBSacrificePerm:DB$Sacrifice | Amount$ PermanentsToSac | SacValid$ Permanent.nontoken | ConditionCheckSVar$ PermanentsToSac | ConditionSVarCompare$ LEY
+SVar:DBSacrificePerm:DB$ Sacrifice | Amount$ PermanentsToSac | SacValid$ Permanent.nontoken | ConditionCheckSVar$ PermanentsToSac | ConditionSVarCompare$ LEY
 SVar:PermanentsToSac:TriggerCount$DamageAmount
 SVar:Y:Count$Valid Permanent.nontoken+YouCtrl
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigLose | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, you lose the game.

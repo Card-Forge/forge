@@ -5,7 +5,7 @@ PT:4/3
 S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefenderControls$ Island | Description$ CARDNAME can't attack unless defending player controls an Island.
 A:AB$ Animate | Cost$ U Sac<1/Island> | ValidTgts$ Land.OppCtrl | TgtPrompt$ Select target land an opponent controls | Types$ Island | RemoveLandTypes$ True | SpellDescription$ Target land an opponent controls becomes an Island until end of turn.
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Island.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When you control no Islands, sacrifice CARDNAME.
-SVar:TrigSac:DB$Sacrifice | Defined$ Self
+SVar:TrigSac:DB$ Sacrifice | Defined$ Self
 SVar:NeedsToPlay:Island.YouCtrl
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kukemssa_serpent.jpg

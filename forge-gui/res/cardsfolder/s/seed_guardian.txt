@@ -4,7 +4,7 @@ Types:Creature Elemental
 PT:3/4
 K:Reach
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, create an X/X green Elemental creature token, where X is the number of creature cards in your graveyard.
-SVar:TrigToken:DB$Token | TokenAmount$ 1 | TokenScript$ g_x_x_elemental | TokenOwner$ TriggeredCardController | LegacyImage$ g x x elemental ogw | TokenPower$ X | TokenToughness$ X
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_x_x_elemental | TokenOwner$ TriggeredCardController | LegacyImage$ g x x elemental ogw | TokenPower$ X | TokenToughness$ X
 SVar:X:Count$TypeInYourYard.Creature
 SVar:SacMe:1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seed_guardian.jpg

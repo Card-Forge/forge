@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Curse | AITgts$ Creature.withFlying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Card.EnchantedBy+withFlying | PresentCompare$ EQ1 | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, if enchanted creature has flying, CARDNAME deals 2 damage to that creature and CARDNAME gains "Enchanted creature loses flying."
-SVar:TrigDealDamage:DB$DealDamage | Defined$ Valid Card.EnchantedBy | NumDmg$ 2 | SubAbility$ DBLoseFlying
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ Valid Card.EnchantedBy | NumDmg$ 2 | SubAbility$ DBLoseFlying
 SVar:DBLoseFlying:DB$ Animate | Defined$ Self | staticAbilities$ LoseFlyingStatic | Duration$ Permanent
 SVar:LoseFlyingStatic:Mode$ Continuous | Affected$ Card.EnchantedBy | RemoveKeyword$ Flying | Description$ Enchanted creature loses flying.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/earthbind.jpg

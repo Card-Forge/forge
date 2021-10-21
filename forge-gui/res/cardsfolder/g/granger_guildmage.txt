@@ -3,7 +3,7 @@ ManaCost:G
 Types:Creature Human Wizard
 PT:1/1
 A:AB$ DealDamage | Cost$ R T | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 1 damage to any target and 1 damage to you.
-SVar:DBDealDamage:DB$DealDamage | Defined$ You | NumDmg$ 1
+SVar:DBDealDamage:DB$ DealDamage | Defined$ You | NumDmg$ 1
 A:AB$ Pump | Cost$ W T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ First Strike | SpellDescription$ Target creature gains first strike until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/granger_guildmage.jpg
 Oracle:{R}, {T}: Granger Guildmage deals 1 damage to any target and 1 damage to you.\n{W}, {T}: Target creature gains first strike until end of turn.

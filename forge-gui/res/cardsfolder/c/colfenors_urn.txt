@@ -5,6 +5,6 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | TriggerZone
 SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Defined$ TriggeredNewCardLKICopy | RememberChanged$ True
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE3 | Execute$ TrigReturnAll | TriggerDescription$ At the beginning of the end step, if three or more cards have been exiled with Colfenor's Urn, sacrifice it. If you do, return those cards to the battlefield under their owner's control.
 SVar:TrigReturnAll:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBSacSelf
-SVar:DBSacSelf:DB$Sacrifice | Defined$ Self
+SVar:DBSacSelf:DB$ Sacrifice | Defined$ Self
 SVar:X:Remembered$Amount
 Oracle:Whenever a creature with toughness 4 or greater is put into your graveyard from the battlefield, you may exile it.\nAt the beginning of the end step, if three or more cards have been exiled with Colfenor's Urn, sacrifice it. If you do, return those cards to the battlefield under their owner's control.

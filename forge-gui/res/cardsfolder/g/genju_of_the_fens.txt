@@ -6,7 +6,7 @@ A:SP$ Attach | Cost$ B | ValidTgts$ Swamp | AILogic$ Pump
 A:AB$ Animate | Cost$ 2 | Defined$ Enchanted | Power$ 2 | Toughness$ 2 | Types$ Creature,Spirit | Colors$ Black | Abilities$ ABPump | SpellDescription$ Until end of turn, enchanted Swamp becomes a 2/2 black Spirit creature with "{B}: This creature gets +1/+1 until end of turn." It's still a land.
 T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigReturnOwner | OptionalDecider$ You | TriggerDescription$ When enchanted Swamp is put into a graveyard, you may return CARDNAME from your graveyard to your hand.
 SVar:ABPump:AB$ Pump | Cost$ B | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ This creature gets +1/+1 until end of turn.
-SVar:TrigReturnOwner:DB$ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Hand
+SVar:TrigReturnOwner:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Hand
 SVar:NonStackingAttachEffect:True
 SVar:AIPaymentPreference:AvoidPayingWithAttachTarget
 Oracle:Enchant Swamp\n{2}: Until end of turn, enchanted Swamp becomes a 2/2 black Spirit creature with "{B}: This creature gets +1/+1 until end of turn." It's still a land.\nWhen enchanted Swamp is put into a graveyard, you may return Genju of the Fens from your graveyard to your hand.

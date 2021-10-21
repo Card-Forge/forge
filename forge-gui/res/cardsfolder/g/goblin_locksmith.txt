@@ -3,6 +3,6 @@ ManaCost:1 R
 Types:Creature Goblin Rogue
 PT:2/1
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ Whenever CARDNAME attacks, creatures with defender can't block this turn.
-SVar:TrigEffect:DB$Effect | StaticAbilities$ KWPump
+SVar:TrigEffect:DB$ Effect | StaticAbilities$ KWPump
 SVar:KWPump:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.withDefender | AddHiddenKeyword$ CARDNAME can't block. | Description$ Creatures with defender can't block this turn.
 Oracle:Whenever Goblin Locksmith attacks, creatures with defender can't block this turn.

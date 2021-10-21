@@ -3,6 +3,6 @@ ManaCost:G
 Types:Creature Elemental
 PT:1/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 3 life.
-SVar:TrigGainLife:DB$GainLife | LifeAmount$ 3
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3
 DeckHas:Ability$LifeGain
 Oracle:When Healer of the Glade enters the battlefield, you gain 3 life.

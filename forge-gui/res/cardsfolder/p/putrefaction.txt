@@ -2,7 +2,7 @@ Name:Putrefaction
 ManaCost:4 B
 Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Card.Green,Card.White | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts a green or white spell, that player discards a card.
-SVar:TrigDiscard:DB$Discard | Defined$ TriggeredActivator | NumCards$ 1 | Mode$ TgtChoose
+SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredActivator | NumCards$ 1 | Mode$ TgtChoose
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/putrefaction.jpg
 Oracle:Whenever a player casts a green or white spell, that player discards a card.

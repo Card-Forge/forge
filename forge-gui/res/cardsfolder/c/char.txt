@@ -2,7 +2,7 @@ Name:Char
 ManaCost:2 R
 Types:Instant
 A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 4  | DamageMap$ True | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 4 damage to any target and 2 damage to you.
-SVar:DBDealDamage:DB$DealDamage | Defined$ You | NumDmg$ 2 | SubAbility$ DBDamageResolve
+SVar:DBDealDamage:DB$ DealDamage | Defined$ You | NumDmg$ 2 | SubAbility$ DBDamageResolve
 SVar:DBDamageResolve:DB$ DamageResolve
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card87942.jpg
 Oracle:Char deals 4 damage to any target and 2 damage to you.

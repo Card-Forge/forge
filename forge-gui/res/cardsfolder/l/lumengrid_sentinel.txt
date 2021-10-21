@@ -4,6 +4,6 @@ Types:Creature Human Wizard
 PT:1/2
 K:Flying
 T:Mode$ ChangesZone | ValidCard$ Artifact.YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever an artifact enters the battlefield under your control, you may tap target permanent.
-SVar:TrigTap:DB$Tap | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
+SVar:TrigTap:DB$ Tap | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lumengrid_sentinel.jpg
 Oracle:Flying\nWhenever an artifact enters the battlefield under your control, you may tap target permanent.

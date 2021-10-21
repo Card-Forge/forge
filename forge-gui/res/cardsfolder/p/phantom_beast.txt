@@ -3,7 +3,7 @@ ManaCost:3 U
 Types:Creature Illusion Beast
 PT:4/5
 T:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When CARDNAME becomes the target of a spell or ability, sacrifice it.
-SVar:TrigSac:DB$Sacrifice | Defined$ Self
+SVar:TrigSac:DB$ Sacrifice | Defined$ Self
 SVar:Targeting:Dies
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phantom_beast.jpg
 Oracle:When Phantom Beast becomes the target of a spell or ability, sacrifice it.

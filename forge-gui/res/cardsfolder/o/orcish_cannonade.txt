@@ -2,9 +2,9 @@ Name:Orcish Cannonade
 ManaCost:1 R R
 Types:Instant
 A:SP$ DealDamage | Cost$ 1 R R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2 | DamageMap$ True | AILogic$ SelfDamage | SubAbility$ DB1 | SpellDescription$ CARDNAME deals 2 damage to any target and 3 damage to you. Draw a card.
-SVar:DB1:DB$DealDamage | NumDmg$ 3 | Defined$ You | SubAbility$ DBDamageResolve
+SVar:DB1:DB$ DealDamage | NumDmg$ 3 | Defined$ You | SubAbility$ DBDamageResolve
 SVar:DBDamageResolve:DB$ DamageResolve | SubAbility$ DB2
-SVar:DB2:DB$Draw | NumCards$ 1
+SVar:DB2:DB$ Draw | NumCards$ 1
 SVar:SelfDamageAmount:3
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orcish_cannonade.jpg

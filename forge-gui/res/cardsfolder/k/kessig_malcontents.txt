@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Creature Human Warrior
 PT:3/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TroubleMaking | TriggerDescription$ When CARDNAME enters the battlefield, it deals damage to target player or planeswalker equal to the number of Humans you control.
-SVar:TroubleMaking:DB$DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ X
+SVar:TroubleMaking:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ X
 SVar:X:Count$Valid Human.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kessig_malcontents.jpg
 Oracle:When Kessig Malcontents enters the battlefield, it deals damage to target player or planeswalker equal to the number of Humans you control.

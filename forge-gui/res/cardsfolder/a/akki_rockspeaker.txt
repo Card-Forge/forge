@@ -3,6 +3,6 @@ ManaCost:1 R
 Types:Creature Goblin Shaman
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMana | TriggerDescription$ When CARDNAME enters the battlefield, add {R}.
-SVar:TrigMana:DB$Mana | Produced$ R | Amount$ 1
+SVar:TrigMana:DB$ Mana | Produced$ R | Amount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/akki_rockspeaker.jpg
 Oracle:When Akki Rockspeaker enters the battlefield, add {R}.

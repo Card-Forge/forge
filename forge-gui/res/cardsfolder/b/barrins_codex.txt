@@ -2,7 +2,7 @@ Name:Barrin's Codex
 ManaCost:4
 Types:Artifact
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may put a page counter on CARDNAME.
-SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ PAGE | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ PAGE | CounterNum$ 1
 A:AB$ Draw | Cost$ 4 T Sac<1/CARDNAME> | NumCards$ X | SpellDescription$ Draw X cards, where X is the number of page counters on CARDNAME.
 SVar:X:Count$CardCounters.PAGE
 # TODO: maybe improve the AI logic for the trigger so that the AI doesn't go too much higher than the max hand size here,

@@ -7,7 +7,7 @@ SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ Y | Defined$ Opponent | SubAbility$ D
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Y:Remembered$CardManaCost
 A:AB$ DealDamage | Cost$ SubCounter<X/LOYALTY> | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ X | Planeswalker$ True | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals X damage to target creature or planeswalker and you gain X life.
-SVar:DBGainLife:DB$GainLife | LifeAmount$ X | Defined$ You
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | Defined$ You
 SVar:X:Count$xPaid
 A:AB$ Token | Cost$ SubCounter<9/LOYALTY> | Planeswalker$ True | TokenAmount$ Z | TokenScript$ b_1_1_vampire_knight_lifelink | TokenOwner$ You | LegacyImage$ b 1 1 vampire knight lifelink soi | Ultimate$ True | SpellDescription$ Create a number of 1/1 black Vampire Knight creature tokens with lifelink equal to the highest life total among all players.
 SVar:Z:PlayerCountPlayers$HighestLifeTotal

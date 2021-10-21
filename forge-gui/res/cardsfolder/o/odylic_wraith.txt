@@ -4,6 +4,6 @@ Types:Creature Wraith
 PT:2/2
 K:Swampwalk
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage to a player, that player discards a card.
-SVar:TrigDiscard:DB$Discard | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose
+SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose
 SVar:Picture:http://www.wizards.com/global/images/magic/general/odylic_wraith.jpg
 Oracle:Swampwalk (This creature can't be blocked as long as defending player controls a Swamp.)\nWhenever Odylic Wraith deals damage to a player, that player discards a card.

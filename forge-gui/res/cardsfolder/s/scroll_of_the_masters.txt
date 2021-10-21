@@ -2,7 +2,7 @@ Name:Scroll of the Masters
 ManaCost:2
 Types:Artifact
 T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a noncreature spell, put a lore counter on CARDNAME.
-SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ LORE | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ LORE | CounterNum$ 1
 A:AB$ Pump | Cost$ 3 T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature | NumAtt$ X | NumDef$ X | SpellDescription$ Target creature you control gets +1/+1 until end of turn for each lore counter on CARDNAME.
 SVar:X:Count$CardCounters.LORE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scroll_of_the_masters.jpg

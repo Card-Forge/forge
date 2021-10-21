@@ -2,6 +2,6 @@ Name:Kiss of the Amesha
 ManaCost:4 W U
 Types:Sorcery
 A:SP$ GainLife | Cost$ 4 W U | LifeAmount$ 7 | ValidTgts$ Player | TgtPrompt$ Choose a player | SubAbility$ DBDraw | SpellDescription$ Target player gains 7 life and draws two cards.
-SVar:DBDraw:DB$Draw | Defined$ Targeted | NumCards$ 2
+SVar:DBDraw:DB$ Draw | Defined$ Targeted | NumCards$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kiss_of_the_amesha.jpg
 Oracle:Target player gains 7 life and draws two cards.

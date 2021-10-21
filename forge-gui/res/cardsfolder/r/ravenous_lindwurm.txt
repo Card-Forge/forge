@@ -3,6 +3,6 @@ ManaCost:4 G G
 Types:Creature Wurm
 PT:6/6
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 4 life.
-SVar:TrigGainLife:DB$GainLife | LifeAmount$ 4
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 4
 DeckHas:Ability$LifeGain
 Oracle:When Ravenous Lindwurm enters the battlefield, you gain 4 life.

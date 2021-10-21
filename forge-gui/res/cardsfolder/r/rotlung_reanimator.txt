@@ -4,6 +4,6 @@ Types:Creature Zombie Cleric
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Cleric.Other | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME or another Cleric dies, create a 2/2 black Zombie creature token.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another Cleric dies, create a 2/2 black Zombie creature token.
-SVar:TrigToken:DB$Token | LegacyImage$ b 2 2 zombie ons | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenAmount$ 1
+SVar:TrigToken:DB$ Token | LegacyImage$ b 2 2 zombie ons | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rotlung_reanimator.jpg
 Oracle:Whenever Rotlung Reanimator or another Cleric dies, create a 2/2 black Zombie creature token.

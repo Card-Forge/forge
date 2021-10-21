@@ -5,7 +5,7 @@ PT:4/4
 K:Flying
 K:Haste
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ At the beginning of the end step, return CARDNAME to its owner's hand.
-SVar:TrigReturn:DB$ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand
+SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand
 SVar:EndOfTurnLeavePlay:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/archwing_dragon.jpg
 Oracle:Flying, haste\nAt the beginning of the end step, return Archwing Dragon to its owner's hand.

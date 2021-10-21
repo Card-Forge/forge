@@ -5,7 +5,7 @@ PT:2/2
 K:Flying
 K:Haunt:TrigDrain
 SVar:TrigDrain:DB$ LoseLife | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 2 | SubAbility$ DBGainLife | SpellDescription$ Target player loses 2 life and you gain 2 life.
-SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 2
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
 DeckHas:Ability$LifeGain
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blind_hunter.jpg
 Oracle:Flying\nHaunt (When this creature dies, exile it haunting target creature.)\nWhen Blind Hunter enters the battlefield or the creature it haunts dies, target player loses 2 life and you gain 2 life.

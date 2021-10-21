@@ -4,11 +4,11 @@ Types:Creature Merfolk Warrior
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ WhirlYou | TriggerDescription$ When CARDNAME enters the battlefield, shuffle the cards from your hand into your library, then draw that many cards.
 SVar:WhirlYou:DB$ ChangeZoneAll | Defined$ You | Origin$ Hand | Destination$ Library | LibraryPosition$ -1 | RememberChanged$ True | ForgetOtherRemembered$ True | Shuffle$ True | SubAbility$ DBDraw
-SVar:DBDraw:DB$Draw | NumCards$ X | Defined$ You | SubAbility$ DBCleanup
+SVar:DBDraw:DB$ Draw | NumCards$ X | Defined$ You | SubAbility$ DBCleanup
 A:AB$ RepeatEach | Cost$ R Sac<1/CARDNAME> | RepeatPlayers$ Player | RepeatSubAbility$ ShuffleHand | SpellDescription$ Each player shuffles the cards from their hand into their library, then draws that many cards.
 SVar:ShuffleHand:DB$ ChangeZoneAll | Defined$ Player.IsRemembered | Origin$ Hand | Destination$ Library | LibraryPosition$ -1 | RememberChanged$ True | Shuffle$ True | SubAbility$ WindDraw
 SVar:WindDraw:DB$ Draw | NumCards$ Y | Defined$ Player.IsRemembered | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 # Amount Minus 1 because the Player is also being remembered at this point
 SVar:Y:Remembered$Amount/Minus.1

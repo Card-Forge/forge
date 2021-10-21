@@ -3,6 +3,6 @@ ManaCost:1 W
 Types:Creature Zombie
 PT:2/2
 T:Mode$ ChangesZone | ValidCard$ Zombie.Other+YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever another Zombie enters the battlefield under your control, you may tap target artifact or creature.
-SVar:TrigTap:DB$Tap | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature
+SVar:TrigTap:DB$ Tap | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/binding_mummy.jpg
 Oracle:Whenever another Zombie enters the battlefield under your control, you may tap target artifact or creature.

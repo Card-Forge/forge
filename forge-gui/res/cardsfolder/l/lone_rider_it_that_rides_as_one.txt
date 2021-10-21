@@ -5,7 +5,7 @@ PT:1/1
 K:First Strike
 K:Lifelink
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ YouLifeGained | SVarCompare$ GE3 | Execute$ TrigTransform | TriggerDescription$ At the beginning of the end step, if you gained 3 or more life this turn, transform CARDNAME.
-SVar:TrigTransform:DB$SetState | Defined$ Self | Mode$ Transform
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 SVar:YouLifeGained:Count$LifeYouGainedThisTurn
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lone_rider.jpg
 AlternateMode:DoubleFaced

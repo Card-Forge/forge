@@ -2,7 +2,7 @@ Name:Warped Devotion
 ManaCost:2 B
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Hand | ValidCard$ Permanent | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ Whenever a permanent is returned to a player's hand, that player discards a card.
-SVar:TrigDiscard:DB$Discard | NumCards$ 1 | Mode$ TgtChoose | Defined$ TriggeredCardOwner
+SVar:TrigDiscard:DB$ Discard | NumCards$ 1 | Mode$ TgtChoose | Defined$ TriggeredCardOwner
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warped_devotion.jpg
 Oracle:Whenever a permanent is returned to a player's hand, that player discards a card.

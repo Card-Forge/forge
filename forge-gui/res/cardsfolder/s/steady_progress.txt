@@ -2,7 +2,7 @@ Name:Steady Progress
 ManaCost:2 U
 Types:Instant
 A:SP$ Proliferate | Cost$ 2 U | SpellDescription$ Proliferate. Draw a card. | SubAbility$ DB
-SVar:DB:DB$Draw | NumCards$ 1
+SVar:DB:DB$ Draw | NumCards$ 1
 DeckHas:Ability$Proliferate
 DeckNeeds:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steady_progress.jpg

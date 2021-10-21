@@ -12,6 +12,6 @@ SVar:DBMillAndDamage:DB$ Mill | Defined$ You | NumCards$ 1 | SubAbility$ DBDamag
 SVar:DBDamage:DB$ DealDamage | Defined$ Remembered | NumDmg$ X | SubAbility$ DBCleanup
 SVar:X:Imprinted$CardManaCost
 SVar:DBPutIntoHand:DB$ Dig | DigNum$ 1 | ChangeNum$ All | ChangeValid$ Card | DestinationZone$ Hand | SubAbility$ DBCleanup | ConditionDefined$ Imprinted | ConditionPresent$ Card | ConditionCompare$ EQ1
-SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True | ClearImprinted$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sin_prodder.jpg
 Oracle:Menace\nAt the beginning of your upkeep, reveal the top card of your library. Any opponent may have you put that card into your graveyard. If a player does, Sin Prodder deals damage to that player equal to that card's mana value. Otherwise, put that card into your hand.

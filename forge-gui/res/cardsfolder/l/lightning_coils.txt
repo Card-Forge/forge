@@ -2,7 +2,7 @@ Name:Lightning Coils
 ManaCost:3
 Types:Artifact
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.nonToken+YouCtrl | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever a nontoken creature you control dies, put a charge counter on CARDNAME.
-SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1 | ConditionPresent$ Card.StrictlySelf
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1 | ConditionPresent$ Card.StrictlySelf
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.Self+counters_GE5_CHARGE | Execute$ DBRemoveCounter | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, if CARDNAME has five or more charge counters on it, remove all of them from it and create that many 3/1 red Elemental creature tokens with haste. Exile them at the beginning of the next end step.
 SVar:DBRemoveCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ All | RememberRemoved$ True | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ r_3_1_elemental_haste | LegacyImage$ r 3 1 elemental haste mrd | AtEOT$ Exile | SubAbility$ DBCleanup

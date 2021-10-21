@@ -3,6 +3,6 @@ ManaCost:1
 Types:Artifact Creature Myr
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigAddMana | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, add {C}.
-SVar:TrigAddMana:DB$Mana | Produced$ C
+SVar:TrigAddMana:DB$ Mana | Produced$ C
 SVar:Picture:http://www.wizards.com/global/images/magic/general/myr_moonvessel.jpg
 Oracle:When Myr Moonvessel dies, add {C}.

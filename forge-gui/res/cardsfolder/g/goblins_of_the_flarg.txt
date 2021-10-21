@@ -4,6 +4,6 @@ Types:Creature Goblin Warrior
 PT:1/1
 K:Mountainwalk
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Dwarf.YouCtrl | PresentCompare$ GE1 | Execute$ TrigSac | TriggerDescription$ When you control a Dwarf, sacrifice CARDNAME.
-SVar:TrigSac:DB$Sacrifice | Defined$ Self
+SVar:TrigSac:DB$ Sacrifice | Defined$ Self
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblins_of_the_flarg.jpg
 Oracle:Mountainwalk (This creature can't be blocked as long as defending player controls a Mountain.)\nWhen you control a Dwarf, sacrifice Goblins of the Flarg.

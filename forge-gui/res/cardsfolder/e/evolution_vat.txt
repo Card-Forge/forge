@@ -2,8 +2,8 @@ Name:Evolution Vat
 ManaCost:3
 Types:Artifact
 A:AB$ Tap | Cost$ 3 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBPutCounter | SpellDescription$ Tap target creature and put a +1/+1 counter on it. Until end of turn, that creature gains "{2}{G}{U}: Double the number of +1/+1 counters on this creature."
-SVar:DBPutCounter:DB$PutCounter | Defined$ Targeted | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBAnimate
-SVar:DBAnimate:DB$Animate | Defined$ Targeted | Abilities$ ABPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Abilities$ ABPutCounter
 SVar:ABPutCounter:AB$ MultiplyCounter | Cost$ 2 G U | Defined$ Self | CounterType$ P1P1 | SpellDescription$ Double the number of +1/+1 counters on CARDNAME.
 DeckHints:Ability$Counters
 DeckNeeds:Color$Green|Blue

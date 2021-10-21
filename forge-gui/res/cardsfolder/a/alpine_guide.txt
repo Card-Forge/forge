@@ -3,8 +3,8 @@ ManaCost:2 R
 Types:Snow Creature Human Scout
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a Mountain card, put that card onto the battlefield tapped, then shuffle.
-SVar:TrigChange:DB$ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Mountain | ChangeNum$ 1 | ShuffleNonMandatory$ True
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Mountain | ChangeNum$ 1 | ShuffleNonMandatory$ True
 K:CARDNAME attacks each combat if able.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigSac | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, sacrifice a Mountain.
-SVar:TrigSac:DB$Sacrifice | SacValid$ Mountain | Defined$ You
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Mountain | Defined$ You
 Oracle:When Alpine Guide enters the battlefield, you may search your library for a Mountain card, put that card onto the battlefield tapped, then shuffle.\nAlpine Guide attacks each combat if able.\nWhen Alpine Guide leaves the battlefield, sacrifice a Mountain.

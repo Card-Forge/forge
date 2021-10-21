@@ -5,6 +5,6 @@ PT:4/4
 K:Flying
 A:AB$ Draw | Cost$ T | NumCards$ 1 | AILogic$ AlwaysAtOppEOT | SpellDescription$ Draw a card.
 T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you draw a card, CARDNAME deals 1 damage to any target.
-SVar:TrigDealDamage:DB$DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/niv_mizzet_the_firemind.jpg
 Oracle:Flying\nWhenever you draw a card, Niv-Mizzet, the Firemind deals 1 damage to any target.\n{T}: Draw a card.

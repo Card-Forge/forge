@@ -2,7 +2,7 @@ Name:Tezzeret's Gambit
 ManaCost:3 PU
 Types:Sorcery
 A:SP$ Draw | Cost$ 3 PU | Defined$ You | NumCards$ 2 | SubAbility$ DBProlif | SpellDescription$ Draw two cards, then proliferate.
-SVar:DBProlif:DB$Proliferate
+SVar:DBProlif:DB$ Proliferate
 DeckHas:Ability$Proliferate
 DeckNeeds:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tezzerets_gambit.jpg

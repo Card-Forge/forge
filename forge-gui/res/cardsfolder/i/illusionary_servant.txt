@@ -4,7 +4,7 @@ Types:Creature Illusion
 PT:3/4
 K:Flying
 T:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When CARDNAME becomes the target of a spell or ability, sacrifice it.
-SVar:TrigSac:DB$Sacrifice | Defined$ Self
+SVar:TrigSac:DB$ Sacrifice | Defined$ Self
 SVar:Targeting:Dies
 SVar:Picture:http://www.wizards.com/global/images/magic/general/illusionary_servant.jpg
 Oracle:Flying\nWhen Illusionary Servant becomes the target of a spell or ability, sacrifice it.

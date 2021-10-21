@@ -4,6 +4,6 @@ Types:Creature Spirit
 PT:3/3
 K:Skulk
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, discard a card.
-SVar:TrigDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+SVar:TrigDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pale_rider_of_trostad.jpg
 Oracle:Skulk (This creature can't be blocked by creatures with greater power.)\nWhen Pale Rider of Trostad enters the battlefield, discard a card.

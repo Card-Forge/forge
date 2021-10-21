@@ -2,6 +2,6 @@ Name:Violet Pall
 ManaCost:4 B
 Types:Tribal Instant Faerie
 A:SP$ Destroy | Cost$ 4 B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | SubAbility$ DBToken | SpellDescription$ Destroy target nonblack creature. Create a 1/1 black Faerie Rogue creature token with flying.
-SVar:DBToken:DB$Token | TokenAmount$ 1 | TokenScript$ b_1_1_faerie_rogue_flying | TokenOwner$ You | LegacyImage$ b 1 1 faerie rogue flying mor
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_faerie_rogue_flying | TokenOwner$ You | LegacyImage$ b 1 1 faerie rogue flying mor
 SVar:Picture:http://www.wizards.com/global/images/magic/general/violet_pall.jpg
 Oracle:Destroy target nonblack creature. Create a 1/1 black Faerie Rogue creature token with flying.

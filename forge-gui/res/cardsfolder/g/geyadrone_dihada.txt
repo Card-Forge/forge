@@ -8,7 +8,7 @@ SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 2 | SubAbi
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2 | SubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ CORRUPTION | CounterNum$ 1
 A:AB$ GainControl | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SubAbility$ DBPutCounter | SpellDescription$ Gain control of target creature or planeswalker until end of turn. Untap it and put a corruption counter on it. It gains haste until end of turn.
-SVar:DBPutCounter:DB$PutCounter | Defined$ Targeted | CounterType$ CORRUPTION | CounterNum$ 1
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ CORRUPTION | CounterNum$ 1
 A:AB$ GainControl | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | AllValid$ Permanent.counters_GE1_CORRUPTION | SpellDescription$ Gain control of each permanent with a corruption counter on it.
 DeckHas:Ability$LifeGain
 Oracle:Protection from permanents with corruption counters on them\n[+1]: Each opponent loses 2 life and you gain 2 life. Put a corruption counter on up to one other target creature or planeswalker.\n[−3]: Gain control of target creature or planeswalker until end of turn. Untap it and put a corruption counter on it. It gains haste until end of turn.\n[−7]: Gain control of each permanent with a corruption counter on it.

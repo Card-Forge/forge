@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Creature Illusion
 PT:1/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a permanent you control to its owner's hand.
-SVar:TrigChange:DB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Permanent.YouCtrl
+SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Permanent.YouCtrl
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dream_stalker.jpg
 Oracle:When Dream Stalker enters the battlefield, return a permanent you control to its owner's hand.

@@ -5,7 +5,7 @@ S:Mode$ Continuous | Affected$ Card.Self+counters_GE1_DEPLETION | AddHiddenKeywo
 A:AB$ Mana | Cost$ T | Produced$ B | Amount$ 1 | SubAbility$ AddCounter | SpellDescription$ Add {B}. Put a depletion counter on CARDNAME.
 A:AB$ Mana | Cost$ T | Produced$ R | Amount$ 1 | SubAbility$ AddCounter | SpellDescription$ Add {R}. Put a depletion counter on CARDNAME.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSubCounter | TriggerDescription$ At the beginning of your upkeep, remove a depletion counter from CARDNAME.
-SVar:TrigSubCounter:DB$RemoveCounter | Defined$ Self | CounterType$ DEPLETION | CounterNum$ 1
-SVar:AddCounter:DB$PutCounter | Defined$ Self | CounterType$ DEPLETION | CounterNum$ 1
+SVar:TrigSubCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ DEPLETION | CounterNum$ 1
+SVar:AddCounter:DB$ PutCounter | Defined$ Self | CounterType$ DEPLETION | CounterNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lava_tubes.jpg
 Oracle:Lava Tubes doesn't untap during your untap step if it has a depletion counter on it.\nAt the beginning of your upkeep, remove a depletion counter from Lava Tubes.\n{T}: Add {B} or {R}. Put a depletion counter on Lava Tubes.

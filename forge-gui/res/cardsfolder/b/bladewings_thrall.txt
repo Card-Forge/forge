@@ -4,7 +4,7 @@ Types:Creature Zombie
 PT:3/3
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME has flying as long as you control a Dragon.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Dragon | TriggerZones$ Graveyard | OptionalDecider$ You | Execute$ TrigReturn | TriggerDescription$ When a Dragon enters the battlefield, you may return CARDNAME from your graveyard to the battlefield.
-SVar:TrigReturn:DB$ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield
+SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield
 SVar:X:Count$Valid Dragon.YouCtrl
 SVar:BuffedBy:Dragon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bladewings_thrall.jpg

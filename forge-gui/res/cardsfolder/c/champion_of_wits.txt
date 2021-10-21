@@ -3,8 +3,8 @@ ManaCost:2 U
 Types:Creature Naga Wizard
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may draw cards equal to its power. If you do, discard two cards.
-SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ X | SubAbility$ DBDiscard
-SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 2
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 2
 K:Eternalize:5 U U
 SVar:X:Count$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/champion_of_wits.jpg

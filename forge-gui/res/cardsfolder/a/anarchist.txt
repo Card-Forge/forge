@@ -3,6 +3,6 @@ ManaCost:4 R
 Types:Creature Human Wizard
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target sorcery card from your graveyard to your hand.
-SVar:TrigChangeZone:DB$ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Sorcery.YouCtrl
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Sorcery.YouCtrl
 SVar:Picture:http://resources.wizards.com/magic/cards/9ed/en-us/card84072.jpg
 Oracle:When Anarchist enters the battlefield, you may return target sorcery card from your graveyard to your hand.

@@ -9,7 +9,7 @@ SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_a_myr | TokenOwne
 SVar:Phyrexian:DB$ Animate | Defined$ Self | Triggers$ TrigEnd | Duration$ Permanent | SpellDescription$ Phyrexian
 SVar:TrigEnd:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ Filter | TriggerDescription$ At the beginning of your end step, draw a card, then discard a card. Then if there are fifteen or more artifact cards in your graveyard, target opponent loses the game.
 SVar:Filter:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBDiscard
-SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1 | SubAbility$ DBLose
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1 | SubAbility$ DBLose
 SVar:DBLose:DB$ LosesGame | ValidTgts$ Opponent | ConditionCheckSVar$ CheckGraveyard | ConditionSVarCompare$ GE15
 SVar:CheckGraveyard:Count$ValidGraveyard Card.Artifact+YouOwn
 DeckHas:Ability$Token

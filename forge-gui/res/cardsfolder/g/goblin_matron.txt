@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Creature Goblin
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a Goblin card, reveal that card, put it into your hand, then shuffle.
-SVar:TrigChange:DB$ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.Goblin | ChangeNum$ 1 | ShuffleNonMandatory$ True
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.Goblin | ChangeNum$ 1 | ShuffleNonMandatory$ True
 DeckHints:Type$Goblin
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_matron.jpg
 Oracle:When Goblin Matron enters the battlefield, you may search your library for a Goblin card, reveal that card, put it into your hand, then shuffle.

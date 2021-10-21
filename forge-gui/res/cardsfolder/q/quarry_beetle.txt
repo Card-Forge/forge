@@ -3,6 +3,6 @@ ManaCost:4 G
 Types:Creature Insect
 PT:4/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target land card from your graveyard to the battlefield.
-SVar:TrigChangeZone:DB$ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Land.YouCtrl
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Land.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quarry_beetle.jpg
 Oracle:When Quarry Beetle enters the battlefield, you may return target land card from your graveyard to the battlefield.
