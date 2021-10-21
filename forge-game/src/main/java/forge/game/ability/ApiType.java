@@ -137,6 +137,7 @@ public enum ApiType {
     RemoveCounter (CountersRemoveEffect.class),
     RemoveCounterAll (CountersRemoveAllEffect.class),
     RemoveFromCombat (RemoveFromCombatEffect.class),
+    RemoveFromGame (RemoveFromGameEffect.class),
     ReorderZone (ReorderZoneEffect.class),
     Repeat (RepeatEffect.class),
     RepeatEach (RepeatEachEffect.class),
