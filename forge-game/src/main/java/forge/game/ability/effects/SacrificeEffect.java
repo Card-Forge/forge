@@ -243,7 +243,6 @@ public class SacrificeEffect extends SpellAbilityEffect {
 
         removeCandidates(validTargets, validTargetsList, union, index + 1, included, amount);
 
-
         CardCollection candidate = validTargetsList.get(index);
         if (candidate.isEmpty()) {
             return;

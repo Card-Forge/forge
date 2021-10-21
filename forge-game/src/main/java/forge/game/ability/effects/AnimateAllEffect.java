@@ -121,11 +121,7 @@ public class AnimateAllEffect extends AnimateEffectBase {
             sVars.addAll(Arrays.asList(sa.getParam("sVars").split(",")));
         }
 
-        String valid = "";
-
-        if (sa.hasParam("ValidCards")) {
-            valid = sa.getParam("ValidCards");
-        }
+        final String valid = sa.getParamOrDefault("ValidCards", "");
 
         CardCollectionView list;
 

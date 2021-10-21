@@ -22,10 +22,7 @@ public class DamageAllEffect extends DamageBaseEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        String desc = "";
-        if (sa.hasParam("ValidDescription")) {
-            desc = sa.getParam("ValidDescription");
-        }
+        final String desc = sa.getParamOrDefault("ValidDescription", "");
 
         final String damage = sa.getParam("NumDmg");
         final int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), damage, sa);
@@ -63,11 +60,7 @@ public class DamageAllEffect extends DamageBaseEffect {
         //Remember params from this effect have been moved to dealDamage in GameAction
         Player targetPlayer = sa.getTargets().getFirstTargetedPlayer();
 
-        String players = "";
-
-        if (sa.hasParam("ValidPlayers")) {
-            players = sa.getParam("ValidPlayers");
-        }
+        final String players = sa.getParamOrDefault("ValidPlayers", "");
 
         CardCollectionView list;
         if (sa.hasParam("ValidCards")) {

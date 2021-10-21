@@ -81,10 +81,7 @@ public class DestroyAllAi extends SpellAbilityAi {
             return true; // e.g. Tetzimoc, Primal Death, where we want to cast the permanent even if the removal trigger does nothing
         }
 
-        String valid = "";
-        if (sa.hasParam("ValidCards")) {
-            valid = sa.getParam("ValidCards");
-        }
+        String valid = sa.getParamOrDefault("ValidCards", "");
 
         if (valid.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.

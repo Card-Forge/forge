@@ -35,7 +35,7 @@ public class DigMultipleEffect extends SpellAbilityEffect {
         int libraryPosition = sa.hasParam("LibraryPosition") ? Integer.parseInt(sa.getParam("LibraryPosition")) : -1;
         final int libraryPosition2 = sa.hasParam("LibraryPosition2") ? Integer.parseInt(sa.getParam("LibraryPosition2")) : -1;
 
-        String changeValid = sa.hasParam("ChangeValid") ? sa.getParam("ChangeValid") : "";
+        String changeValid = sa.getParamOrDefault("ChangeValid", "");
         boolean chooseOptional = sa.hasParam("Optional");
 
         CardZoneTable table = new CardZoneTable();

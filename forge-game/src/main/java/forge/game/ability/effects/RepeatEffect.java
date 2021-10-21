@@ -76,11 +76,7 @@ public class RepeatEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("RepeatPresent")) {
             final String repeatPresent = sa.getParam("RepeatPresent");
-
-            String repeatCompare = "GE1";
-            if (sa.hasParam("RepeatCompare")) {
-                repeatCompare = sa.getParam("RepeatCompare");
-            }
+            String repeatCompare = sa.getParamOrDefault("RepeatCompare", "GE1");
 
             CardCollectionView list;
             if (sa.hasParam("RepeatDefined")) {
