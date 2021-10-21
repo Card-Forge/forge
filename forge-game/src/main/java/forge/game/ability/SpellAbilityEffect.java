@@ -261,7 +261,7 @@ public abstract class SpellAbilityEffect {
         boolean your = location.startsWith("Your");
         boolean combat = location.endsWith("Combat");
 
-        String desc = sa.hasParam("AtEOTDesc") ? sa.getParam("AtEOTDesc") : "";
+        String desc = sa.getParamOrDefault("AtEOTDesc", "");
 
         if (your) {
             location = location.substring("Your".length());

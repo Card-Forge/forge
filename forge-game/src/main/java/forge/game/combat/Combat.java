@@ -345,13 +345,6 @@ public class Combat {
         return result;
     }
 
-    public final CardCollection getBlockers(final Card card) {
-        // If requesting the ordered blocking list pass true, directly.
-        AttackingBand band = getBandOfAttacker(card);
-        Collection<Card> blockers = blockedBands.get(band);
-        return blockers == null ? new CardCollection() : new CardCollection(blockers);
-    }
-
     public final boolean isBlocked(final Card attacker) {
         AttackingBand band = getBandOfAttacker(attacker);
         return band != null && Boolean.TRUE.equals(band.isBlocked());
@@ -408,6 +401,10 @@ public class Combat {
         return result;
     }
 
+    public final CardCollection getBlockers(final Card card) {
+        // If requesting the ordered blocking list pass true, directly.
+        return getBlockers(getBandOfAttacker(card));
+    }
     public final CardCollection getBlockers(final AttackingBand band) {
         Collection<Card> blockers = blockedBands.get(band);
         return blockers == null ? new CardCollection() : new CardCollection(blockers);
@@ -512,8 +509,7 @@ public class Combat {
     	final CardCollection oldBlockers = blockersOrderedForDamageAssignment.get(attacker);
     	if (oldBlockers == null || oldBlockers.isEmpty()) {
    			blockersOrderedForDamageAssignment.put(attacker, new CardCollection(blocker));
-    	}
-    	else {
+    	} else {
     		CardCollection orderedBlockers = playerWhoAttacks.getController().orderBlocker(attacker, blocker, oldBlockers);
             blockersOrderedForDamageAssignment.put(attacker, orderedBlockers);
     	}

@@ -1776,8 +1776,7 @@ public class ComputerUtilCombat {
                 return true;
             }
 
-            // Attacker may kill the blocker before he can deal normal
-            // (secondary) damage
+            // Attacker may kill the blocker before he can deal normal (secondary) damage
             if (dealsFirstStrikeDamage(attacker, withoutAbilities, combat)
                     && !blocker.hasKeyword(Keyword.INDESTRUCTIBLE)) {
                 if (attackerDamage >= defenderLife) {
@@ -1828,7 +1827,7 @@ public class ComputerUtilCombat {
      * @return a boolean.
      */
     public static boolean blockerWouldBeDestroyed(Player ai, final Card blocker, Combat combat) {
-        // TODO THis function only checks if a single attacker at a time would destroy a blocker
+        // TODO This function only checks if a single attacker at a time would destroy a blocker
         // This needs to expand to tally up damage
         final List<Card> attackers = combat.getAttackersBlockedBy(blocker);
 
@@ -2010,8 +2009,7 @@ public class ComputerUtilCombat {
                 return true;
             }
 
-            // Attacker may kill the blocker before he can deal normal
-            // (secondary) damage
+            // Attacker may kill the blocker before he can deal normal (secondary) damage
             if (dealsFirstStrikeDamage(blocker, withoutAbilities, combat)
                     && !attacker.hasKeyword(Keyword.INDESTRUCTIBLE)) {
                 if (defenderDamage >= attackerLife) {

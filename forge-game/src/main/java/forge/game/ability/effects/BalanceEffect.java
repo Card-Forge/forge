@@ -33,7 +33,7 @@ public class BalanceEffect extends SpellAbilityEffect {
         Player activator = sa.getActivatingPlayer();
         Card source = sa.getHostCard();
         Game game = activator.getGame();
-        String valid = sa.hasParam("Valid") ? sa.getParam("Valid") : "Card";
+        String valid = sa.getParamOrDefault("Valid", "Card");
         ZoneType zone = sa.hasParam("Zone") ? ZoneType.smartValueOf(sa.getParam("Zone")) : ZoneType.Battlefield;
         
         int min = Integer.MAX_VALUE;

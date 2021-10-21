@@ -121,7 +121,7 @@ public class SacrificeAi extends SpellAbilityAi {
             // Only cast it if Human has the full amount of valid
             // Only cast it if AI doesn't have the full amount of Valid
             // TODO: Cast if the type is favorable: my "worst" valid is worse than his "worst" valid
-            final String num = sa.hasParam("Amount") ? sa.getParam("Amount") : "1";
+            final String num = sa.getParamOrDefault("Amount", "1");
             int amount = AbilityUtils.calculateAmount(source, num, sa);
 
             if (num.equals("X") && sa.getSVar(num).equals("Count$xPaid")) {
