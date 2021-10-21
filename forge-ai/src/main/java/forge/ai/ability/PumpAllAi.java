@@ -33,7 +33,6 @@ public class PumpAllAi extends PumpAiBase {
      */
     @Override
     protected boolean canPlayAI(final Player ai, final SpellAbility sa) {
-        String valid = "";
         final Card source = sa.getHostCard();
         final Game game = ai.getGame();
         final Combat combat = game.getCombat();
@@ -78,9 +77,7 @@ public class PumpAllAi extends PumpAiBase {
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<>();
         final PhaseType phase = game.getPhaseHandler().getPhase();
 
-        if (sa.hasParam("ValidCards")) {
-            valid = sa.getParam("ValidCards");
-        }
+        final String valid = sa.getParamOrDefault("ValidCards", "");
 
         CardCollection comp = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid, source.getController(), source, sa);
         CardCollection human = CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), valid, source.getController(), source, sa);

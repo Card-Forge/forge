@@ -30,7 +30,7 @@ public class ControlExchangeAi extends SpellAbilityAi {
         sa.resetTargets();
 
         CardCollection list =
-                CardLists.getValidCards(AiAttackController.choosePreferredDefenderPlayer(ai).getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, sa.getHostCard(), sa);
+                CardLists.getValidCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, sa.getHostCard(), sa);
         // AI won't try to grab cards that are filtered out of AI decks on purpose
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
@@ -65,7 +65,7 @@ public class ControlExchangeAi extends SpellAbilityAi {
             }
         } else {
             if (mandatory) {
-                return chkAIDrawback(sa, aiPlayer);
+                return chkAIDrawback(sa, aiPlayer) || sa.isTargetNumberValid();
             } else {
                 return canPlayAI(aiPlayer, sa);
             }
@@ -97,8 +97,12 @@ public class ControlExchangeAi extends SpellAbilityAi {
 
         Card best = ComputerUtilCard.getBestAI(list);
 
+        // add best Target:
+        // do it here already even if we don't want to play this as it might be for targeting a trigger
+        sa.getTargets().add(best);
+        
         // if Param has Defined, check if the best Target is better than the Defined
-        if (sa.hasParam("Defined")) {
+        if (sa.hasParam("Defined") && (!sa.isTrigger() || sa.getRootAbility().isOptionalTrigger())) {
             final Card object = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa).get(0);
             // TODO add evaluate Land if able
             final Card realBest = ComputerUtilCard.getBestAI(Lists.newArrayList(best, object));
@@ -108,9 +112,6 @@ public class ControlExchangeAi extends SpellAbilityAi {
                 return false;
             }
         }
-
-        // add best Target
-        sa.getTargets().add(best);
 
         // second target needed (the AI's own worst)
         if ("TrigTwoTargets".equals(sa.getParam("AILogic"))) {

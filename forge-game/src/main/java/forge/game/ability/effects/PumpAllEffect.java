@@ -137,10 +137,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
             list = tgtPlayers.getCardsIn(affectedZones);
         }
 
-        String valid = "";
-        if (sa.hasParam("ValidCards")) {
-            valid = sa.getParam("ValidCards");
-        }
+        final String valid = sa.getParamOrDefault("ValidCards", "");
 
         list = AbilityUtils.filterListByType(list, valid, sa);
 

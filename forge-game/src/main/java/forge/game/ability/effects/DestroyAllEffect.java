@@ -24,7 +24,6 @@ public class DestroyAllEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
-
         if (sa.hasParam("SpellDescription")) {
             return sa.getParam("SpellDescription");
         }
@@ -51,11 +50,7 @@ public class DestroyAllEffect extends SpellAbilityEffect {
 
         Player targetPlayer = sa.getTargets().getFirstTargetedPlayer();
 
-        String valid = "";
-
-        if (sa.hasParam("ValidCards")) {
-            valid = sa.getParam("ValidCards");
-        }
+        String valid = sa.getParamOrDefault("ValidCards", "");
 
         // Ugh. If calculateAmount needs to be called with DestroyAll it _needs_
         // to use the X variable

@@ -20,7 +20,7 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
 
         final CounterType cType = CounterType.getType(sa.getParam("CounterType"));
         final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("CounterNum"), sa);
-        final String zone = sa.hasParam("ValidZone") ? sa.getParam("ValidZone") : "Battlefield";
+        final String zone = sa.getParamOrDefault("ValidZone", "Battlefield");
 
         sb.append("Put ").append(amount).append(" ").append(cType.getName()).append(" counter");
         if (amount != 1) {

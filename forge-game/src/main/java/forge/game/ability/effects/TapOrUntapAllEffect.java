@@ -28,8 +28,7 @@ public class TapOrUntapAllEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("ValidMessage")) {
             sb.append(sa.getParam("ValidMessage"));
-        }
-        else {
+        } else {
             final List<Card> tgtCards = getTargetCards(sa);
             sb.append(StringUtils.join(tgtCards, ", "));
         }
