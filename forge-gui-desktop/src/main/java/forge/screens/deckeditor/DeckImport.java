@@ -43,7 +43,6 @@ import forge.item.PaperCard;
 import forge.screens.deckeditor.controllers.CDeckEditor;
 import forge.screens.deckeditor.controllers.CStatisticsImporter;
 import forge.screens.deckeditor.views.VStatisticsImporter;
-import forge.toolbox.FComboBox;
 import forge.toolbox.*;
 import forge.util.Localizer;
 import forge.view.FDialog;
