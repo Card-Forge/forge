@@ -185,7 +185,7 @@ public class AiBlockController {
         List<Card> currentAttackers = new ArrayList<>(attackersLeft);
 
         for (final Card attacker : attackersLeft) {
-            if (StaticAbilityCantAttackBlock.getMinMaxBlocker(attacker, combat.getDefenderPlayerByAttacker(attacker)).getLeft() > 1) {
+            if (CombatUtil.getMinNumBlockersForAttacker(attacker, combat.getDefenderPlayerByAttacker(attacker)) > 1) {
                 continue;
             }
 
@@ -296,7 +296,7 @@ public class AiBlockController {
 
         // 6. Blockers that don't survive until the next turn anyway
         for (final Card attacker : attackersLeft) {
-            if (StaticAbilityCantAttackBlock.getMinMaxBlocker(attacker, combat.getDefenderPlayerByAttacker(attacker)).getLeft() > 1) {
+            if (CombatUtil.getMinNumBlockersForAttacker(attacker, combat.getDefenderPlayerByAttacker(attacker)) > 1) {
                 continue;
             }
 
@@ -537,7 +537,7 @@ public class AiBlockController {
 
         // Try to block a Menace attacker with two blockers, neither of which will die
         for (final Card attacker : attackersLeft) {
-            if (StaticAbilityCantAttackBlock.getMinMaxBlocker(attacker, combat.getDefenderPlayerByAttacker(attacker)).getLeft() <= 1) {
+            if (CombatUtil.getMinNumBlockersForAttacker(attacker, combat.getDefenderPlayerByAttacker(attacker)) <= 1) {
                 continue;
             }
 
@@ -593,7 +593,7 @@ public class AiBlockController {
         List<Card> killingBlockers;
 
         for (final Card attacker : attackersLeft) {
-            if (StaticAbilityCantAttackBlock.getMinMaxBlocker(attacker, combat.getDefenderPlayerByAttacker(attacker)).getLeft() > 1) {
+            if (CombatUtil.getMinNumBlockersForAttacker(attacker, combat.getDefenderPlayerByAttacker(attacker)) > 1) {
                 continue;
             }
             if (ComputerUtilCombat.attackerHasThreateningAfflict(attacker, ai)) {
@@ -642,7 +642,7 @@ public class AiBlockController {
 
         Card attacker = attackers.get(0);
 
-        if (StaticAbilityCantAttackBlock.getMinMaxBlocker(attacker, combat.getDefenderPlayerByAttacker(attacker)).getLeft() > 1
+        if (CombatUtil.getMinNumBlockersForAttacker(attacker, combat.getDefenderPlayerByAttacker(attacker)) > 1
             || attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
             || ComputerUtilCombat.attackerHasThreateningAfflict(attacker, ai)) {
             attackers.remove(0);
@@ -691,7 +691,7 @@ public class AiBlockController {
         List<Card> currentAttackers = new ArrayList<>(attackersLeft);
 
         for (final Card attacker : currentAttackers) {
-            if (StaticAbilityCantAttackBlock.getMinMaxBlocker(attacker, combat.getDefenderPlayerByAttacker(attacker)).getLeft() <= 1) {
+            if (CombatUtil.getMinNumBlockersForAttacker(attacker, combat.getDefenderPlayerByAttacker(attacker)) <= 1) {
                 continue;
             }
             List<Card> possibleBlockers = getPossibleBlockers(combat, attacker, blockersLeft, true);
@@ -729,8 +729,7 @@ public class AiBlockController {
         // "Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it."
 
         for (final Card attacker : tramplingAttackers) {
-
-            if (((StaticAbilityCantAttackBlock.getMinMaxBlocker(attacker, combat.getDefenderPlayerByAttacker(attacker)).getLeft() > 1) && !combat.isBlocked(attacker))
+            if (CombatUtil.getMinNumBlockersForAttacker(attacker, combat.getDefenderPlayerByAttacker(attacker)) > combat.getBlockers(attacker).size()
                     || attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
                     || attacker.hasKeyword("CARDNAME can't be blocked unless all creatures defending player controls block it.")) {
                 continue;
@@ -829,7 +828,7 @@ public class AiBlockController {
 
         AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
         final int evalThresholdToken = aic.getIntProperty(AiProps.THRESHOLD_TOKEN_CHUMP_TO_SAVE_PLANESWALKER);
-        final int evalThresholdNonToken = aic.getIntProperty(AiProps.THRESHOLD_TOKEN_CHUMP_TO_SAVE_PLANESWALKER);
+        final int evalThresholdNonToken = aic.getIntProperty(AiProps.THRESHOLD_NONTOKEN_CHUMP_TO_SAVE_PLANESWALKER);
         final boolean onlyIfLethal = aic.getBooleanProperty(AiProps.CHUMP_TO_SAVE_PLANESWALKER_ONLY_ON_LETHAL);
 
         if (evalThresholdToken > 0 || evalThresholdNonToken > 0) {

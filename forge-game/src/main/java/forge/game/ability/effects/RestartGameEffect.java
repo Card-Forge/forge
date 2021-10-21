@@ -32,7 +32,7 @@ public class RestartGameEffect extends SpellAbilityEffect {
 
         ZoneType leaveZone = ZoneType.smartValueOf(sa.hasParam("RestrictFromZone") ? sa.getParam("RestrictFromZone") : null);
         restartZones.remove(leaveZone);
-        String leaveRestriction = sa.hasParam("RestrictFromValid") ? sa.getParam("RestrictFromValid") : "Card";
+        String leaveRestriction = sa.getParamOrDefault("RestrictFromValid", "Card");
 
         //Card.resetUniqueNumber();
         // need this code here, otherwise observables fail

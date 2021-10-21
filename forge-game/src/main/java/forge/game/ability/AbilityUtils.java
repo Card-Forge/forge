@@ -1482,7 +1482,7 @@ public class AbilityUtils {
         final Card source = sa.getHostCard();
 
         // The player who has the chance to cancel the ability
-        final String pays = sa.hasParam("UnlessPayer") ? sa.getParam("UnlessPayer") : "TargetedController";
+        final String pays = sa.getParamOrDefault("UnlessPayer", "TargetedController");
         final FCollectionView<Player> allPayers = getDefinedPlayers(sa.getHostCard(), pays, sa);
         final String  resolveSubs = sa.getParam("UnlessResolveSubs"); // no value means 'Always'
         final boolean execSubsWhenPaid = "WhenPaid".equals(resolveSubs) || StringUtils.isBlank(resolveSubs);
@@ -1565,7 +1565,7 @@ public class AbilityUtils {
                     " ", ""), sa);
             //Check for XColor
             ManaCostBeingPaid toPay = new ManaCostBeingPaid(ManaCost.ZERO);
-            byte xColor = ManaAtom.fromName(sa.hasParam("UnlessXColor") ? sa.getParam("UnlessXColor") : "1");
+            byte xColor = ManaAtom.fromName(sa.getParamOrDefault("UnlessXColor", "1"));
             toPay.increaseShard(ManaCostShard.valueOf(xColor), xCost);
             cost = new Cost(toPay.toManaCost(), true);
         }

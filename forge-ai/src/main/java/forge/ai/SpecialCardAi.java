@@ -413,7 +413,7 @@ public class SpecialCardAi {
             if (!isBlocking && combat.getDefenderByAttacker(source) instanceof Card) {
                 int loyalty = combat.getDefenderByAttacker(source).getCounters(CounterEnumType.LOYALTY);
                 int totalDamageToPW = 0;
-                for (Card atk : (combat.getAttackersOf(combat.getDefenderByAttacker(source)))) {
+                for (Card atk :combat.getAttackersOf(combat.getDefenderByAttacker(source))) {
                     if (combat.isUnblocked(atk)) {
                         totalDamageToPW += atk.getNetCombatDamage();
                     }

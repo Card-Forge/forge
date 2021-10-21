@@ -292,7 +292,7 @@ public class PumpEffect extends SpellAbilityEffect {
             }
         }
         if (sa.hasParam("RandomKeyword")) {
-            final String num = sa.hasParam("RandomKWNum") ? sa.getParam("RandomKWNum") : "1";
+            final String num = sa.getParamOrDefault("RandomKWNum", "1");
             final int numkw = AbilityUtils.calculateAmount(host, num, sa);
             List<String> choice = Lists.newArrayList();
             List<String> total = Lists.newArrayList(keywords);
