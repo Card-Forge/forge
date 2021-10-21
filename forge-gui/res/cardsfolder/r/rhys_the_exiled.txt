@@ -4,7 +4,7 @@ Types:Legendary Creature Elf Warrior
 PT:3/2
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ Whenever CARDNAME attacks, you gain 1 life for each Elf you control.
 A:AB$ Regenerate | Cost$ B Sac<1/Elf> | SpellDescription$ Regenerate CARDNAME.
-SVar:TrigGainLife:DB$GainLife | Defined$ You | LifeAmount$ X
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$Valid Elf.YouCtrl
 # Explicit AI preference for SacCost is needed to avoid infinite recursion and stack overflow when AI is considering AB Regenerate with SacCost vs. trample creatures.
 SVar:AIPreference:SacCost$Creature.Elf

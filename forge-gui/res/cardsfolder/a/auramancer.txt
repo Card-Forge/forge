@@ -3,6 +3,6 @@ ManaCost:2 W
 Types:Creature Human Wizard
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target enchantment card from your graveyard to your hand.
-SVar:TrigChangeZone:DB$ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Enchantment.YouCtrl
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Enchantment.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/auramancer.jpg
 Oracle:When Auramancer enters the battlefield, you may return target enchantment card from your graveyard to your hand.

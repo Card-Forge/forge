@@ -4,7 +4,7 @@ Types:Creature Spirit
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, target player discards a card.
 T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigReturn | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may return CARDNAME to its owner's hand.
-SVar:TrigDiscard:DB$Discard | ValidTgts$ Player | TgtPrompt$ Select a player | NumCards$ 1 | Mode$ TgtChoose
-SVar:TrigReturn:DB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ Self
+SVar:TrigDiscard:DB$ Discard | ValidTgts$ Player | TgtPrompt$ Select a player | NumCards$ 1 | Mode$ TgtChoose
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ Self
 SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card84705.jpg
 Oracle:When Kemuri-Onna enters the battlefield, target player discards a card.\nWhenever you cast a Spirit or Arcane spell, you may return Kemuri-Onna to its owner's hand.

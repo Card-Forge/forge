@@ -4,7 +4,7 @@ Types:Legendary Creature Ogre Monk
 PT:2/4
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE3 | Execute$ TrigFlip | TriggerDescription$ At the beginning of the end step, if three or more creatures died this turn, flip CARDNAME.
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
-SVar:TrigFlip:DB$SetState | Defined$ Self | Mode$ Flip
+SVar:TrigFlip:DB$ SetState | Defined$ Self | Mode$ Flip
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kuon_ogre_ascendant.jpg
 AlternateMode:Flip
 Oracle:At the beginning of the end step, if three or more creatures died this turn, flip Kuon, Ogre Ascendant.
@@ -16,7 +16,7 @@ ManaCost:B B B
 Colors:black
 Types:Legendary Enchantment
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of each player's upkeep, that player sacrifices a creature.
-SVar:TrigSac:DB$Sacrifice | Defined$ TriggeredPlayer | SacValid$ Creature
+SVar:TrigSac:DB$ Sacrifice | Defined$ TriggeredPlayer | SacValid$ Creature
 SVar:Picture:http://www.marc-fowler-design.com/cardforge/flippedcards/SOK/kuons_essence.jpg
 # This link may be a temporary solution and could change in the near future.
 Oracle:At the beginning of each player's upkeep, that player sacrifices a creature.

@@ -2,7 +2,7 @@ Name:Sphinx's Revelation
 ManaCost:X W U U
 Types:Instant
 A:SP$ GainLife | Cost$ X W U U | LifeAmount$ X | SubAbility$ DBDraw | SpellDescription$ You gain X life and draw X cards.
-SVar:DBDraw:DB$Draw | NumCards$ X
+SVar:DBDraw:DB$ Draw | NumCards$ X
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sphinxs_revelation.jpg
 Oracle:You gain X life and draw X cards.

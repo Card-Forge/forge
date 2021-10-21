@@ -2,10 +2,10 @@ Name:Path of Mettle
 ManaCost:R W
 Types:Legendary Enchantment
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 1 damage to each creature that doesn't have first strike, double strike, vigilance, or haste.
-SVar:TrigDamage:DB$DamageAll | ValidCards$ Creature.withoutFirst Strike+withoutDouble Strike+withoutVigilance+withoutHaste | ValidDescription$ each creature that doesn't have first strike, double strike, vigilance, or haste. | NumDmg$ 1
+SVar:TrigDamage:DB$ DamageAll | ValidCards$ Creature.withoutFirst Strike+withoutDouble Strike+withoutVigilance+withoutHaste | ValidDescription$ each creature that doesn't have first strike, double strike, vigilance, or haste. | NumDmg$ 1
 T:Mode$ AttackersDeclared | Execute$ TrigTransform | CheckSVar$ X | SVarCompare$ GE2 | NoResolvingCheck$ True | TriggerZones$ Battlefield | AttackingPlayer$ You | TriggerDescription$ Whenever you attack with at least two creatures that have first strike, double strike, vigilance, and/or haste, transform CARDNAME.
 SVar:X:Count$Valid Creature.attacking+YouCtrl+withFirst Strike,Creature.attacking+YouCtrl+withDouble Strike,Creature.attacking+YouCtrl+withVigilance,Creature.attacking+YouCtrl+withHaste
-SVar:TrigTransform:DB$SetState | Defined$ Self | Mode$ Transform 
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
 SVar:Picture:http://www.wizards.com/global/images/magic/general/path_of_mettle.jpg
 Oracle:When Path of Mettle enters the battlefield, it deals 1 damage to each creature that doesn't have first strike, double strike, vigilance, or haste.\nWhenever you attack with at least two creatures that have first strike, double strike, vigilance, and/or haste, transform Path of Mettle.

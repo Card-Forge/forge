@@ -3,6 +3,6 @@ ManaCost:2 G G
 Types:Creature Elf Warrior
 PT:3/3
 T:Mode$ SpellCast | ValidCard$ Elf | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigToken | TriggerDescription$ Whenever you cast an Elf spell, you may create a 1/1 green Elf Warrior creature token.
-SVar:TrigToken:DB$Token | LegacyImage$ g 1 1 elf warrior lrw | TokenAmount$ 1 | TokenScript$ g_1_1_elf_warrior | TokenOwner$ You
+SVar:TrigToken:DB$ Token | LegacyImage$ g 1 1 elf warrior lrw | TokenAmount$ 1 | TokenScript$ g_1_1_elf_warrior | TokenOwner$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lys_alana_huntmaster.jpg
 Oracle:Whenever you cast an Elf spell, you may create a 1/1 green Elf Warrior creature token.

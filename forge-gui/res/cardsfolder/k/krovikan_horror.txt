@@ -3,7 +3,7 @@ ManaCost:3 B
 Types:Creature Horror Spirit
 PT:2/2
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | TriggerZones$ Graveyard | IsPresent$ Creature.YouOwn+DirectlyAbove | PresentZone$ Graveyard | PresentCompare$ EQ1 | Execute$ TrigReturn | OptionalDecider$ You | TriggerDescription$ At the beginning of the end step, if CARDNAME is in your graveyard with a creature card directly above it, you may return CARDNAME to your hand.
-SVar:TrigReturn:DB$ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Hand
+SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Hand
 A:AB$ DealDamage | Cost$ 1 Sac<1/Creature> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 SVar:DiscardMe:3
 SVar:SacMe:1

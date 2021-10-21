@@ -3,7 +3,7 @@ ManaCost:1 R R
 Types:Creature Human Scout Werewolf
 PT:3/3
 T:Mode$Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
-SVar:TrigTransform:DB$SetState | Defined$ Self | Mode$ Transform
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
 SVar:Picture:http://www.wizards.com/global/images/magic/general/breakneck_rider.jpg
 Oracle:At the beginning of each upkeep, if no spells were cast last turn, transform Breakneck Rider.
@@ -17,7 +17,7 @@ Types:Creature Werewolf
 PT:4/3
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+attacking | AddPower$ 1 | AddKeyword$ Trample | Description$ Attacking creatures you control get +1/+0 and have trample.
 T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
-SVar:TrigTransform:DB$SetState | Defined$ Self | Mode$ Transform
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 SVar:Picture:http://www.wizards.com/global/images/magic/general/neck_breaker.jpg
 Oracle:Attacking creatures you control get +1/+0 and have trample.\nAt the beginning of each upkeep, if a player cast two or more spells last turn, transform Neck Breaker.
 

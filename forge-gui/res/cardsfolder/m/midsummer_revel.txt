@@ -3,7 +3,7 @@ ManaCost:3 G G
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, you may put a verse counter on CARDNAME.
 A:AB$ Token | Cost$ G Sac<1/CARDNAME> | LegacyImage$ g 3 3 beast usg | TokenAmount$ X | TokenScript$ g_3_3_beast | TokenOwner$ You | SpellDescription$ Create X 3/3 green Beast creature tokens.
-SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ VERSE | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ VERSE | CounterNum$ 1
 AI:RemoveDeck:All
 SVar:X:Count$CardCounters.VERSE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/midsummer_revel.jpg

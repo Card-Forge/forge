@@ -4,6 +4,6 @@ Types:Creature Spirit
 PT:3/2
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice a land.
-SVar:TrigSac:DB$Sacrifice | SacValid$ Land | ChangeNum$ 1
+SVar:TrigSac:DB$ Sacrifice | SacValid$ Land | ChangeNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/foul_spirit.jpg
 Oracle:Flying\nWhen Foul Spirit enters the battlefield, sacrifice a land.

@@ -3,6 +3,6 @@ ManaCost:3 U
 Types:Creature Worm
 PT:0/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, create a 3/3 blue Fish creature token with "When this creature dies, create a 6/6 blue Whale creature token with 'When this creature dies, create a 9/9 blue Kraken creature token.'"
-SVar:TrigToken:DB$Token | LegacyImage$ u 3 3 fish hatches whale c14 | TokenScript$ u_3_3_fish_hatches_whale | TokenOwner$ You | TokenAmount$ 1
+SVar:TrigToken:DB$ Token | LegacyImage$ u 3 3 fish hatches whale c14 | TokenScript$ u_3_3_fish_hatches_whale | TokenOwner$ You | TokenAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reef_worm.jpg
 Oracle:When Reef Worm dies, create a 3/3 blue Fish creature token with "When this creature dies, create a 6/6 blue Whale creature token with 'When this creature dies, create a 9/9 blue Kraken creature token.'"

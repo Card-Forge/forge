@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 K:CARDNAME enters the battlefield tapped.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 0/1 green Plant creature token.
-SVar:TrigToken:DB$Token | TokenAmount$ 1 | TokenScript$ g_0_1_plant | TokenOwner$ You | LegacyImage$ g 0 1 plant wwk
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_0_1_plant | TokenOwner$ You | LegacyImage$ g 0 1 plant wwk
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/khalni_garden.jpg
 Oracle:Khalni Garden enters the battlefield tapped.\nWhen Khalni Garden enters the battlefield, create a 0/1 green Plant creature token.\n{T}: Add {G}.

@@ -6,7 +6,7 @@ K:First Strike
 K:Flying
 K:Haste
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME deals combat damage to a creature, put a +1/+1 counter on CARDNAME.
-SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:HasCombatEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mirri_the_cursed.jpg
 Oracle:Flying, first strike, haste\nWhenever Mirri the Cursed deals combat damage to a creature, put a +1/+1 counter on Mirri the Cursed. 

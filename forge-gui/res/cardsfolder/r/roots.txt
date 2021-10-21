@@ -5,6 +5,6 @@ K:Enchant creature without flying
 A:SP$ Attach | Cost$ 3 G | ValidTgts$ Creature.withoutFlying | AILogic$ KeepTapped
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Enchanted creature doesn't untap during its controller's untap step.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, tap enchanted creature.
-SVar:TrigTap:DB$Tap | Defined$ Enchanted
+SVar:TrigTap:DB$ Tap | Defined$ Enchanted
 SVar:Picture:http://www.wizards.com/global/images/magic/general/roots.jpg
 Oracle:Enchant creature without flying\nWhen Roots enters the battlefield, tap enchanted creature.\nEnchanted creature doesn't untap during its controller's untap step.

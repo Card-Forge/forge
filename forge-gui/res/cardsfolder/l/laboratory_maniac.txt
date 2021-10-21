@@ -3,6 +3,6 @@ ManaCost:2 U
 Types:Creature Human Wizard
 PT:2/2
 R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ You | IsPresent$ Card.YouOwn | PresentZone$ Library | PresentCompare$ EQ0 | ReplaceWith$ Win | Description$ If you would draw a card while your library has no cards in it, you win the game instead.
-SVar:Win:DB$WinsGame | Defined$ You
+SVar:Win:DB$ WinsGame | Defined$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/laboratory_maniac.jpg
 Oracle:If you would draw a card while your library has no cards in it, you win the game instead.

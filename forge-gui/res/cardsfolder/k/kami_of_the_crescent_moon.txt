@@ -2,7 +2,7 @@ Name:Kami of the Crescent Moon
 ManaCost:U U
 Types:Legendary Creature Spirit
 T:Mode$ Phase | Phase$ Draw | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of each player's draw step, that player draws an additional card.
-SVar:TrigDraw:DB$Draw | NumCards$ 1 | Defined$ TriggeredPlayer
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ TriggeredPlayer
 PT:1/3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kami_of_the_crescent_moon.jpg
 Oracle:At the beginning of each player's draw step, that player draws an additional card.

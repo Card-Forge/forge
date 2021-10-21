@@ -2,6 +2,6 @@ Name:Misfortune's Gain
 ManaCost:3 W
 Types:Sorcery
 A:SP$ Destroy | Cost$ 3 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBGainLife | SpellDescription$ Destroy target creature. Its owner gains 4 life.
-SVar:DBGainLife:DB$GainLife | Defined$ TargetedOwner | LifeAmount$ 4
+SVar:DBGainLife:DB$ GainLife | Defined$ TargetedOwner | LifeAmount$ 4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/misfortunes_gain.jpg
 Oracle:Destroy target creature. Its owner gains 4 life.

@@ -2,7 +2,7 @@ Name:Gallows at Willow Hill
 ManaCost:3
 Types:Artifact
 A:AB$ Destroy | Cost$ 3 T tapXType<3/Human> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ GhostToken | SpellDescription$ Destroy target creature.
-SVar:GhostToken:DB$Token | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ TargetedController | LegacyImage$ w 1 1 spirit flying avr | SpellDescription$ Its controller creates a 1/1 white Spirit creature token with flying.
+SVar:GhostToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ TargetedController | LegacyImage$ w 1 1 spirit flying avr | SpellDescription$ Its controller creates a 1/1 white Spirit creature token with flying.
 DeckNeeds:Type$Human
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gallows_at_willow_hill.jpg

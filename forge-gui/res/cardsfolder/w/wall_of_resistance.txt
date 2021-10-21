@@ -5,6 +5,6 @@ PT:0/3
 K:Flying
 K:Defender
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | Execute$ TrigPutCounter | IsPresent$ Card.Self+wasDealtDamageThisTurn | TriggerDescription$ At the beginning of each end step, if CARDNAME was dealt damage this turn, put a +0/+1 counter on it.
-SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P0P1 | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P0P1 | CounterNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wall_of_resistance.jpg
 Oracle:Defender (This creature can't attack.)\nFlying\nAt the beginning of each end step, if Wall of Resistance was dealt damage this turn, put a +0/+1 counter on it.

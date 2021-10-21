@@ -5,5 +5,5 @@ Loyalty:5
 T:Mode$ Drawn | ValidCard$ Card.OppOwn | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever an opponent draws a card, CARDNAME deals 1 damage to that player.
 SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 1
 A:AB$ Destroy | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBDraw | SpellDescription$ Destroy target creature. Its controller draws two cards.
-SVar:DBDraw:DB$Draw | Defined$ TargetedController | NumCards$ 2
+SVar:DBDraw:DB$ Draw | Defined$ TargetedController | NumCards$ 2
 Oracle:Whenever an opponent draws a card, Ob Nixilis, the Hate-Twisted deals 1 damage to that player.\n[−2]: Destroy target creature. Its controller draws two cards.

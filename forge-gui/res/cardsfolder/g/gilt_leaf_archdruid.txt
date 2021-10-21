@@ -3,7 +3,7 @@ ManaCost:3 G G
 Types:Creature Elf Druid
 PT:3/3
 T:Mode$ SpellCast | ValidCard$ Druid | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you cast a Druid spell, you may draw a card.
-SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 1
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 A:AB$ GainControl | Cost$ tapXType<7/Druid> | ValidTgts$ Player | TgtPrompt$ Select target player | AllValid$ Land | ControlledByTarget$ True | NewController$ You | CostDesc$ Tap seven untapped Druids you control: | SpellDescription$ Gain control of all lands target player controls.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gilt_leaf_archdruid.jpg
 Oracle:Whenever you cast a Druid spell, you may draw a card.\nTap seven untapped Druids you control: Gain control of all lands target player controls.

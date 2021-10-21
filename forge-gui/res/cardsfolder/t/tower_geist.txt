@@ -4,6 +4,6 @@ Types:Creature Spirit
 PT:2/2
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.
-SVar:TrigDig:DB$Dig | DigNum$ 2 | ChangeNum$ 1 | DestinationZone2$ Graveyard
+SVar:TrigDig:DB$ Dig | DigNum$ 2 | ChangeNum$ 1 | DestinationZone2$ Graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tower_geist.jpg
 Oracle:Flying\nWhen Tower Geist enters the battlefield, look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.

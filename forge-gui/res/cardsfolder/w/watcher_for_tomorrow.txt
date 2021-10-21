@@ -4,5 +4,5 @@ Types:Creature Human Wizard
 PT:2/1
 K:Hideaway
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | TriggerController$ TriggeredCardController | Execute$ DBReturn | TriggerDescription$ When Watcher for Tomorrow leaves the battlefield, put the exiled card into its owner's hand.
-SVar:DBReturn:DB$ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Hand
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Hand
 Oracle:Hideaway (This creature enters the battlefield tapped. When it does, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.)\nWhen Watcher for Tomorrow leaves the battlefield, put the exiled card into its owner's hand.

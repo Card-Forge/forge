@@ -4,8 +4,8 @@ Types:Creature Dragon
 PT:4/4
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for an artifact card, exile it, then shuffle.
-SVar:TrigChange:DB$ChangeZone | Origin$ Library | Destination$ Exile | ChangeType$ Artifact | ChangeNum$ 1 | RememberChanged$ True | ShuffleNonMandatory$ True
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Exile | ChangeType$ Artifact | ChangeNum$ 1 | RememberChanged$ True | ShuffleNonMandatory$ True
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReturn | OptionalDecider$ TriggeredCardController | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you may put the exiled card into its owner's hand.
-SVar:TrigReturn:DB$ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Hand
+SVar:TrigReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hoarding_dragon.jpg
 Oracle:Flying\nWhen Hoarding Dragon enters the battlefield, you may search your library for an artifact card, exile it, then shuffle.\nWhen Hoarding Dragon dies, you may put the exiled card into its owner's hand.

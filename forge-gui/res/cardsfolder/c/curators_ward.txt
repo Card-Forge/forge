@@ -5,5 +5,5 @@ K:Enchant permanent
 A:SP$ Attach | Cost$ 2 U | ValidTgts$ Permanent | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | AddKeyword$ Hexproof | Description$ Enchanted permanent has hexproof.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.AttachedBy+Historic | Execute$ TrigDraw | TriggerDescription$ When enchanted permanent leaves the battlefield, if it was historic, draw two cards. (Artifacts, legendaries, and Sagas are historic.)
-SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 2
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 2
 Oracle:Enchant permanent\nEnchanted permanent has hexproof.\nWhen enchanted permanent leaves the battlefield, if it was historic, draw two cards. (Artifacts, legendaries, and Sagas are historic.)

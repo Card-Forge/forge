@@ -3,6 +3,6 @@ ManaCost:G
 Types:Creature Human Wizard
 PT:1/1
 T:Mode$ Phase | PreCombatMain$ True | ValidPlayer$ Player | Execute$ TrigMana | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's precombat main phase, that player adds {G}{G}.
-SVar:TrigMana:DB$Mana | Produced$ G | Amount$ 2 | Defined$ TriggeredPlayer
+SVar:TrigMana:DB$ Mana | Produced$ G | Amount$ 2 | Defined$ TriggeredPlayer
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magus_of_the_vineyard.jpg
 Oracle:At the beginning of each player's precombat main phase, that player adds {G}{G}.

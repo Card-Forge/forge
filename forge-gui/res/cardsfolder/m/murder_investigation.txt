@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant creature you control
 A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | AILogic$ Pump
 T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigToken | TriggerDescription$ When enchanted creature dies, create X 1/1 white Soldier creature tokens, where X is its power.
-SVar:TrigToken:DB$Token | TokenAmount$ X | TokenScript$ w_1_1_soldier | TokenOwner$ You | LegacyImage$ w 1 1 soldier gtc
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_soldier | TokenOwner$ You | LegacyImage$ w 1 1 soldier gtc
 SVar:X:TriggeredCard$CardPower
 DeckHas:Ability$Token
 SVar:Picture:http://www.wizards.com/global/images/magic/general/murder_investigation.jpg

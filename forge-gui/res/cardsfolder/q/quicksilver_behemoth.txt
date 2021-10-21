@@ -6,6 +6,6 @@ K:Affinity:Artifact
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DelayedTrig | TriggerDescription$ When CARDNAME attacks or blocks, return it to its owner's hand at end of combat. (Return it only if it's on the battlefield.)
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ DelayedTrig | Secondary$ True | TriggerDescription$ When CARDNAME attacks or blocks, return it to its owner's hand at end of combat. (Return it only if it's on the battlefield.)
 SVar:DelayedTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigReturn | TriggerDescription$ Return CARDNAME to its owner's hand at end of combat. (Return it only if it's on the battlefield.)
-SVar:TrigReturn:DB$ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand
+SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quicksilver_behemoth.jpg
 Oracle:Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nWhen Quicksilver Behemoth attacks or blocks, return it to its owner's hand at end of combat. (Return it only if it's on the battlefield.)

@@ -4,6 +4,6 @@ Types:Creature Vampire
 PT:4/4
 K:Flying
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your upkeep, you lose 1 life.
-SVar:TrigLoseLife:DB$LoseLife | Defined$ You | LifeAmount$ 1
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moroii.jpg
 Oracle:Flying\nAt the beginning of your upkeep, you lose 1 life.

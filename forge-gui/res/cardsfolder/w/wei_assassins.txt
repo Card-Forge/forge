@@ -3,6 +3,6 @@ ManaCost:3 B B
 Types:Creature Human Soldier Assassin
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, target opponent chooses a creature they control. Destroy that creature.
-SVar:TrigSac:DB$Sacrifice | ValidTgts$ Opponent | SacValid$ Creature | Destroy$ True
+SVar:TrigSac:DB$ Sacrifice | ValidTgts$ Opponent | SacValid$ Creature | Destroy$ True
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=10583&type=card
 Oracle:When Wei Assassins enters the battlefield, target opponent chooses a creature they control. Destroy that creature.

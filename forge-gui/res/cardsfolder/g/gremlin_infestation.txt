@@ -4,8 +4,8 @@ Types:Enchantment Aura
 K:Enchant artifact
 A:SP$ Attach | Cost$ 3 R | ValidTgts$ Artifact | AILogic$ Curse
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of your end step, CARDNAME deals 2 damage to enchanted artifact's controller.
-SVar:TrigDamage:DB$DealDamage | Defined$ EnchantedController | NumDmg$ 2
+SVar:TrigDamage:DB$ DealDamage | Defined$ EnchantedController | NumDmg$ 2
 T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigToken | TriggerDescription$ When enchanted artifact is put into a graveyard, create a 2/2 red Gremlin creature token.
-SVar:TrigToken:DB$Token | TokenAmount$ 1 | TokenScript$ r_2_2_gremlin | TokenOwner$ You | LegacyImage$ r 2 2 gremlin aer
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_2_2_gremlin | TokenOwner$ You | LegacyImage$ r 2 2 gremlin aer
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gremlin_infestation.jpg
 Oracle:Enchant artifact\nAt the beginning of your end step, Gremlin Infestation deals 2 damage to enchanted artifact's controller.\nWhen enchanted artifact is put into a graveyard, create a 2/2 red Gremlin creature token.

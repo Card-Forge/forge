@@ -2,8 +2,8 @@ Name:Winter Sky
 ManaCost:R
 Types:Sorcery
 A:SP$ FlipACoin | Cost$ R | WinSubAbility$ DBDamageAll | LoseSubAbility$ DBDraw | SpellDescription$ Flip a coin. If you win the flip, CARDNAME deals 1 damage to each creature and each player. If you lose the flip, each player draws a card.
-SVar:DBDamageAll:DB$DamageAll | NumDmg$ 1 | ValidCards$ Creature | ValidPlayers$ Player | ValidDescription$ each creature and each player.
-SVar:DBDraw:DB$Draw | Defined$ Player
+SVar:DBDamageAll:DB$ DamageAll | NumDmg$ 1 | ValidCards$ Creature | ValidPlayers$ Player | ValidDescription$ each creature and each player.
+SVar:DBDraw:DB$ Draw | Defined$ Player
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/winter_sky.jpg
 Oracle:Flip a coin. If you win the flip, Winter Sky deals 1 damage to each creature and each player. If you lose the flip, each player draws a card.

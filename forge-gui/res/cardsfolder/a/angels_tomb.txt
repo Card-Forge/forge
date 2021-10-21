@@ -2,7 +2,7 @@ Name:Angel's Tomb
 ManaCost:3
 Types:Artifact
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigAnimateTomb | OptionalDecider$ You | TriggerDescription$ Whenever a creature enters the battlefield under your control, you may have CARDNAME become a 3/3 white Angel artifact creature with flying until end of turn.
-SVar:TrigAnimateTomb:DB$Animate | Defined$ Self | Power$ 3 | Toughness$ 3 | Types$ Artifact,Creature,Angel | Colors$ White | Keywords$ Flying
+SVar:TrigAnimateTomb:DB$ Animate | Defined$ Self | Power$ 3 | Toughness$ 3 | Types$ Artifact,Creature,Angel | Colors$ White | Keywords$ Flying
 SVar:BuffedBy:Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angels_tomb.jpg
 Oracle:Whenever a creature enters the battlefield under your control, you may have Angel's Tomb become a 3/3 white Angel artifact creature with flying until end of turn.

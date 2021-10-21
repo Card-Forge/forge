@@ -7,6 +7,6 @@ SVar:PlayMain1:TRUE
 AI:RemoveDeck:Random
 A:AB$ ChangeZone | Cost$ 2 W B | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card.OppOwn | SubAbility$ DBToken | SpellDescription$ Exile target card from an opponent's graveyard. If it was a creature card, you create a 1/1 white and black Spirit creature token with flying.
 SVar:DBToken:DB$ Token | ConditionDefined$ Targeted | ConditionPresent$ Creature | ConditionCompare$ EQ1 | TokenAmount$ 1 | TokenScript$ wb_1_1_spirit_flying | TokenOwner$ You | SubAbility$ DBCleanup | LegacyImage$ wb 1 1 spirit flying rna
-SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Token
 Oracle:Creatures you control get +1/+1.\nCreatures your opponents control get -1/-1.\n{2}{W}{B}: Exile target card from an opponent's graveyard. If it was a creature card, you create a 1/1 white and black Spirit creature token with flying.

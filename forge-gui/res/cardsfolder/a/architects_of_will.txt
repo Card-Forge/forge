@@ -4,6 +4,6 @@ Types:Artifact Creature Human Wizard
 PT:3/3
 K:Cycling:UB
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRearrange | TriggerDescription$ When CARDNAME enters the battlefield, look at the top three cards of target player's library, then put them back in any order.
-SVar:TrigRearrange:DB$RearrangeTopOfLibrary | ValidTgts$ Player | TgtPrompt$ Choose target player. | NumCards$ 3
+SVar:TrigRearrange:DB$ RearrangeTopOfLibrary | ValidTgts$ Player | TgtPrompt$ Choose target player. | NumCards$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/architects_of_will.jpg
 Oracle:When Architects of Will enters the battlefield, look at the top three cards of target player's library, then put them back in any order.\nCycling {U/B} ({U/B}, Discard this card: Draw a card.)

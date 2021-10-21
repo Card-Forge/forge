@@ -7,7 +7,7 @@ SVar:GrothamaAttack:Mode$ Attacks | ValidCard$ Card.Self | Execute$ GrothamaFigh
 SVar:GrothamaFight:DB$ Fight | Defined$ TriggeredAttackerLKICopy | ExtraDefined$ OriginalHost | SpellDescription$ You may have it fight ORIGINALHOST
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigRepeat | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, each player draws cards equal to the amount of damage dealt to Grothama this turn by sources they controlled.
 SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ TrigDraw
-SVar:TrigDraw:DB$Draw | Defined$ Remembered | NumCards$ X
+SVar:TrigDraw:DB$ Draw | Defined$ Remembered | NumCards$ X
 SVar:X:TriggeredCard$DamageDoneByPlayerThisTurn.Remembered
 SVar:HasAttackEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grothama_all_devouring.jpg

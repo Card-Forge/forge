@@ -4,7 +4,7 @@ Types:Creature Spirit
 PT:1/1
 K:Haste
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Graveyard | IsPresent$ Creature.YouOwn+Above | PresentZone$ Graveyard | PresentCompare$ GE3 | Execute$ TrigReturn | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, if CARDNAME is in your graveyard with three or more creature cards above it, you may put CARDNAME onto the battlefield.
-SVar:TrigReturn:DB$ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield
+SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield
 SVar:DiscardMe:2
 SVar:NeedsOrderedGraveyard:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nether_shadow.jpg

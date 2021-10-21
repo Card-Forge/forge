@@ -6,8 +6,8 @@ T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature | ValidBlocker$ Card.Sel
 T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | Execute$ TrigDestroyBlocker | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, destroy that creature. You gain life equal to that creature's toughness.
 SVar:TrigDestroyBlocked:DB$ Destroy | Defined$ TriggeredAttackerLKICopy | SubAbility$ DBGainLifeBlocked
 SVar:TrigDestroyBlocker:DB$ Destroy | Defined$ TriggeredBlockerLKICopy | SubAbility$ DBGainLifeBlocker
-SVar:DBGainLifeBlocked:DB$GainLife | Defined$ You | LifeAmount$ X
-SVar:DBGainLifeBlocker:DB$GainLife | Defined$ You | LifeAmount$ Y
+SVar:DBGainLifeBlocked:DB$ GainLife | Defined$ You | LifeAmount$ X
+SVar:DBGainLifeBlocker:DB$ GainLife | Defined$ You | LifeAmount$ Y
 SVar:X:TriggeredAttacker$CardToughness
 SVar:Y:TriggeredBlocker$CardToughness
 SVar:HasCombatEffect:TRUE

@@ -4,6 +4,6 @@ Types:Creature Spirit Avatar
 PT:4/4
 K:Flying
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigGainControl | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may gain control of target permanent until end of turn. If you do, untap it and it gains haste until end of turn.
-SVar:TrigGainControl:DB$GainControl | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Untap$ True | AddKWs$ Haste | LoseControl$ EOT
+SVar:TrigGainControl:DB$ GainControl | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Untap$ True | AddKWs$ Haste | LoseControl$ EOT
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dominus_of_fealty.jpg
 Oracle:Flying\nAt the beginning of your upkeep, you may gain control of target permanent until end of turn. If you do, untap it and it gains haste until end of turn.

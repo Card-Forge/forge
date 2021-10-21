@@ -3,7 +3,7 @@ ManaCost:1 W
 Types:Instant
 A:SP$ Destroy | Cost$ 1 W | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SubAbility$ DBDestroyAll | RememberTargets$ True | ForgetOtherTargets$ True | SpellDescription$ Destroy target enchantment and all other enchantments with the same name as that enchantment.
 SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Remembered.Enchantment+Other+sameName | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/echoing_calm.jpg
 Oracle:Destroy target enchantment and all other enchantments with the same name as that enchantment.

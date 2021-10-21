@@ -4,9 +4,9 @@ Types:Creature Human
 PT:0/2
 S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefenderControls$ Island | Description$ CARDNAME can't attack unless defending player controls an Island.
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Island.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When you control no Islands, sacrifice CARDNAME.
-SVar:TrigSac:DB$Sacrifice | Defined$ Self
+SVar:TrigSac:DB$ Sacrifice | Defined$ Self
 T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, you gain 2 life.
-SVar:TrigGainLife:DB$GainLife | Defined$ You | LifeAmount$ 2
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
 SVar:NeedsToPlay:Island.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merchant_ship.jpg
 Oracle:Merchant Ship can't attack unless defending player controls an Island.\nWhenever Merchant Ship attacks and isn't blocked, you gain 2 life.\nWhen you control no Islands, sacrifice Merchant Ship.

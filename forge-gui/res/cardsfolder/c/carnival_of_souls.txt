@@ -3,7 +3,7 @@ ManaCost:1 B
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a creature enters the battlefield, you lose 1 life and add {B}.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1 | SubAbility$ DBMana
-SVar:DBMana:DB$Mana | Produced$ B
+SVar:DBMana:DB$ Mana | Produced$ B
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/carnival_of_souls.jpg
 Oracle:Whenever a creature enters the battlefield, you lose 1 life and add {B}.

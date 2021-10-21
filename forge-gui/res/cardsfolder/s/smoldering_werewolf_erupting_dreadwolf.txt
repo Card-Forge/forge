@@ -8,7 +8,7 @@ PT:3/2
 
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 1 damage to each of up to two target creatures.
 
-SVar:TrigDealDamage:DB$DealDamage | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1
+SVar:TrigDealDamage:DB$ DealDamage | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1
 
 A:AB$SetState | Cost$ 4 R R | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
 SVar:PlayMain1:TRUE

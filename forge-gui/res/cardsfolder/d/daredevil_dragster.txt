@@ -3,7 +3,7 @@ ManaCost:3
 Types:Artifact Vehicle
 PT:4/4
 T:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | IsPresent$ Card.Self+attackedThisCombat,Card.Self+blockedThisCombat | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At end of combat, if CARDNAME attacked or blocked this combat, put a velocity counter on it. Then if it has two or more velocity counters on it, sacrifice it and draw two cards.
-SVar:TrigPutCounter:DB$PutCounter | CounterType$ VELOCITY | CounterNum$ 1 | SubAbility$ DBSac
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ VELOCITY | CounterNum$ 1 | SubAbility$ DBSac
 SVar:DBSac:DB$ Sacrifice | SacValid$ Self | RememberSacrificed$ True | ConditionPresent$ Card.Self+counters_GE2_VELOCITY | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 2 | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

@@ -4,7 +4,7 @@ Types:Legendary Creature Human Warrior
 PT:0/0
 K:etbCounter:P1P1:3
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard,Command | ValidCard$ Creature.YouCtrl+counters_GE1_P1P1 | TriggerZones$ Battlefield | TriggerController$ TriggeredCardController | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature you control dies or is put into the command zone, if it had one or more +1/+1 counters on it, you may put that many +1/+1 counters on target creature.
-SVar:TrigPutCounter:DB$PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ X
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ X
 SVar:X:TriggeredCard$CardCounters.P1P1
 K:Partner
 DeckHints:Ability$Counters

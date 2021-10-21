@@ -5,7 +5,7 @@ PT:2/3
 K:Flying
 K:Exploit
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another creature you control dies, put a +1/+1 counter on CARDNAME. It gains haste until end of turn if it exploited that creature.
-SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | ConditionPresent$ Card.StrictlySelf | SubAbility$ DBPump
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | ConditionPresent$ Card.StrictlySelf | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Haste | ConditionDefined$ TriggeredCard | ConditionPresent$ Card.exploited
 DeckHas:Ability$Counters
 Oracle:Flying\nExploit (When this creature enters the battlefield, you may sacrifice a creature.)\nWhenever another creature you control dies, put a +1/+1 counter on Silumgar Scavenger. It gains haste until end of turn if it exploited that creature.

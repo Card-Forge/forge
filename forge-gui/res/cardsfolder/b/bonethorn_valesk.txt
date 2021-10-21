@@ -3,6 +3,6 @@ ManaCost:4 R
 Types:Creature Beast
 PT:4/2
 T:Mode$ TurnFaceUp | ValidCard$ Permanent | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a permanent is turned face up, CARDNAME deals 1 damage to any target.
-SVar:TrigDamage:DB$DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bonethorn_valesk.jpg
 Oracle:Whenever a permanent is turned face up, Bonethorn Valesk deals 1 damage to any target.

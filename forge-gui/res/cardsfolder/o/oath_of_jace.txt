@@ -2,8 +2,8 @@ Name:Oath of Jace
 ManaCost:2 U
 Types:Legendary Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw three cards, then discard two cards.
-SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 3 | SubAbility$ DBDiscard
-SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 3 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigScry | TriggerDescription$ At the beginning of your upkeep, scry X, where X is the number of planeswalkers you control.
 SVar:TrigScry:DB$ Scry | ScryNum$ X
 SVar:X:Count$Valid Planeswalker.YouCtrl

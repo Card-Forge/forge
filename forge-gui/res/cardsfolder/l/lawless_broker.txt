@@ -3,6 +3,6 @@ ManaCost:2 B
 Types:Creature Aetherborn Rogue
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, put a +1/+1 counter on target creature you control.
-SVar:TrigPutCounter:DB$PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1 
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lawless_broker.jpg
 Oracle:When Lawless Broker dies, put a +1/+1 counter on target creature you control.

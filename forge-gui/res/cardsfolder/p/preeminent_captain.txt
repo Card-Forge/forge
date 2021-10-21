@@ -4,6 +4,6 @@ Types:Creature Kithkin Soldier
 PT:2/2
 K:First Strike
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChange | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, you may put a Soldier creature card from your hand onto the battlefield tapped and attacking.
-SVar:TrigChange:DB$ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.Soldier+YouCtrl | Tapped$ True | Attacking$ True | SpellDescription$ You may put a Soldier creature card from your hand onto the battlefield tapped and attacking.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.Soldier+YouCtrl | Tapped$ True | Attacking$ True | SpellDescription$ You may put a Soldier creature card from your hand onto the battlefield tapped and attacking.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/preeminent_captain.jpg
 Oracle:First strike (This creature deals combat damage before creatures without first strike.)\nWhenever Preeminent Captain attacks, you may put a Soldier creature card from your hand onto the battlefield tapped and attacking.

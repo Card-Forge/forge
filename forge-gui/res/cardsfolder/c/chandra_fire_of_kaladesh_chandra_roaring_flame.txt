@@ -24,6 +24,6 @@ A:AB$ DealDamage | Cost$ SubCounter<2/LOYALTY> | ValidTgts$ Creature | Planeswal
 A:AB$ DealDamage | Cost$ SubCounter<7/LOYALTY> | Defined$ Player.Opponent | Planeswalker$ True | Ultimate$ True | NumDmg$ 6 | RememberDamaged$ True | SubAbility$ DBUltimateEmblem | SpellDescription$ CARDNAME deals 6 damage to each opponent. Each player dealt damage this way gets an emblem with "At the beginning of your upkeep, this emblem deals 3 damage to you."
 SVar:DBUltimateEmblem:DB$ Effect | Name$ Emblem - Chandra, Roaring Flame | Image$ emblem_chandra_roaring_flame | Stackable$ True | Triggers$ FlameTrigger | Duration$ Permanent | AILogic$ Always | EffectOwner$ Player.IsRemembered | SubAbility$ DBCleanup
 SVar:FlameTrigger:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigDealDamage | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 3 damage to you.
-SVar:TrigDealDamage:DB$DealDamage | Defined$ You | NumDmg$ 3
-SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ You | NumDmg$ 3
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:[+1]: Chandra, Roaring Flame deals 2 damage to target player or planeswalker.\n[−2]: Chandra, Roaring Flame deals 2 damage to target creature.\n[−7]: Chandra, Roaring Flame deals 6 damage to each opponent. Each player dealt damage this way gets an emblem with "At the beginning of your upkeep, this emblem deals 3 damage to you."

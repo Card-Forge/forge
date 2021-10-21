@@ -3,9 +3,9 @@ ManaCost:4 B B
 Types:Creature Nightmare Horror
 PT:6/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, target player loses 6 life.
-SVar:TrigLoseLife:DB$LoseLife | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 6 | RememberTargets$ True | ForgetOtherTargets$ True
+SVar:TrigLoseLife:DB$ LoseLife | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 6 | RememberTargets$ True | ForgetOtherTargets$ True
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, that player gains 6 life.
-SVar:TrigGainLife:DB$GainLife | Defined$ Remembered | LifeAmount$ 6
+SVar:TrigGainLife:DB$ GainLife | Defined$ Remembered | LifeAmount$ 6
 A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/laquatuss_champion.jpg
 Oracle:When Laquatus's Champion enters the battlefield, target player loses 6 life.\nWhen Laquatus's Champion leaves the battlefield, that player gains 6 life.\n{B}: Regenerate Laquatus's Champion.

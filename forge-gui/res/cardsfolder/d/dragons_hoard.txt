@@ -3,7 +3,7 @@ ManaCost:3
 Types:Artifact
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dragons_hoard.jpg
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Dragon.YouCtrl | TriggerZones$ Battlefield | Execute$ DBPutCounter | TriggerDescription$ Whenever a Dragon enters the battlefield under your control, put a gold counter on Dragon's Hoard.
-SVar:DBPutCounter:DB$PutCounter | Defined$ Self | CounterType$ GOLD | CounterNum$ 1
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ GOLD | CounterNum$ 1
 A:AB$ Draw | Cost$ T SubCounter<1/GOLD> | NumCards$ 1 | SpellDescription$ Draw a card.
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
 DeckHints:Type$Dragon

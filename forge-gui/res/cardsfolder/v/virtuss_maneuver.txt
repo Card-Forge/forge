@@ -6,7 +6,7 @@ SVar:FriendRepeat:DB$ RepeatEach | RepeatPlayers$ Remembered | RepeatSubAbility$
 SVar:PlayChoose:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Creature.RememberedPlayerCtrl | Amount$ 1 | Mandatory$ True | ChoiceZone$ Graveyard | ChoiceTitle$ Choose a creature in your graveyard | RememberChosen$ True
 SVar:ReturnAll:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Hand | ChangeType$ Creature.IsRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
-SVar:DBSacrifice:DB$Sacrifice | Defined$ Remembered | SacValid$ Creature | SacMessage$ creature | StackDescription$ SpellDescription | SpellDescription$ Each foe sacrifices a creature they control.
+SVar:DBSacrifice:DB$ Sacrifice | Defined$ Remembered | SacValid$ Creature | SacMessage$ creature | StackDescription$ SpellDescription | SpellDescription$ Each foe sacrifices a creature they control.
 SVar:NeedsToPlayVar:Z GE2
 SVar:Z:SVar$Z1/Plus.Z2
 SVar:Z1:Count$ValidGraveyard Creature.YourTeamCtrl

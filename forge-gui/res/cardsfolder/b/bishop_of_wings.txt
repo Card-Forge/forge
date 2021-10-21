@@ -3,7 +3,7 @@ ManaCost:W W
 Types:Creature Human Cleric
 PT:1/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Angel.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever an Angel enters the battlefield under your control, you gain 4 life.
-SVar:TrigGainLife:DB$GainLife | Defined$ You | LifeAmount$ 4
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 4
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Angel.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever an Angel you control dies, create a 1/1 white Spirit creature token with flying.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You | LegacyImage$ w 1 1 spirit flying m20
 DeckHas:Ability$Token & Ability$LifeGain

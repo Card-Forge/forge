@@ -2,6 +2,6 @@ Name:Ring of Renewal
 ManaCost:5
 Types:Artifact
 A:AB$ Discard | Cost$ 5 T | NumCards$ 1 | Mode$ Random | SpellDescription$ Discard a card at random, then draw two cards. | SubAbility$ DB
-SVar:DB:DB$Draw | NumCards$ 2
+SVar:DB:DB$ Draw | NumCards$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ring_of_renewal.jpg
 Oracle:{5}, {T}: Discard a card at random, then draw two cards.

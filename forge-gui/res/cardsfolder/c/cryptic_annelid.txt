@@ -3,8 +3,8 @@ ManaCost:3 U
 Types:Creature Worm Beast
 PT:1/4
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry 1, then scry 2, then scry 3.
-SVar:TrigScry:DB$Scry | ScryNum$ 1 | SubAbility$ DBScry2
-SVar:DBScry2:DB$Scry | ScryNum$ 2 | SubAbility$ DBScry3
-SVar:DBScry3:DB$Scry | ScryNum$ 3
+SVar:TrigScry:DB$ Scry | ScryNum$ 1 | SubAbility$ DBScry2
+SVar:DBScry2:DB$ Scry | ScryNum$ 2 | SubAbility$ DBScry3
+SVar:DBScry3:DB$ Scry | ScryNum$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cryptic_annelid.jpg
 Oracle:When Cryptic Annelid enters the battlefield, scry 1, then scry 2, then scry 3. (To scry X, look at the top X cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)

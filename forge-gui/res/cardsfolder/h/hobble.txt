@@ -6,6 +6,6 @@ A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack. | Description$ Enchanted creature can't attack.
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+Black | AddHiddenKeyword$ CARDNAME can't block. | Description$ Enchanted creature can't block if it's black.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
-SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 1
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hobble.jpg
 Oracle:Enchant creature\nWhen Hobble enters the battlefield, draw a card.\nEnchanted creature can't attack.\nEnchanted creature can't block if it's black.

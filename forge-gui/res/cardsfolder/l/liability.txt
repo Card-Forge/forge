@@ -2,7 +2,7 @@ Name:Liability
 ManaCost:1 B B
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Permanent.nonToken | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a nontoken permanent is put into a player's graveyard from the battlefield, that player loses 1 life.
-SVar:TrigLoseLife:DB$LoseLife | Defined$ TriggeredCardOwner | LifeAmount$ 1
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredCardOwner | LifeAmount$ 1
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/liability.jpg
 Oracle:Whenever a nontoken permanent is put into a player's graveyard from the battlefield, that player loses 1 life.

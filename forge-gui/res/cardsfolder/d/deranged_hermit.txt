@@ -5,7 +5,7 @@ PT:1/1
 K:Echo:3 G G
 S:Mode$ Continuous | Affected$ Creature.Squirrel | AddPower$ 1 | AddToughness$ 1 | Description$ Squirrel creatures get +1/+1.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create four 1/1 green Squirrel creature tokens.
-SVar:TrigToken:DB$Token | TokenAmount$ 4 | TokenScript$ g_1_1_squirrel | TokenOwner$ You | LegacyImage$ g 1 1 squirrel ulg
+SVar:TrigToken:DB$ Token | TokenAmount$ 4 | TokenScript$ g_1_1_squirrel | TokenOwner$ You | LegacyImage$ g 1 1 squirrel ulg
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deranged_hermit.jpg
 Oracle:Echo {3}{G}{G} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen Deranged Hermit enters the battlefield, create four 1/1 green Squirrel creature tokens.\nSquirrel creatures get +1/+1.

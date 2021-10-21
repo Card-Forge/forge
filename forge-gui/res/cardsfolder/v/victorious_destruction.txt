@@ -2,6 +2,6 @@ Name:Victorious Destruction
 ManaCost:4 R
 Types:Sorcery
 A:SP$ Destroy | Cost$ 4 R | ValidTgts$ Artifact,Land | TgtPrompt$ Select target artifact or land | SubAbility$ DBDrain | SpellDescription$ Destroy target artifact or land. Its controller loses 1 life.
-SVar:DBDrain:DB$LoseLife | Defined$ TargetedController | LifeAmount$ 1
+SVar:DBDrain:DB$ LoseLife | Defined$ TargetedController | LifeAmount$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/victorious_destruction.jpg
 Oracle:Destroy target artifact or land. Its controller loses 1 life.

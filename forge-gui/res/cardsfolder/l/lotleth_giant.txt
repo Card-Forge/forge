@@ -3,6 +3,6 @@ ManaCost:6 B
 Types:Creature Zombie Giant
 PT:6/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ Undergrowth - When CARDNAME enters the battlefield, it deals 1 damage to target opponent for each creature card in your graveyard.
-SVar:TrigDealDamage:DB$DealDamage | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumDmg$ X
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumDmg$ X
 SVar:X:Count$TypeInYourYard.Creature
 Oracle:Undergrowth — When Lotleth Giant enters the battlefield, it deals 1 damage to target opponent for each creature card in your graveyard.

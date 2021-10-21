@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Creature Human Werewolf
 PT:2/2
 T:Mode$Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
-SVar:TrigTransform:DB$SetState | Defined$ Self | Mode$ Transform
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
 SVar:Picture:http://www.wizards.com/global/images/magic/general/convicted_killer.jpg
 Oracle:At the beginning of each upkeep, if no spells were cast last turn, transform Convicted Killer.
@@ -16,7 +16,7 @@ Colors:red
 Types:Creature Werewolf
 PT:4/4
 T:Mode$Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, transform CARDNAME.
-SVar:TrigTransform:DB$SetState | Defined$ Self | Mode$ Transform
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 SVar:Picture:http://www.wizards.com/global/images/magic/general/branded_howler.jpg
 Oracle:At the beginning of each upkeep, if a player cast two or more spells last turn, transform Branded Howler.
 

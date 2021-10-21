@@ -4,6 +4,6 @@ Types:Creature Merfolk Shaman
 PT:2/2
 K:Hexproof
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPut | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on target Merfolk you control.
-SVar:TrigPut:DB$PutCounter | ValidTgts$ Merfolk.YouCtrl | TgtPrompt$ Select target Merfolk you control | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigPut:DB$ PutCounter | ValidTgts$ Merfolk.YouCtrl | TgtPrompt$ Select target Merfolk you control | CounterType$ P1P1 | CounterNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/jade_guardian.jpg
 Oracle:Hexproof (This creature can't be the target of spells or abilities your opponents control.)\nWhen Jade Guardian enters the battlefield, put a +1/+1 counter on target Merfolk you control.

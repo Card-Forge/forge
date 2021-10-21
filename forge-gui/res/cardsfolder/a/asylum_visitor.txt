@@ -3,8 +3,8 @@ ManaCost:1 B
 Types:Creature Vampire Wizard
 PT:3/1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | CheckSVar$ TrigCount | SVarCompare$ EQ0 | Execute$ TrigDraw | TriggerDescription$ At the beginning of each player's upkeep, if that player has no cards in hand, you draw a card and you lose 1 life.
-SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife
-SVar:DBLoseLife:DB$LoseLife | Defined$ You | LifeAmount$ 1 
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1
 SVar:TrigCount:Count$ValidHand Card.ActivePlayerCtrl 
 K:Madness:1 B
 DeckHints:Ability$Discard

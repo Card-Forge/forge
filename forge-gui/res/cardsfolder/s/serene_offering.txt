@@ -2,7 +2,7 @@ Name:Serene Offering
 ManaCost:1 W
 Types:Instant
 A:SP$ Destroy | Cost$ 1 W | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SubAbility$ DBGainLife | SpellDescription$ Destroy target enchantment. You gain life equal to its mana value.
-SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Targeted$CardManaCost
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serene_offering.jpg

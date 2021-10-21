@@ -4,7 +4,7 @@ Types:Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ W U | SpellDescription$ Add {W}{U}.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME enters the battlefield, return a land you control to its owner's hand.
-SVar:TrigReturn:DB$ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Land.YouCtrl | AILogic$ NeverBounceItself | SpellDescription$ Return a land you control to its owner's hand.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Land.YouCtrl | AILogic$ NeverBounceItself | SpellDescription$ Return a land you control to its owner's hand.
 SVar:NeedsToPlay:Land.Basic+YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/azorius_chancery.jpg
 Oracle:Azorius Chancery enters the battlefield tapped.\nWhen Azorius Chancery enters the battlefield, return a land you control to its owner's hand.\n{T}: Add {W}{U}.

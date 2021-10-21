@@ -2,6 +2,6 @@ Name:Enhanced Awareness
 ManaCost:4 U
 Types:Instant
 A:SP$ Draw | Cost$ 4 U | NumCards$ 3 | SpellDescription$ Draw three cards, then discard a card. | SubAbility$ DBDiscard
-SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enhanced_awareness.jpg
 Oracle:Draw three cards, then discard a card.

@@ -4,8 +4,8 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 B | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigDraw | TriggerDescription$ When enchanted creature dies, draw three cards, then discard one of them.
-SVar:TrigDraw:DB$Draw | NumCards$ 3 | RememberDrawn$ True | SubAbility$ DBDiscard
-SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | DiscardValid$ Card.IsRemembered | NumCards$ 1 | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:TrigDraw:DB$ Draw | NumCards$ 3 | RememberDrawn$ True | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | DiscardValid$ Card.IsRemembered | NumCards$ 1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/casting_of_bones.jpg
 Oracle:Enchant creature\nWhen enchanted creature dies, draw three cards, then discard one of them.

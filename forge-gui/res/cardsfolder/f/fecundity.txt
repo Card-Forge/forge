@@ -2,7 +2,7 @@ Name:Fecundity
 ManaCost:2 G
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigDraw | OptionalDecider$ TriggeredCardController | TriggerDescription$ Whenever a creature dies, that creature's controller may draw a card.
-SVar:TrigDraw:DB$Draw | Defined$ TriggeredCardController | NumCards$ 1
+SVar:TrigDraw:DB$ Draw | Defined$ TriggeredCardController | NumCards$ 1
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fecundity.jpg
 Oracle:Whenever a creature dies, that creature's controller may draw a card.

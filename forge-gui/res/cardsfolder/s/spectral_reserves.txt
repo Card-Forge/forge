@@ -2,7 +2,7 @@ Name:Spectral Reserves
 ManaCost:3 W
 Types:Sorcery
 A:SP$ Token | Cost$ 3 W | LegacyImage$ w 1 1 spirit flying emn | TokenAmount$ 2 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You | SubAbility$ DBGainLife | SpellDescription$ Create two 1/1 white Spirit creature tokens with flying.
-SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 2 | SpellDescription$ You gain 2 life. 
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
 DeckHas:Ability$Token & Ability$LifeGain
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spectral_reserves.jpg
 Oracle:Create two 1/1 white Spirit creature tokens with flying. You gain 2 life.

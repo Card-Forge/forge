@@ -4,7 +4,7 @@ Types:Artifact
 K:etbCounter:PAGE:1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Card.IsCommander+YouOwn | Execute$ TrigPutCounter | TriggerDescription$ Whenever your commander enters the battlefield or attacks, put a page counter on CARDNAME.
 T:Mode$ Attacks | ValidCard$ Card.IsCommander+YouOwn | TriggerZones$ Battlefield | Execute$ TrigPutCounter | Secondary$ True | TriggerDescription$ Whenever your commander enters the battlefield or attacks, put a page counter on CARDNAME.
-SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ PAGE | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ PAGE | CounterNum$ 1
 SVar:HasAttackEffect:TRUE
 DeckHints:Type$IsCommander
 DeckHas:Ability$Counters

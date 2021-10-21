@@ -3,6 +3,6 @@ ManaCost:R
 Types:Creature Elemental Lizard
 PT:1/1
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ Whenever CARDNAME attacks, it deals 1 damage to the player or planeswalker it's attacking.
-SVar:TrigDealDamage:DB$DealDamage | Defined$ TriggeredDefender | NumDmg$ 1
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ TriggeredDefender | NumDmg$ 1
 SVar:HasAttackEffect:TRUE
 Oracle:Whenever Scorch Spitter attacks, it deals 1 damage to the player or planeswalker it's attacking.

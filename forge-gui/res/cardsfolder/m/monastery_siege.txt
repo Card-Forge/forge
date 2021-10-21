@@ -6,7 +6,7 @@ SVar:SiegeChoice:DB$ GenericChoice | Choices$ Khans,Dragons | Defined$ You | Set
 SVar:Khans:DB$ Animate | Defined$ Self | Triggers$ KhansTrigger | Duration$ Permanent | SpellDescription$ Khans
 SVar:KhansTrigger:Mode$ Phase | Phase$ Draw | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ Filter | TriggerDescription$ At the beginning of your draw step, draw an additional card, then discard a card.
 SVar:Filter:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBDiscard
-SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
 SVar:Dragons:DB$ Animate | Defined$ Self | staticAbilities$ DragonsST | Duration$ Permanent | SpellDescription$ Dragons
 SVar:DragonsST:Mode$ RaiseCost | ValidTarget$ You,Card.YouCtrl | Activator$ Opponent | Type$ Spell | Amount$ 2 | Description$ Spells your opponents cast that target you or a permanent you control cost {2} more to cast.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/monasterz_siege.jpg

@@ -4,7 +4,7 @@ Types:Artifact Equipment
 K:Equip:1
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Trample | Description$ Equipped creature has trample.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ KaloniaCounter | TriggerDescription$ At the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's green.
-SVar:KaloniaCounter:DB$PutCounter | Defined$ Equipped | ConditionDefined$ Equipped | ConditionPresent$ Creature.Green | ConditionCompare$ EQ1 | CounterType$ P1P1 | CounterNum$ 1
+SVar:KaloniaCounter:DB$ PutCounter | Defined$ Equipped | ConditionDefined$ Equipped | ConditionPresent$ Creature.Green | ConditionCompare$ EQ1 | CounterType$ P1P1 | CounterNum$ 1
 AI:RemoveDeck:Random
 SVar:AttachAi:AITgts$ Creature.Green
 DeckNeeds:Color$Green

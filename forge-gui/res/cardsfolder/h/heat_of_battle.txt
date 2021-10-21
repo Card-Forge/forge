@@ -2,7 +2,7 @@ Name:Heat of Battle
 ManaCost:1 R
 Types:Enchantment
 T:Mode$ Blocks | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a creature blocks, CARDNAME deals 1 damage to that creature's controller.
-SVar:TrigDamage:DB$DealDamage | Defined$ TriggeredBlockerController | NumDmg$ 1
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredBlockerController | NumDmg$ 1
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heat_of_battle.jpg
 Oracle:Whenever a creature blocks, Heat of Battle deals 1 damage to that creature's controller.

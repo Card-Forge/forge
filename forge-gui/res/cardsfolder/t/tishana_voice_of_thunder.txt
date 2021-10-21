@@ -5,7 +5,7 @@ PT:*/*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of cards in your hand.
 S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card for each creature you control.
-SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ NumCreats
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ NumCreats
 SVar:X:Count$InYourHand
 SVar:NumCreats:Count$Valid Creature.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tishana_voice_of_thunder.jpg

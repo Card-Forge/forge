@@ -2,7 +2,7 @@ Name:Call for Unity
 ManaCost:3 W W
 Types:Enchantment
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Revolt$ True | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Revolt — At the beginning of your end step, if a permanent you controlled left the battlefield this turn, put a unity counter on Call for Unity.
-SVar:TrigPutCounter:DB$PutCounter | CounterType$ UNITY | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ UNITY | CounterNum$ 1
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ X | AddToughness$ X | Description$ Creatures you control get +1/+1 for each unity counter on Call for Unity.
 SVar:X:Count$CardCounters.UNITY
 SVar:Picture:http://www.wizards.com/global/images/magic/general/call_for_unity.jpg

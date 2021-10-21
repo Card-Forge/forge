@@ -2,6 +2,6 @@ Name:Zap
 ManaCost:2 R
 Types:Instant
 A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target. | SubAbility$ DBDraw
-SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zap.jpg
 Oracle:Zap deals 1 damage to any target.\nDraw a card.

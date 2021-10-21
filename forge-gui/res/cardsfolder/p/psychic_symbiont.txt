@@ -4,8 +4,8 @@ Types:Creature Nightmare Horror
 PT:3/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDrawDiscard | TriggerDescription$ When CARDNAME enters the battlefield, target opponent discards a card and you draw a card.
-SVar:TrigDrawDiscard:DB$Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBDiscard
-SVar:DBDiscard:DB$Discard | ValidTgts$ Opponent | NumCards$ 1 | Mode$ TgtChoose
+SVar:TrigDrawDiscard:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | ValidTgts$ Opponent | NumCards$ 1 | Mode$ TgtChoose
 DeckHas:Ability$Discard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Bloodhusk_Ritualist.jpg
 Oracle:Flying\nWhen Psychic Symbiont enters the battlefield, target opponent discards a card and you draw a card.

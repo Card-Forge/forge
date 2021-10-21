@@ -2,6 +2,6 @@ Name:Liturgy of Blood
 ManaCost:3 B B
 Types:Sorcery
 A:SP$ Destroy | Cost$ 3 B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBMana | SpellDescription$ Destroy target creature. Add {B}{B}{B}.
-SVar:DBMana:DB$Mana | Produced$ B | Amount$ 3
+SVar:DBMana:DB$ Mana | Produced$ B | Amount$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/liturgy_of_blood.jpg
 Oracle:Destroy target creature. Add {B}{B}{B}.

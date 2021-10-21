@@ -4,6 +4,6 @@ Types:Creature Spirit
 PT:3/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, each player loses 3 life.
-SVar:TrigLoseLife:DB$LoseLife | Defined$ Player | LifeAmount$ 3
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player | LifeAmount$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/howling_banshee.jpg
 Oracle:Flying\nWhen Howling Banshee enters the battlefield, each player loses 3 life.

@@ -4,5 +4,5 @@ Types:Creature Beast
 PT:0/3
 K:Reach
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may put a land card from your hand onto the battlefield tapped.
-SVar:TrigChange:DB$ChangeZone | Origin$ Hand | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.YouCtrl
+SVar:TrigChange:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.YouCtrl
 Oracle:Reach\nWhen Arboreal Grazer enters the battlefield, you may put a land card from your hand onto the battlefield tapped.

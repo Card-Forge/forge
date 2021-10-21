@@ -2,7 +2,7 @@ Name:Mardu Ascendancy
 ManaCost:R W B
 Types:Enchantment
 T:Mode$ Attacks | ValidCard$ Creature.nonToken+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a nontoken creature you control attacks, create a 1/1 red Goblin creature token that's tapped and attacking.
-SVar:TrigToken:DB$Token | TokenAmount$ 1 | TokenScript$ r_1_1_goblin | TokenOwner$ You | LegacyImage$ r 1 1 goblin ktk | TokenTapped$ True | TokenAttacking$ True
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_goblin | TokenOwner$ You | LegacyImage$ r 1 1 goblin ktk | TokenTapped$ True | TokenAttacking$ True
 A:AB$ PumpAll | Cost$ Sac<1/CARDNAME> | ValidCards$ Creature.YouCtrl | NumDef$ +3 | SpellDescription$ Creatures you control get +0/+3 until end of turn.
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mardu_ascendancy.jpg

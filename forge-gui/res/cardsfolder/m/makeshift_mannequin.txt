@@ -5,6 +5,6 @@ A:SP$ ChangeZone | Cost$ 3 B | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select t
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ MannequinStatic | Duration$ Permanent | SubAbility$ DBCleanup | ForgetOnMoved$ Battlefield | ForgetCounter$ MANNEQUIN
 SVar:MannequinStatic:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | AddTrigger$ MannequinBecomesTarget | Description$ For as long as that creature has a mannequin counter on it, it has "When this creature becomes the target of a spell or ability, sacrifice it."
 SVar:MannequinBecomesTarget:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ MakeshiftSac | TriggerDescription$ When CARDNAME becomes the target of a spell or ability, sacrifice it.
-SVar:MakeshiftSac:DB$Sacrifice | Defined$ Self
+SVar:MakeshiftSac:DB$ Sacrifice | Defined$ Self
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Return target creature card from your graveyard to the battlefield with a mannequin counter on it. For as long as that creature has a mannequin counter on it, it has "When this creature becomes the target of a spell or ability, sacrifice it."

@@ -3,6 +3,6 @@ ManaCost:U
 Types:Creature Human Wizard
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRearrange | TriggerDescription$ When CARDNAME enters the battlefield, look at the top four cards of your library, then put them back in any order.
-SVar:TrigRearrange:DB$RearrangeTopOfLibrary | Defined$ You | NumCards$ 4
+SVar:TrigRearrange:DB$ RearrangeTopOfLibrary | Defined$ You | NumCards$ 4
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sage_of_epityr.jpg
 Oracle:When Sage of Epityr enters the battlefield, look at the top four cards of your library, then put them back in any order.

@@ -3,6 +3,6 @@ ManaCost:2 G U R
 Types:Creature Human Warrior
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 4/4 green Bear creature token.
-SVar:TrigToken:DB$Token | TokenAmount$ 1 | TokenScript$ g_4_4_bear | TokenOwner$ You | LegacyImage$ g 4 4 bear ktk
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_4_4_bear | TokenOwner$ You | LegacyImage$ g 4 4 bear ktk
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bears_companion.jpg
 Oracle:When Bear's Companion enters the battlefield, create a 4/4 green Bear creature token.

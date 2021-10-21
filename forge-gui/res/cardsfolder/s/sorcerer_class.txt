@@ -3,7 +3,7 @@ ManaCost:U R
 Types:Enchantment Class
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw two cards, then discard two cards.
 SVar:TrigDraw:DB$ Draw | NumCards$ 2 | SubAbility$ DBDiscard
-SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose
 K:Class:2:U R:AddStaticAbility$ STapMana
 SVar:STapMana:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Creature.YouCtrl | AddAbility$ ManaU & ManaR | Secondary$ True | Description$ Creatures you control have "{T}: Add {U} or {R}. Spend this mana only to cast an instant or sorcery spell or to gain a Class level."
 SVar:ManaU:AB$Mana | Cost$ T | Produced$ U | Amount$ 1 | RestrictValid$ Instant,Sorcery,Activated.ClassLevelUp | SpellDescription$ Add {U}. Spend this mana only to cast an instant or sorcery spell or to gain a Class level.

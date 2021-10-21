@@ -4,6 +4,6 @@ Types:Creature Rhino Monk Soldier
 PT:2/3
 K:Exalted
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 3 life.
-SVar:TrigGainLife:DB$GainLife | LifeAmount$ 3
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rhox_bodyguard.jpg
 Oracle:Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)\nWhen Rhox Bodyguard enters the battlefield, you gain 3 life.

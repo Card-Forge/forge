@@ -6,5 +6,5 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ 
 SVar:TrigAnimate:DB$ Animate | ValidTgts$ Land | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Select two target lands | Types$ Swamp | RemoveLandTypes$ True | Duration$ Permanent | SubAbility$ DBExile
 SVar:DBExile:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Exile
 A:AB$ Tap | Cost$ 3 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature, then return CARDNAME to its owner's hand. | SubAbility$ DBBounce
-SVar:DBBounce:DB$ChangeZone | Origin$ Battlefield | Destination$ Hand
+SVar:DBBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand
 Oracle:When Cyclopean Titan dies, two target lands become Swamps. Exile Cyclopean Titan.\n{3}, {T}: Tap target creature, then return Cyclopean Titan to its owner's hand.

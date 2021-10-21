@@ -3,7 +3,7 @@ ManaCost:4 W
 Types:Creature Antelope
 PT:2/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for an Aura card, reveal it, put it into your hand, then shuffle.
-SVar:TrigChangeZone:DB$ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.Aura | ChangeNum$ 1 | ShuffleNonMandatory$ True
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.Aura | ChangeNum$ 1 | ShuffleNonMandatory$ True
 AI:RemoveDeck:Random
 DeckNeeds:Type$Aura
 SVar:Picture:http://www.wizards.com/global/images/magic/general/totem_guide_hartebeest.jpg

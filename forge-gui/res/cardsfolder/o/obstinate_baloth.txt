@@ -3,7 +3,7 @@ ManaCost:2 G G
 Types:Creature Beast
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 4 life.
-SVar:TrigGainLife:DB$GainLife | LifeAmount$ 4
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 4
 R:Event$ Discard | ActiveZones$ Hand | ValidCard$ Card.Self | ValidSource$ Card.OppCtrl | ReplaceWith$ SurpriseETB | DiscardFromEffect$ True | Description$ If a spell or ability an opponent controls causes you to discard CARDNAME, put it onto the battlefield instead of putting it into your graveyard.
 SVar:SurpriseETB:DB$ ChangeZone | DefinedPlayer$ ReplacedPlayer | Defined$ ReplacedCard | Origin$ Hand | Destination$ Battlefield
 SVar:DiscardMeByOpp:2

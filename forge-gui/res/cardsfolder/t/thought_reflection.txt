@@ -2,6 +2,6 @@ Name:Thought Reflection
 ManaCost:4 U U U
 Types:Enchantment
 R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ DrawTwo | Description$ If you would draw a card, draw two cards instead.
-SVar:DrawTwo:DB$Draw | Defined$ You | NumCards$ 2
+SVar:DrawTwo:DB$ Draw | Defined$ You | NumCards$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thought_reflection.jpg
 Oracle:If you would draw a card, draw two cards instead.

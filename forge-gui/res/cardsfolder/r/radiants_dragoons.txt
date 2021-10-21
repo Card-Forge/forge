@@ -3,7 +3,7 @@ ManaCost:3 W
 Types:Creature Human Soldier
 PT:2/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 5 life.
-SVar:TrigGainLife:DB$GainLife | LifeAmount$ 5
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 5
 K:Echo:3 W
 SVar:Picture:http://www.wizards.com/global/images/magic/general/radiants_dragoons.jpg
 Oracle:Echo {3}{W} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen Radiant's Dragoons enters the battlefield, you gain 5 life.

@@ -3,7 +3,7 @@ ManaCost:3 B
 Types:Sorcery
 K:Flashback:5 B B
 A:SP$ ChangeZone | Cost$ 3 B | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberTargets$ True | ForgetOtherTargets$ True | SubAbility$ DBSearch | SpellDescription$ Exile target creature and all other creatures with the same name as that creature.
-SVar:DBSearch:DB$ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | ChangeType$ Remembered.sameName | Shuffle$ True | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:DBSearch:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | ChangeType$ Remembered.sameName | Shuffle$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sever_the_bloodline.jpg
 Oracle:Exile target creature and all other creatures with the same name as that creature.\nFlashback {5}{B}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

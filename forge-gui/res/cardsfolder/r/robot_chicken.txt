@@ -3,7 +3,7 @@ ManaCost:4
 Types:Artifact Creature Chicken Construct
 PT:2/2
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell, put a 0/1 colorless Egg artifact creature token onto the battlefield.
-SVar:TrigToken:DB$Token | TokenScript$ c_0_1_a_egg
+SVar:TrigToken:DB$ Token | TokenScript$ c_0_1_a_egg
 T:Mode$ ChangesZone | ValidCard$ Egg.YouCtrl | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDestroy | TriggerDescription$ Whenever an Egg you control is put into a graveyard from the battlefield, destroy target artifact or creature.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact,Creature
 DeckHas:Ability$Token

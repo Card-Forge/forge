@@ -5,8 +5,8 @@ PT:6/6
 K:Devoid
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExileYourLibrary | TriggerDescription$ When CARDNAME enters the battlefield, exile all cards from your library face down, then shuffle all cards from your graveyard into your library.
-SVar:TrigExileYourLibrary:DB$ChangeZoneAll | ChangeType$ Card.YouOwn | Origin$ Library | Destination$ Exile | ExileFaceDown$ True | SubAbility$ DBShuffle
-SVar:DBShuffle:DB$ChangeZoneAll | ChangeType$ Card.YouOwn | Origin$ Graveyard | Destination$ Library | Shuffle$ True
+SVar:TrigExileYourLibrary:DB$ ChangeZoneAll | ChangeType$ Card.YouOwn | Origin$ Library | Destination$ Exile | ExileFaceDown$ True | SubAbility$ DBShuffle
+SVar:DBShuffle:DB$ ChangeZoneAll | ChangeType$ Card.YouOwn | Origin$ Graveyard | Destination$ Library | Shuffle$ True
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inverter_of_truth.jpg
 Oracle:Devoid (This card has no color.)\nFlying\nWhen Inverter of Truth enters the battlefield, exile all cards from your library face down, then shuffle all cards from your graveyard into your library.

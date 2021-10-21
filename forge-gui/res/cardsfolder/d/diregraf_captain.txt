@@ -5,7 +5,7 @@ PT:2/2
 K:Deathtouch
 S:Mode$ Continuous | Affected$ Creature.Zombie+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Zombie creatures you control get +1/+1.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Zombie+Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever another Zombie you control dies, target opponent loses 1 life.
-SVar:TrigLoseLife:DB$LoseLife | LifeAmount$ 1 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent
+SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ 1 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diregraf_captain.jpg
 Oracle:Deathtouch\nOther Zombie creatures you control get +1/+1.\nWhenever another Zombie you control dies, target opponent loses 1 life.

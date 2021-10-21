@@ -2,5 +2,5 @@ Name:Ral's Outburst
 ManaCost:2 U R
 Types:Instant
 A:SP$ DealDamage | Cost$ 2 U R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 3 | SubAbility$ DBDig | SpellDescription$ CARDNAME deals 3 damage to any target. Look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.
-SVar:DBDig:DB$Dig | DigNum$ 2
+SVar:DBDig:DB$ Dig | DigNum$ 2
 Oracle:Ral's Outburst deals 3 damage to any target. Look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.

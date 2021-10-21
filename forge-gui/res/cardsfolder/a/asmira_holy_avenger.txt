@@ -4,7 +4,7 @@ Types:Legendary Creature Human Cleric
 PT:2/3
 K:Flying
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of each end step, put a +1/+1 counter on Asmira, Holy Avenger for each creature put into your graveyard from the battlefield this turn.
-SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/asmira_holy_avenger.jpg
 Oracle:Flying\nAt the beginning of each end step, put a +1/+1 counter on Asmira, Holy Avenger for each creature put into your graveyard from the battlefield this turn.

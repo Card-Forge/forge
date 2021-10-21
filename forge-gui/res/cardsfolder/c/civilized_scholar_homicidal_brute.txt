@@ -3,7 +3,7 @@ ManaCost:2 U
 Types:Creature Human Advisor
 PT:0/1
 A:AB$ Draw | Cost$ T | NumCards$ 1 | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then discard a card. If a creature card is discarded this way, untap CARDNAME, then transform it.
-SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1 | RememberDiscarded$ True | SubAbility$ DBTransform
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1 | RememberDiscarded$ True | SubAbility$ DBTransform
 SVar:DBTransform:DB$ SetState | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Card.Creature | ConditionCompare$ EQ1 | SubAbility$ DBUntap | Mode$ Transform
 SVar:DBUntap:DB$ Untap | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Card.Creature | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

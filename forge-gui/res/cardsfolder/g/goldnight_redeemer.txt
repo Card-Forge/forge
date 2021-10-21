@@ -4,7 +4,7 @@ Types:Creature Angel
 PT:4/4
 K:Flying
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 2 life for each other creature you control.
-SVar:TrigGainLife:DB$GainLife | Defined$ You | LifeAmount$ X
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$Valid Creature.Other+YouCtrl/Times.2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goldnight_redeemer.jpg
 Oracle:Flying\nWhen Goldnight Redeemer enters the battlefield, you gain 2 life for each other creature you control.

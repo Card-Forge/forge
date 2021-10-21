@@ -4,6 +4,6 @@ Types:Creature Beast
 PT:3/3
 K:Vigilance
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, tap up to two target creatures your opponents control.
-SVar:TrigTap:DB$Tap | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature your opponent controls
+SVar:TrigTap:DB$ Tap | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature your opponent controls
 SVar:PlayMain1:TRUE
 Oracle:Vigilance\nWhen Intrusive Packbeast enters the battlefield, tap up to two target creatures your opponents control.

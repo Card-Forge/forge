@@ -3,7 +3,7 @@ ManaCost:R
 Types:Creature Devil
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 1 damage to target creature and 1 damage to you.
-SVar:TrigDealDamage:DB$DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | SubAbility$ DBDamageYou
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | SubAbility$ DBDamageYou
 SVar:DBDamageYou:DB$ DealDamage | Defined$ You | NumDmg$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/forge_devil.jpg
 Oracle:When Forge Devil enters the battlefield, it deals 1 damage to target creature and 1 damage to you.

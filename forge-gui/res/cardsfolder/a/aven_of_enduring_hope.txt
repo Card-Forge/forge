@@ -4,6 +4,6 @@ Types:Creature Bird Cleric
 PT:3/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 3 life.
-SVar:TrigGainLife:DB$GainLife | LifeAmount$ 3
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aven_of_enduring_hope.jpg
 Oracle:Flying\nWhen Aven of Enduring Hope enters the battlefield, you gain 3 life.

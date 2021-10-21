@@ -4,7 +4,7 @@ Types:Creature Vampire Wizard
 PT:3/2
 K:Lifelink
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target Vampire or Wizard creature card from your graveyard to the battlefield.
-SVar:TrigChangeZone:DB$ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.Vampire+YouCtrl,Creature.Wizard+YouCtrl | TgtPrompt$ Select target Vampire or Wizard creature card in your graveyard
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.Vampire+YouCtrl,Creature.Wizard+YouCtrl | TgtPrompt$ Select target Vampire or Wizard creature card in your graveyard
 DeckHints:Type$Vampire|Wizard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodline_necromancer.jpg
 Oracle:Lifelink\nWhen Bloodline Necromancer enters the battlefield, you may return target Vampire or Wizard creature card from your graveyard to the battlefield.

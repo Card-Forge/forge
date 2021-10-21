@@ -2,7 +2,7 @@ Name:Spread the Sickness
 ManaCost:4 B
 Types:Sorcery
 A:SP$ Destroy | Cost$ 4 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBProliferate | SpellDescription$ Destroy target creature, then proliferate.
-SVar:DBProliferate:DB$Proliferate
+SVar:DBProliferate:DB$ Proliferate
 DeckHas:Ability$Proliferate
 DeckNeeds:Ability$Counters
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spread_the_sickness.jpg

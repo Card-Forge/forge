@@ -3,7 +3,7 @@ ManaCost:4 G
 Types:Creature Spirit
 PT:3/3
 T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRegen | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, regenerate CARDNAME.
-SVar:TrigRegen:DB$Regenerate | Defined$ Self
+SVar:TrigRegen:DB$ Regenerate | Defined$ Self
 SVar:BuffedBy:Arcane,Spirit
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fiddlehead_kami.jpg

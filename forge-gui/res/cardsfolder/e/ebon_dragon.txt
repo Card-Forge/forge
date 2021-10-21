@@ -4,6 +4,6 @@ Types:Creature Dragon
 PT:5/4
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, you may have target opponent discard a card.
-SVar:TrigDiscard:DB$Discard | ValidTgts$ Opponent | TgtPrompt$ Choose target opponent. | NumCards$ 1 | Mode$ TgtChoose
+SVar:TrigDiscard:DB$ Discard | ValidTgts$ Opponent | TgtPrompt$ Choose target opponent. | NumCards$ 1 | Mode$ TgtChoose
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ebon_dragon.jpg
 Oracle:Flying\nWhen Ebon Dragon enters the battlefield, you may have target opponent discard a card.

@@ -5,6 +5,6 @@ PT:2/3
 K:Flying
 K:Evoke:3 U
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigBounce | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, put target nonland permanent on top of its owner's library.
-SVar:TrigBounce:DB$ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0
+SVar:TrigBounce:DB$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0
 SVar:NeedsToPlayEvoked:Card.nonLand+OppCtrl
 Oracle:Flying\nWhen Nevermaker leaves the battlefield, put target nonland permanent on top of its owner's library.\nEvoke {3}{U} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield.)

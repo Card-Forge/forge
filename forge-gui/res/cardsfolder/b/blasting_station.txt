@@ -3,7 +3,7 @@ ManaCost:3
 Types:Artifact
 A:AB$ DealDamage | Cost$ T Sac<1/Creature> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ Whenever a creature enters the battlefield, you may untap CARDNAME.
-SVar:TrigUntap:DB$Untap | Defined$ Self
+SVar:TrigUntap:DB$ Untap | Defined$ Self
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blasting_station.jpg
 Oracle:{T}, Sacrifice a creature: Blasting Station deals 1 damage to any target.\nWhenever a creature enters the battlefield, you may untap Blasting Station.

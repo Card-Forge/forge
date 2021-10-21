@@ -2,7 +2,7 @@ Name:Venerated Teacher
 ManaCost:2 U
 Types:Creature Human Wizard
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigPut | TriggerDescription$ When CARDNAME enters the battlefield, put two level counters on each creature you control with level up.
-SVar:TrigPut:DB$PutCounterAll | ValidCards$ Creature.YouCtrl+withLevel up | CounterType$ LEVEL | CounterNum$ 2
+SVar:TrigPut:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl+withLevel up | CounterType$ LEVEL | CounterNum$ 2
 PT:2/2
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/venerated_teacher.jpg

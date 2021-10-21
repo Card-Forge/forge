@@ -3,6 +3,6 @@ ManaCost:3
 Types:Artifact
 K:etbCounter:CHARGE:3
 A:AB$ Destroy | Cost$ 1 T SubCounter<1/CHARGE> | ValidTgts$ Creature | AITgts$ BetterThanEvalRating.130 | TgtPrompt$ Select target creature | SorcerySpeed$ True | SubAbility$ OxToken | SpellDescription$ Destroy target creature.
-SVar:OxToken:DB$Token | TokenAmount$ 1 | TokenScript$ w_2_4_ox | TokenOwner$ TargetedController | LegacyImage$ w 2 4 ox | SpellDescription$ Its controller creates a 2/4 white Ox creature token. Activate only any time you could cast a sorcery.
+SVar:OxToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_2_4_ox | TokenOwner$ TargetedController | LegacyImage$ w 2 4 ox | SpellDescription$ Its controller creates a 2/4 white Ox creature token. Activate only any time you could cast a sorcery.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/transmogrifying_wand.jpg
 Oracle:Transmogrifying Wand enters the battlefield with three charge counters on it.\n{1}, {T}, Remove a charge counter from Transmogrifying Wand: Destroy target creature. Its controller creates a 2/4 white Ox creature token. Activate only as a sorcery.

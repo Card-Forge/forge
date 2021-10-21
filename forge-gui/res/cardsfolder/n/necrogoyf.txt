@@ -4,7 +4,7 @@ Types:Creature Lhurgoyf
 PT:*/4
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of creature cards in all graveyards.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ At the beginning of each player's upkeep, that player discards a card.
-SVar:TrigDiscard:DB$Discard | Defined$ TriggeredPlayer | NumCards$ 1 | Mode$ TgtChoose
+SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredPlayer | NumCards$ 1 | Mode$ TgtChoose
 K:Madness:1 B B
 SVar:X:Count$TypeInAllYards.Creature
 DeckHas:Ability$Discard

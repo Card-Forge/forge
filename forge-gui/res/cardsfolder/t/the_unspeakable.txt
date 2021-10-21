@@ -5,7 +5,7 @@ PT:6/7
 K:Flying
 K:Trample
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigReturn | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may return target Arcane card from your graveyard to your hand.
-SVar:TrigReturn:DB$ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Arcane.YouCtrl
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Arcane.YouCtrl
 DeckHints:Type$Arcane|Spirit
 DeckHints:Name$Peer Through Depths|Reach Through Mists|Sift Through Sands|The Unspeakable
 SVar:Picture:http://resources.wizards.com/magic/cards/chk/en-us/card78693.jpg

@@ -2,7 +2,7 @@ Name:Think Tank
 ManaCost:2 U
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ At the beginning of your upkeep, look at the top card of your library. You may put that card into your graveyard.
-SVar:TrigDig:DB$Dig | DigNum$ 1 | ChangeNum$ 1 | DestinationZone$ Graveyard | Optional$ True | LibraryPosition2$ 0
+SVar:TrigDig:DB$ Dig | DigNum$ 1 | ChangeNum$ 1 | DestinationZone$ Graveyard | Optional$ True | LibraryPosition2$ 0
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/think_tank.jpg
 Oracle:At the beginning of your upkeep, look at the top card of your library. You may put that card into your graveyard.

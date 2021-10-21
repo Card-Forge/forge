@@ -5,5 +5,5 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigDealDamage:DB$ DamageAll | ValidPlayers$ Player.Opponent | NumDmg$ 1 | SubAbility$ DBGainOneLife
 SVar:DBGainOneLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 A:AB$ DealDamage | Cost$ 5 B Sac<1/CARDNAME> | ValidTgts$ Opponent | NumDmg$ 4 | SubAbility$ DBGainFourLife | SpellDescription$ CARDNAME deals 4 damage to target opponent and you gain 4 life.
-SVar:DBGainFourLife:DB$GainLife | Defined$ You | LifeAmount$ 4
+SVar:DBGainFourLife:DB$ GainLife | Defined$ You | LifeAmount$ 4
 Oracle:At the beginning of your upkeep, Ill-Gotten Inheritance deals 1 damage to each opponent and you gain 1 life.\n{5}{B}, Sacrifice Ill-Gotten Inheritance: It deals 4 damage to target opponent and you gain 4 life.

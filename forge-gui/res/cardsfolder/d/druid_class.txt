@@ -2,7 +2,7 @@ Name:Druid Class
 ManaCost:1 G
 Types:Enchantment Class
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a land enters the battlefield under your control, you gain 1 life.
-SVar:TrigGainLife:DB$GainLife | Defined$ You | LifeAmount$ 1
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 K:Class:2:2 G:AddStaticAbility$ SLandPlay
 SVar:SLandPlay:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | Secondary$ True | Description$ You may play an additional land on each of your turns.
 K:Class:3:4 G:AddTrigger$ TriggerClassLevel

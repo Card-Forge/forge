@@ -4,7 +4,7 @@ Types:Creature Vampire Skeleton
 PT:3/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, Create two 1/1 black Bat creature tokens with flying.
-SVar:TrigToken:DB$Token | LegacyImage$ b 1 1 bat flying gpt | TokenScript$ b_1_1_bat_flying | TokenOwner$ You | TokenAmount$ 2 | TokenSVars$ Sac
+SVar:TrigToken:DB$ Token | LegacyImage$ b 1 1 bat flying gpt | TokenScript$ b_1_1_bat_flying | TokenOwner$ You | TokenAmount$ 2 | TokenSVars$ Sac
 A:AB$ Token | Cost$ 3 B B Sac<1/Bat> | TokenAmount$ 2 | LegacyImage$ b 1 1 bat flying gpt | TokenScript$ b_1_1_bat_flying | TokenOwner$ You | TokenSVars$ Sac | SpellDescription$ Create two 1/1 black Bat creature tokens with flying.
 A:AB$ Regenerate | Cost$ Sac<1/Bat> | SpellDescription$ Regenerate CARDNAME.
 SVar:Sac:SVar:SacMe:1

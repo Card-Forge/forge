@@ -2,6 +2,6 @@ Name:Emmessi Tome
 ManaCost:4
 Types:Artifact
 A:AB$ Draw | Cost$ 5 T | NumCards$ 2 | SpellDescription$ Draw two cards, then discard a card. | SubAbility$ DBDiscard
-SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 SVar:Picture:http://www.wizards.com/global/images/magic/general/emmessi_tome.jpg
 Oracle:{5}, {T}: Draw two cards, then discard a card.

@@ -3,6 +3,6 @@ ManaCost:1 G
 Types:Creature Insect Druid
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may put target card from a graveyard on the bottom of its owner's library.
-SVar:TrigChange:DB$ChangeZone | ValidTgts$ Card | TgtPrompt$ Select target card in a graveyard | Origin$ Graveyard | Destination$ Library | LibraryPosition$ -1
+SVar:TrigChange:DB$ ChangeZone | ValidTgts$ Card | TgtPrompt$ Select target card in a graveyard | Origin$ Graveyard | Destination$ Library | LibraryPosition$ -1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nantuko_tracer.jpg
 Oracle:When Nantuko Tracer enters the battlefield, you may put target card from a graveyard on the bottom of its owner's library.

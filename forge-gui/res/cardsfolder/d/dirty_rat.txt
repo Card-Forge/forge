@@ -3,5 +3,5 @@ ManaCost:1 B
 Types:Host Creature Rat
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | Host$ True | TriggerDescription$ When this creature enters the battlefield, target opponent discards a card.
-SVar:TrigDiscard:DB$Discard | ValidTgts$ Opponent | TgtPrompt$ Select an opponent | NumCards$ 1 | Mode$ TgtChoose
+SVar:TrigDiscard:DB$ Discard | ValidTgts$ Opponent | TgtPrompt$ Select an opponent | NumCards$ 1 | Mode$ TgtChoose
 Oracle:When this creature enters the battlefield, target opponent discards a card.

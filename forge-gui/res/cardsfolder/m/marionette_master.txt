@@ -4,7 +4,7 @@ Types:Creature Human Artificer
 PT:1/3
 K:Fabricate:3
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Artifact.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever an artifact you control is put into a graveyard from the battlefield, target opponent loses life equal to CARDNAME's power.
-SVar:TrigLoseLife:DB$LoseLife | ValidTgts$ Opponent | TgtPrompt$ Choose target opponent | LifeAmount$ X
+SVar:TrigLoseLife:DB$ LoseLife | ValidTgts$ Opponent | TgtPrompt$ Choose target opponent | LifeAmount$ X
 SVar:X:Count$CardPower
 DeckHas:Ability$Counters & Ability$Token
 DeckHints:Type$Artifact

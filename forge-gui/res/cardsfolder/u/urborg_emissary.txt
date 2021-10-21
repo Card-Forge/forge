@@ -4,7 +4,7 @@ Types:Creature Human Wizard
 PT:3/1
 K:Kicker:1 U
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, return target permanent to its owner's hand.
-SVar:TrigKicker:DB$ChangeZone | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand
+SVar:TrigKicker:DB$ ChangeZone | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand
 SVar:NeedsToPlayKicked:Permanent.OppCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/urborg_emissary.jpg
 Oracle:Kicker {1}{U} (You may pay an additional {1}{U} as you cast this spell.)\nWhen Urborg Emissary enters the battlefield, if it was kicked, return target permanent to its owner's hand.

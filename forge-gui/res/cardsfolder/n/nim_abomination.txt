@@ -3,6 +3,6 @@ ManaCost:2 B
 Types:Creature Zombie
 PT:3/4
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.Self+untapped | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your end step, if CARDNAME is untapped, you lose 3 life.
-SVar:TrigLoseLife:DB$LoseLife | Defined$ You | LifeAmount$ 3
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nim_abomination.jpg
 Oracle:At the beginning of your end step, if Nim Abomination is untapped, you lose 3 life.

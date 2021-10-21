@@ -5,5 +5,5 @@ PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddPower$ 1 | Description$ Other creatures you control get +1/+0.
 SVar:PlayMain1:TRUE
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+nonToken | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a nontoken creature you control dies, CARDNAME deals 1 damage to any target.
-SVar:TrigDamage:DB$DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1
 Oracle:Other creatures you control get +1/+0.\nWhenever a nontoken creature you control dies, Judith, the Scourge Diva deals 1 damage to any target.

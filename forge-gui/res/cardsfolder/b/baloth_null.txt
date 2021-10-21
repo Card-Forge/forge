@@ -3,6 +3,6 @@ ManaCost:4 B G
 Types:Creature Zombie Beast
 PT:4/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return up to two target creature cards from your graveyard to your hand.
-SVar:TrigChangeZone:DB$ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouCtrl | TargetMin$ 0 | TargetMax$ 2
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouCtrl | TargetMin$ 0 | TargetMax$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/baloth_null.jpg
 Oracle:When Baloth Null enters the battlefield, return up to two target creature cards from your graveyard to your hand.

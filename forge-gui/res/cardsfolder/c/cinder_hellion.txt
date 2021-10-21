@@ -4,6 +4,6 @@ Types:Creature Hellion
 PT:4/4
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 2 damage to target opponent or planeswalker.
-SVar:TrigDealDamage:DB$DealDamage | ValidTgts$ Opponent,Planeswalker | TgtPrompt$ Select target opponent or planeswalker | NumDmg$ 2
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Opponent,Planeswalker | TgtPrompt$ Select target opponent or planeswalker | NumDmg$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cinder_hellion.jpg
 Oracle:Trample\nWhen Cinder Hellion enters the battlefield, it deals 2 damage to target opponent or planeswalker.

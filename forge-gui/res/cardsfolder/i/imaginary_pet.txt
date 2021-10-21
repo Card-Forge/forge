@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Creature Illusion
 PT:4/4
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card | PresentZone$ Hand | PresentPlayer$ You | Execute$ TrigBounce | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, if you have a card in hand, return CARDNAME to its owner's hand.
-SVar:TrigBounce:DB$ChangeZone | Origin$ Battlefield | Destination$ Hand
+SVar:TrigBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand
 SVar:NeedsToPlayVar:Y LE1
 SVar:Y:Count$CardsInYourHand
 SVar:Picture:http://www.wizards.com/global/images/magic/general/imaginary_pet.jpg

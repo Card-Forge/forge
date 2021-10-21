@@ -9,7 +9,7 @@ SVar:ExileHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlaye
 SVar:ExileLib:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPlayer$ Targeted | ChangeType$ Card.NamedCard | ChangeNum$ NumInLib | Chooser$ You | Search$ True | Shuffle$ True | SubAbility$ DBCleanup | StackDescription$ None
 SVar:NumInLib:TargetedPlayer$CardsInLibrary
 SVar:NumInHand:TargetedPlayer$CardsInHand
-SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Valid Card.NamedCard/Times.3
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thought_hemorrhage.jpg

@@ -3,7 +3,7 @@ ManaCost:3 B
 Types:Creature Surrakar
 PT:3/3
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | IsPresent$ Island.YouCtrl | CombatDamage$ True | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, if you control an Island, you may draw a card.
-SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 1
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 DeckHints:Color$Blue
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Shoreline_Salvager.jpg
 Oracle:Whenever Shoreline Salvager deals combat damage to a player, if you control an Island, you may draw a card.

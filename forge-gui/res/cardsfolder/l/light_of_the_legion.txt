@@ -5,7 +5,7 @@ PT:5/5
 K:Flying
 K:Mentor
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPutCounters | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, put a +1/+1 counter on each white creature you control.
-SVar:TrigPutCounters:DB$PutCounterAll | ValidCards$ Creature.White+YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigPutCounters:DB$ PutCounterAll | ValidCards$ Creature.White+YouCtrl | CounterType$ P1P1 | CounterNum$ 1
 AI:RemoveDeck:Random
 DeckHas:Ability$Counters & Ability$Token
 Oracle:Flying\nMentor (Whenever this creature attacks, put a +1/+1 counter on target attacking creature with lesser power.)\nWhen Light of the Legion dies, put a +1/+1 counter on each white creature you control.

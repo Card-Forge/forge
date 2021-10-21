@@ -6,7 +6,7 @@ K:Haste
 K:Trample
 K:Kicker:R
 T:Mode$ Phase | Phase$ End of Turn | IsPresent$ Card.Self+notkicked | Execute$ TrigNotKicked | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of the end step, if CARDNAME wasn't kicked, sacrifice it.
-SVar:TrigNotKicked:DB$Sacrifice | Defined$ Self
+SVar:TrigNotKicked:DB$ Sacrifice | Defined$ Self
 # The following construct specifies that the AI always plays the spell kicked, and plays it unkicked on its own turn only if it will attack
 SVar:NeedsToPlay:WillAttack
 SVar:NeedsToPlayKickedVar:Z GE1

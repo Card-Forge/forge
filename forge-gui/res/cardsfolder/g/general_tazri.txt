@@ -3,7 +3,7 @@ ManaCost:4 W
 Types:Legendary Creature Human Ally
 PT:3/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for an Ally creature card, reveal it, put it into your hand, then shuffle.
-SVar:TrigChange:DB$ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Creature.Ally | ChangeNum$ 1 | ShuffleNonMandatory$ True
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Creature.Ally | ChangeNum$ 1 | ShuffleNonMandatory$ True
 A:AB$ PumpAll | Cost$ W U B R G | ValidCards$ Creature.Ally+YouCtrl | NumAtt$ 1 | NumDef$ 1 | ConditionPresent$ Creature.Ally+White+YouCtrl | ConditionCompare$ GE1 | SubAbility$ PumpAllU | SpellDescription$ Ally creatures you control get +X/+X until end of turn, where X is the number of colors among those creatures.
 SVar:PumpAllU:DB$ PumpAll | ValidCards$ Creature.Ally+YouCtrl | NumAtt$ 1 | NumDef$ 1 | ConditionPresent$ Creature.Ally+Blue+YouCtrl | ConditionCompare$ GE1 | SubAbility$ PumpAllB
 SVar:PumpAllB:DB$ PumpAll | ValidCards$ Creature.Ally+YouCtrl | NumAtt$ 1 | NumDef$ 1 | ConditionPresent$ Creature.Ally+Black+YouCtrl | ConditionCompare$ GE1 | SubAbility$ PumpAllR

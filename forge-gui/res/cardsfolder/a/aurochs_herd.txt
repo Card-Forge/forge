@@ -4,7 +4,7 @@ Types:Creature Aurochs
 PT:4/4
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for an Aurochs card, reveal it, put it into your hand, then shuffle.
-SVar:TrigChange:DB$ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.Aurochs | ChangeNum$ 1 | ShuffleNonMandatory$ True
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.Aurochs | ChangeNum$ 1 | ShuffleNonMandatory$ True
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +1/+0 until end of turn for each other attacking Aurochs.
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ X
 SVar:X:Count$Valid Aurochs.attacking+Other

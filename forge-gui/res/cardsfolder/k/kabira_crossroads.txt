@@ -4,6 +4,6 @@ Types:Land
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
 K:CARDNAME enters the battlefield tapped.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 2 life.
-SVar:TrigGainLife:DB$GainLife | LifeAmount$ 2
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kabira_crossroads.jpg
 Oracle:Kabira Crossroads enters the battlefield tapped.\nWhen Kabira Crossroads enters the battlefield, you gain 2 life.\n{T}: Add {W}.

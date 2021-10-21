@@ -4,7 +4,7 @@ Types:Creature Orc Pirate
 PT:3/2
 A:AB$ Token | Cost$ 2 B Sac<1/Creature> | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | LegacyImage$ c a treasure sac xln | SpellDescription$ Create two Treasure tokens.
 A:AB$ Draw | Cost$ Sac<3/Treasure> | NumCards$ 1 | SpellDescription$ Draw a card
-SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | DiscardValid$ Card.IsRemembered | NumCards$ 1 | SubAbility$ DBCleanup
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | DiscardValid$ Card.IsRemembered | NumCards$ 1 | SubAbility$ DBCleanup
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ruthless_knave.jpg
 DeckHas:Ability$Token
 Oracle:{2}{B}, Sacrifice a creature: Create two Treasure tokens. (They're artifacts with "{T}, Sacrifice this artifact: Add one mana of any color.")\nSacrifice three Treasures: Draw a card.

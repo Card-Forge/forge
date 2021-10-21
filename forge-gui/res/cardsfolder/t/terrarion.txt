@@ -3,7 +3,7 @@ ManaCost:1
 Types:Artifact
 A:AB$ Mana | Cost$ 2 T Sac<1/CARDNAME> | Produced$ Combo Any | Amount$ 2 | AILogic$ MostProminentInComputerHand | SpellDescription$ Add two mana in any combination of colors.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, draw a card.
-SVar:TrigDraw:DB$Draw | Defined$ TriggeredCardController | NumCards$ 1
+SVar:TrigDraw:DB$ Draw | Defined$ TriggeredCardController | NumCards$ 1
 K:CARDNAME enters the battlefield tapped.
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/terrarion.jpg

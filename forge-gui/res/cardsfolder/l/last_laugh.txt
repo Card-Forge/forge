@@ -2,9 +2,9 @@ Name:Last Laugh
 ManaCost:2 B B
 Types:Enchantment
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Creature | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When there are no creatures on the battlefield, sacrifice CARDNAME.
-SVar:TrigSac:DB$Sacrifice | Defined$ Self
+SVar:TrigSac:DB$ Sacrifice | Defined$ Self
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Permanent.Other | TriggerZones$ Battlefield | Execute$ TrigDamageAll | TriggerDescription$ Whenever a permanent other than CARDNAME is put into a graveyard from the battlefield, CARDNAME deals 1 damage to each creature and each player.
-SVar:TrigDamageAll:DB$DamageAll | ValidCards$ Creature | ValidPlayers$ Player | ValidDescription$ each creature and each player. | NumDmg$ 1
+SVar:TrigDamageAll:DB$ DamageAll | ValidCards$ Creature | ValidPlayers$ Player | ValidDescription$ each creature and each player. | NumDmg$ 1
 AI:RemoveDeck:Random
 SVar:NeedsToPlay:Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/last_laugh.jpg

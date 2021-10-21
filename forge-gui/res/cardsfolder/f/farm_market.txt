@@ -14,5 +14,5 @@ Types:Sorcery
 K:Aftermath
 A:SP$ Draw | Cost$ 2 U | NumCards$ 2 | SpellDescription$ Draw two cards, then discard two cards. | SubAbility$ DBDiscard
 
-SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose
 Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nDraw two cards, then discard two cards.

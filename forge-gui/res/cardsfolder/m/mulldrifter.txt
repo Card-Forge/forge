@@ -5,6 +5,6 @@ PT:2/2
 K:Flying
 K:Evoke:2 U
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw two cards.
-SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 2
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mulldrifter.jpg
 Oracle:Flying\nWhen Mulldrifter enters the battlefield, draw two cards.\nEvoke {2}{U} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield.)

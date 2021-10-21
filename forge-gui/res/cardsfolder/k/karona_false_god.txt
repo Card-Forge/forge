@@ -5,8 +5,8 @@ PT:5/5
 K:Haste
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigControl | TriggerDescription$ At the beginning of each player's upkeep, that player untaps CARDNAME and gains control of it.
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigChoosePump | TriggerDescription$ Whenever Karona attacks, creatures of the creature type of your choice get +3/+3 until end of turn.
-SVar:TrigControl:DB$GainControl | Defined$ Self | NewController$ TriggeredPlayer | Untap$ True | SpellDescription$ Untap CARDNAME and gain control of it.
-SVar:TrigChoosePump:DB$ChooseType | Defined$ You | Type$ Creature | AILogic$ MostProminentComputerControls | SubAbility$ DBPumpAll | SpellDescription$ Creatures of the creature type of your choice get +3/+3 until end of turn.
+SVar:TrigControl:DB$ GainControl | Defined$ Self | NewController$ TriggeredPlayer | Untap$ True | SpellDescription$ Untap CARDNAME and gain control of it.
+SVar:TrigChoosePump:DB$ ChooseType | Defined$ You | Type$ Creature | AILogic$ MostProminentComputerControls | SubAbility$ DBPumpAll | SpellDescription$ Creatures of the creature type of your choice get +3/+3 until end of turn.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.ChosenType | NumAtt$ 3 | NumDef$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/karona_false_god.jpg
 Oracle:Haste\nAt the beginning of each player's upkeep, that player untaps Karona, False God and gains control of it.\nWhenever Karona attacks, creatures of the creature type of your choice get +3/+3 until end of turn.

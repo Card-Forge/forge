@@ -4,6 +4,6 @@ Types:Creature Dragon
 PT:0/0
 K:etbCounter:P1P1:7
 A:AB$ DelayedTrigger | Cost$ R R R SubCounter<2/P1P1> | SorcerySpeed$ True | Mode$ Phase | Phase$ End of Turn | Execute$ TrigPutCounter | TriggerDescription$ Put a +1/+1 counter on CARDNAME. | SpellDescription$ Put three +1/+1 counters on CARDNAME at end of turn. Play this ability as a sorcery.
-SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 3
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 3
 DeckHas:Ability$Counters
 Oracle:When Shichifukujin Dragon comes into play, put seven +1/+1 counters on it.\n{R}{R}{R}, Sacrifice two +1/+1 counters: Put three +1/+1 counters on Shichifukujin Dragon at end of turn. Play this ability as a sorcery.

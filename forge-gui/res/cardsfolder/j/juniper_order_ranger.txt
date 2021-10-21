@@ -3,8 +3,8 @@ ManaCost:3 G W
 Types:Creature Human Knight Ranger
 PT:2/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another creature enters the battlefield under your control, put a +1/+1 counter on that creature and a +1/+1 counter on CARDNAME.
-SVar:TrigPutCounter:DB$PutCounter | Defined$ TriggeredCardLKICopy | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPutCounter
-SVar:DBPutCounter:DB$PutCounter | Defined$ Self.StrictlySelf | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredCardLKICopy | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self.StrictlySelf | CounterType$ P1P1 | CounterNum$ 1
 SVar:BuffedBy:Creature
 SVar:Picture:http://www.wizards.com/global/images/magic/general/juniper_order_ranger.jpg
 Oracle:Whenever another creature enters the battlefield under your control, put a +1/+1 counter on that creature and a +1/+1 counter on Juniper Order Ranger.

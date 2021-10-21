@@ -6,7 +6,7 @@ SVar:DBSacrifice:DB$ ImmediateTrigger | Execute$ TrigDealDamage | UnlessCost$ Sa
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target. | NumDmg$ 3
 SVar:DBDiscard:DB$ Discard | Defined$ Player | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ Each player discards a card.
 SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | RememberChanged$ True | SubAbility$ DBPutCounter | SpellDescription$ Return target creature card from your graveyard to the battlefield. Put a +1/+1 counter on it. It gains haste until your next turn.
-SVar:DBPutCounter:DB$PutCounter | CounterType$ P1P1 | CounterNum$ 1 | Defined$ Remembered | SubAbility$ DBPump
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | Defined$ Remembered | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ Haste | Duration$ UntilYourNextTurn | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Counters

@@ -3,7 +3,7 @@ ManaCost:2 UR
 Types:Creature Noggle Rogue
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, each player draws two cards, then discards a card at random.
-SVar:TrigDraw:DB$Draw | Defined$ Player | NumCards$ 2 | SubAbility$ DBDiscard
-SVar:DBDiscard:DB$Discard | Defined$ Player | Mode$ Random | NumCards$ 1
+SVar:TrigDraw:DB$ Draw | Defined$ Player | NumCards$ 2 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ Player | Mode$ Random | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/noggle_ransacker.jpg
 Oracle:When Noggle Ransacker enters the battlefield, each player draws two cards, then discards a card at random.

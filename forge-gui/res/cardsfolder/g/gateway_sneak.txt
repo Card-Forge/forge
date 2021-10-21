@@ -6,6 +6,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Gate.Y
 SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ HIDDEN Unblockable | SpellDescription$ CARDNAME can't be blocked this turn.
 SVar:PlayMain1:TRUE
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, draw a card.
-SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 1
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 DeckHints:Type$Gate
 Oracle:Whenever a Gate enters the battlefield under your control, Gateway Sneak can't be blocked this turn.\nWhenever Gateway Sneak deals combat damage to a player, draw a card.

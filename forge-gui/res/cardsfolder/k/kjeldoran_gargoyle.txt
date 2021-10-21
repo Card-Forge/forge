@@ -5,7 +5,7 @@ PT:3/3
 K:Flying
 K:First Strike
 T:Mode$ DamageDealtOnce | ValidSource$ Card.Self | Execute$ TrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage, you gain that much life.
-SVar:TrigGain:DB$GainLife | Defined$ You | LifeAmount$ X
+SVar:TrigGain:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:HasCombatEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kjeldoran_gargoyle.jpg

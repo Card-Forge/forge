@@ -3,6 +3,6 @@ ManaCost:2 W
 Types:Creature Merfolk Wizard
 PT:1/2
 T:Mode$ Taps | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME becomes tapped, you may create a 1/1 blue Merfolk Wizard creature token.
-SVar:TrigToken:DB$Token | LegacyImage$ u 1 1 merfolk wizard lrw | TokenScript$ u_1_1_merfolk_wizard | TokenAmount$ 1 | TokenOwner$ You
+SVar:TrigToken:DB$ Token | LegacyImage$ u 1 1 merfolk wizard lrw | TokenScript$ u_1_1_merfolk_wizard | TokenAmount$ 1 | TokenOwner$ You
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stonybrook_schoolmaster.jpg
 Oracle:Whenever Stonybrook Schoolmaster becomes tapped, you may create a 1/1 blue Merfolk Wizard creature token.

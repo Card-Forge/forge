@@ -3,7 +3,7 @@ ManaCost:3 UR
 Types:Creature Weird
 PT:3/3
 T:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ When CARDNAME becomes the target of a spell or ability, return CARDNAME to its owner's hand.
-SVar:TrigChange:DB$ChangeZone | Origin$ Battlefield | Destination$ Hand
+SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/petrahydrox.jpg
 Oracle:({U/R} can be paid with either {U} or {R}.)\nWhen Petrahydrox becomes the target of a spell or ability, return Petrahydrox to its owner's hand.

@@ -2,6 +2,6 @@ Name:Opal Gargoyle
 ManaCost:1 W
 Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | IsPresent$ Card.Self+Enchantment | Execute$ TrigAnimate | TriggerDescription$ When an opponent casts a creature spell, if CARDNAME is an enchantment, CARDNAME becomes a 2/2 Gargoyle creature with flying.
-SVar:TrigAnimate:DB$Animate | Defined$ Self | Power$ 2 | Toughness$ 2 | Types$ Creature,Gargoyle | Keywords$ Flying | RemoveCardTypes$ True | Duration$ Permanent
+SVar:TrigAnimate:DB$ Animate | Defined$ Self | Power$ 2 | Toughness$ 2 | Types$ Creature,Gargoyle | Keywords$ Flying | RemoveCardTypes$ True | Duration$ Permanent
 SVar:Picture:http://www.wizards.com/global/images/magic/general/opal_gargoyle.jpg
 Oracle:When an opponent casts a creature spell, if Opal Gargoyle is an enchantment, Opal Gargoyle becomes a 2/2 Gargoyle creature with flying.

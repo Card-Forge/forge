@@ -5,7 +5,7 @@ PT:4/4
 K:Deathtouch
 R:Event$ BeginPhase | ActiveZones$ Battlefield | ValidPlayer$ You | Phase$ Draw | Skip$ True | Description$ Skip your draw step.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ LT7 | Execute$ TrigDraw | TriggerDescription$ At the beginning of your upkeep, if you have fewer than seven cards in hand, draw cards equal to the difference.
-SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ Difference
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ Difference
 SVar:X:Count$InYourHand
 SVar:Difference:Number$7/Minus.X
 Oracle:Deathtouch\nSkip your draw step.\nAt the beginning of your upkeep, if you have fewer than seven cards in hand, draw cards equal to the difference.

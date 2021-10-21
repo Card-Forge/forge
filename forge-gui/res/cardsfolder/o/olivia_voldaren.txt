@@ -4,8 +4,8 @@ Types:Legendary Creature Vampire
 PT:3/3
 K:Flying
 A:AB$ DealDamage | Cost$ 1 R | ValidTgts$ Creature.Other | NumDmg$ 1 | SubAbility$ Animate | SpellDescription$ CARDNAME deas 1 damage to another target creature. That creature becomes a Vampire in addition to its other types. Put a +1/+1 counter on CARDNAME.
-SVar:Animate:DB$Animate | Defined$ Targeted | Types$ Vampire | Duration$ Permanent | SubAbility$ PutCounter
-SVar:PutCounter:DB$PutCounter | CounterType$ P1P1 | CounterNum$ 1
+SVar:Animate:DB$ Animate | Defined$ Targeted | Types$ Vampire | Duration$ Permanent | SubAbility$ PutCounter
+SVar:PutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1
 A:AB$ GainControl | Cost$ 3 B B | ValidTgts$ Creature.Vampire | TgtPrompt$ Select target Vampire | LoseControl$ LeavesPlay,LoseControl | SpellDescription$ Gain control of target vampire for as long as you control CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/olivia_voldaren.jpg
 Oracle:Flying\n{1}{R}: Olivia Voldaren deals 1 damage to another target creature. That creature becomes a Vampire in addition to its other types. Put a +1/+1 counter on Olivia Voldaren.\n{3}{B}{B}: Gain control of target Vampire for as long as you control Olivia Voldaren.

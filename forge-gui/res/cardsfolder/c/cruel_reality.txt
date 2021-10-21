@@ -5,7 +5,7 @@ K:Enchant player
 A:SP$ Attach | Cost$ 5 B B | ValidTgts$ Player | AILogic$ Curse
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedBy | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of enchanted player's upkeep, that player sacrifices a creature or planeswalker. If the player can't, they lose 5 life.
 SVar:TrigSac:DB$ Sacrifice | SacValid$ Creature,Planeswalker | Defined$ TriggeredPlayer | SubAbility$ DBLoseLife | RememberSacrificed$ True | SpellDescription$ Sacrifice a creature or planeswalker
-SVar:DBLoseLife:DB$LoseLife | LifeAmount$ 5 | Defined$ TriggeredPlayer | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBCleanup
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 5 | Defined$ TriggeredPlayer | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True 
 SVar:X:Remembered$Amount 
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cruel_reality.jpg

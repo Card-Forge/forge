@@ -2,7 +2,7 @@ Name:Metallurgic Summonings
 ManaCost:3 U U
 Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast an instant or sorcery spell, create an X/X colorless Construct artifact creature token, where X is that spell's mana value.
-SVar:TrigToken:DB$Token | TokenAmount$ 1 | TokenScript$ c_x_x_a_construct | TokenPower$ X | TokenToughness$ X | TokenOwner$ You | LegacyImage$ c x x a construct kld
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_x_x_a_construct | TokenPower$ X | TokenToughness$ X | TokenOwner$ You | LegacyImage$ c x x a construct kld
 A:AB$ ChangeZoneAll | Cost$ 3 U U Exile<1/CARDNAME> | ChangeType$ Instant.YouOwn,Sorcery.YouOwn | IsPresent$ Card.Artifact+YouCtrl | PresentCompare$ GE6 | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return all instant and sorcery cards from your graveyard to your hand. Activate only if you control six or more artifacts.
 SVar:X:TriggerCount$CastSACMC
 SVar:BuffedBy:Instant,Sorcery

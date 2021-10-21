@@ -3,6 +3,6 @@ ManaCost:2 R
 Types:Creature Insect
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, CARDNAME deals 1 damage to each opponent.
-SVar:TrigDamage:DB$DealDamage | Defined$ Player.Opponent | NumDmg$ 1
+SVar:TrigDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tunneling_geopede.jpg
 Oracle:Landfall — Whenever a land enters the battlefield under your control, Tunneling Geopede deals 1 damage to each opponent.

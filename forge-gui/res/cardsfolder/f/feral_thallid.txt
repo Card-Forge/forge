@@ -3,7 +3,7 @@ ManaCost:3 G G G
 Types:Creature Fungus
 PT:6/3
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a spore counter on CARDNAME.
-SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ SPORE | CounterNum$ 1 | SpellDescription$ Put a spore counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ SPORE | CounterNum$ 1 | SpellDescription$ Put a spore counter on CARDNAME.
 A:AB$ Regenerate | Cost$ SubCounter<3/SPORE> | SpellDescription$ Regenerate CARDNAME.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/feral_thallid.jpg
 Oracle:At the beginning of your upkeep, put a spore counter on Feral Thallid.\nRemove three spore counters from Feral Thallid: Regenerate Feral Thallid.

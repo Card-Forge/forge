@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Creature Human Monk
 PT:2/1
 A:AB$ChangeZone | Cost$ T | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1 | Optional$ You | SubAbility$ DBFlip | SpellDescription$ You may put a land card from your hand onto the battlefield. If you control ten or more lands, flip CARDNAME.
-SVar:DBFlip:DB$SetState | Defined$ Self | ConditionPresent$ Land.YouCtrl | ConditionCompare$ GE10 | Mode$ Flip
+SVar:DBFlip:DB$ SetState | Defined$ Self | ConditionPresent$ Land.YouCtrl | ConditionCompare$ GE10 | Mode$ Flip
 AlternateMode:Flip
 SVar:Picture:http://www.wizards.com/global/images/magic/general/budoka_gardener.jpg
 Oracle:{T}: You may put a land card from your hand onto the battlefield. If you control ten or more lands, flip Budoka Gardener.

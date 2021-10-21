@@ -2,7 +2,7 @@ Name:Dingus Staff
 ManaCost:4
 Types:Artifact
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a creature dies, CARDNAME deals 2 damage to that creature's controller.
-SVar:TrigDamage:DB$DealDamage | Defined$ TriggeredCardController | NumDmg$ 2
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredCardController | NumDmg$ 2
 AI:RemoveDeck:Random
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dingus_staff.jpg
 Oracle:Whenever a creature dies, Dingus Staff deals 2 damage to that creature's controller.

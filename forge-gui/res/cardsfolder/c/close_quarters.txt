@@ -2,6 +2,6 @@ Name:Close Quarters
 ManaCost:2 R R
 Types:Enchantment
 T:Mode$ AttackerBlocked | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever a creature you control becomes blocked, CARDNAME deals 1 damage to any target.
-SVar:TrigDealDamage:DB$DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/close_quarters.jpg
 Oracle:Whenever a creature you control becomes blocked, Close Quarters deals 1 damage to any target.

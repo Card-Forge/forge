@@ -3,7 +3,7 @@ ManaCost:2 U U
 Types:Legendary Creature Merfolk Wizard
 PT:2/2
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast an instant or sorcery spell, create a 2/2 blue Drake creature token with flying.
-SVar:TrigToken:DB$Token | TokenAmount$ 1 | TokenScript$ u_2_2_drake_flying | LegacyImage$ u 2 2 drake flying m13 | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_2_2_drake_flying | LegacyImage$ u 2 2 drake flying m13 | TokenOwner$ You
 DeckHas:Ability$Token
 DeckHints:Type$Instant|Sorcery
 SVar:Picture:http://www.wizards.com/global/images/magic/general/talrand_sky_summoner.jpg

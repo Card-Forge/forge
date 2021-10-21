@@ -4,7 +4,7 @@ Types:Creature Drake
 PT:3/3
 K:Flying
 T:Mode$ SpellCast | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a player casts a spell, you lose 1 life.
-SVar:TrigLoseLife:DB$LoseLife | Defined$ You | LifeAmount$ 1
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1
 SVar:AntiBuffedBy:Card
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ebon_drake.jpg
 Oracle:Flying\nWhenever a player casts a spell, you lose 1 life.

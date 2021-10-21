@@ -2,6 +2,6 @@ Name:Decommission
 ManaCost:2 W
 Types:Instant
 A:SP$ Destroy | Cost$ 2 W | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SubAbility$ DBGainLife | SpellDescription$ Destroy target artifact or enchantment. Revolt — If a permanent you controlled left the battlefield this turn, you gain 3 life.
-SVar:DBGainLife:DB$GainLife | Condition$ Revolt | LifeAmount$ 3
+SVar:DBGainLife:DB$ GainLife | Condition$ Revolt | LifeAmount$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/decommission.jpg
 Oracle:Destroy target artifact or enchantment.\nRevolt — If a permanent you controlled left the battlefield this turn, you gain 3 life.

@@ -5,8 +5,8 @@ PT:5/6
 A:AB$ Pump | Cost$ R | Defined$ Self | NumAtt$ 1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile two target lands.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, return the exiled cards to the battlefield under its owner's control.
-SVar:TrigExile:DB$ChangeZone | TargetMin$ 2 | TargetMax$ 2 | IsCurse$ True | ValidTgts$ Land | TgtPrompt$ Choose two target lands. | RememberTargets$ True | ForgetOtherTargets$ True | Origin$ Battlefield | Destination$ Exile
-SVar:TrigReturn:DB$ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield
+SVar:TrigExile:DB$ ChangeZone | TargetMin$ 2 | TargetMax$ 2 | IsCurse$ True | ValidTgts$ Land | TgtPrompt$ Choose two target lands. | RememberTargets$ True | ForgetOtherTargets$ True | Origin$ Battlefield | Destination$ Exile
+SVar:TrigReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/petradon.jpg
 Oracle:When Petradon enters the battlefield, exile two target lands.\nWhen Petradon leaves the battlefield, return the exiled cards to the battlefield under their owners' control.\n{R}: Petradon gets +1/+0 until end of turn.

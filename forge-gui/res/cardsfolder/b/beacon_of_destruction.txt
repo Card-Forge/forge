@@ -2,6 +2,6 @@ Name:Beacon of Destruction
 ManaCost:3 R R
 Types:Instant
 A:SP$ DealDamage | Cost$ 3 R R | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 5 | SubAbility$ DBShuffle | SpellDescription$ CARDNAME deals 5 damage to any target. Shuffle CARDNAME into its owner's library.
-SVar:DBShuffle:DB$ChangeZone | Origin$ Stack | Destination$ Library | Shuffle$ True
+SVar:DBShuffle:DB$ ChangeZone | Origin$ Stack | Destination$ Library | Shuffle$ True
 SVar:Picture:http://resources.wizards.com/magic/cards/5dn/en-us/card51612.jpg
 Oracle:Beacon of Destruction deals 5 damage to any target. Shuffle Beacon of Destruction into its owner's library.

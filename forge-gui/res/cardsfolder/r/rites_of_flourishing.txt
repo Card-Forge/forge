@@ -3,6 +3,6 @@ ManaCost:2 G
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Player | AdjustLandPlays$ 1 | Description$ Each player may play an additional land on each of their turns.
 T:Mode$ Phase | Phase$ Draw | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of each player's draw step, that player draws an additional card.
-SVar:TrigDraw:DB$Draw | NumCards$ 1 | Defined$ TriggeredPlayer
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ TriggeredPlayer
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rites_of_flourishing.jpg
 Oracle:At the beginning of each player's draw step, that player draws an additional card.\nEach player may play an additional land on each of their turns.

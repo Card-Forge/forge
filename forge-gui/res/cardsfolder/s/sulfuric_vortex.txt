@@ -2,7 +2,7 @@ Name:Sulfuric Vortex
 ManaCost:1 R R
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ At the beginning of each player's upkeep, CARDNAME deals 2 damage to that player.
-SVar:TrigDmg:DB$DealDamage | Defined$ TriggeredPlayer | NumDmg$ 2
+SVar:TrigDmg:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 2
 R:Event$ GainLife | ActiveZones$ Battlefield | Prevent$ True | AiLogic$ NoLife | Description$ If a player would gain life, that player gains no life instead.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sulfuric_vortex.jpg
 Oracle:At the beginning of each player's upkeep, Sulfuric Vortex deals 2 damage to that player.\nIf a player would gain life, that player gains no life instead.

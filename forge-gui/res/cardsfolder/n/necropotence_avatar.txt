@@ -4,9 +4,9 @@ Types:Vanguard
 HandLifeModifier:+0/+4
 R:Event$ BeginPhase | ActiveZones$ Command | ValidPlayer$ You | Phase$ Draw | Skip$ True | Description$ Skip your draw step.
 T:Mode$ Phase | Phase$ End Of Turn | ValidPlayer$ You | TriggerZones$ Command | CheckSVar$ Turns | SVarCompare$ GT1 | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, if it's not the first turn of the game, put a death counter on Necropotence Avatar. You draw X cards and you lose X life, where X is the number of death counters on Necropotence Avatar.
-SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ DEATH | CounterNum$ 1 | SubAbility$ TrigDraw
-SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ X | SubAbility$ DBLoseLife
-SVar:DBLoseLife:DB$LoseLife | Defined$ You | LifeAmount$ X
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ DEATH | CounterNum$ 1 | SubAbility$ TrigDraw
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$CardCounters.DEATH
 SVar:Turns:Count$TotalTurns
 AI:RemoveDeck:All

@@ -4,7 +4,7 @@ Types:Creature Human Wizard
 PT:2/3
 K:Morph:2 U
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigSetState | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, you may turn target creature with morph face down.
-SVar:TrigSetState:DB$SetState | ValidTgts$ Creature.faceUp+withMorph,Creature.faceUp+withMegamorph | TgtPrompt$ Select target creature with morph. | Mode$ TurnFace
+SVar:TrigSetState:DB$ SetState | ValidTgts$ Creature.faceUp+withMorph,Creature.faceUp+withMegamorph | TgtPrompt$ Select target creature with morph. | Mode$ TurnFace
 AI:RemoveDeck:All
 SVar:Picture:http://www.wizards.com/global/images/magic/general/master_of_the_veil.jpg
 Oracle:Morph {2}{U} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Master of the Veil is turned face up, you may turn target creature with a morph ability face down.

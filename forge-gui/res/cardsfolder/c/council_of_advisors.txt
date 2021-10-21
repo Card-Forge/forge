@@ -3,6 +3,6 @@ ManaCost:2 U
 Types:Creature Human Advisor
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
-SVar:TrigDraw:DB$Draw | Defined$ You | NumCards$ 1
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:Picture:http://serv4.tcgimages.eu/img/cards/Portal_Three_Kingdoms/council_of_advisors.jpg
 Oracle:When Council of Advisors enters the battlefield, draw a card.

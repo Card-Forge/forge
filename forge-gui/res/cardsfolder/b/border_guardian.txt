@@ -3,7 +3,7 @@ ManaCost:4
 Types:Artifact Creature Knight
 PT:1/1
 T:Mode$ SpellCast | ValidCard$ Card.BorderColorSilver | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast a silver-bordered spell, put a +1/+1 counter on CARDNAME.
-SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 T:Mode$ SpellCast | ValidCard$ Card.BorderColorBlack | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUnblock | TriggerDescription$ Whenever you cast a black-bordered spell, CARDNAME can't be blocked this turn.
 SVar:TrigUnblock:DB$ Pump | Defined$ Self | KW$ HIDDEN Unblockable
 T:Mode$ SpellCast | ValidCard$ Card.BorderColorWhite | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDS | TriggerDescription$ Whenever you cast a white-bordered spell, Border Guardian gains double strike until end of turn.

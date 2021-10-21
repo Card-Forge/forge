@@ -3,6 +3,6 @@ ManaCost:2 G
 Types:Creature Elf Scout
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, search your library for a Forest card, put that card onto the battlefield, then shuffle.
-SVar:TrigChange:DB$ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.Forest | ChangeNum$ 1
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.Forest | ChangeNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wood_elves.jpg
 Oracle:When Wood Elves enters the battlefield, search your library for a Forest card, put that card onto the battlefield, then shuffle.

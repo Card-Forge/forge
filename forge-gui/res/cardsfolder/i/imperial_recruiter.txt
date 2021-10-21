@@ -3,6 +3,6 @@ ManaCost:2 R
 Types:Creature Human Advisor
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, search your library for a creature card with power 2 or less, reveal it, put it into your hand, then shuffle.
-SVar:TrigChange:DB$ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Creature.powerLE2 | ChangeNum$ 1
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Creature.powerLE2 | ChangeNum$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/imperial_recruiter.jpg
 Oracle:When Imperial Recruiter enters the battlefield, search your library for a creature card with power 2 or less, reveal it, put it into your hand, then shuffle.

@@ -7,7 +7,7 @@ SVar:DBEffect:DB$ Effect | IsCurse$ True | StaticAbilities$ DontUntap | Triggers
 SVar:DontUntap:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.RememberedPlayerCtrl | AddHiddenKeyword$ This card doesn't untap during your next untap step. | Description$ Creatures target opponent controls don't untap during their next untap step.
 SVar:RemoveEffect:Mode$ Phase | Phase$ Untap | ValidPlayer$ Player.IsRemembered | TriggerZones$ Command | Static$ True | Execute$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 K:Cycling:2
 SVar:Picture:http://www.wizards.com/global/images/magic/general/imaginary_threats.jpg
 Oracle:Creatures target opponent controls attack this turn if able. During that player's next untap step, creatures they control don't untap.\nCycling {2} ({2}, Discard this card: Draw a card.)

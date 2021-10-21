@@ -2,6 +2,6 @@ Name:Withstand
 ManaCost:2 W
 Types:Instant
 A:SP$ PreventDamage | Cost$ 2 W | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | Amount$ 3 | SubAbility$ DBDraw | SpellDescription$ Prevent the next 3 damage that would be dealt to any target this turn. Draw a card.
-SVar:DBDraw:DB$Draw | NumCards$ 1
+SVar:DBDraw:DB$ Draw | NumCards$ 1
 SVar:Picture:http://www.wizards.com/global/images/magic/general/withstand.jpg
 Oracle:Prevent the next 3 damage that would be dealt to any target this turn.\nDraw a card.

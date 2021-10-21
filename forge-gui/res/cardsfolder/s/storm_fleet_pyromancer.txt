@@ -3,6 +3,6 @@ ManaCost:4 R
 Types:Creature Human Pirate Wizard
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ RaidTest | Execute$ TrigDealDamage | TriggerDescription$ Raid — When CARDNAME enters the battlefield, if you attacked this turn, CARDNAME deals 2 damage to any target.
-SVar:TrigDealDamage:DB$DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2 
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2
 SVar:RaidTest:Count$AttackersDeclared
 Oracle:Raid — When Storm Fleet Pyromancer enters the battlefield, if you attacked this turn, Storm Fleet Pyromancer deals 2 damage to any target.

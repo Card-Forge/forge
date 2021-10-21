@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Legendary Creature Fox Monk
 PT:2/2
 T:Mode$ Always | LifeTotal$ You | LifeAmount$ GE30 | TriggerZones$ Battlefield | Execute$ TrigFlip | TriggerDescription$ When you have 30 or more life, flip CARDNAME.
-SVar:TrigFlip:DB$SetState | Defined$ Self | Mode$ Flip
+SVar:TrigFlip:DB$ SetState | Defined$ Self | Mode$ Flip
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rune_tail_kitsune_ascendant.jpg
 AlternateMode:Flip
 Oracle:When you have 30 or more life, flip Rune-Tail, Kitsune Ascendant.

@@ -5,6 +5,6 @@ PT:4/4
 K:Flying
 A:AB$ PumpAll | Cost$ B R | ValidCards$ Creature.Dragon | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Dragon creatures get +1/+1 until end of turn.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target Dragon permanent card from your graveyard to the battlefield.
-SVar:TrigReturn:DB$ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Permanent.Dragon+YouOwn | TgtPrompt$ Choose target Dragon permanent in your graveyard.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Permanent.Dragon+YouOwn | TgtPrompt$ Choose target Dragon permanent in your graveyard.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bladewing_the_risen.jpg
 Oracle:Flying\nWhen Bladewing the Risen enters the battlefield, you may return target Dragon permanent card from your graveyard to the battlefield.\n{B}{R}: Dragon creatures get +1/+1 until end of turn.

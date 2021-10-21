@@ -4,7 +4,7 @@ Types:Creature Merfolk Mutant
 PT:1/1
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on target creature you control.
-SVar:TrigPutCounter:DB$PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1
 A:AB$ Proliferate | Cost$ 3 G U | SpellDescription$ Proliferate.
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Proliferate & Ability$Counters

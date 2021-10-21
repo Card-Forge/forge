@@ -4,6 +4,6 @@ Types:Creature Dragon
 PT:2/2
 K:Flying
 T:Mode$ AbilityCast | ValidCard$ Planeswalker.Sarkhan | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever you activate an ability of a Sarkhan planeswalker, CARDNAME deals 1 damage to any target.
-SVar:TrigDamage:DB$DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1
 DeckHints:Type$Sarkhan
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhenever you activate an ability of a Sarkhan planeswalker, Sarkhan's Whelp deals 1 damage to any target.

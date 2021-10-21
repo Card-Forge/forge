@@ -3,6 +3,6 @@ ManaCost:1 B R
 Types:Creature Ogre Warrior
 PT:3/2
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ Whenever CARDNAME becomes blocked, it deals 1 damage to the player or planeswalker it's attacking.
-SVar:TrigDealDamage:DB$DealDamage | Defined$ TriggeredDefender | NumDmg$ 1
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ TriggeredDefender | NumDmg$ 1
 SVar:HasAttackEffect:Blocked
 Oracle:Whenever Rakdos Roustabout becomes blocked, it deals 1 damage to the player or planeswalker it's attacking.

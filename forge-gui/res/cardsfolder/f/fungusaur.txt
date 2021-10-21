@@ -3,7 +3,7 @@ ManaCost:3 G
 Types:Creature Fungus Dinosaur
 PT:2/2
 T:Mode$ DamageDoneOnce | ValidTarget$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME is dealt damage, put a +1/+1 counter on it.
-SVar:TrigPutCounter:DB$PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:HasCombatEffect:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fungusaur.jpg
 Oracle:Whenever Fungusaur is dealt damage, put a +1/+1 counter on it.

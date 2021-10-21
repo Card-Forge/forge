@@ -3,6 +3,6 @@ ManaCost:3 G
 Types:Creature Treefolk Warrior
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 green Elf Warrior creature token.
-SVar:TrigToken:DB$Token | TokenAmount$ 1 | TokenScript$ g_1_1_elf_warrior | TokenOwner$ You | LegacyImage$ g 1 1 elf warrior mor
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_elf_warrior | TokenOwner$ You | LegacyImage$ g 1 1 elf warrior mor
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ambassador_oak.jpg
 Oracle:When Ambassador Oak enters the battlefield, create a 1/1 green Elf Warrior creature token.

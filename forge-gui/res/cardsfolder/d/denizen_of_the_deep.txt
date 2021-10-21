@@ -3,6 +3,6 @@ ManaCost:6 U U
 Types:Creature Serpent
 PT:11/11
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZoneAll | TriggerDescription$ When CARDNAME enters the battlefield, return each other creature you control to its owner's hand.
-SVar:TrigChangeZoneAll:DB$ChangeZoneAll | Origin$ Battlefield | Destination$ Hand | ChangeType$ Creature.Other+YouCtrl
+SVar:TrigChangeZoneAll:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Hand | ChangeType$ Creature.Other+YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/denizen_of_the_deep.jpg
 Oracle:When Denizen of the Deep enters the battlefield, return each other creature you control to its owner's hand.

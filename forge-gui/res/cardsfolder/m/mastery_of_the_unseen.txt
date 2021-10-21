@@ -2,7 +2,7 @@ Name:Mastery of the Unseen
 ManaCost:1 W
 Types:Enchantment
 T:Mode$ TurnFaceUp | ValidCard$ Permanent.YouCtrl | Execute$ TrigGainLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever a permanent you control is turned face up, you gain 1 life for each creature you control.
-SVar:TrigGainLife:DB$GainLife | Defined$ You | LifeAmount$ X
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$Valid Creature.YouCtrl
 A:AB$ Manifest | Cost$ 3 W | Amount$ 1 | Defined$ TopOfLibrary | SpellDescription$ Manifest the top card of your library.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mastery_of_the_unseen.jpg
