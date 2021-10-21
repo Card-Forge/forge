@@ -213,7 +213,7 @@ public final class LayoutMenu {
     private static ActionListener getSetWindowSizeAction() {
         return new ActionListener() {
             @Override public void actionPerformed(final ActionEvent e) {
-                final String[] options = {"800x600", "1024x768", "1280x720"};
+                final String[] options = {"800x600", "1024x768", "1280x720", "1600x900", "1920x1080", "2560x1440", "3840x2160"};
                 final Localizer localizer = Localizer.getInstance();
                 final String choice = GuiChoose.oneOrNone(localizer.getMessage("lblChooseNewWindowSize"), options);
                 if (choice != null) {
