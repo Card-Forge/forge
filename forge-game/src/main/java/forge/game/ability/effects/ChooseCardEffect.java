@@ -55,7 +55,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
         if (sa.hasParam("ChoiceZone")) {
             choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
         }
-        CardCollectionView choices = game.getCardsIn(choiceZone);
+        CardCollectionView choices = sa.hasParam("AllCards") ? game.getCardsInGame() : game.getCardsIn(choiceZone);
         if (sa.hasParam("Choices")) {
             choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, host, sa);
         }
@@ -65,9 +65,23 @@ public class ChooseCardEffect extends SpellAbilityEffect {
         if (sa.hasParam("DefinedCards")) {
             choices = AbilityUtils.getDefinedCards(host, sa.getParam("DefinedCards"), sa);
         }
+        if (sa.hasParam("IncludeSpellsOnStack")) {
+            CardCollectionView stack = game.getCardsIn(ZoneType.Stack);
+            CardCollection combined = new CardCollection();
+            combined.addAll(stack);
+            combined.addAll(choices);
+            choices = combined;
+        }
 
-        final String numericAmount = sa.getParamOrDefault("Amount", "1");
-        final int validAmount = StringUtils.isNumeric(numericAmount) ? Integer.parseInt(numericAmount) : AbilityUtils.calculateAmount(host, numericAmount, sa);
+        final String amountValue = sa.getParamOrDefault("Amount", "1");
+        int validAmount;
+        if (StringUtils.isNumeric(amountValue)) {
+            validAmount = Integer.parseInt(amountValue);
+        } else if (amountValue.equals("Random")) {
+            validAmount = Aggregates.randomInt(0, choices.size());
+        } else {
+            validAmount = AbilityUtils.calculateAmount(host, amountValue, sa);
+        }
         final int minAmount = sa.hasParam("MinAmount") ? Integer.parseInt(sa.getParam("MinAmount")) : validAmount;
 
         if (validAmount <= 0) {

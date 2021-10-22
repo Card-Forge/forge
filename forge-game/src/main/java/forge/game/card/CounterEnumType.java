@@ -161,6 +161,8 @@ public enum CounterEnumType {
 
     HUNGER("HUNGR", 255, 91, 149),
 
+    HUSK("HUSK", 227, 212, 173),
+
     ICE("ICE", 0, 239, 255),
 
     INCARNATION("INCRN", 247, 206, 64),

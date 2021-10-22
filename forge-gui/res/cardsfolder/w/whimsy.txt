@@ -1,0 +1,47 @@
+Name:Whimsy
+ManaCost:X U U
+Types:Sorcery
+A:SP$ Repeat | MaxRepeat$ X | RepeatSubAbility$ DBGenericChoice | StackDescription$ SpellDescription | SpellDescription$ Perform X random actions.
+SVar:DBGenericChoice:DB$ GenericChoice | ShowChoice$ Description | AtRandom$ True | Choices$ ToHand,Untap,Tap,Damage,Draw3,DestroyGain,DestroyAE,Gain3,Anoint,DestroyCL,Mill2,Wasp,Nevinyrral,Suleiman,Pandora,Discard,Fog,Sindbad
+SVar:ToHand:DB$ ChooseCard | Choices$ Permanent.unenchanted | AtRandom$ True | SubAbility$ DBChangeZone3 | SpellDescription$ Return a permanent that isn't enchanted chosen at random to its owner's hand.
+SVar:DBChangeZone3:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBCleanup
+SVar:Untap:DB$ ChooseCard | Choices$ Artifact.tapped,Creature.tapped,Land.tapped | AtRandom$ True | SubAbility$ DBUntap4 | SpellDescription$ Untap an artifact, creature or land chosen at random.
+SVar:DBUntap4:DB$ Untap | Defined$ ChosenCard | SubAbility$ DBCleanup
+SVar:Tap:DB$ ChooseCard | Choices$ Artifact.untapped,Creature.untapped,Land.untapped | AtRandom$ True | SubAbility$ DBTap5 | SpellDescription$ Tap an artifact, creature or land chosen at random.
+SVar:DBTap5:DB$ Tap | Defined$ ChosenCard | SubAbility$ DBCleanup
+SVar:Damage:DB$ ChooseEntity | Random$ True | CardChoices$ Creature | PlayerChoices$ Player | RememberChosen$ True | SubAbility$ DBDamage6 | SpellDescription$ CARDNAME deals 4 damage to a creature or player chosen at random.
+SVar:DBDamage6:DB$ DealDamage | Defined$ Remembered | NumDmg$ 4 | SubAbility$ DBCleanup
+SVar:Draw3:DB$ ChoosePlayer | Choices$ Player | Random$ True | SubAbility$ DBDraw7 | SpellDescription$ A player chosen at random draws three cards.
+SVar:DBDraw7:DB$ Draw | NumCards$ 3 | Defined$ ChosenPlayer | SubAbility$ DBCleanup
+SVar:DestroyGain:DB$ ChooseCard | Choices$ Artifact | AtRandom$ True | SubAbility$ DBDestroy8 | SpellDescription$ Destroy an artifact chosen at random. It can't be regenerated. That artifact's controller gains life equal to its converted mana cost.
+SVar:DBDestroy8:DB$ Destroy | Defined$ ChosenCard | NoRegen$ True | RememberDestroyed$ True | SubAbility$ DBGainLife8
+SVar:DBGainLife8:DB$ GainLife | Defined$ RememberedController | LifeAmount$ X8 | SubAbility$ DBCleanup
+SVar:X8:Remembered$CardManaCost
+SVar:DestroyAE:DB$ ChooseCard | Choices$ Artifact,Enchantment | AtRandom$ True | SubAbility$ DBDestroy9 | SpellDescription$ Destroy an artifact or enchantment chosen at random.
+SVar:DBDestroy9:DB$ Destroy | Defined$ ChosenCard | SubAbility$ DBCleanup
+SVar:Gain3:DB$ ChoosePlayer | Choices$ Player | Random$ True | SubAbility$ DBGainLife10 | SpellDescription$ A player chosen at random gains 3 life.
+SVar:DBGainLife10:DB$ GainLife | Defined$ ChosenPlayer | LifeAmount$ 3 | SubAbility$ DBCleanup
+SVar:Anoint:DB$ ChooseEntity | Random$ True | CardChoices$ Creature | PlayerChoices$ Player | RememberChosen$ True | SubAbility$ DBPreventDamage11 | SpellDescription$ Prevent the next 3 damage that would be dealt to a creature or player chosen at random this turn.
+SVar:DBPreventDamage11:DB$ PreventDamage | Defined$ Remembered | Amount$ 3 | SubAbility$ DBCleanup
+SVar:DestroyCL:DB$ ChooseCard | Choices$ Creature,Land | AtRandom$ True | SubAbility$ DBDestroy12 | SpellDescription$ Destroy a creature or land chosen at random. It can't be regenerated.
+SVar:DBDestroy12:DB$ Destroy | Defined$ ChosenCard | NoRegen$ True | SubAbility$ DBCleanup
+SVar:Mill2:DB$ ChoosePlayer | Choices$ Player | Random$ True | SubAbility$ DBMill13 | SpellDescription$ A player chosen at random mills two cards.
+SVar:DBMill13:DB$ Mill | Defined$ ChosenPlayer | NumCards$ 2 | SubAbility$ DBCleanup
+SVar:Wasp:DB$ Token | TokenScript$ wasp | LockInText$ True | SpellDescription$ Create a 1/1 colorless Insect artifact creature token with flying named Wasp.
+SVar:Nevinyrral:DB$ DestroyAll | ValidCards$ Artifact,Creature,Enchantment | SpellDescription$ Destroy all artifacts, creatures and enchantments.
+SVar:Suleiman:DB$ FlipACoin | WinSubAbility$ DBToken | LoseSubAbility$ DBDamage | LockInText$ True | SpellDescription$ Flip a coin. If you win the flip, create a 5/5 colorless Djinn artifact creature token with flying. If you lose the flip, CARDNAME deals 5 damage to you.
+SVar:DBToken:DB$ Token | LockInText$ True | TokenScript$ c_5_5_a_djinn_flying
+SVar:DBDamage:DB$ DealDamage | Defined$ You | NumDmg$ 5
+SVar:Pandora:DB$ ChooseCard | Choices$ Creature | AtRandom$ True | AllCards$ True | SubAbility$ DBRepeatEach17 | SpellDescription$ Choose a creature card at random from all players' decklists. Each player flips a coin. Each player whose coin comes up heads creates a token that's a copy of that card.
+SVar:DBRepeatEach17:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBFlip17 | SubAbility$ DBCleanup
+SVar:DBFlip17:DB$ FlipACoin | Flipper$ Remembered | NoCall$ True | HeadsSubAbility$ DBCopyPermanent17
+SVar:DBCopyPermanent17:DB$ CopyPermanent | Defined$ ChosenCard | Controller$ Remembered
+SVar:Discard:DB$ ChoosePlayer | Choices$ Player | Random$ True | SubAbility$ DBDiscard18 | SpellDescription$ A player chosen at random discards a card.
+SVar:DBDiscard18:DB$ Discard | Defined$ ChosenPlayer | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBCleanup
+SVar:Fog:DB$ Fog | SpellDescription$ Prevent all combat damage that would be dealt this turn.
+SVar:Sindbad:DB$ Draw | NumCards$ 1 | Reveal$ All | RememberDrawn$ True | SubAbility$ DBDiscard20 | SpellDescription$ Draw a card and reveal it. If it isn't a land card, discard it.
+SVar:DBDiscard20:DB$ Discard | Mode$ Defined | Defined$ You | DefinedCards$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | Log$ True | ClearRemembered$ True | ClearChosenCard$ True | ClearChosenPlayer$ True
+SVar:X:Count$xPaid
+DeckHas:Ability$LifeGain & Ability$Token & Ability$Discard
+Oracle:Perform X random actions.

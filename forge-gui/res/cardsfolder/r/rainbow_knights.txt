@@ -1,0 +1,11 @@
+Name:Rainbow Knights
+ManaCost:W W
+Types:Creature Human Knight
+PT:2/1
+K:ETBReplacement:Other:ChooseColor
+SVar:ChooseColor:DB$ ChooseColor | Random$ True | SpellDescription$ As CARDNAME enters the battlefield, it gains protection from a color chosen at random. (This effect lasts indefinitely.)
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection:Card.ChosenColor:Protection from chosenColor | Secondary$ True
+A:AB$ Pump | Cost$ 1 | KW$ First strike | SpellDescription$ CARDNAME gains first strike until end of turn.
+A:AB$ Pump | Cost$ W W | NumAtt$ X | StackDescription$ SpellDescription | SpellDescription$ CARDNAME gets +X/+0 until end of turn, where X is a number chosen randomly from 0 to 2. |
+SVar:X:Count$Random.0.2
+Oracle:As Rainbow Knights enters the battlefield, it gains protection from a color chosen at random. (This effect lasts indefinitely.)\n{1}: Rainbow Knights gains first strike until end of turn.\n{W}{W}: Rainbow Knights gets +X/+0 until end of turn, where X is a number chosen randomly from 0 to 2.
