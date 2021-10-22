@@ -2645,7 +2645,7 @@ public class CardFactoryUtil {
 
             final String awaken = "DB$ PutCounter | CounterType$ P1P1 | CounterNum$ "+ counters + " | "
                     + "ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | Awaken$ True";
-            final String animate = "DB$ Animate | Defined$ Targeted | Power$ 0 | Toughness$ 0 | Types$"
+            final String animate = "DB$ Animate | Defined$ ParentTarget | Power$ 0 | Toughness$ 0 | Types$"
                     + " Creature,Elemental | Duration$ Permanent | Keywords$ Haste";
 
             final AbilitySub awakenSub = (AbilitySub) AbilityFactory.getAbility(awaken, card);
