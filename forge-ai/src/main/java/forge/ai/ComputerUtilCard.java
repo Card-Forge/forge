@@ -1498,7 +1498,7 @@ public class ComputerUtilCard {
                     }
                     if (c.hasKeyword(Keyword.TRAMPLE) || keywords.contains("Trample")) {
                        for (Card b : combat.getBlockers(c)) {
-                           pumpedDmg -= ComputerUtilCombat.getDamageToKill(b);
+                           pumpedDmg -= ComputerUtilCombat.getDamageToKill(b, false);
                        }
                     } else {
                         pumpedDmg = 0;
@@ -1526,7 +1526,7 @@ public class ComputerUtilCard {
                             if (combat.isBlocked(atk)) {
                                 // consider Trample damage properly for a blocked creature
                                 for (Card blk : combat.getBlockers(atk)) {
-                                    totalPowerUnblocked -= ComputerUtilCombat.getDamageToKill(blk);
+                                    totalPowerUnblocked -= ComputerUtilCombat.getDamageToKill(blk, false);
                                 }
                             }
                         }

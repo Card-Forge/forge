@@ -368,7 +368,7 @@ public class AiBlockController {
                 if (firstStrikeBlockers.size() > 1) {
                     CardLists.sortByPowerDesc(firstStrikeBlockers);
                     for (final Card blocker : firstStrikeBlockers) {
-                        final int damageNeeded = ComputerUtilCombat.getDamageToKill(attacker)
+                        final int damageNeeded = ComputerUtilCombat.getDamageToKill(attacker, false)
                                 + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, blocker, combat, false);
                         // if the total damage of the blockgang was not enough
                         // without but is enough with this blocker finish the blockgang
@@ -446,7 +446,7 @@ public class AiBlockController {
                 final int additionalDamage = ComputerUtilCombat.dealsDamageAsBlocker(attacker, blocker);
                 final int absorbedDamage2 = ComputerUtilCombat.getEnoughDamageToKill(blocker, attacker.getNetCombatDamage(), attacker, true);
                 final int addedValue = ComputerUtilCard.evaluateCreature(blocker);
-                final int damageNeeded = ComputerUtilCombat.getDamageToKill(attacker)
+                final int damageNeeded = ComputerUtilCombat.getDamageToKill(attacker, false)
                         + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, blocker, combat, false);
                 if ((damageNeeded > currentDamage || CombatUtil.getMinNumBlockersForAttacker(attacker, ai) > blockGang.size())
                         && !(damageNeeded > currentDamage + additionalDamage)
@@ -486,7 +486,7 @@ public class AiBlockController {
                 final int additionalDamage2 = ComputerUtilCombat.dealsDamageAsBlocker(attacker, secondBlocker);
                 final int absorbedDamage2 = ComputerUtilCombat.getEnoughDamageToKill(secondBlocker, attacker.getNetCombatDamage(), attacker, true);
                 final int addedValue2 = ComputerUtilCard.evaluateCreature(secondBlocker);
-                final int damageNeeded = ComputerUtilCombat.getDamageToKill(attacker)
+                final int damageNeeded = ComputerUtilCombat.getDamageToKill(attacker, false)
                         + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, secondBlocker, combat, false);
 
                 List<Card> usableBlockersAsThird = new ArrayList<>(usableBlockers);
@@ -774,7 +774,7 @@ public class AiBlockController {
             if (blockers.size() > 0) {
                 safeBlockers = getSafeBlockers(combat, attacker, blockers);
                 for (final Card blocker : safeBlockers) {
-                    final int damageNeeded = ComputerUtilCombat.getDamageToKill(attacker)
+                    final int damageNeeded = ComputerUtilCombat.getDamageToKill(attacker, false)
                             + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, blocker, combat, false);
                     // Add an additional blocker if the current blockers are not
                     // enough and the new one would deal additional damage
@@ -801,7 +801,7 @@ public class AiBlockController {
             }
 
             for (final Card blocker : safeBlockers) {
-                final int damageNeeded = ComputerUtilCombat.getDamageToKill(attacker)
+                final int damageNeeded = ComputerUtilCombat.getDamageToKill(attacker, false)
                         + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, blocker, combat, false);
                 // Add an additional blocker if the current blockers are not
                 // enough and the new one would deal the remaining damage

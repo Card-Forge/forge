@@ -164,7 +164,7 @@ public class ComputerUtilCombat {
             }
         });
 
-        return totalDamageOfBlockers(attacker, list);
+        return totalFirstStrikeDamageOfBlockers(attacker, list);
     }
 
     // This function takes Doran and Double Strike into account
@@ -619,7 +619,7 @@ public class ComputerUtilCombat {
             if (flankingMagnitude >= defender.getNetToughness()) {
                 return 0;
             }
-            if ((flankingMagnitude >= (defender.getNetToughness() - defender.getDamage()))
+            if (flankingMagnitude >= (defender.getNetToughness() - defender.getDamage())
                     && !defender.hasKeyword(Keyword.INDESTRUCTIBLE)) {
                 return 0;
             }
@@ -698,7 +698,7 @@ public class ComputerUtilCombat {
 
         final int defBushidoMagnitude = blocker.getKeywordMagnitude(Keyword.BUSHIDO);
 
-        final int defenderDefense = (blocker.getLethalDamage() - flankingMagnitude) + defBushidoMagnitude;
+        final int defenderDefense = blocker.getLethalDamage() - flankingMagnitude + defBushidoMagnitude;
 
         return defenderDefense;
     } // shieldDamage
@@ -751,10 +751,10 @@ public class ComputerUtilCombat {
 
         // Consider first strike and double strike
         if (attacker.hasKeyword(Keyword.FIRST_STRIKE) || attacker.hasKeyword(Keyword.DOUBLE_STRIKE)) {
-            return firstStrikeBlockerDmg >= getDamageToKill(attacker);
+            return firstStrikeBlockerDmg >= getDamageToKill(attacker, true);
         }
 
-        return totalDamageOfBlockers(attacker, blockers) >= getDamageToKill(attacker);
+        return totalDamageOfBlockers(attacker, blockers) >= getDamageToKill(attacker, false);
     }
 
     // Will this trigger trigger?
@@ -1611,7 +1611,7 @@ public class ComputerUtilCombat {
         }
 
         //Check triggers that deal damage or shrink the attacker
-        if (getDamageToKill(attacker)
+        if (getDamageToKill(attacker, false)
                 + predictToughnessBonusOfAttacker(attacker, blocker, combat, withoutAbilities) <= 0) {
             return true;
         }
@@ -1763,9 +1763,9 @@ public class ComputerUtilCombat {
             return false;
         }
 
-        final int defenderLife = getDamageToKill(blocker)
+        final int defenderLife = getDamageToKill(blocker, false)
                 + predictToughnessBonusOfBlocker(attacker, blocker, withoutAbilities);
-        final int attackerLife = getDamageToKill(attacker)
+        final int attackerLife = getDamageToKill(attacker, false)
                 + predictToughnessBonusOfAttacker(attacker, blocker, combat, withoutAbilities, withoutAttackerStaticAbilities);
 
         if (blocker.hasKeyword(Keyword.DOUBLE_STRIKE)) {
@@ -1790,13 +1790,11 @@ public class ComputerUtilCombat {
                 return true;
             }
         } // defender double strike
-
         else { // no double strike for defender
                // Attacker may kill the blocker before he can deal any damage
             if (dealsFirstStrikeDamage(attacker, withoutAbilities, combat)
                     && !blocker.hasKeyword(Keyword.INDESTRUCTIBLE)
                     && !dealsFirstStrikeDamage(blocker, withoutAbilities, combat)) {
-
                 if (attackerDamage >= defenderLife) {
                     return false;
                 }
@@ -1810,7 +1808,6 @@ public class ComputerUtilCombat {
             }
 
             return defenderDamage >= attackerLife;
-
         } // defender no double strike
         return false;// should never arrive here
     } // canDestroyAttacker
@@ -1856,7 +1853,7 @@ public class ComputerUtilCombat {
             if (flankingMagnitude >= blocker.getNetToughness()) {
                 return true;
             }
-            if ((flankingMagnitude >= getDamageToKill(blocker))
+            if (flankingMagnitude >= getDamageToKill(blocker, false)
                     && !blocker.hasKeyword(Keyword.INDESTRUCTIBLE)) {
                 return true;
             }
@@ -1867,7 +1864,7 @@ public class ComputerUtilCombat {
             return false;
         }
 
-        if (getDamageToKill(blocker)
+        if (getDamageToKill(blocker, false)
         		+ predictToughnessBonusOfBlocker(attacker, blocker, withoutAbilities) <= 0) {
         	return true;
         }
@@ -1996,9 +1993,9 @@ public class ComputerUtilCombat {
             }
         }
 
-        final int defenderLife = getDamageToKill(blocker)
+        final int defenderLife = getDamageToKill(blocker, false)
                 + predictToughnessBonusOfBlocker(attacker, blocker, withoutAbilities);
-        final int attackerLife = getDamageToKill(attacker)
+        final int attackerLife = getDamageToKill(attacker, false)
                 + predictToughnessBonusOfAttacker(attacker, blocker, combat, withoutAbilities, withoutAttackerStaticAbilities);
 
         if (attacker.hasKeyword(Keyword.DOUBLE_STRIKE)) {
@@ -2128,7 +2125,7 @@ public class ComputerUtilCombat {
             if (dmgCanDeal > 0 ) { // if any damage left undistributed,
                 if (hasTrample && isAttacking) // if you have trample, deal damage to defending entity
                     damageMap.put(null, dmgCanDeal);
-                else if ( lastBlocker != null ) { // otherwise flush it into last blocker
+                else if (lastBlocker != null) { // otherwise flush it into last blocker
                     damageMap.put(lastBlocker, dmgCanDeal + damageMap.get(lastBlocker));
                 }
             }
@@ -2171,7 +2168,7 @@ public class ComputerUtilCombat {
      */
     public static final int getEnoughDamageToKill(final Card c, final int maxDamage, final Card source, final boolean isCombat,
             final boolean noPrevention) {
-        final int killDamage = getDamageToKill(c);
+        final int killDamage = getDamageToKill(c, false);
 
         if (c.hasKeyword(Keyword.INDESTRUCTIBLE) || c.getShieldCount() > 0) {
             if (!(source.hasKeyword(Keyword.WITHER) || source.hasKeyword(Keyword.INFECT))) {
@@ -2212,8 +2209,8 @@ public class ComputerUtilCombat {
      *
      * @return a int.
      */
-    public final static int getDamageToKill(final Card c) {
-        int damageShield = c.getPreventNextDamageTotalShields();
+    public final static int getDamageToKill(final Card c, boolean withShields) {
+        int damageShield = withShields ? c.getPreventNextDamageTotalShields() : 0;
         int killDamage = (c.isPlaneswalker() ? c.getCurrentLoyalty() : c.getLethalDamage()) + damageShield;
 
         if (killDamage > damageShield

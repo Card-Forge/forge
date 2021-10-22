@@ -11,7 +11,7 @@ ALTERNATE
 Name:Revenge
 ManaCost:4 W B
 Types:Sorcery
-A:SP$ SetLife | LifeAmount$ X | SubAbility$ DBLoseHalf | SpellDescription$ Double your life total. Target opponent loses half their life, rounded up.
+A:SP$ SetLife | LifeAmount$ X | Defined$ You | SubAbility$ DBLoseHalf | SpellDescription$ Double your life total. Target opponent loses half their life, rounded up.
 SVar:DBLoseHalf:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ Y
 SVar:X:Count$YourLifeTotal/Twice
 SVar:Y:Count$TargetedLifeTotal/HalfUp
