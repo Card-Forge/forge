@@ -1,6 +1,0 @@
-deploy:
-  image: maven:3.6-jdk-8
-  script:
-    - 'mvn -U -B clean -P windows-linux install'
-  only:
-    - master
