@@ -91,7 +91,7 @@ public class CostGainControl extends CostPartWithList {
      */
     @Override
     protected Card doPayment(SpellAbility ability, Card targetCard) {
-        targetCard.setController(ability.getActivatingPlayer(), ability.getActivatingPlayer().getGame().getNextTimestamp());
+        targetCard.addTempController(ability.getActivatingPlayer(), ability.getActivatingPlayer().getGame().getNextTimestamp());
         return targetCard;
     }
 

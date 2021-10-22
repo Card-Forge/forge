@@ -90,7 +90,7 @@ public class ControlGainVariantEffect extends SpellAbilityEffect {
                 if (!tgtC.isInPlay() || !tgtC.canBeControlledBy(newController)) {
                     continue;
                 }
-                tgtC.setController(newController, tStamp);
+                tgtC.addTempController(newController, tStamp);
             }
         }
     }

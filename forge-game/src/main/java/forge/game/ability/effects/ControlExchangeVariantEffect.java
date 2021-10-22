@@ -53,10 +53,10 @@ public class ControlExchangeVariantEffect extends SpellAbilityEffect {
         // set new controller
         final long tStamp = sa.getActivatingPlayer().getGame().getNextTimestamp();
         for (final Card c : chosen1) {
-            c.setController(player2, tStamp);
+            c.addTempController(player2, tStamp);
         }
         for (final Card c : chosen2) {
-            c.setController(player1, tStamp);
+            c.addTempController(player1, tStamp);
         }
     }
 }
