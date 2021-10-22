@@ -578,7 +578,6 @@ public class PlayerControllerAi extends PlayerController {
             chosen = validTypes.iterator().next();
             System.err.println("AI has no idea how to choose " + kindOfType +", defaulting to arbitrary element: chosen");
         }
-        getGame().getAction().notifyOfValue(sa, player, chosen, player);
         return chosen;
     }
 

@@ -73,7 +73,9 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
 
             List<SpellAbility> chosenSAs = Lists.newArrayList();
             String prompt = sa.getParamOrDefault("ChoicePrompt","Choose");
+            boolean random = false;
             if (sa.hasParam("AtRandom")) {
+                random = true;
                 Aggregates.random(abilities, amount, chosenSAs);
             } else {
                 chosenSAs = p.getController().chooseSpellAbilitiesForEffect(abilities, sa, prompt, amount, ImmutableMap.of());
@@ -89,15 +91,17 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
                     if (sa.hasParam("SetChosenMode")) {
                         sa.getHostCard().setChosenMode(chosenValue);
                     }
-                    p.getGame().fireEvent(new GameEventCardModeChosen(p, host.getName(), chosenValue, sa.hasParam("ShowChoice")));
+                    p.getGame().fireEvent(new GameEventCardModeChosen(p, host.getName(), chosenValue,
+                            sa.hasParam("ShowChoice"), random));
                     AbilityUtils.resolve(chosenSA);
                 }
             } else {
                 // no choices are valid, e.g. maybe all Unless costs are unpayable
                 if (fallback != null) {
-                    p.getGame().fireEvent(new GameEventCardModeChosen(p, host.getName(), fallback.getDescription(), sa.hasParam("ShowChoice")));
+                    p.getGame().fireEvent(new GameEventCardModeChosen(p, host.getName(), fallback.getDescription(),
+                            sa.hasParam("ShowChoice"), random));
                     AbilityUtils.resolve(fallback);                
-                } else if (!sa.hasParam("AtRandom")) {
+                } else if (!random) {
                     System.err.println("Warning: all Unless costs were unpayable for " + host.getName() +", but it had no FallbackAbility defined. Doing nothing (this is most likely incorrect behavior).");
                 }
             }

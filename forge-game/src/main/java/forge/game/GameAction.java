@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import forge.util.*;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import com.google.common.base.Predicate;
@@ -83,13 +84,6 @@ import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
-import forge.util.Aggregates;
-import forge.util.CardTranslation;
-import forge.util.Expressions;
-import forge.util.Localizer;
-import forge.util.MyRandom;
-import forge.util.ThreadUtil;
-import forge.util.Visitor;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 
@@ -1891,6 +1885,9 @@ public class GameAction {
 
     /** Delivers a message to all players. (use reveal to show Cards) */
     public void notifyOfValue(SpellAbility saSource, GameObject relatedTarget, String value, Player playerExcept) {
+        String name = CardTranslation.getTranslatedName(saSource.getHostCard().getName());
+        value = TextUtil.fastReplace(value, "CARDNAME", name);
+        value = TextUtil.fastReplace(value, "NICKNAME", Lang.getInstance().getNickName(name));
         for (Player p : game.getPlayers()) {
             if (playerExcept == p) continue;
             p.getController().notifyOfValue(saSource, relatedTarget, value);

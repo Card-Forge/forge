@@ -1,0 +1,56 @@
+Name:Faerie Dragon
+ManaCost:2 G G
+Types:Creature Dragon
+PT:1/3
+K:Flying
+A:AB$ GenericChoice | Cost$ 1 G G | AtRandom$ True | ShowChoice$ Description | Choices$ Berserk,Twiddle,BloodLust,Green,White,Red,Damage3,Flying,P3P3,Banding,Black,Blue,NoRegen,LilSneak,M2M0,ToHand,Damage1,Nerf,Exile,Orcish | StackDescription$ SpellDescription | SpellDescription$ Perform a random action.
+SVar:Berserk:DB$ ChooseCard | Choices$ Creature | AtRandom$ True | RememberChosen$ True | SubAbility$ DBPump1 | SpellDescription$ A creature chosen at random gains trample and gets +X/+0 until end of turn, where X is its power. At the beginning of the next end step, destroy that creature if it attacked this turn.
+SVar:DBPump1:DB$ Pump | Defined$ Remembered | KW$ Trample | NumAtt$ X1 | SubAbility$ DBDelayedTrigger1
+SVar:DBDelayedTrigger1:DB$ DelayedTrigger | RememberObjects$ Remembered | Mode$ Phase | Phase$ End of Turn | Execute$ TrigDestroy1 | SubAbility$ DBCleanup | TriggerDescription$ At the beginning of the next end step, destroy that creature if it attacked this turn.
+SVar:TrigDestroy1:DB$ Destroy | Defined$ DelayTriggerRemembered | ConditionDefined$ DelayTriggerRemembered | ConditionPresent$ Card.attackedThisTurn
+SVar:X1:Remembered$CardPower
+SVar:DBCleanup:DB$ Cleanup | Log$ True | ClearRemembered$ True | ClearChosenCard$ True
+SVar:Twiddle:DB$ ChooseCard | Choices$ Artifact,Creature,Land | AtRandom$ True | SubAbility$ DBTapOrUntap2 | SpellDescription$ You may tap or untap an artifact, creature, or land chosen at random.
+SVar:DBTapOrUntap2:DB$ TapOrUntap | Defined$ ChosenCard | SubAbility$ DBCleanup
+SVar:BloodLust:DB$ ChooseCard | Choices$ Creature | AtRandom$ True | RememberChosen$ True | SubAbility$ DBPump3 | SpellDescription$ If a creature chosen at random has toughness 5 or greater, it gets +4/-4 until end of turn. Otherwise, it gets +4/-X until end of turn, where X is its toughness minus 1.
+SVar:DBPump3:DB$ Pump | Defined$ Remembered | NumAtt$ 4 | NumDef$ -X3 | SubAbility$ DBCleanup
+SVar:X3:Count$Compare T3 GE4.4.T3
+SVar:T3:Remembered$CardToughness/Minus.1
+SVar:Green:DB$ ChooseCard | Choices$ Permanent | IncludeSpellsOnStack$ True | AtRandom$ True | LockInText$ True | SubAbility$ DBAnimateG | SpellDescription$ A spell or permanent chosen at random becomes green. (Mana symbols on that permanent remain unchanged.)
+SVar:DBAnimateG:DB$ Animate | Defined$ ChosenCard | Colors$ Green | OverwriteColors$ True | Duration$ Permanent | LockInText$ True | SubAbility$ DBCleanup
+SVar:White:DB$ ChooseCard | Choices$ Permanent | IncludeSpellsOnStack$ True | AtRandom$ True | LockInText$ True | SubAbility$ DBAnimateW | SpellDescription$ A spell or permanent chosen at random becomes white. (Mana symbols on that permanent remain unchanged.)
+SVar:DBAnimateW:DB$ Animate | Defined$ ChosenCard | Colors$ White | OverwriteColors$ True | Duration$ Permanent | LockInText$ True | SubAbility$ DBCleanup
+SVar:Red:DB$ ChooseCard | Choices$ Permanent | IncludeSpellsOnStack$ True | AtRandom$ True | LockInText$ True | SubAbility$ DBAnimateR | SpellDescription$ A spell or permanent chosen at random becomes red. (Mana symbols on that permanent remain unchanged.)
+SVar:DBAnimateR:DB$ Animate | Defined$ ChosenCard | Colors$ Red | OverwriteColors$ True | Duration$ Permanent | LockInText$ True | SubAbility$ DBCleanup
+SVar:Damage3:DB$ ChooseEntity | Random$ True | CardChoices$ Creature | PlayerChoices$ Player | RememberChosen$ True | SubAbility$ DBDamage3 | SpellDescription$ CARDNAME deals 3 damage to a creature or player chosen at random.
+SVar:DBDamage3:DB$ DealDamage | Defined$ Remembered | NumDmg$ 3 | SubAbility$ DBCleanup
+SVar:Flying:DB$ ChooseCard | Choices$ Creature | AtRandom$ True | SubAbility$ DBPump8 | SpellDescription$ A creature chosen at random gains flying until end of turn.
+SVar:DBPump8:DB$ Pump | Defined$ ChosenCard | KW$ Flying | SubAbility$ DBCleanup
+SVar:P3P3:DB$ ChooseCard | Choices$ Creature | AtRandom$ True | SubAbility$ DBPump9 | SpellDescription$ A creature chosen at random gets +3/+3 until end of turn.
+SVar:DBPump9:DB$ Pump | Defined$ ChosenCard | NumAtt$ 3 | NumDef$ 3 | SubAbility$ DBCleanup
+SVar:Banding:DB$ ChooseCard | Choices$ Creature | AtRandom$ True | SubAbility$ DBPump10 | SpellDescription$ A creature chosen at random gains banding until end of turn. (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding a player controls are blocking or being blocked by a creature, that player divides that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)
+SVar:DBPump10:DB$ Pump | Defined$ ChosenCard | KW$ Banding | SubAbility$ DBCleanup
+SVar:Black:DB$ ChooseCard | Choices$ Permanent | IncludeSpellsOnStack$ True | AtRandom$ True | LockInText$ True | SubAbility$ DBAnimateB | SpellDescription$ A spell or permanent chosen at random becomes black. (Mana symbols on that permanent remain unchanged.)
+SVar:DBAnimateB:DB$ Animate | Defined$ ChosenCard | Colors$ Black | OverwriteColors$ True | Duration$ Permanent | LockInText$ True | SubAbility$ DBCleanup
+SVar:Blue:DB$ ChooseCard | Choices$ Permanent | IncludeSpellsOnStack$ True | AtRandom$ True | LockInText$ True | SubAbility$ DBAnimateU | SpellDescription$ A spell or permanent chosen at random becomes blue. (Mana symbols on that permanent remain unchanged.)
+SVar:DBAnimateU:DB$ Animate | Defined$ ChosenCard | Colors$ Blue | OverwriteColors$ True | Duration$ Permanent | LockInText$ True | SubAbility$ DBCleanup
+SVar:NoRegen:DB$ ChooseCard | Choices$ Creature | AtRandom$ True | SubAbility$ DBPump13 | SpellDescription$ A creature chosen at random can't be regenerated this turn.
+SVar:DBPump13:DB$ Pump | Defined$ ChosenCard | KW$ HIDDEN CARDNAME can't be regenerated. | SubAbility$ DBCleanup
+SVar:LilSneak:DB$ ChooseCard | Choices$ Creature | AtRandom$ True | SubAbility$ DBPump14 | RememberChosen$ True | SpellDescription$ If a creature chosen at random has power 2 or less, it is unblockable this turn.
+SVar:DBPump14:DB$ Pump | ConditionDefined$ Remembered | ConditionPresent$ Card.powerLE2 | Defined$ Remembered | KW$ HIDDEN Unblockable | SubAbility$ DBCleanup
+SVar:M2M0:DB$ ChooseCard | Choices$ Creature | AtRandom$ True | SubAbility$ DBPump15 | SpellDescription$ A creature chosen at random gets -2/-0 until end of turn.
+SVar:DBPump15:DB$ Pump | Defined$ ChosenCard | NumAtt$ -2 | SubAbility$ DBCleanup
+SVar:ToHand:DB$ ChooseCard | Choices$ Creature | AtRandom$ True | SubAbility$ DBChangeZone16 | SpellDescription$ Return a creature chosen at random to its owner's hand.
+SVar:DBChangeZone16:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBCleanup
+SVar:Damage1:DB$ ChooseEntity | Random$ True | CardChoices$ Creature | PlayerChoices$ Player | RememberChosen$ True | SubAbility$ DBDamage1 | SpellDescription$ CARDNAME deals 1 damage to a creature or player chosen at random.
+SVar:DBDamage1:DB$ DealDamage | Defined$ Remembered | NumDmg$ 1 | SubAbility$ DBCleanup
+SVar:Nerf:DB$ ChooseCard | Choices$ Creature.Other | AtRandom$ True | SubAbility$ DBAnimate18 | SpellDescription$ A creature other than CARDNAME chosen at random becomes 0/2 until end of turn.
+SVar:DBAnimate18:DB$ Animate | Defined$ ChosenCard | Power$ 0 | Toughness$ 2 | SubAbility$ DBCleanup
+SVar:Exile:DB$ ChooseCard | Choices$ Creature | AtRandom$ True | SubAbility$ DBChangeZone19 | SpellDescription$ Exile a creature chosen at random. Its controller gains life equal to its power.
+SVar:DBChangeZone19:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Battlefield | Destination$ Exile | RememberLKI$ True | SubAbility$ DBGainLife19
+SVar:DBGainLife19:DB$ GainLife | Defined$ RememberedController | LifeAmount$ X19 | SubAbility$ DBCleanup
+SVar:X19:RememberedLKI$CardPower
+SVar:Orcish:DB$ ChooseCard | Choices$ Creature | Amount$ Random | AtRandom$ True | SubAbility$ DBPutCounter20 | SpellDescription$ Randomly distribute X -0/-1 counters among a random number of creatures chosen at random, where X is the number of creatures in play.
+SVar:DBPutCounter20:DB$ PutCounter | Defined$ ChosenCard | CounterType$ M0M1 | CounterNum$ X20 | DividedRandomly$ True | SubAbility$ DBCleanup
+SVar:X20:Count$Valid Creature
+Oracle:Flying\n{1}{G}{G}: Perform a random action.

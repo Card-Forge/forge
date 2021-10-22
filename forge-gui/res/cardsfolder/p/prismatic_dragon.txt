@@ -1,0 +1,11 @@
+Name:Prismatic Dragon
+ManaCost:2 W W
+Types:Creature Dragon
+PT:2/3
+K:Flying
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChooseColor | TriggerDescription$ At the beginning of your upkeep, CARDNAME becomes a color chosen at random. (This effect lasts indefinitely.)
+SVar:TrigChooseColor:DB$ ChooseColor | Random$ True | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Colors$ ChosenColor | OverwriteColors$ True | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenColor$ True
+A:AB$ ChooseColor | Cost$ 2 | Random$ True | SubAbility$ DBAnimate | StackDescription$ SpellDescription | SpellDescription$ CARDNAME becomes a color chosen at random. (This effect lasts indefinitely.)
+Oracle:Flying\nAt the beginning of your upkeep, Prismatic Dragon becomes a color chosen at random. (This effect lasts indefinitely.)\n{2}: Prismatic Dragon becomes a color chosen at random. (This effect lasts indefinitely.)
