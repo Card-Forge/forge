@@ -1,11 +1,13 @@
 package forge.ai.ability;
 
 
-import forge.ai.AiAttackController;
-import forge.ai.AiController;
-import forge.ai.ComputerUtilCost;
-import forge.ai.PlayerControllerAi;
-import forge.ai.SpellAbilityAi;
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
+import forge.ai.*;
+import forge.game.GlobalRuleChange;
+import forge.game.card.Card;
+import forge.game.card.CardPredicates;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
@@ -18,6 +20,7 @@ public class RepeatAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
+        String logic = sa.getParamOrDefault("AILogic", "");
 
         if (sa.usesTargeting()) {
             if (!sa.canTarget(opp)) {
@@ -26,7 +29,6 @@ public class RepeatAi extends SpellAbilityAi {
             sa.resetTargets();
             sa.getTargets().add(opp);
         }
-        String logic = sa.getParam("AILogic");
         if ("MaxX".equals(logic) || "MaxXAtOppEOT".equals(logic)) {
             if ("MaxXAtOppEOT".equals(logic) && !(ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN) && ai.getGame().getPhaseHandler().getNextTurn() == ai)) {
                 return false;
@@ -47,7 +49,33 @@ public class RepeatAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        String logic = sa.getParamOrDefault("AILogic", "");
+
         if (sa.usesTargeting()) {
+            if (logic.startsWith("CopyBestCreature")) {
+                Card best = null;
+                if (!ai.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule) || logic.endsWith("IgnoreLegendary")) {
+                    best = ComputerUtilCard.getBestAI(Iterables.filter(ai.getCreaturesInPlay(), Predicates.and(
+                            CardPredicates.isTargetableBy(sa), new Predicate<Card>() {
+                                @Override
+                                public boolean apply(Card card) {
+                                    return !card.getType().isLegendary();
+                                }
+                            })));
+                } else {
+                    best = ComputerUtilCard.getBestAI(Iterables.filter(ai.getCreaturesInPlay(), CardPredicates.isTargetableBy(sa)));
+                }
+                if (best == null && mandatory && sa.canTarget(sa.getHostCard())) {
+                    best = sa.getHostCard();
+                }
+                if (best != null) {
+                    sa.resetTargets();
+                    sa.getTargets().add(best);
+                    return true;
+                }
+                return false;
+            }
+
             PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
             Player opp = targetableOpps.min(PlayerPredicates.compareByLife());
             if (opp != null) {
