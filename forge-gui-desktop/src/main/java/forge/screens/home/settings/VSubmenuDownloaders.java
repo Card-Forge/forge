@@ -260,6 +260,8 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
         cniSB.append("-------------------\n\n");
 
         for (CardEdition e : editions) {
+            if (CardEdition.Type.FUNNY.equals(e.getType()))
+                continue;
             nifSB.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
             cniSB.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
 
