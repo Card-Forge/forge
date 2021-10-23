@@ -262,8 +262,9 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
         for (CardEdition e : editions) {
             if (CardEdition.Type.FUNNY.equals(e.getType()))
                 continue;
-            nifSB.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
-            cniSB.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
+            boolean nifHeader = false;
+            boolean cniHeader = false;
+            boolean tokenHeader = false;
 
             String imagePath;
             int artIndex = 1;
@@ -289,6 +290,10 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
                 }
 
                 if (cp == null) {
+                    if (!cniHeader) {
+                        cniSB.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
+                        cniHeader = true;
+                    }
                     cniSB.append(" ").append(c).append("\n");
                     notImplementedCount++;
                     continue;
@@ -302,6 +307,10 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
                 if (imagePath != null) {
                     File file = ImageKeys.getImageFile(imagePath);
                     if (file == null) {
+                        if (!nifHeader) {
+                            nifSB.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
+                            nifHeader = true;
+                        }
                         nifSB.append(" ").append(imagePath).append("\n");
                         missingCount++;
                     }
@@ -315,14 +324,16 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
                     if (imagePath != null) {
                         File file = ImageKeys.getImageFile(imagePath);
                         if (file == null) {
+                            if (!nifHeader) {
+                                nifSB.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
+                                nifHeader = true;
+                            }
                             nifSB.append(" ").append(imagePath).append("\n");
                             missingCount++;
                         }
                     } 
                 }
             }
-
-            nifSB.append("\nTOKENS\n");
 
             // TODO: Audit token images here...
             for(Entry<String, Integer> tokenEntry : e.getTokens().entrySet()) {
@@ -338,6 +349,14 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
                         String imgKey = token.getImageKey(i);
                         File file = ImageKeys.getImageFile(imgKey);
                         if (file == null) {
+                            if (!nifHeader) {
+                                nifSB.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
+                                nifHeader = true;
+                            }
+                            if (!tokenHeader) {
+                                nifSB.append("\nTOKENS\n");
+                                tokenHeader = true;
+                            }
                             nifSB.append(" ").append(token.getImageFilename(i + 1)).append("\n");
                             missingCount++;
                         }
@@ -346,7 +365,8 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
                     System.out.println("No Token found: " + name + " in " + e.getName());
                 }
             }
-            nifSB.append("\n");
+            if (nifHeader)
+                nifSB.append("\n");
         }
 
 
