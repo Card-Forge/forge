@@ -281,7 +281,7 @@ public class PumpAi extends PumpAiBase {
             return SpecialCardAi.Donate.considerTargetingOpponent(ai, sa);
         } else if (aiLogic.equals("InfernoOfTheStarMounts")) {
             int numRedMana = ComputerUtilMana.determineLeftoverMana(sa, ai, "R");
-            int currentPower = sa.getHostCard().getNetPower();
+            int currentPower = source.getNetPower();
             if (currentPower < 20 && currentPower + numRedMana >= 20) {
                 return true;
             }
