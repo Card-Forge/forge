@@ -1,31 +1,15 @@
 package forge.ai.ability;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
-import forge.ai.AiCardMemory;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCost;
-import forge.ai.ComputerUtilMana;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.card.CardType;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.AnimateEffectBase;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardTraitChanges;
-import forge.game.card.CardUtil;
+import forge.game.card.*;
 import forge.game.cost.CostPutCounter;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -36,6 +20,10 @@ import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityContinuous;
 import forge.game.staticability.StaticAbilityLayer;
 import forge.game.zone.ZoneType;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -259,6 +247,7 @@ public class AnimateAi extends SpellAbilityAi {
     private boolean animateTgtAI(final SpellAbility sa) {
         final Player ai = sa.getActivatingPlayer();
         final PhaseHandler ph = ai.getGame().getPhaseHandler();
+        final String logic = sa.getParamOrDefault("AILogic", "");
         final boolean alwaysActivatePWAbility = sa.isPwAbility()
                 && sa.getPayCosts().hasSpecificCostType(CostPutCounter.class)
                 && sa.usesTargeting()
@@ -363,7 +352,22 @@ public class AnimateAi extends SpellAbilityAi {
             }
             return true;
         }
-        
+
+        if (logic.equals("SetPT")) {
+            // TODO: 1. Teach the AI to use this to save the creature from direct damage; 2. Determine the best target in a smarter way?
+            Card worst = ComputerUtilCard.getWorstCreatureAI(ai.getCreaturesInPlay());
+            Card buffed = becomeAnimated(worst, sa);
+
+            if (ph.is(PhaseType.MAIN1, ai)) {
+                if (ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, buffed)
+                        && (buffed.getNetPower() - worst.getNetPower() >= 3 || !ComputerUtilCard.doesCreatureAttackAI(ai, worst))) {
+                    sa.getTargets().add(worst);
+                    rememberAnimatedThisTurn(ai, worst);
+                    return true;
+                }
+            }
+        }
+
         // This is reasonable for now. Kamahl, Fist of Krosa and a sorcery or
         // two are the only things
         // that animate a target. Those can just use AI:RemoveDeck:All until
