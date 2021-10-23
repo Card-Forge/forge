@@ -358,13 +358,11 @@ public class AnimateAi extends SpellAbilityAi {
             Card worst = ComputerUtilCard.getWorstCreatureAI(ai.getCreaturesInPlay());
             Card buffed = becomeAnimated(worst, sa);
 
-            if (ph.is(PhaseType.MAIN1, ai)) {
-                if (ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, buffed)
-                        && (buffed.getNetPower() - worst.getNetPower() >= 3 || !ComputerUtilCard.doesCreatureAttackAI(ai, worst))) {
-                    sa.getTargets().add(worst);
-                    rememberAnimatedThisTurn(ai, worst);
-                    return true;
-                }
+            if (ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, buffed)
+                    && (buffed.getNetPower() - worst.getNetPower() >= 3 || !ComputerUtilCard.doesCreatureAttackAI(ai, worst))) {
+                sa.getTargets().add(worst);
+                rememberAnimatedThisTurn(ai, worst);
+                return true;
             }
         }
 
