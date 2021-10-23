@@ -8,11 +8,12 @@ import java.util.function.Function;
 public enum DeckSection {
     Avatar(1, Validators.AVATAR_VALIDATOR),
     Commander(1, Validators.COMMANDER_VALIDATOR),
-    Main(60, Validators.CONSTRUCTED_VALIDATOR),
-    Sideboard(15, Validators.CONSTRUCTED_VALIDATOR),
+    Main(60, Validators.DECK_AND_SIDE_VALIDATOR),
+    Sideboard(15, Validators.DECK_AND_SIDE_VALIDATOR),
     Planes(10, Validators.PLANES_VALIDATOR),
     Schemes(20, Validators.SCHEME_VALIDATOR),
-    Conspiracy(0, Validators.CONSPIRACY_VALIDATOR);
+    Conspiracy(0, Validators.CONSPIRACY_VALIDATOR),
+    Dungeon(0, Validators.DUNGEON_VALIDATOR);
 
     private final int typicalSize; // Rules enforcement is done in DeckFormat class, this is for reference only
     private Function<PaperCard, Boolean> fnValidator;
@@ -57,15 +58,15 @@ public enum DeckSection {
     }
 
     private static class Validators {
-        static final Function<PaperCard, Boolean> CONSTRUCTED_VALIDATOR = new Function<PaperCard, Boolean>() {
+        static final Function<PaperCard, Boolean> DECK_AND_SIDE_VALIDATOR = new Function<PaperCard, Boolean>() {
             @Override
             public Boolean apply(PaperCard card) {
                 CardType t = card.getRules().getType();
                 // NOTE: Same rules applies to both Deck and Side, despite "Conspiracy cards" are allowed
                 // in the SideBoard (see Rule 313.2)
                 // Those will be matched later, in case (see `Deck::validateDeferredSections`)
-                return (!t.isConspiracy() && !t.isDungeon() && !t.isPhenomenon() && !t.isPlane()
-                        && !t.isScheme() && !t.isVanguard());
+                return (!t.isConspiracy() && !t.isDungeon() && !t.isPhenomenon() && !t.isPlane() && !t.isScheme() &&
+                        !t.isVanguard());
             }
         };
 
@@ -82,6 +83,14 @@ public enum DeckSection {
             public Boolean apply(PaperCard card) {
                 CardType t = card.getRules().getType();
                 return (t.isPlane() || t.isPhenomenon());
+            }
+        };
+
+        static final Function<PaperCard, Boolean> DUNGEON_VALIDATOR = new Function<PaperCard, Boolean>() {
+            @Override
+            public Boolean apply(PaperCard card) {
+                CardType t = card.getRules().getType();
+                return t.isDungeon();
             }
         };
 
