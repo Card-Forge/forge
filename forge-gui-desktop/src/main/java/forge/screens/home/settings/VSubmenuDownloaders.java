@@ -48,6 +48,7 @@ import forge.util.ImageUtil;
 import forge.util.Localizer;
 import forge.util.RuntimeVersion;
 import net.miginfocom.swing.MigLayout;
+import org.apache.commons.lang3.tuple.Pair;
 
 /**
  * Assembles Swing components of utilities submenu singleton.
@@ -270,19 +271,19 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
             int artIndex = 1;
             ArrayList<String> cis = new ArrayList<>();
 
-            HashMap<String, Integer> cardCount = new HashMap<>();
+            HashMap<String, Pair<Boolean, Integer>> cardCount = new HashMap<>();
             for (CardInSet c : e.getAllCardsInSet()) {
                 if (cardCount.containsKey(c.name)) {
-                    cardCount.put(c.name, cardCount.get(c.name) + 1);
+                    cardCount.put(c.name, Pair.of(c.collectorNumber.startsWith("F"), cardCount.get(c.name).getRight() + 1));
                 } else {
-                    cardCount.put(c.name, 1);
+                    cardCount.put(c.name, Pair.of(c.collectorNumber.startsWith("F"), 1));
                 }
             }
             
             // loop through the cards in this edition, considering art variations...
-            for (Entry<String, Integer> entry : cardCount.entrySet()) {
+            for (Entry<String, Pair<Boolean, Integer>> entry : cardCount.entrySet()) {
                 String c = entry.getKey();
-                artIndex = entry.getValue();
+                artIndex = entry.getValue().getRight();
 
                 PaperCard cp = cardDb.getCard(c, e.getCode(), artIndex);
                 if (cp == null) {
@@ -290,6 +291,8 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
                 }
 
                 if (cp == null) {
+                    if (entry.getValue().getLeft()) //skip funny cards
+                        continue;
                     if (!cniHeader) {
                         cniSB.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
                         cniHeader = true;

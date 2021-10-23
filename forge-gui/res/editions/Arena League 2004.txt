@@ -14,9 +14,9 @@ ScryfallCode=PAL04
 6 R Darksteel Ingot @Martina Pilcerova
 7 R Serum Visions @Ben Thompson
 8 R Glacial Ray @Jim Murray
-9 R Circle of Protection: Art @Mark “It’s teh-DEEN” Tedin
-10 R Mise @Mark Zug
-11 R Booster Tutor @Heather Hudson
-12 R Goblin Mime @Dan Frazier
-13 R Granny's Payback @Kaja Foglio
-14 R Ashnod's Coupon @Edward P. Beard, Jr.
+F9 R Circle of Protection: Art @Mark “It’s teh-DEEN” Tedin
+F10 R Mise @Mark Zug
+F11 R Booster Tutor @Heather Hudson
+F12 R Goblin Mime @Dan Frazier
+F13 R Granny's Payback @Kaja Foglio
+F14 R Ashnod's Coupon @Edward P. Beard, Jr.

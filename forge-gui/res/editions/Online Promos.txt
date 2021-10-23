@@ -247,4 +247,4 @@ ScryfallCode=PRM
 35096 S Zodiac Snake @Qi Baocheng
 35088 S Zodiac Tiger @Ai Desheng
 225 S Zuran Orb @Sandra Everingham
-26584 S Gleemox @Dan Frazier
+F26584 S Gleemox @Dan Frazier
