@@ -828,6 +828,11 @@ public class Game {
                         getAction().controllerChangeZoneCorrection(c);
                     }
                     c.removeTempController(p);
+                    // return stolen spells
+                    if (c.isInZone(ZoneType.Stack)) {
+                        SpellAbilityStackInstance si = getStack().getInstanceFromSpellAbility(c.getCastSA());
+                        si.setActivatingPlayer(c.getController());
+                    }
                     if (c.getController().equals(p)) {
                         getAction().exile(c, null);
                     }
