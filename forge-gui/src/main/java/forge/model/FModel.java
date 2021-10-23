@@ -101,7 +101,9 @@ public final class FModel {
     private static IStorage<ConquestPlane> planes;
     private static IStorage<QuestWorld> worlds;
     private static GameFormat.Collection formats;
-    private static ItemPool<PaperCard> uniqueCardsNoAlt, allCardsNoAlt, planechaseCards, archenemyCards, brawlCommander, oathbreakerCommander, tinyLeadersCommander, commanderPool, avatarPool, conspiracyPool;
+    private static ItemPool<PaperCard> uniqueCardsNoAlt, allCardsNoAlt, planechaseCards, archenemyCards,
+            brawlCommander, oathbreakerCommander, tinyLeadersCommander, commanderPool,
+            avatarPool, conspiracyPool, dungeonPool;
 
     public static void initialize(final IProgressBar progressBar, Function<ForgePreferences, Void> adjustPrefs) {
         //init version to log
@@ -375,6 +377,12 @@ public final class FModel {
         if (conspiracyPool == null)
             return ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_CONSPIRACY, PaperCard.FN_GET_RULES)), PaperCard.class);
         return conspiracyPool;
+    }
+
+    public static ItemPool<PaperCard> getDungeonPool() {
+        if (dungeonPool == null)
+            return ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_DUNGEON, PaperCard.FN_GET_RULES)), PaperCard.class);
+        return dungeonPool;
     }
 
     private static boolean keywordsLoaded = false;
