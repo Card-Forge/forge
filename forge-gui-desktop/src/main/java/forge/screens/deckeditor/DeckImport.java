@@ -61,9 +61,7 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
     private static final long serialVersionUID = -5837776824284093004L;
 
     private final FTextArea txtInput = new FTextArea();
-    // FIXME: review colours!
-    // FIXME: Background colour: #3e4f63
-
+    // Memo: Background colour: #3e4f63
     // UN-USED COLOUR TO USE "#E1E35F;";
 
     public static final String OK_CARD_IMPORT_COLOUR = "#89DC9F;";
