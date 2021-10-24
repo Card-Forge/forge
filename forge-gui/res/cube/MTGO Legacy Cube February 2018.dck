@@ -18,7 +18,7 @@ Name=MTGO Legacy Cube February 2018
 1 Anger of the Gods|AKR
 1 Anguished Unmaking|SOI
 1 Animate Dead|EMA
-1 Approach of the Second Sun|STX
+1 Approach of the Second Sun|STA
 1 Arbor Elf|A25
 1 Arc Trail|SOM
 1 Archangel Avacyn|SOI
@@ -59,7 +59,7 @@ Name=MTGO Legacy Cube February 2018
 1 Boros Charm|A25
 1 Boros Reckoner|MM3
 1 Botanical Sanctum|KLD
-1 Brainstorm|STX
+1 Brainstorm|STA
 1 Breeding Pool|RNA
 1 Brimaz, King of Oreskos|BNG
 1 Brimstone Volley|2XM
@@ -91,7 +91,7 @@ Name=MTGO Legacy Cube February 2018
 1 Collective Brutality|EMN
 1 Collective Defiance|EMN
 1 Collective Effort|EMN
-1 Compulsive Research|STX
+1 Compulsive Research|STA
 1 Concealed Courtyard|KLD
 1 Condemn|M11
 1 Consecrated Sphinx|IMA
@@ -103,16 +103,16 @@ Name=MTGO Legacy Cube February 2018
 1 Crater's Claws|KTK
 1 Craterhoof Behemoth|MM3
 1 Creeping Tar Pit|UMA
-1 Crux of Fate|STX
+1 Crux of Fate|STA
 1 Cryptic Command|IMA
-1 Cultivate|STX
+1 Cultivate|STA
 1 Cyclonic Rift|2XM
 1 Damnation|MPS_AKH
 1 Dark Confidant|2XM
 1 Dark Petition|ORI
-1 Dark Ritual|STX
+1 Dark Ritual|STA
 1 Darkslick Shores|SOM
-1 Day of Judgment|STX
+1 Day of Judgment|STA
 1 Daze|MPS_AKH
 1 Deathrite Shaman|EMA
 1 Deceiver Exarch|CN2
@@ -131,7 +131,7 @@ Name=MTGO Legacy Cube February 2018
 1 Dissolve|IMA
 1 Distended Mindbender|EMN
 1 Domri Rade|MM3
-1 Doom Blade|STX
+1 Doom Blade|STA
 1 Dragonlord Atarka|DTK
 1 Dragonlord Dromoka|DTK
 1 Dragonlord Ojutai|DTK
@@ -145,11 +145,11 @@ Name=MTGO Legacy Cube February 2018
 1 Dualcaster Mage|2XM
 1 Dungeon Geists|M20
 1 Duplicant|2XM
-1 Duress|STX
+1 Duress|STA
 1 Duskwatch Recruiter|SOI
 1 Edric, Spymaster of Trest|VMA
 1 Elder Deep-Fiend|EMN
-1 Electrolyze|STX
+1 Electrolyze|STA
 1 Elesh Norn, Grand Cenobite|IMA
 1 Elspeth Tirel|SOM
 1 Elspeth, Knight-Errant|MMA
@@ -228,7 +228,7 @@ Name=MTGO Legacy Cube February 2018
 1 Hallowed Spiritkeeper|C14
 1 Hangarback Walker|MPS_KLD
 1 Harbinger of the Tides|ORI
-1 Harmonize|STX
+1 Harmonize|STA
 1 Hazoret the Fervent|AKR
 1 Hellrider|MM3
 1 Hero of Bladehold|MBS
@@ -250,7 +250,7 @@ Name=MTGO Legacy Cube February 2018
 1 Incendiary Flow|EMN
 1 Incinerate|M12
 1 Inferno Titan|M12
-1 Inquisition of Kozilek|STX
+1 Inquisition of Kozilek|STA
 1 Inspiring Vantage|KLD
 1 Into the Roil|ZNR
 1 Ire Shaman|A25
@@ -289,9 +289,9 @@ Name=MTGO Legacy Cube February 2018
 1 Legacy's Allure|TMP
 1 Legion's Landing|XLN
 1 Leonin Relic-Warder|C17
-1 Lightning Bolt|STX
+1 Lightning Bolt|STA
 1 Lightning Greaves|2XM
-1 Lightning Helix|STX
+1 Lightning Helix|STA
 1 Lightning Mauler|AVR
 1 Lightning Strike|M19
 1 Liliana of the Veil|UMA
@@ -314,7 +314,7 @@ Name=MTGO Legacy Cube February 2018
 1 Malicious Affliction|EMA
 1 Man-o'-War|MH1
 1 Mana Confluence|EXP
-1 Mana Tithe|STX
+1 Mana Tithe|STA
 1 Managorger Hydra|ORI
 1 Manic Vandal|M12
 1 Marsh Flats|MH2
@@ -345,11 +345,11 @@ Name=MTGO Legacy Cube February 2018
 1 Myr Battlesphere|2XM
 1 Mystic Snake|A25
 1 Nahiri, the Harbinger|SOI
-1 Natural Order|STX
+1 Natural Order|STA
 1 Nature's Lore|5ED
 1 Necromancy|VIS
 1 Needle Spires|OGW
-1 Negate|STX
+1 Negate|STA
 1 Nekrataal|EMA
 1 Nevinyrral's Disk|MH2
 1 Nicol Bolas, God-Pharaoh|AKR
@@ -373,7 +373,7 @@ Name=MTGO Legacy Cube February 2018
 1 Oona's Prowler|LRW
 1 Ophiomancer|C13
 1 Opposition|MPS_AKH
-1 Opt|STX
+1 Opt|STA
 1 Oracle of Mul Daya|ZEN
 1 Oust|ROE
 1 Outpost Siege|FRF
@@ -401,7 +401,7 @@ Name=MTGO Legacy Cube February 2018
 1 Porcelain Legionnaire|NPH
 1 Precinct Captain|RTR
 1 Preordain|M11
-1 Primal Command|STX
+1 Primal Command|STA
 1 Primeval Titan|IMA
 1 Profane Command|MM2
 1 Purphoros, God of the Forge|THS
@@ -427,7 +427,7 @@ Name=MTGO Legacy Cube February 2018
 1 Recurring Nightmare|TPR
 1 Reflecting Pool|CNS
 1 Reflector Mage|OGW
-1 Regrowth|STX
+1 Regrowth|STA
 1 Rekindling Phoenix|RIX
 1 Relic of Progenitus|EMA
 1 Remand|MM2
@@ -518,7 +518,7 @@ Name=MTGO Legacy Cube February 2018
 1 Sword of Fire and Ice|2XM
 1 Sword of Light and Shadow|2XM
 1 Sword of War and Peace|2XM
-1 Swords to Plowshares|STX
+1 Swords to Plowshares|STA
 1 Sylvan Advocate|OGW
 1 Sylvan Caryatid|THS
 1 Sylvan Library|EMA
@@ -546,7 +546,7 @@ Name=MTGO Legacy Cube February 2018
 1 Thunderbreak Regent|DTK
 1 Thundermaw Hellkite|IMA
 1 Tidehollow Sculler|MMA
-1 Time Warp|STX
+1 Time Warp|STA
 1 Tireless Tracker|SOI
 1 Tooth and Nail|MMA
 1 Torch Fiend|M15

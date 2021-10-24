@@ -81,7 +81,7 @@ Name=Ben's Cube
 1 Boros Reckoner|MM3
 1 Braids, Cabal Minion|MH2
 1 Brain Freeze|VMA
-1 Brainstorm|STX
+1 Brainstorm|STA
 1 Breeding Pool|RNA
 1 Bribery|8ED
 1 Brimaz, King of Oreskos|BNG
@@ -102,8 +102,8 @@ Name=Ben's Cube
 1 Chameleon Colossus|MOR
 1 Chandra, the Firebrand|M13
 1 Chandra's Phoenix|M14
-1 Channel|STX
-1 Chaos Warp|STX
+1 Channel|STA
+1 Chaos Warp|STA
 1 Char|RAV
 1 Chrome Mox|2XM
 1 City of Brass|MMA
@@ -114,7 +114,7 @@ Name=Ben's Cube
 1 Coalition Relic|A25
 1 Coiling Oracle|MM3
 1 Coldsteel Heart|CSP
-1 Compulsive Research|STX
+1 Compulsive Research|STA
 1 Condemn|M11
 1 Consecrated Sphinx|IMA
 1 Consuming Vapors|ROE
@@ -131,7 +131,7 @@ Name=Ben's Cube
 1 Crypt Ghast|GTC
 1 Cryptic Command|IMA
 1 Crystal Shard|MRD
-1 Cultivate|STX
+1 Cultivate|STA
 1 Cursed Scroll|TPR
 1 Cyclonic Rift|2XM
 1 Dack Fayden|EMA
@@ -139,16 +139,16 @@ Name=Ben's Cube
 1 Damnation|MPS_AKH
 1 Daretti, Scrap Savant|C16
 1 Dark Confidant|2XM
-1 Dark Ritual|STX
+1 Dark Ritual|STA
 1 Dauthi Horror|TPR
-1 Day of Judgment|STX
+1 Day of Judgment|STA
 1 Daze|MPS_AKH
 1 Deathrite Shaman|EMA
 1 Deceiver Exarch|CN2
 1 Decree of Justice|A25
 1 Deep Analysis|EMA
 1 Defense of the Heart|ULG
-1 Demonic Tutor|STX
+1 Demonic Tutor|STA
 1 Deranged Hermit|VMA
 1 Desecration Demon|MM3
 1 Desertion|CN2
@@ -164,20 +164,20 @@ Name=Ben's Cube
 1 Dismember|MM2
 1 Dissipate|M15
 1 Domri Rade|MM3
-1 Doom Blade|STX
+1 Doom Blade|STA
 1 Dragon Hunter|DTK
 1 Dragonskull Summit|XLN
 1 Dreadbore|RTR
 1 Drowned Catacomb|XLN
 1 Dryad Militant|RTR
 1 Dualcaster Mage|2XM
-1 Duress|STX
+1 Duress|STA
 1 Duskmantle Seer|CN2
 1 Earthquake|M10
 1 Edric, Spymaster of Trest|VMA
 1 Eidolon of the Great Revel|A25
 1 Eight-and-a-Half-Tails|EMA
-1 Electrolyze|STX
+1 Electrolyze|STA
 1 Elesh Norn, Grand Cenobite|IMA
 1 Elspeth, Knight-Errant|MMA
 1 Elspeth, Sun's Champion|THS
@@ -202,7 +202,7 @@ Name=Ben's Cube
 1 Experiment One|GTC
 1 Explore|MM3
 1 Fact or Fiction|MH1
-1 Faithless Looting|STX
+1 Faithless Looting|STA
 1 Faith's Fetters|M21
 1 Falkenrath Aristocrat|2XM
 1 Far // Away|DGM
@@ -271,7 +271,7 @@ Name=Ben's Cube
 1 Guul Draz Assassin|ROE
 1 Hallowed Burial|CN2
 1 Hallowed Fountain|RNA
-1 Harmonize|STX
+1 Harmonize|STA
 1 Harrow|TPR
 1 Heartbeat of Spring|2XM
 1 Hellrider|MM3
@@ -295,7 +295,7 @@ Name=Ben's Cube
 1 Inferno Titan|M12
 1 Ink-Eyes, Servant of Oni|PCA
 1 Innocent Blood|EMA
-1 Inquisition of Kozilek|STX
+1 Inquisition of Kozilek|STA
 1 Into the Roil|ZNR
 1 Intuition|TPR
 1 Iona, Shield of Emeria|MM2
@@ -338,9 +338,9 @@ Name=Ben's Cube
 1 Legacy's Allure|TMP
 1 Library of Alexandria|VMA
 1 Life from the Loam|UMA
-1 Lightning Bolt|STX
+1 Lightning Bolt|STA
 1 Lightning Greaves|2XM
-1 Lightning Helix|STX
+1 Lightning Helix|STA
 1 Lightning Mauler|AVR
 1 Lightning Strike|M19
 1 Liliana of the Veil|UMA
@@ -376,14 +376,14 @@ Name=Ben's Cube
 1 Maze of Ith|2XM
 1 Meloku the Clouded Mirror|MMA
 1 Memory Jar|VMA
-1 Memory Lapse|STX
+1 Memory Lapse|STA
 1 Mentor of the Meek|M19
 1 Mesmeric Fiend|A25
 1 Mikaeus, the Lunarch|ISD
 1 Mimic Vat|SOM
 1 Mind Shatter|MM3
 1 Mind Stone|IMA
-1 Mind's Desire|STX
+1 Mind's Desire|STA
 1 Mindslaver|SOM
 1 Mirari's Wake|MH2
 1 Mirran Crusader|MM2
@@ -417,11 +417,11 @@ Name=Ben's Cube
 1 Mystical Tutor|EMA
 1 Nantuko Shade|M11
 1 Narcolepsy|MM2
-1 Natural Order|STX
+1 Natural Order|STA
 1 Naturalize|M19
 1 Necromancy|VIS
 1 Necropotence|IMA
-1 Negate|STX
+1 Negate|STA
 1 Nekrataal|EMA
 1 Nether Void|LEG
 1 Nevinyrral's Disk|MH2
@@ -441,7 +441,7 @@ Name=Ben's Cube
 1 Omniscience|M19
 1 Oona's Prowler|LRW
 1 Opposition|MPS_AKH
-1 Opt|STX
+1 Opt|STA
 1 Oracle of Mul Daya|ZEN
 1 Overgrown Battlement|IMA
 1 Overgrown Tomb|GRN
@@ -471,7 +471,7 @@ Name=Ben's Cube
 1 Porcelain Legionnaire|NPH
 1 Precursor Golem|MM2
 1 Preordain|M11
-1 Primal Command|STX
+1 Primal Command|STA
 1 Primeval Titan|IMA
 1 Primordial Hydra|M13
 1 Prismatic Lens|UMA
@@ -483,7 +483,7 @@ Name=Ben's Cube
 1 Psychatog|VMA
 1 Puppeteer Clique|MM2
 1 Purphoros, God of the Forge|THS
-1 Putrefy|STX
+1 Putrefy|STA
 1 Putrid Leech|ARB
 1 Pyroclasm|A25
 1 Qasali Pridemage|ARB
@@ -500,7 +500,7 @@ Name=Ben's Cube
 1 Reckless Waif|ISD
 1 Reclamation Sage|2XM
 1 Recurring Nightmare|TPR
-1 Regrowth|STX
+1 Regrowth|STA
 1 Relic of Progenitus|EMA
 1 Remand|MM2
 1 Repeal|IMA
@@ -536,7 +536,7 @@ Name=Ben's Cube
 1 Shriekmaw|UMA
 1 Shrine of Burning Rage|NPH
 1 Siege-Gang Commander|DOM
-1 Sign in Blood|STX
+1 Sign in Blood|STA
 1 Silverblade Paladin|AVR
 1 Simic Sky Swallower|IMA
 1 Sinkhole|EMA
@@ -575,7 +575,7 @@ Name=Ben's Cube
 1 Stirring Wildwood|UMA
 1 Stoke the Flames|M15
 1 Stomping Ground|RNA
-1 Stone Rain|STX
+1 Stone Rain|STA
 1 Stonecloaker|PLC
 1 Stoneforge Mystic|2XM
 1 Stonewood Invocation|TSP
@@ -599,11 +599,11 @@ Name=Ben's Cube
 1 Sword of Fire and Ice|2XM
 1 Sword of Light and Shadow|2XM
 1 Sword of War and Peace|2XM
-1 Swords to Plowshares|STX
+1 Swords to Plowshares|STA
 1 Sylvan Caryatid|THS
 1 Sylvan Library|EMA
 1 Taiga|VMA
-1 Tainted Pact|STX
+1 Tainted Pact|STA
 1 Talrand, Sky Summoner|M13
 1 Tamiyo, the Moon Sage|AVR
 1 Tangle Wire|NMS
@@ -612,7 +612,7 @@ Name=Ben's Cube
 1 Teetering Peaks|ZEN
 1 Temple Garden|GRN
 1 Temporal Isolation|TSP
-1 Tendrils of Agony|STX
+1 Tendrils of Agony|STA
 1 Terastodon|2XM
 1 Terminate|MM3
 1 Terminus|MM3
@@ -636,7 +636,7 @@ Name=Ben's Cube
 1 Time Spiral|USG
 1 Time Vault|VMA
 1 Time Walk|VMA
-1 Time Warp|STX
+1 Time Warp|STA
 1 Timetwister|VMA
 1 Tinker|ULG
 1 Tombstalker|MMA

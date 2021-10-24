@@ -83,9 +83,9 @@ Name=MTGO Vintage Cube December 2017
 1 Honor of the Pure|M12
 1 Bitterblossom|UMA
 1 Wrath of God|AKR
-1 Swords to Plowshares|STX
+1 Swords to Plowshares|STA
 1 Spear of Heliod|THS
-1 Day of Judgment|STX
+1 Day of Judgment|STA
 1 Leyline of Sanctity|M20
 1 Karakas|UMA
 1 Jace, Vryn's Prodigy|ORI
@@ -96,7 +96,7 @@ Name=MTGO Vintage Cube December 2017
 1 Reveillark|UMA
 1 Unexpectedly Absent|EMA
 1 Armageddon|A25
-1 Mana Tithe|STX
+1 Mana Tithe|STA
 1 Ravages of War|PTK
 1 Angel of Serenity|RTR
 1 Balance|EMA
@@ -146,9 +146,9 @@ Name=MTGO Vintage Cube December 2017
 1 True-Name Nemesis|C13
 1 Vedalken Shackles|MPS_KLD
 1 Timetwister|VMA
-1 Brainstorm|STX
+1 Brainstorm|STA
 1 Empty the Warrens|MMA
-1 Compulsive Research|STX
+1 Compulsive Research|STA
 1 Time Walk|VMA
 1 Frantic Search|UMA
 1 Cryptic Command|IMA
@@ -157,7 +157,7 @@ Name=MTGO Vintage Cube December 2017
 1 Time Spiral|USG
 1 Gitaxian Probe|NPH
 1 Show and Tell|CN2
-1 Mind's Desire|STX
+1 Mind's Desire|STA
 1 Palinchron|VMA
 1 Fact or Fiction|MH1
 1 Force of Will|2XM
@@ -200,11 +200,11 @@ Name=MTGO Vintage Cube December 2017
 1 Cabal Ritual|VMA
 1 Phyrexian Arena|CN2
 1 Go for the Throat|MBS
-1 Duress|STX
+1 Duress|STA
 1 Grim Tutor|M21
 1 The Abyss|LEG
 1 Vampire Nighthawk|MM3
-1 Inquisition of Kozilek|STX
+1 Inquisition of Kozilek|STA
 1 Murderous Cut|KTK
 1 Hypnotic Specter|M10
 1 Mesmeric Fiend|A25
@@ -218,19 +218,19 @@ Name=MTGO Vintage Cube December 2017
 1 Brain Maggot|JOU
 1 Fatal Push|2XM
 1 Hymn to Tourach|EMA
-1 Tendrils of Agony|STX
+1 Tendrils of Agony|STA
 1 Rishadan Port|A25
 1 Grave Titan|M12
 1 Entomb|UMA
 1 Bazaar of Baghdad|VMA
 1 Yawgmoth's Will|USG
 1 Yawgmoth's Bargain|UDS
-1 Demonic Tutor|STX
+1 Demonic Tutor|STA
 1 Mox Jet|VMA
 1 Necropotence|IMA
 1 Looter il-Kor|TSP
 1 Living Death|A25
-1 Dark Ritual|STX
+1 Dark Ritual|STA
 1 Sheoldred, Whispering One|IMA
 1 Terastodon|2XM
 1 Corpse Dance|TPR
@@ -240,7 +240,7 @@ Name=MTGO Vintage Cube December 2017
 1 Search for Azcanta|XLN
 1 Buried Alive|UMA
 1 Iona, Shield of Emeria|MM2
-1 Faithless Looting|STX
+1 Faithless Looting|STA
 1 Necromancy|VIS
 1 Liliana of the Veil|UMA
 1 Reanimate|UMA
@@ -271,7 +271,7 @@ Name=MTGO Vintage Cube December 2017
 1 Desperate Ritual|UMA
 1 Through the Breach|UMA
 1 Searing Spear|M13
-1 Lightning Bolt|STX
+1 Lightning Bolt|STA
 1 Fireblast|VMA
 1 Incinerate|M12
 1 Hazoret the Fervent|AKR
@@ -297,22 +297,22 @@ Name=MTGO Vintage Cube December 2017
 1 Courser of Kruphix|A25
 1 Managorger Hydra|ORI
 1 Primeval Titan|IMA
-1 Harmonize|STX
+1 Harmonize|STA
 1 Birds of Paradise|CN2
 1 Genesis Wave|IMA
 1 Fastbond|VMA
-1 Primal Command|STX
+1 Primal Command|STA
 1 Joraga Treespeaker|ROE
 1 Oracle of Mul Daya|ZEN
 1 Growing Rites of Itlimoc|XLN
 1 Avacyn's Pilgrim|MM3
-1 Channel|STX
+1 Channel|STA
 1 Sakura-Tribe Elder|CNS
 1 Survival of the Fittest|TPR
 1 Noble Hierarch|2XM
 1 Dissenter's Deliverance|AKR
-1 Regrowth|STX
-1 Natural Order|STX
+1 Regrowth|STA
+1 Natural Order|STA
 1 Oath of Druids|TPR
 1 Sylvan Caryatid|THS
 1 Llanowar Elves|DOM
@@ -417,7 +417,7 @@ Name=MTGO Vintage Cube December 2017
 1 Crucible of Worlds|M19
 1 Winter Orb|EMA
 1 Anguished Unmaking|SOI
-1 Lightning Helix|STX
+1 Lightning Helix|STA
 1 Emrakul, the Aeons Torn|UMA
 1 Simic Signet|MM3
 1 Bring to Light|BFZ
@@ -533,7 +533,7 @@ Name=MTGO Vintage Cube December 2017
 1 Vraska, Relic Seeker|XLN
 1 Shambling Vent|BFZ
 1 Izzet Signet|MM3
-1 Electrolyze|STX
+1 Electrolyze|STA
 1 Metalworker|UDS
 1 Abrupt Decay|MM3
 1 Blightsteel Colossus|2XM

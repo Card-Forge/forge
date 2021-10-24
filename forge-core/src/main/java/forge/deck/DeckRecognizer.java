@@ -410,12 +410,12 @@ public class DeckRecognizer {
     public static final Pattern SET_CARD_PATTERN = Pattern.compile(REX_SET_CARD_REQUEST);
     // 3. Full-Request (Amount?, CardName, Set, Collector Number|Art Index) - MTGArena Format
     public static final String REX_FULL_REQUEST_CARD_SET = String.format(
-            "(%s\\s*:\\s*)?(%s\\s)?\\s*%s\\s*(\\||\\(|\\[|\\{|\\s)%s(\\s|\\)|\\]|\\})?\\s+%s\\s*%s\\s*",
+            "(%s\\s*:\\s*)?(%s\\s)?\\s*%s\\s*(\\||\\(|\\[|\\{|\\s)%s(\\s|\\)|\\]|\\})?(\\s+|\\|\\s*)%s\\s*%s\\s*",
             REX_DECKSEC_XMAGE, REX_CARD_COUNT, REX_CARD_NAME, REX_SET_CODE, REX_COLL_NUMBER, REX_FOIL_MTGGOLDFISH);
     public static final Pattern CARD_SET_COLLNO_PATTERN = Pattern.compile(REX_FULL_REQUEST_CARD_SET);
     // 4. Full-Request (Amount?, Set, CardName, Collector Number|Art Index) - Alternative for flexibility
     public static final String REX_FULL_REQUEST_SET_CARD = String.format(
-            "^(%s\\s*:\\s*)?(%s\\s)?\\s*(\\(|\\[|\\{)?%s(\\s+|\\)|\\]|\\}|\\|)\\s*%s\\s+%s\\s*%s$",
+            "^(%s\\s*:\\s*)?(%s\\s)?\\s*(\\(|\\[|\\{)?%s(\\s+|\\)|\\]|\\}|\\|)\\s*%s(\\s+|\\|\\s*)%s\\s*%s$",
             REX_DECKSEC_XMAGE, REX_CARD_COUNT, REX_SET_CODE, REX_CARD_NAME, REX_COLL_NUMBER, REX_FOIL_MTGGOLDFISH);
     public static final Pattern SET_CARD_COLLNO_PATTERN = Pattern.compile(REX_FULL_REQUEST_SET_CARD);
     // 5. (MTGGoldfish mostly) (Amount?, Card Name, <Collector Number>, Set)
@@ -439,7 +439,7 @@ public class DeckRecognizer {
             "side", "sideboard", "sb",
             "main", "card", "mainboard",
             "avatar", "commander", "schemes",
-            "conspiracy", "planes", "deck", };
+            "conspiracy", "planes", "deck", "dungeon"};
 
     private static CharSequence[] allCardTypes(){
         List<String> cardTypesList = new ArrayList<>();

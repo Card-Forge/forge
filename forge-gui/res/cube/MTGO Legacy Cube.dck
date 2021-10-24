@@ -66,7 +66,7 @@ Name=MTGO Legacy Cube
 1 Boros Reckoner|MM3
 1 Brago, King Eternal|VMA
 1 Brain Maggot|JOU
-1 Brainstorm|STX
+1 Brainstorm|STA
 1 Breeding Pool|RNA
 1 Brimaz, King of Oreskos|BNG
 1 Brimstone Volley|2XM
@@ -92,7 +92,7 @@ Name=MTGO Legacy Cube
 1 Cloudgoat Ranger|MMA
 1 Coalition Relic|A25
 1 Commune with the Gods|EMA
-1 Compulsive Research|STX
+1 Compulsive Research|STA
 1 Condemn|M11
 1 Condescend|IMA
 1 Consecrated Sphinx|IMA
@@ -107,16 +107,16 @@ Name=MTGO Legacy Cube
 1 Craterhoof Behemoth|MM3
 1 Crusade|6ED
 1 Cryptic Command|IMA
-1 Cultivate|STX
+1 Cultivate|STA
 1 Cunning Sparkmage|WWK
 1 Curse of Predation|IMA
 1 Cursed Scroll|TPR
 1 Cyclonic Rift|2XM
 1 Damnation|MPS_AKH
 1 Dark Confidant|2XM
-1 Dark Ritual|STX
+1 Dark Ritual|STA
 1 Darkblast|RAV
-1 Day of Judgment|STX
+1 Day of Judgment|STA
 1 Daze|MPS_AKH
 1 Deceiver Exarch|CN2
 1 Deep Analysis|EMA
@@ -136,7 +136,7 @@ Name=MTGO Legacy Cube
 1 Dismiss|CN2
 1 Dissolve|IMA
 1 Domri Rade|MM3
-1 Doom Blade|STX
+1 Doom Blade|STA
 1 Doomed Traveler|IMA
 1 Dragon Fodder|MM3
 1 Dragonskull Summit|XLN
@@ -146,10 +146,10 @@ Name=MTGO Legacy Cube
 1 Dualcaster Mage|2XM
 1 Dungeon Geists|M20
 1 Duplicant|2XM
-1 Duress|STX
+1 Duress|STA
 1 Edric, Spymaster of Trest|VMA
 1 Eight-and-a-Half-Tails|EMA
-1 Electrolyze|STX
+1 Electrolyze|STA
 1 Elesh Norn, Grand Cenobite|IMA
 1 Elite Vanguard|EMA
 1 Elspeth Tirel|SOM
@@ -241,7 +241,7 @@ Name=MTGO Legacy Cube
 1 Hallowed Fountain|RNA
 1 Hallowed Spiritkeeper|C14
 1 Hammer of Purphoros|THS
-1 Harmonize|STX
+1 Harmonize|STA
 1 Hellrider|MM3
 1 Herald of Torment|BNG
 1 Hero of Bladehold|MBS
@@ -260,7 +260,7 @@ Name=MTGO Legacy Cube
 1 Incinerate|M12
 1 Indrik Stomphowler|DIS
 1 Inferno Titan|M12
-1 Inquisition of Kozilek|STX
+1 Inquisition of Kozilek|STA
 1 Into the Roil|ZNR
 1 Intuition|TPR
 1 Isamaru, Hound of Konda|CHK
@@ -290,13 +290,13 @@ Name=MTGO Legacy Cube
 1 Koth of the Hammer|SOM
 1 Kozilek, Butcher of Truth|UMA
 1 Krenko's Command|M13
-1 Krosan Grip|STX
+1 Krosan Grip|STA
 1 Land Tax|2XM
 1 Legacy's Allure|TMP
 1 Lifebane Zombie|M14
-1 Lightning Bolt|STX
+1 Lightning Bolt|STA
 1 Lightning Greaves|2XM
-1 Lightning Helix|STX
+1 Lightning Helix|STA
 1 Lightning Mauler|AVR
 1 Lightning Strike|M19
 1 Liliana of the Veil|UMA
@@ -316,7 +316,7 @@ Name=MTGO Legacy Cube
 1 Man-o'-War|MH1
 1 Mana Confluence|EXP
 1 Mana Leak|IMA
-1 Mana Tithe|STX
+1 Mana Tithe|STA
 1 Marsh Flats|MH2
 1 Martial Coup|CFX
 1 Massacre Wurm|M21
@@ -351,9 +351,9 @@ Name=MTGO Legacy Cube
 1 Mystic Snake|A25
 1 Mystical Teachings|MM3
 1 Nantuko Shade|M11
-1 Natural Order|STX
+1 Natural Order|STA
 1 Naturalize|M19
-1 Negate|STX
+1 Negate|STA
 1 Nekrataal|EMA
 1 Nicol Bolas, Planeswalker|M13
 1 Night's Whisper|EMA
@@ -393,7 +393,7 @@ Name=MTGO Legacy Cube
 1 Precinct Captain|RTR
 1 Precursor Golem|MM2
 1 Preordain|M11
-1 Primal Command|STX
+1 Primal Command|STA
 1 Prime Speaker Zegana|GTC
 1 Primeval Titan|IMA
 1 Profane Command|MM2
@@ -414,7 +414,7 @@ Name=MTGO Legacy Cube
 1 Reclamation Sage|2XM
 1 Recurring Nightmare|TPR
 1 Reflecting Pool|CNS
-1 Regrowth|STX
+1 Regrowth|STA
 1 Remand|MM2
 1 Remove Soul|10E
 1 Repeal|IMA
@@ -502,7 +502,7 @@ Name=MTGO Legacy Cube
 1 Sundering Titan|2XM
 1 Sunpetal Grove|XLN
 1 Supreme Verdict|IMA
-1 Swords to Plowshares|STX
+1 Swords to Plowshares|STA
 1 Sylvan Caryatid|THS
 1 Sylvan Library|EMA
 1 Taiga|VMA
@@ -539,7 +539,7 @@ Name=MTGO Legacy Cube
 1 Thrun, the Last Troll|MBS
 1 Thundermaw Hellkite|IMA
 1 Tidehollow Sculler|MMA
-1 Time Warp|STX
+1 Time Warp|STA
 1 Tooth and Nail|MMA
 1 Toxic Deluge|2XM
 1 Tracker's Instincts|DKA
