@@ -145,11 +145,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
             }
 
             long tStamp = game.getNextTimestamp();
-            if (lose != null) {
-                tgtC.addTempController(newController, tStamp);
-            } else {
-                tgtC.setController(newController, tStamp);
-            }
+            tgtC.addTempController(newController, tStamp);
 
             if (bUntap) {
                 tgtC.untap(true);

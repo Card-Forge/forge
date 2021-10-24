@@ -14,4 +14,4 @@ ScryfallCode=J17
 6 R Prismatic Geoscope @Steven Belledin
 7 R Spellskite @Svetlin Velinov
 8 R Pendelhaven @Dimitar Marinski
-9 R Rules Lawyer @Dmitry Burmak
+F9 R Rules Lawyer @Dmitry Burmak

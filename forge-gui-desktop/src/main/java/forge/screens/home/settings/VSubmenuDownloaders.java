@@ -48,6 +48,7 @@ import forge.util.ImageUtil;
 import forge.util.Localizer;
 import forge.util.RuntimeVersion;
 import net.miginfocom.swing.MigLayout;
+import org.apache.commons.lang3.tuple.Pair;
 
 /**
  * Assembles Swing components of utilities submenu singleton.
@@ -262,26 +263,27 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
         for (CardEdition e : editions) {
             if (CardEdition.Type.FUNNY.equals(e.getType()))
                 continue;
-            nifSB.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
-            cniSB.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
+            boolean nifHeader = false;
+            boolean cniHeader = false;
+            boolean tokenHeader = false;
 
             String imagePath;
             int artIndex = 1;
             ArrayList<String> cis = new ArrayList<>();
 
-            HashMap<String, Integer> cardCount = new HashMap<>();
+            HashMap<String, Pair<Boolean, Integer>> cardCount = new HashMap<>();
             for (CardInSet c : e.getAllCardsInSet()) {
                 if (cardCount.containsKey(c.name)) {
-                    cardCount.put(c.name, cardCount.get(c.name) + 1);
+                    cardCount.put(c.name, Pair.of(c.collectorNumber.startsWith("F"), cardCount.get(c.name).getRight() + 1));
                 } else {
-                    cardCount.put(c.name, 1);
+                    cardCount.put(c.name, Pair.of(c.collectorNumber.startsWith("F"), 1));
                 }
             }
             
             // loop through the cards in this edition, considering art variations...
-            for (Entry<String, Integer> entry : cardCount.entrySet()) {
+            for (Entry<String, Pair<Boolean, Integer>> entry : cardCount.entrySet()) {
                 String c = entry.getKey();
-                artIndex = entry.getValue();
+                artIndex = entry.getValue().getRight();
 
                 PaperCard cp = cardDb.getCard(c, e.getCode(), artIndex);
                 if (cp == null) {
@@ -289,6 +291,12 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
                 }
 
                 if (cp == null) {
+                    if (entry.getValue().getLeft()) //skip funny cards
+                        continue;
+                    if (!cniHeader) {
+                        cniSB.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
+                        cniHeader = true;
+                    }
                     cniSB.append(" ").append(c).append("\n");
                     notImplementedCount++;
                     continue;
@@ -302,6 +310,10 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
                 if (imagePath != null) {
                     File file = ImageKeys.getImageFile(imagePath);
                     if (file == null) {
+                        if (!nifHeader) {
+                            nifSB.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
+                            nifHeader = true;
+                        }
                         nifSB.append(" ").append(imagePath).append("\n");
                         missingCount++;
                     }
@@ -315,14 +327,16 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
                     if (imagePath != null) {
                         File file = ImageKeys.getImageFile(imagePath);
                         if (file == null) {
+                            if (!nifHeader) {
+                                nifSB.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
+                                nifHeader = true;
+                            }
                             nifSB.append(" ").append(imagePath).append("\n");
                             missingCount++;
                         }
                     } 
                 }
             }
-
-            nifSB.append("\nTOKENS\n");
 
             // TODO: Audit token images here...
             for(Entry<String, Integer> tokenEntry : e.getTokens().entrySet()) {
@@ -338,6 +352,14 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
                         String imgKey = token.getImageKey(i);
                         File file = ImageKeys.getImageFile(imgKey);
                         if (file == null) {
+                            if (!nifHeader) {
+                                nifSB.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
+                                nifHeader = true;
+                            }
+                            if (!tokenHeader) {
+                                nifSB.append("\nTOKENS\n");
+                                tokenHeader = true;
+                            }
                             nifSB.append(" ").append(token.getImageFilename(i + 1)).append("\n");
                             missingCount++;
                         }
@@ -346,7 +368,8 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
                     System.out.println("No Token found: " + name + " in " + e.getName());
                 }
             }
-            nifSB.append("\n");
+            if (nifHeader)
+                nifSB.append("\n");
         }
 
 

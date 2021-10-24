@@ -563,7 +563,7 @@ ScryfallCode=PLIST
 555 U Call of the Nightwing @Adam Paquette
 556 M General Kudro of Drannith @Ryan Pancoast
 557 M Karametra, God of Harvests @Eric Deschamps
-558 R Kaya, Ghost Haunter @Sydney Adams
+F558 R Kaya, Ghost Haunter @Sydney Adams
 559 R Lich Lord of Unx @Dave Allsop
 560 R Lonis, Cryptozoologist @Andrew Mar
 561 S Mortify @Glen Angus
@@ -572,7 +572,7 @@ ScryfallCode=PLIST
 564 U Night // Day @Christopher Moeller
 565 U Gate to the Afterlife @Christine Choi
 566 M Helvault @Jaime Jones
-567 R Puresteel Angel @Lukas Litzsinger
+F567 R Puresteel Angel @Lukas Litzsinger
 568 R Sapphire Medallion @Sue Ellen Brown
 569 U Selesnya Keyrune @Daniel Ljunggren
 570 C Signpost Scarecrow @Jung Park

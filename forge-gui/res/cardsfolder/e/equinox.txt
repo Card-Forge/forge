@@ -1,0 +1,8 @@
+Name:Equinox
+ManaCost:W
+Types:Enchantment Aura
+K:Enchant land
+A:SP$ Attach | Cost$ W | ValidTgts$ Land | TgtPrompt$ Select target land | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ CounterDestroyLand | Description$ Enchanted land has "{T}: Counter target spell if it would destroy a land you control."
+SVar:CounterDestroyLand:AB$ Counter | Cost$ T | TargetType$ Spell | ConditionWouldDestroy$ Land.YouCtrl | TgtPrompt$ Select target spell | ValidTgts$ Card | SpellDescription$ Counter target spell if it would destroy a land you control.
+Oracle:Enchant land\nEnchanted land has "{T}: Counter target spell if it would destroy a land you control."
